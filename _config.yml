@@ -1,1 +1,1 @@
-exclude:  ["*.iml", "README.md"]
+exclude:  ["*.iml", "README.md", "Dockerfile"]
