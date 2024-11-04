@@ -1,7 +1,8 @@
 # Site du portail de l'ANSSI
 
 ## Architecture
-Ce site est construit avec Jekyll. 
+Ce site est construit avec Jekyll.   
+Les fichiers générés sont servis par un `nginx`.
 
 ## Développement
 ### Démarrage
@@ -37,3 +38,7 @@ $ bundle exec jekyll serve --livereload
 
  - Arrivé ici, le site doit être consultable sur http://127.0.0.1:4000
  - Avec le paramètre `--livereload`, chaque changement au code source doit être visible instantanément dans le navigateur
+
+## Le build et la PROD
+On utilise un unique `Dockerfile` pour le build via CI/CD et l'hébergement sur notre PaaS.  
+Le `Dockerfile` unique est la solution qui semble la plus simple.
