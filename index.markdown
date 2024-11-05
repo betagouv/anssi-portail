@@ -1,6 +1,4 @@
 ---
 layout: defaut
 ---
-Ceci est le portail de l’ANSSI
-
-{{ site.email }}
+Bienvenue sur le portail de l’ANSSI

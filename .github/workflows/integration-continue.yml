@@ -2,7 +2,7 @@ name: L'intégration continue
 
 on:
   push:
-    branches: [master, initialise-jekyll]
+    branches: [master]
   pull_request:
     branches: [master]
 
