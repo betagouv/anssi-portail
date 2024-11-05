@@ -5,4 +5,7 @@
   <title>{{page.titreHtml}}</title>
   <link rel="stylesheet" href="{{ "/assets/site.css" | relative_url }}">
   <link rel="stylesheet" href="{{ "/assets/fonts.css" | relative_url }}">
+  {% if include.extra-css %}
+    <link rel="stylesheet" href="{{ include.extra-css | relative_url }}">
+  {% endif %}
 </head>

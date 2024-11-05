@@ -1,8 +1,19 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: " fr" }}">
-{%- include head.html -%}
+{% include head.html extra-css="/assets/service.css" %}
 <body>
+<main>
+    <header>
+        <nav>
+            <a href="/">
+                <img src="/assets/images/marianne-dark.svg" class="marianne"/>
+            </a>
+        </nav>
+    </header>
+    <div class="chapeau">
+        <h1>{{page.nomDuService}}</h1>
+    </div>
+</main>
 
-<h1>{{page.nomDuService}}</h1>
 </body>
 </html>
