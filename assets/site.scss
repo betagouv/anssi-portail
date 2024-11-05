@@ -1,0 +1,24 @@
+---
+---
+:root {
+  --noir: #0d0c21;
+  --fonts: Marianne, Arial, sans-serif;
+}
+
+html {
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+body {
+  overflow-x: hidden;
+  font-family: var(--fonts);
+  color: var(--noir);
+  margin: 0;
+}
+
+.marianne {
+  width: 118px;
+  transform: translateX(-12px) translateY(-12px);
+}
+
