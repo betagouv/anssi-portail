@@ -1,1 +1,4 @@
+collections:
+  services:
+    output: true
 exclude:  ["*.iml", "README.md", "Dockerfile"]
