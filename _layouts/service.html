@@ -12,7 +12,17 @@
         </nav>
     </header>
     <div class="chapeau">
+        <div class="fil-ariane">
+            <a href="/">Accueil</a>
+            <span><img src="/assets/images/icone-chevron-droite.svg"/> </span>
+            <a href="/services">Les services et ressources cyber</a>
+            <span><img src="/assets/images/icone-chevron-droite.svg"/></span>
+            <span>{{page.nomDuService}}</span>
+        </div>
+        <span class="badge service">Service</span>
         <h1>{{page.nomDuService}}</h1>
+        {{page.descriptionService}}
+        <a href="{{page.lienService}}" target="_blank" class="bouton">Accéder au service</a>
     </div>
 </main>
 
