@@ -17,3 +17,20 @@
     margin-bottom: 40px;
   }
 }
+
+.menu-lateral {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid #ddd;
+
+  img {
+    width: 16px;
+    height: 16px;
+  }
+
+  span {
+    flex-grow: 1;
+  }
+}
