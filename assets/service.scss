@@ -34,3 +34,23 @@
     flex-grow: 1;
   }
 }
+
+.explication {
+  padding: 40px 16px 8px;
+
+  img {
+    width: 100%;
+  }
+
+  .bouton {
+    margin-top: 32px;
+    margin-bottom: 0;
+  }
+}
+
+h2 {
+  margin: 32px 0;
+  padding: 0;
+  font-size: 1.5rem;
+  line-height: 1.875rem;
+}
