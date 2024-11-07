@@ -20,14 +20,15 @@ body {
 
 header {
   nav {
-    padding: 12px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 16px;
 
     .marianne {
       width: 108px;
-      transform: translateX(-16px) translateY(-12px);
+      transform: translateX(-16px) ;
     }
 
     .menu {
