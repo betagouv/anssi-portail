@@ -222,6 +222,7 @@ h2 {
       .labels {
         display: flex;
         gap: 8px;
+        flex-wrap: wrap;
 
         span {
           border-radius: 12px;
