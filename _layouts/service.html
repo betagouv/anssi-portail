@@ -35,6 +35,22 @@
         <span>{{ page.content }}</span>
         <a href="{{page.lienService}}" target="_blank" class="bouton">Accéder au service</a>
     </div>
+    <div class="cible">
+        <h2>Qui peut utiliser ce service ?</h2>
+        <span>{{ page.cibleService }}</span>
+
+        <div class="cartes">
+            {% for lien in page.liens %}
+            <div class="carte">
+                <div class="illustration" style="background-color: {{lien.couleurFond}}">
+                    <img src="/assets/images/illustrations-services/{{ lien.illustration }}">
+                </div>
+                <a href="{{ lien.lien }}" target="_blank">{{ lien.titre }}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
 </main>
 
 </body>
