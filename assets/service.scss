@@ -136,7 +136,7 @@ h2 {
 
       h3 {
         margin: 0;
-        padding:0;
+        padding: 0;
         font-size: .875rem;
         line-height: 1.5rem;
         font-weight: 400;
@@ -180,6 +180,29 @@ h2 {
           font-weight: normal;
         }
       }
+    }
+  }
+}
+
+.haut-de-page {
+  margin: 0 auto 40px;
+  text-align: center;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.5rem;
+    text-decoration: none;
+    color: var(--noir);
+    border-bottom: 1px solid var(--noir);
+
+    &:before {
+      content: '';
+      background: url("/assets/images/icone-fleche-pleine.svg");
+      width: 16px;
+      height: 16px;
+      margin-left: auto;
     }
   }
 }
