@@ -25,6 +25,13 @@
   position: sticky;
   top: 0;
 
+  &:has(details[open]) {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: calc(100% - 32px);
+  }
+
   details {
     summary {
       display: flex;
