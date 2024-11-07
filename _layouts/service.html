@@ -25,17 +25,31 @@
         <a href="{{page.lienService}}" target="_blank" class="bouton">Accéder au service</a>
     </section>
     <div class="menu-lateral">
-        <img class="menu" src="/assets/images/icone-menu-lateral.svg"/>
-        <span>De quoi s'agit-il ?</span>
-        <img class="chevron" src="/assets/images/icone-chevron-bas.svg"/>
+
+        <details>
+            <summary>
+                <img class="menu" src="/assets/images/icone-menu-lateral.svg"/>
+                <span>De quoi s'agit-il ?</span>
+                <img class="chevron" src="/assets/images/icone-chevron-bas.svg"/>
+            </summary>
+
+            <ul>
+                <li><a href="#explication">De quoi s'agit-il ?</a></li>
+                <li><a href="#cible">Qui peut utiliser ce service ?</a></li>
+                <li><a href="#ressources">Les ressources associées</a></li>
+            </ul>
+
+        </details>
     </div>
-    <section class="explication">
+
+    <section class="explication" id="explication">
         <img src="/assets/images/illustrations-services/{{ page.illustration }}"/>
         <h2>De quoi s'agit-il ?</h2>
         <span>{{ page.content }}</span>
         <a href="{{page.lienService}}" target="_blank" class="bouton">Accéder au service</a>
     </section>
-    <section class="cible">
+
+    <section class="cible" id="cible">
         <h2>Qui peut utiliser ce service ?</h2>
         <span>{{ page.cibleService }}</span>
 
@@ -51,7 +65,7 @@
         </div>
     </section>
 
-    <section class="ressources">
+    <section class="ressources" id="ressources">
         <h2>Les ressources associées</h2>
         {% for ressource in page.ressources %}
         <div class="ressource">
