@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: " fr" }}">
-{% include head.html extra-css="/assets/service.css" %}
+{% include head.html extra-css="/assets/service.css" extra-js="/scripts/service.js" %}
 <body>
 <main>
     <header id="haut-de-page">
@@ -29,12 +29,12 @@
         <details>
             <summary>
                 <img class="menu" src="/assets/images/icone-menu-lateral.svg"/>
-                <span>De quoi s'agit-il ?</span>
+                <span id="section-active">De quoi s'agit-il ?</span>
                 <img class="chevron" src="/assets/images/icone-chevron-bas.svg"/>
             </summary>
 
             <ul>
-                <li><a href="#explication">De quoi s'agit-il ?</a></li>
+                <li class="actif"><a href="#explication">De quoi s'agit-il ?</a></li>
                 <li><a href="#cible">Qui peut utiliser ce service ?</a></li>
                 <li><a href="#ressources">Les ressources associées</a></li>
             </ul>

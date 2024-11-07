@@ -25,43 +25,59 @@
   position: sticky;
   top: 0;
 
-  summary {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  details {
+    summary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
 
-    &::marker {
-      content: '';
-    }
+      &::marker {
+        content: '';
+      }
 
-    &::-webkit-details-marker {
-      display: none;
-    }
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-
-    li {
-      padding: 12px 16px;
-      border-bottom: 1px solid #ddd;
-
-      a {
-        text-decoration: none;
-        color : var(--noir);
+      &::-webkit-details-marker {
+        display: none;
       }
     }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        border-bottom: 1px solid #ddd;
+        padding-top: 12px;
+        padding-bottom: 12px;
+
+        &.actif {
+          background: #fff7db;
+
+          a {
+            border-left: 2px solid #fed980;
+            padding-left: 14px;
+          }
+        }
+
+        a {
+          text-decoration: none;
+          color: var(--noir);
+          padding-left: 16px;
+          display: inline-block;
+        }
+
+      }
+    }
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+
+    span {
+      flex-grow: 1;
+    }
   }
 
-  img {
-    width: 16px;
-    height: 16px;
-  }
-
-  span {
-    flex-grow: 1;
-  }
 }
 
 .explication {
