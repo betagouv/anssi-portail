@@ -8,4 +8,7 @@
   {% if include.extra-css %}
     <link rel="stylesheet" href="{{ include.extra-css | relative_url }}">
   {% endif %}
+  {% if include.extra-js %}
+    <script src="{{ include.extra-js | relative_url }}"></script>
+  {% endif %}
 </head>
