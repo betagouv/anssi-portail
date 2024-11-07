@@ -51,6 +51,29 @@
         </div>
     </section>
 
+    <section class="ressources">
+        <h2>Les ressources associées</h2>
+        {% for ressource in page.ressources %}
+        <div class="ressource">
+            <div class="illustration">
+                <img src="/assets/images/illustrations-services/{{ressource.illustration}}">
+            </div>
+            <div class="contenu">
+                <h3>{{ressource.titre}}</h3>
+                <span>{{ressource.description}}</span>
+                <a href="{{ressource.lien}}">Découvrir le service
+                    <img src="/assets/images/icone-fleche-droite.svg">
+                </a>
+                <div class="labels">
+                    {% for label in ressource.labels %}
+                    <span>{{label}}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+
 </main>
 
 </body>
