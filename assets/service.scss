@@ -48,9 +48,62 @@
   }
 }
 
+.cible {
+  padding: 0 16px;
+  margin-bottom: 40px;
+}
+
 h2 {
   margin: 32px 0;
   padding: 0;
   font-size: 1.5rem;
   line-height: 1.875rem;
+}
+
+.cartes {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.carte {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  .illustration {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: flex;
+    height: 168px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 34px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  a {
+    display: flex;
+    color: var(--noir);
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+    line-height: 1.75rem;
+    padding: 24px;
+    flex-direction: column;
+    gap: 12px;
+
+    &:after {
+      content: '';
+      background: url("/assets/images/icone-lien-externe.svg");
+      width: 16px;
+      height: 16px;
+      align-self: end;
+    }
+  }
 }
