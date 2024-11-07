@@ -206,3 +206,20 @@ h2 {
     }
   }
 }
+
+footer {
+  border-top: 2px solid var(--noir);
+  padding: 16px 16px 24px;
+
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  a {
+    text-decoration: none;
+    color: var(--noir);
+    font-size: .75rem;
+    line-height: 1.5rem;
+  }
+}
