@@ -18,3 +18,15 @@ $points-de-rupture-a-partir-de: (
         + "Les points de rupture disponibles sont: #{map-keys($points-de-rupture-a-partir-de)}.";
   }
 }
+
+:root {
+  --gouttiere: 16px;
+
+  @include a-partir-de(md) {
+    --gouttiere: 56px;
+  }
+
+  @include a-partir-de(lg) {
+    --gouttiere: 24px;
+  }
+}

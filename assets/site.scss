@@ -1,5 +1,8 @@
 ---
 ---
+
+@import './responsive';
+
 :root {
   --noir: #0d0c21;
   --fonts: Marianne, Arial, sans-serif;
@@ -23,8 +26,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: var(--gouttiere);
+    padding-right: var(--gouttiere);
 
     .marianne {
       width: 108px;

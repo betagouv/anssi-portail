@@ -24,73 +24,85 @@
         <p>{{page.descriptionService}}</p>
         <a href="{{page.lienService}}" target="_blank" class="bouton">Accéder au service</a>
     </section>
-    <div class="menu-lateral">
 
-        <details>
-            <summary>
-                <img class="menu" src="/assets/images/icone-menu-lateral.svg"/>
-                <span id="section-active">De quoi s'agit-il ?</span>
-                <img class="chevron" src="/assets/images/icone-chevron-bas.svg"/>
-            </summary>
+    <div class="article">
+        <div class="sommaire-replie">
+            <details>
+                <summary>
+                    <img class="menu" src="/assets/images/icone-menu-lateral.svg"/>
+                    <span id="section-active">De quoi s'agit-il ?</span>
+                    <img class="chevron" src="/assets/images/icone-chevron-bas.svg"/>
+                </summary>
 
+                <ul>
+                    <li class="actif"><a href="#explication">De quoi s'agit-il ?</a></li>
+                    <li><a href="#cible">Qui peut utiliser ce service ?</a></li>
+                    <li><a href="#ressources">Les ressources associées</a></li>
+                </ul>
+            </details>
+
+        </div>
+
+        <div class="sommaire-deplie">
             <ul>
                 <li class="actif"><a href="#explication">De quoi s'agit-il ?</a></li>
                 <li><a href="#cible">Qui peut utiliser ce service ?</a></li>
                 <li><a href="#ressources">Les ressources associées</a></li>
             </ul>
-
-        </details>
-    </div>
-
-    <section class="explication" id="explication">
-        <img src="/assets/images/illustrations-services/{{ page.illustration }}"/>
-        <h2>De quoi s'agit-il ?</h2>
-        <span>{{ page.content }}</span>
-        <a href="{{page.lienService}}" target="_blank" class="bouton">Accéder au service</a>
-    </section>
-
-    <section class="cible" id="cible">
-        <h2>Qui peut utiliser ce service ?</h2>
-        <span>{{ page.cibleService }}</span>
-
-        <div class="cartes">
-            {% for lien in page.liens %}
-            <div class="carte">
-                <div class="illustration" style="background-color: {{lien.couleurFond}}">
-                    <img src="/assets/images/illustrations-services/{{ lien.illustration }}">
-                </div>
-                <a href="{{ lien.lien }}" target="_blank">{{ lien.titre }}</a>
-            </div>
-            {% endfor %}
         </div>
-    </section>
 
-    <section class="ressources" id="ressources">
-        <h2>Les ressources associées</h2>
-        {% for ressource in page.ressources %}
-        <div class="ressource">
-            <div class="illustration">
-                <img src="/assets/images/illustrations-services/{{ressource.illustration}}">
-            </div>
-            <div class="contenu">
-                <h3>{{ressource.titre}}</h3>
-                <span>{{ressource.description}}</span>
-                <a href="{{ressource.lien}}">Découvrir le service
-                    <img src="/assets/images/icone-fleche-droite.svg">
-                </a>
-                <div class="labels">
-                    {% for label in ressource.labels %}
-                    <span>{{label}}</span>
+        <div class="contenu">
+            <section class="explication" id="explication">
+                <img src="/assets/images/illustrations-services/{{ page.illustration }}"/>
+                <h2>De quoi s'agit-il ?</h2>
+                <span>{{ page.content }}</span>
+                <a href="{{page.lienService}}" target="_blank" class="bouton">Accéder au service</a>
+            </section>
+
+            <section class="cible" id="cible">
+                <h2>Qui peut utiliser ce service ?</h2>
+                <span>{{ page.cibleService }}</span>
+
+                <div class="cartes">
+                    {% for lien in page.liens %}
+                    <div class="carte">
+                        <div class="illustration" style="background-color: {{lien.couleurFond}}">
+                            <img src="/assets/images/illustrations-services/{{ lien.illustration }}">
+                        </div>
+                        <a href="{{ lien.lien }}" target="_blank">{{ lien.titre }}</a>
+                    </div>
                     {% endfor %}
                 </div>
-            </div>
-        </div>
-        {% endfor %}
-    </section>
+            </section>
 
-    <section class="haut-de-page">
-        <a href="#haut-de-page">Haut de page</a>
-    </section>
+            <section class="ressources" id="ressources">
+                <h2>Les ressources associées</h2>
+                {% for ressource in page.ressources %}
+                <div class="ressource">
+                    <div class="illustration">
+                        <img src="/assets/images/illustrations-services/{{ressource.illustration}}">
+                    </div>
+                    <div class="contenu">
+                        <h3>{{ressource.titre}}</h3>
+                        <span>{{ressource.description}}</span>
+                        <a href="{{ressource.lien}}">Découvrir le service
+                            <img src="/assets/images/icone-fleche-droite.svg">
+                        </a>
+                        <div class="labels">
+                            {% for label in ressource.labels %}
+                            <span>{{label}}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </section>
+
+            <section class="haut-de-page">
+                <a href="#haut-de-page">Haut de page</a>
+            </section>
+        </div>
+    </div>
 
     <footer>
         <a href="#">Plan du site</a>
