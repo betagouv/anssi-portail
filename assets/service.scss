@@ -1,8 +1,21 @@
 ---
 ---
+
+@import './responsive';
+
 .chapeau {
   background: #f4f4f4 url("/assets/images/motif-fond-service.png");
   padding: 24px 16px;
+
+
+  p {
+    margin: 0;
+    padding: 0;
+    @include a-partir-de(md) {
+      font-size: 1.375rem;
+      line-height: 2rem;
+    }
+  }
 
   .fil-ariane {
     margin-bottom: 24px;
@@ -10,11 +23,21 @@
 
   h1 {
     margin: 0 0 16px;
+
+    @include a-partir-de(md) {
+      font-size: 3.5rem;
+      line-height: 4.125rem;
+    }
   }
 
   .bouton {
     margin-top: 24px;
     margin-bottom: 40px;
+    padding: 10px 28px;
+
+    @include a-partir-de(md) {
+      width: fit-content;
+    }
   }
 }
 
@@ -110,20 +133,30 @@ h2 {
   padding: 0;
   font-size: 1.5rem;
   line-height: 1.875rem;
+
+  @include  a-partir-de(md) {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
 }
 
 .cartes {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 22px;
+  flex-wrap: wrap;
 }
 
 .carte {
   display: flex;
-  width: 100%;
+  width: 286px;
   flex-direction: column;
   border: 1px solid #ddd;
   border-radius: 8px;
+
+  @include a-partir-de(md){
+    width: 320px;
+  }
 
   .illustration {
     border-top-left-radius: 8px;
@@ -168,6 +201,11 @@ h2 {
 
   .ressource {
     border: 1px solid #ddd;
+    width: 288px;
+
+    @include a-partir-de(md) {
+      width: 320px;
+    }
 
     .illustration {
       display: flex;
@@ -240,6 +278,11 @@ h2 {
 .haut-de-page {
   margin: 0 auto 40px;
   text-align: center;
+  padding: 0 16px;
+
+  @include a-partir-de(md) {
+    text-align: left;
+  }
 
   a {
     display: inline-flex;
@@ -263,11 +306,14 @@ h2 {
 footer {
   border-top: 2px solid var(--noir);
   padding: 16px 16px 24px;
-
-
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  @include a-partir-de(md) {
+    flex-direction: row;
+    gap: 16px;
+  }
 
   a {
     text-decoration: none;
