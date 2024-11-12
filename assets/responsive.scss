@@ -3,7 +3,7 @@ $points-de-rupture-a-partir-de: (
         sm: ( min-width: 576px ),
         md: ( min-width: 767px ),
         lg: ( min-width: 992px ),
-        xl: ( min-width: 1440px )
+        xl: ( min-width: 1280px )
 ) !default;
 
 @mixin a-partir-de($point-de-rupture) {
@@ -28,5 +28,9 @@ $points-de-rupture-a-partir-de: (
 
   @include a-partir-de(lg) {
     --gouttiere: 24px;
+  }
+
+  @include a-partir-de(xl) {
+    --gouttiere: 120px;
   }
 }
