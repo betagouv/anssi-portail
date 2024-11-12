@@ -10,6 +10,8 @@
   p {
     margin: 0;
     padding: 0;
+    max-width: 650px;
+
     @include a-partir-de(md) {
       font-size: 1.375rem;
       line-height: 2rem;
@@ -137,7 +139,7 @@
   ul {
     list-style-type: none;
     padding: 0;
-    margin-left: 24px;
+    margin-left: var(--gouttiere);
 
     li {
       padding-top: 12px;
