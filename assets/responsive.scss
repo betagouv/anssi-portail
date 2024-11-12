@@ -1,0 +1,20 @@
+$points-de-rupture-a-partir-de: (
+        xs: ( min-width: 320px ),
+        sm: ( min-width: 576px ),
+        md: ( min-width: 767px ),
+        lg: ( min-width: 992px ),
+        xl: ( min-width: 1440px )
+) !default;
+
+@mixin a-partir-de($point-de-rupture) {
+  @if map-has-key($points-de-rupture-a-partir-de, $point-de-rupture) {
+    @media #{inspect(map-get($points-de-rupture-a-partir-de, $point-de-rupture))} {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "Un point de rupture inconnu (`#{$point-de-rupture}`) a été utilisé. "
+        + "Les points de rupture disponibles sont: #{map-keys($points-de-rupture-a-partir-de)}.";
+  }
+}
