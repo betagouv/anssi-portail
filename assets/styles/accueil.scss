@@ -1,2 +1,25 @@
 ---
 ---
+@import 'responsive';
+
+.chapeau {
+  background: #0D0C21 url("/assets/images/motif-fond-service-opacite-16.png");
+  padding: 24px var(--gouttiere) 48px;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  h1 {
+    font-size: 2.75rem;
+    line-height: 2.875rem;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+
+}
