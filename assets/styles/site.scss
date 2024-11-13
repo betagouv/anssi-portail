@@ -90,10 +90,18 @@ header {
   display: flex;
   justify-content: center;
   border-radius: 8px;
-  background: #fed980;
   text-align: center;
   padding: 10px;
   text-decoration: none;
-  color: var(--noir);
   font-weight: 500;
+}
+
+.bouton.primaire {
+  background: #fed980;
+  color: var(--noir);
+}
+
+.bouton.secondaire {
+  border: 1px solid white;
+  color: white;
 }
