@@ -56,6 +56,12 @@
                 <li><a href="#cible">Qui peut utiliser ce service ?</a></li>
                 <li><a href="#ressources">Les ressources associées</a></li>
             </ul>
+            <span>TAGS</span>
+            <div class="labels">
+                {% for source in page.sources %}
+                <span>{{source}}</span>
+                {% endfor %}
+            </div>
         </div>
 
         <div class="contenu">
