@@ -158,9 +158,11 @@
   flex: 0 0 auto;
   align-self: flex-start;
   margin-top: 40px;
+  margin-left: var(--gouttiere);
 
   @include a-partir-de(lg) {
     display: flex;
+    flex-direction: column;
     position: sticky;
     top: 0;
     margin-top: 48px;
@@ -169,8 +171,7 @@
   ul {
     list-style-type: none;
     padding: 0;
-    margin-top: 0;
-    margin-left: var(--gouttiere);
+    margin: 0 0 40px;
 
     li {
       padding-top: 12px;
@@ -192,6 +193,12 @@
         display: inline-block;
       }
     }
+  }
+
+  span {
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+    line-height: 1.5rem;
   }
 }
 
@@ -381,20 +388,27 @@ h2 {
       }
 
       .labels {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-
         span {
-          border-radius: 12px;
-          background: #f4f4f4;
-          padding: 2px 8px;
           font-size: 0.75rem;
           line-height: 1.25rem;
-          font-weight: normal;
         }
       }
     }
+  }
+}
+
+.labels {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  span {
+    border-radius: 12px;
+    background: #f4f4f4;
+    padding: 2px 8px;
+    font-size: 0.85rem;
+    line-height: 1.5rem;
+    font-weight: normal;
   }
 }
 
