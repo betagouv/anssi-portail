@@ -19,10 +19,17 @@
             <span><img src="/assets/images/icone-chevron-droite.svg"/></span>
             <span>{{page.nomDuService}}</span>
         </div>
-        <span class="badge service">Service</span>
-        <h1>{{page.nomDuService}}</h1>
-        <p>{{page.descriptionService}}</p>
-        <a href="{{page.lienService}}" target="_blank" class="bouton">Accéder au service</a>
+        <div class="resume">
+            <div>
+                <span class="badge service">Service</span>
+                <h1>{{page.nomDuService}}</h1>
+                <p>{{page.descriptionService}}</p>
+                <a href="{{page.lienService}}" target="_blank" class="bouton">Accéder au service</a>
+            </div>
+            <div>
+                <img src="/assets/images/illustrations-services/{{ page.illustration }}"/>
+            </div>
+        </div>
     </section>
 
     <div class="article">
