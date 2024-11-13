@@ -22,7 +22,7 @@ liens:
 ressources:
     - demainspecialistecyber:
       titre: DemainSpécialisteCyber
-      type: video # Rajoute le badge en haut à droite de l'illustration
+      type: Video # Rajoute le badge en haut à droite de l'illustration
       illustration: demainspecialistecyber/demainspecialistecyber.png
       description: S'informer sur la cybersécurité et ses métiers.
       lien: https://www.demainspecialistecyber.fr

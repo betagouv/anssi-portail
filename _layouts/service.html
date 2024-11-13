@@ -86,9 +86,10 @@
                 <h2>Les ressources associées</h2>
                 {% for ressource in page.ressources %}
                 <div class="ressource">
-                    <div class="illustration">
+                    <figure>
                         <img src="/assets/images/illustrations-services/{{ressource.illustration}}">
-                    </div>
+                        <figcaption>{{ressource.type}}</figcaption>
+                    </figure>
                     <div class="contenu">
                         <h3>{{ressource.titre}}</h3>
                         <span>{{ressource.description}}</span>
