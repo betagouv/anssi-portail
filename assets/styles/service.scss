@@ -308,6 +308,7 @@ h2 {
   .ressource {
     border: 1px solid #ddd;
     width: 288px;
+    border-radius: 8px;
 
     @include a-partir-de(md) {
       width: 320px;
@@ -319,6 +320,8 @@ h2 {
       padding: 20px 22px 0;
       background: #f4f4f4;
       margin: 0;
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
 
       img {
         width: 100%;
@@ -339,7 +342,7 @@ h2 {
         border-radius: 8px;
 
         &:before {
-          content:'';
+          content: '';
           background-image: url("/assets/images/icone-ressource.svg");
           width: 12px;
           height: 12px;
@@ -349,6 +352,8 @@ h2 {
 
     .contenu {
       border-bottom: 4px solid #0d0c21;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
       padding: 24px;
       display: flex;
       flex-direction: column;
