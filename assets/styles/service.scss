@@ -347,23 +347,3 @@ h2 {
     }
   }
 }
-
-footer {
-  border-top: 2px solid var(--noir);
-  padding: 16px var(--gouttiere) 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  @include a-partir-de(md) {
-    flex-direction: row;
-    gap: 16px;
-  }
-
-  a {
-    text-decoration: none;
-    color: var(--noir);
-    font-size: .75rem;
-    line-height: 1.5rem;
-  }
-}
