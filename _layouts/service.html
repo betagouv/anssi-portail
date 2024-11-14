@@ -71,7 +71,7 @@ script: /scripts/service.js
 
             <div class="cartes">
                 {% for lien in page.liens %}
-                <div class="carte">
+                <div class="carte lien">
                     <div class="illustration" style="background-color: {{lien.couleurFond}}">
                         <img src="/assets/images/illustrations-services/{{ lien.illustration }}">
                     </div>
@@ -84,7 +84,7 @@ script: /scripts/service.js
         <section class="ressources" id="ressources">
             <h2>Les ressources associées</h2>
             {% for ressource in page.ressources %}
-            <div class="ressource">
+            <div class="carte ressource">
                 <figure>
                         <img src="/assets/images/illustrations-services/{{ressource.illustration}}">
                         <figcaption>{{ressource.type}}</figcaption>

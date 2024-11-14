@@ -31,7 +31,7 @@ header {
 
     .marianne {
       width: 108px;
-      transform: translateX(-16px) ;
+      transform: translateX(-16px);
     }
 
     .menu {
@@ -104,4 +104,132 @@ header {
 .bouton.secondaire {
   border: 1px solid white;
   color: white;
+}
+
+.carte.ressource, .carte.service {
+  border: 1px solid #ddd;
+  width: 288px;
+  border-radius: 8px;
+
+  @include a-partir-de(md) {
+    width: 320px;
+  }
+
+  figure {
+    display: flex;
+    position: relative;
+    padding: 20px 22px 0;
+    background: #f4f4f4;
+    margin: 0;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+
+    img {
+      width: 100%;
+    }
+
+    figcaption {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      top: 16px;
+      right: 16px;
+      padding: 2px 8px;
+      line-height: 1.25rem;
+      font-size: 0.75rem;
+      background: #0d0c21;
+      color: white;
+      border-radius: 8px;
+
+      &:before {
+        content: '';
+        background-image: url("/assets/images/icone-ressource.svg");
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+
+  .contenu {
+    border-bottom: 4px solid black;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    h3 {
+      margin: 0;
+      padding: 0;
+      font-size: .875rem;
+      line-height: 1.5rem;
+      font-weight: 400;
+    }
+
+    span {
+      font-weight: bold;
+      font-size: 1.125rem;
+      line-height: 1.5rem;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      color: var(--noir);
+      font-weight: bold;
+
+      &:after {
+        content: '';
+        background: url("/assets/images/icone-lien-externe.svg");
+        width: 16px;
+        height: 16px;
+        margin-left: auto;
+      }
+    }
+
+    .labels {
+      span {
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+      }
+    }
+  }
+}
+
+.carte.ressource {
+  .contenu {
+    border-bottom-color: #0d0c21;
+  }
+
+  figcaption {
+    background: #0d0c21;
+    color: white;
+
+    &:before {
+      background-image: url("/assets/images/icone-ressource.svg");
+    }
+  }
+}
+
+.carte.service {
+  .contenu {
+    border-bottom-color: #fed980;
+  }
+
+  figure {
+    figcaption {
+      background: #fed980;
+      color: var(--noir);
+
+      &:before {
+        background-image: url("/assets/images/icone-service.svg");
+      }
+    }
+  }
 }
