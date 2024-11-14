@@ -1,4 +1,6 @@
 collections:
   services:
     output: true
+  ressources:
+    output: true
 exclude:  ["*.iml", "README.md", "Dockerfile"]
