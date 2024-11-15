@@ -4,15 +4,25 @@
   export let services: Service[];
 </script>
 
-<main>
-  Catalogue des services :
+{#each services as service}
+  <div class="carte service">
+    <figure>
+      <img src="/assets/images/illustrations-services/{service.illustration}" />
+      <figcaption>Service</figcaption>
+    </figure>
+    <div class="contenu">
+      <h3>{service.nom}</h3>
+      <span></span>
+      <a href="/"
+        >Découvrir le service
+        <img src="/assets/images/icone-fleche-droite.svg" />
+      </a>
+      <div class="labels">
 
-  <ul>
-    {#each services as service}
-      <li>{service.nom}</li>
-    {/each}
-  </ul>
-</main>
+      </div>
+    </div>
+  </div>
+{/each}
 
 <style>
   main {

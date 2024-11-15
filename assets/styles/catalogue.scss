@@ -4,7 +4,7 @@
 @import "responsive";
 
 .chapeau {
-  background: #0D0C21 url("/assets/images/motif-fond-service-opacite-16.png");
+  background: #0d0c21 url("/assets/images/motif-fond-service-opacite-16.png");
   padding: 24px var(--gouttiere) 40px;
   color: white;
   display: flex;
@@ -22,4 +22,11 @@
     font-size: 1.125rem;
     line-height: 1.625rem;
   }
+}
+
+#catalogue {
+  padding: 40px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
 }
