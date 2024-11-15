@@ -184,7 +184,7 @@ header {
       color: var(--noir);
       font-weight: bold;
 
-      &:after {
+      &.lien-externe:after {
         content: '';
         background: url("/assets/images/icone-lien-externe.svg");
         width: 16px;
