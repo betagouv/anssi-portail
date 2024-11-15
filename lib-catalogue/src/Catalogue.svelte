@@ -12,13 +12,13 @@
     </figure>
     <div class="contenu">
       <h3>{service.nom}</h3>
-      <span></span>
-      <a href="/"
-        >Découvrir le service
+      <span>{@html service.description}</span>
+      <a href={service.lienInterne}>
+        En savoir plus
         <img src="/assets/images/icone-fleche-droite.svg" />
       </a>
       <div class="labels">
-
+        {#each service.sources as source}<span>{source}</span>{/each}
       </div>
     </div>
   </div>

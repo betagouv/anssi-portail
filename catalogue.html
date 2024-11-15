@@ -17,7 +17,10 @@ permalink: /catalogue/
           {% for service in site.services %}
         {
           "nom": "{{ service.nomDuService }}",
-          "illustration": "{{service.illustration}}"
+          "illustration": "{{ service.illustration }}",
+          "description": "{{ service.descriptionService }}",
+          "lienInterne": "{{ service.url }}",
+          "sources": {{ service.sources | jsonify }}
         }
           {% unless forloop.last %},{% endunless %}
           {% endfor %}
