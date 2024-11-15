@@ -11,23 +11,19 @@ permalink: /catalogue/
     <p>Trouvez les services et les ressources adaptées à vos besoins et votre niveau cyber.</p>
 </section>
 
-
-
-<script type="application/javascript">
-
+<script type="application/json" id="donnees">
+  {
+      "services": [
+          {% for service in site.services %}
+        {
+          "nom": "{{ service.nomDuService }}",
+          "illustration": "{{service.illustration}}"
+        }
+          {% unless forloop.last %},{% endunless %}
+          {% endfor %}
+      ],
+      "ressources": []
+  }
 </script>
 
-<script type='application/json' id="donnees">
-    {
-        "services": [
-            {% for service in site.services %}
-          {
-            "nom": "{{ service.nomDuService }}"
-          }
-            {% unless forloop.last %},{% endunless %}
-            {% endfor %}
-        ],
-        "ressources": []
-    }
-</script>
 <div id="catalogue"></div>
