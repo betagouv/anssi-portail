@@ -1,12 +1,14 @@
 <script lang="ts">
-    export let services: string[]
+    import type {Service} from "./Catalogue.types";
+
+    export let services: Service[]
 </script>
 
 <main>
     Catalogue des services :
     <ul>
         {#each services as service}
-            <li>{service}</li>
+            <li>{service.nom}</li>
         {/each}
     </ul>
 </main>

@@ -19,9 +19,11 @@ permalink: /catalogue/
 
 <script type='application/json' id="donnees">
     {
-        "services":[
+        "services": [
             {% for service in site.services %}
-            "{{ service.nomDuService }}"
+          {
+            "nom": "{{ service.nomDuService }}"
+          }
             {% unless forloop.last %},{% endunless %}
             {% endfor %}
         ],
