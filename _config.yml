@@ -3,4 +3,13 @@ collections:
     output: true
   ressources:
     output: true
-exclude:  ["*.iml", "README.md", "Dockerfile"]
+exclude:
+    - "*.iml"
+    - README.md
+    - Dockerfile
+    - lib-catalogue/.vscode/
+    - lib-catalogue/node_modules/
+    - lib-catalogue/src/
+    - lib-catalogue/public/
+    - lib-catalogue/index.html
+    - lib-catalogue/README.md
