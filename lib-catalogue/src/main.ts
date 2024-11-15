@@ -1,15 +1,16 @@
 import {mount} from 'svelte'
 import Catalogue from './Catalogue.svelte'
+import type {Service} from "./Catalogue.types";
 
-const d = document.getElementById("donnees")!.textContent
-if (!d)
-    throw new Error();
+const donnees = document.getElementById("donnees")!.textContent
+if (!donnees)
+    throw new Error("Impossible de trouver les données du catalogue");
 
-const donnees = JSON.parse(d);
+const props = JSON.parse(donnees) as { services: Service[] };
 
 const catalogue = mount(Catalogue, {
     target: document.getElementById('catalogue')!,
-    props: {...donnees}
+    props
 })
 
 export default catalogue
