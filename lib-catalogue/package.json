@@ -4,11 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "vite build",
-    "watch": "vite build -w",
-    "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json"
+    "watch": "vite build -w"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
