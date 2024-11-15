@@ -12,4 +12,7 @@ exclude:
     - lib-catalogue/src/
     - lib-catalogue/public/
     - lib-catalogue/index.html
+    - lib-catalogue/*.json
     - lib-catalogue/README.md
+    - lib-catalogue/svelte.config.js
+    - lib-catalogue/vite.config.ts
