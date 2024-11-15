@@ -1,2 +1,3 @@
+npm install --prefix lib-catalogue
 npm run watch --prefix lib-catalogue &
-jekyll serve --livereload
+bundle exec jekyll serve --livereload
