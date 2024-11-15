@@ -1,3 +1,3 @@
 export type Service = {
-    nom: string;
-}
+  nom: string;
+};
