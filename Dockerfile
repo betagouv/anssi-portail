@@ -43,8 +43,17 @@ RUN set -eux; \
         /root/.bundle/cache \
     ;
 
-# Build du site
+# Installation de node
+RUN apk update && apk add nodejs npm
+
 ADD . /srv/jekyll
+
+# Build du catalogue
+WORKDIR /srv/jekyll/lib-catalogue
+RUN npm install && npm run build
+
+# Build du site
+WORKDIR /srv/jekyll
 RUN set -eux; bundler exec jekyll build
 
 ####

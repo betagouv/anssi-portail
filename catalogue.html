@@ -1,7 +1,19 @@
 ---
 layout: catalogue
+permalink: /catalogue/
 ---
+
+<script type="module" crossorigin src="/lib-catalogue/dist/assets/index.js"></script>
+<link rel="stylesheet" crossorigin href="/lib-catalogue/dist/assets/index.css">
+
 <section class="chapeau">
     <h1>Les services et ressources cyber</h1>
     <p>Trouvez les services et les ressources adaptées à vos besoins et votre niveau cyber.</p>
 </section>
+<script type='application/json' id="donnees">
+    {
+        "services": ["s1", "s2"],
+        "ressources": []
+    }
+</script>
+<div id="catalogue"></div>
