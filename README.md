@@ -22,10 +22,16 @@ $ gem install bundler -V
 $ bundler install
 ```
 
- - Utiliser la commande `serve` pour builder le site et pouvoir le consulter
+ - Exécuter le script `dev.sh` pour lancer la génération du Svelte & Jekyll… tout ça en mode `watch`.
 ```shell
-$ bundle exec jekyll serve --livereload
+$ ./dev.sh
 
+# vite v5.4.11 building for production...
+# watching for file changes...
+# build started...
+# transforming (1) index.html      
+#     Regenerating: 1 file(s) changed at 2024-11-15 15:41:53
+#                   ...done in 0.026235 seconds.
 # Generating... 
 #                     done in 0.072 seconds.
 #  Auto-regeneration: enabled for '<path>/anssi-portail'
