@@ -253,3 +253,18 @@ footer {
     line-height: 1.5rem;
   }
 }
+
+.labels {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  span {
+    border-radius: 12px;
+    background: #f4f4f4;
+    padding: 2px 8px;
+    font-size: 0.85rem;
+    line-height: 1.5rem;
+    font-weight: normal;
+  }
+}
