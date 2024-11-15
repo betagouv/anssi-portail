@@ -10,9 +10,21 @@ permalink: /catalogue/
     <h1>Les services et ressources cyber</h1>
     <p>Trouvez les services et les ressources adaptées à vos besoins et votre niveau cyber.</p>
 </section>
+
+
+
+<script type="application/javascript">
+
+</script>
+
 <script type='application/json' id="donnees">
     {
-        "services": ["s1", "s2"],
+        "services":[
+            {% for service in site.services %}
+            "{{ service.nomDuService }}"
+            {% unless forloop.last %},{% endunless %}
+            {% endfor %}
+        ],
         "ressources": []
     }
 </script>
