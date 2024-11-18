@@ -12,6 +12,7 @@
       <figcaption>Service</figcaption>
     </figure>
     <div class="contenu">
+      <p>{service.besoins}</p>
       <h3>{service.nom}</h3>
       <span>{@html service.description}</span>
       <a href={service.lienInterne}>

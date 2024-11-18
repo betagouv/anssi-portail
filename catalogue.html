@@ -19,7 +19,8 @@ permalink: /catalogue/
           "illustration": "{{ service.illustration }}",
           "description": "{{ service.description }}",
           "lienInterne": "{{ service.url }}",
-          "sources": {{ service.sources | jsonify }}
+          "sources": {{ service.sources | jsonify }},
+          "besoins": {{ service.besoins | jsonify }}
         }
           {% unless forloop.last %},{% endunless %}
           {% endfor %}
@@ -31,7 +32,9 @@ permalink: /catalogue/
               "illustration": "{{ ressource.illustration }}",
               "description": "{{ ressource.description }}",
               "lienInterne": "{{ ressource.url }}",
-              "sources": {{ ressource.sources | jsonify }}
+              "sources": {{ ressource.sources | jsonify }},
+              "besoins": {{ ressource.besoins | jsonify }}
+
       }
           {% unless forloop.last %},{% endunless %}
           {% endfor %}
