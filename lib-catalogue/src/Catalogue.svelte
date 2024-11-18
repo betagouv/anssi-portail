@@ -1,11 +1,8 @@
 <script lang="ts">
-  import type { ItemCyber } from "./Catalogue.types";
-
-  export let services: ItemCyber[];
-  export let ressources: ItemCyber[];
+  import { catalogueStore } from "./catalogue.store";
 </script>
 
-{#each services as service}
+{#each $catalogueStore as service}
   <div class="carte service">
     <figure>
       <img
@@ -29,10 +26,6 @@
       </div>
     </div>
   </div>
-{/each}
-
-{#each ressources as ressource}
-  - {ressource.nom}
 {/each}
 
 <style>
