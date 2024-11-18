@@ -10,14 +10,14 @@ script: /scripts/service.js
         <span><img src="/assets/images/icone-chevron-droite.svg"/> </span>
         <a href="/catalogue/">Les services et ressources cyber</a>
         <span><img src="/assets/images/icone-chevron-droite.svg"/></span>
-        <span>{{page.nomDuService}}</span>
+        <span>{{page.nom}}</span>
     </div>
     <div class="resume">
         <div>
             <span class="badge service">Service</span>
-            <h1>{{page.nomDuService}}</h1>
-            <p>{{page.descriptionService}}</p>
-            <a href="{{page.lienService}}" target="_blank" class="bouton primaire">Accéder au service</a>
+            <h1>{{page.nom}}</h1>
+            <p>{{page.description}}</p>
+            <a href="{{page.lien}}" target="_blank" class="bouton primaire">Accéder au service</a>
         </div>
         <div>
             <img src="/assets/images/illustrations-services/{{ page.illustration }}"/>
@@ -62,7 +62,7 @@ script: /scripts/service.js
             <img src="/assets/images/illustrations-services/{{ page.illustration }}"/>
             <h2>De quoi s'agit-il&nbsp;?</h2>
             <span>{{ page.content }}</span>
-            <a href="{{page.lienService}}" target="_blank" class="bouton primaire">Accéder au service</a>
+            <a href="{{page.lien}}" target="_blank" class="bouton primaire">Accéder au service</a>
         </section>
 
         <section class="cible" id="cible">

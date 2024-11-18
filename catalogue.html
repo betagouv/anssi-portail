@@ -16,9 +16,9 @@ permalink: /catalogue/
       "services": [
           {% for service in site.services %}
         {
-          "nom": "{{ service.nomDuService }}",
+          "nom": "{{ service.nom }}",
           "illustration": "{{ service.illustration }}",
-          "description": "{{ service.descriptionService }}",
+          "description": "{{ service.description }}",
           "lienInterne": "{{ service.url }}",
           "sources": {{ service.sources | jsonify }}
         }
