@@ -9,7 +9,7 @@ describe("Le store du catalogue filtré", () => {
   describe("sur application d'un filtre de besoin", () => {
     it("conserve uniquement les items correspondants", () => {
       catalogueStore.initialise([mss(), demainSpecialisteCyber()], []);
-      rechercheParBesoin.set("SECURISER");
+      rechercheParBesoin.set("RENFORCER_LA_SECURITE");
 
       const { resultats } = get(catalogueFiltre);
 
@@ -19,7 +19,7 @@ describe("Le store du catalogue filtré", () => {
 
     it("conserve tous les items en cas d'absence de besoins", () => {
       catalogueStore.initialise([mss(), demainSpecialisteCyber()], []);
-      rechercheParBesoin.set("");
+      rechercheParBesoin.set(null);
 
       const { resultats } = get(catalogueFiltre);
 
