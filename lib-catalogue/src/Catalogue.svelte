@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { Ressource, Service } from "./Catalogue.types";
+  import type { ItemCyber } from "./Catalogue.types";
 
-  export let services: Service[];
-  export let ressources: Ressource[];
+  export let services: ItemCyber[];
+  export let ressources: ItemCyber[];
 </script>
 
 {#each services as service}
@@ -34,7 +34,6 @@
 {#each ressources as ressource}
   - {ressource.nom}
 {/each}
-
 
 <style>
 </style>
