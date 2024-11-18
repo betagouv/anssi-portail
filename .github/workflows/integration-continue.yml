@@ -14,5 +14,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Utilise la version Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Installe les dépendances
+        run: npm ci --prefix lib-catalogue
+
+      - name: Exécute les tests
+        run: npm run test --prefix lib-catalogue
+
       - name: Construis le site via Docker
         run: docker build --target build-le-site -t anssi-portail .
