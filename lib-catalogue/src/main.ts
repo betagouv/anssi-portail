@@ -1,18 +1,20 @@
 import { mount } from "svelte";
 import Catalogue from "./Catalogue.svelte";
 import type { ItemCyber } from "./Catalogue.types";
+import { catalogueStore } from "./catalogue.store";
 
 const donnees = document.getElementById("donnees")!.textContent;
 if (!donnees) throw new Error("Impossible de trouver les données du catalogue");
 
-const props = JSON.parse(donnees) as {
+const { ressources, services } = JSON.parse(donnees) as {
   services: ItemCyber[];
   ressources: ItemCyber[];
 };
 
+catalogueStore.initialise(services, ressources);
+
 const catalogue = mount(Catalogue, {
   target: document.getElementById("catalogue")!,
-  props,
 });
 
 export default catalogue;
