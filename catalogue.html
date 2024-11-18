@@ -25,7 +25,18 @@ permalink: /catalogue/
           {% unless forloop.last %},{% endunless %}
           {% endfor %}
       ],
-      "ressources": []
+      "ressources": [
+          {% for ressource in site.ressources %}
+          {
+              "nom": "{{ ressource.nom }}",
+              "illustration": "{{ ressource.illustration }}",
+              "description": "{{ ressource.description }}",
+              "lienInterne": "{{ ressource.url }}",
+              "sources": {{ ressource.sources | jsonify }}
+      }
+          {% unless forloop.last %},{% endunless %}
+          {% endfor %}
+      ]
   }
 </script>
 
