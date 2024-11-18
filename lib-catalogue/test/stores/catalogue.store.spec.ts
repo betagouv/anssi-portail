@@ -1,7 +1,7 @@
-import {beforeEach, describe, expect, it} from "vitest";
+import { describe, expect, it } from "vitest";
 import { get } from "svelte/store";
-import { catalogueStore } from "../src/catalogue.store";
-import { ItemCyber } from "../src/Catalogue.types";
+import { catalogueStore } from "../../src/stores/catalogue.store";
+import { ItemCyber } from "../../src/Catalogue.types";
 
 describe("Le store du catalogue", () => {
   it("est une collection d'items", () => {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { catalogueStore } from "./catalogue.store";
+  import { catalogueStore } from "./stores/catalogue.store";
 </script>
 
 {#each $catalogueStore as service}

@@ -1,5 +1,5 @@
 import { writable } from "svelte/store";
-import type { ItemCyber } from "./Catalogue.types";
+import type { ItemCyber } from "../Catalogue.types";
 
 const { subscribe, set } = writable([] as ItemCyber[]);
 
