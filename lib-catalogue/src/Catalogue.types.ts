@@ -4,4 +4,5 @@ export type ItemCyber = {
   description: string;
   lienInterne: string;
   sources: string[];
+  besoins: string[]
 };
