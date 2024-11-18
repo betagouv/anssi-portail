@@ -29,4 +29,35 @@
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+
+  .choix-filtre-besoin {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    label {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      text-transform: uppercase;
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+
+      &.actif {
+        background: #fff7db;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25) inset;
+      }
+
+      img {
+        width: 48px;
+        height: 48px;
+      }
+
+      input {
+        display: none;
+      }
+    }
+  }
 }

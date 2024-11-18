@@ -1,8 +1,60 @@
 <script lang="ts">
-  import { catalogueStore } from "./stores/catalogue.store";
+  import { rechercheParBesoin } from "./stores/rechercheParBesoin.store";
+  import { catalogueFiltre } from "./stores/catalogueFiltre.store";
 </script>
 
-{#each $catalogueStore as service}
+<div class="choix-filtre-besoin">
+  <label class:actif={!$rechercheParBesoin}>
+    <img
+      src="/assets/images/illustration-filtre-besoins-tous.svg"
+      alt="illustration tous"
+    />
+    <input
+      type="radio"
+      name="filtre-besoin"
+      value=""
+      bind:group={$rechercheParBesoin}
+    /> Tous les besoins
+  </label>
+  <label class:actif={$rechercheParBesoin === "SENSIBILISER_ET_FORMER"}>
+    <img
+      src="/assets/images/illustration-filtre-besoins-decouvrir-progresser.svg"
+      alt="illustration découvrir et progresser"
+    />
+    <input
+      type="radio"
+      name="filtre-besoin"
+      value="SENSIBILISER_ET_FORMER"
+      bind:group={$rechercheParBesoin}
+    /> Sensibiliser et former
+  </label>
+  <label class:actif={$rechercheParBesoin === "RENFORCER_LA_SECURITE"}>
+    <img
+      src="/assets/images/illustration-filtre-besoins-renforcer-securite.svg"
+      alt="illustration renforcer la sécurité"
+    />
+    <input
+      type="radio"
+      name="filtre-besoin"
+      value="RENFORCER_LA_SECURITE"
+      bind:group={$rechercheParBesoin}
+    /> Renforcer la sécurité
+  </label>
+  <label class:actif={$rechercheParBesoin === "REAGIR"}>
+    <img
+      src="/assets/images/illustration-filtre-besoins-reagir.svg"
+      alt="illustration réagir"
+    />
+    <input
+      type="radio"
+      name="filtre-besoin"
+      value="REAGIR"
+      bind:group={$rechercheParBesoin}
+    /> Réagir
+  </label>
+</div>
+
+{#each $catalogueFiltre.resultats as service}
   <div class="carte service">
     <figure>
       <img
@@ -12,7 +64,6 @@
       <figcaption>Service</figcaption>
     </figure>
     <div class="contenu">
-      <p>{service.besoins}</p>
       <h3>{service.nom}</h3>
       <span>{@html service.description}</span>
       <a href={service.lienInterne}>
