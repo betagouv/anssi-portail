@@ -7,6 +7,7 @@ export const mss = (): ItemCyber => ({
   lienInterne: "https://...",
   besoins: ["RENFORCER_LA_SECURITE"],
   sources: [],
+  droitsAcces: ["ENTITES_PUBLIQUES"],
 });
 
 export const demainSpecialisteCyber = (): ItemCyber => ({
@@ -16,6 +17,7 @@ export const demainSpecialisteCyber = (): ItemCyber => ({
   lienInterne: "https://...",
   besoins: ["SENSIBILISER_ET_FORMER"],
   sources: [],
+  droitsAcces: ["ACCES_LIBRE"],
 });
 
 export const livretEnJeux = (): ItemCyber => ({
@@ -25,4 +27,5 @@ export const livretEnJeux = (): ItemCyber => ({
   lienInterne: "https://...",
   besoins: ["SENSIBILISER_ET_FORMER"],
   sources: [],
+  droitsAcces: [],
 });
