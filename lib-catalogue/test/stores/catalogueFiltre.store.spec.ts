@@ -4,6 +4,7 @@ import { demainSpecialisteCyber, mss } from "./objetsExemples";
 import { catalogueStore } from "../../src/stores/catalogue.store";
 import { rechercheParBesoin } from "../../src/stores/rechercheParBesoin.store";
 import { catalogueFiltre } from "../../src/stores/catalogueFiltre.store";
+import {rechercheParDroitAcces} from "../../src/stores/rechercheParDroitAcces.store";
 
 describe("Le store du catalogue filtré", () => {
   describe("sur application d'un filtre de besoin", () => {
@@ -26,4 +27,25 @@ describe("Le store du catalogue filtré", () => {
       expect(resultats.length).toBe(2);
     });
   });
+
+  describe("sur application d'un filtre d'accessibilité'", () => {
+    it("conserve uniquement les items correspondants", ()=>{
+      catalogueStore.initialise([mss(),  demainSpecialisteCyber()], [])
+      rechercheParDroitAcces.set(["ACCES_LIBRE"])
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(1);
+      expect(resultats[0].nom).toBe("DemainSpécialisteCyber");
+    })
+
+    it("conserve tous les items en cas d'absence de droits d'acces", () => {
+      catalogueStore.initialise([mss(), demainSpecialisteCyber()], []);
+      rechercheParDroitAcces.set([]);
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(2);
+    });
+  })
 });

@@ -8,5 +8,7 @@ illustration: mac/mac.png
 lien: https://monaide.cyber.gouv.fr/
 besoins:
   - RENFORCER_LA_SECURITE
+droitsAcces:
+  - ACCES_LIBRE
 ---
 

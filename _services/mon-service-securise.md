@@ -14,6 +14,8 @@ sources:
   - Innovation ANSSI
 besoins: 
   - RENFORCER_LA_SECURITE
+droitsAcces:
+  - ENTITES_PUBLIQUES
 liens:
     - accompagnement:   
       titre: Bénéficier d’un accompagnement
