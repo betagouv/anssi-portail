@@ -29,7 +29,12 @@
   .resume {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     gap: 24px;
+
+    @include a-partir-de(xxl) {
+      flex-direction: row;
+    }
 
     img {
       display: none;
