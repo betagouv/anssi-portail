@@ -28,15 +28,7 @@ liens:
       illustration: mss/mss-securiser.webp
       couleurFond: "#0079D0"
 ressources:
-    - demainspecialistecyber:
-      titre: DemainSpécialisteCyber
-      type: Video # Rajoute le badge en haut à droite de l'illustration
-      illustration: demainspecialistecyber/demainspecialistecyber.png
-      description: S'informer sur la cybersécurité et ses métiers.
-      lien: https://www.demainspecialistecyber.fr
-      labels:
-        - ANSSI
-        - Innovation ANSSI
+    - /ressources/demain-specialiste-cyber
 ---
 Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
