@@ -1,7 +1,7 @@
 ---
 layout: service
 typologie: service
-nom: MonServiceSécurisé
+nom: Mon&ZeroWidthSpace;Service&ZeroWidthSpace;Sécurisé
 titreHtml: MonServiceSécurisé
 description: "MonServiceSécurisé aide les entités publiques à sécuriser et homologuer leurs services publics numériques&nbsp;: site web, applications mobiles, API."
 lien: https://monservicesecurise.cyber.gouv.fr/
