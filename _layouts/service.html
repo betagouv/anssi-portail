@@ -83,11 +83,13 @@ script: /scripts/service.js
 
         <section class="ressources" id="ressources">
             <h2>Les ressources associées</h2>
-            {% for ressource in page.ressources %}
+            {% for idRessource in page.ressources %}
+            {% assign ressource = site.ressources | where: "id", idRessource  | first %}
+
             <div class="carte ressource">
                 <figure>
                         <img src="/assets/images/illustrations-services/{{ressource.illustration}}">
-                        <figcaption>{{ressource.type}}</figcaption>
+                        <figcaption>{{ressource.format}}</figcaption>
                     </figure>
                 <div class="contenu">
                     <h3>{{ressource.titre}}</h3>
@@ -96,8 +98,8 @@ script: /scripts/service.js
                         <img src="/assets/images/icone-fleche-droite.svg">
                     </a>
                     <div class="labels">
-                        {% for label in ressource.labels %}
-                        <span>{{label}}</span>
+                        {% for source in ressource.sources %}
+                        <span>{{source}}</span>
                         {% endfor %}
                         <a class="lien-externe" href="{{ressource.lien}}" target="_blank"><img src="/assets/images/icone-lien-externe.svg"> </a>
                     </div>
