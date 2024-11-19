@@ -184,20 +184,19 @@ header {
       line-height: 1.5rem;
       color: var(--noir);
       font-weight: bold;
-
-      &.lien-externe:after {
-        content: '';
-        background: url("/assets/images/icone-lien-externe.svg");
-        width: 16px;
-        height: 16px;
-        margin-left: auto;
-      }
     }
 
     .labels {
       span {
         font-size: 0.75rem;
         line-height: 1.25rem;
+      }
+      a.lien-externe {
+        margin-left: auto;
+        img {
+          width: 20px;
+          height: 20px;
+        }
       }
     }
   }
@@ -258,6 +257,7 @@ footer {
 .labels {
   display: flex;
   gap: 8px;
+  align-items: center;
   flex-wrap: wrap;
 
   span {

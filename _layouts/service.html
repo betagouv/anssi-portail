@@ -92,13 +92,14 @@ script: /scripts/service.js
                 <div class="contenu">
                     <h3>{{ressource.titre}}</h3>
                     <span>{{ressource.description}}</span>
-                    <a class="lien-externe" href="{{ressource.lien}}">Découvrir le service
+                    <a href="{{ressource.url}}">Découvrir le service
                         <img src="/assets/images/icone-fleche-droite.svg">
                     </a>
                     <div class="labels">
                         {% for label in ressource.labels %}
                         <span>{{label}}</span>
                         {% endfor %}
+                        <a class="lien-externe" href="{{ressource.lien}}" target="_blank"><img src="/assets/images/icone-lien-externe.svg"> </a>
                     </div>
                 </div>
             </div>
