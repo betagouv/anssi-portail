@@ -62,3 +62,59 @@
     }
   }
 }
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+
+  legend {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    padding: 0;
+    margin-bottom: 16px;
+  }
+
+  label {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    .compte {
+      margin-left: auto;
+      color: #939699;
+      font-size: 0.75rem;
+      line-height: 1rem;
+    }
+
+    input[type=checkbox] {
+      appearance: none;
+      border: 1px solid var(--noir);
+      border-radius: 4px;
+      width: 24px;
+      height: 24px;
+      margin: 0;
+
+      &:checked {
+        background-color: #FED980;
+
+        &::before {
+          content: '';
+          display: block;
+          margin: auto;
+          width: 6px;
+          height: 12px;
+          border-right: 0.15em var(--noir) solid;
+          border-bottom: 0.15em var(--noir) solid;
+          transform: translateY(2px) rotate(0.12turn);
+        }
+      }
+    }
+  }
+}

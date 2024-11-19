@@ -1,9 +1,11 @@
 <script lang="ts">
   import { catalogueFiltre } from "./stores/catalogueFiltre.store";
   import FiltreBesoin from "./FiltreBesoin.svelte";
+  import FiltreAccessibilite from "./FiltreAccessibilite.svelte";
 </script>
 
 <FiltreBesoin/>
+<FiltreAccessibilite/>
 
 {#each $catalogueFiltre.resultats as service}
   <div class="carte service">
