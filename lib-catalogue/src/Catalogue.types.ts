@@ -19,3 +19,14 @@ export enum DroitAcces {
   ENTITES_PUBLIQUES = "ENTITES_PUBLIQUES",
   REGULES_NIS2 = "REGULES_NIS2",
 }
+
+export enum Typologie  {
+  SERVICE = "service",
+  RESSOURCE= "ressource"
+}
+
+export enum FormatRessource {
+  PDF="PDF",
+  VIDEO="Video",
+  LISTES="Listes"
+}
