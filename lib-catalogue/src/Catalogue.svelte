@@ -2,10 +2,12 @@
   import { catalogueFiltre } from "./stores/catalogueFiltre.store";
   import FiltreBesoin from "./FiltreBesoin.svelte";
   import FiltreAccessibilite from "./FiltreAccessibilite.svelte";
+  import FiltreTypologieEtFormat from "./FiltreTypologieEtFormat.svelte";
 </script>
 
 <FiltreBesoin/>
 <FiltreAccessibilite/>
+<FiltreTypologieEtFormat />
 
 {#each $catalogueFiltre.resultats as service}
   <div class="carte service">
