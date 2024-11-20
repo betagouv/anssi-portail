@@ -1,13 +1,13 @@
-import { ItemCyber } from "../../src/Catalogue.types";
+import {BesoinCyber, DroitAcces, ItemCyber} from "../../src/Catalogue.types";
 
 export const mss = (): ItemCyber => ({
   nom: "mss",
   description: "Pour sécuriser",
   illustration: "mss.png",
   lienInterne: "https://...",
-  besoins: ["RENFORCER_LA_SECURITE"],
+  besoins: [BesoinCyber.RENFORCER_LA_SECURITE],
   sources: [],
-  droitsAcces: ["ENTITES_PUBLIQUES"],
+  droitsAcces: [DroitAcces.ENTITES_PUBLIQUES],
 });
 
 export const demainSpecialisteCyber = (): ItemCyber => ({
@@ -15,9 +15,9 @@ export const demainSpecialisteCyber = (): ItemCyber => ({
   description: "Former…",
   illustration: "mss.png",
   lienInterne: "https://...",
-  besoins: ["SENSIBILISER_ET_FORMER"],
+  besoins: [BesoinCyber.SENSIBILISER_ET_FORMER],
   sources: [],
-  droitsAcces: ["ACCES_LIBRE"],
+  droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
 
 export const livretEnJeux = (): ItemCyber => ({
@@ -25,7 +25,7 @@ export const livretEnJeux = (): ItemCyber => ({
   description: "",
   illustration: "livret.png",
   lienInterne: "https://...",
-  besoins: ["SENSIBILISER_ET_FORMER"],
+  besoins: [BesoinCyber.SENSIBILISER_ET_FORMER],
   sources: [],
   droitsAcces: [],
 });
