@@ -1,5 +1,6 @@
 <script lang="ts">
   import { rechercheParDroitAcces } from "./stores/rechercheParDroitAcces.store";
+  import { DroitAcces } from "./Catalogue.types";
 </script>
 
 <fieldset>
@@ -7,7 +8,7 @@
   <label>
     <input
       type="checkbox"
-      value="ACCES_LIBRE"
+      value={DroitAcces.ACCES_LIBRE}
       bind:group={$rechercheParDroitAcces}
     />
     <span class="libelle">Accès libre</span>
@@ -16,14 +17,18 @@
   <label>
     <input
       type="checkbox"
-      value="ENTITES_PUBLIQUES"
+      value={DroitAcces.ENTITES_PUBLIQUES}
       bind:group={$rechercheParDroitAcces}
     />
     <span class="libelle">Entités publiques</span>
     <span class="compte">55</span>
   </label>
   <label>
-    <input type="checkbox"  value="REGULES_NIS2" bind:group={$rechercheParDroitAcces}/>
+    <input
+      type="checkbox"
+      value={DroitAcces.REGULES_NIS2}
+      bind:group={$rechercheParDroitAcces}
+    />
     <span class="libelle">Entités régulées / NIS2</span>
     <span class="compte">4</span>
   </label>
