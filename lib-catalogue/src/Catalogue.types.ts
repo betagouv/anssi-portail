@@ -1,4 +1,4 @@
-export type ItemCyber = {
+export interface ItemCyber {
   typologie: Typologie;
   nom: string;
   illustration: string;
@@ -7,7 +7,8 @@ export type ItemCyber = {
   sources: string[];
   besoins: BesoinCyber[];
   droitsAcces: DroitAcces[];
-};
+  format?: FormatRessource;
+}
 
 export enum BesoinCyber {
   REAGIR = "REAGIR",

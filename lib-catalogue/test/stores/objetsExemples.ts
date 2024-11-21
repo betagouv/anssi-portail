@@ -1,7 +1,13 @@
-import {BesoinCyber, DroitAcces, ItemCyber, Typologie} from "../../src/Catalogue.types";
+import {
+  BesoinCyber,
+  DroitAcces,
+  FormatRessource,
+  ItemCyber,
+  Typologie,
+} from "../../src/Catalogue.types";
 
 export const mss = (): ItemCyber => ({
-  typologie:Typologie.SERVICE,
+  typologie: Typologie.SERVICE,
   nom: "mss",
   description: "Pour sécuriser",
   illustration: "mss.png",
@@ -12,7 +18,7 @@ export const mss = (): ItemCyber => ({
 });
 
 export const demainSpecialisteCyber = (): ItemCyber => ({
-  typologie:Typologie.SERVICE,
+  typologie: Typologie.SERVICE,
   nom: "DemainSpécialisteCyber",
   description: "Former…",
   illustration: "mss.png",
@@ -23,7 +29,7 @@ export const demainSpecialisteCyber = (): ItemCyber => ({
 });
 
 export const monEspaceNIS2 = (): ItemCyber => ({
-  typologie:Typologie.SERVICE,
+  typologie: Typologie.SERVICE,
   nom: "MonEspaceNIS2",
   description:
     "Se notifier et être guidé dans sa mise en conformité avec la directive NIS 2",
@@ -35,12 +41,25 @@ export const monEspaceNIS2 = (): ItemCyber => ({
 });
 
 export const livretEnJeux = (): ItemCyber => ({
-  typologie:Typologie.RESSOURCE,
+  typologie: Typologie.RESSOURCE,
   nom: "enjeux",
+  format: FormatRessource.VIDEO,
   description: "",
   illustration: "livret.png",
   lienInterne: "https://...",
   besoins: [BesoinCyber.SENSIBILISER_ET_FORMER],
+  sources: [],
+  droitsAcces: [DroitAcces.ACCES_LIBRE],
+});
+
+export const guidesTechniques = (): ItemCyber => ({
+  typologie: Typologie.RESSOURCE,
+  nom: "Guides techniques",
+  format: FormatRessource.PDF,
+  description: "",
+  illustration: "guide.png",
+  lienInterne: "https://...",
+  besoins: [BesoinCyber.RENFORCER_LA_SECURITE],
   sources: [],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
