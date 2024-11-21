@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { FormatRessource, Typologie } from "./Catalogue.types";
+  import {DroitAcces, FormatRessource, Typologie} from "./Catalogue.types";
   import { rechercheParTypologie } from "./stores/rechercheParTypologie.store";
   import { rechercheParFormat } from "./stores/rechercheParFormat.store";
+  import {nombreResultats} from "./stores/nombreResultats.store";
 
   let ressourcesPartielles = false;
   $: if ($rechercheParFormat.length > 0) {
@@ -36,7 +37,7 @@
         alt="Logo service"
       />Services</span
     >
-    <span class="compte">2</span>
+    <span class="compte">{$nombreResultats.parTypologie[Typologie.SERVICE]}</span>
   </label>
   <label>
     <input
@@ -52,7 +53,7 @@
         alt="Logo ressource"
       />Ressources</span
     >
-    <span class="compte">1</span>
+    <span class="compte">{$nombreResultats.parTypologie[Typologie.RESSOURCE]}</span>
   </label>
   <fieldset>
     <label>
