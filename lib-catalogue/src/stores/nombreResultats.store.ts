@@ -16,31 +16,26 @@ export const nombreResultats = derived<
     $catalogueStore.filter((item) => item.droitsAcces.includes(droitAcces))
       .length;
 
+  const parDroitAcces = Object.fromEntries(
+    Object.values(DroitAcces).map((d) => [d, nombreParDroitAcces(d)]),
+  );
+
   const nombreParTypologie = (typologie: Typologie) =>
     $catalogueStore.filter((item) => item.typologie === typologie).length;
+
+  const parTypologie = Object.fromEntries(
+    Object.values(Typologie).map((t) => [t, nombreParTypologie(t)]),
+  );
 
   const nombreParFormatDeRessource = (format: FormatRessource) =>
     $catalogueStore.filter((item) => item.format === format).length;
 
-  const parDroitAcces = Object.values(DroitAcces).reduce(
-    (acc, droit) => ({ ...acc, [droit]: nombreParDroitAcces(droit) }),
-    {},
+  const parFormatDeRessource = Object.fromEntries(
+    Object.values(FormatRessource).map((f) => [
+      f,
+      nombreParFormatDeRessource(f),
+    ]),
   );
 
-  const parTypologie = Object.values(Typologie).reduce(
-    (acc, typologie) => ({
-      ...acc,
-      [typologie]: nombreParTypologie(typologie),
-    }),
-    {},
-  );
-
-  const parFormatDeRessource = Object.values(FormatRessource).reduce(
-    (acc, typologie) => ({
-      ...acc,
-      [typologie]: nombreParFormatDeRessource(typologie),
-    }),
-    {},
-  );
   return { parDroitAcces, parTypologie, parFormatDeRessource };
 });
