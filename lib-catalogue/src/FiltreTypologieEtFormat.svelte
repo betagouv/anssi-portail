@@ -1,8 +1,8 @@
 <script lang="ts">
-  import {DroitAcces, FormatRessource, Typologie} from "./Catalogue.types";
+  import { FormatRessource, Typologie } from "./Catalogue.types";
   import { rechercheParTypologie } from "./stores/rechercheParTypologie.store";
   import { rechercheParFormat } from "./stores/rechercheParFormat.store";
-  import {nombreResultats} from "./stores/nombreResultats.store";
+  import { nombreResultats } from "./stores/nombreResultats.store";
 
   let ressourcesPartielles = false;
   $: if ($rechercheParFormat.length > 0) {
@@ -37,7 +37,9 @@
         alt="Logo service"
       />Services</span
     >
-    <span class="compte">{$nombreResultats.parTypologie[Typologie.SERVICE]}</span>
+    <span class="compte"
+      >{$nombreResultats.parTypologie[Typologie.SERVICE]}</span
+    >
   </label>
   <label>
     <input
@@ -53,7 +55,9 @@
         alt="Logo ressource"
       />Ressources</span
     >
-    <span class="compte">{$nombreResultats.parTypologie[Typologie.RESSOURCE]}</span>
+    <span class="compte"
+      >{$nombreResultats.parTypologie[Typologie.RESSOURCE]}</span
+    >
   </label>
   <fieldset>
     <label>
@@ -63,7 +67,9 @@
         bind:group={$rechercheParFormat}
       />
       <span class="libelle">Pdf</span>
-      <span class="compte">{$nombreResultats.parFormatDeRessource[FormatRessource.PDF]}</span>
+      <span class="compte"
+        >{$nombreResultats.parFormatDeRessource[FormatRessource.PDF]}</span
+      >
     </label>
     <label>
       <input
@@ -72,7 +78,9 @@
         bind:group={$rechercheParFormat}
       />
       <span class="libelle">Vidéos</span>
-      <span class="compte">{$nombreResultats.parFormatDeRessource[FormatRessource.VIDEO]}</span>
+      <span class="compte"
+        >{$nombreResultats.parFormatDeRessource[FormatRessource.VIDEO]}</span
+      >
     </label>
     <label>
       <input
@@ -81,7 +89,9 @@
         bind:group={$rechercheParFormat}
       />
       <span class="libelle">Listes</span>
-      <span class="compte">{$nombreResultats.parFormatDeRessource[FormatRessource.LISTES]}</span>
+      <span class="compte"
+        >{$nombreResultats.parFormatDeRessource[FormatRessource.LISTES]}</span
+      >
     </label>
   </fieldset>
 </fieldset>
