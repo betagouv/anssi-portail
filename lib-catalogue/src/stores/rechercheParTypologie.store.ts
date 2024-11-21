@@ -1,19 +1,20 @@
-import { writable } from "svelte/store";
-import { Typologie } from "../Catalogue.types";
+import { get, writable } from "svelte/store";
+import { type ItemCyber, Typologie } from "../Catalogue.types";
 
 const selectionDeTypologies = writable<Typologie[]>([]);
 
 export const rechercheParTypologie = {
   subscribe: selectionDeTypologies.subscribe,
   set: selectionDeTypologies.set,
-  ajouteLesRessources: () => {
+  ajouteLesRessources: () =>
     selectionDeTypologies.update((etatActuel) => [
       ...new Set([...etatActuel, Typologie.RESSOURCE]),
-    ]);
-  },
-  retireLesRessources: () => {
+    ]),
+  retireLesRessources: () =>
     selectionDeTypologies.update((valeur) =>
       valeur.filter((v) => v !== Typologie.RESSOURCE),
-    );
-  },
+    ),
+  ok: (item: ItemCyber) =>
+    get(rechercheParTypologie).length === 0 ||
+    get(rechercheParTypologie).includes(item.typologie),
 };
