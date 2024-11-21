@@ -1,12 +1,23 @@
 import { describe, expect, it } from "vitest";
 import { get } from "svelte/store";
-import { demainSpecialisteCyber, livretEnJeux, mss } from "./objetsExemples";
+import {
+  demainSpecialisteCyber,
+  guidesTechniques,
+  livretEnJeux,
+  mss,
+} from "./objetsExemples";
 import { catalogueStore } from "../../src/stores/catalogue.store";
 import { rechercheParBesoin } from "../../src/stores/rechercheParBesoin.store";
 import { catalogueFiltre } from "../../src/stores/catalogueFiltre.store";
 import { rechercheParDroitAcces } from "../../src/stores/rechercheParDroitAcces.store";
-import { BesoinCyber, DroitAcces, Typologie } from "../../src/Catalogue.types";
+import {
+  BesoinCyber,
+  DroitAcces,
+  FormatRessource,
+  Typologie,
+} from "../../src/Catalogue.types";
 import { rechercheParTypologie } from "../../src/stores/rechercheParTypologie.store";
+import { rechercheParFormat } from "../../src/stores/rechercheParFormat.store";
 
 describe("Le store du catalogue filtré", () => {
   describe("sur application d'un filtre de besoin", () => {
@@ -62,9 +73,30 @@ describe("Le store du catalogue filtré", () => {
       expect(resultats[0].nom).toBe("mss");
     });
 
-    it("conserve tous les items quand aucun filtre actif", ()=>{
+    it("conserve tous les items quand aucun filtre actif", () => {
       catalogueStore.initialise([mss()], [livretEnJeux()]);
       rechercheParTypologie.set([]);
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(2);
+    });
+  });
+
+  describe("sur application d'un filtre de format", () => {
+    it("conserve uniquement les items correspondant", () => {
+      catalogueStore.initialise([], [livretEnJeux(), guidesTechniques()]);
+      rechercheParFormat.set([FormatRessource.PDF]);
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(1);
+      expect(resultats[0].nom).toBe("Guides techniques");
+    });
+
+    it("conserve tous les items quand aucun filtre actif", ()=>{
+      catalogueStore.initialise([], [livretEnJeux(), guidesTechniques()]);
+      rechercheParFormat.set([]);
 
       const { resultats } = get(catalogueFiltre);
 

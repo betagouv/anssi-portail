@@ -37,7 +37,8 @@ permalink: /catalogue/
               "lienInterne": "{{ ressource.url }}",
               "sources": {{ ressource.sources | jsonify }},
               "besoins": {{ ressource.besoins | jsonify }},
-              "droitsAcces": {{ ressource.droitsAcces | jsonify }}
+              "droitsAcces": {{ ressource.droitsAcces | jsonify }},
+              "format": "{{ ressource.format }}"
           }
           {% unless forloop.last %},{% endunless %}
           {% endfor %}
