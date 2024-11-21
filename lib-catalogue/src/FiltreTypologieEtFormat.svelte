@@ -63,7 +63,7 @@
         bind:group={$rechercheParFormat}
       />
       <span class="libelle">Pdf</span>
-      <span class="compte">55</span>
+      <span class="compte">{$nombreResultats.parFormatDeRessource[FormatRessource.PDF]}</span>
     </label>
     <label>
       <input
@@ -72,7 +72,7 @@
         bind:group={$rechercheParFormat}
       />
       <span class="libelle">Vidéos</span>
-      <span class="compte">55</span>
+      <span class="compte">{$nombreResultats.parFormatDeRessource[FormatRessource.VIDEO]}</span>
     </label>
     <label>
       <input
@@ -81,7 +81,7 @@
         bind:group={$rechercheParFormat}
       />
       <span class="libelle">Listes</span>
-      <span class="compte">55</span>
+      <span class="compte">{$nombreResultats.parFormatDeRessource[FormatRessource.LISTES]}</span>
     </label>
   </fieldset>
 </fieldset>

@@ -1,10 +1,11 @@
 import { derived } from "svelte/store";
 import { catalogueStore } from "./catalogue.store";
-import { DroitAcces, Typologie } from "../Catalogue.types";
+import { DroitAcces, FormatRessource, Typologie } from "../Catalogue.types";
 
 type NombreResultats = {
   parDroitAcces: Partial<Record<DroitAcces, number>>;
   parTypologie: Partial<Record<Typologie, number>>;
+  parFormatDeRessource: Partial<Record<FormatRessource, number>>;
 };
 
 export const nombreResultats = derived<
@@ -18,6 +19,9 @@ export const nombreResultats = derived<
   const nombreParTypologie = (typologie: Typologie) =>
     $catalogueStore.filter((item) => item.typologie === typologie).length;
 
+  const nombreParFormatDeRessource = (format: FormatRessource) =>
+    $catalogueStore.filter((item) => item.format === format).length;
+
   const parDroitAcces = Object.values(DroitAcces).reduce(
     (acc, droit) => ({ ...acc, [droit]: nombreParDroitAcces(droit) }),
     {},
@@ -30,5 +34,13 @@ export const nombreResultats = derived<
     }),
     {},
   );
-  return { parDroitAcces, parTypologie };
+
+  const parFormatDeRessource = Object.values(FormatRessource).reduce(
+    (acc, typologie) => ({
+      ...acc,
+      [typologie]: nombreParFormatDeRessource(typologie),
+    }),
+    {},
+  );
+  return { parDroitAcces, parTypologie, parFormatDeRessource };
 });
