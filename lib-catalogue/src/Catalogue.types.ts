@@ -32,3 +32,10 @@ export enum FormatRessource {
   VIDEO = "Video",
   LISTES = "Listes",
 }
+
+export enum Source {
+  ANSSI = "ANSSI",
+  CERTFR = "CERT-FR",
+  INNOVATION_ANSSI = "Innovation ANSSI",
+  PARTENAIRES = "Partenaires"
+}
