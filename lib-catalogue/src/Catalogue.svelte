@@ -3,11 +3,13 @@
   import FiltreBesoin from "./FiltreBesoin.svelte";
   import FiltreAccessibilite from "./FiltreAccessibilite.svelte";
   import FiltreTypologieEtFormat from "./FiltreTypologieEtFormat.svelte";
+  import FiltreSource from "./FiltreSource.svelte";
 </script>
 
 <FiltreBesoin/>
 <FiltreAccessibilite/>
 <FiltreTypologieEtFormat />
+<FiltreSource />
 
 {#each $catalogueFiltre.resultats as service}
   <div class="carte service">
