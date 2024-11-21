@@ -16,6 +16,7 @@ permalink: /catalogue/
           {% for service in site.services %}
         {
           "nom": "{{ service.nom }}",
+          "typologie": "{{ service.typologie }}",
           "illustration": "{{ service.illustration }}",
           "description": "{{ service.description }}",
           "lienInterne": "{{ service.url }}",
@@ -30,6 +31,7 @@ permalink: /catalogue/
           {% for ressource in site.ressources %}
           {
               "nom": "{{ ressource.nom }}",
+              "typologie": "{{ ressource.typologie }}",
               "illustration": "{{ ressource.illustration }}",
               "description": "{{ ressource.description }}",
               "lienInterne": "{{ ressource.url }}",

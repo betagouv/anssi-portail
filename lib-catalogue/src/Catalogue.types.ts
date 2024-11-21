@@ -1,4 +1,5 @@
 export type ItemCyber = {
+  typologie: Typologie;
   nom: string;
   illustration: string;
   description: string;
@@ -20,13 +21,13 @@ export enum DroitAcces {
   REGULES_NIS2 = "REGULES_NIS2",
 }
 
-export enum Typologie  {
+export enum Typologie {
   SERVICE = "service",
-  RESSOURCE= "ressource"
+  RESSOURCE = "ressource",
 }
 
 export enum FormatRessource {
-  PDF="PDF",
-  VIDEO="Video",
-  LISTES="Listes"
+  PDF = "PDF",
+  VIDEO = "Video",
+  LISTES = "Listes",
 }
