@@ -165,3 +165,95 @@
     margin: 24px 0;
   }
 }
+
+.encart {
+  padding: 40px var(--gouttiere);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &.fond-sombre {
+    background: #0d0c21 url("/assets/images/motif-fond-service-opacite-16.png");
+
+    h1 {
+      color: white;
+    }
+  }
+
+  h1 {
+    font-size: 2rem;
+    line-height: 2.375rem;
+    margin: 0 0 16px;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    margin: 16px 0;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .carte {
+    background: white;
+    border-radius: 8px;
+    border-bottom: 6px solid #FED980;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &.parcours {
+      img {
+        height: 170px;
+        align-self: flex-start;
+      }
+
+      h2 {
+        margin: 0;
+        padding: 0;
+      }
+
+      a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        align-self: flex-end;
+        margin: 0;
+        color: var(--noir);
+        text-align: right;
+        text-decoration: none;
+        border-bottom: 1px solid var(--noir);
+
+
+        &::after {
+          content: '';
+          background: url("/assets/images/icone-fleche-droite.svg");
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+
+    &.test-maturite {
+      box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
+      padding-top: 40px;
+
+      p {
+        font-size: 1.25rem;
+        line-height: 1.875rem;
+      }
+
+      a {
+        margin-top: 24px;
+      }
+
+      img {
+        width: 170px;
+      }
+    }
+  }
+}
