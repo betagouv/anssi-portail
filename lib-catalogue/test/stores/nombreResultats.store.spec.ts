@@ -82,7 +82,7 @@ describe("Le store du nombre de résultats", () => {
   });
 
   describe("peut retourner le nombre par source", () => {
-    it("pour un les partenaires", () => {
+    it("pour les partenaires", () => {
       catalogueStore.initialise([], [kitCyber()]);
 
       let parSource = get(nombreResultats).parSource;
