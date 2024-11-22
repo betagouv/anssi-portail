@@ -76,5 +76,30 @@
   </div>
 </div>
 
+<div class="encart fond-sombre">
+  <h1>Nos parcours adaptés à votre maturité cyber</h1>
+  <div class="carte parcours">
+    <img src="/assets/images/debuter-cyber.png" alt="Illustration débutant cyber"/>
+    <h2>Débuter en cyberbersécurité</h2>
+    <p>Vous débutez en cyber ou vous avez besoin de solidifier vous connaissances ? Quelques actions simples pourraient améliorer votre sécurité. L’ANSSI vous propose des solutions pour y arriver.</p>
+    <a href="#">Découvrir le parcours</a>
+  </div>
+  <div class="carte parcours">
+    <img src="/assets/images/approfondir-cyber.png" alt="Illustration approfondir cyber"/>
+    <h2>Approfondir la cybersécurité</h2>
+    <p>Vous connaissez les bases de la cyber mais quelques actions simples pourraient améliorer votre sécurité. L’ANSSI vous propose des solutions pour y arriver.</p>
+    <a href="#">Découvrir le parcours</a>
+  </div>
+</div>
+
+<div  class="encart fond-clair">
+  <div class="carte test-maturite">
+    <img src="/assets/images/trouver-parcours.png" alt="Illustration trouver parcours"/>
+    <h1>Trouvez le parcours cyber adapté</h1>
+    <p>Faites le test et découvrez nos parcours cyber adaptés au niveau de maturité de votre entité.</p>
+    <a href="#" class="bouton primaire">Testez maturité cyber</a>
+  </div>
+</div>
+
 <style>
 </style>
