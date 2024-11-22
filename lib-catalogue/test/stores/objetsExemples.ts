@@ -2,7 +2,7 @@ import {
   BesoinCyber,
   DroitAcces,
   FormatRessource,
-  ItemCyber,
+  ItemCyber, Source,
   Typologie,
 } from "../../src/Catalogue.types";
 
@@ -13,7 +13,7 @@ export const mss = (): ItemCyber => ({
   illustration: "mss.png",
   lienInterne: "https://...",
   besoins: [BesoinCyber.RENFORCER_LA_SECURITE],
-  sources: [],
+  sources: [Source.ANSSI, Source.INNOVATION_ANSSI],
   droitsAcces: [DroitAcces.ENTITES_PUBLIQUES],
 });
 
@@ -24,7 +24,7 @@ export const demainSpecialisteCyber = (): ItemCyber => ({
   illustration: "mss.png",
   lienInterne: "https://...",
   besoins: [BesoinCyber.SENSIBILISER_ET_FORMER],
-  sources: [],
+  sources: [Source.ANSSI, Source.INNOVATION_ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
 
@@ -36,7 +36,7 @@ export const monEspaceNIS2 = (): ItemCyber => ({
   illustration: "nis2.png",
   lienInterne: "https://nis2",
   besoins: [BesoinCyber.RENFORCER_LA_SECURITE],
-  sources: [],
+  sources: [Source.ANSSI, Source.INNOVATION_ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE, DroitAcces.REGULES_NIS2],
 });
 
@@ -48,7 +48,7 @@ export const livretEnJeux = (): ItemCyber => ({
   illustration: "livret.png",
   lienInterne: "https://...",
   besoins: [BesoinCyber.SENSIBILISER_ET_FORMER],
-  sources: [],
+  sources: [Source.ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
 
@@ -60,6 +60,18 @@ export const guidesTechniques = (): ItemCyber => ({
   illustration: "guide.png",
   lienInterne: "https://...",
   besoins: [BesoinCyber.RENFORCER_LA_SECURITE],
-  sources: [],
+  sources: [Source.ANSSI],
+  droitsAcces: [DroitAcces.ACCES_LIBRE],
+});
+
+export const kitCyber = (): ItemCyber => ({
+  typologie: Typologie.RESSOURCE,
+  nom: "KIT CYBER",
+  format: FormatRessource.PDF,
+  description: "",
+  illustration: "kit.png",
+  lienInterne: "https://...",
+  besoins: [BesoinCyber.SENSIBILISER_ET_FORMER],
+  sources: [Source.PARTENAIRES],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });

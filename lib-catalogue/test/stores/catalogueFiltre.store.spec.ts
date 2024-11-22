@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { get } from "svelte/store";
 import {
   demainSpecialisteCyber,
-  guidesTechniques,
+  guidesTechniques, kitCyber,
   livretEnJeux,
   mss,
 } from "./objetsExemples";
@@ -13,11 +13,12 @@ import { rechercheParDroitAcces } from "../../src/stores/rechercheParDroitAcces.
 import {
   BesoinCyber,
   DroitAcces,
-  FormatRessource,
+  FormatRessource, Source,
   Typologie,
 } from "../../src/Catalogue.types";
 import { rechercheParTypologie } from "../../src/stores/rechercheParTypologie.store";
 import { rechercheParFormat } from "../../src/stores/rechercheParFormat.store";
+import {rechercheParSource} from "../../src/stores/rechercheParSource.store";
 
 describe("Le store du catalogue filtré", () => {
   describe("sur application d'un filtre de besoin", () => {
@@ -102,5 +103,27 @@ describe("Le store du catalogue filtré", () => {
 
       expect(resultats.length).toBe(2);
     })
+  });
+
+  describe("sur application d'un filtre de source", () => {
+    // d'autres tests plus spécifiques sont dans rechercheParSource.store.spec
+    it("conserve uniquement les items correspondants", () => {
+      catalogueStore.initialise([mss(), kitCyber()], []);
+      rechercheParSource.set([Source.PARTENAIRES]);
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(1);
+      expect(resultats[0].nom).toBe("KIT CYBER");
+    });
+
+    it("conserve tous les items en cas d'absence de source", () => {
+      catalogueStore.initialise([mss(), demainSpecialisteCyber()], []);
+      rechercheParSource.set([]);
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(2);
+    });
   });
 });
