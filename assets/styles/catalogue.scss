@@ -63,87 +63,111 @@
   }
 }
 
-fieldset {
-  margin: 0;
-  padding: 0 0 32px;
-  border: none;
-  border-bottom: 1px solid #D9DADB;
+.barre-filtres {
   display: flex;
   flex-direction: column;
-  gap: 16px;
   width: 100%;
 
-  legend {
-    text-transform: uppercase;
-    font-weight: bold;
+  h1 {
+    display: flex;
+    align-items: center;
+    gap:7px;
     font-size: 0.875rem;
     line-height: 1.25rem;
+    font-weight: normal;
     padding: 0;
-    margin-bottom: 16px;
-  }
-
-  label {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-
-    .libelle {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-
-      img {
-        width: 20px;
-        height: 20px;
-        filter: brightness(0) saturate(100%);
-      }
-    }
-
-    .compte {
-      margin-left: auto;
-      color: #939699;
-      font-size: 0.75rem;
-      line-height: 1rem;
-    }
-
-    input[type=checkbox] {
-      appearance: none;
-      border: 1px solid var(--noir);
-      border-radius: 4px;
-      width: 24px;
-      height: 24px;
-      margin: 0;
-
-      &:checked {
-        background-color: #FED980;
-
-        &::before {
-          content: '';
-          display: block;
-          margin: auto;
-          width: 6px;
-          height: 12px;
-          border-right: 2px var(--noir) solid;
-          border-bottom: 2px var(--noir) solid;
-          transform: translateY(2px) rotate(0.12turn);
-        }
-      }
-
-      &:indeterminate {
-        /* Ce style est prévu pour être cumulatif avec l'état coché */
-        &::before {
-          width: 9px;
-          height: 10px;
-          border-right: none;
-          transform: none;
-        }
-      }
+    margin: 0 0 16px;
+    &::before {
+      content: '';
+      background: url("/assets/images/icone-filtre-vide.svg");
+      width: 12px;
+      height: 12px;
     }
   }
 
   fieldset {
-    box-sizing: border-box;
-    padding: 0 0 0 16px;
+    margin: 0 0 32px;
+    padding: 0 0 32px;
     border: none;
+    border-bottom: 1px solid #D9DADB;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+
+    legend {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      padding: 0;
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      .libelle {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
+        img {
+          width: 20px;
+          height: 20px;
+          filter: brightness(0) saturate(100%);
+        }
+      }
+
+      .compte {
+        margin-left: auto;
+        color: #939699;
+        font-size: 0.75rem;
+        line-height: 1rem;
+      }
+
+      input[type=checkbox] {
+        appearance: none;
+        border: 1px solid var(--noir);
+        border-radius: 4px;
+        width: 24px;
+        height: 24px;
+        margin: 0;
+
+        &:checked {
+          background-color: #FED980;
+
+          &::before {
+            content: '';
+            display: block;
+            margin: auto;
+            width: 6px;
+            height: 12px;
+            border-right: 2px var(--noir) solid;
+            border-bottom: 2px var(--noir) solid;
+            transform: translateY(2px) rotate(0.12turn);
+          }
+        }
+
+        &:indeterminate {
+          /* Ce style est prévu pour être cumulatif avec l'état coché */
+          &::before {
+            width: 9px;
+            height: 10px;
+            border-right: none;
+            transform: none;
+          }
+        }
+      }
+    }
+
+    fieldset {
+      box-sizing: border-box;
+      padding: 0 0 0 16px;
+      border: none;
+      margin: 0;
+    }
   }
 }
