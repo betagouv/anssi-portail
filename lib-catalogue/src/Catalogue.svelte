@@ -22,46 +22,59 @@
   };
 </script>
 
-<FiltreBesoin />
-<div class="barre-filtres">
-  <h1>Filtres</h1>
-  <FiltreAccessibilite />
-  <FiltreTypologieEtFormat />
-  <FiltreSource />
-  <FiltreTheme />
-  <input
-    type="button"
-    class="bouton primaire"
-    value="Réinitialiser les filtres"
-    on:click={reinitialiseFiltres}
-  />
-</div>
+<div class="recherche">
+  <div class="sommaire sommaire-replie">
+    <details>
+      <summary>
+        <img class="menu" src="/assets/images/icone-filtre-vide.svg" alt="Icône filtre"/>
+        <span class="titre-menu">Filtres</span>
+        <img class="chevron" src="/assets/images/icone-chevron-bas.svg" alt="Chevron ouverture" />
+      </summary>
 
-{#each $catalogueFiltre.resultats as service}
-  <div class="carte service">
-    <figure>
-      <img
-        src="/assets/images/illustrations-services/{service.illustration}"
-        alt="Illustration du service"
-      />
-      <figcaption>Service</figcaption>
-    </figure>
-    <div class="contenu">
-      <h3>{@html service.nom}</h3>
-      <span>{@html service.description}</span>
-      <a href={service.lienInterne}>
-        En savoir plus
-        <img
-          src="/assets/images/icone-fleche-droite.svg"
-          alt="En savoir plus"
+      <div class="barre-filtres">
+        <FiltreBesoin />
+        <FiltreAccessibilite />
+        <FiltreTypologieEtFormat />
+        <FiltreSource />
+        <FiltreTheme />
+        <input
+          type="button"
+          class="bouton primaire"
+          value="Réinitialiser les filtres"
+          on:click={reinitialiseFiltres}
         />
-      </a>
-      <div class="labels">
-        {#each service.sources as source}<span>{source}</span>{/each}
       </div>
-    </div>
+    </details>
   </div>
-{/each}
+
+  <div class="liste">
+    {#each $catalogueFiltre.resultats as service}
+      <div class="carte service">
+        <figure>
+          <img
+            src="/assets/images/illustrations-services/{service.illustration}"
+            alt="Illustration du service"
+          />
+          <figcaption>Service</figcaption>
+        </figure>
+        <div class="contenu">
+          <h3>{@html service.nom}</h3>
+          <span>{@html service.description}</span>
+          <a href={service.lienInterne}>
+            En savoir plus
+            <img
+              src="/assets/images/icone-fleche-droite.svg"
+              alt="En savoir plus"
+            />
+          </a>
+          <div class="labels">
+            {#each service.sources as source}<span>{source}</span>{/each}
+          </div>
+        </div>
+      </div>
+    {/each}
+  </div>
+</div>
 
 <style>
 </style>
