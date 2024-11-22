@@ -23,16 +23,19 @@
 </script>
 
 <FiltreBesoin />
-<FiltreAccessibilite />
-<FiltreTypologieEtFormat />
-<FiltreSource />
-<FiltreTheme />
-<input
-  type="button"
-  class="bouton primaire"
-  value="Réinitialiser les filtres"
-  on:click={reinitialiseFiltres}
-/>
+<div class="barre-filtres">
+  <h1>Filtres</h1>
+  <FiltreAccessibilite />
+  <FiltreTypologieEtFormat />
+  <FiltreSource />
+  <FiltreTheme />
+  <input
+    type="button"
+    class="bouton primaire"
+    value="Réinitialiser les filtres"
+    on:click={reinitialiseFiltres}
+  />
+</div>
 
 {#each $catalogueFiltre.resultats as service}
   <div class="carte service">
