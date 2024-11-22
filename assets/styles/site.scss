@@ -196,8 +196,10 @@ header {
         font-size: 0.75rem;
         line-height: 1.25rem;
       }
+
       a.lien-externe {
         margin-left: auto;
+
         img {
           width: 20px;
           height: 20px;
@@ -281,12 +283,15 @@ footer {
   background: white;
   position: sticky;
   top: 0;
+  z-index: 1;
 
   &:has(details[open]) {
     position: fixed;
     top: 0;
     height: 100vh;
-    width: calc(100% - var(--gouttiere) * 2);
+    width: 100%;
+    box-sizing: border-box;
+    overflow: auto;
   }
 
   @include a-partir-de(lg) {
