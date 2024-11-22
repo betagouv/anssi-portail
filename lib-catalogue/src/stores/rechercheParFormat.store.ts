@@ -13,6 +13,7 @@ export const rechercheParFormat = {
       FormatRessource.VIDEO,
     ]),
   retireTous: () => selectionDeFormats.update(() => []),
+  reinitialise: () => selectionDeFormats.set([]),
   ok: (item: ItemCyber) => {
     if (
       item.typologie === Typologie.SERVICE ||

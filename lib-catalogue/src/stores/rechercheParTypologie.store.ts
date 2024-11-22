@@ -14,6 +14,7 @@ export const rechercheParTypologie = {
     selectionDeTypologies.update((valeur) =>
       valeur.filter((v) => v !== Typologie.RESSOURCE),
     ),
+  reinitialise: () => selectionDeTypologies.set([]),
   ok: (item: ItemCyber) =>
     get(rechercheParTypologie).length === 0 ||
     get(rechercheParTypologie).includes(item.typologie),
