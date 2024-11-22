@@ -13,12 +13,13 @@ import { rechercheParDroitAcces } from "../../src/stores/rechercheParDroitAcces.
 import {
   BesoinCyber,
   DroitAcces,
-  FormatRessource, Source,
+  FormatRessource, Source, ThemeCyber,
   Typologie,
 } from "../../src/Catalogue.types";
 import { rechercheParTypologie } from "../../src/stores/rechercheParTypologie.store";
 import { rechercheParFormat } from "../../src/stores/rechercheParFormat.store";
 import {rechercheParSource} from "../../src/stores/rechercheParSource.store";
+import {rechercheParTheme} from "../../src/stores/rechercheParTheme.store";
 
 describe("Le store du catalogue filtré", () => {
   describe("sur application d'un filtre de besoin", () => {
@@ -125,5 +126,35 @@ describe("Le store du catalogue filtré", () => {
 
       expect(resultats.length).toBe(2);
     });
+  });
+
+  describe("sur application d'un filtre de thème", () => {
+    it("conserve uniquement les items correspondants", () => {
+      catalogueStore.initialise([mss()], [kitCyber()]);
+      rechercheParTheme.set([ThemeCyber.PROTECTION]);
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(1);
+      expect(resultats[0].nom).toBe("mss");
+    });
+
+    it("conserve tous les items en cas d'absence de besoins", () => {
+      catalogueStore.initialise([mss(), demainSpecialisteCyber()], []);
+      rechercheParTheme.set([]);
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(2);
+    });
+
+    it("ne conserve pas les items sans thème lorsque le filtre est actif", ()=>{
+      catalogueStore.initialise([], [livretEnJeux()]);
+      rechercheParTheme.set([ThemeCyber.PROTECTION]);
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(0);
+    })
   });
 });

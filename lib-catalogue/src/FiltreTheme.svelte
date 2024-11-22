@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { rechercheParDroitAcces } from "./stores/rechercheParDroitAcces.store";
-  import { DroitAcces, ThemeCyber } from "./Catalogue.types";
-  import { nombreResultats } from "./stores/nombreResultats.store";
+  import {  ThemeCyber } from "./Catalogue.types";
   import { rechercheParTheme } from "./stores/rechercheParTheme.store";
 </script>
 
