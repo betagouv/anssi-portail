@@ -12,6 +12,7 @@ export const rechercheParSource = {
     ]),
   retire: (source: Source) =>
     selectionDeSources.update((valeur) => valeur.filter((v) => v !== source)),
+  reinitialise: () => selectionDeSources.set([]),
   ok: (item: ItemCyber) => {
     const sources = get(rechercheParSource);
     if (sources.length === 0) return true;

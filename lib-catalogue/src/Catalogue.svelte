@@ -5,13 +5,34 @@
   import FiltreTypologieEtFormat from "./FiltreTypologieEtFormat.svelte";
   import FiltreSource from "./FiltreSource.svelte";
   import FiltreTheme from "./FiltreTheme.svelte";
+  import { rechercheParBesoin } from "./stores/rechercheParBesoin.store";
+  import { rechercheParDroitAcces } from "./stores/rechercheParDroitAcces.store";
+  import { rechercheParTypologie } from "./stores/rechercheParTypologie.store";
+  import { rechercheParFormat } from "./stores/rechercheParFormat.store";
+  import { rechercheParSource } from "./stores/rechercheParSource.store";
+  import { rechercheParTheme } from "./stores/rechercheParTheme.store";
+
+  const reinitialiseFiltres = () => {
+    rechercheParBesoin.reinitialise();
+    rechercheParDroitAcces.reinitialise();
+    rechercheParTypologie.reinitialise();
+    rechercheParFormat.reinitialise();
+    rechercheParSource.reinitialise();
+    rechercheParTheme.reinitialise();
+  };
 </script>
 
-<FiltreBesoin/>
-<FiltreAccessibilite/>
+<FiltreBesoin />
+<FiltreAccessibilite />
 <FiltreTypologieEtFormat />
 <FiltreSource />
-<FiltreTheme/>
+<FiltreTheme />
+<input
+  type="button"
+  class="bouton primaire"
+  value="Réinitialiser les filtres"
+  on:click={reinitialiseFiltres}
+/>
 
 {#each $catalogueFiltre.resultats as service}
   <div class="carte service">

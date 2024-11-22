@@ -6,6 +6,7 @@ const selectionThemes = writable<ThemeCyber[]>([]);
 export const rechercheParTheme = {
   subscribe: selectionThemes.subscribe,
   set: selectionThemes.set,
+  reinitialise: () => selectionThemes.set([]),
   ok: (item: ItemCyber) => {
     if (get(rechercheParTheme).length === 0) return true;
     if (!item.themes) return false;
