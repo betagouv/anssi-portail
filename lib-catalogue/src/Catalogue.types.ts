@@ -8,6 +8,7 @@ export interface ItemCyber {
   besoins: BesoinCyber[];
   droitsAcces: DroitAcces[];
   format?: FormatRessource;
+  themes: ThemeCyber[];
 }
 
 export enum BesoinCyber {
