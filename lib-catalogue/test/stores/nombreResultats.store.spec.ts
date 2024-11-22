@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
-import {DroitAcces, FormatRessource, Typologie} from "../../src/Catalogue.types";
+import {DroitAcces, FormatRessource, Source, Typologie} from "../../src/Catalogue.types";
 import { nombreResultats } from "../../src/stores/nombreResultats.store";
 import { get } from "svelte/store";
 import { catalogueStore } from "../../src/stores/catalogue.store";
 import {
   demainSpecialisteCyber,
-  guidesTechniques, livretEnJeux,
+  guidesTechniques, kitCyber, livretEnJeux,
   monEspaceNIS2,
   mss,
 } from "./objetsExemples";
@@ -78,6 +78,17 @@ describe("Le store du nombre de résultats", () => {
 
       expect(parFormatDeRessource[FormatRessource.PDF]).toBe(0);
       expect(parFormatDeRessource[FormatRessource.VIDEO]).toBe(1);
+    });
+  });
+
+  describe("peut retourner le nombre par source", () => {
+    it("pour un les partenaires", () => {
+      catalogueStore.initialise([], [kitCyber()]);
+
+      let parSource = get(nombreResultats).parSource;
+
+      expect(parSource[Source.ANSSI]).toBe(0);
+      expect(parSource[Source.PARTENAIRES]).toBe(1);
     });
   });
 });

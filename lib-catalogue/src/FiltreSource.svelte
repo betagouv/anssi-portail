@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Source } from "./Catalogue.types";
   import { rechercheParSource } from "./stores/rechercheParSource.store";
+  import { nombreResultats } from "./stores/nombreResultats.store";
 
   let anssiPartielles = false;
   $: if (
@@ -39,7 +40,7 @@
       on:click={gereCocheANSSI}
     />
     <span class="libelle">ANSSI</span>
-    <span class="compte">55</span>
+    <span class="compte">{$nombreResultats.parSource[Source.ANSSI]}</span>
   </label>
   <fieldset>
     <label>
@@ -49,7 +50,7 @@
         bind:group={$rechercheParSource}
       />
       <span class="libelle">CERT-FR</span>
-      <span class="compte">55</span>
+      <span class="compte">{$nombreResultats.parSource[Source.CERTFR]}</span>
     </label>
     <label>
       <input
@@ -58,7 +59,9 @@
         bind:group={$rechercheParSource}
       />
       <span class="libelle">Innovation ANSSI</span>
-      <span class="compte">55</span>
+      <span class="compte"
+        >{$nombreResultats.parSource[Source.INNOVATION_ANSSI]}</span
+      >
     </label>
   </fieldset>
   <label>
@@ -68,6 +71,6 @@
       bind:group={$rechercheParSource}
     />
     <span class="libelle">Partenaires</span>
-    <span class="compte">55</span>
+    <span class="compte">{$nombreResultats.parSource[Source.PARTENAIRES]}</span>
   </label>
 </fieldset>
