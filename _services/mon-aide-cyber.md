@@ -13,5 +13,10 @@ droitsAcces:
 sources:
   - ANSSI
   - Innovation ANSSI
+themes:
+  - Protection
+  - Gouvernance
+  - Défense
+  - Résilience
 ---
 
