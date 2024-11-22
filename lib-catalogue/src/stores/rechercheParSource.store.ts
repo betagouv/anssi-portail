@@ -1,5 +1,5 @@
 import { get, writable } from "svelte/store";
-import { type ItemCyber, Source, Typologie } from "../Catalogue.types";
+import { type ItemCyber, Source } from "../Catalogue.types";
 
 const selectionDeSources = writable<Source[]>([]);
 
@@ -12,4 +12,15 @@ export const rechercheParSource = {
     ]),
   retire: (source: Source) =>
     selectionDeSources.update((valeur) => valeur.filter((v) => v !== source)),
+  ok: (item: ItemCyber) => {
+    const sources = get(rechercheParSource);
+    if (sources.length === 0) return true;
+    if (item.sources.includes(Source.ANSSI)) {
+      const secondaire = item.sources.find((s) => s !== Source.ANSSI);
+      if (secondaire) {
+        return sources.includes(secondaire);
+      }
+    }
+    return !!sources.find((source) => item.sources.includes(source));
+  },
 };
