@@ -30,7 +30,7 @@ script: /scripts/service.js
         <details>
             <summary>
                 <img class="menu" src="/assets/images/icone-menu-lateral.svg"/>
-                <span id="section-active">De quoi s'agit-il&nbsp;?</span>
+                <span id="section-active" class="titre-menu">De quoi s'agit-il&nbsp;?</span>
                 <img class="chevron" src="/assets/images/icone-chevron-bas.svg"/>
             </summary>
 
@@ -40,22 +40,21 @@ script: /scripts/service.js
                 <li><a href="#ressources">Les ressources associées</a></li>
             </ul>
         </details>
-
     </div>
 
-        <div class="sommaire sommaire-deplie">
-            <ul>
-                <li class="actif"><a href="#explication">De quoi s'agit-il&nbsp;?</a></li>
-                <li><a href="#cible">Qui peut utiliser ce service&nbsp;?</a></li>
-                <li><a href="#ressources">Les ressources associées</a></li>
-            </ul>
-            <span>TAGS</span>
-            <div class="labels">
-                {% for source in page.sources %}
-                <span>{{source}}</span>
-                {% endfor %}
-            </div>
+    <div class="sommaire sommaire-deplie">
+        <ul>
+            <li class="actif"><a href="#explication">De quoi s'agit-il&nbsp;?</a></li>
+            <li><a href="#cible">Qui peut utiliser ce service&nbsp;?</a></li>
+            <li><a href="#ressources">Les ressources associées</a></li>
+        </ul>
+        <span>TAGS</span>
+        <div class="labels">
+            {% for source in page.sources %}
+            <span>{{source}}</span>
+            {% endfor %}
         </div>
+    </div>
 
     <div class="contenu">
         <section class="explication" id="explication">
@@ -84,13 +83,13 @@ script: /scripts/service.js
         <section class="ressources" id="ressources">
             <h2>Les ressources associées</h2>
             {% for idRessource in page.ressources %}
-            {% assign ressource = site.ressources | where: "id", idRessource  | first %}
+            {% assign ressource = site.ressources | where: "id", idRessource | first %}
 
             <div class="carte ressource">
                 <figure>
-                        <img src="/assets/images/illustrations-services/{{ressource.illustration}}">
-                        <figcaption>{{ressource.format}}</figcaption>
-                    </figure>
+                    <img src="/assets/images/illustrations-services/{{ressource.illustration}}">
+                    <figcaption>{{ressource.format}}</figcaption>
+                </figure>
                 <div class="contenu">
                     <h3>{{ressource.titre}}</h3>
                     <span>{{ressource.description}}</span>
@@ -101,7 +100,8 @@ script: /scripts/service.js
                         {% for source in ressource.sources %}
                         <span>{{source}}</span>
                         {% endfor %}
-                        <a class="lien-externe" href="{{ressource.lien}}" target="_blank"><img src="/assets/images/icone-lien-externe.svg"> </a>
+                        <a class="lien-externe" href="{{ressource.lien}}" target="_blank"><img
+                                src="/assets/images/icone-lien-externe.svg"> </a>
                     </div>
                 </div>
             </div>

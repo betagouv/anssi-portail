@@ -274,3 +274,48 @@ footer {
     font-weight: normal;
   }
 }
+
+.sommaire-replie {
+  padding: 16px var(--gouttiere);
+  border: 1px solid #ddd;
+  background: white;
+  position: sticky;
+  top: 0;
+
+  &:has(details[open]) {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: calc(100% - var(--gouttiere) * 2);
+  }
+
+  @include a-partir-de(lg) {
+    display: none;
+  }
+
+  details {
+    summary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &::marker {
+        content: '';
+      }
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+    }
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
+
+    .titre-menu {
+      flex-grow: 1;
+    }
+  }
+
+}

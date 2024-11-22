@@ -25,10 +25,8 @@
 }
 
 #catalogue {
-  padding: 40px 16px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
+  flex-direction: column;
 
   .choix-filtre-besoin {
     display: flex;
@@ -67,23 +65,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  h1 {
-    display: flex;
-    align-items: center;
-    gap:7px;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-weight: normal;
-    padding: 0;
-    margin: 0 0 16px;
-    &::before {
-      content: '';
-      background: url("/assets/images/icone-filtre-vide.svg");
-      width: 12px;
-      height: 12px;
-    }
-  }
 
   fieldset {
     margin: 0 0 32px;
@@ -169,5 +150,18 @@
       border: none;
       margin: 0;
     }
+  }
+}
+
+.liste {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 40px var(--gouttiere);
+}
+
+.sommaire-replie {
+  .choix-filtre-besoin {
+    margin: 24px 0;
   }
 }
