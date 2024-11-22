@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {DroitAcces, FormatRessource, Source, Typologie} from "../../src/Catalogue.types";
+import {DroitAcces, FormatRessource, Source, ThemeCyber, Typologie} from "../../src/Catalogue.types";
 import { nombreResultats } from "../../src/stores/nombreResultats.store";
 import { get } from "svelte/store";
 import { catalogueStore } from "../../src/stores/catalogue.store";
@@ -89,6 +89,19 @@ describe("Le store du nombre de résultats", () => {
 
       expect(parSource[Source.ANSSI]).toBe(0);
       expect(parSource[Source.PARTENAIRES]).toBe(1);
+    });
+  });
+
+  describe("peut retourner le nombre par thème", () => {
+    it("pour la protection", () => {
+      catalogueStore.initialise([mss()], []);
+
+      let parTheme = get(nombreResultats).parTheme;
+
+      expect(parTheme[ThemeCyber.PROTECTION]).toBe(1);
+      expect(parTheme[ThemeCyber.RESILIENCE]).toBe(0);
+      expect(parTheme[ThemeCyber.DEFENSE]).toBe(0);
+      expect(parTheme[ThemeCyber.GOUVERNANCE]).toBe(0);
     });
   });
 });
