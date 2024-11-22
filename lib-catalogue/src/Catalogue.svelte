@@ -4,12 +4,14 @@
   import FiltreAccessibilite from "./FiltreAccessibilite.svelte";
   import FiltreTypologieEtFormat from "./FiltreTypologieEtFormat.svelte";
   import FiltreSource from "./FiltreSource.svelte";
+  import FiltreTheme from "./FiltreTheme.svelte";
 </script>
 
 <FiltreBesoin/>
 <FiltreAccessibilite/>
 <FiltreTypologieEtFormat />
 <FiltreSource />
+<FiltreTheme/>
 
 {#each $catalogueFiltre.resultats as service}
   <div class="carte service">

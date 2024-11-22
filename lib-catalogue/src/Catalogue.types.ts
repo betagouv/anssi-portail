@@ -37,5 +37,12 @@ export enum Source {
   ANSSI = "ANSSI",
   CERTFR = "CERT-FR",
   INNOVATION_ANSSI = "Innovation ANSSI",
-  PARTENAIRES = "Partenaires"
+  PARTENAIRES = "Partenaires",
+}
+
+export enum ThemeCyber {
+  GOUVERNANCE = "Gouvernance",
+  DEFENSE = "Defense",
+  PROTECTION = "Protection",
+  RESILIENCE = "Resilience",
 }
