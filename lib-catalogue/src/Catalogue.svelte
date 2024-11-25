@@ -5,22 +5,10 @@
   import FiltreTypologieEtFormat from "./FiltreTypologieEtFormat.svelte";
   import FiltreSource from "./FiltreSource.svelte";
   import FiltreTheme from "./FiltreTheme.svelte";
-  import { rechercheParBesoin } from "./stores/rechercheParBesoin.store";
-  import { rechercheParDroitAcces } from "./stores/rechercheParDroitAcces.store";
-  import { rechercheParTypologie } from "./stores/rechercheParTypologie.store";
-  import { rechercheParFormat } from "./stores/rechercheParFormat.store";
-  import { rechercheParSource } from "./stores/rechercheParSource.store";
-  import { rechercheParTheme } from "./stores/rechercheParTheme.store";
   import { type ItemCyber, Typologie } from "./Catalogue.types";
+  import { recherches } from "./stores/recherches.store";
 
-  const reinitialiseFiltres = () => {
-    rechercheParBesoin.reinitialise();
-    rechercheParDroitAcces.reinitialise();
-    rechercheParTypologie.reinitialise();
-    rechercheParFormat.reinitialise();
-    rechercheParSource.reinitialise();
-    rechercheParTheme.reinitialise();
-  };
+  const reinitialiseFiltres = () => recherches.reinitialise();
 
   const libelleBadge = (item: ItemCyber) =>
     item.typologie === Typologie.SERVICE ? "Service" : item.format;
@@ -30,11 +18,19 @@
   <div class="sommaire sommaire-replie">
     <details>
       <summary>
-        <img
-          class="menu"
-          src="/assets/images/icone-filtre-vide.svg"
-          alt="Icône filtre"
-        />
+        {#if $recherches.filtreActif}
+          <img
+            class="menu"
+            src="/assets/images/icone-filtre-plein.svg"
+            alt="Icône filtre"
+          />
+        {:else}
+          <img
+            class="menu"
+            src="/assets/images/icone-filtre-vide.svg"
+            alt="Icône filtre"
+          />
+        {/if}
         <span class="titre-menu">Filtres</span>
         <img
           class="chevron"
