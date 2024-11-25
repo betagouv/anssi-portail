@@ -61,7 +61,7 @@
 
   <div class="liste">
     {#each $catalogueFiltre.resultats as itemCyber}
-      <div class="carte service">
+      <div class="carte {itemCyber.typologie}">
         <figure>
           <img
             src="/assets/images/illustrations-services/{itemCyber.illustration}"
