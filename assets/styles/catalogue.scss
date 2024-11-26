@@ -263,20 +263,35 @@
 }
 
 .carte.service, .carte.ressource {
-  height: 406px;
   display: flex;
   flex-direction: column;
 
+  @include a-partir-de(md) {
+    height: 406px;
+  }
+
   figure {
-    height: 174px;
+    height: 156px;
+
+    @include a-partir-de(md) {
+      height: 174px;
+    }
+
     img {
-      width: 270px;
-      height: 146px;
+      width: 243px;
+      height: 131px;
+
+      @include a-partir-de(md) {
+        width: 270px;
+        height: 146px;
+      }
     }
   }
 
   .contenu {
     flex: 1;
+    box-sizing: border-box;
+    gap: 8px;
 
     h3 {
       text-wrap: nowrap;
