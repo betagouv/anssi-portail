@@ -27,36 +27,36 @@
 #catalogue {
   display: flex;
   flex-direction: column;
+}
 
-  .choix-filtre-besoin {
+.choix-filtre-besoin {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+
+  label {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-transform: uppercase;
+    padding: 0 8px;
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
 
-    label {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      text-transform: uppercase;
-      padding: 0 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
+    &.actif {
+      background: #fff7db;
+      box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25) inset;
+    }
 
-      &.actif {
-        background: #fff7db;
-        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25) inset;
-      }
+    img {
+      width: 48px;
+      height: 48px;
+    }
 
-      img {
-        width: 48px;
-        height: 48px;
-      }
-
-      input {
-        display: none;
-      }
+    input {
+      display: none;
     }
   }
 }
@@ -158,6 +158,10 @@
   flex-wrap: wrap;
   gap: 24px;
   padding: 40px var(--gouttiere);
+
+  @include a-partir-de(md) {
+    gap: 32px 16px;
+  }
 }
 
 .sommaire-replie {
@@ -254,6 +258,36 @@
       img {
         width: 170px;
       }
+    }
+  }
+}
+
+.carte.service, .carte.ressource {
+  height: 406px;
+  display: flex;
+  flex-direction: column;
+
+  figure {
+    height: 174px;
+    img {
+      width: 270px;
+      height: 146px;
+    }
+  }
+
+  .contenu {
+    flex: 1;
+
+    h3 {
+      text-wrap: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .description {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      height: 84px;
+      overflow: hidden;
     }
   }
 }

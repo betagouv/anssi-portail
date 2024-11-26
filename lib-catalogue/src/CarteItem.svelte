@@ -5,6 +5,11 @@
 
   const libelleBadge = (item: ItemCyber) =>
     item.typologie === Typologie.SERVICE ? "Service" : item.format;
+
+  const tronque = (texte: string)=>{
+    const LONGUEUR_MAX = 57;
+    return texte.length > LONGUEUR_MAX ? texte.slice(0, LONGUEUR_MAX) + "&hellip;" : texte;
+  }
 </script>
 
 <div class="carte {itemCyber.typologie}">
@@ -17,7 +22,7 @@
   </figure>
   <div class="contenu">
     <h3>{@html itemCyber.nom}</h3>
-    <span>{@html itemCyber.description}</span>
+    <span class="description">{@html tronque(itemCyber.description)}</span>
     <a href={itemCyber.lienInterne}>
       En savoir plus
       <img src="/assets/images/icone-fleche-droite.svg" alt="En savoir plus" />
