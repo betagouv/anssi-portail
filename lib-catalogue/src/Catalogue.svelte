@@ -72,7 +72,7 @@
       ? Quelques actions simples pourraient améliorer votre sécurité. L’ANSSI
       vous propose des solutions pour y arriver.
     </p>
-    <a href="#">Découvrir le parcours</a>
+    <a href="/parcours-debuter">Découvrir le parcours</a>
   </div>
   <div class="carte parcours">
     <img
@@ -85,7 +85,7 @@
       pourraient améliorer votre sécurité. L’ANSSI vous propose des solutions
       pour y arriver.
     </p>
-    <a href="#">Découvrir le parcours</a>
+    <a href="/parcours-approfondir">Découvrir le parcours</a>
   </div>
 </div>
 
@@ -100,7 +100,7 @@
       Faites le test et découvrez nos parcours cyber adaptés au niveau de
       maturité de votre entité.
     </p>
-    <a href="#" class="bouton primaire">Testez maturité cyber</a>
+    <a href="/test" class="bouton primaire">Testez maturité cyber</a>
   </div>
 </div>
 
