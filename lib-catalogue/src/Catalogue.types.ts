@@ -9,6 +9,7 @@ export interface ItemCyber {
   droitsAcces: DroitAcces[];
   format?: FormatRessource;
   themes: ThemeCyber[];
+  lienExterne: string;
 }
 
 export enum BesoinCyber {

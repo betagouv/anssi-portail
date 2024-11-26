@@ -24,6 +24,9 @@
     </a>
     <div class="labels">
       {#each itemCyber.sources as source}<span>{source}</span>{/each}
+      <a class="lien-externe" href={itemCyber.lienExterne} target="_blank" aria-label="Ouvrir le lien"
+        ><img src="/assets/images/icone-lien-externe.svg" alt="Ouvrir dans un nouvel onglet" />
+      </a>
     </div>
   </div>
 </div>
