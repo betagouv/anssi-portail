@@ -12,6 +12,10 @@
   const reinitialiseFiltres = () => recherches.reinitialise();
 </script>
 
+<div class="barre-filtre-besoin">
+  <FiltreBesoin />
+</div>
+
 <div class="recherche">
   <div class="sommaire sommaire-replie">
     <details>
