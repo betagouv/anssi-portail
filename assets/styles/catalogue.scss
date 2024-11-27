@@ -176,6 +176,16 @@
   flex-direction: column;
   gap: 24px;
 
+  .liste-parcours {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @include a-partir-de(md) {
+      flex-direction: row;
+    }
+  }
+
   &.fond-sombre {
     background: #0d0c21 url("/assets/images/motif-fond-service-opacite-16.png");
 
@@ -209,6 +219,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    flex-grow: 1;
 
     &.parcours {
       img {
