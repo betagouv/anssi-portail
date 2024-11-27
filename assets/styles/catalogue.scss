@@ -216,12 +216,13 @@
     border-radius: 8px;
     border-bottom: 6px solid #FED980;
     padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    flex-grow: 1;
 
     &.parcours {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex-grow: 1;
+
       img {
         height: 170px;
         align-self: flex-start;
@@ -256,18 +257,57 @@
     &.test-maturite {
       box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
       padding-top: 40px;
+      display: grid;
+      gap: 24px 16px;
+
+      grid-template-columns: auto;
+      grid-template-rows: auto;
+      grid-template-areas:
+          "illustration"
+          "titre"
+          "contenu"
+          "bouton";
+
+      @include a-partir-de(md) {
+        padding: 48px 56px;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+          "titre titre"
+          "contenu illustration"
+          "bouton bouton";
+        h1 {
+          font-size: 2.5rem;
+          line-height: 3rem;
+        }
+        p {
+          align-self: center;
+        }
+      }
+
+      h1 {
+        grid-area: titre;
+        margin: 0;
+      }
 
       p {
+        grid-area: contenu;
         font-size: 1.25rem;
         line-height: 1.875rem;
       }
 
       a {
-        margin-top: 24px;
+        grid-area: bouton;
       }
 
       img {
-        width: 170px;
+        grid-area: illustration;
+        height: 210px;
+        margin-bottom: 16px;
+
+        @include a-partir-de(md) {
+          height: 163px;
+          margin-bottom: 0;
+        }
       }
     }
   }

@@ -102,7 +102,7 @@
       Faites le test et découvrez nos parcours cyber adaptés au niveau de
       maturité de votre entité.
     </p>
-    <a href="/test" class="bouton primaire">Testez maturité cyber</a>
+    <a href="/test" class="bouton primaire">Testez votre maturité cyber</a>
   </div>
 </div>
 
