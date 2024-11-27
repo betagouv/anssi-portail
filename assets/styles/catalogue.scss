@@ -11,6 +11,10 @@
   flex-direction: column;
   gap: 24px;
 
+  @include a-partir-de(lg) {
+    padding-bottom: 130px;
+  }
+
   h1 {
     font-size: 2.5rem;
     line-height: 2.875rem;
@@ -27,6 +31,24 @@
 #catalogue {
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+.barre-filtre-besoin {
+  display: none;
+  position: relative;
+  top: -90px;
+  margin-left: 24px;
+  margin-bottom: -90px;
+
+  @include a-partir-de(lg) {
+    display: block;
+  }
+
+  @include a-partir-de(xl){
+    margin-left: var(--gouttiere);
+    margin-right: var(--gouttiere);
+  }
 }
 
 .choix-filtre-besoin {
@@ -34,6 +56,12 @@
   flex-direction: column;
   gap: 16px;
   width: 100%;
+
+  @include a-partir-de(lg) {
+    flex-direction: row;
+    gap: 0;
+    height: 160px;
+  }
 
   label {
     border: 1px solid #ddd;
@@ -44,6 +72,31 @@
     align-items: center;
     gap: 8px;
     cursor: pointer;
+    background: white;
+
+    @include a-partir-de(lg) {
+      border-radius: 0;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      font-weight: bold;
+
+      &:first-of-type {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+      }
+      &:last-of-type {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+
+      span {
+        @include a-partir-de(lg) {
+          width: 200px;
+        }
+      }
+    }
 
     &.actif {
       background: #fff7db;
@@ -53,6 +106,11 @@
     img {
       width: 48px;
       height: 48px;
+
+      @include a-partir-de(lg) {
+        width: 80px;
+        height: 80px;
+      }
     }
 
     input {

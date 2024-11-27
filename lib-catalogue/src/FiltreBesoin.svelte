@@ -14,7 +14,7 @@
       name="filtre-besoin"
       value=""
       bind:group={$rechercheParBesoin}
-    /> Tous les besoins
+    /> <span>Tous les besoins</span>
   </label>
   <label
     class:actif={$rechercheParBesoin === BesoinCyber.SENSIBILISER_ET_FORMER}
@@ -28,7 +28,7 @@
       name="filtre-besoin"
       value={BesoinCyber.SENSIBILISER_ET_FORMER}
       bind:group={$rechercheParBesoin}
-    /> Sensibiliser et former
+    /> <span>Sensibiliser et former</span>
   </label>
   <label class:actif={$rechercheParBesoin === BesoinCyber.RENFORCER_LA_SECURITE}>
     <img
@@ -40,7 +40,7 @@
       name="filtre-besoin"
       value={BesoinCyber.RENFORCER_LA_SECURITE}
       bind:group={$rechercheParBesoin}
-    /> Renforcer la sécurité
+    /> <span>Renforcer la sécurité</span>
   </label>
   <label class:actif={$rechercheParBesoin === BesoinCyber.REAGIR}>
     <img
@@ -52,6 +52,6 @@
       name="filtre-besoin"
       value={BesoinCyber.REAGIR}
       bind:group={$rechercheParBesoin}
-    /> Réagir
+    /> <span>Réagir</span>
   </label>
 </div>
