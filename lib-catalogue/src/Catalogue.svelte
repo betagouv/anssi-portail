@@ -52,6 +52,37 @@
     </details>
   </div>
 
+  <div class="sommaire sommaire-deplie">
+    <div class="entete-filtres">
+      {#if $recherches.filtreActif}
+        <img
+          class="menu"
+          src="/assets/images/icone-filtre-plein.svg"
+          alt="Icône filtre"
+        />
+      {:else}
+        <img
+          class="menu"
+          src="/assets/images/icone-filtre-vide.svg"
+          alt="Icône filtre"
+        />
+      {/if}
+      <span class="titre-menu">Filtres</span>
+    </div>
+    <div class="barre-filtres">
+      <FiltreAccessibilite />
+      <FiltreTypologieEtFormat />
+      <FiltreSource />
+      <FiltreTheme />
+      <input
+        type="button"
+        class="bouton primaire"
+        value="Réinitialiser les filtres"
+        on:click={reinitialiseFiltres}
+      />
+    </div>
+  </div>
+
   <div class="liste">
     {#each $catalogueFiltre.resultats as itemCyber}
       <CarteItem {itemCyber} />
