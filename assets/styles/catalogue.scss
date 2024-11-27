@@ -226,6 +226,7 @@
   flex-wrap: wrap;
   gap: 24px;
   padding: 40px var(--gouttiere);
+  align-content: flex-start;
 
   @include a-partir-de(md) {
     gap: 32px 16px;
