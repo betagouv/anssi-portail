@@ -153,6 +153,16 @@
   }
 }
 
+.recherche {
+  display: flex;
+  flex-direction: column;
+  @include a-partir-de(lg) {
+    flex-direction: row;
+    gap: 24px;
+    padding: 48px var(--gouttiere) 80px;
+  }
+}
+
 .liste {
   display: flex;
   flex-wrap: wrap;
@@ -162,11 +172,38 @@
   @include a-partir-de(md) {
     gap: 32px 16px;
   }
+
+  @include a-partir-de(lg) {
+    padding: 0;
+  }
 }
 
 .sommaire-replie {
   .choix-filtre-besoin {
     margin: 24px 0;
+  }
+}
+
+.sommaire-deplie {
+  display: none;
+  @include a-partir-de(lg) {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 309px;
+  }
+
+  .entete-filtres {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 16px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
   }
 }
 
