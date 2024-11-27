@@ -275,28 +275,43 @@
           "titre titre"
           "contenu illustration"
           "bouton bouton";
-        h1 {
-          font-size: 2.5rem;
-          line-height: 3rem;
-        }
-        p {
-          align-self: center;
-        }
+      }
+
+      @include a-partir-de(lg) {
+        padding: 40px 44px 40px 40px;
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+          "illustration titre"
+          "illustration contenu"
+          "illustration bouton"
+          "illustration .";
+        gap: 16px 64px
       }
 
       h1 {
         grid-area: titre;
         margin: 0;
+        @include a-partir-de(md) {
+          font-size: 2.5rem;
+          line-height: 3rem;
+        }
       }
 
       p {
         grid-area: contenu;
         font-size: 1.25rem;
         line-height: 1.875rem;
+        @include a-partir-de(md) {
+          align-self: center;
+        }
       }
 
       a {
         grid-area: bouton;
+        @include a-partir-de(lg) {
+          margin-top: 8px;
+          justify-self: start;
+        }
       }
 
       img {
@@ -307,6 +322,9 @@
         @include a-partir-de(md) {
           height: 163px;
           margin-bottom: 0;
+        }
+        @include a-partir-de(lg) {
+          height: 210px;
         }
       }
     }
