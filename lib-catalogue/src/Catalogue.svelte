@@ -7,6 +7,7 @@
   import FiltreTheme from "./FiltreTheme.svelte";
   import { recherches } from "./stores/recherches.store";
   import CarteItem from "./CarteItem.svelte";
+  import EnteteFiltres from "./EnteteFiltres.svelte";
 
   const reinitialiseFiltres = () => recherches.reinitialise();
 </script>
@@ -15,25 +16,7 @@
   <div class="sommaire sommaire-replie">
     <details>
       <summary>
-        {#if $recherches.filtreActif}
-          <img
-            class="menu"
-            src="/assets/images/icone-filtre-plein.svg"
-            alt="Icône filtre"
-          />
-        {:else}
-          <img
-            class="menu"
-            src="/assets/images/icone-filtre-vide.svg"
-            alt="Icône filtre"
-          />
-        {/if}
-        <span class="titre-menu">Filtres</span>
-        <img
-          class="chevron"
-          src="/assets/images/icone-chevron-bas.svg"
-          alt="Chevron ouverture"
-        />
+        <EnteteFiltres />
       </summary>
 
       <div class="barre-filtres">
@@ -53,22 +36,7 @@
   </div>
 
   <div class="sommaire sommaire-deplie">
-    <div class="entete-filtres">
-      {#if $recherches.filtreActif}
-        <img
-          class="menu"
-          src="/assets/images/icone-filtre-plein.svg"
-          alt="Icône filtre"
-        />
-      {:else}
-        <img
-          class="menu"
-          src="/assets/images/icone-filtre-vide.svg"
-          alt="Icône filtre"
-        />
-      {/if}
-      <span class="titre-menu">Filtres</span>
-    </div>
+    <EnteteFiltres />
     <div class="barre-filtres">
       <FiltreAccessibilite />
       <FiltreTypologieEtFormat />

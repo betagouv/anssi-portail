@@ -308,16 +308,18 @@ footer {
 
   details {
     summary {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
       &::marker {
         content: '';
       }
 
       &::-webkit-details-marker {
         display: none;
+      }
+
+      .entete-filtres {
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
     }
 
