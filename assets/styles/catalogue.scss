@@ -204,6 +204,12 @@
       width: 16px;
       height: 16px;
     }
+
+    .chevron {
+      @include a-partir-de(lg) {
+        display: none;
+      }
+    }
   }
 }
 
