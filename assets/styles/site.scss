@@ -114,14 +114,9 @@ header {
 
 .carte.ressource, .carte.service {
   border: 1px solid #ddd;
-  width: 288px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-
-  @include a-partir-de(md) {
-    width: 320px;
-  }
 
   figure {
     height: 157px;
