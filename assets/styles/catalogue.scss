@@ -337,6 +337,10 @@
     font-size: 2rem;
     line-height: 2.375rem;
     margin: 0 0 16px;
+
+    @include a-partir-de(lg) {
+      font-size: 2.5rem;
+    }
   }
 
   h2 {
