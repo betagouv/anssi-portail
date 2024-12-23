@@ -99,6 +99,11 @@
     cursor: pointer;
     background: white;
 
+    @include a-partir-de(md) {
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+
     @include a-partir-de(lg) {
       border-radius: 0;
       flex: 1;
