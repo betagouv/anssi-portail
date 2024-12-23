@@ -1,11 +1,19 @@
 import { describe, expect, it } from "vitest";
-import {DroitAcces, FormatRessource, Source, ThemeCyber, Typologie} from "../../src/Catalogue.types";
+import {
+  DroitAcces,
+  FormatRessource,
+  Source,
+  ThemeCyber,
+  Typologie,
+} from "../../src/Catalogue.types";
 import { nombreResultats } from "../../src/stores/nombreResultats.store";
 import { get } from "svelte/store";
 import { catalogueStore } from "../../src/stores/catalogue.store";
 import {
   demainSpecialisteCyber,
-  guidesTechniques, kitCyber, livretEnJeux,
+  guidesTechniques,
+  kitCyber,
+  livretEnJeux,
   monEspaceNIS2,
   mss,
 } from "./objetsExemples";

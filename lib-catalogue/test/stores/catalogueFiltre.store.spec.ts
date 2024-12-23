@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import { get } from "svelte/store";
 import {
   demainSpecialisteCyber,
-  guidesTechniques, kitCyber,
+  guidesTechniques,
+  kitCyber,
   livretEnJeux,
   mss,
 } from "./objetsExemples";
@@ -13,13 +14,15 @@ import { rechercheParDroitAcces } from "../../src/stores/rechercheParDroitAcces.
 import {
   BesoinCyber,
   DroitAcces,
-  FormatRessource, Source, ThemeCyber,
+  FormatRessource,
+  Source,
+  ThemeCyber,
   Typologie,
 } from "../../src/Catalogue.types";
 import { rechercheParTypologie } from "../../src/stores/rechercheParTypologie.store";
 import { rechercheParFormat } from "../../src/stores/rechercheParFormat.store";
-import {rechercheParSource} from "../../src/stores/rechercheParSource.store";
-import {rechercheParTheme} from "../../src/stores/rechercheParTheme.store";
+import { rechercheParSource } from "../../src/stores/rechercheParSource.store";
+import { rechercheParTheme } from "../../src/stores/rechercheParTheme.store";
 
 describe("Le store du catalogue filtré", () => {
   describe("sur application d'un filtre de besoin", () => {
@@ -96,14 +99,14 @@ describe("Le store du catalogue filtré", () => {
       expect(resultats[0].nom).toBe("Guides techniques");
     });
 
-    it("conserve tous les items quand aucun filtre actif", ()=>{
+    it("conserve tous les items quand aucun filtre actif", () => {
       catalogueStore.initialise([], [livretEnJeux(), guidesTechniques()]);
       rechercheParFormat.set([]);
 
       const { resultats } = get(catalogueFiltre);
 
       expect(resultats.length).toBe(2);
-    })
+    });
   });
 
   describe("sur application d'un filtre de source", () => {
@@ -148,13 +151,13 @@ describe("Le store du catalogue filtré", () => {
       expect(resultats.length).toBe(2);
     });
 
-    it("ne conserve pas les items sans thème lorsque le filtre est actif", ()=>{
+    it("ne conserve pas les items sans thème lorsque le filtre est actif", () => {
       catalogueStore.initialise([], [livretEnJeux()]);
       rechercheParTheme.set([ThemeCyber.PROTECTION]);
 
       const { resultats } = get(catalogueFiltre);
 
       expect(resultats.length).toBe(0);
-    })
+    });
   });
 });

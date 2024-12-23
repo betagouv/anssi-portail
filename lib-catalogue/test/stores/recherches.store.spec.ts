@@ -1,4 +1,4 @@
-import {beforeEach, describe, expect, it} from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { rechercheParDroitAcces } from "../../src/stores/rechercheParDroitAcces.store";
 import {
   BesoinCyber,
@@ -17,14 +17,14 @@ import { rechercheParTypologie } from "../../src/stores/rechercheParTypologie.st
 import { rechercheParSource } from "../../src/stores/rechercheParSource.store";
 
 describe("Le store des recherches", () => {
-  beforeEach(()=>{
+  beforeEach(() => {
     rechercheParDroitAcces.set([]);
     rechercheParBesoin.set(null);
     rechercheParTheme.set([]);
     rechercheParFormat.set([]);
     rechercheParTypologie.set([]);
     rechercheParSource.set([]);
-  })
+  });
 
   describe("indique qu'un filtre est actif lorsque ", () => {
     it("la recherche par besoin est active", () => {

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import {  ThemeCyber } from "./Catalogue.types";
+  import { ThemeCyber } from "./Catalogue.types";
   import { rechercheParTheme } from "./stores/rechercheParTheme.store";
-  import {nombreResultats} from "./stores/nombreResultats.store";
+  import { nombreResultats } from "./stores/nombreResultats.store";
 </script>
 
 <fieldset>
@@ -13,7 +13,9 @@
       bind:group={$rechercheParTheme}
     />
     <span class="libelle">Gouvernance</span>
-    <span class="compte">{$nombreResultats.parTheme[ThemeCyber.GOUVERNANCE]}</span>
+    <span class="compte"
+      >{$nombreResultats.parTheme[ThemeCyber.GOUVERNANCE]}</span
+    >
   </label>
   <label>
     <input
@@ -31,7 +33,9 @@
       bind:group={$rechercheParTheme}
     />
     <span class="libelle">Protection</span>
-    <span class="compte">{$nombreResultats.parTheme[ThemeCyber.PROTECTION]}</span>
+    <span class="compte"
+      >{$nombreResultats.parTheme[ThemeCyber.PROTECTION]}</span
+    >
   </label>
   <label>
     <input
@@ -40,6 +44,8 @@
       bind:group={$rechercheParTheme}
     />
     <span class="libelle">Résilience</span>
-    <span class="compte">{$nombreResultats.parTheme[ThemeCyber.RESILIENCE]}</span>
+    <span class="compte"
+      >{$nombreResultats.parTheme[ThemeCyber.RESILIENCE]}</span
+    >
   </label>
 </fieldset>
