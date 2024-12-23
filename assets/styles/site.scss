@@ -302,6 +302,10 @@ footer {
   }
 
   details {
+    &[open] summary .entete-filtres .chevron  {
+      transform: rotate(180deg);
+    }
+
     summary {
       &::marker {
         content: '';
