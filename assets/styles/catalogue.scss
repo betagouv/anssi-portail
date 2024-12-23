@@ -15,6 +15,16 @@
     padding-bottom: 130px;
   }
 
+  .fil-ariane {
+    background: none;
+    img {
+      filter: invert(100%);
+    }
+    a {
+      color: white;
+    }
+  }
+
   h1 {
     font-size: 2.5rem;
     line-height: 2.875rem;
