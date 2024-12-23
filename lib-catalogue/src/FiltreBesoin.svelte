@@ -30,7 +30,9 @@
       bind:group={$rechercheParBesoin}
     /> <span>Sensibiliser et former</span>
   </label>
-  <label class:actif={$rechercheParBesoin === BesoinCyber.RENFORCER_LA_SECURITE}>
+  <label
+    class:actif={$rechercheParBesoin === BesoinCyber.RENFORCER_LA_SECURITE}
+  >
     <img
       src="/assets/images/illustration-filtre-besoins-renforcer-securite.svg"
       alt="illustration renforcer la sécurité"
