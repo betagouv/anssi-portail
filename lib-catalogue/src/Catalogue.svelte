@@ -58,6 +58,20 @@
   <div class="liste">
     {#each $catalogueFiltre.resultats as itemCyber}
       <CarteItem {itemCyber} />
+    {:else}
+      <div class="aucun-resultat">
+        <img
+          src="/assets/images/illustration-aucun-resultat.svg"
+          alt="Aucun résultat"
+        />
+        <h1>Désolé, aucun résultat trouvé</h1>
+        <input
+          type="button"
+          class="bouton primaire"
+          value="Réinitialiser les filtres"
+          on:click={reinitialiseFiltres}
+        />
+      </div>
     {/each}
   </div>
 </div>
