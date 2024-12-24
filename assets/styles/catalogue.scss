@@ -530,10 +530,6 @@
 
   figure {
     height: 156px;
-
-    @include a-partir-de(md) {
-      height: 174px;
-    }
   }
 
   .contenu {
