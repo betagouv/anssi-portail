@@ -272,6 +272,34 @@
   @include a-partir-de(xl) {
     grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
   }
+
+  .aucun-resultat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    text-align: center;
+
+    @include a-partir-de(lg) {
+      padding-top: 40px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      line-height: 2rem;
+    }
+
+    img {
+      height: 250px;
+    }
+
+    .bouton {
+      width: fit-content;
+      padding: 10px 24px;
+    }
+  }
 }
 
 .sommaire-replie {
