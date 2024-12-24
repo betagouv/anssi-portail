@@ -25,10 +25,6 @@
   <div class="contenu">
     <h3>{@html itemCyber.nom}</h3>
     <span class="description">{@html tronque(itemCyber.description)}</span>
-    <a href={itemCyber.lienInterne}>
-      En savoir plus
-      <img src="/assets/images/icone-fleche-droite.svg" alt="En savoir plus" />
-    </a>
     <div class="labels">
       {#each itemCyber.sources as source}<span>{source}</span>{/each}
       <a
