@@ -522,6 +522,7 @@
 .carte.ressource {
   display: flex;
   flex-direction: column;
+  width: auto;
 
   @include a-partir-de(md) {
     height: 406px;
