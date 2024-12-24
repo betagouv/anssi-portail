@@ -121,6 +121,10 @@ header {
   text-decoration: none;
   color: var(--noir);
 
+  &:hover .contenu {
+    background: #f6f6f6;
+  }
+
   figure {
     height: 157px;
     display: flex;
