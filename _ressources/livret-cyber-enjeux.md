@@ -2,6 +2,7 @@
 layout: service
 typologie: ressource
 nom: Livret et fiches découvrir la cybersécurité
+avecFicheDetaillee: true
 titreHtml: Livret et fiches découvrir la cybersécurité
 description: Découvrir le domaine de la cybersécurité et ses enjeux au travers de 13 fiches pédagogiques.
 besoins:

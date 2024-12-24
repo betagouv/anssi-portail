@@ -99,8 +99,15 @@ script: /scripts/service.js
                         {% for source in ressource.sources %}
                         <span>{{source}}</span>
                         {% endfor %}
-                        <a class="lien-externe" href="{{ressource.lien}}" target="_blank"><img
-                                src="/assets/images/icone-lien-externe.svg"> </a>
+                        {% if ressource.avecFicheDetaillee %}
+                            <img src="/assets/images/icone-fleche-droite.svg"
+                                alt="Voir le détail"
+                                title="Voir le détail">
+                        {% else %}
+                            <img src="/assets/images/icone-lien-externe.svg"
+                                alt="Ouvrir dans un nouvel onglet"
+                                title="Ouvrir dans un nouvel onglet">
+                        {% endif %}
                     </div>
                 </div>
             </div>

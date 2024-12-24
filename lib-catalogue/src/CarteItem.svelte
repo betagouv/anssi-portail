@@ -27,16 +27,19 @@
     <span class="description">{@html tronque(itemCyber.description)}</span>
     <div class="labels">
       {#each itemCyber.sources as source}<span>{source}</span>{/each}
-      <a
-        class="lien-externe"
-        href={itemCyber.lienExterne}
-        target="_blank"
-        aria-label="Ouvrir le lien"
-        ><img
-          src="/assets/images/icone-lien-externe.svg"
-          alt="Ouvrir dans un nouvel onglet"
-        />
-      </a>
+      <img
+        src={`/assets/images/${
+          itemCyber.lienInterne
+            ? "icone-fleche-droite.svg"
+            : "icone-lien-externe.svg"
+        }`}
+        alt={itemCyber.lienInterne
+          ? "Voir le détail"
+          : "Ouvrir dans un nouvel onglet"}
+        title={itemCyber.lienInterne
+          ? "Voir le détail"
+          : "Ouvrir dans un nouvel onglet"}
+      />
     </div>
   </div>
 </div>
