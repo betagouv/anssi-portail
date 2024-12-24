@@ -31,7 +31,7 @@ permalink: /catalogue/
           "typologie": "{{ service.typologie }}",
           "illustration": "{{ service.illustration }}",
           "description": "{{ service.description }}",
-          "lienInterne": "{{ service.url }}",
+          {% if service.avecFicheDetaillee %} "lienInterne": "{{ service.url }}", {% endif %}
           "lienExterne": "{{ service.lien }}",
           "sources": {{ service.sources | jsonify }},
           "besoins": {{ service.besoins | jsonify }},
@@ -48,7 +48,7 @@ permalink: /catalogue/
               "typologie": "{{ ressource.typologie }}",
               "illustration": "{{ ressource.illustration }}",
               "description": "{{ ressource.description }}",
-              "lienInterne": "{{ ressource.url }}",
+              {% if ressource.avecFicheDetaillee %} "lienInterne": "{{ ressource.url }}", {% endif %}
               "lienExterne": "{{ ressource.lien }}",
               "sources": {{ ressource.sources | jsonify }},
               "besoins": {{ ressource.besoins | jsonify }},

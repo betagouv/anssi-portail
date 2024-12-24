@@ -2,6 +2,7 @@
 layout: service
 typologie: ressource
 nom: Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber
+avecFicheDetaillee: true
 titreHtml: 
 description: S’informer sur la cybersécurité et ses métiers.
 illustration: demainspecialistecyber/demainspecialistecyber.png

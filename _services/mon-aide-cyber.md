@@ -2,6 +2,7 @@
 layout: service
 typologie: service
 nom: Mon&ZeroWidthSpace;Aide&ZeroWidthSpace;Cyber
+avecFicheDetaillee: true
 description: Lorem ipsum dolor sit amet consectitur lorem
 titreHtml: MonAideCyber
 illustration: mac/mac.png
