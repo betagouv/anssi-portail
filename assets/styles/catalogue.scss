@@ -366,6 +366,10 @@
       gap: 16px;
       flex: 1;
 
+      @include a-partir-de(md) {
+        padding: 40px;
+      }
+
       img {
         height: 170px;
         align-self: flex-start;
