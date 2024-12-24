@@ -14,7 +14,10 @@
   };
 </script>
 
-<div class="carte {itemCyber.typologie}">
+<a
+  class="carte {itemCyber.typologie}"
+  href={itemCyber.lienInterne ?? itemCyber.lienExterne}
+>
   <figure>
     <img
       src="/assets/images/illustrations-services/{itemCyber.illustration}"
@@ -42,4 +45,4 @@
       />
     </div>
   </div>
-</div>
+</a>

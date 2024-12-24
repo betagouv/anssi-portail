@@ -118,6 +118,8 @@ header {
   display: flex;
   flex-direction: column;
   width: 286px;
+  text-decoration: none;
+  color: var(--noir);
 
   figure {
     height: 157px;

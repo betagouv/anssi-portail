@@ -87,7 +87,11 @@ script: /scripts/service.js
             {% for idRessource in page.ressources %}
             {% assign ressource = site.ressources | where: "id", idRessource | first %}
 
-            <div class="carte ressource">
+            {% if ressource.avecFicheDetaillee %}
+                <a class="carte ressource" href="{{ressource.url}}">
+            {% else %}
+                <a class="carte ressource" href="{{ressource.lien}}">
+            {% endif %}
                 <figure>
                     <img src="/assets/images/illustrations-services/{{ressource.illustration}}">
                     <figcaption>{{ressource.format}}</figcaption>
@@ -110,7 +114,7 @@ script: /scripts/service.js
                         {% endif %}
                     </div>
                 </div>
-            </div>
+            </a>
             {% endfor %}
         </section>
 
