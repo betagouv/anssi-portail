@@ -257,7 +257,7 @@
   width: 100%;
   box-sizing: border-box;
   gap: 24px;
-  grid-template-columns: repeat(auto-fill, minmax(242px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
   align-content: flex-start;
   padding: 40px var(--gouttiere);
 
@@ -267,10 +267,6 @@
 
   @include a-partir-de(lg) {
     padding: 0;
-  }
-
-  @include a-partir-de(xl) {
-    grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
   }
 
   .aucun-resultat {
