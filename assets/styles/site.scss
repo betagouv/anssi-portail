@@ -52,6 +52,12 @@ header {
   }
 }
 
+.contenu-section {
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--largeur-max-contenu);
+}
+
 .fil-ariane {
   font-size: 0.75rem;
   line-height: 1.25rem;
