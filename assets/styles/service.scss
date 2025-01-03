@@ -6,8 +6,11 @@
 .chapeau {
   background: #f4f4f4 url("/assets/images/motif-fond-service.png");
   padding: 24px var(--gouttiere);
-  display: flex;
-  flex-direction: column;
+
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+  }
 
   @include a-partir-de(xxl) {
     padding-bottom: 0;
@@ -74,16 +77,19 @@
 }
 
 .article {
-  display: flex;
-  flex-direction: column;
+  padding: 0 var(--gouttiere);
 
-  @include a-partir-de(lg) {
-    flex-direction: row;
-    gap: 32px;
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+
+    @include a-partir-de(lg) {
+      flex-direction: row;
+      gap: 32px;
+    }
   }
 
   & > .contenu {
-    padding: 0 var(--gouttiere);
     padding-top: 40px;
 
     @include a-partir-de(lg) {
@@ -130,7 +136,7 @@
   flex: 0 0 auto;
   align-self: flex-start;
   margin-top: 40px;
-  margin-left: var(--gouttiere);
+  /*margin-left: var(--gouttiere);*/
 
   @include a-partir-de(lg) {
     display: flex;

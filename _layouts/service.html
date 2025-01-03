@@ -5,44 +5,48 @@ script: /scripts/service.js
 ---
 
 <section class="chapeau">
-    <div class="fil-ariane">
-        <a href="/">Accueil</a>
-        <span><img src="/assets/images/icone-chevron-droite.svg"/> </span>
-        <a href="/catalogue/">Les services et ressources cyber</a>
-        <span><img src="/assets/images/icone-chevron-droite.svg"/></span>
-        <span>{{page.nom}}</span>
-    </div>
-    <div class="resume">
-        <div>
-            <span class="badge service">Service</span>
-            <h1>{{page.nom}}</h1>
-            <p>{{page.description}}</p>
-            <a href="{{page.lien}}" target="_blank" class="bouton primaire">Accéder au service</a>
+    <div class="contenu-section">
+        <div class="fil-ariane">
+            <a href="/">Accueil</a>
+            <span><img src="/assets/images/icone-chevron-droite.svg"/> </span>
+            <a href="/catalogue/">Les services et ressources cyber</a>
+            <span><img src="/assets/images/icone-chevron-droite.svg"/></span>
+            <span>{{page.nom}}</span>
         </div>
-        <div>
-            <img src="/assets/images/illustrations-services/{{ page.illustration }}"/>
+        <div class="resume">
+            <div>
+                <span class="badge service">Service</span>
+                <h1>{{page.nom}}</h1>
+                <p>{{page.description}}</p>
+                <a href="{{page.lien}}" target="_blank" class="bouton primaire">Accéder au service</a>
+            </div>
+            <div>
+                <img src="/assets/images/illustrations-services/{{ page.illustration }}"/>
+            </div>
         </div>
     </div>
 </section>
 
-<div class="article">
-    <div class="sommaire sommaire-replie">
-        <details>
-            <summary>
-                <div class="entete-filtres">
-                    <img class="menu" src="/assets/images/icone-menu-lateral.svg"/>
-                    <span id="section-active" class="titre-menu">De quoi s'agit-il&nbsp;?</span>
-                    <img class="chevron" src="/assets/images/icone-chevron-bas.svg"/>
-                </div>
-            </summary>
+<div class="sommaire sommaire-replie">
+    <details>
+        <summary>
+            <div class="entete-filtres">
+                <img class="menu" src="/assets/images/icone-menu-lateral.svg"/>
+                <span id="section-active" class="titre-menu">De quoi s'agit-il&nbsp;?</span>
+                <img class="chevron" src="/assets/images/icone-chevron-bas.svg"/>
+            </div>
+        </summary>
 
-            <ul>
-                <li class="actif"><a href="#explication">De quoi s'agit-il&nbsp;?</a></li>
-                <li><a href="#cible">Qui peut utiliser ce service&nbsp;?</a></li>
-                <li><a href="#ressources">Les ressources associées</a></li>
-            </ul>
-        </details>
-    </div>
+        <ul>
+            <li class="actif"><a href="#explication">De quoi s'agit-il&nbsp;?</a></li>
+            <li><a href="#cible">Qui peut utiliser ce service&nbsp;?</a></li>
+            <li><a href="#ressources">Les ressources associées</a></li>
+        </ul>
+    </details>
+</div>
+
+<div class="article">
+    <div class="contenu-section">
 
     <div class="sommaire sommaire-deplie">
         <ul>
@@ -88,38 +92,39 @@ script: /scripts/service.js
             {% assign ressource = site.ressources | where: "id", idRessource | first %}
 
             {% if ressource.avecFicheDetaillee %}
-                <a class="carte ressource" href="{{ressource.url}}">
-            {% else %}
+            <a class="carte ressource" href="{{ressource.url}}">
+                {% else %}
                 <a class="carte ressource" href="{{ressource.lien}}">
-            {% endif %}
-                <figure>
-                    <img src="/assets/images/illustrations-services/{{ressource.illustration}}">
-                    <figcaption>{{ressource.format}}</figcaption>
-                </figure>
-                <div class="contenu">
-                    <h3>{{ressource.titre}}</h3>
-                    <span>{{ressource.description}}</span>
-                    <div class="labels">
-                        {% for source in ressource.sources %}
-                        <span>{{source}}</span>
-                        {% endfor %}
-                        {% if ressource.avecFicheDetaillee %}
+                    {% endif %}
+                    <figure>
+                        <img src="/assets/images/illustrations-services/{{ressource.illustration}}">
+                        <figcaption>{{ressource.format}}</figcaption>
+                    </figure>
+                    <div class="contenu">
+                        <h3>{{ressource.titre}}</h3>
+                        <span>{{ressource.description}}</span>
+                        <div class="labels">
+                            {% for source in ressource.sources %}
+                            <span>{{source}}</span>
+                            {% endfor %}
+                            {% if ressource.avecFicheDetaillee %}
                             <img src="/assets/images/icone-fleche-droite.svg"
-                                alt="Voir le détail"
-                                title="Voir le détail">
-                        {% else %}
+                                 alt="Voir le détail"
+                                 title="Voir le détail">
+                            {% else %}
                             <img src="/assets/images/icone-lien-externe.svg"
-                                alt="Ouvrir dans un nouvel onglet"
-                                title="Ouvrir dans un nouvel onglet">
-                        {% endif %}
+                                 alt="Ouvrir dans un nouvel onglet"
+                                 title="Ouvrir dans un nouvel onglet">
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
-            </a>
-            {% endfor %}
+                </a>
+                {% endfor %}
         </section>
 
         <section class="haut-de-page">
             <a href="#haut-de-page">Haut de page</a>
         </section>
+    </div>
     </div>
 </div>
