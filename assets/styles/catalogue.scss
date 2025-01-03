@@ -21,9 +21,11 @@
 
   .fil-ariane {
     background: none;
+
     img {
       filter: invert(100%);
     }
+
     a {
       color: white;
     }
@@ -243,11 +245,16 @@
 }
 
 .recherche {
-  display: flex;
-  flex-direction: column;
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+    @include a-partir-de(lg) {
+      flex-direction: row;
+      gap: 24px;
+    }
+  }
+
   @include a-partir-de(lg) {
-    flex-direction: row;
-    gap: 24px;
     padding: 48px var(--gouttiere) 80px;
   }
 }
