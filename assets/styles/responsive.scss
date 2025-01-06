@@ -31,8 +31,4 @@ $points-de-rupture-a-partir-de: (
   @include a-partir-de(lg) {
     --gouttiere: 24px;
   }
-
-  @include a-partir-de(xl) {
-    --gouttiere: 120px;
-  }
 }
