@@ -66,7 +66,7 @@
         value={FormatRessource.PDF}
         bind:group={$rechercheParFormat}
       />
-      <span class="libelle">Pdf</span>
+      <span class="libelle">PDF</span>
       <span class="compte"
         >{$nombreResultats.parFormatDeRessource[FormatRessource.PDF]}</span
       >
