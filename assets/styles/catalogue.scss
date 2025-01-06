@@ -254,26 +254,37 @@
     }
   }
 
+  padding: 40px var(--gouttiere);
+
   @include a-partir-de(lg) {
     padding: 48px var(--gouttiere) 80px;
   }
 }
 
-.liste {
+.grille {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
   width: 100%;
   box-sizing: border-box;
-  gap: 24px;
-  grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+  column-gap: 24px;
   align-content: flex-start;
-  padding: 40px var(--gouttiere);
 
-  @include a-partir-de(md) {
-    gap: 32px 16px;
+  .sommaire-deplie {
+    /*
+    Lorsqu’il y a des lignes implicites générées par l’auto-fill du repeat, il n’est pas possible
+    d’utiliser la ligne -1 comme ligne de fin pour réaliser un span sur toute la hauteur des lignes.
+    Mettre 100 lignes (valeur très arbitraire mais suffisante pour le moment) permet de résoudre ce
+    problème.
+    Cependant, il y a un problème induit puisque cela génère virtuellement  100 lignes. En soit, cela
+    ne pose pas de souci puisque les lignes ont une hauteur nulle. Mais les gap restent entre les lignes
+    et créent un espace blanc non désiré. C’est pour cette raison qu’on utilise ici un column-gap entre
+    les colonnes et un margin-bottom sur les cartes à la place d’un simple gap: 24px.
+    */
+    grid-row: 1 / 100;
   }
 
-  @include a-partir-de(lg) {
-    padding: 0;
+  .carte {
+    margin-bottom: 24px;
   }
 
   .aucun-resultat {
@@ -287,6 +298,7 @@
 
     @include a-partir-de(lg) {
       padding-top: 40px;
+      grid-column-start: 2;
     }
 
     h1 {
@@ -316,7 +328,6 @@
   @include a-partir-de(lg) {
     display: flex;
     flex-direction: column;
-    flex: 0 0 309px;
   }
 
   .entete-filtres {

@@ -18,16 +18,34 @@
   </div>
 </div>
 
+<div class="sommaire sommaire-replie">
+  <details>
+    <summary>
+      <EnteteFiltres />
+    </summary>
+
+    <div class="barre-filtres">
+      <FiltreBesoin />
+      <FiltreAccessibilite />
+      <FiltreTypologieEtFormat />
+      <FiltreSource />
+      <FiltreTheme />
+      <input
+        type="button"
+        class="bouton primaire"
+        value="Réinitialiser les filtres"
+        on:click={reinitialiseFiltres}
+      />
+    </div>
+  </details>
+</div>
+
 <div class="recherche">
   <div class="contenu-section">
-    <div class="sommaire sommaire-replie">
-      <details>
-        <summary>
-          <EnteteFiltres />
-        </summary>
-
+    <div class="grille">
+      <div class="sommaire sommaire-deplie">
+        <EnteteFiltres />
         <div class="barre-filtres">
-          <FiltreBesoin />
           <FiltreAccessibilite />
           <FiltreTypologieEtFormat />
           <FiltreSource />
@@ -39,26 +57,8 @@
             on:click={reinitialiseFiltres}
           />
         </div>
-      </details>
-    </div>
-
-    <div class="sommaire sommaire-deplie">
-      <EnteteFiltres />
-      <div class="barre-filtres">
-        <FiltreAccessibilite />
-        <FiltreTypologieEtFormat />
-        <FiltreSource />
-        <FiltreTheme />
-        <input
-          type="button"
-          class="bouton primaire"
-          value="Réinitialiser les filtres"
-          on:click={reinitialiseFiltres}
-        />
       </div>
-    </div>
 
-    <div class="liste">
       {#each $catalogueFiltre.resultats as itemCyber}
         <CarteItem {itemCyber} />
       {:else}
