@@ -30,7 +30,12 @@ section {
 
 .sommaire {
   overflow: auto;
-  padding: 32px var(--gouttiere) 16px;
+  margin-top: 16px;
+  padding: 16px var(--gouttiere) 16px;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 
   .groupe-boutons {
     .bouton {
