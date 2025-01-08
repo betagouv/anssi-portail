@@ -22,3 +22,14 @@
     line-height: 1.5rem;
   }
 }
+
+.sommaire {
+  overflow: auto;
+  padding: 32px 0 16px;
+
+  .groupe-boutons {
+    .bouton {
+      text-wrap: nowrap;
+    }
+  }
+}

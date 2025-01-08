@@ -1,6 +1,5 @@
 ---
 ---
-
 .bouton {
   font-family: "Marianne";
   display: flex;
@@ -22,6 +21,35 @@
 }
 
 .bouton.secondaire {
-  border: 1px solid white;
-  color: white;
+  border: 1px solid #ddd;
+  color: var(--noir);
+  padding: 16px 24px;
+  font-size: 1rem;
+  line-height: 1.5rem;
+
+  &.actif {
+    background: #FED980;
+  }
+}
+
+.groupe-boutons {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+
+  .bouton {
+    border-radius: 0;
+    border-left-style: none;
+
+    &:first-of-type {
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+      border-left-style: solid;
+    }
+
+    &:last-of-type {
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+  }
 }
