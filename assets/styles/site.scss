@@ -363,3 +363,81 @@ footer {
     }
   }
 }
+
+.chapeau.fond-sombre {
+  background: #0d0c21 url("/assets/images/motif-fond-service-opacite-16.png");
+  padding: 24px var(--gouttiere) 40px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  @include a-partir-de(md) {
+    gap: 16px;
+  }
+
+  @include a-partir-de(lg) {
+    padding-bottom: 130px;
+  }
+
+  .fil-ariane {
+    background: none;
+
+    img {
+      filter: invert(100%);
+    }
+
+    a {
+      color: white;
+    }
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    line-height: 2.875rem;
+    margin: 16px 0 16px;
+
+    @include a-partir-de(md) {
+      font-size: 3.5rem;
+      line-height: 3.875rem;
+      margin-top: 24px;
+    }
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 2rem;
+
+    @include a-partir-de(md) {
+      font-size: 1.375rem;
+      line-height: 2rem;
+    }
+  }
+
+  .cta {
+    margin: 32px 0 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-left: 24px;
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 0;
+      border-radius: 6px;
+      height: calc(100% - 6px);
+      min-width: 6px;
+      background: #FED980;
+    }
+
+    p {
+      font-weight: bold;
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
