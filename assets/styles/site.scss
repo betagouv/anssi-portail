@@ -94,31 +94,6 @@ header {
   height: 12px;
 }
 
-.bouton {
-  font-family: "Marianne";
-  display: flex;
-  justify-content: center;
-  border-radius: 8px;
-  text-align: center;
-  padding: 10px;
-  text-decoration: none;
-  font-weight: 500;
-  border: none;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  cursor: pointer;
-}
-
-.bouton.primaire {
-  background: #fed980;
-  color: var(--noir);
-}
-
-.bouton.secondaire {
-  border: 1px solid white;
-  color: white;
-}
-
 .carte.ressource,
 .carte.service {
   border: 1px solid #ddd;
