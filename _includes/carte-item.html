@@ -1,0 +1,29 @@
+{% assign item = include.item %}
+{% if item.avecFicheDetaillee %}
+<a class="carte {{ item.typologie }}" href="{{item.url}}">
+{% else %}
+<a class="carte {{ item.typologie }}" href="{{item.lien}}">
+{% endif %}
+  <figure>
+    <img src="/assets/images/illustrations-services/{{item.illustration}}">
+    <figcaption>{{item.format}}</figcaption>
+  </figure>
+  <div class="contenu">
+    <h3>{{item.titre}}</h3>
+    <span>{{item.description}}</span>
+    <div class="labels">
+      {% for source in item.sources %}
+      <span>{{source}}</span>
+      {% endfor %}
+      {% if item.avecFicheDetaillee %}
+      <img src="/assets/images/icone-fleche-droite.svg"
+           alt="Voir le détail"
+           title="Voir le détail">
+      {% else %}
+      <img src="/assets/images/icone-lien-externe.svg"
+           alt="Ouvrir dans un nouvel onglet"
+           title="Ouvrir dans un nouvel onglet">
+      {% endif %}
+    </div>
+  </div>
+</a>

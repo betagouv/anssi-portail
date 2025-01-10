@@ -1,6 +1,5 @@
 ---
 ---
-
 section {
   padding: 24px var(--gouttiere);
 }
@@ -41,5 +40,44 @@ section {
     .bouton {
       text-wrap: nowrap;
     }
+  }
+}
+
+section.action {
+  padding-top: 48px;
+  padding-bottom: 48px;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 2.5rem;
+    margin: 0 0 16px;
+  }
+
+  .explication {
+    margin: 0;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 2rem;
+    margin: 0 0 32px;
+  }
+
+  .illustration {
+    margin: 32px 0 40px;
+  }
+
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .carte {
+    width: auto;
+    margin-bottom: 24px;
   }
 }
