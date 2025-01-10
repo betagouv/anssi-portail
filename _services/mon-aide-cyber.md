@@ -19,5 +19,7 @@ themes:
   - Gouvernance
   - Défense
   - Résilience
+parcours:
+  - DEBUTER_SECURISER
 ---
 
