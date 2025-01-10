@@ -39,14 +39,27 @@ layout: parcours
     </div>
 </section>
 
-<section id="sensibiliser">
+<section id="sensibiliser" class="action">
+    <div class="contenu-section">
+        <h1>Sensibiliser</h1>
+        <p class="explication">Commencez à sensibiliser les dirigeants et salariés aux risques cyber et aux bonnes
+            pratiques.</p>
+        <img class="illustration" src="/assets/images/illustration-sensibiliser.svg"/>
+        <h2>Les services et ressources</h2>
 
+        {% for service in site.services %}
+        {% include carte-item.html item=service %}
+        {% endfor %}
+        {% for ressource in site.ressources %}
+        {% include carte-item.html item=ressource %}
+        {% endfor %}
+    </div>
 </section>
 
-<section id="securiser">
-
+<section id="securiser" class="action">
+    <div class="contenu-section"></div>
 </section>
 
-<section id="etre-accompagne">
-
+<section id="etre-accompagne" class="action">
+    <div class="contenu-section"></div>
 </section>
