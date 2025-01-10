@@ -1,0 +1,11 @@
+{% for service in site.services %}
+    {% if service.parcours contains include.parcours %}
+        {% include carte-item.html item=service %}
+    {% endif %}
+{% endfor %}
+
+{% for ressource in site.ressources %}
+    {% if ressource.parcours contains include.parcours %}
+        {% include carte-item.html item=ressource %}
+    {% endif %}
+{% endfor %}

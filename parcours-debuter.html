@@ -46,13 +46,7 @@ layout: parcours
             pratiques.</p>
         <img class="illustration" src="/assets/images/illustration-sensibiliser.svg"/>
         <h2>Les services et ressources</h2>
-
-        {% for service in site.services %}
-        {% include carte-item.html item=service %}
-        {% endfor %}
-        {% for ressource in site.ressources %}
-        {% include carte-item.html item=ressource %}
-        {% endfor %}
+        {% include services-ressources.html parcours='DEBUTER_SENSIBILISER' %}
     </div>
 </section>
 
