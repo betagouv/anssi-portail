@@ -343,9 +343,11 @@ footer {
   background: #0d0c21 url("/assets/images/motif-fond-service-opacite-16.png");
   padding: 24px var(--gouttiere) 40px;
   color: white;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+  }
 
   @include a-partir-de(md) {
     gap: 16px;
@@ -397,6 +399,8 @@ footer {
     gap: 16px;
     padding-left: 24px;
     position: relative;
+    max-width: 282px;
+    align-self: flex-start;
 
     &:after {
       content: "";
