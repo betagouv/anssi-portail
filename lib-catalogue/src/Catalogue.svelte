@@ -114,22 +114,5 @@
   </div>
 </div>
 
-<div class="encart fond-clair">
-  <div class="contenu-section">
-    <div class="carte test-maturite">
-      <img
-        src="/assets/images/trouver-parcours.png"
-        alt="Illustration trouver parcours"
-      />
-      <h1>Trouvez le parcours cyber adapté</h1>
-      <p>
-        Faites le test et découvrez nos parcours cyber adaptés au niveau de
-        maturité de votre entité.
-      </p>
-      <a href="/test" class="bouton primaire">Testez votre maturité cyber</a>
-    </div>
-  </div>
-</div>
-
 <style>
 </style>
