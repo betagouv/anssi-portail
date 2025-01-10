@@ -1,5 +1,8 @@
 ---
 ---
+
+@import "responsive";
+
 section {
   padding: 24px var(--gouttiere);
 }
@@ -52,6 +55,11 @@ section.action {
     font-weight: bold;
     line-height: 2.5rem;
     margin: 0 0 16px;
+
+    @include a-partir-de(sm) {
+      font-size: 2.5rem;
+      line-height: 3rem;
+    }
   }
 
   .explication {
@@ -65,10 +73,16 @@ section.action {
     font-weight: bold;
     line-height: 2rem;
     margin: 0 0 32px;
+
+    @include a-partir-de(sm) {
+      font-size: 1.75rem;
+      line-height: 2.25rem;
+    }
   }
 
   .illustration {
     margin: 32px 0 40px;
+    max-width: 282px;
   }
 
   .contenu-section {
