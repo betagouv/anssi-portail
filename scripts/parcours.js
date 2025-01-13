@@ -7,9 +7,13 @@ const changeSectionActive = () => {
     boutons.filter((bouton) => new URL(bouton.href).hash === hash);
 
   boutons.forEach((s) => s.classList.remove("actif"));
-  trouveLesBoutons(location.hash).forEach((bouton) =>
-    bouton.classList.add("actif"),
-  );
+  if (location.hash) {
+    trouveLesBoutons(location.hash).forEach((bouton) =>
+      bouton.classList.add("actif"),
+    );
+  } else {
+    boutons[0].classList.add("actif");
+  }
 };
 
 window.addEventListener("hashchange", changeSectionActive);
