@@ -115,3 +115,45 @@ section.action {
     background: #FFF7DB;
   }
 }
+
+.chapeau.fond-sombre {
+  @include a-partir-de(lg) {
+    padding-bottom: 48px;
+  }
+
+  .contenu-section {
+    display: grid;
+    grid-template-columns: auto 384px;
+    column-gap: 24px;
+    grid-template-areas:
+            "fil-ariane"
+            "titre"
+            "description"
+            "cta";
+
+    @include a-partir-de(lg) {
+      grid-template-areas:
+            "fil-ariane cta"
+            "titre cta"
+            "description cta";
+
+    }
+  }
+
+  .fil-ariane {
+    grid-area: fil-ariane;
+  }
+
+  h1 {
+    grid-area: titre;
+  }
+
+  p {
+    grid-area: description;
+  }
+
+  .cta {
+    align-self: center;
+    grid-area: cta;
+  }
+}
