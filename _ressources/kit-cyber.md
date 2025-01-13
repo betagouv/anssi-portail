@@ -13,4 +13,6 @@ sources:
   - Partenaires
 themes:
   - Gouvernance  
+parcours:
+  - DEBUTER_SENSIBILISER
 ---
