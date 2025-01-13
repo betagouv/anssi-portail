@@ -86,8 +86,24 @@ section.action {
   }
 
   .contenu-section {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+    column-gap: 24px;
+  }
+
+  .description {
+    grid-column: 1 / -1;
+    @include a-partir-de(lg) {
+      grid-column: 1;
+      grid-row: 1 / 100;
+    }
+  }
+
+  h2 {
+    grid-column: 1 / -1;
+    @include a-partir-de(lg) {
+      grid-column: 2/-1;
+    }
   }
 
   .carte {
