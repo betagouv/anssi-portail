@@ -77,7 +77,11 @@
 }
 
 .article {
-  padding: 0 var(--gouttiere);
+  padding: 40px var(--gouttiere) 0;
+
+  @include a-partir-de(lg) {
+    padding-top: 48px;
+  }
 
   .contenu-section {
     display: flex;
@@ -135,15 +139,12 @@
   width: 300px;
   flex: 0 0 auto;
   align-self: flex-start;
-  margin-top: 40px;
-  /*margin-left: var(--gouttiere);*/
 
   @include a-partir-de(lg) {
     display: flex;
     flex-direction: column;
     position: sticky;
     top: 0;
-    margin-top: 48px;
   }
 
   ul {
