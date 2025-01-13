@@ -402,6 +402,10 @@ footer {
     max-width: 282px;
     align-self: flex-start;
 
+    @include  a-partir-de(lg) {
+      max-width: none;
+    }
+
     &:after {
       content: "";
       position: absolute;
