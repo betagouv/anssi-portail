@@ -6,7 +6,13 @@
 {% endif %}
   <figure>
     <img src="/assets/images/illustrations-services/{{item.illustration}}">
-    <figcaption>{{item.format}}</figcaption>
+    <figcaption>
+      {% if item.typologie == 'service' %}
+        Service
+      {% else %}
+        {{item.format}}
+      {% endif %}
+    </figcaption>
   </figure>
   <div class="contenu">
     <h3>{{item.nom}}</h3>
