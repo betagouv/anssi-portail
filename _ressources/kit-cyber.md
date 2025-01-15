@@ -15,4 +15,5 @@ themes:
   - Gouvernance  
 parcours:
   - DEBUTER_SENSIBILISER
+  - APPROFONDIR_SENSIBILISER
 ---
