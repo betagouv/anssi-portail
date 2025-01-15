@@ -24,45 +24,7 @@ permalink: /catalogue/
   </div>
 </section>
 
-<script type="application/json" id="donnees">
-  {
-      "services": [
-          {% for service in site.services %}
-        {
-          "nom": "{{ service.nom }}",
-          "typologie": "{{ service.typologie }}",
-          "illustration": "{{ service.illustration }}",
-          "description": "{{ service.description }}",
-          {% if service.avecFicheDetaillee %} "lienInterne": "{{ service.url }}", {% endif %}
-          "lienExterne": "{{ service.lien }}",
-          "sources": {{ service.sources | jsonify }},
-          "besoins": {{ service.besoins | jsonify }},
-          "themes": {{ service.themes | jsonify }},
-          "droitsAcces": {{ service.droitsAcces | jsonify }}
-        }
-          {% unless forloop.last %},{% endunless %}
-          {% endfor %}
-      ],
-      "ressources": [
-          {% for ressource in site.ressources %}
-          {
-              "nom": "{{ ressource.nom }}",
-              "typologie": "{{ ressource.typologie }}",
-              "illustration": "{{ ressource.illustration }}",
-              "description": "{{ ressource.description }}",
-              {% if ressource.avecFicheDetaillee %} "lienInterne": "{{ ressource.url }}", {% endif %}
-              "lienExterne": "{{ ressource.lien }}",
-              "sources": {{ ressource.sources | jsonify }},
-              "besoins": {{ ressource.besoins | jsonify }},
-              "droitsAcces": {{ ressource.droitsAcces | jsonify }},
-              "themes": {{ ressource.themes | jsonify }},
-              "format": "{{ ressource.format }}"
-          }
-          {% unless forloop.last %},{% endunless %}
-          {% endfor %}
-      ]
-  }
-</script>
+{% include script-donnees-json.html %}
 
 <div id="catalogue"></div>
 {% include encart-test-maturite.html fond='clair' %}
