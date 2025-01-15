@@ -5,6 +5,7 @@
 
 .chapeau.fond-sombre {
   padding: 48px var(--gouttiere);
+
   .contenu-section {
     text-align: center;
   }
@@ -15,7 +16,7 @@
     margin: 0 0 32px;
   }
 
-  p{
+  p {
     margin-bottom: 40px;
   }
 
@@ -32,16 +33,30 @@
 }
 
 .services-dispos {
-  padding: 40px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  padding: 48px var(--gouttiere);
+
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+  }
 
   h1 {
-    margin: 0;
+    margin: 0 0 24px;
     padding: 0;
-    font-size: 2.25rem;
+    font-size: 2rem;
     line-height: 2.5rem;
     text-align: center;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 1.25rem;
+    line-height: 2rem;
+    font-weight: normal;
+    margin: 16px 0 24px;
+  }
+
+  .bouton.primaire {
+    margin: 16px 0;
   }
 }
