@@ -37,6 +37,7 @@ permalink: /parcours-approfondir/
             <a href="#sensibiliser" class="actif bouton secondaire">Sensibiliser</a>
             <a href="#progresser" class="bouton secondaire">Progresser</a>
             <a href="#piloter" class="bouton secondaire">Piloter</a>
+            <a href="#tester" class="bouton secondaire">Tester</a>
         </div>
     </div>
 </section>
@@ -62,5 +63,14 @@ titre='Piloter'
 explication='Mettez en place ou améliorez le pilotage de votre plan d’action cyber.'
 parcours='APPROFONDIR_PILOTER'
 %}
+
+{% include action-parcours.html
+id='tester'
+titre='Tester'
+explication='Vérifiez la sécurité de son système d’information grâce à des tests de sécurité.'
+parcours='APPROFONDIR_TESTER'
+fondAlternatif=true
+%}
+
 
 {% include encart-test-maturite.html fond='sombre' %}
