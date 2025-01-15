@@ -3,23 +3,31 @@
 
 @import 'responsive';
 
-.chapeau {
-  background: #0D0C21 url("/assets/images/motif-fond-service-opacite-16.png");
-  padding: 24px var(--gouttiere) 48px;
-  color: white;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-
-  h1 {
-    font-size: 2.75rem;
-    line-height: 2.875rem;
-    margin: 0;
+.chapeau.fond-sombre {
+  padding: 48px var(--gouttiere);
+  .contenu-section {
+    text-align: center;
   }
 
-  p {
-    margin: 0;
+  h1 {
+    font-size: 4.5rem;
+    line-height: 5rem;
+    margin: 0 0 32px;
+  }
+
+  p{
+    margin-bottom: 40px;
+  }
+
+  .bouton {
+    margin-bottom: 16px;
+  }
+
+  .bouton.secondaire {
+    color: white;
+    padding: 10px 0;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
   }
 }
 

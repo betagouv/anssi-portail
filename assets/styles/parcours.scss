@@ -7,29 +7,6 @@ section {
   padding: 24px var(--gouttiere);
 }
 
-.titres-page {
-  border-top: 1px solid #ddd;
-  padding: 12px var(--gouttiere);
-
-  h1 {
-    margin: 0;
-    padding: 0;
-    font-weight: bold;
-    font-size: 1.125rem;
-    line-height: 1.5rem;
-    color: #161616;
-  }
-
-  h2 {
-    margin: 0;
-    padding: 0;
-    font-weight: normal;
-    color: #3A3A3A;
-    font-size: 0.875rem;
-    line-height: 1.5rem;
-  }
-}
-
 .sommaire {
   .contenu-section {
     padding-bottom: 16px;
