@@ -123,7 +123,6 @@ section.action {
 
   .contenu-section {
     display: grid;
-    grid-template-columns: auto 384px;
     column-gap: 24px;
     grid-template-areas:
             "fil-ariane"
@@ -132,6 +131,7 @@ section.action {
             "cta";
 
     @include a-partir-de(lg) {
+      grid-template-columns: auto 384px;
       grid-template-areas:
             "fil-ariane cta"
             "titre cta"
