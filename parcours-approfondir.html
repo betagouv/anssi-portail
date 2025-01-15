@@ -1,0 +1,49 @@
+---
+layout: parcours
+permalink: /parcours-approfondir/
+---
+<section class="titres-page">
+    <div class="contenu-section">
+        <h1>MesServicesCyber</h1>
+        <h2>Innovation ANSSI</h2>
+    </div>
+</section>
+
+<section class="chapeau fond-sombre">
+    <div class="contenu-section">
+        <div class="fil-ariane">
+            <a href="/">Accueil</a>
+            <span><img src="/assets/images/icone-chevron-droite.svg"/> </span>
+            <a href="#">Progresser en cybersécurité</a>
+            <span><img src="/assets/images/icone-chevron-droite.svg"/> </span>
+            <span>Cybersécurité&nbsp;: approfondir&nbsp;!</span>
+        </div>
+        <h1>Cybersécurité&nbsp;: approfondir&nbsp;!</h1>
+        <p>
+            Votre organisation a déjà mis en oeuvre des premières actions pour renforcer sa cybersécurité et souhaite
+            approfondir la démarche engagée ? Découvrez des services et ressources sélectionnés par l’ANSSI pour vous
+            aider.
+        </p>
+        <div class="cta">
+            <p>Trouvez le parcours cyber adapté à votre organisation</p>
+            <a href="/test" class="bouton primaire">Testez votre maturité</a>
+        </div>
+    </div>
+</section>
+
+<section class="sommaire">
+    <div class="contenu-section">
+        <div class="groupe-boutons">
+            <a href="#sensibiliser" class="actif bouton secondaire">Sensibiliser</a>
+        </div>
+    </div>
+</section>
+
+{% include action-parcours.html
+id='sensibiliser'
+titre='Sensibiliser'
+explication='Continuez à sensibiliser les dirigeants et salariés aux risques cyber et aux bonnes pratiques'
+parcours='APPROFONDIR_SENSIBILISER'
+%}
+
+{% include encart-test-maturite.html fond='sombre' %}
