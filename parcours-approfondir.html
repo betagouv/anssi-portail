@@ -35,7 +35,8 @@ permalink: /parcours-approfondir/
     <div class="contenu-section">
         <div class="groupe-boutons">
             <a href="#sensibiliser" class="actif bouton secondaire">Sensibiliser</a>
-            <a href="#progresser" class="actif bouton secondaire">Progresser</a>
+            <a href="#progresser" class="bouton secondaire">Progresser</a>
+            <a href="#piloter" class="bouton secondaire">Piloter</a>
         </div>
     </div>
 </section>
@@ -53,6 +54,13 @@ titre='Progresser'
 explication='Développez les compétences cyber de vos équipes.'
 parcours='APPROFONDIR_PROGRESSER'
 fondAlternatif=true
+%}
+
+{% include action-parcours.html
+id='piloter'
+titre='Piloter'
+explication='Mettez en place ou améliorez le pilotage de votre plan d’action cyber.'
+parcours='APPROFONDIR_PILOTER'
 %}
 
 {% include encart-test-maturite.html fond='sombre' %}
