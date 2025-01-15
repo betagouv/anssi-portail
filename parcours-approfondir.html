@@ -35,6 +35,7 @@ permalink: /parcours-approfondir/
     <div class="contenu-section">
         <div class="groupe-boutons">
             <a href="#sensibiliser" class="actif bouton secondaire">Sensibiliser</a>
+            <a href="#progresser" class="actif bouton secondaire">Progresser</a>
         </div>
     </div>
 </section>
@@ -44,6 +45,14 @@ id='sensibiliser'
 titre='Sensibiliser'
 explication='Continuez à sensibiliser les dirigeants et salariés aux risques cyber et aux bonnes pratiques'
 parcours='APPROFONDIR_SENSIBILISER'
+%}
+
+{% include action-parcours.html
+id='progresser'
+titre='Progresser'
+explication='Développez les compétences cyber de vos équipes.'
+parcours='APPROFONDIR_PROGRESSER'
+fondAlternatif=true
 %}
 
 {% include encart-test-maturite.html fond='sombre' %}
