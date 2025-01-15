@@ -18,5 +18,6 @@ themes:
   - Protection
 parcours:
   - DEBUTER_SENSIBILISER
+  - APPROFONDIR_SENSIBILISER
 ---
 

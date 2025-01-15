@@ -21,5 +21,6 @@ themes:
   - Résilience
 parcours:
   - DEBUTER_SECURISER
+  - APPROFONDIR_SENSIBILISER
 ---
 
