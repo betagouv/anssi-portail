@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [svelte()],
   build: {
     rollupOptions: {
+      input: { catalogue: "src/main.ts", extrait: "src/main-extrait.ts" },
       output: {
         entryFileNames: `assets/[name].js`,
         assetFileNames: `assets/[name].[ext]`,
