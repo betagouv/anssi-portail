@@ -1,6 +1,12 @@
 ---
 layout: accueil
 ---
+<script
+        type="module"
+        crossorigin
+        src="/lib-catalogue/dist/assets/extrait.js"
+></script>
+
 <section class="titres-page">
     <div class="contenu-section">
         <h1>MesServicesCyber</h1>
@@ -18,26 +24,10 @@ layout: accueil
 <section class="services-dispos">
     <div class="contenu-section">
         <h1>Des services adaptés à vos besoins cyber</h1>
+        {% include script-donnees-json.html %}
 
-        <h2>Des services pour comprendre la cyber, être sensibilisé, mais aussi se former et former ses équipes à la
-            cybersécurité.</h2>
-        <div class="carte service">
-            <figure>
-                <img src="/assets/images/illustrations-services/demainspecialistecyber/demainspecialistecyber.png">
-                <figcaption>Service</figcaption>
-            </figure>
-            <div class="contenu">
-                <h3>Demain Spécialiste Cyber</h3>
-                <span>S’informer sur la cybersécurité et ses métiers.</span>
-                <a href="/">Découvrir le service
-                    <img src="/assets/images/icone-fleche-droite.svg">
-                </a>
-                <div class="labels">
-                    <span>ANSSI</span>
-                    <span>Innovation ANSSI</span>
-                </div>
-            </div>
-        </div>
+        <div id="extrait"></div>
+
         <a class="bouton primaire">Découvrez plus de services</a>
     </div>
 </section>
