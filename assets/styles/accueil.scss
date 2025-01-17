@@ -247,17 +247,52 @@
       font-size: 1.25rem;
       line-height: 2rem;
     }
+  }
+}
 
-    .bouton.secondaire {
-      align-self: center;
-      width: 190px;
-      padding: 10px 18px 10px 24px;
+.nis2, .anssi {
+  .bouton.secondaire {
+    align-self: center;
+    width: 190px;
+    padding: 10px 18px 10px 24px;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    border-color: var(--noir);
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+}
+
+.anssi {
+  padding: 48px var(--gouttiere);
+
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    text-align: center;
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+
+    .logo {
+      margin-top: 24px;
+    }
+
+    p {
+      margin: 0;
       font-size: 1.125rem;
       line-height: 1.75rem;
-      border-color: var(--noir);
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
+
+      &:last-of-type {
+        font-weight: bold;
+      }
     }
   }
+
 }
