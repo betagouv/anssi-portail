@@ -4,8 +4,10 @@
   import FiltreBesoin from "./FiltreBesoin.svelte";
   import { BesoinCyber } from "./Catalogue.types";
   import { rechercheParBesoin } from "./stores/rechercheParBesoin.store";
+  import { limitationRecherche } from "./stores/limitationRecherche";
 
   rechercheParBesoin.set(BesoinCyber.SENSIBILISER_ET_FORMER);
+  limitationRecherche.set(3);
 </script>
 
 <div class="barre-filtre-besoin">

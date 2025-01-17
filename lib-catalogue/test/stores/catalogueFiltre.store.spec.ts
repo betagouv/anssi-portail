@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import {beforeEach, describe, expect, it} from "vitest";
 import { get } from "svelte/store";
 import {
   demainSpecialisteCyber,
@@ -23,8 +23,19 @@ import { rechercheParTypologie } from "../../src/stores/rechercheParTypologie.st
 import { rechercheParFormat } from "../../src/stores/rechercheParFormat.store";
 import { rechercheParSource } from "../../src/stores/rechercheParSource.store";
 import { rechercheParTheme } from "../../src/stores/rechercheParTheme.store";
+import { limitationRecherche } from "../../src/stores/limitationRecherche";
 
 describe("Le store du catalogue filtré", () => {
+  beforeEach(()=>{
+    rechercheParBesoin.set(null);
+    rechercheParDroitAcces.set([]);
+    rechercheParTypologie.set([]);
+    rechercheParFormat.set([]);
+    rechercheParSource.set([]);
+    rechercheParTheme.set([]);
+    limitationRecherche.set(0);
+  })
+
   describe("sur application d'un filtre de besoin", () => {
     it("conserve uniquement les items correspondants", () => {
       catalogueStore.initialise([mss(), demainSpecialisteCyber()], []);
@@ -158,6 +169,17 @@ describe("Le store du catalogue filtré", () => {
       const { resultats } = get(catalogueFiltre);
 
       expect(resultats.length).toBe(0);
+    });
+  });
+
+  describe("sur limitation du nombre de résultats", () => {
+    it("ne conserve que les x premiers éléments", () => {
+      catalogueStore.initialise([mss(), demainSpecialisteCyber()], []);
+      limitationRecherche.set(1);
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(1);
     });
   });
 });
