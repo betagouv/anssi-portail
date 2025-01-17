@@ -62,9 +62,10 @@
 }
 
 .barre-filtre-besoin {
-  .contenu-section{
+  .contenu-section {
     overflow: auto;
   }
+
   .choix-filtre-besoin {
     display: flex;
     flex-direction: row;
@@ -117,10 +118,32 @@
 .services {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
-  gap:16px;
+  gap: 16px;
   margin: 16px 0 48px;
 
   .carte.service, .carte.ressource {
     width: auto;
+  }
+}
+
+.encart {
+  padding-top: 48px;
+  padding-bottom: 48px;
+
+  .carte.parcours {
+    gap: 24px;
+
+    .bouton.primaire {
+      text-align: center;
+      border-bottom: none;
+      margin-top: 32px;
+      align-self: center;
+      width: 120px;
+      padding: 10px 24px;
+
+      &:after {
+        content: none;
+      }
+    }
   }
 }
