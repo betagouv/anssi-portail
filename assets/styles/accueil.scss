@@ -147,3 +147,77 @@
     }
   }
 }
+
+.votre-espace-cyber {
+  padding: 48px var(--gouttiere);
+
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      margin: 0 0 24px;
+      text-align: center;
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+
+    img {
+      margin: 40px 0 16px;
+    }
+
+    .fonctions-msc {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin: 24px 0;
+
+      .fonction-msc {
+        position: relative;
+        padding-left: 26px;
+
+        h2 {
+          margin: 0 0 8px;
+          padding: 0;
+          font-size: 1.375rem;
+          line-height: 1.75rem;
+        }
+
+        p {
+          margin: 0;
+          padding: 0;
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 6px;
+          left: 0;
+          border-radius: 6px;
+          height: calc(100% - 6px);
+          min-width: 6px;
+        }
+
+        &.couleur1 {
+          &:after {
+            background: #FED980;
+          }
+        }
+
+        &.couleur2 {
+          &:after {
+            background: var(--noir);
+          }
+        }
+
+      }
+    }
+
+    .bouton.primaire {
+      align-self: center;
+      margin: 16px auto;
+      width: 218px;
+    }
+  }
+
+}
