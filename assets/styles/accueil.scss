@@ -219,5 +219,45 @@
       width: 218px;
     }
   }
+}
 
+.nis2 {
+  background: #f4f4f4 url("/assets/images/motif-fond-service.png");
+  padding: 48px var(--gouttiere);
+
+  .contenu-section {
+    background: white;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    border-bottom: 6px solid var(--noir);
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1.25rem;
+      line-height: 2rem;
+    }
+
+    .bouton.secondaire {
+      align-self: center;
+      width: 190px;
+      padding: 10px 18px 10px 24px;
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+      border-color: var(--noir);
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+  }
 }
