@@ -1,21 +1,25 @@
 <script lang="ts">
   import { rechercheParBesoin } from "./stores/rechercheParBesoin.store";
   import { BesoinCyber } from "./Catalogue.types";
+
+  export let filtreTousVisible: boolean = true;
 </script>
 
 <div class="choix-filtre-besoin">
-  <label class:actif={!$rechercheParBesoin}>
-    <img
-      src="/assets/images/illustration-filtre-besoins-tous.svg"
-      alt="illustration tous"
-    />
-    <input
-      type="radio"
-      name="filtre-besoin"
-      value=""
-      bind:group={$rechercheParBesoin}
-    /> <span>Tous les besoins</span>
-  </label>
+  {#if filtreTousVisible}
+    <label class:actif={!$rechercheParBesoin}>
+      <img
+        src="/assets/images/illustration-filtre-besoins-tous.svg"
+        alt="illustration tous"
+      />
+      <input
+        type="radio"
+        name="filtre-besoin"
+        value=""
+        bind:group={$rechercheParBesoin}
+      /> <span>Tous les besoins</span>
+    </label>
+  {/if}
   <label
     class:actif={$rechercheParBesoin === BesoinCyber.SENSIBILISER_ET_FORMER}
   >

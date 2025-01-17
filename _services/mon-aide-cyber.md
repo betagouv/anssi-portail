@@ -9,6 +9,7 @@ illustration: mac/mac.png
 lien: https://monaide.cyber.gouv.fr/
 besoins:
   - RENFORCER_LA_SECURITE
+  - SENSIBILISER_ET_FORMER  
 droitsAcces:
   - ACCES_LIBRE
 sources:

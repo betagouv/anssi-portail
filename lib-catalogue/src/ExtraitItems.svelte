@@ -2,11 +2,15 @@
   import CarteItem from "./CarteItem.svelte";
   import { catalogueFiltre } from "./stores/catalogueFiltre.store";
   import FiltreBesoin from "./FiltreBesoin.svelte";
+  import { BesoinCyber } from "./Catalogue.types";
+  import { rechercheParBesoin } from "./stores/rechercheParBesoin.store";
+
+  rechercheParBesoin.set(BesoinCyber.SENSIBILISER_ET_FORMER);
 </script>
 
 <div class="barre-filtre-besoin">
   <div class="contenu-section">
-    <FiltreBesoin />
+    <FiltreBesoin filtreTousVisible={false} />
   </div>
 </div>
 
