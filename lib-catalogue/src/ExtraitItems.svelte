@@ -11,9 +11,7 @@
 </script>
 
 <div class="barre-filtre-besoin">
-  <div class="contenu-section">
     <FiltreBesoin filtreTousVisible={false} />
-  </div>
 </div>
 
 <h2>
@@ -21,10 +19,8 @@
   et former ses équipes à la cybersécurité.
 </h2>
 
-<section class="services-dispos">
-  <div class="contenu-section">
+<div class="services">
     {#each $catalogueFiltre.resultats as itemCyber}
       <CarteItem {itemCyber}></CarteItem>
     {/each}
-  </div>
-</section>
+</div>

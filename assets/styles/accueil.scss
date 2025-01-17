@@ -60,3 +60,67 @@
     margin: 16px 0;
   }
 }
+
+.barre-filtre-besoin {
+  .contenu-section{
+    overflow: auto;
+  }
+  .choix-filtre-besoin {
+    display: flex;
+    flex-direction: row;
+    padding: 16px 0 32px;
+    overflow: auto;
+
+    label {
+      border: 1px solid #ddd;
+      border-left-style: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      background: white;
+      flex: 1 0 290px;
+
+      &:first-of-type {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-left-style: solid;
+      }
+
+      &:last-of-type {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+
+      &.actif {
+        background: #fff7db;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25) inset;
+      }
+
+      img {
+        width: 48px;
+        height: 48px;
+      }
+
+      input {
+        display: none;
+      }
+    }
+  }
+}
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  gap:16px;
+  margin: 16px 0 48px;
+
+  .carte.service, .carte.ressource {
+    width: auto;
+  }
+}
