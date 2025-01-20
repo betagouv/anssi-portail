@@ -18,6 +18,12 @@
 .bouton.primaire {
   background: #fed980;
   color: var(--noir);
+
+  &[disabled] {
+    background: #e5e5e5;
+    color: #929292;
+    cursor: not-allowed;
+  }
 }
 
 .bouton.secondaire {
