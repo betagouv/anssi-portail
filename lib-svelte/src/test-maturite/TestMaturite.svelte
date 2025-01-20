@@ -35,12 +35,17 @@
   let questionCourante = 0;
   let reponseDonnee: number | null = null;
 
-  const toutesReponses: number[] = [];
+  let toutesReponses: number[] = [];
 
   function reponds() {
     toutesReponses.push(reponseDonnee!);
     questionCourante++;
     reponseDonnee = null;
+  }
+  function reviensEnArriere() {
+    toutesReponses = toutesReponses.slice(0, questionCourante - 1);
+    questionCourante--;
+    reponseDonnee = toutesReponses[questionCourante];
   }
 </script>
 
@@ -49,7 +54,7 @@
 <p>Étape {questionCourante + 1} sur 7</p>
 <h5>{questions[questionCourante].titre}</h5>
 <hr />
-{reponseDonnee}
+{reponseDonnee} <br />
 <hr />
 <h4>{@html questions[questionCourante].question}</h4>
 {#each questions[questionCourante].propositions as proposition, index}
@@ -59,6 +64,13 @@
   </label>
 {/each}
 
+<input
+  type="button"
+  class="bouton secondaire"
+  value="Précédent"
+  disabled={questionCourante === 0}
+  on:click={reviensEnArriere}
+/>
 <input
   type="button"
   class="bouton primaire"
