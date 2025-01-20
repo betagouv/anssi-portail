@@ -24,10 +24,6 @@ $points-de-rupture-a-partir-de: (
   --gouttiere: 16px;
   --largeur-max-contenu: 1200px;
 
-  @include a-partir-de(md) {
-    --gouttiere: 56px;
-  }
-
   @include a-partir-de(lg) {
     --gouttiere: 24px;
   }

@@ -3,12 +3,6 @@
 
 @import 'responsive';
 
-:root {
-  @include a-partir-de(md) {
-    --gouttiere: 16px;
-  }
-}
-
 .chapeau.fond-sombre {
   padding: 48px var(--gouttiere);
 
