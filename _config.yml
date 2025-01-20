@@ -7,12 +7,12 @@ exclude:
     - "*.iml"
     - README.md
     - Dockerfile
-    - lib-catalogue/.vscode/
-    - lib-catalogue/node_modules/
-    - lib-catalogue/src/
-    - lib-catalogue/public/
-    - lib-catalogue/index.html
-    - lib-catalogue/*.json
-    - lib-catalogue/README.md
-    - lib-catalogue/svelte.config.js
-    - lib-catalogue/vite.config.ts
+    - lib-svelte/.vscode/
+    - lib-svelte/node_modules/
+    - lib-svelte/src/
+    - lib-svelte/public/
+    - lib-svelte/index.html
+    - lib-svelte/*.json
+    - lib-svelte/README.md
+    - lib-svelte/svelte.config.js
+    - lib-svelte/vite.config.ts

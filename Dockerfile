@@ -49,7 +49,7 @@ RUN apk update && apk add nodejs npm
 ADD . /srv/jekyll
 
 # Build du catalogue
-WORKDIR /srv/jekyll/lib-catalogue
+WORKDIR /srv/jekyll/lib-svelte
 RUN npm install && npm run build
 
 # Build du site
