@@ -7,10 +7,10 @@ import {
   livretEnJeux,
   mss,
 } from "./objetsExemples";
-import { catalogueStore } from "../../src/stores/catalogue.store";
-import { rechercheParBesoin } from "../../src/stores/rechercheParBesoin.store";
-import { catalogueFiltre } from "../../src/stores/catalogueFiltre.store";
-import { rechercheParDroitAcces } from "../../src/stores/rechercheParDroitAcces.store";
+import { catalogueStore } from "../../src/catalogue/stores/catalogue.store";
+import { rechercheParBesoin } from "../../src/catalogue/stores/rechercheParBesoin.store";
+import { catalogueFiltre } from "../../src/catalogue/stores/catalogueFiltre.store";
+import { rechercheParDroitAcces } from "../../src/catalogue/stores/rechercheParDroitAcces.store";
 import {
   BesoinCyber,
   DroitAcces,
@@ -18,12 +18,12 @@ import {
   Source,
   ThemeCyber,
   Typologie,
-} from "../../src/Catalogue.types";
-import { rechercheParTypologie } from "../../src/stores/rechercheParTypologie.store";
-import { rechercheParFormat } from "../../src/stores/rechercheParFormat.store";
-import { rechercheParSource } from "../../src/stores/rechercheParSource.store";
-import { rechercheParTheme } from "../../src/stores/rechercheParTheme.store";
-import { limitationRecherche } from "../../src/stores/limitationRecherche";
+} from "../../src/catalogue/Catalogue.types";
+import { rechercheParTypologie } from "../../src/catalogue/stores/rechercheParTypologie.store";
+import { rechercheParFormat } from "../../src/catalogue/stores/rechercheParFormat.store";
+import { rechercheParSource } from "../../src/catalogue/stores/rechercheParSource.store";
+import { rechercheParTheme } from "../../src/catalogue/stores/rechercheParTheme.store";
+import { limitationRecherche } from "../../src/catalogue/stores/limitationRecherche";
 
 describe("Le store du catalogue filtré", () => {
   beforeEach(() => {

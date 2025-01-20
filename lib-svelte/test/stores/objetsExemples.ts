@@ -6,7 +6,7 @@ import {
   Source,
   ThemeCyber,
   Typologie,
-} from "../../src/Catalogue.types";
+} from "../../src/catalogue/Catalogue.types";
 
 export const mss = (): ItemCyber => ({
   typologie: Typologie.SERVICE,

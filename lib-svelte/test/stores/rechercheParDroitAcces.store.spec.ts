@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { DroitAcces } from "../../src/Catalogue.types";
+import { DroitAcces } from "../../src/catalogue/Catalogue.types";
 import { get } from "svelte/store";
-import { rechercheParDroitAcces } from "../../src/stores/rechercheParDroitAcces.store";
+import { rechercheParDroitAcces } from "../../src/catalogue/stores/rechercheParDroitAcces.store";
 
 describe("La recherche par droit d'accès", () => {
   it("est vide quand on la réinitialise", () => {
