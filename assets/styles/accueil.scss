@@ -187,10 +187,9 @@
       text-align: center;
       border-bottom: none;
       margin-top: 32px;
-      justify-self: center;
-      width: 120px;
       padding: 10px 24px;
       grid-area: bouton;
+      place-self: center;
 
       &:after {
         content: none;
@@ -293,13 +292,8 @@
     }
 
     .bouton.primaire {
-      align-self: center;
       margin: 16px auto;
-      width: 218px;
-
-      @include a-partir-de(sm) {
-        width: auto;
-      }
+      justify-self: center;
     }
   }
 }
