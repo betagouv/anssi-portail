@@ -46,6 +46,7 @@
 
 <h1>Testez votre maturité Cyber</h1>
 
+<p>Étape {questionCourante + 1} sur 7</p>
 <h5>{questions[questionCourante].titre}</h5>
 <hr />
 {reponseDonnee}
