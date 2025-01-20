@@ -18,6 +18,18 @@
         "Les objectifs de réduction des risques d'origine cyber sont intégrés dans la stratégie globale de gestion des risques de l'organisation.",
       ],
     },
+    {
+      titre: "Posture à l’égard de la cyber",
+      question:
+        "Quelle est la posture des responsables de votre organisation sur la cybersécurité ?",
+      propositions: [
+        "Le renforcement de la cybersécurité de l'organisation n'est pas une priorité.",
+        "Les responsables de l'organisation autorisent le/les responsables informatiques à agir mais perçoivent le sujet comme avant tout technique.",
+        "Les responsables manifestent un réel intérêt pour le renforcement de la cybersécurité et les directions métiers sont sensibilisées.",
+        "La cybersécurité est un sujet prioritaire évoqué en CODIR, les directions métiers sont responsabilisées sur le sujet et les agents sensibilisés.",
+        "Les responsables souhaitent influer au-delà de leur organisation pour un renforcement de la cyber sécurité de leur écosystème voire de leur secteur d’activité.",
+      ],
+    },
   ];
 
   let questionCourante = 0;
@@ -41,11 +53,7 @@
 <h4>{questions[questionCourante].question}</h4>
 {#each questions[questionCourante].propositions as proposition, index}
   <label>
-    <input
-      type="radio"
-      bind:group={reponseDonnee}
-      value={index}
-    />
+    <input type="radio" bind:group={reponseDonnee} value={index} />
     {proposition}
   </label>
 {/each}
