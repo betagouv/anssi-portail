@@ -1,3 +1,3 @@
-npm install --prefix lib-catalogue
-npm run watch --prefix lib-catalogue &
+npm install --prefix lib-svelte
+npm run watch --prefix lib-svelte &
 bundle exec jekyll serve --livereload
