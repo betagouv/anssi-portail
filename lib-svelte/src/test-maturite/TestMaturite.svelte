@@ -9,7 +9,7 @@
     {
       titre: "Prise en compte du risque",
       question:
-        "Quelle est la perception des risques cyber au sein de votre organisation ?",
+        "Quelle est la perception des risques cyber au sein de votre organisation&nbsp;?",
       propositions: [
         "Les responsables considèrent que leur organisation n'est pas concernée par le risque de cyberattaques.",
         "Les responsables ont conscience que leur organisation peut être victime de cyberattaques, comme d'autres avant elle, sans savoir exactement lesquelles ni les conséquences qu’elles entraîneraient.",
@@ -21,7 +21,7 @@
     {
       titre: "Posture à l’égard de la cyber",
       question:
-        "Quelle est la posture des responsables de votre organisation sur la cybersécurité ?",
+        "Quelle est la posture des responsables de votre organisation sur la cybersécurité&nbsp;?",
       propositions: [
         "Le renforcement de la cybersécurité de l'organisation n'est pas une priorité.",
         "Les responsables de l'organisation autorisent le/les responsables informatiques à agir mais perçoivent le sujet comme avant tout technique.",
@@ -50,7 +50,7 @@
 <hr />
 {reponseDonnee}
 <hr />
-<h4>{questions[questionCourante].question}</h4>
+<h4>{@html questions[questionCourante].question}</h4>
 {#each questions[questionCourante].propositions as proposition, index}
   <label>
     <input type="radio" bind:group={reponseDonnee} value={index} />
