@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { rechercheParDroitAcces } from "../../src/stores/rechercheParDroitAcces.store";
+import { rechercheParDroitAcces } from "../../src/catalogue/stores/rechercheParDroitAcces.store";
 import {
   BesoinCyber,
   DroitAcces,
@@ -7,14 +7,14 @@ import {
   Source,
   ThemeCyber,
   Typologie,
-} from "../../src/Catalogue.types";
+} from "../../src/catalogue/Catalogue.types";
 import { get } from "svelte/store";
-import { recherches } from "../../src/stores/recherches.store";
-import { rechercheParBesoin } from "../../src/stores/rechercheParBesoin.store";
-import { rechercheParTheme } from "../../src/stores/rechercheParTheme.store";
-import { rechercheParFormat } from "../../src/stores/rechercheParFormat.store";
-import { rechercheParTypologie } from "../../src/stores/rechercheParTypologie.store";
-import { rechercheParSource } from "../../src/stores/rechercheParSource.store";
+import { recherches } from "../../src/catalogue/stores/recherches.store";
+import { rechercheParBesoin } from "../../src/catalogue/stores/rechercheParBesoin.store";
+import { rechercheParTheme } from "../../src/catalogue/stores/rechercheParTheme.store";
+import { rechercheParFormat } from "../../src/catalogue/stores/rechercheParFormat.store";
+import { rechercheParTypologie } from "../../src/catalogue/stores/rechercheParTypologie.store";
+import { rechercheParSource } from "../../src/catalogue/stores/rechercheParSource.store";
 
 describe("Le store des recherches", () => {
   beforeEach(() => {

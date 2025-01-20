@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { get } from "svelte/store";
-import { catalogueStore } from "../../src/stores/catalogue.store";
+import { catalogueStore } from "../../src/catalogue/stores/catalogue.store";
 import { livretEnJeux, mss } from "./objetsExemples";
 
 describe("Le store du catalogue", () => {

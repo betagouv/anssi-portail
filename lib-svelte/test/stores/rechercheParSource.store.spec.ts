@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { rechercheParSource } from "../../src/stores/rechercheParSource.store";
-import { DroitAcces, Source } from "../../src/Catalogue.types";
+import { rechercheParSource } from "../../src/catalogue/stores/rechercheParSource.store";
+import { DroitAcces, Source } from "../../src/catalogue/Catalogue.types";
 import { guidesTechniques, mss } from "./objetsExemples";
-import { rechercheParDroitAcces } from "../../src/stores/rechercheParDroitAcces.store";
+import { rechercheParDroitAcces } from "../../src/catalogue/stores/rechercheParDroitAcces.store";
 import { get } from "svelte/store";
 
 describe("La recherche par source", () => {

@@ -1,7 +1,7 @@
 import { mount } from "svelte";
-import ExtraitItems from "./ExtraitItems.svelte";
-import type {ItemCyber} from "./Catalogue.types";
-import {catalogueStore} from "./stores/catalogue.store";
+import ExtraitItems from "./catalogue/ExtraitItems.svelte";
+import type {ItemCyber} from "./catalogue/Catalogue.types";
+import {catalogueStore} from "./catalogue/stores/catalogue.store";
 
 const donnees = document.getElementById("donnees")!.textContent;
 if (!donnees) throw new Error("Impossible de trouver les données du catalogue");
