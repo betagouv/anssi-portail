@@ -11,16 +11,16 @@
 </script>
 
 <div class="barre-filtre-besoin">
-    <FiltreBesoin filtreTousVisible={false} />
+  <FiltreBesoin filtreTousVisible={false} />
 </div>
 
 <h2>
-  Des services pour comprendre la cyber, être sensibilisé, mais aussi se former
-  et former ses équipes à la cybersécurité.
+  Des services et ressources pour sensibiliser aux risques cyber et aux bonnes
+  pratiques et former ses équipes aux enjeux de cybersécurité.
 </h2>
 
 <div class="services">
-    {#each $catalogueFiltre.resultats as itemCyber}
-      <CarteItem {itemCyber}></CarteItem>
-    {/each}
+  {#each $catalogueFiltre.resultats as itemCyber}
+    <CarteItem {itemCyber}></CarteItem>
+  {/each}
 </div>
