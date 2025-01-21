@@ -5,10 +5,10 @@ import {
   Source,
   ThemeCyber,
   Typologie,
-} from "../../src/catalogue/Catalogue.types";
-import { nombreResultats } from "../../src/catalogue/stores/nombreResultats.store";
+} from "../../../src/catalogue/Catalogue.types";
+import { nombreResultats } from "../../../src/catalogue/stores/nombreResultats.store";
 import { get } from "svelte/store";
-import { catalogueStore } from "../../src/catalogue/stores/catalogue.store";
+import { catalogueStore } from "../../../src/catalogue/stores/catalogue.store";
 import {
   demainSpecialisteCyber,
   guidesTechniques,
