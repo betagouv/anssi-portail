@@ -1,5 +1,6 @@
 <script lang="ts">
   import { questions } from "./TestMaturite.donnees";
+  import RadarMaturite from "./RadarMaturite.svelte";
 
   let questionCourante = 0;
   let reponseDonnee: number | null = null;
@@ -20,6 +21,10 @@
 </script>
 
 <h1>Testez votre maturité Cyber</h1>
+
+<RadarMaturite></RadarMaturite>
+
+
 <p>Étape {questionCourante + 1} sur 7</p>
 <h5>{questions[questionCourante].titre}</h5>
 <h4>{@html questions[questionCourante].question}</h4>
