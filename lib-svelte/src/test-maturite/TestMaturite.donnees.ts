@@ -1,4 +1,4 @@
-type Question = {
+export type Question = {
   titre: string;
   question: string;
   propositions: string[];
@@ -75,5 +75,10 @@ export const questions: Question[] = [
       "Un audit de sécurité approfondi a été réalisé et l'organisation commence à disposer de produits et de services cyber en matière de défense et de résilience (SOCs, CERTs, etc.)",
       "L'organisation dispose d'un panel complet de services et d'outils cyber intégrés répondant à l'ensemble des besoins de l'organisation et réalise des audits réguliers.",
     ],
+  },
+  {
+    titre: "Adoption de solutions cyber",
+    question: "Informations complémentaires",
+    propositions: [],
   },
 ];
