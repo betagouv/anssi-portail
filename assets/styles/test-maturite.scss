@@ -23,6 +23,21 @@
       margin-top: 16px;
     }
   }
+
+  .informations-complementaires {
+    label {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .choix-taille {
+      border: none;
+
+      label {
+        flex-direction: row;
+      }
+    }
+  }
 }
 
 #radar {
