@@ -52,4 +52,28 @@ export const questions: Question[] = [
       "L'organisation dispose d'un(e) directeur(ice) cyber siégeant au CODIR et d'une ou plusieurs équipes cyber pouvant inclure des compétences en matière de cyberdéfense.",
     ],
   },
+  {
+    titre: "Budget",
+    question:
+      "Quels sont les moyens budgétaires alloués à la cybersécurité&nbsp;?",
+    propositions: [
+      "Aucune dépense spécifique à la cybersécurité n'a été effectuée.",
+      "Des dépenses dédiées à la cybersécurité peuvent être occasionnellement autorisées.",
+      "Une part du budget informatique est alloué à la cybersécurité.",
+      "Une ligne budgétaire dédiée à la cybersécurité est établie à l'échelle de l'organisation.",
+      "La ligne dédiée à la cybersécurité est égale > ou = à 10% du budget informatique de l'organisation.",
+    ],
+  },
+  {
+    titre: "Adoption de solutions cyber",
+    question:
+      "Quels produits ou services cyber sont mobilisés au service de la cybersécurité de l'organisation&nbsp;?",
+    propositions: [
+      "L'organisation dispose tout au plus d'un antivirus, installé sur les postes informatiques des agents.",
+      "Certains achats des solutions cyber ont été réalisés sur les conseils du prestataire informatique de l'organisation, sans répondre nécessairement à un plan d'action cyber.",
+      "L'organisation dispose de plusieurs outils adaptés aux actions prioritaires identifiées et permettant un premier niveau de supervision de la sécurité de l'organisation.",
+      "Un audit de sécurité approfondi a été réalisé et l'organisation commence à disposer de produits et de services cyber en matière de défense et de résilience (SOCs, CERTs, etc.)",
+      "L'organisation dispose d'un panel complet de services et d'outils cyber intégrés répondant à l'ensemble des besoins de l'organisation et réalise des audits réguliers.",
+    ],
+  },
 ];
