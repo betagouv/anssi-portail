@@ -17,7 +17,4 @@ sources:
 themes:
   - Protection
 parcours:
-  - DEBUTER_SENSIBILISER
-  - APPROFONDIR_SENSIBILISER
----
-
+  - APPROFONDIR_TESTER

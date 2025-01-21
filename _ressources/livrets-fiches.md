@@ -1,12 +1,10 @@
 ---
 layout: service
 typologie: ressource
-nom: Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber
-avecFicheDetaillee: true
-titreHtml: 
-description: S’informer sur la cybersécurité et ses métiers.
+nom: Livret et fiches découvrir la cybersécurité
+titreHtml: Livret et fiches découvrir la cybersécurité
+description: Découvrir le domaine de la cybersécurité et ses enjeux au travers de 13 fiches pédagogiques.
 illustration: demainspecialistecyber/demainspecialistecyber.png
-lien: https://www.demainspecialistecyber.fr
 format: Video # Rajoute le badge en haut à droite de l'illustration
 besoins:
   - SENSIBILISER_ET_FORMER
@@ -14,7 +12,6 @@ droitsAcces:
   - ACCES_LIBRE
 sources:
   - ANSSI
-  - Innovation ANSSI
 themes:
 parcours:
   - APPROFONDIR_SENSIBILISER
