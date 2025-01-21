@@ -1,12 +1,12 @@
 ---
 layout: service
 typologie: service
-nom: Mon&ZeroWidthSpace;Service&ZeroWidthSpace;Sécurisé
+nom: Mon&ZeroWidthSpace;Espace&ZeroWidthSpace;NIS2
 avecFicheDetaillee: true
-titreHtml: MonServiceSécurisé
-description: "MonServiceSécurisé aide les entités publiques à sécuriser et homologuer leurs services publics numériques&nbsp;: site web, applications mobiles, API."
-lien: https://monservicesecurise.cyber.gouv.fr/
-illustration: mss/mss.png
+titreHtml: MonEspaceNIS2
+description: "Se notifier et être guidé dans sa mise en conformité avec la directive NIS 2."
+lien: https://monespacenis2.cyber.gouv.fr/
+illustration: nis2/nis2.png
 cible:  |
     <p>Profils, métier, maturité</p>
     <p>Sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -16,7 +16,8 @@ sources:
 besoins: 
   - RENFORCER_LA_SECURITE
 droitsAcces:
-  - ENTITES_PUBLIQUES
+  - ACCES_LIBRE
+  - REGULES_NIS2
 liens:
     - accompagnement:   
       titre: Bénéficier d’un accompagnement
@@ -31,11 +32,8 @@ liens:
 ressources:
     - /ressources/demain-specialiste-cyber
 themes:
-  - Protection
+  - Gouvernance
 parcours:
-  - DEBUTER_SENSIBILISER
-  - DEBUTER_ETRE_ACCOMPAGNE
-  - APPROFONDIR_SENSIBILISER
 ---
 Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
