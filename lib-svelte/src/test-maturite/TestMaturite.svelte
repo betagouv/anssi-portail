@@ -11,20 +11,32 @@
 
   $: reponseDonnee =
     $questionnaireStore.toutesLesReponses[$questionnaireStore.questionCourante];
+
+  function doitMontrerPropositions() {
+    return $questionnaireStore.questionCourante < 6;
+  }
 </script>
 
 <div class="test-maturite">
   <h1>Testez votre maturité Cyber</h1>
-  <RadarMaturite></RadarMaturite>
+
   <p>Étape {$questionnaireStore.questionCourante + 1} sur 7</p>
+
   <h5>{questions[$questionnaireStore.questionCourante].titre}</h5>
   <h4>{@html questions[$questionnaireStore.questionCourante].question}</h4>
-  {#each questions[$questionnaireStore.questionCourante].propositions as proposition, index}
-    <label>
-      <input type="radio" bind:group={reponseDonnee} value={index} />
-      {proposition}
-    </label>
-  {/each}
+
+  <RadarMaturite />
+
+  {#if doitMontrerPropositions()}
+    {#each questions[$questionnaireStore.questionCourante].propositions as proposition, index}
+      <label>
+        <input type="radio" bind:group={reponseDonnee} value={index} />
+        {proposition}
+      </label>
+    {/each}
+  {:else}
+    <p>LE RESTE</p>
+  {/if}
 
   <pre>
     {JSON.stringify($questionnaireStore)}
