@@ -37,6 +37,13 @@
   &.actif {
     background: #fed980;
   }
+
+  &[disabled] {
+    border-color: #e5e5e5;
+    background: white;
+    color: #929292;
+    cursor: not-allowed;
+  }
 }
 
 .bouton.taille-moyenne {
