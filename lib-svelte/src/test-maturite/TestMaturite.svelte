@@ -1,36 +1,34 @@
 <script lang="ts">
   import { questions } from "./TestMaturite.donnees";
   import RadarMaturite from "./RadarMaturite.svelte";
+  import { questionnaireStore } from "./stores/questionnaire.store";
 
-  let questionCourante = 0;
-  let reponseDonnee: number | null = null;
-
-  let toutesReponses: (number | null)[] = Array(6);
-  toutesReponses.fill(null);
+  questionnaireStore.initialise();
 
   function reponds() {
-    toutesReponses[questionCourante] = reponseDonnee;
-    questionCourante++;
-    reponseDonnee = toutesReponses[questionCourante];
+    questionnaireStore.reponds(reponseDonnee);
   }
 
-  function reviensEnArriere() {
-    questionCourante--;
-    reponseDonnee = toutesReponses[questionCourante];
-  }
+  $: reponseDonnee =
+    $questionnaireStore.toutesLesReponses[$questionnaireStore.questionCourante];
 </script>
 
 <div class="test-maturite">
   <h1>Testez votre maturité Cyber</h1>
-  <RadarMaturite></RadarMaturite><p>Étape {questionCourante + 1} sur 7</p>
-  <h5>{questions[questionCourante].titre}</h5>
-  <h4>{@html questions[questionCourante].question}</h4>
-  {#each questions[questionCourante].propositions as proposition, index}
+  <RadarMaturite></RadarMaturite>
+  <p>Étape {$questionnaireStore.questionCourante + 1} sur 7</p>
+  <h5>{questions[$questionnaireStore.questionCourante].titre}</h5>
+  <h4>{@html questions[$questionnaireStore.questionCourante].question}</h4>
+  {#each questions[$questionnaireStore.questionCourante].propositions as proposition, index}
     <label>
       <input type="radio" bind:group={reponseDonnee} value={index} />
       {proposition}
     </label>
   {/each}
+
+  <pre>
+    {JSON.stringify($questionnaireStore)}
+  </pre>
 
   <div class="commandes">
     <a href="/">Retour à l'accueil</a>
@@ -38,8 +36,8 @@
       type="button"
       class="bouton secondaire taille-moyenne"
       value="Précédent"
-      disabled={questionCourante === 0}
-      on:click={reviensEnArriere}
+      disabled={$questionnaireStore.questionCourante === 0}
+      on:click={questionnaireStore.reviensEnArriere}
     />
     <input
       type="button"
