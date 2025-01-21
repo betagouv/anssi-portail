@@ -1,5 +1,6 @@
 ---
 ---
+
 .bouton {
   font-family: "Marianne";
   display: flex;
@@ -34,8 +35,14 @@
   line-height: 1.5rem;
 
   &.actif {
-    background: #FED980;
+    background: #fed980;
   }
+}
+
+.bouton.taille-moyenne {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding: 8px 16px;
 }
 
 .groupe-boutons {

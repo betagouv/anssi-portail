@@ -1,11 +1,28 @@
 ---
 ---
 
-@import 'responsive';
+@import "responsive";
 
-label {
-  display: block;
-  cursor: pointer;
+.test-maturite {
+  padding: 0 var(--gouttiere);
+
+  label {
+    display: block;
+    cursor: pointer;
+  }
+
+  .commandes {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top: 24px;
+    gap: 16px;
+    margin-bottom: 32px;
+    text-align: center;
+
+    a {
+      margin-top: 16px;
+    }
+  }
 }
 
 #radar {

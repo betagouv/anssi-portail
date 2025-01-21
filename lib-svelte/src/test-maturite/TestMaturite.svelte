@@ -20,32 +20,33 @@
   }
 </script>
 
-<h1>Testez votre maturité Cyber</h1>
+<div class="test-maturite">
+  <h1>Testez votre maturité Cyber</h1>
+  <RadarMaturite></RadarMaturite><p>Étape {questionCourante + 1} sur 7</p>
+  <h5>{questions[questionCourante].titre}</h5>
+  <h4>{@html questions[questionCourante].question}</h4>
+  {#each questions[questionCourante].propositions as proposition, index}
+    <label>
+      <input type="radio" bind:group={reponseDonnee} value={index} />
+      {proposition}
+    </label>
+  {/each}
 
-<RadarMaturite></RadarMaturite>
-
-
-<p>Étape {questionCourante + 1} sur 7</p>
-<h5>{questions[questionCourante].titre}</h5>
-<h4>{@html questions[questionCourante].question}</h4>
-{#each questions[questionCourante].propositions as proposition, index}
-  <label>
-    <input type="radio" bind:group={reponseDonnee} value={index} />
-    {proposition}
-  </label>
-{/each}
-
-<input
-  type="button"
-  class="bouton secondaire"
-  value="Précédent"
-  disabled={questionCourante === 0}
-  on:click={reviensEnArriere}
-/>
-<input
-  type="button"
-  class="bouton primaire"
-  value="Question suivante"
-  disabled={reponseDonnee === null}
-  on:click={reponds}
-/>
+  <div class="commandes">
+    <a href="/">Retour à l'accueil</a>
+    <input
+      type="button"
+      class="bouton secondaire taille-moyenne"
+      value="Précédent"
+      disabled={questionCourante === 0}
+      on:click={reviensEnArriere}
+    />
+    <input
+      type="button"
+      class="bouton primaire taille-moyenne"
+      value="Question suivante"
+      disabled={reponseDonnee === null}
+      on:click={reponds}
+    />
+  </div>
+</div>
