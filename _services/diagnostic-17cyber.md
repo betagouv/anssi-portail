@@ -1,8 +1,8 @@
 ---
 layout: service
 typologie: service
-nom: Diagnostic 17Cyber
-titreHtml: Diagnostic 17Cyber
+nom: 17Cyber
+titreHtml: 17Cyber
 description: "Être conseillé et orienté si je pense être ou si je suis victime d’un acte de cybermalveillance."
 illustration: diagnostic-17cyber/diagnostic-17cyber.png
 sources:

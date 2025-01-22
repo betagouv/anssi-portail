@@ -1,8 +1,8 @@
 ---
 layout: service
 typologie: service
-nom: SENS&ZeroWidthSpace;CYBER
-titreHtml: SENSCYBER
+nom: Sens&ZeroWidthSpace;Cyber
+titreHtml: SensCyber
 description: "Découvrir les cyberattaques, les bonnes pratiques. Apprendre et tester vos connaissances."
 lien: https://www.cybermalveillance.gouv.fr/sens-cyber/apprendre/
 illustration: sens-cyber/sens-cyber.png

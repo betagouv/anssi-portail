@@ -1,7 +1,7 @@
 ---
 layout: service
 typologie: ressource
-nom: DNewsletter Industrie
+nom: Newsletter Industrie
 titreHtml: Newsletter Industrie
 description: Rester informer des actualités cyber du secteur industriel. Destinée aux personnes qui conçoivent des solutions cyber.
 illustration: nl-industries/nl-industries.png
