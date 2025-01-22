@@ -16,4 +16,5 @@ droitsAcces:
 themes:
   - Defense
   - Resilience
----
+parcours:
+  - APPROFONDIR_ANTICIPER

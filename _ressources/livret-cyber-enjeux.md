@@ -15,5 +15,5 @@ sources:
   - ANSSI
 themes:
 parcours:
-  - APPROFONDIR_SENSIBILISER
+  - APPROFONDIR_PROGRESSER
 ---

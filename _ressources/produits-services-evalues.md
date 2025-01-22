@@ -4,7 +4,7 @@ typologie: ressource
 nom: Produits et services évalués
 titreHtml: Produits et services évalués
 description: Accéder à la liste des produits et services certifiés et qualifiés par l’ANSSI.
-illustration: demainspecialistecyber/demainspecialistecyber.png
+illustration: produit-services-evalues/produit-services-evalues.png
 format: Video # Rajoute le badge en haut à droite de l'illustration
 besoins:
   - RENFORCER_LA_SECURITE
@@ -17,4 +17,4 @@ themes:
   - Protection
   - Defense
   - Resilience
----
+

@@ -19,5 +19,4 @@ themes:
   - Defense
 parcours:
   - DEBUTER_ETRE_ACCOMPAGNE
-  - APPROFONDIR_ETRE_ACCOMPAGNE
----
+  - APPROFONDIR_PILOTER
