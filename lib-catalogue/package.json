@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "watch": "vite build -w",
+    "watch": "vite build -w --minify false",
     "test": "vitest"
   },
   "devDependencies": {
