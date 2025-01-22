@@ -26,7 +26,7 @@ export const nombreResultats = derived<
   ) => Object.fromEntries(Object.values(type).map((f) => [f, calculNombre(f)]));
 
   const nombreParDroitAcces = (droitAcces: DroitAcces) =>
-    $catalogueStore.filter((item) => item.droitsAcces.includes(droitAcces))
+    $catalogueStore.filter((item) => item.droitsAcces && item.droitsAcces.includes(droitAcces))
       .length;
 
   const nombreParTypologie = (typologie: Typologie) =>
