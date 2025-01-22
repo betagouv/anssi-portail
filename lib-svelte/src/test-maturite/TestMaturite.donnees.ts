@@ -4,6 +4,21 @@ export type Question = {
   propositions: string[];
 };
 
+export type IdRubrique =
+  | "pilotage"
+  | "budget"
+  | "ressources-humaines"
+  | "adoption-solutions"
+  | "prise-en-compte-risque"
+  | "posture";
+
+export type Rubrique = {
+  id: IdRubrique;
+  label: string;
+  ancrageTexte: "start" | "end";
+  alignementVertical: "middle" | "auto" | "hanging";
+};
+
 export const questions: Question[] = [
   {
     titre: "Prise en compte du risque",
