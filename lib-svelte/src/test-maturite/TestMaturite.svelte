@@ -7,7 +7,7 @@
   import RadarMaturite from "./RadarMaturite.svelte";
   import { questionnaireStore } from "./stores/questionnaire.store";
 
-    let afficheResultats = false;
+    let afficheResultats = true;
 
   questionnaireStore.initialise();
 
@@ -40,7 +40,7 @@
 
   $: idNiveau = calculeIdNiveau(moyenne);
 
-  $: niveau = niveauxMaturite[idNiveau];
+  $: niveau = niveauxMaturite.find(niveau=>niveau.id ===idNiveau) || niveauxMaturite[0];
 
   function obtiensResultat() {
     afficheResultats = true;

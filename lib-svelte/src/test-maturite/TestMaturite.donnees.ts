@@ -27,32 +27,32 @@ export type IdNiveau =
   | "optimal";
 
 export type NiveauMaturite = {
+  id: IdNiveau;
   label: string;
-  index: number;
 };
 
-export const niveauxMaturite: Record<IdNiveau, NiveauMaturite> = {
-  insuffisant: {
+export const niveauxMaturite: NiveauMaturite[] = [
+  {
+    id: "insuffisant",
     label: "Insuffisant",
-    index: 0,
   },
-  emergent: {
+  {
+    id: "emergent",
     label: "Émergent",
-    index: 1,
   },
-  intermediaire: {
+  {
+    id: "intermediaire",
     label: "Intermédiaire",
-    index: 2,
   },
-  confirme: {
+  {
+    id: "confirme",
     label: "Confirmé",
-    index: 3,
   },
-  optimal: {
+  {
+    id: "optimal",
     label: "Optimal",
-    index: 4,
   },
-};
+];
 
 export const questions: Question[] = [
   {
