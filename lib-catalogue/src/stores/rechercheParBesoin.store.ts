@@ -8,7 +8,7 @@ export const rechercheParBesoin = {
   set: selectionBesoins.set,
   reinitialise: () => selectionBesoins.set(null),
   ok: (item: ItemCyber) =>
-    !!item.besoins.find(
+    item.besoins && !!item.besoins.find(
       (b) => !get(selectionBesoins) || get(selectionBesoins) === b,
     ),
 };

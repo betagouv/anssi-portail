@@ -1,4 +1,4 @@
-import {beforeEach, describe, expect, it} from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { get } from "svelte/store";
 import {
   demainSpecialisteCyber,
@@ -26,7 +26,7 @@ import { rechercheParTheme } from "../../src/stores/rechercheParTheme.store";
 import { limitationRecherche } from "../../src/stores/limitationRecherche";
 
 describe("Le store du catalogue filtré", () => {
-  beforeEach(()=>{
+  beforeEach(() => {
     rechercheParBesoin.set(null);
     rechercheParDroitAcces.set([]);
     rechercheParTypologie.set([]);
@@ -34,7 +34,7 @@ describe("Le store du catalogue filtré", () => {
     rechercheParSource.set([]);
     rechercheParTheme.set([]);
     limitationRecherche.set(0);
-  })
+  });
 
   describe("sur application d'un filtre de besoin", () => {
     it("conserve uniquement les items correspondants", () => {
@@ -54,6 +54,17 @@ describe("Le store du catalogue filtré", () => {
       const { resultats } = get(catalogueFiltre);
 
       expect(resultats.length).toBe(2);
+    });
+
+    it("ne conserve pas les items sans besoin", () => {
+      let sansBesoin = {...mss()};
+      delete sansBesoin.besoins;
+      catalogueStore.initialise([sansBesoin], []);
+      rechercheParBesoin.set(BesoinCyber.RENFORCER_LA_SECURITE);
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(0);
     });
   });
 
