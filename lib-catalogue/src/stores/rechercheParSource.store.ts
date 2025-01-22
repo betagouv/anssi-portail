@@ -27,6 +27,7 @@ export const rechercheParSource = {
   ok: (item: ItemCyber) => {
     const sources = get(rechercheParSource);
     if (sources.length === 0) return true;
+    if (!item.sources) return false;
     if (item.sources.includes(Source.ANSSI)) {
       const secondaire = item.sources.find((s) => s !== Source.ANSSI);
       if (secondaire) {

@@ -37,4 +37,15 @@ describe("La recherche par source", () => {
 
     expect(get(rechercheParSource)).toEqual([]);
   });
+
+  it("ne retourne pas un item sans source", () => {
+    rechercheParSource.set([Source.PARTENAIRES]);
+    let sansSource ={... guidesTechniques()};
+    delete sansSource.sources
+
+    const resultat = rechercheParSource.ok(sansSource);
+
+    expect(resultat).toBe(false);
+  });
+
 });
