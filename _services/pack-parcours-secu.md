@@ -12,5 +12,4 @@ themes:
   - Gouvernance
   - Resilience
   - Defense
-
 ---
