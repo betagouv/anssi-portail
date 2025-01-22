@@ -47,6 +47,18 @@ describe("Le store du nombre de résultats", () => {
       expect(parDroitAcces[DroitAcces.ENTITES_PUBLIQUES]).toBe(0);
       expect(parDroitAcces[DroitAcces.REGULES_NIS2]).toBe(1);
     });
+
+    it("lorsque un service n'a pas de droit d'acces", ()=>{
+      const sansDroitAcces = monEspaceNIS2();
+      delete sansDroitAcces.droitsAcces
+      catalogueStore.initialise([sansDroitAcces], []);
+
+      let parDroitAcces = get(nombreResultats).parDroitAcces;
+
+      expect(parDroitAcces[DroitAcces.ACCES_LIBRE]).toBe(0);
+      expect(parDroitAcces[DroitAcces.ENTITES_PUBLIQUES]).toBe(0);
+      expect(parDroitAcces[DroitAcces.REGULES_NIS2]).toBe(0);
+    })
   });
 
   describe("peut retourner le nombre par typologie", () => {
