@@ -88,7 +88,7 @@
         <text x={coordonnees.x} y={coordonnees.y} text-anchor={rubrique.ancrageTexte}
               dominant-baseline={rubrique.alignementVertical} font-size="12" fill="#0D0C21">
             <tspan>{rubrique.label} -</tspan>
-            <tspan font-weight="bold">5/5</tspan>
+            <tspan font-weight="bold">{resultats[rubrique.id]}/5</tspan>
         </text>
     {/each}
 </svg>
