@@ -36,7 +36,7 @@ export const nombreResultats = derived<
     $catalogueStore.filter((item) => item.format === format).length;
 
   const nombreParSource = (source: Source) =>
-    $catalogueStore.filter((item) => item.sources.includes(source)).length;
+    $catalogueStore.filter((item) => item.sources && item.sources.includes(source)).length;
 
   const nombreParTheme = (theme: ThemeCyber) =>
     $catalogueStore.filter((item) => item.themes && item.themes.includes(theme))

@@ -110,6 +110,17 @@ describe("Le store du nombre de résultats", () => {
       expect(parSource[Source.ANSSI]).toBe(0);
       expect(parSource[Source.PARTENAIRES]).toBe(1);
     });
+
+    it("lorsque un service n'a pas de source", ()=>{
+      const sansSource = monEspaceNIS2();
+      delete sansSource.sources
+      catalogueStore.initialise([sansSource], []);
+
+      let parSource = get(nombreResultats).parSource;
+
+      expect(parSource[Source.ANSSI]).toBe(0);
+      expect(parSource[Source.PARTENAIRES]).toBe(0);
+    })
   });
 
   describe("peut retourner le nombre par thème", () => {
