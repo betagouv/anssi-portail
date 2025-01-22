@@ -15,6 +15,4 @@ sources:
 themes:
   - Defense
   - Resilience
-parcours:
-  - APPROFONDIR_PILOTER
 ---

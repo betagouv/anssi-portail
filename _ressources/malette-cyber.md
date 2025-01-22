@@ -13,7 +13,4 @@ droitsAcces:
   - ACCES_LIBRE
 sources:
   - Cybermalveillance
-parcours:
-  - DEBUTER_SENSIBILISER
-  - APPROFONDIR_SENSIBILISER
 ---

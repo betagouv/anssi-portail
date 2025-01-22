@@ -18,4 +18,5 @@ themes:
   - Resilience
 parcours:
   - APPROFONDIR_ANTICIPER
+  - DEBUTER_ETRE_ACCOMPAGNE
 ---
