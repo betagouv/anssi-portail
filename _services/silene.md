@@ -1,8 +1,8 @@
 ---
 layout: service
 typologie: service
-nom: Silène
-titreHtml: Silène
+nom: SILENE
+titreHtml: SILENE
 description: "Cartographier la surface d’exposition sur internet de ses services et avoir de la visibilité sur leur niveau d’exposition."
 lien: https://club.ssi.gouv.fr/beta/#/login
 illustration: silene/silene.png
