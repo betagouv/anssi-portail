@@ -6,7 +6,7 @@ titreHtml: Le guide d'hygiène informatique
 description: Mettre en œuvre les 42 mesures cyber essentielles
 illustration: guides-hygiene/guides-hygiene.jpg
 lien : https://cyber.gouv.fr/sites/default/files/2017/01/guide_hygiene_informatique_anssi.pdf
-format: Pdf # Rajoute le badge en haut à droite de l'illustration
+format: PDF # Rajoute le badge en haut à droite de l'illustration
 besoins:
   - RENFORCER_LA_SECURITE
 droitsAcces:

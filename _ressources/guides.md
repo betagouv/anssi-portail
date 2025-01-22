@@ -5,7 +5,7 @@ nom: Guides techniques
 titreHtml: Guides techniques
 description: Suivre les recommandations de l’ANSSI pour la sécurisation de ses systèmes d’information et accéder à la doctrine technique de l’ANSSI.
 illustration: guides/guides.png
-format: Pdf # Rajoute le badge en haut à droite de l'illustration
+format: PDF # Rajoute le badge en haut à droite de l'illustration
 besoins:
   - RENFORCER_LA_SECURITE
 droitsAcces:
