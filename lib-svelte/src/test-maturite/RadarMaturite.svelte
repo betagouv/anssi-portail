@@ -1,18 +1,29 @@
 <script lang="ts">
-    export let resultats = [2, 1, 4, 5, 3, 5]
-    export let rubriques = [{
+    import type {IdRubrique, Rubrique} from "./TestMaturite.donnees";
+
+    export let resultats: Record<IdRubrique, number>
+    export let rubriques: Rubrique[] = [{
+        id: "pilotage",
         label: "Pilotage de la sécurité",
         ancrageTexte: "start",
         alignementVertical: "middle"
     }, {
+        id: "budget",
         label: "Budget", ancrageTexte: "start", alignementVertical: "hanging"
     }, {
+        id: "ressources-humaines",
         label: "Ressources humaines",
         ancrageTexte: "end", alignementVertical: "hanging"
-    }, {label: "Adoption des solutions cyber", ancrageTexte: "end", alignementVertical: "middle"}, {
+    }, {
+        id: "adoption-solutions",
+        label: "Adoption des solutions cyber",
+        ancrageTexte: "end",
+        alignementVertical: "middle"
+    }, {
+        id: "prise-en-compte-risque",
         label: "Prise en compte du risque",
         ancrageTexte: "end", alignementVertical: "auto"
-    }, {label: "Posture à l'égard de la cyber", ancrageTexte: "start", alignementVertical: "auto"}]
+    }, {id: "posture", label: "Posture à l'égard de la cyber", ancrageTexte: "start", alignementVertical: "auto"}]
 
     const tailleRadar = 200;
     const polaireVersCartesien = (r: number, theta: number) => ({
@@ -23,7 +34,8 @@
 
     const tableauEnPointsPolygone = (coordonnees: Point[]) => coordonnees.map((c) => `${c.x},${c.y}`).join(" ")
 
-    const pointsDuPolygone: Point[] = resultats.map((valeur, index) => {
+    const pointsDuPolygone: Point[] = new Array(6).fill(0).map((_, index) => {
+        const valeur = resultats[rubriques[index].id]
         const r = valeur / 5 * tailleRadar
         const theta = (index * 2 * Math.PI) / 6
         return polaireVersCartesien(r, theta)
@@ -75,7 +87,7 @@
         {@const coordonnees = polaireVersCartesien(tailleRadar * 1.1, index * 2 * Math.PI / 6)}
         <text x={coordonnees.x} y={coordonnees.y} text-anchor={rubrique.ancrageTexte}
               dominant-baseline={rubrique.alignementVertical} font-size="12" fill="#0D0C21">
-            <tspan>{rubrique.label} - </tspan>
+            <tspan>{rubrique.label} -</tspan>
             <tspan font-weight="bold">5/5</tspan>
         </text>
     {/each}
