@@ -19,6 +19,41 @@ export type Rubrique = {
   alignementVertical: "middle" | "auto" | "hanging";
 };
 
+export type IdNiveau =
+  | "insuffisant"
+  | "emergent"
+  | "intermediaire"
+  | "confirme"
+  | "optimal";
+
+export type NiveauMaturite = {
+  label: string;
+  index: number;
+};
+
+export const niveauxMaturite: Record<IdNiveau, NiveauMaturite> = {
+  insuffisant: {
+    label: "Insuffisant",
+    index: 0,
+  },
+  emergent: {
+    label: "Émergent",
+    index: 1,
+  },
+  intermediaire: {
+    label: "Intermédiaire",
+    index: 2,
+  },
+  confirme: {
+    label: "Confirmé",
+    index: 3,
+  },
+  optimal: {
+    label: "Optimal",
+    index: 4,
+  },
+};
+
 export const questions: Question[] = [
   {
     titre: "Prise en compte du risque",
