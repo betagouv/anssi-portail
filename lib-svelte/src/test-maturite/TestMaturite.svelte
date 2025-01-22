@@ -6,8 +6,9 @@
   } from "./TestMaturite.donnees";
   import RadarMaturite from "./RadarMaturite.svelte";
   import { questionnaireStore } from "./stores/questionnaire.store";
+  import TuilesMaturite from "./TuilesMaturite.svelte";
 
-    let afficheResultats = true;
+  let afficheResultats = false;
 
   questionnaireStore.initialise();
 
@@ -59,6 +60,7 @@
   {#if afficheResultats}
     <h1>Résultat de maturité cyber</h1>
     <h2>Niveau de maturité le plus proche : {niveau.label}</h2>
+    <TuilesMaturite niveauCourant={niveau}/>
 
     <RadarMaturite {resultats} />
   {:else}
