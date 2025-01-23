@@ -8,6 +8,7 @@
   import { questionnaireStore } from "./stores/questionnaire.store";
   import TuilesMaturite from "./TuilesMaturite.svelte";
   import Hero from "../Hero.svelte";
+  import Etapier from "../Etapier.svelte";
 
   let afficheResultats = false;
 
@@ -66,9 +67,8 @@
 
     <RadarMaturite {resultats} />
   {:else}
-    <h1>Testez votre maturité Cyber</h1>
-
-    <p>Étape {$questionnaireStore.questionCourante + 1} sur 7</p>
+    <p class="etape">Étape {$questionnaireStore.questionCourante + 1} sur 7</p>
+    <Etapier etapeCourante={$questionnaireStore.questionCourante} nombreEtapes={7}/>
 
     <h5>{questions[$questionnaireStore.questionCourante].titre}</h5>
     <h4>{@html questions[$questionnaireStore.questionCourante].question}</h4>

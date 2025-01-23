@@ -402,7 +402,7 @@ footer {
     max-width: 282px;
     align-self: flex-start;
 
-    @include  a-partir-de(lg) {
+    @include a-partir-de(lg) {
       max-width: none;
     }
 
@@ -659,5 +659,20 @@ footer {
     color: #3A3A3A;
     font-size: 0.875rem;
     line-height: 1.5rem;
+  }
+}
+
+.etapier {
+  display: flex;
+  gap: 8px;
+
+  span {
+    flex-grow: 1;
+    height: 8px;
+    background-color: #eee;
+  }
+
+  .accessible {
+    background-color: var(--noir);
   }
 }
