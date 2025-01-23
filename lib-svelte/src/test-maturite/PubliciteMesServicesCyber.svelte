@@ -1,0 +1,42 @@
+<script lang="ts">
+</script>
+
+<h2>Accédez à votre espace Mes&ZeroWidthSpace;Services&ZeroWidthSpace;Cyber</h2>
+<div class="cartes">
+  <div class="carte">
+    <img
+      src="/assets/images/test-maturite/publicite-msc/sauvegarde.svg"
+      alt=""
+    />
+    <h4>Sauvegarder le résultat de votre test</h4>
+    <p>
+      Retrouvez l’analyse complète de votre test, prête à être téléchargée en
+      PDF et partagée avec vos collègues.
+    </p>
+  </div>
+  <div class="carte">
+    <img
+      src="/assets/images/test-maturite/publicite-msc/progression.svg"
+      alt=""
+    />
+    <h4>Suivez votre progression</h4>
+    <p>
+      Gagnez en maturité cyber grâce à nos parcours adaptés et suivez
+      l'évolution de la maturité cyber de votre organisation.iption.
+    </p>
+  </div>
+  <div class="carte">
+    <img
+      src="/assets/images/test-maturite/publicite-msc/comparaison.svg"
+      alt=""
+    />
+    <h4>Comparez votre maturité cyber</h4>
+    <p>
+      Situez votre organisation par rapport aux autres entités de votre région,
+      votre secteur ou de taille similaire afin d'identifier vos points forts et
+      vos axes d'amélioration (à venir).
+    </p>
+  </div>
+</div>
+
+<a href="#" class="bouton primaire">Connectez-vous sur MesServicesCyber</a>

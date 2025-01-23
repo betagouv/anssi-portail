@@ -1,9 +1,9 @@
 <script lang="ts">
   import Hero from "../Hero.svelte";
   import TuilesMaturite from "./TuilesMaturite.svelte";
-  import RadarMaturite from "./RadarMaturite.svelte";
   import { type IdNiveau, niveauxMaturite } from "./TestMaturite.donnees";
   import { questionnaireStore } from "./stores/questionnaire.store";
+  import PubliciteMesServicesCyber from "./PubliciteMesServicesCyber.svelte";
 
   $: resultats = {
     pilotage: $questionnaireStore.toutesLesReponses[2] + 1,
@@ -49,7 +49,11 @@
     </div>
 
     <a href="#" target="_blank">Les niveaux de maturité cyber</a>
-
-    <RadarMaturite {resultats} />
   </div>
 </div>
+
+<section class="pour-aller-plus-loin">
+  <div class="contenu-section">
+    <PubliciteMesServicesCyber />
+  </div>
+</section>
