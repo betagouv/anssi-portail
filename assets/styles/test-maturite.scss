@@ -198,6 +198,7 @@ h5 {
       line-height: 2rem;
       margin-bottom: 8px;
     }
+
     p {
       font-size: 1.125rem;
       line-height: 1.75rem;
@@ -279,6 +280,13 @@ h5 {
         display: block;
       }
     }
+
+    .libelle-lettre {
+      font-weight: bold;
+      @include a-partir-de(sm) {
+        display: none;
+      }
+    }
   }
 
   ul {
@@ -293,6 +301,9 @@ h5 {
     li {
       padding: 8px;
       margin: 0;
+      .lettre {
+        font-weight: bold;
+      }
     }
   }
 }
