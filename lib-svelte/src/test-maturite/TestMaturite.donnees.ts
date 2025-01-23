@@ -18,6 +18,7 @@ export type Rubrique = {
   label: string;
   ancrageTexte: "start" | "end";
   alignementVertical: "middle" | "auto" | "hanging";
+  lettre: "A" | "B" | "C" | "D" | "E" | "F";
 };
 
 export type IdNiveau =
