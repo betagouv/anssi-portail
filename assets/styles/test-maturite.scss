@@ -205,6 +205,56 @@ h5 {
   }
 }
 
+.pour-aller-plus-loin {
+  padding: 48px var(--gouttiere);
+  background: #0d0c21 url("/assets/images/motif-fond-service-opacite-16.png");
+  color: white;
+
+  h2 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .cartes {
+    display: flex;
+    gap: 16px;
+    color: var(--noir);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+
+    .carte {
+      flex: 0 0 282px;
+      background: white;
+      border-radius: 8px;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      scroll-snap-align: center;
+      box-sizing: border-box;
+      text-align: center;
+      margin: 32px 0 16px;
+
+      img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 16px;
+      }
+
+      h5 {
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  a {
+    margin: 96px auto 16px;
+  }
+}
+
 #radar {
   width: 400px;
   height: 400px;
