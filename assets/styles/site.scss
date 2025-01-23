@@ -21,6 +21,24 @@ body {
   margin: 0;
 }
 
+a {
+  color: var(--noir);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-bottom: 1px solid var(--noir);
+  width: fit-content;
+  text-decoration: none;
+
+  &[target="_blank"]:after {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url("/assets/images/icone-lien-externe.svg") no-repeat;
+  }
+}
+
 header {
   nav {
     padding-left: var(--gouttiere);
@@ -414,7 +432,7 @@ footer {
       border-radius: 6px;
       height: calc(100% - 6px);
       min-width: 6px;
-      background: #FED980;
+      background: #fed980;
     }
 
     p {
@@ -607,7 +625,6 @@ footer {
   }
 }
 
-
 .carte.service,
 .carte.ressource {
   @include a-partir-de(md) {
@@ -656,7 +673,7 @@ footer {
     margin: 0;
     padding: 0;
     font-weight: normal;
-    color: #3A3A3A;
+    color: #3a3a3a;
     font-size: 0.875rem;
     line-height: 1.5rem;
   }
@@ -681,7 +698,7 @@ select {
   padding: 8px 16px;
   border: none;
   border-radius: 4px 4px 0 0;
-  border-bottom: 2px solid #3A3A3A;
-  background: #EEE;
+  border-bottom: 2px solid #3a3a3a;
+  background: #eee;
   width: 100%;
 }
