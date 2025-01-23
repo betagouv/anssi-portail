@@ -10,6 +10,41 @@ p, h1, h2, h3, h4, h5 {
 .test-maturite {
   padding: 32px var(--gouttiere);
 
+  @include a-partir-de(lg) {
+    padding: 24px var(--gouttiere);
+  }
+
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @include a-partir-de(lg) {
+      flex-direction: row;
+    }
+  }
+
+  .formulaire {
+    @include a-partir-de(lg) {
+      padding: 24px 0;
+    }
+  }
+
+  .illustration {
+    display: none;
+    padding: 24px;
+    background-color: #FED980;
+    border-radius: 8px;
+    @include a-partir-de(lg) {
+      display: flex;
+      flex: 0 0;
+      img {
+        width: 261px;
+      }
+
+    }
+  }
+
   .etape {
     color: #3A3A3A;
     font-size: 0.875rem;
