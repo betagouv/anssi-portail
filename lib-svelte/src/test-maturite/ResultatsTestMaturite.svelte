@@ -4,6 +4,7 @@
   import { type IdNiveau, niveauxMaturite } from "./TestMaturite.donnees";
   import { questionnaireStore } from "./stores/questionnaire.store";
   import PubliciteMesServicesCyber from "./PubliciteMesServicesCyber.svelte";
+  import RadarMaturite from "./RadarMaturite.svelte";
 
   $: resultats = {
     pilotage: $questionnaireStore.toutesLesReponses[2] + 1,
@@ -55,5 +56,12 @@
 <section class="pour-aller-plus-loin">
   <div class="contenu-section">
     <PubliciteMesServicesCyber />
+  </div>
+</section>
+
+<section class="repartition">
+  <div class="contenu-section">
+    <h2>Répartition de votre maturité cyber</h2>
+    <RadarMaturite {resultats} />
   </div>
 </section>
