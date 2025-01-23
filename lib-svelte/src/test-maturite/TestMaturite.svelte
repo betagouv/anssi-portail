@@ -116,7 +116,7 @@
         <label>
           Quel est le secteur d’activité de votre organisation&nbsp;?
           <select>
-            <option></option>
+            <option disabled selected>Sélectionner une option</option>
             <option>Banques (secteur bancaire)</option>
             <option>Eau potable</option>
             <option>Eaux usées</option>
@@ -145,7 +145,7 @@
         <label>
           Dans quelle région se trouve votre organisation&nbsp;?
           <select>
-            <option></option>
+            <option disabled>Sélectionner une option</option>
             <option>Auvergne-Rhône-Alpes</option>
             <option>Bourgogne-Franche-Comté</option>
             <option>Bretagne</option>
