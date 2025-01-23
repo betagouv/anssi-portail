@@ -1,3 +1,7 @@
+<script lang="ts">
+    export let titre:string;
+    export let description:string;
+</script>
 <section class="chapeau fond-sombre">
     <div class="contenu-section">
         <div class="fil-ariane">
@@ -5,9 +9,7 @@
             <span><img src="/assets/images/icone-chevron-droite.svg"/> </span>
             <span>Tester votre maturité cyber</span>
         </div>
-        <h1>Test de maturité cyber</h1>
-        <p>
-            Déterminez quel est  le niveau de  maturité cyber de votre organisation en 5 minutes.
-        </p>
+        <h1>{titre}</h1>
+        <p>{description}</p>
     </div>
 </section>

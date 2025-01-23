@@ -14,7 +14,7 @@
       class:courant={index === indexNiveauCourant}
       class:inactif={index > indexNiveauCourant}
     >
-      <img class="illustration" src="/assets/images/test-maturite/niveaux/{niveau.id}.svg" alt="Niveau de maturité">
+      <img class="plante" src="/assets/images/test-maturite/niveaux/{niveau.id}.svg" alt="Niveau de maturité">
       <img class="coche" alt="" src="/assets/images/coche-ronde.svg">
       <span>{niveau.label}</span>
     </div>
