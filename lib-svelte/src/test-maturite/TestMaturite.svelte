@@ -120,7 +120,7 @@
             <label>
               Dans quelle région se trouve votre organisation&nbsp;?
               <select>
-                <option disabled>Sélectionner une option</option>
+                <option disabled selected>Sélectionner une option</option>
                 <option>Auvergne-Rhône-Alpes</option>
                 <option>Bourgogne-Franche-Comté</option>
                 <option>Bretagne</option>
