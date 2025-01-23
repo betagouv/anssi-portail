@@ -170,6 +170,38 @@ h5 {
     h2 {
       margin-bottom: 40px;
     }
+
+    a {
+      margin: 16px 0;
+    }
+  }
+
+  .description-niveau {
+    margin: 32px 0;
+    padding-left: 22px;
+    position: relative;
+
+    &:before {
+      content: "";
+      display: block;
+      min-width: 6px;
+      position: absolute;
+      background-color: #fed980;
+      top: 6px;
+      left: 0;
+      border-radius: 6px;
+      height: calc(100% - 6px);
+    }
+
+    h5 {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
   }
 }
 

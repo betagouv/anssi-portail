@@ -30,35 +30,46 @@ export type IdNiveau =
 export type NiveauMaturite = {
   id: IdNiveau;
   label: string;
+  description: string;
 };
 
 export const niveauxMaturite: NiveauMaturite[] = [
   {
     id: "insuffisant",
     label: "Insuffisant",
+    description:
+      "Une conscience insuffisante des risques cyber pesant sur l'organisation. Pas ou peu de mesures spécifiques mises en oeuvre en matière de cybersécurité.",
   },
   {
     id: "emergent",
     label: "Émergent",
+    description:
+      "Une prise de conscience de l'existence de risques cyber pour l'organisation et une volonté de mettre en place des premières mesures cyber pertinentes.",
   },
   {
     id: "intermediaire",
     label: "Intermédiaire",
+    description:
+      "Une conscience partagée des risques cyber pour l'organisation et la volonté de formaliser un plan d'action cyber complet tout en ajustant les moyens en conséquence.",
   },
   {
     id: "confirme",
     label: "Confirmé",
+    description:
+      "Une cartographie précise de ses risques cyber pour l'organisation, un plan d'action cyber approfondi et des moyens humains et budgétaires dédiés.",
   },
   {
     id: "optimal",
     label: "Optimal",
+    description:
+      "Des objectifs de réduction des risques cyber intégrés à la stratégie de l'organisation. Des moyens humains, budgétaires conséquents, un plan d'action cyber exhaustif, adapté aux menaces stratégiques. ",
   },
 ];
 
 export const questions: Question[] = [
   {
     titre: "Prise en compte du risque",
-    id:"prise-en-compte-risque",
+    id: "prise-en-compte-risque",
     question:
       "Quelle est la perception des risques cyber au sein de votre organisation&nbsp;?",
     propositions: [
@@ -71,7 +82,7 @@ export const questions: Question[] = [
   },
   {
     titre: "Posture à l’égard de la cyber",
-    id:"posture",
+    id: "posture",
     question:
       "Quelle est la posture des responsables de votre organisation sur la cybersécurité&nbsp;?",
     propositions: [
@@ -84,7 +95,7 @@ export const questions: Question[] = [
   },
   {
     titre: "Pilotage de la sécurité",
-    id:"pilotage",
+    id: "pilotage",
     question:
       "Comment est organisé le pilotage de la cybersécurité de votre organisation&nbsp;?",
     propositions: [
@@ -97,7 +108,7 @@ export const questions: Question[] = [
   },
   {
     titre: "Ressources humaines",
-    id:"ressources-humaines",
+    id: "ressources-humaines",
     question: "Quels sont les moyens humains alloués à la cybersécurité&nbsp;?",
     propositions: [
       "L'organisation ne dispose d'aucune ressource dédiée à la cybersécurité.",
@@ -109,7 +120,7 @@ export const questions: Question[] = [
   },
   {
     titre: "Budget",
-    id:"budget",
+    id: "budget",
     question:
       "Quels sont les moyens budgétaires alloués à la cybersécurité&nbsp;?",
     propositions: [
@@ -122,7 +133,7 @@ export const questions: Question[] = [
   },
   {
     titre: "Adoption de solutions cyber",
-    id:"adoption-solutions",
+    id: "adoption-solutions",
     question:
       "Quels produits ou services cyber sont mobilisés au service de la cybersécurité de l'organisation&nbsp;?",
     propositions: [
@@ -137,6 +148,6 @@ export const questions: Question[] = [
     titre: "Adoption de solutions cyber",
     question: "Informations complémentaires",
     propositions: [],
-    id:"infos-complementaires"
+    id: "infos-complementaires",
   },
 ];

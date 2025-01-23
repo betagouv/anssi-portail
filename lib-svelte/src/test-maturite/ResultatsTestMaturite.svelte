@@ -43,6 +43,12 @@
   <div class="contenu-section">
     <h2>Niveau de maturité le plus proche : {niveau.label}</h2>
     <TuilesMaturite niveauCourant={niveau} />
+    <div class="description-niveau">
+      <h5>{niveau.label}</h5>
+      <p>{niveau.description}</p>
+    </div>
+
+    <a href="#" target="_blank">Les niveaux de maturité cyber</a>
 
     <RadarMaturite {resultats} />
   </div>
