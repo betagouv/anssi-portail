@@ -161,9 +161,10 @@ p, h1, h2, h3, h4, h5 {
 
   .contenu-section {
     padding: 16px 0;
+    overflow: hidden;
 
     h2 {
-      margin-bottom: 56px;
+      margin-bottom: 40px;
     }
   }
 }
@@ -176,8 +177,15 @@ p, h1, h2, h3, h4, h5 {
 .tuiles-niveau {
   display: flex;
   gap: 24px;
+  padding-top: 16px;
+  padding-bottom: 32px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 
   .tuile-niveau {
+    scroll-snap-align: center;
+
     border: 1px solid #DDDDDD;
     border-radius: 8px;
     padding: 16px;
