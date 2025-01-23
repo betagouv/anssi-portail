@@ -62,23 +62,26 @@
   }
 </script>
 
-<Hero
-  titre={afficheResultats
-    ? "Résultat de maturité cyber"
-    : "Test de maturité cyber"}
-  description={afficheResultats
-    ? "Ce résultat nous permet de vous guider et de vous fournir les informations et les outils essentiels pour agir et améliorer votre niveau de maturité cyber."
-    : "Déterminez quel est le niveau de maturité cyber de votre organisation en 5 minutes."}
-/>
-<div class="test-maturite">
-  <div class="contenu-section">
-    {#if afficheResultats}
-      <h1>Résultat de maturité cyber</h1>
+{#if afficheResultats}
+  <Hero
+    titre="Résultat de maturité cyber"
+    description="Ce résultat nous permet de vous guider et de vous fournir les informations et les outils essentiels pour agir et améliorer votre niveau de maturité cyber."
+  />
+  <div class="resultats-test">
+    <div class="contenu-section">
       <h2>Niveau de maturité le plus proche : {niveau.label}</h2>
       <TuilesMaturite niveauCourant={niveau} />
 
       <RadarMaturite {resultats} />
-    {:else}
+    </div>
+  </div>
+{:else}
+  <Hero
+    titre="Test de maturité cyber"
+    description="Déterminez quel est le niveau de maturité cyber de votre organisation en 5 minutes."
+  />
+  <div class="test-maturite">
+    <div class="contenu-section">
       <div class="formulaire">
         <p class="etape">
           Étape {$questionnaireStore.questionCourante + 1} sur 7
@@ -214,6 +217,6 @@
           src="/assets/images/test-maturite/illustration-{idQuestionCourante}.svg"
         />
       </div>
-    {/if}
+    </div>
   </div>
-</div>
+{/if}

@@ -23,7 +23,7 @@ p, h1, h2, h3, h4, h5 {
       flex-direction: row;
     }
 
-    @include a-partir-de(xl){
+    @include a-partir-de(xl) {
       gap: 126px;
     }
   }
@@ -45,7 +45,7 @@ p, h1, h2, h3, h4, h5 {
       img {
         width: 261px;
 
-        @include a-partir-de(xl){
+        @include a-partir-de(xl) {
           width: 432px;
         }
       }
@@ -152,6 +152,18 @@ p, h1, h2, h3, h4, h5 {
         align-items: center;
         gap: 8px;
       }
+    }
+  }
+}
+
+.resultats-test {
+  padding: 32px var(--gouttiere);
+
+  .contenu-section {
+    padding: 16px 0;
+
+    h2 {
+      margin-bottom: 56px;
     }
   }
 }
