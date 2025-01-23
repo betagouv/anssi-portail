@@ -22,6 +22,10 @@ p, h1, h2, h3, h4, h5 {
     @include a-partir-de(lg) {
       flex-direction: row;
     }
+
+    @include a-partir-de(xl){
+      gap: 126px;
+    }
   }
 
   .formulaire {
@@ -40,6 +44,10 @@ p, h1, h2, h3, h4, h5 {
       flex: 0 0;
       img {
         width: 261px;
+
+        @include a-partir-de(xl){
+          width: 432px;
+        }
       }
 
     }
