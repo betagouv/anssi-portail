@@ -43,7 +43,9 @@
 
   $: idNiveau = calculeIdNiveau(moyenne);
 
-  $: niveau = niveauxMaturite.find(niveau=>niveau.id ===idNiveau) || niveauxMaturite[0];
+  $: niveau =
+    niveauxMaturite.find((niveau) => niveau.id === idNiveau) ||
+    niveauxMaturite[0];
 
   function obtiensResultat() {
     afficheResultats = true;
@@ -58,28 +60,32 @@
   }
 </script>
 
-<Hero/>
+<Hero />
 <div class="test-maturite">
   {#if afficheResultats}
     <h1>Résultat de maturité cyber</h1>
     <h2>Niveau de maturité le plus proche : {niveau.label}</h2>
-    <TuilesMaturite niveauCourant={niveau}/>
+    <TuilesMaturite niveauCourant={niveau} />
 
     <RadarMaturite {resultats} />
   {:else}
     <p class="etape">Étape {$questionnaireStore.questionCourante + 1} sur 7</p>
-    <Etapier etapeCourante={$questionnaireStore.questionCourante} nombreEtapes={7}/>
-
     <h5>{questions[$questionnaireStore.questionCourante].titre}</h5>
+    <Etapier
+      etapeCourante={$questionnaireStore.questionCourante}
+      nombreEtapes={7}
+    />
     <h4>{@html questions[$questionnaireStore.questionCourante].question}</h4>
 
     {#if doitMontrerPropositions()}
-      {#each questions[$questionnaireStore.questionCourante].propositions as proposition, index}
-        <label>
-          <input type="radio" bind:group={reponseDonnee} value={index} />
-          {proposition}
-        </label>
-      {/each}
+      <div class="propositions">
+        {#each questions[$questionnaireStore.questionCourante].propositions as proposition, index}
+          <label>
+            <input type="radio" bind:group={reponseDonnee} value={index} />
+            <span>{proposition}</span>
+          </label>
+        {/each}
+      </div>
 
       <div class="commandes">
         <a href="/">Retour à l'accueil</a>
