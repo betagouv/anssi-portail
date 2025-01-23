@@ -255,9 +255,42 @@ h5 {
   }
 }
 
-#radar {
-  width: 400px;
-  height: 400px;
+.repartition {
+  padding: 48px var(--gouttiere) 64px;
+
+  .contenu-section {
+    h2 {
+      font-size: 1.75rem;
+      line-height: 2.25rem;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.radar-maturite {
+  #radar {
+    width: 100%;
+    height: 100%;
+
+    .libelle-long {
+      display: none;
+
+      @include a-partir-de(sm) {
+        display: block;
+      }
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 8px;
+      margin: 0;
+    }
+  }
 }
 
 .tuiles-niveau {
