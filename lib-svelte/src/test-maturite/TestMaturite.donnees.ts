@@ -2,6 +2,7 @@ export type Question = {
   titre: string;
   question: string;
   propositions: string[];
+  id: IdRubrique | "infos-complementaires";
 };
 
 export type IdRubrique =
@@ -57,6 +58,7 @@ export const niveauxMaturite: NiveauMaturite[] = [
 export const questions: Question[] = [
   {
     titre: "Prise en compte du risque",
+    id:"prise-en-compte-risque",
     question:
       "Quelle est la perception des risques cyber au sein de votre organisation&nbsp;?",
     propositions: [
@@ -69,6 +71,7 @@ export const questions: Question[] = [
   },
   {
     titre: "Posture à l’égard de la cyber",
+    id:"posture",
     question:
       "Quelle est la posture des responsables de votre organisation sur la cybersécurité&nbsp;?",
     propositions: [
@@ -81,6 +84,7 @@ export const questions: Question[] = [
   },
   {
     titre: "Pilotage de la sécurité",
+    id:"pilotage",
     question:
       "Comment est organisé le pilotage de la cybersécurité de votre organisation&nbsp;?",
     propositions: [
@@ -93,6 +97,7 @@ export const questions: Question[] = [
   },
   {
     titre: "Ressources humaines",
+    id:"ressources-humaines",
     question: "Quels sont les moyens humains alloués à la cybersécurité&nbsp;?",
     propositions: [
       "L'organisation ne dispose d'aucune ressource dédiée à la cybersécurité.",
@@ -104,6 +109,7 @@ export const questions: Question[] = [
   },
   {
     titre: "Budget",
+    id:"budget",
     question:
       "Quels sont les moyens budgétaires alloués à la cybersécurité&nbsp;?",
     propositions: [
@@ -116,6 +122,7 @@ export const questions: Question[] = [
   },
   {
     titre: "Adoption de solutions cyber",
+    id:"adoption-solutions",
     question:
       "Quels produits ou services cyber sont mobilisés au service de la cybersécurité de l'organisation&nbsp;?",
     propositions: [
@@ -130,5 +137,6 @@ export const questions: Question[] = [
     titre: "Adoption de solutions cyber",
     question: "Informations complémentaires",
     propositions: [],
+    id:"infos-complementaires"
   },
 ];
