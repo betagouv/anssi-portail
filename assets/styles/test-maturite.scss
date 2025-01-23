@@ -3,7 +3,12 @@
 
 @import "responsive";
 
-p, h1, h2, h3, h4, h5 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
   margin: 0;
 }
 
@@ -37,7 +42,7 @@ p, h1, h2, h3, h4, h5 {
   .illustration {
     display: none;
     padding: 24px;
-    background-color: #FED980;
+    background-color: #fed980;
     border-radius: 8px;
     @include a-partir-de(lg) {
       display: flex;
@@ -49,12 +54,11 @@ p, h1, h2, h3, h4, h5 {
           width: 432px;
         }
       }
-
     }
   }
 
   .etape {
-    color: #3A3A3A;
+    color: #3a3a3a;
     font-size: 0.875rem;
     line-height: 1.5rem;
   }
@@ -91,7 +95,7 @@ p, h1, h2, h3, h4, h5 {
     align-items: flex-start;
 
     input {
-      margin-top: 8px
+      margin-top: 8px;
     }
   }
 
@@ -186,10 +190,10 @@ p, h1, h2, h3, h4, h5 {
   .tuile-niveau {
     scroll-snap-align: center;
 
-    border: 1px solid #DDDDDD;
+    border: 1px solid #dddddd;
     border-radius: 8px;
     padding: 16px;
-    background: #F6F6F6;
+    background: #f6f6f6;
     flex: 0 0 182px;
     box-sizing: border-box;
     display: flex;
@@ -223,12 +227,12 @@ p, h1, h2, h3, h4, h5 {
     }
 
     &.courant {
-      border: none;
+      border-color: transparent;
       border-radius: 0;
-      background: #FFF7DB;
+      background: #fff7db;
 
       &:after {
-        content: '';
+        content: "";
         display: block;
         position: absolute;
         top: -4px;
@@ -236,7 +240,7 @@ p, h1, h2, h3, h4, h5 {
         left: -4px;
         right: -4px;
         border-radius: 8px;
-        border: 3px solid #FED980;
+        border: 3px solid #fed980;
       }
     }
 
@@ -245,7 +249,7 @@ p, h1, h2, h3, h4, h5 {
       position: absolute;
       z-index: 0;
       bottom: 94px;
-      border: 2px solid #0D0C21;
+      border: 2px solid #0d0c21;
       left: 0;
       right: 0;
     }
