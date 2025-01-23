@@ -62,7 +62,14 @@
   }
 </script>
 
-<Hero />
+<Hero
+  titre={afficheResultats
+    ? "Résultat de maturité cyber"
+    : "Test de maturité cyber"}
+  description={afficheResultats
+    ? "Ce résultat nous permet de vous guider et de vous fournir les informations et les outils essentiels pour agir et améliorer votre niveau de maturité cyber."
+    : "Déterminez quel est le niveau de maturité cyber de votre organisation en 5 minutes."}
+/>
 <div class="test-maturite">
   <div class="contenu-section">
     {#if afficheResultats}
