@@ -1,9 +1,16 @@
 <script lang="ts">
   import { type NiveauMaturite, niveauxMaturite } from "./TestMaturite.donnees";
+  import { onMount } from "svelte";
 
   export let niveauCourant: NiveauMaturite;
 
   $: indexNiveauCourant = niveauxMaturite.indexOf(niveauCourant);
+  onMount(() => {
+    let elementCourant: HTMLDivElement | null = document.querySelector(
+      ".tuile-niveau.courant",
+    );
+    elementCourant?.scrollIntoView({ block: "center" });
+  });
 </script>
 
 <div class="tuiles-niveau">
@@ -14,8 +21,12 @@
       class:courant={index === indexNiveauCourant}
       class:inactif={index > indexNiveauCourant}
     >
-      <img class="plante" src="/assets/images/test-maturite/niveaux/{niveau.id}.svg" alt="Niveau de maturité">
-      <img class="coche" alt="" src="/assets/images/coche-ronde.svg">
+      <img
+        class="plante"
+        src="/assets/images/test-maturite/niveaux/{niveau.id}.svg"
+        alt="Niveau de maturité"
+      />
+      <img class="coche" alt="" src="/assets/images/coche-ronde.svg" />
       <span>{niveau.label}</span>
     </div>
   {/each}

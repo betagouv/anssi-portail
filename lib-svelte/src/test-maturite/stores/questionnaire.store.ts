@@ -10,7 +10,7 @@ const { set, subscribe, update } = writable<Questionnaire>();
 export const questionnaireStore = {
   subscribe,
   initialise: () =>
-    set({ questionCourante: 6, toutesLesReponses: new Array(6).fill(null) }),
+    set({ questionCourante: 0, toutesLesReponses: new Array(6).fill(null) }),
 
   reponds(reponseQuestionCourante: number) {
     update((state) => {
