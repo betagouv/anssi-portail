@@ -7,6 +7,7 @@
   import RadarMaturite from "./RadarMaturite.svelte";
   import { questionnaireStore } from "./stores/questionnaire.store";
   import TuilesMaturite from "./TuilesMaturite.svelte";
+  import Hero from "../Hero.svelte";
 
   let afficheResultats = false;
 
@@ -56,6 +57,7 @@
   }
 </script>
 
+<Hero/>
 <div class="test-maturite">
   {#if afficheResultats}
     <h1>Résultat de maturité cyber</h1>
