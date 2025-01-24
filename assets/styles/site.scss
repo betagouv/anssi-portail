@@ -105,11 +105,49 @@ header {
     .choix {
       display: flex;
       flex-direction: column;
+
       a {
         font-weight: bold;
-        width: 100%;
+        width: calc(100% - 32px);
         border-bottom: 1px solid #dddddd;
         padding: 12px 16px;
+      }
+
+      details {
+        padding: 12px 16px;
+
+        &[open] summary:after {
+          transform: rotate(180deg);
+        }
+
+        summary {
+          font-weight: bold;
+          margin-bottom: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          &::marker {
+            content: "";
+          }
+
+          &::-webkit-details-marker {
+            display: none;
+          }
+
+          &:after {
+            content: "";
+            display: block;
+            width: 16px;
+            height: 16px;
+            background: url("/assets/images/icone-chevron-bas.svg");
+          }
+        }
+
+        a {
+          border-bottom: none;
+          font-weight: normal;
+        }
       }
     }
   }
