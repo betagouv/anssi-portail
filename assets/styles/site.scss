@@ -46,10 +46,56 @@ header {
   a {
     border: none;
   }
+
   .contenu-section {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 32px;
+    padding: 20px 0;
+
+    @include a-partir-de(md) {
+      justify-content: flex-start;
+    }
+  }
+
+  .logo-anssi {
+    width: 68px;
+    height: 68px;
+    display: none;
+    @include a-partir-de(md) {
+      display: block;
+    }
+  }
+
+  .titre-site {
+    display: none;
+    @include a-partir-de(md) {
+      display: block;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+
+      .beta {
+        text-transform: uppercase;
+        color: #18753c;
+        background: #b8fec9;
+        padding: 0 8px;
+        border-radius: 4px;
+        margin-left: 4px;
+      }
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      color: #3a3a3a;
+      font-weight: normal;
+    }
   }
 
   .marianne {
@@ -118,6 +164,7 @@ header {
 
         &.actif {
           position: relative;
+
           &:before {
             content: "";
             display: block;
