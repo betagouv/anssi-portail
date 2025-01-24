@@ -3,12 +3,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{page.titreHtml}}</title>
+
   <link rel="stylesheet" href="{{ "/assets/styles/site.css" | relative_url }}">
   <link rel="stylesheet" href="{{ "/assets/styles/boutons.css" | relative_url }}">
   <link rel="stylesheet" href="{{ "/assets/styles/fonts.css" | relative_url }}">
   {% if include.extra-css %}
     <link rel="stylesheet" href="{{ include.extra-css | relative_url }}">
   {% endif %}
+
+  <script src="{{ "/scripts/navigation-mobile.js" | relative_url }}"></script>
   {% if include.extra-js %}
     <script src="{{ include.extra-js | relative_url }}"></script>
   {% endif %}
