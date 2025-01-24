@@ -40,35 +40,36 @@ a {
 }
 
 header {
-  nav {
-    padding-left: var(--gouttiere);
-    padding-right: var(--gouttiere);
+  padding-left: var(--gouttiere);
+  padding-right: var(--gouttiere);
 
-    .contenu-section {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+  a {
+    border: none;
+  }
+  .contenu-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-    .marianne {
-      width: 108px;
-      transform: translateX(-16px);
-    }
+  .marianne {
+    width: 108px;
+    transform: translateX(-16px);
+  }
 
-    .menu {
-      background: transparent;
-      cursor: pointer;
-      border: 1px solid #ddd;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  .menu {
+    background: transparent;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-      img {
-        width: 24px;
-        height: 24px;
-      }
+    img {
+      width: 24px;
+      height: 24px;
     }
   }
 }
