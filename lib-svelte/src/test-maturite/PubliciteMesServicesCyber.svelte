@@ -22,7 +22,7 @@
     <h4>Suivez votre progression</h4>
     <p>
       Gagnez en maturité cyber grâce à nos parcours adaptés et suivez
-      l'évolution de la maturité cyber de votre organisation.iption.
+      l'évolution de la maturité cyber de votre organisation.
     </p>
   </div>
   <div class="carte">
