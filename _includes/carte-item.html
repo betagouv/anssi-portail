@@ -2,7 +2,7 @@
 {% if item.avecFicheDetaillee %}
 <a class="carte {{ item.typologie }}" href="{{item.url}}">
 {% else %}
-<a class="carte {{ item.typologie }}" href="{{item.lien}}">
+<a class="carte {{ item.typologie }}" href="{{item.lien}}" target="_blank">
 {% endif %}
   <figure>
     <img src="/assets/images/illustrations-services/{{item.illustration}}">
