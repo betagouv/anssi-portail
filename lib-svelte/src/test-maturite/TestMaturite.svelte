@@ -79,6 +79,7 @@
           </div>
         {:else}
           <div class="informations-complementaires">
+            <div class="note">Ces informations sont facultatives et restent anonymes</div>
             <p>
               MesServices a pour mission d'aider les organisations à améliorer
               leur niveau de sécurité cyber. En renseignant ces informations,
