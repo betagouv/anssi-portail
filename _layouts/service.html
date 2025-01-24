@@ -86,6 +86,7 @@ script: /scripts/service.js
             </div>
         </section>
 
+        {% if page.ressources.size  > 0 %}
         <section class="ressources" id="ressources">
             <h2>Les ressources associées</h2>
             {% for idRessource in page.ressources %}
@@ -121,6 +122,7 @@ script: /scripts/service.js
                 </a>
                 {% endfor %}
         </section>
+        {% endif %}
 
         <section class="haut-de-page">
             <a href="#haut-de-page">Haut de page</a>
