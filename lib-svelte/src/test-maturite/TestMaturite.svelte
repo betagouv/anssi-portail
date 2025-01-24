@@ -4,6 +4,8 @@
   import Hero from "../Hero.svelte";
   import Etapier from "../Etapier.svelte";
   import ResultatsTestMaturite from "./ResultatsTestMaturite.svelte";
+  import SelectSecteurActivite from "./SelectSecteurActivite.svelte";
+  import SelectRegion from "./SelectRegion.svelte";
 
   let afficheResultats = false;
   let introFaite = false;
@@ -89,8 +91,10 @@
             </div>
           {:else}
             <div class="informations-complementaires">
-              <div class="note">Ces informations sont facultatives et restent anonymes</div>
-            <p>
+              <div class="note">
+                Ces informations sont facultatives et restent anonymes
+              </div>
+              <p>
                 MesServices a pour mission d'aider les organisations à améliorer
                 leur niveau de sécurité cyber. En renseignant ces informations,
                 vous contribuez à établir une cartographie nationale de la
@@ -100,58 +104,12 @@
 
               <label>
                 Quel est le secteur d’activité de votre organisation&nbsp;?
-                <select>
-                  <option disabled selected>Sélectionner une option</option>
-                  <option>Banques (secteur bancaire)</option>
-                  <option>Eau potable</option>
-                  <option>Eaux usées</option>
-                  <option>Énergie</option>
-                  <option>Espace</option>
-                  <option>Fabrication</option>
-                  <option
-                    >Fabrication, production et distribution de produits
-                    chimiques
-                  </option>
-                  <option>Fournisseurs numériques</option>
-                  <option>Gestion des déchets</option>
-                  <option>Gestion des services TIC</option>
-                  <option>Infrastructure des marchés financiers</option>
-                  <option>Infrastructure numérique</option>
-                  <option
-                    >Production transformation et distribution de denrées
-                    alimentaires
-                  </option>
-                  <option>Recherche</option>
-                  <option>Santé</option>
-                  <option>Services postaux et d'expédition</option>
-                  <option>Transports</option>
-                  <option>Autre secteur d'activité</option>
-                </select>
+                <SelectSecteurActivite />
               </label>
 
               <label>
                 Dans quelle région se trouve votre organisation&nbsp;?
-                <select>
-                  <option disabled selected>Sélectionner une option</option>
-                  <option>Auvergne-Rhône-Alpes</option>
-                  <option>Bourgogne-Franche-Comté</option>
-                  <option>Bretagne</option>
-                  <option>Centre-Val de Loire</option>
-                  <option>Corse</option>
-                  <option>Grand Est</option>
-                  <option>Guadeloupe</option>
-                  <option>Guyane</option>
-                  <option>Hauts-de-France</option>
-                  <option>Ile-de-France</option>
-                  <option>Martinique</option>
-                  <option>Mayotte</option>
-                  <option>Nouvelle-Aquitaine</option>
-                  <option>Normandie</option>
-                  <option>Occitanie</option>
-                  <option>Pays de la Loire</option>
-                  <option>Provence-Alpes-Côte d'Azur</option>
-                  <option>La Réunion</option>
-                </select>
+                <SelectRegion />
               </label>
 
               <fieldset class="choix-taille">
@@ -205,7 +163,10 @@
             value="Débuter le test"
             on:click={debuteTeste}
           />
-          <div class="note">Le résultat obtenu est une évaluation indicative basé sur un modèle élaboré par l’ANSSI.</div>
+          <div class="note">
+            Le résultat obtenu est une évaluation indicative basé sur un modèle
+            élaboré par l’ANSSI.
+          </div>
         </div>
         <div class="illustration">
           <img
