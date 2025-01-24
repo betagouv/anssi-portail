@@ -231,6 +231,7 @@ header {
 
   .contenu-section {
     display: flex;
+    align-items: center;
     gap: 32px;
 
     a {
@@ -240,6 +241,60 @@ header {
       &.actif {
         font-weight: 500;
         border-bottom: 2px solid #fed980;
+      }
+    }
+  }
+
+  details {
+    position: relative;
+    padding: 16px 0;
+
+    &.actif {
+      font-weight: 500;
+      border-bottom: 2px solid #fed980;
+    }
+
+    &[open] summary:after {
+      transform: rotate(180deg);
+    }
+
+    .choix {
+      position: absolute;
+      background: white;
+      box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
+      left: 0;
+      right: 0;
+      top: 62px;
+      padding: 0 16px;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      z-index: 5;
+
+      a.actif {
+        border-bottom: none;
+      }
+    }
+
+    summary {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      cursor: pointer;
+
+      &::marker {
+        content: "";
+      }
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      &:after {
+        content: "";
+        display: block;
+        width: 16px;
+        height: 16px;
+        background: url("/assets/images/icone-chevron-bas.svg");
       }
     }
   }
