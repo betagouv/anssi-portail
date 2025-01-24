@@ -34,7 +34,7 @@
     <p>
       Situez votre organisation par rapport aux autres entités de votre région,
       votre secteur ou de taille similaire afin d'identifier vos points forts et
-      vos axes d'amélioration (à venir).
+      vos axes d'amélioration. (À venir)
     </p>
   </div>
 </div>
