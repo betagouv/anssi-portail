@@ -270,8 +270,28 @@ header {
       line-height: 1.5rem;
       z-index: 5;
 
-      a.actif {
-        border-bottom: none;
+      a {
+        width: 100%;
+        padding: 12px 0;
+        border-bottom: 1px solid #dddddd;
+        position: relative;
+        font-weight: normal;
+        &.actif {
+          font-weight: normal;
+          border-bottom: 1px solid #dddddd;
+          &:before {
+            content: "";
+            display: block;
+            width: 2px;
+            height: 24px;
+            background: #fed980;
+            position: absolute;
+            left: -8px;
+          }
+        }
+        &:last-child {
+          border: none;
+        }
       }
     }
 
