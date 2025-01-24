@@ -406,6 +406,14 @@ h5 {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
+  position: relative;
+  left:-20px;
+
+  &:before{
+    content: "";
+    display: block;
+    width: 1px;
+  }
 
   .tuile-niveau {
     scroll-snap-align: center;
