@@ -63,5 +63,9 @@
   <div class="contenu-section">
     <h2>Répartition de votre maturité cyber</h2>
     <RadarMaturite {resultats} />
+    <div class="note">
+      Ce résultat est une évaluation indicative basé sur un modèle élaboré par
+      l’ANSSI.
+    </div>
   </div>
 </section>
