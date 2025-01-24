@@ -181,7 +181,7 @@ h5 {
     padding-left: 22px;
     position: relative;
 
-    @include  a-partir-de(sm) {
+    @include a-partir-de(sm) {
       margin-left: 32px;
     }
 
@@ -230,6 +230,10 @@ h5 {
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
 
+    @include  a-partir-de(lg){
+      justify-content: space-between;
+    }
+
     .carte {
       flex: 0 0 282px;
       background: white;
@@ -242,6 +246,10 @@ h5 {
       box-sizing: border-box;
       text-align: center;
       margin: 32px 0 16px;
+
+      @include  a-partir-de(lg) {
+        flex: 0 0 384px;
+      }
 
       img {
         width: 80px;
@@ -405,26 +413,60 @@ h5 {
     background: white;
     border-radius: 8px;
     padding: 24px;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "illustration"
+        "titre"
+        "contenu"
+        "bouton";
+
+    @include a-partir-de(lg) {
+      grid-template-columns: auto 384px;
+      grid-template-areas:
+        "titre illustration"
+      "contenu illustration"
+        "bouton illustration";
+      gap: 24px;
+    }
 
     img {
+      grid-area: illustration;
       height: 210px;
       margin-bottom: 24px;
+      @include a-partir-de(lg) {
+        align-self: center;
+        margin: 0 auto;
+      }
     }
 
     h3 {
+      grid-area: titre;
       font-size: 2rem;
       line-height: 2.5rem;
       margin-bottom: 24px;
+      @include a-partir-de(lg) {
+        font-size: 2.5rem;
+        line-height: 3rem;
+      }
     }
 
     p {
+      grid-area: contenu;
       font-size: 1.25rem;
       line-height: 2rem;
       margin-bottom: 24px;
     }
 
     .bouton {
-      margin: 32px auto 16px;
+      grid-area: bouton;
+      margin: 32px 0 16px;
+      justify-self: center;
+
+      @include a-partir-de(lg) {
+        justify-self: flex-start;
+      }
     }
   }
 }
