@@ -26,7 +26,7 @@ liens:
       couleurFond: "#0079D0"
     - commencer:
       titre: Commencer à sécuriser
-      lien: lien2
+      lien: https://cellar-c2.services.clever-cloud.com/monservicesecurise-ressources/MonServiceSecurise%20video.mp4
       illustration: mss/mss-securiser.webp
       couleurFond: "#0079D0"
 themes:
@@ -52,5 +52,5 @@ Depuis votre tableau de bord :
 <li>Supervisez l’ensemble de vos services : leurs besoins, leur indice cyber, leur statut d’homologation les prochaines actions à mener.</li>
 <li>Consultez vos notifications et les recommandations de l’ANSSI</li>
 <li>Téléchargez, dupliquez, partagez à volonté !</li>
-
+</ul>
 Avec MonServiceSécurisé renforcez le niveau de sécurité de vos services publics numériques et mettez-vous en conformité avec la réglementation !
