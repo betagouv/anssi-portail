@@ -67,6 +67,10 @@ header {
     justify-content: center;
     align-items: center;
 
+    @include a-partir-de(sm) {
+      display: none;
+    }
+
     img {
       width: 24px;
       height: 24px;
