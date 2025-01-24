@@ -12,6 +12,12 @@ h5 {
   margin: 0;
 }
 
+.chapeau.fond-sombre {
+  @include a-partir-de(lg) {
+    padding-bottom: 40px;
+  }
+}
+
 .test-maturite {
   padding: 32px var(--gouttiere);
 
@@ -166,7 +172,7 @@ h5 {
     }
   }
 
-  .introduction{
+  .introduction {
     p {
       margin-bottom: 24px;
     }
@@ -339,6 +345,7 @@ h5 {
 
 .radar-maturite {
   margin-bottom: 16px;
+
   #radar {
     width: 100%;
     height: 100%;
