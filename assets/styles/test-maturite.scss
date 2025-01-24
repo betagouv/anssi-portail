@@ -181,6 +181,10 @@ h5 {
     padding-left: 22px;
     position: relative;
 
+    @include  a-partir-de(sm) {
+      margin-left: 32px;
+    }
+
     &:before {
       content: "";
       display: block;
@@ -403,7 +407,7 @@ h5 {
     padding: 24px;
 
     img {
-      width: 240px;
+      height: 210px;
       margin-bottom: 24px;
     }
 
