@@ -241,9 +241,13 @@
 
     img {
       margin: 40px 0 16px;
+
       @include a-partir-de(lg) {
         grid-area: illustration;
         align-self: center;
+        object-fit: cover;
+        width: 100%;
+        max-height: 100%;
       }
     }
 
