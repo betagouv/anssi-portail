@@ -13,16 +13,15 @@
 
     <div class="menu-mobile invisible" id="menu-mobile">
       <a class="fermer" id="menu-mobile-fermer">Fermer</a>
-
       <div class="choix">
-        <a href="/">Accueil</a>
-        <a href="/catalogue/">Consulter le catalogue de services</a>
-        <a href="/test-maturite/">Tester votre maturité cyber</a>
+        <a href="/" {% if page.url == '/' %} class="actif" {% endif %}>Accueil</a>
+        <a href="/catalogue/" {% if page.url == '/catalogue/' %} class="actif" {% endif %}>Consulter le catalogue de services</a>
+        <a href="/test-maturite/" {% if page.url == '/test-maturite/' %} class="actif" {% endif %}>Tester votre maturité cyber</a>
         <details>
           <summary>Progresser en cybersécurité</summary>
 
-          <a href="/parcours-debuter/">Cybersécurité : se lancer !</a>
-          <a href="/parcours-approfondir/">Cybersécurité : approfondir !</a>
+          <a href="/parcours-debuter/" {% if page.url == '/parcours-debuter/' %} class="actif" {% endif %}>Cybersécurité : se lancer !</a>
+          <a href="/parcours-approfondir/" {% if page.url == '/parcours-approfondir/' %} class="actif" {% endif %}>Cybersécurité : approfondir !</a>
         </details>
       </div>
     </div>
