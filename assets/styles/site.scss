@@ -781,6 +781,10 @@ footer {
     height: 156px;
   }
 
+  &:after {
+    display: none;
+  }
+
   .contenu {
     flex: 1;
     box-sizing: border-box;
