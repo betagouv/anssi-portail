@@ -112,8 +112,9 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: auto;
 
-    @include a-partir-de(sm) {
+    @include a-partir-de(lg) {
       display: none;
     }
 
