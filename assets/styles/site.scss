@@ -121,6 +121,8 @@ header {
   width: 286px;
   text-decoration: none;
   color: var(--noir);
+  align-items: stretch;
+  gap: 0;
 
   &:hover {
     figure img {
