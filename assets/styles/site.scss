@@ -57,7 +57,7 @@ header {
     transform: translateX(-16px);
   }
 
-  .menu {
+  .ouverture-menu {
     background: transparent;
     cursor: pointer;
     border: 1px solid #ddd;
@@ -70,6 +70,28 @@ header {
     img {
       width: 24px;
       height: 24px;
+    }
+  }
+
+  .menu-mobile {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 10;
+    background: white;
+    width: calc(100% - 32px);
+    padding: 16px;
+    height: 100vh;
+    top: 0;
+    left: 0;
+
+    &.invisible {
+      display: none;
+    }
+
+    #menu-mobile-fermer {
+      align-self: flex-end;
+      color: #000091;
     }
   }
 }
