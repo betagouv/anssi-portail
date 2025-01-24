@@ -55,7 +55,7 @@
       <p>{niveau.priorite}</p>
     </div>
 
-    <a href="#" target="_blank">Les niveaux de maturité cyber</a>
+    <a href="#a" target="_blank">Les niveaux de maturité cyber</a>
   </div>
 </div>
 
@@ -79,17 +79,19 @@
 <section class="votre-parcours">
   <div class="contenu-section">
     {#if niveau.id === "intermediaire"}
-      <TuileVersParcours parcours="approfondir"/>
+      <TuileVersParcours parcours="approfondir" />
     {:else if niveau.id === "optimal" || niveau.id === "confirme"}
       <div class="tuile">
-        <img src="/assets/images/debuter-cyber.png" alt="">
+        <img src="/assets/images/debuter-cyber.png" alt="" />
         <h3>Les services et ressources cyber</h3>
-        <p>Trouvez les services et les ressources adaptées à vos besoins et votre niveau cyber.</p>
+        <p>
+          Trouvez les services et les ressources adaptées à vos besoins et votre
+          niveau cyber.
+        </p>
         <a href="/catalogue" class="bouton primaire">Découvrir</a>
       </div>
     {:else}
-      <TuileVersParcours parcours="debuter"/>
+      <TuileVersParcours parcours="debuter" />
     {/if}
   </div>
 </section>
-
