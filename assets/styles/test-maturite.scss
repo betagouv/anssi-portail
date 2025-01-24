@@ -265,6 +265,7 @@ h5 {
       line-height: 2.25rem;
       margin-bottom: 24px;
     }
+
     .note {
       font-style: italic;
       margin: 40px 0 16px;
@@ -305,6 +306,7 @@ h5 {
     li {
       padding: 8px;
       margin: 0;
+
       .lettre {
         font-weight: bold;
       }
@@ -386,6 +388,39 @@ h5 {
       border: 2px solid #0d0c21;
       left: 0;
       right: 0;
+    }
+  }
+}
+
+.votre-parcours {
+  padding: 48px var(--gouttiere);
+  background: #fed980 url("/assets/images/motif-fond-opacite-30.png");
+
+
+  .tuile {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+
+    img {
+      width: 240px;
+      margin-bottom: 24px;
+    }
+
+    h3 {
+      font-size: 2rem;
+      line-height: 2.5rem;
+      margin-bottom: 24px;
+    }
+
+    p {
+      font-size: 1.25rem;
+      line-height: 2rem;
+      margin-bottom: 24px;
+    }
+
+    .bouton {
+      margin: 32px auto 16px;
     }
   }
 }

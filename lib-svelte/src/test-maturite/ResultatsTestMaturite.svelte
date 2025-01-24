@@ -5,6 +5,7 @@
   import { questionnaireStore } from "./stores/questionnaire.store";
   import PubliciteMesServicesCyber from "./PubliciteMesServicesCyber.svelte";
   import RadarMaturite from "./RadarMaturite.svelte";
+  import TuileVersParcours from "./TuileVersParcours.svelte";
 
   $: resultats = {
     pilotage: $questionnaireStore.toutesLesReponses[2] + 1,
@@ -69,3 +70,21 @@
     </div>
   </div>
 </section>
+
+<section class="votre-parcours">
+  <div class="contenu-section">
+    {#if niveau.id === "intermediaire"}
+      <TuileVersParcours parcours="approfondir"/>
+    {:else if niveau.id === "optimal" || niveau.id === "confirme"}
+      <div class="tuile">
+        <img src="/assets/images/debuter-cyber.png" alt="">
+        <h3>Les services et ressources cyber</h3>
+        <p>Trouvez les services et les ressources adaptées à vos besoins et votre niveau cyber.</p>
+        <a href="/catalogue" class="bouton primaire">Découvrir</a>
+      </div>
+    {:else}
+      <TuileVersParcours parcours="debuter"/>
+    {/if}
+  </div>
+</section>
+
