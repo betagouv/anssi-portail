@@ -40,5 +40,12 @@
     <a href="/" {% if page.url == '/' %} class="actif" {% endif %}>Accueil</a>
     <a href="/catalogue/" {% if page.url == '/catalogue/' %} class="actif" {% endif %}>Consulter le catalogue de services</a>
     <a href="/test-maturite/" {% if page.url == '/test-maturite/' %} class="actif" {% endif %}>Tester votre maturité cyber</a>
+    <details {% if page.url == '/parcours-debuter/' or page.url == '/parcours-approfondir/' %} class="actif" {% endif %}>
+      <summary>Progresser en cybersécurité</summary>
+      <div class="choix">
+        <a href="/parcours-debuter/" {% if page.url == '/parcours-debuter/' %} class="actif" {% endif %}>Cybersécurité : se lancer !</a>
+        <a href="/parcours-approfondir/" {% if page.url == '/parcours-approfondir/' %} class="actif" {% endif %}>Cybersécurité : approfondir !</a>
+      </div>
+    </details>
   </nav>
 </section>
