@@ -50,6 +50,11 @@
       <p>{niveau.description}</p>
     </div>
 
+    <div class="priorite">
+      <h5>La priorité pour sécuriser votre organisation</h5>
+      <p>{niveau.priorite}</p>
+    </div>
+
     <a href="#" target="_blank">Les niveaux de maturité cyber</a>
   </div>
 </div>
