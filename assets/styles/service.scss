@@ -1,7 +1,7 @@
 ---
 ---
 
-@import 'responsive';
+@import "responsive";
 
 .chapeau {
   background: #f4f4f4 url("/assets/images/motif-fond-service.png");
@@ -273,9 +273,12 @@ h2 {
     flex-direction: column;
     gap: 12px;
     flex: 1;
+    align-items: stretch;
+    border-bottom: none;
+    width: auto;
 
     &:after {
-      content: '';
+      content: "";
       background: url("/assets/images/icone-lien-externe.svg");
       width: 16px;
       height: 16px;
@@ -309,7 +312,7 @@ h2 {
     border-bottom: 1px solid var(--noir);
 
     &:before {
-      content: '';
+      content: "";
       background: url("/assets/images/icone-fleche-pleine.svg");
       width: 16px;
       height: 16px;
