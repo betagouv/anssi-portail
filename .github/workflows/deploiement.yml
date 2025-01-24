@@ -1,5 +1,6 @@
 name: Déploiement
 run-name: Déploiement du commit "${{ github.event.head_commit.message }}"
+permissions: {}
 
 on:
   push:
@@ -31,6 +32,7 @@ jobs:
           clever deploy --force --same-commit-policy=rebuild
 
   deploiement-prod:
+    needs: [deploiement-demo]
     name: Déploiement en PROD
     environment: PROD
     runs-on: ubuntu-latest
