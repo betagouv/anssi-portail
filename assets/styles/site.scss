@@ -92,6 +92,25 @@ header {
     #menu-mobile-fermer {
       align-self: flex-end;
       color: #000091;
+
+      &:after {
+        content: "";
+        display: block;
+        width: 16px;
+        height: 16px;
+        background: url("/assets/images/icone-croix.svg") no-repeat;
+      }
+    }
+
+    .choix {
+      display: flex;
+      flex-direction: column;
+      a {
+        font-weight: bold;
+        width: 100%;
+        border-bottom: 1px solid #dddddd;
+        padding: 12px 16px;
+      }
     }
   }
 }
