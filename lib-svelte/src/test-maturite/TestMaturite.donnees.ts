@@ -157,8 +157,8 @@ export const questions: Question[] = [
     ],
   },
   {
-    titre: "Adoption de solutions cyber",
-    question: "Informations complémentaires",
+    titre: "Informations complémentaires",
+    question: "À propos de votre organisation",
     propositions: [],
     id: "infos-complementaires",
   },
