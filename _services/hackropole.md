@@ -3,13 +3,13 @@ layout: service
 typologie: service
 nom: Hackropole
 titreHtml: Hackropole
-description: "Découvrir et vous former à divers domaines de la cybersécurité. Afficher les solutions rédigées par la communauté pour apprendre des compétences des autres."
+description: "Relever des défis cyber !"
 lien: https://hackropole.fr/fr/
 illustration: hackropole/hackropole.png
 sources:
   - ANSSI
 besoins: 
-  - RENFORCER_LA_SECURITE
+  - SENSIBILISER_ET_FORMER
 droitsAcces:
   - ACCES_LIBRE
 themes:

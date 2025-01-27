@@ -3,7 +3,7 @@ layout: service
 typologie: ressource
 nom: Rapports sur la menace
 titreHtml: Rapports sur la menace
-description: Être sensibilisé à la menace cyber et en avoir une meilleure connaissance (rapports, notes, réponses, expertise…)
+description: Connaître l'état de la menace
 illustration: rapport-menace/rapport-menace.png
 format: PDF # Rajoute le badge en haut à droite de l'illustration
 besoins:
@@ -18,6 +18,4 @@ themes:
   - Resilience
   - Defense
   - Protection
-parcours:
-  - APPROFONDIR_SENSIBILISER
 ---

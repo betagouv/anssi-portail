@@ -3,9 +3,10 @@ layout: service
 typologie: ressource
 nom: Revue de presse du CERT-FR
 titreHtml: Revue de presse du CERT-FR
-description: Partage des actualités de la cybersécurité transmise quotidiennement aux bénéficiaires ayant souscrit à ce service.
+description: Retrouver l'actualités quotidienne de la cybersécurité
 illustration: revue-presse/revue-presse.png
 format: Mail # Rajoute le badge en haut à droite de l'illustration
+lien : Mailto:cert-fr@ssi.gouv.fr
 besoins:
   - RENFORCER_LA_SECURITE
 droitsAcces:

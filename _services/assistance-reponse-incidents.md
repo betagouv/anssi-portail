@@ -1,9 +1,9 @@
 ---
 layout: service
 typologie: service
-nom: Assistance à la Réponse aux incidents
-titreHtml: Assistance à la Réponse aux incidents
-description: "Contacter le cert-fr pour qualifier votre signalement d'incident et être orienté"
+nom: Assistance CERT-FR
+titreHtml: Assistance CERT-FR
+description: "Qualifier un incident et être orienté"
 lien: https://club.ssi.gouv.fr/beta/#/formlist
 illustration: assistance-reponse-incidents/assistance-reponse-incidents.png
 sources:
