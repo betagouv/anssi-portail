@@ -21,9 +21,17 @@
   color: var(--noir);
 
   &[disabled] {
-    background: #e5e5e5;
-    color: #929292;
+    background: var(--gris-desactive-fond);
+    color: var(--gris-desactive-texte);
     cursor: not-allowed;
+  }
+
+  &:hover {
+    background: var(--jaune-msc-hover);
+  }
+
+  &:active {
+    background: var(--jaune-msc-clique);
   }
 }
 
@@ -36,13 +44,29 @@
 
   &.actif {
     background: var(--jaune-msc);
+
+    &:hover {
+      background: var(--jaune-msc-hover);
+    }
+
+    &:active {
+      background: var(--jaune-msc-clique);
+    }
   }
 
   &[disabled] {
-    border-color: #e5e5e5;
+    border-color: var(--gris-desactive-fond);
     background: white;
-    color: #929292;
+    color: var(--gris-desactive-texte);
     cursor: not-allowed;
+  }
+
+  &:hover {
+    background: var(--gris-secondaire-fond-hover);
+  }
+
+  &:active {
+    background: var(--gris-secondaire-fond-clique);
   }
 }
 
