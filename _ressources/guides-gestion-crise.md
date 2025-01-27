@@ -1,11 +1,12 @@
 ---
 layout: service
 typologie: ressource
-nom: Collection des guides sur la gestion de crise
-titreHtml: Collection des guides sur la rémédiation
-description: Appréhender et comprendre comment anticiper une crise avant qu’elle ne survienne et comment la gérer lorsqu’elle survient.
+nom: Guides gestion de crise
+titreHtml: Guides gestion de crise
+description: Anticiper et gérer une crise cyber
 illustration: guides-gestion-crise/guides-gestion-crise.png
 format: PDF # Rajoute le badge en haut à droite de l'illustration
+lien : https://cyber.gouv.fr/anticiper-et-gerer-une-crise-cyber
 besoins:
   - RENFORCER_LA_SECURITE
 droitsAcces:

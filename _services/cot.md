@@ -1,15 +1,17 @@
 ---
 layout: service
 typologie: service
-nom: Réseau des délégués de l’ANSSI dans les territoires
-titreHtml: Réseau des délégués de l’ANSSI dans les territoires
-description: "Bénéficier d’un accompagnement et de conseils d’un délégué à la sécurité numérique de l’ANSSI."
+nom: Les délégués ANSSI dans les territoires
+titreHtml: Les délégués ANSSI dans les territoires
+description: "Contacter un délégué ANSSI de proxmité"
+lien : https://cyber.gouv.fr/action-territoriale
 illustration: cot/cot.png
 sources:
   - ANSSI
 besoins: 
   - RENFORCER_LA_SECURITE
   - REAGIR
+  - SENSIBILISER_ET_FORMER
 droitsAcces:
   - ACCES_LIBRE
 themes:

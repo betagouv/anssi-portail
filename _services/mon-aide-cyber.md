@@ -3,7 +3,7 @@ layout: service
 typologie: service
 nom: Mon&ZeroWidthSpace;Aide&ZeroWidthSpace;Cyber
 avecFicheDetaillee: true
-description: Être accompagné dans votre première démarche de cybersécurité grâce à notre communauté d’Aidants présente sur tout le territoire.
+description: Bénéficier d'un diagnostic cyber
 titreHtml: MonAideCyber
 illustration: mac/mac.png
 lien: https://monaide.cyber.gouv.fr/

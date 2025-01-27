@@ -1,10 +1,10 @@
 ---
 layout: service
 typologie: ressource
-nom: Comprendre les risques cyber
-titreHtml: Comprendre les risques cyber
-description: Se documenter sur les menaces cyber relatives à mes usages.
-illustration: comprendre-risque-cyber/comprendre-risque-cyber.png
+nom: Cybermalveillance
+titreHtml: Cybermalveillance
+description: Comprendre les menaces cyber
+illustration: cybermalveillance/cybermalveillance.png
 lien: https://www.cybermalveillance.gouv.fr/cybermenaces
 format: Web # Rajoute le badge en haut à droite de l'illustration
 besoins:

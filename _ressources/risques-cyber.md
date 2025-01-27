@@ -1,9 +1,9 @@
 ---
 layout: service
 typologie: ressource
-nom: Les risques cyber
-titreHtml: Les risques cyber
-description: Découvrir les risques cyber et leurs conséquences
+nom: Vidéo
+titreHtml: Vidéo
+description: Découvrir les risques cyber en 2mn
 illustration: risques-cyber/risques-cyber.png
 format: Video # Rajoute le badge en haut à droite de l'illustration
 besoins:
