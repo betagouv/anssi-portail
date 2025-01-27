@@ -40,7 +40,9 @@ script: /scripts/service.js
         <ul>
             <li class="actif"><a href="#explication">De quoi s'agit-il&nbsp;?</a></li>
             <li><a href="#cible">Qui peut utiliser ce service&nbsp;?</a></li>
-            <li><a href="#ressources">Les ressources associées</a></li>
+            {% if page.ressources.size  > 0 %}
+                <li><a href="#ressources">Les ressources associées</a></li>
+            {%endif%}
         </ul>
     </details>
 </div>
@@ -52,7 +54,9 @@ script: /scripts/service.js
         <ul>
             <li class="actif"><a href="#explication">De quoi s'agit-il&nbsp;?</a></li>
             <li><a href="#cible">Qui peut utiliser ce service&nbsp;?</a></li>
-            <li><a href="#ressources">Les ressources associées</a></li>
+            {% if page.ressources.size  > 0 %}
+                <li><a href="#ressources">Les ressources associées</a></li>
+            {%endif%}
         </ul>
         <span>TAGS</span>
         <div class="labels">
