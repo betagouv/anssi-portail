@@ -120,6 +120,7 @@
           a {
             border-left: 2px solid var(--jaune-msc);
             padding-left: 14px;
+            border-bottom: none;
           }
         }
 
@@ -128,6 +129,7 @@
           color: var(--noir);
           padding-left: 16px;
           display: inline-block;
+          border-bottom: none;
         }
       }
     }
