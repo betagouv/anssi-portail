@@ -2,33 +2,40 @@
   <div class="contenu-section">
     <a href="/">
       <img
-        src="/assets/images/marianne-dark.svg"
-        class="marianne"
-        alt="Marianne"
+              src="/assets/images/marianne-dark.svg"
+              class="marianne"
+              alt="Marianne"
       />
     </a>
 
-    <img class="logo-anssi" src="/assets/images/logo-anssi.svg" alt="Logo ANSSI"/>
-    <div class="titre-site">
-      <h1>MesServicesCyber <span class="beta">Bêta</span></h1>
-      <h2>Innovation ANSSI</h2>
-    </div>
+    <a href="/" class="titre-msc">
+      <img class="logo-anssi" src="/assets/images/logo-anssi.svg" alt="Logo ANSSI"/>
+      <div class="titre-site">
+        <h1>MesServicesCyber <span class="beta">Bêta</span></h1>
+        <h2>Innovation ANSSI</h2>
+      </div>
+    </a>
 
     <button class="ouverture-menu" id="menu-mobile-ouvrir">
-      <img src="/assets/images/icone-menu.svg" alt="Menu burger" />
+      <img src="/assets/images/icone-menu.svg" alt="Menu burger"/>
     </button>
 
     <nav class="menu-mobile invisible" id="menu-mobile">
       <a class="fermer" id="menu-mobile-fermer">Fermer</a>
       <div class="choix">
-        <a href="/" {% if page.url == '/' %} class="actif" {% endif %}>Accueil</a>
-        <a href="/catalogue/" {% if page.url == '/catalogue/' %} class="actif" {% endif %}>Consulter le catalogue de services</a>
-        <a href="/test-maturite/" {% if page.url == '/test-maturite/' %} class="actif" {% endif %}>Tester votre maturité cyber</a>
-        <details {% if page.url == '/parcours-debuter/' or page.url == '/parcours-approfondir/' %}open {% endif %}>
-          <summary>Progresser en cybersécurité</summary>
+        <a href="/" {% if page.url== '/' %} class="actif" {% endif %}>Accueil</a>
+        <a href="/catalogue/" {% if page.url== '/catalogue/' %} class="actif" {% endif %}>Consulter le catalogue de
+        services</a>
+        <a href="/test-maturite/" {% if page.url== '/test-maturite/' %} class="actif" {% endif %}>Tester votre maturité
+        cyber</a>
+        <details {% if page.url==
+        '/parcours-debuter/' or page.url == '/parcours-approfondir/' %}open {% endif %}>
+        <summary>Progresser en cybersécurité</summary>
 
-          <a href="/parcours-debuter/" {% if page.url == '/parcours-debuter/' %} class="actif" {% endif %}>Cybersécurité : se lancer !</a>
-          <a href="/parcours-approfondir/" {% if page.url == '/parcours-approfondir/' %} class="actif" {% endif %}>Cybersécurité : approfondir !</a>
+        <a href="/parcours-debuter/" {% if page.url== '/parcours-debuter/' %} class="actif" {% endif %}>Cybersécurité :
+        se lancer !</a>
+        <a href="/parcours-approfondir/" {% if page.url== '/parcours-approfondir/' %} class="actif" {% endif
+        %}>Cybersécurité : approfondir !</a>
         </details>
       </div>
     </nav>
@@ -37,15 +44,20 @@
 
 <section class="conteneur-nav">
   <nav class="contenu-section">
-    <a href="/" {% if page.url == '/' %} class="actif" {% endif %}>Accueil</a>
-    <a href="/catalogue/" {% if page.url == '/catalogue/' %} class="actif" {% endif %}>Consulter le catalogue de services</a>
-    <a href="/test-maturite/" {% if page.url == '/test-maturite/' %} class="actif" {% endif %}>Tester votre maturité cyber</a>
-    <details {% if page.url == '/parcours-debuter/' or page.url == '/parcours-approfondir/' %} class="actif" {% endif %}>
-      <summary>Progresser en cybersécurité</summary>
-      <div class="choix">
-        <a href="/parcours-debuter/" {% if page.url == '/parcours-debuter/' %} class="actif" {% endif %}>Cybersécurité : se lancer !</a>
-        <a href="/parcours-approfondir/" {% if page.url == '/parcours-approfondir/' %} class="actif" {% endif %}>Cybersécurité : approfondir !</a>
-      </div>
+    <a href="/" {% if page.url== '/' %} class="actif" {% endif %}>Accueil</a>
+    <a href="/catalogue/" {% if page.url== '/catalogue/' %} class="actif" {% endif %}>Consulter le catalogue de
+    services</a>
+    <a href="/test-maturite/" {% if page.url== '/test-maturite/' %} class="actif" {% endif %}>Tester votre maturité
+    cyber</a>
+    <details {% if page.url==
+    '/parcours-debuter/' or page.url == '/parcours-approfondir/' %} class="actif" {% endif %}>
+    <summary>Progresser en cybersécurité</summary>
+    <div class="choix">
+      <a href="/parcours-debuter/" {% if page.url== '/parcours-debuter/' %} class="actif" {% endif %}>Cybersécurité : se
+      lancer !</a>
+      <a href="/parcours-approfondir/" {% if page.url== '/parcours-approfondir/' %} class="actif" {% endif
+      %}>Cybersécurité : approfondir !</a>
+    </div>
     </details>
   </nav>
 </section>
