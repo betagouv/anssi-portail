@@ -2,7 +2,7 @@
 layout: service
 typologie: service
 nom: ADS (Active Directory Security)
-description: Auditer ses annuaires Active Directory pour avoir de la visibilité sur leur niveau de sécurité.
+description: Auditer vos annuaires Active Directory
 titreHtml: ADS
 illustration: ads/ads.png
 lien: https://club.ssi.gouv.fr/beta/#/login

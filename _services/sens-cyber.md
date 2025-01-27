@@ -3,7 +3,7 @@ layout: service
 typologie: service
 nom: Sens&ZeroWidthSpace;Cyber
 titreHtml: SensCyber
-description: "Découvrir les cyberattaques, les bonnes pratiques. Apprendre et tester vos connaissances."
+description: "Découvrir la cybersécurité et se tester"
 lien: https://www.cybermalveillance.gouv.fr/sens-cyber/apprendre/
 illustration: sens-cyber/sens-cyber.png
 sources:

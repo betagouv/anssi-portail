@@ -3,8 +3,9 @@ layout: service
 typologie: service
 nom: Pack parcours cybersécurité
 titreHtml: Pack parcours cybersécurité
-description: "Fournir à un prestataire d’accompagnement la méthodologie ANSSI éprouvée dans le cadre des parcours France Relance."
+description: "Adopter la méthodologique France Relance"
 illustration: pack-parcours-secu/pack-parcours-secu.png
+lien : https://cyber.gouv.fr/parcours-de-cybersecurite-phase-1-le-pre-diagnostic
 sources:
   - ANSSI
 themes:

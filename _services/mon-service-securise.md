@@ -4,7 +4,7 @@ typologie: service
 nom: Mon&ZeroWidthSpace;Service&ZeroWidthSpace;Sécurisé
 avecFicheDetaillee: true
 titreHtml: MonServiceSécurisé
-description: "MonServiceSécurisé aide les entités publiques à sécuriser et homologuer leurs services publics numériques&nbsp;: site web, applications mobiles, API."
+description: "Piloter la sécurité des services publics en ligne et les homologuer"
 lien: https://monservicesecurise.cyber.gouv.fr/
 illustration: mss/mss.png
 cible:  |

@@ -3,7 +3,7 @@ layout: service
 typologie: service
 nom: SecNumAcadémie
 titreHtml: SecNumAcadémie
-description: "Se former en ligne et assimiler les notions de base de la SSO utiles dans l'environnement professionnel et personnel."
+description: "Se former avec le MOOC de l'ANSSI"
 illustration: secnum-academie/secnum-academie.png
 sources:
   - ANSSI
@@ -17,5 +17,5 @@ themes:
   - Protection
   - Defense
 parcours: 
-  - DEBUTER_PROGRESSER
+  - APPROFONDIR_PROGRESSER
 ---

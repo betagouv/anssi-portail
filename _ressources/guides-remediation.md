@@ -1,11 +1,12 @@
 ---
 layout: service
 typologie: ressource
-nom: Collection des guides sur la rémédiation
-titreHtml: Collection des guides sur la rémédiation
-description: Suivre les recommandations de l’ANSSI pour préparer et faciliter la rémédiation en cas de cyberattaque.
+nom: Guides sur la rémédiation
+titreHtml: Guides sur la rémédiation
+description: Piloter la rémédiation d'un incident cyber
 illustration: guides-remediation/guides-remediation.png
 format: PDF # Rajoute le badge en haut à droite de l'illustration
+lien : https://cyber.gouv.fr/piloter-la-remediation-dun-incident-cyber
 besoins:
   - REAGIR
 droitsAcces:

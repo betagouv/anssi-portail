@@ -4,7 +4,7 @@ typologie: service
 nom: Mon&ZeroWidthSpace;Espace&ZeroWidthSpace;NIS2
 avecFicheDetaillee: true
 titreHtml: MonEspaceNIS2
-description: "Se notifier et être guidé dans sa mise en conformité avec la directive NIS 2."
+description: "Se mettre en conformité avec la directive NIS2"
 lien: https://monespacenis2.cyber.gouv.fr/
 illustration: nis2/nis2.png
 cible:  |

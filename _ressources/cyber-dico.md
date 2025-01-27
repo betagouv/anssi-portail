@@ -3,9 +3,10 @@ layout: service
 typologie: ressource
 nom: CyberDico
 titreHtml: CyberDico
-description: Trouver la signification des mots, expressions et sigles du domaine de la cybersécurité.
+description: Découvrez le dictionnaire de la cybersécurité
 illustration: cyber-dico/cyber-dico.png
-format: PDF # Rajoute le badge en haut à droite de l'illustration
+lien : https://cyber.gouv.fr/le-cyberdico
+format: Web # Rajoute le badge en haut à droite de l'illustration
 besoins:
   - SENSIBILISER_ET_FORMER
 droitsAcces:
