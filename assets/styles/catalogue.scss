@@ -50,6 +50,14 @@
     cursor: pointer;
     background: white;
 
+    &:hover {
+      background: var(--controle-segmente-fond-hover);
+    }
+
+    &:active {
+      background: var(--controle-segmente-fond-clique);
+    }
+
     @include a-partir-de(md) {
       padding-top: 16px;
       padding-bottom: 16px;
