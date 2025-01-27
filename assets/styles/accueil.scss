@@ -115,8 +115,16 @@
         border-bottom-right-radius: 8px;
       }
 
+      &:hover {
+        background: var(--controle-segmente-fond-hover);
+      }
+
+      &:active {
+        background: var(--controle-segmente-fond-clique);
+      }
+
       &.actif {
-        background: #fff7db;
+        background: var(--controle-segmente-courant-fond);
         box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25) inset;
       }
 
