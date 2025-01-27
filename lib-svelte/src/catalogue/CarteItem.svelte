@@ -7,7 +7,7 @@
     item.typologie === Typologie.SERVICE ? "Service" : item.format;
 
   const tronque = (texte: string) => {
-    const LONGUEUR_MAX = 57;
+    const LONGUEUR_MAX = 45;
     return texte.length > LONGUEUR_MAX
       ? texte.slice(0, LONGUEUR_MAX) + "&hellip;"
       : texte;
