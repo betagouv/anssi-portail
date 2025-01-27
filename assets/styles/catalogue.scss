@@ -159,7 +159,7 @@
         cursor: pointer;
 
         &:checked {
-          background-color: #fed980;
+          background-color: var(--jaune-msc);
 
           &::before {
             content: "";

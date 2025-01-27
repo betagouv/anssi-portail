@@ -118,7 +118,7 @@
           background: #fff7db;
 
           a {
-            border-left: 2px solid #fed980;
+            border-left: 2px solid var(--jaune-msc);
             padding-left: 14px;
           }
         }
@@ -160,7 +160,7 @@
         font-weight: bold;
 
         a {
-          border-left: 2px solid #fed980;
+          border-left: 2px solid var(--jaune-msc);
           padding-left: 6px;
         }
       }
