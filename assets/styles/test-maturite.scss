@@ -48,7 +48,7 @@ h5 {
   .illustration {
     display: none;
     padding: 24px;
-    background-color: #fed980;
+    background-color: var(--jaune-msc);
     border-radius: 8px;
     @include a-partir-de(lg) {
       display: flex;
@@ -230,7 +230,7 @@ h5 {
       display: block;
       min-width: 6px;
       position: absolute;
-      background-color: #fed980;
+      background-color: var(--jaune-msc);
       top: 6px;
       left: 0;
       border-radius: 6px;
@@ -322,7 +322,7 @@ h5 {
       box-sizing: border-box;
       text-align: center;
       margin: 32px 0 16px;
-      border-bottom: 4px solid #fed980;
+      border-bottom: 4px solid var(--jaune-msc);
 
       @include a-partir-de(lg) {
         flex: 0 0 384px;
@@ -501,7 +501,7 @@ h5 {
         left: -4px;
         right: -4px;
         border-radius: 8px;
-        border: 3px solid #fed980;
+        border: 3px solid var(--jaune-msc);
       }
     }
 
@@ -519,7 +519,7 @@ h5 {
 
 .votre-parcours {
   padding: 48px var(--gouttiere);
-  background: #fed980 url("/assets/images/motif-fond-opacite-30.png");
+  background: var(--jaune-msc) url("/assets/images/motif-fond-opacite-30.png");
 
   .tuile {
     background: white;

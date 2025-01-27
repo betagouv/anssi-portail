@@ -175,7 +175,7 @@ header {
             width: 2px;
             height: 24px;
             left: 0;
-            background-color: #fed980;
+            background-color: var(--jaune-msc);
             position: absolute;
           }
         }
@@ -243,7 +243,7 @@ header {
 
       &.actif {
         font-weight: 500;
-        border-bottom: 2px solid #fed980;
+        border-bottom: 2px solid var(--jaune-msc);
       }
     }
   }
@@ -254,7 +254,7 @@ header {
 
     &.actif {
       font-weight: 500;
-      border-bottom: 2px solid #fed980;
+      border-bottom: 2px solid var(--jaune-msc);
     }
 
     &[open] summary:after {
@@ -287,7 +287,7 @@ header {
             display: block;
             width: 2px;
             height: 24px;
-            background: #fed980;
+            background: var(--jaune-msc);
             position: absolute;
             left: -8px;
           }
@@ -344,7 +344,7 @@ header {
 .badge {
   justify-content: center;
   border-radius: 8px;
-  background: #fed980;
+  background: var(--jaune-msc);
   text-align: center;
   padding: 2px 8px;
   color: var(--noir);
@@ -497,12 +497,12 @@ header {
 
 .carte.service {
   .contenu {
-    border-bottom-color: #fed980;
+    border-bottom-color: var(--jaune-msc);
   }
 
   figure {
     figcaption {
-      background: #fed980;
+      background: var(--jaune-msc);
       color: var(--noir);
 
       &:before {
@@ -685,7 +685,7 @@ footer {
       border-radius: 6px;
       height: calc(100% - 6px);
       min-width: 6px;
-      background: #fed980;
+      background: var(--jaune-msc);
     }
 
     p {
@@ -750,7 +750,7 @@ footer {
   .carte {
     background: white;
     border-radius: 8px;
-    border-bottom: 6px solid #fed980;
+    border-bottom: 6px solid var(--jaune-msc);
     padding: 24px;
 
     &.parcours {

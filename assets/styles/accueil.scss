@@ -286,7 +286,7 @@
 
         &.couleur1 {
           &:after {
-            background: #FED980;
+            background: var(--jaune-msc);
           }
         }
 

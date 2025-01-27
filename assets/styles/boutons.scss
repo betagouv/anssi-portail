@@ -17,7 +17,7 @@
 }
 
 .bouton.primaire {
-  background: #fed980;
+  background: var(--jaune-msc);
   color: var(--noir);
 
   &[disabled] {
@@ -35,7 +35,7 @@
   line-height: 1.5rem;
 
   &.actif {
-    background: #fed980;
+    background: var(--jaune-msc);
   }
 
   &[disabled] {
