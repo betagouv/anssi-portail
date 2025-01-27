@@ -8,6 +8,8 @@
   --jaune-msc: #fed980;
   --jaune-msc-hover: #ecca79;
   --jaune-msc-clique: #ddbd70;
+  --gris-desactive-fond: #e5e5e5;
+  --gris-desactive-texte: #929292;
   --fonts: Marianne, Arial, sans-serif;
 }
 
@@ -279,9 +281,11 @@ header {
         border-bottom: 1px solid #dddddd;
         position: relative;
         font-weight: normal;
+
         &.actif {
           font-weight: normal;
           border-bottom: 1px solid #dddddd;
+
           &:before {
             content: "";
             display: block;
@@ -292,6 +296,7 @@ header {
             left: -8px;
           }
         }
+
         &:last-child {
           border: none;
         }
