@@ -142,6 +142,7 @@
         <div class="illustration">
           <img
             src="/assets/images/test-maturite/illustration-{idQuestionCourante}.svg"
+            alt=""
           />
         </div>
       {:else}
@@ -171,6 +172,7 @@
         <div class="illustration">
           <img
             src="/assets/images/test-maturite/illustration-prise-en-compte-risque.svg"
+            alt=""
           />
         </div>
       {/if}
