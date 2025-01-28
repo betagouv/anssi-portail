@@ -20,11 +20,17 @@ jobs:
         with:
           node-version: 18
 
-      - name: Installe les dépendances
+      - name: [SITE STATIQUE] Installe les dépendances
+        run: npm ci
+
+      - name: [SITE STATIQUE] Exécute les tests
+        run: npm run test
+
+      - name: [SVELTE] Installe les dépendances
         run: npm ci --prefix lib-svelte
 
-      - name: Exécute les tests
+      - name: [SVELTE] Exécute les tests
         run: npm run test --prefix lib-svelte
 
-      - name: Construis le site via Docker
+      - name: [CONSTRUCTION] Construis le site via Docker
         run: docker build --target build-le-site -t anssi-portail .
