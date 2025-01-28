@@ -13,7 +13,6 @@ droitsAcces:
   - REGULES_NIS2
 sources:
   - ANSSI
-  - CERT-FR
 themes:
   - Protection
   - Gouvernance
