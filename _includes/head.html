@@ -13,6 +13,6 @@
 
   <script src="{{ "/scripts/navigation-mobile.js" | relative_url }}"></script>
   {% if include.extra-js %}
-    <script src="{{ include.extra-js | relative_url }}"></script>
+    <script src="{{ include.extra-js | relative_url }}" type="module"></script>
   {% endif %}
 </head>
