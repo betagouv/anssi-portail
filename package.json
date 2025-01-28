@@ -1,0 +1,17 @@
+{
+  "name": "anssi-portail",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/betagouv/anssi-portail.git"
+  },
+  "private": true,
+  "devDependencies": {
+    "vitest": "^3.0.4"
+  }
+}

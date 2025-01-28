@@ -16,3 +16,4 @@ exclude:
     - lib-svelte/README.md
     - lib-svelte/svelte.config.js
     - lib-svelte/vite.config.ts
+    - test
