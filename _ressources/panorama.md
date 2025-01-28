@@ -13,7 +13,6 @@ droitsAcces:
   - ACCES_LIBRE
 sources:
   - ANSSI
-  - CERT-FR
 parcours : 
   - APPROFONDIR_SENSIBILISER
 ---
