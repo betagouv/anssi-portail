@@ -6,7 +6,7 @@
     <div class="contenu-section">
         <div class="fil-ariane">
             <a href="/">Accueil</a>
-            <span><img src="/assets/images/icone-chevron-droite.svg"/> </span>
+            <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
             <span>Tester votre maturité cyber</span>
         </div>
         <h1>{titre}</h1>
