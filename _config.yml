@@ -7,6 +7,7 @@ exclude:
     - "*.iml"
     - README.md
     - Dockerfile
+    - dev.sh
     - lib-svelte/.vscode/
     - lib-svelte/node_modules/
     - lib-svelte/src/
@@ -16,4 +17,6 @@ exclude:
     - lib-svelte/README.md
     - lib-svelte/svelte.config.js
     - lib-svelte/vite.config.ts
-    - test
+    - lib-svelte/test/
+    - test/
+    - node_modules/
