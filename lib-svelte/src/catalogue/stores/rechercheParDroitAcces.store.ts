@@ -9,7 +9,7 @@ export const rechercheParDroitAcces = {
   reinitialise: () => selectionDroitAcces.set([]),
   ok: (item: ItemCyber) =>
     get(rechercheParDroitAcces).length === 0 ||
-    !!get(rechercheParDroitAcces).find((droitAcces) =>
-      item.droitsAcces.includes(droitAcces),
-    ),
+    !!get(rechercheParDroitAcces).find((droitAcces) => {
+      return item.droitsAcces && item.droitsAcces.includes(droitAcces);
+    }),
 };
