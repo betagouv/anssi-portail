@@ -1,16 +1,55 @@
+import { elementLePlusVisible } from "./scroll.js";
+
+const sectionsSommaireReplie = () =>
+  Array.from(document.querySelectorAll(".sommaire.sommaire-replie ul li"));
+
+const trouveLesLiDuSommaireReplie = (hash) =>
+  sectionsSommaireReplie().filter(
+    (li) => new URL(li.querySelector("a").href).hash === hash,
+  );
+
+const trouveLesLiDesSommaires = (hash) =>
+  Array.from(document.querySelectorAll(".sommaire ul li")).filter(
+    (li) => new URL(li.querySelector("a").href).hash === hash,
+  );
+
+const trouveLeTexte = (hash) =>
+  trouveLesLiDuSommaireReplie(hash)[0].textContent;
+
+const desactiveTousLesItems = () => {
+  const sections = Array.from(document.querySelectorAll(".sommaire ul li"));
+  sections.forEach((s) => s.classList.remove("actif"));
+};
+
+const activeItems = (idPourSurlignage) =>
+  trouveLesLiDesSommaires(idPourSurlignage).forEach((li) =>
+    li.classList.add("actif"),
+  );
+
+const metsAJourLeTexteDeLaSectionActive = (hash) => {
+  document.querySelector("#section-active").textContent =
+    trouveLeTexte(hash) ?? "";
+};
+
+const metsAJourSectionActive = (hashSectionActive) => {
+  desactiveTousLesItems();
+  metsAJourLeTexteDeLaSectionActive(hashSectionActive);
+  activeItems(hashSectionActive);
+};
+
 const changeSectionActive = () => {
-  const sections = Array.from(document.querySelectorAll('.sommaire ul li'))
+  document.querySelector("details").removeAttribute("open");
+  metsAJourSectionActive(location.hash);
+};
 
-  const trouveLesLi = (hash) => sections.filter(li => new URL(li.querySelector('a').href).hash === hash)
-  const trouveLeTexte = hash => trouveLesLi(hash)[0].textContent;
+const scrolle = () => {
+  const sections = document.querySelectorAll(".article .contenu section");
+  const laPlusVisible = elementLePlusVisible([...sections], window.innerHeight);
 
-  document.querySelector('#section-active').textContent = trouveLeTexte(location.hash) ?? ''
-  document.querySelector('details').removeAttribute('open');
+  if (!laPlusVisible) return;
+  metsAJourSectionActive(`#${laPlusVisible.id}`);
+};
 
-  sections.forEach(s => s.classList.remove('actif'))
-  trouveLesLi(location.hash).forEach(li => li.classList.add('actif'))
-}
-
-window.addEventListener('hashchange', changeSectionActive)
-window.addEventListener('DOMContentLoaded', changeSectionActive)
-
+window.addEventListener("hashchange", changeSectionActive);
+window.addEventListener("DOMContentLoaded", changeSectionActive);
+window.addEventListener("scroll", scrolle);
