@@ -3,6 +3,7 @@
     type NiveauMaturite,
     niveauxMaturite,
   } from "./NiveauxMaturite.donnees";
+  import SelectNiveauMaturite from "./SelectNiveauMaturite.svelte";
 
   let niveauxSelectionnes: NiveauMaturite[] = [];
   for (let i = 0; i < 2; i++) {
@@ -14,11 +15,7 @@
   <div class="contenu-section">
     <div class="grille-haute">
       {#each { length: 2 } as _, i}
-        <select bind:value={niveauxSelectionnes[i]}>
-          {#each niveauxMaturite as niveau}
-            <option value={niveau}>{niveau.label}</option>
-          {/each}
-        </select>
+        <SelectNiveauMaturite bind:niveauSelectionne={niveauxSelectionnes[i]} />
       {/each}
 
       {#each { length: 2 } as _, i}
