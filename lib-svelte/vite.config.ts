@@ -10,6 +10,7 @@ export default defineConfig({
         catalogue: "src/main-catalogue.ts",
         extrait: "src/main-extrait.ts",
         "test-maturite": "src/main-test-maturite.ts",
+        "niveaux-maturite":"src/main-niveaux-maturite.ts"
       },
       output: {
         entryFileNames: `assets/[name].js`,
