@@ -6,8 +6,10 @@
   import SelectNiveauMaturite from "./SelectNiveauMaturite.svelte";
   import IllustrationNiveauMaturite from "./IllustrationNiveauMaturite.svelte";
 
+  const COLONNES = 2;
+
   let niveauxSelectionnes: NiveauMaturite[] = [];
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < COLONNES; i++) {
     niveauxSelectionnes.push(niveauxMaturite[i]);
   }
 </script>
@@ -15,17 +17,17 @@
 <section class="niveaux">
   <div class="contenu-section">
     <div class="grille-haute">
-      {#each { length: 2 } as _, i}
+      {#each { length: COLONNES } as _, i}
         <SelectNiveauMaturite bind:niveauSelectionne={niveauxSelectionnes[i]} />
       {/each}
 
-      {#each { length: 2 } as _, i}
+      {#each { length: COLONNES } as _, i}
         <IllustrationNiveauMaturite
           niveauSelectionne={niveauxSelectionnes[i]}
         />
       {/each}
 
-      {#each { length: 2 } as _, i}
+      {#each { length: COLONNES } as _, i}
         <p class="description">{niveauxSelectionnes[i].description}</p>
       {/each}
     </div>
@@ -35,42 +37,58 @@
     <div class="details">
       <div class="detail">
         <h3>Prise en compte du risque</h3>
-        <p>{niveauxSelectionnes[0].priseEnCompteRisque}</p>
+        {#each { length: COLONNES } as _, i}
+          <p>{niveauxSelectionnes[i].priseEnCompteRisque}</p>
+        {/each}
       </div>
 
       <div class="detail">
         <h3>Posture à l'égard de la cyber</h3>
-        <p>{niveauxSelectionnes[0].posture}</p>
+        {#each { length: COLONNES } as _, i}
+          <p>{niveauxSelectionnes[i].posture}</p>
+        {/each}
       </div>
 
       <div class="detail">
         <h3>Pilotage de la sécurité</h3>
-        <p>{niveauxSelectionnes[0].pilotage}</p>
+        {#each { length: COLONNES } as _, i}
+          <p>{niveauxSelectionnes[i].pilotage}</p>
+        {/each}
       </div>
 
       <div class="detail">
         <h3>Resources humaines</h3>
-        <p>{niveauxSelectionnes[0].ressourcesHumaines}</p>
+        {#each { length: COLONNES } as _, i}
+          <p>{niveauxSelectionnes[i].ressourcesHumaines}</p>
+        {/each}
       </div>
 
       <div class="detail">
         <h3>Budget</h3>
-        <p>{niveauxSelectionnes[0].budget}</p>
+        {#each { length: COLONNES } as _, i}
+          <p>{niveauxSelectionnes[i].budget}</p>
+        {/each}
       </div>
 
       <div class="detail">
         <h3>Adoption des solutions cyber</h3>
-        <p>{niveauxSelectionnes[0].adoptionSolutions}</p>
+        {#each { length: COLONNES } as _, i}
+          <p>{niveauxSelectionnes[i].adoptionSolutions}</p>
+        {/each}
       </div>
 
       <div class="detail">
         <h3>Niveau de sécurité</h3>
-        <p>{niveauxSelectionnes[0].niveauSecurite}</p>
+        {#each { length: COLONNES } as _, i}
+          <p>{niveauxSelectionnes[i].niveauSecurite}</p>
+        {/each}
       </div>
 
       <div class="detail">
         <h3>La priorité</h3>
-        <p>{niveauxSelectionnes[0].priorite}</p>
+        {#each { length: COLONNES } as _, i}
+          <p>{niveauxSelectionnes[i].priorite}</p>
+        {/each}
       </div>
     </div>
   </div>
