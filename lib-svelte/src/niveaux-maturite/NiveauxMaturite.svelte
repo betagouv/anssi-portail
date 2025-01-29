@@ -4,6 +4,7 @@
     niveauxMaturite,
   } from "./NiveauxMaturite.donnees";
   import SelectNiveauMaturite from "./SelectNiveauMaturite.svelte";
+  import IllustrationNiveauMaturite from "./IllustrationNiveauMaturite.svelte";
 
   let niveauxSelectionnes: NiveauMaturite[] = [];
   for (let i = 0; i < 2; i++) {
@@ -19,13 +20,9 @@
       {/each}
 
       {#each { length: 2 } as _, i}
-        <div class="illustration">
-          <img
-            src="/assets/images/test-maturite/niveaux/{niveauxSelectionnes[i]
-              .id}.svg"
-            alt={`Illustration niveau ${niveauxSelectionnes[i].label}`}
-          />
-        </div>
+        <IllustrationNiveauMaturite
+          niveauSelectionne={niveauxSelectionnes[i]}
+        />
       {/each}
 
       {#each { length: 2 } as _, i}
