@@ -4,39 +4,36 @@
     niveauxMaturite,
   } from "./NiveauxMaturite.donnees";
 
-  let niveauSelectionne: NiveauMaturite = niveauxMaturite[0];
-  let niveauSelectionne2: NiveauMaturite = niveauxMaturite[1];
+  let niveauxSelectionnes: NiveauMaturite[] = [];
+  for (let i = 0; i < 2; i++) {
+    niveauxSelectionnes.push(niveauxMaturite[i]);
+  }
 </script>
 
 <section class="niveaux">
   <div class="contenu-section">
     <div class="grille-haute">
-      <select bind:value={niveauSelectionne}>
-        {#each niveauxMaturite as niveau}
-          <option value={niveau}>{niveau.label}</option>
-        {/each}
-      </select>
-      <select bind:value={niveauSelectionne2}>
-        {#each niveauxMaturite as niveau}
-          <option value={niveau}>{niveau.label}</option>
-        {/each}
-      </select>
+      {#each { length: 2 } as _, i}
+        <select bind:value={niveauxSelectionnes[i]}>
+          {#each niveauxMaturite as niveau}
+            <option value={niveau}>{niveau.label}</option>
+          {/each}
+        </select>
+      {/each}
 
-      <div class="illustration">
-        <img
-          src="/assets/images/test-maturite/niveaux/{niveauSelectionne.id}.svg"
-          alt={`Illustration niveau ${niveauSelectionne.label}`}
-        />
-      </div>
-      <div class="illustration">
-        <img
-          src="/assets/images/test-maturite/niveaux/{niveauSelectionne2.id}.svg"
-          alt={`Illustration niveau ${niveauSelectionne.label}`}
-        />
-      </div>
+      {#each { length: 2 } as _, i}
+        <div class="illustration">
+          <img
+            src="/assets/images/test-maturite/niveaux/{niveauxSelectionnes[i]
+              .id}.svg"
+            alt={`Illustration niveau ${niveauxSelectionnes[i].label}`}
+          />
+        </div>
+      {/each}
 
-      <p class="description">{niveauSelectionne.description}</p>
-      <p class="description">{niveauSelectionne2.description}</p>
+      {#each { length: 2 } as _, i}
+        <p class="description">{niveauxSelectionnes[i].description}</p>
+      {/each}
     </div>
 
     <h2>Les 6 critères pour évaluer votre niveau de maturité cyber</h2>
@@ -44,42 +41,42 @@
     <div class="details">
       <div class="detail">
         <h3>Prise en compte du risque</h3>
-        <p>{niveauSelectionne.priseEnCompteRisque}</p>
+        <p>{niveauxSelectionnes[0].priseEnCompteRisque}</p>
       </div>
 
       <div class="detail">
         <h3>Posture à l'égard de la cyber</h3>
-        <p>{niveauSelectionne.posture}</p>
+        <p>{niveauxSelectionnes[0].posture}</p>
       </div>
 
       <div class="detail">
         <h3>Pilotage de la sécurité</h3>
-        <p>{niveauSelectionne.pilotage}</p>
+        <p>{niveauxSelectionnes[0].pilotage}</p>
       </div>
 
       <div class="detail">
         <h3>Resources humaines</h3>
-        <p>{niveauSelectionne.ressourcesHumaines}</p>
+        <p>{niveauxSelectionnes[0].ressourcesHumaines}</p>
       </div>
 
       <div class="detail">
         <h3>Budget</h3>
-        <p>{niveauSelectionne.budget}</p>
+        <p>{niveauxSelectionnes[0].budget}</p>
       </div>
 
       <div class="detail">
         <h3>Adoption des solutions cyber</h3>
-        <p>{niveauSelectionne.adoptionSolutions}</p>
+        <p>{niveauxSelectionnes[0].adoptionSolutions}</p>
       </div>
 
       <div class="detail">
         <h3>Niveau de sécurité</h3>
-        <p>{niveauSelectionne.niveauSecurite}</p>
+        <p>{niveauxSelectionnes[0].niveauSecurite}</p>
       </div>
 
       <div class="detail">
         <h3>La priorité</h3>
-        <p>{niveauSelectionne.priorite}</p>
+        <p>{niveauxSelectionnes[0].priorite}</p>
       </div>
     </div>
   </div>
