@@ -6,7 +6,7 @@
   import SelectNiveauMaturite from "./SelectNiveauMaturite.svelte";
   import IllustrationNiveauMaturite from "./IllustrationNiveauMaturite.svelte";
 
-  const COLONNES = 2;
+  const COLONNES = 5;
 
   let niveauxSelectionnes: NiveauMaturite[] = [];
   for (let i = 0; i < COLONNES; i++) {

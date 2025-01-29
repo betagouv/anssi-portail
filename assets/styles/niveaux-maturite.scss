@@ -48,21 +48,17 @@ p {
   }
 }
 
-.colonne2 {
-  display: none;
-  @include a-partir-de(xs2) {
-    display: block;
-  }
-}
-
 .grille-haute {
   display: grid;
   gap: 16px;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 220px;
+  grid-template-rows: auto 220px 1fr;
 
   @include a-partir-de(xs2) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include a-partir-de(sm) {
+    grid-template-columns: repeat(5, minmax(50px, 1fr));
   }
 
   select {
@@ -70,6 +66,13 @@ p {
       display: none;
 
       @include a-partir-de(xs2) {
+        display: block;
+      }
+    }
+
+    &:nth-of-type(n + 3) {
+      display: none;
+      @include a-partir-de(sm) {
         display: block;
       }
     }
@@ -85,6 +88,13 @@ p {
     &:nth-of-type(2) {
       display: none;
       @include a-partir-de(xs2) {
+        display: flex;
+      }
+    }
+
+    &:nth-of-type(n + 3) {
+      display: none;
+      @include a-partir-de(sm) {
         display: flex;
       }
     }
@@ -114,6 +124,13 @@ p {
         display: block;
       }
     }
+
+    &:nth-of-type(n + 3) {
+      display: none;
+      @include a-partir-de(sm) {
+        display: block;
+      }
+    }
   }
 }
 
@@ -124,7 +141,11 @@ p {
   grid-template-columns: 1fr;
 
   @include a-partir-de(xs2) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(50px, 1fr));
+  }
+
+  @include a-partir-de(sm) {
+    grid-template-columns: repeat(5, minmax(50px, 1fr));
   }
 
   h3 {
@@ -135,6 +156,13 @@ p {
     &:nth-of-type(2) {
       display: none;
       @include a-partir-de(xs2) {
+        display: block;
+      }
+    }
+
+    &:nth-of-type(n + 3) {
+      display: none;
+      @include a-partir-de(sm) {
         display: block;
       }
     }
