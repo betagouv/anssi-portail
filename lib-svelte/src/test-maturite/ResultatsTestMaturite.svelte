@@ -1,11 +1,12 @@
 <script lang="ts">
   import Hero from "../Hero.svelte";
   import TuilesMaturite from "./TuilesMaturite.svelte";
-  import { type IdNiveau, niveauxMaturite } from "./TestMaturite.donnees";
+  import { type IdNiveau } from "../niveaux-maturite/NiveauxMaturite.donnees";
   import { questionnaireStore } from "./stores/questionnaire.store";
   import PubliciteMesServicesCyber from "./PubliciteMesServicesCyber.svelte";
   import RadarMaturite from "./RadarMaturite.svelte";
   import TuileVersParcours from "./TuileVersParcours.svelte";
+  import { niveauxMaturite } from "../niveaux-maturite/NiveauxMaturite.donnees";
 
   $: resultats = {
     pilotage: $questionnaireStore.toutesLesReponses[2] + 1,

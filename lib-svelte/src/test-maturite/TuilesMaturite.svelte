@@ -1,6 +1,9 @@
 <script lang="ts">
-  import { type NiveauMaturite, niveauxMaturite } from "./TestMaturite.donnees";
   import { onMount } from "svelte";
+  import {
+    type NiveauMaturite,
+    niveauxMaturite,
+  } from "../niveaux-maturite/NiveauxMaturite.donnees";
 
   export let niveauCourant: NiveauMaturite;
 
