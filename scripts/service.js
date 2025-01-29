@@ -42,12 +42,23 @@ const changeSectionActive = () => {
   metsAJourSectionActive(location.hash);
 };
 
-const scrolle = () => {
-  const sections = document.querySelectorAll(".article .contenu section");
-  const laPlusVisible = elementLePlusVisible([...sections], window.innerHeight);
+let scrollEnAttenteDeMiseAJour = false;
 
-  if (!laPlusVisible) return;
-  metsAJourSectionActive(`#${laPlusVisible.id}`);
+const scrolle = () => {
+  if (!scrollEnAttenteDeMiseAJour) {
+    scrollEnAttenteDeMiseAJour = true;
+    setTimeout(() => {
+      const sections = document.querySelectorAll(".article .contenu section");
+      const laPlusVisible = elementLePlusVisible(
+        [...sections],
+        window.innerHeight,
+      );
+
+      if (!laPlusVisible) return;
+      metsAJourSectionActive(`#${laPlusVisible.id}`);
+      scrollEnAttenteDeMiseAJour = false;
+    }, 400);
+  }
 };
 
 window.addEventListener("hashchange", changeSectionActive);
