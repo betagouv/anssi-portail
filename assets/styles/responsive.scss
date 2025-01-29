@@ -4,7 +4,8 @@ $points-de-rupture-a-partir-de: (
         md: ( min-width: 767px ),
         lg: ( min-width: 992px ),
         xl: ( min-width: 1280px ),
-        xxl: ( min-width: 1440px )
+        xxl: ( min-width: 1440px ),
+        xs2: ( min-width:440px )
 ) !default;
 
 @mixin a-partir-de($point-de-rupture) {
