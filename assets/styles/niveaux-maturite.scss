@@ -1,2 +1,75 @@
 ---
 ---
+
+@import "responsive";
+
+h2,
+h3,
+h4,
+p {
+  padding: 0;
+  margin: 0;
+}
+
+.niveaux {
+  padding: 24px var(--gouttiere) 48px;
+
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      margin: 24px 0;
+      font-size: 1.75rem;
+      line-height: 2.25rem;
+    }
+
+    h3 {
+      margin-top: 24px;
+      font-size: 1.125rem;
+      line-height: 1.5rem;
+    }
+
+    p {
+      padding: 16px 0 32px;
+    }
+
+    .description {
+      font-size: 1.125rem;
+      line-height: 1.5rem;
+      margin-bottom: 0;
+    }
+
+    .details {
+      p {
+        border-bottom: 1px solid #dddddd;
+      }
+    }
+  }
+}
+
+.illustration {
+  margin-top: 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  flex: 0 0 220px;
+  max-height: 220px;
+
+  &:after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    bottom: 13px;
+    border: 1px solid #0d0c21;
+    left: 0;
+    right: 0;
+  }
+
+  img {
+    flex: 0;
+    z-index: 2;
+    height: 220px;
+  }
+}
