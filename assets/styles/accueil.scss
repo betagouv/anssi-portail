@@ -146,6 +146,10 @@
   gap: 16px;
   margin: 16px 0 48px;
 
+  @include a-partir-de(lg) {
+    gap: 24px;
+  }
+
   .carte.service, .carte.ressource {
     width: auto;
   }
