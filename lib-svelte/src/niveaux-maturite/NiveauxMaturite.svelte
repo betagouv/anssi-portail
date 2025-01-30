@@ -16,11 +16,12 @@
 
 <section class="niveaux">
   <div class="contenu-section">
-    <div class="grille-haute">
+    <div class="selecteurs">
       {#each { length: COLONNES } as _, i}
         <SelectNiveauMaturite bind:niveauSelectionne={niveauxSelectionnes[i]} />
       {/each}
-
+    </div>
+    <div class="grille-haute">
       {#each { length: COLONNES } as _, i}
         <IllustrationNiveauMaturite
           niveauSelectionne={niveauxSelectionnes[i]}

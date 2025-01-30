@@ -12,7 +12,7 @@ p {
 }
 
 .niveaux {
-  padding: 24px var(--gouttiere) 48px;
+  padding: 0 var(--gouttiere) 48px;
 
   .contenu-section {
     display: flex;
@@ -48,11 +48,15 @@ p {
   }
 }
 
-.grille-haute {
+.selecteurs {
+  position: sticky;
+  top: 0;
+  background: white;
   display: grid;
   gap: 16px;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 220px 1fr;
+  padding: 24px 0;
+  z-index: 10;
 
   @include a-partir-de(xs2) {
     grid-template-columns: repeat(2, 1fr);
@@ -76,6 +80,20 @@ p {
         display: block;
       }
     }
+  }
+}
+
+.grille-haute {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 220px 1fr;
+
+  @include a-partir-de(xs2) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include a-partir-de(sm) {
+    grid-template-columns: repeat(5, minmax(50px, 1fr));
   }
 
   .illustration {
