@@ -101,7 +101,7 @@ export const questions: Question[] = [
   },
   {
     titre: "Informations complémentaires",
-    question: "À propos de votre organisation",
+    question: "Pour finir",
     propositions: [],
     id: "infos-complementaires",
   },
