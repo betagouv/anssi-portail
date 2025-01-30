@@ -252,7 +252,10 @@ header {
     align-items: center;
 
     a {
-      padding: 16px 16px;
+      padding: 16px 8px;
+      @include a-partir-de(xl) {
+        padding: 16px;
+      }
       border-bottom: none;
 
       &:hover {
@@ -272,7 +275,10 @@ header {
 
   details {
     position: relative;
-    padding: 16px 16px;
+    padding: 16px 8px;
+    @include a-partir-de(xl) {
+      padding: 16px;
+    }
 
     &:hover {
       background: var(--menu-fond-hover);
@@ -827,7 +833,8 @@ footer {
       }
     }
 
-    &.test-maturite, &.nis2 {
+    &.test-maturite,
+    &.nis2 {
       box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
       padding-top: 40px;
       display: grid;
