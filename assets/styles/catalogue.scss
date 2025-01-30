@@ -9,13 +9,20 @@
   position: relative;
 }
 
+.chapeau.fond-sombre {
+  padding-bottom: 96px;
+  p {
+    margin-bottom: 24px;
+  }
+}
+
 .barre-filtre-besoin {
   display: none;
   position: relative;
-  top: -90px;
+  top: -96px;
+  margin-bottom: -96px;
   margin-left: 24px;
   margin-right: 24px;
-  margin-bottom: -90px;
 
   @include a-partir-de(lg) {
     display: block;
@@ -212,11 +219,7 @@
     }
   }
 
-  padding: 40px var(--gouttiere);
-
-  @include a-partir-de(lg) {
-    padding: 48px var(--gouttiere) 80px;
-  }
+  padding: 60px var(--gouttiere) 80px;
 }
 
 .grille {
