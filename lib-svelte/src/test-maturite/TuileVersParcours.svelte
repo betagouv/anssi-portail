@@ -3,12 +3,22 @@
 </script>
 
 <div class="tuile parcours">
-  <img src="/assets/images/{parcours}-cyber.png" alt="">
-  <h3>Votre parcours cyber</h3>
+  <img src="/assets/images/{parcours}-cyber.png" alt="" />
+  <h3>
+    Les services pour {parcours === "debuter"
+      ? "se lancer en"
+      : "approfondir la"} cybersécurité
+  </h3>
   <p>
-    Identifiez vos actions prioritaires grâce à un parcours dédié, regroupant
-    des services et ressources adaptés à vos besoins et à la maturité cyber de
-    votre organisation.
+    {#if parcours === "debuter"}
+      Découvrez les services et les ressources pour aider votre organisation à
+      se lancer dans une démarche de renforcement de la cybersécurité.
+    {:else}
+      Découvrez les services et les ressources pour aider votre organisation à
+      approfondir la démarche de renforcement de la cybersécurité.
+    {/if}
   </p>
-  <a href="/parcours-{parcours}" class="bouton primaire">Accéder à mon parcours cyber</a>
+  <a href="/parcours-{parcours}" class="bouton primaire"
+    >Accéder à mon parcours cyber</a
+  >
 </div>
