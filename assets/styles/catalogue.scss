@@ -318,3 +318,11 @@
   flex-direction: column;
   width: auto;
 }
+
+.encart.fond-clair {
+  background: #f4f4f4 url("/assets/images/motif-fond-service.png");
+
+  .carte.parcours {
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
+  }
+}
