@@ -39,7 +39,8 @@ const metsAJourSectionActive = (hashSectionActive) => {
 
 const changeSectionActive = () => {
   document.querySelector("details").removeAttribute("open");
-  metsAJourSectionActive(location.hash);
+  if (location.hash)
+    metsAJourSectionActive(location.hash);
 };
 
 let scrollEnAttenteDeMiseAJour = false;
