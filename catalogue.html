@@ -5,27 +5,59 @@ titreHtml: "Les services et ressources cyber | MesServicesCyber"
 ---
 
 <script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/catalogue.js"
+        type="module"
+        crossorigin
+        src="/lib-svelte/dist/assets/catalogue.js"
 ></script>
 
 <section class="chapeau fond-sombre">
   <div class="contenu-section">
-      <div class="fil-ariane">
-        <a href="/">Accueil</a>
-        <span><img src="/assets/images/icone-chevron-droite.svg" /> </span>
-        <span>Les services et ressources cyber</span>
-      </div>
-      <h1>Les services et ressources cyber</h1>
-      <p>
-        Trouvez les services et les ressources adaptées à vos besoins et votre
-        niveau cyber.
-      </p>
+    <div class="fil-ariane">
+      <a href="/">Accueil</a>
+      <span><img src="/assets/images/icone-chevron-droite.svg"/> </span>
+      <span>Les services et ressources cyber</span>
+    </div>
+    <h1>Les services et ressources cyber</h1>
+    <p>
+      Trouvez les services et les ressources adaptées à vos besoins.
+    </p>
   </div>
 </section>
 
 {% include script-donnees-json.html %}
 
 <div id="catalogue"></div>
-{% include encart-test-maturite.html fond='clair' %}
+
+{% include encart-nis2.html fond='sombre' %}
+
+<div class="encart fond-clair">
+  <div class="contenu-section">
+    <h1>Nos parcours adaptés à votre maturité cyber</h1>
+    <div class="liste-parcours">
+      <div class="carte parcours">
+        <img
+                src="/assets/images/debuter-cyber.png"
+                alt="Illustration débutant cyber"
+        />
+        <h2>Les services pour se lancer en cybersécurité</h2>
+        <p>
+          Découvrez les services et les ressources pour aider votre organisation à se lancer dans une démarche de
+          renforcement de la cybersécurité.
+        </p>
+        <a href="/parcours-debuter">Découvrir le parcours</a>
+      </div>
+      <div class="carte parcours">
+        <img
+                src="/assets/images/approfondir-cyber.png"
+                alt="Illustration approfondir cyber"
+        />
+        <h2>Les services pour approfondir la cybersécurité</h2>
+        <p>
+          Découvrez les services et les ressources pour aider votre organisation à approfondir la démarche de
+          renforcement de la cybersécurité.
+        </p>
+        <a href="/parcours-approfondir">Découvrir le parcours</a>
+      </div>
+    </div>
+  </div>
+</div>
