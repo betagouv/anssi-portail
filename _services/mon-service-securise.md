@@ -33,6 +33,7 @@ themes:
   - Protection
 parcours:
   - APPROFONDIR_PILOTER
+  - NIS2_REDUIRE_RISQUES
 ---
 MonServiceSécurisé est un service numérique proposé par le laboratoire d'innovation de l’ANSSI pour aider les entités publiques à piloter en équipe la sécurité de tous leurs services numériques et à les homologuer rapidement.
 

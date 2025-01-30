@@ -18,4 +18,5 @@ themes:
   - Protection
 parcours:
   - APPROFONDIR_TESTER
+  - NIS2_REDUIRE_RISQUES
 ---
