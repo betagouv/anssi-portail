@@ -248,42 +248,6 @@ h5 {
       line-height: 1.75rem;
     }
   }
-
-  .priorite {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin: 32px 0;
-    padding: 24px 24px 24px 64px;
-
-    h5 {
-      font-size: 1.125rem;
-      line-height: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 8px;
-      position: relative;
-
-      @include a-partir-de(sm) {
-        font-size: 1.25rem;
-        line-height: 1.75rem;
-      }
-
-      &:before {
-        content: "";
-        background: url("/assets/images/icone-information.svg");
-        position: absolute;
-        display: block;
-        top: 4px;
-        left: -40px;
-        width: 24px;
-        height: 24px;
-      }
-    }
-
-    p {
-      font-size: 0.875rem;
-      line-height: 1.5rem;
-    }
-  }
 }
 
 .pour-aller-plus-loin {
