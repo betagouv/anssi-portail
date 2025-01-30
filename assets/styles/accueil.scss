@@ -239,6 +239,7 @@ section {
         grid-template-columns: 1fr 1fr;
         justify-items: stretch;
         grid-template-areas: "fonctions illustration";
+        margin-top: 40px;
       }
     }
 
@@ -271,6 +272,10 @@ section {
       .fonction-msc {
         position: relative;
         padding-left: 26px;
+
+        @include  a-partir-de(lg) {
+          padding-left: 46px;
+        }
 
         h2 {
           margin: 0 0 8px;
