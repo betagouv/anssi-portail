@@ -147,7 +147,7 @@ section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
   gap: 16px;
-  margin: 16px 0 48px;
+  padding: 16px 0 48px;
 
   @include a-partir-de(lg) {
     gap: 24px;
