@@ -149,8 +149,10 @@
         <div class="introduction">
           <h4>Quelle est la maturité cyber de votre organisation ?</h4>
           <p>
-            Ce test vous invite à répondre à <b>6 questions</b> permettant de déterminer
-            quelle est votre maturité cyber.
+            La maturité cyber correspond au niveau global de prise en compte des
+            enjeux de cyber sécurité par une organisation. Ce test vous invite à
+            répondre à <b>6 questions</b> permettant d’évaluer la maturité cyber
+            de votre organisation.
           </p>
           <input
             type="button"
@@ -159,8 +161,10 @@
             on:click={debuteTeste}
           />
           <div class="note">
-            Le résultat obtenu est une évaluation indicative basé sur un modèle
-            élaboré par l’ANSSI.
+            Le résultat obtenu est une évaluation indicative basée sur un modèle
+            élaboré par l’ANSSI. Le niveau de maturité n’est pas une évaluation
+            du niveau de sécurité des systèmes d’information d’une organisation
+            mais de sa posture à l’égard des enjeux cyber.
           </div>
         </div>
         <div class="illustration">
