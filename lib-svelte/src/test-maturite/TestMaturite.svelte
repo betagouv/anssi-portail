@@ -91,17 +91,6 @@
             </div>
           {:else}
             <div class="informations-complementaires">
-              <div class="note">
-                Ces informations sont facultatives et restent anonymes
-              </div>
-              <p>
-                MesServices a pour mission d'aider les organisations à améliorer
-                leur niveau de sécurité cyber. En renseignant ces informations,
-                vous contribuez à établir une cartographie nationale de la
-                maturité cyber, qui permettra d'adapter les services et
-                recommandations proposés.
-              </p>
-
               <label>
                 Quel est le secteur d’activité de votre organisation&nbsp;?
                 <SelectSecteurActivite />
