@@ -1,7 +1,7 @@
 ---
 ---
 
-@import 'responsive';
+@import "responsive";
 
 section {
   padding: 48px var(--gouttiere) !important;
@@ -12,6 +12,7 @@ section {
 
 .chapeau.fond-sombre {
   .contenu-section {
+    align-items: center;
     text-align: center;
   }
 
@@ -32,6 +33,7 @@ section {
   .boutons {
     display: flex;
     flex-direction: column;
+    align-items: center;
     @include a-partir-de(sm) {
       flex-direction: row;
       gap: 16px;
@@ -153,7 +155,8 @@ section {
     gap: 24px;
   }
 
-  .carte.service, .carte.ressource {
+  .carte.service,
+  .carte.ressource {
     width: auto;
   }
 }
@@ -166,10 +169,10 @@ section {
     grid-template-columns: auto;
     grid-template-rows: auto;
     grid-template-areas:
-        "illustration"
-        "titre"
-        "contenu"
-        "bouton";
+      "illustration"
+      "titre"
+      "contenu"
+      "bouton";
 
     @include a-partir-de(lg) {
       grid-template-columns: auto 384px;
@@ -275,7 +278,7 @@ section {
         position: relative;
         padding-left: 26px;
 
-        @include  a-partir-de(lg) {
+        @include a-partir-de(lg) {
           padding-left: 46px;
         }
 
@@ -312,7 +315,6 @@ section {
             background: var(--noir);
           }
         }
-
       }
     }
 
@@ -339,9 +341,9 @@ section {
 
     @include a-partir-de(lg) {
       grid-template-areas:
-              "titre illustration"
-              "contenu illustration"
-              "bouton illustration";
+        "titre illustration"
+        "contenu illustration"
+        "bouton illustration";
       padding: 40px;
     }
 
@@ -382,7 +384,8 @@ section {
   }
 }
 
-.nis2, .anssi {
+.nis2,
+.anssi {
   .bouton.secondaire {
     align-self: center;
     width: 190px;
