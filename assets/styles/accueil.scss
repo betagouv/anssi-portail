@@ -3,9 +3,14 @@
 
 @import 'responsive';
 
-.chapeau.fond-sombre {
-  padding: 48px var(--gouttiere);
+section {
+  padding: 48px var(--gouttiere) !important;
+  @include a-partir-de(lg) {
+    padding: 72px var(--gouttiere) !important;
+  }
+}
 
+.chapeau.fond-sombre {
   .contenu-section {
     text-align: center;
   }
@@ -47,8 +52,6 @@
 }
 
 .services-dispos {
-  padding: 48px var(--gouttiere);
-
   .contenu-section {
     display: flex;
     flex-direction: column;
@@ -156,9 +159,6 @@
 }
 
 .encart {
-  padding-top: 48px;
-  padding-bottom: 48px;
-
   .carte.parcours {
     display: grid;
     gap: 24px 16px;
@@ -225,8 +225,6 @@
 }
 
 .votre-espace-cyber {
-  padding: 48px var(--gouttiere);
-
   .contenu-section {
     display: flex;
     flex-direction: column;
@@ -320,7 +318,6 @@
 
 .nis2 {
   background: #f4f4f4 url("/assets/images/motif-fond-service.png");
-  padding: 48px var(--gouttiere);
 
   .contenu-section {
     background: white;
@@ -392,8 +389,6 @@
 }
 
 .anssi {
-  padding: 48px var(--gouttiere);
-
   .contenu-section {
     display: flex;
     flex-direction: column;
@@ -421,5 +416,4 @@
       }
     }
   }
-
 }
