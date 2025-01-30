@@ -83,13 +83,6 @@
           <p>{niveauxSelectionnes[i].niveauSecurite}</p>
         {/each}
       </div>
-
-      <div class="detail">
-        <h3>La priorité</h3>
-        {#each { length: COLONNES } as _, i}
-          <p>{niveauxSelectionnes[i].priorite}</p>
-        {/each}
-      </div>
     </div>
   </div>
 </section>
