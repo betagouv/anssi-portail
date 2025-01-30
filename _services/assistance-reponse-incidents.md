@@ -16,4 +16,6 @@ droitsAcces:
 themes:
   - Resilience
   - Defense
+parcours:
+  - NIS2_DECLARER_INCIDENT
 ---

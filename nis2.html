@@ -1,0 +1,65 @@
+---
+layout: parcours
+permalink: /nis2/
+titreHtml: "Votre entité est régulée NIS2 ? | MesServicesCyber"
+---
+
+<section class="chapeau fond-sombre nis2">
+  <div class="contenu-section">
+    <div class="fil-ariane">
+      <a href="/">Accueil</a>
+      <span><img src="/assets/images/icone-chevron-droite.svg"/> </span>
+      <span>Progresser en cybersécurité</span>
+      <span><img src="/assets/images/icone-chevron-droite.svg"/> </span>
+      <span>Cybersécurité&nbsp;: se lancer&nbsp;!</span>
+    </div>
+    <h1>Votre entité est régulée NIS2&nbsp;?</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non efficitur felis. Quisque dictum semper
+      finibus. Etiam non venenatis ligula. Phasellus sit amet tristique arcu. Pellentesque habitant morbi tristique
+      senectus et netus et malesuada fames ac turpis egestas. Aenean id enim condimentum, euismod magna et, porttitor
+      arcu. Sed efficitur tortor mauris.
+    </p>
+  </div>
+</section>
+
+<section class="sommaire">
+  <div class="contenu-section">
+    <div class="groupe-boutons">
+      <a href="#s-informer" class="actif bouton secondaire">S’informer</a>
+      <a href="#s-enregistrer" class="bouton secondaire">S’enregistrer</a>
+      <a href="#reduire-risques" class="bouton secondaire">Réduire les risques cyber</a>
+      <a href="#declarer-incident" class="bouton secondaire">Déclarer un incident</a>
+    </div>
+  </div>
+</section>
+
+{% include action-parcours.html
+id='s-informer'
+titre='S’informer'
+explication='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+parcours='NIS2_S_INFORMER'
+%}
+
+{% include action-parcours.html
+id='s-enregistrer'
+titre='S’enregistrer'
+explication='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+parcours='NIS2_S_ENREGISTRER'
+fondAlternatif=true
+%}
+
+{% include action-parcours.html
+id='reduire-risques'
+titre='Réduire les risques cyber'
+explication='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+parcours='NIS2_REDUIRE_RISQUES'
+%}
+
+{% include action-parcours.html
+id='declarer-incident'
+titre='Déclarer un incident'
+explication='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+parcours='NIS2_DECLARER_INCIDENT'
+fondAlternatif=true
+%}
