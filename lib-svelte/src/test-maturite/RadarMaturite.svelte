@@ -8,44 +8,48 @@
       label: "Pilotage de la sécurité",
       ancrageTexte: "start",
       alignementVertical: "middle",
-      lettre: "A",
+      lettre: "C",
     },
     {
       id: "budget",
       label: "Budget",
       ancrageTexte: "start",
       alignementVertical: "hanging",
-      lettre: "B",
+      lettre: "D",
     },
     {
       id: "ressources-humaines",
       label: "Ressources humaines",
       ancrageTexte: "end",
       alignementVertical: "hanging",
-      lettre: "C",
+      lettre: "E",
     },
     {
       id: "adoption-solutions",
       label: "Adoption des solutions cyber",
       ancrageTexte: "end",
       alignementVertical: "middle",
-      lettre: "D",
+      lettre: "F",
     },
     {
       id: "prise-en-compte-risque",
       label: "Prise en compte du risque",
       ancrageTexte: "end",
       alignementVertical: "auto",
-      lettre: "E",
+      lettre: "A",
     },
     {
       id: "posture",
       label: "Posture à l'égard de la cyber",
       ancrageTexte: "start",
       alignementVertical: "auto",
-      lettre: "F",
+      lettre: "B",
     },
   ];
+
+  $: rubriquesTrieesParLettre = rubriques.toSorted((a, b) =>
+    a.lettre > b.lettre ? 1 : -1,
+  );
 
   const tailleRadar = 200;
   const polaireVersCartesien = (r: number, theta: number) => ({
@@ -166,7 +170,7 @@
   </svg>
 
   <ul>
-    {#each rubriques as rubrique}
+    {#each rubriquesTrieesParLettre as rubrique}
       <li>
         <span class="lettre">{rubrique.lettre}</span> : {rubrique.label} -
         {resultats[rubrique.id]}/5
