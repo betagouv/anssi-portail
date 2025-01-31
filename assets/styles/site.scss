@@ -56,14 +56,19 @@ a {
   }
 
   &:active {
-     background: rgba(0, 0, 0, 0.08);
+    background: rgba(0, 0, 0, 0.08);
   }
 
   &:focus {
-    outline: 2px solid #0A76F6;
+    outline: 2px solid #0a76f6;
     outline-offset: 2px;
     border-style: none;
   }
+}
+
+.marianne {
+  width: 108px;
+  transform: translateX(-16px);
 }
 
 header {
@@ -130,11 +135,6 @@ header {
         font-weight: normal;
       }
     }
-  }
-
-  .marianne {
-    width: 108px;
-    transform: translateX(-16px);
   }
 
   .ouverture-menu {
@@ -568,32 +568,58 @@ header {
 
 footer {
   border-top: 2px solid var(--noir);
+  padding: 16px var(--gouttiere) 24px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 
-  .contenu-section {
+  .officiel {
+    padding: 0 0 16px;
+    border-bottom: 1px solid var(--gris-clair);
+    img {
+      margin-bottom: 8px;
+    }
+    p {
+      margin-bottom: 16px;
+
+      a {
+        display: inline;
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    .liens-externes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 20px;
+      a {
+        color: #3a3a3a;
+        font-weight: bold;
+        border: none;
+      }
+    }
+  }
+
+  .liens-internes {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 16px;
-    @include a-partir-de(md) {
-      flex-direction: row;
-      gap: 16px;
+    padding: 16px 0 0;
+
+    a {
+      text-decoration: none;
+      color: var(--noir);
+      border: none;
     }
-  }
 
-  padding: 16px var(--gouttiere) 24px;
-
-  a {
-    text-decoration: none;
-    color: var(--noir);
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    border: none;
-  }
-
-  hr {
-    border: none;
-    border-left: 1px solid var(--gris-clair);
-    margin: 2px 0;
+    hr {
+      border: none;
+      border-left: 1px solid var(--gris-clair);
+      margin: 2px 0;
+    }
   }
 }
 
