@@ -42,7 +42,7 @@
   titre="Résultat de maturité cyber"
   description="Ce résultat nous permet de vous guider et de vous fournir les informations et les outils essentiels pour agir et améliorer votre niveau de maturité cyber."
 />
-<div class="resultats-test">
+<section class="resultats-test">
   <div class="contenu-section">
     <h2>Niveau de maturité le plus proche : {niveau.label}</h2>
     <TuilesMaturite niveauCourant={niveau} />
@@ -53,7 +53,7 @@
 
     <a href="/niveaux-maturite" target="_blank">Les niveaux de maturité cyber</a>
   </div>
-</div>
+</section>
 
 <section class="pour-aller-plus-loin">
   <div class="contenu-section">

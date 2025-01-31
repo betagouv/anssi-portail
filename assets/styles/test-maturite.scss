@@ -12,6 +12,13 @@ h5 {
   margin: 0;
 }
 
+section {
+  padding: 48px var(--gouttiere);
+  @include a-partir-de(lg) {
+    padding: 72px var(--gouttiere);
+  }
+}
+
 .chapeau.fond-sombre {
   @include a-partir-de(lg) {
     padding-bottom: 40px;
@@ -19,8 +26,6 @@ h5 {
 }
 
 .test-maturite {
-  padding: 32px var(--gouttiere);
-
   @include a-partir-de(lg) {
     padding: 24px var(--gouttiere);
   }
@@ -210,8 +215,6 @@ h5 {
 }
 
 .resultats-test {
-  padding: 32px var(--gouttiere);
-
   .contenu-section {
     padding: 16px 0;
     overflow: hidden;
@@ -262,7 +265,6 @@ h5 {
 }
 
 .pour-aller-plus-loin {
-  padding: 48px var(--gouttiere);
   background: #0d0c21 url("/assets/images/motif-fond-service-opacite-16.png");
   color: white;
 
@@ -321,8 +323,6 @@ h5 {
 }
 
 .repartition {
-  padding: 48px var(--gouttiere) 64px;
-
   .contenu-section {
     h2 {
       font-size: 1.75rem;
@@ -494,7 +494,6 @@ h5 {
 }
 
 .votre-parcours {
-  padding: 48px var(--gouttiere);
   background: var(--jaune-msc) url("/assets/images/motif-fond-opacite-30.png");
 
   .tuile {

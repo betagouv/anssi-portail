@@ -42,7 +42,7 @@
     titre="Test de maturité cyber"
     description="Déterminez quelle est la maturité cyber de votre organisation en 5 minutes."
   />
-  <div class="test-maturite">
+  <section class="test-maturite">
     <div class="contenu-section">
       {#if introFaite}
         <div class="formulaire">
@@ -164,5 +164,5 @@
         </div>
       {/if}
     </div>
-  </div>
+  </section>
 {/if}
