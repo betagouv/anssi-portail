@@ -49,6 +49,7 @@ section {
   }
 
   .formulaire {
+    width: 100%;
     @include a-partir-de(lg) {
       padding: 24px 0;
     }
