@@ -4,7 +4,7 @@ export interface ItemCyber {
   illustration: string;
   description: string;
   lienInterne: string;
-  sources: Source[];
+  sources: string[];
   besoins: BesoinCyber[];
   droitsAcces: DroitAcces[];
   format?: FormatRessource;

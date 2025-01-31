@@ -85,7 +85,7 @@ export const kitCyber = (): ItemCyber => ({
   lienInterne: "https://...",
   lienExterne: "https://...",
   besoins: [BesoinCyber.SENSIBILISER_ET_FORMER],
-  sources: [Source.PARTENAIRES],
+  sources: ["Gendarmerie"],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
   themes: [ThemeCyber.GOUVERNANCE],
 });

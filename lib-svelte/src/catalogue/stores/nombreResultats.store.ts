@@ -26,8 +26,9 @@ export const nombreResultats = derived<
   ) => Object.fromEntries(Object.values(type).map((f) => [f, calculNombre(f)]));
 
   const nombreParDroitAcces = (droitAcces: DroitAcces) =>
-    $catalogueStore.filter((item) => item.droitsAcces && item.droitsAcces.includes(droitAcces))
-      .length;
+    $catalogueStore.filter(
+      (item) => item.droitsAcces && item.droitsAcces.includes(droitAcces),
+    ).length;
 
   const nombreParTypologie = (typologie: Typologie) =>
     $catalogueStore.filter((item) => item.typologie === typologie).length;
@@ -36,7 +37,12 @@ export const nombreResultats = derived<
     $catalogueStore.filter((item) => item.format === format).length;
 
   const nombreParSource = (source: Source) =>
-    $catalogueStore.filter((item) => item.sources && item.sources.includes(source)).length;
+    $catalogueStore.filter((item) => {
+      if (!item.sources) return false;
+      if (!item.sources.includes(Source.ANSSI) && source === Source.PARTENAIRES)
+        return true;
+      return item.sources.includes(source);
+    }).length;
 
   const nombreParTheme = (theme: ThemeCyber) =>
     $catalogueStore.filter((item) => item.themes && item.themes.includes(theme))
