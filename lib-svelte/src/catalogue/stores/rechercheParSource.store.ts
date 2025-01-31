@@ -29,11 +29,15 @@ export const rechercheParSource = {
     if (sources.length === 0) return true;
     if (!item.sources) return false;
     if (item.sources.includes(Source.ANSSI)) {
+      if (!sources.includes(Source.ANSSI)) {
+        return false;
+      }
       const secondaire = item.sources.find((s) => s !== Source.ANSSI);
       if (secondaire) {
-        return sources.includes(secondaire);
+        return sources.includes(secondaire as Source);
       }
+      return true;
     }
-    return !!sources.find((source) => item.sources.includes(source));
+    return sources.includes(Source.PARTENAIRES);
   },
 };
