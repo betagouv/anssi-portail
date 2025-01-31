@@ -326,7 +326,7 @@ section {
 }
 
 .nis2 {
-  background: #f4f4f4 url("/assets/images/motif-fond-service.png");
+  background: #0d0c21 url("/assets/images/motif-fond-service-opacite-16.png");
 
   .contenu-section {
     background: white;
@@ -336,14 +336,14 @@ section {
     display: grid;
     grid-template-areas: "illustration" "titre" "contenu" "bouton";
     gap: 24px;
-    border-bottom: 6px solid var(--noir);
-    box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
+    border-bottom: 6px solid var(--jaune-msc);
 
     @include a-partir-de(lg) {
       grid-template-areas:
         "titre illustration"
         "contenu illustration"
         "bouton illustration";
+      grid-template-rows: auto 1fr auto;
       padding: 40px;
     }
 
