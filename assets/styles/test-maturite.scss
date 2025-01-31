@@ -25,6 +25,10 @@ h5 {
     padding: 24px var(--gouttiere);
   }
 
+  @include a-partir-de(xl) {
+    padding: 48px var(--gouttiere);
+  }
+
   .contenu-section {
     display: flex;
     flex-direction: column;
@@ -181,6 +185,13 @@ h5 {
       @include a-partir-de(md) {
         font-size: 2rem;
         line-height: 2.5rem;
+      }
+
+      @include a-partir-de(lg) {
+        margin-top: 24px;
+      }
+      @include a-partir-de(xl) {
+        margin-top: 0;
       }
     }
     p {
