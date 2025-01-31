@@ -49,6 +49,20 @@ a {
     height: 16px;
     background: url("/assets/images/icone-lien-externe.svg") no-repeat;
   }
+
+  &:hover {
+    border-bottom: 2px solid var(--noir);
+  }
+
+  &:active {
+     background: rgba(0, 0, 0, 0.08);
+  }
+
+  &:focus {
+    outline: 2px solid #0A76F6;
+    outline-offset: 2px;
+    border-style: none;
+  }
 }
 
 header {
@@ -571,6 +585,7 @@ footer {
     color: var(--noir);
     font-size: 0.75rem;
     line-height: 1.5rem;
+    border: none;
   }
 }
 
