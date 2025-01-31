@@ -299,7 +299,7 @@ section {
       scroll-snap-align: center;
       box-sizing: border-box;
       text-align: center;
-      margin: 32px 0 16px;
+      margin: 32px 0;
       border-bottom: 4px solid var(--jaune-msc);
 
       @include a-partir-de(lg) {
@@ -319,7 +319,7 @@ section {
   }
 
   a {
-    margin: 96px auto 16px;
+    margin: 16px auto;
   }
 }
 
