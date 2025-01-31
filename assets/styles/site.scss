@@ -5,6 +5,7 @@
 
 :root {
   --noir: #0d0c21;
+  --gris-clair: #dddddd;
   --jaune-msc: #fed980;
   --jaune-msc-hover: #ecca79;
   --jaune-msc-clique: #ddbd70;
@@ -570,7 +571,8 @@ footer {
 
   .contenu-section {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 16px;
     @include a-partir-de(md) {
       flex-direction: row;
@@ -583,9 +585,15 @@ footer {
   a {
     text-decoration: none;
     color: var(--noir);
-    font-size: 0.75rem;
-    line-height: 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
     border: none;
+  }
+
+  hr {
+    border: none;
+    border-left: 1px solid var(--gris-clair);
+    margin: 2px 0;
   }
 }
 
