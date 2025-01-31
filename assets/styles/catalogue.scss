@@ -320,7 +320,15 @@
 }
 
 .encart.fond-clair {
-  background: #f4f4f4 url("/assets/images/motif-fond-service.png");
+  background: white;
+
+  h1 {
+    margin-bottom: 48px;
+  }
+
+  @include a-partir-de(lg) {
+    padding: 72px var(--gouttiere);
+  }
 
   .carte.parcours {
     box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
