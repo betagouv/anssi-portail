@@ -8,7 +8,7 @@ illustration: publications/publications.png
 format: Publication # Rajoute le badge en haut à droite de l'illustration
 lien : https://cyber.gouv.fr/publications
 besoins:
-  - RENFORCER_LA_SECURITE
+  - SECURISER
 droitsAcces:
   - ACCES_LIBRE
 sources:

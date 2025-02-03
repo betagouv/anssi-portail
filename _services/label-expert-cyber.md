@@ -9,7 +9,7 @@ illustration: label-cyber-expert/label-cyber-expert.png
 sources:
   - Cybermalveillance
 besoins: 
-  - RENFORCER_LA_SECURITE
+  - SECURISER
 droitsAcces:
   - ACCES_LIBRE
 themes:

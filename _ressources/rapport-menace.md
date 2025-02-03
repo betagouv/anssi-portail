@@ -7,7 +7,7 @@ description: Connaître l'état de la menace
 illustration: rapport-menace/rapport-menace.png
 format: PDF # Rajoute le badge en haut à droite de l'illustration
 besoins:
-  - RENFORCER_LA_SECURITE 
+  - SECURISER 
 droitsAcces:
   - ACCES_LIBRE
 sources:

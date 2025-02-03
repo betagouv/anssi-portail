@@ -8,7 +8,7 @@ illustration: avis-bulletin/avis-bulletin.png
 format: Publication # Rajoute le badge en haut à droite de l'illustration
 lien : https://www.cert.ssi.gouv.fr/
 besoins:
-  - RENFORCER_LA_SECURITE
+  - SECURISER
 droitsAcces:
   - ACCES_LIBRE
 sources:

@@ -8,7 +8,7 @@ illustration: ads/ads.png
 lien: https://club.ssi.gouv.fr/beta/#/login
 avecFicheDetaillee: true
 besoins:
-  - RENFORCER_LA_SECURITE
+  - SECURISER
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2

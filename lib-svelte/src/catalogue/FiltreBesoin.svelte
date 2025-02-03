@@ -49,18 +49,18 @@
     /> <span>Se former</span>
   </label>
   <label
-    class:actif={$rechercheParBesoin === BesoinCyber.RENFORCER_LA_SECURITE}
+    class:actif={$rechercheParBesoin === BesoinCyber.SECURISER}
   >
     <img
-      src="/assets/images/illustration-filtre-besoins-renforcer-securite.svg"
-      alt="illustration renforcer la sécurité"
+      src="/assets/images/illustration-filtre-besoins-securiser.svg"
+      alt="illustration Sécuriser"
     />
     <input
       type="radio"
       name="filtre-besoin"
-      value={BesoinCyber.RENFORCER_LA_SECURITE}
+      value={BesoinCyber.SECURISER}
       bind:group={$rechercheParBesoin}
-    /> <span>Renforcer la sécurité</span>
+    /> <span>Sécuriser</span>
   </label>
   <label class:actif={$rechercheParBesoin === BesoinCyber.REAGIR}>
     <img
