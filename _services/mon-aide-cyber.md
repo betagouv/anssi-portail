@@ -29,14 +29,14 @@ cible:  |
 liens:
     - accompagnement:   
       titre: Bénéficier d’un accompagnement
-      lien: lien1
-      illustration: mss/mss-accompagnement.png
+      lien: https://www.monaidecyber.ssi.gouv.fr/
+      illustration: mac/mac-accompagnement.png
       couleurFond: "#0079D0"
     - commencer:
-      titre: Commencer à sécuriser
+      titre: Découvrez notre vidéo !
       lien: https://cellar-c2.services.clever-cloud.com/monservicesecurise-ressources/MonServiceSecurise%20video.mp4
       illustration: mss/mss-securiser.webp
-      couleurFond: "#0079D0"
+      couleurFond: "#6f479f"
 ---
 MonAideCyber est un service numérique proposé par le laboratoire d'innovation de l’ANSSI pour aider l’ensemble des entités publiques et privées peu matures sur les enjeux de cybersécurité mais souhaitant passer à l’action !
 

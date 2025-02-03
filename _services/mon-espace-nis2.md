@@ -13,7 +13,7 @@ sources:
 besoins: 
   - RENFORCER_LA_SECURITE
 droitsAcces:
-  - ACCES_LIBRE
+  - ENTITES_PUBLIQUES
   - REGULES_NIS2
 themes:
   - Gouvernance
@@ -26,8 +26,8 @@ cible:  |
 liens:
     - accompagnement:   
       titre: Parcours NIS2 sur MesServicesCyber
-      lien: lien1
-      illustration: mss/mss-accompagnement.png
+      lien: https://messervices.cyber.gouv.fr/nis2/
+      illustration: nis2/nis-parcours.png
       couleurFond: "#0079D0"
 ---
 MonEspaceNIS2 est un service numérique proposé par l’ANSSI pour aider l’ensemble des entités régulées par la directive NIS2 à :

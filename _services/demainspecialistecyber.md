@@ -21,9 +21,9 @@ cible:  |
 liens:
     - accompagnement:   
       titre: CyberEnJeux
-      lien: lien1
+      lien: https://messervices.cyber.gouv.fr/ressources/cyber-enjeux.html
       illustration: demainspecialistecyber/demainspecialistecyber-cyberenjeux.png
-      couleurFond: "#0079D0"
+      couleurFond: "#4cbab6"
 ---
 DemainSpécialisteCyber est un dispositif créé par le laboratoire d’innovation de l’ANSSI et le bureau de l’innovation pédagogique du ministère de l’Éducation nationale et de la jeunesse en partenariat avec le studio des communs du Campus Cyber.
 
@@ -31,7 +31,7 @@ L’enjeu : le développement de la formation en matière de cybersécurité est
 
 Former au plus tôt les jeunes aux enjeux de la cybersécurité et susciter des vocations pour ce domaine est donc prioritaire pour la sécurité de la Nation. C’est notamment particulièrement vrai s’agissant des femmes encore sous représentées dans la filière.
 
-La solution : DemainSpécialisteCyber propose des informations et ressources pour : 
+La solution : DemainSpécialisteCyber propose des informations et ressources pour
 <ul>
   <li> Former les élèves aux enjeux de cybersécurité dès le collège et le lycée.</li>
   <li> Faire découvrir aux élèves les métiers de la cybersécurité.</li>

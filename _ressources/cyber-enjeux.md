@@ -19,9 +19,9 @@ cible:  |
     <li> Pensé pour les élèves, CyberEnJeux est destiné aux enseignants de collège et de lycée. </li>
 liens:
     - accompagnement:   
-      titre: Bénéficier d’un accompagnement
-      lien: lien1
-      illustration: mss/mss-accompagnement.png
+      titre: Découvrez DemainSpécialisteCyber 
+      lien: https://messervices.cyber.gouv.fr/services/demainspecialistecyber.html
+      illustration: cyber-enjeux/cyber-enjeux-demainspe.png
       couleurFond: "#0079D0"
 ---
 Imaginé par le laboratoire d’innovation de L’ANSSI et co-construit avec le ministère de l’Education nationale et l’association Open Serious Game, CyberEnJeux est un dispositif pédagogique innovant permettant de former des élèves à la cybersécurité dans le cadre de leurs enseignements… par la création de jeux par les élèves eux-mêmes.

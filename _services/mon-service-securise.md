@@ -21,7 +21,7 @@ droitsAcces:
 liens:
     - accompagnement:   
       titre: Bénéficier d’un accompagnement
-      lien: lien1
+      lien: https://calendly.com/fabien-giraud/presentation-de-monservicesecurise-1
       illustration: mss/mss-accompagnement.png
       couleurFond: "#0079D0"
     - commencer:
