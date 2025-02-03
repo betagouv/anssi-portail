@@ -26,7 +26,7 @@ export const demainSpecialisteCyber = (): ItemCyber => ({
   illustration: "mss.png",
   lienInterne: "https://...",
   lienExterne: "https://...",
-  besoins: [BesoinCyber.SENSIBILISER_ET_FORMER],
+  besoins: [BesoinCyber.SENSIBILISER],
   sources: [Source.ANSSI, Source.INNOVATION_ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
@@ -52,7 +52,7 @@ export const livretEnJeux = (): ItemCyber => ({
   illustration: "livret.png",
   lienInterne: "https://...",
   lienExterne: "https://...",
-  besoins: [BesoinCyber.SENSIBILISER_ET_FORMER],
+  besoins: [BesoinCyber.SENSIBILISER],
   sources: [Source.ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
@@ -78,7 +78,7 @@ export const kitCyber = (): ItemCyber => ({
   illustration: "kit.png",
   lienInterne: "https://...",
   lienExterne: "https://...",
-  besoins: [BesoinCyber.SENSIBILISER_ET_FORMER],
+  besoins: [BesoinCyber.FORMER],
   sources: ["Gendarmerie"],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
