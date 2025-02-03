@@ -13,9 +13,6 @@ besoins:
   - REAGIR
 droitsAcces:
   - ACCES_LIBRE
-themes:
-  - Resilience
-  - Defense
 parcours:
   - NIS2_DECLARER_INCIDENT
 ---

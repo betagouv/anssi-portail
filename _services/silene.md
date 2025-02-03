@@ -15,8 +15,6 @@ besoins:
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2
-themes:
-  - Protection
 parcours:
   - APPROFONDIR_TESTER
   - NIS2_REDUIRE_RISQUES

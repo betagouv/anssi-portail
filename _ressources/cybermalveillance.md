@@ -13,9 +13,6 @@ droitsAcces:
   - ACCES_LIBRE
 sources:
   - Cybermalveillance
-themes:
-  - Gouvernance
-  - Protection
 parcours:
   - DEBUTER_SECURISER
 ---

@@ -13,7 +13,4 @@ besoins:
   - REAGIR
 droitsAcces:
   - ACCES_LIBRE
-themes:
-  - Resilience
-  - Defense
 ---

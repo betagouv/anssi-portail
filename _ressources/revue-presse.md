@@ -15,8 +15,6 @@ droitsAcces:
 sources:
   - ANSSI
   - CERT-FR
-themes:
-  - Resilience
 parcours:
   - APPROFONDIR_ANTICIPER
 ---

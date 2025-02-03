@@ -13,11 +13,6 @@ droitsAcces:
   - ACCES_LIBRE
 sources:
   - ANSSI
-themes:
-  - Gouvernance
-  - Defense
-  - Resilience
-  - Protection
 parcours:
   - APPROFONDIR_PILOTER
 ---

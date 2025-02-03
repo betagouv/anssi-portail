@@ -15,8 +15,6 @@ besoins:
 droitsAcces:
   - ACCES_LIBRE
   - REGULES_NIS2
-themes:
-  - Gouvernance
 parcours:
   - NIS2_S_INFORMER
 cible:  |

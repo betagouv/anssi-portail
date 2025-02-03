@@ -13,9 +13,6 @@ besoins:
   - REAGIR
 droitsAcces:
   - ACCES_LIBRE
-themes:
-  - Defense
-  - Resilience
 parcours:
   - APPROFONDIR_ANTICIPER
   - DEBUTER_ETRE_ACCOMPAGNE

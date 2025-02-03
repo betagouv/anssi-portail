@@ -12,7 +12,4 @@ besoins:
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2
-themes:
-  - Resilience
-  - Defense
 ---

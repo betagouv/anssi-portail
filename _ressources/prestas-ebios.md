@@ -13,8 +13,6 @@ droitsAcces:
   - ACCES_LIBRE
 sources:
   - ANSSI
-themes:
-  - Gouvernance
 parcours:
   - APPROFONDIR_PILOTER
 ---

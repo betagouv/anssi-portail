@@ -12,8 +12,6 @@ besoins:
   - SENSIBILISER_ET_FORMER
 droitsAcces:
   - ACCES_LIBRE
-themes:
-  - Gouvernance
 parcours:
   - DEBUTER_SENSIBILISER
   - APPROFONDIR_SENSIBILISER

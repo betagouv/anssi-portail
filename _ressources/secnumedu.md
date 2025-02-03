@@ -14,8 +14,6 @@ droitsAcces:
   - ACCES_LIBRE
 sources:
   - ANSSI
-themes:
-  - Protection
 parcours:
   - APPROFONDIR_PROGRESSER
 cible:  |

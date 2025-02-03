@@ -13,6 +13,4 @@ droitsAcces:
   - ACCES_LIBRE
 sources:
   - CNIL
-themes:
-  - Protection
 ---

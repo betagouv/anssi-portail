@@ -13,11 +13,6 @@ droitsAcces:
   - ACCES_LIBRE
 sources:
   - ANSSI
-themes:
-  - Gouvernance
-  - Protection
-  - Resilience
-  - Defense
 parcours :
   - DEBUTER_SECURISER
 ---

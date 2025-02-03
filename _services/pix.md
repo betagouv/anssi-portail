@@ -12,7 +12,4 @@ besoins:
   - SENSIBILISE_ET_FORMER
 droitsAcces:
   - ACCES_LIBRE
-themes:
-  - Resilience
-  - Defense
 ---
