@@ -15,7 +15,7 @@ export interface ItemCyber {
 export enum BesoinCyber {
   REAGIR = "REAGIR",
   ETRE_SENSIBILISE = "ETRE_SENSIBILISE",
-  FORMER = "FORMER",
+  SE_FORMER = "SE_FORMER",
   RENFORCER_LA_SECURITE = "RENFORCER_LA_SECURITE",
 }
 
