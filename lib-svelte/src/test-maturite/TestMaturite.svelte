@@ -151,8 +151,8 @@
           />
           <div class="note">
             Le résultat obtenu est une évaluation indicative basée sur un modèle
-            élaboré par l’ANSSI. Le niveau de maturité n’est pas une évaluation
-            du niveau de sécurité des systèmes d’information d’une organisation
+            élaboré par l’ANSSI. La maturité cyber n’est pas une évaluation du
+            niveau de sécurité des systèmes d’information d’une organisation
             mais de sa posture à l’égard des enjeux cyber.
           </div>
         </div>
