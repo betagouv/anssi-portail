@@ -1,11 +1,11 @@
 ---
 layout: service
 typologie: ressource
-nom: Label EBIOS RM
-titreHtml: Label EBIOS RM
-description: Accéder à la liste des solutions labelisées
+nom: EBIOS RM
+titreHtml: EBIOS RM
+description: Accéder aux solutions labellisées EBIOS RM
 illustration: prestas-ebios/prestas-ebios.png
-format: Web # Rajoute le badge en haut à droite de l'illustration
+format: Label # Rajoute le badge en haut à droite de l'illustration
 lien : https://cyber.gouv.fr/label-ebios-risk-manager
 besoins:
   - RENFORCER_LA_SECURITE

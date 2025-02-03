@@ -1,11 +1,11 @@
 ---
 layout: service
 typologie: ressource
-nom: Avis, alertes, bulletins, indicateurs
-titreHtml: Avis, alertes, bulletins, indicateurs
+nom: Avis, alertes, bulletins...
+titreHtml: Avis, alertes, bulletins...
 description: Accéder aux publications du CERT-FR
 illustration: avis-bulletin/avis-bulletin.png
-format: Web # Rajoute le badge en haut à droite de l'illustration
+format: Publication # Rajoute le badge en haut à droite de l'illustration
 lien : https://www.cert.ssi.gouv.fr/
 besoins:
   - RENFORCER_LA_SECURITE
