@@ -6,7 +6,7 @@ titreHtml: La Malette Cyber
 description: Mener des actions de sensibilisation
 illustration: malette-cyber/malette-cyber.png
 lien: https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/lancement-mallette-cyber-inclusion-numerique
-format: Kit outil # Rajoute le badge en haut à droite de l'illustration
+format: Outil # Rajoute le badge en haut à droite de l'illustration
 besoins:
   - SENSIBILISER_ET_FORMER
 droitsAcces:
