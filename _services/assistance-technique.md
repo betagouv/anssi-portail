@@ -7,7 +7,7 @@ titreHtml: Assistance Tedchnique
 illustration: assistance-technique/assistance-technique.png
 lien: Mailto:conseil.technique@ssi.gouv.fr
 besoins:
-  - RENFORCER_LA_SECURITE
+  - SECURISER
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2

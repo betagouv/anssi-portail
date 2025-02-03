@@ -11,7 +11,7 @@ sources:
   - ANSSI
   - Innovation ANSSI
 besoins: 
-  - RENFORCER_LA_SECURITE
+  - SECURISER
 droitsAcces:
   - ACCES_LIBRE
   - REGULES_NIS2

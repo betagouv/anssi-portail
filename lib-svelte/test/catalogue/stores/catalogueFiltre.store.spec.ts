@@ -36,7 +36,7 @@ describe("Le store du catalogue filtré", () => {
   describe("sur application d'un filtre de besoin", () => {
     it("conserve uniquement les items correspondants", () => {
       catalogueStore.initialise([mss(), demainSpecialisteCyber()], []);
-      rechercheParBesoin.set(BesoinCyber.RENFORCER_LA_SECURITE);
+      rechercheParBesoin.set(BesoinCyber.SECURISER);
 
       const { resultats } = get(catalogueFiltre);
 
@@ -57,7 +57,7 @@ describe("Le store du catalogue filtré", () => {
       let sansBesoin = {...mss()};
       delete sansBesoin.besoins;
       catalogueStore.initialise([sansBesoin], []);
-      rechercheParBesoin.set(BesoinCyber.RENFORCER_LA_SECURITE);
+      rechercheParBesoin.set(BesoinCyber.SECURISER);
 
       const { resultats } = get(catalogueFiltre);
 

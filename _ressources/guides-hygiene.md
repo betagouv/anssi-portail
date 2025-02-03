@@ -8,7 +8,7 @@ illustration: guides-hygiene/guides-hygiene.png
 lien : https://cyber.gouv.fr/sites/default/files/2017/01/guide_hygiene_informatique_anssi.pdf
 format: Publication # Rajoute le badge en haut à droite de l'illustration
 besoins:
-  - RENFORCER_LA_SECURITE
+  - SECURISER
 droitsAcces:
   - ACCES_LIBRE
 sources:

@@ -9,7 +9,7 @@ illustration: cot/cot.png
 sources:
   - ANSSI
 besoins: 
-  - RENFORCER_LA_SECURITE
+  - SECURISER
   - REAGIR
   - SENSIBILISER_ET_FORMER
 droitsAcces:

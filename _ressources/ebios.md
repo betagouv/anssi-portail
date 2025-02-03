@@ -8,7 +8,7 @@ illustration: ebios/ebios.png
 lien: https://cyber.gouv.fr/la-methode-ebios-risk-manager
 format: Outil # Rajoute le badge en haut à droite de l'illustration
 besoins:
-  - RENFORCER_LA_SECURITE
+  - SECURISER
 droitsAcces:
   - ACCES_LIBRE
 sources:

@@ -8,7 +8,7 @@ illustration: nis2/nis2.png
 sources:
   - ANSSI
 besoins: 
-  - RENFORCER_LA_SECURITE
+  - SECURISER
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2

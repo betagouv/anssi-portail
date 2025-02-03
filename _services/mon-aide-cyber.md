@@ -8,7 +8,7 @@ titreHtml: MonAideCyber
 illustration: mac/mac.png
 lien: https://monaide.cyber.gouv.fr/
 besoins:
-  - RENFORCER_LA_SECURITE
+  - SECURISER
 droitsAcces:
   - ACCES_LIBRE
 sources:

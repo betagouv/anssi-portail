@@ -11,7 +11,7 @@ sources:
   - ANSSI
   - CERT-FR
 besoins: 
-  - RENFORCER_LA_SECURITE
+  - SECURISER
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2

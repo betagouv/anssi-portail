@@ -14,7 +14,7 @@ export const mss = (): ItemCyber => ({
   illustration: "mss.png",
   lienInterne: "https://...",
   lienExterne: "https://...",
-  besoins: [BesoinCyber.RENFORCER_LA_SECURITE],
+  besoins: [BesoinCyber.SECURISER],
   sources: [Source.ANSSI, Source.INNOVATION_ANSSI],
   droitsAcces: [DroitAcces.ENTITES_PUBLIQUES],
 });
@@ -39,7 +39,7 @@ export const monEspaceNIS2 = (): ItemCyber => ({
   illustration: "nis2.png",
   lienInterne: "https://nis2",
   lienExterne: "https://...",
-  besoins: [BesoinCyber.RENFORCER_LA_SECURITE],
+  besoins: [BesoinCyber.SECURISER],
   sources: [Source.ANSSI, Source.INNOVATION_ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE, DroitAcces.REGULES_NIS2],
 });
@@ -65,7 +65,7 @@ export const guidesTechniques = (): ItemCyber => ({
   illustration: "guide.png",
   lienInterne: "https://...",
   lienExterne: "https://...",
-  besoins: [BesoinCyber.RENFORCER_LA_SECURITE],
+  besoins: [BesoinCyber.SECURISER],
   sources: [Source.ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
