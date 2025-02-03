@@ -35,6 +35,20 @@
     /> <span>Sensibiliser et former</span>
   </label>
   <label
+          class:actif={$rechercheParBesoin === BesoinCyber.FORMER}
+  >
+    <img
+            src="/assets/images/illustration-filtre-besoins-former.svg"
+            alt="illustration former"
+    />
+    <input
+            type="radio"
+            name="filtre-besoin"
+            value={BesoinCyber.FORMER}
+            bind:group={$rechercheParBesoin}
+    /> <span>Former</span>
+  </label>
+  <label
     class:actif={$rechercheParBesoin === BesoinCyber.RENFORCER_LA_SECURITE}
   >
     <img
