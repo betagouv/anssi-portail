@@ -13,9 +13,4 @@ droitsAcces:
 sources:
   - ANSSI
   - CERT-FR
-themes:
-  - Gouvernance
-  - Resilience
-  - Defense
-  - Protection
 ---

@@ -13,7 +13,4 @@ droitsAcces:
   - ACCES_LIBRE
 sources:
   - ANSSI
-themes:
-  - Defense
-  - Resilience
 ---

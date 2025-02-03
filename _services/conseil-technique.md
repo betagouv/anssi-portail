@@ -13,7 +13,4 @@ droitsAcces:
   - REGULES_NIS2
 sources:
   - ANSSI
-themes:
-  - Protection
-  - Gouvernance
 ---

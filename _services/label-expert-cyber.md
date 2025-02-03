@@ -12,11 +12,6 @@ besoins:
   - RENFORCER_LA_SECURITE
 droitsAcces:
   - ACCES_LIBRE
-themes:
-  - Protection
-  - Gouvernance
-  - Resilience
-  - Defense
 parcours:
   - DEBUTER_ETRE_ACCOMPAGNE
   - APPROFONDIR_PILOTER

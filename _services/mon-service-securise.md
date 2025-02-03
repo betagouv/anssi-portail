@@ -29,8 +29,6 @@ liens:
       lien: https://cellar-c2.services.clever-cloud.com/monservicesecurise-ressources/MonServiceSecurise%20video.mp4
       illustration: mss/mss-securiser.webp
       couleurFond: "#0079D0"
-themes:
-  - Protection
 parcours:
   - APPROFONDIR_PILOTER
   - NIS2_REDUIRE_RISQUES

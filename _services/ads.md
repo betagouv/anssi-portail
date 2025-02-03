@@ -15,8 +15,6 @@ droitsAcces:
 sources:
   - ANSSI
   - CERT-FR
-themes:
-  - Protection
 parcours:
   - APPROFONDIR_TESTER
   - NIS2_REDUIRE_RISQUES
