@@ -78,7 +78,7 @@ export const kitCyber = (): ItemCyber => ({
   illustration: "kit.png",
   lienInterne: "https://...",
   lienExterne: "https://...",
-  besoins: [BesoinCyber.FORMER],
+  besoins: [BesoinCyber.SE_FORMER],
   sources: ["Gendarmerie"],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
