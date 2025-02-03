@@ -6,7 +6,7 @@
   import { rechercheParBesoin } from "./stores/rechercheParBesoin.store";
   import { limitationRecherche } from "./stores/limitationRecherche";
 
-  rechercheParBesoin.set(BesoinCyber.SENSIBILISER_ET_FORMER);
+  rechercheParBesoin.set(BesoinCyber.SENSIBILISER);
   limitationRecherche.set(3);
 </script>
 
