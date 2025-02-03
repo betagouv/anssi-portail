@@ -4,7 +4,6 @@ import {
   FormatRessource,
   ItemCyber,
   Source,
-  ThemeCyber,
   Typologie,
 } from "../../../src/catalogue/Catalogue.types";
 
@@ -18,7 +17,6 @@ export const mss = (): ItemCyber => ({
   besoins: [BesoinCyber.RENFORCER_LA_SECURITE],
   sources: [Source.ANSSI, Source.INNOVATION_ANSSI],
   droitsAcces: [DroitAcces.ENTITES_PUBLIQUES],
-  themes: [ThemeCyber.PROTECTION],
 });
 
 export const demainSpecialisteCyber = (): ItemCyber => ({
@@ -31,7 +29,6 @@ export const demainSpecialisteCyber = (): ItemCyber => ({
   besoins: [BesoinCyber.SENSIBILISER_ET_FORMER],
   sources: [Source.ANSSI, Source.INNOVATION_ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
-  themes: [],
 });
 
 export const monEspaceNIS2 = (): ItemCyber => ({
@@ -45,7 +42,6 @@ export const monEspaceNIS2 = (): ItemCyber => ({
   besoins: [BesoinCyber.RENFORCER_LA_SECURITE],
   sources: [Source.ANSSI, Source.INNOVATION_ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE, DroitAcces.REGULES_NIS2],
-  themes: [ThemeCyber.GOUVERNANCE],
 });
 
 export const livretEnJeux = (): ItemCyber => ({
@@ -59,7 +55,6 @@ export const livretEnJeux = (): ItemCyber => ({
   besoins: [BesoinCyber.SENSIBILISER_ET_FORMER],
   sources: [Source.ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
-  themes: null,
 });
 
 export const guidesTechniques = (): ItemCyber => ({
@@ -73,7 +68,6 @@ export const guidesTechniques = (): ItemCyber => ({
   besoins: [BesoinCyber.RENFORCER_LA_SECURITE],
   sources: [Source.ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
-  themes: [ThemeCyber.PROTECTION],
 });
 
 export const kitCyber = (): ItemCyber => ({
@@ -87,5 +81,4 @@ export const kitCyber = (): ItemCyber => ({
   besoins: [BesoinCyber.SENSIBILISER_ET_FORMER],
   sources: ["Gendarmerie"],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
-  themes: [ThemeCyber.GOUVERNANCE],
 });

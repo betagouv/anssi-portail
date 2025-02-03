@@ -5,13 +5,11 @@ import {
   DroitAcces,
   FormatRessource,
   Source,
-  ThemeCyber,
   Typologie,
 } from "../../../src/catalogue/Catalogue.types";
 import { get } from "svelte/store";
 import { recherches } from "../../../src/catalogue/stores/recherches.store";
 import { rechercheParBesoin } from "../../../src/catalogue/stores/rechercheParBesoin.store";
-import { rechercheParTheme } from "../../../src/catalogue/stores/rechercheParTheme.store";
 import { rechercheParFormat } from "../../../src/catalogue/stores/rechercheParFormat.store";
 import { rechercheParTypologie } from "../../../src/catalogue/stores/rechercheParTypologie.store";
 import { rechercheParSource } from "../../../src/catalogue/stores/rechercheParSource.store";
@@ -20,7 +18,6 @@ describe("Le store des recherches", () => {
   beforeEach(() => {
     rechercheParDroitAcces.set([]);
     rechercheParBesoin.set(null);
-    rechercheParTheme.set([]);
     rechercheParFormat.set([]);
     rechercheParTypologie.set([]);
     rechercheParSource.set([]);
@@ -61,14 +58,6 @@ describe("Le store des recherches", () => {
 
     it("la recherche par source est active", () => {
       rechercheParSource.set([Source.INNOVATION_ANSSI]);
-
-      const { filtreActif } = get(recherches);
-
-      expect(filtreActif).toBe(true);
-    });
-
-    it("la recherche par thème est active", () => {
-      rechercheParTheme.set([ThemeCyber.RESILIENCE]);
 
       const { filtreActif } = get(recherches);
 

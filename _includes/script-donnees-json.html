@@ -11,7 +11,6 @@
       "lienExterne": "{{ service.lien }}",
       "sources": {{ service.sources | jsonify }},
       "besoins": {{ service.besoins | jsonify }},
-      "themes": {{ service.themes | jsonify }},
       "droitsAcces": {{ service.droitsAcces | jsonify }}
     }
       {% unless forloop.last %},{% endunless %}
@@ -29,7 +28,6 @@
       "sources": {{ ressource.sources | jsonify }},
       "besoins": {{ ressource.besoins | jsonify }},
       "droitsAcces": {{ ressource.droitsAcces | jsonify }},
-      "themes": {{ ressource.themes | jsonify }},
       "format": "{{ ressource.format }}"
       }
       {% unless forloop.last %},{% endunless %}
