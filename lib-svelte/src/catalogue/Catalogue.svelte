@@ -4,7 +4,6 @@
   import FiltreAccessibilite from "./FiltreAccessibilite.svelte";
   import FiltreTypologieEtFormat from "./FiltreTypologieEtFormat.svelte";
   import FiltreSource from "./FiltreSource.svelte";
-  import FiltreTheme from "./FiltreTheme.svelte";
   import { recherches } from "./stores/recherches.store";
   import CarteItem from "./CarteItem.svelte";
   import EnteteFiltres from "./EnteteFiltres.svelte";
@@ -29,7 +28,6 @@
       <FiltreAccessibilite />
       <FiltreTypologieEtFormat />
       <FiltreSource />
-      <FiltreTheme />
       <input
         type="button"
         class="bouton primaire"
@@ -49,7 +47,6 @@
           <FiltreAccessibilite />
           <FiltreTypologieEtFormat />
           <FiltreSource />
-          <FiltreTheme />
           <input
             type="button"
             class="bouton primaire"

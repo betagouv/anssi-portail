@@ -8,7 +8,6 @@ export interface ItemCyber {
   besoins: BesoinCyber[];
   droitsAcces: DroitAcces[];
   format?: FormatRessource;
-  themes: ThemeCyber[];
   lienExterne: string;
 }
 
@@ -40,11 +39,4 @@ export enum Source {
   CERTFR = "CERT-FR",
   INNOVATION_ANSSI = "Innovation ANSSI",
   PARTENAIRES = "Partenaires",
-}
-
-export enum ThemeCyber {
-  GOUVERNANCE = "Gouvernance",
-  DEFENSE = "Defense",
-  PROTECTION = "Protection",
-  RESILIENCE = "Resilience",
 }

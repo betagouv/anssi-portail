@@ -4,7 +4,6 @@ import {
   DroitAcces,
   FormatRessource,
   Source,
-  ThemeCyber,
   Typologie,
 } from "../Catalogue.types";
 
@@ -13,7 +12,6 @@ type NombreResultats = {
   parTypologie: Partial<Record<Typologie, number>>;
   parFormatDeRessource: Partial<Record<FormatRessource, number>>;
   parSource: Partial<Record<Source, number>>;
-  parTheme: Partial<Record<ThemeCyber, number>>;
 };
 
 export const nombreResultats = derived<
@@ -44,10 +42,6 @@ export const nombreResultats = derived<
       return item.sources.includes(source);
     }).length;
 
-  const nombreParTheme = (theme: ThemeCyber) =>
-    $catalogueStore.filter((item) => item.themes && item.themes.includes(theme))
-      .length;
-
   return {
     parDroitAcces: creeObjetDepuisEnum(DroitAcces, nombreParDroitAcces),
     parTypologie: creeObjetDepuisEnum(Typologie, nombreParTypologie),
@@ -56,6 +50,5 @@ export const nombreResultats = derived<
       nombreParFormatDeRessource,
     ),
     parSource: creeObjetDepuisEnum(Source, nombreParSource),
-    parTheme: creeObjetDepuisEnum(ThemeCyber, nombreParTheme),
   };
 });

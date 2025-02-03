@@ -16,13 +16,11 @@ import {
   DroitAcces,
   FormatRessource,
   Source,
-  ThemeCyber,
   Typologie,
 } from "../../../src/catalogue/Catalogue.types";
 import { rechercheParTypologie } from "../../../src/catalogue/stores/rechercheParTypologie.store";
 import { rechercheParFormat } from "../../../src/catalogue/stores/rechercheParFormat.store";
 import { rechercheParSource } from "../../../src/catalogue/stores/rechercheParSource.store";
-import { rechercheParTheme } from "../../../src/catalogue/stores/rechercheParTheme.store";
 import { limitationRecherche } from "../../../src/catalogue/stores/limitationRecherche";
 
 describe("Le store du catalogue filtré", () => {
@@ -32,7 +30,6 @@ describe("Le store du catalogue filtré", () => {
     rechercheParTypologie.set([]);
     rechercheParFormat.set([]);
     rechercheParSource.set([]);
-    rechercheParTheme.set([]);
     limitationRecherche.set(0);
   });
 
@@ -150,36 +147,6 @@ describe("Le store du catalogue filtré", () => {
       const { resultats } = get(catalogueFiltre);
 
       expect(resultats.length).toBe(2);
-    });
-  });
-
-  describe("sur application d'un filtre de thème", () => {
-    it("conserve uniquement les items correspondants", () => {
-      catalogueStore.initialise([mss()], [kitCyber()]);
-      rechercheParTheme.set([ThemeCyber.PROTECTION]);
-
-      const { resultats } = get(catalogueFiltre);
-
-      expect(resultats.length).toBe(1);
-      expect(resultats[0].nom).toBe("mss");
-    });
-
-    it("conserve tous les items en cas d'absence de besoins", () => {
-      catalogueStore.initialise([mss(), demainSpecialisteCyber()], []);
-      rechercheParTheme.set([]);
-
-      const { resultats } = get(catalogueFiltre);
-
-      expect(resultats.length).toBe(2);
-    });
-
-    it("ne conserve pas les items sans thème lorsque le filtre est actif", () => {
-      catalogueStore.initialise([], [livretEnJeux()]);
-      rechercheParTheme.set([ThemeCyber.PROTECTION]);
-
-      const { resultats } = get(catalogueFiltre);
-
-      expect(resultats.length).toBe(0);
     });
   });
 
