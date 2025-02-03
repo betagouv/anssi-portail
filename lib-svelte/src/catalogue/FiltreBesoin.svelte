@@ -21,18 +21,18 @@
     </label>
   {/if}
   <label
-    class:actif={$rechercheParBesoin === BesoinCyber.SENSIBILISER}
+    class:actif={$rechercheParBesoin === BesoinCyber.ETRE_SENSIBILISE}
   >
     <img
       src="/assets/images/illustration-filtre-besoins-sensibiliser.svg"
-      alt="illustration découvrir et progresser"
+      alt="illustration Être sensibilisé"
     />
     <input
       type="radio"
       name="filtre-besoin"
-      value={BesoinCyber.SENSIBILISER}
+      value={BesoinCyber.ETRE_SENSIBILISE}
       bind:group={$rechercheParBesoin}
-    /> <span>Sensibiliser</span>
+    /> <span>Être sensibilisé</span>
   </label>
   <label
           class:actif={$rechercheParBesoin === BesoinCyber.FORMER}
