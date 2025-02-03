@@ -26,7 +26,7 @@ export const demainSpecialisteCyber = (): ItemCyber => ({
   illustration: "mss.png",
   lienInterne: "https://...",
   lienExterne: "https://...",
-  besoins: [BesoinCyber.SENSIBILISER],
+  besoins: [BesoinCyber.ETRE_SENSIBILISE],
   sources: [Source.ANSSI, Source.INNOVATION_ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
@@ -52,7 +52,7 @@ export const livretEnJeux = (): ItemCyber => ({
   illustration: "livret.png",
   lienInterne: "https://...",
   lienExterne: "https://...",
-  besoins: [BesoinCyber.SENSIBILISER],
+  besoins: [BesoinCyber.ETRE_SENSIBILISE],
   sources: [Source.ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
