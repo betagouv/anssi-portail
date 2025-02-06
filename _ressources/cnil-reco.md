@@ -8,7 +8,7 @@ illustration: cnil-reco/cnil-reco.png
 format: Publication 
 lien : https://www.cnil.fr/fr/technologies/cybersecurite
 besoins:
-  - SENSIBILISER_ET_FORMER
+  - ETRE_SENSIBILISE
 droitsAcces:
   - ACCES_LIBRE
 sources:

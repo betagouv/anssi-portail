@@ -8,7 +8,7 @@ description: S’informer sur la cybersécurité et ses métiers
 illustration: demainspecialistecyber/demainspecialistecyber.png
 lien: https://www.demainspecialistecyber.fr/
 besoins:
-  - SENSIBILISER_ET_FORMER
+  - SE_FORMER
 droitsAcces:
   - ACCES_LIBRE
 sources:

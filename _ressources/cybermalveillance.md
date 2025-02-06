@@ -8,7 +8,7 @@ illustration: cybermalveillance/cybermalveillance.png
 lien: https://www.cybermalveillance.gouv.fr/bonnes-pratiques
 format: Publication 
 besoins:
-  - SENSIBILISER_ET_FORMER
+  - ETRE_SENSIBILISE
 droitsAcces:
   - ACCES_LIBRE
 sources:

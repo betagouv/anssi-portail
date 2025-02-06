@@ -9,7 +9,7 @@ illustration: hackropole/hackropole.png
 sources:
   - ANSSI
 besoins: 
-  - SENSIBILISER_ET_FORMER
+  - SE_FORMER
 droitsAcces:
   - ACCES_LIBRE
 ---

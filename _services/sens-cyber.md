@@ -9,7 +9,8 @@ illustration: sens-cyber/sens-cyber.png
 sources:
   - Cybermalveillance
 besoins: 
-  - SENSIBILISER_ET_FORMER
+  - ETRE_SENSIBILISER
+  - SE_FORMER
 droitsAcces:
   - ACCES_LIBRE
 parcours:

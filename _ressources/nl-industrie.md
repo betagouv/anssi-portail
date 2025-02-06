@@ -8,7 +8,7 @@ illustration: nl-industries/nl-industries.png
 lien: https://cyber.gouv.fr/politique-industrielle
 format: Publication 
 besoins:
-  - SENSIBILISER_ET_FORMER
+  - ETRE_SENSIBILISE
 droitsAcces:
   - ACCES_LIBRE
 sources:
