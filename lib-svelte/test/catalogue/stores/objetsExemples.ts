@@ -51,7 +51,7 @@ export const monEspaceNIS2 = (): ItemCyber => ({
 export const livretEnJeux = (): ItemCyber => ({
   typologie: Typologie.RESSOURCE,
   nom: "enjeux",
-  format: FormatRessource.VIDEO,
+  format: FormatRessource.OUTIL,
   description: "",
   illustration: "livret.png",
   lienInterne: "https://...",
@@ -65,7 +65,7 @@ export const livretEnJeux = (): ItemCyber => ({
 export const guidesTechniques = (): ItemCyber => ({
   typologie: Typologie.RESSOURCE,
   nom: "Guides techniques",
-  format: FormatRessource.PDF,
+  format: FormatRessource.PUBLICATION,
   description: "",
   illustration: "guide.png",
   lienInterne: "https://...",
@@ -79,7 +79,7 @@ export const guidesTechniques = (): ItemCyber => ({
 export const kitCyber = (): ItemCyber => ({
   typologie: Typologie.RESSOURCE,
   nom: "KIT CYBER",
-  format: FormatRessource.PDF,
+  format: FormatRessource.PUBLICATION,
   description: "",
   illustration: "kit.png",
   lienInterne: "https://...",

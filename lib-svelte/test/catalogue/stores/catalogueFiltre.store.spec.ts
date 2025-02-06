@@ -113,7 +113,7 @@ describe("Le store du catalogue filtré", () => {
   describe("sur application d'un filtre de format", () => {
     it("conserve uniquement les items correspondant", () => {
       catalogueStore.initialise([], [livretEnJeux(), guidesTechniques()]);
-      rechercheParFormat.set([FormatRessource.PDF]);
+      rechercheParFormat.set([FormatRessource.PUBLICATION]);
 
       const { resultats } = get(catalogueFiltre);
 

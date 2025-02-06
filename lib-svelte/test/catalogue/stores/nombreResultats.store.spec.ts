@@ -87,8 +87,8 @@ describe("Le store du nombre de résultats", () => {
 
       let parFormatDeRessource = get(nombreResultats).parFormatDeRessource;
 
-      expect(parFormatDeRessource[FormatRessource.PDF]).toBe(1);
-      expect(parFormatDeRessource[FormatRessource.VIDEO]).toBe(0);
+      expect(parFormatDeRessource[FormatRessource.PUBLICATION]).toBe(1);
+      expect(parFormatDeRessource[FormatRessource.OUTIL]).toBe(0);
     });
 
     it("pour une vidéo", () => {
@@ -96,8 +96,8 @@ describe("Le store du nombre de résultats", () => {
 
       let parFormatDeRessource = get(nombreResultats).parFormatDeRessource;
 
-      expect(parFormatDeRessource[FormatRessource.PDF]).toBe(0);
-      expect(parFormatDeRessource[FormatRessource.VIDEO]).toBe(1);
+      expect(parFormatDeRessource[FormatRessource.PUBLICATION]).toBe(0);
+      expect(parFormatDeRessource[FormatRessource.OUTIL]).toBe(1);
     });
   });
 
