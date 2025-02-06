@@ -5,7 +5,7 @@ nom: Visas de sécurité
 titreHtml: Visas de sécurité
 description: Accéder aux solutions évaluées par l'ANSSI
 illustration: visa-secu/visa-secu.png
-format: Label # Rajoute le badge en haut à droite de l'illustration
+format: Label 
 lien : https://cyber.gouv.fr/trouver-un-produitservice-de-securite-evalue
 besoins:
   - RENFORCER_LA_SECURITE

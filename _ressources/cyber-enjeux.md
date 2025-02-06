@@ -7,7 +7,7 @@ description: "Former à la cybersécurité par le jeu"
 lien: https://cyber.gouv.fr/actualites/au-college-et-au-lycee-former-a-la-cybersecurite-par-le-jeu
 illustration: cyber-enjeux/cyber-enjeux.png
 avecFicheDetaillee: true
-format: Outil # Rajoute le badge en haut à droite de l'illustration
+format: Outil 
 sources:
   - ANSSI
 besoins: 

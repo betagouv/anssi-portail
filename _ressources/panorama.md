@@ -5,7 +5,7 @@ nom: Panorama de la menace
 titreHtml: Panorama de la menace
 description: Découvrir les tendances de la menace
 illustration: panorama/panorama.png
-format: Publication # Rajoute le badge en haut à droite de l'illustration
+format: Publication 
 lien : https://cyber.gouv.fr/le-panorama-de-la-cybermenace
 besoins:
   - REAGIR

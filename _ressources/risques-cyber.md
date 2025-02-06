@@ -5,7 +5,7 @@ nom: Vidéo
 titreHtml: Vidéo
 description: Découvrir les risques cyber en 2mn
 illustration: risques-cyber/risques-cyber.png
-format: Publication # Rajoute le badge en haut à droite de l'illustration
+format: Publication 
 besoins:
   - SENSIBILISER_ET_FORMER
 droitsAcces:
