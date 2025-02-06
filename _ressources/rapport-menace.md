@@ -5,7 +5,7 @@ nom: Rapports sur la menace
 titreHtml: Rapports sur la menace
 description: Connaître l'état de la menace
 illustration: rapport-menace/rapport-menace.png
-format: PDF 
+format: Publication 
 besoins:
   - RENFORCER_LA_SECURITE 
 droitsAcces:
