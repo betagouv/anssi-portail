@@ -575,9 +575,23 @@ footer {
   .officiel {
     padding: 0 0 16px;
     border-bottom: 1px solid var(--gris-clair);
+    display: flex;
+    flex-direction: column;
+
+    @include a-partir-de(md) {
+      flex-direction: row;
+      .bloc-france {
+        flex: 1;
+      }
+      .info-msc {
+        flex: 2;
+      }
+    }
+
     img {
       margin-bottom: 8px;
     }
+
     p {
       margin-bottom: 16px;
 
@@ -594,6 +608,7 @@ footer {
       display: flex;
       flex-wrap: wrap;
       gap: 16px 20px;
+
       a {
         color: #3a3a3a;
         font-weight: bold;
