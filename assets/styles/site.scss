@@ -77,6 +77,10 @@ header {
 
   a {
     border: none;
+
+    &:hover {
+      border-bottom-style: none;
+    }
   }
 
   .contenu-section {
