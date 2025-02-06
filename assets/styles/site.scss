@@ -320,7 +320,7 @@ header {
       box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
       left: 0;
       right: 0;
-      top: 62px;
+      top: 58px;
       font-size: 0.875rem;
       line-height: 1.5rem;
       z-index: 5;
@@ -331,6 +331,7 @@ header {
         border-bottom: 1px solid #dddddd;
         position: relative;
         font-weight: normal;
+        box-sizing: border-box;
 
         &.actif {
           font-weight: normal;
@@ -343,7 +344,7 @@ header {
             height: 24px;
             background: var(--jaune-msc);
             position: absolute;
-            left: 6px;
+            left: 0;
           }
         }
 
