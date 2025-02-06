@@ -20,7 +20,7 @@ cible:  |
 liens:
     - accompagnement:   
       titre: Découvrez DemainSpécialisteCyber 
-      lien: https://messervices.cyber.gouv.fr/services/demainspecialistecyber.html
+      lien: /services/demainspecialistecyber.html
       illustration: cyber-enjeux/cyber-enjeux-demainspe.png
       couleurFond: "#0079D0"
 ---

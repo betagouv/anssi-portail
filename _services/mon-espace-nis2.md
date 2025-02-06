@@ -27,8 +27,8 @@ liens:
     - accompagnement:   
       titre: Parcours NIS2 sur MesServicesCyber
       lien: https://messervices.cyber.gouv.fr/nis2/
-      illustration: nis2/nis-parcours.png
-      couleurFond: "#0079D0"
+      illustration: nis2/nis2parcours.png
+      couleurFond: "#272771"
 ---
 MonEspaceNIS2 est un service numérique proposé par l’ANSSI pour aider l’ensemble des entités régulées par la directive NIS2 à :
 <ul>
