@@ -5,7 +5,7 @@ nom: Publications
 titreHtml: Publications
 description: Accéder à toutes les publications de l'ANSSI
 illustration: publications/publications.png
-format: Publication # Rajoute le badge en haut à droite de l'illustration
+format: Publication 
 lien : https://cyber.gouv.fr/publications
 besoins:
   - SECURISER

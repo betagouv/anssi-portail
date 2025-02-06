@@ -5,7 +5,7 @@ nom: Rapports sur la menace
 titreHtml: Rapports sur la menace
 description: Connaître l'état de la menace
 illustration: rapport-menace/rapport-menace.png
-format: PDF # Rajoute le badge en haut à droite de l'illustration
+format: PDF 
 besoins:
   - SECURISER 
 droitsAcces:
