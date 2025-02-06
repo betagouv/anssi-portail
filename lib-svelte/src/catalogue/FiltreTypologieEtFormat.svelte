@@ -63,34 +63,34 @@
     <label>
       <input
         type="checkbox"
-        value={FormatRessource.PDF}
+        value={FormatRessource.PUBLICATION}
         bind:group={$rechercheParFormat}
       />
-      <span class="libelle">PDF</span>
+      <span class="libelle">Publication</span>
       <span class="compte"
-        >{$nombreResultats.parFormatDeRessource[FormatRessource.PDF]}</span
+        >{$nombreResultats.parFormatDeRessource[FormatRessource.PUBLICATION]}</span
       >
     </label>
     <label>
       <input
         type="checkbox"
-        value={FormatRessource.VIDEO}
+        value={FormatRessource.OUTIL}
         bind:group={$rechercheParFormat}
       />
-      <span class="libelle">Vidéos</span>
+      <span class="libelle">Outil</span>
       <span class="compte"
-        >{$nombreResultats.parFormatDeRessource[FormatRessource.VIDEO]}</span
+        >{$nombreResultats.parFormatDeRessource[FormatRessource.OUTIL]}</span
       >
     </label>
     <label>
       <input
         type="checkbox"
-        value={FormatRessource.LISTES}
+        value={FormatRessource.LABEL}
         bind:group={$rechercheParFormat}
       />
-      <span class="libelle">Listes</span>
+      <span class="libelle">Label</span>
       <span class="compte"
-        >{$nombreResultats.parFormatDeRessource[FormatRessource.LISTES]}</span
+        >{$nombreResultats.parFormatDeRessource[FormatRessource.LABEL]}</span
       >
     </label>
   </fieldset>
