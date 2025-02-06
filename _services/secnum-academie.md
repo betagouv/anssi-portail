@@ -3,8 +3,9 @@ layout: service
 typologie: service
 nom: SecNumAcadémie
 titreHtml: SecNumAcadémie
+avecFicheDetaillee: true
 description: "Se former avec le MOOC de l'ANSSI"
-illustration: secnum-academie/secnum-academie.png
+illustration: secnumacademie/secnum-academie.png
 sources:
   - ANSSI
 besoins: 

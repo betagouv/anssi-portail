@@ -21,7 +21,7 @@ cible:  |
 liens:
     - accompagnement:   
       titre: CyberEnJeux
-      lien: https://messervices.cyber.gouv.fr/ressources/cyber-enjeux.html
+      lien: /ressources/cyber-enjeux.html
       illustration: demainspecialistecyber/demainspecialistecyber-cyberenjeux.png
       couleurFond: "#4cbab6"
 ---
