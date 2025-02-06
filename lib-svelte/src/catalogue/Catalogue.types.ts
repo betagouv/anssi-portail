@@ -30,9 +30,9 @@ export enum Typologie {
 }
 
 export enum FormatRessource {
-  PDF = "PDF",
-  VIDEO = "Video",
-  LISTES = "Listes",
+  PUBLICATION = "Publication",
+  OUTIL = "Outil",
+  LABEL = "Label",
 }
 
 export enum Source {
