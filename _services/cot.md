@@ -11,7 +11,7 @@ sources:
 besoins: 
   - SECURISER
   - REAGIR
-  - SENSIBILISER_ET_FORMER
+  - ETRE_SENSIBILISE
 droitsAcces:
   - ACCES_LIBRE
 ---

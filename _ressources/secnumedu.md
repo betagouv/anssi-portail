@@ -9,7 +9,7 @@ format: Label
 lien : https://cyber.gouv.fr/secnumedu
 avecFicheDetaillee: true
 besoins:
-  - SENBILISER_ET_FORMER
+  - SE_FORMER
 droitsAcces:
   - ACCES_LIBRE
 sources:

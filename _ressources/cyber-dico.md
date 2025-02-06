@@ -8,7 +8,8 @@ illustration: cyber-dico/cyber-dico.png
 lien : https://cyber.gouv.fr/le-cyberdico
 format: Outil 
 besoins:
-  - SENSIBILISER_ET_FORMER
+  - ETRE_SENSIBILISE
+  - SE_FORMER
 droitsAcces:
   - ACCES_LIBRE
 sources:

@@ -7,7 +7,8 @@ description: Découvrir les risques cyber en 2mn
 illustration: risques-cyber/risques-cyber.png
 format: Publication 
 besoins:
-  - SENSIBILISER_ET_FORMER
+  - ETRE_SENSIBILISER
+  - SE_FORMER
 droitsAcces:
   - ACCES_LIBRE
 sources:

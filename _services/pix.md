@@ -9,7 +9,7 @@ illustration: pix/pix.png
 sources:
   - PIX
 besoins: 
-  - SENSIBILISE_ET_FORMER
+  - SE_FORMER
 droitsAcces:
   - ACCES_LIBRE
 ---

@@ -8,7 +8,7 @@ illustration: malette-cyber/malette-cyber.png
 lien: https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/lancement-mallette-cyber-inclusion-numerique
 format: Outil 
 besoins:
-  - SENSIBILISER_ET_FORMER
+  - ETRE_SENSIBILISE
 droitsAcces:
   - ACCES_LIBRE
 sources:
