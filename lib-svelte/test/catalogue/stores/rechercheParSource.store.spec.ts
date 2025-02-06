@@ -15,12 +15,12 @@ describe("La recherche par source", () => {
       expect(resultat).toBe(false);
     });
 
-    it("retourne l'item lorsque la primaire est ANSSI et qu'il n'a pas de source secondaire", () => {
+    it("ne retourne pas l'item lorsque la primaire est ANSSI et qu'il n'a pas de source secondaire", () => {
       rechercheParSource.set([Source.ANSSI, Source.CERTFR]);
 
       const resultat = rechercheParSource.ok(guidesTechniques()); // uniquement ANSSI
 
-      expect(resultat).toBe(true);
+      expect(resultat).toBe(false);
     });
 
     it("ne retourne pas un item partenaire", ()=>{

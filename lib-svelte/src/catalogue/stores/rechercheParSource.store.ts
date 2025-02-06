@@ -36,7 +36,7 @@ export const rechercheParSource = {
       if (secondaire) {
         return sources.includes(secondaire as Source);
       }
-      return true;
+      return false;
     }
     return sources.includes(Source.PARTENAIRES);
   },
