@@ -14,5 +14,5 @@ format: Publication
 sources:
   - ANSSI
 parcours:
-  - APPROFONDIR_PROGRESSER
+  - APPROFONDIR_SE_FORMER
 ---
