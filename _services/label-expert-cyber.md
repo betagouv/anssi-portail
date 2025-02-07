@@ -14,5 +14,5 @@ droitsAcces:
   - ACCES_LIBRE
 parcours:
   - DEBUTER_REAGIR
-  - APPROFONDIR_PILOTER
+  - APPROFONDIR_SECURISER
 ---

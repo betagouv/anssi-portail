@@ -14,5 +14,5 @@ droitsAcces:
 sources:
   - ANSSI
 parcours:
-  - APPROFONDIR_PILOTER
+  - APPROFONDIR_SECURISER
 ---

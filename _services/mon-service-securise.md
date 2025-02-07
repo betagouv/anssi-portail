@@ -30,7 +30,7 @@ liens:
       illustration: mss/mss-securiser.webp
       couleurFond: "#0079D0"
 parcours:
-  - APPROFONDIR_PILOTER
+  - APPROFONDIR_SECURISER
   - NIS2_REDUIRE_RISQUES
 ---
 MonServiceSécurisé est un service numérique proposé par le laboratoire d'innovation de l’ANSSI pour aider les entités publiques à piloter en équipe la sécurité de tous leurs services numériques et à les homologuer rapidement.

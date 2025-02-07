@@ -16,7 +16,7 @@ sources:
   - Innovation ANSSI
 parcours:
   - DEBUTER_SECURISER
-  - APPROFONDIR_PILOTER
+  - APPROFONDIR_SECURISER
 cible:  |
     <ul>
     <li> En accès libre, MonAideCyber est destiné aux entités publiques et privées en France souhaitant mettre en oeuvre une première démarche de cybersécurité. </li>
