@@ -13,6 +13,6 @@ besoins:
 droitsAcces:
   - ACCES_LIBRE
 parcours:
-  - DEBUTER_ETRE_ACCOMPAGNE
+  - DEBUTER_REAGIR
   - APPROFONDIR_PILOTER
 ---
