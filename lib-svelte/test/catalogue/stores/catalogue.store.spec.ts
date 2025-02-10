@@ -11,14 +11,14 @@ describe("Le store du catalogue", () => {
   });
 
   it("peut être initialisé avec des services", () => {
-    catalogueStore.initialise([mss()], []);
+    catalogueStore.initialise([mss()]);
 
     expect(get(catalogueStore).length).toBe(1);
     expect(get(catalogueStore)[0].nom).toBe("mss");
   });
 
   it("peut être initialisé avec des ressources", () => {
-    catalogueStore.initialise([], [livretEnJeux()]);
+    catalogueStore.initialise( [livretEnJeux()]);
 
     expect(get(catalogueStore).length).toBe(1);
     expect(get(catalogueStore)[0].nom).toBe("enjeux");

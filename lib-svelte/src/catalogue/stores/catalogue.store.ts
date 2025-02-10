@@ -5,6 +5,5 @@ const { subscribe, set } = writable([] as ItemCyber[]);
 
 export const catalogueStore = {
   subscribe,
-  initialise: (services: ItemCyber[], ressources: ItemCyber[]) =>
-    set([...services, ...ressources]),
+  initialise: (itemsCyber: ItemCyber[]) => set([...itemsCyber]),
 };
