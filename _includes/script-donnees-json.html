@@ -4,6 +4,7 @@
       {% assign items = site.services | concat: site.ressources %}
       {% for item in items %}
       {
+        "id": "{{ item.id }}",
         "nom": "{{ item.nom }}",
         "typologie": "{{ item.typologie }}",
         "illustration": "{{ item.illustration }}",

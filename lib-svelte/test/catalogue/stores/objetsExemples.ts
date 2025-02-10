@@ -8,6 +8,7 @@ import {
 } from "../../../src/catalogue/Catalogue.types";
 
 export const mss = (): ItemCyber => ({
+  id:"/services/mss",
   typologie: Typologie.SERVICE,
   nom: "mss",
   description: "Pour sécuriser",
@@ -20,6 +21,7 @@ export const mss = (): ItemCyber => ({
 });
 
 export const demainSpecialisteCyber = (): ItemCyber => ({
+  id:"/services/demainspecialistecyber",
   typologie: Typologie.SERVICE,
   nom: "DemainSpécialisteCyber",
   description: "Former…",
@@ -32,6 +34,7 @@ export const demainSpecialisteCyber = (): ItemCyber => ({
 });
 
 export const monEspaceNIS2 = (): ItemCyber => ({
+  id:"/services/mon-espace-nis2",
   typologie: Typologie.SERVICE,
   nom: "MonEspaceNIS2",
   description:
@@ -45,6 +48,7 @@ export const monEspaceNIS2 = (): ItemCyber => ({
 });
 
 export const livretEnJeux = (): ItemCyber => ({
+  id:"/ressources/livret-cyber-enjeux",
   typologie: Typologie.RESSOURCE,
   nom: "enjeux",
   format: FormatRessource.OUTIL,
@@ -58,6 +62,7 @@ export const livretEnJeux = (): ItemCyber => ({
 });
 
 export const guidesTechniques = (): ItemCyber => ({
+  id:"/ressources/guides-techniques",
   typologie: Typologie.RESSOURCE,
   nom: "Guides techniques",
   format: FormatRessource.PUBLICATION,
@@ -71,6 +76,7 @@ export const guidesTechniques = (): ItemCyber => ({
 });
 
 export const kitCyber = (): ItemCyber => ({
+  id:"/ressources/kit-cyber",
   typologie: Typologie.RESSOURCE,
   nom: "KIT CYBER",
   format: FormatRessource.PUBLICATION,
