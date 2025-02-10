@@ -20,7 +20,7 @@ import {
 describe("Le store du nombre de résultats", () => {
   describe("peut retourner le nombre par droit d'accès", () => {
     it("pour une entité publique", () => {
-      catalogueStore.initialise([mss()], []);
+      catalogueStore.initialise([mss()]);
 
       let parDroitAcces = get(nombreResultats).parDroitAcces;
 
@@ -29,7 +29,7 @@ describe("Le store du nombre de résultats", () => {
     });
 
     it("pour un accès libre", () => {
-      catalogueStore.initialise([demainSpecialisteCyber()], []);
+      catalogueStore.initialise([demainSpecialisteCyber()]);
 
       let parDroitAcces = get(nombreResultats).parDroitAcces;
 
@@ -38,7 +38,7 @@ describe("Le store du nombre de résultats", () => {
     });
 
     it("pour une entité régulée / NIS2 qui est également en accès libre", () => {
-      catalogueStore.initialise([monEspaceNIS2()], []);
+      catalogueStore.initialise([monEspaceNIS2()]);
 
       let parDroitAcces = get(nombreResultats).parDroitAcces;
 
@@ -47,22 +47,22 @@ describe("Le store du nombre de résultats", () => {
       expect(parDroitAcces[DroitAcces.REGULES_NIS2]).toBe(1);
     });
 
-    it("lorsque un service n'a pas de droit d'acces", ()=>{
+    it("lorsque un service n'a pas de droit d'acces", () => {
       const sansDroitAcces = monEspaceNIS2();
-      delete sansDroitAcces.droitsAcces
-      catalogueStore.initialise([sansDroitAcces], []);
+      delete sansDroitAcces.droitsAcces;
+      catalogueStore.initialise([sansDroitAcces]);
 
       let parDroitAcces = get(nombreResultats).parDroitAcces;
 
       expect(parDroitAcces[DroitAcces.ACCES_LIBRE]).toBe(0);
       expect(parDroitAcces[DroitAcces.ENTITES_PUBLIQUES]).toBe(0);
       expect(parDroitAcces[DroitAcces.REGULES_NIS2]).toBe(0);
-    })
+    });
   });
 
   describe("peut retourner le nombre par typologie", () => {
     it("pour un service", () => {
-      catalogueStore.initialise([mss()], []);
+      catalogueStore.initialise([mss()]);
 
       let parTypologie = get(nombreResultats).parTypologie;
 
@@ -71,7 +71,7 @@ describe("Le store du nombre de résultats", () => {
     });
 
     it("pour une ressource", () => {
-      catalogueStore.initialise([], [guidesTechniques()]);
+      catalogueStore.initialise([guidesTechniques()]);
 
       let parTypologie = get(nombreResultats).parTypologie;
 
@@ -82,7 +82,7 @@ describe("Le store du nombre de résultats", () => {
 
   describe("peut retourner le nombre par format", () => {
     it("pour un pdf", () => {
-      catalogueStore.initialise([], [guidesTechniques()]);
+      catalogueStore.initialise([guidesTechniques()]);
 
       let parFormatDeRessource = get(nombreResultats).parFormatDeRessource;
 
@@ -91,7 +91,7 @@ describe("Le store du nombre de résultats", () => {
     });
 
     it("pour une vidéo", () => {
-      catalogueStore.initialise([], [livretEnJeux()]);
+      catalogueStore.initialise([livretEnJeux()]);
 
       let parFormatDeRessource = get(nombreResultats).parFormatDeRessource;
 
@@ -102,7 +102,7 @@ describe("Le store du nombre de résultats", () => {
 
   describe("peut retourner le nombre par source", () => {
     it("pour les partenaires", () => {
-      catalogueStore.initialise([], [kitCyber()]);
+      catalogueStore.initialise([kitCyber()]);
 
       let parSource = get(nombreResultats).parSource;
 
@@ -110,15 +110,15 @@ describe("Le store du nombre de résultats", () => {
       expect(parSource[Source.PARTENAIRES]).toBe(1);
     });
 
-    it("lorsque un service n'a pas de source", ()=>{
+    it("lorsque un service n'a pas de source", () => {
       const sansSource = monEspaceNIS2();
-      delete sansSource.sources
-      catalogueStore.initialise([sansSource], []);
+      delete sansSource.sources;
+      catalogueStore.initialise([sansSource]);
 
       let parSource = get(nombreResultats).parSource;
 
       expect(parSource[Source.ANSSI]).toBe(0);
       expect(parSource[Source.PARTENAIRES]).toBe(0);
-    })
+    });
   });
 });
