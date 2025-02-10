@@ -39,8 +39,7 @@ const metsAJourSectionActive = (hashSectionActive) => {
 
 const changeSectionActive = () => {
   document.querySelector("details").removeAttribute("open");
-  if (location.hash)
-    metsAJourSectionActive(location.hash);
+  if (location.hash) metsAJourSectionActive(location.hash);
 };
 
 let scrollEnAttenteDeMiseAJour = false;
@@ -65,3 +64,17 @@ const scrolle = () => {
 window.addEventListener("hashchange", changeSectionActive);
 window.addEventListener("DOMContentLoaded", changeSectionActive);
 window.addEventListener("scroll", scrolle);
+
+window.ouvreModaleVideo = (lien) => {
+  document.getElementById("modale-video").style.display = "block";
+  let video = document.querySelector("#modale-video video");
+  video.setAttribute("src", lien);
+  video.play();
+};
+
+window.fermeModaleVideo = () => {
+  document.getElementById("modale-video").style.display = "none";
+  const video = document.querySelector("#modale-video video");
+  video.pause();
+  video.currentTime = 0;
+};

@@ -84,9 +84,19 @@ script: /scripts/service.js
                     <div class="illustration" style="background-color: {{lien.couleurFond}}">
                         <img src="/assets/images/illustrations-services/{{ lien.illustration }}">
                     </div>
-                    <a href="{{ lien.lien }}" target="_blank">{{ lien.titre }}</a>
+                    {% if lien.video %}
+                        <button onclick="ouvreModaleVideo('{{lien.lien}}')">{{ lien.titre }}</button>
+                    {% else %}
+                        <a href="{{ lien.lien }}" target="_blank">{{ lien.titre }}</a>
+                    {% endif %}
                 </div>
                 {% endfor %}
+            </div>
+            <div id="modale-video">
+                <div class="contenu-modale">
+                    <span class="ferme-video" onclick="fermeModaleVideo()">&times;</span>
+                    <video id="video-presentation" src="" controls=""></video>
+                </div>
             </div>
         </section>
 

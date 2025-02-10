@@ -11,6 +11,7 @@ cible:  |
     <ul>
     <li> Toutes les entités publiques en France (ministères, établissements publics, collectivités, opérateurs publics de services numériques, etc.). </li>
     <li>Les prestataires privés travaillant au profit d’entités publiques.</li>
+    </ul>
 sources:
   - ANSSI
   - Innovation ANSSI
@@ -25,6 +26,7 @@ liens:
     - commencer:
       titre: Commencer à sécuriser
       lien: https://cellar-c2.services.clever-cloud.com/monservicesecurise-ressources/MonServiceSecurise%20video.mp4
+      video: true
       illustration: mss/mss-securiser.webp
       couleurFond: "#0079D0"
 ---
