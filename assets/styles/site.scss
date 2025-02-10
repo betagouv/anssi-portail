@@ -34,6 +34,10 @@ body {
   margin: 0;
 }
 
+button {
+  font-family: var(--fonts);
+}
+
 a {
   color: var(--noir);
   display: flex;

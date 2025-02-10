@@ -16,6 +16,7 @@ cible:  |
     <ul>
     <li> En accès libre, MonAideCyber est destiné aux entités publiques et privées en France souhaitant mettre en oeuvre une première démarche de cybersécurité. </li>
     <li>Les prestataires privés travaillant au profit d’entités publiques.</li>
+    </ul>
 liens:
     - accompagnement:   
       titre: Bénéficier d’un accompagnement
@@ -24,6 +25,8 @@ liens:
       couleurFond: "#5d2b9d"
     - commencer:
       titre: Découvrez notre vidéo !
+      video: true
+      lien: https://cellar-c2.services.clever-cloud.com/monservicesecurise-ressources/MonServiceSecurise%20video.mp4
       lien: https://cellar-c2.services.clever-cloud.com/monservicesecurise-ressources/Video_MAC.mp4
       illustration: mss/mss-securiser.webp
       couleurFond: "#6f479f"
