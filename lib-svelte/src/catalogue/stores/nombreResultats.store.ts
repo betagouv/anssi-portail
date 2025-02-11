@@ -24,18 +24,18 @@ export const nombreResultats = derived<
   ) => Object.fromEntries(Object.values(type).map((f) => [f, calculNombre(f)]));
 
   const nombreParDroitAcces = (droitAcces: DroitAcces) =>
-    $catalogueStore.filter(
+    $catalogueStore.items.filter(
       (item) => item.droitsAcces && item.droitsAcces.includes(droitAcces),
     ).length;
 
   const nombreParTypologie = (typologie: Typologie) =>
-    $catalogueStore.filter((item) => item.typologie === typologie).length;
+    $catalogueStore.items.filter((item) => item.typologie === typologie).length;
 
   const nombreParFormatDeRessource = (format: FormatRessource) =>
-    $catalogueStore.filter((item) => item.format === format).length;
+    $catalogueStore.items.filter((item) => item.format === format).length;
 
   const nombreParSource = (source: Source) =>
-    $catalogueStore.filter((item) => {
+    $catalogueStore.items.filter((item) => {
       if (!item.sources) return false;
       if (!item.sources.includes(Source.ANSSI) && source === Source.PARTENAIRES)
         return true;

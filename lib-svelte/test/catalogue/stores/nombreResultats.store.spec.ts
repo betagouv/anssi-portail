@@ -18,9 +18,16 @@ import {
 } from "./objetsExemples";
 
 describe("Le store du nombre de résultats", () => {
+    const repartitionVide = () => ({
+      REAGIR: [],
+      SE_FORMER: [],
+      SECURISER: [],
+      ETRE_SENSIBILISE: [],
+    });
   describe("peut retourner le nombre par droit d'accès", () => {
+
     it("pour une entité publique", () => {
-      catalogueStore.initialise([mss()]);
+      catalogueStore.initialise([mss()], repartitionVide());
 
       let parDroitAcces = get(nombreResultats).parDroitAcces;
 
@@ -29,7 +36,7 @@ describe("Le store du nombre de résultats", () => {
     });
 
     it("pour un accès libre", () => {
-      catalogueStore.initialise([demainSpecialisteCyber()]);
+      catalogueStore.initialise([demainSpecialisteCyber()], repartitionVide());
 
       let parDroitAcces = get(nombreResultats).parDroitAcces;
 
@@ -38,7 +45,7 @@ describe("Le store du nombre de résultats", () => {
     });
 
     it("pour une entité régulée / NIS2 qui est également en accès libre", () => {
-      catalogueStore.initialise([monEspaceNIS2()]);
+      catalogueStore.initialise([monEspaceNIS2()], repartitionVide());
 
       let parDroitAcces = get(nombreResultats).parDroitAcces;
 
@@ -50,7 +57,7 @@ describe("Le store du nombre de résultats", () => {
     it("lorsque un service n'a pas de droit d'acces", () => {
       const sansDroitAcces = monEspaceNIS2();
       delete sansDroitAcces.droitsAcces;
-      catalogueStore.initialise([sansDroitAcces]);
+      catalogueStore.initialise([sansDroitAcces], repartitionVide());
 
       let parDroitAcces = get(nombreResultats).parDroitAcces;
 
@@ -62,7 +69,7 @@ describe("Le store du nombre de résultats", () => {
 
   describe("peut retourner le nombre par typologie", () => {
     it("pour un service", () => {
-      catalogueStore.initialise([mss()]);
+      catalogueStore.initialise([mss()], repartitionVide());
 
       let parTypologie = get(nombreResultats).parTypologie;
 
@@ -71,7 +78,7 @@ describe("Le store du nombre de résultats", () => {
     });
 
     it("pour une ressource", () => {
-      catalogueStore.initialise([guidesTechniques()]);
+      catalogueStore.initialise([guidesTechniques()], repartitionVide());
 
       let parTypologie = get(nombreResultats).parTypologie;
 
@@ -82,7 +89,7 @@ describe("Le store du nombre de résultats", () => {
 
   describe("peut retourner le nombre par format", () => {
     it("pour un pdf", () => {
-      catalogueStore.initialise([guidesTechniques()]);
+      catalogueStore.initialise([guidesTechniques()], repartitionVide());
 
       let parFormatDeRessource = get(nombreResultats).parFormatDeRessource;
 
@@ -91,7 +98,7 @@ describe("Le store du nombre de résultats", () => {
     });
 
     it("pour une vidéo", () => {
-      catalogueStore.initialise([livretEnJeux()]);
+      catalogueStore.initialise([livretEnJeux()], repartitionVide());
 
       let parFormatDeRessource = get(nombreResultats).parFormatDeRessource;
 
@@ -102,7 +109,7 @@ describe("Le store du nombre de résultats", () => {
 
   describe("peut retourner le nombre par source", () => {
     it("pour les partenaires", () => {
-      catalogueStore.initialise([kitCyber()]);
+      catalogueStore.initialise([kitCyber()], repartitionVide());
 
       let parSource = get(nombreResultats).parSource;
 
@@ -113,7 +120,7 @@ describe("Le store du nombre de résultats", () => {
     it("lorsque un service n'a pas de source", () => {
       const sansSource = monEspaceNIS2();
       delete sansSource.sources;
-      catalogueStore.initialise([sansSource]);
+      catalogueStore.initialise([sansSource], repartitionVide());
 
       let parSource = get(nombreResultats).parSource;
 

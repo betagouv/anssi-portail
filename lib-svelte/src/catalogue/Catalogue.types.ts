@@ -1,11 +1,14 @@
+export type IdItemCyber = string;
+
 export interface ItemCyber {
+  id: IdItemCyber;
   typologie: Typologie;
   nom: string;
   illustration: string;
   description: string;
   lienInterne: string;
   sources: string[];
-  besoins: BesoinCyber[];
+  besoins?: BesoinCyber[];
   droitsAcces: DroitAcces[];
   format?: FormatRessource;
   lienExterne: string;
@@ -17,6 +20,8 @@ export enum BesoinCyber {
   SE_FORMER = "SE_FORMER",
   SECURISER = "SECURISER",
 }
+
+export type RepartitionParBesoin = Record<BesoinCyber, IdItemCyber[]>;
 
 export enum DroitAcces {
   ACCES_LIBRE = "ACCES_LIBRE",
