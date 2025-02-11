@@ -23,40 +23,23 @@ titreHtml: "Votre entité est régulée NIS2 ? | MesServicesCyber"
 <section class="sommaire">
   <div class="contenu-section">
     <div class="groupe-boutons">
-      <a href="#s-informer" class="actif bouton secondaire">S’informer</a>
-      <a href="#s-enregistrer" class="bouton secondaire">S’enregistrer</a>
-      <a href="#reduire-risques" class="bouton secondaire">Réduire les risques cyber</a>
-      <a href="#declarer-incident" class="bouton secondaire">Déclarer un incident</a>
+      {% for action in site.data.nis2 %}
+      <a href="#{{action[0]}}" class="{%if forloop.first%}actif{% endif %} bouton secondaire">{{action[1].titre}}</a>
+      {% endfor %}
     </div>
   </div>
 </section>
 
-{% include action-parcours.html
-id='s-informer'
-titre='S’informer'
-explication='Découvrez la directive et vérifiez si votre entité est concernée, grâce à notre test.'
-parcours='NIS2_S_INFORMER'
-%}
-
-{% include action-parcours.html
-id='s-enregistrer'
-titre='S’enregistrer'
-explication='Procédez à l’enregistrement de votre entité auprès de l’ANSSI.'
-parcours='NIS2_S_ENREGISTRER'
-fondAlternatif=true
-%}
-
-{% include action-parcours.html
-id='reduire-risques'
-titre='Réduire les risques cyber'
-explication='Mettez en place des mesures de sécurité adaptées.'
-parcours='NIS2_REDUIRE_RISQUES'
-%}
-
-{% include action-parcours.html
-id='declarer-incident'
-titre='Déclarer un incident'
-explication='Signalez à l’ANSSI vos incidents de sécurité.'
-parcours='NIS2_DECLARER_INCIDENT'
-fondAlternatif=true
-%}
+{% for action in site.data.nis2 %}
+{%assign indexModulo2 = forloop.index0 | modulo: 2 %}
+{%if indexModulo2 == 1 %}{%assign fondAlternatif=true%}{%else%}{%assign fondAlternatif=false%}{%endif%}
+  {% assign idAction=action[0] %}
+  {% assign infosAction=action[1] %}
+  {% include action-parcours.html
+  id=idAction
+  titre=infosAction.titre
+  explication=infosAction.explication
+  parcours=infosAction.parcours
+  fondAlternatif=fondAlternatif
+  %}
+{% endfor %}
