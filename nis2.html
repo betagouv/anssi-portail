@@ -35,11 +35,12 @@ titreHtml: "Votre entité est régulée NIS2 ? | MesServicesCyber"
 {%if indexModulo2 == 1 %}{%assign fondAlternatif=true%}{%else%}{%assign fondAlternatif=false%}{%endif%}
   {% assign idAction=action[0] %}
   {% assign infosAction=action[1] %}
-  {% include action-parcours.html
+  {% include action-parcours-avec-items.html
   id=idAction
   titre=infosAction.titre
   explication=infosAction.explication
   parcours=infosAction.parcours
+  items=infosAction.items
   fondAlternatif=fondAlternatif
   %}
 {% endfor %}
