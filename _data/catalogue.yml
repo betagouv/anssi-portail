@@ -1,0 +1,17 @@
+ETRE_SENSIBILISE:
+  - /ressources/risques-cyber
+  - /services/cot
+  - /ressources/panorama
+SECURISER:
+  - /services/mon-aide-cyber
+  - /services/mon-service-securise
+  - /services/ads
+  - /services/silene
+REAGIR:
+  - /services/assistance-reponse-incidents
+  - /ressources/avis-bulletin
+  - /ressources/guides-remediation
+SE_FORMER:
+  - /services/secnum-academie
+  - /ressources/secnumedu
+  - /ressources/cyber-enjeux
