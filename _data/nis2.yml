@@ -1,23 +1,29 @@
 s-informer:
   titre: S’informer
   explication: Découvrez la directive et vérifiez si votre entité est concernée, grâce à notre test.
-  parcours: NIS2_S_INFORMER
   items:
     - /services/mon-espace-nis2
 
 s-enregistrer:
   titre: S’enregistrer
   explication: Procédez à l’enregistrement de votre entité auprès de l’ANSSI.
-  parcours: NIS2_S_ENREGISTRER
   items:
-    - /services/nis2
+    - /services/NIS2
 
 reduire-risques:
   titre: Réduire les risques cyber
   explication: Mettez en place des mesures de sécurité adaptées.
-  parcours: NIS2_REDUIRE_RISQUES
+  items:
+    - /services/mon-aide-cyber
+    - /services/ads
+    - /services/silene
+    - /services/mon-service-securise
+    - /services/assistance-technique
+    - /services/conseil-technique
+    - /ressources/revue-presse
 
 declarer-incident:
   titre: Déclarer un incident
   explication: Signalez à l’ANSSI vos incidents de sécurité.
-  parcours: NIS2_DECLARER_INCIDENT
+  items:
+    - /services/assistance-reponse-incidents

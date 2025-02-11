@@ -1,0 +1,15 @@
+<section id="{{include.id}}" class="action {% if include.fondAlternatif %} fond-alternatif{% endif %}">
+    <div class="contenu-section">
+        <div class="description">
+            <h1>{{include.titre}}</h1>
+            <p class="explication">{{include.explication}}</p>
+            <img class="illustration" src="/assets/images/illustration-{{include.id}}.svg"/>
+        </div>
+        <h2>Les services et ressources</h2>
+        {% for idItem in include.items %}
+            {% assign tous_les_items = site.services | concat: site.ressources %}
+            {% assign item = tous_les_items | where: "id", idItem | first %}
+            {% include carte-item.html item=item %}
+        {% endfor %}
+    </div>
+</section>
