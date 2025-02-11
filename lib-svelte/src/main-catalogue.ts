@@ -1,14 +1,20 @@
 import { mount } from "svelte";
 import Catalogue from "./catalogue/Catalogue.svelte";
-import type { ItemCyber } from "./catalogue/Catalogue.types";
+import {
+  type ItemCyber,
+  type RepartitionParBesoin,
+} from "./catalogue/Catalogue.types";
 import { catalogueStore } from "./catalogue/stores/catalogue.store";
 
 const donnees = document.getElementById("donnees")!.textContent;
 if (!donnees) throw new Error("Impossible de trouver les données du catalogue");
 
-const { itemsCyber } = JSON.parse(donnees) as { itemsCyber: ItemCyber[] };
+const { itemsCyber, repartition } = JSON.parse(donnees) as {
+  itemsCyber: ItemCyber[];
+  repartition: RepartitionParBesoin;
+};
 
-catalogueStore.initialise(itemsCyber);
+catalogueStore.initialise(itemsCyber, repartition);
 
 const catalogue = mount(Catalogue, {
   target: document.getElementById("catalogue")!,

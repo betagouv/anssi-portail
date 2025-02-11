@@ -6,6 +6,7 @@ import { rechercheParTypologie } from "./rechercheParTypologie.store";
 import { rechercheParFormat } from "./rechercheParFormat.store";
 import { rechercheParSource } from "./rechercheParSource.store";
 import { limitationRecherche } from "./limitationRecherche";
+import type { ItemCyber } from "../Catalogue.types";
 
 export const catalogueFiltre = derived(
   [
@@ -24,12 +25,18 @@ export const catalogueFiltre = derived(
     $rechercheParFormat,
     $rechercheParSource,
   ]) => {
-    let resultats = $catalogueStore
-      .filter(rechercheParBesoin.ok)
+    let itemsDuBesoin: ItemCyber[] = [];
+    let besoin = get(rechercheParBesoin);
+    if (besoin) {
+      itemsDuBesoin = $catalogueStore.repartition[besoin]
+        .map((id) => $catalogueStore.items.find((i) => i.id === id))
+        .filter((i) => i !== undefined);
+    } else itemsDuBesoin = $catalogueStore.items;
+    let resultats = itemsDuBesoin
       .filter(rechercheParDroitAcces.ok)
       .filter(rechercheParTypologie.ok)
       .filter(rechercheParFormat.ok)
-      .filter(rechercheParSource.ok)
+      .filter(rechercheParSource.ok);
     if (get(limitationRecherche)) {
       resultats = resultats.slice(0, get(limitationRecherche));
     }
