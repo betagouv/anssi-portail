@@ -29,50 +29,26 @@ titreHtml: "Cybersécurité : approfondir ! | MesServicesCyber"
 <section class="sommaire">
   <div class="contenu-section">
     <div class="groupe-boutons">
-      <a href="#sensibiliser" class="actif bouton secondaire">Sensibiliser</a>
-      <a href="#progresser" class="bouton secondaire">Progresser</a>
-      <a href="#piloter" class="bouton secondaire">Piloter</a>
-      <a href="#tester" class="bouton secondaire">Tester</a>
-      <a href="#anticiper" class="bouton secondaire">Anticiper</a>
+      {% for action in site.data.parcours-approfondir %}
+      <a href="#{{action[0]}}" class="{%if forloop.first%}actif{% endif %} bouton secondaire">{{action[1].titre}}</a>
+      {% endfor %}
     </div>
   </div>
 </section>
 
-{% include action-parcours.html
-id='sensibiliser'
-titre='Sensibiliser'
-explication='Continuez à sensibiliser les dirigeants et salariés aux risques cyber et aux bonnes pratiques'
-parcours='APPROFONDIR_SENSIBILISER'
-%}
-
-{% include action-parcours.html
-id='progresser'
-titre='Progresser'
-explication='Développez les compétences cyber de vos équipes.'
-parcours='APPROFONDIR_PROGRESSER'
-fondAlternatif=true
-%}
-
-{% include action-parcours.html
-id='piloter'
-titre='Piloter'
-explication='Mettez en place ou améliorez le pilotage de votre plan d’action cyber.'
-parcours='APPROFONDIR_PILOTER'
-%}
-
-{% include action-parcours.html
-id='tester'
-titre='Tester'
-explication='Vérifiez la sécurité de son système d’information grâce à des tests de sécurité.'
-parcours='APPROFONDIR_TESTER'
-fondAlternatif=true
-%}
-
-{% include action-parcours.html
-id='anticiper'
-titre='Anticiper'
-explication='Préparez-vous à un incident ou une crise d’origine cyber afin de mieux y répondre.'
-parcours='APPROFONDIR_ANTICIPER'
-%}
+{% for action in site.data.parcours-approfondir %}
+  {%assign indexModulo2 = forloop.index0 | modulo: 2 %}
+  {%if indexModulo2 == 1 %}{%assign fondAlternatif=true%}{%else%}{%assign fondAlternatif=false%}{%endif%}
+  {% assign idAction=action[0] %}
+  {% assign infosAction=action[1] %}
+  {% include action-parcours-avec-items.html
+    id=idAction
+    titre=infosAction.titre
+    explication=infosAction.explication
+    parcours=infosAction.parcours
+    items=infosAction.items
+    fondAlternatif=fondAlternatif
+  %}
+{% endfor %}
 
 {% include encart-nis2.html fond='sombre' %}
