@@ -1,0 +1,23 @@
+sensibiliser:
+  titre: Sensibiliser
+  explication: Commencez à sensibiliser les dirigeants et salariés aux risques cyber et aux bonnes pratiques.
+  items:
+    - /ressources/risques-cyber
+    - /ressources/cybermalveillance
+
+securiser:
+  titre: Sécuriser
+  explication: Mettez en œuvre rapidement des premières mesures de sécurité et réduisez les vulnérabilités de vos systèmes.
+  items:
+    - /services/mon-aide-cyber
+    - /ressources/cyber-13questions
+    - /ressources/cnil-reco
+    - /services/label-expert-cyber
+
+etre-accompagne:
+  titre: Être accompagné
+  explication: Faites-vous accompagner par un prestataire de proximité.
+  items:
+    - /services/assistance-reponse-incidents
+    - /services/diagnostic-17cyber
+    - /services/cot

@@ -30,34 +30,26 @@ titreHtml: "Cybersécurité : se lancer ! | MesServicesCyber"
 <section class="sommaire">
     <div class="contenu-section">
         <div class="groupe-boutons">
-            <a href="#sensibiliser" class="actif bouton secondaire">Sensibiliser</a>
-            <a href="#securiser" class="bouton secondaire">Sécuriser</a>
-            <a href="#etre-accompagne" class="bouton secondaire">Être accompagné</a>
+          {% for action in site.data.parcours-debuter %}
+          <a href="#{{action[0]}}" class="{%if forloop.first%}actif{% endif %} bouton secondaire">{{action[1].titre}}</a>
+          {% endfor %}
         </div>
     </div>
 </section>
 
-{% include action-parcours.html
-id='sensibiliser'
-titre='Sensibiliser'
-explication='Commencez à sensibiliser les dirigeants et salariés aux risques cyber et aux bonnes
-pratiques.'
-parcours='DEBUTER_SENSIBILISER'
-%}
-
-{% include action-parcours.html
-id='securiser'
-titre='Sécuriser'
-explication='Mettez en œuvre rapidement des premières mesures de sécurité et réduisez les vulnérabilités de vos systèmes.'
-parcours='DEBUTER_SECURISER'
-fondAlternatif=true
-%}
-
-{% include action-parcours.html
-id='etre-accompagne'
-titre='Être accompagné'
-explication='Faites-vous accompagner par un prestataire de proximité.'
-parcours='DEBUTER_ETRE_ACCOMPAGNE'
-%}
+{% for action in site.data.parcours-debuter %}
+  {%assign indexModulo2 = forloop.index0 | modulo: 2 %}
+  {%if indexModulo2 == 1 %}{%assign fondAlternatif=true%}{%else%}{%assign fondAlternatif=false%}{%endif%}
+  {% assign idAction=action[0] %}
+  {% assign infosAction=action[1] %}
+  {% include action-parcours-avec-items.html
+    id=idAction
+    titre=infosAction.titre
+    explication=infosAction.explication
+    parcours=infosAction.parcours
+    items=infosAction.items
+    fondAlternatif=fondAlternatif
+  %}
+{% endfor %}
 
 {% include encart-nis2.html fond='sombre' %}
