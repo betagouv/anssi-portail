@@ -1,0 +1,44 @@
+sensibiliser:
+  titre: Sensibiliser
+  explication: Continuez à sensibiliser les dirigeants et salariés aux risques cyber et aux bonnes pratiques
+  items:
+    - /ressources/risques-cyber
+    - /ressources/panorama
+    - /services/cot
+    - /ressources/malette-cyber
+
+progresser:
+  titre: Progresser
+  explication: Développez les compétences cyber de vos équipes.
+  items:
+    - /ressources/cyber-enjeux
+    - /services/secnum-academie
+    - /services/sens-cyber
+    - /ressources/secnumedufc
+    - /services/pix
+
+piloter:
+  titre: Piloter
+  explication: Mettez en place ou améliorez le pilotage de votre plan d’action cyber.
+  items:
+    - /services/mon-aide-cyber
+    - /services/mon-service-securise
+    - /ressources/cyber-13questions
+    - /ressources/prestas-ebios
+    - /ressources/visa-secu
+    - /ressources/cnil-reco
+
+tester:
+  titre: Tester
+  explication: Vérifiez la sécurité de son système d’information grâce à des tests de sécurité.
+  items:
+
+
+anticiper:
+  titre: Anticiper
+  explication: Préparez-vous à un incident ou une crise d’origine cyber afin de mieux y répondre.
+  items:
+    - /ressources/guides-gestion-crise
+    - /ressources/guides-remediation
+    - /services/assistance-reponse-incidents
+    - /services/diagnostic-17cyber
