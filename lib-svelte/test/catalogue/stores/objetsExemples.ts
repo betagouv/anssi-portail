@@ -27,7 +27,6 @@ export const demainSpecialisteCyber = (): ItemCyber => ({
   illustration: "mss.png",
   lienInterne: "https://...",
   lienExterne: "https://...",
-  besoins: [BesoinCyber.ETRE_SENSIBILISE],
   sources: [Source.ANSSI, Source.INNOVATION_ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
@@ -41,7 +40,6 @@ export const monEspaceNIS2 = (): ItemCyber => ({
   illustration: "nis2.png",
   lienInterne: "https://nis2",
   lienExterne: "https://...",
-  besoins: [BesoinCyber.SECURISER],
   sources: [Source.ANSSI, Source.INNOVATION_ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE, DroitAcces.REGULES_NIS2],
 });
@@ -55,7 +53,6 @@ export const livretEnJeux = (): ItemCyber => ({
   illustration: "livret.png",
   lienInterne: "https://...",
   lienExterne: "https://...",
-  besoins: [BesoinCyber.ETRE_SENSIBILISE],
   sources: [Source.ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
@@ -69,7 +66,6 @@ export const guidesTechniques = (): ItemCyber => ({
   illustration: "guide.png",
   lienInterne: "https://...",
   lienExterne: "https://...",
-  besoins: [BesoinCyber.SECURISER],
   sources: [Source.ANSSI],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
@@ -83,7 +79,6 @@ export const kitCyber = (): ItemCyber => ({
   illustration: "kit.png",
   lienInterne: "https://...",
   lienExterne: "https://...",
-  besoins: [BesoinCyber.SE_FORMER],
   sources: ["Gendarmerie"],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });

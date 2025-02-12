@@ -67,17 +67,6 @@ describe("Le store du catalogue filtré", () => {
 
       expect(resultats.length).toBe(2);
     });
-
-    it("ne conserve pas les items sans besoin", () => {
-      let sansBesoin = { ...mss() };
-      delete sansBesoin.besoins;
-      catalogueStore.initialise([sansBesoin], repartitionVide());
-      rechercheParBesoin.set(BesoinCyber.SECURISER);
-
-      const { resultats } = get(catalogueFiltre);
-
-      expect(resultats.length).toBe(0);
-    });
   });
 
   describe("sur application d'un filtre d'accessibilité", () => {

@@ -7,8 +7,4 @@ export const rechercheParBesoin = {
   subscribe: selectionBesoins.subscribe,
   set: selectionBesoins.set,
   reinitialise: () => selectionBesoins.set(null),
-  ok: (item: ItemCyber) =>
-    item.besoins && !!item.besoins.find(
-      (b) => !get(selectionBesoins) || get(selectionBesoins) === b,
-    ),
 };
