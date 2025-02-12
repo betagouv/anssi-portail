@@ -14,9 +14,9 @@ securiser:
     - /ressources/cnil-reco
     - /services/label-expert-cyber
 
-etre-accompagne:
-  titre: Être accompagné
-  explication: Faites-vous accompagner par un prestataire de proximité.
+reagir:
+  titre: Réagir
+  explication: Faites-vous accompagner en cas de problème.
   items:
     - /services/assistance-reponse-incidents
     - /services/diagnostic-17cyber

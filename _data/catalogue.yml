@@ -2,16 +2,52 @@ ETRE_SENSIBILISE:
   - /ressources/risques-cyber
   - /services/cot
   - /ressources/panorama
+  - /services/sens-cyber
+  - /ressources/malette-cyber
+  - /ressources/cybermalveillance
+  - /ressources/cyber-dico
+  - /ressources/cnil-reco
+  - /ressources/cnil-ensemble
+  - /ressources/revue-presse
 SECURISER:
   - /services/mon-aide-cyber
   - /services/mon-service-securise
   - /services/ads
   - /services/silene
+  - /services/cot
+  - /ressources/guides-hygiene
+  - /ressources/cyber-13questions
+  - /ressources/ebios
+  - /ressources/prestas-ebios
+  - /ressources/visa-secu
+  - /services/label-expert-cyber
+  - /services/assistance-technique
+  - /services/mon-espace-nis2
+  - /services/NIS2
+  - /ressources/publications
+  - /ressources/nl-industries
+  - /services/assistance-technique
+  - /services/conseil-technique
+  - /services/pack-parcours-secu
 REAGIR:
   - /services/assistance-reponse-incidents
-  - /ressources/avis-bulletin
+  - /services/cot
+  - /ressources/guides-gestion-crise
   - /ressources/guides-remediation
+  - /services/diagnostic-17cyber
+  - /ressources/revue-presse
+  - /ressources/avis-bulletin
+  - /ressources/rapport-menace
+  - /services/transmission-signalements
+
 SE_FORMER:
+  - /ressources/livret-cyber-enjeux
   - /services/secnum-academie
   - /ressources/secnumedu
-  - /ressources/cyber-enjeux
+  - /ressources/secnumedufc
+  - /services/demainspecialistecyber
+  - /services/pix
+  - /services/hackropole
+  - /ressources/cyber-dico
+  - /ressources/risques-cyber
+  - /ressources/revue-presse
