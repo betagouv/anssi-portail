@@ -80,7 +80,7 @@ script: /scripts/service.js
 
             <div class="cartes">
                 {% for lien in page.liens %}
-                <div class="carte lien">
+                <div class="carte lien {% if lien.video %}video{% endif %}">
                     <div class="illustration" style="background-color: {{lien.couleurFond}}">
                         <img src="/assets/images/illustrations-services/{{ lien.illustration }}">
                     </div>
