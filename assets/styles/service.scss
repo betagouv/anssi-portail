@@ -273,7 +273,8 @@ h2 {
     .illustration:after {
       content: "";
       position: absolute;
-      background: rgba(0,0,0,0.35) url("/assets/images/icone-video.svg") no-repeat center;
+      background: rgba(0, 0, 0, 0.35) url("/assets/images/icone-video.svg")
+        no-repeat center;
       background-size: 60px 60px;
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
@@ -284,8 +285,7 @@ h2 {
     }
   }
 
-  a,
-  button {
+  a {
     display: flex;
     color: var(--noir);
     text-decoration: none;
@@ -306,20 +306,32 @@ h2 {
       height: 16px;
       align-self: end;
       margin-top: auto;
-    }
-  }
-
-  a {
-    &:after {
       background: url("/assets/images/icone-lien-externe.svg");
     }
   }
 
   button {
+    display: flex;
+    flex-direction: column;
+    color: var(--noir);
+    padding: 0;
+    text-decoration: none;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: bold;
+    flex: 1;
+    align-items: stretch;
+    width: auto;
     background-color: transparent;
     cursor: pointer;
     border: none;
     text-align: left;
+
+    span {
+      display: flex;
+      padding: 24px;
+      flex: 1;
+    }
   }
 }
 
