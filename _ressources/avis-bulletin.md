@@ -7,8 +7,6 @@ description: Accéder aux publications du CERT-FR
 illustration: avis-bulletin/avis-bulletin.png
 format: Publication 
 lien : https://www.cert.ssi.gouv.fr/
-besoins:
-  - SECURISER
 droitsAcces:
   - ACCES_LIBRE
 sources:

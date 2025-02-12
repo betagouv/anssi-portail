@@ -8,8 +8,6 @@ description: "Se former avec le MOOC de l'ANSSI"
 illustration: secnumacademie/secnum-academie.png
 sources:
   - ANSSI
-besoins: 
-  - SE_FORMER
 droitsAcces:
   - ACCES_LIBRE
 cible:  |

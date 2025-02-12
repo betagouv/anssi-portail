@@ -10,8 +10,6 @@ illustration: nis2/nis2.png
 sources:
   - ANSSI
   - Innovation ANSSI
-besoins: 
-  - SECURISER
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2

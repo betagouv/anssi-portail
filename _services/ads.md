@@ -7,8 +7,6 @@ titreHtml: ADS (Active Directory Security)
 illustration: ads/ads.png
 lien: https://club.ssi.gouv.fr/beta/#/login
 avecFicheDetaillee: true
-besoins:
-  - SECURISER
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2

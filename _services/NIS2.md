@@ -7,8 +7,6 @@ description: "S'enregistrer auprès de l'ANSSI (bientôt)"
 illustration: nis2/nis2.png
 sources:
   - ANSSI
-besoins: 
-  - SECURISER
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2

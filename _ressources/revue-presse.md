@@ -7,8 +7,6 @@ description: Recevoir l'actu quotidienne cyber
 illustration: revue-presse/revue-presse.png
 format: Publication 
 lien : Mailto:cert-fr@ssi.gouv.fr
-besoins:
-  - SECURISER
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2

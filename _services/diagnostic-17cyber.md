@@ -9,8 +9,6 @@ sources:
   - Cybermalveillance
   - Gendarmerie Nationale
   - Police Nationale
-besoins: 
-  - REAGIR
 droitsAcces:
   - ACCES_LIBRE
 ---

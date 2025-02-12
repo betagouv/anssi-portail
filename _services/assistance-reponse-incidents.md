@@ -9,8 +9,6 @@ illustration: assistance-reponse-incidents/assistance-reponse-incidents.png
 sources:
   - ANSSI
   - CERT-FR
-besoins: 
-  - REAGIR
 droitsAcces:
   - ACCES_LIBRE
 ---

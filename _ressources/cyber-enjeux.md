@@ -10,8 +10,6 @@ avecFicheDetaillee: true
 format: Outil 
 sources:
   - ANSSI
-besoins: 
-  - SE_FORMER
 droitsAcces:
   - ACCES_LIBRE
 cible:  |
