@@ -15,9 +15,6 @@ besoins:
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2
-parcours:
-  - APPROFONDIR_TESTER
-  - NIS2_REDUIRE_RISQUES
 cible:  |
     <ul>
     <li> Le service SILENE n’est accessible qu’à la sphère publique et aux entités réglementées notamment par la directive NIS2. </li>

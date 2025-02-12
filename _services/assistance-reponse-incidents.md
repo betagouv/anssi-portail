@@ -13,6 +13,4 @@ besoins:
   - REAGIR
 droitsAcces:
   - ACCES_LIBRE
-parcours:
-  - NIS2_DECLARER_INCIDENT
 ---

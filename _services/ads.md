@@ -15,9 +15,6 @@ droitsAcces:
 sources:
   - ANSSI
   - CERT-FR
-parcours:
-  - APPROFONDIR_TESTER
-  - NIS2_REDUIRE_RISQUES
 cible:  |
     <ul>
     Le service ADS n’est accessible qu’aux entités publiques et aux entités régulées notamment par la directive NIS2.

@@ -13,7 +13,4 @@ droitsAcces:
   - ACCES_LIBRE
 sources:
   - ANSSI
-parcours: 
-- DEBUTER_SENSIBILISER
-- APPROFONDIR_SENSIBILISER
 ---

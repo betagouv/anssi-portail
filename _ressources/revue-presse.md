@@ -15,6 +15,4 @@ droitsAcces:
 sources:
   - ANSSI
   - CERT-FR
-parcours:
-  - APPROFONDIR_ANTICIPER
 ---

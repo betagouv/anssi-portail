@@ -13,7 +13,4 @@ besoins:
   - SE_FORMER
 droitsAcces:
   - ACCES_LIBRE
-parcours:
-  - DEBUTER_SENSIBILISER
-  - APPROFONDIR_SENSIBILISER
 ---

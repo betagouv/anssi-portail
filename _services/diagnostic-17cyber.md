@@ -13,7 +13,4 @@ besoins:
   - REAGIR
 droitsAcces:
   - ACCES_LIBRE
-parcours:
-  - APPROFONDIR_ANTICIPER
-  - DEBUTER_ETRE_ACCOMPAGNE
 ---
