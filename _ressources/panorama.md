@@ -7,8 +7,6 @@ description: Découvrir les tendances de la menace
 illustration: panorama/panorama.png
 format: Publication 
 lien : https://cyber.gouv.fr/le-panorama-de-la-cybermenace
-besoins:
-  - REAGIR
 droitsAcces:
   - ACCES_LIBRE
 sources:

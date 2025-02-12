@@ -14,8 +14,6 @@ cible:  |
 sources:
   - ANSSI
   - Innovation ANSSI
-besoins: 
-  - SECURISER
 droitsAcces:
   - ENTITES_PUBLIQUES
 liens:

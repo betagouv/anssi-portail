@@ -10,8 +10,6 @@ illustration: silene/silene.png
 sources:
   - ANSSI
   - CERT-FR
-besoins: 
-  - SECURISER
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2

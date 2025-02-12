@@ -8,9 +8,6 @@ lien: https://www.cybermalveillance.gouv.fr/sens-cyber/apprendre/
 illustration: sens-cyber/sens-cyber.png
 sources:
   - Cybermalveillance
-besoins: 
-  - ETRE_SENSIBILISER
-  - SE_FORMER
 droitsAcces:
   - ACCES_LIBRE
 ---

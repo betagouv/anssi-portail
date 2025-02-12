@@ -7,8 +7,6 @@ description: Accéder aux solutions labellisées EBIOS RM
 illustration: prestas-ebios/prestas-ebios.png
 format: Label 
 lien : https://cyber.gouv.fr/label-ebios-risk-manager
-besoins:
-  - SECURISER
 droitsAcces:
   - ACCES_LIBRE
 sources:

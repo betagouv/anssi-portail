@@ -7,8 +7,6 @@ description: Apprendre la prudence sur internet !
 illustration: cnil-ensemble/cnil-ensemble.png
 format: Publication 
 lien : https://www.cnil.fr/fr/education
-besoins:
-  - ETRE_SENSIBILISE
 droitsAcces:
   - ACCES_LIBRE
 sources:

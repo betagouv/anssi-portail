@@ -7,8 +7,6 @@ description: Bénéficier d'un diagnostic cyber
 titreHtml: MonAideCyber
 illustration: mac/mac.png
 lien: https://monaide.cyber.gouv.fr/
-besoins:
-  - SECURISER
 droitsAcces:
   - ACCES_LIBRE
 sources:

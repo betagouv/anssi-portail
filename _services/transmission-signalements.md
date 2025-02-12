@@ -9,8 +9,6 @@ illustration: transmission-signalements/transmission-signalements.png
 sources:
   - ANSSI
   - CERT-FR
-besoins: 
-  - REAGIR
 droitsAcces:
   - ACCES_LIBRE
 ---

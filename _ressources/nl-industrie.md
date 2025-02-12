@@ -7,8 +7,6 @@ description: S'informer sur les actus industrielles cyber
 illustration: nl-industries/nl-industries.png
 lien: https://cyber.gouv.fr/politique-industrielle
 format: Publication 
-besoins:
-  - ETRE_SENSIBILISE
 droitsAcces:
   - ACCES_LIBRE
 sources:

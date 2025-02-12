@@ -8,10 +8,6 @@ lien : https://cyber.gouv.fr/action-territoriale
 illustration: cot/cot.png
 sources:
   - ANSSI
-besoins: 
-  - SECURISER
-  - REAGIR
-  - ETRE_SENSIBILISE
 droitsAcces:
   - ACCES_LIBRE
 ---

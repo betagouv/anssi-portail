@@ -8,8 +8,6 @@ lien: https://www.cybermalveillance.gouv.fr/tous-nos-contenus/label-expertcyber/
 illustration: label-cyber-expert/label-cyber-expert.png
 sources:
   - Cybermalveillance
-besoins: 
-  - SECURISER
 droitsAcces:
   - ACCES_LIBRE
 ---
