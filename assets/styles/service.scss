@@ -265,6 +265,25 @@ h2 {
     }
   }
 
+  &.video {
+    .illustration {
+      position: relative;
+    }
+
+    .illustration:after {
+      content: "";
+      position: absolute;
+      background: rgba(0,0,0,0.35) url("/assets/images/icone-video.svg") no-repeat center;
+      background-size: 60px 60px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
   a,
   button {
     display: flex;
@@ -301,11 +320,6 @@ h2 {
     cursor: pointer;
     border: none;
     text-align: left;
-    &:after {
-      width: 24px;
-      height: 24px;
-      background: url("/assets/images/icone-video.svg");
-    }
   }
 }
 
