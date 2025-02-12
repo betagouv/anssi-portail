@@ -15,8 +15,6 @@ besoins:
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2
-parcours:
-  - NIS2_S_INFORMER
 cible:  |
     <ul>
     <li> En accès libre, MonEspaceNIS2 est destiné aux entités souhaitant s’informer sur la directive NIS2.</li>

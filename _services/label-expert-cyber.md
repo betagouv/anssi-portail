@@ -12,7 +12,4 @@ besoins:
   - SECURISER
 droitsAcces:
   - ACCES_LIBRE
-parcours:
-  - DEBUTER_ETRE_ACCOMPAGNE
-  - APPROFONDIR_PILOTER
 ---

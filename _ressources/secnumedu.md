@@ -14,6 +14,4 @@ droitsAcces:
   - ACCES_LIBRE
 sources:
   - ANSSI
-parcours:
-  - APPROFONDIR_PROGRESSER
 ---

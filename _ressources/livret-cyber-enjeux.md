@@ -13,6 +13,4 @@ droitsAcces:
 format: Publication
 sources:
   - ANSSI
-parcours:
-  - APPROFONDIR_PROGRESSER
 ---

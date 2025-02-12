@@ -29,9 +29,6 @@ liens:
       lien: https://cellar-c2.services.clever-cloud.com/monservicesecurise-ressources/MonServiceSecurise%20video.mp4
       illustration: mss/mss-securiser.webp
       couleurFond: "#0079D0"
-parcours:
-  - APPROFONDIR_PILOTER
-  - NIS2_REDUIRE_RISQUES
 ---
 MonServiceSécurisé est un service numérique proposé par le laboratoire d'innovation de l’ANSSI pour aider les entités publiques à piloter en équipe la sécurité de tous leurs services numériques et à les homologuer rapidement.
 

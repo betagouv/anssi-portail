@@ -12,8 +12,6 @@ besoins:
   - SE_FORMER
 droitsAcces:
   - ACCES_LIBRE
-parcours: 
-  - APPROFONDIR_PROGRESSER
 cible:  |
     <ul>
     <li> SecNumAcadémie est en accès libre.</li>
