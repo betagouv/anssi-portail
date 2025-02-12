@@ -65,16 +65,17 @@ window.addEventListener("hashchange", changeSectionActive);
 window.addEventListener("DOMContentLoaded", changeSectionActive);
 window.addEventListener("scroll", scrolle);
 
-window.ouvreModaleVideo = (lien) => {
-  document.getElementById("modale-video").style.display = "block";
-  let video = document.querySelector("#modale-video video");
-  video.setAttribute("src", lien);
-  video.play();
-};
-
-window.fermeModaleVideo = () => {
-  document.getElementById("modale-video").style.display = "none";
+const modaleVideoFermee = () => {
   const video = document.querySelector("#modale-video video");
   video.pause();
   video.currentTime = 0;
+};
+
+window.ouvreModaleVideo = (lien) => {
+  const modale = document.getElementById("modale-video");
+  modale.showModal();
+  modale.addEventListener("close", modaleVideoFermee);
+  let video = document.querySelector("#modale-video video");
+  video.setAttribute("src", lien);
+  video.play();
 };

@@ -96,12 +96,12 @@ script: /scripts/service.js
                 </div>
                 {% endfor %}
             </div>
-            <div id="modale-video">
-                <div class="contenu-modale">
-                    <span class="ferme-video" onclick="fermeModaleVideo()">&times;</span>
-                    <video id="video-presentation" src="" controls=""></video>
-                </div>
-            </div>
+            <dialog id="modale-video">
+              <form method="dialog" class="contenu-modale">
+                <button class="ferme-video">&times;</button>
+                <video id="video-presentation" src="" controls=""></video>
+              </form>
+            </dialog>
         </section>
 
         {% if page.ressources.size  > 0 %}
