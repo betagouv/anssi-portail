@@ -7,18 +7,18 @@ sensibiliser:
     - /services/cot
     - /ressources/malette-cyber
 
-progresser:
-  titre: Progresser
+se former:
+  titre: Se former
   explication: Développez les compétences cyber de vos équipes.
   items:
-    - /ressources/cyber-enjeux
+    - /ressources/livret-cyber-enjeux
     - /services/secnum-academie
     - /services/sens-cyber
     - /ressources/secnumedufc
     - /services/pix
 
-piloter:
-  titre: Piloter
+securiser:
+  titre: Sécuriser
   explication: Mettez en place ou améliorez le pilotage de votre plan d’action cyber.
   items:
     - /services/mon-aide-cyber
@@ -32,10 +32,12 @@ tester:
   titre: Tester
   explication: Vérifiez la sécurité de son système d’information grâce à des tests de sécurité.
   items:
+  - /services/ads
+  - /services/silene
 
 
-anticiper:
-  titre: Anticiper
+reagir:
+  titre: Réagir
   explication: Préparez-vous à un incident ou une crise d’origine cyber afin de mieux y répondre.
   items:
     - /ressources/guides-gestion-crise

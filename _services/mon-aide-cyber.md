@@ -21,10 +21,10 @@ liens:
       titre: Bénéficier d’un accompagnement
       lien: https://www.monaidecyber.ssi.gouv.fr/
       illustration: mac/mac-accompagnement.png
-      couleurFond: "#0079D0"
+      couleurFond: "#5d2b9d"
     - commencer:
       titre: Découvrez notre vidéo !
-      lien: https://cellar-c2.services.clever-cloud.com/monservicesecurise-ressources/MonServiceSecurise%20video.mp4
+      lien: https://cellar-c2.services.clever-cloud.com/monservicesecurise-ressources/Video_MAC.mp4
       illustration: mss/mss-securiser.webp
       couleurFond: "#6f479f"
 ---

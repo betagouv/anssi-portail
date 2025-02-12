@@ -11,7 +11,7 @@ s-enregistrer:
     - /services/NIS2
 
 reduire-risques:
-  titre: Réduire les risques cyber
+  titre: Réduire ses risques cyber
   explication: Mettez en place des mesures de sécurité adaptées.
   items:
     - /services/mon-aide-cyber
