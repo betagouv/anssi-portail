@@ -7,9 +7,20 @@
         </div>
         <h2>Les services et ressources</h2>
         {% for idItem in include.items %}
+            {% for cle in idItem %}
+                {% if cle[0] %}
+                    {% assign id = cle[0]%}
+                    {% assign nomPerso = cle[1].nom %}
+                    {% assign descriptionPerso = cle[1].description %}
+                {% else %}
+                    {% assign id = cle %}
+                    {% assign nomPerso = nil %}
+                    {% assign descriptionPerso = nil %}
+                {% endif %}
+            {% endfor %}
             {% assign tous_les_items = site.services | concat: site.ressources %}
-            {% assign item = tous_les_items | where: "id", idItem | first %}
-            {% include carte-item.html item=item %}
+            {% assign item = tous_les_items | where: "id", id | first %}
+            {% include carte-item.html item=item nomPerso=nomPerso descriptionPerso=descriptionPerso %}
         {% endfor %}
     </div>
 </section>

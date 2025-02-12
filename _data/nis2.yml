@@ -17,7 +17,9 @@ reduire-risques:
     - /services/mon-aide-cyber
     - /services/ads
     - /services/silene
-    - /services/mon-service-securise
+    - /services/mon-service-securise:
+        description: Sécuriser les entités publiques
+        nom: MSS
     - /services/assistance-technique
     - /services/conseil-technique
     - /ressources/revue-presse
