@@ -12,7 +12,6 @@
       {% if service.avecFicheDetaillee %} "lienInterne": "{{ item.url }}", {% endif %}
       "lienExterne": "{{ item.lien }}",
       "sources": {{ item.sources | jsonify }},
-      "besoins": {{ item.besoins | jsonify }},
       "droitsAcces": {{ item.droitsAcces | jsonify }}{% if item.typologie == 'ressource'%},
       "format": "{{ item.format }}"
       {% endif %}
