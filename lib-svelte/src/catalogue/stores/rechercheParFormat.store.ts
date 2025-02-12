@@ -8,9 +8,9 @@ export const rechercheParFormat = {
   subscribe: selectionDeFormats.subscribe,
   ajouteTous: () =>
     selectionDeFormats.update(() => [
-      FormatRessource.PDF,
-      FormatRessource.LISTES,
-      FormatRessource.VIDEO,
+      FormatRessource.OUTIL,
+      FormatRessource.PUBLICATION,
+      FormatRessource.LABEL,
     ]),
   retireTous: () => selectionDeFormats.update(() => []),
   reinitialise: () => selectionDeFormats.set([]),
