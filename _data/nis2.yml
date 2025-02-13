@@ -18,8 +18,8 @@ reduire-risques:
     - /services/ads
     - /services/silene
     - /services/mon-service-securise:
-        description: Sécuriser les entités publiques
-        nom: MSS
+        tags:
+          - Entité publique
     - /services/assistance-technique
     - /services/conseil-technique
     - /ressources/revue-presse
