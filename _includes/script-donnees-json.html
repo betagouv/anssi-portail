@@ -9,7 +9,7 @@
         "typologie": "{{ item.typologie }}",
         "illustration": "{{ item.illustration }}",
         "description": "{{ item.description }}",
-      {% if service.avecFicheDetaillee %} "lienInterne": "{{ item.url }}", {% endif %}
+      {% if item.avecFicheDetaillee %} "lienInterne": "{{ item.url }}", {% endif %}
       "lienExterne": "{{ item.lien }}",
       "sources": {{ item.sources | jsonify }},
       "droitsAcces": {{ item.droitsAcces | jsonify }}{% if item.typologie == 'ressource'%},
