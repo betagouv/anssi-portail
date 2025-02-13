@@ -18,6 +18,9 @@
     <h3>{% if include.nomPerso %}{{include.nomPerso}}{% else %}{{item.nom}}{% endif %}</h3>
     <span class="description">{% if include.descriptionPerso %}{{include.descriptionPerso}}{% else %}{{item.description}}{% endif %}</span>
     <div class="labels">
+      {% for tag in include.tagsSpecifiques %}
+      <span class="tag-specifique">{{tag}}</span>
+      {% endfor %}
       {% for source in item.sources %}
       <span>{{source}}</span>
       {% endfor %}

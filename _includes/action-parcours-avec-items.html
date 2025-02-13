@@ -12,15 +12,22 @@
                     {% assign id = cle[0]%}
                     {% assign nomPerso = cle[1].nom %}
                     {% assign descriptionPerso = cle[1].description %}
+                    {% assign tags = cle[1].tags %}
                 {% else %}
                     {% assign id = cle %}
                     {% assign nomPerso = nil %}
                     {% assign descriptionPerso = nil %}
+                    {% assign tags = nil %}
                 {% endif %}
             {% endfor %}
             {% assign tous_les_items = site.services | concat: site.ressources %}
             {% assign item = tous_les_items | where: "id", id | first %}
-            {% include carte-item.html item=item nomPerso=nomPerso descriptionPerso=descriptionPerso %}
+            {% include carte-item.html
+                item=item
+                nomPerso=nomPerso
+                descriptionPerso=descriptionPerso
+                tagsSpecifiques=tags
+            %}
         {% endfor %}
     </div>
 </section>
