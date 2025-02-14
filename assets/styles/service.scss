@@ -285,53 +285,41 @@ h2 {
     }
   }
 
-  a {
-    display: flex;
-    color: var(--noir);
-    text-decoration: none;
-    font-size: 1.25rem;
-    font-weight: bold;
-    line-height: 1.75rem;
-    padding: 24px;
-    flex-direction: column;
-    gap: 12px;
-    flex: 1;
-    align-items: stretch;
-    border-bottom: none;
-    width: auto;
-
-    &:after {
-      content: "";
-      width: 16px;
-      height: 16px;
-      align-self: end;
-      margin-top: auto;
-      background: url("/assets/images/icone-lien-externe.svg");
-    }
-  }
-
+  a,
   button {
     display: flex;
     flex-direction: column;
     color: var(--noir);
-    padding: 0;
-    text-decoration: none;
     font-size: 1.25rem;
-    line-height: 1.75rem;
     font-weight: bold;
+    line-height: 1.75rem;
     flex: 1;
     align-items: stretch;
-    width: auto;
-    background-color: transparent;
     cursor: pointer;
+    text-decoration: none;
+    width: auto;
     border: none;
-    text-align: left;
 
     span {
       display: flex;
       padding: 24px;
       flex: 1;
     }
+  }
+
+  a {
+    gap: 0;
+
+    &:after {
+      align-self: end;
+      margin: 0 24px 24px 0;
+    }
+  }
+
+  button {
+    padding: 0;
+    background-color: transparent;
+    text-align: left;
   }
 }
 

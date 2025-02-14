@@ -83,15 +83,17 @@ script: /scripts/service.js
                 <div class="carte lien {% if lien.video %}video{% endif %}">
                     {% if lien.video %}
                     <button onclick="ouvreModaleVideo('{{lien.lien}}')">
+                    {% else %}
+                    <a href="{{ lien.lien }}" target="_blank">
                     {% endif %}
                     <div class="illustration" style="background-color: {{lien.couleurFond}}">
                         <img src="/assets/images/illustrations-services/{{ lien.illustration }}">
                     </div>
-                    {% if lien.video %}
                         <span>{{ lien.titre }}</span>
+                    {% if lien.video %}
                     </button>
                     {% else %}
-                        <a href="{{ lien.lien }}" target="_blank">{{ lien.titre }}</a>
+                    </a>
                     {% endif %}
                 </div>
                 {% endfor %}
