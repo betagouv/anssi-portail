@@ -8,9 +8,9 @@ script: /scripts/service.js
     <div class="contenu-section">
         <div class="fil-ariane">
             <a href="/">Accueil</a>
-            <span><img src="/assets/images/icone-chevron-droite.svg"/> </span>
+            <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
             <a href="/catalogue/">Les services et ressources cyber</a>
-            <span><img src="/assets/images/icone-chevron-droite.svg"/></span>
+            <span><img src="/assets/images/icone-chevron-droite.svg"alt=""/></span>
             <span>{{page.nom}}</span>
         </div>
         <div class="resume">
@@ -21,7 +21,7 @@ script: /scripts/service.js
                 <a href="{{page.lien}}" target="_blank" class="bouton primaire">Accéder au service</a>
             </div>
             <div>
-                <img src="/assets/images/illustrations-services/{{ page.illustration }}"/>
+                <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran"/>
             </div>
         </div>
     </div>
@@ -31,9 +31,9 @@ script: /scripts/service.js
     <details>
         <summary>
             <div class="entete-filtres">
-                <img class="menu" src="/assets/images/icone-menu-lateral.svg"/>
+                <img class="menu" src="/assets/images/icone-menu-lateral.svg" alt=""/>
                 <span id="section-active" class="titre-menu">De quoi s'agit-il&nbsp;?</span>
-                <img class="chevron" src="/assets/images/icone-chevron-bas.svg"/>
+                <img class="chevron" src="/assets/images/icone-chevron-bas.svg" alt=""/>
             </div>
         </summary>
 
@@ -68,7 +68,7 @@ script: /scripts/service.js
 
     <div class="contenu">
         <section class="explication" id="explication">
-            <img src="/assets/images/illustrations-services/{{ page.illustration }}"/>
+            <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran"/>
             <h2>De quoi s'agit-il&nbsp;?</h2>
             <div>{{ page.content }}</div>
             <a href="{{page.lien}}" target="_blank" class="bouton primaire">Accéder au service</a>
@@ -87,7 +87,7 @@ script: /scripts/service.js
                     <a href="{{ lien.lien }}" target="_blank">
                     {% endif %}
                     <div class="illustration" style="background-color: {{lien.couleurFond}}">
-                        <img src="/assets/images/illustrations-services/{{ lien.illustration }}">
+                        <img src="/assets/images/illustrations-services/{{ lien.illustration }}" alt="">
                     </div>
                         <span>{{ lien.titre }}</span>
                     {% if lien.video %}
