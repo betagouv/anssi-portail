@@ -28,8 +28,8 @@ export const questions: Question[] = [
     question:
       "Quelle est la perception des risques cyber au sein de votre organisation&nbsp;?",
     propositions: [
-      "Les responsables considèrent que leur organisation n'est pas concernée par le risque de cyberattaques.",
-      "Les responsables ont conscience que leur organisation peut être victime de cyberattaques, comme d'autres avant elle, sans savoir exactement lesquelles ni les conséquences qu’elles entraîneraient.",
+      "Les responsables considèrent que l'organisation n'est pas concernée par le risque de cyberattaques.",
+      "Les responsables ont conscience que l’organisation pourrait être victime de cyberattaques sans mesurer l'ampleur du risque.",
       "Les données et les processus à protéger en priorité contre les risques cyber les plus courants ont été identifiés.",
       "Une analyse de risque approfondie de l'organisation a été menée et un plan détaillé de traitement des risques a été établi.",
       "Les objectifs de réduction des risques d'origine cyber sont intégrés dans la stratégie globale de gestion des risques de l'organisation.",
@@ -42,10 +42,10 @@ export const questions: Question[] = [
       "Quelle est la posture des responsables de votre organisation sur la cybersécurité&nbsp;?",
     propositions: [
       "Le renforcement de la cybersécurité de l'organisation n'est pas une priorité.",
-      "Les responsables de l'organisation autorisent le/les responsables informatiques à agir mais perçoivent le sujet comme avant tout technique.",
+      "Les responsables de l'organisation perçoivent le sujet comme avant tout technique.",
       "Les responsables manifestent un réel intérêt pour le renforcement de la cybersécurité et les directions métiers sont sensibilisées.",
       "La cybersécurité est un sujet prioritaire évoqué en CODIR, les directions métiers sont responsabilisées sur le sujet et les agents sensibilisés.",
-      "Les responsables souhaitent influer au-delà de leur organisation pour un renforcement de la cyber sécurité de leur écosystème voire de leur secteur d’activité.",
+      "L’organisation est un acteur clé de la cybersécurité au sein de son écosystème ou de son secteur d’activité.",
     ],
   },
   {
@@ -57,8 +57,8 @@ export const questions: Question[] = [
       "La cybersécurité n'est pas ou très peu prise en compte dans la gestion des systèmes d'information de l'organisation.",
       "Des actions en matière de cybersécurité sont parfois mises en oeuvre mais sans réelle priorisation et sans plan d'action structuré.",
       "Un premier plan d'action avec des actions prioritaires à mettre en oeuvre a été établi et est suivi.",
-      "Un plan d'action cyber complet est établi, régulièrement mis à jour et fait l'objet d'un suivi régulier au niveau des responsables de l'organisation.",
-      "Un plan d'action cyber complet et pluriannuel a été établi avec des objectifs chiffrés, intégrés dans la stratégie globale de l'organisation.",
+      "Un plan d'action cyber étoffé est établi et fait l’objet d’un suivi régulier.",
+      "Un plan d'action cyber complet est établi et ses objectifs prioritaires sont intégrés dans la stratégie globale de l'organisation.",
     ],
   },
   {
@@ -70,7 +70,7 @@ export const questions: Question[] = [
       "Une personne est identifiée comme référente pour les enjeux cyber en plus de ses missions actuelles.",
       "La personne référente dispose d'un temps dédié au suivi des enjeux cyber et peut compter sur des soutiens ponctuels.",
       "Au moins un(e) responsable de la sécurité des systèmes d'information se dédie entièrement au sujet. Cette personne peut être épaulée d'une petite équipe.",
-      "L'organisation dispose d'un(e) directeur(ice) cyber siégeant au CODIR et d'une ou plusieurs équipes cyber pouvant inclure des compétences en matière de cyberdéfense.",
+      "L’organisation dispose d'un(e) directeur(ice) cyber siégeant au CODIR et d'une ou plusieurs équipes cyber.",
     ],
   },
   {
@@ -93,10 +93,10 @@ export const questions: Question[] = [
       "Quels produits ou services cyber sont mobilisés au service de la cybersécurité de l'organisation&nbsp;?",
     propositions: [
       "L'organisation dispose tout au plus d'un antivirus, installé sur les postes informatiques des agents.",
-      "Certains achats des solutions cyber ont été réalisés sur les conseils du prestataire informatique de l'organisation, sans répondre nécessairement à un plan d'action cyber.",
-      "L'organisation dispose de plusieurs outils adaptés aux actions prioritaires identifiées et permettant un premier niveau de supervision de la sécurité de l'organisation.",
-      "Un audit de sécurité approfondi a été réalisé et l'organisation commence à disposer de produits et de services cyber en matière de défense et de résilience (SOCs, CERTs, etc.)",
-      "L'organisation dispose d'un panel complet de services et d'outils cyber intégrés répondant à l'ensemble des besoins de l'organisation et réalise des audits réguliers.",
+      "Une ou plusieurs solutions cyber ont pu être déployées en fonction des opportunités.",
+      "L’organisation dispose de plusieurs solutions adaptées aux actions prioritaires identifiées dans le plan d’action.",
+      "Un audit de sécurité approfondi a été réalisé et l'organisation commence à disposer de produits et de services en matière de cyberdéfense.",
+      "L'organisation dispose d'un panel complet de services et d'outils cyber intégrés et réalise des audits réguliers.",
     ],
   },
   {

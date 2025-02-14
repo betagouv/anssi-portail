@@ -40,7 +40,7 @@
 {:else}
   <Hero
     titre="Test de maturité cyber"
-    description="Déterminez quelle est la maturité cyber de votre organisation en 5 minutes."
+    description="Obtenez en 5 minutes une évaluation indicative de la maturité cyber de votre organisation."
   />
   <section class="test-maturite">
     <div class="contenu-section">
@@ -138,10 +138,9 @@
         <div class="introduction">
           <h4>Quelle est la maturité cyber de votre organisation ?</h4>
           <p>
-            La maturité cyber correspond au niveau global de prise en compte des
-            enjeux de cyber sécurité par une organisation. Ce test vous invite à
-            répondre à <b>6 questions</b> permettant d’évaluer la maturité cyber
-            de votre organisation.
+            La maturité cyber est une évaluation indicative du niveau global de prise en compte des
+            enjeux de cyber sécurité par une organisation.
+            Répondez à <b>6 questions</b> pour obtenir votre évaluation.
           </p>
           <input
             type="button"
