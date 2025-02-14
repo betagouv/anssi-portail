@@ -54,9 +54,9 @@
             etapeCourante={$questionnaireStore.questionCourante}
             nombreEtapes={7}
           />
-          <h4>
+          <h2>
             {@html questions[$questionnaireStore.questionCourante].question}
-          </h4>
+          </h2>
 
           {#if doitMontrerPropositions()}
             <div class="propositions">
@@ -136,7 +136,7 @@
         </div>
       {:else}
         <div class="introduction">
-          <h4>Quelle est la maturité cyber de votre organisation ?</h4>
+          <h2>Quelle est la maturité cyber de votre organisation ?</h2>
           <p>
             La maturité cyber est une évaluation indicative du niveau global de prise en compte des
             enjeux de cyber sécurité par une organisation.

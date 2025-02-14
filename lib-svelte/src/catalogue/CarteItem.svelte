@@ -27,7 +27,7 @@
     <figcaption>{libelleBadge(itemCyber)}</figcaption>
   </figure>
   <div class="contenu">
-    <h3>{@html itemCyber.nom}</h3>
+    <div class="nom-item">{@html itemCyber.nom}</div>
     <span class="description">{@html tronque(itemCyber.description)}</span>
     <div class="labels">
       {#each itemCyber.sources as source}<span>{source}</span>{/each}
