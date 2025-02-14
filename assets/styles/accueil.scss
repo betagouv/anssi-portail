@@ -34,6 +34,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     @include a-partir-de(sm) {
       flex-direction: row;
       gap: 16px;
@@ -44,6 +45,25 @@ section {
   .bouton {
     margin-bottom: 16px;
     padding: 10px 24px;
+    width: 100%;
+    box-sizing: border-box;
+
+    @include a-partir-de(sm){
+      width: auto;
+    }
+
+    .long {
+      display: none;
+      @include a-partir-de(sm) {
+        display: inline;
+      }
+    }
+
+    .court {
+      @include a-partir-de(sm) {
+        display: none;
+      }
+    }
   }
 
   .bouton.secondaire {
