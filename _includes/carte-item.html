@@ -5,7 +5,7 @@
 <a class="carte {{ item.typologie }}" href="{{item.lien}}" target="_blank">
 {% endif %}
   <figure>
-    <img src="/assets/images/illustrations-services/{{item.illustration}}">
+    <img src="/assets/images/illustrations-services/{{item.illustration}}" alt="Capture d’écran de {{item.nom}}">
     <figcaption>
       {% if item.typologie == 'service' %}
         Service
