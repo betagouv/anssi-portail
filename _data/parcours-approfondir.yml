@@ -22,7 +22,9 @@ securiser:
   explication: Mettez en place ou améliorez le pilotage de votre plan d’action cyber.
   items:
     - /services/mon-aide-cyber
-    - /services/mon-service-securise
+    - /services/mon-service-securise:
+          tags:
+            - Entités publiques
     - /ressources/cyber-13questions
     - /ressources/prestas-ebios
     - /ressources/visa-secu
@@ -32,8 +34,14 @@ tester:
   titre: Tester
   explication: Vérifiez la sécurité de son système d’information grâce à des tests de sécurité.
   items:
-  - /services/ads
-  - /services/silene
+  - /services/ads:
+        tags:
+          - Entités publiques
+          - Entité régulées
+  - /services/silene:
+        tags:
+          - Entités publiques
+          - Entité régulées
 
 
 reagir:
