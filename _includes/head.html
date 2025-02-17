@@ -2,6 +2,11 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% for baliseMeta in layout.balisesMeta %}
+  {% assign contenu = baliseMeta.contenu | replace: 'SITE_URL', site.url %}
+  <meta property="{{baliseMeta.propriete}}" content="{{contenu}}">
+  {% endfor %}
+
   <title>{{page.titreHtml}}</title>
 
   <link rel="stylesheet" href="{{ "/assets/styles/site.css" | relative_url }}">
