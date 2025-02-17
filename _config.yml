@@ -1,3 +1,4 @@
+url: https://messervices.cyber.gouv.fr
 collections:
   services:
     output: true
