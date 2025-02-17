@@ -37,11 +37,11 @@ tester:
   - /services/ads:
         tags:
           - Entités publiques
-          - Entité régulées
+          - Entités régulées
   - /services/silene:
         tags:
           - Entités publiques
-          - Entité régulées
+          - Entités régulées
 
 
 reagir:
