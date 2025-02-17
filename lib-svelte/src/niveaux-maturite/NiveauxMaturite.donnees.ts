@@ -28,7 +28,7 @@ export const niveauxMaturite: NiveauMaturite[] = [
     priorite:
       "Prendre la mesure des risques cyber pour l'organisation et des impacts qu'entraîneraient une cyberattaque.",
     priseEnCompteRisque:
-      "Les responsables de l'organisation pensent peu probable que celle-ci soit victime d'une cyberattaque.",
+      "Les responsables considèrent que l'organisation n'est pas concernée par le risque de cyberattaques.",
     posture:
       "Le renforcement de la cybersécurité de l'organisation n'est pas une priorité.",
     pilotage:
@@ -37,7 +37,7 @@ export const niveauxMaturite: NiveauMaturite[] = [
       "L'organisation ne dispose d'aucune ressource dédiée à la cybersécurité.",
     budget: "Aucune dépense spécifique à la cybersécurité n'a été effectuée.",
     adoptionSolutions:
-      "L'organisation ne dispose pas de solution dédiée à la cybersécurité ou, tout ou plus, d'un antivirus installé sur les postes informatiques.",
+      "L'organisation dispose tout au plus d'un antivirus, installé sur les postes informatiques des agents.",
     niveauSecurite:
       "L'entité est vulnérable aux menaces cyber les plus courantes.",
   },
@@ -51,15 +51,15 @@ export const niveauxMaturite: NiveauMaturite[] = [
     priseEnCompteRisque:
       "Les responsables ont conscience que leur organisation peut être victime d'une cyberattaque, comme d'autres avant elle, sans savoir lesquelles ni les conséquences qu’elles entraîneraient.",
     posture:
-      "Les responsables de l'organisation permettent au(x) responsable(s) informatique(s) d'agir tout en percevant le sujet comme avant tout technique.",
+      "Les responsables de l'organisation perçoivent le sujet comme avant tout technique.",
     pilotage:
-      "Des actions en matière de cybersécurité sont parfois mises en œuvre mais sans réelle priorisation et sans plan d'action structuré.",
+      "Des actions en matière de cybersécurité sont parfois mises en oeuvre mais sans réelle priorisation et sans plan d'action structuré.",
     ressourcesHumaines:
-      "Une personne commence à assurer un suivi des enjeux cyber de l'organisation, en plus de ses missions courantes.",
+      "Une personne est identifiée comme référente pour les enjeux cyber en plus de ses missions actuelles.",
     budget:
       "Des dépenses dédiées à la cybersécurité peuvent être occasionnellement autorisées.",
     adoptionSolutions:
-      "Des premiers outils permettant de mieux protéger l'organisation peuvent être, d'opportunité, déployés.",
+      "Une ou plusieurs solutions cyber ont pu être déployées en fonction des opportunités.",
     niveauSecurite:
       "L'entité est vulnérable aux menaces cyber les plus courantes.",
   },
@@ -71,13 +71,13 @@ export const niveauxMaturite: NiveauMaturite[] = [
     priorite:
       "Structurer le plan d'action cyber et dédier une ligne budgétaire à la cybersécurité. ",
     priseEnCompteRisque:
-      "Les données et les processus à protéger en priorité contre les risques d'origine cyber les plus courants ont été identifiés.",
+      "Les données et les processus à protéger en priorité contre les risques cyber les plus courants ont été identifiés.",
     posture:
-      "Les responsables perçoivent l'importance de la cybersécurité pour l'organisation et encouragent les équipes informatiques à agir.",
+      "Les responsables manifestent un réel intérêt pour le renforcement de la cybersécurité et les directions métiers sont sensibilisées.",
     pilotage:
-      "Un premier plan d'action cyber avec des actions prioritaires à mettre en œuvre a été établi et fait l'objet d'un suivi.",
+      "Un premier plan d'action avec des actions prioritaires à mettre en oeuvre a été établi et est suivi.",
     ressourcesHumaines:
-      "Une personne est dédiée à la cybersécurité l'organisation, comme un/e responsable de la sécurité des systèmes d'information (RSSI).",
+      "La personne référente dispose d'un temps dédié au suivi des enjeux cyber et peut compter sur des soutiens ponctuels.",
     budget: "Une part du budget informatique est alloué à la cybersécurité.",
     adoptionSolutions:
       "L'organisation déploie de solutions sélectionnées en réponse aux actions prioritaires identifiées dans le plan d'action cyber.",
@@ -92,17 +92,17 @@ export const niveauxMaturite: NiveauMaturite[] = [
     priorite:
       "Élargir la prise en compte des enjeux de cybersécurité notamment en matière de défense et de résilience et renforcer les moyens dédiés à la cybersécurité.",
     priseEnCompteRisque:
-      "Une analyse de risque approfondie a été conduite à l'échelle de l'organisation et un plan détaillé de traitement des risques a été établi.",
+      "Une analyse de risque approfondie de l'organisation a été menée et un plan détaillé de traitement des risques a été établi.",
     posture:
-      "Les responsables encouragent l'ensemble de l'organisation à s'approprier les enjeux de cybersécurité.",
+      "La cybersécurité est un sujet prioritaire évoqué en CODIR, les directions métiers sont responsabilisées sur le sujet et les agents sensibilisés.",
     pilotage:
-      "Un plan d'action cyber complet est établi, régulièrement mis à jour et fait l'objet d'un suivi régulier au niveau des responsables de l'organisation.",
+      "Un plan d'action cyber étoffé est établi et fait l’objet d’un suivi régulier.",
     ressourcesHumaines:
-      "Le/la RSSI dispose d'une équipe dédiée aux enjeux de cybersécurité.",
+      "Au moins un(e) responsable de la sécurité des systèmes d'information se dédie entièrement au sujet. Cette personne peut être épaulée d'une petite équipe.",
     budget:
       "Une ligne budgétaire dédiée à la cybersécurité est établie à l'échelle de l'organisation.",
     adoptionSolutions:
-      "Un audit de sécurité approfondi a été réalisé et l'organisation élargit les produits et services dont elle dispose à la défense et de résilience de l'organisation (ex. SOCs).",
+      "Un audit de sécurité approfondi a été réalisé et l'organisation commence à disposer de produits et de services en matière de cyberdéfense.",
     niveauSecurite:
       "L'organisation a mis en oeuvre des mesures efficaces contre les risques cyber les plus courants et dispose d'un niveau de préparation satisfaisant face à une crise d'origine cyber, mais demeure vulnérable à des attaques plus élaborées.",
   },
@@ -114,13 +114,13 @@ export const niveauxMaturite: NiveauMaturite[] = [
     priorite:
       "Maintenir l'effort et faire, autant que possible, rayonner l'expertise cyber de l'organisation au profit d'entités moins matures et de son secteur.",
     priseEnCompteRisque:
-      "Les objectifs de réduction des risques d'origine cyber font partie intégrante de la stratégie de gestion des risques de l'organisation et l'analyse de risque est régulièrement mise à jour.",
+      "Les objectifs de réduction des risques d'origine cyber sont intégrés dans la stratégie globale de gestion des risques de l'organisation.",
     posture:
-      "La cybersécurité est un enjeu prioritaire de l'organisation traité en réunion de direction et pour lequel des objectifs sont fixés et suivis.",
+      "L’organisation est un acteur clé de la cybersécurité au sein de son écosystème ou de son secteur d’activité.",
     pilotage:
-      "Un plan d'action cyber complet et pluriannuel a été établi avec des objectifs chiffrés, intégrés dans la stratégie globale de l'organisation.",
+      "Un plan d'action cyber complet est établi et ses objectifs prioritaires sont intégrés dans la stratégie globale de l'organisation.",
     ressourcesHumaines:
-      "Une équipe cyber élargie ou plusieurs équipes cyber pilotent la cybersécurité de l'organisation dans ses différentes dimensions.",
+      "L’organisation dispose d'un(e) directeur(ice) cyber siégeant au CODIR et d'une ou plusieurs équipes cyber.",
     budget:
       "La ligne dédiée à la cybersécurité est égale > ou = à 10% du budget informatique de l'organisation.",
     adoptionSolutions:
