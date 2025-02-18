@@ -26,9 +26,8 @@ liens:
     - commencer:
       titre: Découvrez notre vidéo !
       video: true
-      lien: https://cellar-c2.services.clever-cloud.com/monservicesecurise-ressources/MonServiceSecurise%20video.mp4
       lien: https://cellar-c2.services.clever-cloud.com/monservicesecurise-ressources/Video_MAC.mp4
-      illustration: mss/mss-securiser.webp
+      illustration: mac/mac.png
       couleurFond: "#6f479f"
 ---
 MonAideCyber est un service numérique proposé par le laboratoire d'innovation de l’ANSSI pour aider l’ensemble des entités publiques et privées peu matures sur les enjeux de cybersécurité mais souhaitant passer à l’action !
