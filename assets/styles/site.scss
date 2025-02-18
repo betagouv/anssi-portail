@@ -276,12 +276,13 @@ header {
     display: flex;
     align-items: center;
 
-    a {
+    a,
+    details {
       padding: 16px 8px;
+      font-size: 0.875rem;
       @include a-partir-de(xl) {
         padding: 16px;
       }
-      border-bottom: none;
 
       &:hover {
         background: var(--menu-fond-hover);
@@ -296,92 +297,79 @@ header {
         border-bottom: 2px solid var(--jaune-msc);
       }
     }
-  }
 
-  details {
-    position: relative;
-    padding: 16px 8px;
-    @include a-partir-de(xl) {
-      padding: 16px;
+    a {
+      border-bottom: none;
     }
 
-    &:hover {
-      background: var(--menu-fond-hover);
-    }
+    details {
+      position: relative;
 
-    &:active {
-      background: var(--menu-fond-clique);
-    }
+      &[open] summary:after {
+        transform: rotate(180deg);
+      }
 
-    &.actif {
-      font-weight: 500;
-      border-bottom: 2px solid var(--jaune-msc);
-    }
+      .choix {
+        position: absolute;
+        background: white;
+        box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
+        left: 0;
+        right: 0;
+        top: 58px;
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+        z-index: 5;
 
-    &[open] summary:after {
-      transform: rotate(180deg);
-    }
-
-    .choix {
-      position: absolute;
-      background: white;
-      box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
-      left: 0;
-      right: 0;
-      top: 58px;
-      font-size: 0.875rem;
-      line-height: 1.5rem;
-      z-index: 5;
-
-      a {
-        width: 100%;
-        padding: 12px 16px;
-        border-bottom: 1px solid #dddddd;
-        position: relative;
-        font-weight: normal;
-        box-sizing: border-box;
-
-        &.actif {
-          font-weight: normal;
+        a {
+          width: 100%;
+          padding: 12px 16px;
           border-bottom: 1px solid #dddddd;
+          position: relative;
+          font-weight: normal;
+          box-sizing: border-box;
 
-          &:before {
-            content: "";
-            display: block;
-            width: 2px;
-            height: 24px;
-            background: var(--jaune-msc);
-            position: absolute;
-            left: 0;
+          &.actif {
+            font-weight: normal;
+            border-bottom: 1px solid #dddddd;
+
+            &:before {
+              content: "";
+              display: block;
+              width: 2px;
+              height: 24px;
+              background: var(--jaune-msc);
+              position: absolute;
+              left: 0;
+            }
+          }
+
+          &:last-child {
+            border: none;
           }
         }
+      }
 
-        &:last-child {
-          border: none;
+      summary {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        cursor: pointer;
+
+        &::marker {
+          content: "";
         }
-      }
-    }
 
-    summary {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      cursor: pointer;
+        &::-webkit-details-marker {
+          display: none;
+        }
 
-      &::marker {
-        content: "";
-      }
-
-      &::-webkit-details-marker {
-        display: none;
-      }
-
-      &:after {
-        content: "";
-        display: block;
-        width: 16px;
-        height: 16px;
-        background: url("/assets/images/icone-chevron-bas.svg");
+        &:after {
+          content: "";
+          display: block;
+          width: 16px;
+          height: 16px;
+          background: url("/assets/images/icone-chevron-bas.svg");
+        }
       }
     }
   }
@@ -664,8 +652,8 @@ footer {
     font-weight: normal;
 
     &.tag-specifique {
-      background: #DAE6FD;
-      color: #3558A2;
+      background: #dae6fd;
+      color: #3558a2;
     }
   }
 
