@@ -7,6 +7,7 @@
   import RadarMaturite from "./RadarMaturite.svelte";
   import TuileVersParcours from "./TuileVersParcours.svelte";
   import { niveauxMaturite } from "../niveaux-maturite/NiveauxMaturite.donnees";
+  import PartageTest from "./PartageTest.svelte";
 
   $: resultats = {
     pilotage: $questionnaireStore.toutesLesReponses[2] + 1,
@@ -89,5 +90,11 @@
     {:else}
       <TuileVersParcours parcours="debuter" />
     {/if}
+  </div>
+</section>
+
+<section class="partage-test">
+  <div class="contenu-section">
+    <PartageTest/>
   </div>
 </section>
