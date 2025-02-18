@@ -41,6 +41,5 @@ Avec MonAideCyber, faites-vous accompagner par un “Aidant cyber” :
 Accessible gratuitement, MonAideCyber vous propose un espace de confiance pour échanger et identifier ensemble des actions concrètes, faciles et rapides à mettre en oeuvre.
 
 Alors n’attendez pas et trouvez un Aidant Cyber près de chez vous pour bénéficier immédiatement du diagnostic MonAideCyber.
-—
 
 Vous souhaitez devenir Aidant cyber ? Contactez notre équipe !

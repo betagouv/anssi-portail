@@ -14,9 +14,9 @@ sources:
   - ANSSI
   - CERT-FR
 cible:  |
+    ADS n’est accessible qu’aux entités publiques et aux entités régulées notamment par la directive NIS2.
+    ADS peut être utile : 
     <ul>
-    Le service ADS n’est accessible qu’aux entités publiques et aux entités régulées notamment par la directive NIS2.
-    Le service ADS peut être utile
     <li>A la chaine SSI, en offrant une vue globale et synthétique du niveau de sécurité, à travers des tableaux de bord et des indicateurs associés.</li>
     <li>Aux équipes d’exploitation grâce aux recommandations à appliquer et à un accompagnement dans le pilotage de leurs équipes techniques et/ou de leurs prestataires.</li>
     <li>Aux dirigeants, en tant qu’outil d’aide à la décision.. </li>
