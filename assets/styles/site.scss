@@ -55,7 +55,7 @@ a {
     background: url("/assets/images/icone-lien-externe.svg") no-repeat;
   }
 
-  &:hover {
+  &:hover:not(.bouton) {
     border-bottom: 2px solid var(--noir);
   }
 
