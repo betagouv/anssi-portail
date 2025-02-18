@@ -580,6 +580,23 @@ section {
 .partage-test {
   padding: 24px var(--gouttiere);
 
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+
+    @include a-partir-de(lg) {
+      flex-direction: row;
+      gap: 24px;
+      justify-content: space-between;
+    }
+
+    .partage {
+      @include a-partir-de(lg) {
+        width: 282px;
+      }
+    }
+  }
+
   h2 {
     margin-bottom: 8px;
     font-size: 1.375rem;
@@ -588,6 +605,10 @@ section {
 
   p {
     margin-bottom: 24px;
+    max-width: 272px;
+    @include a-partir-de(lg) {
+      max-width: 588px;
+    }
   }
 
   h3 {
