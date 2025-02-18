@@ -14,11 +14,6 @@
   <FiltreBesoin filtreTousVisible={false} />
 </div>
 
-<h2>
-  Des services et ressources pour sensibiliser aux risques cyber et aux bonnes
-  pratiques et former ses équipes aux enjeux de cybersécurité.
-</h2>
-
 <div class="services">
   {#each $catalogueFiltre.resultats as itemCyber}
     <CarteItem {itemCyber}></CarteItem>
