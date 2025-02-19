@@ -6,7 +6,7 @@
 
 
 ####
-## BUILD
+## BUILD du front
 ###
 FROM ruby:3.3.5-alpine3.20 AS build-le-site
 
@@ -57,7 +57,25 @@ WORKDIR /srv/jekyll
 RUN set -eux; bundler exec jekyll build
 
 ####
-## SERVEUR WEB
+## BUILD du back
 ####
-FROM nginx:1.27.2
-COPY --from=build-le-site /srv/jekyll/_site /usr/share/nginx/html
+FROM node:23 AS build-le-back
+RUN npm install -g npm
+WORKDIR /usr/src/app
+COPY package.json package-lock.json /usr/src/app/
+ADD src /usr/src/app/src
+RUN npm install
+WORKDIR /usr/src/app/src
+RUN npx tsc
+
+####
+## SERVEUR
+####
+FROM node:23-alpine
+EXPOSE 3000
+WORKDIR /usr/src/app
+COPY --from=build-le-back /usr/src/app/package.json /usr/src/app/
+COPY --from=build-le-back /usr/src/app/node_modules/ /usr/src/app/node_modules/
+COPY --from=build-le-site /srv/jekyll/_site/ /usr/src/app/_site/
+COPY --from=build-le-back /usr/src/app/dist-back/ /usr/src/app/dist-back/
+CMD ["npm", "start"]

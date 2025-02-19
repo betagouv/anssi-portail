@@ -33,4 +33,7 @@ jobs:
         run: npm run test --prefix lib-svelte
 
       - name: (CONSTRUCTION) Construis le site via Docker
-        run: docker build --target build-le-site -t anssi-portail .
+        run: docker build --target build-le-site -t anssi-portail-site .
+
+      - name: (CONSTRUCTION) Construis le back via Docker
+        run: docker build --target build-le-back -t anssi-portail-back .

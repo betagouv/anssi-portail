@@ -24,3 +24,4 @@ exclude:
     - package.json
     - package-lock.json
     - "*.config.js"
+    - src/
