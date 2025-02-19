@@ -54,6 +54,10 @@ app.use((_requete: Request, reponse: Response) => {
     .sendFile(join(process.cwd(), "_site", "404.html"));
 });
 
+app.use((_requete: Request, reponse:Response)=>{
+  reponse.status(404).set("Content-Type", "text/html").sendFile(join(process.cwd(), "_site", "404.html"))
+})
+
 app.listen(3000, () => {
   console.log("Le serveur écoute sur le port 3000");
 });
