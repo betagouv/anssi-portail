@@ -21,3 +21,6 @@ exclude:
     - lib-svelte/test/
     - test/
     - node_modules/
+    - package.json
+    - package-lock.json
+    - "*.config.js"
