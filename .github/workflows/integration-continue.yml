@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: 18
 
+      - name: (TOUS) Installe les dépendances
+        run: npm ci
+
       - name: (SITE STATIQUE) Installe les dépendances
         run: npm ci --prefix front
 
