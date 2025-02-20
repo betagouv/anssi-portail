@@ -3,17 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "serveur.ts",
-  "scripts": {},
+  "scripts": {
+    "test": "node --import tsx --test ./tests/**/*.spec.ts"
+  },
   "private": true,
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.4",
+    "node-mocks-http": "^1.16.2",
     "tsx": "^4.19.3",
     "typescript": "^5.7.3",
     "vitest": "^3.0.4"
   },
   "dependencies": {
     "express": "^4.21.2",
-    "express-rate-limit": "^7.5.0"
+    "express-rate-limit": "^7.5.0",
+    "express-validator": "^7.2.1"
   }
 }
