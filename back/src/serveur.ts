@@ -1,7 +1,11 @@
 import express, { NextFunction, Request, Response } from "express";
 import { join } from "path";
+import rateLimit from "express-rate-limit";
 
 const app = express();
+
+const centParMinute = rateLimit({ windowMs: 60 * 1000, limit: 100 });
+app.use(centParMinute);
 
 const sersPageJekyll = (requete: Request, reponse: Response) => {
   const cheminFichier = join(
