@@ -21,10 +21,10 @@ jobs:
           node-version: 18
 
       - name: (SITE STATIQUE) Installe les dépendances
-        run: npm ci
+        run: npm ci --prefix front
 
       - name: (SITE STATIQUE) Exécute les tests
-        run: npm run test
+        run: npm run test --prefix front
 
       - name: (SVELTE) Installe les dépendances
         run: npm ci --prefix lib-svelte

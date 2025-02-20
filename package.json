@@ -5,7 +5,7 @@
   "main": "serveur.ts",
   "scripts": {
     "test": "vitest",
-    "dev": "npx concurrently -n \"SERVEUR,SVELTE,JEKYLL\" \"node --watch --import tsx ./src/serveur.ts\" \"npm run watch --prefix lib-svelte\" \"sleep 3 && jekyll build -w\" ",
+    "dev": "npx concurrently -n \"SERVEUR,SVELTE,JEKYLL\" \"node --watch --import tsx ./back/src/serveur.ts\" \"npm run watch --prefix front/lib-svelte\" \"sleep 3 && jekyll build -s ./front -d ./front/_site -w\" ",
     "start": "node ./dist-back/serveur.js"
   },
   "repository": {
