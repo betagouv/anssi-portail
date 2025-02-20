@@ -1,0 +1,9 @@
+{
+  "name": "anssi-portail-front",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "vitest"
+  },
+  "private": true
+}
