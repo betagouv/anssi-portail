@@ -30,10 +30,10 @@ jobs:
         run: npm run test --prefix front
 
       - name: (SVELTE) Installe les dépendances
-        run: npm ci --prefix lib-svelte
+        run: npm ci --prefix front/lib-svelte
 
       - name: (SVELTE) Exécute les tests
-        run: npm run test --prefix lib-svelte
+        run: npm run test --prefix front/lib-svelte
 
       - name: (CONSTRUCTION) Construis le site via Docker
         run: docker build --target build-le-site -t anssi-portail-site .
