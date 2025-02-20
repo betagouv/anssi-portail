@@ -1,12 +1,16 @@
 import express, { NextFunction, Request, Response } from "express";
+import { ressourcePagesJekyll } from "./ressourcePagesJekyll";
 import rateLimit from "express-rate-limit";
 import { join } from "path";
+import { ConfigurationServeur } from "./configurationServeur";
 
-const creeServeur = () => {
+const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
 
   const centParMinute = rateLimit({ windowMs: 60 * 1000, limit: 100 });
   app.use(centParMinute);
+
+  app.use("/catalogue", ressourcePagesJekyll(configurationServeur, "catalogue"));
 
   const sersPageJekyll = (requete: Request, reponse: Response) => {
     const cheminFichier = join(
@@ -27,7 +31,6 @@ const creeServeur = () => {
     "/parcours-debuter",
     "/parcours-approfondir",
     "/nis2",
-    "/catalogue",
     "/test-maturite",
     "/niveaux-maturite",
   ].forEach((page) => {
