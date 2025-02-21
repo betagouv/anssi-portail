@@ -1,5 +1,7 @@
-import {FournisseurChemin} from "./fournisseurChemin";
+import { FournisseurChemin } from "./fournisseurChemin";
+import { Middleware } from "./middleware";
 
 export type ConfigurationServeur = {
-    fournisseurChemin: FournisseurChemin;
+  fournisseurChemin: FournisseurChemin;
+  middleware: Middleware;
 };
