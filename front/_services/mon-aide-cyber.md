@@ -24,13 +24,13 @@ liens:
       illustration: mac/mac-accompagnement.png
       couleurFond: "#5d2b9d"
     - commencer:
-      titre: Découvrez notre vidéo !
+      titre: Découvrez notre vidéo&nbsp;!
       video: true
       lien: https://cellar-c2.services.clever-cloud.com/monservicesecurise-ressources/Video_MAC.mp4
       illustration: mac/mac.png
       couleurFond: "#6f479f"
 ---
-MonAideCyber est un service numérique proposé par le laboratoire d'innovation de l’ANSSI pour aider l’ensemble des entités publiques et privées peu matures sur les enjeux de cybersécurité mais souhaitant passer à l’action !
+MonAideCyber est un service numérique proposé par le laboratoire d'innovation de l’ANSSI pour aider l’ensemble des entités publiques et privées peu matures sur les enjeux de cybersécurité mais souhaitant passer à l’action&nbsp;!
 
 Avec MonAideCyber, faites-vous accompagner par un “Aidant cyber” :
 <ul>
@@ -42,4 +42,4 @@ Accessible gratuitement, MonAideCyber vous propose un espace de confiance pour �
 
 Alors n’attendez pas et trouvez un Aidant Cyber près de chez vous pour bénéficier immédiatement du diagnostic MonAideCyber.
 
-Vous souhaitez devenir Aidant cyber ? Contactez notre équipe !
+Vous souhaitez devenir Aidant cyber&nbsp;? Contactez notre équipe&nbsp;!

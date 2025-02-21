@@ -47,6 +47,6 @@ Depuis votre tableau de bord :
 <ul>
 <li>Supervisez l’ensemble de vos services : leurs besoins, leur indice cyber, leur statut d’homologation les prochaines actions à mener.</li>
 <li>Consultez vos notifications et les recommandations de l’ANSSI</li>
-<li>Téléchargez, dupliquez, partagez à volonté !</li>
+<li>Téléchargez, dupliquez, partagez à volonté&nbsp;!</li>
 </ul>
-Avec MonServiceSécurisé renforcez le niveau de sécurité de vos services publics numériques et mettez-vous en conformité avec la réglementation !
+Avec MonServiceSécurisé renforcez le niveau de sécurité de vos services publics numériques et mettez-vous en conformité avec la réglementation&nbsp;!
