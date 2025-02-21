@@ -1,9 +1,9 @@
-import express, { NextFunction, Request, Response } from "express";
+import express, { Request, Response } from "express";
 import { ressourcePagesJekyll } from "./ressourcePagesJekyll";
 import rateLimit from "express-rate-limit";
-import { join } from "path";
 import { ConfigurationServeur } from "./configurationServeur";
 import { ressourcePageProduit } from "./ressourcePageProduit";
+import { fournisseurChemin } from "./fournisseurChemin";
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -37,7 +37,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   ["assets", "scripts", "lib-svelte", "favicon.ico"].forEach((ressource) => {
     app.use(
       `/${ressource}`,
-      express.static(join(process.cwd(), "front", "_site", ressource)),
+      express.static(fournisseurChemin.ressourceDeBase(ressource)),
     );
   });
 
@@ -45,14 +45,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     reponse
       .status(404)
       .set("Content-Type", "text/html")
-      .sendFile(join(process.cwd(), "front", "_site", "404.html"));
-  });
-
-  app.use((_requete: Request, reponse: Response) => {
-    reponse
-      .status(404)
-      .set("Content-Type", "text/html")
-      .sendFile(join(process.cwd(), "front", "_site", "404.html"));
+      .sendFile(fournisseurChemin.ressourceDeBase("404.html"));
   });
 
   return app;

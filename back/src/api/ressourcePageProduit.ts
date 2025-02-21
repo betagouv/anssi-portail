@@ -12,7 +12,7 @@ const ressourcePageProduit = (
       .contentType("text/html")
       .status(200)
       .sendFile(
-        fournisseurChemin.getCheminProduitJekyll(
+        fournisseurChemin.cheminProduitJekyll(
           repertoireProduits,
           requete.params.id,
         ),

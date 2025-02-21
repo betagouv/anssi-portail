@@ -32,7 +32,7 @@ describe("La ressource pages jekyll", () => {
 
     it("sers le fichier html de jekyll", async () => {
       let nomPageDemande: string;
-      fournisseurChemin.getCheminPageJekyll = (nomPage: string) => {
+      fournisseurChemin.cheminPageJekyll = (nomPage: string) => {
         nomPageDemande = nomPage;
         return join(process.cwd(), "tests", "ressources", "factice.html");
       };

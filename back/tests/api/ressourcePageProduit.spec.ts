@@ -37,7 +37,7 @@ describe("La ressource page produit", () => {
     it("sers le fichier html de jekyll", async () => {
       let idProduitDemande: string;
       let repertoireProduitsDemande: string;
-      fournisseurChemin.getCheminProduitJekyll = (
+      fournisseurChemin.cheminProduitJekyll = (
         repertoireProduits: string,
         idProduit: string,
       ) => {
@@ -56,7 +56,7 @@ describe("La ressource page produit", () => {
   it("sers un fichier sur demande d'une ressource", async () => {
     let idProduitDemande: string;
     let repertoireProduitsDemande: string;
-    fournisseurChemin.getCheminProduitJekyll = (
+    fournisseurChemin.cheminProduitJekyll = (
       repertoireProduits: string,
       idProduit: string,
     ) => {

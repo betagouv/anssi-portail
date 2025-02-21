@@ -11,7 +11,7 @@ const ressourcePagesJekyll = (
     reponse
       .contentType("text/html")
       .status(200)
-      .sendFile(fournisseurChemin.getCheminPageJekyll(nomPage));
+      .sendFile(fournisseurChemin.cheminPageJekyll(nomPage));
   });
 
   return routeur;
