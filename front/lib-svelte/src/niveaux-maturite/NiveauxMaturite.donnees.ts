@@ -49,7 +49,7 @@ export const niveauxMaturite: NiveauMaturite[] = [
     priorite:
       "Identifier les mesures de cybersécurité prioritaires et rapides à mettre en oeuvre pour corriger les principales vulnérabilités.",
     priseEnCompteRisque:
-      "Les responsables ont conscience que leur organisation peut être victime d'une cyberattaque, comme d'autres avant elle, sans savoir lesquelles ni les conséquences qu’elles entraîneraient.",
+      "Les responsables ont conscience que l’organisation pourrait être victime de cyberattaques sans mesurer l'ampleur du risque.",
     posture:
       "Les responsables de l'organisation perçoivent le sujet comme avant tout technique.",
     pilotage:
@@ -80,7 +80,7 @@ export const niveauxMaturite: NiveauMaturite[] = [
       "La personne référente dispose d'un temps dédié au suivi des enjeux cyber et peut compter sur des soutiens ponctuels.",
     budget: "Une part du budget informatique est alloué à la cybersécurité.",
     adoptionSolutions:
-      "L'organisation déploie de solutions sélectionnées en réponse aux actions prioritaires identifiées dans le plan d'action cyber.",
+      "L’organisation dispose de plusieurs solutions adaptées aux actions prioritaires identifiées dans le plan d’action.",
     niveauSecurite:
       "Des vulnérabilités importantes ont été corrigées mais l'organisation demeure vulnérable et n'est souvent pas préparée à faire face à une crise d'origine cyber.",
   },
@@ -124,7 +124,7 @@ export const niveauxMaturite: NiveauMaturite[] = [
     budget:
       "La ligne dédiée à la cybersécurité est égale > ou = à 10% du budget informatique de l'organisation.",
     adoptionSolutions:
-      "L'organisation mobilise un panel complet de services et d'outils cyber intégrés répondant à l'ensemble des besoins de l'organisation en matière de cybersécurité et réalise des audits réguliers.",
+      "L'organisation dispose d'un panel complet de services et d'outils cyber intégrés et réalise des audits réguliers.",
     niveauSecurite:
       "L'organisation a mis en oeuvre des mesures lui permettant de se protéger contre des attaques élaborées et est parfaitement préparée à réagir à une crise d'origine cyber.",
   },
