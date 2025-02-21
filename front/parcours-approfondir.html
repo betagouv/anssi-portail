@@ -7,7 +7,7 @@ titreHtml: "Cybersécurité : approfondir ! | MesServicesCyber"
 <section class="chapeau fond-sombre">
   <div class="contenu-section">
     <div class="fil-ariane">
-      <a href="/">Accueil</a>
+      <a href="/" class="lien">Accueil</a>
       <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
       <span>Découvrir notre sélection</span>
       <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
@@ -37,18 +37,18 @@ titreHtml: "Cybersécurité : approfondir ! | MesServicesCyber"
 </section>
 
 {% for action in site.data.parcours-approfondir %}
-  {%assign indexModulo2 = forloop.index0 | modulo: 2 %}
-  {%if indexModulo2 == 1 %}{%assign fondAlternatif=true%}{%else%}{%assign fondAlternatif=false%}{%endif%}
-  {% assign idAction=action[0] %}
-  {% assign infosAction=action[1] %}
-  {% include action-parcours-avec-items.html
-    id=idAction
-    titre=infosAction.titre
-    explication=infosAction.explication
-    parcours=infosAction.parcours
-    items=infosAction.items
-    fondAlternatif=fondAlternatif
-  %}
+{%assign indexModulo2 = forloop.index0 | modulo: 2 %}
+{%if indexModulo2 == 1 %}{%assign fondAlternatif=true%}{%else%}{%assign fondAlternatif=false%}{%endif%}
+{% assign idAction=action[0] %}
+{% assign infosAction=action[1] %}
+{% include action-parcours-avec-items.html
+id=idAction
+titre=infosAction.titre
+explication=infosAction.explication
+parcours=infosAction.parcours
+items=infosAction.items
+fondAlternatif=fondAlternatif
+%}
 {% endfor %}
 
 {% include encart-nis2.html fond='sombre' %}

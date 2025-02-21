@@ -73,7 +73,7 @@
             </div>
 
             <div class="commandes">
-              <a href="/">Retour à l'accueil</a>
+              <a href="/" class="lien">Retour à l'accueil</a>
               <input
                 type="button"
                 class="bouton secondaire taille-moyenne"
@@ -111,7 +111,7 @@
               </fieldset>
 
               <div class="commandes">
-                <a href="/">Retour à l'accueil</a>
+                <a href="/" class="lien">Retour à l'accueil</a>
                 <input
                   type="button"
                   class="bouton secondaire taille-moyenne"
@@ -138,8 +138,8 @@
         <div class="introduction">
           <h2>Quelle est la maturité cyber de votre organisation ?</h2>
           <p>
-            La maturité cyber est une évaluation indicative du niveau global de prise en compte des
-            enjeux de cyber sécurité par une organisation.
+            La maturité cyber est une évaluation indicative du niveau global de
+            prise en compte des enjeux de cyber sécurité par une organisation.
             Répondez à <b>6 questions</b> pour obtenir votre évaluation.
           </p>
           <input
