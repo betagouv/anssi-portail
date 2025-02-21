@@ -55,8 +55,10 @@ a {
     background: url("/assets/images/icone-lien-externe.svg") no-repeat;
   }
 
-  &:hover:not(.bouton) {
-    border-bottom: 2px solid var(--noir);
+  &.lien {
+    &:hover {
+      border-bottom: 2px solid var(--noir);
+    }
   }
 
   &:active {
@@ -890,7 +892,6 @@ footer {
         color: var(--noir);
         text-align: right;
         text-decoration: none;
-        border-bottom: 1px solid var(--noir);
 
         &::after {
           content: "";

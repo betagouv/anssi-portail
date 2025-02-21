@@ -5,148 +5,148 @@ script: /scripts/service.js
 ---
 
 <section class="chapeau">
-    <div class="contenu-section">
-        <div class="fil-ariane">
-            <a href="/">Accueil</a>
-            <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
-            <a href="/catalogue/">Les services et ressources cyber</a>
-            <span><img src="/assets/images/icone-chevron-droite.svg"alt=""/></span>
-            <span>{{page.nom}}</span>
-        </div>
-        <div class="resume">
-            <div>
-                <span class="badge service">Service</span>
-                <h1>{{page.nom}}</h1>
-                <p>{{page.description}}</p>
-                <a href="{{page.lien}}" target="_blank" class="bouton primaire">Accéder au service</a>
-            </div>
-            <div>
-                <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran"/>
-            </div>
-        </div>
+  <div class="contenu-section">
+    <div class="fil-ariane">
+      <a href="/" class="lien">Accueil</a>
+      <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
+      <a href="/catalogue/" class="lien">Les services et ressources cyber</a>
+      <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/></span>
+      <span>{{page.nom}}</span>
     </div>
+    <div class="resume">
+      <div>
+        <span class="badge service">Service</span>
+        <h1>{{page.nom}}</h1>
+        <p>{{page.description}}</p>
+        <a href="{{page.lien}}" target="_blank" class="bouton primaire">Accéder au service</a>
+      </div>
+      <div>
+        <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran"/>
+      </div>
+    </div>
+  </div>
 </section>
 
 <div class="sommaire sommaire-replie">
-    <details>
-        <summary>
-            <div class="entete-filtres">
-                <img class="menu" src="/assets/images/icone-menu-lateral.svg" alt=""/>
-                <span id="section-active" class="titre-menu">De quoi s'agit-il&nbsp;?</span>
-                <img class="chevron" src="/assets/images/icone-chevron-bas.svg" alt=""/>
-            </div>
-        </summary>
+  <details>
+    <summary>
+      <div class="entete-filtres">
+        <img class="menu" src="/assets/images/icone-menu-lateral.svg" alt=""/>
+        <span id="section-active" class="titre-menu">De quoi s'agit-il&nbsp;?</span>
+        <img class="chevron" src="/assets/images/icone-chevron-bas.svg" alt=""/>
+      </div>
+    </summary>
 
-        <ul>
-            <li class="actif"><a href="#explication">De quoi s'agit-il&nbsp;?</a></li>
-            <li><a href="#cible">Qui peut utiliser ce service&nbsp;?</a></li>
-            {% if page.ressources.size  > 0 %}
-                <li><a href="#ressources">Les ressources associées</a></li>
-            {%endif%}
-        </ul>
-    </details>
+    <ul>
+      <li class="actif"><a href="#explication">De quoi s'agit-il&nbsp;?</a></li>
+      <li><a href="#cible">Qui peut utiliser ce service&nbsp;?</a></li>
+      {% if page.ressources.size > 0 %}
+      <li><a href="#ressources">Les ressources associées</a></li>
+      {%endif%}
+    </ul>
+  </details>
 </div>
 
 <div class="article">
-    <div class="contenu-section">
+  <div class="contenu-section">
 
     <div class="sommaire sommaire-deplie">
-        <ul>
-            <li class="actif"><a href="#explication">De quoi s'agit-il&nbsp;?</a></li>
-            <li><a href="#cible">Qui peut utiliser ce service&nbsp;?</a></li>
-            {% if page.ressources.size  > 0 %}
-                <li><a href="#ressources">Les ressources associées</a></li>
-            {%endif%}
-        </ul>
-        <span>TAGS</span>
-        <div class="labels">
-            {% for source in page.sources %}
-            <span>{{source}}</span>
-            {% endfor %}
-        </div>
+      <ul>
+        <li class="actif"><a href="#explication">De quoi s'agit-il&nbsp;?</a></li>
+        <li><a href="#cible">Qui peut utiliser ce service&nbsp;?</a></li>
+        {% if page.ressources.size > 0 %}
+        <li><a href="#ressources">Les ressources associées</a></li>
+        {%endif%}
+      </ul>
+      <span>TAGS</span>
+      <div class="labels">
+        {% for source in page.sources %}
+        <span>{{source}}</span>
+        {% endfor %}
+      </div>
     </div>
 
     <div class="contenu">
-        <section class="explication" id="explication">
-            <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran"/>
-            <h2>De quoi s'agit-il&nbsp;?</h2>
-            <div>{{ page.content }}</div>
-            <a href="{{page.lien}}" target="_blank" class="bouton primaire">Accéder au service</a>
-        </section>
+      <section class="explication" id="explication">
+        <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran"/>
+        <h2>De quoi s'agit-il&nbsp;?</h2>
+        <div>{{ page.content }}</div>
+        <a href="{{page.lien}}" target="_blank" class="bouton primaire">Accéder au service</a>
+      </section>
 
-        <section class="cible" id="cible">
-            <h2>Qui peut utiliser ce service&nbsp;?</h2>
-            <span>{{ page.cible }}</span>
+      <section class="cible" id="cible">
+        <h2>Qui peut utiliser ce service&nbsp;?</h2>
+        <span>{{ page.cible }}</span>
 
-            <div class="cartes">
-                {% for lien in page.liens %}
-                <div class="carte lien {% if lien.video %}video{% endif %}">
-                    {% if lien.video %}
-                    <button onclick="ouvreModaleVideo('{{lien.lien}}')">
-                    {% else %}
-                    <a href="{{ lien.lien }}" target="_blank">
-                    {% endif %}
-                    <div class="illustration" style="background-color: {{lien.couleurFond}}">
-                        <img src="/assets/images/illustrations-services/{{ lien.illustration }}" alt="">
-                    </div>
-                        <span>{{ lien.titre }}</span>
-                    {% if lien.video %}
-                    </button>
-                    {% else %}
-                    </a>
-                    {% endif %}
+        <div class="cartes">
+          {% for lien in page.liens %}
+          <div class="carte lien {% if lien.video %}video{% endif %}">
+            {% if lien.video %}
+            <button onclick="ouvreModaleVideo('{{lien.lien}}')">
+              {% else %}
+              <a href="{{ lien.lien }}" target="_blank">
+                {% endif %}
+                <div class="illustration" style="background-color: {{lien.couleurFond}}">
+                  <img src="/assets/images/illustrations-services/{{ lien.illustration }}" alt="">
                 </div>
-                {% endfor %}
-            </div>
-            <dialog id="modale-video">
-              <form method="dialog" class="contenu-modale">
-                <button class="ferme-video">&times;</button>
-                <video id="video-presentation" src="" controls=""></video>
-              </form>
-            </dialog>
-        </section>
-
-        {% if page.ressources.size  > 0 %}
-        <section class="ressources" id="ressources">
-            <h2>Les ressources associées</h2>
-            {% for idRessource in page.ressources %}
-            {% assign ressource = site.ressources | where: "id", idRessource | first %}
-
-            {% if ressource.avecFicheDetaillee %}
-            <a class="carte ressource" href="{{ressource.url}}">
-                {% else %}
-                <a class="carte ressource" href="{{ressource.lien}}">
-                    {% endif %}
-                    <figure>
-                        <img src="/assets/images/illustrations-services/{{ressource.illustration}}">
-                        <figcaption>{{ressource.format}}</figcaption>
-                    </figure>
-                    <div class="contenu">
-                        <h3>{{ressource.titre}}</h3>
-                        <span>{{ressource.description}}</span>
-                        <div class="labels">
-                            {% for source in ressource.sources %}
-                            <span>{{source}}</span>
-                            {% endfor %}
-                            {% if ressource.avecFicheDetaillee %}
-                            <img src="/assets/images/icone-fleche-droite.svg"
-                                 alt="Voir le détail"
-                                 title="Voir le détail">
-                            {% else %}
-                            <img src="/assets/images/icone-lien-externe.svg"
-                                 alt="Ouvrir dans un nouvel onglet"
-                                 title="Ouvrir dans un nouvel onglet">
-                            {% endif %}
-                        </div>
-                    </div>
-                </a>
-                {% endfor %}
-        </section>
-        {% endif %}
-
-        <div class="haut-de-page">
-            <a href="#haut-de-page">Haut de page</a>
+                <span>{{ lien.titre }}</span>
+                {% if lien.video %}
+            </button>
+            {% else %}
+            </a>
+            {% endif %}
+          </div>
+          {% endfor %}
         </div>
+        <dialog id="modale-video">
+          <form method="dialog" class="contenu-modale">
+            <button class="ferme-video">&times;</button>
+            <video id="video-presentation" src="" controls=""></video>
+          </form>
+        </dialog>
+      </section>
+
+      {% if page.ressources.size > 0 %}
+      <section class="ressources" id="ressources">
+        <h2>Les ressources associées</h2>
+        {% for idRessource in page.ressources %}
+        {% assign ressource = site.ressources | where: "id", idRessource | first %}
+
+        {% if ressource.avecFicheDetaillee %}
+        <a class="carte ressource" href="{{ressource.url}}">
+          {% else %}
+          <a class="carte ressource" href="{{ressource.lien}}">
+            {% endif %}
+            <figure>
+              <img src="/assets/images/illustrations-services/{{ressource.illustration}}">
+              <figcaption>{{ressource.format}}</figcaption>
+            </figure>
+            <div class="contenu">
+              <h3>{{ressource.titre}}</h3>
+              <span>{{ressource.description}}</span>
+              <div class="labels">
+                {% for source in ressource.sources %}
+                <span>{{source}}</span>
+                {% endfor %}
+                {% if ressource.avecFicheDetaillee %}
+                <img src="/assets/images/icone-fleche-droite.svg"
+                     alt="Voir le détail"
+                     title="Voir le détail">
+                {% else %}
+                <img src="/assets/images/icone-lien-externe.svg"
+                     alt="Ouvrir dans un nouvel onglet"
+                     title="Ouvrir dans un nouvel onglet">
+                {% endif %}
+              </div>
+            </div>
+          </a>
+          {% endfor %}
+      </section>
+      {% endif %}
+
+      <div class="haut-de-page">
+        <a href="#haut-de-page" class="lien">Haut de page</a>
+      </div>
     </div>
-    </div>
+  </div>
 </div>

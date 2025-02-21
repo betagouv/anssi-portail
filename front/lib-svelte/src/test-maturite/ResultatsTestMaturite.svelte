@@ -52,7 +52,7 @@
       <p>{niveau.description}</p>
     </div>
 
-    <a href="/niveaux-maturite" target="_blank">Les niveaux de maturité cyber</a>
+    <a href="/niveaux-maturite" class="lien" target="_blank">Les niveaux de maturité cyber</a>
   </div>
 </section>
 
