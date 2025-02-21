@@ -6,13 +6,13 @@ import assert from "node:assert";
 import { join } from "path";
 import { FournisseurChemin } from "../../src/api/fournisseurChemin";
 
-describe("La ressource profil", () => {
+describe("La ressource pages jekyll", () => {
   let serveur: Express;
   let fournisseurChemin: FournisseurChemin;
 
   beforeEach(() => {
     fournisseurChemin = {
-      getCheminPageJekyll: (nomPage: string) =>
+      getCheminPageJekyll: (_: string) =>
         join(process.cwd(), "tests", "ressources", "factice.html"),
     };
     serveur = creeServeur({ fournisseurChemin });

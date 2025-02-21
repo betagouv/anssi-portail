@@ -14,31 +14,16 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   });
   app.use(centParMinute);
 
-  app.use("/catalogue", ressourcePagesJekyll(configurationServeur, "catalogue"));
-
-  const sersPageJekyll = (requete: Request, reponse: Response) => {
-    const cheminFichier = join(
-      process.cwd(),
-      "front",
-      "_site",
-      requete.url,
-      "index.html",
-    );
-    reponse
-      .status(200)
-      .set("Content-Type", "text/html")
-      .sendFile(cheminFichier);
-  };
-
   [
-    "/",
-    "/parcours-debuter",
-    "/parcours-approfondir",
-    "/nis2",
-    "/test-maturite",
-    "/niveaux-maturite",
+    "",
+    "catalogue",
+    "parcours-debuter",
+    "parcours-approfondir",
+    "nis2",
+    "test-maturite",
+    "niveaux-maturite",
   ].forEach((page) => {
-    app.get(page, sersPageJekyll);
+    app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page));
   });
 
   ["services", "ressources"].forEach((repertoireProduits) => {
