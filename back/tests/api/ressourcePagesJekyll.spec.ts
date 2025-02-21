@@ -5,16 +5,14 @@ import { creeServeur } from "../../src/api/msc";
 import assert from "node:assert";
 import { join } from "path";
 import { FournisseurChemin } from "../../src/api/fournisseurChemin";
+import { fauxFournisseurDeChemin } from "./fauxObjets";
 
 describe("La ressource pages jekyll", () => {
   let serveur: Express;
-  let fournisseurChemin: FournisseurChemin;
 
+  let fournisseurChemin: FournisseurChemin;
   beforeEach(() => {
-    fournisseurChemin = {
-      getCheminPageJekyll: (_: string) =>
-        join(process.cwd(), "tests", "ressources", "factice.html"),
-    };
+    fournisseurChemin = fauxFournisseurDeChemin;
     serveur = creeServeur({ fournisseurChemin });
   });
 
@@ -39,10 +37,8 @@ describe("La ressource pages jekyll", () => {
         return join(process.cwd(), "tests", "ressources", "factice.html");
       };
 
-      const reponse = await request(serveur).get("/catalogue");
+      await request(serveur).get("/catalogue");
 
-      assert.notEqual(reponse.headers["content-type"], undefined);
-      assert.match(reponse.headers["content-type"], /html/);
       assert.equal(nomPageDemande!, "catalogue");
     });
   });

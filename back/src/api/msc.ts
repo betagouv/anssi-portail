@@ -3,6 +3,7 @@ import { ressourcePagesJekyll } from "./ressourcePagesJekyll";
 import rateLimit from "express-rate-limit";
 import { join } from "path";
 import { ConfigurationServeur } from "./configurationServeur";
+import { ressourcePageProduit } from "./ressourcePageProduit";
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -22,30 +23,16 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     "nis2",
     "test-maturite",
     "niveaux-maturite",
-  ].forEach((page) => {
-    app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page));
-  });
+  ].forEach((page) =>
+    app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page)),
+  );
 
-  ["services", "ressources"].forEach((repertoireProduits) => {
-    app.get(
-      `/${repertoireProduits}/:id`,
-      (requete: Request, reponse: Response, suite: NextFunction) => {
-        const cheminFichier = join(
-          process.cwd(),
-          "front",
-          "_site",
-          repertoireProduits,
-          requete.params.id,
-        );
-        reponse
-          .status(200)
-          .set("Content-Type", "text/html")
-          .sendFile(cheminFichier, () => {
-            if (!reponse.headersSent) suite();
-          });
-      },
-    );
-  });
+  ["services", "ressources"].forEach((repertoireProduits) =>
+    app.use(
+      `/${repertoireProduits}`,
+      ressourcePageProduit(configurationServeur, repertoireProduits),
+    ),
+  );
 
   ["assets", "scripts", "lib-svelte", "favicon.ico"].forEach((ressource) => {
     app.use(
