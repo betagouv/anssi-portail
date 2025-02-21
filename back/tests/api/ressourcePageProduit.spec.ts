@@ -6,6 +6,7 @@ import { creeServeur } from "../../src/api/msc";
 import request from "supertest";
 import assert from "node:assert";
 import { fauxFournisseurDeChemin } from "./fauxObjets";
+import { fabriqueMiddleware } from "../../src/api/middleware";
 
 describe("La ressource page produit", () => {
   let serveur: Express;
@@ -13,7 +14,10 @@ describe("La ressource page produit", () => {
 
   beforeEach(() => {
     fournisseurChemin = fauxFournisseurDeChemin;
-    serveur = creeServeur({ fournisseurChemin });
+    serveur = creeServeur({
+      fournisseurChemin,
+      middleware: fabriqueMiddleware(),
+    });
   });
 
   describe("sur demande d'une page de service", () => {
@@ -50,6 +54,21 @@ describe("La ressource page produit", () => {
 
       assert.equal(repertoireProduitsDemande!, "services");
       assert.equal(idProduitDemande!, "mon-service-securise");
+    });
+
+    it("aseptise l'id du produit", async () => {
+      let idProduitDemande: string;
+      fournisseurChemin.cheminProduitJekyll = (
+        _: string,
+        idProduit: string,
+      ) => {
+        idProduitDemande = idProduit;
+        return join(process.cwd(), "tests", "ressources", "factice.html");
+      };
+
+      await request(serveur).get("/services/mon>service");
+
+      assert.equal(idProduitDemande!, "mon&gt;service");
     });
   });
 

@@ -6,6 +6,7 @@ import assert from "node:assert";
 import { join } from "path";
 import { FournisseurChemin } from "../../src/api/fournisseurChemin";
 import { fauxFournisseurDeChemin } from "./fauxObjets";
+import { fabriqueMiddleware } from "../../src/api/middleware";
 
 describe("La ressource pages jekyll", () => {
   let serveur: Express;
@@ -13,7 +14,10 @@ describe("La ressource pages jekyll", () => {
   let fournisseurChemin: FournisseurChemin;
   beforeEach(() => {
     fournisseurChemin = fauxFournisseurDeChemin;
-    serveur = creeServeur({ fournisseurChemin });
+    serveur = creeServeur({
+      fournisseurChemin,
+      middleware: fabriqueMiddleware(),
+    });
   });
 
   describe("sur demande de la page catalogue", () => {
