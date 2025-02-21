@@ -7,7 +7,11 @@ import { ConfigurationServeur } from "./configurationServeur";
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
 
-  const centParMinute = rateLimit({ windowMs: 60 * 1000, limit: 100 });
+  const centParMinute = rateLimit({
+    windowMs: 60 * 1000,
+    limit: 100,
+    skip: (req) => req.url.startsWith("/assets"),
+  });
   app.use(centParMinute);
 
   app.use("/catalogue", ressourcePagesJekyll(configurationServeur, "catalogue"));
