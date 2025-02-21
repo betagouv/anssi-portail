@@ -19,6 +19,6 @@
     {/if}
   </p>
   <a href="/parcours-{parcours}" class="bouton primaire"
-    >Accéder à mon parcours cyber</a
+    >Découvrir</a
   >
 </div>
