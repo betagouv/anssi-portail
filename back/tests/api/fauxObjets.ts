@@ -1,8 +1,10 @@
-import {join} from "path";
+import { join } from "path";
 
 export let fauxFournisseurDeChemin = {
-    getCheminPageJekyll: (_: string) =>
-        join(process.cwd(), "tests", "ressources", "factice.html"),
-    getCheminProduitJekyll: (_a: string, _b: string) =>
-        join(process.cwd(), "tests", "ressources", "factice.html"),
+  cheminPageJekyll: (_: string) =>
+    join(process.cwd(), "tests", "ressources", "factice.html"),
+  cheminProduitJekyll: (_a: string, _b: string) =>
+    join(process.cwd(), "tests", "ressources", "factice.html"),
+  ressourceDeBase: (_: string) =>
+    join(process.cwd(), "tests", "ressources", "factice.html"),
 };
