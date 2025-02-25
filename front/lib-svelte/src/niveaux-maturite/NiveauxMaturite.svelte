@@ -33,7 +33,7 @@
       {/each}
     </div>
 
-    <h2>Les 6 critères pour évaluer votre niveau de maturité cyber</h2>
+    <h2>Les 6 critères pour évaluer votre maturité cyber</h2>
 
     <div class="details">
       <div class="detail">
