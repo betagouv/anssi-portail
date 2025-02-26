@@ -4,7 +4,7 @@
   "description": "",
   "main": "serveur.ts",
   "scripts": {
-    "dev": "npx concurrently -n \"SERVEUR,SVELTE,JEKYLL\" \"node --watch --import tsx ./back/src/serveur.ts\" \"npm run watch --prefix front/lib-svelte\" \"sleep 3 && jekyll build -s ./front -d ./front/_site -w\" ",
+    "dev": "npx concurrently -n \"SERVEUR,SVELTE,JEKYLL\" \"node --watch --import tsx --env-file ./back/.env ./back/src/serveur.ts\" \"npm run watch --prefix front/lib-svelte\" \"sleep 3 && jekyll build -s ./front -d ./front/_site -w\" ",
     "installe-tout": "npx concurrently -n \"SERVEUR,SVELTE,JEKYLL\" \"npm install --prefix back\" \"npm install --prefix front/lib-svelte\" \"npm install\" ",
     "start": "node ./dist-back/serveur.js"
   },
