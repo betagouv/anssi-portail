@@ -77,5 +77,5 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 COPY --from=build-le-back /usr/src/app/node_modules/ /usr/src/app/node_modules/
 COPY --from=build-le-site /srv/jekyll/_site/ /usr/src/app/front/_site/
-COPY --from=build-le-back /usr/src/app/dist-back/ /usr/src/app/dist-back/
+COPY --from=build-le-back /usr/src/dist-back/ /usr/src/app/dist-back/
 CMD ["npm", "start"]
