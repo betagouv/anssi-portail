@@ -6,4 +6,5 @@ _site
 vendor
 node_modules
 dist-back
+.vscode
 
