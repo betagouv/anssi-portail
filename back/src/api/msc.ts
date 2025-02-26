@@ -4,6 +4,7 @@ import rateLimit from "express-rate-limit";
 import { ConfigurationServeur } from "./configurationServeur";
 import { ressourcePageProduit } from "./ressourcePageProduit";
 import { fournisseurChemin } from "./fournisseurChemin";
+import { ressourceConnexionOIDC } from "./ressourceConnexionOIDC";
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -41,6 +42,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       express.static(fournisseurChemin.ressourceDeBase(ressource)),
     );
   });
+
+  app.use("/oidc/connexion", ressourceConnexionOIDC(configurationServeur));
 
   app.use((_requete: Request, reponse: Response) => {
     reponse
