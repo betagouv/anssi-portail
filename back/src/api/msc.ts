@@ -23,6 +23,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     "nis2",
     "test-maturite",
     "niveaux-maturite",
+    "connexion",
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page)),
   );
