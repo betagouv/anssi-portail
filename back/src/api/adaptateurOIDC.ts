@@ -1,6 +1,15 @@
 import { Request } from "express";
 import { generators, Issuer } from "openid-client";
 import { adaptateurEnvironnement } from "../infra/adaptateurEnvironnement";
+export interface DemandeAutorisation {
+  url: string;
+  nonce: string;
+  state: string;
+}
+
+export interface AdaptateurOIDC {
+  genereDemandeAutorisation: () => Promise<DemandeAutorisation>;
+}
 
 const configurationOidc = adaptateurEnvironnement.oidc();
 
@@ -58,7 +67,7 @@ const recupereJeton = async (requete: Request) => {
   const token = await client.callback(
     configurationOidc.urlRedirectionApresAuthentification(),
     params,
-    { nonce, state },
+    { nonce, state }
   );
 
   return {
