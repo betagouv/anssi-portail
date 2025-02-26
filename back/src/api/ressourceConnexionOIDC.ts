@@ -7,7 +7,14 @@ const ressourceConnexionOIDC = (configurationServeur: ConfigurationServeur) => {
     const demandeAutorisation =
       await configurationServeur.adaptateurOIDC.genereDemandeAutorisation();
 
-    reponse.redirect(demandeAutorisation.url);
+    const { url, state, nonce } = demandeAutorisation;
+    reponse.cookie(
+      "AgentConnectInfo",
+      { state, nonce },
+      { httpOnly: true, secure: true, maxAge: 120000, sameSite: "none" }
+    );
+
+    reponse.redirect(url);
   });
   return routeur;
 };
