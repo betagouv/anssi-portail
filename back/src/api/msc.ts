@@ -5,6 +5,7 @@ import { ConfigurationServeur } from './configurationServeur';
 import { ressourcePageProduit } from './ressourcePageProduit';
 import { fournisseurChemin } from './fournisseurChemin';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
+import { ressourceApresAuthentificationOIDC } from "./oidc/ressourceApresAuthentificationOIDC";
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -44,6 +45,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   });
 
   app.use('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
+
+  app.use("/oidc/apres-authentification", ressourceApresAuthentificationOIDC());
 
   app.use((_requete: Request, reponse: Response) => {
     reponse
