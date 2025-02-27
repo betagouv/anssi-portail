@@ -25,6 +25,6 @@ Ce service vise à donner de la visibilité à ces entités sur leur niveau d’
 Dès réception des adresses IP et des noms de domaine transmis à SILENE :
 <ul>
   <li>Recevez un rapport détaillé présentant les différents points de contrôle qui ont révélé des défauts de configuration pouvant entraîner des risques de sécurité.</li>
-  <li>Découvrez le niveau de sécurité des services exposés sur Internet est traduit par un niveau qui se situe sur une échelle de 1 à 5.</li>
+  <li>Découvrez le niveau de sécurité des services exposés sur Internet et traduit par un niveau qui se situe sur une échelle de 1 à 5.</li>
   <li>Bénéficiez de recommandations adaptées.</li>
 </ul>
