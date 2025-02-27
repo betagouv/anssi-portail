@@ -1,7 +1,6 @@
 import { Request } from 'express';
 import { generators, Issuer } from 'openid-client';
-import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
-
+import { adaptateurEnvironnement } from '../../infra/adaptateurEnvironnement';
 export interface DemandeAutorisation {
   url: string;
   nonce: string;

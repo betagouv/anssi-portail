@@ -1,7 +1,7 @@
 import { creeServeur } from './api/msc';
 import { fournisseurChemin } from './api/fournisseurChemin';
 import { fabriqueMiddleware } from './api/middleware';
-import { adaptateurOIDC } from './api/adaptateurOIDC';
+import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
 
 creeServeur({
   fournisseurChemin,
