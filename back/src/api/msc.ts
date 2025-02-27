@@ -26,6 +26,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'test-maturite',
     'niveaux-maturite',
     'connexion',
+    "apres-authentification",
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
@@ -46,7 +47,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
 
-  app.use("/oidc/apres-authentification", ressourceApresAuthentificationOIDC());
+  app.use(
+    "/oidc/apres-authentification",
+    ressourceApresAuthentificationOIDC(configurationServeur)
+  );
 
   app.use((_requete: Request, reponse: Response) => {
     reponse
