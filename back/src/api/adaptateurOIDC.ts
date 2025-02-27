@@ -1,6 +1,7 @@
-import { Request } from "express";
-import { generators, Issuer } from "openid-client";
-import { adaptateurEnvironnement } from "../infra/adaptateurEnvironnement";
+import { Request } from 'express';
+import { generators, Issuer } from 'openid-client';
+import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
+
 export interface DemandeAutorisation {
   url: string;
   nonce: string;
@@ -14,15 +15,15 @@ export interface AdaptateurOIDC {
 const configurationOidc = adaptateurEnvironnement.oidc();
 
 async function recupereClient() {
-  console.log("url base : ", configurationOidc.urlBase());
+  console.log('url base : ', configurationOidc.urlBase());
   const agentConnect = await Issuer.discover(configurationOidc.urlBase());
   return new agentConnect.Client({
     client_id: configurationOidc.clientId(),
     client_secret: configurationOidc.clientSecret(),
     redirect_uris: [configurationOidc.urlRedirectionApresAuthentification()],
-    response_types: ["code"],
-    id_token_signed_response_alg: "RS256",
-    userinfo_signed_response_alg: "RS256",
+    response_types: ['code'],
+    id_token_signed_response_alg: 'RS256',
+    userinfo_signed_response_alg: 'RS256',
   });
 }
 
@@ -31,7 +32,7 @@ const genereDemandeAutorisation = async () => {
   const nonce = generators.nonce(32);
   const state = generators.state(32);
   const url = client.authorizationUrl({
-    scope: "openid email given_name usual_name siret",
+    scope: 'openid email given_name usual_name siret',
     nonce,
     state,
   });

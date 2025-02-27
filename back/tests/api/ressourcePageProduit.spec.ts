@@ -1,14 +1,14 @@
-import { beforeEach, describe, it } from "node:test";
-import { Express } from "express";
-import { FournisseurChemin } from "../../src/api/fournisseurChemin";
-import { join } from "path";
-import { creeServeur } from "../../src/api/msc";
-import request from "supertest";
-import assert from "node:assert";
-import { fauxFournisseurDeChemin } from "./fauxObjets";
-import { fabriqueMiddleware } from "../../src/api/middleware";
+import { beforeEach, describe, it } from 'node:test';
+import { Express } from 'express';
+import { FournisseurChemin } from '../../src/api/fournisseurChemin';
+import { join } from 'path';
+import { creeServeur } from '../../src/api/msc';
+import request from 'supertest';
+import assert from 'node:assert';
+import { fauxFournisseurDeChemin } from './fauxObjets';
+import { fabriqueMiddleware } from '../../src/api/middleware';
 
-describe("La ressource page produit", () => {
+describe('La ressource page produit', () => {
   let serveur: Express;
   let fournisseurChemin: FournisseurChemin;
 
@@ -21,54 +21,54 @@ describe("La ressource page produit", () => {
   });
 
   describe("sur demande d'une page de service", () => {
-    it("répond 200", async () => {
+    it('répond 200', async () => {
       const reponse = await request(serveur).get(
-        "/services/mon-service-securise",
+        '/services/mon-service-securise'
       );
 
       assert.equal(reponse.status, 200);
     });
 
-    it("renvoie un contenu html", async () => {
+    it('renvoie un contenu html', async () => {
       const reponse = await request(serveur).get(
-        "/services/mon-service-securise",
+        '/services/mon-service-securise'
       );
 
-      assert.notEqual(reponse.headers["content-type"], undefined);
-      assert.match(reponse.headers["content-type"], /html/);
+      assert.notEqual(reponse.headers['content-type'], undefined);
+      assert.match(reponse.headers['content-type'], /html/);
     });
 
-    it("sers le fichier html de jekyll", async () => {
+    it('sers le fichier html de jekyll', async () => {
       let idProduitDemande: string;
       let repertoireProduitsDemande: string;
       fournisseurChemin.cheminProduitJekyll = (
         repertoireProduits: string,
-        idProduit: string,
+        idProduit: string
       ) => {
         idProduitDemande = idProduit;
         repertoireProduitsDemande = repertoireProduits;
-        return join(process.cwd(), "tests", "ressources", "factice.html");
+        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
       };
 
-      await request(serveur).get("/services/mon-service-securise");
+      await request(serveur).get('/services/mon-service-securise');
 
-      assert.equal(repertoireProduitsDemande!, "services");
-      assert.equal(idProduitDemande!, "mon-service-securise");
+      assert.equal(repertoireProduitsDemande!, 'services');
+      assert.equal(idProduitDemande!, 'mon-service-securise');
     });
 
     it("aseptise l'id du produit", async () => {
       let idProduitDemande: string;
       fournisseurChemin.cheminProduitJekyll = (
         _: string,
-        idProduit: string,
+        idProduit: string
       ) => {
         idProduitDemande = idProduit;
-        return join(process.cwd(), "tests", "ressources", "factice.html");
+        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
       };
 
-      await request(serveur).get("/services/mon>service");
+      await request(serveur).get('/services/mon>service');
 
-      assert.equal(idProduitDemande!, "mon&gt;service");
+      assert.equal(idProduitDemande!, 'mon&gt;service');
     });
   });
 
@@ -77,19 +77,19 @@ describe("La ressource page produit", () => {
     let repertoireProduitsDemande: string;
     fournisseurChemin.cheminProduitJekyll = (
       repertoireProduits: string,
-      idProduit: string,
+      idProduit: string
     ) => {
       idProduitDemande = idProduit;
       repertoireProduitsDemande = repertoireProduits;
-      return join(process.cwd(), "tests", "ressources", "factice.html");
+      return join(process.cwd(), 'tests', 'ressources', 'factice.html');
     };
 
-    const reponse = await request(serveur).get("/ressources/cot");
+    const reponse = await request(serveur).get('/ressources/cot');
 
     assert.equal(reponse.status, 200);
-    assert.notEqual(reponse.headers["content-type"], undefined);
-    assert.match(reponse.headers["content-type"], /html/);
-    assert.equal(repertoireProduitsDemande!, "ressources");
-    assert.equal(idProduitDemande!, "cot");
+    assert.notEqual(reponse.headers['content-type'], undefined);
+    assert.match(reponse.headers['content-type'], /html/);
+    assert.equal(repertoireProduitsDemande!, 'ressources');
+    assert.equal(idProduitDemande!, 'cot');
   });
 });
