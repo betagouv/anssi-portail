@@ -4,7 +4,10 @@
   "description": "",
   "main": "serveur.ts",
   "scripts": {
-    "test": "node --import tsx --test ./tests/**/*.spec.ts"
+    "test": "node --import tsx --test './tests/**/*.spec.ts'"
+  },
+  "engines": {
+    "node": ">=23"
   },
   "private": true,
   "devDependencies": {
