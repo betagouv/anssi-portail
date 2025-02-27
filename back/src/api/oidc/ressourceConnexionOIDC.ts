@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ConfigurationServeur } from './configurationServeur';
+import { ConfigurationServeur } from '../configurationServeur';
 
 const ressourceConnexionOIDC = (configurationServeur: ConfigurationServeur) => {
   let routeur = Router();

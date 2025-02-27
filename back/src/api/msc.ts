@@ -4,7 +4,7 @@ import rateLimit from 'express-rate-limit';
 import { ConfigurationServeur } from './configurationServeur';
 import { ressourcePageProduit } from './ressourcePageProduit';
 import { fournisseurChemin } from './fournisseurChemin';
-import { ressourceConnexionOIDC } from './ressourceConnexionOIDC';
+import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
