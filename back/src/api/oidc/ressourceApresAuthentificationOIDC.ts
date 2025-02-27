@@ -1,9 +1,16 @@
 import { Router } from "express";
+import { ConfigurationServeur } from "../configurationServeur";
 
-const ressourceApresAuthentificationOIDC = () => {
+const ressourceApresAuthentificationOIDC = (
+  configurationServeur: ConfigurationServeur
+) => {
   let routeur = Router();
   routeur.get("/", async (_requete, reponse) => {
-    reponse.sendStatus(200);
+    reponse.sendFile(
+      configurationServeur.fournisseurChemin.cheminPageJekyll(
+        "apres-authentification"
+      )
+    );
   });
   return routeur;
 };
