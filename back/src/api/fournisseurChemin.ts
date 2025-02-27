@@ -1,4 +1,4 @@
-import { join } from "path";
+import { join } from 'path';
 
 export interface FournisseurChemin {
   cheminPageJekyll: (nomPage: string) => string;
@@ -8,9 +8,9 @@ export interface FournisseurChemin {
 
 export const fournisseurChemin: FournisseurChemin = {
   cheminPageJekyll: (nomPage: string) =>
-    join(process.cwd(), "front", "_site", nomPage, "index.html"),
+    join(process.cwd(), 'front', '_site', nomPage, 'index.html'),
   cheminProduitJekyll: (repertoireProduits: string, idProduit: string) =>
-    join(process.cwd(), "front", "_site", repertoireProduits, idProduit),
+    join(process.cwd(), 'front', '_site', repertoireProduits, idProduit),
   ressourceDeBase: (ressource) =>
-    join(process.cwd(), "front", "_site", ressource),
+    join(process.cwd(), 'front', '_site', ressource),
 };
