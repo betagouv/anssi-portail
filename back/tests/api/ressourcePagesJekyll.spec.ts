@@ -5,7 +5,7 @@ import { creeServeur } from '../../src/api/msc';
 import assert from 'node:assert';
 import { join } from 'path';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin';
-import { fauxFournisseurDeChemin } from './fauxObjets';
+import { fauxAdaptateurOIDC, fauxFournisseurDeChemin } from './fauxObjets';
 import { fabriqueMiddleware } from '../../src/api/middleware';
 
 describe('La ressource pages jekyll', () => {
@@ -17,6 +17,7 @@ describe('La ressource pages jekyll', () => {
     serveur = creeServeur({
       fournisseurChemin,
       middleware: fabriqueMiddleware(),
+      adaptateurOIDC: fauxAdaptateurOIDC,
     });
   });
 

@@ -5,7 +5,7 @@ import { join } from 'path';
 import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import assert from 'node:assert';
-import { fauxFournisseurDeChemin } from './fauxObjets';
+import { fauxAdaptateurOIDC, fauxFournisseurDeChemin } from './fauxObjets';
 import { fabriqueMiddleware } from '../../src/api/middleware';
 
 describe('La ressource page produit', () => {
@@ -17,6 +17,7 @@ describe('La ressource page produit', () => {
     serveur = creeServeur({
       fournisseurChemin,
       middleware: fabriqueMiddleware(),
+      adaptateurOIDC: fauxAdaptateurOIDC,
     });
   });
 
