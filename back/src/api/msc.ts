@@ -5,7 +5,7 @@ import { ConfigurationServeur } from './configurationServeur';
 import { ressourcePageProduit } from './ressourcePageProduit';
 import { fournisseurChemin } from './fournisseurChemin';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
-import { ressourceApresAuthentificationOIDC } from "./oidc/ressourceApresAuthentificationOIDC";
+import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -26,7 +26,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'test-maturite',
     'niveaux-maturite',
     'connexion',
-    "apres-authentification",
+    'apres-authentification',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
@@ -48,7 +48,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
 
   app.use(
-    "/oidc/apres-authentification",
+    '/oidc/apres-authentification',
     ressourceApresAuthentificationOIDC(configurationServeur)
   );
 

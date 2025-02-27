@@ -11,8 +11,8 @@ export const fauxFournisseurDeChemin = {
 
 export const fauxAdaptateurOIDC = {
   genereDemandeAutorisation: async () => ({
-    url: "",
-    nonce: "",
-    state: "",
+    url: '',
+    nonce: '',
+    state: '',
   }),
 };
