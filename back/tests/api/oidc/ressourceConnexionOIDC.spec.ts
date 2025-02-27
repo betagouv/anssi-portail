@@ -2,11 +2,11 @@ import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import request from 'supertest';
 import assert from 'node:assert';
-import { creeServeur } from '../../src/api/msc';
-import { ConfigurationServeur } from '../../src/api/configurationServeur';
-import { fauxFournisseurDeChemin } from './fauxObjets';
-import { fabriqueMiddleware } from '../../src/api/middleware';
-import { enObjet } from './cookie';
+import { ConfigurationServeur } from '../../../src/api/configurationServeur';
+import { fabriqueMiddleware } from '../../../src/api/middleware';
+import { creeServeur } from '../../../src/api/msc';
+import { enObjet } from '../cookie';
+import { fauxFournisseurDeChemin } from '../fauxObjets';
 
 describe('La ressource connexion OIDC', () => {
   describe('quand on requete GET sur /oidc/connexion', () => {
