@@ -11,6 +11,7 @@ const ressourceApresAuthentificationOIDC = (
     let informationsUtilisateur =
       await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
     requete.session! = { ...requete.session!, ...informationsUtilisateur };
+    requete.session.token = configurationServeur.adaptateurJWT.genereToken(informationsUtilisateur.email)
     reponse.sendFile(
       configurationServeur.fournisseurChemin.cheminPageJekyll(
         'apres-authentification'
