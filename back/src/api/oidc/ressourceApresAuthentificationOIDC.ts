@@ -6,6 +6,11 @@ const ressourceApresAuthentificationOIDC = (
 ) => {
   let routeur = Router();
   routeur.get('/', async (requete, reponse) => {
+    if (!requete.cookies.AgentConnectInfo) {
+      reponse.sendStatus(401);
+      return;
+    }
+
     const { adaptateurOIDC } = configurationServeur;
     let { accessToken } = await adaptateurOIDC.recupereJeton(requete);
     let informationsUtilisateur =
