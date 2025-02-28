@@ -21,4 +21,12 @@ const decodeSessionDuCookie = (reponse: Response, indiceHeader: number) => {
   }
 };
 
-export { enObjet, decodeSessionDuCookie };
+const encodeSession = (contenuSession: any) => {
+  const sessionEnBase64 = Buffer.from(
+    JSON.stringify(contenuSession),
+    'utf-8'
+  ).toString('base64');
+  return `session=${sessionEnBase64}`;
+};
+
+export { enObjet, decodeSessionDuCookie, encodeSession };

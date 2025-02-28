@@ -16,7 +16,8 @@ const ressourceApresAuthentificationOIDC = (
       let { accessToken } = await adaptateurOIDC.recupereJeton(requete);
       let informationsUtilisateur =
         await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
-      requete.session! = { ...requete.session!, ...informationsUtilisateur };
+
+      requete.session = { ...requete.session, ...informationsUtilisateur };
       requete.session.token = configurationServeur.adaptateurJWT.genereToken(
         informationsUtilisateur.email
       );
