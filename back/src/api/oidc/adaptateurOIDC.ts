@@ -8,23 +8,32 @@ export interface DemandeAutorisation {
   state: string;
 }
 
+type InformationsUtilisateur = {
+  prenom: string;
+  nom: string;
+  email: string;
+  siret: string | undefined;
+};
+
+type JetonsOIDC = {
+  idToken: string;
+  accessToken: string;
+};
+
 export interface AdaptateurOIDC {
   genereDemandeAutorisation: () => Promise<DemandeAutorisation>;
-  recupereJeton: (
-    requete: Request
-  ) => Promise<{ idToken: string; accessToken: string }>;
-  recupereInformationsUtilisateur: (accessToken: string) => Promise<{
-    prenom: string;
-    nom: string;
-    email: string;
-    siret: string;
-  }>;
+  recupereJeton: (requete: Request) => Promise<JetonsOIDC>;
+  recupereInformationsUtilisateur: (
+    accessToken: string
+  ) => Promise<InformationsUtilisateur>;
+  genereDemandeDeconnexion: (
+    idToken: string
+  ) => Promise<{ url: string; state: string }>;
 }
 
 const configurationOidc = adaptateurEnvironnement.oidc();
 
 async function recupereClient() {
-  console.log('url base : ', configurationOidc.urlBase());
   const agentConnect = await Issuer.discover(configurationOidc.urlBase());
   return new agentConnect.Client({
     client_id: configurationOidc.clientId(),
@@ -80,6 +89,10 @@ const recupereJeton = async (requete: Request) => {
     { nonce, state }
   );
 
+  if (!token.id_token || !token.access_token) {
+    throw new Error("Les tokens n'ont pas pu être récupérés");
+  }
+
   return {
     idToken: token.id_token,
     accessToken: token.access_token,
@@ -94,10 +107,10 @@ const recupereInformationsUtilisateur = async (accessToken: string) => {
     email,
     siret,
   } = await client.userinfo(accessToken);
-  return { prenom, nom, email, siret };
+  return { prenom, nom, email, siret } as InformationsUtilisateur;
 };
 
-const adaptateurOIDC = {
+const adaptateurOIDC: AdaptateurOIDC = {
   genereDemandeAutorisation,
   genereDemandeDeconnexion,
   recupereInformationsUtilisateur,
