@@ -8,6 +8,7 @@ import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
 import cookieSession from 'cookie-session';
 import cookieParser from 'cookie-parser';
+import { ressourceProfil } from './ressourceProfil';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -25,6 +26,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       sameSite: true,
       secret: process.env.SECRET_COOKIE,
       secure: process.env.NODE_ENV === 'production',
+      signed: process.env.NODE_ENV === 'production',
     })
   );
 
@@ -64,6 +66,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     '/oidc/apres-authentification',
     ressourceApresAuthentificationOIDC(configurationServeur)
   );
+
+  app.use('/profil', ressourceProfil(configurationServeur));
 
   app.use((_requete: Request, reponse: Response) => {
     reponse
