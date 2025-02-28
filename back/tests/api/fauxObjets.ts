@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -9,7 +10,14 @@ export const fauxFournisseurDeChemin = {
     join(process.cwd(), 'tests', 'ressources', 'factice.html'),
 };
 
-export const fauxAdaptateurOIDC = {
+export const fauxAdaptateurOIDC: AdaptateurOIDC = {
+  recupereInformationsUtilisateur: async (_accessToken: string) => ({
+    email: '',
+    nom: '',
+    prenom: '',
+    siret: '',
+  }),
+  recupereJeton: async (_requete) => ({ accessToken: '', idToken: '' }),
   genereDemandeAutorisation: async () => ({
     url: '',
     nonce: '',

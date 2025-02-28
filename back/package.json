@@ -4,13 +4,14 @@
   "description": "",
   "main": "serveur.ts",
   "scripts": {
-    "test": "node --import tsx --test './tests/**/*.spec.ts'"
+    "test": "node --import tsx --env-file=.env --test './tests/**/*.spec.ts'"
   },
   "engines": {
     "node": ">=23"
   },
   "private": true,
   "devDependencies": {
+    "@types/cookie-session": "^2.0.49",
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.4",
     "@types/supertest": "^6.0.2",
@@ -21,6 +22,7 @@
     "vitest": "^3.0.4"
   },
   "dependencies": {
+    "cookie-session": "^2.1.0",
     "express": "^4.21.2",
     "express-rate-limit": "^7.5.0",
     "express-validator": "^7.2.1",

@@ -6,6 +6,7 @@ import { ressourcePageProduit } from './ressourcePageProduit';
 import { fournisseurChemin } from './fournisseurChemin';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
+import cookieSession from 'cookie-session';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -16,6 +17,15 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     skip: (req) => req.url.startsWith('/assets'),
   });
   app.use(centParMinute);
+
+  app.use(
+    cookieSession({
+      name: 'session',
+      sameSite: true,
+      secret: process.env.SECRET_COOKIE,
+      secure: process.env.NODE_ENV === 'production',
+    })
+  );
 
   [
     '',

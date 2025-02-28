@@ -10,6 +10,15 @@ export interface DemandeAutorisation {
 
 export interface AdaptateurOIDC {
   genereDemandeAutorisation: () => Promise<DemandeAutorisation>;
+  recupereJeton: (
+    requete: Request
+  ) => Promise<{ idToken: string; accessToken: string }>;
+  recupereInformationsUtilisateur: (accessToken: string) => Promise<{
+    prenom: string;
+    nom: string;
+    email: string;
+    siret: string;
+  }>;
 }
 
 const configurationOidc = adaptateurEnvironnement.oidc();
