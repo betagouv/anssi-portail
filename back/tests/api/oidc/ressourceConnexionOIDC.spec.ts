@@ -6,24 +6,23 @@ import { ConfigurationServeur } from '../../../src/api/configurationServeur';
 import { fabriqueMiddleware } from '../../../src/api/middleware';
 import { creeServeur } from '../../../src/api/msc';
 import { enObjet } from '../cookie';
-import { fauxFournisseurDeChemin } from '../fauxObjets';
+import { fauxAdaptateurJWT, fauxAdaptateurOIDC, fauxFournisseurDeChemin } from '../fauxObjets';
 
 describe('La ressource connexion OIDC', () => {
   describe('quand on requete GET sur /oidc/connexion', () => {
     let serveur: Express;
     beforeEach(() => {
+      const adaptateurOIDC = fauxAdaptateurOIDC;
+      adaptateurOIDC.genereDemandeAutorisation = async () => ({
+        url: 'une-adresse-proconnect',
+        state: 'un faux state',
+        nonce: 'un faux nonce',
+      });
       const configurationServeur: ConfigurationServeur = {
         fournisseurChemin: fauxFournisseurDeChemin,
         middleware: fabriqueMiddleware(),
-        adaptateurOIDC: {
-          genereDemandeAutorisation: async () => {
-            return Promise.resolve({
-              url: 'une-adresse-proconnect',
-              state: 'un faux state',
-              nonce: 'un faux nonce',
-            });
-          },
-        },
+        adaptateurJWT: fauxAdaptateurJWT,
+        adaptateurOIDC,
       };
       serveur = creeServeur(configurationServeur);
     });

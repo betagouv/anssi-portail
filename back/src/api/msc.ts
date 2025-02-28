@@ -7,6 +7,7 @@ import { fournisseurChemin } from './fournisseurChemin';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
 import cookieSession from 'cookie-session';
+import cookieParser from 'cookie-parser';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -26,6 +27,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       secure: process.env.NODE_ENV === 'production',
     })
   );
+
+  app.use(cookieParser());
 
   [
     '',

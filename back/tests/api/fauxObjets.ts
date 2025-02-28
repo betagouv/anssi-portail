@@ -1,5 +1,6 @@
 import { join } from 'path';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
+import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -23,4 +24,9 @@ export const fauxAdaptateurOIDC: AdaptateurOIDC = {
     nonce: '',
     state: '',
   }),
+  genereDemandeDeconnexion: async (_) => ({ url: '', state: '' }),
+};
+
+export const fauxAdaptateurJWT: AdaptateurJWT = {
+  genereToken: (_: string) => '',
 };

@@ -5,7 +5,7 @@ import { join } from 'path';
 import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import assert from 'node:assert';
-import { fauxAdaptateurOIDC, fauxFournisseurDeChemin } from './fauxObjets';
+import { fauxAdaptateurJWT, fauxAdaptateurOIDC, fauxFournisseurDeChemin } from './fauxObjets';
 import { fabriqueMiddleware } from '../../src/api/middleware';
 
 describe('La ressource page produit', () => {
@@ -18,6 +18,7 @@ describe('La ressource page produit', () => {
       fournisseurChemin,
       middleware: fabriqueMiddleware(),
       adaptateurOIDC: fauxAdaptateurOIDC,
+      adaptateurJWT: fauxAdaptateurJWT,
     });
   });
 
