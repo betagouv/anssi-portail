@@ -96,5 +96,13 @@ describe('La ressource apres authentification OIDC', () => {
 
       assert.equal(reponse.status, 401);
     });
+
+    it("jette une erreur 401 si quoi que ce soit se passe mal", async () => {
+      adaptateurOIDC.recupereJeton = async () => {throw new Error("mauvais state");}
+
+      const reponse: any = await requeteGet();
+
+      assert.equal(reponse.status, 401);
+    })
   });
 });
