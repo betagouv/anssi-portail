@@ -11,17 +11,23 @@ const ressourceApresAuthentificationOIDC = (
       return;
     }
 
-    const { adaptateurOIDC } = configurationServeur;
-    let { accessToken } = await adaptateurOIDC.recupereJeton(requete);
-    let informationsUtilisateur =
-      await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
-    requete.session! = { ...requete.session!, ...informationsUtilisateur };
-    requete.session.token = configurationServeur.adaptateurJWT.genereToken(informationsUtilisateur.email)
-    reponse.sendFile(
-      configurationServeur.fournisseurChemin.cheminPageJekyll(
-        'apres-authentification'
-      )
-    );
+    try {
+      const { adaptateurOIDC } = configurationServeur;
+      let { accessToken } = await adaptateurOIDC.recupereJeton(requete);
+      let informationsUtilisateur =
+        await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
+      requete.session! = { ...requete.session!, ...informationsUtilisateur };
+      requete.session.token = configurationServeur.adaptateurJWT.genereToken(
+        informationsUtilisateur.email
+      );
+      reponse.sendFile(
+        configurationServeur.fournisseurChemin.cheminPageJekyll(
+          'apres-authentification'
+        )
+      );
+    } catch (e) {
+      reponse.sendStatus(401)
+    }
   });
   return routeur;
 };
