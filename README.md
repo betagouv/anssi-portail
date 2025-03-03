@@ -2,7 +2,6 @@
 
 ## Architecture
 Ce site est construit avec Jekyll.   
-Les fichiers générés sont servis par un `nginx`.
 
 ## Développement
 ### Démarrage
@@ -10,7 +9,7 @@ Les fichiers générés sont servis par un `nginx`.
 > Nous ne sommes pas développeurs Ruby et nous découvrons son écosystème.  
 > Il se peut que les instructions ci-dessous semblent mauvaises à une personne connaissant bien Ruby 🙏 
 
- - Installer les [pré-requis Jekyll](https://jekyllrb.com/docs/#prerequisites)
+ - Installer les [pré-requis Jekyll](https://jekyllrb.com/docs/#prerequisites) (suivre les pages détaillées de prérequis pour chaque OS)
 
  - Installer `bundler`
 ```shell
@@ -19,31 +18,20 @@ $ gem install bundler -V
 
  - Installer les dépendances de ce projet
 ```shell
+$ cd front
 $ bundler install
 ```
 
- - Exécuter le script `dev.sh` pour lancer la génération du Svelte & Jekyll… tout ça en mode `watch`.
+ - Créer un fichier de variables d'environnement pour le backend, en se basant sur le fichier `back/.env.template`
+
+ - Revenir à la racine, installer les dépendances Node et lancer le projet en mode "dev"
 ```shell
-$ ./dev.sh
-
-# vite v5.4.11 building for production...
-# watching for file changes...
-# build started...
-# transforming (1) index.html      
-#     Regenerating: 1 file(s) changed at 2024-11-15 15:41:53
-#                   ...done in 0.026235 seconds.
-# Generating... 
-#                     done in 0.072 seconds.
-#  Auto-regeneration: enabled for '<path>/anssi-portail'
-# LiveReload address: http://127.0.0.1:35729
-#     Server address: http://127.0.0.1:4000
-#   Server running... press ctrl-c to stop.
-#         LiveReload: Browser connected
-
+$ cd ..
+$ npm run installe-tout
+$ npm run dev
 ```
 
- - Arrivé ici, le site doit être consultable sur http://127.0.0.1:4000
- - Avec le paramètre `--livereload`, chaque changement au code source doit être visible instantanément dans le navigateur
+ - Arrivé ici, le site doit être consultable sur http://127.0.0.1:3000
 
 ## Le build et la PROD
 On utilise un unique `Dockerfile` pour le build via CI/CD et l'hébergement sur notre PaaS.  
