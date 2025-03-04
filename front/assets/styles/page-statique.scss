@@ -38,6 +38,16 @@
       }
     }
 
+    h2 {
+      font-size: 1.75rem;
+      line-height: 2.25rem;
+      margin: 32px 0 16px;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+
     @include a-partir-de(lg) {
       --largeur-max-contenu: 996px;
     }
