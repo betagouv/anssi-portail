@@ -5,6 +5,7 @@ import { ConfigurationServeur } from './configurationServeur';
 import { ressourcePageProduit } from './ressourcePageProduit';
 import { fournisseurChemin } from './fournisseurChemin';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
+import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
 import cookieSession from 'cookie-session';
 import cookieParser from 'cookie-parser';
@@ -66,6 +67,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     '/oidc/apres-authentification',
     ressourceApresAuthentificationOIDC(configurationServeur)
   );
+
+  app.use('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
+
 
   app.use('/profil', ressourceProfil(configurationServeur));
 
