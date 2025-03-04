@@ -3,7 +3,7 @@
 {% include head.html extra-css=layout.style extra-js=layout.script %}
 <body>
 
-{% if site.env.MATOMO_ID != undefined %}
+{% if site.env.MATOMO_ID != '' and site.env.MATOMO_ID != undefined %}
     {% include script-matomo.html %}
 {% endif %}
 
