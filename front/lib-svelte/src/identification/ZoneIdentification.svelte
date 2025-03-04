@@ -22,10 +22,8 @@
   });
 </script>
 
-<span>
-  {#if profil === undefined}
-    <a href="/connexion">Se connecter</a>
-  {:else}
-    {profil.prenom} {profil.nom}
-  {/if}
-</span>
+{#if profil === undefined}
+  <a href="/connexion">Se connecter</a>
+{:else}
+  <span class="libelle-profil">{profil.prenom} {profil.nom}</span>
+{/if}

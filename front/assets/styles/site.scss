@@ -148,6 +148,34 @@ header {
     }
   }
 
+  #zone-identification {
+    display: none;
+    @include a-partir-de(lg) {
+      display: block;
+    }
+    margin-left: auto;
+    a, .libelle-profil{
+      color: #000091;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 4px 0;
+      &:before {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+      }
+    }
+
+    a:before {
+      content: url("/assets/images/icone-profil-non-connecte.svg");
+    }
+
+    .libelle-profil:before {
+      content: url("/assets/images/icone-profil-connecte.svg");
+    }
+  }
+
   .ouverture-menu {
     background: transparent;
     cursor: pointer;
