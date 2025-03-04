@@ -35,7 +35,9 @@ describe('La ressource apres authentification OIDC', () => {
     });
 
     const requeteGet = () =>
-      request(serveur).get('/oidc/apres-authentification').set("Cookie", ["AgentConnectInfo={}"]);
+      request(serveur)
+        .get('/oidc/apres-authentification')
+        .set('Cookie', ['AgentConnectInfo={}']);
 
     it('reçoit 200', async () => {
       const reponse = await requeteGet();
@@ -82,6 +84,12 @@ describe('La ressource apres authentification OIDC', () => {
     });
 
     it('ajoute un token JWT à la session', async () => {
+      adaptateurOIDC.recupereInformationsUtilisateur = async (_) => ({
+        prenom: 'Jeanne',
+        nom: 'Dupont',
+        email: 'jeanne.dupont',
+        siret: '1234',
+      });
       adaptateurJWT.genereToken = (email: string) => `tokenJWT-${email}`;
 
       const reponse: any = await requeteGet();
@@ -91,18 +99,19 @@ describe('La ressource apres authentification OIDC', () => {
     });
 
     it("jette une erreur 401 si le cookie AgentConnectInfo n'est pas défini", async () => {
-
-      const reponse: any = await requeteGet().set("Cookie", []);
+      const reponse: any = await requeteGet().set('Cookie', []);
 
       assert.equal(reponse.status, 401);
     });
 
-    it("jette une erreur 401 si quoi que ce soit se passe mal", async () => {
-      adaptateurOIDC.recupereJeton = async () => {throw new Error("mauvais state");}
+    it('jette une erreur 401 si quoi que ce soit se passe mal', async () => {
+      adaptateurOIDC.recupereJeton = async () => {
+        throw new Error('mauvais state');
+      };
 
       const reponse: any = await requeteGet();
 
       assert.equal(reponse.status, 401);
-    })
+    });
   });
 });
