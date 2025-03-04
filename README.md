@@ -36,3 +36,11 @@ $ npm run dev
 ## Le build et la PROD
 On utilise un unique `Dockerfile` pour le build via CI/CD et l'hébergement sur notre PaaS.  
 Le `Dockerfile` unique est la solution qui semble la plus simple.
+Certaines variables d'environnement sont nécessaires au moment de la construction du site statique (avec Jekyll).
+Pour ce faire, ces variables sont passées via les `--build-arg` par CleverCloud. On peut donc les utiliser dans notre Dockerfile.
+Exemple : 
+```Dockerfile
+ARG MA_VARIABLE
+RUN echo "MA_VARIABLE=${MA_VARIABLE}" >> .env
+```
+Ces variables sont passées à Jekyll via le plugin [jekyll-dotenv](https://www.rubydoc.info/gems/jekyll-dotenv/0.2.0)
