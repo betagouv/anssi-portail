@@ -4,7 +4,7 @@
   "description": "",
   "main": "serveur.ts",
   "scripts": {
-    "test": "node --import tsx --env-file=.env --test './tests/**/*.spec.ts'"
+    "test": "node --import tsx --test './tests/**/*.spec.ts'"
   },
   "engines": {
     "node": ">=23"
