@@ -44,6 +44,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'niveaux-maturite',
     'connexion',
     'apres-authentification',
+    'aPropos',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
