@@ -45,6 +45,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'connexion',
     'apres-authentification',
     'aPropos',
+    'mentionsLegales',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
