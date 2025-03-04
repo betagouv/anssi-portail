@@ -1,14 +1,15 @@
+import cookieParser from 'cookie-parser';
+import cookieSession from 'cookie-session';
 import express, { Request, Response } from 'express';
-import { ressourcePagesJekyll } from './ressourcePagesJekyll';
 import rateLimit from 'express-rate-limit';
 import { ConfigurationServeur } from './configurationServeur';
-import { ressourcePageProduit } from './ressourcePageProduit';
 import { fournisseurChemin } from './fournisseurChemin';
+import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
+import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionOIDC';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
 import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
-import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
-import cookieSession from 'cookie-session';
-import cookieParser from 'cookie-parser';
+import { ressourcePageProduit } from './ressourcePageProduit';
+import { ressourcePagesJekyll } from './ressourcePagesJekyll';
 import { ressourceProfil } from './ressourceProfil';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
@@ -70,6 +71,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
 
+  app.use(
+    '/oidc/apres-deconnexion',
+    ressourceApresDeconnexionOIDC(configurationServeur)
+  );
 
   app.use('/profil', ressourceProfil(configurationServeur));
 
