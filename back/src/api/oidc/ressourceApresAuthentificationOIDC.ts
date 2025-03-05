@@ -18,11 +18,16 @@ const ressourceApresAuthentificationOIDC = (
       );
       let informationsUtilisateur =
         await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
+      const { email } = informationsUtilisateur;
+
+      if (!configurationServeur.entrepotUtilisateur.parEmail(email)) {
+        reponse.redirect('/creation-compte');
+        return;
+      }
 
       requete.session = { ...requete.session, ...informationsUtilisateur };
-      requete.session.token = configurationServeur.adaptateurJWT.genereToken(
-        informationsUtilisateur.email
-      );
+      requete.session.token =
+        configurationServeur.adaptateurJWT.genereToken(email);
       requete.session.AgentConnectIdToken = idToken;
       reponse.sendFile(
         configurationServeur.fournisseurChemin.cheminPageJekyll(
