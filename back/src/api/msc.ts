@@ -1,5 +1,6 @@
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
+import helmet from 'helmet';
 import express, { Request, Response } from 'express';
 import rateLimit from 'express-rate-limit';
 import { ConfigurationServeur } from './configurationServeur';
@@ -14,6 +15,8 @@ import { ressourceProfil } from './ressourceProfil';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
+
+  app.use(helmet());
 
   const centParMinute = rateLimit({
     windowMs: 60 * 1000,
