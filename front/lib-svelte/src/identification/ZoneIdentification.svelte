@@ -23,7 +23,12 @@
 </script>
 
 {#if profil === undefined}
-  <a href="/connexion">Se connecter</a>
+  <div class="profil-deconnecte">
+    <a href="/connexion">Se connecter</a>
+  </div>
 {:else}
-  <span class="libelle-profil">{profil.prenom} {profil.nom}</span>
+  <div class="profil-connecte">
+    <span class="libelle-profil">{profil.prenom} {profil.nom}</span>
+    <a href="/oidc/deconnexion">Se déconnecter</a>
+  </div>
 {/if}
