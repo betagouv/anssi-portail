@@ -67,7 +67,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   ['assets', 'scripts', 'lib-svelte', 'favicon.ico'].forEach((ressource) => {
     app.use(
       `/${ressource}`,
-      express.static(fournisseurChemin.ressourceDeBase(ressource))
+      express.static(fournisseurChemin.ressourceDeBase(ressource), {
+        setHeaders: (reponse: Response) =>
+          reponse.setHeader('cache-control', process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'),
+      })
     );
   });
 
