@@ -58,6 +58,12 @@
       }
     }
 
+    h3 {
+      font-size: 1.125rem;
+      line-height: 1.5rem;
+      margin: 0 0 8px;
+    }
+
     table {
       @include a-partir-de(sm) {
         border-collapse: collapse;
