@@ -13,6 +13,7 @@ export const ressourceApresDeconnexionOIDC = (
       return;
     }
     reponse.clearCookie('AgentConnectInfo');
+    reponse.clearCookie('session');
     reponse.redirect('/');
   });
   return routes;

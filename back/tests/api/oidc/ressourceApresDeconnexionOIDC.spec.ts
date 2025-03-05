@@ -10,7 +10,7 @@ import {
   fauxAdaptateurOIDC,
   fauxFournisseurDeChemin,
 } from '../fauxObjets';
-import { enObjet } from '../cookie';
+import { encodeSession, enObjet } from '../cookie';
 
 describe('La ressource apres deconnexion OIDC', () => {
   describe('quand on requete GET sur /oidc/apres-deconnexion', () => {
@@ -58,14 +58,33 @@ describe('La ressource apres deconnexion OIDC', () => {
 
       const reponse = await request(serveur)
         .get('/oidc/apres-deconnexion?state=le-bon-state')
-        .set('Cookie', [`AgentConnectInfo=${cookie}`])
-        .redirects(0);
+        .set('Cookie', [`AgentConnectInfo=${cookie}`]);
 
       const headerCookie = reponse.headers['set-cookie'];
       assert.notEqual(headerCookie, undefined);
       const cookieSession = enObjet(headerCookie[0]);
 
       assert.equal(cookieSession.AgentConnectInfo, '');
+    });
+
+    it('supprime le cookie contenant le session', async () => {
+      let cookieAgentConnect = encodeURIComponent(
+        `j:${JSON.stringify({ state: 'le-bon-state' })}`
+      );
+      let cookieSession = encodeSession({ token: 'token-session' });
+
+      const reponse = await request(serveur)
+        .get('/oidc/apres-deconnexion?state=le-bon-state')
+        .set('Cookie', [
+          `AgentConnectInfo=${cookieAgentConnect}`,
+          cookieSession,
+        ]);
+
+      const headerCookie = reponse.headers['set-cookie'];
+
+      const cookieSessionDecode = enObjet(headerCookie[1]);
+
+      assert.equal(cookieSessionDecode.session, '');
     });
   });
 });
