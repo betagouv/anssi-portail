@@ -13,7 +13,9 @@ const ressourceApresAuthentificationOIDC = (
 
     try {
       const { adaptateurOIDC } = configurationServeur;
-      let { accessToken } = await adaptateurOIDC.recupereJeton(requete);
+      let { accessToken, idToken } = await adaptateurOIDC.recupereJeton(
+        requete
+      );
       let informationsUtilisateur =
         await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
 
@@ -21,13 +23,14 @@ const ressourceApresAuthentificationOIDC = (
       requete.session.token = configurationServeur.adaptateurJWT.genereToken(
         informationsUtilisateur.email
       );
+      requete.session.AgentConnectIdToken = idToken;
       reponse.sendFile(
         configurationServeur.fournisseurChemin.cheminPageJekyll(
           'apres-authentification'
         )
       );
     } catch (e) {
-      reponse.sendStatus(401)
+      reponse.sendStatus(401);
     }
   });
   return routeur;

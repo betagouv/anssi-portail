@@ -98,6 +98,17 @@ describe('La ressource apres authentification OIDC', () => {
       assert.equal(session.token, 'tokenJWT-jeanne.dupont');
     });
 
+    it('ajoute un tokenId AgentConnect à la session', async () => {
+      adaptateurOIDC.recupereJeton = async () => {
+        return { idToken: 'tokenAgentConnect', accessToken: 'y' };
+      };
+
+      const reponse: any = await requeteGet();
+
+      const session = decodeSessionDuCookie(reponse, 0);
+      assert.equal(session.AgentConnectIdToken, 'tokenAgentConnect');
+    });
+
     it("jette une erreur 401 si le cookie AgentConnectInfo n'est pas défini", async () => {
       const reponse: any = await requeteGet().set('Cookie', []);
 
