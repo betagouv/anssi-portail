@@ -175,7 +175,7 @@ header {
       color: #000091;
     }
 
-    .profil-deconnecte:before {
+    .profil-deconnecte > a:before {
       content: url('/assets/images/icone-profil-non-connecte.svg');
     }
 
