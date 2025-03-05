@@ -17,6 +17,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
 
   app.use(helmet());
+  app.use(configurationServeur.middleware.interdisLaMiseEnCache);
 
   const centParMinute = rateLimit({
     windowMs: 60 * 1000,
