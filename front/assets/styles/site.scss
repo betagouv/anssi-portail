@@ -80,6 +80,13 @@ a {
 header {
   padding-left: var(--gouttiere);
   padding-right: var(--gouttiere);
+  border-bottom: 1px solid #dddddd;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
+
+  @include a-partir-de(lg) {
+    box-shadow: none;
+    border-bottom: none;
+  }
 
   a {
     border: none;
