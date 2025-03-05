@@ -8,7 +8,11 @@ creeServeur({
   fournisseurChemin,
   middleware: fabriqueMiddleware(),
   adaptateurOIDC,
-  adaptateurJWT
+  adaptateurJWT,
+  entrepotUtilisateur: {
+    ajoute: () => {},
+    parEmail: () => undefined,
+  },
 }).listen(3000, () => {
   console.log('Le serveur écoute sur le port 3000');
 });

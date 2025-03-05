@@ -14,6 +14,7 @@ import { join } from 'node:path';
 import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC';
 import { decodeSessionDuCookie } from '../cookie';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
+import { EntrepotUtilisateurMemoire } from '../../persistance/EntrepotUtilisateurMemoire';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {
@@ -21,15 +22,18 @@ describe('La ressource apres authentification OIDC', () => {
     let fournisseurChemin = fauxFournisseurDeChemin;
     let adaptateurOIDC: AdaptateurOIDC;
     let adaptateurJWT: AdaptateurJWT;
+    let entrepotUtilisateur: EntrepotUtilisateurMemoire;
 
     beforeEach(() => {
-      adaptateurOIDC = fauxAdaptateurOIDC;
+      adaptateurOIDC = { ...fauxAdaptateurOIDC };
       adaptateurJWT = fauxAdaptateurJWT;
+      entrepotUtilisateur = new EntrepotUtilisateurMemoire();
       const configurationServeur: ConfigurationServeur = {
         fournisseurChemin,
         middleware: fabriqueMiddleware(),
         adaptateurOIDC,
         adaptateurJWT,
+        entrepotUtilisateur,
       };
       serveur = creeServeur(configurationServeur);
     });
@@ -39,74 +43,84 @@ describe('La ressource apres authentification OIDC', () => {
         .get('/oidc/apres-authentification')
         .set('Cookie', ['AgentConnectInfo={}']);
 
-    it('reçoit 200', async () => {
-      const reponse = await requeteGet();
+    describe("si l'utilisateur est connu", () => {
+      beforeEach(() => {
+        const jeanneDupont = { email: 'jeanne.dupont' };
+        entrepotUtilisateur.ajoute(jeanneDupont);
 
-      assert.equal(reponse.status, 200);
-    });
-
-    it('sert la page apres-authentification', async () => {
-      let nomPageDemande;
-      fournisseurChemin.cheminPageJekyll = (nomPage) => {
-        nomPageDemande = nomPage;
-        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
-      };
-
-      await requeteGet();
-
-      assert.equal(nomPageDemande, 'apres-authentification');
-    });
-
-    it("ajoute les informations de l'utilisateur à la session", async () => {
-      adaptateurOIDC.recupereJeton = async () => {
-        return { idToken: 'xx', accessToken: 'y' };
-      };
-      adaptateurOIDC.recupereInformationsUtilisateur = async (accessToken) => {
-        if (accessToken === 'y') {
-          return {
-            prenom: 'Jeanne',
-            nom: 'Dupont',
-            email: 'jeanne.dupont',
-            siret: '1234',
-          };
-        }
-        throw new Error('Aurait du être appelé avec le bon access token');
-      };
-
-      const reponse = await requeteGet();
-
-      const session = decodeSessionDuCookie(reponse, 0);
-      assert.notEqual(session, undefined);
-      assert.equal(session.prenom, 'Jeanne');
-      assert.equal(session.nom, 'Dupont');
-      assert.equal(session.email, 'jeanne.dupont');
-      assert.equal(session.siret, '1234');
-    });
-
-    it('ajoute un token JWT à la session', async () => {
-      adaptateurOIDC.recupereInformationsUtilisateur = async (_) => ({
-        prenom: 'Jeanne',
-        nom: 'Dupont',
-        email: 'jeanne.dupont',
-        siret: '1234',
+        adaptateurOIDC.recupereInformationsUtilisateur = async (_) => ({
+          prenom: 'Jeanne',
+          nom: 'Dupont',
+          email: 'jeanne.dupont',
+          siret: '1234',
+        });
       });
-      adaptateurJWT.genereToken = (email: string) => `tokenJWT-${email}`;
 
-      const reponse: any = await requeteGet();
+      it('reçoit 200', async () => {
+        const reponse = await requeteGet();
 
-      const session = decodeSessionDuCookie(reponse, 0);
-      assert.equal(session.token, 'tokenJWT-jeanne.dupont');
-    });
+        assert.equal(reponse.status, 200);
+      });
 
-    it('ajoute un tokenId AgentConnect à la session', async () => {
-      adaptateurOIDC.recupereJeton = async () => {
-        return { idToken: 'tokenAgentConnect', accessToken: 'y' };
-      };
+      it('sert la page apres-authentification', async () => {
+        let nomPageDemande;
+        fournisseurChemin.cheminPageJekyll = (nomPage) => {
+          nomPageDemande = nomPage;
+          return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+        };
 
-      const reponse: any = await requeteGet();
+        await requeteGet();
 
-      const session = decodeSessionDuCookie(reponse, 0);
-      assert.equal(session.AgentConnectIdToken, 'tokenAgentConnect');
+        assert.equal(nomPageDemande, 'apres-authentification');
+      });
+
+      it("ajoute les informations de l'utilisateur à la session", async () => {
+        adaptateurOIDC.recupereJeton = async () => {
+          return { idToken: 'xx', accessToken: 'y' };
+        };
+        adaptateurOIDC.recupereInformationsUtilisateur = async (
+          accessToken
+        ) => {
+          if (accessToken === 'y') {
+            return {
+              prenom: 'Jeanne',
+              nom: 'Dupont',
+              email: 'jeanne.dupont',
+              siret: '1234',
+            };
+          }
+          throw new Error('Aurait du être appelé avec le bon access token');
+        };
+
+        const reponse = await requeteGet();
+
+        const session = decodeSessionDuCookie(reponse, 0);
+        assert.notEqual(session, undefined);
+        assert.equal(session.prenom, 'Jeanne');
+        assert.equal(session.nom, 'Dupont');
+        assert.equal(session.email, 'jeanne.dupont');
+        assert.equal(session.siret, '1234');
+      });
+
+      it('ajoute un token JWT à la session', async () => {
+        adaptateurJWT.genereToken = (email: string) => `tokenJWT-${email}`;
+
+        const reponse: any = await requeteGet();
+
+        const session = decodeSessionDuCookie(reponse, 0);
+        assert.equal(session.token, 'tokenJWT-jeanne.dupont');
+      });
+
+      it('ajoute un tokenId AgentConnect à la session', async () => {
+        adaptateurOIDC.recupereJeton = async () => {
+          return { idToken: 'tokenAgentConnect', accessToken: 'y' };
+        };
+
+        const reponse: any = await requeteGet();
+
+        const session = decodeSessionDuCookie(reponse, 0);
+        assert.equal(session.AgentConnectIdToken, 'tokenAgentConnect');
+      });
     });
 
     it("jette une erreur 401 si le cookie AgentConnectInfo n'est pas défini", async () => {
@@ -123,6 +137,15 @@ describe('La ressource apres authentification OIDC', () => {
       const reponse: any = await requeteGet();
 
       assert.equal(reponse.status, 401);
+    });
+
+    describe("si l'utilisateur est inconnu", () => {
+      it("redirige vers la page d'inscription", async () => {
+        const reponse = await requeteGet();
+
+        assert.equal(reponse.status, 302);
+        assert.equal(reponse.headers.location, '/creation-compte');
+      });
     });
   });
 });
