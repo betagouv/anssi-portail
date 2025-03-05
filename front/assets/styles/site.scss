@@ -1,7 +1,7 @@
 ---
 ---
 
-@import "responsive";
+@import 'responsive';
 
 :root {
   --noir: #0d0c21;
@@ -47,12 +47,12 @@ a {
   width: fit-content;
   text-decoration: none;
 
-  &[target="_blank"]:after {
-    content: "";
+  &[target='_blank']:after {
+    content: '';
     display: block;
     width: 16px;
     height: 16px;
-    background: url("/assets/images/icone-lien-externe.svg") no-repeat;
+    background: url('/assets/images/icone-lien-externe.svg') no-repeat;
   }
 
   &.lien {
@@ -154,12 +154,14 @@ header {
       display: block;
     }
     margin-left: auto;
-    a, .libelle-profil{
-      color: #000091;
+    .profil-connecte,
+    .profil-deconnecte,
+    .profil-connecte > a,
+    .libelle-profil {
       display: flex;
       gap: 8px;
       align-items: center;
-      padding: 4px 0;
+      padding: 4px 8px;
       &:before {
         width: 16px;
         height: 16px;
@@ -167,12 +169,22 @@ header {
       }
     }
 
-    a:before {
-      content: url("/assets/images/icone-profil-non-connecte.svg");
+    .profil-connecte > a,
+    .profil-deconnecte > a,
+    .libelle-profil {
+      color: #000091;
+    }
+
+    .profil-deconnecte:before {
+      content: url('/assets/images/icone-profil-non-connecte.svg');
+    }
+
+    .profil-connecte > a:before {
+      content: url('/assets/images/icone-profil-deconnecte.svg');
     }
 
     .libelle-profil:before {
-      content: url("/assets/images/icone-profil-connecte.svg");
+      content: url('/assets/images/icone-profil-connecte.svg');
     }
   }
 
@@ -218,11 +230,11 @@ header {
       color: #000091;
 
       &:after {
-        content: "";
+        content: '';
         display: block;
         width: 16px;
         height: 16px;
-        background: url("/assets/images/icone-croix.svg") no-repeat;
+        background: url('/assets/images/icone-croix.svg') no-repeat;
       }
     }
 
@@ -240,7 +252,7 @@ header {
           position: relative;
 
           &:before {
-            content: "";
+            content: '';
             display: block;
             width: 2px;
             height: 24px;
@@ -266,7 +278,7 @@ header {
           justify-content: space-between;
 
           &::marker {
-            content: "";
+            content: '';
           }
 
           &::-webkit-details-marker {
@@ -274,11 +286,11 @@ header {
           }
 
           &:after {
-            content: "";
+            content: '';
             display: block;
             width: 16px;
             height: 16px;
-            background: url("/assets/images/icone-chevron-bas.svg");
+            background: url('/assets/images/icone-chevron-bas.svg');
           }
         }
 
@@ -363,7 +375,7 @@ header {
             border-bottom: 1px solid #dddddd;
 
             &:before {
-              content: "";
+              content: '';
               display: block;
               width: 2px;
               height: 24px;
@@ -386,7 +398,7 @@ header {
         cursor: pointer;
 
         &::marker {
-          content: "";
+          content: '';
         }
 
         &::-webkit-details-marker {
@@ -394,11 +406,11 @@ header {
         }
 
         &:after {
-          content: "";
+          content: '';
           display: block;
           width: 16px;
           height: 16px;
-          background: url("/assets/images/icone-chevron-bas.svg");
+          background: url('/assets/images/icone-chevron-bas.svg');
         }
       }
     }
@@ -438,8 +450,8 @@ header {
 }
 
 .badge.service:before {
-  content: "";
-  background-image: url("/assets/images/icone-service.svg");
+  content: '';
+  background-image: url('/assets/images/icone-service.svg');
   width: 12px;
   height: 12px;
 }
@@ -500,8 +512,8 @@ header {
       border-radius: 8px;
 
       &:before {
-        content: "";
-        background-image: url("/assets/images/icone-ressource.svg");
+        content: '';
+        background-image: url('/assets/images/icone-ressource.svg');
         width: 12px;
         height: 12px;
       }
@@ -572,7 +584,7 @@ header {
     color: white;
 
     &:before {
-      background-image: url("/assets/images/icone-ressource.svg");
+      background-image: url('/assets/images/icone-ressource.svg');
     }
   }
 }
@@ -588,7 +600,7 @@ header {
       color: var(--noir);
 
       &:before {
-        background-image: url("/assets/images/icone-service.svg");
+        background-image: url('/assets/images/icone-service.svg');
       }
     }
   }
@@ -720,7 +732,7 @@ footer {
 
     summary {
       &::marker {
-        content: "";
+        content: '';
       }
 
       &::-webkit-details-marker {
@@ -746,7 +758,7 @@ footer {
 }
 
 .chapeau.fond-sombre {
-  background: #0d0c21 url("/assets/images/motif-fond-service-opacite-16.png");
+  background: #0d0c21 url('/assets/images/motif-fond-service-opacite-16.png');
   padding: 24px var(--gouttiere) 40px;
   color: white;
 
@@ -810,7 +822,7 @@ footer {
     }
 
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       top: 6px;
       left: 0;
@@ -850,7 +862,7 @@ footer {
   }
 
   &.fond-sombre {
-    background: #0d0c21 url("/assets/images/motif-fond-service-opacite-16.png");
+    background: #0d0c21 url('/assets/images/motif-fond-service-opacite-16.png');
 
     h1 {
       color: white;
@@ -922,8 +934,8 @@ footer {
         text-decoration: none;
 
         &::after {
-          content: "";
-          background: url("/assets/images/icone-fleche-droite.svg");
+          content: '';
+          background: url('/assets/images/icone-fleche-droite.svg');
           width: 16px;
           height: 16px;
         }
@@ -940,28 +952,28 @@ footer {
       grid-template-columns: auto;
       grid-template-rows: auto;
       grid-template-areas:
-        "illustration"
-        "titre"
-        "contenu"
-        "bouton";
+        'illustration'
+        'titre'
+        'contenu'
+        'bouton';
 
       @include a-partir-de(md) {
         padding: 48px 56px;
         grid-template-columns: 1fr auto;
         grid-template-areas:
-          "titre titre"
-          "contenu illustration"
-          "bouton bouton";
+          'titre titre'
+          'contenu illustration'
+          'bouton bouton';
       }
 
       @include a-partir-de(lg) {
         padding: 40px 44px 40px 40px;
         grid-template-columns: auto 1fr;
         grid-template-areas:
-          "illustration titre"
-          "illustration contenu"
-          "illustration bouton"
-          "illustration .";
+          'illustration titre'
+          'illustration contenu'
+          'illustration bouton'
+          'illustration .';
         gap: 16px 64px;
       }
 
