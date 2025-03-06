@@ -8,14 +8,15 @@ import {cableTousLesAbonnes} from "./bus/cablage";
 import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
 
-const busEvenements = new BusEvenements();
-cableTousLesAbonnes(busEvenements);
+const busEvenement = new BusEvenements();
+cableTousLesAbonnes(busEvenement);
 
 creeServeur({
   fournisseurChemin,
   middleware: fabriqueMiddleware(),
   adaptateurOIDC,
   adaptateurJWT,
+  busEvenement,
   entrepotUtilisateur: new EntrepotUtilisateurPostgres(),
   trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
   maxRequetesParMinutes: adaptateurEnvironnement.serveur().maxRequetesParMinute(),
