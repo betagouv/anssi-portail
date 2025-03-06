@@ -6,14 +6,15 @@ import { adaptateurJWT } from './api/adaptateurJWT';
 import {BusEvenements} from "./bus/busEvenements";
 import {cableTousLesAbonnes} from "./bus/cablage";
 
-const busEvenements = new BusEvenements();
-cableTousLesAbonnes(busEvenements);
+const busEvenement = new BusEvenements();
+cableTousLesAbonnes(busEvenement);
 
 creeServeur({
   fournisseurChemin,
   middleware: fabriqueMiddleware(),
   adaptateurOIDC,
-  adaptateurJWT
+  adaptateurJWT,
+  busEvenement
 }).listen(3000, () => {
   console.log('Le serveur écoute sur le port 3000');
 });
