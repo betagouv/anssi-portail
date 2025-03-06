@@ -6,6 +6,7 @@
   import ResultatsTestMaturite from "./ResultatsTestMaturite.svelte";
   import SelectSecteurActivite from "./SelectSecteurActivite.svelte";
   import SelectRegion from "./SelectRegion.svelte";
+  import SelectTailleOrganisation from "./SelectTailleOrganisation.svelte";
 
   let afficheResultats = false;
   let introFaite = false;
@@ -101,14 +102,10 @@
                 <SelectRegion />
               </label>
 
-              <fieldset class="choix-taille">
-                <legend
-                  >Quelle est la taille de votre organisation&nbsp;?
-                </legend>
-                <label><input type="radio" name="taille" />1 à 49</label>
-                <label><input type="radio" name="taille" />50 à 249</label>
-                <label><input type="radio" name="taille" />≥ 250</label>
-              </fieldset>
+              <label>
+                Quelle est la taille de votre organisation&nbsp;?
+                <SelectTailleOrganisation />
+              </label>
 
               <div class="commandes">
                 <a href="/" class="lien">Retour à l'accueil</a>
