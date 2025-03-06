@@ -1,6 +1,8 @@
 import { join } from 'path';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
+import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
+import { Utilisateur } from '../../src/metier/utilisateur';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>

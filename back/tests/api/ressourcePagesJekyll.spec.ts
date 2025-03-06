@@ -5,8 +5,13 @@ import { creeServeur } from '../../src/api/msc';
 import assert from 'node:assert';
 import { join } from 'path';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin';
-import { fauxAdaptateurJWT, fauxAdaptateurOIDC, fauxFournisseurDeChemin } from './fauxObjets';
+import {
+  fauxAdaptateurJWT,
+  fauxAdaptateurOIDC,
+  fauxFournisseurDeChemin,
+} from './fauxObjets';
 import { fabriqueMiddleware } from '../../src/api/middleware';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource pages jekyll', () => {
   let serveur: Express;
@@ -19,6 +24,7 @@ describe('La ressource pages jekyll', () => {
       middleware: fabriqueMiddleware(),
       adaptateurOIDC: fauxAdaptateurOIDC,
       adaptateurJWT: fauxAdaptateurJWT,
+      entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
     });
   });
 

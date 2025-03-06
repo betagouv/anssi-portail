@@ -6,7 +6,12 @@ import { ConfigurationServeur } from '../../../src/api/configurationServeur';
 import { fabriqueMiddleware } from '../../../src/api/middleware';
 import { creeServeur } from '../../../src/api/msc';
 import { enObjet } from '../cookie';
-import { fauxAdaptateurJWT, fauxAdaptateurOIDC, fauxFournisseurDeChemin } from '../fauxObjets';
+import {
+  fauxAdaptateurJWT,
+  fauxAdaptateurOIDC,
+  fauxFournisseurDeChemin,
+} from '../fauxObjets';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource connexion OIDC', () => {
   describe('quand on requete GET sur /oidc/connexion', () => {
@@ -23,6 +28,7 @@ describe('La ressource connexion OIDC', () => {
         middleware: fabriqueMiddleware(),
         adaptateurJWT: fauxAdaptateurJWT,
         adaptateurOIDC,
+        entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
       };
       serveur = creeServeur(configurationServeur);
     });

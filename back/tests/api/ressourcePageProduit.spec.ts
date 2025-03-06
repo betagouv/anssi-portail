@@ -5,8 +5,13 @@ import { join } from 'path';
 import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import assert from 'node:assert';
-import { fauxAdaptateurJWT, fauxAdaptateurOIDC, fauxFournisseurDeChemin } from './fauxObjets';
+import {
+  fauxAdaptateurJWT,
+  fauxAdaptateurOIDC,
+  fauxFournisseurDeChemin,
+} from './fauxObjets';
 import { fabriqueMiddleware } from '../../src/api/middleware';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource page produit', () => {
   let serveur: Express;
@@ -19,6 +24,7 @@ describe('La ressource page produit', () => {
       middleware: fabriqueMiddleware(),
       adaptateurOIDC: fauxAdaptateurOIDC,
       adaptateurJWT: fauxAdaptateurJWT,
+      entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
     });
   });
 

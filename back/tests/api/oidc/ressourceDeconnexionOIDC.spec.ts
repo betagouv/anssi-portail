@@ -6,7 +6,12 @@ import { ConfigurationServeur } from '../../../src/api/configurationServeur';
 import { fabriqueMiddleware } from '../../../src/api/middleware';
 import { creeServeur } from '../../../src/api/msc';
 import { encodeSession, enObjet } from '../cookie';
-import { fauxAdaptateurJWT, fauxAdaptateurOIDC, fauxFournisseurDeChemin } from '../fauxObjets';
+import {
+  fauxAdaptateurJWT,
+  fauxAdaptateurOIDC,
+  fauxFournisseurDeChemin,
+} from '../fauxObjets';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource deconnexion OIDC', () => {
   describe('quand on requete GET sur /oidc/deconnexion', () => {
@@ -15,43 +20,48 @@ describe('La ressource deconnexion OIDC', () => {
     beforeEach(() => {
       const adaptateurOIDC = fauxAdaptateurOIDC;
       adaptateurOIDC.genereDemandeDeconnexion = async (idToken: string) => {
-        idTokenRecu = idToken
-        return ({
+        idTokenRecu = idToken;
+        return {
           url: 'une-adresse-proconnect',
           state: 'un faux state',
-        });
+        };
       };
       const configurationServeur: ConfigurationServeur = {
         fournisseurChemin: fauxFournisseurDeChemin,
         middleware: fabriqueMiddleware(),
         adaptateurJWT: fauxAdaptateurJWT,
         adaptateurOIDC,
+        entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
       };
       serveur = creeServeur(configurationServeur);
     });
 
-    it('redirige vers url de deconnexion', async ()=> {
+    it('redirige vers url de deconnexion', async () => {
       let cookie = encodeSession({
-        AgentConnectIdToken: 'idToken'
+        AgentConnectIdToken: 'idToken',
       });
-        
-      const reponse = await request(serveur).get('/oidc/deconnexion').set('Cookie', [cookie]);
-      
+
+      const reponse = await request(serveur)
+        .get('/oidc/deconnexion')
+        .set('Cookie', [cookie]);
+
       assert.equal(reponse.status, 302);
       assert.equal(reponse.headers.location, 'une-adresse-proconnect');
       assert.equal(idTokenRecu, 'idToken');
-    })
+    });
 
-    it('dépose un cookie avec le state', async ()=> {
+    it('dépose un cookie avec le state', async () => {
       let cookie = encodeSession({
-        AgentConnectIdToken: 'idToken'
+        AgentConnectIdToken: 'idToken',
       });
-        
-      const reponse = await request(serveur).get('/oidc/deconnexion').set('Cookie', [cookie]);
+
+      const reponse = await request(serveur)
+        .get('/oidc/deconnexion')
+        .set('Cookie', [cookie]);
       const headerCookie = reponse.headers['set-cookie'];
       const cookieSession = enObjet(headerCookie[0]);
 
-      assert.equal(cookieSession.AgentConnectInfo.state,  "un faux state")
-    })
+      assert.equal(cookieSession.AgentConnectInfo.state, 'un faux state');
+    });
   });
 });

@@ -10,6 +10,7 @@ import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import { fabriqueMiddleware } from '../../src/api/middleware';
 import { encodeSession } from './cookie';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource Profil', () => {
   let serveur: Express;
@@ -20,6 +21,7 @@ describe('La ressource Profil', () => {
       middleware: fabriqueMiddleware(),
       adaptateurOIDC: fauxAdaptateurOIDC,
       adaptateurJWT: fauxAdaptateurJWT,
+      entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
     });
   });
 
