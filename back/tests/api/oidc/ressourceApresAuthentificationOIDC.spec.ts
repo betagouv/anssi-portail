@@ -14,7 +14,7 @@ import { join } from 'node:path';
 import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC';
 import { decodeSessionDuCookie } from '../cookie';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
-import { EntrepotUtilisateurMemoire } from '../../persistance/EntrepotUtilisateurMemoire';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {

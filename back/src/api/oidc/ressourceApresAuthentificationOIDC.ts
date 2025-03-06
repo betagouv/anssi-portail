@@ -20,7 +20,7 @@ const ressourceApresAuthentificationOIDC = (
         await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
       const { email } = informationsUtilisateur;
 
-      if (!configurationServeur.entrepotUtilisateur.parEmail(email)) {
+      if (!(await configurationServeur.entrepotUtilisateur.parEmail(email))) {
         reponse.redirect('/creation-compte');
         return;
       }

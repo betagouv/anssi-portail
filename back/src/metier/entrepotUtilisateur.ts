@@ -1,6 +1,6 @@
-import { Utilisateur } from './Utilisateur';
+import { Utilisateur } from './utilisateur';
 
 export interface EntrepotUtilisateur {
-  ajoute: (utilisateur: Utilisateur) => void;
-  parEmail: (email: string) => Utilisateur | undefined;
+  ajoute: (utilisateur: Utilisateur) => Promise<void>;
+  parEmail: (email: string) => Promise<Utilisateur | undefined>;
 }

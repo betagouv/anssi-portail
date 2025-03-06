@@ -11,6 +11,7 @@ import {
   fauxFournisseurDeChemin,
 } from '../fauxObjets';
 import { encodeSession, enObjet } from '../cookie';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource apres deconnexion OIDC', () => {
   describe('quand on requete GET sur /oidc/apres-deconnexion', () => {
@@ -22,6 +23,7 @@ describe('La ressource apres deconnexion OIDC', () => {
         middleware: fabriqueMiddleware(),
         adaptateurJWT: fauxAdaptateurJWT,
         adaptateurOIDC: fauxAdaptateurOIDC,
+        entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
       };
       serveur = creeServeur(configurationServeur);
     });
