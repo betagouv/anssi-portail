@@ -1,5 +1,11 @@
-<select>
-  <option disabled selected>Sélectionner une option</option>
+<script lang="ts">
+  export let region: string | null;
+  let regionSelectionnee: string;
+  $: region = regionSelectionnee === "" ? null : regionSelectionnee;
+</script>
+
+<select bind:value={regionSelectionnee}>
+  <option disabled selected value="">Sélectionner une option</option>
   <option>Auvergne-Rhône-Alpes</option>
   <option>Bourgogne-Franche-Comté</option>
   <option>Bretagne</option>
