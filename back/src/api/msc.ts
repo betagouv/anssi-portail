@@ -49,6 +49,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'confidentialite',
     'cgu',
     'accessibilite',
+    'creation-compte',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
