@@ -1,0 +1,19 @@
+version: '3'
+
+x-app: &configuration-base
+  build:
+    context: .
+
+services:
+  msc-db:
+    image: postgres:14
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - '5432:5432'
+    volumes:
+      - dbvol:/var/lib/postgresql/data
+
+volumes:
+  dbvol:
+    driver: local
