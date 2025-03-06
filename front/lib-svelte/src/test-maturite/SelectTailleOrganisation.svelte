@@ -1,9 +1,14 @@
 <script lang="ts">
   import { tranchesEffectifEtablissement } from "./TestMaturite.donnees";
+
+  export let tailleOrganisation: string | null;
+  let codeTailleOrganisation: string;
+  $: tailleOrganisation =
+    codeTailleOrganisation === "" ? null : codeTailleOrganisation;
 </script>
 
-<select>
-  <option disabled selected value="null">Sélectionner une option</option>
+<select bind:value={codeTailleOrganisation}>
+  <option disabled selected value="">Sélectionner une option</option>
   {#each tranchesEffectifEtablissement as tranche}
     <option value={tranche.code}>{tranche.libelle}</option>
   {/each}

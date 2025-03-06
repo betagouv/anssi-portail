@@ -2,21 +2,14 @@
   import Hero from "../Hero.svelte";
   import TuilesMaturite from "./TuilesMaturite.svelte";
   import { type IdNiveau } from "../niveaux-maturite/NiveauxMaturite.donnees";
-  import { questionnaireStore } from "./stores/questionnaire.store";
+  import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
   import PubliciteMesServicesCyber from "./PubliciteMesServicesCyber.svelte";
   import RadarMaturite from "./RadarMaturite.svelte";
   import TuileVersParcours from "./TuileVersParcours.svelte";
   import { niveauxMaturite } from "../niveaux-maturite/NiveauxMaturite.donnees";
   import PartageTest from "./PartageTest.svelte";
 
-  $: resultats = {
-    pilotage: $questionnaireStore.toutesLesReponses[2] + 1,
-    budget: $questionnaireStore.toutesLesReponses[4] + 1,
-    "ressources-humaines": $questionnaireStore.toutesLesReponses[3] + 1,
-    "adoption-solutions": $questionnaireStore.toutesLesReponses[5] + 1,
-    "prise-en-compte-risque": $questionnaireStore.toutesLesReponses[0] + 1,
-    posture: $questionnaireStore.toutesLesReponses[1] + 1,
-  };
+  $: resultats = resultatsQuestionnaire();
 
   const calculeIdNiveau = (moyenne: number): IdNiveau => {
     if (moyenne < 1) return "insuffisant";
