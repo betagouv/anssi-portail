@@ -1,6 +1,9 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { get } from "svelte/store";
-import { questionnaireStore } from "../../../src/test-maturite/stores/questionnaire.store";
+import {
+  questionnaireStore,
+  resultatsQuestionnaire,
+} from "../../../src/test-maturite/stores/questionnaire.store";
 
 describe("Le store du questionnaire", () => {
   beforeEach(() => {
@@ -50,5 +53,22 @@ describe("Le store du questionnaire", () => {
     const { toutesLesReponses, questionCourante } = get(questionnaireStore);
     expect(questionCourante).toBe(4);
     expect(toutesLesReponses).toEqual([10, 20, 30, 41, 50, 60]);
+  });
+
+  it("peut donner les résultats avec les identifiants", () => {
+    questionnaireStore.reponds(4);
+    questionnaireStore.reponds(2);
+    questionnaireStore.reponds(0);
+
+    const resultats = resultatsQuestionnaire();
+
+    expect(resultats).toStrictEqual({
+      "prise-en-compte-risque": 5,
+      posture: 3,
+      pilotage: 1,
+      "ressources-humaines": null,
+      budget: null,
+      "adoption-solutions": null,
+    });
   });
 });

@@ -1,15 +1,23 @@
 <script lang="ts">
   import { questions } from "./TestMaturite.donnees";
-  import { questionnaireStore } from "./stores/questionnaire.store";
+  import {
+    questionnaireStore,
+    resultatsQuestionnaire,
+  } from "./stores/questionnaire.store";
   import Hero from "../Hero.svelte";
   import Etapier from "../Etapier.svelte";
   import ResultatsTestMaturite from "./ResultatsTestMaturite.svelte";
   import SelectSecteurActivite from "./SelectSecteurActivite.svelte";
   import SelectRegion from "./SelectRegion.svelte";
   import SelectTailleOrganisation from "./SelectTailleOrganisation.svelte";
+  import axios from "axios";
 
   let afficheResultats = false;
   let introFaite = false;
+
+  let secteur: string | null;
+  let region: string | null;
+  let tailleOrganisation: string | null;
 
   questionnaireStore.initialise();
 
@@ -20,6 +28,12 @@
   $: idQuestionCourante = questions[$questionnaireStore.questionCourante].id;
 
   function obtiensResultat() {
+    axios.post("/api/resultats-test", {
+      reponses: resultatsQuestionnaire(),
+      secteur,
+      region,
+      tailleOrganisation,
+    });
     afficheResultats = true;
   }
 
@@ -94,17 +108,17 @@
             <div class="informations-complementaires">
               <label>
                 Quel est le secteur d’activité de votre organisation&nbsp;?
-                <SelectSecteurActivite />
+                <SelectSecteurActivite bind:secteur />
               </label>
 
               <label>
                 Dans quelle région se trouve votre organisation&nbsp;?
-                <SelectRegion />
+                <SelectRegion bind:region />
               </label>
 
               <label>
                 Quelle est la taille de votre organisation&nbsp;?
-                <SelectTailleOrganisation />
+                <SelectTailleOrganisation bind:tailleOrganisation />
               </label>
 
               <div class="commandes">
