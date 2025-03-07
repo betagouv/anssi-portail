@@ -5,7 +5,7 @@
     resultatsQuestionnaire,
   } from "./stores/questionnaire.store";
   import Hero from "../Hero.svelte";
-  import Etapier from "../Etapier.svelte";
+  import Etapier from "../ui/Etapier.svelte";
   import ResultatsTestMaturite from "./ResultatsTestMaturite.svelte";
   import SelectSecteurActivite from "./SelectSecteurActivite.svelte";
   import SelectRegion from "./SelectRegion.svelte";
