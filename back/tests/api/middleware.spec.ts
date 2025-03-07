@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
 import assert from 'assert';
 import { createRequest, createResponse } from 'node-mocks-http';
+import { OutgoingHttpHeaders } from 'node:http';
 
 describe('Le middleware', () => {
   let requete: Request & { service?: string };
@@ -64,6 +65,22 @@ describe('Le middleware', () => {
         paramRenseigne,
         '&lt;script&gt;alert(&quot;hacked!&quot;);&lt;&#x2F;script&gt;'
       );
+    });
+  });
+
+  describe("sur demande d'interdiction de mise en cache", () => {
+    it('interdit la mise en cache', async () => {
+      let headers: OutgoingHttpHeaders = {};
+      const suite = () => {
+        headers = reponse.getHeaders();
+      };
+      await middleware.interdisLaMiseEnCache(requete, reponse, suite);
+
+
+      assert.equal(headers['cache-control'], 'no-store, no-cache, must-revalidate, proxy-revalidate');
+      assert.equal(headers.pragma, 'no-cache');
+      assert.equal(headers.expires, '0');
+      assert.equal(headers['surrogate-control'], 'no-store');
     });
   });
 });

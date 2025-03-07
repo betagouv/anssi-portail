@@ -9,6 +9,7 @@ type FonctionMiddleware = (
 
 export type Middleware = {
   aseptise: (...nomsParametres: string[]) => FonctionMiddleware;
+  interdisLaMiseEnCache: FonctionMiddleware;
 };
 
 export const fabriqueMiddleware = (): Middleware => {
@@ -22,7 +23,18 @@ export const fabriqueMiddleware = (): Middleware => {
       suite();
     };
 
+  const interdisLaMiseEnCache = async (_requete: Request, reponse: Response, suite: NextFunction) => {
+    reponse.set({
+      'cache-control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      pragma: 'no-cache',
+      expires: '0',
+      'surrogate-control': 'no-store',
+    });
+    suite();
+  };
+
   return {
     aseptise,
+    interdisLaMiseEnCache
   };
 };

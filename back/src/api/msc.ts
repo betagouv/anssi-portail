@@ -1,5 +1,6 @@
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
+import helmet from 'helmet';
 import express, { Request, Response } from 'express';
 import rateLimit from 'express-rate-limit';
 import { ConfigurationServeur } from './configurationServeur';
@@ -14,6 +15,9 @@ import { ressourceProfil } from './ressourceProfil';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
+
+  app.use(helmet());
+  app.use(configurationServeur.middleware.interdisLaMiseEnCache);
 
   const centParMinute = rateLimit({
     windowMs: 60 * 1000,
@@ -64,7 +68,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   ['assets', 'scripts', 'lib-svelte', 'favicon.ico'].forEach((ressource) => {
     app.use(
       `/${ressource}`,
-      express.static(fournisseurChemin.ressourceDeBase(ressource))
+      express.static(fournisseurChemin.ressourceDeBase(ressource), {
+        setHeaders: (reponse: Response) =>
+          reponse.setHeader('cache-control', process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'),
+      })
     );
   });
 
