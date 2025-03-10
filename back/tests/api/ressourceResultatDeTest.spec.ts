@@ -91,7 +91,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         .post('/api/resultats-test')
         .send({
           region: 'Normandie  ',
-          secteur: 'J<',
+          secteur: 'J  ',
           tailleOrganisation: '51     ',
           reponses: {
             'prise-en-compte-risque': '2>',
@@ -100,7 +100,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
       const evenement = busEvenement.recupereEvenement(TestRealise);
       assert.equal(evenement!.region, 'Normandie');
-      assert.equal(evenement!.secteur, 'J&lt;');
+      assert.equal(evenement!.secteur, 'J');
       assert.equal(evenement!.tailleOrganisation, '51');
       assert.equal(evenement!.reponses['prise-en-compte-risque'], '2&gt;');
     });
@@ -115,6 +115,18 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
       assert.equal(reponse.status, 400);
       assert.equal(reponse.body.erreur, 'Région invalide');
+    });
+
+    it('valide le secteur', async () => {
+      const reponse = await request(serveur)
+        .post('/api/resultats-test')
+        .send({
+          ...donneesCorrectes,
+          secteur: 'UnSecteurInconnu',
+        });
+
+      assert.equal(reponse.status, 400);
+      assert.equal(reponse.body.erreur, 'Secteur invalide');
     });
   });
 });
