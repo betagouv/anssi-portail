@@ -6,6 +6,9 @@
 {% if site.env.MATOMO_ID != '' and site.env.MATOMO_ID != undefined %}
     {% include script-matomo.html %}
 {% endif %}
+{% if site.env.MATOMO_URL_TAG_MANAGER != '' and site.env.MATOMO_URL_TAG_MANAGER != undefined %}
+    {% include script-matomo-tag-manager.html %}
+{% endif %}
 
 <main>
     {% include header.html %}

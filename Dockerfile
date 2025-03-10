@@ -55,8 +55,10 @@ RUN npm install && npm run build
 # Build du site
 WORKDIR /srv/jekyll
 ARG MATOMO_ID
+ARG MATOMO_URL_TAG_MANAGER
 RUN touch .env
 RUN echo "MATOMO_ID=${MATOMO_ID}" >> .env
+RUN echo "MATOMO_URL_TAG_MANAGER=${MATOMO_URL_TAG_MANAGER}" >> .env
 RUN set -eux; bundler exec jekyll build
 
 ####
