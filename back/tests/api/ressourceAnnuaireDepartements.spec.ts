@@ -10,10 +10,9 @@ import {
 import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import { fabriqueMiddleware } from '../../src/api/middleware';
-import { encodeSession } from './cookie';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 
-describe('La ressource Profil', () => {
+describe('La ressource Annuaire Départements', () => {
   let serveur: Express;
 
   beforeEach(() => {
@@ -29,27 +28,16 @@ describe('La ressource Profil', () => {
 
   describe('sur demande GET', () => {
     it('répond 200', async () => {
-      const reponse = await request(serveur).get('/profil');
+      const reponse = await request(serveur).get('/api/annuaire/departements');
 
       assert.equal(reponse.status, 200);
     });
 
-    it('renvoie les informations utilisateur stockées dans la session', async () => {
-      let cookie = encodeSession({
-        nom: 'Dupont',
-        prenom: 'Jeanne',
-        email: 'jeanne.dupont',
-        siret: '1234',
-      });
+    it('renvoie les départements du référentiel', async () => {
+      const reponse = await request(serveur).get('/api/annuaire/departements');
 
-      const reponse = await request(serveur)
-        .get('/profil')
-        .set('Cookie', [cookie]);
-
-      assert.equal(reponse.body.nom, 'Dupont');
-      assert.equal(reponse.body.prenom, 'Jeanne');
-      assert.equal(reponse.body.email, 'jeanne.dupont');
-      assert.equal(reponse.body.siret, '1234');
+      assert.equal(reponse.body[0].nom, 'Ain');
+      assert.equal(reponse.body[0].code, '01');
     });
   });
 });

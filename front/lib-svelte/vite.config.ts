@@ -8,6 +8,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         catalogue: "src/main-catalogue.ts",
+        "creation-compte": "src/main-creation-compte.ts",
         extrait: "src/main-extrait.ts",
         "test-maturite": "src/main-test-maturite.ts",
         "niveaux-maturite":"src/main-niveaux-maturite.ts",

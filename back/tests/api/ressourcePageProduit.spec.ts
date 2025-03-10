@@ -8,6 +8,7 @@ import assert from 'node:assert';
 import {
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
+  fauxAdaptateurRechercheEntreprise,
   fauxFournisseurDeChemin,
 } from './fauxObjets';
 import { fabriqueMiddleware } from '../../src/api/middleware';
@@ -25,6 +26,7 @@ describe('La ressource page produit', () => {
       adaptateurOIDC: fauxAdaptateurOIDC,
       adaptateurJWT: fauxAdaptateurJWT,
       entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
+      adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
     });
   });
 
