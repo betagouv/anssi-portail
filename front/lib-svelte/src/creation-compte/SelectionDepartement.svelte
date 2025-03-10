@@ -79,3 +79,39 @@
   bind:doitEtreOuvert={suggestionsVisibles}
   elements={[suggestionsEl]}
 />
+
+<style lang="scss">
+  .selection-departement.conteneur {
+    position: relative;
+  }
+
+  .selection-departement .liste-suggestions {
+    display: none;
+    position: absolute;
+    background: white;
+    width: calc(100% - 34px);
+    /* 34px = paddings gauche et droite + bords = 2 x 16 + 2 x 1 */
+    z-index: 1;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transform: translateY(-5px);
+    padding: 0 16px;
+  }
+
+  .selection-departement .visible {
+    display: block;
+    border: 1px solid var(--bleu-survol);
+  }
+
+  .selection-departement .option {
+    padding: 4px 0;
+    cursor: pointer;
+  }
+
+  .selection-departement .liste-suggestions {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 200px;
+    overflow-scrolling: touch;
+  }
+</style>

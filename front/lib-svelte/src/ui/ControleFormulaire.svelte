@@ -12,3 +12,27 @@
   </span>
 </label>
 
+<style lang="scss">
+  .controle-formulaire {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-weight: normal;
+    .contenu {
+      margin-top: 4px;
+    }
+    .sousTitre {
+      color: var(--texte-clair);
+      font-size: 0.75rem;
+      line-height: 1.25rem;
+    }
+
+    .requis:before {
+      content: '*';
+      color: #e3271c;
+      margin-right: 4px;
+      font-size: 1rem;
+    }
+  }
+</style>
