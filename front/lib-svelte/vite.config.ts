@@ -5,6 +5,7 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 export default defineConfig({
   plugins: [svelte()],
   build: {
+    cssCodeSplit: false,
     rollupOptions: {
       input: {
         catalogue: "src/main-catalogue.ts",
