@@ -27,13 +27,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.set('trust proxy', 2);
   app.use(centParMinute);
 
-  // A supprimer
-  // On logue les en-têtes HTTP pour vérifier la mise au point des paramètres de proxy
-  app.use((req, res, next) => {
-    console.log('Headers:', req.headers);
-    next();
-  });
-
   app.use(
     cookieSession({
       name: 'session',
