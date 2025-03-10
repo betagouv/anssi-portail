@@ -44,14 +44,18 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
     };
     serveur = creeServeur({...configurationServeur, adaptateurRechercheEntreprise: unAdaptateurRechercheEntreprise});
 
-    await request(serveur).get('/api/annuaire/organisations?recherche=ma>recherche&departement=mon>departement');
+    await request(serveur).get('/api/annuaire/organisations?recherche=ma>recherche&departement=33');
 
     assert.equal(termeCherche, 'ma&gt;recherche');
-    assert.equal(departementCherche, 'mon&gt;departement');
   });
 
   it('retourne une erreur HTTP 400 si le terme de recherche est vide', async () => {
     let reponse = await request(serveur).get('/api/annuaire/organisations?recherche=&departement=mon>departement');
+    assert.equal(reponse.status, 400);
+  });
+
+  it("retourne une erreur HTTP 400 si le département n'existe pas", async () => {
+    let reponse = await request(serveur).get('/api/annuaire/organisations?recherche=siret&departement=990');
     assert.equal(reponse.status, 400);
   });
 
@@ -69,10 +73,10 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
     };
     serveur = creeServeur({...configurationServeur, adaptateurRechercheEntreprise: unAdaptateurRechercheEntreprise});
 
-    await request(serveur).get('/api/annuaire/organisations?recherche=marecherche&departement=mondepartement');
+    await request(serveur).get('/api/annuaire/organisations?recherche=marecherche&departement=01');
 
     assert.equal(adaptateurAppele, true);
     assert.equal(termeCherche, 'marecherche');
-    assert.equal(departementCherche, 'mondepartement');
+    assert.equal(departementCherche, '01');
   });
 });

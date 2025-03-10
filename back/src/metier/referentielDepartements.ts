@@ -109,3 +109,5 @@ export const departements = [
   {nom: 'Nouvelle-Calédonie', code: '988'},
   {nom: 'Île de Clipperton', code: '989'},
 ]
+
+export const estCodeDepartement = (code: string) => departements.map((d) => d.code).includes(code);
