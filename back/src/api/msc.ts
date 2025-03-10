@@ -1,7 +1,7 @@
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
+import express, { json, Request, Response } from 'express';
 import helmet from 'helmet';
-import express, { Request, Response } from 'express';
 import rateLimit from 'express-rate-limit';
 import { ConfigurationServeur } from './configurationServeur';
 import { fournisseurChemin } from './fournisseurChemin';
@@ -12,7 +12,7 @@ import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
 import { ressourcePageProduit } from './ressourcePageProduit';
 import { ressourcePagesJekyll } from './ressourcePagesJekyll';
 import { ressourceProfil } from './ressourceProfil';
-import {ressourceResultatDeTest} from "./ressourceResultatDeTest";
+import { ressourceResultatDeTest } from './ressourceResultatDeTest';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -39,6 +39,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   );
 
   app.use(cookieParser());
+  app.use(json());
 
   [
     '',
