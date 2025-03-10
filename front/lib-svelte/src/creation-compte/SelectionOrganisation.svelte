@@ -124,3 +124,36 @@
     use:validationChamp={'Ce champ est obligatoire. Veuillez sélectionner une entrée.'}
   />
 </div>
+
+<style lang="scss">
+  .conteneur-selection-organisation {
+    position: relative;
+
+    .liste-suggestions {
+      display: none;
+      position: absolute;
+      background: white;
+      width: calc(100% - 34px);
+      /* 34px = paddings gauche et droite + bords = 2 x 16 + 2 x 1 */
+      z-index: 1;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      transform: translateY(-5px);
+      padding: 0 16px;
+    }
+
+    .visible {
+      display: block;
+      border: 1px solid var(--bleu-survol);
+    }
+
+    .option {
+      padding: 4px 0;
+      cursor: pointer;
+    }
+
+    .valeur-cache {
+      display: none;
+    }
+  }
+</style>

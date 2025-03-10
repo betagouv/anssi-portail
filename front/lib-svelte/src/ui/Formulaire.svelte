@@ -50,3 +50,10 @@
   <slot />
 </form>
 
+<style lang="scss">
+  .formulaireDuTiroir {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
