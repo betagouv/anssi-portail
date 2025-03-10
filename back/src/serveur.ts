@@ -13,6 +13,7 @@ creeServeur({
   adaptateurJWT,
   entrepotUtilisateur: new EntrepotUtilisateurPostgres(),
   trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
+  maxRequetesParMinutes: adaptateurEnvironnement.serveur().maxRequetesParMinute(),
 }).listen(3000, () => {
   console.log('Le serveur écoute sur le port 3000');
 });
