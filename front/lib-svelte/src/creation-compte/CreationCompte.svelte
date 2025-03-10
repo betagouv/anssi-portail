@@ -14,18 +14,23 @@
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
   import Bouton from "../ui/Bouton.svelte";
+  import {onMount} from "svelte";
+  import axios from "axios";
 
-  //TODO: recupérer informationsProfessionnelles et departements
+  //TODO: recupérer informationsProfessionnelles
   let informationsProfessionnelles: InformationsProfessionnelles = {
     prenom: "prenom",
     nom: "nom",
-    email: "email",
-    organisation: {departement: '75', nom: 'test', siret: '242424'},
-    telephone: '',
-    domainesSpecialite: []
+    email: "email"
   };
   const modeleTelephone = '^0\\d{9}$';
   let departements: Departement[];
+
+
+  onMount(async () => {
+    const reponseDepartements = await axios.get<Departement[]>('/api/annuaire/departements');
+    departements = reponseDepartements.data;
+  });
 
   let etapeCourante = 1;
 
@@ -71,7 +76,7 @@
     email: informationsProfessionnelles.email,
     siretEntite: informationsProfessionnelles.organisation?.siret,
     telephone: informationsProfessionnelles.telephone,
-    postes: informationsProfessionnelles.domainesSpecialite,
+    postes: informationsProfessionnelles.domainesSpecialite || [],
     estimationNombreServices: null,
     agentConnect: true,
     cguAcceptees: false,
@@ -85,6 +90,16 @@
     formulaireInscription.siretEntite =
       informationsProfessionnelles.organisation?.siret || organisation?.siret;
   }
+
+  let elementSelectionDepartement: SelectionDepartement;
+  const modifieDepartementApresChoixOrganisation = (
+    e: CustomEvent<Organisation>
+  ) => {
+    const d = departements.find((d) => d.code === e.detail.departement);
+    if (d) {
+      elementSelectionDepartement.choisisDepartement(d);
+    }
+  };
 </script>
 
 <div class="contenu-inscription">
@@ -154,7 +169,10 @@
               requis={true}
               libelle="Département de votre organisation"
             >
-              <SelectionDepartement bind:valeur={departement} {departements}/>
+              <SelectionDepartement
+                bind:valeur={departement}
+                {departements}
+                bind:this={elementSelectionDepartement} />
             </ControleFormulaire>
             <ControleFormulaire
               requis={true}
@@ -163,6 +181,7 @@
               <SelectionOrganisation
                 bind:valeur={organisation}
                 filtreDepartement={departement}
+                on:organisationChoisie={modifieDepartementApresChoixOrganisation}
               />
             </ControleFormulaire>
           </div>
