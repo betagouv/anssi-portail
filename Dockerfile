@@ -70,6 +70,7 @@ ADD back/src /usr/src/app/src
 RUN npm install
 WORKDIR /usr/src/app/src
 RUN npx tsc
+ADD back/migrations /usr/src/dist-back/migrations
 
 ####
 ## SERVEUR

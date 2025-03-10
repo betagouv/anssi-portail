@@ -5,7 +5,13 @@ x-app: &configuration-base
     context: .
 
 services:
-  msc-db:
+  app:
+    build:
+      context: .
+    env_file:
+      - .env
+
+  db:
     image: postgres:14
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
