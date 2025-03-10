@@ -128,5 +128,17 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       assert.equal(reponse.status, 400);
       assert.equal(reponse.body.erreur, 'Secteur invalide');
     });
+
+    it("valide la taille d'organisation", async () => {
+      const reponse = await request(serveur)
+        .post('/api/resultats-test')
+        .send({
+          ...donneesCorrectes,
+          tailleOrganisation: 'UneTailleInconnue',
+        });
+
+      assert.equal(reponse.status, 400);
+      assert.equal(reponse.body.erreur, "Taille d'organisation invalide");
+    });
   });
 });

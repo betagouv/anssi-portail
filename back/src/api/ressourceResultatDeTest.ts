@@ -4,6 +4,7 @@ import { TestRealise } from '../bus/testRealise';
 import { regions } from '../metier/referentielRegions';
 import { check, validationResult } from 'express-validator';
 import { codesSecteur } from '../metier/referentielSecteurs';
+import { taillesOrganisation } from '../metier/referentielTailleOrganisation';
 
 const ressourceResultatDeTest = ({
   busEvenement,
@@ -16,6 +17,7 @@ const ressourceResultatDeTest = ({
     [
       check('region').isString().isIn(regions).withMessage('Région invalide'),
       check('secteur').isString().isIn(codesSecteur).withMessage('Secteur invalide'),
+      check('tailleOrganisation').isString().isIn(taillesOrganisation).withMessage("Taille d'organisation invalide"),
     ],
     async (requete: Request, reponse: Response) => {
       const { tailleOrganisation, region, secteur, reponses } = requete.body;
