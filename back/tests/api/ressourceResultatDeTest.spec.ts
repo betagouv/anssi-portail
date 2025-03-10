@@ -14,10 +14,25 @@ import {
   MockBusEvenement,
 } from '../bus/busPourLesTests';
 import { TestRealise } from '../../src/bus/testRealise';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource qui gère les résultats de test de maturité', () => {
   let serveur: Express;
   let busEvenement: MockBusEvenement;
+
+  const donneesCorrectes = {
+    region: 'Normandie',
+    secteur: 'J',
+    tailleOrganisation: '51',
+    reponses: {
+      'prise-en-compte-risque': 2,
+      pilotage: 3,
+      budget: 5,
+      'ressources-humaines': 3,
+      'adoption-solutions': 2,
+      posture: 3,
+    },
+  };
 
   beforeEach(() => {
     busEvenement = fabriqueBusPourLesTests();
@@ -26,13 +41,15 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       middleware: fabriqueMiddleware(),
       adaptateurOIDC: fauxAdaptateurOIDC,
       adaptateurJWT: fauxAdaptateurJWT,
+      entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
+      trustProxy: '0',
       busEvenement,
     });
   });
 
   describe('sur requête POST', () => {
     it('répond 201', async () => {
-      const reponse = await request(serveur).post('/api/resultats-test');
+      const reponse = await request(serveur).post('/api/resultats-test').send(donneesCorrectes);
 
       assert.equal(reponse.status, 201);
     });
@@ -73,7 +90,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       await request(serveur)
         .post('/api/resultats-test')
         .send({
-          region: 'Norma>ndie',
+          region: 'Normandie  ',
           secteur: 'J<',
           tailleOrganisation: '51     ',
           reponses: {
@@ -82,10 +99,22 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         });
 
       const evenement = busEvenement.recupereEvenement(TestRealise);
-      assert.equal(evenement!.region, 'Norma&gt;ndie');
+      assert.equal(evenement!.region, 'Normandie');
       assert.equal(evenement!.secteur, 'J&lt;');
       assert.equal(evenement!.tailleOrganisation, '51');
       assert.equal(evenement!.reponses['prise-en-compte-risque'], '2&gt;');
+    });
+
+    it('valide la région', async () => {
+      const reponse = await request(serveur)
+        .post('/api/resultats-test')
+        .send({
+          ...donneesCorrectes,
+          region: 'UneRegionInconnue',
+        });
+
+      assert.equal(reponse.status, 400);
+      assert.equal(reponse.body.erreur, 'Région invalide');
     });
   });
 });

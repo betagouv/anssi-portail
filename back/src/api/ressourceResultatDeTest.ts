@@ -1,6 +1,8 @@
 import { ConfigurationServeur } from './configurationServeur';
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
 import { TestRealise } from '../bus/testRealise';
+import { regions } from '../metier/referentielRegions';
+import { check, validationResult } from 'express-validator';
 
 const ressourceResultatDeTest = ({
   busEvenement,
@@ -10,13 +12,24 @@ const ressourceResultatDeTest = ({
   routeur.post(
     '/',
     middleware.aseptise('region', 'secteur', 'tailleOrganisation', "reponses.*"),
-    async (requete, reponse) => {
+    [
+      check('region').isString().isIn(regions).withMessage('Région invalide')
+    ],
+    async (requete: Request, reponse: Response) => {
+      const { tailleOrganisation, region, secteur, reponses } = requete.body;
+
+      const erreurs = validationResult(requete);
+      if(!erreurs.isEmpty()) {
+        reponse.status(400).json({ erreur: erreurs.array()[0].msg });
+        return;
+      }
+
       await busEvenement.publie(
         new TestRealise({
-          region: requete.body.region,
-          secteur: requete.body.secteur,
-          tailleOrganisation: requete.body.tailleOrganisation,
-          reponses: requete.body.reponses,
+          region: region,
+          secteur: secteur,
+          tailleOrganisation: tailleOrganisation,
+          reponses: reponses,
         })
       );
       reponse.sendStatus(201);
