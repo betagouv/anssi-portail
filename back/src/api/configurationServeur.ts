@@ -10,4 +10,5 @@ export type ConfigurationServeur = {
   adaptateurOIDC: AdaptateurOIDC;
   adaptateurJWT: AdaptateurJWT;
   entrepotUtilisateur: EntrepotUtilisateur;
+  trustProxy: String;
 };
