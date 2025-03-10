@@ -11,4 +11,5 @@ export type ConfigurationServeur = {
   adaptateurJWT: AdaptateurJWT;
   entrepotUtilisateur: EntrepotUtilisateur;
   trustProxy: String;
+  maxRequetesParMinutes: number;
 };
