@@ -45,3 +45,38 @@
   bind:doitEtreOuvert={menuOuvert}
   elements={[declencheurEl, ...(fermeMenuSiClicInterne ? [] : [contenuEl])]}
 />
+
+<style lang="scss">
+  .conteneur {
+    display: flex;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .svelte-menu-flottant {
+    position: absolute;
+    left: -2px;
+    transform: translateX(-100%);
+    z-index: 100;
+  }
+
+  .svelte-menu-flottant.parDessusDeclencheur {
+    transform: translate(0, -1px);
+  }
+
+  .invisible {
+    display: none;
+  }
+
+  button {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  button[disabled] {
+    cursor: not-allowed;
+  }
+</style>
