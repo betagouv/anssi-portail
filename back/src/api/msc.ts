@@ -28,8 +28,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   const centParMinute = rateLimit({
     windowMs: 60 * 1000,
-    limit: 100,
-    skip: (req) => req.url.startsWith('/assets'),
+    limit: configurationServeur.maxRequetesParMinutes,
   });
   app.set('trust proxy', configurationServeur.trustProxy);
   app.use(centParMinute);
