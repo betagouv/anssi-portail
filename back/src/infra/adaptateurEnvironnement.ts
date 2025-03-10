@@ -10,6 +10,15 @@ const adaptateurEnvironnement = {
   }),
   serveur: () => ({
     trustProxy: () => process.env.SERVEUR_TRUST_PROXY || '0',
+    maxRequetesParMinute: () => {
+      const asString = process.env.SERVEUR_MAX_REQUETES_PAR_MINUTE || '600'
+      const asNumber = Number(asString);
+      if (isNaN(asNumber)) {
+        throw new Error(`SERVEUR_MAX_REQUETES_PAR_MINUTE n'est pas un nombre : ${asString}`);
+      } else {
+        return asNumber
+      }
+    },
   }),
 };
 
