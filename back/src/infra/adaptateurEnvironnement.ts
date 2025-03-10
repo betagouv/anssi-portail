@@ -8,6 +8,9 @@ const adaptateurEnvironnement = {
     clientId: () => process.env.OIDC_CLIENT_ID || '',
     clientSecret: () => process.env.OIDC_CLIENT_SECRET || '',
   }),
+  serveur: () => ({
+    trustProxy: () => process.env.SERVEUR_TRUST_PROXY || '0',
+  }),
 };
 
 export { adaptateurEnvironnement };
