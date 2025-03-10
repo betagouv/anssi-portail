@@ -8,9 +8,9 @@ export type InformationsProfessionnelles = {
   prenom: string;
   nom: string;
   email: string;
-  organisation: Organisation;
-  telephone: string;
-  domainesSpecialite: string[];
+  organisation?: Organisation;
+  telephone?: string;
+  domainesSpecialite?: string[];
 };
 
 export type Departement = {
@@ -29,8 +29,8 @@ export type FormulaireInscription = {
   prenom: string;
   nom: string;
   email: string;
-  siretEntite: string;
-  telephone: string;
+  siretEntite?: string;
+  telephone?: string;
   postes: string[];
   estimationNombreServices: Intervalle | null;
   agentConnect: boolean;

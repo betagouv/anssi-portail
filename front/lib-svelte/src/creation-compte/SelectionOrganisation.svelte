@@ -3,7 +3,11 @@
   import { createEventDispatcher, tick } from 'svelte';
   import type { Departement, Organisation } from './creationCompte';
   import { validationChamp } from '../directives/validationChamp';
+  import axios from "axios";
 
+  type ReponseApiAnnuaireOrganisations = {
+    suggestions: Organisation[]
+  }
   type OrganisationAvecLabel = Organisation & {
     label: string;
   };
@@ -52,14 +56,14 @@
       suggestions = [];
       return;
     }
-    const reponse = await axios.get('/api/annuaire/organisations', {
+    const reponse = await axios.get<ReponseApiAnnuaireOrganisations>('/api/annuaire/organisations', {
       params: {
         recherche: saisie,
         departement: filtreDepartement?.code,
       },
     });
 
-    suggestions = reponse.data.suggestions.map(uneSuggestion);
+    suggestions = reponse?.data?.suggestions.map(uneSuggestion);
     suggestionsVisibles = suggestions.length > 0;
   };
 
