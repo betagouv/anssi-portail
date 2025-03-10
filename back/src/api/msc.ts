@@ -24,7 +24,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     limit: 100,
     skip: (req) => req.url.startsWith('/assets'),
   });
-  app.set('trust proxy', 1);
+  app.set('trust proxy', 2);
   app.use(centParMinute);
 
   app.use(
