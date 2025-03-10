@@ -4,6 +4,7 @@ import assert from 'node:assert';
 import {
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
+  fauxAdaptateurRechercheEntreprise,
   fauxFournisseurDeChemin,
 } from './fauxObjets';
 import { creeServeur } from '../../src/api/msc';
@@ -22,6 +23,7 @@ describe('La ressource Profil', () => {
       adaptateurOIDC: fauxAdaptateurOIDC,
       adaptateurJWT: fauxAdaptateurJWT,
       entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
+      adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
     });
   });
 

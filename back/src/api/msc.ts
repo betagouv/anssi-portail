@@ -12,6 +12,7 @@ import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
 import { ressourcePageProduit } from './ressourcePageProduit';
 import { ressourcePagesJekyll } from './ressourcePagesJekyll';
 import { ressourceProfil } from './ressourceProfil';
+import {ressourceAnnuaireOrganisations} from "./ressourceAnnuaireOrganisations";
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -91,6 +92,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   );
 
   app.use('/profil', ressourceProfil(configurationServeur));
+
+  app.use('/api/annuaire/organisations', ressourceAnnuaireOrganisations(configurationServeur));
 
   app.use((_requete: Request, reponse: Response) => {
     reponse

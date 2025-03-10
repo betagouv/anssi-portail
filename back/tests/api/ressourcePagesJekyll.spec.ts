@@ -8,6 +8,7 @@ import { FournisseurChemin } from '../../src/api/fournisseurChemin';
 import {
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
+  fauxAdaptateurRechercheEntreprise,
   fauxFournisseurDeChemin,
 } from './fauxObjets';
 import { fabriqueMiddleware } from '../../src/api/middleware';
@@ -25,6 +26,7 @@ describe('La ressource pages jekyll', () => {
       adaptateurOIDC: fauxAdaptateurOIDC,
       adaptateurJWT: fauxAdaptateurJWT,
       entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
+      adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
     });
   });
 

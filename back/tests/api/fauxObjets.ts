@@ -1,8 +1,9 @@
 import { join } from 'path';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { Utilisateur } from '../../src/metier/utilisateur';
+import {
+  AdaptateurRechercheEntreprise,
+} from "../../src/infra/adaptateurRechercheEntreprise";
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -32,3 +33,7 @@ export const fauxAdaptateurOIDC: AdaptateurOIDC = {
 export const fauxAdaptateurJWT: AdaptateurJWT = {
   genereToken: (_: string) => '',
 };
+
+export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
+  rechercheOrganisations: async (_: string, __: string | null) => ([])
+}
