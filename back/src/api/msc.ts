@@ -13,6 +13,7 @@ import { ressourcePageProduit } from './ressourcePageProduit';
 import { ressourcePagesJekyll } from './ressourcePagesJekyll';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceResultatDeTest } from './ressourceResultatDeTest';
+import {ressourceAnnuaireOrganisations} from "./ressourceAnnuaireOrganisations";
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -104,6 +105,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/profil', ressourceProfil(configurationServeur));
 
   app.use('/api/resultats-test', ressourceResultatDeTest(configurationServeur));
+  
+  app.use('/api/annuaire/organisations', ressourceAnnuaireOrganisations(configurationServeur));
 
   app.use((_requete: Request, reponse: Response) => {
     reponse

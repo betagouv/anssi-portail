@@ -4,6 +4,7 @@ import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
 import { AdaptateurJWT } from './adaptateurJWT';
 import { BusEvenements } from '../bus/busEvenements';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
+import { AdaptateurRechercheEntreprise } from "../infra/adaptateurRechercheEntreprise";
 
 export type ConfigurationServeur = {
   fournisseurChemin: FournisseurChemin;
@@ -11,6 +12,7 @@ export type ConfigurationServeur = {
   adaptateurOIDC: AdaptateurOIDC;
   adaptateurJWT: AdaptateurJWT;
   busEvenement: BusEvenements;
+  adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   entrepotUtilisateur: EntrepotUtilisateur;
   trustProxy: String;
   maxRequetesParMinutes: number;

@@ -5,6 +5,9 @@ import { fabriqueMiddleware } from '../../src/api/middleware';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
+import {
+  AdaptateurRechercheEntreprise,
+} from "../../src/infra/adaptateurRechercheEntreprise";
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -44,3 +47,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   trustProxy: '0',
   busEvenement: fabriqueBusPourLesTests(),
 };
+
+export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
+  rechercheOrganisations: async (_: string, __: string | null) => ([])
+}
