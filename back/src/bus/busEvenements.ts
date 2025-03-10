@@ -3,6 +3,10 @@ export type GestionnaireDEvenement<T extends EvenementDuBus> = (evenement: T) =>
 export interface EvenementDuBus {
 }
 
+export type ClasseDEvenementDeBus<T extends EvenementDuBus> = new (
+  ...args: any[]
+) => T;
+
 export class BusEvenements {
   gestionnaires: Record<string, GestionnaireDEvenement<any>[]> = {};
 
