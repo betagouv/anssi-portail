@@ -1,20 +1,20 @@
-import {beforeEach, describe, it} from "node:test";
-import request from "supertest";
-import {Express} from "express";
-import {creeServeur} from "../../src/api/msc";
+import { beforeEach, describe, it } from 'node:test';
+import request from 'supertest';
+import { Express } from 'express';
+import { creeServeur } from '../../src/api/msc';
 import {
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
   fauxAdaptateurRechercheEntreprise,
-  fauxFournisseurDeChemin
-} from "./fauxObjets";
-import {fabriqueMiddleware} from "../../src/api/middleware";
-import {EntrepotUtilisateurMemoire} from "../persistance/entrepotUtilisateurMemoire";
+  fauxFournisseurDeChemin,
+} from './fauxObjets';
+import { fabriqueMiddleware } from '../../src/api/middleware';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import {
   AdaptateurRechercheEntreprise,
-  ResultatRechercheEntreprise
-} from "../../src/infra/adaptateurRechercheEntreprise";
-import assert from "node:assert";
+  ResultatRechercheEntreprise,
+} from '../../src/infra/adaptateurRechercheEntreprise';
+import assert from 'node:assert';
 
 describe('quand requête GET sur `/api/annuaire/organisations`', () => {
   let serveur: Express;
@@ -36,22 +36,39 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
     let termeCherche;
     let departementCherche;
     let unAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
-      rechercheOrganisations: async (terme: string, departement: string | null) => {
+      rechercheOrganisations: async (
+        terme: string,
+        departement: string | null
+      ) => {
         termeCherche = terme;
         departementCherche = departement;
-        return ([]);
-      }
+        return [];
+      },
     };
-    serveur = creeServeur({...configurationServeur, adaptateurRechercheEntreprise: unAdaptateurRechercheEntreprise});
+    serveur = creeServeur({
+      ...configurationServeur,
+      adaptateurRechercheEntreprise: unAdaptateurRechercheEntreprise,
+    });
 
-    await request(serveur).get('/api/annuaire/organisations?recherche=ma>recherche&departement=mon>departement');
+    await request(serveur).get(
+      '/api/annuaire/organisations?recherche=ma>recherche&departement=33      '
+    );
 
     assert.equal(termeCherche, 'ma&gt;recherche');
-    assert.equal(departementCherche, 'mon&gt;departement');
+    assert.equal(departementCherche, '33');
   });
 
   it('retourne une erreur HTTP 400 si le terme de recherche est vide', async () => {
-    let reponse = await request(serveur).get('/api/annuaire/organisations?recherche=&departement=mon>departement');
+    let reponse = await request(serveur).get(
+      '/api/annuaire/organisations?recherche=&departement=mon>departement'
+    );
+    assert.equal(reponse.status, 400);
+  });
+
+  it("retourne une erreur HTTP 400 si le département n'existe pas", async () => {
+    let reponse = await request(serveur).get(
+      '/api/annuaire/organisations?recherche=siret&departement=990'
+    );
     assert.equal(reponse.status, 400);
   });
 
@@ -60,19 +77,27 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
     let termeCherche;
     let departementCherche;
     let unAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
-      rechercheOrganisations: async (terme: string, departement: string | null): Promise<ResultatRechercheEntreprise[]> => {
+      rechercheOrganisations: async (
+        terme: string,
+        departement: string | null
+      ): Promise<ResultatRechercheEntreprise[]> => {
         adaptateurAppele = true;
         termeCherche = terme;
         departementCherche = departement;
-        return [{nom: 'un résultat', departement: '01', siret: '1234'}];
-      }
+        return [{ nom: 'un résultat', departement: '01', siret: '1234' }];
+      },
     };
-    serveur = creeServeur({...configurationServeur, adaptateurRechercheEntreprise: unAdaptateurRechercheEntreprise});
+    serveur = creeServeur({
+      ...configurationServeur,
+      adaptateurRechercheEntreprise: unAdaptateurRechercheEntreprise,
+    });
 
-    await request(serveur).get('/api/annuaire/organisations?recherche=marecherche&departement=mondepartement');
+    await request(serveur).get(
+      '/api/annuaire/organisations?recherche=marecherche&departement=01'
+    );
 
     assert.equal(adaptateurAppele, true);
     assert.equal(termeCherche, 'marecherche');
-    assert.equal(departementCherche, 'mondepartement');
+    assert.equal(departementCherche, '01');
   });
 });
