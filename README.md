@@ -32,13 +32,13 @@ $ bundler install
 - Démarrer le conteneur de base de données
 
 ```shell
-$ docker compose up msc-db
+$ docker compose up db
 ```
 
 - Se connecter au conteneur de la base de données et créer une nouvelle base `msc` pour un utilisateur postgres.
 
 ```shell
-$ docker compose exec msc-db createdb -U postgres msc
+$ docker compose exec db createdb -U postgres msc
 ```
 
 - Revenir à la racine, installer les dépendances Node et lancer le projet en mode "dev"
