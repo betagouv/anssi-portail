@@ -44,5 +44,6 @@
     background: #eee;
     margin-bottom: 0;
     box-sizing: border-box;
+    font-family: var(--fonts);
   }
 </style>

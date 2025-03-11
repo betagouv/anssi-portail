@@ -127,11 +127,10 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-  }
-  .conteneur-selection-domaine-specialite {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+
+    :focus-visible {
+      outline: none;
+    }
 
     .bouton {
       width: 100%;
@@ -175,7 +174,7 @@
     }
 
     .bouton:hover {
-      border-color: var(--bleu-mise-en-avant);
+      border-color: var(--jaune-msc);
     }
 
     :global(.selection-domaine .declencheur) {
@@ -189,15 +188,14 @@
     }
 
     .domaines {
-      border: 1px solid var(--bleu-mise-en-avant);
-      background-color: #eee;
+      border: 1px solid var(--jaune-msc);
+      background-color: #fff;
       width: calc(100% - 2px);
       border-radius: 6px;
       color: black;
     }
 
     .rappel-declencheur {
-      border-bottom: 1px solid var(--bleu-mise-en-avant);
       padding-top: 17px;
     }
 
@@ -214,10 +212,6 @@
       gap: 16px;
       flex-direction: column;
       padding: 12px 16px 26px;
-    }
-
-    input[type='checkbox'] + label {
-      margin: 0;
     }
   }
 </style>

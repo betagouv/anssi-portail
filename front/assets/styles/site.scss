@@ -19,6 +19,7 @@
   --menu-fond-hover: rgba(0, 0, 0, 0.04);
   --menu-fond-clique: rgba(0, 0, 0, 0.08);
   --fonts: Marianne, Arial, sans-serif;
+  --erreur-texte: #ce0500;
 }
 
 html {
@@ -1089,5 +1090,29 @@ select {
   color: var(--noir);
   font-size: 1rem;
   line-height: 1.5rem;
-  font-family: "Marianne";
+  font-family: 'Marianne';
+}
+
+.erreur-champ-saisie {
+  font-size: 12px;
+  line-height: 14px;
+  margin-top: 16px;
+}
+
+.erreur-champ-saisie {
+  color: var(--erreur-texte);
+}
+
+.erreur-champ-saisie:before {
+  content: '';
+  display: flex;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.erreur-champ-saisie:before {
+  background-image: url('/assets/images/erreur.svg');
 }
