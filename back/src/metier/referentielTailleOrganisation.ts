@@ -13,6 +13,8 @@ const tranchesEffectifEtablissement = [
   { code: "51", libelle: "2000 à 4999 salariés" },
   { code: "52", libelle: "5000 salariés ou plus" },
   { code: "53", libelle: "10 000 salariés et plus" },
-];
+] as const;
 
 export const taillesOrganisation = tranchesEffectifEtablissement.map(t => t.code);
+
+export type TailleOrganisation = (typeof taillesOrganisation)[number];
