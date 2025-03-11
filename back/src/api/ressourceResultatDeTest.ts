@@ -34,14 +34,9 @@ const ressourceResultatDeTest = ({
         return Number.isInteger(valeur) && valeur >= 1 && valeur <= 5;
       })).withMessage('Les valeurs de réponses doivent être comprises entre 1 et 5')
     ],
+    middleware.valide(),
     async (requete: Request, reponse: Response) => {
       const {tailleOrganisation, region, secteur, reponses} = requete.body;
-
-      const erreurs = validationResult(requete);
-      if (!erreurs.isEmpty()) {
-        reponse.status(400).json({erreur: erreurs.array()[0].msg});
-        return;
-      }
 
       await busEvenement.publie(
         new TestRealise({
