@@ -136,6 +136,29 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         assert.equal(reponse.status, 400);
         assert.equal(reponse.body.erreur, "Taille d'organisation invalide");
       });
+
+      describe("concernant les réponses", () => {
+        it('valide que les réponses sont dans un objet', async () => {
+          const reponse = await requeteAvecDonneeIncorrecte({ reponses: ['pasUnObjet'] });
+
+          assert.equal(reponse.status, 400);
+          assert.equal(reponse.body.erreur, "Les réponses doivent être dans un objet");
+        });
+
+        it('valide les clés de réponses', async () => {
+          const reponse = await requeteAvecDonneeIncorrecte({ reponses: {uneAutreClé: 1} });
+
+          assert.equal(reponse.status, 400);
+          assert.equal(reponse.body.erreur, "Les clés de réponse sont invalides");
+        });
+
+        it('valide les valeurs de reponses', async () => {
+          const reponse = await requeteAvecDonneeIncorrecte({ reponses: { ...donneesCorrectes.reponses, pilotage: 0 } });
+
+          assert.equal(reponse.status, 400);
+          assert.equal(reponse.body.erreur, "Les valeurs de réponses doivent être comprises entre 1 et 5");
+        });
+      });
     });
   });
 });
