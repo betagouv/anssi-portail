@@ -1,7 +1,7 @@
 ---
 ---
 
-@import "responsive";
+@use "../../assets/styles/responsive" as *;
 
 .chapeau {
   background: #f4f4f4 url("/assets/images/motif-fond-service.png");

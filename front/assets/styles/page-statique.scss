@@ -1,7 +1,7 @@
 ---
 ---
 
-@import 'responsive';
+@use "../../assets/styles/responsive" as *;
 
 .chapeau.fond-sombre.chapeau-page-statique {
   padding: 32px var(--gouttiere);

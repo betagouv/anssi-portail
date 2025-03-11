@@ -1,7 +1,7 @@
 ---
 ---
 
-@import 'responsive';
+@use "../../assets/styles/responsive" as *;
 
 :root {
   --noir: #0d0c21;
@@ -161,7 +161,9 @@ header {
     @include a-partir-de(lg) {
       display: block;
     }
-    margin-left: auto;
+    & {
+      margin-left: auto;
+    }
     .profil-connecte,
     .profil-deconnecte,
     .profil-connecte > a,
