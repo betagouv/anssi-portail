@@ -86,59 +86,56 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       });
     });
 
-    it('aseptise les paramètres', async () => {
-      await request(serveur)
-        .post('/api/resultats-test')
-        .send({
-          region: 'Normandie  ',
-          secteur: 'J  ',
-          tailleOrganisation: '51     ',
-          reponses: {
-            'prise-en-compte-risque': '2>',
-          },
-        });
+    describe("concernant la validation des données", () => {
+      const requeteAvecDonneeIncorrecte = async (donnees: Record<string, any>) => {
+        const reponse = await request(serveur)
+          .post('/api/resultats-test')
+          .send({
+            ...donneesCorrectes,
+            ...donnees,
+          });
+        return reponse;
+      };
 
-      const evenement = busEvenement.recupereEvenement(TestRealise);
-      assert.equal(evenement!.region, 'Normandie');
-      assert.equal(evenement!.secteur, 'J');
-      assert.equal(evenement!.tailleOrganisation, '51');
-      assert.equal(evenement!.reponses['prise-en-compte-risque'], '2&gt;');
-    });
+      it('aseptise les paramètres', async () => {
+        await request(serveur)
+          .post('/api/resultats-test')
+          .send({
+            region: 'Normandie  ',
+            secteur: 'J  ',
+            tailleOrganisation: '51     ',
+            reponses: {
+              'prise-en-compte-risque': '2>',
+            },
+          });
 
-    it('valide la région', async () => {
-      const reponse = await request(serveur)
-        .post('/api/resultats-test')
-        .send({
-          ...donneesCorrectes,
-          region: 'UneRegionInconnue',
-        });
+        const evenement = busEvenement.recupereEvenement(TestRealise);
+        assert.equal(evenement!.region, 'Normandie');
+        assert.equal(evenement!.secteur, 'J');
+        assert.equal(evenement!.tailleOrganisation, '51');
+        assert.equal(evenement!.reponses['prise-en-compte-risque'], '2&gt;');
+      });
 
-      assert.equal(reponse.status, 400);
-      assert.equal(reponse.body.erreur, 'Région invalide');
-    });
+      it('valide la région', async () => {
+        const reponse = await requeteAvecDonneeIncorrecte({ region: 'UneRegionInconnue' });
 
-    it('valide le secteur', async () => {
-      const reponse = await request(serveur)
-        .post('/api/resultats-test')
-        .send({
-          ...donneesCorrectes,
-          secteur: 'UnSecteurInconnu',
-        });
+        assert.equal(reponse.status, 400);
+        assert.equal(reponse.body.erreur, 'Région invalide');
+      });
 
-      assert.equal(reponse.status, 400);
-      assert.equal(reponse.body.erreur, 'Secteur invalide');
-    });
+      it('valide le secteur', async () => {
+        const reponse = await requeteAvecDonneeIncorrecte({ secteur: 'UnSecteurInconnu' });
 
-    it("valide la taille d'organisation", async () => {
-      const reponse = await request(serveur)
-        .post('/api/resultats-test')
-        .send({
-          ...donneesCorrectes,
-          tailleOrganisation: 'UneTailleInconnue',
-        });
+        assert.equal(reponse.status, 400);
+        assert.equal(reponse.body.erreur, 'Secteur invalide');
+      });
 
-      assert.equal(reponse.status, 400);
-      assert.equal(reponse.body.erreur, "Taille d'organisation invalide");
+      it("valide la taille d'organisation", async () => {
+        const reponse = await requeteAvecDonneeIncorrecte({ tailleOrganisation: 'UneTailleInconnue' });
+
+        assert.equal(reponse.status, 400);
+        assert.equal(reponse.body.erreur, "Taille d'organisation invalide");
+      });
     });
   });
 });
