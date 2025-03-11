@@ -282,6 +282,12 @@
 
 <style lang="scss">
   @import '../../assets/styles/responsive';
+  :global(.creation-compte .actions button) {
+    padding: 8px 16px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+  }
 
   input {
     box-sizing: border-box;
@@ -398,5 +404,38 @@
 
   .cgu label {
     order: -1;
+    a {
+      display: inline-block;
+    }
+  }
+
+  :global(.creation-compte .case-et-label), .case-a-cocher {
+    display: flex;
+    gap: 8px;
+  }
+
+  :global(.creation-compte input[type="checkbox"]) {
+      appearance: none;
+      border: 1px solid var(--noir);
+      border-radius: 4px;
+      width: 24px;
+      height: 24px;
+      margin: 0;
+      cursor: pointer;
+
+      &:checked {
+        background-color: var(--jaune-msc);
+
+        &::before {
+          content: "";
+          display: block;
+          margin: auto;
+          width: 6px;
+          height: 12px;
+          border-right: 2px var(--noir) solid;
+          border-bottom: 2px var(--noir) solid;
+          transform: translateY(2px) rotate(0.12turn);
+        }
+      }
   }
 </style>

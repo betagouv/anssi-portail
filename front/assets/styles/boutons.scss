@@ -43,14 +43,14 @@
   line-height: 1.5rem;
   background: white;
 
-  &.actif {
+  &:not([disabled]).actif {
     background: var(--jaune-msc);
 
-    &:hover {
+    &:not([disabled]):hover {
       background: var(--jaune-msc-hover);
     }
 
-    &:active {
+    &:not([disabled]):active {
       background: var(--jaune-msc-clique);
     }
   }
@@ -62,11 +62,11 @@
     cursor: not-allowed;
   }
 
-  &:hover {
+  &:not([disabled]):hover {
     background: var(--gris-secondaire-fond-hover);
   }
 
-  &:active {
+  &:not([disabled]):active {
     background: var(--gris-secondaire-fond-clique);
   }
 }
