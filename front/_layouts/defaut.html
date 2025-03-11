@@ -7,7 +7,7 @@
     <script type='module' src='/scripts/matomo.js' data-id-site-matomo="{{ site.env.MATOMO_ID }}" id="script-matomo"></script>
 {% endif %}
 {% if site.env.MATOMO_URL_TAG_MANAGER != '' and site.env.MATOMO_URL_TAG_MANAGER != undefined %}
-    {% include script-matomo-tag-manager.html %}
+    <script type='module' src='/scripts/matomoTagManager.js' data-url-tag-manager-matomo="{{ site.env.MATOMO_URL_TAG_MANAGER }}" id="script-matomo-tag-manager"></script>
 {% endif %}
 
 <main>
