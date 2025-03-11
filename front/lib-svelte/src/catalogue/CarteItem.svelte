@@ -18,6 +18,7 @@
   class="carte {itemCyber.typologie}"
   target={itemCyber.lienInterne ? "" : "_blank"}
   href={itemCyber.lienInterne ?? itemCyber.lienExterne}
+  class:lien-externe-produit={!itemCyber.lienInterne}
 >
   <figure>
     <img
