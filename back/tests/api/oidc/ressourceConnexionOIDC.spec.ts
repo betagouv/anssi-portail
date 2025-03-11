@@ -7,6 +7,7 @@ import { fabriqueMiddleware } from '../../../src/api/middleware';
 import { creeServeur } from '../../../src/api/msc';
 import { enObjet } from '../cookie';
 import {
+  configurationDeTestDuServeur,
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
   fauxFournisseurDeChemin,
@@ -24,11 +25,8 @@ describe('La ressource connexion OIDC', () => {
         nonce: 'un faux nonce',
       });
       const configurationServeur: ConfigurationServeur = {
-        fournisseurChemin: fauxFournisseurDeChemin,
-        middleware: fabriqueMiddleware(),
-        adaptateurJWT: fauxAdaptateurJWT,
+        ...configurationDeTestDuServeur,
         adaptateurOIDC,
-        entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
       };
       serveur = creeServeur(configurationServeur);
     });

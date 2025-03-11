@@ -6,6 +6,7 @@ import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import assert from 'node:assert';
 import {
+  configurationDeTestDuServeur,
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
   fauxFournisseurDeChemin,
@@ -20,11 +21,8 @@ describe('La ressource page produit', () => {
   beforeEach(() => {
     fournisseurChemin = fauxFournisseurDeChemin;
     serveur = creeServeur({
+      ...configurationDeTestDuServeur,
       fournisseurChemin,
-      middleware: fabriqueMiddleware(),
-      adaptateurOIDC: fauxAdaptateurOIDC,
-      adaptateurJWT: fauxAdaptateurJWT,
-      entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
     });
   });
 

@@ -3,10 +3,10 @@ import { Express } from 'express';
 import request from 'supertest';
 import assert from 'node:assert';
 import { ConfigurationServeur } from '../../../src/api/configurationServeur';
-import { fabriqueMiddleware } from '../../../src/api/middleware';
 import { creeServeur } from '../../../src/api/msc';
 import { encodeSession, enObjet } from '../cookie';
 import {
+  configurationDeTestDuServeur,
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
   fauxFournisseurDeChemin,
@@ -27,11 +27,8 @@ describe('La ressource deconnexion OIDC', () => {
         };
       };
       const configurationServeur: ConfigurationServeur = {
-        fournisseurChemin: fauxFournisseurDeChemin,
-        middleware: fabriqueMiddleware(),
-        adaptateurJWT: fauxAdaptateurJWT,
+        ...configurationDeTestDuServeur,
         adaptateurOIDC,
-        entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
       };
       serveur = creeServeur(configurationServeur);
     });
