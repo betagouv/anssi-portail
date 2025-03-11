@@ -1,9 +1,12 @@
 import { EvenementDuBus } from './busEvenements';
+import { Region } from '../metier/referentielRegions';
+import { CodeSecteur } from '../metier/referentielSecteurs';
+import { TailleOrganisation } from '../metier/referentielTailleOrganisation';
 
 export class TestRealise implements EvenementDuBus {
-  region: string;
-  secteur: string;
-  tailleOrganisation: string;
+  region: Region;
+  secteur: CodeSecteur;
+  tailleOrganisation: TailleOrganisation;
   reponses: Record<string, number>;
 
   constructor({
@@ -12,9 +15,9 @@ export class TestRealise implements EvenementDuBus {
     tailleOrganisation,
     reponses,
   }: {
-    region: string;
-    secteur: string;
-    tailleOrganisation: string;
+    region: Region;
+    secteur: CodeSecteur;
+    tailleOrganisation: TailleOrganisation;
     reponses: Record<string, number>;
   }) {
     this.region = region;

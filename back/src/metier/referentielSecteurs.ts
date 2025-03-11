@@ -41,6 +41,8 @@ const secteurs = [
       "Activités des ménages en tant qu'employeurs ; activités indifférenciées des ménages en tant que producteurs de biens et services pour usage propre",
   },
   { code: "U", libelle: "Activités extra-territoriales" },
-];
+] as const;
 
 export const codesSecteur = secteurs.map(s => s.code);
+
+export type CodeSecteur = (typeof codesSecteur)[number];
