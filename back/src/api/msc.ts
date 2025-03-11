@@ -15,6 +15,7 @@ import { ressourceProfil } from './ressourceProfil';
 import { ressourceResultatDeTest } from './ressourceResultatDeTest';
 import {ressourceAnnuaireOrganisations} from "./ressourceAnnuaireOrganisations";
 import {ressourceAnnuaireDepartements} from "./ressourceAnnuaireDepartements";
+import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -103,7 +104,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourceApresDeconnexionOIDC(configurationServeur)
   );
 
-  app.use('/api/profil', ressourceProfil(configurationServeur));
+  app.use('/api/profil', ressourceProfil());
+
+  app.use('/api/informations-creation-compte', ressourceInformationsCreationCompte(configurationServeur));
 
   app.use('/api/resultats-test', ressourceResultatDeTest(configurationServeur));
   

@@ -31,9 +31,13 @@
   onMount(async () => {
     const token = new URLSearchParams(window.location.search).get('token');
     try {
-      informationsProfessionnelles = (await axios.get<InformationsProfessionnelles>(`/api/profil/verification-token-creation-compte?token=${token}`)).data;
-    } catch(e) {
-      window.location.pathname = '/erreur'
+      informationsProfessionnelles = (
+        await axios.get<InformationsProfessionnelles>(
+          `/api/informations-creation-compte?token=${token}`
+        )
+      ).data;
+    } catch (e) {
+      window.location.pathname = '/erreur';
     }
     const reponseDepartements = await axios.get<Departement[]>(
       '/api/annuaire/departements'
@@ -415,33 +419,34 @@
     }
   }
 
-  :global(.creation-compte .case-et-label), .case-a-cocher {
+  :global(.creation-compte .case-et-label),
+  .case-a-cocher {
     display: flex;
     gap: 8px;
   }
 
-  :global(.creation-compte input[type="checkbox"]) {
-      appearance: none;
-      border: 1px solid var(--noir);
-      border-radius: 4px;
-      width: 24px;
-      height: 24px;
-      margin: 0;
-      cursor: pointer;
+  :global(.creation-compte input[type='checkbox']) {
+    appearance: none;
+    border: 1px solid var(--noir);
+    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    cursor: pointer;
 
-      &:checked {
-        background-color: var(--jaune-msc);
+    &:checked {
+      background-color: var(--jaune-msc);
 
-        &::before {
-          content: "";
-          display: block;
-          margin: auto;
-          width: 6px;
-          height: 12px;
-          border-right: 2px var(--noir) solid;
-          border-bottom: 2px var(--noir) solid;
-          transform: translateY(2px) rotate(0.12turn);
-        }
+      &::before {
+        content: '';
+        display: block;
+        margin: auto;
+        width: 6px;
+        height: 12px;
+        border-right: 2px var(--noir) solid;
+        border-bottom: 2px var(--noir) solid;
+        transform: translateY(2px) rotate(0.12turn);
       }
+    }
   }
 </style>
