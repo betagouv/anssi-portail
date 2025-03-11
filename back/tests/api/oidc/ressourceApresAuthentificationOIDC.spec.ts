@@ -15,6 +15,7 @@ import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC';
 import { decodeSessionDuCookie } from '../cookie';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
+import { adaptateurRechercheEntreprise } from '../../../src/infra/adaptateurRechercheEntreprise';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {
@@ -34,6 +35,9 @@ describe('La ressource apres authentification OIDC', () => {
         adaptateurOIDC,
         adaptateurJWT,
         entrepotUtilisateur,
+        adaptateurRechercheEntreprise,
+        trustProxy: '0',
+        maxRequetesParMinutes: 600
       };
       serveur = creeServeur(configurationServeur);
     });
@@ -103,7 +107,7 @@ describe('La ressource apres authentification OIDC', () => {
       });
 
       it('ajoute un token JWT à la session', async () => {
-        adaptateurJWT.genereToken = (email: string) => `tokenJWT-${email}`;
+        adaptateurJWT.genereToken = (donnees: Record<string, any>) => `tokenJWT-${donnees.email}`;
 
         const reponse: any = await requeteGet();
 
@@ -140,11 +144,11 @@ describe('La ressource apres authentification OIDC', () => {
     });
 
     describe("si l'utilisateur est inconnu", () => {
-      it("redirige vers la page d'inscription", async () => {
+      it("ajoute un token contenant les informations du nouvel utilisateur et redirige vers la page de création de compte", async () => {
         const reponse = await requeteGet();
 
         assert.equal(reponse.status, 302);
-        assert.equal(reponse.headers.location, '/creation-compte');
+        assert.equal(reponse.headers.location, '/creation-compte?token=tokenJWT-');
       });
     });
   });

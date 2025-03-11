@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
 
 const ressourceApresAuthentificationOIDC = (
-  configurationServeur: ConfigurationServeur
+  {adaptateurOIDC, adaptateurJWT, entrepotUtilisateur, fournisseurChemin}: ConfigurationServeur
 ) => {
   let routeur = Router();
   routeur.get('/', async (requete, reponse) => {
@@ -12,24 +12,25 @@ const ressourceApresAuthentificationOIDC = (
     }
 
     try {
-      const { adaptateurOIDC } = configurationServeur;
-      let { accessToken, idToken } =
-        await adaptateurOIDC.recupereJeton(requete);
+      let { accessToken, idToken } = await adaptateurOIDC.recupereJeton(
+        requete
+      );
       let informationsUtilisateur =
         await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
       const { email } = informationsUtilisateur;
 
-      if (!(await configurationServeur.entrepotUtilisateur.parEmail(email))) {
-        reponse.redirect('/creation-compte');
+      if (!(await entrepotUtilisateur.parEmail(email))) {
+        const token = adaptateurJWT.genereToken(informationsUtilisateur);
+        reponse.redirect(`/creation-compte?token=${token}`);
         return;
       }
 
       requete.session = { ...requete.session, ...informationsUtilisateur };
       requete.session.token =
-        configurationServeur.adaptateurJWT.genereToken(email);
+        adaptateurJWT.genereToken({ email });
       requete.session.AgentConnectIdToken = idToken;
       reponse.sendFile(
-        configurationServeur.fournisseurChemin.cheminPageJekyll(
+        fournisseurChemin.cheminPageJekyll(
           'apres-authentification'
         )
       );
