@@ -7,12 +7,8 @@ import { join } from 'path';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin';
 import {
   configurationDeTestDuServeur,
-  fauxAdaptateurJWT,
-  fauxAdaptateurOIDC,
   fauxFournisseurDeChemin,
 } from './fauxObjets';
-import { fabriqueMiddleware } from '../../src/api/middleware';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource pages jekyll', () => {
   let serveur: Express;

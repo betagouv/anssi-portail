@@ -1,17 +1,10 @@
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import assert from 'node:assert';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurJWT,
-  fauxAdaptateurOIDC,
-  fauxFournisseurDeChemin,
-} from './fauxObjets';
+import { configurationDeTestDuServeur } from './fauxObjets';
 import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
-import { fabriqueMiddleware } from '../../src/api/middleware';
 import { encodeSession } from './cookie';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource Profil', () => {
   let serveur: Express;

@@ -79,7 +79,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       `/${ressource}`,
       express.static(fournisseurChemin.ressourceDeBase(ressource), {
         setHeaders: (reponse: Response) =>
-          reponse.setHeader('cache-control', process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'),
+          reponse.setHeader(
+            'cache-control',
+            process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'
+          ),
       })
     );
   });

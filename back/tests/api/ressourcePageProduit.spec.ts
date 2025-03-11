@@ -7,12 +7,8 @@ import request from 'supertest';
 import assert from 'node:assert';
 import {
   configurationDeTestDuServeur,
-  fauxAdaptateurJWT,
-  fauxAdaptateurOIDC,
   fauxFournisseurDeChemin,
 } from './fauxObjets';
-import { fabriqueMiddleware } from '../../src/api/middleware';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource page produit', () => {
   let serveur: Express;
