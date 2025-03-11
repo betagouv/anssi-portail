@@ -16,7 +16,14 @@ import { ressourceProfil } from './ressourceProfil';
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
 
-  app.use(helmet());
+  app.use(helmet({
+    contentSecurityPolicy: {
+      directives: {
+        scriptSrc: ["'self'", 'https://stats.beta.gouv.fr'],
+        connectSrc: ["'self'", 'https://stats.beta.gouv.fr']
+      }
+    }
+  }));
   app.use(configurationServeur.middleware.interdisLaMiseEnCache);
 
   const centParMinute = rateLimit({
