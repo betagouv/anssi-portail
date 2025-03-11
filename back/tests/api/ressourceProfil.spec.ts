@@ -1,20 +1,23 @@
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import assert from 'node:assert';
-import { configurationDeTestDuServeur, fauxAdaptateurJWT } from './fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurJWT, fauxAdaptateurRechercheEntreprise } from './fauxObjets';
 import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import { encodeSession } from './cookie';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { JsonWebTokenError } from 'jsonwebtoken';
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 
 describe('La ressource Profil', () => {
   let serveur: Express;
   let adaptateurJWT: AdaptateurJWT;
+  let adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
 
   beforeEach(() => {
     adaptateurJWT = fauxAdaptateurJWT;
-    serveur = creeServeur({...configurationDeTestDuServeur, adaptateurJWT});
+    adaptateurRechercheEntreprise = fauxAdaptateurRechercheEntreprise;
+    serveur = creeServeur({...configurationDeTestDuServeur, adaptateurJWT, adaptateurRechercheEntreprise});
   });
 
   describe('sur demande GET', () => {
@@ -70,6 +73,26 @@ describe('La ressource Profil', () => {
         nom: 'Dupont',
       });
       assert.equal(tokenRecu, 'unBonToken');
+    });
+
+    it("complète les informations de l'organisation si le siret est présent dans le token", async () => {
+      adaptateurJWT.decode = () =>
+        ({
+          siret: '1234',
+        });
+      adaptateurRechercheEntreprise.rechercheOrganisations = async (terme: string) => ([{
+        siret: terme,
+        departement: '75',
+        nom: 'MonOrganisation'
+      }]);
+
+      const reponse = await request(serveur)
+        .get('/api/profil/verification-token-creation-compte?token=unBonToken');
+      assert.deepEqual(reponse.body.organisation, {
+        siret: '1234',
+        departement: '75',
+        nom: 'MonOrganisation'
+      });
     });
   });
 });
