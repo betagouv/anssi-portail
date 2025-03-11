@@ -9,9 +9,16 @@ import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
 import { adaptateurRechercheEntreprise } from "./infra/adaptateurRechercheEntreprise";
 import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSentry';
+import { adaptateurHorloge } from './infra/adaptateurHorloge';
 
-const busEvenement = new BusEvenements();
-cableTousLesAbonnes(busEvenement);
+const busEvenements = new BusEvenements();
+cableTousLesAbonnes({
+  busEvenements,
+  adaptateurJournal: {
+    consigneEvenement: async (_) => {},
+  },
+  adaptateurHorloge,
+});
 
 creeServeur({
   fournisseurChemin,
@@ -19,10 +26,12 @@ creeServeur({
   adaptateurOIDC,
   adaptateurJWT,
   adaptateurGestionErreur: adaptateurGestionErreurSentry,
-  busEvenement,
+  busEvenements,
   entrepotUtilisateur: new EntrepotUtilisateurPostgres(),
   trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
-  maxRequetesParMinutes: adaptateurEnvironnement.serveur().maxRequetesParMinute(),
+  maxRequetesParMinutes: adaptateurEnvironnement
+    .serveur()
+    .maxRequetesParMinute(),
   adaptateurRechercheEntreprise,
 }).listen(3000, () => {
   console.log('Le serveur écoute sur le port 3000');

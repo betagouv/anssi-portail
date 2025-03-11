@@ -51,7 +51,8 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurGestionErreur: adaptateurGestionVide,
   entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
   trustProxy: '0',
-  busEvenement: fabriqueBusPourLesTests(),
+  maxRequetesParMinutes: 3,
+  busEvenements: fabriqueBusPourLesTests(),
   adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
   maxRequetesParMinutes: 33,
 };
