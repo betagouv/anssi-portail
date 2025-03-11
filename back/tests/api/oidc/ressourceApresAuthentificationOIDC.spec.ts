@@ -3,9 +3,9 @@ import { Express } from 'express';
 import request from 'supertest';
 import assert from 'node:assert';
 import { ConfigurationServeur } from '../../../src/api/configurationServeur';
-import { fabriqueMiddleware } from '../../../src/api/middleware';
 import { creeServeur } from '../../../src/api/msc';
 import {
+  configurationDeTestDuServeur,
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
   fauxFournisseurDeChemin,
@@ -29,8 +29,8 @@ describe('La ressource apres authentification OIDC', () => {
       adaptateurJWT = fauxAdaptateurJWT;
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
       const configurationServeur: ConfigurationServeur = {
+        ...configurationDeTestDuServeur,
         fournisseurChemin,
-        middleware: fabriqueMiddleware(),
         adaptateurOIDC,
         adaptateurJWT,
         entrepotUtilisateur,

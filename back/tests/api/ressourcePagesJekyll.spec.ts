@@ -6,6 +6,7 @@ import assert from 'node:assert';
 import { join } from 'path';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin';
 import {
+  configurationDeTestDuServeur,
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
   fauxFournisseurDeChemin,
@@ -20,11 +21,8 @@ describe('La ressource pages jekyll', () => {
   beforeEach(() => {
     fournisseurChemin = fauxFournisseurDeChemin;
     serveur = creeServeur({
+      ...configurationDeTestDuServeur,
       fournisseurChemin,
-      middleware: fabriqueMiddleware(),
-      adaptateurOIDC: fauxAdaptateurOIDC,
-      adaptateurJWT: fauxAdaptateurJWT,
-      entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
     });
   });
 

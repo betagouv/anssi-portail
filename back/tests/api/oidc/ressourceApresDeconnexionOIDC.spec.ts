@@ -2,30 +2,18 @@ import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import request from 'supertest';
 import assert from 'node:assert';
-import { ConfigurationServeur } from '../../../src/api/configurationServeur';
-import { fabriqueMiddleware } from '../../../src/api/middleware';
 import { creeServeur } from '../../../src/api/msc';
 import {
-  fauxAdaptateurJWT,
-  fauxAdaptateurOIDC,
-  fauxFournisseurDeChemin,
+  configurationDeTestDuServeur,
 } from '../fauxObjets';
 import { encodeSession, enObjet } from '../cookie';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource apres deconnexion OIDC', () => {
   describe('quand on requete GET sur /oidc/apres-deconnexion', () => {
     let serveur: Express;
 
     beforeEach(() => {
-      const configurationServeur: ConfigurationServeur = {
-        fournisseurChemin: fauxFournisseurDeChemin,
-        middleware: fabriqueMiddleware(),
-        adaptateurJWT: fauxAdaptateurJWT,
-        adaptateurOIDC: fauxAdaptateurOIDC,
-        entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
-      };
-      serveur = creeServeur(configurationServeur);
+      serveur = creeServeur(configurationDeTestDuServeur);
     });
 
     it("redirige vers la page d'accueil", async () => {

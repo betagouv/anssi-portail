@@ -2,6 +2,7 @@ import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import assert from 'node:assert';
 import {
+  configurationDeTestDuServeur,
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
   fauxFournisseurDeChemin,
@@ -16,13 +17,7 @@ describe('La ressource Profil', () => {
   let serveur: Express;
 
   beforeEach(() => {
-    serveur = creeServeur({
-      fournisseurChemin: fauxFournisseurDeChemin,
-      middleware: fabriqueMiddleware(),
-      adaptateurOIDC: fauxAdaptateurOIDC,
-      adaptateurJWT: fauxAdaptateurJWT,
-      entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
-    });
+    serveur = creeServeur(configurationDeTestDuServeur);
   });
 
   describe('sur demande GET', () => {

@@ -1,8 +1,10 @@
 import { join } from 'path';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { Utilisateur } from '../../src/metier/utilisateur';
+import { fabriqueMiddleware } from '../../src/api/middleware';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
+import { ConfigurationServeur } from '../../src/api/configurationServeur';
+import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -31,4 +33,14 @@ export const fauxAdaptateurOIDC: AdaptateurOIDC = {
 
 export const fauxAdaptateurJWT: AdaptateurJWT = {
   genereToken: (_: string) => '',
+};
+
+export const configurationDeTestDuServeur: ConfigurationServeur = {
+  fournisseurChemin: fauxFournisseurDeChemin,
+  middleware: fabriqueMiddleware(),
+  adaptateurOIDC: fauxAdaptateurOIDC,
+  adaptateurJWT: fauxAdaptateurJWT,
+  entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
+  trustProxy: '0',
+  busEvenement: fabriqueBusPourLesTests(),
 };

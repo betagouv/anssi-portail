@@ -2,6 +2,7 @@ import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import { creeServeur } from '../../src/api/msc';
 import {
+  configurationDeTestDuServeur,
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
   fauxFournisseurDeChemin,
@@ -37,12 +38,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
   beforeEach(() => {
     busEvenement = fabriqueBusPourLesTests();
     serveur = creeServeur({
-      fournisseurChemin: fauxFournisseurDeChemin,
-      middleware: fabriqueMiddleware(),
-      adaptateurOIDC: fauxAdaptateurOIDC,
-      adaptateurJWT: fauxAdaptateurJWT,
-      entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
-      trustProxy: '0',
+      ...configurationDeTestDuServeur,
       busEvenement,
     });
   });
