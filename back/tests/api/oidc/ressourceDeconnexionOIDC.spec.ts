@@ -7,11 +7,8 @@ import { creeServeur } from '../../../src/api/msc';
 import { encodeSession, enObjet } from '../cookie';
 import {
   configurationDeTestDuServeur,
-  fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
-  fauxFournisseurDeChemin,
 } from '../fauxObjets';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource deconnexion OIDC', () => {
   describe('quand on requete GET sur /oidc/deconnexion', () => {

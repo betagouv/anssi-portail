@@ -1,13 +1,7 @@
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import { creeServeur } from '../../src/api/msc';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurJWT,
-  fauxAdaptateurOIDC,
-  fauxFournisseurDeChemin,
-} from './fauxObjets';
-import { fabriqueMiddleware } from '../../src/api/middleware';
+import { configurationDeTestDuServeur } from './fauxObjets';
 import request from 'supertest';
 import assert from 'node:assert';
 import {
@@ -15,7 +9,6 @@ import {
   MockBusEvenement,
 } from '../bus/busPourLesTests';
 import { TestRealise } from '../../src/bus/testRealise';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource qui gère les résultats de test de maturité', () => {
   let serveur: Express;
@@ -45,7 +38,9 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
   describe('sur requête POST', () => {
     it('répond 201', async () => {
-      const reponse = await request(serveur).post('/api/resultats-test').send(donneesCorrectes);
+      const reponse = await request(serveur)
+        .post('/api/resultats-test')
+        .send(donneesCorrectes);
 
       assert.equal(reponse.status, 201);
     });
@@ -82,8 +77,10 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       });
     });
 
-    describe("concernant la validation des données", () => {
-      const requeteAvecDonneeIncorrecte = async (donnees: Record<string, any>) => {
+    describe('concernant la validation des données', () => {
+      const requeteAvecDonneeIncorrecte = async (
+        donnees: Record<string, any>
+      ) => {
         const reponse = await request(serveur)
           .post('/api/resultats-test')
           .send({
@@ -113,46 +110,67 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       });
 
       it('valide la région', async () => {
-        const reponse = await requeteAvecDonneeIncorrecte({ region: 'UneRegionInconnue' });
+        const reponse = await requeteAvecDonneeIncorrecte({
+          region: 'UneRegionInconnue',
+        });
 
         assert.equal(reponse.status, 400);
         assert.equal(reponse.body.erreur, 'Région invalide');
       });
 
       it('valide le secteur', async () => {
-        const reponse = await requeteAvecDonneeIncorrecte({ secteur: 'UnSecteurInconnu' });
+        const reponse = await requeteAvecDonneeIncorrecte({
+          secteur: 'UnSecteurInconnu',
+        });
 
         assert.equal(reponse.status, 400);
         assert.equal(reponse.body.erreur, 'Secteur invalide');
       });
 
       it("valide la taille d'organisation", async () => {
-        const reponse = await requeteAvecDonneeIncorrecte({ tailleOrganisation: 'UneTailleInconnue' });
+        const reponse = await requeteAvecDonneeIncorrecte({
+          tailleOrganisation: 'UneTailleInconnue',
+        });
 
         assert.equal(reponse.status, 400);
         assert.equal(reponse.body.erreur, "Taille d'organisation invalide");
       });
 
-      describe("concernant les réponses", () => {
+      describe('concernant les réponses', () => {
         it('valide que les réponses sont dans un objet', async () => {
-          const reponse = await requeteAvecDonneeIncorrecte({ reponses: ['pasUnObjet'] });
+          const reponse = await requeteAvecDonneeIncorrecte({
+            reponses: ['pasUnObjet'],
+          });
 
           assert.equal(reponse.status, 400);
-          assert.equal(reponse.body.erreur, "Les réponses doivent être dans un objet");
+          assert.equal(
+            reponse.body.erreur,
+            'Les réponses doivent être dans un objet'
+          );
         });
 
         it('valide les clés de réponses', async () => {
-          const reponse = await requeteAvecDonneeIncorrecte({ reponses: {uneAutreClé: 1} });
+          const reponse = await requeteAvecDonneeIncorrecte({
+            reponses: { uneAutreClé: 1 },
+          });
 
           assert.equal(reponse.status, 400);
-          assert.equal(reponse.body.erreur, "Les clés de réponse sont invalides");
+          assert.equal(
+            reponse.body.erreur,
+            'Les clés de réponse sont invalides'
+          );
         });
 
         it('valide les valeurs de reponses', async () => {
-          const reponse = await requeteAvecDonneeIncorrecte({ reponses: { ...donneesCorrectes.reponses, pilotage: 0 } });
+          const reponse = await requeteAvecDonneeIncorrecte({
+            reponses: { ...donneesCorrectes.reponses, pilotage: 0 },
+          });
 
           assert.equal(reponse.status, 400);
-          assert.equal(reponse.body.erreur, "Les valeurs de réponses doivent être comprises entre 1 et 5");
+          assert.equal(
+            reponse.body.erreur,
+            'Les valeurs de réponses doivent être comprises entre 1 et 5'
+          );
         });
       });
     });

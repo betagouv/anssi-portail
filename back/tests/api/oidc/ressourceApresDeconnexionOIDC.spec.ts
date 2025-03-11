@@ -3,9 +3,7 @@ import { Express } from 'express';
 import request from 'supertest';
 import assert from 'node:assert';
 import { creeServeur } from '../../../src/api/msc';
-import {
-  configurationDeTestDuServeur,
-} from '../fauxObjets';
+import { configurationDeTestDuServeur } from '../fauxObjets';
 import { encodeSession, enObjet } from '../cookie';
 
 describe('La ressource apres deconnexion OIDC', () => {

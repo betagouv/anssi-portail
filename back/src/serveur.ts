@@ -3,8 +3,8 @@ import { fournisseurChemin } from './api/fournisseurChemin';
 import { fabriqueMiddleware } from './api/middleware';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
 import { adaptateurJWT } from './api/adaptateurJWT';
-import {BusEvenements} from "./bus/busEvenements";
-import {cableTousLesAbonnes} from "./bus/cablage";
+import { BusEvenements } from './bus/busEvenements';
+import { cableTousLesAbonnes } from './bus/cablage';
 import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
 

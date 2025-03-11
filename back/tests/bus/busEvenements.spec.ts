@@ -1,8 +1,8 @@
 // eslint-disable-next-line max-classes-per-file
 
-import { describe, it } from "node:test";
-import {BusEvenements, EvenementDuBus} from "../../src/bus/busEvenements";
-import assert from "node:assert";
+import { describe, it } from 'node:test';
+import { BusEvenements, EvenementDuBus } from '../../src/bus/busEvenements';
+import assert from 'node:assert';
 
 class EvenementTestA implements EvenementDuBus {
   increment: number = 0;
@@ -35,8 +35,12 @@ describe("Le bus d'événements", () => {
 
     const bus = creeBusEvenements();
     bus.abonnePlusieurs(EvenementTestA, [
-      async () => {compteur += 1},
-      async () => {compteur += 10},
+      async () => {
+        compteur += 1;
+      },
+      async () => {
+        compteur += 10;
+      },
     ]);
 
     await bus.publie(new EvenementTestA());

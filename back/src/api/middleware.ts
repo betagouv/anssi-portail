@@ -1,5 +1,5 @@
-import {NextFunction, Request, Response} from 'express';
-import {check, validationResult} from 'express-validator';
+import { NextFunction, Request, Response } from 'express';
+import { check, validationResult } from 'express-validator';
 
 type FonctionMiddleware = (
   requete: Request,
@@ -16,25 +16,28 @@ export type Middleware = {
 export const fabriqueMiddleware = (): Middleware => {
   const aseptise =
     (...nomsParametres: string[]) =>
-      async (requete: any, _reponse: any, suite: any) => {
-        const aseptisations = nomsParametres.map((p) =>
-          check(p).trim().escape().run(requete)
-        );
-        await Promise.all(aseptisations);
-        suite();
-      };
-
-  const valide = () =>
-    async (requete: any, reponse: any, suite: any) => {
-      const erreurs = validationResult(requete);
-      if (!erreurs.isEmpty()) {
-        reponse.status(400).json({erreur: erreurs.array()[0].msg});
-        return;
-      }
+    async (requete: any, _reponse: any, suite: any) => {
+      const aseptisations = nomsParametres.map((p) =>
+        check(p).trim().escape().run(requete)
+      );
+      await Promise.all(aseptisations);
       suite();
-    }
+    };
 
-  const interdisLaMiseEnCache = async (_requete: Request, reponse: Response, suite: NextFunction) => {
+  const valide = () => async (requete: any, reponse: any, suite: any) => {
+    const erreurs = validationResult(requete);
+    if (!erreurs.isEmpty()) {
+      reponse.status(400).json({ erreur: erreurs.array()[0].msg });
+      return;
+    }
+    suite();
+  };
+
+  const interdisLaMiseEnCache = async (
+    _requete: Request,
+    reponse: Response,
+    suite: NextFunction
+  ) => {
     reponse.set({
       'cache-control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
       pragma: 'no-cache',
@@ -47,6 +50,6 @@ export const fabriqueMiddleware = (): Middleware => {
   return {
     aseptise,
     valide,
-    interdisLaMiseEnCache
+    interdisLaMiseEnCache,
   };
 };

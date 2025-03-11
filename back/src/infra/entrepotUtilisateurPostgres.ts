@@ -6,9 +6,11 @@ import { UtilisateurBDD } from './utilisateurBDD';
 
 export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
   knex: Knex.Knex;
+
   constructor() {
     this.knex = Knex(config);
   }
+
   private chiffreDonneesUtilisateur(utilisateur: Utilisateur): UtilisateurBDD {
     return utilisateur;
   }

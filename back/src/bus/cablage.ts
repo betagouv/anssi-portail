@@ -1,8 +1,3 @@
-import {BusEvenements} from "./busEvenements";
+import { BusEvenements } from './busEvenements';
 
-export const cableTousLesAbonnes = (
-  busEvenements: BusEvenements,
-) => {
-
-};
-
+export const cableTousLesAbonnes = (busEvenements: BusEvenements) => {};

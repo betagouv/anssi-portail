@@ -1,4 +1,8 @@
-import { BusEvenements, ClasseDEvenementDeBus, EvenementDuBus } from '../../src/bus/busEvenements';
+import {
+  BusEvenements,
+  ClasseDEvenementDeBus,
+  EvenementDuBus,
+} from '../../src/bus/busEvenements';
 
 export class MockBusEvenement extends BusEvenements {
   evenementsRecus: EvenementDuBus[] = [];
