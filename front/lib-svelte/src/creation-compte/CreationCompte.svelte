@@ -17,12 +17,11 @@
   import { onMount } from 'svelte';
   import axios from 'axios';
 
-  //TODO: recupérer informationsProfessionnelles
   let informationsProfessionnelles: InformationsProfessionnelles = {
-    prenom: 'prenom',
-    nom: 'nom',
-    email: 'email',
-    organisation: { departement: '75', nom: 'test', siret: '242424' },
+    prenom: '',
+    nom: '',
+    email: '',
+    organisation: { departement: '', nom: '', siret: '' },
     telephone: '',
     domainesSpecialite: [],
   };
@@ -30,6 +29,12 @@
   let departements: Departement[] = [];
 
   onMount(async () => {
+    const token = new URLSearchParams(window.location.search).get('token');
+    try {
+      informationsProfessionnelles = (await axios.get<InformationsProfessionnelles>(`/api/profil/verification-token-creation-compte?token=${token}`)).data;
+    } catch(e) {
+      window.location.pathname = '/erreur'
+    }
     const reponseDepartements = await axios.get<Departement[]>(
       '/api/annuaire/departements'
     );
@@ -74,7 +79,8 @@
     }
   };
 
-  let formulaireInscription: FormulaireInscription = {
+  let formulaireInscription: FormulaireInscription;
+  $: formulaireInscription = {
     prenom: informationsProfessionnelles.prenom,
     nom: informationsProfessionnelles.nom,
     email: informationsProfessionnelles.email,
