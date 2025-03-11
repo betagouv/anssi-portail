@@ -1,7 +1,7 @@
 ---
 ---
 
-@import "responsive";
+@use "../../assets/styles/responsive" as *;
 
 #catalogue {
   display: flex;
@@ -219,8 +219,9 @@
       gap: 24px;
     }
   }
-
-  padding: 60px var(--gouttiere) 80px;
+  & {
+    padding: 60px var(--gouttiere) 80px;
+  }
 }
 
 .grille {

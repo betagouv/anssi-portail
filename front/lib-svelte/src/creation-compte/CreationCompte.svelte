@@ -291,7 +291,8 @@
 </div>
 
 <style lang="scss">
-  @import '../../assets/styles/responsive';
+  @use '../../../assets/styles/responsive.scss' as *;
+
   :global(.creation-compte .actions button) {
     padding: 8px 16px;
     font-size: 1rem;

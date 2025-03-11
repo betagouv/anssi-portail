@@ -1,7 +1,7 @@
 ---
 ---
 
-@import 'responsive';
+@use "../../assets/styles/responsive" as *;
 
 section.connexion {
   padding: 48px 16px;
