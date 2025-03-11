@@ -12,7 +12,7 @@
   let profil: Profil | undefined;
 
   onMount(async () => {
-    let reponse = await axios.get("/profil");
+    let reponse = await axios.get("/api/profil");
     let data = reponse.data as any;
     if (data.email) {
       profil = data as Profil;
