@@ -1,9 +1,10 @@
-import { beforeEach, describe, it } from 'node:test';
-import { Request, Response } from 'express';
-import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
+import {beforeEach, describe, it} from 'node:test';
+import {Request, Response} from 'express';
+import {fabriqueMiddleware, Middleware} from '../../src/api/middleware';
 import assert from 'assert';
-import { createRequest, createResponse } from 'node-mocks-http';
-import { OutgoingHttpHeaders } from 'node:http';
+import {createRequest, createResponse} from 'node-mocks-http';
+import {OutgoingHttpHeaders} from 'node:http';
+import {Context} from "express-validator/lib/context";
 
 describe('Le middleware', () => {
   let requete: Request & { service?: string };
@@ -81,6 +82,28 @@ describe('Le middleware', () => {
       assert.equal(headers.pragma, 'no-cache');
       assert.equal(headers.expires, '0');
       assert.equal(headers['surrogate-control'], 'no-store');
+    });
+  });
+
+  describe("sur demande de validation", () => {
+    it('jette une 400 si une erreur de validation est présente', async () => {
+      requete.body.param = 'hello';
+      let contexteAvecErreur = new Context(["unChamp"], [], [], false, false);
+      contexteAvecErreur.addError({
+        type: 'field',
+        message: "un message d'erreur",
+        value: "",
+        // @ts-ignore
+        meta: {}
+      })
+
+      // @ts-ignore
+      requete["express-validator#contexts"] = [contexteAvecErreur]
+
+      await middleware.valide()(requete, reponse, () => {
+      });
+
+      assert.equal(reponse.statusCode, 400);
     });
   });
 });
