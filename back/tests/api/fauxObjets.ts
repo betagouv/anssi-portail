@@ -36,6 +36,7 @@ export const fauxAdaptateurOIDC: AdaptateurOIDC = {
 
 export const fauxAdaptateurJWT: AdaptateurJWT = {
   genereToken: (_: Record<string, any>) => '',
+  decode: (_: string) => ({})
 };
 
 export const configurationDeTestDuServeur: ConfigurationServeur = {
