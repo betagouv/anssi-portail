@@ -12,7 +12,7 @@ export class BusEvenements {
   gestionnaires: Record<string, GestionnaireDEvenement<any>[]> = {};
 
   abonne<T extends EvenementDuBus>(
-    classeEvenement: new () => T,
+    classeEvenement: ClasseDEvenementDeBus<T>,
     gestionnaire: GestionnaireDEvenement<T>
   ) {
     this.gestionnaires[classeEvenement.name] ??= [];
@@ -20,7 +20,7 @@ export class BusEvenements {
   }
 
   abonnePlusieurs<T extends EvenementDuBus>(
-    classeEvenement: new () => T,
+    classeEvenement: ClasseDEvenementDeBus<T>,
     gestionnaires: GestionnaireDEvenement<T>[]
   ) {
     gestionnaires.forEach((h) => this.abonne(classeEvenement, h));

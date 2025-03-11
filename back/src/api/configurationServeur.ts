@@ -13,7 +13,7 @@ export type ConfigurationServeur = {
   adaptateurOIDC: AdaptateurOIDC;
   adaptateurJWT: AdaptateurJWT;
   adaptateurGestionErreur: AdaptateurGestionErreur;
-  busEvenement: BusEvenements;
+  busEvenements: BusEvenements;
   adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   entrepotUtilisateur: EntrepotUtilisateur;
   trustProxy: String;

@@ -16,7 +16,7 @@ const clesReponsesValides = [
 ];
 
 const ressourceResultatDeTest = ({
-  busEvenement,
+  busEvenements,
   middleware,
 }: ConfigurationServeur) => {
   const routeur = Router();
@@ -65,7 +65,7 @@ const ressourceResultatDeTest = ({
     async (requete: Request, reponse: Response) => {
       const { tailleOrganisation, region, secteur, reponses } = requete.body;
 
-      await busEvenement.publie(
+      await busEvenements.publie(
         new TestRealise({
           region: region,
           secteur: secteur,

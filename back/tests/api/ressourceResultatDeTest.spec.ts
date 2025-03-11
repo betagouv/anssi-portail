@@ -32,7 +32,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
     busEvenement = fabriqueBusPourLesTests();
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
-      busEvenement,
+      busEvenements: busEvenement,
     });
   });
 
