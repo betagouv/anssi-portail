@@ -103,7 +103,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourceApresDeconnexionOIDC(configurationServeur)
   );
 
-  app.use('/profil', ressourceProfil(configurationServeur));
+  app.use('/api/profil', ressourceProfil(configurationServeur));
 
   app.use('/api/resultats-test', ressourceResultatDeTest(configurationServeur));
   

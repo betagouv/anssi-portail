@@ -15,7 +15,7 @@ describe('La ressource Profil', () => {
 
   describe('sur demande GET', () => {
     it('répond 200', async () => {
-      const reponse = await request(serveur).get('/profil');
+      const reponse = await request(serveur).get('/api/profil');
 
       assert.equal(reponse.status, 200);
     });
@@ -29,7 +29,7 @@ describe('La ressource Profil', () => {
       });
 
       const reponse = await request(serveur)
-        .get('/profil')
+        .get('/api/profil')
         .set('Cookie', [cookie]);
 
       assert.equal(reponse.body.nom, 'Dupont');
