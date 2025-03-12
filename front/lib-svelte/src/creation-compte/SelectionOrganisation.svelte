@@ -3,11 +3,11 @@
   import { createEventDispatcher, tick } from 'svelte';
   import type { Departement, Organisation } from './creationCompte';
   import { validationChamp } from '../directives/validationChamp';
-  import axios from "axios";
+  import axios from 'axios';
 
   type ReponseApiAnnuaireOrganisations = {
-    suggestions: Organisation[]
-  }
+    suggestions: Organisation[];
+  };
   type OrganisationAvecLabel = Organisation & {
     label: string;
   };
@@ -56,12 +56,15 @@
       suggestions = [];
       return;
     }
-    const reponse = await axios.get<ReponseApiAnnuaireOrganisations>('/api/annuaire/organisations', {
-      params: {
-        recherche: saisie,
-        departement: filtreDepartement?.code,
-      },
-    });
+    const reponse = await axios.get<ReponseApiAnnuaireOrganisations>(
+      '/api/annuaire/organisations',
+      {
+        params: {
+          recherche: saisie,
+          departement: filtreDepartement?.code,
+        },
+      }
+    );
 
     suggestions = reponse?.data?.suggestions.map(uneSuggestion);
     suggestionsVisibles = suggestions.length > 0;
@@ -128,32 +131,32 @@
 <style lang="scss">
   .conteneur-selection-organisation {
     position: relative;
+  }
 
-    .liste-suggestions {
-      display: none;
-      position: absolute;
-      background: white;
-      width: calc(100% - 34px);
-      /* 34px = paddings gauche et droite + bords = 2 x 16 + 2 x 1 */
-      z-index: 1;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-      transform: translateY(-5px);
-      padding: 0 16px;
-    }
+  .liste-suggestions {
+    display: none;
+    position: absolute;
+    background: white;
+    width: calc(100% - 34px);
+    /* 34px = paddings gauche et droite + bords = 2 x 16 + 2 x 1 */
+    z-index: 1;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transform: translateY(-5px);
+    padding: 0 16px;
+  }
 
-    .visible {
-      display: block;
-      border: 1px solid var(--bleu-survol);
-    }
+  .visible {
+    display: block;
+    border: 1px solid var(--jaune-msc);
+  }
 
-    .option {
-      padding: 4px 0;
-      cursor: pointer;
-    }
+  .option {
+    padding: 4px 0;
+    cursor: pointer;
+  }
 
-    .valeur-cache {
-      display: none;
-    }
+  .valeur-cache {
+    display: none;
   }
 </style>

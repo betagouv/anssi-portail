@@ -81,11 +81,11 @@
 />
 
 <style lang="scss">
-  .selection-departement.conteneur {
+  .conteneur {
     position: relative;
   }
 
-  .selection-departement .liste-suggestions {
+  .liste-suggestions {
     display: none;
     position: absolute;
     background: white;
@@ -98,17 +98,17 @@
     padding: 0 16px;
   }
 
-  .selection-departement .visible {
+  .visible {
     display: block;
-    border: 1px solid var(--bleu-survol);
+    border: 1px solid var(--jaune-msc);
   }
 
-  .selection-departement .option {
+  .option {
     padding: 4px 0;
     cursor: pointer;
   }
 
-  .selection-departement .liste-suggestions {
+  .liste-suggestions {
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 200px;
