@@ -2,28 +2,16 @@ import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import assert from 'node:assert';
 import {
-  fauxAdaptateurJWT,
-  fauxAdaptateurOIDC,
-  fauxAdaptateurRechercheEntreprise,
-  fauxFournisseurDeChemin,
+  configurationDeTestDuServeur,
 } from './fauxObjets';
 import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
-import { fabriqueMiddleware } from '../../src/api/middleware';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource Annuaire Départements', () => {
   let serveur: Express;
 
   beforeEach(() => {
-    serveur = creeServeur({
-      fournisseurChemin: fauxFournisseurDeChemin,
-      middleware: fabriqueMiddleware(),
-      adaptateurOIDC: fauxAdaptateurOIDC,
-      adaptateurJWT: fauxAdaptateurJWT,
-      entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
-      adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
-    });
+    serveur = creeServeur(configurationDeTestDuServeur);
   });
 
   describe('sur demande GET', () => {
