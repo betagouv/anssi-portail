@@ -245,8 +245,7 @@
                 name="infolettreAcceptee"
               />
               <label for="infolettreAcceptee">
-                J'accepte de recevoir la lettre d'information
-                MonServiceSécurisé.
+                J'accepte de recevoir la lettre d'information MesServicesCyber.
               </label>
             </div>
             <div class="case-a-cocher cgu">
@@ -259,9 +258,9 @@
                 use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
               />
               <label for="cguAcceptees" class="requis">
-                J'accepte les <a href="/cgu"
-                  >conditions générales d'utilisation</a
-                > de MonServiceSécurisé
+                J'accepte les <a href="/cgu">
+                  conditions générales d'utilisation
+                </a> de MesServicesCyber
               </label>
             </div>
           </div>
