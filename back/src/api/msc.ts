@@ -20,6 +20,8 @@ import { ressourceInformationsCreationCompte } from './ressourceInformationsCrea
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
 
+  configurationServeur.adaptateurGestionErreur.initialise(app);
+
   app.use(helmet({
     contentSecurityPolicy: {
       directives: {
@@ -113,6 +115,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/api/annuaire/organisations', ressourceAnnuaireOrganisations(configurationServeur));
 
   app.use('/api/annuaire/departements', ressourceAnnuaireDepartements(configurationServeur));
+
+  app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 
   app.use((_requete: Request, reponse: Response) => {
     reponse

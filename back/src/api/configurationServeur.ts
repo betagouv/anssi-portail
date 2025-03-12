@@ -5,12 +5,14 @@ import { AdaptateurJWT } from './adaptateurJWT';
 import { BusEvenements } from '../bus/busEvenements';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { AdaptateurRechercheEntreprise } from "../infra/adaptateurRechercheEntreprise";
+import { AdaptateurGestionErreur } from '../infra/adaptateurGestionErreurSentry';
 
 export type ConfigurationServeur = {
   fournisseurChemin: FournisseurChemin;
   middleware: Middleware;
   adaptateurOIDC: AdaptateurOIDC;
   adaptateurJWT: AdaptateurJWT;
+  adaptateurGestionErreur: AdaptateurGestionErreur;
   busEvenement: BusEvenements;
   adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   entrepotUtilisateur: EntrepotUtilisateur;

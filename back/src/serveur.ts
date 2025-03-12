@@ -8,6 +8,7 @@ import { cableTousLesAbonnes } from './bus/cablage';
 import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
 import { adaptateurRechercheEntreprise } from "./infra/adaptateurRechercheEntreprise";
+import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSentry';
 
 const busEvenement = new BusEvenements();
 cableTousLesAbonnes(busEvenement);
@@ -17,6 +18,7 @@ creeServeur({
   middleware: fabriqueMiddleware(),
   adaptateurOIDC,
   adaptateurJWT,
+  adaptateurGestionErreur: adaptateurGestionErreurSentry,
   busEvenement,
   entrepotUtilisateur: new EntrepotUtilisateurPostgres(),
   trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
