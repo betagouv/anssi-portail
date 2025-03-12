@@ -5,9 +5,7 @@ import { fabriqueMiddleware } from '../../src/api/middleware';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
-import {
-  AdaptateurRechercheEntreprise,
-} from "../../src/infra/adaptateurRechercheEntreprise";
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -36,8 +34,13 @@ export const fauxAdaptateurOIDC: AdaptateurOIDC = {
 
 export const fauxAdaptateurJWT: AdaptateurJWT = {
   genereToken: (_: Record<string, any>) => '',
-  decode: (_: string) => ({})
+  decode: (_: string) => ({}),
 };
+
+export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
+  {
+    rechercheOrganisations: async (_: string, __: string | null) => [],
+  };
 
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   fournisseurChemin: fauxFournisseurDeChemin,
@@ -47,8 +50,6 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
   trustProxy: '0',
   busEvenement: fabriqueBusPourLesTests(),
+  adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
+  maxRequetesParMinutes: 33,
 };
-
-export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
-  rechercheOrganisations: async (_: string, __: string | null) => ([])
-}
