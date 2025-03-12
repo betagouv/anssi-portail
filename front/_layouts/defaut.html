@@ -10,6 +10,11 @@
     <script type='module' src='/scripts/matomoTagManager.js' data-url-tag-manager-matomo="{{ site.env.MATOMO_URL_TAG_MANAGER }}" id="script-matomo-tag-manager"></script>
 {% endif %}
 
+{% if site.env.SENTRY_DSN != '' and site.env.SENTRY_DSN != undefined %}
+    <script src='https://browser.sentry-cdn.com/7.102.1/bundle.min.js' crossorigin='anonymous'></script>
+    <script type='module' src='/scripts/sentry.js' data-environnement="{{ site.env.SENTRY_ENVIRONNEMENT }}" data-dsn="{{ site.env.SENTRY_DSN }}" id='script-sentry'></script>
+{% endif %}
+
 <main>
     {% include header.html %}
     {{ content }}
