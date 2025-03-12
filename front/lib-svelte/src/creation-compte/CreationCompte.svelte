@@ -328,8 +328,7 @@
       padding: 32px 64px;
     }
     @include a-partir-de(md) {
-      margin: auto;
-      max-height: 644px;
+      margin: 0 auto;
       max-width: 800px;
     }
   }

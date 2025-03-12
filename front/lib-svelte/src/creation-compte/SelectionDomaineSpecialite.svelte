@@ -187,14 +187,6 @@
       transform: translate(0, 0) !important;
     }
 
-    .domaines {
-      border: 1px solid var(--jaune-msc);
-      background-color: #fff;
-      width: calc(100% - 2px);
-      border-radius: 6px;
-      color: black;
-    }
-
     .rappel-declencheur {
       padding-top: 17px;
     }
