@@ -56,9 +56,13 @@ RUN npm install && npm run build
 WORKDIR /srv/jekyll
 ARG MATOMO_ID
 ARG MATOMO_URL_TAG_MANAGER
+ARG SENTRY_DSN
+ARG SENTRY_ENVIRONNEMENT
 RUN touch .env
 RUN echo "MATOMO_ID=${MATOMO_ID}" >> .env
 RUN echo "MATOMO_URL_TAG_MANAGER=${MATOMO_URL_TAG_MANAGER}" >> .env
+RUN echo "SENTRY_DSN=${SENTRY_DSN}" >> .env
+RUN echo "SENTRY_ENVIRONNEMENT=${SENTRY_ENVIRONNEMENT}" >> .env
 RUN set -eux; bundler exec jekyll build
 
 ####

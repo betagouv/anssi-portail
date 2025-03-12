@@ -25,7 +25,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(helmet({
     contentSecurityPolicy: {
       directives: {
-        scriptSrc: ["'self'", 'https://stats.beta.gouv.fr'],
+        scriptSrc: ["'self'", 'https://stats.beta.gouv.fr', 'https://browser.sentry-cdn.com'],
         connectSrc: ["'self'", 'https://stats.beta.gouv.fr']
       }
     }
