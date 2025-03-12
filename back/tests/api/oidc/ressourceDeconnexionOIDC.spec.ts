@@ -23,11 +23,10 @@ describe('La ressource deconnexion OIDC', () => {
           state: 'un faux state',
         };
       };
-      const configurationServeur: ConfigurationServeur = {
+      serveur = creeServeur({
         ...configurationDeTestDuServeur,
         adaptateurOIDC,
-      };
-      serveur = creeServeur(configurationServeur);
+      });
     });
 
     it('redirige vers url de deconnexion', async () => {

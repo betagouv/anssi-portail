@@ -15,7 +15,6 @@ import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC';
 import { decodeSessionDuCookie } from '../cookie';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
-import { adaptateurRechercheEntreprise } from '../../../src/infra/adaptateurRechercheEntreprise';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {
@@ -35,9 +34,6 @@ describe('La ressource apres authentification OIDC', () => {
         adaptateurOIDC,
         adaptateurJWT,
         entrepotUtilisateur,
-        adaptateurRechercheEntreprise,
-        trustProxy: '0',
-        maxRequetesParMinutes: 600
       };
       serveur = creeServeur(configurationServeur);
     });

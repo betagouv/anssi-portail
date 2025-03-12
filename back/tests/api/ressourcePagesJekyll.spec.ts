@@ -12,8 +12,8 @@ import {
 
 describe('La ressource pages jekyll', () => {
   let serveur: Express;
-
   let fournisseurChemin: FournisseurChemin;
+  
   beforeEach(() => {
     fournisseurChemin = fauxFournisseurDeChemin;
     serveur = creeServeur({

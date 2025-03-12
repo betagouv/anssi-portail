@@ -3,13 +3,8 @@ import request from 'supertest';
 import { Express } from 'express';
 import { creeServeur } from '../../src/api/msc';
 import {
-  fauxAdaptateurJWT,
-  fauxAdaptateurOIDC,
-  fauxAdaptateurRechercheEntreprise,
-  fauxFournisseurDeChemin,
+  configurationDeTestDuServeur,
 } from './fauxObjets';
-import { fabriqueMiddleware } from '../../src/api/middleware';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import {
   AdaptateurRechercheEntreprise,
   ResultatRechercheEntreprise,
@@ -18,18 +13,9 @@ import assert from 'node:assert';
 
 describe('quand requête GET sur `/api/annuaire/organisations`', () => {
   let serveur: Express;
-  let configurationServeur: any;
 
   beforeEach(() => {
-    configurationServeur = {
-      fournisseurChemin: fauxFournisseurDeChemin,
-      middleware: fabriqueMiddleware(),
-      adaptateurOIDC: fauxAdaptateurOIDC,
-      adaptateurJWT: fauxAdaptateurJWT,
-      adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
-      entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
-    };
-    serveur = creeServeur(configurationServeur);
+    serveur = creeServeur(configurationDeTestDuServeur);
   });
 
   it('aseptise les paramètres de la requête', async (done) => {
@@ -46,7 +32,7 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
       },
     };
     serveur = creeServeur({
-      ...configurationServeur,
+      ...configurationDeTestDuServeur,
       adaptateurRechercheEntreprise: unAdaptateurRechercheEntreprise,
     });
 
@@ -88,7 +74,7 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
       },
     };
     serveur = creeServeur({
-      ...configurationServeur,
+      ...configurationDeTestDuServeur,
       adaptateurRechercheEntreprise: unAdaptateurRechercheEntreprise,
     });
 

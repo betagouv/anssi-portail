@@ -20,11 +20,10 @@ describe('La ressource connexion OIDC', () => {
         state: 'un faux state',
         nonce: 'un faux nonce',
       });
-      const configurationServeur: ConfigurationServeur = {
+      serveur = creeServeur({
         ...configurationDeTestDuServeur,
         adaptateurOIDC,
-      };
-      serveur = creeServeur(configurationServeur);
+      });
     });
 
     it("redirige vers l'adresse proconnect", async () => {
