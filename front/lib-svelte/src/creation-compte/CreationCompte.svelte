@@ -75,7 +75,7 @@
     if (formulaireCourant.estValide()) {
       try {
         enCoursEnvoi = true;
-        await axios.post('/api/utilisateur', formulaireInscription);
+        await axios.post('/api/utilisateurs', formulaireInscription);
       } finally {
         enCoursEnvoi = false;
       }
