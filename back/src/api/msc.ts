@@ -16,6 +16,7 @@ import { ressourceResultatDeTest } from './ressourceResultatDeTest';
 import {ressourceAnnuaireOrganisations} from "./ressourceAnnuaireOrganisations";
 import {ressourceAnnuaireDepartements} from "./ressourceAnnuaireDepartements";
 import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte';
+import { ressourceUtilisateurs } from './ressourceUtilisateurs';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -107,6 +108,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   );
 
   app.use('/api/profil', ressourceProfil());
+
+  app.use('/api/utilisateurs', ressourceUtilisateurs(configurationServeur));
 
   app.use('/api/informations-creation-compte', ressourceInformationsCreationCompte(configurationServeur));
 
