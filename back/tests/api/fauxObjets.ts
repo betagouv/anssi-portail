@@ -6,6 +6,7 @@ import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMe
 import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
+import { adaptateurGestionVide } from '../../src/infra/adaptateurGestionErreurVide';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -47,6 +48,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   middleware: fabriqueMiddleware(),
   adaptateurOIDC: fauxAdaptateurOIDC,
   adaptateurJWT: fauxAdaptateurJWT,
+  adaptateurGestionErreur: adaptateurGestionVide,
   entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
   trustProxy: '0',
   busEvenement: fabriqueBusPourLesTests(),
