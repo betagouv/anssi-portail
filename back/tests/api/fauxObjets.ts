@@ -54,7 +54,7 @@ export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
 
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   fournisseurChemin: fauxFournisseurDeChemin,
-  middleware: fabriqueMiddleware(),
+  middleware: fabriqueMiddleware({ adaptateurJWT: fauxAdaptateurJWT }),
   adaptateurOIDC: fauxAdaptateurOIDC,
   adaptateurJWT: fauxAdaptateurJWT,
   adaptateurGestionErreur: adaptateurGestionVide,
