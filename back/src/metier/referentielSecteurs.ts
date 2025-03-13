@@ -1,4 +1,4 @@
-const secteurs = [
+export const secteurs = [
   { code: 'A', libelle: 'Agriculture, sylviculture et pêche' },
   { code: 'B', libelle: 'Industries extractives' },
   { code: 'C', libelle: 'Industrie manufacturière' },
