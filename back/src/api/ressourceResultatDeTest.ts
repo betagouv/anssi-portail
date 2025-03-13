@@ -1,7 +1,7 @@
 import { ConfigurationServeur } from './configurationServeur';
 import { Request, Response, Router } from 'express';
 import { TestRealise } from '../bus/testRealise';
-import { regions } from '../metier/referentielRegions';
+import {codesRegion, regions} from '../metier/referentielRegions';
 import { body, check } from 'express-validator';
 import { codesSecteur } from '../metier/referentielSecteurs';
 import { taillesOrganisation } from '../metier/referentielTailleOrganisation';
@@ -23,7 +23,7 @@ const ressourceResultatDeTest = ({
   routeur.post(
     '/',
     [
-      check('region').isString().optional({values: "null"}).isIn(regions).withMessage('Région invalide'),
+      check('region').isString().optional({values: "null"}).isIn(codesRegion).withMessage('Région invalide'),
       check('secteur')
         .isString()
         .optional({values: "null"})

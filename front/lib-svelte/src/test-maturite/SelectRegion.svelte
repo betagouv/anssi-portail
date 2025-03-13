@@ -2,26 +2,32 @@
   export let region: string | null;
   let regionSelectionnee: string;
   $: region = regionSelectionnee === "" ? null : regionSelectionnee;
+
+  const regions = [
+    {codeIso: 'FR-ARA', nom: 'Auvergne-Rhône-Alpes'},
+    {codeIso: 'FR-BFC', nom: 'Bourgogne-Franche-Comté'},
+    {codeIso: 'FR-BRE', nom: 'Bretagne'},
+    {codeIso: 'FR-CVL', nom: 'Centre-Val de Loire'},
+    {codeIso: 'FR-20R', nom: 'Corse'},
+    {codeIso: 'FR-GES', nom: 'Grand Est'},
+    {codeIso: 'FR-971', nom: 'Guadeloupe'},
+    {codeIso: 'FR-973', nom: 'Guyane'},
+    {codeIso: 'FR-HDF', nom: 'Hauts-de-France'},
+    {codeIso: 'FR-IDF', nom: 'Ile-de-France'},
+    {codeIso: 'FR-972', nom: 'Martinique'},
+    {codeIso: 'FR-976', nom: 'Mayotte'},
+    {codeIso: 'FR-NAQ', nom: 'Nouvelle-Aquitaine'},
+    {codeIso: 'FR-NOR', nom: 'Normandie'},
+    {codeIso: 'FR-OCC', nom: 'Occitanie'},
+    {codeIso: 'FR-PDL', nom: 'Pays de la Loire'},
+    {codeIso: 'FR-PAC', nom: "Provence-Alpes-Côte d'Azur"},
+    {codeIso: 'FR-974', nom: 'La Réunion'},
+  ] as const;
 </script>
 
 <select bind:value={regionSelectionnee}>
   <option disabled selected value="">Sélectionner une option</option>
-  <option>Auvergne-Rhône-Alpes</option>
-  <option>Bourgogne-Franche-Comté</option>
-  <option>Bretagne</option>
-  <option>Centre-Val de Loire</option>
-  <option>Corse</option>
-  <option>Grand Est</option>
-  <option>Guadeloupe</option>
-  <option>Guyane</option>
-  <option>Hauts-de-France</option>
-  <option>Ile-de-France</option>
-  <option>Martinique</option>
-  <option>Mayotte</option>
-  <option>Nouvelle-Aquitaine</option>
-  <option>Normandie</option>
-  <option>Occitanie</option>
-  <option>Pays de la Loire</option>
-  <option>Provence-Alpes-Côte d'Azur</option>
-  <option>La Réunion</option>
+  {#each regions as uneRegion}
+    <option value={uneRegion.codeIso}>{uneRegion.nom}</option>
+  {/each}
 </select>
