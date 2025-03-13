@@ -150,7 +150,7 @@
           <h2>Quelle est la maturité cyber de votre organisation ?</h2>
           <p>
             La maturité cyber est une évaluation indicative du niveau global de
-            prise en compte des enjeux de cyber sécurité par une organisation.
+            prise en compte des enjeux de cybersécurité par une organisation.
             Répondez à <b>6 questions</b> pour obtenir votre évaluation.
           </p>
           <input
