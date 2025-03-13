@@ -19,6 +19,7 @@ import { ressourceInformationsCreationCompte } from './ressourceInformationsCrea
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
 import { ressourcePageConnexion } from './ressourcePageConnexion';
 import { ressourceAnnuaireRegions } from './ressourceAnnuaireRegions';
+import { ressourceAnnuaireSecteursActivite } from './ressourceAnnuaireSecteursActivite';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -132,6 +133,11 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(
     '/api/annuaire/regions',
     ressourceAnnuaireRegions(configurationServeur)
+  );
+
+  app.use(
+    '/api/annuaire/secteurs-activite',
+    ressourceAnnuaireSecteursActivite(configurationServeur)
   );
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
