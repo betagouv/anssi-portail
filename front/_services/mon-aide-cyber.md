@@ -26,7 +26,7 @@ liens:
     - commencer:
       titre: Découvrez notre vidéo&nbsp;!
       video: true
-      lien: https://cellar-c2.services.clever-cloud.com/monservicesecurise-ressources/Video_MAC.mp4
+      lien: https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/Video_MAC.mp4
       illustration: mac/mac.png
       couleurFond: "#6f479f"
 ---
