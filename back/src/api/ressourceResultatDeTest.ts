@@ -4,7 +4,7 @@ import { TestRealise } from '../bus/testRealise';
 import {codesRegion, regions} from '../metier/referentielRegions';
 import { body, check } from 'express-validator';
 import { codesSecteur } from '../metier/referentielSecteurs';
-import { taillesOrganisation } from '../metier/referentielTailleOrganisation';
+import { codesTranchesEffectif } from '../metier/referentielTranchesEffectifEtablissement';
 
 const clesReponsesValides = [
   'prise-en-compte-risque',
@@ -32,7 +32,7 @@ const ressourceResultatDeTest = ({
       check('tailleOrganisation')
         .isString()
         .optional({values: "null"})
-        .isIn(taillesOrganisation)
+        .isIn(codesTranchesEffectif)
         .withMessage("Taille d'organisation invalide"),
       body('reponses')
         .custom(

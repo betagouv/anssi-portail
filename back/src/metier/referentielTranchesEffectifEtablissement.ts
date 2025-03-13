@@ -1,4 +1,4 @@
-const tranchesEffectifEtablissement = [
+export const tranchesEffectifEtablissement = [
   { code: '00', libelle: '0 salarié' },
   { code: '01', libelle: '1 ou 2 salariés' },
   { code: '02', libelle: '3 à 5 salariés' },
@@ -15,8 +15,8 @@ const tranchesEffectifEtablissement = [
   { code: '53', libelle: '10 000 salariés et plus' },
 ] as const;
 
-export const taillesOrganisation = tranchesEffectifEtablissement.map(
+export const codesTranchesEffectif = tranchesEffectifEtablissement.map(
   (t) => t.code
 );
 
-export type TailleOrganisation = (typeof taillesOrganisation)[number];
+export type CodeTrancheEffectif = (typeof codesTranchesEffectif)[number];
