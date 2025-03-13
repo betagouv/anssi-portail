@@ -1,10 +1,10 @@
 import { EvenementDuBus } from './busEvenements';
-import { Region } from '../metier/referentielRegions';
+import { CodeRegion } from '../metier/referentielRegions';
 import { CodeSecteur } from '../metier/referentielSecteurs';
 import { TailleOrganisation } from '../metier/referentielTailleOrganisation';
 
 export class TestRealise implements EvenementDuBus {
-  region: Region;
+  region: CodeRegion;
   secteur: CodeSecteur;
   tailleOrganisation: TailleOrganisation;
   reponses: Record<string, number>;
@@ -15,7 +15,7 @@ export class TestRealise implements EvenementDuBus {
     tailleOrganisation,
     reponses,
   }: {
-    region: Region;
+    region: CodeRegion;
     secteur: CodeSecteur;
     tailleOrganisation: TailleOrganisation;
     reponses: Record<string, number>;

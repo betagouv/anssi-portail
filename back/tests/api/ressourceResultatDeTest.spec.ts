@@ -15,7 +15,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
   let busEvenement: MockBusEvenement;
 
   const donneesCorrectes = {
-    region: 'Normandie',
+    region: 'FR-NOR',
     secteur: 'J',
     tailleOrganisation: '51',
     reponses: {
@@ -49,7 +49,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       await request(serveur)
         .post('/api/resultats-test')
         .send({
-          region: 'Normandie',
+          region: 'FR-NOR',
           secteur: 'J',
           tailleOrganisation: '51',
           reponses: {
@@ -64,7 +64,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
       busEvenement.aRecuUnEvenement(TestRealise);
       let evenement = busEvenement.recupereEvenement(TestRealise);
-      assert.equal(evenement!.region, 'Normandie');
+      assert.equal(evenement!.region, 'FR-NOR');
       assert.equal(evenement!.secteur, 'J');
       assert.equal(evenement!.tailleOrganisation, '51');
       assert.deepEqual(evenement!.reponses, {
