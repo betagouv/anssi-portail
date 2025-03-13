@@ -19,6 +19,7 @@
   target={itemCyber.lienInterne ? "" : "_blank"}
   href={itemCyber.lienInterne ?? itemCyber.lienExterne}
   class:lien-externe-produit={!itemCyber.lienInterne}
+  data-source="Catalogue"
 >
   <figure>
     <img
