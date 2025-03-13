@@ -26,7 +26,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     contentSecurityPolicy: {
       directives: {
         scriptSrc: ["'self'", 'https://stats.beta.gouv.fr', 'https://browser.sentry-cdn.com'],
-        connectSrc: ["'self'", 'https://stats.beta.gouv.fr']
+        connectSrc: ["'self'", 'https://stats.beta.gouv.fr'],
+        mediaSrc: ["'self'", 'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com']
       }
     }
   }));
