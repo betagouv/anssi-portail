@@ -45,7 +45,11 @@ describe('La ressource apres authentification OIDC', () => {
 
     describe("si l'utilisateur est connu", () => {
       beforeEach(() => {
-        const jeanneDupont = { email: 'jeanne.dupont' };
+        const jeanneDupont = {
+          email: 'jeanne.dupont',
+          cguAcceptees: true,
+          infolettreAcceptee: true,
+        };
         entrepotUtilisateur.ajoute(jeanneDupont);
 
         adaptateurOIDC.recupereInformationsUtilisateur = async (_) => ({
@@ -103,7 +107,8 @@ describe('La ressource apres authentification OIDC', () => {
       });
 
       it('ajoute un token JWT à la session', async () => {
-        adaptateurJWT.genereToken = (donnees: Record<string, any>) => `tokenJWT-${donnees.email}`;
+        adaptateurJWT.genereToken = (donnees: Record<string, any>) =>
+          `tokenJWT-${donnees.email}`;
 
         const reponse: any = await requeteGet();
 
@@ -140,11 +145,14 @@ describe('La ressource apres authentification OIDC', () => {
     });
 
     describe("si l'utilisateur est inconnu", () => {
-      it("ajoute un token contenant les informations du nouvel utilisateur et redirige vers la page de création de compte", async () => {
+      it('ajoute un token contenant les informations du nouvel utilisateur et redirige vers la page de création de compte', async () => {
         const reponse = await requeteGet();
 
         assert.equal(reponse.status, 302);
-        assert.equal(reponse.headers.location, '/creation-compte?token=tokenJWT-');
+        assert.equal(
+          reponse.headers.location,
+          '/creation-compte?token=tokenJWT-'
+        );
       });
     });
   });
