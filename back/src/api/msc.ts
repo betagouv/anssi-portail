@@ -110,7 +110,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourceApresDeconnexionOIDC(configurationServeur)
   );
 
-  app.use('/api/profil', ressourceProfil());
+  app.use('/api/profil', ressourceProfil(configurationServeur));
 
   app.use('/api/utilisateurs', ressourceUtilisateurs(configurationServeur));
 
