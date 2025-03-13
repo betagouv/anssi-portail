@@ -20,6 +20,7 @@ import { ressourceUtilisateurs } from './ressourceUtilisateurs';
 import { ressourcePageConnexion } from './ressourcePageConnexion';
 import { ressourceAnnuaireRegions } from './ressourceAnnuaireRegions';
 import { ressourceAnnuaireSecteursActivite } from './ressourceAnnuaireSecteursActivite';
+import { ressourceAnnuaireTranchesEffectif } from './ressourceAnnuaireTranchesEffectif';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -138,6 +139,11 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(
     '/api/annuaire/secteurs-activite',
     ressourceAnnuaireSecteursActivite(configurationServeur)
+  );
+
+  app.use(
+    '/api/annuaire/tranches-effectif',
+    ressourceAnnuaireTranchesEffectif(configurationServeur)
   );
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);

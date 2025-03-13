@@ -1,10 +1,23 @@
 <script lang="ts">
-  import { tranchesEffectifEtablissement } from "./TestMaturite.donnees";
+  import { onMount } from 'svelte';
+  import axios from 'axios';
 
   export let tailleOrganisation: string | null;
   let codeTailleOrganisation: string;
   $: tailleOrganisation =
-    codeTailleOrganisation === "" ? null : codeTailleOrganisation;
+    codeTailleOrganisation === '' ? null : codeTailleOrganisation;
+  type TrancheEffectif = {
+    code: string;
+    libelle: string;
+  };
+  let tranchesEffectifEtablissement: TrancheEffectif[];
+
+  onMount(async () => {
+    const reponse = await axios.get<TrancheEffectif[]>(
+      '/api/annuaire/tranches-effectif'
+    );
+    tranchesEffectifEtablissement = reponse.data;
+  });
 </script>
 
 <select bind:value={codeTailleOrganisation}>
