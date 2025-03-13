@@ -90,23 +90,34 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         return reponse;
       };
 
-      it('aseptise les paramètres', async () => {
-        await request(serveur)
-          .post('/api/resultats-test')
-          .send({
-            region: 'Normandie  ',
-            secteur: 'J  ',
-            tailleOrganisation: '51     ',
-            reponses: {
-              'prise-en-compte-risque': '2>',
-            },
-          });
+      it('accepte une région non renseignée', async () => {
+        const reponse = await requeteAvecDonneeIncorrecte({
+          region: null,
+        });
 
+        assert.equal(reponse.status, 201);
         const evenement = busEvenement.recupereEvenement(TestRealise);
-        assert.equal(evenement!.region, 'Normandie');
-        assert.equal(evenement!.secteur, 'J');
-        assert.equal(evenement!.tailleOrganisation, '51');
-        assert.equal(evenement!.reponses['prise-en-compte-risque'], '2&gt;');
+        assert.equal(evenement!.region, null);
+      });
+
+      it('accepte un secteur non renseigné', async () => {
+        const reponse = await requeteAvecDonneeIncorrecte({
+          secteur: null,
+        });
+
+        assert.equal(reponse.status, 201);
+        const evenement = busEvenement.recupereEvenement(TestRealise);
+        assert.equal(evenement!.secteur, null);
+      });
+
+      it("accepte une taille d'organisation non renseignée", async () => {
+        const reponse = await requeteAvecDonneeIncorrecte({
+          tailleOrganisation: null,
+        });
+
+        assert.equal(reponse.status, 201);
+        const evenement = busEvenement.recupereEvenement(TestRealise);
+        assert.equal(evenement!.tailleOrganisation, null);
       });
 
       it('valide la région', async () => {

@@ -22,20 +22,16 @@ const ressourceResultatDeTest = ({
   const routeur = Router();
   routeur.post(
     '/',
-    middleware.aseptise(
-      'region',
-      'secteur',
-      'tailleOrganisation',
-      'reponses.*'
-    ),
     [
-      check('region').isString().isIn(regions).withMessage('Région invalide'),
+      check('region').isString().optional({values: "null"}).isIn(regions).withMessage('Région invalide'),
       check('secteur')
         .isString()
+        .optional({values: "null"})
         .isIn(codesSecteur)
         .withMessage('Secteur invalide'),
       check('tailleOrganisation')
         .isString()
+        .optional({values: "null"})
         .isIn(taillesOrganisation)
         .withMessage("Taille d'organisation invalide"),
       body('reponses')
