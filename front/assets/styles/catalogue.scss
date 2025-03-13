@@ -321,6 +321,10 @@
   width: auto;
 }
 
+.carte.service.lien-externe-produit > * {
+  pointer-events: none;
+}
+
 .encart.fond-clair {
   background: white;
 
