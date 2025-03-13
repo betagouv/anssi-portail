@@ -17,6 +17,7 @@ import {ressourceAnnuaireOrganisations} from "./ressourceAnnuaireOrganisations";
 import {ressourceAnnuaireDepartements} from "./ressourceAnnuaireDepartements";
 import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
+import { ressourcePageConnexion } from './ressourcePageConnexion';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -62,7 +63,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'nis2',
     'test-maturite',
     'niveaux-maturite',
-    'connexion',
     'apres-authentification',
     'aPropos',
     'mentionsLegales',
@@ -73,6 +73,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
+
+  app.use("/connexion", ressourcePageConnexion(configurationServeur));
 
   ['services', 'ressources'].forEach((repertoireProduits) =>
     app.use(
