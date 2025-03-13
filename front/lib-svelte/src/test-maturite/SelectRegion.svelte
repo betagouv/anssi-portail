@@ -1,28 +1,22 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import axios from 'axios';
+
   export let region: string | null;
   let regionSelectionnee: string;
-  $: region = regionSelectionnee === "" ? null : regionSelectionnee;
+  $: region = regionSelectionnee === '' ? null : regionSelectionnee;
 
-  const regions = [
-    {codeIso: 'FR-ARA', nom: 'Auvergne-Rhône-Alpes'},
-    {codeIso: 'FR-BFC', nom: 'Bourgogne-Franche-Comté'},
-    {codeIso: 'FR-BRE', nom: 'Bretagne'},
-    {codeIso: 'FR-CVL', nom: 'Centre-Val de Loire'},
-    {codeIso: 'FR-20R', nom: 'Corse'},
-    {codeIso: 'FR-GES', nom: 'Grand Est'},
-    {codeIso: 'FR-971', nom: 'Guadeloupe'},
-    {codeIso: 'FR-973', nom: 'Guyane'},
-    {codeIso: 'FR-HDF', nom: 'Hauts-de-France'},
-    {codeIso: 'FR-IDF', nom: 'Ile-de-France'},
-    {codeIso: 'FR-972', nom: 'Martinique'},
-    {codeIso: 'FR-976', nom: 'Mayotte'},
-    {codeIso: 'FR-NAQ', nom: 'Nouvelle-Aquitaine'},
-    {codeIso: 'FR-NOR', nom: 'Normandie'},
-    {codeIso: 'FR-OCC', nom: 'Occitanie'},
-    {codeIso: 'FR-PDL', nom: 'Pays de la Loire'},
-    {codeIso: 'FR-PAC', nom: "Provence-Alpes-Côte d'Azur"},
-    {codeIso: 'FR-974', nom: 'La Réunion'},
-  ] as const;
+  type Region = {
+    codeIso: string;
+    nom: string;
+  };
+
+  let regions: Region[];
+
+  onMount(async () => {
+    const reponse = await axios.get<Region[]>('/api/annuaire/regions');
+    regions = reponse.data;
+  });
 </script>
 
 <select bind:value={regionSelectionnee}>

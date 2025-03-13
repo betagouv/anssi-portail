@@ -13,11 +13,12 @@ import { ressourcePageProduit } from './ressourcePageProduit';
 import { ressourcePagesJekyll } from './ressourcePagesJekyll';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceResultatDeTest } from './ressourceResultatDeTest';
-import {ressourceAnnuaireOrganisations} from "./ressourceAnnuaireOrganisations";
-import {ressourceAnnuaireDepartements} from "./ressourceAnnuaireDepartements";
+import { ressourceAnnuaireOrganisations } from './ressourceAnnuaireOrganisations';
+import { ressourceAnnuaireDepartements } from './ressourceAnnuaireDepartements';
 import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
 import { ressourcePageConnexion } from './ressourcePageConnexion';
+import { ressourceAnnuaireRegions } from './ressourceAnnuaireRegions';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -117,10 +118,21 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/api/informations-creation-compte', ressourceInformationsCreationCompte(configurationServeur));
 
   app.use('/api/resultats-test', ressourceResultatDeTest(configurationServeur));
-  
-  app.use('/api/annuaire/organisations', ressourceAnnuaireOrganisations(configurationServeur));
 
-  app.use('/api/annuaire/departements', ressourceAnnuaireDepartements(configurationServeur));
+  app.use(
+    '/api/annuaire/organisations',
+    ressourceAnnuaireOrganisations(configurationServeur)
+  );
+
+  app.use(
+    '/api/annuaire/departements',
+    ressourceAnnuaireDepartements(configurationServeur)
+  );
+
+  app.use(
+    '/api/annuaire/regions',
+    ressourceAnnuaireRegions(configurationServeur)
+  );
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 
