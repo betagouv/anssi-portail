@@ -25,7 +25,7 @@ liens:
       couleurFond: "#0079D0"
     - commencer:
       titre: Commencer à sécuriser
-      lien: https://cellar-c2.services.clever-cloud.com/monservicesecurise-ressources/MonServiceSecurise%20video.mp4
+      lien: https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/MonServiceSecurise%20video.mp4
       video: true
       illustration: mss/mss-securiser.webp
       couleurFond: "#0079D0"
