@@ -82,7 +82,7 @@ script: /scripts/service.js
           {% for lien in page.liens %}
           <div class="carte lien {% if lien.video %}video{% endif %}">
             {% if lien.video %}
-            <button onclick="ouvreModaleVideo('{{lien.lien}}')">
+            <button class="ouverture-modale" data-lien-video="{{lien.lien}}">
               {% else %}
               <a href="{{ lien.lien }}" target="_blank">
                 {% endif %}

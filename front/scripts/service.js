@@ -71,11 +71,20 @@ const modaleVideoFermee = () => {
   video.currentTime = 0;
 };
 
-window.ouvreModaleVideo = (lien) => {
+const brancheBoutonModale = () => {
+  const bouton = document.getElementsByClassName("ouverture-modale");
   const modale = document.getElementById("modale-video");
-  modale.showModal();
-  modale.addEventListener("close", modaleVideoFermee);
-  let video = document.querySelector("#modale-video video");
-  video.setAttribute("src", lien);
-  video.play();
+
+  for (let b of bouton) {
+    b.addEventListener("click", () => {
+      const lien = b.dataset.lienVideo;
+      modale.showModal();
+      modale.addEventListener("close", modaleVideoFermee);
+      let video = document.querySelector("#modale-video video");
+      video.setAttribute("src", lien);
+      video.play();
+    });
+  }
 };
+
+window.addEventListener("DOMContentLoaded", brancheBoutonModale);
