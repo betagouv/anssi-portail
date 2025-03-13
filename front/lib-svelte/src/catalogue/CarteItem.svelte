@@ -20,6 +20,7 @@
   href={itemCyber.lienInterne ?? itemCyber.lienExterne}
   class:lien-externe-produit={!itemCyber.lienInterne}
   data-source="Catalogue"
+  data-cible={itemCyber.nom}
 >
   <figure>
     <img
