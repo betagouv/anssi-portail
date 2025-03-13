@@ -12,13 +12,14 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
   }
 
   private chiffreDonneesUtilisateur(utilisateur: Utilisateur): UtilisateurBDD {
-    return utilisateur;
+    return { email: utilisateur.email, donnees: utilisateur };
   }
 
   private dechiffreDonneesUtilisateur(
     utilisateur: UtilisateurBDD
   ): Utilisateur {
-    return utilisateur;
+    const { email, donnees } = utilisateur;
+    return { ...donnees, email };
   }
 
   async ajoute(utilisateur: Utilisateur) {
@@ -28,8 +29,10 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
   }
 
   async parEmail(email: string) {
-    return this.dechiffreDonneesUtilisateur(
-      await this.knex('utilisateurs').where({ email }).first()
-    );
+    const utilisateur = await this.knex('utilisateurs')
+      .where({ email })
+      .first();
+    if (!utilisateur) return undefined;
+    return this.dechiffreDonneesUtilisateur(utilisateur);
   }
 }
