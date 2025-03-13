@@ -54,5 +54,4 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   maxRequetesParMinutes: 3,
   busEvenements: fabriqueBusPourLesTests(),
   adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
-  maxRequetesParMinutes: 33,
 };

@@ -10,13 +10,12 @@ import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
 import { adaptateurRechercheEntreprise } from "./infra/adaptateurRechercheEntreprise";
 import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSentry';
 import { adaptateurHorloge } from './infra/adaptateurHorloge';
+import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
   busEvenements,
-  adaptateurJournal: {
-    consigneEvenement: async (_) => {},
-  },
+  adaptateurJournal: fabriqueAdaptateurJournal(),
   adaptateurHorloge,
 });
 
