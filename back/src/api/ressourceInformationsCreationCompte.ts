@@ -1,29 +1,44 @@
 import { ConfigurationServeur } from './configurationServeur';
-import { Response, Request, Router } from 'express';
+import { Request, Response, Router } from 'express';
 import { ResultatRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 
-const ressourceInformationsCreationCompte = ({adaptateurJWT, adaptateurRechercheEntreprise}: ConfigurationServeur) => {
+const ressourceInformationsCreationCompte = ({
+  adaptateurJWT,
+  adaptateurRechercheEntreprise,
+  adaptateurProfilAnssi,
+}: ConfigurationServeur) => {
   const routeur = Router();
- 
 
   routeur.get('/', async (requete: Request, reponse: Response) => {
     const { token } = requete.query;
+    if (!token) reponse.sendStatus(401);
     try {
-      if(!token) throw new Error('Token manquant');
       const informationsUtilisateur = adaptateurJWT.decode(token as string);
 
       let organisation: ResultatRechercheEntreprise | undefined;
-      if(informationsUtilisateur.siret) {
-        organisation = (await adaptateurRechercheEntreprise.rechercheOrganisations(informationsUtilisateur.siret, null))[0];
+
+      let profilAnssi = await adaptateurProfilAnssi.recupere(
+        informationsUtilisateur.email
+      );
+
+      if (!profilAnssi && informationsUtilisateur.siret) {
+        organisation = (
+          await adaptateurRechercheEntreprise.rechercheOrganisations(
+            informationsUtilisateur.siret,
+            null
+          )
+        )[0];
       }
 
       reponse.send({
+        email: informationsUtilisateur.email,
         prenom: informationsUtilisateur.prenom,
         nom: informationsUtilisateur.nom,
-        email: informationsUtilisateur.email,
-        ...(organisation && { organisation })
+        ...(organisation && { organisation }),
+        ...profilAnssi,
+        postes: profilAnssi?.domainesSpecialite,
       });
-    } catch(e) {
+    } catch (e) {
       reponse.sendStatus(401);
     }
   });

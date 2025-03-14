@@ -7,7 +7,7 @@ import { BusEvenements } from './bus/busEvenements';
 import { cableTousLesAbonnes } from './bus/cablage';
 import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPostgres';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
-import { adaptateurRechercheEntreprise } from "./infra/adaptateurRechercheEntreprise";
+import { adaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
 import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSentry';
 import { adaptateurHorloge } from './infra/adaptateurHorloge';
 import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
@@ -20,6 +20,8 @@ cableTousLesAbonnes({
   adaptateurHorloge,
 });
 
+const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
+
 creeServeur({
   fournisseurChemin,
   middleware: fabriqueMiddleware(),
@@ -27,12 +29,16 @@ creeServeur({
   adaptateurJWT,
   adaptateurGestionErreur: adaptateurGestionErreurSentry,
   busEvenements,
-  entrepotUtilisateur: new EntrepotUtilisateurMPAPostgres(fabriqueAdaptateurProfilAnssi(), adaptateurRechercheEntreprise),
+  entrepotUtilisateur: new EntrepotUtilisateurMPAPostgres(
+    adaptateurProfilAnssi,
+    adaptateurRechercheEntreprise
+  ),
   trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
   maxRequetesParMinutes: adaptateurEnvironnement
     .serveur()
     .maxRequetesParMinute(),
   adaptateurRechercheEntreprise,
+  adaptateurProfilAnssi,
 }).listen(3000, () => {
   console.log('Le serveur écoute sur le port 3000');
 });
