@@ -5,7 +5,7 @@ import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
 import { adaptateurJWT } from './api/adaptateurJWT';
 import { BusEvenements } from './bus/busEvenements';
 import { cableTousLesAbonnes } from './bus/cablage';
-import { EntrepotUtilisateurPostgres } from './infra/entrepotUtilisateurPostgres';
+import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPostgres';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
 import { adaptateurRechercheEntreprise } from "./infra/adaptateurRechercheEntreprise";
 import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSentry';
@@ -27,7 +27,7 @@ creeServeur({
   adaptateurJWT,
   adaptateurGestionErreur: adaptateurGestionErreurSentry,
   busEvenements,
-  entrepotUtilisateur: new EntrepotUtilisateurPostgres(fabriqueAdaptateurProfilAnssi(), adaptateurRechercheEntreprise),
+  entrepotUtilisateur: new EntrepotUtilisateurMPAPostgres(fabriqueAdaptateurProfilAnssi(), adaptateurRechercheEntreprise),
   trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
   maxRequetesParMinutes: adaptateurEnvironnement
     .serveur()
