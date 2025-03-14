@@ -3,12 +3,18 @@ import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { Utilisateur } from '../metier/utilisateur';
 import config from '../../knexfile';
 import { UtilisateurBDD } from './utilisateurBDD';
+import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi';
+import { AdaptateurRechercheEntreprise } from './adaptateurRechercheEntreprise';
 
 export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
   knex: Knex.Knex;
+  adaptateurProfilAnssi: AdaptateurProfilAnssi;
+  adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
 
-  constructor() {
+  constructor(adaptateurProfilAnssi: AdaptateurProfilAnssi, adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise) {
     this.knex = Knex(config);
+    this.adaptateurProfilAnssi = adaptateurProfilAnssi;
+    this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
   }
 
   private chiffreDonneesUtilisateur(utilisateur: Utilisateur): UtilisateurBDD {
@@ -19,13 +25,23 @@ export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
     utilisateur: UtilisateurBDD
   ): Utilisateur {
     const { email, donnees } = utilisateur;
-    return { ...donnees, email };
+    return { ...donnees, email, nom: '', prenom: '', telephone: '', postes: [], siretEntite: '' };
   }
 
   async ajoute(utilisateur: Utilisateur) {
+    const { prenom, nom, telephone, email, postes, siretEntite } = utilisateur;
     await this.knex('utilisateurs').insert(
       this.chiffreDonneesUtilisateur(utilisateur)
     );
+    const organisations = await this.adaptateurRechercheEntreprise.rechercheOrganisations(siretEntite, null);
+    await this.adaptateurProfilAnssi.metsAJour({
+      prenom,
+      nom,
+      telephone,
+      email,
+      domainesSpecialite: postes,
+      organisation: organisations[0],
+    });
   }
 
   async parEmail(email: string) {
