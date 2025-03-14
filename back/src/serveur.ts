@@ -11,6 +11,7 @@ import { adaptateurRechercheEntreprise } from "./infra/adaptateurRechercheEntrep
 import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSentry';
 import { adaptateurHorloge } from './infra/adaptateurHorloge';
 import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
+import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
@@ -26,7 +27,7 @@ creeServeur({
   adaptateurJWT,
   adaptateurGestionErreur: adaptateurGestionErreurSentry,
   busEvenements,
-  entrepotUtilisateur: new EntrepotUtilisateurPostgres(),
+  entrepotUtilisateur: new EntrepotUtilisateurPostgres(fabriqueAdaptateurProfilAnssi(), adaptateurRechercheEntreprise),
   trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
   maxRequetesParMinutes: adaptateurEnvironnement
     .serveur()
