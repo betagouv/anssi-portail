@@ -12,7 +12,7 @@ type Organisation = {
   departement: string;
 }
 
-type ProfilAnssi = {
+export type ProfilAnssi = {
   email: string;
   prenom: string;
   nom: string;
@@ -23,7 +23,7 @@ type ProfilAnssi = {
 
 export interface AdaptateurProfilAnssi {
   metsAJour: (profilAnssi: ProfilAnssi) => Promise<void>;
-  recupere: (email: string) => Promise<ProfilAnssi>;
+  recupere: (email: string) => Promise<ProfilAnssi | undefined>;
 }
 
 const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {

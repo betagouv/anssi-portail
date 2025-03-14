@@ -7,6 +7,10 @@ import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 import { adaptateurGestionVide } from '../../src/infra/adaptateurGestionErreurVide';
+import {
+  AdaptateurProfilAnssi,
+  ProfilAnssi,
+} from '../../src/infra/adaptateurProfilAnssi';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -43,6 +47,11 @@ export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
     rechercheOrganisations: async (_: string, __: string | null) => [],
   };
 
+export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
+  metsAJour: async (_profilAnssi: ProfilAnssi) => undefined,
+  recupere: async (_email: string) => undefined,
+};
+
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   fournisseurChemin: fauxFournisseurDeChemin,
   middleware: fabriqueMiddleware(),
@@ -54,4 +63,5 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   maxRequetesParMinutes: 3,
   busEvenements: fabriqueBusPourLesTests(),
   adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
+  adaptateurProfilAnssi: fauxAdaptateurProfilAnssi,
 };
