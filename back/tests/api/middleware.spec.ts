@@ -5,16 +5,21 @@ import assert from 'assert';
 import { createRequest, createResponse } from 'node-mocks-http';
 import { OutgoingHttpHeaders } from 'node:http';
 import { Context } from 'express-validator/lib/context';
+import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
+import { fauxAdaptateurJWT } from './fauxObjets';
+import { JsonWebTokenError } from 'jsonwebtoken';
 
 describe('Le middleware', () => {
-  let requete: Request & { service?: string };
+  let requete: Request & { emailUtilisateurCourant?: string; };
   let reponse: Response;
   let middleware: Middleware;
+  let adaptateurJWT: AdaptateurJWT;
 
   beforeEach(() => {
+    adaptateurJWT = fauxAdaptateurJWT;
     requete = createRequest();
     reponse = createResponse();
-    middleware = fabriqueMiddleware();
+    middleware = fabriqueMiddleware({ adaptateurJWT });
   });
 
   describe("sur demande d'aseptisation", () => {
@@ -105,6 +110,59 @@ describe('Le middleware', () => {
       await middleware.valide()(requete, reponse, () => {});
 
       assert.equal(reponse.statusCode, 400);
+    });
+  });
+
+  describe('sur demande de validation du token JWT', () => {
+    it("jette une erreur si le token n'est pas présent", async () => {
+      let statutOriginal = reponse.status;
+      let envOriginal = process.env;
+
+      process.env.SECRET_JWT = 'monSecretJWT';
+      const token = adaptateurJWT.genereToken({email: 'jeanne.dupont@beta.gouv.fr'});
+      requete.session = { token };
+
+      let statutRecu;
+      reponse.status = (statut: number) => {
+        statutRecu = statut;
+        return statutOriginal(statut);
+      };
+
+      await middleware.verifieJWT(requete, reponse, () => {});
+
+      assert.equal(statutRecu, 401);
+
+      process.env = envOriginal;
+    });
+
+    it("jette une erreur si le token ne peut pas être décodé", async () => {
+      let statutOriginal = reponse.status;
+
+      adaptateurJWT.decode = () => {
+        throw new JsonWebTokenError('Erreur de token');
+      }
+
+      let statutRecu;
+      reponse.status = (statut: number) => {
+        statutRecu = statut;
+        return statutOriginal(statut);
+      };
+
+      await middleware.verifieJWT(requete, reponse, () => {});
+
+      assert.equal(statutRecu, 401);
+    })
+
+    it("ajoute l'email de l'utilisateur courant dans la requête", async () => {
+      adaptateurJWT.decode = () => {
+        return { email: 'jeanne.dupond@beta.gouv.fr'}
+      }
+      requete.session = {
+        token: 'unToken'
+      }
+
+      await middleware.verifieJWT(requete, reponse, () => {});
+      assert.equal(requete.emailUtilisateurCourant, 'jeanne.dupond@beta.gouv.fr');
     });
   });
 });

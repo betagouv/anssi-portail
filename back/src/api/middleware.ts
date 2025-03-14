@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { check, validationResult } from 'express-validator';
+import { AdaptateurJWT } from './adaptateurJWT';
 
 type FonctionMiddleware = (
   requete: Request,
@@ -11,9 +12,10 @@ export type Middleware = {
   aseptise: (...nomsParametres: string[]) => FonctionMiddleware;
   valide: () => FonctionMiddleware;
   interdisLaMiseEnCache: FonctionMiddleware;
+  verifieJWT: FonctionMiddleware;
 };
 
-export const fabriqueMiddleware = (): Middleware => {
+export const fabriqueMiddleware = ({ adaptateurJWT }: { adaptateurJWT: AdaptateurJWT }): Middleware => {
   const aseptise =
     (...nomsParametres: string[]) =>
     async (requete: any, _reponse: any, suite: any) => {
@@ -47,9 +49,29 @@ export const fabriqueMiddleware = (): Middleware => {
     suite();
   };
 
+  const verifieJWT = async (
+    requete: Request & { emailUtilisateurCourant?: string; },
+    reponse: Response,
+    suite: NextFunction
+  ) => {
+    if(!requete.session?.token) {
+      reponse.status(401);
+      return;
+    }
+
+    try {
+      const { email } = adaptateurJWT.decode(requete.session.token);
+      requete.emailUtilisateurCourant = email;
+      suite();
+    } catch(e) {
+      reponse.status(401);
+    }
+  };
+
   return {
     aseptise,
     valide,
+    verifieJWT,
     interdisLaMiseEnCache,
   };
 };

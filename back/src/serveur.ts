@@ -21,7 +21,7 @@ cableTousLesAbonnes({
 
 creeServeur({
   fournisseurChemin,
-  middleware: fabriqueMiddleware(),
+  middleware: fabriqueMiddleware({ adaptateurJWT }),
   adaptateurOIDC,
   adaptateurJWT,
   adaptateurGestionErreur: adaptateurGestionErreurSentry,
