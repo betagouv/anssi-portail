@@ -4,8 +4,9 @@ import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
 import { AdaptateurJWT } from './adaptateurJWT';
 import { BusEvenements } from '../bus/busEvenements';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { AdaptateurRechercheEntreprise } from "../infra/adaptateurRechercheEntreprise";
+import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { AdaptateurGestionErreur } from '../infra/adaptateurGestionErreurSentry';
+import { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
 
 export type ConfigurationServeur = {
   fournisseurChemin: FournisseurChemin;
@@ -18,4 +19,5 @@ export type ConfigurationServeur = {
   entrepotUtilisateur: EntrepotUtilisateur;
   trustProxy: String;
   maxRequetesParMinutes: number;
+  adaptateurProfilAnssi: AdaptateurProfilAnssi;
 };
