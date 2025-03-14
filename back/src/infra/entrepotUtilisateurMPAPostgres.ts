@@ -6,7 +6,7 @@ import { UtilisateurBDD } from './utilisateurBDD';
 import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi';
 import { AdaptateurRechercheEntreprise } from './adaptateurRechercheEntreprise';
 
-export class EntrepotUtilisateurPostgres implements EntrepotUtilisateur {
+export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   knex: Knex.Knex;
   adaptateurProfilAnssi: AdaptateurProfilAnssi;
   adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
