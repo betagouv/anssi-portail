@@ -34,7 +34,7 @@
 
 <Hero
   titre="Résultat de maturité cyber"
-  description="Ce résultat nous permet de vous guider et de vous fournir les informations et les outils essentiels pour agir et améliorer votre niveau de maturité cyber."
+  description="Ce résultat nous permet de vous guider et de vous fournir les informations et les outils essentiels pour agir sur votre maturité cyber."
 />
 <section class="resultats-test">
   <div class="contenu-section">
