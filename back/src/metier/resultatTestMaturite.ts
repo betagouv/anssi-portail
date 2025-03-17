@@ -1,29 +1,32 @@
-import { EvenementDuBus } from './busEvenements';
-import { CodeRegion } from '../metier/referentielRegions';
-import { CodeSecteur } from '../metier/referentielSecteurs';
-import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
-import { ReponsesTestMaturite } from '../metier/resultatTestMaturite';
+import { CodeRegion } from './referentielRegions';
+import { CodeSecteur } from './referentielSecteurs';
+import { CodeTrancheEffectif } from './referentielTranchesEffectifEtablissement';
 
-export class TestRealise implements EvenementDuBus {
+export type ReponsesTestMaturite = Record<string, number>;
+
+export class ResultatTestMaturite {
+  emailUtilisateur: string;
   region: CodeRegion;
   secteur: CodeSecteur;
   tailleOrganisation: CodeTrancheEffectif;
   reponses: ReponsesTestMaturite;
 
   constructor({
+    emailUtilisateur,
     region,
     secteur,
     tailleOrganisation,
     reponses,
   }: {
+    emailUtilisateur: string;
     region: CodeRegion;
     secteur: CodeSecteur;
     tailleOrganisation: CodeTrancheEffectif;
     reponses: ReponsesTestMaturite;
   }) {
+    this.emailUtilisateur = emailUtilisateur;
     this.region = region;
     this.secteur = secteur;
     this.tailleOrganisation = tailleOrganisation;
-    this.reponses = reponses;
-  }
+    this.reponses = reponses;}
 }

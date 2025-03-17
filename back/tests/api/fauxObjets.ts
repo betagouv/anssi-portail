@@ -7,6 +7,7 @@ import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 import { adaptateurGestionVide } from '../../src/infra/adaptateurGestionErreurVide';
+import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import {
   AdaptateurProfilAnssi,
   ProfilAnssi,
@@ -70,5 +71,6 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   maxRequetesParMinutes: 3,
   busEvenements: fabriqueBusPourLesTests(),
   adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
+  entrepotResultatTest: new EntrepotResultatTestMemoire(),
   adaptateurProfilAnssi: fauxAdaptateurProfilAnssi,
 };
