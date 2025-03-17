@@ -36,7 +36,7 @@ const ressourceInformationsCreationCompte = ({
         nom: informationsUtilisateur.nom,
         ...(organisation && { organisation }),
         ...profilAnssi,
-        postes: profilAnssi?.domainesSpecialite,
+        domainesSpecialite: profilAnssi?.domainesSpecialite,
       });
     } catch (e) {
       reponse.sendStatus(401);
