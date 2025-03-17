@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { adaptateurProfilAnssiVide } from './adaptateurProfilAnssiVide';
+
 
 const CONFIGURATION_AUTHENTIFICATION = {
   headers: {
@@ -10,7 +12,7 @@ type Organisation = {
   nom: string;
   siret: string;
   departement: string;
-}
+};
 
 export type ProfilAnssi = {
   email: string;
@@ -71,4 +73,7 @@ const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
   return { recupere, metsAJour };
 };
 
-export const fabriqueAdaptateurProfilAnssi = () => adaptateurProfilAnssi();
+export const fabriqueAdaptateurProfilAnssi = () =>
+  process.env.PROFIL_ANSSI_URL_BASE
+    ? adaptateurProfilAnssi()
+    : adaptateurProfilAnssiVide();
