@@ -248,11 +248,25 @@ header {
       }
     }
 
+    #zone-identification-mobile {
+       border-bottom: 1px solid #dddddd;
+       padding-bottom: 12px;
+
+       #zone-identification {
+        display: block;
+        
+        .profil-connecte > span.libelle-profil {
+          display: none;
+        }
+       }
+    }
+
     .choix {
       display: flex;
       flex-direction: column;
+      padding-top: 12px;
 
-      a {
+      a, details {
         font-weight: bold;
         width: calc(100% - 32px);
         border-bottom: 1px solid #dddddd;
@@ -280,9 +294,12 @@ header {
           transform: rotate(180deg);
         }
 
+        &[open] summary {
+          margin-bottom: 8px;
+        }
+
         summary {
           font-weight: bold;
-          margin-bottom: 8px;
           display: flex;
           align-items: center;
           justify-content: space-between;

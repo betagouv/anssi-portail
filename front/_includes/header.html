@@ -21,9 +21,8 @@
       crossorigin
       src="/lib-svelte/dist/assets/identification.js"
     ></script>
-
-    <div id="zone-identification">
-    </div>
+    
+    <div id="zone-identification"></div>
 
     <button class="ouverture-menu" id="menu-mobile-ouvrir">
       <img src="/assets/images/icone-menu.svg" alt="Menu burger"/>
@@ -31,10 +30,10 @@
 
     <nav class="menu-mobile invisible" id="menu-mobile">
       <a class="fermer" id="menu-mobile-fermer">Fermer</a>
+      <div id="zone-identification-mobile"></div>
       <div class="choix">
         <a href="/" {% if page.url== '/' %} class="actif" {% endif %}>Accueil</a>
-        <a href="/catalogue/" {% if page.url== '/catalogue/' %} class="actif" {% endif %}>Explorer le catalogue de
-        services complet</a>
+        <a href="/catalogue/" {% if page.url== '/catalogue/' %} class="actif" {% endif %}>Explorer le catalogue complet</a>
         <a href="/nis2/" {% if page.url== '/nis2/' %} class="actif" {% endif %}>Vous accompagner avec NIS2</a>
         <details {% if page.url==
         '/parcours-debuter/' or page.url == '/parcours-approfondir/' %}open {% endif %}>
