@@ -8,3 +8,4 @@ node_modules
 dist-back
 .vscode
 .env
+.idea
