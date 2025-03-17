@@ -42,7 +42,7 @@ export const questions: Question[] = [
       "Quelle est la posture des responsables de votre organisation sur la cybersécurité&nbsp;?",
     propositions: [
       "Le renforcement de la cybersécurité de l'organisation n'est pas une priorité.",
-      "Les responsables de l'organisation perçoivent le sujet comme avant tout technique.",
+      "Les responsables de l’organisation comprennent qu’il y a un enjeu mais le perçoivent comme avant tout technique.",
       "Les responsables manifestent un réel intérêt pour le renforcement de la cybersécurité et les directions métiers sont sensibilisées.",
       "La cybersécurité est un sujet prioritaire évoqué en CODIR, les directions métiers sont responsabilisées sur le sujet et les agents sensibilisés.",
       "L’organisation est un acteur clé de la cybersécurité au sein de son écosystème ou de son secteur d’activité.",
@@ -56,9 +56,9 @@ export const questions: Question[] = [
     propositions: [
       "La cybersécurité n'est pas ou très peu prise en compte dans la gestion des systèmes d'information de l'organisation.",
       "Des actions en matière de cybersécurité sont parfois mises en oeuvre mais sans réelle priorisation et sans plan d'action structuré.",
-      "Un premier plan d'action avec des actions prioritaires à mettre en oeuvre a été établi et est suivi.",
-      "Un plan d'action cyber étoffé est établi et fait l’objet d’un suivi régulier.",
-      "Un plan d'action cyber complet est établi et ses objectifs prioritaires sont intégrés dans la stratégie globale de l'organisation.",
+      "Un premier plan d'action avec des actions prioritaires à mettre en oeuvre a été établi.",
+      "Un plan d'action cyber complet est établi et fait l’objet d’un suivi régulier.",
+      "Le plan d'action cyber est doté d’objectifs intégrés à la stratégie globale de l'organisation.",
     ],
   },
   {
@@ -93,7 +93,7 @@ export const questions: Question[] = [
       "Quels produits ou services cyber sont mobilisés au service de la cybersécurité de l'organisation&nbsp;?",
     propositions: [
       "L'organisation dispose tout au plus d'un antivirus, installé sur les postes informatiques des agents.",
-      "Une ou plusieurs solutions cyber ont pu être déployées en fonction des opportunités.",
+      "Une ou plusieurs solutions cyber ont été déployées en fonction des opportunités.",
       "L’organisation dispose de plusieurs solutions adaptées aux actions prioritaires identifiées dans le plan d’action.",
       "Un audit de sécurité approfondi a été réalisé et l'organisation commence à disposer de produits et de services en matière de cyberdéfense.",
       "L'organisation dispose d'un panel complet de services et d'outils cyber intégrés et réalise des audits réguliers.",
