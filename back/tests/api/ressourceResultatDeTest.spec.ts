@@ -12,6 +12,8 @@ import { TestRealise } from '../../src/bus/testRealise';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 
+const REGEX_UUID= /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+
 describe('La ressource qui gère les résultats de test de maturité', () => {
   let serveur: Express;
   let busEvenement: MockBusEvenement;
@@ -41,7 +43,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       ...configurationDeTestDuServeur,
       busEvenements: busEvenement,
       entrepotResultatTest,
-      adaptateurJWT
+      adaptateurJWT,
     });
   });
 
@@ -88,19 +90,21 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
     it('sauvegarde le résultat de test', async () => {
       adaptateurJWT.decode = () => ({ email: 'jeanne.dupont@mail.com' });
-      await request(serveur).post('/api/resultats-test').send({
-        region: 'FR-NOR',
-        secteur: 'J',
-        tailleOrganisation: '51',
-        reponses: {
-          'prise-en-compte-risque': 2,
-          pilotage: 3,
-          budget: 5,
-          'ressources-humaines': 3,
-          'adoption-solutions': 2,
-          posture: 3,
-        },
-      });
+      await request(serveur)
+        .post('/api/resultats-test')
+        .send({
+          region: 'FR-NOR',
+          secteur: 'J',
+          tailleOrganisation: '51',
+          reponses: {
+            'prise-en-compte-risque': 2,
+            pilotage: 3,
+            budget: 5,
+            'ressources-humaines': 3,
+            'adoption-solutions': 2,
+            posture: 3,
+          },
+        });
 
       const resultatSauvegarde =
         await entrepotResultatTest.dernierPourUtilisateur(
@@ -123,6 +127,21 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         'adoption-solutions': 2,
         posture: 3,
       });
+    });
+
+    it("retourne l'identifiant du résultat de test", async () => {
+      adaptateurJWT.decode = () => ({ email: 'jeanne.dupont@mail.com' });
+
+      let reponse = await request(serveur)
+        .post('/api/resultats-test')
+        .send(donneesCorrectes);
+
+      const resultatSauvegarde =
+        await entrepotResultatTest.dernierPourUtilisateur(
+          'jeanne.dupont@mail.com'
+        );
+      assert.match(resultatSauvegarde!.id, REGEX_UUID);
+      assert.deepEqual(reponse.body, { id: resultatSauvegarde!.id });
     });
 
     describe('concernant la validation des données', () => {

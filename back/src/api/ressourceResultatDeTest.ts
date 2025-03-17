@@ -87,7 +87,7 @@ const ressourceResultatDeTest = ({
           reponses: reponses,
         })
       );
-      reponse.sendStatus(201);
+      reponse.status(201).send({ id: resultatTest.id });
     }
   );
   return routeur;
