@@ -1,5 +1,5 @@
-import { defineConfig } from "vite";
-import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { defineConfig } from 'vite';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -8,12 +8,13 @@ export default defineConfig({
     cssCodeSplit: false,
     rollupOptions: {
       input: {
-        catalogue: "src/main-catalogue.ts",
-        "creation-compte": "src/main-creation-compte.ts",
-        extrait: "src/main-extrait.ts",
-        "test-maturite": "src/main-test-maturite.ts",
-        "niveaux-maturite":"src/main-niveaux-maturite.ts",
-        identification: "src/main-identification.ts",
+        catalogue: 'src/main-catalogue.ts',
+        'centre-aide': 'src/main-centre-aide.ts',
+        'creation-compte': 'src/main-creation-compte.ts',
+        extrait: 'src/main-extrait.ts',
+        'test-maturite': 'src/main-test-maturite.ts',
+        'niveaux-maturite': 'src/main-niveaux-maturite.ts',
+        identification: 'src/main-identification.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
@@ -24,7 +25,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'modern-compiler'
+        api: 'modern-compiler',
       },
     },
   },
