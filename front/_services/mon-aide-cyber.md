@@ -20,13 +20,13 @@ cible:  |
 liens:
     - accompagnement:   
       titre: Bénéficier d’un accompagnement
-      lien: https://www.monaidecyber.ssi.gouv.fr/
+      lien: https://www.monaide.cyber.gouv.fr/
       illustration: mac/mac-accompagnement.png
       couleurFond: "#5d2b9d"
     - commencer:
       titre: Découvrez notre vidéo&nbsp;!
       video: true
-      lien: https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/Video_MAC.mp4
+      lien: https://ressources-mac.cellar-c2.services.clever-cloud.com/Video_MAC.mp4
       illustration: mac/mac.png
       couleurFond: "#6f479f"
 ---
