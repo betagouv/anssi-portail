@@ -2,8 +2,6 @@
   import { fly } from 'svelte/transition';
 
   let ouvert: boolean = false;
-
-  $: document.body.style.overflow = ouvert ? 'hidden' : 'auto';
 </script>
 
 {#if !ouvert}
@@ -40,6 +38,8 @@
 {/if}
 
 <style lang="scss">
+  @use "../../../assets/styles/responsive" as *;
+
   .declencheur-centre-aide {
     position: fixed;
     bottom: 24px;
@@ -56,8 +56,14 @@
     display: flex;
     gap: 8px;
     padding: 10px 24px 10px 18px;
-    z-index: 10;
     cursor: pointer;
+    z-index: 8;
+
+
+    @include a-partir-de(sm) {
+      bottom: 48px;
+      right: 48px;
+    }
   }
 
   .centre-aide {
@@ -67,6 +73,20 @@
     width: 100%;
     height: 100%;
     background: white;
+    z-index: 9;
+
+    @include a-partir-de(sm) {
+      width: 520px;
+      height: 576px;
+      top: unset;
+      left: unset;
+      bottom: 48px;
+      right: 48px;
+
+      border-radius: 8px;
+      border: 1px solid #FFF;
+      box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
+    }
 
     .entete {
       padding: 16px;
@@ -74,6 +94,11 @@
       align-items: center;
       justify-content: space-between;
       background: #0d0c21 url("/assets/images/motif-fond-service-opacite-16.png");
+
+      @include a-partir-de(sm) {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
 
       h4 {
         color: white;
@@ -107,6 +132,11 @@
       flex-direction: column;
       gap: 12px;
 
+
+      @include a-partir-de(sm) {
+        padding: 32px;
+      }
+
       .message {
         display: flex;
         padding: 16px;
@@ -129,6 +159,10 @@
         line-height: 1.5rem;
         width: 100%;
         box-sizing: border-box;
+
+        @include a-partir-de(sm) {
+          width: fit-content;
+        }
 
         &.secondaire {
           border-color: var(--noir);
