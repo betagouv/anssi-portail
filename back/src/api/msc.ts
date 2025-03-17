@@ -21,6 +21,7 @@ import { ressourcePageConnexion } from './ressourcePageConnexion';
 import { ressourceAnnuaireRegions } from './ressourceAnnuaireRegions';
 import { ressourceAnnuaireSecteursActivite } from './ressourceAnnuaireSecteursActivite';
 import { ressourceAnnuaireTranchesEffectif } from './ressourceAnnuaireTranchesEffectif';
+import { ressourceContacts } from './ressourceContacts';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -112,6 +113,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     '/oidc/apres-deconnexion',
     ressourceApresDeconnexionOIDC(configurationServeur)
   );
+
+  app.use('/api/contacts', ressourceContacts(configurationServeur));
 
   app.use('/api/profil', ressourceProfil(configurationServeur));
 
