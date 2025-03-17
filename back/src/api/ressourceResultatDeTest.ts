@@ -68,7 +68,7 @@ const ressourceResultatDeTest = ({
     async (requete: Request, reponse: Response) => {
       const { tailleOrganisation, region, secteur, reponses } = requete.body;
 
-      let emailUtilisateur = adaptateurJWT.decode(requete.session?.token).email;
+      let emailUtilisateur =requete.session?.email;
       let resultatTest = new ResultatTestMaturite({
         tailleOrganisation,
         region,

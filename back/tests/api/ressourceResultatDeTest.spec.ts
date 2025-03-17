@@ -11,8 +11,10 @@ import {
 import { TestRealise } from '../../src/bus/testRealise';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
+import { encodeSession } from './cookie';
 
-const REGEX_UUID= /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+const REGEX_UUID =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 
 describe('La ressource qui gère les résultats de test de maturité', () => {
   let serveur: Express;
@@ -88,60 +90,81 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       });
     });
 
-    it('sauvegarde le résultat de test', async () => {
-      adaptateurJWT.decode = () => ({ email: 'jeanne.dupont@mail.com' });
-      await request(serveur)
-        .post('/api/resultats-test')
-        .send({
-          region: 'FR-NOR',
-          secteur: 'J',
-          tailleOrganisation: '51',
-          reponses: {
-            'prise-en-compte-risque': 2,
-            pilotage: 3,
-            budget: 5,
-            'ressources-humaines': 3,
-            'adoption-solutions': 2,
-            posture: 3,
-          },
-        });
+    describe("lorsque l'utilisateur est connecte", () => {
+      let cookie: string;
 
-      const resultatSauvegarde =
-        await entrepotResultatTest.dernierPourUtilisateur(
+      beforeEach(() => {
+        cookie = encodeSession({ email: 'jeanne.dupont@mail.com' });
+      });
+
+      it("sauvegarde le résultat de test avec l'email de l'utilisateur", async () => {
+        await request(serveur)
+          .post('/api/resultats-test')
+          .set('Cookie', [cookie])
+          .send({
+            region: 'FR-NOR',
+            secteur: 'J',
+            tailleOrganisation: '51',
+            reponses: {
+              'prise-en-compte-risque': 2,
+              pilotage: 3,
+              budget: 5,
+              'ressources-humaines': 3,
+              'adoption-solutions': 2,
+              posture: 3,
+            },
+          });
+
+        const resultatSauvegarde =
+          await entrepotResultatTest.dernierPourUtilisateur(
+            'jeanne.dupont@mail.com'
+          );
+
+        assert.notEqual(resultatSauvegarde, undefined);
+        assert.equal(
+          resultatSauvegarde?.emailUtilisateur,
           'jeanne.dupont@mail.com'
         );
+        assert.equal(resultatSauvegarde!.region, 'FR-NOR');
+        assert.equal(resultatSauvegarde!.secteur, 'J');
+        assert.equal(resultatSauvegarde!.tailleOrganisation, '51');
+        assert.deepEqual(resultatSauvegarde!.reponses, {
+          'prise-en-compte-risque': 2,
+          pilotage: 3,
+          budget: 5,
+          'ressources-humaines': 3,
+          'adoption-solutions': 2,
+          posture: 3,
+        });
+      });
 
-      assert.notEqual(resultatSauvegarde, undefined);
-      assert.equal(
-        resultatSauvegarde?.emailUtilisateur,
-        'jeanne.dupont@mail.com'
-      );
-      assert.equal(resultatSauvegarde!.region, 'FR-NOR');
-      assert.equal(resultatSauvegarde!.secteur, 'J');
-      assert.equal(resultatSauvegarde!.tailleOrganisation, '51');
-      assert.deepEqual(resultatSauvegarde!.reponses, {
-        'prise-en-compte-risque': 2,
-        pilotage: 3,
-        budget: 5,
-        'ressources-humaines': 3,
-        'adoption-solutions': 2,
-        posture: 3,
+      it("retourne l'identifiant du résultat de test", async () => {
+        adaptateurJWT.decode = () => ({ email: 'jeanne.dupont@mail.com' });
+
+        let reponse = await request(serveur)
+          .post('/api/resultats-test')
+          .set('Cookie', [cookie])
+          .send(donneesCorrectes);
+
+        const resultatSauvegarde =
+          await entrepotResultatTest.dernierPourUtilisateur(
+            'jeanne.dupont@mail.com'
+          );
+        assert.match(resultatSauvegarde!.id, REGEX_UUID);
+        assert.deepEqual(reponse.body, { id: resultatSauvegarde!.id });
       });
     });
 
-    it("retourne l'identifiant du résultat de test", async () => {
-      adaptateurJWT.decode = () => ({ email: 'jeanne.dupont@mail.com' });
+    describe("lorsque l'utilisateur n'est pas connecté", () => {
+      it('sauvegarde le résultat du test sans email', async () => {
+        await request(serveur)
+          .post('/api/resultats-test')
+          .send(donneesCorrectes);
 
-      let reponse = await request(serveur)
-        .post('/api/resultats-test')
-        .send(donneesCorrectes);
-
-      const resultatSauvegarde =
-        await entrepotResultatTest.dernierPourUtilisateur(
-          'jeanne.dupont@mail.com'
-        );
-      assert.match(resultatSauvegarde!.id, REGEX_UUID);
-      assert.deepEqual(reponse.body, { id: resultatSauvegarde!.id });
+        const resultatSauvegarde = (await entrepotResultatTest.tous())[0];
+        assert.notEqual(resultatSauvegarde, undefined);
+        assert.equal(resultatSauvegarde?.emailUtilisateur, undefined);
+      });
     });
 
     describe('concernant la validation des données', () => {
