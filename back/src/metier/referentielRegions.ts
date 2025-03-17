@@ -3,6 +3,7 @@ export const regions = [
   {codeIso: 'FR-BFC', nom: 'Bourgogne-Franche-Comté'},
   {codeIso: 'FR-BRE', nom: 'Bretagne'},
   {codeIso: 'FR-CVL', nom: 'Centre-Val de Loire'},
+  {codeIso: 'FR-COM', nom: "Collectivités d'Outre-Mer"},
   {codeIso: 'FR-20R', nom: 'Corse'},
   {codeIso: 'FR-GES', nom: 'Grand Est'},
   {codeIso: 'FR-971', nom: 'Guadeloupe'},
