@@ -14,7 +14,7 @@ describe('La ressource utilisateur', () => {
     prenom: 'Jeanne',
     nom: 'Dupont',
     telephone: '0123456789',
-    postes: ['RSSI'],
+    domainesSpecialite: ['RSSI'],
     siretEntite: '13000766900018',
     cguAcceptees: true,
     infolettreAcceptee: true,
@@ -47,7 +47,7 @@ describe('La ressource utilisateur', () => {
       assert.equal(jeanne?.prenom, 'Jeanne');
       assert.equal(jeanne?.nom, 'Dupont');
       assert.equal(jeanne?.telephone, '0123456789');
-      assert.deepEqual(jeanne?.postes, ['RSSI']);
+      assert.deepEqual(jeanne?.domainesSpecialite, ['RSSI']);
       assert.equal(jeanne?.siretEntite, '13000766900018');
       assert.equal(jeanne?.cguAcceptees, true);
       assert.equal(jeanne?.infolettreAcceptee, true);
@@ -61,7 +61,7 @@ describe('La ressource utilisateur', () => {
           prenom: '<Jeanne',
           nom: '<Dupont',
           telephone: ' 0123456789',
-          postes: [' RSSI'],
+          domainesSpecialite: [' RSSI'],
           siretEntite: ' 13000766900018',
           cguAcceptees: true,
           infolettreAcceptee: true,
@@ -75,7 +75,7 @@ describe('La ressource utilisateur', () => {
       assert.equal(jeanne?.prenom, '&lt;Jeanne');
       assert.equal(jeanne?.nom, '&lt;Dupont');
       assert.equal(jeanne?.telephone, '0123456789');
-      assert.deepEqual(jeanne?.postes, ['RSSI']);
+      assert.deepEqual(jeanne?.domainesSpecialite, ['RSSI']);
       assert.equal(jeanne?.siretEntite, '13000766900018');
     });
 
@@ -124,15 +124,15 @@ describe('La ressource utilisateur', () => {
         assert.equal(reponse.body.erreur, "Le téléphone est invalide");
       });
 
-      it("valide les postes", async () => {
+      it("valide les domaines de spécialité", async () => {
         const reponse = await request(serveur)
           .post('/api/utilisateurs')
           .send({
             ...donneesUtilisateur,
-            postes: ['unMauvaisPoste'],
+            domainesSpecialite: ['unMauvaisPoste'],
           });
         assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.erreur, "Les postes sont invalides");
+        assert.equal(reponse.body.erreur, "Les domaines de spécialité sont invalides");
       });
 
       it("valide le siret", async () => {

@@ -90,7 +90,7 @@
     email: informationsProfessionnelles.email,
     siretEntite: informationsProfessionnelles.organisation?.siret,
     telephone: informationsProfessionnelles.telephone,
-    postes: informationsProfessionnelles.domainesSpecialite || [],
+    domainesSpecialite: informationsProfessionnelles.domainesSpecialite || [],
     estimationNombreServices: null,
     agentConnect: true,
     cguAcceptees: false,
@@ -225,7 +225,7 @@
               <SelectionDomaineSpecialite
                 id="domaine-specialite"
                 requis
-                bind:valeurs={formulaireInscription.postes}
+                bind:valeurs={formulaireInscription.domainesSpecialite}
               />
             </ControleFormulaire>
           </div>

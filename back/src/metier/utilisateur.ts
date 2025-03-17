@@ -3,7 +3,7 @@ export interface Utilisateur {
   prenom: string;
   nom: string;
   telephone?: string;
-  postes: string[];
+  domainesSpecialite: string[];
   siretEntite: string;
   cguAcceptees: boolean;
   infolettreAcceptee: boolean;

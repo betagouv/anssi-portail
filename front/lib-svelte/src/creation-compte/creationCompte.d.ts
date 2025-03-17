@@ -31,7 +31,7 @@ export type FormulaireInscription = {
   email: string;
   siretEntite?: string;
   telephone?: string;
-  postes: string[];
+  domainesSpecialite: string[];
   estimationNombreServices: Intervalle | null;
   agentConnect: boolean;
   cguAcceptees: boolean;

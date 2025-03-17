@@ -25,11 +25,11 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     utilisateur: UtilisateurBDD
   ): Utilisateur {
     const { email, donnees } = utilisateur;
-    return { ...donnees, email, nom: '', prenom: '', telephone: '', postes: [], siretEntite: '' };
+    return { ...donnees, email, nom: '', prenom: '', telephone: '', domainesSpecialite: [], siretEntite: '' };
   }
 
   async ajoute(utilisateur: Utilisateur) {
-    const { prenom, nom, telephone, email, postes, siretEntite } = utilisateur;
+    const { prenom, nom, telephone, email, domainesSpecialite, siretEntite } = utilisateur;
     await this.knex('utilisateurs').insert(
       this.chiffreDonneesUtilisateur(utilisateur)
     );
@@ -39,7 +39,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
       nom,
       telephone,
       email,
-      domainesSpecialite: postes,
+      domainesSpecialite,
       organisation: organisations[0],
     });
   }
