@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import { fabriqueMiddleware } from '../../src/api/middleware';
+import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
@@ -51,6 +51,13 @@ export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
   metsAJour: async (_profilAnssi: ProfilAnssi) => undefined,
   recupere: async (_email: string) => undefined,
 };
+
+export const fauxMiddleware: Middleware = {
+  aseptise: () => async (_, __, suite) => { suite(); },
+  valide: () => async (_, __, suite) => { suite(); },
+  interdisLaMiseEnCache: async (_, __, suite) => { suite(); },
+  verifieJWT: async (_, __, suite) => { suite(); },
+}
 
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   fournisseurChemin: fauxFournisseurDeChemin,
