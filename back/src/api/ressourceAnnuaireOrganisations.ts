@@ -1,6 +1,6 @@
 import {ConfigurationServeur} from './configurationServeur';
 import {Router} from 'express';
-import {estCodeDepartement} from "../metier/referentielDepartements";
+import { CodeDepartement, estCodeDepartement } from '../metier/referentielDepartements';
 
 const ressourceAnnuaireOrganisations = (
   {middleware, adaptateurRechercheEntreprise}: ConfigurationServeur
@@ -16,7 +16,7 @@ const ressourceAnnuaireOrganisations = (
         reponse.status(400).send('Le terme de recherche ne peut pas être vide');
         return;
       }
-      if (departement !== null && !estCodeDepartement(departement)) {
+      if (departement !== null && !estCodeDepartement(departement as CodeDepartement)) {
         reponse.status(400).send('Le département doit être valide (01 à 989)');
         return;
       }

@@ -51,5 +51,22 @@ describe('La ressource Contacts', () => {
 
       assert.equal(adaptateurAppele, true);
     });
+
+    it('retourne les informations de contacts', async () => {
+      adaptateurProfilAnssi.recupere = async () => {
+        return {
+          email: '',
+          prenom: '',
+          nom: '',
+          telephone: '',
+          domainesSpecialite: [],
+          organisation: { nom: '', siret: '', departement: '59' },
+        };
+      }
+
+      const reponse = await request(serveur).get('/api/contacts');
+
+      assert.equal(reponse.body.CSIRT.nom, 'CSIRT Hauts-de-France');
+    });
   });
 });
