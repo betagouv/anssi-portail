@@ -12,6 +12,7 @@ import { TestRealise } from '../../src/bus/testRealise';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { encodeSession } from './cookie';
+import { ProprieteTestRevendiquee } from '../../src/bus/proprieteTestRevendiquee';
 
 const REGEX_UUID =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
@@ -153,6 +154,18 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         assert.match(resultatSauvegarde!.id, REGEX_UUID);
         assert.deepEqual(reponse.body, { id: resultatSauvegarde!.id });
       });
+      
+      it("publie un événement sur le bus qui indique que l'utilisateur est relié au test", async () => {
+        let reponse = await request(serveur)
+          .post('/api/resultats-test')
+          .set('Cookie', [cookie])
+          .send(donneesCorrectes);
+
+        busEvenement.aRecuUnEvenement(ProprieteTestRevendiquee);
+        let evenement = busEvenement.recupereEvenement(ProprieteTestRevendiquee);
+        assert.equal(evenement!.emailUtilisateur, 'jeanne.dupont@mail.com');
+        assert.equal(evenement!.idResultatTest, reponse.body.id);
+      });
     });
 
     describe("lorsque l'utilisateur n'est pas connecté", () => {
@@ -164,6 +177,13 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         const resultatSauvegarde = (await entrepotResultatTest.tous())[0];
         assert.notEqual(resultatSauvegarde, undefined);
         assert.equal(resultatSauvegarde?.emailUtilisateur, undefined);
+      });
+      it("ne publie pas d'événement sur le bus qui indique que l'utilisateur est relié au test", async () => {
+        await request(serveur)
+          .post('/api/resultats-test')
+          .send(donneesCorrectes);
+
+        busEvenement.naPasRecuDEvenement(ProprieteTestRevendiquee);
       });
     });
 
