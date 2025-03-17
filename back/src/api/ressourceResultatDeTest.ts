@@ -6,6 +6,7 @@ import { body, check } from 'express-validator';
 import { codesSecteur } from '../metier/referentielSecteurs';
 import { codesTranchesEffectif } from '../metier/referentielTranchesEffectifEtablissement';
 import { ResultatTestMaturite } from '../metier/resultatTestMaturite';
+import { ProprieteTestRevendiquee } from '../bus/proprieteTestRevendiquee';
 
 const clesReponsesValides = [
   'prise-en-compte-risque',
@@ -68,7 +69,7 @@ const ressourceResultatDeTest = ({
     async (requete: Request, reponse: Response) => {
       const { tailleOrganisation, region, secteur, reponses } = requete.body;
 
-      let emailUtilisateur =requete.session?.email;
+      let emailUtilisateur = requete.session?.email;
       let resultatTest = new ResultatTestMaturite({
         tailleOrganisation,
         region,
@@ -87,6 +88,15 @@ const ressourceResultatDeTest = ({
           reponses: reponses,
         })
       );
+      if (emailUtilisateur) {
+        await busEvenements.publie(
+          new ProprieteTestRevendiquee({
+            emailUtilisateur,
+            idResultatTest: resultatTest.id,
+          })
+        );
+      }
+
       reponse.status(201).send({ id: resultatTest.id });
     }
   );
