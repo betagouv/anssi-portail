@@ -1,7 +1,7 @@
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import { creeServeur } from '../../src/api/msc';
-import { configurationDeTestDuServeur } from './fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurJWT } from './fauxObjets';
 import request from 'supertest';
 import assert from 'node:assert';
 import {
@@ -9,10 +9,14 @@ import {
   MockBusEvenement,
 } from '../bus/busPourLesTests';
 import { TestRealise } from '../../src/bus/testRealise';
+import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
+import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 
 describe('La ressource qui gère les résultats de test de maturité', () => {
   let serveur: Express;
   let busEvenement: MockBusEvenement;
+  let entrepotResultatTest: EntrepotResultatTestMemoire;
+  let adaptateurJWT: AdaptateurJWT;
 
   const donneesCorrectes = {
     region: 'FR-NOR',
@@ -30,9 +34,14 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
   beforeEach(() => {
     busEvenement = fabriqueBusPourLesTests();
+    entrepotResultatTest = new EntrepotResultatTestMemoire();
+    adaptateurJWT = { ...fauxAdaptateurJWT };
+    adaptateurJWT.decode = (_) => ({ email: '' });
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements: busEvenement,
+      entrepotResultatTest,
+      adaptateurJWT
     });
   });
 
@@ -68,6 +77,45 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       assert.equal(evenement!.secteur, 'J');
       assert.equal(evenement!.tailleOrganisation, '51');
       assert.deepEqual(evenement!.reponses, {
+        'prise-en-compte-risque': 2,
+        pilotage: 3,
+        budget: 5,
+        'ressources-humaines': 3,
+        'adoption-solutions': 2,
+        posture: 3,
+      });
+    });
+
+    it('sauvegarde le résultat de test', async () => {
+      adaptateurJWT.decode = () => ({ email: 'jeanne.dupont@mail.com' });
+      await request(serveur).post('/api/resultats-test').send({
+        region: 'FR-NOR',
+        secteur: 'J',
+        tailleOrganisation: '51',
+        reponses: {
+          'prise-en-compte-risque': 2,
+          pilotage: 3,
+          budget: 5,
+          'ressources-humaines': 3,
+          'adoption-solutions': 2,
+          posture: 3,
+        },
+      });
+
+      const resultatSauvegarde =
+        await entrepotResultatTest.dernierPourUtilisateur(
+          'jeanne.dupont@mail.com'
+        );
+
+      assert.notEqual(resultatSauvegarde, undefined);
+      assert.equal(
+        resultatSauvegarde?.emailUtilisateur,
+        'jeanne.dupont@mail.com'
+      );
+      assert.equal(resultatSauvegarde!.region, 'FR-NOR');
+      assert.equal(resultatSauvegarde!.secteur, 'J');
+      assert.equal(resultatSauvegarde!.tailleOrganisation, '51');
+      assert.deepEqual(resultatSauvegarde!.reponses, {
         'prise-en-compte-risque': 2,
         pilotage: 3,
         budget: 5,

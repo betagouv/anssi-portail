@@ -6,6 +6,7 @@ import { BusEvenements } from '../bus/busEvenements';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { AdaptateurGestionErreur } from '../infra/adaptateurGestionErreurSentry';
+import { EntrepotResultatTest } from '../metier/entrepotResultatTest';
 import { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
 
 export type ConfigurationServeur = {
@@ -19,5 +20,6 @@ export type ConfigurationServeur = {
   entrepotUtilisateur: EntrepotUtilisateur;
   trustProxy: String;
   maxRequetesParMinutes: number;
+  entrepotResultatTest: EntrepotResultatTest;
   adaptateurProfilAnssi: AdaptateurProfilAnssi;
 };
