@@ -1,26 +1,32 @@
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import assert from 'node:assert';
-import { configurationDeTestDuServeur, fauxAdaptateurProfilAnssi, fauxMiddleware } from './fauxObjets';
+import { configurationDeTestDuServeur, fauxMiddleware } from './fauxObjets';
 import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
-import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi';
+import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource Contacts', () => {
   let serveur: Express;
-  let adaptateurProfilAnssi: AdaptateurProfilAnssi;
+  let entrepotUtilisateur: EntrepotUtilisateur;
 
   beforeEach(() => {
-    adaptateurProfilAnssi = fauxAdaptateurProfilAnssi;
-    serveur = creeServeur({ ...configurationDeTestDuServeur, adaptateurProfilAnssi, middleware: fauxMiddleware });
+    entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+    serveur = creeServeur({
+      ...configurationDeTestDuServeur,
+      entrepotUtilisateur,
+      middleware: fauxMiddleware,
+    });
   });
 
   describe('sur demande GET', () => {
     it('utilise le middleware de verification de JWT', async () => {
       let middelwareAppele = false;
       serveur = creeServeur({
-        ...configurationDeTestDuServeur, middleware: {
-         ...fauxMiddleware,
+        ...configurationDeTestDuServeur,
+        middleware: {
+          ...fauxMiddleware,
           verifieJWT: async (_, __, suite) => {
             middelwareAppele = true;
             suite();
@@ -32,41 +38,40 @@ describe('La ressource Contacts', () => {
       assert.equal(middelwareAppele, true);
     });
 
-    it("renvoie une 404 si les informations de l'utilisateur ne sont pas disponibles dans le Profil ANSSI", async () => {
-      adaptateurProfilAnssi.recupere = async () => undefined
+    it("renvoie une 404 si les informations de l'utilisateur ne sont pas disponibles dans l'entrepot utilisateur", async () => {
+      entrepotUtilisateur.parEmail = async () => undefined;
 
       const reponse = await request(serveur).get('/api/contacts');
 
       assert.equal(reponse.status, 404);
     });
 
-    it("récupère les informations de l'utilisateur via le Profil ANSSI", async () => {
-      let adaptateurAppele;
-      adaptateurProfilAnssi.recupere = async () => {
-        adaptateurAppele = true;
+    it("récupère les informations de l'utilisateur via l'entrepot utilisateur", async () => {
+      let entrepotAppele;
+      entrepotUtilisateur.parEmail = async () => {
+        entrepotAppele = true;
         return undefined;
-      }
+      };
 
       await request(serveur).get('/api/contacts');
 
-      assert.equal(adaptateurAppele, true);
+      assert.equal(entrepotAppele, true);
     });
 
     it('retourne les informations de contacts', async () => {
-      adaptateurProfilAnssi.recupere = async () => {
-        return {
-          email: '',
-          prenom: '',
-          nom: '',
-          telephone: '',
-          domainesSpecialite: [],
-          organisation: { nom: '', siret: '', departement: '59' },
-        };
-      }
-
+      entrepotUtilisateur.parEmail = async () => ({
+        email: 'jeanne.dupont@user.com',
+        prenom: 'Jeanne',
+        nom: 'Dupont',
+        telephone: '0123456789',
+        domainesSpecialite: ['RSSI'],
+        organisation: { siret: '', departement: '75', nom: '' },
+        cguAcceptees: true,
+        infolettreAcceptee: true,
+      });
       const reponse = await request(serveur).get('/api/contacts');
 
-      assert.equal(reponse.body.CSIRT.nom, 'CSIRT Hauts-de-France');
+      assert.equal(reponse.body.CSIRT.nom, 'Urgence Cyber Île-de-France');
     });
   });
 });

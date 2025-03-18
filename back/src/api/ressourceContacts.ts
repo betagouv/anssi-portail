@@ -5,22 +5,23 @@ import { CodeDepartement, regionDuDepartement } from '../metier/referentielDepar
 
 const ressourceContacts = ({
   middleware,
-  adaptateurProfilAnssi,
+  entrepotUtilisateur,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
     '/',
     middleware.verifieJWT,
     async (requete: Request, reponse: Response) => {
-      const profilANSSI = await adaptateurProfilAnssi.recupere(
+      const utilisateur = await entrepotUtilisateur.parEmail(
         requete.emailUtilisateurCourant!
       );
-      if (!profilANSSI) {
+
+      if (!utilisateur) {
         reponse.sendStatus(404);
         return;
       }
 
-      const codeRegion = regionDuDepartement(profilANSSI.organisation.departement as CodeDepartement);
+      const codeRegion = regionDuDepartement(utilisateur.organisation.departement as CodeDepartement);
       
       reponse.json(contactsParRegion[codeRegion]);
     }
