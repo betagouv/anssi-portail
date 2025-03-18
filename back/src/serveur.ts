@@ -12,6 +12,7 @@ import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSe
 import { adaptateurHorloge } from './infra/adaptateurHorloge';
 import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
+import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres';
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
@@ -39,6 +40,7 @@ creeServeur({
     .maxRequetesParMinute(),
   adaptateurRechercheEntreprise,
   adaptateurProfilAnssi,
+  entrepotResultatTest: new EntrepotResultatTestPostgres(),
 }).listen(3000, () => {
   console.log('Le serveur écoute sur le port 3000');
 });
