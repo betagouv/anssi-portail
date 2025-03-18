@@ -19,6 +19,7 @@ const adaptateurEnvironnement = {
         return maxEnNombre
       }
     },
+    ipAutorisees: () => process.env.SERVEUR_ADRESSES_IP_AUTORISEES?.split(',') ?? false,
   }),
   sentry: () => ({
     dsn: () => process.env.SENTRY_DSN,

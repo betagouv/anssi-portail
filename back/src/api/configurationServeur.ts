@@ -21,6 +21,7 @@ export type ConfigurationServeur = {
   reseau : {
     trustProxy: string;
     maxRequetesParMinutes: number;
+    ipAutorisees: string[] | false;
   };
   entrepotResultatTest: EntrepotResultatTest;
   adaptateurProfilAnssi: AdaptateurProfilAnssi;
