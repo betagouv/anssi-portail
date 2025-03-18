@@ -1,6 +1,6 @@
 import Knex from 'knex';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { Utilisateur } from '../metier/utilisateur';
+import { Utilisateur, UtilisateurPartiel } from '../metier/utilisateur';
 import config from '../../knexfile';
 import { UtilisateurBDD } from './utilisateurBDD';
 import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi';
@@ -20,26 +20,21 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
   }
 
-  private chiffreDonneesUtilisateur(utilisateur: Utilisateur): UtilisateurBDD {
+  private chiffreDonneesUtilisateur(utilisateur: UtilisateurPartiel): UtilisateurBDD {
     return { email: utilisateur.email, donnees: utilisateur };
   }
 
   private dechiffreDonneesUtilisateur(
     utilisateur: UtilisateurBDD
-  ): Utilisateur {
+  ): UtilisateurBDD['donnees'] {
     const { email, donnees } = utilisateur;
     return {
       ...donnees,
       email,
-      nom: '',
-      prenom: '',
-      telephone: '',
-      domainesSpecialite: [],
-      siretEntite: '',
     };
   }
 
-  async ajoute(utilisateur: Utilisateur) {
+  async ajoute(utilisateur: UtilisateurPartiel) {
     const { prenom, nom, telephone, email, domainesSpecialite, siretEntite } =
       utilisateur;
     await this.knex('utilisateurs').insert(
@@ -65,7 +60,19 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
       .where({ email })
       .first();
     if (!utilisateur) return undefined;
-    return this.dechiffreDonneesUtilisateur(utilisateur);
+
+    const donnees = await this.dechiffreDonneesUtilisateur(utilisateur);
+    const { prenom, nom, telephone, domainesSpecialite, organisation } =
+      (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
+      return {
+        ...donnees,
+        email,
+        prenom,
+        nom,
+        telephone,
+        domainesSpecialite,
+        organisation,
+      };
   }
 
   async existe(email: string) {
