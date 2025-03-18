@@ -68,8 +68,10 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurJWT: fauxAdaptateurJWT,
   adaptateurGestionErreur: adaptateurGestionVide,
   entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
-  trustProxy: '0',
-  maxRequetesParMinutes: 3,
+  reseau: {
+    trustProxy: '0',
+    maxRequetesParMinutes: 3,
+  },
   busEvenements: fabriqueBusPourLesTests(),
   adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
   entrepotResultatTest: new EntrepotResultatTestMemoire(),
