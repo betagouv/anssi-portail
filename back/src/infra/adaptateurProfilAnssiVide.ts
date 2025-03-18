@@ -1,13 +1,7 @@
 import { AdaptateurProfilAnssi } from "./adaptateurProfilAnssi";
 
-export const adaptateurProfilAnssiVide = (): AdaptateurProfilAnssi => ({
-  recupere: async () => ({
-    email: '',
-    prenom: '',
-    nom: '',
-    telephone: '',
-    domainesSpecialite: [],
-    organisation: { nom: '', siret: '', departement: '' },
-  }),
+export const adaptateurProfilAnssiVide = (): AdaptateurProfilAnssi => (
+{
+  recupere: async () => undefined,
   metsAJour: async () => {},
 });
