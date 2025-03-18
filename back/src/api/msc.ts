@@ -54,9 +54,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   const limiteRequetesParMinute = rateLimit({
     windowMs: 60 * 1000,
-    limit: configurationServeur.maxRequetesParMinutes,
+    limit: configurationServeur.reseau.maxRequetesParMinutes,
   });
-  app.set('trust proxy', configurationServeur.trustProxy);
+  app.set('trust proxy', configurationServeur.reseau.trustProxy);
   app.use(limiteRequetesParMinute);
 
   app.use(

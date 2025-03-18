@@ -18,8 +18,10 @@ export type ConfigurationServeur = {
   busEvenements: BusEvenements;
   adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   entrepotUtilisateur: EntrepotUtilisateur;
-  trustProxy: String;
-  maxRequetesParMinutes: number;
+  reseau : {
+    trustProxy: string;
+    maxRequetesParMinutes: number;
+  };
   entrepotResultatTest: EntrepotResultatTest;
   adaptateurProfilAnssi: AdaptateurProfilAnssi;
 };

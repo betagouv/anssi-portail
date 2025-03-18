@@ -34,10 +34,12 @@ creeServeur({
     adaptateurProfilAnssi,
     adaptateurRechercheEntreprise
   ),
-  trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
-  maxRequetesParMinutes: adaptateurEnvironnement
-    .serveur()
-    .maxRequetesParMinute(),
+  reseau : {
+    trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
+    maxRequetesParMinutes: adaptateurEnvironnement
+      .serveur()
+      .maxRequetesParMinute(),
+  },
   adaptateurRechercheEntreprise,
   adaptateurProfilAnssi,
   entrepotResultatTest: new EntrepotResultatTestPostgres(),
