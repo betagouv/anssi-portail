@@ -12,7 +12,7 @@ import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
 import { ressourcePageProduit } from './ressourcePageProduit';
 import { ressourcePagesJekyll } from './ressourcePagesJekyll';
 import { ressourceProfil } from './ressourceProfil';
-import { ressourceResultatDeTest } from './ressourceResultatDeTest';
+import { ressourceResultatsDeTest } from './ressourceResultatsDeTest';
 import { ressourceAnnuaireOrganisations } from './ressourceAnnuaireOrganisations';
 import { ressourceAnnuaireDepartements } from './ressourceAnnuaireDepartements';
 import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte';
@@ -122,7 +122,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/api/informations-creation-compte', ressourceInformationsCreationCompte(configurationServeur));
 
-  app.use('/api/resultats-test', ressourceResultatDeTest(configurationServeur));
+  app.use('/api/resultats-test', ressourceResultatsDeTest(configurationServeur));
 
   app.use(
     '/api/annuaire/organisations',
