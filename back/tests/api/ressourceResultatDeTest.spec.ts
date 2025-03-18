@@ -24,7 +24,7 @@ describe('La ressource qui gère un résultat de test', () => {
 
   beforeEach(() => {
     entrepotResultatTest = new EntrepotResultatTestMemoire();
-    cookieJeanneDupont = encodeSession({ email: 'jeanne.dupont@mail.com' });
+    cookieJeanneDupont = encodeSession({ email: 'jeanne.dupont@mail.com', token:"token" });
     busEvenements = fabriqueBusPourLesTests();
     serveur = creeServeur({
       ...configurationDeTestDuServeur,

@@ -5,10 +5,10 @@ import { ProprieteTestRevendiquee } from '../bus/proprieteTestRevendiquee';
 const ressourceResultatDeTest = ({
   entrepotResultatTest,
   busEvenements,
-  middleware
+  middleware,
 }: ConfigurationServeur) => {
   const routeur = Router();
-  routeur.put('/:id', middleware.  async (requete, reponse) => {
+  routeur.put('/:id', middleware.verifieJWT, async (requete, reponse) => {
     const resultatTest = await entrepotResultatTest.parId(requete.params.id);
     if (!resultatTest) {
       reponse.sendStatus(404);
