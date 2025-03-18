@@ -21,7 +21,7 @@ describe("L'abonnement qui consigne la réalisation d'un test dans le journal", 
 
     consigneEvenementTestRealiseDansJournal({ adaptateurJournal, adaptateurHorloge })(
       new TestRealise({
-        region: 'Auvergne-Rhône-Alpes',
+        region: 'FR-20R',
         reponses: { pilotage: 2 },
         secteur: 'A',
         tailleOrganisation: '00',
@@ -30,7 +30,7 @@ describe("L'abonnement qui consigne la réalisation d'un test dans le journal", 
 
     assert.notEqual(evenementRecu, undefined);
     assert.equal(evenementRecu!.type, "TEST_REALISE");
-    assert.equal(evenementRecu!.donnees.region, "Auvergne-Rhône-Alpes");
+    assert.equal(evenementRecu!.donnees.region, "FR-20R");
     assert.deepEqual(evenementRecu!.donnees.reponses, { pilotage: 2 });
     assert.equal(evenementRecu!.donnees.secteur, "A");
     assert.equal(evenementRecu!.donnees.tailleOrganisation, "00");
