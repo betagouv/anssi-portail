@@ -49,6 +49,44 @@ describe('La ressource qui gère un résultat de test', () => {
   });
 
   describe('sur requête PUT', () => {
+    it("refuse la mise à jour si le résultat de test a déjà été revendiqué par un autre utilisateur", async () => {
+      await entrepotResultatTest.ajoute(
+        new ResultatTestMaturite({
+          ...donneesResultatTestCorrectes(),
+          emailUtilisateur: 'jean.jean@mail.com',
+          id: 'r1',
+        })
+      );
+
+      const reponse = await request(serveur)
+        .put('/api/resultats-test/r1')
+        .set('Cookie', [cookieJeanneDupont])
+        .send();
+
+      assert.equal(reponse.status, 403);
+      const resultatTest = await entrepotResultatTest.parId('r1');
+      assert.equal(resultatTest!.emailUtilisateur, 'jean.jean@mail.com');
+      busEvenements.naPasRecuDEvenement(ProprieteTestRevendiquee);
+    });
+
+    it("ne fait rien si le résultat a déjà été revendiqué par cet utilisateur", async () => {
+      await entrepotResultatTest.ajoute(
+        new ResultatTestMaturite({
+          ...donneesResultatTestCorrectes(),
+          emailUtilisateur: 'jeanne.dupont@mail.com',
+          id: 'r1',
+        })
+      );
+
+      const reponse = await request(serveur)
+        .put('/api/resultats-test/r1')
+        .set('Cookie', [cookieJeanneDupont])
+        .send();
+
+      assert.equal(reponse.status, 200);
+      busEvenements.naPasRecuDEvenement(ProprieteTestRevendiquee);
+    });
+
     it("associe l'utilisateur courant au résultat de test", async () => {
       await entrepotResultatTest.ajoute(
         new ResultatTestMaturite({
@@ -76,7 +114,7 @@ describe('La ressource qui gère un résultat de test', () => {
       assert.equal(reponse.status, 404);
     });
 
-    it('public un événement de revendication de propriété du test', async () => {
+    it('publie un événement de revendication de propriété du test', async () => {
       await entrepotResultatTest.ajoute(
         new ResultatTestMaturite({
           ...donneesResultatTestCorrectes(),

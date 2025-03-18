@@ -35,4 +35,8 @@ export class ResultatTestMaturite {
     this.reponses = reponses;
     this.id = id || randomUUID();
   }
+
+  revendiquePropriete(emailUtilisateur: string) {
+    this.emailUtilisateur = emailUtilisateur;
+  }
 }
