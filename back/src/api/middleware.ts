@@ -55,7 +55,7 @@ export const fabriqueMiddleware = ({ adaptateurJWT }: { adaptateurJWT: Adaptateu
     suite: NextFunction
   ) => {
     if(!requete.session?.token) {
-      reponse.status(401);
+      reponse.sendStatus(401);
       return;
     }
 
@@ -64,7 +64,7 @@ export const fabriqueMiddleware = ({ adaptateurJWT }: { adaptateurJWT: Adaptateu
       requete.emailUtilisateurCourant = email;
       suite();
     } catch(e) {
-      reponse.status(401);
+      reponse.sendStatus(401);
     }
   };
 
