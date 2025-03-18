@@ -123,7 +123,7 @@ describe('Le middleware', () => {
       requete.session = { token };
 
       let statutRecu;
-      reponse.status = (statut: number) => {
+      reponse.sendStatus = (statut: number) => {
         statutRecu = statut;
         return statutOriginal(statut);
       };
@@ -143,7 +143,7 @@ describe('Le middleware', () => {
       }
 
       let statutRecu;
-      reponse.status = (statut: number) => {
+      reponse.sendStatus = (statut: number) => {
         statutRecu = statut;
         return statutOriginal(statut);
       };
