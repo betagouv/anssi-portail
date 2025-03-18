@@ -39,6 +39,7 @@ creeServeur({
     maxRequetesParMinutes: adaptateurEnvironnement
       .serveur()
       .maxRequetesParMinute(),
+    ipAutorisees: adaptateurEnvironnement.serveur().ipAutorisees(),
   },
   adaptateurRechercheEntreprise,
   adaptateurProfilAnssi,

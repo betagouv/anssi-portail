@@ -71,6 +71,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   reseau: {
     trustProxy: '0',
     maxRequetesParMinutes: 3,
+    ipAutorisees: false,
   },
   busEvenements: fabriqueBusPourLesTests(),
   adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,

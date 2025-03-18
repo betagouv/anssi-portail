@@ -3,6 +3,7 @@ import cookieSession from 'cookie-session';
 import express, { json, Request, Response } from 'express';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import { IpFilter } from 'express-ipfilter';
 import { ConfigurationServeur } from './configurationServeur';
 import { fournisseurChemin } from './fournisseurChemin';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
@@ -58,6 +59,14 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   });
   app.set('trust proxy', configurationServeur.reseau.trustProxy);
   app.use(limiteRequetesParMinute);
+
+  if (configurationServeur.reseau.ipAutorisees) {
+    console.log(`On accepte uniquement les Ips: ${configurationServeur.reseau.ipAutorisees}`)
+    app.use(IpFilter(configurationServeur.reseau.ipAutorisees, {
+      mode: 'allow',
+      log: false,
+    }));
+  }
 
   app.use(
     cookieSession({
