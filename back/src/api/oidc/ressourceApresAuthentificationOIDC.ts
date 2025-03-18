@@ -19,7 +19,7 @@ const ressourceApresAuthentificationOIDC = (
         await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
       const { email } = informationsUtilisateur;
 
-      if (!(await entrepotUtilisateur.parEmail(email))) {
+      if (!(await entrepotUtilisateur.existe(email))) {
         const token = adaptateurJWT.genereToken(informationsUtilisateur);
         reponse.redirect(`/creation-compte?token=${token}`);
         return;
