@@ -10,8 +10,27 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
     this.knex = Knex(config);
   }
 
+  async parId(id: string): Promise<ResultatTestMaturite | undefined> {
+    const donnees: any = await this.knex('resultats_test')
+      .where({ id })
+      .first();
+    return donnees
+      ? new ResultatTestMaturite({
+          ...donnees,
+          emailUtilisateur: donnees.email_utilisateur,
+          tailleOrganisation: donnees.taille_organisation,
+        })
+      : undefined;
+  }
+
+  async metsAjour(resultatTest: ResultatTestMaturite): Promise<void> {
+    await this.knex('resultats_test').where({ id: resultatTest.id }).update({
+      email_utilisateur: resultatTest.emailUtilisateur,
+    });
+  }
+
   async ajoute(resultatTest: ResultatTestMaturite): Promise<void> {
-    let { emailUtilisateur, tailleOrganisation, ...reste } = resultatTest;
+    const { emailUtilisateur, tailleOrganisation, ...reste } = resultatTest;
     await this.knex('resultats_test').insert({
       ...reste,
       email_utilisateur: emailUtilisateur,

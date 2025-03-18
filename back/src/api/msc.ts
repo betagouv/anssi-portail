@@ -21,6 +21,7 @@ import { ressourcePageConnexion } from './ressourcePageConnexion';
 import { ressourceAnnuaireRegions } from './ressourceAnnuaireRegions';
 import { ressourceAnnuaireSecteursActivite } from './ressourceAnnuaireSecteursActivite';
 import { ressourceAnnuaireTranchesEffectif } from './ressourceAnnuaireTranchesEffectif';
+import { ressourceResultatDeTest } from './ressourceResultatDeTest';
 import { ressourceContacts } from './ressourceContacts';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
@@ -28,15 +29,25 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   configurationServeur.adaptateurGestionErreur.initialise(app);
 
-  app.use(helmet({
-    contentSecurityPolicy: {
-      directives: {
-        scriptSrc: ["'self'", 'https://stats.beta.gouv.fr', 'https://browser.sentry-cdn.com'],
-        connectSrc: ["'self'", 'https://stats.beta.gouv.fr'],
-        mediaSrc: ["'self'", 'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com', 'https://ressources-mac.cellar-c2.services.clever-cloud.com']
-      }
-    }
-  }));
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          scriptSrc: [
+            "'self'",
+            'https://stats.beta.gouv.fr',
+            'https://browser.sentry-cdn.com',
+          ],
+          connectSrc: ["'self'", 'https://stats.beta.gouv.fr'],
+          mediaSrc: [
+            "'self'",
+            'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com',
+            'https://ressources-mac.cellar-c2.services.clever-cloud.com',
+          ],
+        },
+      },
+    })
+  );
   app.use(configurationServeur.middleware.interdisLaMiseEnCache);
 
   const centParMinute = rateLimit({
@@ -78,7 +89,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
 
-  app.use("/connexion", ressourcePageConnexion(configurationServeur));
+  app.use('/connexion', ressourcePageConnexion(configurationServeur));
 
   ['services', 'ressources'].forEach((repertoireProduits) =>
     app.use(
@@ -120,9 +131,16 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/api/utilisateurs', ressourceUtilisateurs(configurationServeur));
 
-  app.use('/api/informations-creation-compte', ressourceInformationsCreationCompte(configurationServeur));
+  app.use(
+    '/api/informations-creation-compte',
+    ressourceInformationsCreationCompte(configurationServeur)
+  );
 
-  app.use('/api/resultats-test', ressourceResultatsDeTest(configurationServeur));
+  app.use(
+    '/api/resultats-test',
+    ressourceResultatsDeTest(configurationServeur),
+    ressourceResultatDeTest(configurationServeur)
+  );
 
   app.use(
     '/api/annuaire/organisations',
