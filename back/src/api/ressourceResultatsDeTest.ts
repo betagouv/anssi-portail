@@ -17,11 +17,10 @@ const clesReponsesValides = [
   'posture',
 ];
 
-const ressourceResultatDeTest = ({
+const ressourceResultatsDeTest = ({
   busEvenements,
   middleware,
   entrepotResultatTest,
-  adaptateurJWT,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post(
@@ -103,4 +102,4 @@ const ressourceResultatDeTest = ({
   return routeur;
 };
 
-export { ressourceResultatDeTest };
+export { ressourceResultatsDeTest };
