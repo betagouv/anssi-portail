@@ -21,7 +21,6 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
   let serveur: Express;
   let busEvenements: MockBusEvenement;
   let entrepotResultatTest: EntrepotResultatTestMemoire;
-  let adaptateurJWT: AdaptateurJWT;
 
   const donneesCorrectes = {
     region: 'FR-NOR',
@@ -40,13 +39,10 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
   beforeEach(() => {
     busEvenements = fabriqueBusPourLesTests();
     entrepotResultatTest = new EntrepotResultatTestMemoire();
-    adaptateurJWT = { ...fauxAdaptateurJWT };
-    adaptateurJWT.decode = (_) => ({ email: '' });
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements,
       entrepotResultatTest,
-      adaptateurJWT,
     });
   });
 
@@ -140,8 +136,6 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       });
 
       it("retourne l'identifiant du résultat de test", async () => {
-        adaptateurJWT.decode = () => ({ email: 'jeanne.dupont@mail.com' });
-
         let reponse = await request(serveur)
           .post('/api/resultats-test')
           .set('Cookie', [cookie])
