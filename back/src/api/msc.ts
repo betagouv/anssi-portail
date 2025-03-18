@@ -52,12 +52,12 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   );
   app.use(configurationServeur.middleware.interdisLaMiseEnCache);
 
-  const centParMinute = rateLimit({
+  const limiteRequetesParMinute = rateLimit({
     windowMs: 60 * 1000,
     limit: configurationServeur.maxRequetesParMinutes,
   });
   app.set('trust proxy', configurationServeur.trustProxy);
-  app.use(centParMinute);
+  app.use(limiteRequetesParMinute);
 
   app.use(
     cookieSession({
