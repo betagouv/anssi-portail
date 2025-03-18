@@ -14,8 +14,23 @@ const ressourceResultatDeTest = ({
       reponse.sendStatus(404);
       return;
     }
+
     const emailUtilisateur = requete.session?.email;
-    resultatTest.emailUtilisateur = emailUtilisateur;
+
+    if (
+      resultatTest.emailUtilisateur &&
+      resultatTest.emailUtilisateur !== emailUtilisateur
+    ) {
+      reponse.sendStatus(403);
+      return;
+    }
+    if (resultatTest.emailUtilisateur === emailUtilisateur) {
+      reponse.sendStatus(200);
+      return;
+    }
+
+    resultatTest.revendiquePropriete(emailUtilisateur);
+
     await entrepotResultatTest.metsAjour(resultatTest);
     await busEvenements.publie(
       new ProprieteTestRevendiquee({

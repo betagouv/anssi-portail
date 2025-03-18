@@ -26,7 +26,7 @@ export class EntrepotResultatTestMemoire implements EntrepotResultatTest {
   }
 
   tous = async (): Promise<ResultatTestMaturite[]> => {
-    return this.entites.map((entite) => ({ ...entite }));
+    return this.entites.map((entite) => (new ResultatTestMaturite({ ...entite })));
   };
 
   async parId(id: string) {
@@ -34,6 +34,6 @@ export class EntrepotResultatTestMemoire implements EntrepotResultatTest {
   }
 
   private copie(entite: ResultatTestMaturite | undefined) {
-    return entite ? { ...entite } : undefined;
+    return entite ? new ResultatTestMaturite({ ...entite }) : undefined;
   }
 }
