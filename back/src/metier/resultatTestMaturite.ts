@@ -7,7 +7,7 @@ export type ReponsesTestMaturite = Record<string, number>;
 
 export class ResultatTestMaturite {
   id!: string;
-  emailUtilisateur: string;
+  emailUtilisateur: string | undefined;
   region: CodeRegion;
   secteur: CodeSecteur;
   tailleOrganisation: CodeTrancheEffectif;
@@ -21,7 +21,7 @@ export class ResultatTestMaturite {
     reponses,
     id,
   }: {
-    emailUtilisateur: string;
+    emailUtilisateur: string | undefined;
     region: CodeRegion;
     secteur: CodeSecteur;
     tailleOrganisation: CodeTrancheEffectif;

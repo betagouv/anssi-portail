@@ -19,7 +19,7 @@ const REGEX_UUID =
 
 describe('La ressource qui gère les résultats de test de maturité', () => {
   let serveur: Express;
-  let busEvenement: MockBusEvenement;
+  let busEvenements: MockBusEvenement;
   let entrepotResultatTest: EntrepotResultatTestMemoire;
   let adaptateurJWT: AdaptateurJWT;
 
@@ -38,13 +38,13 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
   };
 
   beforeEach(() => {
-    busEvenement = fabriqueBusPourLesTests();
+    busEvenements = fabriqueBusPourLesTests();
     entrepotResultatTest = new EntrepotResultatTestMemoire();
     adaptateurJWT = { ...fauxAdaptateurJWT };
     adaptateurJWT.decode = (_) => ({ email: '' });
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
-      busEvenements: busEvenement,
+      busEvenements,
       entrepotResultatTest,
       adaptateurJWT,
     });
@@ -76,8 +76,8 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           },
         });
 
-      busEvenement.aRecuUnEvenement(TestRealise);
-      let evenement = busEvenement.recupereEvenement(TestRealise);
+      busEvenements.aRecuUnEvenement(TestRealise);
+      let evenement = busEvenements.recupereEvenement(TestRealise);
       assert.equal(evenement!.region, 'FR-NOR');
       assert.equal(evenement!.secteur, 'J');
       assert.equal(evenement!.tailleOrganisation, '51');
@@ -161,8 +161,8 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           .set('Cookie', [cookie])
           .send(donneesCorrectes);
 
-        busEvenement.aRecuUnEvenement(ProprieteTestRevendiquee);
-        let evenement = busEvenement.recupereEvenement(ProprieteTestRevendiquee);
+        busEvenements.aRecuUnEvenement(ProprieteTestRevendiquee);
+        let evenement = busEvenements.recupereEvenement(ProprieteTestRevendiquee);
         assert.equal(evenement!.emailUtilisateur, 'jeanne.dupont@mail.com');
         assert.equal(evenement!.idResultatTest, reponse.body.id);
       });
@@ -183,7 +183,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           .post('/api/resultats-test')
           .send(donneesCorrectes);
 
-        busEvenement.naPasRecuDEvenement(ProprieteTestRevendiquee);
+        busEvenements.naPasRecuDEvenement(ProprieteTestRevendiquee);
       });
     });
 
@@ -206,7 +206,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         });
 
         assert.equal(reponse.status, 201);
-        const evenement = busEvenement.recupereEvenement(TestRealise);
+        const evenement = busEvenements.recupereEvenement(TestRealise);
         assert.equal(evenement!.region, null);
       });
 
@@ -216,7 +216,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         });
 
         assert.equal(reponse.status, 201);
-        const evenement = busEvenement.recupereEvenement(TestRealise);
+        const evenement = busEvenements.recupereEvenement(TestRealise);
         assert.equal(evenement!.secteur, null);
       });
 
@@ -226,7 +226,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         });
 
         assert.equal(reponse.status, 201);
-        const evenement = busEvenement.recupereEvenement(TestRealise);
+        const evenement = busEvenements.recupereEvenement(TestRealise);
         assert.equal(evenement!.tailleOrganisation, null);
       });
 
