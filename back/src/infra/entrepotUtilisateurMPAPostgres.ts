@@ -11,7 +11,10 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   adaptateurProfilAnssi: AdaptateurProfilAnssi;
   adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
 
-  constructor(adaptateurProfilAnssi: AdaptateurProfilAnssi, adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise) {
+  constructor(
+    adaptateurProfilAnssi: AdaptateurProfilAnssi,
+    adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise
+  ) {
     this.knex = Knex(config);
     this.adaptateurProfilAnssi = adaptateurProfilAnssi;
     this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
@@ -25,15 +28,28 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     utilisateur: UtilisateurBDD
   ): Utilisateur {
     const { email, donnees } = utilisateur;
-    return { ...donnees, email, nom: '', prenom: '', telephone: '', domainesSpecialite: [], siretEntite: '' };
+    return {
+      ...donnees,
+      email,
+      nom: '',
+      prenom: '',
+      telephone: '',
+      domainesSpecialite: [],
+      siretEntite: '',
+    };
   }
 
   async ajoute(utilisateur: Utilisateur) {
-    const { prenom, nom, telephone, email, domainesSpecialite, siretEntite } = utilisateur;
+    const { prenom, nom, telephone, email, domainesSpecialite, siretEntite } =
+      utilisateur;
     await this.knex('utilisateurs').insert(
       this.chiffreDonneesUtilisateur(utilisateur)
     );
-    const organisations = await this.adaptateurRechercheEntreprise.rechercheOrganisations(siretEntite, null);
+    const organisations =
+      await this.adaptateurRechercheEntreprise.rechercheOrganisations(
+        siretEntite,
+        null
+      );
     await this.adaptateurProfilAnssi.metsAJour({
       prenom,
       nom,
@@ -50,5 +66,12 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
       .first();
     if (!utilisateur) return undefined;
     return this.dechiffreDonneesUtilisateur(utilisateur);
+  }
+
+  async existe(email: string) {
+    const utilisateur = await this.knex('utilisateurs')
+      .where({ email })
+      .first();
+    return !!utilisateur;
   }
 }

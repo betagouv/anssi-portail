@@ -9,4 +9,7 @@ export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
   parEmail = async (email: string) => {
     return this.entites.find((utilisateur) => utilisateur.email === email);
   };
+  existe = async (email: string) => {
+    return !!this.entites.find((utilisateur) => utilisateur.email === email);
+  };
 }
