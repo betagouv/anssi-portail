@@ -31,8 +31,8 @@
       <div class="message marge-haute">
         <span>Vous souhaitez faire une autre demande ou un signalement ?</span>
       </div>
-      <a class="bouton secondaire" href="https://club.ssi.gouv.fr/#/declarations" target="_blank">️⚠️ Signaler un incident ou une vulnérabilité</a>
-      <a class="bouton secondaire" href="https://cyber.gouv.fr/contacter-lanssi" target="_blank">️📩 Contacter d’autres services de l’ANSSI</a>
+      <a class="bouton secondaire centre-aide-signaler-incident" href="https://club.ssi.gouv.fr/#/declarations" target="_blank">️⚠️ Signaler un incident ou une vulnérabilité</a>
+      <a class="bouton secondaire centre-aide-contacter-anssi" href="https://cyber.gouv.fr/contacter-lanssi" target="_blank">️📩 Contacter d’autres services de l’ANSSI</a>
     </div>
   </div>
 {/if}
