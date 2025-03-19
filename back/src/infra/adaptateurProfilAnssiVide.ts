@@ -1,10 +1,10 @@
 import { AdaptateurProfilAnssi } from "./adaptateurProfilAnssi";
 
 export const adaptateurProfilAnssiVide = (): AdaptateurProfilAnssi => ({
-  recupere: async () => ({
+  recupere: async (email: string) => ({
     prenom: 'Jeanne',
     nom: 'Dupont',
-    email: 'jeanne.dupont@mail.fr',
+    email,
     domainesSpecialite:['RSSI'],
     organisation: {nom:'ANSSI', siret:'12345678901234', departement: '33'}
   }),
