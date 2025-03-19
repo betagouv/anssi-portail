@@ -8,12 +8,13 @@ export default defineConfig({
     cssCodeSplit: false,
     rollupOptions: {
       input: {
-        catalogue: 'src/main-catalogue.ts',
         'centre-aide': 'src/main-centre-aide.ts',
         'creation-compte': 'src/main-creation-compte.ts',
-        extrait: 'src/main-extrait.ts',
-        'test-maturite': 'src/main-test-maturite.ts',
         'niveaux-maturite': 'src/main-niveaux-maturite.ts',
+        'test-maturite': 'src/main-test-maturite.ts',
+        catalogue: 'src/main-catalogue.ts',
+        contacts: 'src/main-contacts.ts',
+        extrait: 'src/main-extrait.ts',
         identification: 'src/main-identification.ts',
       },
       output: {
