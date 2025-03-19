@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { IdRubrique, Rubrique } from "./TestMaturite.donnees";
 
-  export let resultats: Record<IdRubrique, number>;
+  export let resultats: Record<IdRubrique, number|null>;
   export let rubriques: Rubrique[] = [
     {
       id: "pilotage",
@@ -63,7 +63,7 @@
 
   $: pointsDuPolygone = new Array(6).fill(0).map((_, index) => {
     const valeur = resultats[rubriques[index].id];
-    const r = (valeur / 5) * tailleRadar;
+    const r = ((valeur || 0) / 5) * tailleRadar;
     const theta = (index * 2 * Math.PI) / 6;
     return polaireVersCartesien(r, theta);
   });
