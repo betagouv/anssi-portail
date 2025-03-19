@@ -29,7 +29,7 @@
 
   function obtiensResultat() {
     axios.post("/api/resultats-test", {
-      reponses: resultatsQuestionnaire(),
+      reponses: $resultatsQuestionnaire,
       secteur,
       region,
       tailleOrganisation,

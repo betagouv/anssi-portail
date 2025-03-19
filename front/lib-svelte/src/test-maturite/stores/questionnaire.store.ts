@@ -1,4 +1,4 @@
-import { get, writable } from "svelte/store";
+import { derived, writable } from 'svelte/store';
 
 export type Questionnaire = {
   questionCourante: number;
@@ -29,18 +29,21 @@ export const questionnaireStore = {
   },
 };
 
-export const resultatsQuestionnaire= ()=> {
-  function reponse(question:number) {
-    let resultat = get(questionnaireStore).toutesLesReponses[question];
-    return resultat === null ? null : resultat + 1;
-  }
+export const resultatsQuestionnaire = derived(
+  questionnaireStore,
+  ($questionnaireStore) => {
+    function reponse(question: number) {
+      let resultat = $questionnaireStore.toutesLesReponses[question];
+      return resultat === null ? null : resultat + 1;
+    }
 
-  return {
-    "prise-en-compte-risque": reponse(0),
-    pilotage: reponse(2),
-    budget: reponse(4),
-    "ressources-humaines": reponse(3),
-    "adoption-solutions":reponse(5),
-    posture: reponse(1),
+    return {
+      'prise-en-compte-risque': reponse(0),
+      pilotage: reponse(2),
+      budget: reponse(4),
+      'ressources-humaines': reponse(3),
+      'adoption-solutions': reponse(5),
+      posture: reponse(1),
+    };
   }
-}
+);
