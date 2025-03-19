@@ -23,6 +23,22 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
       : undefined;
   }
 
+  async dernierPourUtilisateur(
+    emailUtilisateur: string
+  ): Promise<ResultatTestMaturite | undefined> {
+    const donnees: any = await this.knex('resultats_test')
+      .where({ email_utilisateur: emailUtilisateur })
+      .orderBy('date_realisation', 'desc')
+      .first();
+    return donnees
+      ? new ResultatTestMaturite({
+          ...donnees,
+          emailUtilisateur: donnees.email_utilisateur,
+          tailleOrganisation: donnees.taille_organisation,
+        })
+      : undefined;
+  }
+
   async metsAjour(resultatTest: ResultatTestMaturite): Promise<void> {
     await this.knex('resultats_test').where({ id: resultatTest.id }).update({
       email_utilisateur: resultatTest.emailUtilisateur,

@@ -23,6 +23,7 @@ import { ressourceAnnuaireSecteursActivite } from './ressourceAnnuaireSecteursAc
 import { ressourceAnnuaireTranchesEffectif } from './ressourceAnnuaireTranchesEffectif';
 import { ressourceResultatDeTest } from './ressourceResultatDeTest';
 import { ressourceContacts } from './ressourceContacts';
+import { ressourceDernierResultatDeTest } from './ressourceDernierResultatDeTest';
 import { ressourcePageContacts } from './ressourcePageContacts';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
@@ -143,8 +144,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(
     '/api/resultats-test',
     ressourceResultatsDeTest(configurationServeur),
-    ressourceResultatDeTest(configurationServeur)
+    ressourceResultatDeTest(configurationServeur),
+
   );
+  app.use('/api/resultats-test/dernier', ressourceDernierResultatDeTest(configurationServeur))
 
   app.use(
     '/api/annuaire/organisations',
