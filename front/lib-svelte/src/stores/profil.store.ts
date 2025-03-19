@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 import axios from 'axios';
 
 type Profil = {
@@ -18,4 +18,7 @@ axios.get<Profil>('/api/profil').then(({ data: profil }) => {
   set(undefined);
 });
 
-export const profilStore = { subscribe };
+export const profilStore = {
+  subscribe,
+  utilisateurEstConnecte: (): boolean => !!get(profilStore)?.email,
+};
