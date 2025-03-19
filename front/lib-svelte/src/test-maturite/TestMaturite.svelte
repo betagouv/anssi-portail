@@ -1,16 +1,14 @@
 <script lang="ts">
-  import { etapesTestMaturite } from "./TestMaturite.donnees";
-  import {
-    questionnaireStore,
-    resultatsQuestionnaire,
-  } from "./stores/questionnaire.store";
-  import Hero from "../Hero.svelte";
-  import Etapier from "../ui/Etapier.svelte";
-  import ResultatsTestMaturite from "./ResultatsTestMaturite.svelte";
-  import SelectSecteurActivite from "./SelectSecteurActivite.svelte";
-  import SelectRegion from "./SelectRegion.svelte";
-  import SelectTailleOrganisation from "./SelectTailleOrganisation.svelte";
-  import axios from "axios";
+  import { etapesTestMaturite } from './TestMaturite.donnees';
+  import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
+  import Hero from '../Hero.svelte';
+  import Etapier from '../ui/Etapier.svelte';
+  import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
+  import SelectSecteurActivite from './SelectSecteurActivite.svelte';
+  import SelectRegion from './SelectRegion.svelte';
+  import SelectTailleOrganisation from './SelectTailleOrganisation.svelte';
+  import axios from 'axios';
+  import { profilStore } from '../stores/profil.store';
 
   let afficheResultats = false;
   let introFaite = false;
@@ -25,15 +23,26 @@
     questionnaireStore.reponds(reponseDonnee);
   }
 
-  $: idQuestionCourante = etapesTestMaturite[$questionnaireStore.questionCourante].id;
+  $: idQuestionCourante =
+    etapesTestMaturite[$questionnaireStore.questionCourante].id;
 
-  function obtiensResultat() {
-    axios.post("/api/resultats-test", {
+  type CreationTest = {
+    id: string;
+  };
+
+  const utilisateurEstConnecte = async () => profilStore.utilisateurEstConnecte();
+
+  async function obtiensResultat() {
+    const reponse = await axios.post<CreationTest>('/api/resultats-test', {
       reponses: $resultatsQuestionnaire,
       secteur,
       region,
       tailleOrganisation,
     });
+    const { id } = reponse.data;
+    if (!await utilisateurEstConnecte()) {
+      localStorage.setItem('idTestMaturite', id);
+    }
     afficheResultats = true;
   }
 
@@ -45,7 +54,9 @@
     $questionnaireStore.toutesLesReponses[$questionnaireStore.questionCourante];
 
   function doitMontrerPropositions() {
-    const avecPropositions = etapesTestMaturite.filter((q) => q.propositions.length > 0);
+    const avecPropositions = etapesTestMaturite.filter(
+      (q) => q.propositions.length > 0
+    );
     return $questionnaireStore.questionCourante < avecPropositions.length;
   }
 </script>
@@ -64,13 +75,16 @@
           <p class="etape">
             Étape {$questionnaireStore.questionCourante + 1} sur 7
           </p>
-          <h5>{etapesTestMaturite[$questionnaireStore.questionCourante].titre}</h5>
+          <h5>
+            {etapesTestMaturite[$questionnaireStore.questionCourante].titre}
+          </h5>
           <Etapier
             etapeCourante={$questionnaireStore.questionCourante}
             nombreEtapes={7}
           />
           <h2>
-            {@html etapesTestMaturite[$questionnaireStore.questionCourante].question}
+            {@html etapesTestMaturite[$questionnaireStore.questionCourante]
+              .question}
           </h2>
 
           {#if doitMontrerPropositions()}
@@ -99,7 +113,7 @@
               <input
                 type="button"
                 class="bouton primaire taille-moyenne"
-                value={"Question suivante"}
+                value={'Question suivante'}
                 disabled={reponseDonnee === null}
                 on:click={reponds}
               />
@@ -149,8 +163,10 @@
         <div class="introduction">
           <h2>Quelle est la maturité cyber de votre organisation ?</h2>
           <p>
-            La maturité cyber <b>reflète</b> le niveau global de prise en compte des enjeux de cybersécurité par une organisation. 
-            Répondez à <b>6 questions</b> pour obtenir votre évaluation <b>indicative</b>.
+            La maturité cyber <b>reflète</b> le niveau global de prise en compte
+            des enjeux de cybersécurité par une organisation. Répondez à
+            <b>6 questions</b>
+            pour obtenir votre évaluation <b>indicative</b>.
           </p>
           <input
             type="button"
