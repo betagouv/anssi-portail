@@ -87,19 +87,18 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'cgu',
     'accessibilite',
     'creation-compte',
-    'ma-maturite',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
 
-  app.use('/connexion', ressourcePageConnexion(configurationServeur));
-
-  ['contacts'].forEach((page) =>
+  ['contacts', 'ma-maturite'].forEach((page) =>
     app.use(
       `/${page}`,
       ressourcePagesJekyllConnectees(configurationServeur, page)
     )
   );
+
+  app.use('/connexion', ressourcePageConnexion(configurationServeur));
 
   ['services', 'ressources'].forEach((repertoireProduits) =>
     app.use(
