@@ -1,8 +1,9 @@
 import { ConfigurationServeur } from './configurationServeur';
 import { Request, Response, Router } from 'express';
 
-const ressourcePageContacts = (
+const ressourcePagesJekyllConnectees = (
   { fournisseurChemin, middleware }: ConfigurationServeur,
+  nomPage:string
 ): Router => {
   const routeur = Router();
 
@@ -13,10 +14,10 @@ const ressourcePageContacts = (
       reponse
         .contentType('text/html')
         .status(200)
-        .sendFile(fournisseurChemin.cheminPageJekyll('contacts'));
+        .sendFile(fournisseurChemin.cheminPageJekyll(nomPage));
     }
   );
 
   return routeur;
 };
-export { ressourcePageContacts };
+export { ressourcePagesJekyllConnectees };

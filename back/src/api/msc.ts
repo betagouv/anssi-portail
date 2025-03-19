@@ -24,7 +24,7 @@ import { ressourceAnnuaireTranchesEffectif } from './ressourceAnnuaireTranchesEf
 import { ressourceResultatDeTest } from './ressourceResultatDeTest';
 import { ressourceContacts } from './ressourceContacts';
 import { ressourceDernierResultatDeTest } from './ressourceDernierResultatDeTest';
-import { ressourcePageContacts } from './ressourcePageContacts';
+import { ressourcePagesJekyllConnectees } from './ressourcePagesJekyllConnectees';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -87,14 +87,19 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'cgu',
     'accessibilite',
     'creation-compte',
-    "ma-maturite"
+    'ma-maturite',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
 
   app.use('/connexion', ressourcePageConnexion(configurationServeur));
 
-  app.use('/contacts', ressourcePageContacts(configurationServeur));
+  ['contacts'].forEach((page) =>
+    app.use(
+      `/${page}`,
+      ressourcePagesJekyllConnectees(configurationServeur, page)
+    )
+  );
 
   ['services', 'ressources'].forEach((repertoireProduits) =>
     app.use(
@@ -144,10 +149,12 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(
     '/api/resultats-test',
     ressourceResultatsDeTest(configurationServeur),
-    ressourceResultatDeTest(configurationServeur),
-
+    ressourceResultatDeTest(configurationServeur)
   );
-  app.use('/api/resultats-test/dernier', ressourceDernierResultatDeTest(configurationServeur))
+  app.use(
+    '/api/resultats-test/dernier',
+    ressourceDernierResultatDeTest(configurationServeur)
+  );
 
   app.use(
     '/api/annuaire/organisations',

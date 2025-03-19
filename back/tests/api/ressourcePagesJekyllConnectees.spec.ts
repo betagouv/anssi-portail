@@ -5,7 +5,7 @@ import { creeServeur } from '../../src/api/msc';
 import assert from 'node:assert';
 import { configurationDeTestDuServeur, fauxMiddleware } from './fauxObjets';
 
-describe('La ressource de la page des contacts', () => {
+describe("La ressource d'une page Jekyll connectée", () => {
   let serveur: Express;
 
   beforeEach(() => {
