@@ -11,8 +11,10 @@
   import TuileVersParcours from './TuileVersParcours.svelte';
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import PartageTest from './PartageTest.svelte';
+  import { questions } from './TestMaturite.donnees';
 
   export let affichePubMsc = true;
+  export let afficheRappelReponses = false;
 
   const calculeIdNiveau = (moyenne: number): IdNiveau => {
     if (moyenne < 1) return 'insuffisant';
@@ -72,6 +74,24 @@
     </div>
   </div>
 </section>
+
+{#if afficheRappelReponses}
+  <section class="rappel-reponses">
+    <div class="contenu-section">
+      <h2>Rappel de vos réponses</h2>
+      <div class="reponses">
+        {#each questions as question}
+          <div class="reponse">
+            <h3>{question.titre}</h3>
+            <p>
+              {question.propositions[$resultatsQuestionnaire[question.id] || 0]}
+            </p>
+          </div>
+        {/each}
+      </div>
+    </div>
+  </section>
+{/if}
 
 <section class="votre-parcours">
   <div class="contenu-section">

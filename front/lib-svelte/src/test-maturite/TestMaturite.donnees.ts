@@ -28,7 +28,7 @@ export type Rubrique = {
   lettre: 'A' | 'B' | 'C' | 'D' | 'E' | 'F';
 };
 
-const questions: Question[] = [
+export const questions: Question[] = [
   {
     titre: 'Prise en compte du risque',
     id: 'prise-en-compte-risque',
