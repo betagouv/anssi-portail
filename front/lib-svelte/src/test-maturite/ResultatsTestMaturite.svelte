@@ -84,7 +84,7 @@
           <div class="reponse">
             <h3>{question.titre}</h3>
             <p>
-              {question.propositions[$resultatsQuestionnaire[question.id] || 0]}
+              {question.propositions[($resultatsQuestionnaire[question.id] || 1) - 1]}
             </p>
           </div>
         {/each}
