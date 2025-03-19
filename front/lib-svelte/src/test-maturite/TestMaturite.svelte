@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { questions } from "./TestMaturite.donnees";
+  import { etapesTestMaturite } from "./TestMaturite.donnees";
   import {
     questionnaireStore,
     resultatsQuestionnaire,
@@ -25,7 +25,7 @@
     questionnaireStore.reponds(reponseDonnee);
   }
 
-  $: idQuestionCourante = questions[$questionnaireStore.questionCourante].id;
+  $: idQuestionCourante = etapesTestMaturite[$questionnaireStore.questionCourante].id;
 
   function obtiensResultat() {
     axios.post("/api/resultats-test", {
@@ -45,7 +45,7 @@
     $questionnaireStore.toutesLesReponses[$questionnaireStore.questionCourante];
 
   function doitMontrerPropositions() {
-    const avecPropositions = questions.filter((q) => q.propositions.length > 0);
+    const avecPropositions = etapesTestMaturite.filter((q) => q.propositions.length > 0);
     return $questionnaireStore.questionCourante < avecPropositions.length;
   }
 </script>
@@ -64,18 +64,18 @@
           <p class="etape">
             Étape {$questionnaireStore.questionCourante + 1} sur 7
           </p>
-          <h5>{questions[$questionnaireStore.questionCourante].titre}</h5>
+          <h5>{etapesTestMaturite[$questionnaireStore.questionCourante].titre}</h5>
           <Etapier
             etapeCourante={$questionnaireStore.questionCourante}
             nombreEtapes={7}
           />
           <h2>
-            {@html questions[$questionnaireStore.questionCourante].question}
+            {@html etapesTestMaturite[$questionnaireStore.questionCourante].question}
           </h2>
 
           {#if doitMontrerPropositions()}
             <div class="propositions">
-              {#each questions[$questionnaireStore.questionCourante].propositions as proposition, index}
+              {#each etapesTestMaturite[$questionnaireStore.questionCourante].propositions as proposition, index}
                 <label>
                   <input
                     type="radio"
