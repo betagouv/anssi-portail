@@ -1,28 +1,29 @@
 <script lang="ts">
-  import Hero from "../Hero.svelte";
-  import TuilesMaturite from "./TuilesMaturite.svelte";
-  import { type IdNiveau } from "../niveaux-maturite/NiveauxMaturite.donnees";
-  import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
-  import PubliciteMesServicesCyber from "./PubliciteMesServicesCyber.svelte";
-  import RadarMaturite from "./RadarMaturite.svelte";
-  import TuileVersParcours from "./TuileVersParcours.svelte";
-  import { niveauxMaturite } from "../niveaux-maturite/NiveauxMaturite.donnees";
-  import PartageTest from "./PartageTest.svelte";
-
-  $: resultats = resultatsQuestionnaire();
+  import Hero from '../Hero.svelte';
+  import TuilesMaturite from './TuilesMaturite.svelte';
+  import { type IdNiveau } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import {
+    questionnaireStore,
+    resultatsQuestionnaire,
+  } from './stores/questionnaire.store';
+  import PubliciteMesServicesCyber from './PubliciteMesServicesCyber.svelte';
+  import RadarMaturite from './RadarMaturite.svelte';
+  import TuileVersParcours from './TuileVersParcours.svelte';
+  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import PartageTest from './PartageTest.svelte';
 
   const calculeIdNiveau = (moyenne: number): IdNiveau => {
-    if (moyenne < 1) return "insuffisant";
-    if (moyenne < 2) return "emergent";
-    if (moyenne < 3) return "intermediaire";
-    if (moyenne < 4) return "confirme";
-    return "optimal";
+    if (moyenne < 1) return 'insuffisant';
+    if (moyenne < 2) return 'emergent';
+    if (moyenne < 3) return 'intermediaire';
+    if (moyenne < 4) return 'confirme';
+    return 'optimal';
   };
 
   $: moyenne =
     $questionnaireStore.toutesLesReponses.reduce(
       (acc, valeur) => acc + valeur,
-      0,
+      0
     ) / $questionnaireStore.toutesLesReponses.length;
 
   $: idNiveau = calculeIdNiveau(moyenne);
@@ -58,7 +59,7 @@
 <section class="repartition">
   <div class="contenu-section">
     <h2>Répartition de votre maturité cyber</h2>
-    <RadarMaturite {resultats} />
+    <RadarMaturite resultats={$resultatsQuestionnaire} />
     <div class="note">
       Ce résultat est une évaluation indicative basé sur un modèle élaboré par
       l’ANSSI.
@@ -68,9 +69,9 @@
 
 <section class="votre-parcours">
   <div class="contenu-section">
-    {#if niveau.id === "intermediaire"}
+    {#if niveau.id === 'intermediaire'}
       <TuileVersParcours parcours="approfondir" />
-    {:else if niveau.id === "optimal" || niveau.id === "confirme"}
+    {:else if niveau.id === 'optimal' || niveau.id === 'confirme'}
       <div class="tuile">
         <img src="/assets/images/debuter-cyber.png" alt="" />
         <h3>Les services et ressources cyber</h3>
@@ -88,6 +89,6 @@
 
 <section class="partage-test">
   <div class="contenu-section">
-    <PartageTest/>
+    <PartageTest />
   </div>
 </section>

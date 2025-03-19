@@ -54,13 +54,13 @@ describe("Le store du questionnaire", () => {
     expect(questionCourante).toBe(4);
     expect(toutesLesReponses).toEqual([10, 20, 30, 41, 50, 60]);
   });
-
+resultatsQuestionnaire
   it("peut donner les résultats avec les identifiants", () => {
     questionnaireStore.reponds(4);
     questionnaireStore.reponds(2);
     questionnaireStore.reponds(0);
 
-    const resultats = resultatsQuestionnaire();
+    const resultats = get(resultatsQuestionnaire);
 
     expect(resultats).toStrictEqual({
       "prise-en-compte-risque": 5,
