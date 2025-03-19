@@ -13,9 +13,14 @@ export type Middleware = {
   valide: () => FonctionMiddleware;
   interdisLaMiseEnCache: FonctionMiddleware;
   verifieJWT: FonctionMiddleware;
+  verifieJWTNavigation: FonctionMiddleware;
 };
 
-export const fabriqueMiddleware = ({ adaptateurJWT }: { adaptateurJWT: AdaptateurJWT }): Middleware => {
+export const fabriqueMiddleware = ({
+  adaptateurJWT,
+}: {
+  adaptateurJWT: AdaptateurJWT;
+}): Middleware => {
   const aseptise =
     (...nomsParametres: string[]) =>
     async (requete: any, _reponse: any, suite: any) => {
@@ -50,11 +55,11 @@ export const fabriqueMiddleware = ({ adaptateurJWT }: { adaptateurJWT: Adaptateu
   };
 
   const verifieJWT = async (
-    requete: Request & { emailUtilisateurCourant?: string; },
+    requete: Request & { emailUtilisateurCourant?: string },
     reponse: Response,
     suite: NextFunction
   ) => {
-    if(!requete.session?.token) {
+    if (!requete.session?.token) {
       reponse.sendStatus(401);
       return;
     }
@@ -63,8 +68,26 @@ export const fabriqueMiddleware = ({ adaptateurJWT }: { adaptateurJWT: Adaptateu
       const { email } = adaptateurJWT.decode(requete.session.token);
       requete.emailUtilisateurCourant = email;
       suite();
-    } catch(e) {
+    } catch (e) {
       reponse.sendStatus(401);
+    }
+  };
+
+  const verifieJWTNavigation = async (
+    requete: Request,
+    reponse: Response,
+    suite: NextFunction
+  ) => {
+    if (!requete.session?.token) {
+      reponse.redirect('/connexion');
+      return;
+    }
+
+    try {
+      adaptateurJWT.decode(requete.session.token);
+      suite();
+    } catch (e) {
+      reponse.redirect('/connexion');
     }
   };
 
@@ -72,6 +95,7 @@ export const fabriqueMiddleware = ({ adaptateurJWT }: { adaptateurJWT: Adaptateu
     aseptise,
     valide,
     verifieJWT,
+    verifieJWTNavigation,
     interdisLaMiseEnCache,
   };
 };
