@@ -12,6 +12,8 @@
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import PartageTest from './PartageTest.svelte';
 
+  export let affichePubMsc = true;
+
   const calculeIdNiveau = (moyenne: number): IdNiveau => {
     if (moyenne < 1) return 'insuffisant';
     if (moyenne < 2) return 'emergent';
@@ -46,15 +48,19 @@
       <p>{niveau.description}</p>
     </div>
 
-    <a href="/niveaux-maturite" class="lien" target="_blank">Les niveaux de maturité cyber</a>
+    <a href="/niveaux-maturite" class="lien" target="_blank"
+      >Les niveaux de maturité cyber</a
+    >
   </div>
 </section>
 
-<section class="pour-aller-plus-loin">
-  <div class="contenu-section">
-    <PubliciteMesServicesCyber />
-  </div>
-</section>
+{#if affichePubMsc}
+  <section class="pour-aller-plus-loin">
+    <div class="contenu-section">
+      <PubliciteMesServicesCyber />
+    </div>
+  </section>
+{/if}
 
 <section class="repartition">
   <div class="contenu-section">

@@ -20,4 +20,4 @@
   });
 </script>
 
-<ResultatsTestMaturite />
+<ResultatsTestMaturite affichePubMsc={false} />
