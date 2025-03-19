@@ -58,6 +58,7 @@ export const fauxMiddleware: Middleware = {
   valide: () => async (_, __, suite) => { suite(); },
   interdisLaMiseEnCache: async (_, __, suite) => { suite(); },
   verifieJWT: async (_, __, suite) => { suite(); },
+  verifieJWTNavigation: async (_, __, suite) => { suite(); },
 }
 
 export const configurationDeTestDuServeur: ConfigurationServeur = {

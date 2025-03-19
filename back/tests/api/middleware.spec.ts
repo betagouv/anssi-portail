@@ -10,7 +10,7 @@ import { fauxAdaptateurJWT } from './fauxObjets';
 import { JsonWebTokenError } from 'jsonwebtoken';
 
 describe('Le middleware', () => {
-  let requete: Request & { emailUtilisateurCourant?: string; };
+  let requete: Request & { emailUtilisateurCourant?: string };
   let reponse: Response;
   let middleware: Middleware;
   let adaptateurJWT: AdaptateurJWT;
@@ -119,7 +119,9 @@ describe('Le middleware', () => {
       let envOriginal = process.env;
 
       process.env.SECRET_JWT = 'monSecretJWT';
-      const token = adaptateurJWT.genereToken({email: 'jeanne.dupont@beta.gouv.fr'});
+      const token = adaptateurJWT.genereToken({
+        email: 'jeanne.dupont@beta.gouv.fr',
+      });
       requete.session = { token };
 
       let statutRecu;
@@ -135,12 +137,15 @@ describe('Le middleware', () => {
       process.env = envOriginal;
     });
 
-    it("jette une erreur si le token ne peut pas être décodé", async () => {
+    it('jette une erreur si le token ne peut pas être décodé', async () => {
       let statutOriginal = reponse.status;
 
       adaptateurJWT.decode = () => {
         throw new JsonWebTokenError('Erreur de token');
-      }
+      };
+      requete.session = {
+        token: 'unToken',
+      };
 
       let statutRecu;
       reponse.sendStatus = (statut: number) => {
@@ -151,18 +156,56 @@ describe('Le middleware', () => {
       await middleware.verifieJWT(requete, reponse, () => {});
 
       assert.equal(statutRecu, 401);
-    })
+    });
 
     it("ajoute l'email de l'utilisateur courant dans la requête", async () => {
       adaptateurJWT.decode = () => {
-        return { email: 'jeanne.dupond@beta.gouv.fr'}
-      }
+        return { email: 'jeanne.dupond@beta.gouv.fr' };
+      };
       requete.session = {
-        token: 'unToken'
-      }
+        token: 'unToken',
+      };
 
       await middleware.verifieJWT(requete, reponse, () => {});
-      assert.equal(requete.emailUtilisateurCourant, 'jeanne.dupond@beta.gouv.fr');
+      assert.equal(
+        requete.emailUtilisateurCourant,
+        'jeanne.dupond@beta.gouv.fr'
+      );
+    });
+  });
+
+  describe('sur demande de validation du token JWT en cas de navigation', () => {
+    it("redirige vers la page de connexion si le token n'est pas présent", async () => {
+      let urlRecu;
+      // @ts-ignore
+      reponse.redirect = (url: string) => {
+        urlRecu = url;
+        return;
+      };
+
+      await middleware.verifieJWTNavigation(requete, reponse, () => {});
+
+      assert.equal(urlRecu, '/connexion');
+    });
+
+    it('redirige vers la page de connexion si le token ne peut pas être décodé', async () => {
+      adaptateurJWT.decode = () => {
+        throw new JsonWebTokenError('Erreur de token');
+      };
+      requete.session = {
+        token: 'unToken',
+      };
+
+      let urlRecu;
+      // @ts-ignore
+      reponse.redirect = (url: string) => {
+        urlRecu = url;
+        return;
+      };
+
+      await middleware.verifieJWTNavigation(requete, reponse, () => {});
+
+      assert.equal(urlRecu, '/connexion');
     });
   });
 });
