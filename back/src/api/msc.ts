@@ -86,6 +86,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'cgu',
     'accessibilite',
     'creation-compte',
+    "ma-maturite"
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );

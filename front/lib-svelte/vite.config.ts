@@ -16,6 +16,7 @@ export default defineConfig({
         contacts: 'src/main-contacts.ts',
         extrait: 'src/main-extrait.ts',
         identification: 'src/main-identification.ts',
+        'maturite-utilisateur': 'src/main-maturite-utilisateur.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
