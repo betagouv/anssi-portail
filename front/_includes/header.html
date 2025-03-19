@@ -50,23 +50,10 @@
   </div>
 </header>
 
-<nav class="conteneur-nav">
-  <nav class="contenu-section">
-    <a href="/" {% if page.url== '/' %} class="actif" {% endif %}>Accueil</a>
-    <a href="/catalogue/" {% if page.url== '/catalogue/' %} class="actif" {% endif %}>Explorer le catalogue
-    </a>
-    <a href="/nis2/" {% if page.url== '/nis2/' %} class="actif" {% endif %}>Vous accompagner avec NIS2</a>
-    <details {% if page.url==
-    '/parcours-debuter/' or page.url == '/parcours-approfondir/' %} class="actif" {% endif %}>
-    <summary>Découvrir notre sélection</summary>
-    <div class="choix">
-      <a href="/parcours-debuter/" {% if page.url== '/parcours-debuter/' %} class="actif" {% endif %}>Les services pour se
-      lancer</a>
-      <a href="/parcours-approfondir/" {% if page.url== '/parcours-approfondir/' %} class="actif" {% endif
-      %}>Les services pour approfondir</a>
-    </div>
-    </details>
-    <a href="/test-maturite/" {% if page.url== '/test-maturite/' %} class="actif" {% endif %}>Tester votre maturité
-    cyber</a>
-  </nav>
-</nav>
+<script
+  type="module"
+  crossorigin
+  src="/lib-svelte/dist/assets/navigation.js"
+></script>
+
+<div id="navigation"></div>
