@@ -23,6 +23,7 @@ import { ressourceAnnuaireSecteursActivite } from './ressourceAnnuaireSecteursAc
 import { ressourceAnnuaireTranchesEffectif } from './ressourceAnnuaireTranchesEffectif';
 import { ressourceResultatDeTest } from './ressourceResultatDeTest';
 import { ressourceContacts } from './ressourceContacts';
+import { ressourcePageContacts } from './ressourcePageContacts';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -90,6 +91,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   );
 
   app.use('/connexion', ressourcePageConnexion(configurationServeur));
+
+  app.use('/contacts', ressourcePageContacts(configurationServeur));
 
   ['services', 'ressources'].forEach((repertoireProduits) =>
     app.use(
