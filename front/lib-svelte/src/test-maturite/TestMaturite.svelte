@@ -8,6 +8,7 @@
   import SelectRegion from './SelectRegion.svelte';
   import SelectTailleOrganisation from './SelectTailleOrganisation.svelte';
   import axios from 'axios';
+  import { enregistreIdResultatTestPourRevendication } from './resultatTest';
   import { profilStore } from '../stores/profil.store';
 
   let afficheResultats = false;
@@ -41,7 +42,7 @@
     });
     const { id } = reponse.data;
     if (!await utilisateurEstConnecte()) {
-      localStorage.setItem('idTestMaturite', id);
+      enregistreIdResultatTestPourRevendication(id);
     }
     afficheResultats = true;
   }

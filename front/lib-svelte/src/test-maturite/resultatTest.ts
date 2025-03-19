@@ -9,3 +9,7 @@ export const verifieResultatTestARevendiquer = async () => {
     localStorage.removeItem(cleStockageLocal);
   }
 };
+
+export function enregistreIdResultatTestPourRevendication(id: string) {
+  localStorage.setItem(cleStockageLocal, id);
+}
