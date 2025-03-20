@@ -10,9 +10,18 @@ export class EntrepotFavoriPostgres implements EntrepotFavori {
     this.knex = Knex(config);
   }
 
+  async retire(favori: Favori): Promise<void> {
+    await this.knex('favoris')
+      .where({
+        email_utilisateur: favori.emailUtilisateur,
+        id: favori.id,
+      })
+      .delete();
+  }
+
   async tousCeuxDeUtilisateur(emailUtilisateur: string): Promise<Favori[]> {
     return this.knex('favoris')
-      .where('emailUtilisateur', emailUtilisateur)
+      .where('email_utilisateur', emailUtilisateur)
       .orderBy('date_ajout', 'desc');
   }
 

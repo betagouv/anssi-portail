@@ -27,6 +27,7 @@ import { ressourceContacts } from './ressourceContacts';
 import { ressourceDernierResultatDeTest } from './ressourceDernierResultatDeTest';
 import { ressourcePagesJekyllConnectees } from './ressourcePagesJekyllConnectees';
 import { ressourceFavoris } from './ressourceFavoris';
+import { ressourceFavori } from './ressourceFavori';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -164,7 +165,11 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/api/utilisateurs', ressourceUtilisateurs(configurationServeur));
 
-  app.use('/api/favoris', ressourceFavoris(configurationServeur));
+  app.use(
+    '/api/favoris',
+    ressourceFavoris(configurationServeur),
+    ressourceFavori(configurationServeur)
+  );
 
   app.use(
     '/api/informations-creation-compte',
