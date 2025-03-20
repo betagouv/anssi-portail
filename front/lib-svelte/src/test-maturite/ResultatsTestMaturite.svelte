@@ -70,7 +70,7 @@
     <RadarMaturite resultats={$resultatsQuestionnaire} />
     <div class="note">
       Ce résultat est une évaluation indicative basé sur un modèle élaboré par
-      l’ANSSI.
+      l’ANSSI. La maturité cyber n’est pas une évaluation du niveau de sécurité des systèmes d’information d’une organisation.
     </div>
   </div>
 </section>
