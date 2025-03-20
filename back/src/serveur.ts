@@ -13,10 +13,14 @@ import { adaptateurHorloge } from './infra/adaptateurHorloge';
 import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
 import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres';
+import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo';
+
+const adaptateurEmail = fabriqueAdaptateurEmail();
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
   busEvenements,
+  adaptateurEmail,
   adaptateurJournal: fabriqueAdaptateurJournal(),
   adaptateurHorloge,
 });
