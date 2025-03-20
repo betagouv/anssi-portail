@@ -129,7 +129,7 @@ describe('La ressource utilisateur', () => {
           .post('/api/utilisateurs')
           .send({
             ...donneesUtilisateur,
-            domainesSpecialite: ['unMauvaisPoste'],
+            domainesSpecialite: [],
           });
         assert.equal(reponse.status, 400);
         assert.equal(reponse.body.erreur, "Les domaines de spécialité sont invalides");
