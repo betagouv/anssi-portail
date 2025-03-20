@@ -7,6 +7,7 @@ const ressourceFavoris = ({
   entrepotFavori,
 }: ConfigurationServeur) => {
   const routeur = Router();
+
   routeur.post(
     '/',
     middleware.verifieJWT,
@@ -23,6 +24,18 @@ const ressourceFavoris = ({
       reponse.sendStatus(201);
     }
   );
+
+  routeur.get(
+    '/',
+    middleware.verifieJWT,
+    async (requete: Request, reponse: Response) => {
+      const favoris = await entrepotFavori.tousCeuxDeUtilisateur(
+        requete.session?.email
+      );
+      reponse.status(200).send(favoris.map((favori) => favori.id));
+    }
+  );
+
   return routeur;
 };
 

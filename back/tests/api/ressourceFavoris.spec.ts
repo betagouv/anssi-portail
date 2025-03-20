@@ -44,7 +44,7 @@ describe('La ressource des services et ressources favoris', () => {
         },
       });
 
-      await request(serveur).post('/api/favoris').send({id: ''});
+      await request(serveur).post('/api/favoris').send({ id: '' });
 
       assert.equal(middelwareAppele, true);
     });
@@ -53,11 +53,9 @@ describe('La ressource des services et ressources favoris', () => {
       const reponse = await request(serveur)
         .post('/api/favoris')
         .set('Cookie', [cookieJeanneDupont])
-        .send({ });
+        .send({});
 
-      await entrepotFavori.tousCeuxDeUtilisateur(
-        'jeanne.dupont@mail.com'
-      );
+      await entrepotFavori.tousCeuxDeUtilisateur('jeanne.dupont@mail.com');
 
       assert.equal(reponse.status, 400);
     });
@@ -92,6 +90,49 @@ describe('La ressource des services et ressources favoris', () => {
       );
 
       assert.equal(ceuxDeUtilisateur[0].id, '/services/mon-service-cyber');
+    });
+  });
+
+  describe('Sur requête GET', () => {
+    it('utilise le middleware de verification de JWT', async () => {
+      let middelwareAppele = false;
+      serveur = creeServeur({
+        ...configurationDeTestDuServeur,
+        middleware: {
+          ...fauxMiddleware,
+          verifieJWT: async (_, __, suite) => {
+            middelwareAppele = true;
+            suite();
+          },
+        },
+      });
+
+      await request(serveur).get('/api/favoris');
+
+      assert.equal(middelwareAppele, true);
+    });
+
+    it("retourne les favoris de l'utilisateur connecté", async () => {
+      await entrepotFavori.ajoute({
+        id: 'unId',
+        emailUtilisateur: 'jeanne.dupont@mail.com',
+      });
+      await entrepotFavori.ajoute({
+        id: 'unSecondId',
+        emailUtilisateur: 'jeanne.dupont@mail.com',
+      });
+      await entrepotFavori.ajoute({
+        id: 'unTroisiemeId',
+        emailUtilisateur: 'hector.dupont@mail.com',
+      });
+
+      const reponse = await request(serveur)
+        .get('/api/favoris')
+        .set('Cookie', [cookieJeanneDupont]);
+
+      assert.equal(reponse.status, 200);
+      assert.equal(reponse.body.length, 2);
+      assert.deepEqual(reponse.body, ['unId', 'unSecondId']);
     });
   });
 });
