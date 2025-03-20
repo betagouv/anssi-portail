@@ -5,6 +5,8 @@ import { configurationDeTestDuServeur } from './fauxObjets';
 import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests';
+import { CompteCree } from '../../src/bus/compteCree';
 
 describe('La ressource utilisateur', () => {
   let serveur: Express;
@@ -19,11 +21,16 @@ describe('La ressource utilisateur', () => {
     cguAcceptees: true,
     infolettreAcceptee: true,
   };
+  let busEvenements: MockBusEvenement;
+
   beforeEach(() => {
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+    busEvenements = fabriqueBusPourLesTests();
+
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       entrepotUtilisateur,
+      busEvenements
     });
   });
 
@@ -35,7 +42,7 @@ describe('La ressource utilisateur', () => {
     });
 
     it("ajoute un utilisateur à l'entrepot", async () => {
-      const reponse = await request(serveur)
+      await request(serveur)
         .post('/api/utilisateurs')
         .send(donneesUtilisateur);
 
@@ -53,8 +60,19 @@ describe('La ressource utilisateur', () => {
       assert.equal(jeanne?.infolettreAcceptee, true);
     });
 
+    it("publie un événement de création de compte", async () => {
+      await request(serveur)
+        .post('/api/utilisateurs')
+        .send(donneesUtilisateur);
+
+      busEvenements.aRecuUnEvenement(CompteCree);
+      let evenement = busEvenements.recupereEvenement(CompteCree);
+      assert.equal(evenement!.email, 'jeanne.dupont@user.com');
+      assert.equal(evenement!.prenom, 'Jeanne');
+    });
+
     it('aseptise les paramètres', async () => {
-      const reponse = await request(serveur)
+      await request(serveur)
         .post('/api/utilisateurs')
         .send({
           email: '  jeanne.dupont@user.com',
