@@ -1,22 +1,27 @@
 <script lang="ts">
+  import { profilStore } from '../stores/profil.store';
   import LienNavigation from './LienNavigation.svelte';
 
   const cheminRelatif = window.location.pathname;
+
+  $: estConnecte = !!$profilStore;
 </script>
 
 <nav class="conteneur-nav">
   <div class="contenu-section">
-    <LienNavigation href="/" label="Accueil"/>
-    <LienNavigation href="/catalogue/" label="Explorer le catalogue"/>
+    {#if !estConnecte}
+      <LienNavigation href="/" label="Accueil"/>
+    {/if}
+    <LienNavigation href="/catalogue/" label={estConnecte ? 'Le catalogue des services' : 'Explorer le catalogue'}/>
     <LienNavigation href="/nis2/" label="Vous accompagner avec NIS2"/>
     <details class:actif={ cheminRelatif === '/parcours-debuter/' ||  cheminRelatif === '/parcours-approfondir/'}>
-      <summary>Découvrir notre sélection</summary>
+      <summary>{estConnecte ? 'Notre sélection' : 'Découvrir notre sélection'}</summary>
       <div class="choix">
         <LienNavigation href="/parcours-debuter/" label="Les services pour se lancer" dansMenuDeroulant/>
         <LienNavigation href="/parcours-approfondir/" label="Les services pour approfondir" dansMenuDeroulant/>
       </div>
     </details>
-    <LienNavigation href="/test-maturite/" label="Tester votre maturité cyber"/>
+    <LienNavigation href={estConnecte ? '/ma-maturite' : '/test-maturite/'} label={estConnecte ? 'Votre maturité cyber' : 'Tester votre maturité cyber'}/>
   </div>
 </nav>
 
