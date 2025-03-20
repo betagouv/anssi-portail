@@ -13,6 +13,7 @@ import { adaptateurHorloge } from './infra/adaptateurHorloge';
 import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
 import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres';
+import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
@@ -34,7 +35,7 @@ creeServeur({
     adaptateurProfilAnssi,
     adaptateurRechercheEntreprise
   ),
-  reseau : {
+  reseau: {
     trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
     maxRequetesParMinutes: adaptateurEnvironnement
       .serveur()
@@ -44,6 +45,7 @@ creeServeur({
   adaptateurRechercheEntreprise,
   adaptateurProfilAnssi,
   entrepotResultatTest: new EntrepotResultatTestPostgres(),
+  entrepotFavori: new EntrepotFavoriPostgres(),
 }).listen(3000, () => {
   console.log('Le serveur écoute sur le port 3000');
 });
