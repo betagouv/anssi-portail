@@ -1,10 +1,17 @@
 <script lang="ts">
+  import axios from 'axios';
+
   export let surClic: () => string;
   export let estPlein: boolean;
   $: cheminIcone = `/assets/images/icone-favori-${estPlein ? 'plein' : 'vide'}.svg`;
-  const actionSurClick = () => {
-    const favori = surClic();
-    estPlein = !estPlein;
+  const actionSurClick = async () => {
+    const idFavori = surClic();
+    try {
+      await axios.post('/api/favoris', {id: idFavori})
+      estPlein = !estPlein;
+    } catch (error) {
+      console.error("API indisponible", error);
+    }
   };
 </script>
 
