@@ -1,8 +1,10 @@
 <script lang="ts">
-import { type ItemCyber, Typologie } from "./Catalogue.types";
-import BoutonFavori from "../favoris/BoutonFavori.svelte";
+  import {type ItemCyber, Typologie} from "./Catalogue.types";
+  import BoutonFavori from "../favoris/BoutonFavori.svelte";
+  import {profilStore} from '../stores/profil.store';
 
   export let itemCyber: ItemCyber;
+  export let avecBoutonFavori: boolean = false;
 
   const libelleBadge = (item: ItemCyber) =>
     item.typologie === Typologie.SERVICE ? "Service" : item.format;
@@ -13,6 +15,7 @@ import BoutonFavori from "../favoris/BoutonFavori.svelte";
       ? texte.slice(0, LONGUEUR_MAX) + "&hellip;"
       : texte;
   };
+
 </script>
 
 <a
@@ -33,9 +36,11 @@ import BoutonFavori from "../favoris/BoutonFavori.svelte";
   <div class="contenu">
     <div class="en-tete">
       <div class="nom-item">{@html itemCyber.nom}</div>
-      <BoutonFavori estPlein={false} surClic={()=>itemCyber.nom}/>
+      {#if avecBoutonFavori && $profilStore}
+        <BoutonFavori estPlein={false} surClic={() => itemCyber.id}/>
+      {/if}
     </div>
-    
+
     <span class="description">{@html tronque(itemCyber.description)}</span>
     <div class="labels">
       {#each itemCyber.sources as source}<span>{source}</span>{/each}
