@@ -2,8 +2,10 @@ import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 import { check } from 'express-validator';
 import { codesDomainesDeSpecialite } from '../metier/referentielDomainesDeSpecialite';
+import { CompteCree } from '../bus/compteCree';
 
 const ressourceUtilisateurs = ({
+  busEvenements,
   entrepotUtilisateur,
   middleware,
 }: ConfigurationServeur) => {
@@ -44,6 +46,8 @@ const ressourceUtilisateurs = ({
         cguAcceptees,
         infolettreAcceptee,
       });
+
+      await busEvenements.publie(new CompteCree({ email, prenom }))
 
       reponse.sendStatus(201);
     }
