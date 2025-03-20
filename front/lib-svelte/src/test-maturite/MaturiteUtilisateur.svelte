@@ -12,11 +12,19 @@
   };
 
   onMount(async () => {
-    const reponseHttp = await axios.get<DernierResultatTest>(
-      '/api/resultats-test/dernier'
-    );
-    const reponses = reponseHttp.data.reponses;
-    questionnaireStore.chargeReponses(reponses);
+    try {
+      const reponseHttp = await axios.get<DernierResultatTest>(
+        '/api/resultats-test/dernier'
+      );
+      const reponses = reponseHttp.data.reponses;
+      questionnaireStore.chargeReponses(reponses);
+    } catch (e) {
+      if(e?.status === 404) {
+        window.location.href = '/test-maturite'
+      } else {
+        throw e;
+      }
+    };
   });
 </script>
 
