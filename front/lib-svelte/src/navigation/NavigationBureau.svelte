@@ -22,6 +22,9 @@
       </div>
     </details>
     <LienNavigation href={estConnecte ? '/ma-maturite' : '/test-maturite/'} label={estConnecte ? 'Votre maturité cyber' : 'Tester votre maturité cyber'}/>
+    {#if estConnecte}
+      <LienNavigation href="/contacts/" label='Vos contacts' />
+    {/if}
   </div>
 </nav>
 

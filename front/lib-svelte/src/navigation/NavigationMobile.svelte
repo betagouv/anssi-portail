@@ -48,6 +48,9 @@
         </div>
       </details>
       <LienNavigationMobile href={estConnecte ? '/ma-maturite' : '/test-maturite/'} label={estConnecte ? 'Votre maturité cyber' : 'Tester votre maturité cyber'} />
+      {#if estConnecte}
+        <LienNavigationMobile href="/contacts/" label='Vos contacts' />
+      {/if}
     </div>
   </nav>
 {/if}
