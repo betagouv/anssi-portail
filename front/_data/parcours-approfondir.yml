@@ -28,6 +28,7 @@ securiser:
     - /ressources/cyber-13questions
     - /ressources/prestas-ebios
     - /ressources/visa-secu
+    - /ressources/visa-secu-produit
     - /ressources/cnil-reco
 
 tester:
