@@ -20,6 +20,7 @@ SECURISER:
   - /ressources/ebios
   - /ressources/prestas-ebios
   - /ressources/visa-secu
+  - /ressources/visa-secu-produit
   - /services/label-expert-cyber
   - /services/assistance-technique
   - /services/mon-espace-nis2
@@ -46,6 +47,7 @@ SE_FORMER:
   - /ressources/secnumedu
   - /ressources/secnumedufc
   - /services/demainspecialistecyber
+  - /services/demainspecialistecyber-affiches
   - /services/pix
   - /services/hackropole
   - /ressources/cyber-dico
