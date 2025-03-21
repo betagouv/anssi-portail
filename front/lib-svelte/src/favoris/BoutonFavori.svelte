@@ -1,26 +1,32 @@
 <script lang="ts">
   import axios from 'axios';
+  import type { ItemCyber } from '../catalogue/Catalogue.types';
+  import { favorisStore } from '../stores/favoris.store';
 
-  export let surClic: () => string;
-  export let estPlein: boolean;
-  $: cheminIcone = `/assets/images/icone-favori-${estPlein ? 'plein' : 'vide'}.svg`;
+  export let itemCyber: ItemCyber;
+
+  $: cheminIcone = `/assets/images/icone-favori-${estFavori(itemCyber) ? 'plein' : 'vide'}.svg`;
+
+  $: estFavori = (itemCyber: ItemCyber) => $favorisStore.includes(itemCyber.id);
+
   const actionSurClick = async () => {
-    const idFavori = surClic();
+    const idFavori = itemCyber.id;
     try {
-      if (estPlein) {
+      if (estFavori(itemCyber)) {
         await axios.delete(`/api/favoris/${encodeURIComponent(idFavori)}`);
+        favorisStore.retire(idFavori);
       } else {
-        await axios.post('/api/favoris', {idItemCyber: idFavori});
+        await axios.post('/api/favoris', { idItemCyber: idFavori });
+        favorisStore.ajoute(idFavori);
       }
-      estPlein = !estPlein;
     } catch (error) {
-      console.error("API indisponible", error);
+      console.error('API indisponible', error);
     }
   };
 </script>
 
 <button on:click|preventDefault={actionSurClick}>
-  <img src={cheminIcone} alt="Favori"/>
+  <img src={cheminIcone} alt="Favori" />
 </button>
 
 <style lang="scss">

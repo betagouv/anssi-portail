@@ -1,8 +1,7 @@
 <script lang="ts">
-  import {type ItemCyber, Typologie} from "./Catalogue.types";
-  import BoutonFavori from "../favoris/BoutonFavori.svelte";
-  import {profilStore} from '../stores/profil.store';
-  import {favorisStore} from "../stores/favoris.store";
+  import { type ItemCyber, Typologie } from './Catalogue.types';
+  import BoutonFavori from '../favoris/BoutonFavori.svelte';
+  import { profilStore } from '../stores/profil.store';
 
   export let itemCyber: ItemCyber;
   export let avecBoutonFavori: boolean = false;
@@ -16,9 +15,6 @@
       ? texte.slice(0, LONGUEUR_MAX) + "&hellip;"
       : texte;
   };
-
-  const estFavori = (itemCyber: ItemCyber) => $favorisStore.includes(itemCyber.id)
-
 </script>
 
 <a
@@ -40,7 +36,7 @@
     <div class="en-tete">
       <div class="nom-item">{@html itemCyber.nom}</div>
       {#if avecBoutonFavori && $profilStore}
-        <BoutonFavori estPlein={estFavori(itemCyber)} surClic={() => itemCyber.id}/>
+        <BoutonFavori {itemCyber} />
       {/if}
     </div>
 
