@@ -1,8 +1,10 @@
 ---
-layout: defaut
+layout: favoris
 permalink: /favoris/
 titreHtml: 'Vos favoris | MesServicesCyber'
 ---
+
+{% include script-donnees-json.html repartition=site.data.catalogue %}
 
 <script
   type="module"
@@ -16,6 +18,10 @@ titreHtml: 'Vos favoris | MesServicesCyber'
     <p>
       Retrouvez tous vos contenus cyber à partager.
     </p>
+     <div class="cta">
+       <p>Parcourez le catalogue pour ajouter plus de services et ressources.</p>
+       <a href="/catalogue/" class="bouton primaire">Explorer le catalogue</a>
+     </div>
   </div>
 </section>
 
