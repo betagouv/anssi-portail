@@ -15,7 +15,7 @@ const ressourceFavori = ({
       let id = requete.params.id;
       id = id.replaceAll('&#x2F;', '/');
       await entrepotFavori.retire({
-        id,
+        idItemCyber: id,
         emailUtilisateur: requete.session!.email,
       });
       reponse.send(200);

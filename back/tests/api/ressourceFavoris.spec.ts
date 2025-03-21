@@ -44,7 +44,7 @@ describe('La ressource des services et ressources favoris', () => {
         },
       });
 
-      await request(serveur).post('/api/favoris').send({ id: '' });
+      await request(serveur).post('/api/favoris').send({ idItemCyber: '' });
 
       assert.equal(middelwareAppele, true);
     });
@@ -64,7 +64,7 @@ describe('La ressource des services et ressources favoris', () => {
       const reponse = await request(serveur)
         .post('/api/favoris')
         .set('Cookie', [cookieJeanneDupont])
-        .send({ id: 'unId' });
+        .send({ idItemCyber: 'unId' });
 
       let ceuxDeUtilisateur = await entrepotFavori.tousCeuxDeUtilisateur(
         'jeanne.dupont@mail.com'
@@ -72,7 +72,7 @@ describe('La ressource des services et ressources favoris', () => {
 
       assert.equal(reponse.status, 201);
       assert.equal(ceuxDeUtilisateur.length, 1);
-      assert.equal(ceuxDeUtilisateur[0].id, 'unId');
+      assert.equal(ceuxDeUtilisateur[0].idItemCyber, 'unId');
       assert.equal(
         ceuxDeUtilisateur[0].emailUtilisateur,
         'jeanne.dupont@mail.com'
@@ -83,13 +83,13 @@ describe('La ressource des services et ressources favoris', () => {
       await request(serveur)
         .post('/api/favoris')
         .set('Cookie', [cookieJeanneDupont])
-        .send({ id: '/services/mon-service-cyber  ' });
+        .send({ idItemCyber: '/services/mon-service-cyber  ' });
 
       let ceuxDeUtilisateur = await entrepotFavori.tousCeuxDeUtilisateur(
         'jeanne.dupont@mail.com'
       );
 
-      assert.equal(ceuxDeUtilisateur[0].id, '/services/mon-service-cyber');
+      assert.equal(ceuxDeUtilisateur[0].idItemCyber, '/services/mon-service-cyber');
     });
   });
 
@@ -114,15 +114,15 @@ describe('La ressource des services et ressources favoris', () => {
 
     it("retourne les favoris de l'utilisateur connecté", async () => {
       await entrepotFavori.ajoute({
-        id: 'unId',
+        idItemCyber: 'unId',
         emailUtilisateur: 'jeanne.dupont@mail.com',
       });
       await entrepotFavori.ajoute({
-        id: 'unSecondId',
+        idItemCyber: 'unSecondId',
         emailUtilisateur: 'jeanne.dupont@mail.com',
       });
       await entrepotFavori.ajoute({
-        id: 'unTroisiemeId',
+        idItemCyber: 'unTroisiemeId',
         emailUtilisateur: 'hector.dupont@mail.com',
       });
 

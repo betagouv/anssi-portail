@@ -10,7 +10,7 @@
       if (estPlein) {
         await axios.delete(`/api/favoris/${encodeURIComponent(idFavori)}`);
       } else {
-        await axios.post('/api/favoris', {id: idFavori});
+        await axios.post('/api/favoris', {idItemCyber: idFavori});
       }
       estPlein = !estPlein;
     } catch (error) {

@@ -1,4 +1,4 @@
 export type Favori = {
-  id: string;
+  idItemCyber: string;
   emailUtilisateur: string;
 };
