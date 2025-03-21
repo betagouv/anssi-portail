@@ -7,7 +7,11 @@
   const actionSurClick = async () => {
     const idFavori = surClic();
     try {
-      await axios.post('/api/favoris', {id: idFavori})
+      if (estPlein) {
+        await axios.delete(`/api/favoris/${encodeURIComponent(idFavori)}`);
+      } else {
+        await axios.post('/api/favoris', {id: idFavori});
+      }
       estPlein = !estPlein;
     } catch (error) {
       console.error("API indisponible", error);
