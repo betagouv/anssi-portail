@@ -14,21 +14,30 @@ export class EntrepotFavoriPostgres implements EntrepotFavori {
     await this.knex('favoris')
       .where({
         email_utilisateur: favori.emailUtilisateur,
-        id: favori.id,
+        id_item_cyber: favori.idItemCyber,
       })
       .delete();
   }
 
   async tousCeuxDeUtilisateur(emailUtilisateur: string): Promise<Favori[]> {
-    return this.knex('favoris')
+    let favoris = await this.knex('favoris')
       .where('email_utilisateur', emailUtilisateur)
       .orderBy('date_ajout', 'desc');
+    return favoris.map(
+      ({
+        email_utilisateur: emailUtilisateur,
+        id_item_cyber: idItemCyber,
+      }) => ({
+        emailUtilisateur,
+        idItemCyber,
+      })
+    );
   }
 
   async ajoute(favori: Favori): Promise<void> {
     await this.knex('favoris').insert({
       email_utilisateur: favori.emailUtilisateur,
-      id: favori.id,
+      id_item_cyber: favori.idItemCyber,
     });
   }
 }

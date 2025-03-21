@@ -53,7 +53,7 @@ describe('La ressource des services et ressources favoris', () => {
 
     it("supprime le favori de l'entrepot", async () => {
       await entrepotFavori.ajoute({
-        id: '/services/mon-super-service',
+        idItemCyber: '/services/mon-super-service',
         emailUtilisateur: 'jeanne.dupont@mail.com',
       });
 
@@ -71,7 +71,7 @@ describe('La ressource des services et ressources favoris', () => {
 
     it('aseptise le paramètre id', async () => {
       await entrepotFavori.ajoute({
-        id: 'unId&lt;truc',
+        idItemCyber: 'unId&lt;truc',
         emailUtilisateur: 'jeanne.dupont@mail.com',
       });
 

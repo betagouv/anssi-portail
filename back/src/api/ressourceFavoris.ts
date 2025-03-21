@@ -11,14 +11,14 @@ const ressourceFavoris = ({
   routeur.post(
     '/',
     middleware.verifieJWT,
-    middleware.aseptise('id'),
-    [check('id').not().isEmpty().withMessage("L'id est invalide")],
+    middleware.aseptise('idItemCyber'),
+    [check('idItemCyber').not().isEmpty().withMessage("L'idItemCyber est invalide")],
     middleware.valide(),
     async (requete: Request, reponse: Response) => {
-      let id = requete.body.id;
-      id = id.replaceAll('&#x2F;', '/');
+      let idItemCyber = requete.body.idItemCyber;
+      idItemCyber = idItemCyber.replaceAll('&#x2F;', '/');
       await entrepotFavori.ajoute({
-        id,
+        idItemCyber,
         emailUtilisateur: requete.session?.email,
       });
       reponse.sendStatus(201);
@@ -32,7 +32,7 @@ const ressourceFavoris = ({
       const favoris = await entrepotFavori.tousCeuxDeUtilisateur(
         requete.session?.email
       );
-      reponse.status(200).send(favoris.map((favori) => favori.id));
+      reponse.status(200).send(favoris.map((favori) => favori.idItemCyber));
     }
   );
 
