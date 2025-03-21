@@ -117,7 +117,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
 
-  ['contacts', 'ma-maturite'].forEach((page) =>
+  ['contacts', 'ma-maturite', 'favoris'].forEach((page) =>
     app.use(
       `/${page}`,
       ressourcePagesJekyllConnectees(configurationServeur, page)
