@@ -1,3 +1,4 @@
+#checkov:skip=CKV_DOCKER_2:Clever Cloud n'utiliser pas HEALTHCHECK
 #######################
 ## Dockerfile multi-staged, pour être utilisé à la fois par la CI/CD et par le PaaS de PROD.
 ## En CI/CD on veut simplement déclencher le `build` pour vérifier la validité du code
