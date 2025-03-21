@@ -8,6 +8,7 @@ import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntre
 import { AdaptateurGestionErreur } from '../infra/adaptateurGestionErreurSentry';
 import { EntrepotResultatTest } from '../metier/entrepotResultatTest';
 import { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
+import { EntrepotFavori } from '../metier/entrepotFavori';
 
 export type ConfigurationServeur = {
   fournisseurChemin: FournisseurChemin;
@@ -18,11 +19,12 @@ export type ConfigurationServeur = {
   busEvenements: BusEvenements;
   adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   entrepotUtilisateur: EntrepotUtilisateur;
-  reseau : {
+  reseau: {
     trustProxy: string;
     maxRequetesParMinutes: number;
     ipAutorisees: string[] | false;
   };
   entrepotResultatTest: EntrepotResultatTest;
+  entrepotFavori: EntrepotFavori;
   adaptateurProfilAnssi: AdaptateurProfilAnssi;
 };

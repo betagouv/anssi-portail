@@ -1,7 +1,10 @@
 <script lang="ts">
-  import { type ItemCyber, Typologie } from "./Catalogue.types";
+  import { type ItemCyber, Typologie } from './Catalogue.types';
+  import BoutonFavori from '../favoris/BoutonFavori.svelte';
+  import { profilStore } from '../stores/profil.store';
 
   export let itemCyber: ItemCyber;
+  export let avecBoutonFavori: boolean = false;
 
   const libelleBadge = (item: ItemCyber) =>
     item.typologie === Typologie.SERVICE ? "Service" : item.format;
@@ -30,7 +33,13 @@
     <figcaption>{libelleBadge(itemCyber)}</figcaption>
   </figure>
   <div class="contenu">
-    <div class="nom-item">{@html itemCyber.nom}</div>
+    <div class="en-tete">
+      <div class="nom-item">{@html itemCyber.nom}</div>
+      {#if avecBoutonFavori && $profilStore}
+        <BoutonFavori {itemCyber} />
+      {/if}
+    </div>
+
     <span class="description">{@html tronque(itemCyber.description)}</span>
     <div class="labels">
       {#each itemCyber.sources as source}<span>{source}</span>{/each}
@@ -50,3 +59,64 @@
     </div>
   </div>
 </a>
+
+<style lang="scss">
+  .contenu {
+    background: white;
+    z-index: 1;
+    border-bottom: 4px solid black;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .en-tete {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nom-item {
+      margin: 0;
+      padding: 0;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      font-weight: 400;
+    }
+
+    .description {
+      font-weight: bold;
+      font-size: 1.125rem;
+      line-height: 1.5rem;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      color: var(--noir);
+      font-weight: bold;
+    }
+
+    .labels {
+      span {
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+      }
+
+      a.lien-externe {
+        margin-left: auto;
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+</style>

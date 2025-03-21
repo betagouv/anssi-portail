@@ -14,6 +14,7 @@ export default defineConfig({
         'test-maturite': 'src/main-test-maturite.ts',
         catalogue: 'src/main-catalogue.ts',
         contacts: 'src/main-contacts.ts',
+        favoris: 'src/main-favoris.ts',
         extrait: 'src/main-extrait.ts',
         identification: 'src/main-identification.ts',
         navigation: 'src/main-navigation.ts',

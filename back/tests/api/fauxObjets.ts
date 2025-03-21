@@ -12,6 +12,7 @@ import {
   AdaptateurProfilAnssi,
   ProfilAnssi,
 } from '../../src/infra/adaptateurProfilAnssi';
+import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -77,4 +78,5 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
   entrepotResultatTest: new EntrepotResultatTestMemoire(),
   adaptateurProfilAnssi: fauxAdaptateurProfilAnssi,
+  entrepotFavori: new EntrepotFavoriMemoire(),
 };
