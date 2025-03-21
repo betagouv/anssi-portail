@@ -46,7 +46,7 @@ RUN set -eux; \
 # Installation de node
 RUN apk update && apk add nodejs npm
 
-ADD front /srv/jekyll
+COPY front /srv/jekyll
 
 # Build du catalogue
 WORKDIR /srv/jekyll/lib-svelte
@@ -74,11 +74,11 @@ FROM node:23 AS build-le-back
 RUN npm install -g npm
 WORKDIR /usr/src/app
 COPY back/package.json back/package-lock.json back/tsconfig.json back/knexfile.ts /usr/src/app/
-ADD back/src /usr/src/app/src
+COPY back/src /usr/src/app/src
 RUN npm install
 WORKDIR /usr/src/app/src
 RUN npx tsc
-ADD back/migrations /usr/src/dist-back/migrations
+COPY back/migrations /usr/src/dist-back/migrations
 
 ####
 ## SERVEUR
