@@ -28,6 +28,7 @@ import { ressourceDernierResultatDeTest } from './ressourceDernierResultatDeTest
 import { ressourcePagesJekyllConnectees } from './ressourcePagesJekyllConnectees';
 import { ressourceFavoris } from './ressourceFavoris';
 import { ressourceFavori } from './ressourceFavori';
+import { ressourceFavorisPartages } from './ressourceFavorisPartages';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -117,7 +118,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
 
-  app.use('/favoris-partages/:id', ressourcePagesJekyll(configurationServeur, 'favoris-partages'));
+  app.use(
+    '/favoris-partages/:id',
+    ressourcePagesJekyll(configurationServeur, 'favoris-partages')
+  );
 
   ['contacts', 'ma-maturite', 'favoris'].forEach((page) =>
     app.use(
@@ -172,6 +176,11 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     '/api/favoris',
     ressourceFavoris(configurationServeur),
     ressourceFavori(configurationServeur)
+  );
+
+  app.use(
+    '/api/favoris-partages',
+    ressourceFavorisPartages(configurationServeur)
   );
 
   app.use(
