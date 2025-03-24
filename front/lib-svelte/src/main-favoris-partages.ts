@@ -1,7 +1,7 @@
 import { mount } from 'svelte';
-import MesFavoris from "./favoris/MesFavoris.svelte";
 import type {ItemCyber, RepartitionParBesoin} from "./catalogue/Catalogue.types";
 import {catalogueStore} from "./catalogue/stores/catalogue.store";
+import FavorisPartages from "./favoris/FavorisPartages.svelte";
 
 
 const donnees = document.getElementById("donnees")!.textContent;
@@ -14,8 +14,8 @@ const { itemsCyber, repartition } = JSON.parse(donnees) as {
 
 catalogueStore.initialise(itemsCyber, repartition);
 
-const favoris = mount(MesFavoris, {
-  target: document.getElementById('favoris')!,
+const favorisPartages = mount(FavorisPartages, {
+  target: document.getElementById('favoris-partages')!,
 });
 
-export default favoris;
+export default favorisPartages;

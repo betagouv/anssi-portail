@@ -48,4 +48,31 @@ describe('La ressource pages jekyll', () => {
       assert.equal(nomPageDemande!, 'catalogue');
     });
   });
+
+  describe('sur demande de la page favoris partagés', () => {
+    it('répond 200', async () => {
+      const reponse = await request(serveur).get('/favoris-partages/monSuperId');
+
+      assert.equal(reponse.status, 200);
+    });
+
+    it('renvoie un contenu html', async () => {
+      const reponse = await request(serveur).get('/favoris-partages/monSuperId');
+
+      assert.notEqual(reponse.headers['content-type'], undefined);
+      assert.match(reponse.headers['content-type'], /html/);
+    });
+
+    it('sers le fichier html de jekyll', async () => {
+      let nomPageDemande: string;
+      fournisseurChemin.cheminPageJekyll = (nomPage: string) => {
+        nomPageDemande = nomPage;
+        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+      };
+
+      await request(serveur).get('/favoris-partages/monSuperId');
+
+      assert.equal(nomPageDemande!, 'favoris-partages');
+    });
+  });
 });

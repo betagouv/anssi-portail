@@ -1,36 +1,67 @@
 ---
 ---
 
+
 @use "../../assets/styles/responsive" as *;
 
-@media (min-width: 992px) {
-  .chapeau.fond-sombre {
-    padding-bottom: 48px;
+#favoris {
+  section {
+    padding: 16px var(--gouttiere);
   }
-}
-.chapeau.fond-sombre .contenu-section {
-  display: grid;
-  column-gap: 24px;
-  grid-template-areas: "titre" "description" "cta";
-}
-@media (min-width: 992px) {
+
+  @media (min-width: 992px) {
+    .chapeau.fond-sombre {
+      padding-bottom: 48px;
+    }
+  }
+
   .chapeau.fond-sombre .contenu-section {
-    grid-template-columns: auto 384px;
-    grid-template-areas: "titre cta" "description cta";
+    display: grid;
+    column-gap: 24px;
+    grid-template-areas: "titre" "description" "cta";
+  }
+
+  @media (min-width: 992px) {
+    .chapeau.fond-sombre .contenu-section {
+      grid-template-columns: auto 384px;
+      grid-template-areas: "titre cta" "description cta";
+    }
+  }
+
+  .chapeau.fond-sombre .fil-ariane {
+    grid-area: fil-ariane;
+  }
+
+  .chapeau.fond-sombre h1 {
+    grid-area: titre;
+  }
+
+  .chapeau.fond-sombre p {
+    grid-area: description;
+  }
+
+  .chapeau.fond-sombre .cta {
+    align-self: center;
+    grid-area: cta;
+  }
+
+  .favoris {
+    margin-top: 48px;
+    margin-bottom: 48px;
   }
 }
-.chapeau.fond-sombre .fil-ariane {
-  grid-area: fil-ariane;
+
+.contenu-sans-favoris {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 72px auto 97px;
+  max-width: 588px;
 }
-.chapeau.fond-sombre h1 {
-  grid-area: titre;
-}
-.chapeau.fond-sombre p {
-  grid-area: description;
-}
-.chapeau.fond-sombre .cta {
-  align-self: center;
-  grid-area: cta;
+
+.contenu-sans-favoris h2 {
+  text-align: center;
 }
 
 .grille {
@@ -57,24 +88,77 @@
   pointer-events: none;
 }
 
-#favoris > section {
-  padding: 16px var(--gouttiere);
-}
 
-.favoris {
-  margin-top: 48px;
-  margin-bottom: 48px;
-}
 
-.contenu-sans-favoris {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  margin: 72px auto 97px;
-  max-width: 588px;
-}
+#favoris-partages {
 
-.contenu-sans-favoris h2 {
-  text-align: center;
+  .encart {
+    .carte.parcours {
+      display: grid;
+      gap: 24px 16px;
+
+      grid-template-columns: auto;
+      grid-template-rows: auto;
+      grid-template-areas:
+      "illustration"
+      "titre"
+      "contenu"
+      "bouton";
+
+
+      @include a-partir-de(lg) {
+        grid-template-columns: auto 384px;
+        grid-template-areas:
+        "titre illustration"
+        "contenu illustration"
+        "bouton illustration";
+      }
+
+      .illustration {
+        grid-area: illustration;
+        @include a-partir-de(lg) {
+          height: 205px;
+          padding: 38px 51px;
+        }
+      }
+
+      h2 {
+        grid-area: titre;
+        @include a-partir-de(lg) {
+          font-size: 2.5rem;
+          line-height: 3rem;
+        }
+      }
+
+      p {
+        grid-area: contenu;
+        font-size: 1.25rem;
+        line-height: 2rem;
+      }
+
+      .bouton.primaire {
+        text-align: center;
+        border-bottom: none;
+        margin-top: 32px;
+        padding: 10px 24px;
+        grid-area: bouton;
+        place-self: center;
+
+        &:after {
+          content: none;
+        }
+
+        @include a-partir-de(sm) {
+          width: auto;
+        }
+
+        @include a-partir-de(lg) {
+          width: fit-content;
+          justify-self: flex-start;
+          margin-top: 16px;
+        }
+      }
+    }
+  }
+
 }
