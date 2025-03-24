@@ -31,6 +31,9 @@ export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
   parEmail = async (email: string) => {
     return this.entites.find((utilisateur) => utilisateur.email === email);
   };
+  parIdListeFavoris = async (idListeFavoris: string) => {
+    return this.entites.find((utilisateur) => utilisateur.idListeFavoris === idListeFavoris);
+  };
   existe = async (email: string) => {
     return !!this.entites.find((utilisateur) => utilisateur.email === email);
   };
