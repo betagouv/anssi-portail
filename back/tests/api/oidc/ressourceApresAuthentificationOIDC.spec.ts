@@ -16,6 +16,7 @@ import { decodeSessionDuCookie } from '../cookie';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { UtilisateurPartiel } from '../../../src/metier/utilisateur';
+import {randomUUID} from "node:crypto";
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {
@@ -53,7 +54,7 @@ describe('La ressource apres authentification OIDC', () => {
           prenom: '',
           nom: '',
           siretEntite: '',
-          domainesSpecialite: []
+          domainesSpecialite: [],
         };
         entrepotUtilisateur.ajoute(jeanneDupont);
 

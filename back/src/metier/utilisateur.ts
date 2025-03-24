@@ -3,6 +3,7 @@ type Organisation = {
   siret: string;
   departement: string;
 };
+
 export interface Utilisateur {
   email: string;
   prenom: string;
@@ -12,6 +13,7 @@ export interface Utilisateur {
   organisation: Organisation;
   cguAcceptees: boolean;
   infolettreAcceptee: boolean;
+  idListeFavoris: string;
 }
 
 export interface UtilisateurPartiel {

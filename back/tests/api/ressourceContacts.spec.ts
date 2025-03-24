@@ -6,6 +6,7 @@ import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
+import {randomUUID} from "node:crypto";
 
 describe('La ressource Contacts', () => {
   let serveur: Express;
@@ -68,6 +69,7 @@ describe('La ressource Contacts', () => {
         organisation: { siret: '', departement: '75', nom: '' },
         cguAcceptees: true,
         infolettreAcceptee: true,
+        idListeFavoris: randomUUID(),
       });
       const reponse = await request(serveur).get('/api/contacts');
 
