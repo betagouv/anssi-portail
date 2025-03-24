@@ -1,5 +1,6 @@
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 import { Utilisateur, UtilisateurPartiel } from '../../src/metier/utilisateur';
+import {randomUUID} from "node:crypto";
 
 export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
   entites: Utilisateur[] = [];
@@ -22,6 +23,7 @@ export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
       domainesSpecialite,
       cguAcceptees,
       infolettreAcceptee,
+      idListeFavoris: randomUUID(),
       organisation: { siret: siretEntite, departement: '75', nom: 'ANSSI' },
     };
     this.entites.push(utilisateurComplet);

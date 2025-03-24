@@ -66,6 +66,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
       (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
       return {
         ...donnees,
+        idListeFavoris: utilisateur.id_liste_favoris,
         email,
         prenom,
         nom,
