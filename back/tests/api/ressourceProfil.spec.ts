@@ -6,12 +6,19 @@ import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import { encodeSession, enObjet } from './cookie';
 import { JsonWebTokenError } from 'jsonwebtoken';
+import {EntrepotUtilisateurMemoire} from "../persistance/entrepotUtilisateurMemoire";
+import {jeanneDupont} from "./objetsPretsALEmploi";
 
 describe('La ressource Profil', () => {
   let serveur: Express;
+  let entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
   beforeEach(() => {
-    serveur = creeServeur(configurationDeTestDuServeur);
+    entrepotUtilisateur.ajoute(jeanneDupont)
+    serveur = creeServeur({
+      ...configurationDeTestDuServeur,
+      entrepotUtilisateur
+    });
   });
 
   describe('sur demande GET', () => {
@@ -21,12 +28,10 @@ describe('La ressource Profil', () => {
       assert.equal(reponse.status, 200);
     });
 
-    it('renvoie les informations utilisateur stockées dans la session', async () => {
+    it("renvoie les informations de l'utilisateur", async () => {
+      const jeanneEntreposee = await entrepotUtilisateur.parEmail('jeanne.dupont@user.com');
       let cookie = encodeSession({
-        nom: 'Dupont',
-        prenom: 'Jeanne',
-        email: 'jeanne.dupont',
-        siret: '1234',
+        email: 'jeanne.dupont@user.com',
       });
 
       const reponse = await request(serveur)
@@ -35,8 +40,9 @@ describe('La ressource Profil', () => {
 
       assert.equal(reponse.body.nom, 'Dupont');
       assert.equal(reponse.body.prenom, 'Jeanne');
-      assert.equal(reponse.body.email, 'jeanne.dupont');
-      assert.equal(reponse.body.siret, '1234');
+      assert.equal(reponse.body.email, 'jeanne.dupont@user.com');
+      assert.equal(reponse.body.siret, '13000766900018');
+      assert.equal(reponse.body.idListeFavoris, jeanneEntreposee!.idListeFavoris);
     });
 
     it('supprime la session si le token JWT est invalide', async () => {

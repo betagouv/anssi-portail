@@ -1,6 +1,18 @@
 <script lang="ts">
   import { itemsCatalogueEnFavori } from '../catalogue/stores/itemsCatalogueEnFavori';
   import ContenuFavoris from './ContenuFavoris.svelte';
+  import Bouton from '../ui/Bouton.svelte';
+  import { profilStore } from '../stores/profil.store';
+
+  const partageLien = () => {
+    const hote = new URL(window.location.href).origin;
+    const urlPartagee = `${hote}/favoris-partages/${$profilStore?.idListeFavoris}`;
+    navigator.clipboard
+      .writeText(urlPartagee)
+      .then(() => {
+        alert('Adresse copiée dans le presse papier.');
+      });
+  };
 </script>
 
 <section class="chapeau fond-sombre">
@@ -34,6 +46,18 @@
           <a href="/catalogue" class="bouton primaire">Explorer le catalogue</a>
         </div>
       {:else}
+        <div class="banniere-partage-favoris">
+          <p>
+            Une liste de favoris bien pensée est la clé pour sensibiliser
+            efficacement vos équipes à la cybersécurité.
+          </p>
+          <Bouton
+            type="primaire"
+            titre="Partager mes favoris"
+            icone="partager"
+            on:click={partageLien}
+          />
+        </div>
         <ContenuFavoris
           avecBoutonFavori
           itemsEnFavori={$itemsCatalogueEnFavori}

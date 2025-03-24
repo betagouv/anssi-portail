@@ -7,6 +7,7 @@ type Profil = {
   nom: string;
   email: string;
   siret: string;
+  idListeFavoris: string;
 };
 
 const { subscribe, set } = writable<Profil | undefined>(undefined);
