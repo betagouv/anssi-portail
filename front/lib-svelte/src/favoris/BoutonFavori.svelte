@@ -43,6 +43,7 @@
     align-items: center;
     padding: 8px;
     transition: transform 0.2s ease-in-out;
+    pointer-events: initial;
 
     &:hover {
       transform: scale(1.3);
