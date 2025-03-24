@@ -1,5 +1,5 @@
 import { mount } from 'svelte';
-import Favoris from "./favoris/Favoris.svelte";
+import Favoris from "./favoris/MesFavoris.svelte";
 import type {ItemCyber, RepartitionParBesoin} from "./catalogue/Catalogue.types";
 import {catalogueStore} from "./catalogue/stores/catalogue.store";
 
