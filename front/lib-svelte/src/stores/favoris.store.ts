@@ -1,24 +1,27 @@
-import { get, writable } from 'svelte/store';
+import { derived, writable } from 'svelte/store';
 import axios from 'axios';
 import { profilStore } from './profil.store';
 
-const { subscribe, set } = writable<string[]>([]);
+const favoris = writable<string[]>([]);
 
-if (profilStore.utilisateurEstConnecte()) {
-  axios
-    .get<string[]>('/api/favoris')
-    .then(async ({ data: favoris }) => {
-      set(favoris);
-    })
-    .catch((_) => {
-      set([]);
-    });
-}
+const { subscribe: ecouteLetatDuProfil } = derived(
+  profilStore,
+  async ($profilStore) => {
+    if ($profilStore) {
+      const reponse = await axios.get<string[]>('/api/favoris');
+      return reponse.data;
+    }
+    return [];
+  }
+);
+
+ecouteLetatDuProfil(async (value) => {
+  favoris.set(await value);
+});
 
 export const favorisStore = {
-  subscribe,
-  set,
-  ajoute: (favori: string) => set([...get(favorisStore), favori]),
+  subscribe: favoris.subscribe,
+  ajoute: (favori: string) => favoris.update((current) => [...current, favori]),
   retire: (favori: string) =>
-    set(get(favorisStore).filter((f) => f !== favori)),
+    favoris.update((current) => current.filter((item) => item !== favori)),
 };
