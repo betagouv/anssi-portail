@@ -20,14 +20,14 @@ Ce site est construit avec Jekyll.
 $ gem install bundler -V
 ```
 
-- Installer les dépendances de ce projet
+- Installer les dépendances Jekyll de ce projet
 
 ```shell
 $ cd front
 $ bundler install
 ```
 
-- Créer un fichier de variables d'environnement pour le backend, en se basant sur le fichier `back/.env.template`
+- Créer un fichier de variables d'environnement, en se basant sur le fichier `.env.template`
 
 - Démarrer le conteneur de base de données
 
