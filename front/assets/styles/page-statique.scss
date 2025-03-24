@@ -154,5 +154,29 @@
         }
       }
     }
+    img.encart-homologation {
+      width: 100%;
+
+      &.encart-tablette, &.encart-desktop {
+        display: none;
+      }
+
+      @include a-partir-de(sm) {
+        &.encart-tablette {
+          display: block;
+        }
+        &.encart-mobile {
+          display: none;
+        }
+      }
+      @include a-partir-de(lg) {
+        &.encart-desktop {
+          display: block;
+        }
+        &.encart-tablette, &.encart-mobile {
+          display: none;
+        }
+      }
+    }
   }
 }
