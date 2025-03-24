@@ -1,9 +1,9 @@
 ---
 layout: service
 typologie: service
-nom: Mon&ZeroWidthSpace;Aide&ZeroWidthSpace;Cyber
+nom: Le diagnostic Mon&ZeroWidthSpace;Aide&ZeroWidthSpace;Cyber
 avecFicheDetaillee: true
-description: Bénéficier d'un diagnostic cyber
+description: Bénéficier d'un diagnostic cyber gratuit et accompagné
 titreHtml: MonAideCyber
 illustration: mac/mac.png
 lien: https://monaide.cyber.gouv.fr/
@@ -19,7 +19,7 @@ cible:  |
     </ul>
 liens:
     - accompagnement:   
-      titre: Bénéficier d’un accompagnement
+      titre: Bénéficiez d’un accompagnement
       lien: https://www.monaide.cyber.gouv.fr/
       illustration: mac/mac-accompagnement.png
       couleurFond: "#5d2b9d"
@@ -30,16 +30,24 @@ liens:
       illustration: mac/mac.png
       couleurFond: "#6f479f"
 ---
-MonAideCyber est un service numérique proposé par le laboratoire d'innovation de l’ANSSI pour aider l’ensemble des entités publiques et privées peu matures sur les enjeux de cybersécurité mais souhaitant passer à l’action&nbsp;!
+Vous souhaitez protéger votre organisation contre les cyberattaques mais ne savez pas par quoi commencer ?
 
-Avec MonAideCyber, faites-vous accompagner par un “Aidant cyber” :
+Prenez votre cyberdépart en vous faisant** accompagner gratuitement et en une fois par un Aidant cyber pour commencer à renforcer rapidement le niveau de cybersécurité de votre organisation.**
 <ul>
-  <li> Bénéficiez d’un 1er diagnostic de la cybersécurité de votre organisation, en moins de 2h dans vos locaux </li>
-  <li>Recevez les recommandations de l’ANSSI sur des premières actions faciles et rapides à mettre en place permettant de réduire les vulnérabilités de votre organisation face au risque de cyberattaques.</li>
+  <li>Sans effort : votre Aidant cyber se déplace dans vos locaux</li>
+  <li>Rapide : 1h30 seulement pour obtenir des recommandations personnalisées.</li>
+  <li>Anonyme : Un diagnostic pensé pour vous, rien que pour vous.</li>
 </ul>
 
-Accessible gratuitement, MonAideCyber vous propose un espace de confiance pour échanger et identifier ensemble des actions concrètes, faciles et rapides à mettre en oeuvre.
+Un dispositif public
+🇫🇷 Proposé par l'Etat et son Agence nationale de la sécurité des systèmes d'information (ANSSI). Une #InnovationANSSI
+🚀 Propulsé par une communauté d'Aidants cyber de confiance de la communauté MonAideCyber (lien PP MAC), issus du secteur public ou d'associations engagées dans le renforcement de la confiance numérique.
 
-Alors n’attendez pas et trouvez un Aidant Cyber près de chez vous pour bénéficier immédiatement du diagnostic MonAideCyber.
+4 étapes simples
+<ul>
+  <li>Entrez en relation avec un Aidant cyber et convenez d'un jour et d'une heure pour que la réalisation d’un diagnosti﻿c cyber avec vous dans vos locaux.</li>
+  <li>Le jour J, pendant 1h, échangez avec votre Aidant cyber, grâce à un questionnaire simple proposé par l'Etat.</li>
+  <li>Découvrez 6 recommandations pour améliorer rapidement et simplement la cybersécurité de votre organisation.</li>
+  <li>Retrouvez vos résultats sur votre espace connecté MesServicesCyber et découvrez les autres ressources et services pour vous aider à poursuivre vos efforts !</li>
+</ul>
 
-Vous souhaitez devenir Aidant cyber&nbsp;? Contactez notre équipe&nbsp;!
