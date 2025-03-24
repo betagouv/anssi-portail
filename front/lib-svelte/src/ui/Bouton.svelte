@@ -5,10 +5,12 @@
   export let enCoursEnvoi: boolean = false;
   export let boutonSoumission: boolean = true;
   export let classe: string = '';
+  export let icone: '' | 'partager' = '';
 </script>
 
 <button
-  class="bouton {type} {classe}"
+  class="bouton {type} {classe} {icone}"
+  class:avecIcone={!!icone}
   type={boutonSoumission ? 'submit' : 'button'}
   on:click
   disabled={!actif || enCoursEnvoi}
@@ -16,3 +18,23 @@
 >
   {titre}
 </button>
+
+<style>
+  .bouton {
+    align-items: center;
+    gap: 8px;
+  }
+
+  .avecIcone:before {
+    content: '';
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 16px;
+    height: 16px;
+  }
+
+  .partager:before {
+    background-image: url('/assets/images/icone-partager.svg');
+  }
+</style>
