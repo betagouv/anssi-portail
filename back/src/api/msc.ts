@@ -117,6 +117,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
 
+  app.use('/favoris-partages/:id', ressourcePagesJekyll(configurationServeur, 'favoris-partages'));
+
   ['contacts', 'ma-maturite', 'favoris'].forEach((page) =>
     app.use(
       `/${page}`,

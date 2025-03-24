@@ -15,6 +15,7 @@ export default defineConfig({
         catalogue: 'src/main-catalogue.ts',
         contacts: 'src/main-contacts.ts',
         favoris: 'src/main-favoris.ts',
+        'favoris-partages': 'src/main-favoris-partages.ts',
         extrait: 'src/main-extrait.ts',
         identification: 'src/main-identification.ts',
         navigation: 'src/main-navigation.ts',

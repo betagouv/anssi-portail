@@ -1,0 +1,15 @@
+---
+layout: favoris
+permalink: /favoris-partages/
+titreHtml: 'Favoris partagés | MesServicesCyber'
+---
+
+{% include script-donnees-json.html repartition=site.data.catalogue %}
+
+<script
+  type="module"
+  crossorigin
+  src="/lib-svelte/dist/assets/favoris-partages.js"
+></script>
+
+<div id="favoris-partages"></div>
