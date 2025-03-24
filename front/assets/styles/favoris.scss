@@ -57,7 +57,9 @@
   pointer-events: none;
 }
 
-
+#favoris > section {
+  padding: 16px var(--gouttiere);
+}
 
 .favoris {
   margin-top: 48px;
