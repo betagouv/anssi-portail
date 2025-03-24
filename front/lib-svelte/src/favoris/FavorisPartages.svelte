@@ -1,14 +1,41 @@
 <script lang="ts">
   import ContenuFavoris from './ContenuFavoris.svelte';
-  import Hero from "../Hero.svelte";
-  import type {ItemCyber} from "../catalogue/Catalogue.types";
+  import Hero from '../Hero.svelte';
+  import type { ItemCyber } from '../catalogue/Catalogue.types';
+  import { onMount } from 'svelte';
+  import axios from 'axios';
+  import { catalogueStore } from '../catalogue/stores/catalogue.store';
 
-  let prenom: string = "";
+  let prenom: string = '';
   let itemsCyberPartages: ItemCyber[] = [];
+
+  type FavorisPartagesAPI = {
+    prenom: string;
+    favorisPartages: string[];
+  };
+
+  let urlDemandee = new URL(window.location.href).pathname;
+
+  onMount(async () => {
+    try {
+      const reponse = await axios.get<FavorisPartagesAPI>(`/api${urlDemandee}`);
+      prenom = reponse.data.prenom;
+      itemsCyberPartages = reponse.data.favorisPartages
+        .map((idFavori) =>
+          $catalogueStore.items.find((itemCyber) => itemCyber.id === idFavori)
+        )
+        .filter((item) => !!item);
+    } catch (e) {
+      prenom = '?';
+      itemsCyberPartages = [];
+    }
+  });
 </script>
 
-<Hero description={`Cette liste de services et ressources est partagée par ${prenom}`}
-      titre="Services et ressources partagés"/>
+<Hero
+  description={`Cette liste de services et ressources est partagée par ${prenom}`}
+  titre="Services et ressources partagés"
+/>
 
 <section>
   <div class="contenu-section">
@@ -19,15 +46,10 @@
             src="/assets/images/illustration-dragon-aucun-resultat.svg"
             alt="Aucun favori sauvegardé"
           />
-          <h2>
-            La liste de services et ressources est vide.
-          </h2>
+          <h2>La liste de services et ressources est vide.</h2>
         </div>
       {:else}
-        <ContenuFavoris
-          avecBoutonFavori
-          itemsEnFavori={itemsCyberPartages}
-        />
+        <ContenuFavoris avecBoutonFavori itemsEnFavori={itemsCyberPartages} />
       {/if}
     </div>
   </div>
@@ -44,11 +66,10 @@
         />
         <h2>Découvrez plus de services et ressources cyber</h2>
         <p>
-          Accédez aux services et ressources cyber proposés par l’ANSSI et ses partenaires.
+          Accédez aux services et ressources cyber proposés par l’ANSSI et ses
+          partenaires.
         </p>
-        <a href="/catalogue/" class="bouton primaire"
-        >Explorer le catalogue</a
-        >
+        <a href="/catalogue/" class="bouton primaire">Explorer le catalogue</a>
       </div>
     </div>
   </div>
