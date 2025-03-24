@@ -38,3 +38,70 @@
     </div>
   </div>
 </section>
+
+<style lang="scss">
+  @use "../../../assets/styles/responsive" as *;
+
+@media (min-width: 992px) {
+  .chapeau.fond-sombre {
+    padding-bottom: 48px;
+  }
+}
+  
+  h1 {
+    max-width: 792px;
+  }
+
+.chapeau.fond-sombre h1 {
+    grid-area: titre;
+}
+
+section {
+    padding: 16px var(--gouttiere);
+}
+
+ .chapeau.fond-sombre .contenu-section {
+  display: grid;
+  column-gap: 24px;
+    grid-template-areas: 'titre' 'description' 'cta';
+}
+
+@media (min-width: 992px) {
+  .chapeau.fond-sombre .contenu-section {
+    grid-template-columns: auto 384px;
+      grid-template-areas: 'titre cta' 'description cta';
+  }
+}
+
+.chapeau.fond-sombre p {
+    grid-area: description;
+}
+
+.chapeau.fond-sombre .cta {
+  align-self: center;
+  grid-area: cta;
+}
+.favoris {
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+.contenu-sans-favoris {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 72px auto 97px;
+  max-width: 588px;
+}
+
+.contenu-sans-favoris h2 {
+  text-align: center;
+}
+
+:global(.carte.service),
+:global(.carte.ressource) {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+}
+</style>

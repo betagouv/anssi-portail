@@ -11,3 +11,14 @@
     <CarteItem {itemCyber} {avecBoutonFavori} />
   {/each}
 </div>
+
+<style>
+  .grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+    width: 100%;
+    box-sizing: border-box;
+    column-gap: 24px;
+    align-content: flex-start;
+  }
+</style>
