@@ -33,7 +33,7 @@
   };
 </script>
 
-<button on:click|preventDefault={actionSurClick} title={titre}>
+<button on:click|preventDefault={actionSurClick} title={titre} class:actif={$profilStore}>
   <img src={cheminIcone} alt="Favori" />
 </button>
 
@@ -53,7 +53,7 @@
     transition: transform 0.2s ease-in-out;
     pointer-events: initial;
 
-    &:hover {
+    &.actif:hover {
       transform: scale(1.3);
     }
 
