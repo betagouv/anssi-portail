@@ -6,6 +6,9 @@
   {% assign contenu = baliseMeta.contenu | replace: 'SITE_URL', site.url %}
   <meta property="{{baliseMeta.propriete}}" content="{{contenu}}">
   {% endfor %}
+  {% if site.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION != '' and site.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION != undefined %}
+    <meta name="google-site-verification" content="{{site.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION}}">
+  {% endif %}
 
   <title>{{page.titreHtml}}</title>
 
