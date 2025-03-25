@@ -70,6 +70,7 @@
   <Hero
     titre="Test de maturité cyber"
     description="Obtenez en 5 minutes une évaluation indicative de la maturité cyber de votre organisation."
+    ariane="Tester votre maturité cyber"
   />
   <section class="test-maturite">
     <div class="contenu-section">

@@ -35,6 +35,7 @@
 <Hero
   description={`Cette liste de services et ressources est partagée par ${prenom}`}
   titre="Services et ressources partagés"
+  ariane="Services et ressources partagés"
 />
 
 <section>
