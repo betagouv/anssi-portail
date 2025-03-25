@@ -32,7 +32,7 @@ liens:
 ---
 Vous souhaitez protéger votre organisation contre les cyberattaques mais ne savez pas par quoi commencer ?
 
-Prenez votre cyberdépart en vous faisant** accompagner gratuitement et en une fois par un Aidant cyber pour commencer à renforcer rapidement le niveau de cybersécurité de votre organisation.
+Prenez votre cyberdépart en vous faisant accompagner gratuitement et en une fois par un Aidant cyber pour commencer à renforcer rapidement le niveau de cybersécurité de votre organisation.
 <ul>
   <li>Sans effort : votre Aidant cyber se déplace dans vos locaux</li>
   <li>Rapide : 1h30 seulement pour obtenir des recommandations personnalisées.</li>
