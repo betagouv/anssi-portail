@@ -76,10 +76,10 @@
       try {
         enCoursEnvoi = true;
         await axios.post('/api/utilisateurs', formulaireInscription);
-      } finally {
+        window.location.href = '/oidc/connexion';
+      } catch (e) {
         enCoursEnvoi = false;
       }
-      window.location.href = '/oidc/connexion';
     }
   };
 
