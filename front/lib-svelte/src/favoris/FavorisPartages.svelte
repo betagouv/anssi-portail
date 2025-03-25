@@ -74,3 +74,26 @@
     </div>
   </div>
 </section>
+
+<style>
+  .favoris {
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+  .contenu-sans-favoris {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin: 72px auto 97px;
+    max-width: 588px;
+  }
+
+  .contenu-sans-favoris h2 {
+    text-align: center;
+  }
+
+  section {
+    padding: 16px var(--gouttiere);
+  }
+</style>
