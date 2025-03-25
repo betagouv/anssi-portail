@@ -395,16 +395,13 @@
     background-color: #f6f6f6;
     border-radius: 6px;
     padding: 16px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   input[type='checkbox'] {
     transform: none;
-  }
-
-  .case-a-cocher.cgu {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
   }
 
   .cgu #cguAcceptees {
