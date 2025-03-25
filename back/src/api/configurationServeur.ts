@@ -20,7 +20,7 @@ export type ConfigurationServeur = {
   adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   entrepotUtilisateur: EntrepotUtilisateur;
   reseau: {
-    trustProxy: string;
+    trustProxy: number|string;
     maxRequetesParMinutes: number;
     ipAutorisees: string[] | false;
   };
