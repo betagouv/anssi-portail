@@ -32,7 +32,7 @@ liens:
 ---
 Vous souhaitez protéger votre organisation contre les cyberattaques mais ne savez pas par quoi commencer ?
 
-Prenez votre cyberdépart en vous faisant** accompagner gratuitement et en une fois par un Aidant cyber pour commencer à renforcer rapidement le niveau de cybersécurité de votre organisation.**
+Prenez votre cyberdépart en vous faisant** accompagner gratuitement et en une fois par un Aidant cyber pour commencer à renforcer rapidement le niveau de cybersécurité de votre organisation.
 <ul>
   <li>Sans effort : votre Aidant cyber se déplace dans vos locaux</li>
   <li>Rapide : 1h30 seulement pour obtenir des recommandations personnalisées.</li>
@@ -40,8 +40,10 @@ Prenez votre cyberdépart en vous faisant** accompagner gratuitement et en une f
 </ul>
 
 Un dispositif public
-🇫🇷 Proposé par l'Etat et son Agence nationale de la sécurité des systèmes d'information (ANSSI). Une #InnovationANSSI
-🚀 Propulsé par une communauté d'Aidants cyber de confiance de la communauté MonAideCyber (lien PP MAC), issus du secteur public ou d'associations engagées dans le renforcement de la confiance numérique.
+<ul>
+  <li>🇫🇷 Proposé par l'Etat et son Agence nationale de la sécurité des systèmes d'information (ANSSI). Une #InnovationANSSI </li>
+  <li>🚀 Propulsé par une communauté d'Aidants cyber de confiance de la communauté MonAideCyber, issus du secteur public ou d'associations engagées dans le renforcement de la confiance numérique.</li>
+</ul>
 
 4 étapes simples
 <ul>
