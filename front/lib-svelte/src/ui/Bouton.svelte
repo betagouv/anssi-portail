@@ -30,8 +30,13 @@
     display: inline-block;
     background-repeat: no-repeat;
     background-size: contain;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+  }
+
+  .avecIcone {
+    text-wrap: nowrap;
   }
 
   .partager:before {
