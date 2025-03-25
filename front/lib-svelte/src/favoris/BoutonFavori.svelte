@@ -1,18 +1,18 @@
 <script lang="ts">
   import axios from 'axios';
-  import type { ItemCyber } from '../catalogue/Catalogue.types';
+  import type { IdItemCyber } from '../catalogue/Catalogue.types';
   import { favorisStore } from '../stores/favoris.store';
 
-  export let itemCyber: ItemCyber;
+  export let itemCyberId: IdItemCyber;
 
-  $: cheminIcone = `/assets/images/icone-favori-${estFavori(itemCyber) ? 'plein' : 'vide'}.svg`;
+  $: cheminIcone = `/assets/images/icone-favori-${estFavori(itemCyberId) ? 'plein' : 'vide'}.svg`;
 
-  $: estFavori = (itemCyber: ItemCyber) => $favorisStore.includes(itemCyber.id);
+  $: estFavori = (itemCyberId: IdItemCyber) => $favorisStore.includes(itemCyberId);
 
   const actionSurClick = async () => {
-    const idFavori = itemCyber.id;
+    const idFavori = itemCyberId;
     try {
-      if (estFavori(itemCyber)) {
+      if (estFavori(idFavori)) {
         await axios.delete(`/api/favoris/${encodeURIComponent(idFavori)}`);
         favorisStore.retire(idFavori);
       } else {

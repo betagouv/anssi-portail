@@ -36,7 +36,7 @@
     <div class="en-tete">
       <div class="nom-item">{@html itemCyber.nom}</div>
       {#if avecBoutonFavori && $profilStore}
-        <BoutonFavori {itemCyber} />
+        <BoutonFavori itemCyberId={itemCyber.id} />
       {/if}
     </div>
 
