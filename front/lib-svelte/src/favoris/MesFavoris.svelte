@@ -7,11 +7,9 @@
   const partageLien = () => {
     const hote = new URL(window.location.href).origin;
     const urlPartagee = `${hote}/favoris-partages/${$profilStore?.idListeFavoris}`;
-    navigator.clipboard
-      .writeText(urlPartagee)
-      .then(() => {
-        alert('Adresse copiée dans le presse papier.');
-      });
+    navigator.clipboard.writeText(urlPartagee).then(() => {
+      alert('Adresse copiée dans le presse papier.');
+    });
   };
 </script>
 
@@ -40,7 +38,8 @@
             alt="Aucun favori sauvegardé"
           />
           <h2>
-            Ajoutez vos services et ressources favoris et partagez-les facilement au sein de votre organisation.
+            Ajoutez vos services et ressources favoris et partagez-les
+            facilement au sein de votre organisation.
           </h2>
           <a href="/catalogue" class="bouton primaire">Explorer le catalogue</a>
         </div>
@@ -99,7 +98,7 @@
 
   @include a-partir-de(lg) {
     .chapeau.fond-sombre .contenu-section {
-      grid-template-columns: 792px auto;
+      grid-template-columns: auto 384px;
       grid-template-areas: 'titre cta' 'description cta';
     }
   }
@@ -140,5 +139,35 @@
     display: flex;
     flex-direction: column;
     width: auto;
+  }
+
+  .banniere-partage-favoris {
+    background-color: #fef6e3;
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+
+    p {
+      font-weight: bold;
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    @include a-partir-de(sm) {
+      align-items: flex-start;
+    }
+
+    @include a-partir-de(lg) {
+      flex-direction: row;
+      button {
+        text-wrap: nowrap;
+      }
+    }
   }
 </style>
