@@ -40,8 +40,7 @@
             alt="Aucun favori sauvegardé"
           />
           <h2>
-            Ajoutez vos ressources cyber favorites et partagez-les facilement
-            avec vos équipes.
+            Ajoutez vos services et ressources favoris et partagez-les facilement au sein de votre organisation.
           </h2>
           <a href="/catalogue" class="bouton primaire">Explorer le catalogue</a>
         </div>
