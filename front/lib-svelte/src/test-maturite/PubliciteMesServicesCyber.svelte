@@ -16,17 +16,6 @@
   </div>
   <div class="carte">
     <img
-      src="/assets/images/test-maturite/publicite-msc/progression.svg"
-      alt=""
-    />
-    <h4>Suivez votre progression</h4>
-    <p>
-      Gagnez en maturité cyber grâce à nos parcours adaptés et suivez
-      l'évolution de la maturité cyber de votre organisation.
-    </p>
-  </div>
-  <div class="carte">
-    <img
       src="/assets/images/test-maturite/publicite-msc/comparaison.svg"
       alt=""
     />
