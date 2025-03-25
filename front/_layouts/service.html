@@ -69,7 +69,10 @@ script: /scripts/service.js
     <div class="contenu">
       <section class="explication" id="explication">
         <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran"/>
-        <h2>De quoi s'agit-il&nbsp;?</h2>
+        <div class="actions">
+          <div id="bouton-favori"></div>
+        </div>
+          <h2>De quoi s'agit-il&nbsp;?</h2>
         <div>{{ page.content }}</div>
         <a href="{{page.lien}}" target="_blank" class="bouton primaire lien-externe-produit" data-source="Page produit" data-cible="{{page.nom}}">Accéder au service</a>
       </section>
@@ -150,3 +153,10 @@ script: /scripts/service.js
     </div>
   </div>
 </div>
+<script
+  type="module"
+  crossorigin
+  id-item-cyber="{{page.id}}"
+  id="script-bouton-favori"
+  src="/lib-svelte/dist/assets/bouton-favori.js"
+></script>

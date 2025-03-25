@@ -3,14 +3,14 @@
   import type { IdItemCyber } from '../catalogue/Catalogue.types';
   import { favorisStore } from '../stores/favoris.store';
 
-  export let itemCyberId: IdItemCyber;
+  export let idItemCyber: IdItemCyber;
 
-  $: cheminIcone = `/assets/images/icone-favori-${estFavori(itemCyberId) ? 'plein' : 'vide'}.svg`;
+  $: cheminIcone = `/assets/images/icone-favori-${estFavori(idItemCyber) ? 'plein' : 'vide'}.svg`;
 
-  $: estFavori = (itemCyberId: IdItemCyber) => $favorisStore.includes(itemCyberId);
+  $: estFavori = (idItemCyber: IdItemCyber) => $favorisStore.includes(idItemCyber);
 
   const actionSurClick = async () => {
-    const idFavori = itemCyberId;
+    const idFavori = idItemCyber;
     try {
       if (estFavori(idFavori)) {
         await axios.delete(`/api/favoris/${encodeURIComponent(idFavori)}`);

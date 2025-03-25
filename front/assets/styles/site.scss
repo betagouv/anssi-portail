@@ -858,3 +858,10 @@ select {
 .erreur-champ-saisie:before {
   background-image: url('/assets/images/erreur.svg');
 }
+
+#bouton-favori {
+  img {
+    display: block;
+  }
+  float: right;
+}

@@ -20,6 +20,7 @@ export default defineConfig({
         identification: 'src/main-identification.ts',
         navigation: 'src/main-navigation.ts',
         'maturite-utilisateur': 'src/main-maturite-utilisateur.ts',
+        'bouton-favori': 'src/main-bouton-favori.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
