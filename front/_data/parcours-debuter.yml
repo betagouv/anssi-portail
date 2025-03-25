@@ -12,7 +12,7 @@ securiser:
     - /services/mon-aide-cyber
     - /ressources/cyber-13questions
     - /ressources/visa-secu
-    - /services/label-expert-cyber
+    - /ressources/label-expert-cyber
 
 reagir:
   titre: Réagir
