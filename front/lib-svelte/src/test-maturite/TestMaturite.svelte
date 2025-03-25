@@ -43,8 +43,10 @@
     const { id } = reponse.data;
     if (!await utilisateurEstConnecte()) {
       enregistreIdResultatTestPourRevendication(id);
+      afficheResultats = true;
+    } else {
+      window.location.href = '/ma-maturite';
     }
-    afficheResultats = true;
   }
 
   function debuteTeste() {
