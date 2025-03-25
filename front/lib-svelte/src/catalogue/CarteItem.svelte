@@ -1,7 +1,6 @@
 <script lang="ts">
   import { type ItemCyber, Typologie } from './Catalogue.types';
   import BoutonFavori from '../favoris/BoutonFavori.svelte';
-  import { profilStore } from '../stores/profil.store';
 
   export let itemCyber: ItemCyber;
   export let avecBoutonFavori: boolean = false;
@@ -35,7 +34,7 @@
   <div class="contenu">
     <div class="en-tete">
       <div class="nom-item">{@html itemCyber.nom}</div>
-      {#if avecBoutonFavori && $profilStore}
+      {#if avecBoutonFavori}
         <BoutonFavori idItemCyber={itemCyber.id} />
       {/if}
     </div>
