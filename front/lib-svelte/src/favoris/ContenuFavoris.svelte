@@ -18,7 +18,7 @@
     grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
     width: 100%;
     box-sizing: border-box;
-    column-gap: 24px;
+    gap: 24px;
     align-content: flex-start;
   }
 </style>
