@@ -2,15 +2,23 @@
   import axios from 'axios';
   import type { IdItemCyber } from '../catalogue/Catalogue.types';
   import { favorisStore } from '../stores/favoris.store';
+  import { profilStore } from '../stores/profil.store';
 
   export let idItemCyber: IdItemCyber;
 
   $: cheminIcone = `/assets/images/icone-favori-${estFavori(idItemCyber) ? 'plein' : 'vide'}.svg`;
 
-  $: estFavori = (idItemCyber: IdItemCyber) => $favorisStore.includes(idItemCyber);
+  $: estFavori = (idItemCyber: IdItemCyber) =>
+    $favorisStore.includes(idItemCyber);
 
-  const actionSurClick = async () => {
-    const idFavori = idItemCyber;
+  $: titre = $profilStore
+    ? ''
+    : 'Connectez-vous pour profiter des favoris';
+    
+    const actionSurClick = async () => {
+      const idFavori = idItemCyber;
+      if (!$profilStore) return;
+      
     try {
       if (estFavori(idFavori)) {
         await axios.delete(`/api/favoris/${encodeURIComponent(idFavori)}`);
@@ -25,7 +33,7 @@
   };
 </script>
 
-<button on:click|preventDefault={actionSurClick}>
+<button on:click|preventDefault={actionSurClick} title={titre}>
   <img src={cheminIcone} alt="Favori" />
 </button>
 
