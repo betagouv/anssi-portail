@@ -51,6 +51,7 @@
       {#if estConnecte}
         <LienNavigationMobile href="/contacts/" label='Vos contacts' />
         <LienNavigationMobile href="/favoris/" label='Vos favoris' />
+        <LienNavigationMobile href="/services-anssi/" label='Services ANSSI utilisés' />
       {/if}
     </div>
   </nav>

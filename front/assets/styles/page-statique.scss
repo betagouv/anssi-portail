@@ -70,6 +70,11 @@
       margin: 0 0 8px;
     }
 
+    h4 {
+      font-size: 1.375rem;
+      line-height: 1.75rem;
+    }
+
     table {
       @include a-partir-de(sm) {
         border-collapse: collapse;
@@ -186,8 +191,9 @@
     gap: 16px;
     margin: 72px auto 97px;
     max-width: 588px;
-    h2 {
+    h2, h4 {
       text-align: center;
+      margin: 0;
     }
   }
 

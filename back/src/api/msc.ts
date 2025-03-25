@@ -124,7 +124,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourcePagesJekyll(configurationServeur, 'favoris-partages')
   );
 
-  ['contacts', 'ma-maturite', 'favoris'].forEach((page) =>
+  ['contacts', 'ma-maturite', 'favoris', 'services-anssi'].forEach((page) =>
     app.use(
       `/${page}`,
       ressourcePagesJekyllConnectees(configurationServeur, page)
