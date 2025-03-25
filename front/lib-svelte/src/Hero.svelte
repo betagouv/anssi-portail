@@ -1,6 +1,7 @@
 <script lang="ts">
   export let titre: string;
   export let description: string;
+  export let ariane: string;
 </script>
 
 <section class="chapeau fond-sombre">
