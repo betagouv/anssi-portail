@@ -9,7 +9,18 @@ const adaptateurEnvironnement = {
     clientSecret: () => process.env.OIDC_CLIENT_SECRET || '',
   }),
   serveur: () => ({
-    trustProxy: () => process.env.SERVEUR_TRUST_PROXY || '0',
+    trustProxy: () => {
+      const trustProxyEnChaine = process.env.SERVEUR_TRUST_PROXY || '0';
+      const trustProxyEnNombre = Number(trustProxyEnChaine);
+      if (isNaN(trustProxyEnNombre)) {
+        console.warn(
+          `Attention ! SERVEUR_TRUST_PROXY positionné à ${trustProxyEnChaine}`
+        );
+        return trustProxyEnChaine;
+      } else {
+        return trustProxyEnNombre;
+      }
+    },
     maxRequetesParMinute: () => {
       const maxEnChaine = process.env.SERVEUR_MAX_REQUETES_PAR_MINUTE || '600'
       const maxEnNombre = Number(maxEnChaine);
