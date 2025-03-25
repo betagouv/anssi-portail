@@ -179,4 +179,16 @@
       }
     }
   }
+  .contenu-vide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin: 72px auto 97px;
+    max-width: 588px;
+    h2 {
+      text-align: center;
+    }
+  }
+
 }
