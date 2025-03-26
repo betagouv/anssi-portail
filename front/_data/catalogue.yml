@@ -64,7 +64,6 @@ TOUS:
 - /ressources/visa-secu
 - /ressources/visa-secu-produit
 - /ressources/livret-cyber-enjeux
-- /ressources/revue-presse
 - /ressources/guides-gestion-crise
 - /ressources/guides-remediation
 - /services/assistance-technique
@@ -78,11 +77,9 @@ TOUS:
 - /ressources/prestas-ebios
 - /ressources/publications
 - /ressources/nl-industries
-- /services/cot
 - /services/assistance-reponse-incidents
 - /services/transmission-signalements
-- /ressources/revue-presse
-- /ressources/risques-cyber   
+- /ressources/revue-presse 
 - /ressources/avis-bulletin
 - /ressources/rapport-menace
 - /services/secnum-academie
@@ -99,7 +96,5 @@ TOUS:
 - /ressources/cybermalveillance
 - /services/sens-cyber
 - /ressources/malette-cyber
-- /ressources/cnil-reco
-- /ressources/cnil-ensemble
 - /ressources/cnil-reco
 - /ressources/cnil-ensemble
