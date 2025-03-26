@@ -15,6 +15,7 @@
 
   export let affichePubMsc = true;
   export let afficheRappelReponses = false;
+  export let animeTuiles = true;
 
   const calculeIdNiveau = (moyenne: number): IdNiveau => {
     if (moyenne < 1) return 'insuffisant';
@@ -45,7 +46,7 @@
 <section class="resultats-test">
   <div class="contenu-section">
     <h2>Niveau de maturité le plus proche : {niveau.label}</h2>
-    <TuilesMaturite niveauCourant={niveau} />
+    <TuilesMaturite niveauCourant={niveau} {animeTuiles} />
     <div class="description-niveau">
       <h5>{niveau.label}</h5>
       <p>{niveau.description}</p>

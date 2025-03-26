@@ -6,6 +6,7 @@
   } from "../niveaux-maturite/NiveauxMaturite.donnees";
 
   export let niveauCourant: NiveauMaturite;
+  export let animeTuiles = true;
 
   $: indexNiveauCourant = niveauxMaturite.indexOf(niveauCourant);
   onMount(() => {
@@ -16,7 +17,7 @@
   });
 </script>
 
-<div class="tuiles-niveau">
+<div class="tuiles-niveau" class:avec-animation={animeTuiles}>
   {#each niveauxMaturite as niveau, index}
     <div
       class="tuile-niveau"
