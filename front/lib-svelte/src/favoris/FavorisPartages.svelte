@@ -95,6 +95,6 @@
   }
 
   section {
-    padding: 16px var(--gouttiere);
+    padding: 72px var(--gouttiere);
   }
 </style>
