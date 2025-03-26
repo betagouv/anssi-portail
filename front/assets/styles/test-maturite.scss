@@ -302,9 +302,12 @@ section {
 }
 
 .repartition {
-  border-top: 1px solid var(--gris-clair);
+  padding-top: 0;
 
   .contenu-section {
+    padding-top: 72px;
+    border-top: 1px solid var(--gris-clair);
+
     h2 {
       font-size: 1.75rem;
       line-height: 2.25rem;
