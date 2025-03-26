@@ -5,7 +5,7 @@ nom: Le diagnostic Mon&ZeroWidthSpace;Aide&ZeroWidthSpace;Cyber
 avecFicheDetaillee: true
 description: Bénéficier d'un diagnostic cyber gratuit et accompagné
 titreHtml: MonAideCyber
-illustration: mac/mac.png
+illustration: mac/mac-diag.png
 lien: https://monaide.cyber.gouv.fr/
 droitsAcces:
   - ACCES_LIBRE
