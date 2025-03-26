@@ -1,7 +1,7 @@
 ---
 ---
 
-@use "../../assets/styles/responsive" as *;
+@use '../../assets/styles/responsive' as *;
 
 :root {
   --noir: #0d0c21;
@@ -155,7 +155,7 @@ header {
   }
 
   #zone-identification {
-      margin-left: auto;
+    margin-left: auto;
   }
 
   #menu-burger-mobile {
@@ -701,29 +701,15 @@ footer {
 
       grid-template-columns: auto;
       grid-template-rows: auto;
-      grid-template-areas:
-        'illustration'
-        'titre'
-        'contenu'
-        'bouton';
 
       @include a-partir-de(md) {
         padding: 48px 56px;
         grid-template-columns: 1fr auto;
-        grid-template-areas:
-          'titre titre'
-          'contenu illustration'
-          'bouton bouton';
       }
 
       @include a-partir-de(lg) {
         padding: 40px 44px 40px 40px;
         grid-template-columns: auto 1fr;
-        grid-template-areas:
-          'illustration titre'
-          'illustration contenu'
-          'illustration bouton'
-          'illustration .';
         gap: 16px 64px;
       }
 
@@ -766,6 +752,51 @@ footer {
         }
         @include a-partir-de(lg) {
           height: 210px;
+        }
+      }
+    }
+
+    &.test-maturite {
+      grid-template-areas:
+        'illustration'
+        'titre'
+        'contenu'
+        'bouton';
+
+      @include a-partir-de(md) {
+        grid-template-areas:
+          'titre titre'
+          'contenu illustration'
+          'bouton bouton';
+      }
+      @include a-partir-de(lg) {
+        grid-template-areas:
+          'illustration titre'
+          'illustration contenu'
+          'illustration bouton'
+          'illustration .';
+      }
+    }
+
+    &.nis2 {
+      grid-template-areas:
+        'illustration'
+        'titre'
+        'contenu'
+        'bouton';
+      @include a-partir-de(md) {
+        grid-template-areas:
+          'titre titre'
+          'contenu illustration'
+          'bouton bouton';
+      }
+      @include a-partir-de(lg) {
+        grid-template-areas:
+          'titre illustration'
+          'contenu illustration'
+          'bouton illustration';
+        img {
+          justify-self: center;
         }
       }
     }
@@ -863,5 +894,6 @@ select {
   img {
     display: block;
   }
+
   float: right;
 }
