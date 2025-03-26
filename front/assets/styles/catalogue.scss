@@ -47,7 +47,7 @@
   }
 
   label {
-    border: 1px solid #ddd;
+    border: 1px solid var(--gris-clair);
     border-radius: 8px;
     text-transform: uppercase;
     padding: 0 8px;
@@ -72,6 +72,7 @@
 
     @include a-partir-de(lg) {
       border-radius: 0;
+      border-right-style: none;
       flex: 1;
       flex-direction: column;
       justify-content: center;
@@ -85,6 +86,7 @@
       &:last-of-type {
         border-top-right-radius: 8px;
         border-bottom-right-radius: 8px;
+        border-right: 1px solid var(--gris-clair);
       }
 
       span {
