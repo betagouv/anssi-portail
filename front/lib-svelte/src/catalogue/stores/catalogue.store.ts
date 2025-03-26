@@ -8,6 +8,7 @@ const { subscribe, set } = writable({
     SECURISER: [],
     ETRE_SENSIBILISE: [],
     SE_FORMER: [],
+    TOUS:[]
   },
 } as { items: ItemCyber[]; repartition: RepartitionParBesoin });
 

@@ -1,29 +1,30 @@
-import { beforeEach, describe, expect, it } from "vitest";
-import { get } from "svelte/store";
+import { beforeEach, describe, expect, it } from 'vitest';
+import { get } from 'svelte/store';
 import {
   demainSpecialisteCyber,
   guidesTechniques,
   kitCyber,
   livretEnJeux,
   mss,
-} from "./objetsExemples";
-import { catalogueStore } from "../../../src/catalogue/stores/catalogue.store";
-import { rechercheParBesoin } from "../../../src/catalogue/stores/rechercheParBesoin.store";
-import { catalogueFiltre } from "../../../src/catalogue/stores/catalogueFiltre.store";
-import { rechercheParDroitAcces } from "../../../src/catalogue/stores/rechercheParDroitAcces.store";
+} from './objetsExemples';
+import { catalogueStore } from '../../../src/catalogue/stores/catalogue.store';
+import { rechercheParBesoin } from '../../../src/catalogue/stores/rechercheParBesoin.store';
+import { catalogueFiltre } from '../../../src/catalogue/stores/catalogueFiltre.store';
+import { rechercheParDroitAcces } from '../../../src/catalogue/stores/rechercheParDroitAcces.store';
 import {
   BesoinCyber,
   DroitAcces,
   FormatRessource,
+  ItemCyber,
   Source,
   Typologie,
-} from "../../../src/catalogue/Catalogue.types";
-import { rechercheParTypologie } from "../../../src/catalogue/stores/rechercheParTypologie.store";
-import { rechercheParFormat } from "../../../src/catalogue/stores/rechercheParFormat.store";
-import { rechercheParSource } from "../../../src/catalogue/stores/rechercheParSource.store";
-import { limitationRecherche } from "../../../src/catalogue/stores/limitationRecherche";
+} from '../../../src/catalogue/Catalogue.types';
+import { rechercheParTypologie } from '../../../src/catalogue/stores/rechercheParTypologie.store';
+import { rechercheParFormat } from '../../../src/catalogue/stores/rechercheParFormat.store';
+import { rechercheParSource } from '../../../src/catalogue/stores/rechercheParSource.store';
+import { limitationRecherche } from '../../../src/catalogue/stores/limitationRecherche';
 
-describe("Le store du catalogue filtré", () => {
+describe('Le store du catalogue filtré', () => {
   beforeEach(() => {
     rechercheParBesoin.set(null);
     rechercheParDroitAcces.set([]);
@@ -33,61 +34,64 @@ describe("Le store du catalogue filtré", () => {
     limitationRecherche.set(0);
   });
 
-  const repartitionVide = () => ({
-    REAGIR: [],
-    SE_FORMER: [],
-    SECURISER: [],
-    ETRE_SENSIBILISE: [],
-  });
+  const initialiseStoreCatalogue = (tous: ItemCyber[]) => {
+    catalogueStore.initialise(tous, {
+      REAGIR: [],
+      SE_FORMER: [],
+      SECURISER: [],
+      ETRE_SENSIBILISE: [],
+      TOUS: tous.map((item) => item.id),
+    });
+  };
 
   describe("sur application d'un filtre de besoin", () => {
-    it("conserve uniquement les items correspondants", () => {
+    it('conserve uniquement les items correspondants', () => {
       catalogueStore.initialise([mss(), demainSpecialisteCyber()], {
         REAGIR: [],
         SE_FORMER: [],
-        SECURISER: ["/services/mss"],
+        SECURISER: ['/services/mss'],
         ETRE_SENSIBILISE: [],
+        TOUS: [],
       });
       rechercheParBesoin.set(BesoinCyber.SECURISER);
 
       const { resultats } = get(catalogueFiltre);
 
       expect(resultats.length).toBe(1);
-      expect(resultats[0].nom).toBe("mss");
+      expect(resultats[0].nom).toBe('mss');
     });
 
     it("conserve tous les items en cas d'absence de besoins", () => {
-      catalogueStore.initialise(
-        [mss(), demainSpecialisteCyber()],
-        repartitionVide(),
-      );
+      const repartition = {
+        REAGIR: [],
+        SE_FORMER: [],
+        SECURISER: [],
+        ETRE_SENSIBILISE: [],
+        TOUS: ['/services/demainspecialistecyber', '/services/mss'],
+      };
+      catalogueStore.initialise([mss(), demainSpecialisteCyber()], repartition);
       rechercheParBesoin.set(null);
 
       const { resultats } = get(catalogueFiltre);
 
       expect(resultats.length).toBe(2);
+      expect(resultats[0].id).toEqual('/services/demainspecialistecyber');
     });
   });
 
   describe("sur application d'un filtre d'accessibilité", () => {
-    it("conserve uniquement les items correspondants", () => {
-      catalogueStore.initialise(
-        [mss(), demainSpecialisteCyber()],
-        repartitionVide(),
-      );
+    it('conserve uniquement les items correspondants', () => {
+      initialiseStoreCatalogue([mss(), demainSpecialisteCyber()]);
       rechercheParDroitAcces.set([DroitAcces.ACCES_LIBRE]);
 
       const { resultats } = get(catalogueFiltre);
 
       expect(resultats.length).toBe(1);
-      expect(resultats[0].nom).toBe("DemainSpécialisteCyber");
+      expect(resultats[0].nom).toBe('DemainSpécialisteCyber');
     });
 
     it("conserve tous les items en cas d'absence de droits d'acces", () => {
-      catalogueStore.initialise(
-        [mss(), demainSpecialisteCyber()],
-        repartitionVide(),
-      );
+      initialiseStoreCatalogue([mss(), demainSpecialisteCyber()]);
       rechercheParDroitAcces.set([]);
 
       const { resultats } = get(catalogueFiltre);
@@ -97,18 +101,18 @@ describe("Le store du catalogue filtré", () => {
   });
 
   describe("sur application d'un filtre de typologie", () => {
-    it("peut conserver uniquement les services", () => {
-      catalogueStore.initialise([mss(), livretEnJeux()], repartitionVide());
+    it('peut conserver uniquement les services', () => {
+      initialiseStoreCatalogue([mss(), livretEnJeux()]);
       rechercheParTypologie.set([Typologie.SERVICE]);
 
       const { resultats } = get(catalogueFiltre);
 
       expect(resultats.length).toBe(1);
-      expect(resultats[0].nom).toBe("mss");
+      expect(resultats[0].nom).toBe('mss');
     });
 
-    it("conserve tous les items quand aucun filtre actif", () => {
-      catalogueStore.initialise([mss(), livretEnJeux()], repartitionVide());
+    it('conserve tous les items quand aucun filtre actif', () => {
+      initialiseStoreCatalogue([mss(), livretEnJeux()]);
       rechercheParTypologie.set([]);
 
       const { resultats } = get(catalogueFiltre);
@@ -118,24 +122,18 @@ describe("Le store du catalogue filtré", () => {
   });
 
   describe("sur application d'un filtre de format", () => {
-    it("conserve uniquement les items correspondant", () => {
-      catalogueStore.initialise(
-        [livretEnJeux(), guidesTechniques()],
-        repartitionVide(),
-      );
+    it('conserve uniquement les items correspondant', () => {
+      initialiseStoreCatalogue([livretEnJeux(), guidesTechniques()]);
       rechercheParFormat.set([FormatRessource.PUBLICATION]);
 
       const { resultats } = get(catalogueFiltre);
 
       expect(resultats.length).toBe(1);
-      expect(resultats[0].nom).toBe("Guides techniques");
+      expect(resultats[0].nom).toBe('Guides techniques');
     });
 
-    it("conserve tous les items quand aucun filtre actif", () => {
-      catalogueStore.initialise(
-        [livretEnJeux(), guidesTechniques()],
-        repartitionVide(),
-      );
+    it('conserve tous les items quand aucun filtre actif', () => {
+      initialiseStoreCatalogue([livretEnJeux(), guidesTechniques()]);
       rechercheParFormat.set([]);
 
       const { resultats } = get(catalogueFiltre);
@@ -146,21 +144,18 @@ describe("Le store du catalogue filtré", () => {
 
   describe("sur application d'un filtre de source", () => {
     // d'autres tests plus spécifiques sont dans rechercheParSource.store.spec
-    it("conserve uniquement les items correspondants", () => {
-      catalogueStore.initialise([mss(), kitCyber()], repartitionVide());
+    it('conserve uniquement les items correspondants', () => {
+      initialiseStoreCatalogue([mss(), kitCyber()]);
       rechercheParSource.set([Source.PARTENAIRES]);
 
       const { resultats } = get(catalogueFiltre);
 
       expect(resultats.length).toBe(1);
-      expect(resultats[0].nom).toBe("KIT CYBER");
+      expect(resultats[0].nom).toBe('KIT CYBER');
     });
 
     it("conserve tous les items en cas d'absence de source", () => {
-      catalogueStore.initialise(
-        [mss(), demainSpecialisteCyber()],
-        repartitionVide(),
-      );
+      initialiseStoreCatalogue([mss(), demainSpecialisteCyber()]);
       rechercheParSource.set([]);
 
       const { resultats } = get(catalogueFiltre);
@@ -169,12 +164,9 @@ describe("Le store du catalogue filtré", () => {
     });
   });
 
-  describe("sur limitation du nombre de résultats", () => {
-    it("ne conserve que les x premiers éléments", () => {
-      catalogueStore.initialise(
-        [mss(), demainSpecialisteCyber()],
-        repartitionVide(),
-      );
+  describe('sur limitation du nombre de résultats', () => {
+    it('ne conserve que les x premiers éléments', () => {
+      initialiseStoreCatalogue([mss(), demainSpecialisteCyber()]);
       limitationRecherche.set(1);
 
       const { resultats } = get(catalogueFiltre);

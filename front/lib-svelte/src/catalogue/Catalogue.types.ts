@@ -18,6 +18,7 @@ export enum BesoinCyber {
   ETRE_SENSIBILISE = "ETRE_SENSIBILISE",
   SE_FORMER = "SE_FORMER",
   SECURISER = "SECURISER",
+  TOUS = "TOUS"
 }
 
 export type RepartitionParBesoin = Record<BesoinCyber, IdItemCyber[]>;

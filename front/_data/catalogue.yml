@@ -41,7 +41,6 @@ REAGIR:
   - /ressources/avis-bulletin
   - /ressources/rapport-menace
   - /services/transmission-signalements
-
 SE_FORMER:
   - /ressources/livret-cyber-enjeux
   - /services/secnum-academie
@@ -54,3 +53,48 @@ SE_FORMER:
   - /ressources/cyber-dico
   - /ressources/risques-cyber
   - /ressources/revue-presse
+TOUS:
+  - /ressources/livret-cyber-enjeux
+  - /services/secnum-academie
+  - /ressources/secnumedu
+  - /ressources/secnumedufc
+  - /services/demainspecialistecyber
+  - /services/demainspecialistecyber-affiches
+  - /services/pix
+  - /services/hackropole
+  - /ressources/cyber-dico
+  - /ressources/risques-cyber
+  - /ressources/revue-presse
+  - /services/assistance-reponse-incidents
+  - /services/cot
+  - /ressources/guides-gestion-crise
+  - /ressources/guides-remediation
+  - /services/diagnostic-17cyber
+  - /ressources/avis-bulletin
+  - /ressources/rapport-menace
+  - /services/transmission-signalements
+  - /services/mon-aide-cyber
+  - /services/mon-aide-cyber-aidants
+  - /services/mon-service-securise
+  - /services/ads
+  - /services/silene
+  - /ressources/guides-hygiene
+  - /ressources/cyber-13questions
+  - /ressources/ebios
+  - /ressources/prestas-ebios
+  - /ressources/visa-secu
+  - /ressources/visa-secu-produit
+  - /ressources/label-expert-cyber
+  - /services/assistance-technique
+  - /services/mon-espace-nis2
+  - /services/NIS2
+  - /ressources/publications
+  - /ressources/nl-industries
+  - /services/conseil-technique
+  - /services/pack-parcours-secu
+  - /ressources/panorama
+  - /services/sens-cyber
+  - /ressources/malette-cyber
+  - /ressources/cybermalveillance
+  - /ressources/cnil-reco
+  - /ressources/cnil-ensemble
