@@ -53,9 +53,8 @@ a {
   display: flex;
   gap: 8px;
   align-items: center;
-  border-bottom: 1px solid var(--noir);
-  width: fit-content;
   text-decoration: none;
+  width: fit-content;
 
   &[target='_blank']:after {
     content: '';
@@ -66,8 +65,11 @@ a {
   }
 
   &.lien {
+    text-decoration: underline solid var(--noir) 1px;
+    text-underline-offset: 4px;
+
     &:hover {
-      border-bottom: 2px solid var(--noir);
+      text-decoration-thickness: 2px;
     }
   }
 
@@ -417,7 +419,10 @@ footer {
     a {
       text-decoration: none;
       color: var(--noir);
-      border: none;
+
+      &:hover {
+        text-decoration: underline solid var(--noir) 1px;
+      }
     }
 
     hr {
@@ -681,7 +686,6 @@ footer {
         margin: 0;
         color: var(--noir);
         text-align: right;
-        text-decoration: none;
 
         &::after {
           content: '';
