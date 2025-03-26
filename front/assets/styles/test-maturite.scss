@@ -197,8 +197,12 @@ section {
 
     h2 {
       margin-bottom: 40px;
-      font-size: 1.75rem;
-      line-height: 2.25rem;
+      font-size: 2rem;
+      line-height: 2.5rem;
+      @include a-partir-de(sm) {
+        font-size: 2.5rem;
+        line-height: 3rem;
+      }
     }
 
     a {
@@ -309,9 +313,14 @@ section {
     border-top: 1px solid var(--gris-clair);
 
     h2 {
-      font-size: 1.75rem;
-      line-height: 2.25rem;
       margin-bottom: 24px;
+      font-size: 2rem;
+      line-height: 2.5rem;
+      @include a-partir-de(sm) {
+        font-size: 2.5rem;
+        line-height: 3rem;
+      }
+
     }
   }
 }
