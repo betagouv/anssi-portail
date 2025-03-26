@@ -320,7 +320,6 @@ section {
         font-size: 2.5rem;
         line-height: 3rem;
       }
-
     }
   }
 }
@@ -339,6 +338,7 @@ section {
 
       @include a-partir-de(sm) {
         display: block;
+        font-size: 1.375rem;
       }
     }
 

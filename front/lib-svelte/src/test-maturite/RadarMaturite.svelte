@@ -78,7 +78,7 @@
       viewBox = "-220 -220 440 440";
       coefDistanceLibelle = 1.03;
     } else {
-      viewBox = "-440 -225 880 450";
+      viewBox = "-600 -225 1200 450";
       coefDistanceLibelle = 1.1;
     }
   }
