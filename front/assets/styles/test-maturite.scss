@@ -190,13 +190,19 @@ section {
   }
 }
 
+.section-onglets {
+  padding: 48px var(--gouttiere) 0;
+}
+
 .resultats-test {
+  padding: 24px var(--gouttiere) 48px;
+
   .contenu-section {
-    padding: 16px 0;
+    padding: 0 0 16px;
     overflow: hidden;
 
     h2 {
-      margin-bottom: 40px;
+      margin: 0 0 40px;
       font-size: 2rem;
       line-height: 2.5rem;
       @include a-partir-de(sm) {
@@ -657,5 +663,29 @@ section {
         flex: calc(50% - 12px);
       }
     }
+  }
+}
+
+.comparaison {
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    text-align: center;
+  }
+  img{
+    max-width: 282px;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    max-width: 588px;
   }
 }
