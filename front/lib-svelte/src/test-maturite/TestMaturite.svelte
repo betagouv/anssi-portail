@@ -1,6 +1,9 @@
 <script lang="ts">
   import { etapesTestMaturite } from './TestMaturite.donnees';
-  import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
+  import {
+    questionnaireStore,
+    resultatsQuestionnaire,
+  } from './stores/questionnaire.store';
   import Etapier from '../ui/Etapier.svelte';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
   import SelectSecteurActivite from './SelectSecteurActivite.svelte';
@@ -10,6 +13,7 @@
   import { enregistreIdResultatTestPourRevendication } from './resultatTest';
   import { profilStore } from '../stores/profil.store';
   import Hero from '../ui/Hero.svelte';
+  import PartageTest from './PartageTest.svelte';
 
   let afficheResultats = false;
   let introFaite = false;
@@ -31,7 +35,8 @@
     id: string;
   };
 
-  const utilisateurEstConnecte = async () => profilStore.utilisateurEstConnecte();
+  const utilisateurEstConnecte = async () =>
+    profilStore.utilisateurEstConnecte();
 
   async function obtiensResultat() {
     const reponse = await axios.post<CreationTest>('/api/resultats-test', {
@@ -41,11 +46,12 @@
       tailleOrganisation,
     });
     const { id } = reponse.data;
-    if (!await utilisateurEstConnecte()) {
+    const estConnecte = await utilisateurEstConnecte();
+    if (estConnecte) {
+      window.location.href = '/ma-maturite';
+    } else {
       enregistreIdResultatTestPourRevendication(id);
       afficheResultats = true;
-    } else {
-      window.location.href = '/ma-maturite';
     }
   }
 
@@ -194,4 +200,7 @@
       {/if}
     </div>
   </section>
+  {#if !introFaite}
+    <PartageTest />
+  {/if}
 {/if}
