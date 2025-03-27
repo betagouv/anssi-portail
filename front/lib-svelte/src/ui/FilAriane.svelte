@@ -11,3 +11,9 @@
   <span><img src="/assets/images/icone-chevron-droite.svg" alt="" /> </span>
   <span>{ariane}</span>
 </div>
+
+<style>
+  .fil-ariane {
+      grid-area: ariane;
+  }
+</style>
