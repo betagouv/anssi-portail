@@ -22,6 +22,15 @@
       text-decoration: underline;
       display: inline;
     }
+
+    a:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    .fil-ariane {
+      margin-bottom: 24px;
+      margin-top: -8px;
+    }
   }
 }
 
