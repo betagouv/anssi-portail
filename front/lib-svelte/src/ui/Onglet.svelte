@@ -22,6 +22,7 @@
   }
 
   .onglet {
+    font-size: 1rem;
     padding: 9px 12px;
     background: #f6f6f6;
     border: none;
