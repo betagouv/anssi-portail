@@ -5,6 +5,7 @@
   import axios from 'axios';
   import { catalogueStore } from '../catalogue/stores/catalogue.store';
   import Hero from '../ui/Hero.svelte';
+  import { profilStore } from '../stores/profil.store';
 
   let prenom: string = '';
   let itemsCyberPartages: ItemCyber[] = [];
@@ -15,6 +16,8 @@
   };
 
   let urlDemandee = new URL(window.location.href).pathname;
+
+  $: estConnecte = !!$profilStore;
 
   onMount(async () => {
     try {
@@ -50,7 +53,10 @@
           <h2>La liste de services et ressources est vide.</h2>
         </div>
       {:else}
-        <ContenuFavoris avecBoutonFavori itemsEnFavori={itemsCyberPartages} />
+        <ContenuFavoris
+          avecBoutonFavori={estConnecte}
+          itemsEnFavori={itemsCyberPartages}
+        />
       {/if}
     </div>
   </div>
@@ -65,12 +71,25 @@
           alt="Illustration découvrez plus de services et ressources cyber"
           class="illustration"
         />
-        <h2>Découvrez plus de services et ressources cyber</h2>
-        <p>
-          Accédez aux services et ressources cyber proposés par l’ANSSI et ses
-          partenaires.
-        </p>
-        <a href="/catalogue/" class="bouton primaire">Explorer le catalogue</a>
+        {#if estConnecte}
+          <h2>Découvrez plus de services et ressources cyber</h2>
+          <p>
+            Accédez aux services et ressources cyber proposés par l’ANSSI et ses
+            partenaires.
+          </p>
+          <a href="/catalogue/" class="bouton primaire">Explorer le catalogue</a
+          >
+        {:else}
+          <h2>Créez votre propre liste de favoris !</h2>
+          <p>
+            Créez-vous un compte MesServicesCyber, explorez le catalogue et
+            sauvegardez facilement les services et ressources utiles pour votre
+            organisation.
+          </p>
+          <a href="/connexion/" class="bouton primaire">
+            Connectez-vous sur MesServicesCyber
+          </a>
+        {/if}
       </div>
     </div>
   </div>
@@ -81,6 +100,7 @@
     margin-top: 48px;
     margin-bottom: 48px;
   }
+
   .contenu-sans-favoris {
     display: flex;
     flex-direction: column;
