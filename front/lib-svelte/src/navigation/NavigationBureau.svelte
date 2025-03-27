@@ -36,9 +36,15 @@
   .conteneur-nav {
     padding: 0 var(--gouttiere);
     display: none;
+    margin-left: -8px;
+
+    @include a-partir-de(xl) {
+      margin-left: -32px;
+    }
 
     border-top: 1px solid #dddddd;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
+
+
 
     @include a-partir-de(lg) {
       display: block;
@@ -49,11 +55,7 @@
       align-items: center;
 
       details {
-        padding: 16px 8px;
         font-size: 0.875rem;
-        @include a-partir-de(xl) {
-          padding: 16px;
-        }
 
         &:hover {
           background: var(--menu-fond-hover);
@@ -82,13 +84,18 @@
           box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
           left: 0;
           right: -100px;
-          top: 58px;
+          top: 57px;
           font-size: 0.875rem;
           line-height: 1.5rem;
           z-index: 5;
+          border-top: 1px solid #ddd;
         }
 
         summary {
+          @include a-partir-de(xl) {
+            padding: 16px;
+          }
+          padding: 16px 8px;
           display: flex;
           gap: 8px;
           align-items: center;
