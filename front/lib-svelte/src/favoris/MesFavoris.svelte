@@ -3,6 +3,7 @@
   import ContenuFavoris from './ContenuFavoris.svelte';
   import Bouton from '../ui/Bouton.svelte';
   import { profilStore } from '../stores/profil.store';
+  import FilAriane from '../ui/FilAriane.svelte';
 
   const partageLien = () => {
     const hote = new URL(window.location.href).origin;
@@ -15,6 +16,7 @@
 
 <section class="chapeau fond-sombre">
   <div class="contenu-section">
+    <FilAriane ariane="Services et ressources favoris" />
     <h1>Services et ressources favoris</h1>
     <p>Retrouvez tous vos contenus cyber à partager.</p>
     {#if $itemsCatalogueEnFavori.length > 0}
@@ -92,14 +94,14 @@
     .contenu-section {
       display: grid;
       column-gap: 24px;
-      grid-template-areas: 'titre' 'description' 'cta';
+      grid-template-areas: 'ariane' 'titre' 'description' 'cta';
     }
   }
 
   @include a-partir-de(lg) {
     .chapeau.fond-sombre .contenu-section {
       grid-template-columns: auto 384px;
-      grid-template-areas: 'titre cta' 'description cta';
+      grid-template-areas: "ariane cta" 'titre cta' 'description cta';
     }
   }
 
