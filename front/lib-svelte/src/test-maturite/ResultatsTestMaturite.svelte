@@ -160,4 +160,4 @@
   </section>
 {/if}
 
-<PartageTest />
+<PartageTest couleurFond="fonce" />
