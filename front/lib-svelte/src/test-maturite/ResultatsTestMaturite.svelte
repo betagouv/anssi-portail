@@ -1,7 +1,13 @@
 <script lang="ts">
   import TuilesMaturite from './TuilesMaturite.svelte';
-  import { type IdNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
-  import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
+  import {
+    type IdNiveau,
+    niveauxMaturite,
+  } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import {
+    questionnaireStore,
+    resultatsQuestionnaire,
+  } from './stores/questionnaire.store';
   import PubliciteMesServicesCyber from './PubliciteMesServicesCyber.svelte';
   import RadarMaturite from './RadarMaturite.svelte';
   import TuileVersParcours from './TuileVersParcours.svelte';
@@ -26,7 +32,7 @@
   $: moyenne =
     $questionnaireStore.toutesLesReponses.reduce(
       (acc, valeur) => acc + valeur,
-      0,
+      0
     ) / $questionnaireStore.toutesLesReponses.length;
 
   $: idNiveau = calculeIdNiveau(moyenne);
@@ -71,7 +77,7 @@
       </div>
 
       <a href="/niveaux-maturite" class="lien" target="_blank"
-      >Les niveaux de maturité cyber</a
+        >Les niveaux de maturité cyber</a
       >
     </div>
   </section>
@@ -106,8 +112,8 @@
               <h3>{question.titre}</h3>
               <p>
                 {question.propositions[
-                ($resultatsQuestionnaire[question.id] || 1) - 1
-                  ]}
+                  ($resultatsQuestionnaire[question.id] || 1) - 1
+                ]}
               </p>
             </div>
           {/each}
@@ -143,14 +149,15 @@
         alt="Aucun favori sauvegardé"
       />
       <h4>Bientôt disponible pour votre organisation.</h4>
-      <p>Contribuez à enrichir l’expérience pour vous et les autres organisations en evaluant votre maturité cyber.</p>
-      <a href="/test-maturite" class="bouton primaire">Tester votre maturité cyber</a>
+      <p>
+        Contribuez à enrichir l’expérience pour vous et les autres organisations
+        en evaluant votre maturité cyber.
+      </p>
+      <a href="/test-maturite" class="bouton primaire"
+        >Tester votre maturité cyber</a
+      >
     </div>
   </section>
 {/if}
 
-<section class="partage-test">
-  <div class="contenu-section">
-    <PartageTest />
-  </div>
-</section>
+<PartageTest />
