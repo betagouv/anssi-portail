@@ -13,9 +13,9 @@
 </script>
 
 <Hero
-  titre="Vos contacts"
+  titre="Contacts utiles"
   description="Des contacts cyber utiles de proximité pour vous orienter."
-  ariane="Vos contacts"
+  ariane="Contacts utiles"
 ></Hero>
 
 <section>

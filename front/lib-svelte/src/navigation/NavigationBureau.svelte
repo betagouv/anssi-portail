@@ -23,7 +23,7 @@
     </details>
     <LienNavigation href={estConnecte ? '/ma-maturite' : '/test-maturite/'} label={estConnecte ? 'Votre maturité cyber' : 'Tester votre maturité cyber'}/>
     {#if estConnecte}
-      <LienNavigation href="/contacts/" label='Vos contacts' />
+      <LienNavigation href="/contacts/" label='Contacts utiles' />
       <LienNavigation href="/favoris/" label='Vos favoris' />
       <LienNavigation href="/services-anssi/" label='Services ANSSI utilisés' />
     {/if}
