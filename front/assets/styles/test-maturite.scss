@@ -643,20 +643,20 @@ section {
     margin-bottom: 12px;
   }
 
-  .boutons-partage {
-    padding: 0;
-    display: flex;
-    gap: 16px;
+}
+.boutons-partage {
+  padding: 0;
+  display: flex;
+  gap: 16px;
 
-    a {
-      &:after {
-        display: none;
-      }
+  a {
+    &:after {
+      display: none;
     }
+  }
 
-    .bouton {
-      padding: 8px;
-    }
+  .bouton {
+    padding: 8px;
   }
 }
 

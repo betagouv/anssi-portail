@@ -1,20 +1,7 @@
 <script lang="ts">
-  export let couleurFond: 'clair' | 'fonce' = 'clair';
-  let lienTest = window.location.href;
-  let urlLinkedIn = `https://www.linkedin.com/shareArticle?url=${lienTest}&title=Test de maturité Cyber`;
-  const partageLinkedIn = () => {
-    window.open(
-      urlLinkedIn,
-      'Partager sur LinkedIn',
-      'toolbar=no,location=yes,status=no,menubar=no,scrollbars=yes,resizable=yes,width=550,height=550'
-    );
-  };
+  import BoutonsPartageTest from './BoutonsPartageTest.svelte';
 
-  const partageLien = () => {
-    navigator.clipboard.writeText(window.location.href).then(function () {
-      alert('Adresse copiée dans le presse papier.');
-    });
-  };
+  export let couleurFond: 'clair' | 'fonce' = 'clair';
 </script>
 
 <section class="partage-test fond-{couleurFond}">
@@ -28,38 +15,7 @@
     </div>
     <div class="partage">
       <h3>Partager le test</h3>
-      <div class="boutons-partage">
-        <a
-          class="bouton secondaire"
-          target="_blank"
-          rel="noopener"
-          title="Partager sur LinkedIn"
-          on:click|preventDefault={partageLinkedIn}
-          href={urlLinkedIn}
-        >
-          <img
-            src="/assets/images/icone-linkedin.svg"
-            alt="Partager sur LinkedIn"
-          />
-        </a>
-
-        <a
-          class="bouton secondaire"
-          target="_blank"
-          rel="noopener external"
-          title="Partager par email"
-          href="mailto:?subject=Test de maturité Cyber&body=Lien vers le test : {lienTest}"
-        >
-          <img src="/assets/images/icone-email.svg" alt="Partager par email" />
-        </a>
-
-        <button class="bouton secondaire" on:click={partageLien}>
-          <img
-            src="/assets/images/icone-copie-lien.svg"
-            alt="Copier dans le presse-papier"
-          />
-        </button>
-      </div>
+      <BoutonsPartageTest />
     </div>
   </div>
 </section>
