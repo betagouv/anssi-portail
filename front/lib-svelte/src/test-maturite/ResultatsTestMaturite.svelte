@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Hero from '../Hero.svelte';
   import TuilesMaturite from './TuilesMaturite.svelte';
   import { type IdNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
@@ -10,6 +9,7 @@
   import { questions } from './TestMaturite.donnees';
   import Onglet from '../ui/Onglet.svelte';
   import ConteneurOnglets from '../ui/ConteneurOnglets.svelte';
+  import Hero from '../ui/Hero.svelte';
 
   export let affichePubMsc = true;
   export let afficheRappelReponses = false;

@@ -1,10 +1,10 @@
 <script lang="ts">
   import ContenuFavoris from './ContenuFavoris.svelte';
-  import Hero from '../Hero.svelte';
   import type { ItemCyber } from '../catalogue/Catalogue.types';
   import { onMount } from 'svelte';
   import axios from 'axios';
   import { catalogueStore } from '../catalogue/stores/catalogue.store';
+  import Hero from '../ui/Hero.svelte';
 
   let prenom: string = '';
   let itemsCyberPartages: ItemCyber[] = [];

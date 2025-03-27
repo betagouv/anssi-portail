@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import axios from 'axios';
   import type { Contacts } from './contacts';
-  import Hero from '../Hero.svelte';
+  import Hero from '../ui/Hero.svelte';
 
   let contacts: Contacts;
 

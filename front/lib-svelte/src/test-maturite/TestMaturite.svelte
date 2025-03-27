@@ -1,7 +1,6 @@
 <script lang="ts">
   import { etapesTestMaturite } from './TestMaturite.donnees';
   import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
-  import Hero from '../Hero.svelte';
   import Etapier from '../ui/Etapier.svelte';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
   import SelectSecteurActivite from './SelectSecteurActivite.svelte';
@@ -10,6 +9,7 @@
   import axios from 'axios';
   import { enregistreIdResultatTestPourRevendication } from './resultatTest';
   import { profilStore } from '../stores/profil.store';
+  import Hero from '../ui/Hero.svelte';
 
   let afficheResultats = false;
   let introFaite = false;
