@@ -1,4 +1,5 @@
 <script lang="ts">
+  export let couleurFond: 'clair' | 'fonce' = 'clair';
   let lienTest = window.location.href;
   let urlLinkedIn = `https://www.linkedin.com/shareArticle?url=${lienTest}&title=Test de maturité Cyber`;
   const partageLinkedIn = () => {
@@ -16,7 +17,7 @@
   };
 </script>
 
-<section class="partage-test">
+<section class="partage-test fond-{couleurFond}">
   <div class="contenu-section">
     <div class="description">
       <h2>Encouragez d’autres organisations à agir</h2>
@@ -26,7 +27,7 @@
       </p>
     </div>
     <div class="partage">
-      <h3>Partager</h3>
+      <h3>Partager le test</h3>
       <div class="boutons-partage">
         <a
           class="bouton secondaire"
