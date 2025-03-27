@@ -16,6 +16,7 @@
   import Onglet from '../ui/Onglet.svelte';
   import ConteneurOnglets from '../ui/ConteneurOnglets.svelte';
   import Hero from '../ui/Hero.svelte';
+  import { profilStore } from '../stores/profil.store';
 
   export let affichePubMsc = true;
   export let afficheRappelReponses = false;
@@ -49,20 +50,23 @@
   description="Ce résultat nous permet de vous guider et de vous fournir les informations et les outils essentiels pour agir sur votre maturité cyber."
   ariane="Tester votre maturité cyber"
 />
+
 <section class="section-onglets">
   <div class="contenu-section">
-    <ConteneurOnglets>
-      <Onglet
-        bind:ongletActif
-        cetOnglet="votre-organisation"
-        labelOnglet="Maturité cyber de votre organisation"
-      ></Onglet>
-      <Onglet
-        bind:ongletActif
-        cetOnglet="comparaison"
-        labelOnglet="Comparaison avec d’autres entités"
-      ></Onglet>
-    </ConteneurOnglets>
+    {#if $profilStore}
+      <ConteneurOnglets>
+        <Onglet
+          bind:ongletActif
+          cetOnglet="votre-organisation"
+          labelOnglet="Maturité cyber de votre organisation"
+        ></Onglet>
+        <Onglet
+          bind:ongletActif
+          cetOnglet="comparaison"
+          labelOnglet="Comparaison avec d’autres entités"
+        ></Onglet>
+      </ConteneurOnglets>
+    {/if}
   </div>
 </section>
 
