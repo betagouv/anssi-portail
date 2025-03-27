@@ -22,10 +22,12 @@
   <div class="contenu-section">
     {#if contacts}
       <div class="contacts">
+        <h2>Contacts régionaux</h2>
+
         {#if contacts.COT}
           {@const { nom, email } = contacts.COT}
           <div class="carte-contact">
-            <h2>Délégué(e)s ANSSI de votre région</h2>
+            <h3>Délégué(e)s ANSSI de votre région</h3>
             <p class="nom">{nom}</p>
             <p class="email"><a href="mailto:{email}">{email}</a></p>
           </div>
@@ -34,7 +36,7 @@
         {#if contacts.CSIRT}
           {@const { nom, telephone, siteWeb, adresse } = contacts.CSIRT}
           <div class="carte-contact">
-            <h2>{nom}</h2>
+            <h3>{nom}</h3>
             {#if telephone}
               <p class="telephone"><a href="tel:{telephone}">{telephone}</a></p>
             {/if}
@@ -50,7 +52,7 @@
         {#if contacts.campus}
           {@const { nom, siteWeb, adresse, email } = contacts.campus}
           <div class="carte-contact">
-            <h2>{nom}</h2>
+            <h3>{nom}</h3>
             {#if email}
               <p class="email"><a href="mailto:{email}">{email}</a></p>
             {/if}
@@ -61,8 +63,10 @@
           </div>
         {/if}
 
+        <h2>Contacts nationaux</h2>
+
         <div class="carte-contact">
-          <h2>CERT-FR</h2>
+          <h3>CERT-FR</h3>
           <ul class="telephone">
             <li>
               Depuis la France métropolitaine au <a href="tel:3218">3218</a>
@@ -93,15 +97,26 @@
 <style lang="scss">
   @use '../../../assets/styles/responsive.scss' as *;
 
+  h3,
   h2,
   p {
     margin: 0;
   }
 
   h2 {
+    margin: 8px 0 0 0;
+    font-size: 2rem;
+    line-height: 2.5rem;
+
+    @include a-partir-de(lg) {
+      width: 790px;
+    }
+  }
+
+  h3 {
     margin-bottom: 8px;
-    font-size: 20px;
-    line-height: 28px;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 
   p {
