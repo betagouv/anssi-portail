@@ -13,10 +13,9 @@
   import TuileVersParcours from './TuileVersParcours.svelte';
   import PartageTest from './PartageTest.svelte';
   import { questions } from './TestMaturite.donnees';
-  import Onglet from '../ui/Onglet.svelte';
-  import ConteneurOnglets from '../ui/ConteneurOnglets.svelte';
   import Hero from '../ui/Hero.svelte';
-  import { profilStore } from '../stores/profil.store';
+  import ComparaisonTest from './ComparaisonTest.svelte';
+  import OngletsTest from './OngletsTest.svelte';
 
   export let affichePubMsc = true;
   export let afficheRappelReponses = false;
@@ -51,24 +50,7 @@
   ariane="Tester votre maturité cyber"
 />
 
-<section class="section-onglets">
-  <div class="contenu-section">
-    {#if $profilStore}
-      <ConteneurOnglets>
-        <Onglet
-          bind:ongletActif
-          cetOnglet="votre-organisation"
-          labelOnglet="Maturité cyber de votre organisation"
-        ></Onglet>
-        <Onglet
-          bind:ongletActif
-          cetOnglet="comparaison"
-          labelOnglet="Comparaison avec d’autres entités"
-        ></Onglet>
-      </ConteneurOnglets>
-    {/if}
-  </div>
-</section>
+<OngletsTest bind:ongletActif />
 
 {#if ongletActif === 'votre-organisation'}
   <section class="resultats-test">
@@ -145,23 +127,7 @@
       {/if}
     </div>
   </section>
+  <PartageTest couleurFond="fonce" />
 {:else}
-  <section class="comparaison">
-    <div class="contenu-section">
-      <img
-        src="/assets/images/illustration-dragon-aucun-resultat.svg"
-        alt="Aucun favori sauvegardé"
-      />
-      <h4>Bientôt disponible pour votre organisation.</h4>
-      <p>
-        Contribuez à enrichir l’expérience pour vous et les autres organisations
-        en evaluant votre maturité cyber.
-      </p>
-      <a href="/test-maturite" class="bouton primaire"
-        >Tester votre maturité cyber</a
-      >
-    </div>
-  </section>
+  <ComparaisonTest testRealise={true} />
 {/if}
-
-<PartageTest couleurFond="fonce" />
