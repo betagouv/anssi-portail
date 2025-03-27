@@ -13,7 +13,7 @@
     border-bottom: 1px solid var(--gris-clair);
   }
   .conteneur-scrollable {
-    overflow-y: scroll;
+    overflow-x: auto;
     padding-bottom: 8px;
   }
 </style>
