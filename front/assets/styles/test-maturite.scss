@@ -575,7 +575,7 @@ section {
 }
 
 .partage-test {
-  padding: 24px var(--gouttiere);
+  padding: 32px var(--gouttiere);
 
   &.fond-clair {
     background-color: #f6f6f6;
@@ -637,13 +637,14 @@ section {
   }
 
   h3 {
+    margin-top: 4px;
     font-size: 1.125rem;
     line-height: 1.75rem;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
 
   .boutons-partage {
-    padding: 8px;
+    padding: 0;
     display: flex;
     gap: 16px;
 
