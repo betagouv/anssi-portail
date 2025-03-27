@@ -9,7 +9,7 @@
     <div class="fil-ariane">
       <a href="/" class="lien">Accueil</a>
       <span><img src="/assets/images/icone-chevron-droite.svg" alt="" /> </span>
-      <span>Tester votre maturité cyber</span>
+      <span>{ariane}</span>
     </div>
     <h1>{titre}</h1>
     <p>{description}</p>
