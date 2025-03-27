@@ -4,6 +4,13 @@ style: /assets/styles/page-statique.css
 ---
 <section class="chapeau fond-sombre chapeau-page-statique">
   <div class="contenu-section">
+    {% if page.filAriane %}
+      <div class="fil-ariane">
+        <a href="/catalogue" class="lien">Catalogue des services</a>
+        <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
+        <span>{{page.filAriane}}</span>
+      </div>
+    {% endif %}
     <h1>{{page.titrePageStatique}}</h1>
     {% if page.sousTitrePageStatique %}
     <p>{{page.sousTitrePageStatique}}</p>
