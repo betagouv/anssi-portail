@@ -81,7 +81,7 @@
           background: white;
           box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
           left: 0;
-          right: 0;
+          right: -100px;
           top: 58px;
           font-size: 0.875rem;
           line-height: 1.5rem;
