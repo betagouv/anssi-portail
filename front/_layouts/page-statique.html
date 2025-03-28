@@ -2,14 +2,23 @@
 layout: defaut
 style: /assets/styles/page-statique.css
 ---
+
 <section class="chapeau fond-sombre chapeau-page-statique">
   <div class="contenu-section">
     {% if page.filAriane %}
-      <div class="fil-ariane">
-        <a href="/catalogue" class="lien">Catalogue des services</a>
-        <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
-        <span>{{page.filAriane}}</span>
-      </div>
+      <script
+        type="module"
+        crossorigin
+        src="/lib-svelte/dist/assets/fil-ariane.js"
+      ></script>
+
+      <script type="application/json" id="donnees">
+        {
+          "feuille": "{{page.filAriane}}"
+        }
+      </script>
+
+      <div id="fil-ariane"></div>
     {% endif %}
     <h1>{{page.titrePageStatique}}</h1>
     {% if page.sousTitrePageStatique %}
