@@ -8,7 +8,7 @@
 
 <section class="chapeau fond-sombre">
   <div class="contenu-section">
-    <FilAriane {ariane} />
+    <FilAriane feuille={ariane} />
     <h1>{titre}</h1>
     <p>{description}</p>
   </div>

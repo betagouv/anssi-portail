@@ -1,6 +1,6 @@
 <script lang="ts">
   import { profilStore } from '../stores/profil.store.js';
-  export let ariane: string;
+  export let feuille: string;
 </script>
 <div class="fil-ariane">
   {#if $profilStore}
@@ -9,7 +9,7 @@
     <a href="/" class="lien">Accueil</a>
   {/if}
   <span><img src="/assets/images/icone-chevron-droite.svg" alt="" /> </span>
-  <span>{ariane}</span>
+  <span>{feuille}</span>
 </div>
 
 <style>
