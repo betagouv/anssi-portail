@@ -10,20 +10,6 @@ titreHtml: "Les services et ressources cyber | MesServicesCyber"
         src="/lib-svelte/dist/assets/catalogue.js"
 ></script>
 
-<section class="chapeau fond-sombre">
-  <div class="contenu-section">
-    <div class="fil-ariane">
-      <a href="/" class="lien">Accueil</a>
-      <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
-      <span>Explorer le catalogue</span>
-    </div>
-    <h1>Les services et ressources cyber</h1>
-    <p>
-      Trouvez les services et les ressources adaptés à vos besoins.
-    </p>
-  </div>
-</section>
-
 {% include script-donnees-json.html repartition=site.data.catalogue %}
 
 <div id="catalogue"></div>
