@@ -1,18 +1,23 @@
 <script lang="ts">
-  import { catalogueFiltre } from "./stores/catalogueFiltre.store";
-  import FiltreBesoin from "./FiltreBesoin.svelte";
-  import FiltreAccessibilite from "./FiltreAccessibilite.svelte";
-  import FiltreTypologieEtFormat from "./FiltreTypologieEtFormat.svelte";
-  import FiltreSource from "./FiltreSource.svelte";
-  import { recherches } from "./stores/recherches.store";
-  import CarteItem from "./CarteItem.svelte";
-  import EnteteFiltres from "./EnteteFiltres.svelte";
+  import { catalogueFiltre } from './stores/catalogueFiltre.store';
+  import FiltreBesoin from './FiltreBesoin.svelte';
+  import FiltreAccessibilite from './FiltreAccessibilite.svelte';
+  import FiltreTypologieEtFormat from './FiltreTypologieEtFormat.svelte';
+  import FiltreSource from './FiltreSource.svelte';
+  import { recherches } from './stores/recherches.store';
+  import CarteItem from './CarteItem.svelte';
+  import EnteteFiltres from './EnteteFiltres.svelte';
   import Hero from '../ui/Hero.svelte';
+  import { profilStore } from '../stores/profil.store';
 
   const reinitialiseFiltres = () => recherches.reinitialise();
 </script>
 
-<Hero titre="Les services et ressources cyber" description="Trouvez les services et les ressources adaptés à vos besoins." ariane="Explorer le catalogue"/>
+<Hero
+  titre="Les services et ressources cyber"
+  description="Trouvez les services et les ressources adaptés à vos besoins."
+  ariane={$profilStore ? undefined : 'Explorer le catalogue'}
+/>
 
 <div class="barre-filtre-besoin">
   <div class="contenu-section">
