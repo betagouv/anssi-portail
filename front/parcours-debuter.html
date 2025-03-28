@@ -4,15 +4,24 @@ permalink: /parcours-debuter/
 titreHtml: "Cybersécurité : se lancer ! | MesServicesCyber"
 ---
 
+<script
+  type="module"
+  crossorigin
+  src="/lib-svelte/dist/assets/fil-ariane.js"
+></script>
+
+<script type="application/json" id="donnees">
+  {
+    "branche": {
+      "nom": "Découvrir notre sélection"
+    },
+    "feuille": "Les services pour se lancer"
+  }
+</script>
+
 <section class="chapeau fond-sombre">
   <div class="contenu-section">
-    <div class="fil-ariane">
-      <a href="/" class="lien">Accueil</a>
-      <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
-      <span>Découvrir notre sélection</span>
-      <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
-      <span>Les services pour se lancer</span>
-    </div>
+    <div id="fil-ariane"></div>
     <h1>Les services pour se lancer</h1>
     <p>
       Votre organisation souhaite mettre en œuvre des premières actions
