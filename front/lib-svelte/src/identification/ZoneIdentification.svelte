@@ -7,7 +7,8 @@
 <div class="conteneur-zone-indentification" class:mobile={estMobile}>
   {#if $profilStore === undefined}
     <div class="profil-deconnecte">
-      <a href="/connexion">Se connecter</a>
+      <a href="/inscription" class="lien-inscription">S’inscrire</a>
+      <a href="/connexion" class="lien-connexion">Se connecter</a>
     </div>
   {:else}
     <div class="profil-connecte">
@@ -62,10 +63,11 @@
   .profil-connecte > a,
   .profil-deconnecte > a,
   .libelle-profil {
+    padding: 4px 12px;
     color: #000091;
   }
 
-  .profil-deconnecte > a:before {
+  .profil-deconnecte > a.lien-connexion:before {
     content: url('/assets/images/icone-profil-non-connecte.svg');
   }
 
