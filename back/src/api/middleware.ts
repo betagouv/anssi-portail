@@ -99,10 +99,11 @@ export const fabriqueMiddleware = ({
     reponse: Response,
     suite: NextFunction
   ) => {
+    const nonceAleatoire = randomBytes(16).toString('base64');
+    reponse.locals.nonce = nonceAleatoire;
     reponse.sendFileAvecNonce = (chemin: string) => {
-      const fichier = fs.readFileSync(chemin, "utf-8")
-      const nonceAleatoire = randomBytes(16).toString("base64");
-      const avecNonce = fichier.replace("%%NONCE%%", nonceAleatoire);
+      const fichier = fs.readFileSync(chemin, 'utf-8');
+      const avecNonce = fichier.replace('%%NONCE%%', nonceAleatoire);
       reponse.send(avecNonce);
     };
     suite();

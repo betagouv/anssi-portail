@@ -35,7 +35,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   configurationServeur.adaptateurGestionErreur.initialise(app);
 
-  app.use(
+  app.use(configurationServeur.middleware.ajouteMethodeNonce);
+
+  app.use((requete, reponse, suite) =>
     helmet({
       contentSecurityPolicy: {
         directives: {
@@ -50,10 +52,12 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
             'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com',
             'https://ressources-mac.cellar-c2.services.clever-cloud.com',
           ],
+          styleSrc: ["'self'", `'nonce-${reponse.locals.nonce}'`],
         },
       },
-    })
+    })(requete, reponse, suite)
   );
+
   app.use(configurationServeur.middleware.interdisLaMiseEnCache);
 
   const limiteRequetesParMinute = rateLimit({
@@ -62,8 +66,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   });
   app.set('trust proxy', configurationServeur.reseau.trustProxy);
   app.use(limiteRequetesParMinute);
-
-  app.use(configurationServeur.middleware.ajouteMethodeNonce);
 
   if (configurationServeur.reseau.ipAutorisees) {
     app.use(
