@@ -47,7 +47,7 @@
           <LienNavigationMobile href="/parcours-approfondir/" label="Les services pour approfondir" dansMenuDeroulant />
         </div>
       </details>
-      <LienNavigationMobile href={estConnecte ? '/ma-maturite' : '/test-maturite/'} label={estConnecte ? 'Votre maturité cyber' : 'Tester votre maturité cyber'} />
+      <LienNavigationMobile href={estConnecte ? '/ma-maturite' : '/test-maturite/'} label={estConnecte ? 'Maturité cyber' : 'Tester votre maturité cyber'} />
       {#if estConnecte}
         <LienNavigationMobile href="/contacts/" label='Contacts utiles' />
         <LienNavigationMobile href="/favoris/" label='Favoris' />
