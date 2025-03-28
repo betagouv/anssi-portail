@@ -4,24 +4,32 @@ style: /assets/styles/service.css
 script: /scripts/service.js
 ---
 
+<script
+  type="module"
+  crossorigin
+  src="/lib-svelte/dist/assets/fil-ariane-produit.js"
+></script>
+
+<script type="application/json" id="donnees">
+  {
+    "nom": "{{page.nom}}"
+  }
+</script>
+
+
 <section class="chapeau">
   <div class="contenu-section">
-    <div class="fil-ariane">
-      <a href="/" class="lien">Accueil</a>
-      <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
-      <a href="/catalogue/" class="lien">Les services et ressources cyber</a>
-      <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/></span>
-      <span>{{page.nom}}</span>
-    </div>
+    <div id="fil-ariane-produit"></div>
     <div class="resume">
       <div>
         <span class="badge service">Service</span>
         <h1>{{page.nom}}</h1>
         <p>{{page.description}}</p>
-        <a href="{{page.lien}}" target="_blank" class="bouton primaire lien-externe-produit" data-source="Page produit" data-cible="{{page.nom}}">Accéder au service</a>
+        <a href="{{page.lien}}" target="_blank" class="bouton primaire lien-externe-produit" data-source="Page produit"
+           data-cible="{{page.nom}}">Accéder au service</a>
       </div>
       <div class="conteneur-illustration">
-        <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran"/>
+        <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran" />
       </div>
     </div>
   </div>
@@ -31,9 +39,9 @@ script: /scripts/service.js
   <details>
     <summary>
       <div class="entete-filtres">
-        <img class="menu" src="/assets/images/icone-menu-lateral.svg" alt=""/>
+        <img class="menu" src="/assets/images/icone-menu-lateral.svg" alt="" />
         <span id="section-active" class="titre-menu">De quoi s'agit-il&nbsp;?</span>
-        <img class="chevron" src="/assets/images/icone-chevron-bas.svg" alt=""/>
+        <img class="chevron" src="/assets/images/icone-chevron-bas.svg" alt="" />
       </div>
     </summary>
 
@@ -68,13 +76,14 @@ script: /scripts/service.js
 
     <div class="contenu">
       <section class="explication" id="explication">
-        <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran"/>
+        <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran" />
         <div class="actions">
           <div id="bouton-favori"></div>
         </div>
-          <h2>De quoi s'agit-il&nbsp;?</h2>
+        <h2>De quoi s'agit-il&nbsp;?</h2>
         <div>{{ page.content }}</div>
-        <a href="{{page.lien}}" target="_blank" class="bouton primaire lien-externe-produit" data-source="Page produit" data-cible="{{page.nom}}">Accéder au service</a>
+        <a href="{{page.lien}}" target="_blank" class="bouton primaire lien-externe-produit" data-source="Page produit"
+           data-cible="{{page.nom}}">Accéder au service</a>
       </section>
 
       <section class="cible" id="cible">
