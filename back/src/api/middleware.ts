@@ -3,6 +3,7 @@ import { check, validationResult } from 'express-validator';
 import { AdaptateurJWT } from './adaptateurJWT';
 import fs from 'node:fs';
 import { randomBytes } from 'node:crypto';
+import helmet from 'helmet';
 
 type FonctionMiddleware = (
   requete: Request,
@@ -17,6 +18,7 @@ export type Middleware = {
   verifieJWT: FonctionMiddleware;
   verifieJWTNavigation: FonctionMiddleware;
   ajouteMethodeNonce: FonctionMiddleware;
+  positionneLesCsp: () => FonctionMiddleware;
 };
 
 export const fabriqueMiddleware = ({
@@ -109,6 +111,27 @@ export const fabriqueMiddleware = ({
     suite();
   };
 
+  const positionneLesCsp =
+    () => async (requete: Request, reponse: Response, suite: NextFunction) =>
+      helmet({
+        contentSecurityPolicy: {
+          directives: {
+            scriptSrc: [
+              "'self'",
+              'https://stats.beta.gouv.fr',
+              'https://browser.sentry-cdn.com',
+            ],
+            connectSrc: ["'self'", 'https://stats.beta.gouv.fr'],
+            mediaSrc: [
+              "'self'",
+              'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com',
+              'https://ressources-mac.cellar-c2.services.clever-cloud.com',
+            ],
+            styleSrc: ["'self'", `'nonce-${reponse.locals.nonce}'`],
+          },
+        },
+      })(requete, reponse, suite);
+
   return {
     aseptise,
     valide,
@@ -116,5 +139,6 @@ export const fabriqueMiddleware = ({
     verifieJWTNavigation,
     interdisLaMiseEnCache,
     ajouteMethodeNonce,
+    positionneLesCsp,
   };
 };
