@@ -7,9 +7,12 @@
   import { recherches } from "./stores/recherches.store";
   import CarteItem from "./CarteItem.svelte";
   import EnteteFiltres from "./EnteteFiltres.svelte";
+  import Hero from '../ui/Hero.svelte';
 
   const reinitialiseFiltres = () => recherches.reinitialise();
 </script>
+
+<Hero titre="Les services et ressources cyber" description="Trouvez les services et les ressources adaptés à vos besoins." ariane="Explorer le catalogue"/>
 
 <div class="barre-filtre-besoin">
   <div class="contenu-section">
