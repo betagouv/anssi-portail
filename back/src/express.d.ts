@@ -1,5 +1,9 @@
 declare namespace Express {
   export interface Request {
-    emailUtilisateurCourant?: string
+    emailUtilisateurCourant?: string;
+  }
+
+  export interface Response {
+    sendFileAvecNonce: (chemin: string) => void;
   }
 }

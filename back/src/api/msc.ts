@@ -63,26 +63,30 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.set('trust proxy', configurationServeur.reseau.trustProxy);
   app.use(limiteRequetesParMinute);
 
-  if (configurationServeur.reseau.ipAutorisees) {
-    app.use(IpFilter(configurationServeur.reseau.ipAutorisees, {
-      detectIp: (request) => {
-        const forwardedFor = request.headers['x-forwarded-for']
-        if (typeof forwardedFor === 'string') {
-          const ips = forwardedFor
-            .split(',')
-            .map(ip => ip.trim())
-            .filter(ip => ip !== '');
+  app.use(configurationServeur.middleware.ajouteMethodeNonce);
 
-          if (ips.length > 0) {
-            const ipWaf = ips[ips.length - 1];
-            return ipWaf;
+  if (configurationServeur.reseau.ipAutorisees) {
+    app.use(
+      IpFilter(configurationServeur.reseau.ipAutorisees, {
+        detectIp: (request) => {
+          const forwardedFor = request.headers['x-forwarded-for'];
+          if (typeof forwardedFor === 'string') {
+            const ips = forwardedFor
+              .split(',')
+              .map((ip) => ip.trim())
+              .filter((ip) => ip !== '');
+
+            if (ips.length > 0) {
+              const ipWaf = ips[ips.length - 1];
+              return ipWaf;
+            }
           }
-        }
-        return "interdire"
-      },
-      mode: 'allow',
-      log: false,
-    }));
+          return 'interdire';
+        },
+        mode: 'allow',
+        log: false,
+      })
+    );
   }
 
   app.use(
