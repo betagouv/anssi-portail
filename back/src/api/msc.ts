@@ -234,7 +234,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     reponse
       .status(404)
       .set('Content-Type', 'text/html')
-      .sendFile(fournisseurChemin.ressourceDeBase('404.html'));
+      .sendFileAvecNonce(fournisseurChemin.ressourceDeBase('404.html'));
   });
 
   return app;
