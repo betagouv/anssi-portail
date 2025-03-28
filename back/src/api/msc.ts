@@ -1,7 +1,6 @@
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import express, { json, Request, Response } from 'express';
-import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { IpFilter } from 'express-ipfilter';
 import { ConfigurationServeur } from './configurationServeur';
@@ -37,26 +36,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(configurationServeur.middleware.ajouteMethodeNonce);
 
-  app.use((requete, reponse, suite) =>
-    helmet({
-      contentSecurityPolicy: {
-        directives: {
-          scriptSrc: [
-            "'self'",
-            'https://stats.beta.gouv.fr',
-            'https://browser.sentry-cdn.com',
-          ],
-          connectSrc: ["'self'", 'https://stats.beta.gouv.fr'],
-          mediaSrc: [
-            "'self'",
-            'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com',
-            'https://ressources-mac.cellar-c2.services.clever-cloud.com',
-          ],
-          styleSrc: ["'self'", `'nonce-${reponse.locals.nonce}'`],
-        },
-      },
-    })(requete, reponse, suite)
-  );
+  app.use(configurationServeur.middleware.positionneLesCsp());
 
   app.use(configurationServeur.middleware.interdisLaMiseEnCache);
 
