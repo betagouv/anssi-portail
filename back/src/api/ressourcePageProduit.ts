@@ -14,7 +14,7 @@ const ressourcePageProduit = (
       reponse
         .contentType('text/html')
         .status(200)
-        .sendFile(
+        .sendFileAvecNonce(
           fournisseurChemin.cheminProduitJekyll(
             repertoireProduits,
             requete.params.id
