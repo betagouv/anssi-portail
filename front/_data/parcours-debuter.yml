@@ -11,8 +11,9 @@ securiser:
   items:
     - /services/mon-aide-cyber
     - /ressources/cyber-13questions
-    - /ressources/visa-secu
     - /ressources/label-expert-cyber
+    - /ressources/visa-secu
+  
 
 reagir:
   titre: Réagir
