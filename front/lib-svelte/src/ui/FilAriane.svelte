@@ -7,6 +7,7 @@
     lien: string | undefined;
   };
   export let branche: undefined | Branche = undefined;
+  export let brancheConnectee: undefined | Branche = undefined;
 </script>
 
 <div class="fil-ariane">
@@ -17,11 +18,20 @@
   {/if}
   <span><img src="/assets/images/icone-chevron-droite.svg" alt="" /> </span>
 
-  {#if branche}
+  {#if branche && !$profilStore}
     {#if branche.lien}
       <a href={branche.lien} class="lien">{branche.nom}</a>
     {:else}
       {branche.nom}
+    {/if}
+    <span><img src="/assets/images/icone-chevron-droite.svg" alt="" /></span>
+  {/if}
+
+  {#if brancheConnectee && $profilStore}
+    {#if brancheConnectee.lien}
+      <a href={brancheConnectee.lien} class="lien">{brancheConnectee.nom}</a>
+    {:else}
+      {brancheConnectee.nom}
     {/if}
     <span><img src="/assets/images/icone-chevron-droite.svg" alt="" /></span>
   {/if}
