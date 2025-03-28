@@ -55,11 +55,13 @@ export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
 };
 
 export const fauxMiddleware: Middleware = {
+  ajouteMethodeNonce: fabriqueMiddleware({adaptateurJWT:fauxAdaptateurJWT}).ajouteMethodeNonce,
+  positionneLesCsp:()=> async (_, __, suite) => { suite(); },
   aseptise: () => async (_, __, suite) => { suite(); },
   valide: () => async (_, __, suite) => { suite(); },
   interdisLaMiseEnCache: async (_, __, suite) => { suite(); },
   verifieJWT: async (_, __, suite) => { suite(); },
-  verifieJWTNavigation: async (_, __, suite) => { suite(); },
+  verifieJWTNavigation: async (_, __, suite) => { suite(); }
 }
 
 export const configurationDeTestDuServeur: ConfigurationServeur = {
