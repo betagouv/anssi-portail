@@ -3,7 +3,7 @@ layout: service
 typologie: service
 nom: Assistance CERT-FR
 titreHtml: Assistance CERT-FR
-description: "Qualifier un incident et être orienté"
+description: "Faire une déclaration d'incident au CERT-FR"
 lien: https://club.ssi.gouv.fr/#/declaration-incident
 illustration: assistance-reponse-incidents/assistance-reponse-incidents.png
 sources:
