@@ -16,7 +16,7 @@
 
 <section class="chapeau fond-sombre">
   <div class="contenu-section">
-    <FilAriane feuille="Services et ressources favoris" />
+    <FilAriane feuille="Favoris" />
     <h1>Services et ressources favoris</h1>
     <p>Retrouvez tous vos contenus cyber à partager.</p>
     {#if $itemsCatalogueEnFavori.length > 0}
