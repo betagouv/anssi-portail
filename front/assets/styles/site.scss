@@ -111,8 +111,7 @@ header {
   .contenu-section {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 32px;
+    justify-content: flex-start;
     padding: 20px 0;
 
     @include a-partir-de(md) {
@@ -121,6 +120,7 @@ header {
   }
 
   .titre-msc {
+    margin-left: 32px;
     display: flex;
     align-items: center;
     gap: 32px;
@@ -156,12 +156,12 @@ header {
     }
   }
 
-  #zone-identification {
+  lab-anssi-bouton-suite-cyber-navigation {
     margin-left: auto;
   }
 
   #menu-burger-mobile {
-    margin-left: auto;
+    margin-left: 16px;
 
     @include a-partir-de(lg) {
       display: none;

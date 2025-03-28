@@ -120,6 +120,11 @@ export const fabriqueMiddleware = ({
               "'self'",
               'https://stats.beta.gouv.fr',
               'https://browser.sentry-cdn.com',
+              'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
+            ],
+            imgSrc: [
+              "'self'",
+              'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
             ],
             connectSrc: ["'self'", 'https://stats.beta.gouv.fr'],
             mediaSrc: [
