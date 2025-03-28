@@ -7,19 +7,23 @@ script: /scripts/service.js
 <script
   type="module"
   crossorigin
-  src="/lib-svelte/dist/assets/fil-ariane-produit.js"
+  src="/lib-svelte/dist/assets/fil-ariane.js"
 ></script>
 
 <script type="application/json" id="donnees">
   {
-    "nom": "{{page.nom}}"
+    "feuille": "{{page.nom}}",
+    "branche": {
+      "nom": "Les services et ressources cyber",
+      "lien": "/catalogue"
+    }
   }
 </script>
 
 
 <section class="chapeau">
   <div class="contenu-section">
-    <div id="fil-ariane-produit"></div>
+    <div id="fil-ariane"></div>
     <div class="resume">
       <div>
         <span class="badge service">Service</span>
