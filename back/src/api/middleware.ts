@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { check, validationResult } from 'express-validator';
 import { AdaptateurJWT } from './adaptateurJWT';
+import fs from 'node:fs';
+import { randomBytes } from 'node:crypto';
 
 type FonctionMiddleware = (
   requete: Request,
@@ -14,6 +16,7 @@ export type Middleware = {
   interdisLaMiseEnCache: FonctionMiddleware;
   verifieJWT: FonctionMiddleware;
   verifieJWTNavigation: FonctionMiddleware;
+  ajouteMethodeNonce: FonctionMiddleware;
 };
 
 export const fabriqueMiddleware = ({
@@ -91,11 +94,26 @@ export const fabriqueMiddleware = ({
     }
   };
 
+  const ajouteMethodeNonce = async (
+    _: Request,
+    reponse: Response,
+    suite: NextFunction
+  ) => {
+    reponse.sendFileAvecNonce = (chemin: string) => {
+      const fichier = fs.readFileSync(chemin, "utf-8")
+      const nonceAleatoire = randomBytes(16).toString("base64");
+      const avecNonce = fichier.replace("%%NONCE%%", nonceAleatoire);
+      reponse.send(avecNonce);
+    };
+    suite();
+  };
+
   return {
     aseptise,
     valide,
     verifieJWT,
     verifieJWTNavigation,
     interdisLaMiseEnCache,
+    ajouteMethodeNonce,
   };
 };

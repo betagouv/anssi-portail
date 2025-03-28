@@ -13,14 +13,10 @@ const ressourcePageConnexion = (
     (_requete: Request, reponse: Response) => {
       reponse.clearCookie('session');
 
-      const fichier = fs.readFileSync(fournisseurChemin.cheminPageJekyll("connexion"), "utf-8")
-      const nonceAleatoire = randomBytes(16).toString("base64");
-      const avecNonce = fichier.replace("%%NONCE%%", nonceAleatoire);
-
       reponse
         .contentType('text/html')
         .status(200)
-        .send(avecNonce);
+        .sendFileAvecNonce(fournisseurChemin.cheminPageJekyll("connexion"));
     }
   );
 

@@ -8,6 +8,7 @@ import { Context } from 'express-validator/lib/context';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { fauxAdaptateurJWT } from './fauxObjets';
 import { JsonWebTokenError } from 'jsonwebtoken';
+import { join } from 'path';
 
 describe('Le middleware', () => {
   let requete: Request & { emailUtilisateurCourant?: string };
@@ -206,6 +207,25 @@ describe('Le middleware', () => {
       await middleware.verifieJWTNavigation(requete, reponse, () => {});
 
       assert.equal(urlRecu, '/connexion');
+    });
+  });
+
+  describe("sur demande d'ajout de la méthode sendFileAvecNonce", () => {
+    it('permet de substituer la variable du nonce par une valeur aléatoire', async () => {
+      const leVraiSend = reponse.send;
+      let aAppeleSend = false;
+      reponse.send = (contenu: string) => {
+        aAppeleSend = true;
+        assert.match(contenu, /<script nonce="[a-zA-Z0-9+/]{22}=="/);
+        return leVraiSend(contenu);
+      };
+
+      await middleware.ajouteMethodeNonce(requete, reponse, () => {
+        assert.notEqual(reponse.sendFileAvecNonce, undefined);
+        reponse.sendFileAvecNonce(join(process.cwd(), 'tests', 'ressources', 'factice.html'));
+      });
+
+      assert.equal(true, aAppeleSend);
     });
   });
 });
