@@ -4,13 +4,21 @@ permalink: /nis2/
 titreHtml: "Votre entité est régulée NIS2 ? | MesServicesCyber"
 ---
 
+<script
+  type="module"
+  crossorigin
+  src="/lib-svelte/dist/assets/fil-ariane.js"
+></script>
+
+<script type="application/json" id="donnees">
+  {
+    "ariane": "Vous accompagner avec NIS2"
+  }
+</script>
+
 <section class="chapeau fond-sombre nis2">
   <div class="contenu-section">
-    <div class="fil-ariane">
-      <a href="/" class="lien">Accueil</a>
-      <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
-      <span>Vous accompagner avec NIS2</span>
-    </div>
+    <div id="fil-ariane"></div>
     <h1>Votre entité est régulée NIS2&nbsp;?</h1>
     <p>
       La directive NIS 2 vise à renforcer le niveau de cybersécurité des tissus économique et administratif des pays
