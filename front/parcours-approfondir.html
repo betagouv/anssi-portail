@@ -4,15 +4,24 @@ permalink: /parcours-approfondir/
 titreHtml: "Cybersécurité : approfondir ! | MesServicesCyber"
 ---
 
+<script
+  type="module"
+  crossorigin
+  src="/lib-svelte/dist/assets/fil-ariane.js"
+></script>
+
+<script type="application/json" id="donnees">
+  {
+    "branche": {
+      "nom": "Découvrir notre sélection"
+    },
+    "feuille": "Les services pour approfondir"
+  }
+</script>
+
 <section class="chapeau fond-sombre">
   <div class="contenu-section">
-    <div class="fil-ariane">
-      <a href="/" class="lien">Accueil</a>
-      <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
-      <span>Découvrir notre sélection</span>
-      <span><img src="/assets/images/icone-chevron-droite.svg" alt=""/> </span>
-      <span>Les services pour approfondir</span>
-    </div>
+    <div id="fil-ariane"></div>
     <h1>Les services pour approfondir</h1>
     <p>
       Votre organisation a déjà mis en œuvre des premières actions pour renforcer sa cybersécurité et souhaite
