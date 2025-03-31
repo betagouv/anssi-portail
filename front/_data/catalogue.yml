@@ -13,8 +13,6 @@ SECURISER:
   - /services/mon-aide-cyber
   - /services/mon-aide-cyber-aidants
   - /services/mon-service-securise
-  - /services/ads
-  - /services/silene
   - /services/cot
   - /ressources/guides-hygiene
   - /ressources/cyber-13questions
@@ -72,8 +70,6 @@ TOUS:
 - /services/conseil-technique
 - /services/mon-aide-cyber-aidants
 - /ressources/panorama
-- /services/ads
-- /services/silene
 - /services/cot   
 - /ressources/ebios
 - /ressources/prestas-ebios

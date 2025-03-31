@@ -31,20 +31,6 @@ securiser:
     - /ressources/visa-secu-produit
     - /ressources/cnil-reco
 
-tester:
-  titre: Tester
-  explication: Vérifiez la sécurité de son système d’information grâce à des tests de sécurité.
-  items:
-  - /services/ads:
-        tags:
-          - Entités publiques
-          - Entités régulées
-  - /services/silene:
-        tags:
-          - Entités publiques
-          - Entités régulées
-
-
 reagir:
   titre: Réagir
   explication: Préparez-vous à un incident ou une crise d’origine cyber afin de mieux y répondre.

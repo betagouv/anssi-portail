@@ -5,7 +5,7 @@ ETRE_SENSIBILISE:
 SECURISER:
   - /services/mon-aide-cyber
   - /services/mon-service-securise
-  - /services/ads
+  - /services/cot
 REAGIR:
   - /services/assistance-reponse-incidents
   - /ressources/avis-bulletin
