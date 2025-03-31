@@ -48,11 +48,17 @@
   </details>
 </div>
 
+<section class="barre-recherche-mobile">
+  <div class="contenu-section">
+    <ChampRecherche bind:recherche={$rechercheTextuelle} />
+  </div>
+</section>
+
 <div class="recherche">
   <div class="contenu-section">
     <div class="grille">
       <div class="sommaire sommaire-deplie">
-        <ChampRecherche bind:recherche={$rechercheTextuelle}/>
+        <ChampRecherche bind:recherche={$rechercheTextuelle} />
         <EnteteFiltres />
         <div class="barre-filtres">
           <FiltreAccessibilite />

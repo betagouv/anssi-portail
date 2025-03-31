@@ -222,7 +222,17 @@
     }
   }
   & {
-    padding: 60px var(--gouttiere) 80px;
+    padding: 32px var(--gouttiere) 80px;
+  }
+}
+
+.barre-recherche-mobile {
+  .contenu-section {
+    padding: 32px var(--gouttiere) 0;
+    box-sizing: border-box;
+  }
+  @include a-partir-de(lg) {
+    display: none;
   }
 }
 
