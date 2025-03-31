@@ -20,12 +20,6 @@ describe('Le store du catalogue', () => {
       TOUS: tous.map((item) => item.id),
     });
   };
-  const repartitionVide = () => ({
-    REAGIR: [],
-    SE_FORMER: [],
-    SECURISER: [],
-    ETRE_SENSIBILISE: [],
-  });
 
   it('peut être initialisé avec des services', () => {
     initialiseStoreCatalogue([mss()]);
