@@ -5,6 +5,7 @@ import { rechercheParFormat } from "./rechercheParFormat.store";
 import { rechercheParSource } from "./rechercheParSource.store";
 import { limitationRecherche } from "./limitationRecherche";
 import { catalogueParBesoin } from "./catalogueParBesoin";
+import { rechercheTextuelle } from './rechercheTextuelle.store';
 
 export const catalogueFiltre = derived(
   [
@@ -13,6 +14,7 @@ export const catalogueFiltre = derived(
     rechercheParTypologie,
     rechercheParFormat,
     rechercheParSource,
+    rechercheTextuelle
   ],
   ([
     $catalogueParBesoin,
@@ -20,12 +22,14 @@ export const catalogueFiltre = derived(
     $rechercheParTypologie,
     $rechercheParFormat,
     $rechercheParSource,
+    $rechercheTextuelle
   ]) => {
     let resultats = $catalogueParBesoin
       .filter(rechercheParDroitAcces.ok)
       .filter(rechercheParTypologie.ok)
       .filter(rechercheParFormat.ok)
-      .filter(rechercheParSource.ok);
+      .filter(rechercheParSource.ok)
+      .filter(rechercheTextuelle.ok);
     if (get(limitationRecherche)) {
       resultats = resultats.slice(0, get(limitationRecherche));
     }
