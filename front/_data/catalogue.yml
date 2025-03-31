@@ -43,6 +43,7 @@ REAGIR:
   - /services/transmission-signalements
 SE_FORMER:
   - /ressources/livret-cyber-enjeux
+  - /ressources/cyber-enjeux
   - /services/secnum-academie
   - /ressources/secnumedu
   - /ressources/secnumedufc
@@ -63,6 +64,7 @@ TOUS:
 - /ressources/guides-hygiene
 - /ressources/visa-secu
 - /ressources/visa-secu-produit
+- /ressources/cyber-enjeux
 - /ressources/livret-cyber-enjeux
 - /ressources/guides-gestion-crise
 - /ressources/guides-remediation
@@ -86,7 +88,7 @@ TOUS:
 - /ressources/secnumedu
 - /ressources/secnumedufc
 - /services/demainspecialistecyber
-- /services/demainspecialistecyber-affiches
+- /ressources/demainspecialistecyber-affiches
 - /services/pix
 - /services/hackropole
 - /ressources/cyber-dico
