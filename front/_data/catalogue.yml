@@ -21,12 +21,10 @@ SECURISER:
   - /ressources/visa-secu
   - /ressources/visa-secu-produit
   - /ressources/label-expert-cyber
-  - /services/assistance-technique
   - /services/mon-espace-nis2
   - /services/NIS2
   - /ressources/publications
   - /ressources/nl-industries
-  - /services/assistance-technique
   - /services/conseil-technique
   - /services/pack-parcours-secu
 REAGIR:
@@ -66,7 +64,6 @@ TOUS:
 - /ressources/livret-cyber-enjeux
 - /ressources/guides-gestion-crise
 - /ressources/guides-remediation
-- /services/assistance-technique
 - /services/conseil-technique
 - /services/mon-aide-cyber-aidants
 - /ressources/panorama
