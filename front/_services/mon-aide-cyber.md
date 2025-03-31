@@ -14,7 +14,7 @@ sources:
   - Innovation ANSSI
 cible:  |
     <ul>
-    <li> En accès libre, MonAideCyber est destiné aux entités publiques et privées en France souhaitant mettre en oeuvre une première démarche de cybersécurité. </li>
+    <li> En accès libre, MonAideCyber est destiné aux entités publiques et privées en France souhaitant mettre en oeuvre une première démarche de cybersécurité. Le diagnostic n'est pas adapté aux particuliers et micro-entreprises. </li>
     <li>Les prestataires privés travaillant au profit d’entités publiques.</li>
     </ul>
 liens:
