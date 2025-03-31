@@ -23,6 +23,7 @@ import { rechercheParTypologie } from '../../../src/catalogue/stores/recherchePa
 import { rechercheParFormat } from '../../../src/catalogue/stores/rechercheParFormat.store';
 import { rechercheParSource } from '../../../src/catalogue/stores/rechercheParSource.store';
 import { limitationRecherche } from '../../../src/catalogue/stores/limitationRecherche';
+import { rechercheTextuelle } from '../../../src/catalogue/stores/rechercheTextuelle.store';
 
 describe('Le store du catalogue filtré', () => {
   beforeEach(() => {
@@ -172,6 +173,48 @@ describe('Le store du catalogue filtré', () => {
       const { resultats } = get(catalogueFiltre);
 
       expect(resultats.length).toBe(1);
+    });
+  });
+
+  describe('sur recherche textuelle', () => {
+    it("filtre sur le nom de l'item", () => {
+      initialiseStoreCatalogue([mss(), demainSpecialisteCyber()]);
+      rechercheTextuelle.set('mss');
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(1);
+      expect(resultats[0].nom).toBe('mss');
+    });
+
+    it('le filtre sur le nom peut être partiel', () => {
+      initialiseStoreCatalogue([mss(), demainSpecialisteCyber()]);
+      rechercheTextuelle.set('Demain');
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(1);
+      expect(resultats[0].nom).toBe('DemainSpécialisteCyber');
+    });
+
+    it('le filtre est insensible à la casse', () => {
+      initialiseStoreCatalogue([mss(), demainSpecialisteCyber()]);
+      rechercheTextuelle.set('dEMAIN');
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(1);
+      expect(resultats[0].nom).toBe('DemainSpécialisteCyber');
+    });
+
+    it('filtre sur la description', () => {
+      initialiseStoreCatalogue([mss(), demainSpecialisteCyber()]);
+      rechercheTextuelle.set('sécuriser');
+
+      const { resultats } = get(catalogueFiltre);
+
+      expect(resultats.length).toBe(1);
+      expect(resultats[0].nom).toBe('mss');
     });
   });
 });

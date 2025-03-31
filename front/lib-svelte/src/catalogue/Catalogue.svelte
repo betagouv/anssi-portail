@@ -9,6 +9,8 @@
   import EnteteFiltres from './EnteteFiltres.svelte';
   import Hero from '../ui/Hero.svelte';
   import { profilStore } from '../stores/profil.store';
+  import ChampRecherche from '../ui/ChampRecherche.svelte';
+  import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
 
   const reinitialiseFiltres = () => recherches.reinitialise();
 </script>
@@ -50,6 +52,7 @@
   <div class="contenu-section">
     <div class="grille">
       <div class="sommaire sommaire-deplie">
+        <ChampRecherche bind:recherche={$rechercheTextuelle}/>
         <EnteteFiltres />
         <div class="barre-filtres">
           <FiltreAccessibilite />
