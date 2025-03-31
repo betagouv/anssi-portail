@@ -54,7 +54,7 @@
   </div>
 </section>
 
-<div class="recherche">
+<div class="contenu-catalogue">
   <div class="contenu-section">
     <div class="grille">
       <div class="sommaire sommaire-deplie">
