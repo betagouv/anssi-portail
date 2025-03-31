@@ -18,14 +18,7 @@ reduire-risques:
   explication: Mettez en place des mesures de sécurité adaptées.
   items:
     - /services/mon-aide-cyber
-    - /services/assistance-technique:
-        tags:
-          - Entités publiques
-          - Entité régulées
-    - /services/conseil-technique:
-        tags:
-          - Entités publiques
-          - Entité régulées
+    - /services/conseil-technique
     - /ressources/revue-presse
 
 declarer-incident:
