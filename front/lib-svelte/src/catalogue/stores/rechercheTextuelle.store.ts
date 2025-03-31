@@ -9,7 +9,10 @@ export const rechercheTextuelle = {
   ok: (item: ItemCyber) => {
     if (!get(rechercheTextuelle)) return true;
     return (
-      item.nom.toLowerCase().includes(get(rechercheTextuelle).toLowerCase()) ||
+      item.nom
+        .replace('&ZeroWidthSpace;', '')
+        .toLowerCase()
+        .includes(get(rechercheTextuelle).toLowerCase()) ||
       item.description
         .toLowerCase()
         .includes(get(rechercheTextuelle).toLowerCase())
