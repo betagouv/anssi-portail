@@ -49,7 +49,7 @@ describe("Le store des recherches", () => {
     });
 
     it("la recherche par format est active", () => {
-      rechercheParFormat.set([FormatRessource.PDF]);
+      rechercheParFormat.set([FormatRessource.PUBLICATION]);
 
       const { filtreActif } = get(recherches);
 

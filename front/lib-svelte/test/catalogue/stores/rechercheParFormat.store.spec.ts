@@ -9,7 +9,7 @@ import { rechercheParFormat } from "../../../src/catalogue/stores/rechercheParFo
 
 describe("La recherche par format", () => {
   it("est vide quand on la réinitialise", () => {
-    rechercheParFormat.set([FormatRessource.PDF]);
+    rechercheParFormat.set([FormatRessource.PUBLICATION]);
 
     rechercheParFormat.reinitialise();
 
