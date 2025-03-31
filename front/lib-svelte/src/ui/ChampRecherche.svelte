@@ -1,10 +1,24 @@
 <script lang="ts">
   export let recherche: string;
+
+  const efface = () => {
+    recherche = '';
+  };
 </script>
 
 <div>
   <input type="text" bind:value={recherche} placeholder="Rechercher" />
-  <button>
+  <button
+    class:visible={recherche}
+    class="suppression-recherche"
+    on:click={efface}
+  >
+    <img
+      src="/assets/images/icone-croix-blanche.svg"
+      alt="Suppression de la recherche"
+    />
+  </button>
+  <button class="bouton-recherche">
     <img src="/assets/images/icone_loupe.svg" alt="Icône de recherche" />
   </button>
 </div>
@@ -32,8 +46,9 @@
     align-items: center;
     background: var(--noir);
     border: none;
-    border-top-right-radius: 4px;
     cursor: pointer;
+    justify-content: center;
+    padding: 0;
 
     &:hover {
       background: #2c2640;
@@ -44,8 +59,26 @@
     }
   }
 
+  .suppression-recherche {
+    position: absolute;
+    right: 56px;
+    width: 16px;
+    height: 16px;
+    top: 13px;
+    border-radius: 8px;
+    display: none;
+    &.visible {
+      display: flex;
+    }
+  }
+  .bouton-recherche {
+    flex: 0 0 40px;
+    border-top-right-radius: 4px;
+  }
+
   div {
     display: flex;
+    position: relative;
     margin-bottom: 16px;
   }
 </style>
