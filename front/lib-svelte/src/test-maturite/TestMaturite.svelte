@@ -61,6 +61,7 @@
     introFaite = true;
   }
 
+  // TODO : enlever le reactif et il faut que mettre reponseDonnee à null lors de la reponds() mais on veut pouvoir retourner en arrière et récualiser la réponse précédente
   $: reponseDonnee =
     $questionnaireStore.toutesLesReponses[$questionnaireStore.questionCourante];
 
@@ -100,13 +101,14 @@
               nombreEtapes={7}
             />
             <h2>
+              <!-- eslint-disable-next-line svelte/no-at-html-tags -->
               {@html etapesTestMaturite[$questionnaireStore.questionCourante]
                 .question}
             </h2>
 
             {#if doitMontrerPropositions()}
               <div class="propositions">
-                {#each etapesTestMaturite[$questionnaireStore.questionCourante].propositions as proposition, index}
+                {#each etapesTestMaturite[$questionnaireStore.questionCourante].propositions as proposition, index (proposition)}
                   <label>
                     <input
                       type="radio"
@@ -130,7 +132,7 @@
                 <input
                   type="button"
                   class="bouton primaire taille-moyenne"
-                  value={'Question suivante'}
+                  value="Question suivante"
                   disabled={reponseDonnee === null}
                   on:click={reponds}
                 />

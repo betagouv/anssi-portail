@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import BoutonsPartageTest from './BoutonsPartageTest.svelte';
 
   export let testRealise = false;

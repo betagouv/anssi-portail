@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount } from 'svelte';
   import {
     type NiveauMaturite,
     niveauxMaturite,
-  } from "../niveaux-maturite/NiveauxMaturite.donnees";
+  } from '../niveaux-maturite/NiveauxMaturite.donnees';
 
   export let niveauCourant: NiveauMaturite;
   export let animeTuiles = true;
@@ -11,14 +11,14 @@
   $: indexNiveauCourant = niveauxMaturite.indexOf(niveauCourant);
   onMount(() => {
     let elementCourant: HTMLDivElement | null = document.querySelector(
-      ".tuile-niveau.courant",
+      '.tuile-niveau.courant'
     );
-    elementCourant?.scrollIntoView({ block: "center" });
+    elementCourant?.scrollIntoView({ block: 'center' });
   });
 </script>
 
 <div class="tuiles-niveau" class:avec-animation={animeTuiles}>
-  {#each niveauxMaturite as niveau, index}
+  {#each niveauxMaturite as niveau, index (index)}
     <div
       class="tuile-niveau"
       class:actif={index < indexNiveauCourant}

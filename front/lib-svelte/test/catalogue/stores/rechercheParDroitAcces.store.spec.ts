@@ -21,7 +21,7 @@ describe("La recherche par droit d'accès", () => {
     const sansDroitDAcces = { ...mss() };
     delete sansDroitDAcces.droitsAcces;
 
-    let resultat = rechercheParDroitAcces.ok(sansDroitDAcces);
+    const resultat = rechercheParDroitAcces.ok(sansDroitDAcces);
 
     expect(resultat).toBe(false)
   });

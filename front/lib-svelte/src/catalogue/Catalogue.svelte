@@ -73,7 +73,7 @@
         </div>
       </div>
 
-      {#each $catalogueFiltre.resultats as itemCyber}
+      {#each $catalogueFiltre.resultats as itemCyber (itemCyber.id)}
         <CarteItem {itemCyber} avecBoutonFavori />
       {:else}
         <div class="aucun-resultat">

@@ -7,7 +7,7 @@
 </script>
 
 <div class="grille">
-  {#each itemsEnFavori as itemCyber}
+  {#each itemsEnFavori as itemCyber (itemCyber.id)}
     <CarteItem {itemCyber} {avecBoutonFavori} />
   {/each}
 </div>

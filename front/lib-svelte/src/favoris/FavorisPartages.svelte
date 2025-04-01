@@ -28,7 +28,7 @@
           $catalogueStore.items.find((itemCyber) => itemCyber.id === idFavori)
         )
         .filter((item) => !!item);
-    } catch (e) {
+    } catch {
       prenom = '?';
       itemsCyberPartages = [];
     }

@@ -35,7 +35,7 @@
     {/if}
     <span><img src="/assets/images/icone-chevron-droite.svg" alt="" /></span>
   {/if}
-
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
   <span>{@html feuille}</span>
 </div>
 

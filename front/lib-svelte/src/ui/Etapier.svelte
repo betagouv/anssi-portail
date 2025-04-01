@@ -4,7 +4,8 @@
 </script>
 
 <div class="etapier">
-  {#each new Array(nombreEtapes).fill(0) as _, i}
+  <!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
+  {#each new Array(nombreEtapes).fill(0) as _, i (i)}
     <span class:accessible={i <= etapeCourante}></span>
   {/each}
 </div>

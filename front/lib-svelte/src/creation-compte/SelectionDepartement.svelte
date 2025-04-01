@@ -55,7 +55,7 @@
     class:visible={suggestionsVisibles}
     bind:this={suggestionsEl}
   >
-    {#each suggestions as suggestion}
+    {#each suggestions as suggestion (suggestion.code)}
       <div
         class="option"
         role="button"
@@ -69,6 +69,7 @@
           }
         }}
       >
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         <div>{@html suggestion.nom} ({suggestion.code})</div>
       </div>
     {/each}

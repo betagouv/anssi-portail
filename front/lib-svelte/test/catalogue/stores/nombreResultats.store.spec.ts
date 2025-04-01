@@ -32,7 +32,7 @@ describe('Le store du nombre de résultats', () => {
     it('pour une entité publique', () => {
       initialiseStoreCatalogue([mss()]);
 
-      let parDroitAcces = get(nombreResultats).parDroitAcces;
+      const parDroitAcces = get(nombreResultats).parDroitAcces;
 
       expect(parDroitAcces[DroitAcces.ACCES_LIBRE]).toBe(0);
       expect(parDroitAcces[DroitAcces.ENTITES_PUBLIQUES]).toBe(1);
@@ -41,7 +41,7 @@ describe('Le store du nombre de résultats', () => {
     it('pour un accès libre', () => {
       initialiseStoreCatalogue([demainSpecialisteCyber()]);
 
-      let parDroitAcces = get(nombreResultats).parDroitAcces;
+      const parDroitAcces = get(nombreResultats).parDroitAcces;
 
       expect(parDroitAcces[DroitAcces.ACCES_LIBRE]).toBe(1);
       expect(parDroitAcces[DroitAcces.ENTITES_PUBLIQUES]).toBe(0);
@@ -50,7 +50,7 @@ describe('Le store du nombre de résultats', () => {
     it('pour une entité régulée / NIS2 qui est également en accès libre', () => {
       initialiseStoreCatalogue([monEspaceNIS2()]);
 
-      let parDroitAcces = get(nombreResultats).parDroitAcces;
+      const parDroitAcces = get(nombreResultats).parDroitAcces;
 
       expect(parDroitAcces[DroitAcces.ACCES_LIBRE]).toBe(1);
       expect(parDroitAcces[DroitAcces.ENTITES_PUBLIQUES]).toBe(0);
@@ -62,7 +62,7 @@ describe('Le store du nombre de résultats', () => {
       delete sansDroitAcces.droitsAcces;
       initialiseStoreCatalogue([sansDroitAcces]);
 
-      let parDroitAcces = get(nombreResultats).parDroitAcces;
+      const parDroitAcces = get(nombreResultats).parDroitAcces;
 
       expect(parDroitAcces[DroitAcces.ACCES_LIBRE]).toBe(0);
       expect(parDroitAcces[DroitAcces.ENTITES_PUBLIQUES]).toBe(0);
@@ -74,7 +74,7 @@ describe('Le store du nombre de résultats', () => {
     it('pour un service', () => {
       initialiseStoreCatalogue([mss()]);
 
-      let parTypologie = get(nombreResultats).parTypologie;
+      const parTypologie = get(nombreResultats).parTypologie;
 
       expect(parTypologie[Typologie.SERVICE]).toBe(1);
       expect(parTypologie[Typologie.RESSOURCE]).toBe(0);
@@ -83,7 +83,7 @@ describe('Le store du nombre de résultats', () => {
     it('pour une ressource', () => {
       initialiseStoreCatalogue([guidesTechniques()]);
 
-      let parTypologie = get(nombreResultats).parTypologie;
+      const parTypologie = get(nombreResultats).parTypologie;
 
       expect(parTypologie[Typologie.SERVICE]).toBe(0);
       expect(parTypologie[Typologie.RESSOURCE]).toBe(1);
@@ -94,7 +94,7 @@ describe('Le store du nombre de résultats', () => {
     it('pour un pdf', () => {
       initialiseStoreCatalogue([guidesTechniques()]);
 
-      let parFormatDeRessource = get(nombreResultats).parFormatDeRessource;
+      const parFormatDeRessource = get(nombreResultats).parFormatDeRessource;
 
       expect(parFormatDeRessource[FormatRessource.PUBLICATION]).toBe(1);
       expect(parFormatDeRessource[FormatRessource.OUTIL]).toBe(0);
@@ -103,7 +103,7 @@ describe('Le store du nombre de résultats', () => {
     it('pour une vidéo', () => {
       initialiseStoreCatalogue([livretEnJeux()]);
 
-      let parFormatDeRessource = get(nombreResultats).parFormatDeRessource;
+      const parFormatDeRessource = get(nombreResultats).parFormatDeRessource;
 
       expect(parFormatDeRessource[FormatRessource.PUBLICATION]).toBe(0);
       expect(parFormatDeRessource[FormatRessource.OUTIL]).toBe(1);
@@ -114,7 +114,7 @@ describe('Le store du nombre de résultats', () => {
     it('pour les partenaires', () => {
       initialiseStoreCatalogue([kitCyber()]);
 
-      let parSource = get(nombreResultats).parSource;
+      const parSource = get(nombreResultats).parSource;
 
       expect(parSource[Source.ANSSI]).toBe(0);
       expect(parSource[Source.PARTENAIRES]).toBe(1);
@@ -125,7 +125,7 @@ describe('Le store du nombre de résultats', () => {
       delete sansSource.sources;
       initialiseStoreCatalogue([sansSource]);
 
-      let parSource = get(nombreResultats).parSource;
+      const parSource = get(nombreResultats).parSource;
 
       expect(parSource[Source.ANSSI]).toBe(0);
       expect(parSource[Source.PARTENAIRES]).toBe(0);

@@ -36,7 +36,7 @@
           `/api/informations-creation-compte?token=${token}`
         )
       ).data;
-    } catch (e) {
+    } catch {
       window.location.pathname = '/erreur';
     }
     const reponseDepartements = await axios.get<Departement[]>(
@@ -77,7 +77,7 @@
         enCoursEnvoi = true;
         await axios.post('/api/utilisateurs', formulaireInscription);
         window.location.href = '/oidc/connexion';
-      } catch (e) {
+      } catch {
         enCoursEnvoi = false;
       }
     }

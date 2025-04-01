@@ -6,7 +6,7 @@ import { BesoinCyber } from '../Catalogue.types';
 export const catalogueParBesoin = derived(
   [catalogueStore, rechercheParBesoin],
   ([$catalogueStore, $rechercheParBesoin]) => {
-    let besoinCyber = $rechercheParBesoin ? $rechercheParBesoin : BesoinCyber.TOUS;
+    const besoinCyber = $rechercheParBesoin ? $rechercheParBesoin : BesoinCyber.TOUS;
     return $catalogueStore.repartition[besoinCyber]
       .map((id) => $catalogueStore.items.find((i) => i.id === id))
       .filter((i) => i !== undefined);
