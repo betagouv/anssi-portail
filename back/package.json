@@ -4,7 +4,9 @@
   "description": "",
   "main": "serveur.ts",
   "scripts": {
-    "test": "node --import tsx --test './tests/**/*.spec.ts'"
+    "test": "npx eslint . && node --import tsx --test './tests/**/*.spec.ts'",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix"
   },
   "engines": {
     "node": ">=23"
