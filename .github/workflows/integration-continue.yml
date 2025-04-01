@@ -38,7 +38,7 @@ jobs:
       - name: (BACK) Installe les dépendances
         run: npm ci --prefix back
 
-      - name: (BACK) Exécute les tests
+      - name: (BACK) Exécute les tests et le linter
         run: npm run test --prefix back
 
       - name: (CONSTRUCTION) Construis le site via Docker
