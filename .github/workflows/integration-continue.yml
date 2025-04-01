@@ -35,10 +35,10 @@ jobs:
       - name: (SVELTE) Exécute les tests
         run: npm run test --prefix front/lib-svelte
 
-      - name: (BACK) Installe les dépendances
+      - name: (SERVEUR) Installe les dépendances
         run: npm ci --prefix back
 
-      - name: (BACK) Exécute les tests et le linter
+      - name: (SERVEUR) Exécute les tests et le linter
         run: npm run test --prefix back
 
       - name: (CONSTRUCTION) Construis le site via Docker
