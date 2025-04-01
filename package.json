@@ -8,7 +8,8 @@
     "migre-bdd": "node --env-file=.env --import tsx back/node_modules/knex/bin/cli.js migrate:latest --knexfile back/knexfile.ts",
     "migre-bdd-clever": "node node_modules/knex/bin/cli.js migrate:latest --knexfile dist-back/knexfile.js",
     "dev": "npx concurrently -n \"SERVEUR,SVELTE,JEKYLL,BDD,MIGRE\" \"node --watch --import tsx --env-file .env ./back/src/serveur.ts\" \"npm run watch --prefix front/lib-svelte\" \"sleep 3 && jekyll build -s ./front -d ./front/_site -w\" \"docker compose up db\" \"sleep 3 && npm run migre-bdd\"",
-    "start": "npm run migre-bdd-clever && node ./dist-back/src/serveur.js"
+    "start": "npm run migre-bdd-clever && node ./dist-back/src/serveur.js",
+    "lint": "npx concurrently -n \"SERVEUR,SVELTE\" \"npm run lint --prefix back\" \"npm run lint --prefix front/lib-svelte\" "
   },
   "repository": {
     "type": "git",
