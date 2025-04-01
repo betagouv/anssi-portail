@@ -66,7 +66,7 @@ describe('La ressource utilisateur', () => {
         .send(donneesUtilisateur);
 
       busEvenements.aRecuUnEvenement(CompteCree);
-      let evenement = busEvenements.recupereEvenement(CompteCree);
+      const evenement = busEvenements.recupereEvenement(CompteCree);
       assert.equal(evenement!.email, 'jeanne.dupont@user.com');
       assert.equal(evenement!.prenom, 'Jeanne');
     });

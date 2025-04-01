@@ -21,7 +21,7 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
   it('aseptise les paramètres de la requête', async (done) => {
     let termeCherche;
     let departementCherche;
-    let unAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
+    const unAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
       rechercheOrganisations: async (
         terme: string,
         departement: string | null
@@ -45,14 +45,14 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
   });
 
   it('retourne une erreur HTTP 400 si le terme de recherche est vide', async () => {
-    let reponse = await request(serveur).get(
+    const reponse = await request(serveur).get(
       '/api/annuaire/organisations?recherche=&departement=mon>departement'
     );
     assert.equal(reponse.status, 400);
   });
 
   it("retourne une erreur HTTP 400 si le département n'existe pas", async () => {
-    let reponse = await request(serveur).get(
+    const reponse = await request(serveur).get(
       '/api/annuaire/organisations?recherche=siret&departement=990'
     );
     assert.equal(reponse.status, 400);
@@ -62,7 +62,7 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
     let adaptateurAppele = false;
     let termeCherche;
     let departementCherche;
-    let unAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
+    const unAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
       rechercheOrganisations: async (
         terme: string,
         departement: string | null

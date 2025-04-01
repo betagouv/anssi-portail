@@ -9,7 +9,7 @@ export class EntrepotResultatTestMemoire implements EntrepotResultatTest {
   }
 
   async metsAjour(resultatTest: ResultatTestMaturite): Promise<void> {
-    let entiteAMettreAJour = this.entites.find(
+    const entiteAMettreAJour = this.entites.find(
       (entite) => entite.id === resultatTest.id
     );
     if (entiteAMettreAJour) {

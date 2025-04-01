@@ -30,7 +30,7 @@ describe('La ressource deconnexion OIDC', () => {
     });
 
     it('redirige vers url de deconnexion', async () => {
-      let cookie = encodeSession({
+      const cookie = encodeSession({
         AgentConnectIdToken: 'idToken',
       });
 
@@ -44,7 +44,7 @@ describe('La ressource deconnexion OIDC', () => {
     });
 
     it('dépose un cookie avec le state', async () => {
-      let cookie = encodeSession({
+      const cookie = encodeSession({
         AgentConnectIdToken: 'idToken',
       });
 

@@ -21,7 +21,7 @@ import {randomUUID} from "node:crypto";
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {
     let serveur: Express;
-    let fournisseurChemin = fauxFournisseurDeChemin;
+    const fournisseurChemin = fauxFournisseurDeChemin;
     let adaptateurOIDC: AdaptateurOIDC;
     let adaptateurJWT: AdaptateurJWT;
     let entrepotUtilisateur: EntrepotUtilisateurMemoire;

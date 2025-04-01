@@ -128,7 +128,7 @@ describe('La ressource qui gère un résultat de test', () => {
         .send();
 
       busEvenements.aRecuUnEvenement(ProprieteTestRevendiquee);
-      let evenement = busEvenements.recupereEvenement(ProprieteTestRevendiquee);
+      const evenement = busEvenements.recupereEvenement(ProprieteTestRevendiquee);
       assert.equal(evenement!.emailUtilisateur, 'jeanne.dupont@mail.com');
       assert.equal(evenement!.idResultatTest, "r1");
     });
