@@ -4,6 +4,7 @@ import { profilStore } from './stores/profil.store';
 
 const idItemCyber = (
   document.getElementById(`script-bouton-favori`)!.attributes as {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
   }
 )['id-item-cyber'].value;

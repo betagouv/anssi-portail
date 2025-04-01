@@ -33,12 +33,13 @@
   </figure>
   <div class="contenu">
     <div class="en-tete">
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
       <div class="nom-item">{@html itemCyber.nom}</div>
       {#if avecBoutonFavori}
         <BoutonFavori idItemCyber={itemCyber.id} />
       {/if}
     </div>
-
+    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
     <span class="description">{@html tronque(itemCyber.description)}</span>
     <div class="labels">
       {#each itemCyber.sources as source}<span>{source}</span>{/each}

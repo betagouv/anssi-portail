@@ -11,7 +11,7 @@
   const cheminRelatif = window.location.pathname;
   let ouvert = false;
 
-  let menuBurger: Record<string, any>;
+  let menuBurger: Record<string, unknown>;
   onMount(() => {
     const surClic = () => {
       ouvert = true;
@@ -19,7 +19,7 @@
 
     menuBurger = mount(MenuBurger, {
       target: document.getElementById('menu-burger-mobile')!,
-      props: { surClic }
+      props: { surClic },
     });
   });
 
@@ -32,26 +32,52 @@
 
 {#if ouvert}
   <nav class="menu-mobile" transition:fly={{ x: 300 }}>
-    <button class="fermer" on:click={() => ouvert = false}>Fermer</button>
-    <ZoneIdentification estMobile/>
+    <button class="fermer" on:click={() => (ouvert = false)}>Fermer</button>
+    <ZoneIdentification estMobile />
     <div class="choix">
       {#if !estConnecte}
-        <LienNavigation href="/" label="Accueil"/>
+        <LienNavigation href="/" label="Accueil" />
       {/if}
-      <LienNavigationMobile href="/catalogue/" label={estConnecte ? 'Le catalogue des services' : 'Explorer le catalogue complet'}/>
+      <LienNavigationMobile
+        href="/catalogue/"
+        label={estConnecte
+          ? 'Le catalogue des services'
+          : 'Explorer le catalogue complet'}
+      />
       <LienNavigationMobile href="/nis2/" label="Vous accompagner avec NIS2" />
-      <details class:actif={ cheminRelatif === '/parcours-debuter/' ||  cheminRelatif === '/parcours-approfondir/'}>
-        <summary>{estConnecte ? 'Notre sélection' : 'Découvrir notre sélection'}</summary>
+      <details
+        class:actif={cheminRelatif === '/parcours-debuter/' ||
+          cheminRelatif === '/parcours-approfondir/'}
+      >
+        <summary
+          >{estConnecte
+            ? 'Notre sélection'
+            : 'Découvrir notre sélection'}</summary
+        >
         <div class="choix">
-          <LienNavigationMobile href="/parcours-debuter/" label="Les services pour se lancer" dansMenuDeroulant />
-          <LienNavigationMobile href="/parcours-approfondir/" label="Les services pour approfondir" dansMenuDeroulant />
+          <LienNavigationMobile
+            href="/parcours-debuter/"
+            label="Les services pour se lancer"
+            dansMenuDeroulant
+          />
+          <LienNavigationMobile
+            href="/parcours-approfondir/"
+            label="Les services pour approfondir"
+            dansMenuDeroulant
+          />
         </div>
       </details>
-      <LienNavigationMobile href={estConnecte ? '/ma-maturite' : '/test-maturite/'} label={estConnecte ? 'Maturité cyber' : 'Tester votre maturité cyber'} />
+      <LienNavigationMobile
+        href={estConnecte ? '/ma-maturite' : '/test-maturite/'}
+        label={estConnecte ? 'Maturité cyber' : 'Tester votre maturité cyber'}
+      />
       {#if estConnecte}
-        <LienNavigationMobile href="/contacts/" label='Contacts utiles' />
-        <LienNavigationMobile href="/favoris/" label='Favoris' />
-        <LienNavigationMobile href="/services-anssi/" label='Services ANSSI utilisés' />
+        <LienNavigationMobile href="/contacts/" label="Contacts utiles" />
+        <LienNavigationMobile href="/favoris/" label="Favoris" />
+        <LienNavigationMobile
+          href="/services-anssi/"
+          label="Services ANSSI utilisés"
+        />
       {/if}
     </div>
   </nav>
