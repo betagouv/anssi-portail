@@ -1,7 +1,7 @@
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import { creeServeur } from '../../src/api/msc';
-import { configurationDeTestDuServeur, fauxAdaptateurJWT } from './fauxObjets';
+import { configurationDeTestDuServeur } from './fauxObjets';
 import request from 'supertest';
 import assert from 'node:assert';
 import {
@@ -9,7 +9,6 @@ import {
   MockBusEvenement,
 } from '../bus/busPourLesTests';
 import { TestRealise } from '../../src/bus/testRealise';
-import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { encodeSession } from './cookie';
 import { ProprieteTestRevendiquee } from '../../src/bus/proprieteTestRevendiquee';
@@ -91,7 +90,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       let cookie: string;
 
       beforeEach(() => {
-        cookie = encodeSession({ email: 'jeanne.dupont@mail.com' });
+        cookie = encodeSession({ email: 'jeanne.dupont@mail.com', token: '' });
       });
 
       it("sauvegarde le résultat de test avec l'email de l'utilisateur", async () => {
@@ -148,7 +147,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         assert.match(resultatSauvegarde!.id, REGEX_UUID);
         assert.deepEqual(reponse.body, { id: resultatSauvegarde!.id });
       });
-      
+
       it("publie un événement sur le bus qui indique que l'utilisateur est relié au test", async () => {
         const reponse = await request(serveur)
           .post('/api/resultats-test')
@@ -156,7 +155,9 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           .send(donneesCorrectes);
 
         busEvenements.aRecuUnEvenement(ProprieteTestRevendiquee);
-        const evenement = busEvenements.recupereEvenement(ProprieteTestRevendiquee);
+        const evenement = busEvenements.recupereEvenement(
+          ProprieteTestRevendiquee
+        );
         assert.equal(evenement!.emailUtilisateur, 'jeanne.dupont@mail.com');
         assert.equal(evenement!.idResultatTest, reponse.body.id);
       });
@@ -183,7 +184,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
     describe('concernant la validation des données', () => {
       const requeteAvecDonneeIncorrecte = async (
-        donnees: Record<string, any>
+        donnees: Record<string, unknown>
       ) => {
         const reponse = await request(serveur)
           .post('/api/resultats-test')

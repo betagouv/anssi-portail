@@ -2,9 +2,8 @@ import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import request from 'supertest';
 import assert from 'node:assert';
-import { ConfigurationServeur } from '../../../src/api/configurationServeur';
 import { creeServeur } from '../../../src/api/msc';
-import { encodeSession, enObjet } from '../cookie';
+import { AgentConnectInfo, encodeSession, enObjet } from '../cookie';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurOIDC,
@@ -54,7 +53,10 @@ describe('La ressource deconnexion OIDC', () => {
       const headerCookie = reponse.headers['set-cookie'];
       const cookieSession = enObjet(headerCookie[0]);
 
-      assert.equal(cookieSession.AgentConnectInfo.state, 'un faux state');
+      assert.equal(
+        (cookieSession.AgentConnectInfo as AgentConnectInfo).state,
+        'un faux state'
+      );
     });
   });
 });

@@ -11,7 +11,7 @@ describe("L'abonnement qui consigne la réalisation d'un test dans le journal", 
   it('consigne un évènement de NouveauTestRealise', () => {
     let evenementRecu;
     const adaptateurJournal: AdaptateurJournal = {
-      consigneEvenement: async (donneesEvenement: any) => {
+      consigneEvenement: async (donneesEvenement: unknown) => {
         evenementRecu = donneesEvenement;
       },
     };

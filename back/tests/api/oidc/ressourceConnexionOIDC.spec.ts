@@ -2,9 +2,8 @@ import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import request from 'supertest';
 import assert from 'node:assert';
-import { ConfigurationServeur } from '../../../src/api/configurationServeur';
 import { creeServeur } from '../../../src/api/msc';
-import { enObjet } from '../cookie';
+import { AgentConnectInfo, enObjet } from '../cookie';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurOIDC,
@@ -39,7 +38,8 @@ describe('La ressource connexion OIDC', () => {
       const cookieHeader = reponse.headers['set-cookie'];
       assert.notEqual(cookieHeader, undefined);
       const cookie = enObjet(cookieHeader[0]);
-      const { state, nonce } = cookie.AgentConnectInfo;
+
+      const { state, nonce } = cookie.AgentConnectInfo as AgentConnectInfo;
       assert.equal(state, 'un faux state');
       assert.equal(nonce, 'un faux nonce');
     });

@@ -28,7 +28,7 @@ export const fabriqueMiddleware = ({
 }): Middleware => {
   const aseptise =
     (...nomsParametres: string[]) =>
-    async (requete: any, _reponse: any, suite: any) => {
+    async (requete: Request, _reponse: Response, suite: NextFunction) => {
       const aseptisations = nomsParametres.map((p) =>
         check(p).trim().escape().run(requete)
       );
@@ -36,14 +36,15 @@ export const fabriqueMiddleware = ({
       suite();
     };
 
-  const valide = () => async (requete: any, reponse: any, suite: any) => {
-    const erreurs = validationResult(requete);
-    if (!erreurs.isEmpty()) {
-      reponse.status(400).json({ erreur: erreurs.array()[0].msg });
-      return;
-    }
-    suite();
-  };
+  const valide =
+    () => async (requete: Request, reponse: Response, suite: NextFunction) => {
+      const erreurs = validationResult(requete);
+      if (!erreurs.isEmpty()) {
+        reponse.status(400).json({ erreur: erreurs.array()[0].msg });
+        return;
+      }
+      suite();
+    };
 
   const interdisLaMiseEnCache = async (
     _requete: Request,
@@ -73,7 +74,7 @@ export const fabriqueMiddleware = ({
       const { email } = adaptateurJWT.decode(requete.session.token);
       requete.emailUtilisateurCourant = email;
       suite();
-    } catch (e) {
+    } catch {
       reponse.sendStatus(401);
     }
   };
@@ -91,7 +92,7 @@ export const fabriqueMiddleware = ({
     try {
       adaptateurJWT.decode(requete.session.token);
       suite();
-    } catch (e) {
+    } catch {
       reponse.redirect('/connexion');
     }
   };

@@ -149,10 +149,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
 
-  app.use(
-    '/oidc/apres-deconnexion',
-    ressourceApresDeconnexionOIDC(configurationServeur)
-  );
+  app.use('/oidc/apres-deconnexion', ressourceApresDeconnexionOIDC());
 
   app.use('/api/contacts', ressourceContacts(configurationServeur));
 

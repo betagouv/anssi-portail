@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { adaptateurProfilAnssiVide } from './adaptateurProfilAnssiVide';
 
-
 const CONFIGURATION_AUTHENTIFICATION = {
   headers: {
     Authorization: `Bearer ${process.env.PROFIL_ANSSI_JETON_API}`,
@@ -11,7 +10,7 @@ const CONFIGURATION_AUTHENTIFICATION = {
 type Organisation = {
   nom: string;
   siret: string;
-  departement: string;
+  departement: string | null;
 };
 
 export type ProfilAnssi = {
@@ -59,8 +58,8 @@ const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
         CONFIGURATION_AUTHENTIFICATION
       );
       return reponse.data;
-    } catch (e: any) {
-      if (e.response?.status !== 404) {
+    } catch (e) {
+      if (axios.isAxiosError(e) && e.response?.status !== 404) {
         console.error({
           'Erreur renvoyée par API MonProfilAnssi': e.response?.data,
           'Statut renvoyé par API MonProfilAnssi': e.response?.status,

@@ -2,9 +2,7 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { Express } from 'express';
 import { creeServeur } from '../../src/api/msc';
-import {
-  configurationDeTestDuServeur,
-} from './fauxObjets';
+import { configurationDeTestDuServeur } from './fauxObjets';
 import {
   AdaptateurRechercheEntreprise,
   ResultatRechercheEntreprise,
@@ -18,7 +16,7 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
     serveur = creeServeur(configurationDeTestDuServeur);
   });
 
-  it('aseptise les paramètres de la requête', async (done) => {
+  it('aseptise les paramètres de la requête', async () => {
     let termeCherche;
     let departementCherche;
     const unAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
@@ -58,7 +56,7 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
     assert.equal(reponse.status, 400);
   });
 
-  it("recherche les organisations correspondantes grâce au service d'annuaire", async (done) => {
+  it("recherche les organisations correspondantes grâce au service d'annuaire", async () => {
     let adaptateurAppele = false;
     let termeCherche;
     let departementCherche;

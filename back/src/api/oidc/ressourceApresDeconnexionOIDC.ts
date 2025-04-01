@@ -1,9 +1,6 @@
 import { Router } from 'express';
-import { ConfigurationServeur } from '../configurationServeur';
 
-export const ressourceApresDeconnexionOIDC = (
-  configurationServeur: ConfigurationServeur
-) => {
+export const ressourceApresDeconnexionOIDC = () => {
   const routes = Router();
 
   routes.get('/', async (requete, reponse) => {

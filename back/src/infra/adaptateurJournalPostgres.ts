@@ -1,4 +1,4 @@
-import {AdaptateurJournal} from "./adaptateurJournal";
+import { AdaptateurJournal, DonneesEvenement } from './adaptateurJournal';
 import Knex from "knex";
 import {v4 as uuidv4} from "uuid";
 
@@ -11,7 +11,7 @@ export const adaptateurJournalPostgres = (): AdaptateurJournal => {
   const knex = Knex(config);
 
   return {
-    async consigneEvenement(donneesEvenement: any): Promise<void> {
+    async consigneEvenement(donneesEvenement: DonneesEvenement): Promise<void> {
       const { type, donnees, date } = donneesEvenement;
 
       return knex('journal_msc.evenements').insert({

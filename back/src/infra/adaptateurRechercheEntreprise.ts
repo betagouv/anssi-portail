@@ -1,15 +1,17 @@
-import axios, {AxiosError} from "axios";
+import axios, { AxiosError } from 'axios';
 
 export interface AdaptateurRechercheEntreprise {
-  rechercheOrganisations(terme: string,
-                         departement: string | null): Promise<ResultatRechercheEntreprise[]>;
+  rechercheOrganisations(
+    terme: string,
+    departement: string | null
+  ): Promise<ResultatRechercheEntreprise[]>;
 }
 
 export type ResultatRechercheEntreprise = {
-  nom: string,
-  departement: string,
-  siret: string,
-}
+  nom: string;
+  departement: string | null;
+  siret: string;
+};
 
 const extraisDepartement = (commune: string | undefined) => {
   if (!commune) {
@@ -21,9 +23,14 @@ const extraisDepartement = (commune: string | undefined) => {
     : commune.slice(0, 2);
 };
 
-const extraisInfosEtablissement = (terme: string, resultat: any): ResultatRechercheEntreprise => {
+const extraisInfosEtablissement = (
+  terme: string,
+  resultat: ResultatSirene
+): ResultatRechercheEntreprise => {
   let nom = resultat.nom_complet;
-  let {departement, siret} = resultat.siege;
+  const { departement, siret } = resultat.siege;
+  let departementRetour: string | null = departement;
+  let siretRetour = siret;
 
   const estUneRechercheParSiret = terme.match('^[0-9 ]+$');
 
@@ -38,24 +45,37 @@ const extraisInfosEtablissement = (terme: string, resultat: any): ResultatRecher
     if (aUneListeEnseigne) {
       nom = resultat.matching_etablissements[0].liste_enseignes[0];
     }
-    departement = extraisDepartement(
+    departementRetour = extraisDepartement(
       resultat.matching_etablissements[0].commune
     );
-    siret = resultat.matching_etablissements[0].siret;
+    siretRetour = resultat.matching_etablissements[0].siret;
   }
 
   return {
     nom,
-    departement,
-    siret,
+    departement: departementRetour,
+    siret: siretRetour,
   };
 };
 
-export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
+// https://recherche-entreprises.api.gouv.fr/docs/
+type ResultatSirene = {
+  nom_complet: string;
+  siege: {
+    departement: string;
+    siret: string;
+  };
+  matching_etablissements: {
+    liste_enseignes: string[];
+    commune: string;
+    siret: string;
+  }[];
+};
 
+export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
   async rechercheOrganisations(
     terme: string,
-    departement: string | null,
+    departement: string | null
   ): Promise<ResultatRechercheEntreprise[]> {
     try {
       const reponse = await axios.get(
@@ -63,7 +83,7 @@ export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
         {
           params: {
             q: terme,
-            ...(departement && {departement}),
+            ...(departement && { departement }),
             per_page: 25,
             page: 1,
             limite_matching_etablissements: 1,
@@ -74,8 +94,8 @@ export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
       );
 
       return reponse.data.results
-        .filter((r: any) => r.siege.departement !== null)
-        .map((r: any) => extraisInfosEtablissement(terme, r));
+        .filter((r: ResultatSirene) => r.siege.departement !== null)
+        .map((r: ResultatSirene) => extraisInfosEtablissement(terme, r));
     } catch (e) {
       if (e instanceof AxiosError) {
         console.error(e, {
@@ -88,5 +108,5 @@ export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
 
       return [];
     }
-  }
+  },
 };

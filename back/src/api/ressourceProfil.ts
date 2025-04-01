@@ -9,11 +9,13 @@ const ressourceProfil = ({
   routeur.get('/', async (requete: Request, reponse: Response) => {
     try {
       adaptateurJWT.decode(requete.session?.token);
-    } catch (e) {
+    } catch {
       reponse.clearCookie('session');
     } finally {
       const email = requete.session?.email;
-      const utilisateurConnecte = email ? await entrepotUtilisateur.parEmail(email) : undefined;
+      const utilisateurConnecte = email
+        ? await entrepotUtilisateur.parEmail(email)
+        : undefined;
       reponse.send({
         email,
         nom: utilisateurConnecte?.nom,

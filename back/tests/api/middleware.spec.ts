@@ -101,11 +101,11 @@ describe('Le middleware', () => {
         type: 'field',
         message: "un message d'erreur",
         value: '',
-        // @ts-ignore
+        // @ts-expect-error (on n'a pas besoin de la valeur meta dans le cas de notre test)
         meta: {},
       });
 
-      // @ts-ignore
+      // @ts-expect-error (on sait que express-validator#contexts existe)
       requete['express-validator#contexts'] = [contexteAvecErreur];
 
       await middleware.valide()(requete, reponse, () => {});
@@ -178,7 +178,7 @@ describe('Le middleware', () => {
   describe('sur demande de validation du token JWT en cas de navigation', () => {
     it("redirige vers la page de connexion si le token n'est pas présent", async () => {
       let urlRecu;
-      // @ts-ignore
+      // @ts-expect-error (on sait que redirect va être appelé avec une URL et pas un code HTTP dans ce cas)
       reponse.redirect = (url: string) => {
         urlRecu = url;
         return;
@@ -198,7 +198,7 @@ describe('Le middleware', () => {
       };
 
       let urlRecu;
-      // @ts-ignore
+      // @ts-expect-error (on sait que redirect va être appelé avec une URL et pas un code HTTP dans ce cas)
       reponse.redirect = (url: string) => {
         urlRecu = url;
         return;
@@ -222,7 +222,9 @@ describe('Le middleware', () => {
 
       await middleware.ajouteMethodeNonce(requete, reponse, () => {
         assert.notEqual(reponse.sendFileAvecNonce, undefined);
-        reponse.sendFileAvecNonce(join(process.cwd(), 'tests', 'ressources', 'factice.html'));
+        reponse.sendFileAvecNonce(
+          join(process.cwd(), 'tests', 'ressources', 'factice.html')
+        );
       });
 
       assert.equal(true, aAppeleSend);

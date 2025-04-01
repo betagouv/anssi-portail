@@ -8,10 +8,7 @@ import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 import { adaptateurGestionVide } from '../../src/infra/adaptateurGestionErreurVide';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
-import {
-  AdaptateurProfilAnssi,
-  ProfilAnssi,
-} from '../../src/infra/adaptateurProfilAnssi';
+import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
 
 export const fauxFournisseurDeChemin = {
@@ -40,7 +37,7 @@ export const fauxAdaptateurOIDC: AdaptateurOIDC = {
 };
 
 export const fauxAdaptateurJWT: AdaptateurJWT = {
-  genereToken: (_: Record<string, any>) => '',
+  genereToken: (_: Record<string, unknown>) => '',
   decode: (_: string) => ({}),
 };
 
@@ -50,19 +47,32 @@ export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
   };
 
 export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
-  metsAJour: async (_profilAnssi: ProfilAnssi) => undefined,
-  recupere: async (_email: string) => undefined,
+  metsAJour: async () => undefined,
+  recupere: async () => undefined,
 };
 
 export const fauxMiddleware: Middleware = {
-  ajouteMethodeNonce: fabriqueMiddleware({adaptateurJWT:fauxAdaptateurJWT}).ajouteMethodeNonce,
-  positionneLesCsp:()=> async (_, __, suite) => { suite(); },
-  aseptise: () => async (_, __, suite) => { suite(); },
-  valide: () => async (_, __, suite) => { suite(); },
-  interdisLaMiseEnCache: async (_, __, suite) => { suite(); },
-  verifieJWT: async (_, __, suite) => { suite(); },
-  verifieJWTNavigation: async (_, __, suite) => { suite(); }
-}
+  ajouteMethodeNonce: fabriqueMiddleware({ adaptateurJWT: fauxAdaptateurJWT })
+    .ajouteMethodeNonce,
+  positionneLesCsp: () => async (_, __, suite) => {
+    suite();
+  },
+  aseptise: () => async (_, __, suite) => {
+    suite();
+  },
+  valide: () => async (_, __, suite) => {
+    suite();
+  },
+  interdisLaMiseEnCache: async (_, __, suite) => {
+    suite();
+  },
+  verifieJWT: async (_, __, suite) => {
+    suite();
+  },
+  verifieJWTNavigation: async (_, __, suite) => {
+    suite();
+  },
+};
 
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   fournisseurChemin: fauxFournisseurDeChemin,

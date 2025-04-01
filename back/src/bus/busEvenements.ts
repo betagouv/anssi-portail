@@ -2,13 +2,15 @@ export type GestionnaireDEvenement<T extends EvenementDuBus> = (
   evenement: T
 ) => Promise<void>;
 
-export interface EvenementDuBus {}
+export type EvenementDuBus = object;
 
 export type ClasseDEvenementDeBus<T extends EvenementDuBus> = new (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ...args: any[]
 ) => T;
 
 export class BusEvenements {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   gestionnaires: Record<string, GestionnaireDEvenement<any>[]> = {};
 
   abonne<T extends EvenementDuBus>(
