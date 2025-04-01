@@ -96,7 +96,7 @@ describe('Le middleware', () => {
   describe('sur demande de validation', () => {
     it('jette une 400 si une erreur de validation est présente', async () => {
       requete.body.param = 'hello';
-      let contexteAvecErreur = new Context(['unChamp'], [], [], false, false);
+      const contexteAvecErreur = new Context(['unChamp'], [], [], false, false);
       contexteAvecErreur.addError({
         type: 'field',
         message: "un message d'erreur",
@@ -116,8 +116,8 @@ describe('Le middleware', () => {
 
   describe('sur demande de validation du token JWT', () => {
     it("jette une erreur si le token n'est pas présent", async () => {
-      let statutOriginal = reponse.status;
-      let envOriginal = process.env;
+      const statutOriginal = reponse.status;
+      const envOriginal = process.env;
 
       process.env.SECRET_JWT = 'monSecretJWT';
       const token = adaptateurJWT.genereToken({
@@ -139,7 +139,7 @@ describe('Le middleware', () => {
     });
 
     it('jette une erreur si le token ne peut pas être décodé', async () => {
-      let statutOriginal = reponse.status;
+      const statutOriginal = reponse.status;
 
       adaptateurJWT.decode = () => {
         throw new JsonWebTokenError('Erreur de token');

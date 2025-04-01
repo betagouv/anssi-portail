@@ -11,7 +11,7 @@ import {jeanneDupont} from "./objetsPretsALEmploi";
 
 describe('La ressource Profil', () => {
   let serveur: Express;
-  let entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+  const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
   beforeEach(() => {
     entrepotUtilisateur.ajoute(jeanneDupont)
@@ -30,7 +30,7 @@ describe('La ressource Profil', () => {
 
     it("renvoie les informations de l'utilisateur", async () => {
       const jeanneEntreposee = await entrepotUtilisateur.parEmail('jeanne.dupont@user.com');
-      let cookie = encodeSession({
+      const cookie = encodeSession({
         email: 'jeanne.dupont@user.com',
       });
 
@@ -46,7 +46,7 @@ describe('La ressource Profil', () => {
     });
 
     it('supprime la session si le token JWT est invalide', async () => {
-      let cookieSession = encodeSession({ token: 'token-session' });
+      const cookieSession = encodeSession({ token: 'token-session' });
 
       serveur = creeServeur({
         ...configurationDeTestDuServeur,

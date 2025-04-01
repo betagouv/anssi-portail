@@ -39,7 +39,7 @@ describe('La ressource des favoris partagés', () => {
 
   describe('sur requête GET', () => {
     it('répond 200', async () => {
-      let reponse = await request(serveur).get(
+      const reponse = await request(serveur).get(
         `/api/favoris-partages/${idListeFavoris}`
       );
 
@@ -47,7 +47,7 @@ describe('La ressource des favoris partagés', () => {
     });
 
     it("retourne les favoris de l'utilisateur qui a partagé sa liste", async () => {
-      let reponse = await request(serveur).get(
+      const reponse = await request(serveur).get(
         `/api/favoris-partages/${idListeFavoris}`
       );
 
@@ -59,7 +59,7 @@ describe('La ressource des favoris partagés', () => {
     });
 
     it('répond 404 si aucun utilisateur ne possède cet id de liste de favoris', async () => {
-      let reponse = await request(serveur).get(
+      const reponse = await request(serveur).get(
         `/api/favoris-partages/${randomUUID()}`
       );
 
@@ -67,7 +67,7 @@ describe('La ressource des favoris partagés', () => {
     });
 
     it("retourne 400 si l'id de la liste de favoris n'est pas un uuid", async () => {
-      let reponse = await request(serveur).get(
+      const reponse = await request(serveur).get(
         `/api/favoris-partages/pasunuuid`
       );
 

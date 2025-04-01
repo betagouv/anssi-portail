@@ -50,7 +50,7 @@ describe('La ressource de la page connexion', () => {
     });
     
     it("supprime la session de l'utilisateur", async () => {
-      let cookieSession = encodeSession({ token: 'token-session' });
+      const cookieSession = encodeSession({ token: 'token-session' });
 
       const reponse = await request(serveur)
         .get('/connexion')

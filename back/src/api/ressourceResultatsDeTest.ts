@@ -68,8 +68,8 @@ const ressourceResultatsDeTest = ({
     async (requete: Request, reponse: Response) => {
       const { tailleOrganisation, region, secteur, reponses } = requete.body;
 
-      let emailUtilisateur = requete.session?.email;
-      let resultatTest = new ResultatTestMaturite({
+      const emailUtilisateur = requete.session?.email;
+      const resultatTest = new ResultatTestMaturite({
         tailleOrganisation,
         region,
         secteur,

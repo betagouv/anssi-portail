@@ -73,7 +73,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         });
 
       busEvenements.aRecuUnEvenement(TestRealise);
-      let evenement = busEvenements.recupereEvenement(TestRealise);
+      const evenement = busEvenements.recupereEvenement(TestRealise);
       assert.equal(evenement!.region, 'FR-NOR');
       assert.equal(evenement!.secteur, 'J');
       assert.equal(evenement!.tailleOrganisation, '51');
@@ -136,7 +136,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       });
 
       it("retourne l'identifiant du résultat de test", async () => {
-        let reponse = await request(serveur)
+        const reponse = await request(serveur)
           .post('/api/resultats-test')
           .set('Cookie', [cookie])
           .send(donneesCorrectes);
@@ -150,13 +150,13 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       });
       
       it("publie un événement sur le bus qui indique que l'utilisateur est relié au test", async () => {
-        let reponse = await request(serveur)
+        const reponse = await request(serveur)
           .post('/api/resultats-test')
           .set('Cookie', [cookie])
           .send(donneesCorrectes);
 
         busEvenements.aRecuUnEvenement(ProprieteTestRevendiquee);
-        let evenement = busEvenements.recupereEvenement(ProprieteTestRevendiquee);
+        const evenement = busEvenements.recupereEvenement(ProprieteTestRevendiquee);
         assert.equal(evenement!.emailUtilisateur, 'jeanne.dupont@mail.com');
         assert.equal(evenement!.idResultatTest, reponse.body.id);
       });

@@ -4,7 +4,7 @@ import { ConfigurationServeur } from '../configurationServeur';
 const ressourceApresAuthentificationOIDC = (
   {adaptateurOIDC, adaptateurJWT, entrepotUtilisateur, fournisseurChemin}: ConfigurationServeur
 ) => {
-  let routeur = Router();
+  const routeur = Router();
   routeur.get('/', async (requete, reponse) => {
     if (!requete.cookies.AgentConnectInfo) {
       reponse.sendStatus(401);
@@ -12,10 +12,10 @@ const ressourceApresAuthentificationOIDC = (
     }
 
     try {
-      let { accessToken, idToken } = await adaptateurOIDC.recupereJeton(
+      const { accessToken, idToken } = await adaptateurOIDC.recupereJeton(
         requete
       );
-      let informationsUtilisateur =
+      const informationsUtilisateur =
         await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
       const { email } = informationsUtilisateur;
 

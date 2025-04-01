@@ -17,7 +17,7 @@ const ressourceInformationsCreationCompte = ({
 
       let organisation: ResultatRechercheEntreprise | undefined;
 
-      let profilAnssi = await adaptateurProfilAnssi.recupere(
+      const profilAnssi = await adaptateurProfilAnssi.recupere(
         informationsUtilisateur.email
       );
 

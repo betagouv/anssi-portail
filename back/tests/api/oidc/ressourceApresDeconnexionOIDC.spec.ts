@@ -15,7 +15,7 @@ describe('La ressource apres deconnexion OIDC', () => {
     });
 
     it("redirige vers la page d'accueil", async () => {
-      let cookie = encodeURIComponent(
+      const cookie = encodeURIComponent(
         'j:' + JSON.stringify({ state: 'le-bon-state' })
       );
 
@@ -28,7 +28,7 @@ describe('La ressource apres deconnexion OIDC', () => {
     });
 
     it("ne deconnecte l'utilisateur si le state ne correspond pas", async () => {
-      let cookie = encodeURIComponent(
+      const cookie = encodeURIComponent(
         'j:' + JSON.stringify({ state: 'le-bon-state' })
       );
 
@@ -40,7 +40,7 @@ describe('La ressource apres deconnexion OIDC', () => {
     });
 
     it('supprime le cookie contenant le state', async () => {
-      let cookie = encodeURIComponent(
+      const cookie = encodeURIComponent(
         `j:${JSON.stringify({ state: 'le-bon-state' })}`
       );
 
@@ -56,10 +56,10 @@ describe('La ressource apres deconnexion OIDC', () => {
     });
 
     it('supprime le cookie contenant le session', async () => {
-      let cookieAgentConnect = encodeURIComponent(
+      const cookieAgentConnect = encodeURIComponent(
         `j:${JSON.stringify({ state: 'le-bon-state' })}`
       );
-      let cookieSession = encodeSession({ token: 'token-session' });
+      const cookieSession = encodeSession({ token: 'token-session' });
 
       const reponse = await request(serveur)
         .get('/oidc/apres-deconnexion?state=le-bon-state')

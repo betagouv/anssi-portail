@@ -63,7 +63,7 @@ describe('La ressource des services et ressources favoris', () => {
         )
         .set('Cookie', [cookieJeanneDupont]);
 
-      let favoris = await entrepotFavori.tousCeuxDeUtilisateur(
+      const favoris = await entrepotFavori.tousCeuxDeUtilisateur(
         'jeanne.dupont@mail.com'
       );
       assert.equal(favoris.length, 0);
@@ -79,7 +79,7 @@ describe('La ressource des services et ressources favoris', () => {
         .delete(`/api/favoris/unId<truc`)
         .set('Cookie', [cookieJeanneDupont]);
 
-      let favoris = await entrepotFavori.tousCeuxDeUtilisateur(
+      const favoris = await entrepotFavori.tousCeuxDeUtilisateur(
         'jeanne.dupont@mail.com'
       );
       assert.equal(favoris.length, 0);

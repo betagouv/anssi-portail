@@ -66,7 +66,7 @@ describe('La ressource des services et ressources favoris', () => {
         .set('Cookie', [cookieJeanneDupont])
         .send({ idItemCyber: 'unId' });
 
-      let ceuxDeUtilisateur = await entrepotFavori.tousCeuxDeUtilisateur(
+      const ceuxDeUtilisateur = await entrepotFavori.tousCeuxDeUtilisateur(
         'jeanne.dupont@mail.com'
       );
 
@@ -85,7 +85,7 @@ describe('La ressource des services et ressources favoris', () => {
         .set('Cookie', [cookieJeanneDupont])
         .send({ idItemCyber: '/services/mon-service-cyber  ' });
 
-      let ceuxDeUtilisateur = await entrepotFavori.tousCeuxDeUtilisateur(
+      const ceuxDeUtilisateur = await entrepotFavori.tousCeuxDeUtilisateur(
         'jeanne.dupont@mail.com'
       );
 

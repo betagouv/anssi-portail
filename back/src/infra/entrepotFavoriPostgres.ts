@@ -20,7 +20,7 @@ export class EntrepotFavoriPostgres implements EntrepotFavori {
   }
 
   async tousCeuxDeUtilisateur(emailUtilisateur: string): Promise<Favori[]> {
-    let favoris = await this.knex('favoris')
+    const favoris = await this.knex('favoris')
       .where('email_utilisateur', emailUtilisateur)
       .orderBy('date_ajout', 'desc');
     return favoris.map(

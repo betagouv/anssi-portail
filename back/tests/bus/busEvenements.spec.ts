@@ -1,4 +1,4 @@
-// eslint-disable-next-line max-classes-per-file
+ 
 
 import { describe, it } from 'node:test';
 import { BusEvenements, EvenementDuBus } from '../../src/bus/busEvenements';
