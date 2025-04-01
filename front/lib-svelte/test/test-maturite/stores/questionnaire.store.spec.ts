@@ -1,26 +1,26 @@
-import { beforeEach, describe, expect, it } from "vitest";
-import { get } from "svelte/store";
+import { beforeEach, describe, expect, it } from 'vitest';
+import { get } from 'svelte/store';
 import {
   questionnaireStore,
   resultatsQuestionnaire,
-} from "../../../src/test-maturite/stores/questionnaire.store";
+} from '../../../src/test-maturite/stores/questionnaire.store';
 
-describe("Le store du questionnaire", () => {
+describe('Le store du questionnaire', () => {
   beforeEach(() => {
     questionnaireStore.initialise();
   });
 
-  it("démarre à la première question", () => {
+  it('démarre à la première question', () => {
     const { questionCourante } = get(questionnaireStore);
     expect(questionCourante).toBe(0);
   });
 
-  it("ne connaît aucune réponse", () => {
+  it('ne connaît aucune réponse', () => {
     const { toutesLesReponses } = get(questionnaireStore);
     expect(toutesLesReponses).toEqual([null, null, null, null, null, null]);
   });
 
-  it("peut répondre à la question courante", () => {
+  it('peut répondre à la question courante', () => {
     questionnaireStore.reponds(4);
 
     const { toutesLesReponses, questionCourante } = get(questionnaireStore);
@@ -28,7 +28,7 @@ describe("Le store du questionnaire", () => {
     expect(questionCourante).toBe(1);
   });
 
-  it("peut revenir en arrière sur la question précédente", () => {
+  it('peut revenir en arrière sur la question précédente', () => {
     questionnaireStore.reponds(10);
 
     questionnaireStore.reviensEnArriere();
@@ -38,7 +38,7 @@ describe("Le store du questionnaire", () => {
     expect(toutesLesReponses).toEqual([10, null, null, null, null, null]);
   });
 
-  it("scénario : peut répondre à toutes les questions puis revenir au milieu pour modifier une réponse", () => {
+  it('scénario : peut répondre à toutes les questions puis revenir au milieu pour modifier une réponse', () => {
     questionnaireStore.reponds(10);
     questionnaireStore.reponds(20);
     questionnaireStore.reponds(30);
@@ -54,8 +54,8 @@ describe("Le store du questionnaire", () => {
     expect(questionCourante).toBe(4);
     expect(toutesLesReponses).toEqual([10, 20, 30, 41, 50, 60]);
   });
-resultatsQuestionnaire
-  it("peut donner les résultats avec les identifiants", () => {
+
+  it('peut donner les résultats avec les identifiants', () => {
     questionnaireStore.reponds(4);
     questionnaireStore.reponds(2);
     questionnaireStore.reponds(0);
@@ -63,12 +63,12 @@ resultatsQuestionnaire
     const resultats = get(resultatsQuestionnaire);
 
     expect(resultats).toStrictEqual({
-      "prise-en-compte-risque": 5,
+      'prise-en-compte-risque': 5,
       posture: 3,
       pilotage: 1,
-      "ressources-humaines": null,
+      'ressources-humaines': null,
       budget: null,
-      "adoption-solutions": null,
+      'adoption-solutions': null,
     });
   });
 });

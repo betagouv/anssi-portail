@@ -21,7 +21,7 @@
 
 <select bind:value={regionSelectionnee}>
   <option disabled selected value="">Sélectionner une option</option>
-  {#each regions as uneRegion}
+  {#each regions as uneRegion (uneRegion.codeIso)}
     <option value={uneRegion.codeIso}>{uneRegion.nom}</option>
   {/each}
 </select>

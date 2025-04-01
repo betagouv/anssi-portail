@@ -33,7 +33,6 @@
   const construisLabel = (organisation: Organisation) => {
     const siret = organisation.siret;
 
-    /* eslint-disable no-irregular-whitespace */
     const siretFormatte =
       siret &&
       `${siret.substring(0, 3)} ${siret.substring(3, 6)} ${siret.substring(
@@ -100,7 +99,7 @@
     autocomplete="off"
   />
   <div class="liste-suggestions" class:visible={suggestionsVisibles}>
-    {#each suggestions as suggestion}
+    {#each suggestions as suggestion (suggestion.siret)}
       <div
         class="option"
         role="button"
@@ -114,6 +113,7 @@
           }
         }}
       >
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         <div>{@html suggestion.label}</div>
       </div>
     {/each}

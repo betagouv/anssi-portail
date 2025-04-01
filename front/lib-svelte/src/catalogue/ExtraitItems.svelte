@@ -1,10 +1,10 @@
 <script lang="ts">
-  import CarteItem from "./CarteItem.svelte";
-  import { catalogueFiltre } from "./stores/catalogueFiltre.store";
-  import FiltreBesoin from "./FiltreBesoin.svelte";
-  import { BesoinCyber } from "./Catalogue.types";
-  import { rechercheParBesoin } from "./stores/rechercheParBesoin.store";
-  import { limitationRecherche } from "./stores/limitationRecherche";
+  import CarteItem from './CarteItem.svelte';
+  import { catalogueFiltre } from './stores/catalogueFiltre.store';
+  import FiltreBesoin from './FiltreBesoin.svelte';
+  import { BesoinCyber } from './Catalogue.types';
+  import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
+  import { limitationRecherche } from './stores/limitationRecherche';
 
   rechercheParBesoin.set(BesoinCyber.ETRE_SENSIBILISE);
   limitationRecherche.set(3);
@@ -15,7 +15,7 @@
 </div>
 
 <div class="services">
-  {#each $catalogueFiltre.resultats as itemCyber}
+  {#each $catalogueFiltre.resultats as itemCyber (itemCyber.id)}
     <CarteItem {itemCyber}></CarteItem>
   {/each}
 </div>

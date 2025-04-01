@@ -22,7 +22,7 @@
 
 <select bind:value={codeSecteur}>
   <option disabled selected value="">Sélectionner une option</option>
-  {#each secteurs as secteur}
+  {#each secteurs as secteur (secteur.code)}
     <option value={secteur.code}>{secteur.libelle}</option>
   {/each}
 </select>

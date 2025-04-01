@@ -1,5 +1,5 @@
-import { get, writable } from "svelte/store";
-import type { BesoinCyber, ItemCyber } from "../Catalogue.types";
+import { writable } from 'svelte/store';
+import type { BesoinCyber } from '../Catalogue.types';
 
 const selectionBesoins = writable<BesoinCyber | null>();
 

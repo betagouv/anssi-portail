@@ -1,54 +1,54 @@
 <script lang="ts">
-  import type { IdRubrique, Rubrique } from "./TestMaturite.donnees";
+  import type { IdRubrique, Rubrique } from './TestMaturite.donnees';
 
-  export let resultats: Record<IdRubrique, number|null>;
+  export let resultats: Record<IdRubrique, number | null>;
   export let rubriques: Rubrique[] = [
     {
-      id: "pilotage",
-      label: "Pilotage de la sécurité",
-      ancrageTexte: "start",
-      alignementVertical: "middle",
-      lettre: "C",
+      id: 'pilotage',
+      label: 'Pilotage de la sécurité',
+      ancrageTexte: 'start',
+      alignementVertical: 'middle',
+      lettre: 'C',
     },
     {
-      id: "budget",
-      label: "Budget",
-      ancrageTexte: "start",
-      alignementVertical: "hanging",
-      lettre: "D",
+      id: 'budget',
+      label: 'Budget',
+      ancrageTexte: 'start',
+      alignementVertical: 'hanging',
+      lettre: 'D',
     },
     {
-      id: "ressources-humaines",
-      label: "Ressources humaines",
-      ancrageTexte: "end",
-      alignementVertical: "hanging",
-      lettre: "E",
+      id: 'ressources-humaines',
+      label: 'Ressources humaines',
+      ancrageTexte: 'end',
+      alignementVertical: 'hanging',
+      lettre: 'E',
     },
     {
-      id: "adoption-solutions",
-      label: "Adoption des solutions cyber",
-      ancrageTexte: "end",
-      alignementVertical: "middle",
-      lettre: "F",
+      id: 'adoption-solutions',
+      label: 'Adoption des solutions cyber',
+      ancrageTexte: 'end',
+      alignementVertical: 'middle',
+      lettre: 'F',
     },
     {
-      id: "prise-en-compte-risque",
-      label: "Prise en compte du risque",
-      ancrageTexte: "end",
-      alignementVertical: "auto",
-      lettre: "A",
+      id: 'prise-en-compte-risque',
+      label: 'Prise en compte du risque',
+      ancrageTexte: 'end',
+      alignementVertical: 'auto',
+      lettre: 'A',
     },
     {
-      id: "posture",
+      id: 'posture',
       label: "Posture à l'égard de la cyber",
-      ancrageTexte: "start",
-      alignementVertical: "auto",
-      lettre: "B",
+      ancrageTexte: 'start',
+      alignementVertical: 'auto',
+      lettre: 'B',
     },
   ];
 
   $: rubriquesTrieesParLettre = rubriques.toSorted((a, b) =>
-    a.lettre > b.lettre ? 1 : -1,
+    a.lettre > b.lettre ? 1 : -1
   );
 
   const tailleRadar = 200;
@@ -59,7 +59,7 @@
   type Point = { x: number; y: number };
 
   const tableauEnPointsPolygone = (coordonnees: Point[]) =>
-    coordonnees.map((c) => `${c.x},${c.y}`).join(" ");
+    coordonnees.map((c) => `${c.x},${c.y}`).join(' ');
 
   $: pointsDuPolygone = new Array(6).fill(0).map((_, index) => {
     const valeur = resultats[rubriques[index].id];
@@ -72,13 +72,13 @@
   let coefDistanceLibelle: number;
 
   function modifieViewBox() {
-    const estPetitEcran = window.matchMedia("(max-width: 576px)").matches;
+    const estPetitEcran = window.matchMedia('(max-width: 576px)').matches;
 
     if (estPetitEcran) {
-      viewBox = "-220 -220 440 440";
+      viewBox = '-220 -220 440 440';
       coefDistanceLibelle = 1.03;
     } else {
-      viewBox = "-600 -225 1200 450";
+      viewBox = '-600 -225 1200 450';
       coefDistanceLibelle = 1.1;
     }
   }
@@ -86,23 +86,24 @@
   modifieViewBox();
 
   window
-    .matchMedia("(max-width: 576px)")
-    .addEventListener("change", modifieViewBox);
+    .matchMedia('(max-width: 576px)')
+    .addEventListener('change', modifieViewBox);
 </script>
 
 <div class="radar-maturite">
   <svg id="radar" {viewBox} xmlns="http://www.w3.org/2000/svg">
-    {#each new Array(6).fill(0).map((_, index) => index) as index}
+    {#each new Array(6).fill(0).map((_, index) => index) as index (index)}
       {@const theta = (index * 2 * Math.PI) / 6}
       {@const coordonnees = polaireVersCartesien(tailleRadar, theta)}
       <line x1="0" y1="0" x2={coordonnees.x} y2={coordonnees.y} stroke="#ddd" />
-      {#each new Array(6).fill(0).map((_, index) => index) as index2}
+      {#each new Array(6).fill(0).map((_, index) => index) as index2 (index2)}
+        {@const theta = (index * 2 * Math.PI) / 6}
         {@const thetaSuivant = ((index + 1) * 2 * Math.PI) / 6}
         {@const decalage = (tailleRadar / 5) * index2}
         {@const coordonneesActuelles = polaireVersCartesien(decalage, theta)}
         {@const coordonneesSuivantes = polaireVersCartesien(
           decalage,
-          thetaSuivant,
+          thetaSuivant
         )}
         <line
           x1={coordonneesActuelles.x}
@@ -120,7 +121,7 @@
       stroke="#0D0C21"
       stroke-width="3"
     />
-    {#each new Array(6).fill(0).map((_, index) => index) as index}
+    {#each new Array(6).fill(0).map((_, index) => index) as index (index)}
       {#if index !== 0}
         {@const r = (tailleRadar / 5) * index}
         {@const y = -r * Math.cos(-Math.PI / 6)}
@@ -140,10 +141,10 @@
       {/if}
     {/each}
 
-    {#each rubriques as rubrique, index}
+    {#each rubriques as rubrique, index (rubrique.id)}
       {@const coordonnees = polaireVersCartesien(
         tailleRadar * coefDistanceLibelle,
-        (index * 2 * Math.PI) / 6,
+        (index * 2 * Math.PI) / 6
       )}
       <text
         x={coordonnees.x}
@@ -170,7 +171,7 @@
   </svg>
 
   <ul>
-    {#each rubriquesTrieesParLettre as rubrique}
+    {#each rubriquesTrieesParLettre as rubrique (rubrique.id)}
       <li>
         <span class="lettre">{rubrique.lettre}</span> : {rubrique.label} -
         {resultats[rubrique.id]}/5

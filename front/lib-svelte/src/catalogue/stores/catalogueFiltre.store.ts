@@ -1,10 +1,10 @@
-import { derived, get } from "svelte/store";
-import { rechercheParDroitAcces } from "./rechercheParDroitAcces.store";
-import { rechercheParTypologie } from "./rechercheParTypologie.store";
-import { rechercheParFormat } from "./rechercheParFormat.store";
-import { rechercheParSource } from "./rechercheParSource.store";
-import { limitationRecherche } from "./limitationRecherche";
-import { catalogueParBesoin } from "./catalogueParBesoin";
+import { derived, get } from 'svelte/store';
+import { rechercheParDroitAcces } from './rechercheParDroitAcces.store';
+import { rechercheParTypologie } from './rechercheParTypologie.store';
+import { rechercheParFormat } from './rechercheParFormat.store';
+import { rechercheParSource } from './rechercheParSource.store';
+import { limitationRecherche } from './limitationRecherche';
+import { catalogueParBesoin } from './catalogueParBesoin';
 import { rechercheTextuelle } from './rechercheTextuelle.store';
 
 export const catalogueFiltre = derived(
@@ -14,16 +14,9 @@ export const catalogueFiltre = derived(
     rechercheParTypologie,
     rechercheParFormat,
     rechercheParSource,
-    rechercheTextuelle
+    rechercheTextuelle,
   ],
-  ([
-    $catalogueParBesoin,
-    $rechercheParDroitAcces,
-    $rechercheParTypologie,
-    $rechercheParFormat,
-    $rechercheParSource,
-    $rechercheTextuelle
-  ]) => {
+  ([$catalogueParBesoin]) => {
     let resultats = $catalogueParBesoin
       .filter(rechercheParDroitAcces.ok)
       .filter(rechercheParTypologie.ok)
@@ -34,5 +27,5 @@ export const catalogueFiltre = derived(
       resultats = resultats.slice(0, get(limitationRecherche));
     }
     return { resultats };
-  },
+  }
 );

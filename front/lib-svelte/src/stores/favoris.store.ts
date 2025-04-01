@@ -2,21 +2,24 @@ import { derived, writable } from 'svelte/store';
 import axios from 'axios';
 import { profilStore } from './profil.store';
 
-const favoris = writable<string[]>([]);
+type ListeFavoris = string[];
 
-const { subscribe: ecouteLetatDuProfil } = derived(
-  profilStore,
-  async ($profilStore) => {
-    if ($profilStore) {
-      const reponse = await axios.get<string[]>('/api/favoris');
-      return reponse.data;
-    }
-    return [];
+const favoris = writable<ListeFavoris>([]);
+
+const { subscribe: ecouteLetatDuProfil } = derived<
+  typeof profilStore,
+  ListeFavoris
+>(profilStore, ($profilStore, set) => {
+  if ($profilStore) {
+    axios.get<ListeFavoris>('/api/favoris').then((reponse) => {
+      set(reponse.data);
+    });
   }
-);
+  set([]);
+});
 
-ecouteLetatDuProfil(async (value) => {
-  favoris.set(await value);
+ecouteLetatDuProfil((value) => {
+  favoris.set(value);
 });
 
 export const favorisStore = {

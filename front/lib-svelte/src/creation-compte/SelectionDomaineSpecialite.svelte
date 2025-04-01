@@ -69,7 +69,7 @@
         placeholder="Sélectionner un domaine de spécialité"
         class="bouton bouton-secondaire contenu-declencheur"
         class:complete={selection.length > 0}
-        bind:value={label}
+        value={label}
         required
         use:validationChamp={requis
           ? 'Le domaine est obligatoire. Veuillez le renseigner.'
@@ -88,7 +88,7 @@
         {labelRappelDeclencheur}
       </div>
       <div class="options">
-        {#each domaines as domaine}
+        {#each domaines as domaine (domaine.id)}
           <div class="case-et-label">
             <input
               type="checkbox"

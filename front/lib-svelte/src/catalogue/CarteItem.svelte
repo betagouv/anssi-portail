@@ -42,7 +42,9 @@
     <!-- eslint-disable-next-line svelte/no-at-html-tags -->
     <span class="description">{@html tronque(itemCyber.description)}</span>
     <div class="labels">
-      {#each itemCyber.sources as source}<span>{source}</span>{/each}
+      {#if itemCyber.sources}
+        {#each itemCyber.sources as source (source)}<span>{source}</span>{/each}
+      {/if}
       <img
         src={`/assets/images/${
           itemCyber.lienInterne

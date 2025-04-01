@@ -94,7 +94,7 @@
       <div class="contenu-section">
         <h2>Rappel de vos réponses</h2>
         <div class="reponses">
-          {#each questions as question}
+          {#each questions as question (question.id)}
             <div class="reponse">
               <h3>{question.titre}</h3>
               <p>
