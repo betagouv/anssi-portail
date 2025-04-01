@@ -11,7 +11,7 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
   }
 
   async parId(id: string): Promise<ResultatTestMaturite | undefined> {
-    const donnees: any = await this.knex('resultats_test')
+    const donnees = await this.knex('resultats_test')
       .where({ id })
       .first();
     return donnees
@@ -26,7 +26,7 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
   async dernierPourUtilisateur(
     emailUtilisateur: string
   ): Promise<ResultatTestMaturite | undefined> {
-    const donnees: any = await this.knex('resultats_test')
+    const donnees = await this.knex('resultats_test')
       .where({ email_utilisateur: emailUtilisateur })
       .orderBy('date_realisation', 'desc')
       .first();

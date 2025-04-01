@@ -1,7 +1,7 @@
 type Organisation = {
   nom: string;
   siret: string;
-  departement: string;
+  departement: string | null;
 };
 
 export interface Utilisateur {

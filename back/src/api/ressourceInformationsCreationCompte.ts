@@ -38,7 +38,7 @@ const ressourceInformationsCreationCompte = ({
         ...profilAnssi,
         domainesSpecialite: profilAnssi?.domainesSpecialite,
       });
-    } catch (e) {
+    } catch {
       reponse.sendStatus(401);
     }
   });

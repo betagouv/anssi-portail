@@ -1,9 +1,12 @@
 import { Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
 
-const ressourceApresAuthentificationOIDC = (
-  {adaptateurOIDC, adaptateurJWT, entrepotUtilisateur, fournisseurChemin}: ConfigurationServeur
-) => {
+const ressourceApresAuthentificationOIDC = ({
+  adaptateurOIDC,
+  adaptateurJWT,
+  entrepotUtilisateur,
+  fournisseurChemin,
+}: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get('/', async (requete, reponse) => {
     if (!requete.cookies.AgentConnectInfo) {
@@ -12,9 +15,8 @@ const ressourceApresAuthentificationOIDC = (
     }
 
     try {
-      const { accessToken, idToken } = await adaptateurOIDC.recupereJeton(
-        requete
-      );
+      const { accessToken, idToken } =
+        await adaptateurOIDC.recupereJeton(requete);
       const informationsUtilisateur =
         await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
       const { email } = informationsUtilisateur;
@@ -26,15 +28,12 @@ const ressourceApresAuthentificationOIDC = (
       }
 
       requete.session = { ...requete.session, ...informationsUtilisateur };
-      requete.session.token =
-        adaptateurJWT.genereToken({ email });
+      requete.session.token = adaptateurJWT.genereToken({ email });
       requete.session.AgentConnectIdToken = idToken;
       reponse.sendFileAvecNonce(
-        fournisseurChemin.cheminPageJekyll(
-          'apres-authentification'
-        )
+        fournisseurChemin.cheminPageJekyll('apres-authentification')
       );
-    } catch (e) {
+    } catch {
       reponse.sendStatus(401);
     }
   });

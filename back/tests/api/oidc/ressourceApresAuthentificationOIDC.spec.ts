@@ -16,7 +16,6 @@ import { decodeSessionDuCookie } from '../cookie';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { UtilisateurPartiel } from '../../../src/metier/utilisateur';
-import {randomUUID} from "node:crypto";
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {
@@ -113,10 +112,10 @@ describe('La ressource apres authentification OIDC', () => {
       });
 
       it('ajoute un token JWT à la session', async () => {
-        adaptateurJWT.genereToken = (donnees: Record<string, any>) =>
+        adaptateurJWT.genereToken = (donnees: Record<string, unknown>) =>
           `tokenJWT-${donnees.email}`;
 
-        const reponse: any = await requeteGet();
+        const reponse = await requeteGet();
 
         const session = decodeSessionDuCookie(reponse, 0);
         assert.equal(session.token, 'tokenJWT-jeanne.dupont');
@@ -127,7 +126,7 @@ describe('La ressource apres authentification OIDC', () => {
           return { idToken: 'tokenAgentConnect', accessToken: 'y' };
         };
 
-        const reponse: any = await requeteGet();
+        const reponse = await requeteGet();
 
         const session = decodeSessionDuCookie(reponse, 0);
         assert.equal(session.AgentConnectIdToken, 'tokenAgentConnect');
@@ -135,7 +134,7 @@ describe('La ressource apres authentification OIDC', () => {
     });
 
     it("jette une erreur 401 si le cookie AgentConnectInfo n'est pas défini", async () => {
-      const reponse: any = await requeteGet().set('Cookie', []);
+      const reponse = await requeteGet().set('Cookie', []);
 
       assert.equal(reponse.status, 401);
     });
@@ -145,7 +144,7 @@ describe('La ressource apres authentification OIDC', () => {
         throw new Error('mauvais state');
       };
 
-      const reponse: any = await requeteGet();
+      const reponse = await requeteGet();
 
       assert.equal(reponse.status, 401);
     });

@@ -95,11 +95,9 @@ describe("La ressource d'informations de création de compte", () => {
         adaptateurJWT.decode = () => ({
           email: 'jeanne.dujardin@mail.com',
         });
-        adaptateurProfilAnssi.recupere = async (email) => undefined;
+        adaptateurProfilAnssi.recupere = async () => undefined;
         let rechercheEntrepriseAppelee = false;
-        adaptateurRechercheEntreprise.rechercheOrganisations = async (
-          _terme: string
-        ) => {
+        adaptateurRechercheEntreprise.rechercheOrganisations = async () => {
           rechercheEntrepriseAppelee = true;
           return [];
         };
@@ -160,7 +158,7 @@ describe("La ressource d'informations de création de compte", () => {
         });
         let rechercheEntrepriseAppelee = false;
         adaptateurRechercheEntreprise.rechercheOrganisations = async (
-          terme: string
+          _terme: string
         ) => {
           rechercheEntrepriseAppelee = true;
           return [];
