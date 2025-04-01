@@ -7,12 +7,12 @@
   export let valeur: Departement | '' = '';
 
   let saisie: string;
-  let minuteur: NodeJS.Timeout;
+  let minuteur: ReturnType<typeof setTimeout>;
   let dureeDebounceEnMs = 300;
   let suggestions: Departement[] = [];
   let suggestionsVisibles = false;
 
-  const avecTemporisation = (fonction: () => Promise<any>) => {
+  const avecTemporisation = (fonction: () => Promise<void>) => {
     clearTimeout(minuteur);
     minuteur = setTimeout(async () => {
       await fonction();

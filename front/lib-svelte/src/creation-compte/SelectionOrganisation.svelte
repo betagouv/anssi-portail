@@ -17,13 +17,13 @@
   export let id: string = '';
 
   let saisie: string;
-  let minuteur: NodeJS.Timeout;
+  let minuteur: ReturnType<typeof setTimeout>;
   let dureeDebounceEnMs = 300;
   let suggestions: OrganisationAvecLabel[] = [];
   let suggestionsVisibles = false;
   let champValeur: HTMLInputElement;
 
-  const avecTemporisation = (fonction: () => Promise<any>) => {
+  const avecTemporisation = (fonction: () => Promise<void>) => {
     clearTimeout(minuteur);
     minuteur = setTimeout(async () => {
       await fonction();
@@ -36,10 +36,10 @@
     /* eslint-disable no-irregular-whitespace */
     const siretFormatte =
       siret &&
-      `${siret.substring(0, 3)} ${siret.substring(3, 6)} ${siret.substring(
+      `${siret.substring(0, 3)} ${siret.substring(3, 6)} ${siret.substring(
         6,
         9
-      )} ${siret.substring(9, 14)}`;
+      )} ${siret.substring(9, 14)}`;
     return `(${organisation.departement}) ${organisation.nom} - ${siretFormatte}`;
   };
 

@@ -8,17 +8,15 @@
 
   $: cheminIcone = `/assets/images/icone-favori-${estFavori(idItemCyber) ? 'plein' : 'vide'}.svg`;
 
-  $: estFavori = (idItemCyber: IdItemCyber) =>
+  const estFavori = (idItemCyber: IdItemCyber) =>
     $favorisStore.includes(idItemCyber);
 
-  $: titre = $profilStore
-    ? ''
-    : 'Connectez-vous pour profiter des favoris';
-    
-    const actionSurClick = async () => {
-      const idFavori = idItemCyber;
-      if (!$profilStore) return;
-      
+  $: titre = $profilStore ? '' : 'Connectez-vous pour profiter des favoris';
+
+  const actionSurClick = async () => {
+    const idFavori = idItemCyber;
+    if (!$profilStore) return;
+
     try {
       if (estFavori(idFavori)) {
         await axios.delete(`/api/favoris/${encodeURIComponent(idFavori)}`);
@@ -33,7 +31,11 @@
   };
 </script>
 
-<button on:click|preventDefault={actionSurClick} title={titre} class:actif={$profilStore}>
+<button
+  on:click|preventDefault={actionSurClick}
+  title={titre}
+  class:actif={$profilStore}
+>
   <img src={cheminIcone} alt="Favori" />
 </button>
 
