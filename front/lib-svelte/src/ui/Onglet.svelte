@@ -16,11 +16,6 @@
 </button>
 
 <style>
-  img {
-    width: 16px;
-    height: 16px;
-  }
-
   .onglet {
     font-size: 1rem;
     padding: 9px 12px;
