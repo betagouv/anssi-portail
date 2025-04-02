@@ -38,9 +38,10 @@
 
   $: idNiveau = calculeIdNiveau(moyenne);
 
-  $: niveau =
-    niveauxMaturite.find((niveau) => niveau.id === idNiveau) ||
-    niveauxMaturite[0];
+  const trouveNiveauMaturiteParId = (id: string) =>
+    niveauxMaturite.find((niveau) => niveau.id === id) || niveauxMaturite[0];
+
+  $: niveau = trouveNiveauMaturiteParId(idNiveau);
 
   let ongletActif: 'votre-organisation' | 'comparaison' = 'votre-organisation';
 </script>

@@ -47,8 +47,11 @@
     actualiseReponseCourante();
   }
 
-  $: idQuestionCourante =
-    etapesTestMaturite[$questionnaireStore.questionCourante].id;
+  const lisIdQuestionCourante = (q: number) => etapesTestMaturite[q].id;
+
+  $: idQuestionCourante = lisIdQuestionCourante(
+    $questionnaireStore.questionCourante
+  );
 
   type CreationTest = {
     id: string;
