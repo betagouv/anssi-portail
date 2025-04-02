@@ -26,8 +26,23 @@
 
   questionnaireStore.initialise();
 
-  function reponds() {
-    questionnaireStore.reponds(reponseDonnee);
+  let reponseCourante : number;
+
+  actualiseReponseCourante();
+
+  function actualiseReponseCourante() {
+    reponseCourante =
+      $questionnaireStore.toutesLesReponses[$questionnaireStore.questionCourante];
+  }
+
+  function valideReponse() {
+    questionnaireStore.reponds(reponseCourante);
+    actualiseReponseCourante();
+  }
+
+  function reviensEnArriere() {
+    questionnaireStore.reviensEnArriere()
+    actualiseReponseCourante();
   }
 
   $: idQuestionCourante =
@@ -60,10 +75,6 @@
   function debuteTeste() {
     introFaite = true;
   }
-
-  // TODO : enlever le reactif et il faut que mettre reponseDonnee à null lors de la reponds() mais on veut pouvoir retourner en arrière et récualiser la réponse précédente
-  $: reponseDonnee =
-    $questionnaireStore.toutesLesReponses[$questionnaireStore.questionCourante];
 
   function doitMontrerPropositions() {
     const avecPropositions = etapesTestMaturite.filter(
@@ -112,7 +123,7 @@
                   <label>
                     <input
                       type="radio"
-                      bind:group={reponseDonnee}
+                      bind:group={reponseCourante}
                       value={index}
                     />
                     <span>{proposition}</span>
@@ -127,14 +138,14 @@
                   class="bouton secondaire taille-moyenne"
                   value="Précédent"
                   disabled={$questionnaireStore.questionCourante === 0}
-                  on:click={questionnaireStore.reviensEnArriere}
+                  on:click={reviensEnArriere}
                 />
                 <input
                   type="button"
                   class="bouton primaire taille-moyenne"
                   value="Question suivante"
-                  disabled={reponseDonnee === null}
-                  on:click={reponds}
+                  disabled={reponseCourante === null}
+                  on:click={valideReponse}
                 />
               </div>
             {:else}
