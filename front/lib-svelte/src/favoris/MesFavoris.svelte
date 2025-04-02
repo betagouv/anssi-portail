@@ -167,9 +167,6 @@
 
     @include a-partir-de(lg) {
       flex-direction: row;
-      button {
-        text-wrap: nowrap;
-      }
     }
   }
 </style>
