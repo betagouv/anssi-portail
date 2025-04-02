@@ -94,30 +94,15 @@
       line-height: 1.5rem;
     }
 
-    a {
-      display: flex;
-      align-items: center;
-      gap: 3px;
-      text-decoration: none;
-      font-size: 0.875rem;
-      line-height: 1.5rem;
-      color: var(--noir);
-      font-weight: bold;
-    }
-
     .labels {
       span {
         font-size: 0.75rem;
         line-height: 1.25rem;
       }
 
-      a.lien-externe {
-        margin-left: auto;
-
-        img {
-          width: 20px;
-          height: 20px;
-        }
+      img {
+        width: 20px;
+        height: 20px;
       }
     }
   }
