@@ -24,7 +24,10 @@ describe('La ressource qui gère un résultat de test', () => {
 
   beforeEach(() => {
     entrepotResultatTest = new EntrepotResultatTestMemoire();
-    cookieJeanneDupont = encodeSession({ email: 'jeanne.dupont@mail.com', token:"token" });
+    cookieJeanneDupont = encodeSession({
+      email: 'jeanne.dupont@mail.com',
+      token: 'token',
+    });
     busEvenements = fabriqueBusPourLesTests();
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
@@ -49,7 +52,7 @@ describe('La ressource qui gère un résultat de test', () => {
   });
 
   describe('sur requête PUT', () => {
-    it("refuse la mise à jour si le résultat de test a déjà été revendiqué par un autre utilisateur", async () => {
+    it('refuse la mise à jour si le résultat de test a déjà été revendiqué par un autre utilisateur', async () => {
       await entrepotResultatTest.ajoute(
         new ResultatTestMaturite({
           ...donneesResultatTestCorrectes(),
@@ -69,7 +72,7 @@ describe('La ressource qui gère un résultat de test', () => {
       busEvenements.naPasRecuDEvenement(ProprieteTestRevendiquee);
     });
 
-    it("ne fait rien si le résultat a déjà été revendiqué par cet utilisateur", async () => {
+    it('ne fait rien si le résultat a déjà été revendiqué par cet utilisateur', async () => {
       await entrepotResultatTest.ajoute(
         new ResultatTestMaturite({
           ...donneesResultatTestCorrectes(),
@@ -128,11 +131,13 @@ describe('La ressource qui gère un résultat de test', () => {
         .send();
 
       busEvenements.aRecuUnEvenement(ProprieteTestRevendiquee);
-      const evenement = busEvenements.recupereEvenement(ProprieteTestRevendiquee);
+      const evenement = busEvenements.recupereEvenement(
+        ProprieteTestRevendiquee
+      );
       assert.equal(evenement!.emailUtilisateur, 'jeanne.dupont@mail.com');
-      assert.equal(evenement!.idResultatTest, "r1");
+      assert.equal(evenement!.idResultatTest, 'r1');
     });
-    
+
     it('refuse les requêtes non connectées', async () => {
       const reponse = await request(serveur)
         .put('/api/resultats-test/r1')

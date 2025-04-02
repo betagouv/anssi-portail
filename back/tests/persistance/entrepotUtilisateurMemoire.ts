@@ -1,6 +1,6 @@
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 import { Utilisateur, UtilisateurPartiel } from '../../src/metier/utilisateur';
-import {randomUUID} from "node:crypto";
+import { randomUUID } from 'node:crypto';
 
 export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
   entites: Utilisateur[] = [];
@@ -32,7 +32,9 @@ export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
     return this.entites.find((utilisateur) => utilisateur.email === email);
   };
   parIdListeFavoris = async (idListeFavoris: string) => {
-    return this.entites.find((utilisateur) => utilisateur.idListeFavoris === idListeFavoris);
+    return this.entites.find(
+      (utilisateur) => utilisateur.idListeFavoris === idListeFavoris
+    );
   };
   existe = async (email: string) => {
     return !!this.entites.find((utilisateur) => utilisateur.email === email);

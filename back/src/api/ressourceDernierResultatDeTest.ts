@@ -8,8 +8,9 @@ const ressourceDernierResultatDeTest = ({
   const routeur = Router();
   routeur.get('/', middleware.verifieJWT, async (requete, reponse) => {
     const emailUtilisateur = requete.session?.email;
-    const resultatTest =
-      await entrepotResultatTest.dernierPourUtilisateur(emailUtilisateur);
+    const resultatTest = await entrepotResultatTest.dernierPourUtilisateur(
+      emailUtilisateur
+    );
     if (!resultatTest) {
       reponse.sendStatus(404);
       return;

@@ -1,6 +1,6 @@
-import {ConfigurationServeur} from './configurationServeur';
-import {Response, Request, Router} from 'express';
-import {departements} from "../metier/referentielDepartements";
+import { ConfigurationServeur } from './configurationServeur';
+import { Response, Request, Router } from 'express';
+import { departements } from '../metier/referentielDepartements';
 
 const ressourceAnnuaireDepartements = (_: ConfigurationServeur) => {
   const routeur = Router();
@@ -10,4 +10,4 @@ const ressourceAnnuaireDepartements = (_: ConfigurationServeur) => {
   return routeur;
 };
 
-export {ressourceAnnuaireDepartements};
+export { ressourceAnnuaireDepartements };

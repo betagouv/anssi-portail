@@ -37,7 +37,7 @@ export const cableTousLesAbonnes = ({
   busEvenements.abonne(
     CompteCree,
     envoieEmailCreationCompte({
-      adaptateurEmail
+      adaptateurEmail,
     })
-  )
+  );
 };

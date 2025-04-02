@@ -101,7 +101,7 @@
   @include a-partir-de(lg) {
     .chapeau.fond-sombre .contenu-section {
       grid-template-columns: auto 384px;
-      grid-template-areas: "ariane cta" 'titre cta' 'description cta';
+      grid-template-areas: 'ariane cta' 'titre cta' 'description cta';
     }
   }
 

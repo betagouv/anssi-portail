@@ -51,45 +51,45 @@ SE_FORMER:
   - /ressources/risques-cyber
   - /ressources/revue-presse
 TOUS:
-- /ressources/risques-cyber
-- /services/mon-aide-cyber
-- /services/mon-espace-nis2
-- /services/NIS2
-- /services/mon-service-securise
-- /ressources/cyber-13questions
-- /ressources/guides-hygiene
-- /ressources/visa-secu
-- /ressources/visa-secu-produit
-- /ressources/cyber-enjeux
-- /ressources/livret-cyber-enjeux
-- /ressources/guides-gestion-crise
-- /ressources/guides-remediation
-- /services/conseil-technique
-- /services/mon-aide-cyber-aidants
-- /ressources/panorama
-- /services/cot   
-- /ressources/ebios
-- /ressources/prestas-ebios
-- /ressources/publications
-- /ressources/nl-industries
-- /services/assistance-reponse-incidents
-- /services/transmission-signalements
-- /ressources/revue-presse 
-- /ressources/avis-bulletin
-- /ressources/rapport-menace
-- /services/secnum-academie
-- /ressources/secnumedu
-- /ressources/secnumedufc
-- /services/demainspecialistecyber
-- /ressources/demainspecialistecyber-affiches
-- /services/pix
-- /services/hackropole
-- /ressources/cyber-dico
-- /services/pack-parcours-secu
-- /ressources/label-expert-cyber
-- /services/diagnostic-17cyber
-- /ressources/cybermalveillance
-- /services/sens-cyber
-- /ressources/malette-cyber
-- /ressources/cnil-reco
-- /ressources/cnil-ensemble
+  - /ressources/risques-cyber
+  - /services/mon-aide-cyber
+  - /services/mon-espace-nis2
+  - /services/NIS2
+  - /services/mon-service-securise
+  - /ressources/cyber-13questions
+  - /ressources/guides-hygiene
+  - /ressources/visa-secu
+  - /ressources/visa-secu-produit
+  - /ressources/cyber-enjeux
+  - /ressources/livret-cyber-enjeux
+  - /ressources/guides-gestion-crise
+  - /ressources/guides-remediation
+  - /services/conseil-technique
+  - /services/mon-aide-cyber-aidants
+  - /ressources/panorama
+  - /services/cot
+  - /ressources/ebios
+  - /ressources/prestas-ebios
+  - /ressources/publications
+  - /ressources/nl-industries
+  - /services/assistance-reponse-incidents
+  - /services/transmission-signalements
+  - /ressources/revue-presse
+  - /ressources/avis-bulletin
+  - /ressources/rapport-menace
+  - /services/secnum-academie
+  - /ressources/secnumedu
+  - /ressources/secnumedufc
+  - /services/demainspecialistecyber
+  - /ressources/demainspecialistecyber-affiches
+  - /services/pix
+  - /services/hackropole
+  - /ressources/cyber-dico
+  - /services/pack-parcours-secu
+  - /ressources/label-expert-cyber
+  - /services/diagnostic-17cyber
+  - /ressources/cybermalveillance
+  - /services/sens-cyber
+  - /ressources/malette-cyber
+  - /ressources/cnil-reco
+  - /ressources/cnil-ensemble

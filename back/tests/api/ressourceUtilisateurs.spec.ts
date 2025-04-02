@@ -5,7 +5,10 @@ import { configurationDeTestDuServeur } from './fauxObjets';
 import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
-import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests';
+import {
+  fabriqueBusPourLesTests,
+  MockBusEvenement,
+} from '../bus/busPourLesTests';
 import { CompteCree } from '../../src/bus/compteCree';
 
 describe('La ressource utilisateur', () => {
@@ -30,21 +33,21 @@ describe('La ressource utilisateur', () => {
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       entrepotUtilisateur,
-      busEvenements
+      busEvenements,
     });
   });
 
   describe('sur demande POST', () => {
     it('répond 201', async () => {
-      const reponse = await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
+      const reponse = await request(serveur)
+        .post('/api/utilisateurs')
+        .send(donneesUtilisateur);
 
       assert.equal(reponse.status, 201);
     });
 
     it("ajoute un utilisateur à l'entrepot", async () => {
-      await request(serveur)
-        .post('/api/utilisateurs')
-        .send(donneesUtilisateur);
+      await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
 
       const jeanne = await entrepotUtilisateur.parEmail(
         'jeanne.dupont@user.com'
@@ -60,10 +63,8 @@ describe('La ressource utilisateur', () => {
       assert.equal(jeanne?.infolettreAcceptee, true);
     });
 
-    it("publie un événement de création de compte", async () => {
-      await request(serveur)
-        .post('/api/utilisateurs')
-        .send(donneesUtilisateur);
+    it('publie un événement de création de compte', async () => {
+      await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
 
       busEvenements.aRecuUnEvenement(CompteCree);
       const evenement = busEvenements.recupereEvenement(CompteCree);
@@ -109,7 +110,7 @@ describe('La ressource utilisateur', () => {
         assert.equal(reponse.body.erreur, "L'email est invalide");
       });
 
-      it("valide le prénom", async () => {
+      it('valide le prénom', async () => {
         const reponse = await request(serveur)
           .post('/api/utilisateurs')
           .send({
@@ -117,10 +118,10 @@ describe('La ressource utilisateur', () => {
             prenom: '',
           });
         assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.erreur, "Le prénom est invalide");
+        assert.equal(reponse.body.erreur, 'Le prénom est invalide');
       });
 
-      it("valide le nom", async () => {
+      it('valide le nom', async () => {
         const reponse = await request(serveur)
           .post('/api/utilisateurs')
           .send({
@@ -128,10 +129,10 @@ describe('La ressource utilisateur', () => {
             nom: '',
           });
         assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.erreur, "Le nom est invalide");
+        assert.equal(reponse.body.erreur, 'Le nom est invalide');
       });
 
-      it("valide le téléphone", async () => {
+      it('valide le téléphone', async () => {
         const reponse = await request(serveur)
           .post('/api/utilisateurs')
           .send({
@@ -139,10 +140,10 @@ describe('La ressource utilisateur', () => {
             telephone: 'ABCD',
           });
         assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.erreur, "Le téléphone est invalide");
+        assert.equal(reponse.body.erreur, 'Le téléphone est invalide');
       });
 
-      it("valide les domaines de spécialité", async () => {
+      it('valide les domaines de spécialité', async () => {
         const reponse = await request(serveur)
           .post('/api/utilisateurs')
           .send({
@@ -150,10 +151,13 @@ describe('La ressource utilisateur', () => {
             domainesSpecialite: [],
           });
         assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.erreur, "Les domaines de spécialité sont invalides");
+        assert.equal(
+          reponse.body.erreur,
+          'Les domaines de spécialité sont invalides'
+        );
       });
 
-      it("valide le siret", async () => {
+      it('valide le siret', async () => {
         const reponse = await request(serveur)
           .post('/api/utilisateurs')
           .send({
@@ -161,7 +165,7 @@ describe('La ressource utilisateur', () => {
             siretEntite: 'unMauvaisSiret',
           });
         assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.erreur, "Le siret est invalide");
+        assert.equal(reponse.body.erreur, 'Le siret est invalide');
       });
 
       it("valide l'acceptation des CGU", async () => {
@@ -183,7 +187,10 @@ describe('La ressource utilisateur', () => {
             infolettreAcceptee: 12,
           });
         assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.erreur, "L'acceptation de l'infolettre est invalide");
+        assert.equal(
+          reponse.body.erreur,
+          "L'acceptation de l'infolettre est invalide"
+        );
       });
     });
   });

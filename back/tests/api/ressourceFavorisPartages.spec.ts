@@ -8,7 +8,7 @@ import assert from 'node:assert';
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 import { jeanneDupont } from './objetsPretsALEmploi';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
-import {randomUUID} from "node:crypto";
+import { randomUUID } from 'node:crypto';
 
 describe('La ressource des favoris partagés', () => {
   let serveur: Express;

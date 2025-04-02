@@ -9,4 +9,4 @@ const domaines = [
   { id: 'autre', libelle: 'Autre' },
 ] as const;
 
-export const codesDomainesDeSpecialite = domaines.map(d => d.id);
+export const codesDomainesDeSpecialite = domaines.map((d) => d.id);

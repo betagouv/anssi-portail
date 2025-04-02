@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { rechercheParDroitAcces } from "./stores/rechercheParDroitAcces.store";
-  import { DroitAcces } from "./Catalogue.types";
-  import { nombreResultats } from "./stores/nombreResultats.store";
+  import { rechercheParDroitAcces } from './stores/rechercheParDroitAcces.store';
+  import { DroitAcces } from './Catalogue.types';
+  import { nombreResultats } from './stores/nombreResultats.store';
 </script>
 
 <fieldset>

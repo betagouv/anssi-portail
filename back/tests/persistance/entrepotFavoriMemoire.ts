@@ -9,7 +9,13 @@ export class EntrepotFavoriMemoire implements EntrepotFavori {
   }
 
   async retire(favori: Favori): Promise<void> {
-    this.entites = this.entites.filter((f) => !(f.emailUtilisateur === favori.emailUtilisateur && f.idItemCyber === favori.idItemCyber));
+    this.entites = this.entites.filter(
+      (f) =>
+        !(
+          f.emailUtilisateur === favori.emailUtilisateur &&
+          f.idItemCyber === favori.idItemCyber
+        )
+    );
   }
 
   async tousCeuxDeUtilisateur(emailUtilisateur: string): Promise<Favori[]> {

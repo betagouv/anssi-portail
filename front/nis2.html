@@ -1,7 +1,7 @@
 ---
 layout: parcours
 permalink: /nis2/
-titreHtml: "Votre entité est régulée NIS2 ? | MesServicesCyber"
+titreHtml: 'Votre entité est régulée NIS2 ? | MesServicesCyber'
 ---
 
 <script
@@ -21,8 +21,10 @@ titreHtml: "Votre entité est régulée NIS2 ? | MesServicesCyber"
     <div id="fil-ariane"></div>
     <h1>Votre entité est régulée NIS2&nbsp;?</h1>
     <p>
-      La directive NIS 2 vise à renforcer le niveau de cybersécurité des tissus économique et administratif des pays
-      membres de l'UE. Découvrez les services et ressources pouvant accompagner les entités régulées par la directive.
+      La directive NIS 2 vise à renforcer le niveau de cybersécurité des tissus
+      économique et administratif des pays membres de l'UE. Découvrez les
+      services et ressources pouvant accompagner les entités régulées par la
+      directive.
     </p>
   </div>
 </section>
@@ -31,7 +33,11 @@ titreHtml: "Votre entité est régulée NIS2 ? | MesServicesCyber"
   <div class="contenu-section">
     <div class="groupe-boutons">
       {% for action in site.data.nis2 %}
-      <a href="#{{action[0]}}" class="{%if forloop.first%}actif{% endif %} bouton secondaire">{{action[1].titre}}</a>
+      <a
+        href="#{{action[0]}}"
+        class="{%if forloop.first%}actif{% endif %} bouton secondaire"
+        >{{action[1].titre}}</a
+      >
       {% endfor %}
     </div>
   </div>
@@ -39,7 +45,11 @@ titreHtml: "Votre entité est régulée NIS2 ? | MesServicesCyber"
 
 {% for action in site.data.nis2 %}
   {%assign indexModulo2 = forloop.index0 | modulo: 2 %}
-  {%if indexModulo2 == 1 %}{%assign fondAlternatif=true%}{%else%}{%assign fondAlternatif=false%}{%endif%}
+  {%if indexModulo2 == 1 %}
+    {%assign fondAlternatif=true%}
+  {%else%}
+    {%assign fondAlternatif=false%}
+  {%endif%}
   {% assign idAction=action[0] %}
   {% assign infosAction=action[1] %}
   {% include action-parcours-avec-items.html

@@ -22,15 +22,18 @@ const adaptateurEnvironnement = {
       }
     },
     maxRequetesParMinute: () => {
-      const maxEnChaine = process.env.SERVEUR_MAX_REQUETES_PAR_MINUTE || '600'
+      const maxEnChaine = process.env.SERVEUR_MAX_REQUETES_PAR_MINUTE || '600';
       const maxEnNombre = Number(maxEnChaine);
       if (isNaN(maxEnNombre)) {
-        throw new Error(`SERVEUR_MAX_REQUETES_PAR_MINUTE n'est pas un nombre : ${maxEnChaine}`);
+        throw new Error(
+          `SERVEUR_MAX_REQUETES_PAR_MINUTE n'est pas un nombre : ${maxEnChaine}`
+        );
       } else {
-        return maxEnNombre
+        return maxEnNombre;
       }
     },
-    ipAutorisees: () => process.env.SERVEUR_ADRESSES_IP_AUTORISEES?.split(',') ?? false,
+    ipAutorisees: () =>
+      process.env.SERVEUR_ADRESSES_IP_AUTORISEES?.split(',') ?? false,
   }),
   sentry: () => ({
     dsn: () => process.env.SENTRY_DSN,

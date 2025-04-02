@@ -1,7 +1,7 @@
 ---
 ---
 
-@use "../../assets/styles/responsive" as *;
+@use '../../assets/styles/responsive' as *;
 
 .chapeau.fond-sombre.chapeau-page-statique {
   padding: 32px var(--gouttiere);
@@ -171,7 +171,8 @@
     img.encart-homologation {
       width: 100%;
 
-      &.encart-tablette, &.encart-desktop {
+      &.encart-tablette,
+      &.encart-desktop {
         display: none;
       }
 
@@ -187,7 +188,8 @@
         &.encart-desktop {
           display: block;
         }
-        &.encart-tablette, &.encart-mobile {
+        &.encart-tablette,
+        &.encart-mobile {
           display: none;
         }
       }
@@ -200,10 +202,10 @@
     gap: 16px;
     margin: 72px auto 97px;
     max-width: 588px;
-    h2, h4 {
+    h2,
+    h4 {
       text-align: center;
       margin: 0;
     }
   }
-
 }

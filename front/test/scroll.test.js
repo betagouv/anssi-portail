@@ -1,7 +1,7 @@
-import { describe, expect, test } from "vitest";
-import { elementLePlusVisible, ratioEspaceOccupe } from "../scripts/scroll";
+import { describe, expect, test } from 'vitest';
+import { elementLePlusVisible, ratioEspaceOccupe } from '../scripts/scroll';
 
-describe("Pour la synchronisation avec le scroll", () => {
+describe('Pour la synchronisation avec le scroll', () => {
   describe("le calcul de visibilite d'un element", () => {
     const etat = (top, hauteur) => ({ top, hauteur, hauteurFenetre: 100 });
 
@@ -59,7 +59,7 @@ describe("Pour la synchronisation avec le scroll", () => {
       expect(lePlusVisible).toEqual(maxi);
     });
 
-    test("renvoie null si tous les éléments sont invisibles", () => {
+    test('renvoie null si tous les éléments sont invisibles', () => {
       const fenetre = 100;
       const invisible1 = {
         getBoundingClientRect: () => ({ top: -100, height: 20 }),
@@ -70,7 +70,7 @@ describe("Pour la synchronisation avec le scroll", () => {
 
       const lePlusVisible = elementLePlusVisible(
         [invisible1, invisible2],
-        fenetre,
+        fenetre
       );
 
       expect(lePlusVisible).toBe(null);

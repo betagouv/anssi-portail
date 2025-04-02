@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { rechercheParBesoin } from "./stores/rechercheParBesoin.store";
-  import { BesoinCyber } from "./Catalogue.types";
+  import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
+  import { BesoinCyber } from './Catalogue.types';
 
   export let filtreTousVisible: boolean = true;
 </script>

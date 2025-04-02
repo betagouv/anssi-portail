@@ -89,7 +89,10 @@ describe('La ressource des services et ressources favoris', () => {
         'jeanne.dupont@mail.com'
       );
 
-      assert.equal(ceuxDeUtilisateur[0].idItemCyber, '/services/mon-service-cyber');
+      assert.equal(
+        ceuxDeUtilisateur[0].idItemCyber,
+        '/services/mon-service-cyber'
+      );
     });
   });
 

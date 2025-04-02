@@ -16,7 +16,7 @@ describe("L'abonnement qui envoie un email de création de compte", () => {
     envoieEmailCreationCompte({ adaptateurEmail })(
       new CompteCree({
         email: 'jeanne.dupond@mail.fr',
-        prenom: 'Jeanne'
+        prenom: 'Jeanne',
       })
     );
 

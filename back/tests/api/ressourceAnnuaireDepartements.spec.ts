@@ -1,9 +1,7 @@
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import assert from 'node:assert';
-import {
-  configurationDeTestDuServeur,
-} from './fauxObjets';
+import { configurationDeTestDuServeur } from './fauxObjets';
 import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 

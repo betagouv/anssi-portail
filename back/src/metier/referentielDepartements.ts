@@ -1,4 +1,4 @@
-import { CodeRegion } from "./referentielRegions";
+import { CodeRegion } from './referentielRegions';
 
 export const departements = [
   { nom: 'Ain', code: '01', codeRegion: 'FR-ARA' },
@@ -121,8 +121,9 @@ export const codeDepartement = departements.map((s) => s.code);
 export const estCodeDepartement = (code: CodeDepartement) =>
   departements.map((d) => d.code).includes(code);
 
-export const regionDuDepartement = (codeDepartement: CodeDepartement):CodeRegion =>
+export const regionDuDepartement = (
+  codeDepartement: CodeDepartement
+): CodeRegion =>
   departements.find((d) => d.code === codeDepartement)!.codeRegion;
-
 
 export type CodeDepartement = (typeof codeDepartement)[number];

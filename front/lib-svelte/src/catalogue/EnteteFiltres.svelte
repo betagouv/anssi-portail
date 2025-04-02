@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { recherches } from "./stores/recherches.store.js";
+  import { recherches } from './stores/recherches.store.js';
 </script>
 
 <div class="entete-filtres">

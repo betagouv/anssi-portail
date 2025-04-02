@@ -10,28 +10,51 @@
 <nav class="conteneur-nav">
   <div class="contenu-section">
     {#if !estConnecte}
-      <LienNavigation href="/" label="Accueil"/>
+      <LienNavigation href="/" label="Accueil" />
     {/if}
-    <LienNavigation href="/catalogue/" label={estConnecte ? 'Le catalogue des services' : 'Explorer le catalogue'}/>
-    <LienNavigation href="/nis2/" label="Vous accompagner avec NIS2"/>
-    <details class:actif={ cheminRelatif === '/parcours-debuter/' ||  cheminRelatif === '/parcours-approfondir/'}>
-      <summary>{estConnecte ? 'Notre sélection' : 'Découvrir notre sélection'}</summary>
+    <LienNavigation
+      href="/catalogue/"
+      label={estConnecte
+        ? 'Le catalogue des services'
+        : 'Explorer le catalogue'}
+    />
+    <LienNavigation href="/nis2/" label="Vous accompagner avec NIS2" />
+    <details
+      class:actif={cheminRelatif === '/parcours-debuter/' ||
+        cheminRelatif === '/parcours-approfondir/'}
+    >
+      <summary
+        >{estConnecte
+          ? 'Notre sélection'
+          : 'Découvrir notre sélection'}</summary
+      >
       <div class="choix">
-        <LienNavigation href="/parcours-debuter/" label="Les services pour se lancer" dansMenuDeroulant/>
-        <LienNavigation href="/parcours-approfondir/" label="Les services pour approfondir" dansMenuDeroulant/>
+        <LienNavigation
+          href="/parcours-debuter/"
+          label="Les services pour se lancer"
+          dansMenuDeroulant
+        />
+        <LienNavigation
+          href="/parcours-approfondir/"
+          label="Les services pour approfondir"
+          dansMenuDeroulant
+        />
       </div>
     </details>
-    <LienNavigation href={estConnecte ? '/ma-maturite' : '/test-maturite/'} label={estConnecte ? 'Maturité cyber' : 'Tester votre maturité cyber'}/>
+    <LienNavigation
+      href={estConnecte ? '/ma-maturite' : '/test-maturite/'}
+      label={estConnecte ? 'Maturité cyber' : 'Tester votre maturité cyber'}
+    />
     {#if estConnecte}
-      <LienNavigation href="/contacts/" label='Contacts utiles' />
-      <LienNavigation href="/favoris/" label='Favoris' />
-      <LienNavigation href="/services-anssi/" label='Services ANSSI utilisés' />
+      <LienNavigation href="/contacts/" label="Contacts utiles" />
+      <LienNavigation href="/favoris/" label="Favoris" />
+      <LienNavigation href="/services-anssi/" label="Services ANSSI utilisés" />
     {/if}
   </div>
 </nav>
 
 <style lang="scss">
-  @use "../../../assets/styles/responsive" as *;
+  @use '../../../assets/styles/responsive' as *;
 
   .conteneur-nav {
     padding: 0 var(--gouttiere);
@@ -43,8 +66,6 @@
     }
 
     border-top: 1px solid #dddddd;
-
-
 
     @include a-partir-de(lg) {
       display: block;

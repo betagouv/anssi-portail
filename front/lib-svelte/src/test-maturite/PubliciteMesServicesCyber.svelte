@@ -28,4 +28,6 @@
   </div>
 </div>
 
-<a href="/connexion" class="bouton primaire">Connectez-vous sur MesServicesCyber</a>
+<a href="/connexion" class="bouton primaire"
+  >Connectez-vous sur MesServicesCyber</a
+>

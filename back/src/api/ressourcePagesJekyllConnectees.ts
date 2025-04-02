@@ -3,7 +3,7 @@ import { Request, Response, Router } from 'express';
 
 const ressourcePagesJekyllConnectees = (
   { fournisseurChemin, middleware }: ConfigurationServeur,
-  nomPage:string
+  nomPage: string
 ): Router => {
   const routeur = Router();
 

@@ -1,6 +1,6 @@
 import { ConfigurationServeur } from './configurationServeur';
 import { Request, Response, Router } from 'express';
-import {check} from "express-validator";
+import { check } from 'express-validator';
 
 const ressourceFavorisPartages = ({
   middleware,
@@ -11,9 +11,7 @@ const ressourceFavorisPartages = ({
 
   routeur.get(
     '/:id',
-    [
-      check('id').isUUID().withMessage("L'id est invalide"),
-    ],
+    [check('id').isUUID().withMessage("L'id est invalide")],
     middleware.valide(),
     async (requete: Request, reponse: Response) => {
       const utilisateurPartageur = await entrepotUtilisateur.parIdListeFavoris(

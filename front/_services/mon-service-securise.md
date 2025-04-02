@@ -4,37 +4,39 @@ typologie: service
 nom: Mon&ZeroWidthSpace;Service&ZeroWidthSpace;Sécurisé
 avecFicheDetaillee: true
 titreHtml: MonServiceSécurisé
-description: "Sécuriser et homologuer en équipe"
+description: 'Sécuriser et homologuer en équipe'
 lien: https://monservicesecurise.cyber.gouv.fr/
 illustration: mss/mss.png
-cible:  |
-    <ul>
-    <li> Toutes les entités publiques en France (ministères, établissements publics, collectivités, opérateurs publics de services numériques, etc.). </li>
-    <li>Les prestataires privés travaillant au profit d’entités publiques.</li>
-    </ul>
+cible: |
+  <ul>
+  <li> Toutes les entités publiques en France (ministères, établissements publics, collectivités, opérateurs publics de services numériques, etc.). </li>
+  <li>Les prestataires privés travaillant au profit d’entités publiques.</li>
+  </ul>
 sources:
   - ANSSI
   - Innovation ANSSI
 droitsAcces:
   - ENTITES_PUBLIQUES
 liens:
-    - accompagnement:   
-      titre: Bénéficier d’un accompagnement
-      lien: https://calendly.com/fabien-giraud/presentation-de-monservicesecurise-1
-      illustration: mss/mss-accompagnement.png
-      couleurFond: "#0079D0"
-    - commencer:
-      titre: Commencer à sécuriser
-      lien: https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/MonServiceSecurise%20video.mp4
-      video: true
-      illustration: mss/mss-securiser.webp
-      couleurFond: "#0079D0"
+  - accompagnement:
+    titre: Bénéficier d’un accompagnement
+    lien: https://calendly.com/fabien-giraud/presentation-de-monservicesecurise-1
+    illustration: mss/mss-accompagnement.png
+    couleurFond: '#0079D0'
+  - commencer:
+    titre: Commencer à sécuriser
+    lien: https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/MonServiceSecurise%20video.mp4
+    video: true
+    illustration: mss/mss-securiser.webp
+    couleurFond: '#0079D0'
 ---
+
 MonServiceSécurisé est un service numérique proposé par le laboratoire d'innovation de l’ANSSI pour aider les entités publiques à piloter en équipe la sécurité de tous leurs services numériques et à les homologuer rapidement.
 
 Gratuit, 100% en ligne, MonServiceSécurisé est destiné aussi bien aux professionnels de l’informatique et de la sécurité qu’aux chefs de projets métiers.
 
 Avec MonServiceSécurisé
+
 <ul>
 <li>Identifiez en 3mn les besoins de sécurité d’un service à sécuriser</li>
 <li>Obtenez une liste de mesures de sécurité personnalisée, adaptée aux besoins identifiés.</li>
@@ -44,6 +46,7 @@ Avec MonServiceSécurisé
 </ul>
 
 Depuis votre tableau de bord :
+
 <ul>
 <li>Supervisez l’ensemble de vos services : leurs besoins, leur indice cyber, leur statut d’homologation les prochaines actions à mener.</li>
 <li>Consultez vos notifications et les recommandations de l’ANSSI</li>
