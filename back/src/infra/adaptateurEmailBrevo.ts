@@ -12,20 +12,24 @@ const enteteJSON = {
 const urlBase = process.env.BREVO_API_URL_BASE;
 
 export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
-  envoieEmailBienvenue: async ({ email, prenom }: { email: string; prenom: string }) => {
+  envoieEmailBienvenue: async ({
+    email,
+    prenom,
+  }: {
+    email: string;
+    prenom: string;
+  }) => {
     await axios.post(
       `${urlBase}/smtp/email`,
       {
         to: [{ email }],
         templateId: parseInt(process.env.BREVO_ID_TEMPLATE_BIENVENUE || '0'),
-        PRENOM: prenom
+        PRENOM: prenom,
       },
-      enteteJSON,
-    )
-  }
+      enteteJSON
+    );
+  },
 });
 
 export const fabriqueAdaptateurEmail = () =>
-  process.env.BREVO_CLE_API
-    ? adaptateurEmailBrevo()
-    : adaptateurEmailConsole();
+  process.env.BREVO_CLE_API ? adaptateurEmailBrevo() : adaptateurEmailConsole();

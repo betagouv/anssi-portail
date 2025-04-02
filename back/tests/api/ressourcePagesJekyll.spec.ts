@@ -13,7 +13,7 @@ import {
 describe('La ressource pages jekyll', () => {
   let serveur: Express;
   let fournisseurChemin: FournisseurChemin;
-  
+
   beforeEach(() => {
     fournisseurChemin = fauxFournisseurDeChemin;
     serveur = creeServeur({
@@ -51,13 +51,17 @@ describe('La ressource pages jekyll', () => {
 
   describe('sur demande de la page favoris partagés', () => {
     it('répond 200', async () => {
-      const reponse = await request(serveur).get('/favoris-partages/monSuperId');
+      const reponse = await request(serveur).get(
+        '/favoris-partages/monSuperId'
+      );
 
       assert.equal(reponse.status, 200);
     });
 
     it('renvoie un contenu html', async () => {
-      const reponse = await request(serveur).get('/favoris-partages/monSuperId');
+      const reponse = await request(serveur).get(
+        '/favoris-partages/monSuperId'
+      );
 
       assert.notEqual(reponse.headers['content-type'], undefined);
       assert.match(reponse.headers['content-type'], /html/);

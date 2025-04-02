@@ -1,3 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-  window.location = "/catalogue";
+document.addEventListener('DOMContentLoaded', () => {
+  window.location = '/catalogue';
 });

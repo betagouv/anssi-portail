@@ -1,4 +1,4 @@
-import {mount} from "svelte";
+import { mount } from "svelte";
 import TestMaturite from "./test-maturite/TestMaturite.svelte";
 
 

@@ -1,6 +1,6 @@
 import { mount } from "svelte";
 import ExtraitItems from "./catalogue/ExtraitItems.svelte";
-import type {ItemCyber, RepartitionParBesoin} from "./catalogue/Catalogue.types";
+import type { ItemCyber, RepartitionParBesoin } from "./catalogue/Catalogue.types";
 import { catalogueStore } from "./catalogue/stores/catalogue.store";
 
 const donnees = document.getElementById("donnees")!.textContent;

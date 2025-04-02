@@ -1,7 +1,10 @@
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 import { contactsParRegion } from '../metier/referentielContacts';
-import { CodeDepartement, regionDuDepartement } from '../metier/referentielDepartements';
+import {
+  CodeDepartement,
+  regionDuDepartement,
+} from '../metier/referentielDepartements';
 
 const ressourceContacts = ({
   middleware,
@@ -21,8 +24,10 @@ const ressourceContacts = ({
         return;
       }
 
-      const codeRegion = regionDuDepartement(utilisateur.organisation.departement as CodeDepartement);
-      
+      const codeRegion = regionDuDepartement(
+        utilisateur.organisation.departement as CodeDepartement
+      );
+
       reponse.json(contactsParRegion[codeRegion]);
     }
   );

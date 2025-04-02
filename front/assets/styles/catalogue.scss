@@ -1,7 +1,7 @@
 ---
 ---
 
-@use "../../assets/styles/responsive" as *;
+@use '../../assets/styles/responsive' as *;
 
 #catalogue {
   display: flex;
@@ -167,7 +167,7 @@
         line-height: 1rem;
       }
 
-      input[type="checkbox"] {
+      input[type='checkbox'] {
         appearance: none;
         border: 1px solid var(--noir);
         border-radius: 4px;
@@ -180,7 +180,7 @@
           background-color: var(--jaune-msc);
 
           &::before {
-            content: "";
+            content: '';
             display: block;
             margin: auto;
             width: 6px;

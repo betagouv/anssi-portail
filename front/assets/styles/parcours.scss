@@ -1,7 +1,7 @@
 ---
 ---
 
-@use "../../assets/styles/responsive" as *;
+@use '../../assets/styles/responsive' as *;
 
 section {
   padding: 24px var(--gouttiere);
@@ -110,21 +110,22 @@ section.action {
     display: grid;
     column-gap: 24px;
     grid-template-areas:
-      "fil-ariane"
-      "titre"
-      "description"
-      "cta";
+      'fil-ariane'
+      'titre'
+      'description'
+      'cta';
 
     @include a-partir-de(lg) {
       grid-template-columns: auto 384px;
       grid-template-areas:
-        "fil-ariane cta"
-        "titre cta"
-        "description cta";
+        'fil-ariane cta'
+        'titre cta'
+        'description cta';
     }
   }
 
-  .fil-ariane, #fil-ariane {
+  .fil-ariane,
+  #fil-ariane {
     grid-area: fil-ariane;
   }
 
@@ -144,11 +145,11 @@ section.action {
 
 .chapeau.fond-sombre.nis2 {
   .contenu-section {
-    grid-template-areas: "fil-ariane" "titre" "description";
+    grid-template-areas: 'fil-ariane' 'titre' 'description';
 
     @include a-partir-de(lg) {
       grid-template-columns: auto;
-      grid-template-areas: "fil-ariane" "titre" "description";
+      grid-template-areas: 'fil-ariane' 'titre' 'description';
     }
   }
 }

@@ -1,5 +1,3 @@
- 
-
 import { describe, it } from 'node:test';
 import { BusEvenements, EvenementDuBus } from '../../src/bus/busEvenements';
 import assert from 'node:assert';

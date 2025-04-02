@@ -1,6 +1,6 @@
 import { mount } from 'svelte';
-import type {ItemCyber, RepartitionParBesoin} from "./catalogue/Catalogue.types";
-import {catalogueStore} from "./catalogue/stores/catalogue.store";
+import type { ItemCyber, RepartitionParBesoin } from "./catalogue/Catalogue.types";
+import { catalogueStore } from "./catalogue/stores/catalogue.store";
 import FavorisPartages from "./favoris/FavorisPartages.svelte";
 
 

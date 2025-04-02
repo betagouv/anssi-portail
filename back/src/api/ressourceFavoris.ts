@@ -12,7 +12,12 @@ const ressourceFavoris = ({
     '/',
     middleware.verifieJWT,
     middleware.aseptise('idItemCyber'),
-    [check('idItemCyber').not().isEmpty().withMessage("L'idItemCyber est invalide")],
+    [
+      check('idItemCyber')
+        .not()
+        .isEmpty()
+        .withMessage("L'idItemCyber est invalide"),
+    ],
     middleware.valide(),
     async (requete: Request, reponse: Response) => {
       let idItemCyber = requete.body.idItemCyber;

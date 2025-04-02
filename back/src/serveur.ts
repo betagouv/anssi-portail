@@ -14,9 +14,9 @@ import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
 import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres';
 import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo';
+import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
-import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({

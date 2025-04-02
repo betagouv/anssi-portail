@@ -1,7 +1,7 @@
 ---
 ---
 
-@use "../../assets/styles/responsive" as *;
+@use '../../assets/styles/responsive' as *;
 
 h2,
 h3,
@@ -118,7 +118,7 @@ p {
     }
 
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       z-index: 0;
       bottom: 13px;

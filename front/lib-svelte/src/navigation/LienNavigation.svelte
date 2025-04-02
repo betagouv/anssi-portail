@@ -6,10 +6,14 @@
   const cheminRelatif = window.location.pathname;
 </script>
 
-<a {href} class:actif={cheminRelatif === href} class:dans-menu-deroulant={dansMenuDeroulant}>{label}</a>
+<a
+  {href}
+  class:actif={cheminRelatif === href}
+  class:dans-menu-deroulant={dansMenuDeroulant}>{label}</a
+>
 
 <style lang="scss">
-  @use "../../../assets/styles/responsive" as *;
+  @use '../../../assets/styles/responsive' as *;
 
   a {
     padding: 16px 8px;

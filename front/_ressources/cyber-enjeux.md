@@ -3,42 +3,46 @@ layout: service
 typologie: ressource
 nom: Cyber&ZeroWidthSpace;Enjeux&ZeroWidthSpace;
 titreHtml: CyberEnjeux
-description: "Former à la cybersécurité par le jeu"
+description: 'Former à la cybersécurité par le jeu'
 lien: https://cyber.gouv.fr/actualites/au-college-et-au-lycee-former-a-la-cybersecurite-par-le-jeu
 illustration: cyber-enjeux/cyber-enjeux.png
 avecFicheDetaillee: true
-format: Outil 
+format: Outil
 sources:
   - ANSSI
 droitsAcces:
   - ACCES_LIBRE
-cible:  |
-    <ul>
-    <li> Pensé pour les élèves, CyberEnJeux est destiné aux enseignants de collège et de lycée. </li>
+cible: |
+  <ul>
+  <li> Pensé pour les élèves, CyberEnJeux est destiné aux enseignants de collège et de lycée. </li>
 liens:
-    - accompagnement:   
-      titre: Découvrez DemainSpécialisteCyber 
-      lien: /services/demainspecialistecyber.html
-      illustration: cyber-enjeux/cyber-enjeux-demainspe.png
-      couleurFond: "#0079D0"
+  - accompagnement:
+    titre: Découvrez DemainSpécialisteCyber
+    lien: /services/demainspecialistecyber.html
+    illustration: cyber-enjeux/cyber-enjeux-demainspe.png
+    couleurFond: '#0079D0'
 ---
+
 Imaginé par le laboratoire d’innovation de L’ANSSI et co-construit avec le ministère de l’Education nationale et l’association Open Serious Game, CyberEnJeux est un dispositif pédagogique innovant permettant de former des élèves à la cybersécurité dans le cadre de leurs enseignements… par la création de jeux par les élèves eux-mêmes.
 
 CyberEnJeux c’est :
 
 1/ Pour les enseignants
+
 <ul> 
   <li>3 livrets enseignant présentant le dispositif, se former et former les élèves à la cybersécurité, accompagner les élèves à la création de jeux.</li>
   <li>1 présentation (diapositives) permettant de dérouler la formation cyber des élèves en classe.</li>
 </ul>
 
 2/ Pour les élèves
+
 <ul>
   <li>1 livret élèves incluant des modèles de jeux</li>
   <li>13 cartes objectifs cyber</li>
 </ul>
 
 CyberEnJeux s’articule autour de deux temps :
+
 <ul>
   <li>Un temps de formation des élèves à la cybersécurité</li>
   <li>Un temps de conception de prototypes de jeux « physiques ».</li>

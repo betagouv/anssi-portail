@@ -1,7 +1,7 @@
 ---
 layout: parcours
 permalink: /parcours-approfondir/
-titreHtml: "Cybersécurité : approfondir ! | MesServicesCyber"
+titreHtml: 'Cybersécurité : approfondir ! | MesServicesCyber'
 ---
 
 <script
@@ -27,8 +27,9 @@ titreHtml: "Cybersécurité : approfondir ! | MesServicesCyber"
     <div id="fil-ariane"></div>
     <h1>Les services pour approfondir</h1>
     <p>
-      Votre organisation a déjà mis en œuvre des premières actions pour renforcer sa cybersécurité et souhaite
-      approfondir la démarche engagée ? Découvrez des services et ressources sélectionnés par l’ANSSI pour vous
+      Votre organisation a déjà mis en œuvre des premières actions pour
+      renforcer sa cybersécurité et souhaite approfondir la démarche engagée ?
+      Découvrez des services et ressources sélectionnés par l’ANSSI pour vous
       aider.
     </p>
     <div class="cta">
@@ -42,25 +43,33 @@ titreHtml: "Cybersécurité : approfondir ! | MesServicesCyber"
   <div class="contenu-section">
     <div class="groupe-boutons">
       {% for action in site.data.parcours-approfondir %}
-      <a href="#{{action[0]}}" class="{%if forloop.first%}actif{% endif %} bouton secondaire">{{action[1].titre}}</a>
+      <a
+        href="#{{action[0]}}"
+        class="{%if forloop.first%}actif{% endif %} bouton secondaire"
+        >{{action[1].titre}}</a
+      >
       {% endfor %}
     </div>
   </div>
 </section>
 
 {% for action in site.data.parcours-approfondir %}
-{%assign indexModulo2 = forloop.index0 | modulo: 2 %}
-{%if indexModulo2 == 1 %}{%assign fondAlternatif=true%}{%else%}{%assign fondAlternatif=false%}{%endif%}
-{% assign idAction=action[0] %}
-{% assign infosAction=action[1] %}
-{% include action-parcours-avec-items.html
-id=idAction
-titre=infosAction.titre
-explication=infosAction.explication
-parcours=infosAction.parcours
-items=infosAction.items
-fondAlternatif=fondAlternatif
-%}
+  {%assign indexModulo2 = forloop.index0 | modulo: 2 %}
+  {%if indexModulo2 == 1 %}
+    {%assign fondAlternatif=true%}
+  {%else%}
+    {%assign fondAlternatif=false%}
+  {%endif%}
+  {% assign idAction=action[0] %}
+  {% assign infosAction=action[1] %}
+  {% include action-parcours-avec-items.html
+    id=idAction
+    titre=infosAction.titre
+    explication=infosAction.explication
+    parcours=infosAction.parcours
+    items=infosAction.items
+    fondAlternatif=fondAlternatif
+  %}
 {% endfor %}
 
 {% include encart-nis2.html fond='sombre' %}

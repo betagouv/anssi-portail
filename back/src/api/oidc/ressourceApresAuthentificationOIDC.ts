@@ -15,8 +15,9 @@ const ressourceApresAuthentificationOIDC = ({
     }
 
     try {
-      const { accessToken, idToken } =
-        await adaptateurOIDC.recupereJeton(requete);
+      const { accessToken, idToken } = await adaptateurOIDC.recupereJeton(
+        requete
+      );
       const informationsUtilisateur =
         await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
       const { email } = informationsUtilisateur;

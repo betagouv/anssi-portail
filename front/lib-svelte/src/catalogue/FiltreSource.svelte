@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Source } from "./Catalogue.types";
-  import { rechercheParSource } from "./stores/rechercheParSource.store";
-  import { nombreResultats } from "./stores/nombreResultats.store";
+  import { Source } from './Catalogue.types';
+  import { rechercheParSource } from './stores/rechercheParSource.store';
+  import { nombreResultats } from './stores/nombreResultats.store';
 
   let anssiPartielles = false;
   $: if (

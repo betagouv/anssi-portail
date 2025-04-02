@@ -7,23 +7,23 @@ collections:
   ressources:
     output: true
 exclude:
-    - "*.iml"
-    - README.md
-    - Dockerfile
-    - dev.sh
-    - lib-svelte/.vscode/
-    - lib-svelte/node_modules/
-    - lib-svelte/src/
-    - lib-svelte/public/
-    - lib-svelte/index.html
-    - lib-svelte/*.json
-    - lib-svelte/README.md
-    - lib-svelte/svelte.config.js
-    - lib-svelte/vite.config.ts
-    - lib-svelte/test/
-    - test/
-    - node_modules/
-    - package.json
-    - package-lock.json
-    - "*.config.js"
-    - src/
+  - '*.iml'
+  - README.md
+  - Dockerfile
+  - dev.sh
+  - lib-svelte/.vscode/
+  - lib-svelte/node_modules/
+  - lib-svelte/src/
+  - lib-svelte/public/
+  - lib-svelte/index.html
+  - lib-svelte/*.json
+  - lib-svelte/README.md
+  - lib-svelte/svelte.config.js
+  - lib-svelte/vite.config.ts
+  - lib-svelte/test/
+  - test/
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - '*.config.js'
+  - src/

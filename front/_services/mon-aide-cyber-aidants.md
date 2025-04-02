@@ -12,26 +12,27 @@ droitsAcces:
 sources:
   - ANSSI
   - Innovation ANSSI
-cible:  |
-    Pour devenir Aidant cyber vous devez : 
-    <ul>
-    <li> Pour devenir Aidant cyber, vReprésenter ou faire partie au titre de son activité professionnelle ou associative d’un service de l’État, d’une administration, d’une réserve citoyenne ou d’une entité morale à but non lucratif</li>
-    <li>Être dans une démarche non lucrative tout au long du dispositif
-    <li>Participer à un atelier Devenir Aidant MonAideCyber dispensé par l’ANSSI</li>
-    </ul>
+cible: |
+  Pour devenir Aidant cyber vous devez : 
+  <ul>
+  <li> Pour devenir Aidant cyber, vReprésenter ou faire partie au titre de son activité professionnelle ou associative d’un service de l’État, d’une administration, d’une réserve citoyenne ou d’une entité morale à but non lucratif</li>
+  <li>Être dans une démarche non lucrative tout au long du dispositif
+  <li>Participer à un atelier Devenir Aidant MonAideCyber dispensé par l’ANSSI</li>
+  </ul>
 liens:
-    - accompagnement:   
-      titre: Devenir Aidant cyber !
-      lien: https://www.monaide.cyber.gouv.fr/
-      illustration: mac/mac-accompagnement.png
-      couleurFond: "#5d2b9d"
-    - commencer:
-      titre: Découvrez notre vidéo&nbsp;!
-      video: true
-      lien: https://ressources-mac.cellar-c2.services.clever-cloud.com/Video_MAC.mp4
-      illustration: mac/mac.png
-      couleurFond: "#6f479f"
+  - accompagnement:
+    titre: Devenir Aidant cyber !
+    lien: https://www.monaide.cyber.gouv.fr/
+    illustration: mac/mac-accompagnement.png
+    couleurFond: '#5d2b9d'
+  - commencer:
+    titre: Découvrez notre vidéo&nbsp;!
+    video: true
+    lien: https://ressources-mac.cellar-c2.services.clever-cloud.com/Video_MAC.mp4
+    illustration: mac/mac.png
+    couleurFond: '#6f479f'
 ---
+
 MonAideCyber est un service numérique proposé par le laboratoire d’innovation de l’ANSSI pour aider l’ensemble des entités publiques et privées peu matures sur les enjeux de cybersécurité mais souhaitant passer à l’action !
 
 L’objectif de MonAideCyber est de fédérer une communauté d’Aidants cyber volontaires, issus du secteur public ou associatifs souhaitant aider des entités publiques, privées et associatives à passer à l’action cyber !
@@ -45,6 +46,7 @@ Les Aidants cyber sont référencés sur l’annuaire en ligne, et peuvent être
 MonAideCyber est un service numérique proposé par le laboratoire d'innovation de l’ANSSI pour aider l’ensemble des entités publiques et privées peu matures sur les enjeux de cybersécurité mais souhaitant passer à l’action&nbsp;!
 
 Avec MonAideCyber, faites-vous accompagner par un “Aidant cyber” :
+
 <ul>
   <li> Bénéficiez d’un 1er diagnostic de la cybersécurité de votre organisation, en moins de 2h dans vos locaux </li>
   <li>Recevez les recommandations de l’ANSSI sur des premières actions faciles et rapides à mettre en place permettant de réduire les vulnérabilités de votre organisation face au risque de cyberattaques.</li>

@@ -14,15 +14,22 @@ describe("La ressource Annuaire Secteurs d'activité", () => {
 
   describe('sur demande GET', () => {
     it('répond 200', async () => {
-      const reponse = await request(serveur).get('/api/annuaire/secteurs-activite');
+      const reponse = await request(serveur).get(
+        '/api/annuaire/secteurs-activite'
+      );
 
       assert.equal(reponse.status, 200);
     });
 
     it('renvoie les secteurs du référentiel', async () => {
-      const reponse = await request(serveur).get('/api/annuaire/secteurs-activite');
+      const reponse = await request(serveur).get(
+        '/api/annuaire/secteurs-activite'
+      );
 
-      assert.equal(reponse.body[0].libelle, 'Agriculture, sylviculture et pêche');
+      assert.equal(
+        reponse.body[0].libelle,
+        'Agriculture, sylviculture et pêche'
+      );
       assert.equal(reponse.body[0].code, 'A');
     });
   });

@@ -26,13 +26,15 @@
 
   questionnaireStore.initialise();
 
-  let reponseCourante : number;
+  let reponseCourante: number;
 
   actualiseReponseCourante();
 
   function actualiseReponseCourante() {
     reponseCourante =
-      $questionnaireStore.toutesLesReponses[$questionnaireStore.questionCourante];
+      $questionnaireStore.toutesLesReponses[
+        $questionnaireStore.questionCourante
+      ];
   }
 
   function valideReponse() {
@@ -41,7 +43,7 @@
   }
 
   function reviensEnArriere() {
-    questionnaireStore.reviensEnArriere()
+    questionnaireStore.reviensEnArriere();
     actualiseReponseCourante();
   }
 

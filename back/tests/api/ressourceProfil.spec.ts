@@ -6,18 +6,18 @@ import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import { encodeSession, enObjet } from './cookie';
 import { JsonWebTokenError } from 'jsonwebtoken';
-import {EntrepotUtilisateurMemoire} from "../persistance/entrepotUtilisateurMemoire";
-import {jeanneDupont} from "./objetsPretsALEmploi";
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
+import { jeanneDupont } from './objetsPretsALEmploi';
 
 describe('La ressource Profil', () => {
   let serveur: Express;
   const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
   beforeEach(() => {
-    entrepotUtilisateur.ajoute(jeanneDupont)
+    entrepotUtilisateur.ajoute(jeanneDupont);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
-      entrepotUtilisateur
+      entrepotUtilisateur,
     });
   });
 
@@ -29,7 +29,9 @@ describe('La ressource Profil', () => {
     });
 
     it("renvoie les informations de l'utilisateur", async () => {
-      const jeanneEntreposee = await entrepotUtilisateur.parEmail('jeanne.dupont@user.com');
+      const jeanneEntreposee = await entrepotUtilisateur.parEmail(
+        'jeanne.dupont@user.com'
+      );
       const cookie = encodeSession({
         email: 'jeanne.dupont@user.com',
       });
@@ -42,7 +44,10 @@ describe('La ressource Profil', () => {
       assert.equal(reponse.body.prenom, 'Jeanne');
       assert.equal(reponse.body.email, 'jeanne.dupont@user.com');
       assert.equal(reponse.body.siret, '13000766900018');
-      assert.equal(reponse.body.idListeFavoris, jeanneEntreposee!.idListeFavoris);
+      assert.equal(
+        reponse.body.idListeFavoris,
+        jeanneEntreposee!.idListeFavoris
+      );
     });
 
     it('supprime la session si le token JWT est invalide', async () => {

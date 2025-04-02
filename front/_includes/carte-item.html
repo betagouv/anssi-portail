@@ -1,38 +1,46 @@
-{% assign item = include.item %}
-{% if item.avecFicheDetaillee %}
+{% assign item = include.item %} {% if item.avecFicheDetaillee %}
 <a class="carte {{ item.typologie }}" href="{{item.url}}">
-{% else %}
-<a class="carte {{ item.typologie }}" href="{{item.lien}}" target="_blank">
-{% endif %}
-  <figure>
-    <img src="/assets/images/illustrations-services/{{item.illustration}}" alt="Capture d’écran de {{item.nom}}">
-    <figcaption>
-      {% if item.typologie == 'service' %}
-        Service
-      {% else %}
-        {{item.format}}
-      {% endif %}
-    </figcaption>
-  </figure>
-  <div class="contenu">
-    <div class="nom-item">{% if include.nomPerso %}{{include.nomPerso}}{% else %}{{item.nom}}{% endif %}</div>
-    <span class="description">{% if include.descriptionPerso %}{{include.descriptionPerso}}{% else %}{{item.description}}{% endif %}</span>
-    <div class="labels">
-      {% for tag in include.tagsSpecifiques %}
-      <span class="tag-specifique">{{tag}}</span>
-      {% endfor %}
-      {% for source in item.sources %}
-      <span>{{source}}</span>
-      {% endfor %}
-      {% if item.avecFicheDetaillee %}
-      <img src="/assets/images/icone-fleche-droite.svg"
-           alt="Voir le détail"
-           title="Voir le détail">
-      {% else %}
-      <img src="/assets/images/icone-lien-externe.svg"
-           alt="Ouvrir dans un nouvel onglet"
-           title="Ouvrir dans un nouvel onglet">
-      {% endif %}
+  {% else %}
+  <a class="carte {{ item.typologie }}" href="{{item.lien}}" target="_blank">
+    {% endif %}
+    <figure>
+      <img
+        src="/assets/images/illustrations-services/{{item.illustration}}"
+        alt="Capture d’écran de {{item.nom}}"
+      />
+      <figcaption>
+        {% if item.typologie == 'service' %} Service {% else %} {{item.format}}
+        {% endif %}
+      </figcaption>
+    </figure>
+    <div class="contenu">
+      <div class="nom-item">
+        {% if include.nomPerso %}{{include.nomPerso}}{% else %}{{item.nom}}{%
+        endif %}
+      </div>
+      <span class="description"
+        >{% if include.descriptionPerso %}{{include.descriptionPerso}}{% else
+        %}{{item.description}}{% endif %}</span
+      >
+      <div class="labels">
+        {% for tag in include.tagsSpecifiques %}
+        <span class="tag-specifique">{{tag}}</span>
+        {% endfor %} {% for source in item.sources %}
+        <span>{{source}}</span>
+        {% endfor %} {% if item.avecFicheDetaillee %}
+        <img
+          src="/assets/images/icone-fleche-droite.svg"
+          alt="Voir le détail"
+          title="Voir le détail"
+        />
+        {% else %}
+        <img
+          src="/assets/images/icone-lien-externe.svg"
+          alt="Ouvrir dans un nouvel onglet"
+          title="Ouvrir dans un nouvel onglet"
+        />
+        {% endif %}
+      </div>
     </div>
-  </div>
+  </a>
 </a>

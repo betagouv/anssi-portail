@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { FormatRessource, Typologie } from "./Catalogue.types";
-  import { rechercheParTypologie } from "./stores/rechercheParTypologie.store";
-  import { rechercheParFormat } from "./stores/rechercheParFormat.store";
-  import { nombreResultats } from "./stores/nombreResultats.store";
+  import { FormatRessource, Typologie } from './Catalogue.types';
+  import { rechercheParTypologie } from './stores/rechercheParTypologie.store';
+  import { rechercheParFormat } from './stores/rechercheParFormat.store';
+  import { nombreResultats } from './stores/nombreResultats.store';
 
   let ressourcesPartielles = false;
   $: if ($rechercheParFormat.length > 0) {
@@ -68,7 +68,9 @@
       />
       <span class="libelle">Publication</span>
       <span class="compte"
-        >{$nombreResultats.parFormatDeRessource[FormatRessource.PUBLICATION]}</span
+        >{$nombreResultats.parFormatDeRessource[
+          FormatRessource.PUBLICATION
+        ]}</span
       >
     </label>
     <label>

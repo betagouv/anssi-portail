@@ -26,7 +26,9 @@ export class EntrepotResultatTestMemoire implements EntrepotResultatTest {
   }
 
   tous = async (): Promise<ResultatTestMaturite[]> => {
-    return this.entites.map((entite) => (new ResultatTestMaturite({ ...entite })));
+    return this.entites.map(
+      (entite) => new ResultatTestMaturite({ ...entite })
+    );
   };
 
   async parId(id: string) {

@@ -48,7 +48,7 @@ describe('La ressource de la page connexion', () => {
 
       assert.equal(nomPageDemande!, 'connexion');
     });
-    
+
     it("supprime la session de l'utilisateur", async () => {
       const cookieSession = encodeSession({ token: 'token-session' });
 

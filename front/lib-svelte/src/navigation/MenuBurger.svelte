@@ -3,11 +3,11 @@
 </script>
 
 <button on:click={surClic}>
-  <img src="/assets/images/icone-menu.svg" alt="Menu burger"/>
+  <img src="/assets/images/icone-menu.svg" alt="Menu burger" />
 </button>
 
 <style lang="scss">
-  @use "../../../assets/styles/responsive" as *;
+  @use '../../../assets/styles/responsive' as *;
 
   button {
     background: transparent;

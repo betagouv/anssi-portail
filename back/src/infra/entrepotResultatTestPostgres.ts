@@ -11,9 +11,7 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
   }
 
   async parId(id: string): Promise<ResultatTestMaturite | undefined> {
-    const donnees = await this.knex('resultats_test')
-      .where({ id })
-      .first();
+    const donnees = await this.knex('resultats_test').where({ id }).first();
     return donnees
       ? new ResultatTestMaturite({
           ...donnees,

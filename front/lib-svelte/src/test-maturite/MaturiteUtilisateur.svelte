@@ -19,13 +19,17 @@
       const reponses = reponseHttp.data.reponses;
       questionnaireStore.chargeReponses(reponses);
     } catch (e) {
-      if(e?.status === 404) {
-        window.location.href = '/test-maturite'
+      if (e?.status === 404) {
+        window.location.href = '/test-maturite';
       } else {
         throw e;
       }
-    };
+    }
   });
 </script>
 
-<ResultatsTestMaturite affichePubMsc={false} afficheRappelReponses={true} animeTuiles={false}/>
+<ResultatsTestMaturite
+  affichePubMsc={false}
+  afficheRappelReponses={true}
+  animeTuiles={false}
+/>

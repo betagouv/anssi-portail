@@ -6,7 +6,7 @@ import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
-import {randomUUID} from "node:crypto";
+import { randomUUID } from 'node:crypto';
 
 describe('La ressource Contacts', () => {
   let serveur: Express;
