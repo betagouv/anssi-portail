@@ -60,12 +60,11 @@
     padding: 0 var(--gouttiere);
     display: none;
     margin-left: -8px;
+    border-top: 1px solid #dddddd;
 
     @include a-partir-de(xl) {
       margin-left: -32px;
     }
-
-    border-top: 1px solid #dddddd;
 
     @include a-partir-de(lg) {
       display: block;
@@ -113,14 +112,14 @@
         }
 
         summary {
-          @include a-partir-de(xl) {
-            padding: 16px;
-          }
           padding: 16px 8px;
           display: flex;
           gap: 8px;
           align-items: center;
           cursor: pointer;
+          @include a-partir-de(xl) {
+            padding: 16px;
+          }
 
           &::marker {
             content: '';
