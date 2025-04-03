@@ -6,11 +6,9 @@
 
   export let idItemCyber: IdItemCyber;
 
-  $: cheminIcone = `/assets/images/icone-favori-${estFavori(idItemCyber) ? 'plein' : 'vide'}.svg`;
+  $: estFavori = $favorisStore.includes(idItemCyber)
 
-  // eslint-disable-next-line svelte/no-reactive-functions
-  $: estFavori = (idItemCyber: IdItemCyber) =>
-    $favorisStore.includes(idItemCyber);
+  $: cheminIcone = `/assets/images/icone-favori-${estFavori ? 'plein' : 'vide'}.svg`;
 
   $: titre = $profilStore ? '' : 'Connectez-vous pour profiter des favoris';
 
@@ -19,7 +17,7 @@
     if (!$profilStore) return;
 
     try {
-      if (estFavori(idFavori)) {
+      if (estFavori) {
         await axios.delete(`/api/favoris/${encodeURIComponent(idFavori)}`);
         favorisStore.retire(idFavori);
       } else {
