@@ -13,8 +13,6 @@ const { itemsCyber, repartition } = JSON.parse(donnees) as {
 
 catalogueStore.initialise(itemsCyber, repartition);
 
-const extrait = mount(ExtraitItems, {
-  target: document.getElementById("extrait")!,
-});
-
-export default extrait;
+ mount(ExtraitItems, {
+   target: document.getElementById('extrait')!,
+ });

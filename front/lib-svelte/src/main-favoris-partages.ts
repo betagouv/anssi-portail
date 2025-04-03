@@ -10,8 +10,6 @@ const { itemsCyber } = JSON.parse(donnees) as { itemsCyber: ItemCyber[] };
 
 catalogueStore.initialise(itemsCyber);
 
-const favorisPartages = mount(FavorisPartages, {
+mount(FavorisPartages, {
   target: document.getElementById('favoris-partages')!,
 });
-
-export default favorisPartages;
