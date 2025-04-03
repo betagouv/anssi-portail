@@ -8,7 +8,8 @@
 
   $: cheminIcone = `/assets/images/icone-favori-${estFavori(idItemCyber) ? 'plein' : 'vide'}.svg`;
 
-  const estFavori = (idItemCyber: IdItemCyber) =>
+  // eslint-disable-next-line svelte/no-reactive-functions
+  $: estFavori = (idItemCyber: IdItemCyber) =>
     $favorisStore.includes(idItemCyber);
 
   $: titre = $profilStore ? '' : 'Connectez-vous pour profiter des favoris';
