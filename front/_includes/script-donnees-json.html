@@ -18,7 +18,9 @@
     }
       {% unless forloop.last %},{% endunless %}
       {% endfor %}
-    ],
+    ]
+    {% if include.repartition %}
+    ,
     "repartition": {
       "ETRE_SENSIBILISE": {% include tableau-json.html tableau=include.repartition.ETRE_SENSIBILISE %},
       "REAGIR": {% include tableau-json.html tableau=include.repartition.REAGIR %},
@@ -26,5 +28,6 @@
       "SECURISER": {% include tableau-json.html tableau=include.repartition.SECURISER %},
       "TOUS": {% include tableau-json.html tableau=include.repartition.TOUS %}
     }
+    {% endif %}
   }
 </script>
