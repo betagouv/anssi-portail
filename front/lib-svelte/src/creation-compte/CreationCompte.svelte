@@ -258,7 +258,7 @@
                 use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
               />
               <label for="cguAcceptees" class="requis">
-                J'accepte les <a href="/cgu">
+                J'accepte les <a class="lien" href="/cgu">
                   conditions générales d'utilisation
                 </a> de MesServicesCyber
               </label>
