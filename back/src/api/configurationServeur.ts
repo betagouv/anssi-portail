@@ -9,6 +9,7 @@ import { AdaptateurGestionErreur } from '../infra/adaptateurGestionErreurSentry'
 import { EntrepotResultatTest } from '../metier/entrepotResultatTest';
 import { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
 import { EntrepotFavori } from '../metier/entrepotFavori';
+import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber';
 
 export type ConfigurationServeur = {
   fournisseurChemin: FournisseurChemin;
@@ -27,4 +28,5 @@ export type ConfigurationServeur = {
   entrepotResultatTest: EntrepotResultatTest;
   entrepotFavori: EntrepotFavori;
   adaptateurProfilAnssi: AdaptateurProfilAnssi;
+  adaptateurMonAideCyber: AdaptateurMonAideCyber;
 };

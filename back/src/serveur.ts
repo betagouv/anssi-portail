@@ -15,6 +15,7 @@ import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
 import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres';
 import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
+import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 
@@ -27,6 +28,7 @@ cableTousLesAbonnes({
 });
 
 const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
+const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber();
 
 creeServeur({
   fournisseurChemin,
@@ -50,6 +52,7 @@ creeServeur({
   adaptateurProfilAnssi,
   entrepotResultatTest: new EntrepotResultatTestPostgres(),
   entrepotFavori: new EntrepotFavoriPostgres(),
+  adaptateurMonAideCyber,
 }).listen(3000, () => {
   console.log('Le serveur écoute sur le port 3000');
 });

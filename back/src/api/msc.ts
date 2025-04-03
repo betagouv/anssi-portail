@@ -159,7 +159,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/api/utilisateurs', ressourceUtilisateurs(configurationServeur));
 
-  app.use('/api/mon-aide-cyber/demandes-aide', ressourceDemandesAide());
+  app.use(
+    '/api/mon-aide-cyber/demandes-aide',
+    ressourceDemandesAide(configurationServeur)
+  );
 
   app.use(
     '/api/favoris',

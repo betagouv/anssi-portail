@@ -74,6 +74,8 @@ export const fauxMiddleware: Middleware = {
   },
 };
 
+const fauxAdaptateurMonAideCyber = { creeDemandeAide: () => Promise.resolve() };
+
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   fournisseurChemin: fauxFournisseurDeChemin,
   middleware: fabriqueMiddleware({ adaptateurJWT: fauxAdaptateurJWT }),
@@ -90,5 +92,6 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
   entrepotResultatTest: new EntrepotResultatTestMemoire(),
   adaptateurProfilAnssi: fauxAdaptateurProfilAnssi,
+  adaptateurMonAideCyber: fauxAdaptateurMonAideCyber,
   entrepotFavori: new EntrepotFavoriMemoire(),
 };
