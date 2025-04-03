@@ -95,7 +95,8 @@
   </div>
 </section>
 
-<style>
+<style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
   .favoris {
     margin-top: 48px;
     margin-bottom: 48px;
@@ -116,5 +117,73 @@
 
   section {
     padding: 72px var(--gouttiere);
+  }
+
+  .encart {
+    .carte.parcours {
+      display: grid;
+      gap: 24px 16px;
+
+      grid-template-columns: auto;
+      grid-template-rows: auto;
+      grid-template-areas:
+        'illustration'
+        'titre'
+        'contenu'
+        'bouton';
+
+      @include a-partir-de(lg) {
+        grid-template-columns: auto 384px;
+        grid-template-areas:
+          'titre illustration'
+          'contenu illustration'
+          'bouton illustration';
+      }
+
+      .illustration {
+        grid-area: illustration;
+        @include a-partir-de(lg) {
+          height: 205px;
+          padding: 38px 51px;
+        }
+      }
+
+      h2 {
+        grid-area: titre;
+        @include a-partir-de(lg) {
+          font-size: 2.5rem;
+          line-height: 3rem;
+        }
+      }
+
+      p {
+        grid-area: contenu;
+        font-size: 1.25rem;
+        line-height: 2rem;
+      }
+
+      .bouton.primaire {
+        text-align: center;
+        border-bottom: none;
+        margin-top: 32px;
+        padding: 10px 24px;
+        grid-area: bouton;
+        place-self: center;
+
+        &:after {
+          content: none;
+        }
+
+        @include a-partir-de(sm) {
+          width: auto;
+        }
+
+        @include a-partir-de(lg) {
+          width: fit-content;
+          justify-self: flex-start;
+          margin-top: 16px;
+        }
+      }
+    }
   }
 </style>
