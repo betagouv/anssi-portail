@@ -28,6 +28,7 @@ import { ressourcePagesJekyllConnectees } from './ressourcePagesJekyllConnectees
 import { ressourceFavoris } from './ressourceFavoris';
 import { ressourceFavori } from './ressourceFavori';
 import { ressourceFavorisPartages } from './ressourceFavorisPartages';
+import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -102,7 +103,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'securite',
     'statistiques',
     'inscription',
-    'demande-aide-poc'
+    'demande-aide-poc',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
@@ -157,6 +158,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/api/profil', ressourceProfil(configurationServeur));
 
   app.use('/api/utilisateurs', ressourceUtilisateurs(configurationServeur));
+
+  app.use('/api/mon-aide-cyber/demandes-aide', ressourceDemandesAide());
 
   app.use(
     '/api/favoris',
