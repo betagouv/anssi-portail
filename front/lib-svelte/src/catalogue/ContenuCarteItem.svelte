@@ -37,19 +37,21 @@
     {#if itemCyber.sources}
       {#each itemCyber.sources as source (source)}<span>{source}</span>{/each}
     {/if}
-    <img
-      src={`/assets/images/${
-        itemCyber.lienInterne
-          ? 'icone-fleche-droite.svg'
-          : 'icone-lien-externe.svg'
-      }`}
-      alt={itemCyber.lienInterne
-        ? 'Voir le détail'
-        : 'Ouvrir dans un nouvel onglet'}
-      title={itemCyber.lienInterne
-        ? 'Voir le détail'
-        : 'Ouvrir dans un nouvel onglet'}
-    />
+    {#if itemCyber.lienInterne || itemCyber.lienExterne}
+      <img
+        src={`/assets/images/${
+          itemCyber.lienInterne
+            ? 'icone-fleche-droite.svg'
+            : 'icone-lien-externe.svg'
+        }`}
+        alt={itemCyber.lienInterne
+          ? 'Voir le détail'
+          : 'Ouvrir dans un nouvel onglet'}
+        title={itemCyber.lienInterne
+          ? 'Voir le détail'
+          : 'Ouvrir dans un nouvel onglet'}
+      />
+    {/if}
   </div>
 </div>
 
