@@ -39,4 +39,17 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
 
     assert.equal(emailEnvoye, 'durant@mail.fr');
   });
+
+  it('aseptise les paramètres', async () => {
+    let emailEnvoye = '';
+    adaptateurMonAideCyber.creeDemandeAide = async ({ email }: DemandeAide) => {
+      emailEnvoye = email;
+    };
+
+    await request(serveur)
+      .post('/api/mon-aide-cyber/demandes-aide')
+      .send({ email: '<script>durant@mail.fr' });
+
+    assert.equal(emailEnvoye, '&lt;script&gt;durant@mail.fr');
+  });
 });
