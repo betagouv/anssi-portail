@@ -343,14 +343,6 @@ h2 {
   }
 
   a {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    line-height: 1.5rem;
-    text-decoration: none;
-    color: var(--noir);
-    border-bottom: 1px solid var(--noir);
-
     &:before {
       content: '';
       background: url('/assets/images/icone-fleche-pleine.svg');
