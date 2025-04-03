@@ -12,6 +12,7 @@ export default defineConfig({
         'creation-compte': 'src/main-creation-compte.ts',
         'niveaux-maturite': 'src/main-niveaux-maturite.ts',
         'test-maturite': 'src/main-test-maturite.ts',
+        'demande-aide-mon-aide-cyber': 'src/main-demande-aide-mon-aide-cyber.ts',
         catalogue: 'src/main-catalogue.ts',
         contacts: 'src/main-contacts.ts',
         favoris: 'src/main-favoris.ts',
