@@ -2,7 +2,6 @@
   import ChampTexte from '../ui/ChampTexte.svelte';
   import Bouton from '../ui/Bouton.svelte';
   import axios from 'axios';
-
   let email: string;
   let enCoursEnvoi = false;
 
@@ -20,11 +19,11 @@
   <div class="contenu-section">
     <h2>Le diagnostic</h2>
     <div class="formulaire">
-      <label for="nom">Votre email</label>
+      <label for="email">Votre email</label>
       <ChampTexte
         bind:valeur={email}
-        nom="nom"
-        id="nom"
+        nom="email"
+        id="email"
         aideSaisie="Ex: jean.dupont@email.com"
       />
     </div>
