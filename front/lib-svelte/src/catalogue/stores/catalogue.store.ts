@@ -1,19 +1,25 @@
-import { writable } from "svelte/store";
-import { type ItemCyber, type RepartitionParBesoin } from "../Catalogue.types";
+import { writable } from 'svelte/store';
+import { type ItemCyber, type RepartitionParBesoin } from '../Catalogue.types';
+
+const repartitionVide = {
+  REAGIR: [],
+  SECURISER: [],
+  SE_FORMER: [],
+  ETRE_SENSIBILISE: [],
+  TOUS: [],
+};
 
 const { subscribe, set } = writable({
   items: [],
-  repartition: {
-    REAGIR: [],
-    SECURISER: [],
-    ETRE_SENSIBILISE: [],
-    SE_FORMER: [],
-    TOUS:[]
-  },
+  repartition: repartitionVide,
 } as { items: ItemCyber[]; repartition: RepartitionParBesoin });
 
 export const catalogueStore = {
   subscribe,
-  initialise: (itemsCyber: ItemCyber[], repartition: RepartitionParBesoin) =>
-    set({ items: [...itemsCyber], repartition }),
+  initialise: (itemsCyber: ItemCyber[], repartition?: RepartitionParBesoin) => {
+    set({
+      items: [...itemsCyber],
+      repartition: repartition ?? repartitionVide,
+    });
+  },
 };
