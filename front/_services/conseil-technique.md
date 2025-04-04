@@ -6,7 +6,6 @@ description: Poser une question technique
 titreHtml: Conseil Technique
 illustration: conseil-technique/conseil-technique.png
 avecFicheDetaillee: true
-lien: Mailto:conseil.technique@ssi.gouv.fr
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2
