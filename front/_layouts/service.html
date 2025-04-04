@@ -29,8 +29,10 @@ script: /scripts/service.js
         <span class="badge service">Service</span>
         <h1>{{page.nom}}</h1>
         <p>{{page.description}}</p>
+        {% if page.lien %}
         <a href="{{page.lien}}" target="_blank" class="bouton primaire lien-externe-produit" data-source="Page produit"
            data-cible="{{page.nom}}">Accéder au service</a>
+        {%endif%}
       </div>
       <div class="conteneur-illustration">
         <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran" />
@@ -86,8 +88,10 @@ script: /scripts/service.js
         </div>
         <h2>De quoi s'agit-il&nbsp;?</h2>
         <div>{{ page.content }}</div>
+        {% if page.lien %}
         <a href="{{page.lien}}" target="_blank" class="bouton primaire lien-externe-produit" data-source="Page produit"
            data-cible="{{page.nom}}">Accéder au service</a>
+        {% endif %}
       </section>
 
       <section class="cible" id="cible">
