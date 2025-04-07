@@ -3,7 +3,12 @@ declare namespace Express {
     emailUtilisateurCourant?: string;
   }
 
+  export interface CorpsDeRequeteTypee<T> extends Request {
+    body: T;
+  }
+
   export interface Response {
     sendFileAvecNonce: (chemin: string) => void;
   }
 }
+
