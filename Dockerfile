@@ -85,6 +85,9 @@ ADD back/migrations /usr/src/dist-back/migrations
 ####
 FROM node:23-alpine
 EXPOSE 3000
+
+RUN set -eux; \
+    apk add --no-cache bash ;
 WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 COPY --from=build-le-back /usr/src/app/node_modules/ /usr/src/app/node_modules/
