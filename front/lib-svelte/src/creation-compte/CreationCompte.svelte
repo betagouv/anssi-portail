@@ -10,7 +10,7 @@
   } from './creationCompte';
   import Formulaire from '../ui/Formulaire.svelte';
   import SelectionDepartement from './SelectionDepartement.svelte';
-  import SelectionOrganisation from './SelectionOrganisation.svelte';
+  import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
   import Bouton from '../ui/Bouton.svelte';
