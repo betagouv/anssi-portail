@@ -182,6 +182,8 @@
 </article>
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
+
   h2 {
     font-size: 28px;
     font-style: normal;
@@ -196,7 +198,7 @@
   }
 
   .encart-presentation {
-    padding: var(--gouttiere);
+    padding: var(--gouttiere) var(--gouttiere) 52px var(--gouttiere);
 
     background-color: var(--controle-segmente-courant-fond);
 
@@ -217,6 +219,11 @@
     width: auto;
     max-width: 100%;
     padding: var(--gouttiere);
+
+    @include a-partir-de(md) {
+      padding-left: 64px;
+      padding-right: 64px;
+    }
   }
 
   :global(.carte-formulaire) {
@@ -227,9 +234,15 @@
     background: #fff;
     padding: 48px 24px 72px 24px;
 
+    margin-top: -50px;
+
     display: flex;
     flex-direction: column;
     gap: 32px;
+
+    @include a-partir-de(md) {
+      padding: 48px 80px 72px 80px;
+    }
 
     .libelle {
       font-size: 20px;
