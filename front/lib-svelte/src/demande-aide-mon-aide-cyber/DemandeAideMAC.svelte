@@ -10,6 +10,7 @@
   import { validationChamp } from '../directives/validationChamp';
 
   let formulaireDemandeAide: Formulaire;
+  let formulaireSoumis: boolean;
 
   let entite: OrganisationDisponible;
   let email: string;
@@ -19,7 +20,10 @@
   let enCoursEnvoi = false;
 
   const soumetsFormulaire = async () => {
+    formulaireSoumis = true;
+
     if (!formulaireDemandeAide.estValide()) return;
+
     try {
       enCoursEnvoi = true;
       await axios.post('/api/mon-aide-cyber/demandes-aide', { email });
@@ -112,9 +116,7 @@
                 <input
                   name="estEnRelationAvecUnUtilisateur"
                   type="radio"
-                  required
                   bind:group={estEnRelationAvecUnUtilisateur}
-                  use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
                   value={false}
                 />
                 <span>Non</span>
@@ -129,6 +131,11 @@
                 <span>Oui</span>
               </label>
             </div>
+            {#if estEnRelationAvecUnUtilisateur === undefined && formulaireSoumis}
+              <span class="erreur-champ-saisie"
+                >Ce champ est obligatoire. Veuillez le cocher.</span
+              >
+            {/if}
           </ControleFormulaire>
         </div>
 
@@ -239,6 +246,10 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
+
+      .erreur-champ-saisie {
+        display: flex;
+      }
     }
   }
 
