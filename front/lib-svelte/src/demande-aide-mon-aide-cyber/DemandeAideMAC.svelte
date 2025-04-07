@@ -5,6 +5,11 @@
   import Icone from '../ui/Icone.svelte';
   import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
   import type { OrganisationDisponible } from '../ui/formulaire/SelectionOrganisation.types';
+  import Formulaire from '../ui/Formulaire.svelte';
+  import ControleFormulaire from '../ui/ControleFormulaire.svelte';
+  import { validationChamp } from '../directives/validationChamp';
+
+  let formulaireDemandeAide: Formulaire;
 
   let entite: OrganisationDisponible;
   let email: string;
@@ -13,10 +18,11 @@
   let cguSontValidees: boolean;
   let enCoursEnvoi = false;
 
-  const soumetFormulaire = () => {
-    enCoursEnvoi = true;
+  const soumetsFormulaire = async () => {
+    if (!formulaireDemandeAide.estValide()) return;
     try {
-      axios.post('/api/mon-aide-cyber/demandes-aide', { email });
+      enCoursEnvoi = true;
+      await axios.post('/api/mon-aide-cyber/demandes-aide', { email });
     } finally {
       enCoursEnvoi = false;
     }
@@ -68,7 +74,7 @@
     </div>
   </section>
   <section class="contenu-section zone-formulaire">
-    <div class="carte-formulaire">
+    <Formulaire classe="carte-formulaire" bind:this={formulaireDemandeAide}>
       <div class="champ">
         <label class="libelle" for="entite">Recherchez votre organisation</label
         >
@@ -83,140 +89,156 @@
 
       {#if entite}
         <div class="champ">
-          <label for="email">*Email de contact</label>
-          <ChampTexte
-            bind:valeur={email}
-            nom="email"
-            id="email"
-            aideSaisie="Ex: jean.dupont@email.com"
-          />
+          <ControleFormulaire requis={true} libelle="Email de contact">
+            <ChampTexte
+              id="email"
+              nom="email"
+              type="email"
+              aideSaisie="Ex : jean.dupont@mail.com"
+              requis={true}
+              bind:valeur={email}
+              messageErreur="Le format du mail est invalide"
+            />
+          </ControleFormulaire>
         </div>
 
         <div class="champ champ-radios">
-          <span>
-            * Êtes-vous déjà en contact avec un Aidant cyber ou un prestataire ?
-          </span>
-          <div>
-            <label>
-              <input
-                type="radio"
-                bind:group={estEnRelationAvecUnUtilisateur}
-                value={false}
-              />
-              <span>Non</span>
-            </label>
-            <label>
-              <input
-                type="radio"
-                bind:group={estEnRelationAvecUnUtilisateur}
-                value={true}
-              />
-              <span>Oui</span>
-            </label>
-          </div>
+          <ControleFormulaire
+            requis
+            libelle="Êtes-vous déjà en contact avec un Aidant cyber ou un prestataire ?"
+          >
+            <div>
+              <label>
+                <input
+                  name="estEnRelationAvecUnUtilisateur"
+                  type="radio"
+                  required
+                  bind:group={estEnRelationAvecUnUtilisateur}
+                  use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
+                  value={false}
+                />
+                <span>Non</span>
+              </label>
+              <label>
+                <input
+                  name="estEnRelationAvecUnUtilisateur"
+                  type="radio"
+                  bind:group={estEnRelationAvecUnUtilisateur}
+                  value={true}
+                />
+                <span>Oui</span>
+              </label>
+            </div>
+          </ControleFormulaire>
         </div>
 
         {#if estEnRelationAvecUnUtilisateur}
           <div class="champ">
-            <label for="emailUtilisateur"
-              >* Email de l'Aidant ou du prestataire</label
+            <ControleFormulaire
+              requis={true}
+              libelle="Email de l'Aidant ou du prestataire"
             >
-            <ChampTexte
-              bind:valeur={emailUtilisateur}
-              nom="emailUtilisateur"
-              id="emailUtilisateur"
-              aideSaisie="Ex: jean.dupont@email.com"
-            />
+              <ChampTexte
+                bind:valeur={emailUtilisateur}
+                nom="emailUtilisateur"
+                id="emailUtilisateur"
+                requis={true}
+                aideSaisie="Ex: jean.dupont@email.com"
+                messageErreur="Le format du mail est invalide"
+              />
+            </ControleFormulaire>
           </div>
         {/if}
 
-        <label>
-          <input type="checkbox" value="Valide" bind:group={cguSontValidees} />
-          <span
-            >J'accepte les conditions générales d'utilisation de
-            MesServicesCyber au nom de l’entité que je représente.</span
-          >
-        </label>
+        <div class="case-a-cocher cgu">
+          <input
+            type="checkbox"
+            required
+            bind:checked={cguSontValidees}
+            use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
+          />
+          <label for="cguAcceptees" class="requis">
+            J'accepte les conditions générales d'utilisation de MesServicesCyber
+            au nom de l’entité que je représente.
+          </label>
+        </div>
 
         <Bouton
           type="primaire"
           titre="Envoyer ma demande de diagnostic"
-          actif={!!entite && !!email && cguSontValidees}
-          on:click={soumetFormulaire}
+          on:click={soumetsFormulaire}
           {enCoursEnvoi}
         />
       {/if}
-    </div>
+    </Formulaire>
   </section>
 </article>
 
 <style lang="scss">
-  .page-demande-aide-mon-aide-cyber {
-    h2 {
-      font-size: 28px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: var(--Typographie-Titres-H2---LG-Interlignage, 36px);
-    }
+  h2 {
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: var(--Typographie-Titres-H2---LG-Interlignage, 36px);
+  }
 
-    p {
-      font-size: 18px;
-      font-style: normal;
-      line-height: 28px;
-    }
+  p {
+    font-size: 18px;
+    font-style: normal;
+    line-height: 28px;
+  }
 
-    .encart-presentation {
-      padding: var(--gouttiere);
+  .encart-presentation {
+    padding: var(--gouttiere);
 
-      background-color: var(--controle-segmente-courant-fond);
+    background-color: var(--controle-segmente-courant-fond);
 
-      .grille-deux-colonnes {
-        display: grid;
-        grid-template-columns: 1fr;
+    .grille-deux-colonnes {
+      display: grid;
+      grid-template-columns: 1fr;
 
-        .dragon-cyberdepart {
-          display: none;
-        }
-        img {
-          overflow: auto;
-        }
+      .dragon-cyberdepart {
+        display: none;
+      }
+      img {
+        overflow: auto;
       }
     }
+  }
 
-    .zone-formulaire {
-      width: auto;
-      max-width: 100%;
-      padding: var(--gouttiere);
+  :global(.zone-formulaire) {
+    width: auto;
+    max-width: 100%;
+    padding: var(--gouttiere);
+  }
 
-      .carte-formulaire {
-        max-width: 100%;
-        border-radius: 8px;
-        border: 1px solid
-          var(--Couleurs-Clair-Decisions-Border-_border-default-grey, #ddd);
-        background: #fff;
-        padding: 48px 24px 72px 24px;
+  :global(.carte-formulaire) {
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid
+      var(--Couleurs-Clair-Decisions-Border-_border-default-grey, #ddd);
+    background: #fff;
+    padding: 48px 24px 72px 24px;
 
-        display: flex;
-        flex-direction: column;
-        gap: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
 
-        .libelle {
-          font-size: 20px;
-          font-weight: bold;
-        }
+    .libelle {
+      font-size: 20px;
+      font-weight: bold;
+    }
 
-        .champ {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-        }
+    .champ {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-        .champ.champ-radios {
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-        }
-      }
+    .champ.champ-radios {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
   }
 
