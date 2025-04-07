@@ -26,12 +26,13 @@
     cursor: not-allowed;
   }
 
-  &:hover {
-    background: var(--jaune-msc-hover);
-  }
-
-  &:active {
-    background: var(--jaune-msc-clique);
+  &:not([disabled]) {
+    &:hover {
+      background: var(--jaune-msc-hover);
+    }
+    &:active {
+      background: var(--jaune-msc-clique);
+    }
   }
 }
 
