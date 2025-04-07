@@ -14,7 +14,7 @@ const trouveLesLiDesSommaires = (hash) =>
   );
 
 const trouveLeTexte = (hash) =>
-  trouveLesLiDuSommaireReplie(hash)[0].textContent;
+  trouveLesLiDuSommaireReplie(hash)[0]?.textContent;
 
 const desactiveTousLesItems = () => {
   const sections = Array.from(document.querySelectorAll('.sommaire ul li'));
