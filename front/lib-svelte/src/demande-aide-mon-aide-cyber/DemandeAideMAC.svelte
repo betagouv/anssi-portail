@@ -3,10 +3,10 @@
   import Bouton from '../ui/Bouton.svelte';
   import axios from 'axios';
   import Icone from '../ui/Icone.svelte';
-  import SelectionOrganisation from '../creation-compte/SelectionOrganisation.svelte';
-  import type { Organisation } from '../creation-compte/creationCompte';
+  import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
+  import type { OrganisationDisponible } from '../ui/formulaire/SelectionOrganisation.types';
 
-  let entite: Organisation;
+  let entite: OrganisationDisponible;
   let email: string;
   let estEnRelationAvecUnUtilisateur: boolean;
   let emailUtilisateur: string;

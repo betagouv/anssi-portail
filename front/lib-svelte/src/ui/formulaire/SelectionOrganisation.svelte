@@ -1,19 +1,22 @@
 <script lang="ts">
-  import ChampTexte from '../ui/ChampTexte.svelte';
+  import ChampTexte from '../ChampTexte.svelte';
   import { createEventDispatcher, tick } from 'svelte';
-  import type { Departement, Organisation } from './creationCompte';
-  import { validationChamp } from '../directives/validationChamp';
+  import { validationChamp } from '../../directives/validationChamp';
   import axios from 'axios';
+  import type {
+    OrganisationDisponible,
+    Departement,
+  } from './SelectionOrganisation.types.ts';
 
   type ReponseApiAnnuaireOrganisations = {
-    suggestions: Organisation[];
+    suggestions: OrganisationDisponible[];
   };
-  type OrganisationAvecLabel = Organisation & {
+  type OrganisationAvecLabel = OrganisationDisponible & {
     label: string;
   };
 
   export let filtreDepartement: Departement | undefined;
-  export let valeur: Organisation | undefined;
+  export let valeur: OrganisationDisponible | undefined;
   export let id: string = '';
 
   let saisie: string;
@@ -30,7 +33,7 @@
     }, dureeDebounceEnMs);
   };
 
-  const construisLabel = (organisation: Organisation) => {
+  const construisLabel = (organisation: OrganisationDisponible) => {
     const siret = organisation.siret;
 
     const siretFormatte =
@@ -42,7 +45,9 @@
     return `(${organisation.departement}) ${organisation.nom} - ${siretFormatte}`;
   };
 
-  const uneSuggestion = (organisation: Organisation): OrganisationAvecLabel => {
+  const uneSuggestion = (
+    organisation: OrganisationDisponible
+  ): OrganisationAvecLabel => {
     return { ...organisation, label: construisLabel(organisation) };
   };
 
@@ -70,7 +75,7 @@
   };
 
   const envoiEvenement = createEventDispatcher<{
-    organisationChoisie: Organisation;
+    organisationChoisie: OrganisationDisponible;
   }>();
 
   const choisisOrganisation = (item: OrganisationAvecLabel) => {
