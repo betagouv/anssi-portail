@@ -3,6 +3,9 @@ import { adaptateurMonAideCyberVide } from './adaptateurMonAideCyberVide';
 
 export type DemandeAide = {
   email: string;
+  emailAidant?: string;
+  departement: string;
+  raisonSociale: string
 };
 
 export interface AdaptateurMonAideCyber {
