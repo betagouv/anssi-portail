@@ -6,21 +6,27 @@ import { createRequest, createResponse } from 'node-mocks-http';
 import { OutgoingHttpHeaders } from 'node:http';
 import { Context } from 'express-validator/lib/context';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import { fauxAdaptateurJWT } from './fauxObjets';
+import { fauxAdaptateurJWT, fauxFournisseurDeChemin } from './fauxObjets';
 import { JsonWebTokenError } from 'jsonwebtoken';
 import { join } from 'path';
+import { FournisseurChemin } from '../../src/api/fournisseurChemin';
 
 describe('Le middleware', () => {
   let requete: Request & { emailUtilisateurCourant?: string };
   let reponse: Response;
   let middleware: Middleware;
   let adaptateurJWT: AdaptateurJWT;
+  let fournisseurChemin: FournisseurChemin;
 
   beforeEach(() => {
     adaptateurJWT = fauxAdaptateurJWT;
     requete = createRequest();
     reponse = createResponse();
-    middleware = fabriqueMiddleware({ adaptateurJWT });
+    fournisseurChemin = { ...fauxFournisseurDeChemin };
+    middleware = fabriqueMiddleware({
+      adaptateurJWT,
+      fournisseurChemin,
+    });
   });
 
   describe("sur demande d'aseptisation", () => {
@@ -228,6 +234,21 @@ describe('Le middleware', () => {
       });
 
       assert.equal(true, aAppeleSend);
+    });
+
+    it("renvoi un 404 si la fichier n'existe pas", async () => {
+      let pagesDemandee: string = '';
+      fournisseurChemin.ressourceDeBase = (nomPage) => {
+        pagesDemandee = nomPage;
+        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+      };
+
+      await middleware.ajouteMethodeNonce(requete, reponse, () => {
+        assert.notEqual(reponse.sendFileAvecNonce, undefined);
+        reponse.sendFileAvecNonce('/services/inexistant.html');
+      });
+
+      assert.deepEqual(pagesDemandee, '404.html');
     });
   });
 });

@@ -4,6 +4,7 @@ import { AdaptateurJWT } from './adaptateurJWT';
 import fs from 'node:fs';
 import { randomBytes } from 'node:crypto';
 import helmet from 'helmet';
+import { FournisseurChemin } from './fournisseurChemin';
 
 type FonctionMiddleware = (
   requete: Request,
@@ -23,8 +24,10 @@ export type Middleware = {
 
 export const fabriqueMiddleware = ({
   adaptateurJWT,
+  fournisseurChemin,
 }: {
   adaptateurJWT: AdaptateurJWT;
+  fournisseurChemin: FournisseurChemin;
 }): Middleware => {
   const aseptise =
     (...nomsParametres: string[]) =>
@@ -105,9 +108,17 @@ export const fabriqueMiddleware = ({
     const nonceAleatoire = randomBytes(16).toString('base64');
     reponse.locals.nonce = nonceAleatoire;
     reponse.sendFileAvecNonce = (chemin: string) => {
-      const fichier = fs.readFileSync(chemin, 'utf-8');
-      const avecNonce = fichier.replace('%%NONCE%%', nonceAleatoire);
-      reponse.send(avecNonce);
+      try {
+        const fichier = fs.readFileSync(chemin, 'utf-8');
+        const avecNonce = fichier.replace('%%NONCE%%', nonceAleatoire);
+        reponse.send(avecNonce);
+      } catch (error) {
+        console.error(error);
+        reponse
+          .status(404)
+          .set('Content-Type', 'text/html')
+          .sendFileAvecNonce(fournisseurChemin.ressourceDeBase('404.html'));
+      }
     };
     suite();
   };
