@@ -3,9 +3,10 @@
   import Bouton from '../ui/Bouton.svelte';
   import axios from 'axios';
   import Icone from '../ui/Icone.svelte';
-  import ChampRecherche from '../ui/ChampRecherche.svelte';
+  import SelectionOrganisation from '../creation-compte/SelectionOrganisation.svelte';
+  import type { Organisation } from '../creation-compte/creationCompte';
 
-  let entite: string;
+  let entite: Organisation;
   let email: string;
   let estEnRelationAvecUnUtilisateur: boolean;
   let emailUtilisateur: string;
@@ -71,9 +72,12 @@
       <div class="champ">
         <label class="libelle" for="entite">Recherchez votre organisation</label
         >
-        <ChampRecherche bind:recherche={entite} />
+        <SelectionOrganisation
+          bind:valeur={entite}
+          filtreDepartement={undefined}
+        />
         {#if entite}
-          <div>Adresse : {entite}</div>
+          <div>Votre entreprise : {entite.nom} ({entite.departement})</div>
         {/if}
       </div>
 
@@ -115,7 +119,7 @@
         {#if estEnRelationAvecUnUtilisateur}
           <div class="champ">
             <label for="emailUtilisateur"
-              >Email de l'Aidant ou du prestataire</label
+              >* Email de l'Aidant ou du prestataire</label
             >
             <ChampTexte
               bind:valeur={emailUtilisateur}
