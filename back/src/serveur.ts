@@ -32,7 +32,7 @@ const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber();
 
 creeServeur({
   fournisseurChemin,
-  middleware: fabriqueMiddleware({ adaptateurJWT }),
+  middleware: fabriqueMiddleware({ adaptateurJWT, fournisseurChemin }),
   adaptateurOIDC,
   adaptateurJWT,
   adaptateurGestionErreur: adaptateurGestionErreurSentry,

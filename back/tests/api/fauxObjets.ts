@@ -52,8 +52,10 @@ export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
 };
 
 export const fauxMiddleware: Middleware = {
-  ajouteMethodeNonce: fabriqueMiddleware({ adaptateurJWT: fauxAdaptateurJWT })
-    .ajouteMethodeNonce,
+  ajouteMethodeNonce: fabriqueMiddleware({
+    adaptateurJWT: fauxAdaptateurJWT,
+    fournisseurChemin: fauxFournisseurDeChemin,
+  }).ajouteMethodeNonce,
   positionneLesCsp: () => async (_, __, suite) => {
     suite();
   },
@@ -78,7 +80,10 @@ const fauxAdaptateurMonAideCyber = { creeDemandeAide: () => Promise.resolve() };
 
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   fournisseurChemin: fauxFournisseurDeChemin,
-  middleware: fabriqueMiddleware({ adaptateurJWT: fauxAdaptateurJWT }),
+  middleware: fabriqueMiddleware({
+    adaptateurJWT: fauxAdaptateurJWT,
+    fournisseurChemin: fauxFournisseurDeChemin,
+  }),
   adaptateurOIDC: fauxAdaptateurOIDC,
   adaptateurJWT: fauxAdaptateurJWT,
   adaptateurGestionErreur: adaptateurGestionVide,
