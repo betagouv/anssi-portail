@@ -86,6 +86,9 @@ COPY back/migrations /usr/src/dist-back/migrations
 ####
 FROM node:23-alpine
 EXPOSE 3000
+
+RUN set -eux; \
+    apk add --no-cache bash ;
 WORKDIR /usr/src/app
 
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
