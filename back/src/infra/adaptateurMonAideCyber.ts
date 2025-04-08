@@ -25,7 +25,7 @@ const adaptateurMonAideCyber = (): AdaptateurMonAideCyber => {
       ...(emailAidant && { relationUtilisateur: emailAidant }),
     };
     await axios.post(
-      `${process.env.MON_AIDE_CYBER_URL_BASE}/api/demandes/dummy-etre-aide`,
+      `${process.env.MON_AIDE_CYBER_URL_BASE}/api/demandes/etre-aide`,
       demandeMAC
     );
   };
