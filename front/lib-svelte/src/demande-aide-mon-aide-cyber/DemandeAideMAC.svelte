@@ -2,7 +2,6 @@
   import ChampTexte from '../ui/ChampTexte.svelte';
   import Bouton from '../ui/Bouton.svelte';
   import axios from 'axios';
-  import Icone from '../ui/Icone.svelte';
   import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
   import type { OrganisationDisponible } from '../ui/formulaire/SelectionOrganisation.types';
   import Formulaire from '../ui/Formulaire.svelte';
@@ -36,10 +35,10 @@
 <article class="page-demande-aide-mon-aide-cyber">
   <section class="encart-presentation">
     <div class="contenu-section">
-      <a href="/" class="lien"><Icone type="fleche-gauche" />Retour</a>
+      <a href="/" class="lien">Retour</a>
     </div>
     <div class="contenu-section grille-deux-colonnes">
-      <div>
+      <div class="colonne-explicative">
         <h2>
           Vous souhaitez vous protéger contre les cyberattaques mais ne savez
           pas comment vous y prendre ?
@@ -54,14 +53,9 @@
           organisation.
         </p>
         <div class="zone-tags">
-          <span class="tag">
-            <Icone type="check" /> Dans vos locaux
-          </span>
-          <span class="tag">
-            <Icone type="check" />
-            Rapide (1h30)</span
-          >
-          <span class="tag"> <Icone type="check" /> Anonyme</span>
+          <span class="tag"> Dans vos locaux </span>
+          <span class="tag"> Rapide (1h30)</span>
+          <span class="tag"> Anonyme</span>
         </div>
         <p>
           <i
@@ -70,11 +64,13 @@
           >
         </p>
       </div>
-      <img
-        class="illustration dragon-cyberdepart"
-        src="/assets/images/illustration-cyberdepart.svg"
-        alt="Illustration Cyberdepart"
-      />
+      <div class="colonne-illustration">
+        <img
+          class="illustration dragon-cyberdepart"
+          src="/assets/images/illustration-cyberdepart.svg"
+          alt="Illustration Cyberdepart"
+        />
+      </div>
     </div>
   </section>
   <section class="contenu-section zone-formulaire">
@@ -83,6 +79,7 @@
         <label class="libelle" for="entite">Recherchez votre organisation</label
         >
         <SelectionOrganisation
+          id="entite"
           bind:valeur={entite}
           filtreDepartement={undefined}
         />
@@ -159,6 +156,7 @@
 
         <div class="case-a-cocher cgu">
           <input
+            id="cguAcceptees"
             type="checkbox"
             required
             bind:checked={cguSontValidees}
@@ -206,11 +204,26 @@
       display: grid;
       grid-template-columns: 1fr;
 
+      @include a-partir-de(md) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .colonne-illustration {
+        overflow-x: hidden;
+      }
+
       .dragon-cyberdepart {
         display: none;
-      }
-      img {
-        overflow: auto;
+
+        @include a-partir-de(md) {
+          display: block;
+          align-self: anchor-center;
+        }
+
+        @include a-partir-de(lg) {
+          display: block;
+          align-self: anchor-center;
+        }
       }
     }
   }
@@ -221,8 +234,8 @@
     padding: var(--gouttiere);
 
     @include a-partir-de(md) {
-      padding-left: 64px;
-      padding-right: 64px;
+      width: 744px;
+      max-width: 792px;
     }
   }
 
@@ -234,13 +247,17 @@
     background: #fff;
     padding: 48px 24px 72px 24px;
 
-    margin-top: -50px;
+    margin-top: -75px;
 
     display: flex;
     flex-direction: column;
     gap: 32px;
 
     @include a-partir-de(md) {
+      padding: 48px 80px 72px 80px;
+    }
+
+    @include a-partir-de(lg) {
       padding: 48px 80px 72px 80px;
     }
 
