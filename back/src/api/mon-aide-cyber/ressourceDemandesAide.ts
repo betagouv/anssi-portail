@@ -5,12 +5,12 @@ import { body, check } from 'express-validator';
 import { codeDepartement } from '../../metier/referentielDepartements';
 
 export type CorpsDemandeAide = {
-  email: string;
-  emailAidant?: string;
-  entite: {
+  entiteAidee: {
+    email: string;
     departement: string;
     raisonSociale: string;
   };
+  emailAidant?: string;
   validationCGU: boolean;
 };
 
@@ -23,20 +23,20 @@ const ressourceDemandesAide = ({
   routeur.post(
     '/',
     middleware.aseptise(
-      'email',
-      'emailAidant',
-      'entite.departement',
-      'entite.raisonSociale'
+      'entiteAidee.email',
+      'entiteAidee.departement',
+      'entiteAidee.raisonSociale',
+      'emailAidant'
     ),
-    check('entite.departement')
+    check('entiteAidee.departement')
       .isString()
       .isIn(codeDepartement)
       .withMessage('Veuillez saisir un département valide.'),
-    body('entite.raisonSociale')
+    body('entiteAidee.raisonSociale')
       .isString()
       .notEmpty()
       .withMessage('Veuillez saisir une raison sociale valide.'),
-    body('email')
+    body('entiteAidee.email')
       .notEmpty()
       .isEmail()
       .withMessage('Veuillez saisir un email valide.'),
@@ -49,13 +49,16 @@ const ressourceDemandesAide = ({
       .withMessage('Veuillez valider les CGU.'),
     middleware.valide(),
     async (requete: CorpsDeRequeteTypee<CorpsDemandeAide>, reponse) => {
+      const { emailAidant, entiteAidee, validationCGU } = requete.body;
+      const { email, departement, raisonSociale } = entiteAidee;
       await adaptateurMonAideCyber.creeDemandeAide({
-        email: requete.body.email,
-        ...(requete.body.emailAidant && {
-          emailAidant: requete.body.emailAidant,
-        }),
-        departement: requete.body.entite.departement,
-        raisonSociale: requete.body.entite.raisonSociale,
+        ...(emailAidant && { emailAidant }),
+        entiteAidee: {
+          email,
+          departement,
+          raisonSociale,
+        },
+          validationCGU
       });
       reponse.sendStatus(201);
     }

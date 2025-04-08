@@ -2,10 +2,13 @@ import axios from 'axios';
 import { adaptateurMonAideCyberVide } from './adaptateurMonAideCyberVide';
 
 export type DemandeAide = {
-  email: string;
+  entiteAidee: {
+    email: string;
+    departement: string;
+    raisonSociale: string;
+  };
   emailAidant?: string;
-  departement: string;
-  raisonSociale: string
+  validationCGU: boolean;
 };
 
 export interface AdaptateurMonAideCyber {
@@ -13,12 +16,10 @@ export interface AdaptateurMonAideCyber {
 }
 
 const adaptateurMonAideCyber = (): AdaptateurMonAideCyber => {
-  const creeDemandeAide = async ({ email }: DemandeAide) => {
+  const creeDemandeAide = async ({ entiteAidee }: DemandeAide) => {
     await axios.post(
       `${process.env.MON_AIDE_CYBER_URL_BASE}/api/demandes/dummy-etre-aide`,
-      {
-        email,
-      }
+      { email: entiteAidee.email }
     );
   };
 
