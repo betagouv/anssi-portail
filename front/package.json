@@ -5,5 +5,10 @@
   "scripts": {
     "test": "vitest"
   },
-  "private": true
+  "private": true,
+  "main": "vitest.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {}
 }

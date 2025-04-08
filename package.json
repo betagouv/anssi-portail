@@ -22,6 +22,7 @@
     "vitest": "^3.0.4"
   },
   "workspaces": [
-    "back"
+    "back",
+    "front"
   ]
 }
