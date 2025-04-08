@@ -45,7 +45,7 @@ $ docker compose exec db createdb -U postgres msc
 
 ```shell
 $ cd ..
-$ npm run installe-tout
+$ npm install
 $ npm run dev
 ```
 
