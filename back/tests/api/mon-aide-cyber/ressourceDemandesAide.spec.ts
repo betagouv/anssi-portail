@@ -61,7 +61,6 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
         departement: '12',
         raisonSociale: 'Une raison sociale',
       },
-      validationCGU: true,
     });
   });
 
