@@ -8,7 +8,6 @@ export type DemandeAide = {
     raisonSociale: string;
   };
   emailAidant?: string;
-  validationCGU: boolean;
 };
 
 export interface AdaptateurMonAideCyber {
@@ -16,10 +15,18 @@ export interface AdaptateurMonAideCyber {
 }
 
 const adaptateurMonAideCyber = (): AdaptateurMonAideCyber => {
-  const creeDemandeAide = async ({ entiteAidee }: DemandeAide) => {
+  const creeDemandeAide = async ({ entiteAidee, emailAidant }: DemandeAide) => {
+    const { email, raisonSociale, departement } = entiteAidee;
+    const demandeMAC = {
+      cguValidees: true,
+      email,
+      departement,
+      raisonSociale,
+      ...(emailAidant && { relationUtilisateur: emailAidant }),
+    };
     await axios.post(
       `${process.env.MON_AIDE_CYBER_URL_BASE}/api/demandes/dummy-etre-aide`,
-      { email: entiteAidee.email }
+      demandeMAC
     );
   };
 

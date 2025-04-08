@@ -49,7 +49,7 @@ const ressourceDemandesAide = ({
       .withMessage('Veuillez valider les CGU.'),
     middleware.valide(),
     async (requete: CorpsDeRequeteTypee<CorpsDemandeAide>, reponse) => {
-      const { emailAidant, entiteAidee, validationCGU } = requete.body;
+      const { emailAidant, entiteAidee } = requete.body;
       const { email, departement, raisonSociale } = entiteAidee;
       await adaptateurMonAideCyber.creeDemandeAide({
         ...(emailAidant && { emailAidant }),
@@ -58,7 +58,6 @@ const ressourceDemandesAide = ({
           departement,
           raisonSociale,
         },
-          validationCGU
       });
       reponse.sendStatus(201);
     }
