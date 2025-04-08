@@ -1,12 +1,13 @@
 {
-  "name": "catalogue",
+  "name": "anssi-portail-svelte",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Partie svelte pour le catalogue du portail de l’ANSSI",
   "type": "module",
   "scripts": {
     "build": "vite build",
     "watch": "vite build -w --minify false",
-    "test": "npx eslint . && vitest",
+    "test": "npx eslint . && vitest --run",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix"
   },
@@ -31,5 +32,9 @@
   },
   "dependencies": {
     "axios": "^1.8.2"
+  },
+  "main": "svelte.config.js",
+  "directories": {
+    "test": "test"
   }
 }
