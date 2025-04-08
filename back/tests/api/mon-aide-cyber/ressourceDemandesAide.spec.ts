@@ -13,9 +13,9 @@ const uneDemandeAide = (parametres?: {
   departement?: string;
   raisonSociale?: string;
 }): CorpsDemandeAide => ({
-  email: 'durant@mail.fr',
   ...(parametres?.emailAidant && { emailAidant: parametres?.emailAidant }),
-  entite: {
+  entiteAidee: {
+    email: parametres?.email || 'durant@mail.fr',
     departement: parametres?.departement || '12',
     raisonSociale: parametres?.raisonSociale || 'Une raison sociale',
   },
@@ -56,9 +56,12 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
       .send(uneDemandeAide({ email: 'durant@mail.fr' }));
 
     assert.deepEqual(demandeAideEnvoyee, {
-      email: 'durant@mail.fr',
-      departement: '12',
-      raisonSociale: 'Une raison sociale',
+      entiteAidee: {
+        email: 'durant@mail.fr',
+        departement: '12',
+        raisonSociale: 'Une raison sociale',
+      },
+      validationCGU: true,
     });
   });
 
@@ -66,7 +69,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
     it('pour le mail de l’entité Aidée', async () => {
       let emailEnvoye = '';
       adaptateurMonAideCyber.creeDemandeAide = async ({
-        email,
+        entiteAidee: { email },
       }: DemandeAide) => {
         emailEnvoye = email;
       };
@@ -96,7 +99,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
     it('pour le département de l’entité', async () => {
       let departementEnvoye: string = '';
       adaptateurMonAideCyber.creeDemandeAide = async ({
-        departement,
+        entiteAidee: { departement },
       }: DemandeAide) => {
         departementEnvoye = departement;
       };
@@ -111,7 +114,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
     it('pour la raison sociale de l’entité', async () => {
       let raisonSocialeEnvoyee: string = '';
       adaptateurMonAideCyber.creeDemandeAide = async ({
-        raisonSociale,
+        entiteAidee: { raisonSociale },
       }: DemandeAide) => {
         raisonSocialeEnvoyee = raisonSociale;
       };
@@ -135,8 +138,11 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
       const reponse = await request(serveur)
         .post('/api/mon-aide-cyber/demandes-aide')
         .send({
-          email: 'ceci-n-est-pas-un-mail.fr',
-          entite: { departement: '12', raisonSociale: 'Une raison sociale' },
+          entiteAidee: {
+            email: 'ceci-n-est-pas-un-mail.fr',
+            departement: '12',
+            raisonSociale: 'Une raison sociale',
+          },
         });
 
       assert.equal(reponse.status, 400);
@@ -150,9 +156,12 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
       const reponse = await request(serveur)
         .post('/api/mon-aide-cyber/demandes-aide')
         .send({
-          email: 'jean.dupont@mail.fr',
           emailAidant: 'ceci-n-est-pas-un-mail.fr',
-          entite: { departement: '12', raisonSociale: 'Une raison sociale' },
+          entiteAidee: {
+            email: 'jean.dupont@mail.fr',
+            departement: '12',
+            raisonSociale: 'Une raison sociale',
+          },
         });
 
       assert.equal(reponse.status, 400);
@@ -166,9 +175,12 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
       const reponse = await request(serveur)
         .post('/api/mon-aide-cyber/demandes-aide')
         .send({
-          email: 'jean.dupont@mail.fr',
           validationCGU: false,
-          entite: { departement: '12', raisonSociale: 'Une raison sociale' },
+          entiteAidee: {
+            email: 'jean.dupont@mail.fr',
+            departement: '12',
+            raisonSociale: 'Une raison sociale',
+          },
         });
 
       assert.equal(reponse.status, 400);
@@ -177,28 +189,34 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
 
     it('pour la validation du département', async () => {
       const reponse = await request(serveur)
-          .post('/api/mon-aide-cyber/demandes-aide')
-          .send({
-            email: 'jean.dupont@mail.fr',
-            validationCGU: true,
-            entite: { departement: '1000', raisonSociale: 'Une raison sociale' },
-          });
+        .post('/api/mon-aide-cyber/demandes-aide')
+        .send({
+          email: 'jean.dupont@mail.fr',
+          validationCGU: true,
+          entite: { departement: '1000', raisonSociale: 'Une raison sociale' },
+        });
 
       assert.equal(reponse.status, 400);
-      assert.equal(await reponse.body.erreur, 'Veuillez saisir un département valide.');
+      assert.equal(
+        await reponse.body.erreur,
+        'Veuillez saisir un département valide.'
+      );
     });
 
     it('pour la validation de la raison sociale', async () => {
       const reponse = await request(serveur)
-          .post('/api/mon-aide-cyber/demandes-aide')
-          .send({
-            email: 'jean.dupont@mail.fr',
-            validationCGU: true,
-            entite: { departement: '01', raisonSociale: '   ' },
-          });
+        .post('/api/mon-aide-cyber/demandes-aide')
+        .send({
+          email: 'jean.dupont@mail.fr',
+          validationCGU: true,
+          entiteAidee: { departement: '01', raisonSociale: '   ' },
+        });
 
       assert.equal(reponse.status, 400);
-      assert.equal(await reponse.body.erreur, 'Veuillez saisir une raison sociale valide.');
+      assert.equal(
+        await reponse.body.erreur,
+        'Veuillez saisir une raison sociale valide.'
+      );
     });
   });
 });
