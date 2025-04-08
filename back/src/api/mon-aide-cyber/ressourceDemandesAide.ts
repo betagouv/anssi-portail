@@ -49,17 +49,21 @@ const ressourceDemandesAide = ({
       .withMessage('Veuillez valider les CGU.'),
     middleware.valide(),
     async (requete: CorpsDeRequeteTypee<CorpsDemandeAide>, reponse) => {
-      const { emailAidant, entiteAidee } = requete.body;
-      const { email, departement, raisonSociale } = entiteAidee;
-      await adaptateurMonAideCyber.creeDemandeAide({
-        ...(emailAidant && { emailAidant }),
-        entiteAidee: {
-          email,
-          departement,
-          raisonSociale,
-        },
-      });
-      reponse.sendStatus(201);
+      try {
+        const { emailAidant, entiteAidee } = requete.body;
+        const { email, departement, raisonSociale } = entiteAidee;
+        await adaptateurMonAideCyber.creeDemandeAide({
+          ...(emailAidant && { emailAidant }),
+          entiteAidee: {
+            email,
+            departement,
+            raisonSociale,
+          },
+        });
+        reponse.sendStatus(201);
+      } catch (e: unknown | Error) {
+        reponse.status(400).send({ erreur: (e as Error).message });
+      }
     }
   );
   return routeur;

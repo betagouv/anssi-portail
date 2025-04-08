@@ -16,18 +16,30 @@ export interface AdaptateurMonAideCyber {
 
 const adaptateurMonAideCyber = (): AdaptateurMonAideCyber => {
   const creeDemandeAide = async ({ entiteAidee, emailAidant }: DemandeAide) => {
-    const { email, raisonSociale, departement } = entiteAidee;
-    const demandeMAC = {
-      cguValidees: true,
-      email,
-      departement,
-      raisonSociale,
-      ...(emailAidant && { relationUtilisateur: emailAidant }),
-    };
-    await axios.post(
-      `${process.env.MON_AIDE_CYBER_URL_BASE}/api/demandes/etre-aide`,
-      demandeMAC
-    );
+    try {
+      const { email, raisonSociale, departement } = entiteAidee;
+      const demandeMAC = {
+        cguValidees: true,
+        email,
+        departement,
+        raisonSociale,
+        ...(emailAidant && { relationUtilisateur: emailAidant }),
+      };
+      await axios.post(
+        `${process.env.MON_AIDE_CYBER_URL_BASE}/api/demandes/etre-aide`,
+        demandeMAC
+      );
+    } catch (e: unknown | Error) {
+      if (
+        axios.isAxiosError(e) &&
+        e.response &&
+        e.response.status >= 400 &&
+        e.response.status < 500
+      ) {
+        throw new Error(e.response.data.message);
+      }
+      throw e;
+    }
   };
 
   return { creeDemandeAide };

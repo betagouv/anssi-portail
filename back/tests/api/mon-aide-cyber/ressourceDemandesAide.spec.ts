@@ -64,6 +64,21 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
     });
   });
 
+  it('gère les cas d’erreurs lors de la demande d’Aide', async () => {
+    adaptateurMonAideCyber.creeDemandeAide = async (
+        _demandeAide: DemandeAide
+    ) => {
+      throw new Error('une erreur quelconque')
+    };
+
+    const reponse = await request(serveur)
+        .post('/api/mon-aide-cyber/demandes-aide')
+        .send(uneDemandeAide({ email: 'durant@mail.fr' }));
+
+    assert.equal(reponse.status, 400);
+    assert.equal(reponse.body.erreur, 'une erreur quelconque');
+  })
+
   describe('aseptise les paramètres', () => {
     it('pour le mail de l’entité Aidée', async () => {
       let emailEnvoye = '';
