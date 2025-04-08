@@ -21,6 +21,7 @@ exclude:
   - lib-svelte/svelte.config.js
   - lib-svelte/vite.config.ts
   - lib-svelte/test/
+  - lib-svelte/*.mjs
   - test/
   - node_modules/
   - package.json
