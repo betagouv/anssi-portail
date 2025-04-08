@@ -4,8 +4,8 @@
   "description": "",
   "main": "serveur.ts",
   "scripts": {
-    "installe-tout": "npx concurrently -n \"SERVEUR,SVELTE,JEKYLL\" \"npm install --prefix back\" \"npm install --prefix front/lib-svelte\" \"npm install\" ",
-    "migre-bdd": "node --env-file=.env --import tsx back/node_modules/knex/bin/cli.js migrate:latest --knexfile back/knexfile.ts",
+    "installe-tout": "npx concurrently -n \"SVELTE,RACINE\" \"npm install --prefix front/lib-svelte\" \"npm install\" ",
+    "migre-bdd": "node --env-file=.env --import tsx ./node_modules/knex/bin/cli.js migrate:latest --knexfile back/knexfile.ts",
     "migre-bdd-clever": "node node_modules/knex/bin/cli.js migrate:latest --knexfile dist-back/knexfile.js",
     "dev": "npx concurrently -n \"SERVEUR,SVELTE,JEKYLL,BDD,MIGRE\" \"node --watch --import tsx --env-file .env ./back/src/serveur.ts\" \"npm run watch --prefix front/lib-svelte\" \"sleep 3 && jekyll build -s ./front -d ./front/_site -w\" \"docker compose up db\" \"sleep 3 && npm run migre-bdd\"",
     "start": "npm run migre-bdd-clever && node ./dist-back/src/serveur.js",
@@ -20,5 +20,8 @@
   "devDependencies": {
     "tsx": "^4.19.3",
     "vitest": "^3.0.4"
-  }
+  },
+  "workspaces": [
+    "back"
+  ]
 }
