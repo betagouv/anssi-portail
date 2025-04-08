@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest --run"
   },
   "private": true,
   "main": "vitest.config.js",
