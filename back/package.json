@@ -1,5 +1,5 @@
 {
-  "name": "anssi-portail",
+  "name": "anssi-portail-back",
   "version": "1.0.0",
   "description": "",
   "main": "serveur.ts",
@@ -44,5 +44,8 @@
     "openid-client": "^5.7.0",
     "pg": "^8.13.3",
     "uuid": "^11.1.0"
+  },
+  "directories": {
+    "test": "tests"
   }
 }
