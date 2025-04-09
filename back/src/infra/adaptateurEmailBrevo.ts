@@ -29,6 +29,7 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
       enteteJSON
     );
   },
+  creeContactBrevo: async () => {},
 });
 
 export const fabriqueAdaptateurEmail = () =>

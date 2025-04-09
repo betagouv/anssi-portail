@@ -8,6 +8,7 @@ import { consigneEvenementProprieteTestRevendiqueeDansJournal } from './consigne
 import { CompteCree } from './compteCree';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte';
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
+import { creeContactBrevo } from './creeContactBrevo';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
@@ -34,10 +35,12 @@ export const cableTousLesAbonnes = ({
       adaptateurHorloge,
     })
   );
-  busEvenements.abonne(
-    CompteCree,
+  busEvenements.abonnePlusieurs(CompteCree, [
     envoieEmailCreationCompte({
       adaptateurEmail,
-    })
-  );
+    }),
+    creeContactBrevo({
+      adaptateurEmail,
+    }),
+  ]);
 };

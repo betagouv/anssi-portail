@@ -11,12 +11,15 @@ describe("L'abonnement qui envoie un email de création de compte", () => {
       envoieEmailBienvenue: async ({ email, prenom }) => {
         donneesRecues = { email, prenom };
       },
+      creeContactBrevo: async () => {},
     };
 
     envoieEmailCreationCompte({ adaptateurEmail })(
       new CompteCree({
         email: 'jeanne.dupond@mail.fr',
         prenom: 'Jeanne',
+        nom: 'Dupont',
+        infoLettre: true,
       })
     );
 

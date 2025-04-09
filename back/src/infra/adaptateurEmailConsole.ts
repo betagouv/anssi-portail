@@ -12,4 +12,5 @@ export const adaptateurEmailConsole = (): AdaptateurEmail => ({
       `Envoie d'email de bienvenue pour l'utilisateur ${email} avec prénom ${prenom}`
     );
   },
+  creeContactBrevo: async () => {},
 });
