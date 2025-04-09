@@ -14,7 +14,6 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@tsconfig/svelte": "^5.0.4",
-    "@types/axios": "^0.9.36",
     "eslint": "^9.23.0",
     "eslint-plugin-svelte": "^3.5.0",
     "globals": "^16.0.0",
