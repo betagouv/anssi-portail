@@ -70,6 +70,8 @@ describe('La ressource utilisateur', () => {
       const evenement = busEvenements.recupereEvenement(CompteCree);
       assert.equal(evenement!.email, 'jeanne.dupont@user.com');
       assert.equal(evenement!.prenom, 'Jeanne');
+      assert.equal(evenement!.nom, 'Dupont');
+      assert.equal(evenement!.infoLettre, true);
     });
 
     it('aseptise les paramètres', async () => {

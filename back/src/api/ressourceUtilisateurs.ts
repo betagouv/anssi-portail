@@ -64,7 +64,9 @@ const ressourceUtilisateurs = ({
         infolettreAcceptee,
       });
 
-      await busEvenements.publie(new CompteCree({ email, prenom }));
+      await busEvenements.publie(
+        new CompteCree({ email, prenom, nom, infoLettre: infolettreAcceptee })
+      );
 
       reponse.sendStatus(201);
     }
