@@ -10,6 +10,7 @@
   let formulaireDemandeAide: FormulaireDemandeAide;
   let enSucces: boolean = false;
   let formulaireSoumis: boolean;
+  let erreurs: string;
 
   let enCoursEnvoi = false;
 
@@ -36,11 +37,14 @@
       };
       console.log('données à donner à l‘API', { corps });
 
-      const reponse = await axios.post('/api/mon-aide-cyber/demandes-aide', {
-        email: 'marc.etourneau@gmail.com',
-      });
+      const reponse = await axios.post('/api/mon-aide-cyber/demandes-aide', corps);
       if (reponse.status === 201) {
         enSucces = true;
+      }
+    } catch (e) {
+      console.error(e);
+      if (axios.isAxiosError(e)) {
+        erreurs = e.response?.data?.erreur;
       }
     } finally {
       enCoursEnvoi = false;
@@ -92,10 +96,11 @@
   <section class="contenu-section zone-formulaire">
     {#if !enSucces}
       <FormulaireDemandeAide
-        {enCoursEnvoi}
-        {formulaireSoumis}
         bind:this={formulaireDemandeAide}
         on:formulaireSoumis={soumetsFormulaire}
+        {formulaireSoumis}
+        {enCoursEnvoi}
+        {erreurs}
       />
     {:else}
       <ConfirmationCreationDemandeAide />

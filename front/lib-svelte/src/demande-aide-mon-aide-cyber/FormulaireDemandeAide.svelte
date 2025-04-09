@@ -8,10 +8,13 @@
   import { createEventDispatcher } from 'svelte';
   import type { DonneesFormulaireDemandeAide } from './DonneesFormulaireDemandeAide';
   import { validationChamp } from '../directives/validationChamp';
+  import Alerte from '../ui/Alerte.svelte';
 
   let formulaire: Formulaire;
   export let enCoursEnvoi: boolean;
   export let formulaireSoumis: boolean;
+
+  export let erreurs: string;
 
   let entite: OrganisationDisponible;
   let email: string;
@@ -129,12 +132,18 @@
       </label>
     </div>
 
-    <Bouton
-      type="primaire"
-      titre="Envoyer ma demande de diagnostic"
-      on:click={soumetsFormulaire}
-      {enCoursEnvoi}
-    />
+    <div>
+      <Bouton
+        type="primaire"
+        titre="Envoyer ma demande de diagnostic"
+        on:click={soumetsFormulaire}
+        {enCoursEnvoi}
+      />
+    </div>
+
+    {#if erreurs}
+      <Alerte type="ERREUR" titre="Une erreur est survenue" message={erreurs} />
+    {/if}
   {/if}
 </Formulaire>
 
