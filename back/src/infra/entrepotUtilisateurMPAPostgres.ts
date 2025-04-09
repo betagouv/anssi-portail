@@ -106,4 +106,26 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
       .first();
     return !!utilisateur;
   }
+
+  async tous() {
+    const utilisateurs = await this.knex('utilisateurs');
+
+    return Promise.all(
+      utilisateurs.map(async (utilisateur) => {
+        const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
+        const { prenom, nom, telephone, domainesSpecialite, organisation } =
+          (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
+        return {
+          ...donnees,
+          idListeFavoris: utilisateur.id_liste_favoris,
+          email: donnees.email,
+          prenom,
+          nom,
+          telephone,
+          domainesSpecialite,
+          organisation,
+        };
+      })
+    );
+  }
 }
