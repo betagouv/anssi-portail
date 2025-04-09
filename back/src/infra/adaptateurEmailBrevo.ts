@@ -1,6 +1,7 @@
 import { adaptateurEmailConsole } from './adaptateurEmailConsole';
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
 import axios from 'axios';
+import { decode } from 'punycode';
 
 const enteteJSON = {
   headers: {
@@ -29,7 +30,41 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
       enteteJSON
     );
   },
-  creeContactBrevo: async () => {},
+  creeContactBrevo: async ({
+    email,
+    prenom,
+    nom,
+    infoLettre,
+  }: {
+    email: string;
+    prenom: string;
+    nom: string;
+    infoLettre: boolean;
+  }) => {
+    axios
+      .post(
+        `${urlBase}/contacts`,
+        {
+          updateEnabled: true,
+          email,
+          emailBlacklisted: !infoLettre,
+          attributes: {
+            PRENOM: decode(prenom),
+            NOM: decode(nom),
+          },
+        },
+        enteteJSON
+      )
+      .catch((e) => {
+        if (e.response.data.message === 'Contact already exist')
+          return Promise.resolve();
+
+        console.error(e, {
+          'Erreur renvoyée par API Brevo': e.response.data,
+        });
+        return Promise.reject(e);
+      });
+  },
 });
 
 export const fabriqueAdaptateurEmail = () =>
