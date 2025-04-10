@@ -2,7 +2,7 @@ import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types'
 
 export type DonneesFormulaireDemandeAide = {
   email: string;
-  emailUtilisateur: string;
+  emailAidant: string;
   entite: Organisation;
   cguSontValidees: boolean;
 };
