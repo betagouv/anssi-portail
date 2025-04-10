@@ -18,7 +18,6 @@
     e: CustomEvent<DonneesFormulaireDemandeAide>
   ) => {
     formulaireSoumis = true;
-    console.log('données du formulaire', { donnees: e.detail });
     if (!formulaireDemandeAide.estValide()) return;
 
     try {
@@ -35,14 +34,11 @@
           emailAidant: e.detail.emailUtilisateur,
         }),
       };
-      console.log('données à donner à l‘API', { corps });
-
       const reponse = await axios.post('/api/mon-aide-cyber/demandes-aide', corps);
       if (reponse.status === 201) {
         enSucces = true;
       }
     } catch (e) {
-      console.error(e);
       if (axios.isAxiosError(e)) {
         erreurs = e.response?.data?.erreur;
       }
