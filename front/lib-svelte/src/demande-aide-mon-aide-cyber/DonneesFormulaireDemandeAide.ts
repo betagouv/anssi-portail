@@ -1,9 +1,9 @@
-import type { OrganisationDisponible } from '../ui/formulaire/SelectionOrganisation.types';
+import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
 
 export type DonneesFormulaireDemandeAide = {
   email: string;
   emailUtilisateur: string;
-  entite: OrganisationDisponible;
+  entite: Organisation;
   cguSontValidees: boolean;
 };
 

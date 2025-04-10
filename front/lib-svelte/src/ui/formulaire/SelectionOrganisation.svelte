@@ -4,19 +4,19 @@
   import { validationChamp } from '../../directives/validationChamp';
   import axios from 'axios';
   import type {
-    OrganisationDisponible,
+    Organisation,
     Departement,
   } from './SelectionOrganisation.types.ts';
 
   type ReponseApiAnnuaireOrganisations = {
-    suggestions: OrganisationDisponible[];
+    suggestions: Organisation[];
   };
-  type OrganisationAvecLabel = OrganisationDisponible & {
+  type OrganisationAvecLabel = Organisation & {
     label: string;
   };
 
   export let filtreDepartement: Departement | undefined;
-  export let valeur: OrganisationDisponible | undefined;
+  export let valeur: Organisation | undefined;
   export let id: string = '';
 
   let saisie: string;
@@ -33,7 +33,7 @@
     }, dureeDebounceEnMs);
   };
 
-  const construisLabel = (organisation: OrganisationDisponible) => {
+  const construisLabel = (organisation: Organisation) => {
     const siret = organisation.siret;
 
     const siretFormatte =
@@ -46,7 +46,7 @@
   };
 
   const uneSuggestion = (
-    organisation: OrganisationDisponible
+    organisation: Organisation
   ): OrganisationAvecLabel => {
     return { ...organisation, label: construisLabel(organisation) };
   };
@@ -75,7 +75,7 @@
   };
 
   const envoiEvenement = createEventDispatcher<{
-    organisationChoisie: OrganisationDisponible;
+    organisationChoisie: Organisation;
   }>();
 
   const choisisOrganisation = (item: OrganisationAvecLabel) => {
