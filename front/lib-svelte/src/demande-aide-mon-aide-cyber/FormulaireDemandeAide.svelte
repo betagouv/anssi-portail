@@ -4,7 +4,7 @@
   import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
-  import type { OrganisationDisponible } from '../ui/formulaire/SelectionOrganisation.types';
+  import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
   import { createEventDispatcher } from 'svelte';
   import type { DonneesFormulaireDemandeAide } from './DonneesFormulaireDemandeAide';
   import { validationChamp } from '../directives/validationChamp';
@@ -16,7 +16,7 @@
 
   export let erreurs: string;
 
-  let entite: OrganisationDisponible;
+  let entite: Organisation;
   let email: string;
   let estEnRelationAvecUnUtilisateur: boolean;
   let emailUtilisateur: string;

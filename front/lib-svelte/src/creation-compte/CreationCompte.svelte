@@ -3,10 +3,8 @@
   import SelectionDomaineSpecialite from './SelectionDomaineSpecialite.svelte';
   import { validationChamp } from '../directives/validationChamp';
   import type {
-    Departement,
     FormulaireInscription,
     InformationsProfessionnelles,
-    Organisation,
   } from './creationCompte';
   import Formulaire from '../ui/Formulaire.svelte';
   import SelectionDepartement from './SelectionDepartement.svelte';
@@ -16,6 +14,7 @@
   import Bouton from '../ui/Bouton.svelte';
   import { onMount } from 'svelte';
   import axios from 'axios';
+  import type { Departement, Organisation } from '../ui/formulaire/SelectionOrganisation.types.js';
 
   let informationsProfessionnelles: InformationsProfessionnelles = {
     prenom: '',
