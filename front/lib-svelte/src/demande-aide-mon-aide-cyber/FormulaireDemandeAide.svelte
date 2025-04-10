@@ -127,7 +127,7 @@
         use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
       />
       <label for="cguAcceptees" class="requis">
-        J'accepte les conditions générales d'utilisation de MesServicesCyber au
+        J'accepte les <a class="lien" href="https://monaide.cyber.gouv.fr/cgu" target="_blank">conditions générales d'utilisation</a> de MonAideCyber au
         nom de l’entité que je représente.
       </label>
     </div>
@@ -198,7 +198,7 @@
     appearance: none;
     border: 1px solid var(--noir);
     border-radius: 4px;
-    width: 24px;
+    min-width: 24px;
     height: 24px;
     margin: 0;
     cursor: pointer;
@@ -219,7 +219,6 @@
     }
 
     &:indeterminate {
-      /* Ce style est prévu pour être cumulatif avec l'état coché */
       &::before {
         width: 9px;
         height: 10px;
@@ -228,4 +227,38 @@
       }
     }
   }
+
+  .case-a-cocher {
+    display: grid;
+    grid-template-areas:  'input label'
+                          'erreur erreur';
+    gap: 8px;
+
+    input {
+      grid-area: input;
+    }
+    label {
+      grid-area: label;
+    }
+    :global(.erreur-champ-saisie) {
+      grid-area: erreur;
+      margin-top: 0;
+    }
+  }
+
+  input[type='checkbox'] {
+    transform: none;
+  }
+
+  .lien {
+    display: inline-flex;
+  }
+
+  .requis:before {
+    content: '*';
+    color: #e3271c;
+    margin-right: 4px;
+    font-size: 1rem;
+  }
+
 </style>
