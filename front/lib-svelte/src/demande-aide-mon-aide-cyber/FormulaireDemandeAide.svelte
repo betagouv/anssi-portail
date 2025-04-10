@@ -19,7 +19,7 @@
   let entite: Organisation;
   let email: string;
   let estEnRelationAvecUnUtilisateur: boolean;
-  let emailUtilisateur: string;
+  let emailAidant: string;
   let cguSontValidees: boolean;
 
   export const estValide = () => formulaire.estValide();
@@ -32,7 +32,7 @@
     emets('formulaireSoumis', {
       entite,
       email,
-      emailUtilisateur,
+      emailAidant,
       cguSontValidees,
     });
   };
@@ -106,9 +106,9 @@
           libelle="Email de l'Aidant ou du prestataire"
         >
           <ChampTexte
-            bind:valeur={emailUtilisateur}
-            nom="emailUtilisateur"
-            id="emailUtilisateur"
+            bind:valeur={emailAidant}
+            nom="emailAidant"
+            id="emailAidant"
             requis={true}
             type="email"
             aideSaisie="Ex: jean.dupont@email.com"

@@ -1,9 +1,6 @@
 <script lang="ts">
   import FormulaireDemandeAide from './FormulaireDemandeAide.svelte';
-  import type {
-    CorpsAPIDemandeAide,
-    DonneesFormulaireDemandeAide,
-  } from './DonneesFormulaireDemandeAide';
+  import type { CorpsAPIDemandeAide, DonneesFormulaireDemandeAide } from './DonneesFormulaireDemandeAide';
   import axios from 'axios';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
 
@@ -23,16 +20,15 @@
     try {
       enCoursEnvoi = true;
 
+      const { email, cguSontValidees, emailAidant, entite } = e.detail;
       const corps: CorpsAPIDemandeAide = {
         entiteAidee: {
-          email: e.detail.email,
-          departement: e.detail.entite.departement,
-          raisonSociale: e.detail.entite.nom,
+          email,
+          departement: entite.departement,
+          raisonSociale: entite.nom,
         },
-        validationCGU: e.detail.cguSontValidees,
-        ...(e.detail.emailUtilisateur && {
-          emailAidant: e.detail.emailUtilisateur,
-        }),
+        validationCGU: cguSontValidees,
+        ...(emailAidant && { emailAidant }),
       };
       const reponse = await axios.post('/api/mon-aide-cyber/demandes-aide', corps);
       if (reponse.status === 201) {
