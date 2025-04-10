@@ -32,7 +32,7 @@
     emets('formulaireSoumis', {
       entite,
       email,
-      emailAidant,
+      ...(estEnRelationAvecUnUtilisateur && { emailAidant }),
       cguSontValidees,
     });
   };
