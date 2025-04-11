@@ -20,10 +20,12 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
   }
 
-  private chiffreDonneesUtilisateur(
-    utilisateur: Utilisateur
-  ): UtilisateurBDD {
-    return { email: utilisateur.email, donnees: utilisateur };
+  private chiffreDonneesUtilisateur(utilisateur: Utilisateur): UtilisateurBDD {
+    return {
+      email: utilisateur.email,
+      donnees: utilisateur,
+      id_liste_favoris: utilisateur.idListeFavoris,
+    };
   }
 
   private dechiffreDonneesUtilisateur(
@@ -55,40 +57,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     });
   }
 
-  async parEmail(email: string): Promise<Utilisateur | undefined> {
-    const utilisateur = await this.knex('utilisateurs')
-      .where({ email })
-      .first();
-    if (!utilisateur) return undefined;
-
-    const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
-    const { prenom, nom, telephone, domainesSpecialite, organisation } =
-      (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
-
-    return new Utilisateur(
-      {
-        email,
-        prenom,
-        nom,
-        telephone,
-        domainesSpecialite,
-        cguAcceptees: donnees.cguAcceptees,
-        infolettreAcceptee: donnees.infolettreAcceptee,
-        siretEntite: organisation.siret,
-        idListeFavoris: utilisateur.id_liste_favoris,
-      },
-      this.adaptateurRechercheEntreprise
-    );
-  }
-
-  async parIdListeFavoris(
-    idListeFavoris: string
-  ): Promise<Utilisateur | undefined> {
-    const utilisateur = await this.knex('utilisateurs')
-      .where({ id_liste_favoris: idListeFavoris })
-      .first();
-    if (!utilisateur) return undefined;
-
+  private async hydrateUtilisateur(utilisateur: UtilisateurBDD) {
     const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
     const { prenom, nom, telephone, domainesSpecialite, organisation } =
       (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
@@ -109,6 +78,25 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     );
   }
 
+  async parEmail(email: string): Promise<Utilisateur | undefined> {
+    const utilisateur = await this.knex('utilisateurs')
+      .where({ email })
+      .first();
+    if (!utilisateur) return undefined;
+    return await this.hydrateUtilisateur(utilisateur);
+  }
+
+  async parIdListeFavoris(
+    idListeFavoris: string
+  ): Promise<Utilisateur | undefined> {
+    const utilisateur = await this.knex('utilisateurs')
+      .where({ id_liste_favoris: idListeFavoris })
+      .first();
+    if (!utilisateur) return undefined;
+
+    return this.hydrateUtilisateur(utilisateur);
+  }
+
   async existe(email: string) {
     const utilisateur = await this.knex('utilisateurs')
       .where({ email })
@@ -118,29 +106,6 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
   async tous() {
     const utilisateurs = await this.knex('utilisateurs');
-
-    return Promise.all(
-      utilisateurs.map(async (utilisateur) => {
-        const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
-        const { prenom, nom, telephone, domainesSpecialite, organisation } =
-          (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
-
-        return new Utilisateur(
-          {
-            email: donnees.email,
-            prenom,
-            nom,
-            telephone,
-            domainesSpecialite,
-            cguAcceptees: donnees.cguAcceptees,
-            infolettreAcceptee: donnees.infolettreAcceptee,
-            siretEntite: organisation.siret,
-            idListeFavoris: utilisateur.id_liste_favoris,
-          },
-          this.adaptateurRechercheEntreprise
-        );
-
-      })
-    );
+    return Promise.all(utilisateurs.map((u) => this.hydrateUtilisateur(u)));
   }
 }
