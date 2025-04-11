@@ -5,4 +5,5 @@ export interface UtilisateurBDD {
     cguAcceptees: boolean;
     infolettreAcceptee: boolean;
   };
+  id_liste_favoris: string;
 }
