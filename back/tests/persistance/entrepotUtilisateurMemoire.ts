@@ -4,6 +4,9 @@ import { randomUUID } from 'node:crypto';
 
 export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
   entites: Utilisateur[] = [];
+
+  tous = async () => [...this.entites];
+
   ajoute = async (utilisateur: UtilisateurPartiel) => {
     const {
       nom,
