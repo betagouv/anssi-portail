@@ -2,7 +2,7 @@ import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 import { check } from 'express-validator';
 import { CompteCree } from '../bus/compteCree';
-import { ClasseUtilisateur } from '../metier/utilisateur';
+import { Utilisateur } from '../metier/utilisateur';
 
 const ressourceUtilisateurs = ({
   busEvenements,
@@ -55,7 +55,7 @@ const ressourceUtilisateurs = ({
         infolettreAcceptee,
       } = requete.body;
 
-      const utilisateur = new ClasseUtilisateur({
+      const utilisateur = new Utilisateur({
         email,
         prenom,
         nom,

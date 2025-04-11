@@ -5,7 +5,7 @@ import { fabriqueAdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
 import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres';
 import { fabriqueAdaptateurEmail } from '../infra/adaptateurEmailBrevo';
 import { adaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
-import { ClasseUtilisateur } from '../metier/utilisateur';
+import { Utilisateur } from '../metier/utilisateur';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
@@ -48,9 +48,9 @@ export class ConsoleAdministration {
 
   async rattrapageProfilsContactBrevo() {
     const tousUtilisateurs = await this.entrepotUtilisateur.tous();
-    const afficheErreur = (utilisateur: ClasseUtilisateur) =>
+    const afficheErreur = (utilisateur: Utilisateur) =>
       `Erreur pour ${utilisateur.email}`;
-    const rattrapeUtilisateur = async (utilisateur: ClasseUtilisateur) => {
+    const rattrapeUtilisateur = async (utilisateur: Utilisateur) => {
       const { prenom, nom, email, infolettreAcceptee } = utilisateur;
       this.adaptateurEmail.creeContactBrevo({
         prenom,

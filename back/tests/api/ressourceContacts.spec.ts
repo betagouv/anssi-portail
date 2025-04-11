@@ -7,7 +7,7 @@ import request from 'supertest';
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { randomUUID } from 'node:crypto';
-import { ClasseUtilisateur } from '../../src/metier/utilisateur';
+import { Utilisateur } from '../../src/metier/utilisateur';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 
 describe('La ressource Contacts', () => {
@@ -68,7 +68,7 @@ describe('La ressource Contacts', () => {
         ],
       };
       entrepotUtilisateur.parEmail = async () =>
-        new ClasseUtilisateur(
+        new Utilisateur(
           {
             email: 'jeanne.dupont@user.com',
             prenom: 'Jeanne',

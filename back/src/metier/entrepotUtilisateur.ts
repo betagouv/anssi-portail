@@ -1,11 +1,11 @@
-import { ClasseUtilisateur } from './utilisateur';
+import { Utilisateur } from './utilisateur';
 
 export interface EntrepotUtilisateur {
-  ajoute: (utilisateur: ClasseUtilisateur) => Promise<void>;
-  parEmail: (email: string) => Promise<ClasseUtilisateur | undefined>;
+  ajoute: (utilisateur: Utilisateur) => Promise<void>;
+  parEmail: (email: string) => Promise<Utilisateur | undefined>;
   existe: (email: string) => Promise<boolean>;
   parIdListeFavoris: (
     idListeFavoris: string
-  ) => Promise<ClasseUtilisateur | undefined>;
-  tous: () => Promise<ClasseUtilisateur[]>;
+  ) => Promise<Utilisateur | undefined>;
+  tous: () => Promise<Utilisateur[]>;
 }
