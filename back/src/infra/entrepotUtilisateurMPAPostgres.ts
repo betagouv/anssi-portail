@@ -124,16 +124,22 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
         const { prenom, nom, telephone, domainesSpecialite, organisation } =
           (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
-        return {
-          ...donnees,
-          idListeFavoris: utilisateur.id_liste_favoris,
-          email: donnees.email,
-          prenom,
-          nom,
-          telephone,
-          domainesSpecialite,
-          organisation,
-        };
+
+        return new ClasseUtilisateur(
+          {
+            email: donnees.email,
+            prenom,
+            nom,
+            telephone,
+            domainesSpecialite,
+            cguAcceptees: donnees.cguAcceptees,
+            infolettreAcceptee: donnees.infolettreAcceptee,
+            siretEntite: organisation.siret,
+            idListeFavoris: utilisateur.id_liste_favoris,
+          },
+          this.adaptateurRechercheEntreprise
+        );
+
       })
     );
   }
