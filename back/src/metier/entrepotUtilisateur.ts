@@ -6,6 +6,6 @@ export interface EntrepotUtilisateur {
   existe: (email: string) => Promise<boolean>;
   parIdListeFavoris: (
     idListeFavoris: string
-  ) => Promise<Utilisateur | undefined>;
+  ) => Promise<ClasseUtilisateur | undefined>;
   tous: () => Promise<Utilisateur[]>;
 }
