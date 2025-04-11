@@ -7,6 +7,8 @@ import request from 'supertest';
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { randomUUID } from 'node:crypto';
+import { ClasseUtilisateur } from '../../src/metier/utilisateur';
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 
 describe('La ressource Contacts', () => {
   let serveur: Express;
@@ -60,17 +62,26 @@ describe('La ressource Contacts', () => {
     });
 
     it('retourne les informations de contacts', async () => {
-      entrepotUtilisateur.parEmail = async () => ({
-        email: 'jeanne.dupont@user.com',
-        prenom: 'Jeanne',
-        nom: 'Dupont',
-        telephone: '0123456789',
-        domainesSpecialite: ['RSSI'],
-        organisation: { siret: '', departement: '75', nom: '' },
-        cguAcceptees: true,
-        infolettreAcceptee: true,
-        idListeFavoris: randomUUID(),
-      });
+      const rechercheEntreprise: AdaptateurRechercheEntreprise = {
+        rechercheOrganisations: async (_: string, __: string | null) => [
+          { siret: '', departement: '75', nom: '' },
+        ],
+      };
+      entrepotUtilisateur.parEmail = async () =>
+        new ClasseUtilisateur(
+          {
+            email: 'jeanne.dupont@user.com',
+            prenom: 'Jeanne',
+            nom: 'Dupont',
+            telephone: '0123456789',
+            domainesSpecialite: ['RSSI'],
+            siretEntite: '',
+            cguAcceptees: true,
+            infolettreAcceptee: true,
+            idListeFavoris: randomUUID(),
+          },
+          rechercheEntreprise
+        );
       const reponse = await request(serveur).get('/api/contacts');
 
       assert.equal(reponse.body.CSIRT.nom, 'Urgence Cyber Île-de-France');

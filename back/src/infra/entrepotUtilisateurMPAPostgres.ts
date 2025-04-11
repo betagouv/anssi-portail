@@ -55,7 +55,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     });
   }
 
-  async parEmail(email: string): Promise<Utilisateur | undefined> {
+  async parEmail(email: string): Promise<ClasseUtilisateur | undefined> {
     const utilisateur = await this.knex('utilisateurs')
       .where({ email })
       .first();
@@ -64,16 +64,21 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
     const { prenom, nom, telephone, domainesSpecialite, organisation } =
       (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
-    return {
-      ...donnees,
-      idListeFavoris: utilisateur.id_liste_favoris,
-      email,
-      prenom,
-      nom,
-      telephone,
-      domainesSpecialite,
-      organisation,
-    };
+
+    return new ClasseUtilisateur(
+      {
+        email,
+        prenom,
+        nom,
+        telephone,
+        domainesSpecialite,
+        cguAcceptees: donnees.cguAcceptees,
+        infolettreAcceptee: donnees.infolettreAcceptee,
+        siretEntite: organisation.siret,
+        idListeFavoris: utilisateur.id_liste_favoris,
+      },
+      this.adaptateurRechercheEntreprise
+    );
   }
 
   async parIdListeFavoris(

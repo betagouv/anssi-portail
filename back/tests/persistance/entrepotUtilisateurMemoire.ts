@@ -4,6 +4,7 @@ import { randomUUID } from 'node:crypto';
 
 export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
   entites: Utilisateur[] = [];
+  utilisateurs: ClasseUtilisateur[] = [];
 
   tous = async () => [...this.entites];
 
@@ -17,6 +18,8 @@ export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
       cguAcceptees,
       infolettreAcceptee,
     } = utilisateur;
+
+    const idListeFavoris = randomUUID();
     const utilisateurComplet = {
       nom,
       prenom,
@@ -25,14 +28,15 @@ export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
       domainesSpecialite,
       cguAcceptees,
       infolettreAcceptee,
-      idListeFavoris: randomUUID(),
+      idListeFavoris,
       organisation: await utilisateur.organisation(),
     };
+    utilisateur.idListeFavoris = idListeFavoris;
     this.entites.push(utilisateurComplet);
-    //this.entites.push(utilisateur);
+    this.utilisateurs.push(utilisateur);
   };
   parEmail = async (email: string) => {
-    return this.entites.find((utilisateur) => utilisateur.email === email);
+    return this.utilisateurs.find((utilisateur) => utilisateur.email === email);
   };
   parIdListeFavoris = async (idListeFavoris: string) => {
     return this.entites.find(

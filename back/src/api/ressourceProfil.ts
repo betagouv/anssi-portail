@@ -20,7 +20,7 @@ const ressourceProfil = ({
         email,
         nom: utilisateurConnecte?.nom,
         prenom: utilisateurConnecte?.prenom,
-        siret: utilisateurConnecte?.organisation.siret,
+        siret: (await utilisateurConnecte?.organisation())?.siret,
         idListeFavoris: utilisateurConnecte?.idListeFavoris,
       });
     }

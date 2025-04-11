@@ -27,6 +27,7 @@ interface InformationsCreationUtilisateur {
   siretEntite: string;
   cguAcceptees: boolean;
   infolettreAcceptee: boolean;
+  idListeFavoris?: string;
 }
 
 export class ClasseUtilisateur {
@@ -38,7 +39,7 @@ export class ClasseUtilisateur {
   cguAcceptees: boolean;
   infolettreAcceptee: boolean;
   siretEntite: string;
-  idListeFavoris!: string;
+  idListeFavoris: string;
   private adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
 
   constructor(
@@ -51,6 +52,7 @@ export class ClasseUtilisateur {
       cguAcceptees,
       infolettreAcceptee,
       siretEntite,
+      idListeFavoris,
     }: InformationsCreationUtilisateur,
     adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise
   ) {
@@ -63,7 +65,7 @@ export class ClasseUtilisateur {
     this.infolettreAcceptee = infolettreAcceptee;
     this.siretEntite = siretEntite;
     this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
-    // this.idListeFavoris = idListeFavoris;
+    this.idListeFavoris = idListeFavoris ?? '';
   }
 
   async organisation(): Promise<Organisation> {
