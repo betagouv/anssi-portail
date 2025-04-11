@@ -72,7 +72,7 @@ describe('La ressource utilisateur', () => {
       assert.equal(jeanne?.nom, 'Dupont');
       assert.equal(jeanne?.telephone, '0123456789');
       assert.deepEqual(jeanne?.domainesSpecialite, ['RSSI']);
-      assert.equal(jeanne?.organisation.siret, '13000766900018');
+      assert.equal((await jeanne?.organisation())?.siret, '13000766900018');
       assert.equal(jeanne?.cguAcceptees, true);
       assert.equal(jeanne?.infolettreAcceptee, true);
     });
@@ -119,7 +119,7 @@ describe('La ressource utilisateur', () => {
       assert.equal(jeanne?.nom, '&lt;Dupont');
       assert.equal(jeanne?.telephone, '0123456789');
       assert.deepEqual(jeanne?.domainesSpecialite, ['RSSI']);
-      assert.equal(jeanne?.organisation.siret, '13000766900018');
+      assert.equal((await jeanne?.organisation())?.siret, '13000766900018');
     });
 
     describe('concernant la validation des données', () => {

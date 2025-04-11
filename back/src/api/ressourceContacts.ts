@@ -25,7 +25,7 @@ const ressourceContacts = ({
       }
 
       const codeRegion = regionDuDepartement(
-        utilisateur.organisation.departement as CodeDepartement
+        (await utilisateur.organisation()).departement as CodeDepartement
       );
 
       reponse.json(contactsParRegion[codeRegion]);
