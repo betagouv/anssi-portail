@@ -1,6 +1,6 @@
 import Knex from 'knex';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { ClasseUtilisateur, Utilisateur } from '../metier/utilisateur';
+import { ClasseUtilisateur } from '../metier/utilisateur';
 import config from '../../knexfile';
 import { UtilisateurBDD } from './utilisateurBDD';
 import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi';
@@ -83,7 +83,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
   async parIdListeFavoris(
     idListeFavoris: string
-  ): Promise<Utilisateur | undefined> {
+  ): Promise<ClasseUtilisateur | undefined> {
     const utilisateur = await this.knex('utilisateurs')
       .where({ id_liste_favoris: idListeFavoris })
       .first();
@@ -92,15 +92,21 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
     const { prenom, nom, telephone, domainesSpecialite, organisation } =
       (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
-    return {
-      ...donnees,
-      idListeFavoris: utilisateur.id_liste_favoris,
-      prenom,
-      nom,
-      telephone,
-      domainesSpecialite,
-      organisation,
-    };
+
+    return new ClasseUtilisateur(
+      {
+        email: donnees.email,
+        prenom,
+        nom,
+        telephone,
+        domainesSpecialite,
+        cguAcceptees: donnees.cguAcceptees,
+        infolettreAcceptee: donnees.infolettreAcceptee,
+        siretEntite: organisation.siret,
+        idListeFavoris: utilisateur.id_liste_favoris,
+      },
+      this.adaptateurRechercheEntreprise
+    );
   }
 
   async existe(email: string) {
