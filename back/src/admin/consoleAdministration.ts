@@ -1,11 +1,11 @@
 import { AxiosError } from 'axios';
-import { EntrepotUtilisateurMPAPostgres } from '../src/infra/entrepotUtilisateurMPAPostgres';
-import { EntrepotUtilisateur } from '../src/metier/entrepotUtilisateur';
-import { fabriqueAdaptateurProfilAnssi } from '../src/infra/adaptateurProfilAnssi';
-import { adaptateurRechercheEntreprise } from '../src/infra/adaptateurRechercheEntreprise';
-import { Utilisateur } from '../src/metier/utilisateur';
-import { AdaptateurEmail } from '../src/metier/adaptateurEmail';
-import { fabriqueAdaptateurEmail } from '../src/infra/adaptateurEmailBrevo';
+import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
+import { AdaptateurEmail } from '../metier/adaptateurEmail';
+import { fabriqueAdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
+import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres';
+import { fabriqueAdaptateurEmail } from '../infra/adaptateurEmailBrevo';
+import { adaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
+import { Utilisateur } from '../metier/utilisateur';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
