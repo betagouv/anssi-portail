@@ -1,6 +1,6 @@
 import Knex from 'knex';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { ClasseUtilisateur, Utilisateur, UtilisateurPartiel } from '../metier/utilisateur';
+import { ClasseUtilisateur, Utilisateur } from '../metier/utilisateur';
 import config from '../../knexfile';
 import { UtilisateurBDD } from './utilisateurBDD';
 import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi';
@@ -21,7 +21,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   }
 
   private chiffreDonneesUtilisateur(
-    utilisateur: UtilisateurPartiel
+    utilisateur: ClasseUtilisateur
   ): UtilisateurBDD {
     return { email: utilisateur.email, donnees: utilisateur };
   }
@@ -44,8 +44,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
     // Enregistrement dans MPA
     const organisation = await utilisateur.organisation();
-    const { prenom, nom, telephone, email, domainesSpecialite } =
-      utilisateur;
+    const { prenom, nom, telephone, email, domainesSpecialite } = utilisateur;
     await this.adaptateurProfilAnssi.metsAJour({
       prenom,
       nom,
