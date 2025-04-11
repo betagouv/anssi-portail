@@ -16,7 +16,7 @@ import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC';
 import { decodeSessionDuCookie } from '../cookie';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
-import { ClasseUtilisateur } from '../../../src/metier/utilisateur';
+import { Utilisateur } from '../../../src/metier/utilisateur';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {
@@ -47,7 +47,7 @@ describe('La ressource apres authentification OIDC', () => {
 
     describe("si l'utilisateur est connu", () => {
       beforeEach(() => {
-        const jeanneDupont = new ClasseUtilisateur(
+        const jeanneDupont = new Utilisateur(
           {
             email: 'jeanne.dupont',
             cguAcceptees: true,

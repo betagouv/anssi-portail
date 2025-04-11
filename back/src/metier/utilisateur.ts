@@ -18,7 +18,7 @@ interface InformationsCreationUtilisateur {
   idListeFavoris?: string;
 }
 
-export class ClasseUtilisateur {
+export class Utilisateur {
   email: string;
   prenom: string;
   nom: string;

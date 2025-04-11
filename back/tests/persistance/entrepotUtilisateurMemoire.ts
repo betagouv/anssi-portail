@@ -1,13 +1,13 @@
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { ClasseUtilisateur } from '../../src/metier/utilisateur';
+import { Utilisateur } from '../../src/metier/utilisateur';
 import { randomUUID } from 'node:crypto';
 
 export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
-  utilisateurs: ClasseUtilisateur[] = [];
+  utilisateurs: Utilisateur[] = [];
 
   tous = async () => [...this.utilisateurs];
 
-  ajoute = async (utilisateur: ClasseUtilisateur) => {
+  ajoute = async (utilisateur: Utilisateur) => {
     utilisateur.idListeFavoris = randomUUID();
     this.utilisateurs.push(utilisateur);
   };

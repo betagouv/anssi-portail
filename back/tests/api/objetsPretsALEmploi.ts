@@ -1,7 +1,7 @@
-import { ClasseUtilisateur } from '../../src/metier/utilisateur';
+import { Utilisateur } from '../../src/metier/utilisateur';
 import { fauxAdaptateurRechercheEntreprise } from './fauxObjets';
 
-export const jeanneDupont: ClasseUtilisateur = new ClasseUtilisateur(
+export const jeanneDupont: Utilisateur = new Utilisateur(
   {
     email: 'jeanne.dupont@user.com',
     prenom: 'Jeanne',

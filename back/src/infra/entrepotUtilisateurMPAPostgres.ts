@@ -1,6 +1,6 @@
 import Knex from 'knex';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { ClasseUtilisateur } from '../metier/utilisateur';
+import { Utilisateur } from '../metier/utilisateur';
 import config from '../../knexfile';
 import { UtilisateurBDD } from './utilisateurBDD';
 import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi';
@@ -21,7 +21,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   }
 
   private chiffreDonneesUtilisateur(
-    utilisateur: ClasseUtilisateur
+    utilisateur: Utilisateur
   ): UtilisateurBDD {
     return { email: utilisateur.email, donnees: utilisateur };
   }
@@ -36,7 +36,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     };
   }
 
-  async ajoute(utilisateur: ClasseUtilisateur) {
+  async ajoute(utilisateur: Utilisateur) {
     // Enregistrement dans la BDD
     await this.knex('utilisateurs').insert(
       this.chiffreDonneesUtilisateur(utilisateur)
@@ -55,7 +55,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     });
   }
 
-  async parEmail(email: string): Promise<ClasseUtilisateur | undefined> {
+  async parEmail(email: string): Promise<Utilisateur | undefined> {
     const utilisateur = await this.knex('utilisateurs')
       .where({ email })
       .first();
@@ -65,7 +65,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     const { prenom, nom, telephone, domainesSpecialite, organisation } =
       (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
 
-    return new ClasseUtilisateur(
+    return new Utilisateur(
       {
         email,
         prenom,
@@ -83,7 +83,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
   async parIdListeFavoris(
     idListeFavoris: string
-  ): Promise<ClasseUtilisateur | undefined> {
+  ): Promise<Utilisateur | undefined> {
     const utilisateur = await this.knex('utilisateurs')
       .where({ id_liste_favoris: idListeFavoris })
       .first();
@@ -93,7 +93,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     const { prenom, nom, telephone, domainesSpecialite, organisation } =
       (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
 
-    return new ClasseUtilisateur(
+    return new Utilisateur(
       {
         email: donnees.email,
         prenom,
@@ -125,7 +125,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         const { prenom, nom, telephone, domainesSpecialite, organisation } =
           (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
 
-        return new ClasseUtilisateur(
+        return new Utilisateur(
           {
             email: donnees.email,
             prenom,
