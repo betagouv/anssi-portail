@@ -1,4 +1,4 @@
-import { ClasseUtilisateur, Utilisateur } from './utilisateur';
+import { ClasseUtilisateur } from './utilisateur';
 
 export interface EntrepotUtilisateur {
   ajoute: (utilisateur: ClasseUtilisateur) => Promise<void>;
@@ -7,5 +7,5 @@ export interface EntrepotUtilisateur {
   parIdListeFavoris: (
     idListeFavoris: string
   ) => Promise<ClasseUtilisateur | undefined>;
-  tous: () => Promise<Utilisateur[]>;
+  tous: () => Promise<ClasseUtilisateur[]>;
 }

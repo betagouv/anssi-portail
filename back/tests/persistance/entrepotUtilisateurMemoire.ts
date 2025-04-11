@@ -6,7 +6,7 @@ export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
   entites: Utilisateur[] = [];
   utilisateurs: ClasseUtilisateur[] = [];
 
-  tous = async () => [...this.entites];
+  tous = async () => [...this.utilisateurs];
 
   ajoute = async (utilisateur: ClasseUtilisateur) => {
     const {
