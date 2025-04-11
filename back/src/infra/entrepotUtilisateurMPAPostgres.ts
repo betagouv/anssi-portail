@@ -1,6 +1,6 @@
 import Knex from 'knex';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { Utilisateur, UtilisateurPartiel } from '../metier/utilisateur';
+import { Utilisateur } from '../metier/utilisateur';
 import config from '../../knexfile';
 import { UtilisateurBDD } from './utilisateurBDD';
 import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi';
@@ -20,10 +20,12 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
   }
 
-  private chiffreDonneesUtilisateur(
-    utilisateur: UtilisateurPartiel
-  ): UtilisateurBDD {
-    return { email: utilisateur.email, donnees: utilisateur };
+  private chiffreDonneesUtilisateur(utilisateur: Utilisateur): UtilisateurBDD {
+    return {
+      email: utilisateur.email,
+      donnees: utilisateur,
+      id_liste_favoris: utilisateur.idListeFavoris,
+    };
   }
 
   private dechiffreDonneesUtilisateur(
@@ -36,25 +38,45 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     };
   }
 
-  async ajoute(utilisateur: UtilisateurPartiel) {
-    const { prenom, nom, telephone, email, domainesSpecialite, siretEntite } =
-      utilisateur;
+  async ajoute(utilisateur: Utilisateur) {
+    // Enregistrement dans la BDD
     await this.knex('utilisateurs').insert(
       this.chiffreDonneesUtilisateur(utilisateur)
     );
-    const organisations =
-      await this.adaptateurRechercheEntreprise.rechercheOrganisations(
-        siretEntite,
-        null
-      );
+
+    // Enregistrement dans MPA
+    const organisation = await utilisateur.organisation();
+    const { prenom, nom, telephone, email, domainesSpecialite } = utilisateur;
     await this.adaptateurProfilAnssi.metsAJour({
       prenom,
       nom,
       telephone,
       email,
       domainesSpecialite,
-      organisation: organisations[0],
+      organisation,
     });
+  }
+
+  private async hydrateUtilisateur(utilisateur: UtilisateurBDD) {
+    const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
+    const { prenom, nom, telephone, domainesSpecialite, organisation } =
+      (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
+
+    return new Utilisateur(
+      {
+        email: donnees.email,
+        prenom,
+        nom,
+        telephone,
+        domainesSpecialite,
+        cguAcceptees: donnees.cguAcceptees,
+        infolettreAcceptee: donnees.infolettreAcceptee,
+        siretEntite: organisation.siret,
+        idListeFavoris: utilisateur.id_liste_favoris,
+        organisation
+      },
+      this.adaptateurRechercheEntreprise
+    );
   }
 
   async parEmail(email: string): Promise<Utilisateur | undefined> {
@@ -62,20 +84,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
       .where({ email })
       .first();
     if (!utilisateur) return undefined;
-
-    const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
-    const { prenom, nom, telephone, domainesSpecialite, organisation } =
-      (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
-    return {
-      ...donnees,
-      idListeFavoris: utilisateur.id_liste_favoris,
-      email,
-      prenom,
-      nom,
-      telephone,
-      domainesSpecialite,
-      organisation,
-    };
+    return await this.hydrateUtilisateur(utilisateur);
   }
 
   async parIdListeFavoris(
@@ -86,18 +95,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
       .first();
     if (!utilisateur) return undefined;
 
-    const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
-    const { prenom, nom, telephone, domainesSpecialite, organisation } =
-      (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
-    return {
-      ...donnees,
-      idListeFavoris: utilisateur.id_liste_favoris,
-      prenom,
-      nom,
-      telephone,
-      domainesSpecialite,
-      organisation,
-    };
+    return this.hydrateUtilisateur(utilisateur);
   }
 
   async existe(email: string) {
@@ -109,23 +107,6 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
   async tous() {
     const utilisateurs = await this.knex('utilisateurs');
-
-    return Promise.all(
-      utilisateurs.map(async (utilisateur) => {
-        const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
-        const { prenom, nom, telephone, domainesSpecialite, organisation } =
-          (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
-        return {
-          ...donnees,
-          idListeFavoris: utilisateur.id_liste_favoris,
-          email: donnees.email,
-          prenom,
-          nom,
-          telephone,
-          domainesSpecialite,
-          organisation,
-        };
-      })
-    );
+    return Promise.all(utilisateurs.map((u) => this.hydrateUtilisateur(u)));
   }
 }

@@ -1,35 +1,15 @@
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { Utilisateur, UtilisateurPartiel } from '../../src/metier/utilisateur';
+import { Utilisateur } from '../../src/metier/utilisateur';
 import { randomUUID } from 'node:crypto';
+import { EntrepotMemoire } from './entrepotMemoire';
 
-export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
-  entites: Utilisateur[] = [];
-
-  tous = async () => [...this.entites];
-
-  ajoute = async (utilisateur: UtilisateurPartiel) => {
-    const {
-      nom,
-      prenom,
-      email,
-      telephone,
-      domainesSpecialite,
-      cguAcceptees,
-      infolettreAcceptee,
-      siretEntite,
-    } = utilisateur;
-    const utilisateurComplet = {
-      nom,
-      prenom,
-      email,
-      telephone,
-      domainesSpecialite,
-      cguAcceptees,
-      infolettreAcceptee,
-      idListeFavoris: randomUUID(),
-      organisation: { siret: siretEntite, departement: '75', nom: 'ANSSI' },
-    };
-    this.entites.push(utilisateurComplet);
+export class EntrepotUtilisateurMemoire
+  extends EntrepotMemoire<Utilisateur>
+  implements EntrepotUtilisateur
+{
+  ajoute = async (utilisateur: Utilisateur) => {
+    utilisateur.idListeFavoris = randomUUID();
+    await super.ajoute(utilisateur);
   };
   parEmail = async (email: string) => {
     return this.entites.find((utilisateur) => utilisateur.email === email);

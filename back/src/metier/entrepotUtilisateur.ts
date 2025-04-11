@@ -1,7 +1,7 @@
-import { Utilisateur, UtilisateurPartiel } from './utilisateur';
+import { Utilisateur } from './utilisateur';
 
 export interface EntrepotUtilisateur {
-  ajoute: (utilisateur: UtilisateurPartiel) => Promise<void>;
+  ajoute: (utilisateur: Utilisateur) => Promise<void>;
   parEmail: (email: string) => Promise<Utilisateur | undefined>;
   existe: (email: string) => Promise<boolean>;
   parIdListeFavoris: (
