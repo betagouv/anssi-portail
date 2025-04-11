@@ -1,7 +1,7 @@
 import { adaptateurEmailConsole } from './adaptateurEmailConsole';
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
 import axios from 'axios';
-import { decode } from 'punycode';
+import { decode } from 'html-entities';
 
 const enteteJSON = {
   headers: {
@@ -25,7 +25,7 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
       {
         to: [{ email }],
         templateId: parseInt(process.env.BREVO_ID_TEMPLATE_BIENVENUE || '0'),
-        PRENOM: prenom,
+        PRENOM: decode(prenom),
       },
       enteteJSON
     );
