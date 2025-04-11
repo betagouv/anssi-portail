@@ -16,6 +16,7 @@ interface InformationsCreationUtilisateur {
   cguAcceptees: boolean;
   infolettreAcceptee: boolean;
   idListeFavoris?: string;
+  organisation?: Organisation;
 }
 
 export class Utilisateur {
@@ -29,6 +30,7 @@ export class Utilisateur {
   siretEntite: string;
   idListeFavoris: string;
   private adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
+  private _organisation: Organisation | undefined;
 
   constructor(
     {
@@ -41,6 +43,7 @@ export class Utilisateur {
       infolettreAcceptee,
       siretEntite,
       idListeFavoris,
+      organisation,
     }: InformationsCreationUtilisateur,
     adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise
   ) {
@@ -54,14 +57,18 @@ export class Utilisateur {
     this.siretEntite = siretEntite;
     this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
     this.idListeFavoris = idListeFavoris ?? '';
+    this._organisation = organisation;
   }
 
   async organisation(): Promise<Organisation> {
-    const organisations =
-      await this.adaptateurRechercheEntreprise.rechercheOrganisations(
-        this.siretEntite,
-        null
-      );
-    return organisations[0];
+    if (!this._organisation) {
+      const organisations =
+        await this.adaptateurRechercheEntreprise.rechercheOrganisations(
+          this.siretEntite,
+          null
+        );
+      this._organisation = organisations[0];
+    }
+    return this._organisation;
   }
 }

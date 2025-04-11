@@ -73,6 +73,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         infolettreAcceptee: donnees.infolettreAcceptee,
         siretEntite: organisation.siret,
         idListeFavoris: utilisateur.id_liste_favoris,
+        organisation
       },
       this.adaptateurRechercheEntreprise
     );
