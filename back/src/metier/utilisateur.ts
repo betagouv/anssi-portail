@@ -6,18 +6,6 @@ type Organisation = {
   departement: string | null;
 };
 
-export interface Utilisateur {
-  email: string;
-  prenom: string;
-  nom: string;
-  telephone?: string;
-  domainesSpecialite: string[];
-  organisation: Organisation;
-  cguAcceptees: boolean;
-  infolettreAcceptee: boolean;
-  idListeFavoris: string;
-}
-
 interface InformationsCreationUtilisateur {
   email: string;
   prenom: string;
