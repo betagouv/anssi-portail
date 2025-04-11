@@ -5,6 +5,7 @@ import { creeServeur } from '../../src/api/msc';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurJWT,
+  fauxFournisseurDeChemin,
   fauxMiddleware,
 } from './fauxObjets';
 import assert from 'node:assert';
@@ -25,7 +26,10 @@ describe('La ressource des services et ressources favoris', () => {
     });
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
-      middleware: fabriqueMiddleware({ adaptateurJWT: fauxAdaptateurJWT }),
+      middleware: fabriqueMiddleware({
+        adaptateurJWT: fauxAdaptateurJWT,
+        fournisseurChemin: fauxFournisseurDeChemin,
+      }),
       entrepotFavori,
     });
   });
