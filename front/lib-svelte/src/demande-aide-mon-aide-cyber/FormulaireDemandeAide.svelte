@@ -39,7 +39,7 @@
 </script>
 
 <Formulaire classe="carte-formulaire" bind:this={formulaire}>
-  <div class="champ">
+  <div class="champ recherche-organisation">
     <label class="libelle" for="entite">Recherchez votre organisation</label>
     <SelectionOrganisation
       id="entite"
@@ -52,6 +52,9 @@
   </div>
 
   {#if entite}
+    <div class="champs-requis-libelle">
+      <span class="requis">Champ obligatoire</span>
+    </div>
     <div class="champ">
       <ControleFormulaire requis={true} libelle="Email de contact">
         <ChampTexte
@@ -69,7 +72,7 @@
     <div class="champ champ-radios">
       <ControleFormulaire
         requis
-        libelle="Êtes-vous déjà en contact avec un Aidant cyber ou un prestataire ?"
+        libelle="Êtes-vous déjà en contact avec un Aidant cyber ou un prestataire ayant proposé de vous accompagner dans la réalisation de ce diagnostic ?"
       >
         <div>
           <label>
@@ -103,7 +106,7 @@
       <div class="champ">
         <ControleFormulaire
           requis={true}
-          libelle="Email de l'Aidant ou du prestataire"
+          libelle="Email de l'Aidant cyber ou du prestataire"
         >
           <ChampTexte
             bind:valeur={emailAidant}
@@ -111,7 +114,7 @@
             id="emailAidant"
             requis={true}
             type="email"
-            aideSaisie="Ex: jean.dupont@email.com"
+            aideSaisie="Ex: roger.dupont@email.fr"
             messageErreur="Le format du mail est invalide"
           />
         </ControleFormulaire>
@@ -156,9 +159,9 @@
     border: 1px solid
       var(--Couleurs-Clair-Decisions-Border-_border-default-grey, #ddd);
     background: #fff;
-    padding: 48px 24px 72px 24px;
+    padding: 48px 16px 72px 16px;
 
-    margin-top: -75px;
+    margin-top: -128px;
 
     display: flex;
     flex-direction: column;
@@ -182,6 +185,10 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+  }
+
+  .recherche-organisation {
+    gap: 16px;
   }
 
   .champ.champ-radios {
@@ -259,6 +266,12 @@
     color: #e3271c;
     margin-right: 4px;
     font-size: 1rem;
+  }
+
+  .champs-requis-libelle {
+    display: flex;
+    justify-content: end;
+    font-size: 14px;
   }
 
 </style>

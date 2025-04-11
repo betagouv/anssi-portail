@@ -56,7 +56,7 @@
           pas comment vous y prendre ?
         </h2>
         <p>
-          <b>Prenez votre cyberpdépart !</b> Bénéficiez d’un
+          <b>Prenez votre cyberdépart !</b> Bénéficiez d’un
           <b
             >premier diagnostic gratuit accompagné d’un Aidant de la communauté
             MonAideCyber</b
@@ -69,11 +69,9 @@
           <span class="tag"> Rapide (1h30)</span>
           <span class="tag"> Anonyme</span>
         </div>
-        <p>
-          <i
-            >Ce diagnostic proposé par l'État n'est pas adapté aux particuliers
-            et micro-entreprises.</i
-          >
+        <p class="">
+            Ce diagnostic proposé par l'État n'est pas adapté aux particuliers
+            et micro-entreprises.
         </p>
       </div>
       <div class="colonne-illustration">
@@ -117,7 +115,7 @@
   }
 
   .encart-presentation {
-    padding: var(--gouttiere) var(--gouttiere) 52px var(--gouttiere);
+    padding: var(--gouttiere) var(--gouttiere) 110px var(--gouttiere);
 
     background-color: var(--controle-segmente-courant-fond);
 
