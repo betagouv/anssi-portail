@@ -1,38 +1,14 @@
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { ClasseUtilisateur, Utilisateur } from '../../src/metier/utilisateur';
+import { ClasseUtilisateur } from '../../src/metier/utilisateur';
 import { randomUUID } from 'node:crypto';
 
 export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
-  entites: Utilisateur[] = [];
   utilisateurs: ClasseUtilisateur[] = [];
 
   tous = async () => [...this.utilisateurs];
 
   ajoute = async (utilisateur: ClasseUtilisateur) => {
-    const {
-      nom,
-      prenom,
-      email,
-      telephone,
-      domainesSpecialite,
-      cguAcceptees,
-      infolettreAcceptee,
-    } = utilisateur;
-
-    const idListeFavoris = randomUUID();
-    const utilisateurComplet = {
-      nom,
-      prenom,
-      email,
-      telephone,
-      domainesSpecialite,
-      cguAcceptees,
-      infolettreAcceptee,
-      idListeFavoris,
-      organisation: await utilisateur.organisation(),
-    };
-    utilisateur.idListeFavoris = idListeFavoris;
-    this.entites.push(utilisateurComplet);
+    utilisateur.idListeFavoris = randomUUID();
     this.utilisateurs.push(utilisateur);
   };
   parEmail = async (email: string) => {
@@ -44,6 +20,8 @@ export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
     );
   };
   existe = async (email: string) => {
-    return !!this.entites.find((utilisateur) => utilisateur.email === email);
+    return !!this.utilisateurs.find(
+      (utilisateur) => utilisateur.email === email
+    );
   };
 }
