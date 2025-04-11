@@ -2,8 +2,10 @@ import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest';
 import { ResultatTestMaturite } from '../../src/metier/resultatTestMaturite';
 import { EntrepotMemoire } from './entrepotMemoire';
 
-export class EntrepotResultatTestMemoire extends EntrepotMemoire<ResultatTestMaturite> implements EntrepotResultatTest {
-
+export class EntrepotResultatTestMemoire
+  extends EntrepotMemoire<ResultatTestMaturite>
+  implements EntrepotResultatTest
+{
   async metsAjour(resultatTest: ResultatTestMaturite): Promise<void> {
     const entiteAMettreAJour = this.entites.find(
       (entite) => entite.id === resultatTest.id

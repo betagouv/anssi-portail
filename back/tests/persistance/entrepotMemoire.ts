@@ -1,7 +1,10 @@
-export class EntrepotMemoire<T>  {
-  entites:T[] = [];
-  
-  ajoute = async (entite: T) => {
+export class EntrepotMemoire<T> {
+  entites: T[] = [];
+
+  async ajoute(entite: T) {
     this.entites.push(entite);
-  };
+  }
+
+  tous = async () => [...this.entites];
+
 }
