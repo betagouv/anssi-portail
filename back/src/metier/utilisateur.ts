@@ -18,7 +18,7 @@ export interface Utilisateur {
   idListeFavoris: string;
 }
 
-export interface UtilisateurPartiel {
+interface InformationsCreationUtilisateur {
   email: string;
   prenom: string;
   nom: string;
@@ -29,7 +29,7 @@ export interface UtilisateurPartiel {
   infolettreAcceptee: boolean;
 }
 
-export class ClasseUtilisateur implements UtilisateurPartiel{
+export class ClasseUtilisateur {
   email: string;
   prenom: string;
   nom: string;
@@ -51,7 +51,7 @@ export class ClasseUtilisateur implements UtilisateurPartiel{
       cguAcceptees,
       infolettreAcceptee,
       siretEntite,
-    }: UtilisateurPartiel,
+    }: InformationsCreationUtilisateur,
     adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise
   ) {
     this.email = email;
