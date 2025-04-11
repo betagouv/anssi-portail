@@ -8,6 +8,7 @@ import {
   configurationDeTestDuServeur,
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
+  fauxAdaptateurRechercheEntreprise,
   fauxFournisseurDeChemin,
 } from '../fauxObjets';
 import { join } from 'node:path';
@@ -15,7 +16,7 @@ import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC';
 import { decodeSessionDuCookie } from '../cookie';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
-import { UtilisateurPartiel } from '../../../src/metier/utilisateur';
+import { ClasseUtilisateur } from '../../../src/metier/utilisateur';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {
@@ -46,15 +47,18 @@ describe('La ressource apres authentification OIDC', () => {
 
     describe("si l'utilisateur est connu", () => {
       beforeEach(() => {
-        const jeanneDupont: UtilisateurPartiel = {
-          email: 'jeanne.dupont',
-          cguAcceptees: true,
-          infolettreAcceptee: true,
-          prenom: '',
-          nom: '',
-          siretEntite: '',
-          domainesSpecialite: [],
-        };
+        const jeanneDupont = new ClasseUtilisateur(
+          {
+            email: 'jeanne.dupont',
+            cguAcceptees: true,
+            infolettreAcceptee: true,
+            prenom: '',
+            nom: '',
+            siretEntite: '',
+            domainesSpecialite: [],
+          },
+          fauxAdaptateurRechercheEntreprise
+        );
         entrepotUtilisateur.ajoute(jeanneDupont);
 
         adaptateurOIDC.recupereInformationsUtilisateur = async (_) => ({
