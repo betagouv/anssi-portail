@@ -2,11 +2,13 @@ import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 import { check } from 'express-validator';
 import { CompteCree } from '../bus/compteCree';
+import { ClasseUtilisateur } from '../metier/utilisateur';
 
 const ressourceUtilisateurs = ({
   busEvenements,
   entrepotUtilisateur,
   middleware,
+  adaptateurRechercheEntreprise
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post(
@@ -53,7 +55,7 @@ const ressourceUtilisateurs = ({
         infolettreAcceptee,
       } = requete.body;
 
-      await entrepotUtilisateur.ajoute({
+      const utilisateur = new ClasseUtilisateur({
         email,
         prenom,
         nom,
@@ -62,7 +64,9 @@ const ressourceUtilisateurs = ({
         siretEntite,
         cguAcceptees,
         infolettreAcceptee,
-      });
+      }, adaptateurRechercheEntreprise)
+
+      await entrepotUtilisateur.ajoute(utilisateur);
 
       await busEvenements.publie(
         new CompteCree({ email, prenom, nom, infoLettre: infolettreAcceptee })

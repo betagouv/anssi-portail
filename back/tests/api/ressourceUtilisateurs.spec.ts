@@ -10,10 +10,12 @@ import {
   MockBusEvenement,
 } from '../bus/busPourLesTests';
 import { CompteCree } from '../../src/bus/compteCree';
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 
 describe('La ressource utilisateur', () => {
   let serveur: Express;
   let entrepotUtilisateur: EntrepotUtilisateurMemoire;
+  let adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   const donneesUtilisateur = {
     email: 'jeanne.dupont@user.com',
     prenom: 'Jeanne',
@@ -29,11 +31,15 @@ describe('La ressource utilisateur', () => {
   beforeEach(() => {
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     busEvenements = fabriqueBusPourLesTests();
+    adaptateurRechercheEntreprise = {
+      rechercheOrganisations: async (_: string, __: string | null) => [],
+    };
 
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       entrepotUtilisateur,
       busEvenements,
+      adaptateurRechercheEntreprise,
     });
   });
 
@@ -47,6 +53,14 @@ describe('La ressource utilisateur', () => {
     });
 
     it("ajoute un utilisateur à l'entrepot", async () => {
+      adaptateurRechercheEntreprise.rechercheOrganisations = async () => [
+        {
+          nom: '',
+          departement: '',
+          siret: '13000766900018',
+        },
+      ];
+
       await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
 
       const jeanne = await entrepotUtilisateur.parEmail(
@@ -75,6 +89,14 @@ describe('La ressource utilisateur', () => {
     });
 
     it('aseptise les paramètres', async () => {
+      adaptateurRechercheEntreprise.rechercheOrganisations = async () => [
+        {
+          nom: '',
+          departement: '',
+          siret: '13000766900018',
+        },
+      ];
+
       await request(serveur)
         .post('/api/utilisateurs')
         .send({

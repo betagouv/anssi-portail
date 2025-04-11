@@ -1,5 +1,5 @@
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { Utilisateur, UtilisateurPartiel } from '../../src/metier/utilisateur';
+import { ClasseUtilisateur, Utilisateur } from '../../src/metier/utilisateur';
 import { randomUUID } from 'node:crypto';
 
 export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
@@ -7,7 +7,7 @@ export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
 
   tous = async () => [...this.entites];
 
-  ajoute = async (utilisateur: UtilisateurPartiel) => {
+  ajoute = async (utilisateur: ClasseUtilisateur) => {
     const {
       nom,
       prenom,
@@ -16,7 +16,6 @@ export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
       domainesSpecialite,
       cguAcceptees,
       infolettreAcceptee,
-      siretEntite,
     } = utilisateur;
     const utilisateurComplet = {
       nom,
@@ -27,9 +26,10 @@ export class EntrepotUtilisateurMemoire implements EntrepotUtilisateur {
       cguAcceptees,
       infolettreAcceptee,
       idListeFavoris: randomUUID(),
-      organisation: { siret: siretEntite, departement: '75', nom: 'ANSSI' },
+      organisation: await utilisateur.organisation(),
     };
     this.entites.push(utilisateurComplet);
+    //this.entites.push(utilisateur);
   };
   parEmail = async (email: string) => {
     return this.entites.find((utilisateur) => utilisateur.email === email);
