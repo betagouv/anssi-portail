@@ -18,7 +18,7 @@
   "private": true,
   "devDependencies": {
     "tsx": "^4.19.3",
-    "vitest": "^3.0.4"
+    "vitest": "^3.0.5"
   },
   "workspaces": [
     "back",
