@@ -103,7 +103,7 @@
     </div>
 
     {#if estEnRelationAvecUnUtilisateur}
-      <div class="champ">
+      <div class="champ email-aidant">
         <ControleFormulaire
           requis={true}
           libelle="Email de l'Aidant cyber ou du prestataire"
@@ -130,8 +130,11 @@
         use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
       />
       <label for="cguAcceptees" class="requis">
-        J'accepte les <a class="lien" href="https://monaide.cyber.gouv.fr/cgu" target="_blank">conditions générales d'utilisation</a> de MonAideCyber au
-        nom de l’entité que je représente.
+        J'accepte les <a
+          class="lien"
+          href="https://monaide.cyber.gouv.fr/cgu"
+          target="_blank">conditions générales d'utilisation</a
+        > de MonAideCyber au nom de l’entité que je représente.
       </label>
     </div>
 
@@ -154,16 +157,14 @@
   @use '../../../assets/styles/responsive' as *;
 
   :global(.carte-formulaire) {
+    display: flex;
+    flex-direction: column;
     max-width: 792px;
     margin: auto;
     border-radius: 8px;
-    border: 1px solid
-      var(--Couleurs-Clair-Decisions-Border-_border-default-grey, #ddd);
+    border: 1px solid #ddd;
     background: #fff;
     padding: 48px 16px 72px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
 
     @include a-partir-de(md) {
       padding: 48px 80px 72px 80px;
@@ -183,6 +184,11 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+  }
+
+  .email-aidant {
+    position: relative;
+    top: -8px;
   }
 
   .recherche-organisation {
@@ -235,9 +241,11 @@
 
   .case-a-cocher {
     display: grid;
-    grid-template-areas:  'input label'
-                          'erreur erreur';
+    grid-template-areas:
+      'input label'
+      'erreur erreur';
     gap: 8px;
+    margin-bottom: 32px;
 
     input {
       grid-area: input;
@@ -270,6 +278,7 @@
     display: flex;
     justify-content: end;
     font-size: 14px;
+    margin-top: 16px;
+    margin-bottom: 16px;
   }
-
 </style>
