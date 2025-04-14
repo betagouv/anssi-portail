@@ -76,7 +76,7 @@
           <span class="tag"><Icone type="check" /> Rapide (1h30)</span>
           <span class="tag"><Icone type="check" /> Anonyme</span>
         </div>
-        <p class="">
+        <p class="cible-du-diagnostic">
           Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et
           micro-entreprises.
         </p>
@@ -148,6 +148,14 @@
         overflow-x: hidden;
       }
 
+      .cible-du-diagnostic {
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5rem;
+        margin: 0;
+      }
+
       .dragon-cyberdepart {
         display: none;
 
@@ -179,6 +187,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    margin: 24px 0;
 
     .tag {
       background: var(--jaune-jaune-primaire, #fed980);
