@@ -10,6 +10,7 @@
   export let modele: string | undefined = undefined;
   export let type: string = 'text';
   export let autocomplete: 'on' | 'off' | '' = '';
+  export let disabled: boolean = false;
 
   const typeChamp = (node: HTMLInputElement) => {
     node.type = type;
@@ -29,6 +30,7 @@
   on:input
   on:focus
   {autocomplete}
+  disabled={disabled}
 />
 
 <style lang="scss">

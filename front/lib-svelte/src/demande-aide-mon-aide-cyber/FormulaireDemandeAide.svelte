@@ -5,7 +5,7 @@
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
   import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   import type { DonneesFormulaireDemandeAide } from './DonneesFormulaireDemandeAide';
   import { validationChamp } from '../directives/validationChamp';
   import Alerte from '../ui/Alerte.svelte';
@@ -19,8 +19,18 @@
   let entite: Organisation;
   let email: string;
   let estEnRelationAvecUnUtilisateur: boolean;
-  let emailAidant: string;
+  let emailUtilisateurMAC: string;
   let cguSontValidees: boolean;
+  let utilisateurMACPrerempli: boolean = false;
+
+  onMount(() => {
+    let utilisateurMAC = new URLSearchParams(window.location.search).get('utilisateur-mac');
+    if(utilisateurMAC) {
+      utilisateurMACPrerempli = true;
+      estEnRelationAvecUnUtilisateur = true;
+      emailUtilisateurMAC = atob(decodeURIComponent(utilisateurMAC));
+    }
+  })
 
   export const estValide = () => formulaire.estValide();
 
@@ -32,7 +42,7 @@
     emets('formulaireSoumis', {
       entite,
       email,
-      ...(estEnRelationAvecUnUtilisateur && { emailAidant }),
+      ...(estEnRelationAvecUnUtilisateur && { emailAidant: emailUtilisateurMAC }),
       cguSontValidees,
     });
   };
@@ -51,7 +61,7 @@
     {/if}
   </div>
 
-  {#if entite}
+  {#if entite || utilisateurMACPrerempli}
     <div class="champs-requis-libelle">
       <span class="requis">Champ obligatoire</span>
     </div>
@@ -77,6 +87,7 @@
         <div>
           <label>
             <input
+              disabled={utilisateurMACPrerempli}
               name="estEnRelationAvecUnUtilisateur"
               type="radio"
               bind:group={estEnRelationAvecUnUtilisateur}
@@ -86,6 +97,7 @@
           </label>
           <label>
             <input
+              disabled={utilisateurMACPrerempli}
               name="estEnRelationAvecUnUtilisateur"
               type="radio"
               bind:group={estEnRelationAvecUnUtilisateur}
@@ -109,13 +121,14 @@
           libelle="Email de l'Aidant cyber ou du prestataire"
         >
           <ChampTexte
-            bind:valeur={emailAidant}
+            bind:valeur={emailUtilisateurMAC}
             nom="emailAidant"
             id="emailAidant"
             requis={true}
             type="email"
             aideSaisie="Ex: roger.dupont@email.fr"
             messageErreur="Le format du mail est invalide"
+            disabled={utilisateurMACPrerempli}
           />
         </ControleFormulaire>
       </div>
