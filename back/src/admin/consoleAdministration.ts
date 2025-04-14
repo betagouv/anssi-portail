@@ -6,6 +6,7 @@ import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAP
 import { fabriqueAdaptateurEmail } from '../infra/adaptateurEmailBrevo';
 import { adaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { Utilisateur } from '../metier/utilisateur';
+import pThrottle from 'p-throttle';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
@@ -50,7 +51,9 @@ export class ConsoleAdministration {
     const tousUtilisateurs = await this.entrepotUtilisateur.tous();
     const afficheErreur = (utilisateur: Utilisateur) =>
       `Erreur pour ${utilisateur.email}`;
-    const rattrapeUtilisateur = async (utilisateur: Utilisateur) => {
+    const enCadence = pThrottle({ limit: 1, interval: 1000 });
+
+    const rattrapeUtilisateur = enCadence(async (utilisateur: Utilisateur) => {
       const { prenom, nom, email, infolettreAcceptee } = utilisateur;
       this.adaptateurEmail.creeContactBrevo({
         prenom,
@@ -58,7 +61,7 @@ export class ConsoleAdministration {
         email,
         infoLettre: infolettreAcceptee,
       });
-    };
+    });
 
     return ConsoleAdministration.rattrapage(
       tousUtilisateurs,
@@ -71,4 +74,4 @@ export class ConsoleAdministration {
 // Usage example depuis le dossier /back
 // Lancer un script node: `node --import tsx --env-file ../.env`
 // Puis importer la classe ConsoleAdministration et l'utiliser
-// const consoleAdmin = new (await import("./admin/consoleAdministration.ts")).default.ConsoleAdministration();
+// const consoleAdmin = new (await import("./src/admin/consoleAdministration.ts")).default.ConsoleAdministration();
