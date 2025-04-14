@@ -141,7 +141,8 @@
     <div>
       <Bouton
         type="primaire"
-        titre="Envoyer ma demande de diagnostic"
+        taille="md"
+        titre="Envoyer ma demande"
         on:click={soumetsFormulaire}
         {enCoursEnvoi}
       />
