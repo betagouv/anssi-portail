@@ -120,7 +120,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   async tous() {
     const utilisateursBDD = await this.knex('utilisateurs');
     const result: Utilisateur[] = [];
-    const enCadence = pThrottle({ limit: 1, interval: 60 });
+    const enCadence = pThrottle({ limit: 1, interval: 700 });
 
     for (const utilisateurBDD of utilisateursBDD) {
       const utilisateur = await enCadence(() =>
