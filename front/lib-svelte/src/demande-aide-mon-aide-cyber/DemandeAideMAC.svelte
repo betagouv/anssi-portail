@@ -1,8 +1,12 @@
 <script lang="ts">
   import FormulaireDemandeAide from './FormulaireDemandeAide.svelte';
-  import type { CorpsAPIDemandeAide, DonneesFormulaireDemandeAide } from './DonneesFormulaireDemandeAide';
+  import type {
+    CorpsAPIDemandeAide,
+    DonneesFormulaireDemandeAide,
+  } from './DonneesFormulaireDemandeAide';
   import axios from 'axios';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
+  import Icone from '../ui/Icone.svelte';
 
   let formulaireDemandeAide: FormulaireDemandeAide;
   let enSucces: boolean = false;
@@ -30,7 +34,10 @@
         validationCGU: cguSontValidees,
         ...(emailAidant && { emailAidant }),
       };
-      const reponse = await axios.post('/api/mon-aide-cyber/demandes-aide', corps);
+      const reponse = await axios.post(
+        '/api/mon-aide-cyber/demandes-aide',
+        corps
+      );
       if (reponse.status === 201) {
         enSucces = true;
       }
@@ -47,7 +54,7 @@
 <article class="page-demande-aide-mon-aide-cyber">
   <section class="encart-presentation">
     <div class="contenu-section">
-      <a href="/" class="lien">Retour</a>
+      <a href="/" class="lien"><Icone type="fleche-gauche" /> Retour</a>
     </div>
     <div class="contenu-section grille-deux-colonnes">
       <div class="colonne-explicative">
@@ -65,13 +72,13 @@
           organisation.
         </p>
         <div class="zone-tags">
-          <span class="tag"> Dans vos locaux </span>
-          <span class="tag"> Rapide (1h30)</span>
-          <span class="tag"> Anonyme</span>
+          <span class="tag"><Icone type="check" /> Dans vos locaux </span>
+          <span class="tag"><Icone type="check" /> Rapide (1h30)</span>
+          <span class="tag"><Icone type="check" /> Anonyme</span>
         </div>
         <p class="">
-            Ce diagnostic proposé par l'État n'est pas adapté aux particuliers
-            et micro-entreprises.
+          Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et
+          micro-entreprises.
         </p>
       </div>
       <div class="colonne-illustration">
@@ -105,13 +112,23 @@
     font-size: 28px;
     font-style: normal;
     font-weight: 700;
-    line-height: var(--Typographie-Titres-H2---LG-Interlignage, 36px);
+    line-height: 36px;
   }
 
   p {
     font-size: 18px;
     font-style: normal;
     line-height: 28px;
+  }
+
+  .lien {
+    text-decoration: none;
+    border-bottom: 1px solid var(--noir);
+    padding-bottom: 1px;
+    &:hover {
+      border-bottom-width: 2px;
+      padding-bottom: 0 !important;
+    }
   }
 
   .encart-presentation {
@@ -162,17 +179,16 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-  }
 
-  span.tag {
-    background: var(--jaune-jaune-primaire, #fed980);
-    color: var(--noir);
-    font-weight: 700;
-    border-radius: 999px;
-    padding: 4px 12px;
-
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    .tag {
+      background: var(--jaune-jaune-primaire, #fed980);
+      color: var(--noir);
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 4px 12px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
   }
 </style>
