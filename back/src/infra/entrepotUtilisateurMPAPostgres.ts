@@ -5,6 +5,7 @@ import config from '../../knexfile';
 import { UtilisateurBDD } from './utilisateurBDD';
 import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi';
 import { AdaptateurRechercheEntreprise } from './adaptateurRechercheEntreprise';
+import pThrottle from 'p-throttle';
 
 export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   knex: Knex.Knex;
@@ -73,7 +74,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         infolettreAcceptee: donnees.infolettreAcceptee,
         siretEntite: organisation.siret,
         idListeFavoris: utilisateur.id_liste_favoris,
-        organisation
+        organisation,
       },
       this.adaptateurRechercheEntreprise
     );
@@ -107,6 +108,15 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
   async tous() {
     const utilisateurs = await this.knex('utilisateurs');
-    return Promise.all(utilisateurs.map((u) => this.hydrateUtilisateur(u)));
+    const result: Utilisateur[] = [];
+    const enCadence = pThrottle({ limit: 1, interval: 60 });
+    for (const utilisateur of utilisateurs) {
+      result.push(
+        await enCadence(async () => {
+          return await this.hydrateUtilisateur(utilisateur);
+        })()
+      );
+    }
+    return result;
   }
 }
