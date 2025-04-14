@@ -1,6 +1,7 @@
 <script lang="ts">
   export let titre: string;
   export let type: 'primaire' | 'secondaire';
+  export let taille: 'md' | undefined = undefined;
   export let actif: boolean = true;
   export let enCoursEnvoi: boolean = false;
   export let boutonSoumission: boolean = true;
@@ -9,7 +10,7 @@
 </script>
 
 <button
-  class="bouton {type} {classe} {icone}"
+  class={`bouton ${type} ${classe} ${icone} ${taille ? `bouton-${taille}` : ''}`}
   class:avecIcone={!!icone}
   type={boutonSoumission ? 'submit' : 'button'}
   on:click
@@ -23,6 +24,16 @@
   .bouton {
     align-items: center;
     gap: 8px;
+  }
+
+  .bouton-md {
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5rem;
   }
 
   .avecIcone:before {
