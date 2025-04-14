@@ -14,14 +14,16 @@
 
 <style lang="scss">
   .controle-formulaire {
-    margin-bottom: 24px;
+    margin-bottom: 32px;
     display: flex;
     flex-direction: column;
     gap: 4px;
     font-weight: normal;
+
     .contenu {
       margin-top: 4px;
     }
+
     .sousTitre {
       color: var(--texte-clair);
       font-size: 0.75rem;
