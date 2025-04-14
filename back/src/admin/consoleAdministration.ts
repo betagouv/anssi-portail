@@ -51,7 +51,7 @@ export class ConsoleAdministration {
     const tousUtilisateurs = await this.entrepotUtilisateur.tous();
     const afficheErreur = (utilisateur: Utilisateur) =>
       `Erreur pour ${utilisateur.email}`;
-    const enCadence = pThrottle({ limit: 1, interval: 1000 });
+    const enCadence = pThrottle({ limit: 1, interval: 150 });
 
     const rattrapeUtilisateur = enCadence(async (utilisateur: Utilisateur) => {
       const { prenom, nom, email, infolettreAcceptee } = utilisateur;
