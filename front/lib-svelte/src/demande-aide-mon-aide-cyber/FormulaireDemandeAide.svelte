@@ -154,15 +154,13 @@
   @use '../../../assets/styles/responsive' as *;
 
   :global(.carte-formulaire) {
-    max-width: 100%;
+    max-width: 792px;
+    margin: auto;
     border-radius: 8px;
     border: 1px solid
       var(--Couleurs-Clair-Decisions-Border-_border-default-grey, #ddd);
     background: #fff;
     padding: 48px 16px 72px 16px;
-
-    margin-top: -128px;
-
     display: flex;
     flex-direction: column;
     gap: 32px;

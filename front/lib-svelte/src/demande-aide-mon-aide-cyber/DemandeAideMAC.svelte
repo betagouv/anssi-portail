@@ -132,7 +132,7 @@
   }
 
   .encart-presentation {
-    padding: var(--gouttiere) var(--gouttiere) 110px var(--gouttiere);
+    padding: var(--gouttiere) var(--gouttiere) 24px var(--gouttiere);
 
     background-color: var(--controle-segmente-courant-fond);
 
@@ -173,13 +173,24 @@
   }
 
   :global(.zone-formulaire) {
-    width: auto;
-    max-width: 100%;
-    padding: var(--gouttiere) var(--gouttiere) 96px var(--gouttiere);
+    max-width: unset;
+    padding: 0 var(--gouttiere) 96px var(--gouttiere);
+
+    background: linear-gradient(
+      to bottom,
+      var(--controle-segmente-courant-fond) 0px,
+      var(--controle-segmente-courant-fond) 96px,
+      white 0,
+      white 100%
+    );
+
+    &.contenu-section {
+      width: unset;
+    }
 
     @include a-partir-de(md) {
-      width: 744px;
-      max-width: 792px;
+      padding-left: 60px;
+      padding-right: 60px;
     }
   }
 
