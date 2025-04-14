@@ -112,8 +112,7 @@ export const fabriqueMiddleware = ({
         const fichier = fs.readFileSync(chemin, 'utf-8');
         const avecNonce = fichier.replace('%%NONCE%%', nonceAleatoire);
         reponse.send(avecNonce);
-      } catch (error) {
-        console.error(error);
+      } catch {
         reponse
           .status(404)
           .set('Content-Type', 'text/html')
