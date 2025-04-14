@@ -60,8 +60,19 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
   private async hydrateUtilisateur(utilisateur: UtilisateurBDD) {
     const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
+    const profilAnssi = await this.adaptateurProfilAnssi.recupere(
+      donnees.email
+    );
+    if (!profilAnssi) {
+      console.warn(
+        'Utilisateur trouvé en base de données sans profil ANSSI ',
+        utilisateur.email
+      );
+      return undefined;
+    }
+
     const { prenom, nom, telephone, domainesSpecialite, organisation } =
-      (await this.adaptateurProfilAnssi.recupere(donnees.email))!;
+      profilAnssi;
 
     return new Utilisateur(
       {
@@ -85,7 +96,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
       .where({ email })
       .first();
     if (!utilisateur) return undefined;
-    return await this.hydrateUtilisateur(utilisateur);
+    return this.hydrateUtilisateur(utilisateur);
   }
 
   async parIdListeFavoris(
@@ -107,15 +118,15 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   }
 
   async tous() {
-    const utilisateurs = await this.knex('utilisateurs');
+    const utilisateursBDD = await this.knex('utilisateurs');
     const result: Utilisateur[] = [];
     const enCadence = pThrottle({ limit: 1, interval: 60 });
-    for (const utilisateur of utilisateurs) {
-      result.push(
-        await enCadence(async () => {
-          return await this.hydrateUtilisateur(utilisateur);
-        })()
-      );
+
+    for (const utilisateurBDD of utilisateursBDD) {
+      const utilisateur = await enCadence(() =>
+        this.hydrateUtilisateur(utilisateurBDD)
+      )();
+      if (utilisateur) result.push(utilisateur);
     }
     return result;
   }
