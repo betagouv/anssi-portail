@@ -56,7 +56,7 @@
     <div class="contenu-section">
       <a href="/" class="lien"><Icone type="fleche-gauche" /> Retour</a>
     </div>
-    <div class="contenu-section grille-deux-colonnes">
+    <div class="contenu-section">
       <div class="colonne-explicative">
         <h2>
           Vous souhaitez vous protéger contre les cyberattaques mais ne savez
@@ -80,13 +80,6 @@
           Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et
           micro-entreprises.
         </p>
-      </div>
-      <div class="colonne-illustration">
-        <img
-          class="illustration dragon-cyberdepart"
-          src="/assets/images/illustration-cyberdepart.svg"
-          alt="Illustration Cyberdepart"
-        />
       </div>
     </div>
   </section>
@@ -133,19 +126,19 @@
 
   .encart-presentation {
     padding: var(--gouttiere) var(--gouttiere) 24px var(--gouttiere);
+    background: var(--controle-segmente-courant-fond);
 
-    background-color: var(--controle-segmente-courant-fond);
+    @include a-partir-de(md) {
+      background: var(--controle-segmente-courant-fond)
+        url(/assets/images/illustration-cyberdepart.svg) no-repeat;
+      background-position-x: calc(50vw + 30px);
+      background-position-y: calc(50% + 30px);
+    }
 
-    .grille-deux-colonnes {
-      display: grid;
-      grid-template-columns: 1fr;
-
+    .colonne-explicative {
       @include a-partir-de(md) {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .colonne-illustration {
-        overflow-x: hidden;
+        width: 50%;
+        align-self: flex-start;
       }
 
       .cible-du-diagnostic {
@@ -154,20 +147,6 @@
         font-weight: 400;
         line-height: 1.5rem;
         margin: 0;
-      }
-
-      .dragon-cyberdepart {
-        display: none;
-
-        @include a-partir-de(md) {
-          display: block;
-          align-self: anchor-center;
-        }
-
-        @include a-partir-de(lg) {
-          display: block;
-          align-self: anchor-center;
-        }
       }
     }
   }
