@@ -11,6 +11,7 @@ export type CorpsDemandeAide = {
     raisonSociale: string;
   };
   emailAidant?: string;
+  identifiantAidant?: string;
   validationCGU: boolean;
 };
 
@@ -26,7 +27,8 @@ const ressourceDemandesAide = ({
       'entiteAidee.email',
       'entiteAidee.departement',
       'entiteAidee.raisonSociale',
-      'emailAidant'
+      'emailAidant',
+      'identifiantAidant'
     ),
     check('entiteAidee.departement')
       .isString()
@@ -44,16 +46,22 @@ const ressourceDemandesAide = ({
       .optional({ checkFalsy: true })
       .isEmail()
       .withMessage('Veuillez saisir un email valide pour l’Aidant.'),
+    body('identifiantAidant')
+      .optional({ values: 'falsy' })
+      .trim()
+      .isUUID()
+      .withMessage('Veuillez saisir un identifiant Aidant valide.'),
     body('validationCGU')
       .custom((validationCGU) => !!validationCGU)
       .withMessage('Veuillez valider les CGU.'),
     middleware.valide(),
     async (requete: CorpsDeRequeteTypee<CorpsDemandeAide>, reponse) => {
       try {
-        const { emailAidant, entiteAidee } = requete.body;
+        const { emailAidant, identifiantAidant, entiteAidee } = requete.body;
         const { email, departement, raisonSociale } = entiteAidee;
         await adaptateurMonAideCyber.creeDemandeAide({
           ...(emailAidant && { emailAidant }),
+          ...(identifiantAidant && { identifiantAidant }),
           entiteAidee: {
             email,
             departement,

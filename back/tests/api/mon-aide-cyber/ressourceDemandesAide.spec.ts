@@ -10,10 +10,14 @@ import { CorpsDemandeAide } from '../../../src/api/mon-aide-cyber/ressourceDeman
 const uneDemandeAide = (parametres?: {
   email?: string;
   emailAidant?: string;
+  identifiantAidant?: string;
   departement?: string;
   raisonSociale?: string;
 }): CorpsDemandeAide => ({
   ...(parametres?.emailAidant && { emailAidant: parametres?.emailAidant }),
+  ...(parametres?.identifiantAidant && {
+    identifiantAidant: parametres?.identifiantAidant,
+  }),
   entiteAidee: {
     email: parametres?.email || 'durant@mail.fr',
     departement: parametres?.departement || '12',
@@ -66,18 +70,18 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
 
   it('gère les cas d’erreurs lors de la demande d’Aide', async () => {
     adaptateurMonAideCyber.creeDemandeAide = async (
-        _demandeAide: DemandeAide
+      _demandeAide: DemandeAide
     ) => {
-      throw new Error('une erreur quelconque')
+      throw new Error('une erreur quelconque');
     };
 
     const reponse = await request(serveur)
-        .post('/api/mon-aide-cyber/demandes-aide')
-        .send(uneDemandeAide({ email: 'durant@mail.fr' }));
+      .post('/api/mon-aide-cyber/demandes-aide')
+      .send(uneDemandeAide({ email: 'durant@mail.fr' }));
 
     assert.equal(reponse.status, 400);
     assert.equal(reponse.body.erreur, 'une erreur quelconque');
-  })
+  });
 
   describe('aseptise les paramètres', () => {
     it('pour le mail de l’entité Aidée', async () => {
@@ -144,6 +148,28 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
         );
 
       assert.equal(raisonSocialeEnvoyee, 'Une raison sociale');
+    });
+
+    it('pour l’identifiant de l’Aidant', async () => {
+      let identifiantAidantEnvoye: string | undefined = undefined;
+      adaptateurMonAideCyber.creeDemandeAide = async ({
+        identifiantAidant,
+      }: DemandeAide) => {
+        identifiantAidantEnvoye = identifiantAidant;
+      };
+
+      await request(serveur)
+        .post('/api/mon-aide-cyber/demandes-aide')
+        .send(
+          uneDemandeAide({
+            email: 'durant@mail.fr',
+            departement: '12',
+            raisonSociale: 'Une raison sociale',
+            identifiantAidant: '   a5b9ee4c-4eca-432d-ba96-da387fe6d5ed  ',
+          })
+        );
+
+      assert.equal(identifiantAidantEnvoye, 'a5b9ee4c-4eca-432d-ba96-da387fe6d5ed');
     });
   });
 
@@ -230,6 +256,22 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
       assert.equal(
         await reponse.body.erreur,
         'Veuillez saisir une raison sociale valide.'
+      );
+    });
+
+    it('pour la validation de l’identifiant Aidant', async () => {
+      const reponse = await request(serveur)
+          .post('/api/mon-aide-cyber/demandes-aide')
+          .send({
+            validationCGU: true,
+            entiteAidee: { departement: '33', raisonSociale: 'beta-gouv', email: 'jean.dupont@mail.fr', },
+            identifiantAidant: '  a '
+          });
+
+      assert.equal(reponse.status, 400);
+      assert.equal(
+          await reponse.body.erreur,
+          'Veuillez saisir un identifiant Aidant valide.'
       );
     });
   });
