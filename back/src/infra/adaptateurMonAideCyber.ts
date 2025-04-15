@@ -8,6 +8,7 @@ export type DemandeAide = {
     raisonSociale: string;
   };
   emailAidant?: string;
+  identifiantAidant?: string;
 };
 
 export interface AdaptateurMonAideCyber {
@@ -15,7 +16,7 @@ export interface AdaptateurMonAideCyber {
 }
 
 const adaptateurMonAideCyber = (): AdaptateurMonAideCyber => {
-  const creeDemandeAide = async ({ entiteAidee, emailAidant }: DemandeAide) => {
+  const creeDemandeAide = async ({ entiteAidee, emailAidant, identifiantAidant }: DemandeAide) => {
     try {
       const { email, raisonSociale, departement } = entiteAidee;
       const demandeMAC = {
@@ -24,6 +25,7 @@ const adaptateurMonAideCyber = (): AdaptateurMonAideCyber => {
         departement,
         raisonSociale,
         ...(emailAidant && { relationUtilisateur: emailAidant }),
+        ...(identifiantAidant && { identifiantAidant }),
       };
       await axios.post(
         `${process.env.MON_AIDE_CYBER_URL_BASE}/api/demandes/etre-aide`,
