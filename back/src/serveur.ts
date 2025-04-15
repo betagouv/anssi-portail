@@ -16,15 +16,19 @@ import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgr
 import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
 import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber';
+import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
+const adaptateurChiffrement = fabriqueAdaptateurChiffrement();
+const adaptateurJournal = fabriqueAdaptateurJournal();
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
   busEvenements,
   adaptateurEmail,
-  adaptateurJournal: fabriqueAdaptateurJournal(),
+  adaptateurJournal,
   adaptateurHorloge,
+  adaptateurChiffrement,
 });
 
 const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();

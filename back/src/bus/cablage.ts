@@ -9,17 +9,23 @@ import { CompteCree } from './compteCree';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte';
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
 import { creeContactBrevo } from './creeContactBrevo';
+import {
+  consigneEvenementCompteCreeDansJournal,
+} from './consigneEvenementCompteCreeDansJournal';
+import { AdaptateurChiffrement } from '../infra/adaptateurChiffrement';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
   adaptateurEmail,
   adaptateurJournal,
   adaptateurHorloge,
+  adaptateurChiffrement,
 }: {
   busEvenements: BusEvenements;
   adaptateurEmail: AdaptateurEmail;
   adaptateurJournal: AdaptateurJournal;
   adaptateurHorloge: AdaptateurHorloge;
+  adaptateurChiffrement: AdaptateurChiffrement;
 }) => {
   busEvenements.abonne(
     TestRealise,
@@ -41,6 +47,11 @@ export const cableTousLesAbonnes = ({
     }),
     creeContactBrevo({
       adaptateurEmail,
+    }),
+    consigneEvenementCompteCreeDansJournal({
+      adaptateurJournal,
+      adaptateurHorloge,
+      adaptateurChiffrement,
     }),
   ]);
 };
