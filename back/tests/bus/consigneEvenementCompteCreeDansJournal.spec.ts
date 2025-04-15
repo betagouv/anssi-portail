@@ -4,6 +4,7 @@ import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
 import { CompteCree } from '../../src/bus/compteCree';
 import { consigneEvenementCompteCreeDansJournal } from '../../src/bus/consigneEvenementCompteCreeDansJournal';
+import { AdaptateurChiffrement } from '../../src/infra/adaptateurChiffrement';
 
 describe("L'abonnement qui consigne la création d'un compte utilisateur dans le journal", () => {
   it('consigne un évènement de NouvelUtilisateurInscrit', async () => {
@@ -17,8 +18,8 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
       maintenant: () => new Date('2025-03-10'),
     };
 
-    const adaptateurChiffrement = {
-      hacheSha256: (valeur: string) => `${valeur}-hache`,
+    const adaptateurChiffrement: AdaptateurChiffrement = {
+      hacheSha256: (chaineEnClair: string) => `${chaineEnClair}-hache`,
     };
 
     await consigneEvenementCompteCreeDansJournal({
