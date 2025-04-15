@@ -90,11 +90,8 @@
     siretEntite: informationsProfessionnelles.organisation?.siret,
     telephone: informationsProfessionnelles.telephone,
     domainesSpecialite: informationsProfessionnelles.domainesSpecialite || [],
-    estimationNombreServices: null,
-    agentConnect: true,
     cguAcceptees: false,
     infolettreAcceptee: false,
-    transactionnelAccepte: true,
   };
 
   let departement: Departement;
