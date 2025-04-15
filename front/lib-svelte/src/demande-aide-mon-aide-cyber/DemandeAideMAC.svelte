@@ -24,7 +24,7 @@
     try {
       enCoursEnvoi = true;
 
-      const { email, cguSontValidees, emailAidant, entite } = e.detail;
+      const { email, cguSontValidees, emailUtilisateurMAC, entite, identifiantAidant } = e.detail;
       const corps: CorpsAPIDemandeAide = {
         entiteAidee: {
           email,
@@ -32,7 +32,8 @@
           raisonSociale: entite.nom,
         },
         validationCGU: cguSontValidees,
-        ...(emailAidant && { emailAidant }),
+        ...(emailUtilisateurMAC && { emailAidant: emailUtilisateurMAC }),
+        ...(identifiantAidant && {identifiantAidant})
       };
       const reponse = await axios.post(
         '/api/mon-aide-cyber/demandes-aide',

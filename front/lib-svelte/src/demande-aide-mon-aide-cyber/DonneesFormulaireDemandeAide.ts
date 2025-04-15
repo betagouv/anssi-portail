@@ -2,7 +2,8 @@ import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types'
 
 export type DonneesFormulaireDemandeAide = {
   email: string;
-  emailAidant?: string;
+  emailUtilisateurMAC?: string;
+  identifiantAidant?: string;
   entite: Organisation;
   cguSontValidees: boolean;
 };
@@ -14,5 +15,6 @@ export type CorpsAPIDemandeAide = {
     raisonSociale: string;
   };
   emailAidant?: string;
+  identifiantAidant?: string;
   validationCGU: boolean;
 };
