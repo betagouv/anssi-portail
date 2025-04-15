@@ -1,10 +1,7 @@
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../infra/adaptateurJournal';
 import { CompteCree } from './compteCree';
-
-export interface AdaptateurChiffrement {
-  hacheSha256: (valeur: string) => string;
-}
+import { AdaptateurChiffrement } from '../infra/adaptateurChiffrement';
 
 export const consigneEvenementCompteCreeDansJournal = ({
   adaptateurJournal,
