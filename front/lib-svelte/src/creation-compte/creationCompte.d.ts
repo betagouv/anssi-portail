@@ -1,4 +1,4 @@
-import type { Departement, Organisation } from '../ui/formulaire/SelectionOrganisation.types';
+import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
 
 export type InformationsProfessionnelles = {
   prenom: string;
@@ -9,13 +9,6 @@ export type InformationsProfessionnelles = {
   domainesSpecialite?: string[];
 };
 
-export type InscriptionProps = {
-  estimationNombreServices: EstimationNombreServices[];
-  informationsProfessionnelles: InformationsProfessionnelles;
-  departements: Departement[];
-  invite: boolean;
-};
-
 export type FormulaireInscription = {
   prenom: string;
   nom: string;
@@ -23,9 +16,6 @@ export type FormulaireInscription = {
   siretEntite?: string;
   telephone?: string;
   domainesSpecialite: string[];
-  estimationNombreServices: Intervalle | null;
-  agentConnect: boolean;
   cguAcceptees: boolean;
   infolettreAcceptee: boolean;
-  transactionnelAccepte: boolean;
 };
