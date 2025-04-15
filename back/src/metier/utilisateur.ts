@@ -28,7 +28,7 @@ export class Utilisateur {
   cguAcceptees: boolean;
   infolettreAcceptee: boolean;
   siretEntite: string;
-  idListeFavoris: string;
+  idListeFavoris: string | undefined;
   private adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   private _organisation: Organisation | undefined;
 
@@ -56,7 +56,7 @@ export class Utilisateur {
     this.infolettreAcceptee = infolettreAcceptee;
     this.siretEntite = siretEntite;
     this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
-    this.idListeFavoris = idListeFavoris ?? '';
+    this.idListeFavoris = idListeFavoris ?? undefined;
     this._organisation = organisation;
   }
 
