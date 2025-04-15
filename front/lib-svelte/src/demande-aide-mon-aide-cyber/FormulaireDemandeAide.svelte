@@ -18,31 +18,43 @@
 
   let entite: Organisation;
   let email: string;
+  let libelleChampUtilisateurMAC = "Email de l'Aidant cyber ou du prestataire";
   let estEnRelationAvecUnUtilisateur: boolean;
   let emailUtilisateurMAC: string;
+  let identifiantAidant: string | null;
   let cguSontValidees: boolean;
   let utilisateurMACPrerempli: boolean = false;
 
   onMount(() => {
-    let utilisateurMAC = new URLSearchParams(window.location.search).get('utilisateur-mac');
-    if(utilisateurMAC) {
+    let urlSearchParams = new URLSearchParams(window.location.search);
+    let utilisateurMAC = urlSearchParams.get('utilisateur-mac');
+    if (utilisateurMAC) {
       utilisateurMACPrerempli = true;
       estEnRelationAvecUnUtilisateur = true;
       emailUtilisateurMAC = atob(decodeURIComponent(utilisateurMAC));
     }
-  })
+    let nomUsage = urlSearchParams.get('nom-usage');
+    identifiantAidant = urlSearchParams.get('identifiant-utilisateur-mac');
+    if (nomUsage && identifiantAidant) {
+      libelleChampUtilisateurMAC = "Nom de l'Aidant cyber";
+      utilisateurMACPrerempli = true;
+      estEnRelationAvecUnUtilisateur = true;
+      emailUtilisateurMAC = atob(decodeURIComponent(nomUsage));
+    }
+  });
 
   export const estValide = () => formulaire.estValide();
 
   const emets = createEventDispatcher<{
     formulaireSoumis: DonneesFormulaireDemandeAide;
   }>();
-
   const soumetsFormulaire = () => {
     emets('formulaireSoumis', {
       entite,
       email,
-      ...(estEnRelationAvecUnUtilisateur && { emailAidant: emailUtilisateurMAC }),
+      ...(estEnRelationAvecUnUtilisateur &&
+        !identifiantAidant && { emailUtilisateurMAC }),
+      ...(identifiantAidant && { identifiantAidant }),
       cguSontValidees,
     });
   };
@@ -115,21 +127,30 @@
     </div>
 
     {#if estEnRelationAvecUnUtilisateur}
-      <div class="champ email-aidant">
-        <ControleFormulaire
-          requis={true}
-          libelle="Email de l'Aidant cyber ou du prestataire"
-        >
-          <ChampTexte
-            bind:valeur={emailUtilisateurMAC}
-            nom="emailAidant"
-            id="emailAidant"
-            requis={true}
-            type="email"
-            aideSaisie="Ex: roger.dupont@email.fr"
-            messageErreur="Le format du mail est invalide"
-            disabled={utilisateurMACPrerempli}
-          />
+      <div class="champ champ-aidant">
+        <ControleFormulaire requis={true} libelle={libelleChampUtilisateurMAC}>
+          {#if identifiantAidant}
+            <ChampTexte
+              bind:valeur={emailUtilisateurMAC}
+              nom="identifiantAidant"
+              id="identifiantAidant"
+              requis={true}
+              type="text"
+              aideSaisie="Ex: Roger D."
+              disabled={true}
+            />
+          {:else}
+            <ChampTexte
+              bind:valeur={emailUtilisateurMAC}
+              nom="emailAidant"
+              id="emailAidant"
+              requis={true}
+              type="email"
+              aideSaisie="Ex: roger.dupont@email.fr"
+              messageErreur="Le format du mail est invalide"
+              disabled={utilisateurMACPrerempli}
+            />
+          {/if}
         </ControleFormulaire>
       </div>
     {/if}
@@ -200,7 +221,7 @@
     gap: 8px;
   }
 
-  .email-aidant {
+  .champ-aidant {
     position: relative;
     top: -8px;
   }
@@ -264,9 +285,11 @@
     input {
       grid-area: input;
     }
+
     label {
       grid-area: label;
     }
+
     :global(.erreur-champ-saisie) {
       grid-area: erreur;
       margin-top: 0;

@@ -25,6 +25,7 @@
   .alerte {
     width: 100%;
     display: flex;
+    margin-top: 32px;
 
     .icone {
       display: flex;
