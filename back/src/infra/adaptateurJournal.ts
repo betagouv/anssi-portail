@@ -1,11 +1,43 @@
 import { adaptateurJournalPostgres } from './adaptateurJournalPostgres';
-import { EvenementDuBus } from '../bus/busEvenements';
+import { CodeRegion } from '../metier/referentielRegions';
+import { CodeSecteur } from '../metier/referentielSecteurs';
+import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
+import { ReponsesTestMaturite } from '../metier/resultatTestMaturite';
 
-export type DonneesEvenement = {
-  type: string;
-  donnees: EvenementDuBus;
+export type DonneesEvenement =
+  | DonneesEvenementNouvelUtilisateur
+  | DonneesEvenementProprieteTestRevendiquee
+  | DonneesEvenementTestRealise;
+
+interface DonneesCommunesEvenement {
   date: Date;
-};
+}
+
+interface DonneesEvenementNouvelUtilisateur extends DonneesCommunesEvenement {
+  donnees: {
+    idUtilisateur: string;
+  };
+  type: 'NOUVEL_UTILISATEUR_INSCRIT';
+}
+
+interface DonneesEvenementProprieteTestRevendiquee
+  extends DonneesCommunesEvenement {
+  donnees: {
+    emailUtilisateur: string;
+    idResultatTest: string;
+  };
+  type: 'PROPRIETE_TEST_REVENDIQUEE';
+}
+
+interface DonneesEvenementTestRealise extends DonneesCommunesEvenement {
+  donnees: {
+    region: CodeRegion;
+    secteur: CodeSecteur;
+    tailleOrganisation: CodeTrancheEffectif;
+    reponses: ReponsesTestMaturite;
+  };
+  type: 'TEST_REALISE';
+}
 
 export type AdaptateurJournal = {
   consigneEvenement: (donneesEvenement: DonneesEvenement) => Promise<void>;
