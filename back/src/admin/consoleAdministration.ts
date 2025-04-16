@@ -7,10 +7,18 @@ import { fabriqueAdaptateurEmail } from '../infra/adaptateurEmailBrevo';
 import { adaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { Utilisateur } from '../metier/utilisateur';
 import pThrottle from 'p-throttle';
+import { adaptateurJournalMemoire } from '../infra/adaptateurJournal';
+import { adaptateurJournalPostgres } from '../infra/adaptateurJournalPostgres';
+import {
+  AdaptateurChiffrement,
+  fabriqueAdaptateurChiffrement,
+} from '../infra/adaptateurChiffrement';
+import { CompteCree } from '../bus/compteCree';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
   private adaptateurEmail: AdaptateurEmail;
+  private adaptateurChiffrement: AdaptateurChiffrement;
 
   constructor() {
     const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
@@ -19,6 +27,7 @@ export class ConsoleAdministration {
       adaptateurRechercheEntreprise
     );
     this.adaptateurEmail = fabriqueAdaptateurEmail();
+    this.adaptateurChiffrement = fabriqueAdaptateurChiffrement();
   }
 
   static async rattrapage<T>(
@@ -67,6 +76,44 @@ export class ConsoleAdministration {
       tousUtilisateurs,
       afficheErreur,
       rattrapeUtilisateur
+    );
+  }
+
+  async genereTousEvenementsNouvelUtilisateurInscrit(
+    persiste: boolean = false
+  ) {
+    const journal = persiste
+      ? adaptateurJournalPostgres()
+      : adaptateurJournalMemoire;
+
+    const tousUtilisateurs = await this.entrepotUtilisateur.tous();
+    const tousEvenementsUtilisateurs: CompteCree[] = tousUtilisateurs.map(
+      ({ email, prenom, nom, infolettreAcceptee }) =>
+        new CompteCree({
+          email,
+          prenom,
+          nom,
+          infoLettre: infolettreAcceptee,
+        })
+    );
+    const rattrapeEvenement = (evenement: CompteCree) =>
+      journal.consigneEvenement({
+        type: 'NOUVEL_UTILISATEUR_INSCRIT',
+        donnees: {
+          idUtilisateur: this.adaptateurChiffrement.hacheSha256(
+            evenement.email
+          ),
+        },
+        date: new Date(),
+      });
+
+    const afficheErreur = (evenement: CompteCree) =>
+      `Erreur pour ${evenement.email}`;
+
+    return ConsoleAdministration.rattrapage(
+      tousEvenementsUtilisateurs,
+      afficheErreur,
+      rattrapeEvenement
     );
   }
 }
