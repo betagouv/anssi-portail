@@ -12,11 +12,17 @@ import assert from 'node:assert';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
 import { encodeSession } from './cookie';
 import { fabriqueMiddleware } from '../../src/api/middleware';
+import {
+  fabriqueBusPourLesTests,
+  MockBusEvenement,
+} from '../bus/busPourLesTests';
+import { MiseAJourFavorisUtilisateur } from '../../src/bus/miseAJourFavorisUtilisateur';
 
 describe('La ressource des services et ressources favoris', () => {
   let serveur: Express;
   let entrepotFavori: EntrepotFavoriMemoire;
   let cookieJeanneDupont: string;
+  let busEvenements: MockBusEvenement;
 
   beforeEach(() => {
     entrepotFavori = new EntrepotFavoriMemoire();
@@ -24,12 +30,15 @@ describe('La ressource des services et ressources favoris', () => {
       email: 'jeanne.dupont@mail.com',
       token: 'token',
     });
+    busEvenements = fabriqueBusPourLesTests();
+
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       middleware: fabriqueMiddleware({
         adaptateurJWT: fauxAdaptateurJWT,
         fournisseurChemin: fauxFournisseurDeChemin,
       }),
+      busEvenements,
       entrepotFavori,
     });
   });
@@ -87,6 +96,26 @@ describe('La ressource des services et ressources favoris', () => {
         'jeanne.dupont@mail.com'
       );
       assert.equal(favoris.length, 0);
+    });
+
+    it('publie un événement de mise à jour de la liste des favoris', async () => {
+      await entrepotFavori.ajoute({
+        idItemCyber: '/services/mon-super-service',
+        emailUtilisateur: 'jeanne.dupont@mail.com',
+      });
+
+      await request(serveur)
+        .delete(
+          `/api/favoris/${encodeURIComponent('/services/mon-super-service')}`
+        )
+        .set('Cookie', [cookieJeanneDupont]);
+
+      busEvenements.aRecuUnEvenement(MiseAJourFavorisUtilisateur);
+      const evenement = busEvenements.recupereEvenement(
+        MiseAJourFavorisUtilisateur
+      );
+      assert.equal(evenement!.email, 'jeanne.dupont@mail.com');
+      assert.equal(evenement!.listeIdFavoris.length, 0);
     });
   });
 });
