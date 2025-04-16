@@ -7,7 +7,8 @@ import { ReponsesTestMaturite } from '../metier/resultatTestMaturite';
 export type DonneesEvenement =
   | DonneesEvenementNouvelUtilisateur
   | DonneesEvenementProprieteTestRevendiquee
-  | DonneesEvenementTestRealise;
+  | DonneesEvenementTestRealise
+  | DonneesEvenementMiseAJourFavorisUtilisateur;
 
 interface DonneesCommunesEvenement {
   date: Date;
@@ -18,6 +19,15 @@ interface DonneesEvenementNouvelUtilisateur extends DonneesCommunesEvenement {
     idUtilisateur: string;
   };
   type: 'NOUVEL_UTILISATEUR_INSCRIT';
+}
+
+interface DonneesEvenementMiseAJourFavorisUtilisateur
+  extends DonneesCommunesEvenement {
+  donnees: {
+    idUtilisateur: string;
+    listeIdFavoris: string[];
+  };
+  type: 'MISE_A_JOUR_FAVORIS_UTILISATEUR';
 }
 
 interface DonneesEvenementProprieteTestRevendiquee

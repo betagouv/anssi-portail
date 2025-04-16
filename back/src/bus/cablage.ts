@@ -13,6 +13,8 @@ import {
   consigneEvenementCompteCreeDansJournal,
 } from './consigneEvenementCompteCreeDansJournal';
 import { AdaptateurChiffrement } from '../infra/adaptateurChiffrement';
+import { consigneEvenementMAJFavorisUtilisateurDansJournal } from './consigneEvenementMAJFavorisUtilisateurDansJournal';
+import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
@@ -54,4 +56,12 @@ export const cableTousLesAbonnes = ({
       adaptateurChiffrement,
     }),
   ]);
+  busEvenements.abonne(
+    MiseAJourFavorisUtilisateur,
+    consigneEvenementMAJFavorisUtilisateurDansJournal({
+      adaptateurJournal,
+      adaptateurHorloge,
+      adaptateurChiffrement,
+    })
+  );
 };
