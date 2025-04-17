@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail';
 import { envoieEmailCreationCompte } from '../../src/bus/envoieEmailCreationCompte';
-import { CompteCree } from '../../src/bus/compteCree';
+import { CompteCree } from '../../src/bus/evenements/compteCree';
 
 describe("L'abonnement qui envoie un email de création de compte", () => {
   it('envoie un email de bienvenue', () => {

@@ -1,4 +1,4 @@
-import { CompteCree } from './compteCree';
+import { CompteCree } from './evenements/compteCree';
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
 
 export const envoieEmailCreationCompte = ({

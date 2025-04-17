@@ -13,7 +13,7 @@ import {
   AdaptateurChiffrement,
   fabriqueAdaptateurChiffrement,
 } from '../infra/adaptateurChiffrement';
-import { CompteCree } from '../bus/compteCree';
+import { CompteCree } from '../bus/evenements/compteCree';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;

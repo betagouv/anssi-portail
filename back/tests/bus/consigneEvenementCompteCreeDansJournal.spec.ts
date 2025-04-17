@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
-import { CompteCree } from '../../src/bus/compteCree';
+import { CompteCree } from '../../src/bus/evenements/compteCree';
 import { consigneEvenementCompteCreeDansJournal } from '../../src/bus/consigneEvenementCompteCreeDansJournal';
 import { AdaptateurChiffrement } from '../../src/infra/adaptateurChiffrement';
 
