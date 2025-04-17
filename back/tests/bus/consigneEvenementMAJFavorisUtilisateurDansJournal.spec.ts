@@ -5,6 +5,7 @@ import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
 import { AdaptateurChiffrement } from '../../src/infra/adaptateurChiffrement';
 import { consigneEvenementMAJFavorisUtilisateurDansJournal } from '../../src/bus/consigneEvenementMAJFavorisUtilisateurDansJournal';
 import { MiseAJourFavorisUtilisateur } from '../../src/bus/miseAJourFavorisUtilisateur';
+import { EntrepotFavori } from '../../src/metier/entrepotFavori';
 
 describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur dans le journal", () => {
   it('consigne un évènement de MAJFavorisUtilisateur', async () => {
@@ -22,14 +23,23 @@ describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur
       hacheSha256: (chaineEnClair: string) => `${chaineEnClair}-hache`,
     };
 
+    const entrepotFavori: EntrepotFavori = {
+      ajoute: async() => {},
+      retire: async() => {},
+      tousCeuxDeUtilisateur: async (emailUtilisateur: string) => await([
+        { emailUtilisateur, idItemCyber: 'groupe/id' },
+        { emailUtilisateur, idItemCyber: 'groupe/id-2' },
+      ]),
+    };
+
     await consigneEvenementMAJFavorisUtilisateurDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurChiffrement,
+      entrepotFavori,
     })(
       new MiseAJourFavorisUtilisateur({
         email: 'email@mail.com',
-        listeIdFavoris: ['id/favori', 'id/favori2'],
       })
     );
 

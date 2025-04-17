@@ -21,14 +21,9 @@ const ressourceFavori = ({
         emailUtilisateur: requete.session!.email,
       });
 
-      const favoris = await entrepotFavori.tousCeuxDeUtilisateur(
-        requete.session?.email
-      );
-
       await busEvenements.publie(
         new MiseAJourFavorisUtilisateur({
           email: requete.session?.email,
-          listeIdFavoris: favoris.map(({ idItemCyber }) => idItemCyber),
         })
       );
       reponse.send(200);
