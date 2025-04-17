@@ -1,8 +1,8 @@
-import { EvenementDuBus } from './busEvenements';
-import { CodeRegion } from '../metier/referentielRegions';
-import { CodeSecteur } from '../metier/referentielSecteurs';
-import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
-import { ReponsesTestMaturite } from '../metier/resultatTestMaturite';
+import { EvenementDuBus } from '../busEvenements';
+import { CodeRegion } from '../../metier/referentielRegions';
+import { CodeSecteur } from '../../metier/referentielSecteurs';
+import { CodeTrancheEffectif } from '../../metier/referentielTranchesEffectifEtablissement';
+import { ReponsesTestMaturite } from '../../metier/resultatTestMaturite';
 
 export class TestRealise implements EvenementDuBus {
   region: CodeRegion;

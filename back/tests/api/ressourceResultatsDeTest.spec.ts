@@ -8,7 +8,7 @@ import {
   fabriqueBusPourLesTests,
   MockBusEvenement,
 } from '../bus/busPourLesTests';
-import { TestRealise } from '../../src/bus/testRealise';
+import { TestRealise } from '../../src/bus/evenements/testRealise';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { encodeSession } from './cookie';
 import { ProprieteTestRevendiquee } from '../../src/bus/proprieteTestRevendiquee';

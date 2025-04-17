@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import { consigneEvenementTestRealiseDansJournal } from '../../src/bus/consigneEvenementTestRealiseDansJournal';
-import { TestRealise } from '../../src/bus/testRealise';
+import { TestRealise } from '../../src/bus/evenements/testRealise';
 import assert from 'node:assert';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';

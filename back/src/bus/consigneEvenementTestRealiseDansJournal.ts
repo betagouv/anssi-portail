@@ -1,4 +1,4 @@
-import { TestRealise } from './testRealise';
+import { TestRealise } from './evenements/testRealise';
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../infra/adaptateurJournal';
 
