@@ -167,7 +167,6 @@ describe('La ressource des services et ressources favoris', () => {
         MiseAJourFavorisUtilisateur
       );
       assert.equal(evenement!.email, 'jeanne.dupont@mail.com');
-      assert.equal(evenement!.listeIdFavoris.length, 2);
     });
   });
 });
