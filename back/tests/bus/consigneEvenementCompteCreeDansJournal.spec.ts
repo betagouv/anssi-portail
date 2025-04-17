@@ -35,9 +35,10 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
       })
     );
 
-    assert.notEqual(evenementRecu, undefined);
-    assert.equal(evenementRecu!.type, 'NOUVEL_UTILISATEUR_INSCRIT');
-    assert.equal(evenementRecu!.donnees.idUtilisateur, 'u1@mail.com-hache');
-    assert.deepEqual(evenementRecu!.date, new Date('2025-03-10'));
+    assert.deepEqual(evenementRecu, {
+      type: 'NOUVEL_UTILISATEUR_INSCRIT',
+      donnees: { idUtilisateur: 'u1@mail.com-hache' },
+      date: new Date('2025-03-10'),
+    });
   });
 });
