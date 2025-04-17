@@ -21,6 +21,7 @@ import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement();
 const adaptateurJournal = fabriqueAdaptateurJournal();
+const entrepotFavori = new EntrepotFavoriPostgres();
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
@@ -29,6 +30,7 @@ cableTousLesAbonnes({
   adaptateurJournal,
   adaptateurHorloge,
   adaptateurChiffrement,
+  entrepotFavori,
 });
 
 const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
