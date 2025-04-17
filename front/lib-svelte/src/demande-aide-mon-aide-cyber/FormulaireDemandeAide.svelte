@@ -27,11 +27,12 @@
 
   onMount(() => {
     let urlSearchParams = new URLSearchParams(window.location.search);
-    let utilisateurMAC = urlSearchParams.get('utilisateur-mac');
-    if (utilisateurMAC) {
+    let parametreEmailUtilisateurMAC = urlSearchParams.get('email-utilisateur-mac');
+    if (parametreEmailUtilisateurMAC) {
       utilisateurMACPrerempli = true;
       estEnRelationAvecUnUtilisateur = true;
-      emailUtilisateurMAC = atob(decodeURIComponent(utilisateurMAC));
+      emailUtilisateurMAC = atob(decodeURIComponent(parametreEmailUtilisateurMAC));
+      return
     }
     let nomUsage = urlSearchParams.get('nom-usage');
     identifiantAidant = urlSearchParams.get('identifiant-utilisateur-mac');
@@ -40,6 +41,7 @@
       utilisateurMACPrerempli = true;
       estEnRelationAvecUnUtilisateur = true;
       emailUtilisateurMAC = atob(decodeURIComponent(nomUsage));
+      return
     }
   });
 
