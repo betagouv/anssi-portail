@@ -1,6 +1,6 @@
 import { ConfigurationServeur } from './configurationServeur';
 import { Request, Response, Router } from 'express';
-import { TestRealise } from '../bus/testRealise';
+import { TestRealise } from '../bus/evenements/testRealise';
 import { codesRegion } from '../metier/referentielRegions';
 import { body, check } from 'express-validator';
 import { codesSecteur } from '../metier/referentielSecteurs';

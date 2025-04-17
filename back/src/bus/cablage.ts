@@ -1,5 +1,5 @@
 import { BusEvenements } from './busEvenements';
-import { TestRealise } from './testRealise';
+import { TestRealise } from './evenements/testRealise';
 import { consigneEvenementTestRealiseDansJournal } from './consigneEvenementTestRealiseDansJournal';
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../infra/adaptateurJournal';
