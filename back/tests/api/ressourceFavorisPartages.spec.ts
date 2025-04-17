@@ -14,7 +14,7 @@ describe('La ressource des favoris partagés', () => {
   let serveur: Express;
   let entrepotFavori: EntrepotFavoriMemoire;
   let entrepotUtilisateur: EntrepotUtilisateur;
-  let idListeFavoris: string;
+  let idListeFavoris: string | undefined;
 
   beforeEach(async () => {
     entrepotFavori = new EntrepotFavoriMemoire();
