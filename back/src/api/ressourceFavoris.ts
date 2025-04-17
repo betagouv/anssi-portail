@@ -1,8 +1,10 @@
 import { ConfigurationServeur } from './configurationServeur';
 import { Request, Response, Router } from 'express';
 import { check } from 'express-validator';
+import { MiseAJourFavorisUtilisateur } from '../bus/miseAJourFavorisUtilisateur';
 
 const ressourceFavoris = ({
+  busEvenements,
   middleware,
   entrepotFavori,
 }: ConfigurationServeur) => {
@@ -26,6 +28,12 @@ const ressourceFavoris = ({
         idItemCyber,
         emailUtilisateur: requete.session?.email,
       });
+
+      await busEvenements.publie(
+        new MiseAJourFavorisUtilisateur({
+          email: requete.session?.email,
+        })
+      );
       reponse.sendStatus(201);
     }
   );

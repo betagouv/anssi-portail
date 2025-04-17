@@ -13,6 +13,9 @@ import {
   consigneEvenementCompteCreeDansJournal,
 } from './consigneEvenementCompteCreeDansJournal';
 import { AdaptateurChiffrement } from '../infra/adaptateurChiffrement';
+import { consigneEvenementMAJFavorisUtilisateurDansJournal } from './consigneEvenementMAJFavorisUtilisateurDansJournal';
+import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
+import { EntrepotFavori } from '../metier/entrepotFavori';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
@@ -20,12 +23,14 @@ export const cableTousLesAbonnes = ({
   adaptateurJournal,
   adaptateurHorloge,
   adaptateurChiffrement,
+  entrepotFavori,
 }: {
   busEvenements: BusEvenements;
   adaptateurEmail: AdaptateurEmail;
   adaptateurJournal: AdaptateurJournal;
   adaptateurHorloge: AdaptateurHorloge;
   adaptateurChiffrement: AdaptateurChiffrement;
+  entrepotFavori: EntrepotFavori;
 }) => {
   busEvenements.abonne(
     TestRealise,
@@ -54,4 +59,13 @@ export const cableTousLesAbonnes = ({
       adaptateurChiffrement,
     }),
   ]);
+  busEvenements.abonne(
+    MiseAJourFavorisUtilisateur,
+    consigneEvenementMAJFavorisUtilisateurDansJournal({
+      adaptateurJournal,
+      adaptateurHorloge,
+      adaptateurChiffrement,
+      entrepotFavori,
+    })
+  );
 };
