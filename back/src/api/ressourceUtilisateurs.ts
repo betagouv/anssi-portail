@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 import { check } from 'express-validator';
-import { CompteCree } from '../bus/compteCree';
+import { CompteCree } from '../bus/evenements/compteCree';
 import { Utilisateur } from '../metier/utilisateur';
 
 const ressourceUtilisateurs = ({

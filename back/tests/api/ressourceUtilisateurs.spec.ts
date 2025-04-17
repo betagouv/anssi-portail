@@ -9,7 +9,7 @@ import {
   fabriqueBusPourLesTests,
   MockBusEvenement,
 } from '../bus/busPourLesTests';
-import { CompteCree } from '../../src/bus/compteCree';
+import { CompteCree } from '../../src/bus/evenements/compteCree';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 
 describe('La ressource utilisateur', () => {
