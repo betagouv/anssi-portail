@@ -11,7 +11,7 @@ import {
 import { TestRealise } from '../../src/bus/evenements/testRealise';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { encodeSession } from './cookie';
-import { ProprieteTestRevendiquee } from '../../src/bus/proprieteTestRevendiquee';
+import { ProprieteTestRevendiquee } from '../../src/bus/evenements/proprieteTestRevendiquee';
 
 const REGEX_UUID =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;

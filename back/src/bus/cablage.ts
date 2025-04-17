@@ -3,7 +3,7 @@ import { TestRealise } from './evenements/testRealise';
 import { consigneEvenementTestRealiseDansJournal } from './consigneEvenementTestRealiseDansJournal';
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../infra/adaptateurJournal';
-import { ProprieteTestRevendiquee } from './proprieteTestRevendiquee';
+import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee';
 import { consigneEvenementProprieteTestRevendiqueeDansJournal } from './consigneEvenementProprieteTestRevendiqueeDansJournal';
 import { CompteCree } from './evenements/compteCree';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte';

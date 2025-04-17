@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
-import { ProprieteTestRevendiquee } from '../../src/bus/proprieteTestRevendiquee';
+import { ProprieteTestRevendiquee } from '../../src/bus/evenements/proprieteTestRevendiquee';
 import { consigneEvenementProprieteTestRevendiqueeDansJournal } from '../../src/bus/consigneEvenementProprieteTestRevendiqueeDansJournal';
 
 describe("L'abonnement qui consigne la revendication de la propriété d'un test dans le journal", () => {
