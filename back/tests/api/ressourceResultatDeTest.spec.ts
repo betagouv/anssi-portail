@@ -10,7 +10,7 @@ import assert from 'node:assert';
 import { CodeRegion } from '../../src/metier/referentielRegions';
 import { CodeSecteur } from '../../src/metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../../src/metier/referentielTranchesEffectifEtablissement';
-import { ProprieteTestRevendiquee } from '../../src/bus/proprieteTestRevendiquee';
+import { ProprieteTestRevendiquee } from '../../src/bus/evenements/proprieteTestRevendiquee';
 import {
   fabriqueBusPourLesTests,
   MockBusEvenement,

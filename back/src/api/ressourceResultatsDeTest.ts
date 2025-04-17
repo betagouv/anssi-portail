@@ -6,7 +6,7 @@ import { body, check } from 'express-validator';
 import { codesSecteur } from '../metier/referentielSecteurs';
 import { codesTranchesEffectif } from '../metier/referentielTranchesEffectifEtablissement';
 import { ResultatTestMaturite } from '../metier/resultatTestMaturite';
-import { ProprieteTestRevendiquee } from '../bus/proprieteTestRevendiquee';
+import { ProprieteTestRevendiquee } from '../bus/evenements/proprieteTestRevendiquee';
 
 const clesReponsesValides = [
   'prise-en-compte-risque',
