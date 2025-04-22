@@ -177,7 +177,7 @@ section {
 .encart {
   .carte.parcours {
     display: grid;
-    gap: 24px 16px;
+    gap: 16px 24px;
 
     grid-template-columns: auto;
     grid-template-rows: auto;
@@ -198,8 +198,8 @@ section {
     .illustration {
       grid-area: illustration;
       @include a-partir-de(lg) {
-        height: 205px;
-        padding: 38px 51px;
+        height: 264px;
+        padding: 38px 0;
       }
     }
 
