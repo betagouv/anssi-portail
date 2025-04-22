@@ -1,13 +1,7 @@
 <script lang="ts">
   import TuilesMaturite from './TuilesMaturite.svelte';
-  import {
-    type IdNiveau,
-    niveauxMaturite,
-  } from '../niveaux-maturite/NiveauxMaturite.donnees';
-  import {
-    questionnaireStore,
-    resultatsQuestionnaire,
-  } from './stores/questionnaire.store';
+  import { type IdNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
   import PubliciteMesServicesCyber from './PubliciteMesServicesCyber.svelte';
   import RadarMaturite from './RadarMaturite.svelte';
   import TuileVersParcours from './TuileVersParcours.svelte';
@@ -33,7 +27,7 @@
   $: moyenne =
     $questionnaireStore.toutesLesReponses.reduce(
       (acc, valeur) => acc + valeur,
-      0
+      0,
     ) / $questionnaireStore.toutesLesReponses.length;
 
   $: idNiveau = calculeIdNiveau(moyenne);
@@ -65,7 +59,7 @@
       </div>
 
       <a href="/niveaux-maturite" class="lien" target="_blank"
-        >Les niveaux de maturité cyber</a
+      >Les niveaux de maturité cyber</a
       >
     </div>
   </section>
@@ -100,8 +94,8 @@
               <h3>{question.titre}</h3>
               <p>
                 {question.propositions[
-                  ($resultatsQuestionnaire[question.id] || 1) - 1
-                ]}
+                ($resultatsQuestionnaire[question.id] || 1) - 1
+                  ]}
               </p>
             </div>
           {/each}
@@ -110,25 +104,53 @@
     </section>
   {/if}
 
-  <section class="votre-parcours">
-    <div class="contenu-section">
-      {#if niveau.id === 'intermediaire'}
-        <TuileVersParcours parcours="approfondir" />
-      {:else if niveau.id === 'optimal' || niveau.id === 'confirme'}
-        <div class="tuile">
-          <img src="/assets/images/debuter-cyber.png" alt="" />
-          <h3>Les services et ressources cyber</h3>
+  {#if niveau.id === 'insuffisant' }
+    <section class="encart fond-clair">
+      <div class="contenu-section">
+        <div class="carte parcours cyber-depart">
+          <img
+            src="/assets/images/dragon-kart.svg"
+            alt="Illustration diagnostic cyber"
+            class="illustration"
+          />
+          <h2>Bénéficiez d’un diagnostic cyber gratuit</h2>
           <p>
-            Trouvez les services et les ressources adaptés à vos besoins et
-            votre maturité cyber.
+            Vous souhaitez <b>protéger votre organisation contre les cyberattaques</b> mais ne savez pas par quoi
+            commencer
+            ?
+            <b>Prenez votre cyberdépart</b> avec un <b>premier diagnostic gratuit</b> et anonyme d'une heure dans vos
+            locaux
+            <b>accompagné
+              par un Aidant de la communauté MonAideCyber</b>.
           </p>
-          <a href="/catalogue" class="bouton primaire">Découvrir</a>
+          <a href="/cyberdepart" class="bouton primaire">
+            Demander mon diagnostic cyber
+          </a>
         </div>
-      {:else}
-        <TuileVersParcours parcours="debuter" />
-      {/if}
-    </div>
-  </section>
+      </div>
+    </section>
+  {:else }
+    <section class="votre-parcours">
+      <div class="contenu-section">
+        {#if niveau.id === 'intermediaire'}
+          <TuileVersParcours parcours="approfondir" />
+        {:else if niveau.id === 'optimal' || niveau.id === 'confirme'}
+          <div class="tuile">
+            <img src="/assets/images/debuter-cyber.png" alt="" />
+            <h3>Les services et ressources cyber</h3>
+            <p>
+              Trouvez les services et les ressources adaptés à vos besoins et
+              votre maturité cyber.
+            </p>
+            <a href="/catalogue" class="bouton primaire">Découvrir</a>
+          </div>
+        {:else}
+          <TuileVersParcours parcours="debuter" />
+        {/if}
+      </div>
+    </section>
+  {/if}
+
   <PartageTest couleurFond="fonce" />
 {:else}
   <ComparaisonTest testRealise={true} />
