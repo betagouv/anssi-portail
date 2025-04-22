@@ -44,17 +44,17 @@
           ? 'Le catalogue des services'
           : 'Explorer le catalogue complet'}
       />
-      <LienNavigationMobile href="/nis2/" label="Vous accompagner avec NIS2" />
       <details
         class:actif={cheminRelatif === '/parcours-debuter/' ||
           cheminRelatif === '/parcours-approfondir/'}
       >
         <summary
-          >{estConnecte
-            ? 'Notre sélection'
-            : 'Découvrir notre sélection'}</summary
+        >{estConnecte
+          ? 'Notre sélection'
+          : 'Découvrir notre sélection'}</summary
         >
         <div class="choix">
+          <LienNavigationMobile href="/nis2/" label="Les services pour vous accompagner avec NIS2" dansMenuDeroulant />
           <LienNavigationMobile
             href="/parcours-debuter/"
             label="Les services pour se lancer"

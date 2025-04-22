@@ -18,7 +18,6 @@
         ? 'Le catalogue des services'
         : 'Explorer le catalogue'}
     />
-    <LienNavigation href="/nis2/" label="Vous accompagner avec NIS2" />
     <details
       class:actif={cheminRelatif === '/parcours-debuter/' ||
         cheminRelatif === '/parcours-approfondir/'}
@@ -29,6 +28,7 @@
           : 'Découvrir notre sélection'}</summary
       >
       <div class="choix">
+        <LienNavigation href="/nis2/" label="Les services pour vous accompagner avec NIS2" dansMenuDeroulant />
         <LienNavigation
           href="/parcours-debuter/"
           label="Les services pour se lancer"
@@ -103,7 +103,7 @@
           background: white;
           box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
           left: 0;
-          right: -100px;
+          width: 320px;
           top: 57px;
           font-size: 0.875rem;
           line-height: 1.5rem;
