@@ -17,7 +17,9 @@
   <link rel="stylesheet" href="{{ "/assets/styles/fonts.css" | relative_url }}">
   <link rel="stylesheet" href="{{ "/lib-svelte/dist/assets/style.css" | relative_url }}">
   {% if include.extra-css %}
-    <link rel="stylesheet" href="{{ include.extra-css | relative_url }}">
+    {% for style in include.extra-css %}
+      <link rel="stylesheet" href="{{ style | relative_url }}">
+    {% endfor %}
   {% endif %}
 
   {% if include.extra-js %}
