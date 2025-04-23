@@ -36,6 +36,8 @@
     <ZoneIdentification estMobile />
     <div class="choix">
       {#if !estConnecte}
+        <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart"></lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
+
         <LienNavigation href="/" label="Accueil" />
       {/if}
       <LienNavigationMobile
@@ -174,6 +176,10 @@
             background: url('/assets/images/icone-chevron-bas.svg');
           }
         }
+      }
+
+      lab-anssi-mes-services-cyber-lien-diagnostic-cyber {
+        margin-bottom: 16px;
       }
     }
   }
