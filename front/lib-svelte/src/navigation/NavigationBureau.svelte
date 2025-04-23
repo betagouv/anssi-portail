@@ -49,6 +49,8 @@
       <LienNavigation href="/contacts/" label="Contacts utiles" />
       <LienNavigation href="/favoris/" label="Favoris" />
       <LienNavigation href="/services-anssi/" label="Services ANSSI utilisés" />
+    {:else}
+      <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart"></lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
     {/if}
   </div>
 </nav>
@@ -138,6 +140,11 @@
           }
         }
       }
+
+      lab-anssi-mes-services-cyber-lien-diagnostic-cyber {
+        margin-left: auto;
+      }
     }
   }
+
 </style>
