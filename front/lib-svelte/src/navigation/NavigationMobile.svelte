@@ -6,7 +6,6 @@
   import { mount, onDestroy, onMount, unmount } from 'svelte';
   import MenuBurger from './MenuBurger.svelte';
   import ZoneIdentification from '../identification/ZoneIdentification.svelte';
-  import LienNavigation from './LienNavigation.svelte';
 
   const cheminRelatif = window.location.pathname;
   let ouvert = false;
@@ -38,7 +37,7 @@
       {#if !estConnecte}
         <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart"
         ></lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
-        <LienNavigation href="/" label="Accueil" />
+        <LienNavigationMobile href="/" label="Accueil" />
       {/if}
       <LienNavigationMobile
         href="/catalogue/"
