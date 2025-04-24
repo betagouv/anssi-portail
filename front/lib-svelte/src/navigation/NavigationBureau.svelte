@@ -22,13 +22,15 @@
       class:actif={cheminRelatif === '/parcours-debuter/' ||
         cheminRelatif === '/parcours-approfondir/'}
     >
-      <summary
-        >{estConnecte
-          ? 'Notre sélection'
-          : 'Découvrir notre sélection'}</summary
-      >
+      <summary>
+        {estConnecte ? 'Notre sélection' : 'Découvrir notre sélection'}
+      </summary>
       <div class="choix">
-        <LienNavigation href="/nis2/" label="Les services pour vous accompagner avec NIS2" dansMenuDeroulant />
+        <LienNavigation
+          href="/nis2/"
+          label="Les services pour vous accompagner avec NIS2"
+          dansMenuDeroulant
+        />
         <LienNavigation
           href="/parcours-debuter/"
           label="Les services pour se lancer"
@@ -49,8 +51,10 @@
       <LienNavigation href="/contacts/" label="Contacts utiles" />
       <LienNavigation href="/favoris/" label="Favoris" />
       <LienNavigation href="/services-anssi/" label="Services ANSSI utilisés" />
+      <LienNavigation href="/cyberdepart/" label="Diagnostic cyber" />
     {:else}
-      <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart"></lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
+      <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart"
+      ></lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
     {/if}
   </div>
 </nav>
@@ -146,5 +150,4 @@
       }
     }
   }
-
 </style>
