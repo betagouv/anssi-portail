@@ -590,8 +590,11 @@ footer {
       a {
         grid-area: bouton;
         padding: 10px 24px;
+        margin: 16px auto;
+        justify-self: center;
+
         @include a-partir-de(lg) {
-          margin-top: 8px;
+          margin: 64px 0 0 0;
           justify-self: start;
         }
       }
@@ -724,8 +727,7 @@ select {
 }
 
 code {
-  background: rgba(0,0,0,.1);
+  background: rgba(0, 0, 0, 0.1);
   padding-left: 3px;
   padding-right: 3px;
 }
-
