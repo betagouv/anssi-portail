@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: 'fr' }}">
-{% include head.html extra-css=layout.styles extra-js=layout.script %}
+{% include head.html extra-js=layout.script %}
 <body>
 
 {% if site.env.MATOMO_ID != '' and site.env.MATOMO_ID != undefined %}
