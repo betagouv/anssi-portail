@@ -1,4 +1,26 @@
-const adaptateurEnvironnement = {
+type AdaptateurEnvironnement = {
+  oidc: () => {
+    urlRedirectionApresAuthentification: () => string;
+    urlRedirectionApresDeconnexion: () => string;
+    urlBase: () => string;
+    clientId: () => string;
+    clientSecret: () => string;
+  };
+  serveur: () => {
+    trustProxy: () => string | number;
+    maxRequetesParMinute: () => number;
+    ipAutorisees: () => false | string[];
+  };
+  sentry: () => {
+    dsn: () => string | undefined;
+    environnement: () => string | undefined;
+  };
+  crisp: () => {
+    idArticle: (id: string) => string | undefined;
+  };
+};
+
+const adaptateurEnvironnement: AdaptateurEnvironnement = {
   oidc: () => ({
     urlRedirectionApresAuthentification: () =>
       `${process.env.URL_BASE_MSC}/oidc/apres-authentification`,
@@ -39,6 +61,11 @@ const adaptateurEnvironnement = {
     dsn: () => process.env.SENTRY_DSN,
     environnement: () => process.env.SENTRY_ENVIRONNEMENT,
   }),
+  crisp: () => ({
+    idArticle: (id: string) => {
+      return process.env[`ARTICLE_${id}_ID`];
+    },
+  }),
 };
 
-export { adaptateurEnvironnement };
+export { AdaptateurEnvironnement, adaptateurEnvironnement };

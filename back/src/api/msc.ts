@@ -29,6 +29,7 @@ import { ressourceFavoris } from './ressourceFavoris';
 import { ressourceFavori } from './ressourceFavori';
 import { ressourceFavorisPartages } from './ressourceFavorisPartages';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide';
+import { ressourcePageCrisp } from './ressourcePageCrisp';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -215,6 +216,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     '/api/annuaire/tranches-effectif',
     ressourceAnnuaireTranchesEffectif(configurationServeur)
   );
+
+  app.use('/api/pages-crisp', ressourcePageCrisp(configurationServeur));
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 

@@ -30,6 +30,7 @@
     "vitest": "^3.0.5"
   },
   "dependencies": {
+    "@lab-anssi/lib": "^1.1.0",
     "@sentry/node": "^7.102.1",
     "axios": "^1.8.2",
     "cookie-parser": "^1.4.7",

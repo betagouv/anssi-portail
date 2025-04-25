@@ -10,6 +10,8 @@ import { adaptateurGestionVide } from '../../src/infra/adaptateurGestionErreurVi
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
+import { MockCmsCrisp } from '../mockCmsCrisp';
+import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -80,6 +82,28 @@ export const fauxMiddleware: Middleware = {
 
 const fauxAdaptateurMonAideCyber = { creeDemandeAide: () => Promise.resolve() };
 
+export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
+  oidc: () => ({
+    urlRedirectionApresAuthentification: () => '',
+    urlRedirectionApresDeconnexion: () => '',
+    urlBase: () => '',
+    clientId: () => '',
+    clientSecret: () => '',
+  }),
+  serveur: () => ({
+    trustProxy: () => '',
+    maxRequetesParMinute: () => 0,
+    ipAutorisees: () => false,
+  }),
+  sentry: () => ({
+    dsn: () => '',
+    environnement: () => '',
+  }),
+  crisp: () => ({
+    idArticle: (_: string) => '',
+  }),
+};
+
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   fournisseurChemin: fauxFournisseurDeChemin,
   middleware: fabriqueMiddleware({
@@ -101,4 +125,6 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurProfilAnssi: fauxAdaptateurProfilAnssi,
   adaptateurMonAideCyber: fauxAdaptateurMonAideCyber,
   entrepotFavori: new EntrepotFavoriMemoire(),
+  cmsCrisp: new MockCmsCrisp(),
+  adaptateurEnvironnement: fauxAdaptateurEnvironnement,
 };

@@ -17,6 +17,7 @@ import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
 import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
+import { CmsCrisp } from '@lab-anssi/lib';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement();
@@ -35,6 +36,8 @@ cableTousLesAbonnes({
 
 const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
 const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber();
+
+const cmsCrisp = new CmsCrisp(process.env.CRISP_ID_SITE, process.env.CRISP_CLE_API)
 
 creeServeur({
   fournisseurChemin,
@@ -59,6 +62,8 @@ creeServeur({
   entrepotResultatTest: new EntrepotResultatTestPostgres(),
   entrepotFavori: new EntrepotFavoriPostgres(),
   adaptateurMonAideCyber,
+  adaptateurEnvironnement,
+  cmsCrisp
 }).listen(3000, () => {
   console.log('Le serveur écoute sur le port 3000');
 });
