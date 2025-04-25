@@ -16,11 +16,12 @@
   <link rel="stylesheet" href="{{ "/assets/styles/boutons.css" | relative_url }}">
   <link rel="stylesheet" href="{{ "/assets/styles/fonts.css" | relative_url }}">
   <link rel="stylesheet" href="{{ "/lib-svelte/dist/assets/style.css" | relative_url }}">
-  {% if include.extra-css %}
-    {% for style in include.extra-css %}
-      <link rel="stylesheet" href="{{ style | relative_url }}">
-    {% endfor %}
-  {% endif %}
+  {% for style in layout.styles %}
+    <link rel="stylesheet" href="{{ style | relative_url }}">
+  {% endfor %}
+  {% for style in page.styles %}
+  <link rel="stylesheet" href="{{ style | relative_url }}">
+  {% endfor %}
 
   {% if include.extra-js %}
     <script src="{{ include.extra-js | relative_url }}" type="module"></script>
