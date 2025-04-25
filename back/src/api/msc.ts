@@ -104,6 +104,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'statistiques',
     'inscription',
     'cyberdepart',
+    'promouvoir-messervicescyber',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
