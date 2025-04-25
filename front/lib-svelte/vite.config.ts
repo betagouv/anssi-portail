@@ -23,6 +23,7 @@ export default defineConfig({
         'maturite-utilisateur': 'src/main-maturite-utilisateur.ts',
         'bouton-favori': 'src/main-bouton-favori.ts',
         'fil-ariane': 'src/main-fil-ariane.ts',
+        'promouvoir-msc': 'src/main-promouvoir-msc.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
