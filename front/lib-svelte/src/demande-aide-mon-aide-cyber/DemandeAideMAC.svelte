@@ -30,6 +30,7 @@
           email,
           departement: entite.departement,
           raisonSociale: entite.nom,
+          siret: entite.siret,
         },
         validationCGU: cguSontValidees,
         ...(emailUtilisateurMAC && { emailAidant: emailUtilisateurMAC }),
