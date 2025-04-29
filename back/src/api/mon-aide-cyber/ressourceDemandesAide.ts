@@ -9,6 +9,7 @@ export type CorpsDemandeAide = {
     email: string;
     departement: string;
     raisonSociale: string;
+    siret: string;
   };
   emailAidant?: string;
   identifiantAidant?: string;
@@ -34,6 +35,9 @@ const ressourceDemandesAide = ({
       .isString()
       .isIn(codeDepartement)
       .withMessage('Veuillez saisir un département valide.'),
+    check('entiteAidee.siret')
+      .matches(/^\d{14}$/)
+      .withMessage('Veuillez saisir un SIRET valide.'),
     body('entiteAidee.raisonSociale')
       .isString()
       .notEmpty()
@@ -58,7 +62,7 @@ const ressourceDemandesAide = ({
     async (requete: CorpsDeRequeteTypee<CorpsDemandeAide>, reponse) => {
       try {
         const { emailAidant, identifiantAidant, entiteAidee } = requete.body;
-        const { email, departement, raisonSociale } = entiteAidee;
+        const { email, departement, raisonSociale, siret } = entiteAidee;
         await adaptateurMonAideCyber.creeDemandeAide({
           ...(emailAidant && { emailAidant }),
           ...(identifiantAidant && { identifiantAidant }),
@@ -66,6 +70,7 @@ const ressourceDemandesAide = ({
             email,
             departement,
             raisonSociale,
+            siret
           },
         });
         reponse.sendStatus(201);
