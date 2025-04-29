@@ -13,6 +13,7 @@ export type CorpsAPIDemandeAide = {
     email: string;
     departement: string;
     raisonSociale: string;
+    siret: string;
   };
   emailAidant?: string;
   identifiantAidant?: string;
