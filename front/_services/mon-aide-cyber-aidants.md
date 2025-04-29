@@ -15,7 +15,7 @@ sources:
 cible: |
   Pour devenir Aidant cyber vous devez : 
   <ul>
-  <li> Pour devenir Aidant cyber, vReprésenter ou faire partie au titre de son activité professionnelle ou associative d’un service de l’État, d’une administration, d’une réserve citoyenne ou d’une entité morale à but non lucratif</li>
+  <li>Représenter ou faire partie au titre de son activité professionnelle ou associative d’un service de l’État, d’une administration, d’une réserve citoyenne ou d’une entité morale à but non lucratif</li>
   <li>Être dans une démarche non lucrative tout au long du dispositif
   <li>Participer à un atelier Devenir Aidant MonAideCyber dispensé par l’ANSSI</li>
   </ul>
