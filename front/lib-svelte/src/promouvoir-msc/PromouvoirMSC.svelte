@@ -7,7 +7,7 @@
     profondeur: number;
     texte: string;
     id: string;
-  }
+  };
 
   type PageHtmlCrisp = {
     titre: string;
@@ -30,7 +30,9 @@
     pageCrisp = reponse.data;
   });
 
-  $: tableDesMatieresMobile =  pageCrisp.tableDesMatieres.filter(e=>e.profondeur === 2)
+  $: tableDesMatieres = pageCrisp.tableDesMatieres.filter(
+    (e) => e.profondeur === 2
+  );
 </script>
 
 <Hero
@@ -44,20 +46,38 @@
     <summary>
       <div class="entete-filtres">
         <img class="menu" src="/assets/images/icone-menu-lateral.svg" alt="" />
-        <span id="section-active" class="titre-menu">{tableDesMatieresMobile[0]?.texte}</span>
-        <img class="chevron" src="/assets/images/icone-chevron-bas.svg" alt="" />
+        <span id="section-active" class="titre-menu">
+          {tableDesMatieres[0]?.texte}
+        </span>
+        <img
+          class="chevron"
+          src="/assets/images/icone-chevron-bas.svg"
+          alt=""
+        />
       </div>
     </summary>
 
     <ul>
-      {#each tableDesMatieresMobile as entree (entree.id)}
-      <li><a href="{entree.id}">{entree.texte}</a></li>
-        {/each}
+      {#each tableDesMatieres as entree (entree.id)}
+        <li><a href={`#${entree.id}`}>{entree.texte}</a></li>
+      {/each}
     </ul>
   </details>
 </div>
 
-<div class="article-promouvoir-msc">
-  <!-- eslint-disable-next-line svelte/no-at-html-tags-->
-  {@html pageCrisp.contenu}
+<div class="article">
+  <div class="contenu-section">
+    <div class="sommaire sommaire-deplie">
+      <ul>
+        {#each tableDesMatieres as entree (entree.id)}
+          <li><a href={`#${entree.id}`}>{entree.texte}</a></li>
+        {/each}
+      </ul>
+    </div>
+
+    <div class="contenu">
+      <!-- eslint-disable-next-line svelte/no-at-html-tags-->
+      {@html pageCrisp.contenu}
+    </div>
+  </div>
 </div>
