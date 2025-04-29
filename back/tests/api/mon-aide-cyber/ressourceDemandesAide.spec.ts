@@ -13,6 +13,7 @@ const uneDemandeAide = (parametres?: {
   identifiantAidant?: string;
   departement?: string;
   raisonSociale?: string;
+  siret?: string;
 }): CorpsDemandeAide => ({
   ...(parametres?.emailAidant && { emailAidant: parametres?.emailAidant }),
   ...(parametres?.identifiantAidant && {
@@ -22,6 +23,7 @@ const uneDemandeAide = (parametres?: {
     email: parametres?.email || 'durant@mail.fr',
     departement: parametres?.departement || '12',
     raisonSociale: parametres?.raisonSociale || 'Une raison sociale',
+    siret: parametres?.siret || '01234567891234'
   },
   validationCGU: true,
 });
@@ -57,13 +59,14 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
 
     await request(serveur)
       .post('/api/mon-aide-cyber/demandes-aide')
-      .send(uneDemandeAide({ email: 'durant@mail.fr' }));
+      .send(uneDemandeAide({ email: 'durant@mail.fr', siret: '09876543214321' }));
 
     assert.deepEqual(demandeAideEnvoyee, {
       entiteAidee: {
         email: 'durant@mail.fr',
         departement: '12',
         raisonSociale: 'Une raison sociale',
+        siret: '09876543214321'
       },
     });
   });
@@ -182,6 +185,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
             email: 'ceci-n-est-pas-un-mail.fr',
             departement: '12',
             raisonSociale: 'Une raison sociale',
+            siret: '12345678901234',
           },
         });
 
@@ -189,6 +193,25 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
       assert.equal(
         await reponse.body.erreur,
         'Veuillez saisir un email valide.'
+      );
+    });
+
+    it('pour le SIRET de l’entité', async () => {
+      const reponse = await request(serveur)
+        .post('/api/mon-aide-cyber/demandes-aide')
+        .send({
+          validationCGU: true,
+          entiteAidee: {
+            email: 'jean.dupont@email.fr',
+            departement: '12',
+            raisonSociale: 'Une raison sociale',
+          },
+        });
+
+      assert.equal(reponse.status, 400);
+      assert.equal(
+        await reponse.body.erreur,
+        'Veuillez saisir un SIRET valide.'
       );
     });
 
@@ -201,6 +224,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
             email: 'jean.dupont@mail.fr',
             departement: '12',
             raisonSociale: 'Une raison sociale',
+            siret: '12345678901234',
           },
         });
 
@@ -220,6 +244,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
             email: 'jean.dupont@mail.fr',
             departement: '12',
             raisonSociale: 'Une raison sociale',
+            siret: '12345678901234',
           },
         });
 
@@ -249,7 +274,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
         .send({
           email: 'jean.dupont@mail.fr',
           validationCGU: true,
-          entiteAidee: { departement: '01', raisonSociale: '   ' },
+          entiteAidee: { departement: '01', raisonSociale: '   ', siret: '12345678901234', },
         });
 
       assert.equal(reponse.status, 400);
@@ -261,17 +286,22 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
 
     it('pour la validation de l’identifiant Aidant', async () => {
       const reponse = await request(serveur)
-          .post('/api/mon-aide-cyber/demandes-aide')
-          .send({
-            validationCGU: true,
-            entiteAidee: { departement: '33', raisonSociale: 'beta-gouv', email: 'jean.dupont@mail.fr', },
-            identifiantAidant: '  a '
-          });
+        .post('/api/mon-aide-cyber/demandes-aide')
+        .send({
+          validationCGU: true,
+          entiteAidee: {
+            departement: '33',
+            raisonSociale: 'beta-gouv',
+            email: 'jean.dupont@mail.fr',
+            siret: '12345678901234',
+          },
+          identifiantAidant: '  a ',
+        });
 
       assert.equal(reponse.status, 400);
       assert.equal(
-          await reponse.body.erreur,
-          'Veuillez saisir un identifiant Aidant valide.'
+        await reponse.body.erreur,
+        'Veuillez saisir un identifiant Aidant valide.'
       );
     });
   });

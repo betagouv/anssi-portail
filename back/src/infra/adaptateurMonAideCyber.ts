@@ -6,6 +6,7 @@ export type DemandeAide = {
     email: string;
     departement: string;
     raisonSociale: string;
+    siret: string;
   };
   emailAidant?: string;
   identifiantAidant?: string;
@@ -18,12 +19,13 @@ export interface AdaptateurMonAideCyber {
 const adaptateurMonAideCyber = (): AdaptateurMonAideCyber => {
   const creeDemandeAide = async ({ entiteAidee, emailAidant, identifiantAidant }: DemandeAide) => {
     try {
-      const { email, raisonSociale, departement } = entiteAidee;
+      const { email, raisonSociale, departement, siret } = entiteAidee;
       const demandeMAC = {
         cguValidees: true,
         email,
         departement,
         raisonSociale,
+        siret,
         ...(emailAidant && { relationUtilisateur: emailAidant }),
         ...(identifiantAidant && { identifiantAidant }),
       };
