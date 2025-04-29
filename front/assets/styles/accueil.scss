@@ -270,6 +270,36 @@ section {
   }
 }
 
+.communaute-msc {
+  .contenu-section {
+    display: grid;
+    gap: 24px;
+
+    h1 {
+      margin: 0 0 24px;
+      font-size: 2rem;
+      line-height: 2.5rem;
+      text-align: left;
+    }
+
+    ul {
+      padding-left: 24px;
+    }
+
+    img {
+      margin: 24px 0;
+      justify-self: center;
+      width: 100%;
+      max-width: 588px;
+    }
+
+    .bouton.primaire {
+      margin: 16px auto;
+      justify-self: center;
+    }
+  }
+}
+
 .nis2 {
   background: #0d0c21 url('/assets/images/motif-fond-service-opacite-16.png');
 
