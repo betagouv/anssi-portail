@@ -70,7 +70,7 @@
       }
     );
 
-    suggestions = reponse?.data?.suggestions.map(uneSuggestion);
+    suggestions = reponse?.data?.suggestions?.map(uneSuggestion) ?? [];
     suggestionsVisibles = suggestions.length > 0;
   };
 
