@@ -163,6 +163,17 @@
       }
     }
 
+    section {
+      padding: 0 0 72px;
+      border-bottom: 1px solid var(--gris-clair);
+      margin-bottom: 72px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+    }
+
     .aide,
     .information {
       background: #e8edff;
