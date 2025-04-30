@@ -74,6 +74,11 @@
         href={estConnecte ? '/ma-maturite' : '/test-maturite/'}
         label={estConnecte ? 'Maturité cyber' : 'Tester votre maturité cyber'}
       />
+      <LienNavigationMobile
+        href="/promouvoir-messervicescyber/"
+        label="Promouvoir MesServicesCyber"
+      />
+
       {#if estConnecte}
         <LienNavigationMobile href="/contacts/" label="Contacts utiles" />
         <LienNavigationMobile href="/favoris/" label="Favoris" />
