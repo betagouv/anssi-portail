@@ -127,9 +127,6 @@
           gap: 8px;
           align-items: center;
           cursor: pointer;
-          @include a-partir-de(xl) {
-            padding: 16px;
-          }
 
           &::marker {
             content: '';
