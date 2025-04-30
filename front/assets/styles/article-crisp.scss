@@ -47,7 +47,6 @@
 
           a {
             text-decoration: none;
-            color: var(--noir);
             padding-left: 16px;
             display: inline-block;
             border-bottom: none;
@@ -119,7 +118,6 @@
         a {
           border-bottom: none;
           text-decoration: none;
-          color: var(--noir);
           padding-left: 8px;
           display: inline-block;
         }
@@ -164,9 +162,9 @@
     }
 
     section {
-      padding: 0 0 72px;
+      padding-bottom: 36px;
       border-bottom: 1px solid var(--gris-clair);
-      margin-bottom: 72px;
+      margin-bottom: 36px;
 
       &:last-of-type {
         margin-bottom: 0;
@@ -174,7 +172,6 @@
       }
     }
 
-    .aide,
     .information {
       background: #e8edff;
       padding: 16px;
@@ -190,39 +187,66 @@
       border-left: 3px solid #0079d0;
     }
 
+    .aide {
+      background: #f6f6f6;
+      position: relative;
+      padding: 16px 16px 16px 80px;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 4px;
+      align-self: stretch;
+      margin: 16px 0;
+      font-size: 14px;
+
+      &:before {
+        content: '';
+        display: block;
+        background-image: url('/assets/icones/aide.svg');
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        top: 20px;
+        left: 24px;
+      }
+    }
+
     .information:before {
       content: 'Information';
       font-weight: bold;
     }
 
-    .aide:before {
-      content: 'Aide';
-      font-weight: bold;
-    }
-
     h2 {
-      color: var(--noir);
-      font-family: Marianne;
       font-size: 1.75rem;
       font-style: normal;
       font-weight: 700;
       line-height: 2.25rem;
       margin: 0;
+      padding-bottom: 32px;
     }
 
-    h4 {
+    h3 {
       color: #161616;
-      font-family: Marianne;
       font-size: 1.5rem;
       font-style: normal;
       font-weight: 700;
       line-height: 2rem;
     }
 
+    h4 {
+      color: #161616;
+      font-size: 1.25rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.75rem;
+      margin: 0;
+    }
+
     h6 {
       color: #161616;
 
-      font-family:  Marianne;
       font-size: 1.25rem;
       font-style: normal;
       font-weight: 700;
@@ -230,14 +254,16 @@
     }
 
     p {
-      color: var(--Noir-noir-msc-default, #0d0c21);
-      font-family: Marianne;
+      color: var(--noir);
       font-size: 1rem;
       font-style: normal;
       font-weight: 400;
       line-height: 1.5rem;
       padding: 16px 0;
       margin: 0;
+      &:has(img) {
+        padding: 0;
+      }
     }
 
     ul li {
@@ -254,9 +280,14 @@
       border-radius: 10px;
     }
 
+    .conteneur-video p {
+      font-style: italic;
+      margin: 0;
+      padding: 0;
+    }
+
     a {
       text-decoration: underline;
-      color: var(--noir);
       display: inline;
       gap: 2px;
       align-items: center;
@@ -279,14 +310,6 @@
         width: 16px;
         height: 16px;
       }
-    }
-
-    hr {
-      border-bottom: 1px solid var(--gris-clair);
-      border-top: none;
-      border-left: none;
-      border-right: none;
-      margin: 72px 0;
     }
   }
 }
