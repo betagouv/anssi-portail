@@ -19,9 +19,6 @@
     padding: 16px 8px;
     font-size: 0.875rem;
     border-bottom: none;
-    @include a-partir-de(xl) {
-      padding: 16px;
-    }
 
     &:hover {
       background: var(--menu-fond-hover);
