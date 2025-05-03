@@ -6,7 +6,7 @@ avecFicheDetaillee: true
 description: Bénéficier d'un diagnostic cyber gratuit et accompagné
 titreHtml: MonAideCyber
 illustration: mac/mac-diag.png
-lien: https://monaide.cyber.gouv.fr/
+lien: https://messervices.cyber.gouv.fr/cyberdepart
 droitsAcces:
   - ACCES_LIBRE
 sources:
@@ -20,15 +20,9 @@ cible: |
 liens:
   - accompagnement:
     titre: Bénéficiez d’un accompagnement
-    lien: https://www.monaide.cyber.gouv.fr/
-    illustration: mac/mac-accompagnement.png
+    lien: https://messervices.cyber.gouv.fr/cyberdepart
+    illustration: mac/mac-diag.png
     couleurFond: '#5d2b9d'
-  - commencer:
-    titre: Découvrez notre vidéo&nbsp;!
-    video: true
-    lien: https://ressources-mac.cellar-c2.services.clever-cloud.com/Video_MAC.mp4
-    illustration: mac/mac.png
-    couleurFond: '#6f479f'
 ---
 
 Vous souhaitez protéger votre organisation contre les cyberattaques mais ne savez pas par quoi commencer ?
