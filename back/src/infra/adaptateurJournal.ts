@@ -33,7 +33,7 @@ interface DonneesEvenementMiseAJourFavorisUtilisateur
 interface DonneesEvenementProprieteTestRevendiquee
   extends DonneesCommunesEvenement {
   donnees: {
-    emailUtilisateur: string;
+    idUtilisateur: string;
     idResultatTest: string;
   };
   type: 'PROPRIETE_TEST_REVENDIQUEE';

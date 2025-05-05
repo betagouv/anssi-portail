@@ -44,6 +44,7 @@ export const cableTousLesAbonnes = ({
     consigneEvenementProprieteTestRevendiqueeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
+      adaptateurChiffrement
     })
   );
   busEvenements.abonnePlusieurs(CompteCree, [
