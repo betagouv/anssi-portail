@@ -37,7 +37,13 @@ cableTousLesAbonnes({
 const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
 const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber();
 
-const cmsCrisp = new CmsCrisp(process.env.CRISP_ID_SITE, process.env.CRISP_CLE_API)
+const crispIdSite = process.env.CRISP_ID_SITE;
+const crispCleApi = process.env.CRISP_CLE_API;
+if (!crispIdSite || !crispCleApi) {
+  throw new Error("Variables CRISP_ID_SITE et/ou CRISP_CLE_API manquantes")
+}
+
+const cmsCrisp = new CmsCrisp(crispIdSite, crispCleApi)
 
 creeServeur({
   fournisseurChemin,
