@@ -40,6 +40,7 @@ REAGIR:
 SE_FORMER:
   - /ressources/livret-cyber-enjeux
   - /ressources/cyber-enjeux
+  - /ressources/cyber-enjeux-pro
   - /services/secnum-academie
   - /ressources/secnumedu
   - /ressources/secnumedufc
@@ -61,6 +62,7 @@ TOUS:
   - /ressources/visa-secu
   - /ressources/visa-secu-produit
   - /ressources/cyber-enjeux
+  - /ressources/cyber-enjeux-pro
   - /ressources/livret-cyber-enjeux
   - /ressources/guides-gestion-crise
   - /ressources/guides-remediation

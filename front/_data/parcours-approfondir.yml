@@ -11,7 +11,7 @@ se-former:
   titre: Se former
   explication: Développez les compétences cyber de vos équipes.
   items:
-    - /ressources/livret-cyber-enjeux
+    - /ressources/cyber-enjeux-pro
     - /services/secnum-academie
     - /services/sens-cyber
     - /ressources/secnumedufc
