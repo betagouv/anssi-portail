@@ -53,6 +53,8 @@
       text-decoration: underline;
       text-underline-offset: 4px;
       text-decoration-thickness: 1px;
+      word-break: normal;
+      overflow-wrap: anywhere;
 
       &:hover {
         text-decoration-thickness: 2px;
