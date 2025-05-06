@@ -17,12 +17,14 @@ import { CompteCree } from '../bus/evenements/compteCree';
 import { MiseAJourFavorisUtilisateur } from '../bus/miseAJourFavorisUtilisateur';
 import { EntrepotFavori } from '../metier/entrepotFavori';
 import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres';
+import Knex from 'knex';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
   private adaptateurEmail: AdaptateurEmail;
   private adaptateurChiffrement: AdaptateurChiffrement;
   private entrepotFavori: EntrepotFavori;
+  private knexJournal: Knex.Knex;
 
   constructor() {
     const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
@@ -33,6 +35,17 @@ export class ConsoleAdministration {
     this.adaptateurEmail = fabriqueAdaptateurEmail();
     this.adaptateurChiffrement = fabriqueAdaptateurChiffrement();
     this.entrepotFavori = new EntrepotFavoriPostgres();
+    const configDuJournal = {
+      client: 'pg',
+      connection: process.env.BASE_DONNEES_JOURNAL_URL_SERVEUR,
+      pool: {
+        min: 0,
+        max: Number.parseInt(
+          process.env.BASE_DONNEES_JOURNAL_POOL_CONNEXION_MAX || '0'
+        ),
+      },
+    };
+    this.knexJournal = Knex(configDuJournal);
   }
 
   static async rattrapage<T>(
@@ -160,6 +173,55 @@ export class ConsoleAdministration {
       afficheErreur,
       rattrapeEvenement
     );
+  }
+
+  async corrigeEvenementsAvecMailEnClair() {
+    process.stdout.write(
+      'Migration des événements PROPRIETE_TEST_REVENDIQUEE avec email en clair\n'
+    );
+    await this.knexJournal.transaction(async (trx) => {
+      const evenements = await trx('journal_msc.evenements').where(
+        'type',
+        'PROPRIETE_TEST_REVENDIQUEE'
+      );
+      process.stdout.write('\n');
+      let compteur = 0;
+
+      const majEvenements = evenements.map(({ id, donnees }, index) => {
+        process.stdout.write(
+          `\rConstruction des données: ${(
+            (index / (evenements.length)) *
+            100.0
+          ).toFixed(2)}% (${index}/${evenements.length})`
+        );
+
+        const nouvellesDonnees = {
+          ...donnees,
+          idUtilisateur: this.adaptateurChiffrement.hacheSha256(
+            donnees.emailUtilisateur
+          ),
+        };
+        delete nouvellesDonnees.emailUtilisateur;
+
+        return trx('journal_msc.evenements')
+          .where({ id })
+          .update({ donnees: nouvellesDonnees })
+          .then(() => {
+            compteur += 1;
+            process.stdout.write(
+              `\rExécution des promesses: ${(
+                (compteur / (evenements.length)) *
+                100.0
+              ).toFixed(2)}% (${compteur}/${evenements.length})`
+            );
+          });
+      });
+
+      process.stdout.write('\n');
+      await Promise.all(majEvenements);
+      process.stdout.write('\n');
+      process.stdout.write('Fin de la migration des événements\n');
+    });
   }
 }
 
