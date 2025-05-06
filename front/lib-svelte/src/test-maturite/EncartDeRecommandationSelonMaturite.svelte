@@ -2,9 +2,13 @@
   import type {NiveauMaturite} from "../niveaux-maturite/NiveauxMaturite.donnees.js";
 
   export let niveau: NiveauMaturite;
+
+  $: afficheDiagnostic = niveau.id === 'insuffisant' || niveau.id === 'emergent';
+  $: afficheParcoursApprofondir = niveau.id === 'intermediaire';
+  $: afficheCatalogue = niveau.id === 'optimal' || niveau.id === 'confirme';
 </script>
 
-{#if niveau.id === 'insuffisant' || niveau.id === 'emergent' }
+{#if afficheDiagnostic}
   <section class="encart fond-clair">
     <div class="contenu-section">
       <div class="carte parcours cyber-depart">
@@ -32,21 +36,21 @@
 {:else }
   <section class="votre-parcours">
     <div class="contenu-section">
-      {#if niveau.id === 'intermediaire'}
+      {#if afficheParcoursApprofondir}
         <div class="tuile parcours">
-          <img src="/assets/images/approfondir-cyber.png" alt="" />
+          <img src="/assets/images/approfondir-cyber.png" alt=""/>
           <h3>
             Les services pour approfondir la cybersécurité
           </h3>
           <p>
-              Découvrez les services et les ressources pour aider votre organisation à
-              approfondir la démarche de renforcement de la cybersécurité.
+            Découvrez les services et les ressources pour aider votre organisation à
+            approfondir la démarche de renforcement de la cybersécurité.
           </p>
           <a href="/parcours-approfondir" class="bouton primaire">Découvrir</a>
         </div>
-      {:else if niveau.id === 'optimal' || niveau.id === 'confirme'}
+      {:else if afficheCatalogue}
         <div class="tuile">
-          <img src="/assets/images/debuter-cyber.png" alt="" />
+          <img src="/assets/images/debuter-cyber.png" alt=""/>
           <h3>Les services et ressources cyber</h3>
           <p>
             Trouvez les services et les ressources adaptés à vos besoins et
