@@ -4,7 +4,7 @@ typologie: ressource
 nom: Cyber&ZeroWidthSpace;Enjeux Pro
 titreHtml: CyberEnjeux Pro
 description: 'Former les équipes à la cybersécurité par le jeu'
-lien: https://cyber.gouv.fr/actualites/au-college-et-au-lycee-former-a-la-cybersecurite-par-le-jeu
+lien: https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/CyberEnJeux-Pro.zip
 illustration: cyber-enjeux-pro/cyber-enjeux-pro.png
 avecFicheDetaillee: true
 format: Outil
