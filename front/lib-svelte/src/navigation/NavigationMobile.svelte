@@ -50,7 +50,7 @@
           cheminRelatif === '/parcours-approfondir/'}
       >
         <summary>
-          {estConnecte ? 'Notre sélection' : 'Découvrir notre sélection'}
+          {estConnecte ? 'Nos sélections' : 'Découvrir nos sélections'}
         </summary>
         <div class="choix">
           <LienNavigationMobile
