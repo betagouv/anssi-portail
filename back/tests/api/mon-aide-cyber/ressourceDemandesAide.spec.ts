@@ -231,7 +231,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
       assert.equal(reponse.status, 400);
       assert.equal(
         await reponse.body.erreur,
-        'Veuillez saisir un email valide pour l’Aidant.'
+        'Veuillez saisir un email valide pour l’Aidant cyber.'
       );
     });
 
@@ -301,7 +301,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
       assert.equal(reponse.status, 400);
       assert.equal(
         await reponse.body.erreur,
-        'Veuillez saisir un identifiant Aidant valide.'
+        'Veuillez saisir un identifiant Aidant cyber valide.'
       );
     });
   });
