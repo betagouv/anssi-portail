@@ -49,12 +49,12 @@ const ressourceDemandesAide = ({
     body('emailAidant')
       .optional({ checkFalsy: true })
       .isEmail()
-      .withMessage('Veuillez saisir un email valide pour l’Aidant.'),
+      .withMessage('Veuillez saisir un email valide pour l’Aidant cyber.'),
     body('identifiantAidant')
       .optional({ values: 'falsy' })
       .trim()
       .isUUID()
-      .withMessage('Veuillez saisir un identifiant Aidant valide.'),
+      .withMessage('Veuillez saisir un identifiant Aidant cyber valide.'),
     body('validationCGU')
       .custom((validationCGU) => !!validationCGU)
       .withMessage('Veuillez valider les CGU.'),

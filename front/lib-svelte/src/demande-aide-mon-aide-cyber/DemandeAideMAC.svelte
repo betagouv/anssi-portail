@@ -24,7 +24,13 @@
     try {
       enCoursEnvoi = true;
 
-      const { email, cguSontValidees, emailUtilisateurMAC, entite, identifiantAidant } = e.detail;
+      const {
+        email,
+        cguSontValidees,
+        emailUtilisateurMAC,
+        entite,
+        identifiantAidant,
+      } = e.detail;
       const corps: CorpsAPIDemandeAide = {
         entiteAidee: {
           email,
@@ -34,7 +40,7 @@
         },
         validationCGU: cguSontValidees,
         ...(emailUtilisateurMAC && { emailAidant: emailUtilisateurMAC }),
-        ...(identifiantAidant && {identifiantAidant})
+        ...(identifiantAidant && { identifiantAidant }),
       };
       const reponse = await axios.post(
         '/api/mon-aide-cyber/demandes-aide',
@@ -66,10 +72,7 @@
         </h2>
         <p>
           <b>Prenez votre cyberdépart !</b> Bénéficiez d’un
-          <b
-            >premier diagnostic gratuit accompagné d’un Aidant de la communauté
-            MonAideCyber</b
-          >
+          <b>premier diagnostic gratuit accompagné d’un Aidant cyber</b>
           et commencez à renforcer rapidement le niveau de cybersécurité de votre
           organisation.
         </p>
