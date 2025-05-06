@@ -104,7 +104,7 @@
     </section>
   {/if}
 
-  {#if niveau.id === 'insuffisant' }
+  {#if niveau.id === 'insuffisant' || niveau.id === 'emergent' }
     <section class="encart fond-clair">
       <div class="contenu-section">
         <div class="carte parcours cyber-depart">
@@ -144,8 +144,6 @@
             </p>
             <a href="/catalogue" class="bouton primaire">Découvrir</a>
           </div>
-        {:else}
-          <TuileVersParcours parcours="debuter" />
         {/if}
       </div>
     </section>
