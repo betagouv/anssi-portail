@@ -1,5 +1,5 @@
-import { MiseAJourFavorisUtilisateur } from '../bus/miseAJourFavorisUtilisateur';
-import { ConfigurationServeur } from './configurationServeur';
+import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur';
+import { ConfigurationServeur } from '../configurationServeur';
 import { Router } from 'express';
 
 const ressourceFavori = ({

@@ -1,4 +1,4 @@
-import { ConfigurationServeur } from './configurationServeur';
+import { ConfigurationServeur } from '../configurationServeur';
 import { Router } from 'express';
 
 const ressourceDernierResultatDeTest = ({

@@ -1,15 +1,15 @@
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { Express } from 'express';
-import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
-import { configurationDeTestDuServeur } from './fauxObjets';
-import { creeServeur } from '../../src/api/msc';
-import { ResultatTestMaturite } from '../../src/metier/resultatTestMaturite';
-import { encodeSession } from './cookie';
+import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
+import { configurationDeTestDuServeur } from '../fauxObjets';
+import { creeServeur } from '../../../src/api/msc';
+import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
+import { encodeSession } from '../cookie';
 import assert from 'node:assert';
-import { CodeRegion } from '../../src/metier/referentielRegions';
-import { CodeSecteur } from '../../src/metier/referentielSecteurs';
-import { CodeTrancheEffectif } from '../../src/metier/referentielTranchesEffectifEtablissement';
+import { CodeRegion } from '../../../src/metier/referentielRegions';
+import { CodeSecteur } from '../../../src/metier/referentielSecteurs';
+import { CodeTrancheEffectif } from '../../../src/metier/referentielTranchesEffectifEtablissement';
 
 describe('La ressource qui gère le dernier résultat de test', () => {
   let serveur: Express;
