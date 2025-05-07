@@ -12,6 +12,7 @@ import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
 import { MockCmsCrisp } from '../mockCmsCrisp';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
+import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -125,6 +126,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurProfilAnssi: fauxAdaptateurProfilAnssi,
   adaptateurMonAideCyber: fauxAdaptateurMonAideCyber,
   entrepotFavori: new EntrepotFavoriMemoire(),
+  entrepotSessionDeGroupe: new EntrepotSessionDeGroupeMemoire(),
   cmsCrisp: new MockCmsCrisp(),
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
 };
