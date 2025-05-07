@@ -1,7 +1,7 @@
-import { ConfigurationServeur } from './configurationServeur';
+import { ConfigurationServeur } from '../configurationServeur';
 import { Request, Response, Router } from 'express';
 import { check } from 'express-validator';
-import { MiseAJourFavorisUtilisateur } from '../bus/miseAJourFavorisUtilisateur';
+import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur';
 
 const ressourceFavoris = ({
   busEvenements,

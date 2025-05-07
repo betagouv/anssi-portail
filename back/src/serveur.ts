@@ -18,6 +18,7 @@ import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
 import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 import { CmsCrisp } from '@lab-anssi/lib';
+import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement();
@@ -40,10 +41,10 @@ const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber();
 const crispIdSite = process.env.CRISP_ID_SITE;
 const crispCleApi = process.env.CRISP_CLE_API;
 if (!crispIdSite || !crispCleApi) {
-  throw new Error("Variables CRISP_ID_SITE et/ou CRISP_CLE_API manquantes")
+  throw new Error('Variables CRISP_ID_SITE et/ou CRISP_CLE_API manquantes');
 }
 
-const cmsCrisp = new CmsCrisp(crispIdSite, crispCleApi)
+const cmsCrisp = new CmsCrisp(crispIdSite, crispCleApi);
 
 creeServeur({
   fournisseurChemin,
@@ -67,9 +68,10 @@ creeServeur({
   adaptateurProfilAnssi,
   entrepotResultatTest: new EntrepotResultatTestPostgres(),
   entrepotFavori: new EntrepotFavoriPostgres(),
+  entrepotSessionDeGroupe: new EntrepotSessionDeGroupePostgres(),
   adaptateurMonAideCyber,
   adaptateurEnvironnement,
-  cmsCrisp
+  cmsCrisp,
 }).listen(3000, () => {
   console.log('Le serveur écoute sur le port 3000');
 });

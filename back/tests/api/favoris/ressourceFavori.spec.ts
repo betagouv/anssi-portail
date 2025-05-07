@@ -1,22 +1,22 @@
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { Express } from 'express';
-import { creeServeur } from '../../src/api/msc';
+import { creeServeur } from '../../../src/api/msc';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurJWT,
   fauxFournisseurDeChemin,
   fauxMiddleware,
-} from './fauxObjets';
+} from '../fauxObjets';
 import assert from 'node:assert';
-import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
-import { encodeSession } from './cookie';
-import { fabriqueMiddleware } from '../../src/api/middleware';
+import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire';
+import { encodeSession } from '../cookie';
+import { fabriqueMiddleware } from '../../../src/api/middleware';
 import {
   fabriqueBusPourLesTests,
   MockBusEvenement,
-} from '../bus/busPourLesTests';
-import { MiseAJourFavorisUtilisateur } from '../../src/bus/miseAJourFavorisUtilisateur';
+} from '../../bus/busPourLesTests';
+import { MiseAJourFavorisUtilisateur } from '../../../src/bus/miseAJourFavorisUtilisateur';
 
 describe('La ressource des services et ressources favoris', () => {
   let serveur: Express;

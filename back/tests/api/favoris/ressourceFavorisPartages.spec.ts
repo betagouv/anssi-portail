@@ -1,13 +1,13 @@
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
-import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
-import { creeServeur } from '../../src/api/msc';
-import { configurationDeTestDuServeur } from './fauxObjets';
+import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire';
+import { creeServeur } from '../../../src/api/msc';
+import { configurationDeTestDuServeur } from '../fauxObjets';
 import request from 'supertest';
 import assert from 'node:assert';
-import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { jeanneDupont } from './objetsPretsALEmploi';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
+import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
+import { jeanneDupont } from '../objetsPretsALEmploi';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { randomUUID } from 'node:crypto';
 
 describe('La ressource des favoris partagés', () => {
