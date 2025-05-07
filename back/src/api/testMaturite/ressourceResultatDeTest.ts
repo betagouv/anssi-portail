@@ -1,6 +1,6 @@
-import { ConfigurationServeur } from './configurationServeur';
+import { ConfigurationServeur } from '../configurationServeur';
 import { Router } from 'express';
-import { ProprieteTestRevendiquee } from '../bus/evenements/proprieteTestRevendiquee';
+import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee';
 
 const ressourceResultatDeTest = ({
   entrepotResultatTest,
