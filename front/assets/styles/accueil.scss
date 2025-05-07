@@ -274,12 +274,32 @@ section {
   .contenu-section {
     display: grid;
     gap: 24px;
+    grid-template-areas:
+      'titre'
+      'illustration'
+      'contenu'
+      'bouton';
+
+    @include a-partir-de(lg) {
+      grid-template-areas:
+        'illustration titre'
+        'illustration contenu'
+        'illustration bouton';
+      grid-auto-columns: 384px auto;
+      row-gap: 0;
+    }
 
     h1 {
       margin: 0 0 24px;
       font-size: 2rem;
       line-height: 2.5rem;
       text-align: left;
+      grid-area: titre;
+      @include a-partir-de(lg) {
+        font-size: 1.75rem;
+        line-height: 2.25rem;
+        margin: 0;
+      }
     }
 
     ul {
@@ -291,11 +311,24 @@ section {
       justify-self: center;
       width: 100%;
       max-width: 588px;
+      grid-area: illustration;
+      @include a-partir-de(lg) {
+        align-self: center;
+      }
     }
 
     .bouton.primaire {
       margin: 16px auto;
       justify-self: center;
+      grid-area: bouton;
+      @include a-partir-de(lg) {
+        margin: 16px 0;
+        justify-self: left;
+      }
+    }
+
+    .contenu {
+      grid-area: contenu;
     }
   }
 }
