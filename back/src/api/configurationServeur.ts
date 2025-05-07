@@ -12,6 +12,7 @@ import { EntrepotFavori } from '../metier/entrepotFavori';
 import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber';
 import { CmsCrisp } from '@lab-anssi/lib';
 import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
+import { EntrepotSessionDeGroupe } from '../metier/entrepotSessionDeGroupe';
 
 export type ConfigurationServeur = {
   fournisseurChemin: FournisseurChemin;
@@ -29,6 +30,7 @@ export type ConfigurationServeur = {
   };
   entrepotResultatTest: EntrepotResultatTest;
   entrepotFavori: EntrepotFavori;
+  entrepotSessionDeGroupe: EntrepotSessionDeGroupe;
   adaptateurProfilAnssi: AdaptateurProfilAnssi;
   adaptateurMonAideCyber: AdaptateurMonAideCyber;
   cmsCrisp: CmsCrisp;

@@ -30,6 +30,7 @@ import { ressourceFavorisPartages } from './favoris/ressourceFavorisPartages';
 import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTest';
 import { ressourceResultatDeTest } from './testMaturite/ressourceResultatDeTest';
 import { ressourceDernierResultatDeTest } from './testMaturite/ressourceDernierResultatDeTest';
+import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -191,6 +192,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     '/api/resultats-test/dernier',
     ressourceDernierResultatDeTest(configurationServeur)
   );
+  app.use("/api/sessions-groupe", ressourceSessionsDeGroupe(configurationServeur))
 
   app.use(
     '/api/annuaire/organisations',
