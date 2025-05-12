@@ -1,14 +1,24 @@
 import { EntrepotSessionDeGroupe } from '../metier/entrepotSessionDeGroupe';
 import { SessionDeGroupe } from '../metier/sessionDeGroupe';
+import Knex from 'knex';
+import config from '../../knexfile';
 
 export class EntrepotSessionDeGroupePostgres
   implements EntrepotSessionDeGroupe
 {
-  async tous(): Promise<SessionDeGroupe[]> {
-    throw new Error('Non implémentée');
+  knex: Knex.Knex;
+
+  constructor() {
+    this.knex = Knex(config);
   }
 
-  async ajoute(_sessionDeGroupe: SessionDeGroupe): Promise<void> {
-    throw new Error('Non implémentée');
+  async tous(): Promise<SessionDeGroupe[]> {
+    return this.knex('sessions_groupe');
+  }
+
+  async ajoute(sessionDeGroupe: SessionDeGroupe): Promise<void> {
+    await this.knex('sessions_groupe').insert({
+      code: sessionDeGroupe.code,
+    });
   }
 }
