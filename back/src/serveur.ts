@@ -72,6 +72,9 @@ creeServeur({
   adaptateurMonAideCyber,
   adaptateurEnvironnement,
   cmsCrisp,
+  generateurCodeSessionDeGroupe: {
+    genere: async () => ""
+  }
 }).listen(3000, () => {
   console.log('Le serveur écoute sur le port 3000');
 });

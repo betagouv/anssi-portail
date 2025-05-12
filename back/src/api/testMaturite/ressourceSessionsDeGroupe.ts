@@ -4,11 +4,15 @@ import { SessionDeGroupe } from '../../metier/sessionDeGroupe';
 
 export const ressourceSessionsDeGroupe = ({
   entrepotSessionDeGroupe,
+  generateurCodeSessionDeGroupe,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post('/', async (_: Request, reponse: Response) => {
-    await entrepotSessionDeGroupe.ajoute(new SessionDeGroupe());
-    reponse.sendStatus(201);
+    const sessionDeGroupe = await SessionDeGroupe.cree(
+      generateurCodeSessionDeGroupe
+    );
+    await entrepotSessionDeGroupe.ajoute(sessionDeGroupe);
+    reponse.status(201).send({ code: sessionDeGroupe.code });
   });
   return routeur;
 };
