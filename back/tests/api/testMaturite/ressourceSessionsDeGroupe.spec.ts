@@ -6,16 +6,20 @@ import { configurationDeTestDuServeur } from '../fauxObjets';
 import { Express } from 'express';
 import { EntrepotSessionDeGroupe } from '../../../src/metier/entrepotSessionDeGroupe';
 import { EntrepotSessionDeGroupeMemoire } from '../../persistance/EntrepotSessionDeGroupeMemoire';
+import { GenerateurCodeSessionDeGroupe } from '../../../src/metier/generateurCodeSessionDeGroupe';
 
 describe('La ressource qui gère les sessions de groupe', () => {
   let serveur: Express;
   let entrepotSessionDeGroupe: EntrepotSessionDeGroupe;
+  let generateurCodeSessionDeGroupe: GenerateurCodeSessionDeGroupe;
 
   beforeEach(() => {
     entrepotSessionDeGroupe = new EntrepotSessionDeGroupeMemoire();
+    generateurCodeSessionDeGroupe = { genere: async () => '' };
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       entrepotSessionDeGroupe,
+      generateurCodeSessionDeGroupe,
     });
   });
 
@@ -32,6 +36,16 @@ describe('La ressource qui gère les sessions de groupe', () => {
       await request(serveur).post('/api/sessions-groupe').send({});
 
       assert.equal((await entrepotSessionDeGroupe.tous()).length, 1);
+    });
+
+    it('répond avec le code de la session de groupe', async () => {
+      generateurCodeSessionDeGroupe.genere = async () => 'AB1XI5';
+
+      const reponse = await request(serveur)
+        .post('/api/sessions-groupe')
+        .send({});
+
+      assert.deepEqual(reponse.body, { code: 'AB1XI5' });
     });
   });
 });

@@ -105,6 +105,10 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   }),
 };
 
+const fauxGenerateurCodeSessionDeGroupe = {
+  genere: async () => 'hello',
+};
+
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   fournisseurChemin: fauxFournisseurDeChemin,
   middleware: fabriqueMiddleware({
@@ -129,4 +133,5 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   entrepotSessionDeGroupe: new EntrepotSessionDeGroupeMemoire(),
   cmsCrisp: new MockCmsCrisp(),
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
+  generateurCodeSessionDeGroupe: fauxGenerateurCodeSessionDeGroupe,
 };

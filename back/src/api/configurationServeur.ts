@@ -13,6 +13,7 @@ import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber';
 import { CmsCrisp } from '@lab-anssi/lib';
 import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import { EntrepotSessionDeGroupe } from '../metier/entrepotSessionDeGroupe';
+import { GenerateurCodeSessionDeGroupe } from '../metier/generateurCodeSessionDeGroupe';
 
 export type ConfigurationServeur = {
   fournisseurChemin: FournisseurChemin;
@@ -35,4 +36,5 @@ export type ConfigurationServeur = {
   adaptateurMonAideCyber: AdaptateurMonAideCyber;
   cmsCrisp: CmsCrisp;
   adaptateurEnvironnement: AdaptateurEnvironnement;
+  generateurCodeSessionDeGroupe: GenerateurCodeSessionDeGroupe;
 };
