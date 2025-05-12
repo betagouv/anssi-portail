@@ -21,4 +21,8 @@ export class EntrepotSessionDeGroupePostgres
       code: sessionDeGroupe.code,
     });
   }
+
+  parCode(code: string): Promise<SessionDeGroupe | undefined> {
+    return this.knex('sessions_groupe').where({ code }).first();
+  }
 }

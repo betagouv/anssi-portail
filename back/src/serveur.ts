@@ -19,6 +19,7 @@ import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 import { CmsCrisp } from '@lab-anssi/lib';
 import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres';
+import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement();
@@ -46,6 +47,8 @@ if (!crispIdSite || !crispCleApi) {
 
 const cmsCrisp = new CmsCrisp(crispIdSite, crispCleApi);
 
+const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
+
 creeServeur({
   fournisseurChemin,
   middleware: fabriqueMiddleware({ adaptateurJWT, fournisseurChemin }),
@@ -68,13 +71,13 @@ creeServeur({
   adaptateurProfilAnssi,
   entrepotResultatTest: new EntrepotResultatTestPostgres(),
   entrepotFavori: new EntrepotFavoriPostgres(),
-  entrepotSessionDeGroupe: new EntrepotSessionDeGroupePostgres(),
+  entrepotSessionDeGroupe,
   adaptateurMonAideCyber,
   adaptateurEnvironnement,
   cmsCrisp,
-  generateurCodeSessionDeGroupe: {
-    genere: async () => ""
-  }
+  generateurCodeSessionDeGroupe: new GenerateurAleatoireCodeSessionDeGroupe(
+    entrepotSessionDeGroupe
+  ),
 }).listen(3000, () => {
   console.log('Le serveur écoute sur le port 3000');
 });
