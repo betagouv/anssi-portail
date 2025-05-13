@@ -12,7 +12,8 @@ export default defineConfig({
         'creation-compte': 'src/main-creation-compte.ts',
         'niveaux-maturite': 'src/main-niveaux-maturite.ts',
         'test-maturite': 'src/main-test-maturite.ts',
-        'demande-aide-mon-aide-cyber': 'src/main-demande-aide-mon-aide-cyber.ts',
+        'demande-aide-mon-aide-cyber':
+          'src/main-demande-aide-mon-aide-cyber.ts',
         catalogue: 'src/main-catalogue.ts',
         contacts: 'src/main-contacts.ts',
         favoris: 'src/main-favoris.ts',
@@ -24,6 +25,7 @@ export default defineConfig({
         'bouton-favori': 'src/main-bouton-favori.ts',
         'fil-ariane': 'src/main-fil-ariane.ts',
         'promouvoir-msc': 'src/main-promouvoir-msc.ts',
+        'session-groupe': 'src/main-session-groupe.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
