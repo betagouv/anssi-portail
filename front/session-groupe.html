@@ -1,0 +1,31 @@
+---
+permalink: /session-groupe/
+layout: defaut
+titreHtml: 'Session de groupe | MesServicesCyber'
+---
+
+<script type="module" crossorigin src="/lib-svelte/dist/assets/fil-ariane.js"></script>
+
+<script type="application/json" id="donnees">
+  {
+    "branche": {
+      "nom": "Tester votre maturité cyber",
+      "lien": "/test-maturite/"
+    },
+    "feuille": "Session de groupe"
+  }
+</script>
+
+<section class="chapeau fond-sombre">
+  <div class="contenu-section">
+    <div id="fil-ariane"></div>
+    <h1>Session de groupe</h1>
+    <p>
+      Déterminez la maturité cyber de votre organisation en 5 minutes.
+    </p>
+  </div>
+</section>
+
+<script type="module" crossorigin src="/lib-svelte/dist/assets/session-groupe.js"></script>
+
+<div id="session-groupe"></div>
