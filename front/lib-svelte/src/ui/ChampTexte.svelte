@@ -30,6 +30,7 @@
   on:focus
   {autocomplete}
   {disabled}
+  maxlength={$$restProps.maxlength}
   class={'champTexte ' + ($$restProps.class ?? '')}
 />
 
