@@ -18,7 +18,6 @@
 </script>
 
 <input
-  class="champTexte"
   use:typeChamp
   {id}
   name={nom}
@@ -30,7 +29,8 @@
   on:input
   on:focus
   {autocomplete}
-  disabled={disabled}
+  {disabled}
+  class={'champTexte ' + ($$restProps.class ?? '')}
 />
 
 <style lang="scss">
