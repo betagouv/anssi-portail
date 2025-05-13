@@ -2,8 +2,16 @@
   import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
+  import Formulaire from '../ui/Formulaire.svelte';
 
   let codeSession = '';
+
+  const saisieCodeSession = () => {
+    if (codeSession.length === 3) {
+      codeSession += '-';
+    }
+    codeSession = codeSession.toUpperCase();
+  };
 </script>
 
 <section>
@@ -36,26 +44,32 @@
         Saisissez-le ci-dessous pour accéder au test de maturité cyber lancé par
         votre animateur. Votre résultat est anonyme.
       </p>
-      <ControleFormulaire
-        libelle="Code de session"
-        sousTitre="Saisissez le code fourni par votre organisateur"
-        requis
-      >
-        <ChampTexte
-          id="codeSession"
-          nom="codeSession"
-          requis={true}
-          bind:valeur={codeSession}
-          messageErreur="Renseigner un code de session en cours valide."
-          class="champ-session-groupe"
+      <Formulaire>
+        <ControleFormulaire
+          libelle="Code de session"
+          sousTitre="Saisissez le code fourni par votre organisateur"
+          requis
+        >
+          <ChampTexte
+            id="codeSession"
+            nom="codeSession"
+            requis={true}
+            modele={'[A-Z1-9]{3}-[A-Z1-9]{3}'}
+            bind:valeur={codeSession}
+            messageErreur="Renseigner un code de session en cours valide."
+            class="champ-session-groupe"
+            autocomplete="off"
+            on:input={saisieCodeSession}
+            maxlength="7"
+          />
+        </ControleFormulaire>
+        <Bouton
+          titre="Débuter le test"
+          type="primaire"
+          taille="md"
+          classe="bouton-session-groupe"
         />
-      </ControleFormulaire>
-      <Bouton
-        titre="Débuter le test"
-        type="primaire"
-        taille="md"
-        classe="bouton-session-groupe"
-      />
+      </Formulaire>
     </div>
   </div>
 </section>
@@ -78,6 +92,7 @@
     padding: 40px;
     border: 1px solid var(--gris-clair);
     border-radius: 8px;
+
     &.organisateur {
       background-color: #f6f6f6;
       border-color: #f6f6f6;
