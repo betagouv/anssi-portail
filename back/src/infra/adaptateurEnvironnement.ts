@@ -1,4 +1,5 @@
 type AdaptateurEnvironnement = {
+  urlBaseMSC: () => string;
   oidc: () => {
     urlRedirectionApresAuthentification: () => string;
     urlRedirectionApresDeconnexion: () => string;
@@ -21,6 +22,7 @@ type AdaptateurEnvironnement = {
 };
 
 const adaptateurEnvironnement: AdaptateurEnvironnement = {
+  urlBaseMSC: () => process.env.URL_BASE_MSC || '',
   oidc: () => ({
     urlRedirectionApresAuthentification: () =>
       `${process.env.URL_BASE_MSC}/oidc/apres-authentification`,

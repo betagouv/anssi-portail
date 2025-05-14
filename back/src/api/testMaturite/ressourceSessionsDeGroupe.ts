@@ -4,6 +4,7 @@ import { SessionDeGroupe } from '../../metier/sessionDeGroupe';
 
 export const ressourceSessionsDeGroupe = ({
   entrepotSessionDeGroupe,
+  adaptateurEnvironnement,
   generateurCodeSessionDeGroupe,
 }: ConfigurationServeur) => {
   const routeur = Router();
@@ -12,7 +13,10 @@ export const ressourceSessionsDeGroupe = ({
       generateurCodeSessionDeGroupe
     );
     await entrepotSessionDeGroupe.ajoute(sessionDeGroupe);
-    reponse.status(201).send({ code: sessionDeGroupe.code });
+    reponse.status(201).send({
+      code: sessionDeGroupe.code,
+      lienParticipant: `${adaptateurEnvironnement.urlBaseMSC()}/test-maturite?session-groupe=${sessionDeGroupe.code}`,
+    });
   });
   return routeur;
 };

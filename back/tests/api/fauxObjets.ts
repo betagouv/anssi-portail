@@ -84,6 +84,7 @@ export const fauxMiddleware: Middleware = {
 const fauxAdaptateurMonAideCyber = { creeDemandeAide: () => Promise.resolve() };
 
 export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
+  urlBaseMSC: () => 'http://localhost',
   oidc: () => ({
     urlRedirectionApresAuthentification: () => '',
     urlRedirectionApresDeconnexion: () => '',
