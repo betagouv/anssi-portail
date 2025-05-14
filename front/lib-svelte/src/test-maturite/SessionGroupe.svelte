@@ -90,7 +90,7 @@
             id="codeSession"
             nom="codeSession"
             requis={true}
-            modele={'[A-Z1-9]{3}-[A-Z1-9]{3}'}
+            modele={'[A-Z1-9]{3}-?[A-Z1-9]{3}'}
             bind:valeur={codeSession}
             messageErreur="Renseigner un code de session en cours valide."
             class="champ-session-groupe"
