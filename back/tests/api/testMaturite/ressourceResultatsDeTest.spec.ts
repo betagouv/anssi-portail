@@ -33,6 +33,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       'adoption-solutions': 2,
       posture: 3,
     },
+    codeSessionGroupe: undefined,
   };
 
   beforeEach(() => {
@@ -54,35 +55,60 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       assert.equal(reponse.status, 201);
     });
 
-    it('publie un évènement du bus TestRealise', async () => {
-      await request(serveur)
-        .post('/api/resultats-test')
-        .send({
-          region: 'FR-NOR',
-          secteur: 'J',
-          tailleOrganisation: '51',
-          reponses: {
-            'prise-en-compte-risque': 2,
-            pilotage: 3,
-            budget: 5,
-            'ressources-humaines': 3,
-            'adoption-solutions': 2,
-            posture: 3,
-          },
-        });
+    describe('concernant la publication des evenements', () => {
+      it('publie un évènement du bus TestRealise', async () => {
+        await request(serveur)
+          .post('/api/resultats-test')
+          .send({
+            region: 'FR-NOR',
+            secteur: 'J',
+            tailleOrganisation: '51',
+            reponses: {
+              'prise-en-compte-risque': 2,
+              pilotage: 3,
+              budget: 5,
+              'ressources-humaines': 3,
+              'adoption-solutions': 2,
+              posture: 3,
+            },
+          });
 
-      busEvenements.aRecuUnEvenement(TestRealise);
-      const evenement = busEvenements.recupereEvenement(TestRealise);
-      assert.equal(evenement!.region, 'FR-NOR');
-      assert.equal(evenement!.secteur, 'J');
-      assert.equal(evenement!.tailleOrganisation, '51');
-      assert.deepEqual(evenement!.reponses, {
-        'prise-en-compte-risque': 2,
-        pilotage: 3,
-        budget: 5,
-        'ressources-humaines': 3,
-        'adoption-solutions': 2,
-        posture: 3,
+        busEvenements.aRecuUnEvenement(TestRealise);
+        const evenement = busEvenements.recupereEvenement(TestRealise);
+        assert.equal(evenement!.region, 'FR-NOR');
+        assert.equal(evenement!.secteur, 'J');
+        assert.equal(evenement!.tailleOrganisation, '51');
+        assert.deepEqual(evenement!.reponses, {
+          'prise-en-compte-risque': 2,
+          pilotage: 3,
+          budget: 5,
+          'ressources-humaines': 3,
+          'adoption-solutions': 2,
+          posture: 3,
+        });
+      });
+
+      it('publie un évènement du bus TestRealise avec un code de session de groupe ', async () => {
+        await request(serveur)
+          .post('/api/resultats-test')
+          .send({
+            region: 'FR-NOR',
+            secteur: 'J',
+            tailleOrganisation: '51',
+            reponses: {
+              'prise-en-compte-risque': 2,
+              pilotage: 3,
+              budget: 5,
+              'ressources-humaines': 3,
+              'adoption-solutions': 2,
+              posture: 3,
+            },
+            codeSessionGroupe: 'ABC2ED',
+          });
+
+        busEvenements.aRecuUnEvenement(TestRealise);
+        const evenement = busEvenements.recupereEvenement(TestRealise);
+        assert.equal(evenement!.codeSessionGroupe, 'ABC2ED');
       });
     });
 
@@ -287,6 +313,15 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
             reponse.body.erreur,
             'Les valeurs de réponses doivent être comprises entre 1 et 5'
           );
+        });
+
+        it('aseptise le code de session de groupe', async () => {
+          await requeteAvecDonneeIncorrecte({
+            codeSessionGroupe: ' ABC2ED ',
+          });
+
+          const evenement = busEvenements.recupereEvenement(TestRealise);
+          assert.equal(evenement!.codeSessionGroupe, 'ABC2ED');
         });
       });
     });
