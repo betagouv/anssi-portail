@@ -12,12 +12,22 @@
   export let autocomplete: 'on' | 'off' | '' = '';
   export let disabled: boolean = false;
 
+  let element: HTMLInputElement;
+
+  export const setValiditePersonnalisee = (messageErreur: string) => {
+    element.setCustomValidity(messageErreur);
+    if (messageErreur) {
+      element.checkValidity();
+    }
+  };
+
   const typeChamp = (node: HTMLInputElement) => {
     node.type = type;
   };
 </script>
 
 <input
+  bind:this={element}
   use:typeChamp
   {id}
   name={nom}
