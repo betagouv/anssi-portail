@@ -1,11 +1,14 @@
 <script lang="ts">
+  import axios from 'axios';
   import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
   import ModaleNouvelleSessionGroupe from './ModaleNouvelleSessionGroupe.svelte';
+  import type { ReponseCreationSessionGroupe } from './SessionGroupe';
 
   let codeSession = '';
+  let creationNouvelleSession = false;
   let modaleNouvelleSession: ModaleNouvelleSessionGroupe;
 
   const saisieCodeSession = () => {
@@ -14,8 +17,16 @@
     }
     codeSession = codeSession.toUpperCase();
   };
-  const nouvelleSession = () => {
-    modaleNouvelleSession.ouvre();
+  const nouvelleSession = async () => {
+    try {
+      creationNouvelleSession = true;
+      const reponse = await axios.post<ReponseCreationSessionGroupe>(
+        '/api/sessions-groupe'
+      );
+      modaleNouvelleSession.ouvre(reponse.data);
+    } finally {
+      creationNouvelleSession = false;
+    }
   };
 </script>
 
@@ -37,6 +48,7 @@
         type="secondaire"
         taille="md"
         classe="bouton-session-groupe"
+        enCoursEnvoi={creationNouvelleSession}
         on:click={nouvelleSession}
       />
       <ModaleNouvelleSessionGroupe bind:this={modaleNouvelleSession} />

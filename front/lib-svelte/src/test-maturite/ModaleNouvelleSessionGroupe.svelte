@@ -1,10 +1,15 @@
 <script lang="ts">
 
   import Bouton from '../ui/Bouton.svelte';
+    import type { ReponseCreationSessionGroupe } from './SessionGroupe';
 
   let modaleNouvelleSession: HTMLDialogElement;
+  let codeSession: string;
+  let lienSession: string;
 
-  export const ouvre = () => {
+  export const ouvre = ({code, lienParticipant}: ReponseCreationSessionGroupe) => {
+    codeSession = code.slice(0,3) + "-" + code.slice(3) ;
+    lienSession = lienParticipant
     modaleNouvelleSession.showModal();
   };
   const ferme = () => {
@@ -21,7 +26,7 @@
         <p>Partagez ce code ou le QR code aux participants pour leur permettre d’accéder à la session de test de
           maturité
           cyber. Ce code est unique et valable pour cette session uniquement.</p>
-        <div class="code">3D8-7B3</div>
+        <div class="code">{codeSession}</div>
       </div>
       <div class="qrcode">
         <div class="conteneur-qrcode">
