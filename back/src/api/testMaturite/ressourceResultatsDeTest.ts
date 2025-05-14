@@ -65,8 +65,15 @@ const ressourceResultatsDeTest = ({
         ),
     ],
     middleware.valide(),
+    middleware.aseptise('codeSessionGroupe'),
     async (requete: Request, reponse: Response) => {
-      const { tailleOrganisation, region, secteur, reponses } = requete.body;
+      const {
+        tailleOrganisation,
+        region,
+        secteur,
+        reponses,
+        codeSessionGroupe,
+      } = requete.body;
 
       const emailUtilisateur = requete.session?.email;
       const resultatTest = new ResultatTestMaturite({
@@ -81,10 +88,11 @@ const ressourceResultatsDeTest = ({
 
       await busEvenements.publie(
         new TestRealise({
-          region: region,
-          secteur: secteur,
-          tailleOrganisation: tailleOrganisation,
-          reponses: reponses,
+          region,
+          secteur,
+          tailleOrganisation,
+          reponses,
+          codeSessionGroupe,
         })
       );
       if (emailUtilisateur) {

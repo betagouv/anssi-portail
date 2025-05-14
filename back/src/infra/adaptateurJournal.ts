@@ -45,6 +45,7 @@ interface DonneesEvenementTestRealise extends DonneesCommunesEvenement {
     secteur: CodeSecteur;
     tailleOrganisation: CodeTrancheEffectif;
     reponses: ReponsesTestMaturite;
+    codeSessionGroupe?: string | undefined;
   };
   type: 'TEST_REALISE';
 }
