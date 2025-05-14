@@ -3,14 +3,19 @@
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
+  import ModaleNouvelleSessionGroupe from './ModaleNouvelleSessionGroupe.svelte';
 
   let codeSession = '';
+  let modaleNouvelleSession: ModaleNouvelleSessionGroupe;
 
   const saisieCodeSession = () => {
     if (codeSession.length === 3) {
       codeSession += '-';
     }
     codeSession = codeSession.toUpperCase();
+  };
+  const nouvelleSession = () => {
+    modaleNouvelleSession.ouvre();
   };
 </script>
 
@@ -32,7 +37,9 @@
         type="secondaire"
         taille="md"
         classe="bouton-session-groupe"
+        on:click={nouvelleSession}
       />
+      <ModaleNouvelleSessionGroupe bind:this={modaleNouvelleSession} />
     </div>
 
     <div class="bloc-role participant">
