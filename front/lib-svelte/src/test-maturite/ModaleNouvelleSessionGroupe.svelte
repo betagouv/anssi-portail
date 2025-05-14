@@ -1,36 +1,41 @@
 <script lang="ts">
-
+  import qrcode from 'qrcode';
   import Bouton from '../ui/Bouton.svelte';
-    import type { ReponseCreationSessionGroupe } from './SessionGroupe';
+  import type { ReponseCreationSessionGroupe } from './SessionGroupe';
 
   let modaleNouvelleSession: HTMLDialogElement;
   let codeSession: string;
-  let lienSession: string;
+  let canvas: HTMLCanvasElement;
 
-  export const ouvre = ({code, lienParticipant}: ReponseCreationSessionGroupe) => {
-    codeSession = code.slice(0,3) + "-" + code.slice(3) ;
-    lienSession = lienParticipant
+  export const ouvre = ({
+    code,
+    lienParticipant,
+  }: ReponseCreationSessionGroupe) => {
+    codeSession = code.slice(0, 3) + '-' + code.slice(3);
+    qrcode.toCanvas(canvas, lienParticipant, { width: 148, margin: 0 });
     modaleNouvelleSession.showModal();
   };
   const ferme = () => {
     modaleNouvelleSession.close();
   };
-
 </script>
+
 <dialog bind:this={modaleNouvelleSession}>
   <div class="modale">
     <button class="fermer" on:click={ferme}>Fermer</button>
     <h4>Nouvelle session de groupe</h4>
     <div class="contenu">
       <div class="information">
-        <p>Partagez ce code ou le QR code aux participants pour leur permettre d’accéder à la session de test de
-          maturité
-          cyber. Ce code est unique et valable pour cette session uniquement.</p>
+        <p>
+          Partagez ce code ou le QR code aux participants pour leur permettre
+          d’accéder à la session de test de maturité cyber. Ce code est unique
+          et valable pour cette session uniquement.
+        </p>
         <div class="code">{codeSession}</div>
       </div>
       <div class="qrcode">
         <div class="conteneur-qrcode">
-          <img src="/assets/images/qr-code-demo.svg" alt="QR code" />
+          <canvas id="canvas" bind:this={canvas}></canvas>
         </div>
         <button>Télécharger le QR Code</button>
       </div>
@@ -124,7 +129,7 @@
       padding: 16px;
       margin-bottom: 8px;
 
-      img {
+      canvas {
         width: 148px;
         height: 148px;
       }
@@ -153,5 +158,4 @@
     align-items: center;
     gap: 16px;
   }
-
 </style>
