@@ -16,6 +16,7 @@
   import PartageTest from './PartageTest.svelte';
   import OngletsTest from './OngletsTest.svelte';
   import ComparaisonTest from './ComparaisonTest.svelte';
+  import { onMount } from 'svelte';
 
   let afficheResultats = false;
   let introFaite = false;
@@ -27,6 +28,7 @@
   questionnaireStore.initialise();
 
   let reponseCourante: number;
+  let codeSessionGroupe: string | undefined;
 
   actualiseReponseCourante();
 
@@ -66,6 +68,7 @@
       secteur,
       region,
       tailleOrganisation,
+      codeSessionGroupe,
     });
     const { id } = reponse.data;
     const estConnecte = await utilisateurEstConnecte();
@@ -89,6 +92,14 @@
   }
 
   let ongletActif: 'votre-organisation' | 'comparaison' = 'votre-organisation';
+
+  onMount(() => {
+    const parametres = new URLSearchParams(window.location.search);
+    codeSessionGroupe = parametres.get('session-groupe') ?? undefined;
+    if (codeSessionGroupe) {
+      introFaite = true;
+    }
+  });
 </script>
 
 {#if afficheResultats}
