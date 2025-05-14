@@ -5,19 +5,24 @@
 
   let modaleNouvelleSession: HTMLDialogElement;
   let codeSession: string;
+  let codeSessionFormate: string;
   let canvas: HTMLCanvasElement;
 
   export const ouvre = ({
     code,
     lienParticipant,
   }: ReponseCreationSessionGroupe) => {
-    codeSession = code.slice(0, 3) + '-' + code.slice(3);
+    codeSession = code;
     qrcode.toCanvas(canvas, lienParticipant, { width: 148, margin: 0 });
     modaleNouvelleSession.showModal();
   };
+
   const ferme = () => {
     modaleNouvelleSession.close();
   };
+
+  $: codeSessionFormate =
+    codeSession && codeSession.slice(0, 3) + '-' + codeSession.slice(3);
 </script>
 
 <dialog bind:this={modaleNouvelleSession}>
@@ -31,7 +36,7 @@
           d’accéder à la session de test de maturité cyber. Ce code est unique
           et valable pour cette session uniquement.
         </p>
-        <div class="code">{codeSession}</div>
+        <div class="code">{codeSessionFormate}</div>
       </div>
       <div class="qrcode">
         <div class="conteneur-qrcode">
@@ -42,7 +47,10 @@
     </div>
     <div class="actions">
       <Bouton titre="Annuler" type="secondaire" taille="md" on:click={ferme} />
-      <Bouton titre="Débuter le test" type="primaire" taille="md" />
+      <a
+        href={`/test-maturite?session-groupe=${codeSession}&organisateur`}
+        class="bouton primaire taille-moyenne">Débuter le test</a
+      >
     </div>
   </div>
 </dialog>
