@@ -10,13 +10,17 @@
   let codeSession = '';
   let creationNouvelleSession = false;
   let modaleNouvelleSession: ModaleNouvelleSessionGroupe;
+  let champCodeSession: ChampTexte;
+  let formulaire: Formulaire;
 
   const saisieCodeSession = () => {
     if (codeSession.length === 3) {
       codeSession += '-';
     }
     codeSession = codeSession.toUpperCase();
+    champCodeSession.setValiditePersonnalisee('');
   };
+
   const nouvelleSession = async () => {
     try {
       creationNouvelleSession = true;
@@ -26,6 +30,18 @@
       modaleNouvelleSession.ouvre(reponse.data);
     } finally {
       creationNouvelleSession = false;
+    }
+  };
+
+  const rejoindreSession = async () => {
+    if (formulaire.estValide()) {
+      const codeSansTiret = codeSession.replaceAll('-', '');
+      try {
+        await axios.get(`/api/sessions-groupe/${codeSansTiret}`);
+        window.location.href = `/test-maturite?session-groupe=${codeSansTiret}`;
+      } catch {
+        champCodeSession.setValiditePersonnalisee('Code non trouvé');
+      }
     }
   };
 </script>
@@ -63,13 +79,14 @@
         Saisissez-le ci-dessous pour accéder au test de maturité cyber lancé par
         votre animateur. Votre résultat est anonyme.
       </p>
-      <Formulaire>
+      <Formulaire bind:this={formulaire}>
         <ControleFormulaire
           libelle="Code de session"
           sousTitre="Saisissez le code fourni par votre organisateur"
           requis
         >
           <ChampTexte
+            bind:this={champCodeSession}
             id="codeSession"
             nom="codeSession"
             requis={true}
@@ -87,6 +104,7 @@
           type="primaire"
           taille="md"
           classe="bouton-session-groupe"
+          on:click={rejoindreSession}
         />
       </Formulaire>
     </div>
