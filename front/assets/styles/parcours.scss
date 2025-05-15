@@ -19,14 +19,6 @@ section {
   position: sticky;
   top: 0;
   z-index: 2;
-
-  .groupe-boutons {
-    .bouton {
-      text-wrap: nowrap;
-      flex: 1 0 185px;
-      box-sizing: border-box;
-    }
-  }
 }
 
 section.action {
