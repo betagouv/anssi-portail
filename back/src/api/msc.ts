@@ -109,6 +109,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'cyberdepart',
     'promouvoir-messervicescyber',
     'session-groupe',
+    'resultats-session-groupe'
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
