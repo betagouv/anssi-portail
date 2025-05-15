@@ -81,6 +81,10 @@
     }
   }
 
+  async function afficheResultatSessionGroupe() {
+    window.location.href = `/resultats-session-groupe?code=${codeSessionGroupe}`;
+  }
+
   function debuteTeste() {
     introFaite = true;
   }
@@ -209,12 +213,21 @@
                       value="Précédent"
                       on:click={questionnaireStore.reviensEnArriere}
                     />
-                    <input
-                      type="button"
-                      class="bouton primaire taille-moyenne"
-                      value="Obtenir mon résultat"
-                      on:click={obtiensResultat}
-                    />
+                    {#if enSessionGroupe}
+                      <input
+                        type="button"
+                        class="bouton primaire taille-moyenne"
+                        value="Afficher les résultats"
+                        on:click={afficheResultatSessionGroupe}
+                      />
+                    {:else}
+                      <input
+                        type="button"
+                        class="bouton primaire taille-moyenne"
+                        value="Obtenir mon résultat"
+                        on:click={obtiensResultat}
+                      />
+                    {/if}
                   </div>
                 </div>
               {/if}
