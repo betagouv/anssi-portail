@@ -1,11 +1,8 @@
 <script lang="ts">
   import { profilStore } from '../stores/profil.store.js';
+  import type { Branche } from './filAriane';
 
   export let feuille: string;
-  type Branche = {
-    nom: string;
-    lien: string | undefined;
-  };
   export let branche: undefined | Branche = undefined;
   export let brancheConnectee: undefined | Branche = undefined;
 </script>
