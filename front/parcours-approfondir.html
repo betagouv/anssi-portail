@@ -41,11 +41,11 @@ titreHtml: 'Cybersécurité : approfondir ! | MesServicesCyber'
 
 <section class="sommaire">
   <div class="contenu-section">
-    <div class="groupe-boutons">
+    <div class="controle-segmente">
       {% for action in site.data.parcours-approfondir %}
       <a
         href="#{{action[0]}}"
-        class="{%if forloop.first%}actif{% endif %} bouton secondaire"
+        class="{%if forloop.first%}actif{% endif %} bouton-segmente"
         >{{action[1].titre}}</a
       >
       {% endfor %}

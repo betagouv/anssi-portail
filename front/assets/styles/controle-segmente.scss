@@ -1,0 +1,65 @@
+---
+---
+.controle-segmente {
+  display: flex;
+  flex-direction: row;
+
+  .bouton-segmente {
+    border-radius: 0;
+    font-family: 'Marianne';
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-left-style: none;
+    color: var(--noir);
+    padding: 16px 24px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    background: white;
+    text-wrap: nowrap;
+    flex: 1 0 185px;
+    box-sizing: border-box;
+
+    &:first-of-type {
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+      border-left-style: solid;
+    }
+
+    &:last-of-type {
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+
+    &:not([disabled]).actif {
+      background: var(--jaune-msc);
+
+      &:not([disabled]):hover {
+        background: var(--jaune-msc-hover);
+      }
+
+      &:not([disabled]):active {
+        background: var(--jaune-msc-clique);
+      }
+    }
+
+    &[disabled] {
+      border-color: var(--gris-desactive-fond);
+      background: white;
+      color: var(--gris-desactive-texte);
+      cursor: not-allowed;
+    }
+
+    &:not([disabled]):hover {
+      background: var(--gris-secondaire-fond-hover);
+    }
+
+    &:not([disabled]):active {
+      background: var(--gris-secondaire-fond-clique);
+    }
+  }
+}
