@@ -7,9 +7,9 @@
     'votre-organisation';
 </script>
 
-<section class="section-onglets">
-  <div class="contenu-section">
-    {#if $profilStore}
+{#if $profilStore}
+  <section class="section-onglets">
+    <div class="contenu-section">
       <ConteneurOnglets>
         <Onglet
           bind:ongletActif
@@ -22,6 +22,6 @@
           labelOnglet="Comparaison avec d’autres entités"
         ></Onglet>
       </ConteneurOnglets>
-    {/if}
-  </div>
-</section>
+    </div>
+  </section>
+{/if}
