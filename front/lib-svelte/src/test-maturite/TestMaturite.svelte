@@ -104,6 +104,7 @@
   });
 
   $: organisateurSessionGroupe = codeSessionGroupe && organisateurSession;
+  $: enSessionGroupe = !!codeSessionGroupe;
 </script>
 
 {#if afficheResultats}
@@ -112,7 +113,15 @@
   <Hero
     titre="Test de maturité cyber"
     description="Obtenez en 5 minutes une évaluation indicative de la maturité cyber de votre organisation."
-    ariane="Tester votre maturité cyber"
+    ariane={enSessionGroupe
+      ? 'Session de groupe'
+      : 'Tester votre maturité cyber'}
+    arianeBranche={enSessionGroupe
+      ? { nom: 'Tester votre maturité cyber', lien: '/test-maturite' }
+      : undefined}
+    arianeBrancheConnectee={enSessionGroupe
+      ? { nom: 'Maturité cyber', lien: '/ma-maturite' }
+      : undefined}
   />
 
   <OngletsTest bind:ongletActif />
