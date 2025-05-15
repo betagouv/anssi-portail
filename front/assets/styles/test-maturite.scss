@@ -38,6 +38,12 @@ section {
     display: flex;
     flex-direction: column;
     gap: 24px;
+  }
+
+  .contenu-test {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 
     @include a-partir-de(lg) {
       flex-direction: row;
@@ -504,6 +510,7 @@ section {
 
 .encart.fond-clair {
   background: var(--jaune-msc) url('/assets/images/motif-fond-opacite-30.png');
+
   .cyber-depart {
     border-bottom-color: var(--noir);
   }
@@ -650,6 +657,7 @@ section {
     margin-bottom: 12px;
   }
 }
+
 .boutons-partage {
   padding: 0;
   display: flex;
@@ -709,6 +717,7 @@ section {
     align-items: center;
     text-align: center;
   }
+
   img {
     max-width: 282px;
   }

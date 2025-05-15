@@ -29,6 +29,7 @@
 
   let reponseCourante: number;
   let codeSessionGroupe: string | undefined;
+  let organisateurSession = false;
 
   actualiseReponseCourante();
 
@@ -99,7 +100,10 @@
     if (codeSessionGroupe) {
       introFaite = true;
     }
+    organisateurSession = parametres.has('organisateur');
   });
+
+  $: organisateurSessionGroupe = codeSessionGroupe && organisateurSession;
 </script>
 
 {#if afficheResultats}
@@ -110,76 +114,49 @@
     description="Obtenez en 5 minutes une évaluation indicative de la maturité cyber de votre organisation."
     ariane="Tester votre maturité cyber"
   />
+
   <OngletsTest bind:ongletActif />
 
   {#if ongletActif === 'votre-organisation'}
     <section class="test-maturite">
       <div class="contenu-section">
         {#if introFaite}
-          <div class="formulaire">
-            <p class="etape">
-              Étape {$questionnaireStore.questionCourante + 1} sur 7
-            </p>
-            <h5>
-              {etapesTestMaturite[$questionnaireStore.questionCourante].titre}
-            </h5>
-            <Etapier
-              etapeCourante={$questionnaireStore.questionCourante}
-              nombreEtapes={7}
-            />
-            <h2>
-              <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-              {@html etapesTestMaturite[$questionnaireStore.questionCourante]
-                .question}
-            </h2>
+          {#if organisateurSessionGroupe}
+            <lab-anssi-alerte
+              description="En tant qu’organisateur, vos réponses ne seront pas enregistrées ni prises en compte dans les résultats du groupe."
+            ></lab-anssi-alerte>
+          {/if}
+          <div class="contenu-test">
+            <div class="formulaire">
+              <p class="etape">
+                Étape {$questionnaireStore.questionCourante + 1} sur 7
+              </p>
+              <h5>
+                {etapesTestMaturite[$questionnaireStore.questionCourante].titre}
+              </h5>
+              <Etapier
+                etapeCourante={$questionnaireStore.questionCourante}
+                nombreEtapes={7}
+              />
+              <h2>
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                {@html etapesTestMaturite[$questionnaireStore.questionCourante]
+                  .question}
+              </h2>
 
-            {#if doitMontrerPropositions()}
-              <div class="propositions">
-                {#each etapesTestMaturite[$questionnaireStore.questionCourante].propositions as proposition, index (proposition)}
-                  <label>
-                    <input
-                      type="radio"
-                      bind:group={reponseCourante}
-                      value={index}
-                    />
-                    <span>{proposition}</span>
-                  </label>
-                {/each}
-              </div>
-
-              <div class="commandes">
-                <a href="/" class="lien">Retour à l'accueil</a>
-                <input
-                  type="button"
-                  class="bouton secondaire taille-moyenne"
-                  value="Précédent"
-                  disabled={$questionnaireStore.questionCourante === 0}
-                  on:click={reviensEnArriere}
-                />
-                <input
-                  type="button"
-                  class="bouton primaire taille-moyenne"
-                  value="Question suivante"
-                  disabled={reponseCourante === null}
-                  on:click={valideReponse}
-                />
-              </div>
-            {:else}
-              <div class="informations-complementaires">
-                <label>
-                  Quel est le secteur d’activité de votre organisation&nbsp;?
-                  <SelectSecteurActivite bind:secteur />
-                </label>
-
-                <label>
-                  Dans quelle région se trouve votre organisation&nbsp;?
-                  <SelectRegion bind:region />
-                </label>
-
-                <label>
-                  Quelle est la taille de votre organisation&nbsp;?
-                  <SelectTailleOrganisation bind:tailleOrganisation />
-                </label>
+              {#if doitMontrerPropositions()}
+                <div class="propositions">
+                  {#each etapesTestMaturite[$questionnaireStore.questionCourante].propositions as proposition, index (proposition)}
+                    <label>
+                      <input
+                        type="radio"
+                        bind:group={reponseCourante}
+                        value={index}
+                      />
+                      <span>{proposition}</span>
+                    </label>
+                  {/each}
+                </div>
 
                 <div class="commandes">
                   <a href="/" class="lien">Retour à l'accueil</a>
@@ -187,23 +164,58 @@
                     type="button"
                     class="bouton secondaire taille-moyenne"
                     value="Précédent"
-                    on:click={questionnaireStore.reviensEnArriere}
+                    disabled={$questionnaireStore.questionCourante === 0}
+                    on:click={reviensEnArriere}
                   />
                   <input
                     type="button"
                     class="bouton primaire taille-moyenne"
-                    value="Obtenir mon résultat"
-                    on:click={obtiensResultat}
+                    value="Question suivante"
+                    disabled={reponseCourante === null}
+                    on:click={valideReponse}
                   />
                 </div>
-              </div>
-            {/if}
-          </div>
-          <div class="illustration">
-            <img
-              src="/assets/images/test-maturite/illustration-{idQuestionCourante}.svg"
-              alt=""
-            />
+              {:else}
+                <div class="informations-complementaires">
+                  <label>
+                    Quel est le secteur d’activité de votre organisation&nbsp;?
+                    <SelectSecteurActivite bind:secteur />
+                  </label>
+
+                  <label>
+                    Dans quelle région se trouve votre organisation&nbsp;?
+                    <SelectRegion bind:region />
+                  </label>
+
+                  <label>
+                    Quelle est la taille de votre organisation&nbsp;?
+                    <SelectTailleOrganisation bind:tailleOrganisation />
+                  </label>
+
+                  <div class="commandes">
+                    <a href="/" class="lien">Retour à l'accueil</a>
+                    <input
+                      type="button"
+                      class="bouton secondaire taille-moyenne"
+                      value="Précédent"
+                      on:click={questionnaireStore.reviensEnArriere}
+                    />
+                    <input
+                      type="button"
+                      class="bouton primaire taille-moyenne"
+                      value="Obtenir mon résultat"
+                      on:click={obtiensResultat}
+                    />
+                  </div>
+                </div>
+              {/if}
+            </div>
+            <div class="illustration">
+              <img
+                src="/assets/images/test-maturite/illustration-{idQuestionCourante}.svg"
+                alt=""
+              />
+            </div>
           </div>
         {:else}
           <div class="introduction">
