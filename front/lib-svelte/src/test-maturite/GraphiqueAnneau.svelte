@@ -1,12 +1,9 @@
 <script lang="ts">
-  export let serie;
+  import { pourcentagesSerie, type Serie, totalSerie } from './Serie';
 
-  const total = serie.reduce(
-    (valeurCumulee, element) => valeurCumulee + element.valeur,
-    0
-  );
-  const pourcentages = serie.map((d) => (d.valeur / total) * 100);
-  const pourcentagesCumules = pourcentages.reduce(
+  export let serie: Serie;
+
+  const pourcentagesCumules = pourcentagesSerie(serie).reduce(
     (pourcentagesCumules, pourcentage) => [
       ...pourcentagesCumules,
       pourcentagesCumules[pourcentagesCumules.length - 1] + pourcentage,
@@ -59,7 +56,7 @@
       x="0"
       y="0"
       text-anchor="middle"
-      font-size="40">{total}</text
+      font-size="40">{totalSerie(serie)}</text
     >
     <text
       class="libelle-total-participants"
