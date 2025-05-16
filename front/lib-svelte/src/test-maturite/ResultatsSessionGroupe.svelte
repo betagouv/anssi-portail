@@ -1,5 +1,13 @@
 <script>
+  import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import TuilesMaturiteSessionGroupe from './TuilesMaturiteSessionGroupe.svelte';
+  const serie = [
+    { libelle: 'Insuffisant', valeur: 16 },
+    { libelle: 'Émergent', valeur: 11 },
+    { libelle: 'Intermédiaire', valeur: 16 },
+    { libelle: 'Confirmé', valeur: 8 },
+    { libelle: 'Optimal', valeur: 3 },
+  ];
 </script>
 
 <section>
@@ -9,6 +17,19 @@
     <a href="/niveaux-maturite" class="lien" target="_blank">
       Les niveaux de maturité cyber
     </a>
+  </div>
+</section>
+
+<section>
+  <div class="contenu-section">
+    <h2>Répartition des niveaux de maturité cyber de cette session</h2>
+    <GraphiqueAnneau {serie} />
+  </div>
+</section>
+
+<section>
+  <div class="contenu-section">
+    <h2>Répartition des réponses</h2>
   </div>
 </section>
 
