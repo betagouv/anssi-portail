@@ -26,6 +26,7 @@ export default defineConfig({
         'fil-ariane': 'src/main-fil-ariane.ts',
         'promouvoir-msc': 'src/main-promouvoir-msc.ts',
         'session-groupe': 'src/main-session-groupe.ts',
+        'resultats-session-groupe': 'src/main-resultats-session-groupe.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
