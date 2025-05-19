@@ -12,6 +12,7 @@ export class ResultatTestMaturite {
   secteur: CodeSecteur;
   tailleOrganisation: CodeTrancheEffectif;
   reponses: ReponsesTestMaturite;
+  codeSessionGroupe?: string;
 
   constructor({
     emailUtilisateur,
@@ -20,6 +21,7 @@ export class ResultatTestMaturite {
     tailleOrganisation,
     reponses,
     id,
+    codeSessionGroupe,
   }: {
     emailUtilisateur: string | undefined;
     region: CodeRegion;
@@ -27,12 +29,14 @@ export class ResultatTestMaturite {
     tailleOrganisation: CodeTrancheEffectif;
     reponses: ReponsesTestMaturite;
     id?: string;
+    codeSessionGroupe?: string;
   }) {
     this.emailUtilisateur = emailUtilisateur;
     this.region = region;
     this.secteur = secteur;
     this.tailleOrganisation = tailleOrganisation;
     this.reponses = reponses;
+    this.codeSessionGroupe = codeSessionGroupe;
     this.id = id || randomUUID();
   }
 
