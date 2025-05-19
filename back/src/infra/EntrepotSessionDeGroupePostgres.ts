@@ -13,7 +13,8 @@ export class EntrepotSessionDeGroupePostgres
   }
 
   async tous(): Promise<SessionDeGroupe[]> {
-    return this.knex('sessions_groupe');
+    const sessions = await this.knex('sessions_groupe');
+    return sessions.map((d) => (new SessionDeGroupe(d.code)));
   }
 
   async ajoute(sessionDeGroupe: SessionDeGroupe): Promise<void> {
@@ -22,7 +23,8 @@ export class EntrepotSessionDeGroupePostgres
     });
   }
 
-  parCode(code: string): Promise<SessionDeGroupe | undefined> {
-    return this.knex('sessions_groupe').where({ code }).first();
+  async parCode(code: string): Promise<SessionDeGroupe | undefined> {
+    const donneesSession = await this.knex('sessions_groupe').where({ code }).first();
+    return new SessionDeGroupe(donneesSession.code);
   }
 }

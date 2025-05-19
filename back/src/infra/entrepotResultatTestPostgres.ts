@@ -10,15 +10,26 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
     this.knex = Knex(config);
   }
 
+  async ceuxDeSessionGroupe(code: string): Promise<ResultatTestMaturite[]> {
+    const donnees = await this.knex('resultats_test').where({
+      code_session_groupe: code,
+    });
+    return donnees.map(this.traduitEnResultatTestMaturite);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private traduitEnResultatTestMaturite(donneesTestMaturite: any) {
+    return new ResultatTestMaturite({
+      ...donneesTestMaturite,
+      emailUtilisateur: donneesTestMaturite.email_utilisateur,
+      tailleOrganisation: donneesTestMaturite.taille_organisation,
+      codeSessionGroupe: donneesTestMaturite.code_session_groupe,
+    });
+  }
+
   async parId(id: string): Promise<ResultatTestMaturite | undefined> {
     const donnees = await this.knex('resultats_test').where({ id }).first();
-    return donnees
-      ? new ResultatTestMaturite({
-          ...donnees,
-          emailUtilisateur: donnees.email_utilisateur,
-          tailleOrganisation: donnees.taille_organisation,
-        })
-      : undefined;
+    return donnees ? this.traduitEnResultatTestMaturite(donnees) : undefined;
   }
 
   async dernierPourUtilisateur(
@@ -28,13 +39,7 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
       .where({ email_utilisateur: emailUtilisateur })
       .orderBy('date_realisation', 'desc')
       .first();
-    return donnees
-      ? new ResultatTestMaturite({
-          ...donnees,
-          emailUtilisateur: donnees.email_utilisateur,
-          tailleOrganisation: donnees.taille_organisation,
-        })
-      : undefined;
+    return donnees ? this.traduitEnResultatTestMaturite(donnees) : undefined;
   }
 
   async metsAjour(resultatTest: ResultatTestMaturite): Promise<void> {

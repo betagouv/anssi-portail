@@ -6,6 +6,12 @@ export class EntrepotResultatTestMemoire
   extends EntrepotMemoire<ResultatTestMaturite>
   implements EntrepotResultatTest
 {
+  async ceuxDeSessionGroupe(code: string): Promise<ResultatTestMaturite[]> {
+    return this.entites
+      .filter((entite) => entite.codeSessionGroupe === code)
+      .map((entite) => new ResultatTestMaturite({ ...entite }));
+  }
+
   async metsAjour(resultatTest: ResultatTestMaturite): Promise<void> {
     const entiteAMettreAJour = this.entites.find(
       (entite) => entite.id === resultatTest.id
