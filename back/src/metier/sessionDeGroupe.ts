@@ -1,5 +1,6 @@
 import { GenerateurCodeSessionDeGroupe } from './generateurCodeSessionDeGroupe';
 import { EntrepotResultatTest } from './entrepotResultatTest';
+import { IdNiveauMaturite, ResultatTestMaturite } from './resultatTestMaturite';
 
 export class SessionDeGroupe {
   constructor(public readonly code: string) {}
@@ -12,15 +13,27 @@ export class SessionDeGroupe {
   }
 
   async resultatSession(entrepotResultatTest: EntrepotResultatTest) {
-    const testsMaturite = await entrepotResultatTest.ceuxDeSessionGroupe(
+    const resultatsTest = await entrepotResultatTest.ceuxDeSessionGroupe(
       this.code
     );
 
+    const objetVide: Record<IdNiveauMaturite, ResultatTestMaturite[]> = {
+      insuffisant: [],
+      emergent: [],
+      intermediaire: [],
+      confirme: [],
+      optimal: [],
+    };
+    const resultatsParNiveau = resultatsTest.reduce((niveaux, resultatTest) => {
+      niveaux[resultatTest.niveau()].push(resultatTest);
+      return niveaux;
+    }, objetVide);
+
     return {
-      nombreParticipants: testsMaturite.length,
+      nombreParticipants: resultatsTest.length,
       resume: {
         insuffisant: {
-          total: 0,
+          total: resultatsParNiveau.insuffisant.length,
           moyennes: {
             'prise-en-compte-risque': 0,
             pilotage: 0,
@@ -31,7 +44,7 @@ export class SessionDeGroupe {
           },
         },
         emergent: {
-          total: 0,
+          total: resultatsParNiveau.emergent.length,
           moyennes: {
             'prise-en-compte-risque': 0,
             pilotage: 0,
@@ -42,7 +55,7 @@ export class SessionDeGroupe {
           },
         },
         intermediaire: {
-          total: 0,
+          total: resultatsParNiveau.intermediaire.length,
           moyennes: {
             'prise-en-compte-risque': 0,
             pilotage: 0,
@@ -53,7 +66,7 @@ export class SessionDeGroupe {
           },
         },
         confirme: {
-          total: 0,
+          total: resultatsParNiveau.confirme.length,
           moyennes: {
             'prise-en-compte-risque': 0,
             pilotage: 0,
@@ -64,7 +77,7 @@ export class SessionDeGroupe {
           },
         },
         optimal: {
-          total: 0,
+          total: resultatsParNiveau.optimal.length,
           moyennes: {
             'prise-en-compte-risque': 0,
             pilotage: 0,
