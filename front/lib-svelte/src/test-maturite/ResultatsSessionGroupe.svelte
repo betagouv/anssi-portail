@@ -27,13 +27,13 @@
     <div class="repartition-niveaux-maturite">
       <GraphiqueAnneau {serie} />
       <div class="legende">
-        {#each pourcentagesSerie(serie) as pourcentage, index}
+        {#each pourcentagesSerie(serie) as pourcentage, index (index)}
           {@const element = serie[index]}
           <div class="ligne-legende ligne-legende-{index}">
             <span class="libelle">{element.libelle}</span>
             <div>
               <span class="total">{element.valeur}</span>
-              <span class="pourcentage">({pourcentage}%)</span>
+              <span class="pourcentage">({Math.round(pourcentage)}%)</span>
             </div>
           </div>
         {/each}
