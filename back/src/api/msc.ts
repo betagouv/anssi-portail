@@ -32,6 +32,7 @@ import { ressourceResultatDeTest } from './testMaturite/ressourceResultatDeTest'
 import { ressourceDernierResultatDeTest } from './testMaturite/ressourceDernierResultatDeTest';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
+import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -109,7 +110,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'cyberdepart',
     'promouvoir-messervicescyber',
     'session-groupe',
-    'resultats-session-groupe'
+    'resultats-session-groupe',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
@@ -199,7 +200,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(
     '/api/sessions-groupe',
     ressourceSessionsDeGroupe(configurationServeur),
-    ressourceSessionDeGroupe(configurationServeur)
+    ressourceSessionDeGroupe(configurationServeur),
+    ressourceResultatsSessionDeGroupe(configurationServeur)
   );
 
   app.use(

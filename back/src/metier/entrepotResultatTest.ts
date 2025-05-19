@@ -10,4 +10,6 @@ export interface EntrepotResultatTest {
   dernierPourUtilisateur(
     emailUtilisateur: string
   ): Promise<ResultatTestMaturite | undefined>;
+
+  ceuxDeSessionGroupe(code: string): Promise<ResultatTestMaturite[]>;
 }
