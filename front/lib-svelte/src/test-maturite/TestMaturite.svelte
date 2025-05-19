@@ -107,8 +107,8 @@
     organisateurSession = parametres.has('organisateur');
   });
 
-  $: organisateurSessionGroupe = codeSessionGroupe && organisateurSession;
   $: enSessionGroupe = !!codeSessionGroupe;
+  $: organisateurSessionGroupe = enSessionGroupe && organisateurSession;
 </script>
 
 {#if afficheResultats}
@@ -213,7 +213,7 @@
                       value="Précédent"
                       on:click={questionnaireStore.reviensEnArriere}
                     />
-                    {#if enSessionGroupe}
+                    {#if organisateurSession}
                       <input
                         type="button"
                         class="bouton primaire taille-moyenne"
