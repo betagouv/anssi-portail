@@ -5,6 +5,23 @@ import { randomUUID } from 'node:crypto';
 
 export type ReponsesTestMaturite = Record<string, number>;
 
+export type DonneesCreationResultatTestMaturite = {
+  emailUtilisateur: string | undefined;
+  region: CodeRegion;
+  secteur: CodeSecteur;
+  tailleOrganisation: CodeTrancheEffectif;
+  reponses: ReponsesTestMaturite;
+  id?: string;
+  codeSessionGroupe?: string;
+};
+
+export type IdNiveauMaturite =
+  | 'insuffisant'
+  | 'emergent'
+  | 'intermediaire'
+  | 'confirme'
+  | 'optimal';
+
 export class ResultatTestMaturite {
   id!: string;
   emailUtilisateur: string | undefined;
@@ -22,15 +39,7 @@ export class ResultatTestMaturite {
     reponses,
     id,
     codeSessionGroupe,
-  }: {
-    emailUtilisateur: string | undefined;
-    region: CodeRegion;
-    secteur: CodeSecteur;
-    tailleOrganisation: CodeTrancheEffectif;
-    reponses: ReponsesTestMaturite;
-    id?: string;
-    codeSessionGroupe?: string;
-  }) {
+  }: DonneesCreationResultatTestMaturite) {
     this.emailUtilisateur = emailUtilisateur;
     this.region = region;
     this.secteur = secteur;
@@ -42,5 +51,21 @@ export class ResultatTestMaturite {
 
   revendiquePropriete(emailUtilisateur: string) {
     this.emailUtilisateur = emailUtilisateur;
+  }
+
+  niveau(): IdNiveauMaturite {
+    const sommeDesPoints = Object.values(this.reponses)
+      .map((r) => this.points(r))
+      .reduce((sommePoints, points) => sommePoints + points, 0);
+    const moyenneDesPoints = sommeDesPoints / 6;
+    if (moyenneDesPoints < 1) return 'insuffisant';
+    if (moyenneDesPoints < 2) return 'emergent';
+    if (moyenneDesPoints < 3) return 'intermediaire';
+    if (moyenneDesPoints < 4) return 'confirme';
+    return 'optimal';
+  }
+
+  private points(rangReponse: number) {
+    return rangReponse - 1;
   }
 }
