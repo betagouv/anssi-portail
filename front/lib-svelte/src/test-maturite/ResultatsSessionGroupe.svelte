@@ -1,14 +1,40 @@
-<script>
+<script lang="ts">
+  import axios from 'axios';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import TuilesMaturiteSessionGroupe from './TuilesMaturiteSessionGroupe.svelte';
-  import { pourcentagesSerie } from './Serie';
-  const serie = [
-    { libelle: 'Insuffisant', valeur: 16 },
-    { libelle: 'Émergent', valeur: 11 },
-    { libelle: 'Intermédiaire', valeur: 16 },
-    { libelle: 'Confirmé', valeur: 8 },
-    { libelle: 'Optimal', valeur: 3 },
-  ];
+  import { pourcentagesSerie, type Serie } from './Serie';
+  import { onMount } from 'svelte';
+  import {
+    type IdNiveau,
+    niveauxMaturite,
+  } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import type { IdRubrique } from './TestMaturite.donnees';
+
+  type ResumeNiveau = {
+    total: number;
+    moyennes: Record<IdRubrique, number>;
+  };
+  type ResultatsSessionGroupe = {
+    nombreParticipants: number;
+    resume: Record<IdNiveau, ResumeNiveau>;
+  };
+
+  let serie: Serie;
+  let resultatsSessionGroupe: ResultatsSessionGroupe;
+
+  onMount(async () => {
+    let codeSessionGroupe = new URLSearchParams(window.location.search).get(
+      'code'
+    );
+    const reponse = await axios.get<ResultatsSessionGroupe>(
+      `/api/sessions-groupe/${codeSessionGroupe}/resultats`
+    );
+    resultatsSessionGroupe = reponse.data;
+    serie = niveauxMaturite.map((niveau) => ({
+      libelle: niveau.label,
+      valeur: resultatsSessionGroupe.resume[niveau.id].total,
+    }));
+  });
 </script>
 
 <section>
@@ -25,19 +51,23 @@
   <div class="contenu-section">
     <h2>Répartition des niveaux de maturité cyber de cette session</h2>
     <div class="repartition-niveaux-maturite">
-      <GraphiqueAnneau {serie} />
-      <div class="legende">
-        {#each pourcentagesSerie(serie) as pourcentage, index (index)}
-          {@const element = serie[index]}
-          <div class="ligne-legende ligne-legende-{index}">
-            <span class="libelle">{element.libelle}</span>
-            <div>
-              <span class="total">{element.valeur}</span>
-              <span class="pourcentage">({Math.round(pourcentage)}%)</span>
+      {#if resultatsSessionGroupe && resultatsSessionGroupe.nombreParticipants > 0}
+        <GraphiqueAnneau {serie} />
+        <div class="legende">
+          {#each pourcentagesSerie(serie) as pourcentage, index (index)}
+            {@const element = serie[index]}
+            <div class="ligne-legende ligne-legende-{index}">
+              <span class="libelle">{element.libelle}</span>
+              <div>
+                <span class="total">{element.valeur}</span>
+                <span class="pourcentage">({Math.round(pourcentage)}%)</span>
+              </div>
             </div>
-          </div>
-        {/each}
-      </div>
+          {/each}
+        </div>
+      {:else}
+        <div>Pas de résultat, rechargez la page</div>
+      {/if}
     </div>
   </div>
 </section>
