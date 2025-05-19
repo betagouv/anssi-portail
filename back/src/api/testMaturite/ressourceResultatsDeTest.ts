@@ -82,6 +82,7 @@ const ressourceResultatsDeTest = ({
         secteur,
         reponses,
         emailUtilisateur,
+        codeSessionGroupe
       });
 
       await entrepotResultatTest.ajoute(resultatTest);

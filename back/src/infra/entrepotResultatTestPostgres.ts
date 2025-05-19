@@ -44,11 +44,17 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
   }
 
   async ajoute(resultatTest: ResultatTestMaturite): Promise<void> {
-    const { emailUtilisateur, tailleOrganisation, ...reste } = resultatTest;
+    const {
+      emailUtilisateur,
+      tailleOrganisation,
+      codeSessionGroupe,
+      ...reste
+    } = resultatTest;
     await this.knex('resultats_test').insert({
       ...reste,
       email_utilisateur: emailUtilisateur,
       taille_organisation: tailleOrganisation,
+      code_session_groupe: codeSessionGroupe,
     });
   }
 }

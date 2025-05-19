@@ -325,5 +325,28 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         });
       });
     });
+
+    it("conserve le code de session de groupe s'il est présent", async () => {
+      await request(serveur)
+        .post('/api/resultats-test')
+        .send({
+          region: 'FR-NOR',
+          secteur: 'J',
+          tailleOrganisation: '51',
+          reponses: {
+            'prise-en-compte-risque': 2,
+            pilotage: 3,
+            budget: 5,
+            'ressources-humaines': 3,
+            'adoption-solutions': 2,
+            posture: 3,
+          },
+          codeSessionGroupe: 'ABC2ED',
+        });
+
+      const resultatSauvegarde = (await entrepotResultatTest.tous())[0];
+
+      assert.equal(resultatSauvegarde.codeSessionGroupe, 'ABC2ED');
+    });
   });
 });
