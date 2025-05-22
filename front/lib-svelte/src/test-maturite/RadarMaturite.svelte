@@ -179,3 +179,54 @@
     {/each}
   </ul>
 </div>
+
+<style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
+
+  .radar-maturite {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    #radar {
+      max-height: 350px;
+
+      .libelle-long {
+        display: none;
+
+        @include a-partir-de(sm) {
+          display: block;
+          font-size: 1.375rem;
+        }
+      }
+
+      .libelle-lettre {
+        font-weight: bold;
+        @include a-partir-de(sm) {
+          display: none;
+        }
+      }
+    }
+
+    ul {
+      align-self: flex-start;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+
+      @include a-partir-de(sm) {
+        display: none;
+      }
+
+      li {
+        padding: 8px;
+        margin: 0;
+
+        .lettre {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+</style>
