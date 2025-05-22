@@ -2,12 +2,11 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import assert from 'node:assert';
 import { creeServeur } from '../../../src/api/msc';
-import {
-  configurationDeTestDuServeur
-} from '../fauxObjets';
+import { configurationDeTestDuServeur } from '../fauxObjets';
 import { Express } from 'express';
 import { EntrepotSessionDeGroupe } from '../../../src/metier/entrepotSessionDeGroupe';
 import { EntrepotSessionDeGroupeMemoire } from '../../persistance/EntrepotSessionDeGroupeMemoire';
+import { SessionDeGroupe } from '../../../src/metier/sessionDeGroupe';
 
 describe('La ressource qui gère une session de groupe', () => {
   let serveur: Express;
@@ -23,7 +22,7 @@ describe('La ressource qui gère une session de groupe', () => {
 
   describe('sur requête GET', () => {
     it('répond 200 lorsque la session existe', async () => {
-      await entrepotSessionDeGroupe.ajoute({code: 'ABC2ED'});
+      await entrepotSessionDeGroupe.ajoute(new SessionDeGroupe('ABC2ED'));
 
       const reponse = await request(serveur)
         .get('/api/sessions-groupe/ABC2ED')
@@ -40,14 +39,14 @@ describe('La ressource qui gère une session de groupe', () => {
       assert.equal(reponse.status, 404);
     });
 
-    it("aseptise le code passé en paramètre", async () => {
-      await entrepotSessionDeGroupe.ajoute({ code: 'ABC2&lt;D' });
+    it('aseptise le code passé en paramètre', async () => {
+      await entrepotSessionDeGroupe.ajoute(new SessionDeGroupe('ABC2&lt;D'));
 
       const reponse = await request(serveur)
         .get('/api/sessions-groupe/ABC2<D')
         .send({});
 
       assert.equal(reponse.status, 200);
-    })
+    });
   });
 });
