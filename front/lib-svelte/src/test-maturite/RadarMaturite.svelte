@@ -130,10 +130,10 @@
           {y}
           fill="#0D0C21"
           text-anchor="middle"
-          font-size="15"
+          font-size="22"
           stroke="white"
-          stroke-width="0.6"
-          font-weight="bold"
+          stroke-width="1.3"
+          font-weight="bolder"
           dominant-baseline="middle"
         >
           {index}
