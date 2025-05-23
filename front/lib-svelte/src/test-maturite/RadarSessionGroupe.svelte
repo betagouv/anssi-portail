@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Rubrique } from './TestMaturite.donnees';
   import type { SerieRadar } from './Serie';
+  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
 
   export let rubriques: Rubrique[] = [
     {
@@ -55,11 +56,11 @@
   });
   type Point = { x: number; y: number };
 
-  const pointsEnChaineSvg = (coordonnees: Point[] ) => {
-    return coordonnees.map((c) => `${c.x},${c.y}`).join(' ');
+  const cheminSvg = (coordonnees: Point[]) => {
+    return 'M ' + coordonnees.map((c) => `${c.x} ${c.y}`).join(' L ') + ' Z';
   };
 
-  const pointsDuPolygoneDeLaSerie = (serie: SerieRadar) : Point[] => {
+  const pointsDuPolygoneDeLaSerie = (serie: SerieRadar): Point[] => {
     return new Array(6).fill(0).map((_, index) => {
       const valeur = serie?.valeurs[rubriques[index].id];
       const r = ((valeur || 0) / 5) * tailleRadar;
@@ -67,6 +68,9 @@
       return polaireVersCartesien(r, theta);
     });
   };
+
+  const libelleSerie = (serie: SerieRadar) =>
+    niveauxMaturite.find((niveau) => niveau.id === serie.id)?.label;
 
   let coefDistanceLibelle: number = 1.1;
 </script>
@@ -99,13 +103,18 @@
         />
       {/each}
     {/each}
+
     {#each series as serie (serie.id)}
-      <polygon
-        points={pointsEnChaineSvg(pointsDuPolygoneDeLaSerie(serie))}
+      <path
+        class="serie"
+        fill="none"
         fill-opacity="0"
         stroke={serie.couleur}
         stroke-width="3"
-      />
+        d={cheminSvg(pointsDuPolygoneDeLaSerie(serie))}
+      >
+        <title>{libelleSerie(serie)}</title>
+      </path>
     {/each}
 
     {#each new Array(6).fill(0).map((_, index) => index) as index (index)}
@@ -151,6 +160,9 @@
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
+  .serie:hover {
+    stroke-width: 5;
+  }
   .radar {
     margin-bottom: 16px;
     display: flex;
