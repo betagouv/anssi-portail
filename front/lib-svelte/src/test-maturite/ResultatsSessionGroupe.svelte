@@ -35,7 +35,7 @@
     optimal: '#8ed4a3',
   };
 
-  onMount(async () => {
+  async function rechargeResultatsGroupe() {
     let codeSessionGroupe = new URLSearchParams(window.location.search).get(
       'code'
     );
@@ -52,6 +52,11 @@
       valeurs: resultatsSessionGroupe.resume[niveau.id].moyennes,
       couleur: couleurs[niveau.id],
     }));
+  }
+
+  onMount(async () => {
+    await rechargeResultatsGroupe();
+    setInterval(rechargeResultatsGroupe, 5000);
   });
 </script>
 
