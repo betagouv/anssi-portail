@@ -109,5 +109,48 @@ describe('La session de groupe', () => {
       assert.equal(resultatSession.resume['confirme'].total, 0);
       assert.equal(resultatSession.resume['optimal'].total, 0);
     });
+
+    it('donne un résumé avec résultats avec, pour chaque niveau, les moyennes des réponses à chaque question', async () => {
+      const sessionDeGroupe = await SessionDeGroupe.cree({
+        genere: async () => 'ABCD',
+      });
+      const entrepotResultatTest = new EntrepotResultatTestMemoire();
+      await entrepotResultatTest.ajoute(
+        resultatAvecReponses(
+          {
+            'prise-en-compte-risque': 1,
+            pilotage: 1,
+            budget: 1,
+            'ressources-humaines': 4,
+            'adoption-solutions': 1,
+            posture: 1,
+          },
+          'ABCD'
+        )
+      );
+      await entrepotResultatTest.ajoute(
+        resultatAvecReponses(
+          {
+            'prise-en-compte-risque': 1,
+            pilotage: 1,
+            budget: 1,
+            'ressources-humaines': 3,
+            'adoption-solutions': 1,
+            posture: 1,
+          },
+          'ABCD'
+        )
+      );
+
+      const resultatSession =
+        await sessionDeGroupe.resultatSession(entrepotResultatTest);
+
+      assert.equal(resultatSession.nombreParticipants, 2);
+      assert.equal(resultatSession.resume['insuffisant'].total, 2);
+      assert.equal(
+        resultatSession.resume['insuffisant'].moyennes['ressources-humaines'],
+        3.5
+      );
+    });
   });
 });

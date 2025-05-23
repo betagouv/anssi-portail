@@ -3,7 +3,7 @@
 
   export let serie: Serie;
 
-  const pourcentagesCumules = pourcentagesSerie(serie).reduce(
+  $: pourcentagesCumules = pourcentagesSerie(serie).reduce(
     (pourcentagesCumules, pourcentage) => [
       ...pourcentagesCumules,
       pourcentagesCumules[pourcentagesCumules.length - 1] + pourcentage,

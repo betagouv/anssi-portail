@@ -1,14 +1,17 @@
 <script lang="ts">
   import axios from 'axios';
-  import GraphiqueAnneau from './GraphiqueAnneau.svelte';
-  import TuilesMaturiteSessionGroupe from './TuilesMaturiteSessionGroupe.svelte';
-  import { pourcentagesSerie, type Serie } from './Serie';
+  import { type Serie, type SerieRadar } from './Serie';
   import { onMount } from 'svelte';
   import {
     type IdNiveau,
     niveauxMaturite,
   } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { IdRubrique } from './TestMaturite.donnees';
+  import RadarSessionGroupe from './RadarSessionGroupe.svelte';
+  import TuilesMaturiteSessionGroupe from './TuilesMaturiteSessionGroupe.svelte';
+  import GraphiqueAnneau from './GraphiqueAnneau.svelte';
+  import LegendeAnneauSessionGroupe from './LegendeAnneauSessionGroupe.svelte';
+  import LegendeRadarSessionGroupe from './LegendeRadarSessionGroupe.svelte';
 
   type ResumeNiveau = {
     total: number;
@@ -22,7 +25,17 @@
   let serie: Serie;
   let resultatsSessionGroupe: ResultatsSessionGroupe;
 
-  onMount(async () => {
+  let seriesRadar: SerieRadar[];
+
+  const couleurs = {
+    insuffisant: '#6369f1',
+    emergent: '#fec54b',
+    intermediaire: '#8248a1',
+    confirme: '#f26c85',
+    optimal: '#8ed4a3',
+  };
+
+  async function rechargeResultatsGroupe() {
     let codeSessionGroupe = new URLSearchParams(window.location.search).get(
       'code'
     );
@@ -34,49 +47,72 @@
       libelle: niveau.label,
       valeur: resultatsSessionGroupe.resume[niveau.id].total,
     }));
+    seriesRadar = niveauxMaturite.map((niveau) => ({
+      id: niveau.id,
+      valeurs: resultatsSessionGroupe.resume[niveau.id].moyennes,
+      couleur: couleurs[niveau.id],
+    }));
+  }
+
+  onMount(async () => {
+    await rechargeResultatsGroupe();
+    setInterval(rechargeResultatsGroupe, 5000);
   });
 </script>
 
-<section>
-  <div class="contenu-section">
-    <h2>Les 5 niveaux de maturité cyber</h2>
-    <TuilesMaturiteSessionGroupe />
-    <a href="/niveaux-maturite" class="lien" target="_blank">
-      Les niveaux de maturité cyber
-    </a>
-  </div>
-</section>
-
-<section>
-  <div class="contenu-section">
-    <h2>Répartition des niveaux de maturité cyber de cette session</h2>
-    <div class="repartition-niveaux-maturite">
-      {#if resultatsSessionGroupe && resultatsSessionGroupe.nombreParticipants > 0}
-        <GraphiqueAnneau {serie} />
-        <div class="legende">
-          {#each pourcentagesSerie(serie) as pourcentage, index (index)}
-            {@const element = serie[index]}
-            <div class="ligne-legende ligne-legende-{index}">
-              <span class="libelle">{element.libelle}</span>
-              <div>
-                <span class="total">{element.valeur}</span>
-                <span class="pourcentage">({Math.round(pourcentage)}%)</span>
-              </div>
-            </div>
-          {/each}
-        </div>
-      {:else}
-        <div>Pas de résultat, rechargez la page</div>
-      {/if}
+{#if resultatsSessionGroupe && resultatsSessionGroupe.nombreParticipants > 0}
+  <section>
+    <div class="contenu-section">
+      <h2>Les 5 niveaux de maturité cyber</h2>
+      <TuilesMaturiteSessionGroupe />
+      <a href="/niveaux-maturite" class="lien" target="_blank">
+        Les niveaux de maturité cyber
+      </a>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="contenu-section">
-    <h2>Répartition des réponses</h2>
-  </div>
-</section>
+  <section>
+    <div class="contenu-section">
+      <h2>Répartition des niveaux de maturité cyber de cette session</h2>
+      <div class="repartition-niveaux-maturite">
+        {#if resultatsSessionGroupe && resultatsSessionGroupe.nombreParticipants > 0}
+          <GraphiqueAnneau {serie} />
+          <LegendeAnneauSessionGroupe {serie} />
+        {:else}
+          <div>Pas de résultat, rechargez la page</div>
+        {/if}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="contenu-section repartition-reponses">
+      <h2>Répartition des réponses</h2>
+      <RadarSessionGroupe series={seriesRadar} />
+      <LegendeRadarSessionGroupe />
+      <div class="message-information">
+        Le résultat obtenu est une évaluation indicative basée sur un modèle
+        élaboré par l’ANSSI. La maturité cyber n’est pas une évaluation du
+        niveau de sécurité des systèmes d’information d’une organisation mais de
+        sa posture à l’égard des enjeux cyber.
+      </div>
+    </div>
+  </section>
+{:else}
+  <section>
+    <div class="contenu-section contenu-sans-resultat">
+      <img
+        src="/assets/images/illustration-dragon-aucun-resultat.svg"
+        alt="Pas encore de résultat soumis par les participants"
+      />
+      <h4>Encouragez vos participants à finaliser le test</h4>
+      <p>
+        Les résultats seront disponibles dès que les participants auront
+        complété le test.<br /> Invitez-les à le finaliser.
+      </p>
+    </div>
+  </section>
+{/if}
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
@@ -106,53 +142,40 @@
     gap: 48px;
   }
 
-  .legende {
-    width: 242px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .ligne-legende {
-    display: grid;
-    gap: 10px;
-    grid-template-columns: 24px 2fr 1fr;
-    align-items: center;
-
-    div {
-      text-wrap: nowrap;
-    }
-
-    .total {
-      font-weight: bold;
+  .repartition-reponses {
+    h2 {
+      margin-bottom: 32px;
     }
   }
 
-  .ligne-legende:before {
-    width: 14px;
-    height: 14px;
-    border-radius: 7px;
-    content: '';
-    background-color: var(--couleur-puce);
+  .message-information {
+    font-size: 0.75rem;
+    line-height: 1.5rem;
+    font-style: italic;
+    padding: 24px 0;
+    color: #666666;
   }
 
-  .ligne-legende-0 {
-    --couleur-puce: #6369f1;
-  }
+  .contenu-section {
+    &.contenu-sans-resultat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin: 32px auto 72px;
+      border-bottom: none;
 
-  .ligne-legende-1 {
-    --couleur-puce: #fec54b;
-  }
+      h4 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        text-align: center;
+        margin: 0;
+      }
 
-  .ligne-legende-2 {
-    --couleur-puce: #8248a1;
-  }
-
-  .ligne-legende-3 {
-    --couleur-puce: #f26c85;
-  }
-
-  .ligne-legende-4 {
-    --couleur-puce: #8ed4a3;
+      p {
+        text-align: center;
+        margin: 0;
+      }
+    }
   }
 </style>

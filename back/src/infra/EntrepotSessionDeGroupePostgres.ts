@@ -25,6 +25,9 @@ export class EntrepotSessionDeGroupePostgres
 
   async parCode(code: string): Promise<SessionDeGroupe | undefined> {
     const donneesSession = await this.knex('sessions_groupe').where({ code }).first();
+    if (!donneesSession) {
+      return undefined;
+    }
     return new SessionDeGroupe(donneesSession.code);
   }
 }
