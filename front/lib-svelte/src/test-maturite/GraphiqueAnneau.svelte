@@ -3,7 +3,9 @@
 
   export let serie: Serie;
 
-  $: pourcentagesCumules = pourcentagesSerie(serie).reduce(
+  $: pourcentages = pourcentagesSerie(serie);
+
+  $: pourcentagesCumules = pourcentages.reduce(
     (pourcentagesCumules, pourcentage) => [
       ...pourcentagesCumules,
       pourcentagesCumules[pourcentagesCumules.length - 1] + pourcentage,
@@ -85,7 +87,7 @@
          L {secteur.premierPointInterieur.x} {secteur.premierPointInterieur.y}
          A {rayonInterieur} {rayonInterieur} 0 {secteur.arcLarge ? 1 : 0} 0 {secteur.secondPointInterieur.x} {secteur.secondPointInterieur.y}
          Z"
-    />
+    ><title>{`${serie[index].libelle} : ${serie[index].valeur} (${Math.round(pourcentages[index])}%)`}</title></path>
   {/each}
 </svg>
 
@@ -102,6 +104,10 @@
   .secteur {
     stroke: white;
     stroke-width: 3px;
+  }
+
+  .secteur:hover {
+    opacity: 80%;
   }
 
   .secteur-0 {
