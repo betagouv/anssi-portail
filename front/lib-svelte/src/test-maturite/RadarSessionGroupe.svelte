@@ -1,7 +1,8 @@
 <script lang="ts">
-  import type { IdRubrique, Rubrique } from './TestMaturite.donnees';
+  import type { Rubrique } from './TestMaturite.donnees';
+  import type { SerieRadar } from './Serie';
+  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
 
-  export let resultats: Record<IdRubrique, number | null>;
   export let rubriques: Rubrique[] = [
     {
       id: 'pilotage',
@@ -46,10 +47,7 @@
       lettre: 'B',
     },
   ];
-
-  $: rubriquesTrieesParLettre = rubriques.toSorted((a, b) =>
-    a.lettre > b.lettre ? 1 : -1
-  );
+  export let series: SerieRadar[];
 
   const tailleRadar = 200;
   const polaireVersCartesien = (r: number, theta: number) => ({
@@ -58,40 +56,31 @@
   });
   type Point = { x: number; y: number };
 
-  const tableauEnPointsPolygone = (coordonnees: Point[]) =>
-    coordonnees.map((c) => `${c.x},${c.y}`).join(' ');
+  const cheminSvg = (coordonnees: Point[]) => {
+    return 'M ' + coordonnees.map((c) => `${c.x} ${c.y}`).join(' L ') + ' Z';
+  };
 
-  $: pointsDuPolygone = new Array(6).fill(0).map((_, index) => {
-    const valeur = resultats[rubriques[index].id];
-    const r = ((valeur || 0) / 5) * tailleRadar;
-    const theta = (index * 2 * Math.PI) / 6;
-    return polaireVersCartesien(r, theta);
-  });
+  const pointsDuPolygoneDeLaSerie = (serie: SerieRadar): Point[] => {
+    return new Array(6).fill(0).map((_, index) => {
+      const valeur = serie?.valeurs[rubriques[index].id];
+      const r = ((valeur || 0) / 5) * tailleRadar;
+      const theta = (index * 2 * Math.PI) / 6;
+      return polaireVersCartesien(r, theta);
+    });
+  };
 
-  let viewBox: string;
-  let coefDistanceLibelle: number;
+  const libelleSerie = (serie: SerieRadar) =>
+    niveauxMaturite.find((niveau) => niveau.id === serie.id)?.label;
 
-  function modifieViewBox() {
-    const estPetitEcran = window.matchMedia('(max-width: 576px)').matches;
-
-    if (estPetitEcran) {
-      viewBox = '-220 -220 440 440';
-      coefDistanceLibelle = 1.03;
-    } else {
-      viewBox = '-600 -225 1200 450';
-      coefDistanceLibelle = 1.1;
-    }
-  }
-
-  modifieViewBox();
-
-  window
-    .matchMedia('(max-width: 576px)')
-    .addEventListener('change', modifieViewBox);
+  let coefDistanceLibelle: number = 1.1;
 </script>
 
-<div class="radar-maturite">
-  <svg id="radar" {viewBox} xmlns="http://www.w3.org/2000/svg">
+<div class="radar">
+  <svg
+    id="radar"
+    viewBox="-600 -225 1200 450"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     {#each new Array(6).fill(0).map((_, index) => index) as index (index)}
       {@const theta = (index * 2 * Math.PI) / 6}
       {@const coordonnees = polaireVersCartesien(tailleRadar, theta)}
@@ -115,12 +104,35 @@
       {/each}
     {/each}
 
-    <polygon
-      points={tableauEnPointsPolygone(pointsDuPolygone)}
-      fill="#FED98099"
-      stroke="#0D0C21"
-      stroke-width="3"
-    />
+    {#each series as serie (serie.id)}
+      {@const pointsDuPolygone = pointsDuPolygoneDeLaSerie(serie)}
+      <path
+        class="serie"
+        fill="none"
+        fill-opacity="0"
+        stroke={serie.couleur}
+        stroke-width="3"
+        d={cheminSvg(pointsDuPolygone)}
+      >
+        <title>{libelleSerie(serie)}</title>
+      </path>
+      {#each pointsDuPolygone as point, index (index)}
+        <circle
+          class="sommet"
+          r="8"
+          cx={point.x}
+          cy={point.y}
+          fill={serie.couleur}
+          stroke="white"
+          stroke-width="3px"
+        >
+          <title
+            >{`${libelleSerie(serie)} / ${rubriques[index].label} : ${Math.round(serie.valeurs[rubriques[index].id] * 100) / 100}`}</title
+          >
+        </circle>
+      {/each}
+    {/each}
+
     {#each new Array(6).fill(0).map((_, index) => index) as index (index)}
       {#if index !== 0}
         {@const r = (tailleRadar / 5) * index}
@@ -155,35 +167,28 @@
         fill="#0D0C21"
         class="libelle-long"
       >
-        <tspan>{rubrique.label} -</tspan>
-        <tspan font-weight="bold">{resultats[rubrique.id]}/5</tspan>
+        <tspan>{rubrique.label}</tspan>
       </text>
-      <text
-        x={coordonnees.x}
-        y={coordonnees.y}
-        text-anchor={rubrique.ancrageTexte}
-        dominant-baseline={rubrique.alignementVertical}
-        font-size="16"
-        fill="#0D0C21"
-        class="libelle-lettre">{rubrique.lettre}</text
-      >
     {/each}
   </svg>
-
-  <ul>
-    {#each rubriquesTrieesParLettre as rubrique (rubrique.id)}
-      <li>
-        <span class="lettre">{rubrique.lettre}</span> : {rubrique.label} -
-        {resultats[rubrique.id]}/5
-      </li>
-    {/each}
-  </ul>
 </div>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
-  .radar-maturite {
+  .serie:hover {
+    stroke-width: 5;
+  }
+
+  .sommet {
+    fill-opacity: 0;
+    stroke-width: 0;
+  }
+  .sommet:hover {
+    fill-opacity: 1;
+    stroke-width: 3px;
+  }
+  .radar {
     margin-bottom: 16px;
     display: flex;
     flex-direction: column;
@@ -193,39 +198,7 @@
       max-height: 350px;
 
       .libelle-long {
-        display: none;
-
-        @include a-partir-de(sm) {
-          display: block;
-          font-size: 1.375rem;
-        }
-      }
-
-      .libelle-lettre {
-        font-weight: bold;
-        @include a-partir-de(sm) {
-          display: none;
-        }
-      }
-    }
-
-    ul {
-      align-self: flex-start;
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-
-      @include a-partir-de(sm) {
-        display: none;
-      }
-
-      li {
-        padding: 8px;
-        margin: 0;
-
-        .lettre {
-          font-weight: bold;
-        }
+        font-size: 1.375rem;
       }
     }
   }

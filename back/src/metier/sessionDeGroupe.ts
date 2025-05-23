@@ -1,6 +1,44 @@
 import { GenerateurCodeSessionDeGroupe } from './generateurCodeSessionDeGroupe';
 import { EntrepotResultatTest } from './entrepotResultatTest';
-import { IdNiveauMaturite, ResultatTestMaturite } from './resultatTestMaturite';
+import {
+  IdNiveauMaturite,
+  IdRubrique,
+  ResultatTestMaturite,
+  tousLesIdNiveauMaturite,
+  tousLesIdRubrique,
+} from './resultatTestMaturite';
+
+export type ResumeNiveauMaturite = {
+  total: number;
+  moyennes: Record<IdRubrique, number>;
+};
+
+export type ResultatSession = {
+  nombreParticipants: number;
+  resume: Record<IdNiveauMaturite, ResumeNiveauMaturite>;
+};
+
+const moyenne = (numbers: number[]) => {
+  if (numbers.length === 0) {
+    return 0;
+  }
+  return numbers.reduce((acc, n) => acc + n, 0) / numbers.length;
+};
+
+const resumeNiveau = (
+  resultatsDuNiveau: ResultatTestMaturite[]
+): ResumeNiveauMaturite => ({
+  total: resultatsDuNiveau.length,
+  moyennes: tousLesIdRubrique.reduce(
+    (accumulateur, idRubrique) => ({
+      ...accumulateur,
+      [idRubrique]: moyenne(
+        resultatsDuNiveau.map((r) => r.reponses[idRubrique])
+      ),
+    }),
+    {}
+  ),
+});
 
 export class SessionDeGroupe {
   constructor(public readonly code: string) {}
@@ -12,82 +50,31 @@ export class SessionDeGroupe {
     return new SessionDeGroupe(code);
   }
 
-  async resultatSession(entrepotResultatTest: EntrepotResultatTest) {
+  async resultatSession(
+    entrepotResultatTest: EntrepotResultatTest
+  ): Promise<ResultatSession> {
     const resultatsTest = await entrepotResultatTest.ceuxDeSessionGroupe(
       this.code
     );
 
-    const objetVide: Record<IdNiveauMaturite, ResultatTestMaturite[]> = {
-      insuffisant: [],
-      emergent: [],
-      intermediaire: [],
-      confirme: [],
-      optimal: [],
-    };
-    const resultatsParNiveau = resultatsTest.reduce((niveaux, resultatTest) => {
-      niveaux[resultatTest.niveau()].push(resultatTest);
-      return niveaux;
-    }, objetVide);
+    const resultatsParNiveau: Record<IdNiveauMaturite, ResultatTestMaturite[]> =
+      tousLesIdNiveauMaturite.reduce(
+        (previousValue, idNiveau) => ({
+          ...previousValue,
+          [idNiveau]: resultatsTest.filter((r) => r.niveau() === idNiveau),
+        }),
+        {}
+      );
 
     return {
       nombreParticipants: resultatsTest.length,
-      resume: {
-        insuffisant: {
-          total: resultatsParNiveau.insuffisant.length,
-          moyennes: {
-            'prise-en-compte-risque': 0,
-            pilotage: 0,
-            budget: 0,
-            'ressources-humaines': 0,
-            'adoption-solutions': 0,
-            posture: 0,
-          },
-        },
-        emergent: {
-          total: resultatsParNiveau.emergent.length,
-          moyennes: {
-            'prise-en-compte-risque': 0,
-            pilotage: 0,
-            budget: 0,
-            'ressources-humaines': 0,
-            'adoption-solutions': 0,
-            posture: 0,
-          },
-        },
-        intermediaire: {
-          total: resultatsParNiveau.intermediaire.length,
-          moyennes: {
-            'prise-en-compte-risque': 0,
-            pilotage: 0,
-            budget: 0,
-            'ressources-humaines': 0,
-            'adoption-solutions': 0,
-            posture: 0,
-          },
-        },
-        confirme: {
-          total: resultatsParNiveau.confirme.length,
-          moyennes: {
-            'prise-en-compte-risque': 0,
-            pilotage: 0,
-            budget: 0,
-            'ressources-humaines': 0,
-            'adoption-solutions': 0,
-            posture: 0,
-          },
-        },
-        optimal: {
-          total: resultatsParNiveau.optimal.length,
-          moyennes: {
-            'prise-en-compte-risque': 0,
-            pilotage: 0,
-            budget: 0,
-            'ressources-humaines': 0,
-            'adoption-solutions': 0,
-            posture: 0,
-          },
-        },
-      },
+      resume: tousLesIdNiveauMaturite.reduce(
+        (accumulateur, idNiveau) => ({
+          ...accumulateur,
+          [idNiveau]: resumeNiveau(resultatsParNiveau[idNiveau]),
+        }),
+        {}
+      ),
     };
   }
 }
