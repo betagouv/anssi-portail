@@ -98,11 +98,17 @@
 
   let ongletActif: 'votre-organisation' | 'comparaison' = 'votre-organisation';
 
-  onMount(() => {
+  onMount(async () => {
     const parametres = new URLSearchParams(window.location.search);
     codeSessionGroupe = parametres.get('session-groupe') ?? undefined;
     if (codeSessionGroupe) {
       introFaite = true;
+      try {
+        await axios.get(`/api/sessions-groupe/${codeSessionGroupe}`);
+      } catch {
+        alert("Code de session inconnu, vous allez être redirigé");
+        window.location.href = "/session-groupe";
+      }
     }
     organisateurSession = parametres.has('organisateur');
   });
