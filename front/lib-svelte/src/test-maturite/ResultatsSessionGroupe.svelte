@@ -1,11 +1,12 @@
 <script lang="ts">
   import axios from 'axios';
-  import GraphiqueAnneau from './GraphiqueAnneau.svelte';
-  import TuilesMaturiteSessionGroupe from './TuilesMaturiteSessionGroupe.svelte';
-  import { type Serie } from './Serie';
+  import { type Serie, type SerieRadar } from './Serie';
   import { onMount } from 'svelte';
   import { type IdNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { IdRubrique } from './TestMaturite.donnees';
+  import RadarSessionGroupe from './RadarSessionGroupe.svelte';
+  import TuilesMaturiteSessionGroupe from './TuilesMaturiteSessionGroupe.svelte';
+  import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeAnneauSessionGroupe from './LegendeAnneauSessionGroupe.svelte';
 
   type ResumeNiveau = {
@@ -20,6 +21,16 @@
   let serie: Serie;
   let resultatsSessionGroupe: ResultatsSessionGroupe;
 
+  let seriesRadar: SerieRadar[];
+
+  const couleurs = {
+    insuffisant: '#6369f1',
+    emergent: '#fec54b',
+    intermediaire: '#8248a1',
+    confirme: '#f26c85',
+    optimal: '#8ed4a3',
+  };
+
   onMount(async () => {
     let codeSessionGroupe = new URLSearchParams(window.location.search).get(
       'code',
@@ -31,6 +42,11 @@
     serie = niveauxMaturite.map((niveau) => ({
       libelle: niveau.label,
       valeur: resultatsSessionGroupe.resume[niveau.id].total,
+    }));
+    seriesRadar = niveauxMaturite.map((niveau) => ({
+      id: niveau.id,
+      valeurs: resultatsSessionGroupe.resume[niveau.id].moyennes,
+      couleur: couleurs[niveau.id],
     }));
   });
 </script>
@@ -62,6 +78,7 @@
 <section>
   <div class="contenu-section">
     <h2>Répartition des réponses</h2>
+    <RadarSessionGroupe series={seriesRadar} />
   </div>
 </section>
 
