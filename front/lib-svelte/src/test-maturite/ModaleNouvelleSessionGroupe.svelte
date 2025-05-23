@@ -7,12 +7,14 @@
   let codeSession: string;
   let codeSessionFormate: string;
   let canvas: HTMLCanvasElement;
+  let lienPourParticipants : string;
 
   export const ouvre = ({
     code,
     lienParticipant,
   }: ReponseCreationSessionGroupe) => {
     codeSession = code;
+    lienPourParticipants = lienParticipant;
     qrcode.toCanvas(canvas, lienParticipant, { width: 148, margin: 0 });
     modaleNouvelleSession.showModal();
   };
@@ -23,6 +25,12 @@
 
   $: codeSessionFormate =
     codeSession && codeSession.slice(0, 3) + '-' + codeSession.slice(3);
+
+  const copieLienParticipant = ()=>{
+    navigator.clipboard.writeText(lienPourParticipants).then(function () {
+      alert('Lien participant copié dans le presse papier.');
+    });
+  }
 </script>
 
 <dialog bind:this={modaleNouvelleSession}>
@@ -42,7 +50,9 @@
         <div class="conteneur-qrcode">
           <canvas id="canvas" bind:this={canvas}></canvas>
         </div>
-        <button>Télécharger le QR Code</button>
+        <button title="Copier dans le presse-papier le lien de participation à la session de groupe" on:click={copieLienParticipant}>
+          Copier le lien participant
+        </button>
       </div>
     </div>
     <div class="actions">
