@@ -8,6 +8,7 @@
   import TuilesMaturiteSessionGroupe from './TuilesMaturiteSessionGroupe.svelte';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeAnneauSessionGroupe from './LegendeAnneauSessionGroupe.svelte';
+  import LegendeRadarSessionGroupe from "./LegendeRadarSessionGroupe.svelte";
 
   type ResumeNiveau = {
     total: number;
@@ -76,9 +77,13 @@
 </section>
 
 <section>
-  <div class="contenu-section">
+  <div class="contenu-section repartition-reponses">
     <h2>Répartition des réponses</h2>
     <RadarSessionGroupe series={seriesRadar} />
+    <LegendeRadarSessionGroupe />
+    <div class="message-information">Le résultat obtenu est une évaluation indicative basée sur un modèle élaboré par l’ANSSI.
+      La maturité cyber n’est pas une évaluation du niveau de sécurité des systèmes d’information d’une organisation
+      mais de sa posture à l’égard des enjeux cyber.</div>
   </div>
 </section>
 
@@ -108,5 +113,19 @@
     align-items: center;
     justify-content: space-evenly;
     gap: 48px;
+  }
+
+  .repartition-reponses {
+    h2 {
+      margin-bottom: 32px;
+    }
+  }
+
+  .message-information {
+    font-size: 0.75rem;
+    line-height: 1.5rem;
+    font-style: italic;
+    padding: 24px 0;
+    color: #666666;
   }
 </style>
