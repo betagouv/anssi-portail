@@ -105,16 +105,32 @@
     {/each}
 
     {#each series as serie (serie.id)}
+      {@const pointsDuPolygone = pointsDuPolygoneDeLaSerie(serie)}
       <path
         class="serie"
         fill="none"
         fill-opacity="0"
         stroke={serie.couleur}
         stroke-width="3"
-        d={cheminSvg(pointsDuPolygoneDeLaSerie(serie))}
+        d={cheminSvg(pointsDuPolygone)}
       >
         <title>{libelleSerie(serie)}</title>
       </path>
+      {#each pointsDuPolygone as point, index (index)}
+        <circle
+          class="sommet"
+          r="8"
+          cx={point.x}
+          cy={point.y}
+          fill={serie.couleur}
+          stroke="white"
+          stroke-width="3px"
+        >
+          <title
+            >{`${libelleSerie(serie)} / ${rubriques[index].label} : ${Math.round(serie.valeurs[rubriques[index].id] * 100) / 100}`}</title
+          >
+        </circle>
+      {/each}
     {/each}
 
     {#each new Array(6).fill(0).map((_, index) => index) as index (index)}
@@ -162,6 +178,15 @@
 
   .serie:hover {
     stroke-width: 5;
+  }
+
+  .sommet {
+    fill-opacity: 0;
+    stroke-width: 0;
+  }
+  .sommet:hover {
+    fill-opacity: 1;
+    stroke-width: 3px;
   }
   .radar {
     margin-bottom: 16px;
