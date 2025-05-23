@@ -1,9 +1,6 @@
 <script lang="ts">
   import { etapesTestMaturite } from './TestMaturite.donnees';
-  import {
-    questionnaireStore,
-    resultatsQuestionnaire,
-  } from './stores/questionnaire.store';
+  import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
   import Etapier from '../ui/Etapier.svelte';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
   import SelectSecteurActivite from './SelectSecteurActivite.svelte';
@@ -37,7 +34,7 @@
     reponseCourante =
       $questionnaireStore.toutesLesReponses[
         $questionnaireStore.questionCourante
-      ];
+        ];
   }
 
   function valideReponse() {
@@ -53,7 +50,7 @@
   const lisIdQuestionCourante = (q: number) => etapesTestMaturite[q].id;
 
   $: idQuestionCourante = lisIdQuestionCourante(
-    $questionnaireStore.questionCourante
+    $questionnaireStore.questionCourante,
   );
 
   type CreationTest = {
@@ -91,7 +88,7 @@
 
   function doitMontrerPropositions() {
     const avecPropositions = etapesTestMaturite.filter(
-      (q) => q.propositions.length > 0
+      (q) => q.propositions.length > 0,
     );
     return $questionnaireStore.questionCourante < avecPropositions.length;
   }
@@ -106,8 +103,8 @@
       try {
         await axios.get(`/api/sessions-groupe/${codeSessionGroupe}`);
       } catch {
-        alert("Code de session inconnu, vous allez être redirigé");
-        window.location.href = "/session-groupe";
+        alert('Code de session inconnu, vous allez être redirigé');
+        window.location.href = '/session-groupe';
       }
     }
     organisateurSession = parametres.has('organisateur');
@@ -246,33 +243,35 @@
             </div>
           </div>
         {:else}
-          <div class="introduction">
-            <h2>Quelle est la maturité cyber de votre organisation ?</h2>
-            <p>
-              La maturité cyber <b>reflète</b> le niveau global de prise en
-              compte des enjeux de cybersécurité par une organisation. Répondez
-              à
-              <b>6 questions</b>
-              pour obtenir votre évaluation <b>indicative</b>.
-            </p>
-            <input
-              type="button"
-              class="bouton primaire taille-moyenne"
-              value="Débuter le test"
-              on:click={debuteTeste}
-            />
-            <div class="note">
-              Le résultat obtenu est une évaluation indicative basée sur un
-              modèle élaboré par l’ANSSI. La maturité cyber n’est pas une
-              évaluation du niveau de sécurité des systèmes d’information d’une
-              organisation mais de sa posture à l’égard des enjeux cyber.
+          <div class="contenu-test">
+            <div class="introduction">
+              <h2>Quelle est la maturité cyber de votre organisation ?</h2>
+              <p>
+                La maturité cyber <b>reflète</b> le niveau global de prise en
+                compte des enjeux de cybersécurité par une organisation. Répondez
+                à
+                <b>6 questions</b>
+                pour obtenir votre évaluation <b>indicative</b>.
+              </p>
+              <input
+                type="button"
+                class="bouton primaire taille-moyenne"
+                value="Débuter le test"
+                on:click={debuteTeste}
+              />
+              <div class="note">
+                Le résultat obtenu est une évaluation indicative basée sur un
+                modèle élaboré par l’ANSSI. La maturité cyber n’est pas une
+                évaluation du niveau de sécurité des systèmes d’information d’une
+                organisation mais de sa posture à l’égard des enjeux cyber.
+              </div>
             </div>
-          </div>
-          <div class="illustration">
-            <img
-              src="/assets/images/test-maturite/illustration-prise-en-compte-risque.svg"
-              alt=""
-            />
+            <div class="illustration">
+              <img
+                src="/assets/images/test-maturite/illustration-prise-en-compte-risque.svg"
+                alt=""
+              />
+            </div>
           </div>
         {/if}
       </div>
