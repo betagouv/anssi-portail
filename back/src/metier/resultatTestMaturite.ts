@@ -15,12 +15,26 @@ export type DonneesCreationResultatTestMaturite = {
   codeSessionGroupe?: string;
 };
 
-export type IdNiveauMaturite =
-  | 'insuffisant'
-  | 'emergent'
-  | 'intermediaire'
-  | 'confirme'
-  | 'optimal';
+export const tousLesIdNiveauMaturite = [
+  'insuffisant',
+  'emergent',
+  'intermediaire',
+  'confirme',
+  'optimal',
+];
+
+export type IdNiveauMaturite = (typeof tousLesIdNiveauMaturite)[number];
+
+export const tousLesIdRubrique = [
+  'prise-en-compte-risque',
+  'pilotage',
+  'budget',
+  'ressources-humaines',
+  'adoption-solutions',
+  'posture',
+];
+
+export type IdRubrique = (typeof tousLesIdRubrique)[number];
 
 export class ResultatTestMaturite {
   id!: string;
