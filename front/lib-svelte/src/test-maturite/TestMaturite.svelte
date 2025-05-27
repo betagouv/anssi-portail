@@ -259,7 +259,17 @@
                 value="Débuter le test"
                 on:click={debuteTeste}
               />
-              <div class="note">
+              <div class="acces-session-groupe">
+              <p>
+                Vous souhaitez organiser ou participer ce test à plusieurs, lors
+                d’un atelier ou d’un événement&nbsp;? Lancez une session de groupe
+                pour recueillir et comparer les résultats des participants.
+              </p>
+              <a href="/session-groupe" class="lien"
+                >Accéder à l’espace de test en groupe</a
+              >
+            </div>
+            <div class="note">
                 Le résultat obtenu est une évaluation indicative basée sur un
                 modèle élaboré par l’ANSSI. La maturité cyber n’est pas une
                 évaluation du niveau de sécurité des systèmes d’information d’une
@@ -285,3 +295,12 @@
     <PartageTest couleurFond="clair" />
   {/if}
 {/if}
+
+<style lang="scss">
+  .acces-session-groupe {
+    p {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+  }
+</style>
