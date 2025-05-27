@@ -188,7 +188,7 @@ section {
     }
 
     .bouton {
-      margin: 16px auto;
+      margin: 32px auto;
       @include a-partir-de(sm) {
         margin-left: 0;
       }
