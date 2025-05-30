@@ -37,7 +37,7 @@ export const questions: Question[] = [
     propositions: [
       "Les responsables sous-estiment le risque de cyberattaques pour leur organisation.",
       "Les responsables ont conscience de l’existence de risques cyber mais n’en mesurent pas l’ampleur.",
-      "Un premier travail de recensement des données et processus à protéger en priorité contre les risques cyber a été mené.",
+      "Un recensement des données et processus à protéger en priorité a été effectué.",
       "Une analyse de risque approfondie de l'organisation a été réalisée.",
       "La gestion des risques cyber est pleinement intégrée à la stratégie globale de gestion des risques.",
     ],
@@ -50,7 +50,7 @@ export const questions: Question[] = [
     propositions: [
       "Le renforcement de la cybersécurité de l'organisation n'est pas une priorité.",
       'Les responsables comprennent qu’il y a un enjeu mais le perçoivent comme avant tout technique.',
-      'L’intérêt pour le renforcement de la cybersécurité est réel les directions métiers sont sensibilisées.',
+      'L’intérêt pour le renforcement de la cybersécurité est réel et les directions métiers sont sensibilisées.',
       'La cybersécurité est un sujet prioritaire évoqué en CODIR et tous les agents sensibilisés.',
       'L’organisation est un acteur clé de la cybersécurité de son écosystème ou de son secteur d’activité.',
     ],
@@ -74,10 +74,10 @@ export const questions: Question[] = [
     question: 'Quels sont les moyens humains alloués à la cybersécurité&nbsp;?',
     propositions: [
       "L'organisation ne dispose d'aucune ressource dédiée à la cybersécurité.",
-      'L’organisation dispose d’une personne référente pour les enjeux cyber, en plus de ses missions habituelles.',
-      "Au moins une personne est responsable de la cybersécurité et se dédie aux enjeux cyber.",
-      "Au moins un(e) responsable de la sécurité des systèmes d'information se dédie entièrement au sujet. Cette personne dispose d’une équipe dédiée.",
-      "L’organisation dispose d'un(e) directeur(ice) cyber siégeant au CODIR et d'une ou plusieurs équipes cyber.",
+      'L’organisation dispose d’une personne référente sur les enjeux cyber, en plus de ses missions habituelles.',
+      "Une personne est, à temps plein, responsable des enjeux de cybersécurité.",
+      "Une équipe épaule la personne responsable des enjeux de cybersécurité.",
+      "Un(e) directeur(ice) cyber siège au CODIR.",
     ],
   },
   {
@@ -87,9 +87,9 @@ export const questions: Question[] = [
       'Quels sont les moyens budgétaires alloués à la cybersécurité&nbsp;?',
     propositions: [
       "Aucun.",
-      'Des dépenses occasionnelles sur la cybersécurité peuvent être autorisées.',
+      'Des dépenses occasionnelles sur la cybersécurité sont autorisées.',
       'Une part du budget informatique est alloué à la cybersécurité.',
-      "Une ligne budgétaire est spécifiquement dédiée à la cybersécurité.",
+      "Une ligne budgétaire est dédiée à la cybersécurité.",
       "La ligne dédiée à la cybersécurité est égale > ou = à 10% du budget informatique de l'organisation.",
     ],
   },
@@ -99,10 +99,10 @@ export const questions: Question[] = [
     question:
       "Quels produits ou services cyber sont utilisés au sein de l'organisation&nbsp;?",
     propositions: [
-      "L'organisation dispose tout au plus d'un antivirus, installé sur les postes informatiques des agents.",
-      'Une ou plusieurs solutions cyber ont été déployées en fonction des opportunités.',
-      'L’organisation dispose de quelques solutions cyber adaptées aux actions prioritaires identifiées.',
-      "Un audit de sécurité a été réalisé et des solutions en matière de détection et de réponse à incidents ont été ajoutées.",
+      "Aucun.",
+      'Un antivirus est a minima installé sur les postes informatiques.',
+      "Une ou plusieurs solutions visant à renforcer la protection des systèmes d'information sont déployées.",
+      "Un audit de sécurité approfondi a été réalisé et des solutions en matière de détection et de réponse à incidents ont été ajoutées.",
       "L'organisation dispose d'un panel complet de services et d'outils cyber intégrés et réalise des audits réguliers.",
     ],
   },
