@@ -176,7 +176,7 @@
                         bind:group={reponseCourante}
                         value={index}
                       />
-                      <span>{proposition}</span>
+                      <span>{index+1}.&nbsp;{proposition}</span>
                     </label>
                   {/each}
                 </div>
