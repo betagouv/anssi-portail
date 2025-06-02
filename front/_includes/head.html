@@ -11,6 +11,7 @@
   {% endif %}
 
   <title>{{page.titreHtml}}</title>
+  <meta name="description" content="{{ site.data.meta-description[page.url] | escape }}">
 
   <link rel="stylesheet" href="{{ "/assets/styles/site.css" | relative_url }}">
   <link rel="stylesheet" href="{{ "/assets/styles/boutons.css" | relative_url }}">

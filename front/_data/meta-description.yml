@@ -1,0 +1,43 @@
+# Ce fichier contient le contenu de la balise
+# meta "description" pour toutes les pages du site
+
+# La syntaxe de chaque ligne est la suivante :
+#<url>: <description>
+#      ^ cette espace est indispensable
+
+/accessibilite/:
+/apres-authentification/:
+/aPropos/:
+/catalogue/:
+/cgu/:
+/confidentialite/:
+/connexion/:
+/contacts/:
+/creation-compte/:
+/cyberdepart/:
+/favoris/:
+/favoris-partages/:
+/inscription/:
+/ma-maturite/:
+/mentionsLegales/:
+/nis2/:
+/niveaux-maturite/:
+/parcours-approfondir/:
+/parcours-debuter/:
+/promouvoir-messervicescyber/:
+/resultats-session-groupe/:
+/securite/:
+/services-anssi/:
+/session-groupe/:
+/statistiques/:
+/test-maturite/:
+/services/conseil-technique.html:
+/services/demainspecialistecyber.html:
+/services/mon-aide-cyber-aidants.html:
+/services/mon-aide-cyber.html:
+/services/mon-espace-nis2.html:
+/services/mon-service-securise.html:
+/services/secnum-academie.html:
+/ressources/cyber-enjeux.html:
+/ressources/cyber-enjeux-pro.html:
+/ressources/secnumedu.html:
