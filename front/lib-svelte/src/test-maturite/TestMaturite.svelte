@@ -1,6 +1,9 @@
 <script lang="ts">
   import { etapesTestMaturite } from './TestMaturite.donnees';
-  import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
+  import {
+    questionnaireStore,
+    resultatsQuestionnaire,
+  } from './stores/questionnaire.store';
   import Etapier from '../ui/Etapier.svelte';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
   import SelectSecteurActivite from './SelectSecteurActivite.svelte';
@@ -36,7 +39,7 @@
     reponseCourante =
       $questionnaireStore.toutesLesReponses[
         $questionnaireStore.questionCourante
-        ];
+      ];
     if (contenuTest)
       contenuTest.scrollIntoView({ behavior: 'smooth' });
   }
@@ -54,7 +57,7 @@
   const lisIdQuestionCourante = (q: number) => etapesTestMaturite[q].id;
 
   $: idQuestionCourante = lisIdQuestionCourante(
-    $questionnaireStore.questionCourante,
+    $questionnaireStore.questionCourante
   );
 
   type CreationTest = {
@@ -92,7 +95,7 @@
 
   function doitMontrerPropositions() {
     const avecPropositions = etapesTestMaturite.filter(
-      (q) => q.propositions.length > 0,
+      (q) => q.propositions.length > 0
     );
     return $questionnaireStore.questionCourante < avecPropositions.length;
   }
@@ -252,8 +255,8 @@
               <h2>Quelle est la maturité cyber de votre organisation ?</h2>
               <p>
                 La maturité cyber <b>reflète</b> le niveau global de prise en
-                compte des enjeux de cybersécurité par une organisation. Répondez
-                à
+                compte des enjeux de cybersécurité par une organisation.
+                Répondez à
                 <b>6 questions</b>
                 pour obtenir votre évaluation <b>indicative</b>.
               </p>
@@ -264,20 +267,21 @@
                 on:click={debuteTeste}
               />
               <div class="acces-session-groupe">
-              <p>
-                Vous souhaitez organiser ou participer ce test à plusieurs, lors
-                d’un atelier ou d’un événement&nbsp;? Lancez une session de groupe
-                pour recueillir et comparer les résultats des participants.
-              </p>
-              <a href="/session-groupe" class="lien"
-                >Accéder à l’espace de test en groupe</a
-              >
-            </div>
-            <div class="note">
+                <p>
+                  Vous souhaitez réaliser ce test à plusieurs, lors d’un atelier
+                  ou d’un événement ? Lancez une session de groupe pour
+                  recueillir et comparer les résultats des participants.
+                </p>
+                <a href="/session-groupe" class="lien"
+                  >Accéder à l’espace de session de groupe</a
+                >
+              </div>
+              <div class="note">
                 Le résultat obtenu est une évaluation indicative basée sur un
                 modèle élaboré par l’ANSSI. La maturité cyber n’est pas une
-                évaluation du niveau de sécurité des systèmes d’information d’une
-                organisation mais de sa posture à l’égard des enjeux cyber.
+                évaluation du niveau de sécurité des systèmes d’information
+                d’une organisation mais de sa posture à l’égard des enjeux
+                cyber.
               </div>
             </div>
             <div class="illustration">
