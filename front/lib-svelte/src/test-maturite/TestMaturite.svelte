@@ -28,6 +28,8 @@
   let codeSessionGroupe: string | undefined;
   let organisateurSession = false;
 
+  let contenuTest: HTMLElement;
+
   actualiseReponseCourante();
 
   function actualiseReponseCourante() {
@@ -35,6 +37,8 @@
       $questionnaireStore.toutesLesReponses[
         $questionnaireStore.questionCourante
         ];
+    if (contenuTest)
+      contenuTest.scrollIntoView({ behavior: 'smooth' });
   }
 
   function valideReponse() {
@@ -142,7 +146,7 @@
               description="En tant qu’organisateur, vos réponses ne seront pas enregistrées ni prises en compte dans les résultats du groupe."
             ></lab-anssi-alerte>
           {/if}
-          <div class="contenu-test">
+          <div class="contenu-test" bind:this={contenuTest}>
             <div class="formulaire">
               <p class="etape">
                 Étape {$questionnaireStore.questionCourante + 1} sur 7
