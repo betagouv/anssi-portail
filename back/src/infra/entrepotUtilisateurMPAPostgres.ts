@@ -1,6 +1,6 @@
 import Knex from 'knex';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { Utilisateur } from '../metier/utilisateur';
+import { Organisation, Utilisateur } from '../metier/utilisateur';
 import config from '../../knexfile';
 import { UtilisateurBDD } from './utilisateurBDD';
 import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi';
@@ -85,7 +85,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         infolettreAcceptee: donnees.infolettreAcceptee,
         siretEntite: organisation.siret,
         idListeFavoris: utilisateur.id_liste_favoris,
-        organisation,
+        organisation: new Organisation(organisation),
       },
       this.adaptateurRechercheEntreprise
     );
