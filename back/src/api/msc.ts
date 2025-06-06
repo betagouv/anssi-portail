@@ -109,6 +109,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'inscription',
     'cyberdepart',
     'promouvoir-messervicescyber',
+    'promouvoir-diagnostic-cyber',
     'session-groupe',
     'resultats-session-groupe',
   ].forEach((page) =>
