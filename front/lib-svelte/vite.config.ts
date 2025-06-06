@@ -24,7 +24,7 @@ export default defineConfig({
         'maturite-utilisateur': 'src/main-maturite-utilisateur.ts',
         'bouton-favori': 'src/main-bouton-favori.ts',
         'fil-ariane': 'src/main-fil-ariane.ts',
-        'promouvoir-msc': 'src/main-promouvoir-msc.ts',
+        'page-crisp': 'src/main-page-crisp.ts',
         'session-groupe': 'src/main-session-groupe.ts',
         'resultats-session-groupe': 'src/main-resultats-session-groupe.ts',
       },

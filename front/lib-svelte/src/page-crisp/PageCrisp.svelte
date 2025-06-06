@@ -3,6 +3,8 @@
   import { onMount } from 'svelte';
   import axios from 'axios';
 
+  export let clePageCrisp: string;
+
   type EntreeTableDesMatieres = {
     profondeur: number;
     texte: string;
@@ -25,7 +27,7 @@
 
   onMount(async () => {
     const reponse = await axios.get<PageHtmlCrisp>(
-      '/api/pages-crisp/promouvoir_msc'
+      '/api/pages-crisp/' + clePageCrisp
     );
     pageCrisp = reponse.data;
   });
