@@ -146,7 +146,24 @@ header {
     .titre-site {
       display: none;
       @include a-partir-de(md) {
-        display: block;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .titre-principal {
+        display: flex;
+        align-items: start;
+        gap: 4px
+      }
+
+      .badge-agent-anssi {
+        text-transform: uppercase;
+        padding: 0 6px;
+        border-radius: 4px;
+        color: #2F4077FF;
+        font-weight: bold;
+        font-size: 0.8rem;
+        background-color: #E9EDFEFF;
       }
 
       h1 {
