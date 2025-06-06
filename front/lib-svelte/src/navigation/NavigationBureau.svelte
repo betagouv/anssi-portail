@@ -47,10 +47,26 @@
       href={estConnecte ? '/ma-maturite' : '/test-maturite/'}
       label={estConnecte ? 'Maturité cyber' : 'Tester votre maturité cyber'}
     />
-    <LienNavigation
-      href="/promouvoir-messervicescyber/"
-      label="Promouvoir MesServicesCyber"
-    />
+    <details
+      class:actif={cheminRelatif === '/promouvoir-messervicescyber/' ||
+          cheminRelatif === '/promouvoir-diagnostic-cyber/'}
+    >
+      <summary>
+        Promouvoir
+      </summary>
+      <div class="choix">
+        <LienNavigation
+          href="/promouvoir-messervicescyber/"
+          label="Promouvoir MesServicesCyber"
+          dansMenuDeroulant
+        />
+        <LienNavigation
+          href="/promouvoir-diagnostic-cyber/"
+          label="Promouvoir le diagnostic cyber"
+          dansMenuDeroulant
+        />
+      </div>
+    </details>
     {#if estConnecte}
       <LienNavigation href="/contacts/" label="Contacts utiles" />
       <LienNavigation href="/favoris/" label="Favoris" />
