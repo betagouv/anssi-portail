@@ -21,6 +21,7 @@ const ressourceProfil = ({
         nom: utilisateurConnecte?.nom,
         prenom: utilisateurConnecte?.prenom,
         siret: (await utilisateurConnecte?.organisation())?.siret,
+        estAgentAnssi: (await utilisateurConnecte?.estAgentAnssi()),
         idListeFavoris: utilisateurConnecte?.idListeFavoris,
       });
     }
