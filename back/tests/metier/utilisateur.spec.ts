@@ -1,21 +1,29 @@
 import { describe, it } from 'node:test';
-import { Utilisateur } from '../../src/metier/utilisateur';
+import { Organisation, Utilisateur } from '../../src/metier/utilisateur';
 import assert from 'node:assert';
 import { fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 
 describe("L'utilisateur", () => {
+  const infosUtilisateur = {
+    email: 'jeanne@chezelle.fr',
+    prenom: 'Jeanne',
+    nom: 'Dupont',
+    siretEntite: '1234',
+    cguAcceptees: true,
+    domainesSpecialite: ['a'],
+    infolettreAcceptee: false,
+  };
+
   it("utilise l'organisation fournie en priorite", async () => {
     const utilisateur = new Utilisateur(
       {
-        email: 'jeanne@chezelle.fr',
-        prenom: 'Jeanne',
-        nom: 'Dupont',
-        siretEntite: '1234',
-        cguAcceptees: true,
-        domainesSpecialite: ['a'],
-        infolettreAcceptee: false,
-        organisation: { nom: 'beta', departement: '33', siret: '1234' },
+        ...infosUtilisateur,
+        organisation: new Organisation({
+          nom: 'beta',
+          departement: '33',
+          siret: '1234',
+        }),
       },
       fauxAdaptateurRechercheEntreprise
     );
@@ -37,13 +45,8 @@ describe("L'utilisateur", () => {
     };
     const utilisateur = new Utilisateur(
       {
-        email: 'jeanne@chezelle.fr',
-        prenom: 'Jeanne',
-        nom: 'Dupont',
-        siretEntite: '1234',
-        cguAcceptees: true,
-        domainesSpecialite: ['a'],
-        infolettreAcceptee: false,
+        ...infosUtilisateur,
+        organisation: undefined,
       },
       rechercheEntreprise
     );
@@ -55,5 +58,59 @@ describe("L'utilisateur", () => {
     assert.equal(organisation.departement, '01');
     assert.equal(organisation.siret, '98');
     assert.equal(1, nombreRecherchesEntreprise);
+  });
+
+  it("se décrit comme un agent ANSSI si son organisation est le siège social de l'ANSSI", async () => {
+    const utilisateur = new Utilisateur(
+      {
+        ...infosUtilisateur,
+        organisation: new Organisation({
+          nom: 'ANSSI',
+          departement: '75',
+          siret: '13000766900018',
+        }),
+      },
+      fauxAdaptateurRechercheEntreprise
+    );
+
+    const estAgentAnssi = await utilisateur.estAgentAnssi();
+
+    assert.equal(estAgentAnssi, true);
+  });
+
+  it("se décrit comme un agent ANSSI si son organisation n'est pas l'ANSSI", async () => {
+    const utilisateur = new Utilisateur(
+      {
+        ...infosUtilisateur,
+        organisation: new Organisation({
+          nom: 'ANSSI',
+          departement: '75',
+          siret: '2424242000023',
+        }),
+      },
+      fauxAdaptateurRechercheEntreprise
+    );
+
+    const estAgentAnssi = await utilisateur.estAgentAnssi();
+
+    assert.equal(estAgentAnssi, false);
+  });
+
+  it("se décrit comme un agent ANSSI si son organisation est un établissement de l'ANSSI", async () => {
+    const utilisateur = new Utilisateur(
+      {
+        ...infosUtilisateur,
+        organisation: new Organisation({
+          nom: 'ANSSI',
+          departement: '75',
+          siret: '13000766912345',
+        }),
+      },
+      fauxAdaptateurRechercheEntreprise
+    );
+
+    const estAgentAnssi = await utilisateur.estAgentAnssi();
+
+    assert.equal(estAgentAnssi, true);
   });
 });
