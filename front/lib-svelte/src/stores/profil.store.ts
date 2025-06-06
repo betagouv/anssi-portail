@@ -7,6 +7,7 @@ type Profil = {
   nom: string;
   email: string;
   siret: string;
+  estAgentAnssi: boolean;
   idListeFavoris: string;
 };
 
