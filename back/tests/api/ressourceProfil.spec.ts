@@ -44,6 +44,7 @@ describe('La ressource Profil', () => {
       assert.equal(reponse.body.prenom, 'Jeanne');
       assert.equal(reponse.body.email, 'jeanne.dupont@user.com');
       assert.equal(reponse.body.siret, '13000766900018');
+      assert.equal(reponse.body.estAgentAnssi, true);
       assert.equal(
         reponse.body.idListeFavoris,
         jeanneEntreposee!.idListeFavoris

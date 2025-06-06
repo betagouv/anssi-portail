@@ -27,6 +27,7 @@ export default defineConfig({
         'page-crisp': 'src/main-page-crisp.ts',
         'session-groupe': 'src/main-session-groupe.ts',
         'resultats-session-groupe': 'src/main-resultats-session-groupe.ts',
+        'badge-agent-anssi': 'src/main-badge-agent-anssi.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,

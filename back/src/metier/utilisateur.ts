@@ -1,10 +1,28 @@
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 
-type Organisation = {
+export class Organisation {
   nom: string;
   siret: string;
   departement: string | null;
-};
+
+  constructor({
+    nom,
+    siret,
+    departement,
+  }: {
+    nom: string;
+    siret: string;
+    departement: string | null;
+  }) {
+    this.nom = nom;
+    this.siret = siret;
+    this.departement = departement;
+  }
+
+  estAnssi = () => {
+    return this.siret.startsWith('130007669');
+  };
+}
 
 interface InformationsCreationUtilisateur {
   email: string;
@@ -67,8 +85,12 @@ export class Utilisateur {
           this.siretEntite,
           null
         );
-      this._organisation = organisations[0];
+      this._organisation = new Organisation(organisations[0]);
     }
     return this._organisation;
   }
+
+  estAgentAnssi = async () => {
+    return (await this.organisation()).estAnssi();
+  };
 }
