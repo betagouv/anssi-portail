@@ -20,6 +20,15 @@
   --menu-fond-clique: rgba(0, 0, 0, 0.08);
   --fonts: Marianne, Arial, sans-serif;
   --erreur-texte: #ce0500;
+
+  /* thème ui kit */
+  --titre-couleur-primaire: #0D0C21;
+  --bandeau-titre-background: var(--centre-aide-background-entete);
+  --couleur-lien: #0D0C21;
+  --filtre-couleur-primaire: brightness(0) invert(3%) sepia(26%) saturate(6797%) hue-rotate(236deg) brightness(105%) contrast(97%);
+  --sommaire-actif-indicateur-couleur: #FED980;
+  --sommaire-actif-couleur: #0D0C21;
+  --sommaire-mobile-fond: #FFF7DB;
 }
 
 :root {
