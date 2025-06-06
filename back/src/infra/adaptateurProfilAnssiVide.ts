@@ -6,7 +6,7 @@ export const adaptateurProfilAnssiVide = (): AdaptateurProfilAnssi => ({
     nom: 'Dupont',
     email,
     domainesSpecialite: ['RSSI'],
-    organisation: { nom: 'ANSSI', siret: '12345678901234', departement: '33' },
+    organisation: { nom: 'ANSSI', siret: '13000766900018', departement: '33' },
   }),
   metsAJour: async () => {},
 });
