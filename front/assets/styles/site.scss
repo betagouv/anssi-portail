@@ -118,30 +118,41 @@ header {
     }
   }
 
-  .contenu-section {
+  .logo-anssi {
+    width: 68px;
+    height: 68px;
+  }
+
+  .entete-principale {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 20px 0;
 
-    @include a-partir-de(md) {
-      justify-content: flex-start;
+    .titre-msc {
+      display: none;
+      margin-left: 32px;
+      @include a-partir-de(lg) {
+        display: flex;
+      }
+    }
+  }
+
+  .entete-secondaire {
+    display: block;
+    border-top: 1px solid var(--gris-clair);
+    padding: 12px 0;
+    @include a-partir-de(lg) {
+      display: none;
+    }
+
+    .titre-msc {
+      display: flex;
     }
   }
 
   .titre-msc {
-    margin-left: 32px;
-    display: none;
     align-items: center;
     gap: 32px;
-    @include a-partir-de(md) {
-      display: flex;
-    }
-
-    .logo-anssi {
-      width: 68px;
-      height: 68px;
-    }
 
     .titre-site {
       display: flex;
@@ -149,18 +160,8 @@ header {
 
       .titre-principal {
         display: flex;
-        align-items: start;
-        gap: 4px;
-      }
-
-      .badge-agent-anssi {
-        text-transform: uppercase;
-        padding: 0 6px;
-        border-radius: 4px;
-        color: #2f4077ff;
-        font-weight: bold;
-        font-size: 0.8rem;
-        background-color: #e9edfeff;
+        align-items: center;
+        gap: 8px;
       }
 
       h1 {
