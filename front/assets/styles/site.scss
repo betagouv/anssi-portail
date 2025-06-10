@@ -128,6 +128,10 @@ header {
     align-items: center;
     justify-content: flex-start;
 
+    @include a-partir-de(lg) {
+      padding: 12px 0;
+    }
+
     .titre-msc {
       display: none;
       margin-left: 32px;
