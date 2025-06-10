@@ -22,13 +22,14 @@
   --erreur-texte: #ce0500;
 
   /* thème ui kit */
-  --titre-couleur-primaire: #0D0C21;
+  --titre-couleur-primaire: #0d0c21;
   --bandeau-titre-background: var(--centre-aide-background-entete);
-  --couleur-lien: #0D0C21;
-  --filtre-couleur-primaire: brightness(0) invert(3%) sepia(26%) saturate(6797%) hue-rotate(236deg) brightness(105%) contrast(97%);
-  --sommaire-actif-indicateur-couleur: #FED980;
-  --sommaire-actif-couleur: #0D0C21;
-  --sommaire-mobile-fond: #FFF7DB;
+  --couleur-lien: #0d0c21;
+  --filtre-couleur-primaire: brightness(0) invert(3%) sepia(26%) saturate(6797%)
+    hue-rotate(236deg) brightness(105%) contrast(97%);
+  --sommaire-actif-indicateur-couleur: #fed980;
+  --sommaire-actif-couleur: #0d0c21;
+  --sommaire-mobile-fond: #fff7db;
 }
 
 :root {
@@ -130,40 +131,36 @@ header {
 
   .titre-msc {
     margin-left: 32px;
-    display: flex;
+    display: none;
     align-items: center;
     gap: 32px;
+    @include a-partir-de(md) {
+      display: flex;
+    }
 
     .logo-anssi {
       width: 68px;
       height: 68px;
-      display: none;
-      @include a-partir-de(md) {
-        display: block;
-      }
     }
 
     .titre-site {
-      display: none;
-      @include a-partir-de(md) {
-        display: flex;
-        flex-direction: column;
-      }
+      display: flex;
+      flex-direction: column;
 
       .titre-principal {
         display: flex;
         align-items: start;
-        gap: 4px
+        gap: 4px;
       }
 
       .badge-agent-anssi {
         text-transform: uppercase;
         padding: 0 6px;
         border-radius: 4px;
-        color: #2F4077FF;
+        color: #2f4077ff;
         font-weight: bold;
         font-size: 0.8rem;
-        background-color: #E9EDFEFF;
+        background-color: #e9edfeff;
       }
 
       h1 {
