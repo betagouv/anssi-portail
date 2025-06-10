@@ -1,6 +1,10 @@
-import { mount } from "svelte";
-import BadgeAgentAnssi from "./badge-agent-anssi/BadgeAgentAnssi.svelte";
+import { mount } from 'svelte';
+import BadgeAgentAnssi from './badge-agent-anssi/BadgeAgentAnssi.svelte';
 
-mount(BadgeAgentAnssi, {
-  target: document.getElementById('zone-badge-agent-anssi')!,
-});
+const zones = document.getElementsByClassName('zone-badge-agent-anssi');
+
+for (const zone of zones) {
+  mount(BadgeAgentAnssi, {
+    target: zone,
+  });
+}

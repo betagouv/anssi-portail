@@ -1,46 +1,62 @@
 <header id="haut-de-page" class="fr-header__brand">
   <div class="contenu-section">
-    <a href="/">
-      <img
-        src="/assets/images/marianne-dark.svg"
-        class="marianne"
-        alt="Marianne"
-      />
-    </a>
+    <script
+      type="module"
+      crossorigin
+      src="/lib-svelte/dist/assets/badge-agent-anssi.js"
+    ></script>
 
-    <a href="/" class="titre-msc" aria-label="Retour à l’accueil">
-      <img
-        class="logo-anssi"
-        src="/assets/images/logo-anssi.svg"
-        alt="Logo ANSSI"
-      />
+    <div class="entete-principale">
+      <a href="/">
+        <img
+          src="/assets/images/marianne-dark.svg"
+          class="marianne"
+          alt="Marianne"
+        />
+      </a>
+
+      <a href="https://cyber.gouv.fr" aria-label="Site de l’ANSSI">
+        <img
+          class="logo-anssi"
+          src="/assets/images/logo-anssi.svg"
+          alt="Logo ANSSI"
+        />
+      </a>
+
+      <a href="/" class="titre-msc" aria-label="Retour à l’accueil">
+        <div class="titre-site">
+          <div class="titre-principal">
+            <h1>MesServicesCyber</h1>
+            <div class="zone-badge-agent-anssi"></div>
+          </div>
+          <h2>Innovation ANSSI</h2>
+        </div>
+      </a>
 
       <script
         type="module"
         crossorigin
-        src="/lib-svelte/dist/assets/badge-agent-anssi.js"
+        src="/lib-svelte/dist/assets/identification.js"
       ></script>
 
-      <div class="titre-site">
-        <div class="titre-principal">
-          <h1>MesServicesCyber</h1>
-          <div id="zone-badge-agent-anssi"></div>
+      <lab-anssi-bouton-suite-cyber-navigation></lab-anssi-bouton-suite-cyber-navigation>
+
+      <div id="zone-identification"></div>
+
+      <div id="menu-burger-mobile"></div>
+    </div>
+    <div class="entete-secondaire">
+      <a href="/" class="titre-msc" aria-label="Retour à l’accueil">
+
+        <div class="titre-site">
+          <div class="titre-principal">
+            <h1>MesServicesCyber</h1>
+            <div class="zone-badge-agent-anssi"></div>
+          </div>
+          <h2>Innovation ANSSI</h2>
         </div>
-        <h2>Innovation ANSSI</h2>
-      </div>
-    </a>
-
-    <script
-      type="module"
-      crossorigin
-      src="/lib-svelte/dist/assets/identification.js"
-    ></script>
-
-    <lab-anssi-bouton-suite-cyber-navigation></lab-anssi-bouton-suite-cyber-navigation>
-
-    <div id="zone-identification"></div>
-
-    <div id="menu-burger-mobile"></div>
+      </a>
+    </div>
   </div>
 </header>
 
