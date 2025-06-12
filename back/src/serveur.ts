@@ -49,6 +49,8 @@ const cmsCrisp = new CmsCrisp(crispIdSite, crispCleApi);
 
 const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
 
+adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
+
 creeServeur({
   fournisseurChemin,
   middleware: fabriqueMiddleware({ adaptateurJWT, fournisseurChemin }),
