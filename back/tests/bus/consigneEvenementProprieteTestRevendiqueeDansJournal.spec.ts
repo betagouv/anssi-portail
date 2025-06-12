@@ -4,24 +4,25 @@ import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
 import { ProprieteTestRevendiquee } from '../../src/bus/evenements/proprieteTestRevendiquee';
 import { consigneEvenementProprieteTestRevendiqueeDansJournal } from '../../src/bus/consigneEvenementProprieteTestRevendiqueeDansJournal';
-import { AdaptateurChiffrement } from '../../src/infra/adaptateurChiffrement';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 
 describe("L'abonnement qui consigne la revendication de la propriété d'un test dans le journal", () => {
   let adaptateurHorloge: AdaptateurHorloge;
   let adaptateurJournal: AdaptateurJournal;
-  let adaptateurChiffrement: AdaptateurChiffrement;
+  let adaptateurHachage: AdaptateurHachage;
 
-  const consigneEvenementDansJournal = () =>
-    consigneEvenementProprieteTestRevendiqueeDansJournal({
+  const consigneEvenementDansJournal = () => {
+    return consigneEvenementProprieteTestRevendiqueeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
-      adaptateurChiffrement,
+      adaptateurHachage,
     });
+  };
 
   beforeEach(() => {
     adaptateurHorloge = { maintenant: () => new Date() };
-    adaptateurChiffrement = {
-      hacheSha256: (chaineEnClair: string) => `${chaineEnClair}-hache`,
+    adaptateurHachage = {
+      hache: (valeur) => `${valeur}-hacheHMAC`,
     };
   });
 
@@ -64,7 +65,7 @@ describe("L'abonnement qui consigne la revendication de la propriété d'un test
       })
     );
 
-    assert.equal(evenementRecu!.donnees.idUtilisateur, 'u1@mail.com-hache');
+    assert.equal(evenementRecu!.donnees.idUtilisateur, 'u1@mail.com-hacheHMAC');
     assert.equal(evenementRecu!.donnees.emailUtilisateur, undefined);
   });
 });

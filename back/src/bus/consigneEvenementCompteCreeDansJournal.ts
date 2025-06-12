@@ -1,21 +1,21 @@
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../infra/adaptateurJournal';
 import { CompteCree } from './evenements/compteCree';
-import { AdaptateurChiffrement } from '../infra/adaptateurChiffrement';
+import { AdaptateurHachage } from '../infra/adaptateurHachage';
 
 export const consigneEvenementCompteCreeDansJournal = ({
   adaptateurJournal,
   adaptateurHorloge,
-  adaptateurChiffrement,
+  adaptateurHachage,
 }: {
   adaptateurJournal: AdaptateurJournal;
   adaptateurHorloge: AdaptateurHorloge;
-  adaptateurChiffrement: AdaptateurChiffrement;
+  adaptateurHachage: AdaptateurHachage;
 }) => {
   return async function (evenement: CompteCree) {
     await adaptateurJournal.consigneEvenement({
       donnees: {
-        idUtilisateur: adaptateurChiffrement.hacheSha256(evenement.email),
+        idUtilisateur: adaptateurHachage.hache(evenement.email),
       },
       type: 'NOUVEL_UTILISATEUR_INSCRIT',
       date: adaptateurHorloge.maintenant(),

@@ -4,7 +4,7 @@ import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
 import { CompteCree } from '../../src/bus/evenements/compteCree';
 import { consigneEvenementCompteCreeDansJournal } from '../../src/bus/consigneEvenementCompteCreeDansJournal';
-import { AdaptateurChiffrement } from '../../src/infra/adaptateurChiffrement';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 
 describe("L'abonnement qui consigne la création d'un compte utilisateur dans le journal", () => {
   it('consigne un évènement de NouvelUtilisateurInscrit', async () => {
@@ -18,14 +18,14 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
       maintenant: () => new Date('2025-03-10'),
     };
 
-    const adaptateurChiffrement: AdaptateurChiffrement = {
-      hacheSha256: (chaineEnClair: string) => `${chaineEnClair}-hache`,
+    const adaptateurHachage: AdaptateurHachage = {
+      hache: (valeur) => `${valeur}-hacheHMAC`,
     };
 
     await consigneEvenementCompteCreeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
-      adaptateurChiffrement,
+      adaptateurHachage,
     })(
       new CompteCree({
         email: 'u1@mail.com',
@@ -37,7 +37,7 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
 
     assert.deepEqual(evenementRecu, {
       type: 'NOUVEL_UTILISATEUR_INSCRIT',
-      donnees: { idUtilisateur: 'u1@mail.com-hache' },
+      donnees: { idUtilisateur: 'u1@mail.com-hacheHMAC' },
       date: new Date('2025-03-10'),
     });
   });
