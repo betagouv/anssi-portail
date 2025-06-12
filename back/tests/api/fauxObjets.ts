@@ -84,6 +84,9 @@ export const fauxMiddleware: Middleware = {
 const fauxAdaptateurMonAideCyber = { creeDemandeAide: () => Promise.resolve() };
 
 export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
+  hachage: () => ({
+    tousLesSecretsDeHachage: () => [{ version: 1, secret: 'secret' }],
+  }),
   urlBaseMSC: () => 'http://localhost',
   oidc: () => ({
     urlRedirectionApresAuthentification: () => '',

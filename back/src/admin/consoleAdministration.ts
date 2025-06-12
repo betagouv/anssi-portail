@@ -28,7 +28,7 @@ import {
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
   private adaptateurEmail: AdaptateurEmail;
-  private adaptateurChiffrement: AdaptateurChiffrement;
+  private readonly adaptateurChiffrement: AdaptateurChiffrement;
   private readonly adaptateurHachage: AdaptateurHachage;
   private entrepotFavori: EntrepotFavori;
   private knexJournal: Knex.Knex;
@@ -36,15 +36,17 @@ export class ConsoleAdministration {
 
   constructor() {
     const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
-    this.entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres(
-      adaptateurProfilAnssi,
-      adaptateurRechercheEntreprise
-    );
+    this.adaptateurChiffrement = fabriqueAdaptateurChiffrement();
     this.adaptateurHachage = fabriqueAdaptateurHachage({
       adaptateurEnvironnement,
     });
+    this.entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
+      adaptateurProfilAnssi,
+      adaptateurRechercheEntreprise,
+      adaptateurChiffrement: this.adaptateurChiffrement,
+      adaptateurHachage: this.adaptateurHachage,
+    });
     this.adaptateurEmail = fabriqueAdaptateurEmail();
-    this.adaptateurChiffrement = fabriqueAdaptateurChiffrement();
     this.entrepotFavori = new EntrepotFavoriPostgres();
     const configDuJournal = {
       client: 'pg',

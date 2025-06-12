@@ -8,7 +8,7 @@ export type AdaptateurHachage = {
   hache: (valeur: string) => string;
 };
 
-export const adaptateurHachage = ({
+export const fabriqueAdaptateurHachage = ({
   adaptateurEnvironnement,
 }: {
   adaptateurEnvironnement: AdaptateurEnvironnement;

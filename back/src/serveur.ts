@@ -20,10 +20,17 @@ import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 import { CmsCrisp } from '@lab-anssi/lib';
 import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
+import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement();
 const adaptateurJournal = fabriqueAdaptateurJournal();
+const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
+const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber();
+const adaptateurHachage = fabriqueAdaptateurHachage({
+  adaptateurEnvironnement,
+});
+
 const entrepotFavori = new EntrepotFavoriPostgres();
 
 const busEvenements = new BusEvenements();
@@ -32,12 +39,9 @@ cableTousLesAbonnes({
   adaptateurEmail,
   adaptateurJournal,
   adaptateurHorloge,
-  adaptateurChiffrement,
+  adaptateurHachage,
   entrepotFavori,
 });
-
-const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
-const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber();
 
 const crispIdSite = process.env.CRISP_ID_SITE;
 const crispCleApi = process.env.CRISP_CLE_API;
@@ -58,10 +62,12 @@ creeServeur({
   adaptateurJWT,
   adaptateurGestionErreur: adaptateurGestionErreurSentry,
   busEvenements,
-  entrepotUtilisateur: new EntrepotUtilisateurMPAPostgres(
+  entrepotUtilisateur: new EntrepotUtilisateurMPAPostgres({
     adaptateurProfilAnssi,
-    adaptateurRechercheEntreprise
-  ),
+    adaptateurRechercheEntreprise,
+    adaptateurChiffrement,
+    adaptateurHachage,
+  }),
   reseau: {
     trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
     maxRequetesParMinutes: adaptateurEnvironnement
