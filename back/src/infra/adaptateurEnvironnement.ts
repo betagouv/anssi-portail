@@ -19,6 +19,9 @@ type AdaptateurEnvironnement = {
   crisp: () => {
     idArticle: (id: string) => string | undefined;
   };
+  hachage: () => {
+    tousLesSecretsDeHachage: () => { version: number; secret: string }[];
+  };
 };
 
 const adaptateurEnvironnement: AdaptateurEnvironnement = {
@@ -66,6 +69,39 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
   crisp: () => ({
     idArticle: (id: string) => {
       return process.env[`ARTICLE_${id}_ID`];
+    },
+  }),
+  hachage: () => ({
+    tousLesSecretsDeHachage: () => {
+      type VersionDeSecret = {
+        version: string;
+        valeur: string;
+      };
+      const secrets = Object.entries(process.env)
+        .map(([cle, valeur]) => {
+          const matches = cle.match(/HACHAGE_SECRET_DE_HACHAGE_(\d+)/);
+          const version = matches ? matches[1] : undefined;
+          return { version, valeur };
+        })
+        .filter((objet): objet is VersionDeSecret => !!objet.version)
+        .map(({ version, valeur }) => {
+          if (!valeur) {
+            throw new Error(
+              `Le secret de hachage HACHAGE_SECRET_DE_HACHAGE_${version} ne doit pas être vide`
+            );
+          }
+          return {
+            version: parseInt(version, 10),
+            secret: valeur,
+          };
+        })
+        .sort(
+          ({ version: version1 }, { version: version2 }) => version1 - version2
+        );
+      if (secrets.length === 0) {
+        throw new Error('Il doit y avoir au moins un secret de hachage');
+      }
+      return secrets;
     },
   }),
 };
