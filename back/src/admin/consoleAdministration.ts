@@ -18,6 +18,7 @@ import { MiseAJourFavorisUtilisateur } from '../bus/miseAJourFavorisUtilisateur'
 import { EntrepotFavori } from '../metier/entrepotFavori';
 import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres';
 import Knex from 'knex';
+import config from '../../knexfile';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
@@ -25,6 +26,7 @@ export class ConsoleAdministration {
   private adaptateurChiffrement: AdaptateurChiffrement;
   private entrepotFavori: EntrepotFavori;
   private knexJournal: Knex.Knex;
+  private knexMSC: Knex.Knex;
 
   constructor() {
     const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
@@ -46,6 +48,7 @@ export class ConsoleAdministration {
       },
     };
     this.knexJournal = Knex(configDuJournal);
+    this.knexMSC = Knex(config);
   }
 
   static async rattrapage<T>(
@@ -190,7 +193,7 @@ export class ConsoleAdministration {
       const majEvenements = evenements.map(({ id, donnees }, index) => {
         process.stdout.write(
           `\rConstruction des données: ${(
-            (index / (evenements.length)) *
+            (index / evenements.length) *
             100.0
           ).toFixed(2)}% (${index}/${evenements.length})`
         );
@@ -210,7 +213,7 @@ export class ConsoleAdministration {
             compteur += 1;
             process.stdout.write(
               `\rExécution des promesses: ${(
-                (compteur / (evenements.length)) *
+                (compteur / evenements.length) *
                 100.0
               ).toFixed(2)}% (${compteur}/${evenements.length})`
             );
@@ -221,6 +224,68 @@ export class ConsoleAdministration {
       await Promise.all(majEvenements);
       process.stdout.write('\n');
       process.stdout.write('Fin de la migration des événements\n');
+    });
+  }
+
+  async migreLesHashSha256DuJournal() {
+    const leHashHMACCorrespondantA = async (leHash256: string) => {
+      const ligne = await this.knexMSC('utilisateurs')
+        .where({ email_hache_256: leHash256 })
+        .first();
+      return ligne ? ligne.email_hache : null;
+    };
+
+    process.stdout.write(
+      'Migration des événements avec email hachés avec algo SHA256\n'
+    );
+    await this.knexJournal.transaction(async (trx) => {
+      const evenements = await trx('journal_msc.evenements').whereRaw(
+        "donnees->>'idUtilisateur' IS NOT NULL"
+      );
+      process.stdout.write('\n');
+      let compteur = 0;
+
+      await this.knexJournal.transaction(async (trx) => {
+        const majEvenements = evenements.map(({ id, donnees }, index) => {
+          process.stdout.write(
+            `\rConstruction des données: ${(
+              (index / evenements.length) *
+              100.0
+            ).toFixed(2)}% (${index}/${evenements.length})`
+          );
+
+          return leHashHMACCorrespondantA(donnees.idUtilisateur).then(
+            (emailHacheAvecHMAC) => {
+              if (!emailHacheAvecHMAC) {
+                return new Promise((resolve) => resolve(null));
+              }
+
+              const nouvellesDonnees = {
+                ...donnees,
+                idUtilisateur: emailHacheAvecHMAC,
+              };
+
+              return trx('journal_msc.evenements')
+                .where({ id })
+                .update({ donnees: nouvellesDonnees })
+                .then(() => {
+                  compteur += 1;
+                  process.stdout.write(
+                    `\rExécution des promesses: ${(
+                      (compteur / evenements.length) *
+                      100.0
+                    ).toFixed(2)}% (${compteur}/${evenements.length})`
+                  );
+                });
+            }
+          );
+        });
+
+        process.stdout.write('\n');
+        await Promise.all(majEvenements);
+        process.stdout.write('\n');
+        process.stdout.write('Fin de la migration des événements\n');
+      });
     });
   }
 }
