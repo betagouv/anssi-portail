@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
-import { adaptateurHachage } from '../../src/infra/adaptateurHachage';
+import { fabriqueAdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
 
@@ -14,7 +14,7 @@ describe("L'adaptateur de hachage", () => {
         }),
       };
 
-      const hache = adaptateurHachage({
+      const hache = fabriqueAdaptateurHachage({
         adaptateurEnvironnement,
       }).hache('7276abd6-98bb-4bc9-bd17-d50a56aba7e4');
 
@@ -35,7 +35,7 @@ describe("L'adaptateur de hachage", () => {
         }),
       };
 
-      const hache = adaptateurHachage({
+      const hache = fabriqueAdaptateurHachage({
         adaptateurEnvironnement,
       }).hache('7276abd6-98bb-4bc9-bd17-d50a56aba7e4');
 
@@ -53,7 +53,7 @@ describe("L'adaptateur de hachage", () => {
         }),
       };
 
-      const hache = adaptateurHachage({
+      const hache = fabriqueAdaptateurHachage({
         adaptateurEnvironnement,
       }).hache('7276abd6-98bb-4bc9-bd17-d50a56aba7e4');
 
