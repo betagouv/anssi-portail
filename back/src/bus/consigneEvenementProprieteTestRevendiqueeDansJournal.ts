@@ -1,23 +1,21 @@
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../infra/adaptateurJournal';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee';
-import { AdaptateurChiffrement } from '../infra/adaptateurChiffrement';
+import { AdaptateurHachage } from '../infra/adaptateurHachage';
 
 export const consigneEvenementProprieteTestRevendiqueeDansJournal = ({
   adaptateurJournal,
   adaptateurHorloge,
-  adaptateurChiffrement,
+  adaptateurHachage,
 }: {
   adaptateurJournal: AdaptateurJournal;
   adaptateurHorloge: AdaptateurHorloge;
-  adaptateurChiffrement: AdaptateurChiffrement;
+  adaptateurHachage: AdaptateurHachage;
 }) => {
   return async function (evenement: ProprieteTestRevendiquee) {
     await adaptateurJournal.consigneEvenement({
       donnees: {
-        idUtilisateur: adaptateurChiffrement.hacheSha256(
-          evenement.emailUtilisateur
-        ),
+        idUtilisateur: adaptateurHachage.hache(evenement.emailUtilisateur),
         idResultatTest: evenement.idResultatTest,
       },
       type: 'PROPRIETE_TEST_REVENDIQUEE',

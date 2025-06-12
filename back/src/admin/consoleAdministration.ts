@@ -19,11 +19,17 @@ import { EntrepotFavori } from '../metier/entrepotFavori';
 import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres';
 import Knex from 'knex';
 import config from '../../knexfile';
+import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
+import {
+  AdaptateurHachage,
+  fabriqueAdaptateurHachage,
+} from '../infra/adaptateurHachage';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
   private adaptateurEmail: AdaptateurEmail;
   private adaptateurChiffrement: AdaptateurChiffrement;
+  private readonly adaptateurHachage: AdaptateurHachage;
   private entrepotFavori: EntrepotFavori;
   private knexJournal: Knex.Knex;
   private knexMSC: Knex.Knex;
@@ -34,6 +40,9 @@ export class ConsoleAdministration {
       adaptateurProfilAnssi,
       adaptateurRechercheEntreprise
     );
+    this.adaptateurHachage = fabriqueAdaptateurHachage({
+      adaptateurEnvironnement,
+    });
     this.adaptateurEmail = fabriqueAdaptateurEmail();
     this.adaptateurChiffrement = fabriqueAdaptateurChiffrement();
     this.entrepotFavori = new EntrepotFavoriPostgres();
@@ -120,9 +129,7 @@ export class ConsoleAdministration {
       journal.consigneEvenement({
         type: 'MISE_A_JOUR_FAVORIS_UTILISATEUR',
         donnees: {
-          idUtilisateur: this.adaptateurChiffrement.hacheSha256(
-            evenement.email
-          ),
+          idUtilisateur: this.adaptateurHachage.hache(evenement.email),
           listeIdFavoris: await constitueListeIdFavorisUtilisateur(
             evenement.email
           ),
@@ -161,9 +168,7 @@ export class ConsoleAdministration {
       journal.consigneEvenement({
         type: 'NOUVEL_UTILISATEUR_INSCRIT',
         donnees: {
-          idUtilisateur: this.adaptateurChiffrement.hacheSha256(
-            evenement.email
-          ),
+          idUtilisateur: this.adaptateurHachage.hache(evenement.email),
         },
         date: new Date(),
       });
@@ -200,9 +205,7 @@ export class ConsoleAdministration {
 
         const nouvellesDonnees = {
           ...donnees,
-          idUtilisateur: this.adaptateurChiffrement.hacheSha256(
-            donnees.emailUtilisateur
-          ),
+          idUtilisateur: this.adaptateurHachage.hache(donnees.emailUtilisateur),
         };
         delete nouvellesDonnees.emailUtilisateur;
 
