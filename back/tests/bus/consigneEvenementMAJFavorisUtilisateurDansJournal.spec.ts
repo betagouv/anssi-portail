@@ -6,6 +6,7 @@ import { consigneEvenementMAJFavorisUtilisateurDansJournal } from '../../src/bus
 import { MiseAJourFavorisUtilisateur } from '../../src/bus/miseAJourFavorisUtilisateur';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import {fauxAdaptateurHachage} from "../api/fauxObjets";
 
 describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur dans le journal", () => {
   it('consigne un évènement de MAJFavorisUtilisateur', async () => {
@@ -20,6 +21,7 @@ describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur
     };
 
     const adaptateurHachage: AdaptateurHachage = {
+      ...fauxAdaptateurHachage,
       hache: (valeur) => `${valeur}-hacheHMAC`,
     };
 

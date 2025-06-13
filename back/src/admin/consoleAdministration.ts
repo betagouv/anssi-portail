@@ -293,6 +293,24 @@ export class ConsoleAdministration {
       });
     });
   }
+
+  async sauvegardeLesSecretsDeHachage() {
+    await this.knexMSC.transaction(async (trx) => {
+      const tousLesSecretsDeHachage = adaptateurEnvironnement
+        .hachage()
+        .tousLesSecretsDeHachage();
+
+      const maj = tousLesSecretsDeHachage.map(async ({ version, secret }) => {
+        const empreinte = await this.adaptateurHachage.hacheBCrypt(secret);
+        return trx('secrets_hachage')
+          .insert({ version, empreinte })
+          .onConflict()
+          .ignore();
+      });
+
+      await Promise.all(maj);
+    });
+  }
 }
 
 // Usage example depuis le dossier /back
