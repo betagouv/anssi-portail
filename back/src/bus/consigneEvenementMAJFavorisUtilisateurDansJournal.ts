@@ -17,11 +17,11 @@ export const consigneEvenementMAJFavorisUtilisateurDansJournal = ({
 }) => {
   return async function (evenement: MiseAJourFavorisUtilisateur) {
     const listeIdFavoris = (
-      await entrepotFavori.tousCeuxDeUtilisateur(evenement?.email)
+      await entrepotFavori.tousCeuxDeUtilisateur(evenement?.utilisateur)
     ).map(({ idItemCyber }) => idItemCyber);
     await adaptateurJournal.consigneEvenement({
       donnees: {
-        idUtilisateur: adaptateurHachage.hache(evenement.email),
+        idUtilisateur: adaptateurHachage.hache(evenement.utilisateur.email),
         listeIdFavoris,
       },
       type: 'MISE_A_JOUR_FAVORIS_UTILISATEUR',

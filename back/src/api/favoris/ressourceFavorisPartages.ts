@@ -23,9 +23,8 @@ const ressourceFavorisPartages = ({
         return;
       }
 
-      const favoris = await entrepotFavori.tousCeuxDeUtilisateur(
-        utilisateurPartageur.email
-      );
+      const favoris =
+        await entrepotFavori.tousCeuxDeUtilisateur(utilisateurPartageur);
       const favorisPartages = favoris.map((favori) => favori.idItemCyber);
 
       reponse.send({

@@ -6,7 +6,8 @@ import { consigneEvenementMAJFavorisUtilisateurDansJournal } from '../../src/bus
 import { MiseAJourFavorisUtilisateur } from '../../src/bus/miseAJourFavorisUtilisateur';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
-import {fauxAdaptateurHachage} from "../api/fauxObjets";
+import { fauxAdaptateurHachage } from '../api/fauxObjets';
+import { jeanneDupont } from '../api/objetsPretsALEmploi';
 
 describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur dans le journal", () => {
   it('consigne un évènement de MAJFavorisUtilisateur', async () => {
@@ -27,11 +28,11 @@ describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur
 
     const entrepotFavori = new EntrepotFavoriMemoire();
     await entrepotFavori.ajoute({
-      emailUtilisateur: 'email@mail.com',
+      utilisateur: jeanneDupont,
       idItemCyber: 'groupe/id',
     });
     await entrepotFavori.ajoute({
-      emailUtilisateur: 'email@mail.com',
+      utilisateur: jeanneDupont,
       idItemCyber: 'groupe/id-2',
     });
 
@@ -42,7 +43,7 @@ describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur
       entrepotFavori,
     })(
       new MiseAJourFavorisUtilisateur({
-        email: 'email@mail.com',
+        utilisateur: jeanneDupont,
       })
     );
 
@@ -50,7 +51,7 @@ describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur
     assert.equal(evenementRecu!.type, 'MISE_A_JOUR_FAVORIS_UTILISATEUR');
     assert.equal(
       evenementRecu!.donnees.idUtilisateur,
-      'email@mail.com-hacheHMAC'
+      'jeanne.dupont@user.com-hacheHMAC'
     );
     assert.equal(evenementRecu!.donnees.listeIdFavoris.length, 2);
     assert.deepEqual(evenementRecu!.date, new Date('2025-04-16'));

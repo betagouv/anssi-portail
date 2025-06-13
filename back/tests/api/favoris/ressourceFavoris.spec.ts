@@ -17,6 +17,8 @@ import {
   fabriqueBusPourLesTests,
   MockBusEvenement,
 } from '../../bus/busPourLesTests';
+import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource des services et ressources favoris', () => {
   let serveur: Express;
@@ -26,8 +28,10 @@ describe('La ressource des services et ressources favoris', () => {
 
   beforeEach(() => {
     entrepotFavori = new EntrepotFavoriMemoire();
+    const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+    entrepotUtilisateur.ajoute(jeanneDupont);
     cookieJeanneDupont = encodeSession({
-      email: 'jeanne.dupont@mail.com',
+      email: jeanneDupont.email,
       token: 'token',
     });
     busEvenements = fabriqueBusPourLesTests();
@@ -40,6 +44,7 @@ describe('La ressource des services et ressources favoris', () => {
       }),
       busEvenements,
       entrepotFavori,
+      entrepotUtilisateur,
     });
   });
 
@@ -68,7 +73,7 @@ describe('La ressource des services et ressources favoris', () => {
         .set('Cookie', [cookieJeanneDupont])
         .send({});
 
-      await entrepotFavori.tousCeuxDeUtilisateur('jeanne.dupont@mail.com');
+      await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
 
       assert.equal(reponse.status, 400);
     });
@@ -79,17 +84,13 @@ describe('La ressource des services et ressources favoris', () => {
         .set('Cookie', [cookieJeanneDupont])
         .send({ idItemCyber: 'unId' });
 
-      const ceuxDeUtilisateur = await entrepotFavori.tousCeuxDeUtilisateur(
-        'jeanne.dupont@mail.com'
-      );
+      const ceuxDeUtilisateur =
+        await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
 
       assert.equal(reponse.status, 201);
       assert.equal(ceuxDeUtilisateur.length, 1);
       assert.equal(ceuxDeUtilisateur[0].idItemCyber, 'unId');
-      assert.equal(
-        ceuxDeUtilisateur[0].emailUtilisateur,
-        'jeanne.dupont@mail.com'
-      );
+      assert.deepEqual(ceuxDeUtilisateur[0].utilisateur, jeanneDupont);
     });
 
     it('aseptise le contenu du body et remet les slash en place', async () => {
@@ -98,9 +99,8 @@ describe('La ressource des services et ressources favoris', () => {
         .set('Cookie', [cookieJeanneDupont])
         .send({ idItemCyber: '/services/mon-service-cyber  ' });
 
-      const ceuxDeUtilisateur = await entrepotFavori.tousCeuxDeUtilisateur(
-        'jeanne.dupont@mail.com'
-      );
+      const ceuxDeUtilisateur =
+        await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
 
       assert.equal(
         ceuxDeUtilisateur[0].idItemCyber,
@@ -121,6 +121,7 @@ describe('La ressource des services et ressources favoris', () => {
             suite();
           },
         },
+        entrepotFavori,
       });
 
       await request(serveur).get('/api/favoris');
@@ -131,15 +132,15 @@ describe('La ressource des services et ressources favoris', () => {
     it("retourne les favoris de l'utilisateur connecté", async () => {
       await entrepotFavori.ajoute({
         idItemCyber: 'unId',
-        emailUtilisateur: 'jeanne.dupont@mail.com',
+        utilisateur: jeanneDupont,
       });
       await entrepotFavori.ajoute({
         idItemCyber: 'unSecondId',
-        emailUtilisateur: 'jeanne.dupont@mail.com',
+        utilisateur: jeanneDupont,
       });
       await entrepotFavori.ajoute({
         idItemCyber: 'unTroisiemeId',
-        emailUtilisateur: 'hector.dupont@mail.com',
+        utilisateur: hectorDurant,
       });
 
       const reponse = await request(serveur)
@@ -154,7 +155,7 @@ describe('La ressource des services et ressources favoris', () => {
     it('publie un événement de mise à jour de la liste des favoris', async () => {
       await entrepotFavori.ajoute({
         idItemCyber: '/services/mon-super-service',
-        emailUtilisateur: 'jeanne.dupont@mail.com',
+        utilisateur: jeanneDupont,
       });
 
       await request(serveur)
@@ -166,7 +167,7 @@ describe('La ressource des services et ressources favoris', () => {
       const evenement = busEvenements.recupereEvenement(
         MiseAJourFavorisUtilisateur
       );
-      assert.equal(evenement!.email, 'jeanne.dupont@mail.com');
+      assert.equal(evenement!.utilisateur, jeanneDupont);
     });
   });
 });
