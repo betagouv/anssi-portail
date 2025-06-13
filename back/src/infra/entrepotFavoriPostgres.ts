@@ -2,6 +2,7 @@ import Knex from 'knex';
 import config from '../../knexfile';
 import { EntrepotFavori } from '../metier/entrepotFavori';
 import { Favori } from '../metier/favori';
+import { Utilisateur } from '../metier/utilisateur';
 
 export class EntrepotFavoriPostgres implements EntrepotFavori {
   knex: Knex.Knex;
@@ -13,30 +14,25 @@ export class EntrepotFavoriPostgres implements EntrepotFavori {
   async retire(favori: Favori): Promise<void> {
     await this.knex('favoris')
       .where({
-        email_utilisateur: favori.emailUtilisateur,
+        email_utilisateur: favori.utilisateur.email,
         id_item_cyber: favori.idItemCyber,
       })
       .delete();
   }
 
-  async tousCeuxDeUtilisateur(emailUtilisateur: string): Promise<Favori[]> {
+  async tousCeuxDeUtilisateur(utilisateur: Utilisateur): Promise<Favori[]> {
     const favoris = await this.knex('favoris')
-      .where('email_utilisateur', emailUtilisateur)
+      .where('email_utilisateur', utilisateur.email)
       .orderBy('date_ajout', 'desc');
-    return favoris.map(
-      ({
-        email_utilisateur: emailUtilisateur,
-        id_item_cyber: idItemCyber,
-      }) => ({
-        emailUtilisateur,
-        idItemCyber,
-      })
-    );
+    return favoris.map(({ id_item_cyber: idItemCyber }) => ({
+      utilisateur,
+      idItemCyber,
+    }));
   }
 
   async ajoute(favori: Favori): Promise<void> {
     await this.knex('favoris').insert({
-      email_utilisateur: favori.emailUtilisateur,
+      email_utilisateur: favori.utilisateur.email,
       id_item_cyber: favori.idItemCyber,
     });
   }

@@ -5,6 +5,7 @@ import { Router } from 'express';
 const ressourceFavori = ({
   middleware,
   entrepotFavori,
+  entrepotUtilisateur,
   busEvenements,
 }: ConfigurationServeur) => {
   const routeur = Router();
@@ -16,15 +17,13 @@ const ressourceFavori = ({
     async (requete, reponse) => {
       let id = requete.params.id;
       id = id.replaceAll('&#x2F;', '/');
-      await entrepotFavori.retire({
-        idItemCyber: id,
-        emailUtilisateur: requete.session!.email,
-      });
+      const utilisateur = (await entrepotUtilisateur.parEmail(
+        requete.session!.email
+      ))!;
+      await entrepotFavori.retire({ idItemCyber: id, utilisateur });
 
       await busEvenements.publie(
-        new MiseAJourFavorisUtilisateur({
-          email: requete.session?.email,
-        })
+        new MiseAJourFavorisUtilisateur({ utilisateur })
       );
       reponse.send(200);
     }

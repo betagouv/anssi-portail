@@ -1,7 +1,9 @@
-export class MiseAJourFavorisUtilisateur {
-  email!: string;
+import { Utilisateur } from '../metier/utilisateur';
 
-  constructor({ email }: { email: string }) {
-    this.email = email;
+export class MiseAJourFavorisUtilisateur {
+  utilisateur!: Utilisateur;
+
+  constructor({ utilisateur }: { utilisateur: Utilisateur }) {
+    this.utilisateur = utilisateur;
   }
 }
