@@ -117,6 +117,7 @@ const fauxGenerateurCodeSessionDeGroupe = {
 export const fauxAdaptateurHachage: AdaptateurHachage = {
   hache: (valeur: string): string => `${valeur}-hache`,
   hacheBCrypt: async (valeur: string): Promise<string> => `${valeur}-hacheBCrypt`,
+  compareBCrypt: async (_valeurEnClair: string, _empreinte: string): Promise<boolean> => true,
 };
 
 export const configurationDeTestDuServeur: ConfigurationServeur = {
