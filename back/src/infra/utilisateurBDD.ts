@@ -1,5 +1,7 @@
 export interface UtilisateurBDD {
   email: string;
+  email_hache: string;
+  email_hache_256: string;
   donnees: {
     email: string;
     cguAcceptees: boolean;

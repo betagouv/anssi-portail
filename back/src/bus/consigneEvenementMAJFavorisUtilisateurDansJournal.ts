@@ -1,18 +1,18 @@
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../infra/adaptateurJournal';
-import { AdaptateurChiffrement } from '../infra/adaptateurChiffrement';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
 import { EntrepotFavori } from '../metier/entrepotFavori';
+import { AdaptateurHachage } from '../infra/adaptateurHachage';
 
 export const consigneEvenementMAJFavorisUtilisateurDansJournal = ({
   adaptateurJournal,
   adaptateurHorloge,
-  adaptateurChiffrement,
+  adaptateurHachage,
   entrepotFavori,
 }: {
   adaptateurJournal: AdaptateurJournal;
   adaptateurHorloge: AdaptateurHorloge;
-  adaptateurChiffrement: AdaptateurChiffrement;
+  adaptateurHachage: AdaptateurHachage;
   entrepotFavori: EntrepotFavori;
 }) => {
   return async function (evenement: MiseAJourFavorisUtilisateur) {
@@ -21,7 +21,7 @@ export const consigneEvenementMAJFavorisUtilisateurDansJournal = ({
     ).map(({ idItemCyber }) => idItemCyber);
     await adaptateurJournal.consigneEvenement({
       donnees: {
-        idUtilisateur: adaptateurChiffrement.hacheSha256(evenement.email),
+        idUtilisateur: adaptateurHachage.hache(evenement.email),
         listeIdFavoris,
       },
       type: 'MISE_A_JOUR_FAVORIS_UTILISATEUR',

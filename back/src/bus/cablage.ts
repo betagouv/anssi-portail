@@ -9,27 +9,25 @@ import { CompteCree } from './evenements/compteCree';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte';
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
 import { creeContactBrevo } from './creeContactBrevo';
-import {
-  consigneEvenementCompteCreeDansJournal,
-} from './consigneEvenementCompteCreeDansJournal';
-import { AdaptateurChiffrement } from '../infra/adaptateurChiffrement';
+import { consigneEvenementCompteCreeDansJournal } from './consigneEvenementCompteCreeDansJournal';
 import { consigneEvenementMAJFavorisUtilisateurDansJournal } from './consigneEvenementMAJFavorisUtilisateurDansJournal';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
 import { EntrepotFavori } from '../metier/entrepotFavori';
+import { AdaptateurHachage } from '../infra/adaptateurHachage';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
   adaptateurEmail,
   adaptateurJournal,
   adaptateurHorloge,
-  adaptateurChiffrement,
+  adaptateurHachage,
   entrepotFavori,
 }: {
   busEvenements: BusEvenements;
   adaptateurEmail: AdaptateurEmail;
   adaptateurJournal: AdaptateurJournal;
   adaptateurHorloge: AdaptateurHorloge;
-  adaptateurChiffrement: AdaptateurChiffrement;
+  adaptateurHachage: AdaptateurHachage;
   entrepotFavori: EntrepotFavori;
 }) => {
   busEvenements.abonne(
@@ -44,7 +42,7 @@ export const cableTousLesAbonnes = ({
     consigneEvenementProprieteTestRevendiqueeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
-      adaptateurChiffrement
+      adaptateurHachage,
     })
   );
   busEvenements.abonnePlusieurs(CompteCree, [
@@ -57,7 +55,7 @@ export const cableTousLesAbonnes = ({
     consigneEvenementCompteCreeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
-      adaptateurChiffrement,
+      adaptateurHachage,
     }),
   ]);
   busEvenements.abonne(
@@ -65,7 +63,7 @@ export const cableTousLesAbonnes = ({
     consigneEvenementMAJFavorisUtilisateurDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
-      adaptateurChiffrement,
+      adaptateurHachage,
       entrepotFavori,
     })
   );

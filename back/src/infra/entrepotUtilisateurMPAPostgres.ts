@@ -6,19 +6,32 @@ import { UtilisateurBDD } from './utilisateurBDD';
 import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi';
 import { AdaptateurRechercheEntreprise } from './adaptateurRechercheEntreprise';
 import pThrottle from 'p-throttle';
+import { AdaptateurHachage } from './adaptateurHachage';
+import { AdaptateurChiffrement } from './adaptateurChiffrement';
 
 export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   knex: Knex.Knex;
   adaptateurProfilAnssi: AdaptateurProfilAnssi;
   adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
+  adaptateurChiffrement: AdaptateurChiffrement;
+  adaptateurHachage: AdaptateurHachage;
 
-  constructor(
-    adaptateurProfilAnssi: AdaptateurProfilAnssi,
-    adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise
-  ) {
+  constructor({
+    adaptateurProfilAnssi,
+    adaptateurRechercheEntreprise,
+    adaptateurHachage,
+    adaptateurChiffrement,
+  }: {
+    adaptateurProfilAnssi: AdaptateurProfilAnssi;
+    adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
+    adaptateurHachage: AdaptateurHachage;
+    adaptateurChiffrement: AdaptateurChiffrement;
+  }) {
     this.knex = Knex(config);
     this.adaptateurProfilAnssi = adaptateurProfilAnssi;
     this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
+    this.adaptateurChiffrement = adaptateurChiffrement;
+    this.adaptateurHachage = adaptateurHachage;
   }
 
   private chiffreDonneesUtilisateur(utilisateur: Utilisateur): UtilisateurBDD {
@@ -26,6 +39,10 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
       email: utilisateur.email,
       donnees: utilisateur,
       id_liste_favoris: utilisateur.idListeFavoris,
+      email_hache: this.adaptateurHachage.hache(utilisateur.email),
+      email_hache_256: this.adaptateurChiffrement.hacheSha256(
+        utilisateur.email
+      ),
     };
   }
 

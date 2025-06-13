@@ -13,6 +13,7 @@ import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
 import { MockCmsCrisp } from '../mockCmsCrisp';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
+import {AdaptateurHachage} from "../../src/infra/adaptateurHachage";
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -84,6 +85,9 @@ export const fauxMiddleware: Middleware = {
 const fauxAdaptateurMonAideCyber = { creeDemandeAide: () => Promise.resolve() };
 
 export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
+  hachage: () => ({
+    tousLesSecretsDeHachage: () => [{ version: 1, secret: 'secret' }],
+  }),
   urlBaseMSC: () => 'http://localhost',
   oidc: () => ({
     urlRedirectionApresAuthentification: () => '',
@@ -108,6 +112,11 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
 
 const fauxGenerateurCodeSessionDeGroupe = {
   genere: async () => 'hello',
+};
+
+export const fauxAdaptateurHachage: AdaptateurHachage = {
+  hache: (valeur: string): string => `${valeur}-hache`,
+  hacheBCrypt: async (valeur: string): Promise<string> => `${valeur}-hacheBCrypt`,
 };
 
 export const configurationDeTestDuServeur: ConfigurationServeur = {

@@ -18,22 +18,35 @@ import { MiseAJourFavorisUtilisateur } from '../bus/miseAJourFavorisUtilisateur'
 import { EntrepotFavori } from '../metier/entrepotFavori';
 import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres';
 import Knex from 'knex';
+import config from '../../knexfile';
+import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
+import {
+  AdaptateurHachage,
+  fabriqueAdaptateurHachage,
+} from '../infra/adaptateurHachage';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
   private adaptateurEmail: AdaptateurEmail;
-  private adaptateurChiffrement: AdaptateurChiffrement;
+  private readonly adaptateurChiffrement: AdaptateurChiffrement;
+  private readonly adaptateurHachage: AdaptateurHachage;
   private entrepotFavori: EntrepotFavori;
   private knexJournal: Knex.Knex;
+  private knexMSC: Knex.Knex;
 
   constructor() {
     const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
-    this.entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres(
-      adaptateurProfilAnssi,
-      adaptateurRechercheEntreprise
-    );
-    this.adaptateurEmail = fabriqueAdaptateurEmail();
     this.adaptateurChiffrement = fabriqueAdaptateurChiffrement();
+    this.adaptateurHachage = fabriqueAdaptateurHachage({
+      adaptateurEnvironnement,
+    });
+    this.entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
+      adaptateurProfilAnssi,
+      adaptateurRechercheEntreprise,
+      adaptateurChiffrement: this.adaptateurChiffrement,
+      adaptateurHachage: this.adaptateurHachage,
+    });
+    this.adaptateurEmail = fabriqueAdaptateurEmail();
     this.entrepotFavori = new EntrepotFavoriPostgres();
     const configDuJournal = {
       client: 'pg',
@@ -46,6 +59,7 @@ export class ConsoleAdministration {
       },
     };
     this.knexJournal = Knex(configDuJournal);
+    this.knexMSC = Knex(config);
   }
 
   static async rattrapage<T>(
@@ -117,9 +131,7 @@ export class ConsoleAdministration {
       journal.consigneEvenement({
         type: 'MISE_A_JOUR_FAVORIS_UTILISATEUR',
         donnees: {
-          idUtilisateur: this.adaptateurChiffrement.hacheSha256(
-            evenement.email
-          ),
+          idUtilisateur: this.adaptateurHachage.hache(evenement.email),
           listeIdFavoris: await constitueListeIdFavorisUtilisateur(
             evenement.email
           ),
@@ -158,9 +170,7 @@ export class ConsoleAdministration {
       journal.consigneEvenement({
         type: 'NOUVEL_UTILISATEUR_INSCRIT',
         donnees: {
-          idUtilisateur: this.adaptateurChiffrement.hacheSha256(
-            evenement.email
-          ),
+          idUtilisateur: this.adaptateurHachage.hache(evenement.email),
         },
         date: new Date(),
       });
@@ -190,16 +200,14 @@ export class ConsoleAdministration {
       const majEvenements = evenements.map(({ id, donnees }, index) => {
         process.stdout.write(
           `\rConstruction des données: ${(
-            (index / (evenements.length)) *
+            (index / evenements.length) *
             100.0
           ).toFixed(2)}% (${index}/${evenements.length})`
         );
 
         const nouvellesDonnees = {
           ...donnees,
-          idUtilisateur: this.adaptateurChiffrement.hacheSha256(
-            donnees.emailUtilisateur
-          ),
+          idUtilisateur: this.adaptateurHachage.hache(donnees.emailUtilisateur),
         };
         delete nouvellesDonnees.emailUtilisateur;
 
@@ -210,7 +218,7 @@ export class ConsoleAdministration {
             compteur += 1;
             process.stdout.write(
               `\rExécution des promesses: ${(
-                (compteur / (evenements.length)) *
+                (compteur / evenements.length) *
                 100.0
               ).toFixed(2)}% (${compteur}/${evenements.length})`
             );
@@ -221,6 +229,86 @@ export class ConsoleAdministration {
       await Promise.all(majEvenements);
       process.stdout.write('\n');
       process.stdout.write('Fin de la migration des événements\n');
+    });
+  }
+
+  async migreLesHashSha256DuJournal() {
+    const leHashHMACCorrespondantA = async (leHash256: string) => {
+      const ligne = await this.knexMSC('utilisateurs')
+        .where({ email_hache_256: leHash256 })
+        .first();
+      return ligne ? ligne.email_hache : null;
+    };
+
+    process.stdout.write(
+      'Migration des événements avec email hachés avec algo SHA256\n'
+    );
+    await this.knexJournal.transaction(async (trx) => {
+      const evenements = await trx('journal_msc.evenements').whereRaw(
+        "donnees->>'idUtilisateur' IS NOT NULL"
+      );
+      process.stdout.write('\n');
+      let compteur = 0;
+
+      await this.knexJournal.transaction(async (trx) => {
+        const majEvenements = evenements.map(({ id, donnees }, index) => {
+          process.stdout.write(
+            `\rConstruction des données: ${(
+              (index / evenements.length) *
+              100.0
+            ).toFixed(2)}% (${index}/${evenements.length})`
+          );
+
+          return leHashHMACCorrespondantA(donnees.idUtilisateur).then(
+            (emailHacheAvecHMAC) => {
+              if (!emailHacheAvecHMAC) {
+                return new Promise((resolve) => resolve(null));
+              }
+
+              const nouvellesDonnees = {
+                ...donnees,
+                idUtilisateur: emailHacheAvecHMAC,
+              };
+
+              return trx('journal_msc.evenements')
+                .where({ id })
+                .update({ donnees: nouvellesDonnees })
+                .then(() => {
+                  compteur += 1;
+                  process.stdout.write(
+                    `\rExécution des promesses: ${(
+                      (compteur / evenements.length) *
+                      100.0
+                    ).toFixed(2)}% (${compteur}/${evenements.length})`
+                  );
+                });
+            }
+          );
+        });
+
+        process.stdout.write('\n');
+        await Promise.all(majEvenements);
+        process.stdout.write('\n');
+        process.stdout.write('Fin de la migration des événements\n');
+      });
+    });
+  }
+
+  async sauvegardeLesSecretsDeHachage() {
+    await this.knexMSC.transaction(async (trx) => {
+      const tousLesSecretsDeHachage = adaptateurEnvironnement
+        .hachage()
+        .tousLesSecretsDeHachage();
+
+      const maj = tousLesSecretsDeHachage.map(async ({ version, secret }) => {
+        const empreinte = await this.adaptateurHachage.hacheBCrypt(secret);
+        return trx('secrets_hachage')
+          .insert({ version, empreinte })
+          .onConflict()
+          .ignore();
+      });
+
+      await Promise.all(maj);
     });
   }
 }
