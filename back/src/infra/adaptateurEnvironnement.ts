@@ -77,7 +77,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
         version: string;
         valeur: string;
       };
-      const secrets = Object.entries(process.env)
+      return Object.entries(process.env)
         .map(([cle, valeur]) => {
           const matches = cle.match(/HACHAGE_SECRET_DE_HACHAGE_(\d+)/);
           const version = matches ? matches[1] : undefined;
@@ -98,10 +98,6 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
         .sort(
           ({ version: version1 }, { version: version2 }) => version1 - version2
         );
-      if (secrets.length === 0) {
-        throw new Error('Il doit y avoir au moins un secret de hachage');
-      }
-      return secrets;
     },
   }),
 };
