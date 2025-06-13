@@ -40,7 +40,11 @@
       libelleChampUtilisateurMAC = "Nom de l'Aidant cyber";
       utilisateurMACPrerempli = true;
       estEnRelationAvecUnUtilisateur = true;
-      emailUtilisateurMAC = atob(decodeURIComponent(nomUsage));
+      emailUtilisateurMAC = new TextDecoder().decode(
+              Uint8Array.from(atob(decodeURIComponent(nomUsage)), (car) =>
+                      car.charCodeAt(0)
+              )
+      )
       return
     }
   });
