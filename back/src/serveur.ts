@@ -21,6 +21,8 @@ import { CmsCrisp } from '@lab-anssi/lib';
 import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
+import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
+import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement();
@@ -53,39 +55,55 @@ const cmsCrisp = new CmsCrisp(crispIdSite, crispCleApi);
 
 const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
 
-adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
+const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 
-creeServeur({
-  fournisseurChemin,
-  middleware: fabriqueMiddleware({ adaptateurJWT, fournisseurChemin }),
-  adaptateurOIDC,
-  adaptateurJWT,
-  adaptateurGestionErreur: adaptateurGestionErreurSentry,
-  busEvenements,
-  entrepotUtilisateur: new EntrepotUtilisateurMPAPostgres({
-    adaptateurProfilAnssi,
-    adaptateurRechercheEntreprise,
-    adaptateurChiffrement,
+const serviceCoherenceSecretsHachage =
+  fabriqueServiceVerificationCoherenceSecretsHachage({
+    adaptateurEnvironnement,
+    entrepotSecretHachage,
     adaptateurHachage,
-  }),
-  reseau: {
-    trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
-    maxRequetesParMinutes: adaptateurEnvironnement
-      .serveur()
-      .maxRequetesParMinute(),
-    ipAutorisees: adaptateurEnvironnement.serveur().ipAutorisees(),
-  },
-  adaptateurRechercheEntreprise,
-  adaptateurProfilAnssi,
-  entrepotResultatTest: new EntrepotResultatTestPostgres(),
-  entrepotFavori: new EntrepotFavoriPostgres(),
-  entrepotSessionDeGroupe,
-  adaptateurMonAideCyber,
-  adaptateurEnvironnement,
-  cmsCrisp,
-  generateurCodeSessionDeGroupe: new GenerateurAleatoireCodeSessionDeGroupe(
-    entrepotSessionDeGroupe
-  ),
-}).listen(3000, () => {
-  console.log('Le serveur écoute sur le port 3000');
-});
+  });
+
+serviceCoherenceSecretsHachage
+  .verifieCoherenceSecrets()
+  .catch((reason) => {
+    console.error(reason.message);
+    process.exit(1);
+  })
+  .then(() => console.log('✅ Vérification des secrets réussie'))
+  .then(() => {
+    return creeServeur({
+      fournisseurChemin,
+      middleware: fabriqueMiddleware({ adaptateurJWT, fournisseurChemin }),
+      adaptateurOIDC,
+      adaptateurJWT,
+      adaptateurGestionErreur: adaptateurGestionErreurSentry,
+      busEvenements,
+      entrepotUtilisateur: new EntrepotUtilisateurMPAPostgres({
+        adaptateurProfilAnssi,
+        adaptateurRechercheEntreprise,
+        adaptateurChiffrement,
+        adaptateurHachage,
+      }),
+      reseau: {
+        trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
+        maxRequetesParMinutes: adaptateurEnvironnement
+          .serveur()
+          .maxRequetesParMinute(),
+        ipAutorisees: adaptateurEnvironnement.serveur().ipAutorisees(),
+      },
+      adaptateurRechercheEntreprise,
+      adaptateurProfilAnssi,
+      entrepotResultatTest: new EntrepotResultatTestPostgres(),
+      entrepotFavori: new EntrepotFavoriPostgres(),
+      entrepotSessionDeGroupe,
+      adaptateurMonAideCyber,
+      adaptateurEnvironnement,
+      cmsCrisp,
+      generateurCodeSessionDeGroupe: new GenerateurAleatoireCodeSessionDeGroupe(
+        entrepotSessionDeGroupe
+      ),
+    }).listen(3000, () => {
+      console.log('Le serveur écoute sur le port 3000');
+    });
+  });

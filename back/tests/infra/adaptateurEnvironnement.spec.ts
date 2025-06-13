@@ -89,17 +89,6 @@ describe("L'adaptateur environnement", () => {
     );
   });
 
-  it("lance une exception s'il n'y a aucun secret", () => {
-    process.env = {};
-
-    assert.throws(
-      () => {
-        adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
-      },
-      { message: `Il doit y avoir au moins un secret de hachage` }
-    );
-  });
-
   it('ignore les clés qui ne concernent pas le hachage', () => {
     process.env = {
       URL_BASE: '',
