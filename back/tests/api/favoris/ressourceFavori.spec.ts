@@ -17,19 +17,24 @@ import {
   MockBusEvenement,
 } from '../../bus/busPourLesTests';
 import { MiseAJourFavorisUtilisateur } from '../../../src/bus/miseAJourFavorisUtilisateur';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
+import { jeanneDupont } from '../objetsPretsALEmploi';
 
 describe('La ressource des services et ressources favoris', () => {
   let serveur: Express;
   let entrepotFavori: EntrepotFavoriMemoire;
+  let entrepotUtilisateur: EntrepotUtilisateurMemoire;
   let cookieJeanneDupont: string;
   let busEvenements: MockBusEvenement;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     entrepotFavori = new EntrepotFavoriMemoire();
+    entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     cookieJeanneDupont = encodeSession({
-      email: 'jeanne.dupont@mail.com',
+      email: jeanneDupont.email,
       token: 'token',
     });
+    await entrepotUtilisateur.ajoute(jeanneDupont);
     busEvenements = fabriqueBusPourLesTests();
 
     serveur = creeServeur({
@@ -40,6 +45,7 @@ describe('La ressource des services et ressources favoris', () => {
       }),
       busEvenements,
       entrepotFavori,
+      entrepotUtilisateur,
     });
   });
 
@@ -48,6 +54,7 @@ describe('La ressource des services et ressources favoris', () => {
       let middelwareAppele = false;
       serveur = creeServeur({
         ...configurationDeTestDuServeur,
+        entrepotUtilisateur,
         middleware: {
           ...fauxMiddleware,
           verifieJWT: async (_, __, suite) => {
@@ -67,7 +74,7 @@ describe('La ressource des services et ressources favoris', () => {
     it("supprime le favori de l'entrepot", async () => {
       await entrepotFavori.ajoute({
         idItemCyber: '/services/mon-super-service',
-        emailUtilisateur: 'jeanne.dupont@mail.com',
+        utilisateur: jeanneDupont,
       });
 
       await request(serveur)
@@ -76,32 +83,28 @@ describe('La ressource des services et ressources favoris', () => {
         )
         .set('Cookie', [cookieJeanneDupont]);
 
-      const favoris = await entrepotFavori.tousCeuxDeUtilisateur(
-        'jeanne.dupont@mail.com'
-      );
+      const favoris = await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
       assert.equal(favoris.length, 0);
     });
 
     it('aseptise le paramètre id', async () => {
       await entrepotFavori.ajoute({
         idItemCyber: 'unId&lt;truc',
-        emailUtilisateur: 'jeanne.dupont@mail.com',
+        utilisateur: jeanneDupont,
       });
 
       await request(serveur)
         .delete(`/api/favoris/unId<truc`)
         .set('Cookie', [cookieJeanneDupont]);
 
-      const favoris = await entrepotFavori.tousCeuxDeUtilisateur(
-        'jeanne.dupont@mail.com'
-      );
+      const favoris = await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
       assert.equal(favoris.length, 0);
     });
 
     it('publie un événement de mise à jour de la liste des favoris', async () => {
       await entrepotFavori.ajoute({
         idItemCyber: '/services/mon-super-service',
-        emailUtilisateur: 'jeanne.dupont@mail.com',
+        utilisateur: jeanneDupont,
       });
 
       await request(serveur)
@@ -114,7 +117,7 @@ describe('La ressource des services et ressources favoris', () => {
       const evenement = busEvenements.recupereEvenement(
         MiseAJourFavorisUtilisateur
       );
-      assert.equal(evenement!.email, 'jeanne.dupont@mail.com');
+      assert.equal(evenement!.utilisateur, jeanneDupont);
     });
   });
 });

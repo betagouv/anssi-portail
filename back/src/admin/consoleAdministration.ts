@@ -119,10 +119,12 @@ export class ConsoleAdministration {
     const tousUtilisateurs = await this.entrepotUtilisateur.tous();
     const tousEvenementsUtilisateurs: MiseAJourFavorisUtilisateur[] =
       tousUtilisateurs.map(
-        ({ email }) => new MiseAJourFavorisUtilisateur({ email })
+        (utilisateur) => new MiseAJourFavorisUtilisateur({ utilisateur })
       );
-    const constitueListeIdFavorisUtilisateur = async (email: string) => {
-      return (await this.entrepotFavori.tousCeuxDeUtilisateur(email)).map(
+    const constitueListeIdFavorisUtilisateur = async (
+      utilisateur: Utilisateur
+    ) => {
+      return (await this.entrepotFavori.tousCeuxDeUtilisateur(utilisateur)).map(
         ({ idItemCyber }) => idItemCyber
       );
     };
@@ -131,16 +133,18 @@ export class ConsoleAdministration {
       journal.consigneEvenement({
         type: 'MISE_A_JOUR_FAVORIS_UTILISATEUR',
         donnees: {
-          idUtilisateur: this.adaptateurHachage.hache(evenement.email),
+          idUtilisateur: this.adaptateurHachage.hache(
+            evenement.utilisateur.email
+          ),
           listeIdFavoris: await constitueListeIdFavorisUtilisateur(
-            evenement.email
+            evenement.utilisateur
           ),
         },
         date: new Date(),
       });
 
     const afficheErreur = (evenement: MiseAJourFavorisUtilisateur) =>
-      `Erreur pour ${evenement.email}`;
+      `Erreur pour ${evenement.utilisateur.email}`;
 
     return ConsoleAdministration.rattrapage(
       tousEvenementsUtilisateurs,
