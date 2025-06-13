@@ -28,11 +28,11 @@ describe('La ressource des favoris partagés', () => {
     idListeFavoris = (await entrepotUtilisateur.parEmail(jeanneDupont.email))!
       .idListeFavoris;
     await entrepotFavori.ajoute({
-      emailUtilisateur: jeanneDupont.email,
+      utilisateur: jeanneDupont,
       idItemCyber: '/services/mon-super-service',
     });
     await entrepotFavori.ajoute({
-      emailUtilisateur: jeanneDupont.email,
+      utilisateur: jeanneDupont,
       idItemCyber: '/services/mon-autre-super-service',
     });
   });
