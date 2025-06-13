@@ -5,6 +5,7 @@ import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
 import { ProprieteTestRevendiquee } from '../../src/bus/evenements/proprieteTestRevendiquee';
 import { consigneEvenementProprieteTestRevendiqueeDansJournal } from '../../src/bus/consigneEvenementProprieteTestRevendiqueeDansJournal';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import {fauxAdaptateurHachage} from "../api/fauxObjets";
 
 describe("L'abonnement qui consigne la revendication de la propriété d'un test dans le journal", () => {
   let adaptateurHorloge: AdaptateurHorloge;
@@ -22,6 +23,7 @@ describe("L'abonnement qui consigne la revendication de la propriété d'un test
   beforeEach(() => {
     adaptateurHorloge = { maintenant: () => new Date() };
     adaptateurHachage = {
+      ...fauxAdaptateurHachage,
       hache: (valeur) => `${valeur}-hacheHMAC`,
     };
   });

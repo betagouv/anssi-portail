@@ -5,6 +5,7 @@ import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
 import { CompteCree } from '../../src/bus/evenements/compteCree';
 import { consigneEvenementCompteCreeDansJournal } from '../../src/bus/consigneEvenementCompteCreeDansJournal';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import {fauxAdaptateurHachage} from "../api/fauxObjets";
 
 describe("L'abonnement qui consigne la création d'un compte utilisateur dans le journal", () => {
   it('consigne un évènement de NouvelUtilisateurInscrit', async () => {
@@ -19,6 +20,7 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
     };
 
     const adaptateurHachage: AdaptateurHachage = {
+      ...fauxAdaptateurHachage,
       hache: (valeur) => `${valeur}-hacheHMAC`,
     };
 
