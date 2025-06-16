@@ -294,7 +294,7 @@ export class ConsoleAdministration {
     });
   }
 
-  async sauvegardeLesSecretsDeHachage() {
+  async sauvegardeLesEmpreintesDesSecretsDeHachage() {
     await this.knexMSC.transaction(async (trx) => {
       const tousLesSecretsDeHachage = adaptateurEnvironnement
         .hachage()
