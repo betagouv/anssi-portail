@@ -17,7 +17,7 @@ const hacheSha256 = (valeur: string) =>
   .update(valeur + process.env.CHIFFREMENT_SEL_DE_HASHAGE)
   .digest('hex');
 
-exports.up = async (knex: Knex) => {
+export async function up(knex: Knex): Promise<void> {
 
   await knex.transaction(async (trx) => {
     const utilisateurs = await trx('utilisateurs');
@@ -32,10 +32,10 @@ exports.up = async (knex: Knex) => {
 
     await Promise.all(maj);
   });
-};
+}
 
-exports.down = async (knex: Knex) => {
+export async function down(knex: Knex): Promise<void> {
   await knex.transaction(async (trx) =>
     trx('utilisateurs').update({ email_hache: null, email_hache_256: null })
   );
-};
+}
