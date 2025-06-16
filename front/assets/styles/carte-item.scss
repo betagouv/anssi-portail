@@ -42,10 +42,7 @@
     margin: 0;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
-    flex: 1;
-    box-sizing: border-box;
-    gap: 8px;
-    height: 156px;
+    flex-basis: 154px;
 
     img {
       height: 131px;
@@ -87,7 +84,7 @@
     padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    flex: 1;
 
     .nom-item {
       margin: 0;
@@ -103,7 +100,6 @@
       font-weight: bold;
       font-size: 1.25rem;
       line-height: 1.75rem;
-      height: 84px;
       overflow: hidden;
       margin-bottom: 8px;
     }

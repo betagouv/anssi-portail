@@ -65,12 +65,12 @@
     padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
 
     .en-tete {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 8px;
     }
 
     .nom-item {
