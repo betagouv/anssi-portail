@@ -10,6 +10,7 @@ import assert from 'node:assert';
 import { CodeRegion } from '../../../src/metier/referentielRegions';
 import { CodeSecteur } from '../../../src/metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../../../src/metier/referentielTranchesEffectifEtablissement';
+import { jeanneDupont } from '../objetsPretsALEmploi';
 
 describe('La ressource qui gère le dernier résultat de test', () => {
   let serveur: Express;
@@ -19,7 +20,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
   beforeEach(() => {
     entrepotResultatTest = new EntrepotResultatTestMemoire();
     cookieJeanneDupont = encodeSession({
-      email: 'jeanne.dupont@mail.com',
+      email: jeanneDupont.email,
       token: 'token',
     });
     serveur = creeServeur({
@@ -29,7 +30,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
   });
 
   const donneesResultatTestCorrectes = () => ({
-    emailUtilisateur: 'jeanne.dupont@mail.com',
+    utilisateur: jeanneDupont,
     region: 'FR-NOR' as CodeRegion,
     secteur: 'J' as CodeSecteur,
     tailleOrganisation: '51' as CodeTrancheEffectif,

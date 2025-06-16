@@ -8,11 +8,11 @@ import assert from 'node:assert';
 
 const resultatAvecReponses = (reponses: ReponsesTestMaturite) =>
   new ResultatTestMaturite({
-    emailUtilisateur: undefined,
     region: 'FR-NOR',
     secteur: 'J',
     tailleOrganisation: '51',
     reponses,
+    utilisateur: undefined,
   });
 
 describe('Le résultat du test de maturité', () => {

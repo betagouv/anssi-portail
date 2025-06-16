@@ -2,11 +2,12 @@ import { CodeRegion } from './referentielRegions';
 import { CodeSecteur } from './referentielSecteurs';
 import { CodeTrancheEffectif } from './referentielTranchesEffectifEtablissement';
 import { randomUUID } from 'node:crypto';
+import { Utilisateur } from './utilisateur';
 
 export type ReponsesTestMaturite = Record<string, number>;
 
 export type DonneesCreationResultatTestMaturite = {
-  emailUtilisateur: string | undefined;
+  utilisateur: Utilisateur | undefined;
   region: CodeRegion;
   secteur: CodeSecteur;
   tailleOrganisation: CodeTrancheEffectif;
@@ -38,23 +39,23 @@ export type IdRubrique = (typeof tousLesIdRubrique)[number];
 
 export class ResultatTestMaturite {
   id!: string;
-  emailUtilisateur: string | undefined;
   region: CodeRegion;
   secteur: CodeSecteur;
   tailleOrganisation: CodeTrancheEffectif;
   reponses: ReponsesTestMaturite;
   codeSessionGroupe?: string;
+  utilisateur: Utilisateur | undefined;
 
   constructor({
-    emailUtilisateur,
     region,
     secteur,
     tailleOrganisation,
     reponses,
     id,
     codeSessionGroupe,
+    utilisateur,
   }: DonneesCreationResultatTestMaturite) {
-    this.emailUtilisateur = emailUtilisateur;
+    this.utilisateur = utilisateur;
     this.region = region;
     this.secteur = secteur;
     this.tailleOrganisation = tailleOrganisation;
@@ -63,8 +64,8 @@ export class ResultatTestMaturite {
     this.id = id || randomUUID();
   }
 
-  revendiquePropriete(emailUtilisateur: string) {
-    this.emailUtilisateur = emailUtilisateur;
+  revendiquePropriete(utilisateur: Utilisateur) {
+    this.utilisateur = utilisateur;
   }
 
   niveau(): IdNiveauMaturite {

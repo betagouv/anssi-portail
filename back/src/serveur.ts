@@ -72,6 +72,13 @@ serviceCoherenceSecretsHachage
   })
   .then(() => console.log('✅ Vérification des secrets réussie'))
   .then(() => {
+    const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
+      adaptateurProfilAnssi,
+      adaptateurRechercheEntreprise,
+      adaptateurChiffrement,
+      adaptateurHachage,
+    });
+    const entrepotResultatTest = new EntrepotResultatTestPostgres(entrepotUtilisateur);
     return creeServeur({
       fournisseurChemin,
       middleware: fabriqueMiddleware({ adaptateurJWT, fournisseurChemin }),
@@ -79,12 +86,7 @@ serviceCoherenceSecretsHachage
       adaptateurJWT,
       adaptateurGestionErreur: adaptateurGestionErreurSentry,
       busEvenements,
-      entrepotUtilisateur: new EntrepotUtilisateurMPAPostgres({
-        adaptateurProfilAnssi,
-        adaptateurRechercheEntreprise,
-        adaptateurChiffrement,
-        adaptateurHachage,
-      }),
+      entrepotUtilisateur,
       reseau: {
         trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
         maxRequetesParMinutes: adaptateurEnvironnement
@@ -94,7 +96,7 @@ serviceCoherenceSecretsHachage
       },
       adaptateurRechercheEntreprise,
       adaptateurProfilAnssi,
-      entrepotResultatTest: new EntrepotResultatTestPostgres(),
+      entrepotResultatTest,
       entrepotFavori: new EntrepotFavoriPostgres(),
       entrepotSessionDeGroupe,
       adaptateurMonAideCyber,

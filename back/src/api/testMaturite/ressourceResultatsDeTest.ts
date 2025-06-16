@@ -21,6 +21,7 @@ const ressourceResultatsDeTest = ({
   busEvenements,
   middleware,
   entrepotResultatTest,
+  entrepotUtilisateur,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post(
@@ -75,14 +76,16 @@ const ressourceResultatsDeTest = ({
         codeSessionGroupe,
       } = requete.body;
 
-      const emailUtilisateur = requete.session?.email;
+      const utilisateur = await entrepotUtilisateur.parEmail(
+        requete.session?.email
+      );
       const resultatTest = new ResultatTestMaturite({
         tailleOrganisation,
         region,
         secteur,
         reponses,
-        emailUtilisateur,
-        codeSessionGroupe
+        codeSessionGroupe,
+        utilisateur,
       });
 
       await entrepotResultatTest.ajoute(resultatTest);
@@ -96,11 +99,11 @@ const ressourceResultatsDeTest = ({
           codeSessionGroupe,
         })
       );
-      if (emailUtilisateur) {
+      if (utilisateur) {
         await busEvenements.publie(
           new ProprieteTestRevendiquee({
-            emailUtilisateur,
             idResultatTest: resultatTest.id,
+            utilisateur,
           })
         );
       }

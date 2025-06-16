@@ -15,6 +15,8 @@ import {
   fabriqueBusPourLesTests,
   MockBusEvenement,
 } from '../../bus/busPourLesTests';
+import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource qui gère un résultat de test', () => {
   let serveur: Express;
@@ -22,10 +24,12 @@ describe('La ressource qui gère un résultat de test', () => {
   let cookieJeanneDupont: string;
   let busEvenements: MockBusEvenement;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     entrepotResultatTest = new EntrepotResultatTestMemoire();
+    const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+    await entrepotUtilisateur.ajoute(jeanneDupont);
     cookieJeanneDupont = encodeSession({
-      email: 'jeanne.dupont@mail.com',
+      email: jeanneDupont.email,
       token: 'token',
     });
     busEvenements = fabriqueBusPourLesTests();
@@ -33,11 +37,12 @@ describe('La ressource qui gère un résultat de test', () => {
       ...configurationDeTestDuServeur,
       entrepotResultatTest,
       busEvenements,
+      entrepotUtilisateur
     });
   });
 
   const donneesResultatTestCorrectes = () => ({
-    emailUtilisateur: undefined,
+    utilisateur: undefined,
     region: 'FR-NOR' as CodeRegion,
     secteur: 'J' as CodeSecteur,
     tailleOrganisation: '51' as CodeTrancheEffectif,
@@ -56,8 +61,8 @@ describe('La ressource qui gère un résultat de test', () => {
       await entrepotResultatTest.ajoute(
         new ResultatTestMaturite({
           ...donneesResultatTestCorrectes(),
-          emailUtilisateur: 'jean.jean@mail.com',
           id: 'r1',
+          utilisateur: hectorDurant,
         })
       );
 
@@ -68,7 +73,7 @@ describe('La ressource qui gère un résultat de test', () => {
 
       assert.equal(reponse.status, 403);
       const resultatTest = await entrepotResultatTest.parId('r1');
-      assert.equal(resultatTest!.emailUtilisateur, 'jean.jean@mail.com');
+      assert.equal(resultatTest!.utilisateur, hectorDurant);
       busEvenements.naPasRecuDEvenement(ProprieteTestRevendiquee);
     });
 
@@ -76,7 +81,7 @@ describe('La ressource qui gère un résultat de test', () => {
       await entrepotResultatTest.ajoute(
         new ResultatTestMaturite({
           ...donneesResultatTestCorrectes(),
-          emailUtilisateur: 'jeanne.dupont@mail.com',
+          utilisateur: jeanneDupont,
           id: 'r1',
         })
       );
@@ -105,7 +110,7 @@ describe('La ressource qui gère un résultat de test', () => {
 
       assert.equal(reponse.status, 200);
       const resultatTest = await entrepotResultatTest.parId('r1');
-      assert.equal(resultatTest!.emailUtilisateur, 'jeanne.dupont@mail.com');
+      assert.equal(resultatTest!.utilisateur, jeanneDupont);
     });
 
     it("renvoie une erreur 404 lorsque le résultat de test n'existe pas", async () => {
@@ -134,7 +139,7 @@ describe('La ressource qui gère un résultat de test', () => {
       const evenement = busEvenements.recupereEvenement(
         ProprieteTestRevendiquee
       );
-      assert.equal(evenement!.emailUtilisateur, 'jeanne.dupont@mail.com');
+      assert.equal(evenement!.utilisateur, jeanneDupont);
       assert.equal(evenement!.idResultatTest, 'r1');
     });
 

@@ -12,7 +12,7 @@ const resultatAvecReponses = (
   codeSession: string
 ) =>
   new ResultatTestMaturite({
-    emailUtilisateur: undefined,
+    utilisateur: undefined,
     region: 'FR-NOR',
     secteur: 'J',
     tailleOrganisation: '51',

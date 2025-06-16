@@ -25,7 +25,7 @@ export class EntrepotResultatTestMemoire
     email: string
   ): Promise<ResultatTestMaturite | undefined> {
     return this.copie(
-      this.entites.find((entite) => entite.emailUtilisateur === email)
+      this.entites.find((entite) => entite.utilisateur?.email === email)
     );
   }
 

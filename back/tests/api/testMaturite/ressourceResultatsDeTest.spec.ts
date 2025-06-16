@@ -12,6 +12,8 @@ import { TestRealise } from '../../../src/bus/evenements/testRealise';
 import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
 import { encodeSession } from '../cookie';
 import { ProprieteTestRevendiquee } from '../../../src/bus/evenements/proprieteTestRevendiquee';
+import { jeanneDupont } from '../objetsPretsALEmploi';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 
 const REGEX_UUID =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
@@ -20,6 +22,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
   let serveur: Express;
   let busEvenements: MockBusEvenement;
   let entrepotResultatTest: EntrepotResultatTestMemoire;
+  let entrepotUtilisateur: EntrepotUtilisateurMemoire;
 
   const donneesCorrectes = {
     region: 'FR-NOR',
@@ -39,10 +42,13 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
   beforeEach(() => {
     busEvenements = fabriqueBusPourLesTests();
     entrepotResultatTest = new EntrepotResultatTestMemoire();
+    entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+    entrepotUtilisateur.ajoute(jeanneDupont);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements,
       entrepotResultatTest,
+      entrepotUtilisateur,
     });
   });
 
@@ -116,7 +122,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       let cookie: string;
 
       beforeEach(() => {
-        cookie = encodeSession({ email: 'jeanne.dupont@mail.com', token: '' });
+        cookie = encodeSession({ email: jeanneDupont.email, token: '' });
       });
 
       it("sauvegarde le résultat de test avec l'email de l'utilisateur", async () => {
@@ -138,15 +144,10 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           });
 
         const resultatSauvegarde =
-          await entrepotResultatTest.dernierPourUtilisateur(
-            'jeanne.dupont@mail.com'
-          );
+          await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont.email);
 
         assert.notEqual(resultatSauvegarde, undefined);
-        assert.equal(
-          resultatSauvegarde?.emailUtilisateur,
-          'jeanne.dupont@mail.com'
-        );
+        assert.equal(resultatSauvegarde?.utilisateur, jeanneDupont);
         assert.equal(resultatSauvegarde!.region, 'FR-NOR');
         assert.equal(resultatSauvegarde!.secteur, 'J');
         assert.equal(resultatSauvegarde!.tailleOrganisation, '51');
@@ -167,9 +168,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           .send(donneesCorrectes);
 
         const resultatSauvegarde =
-          await entrepotResultatTest.dernierPourUtilisateur(
-            'jeanne.dupont@mail.com'
-          );
+          await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont.email);
         assert.match(resultatSauvegarde!.id, REGEX_UUID);
         assert.deepEqual(reponse.body, { id: resultatSauvegarde!.id });
       });
@@ -184,7 +183,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         const evenement = busEvenements.recupereEvenement(
           ProprieteTestRevendiquee
         );
-        assert.equal(evenement!.emailUtilisateur, 'jeanne.dupont@mail.com');
+        assert.equal(evenement!.utilisateur, jeanneDupont);
         assert.equal(evenement!.idResultatTest, reponse.body.id);
       });
     });
@@ -197,7 +196,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
         const resultatSauvegarde = (await entrepotResultatTest.tous())[0];
         assert.notEqual(resultatSauvegarde, undefined);
-        assert.equal(resultatSauvegarde?.emailUtilisateur, undefined);
+        assert.equal(resultatSauvegarde?.utilisateur, undefined);
       });
       it("ne publie pas d'événement sur le bus qui indique que l'utilisateur est relié au test", async () => {
         await request(serveur)
@@ -212,13 +211,12 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       const requeteAvecDonneeIncorrecte = async (
         donnees: Record<string, unknown>
       ) => {
-        const reponse = await request(serveur)
+        return await request(serveur)
           .post('/api/resultats-test')
           .send({
             ...donneesCorrectes,
             ...donnees,
           });
-        return reponse;
       };
 
       it('accepte une région non renseignée', async () => {
@@ -293,7 +291,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
         it('valide les clés de réponses', async () => {
           const reponse = await requeteAvecDonneeIncorrecte({
-            reponses: { uneAutreClé: 1 },
+            reponses: { uneAutreClef: 1 },
           });
 
           assert.equal(reponse.status, 400);

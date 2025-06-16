@@ -15,7 +15,7 @@ export const consigneEvenementProprieteTestRevendiqueeDansJournal = ({
   return async function (evenement: ProprieteTestRevendiquee) {
     await adaptateurJournal.consigneEvenement({
       donnees: {
-        idUtilisateur: adaptateurHachage.hache(evenement.emailUtilisateur),
+        idUtilisateur: adaptateurHachage.hache(evenement.utilisateur.email),
         idResultatTest: evenement.idResultatTest,
       },
       type: 'PROPRIETE_TEST_REVENDIQUEE',

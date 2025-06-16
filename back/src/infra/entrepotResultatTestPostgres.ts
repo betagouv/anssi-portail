@@ -2,26 +2,37 @@ import { EntrepotResultatTest } from '../metier/entrepotResultatTest';
 import { ResultatTestMaturite } from '../metier/resultatTestMaturite';
 import Knex from 'knex';
 import config from '../../knexfile';
+import { EntrepotUtilisateurMPAPostgres } from './entrepotUtilisateurMPAPostgres';
+import { Utilisateur } from '../metier/utilisateur';
 
 export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
   knex: Knex.Knex;
+  entrepotUtilisateur: EntrepotUtilisateurMPAPostgres;
 
-  constructor() {
+  constructor(entrepotUtilisateur: EntrepotUtilisateurMPAPostgres) {
     this.knex = Knex(config);
+    this.entrepotUtilisateur = entrepotUtilisateur;
   }
 
   async ceuxDeSessionGroupe(code: string): Promise<ResultatTestMaturite[]> {
     const donnees = await this.knex('resultats_test').where({
       code_session_groupe: code,
     });
-    return donnees.map(this.traduitEnResultatTestMaturite);
+    return Promise.all(donnees.map((donnees)=>this.traduitEnResultatTestMaturite(donnees)));
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private traduitEnResultatTestMaturite(donneesTestMaturite: any) {
+  private async traduitEnResultatTestMaturite(donneesTestMaturite: any) {
+    const utilisateur: Utilisateur | undefined =
+      donneesTestMaturite.email_utilisateur
+        ? await this.entrepotUtilisateur.parEmail(
+            donneesTestMaturite.email_utilisateur
+          )
+        : undefined;
+
     return new ResultatTestMaturite({
       ...donneesTestMaturite,
-      emailUtilisateur: donneesTestMaturite.email_utilisateur,
+      utilisateur,
       tailleOrganisation: donneesTestMaturite.taille_organisation,
       codeSessionGroupe: donneesTestMaturite.code_session_groupe,
     });
@@ -44,20 +55,16 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
 
   async metsAjour(resultatTest: ResultatTestMaturite): Promise<void> {
     await this.knex('resultats_test').where({ id: resultatTest.id }).update({
-      email_utilisateur: resultatTest.emailUtilisateur,
+      email_utilisateur: resultatTest.utilisateur?.email,
     });
   }
 
   async ajoute(resultatTest: ResultatTestMaturite): Promise<void> {
-    const {
-      emailUtilisateur,
-      tailleOrganisation,
-      codeSessionGroupe,
-      ...reste
-    } = resultatTest;
+    const { utilisateur, tailleOrganisation, codeSessionGroupe, ...reste } =
+      resultatTest;
     await this.knex('resultats_test').insert({
       ...reste,
-      email_utilisateur: emailUtilisateur,
+      email_utilisateur: utilisateur?.email,
       taille_organisation: tailleOrganisation,
       code_session_groupe: codeSessionGroupe,
     });
