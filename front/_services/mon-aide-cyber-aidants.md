@@ -48,7 +48,7 @@ MonAideCyber est un service numérique proposé par le laboratoire d'innovation 
 Avec MonAideCyber, faites-vous accompagner par un “Aidant cyber” :
 
 <ul>
-  <li> Bénéficiez d’un 1er diagnostic de la cybersécurité de votre organisation, en moins de 2h dans vos locaux </li>
+  <li> Bénéficiez d’un 1er diagnostic de la cybersécurité de votre organisation, en moins de 2h dans vos locaux ou en visio </li>
   <li>Recevez les recommandations de l’ANSSI sur des premières actions faciles et rapides à mettre en place permettant de réduire les vulnérabilités de votre organisation face au risque de cyberattaques.</li>
 </ul>
 
