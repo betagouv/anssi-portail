@@ -6,6 +6,7 @@ const ressourceResultatDeTest = ({
   entrepotResultatTest,
   busEvenements,
   middleware,
+  entrepotUtilisateur,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.put('/:id', middleware.verifieJWT, async (requete, reponse) => {
@@ -15,26 +16,28 @@ const ressourceResultatDeTest = ({
       return;
     }
 
-    const emailUtilisateur = requete.session?.email;
+    const utilisateur = (await entrepotUtilisateur.parEmail(
+      requete.session?.email
+    ))!;
 
     if (
-      resultatTest.emailUtilisateur &&
-      resultatTest.emailUtilisateur !== emailUtilisateur
+      resultatTest.utilisateur?.email &&
+      resultatTest.utilisateur?.email !== utilisateur.email
     ) {
       reponse.sendStatus(403);
       return;
     }
-    if (resultatTest.emailUtilisateur === emailUtilisateur) {
+    if (resultatTest.utilisateur?.email === utilisateur.email) {
       reponse.sendStatus(200);
       return;
     }
 
-    resultatTest.revendiquePropriete(emailUtilisateur);
+    resultatTest.revendiquePropriete(utilisateur);
 
     await entrepotResultatTest.metsAjour(resultatTest);
     await busEvenements.publie(
       new ProprieteTestRevendiquee({
-        emailUtilisateur,
+        utilisateur,
         idResultatTest: resultatTest.id,
       })
     );

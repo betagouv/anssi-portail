@@ -6,6 +6,7 @@ import { ProprieteTestRevendiquee } from '../../src/bus/evenements/proprieteTest
 import { consigneEvenementProprieteTestRevendiqueeDansJournal } from '../../src/bus/consigneEvenementProprieteTestRevendiqueeDansJournal';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import {fauxAdaptateurHachage} from "../api/fauxObjets";
+import { jeanneDupont } from '../api/objetsPretsALEmploi';
 
 describe("L'abonnement qui consigne la revendication de la propriété d'un test dans le journal", () => {
   let adaptateurHorloge: AdaptateurHorloge;
@@ -41,7 +42,7 @@ describe("L'abonnement qui consigne la revendication de la propriété d'un test
 
     await consigneEvenementDansJournal()(
       new ProprieteTestRevendiquee({
-        emailUtilisateur: 'u1@mail.com',
+        utilisateur: jeanneDupont,
         idResultatTest: '12345',
       })
     );
@@ -62,12 +63,12 @@ describe("L'abonnement qui consigne la revendication de la propriété d'un test
 
     await consigneEvenementDansJournal()(
       new ProprieteTestRevendiquee({
-        emailUtilisateur: 'u1@mail.com',
         idResultatTest: '1',
+        utilisateur:jeanneDupont
       })
     );
 
-    assert.equal(evenementRecu!.donnees.idUtilisateur, 'u1@mail.com-hacheHMAC');
+    assert.equal(evenementRecu!.donnees.idUtilisateur, `${jeanneDupont.email}-hacheHMAC`);
     assert.equal(evenementRecu!.donnees.emailUtilisateur, undefined);
   });
 });

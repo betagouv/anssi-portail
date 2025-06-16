@@ -1,15 +1,17 @@
+import { Utilisateur } from '../../metier/utilisateur';
+
 export class ProprieteTestRevendiquee {
-  emailUtilisateur!: string;
   idResultatTest!: string;
+  utilisateur!: Utilisateur;
 
   constructor({
-    emailUtilisateur,
     idResultatTest,
+    utilisateur
   }: {
-    emailUtilisateur: string;
     idResultatTest: string;
+    utilisateur: Utilisateur
   }) {
-    this.emailUtilisateur = emailUtilisateur;
     this.idResultatTest = idResultatTest;
+    this.utilisateur = utilisateur;
   }
 }

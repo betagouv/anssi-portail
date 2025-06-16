@@ -13,6 +13,7 @@ import {
   ResultatTestMaturite,
 } from '../../../src/metier/resultatTestMaturite';
 import { SessionDeGroupe } from '../../../src/metier/sessionDeGroupe';
+import { jeanneDupont } from '../objetsPretsALEmploi';
 
 describe("La ressource qui gère les résultats d'une session de groupe", () => {
   let serveur: Express;
@@ -24,7 +25,7 @@ describe("La ressource qui gère les résultats d'une session de groupe", () => 
 
   const donneesResultatTest: Omit<
     DonneesCreationResultatTestMaturite,
-    'emailUtilisateur'
+    'utilisateur'
   > = {
     region: 'FR-NOR',
     secteur: 'J',
@@ -94,7 +95,7 @@ describe("La ressource qui gère les résultats d'une session de groupe", () => 
         new ResultatTestMaturite({
           ...donneesResultatTest,
           codeSessionGroupe: 'ABC2ED',
-          emailUtilisateur: 'jeanne.dupont@mail.fr',
+          utilisateur: jeanneDupont,
         })
       );
 
