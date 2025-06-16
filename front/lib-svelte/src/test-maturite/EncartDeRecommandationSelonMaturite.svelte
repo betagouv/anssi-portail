@@ -25,7 +25,7 @@
           mais ne savez pas par quoi commencer ?
           <b>Prenez votre cyberdépart</b> avec un
           <b>premier diagnostic gratuit</b>
-          et anonyme d'une heure dans vos locaux
+          et anonyme d'une heure dans vos locaux ou en visio
           <b>accompagné par un Aidant cyber</b>.
         </p>
         <a href="/cyberdepart" class="bouton primaire">
