@@ -1,4 +1,5 @@
 import { ResultatTestMaturite } from './resultatTestMaturite';
+import { Utilisateur } from './utilisateur';
 
 export interface EntrepotResultatTest {
   ajoute(resultatTest: ResultatTestMaturite): Promise<void>;
@@ -8,7 +9,7 @@ export interface EntrepotResultatTest {
   metsAjour(resultatTest: ResultatTestMaturite): Promise<void>;
 
   dernierPourUtilisateur(
-    emailUtilisateur: string
+    utilisateur: Utilisateur
   ): Promise<ResultatTestMaturite | undefined>;
 
   ceuxDeSessionGroupe(code: string): Promise<ResultatTestMaturite[]>;

@@ -4,12 +4,12 @@ import { Router } from 'express';
 const ressourceDernierResultatDeTest = ({
   entrepotResultatTest,
   middleware,
+  entrepotUtilisateur
 }: ConfigurationServeur) => {
   const routeur = Router();
-  routeur.get('/', middleware.verifieJWT, async (requete, reponse) => {
-    const emailUtilisateur = requete.session?.email;
+  routeur.get('/', middleware.verifieJWT, middleware.ajouteUtilisateurARequete(entrepotUtilisateur), async (requete, reponse) => {
     const resultatTest = await entrepotResultatTest.dernierPourUtilisateur(
-      emailUtilisateur
+      requete.utilisateur
     );
     if (!resultatTest) {
       reponse.sendStatus(404);

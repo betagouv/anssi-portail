@@ -144,7 +144,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           });
 
         const resultatSauvegarde =
-          await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont.email);
+          await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
 
         assert.notEqual(resultatSauvegarde, undefined);
         assert.equal(resultatSauvegarde?.utilisateur, jeanneDupont);
@@ -168,7 +168,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           .send(donneesCorrectes);
 
         const resultatSauvegarde =
-          await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont.email);
+          await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
         assert.match(resultatSauvegarde!.id, REGEX_UUID);
         assert.deepEqual(reponse.body, { id: resultatSauvegarde!.id });
       });
