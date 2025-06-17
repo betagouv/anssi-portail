@@ -4,12 +4,21 @@ import Knex from 'knex';
 import config from '../../knexfile';
 import { EntrepotUtilisateurMPAPostgres } from './entrepotUtilisateurMPAPostgres';
 import { Utilisateur } from '../metier/utilisateur';
+import { AdaptateurHachage } from './adaptateurHachage';
 
 export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
   knex: Knex.Knex;
   entrepotUtilisateur: EntrepotUtilisateurMPAPostgres;
+  private adaptateurHachage: AdaptateurHachage;
 
-  constructor(entrepotUtilisateur: EntrepotUtilisateurMPAPostgres) {
+  constructor({
+    entrepotUtilisateur,
+    adaptateurHachage,
+  }: {
+    entrepotUtilisateur: EntrepotUtilisateurMPAPostgres;
+    adaptateurHachage: AdaptateurHachage;
+  }) {
+    this.adaptateurHachage = adaptateurHachage;
     this.knex = Knex(config);
     this.entrepotUtilisateur = entrepotUtilisateur;
   }
@@ -18,7 +27,9 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
     const donnees = await this.knex('resultats_test').where({
       code_session_groupe: code,
     });
-    return Promise.all(donnees.map((donnees)=>this.traduitEnResultatTestMaturite(donnees)));
+    return Promise.all(
+      donnees.map((donnees) => this.traduitEnResultatTestMaturite(donnees))
+    );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -54,9 +65,14 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
   }
 
   async metsAjour(resultatTest: ResultatTestMaturite): Promise<void> {
-    await this.knex('resultats_test').where({ id: resultatTest.id }).update({
-      email_utilisateur: resultatTest.utilisateur?.email,
-    });
+    await this.knex('resultats_test')
+      .where({ id: resultatTest.id })
+      .update({
+        email_utilisateur: resultatTest.utilisateur?.email,
+        email_utilisateur_hache: resultatTest.utilisateur
+          ? this.adaptateurHachage.hache(resultatTest.utilisateur.email)
+          : null,
+      });
   }
 
   async ajoute(resultatTest: ResultatTestMaturite): Promise<void> {
@@ -67,6 +83,9 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
       email_utilisateur: utilisateur?.email,
       taille_organisation: tailleOrganisation,
       code_session_groupe: codeSessionGroupe,
+      email_utilisateur_hache: resultatTest.utilisateur
+        ? this.adaptateurHachage.hache(resultatTest.utilisateur.email)
+        : null,
     });
   }
 }

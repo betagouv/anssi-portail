@@ -42,9 +42,10 @@ const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
   adaptateurChiffrement,
   adaptateurHachage,
 });
-const entrepotResultatTest = new EntrepotResultatTestPostgres(
-  entrepotUtilisateur
-);
+const entrepotResultatTest = new EntrepotResultatTestPostgres({
+  adaptateurHachage,
+  entrepotUtilisateur,
+});
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
