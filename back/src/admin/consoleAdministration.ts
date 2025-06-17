@@ -47,7 +47,9 @@ export class ConsoleAdministration {
       adaptateurHachage: this.adaptateurHachage,
     });
     this.adaptateurEmail = fabriqueAdaptateurEmail();
-    this.entrepotFavori = new EntrepotFavoriPostgres();
+    this.entrepotFavori = new EntrepotFavoriPostgres({
+      adaptateurHachage: this.adaptateurHachage,
+    });
     const configDuJournal = {
       client: 'pg',
       connection: process.env.BASE_DONNEES_JOURNAL_URL_SERVEUR,

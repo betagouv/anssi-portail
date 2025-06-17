@@ -33,7 +33,18 @@ const adaptateurHachage = fabriqueAdaptateurHachage({
   adaptateurEnvironnement,
 });
 
-const entrepotFavori = new EntrepotFavoriPostgres();
+const entrepotFavori = new EntrepotFavoriPostgres({ adaptateurHachage });
+const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
+const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
+const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
+  adaptateurProfilAnssi,
+  adaptateurRechercheEntreprise,
+  adaptateurChiffrement,
+  adaptateurHachage,
+});
+const entrepotResultatTest = new EntrepotResultatTestPostgres(
+  entrepotUtilisateur
+);
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
@@ -53,10 +64,6 @@ if (!crispIdSite || !crispCleApi) {
 
 const cmsCrisp = new CmsCrisp(crispIdSite, crispCleApi);
 
-const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
-
-const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
-
 const serviceCoherenceSecretsHachage =
   fabriqueServiceVerificationCoherenceSecretsHachage({
     adaptateurEnvironnement,
@@ -72,13 +79,6 @@ serviceCoherenceSecretsHachage
   })
   .then(() => console.log('✅ Vérification des secrets réussie'))
   .then(() => {
-    const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
-      adaptateurProfilAnssi,
-      adaptateurRechercheEntreprise,
-      adaptateurChiffrement,
-      adaptateurHachage,
-    });
-    const entrepotResultatTest = new EntrepotResultatTestPostgres(entrepotUtilisateur);
     return creeServeur({
       fournisseurChemin,
       middleware: fabriqueMiddleware({ adaptateurJWT, fournisseurChemin }),
@@ -97,7 +97,7 @@ serviceCoherenceSecretsHachage
       adaptateurRechercheEntreprise,
       adaptateurProfilAnssi,
       entrepotResultatTest,
-      entrepotFavori: new EntrepotFavoriPostgres(),
+      entrepotFavori,
       entrepotSessionDeGroupe,
       adaptateurMonAideCyber,
       adaptateurEnvironnement,
