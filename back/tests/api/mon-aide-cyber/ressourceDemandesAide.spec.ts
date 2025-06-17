@@ -14,7 +14,9 @@ const uneDemandeAide = (parametres?: {
   departement?: string;
   raisonSociale?: string;
   siret?: string;
+  origine?: string;
 }): CorpsDemandeAide => ({
+  ...(parametres?.origine && { origine: parametres.origine }),
   ...(parametres?.emailAidant && { emailAidant: parametres?.emailAidant }),
   ...(parametres?.identifiantAidant && {
     identifiantAidant: parametres?.identifiantAidant,
@@ -23,7 +25,7 @@ const uneDemandeAide = (parametres?: {
     email: parametres?.email || 'durant@mail.fr',
     departement: parametres?.departement || '12',
     raisonSociale: parametres?.raisonSociale || 'Une raison sociale',
-    siret: parametres?.siret || '01234567891234'
+    siret: parametres?.siret || '01234567891234',
   },
   validationCGU: true,
 });
@@ -59,14 +61,16 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
 
     await request(serveur)
       .post('/api/mon-aide-cyber/demandes-aide')
-      .send(uneDemandeAide({ email: 'durant@mail.fr', siret: '09876543214321' }));
+      .send(
+        uneDemandeAide({ email: 'durant@mail.fr', siret: '09876543214321' })
+      );
 
     assert.deepEqual(demandeAideEnvoyee, {
       entiteAidee: {
         email: 'durant@mail.fr',
         departement: '12',
         raisonSociale: 'Une raison sociale',
-        siret: '09876543214321'
+        siret: '09876543214321',
       },
     });
   });
@@ -172,7 +176,10 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
           })
         );
 
-      assert.equal(identifiantAidantEnvoye, 'a5b9ee4c-4eca-432d-ba96-da387fe6d5ed');
+      assert.equal(
+        identifiantAidantEnvoye,
+        'a5b9ee4c-4eca-432d-ba96-da387fe6d5ed'
+      );
     });
   });
 
@@ -274,7 +281,11 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
         .send({
           email: 'jean.dupont@mail.fr',
           validationCGU: true,
-          entiteAidee: { departement: '01', raisonSociale: '   ', siret: '12345678901234', },
+          entiteAidee: {
+            departement: '01',
+            raisonSociale: '   ',
+            siret: '12345678901234',
+          },
         });
 
       assert.equal(reponse.status, 400);
@@ -302,6 +313,27 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
       assert.equal(
         await reponse.body.erreur,
         'Veuillez saisir un identifiant Aidant cyber valide.'
+      );
+    });
+
+    it('pour l’origine de la demande', async () => {
+      const reponse = await request(serveur)
+        .post('/api/mon-aide-cyber/demandes-aide')
+        .send({
+          origine: '   ',
+          validationCGU: true,
+          entiteAidee: {
+            departement: '33',
+            raisonSociale: 'beta-gouv',
+            email: 'jean.dupont@mail.fr',
+            siret: '12345678901234',
+          },
+        });
+
+      assert.equal(reponse.status, 400);
+      assert.equal(
+        await reponse.body.erreur,
+        'Veuillez saisir une origine valide.'
       );
     });
   });

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { adaptateurMonAideCyberVide } from './adaptateurMonAideCyberVide';
 
 export type DemandeAide = {
+  origine?: string;
   entiteAidee: {
     email: string;
     departement: string;
@@ -17,10 +18,16 @@ export interface AdaptateurMonAideCyber {
 }
 
 const adaptateurMonAideCyber = (): AdaptateurMonAideCyber => {
-  const creeDemandeAide = async ({ entiteAidee, emailAidant, identifiantAidant }: DemandeAide) => {
+  const creeDemandeAide = async ({
+    entiteAidee,
+    emailAidant,
+    identifiantAidant,
+    origine,
+  }: DemandeAide) => {
     try {
       const { email, raisonSociale, departement, siret } = entiteAidee;
       const demandeMAC = {
+        ...(origine && { origine }),
         cguValidees: true,
         email,
         departement,
