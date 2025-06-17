@@ -7,13 +7,20 @@
   import axios from 'axios';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import Icone from '../ui/Icone.svelte';
+  import {onMount} from "svelte";
 
   let formulaireDemandeAide: FormulaireDemandeAide;
   let enSucces: boolean = false;
   let formulaireSoumis: boolean;
   let erreurs: string;
+  let origine : string | null;
 
   let enCoursEnvoi = false;
+
+  onMount(() => {
+    const parametres = new URLSearchParams(window.location.search);
+    origine = parametres.get('mtm_campaign');
+  })
 
   const soumetsFormulaire = async (
     e: CustomEvent<DonneesFormulaireDemandeAide>
@@ -32,6 +39,7 @@
         identifiantAidant,
       } = e.detail;
       const corps: CorpsAPIDemandeAide = {
+        ...(origine && {origine}),
         entiteAidee: {
           email,
           departement: entite.departement,
