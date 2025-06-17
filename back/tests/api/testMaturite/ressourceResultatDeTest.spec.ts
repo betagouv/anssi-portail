@@ -37,7 +37,7 @@ describe('La ressource qui gère un résultat de test', () => {
       ...configurationDeTestDuServeur,
       entrepotResultatTest,
       busEvenements,
-      entrepotUtilisateur
+      entrepotUtilisateur,
     });
   });
 

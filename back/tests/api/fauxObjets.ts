@@ -57,6 +57,8 @@ export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
   recupere: async () => undefined,
 };
 
+const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+
 const vraiMiddleware = fabriqueMiddleware({
   adaptateurJWT: fauxAdaptateurJWT,
   fournisseurChemin: fauxFournisseurDeChemin,
@@ -132,7 +134,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurOIDC: fauxAdaptateurOIDC,
   adaptateurJWT: fauxAdaptateurJWT,
   adaptateurGestionErreur: adaptateurGestionVide,
-  entrepotUtilisateur: new EntrepotUtilisateurMemoire(),
+  entrepotUtilisateur,
   reseau: {
     trustProxy: '0',
     maxRequetesParMinutes: 3,
