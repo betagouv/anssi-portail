@@ -68,7 +68,6 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
     await this.knex('resultats_test')
       .where({ id: resultatTest.id })
       .update({
-        email_utilisateur: resultatTest.utilisateur?.email,
         email_utilisateur_hache: resultatTest.utilisateur
           ? this.adaptateurHachage.hache(resultatTest.utilisateur.email)
           : null,
@@ -80,11 +79,10 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
       resultatTest;
     await this.knex('resultats_test').insert({
       ...reste,
-      email_utilisateur: utilisateur?.email,
       taille_organisation: tailleOrganisation,
       code_session_groupe: codeSessionGroupe,
-      email_utilisateur_hache: resultatTest.utilisateur
-        ? this.adaptateurHachage.hache(resultatTest.utilisateur.email)
+      email_utilisateur_hache: utilisateur
+        ? this.adaptateurHachage.hache(utilisateur.email)
         : null,
     });
   }
