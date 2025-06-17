@@ -5,6 +5,7 @@ import { body, check } from 'express-validator';
 import { codeDepartement } from '../../metier/referentielDepartements';
 
 export type CorpsDemandeAide = {
+  origine?: string;
   entiteAidee: {
     email: string;
     departement: string;
@@ -55,22 +56,28 @@ const ressourceDemandesAide = ({
       .trim()
       .isUUID()
       .withMessage('Veuillez saisir un identifiant Aidant cyber valide.'),
+    body('origine')
+      .optional({ checkFalsy: true })
+      .custom((origine) => origine && origine.trim().length > 0)
+      .withMessage('Veuillez saisir une origine valide.'),
     body('validationCGU')
       .custom((validationCGU) => !!validationCGU)
       .withMessage('Veuillez valider les CGU.'),
     middleware.valide(),
     async (requete: CorpsDeRequeteTypee<CorpsDemandeAide>, reponse) => {
       try {
-        const { emailAidant, identifiantAidant, entiteAidee } = requete.body;
+        const { emailAidant, identifiantAidant, entiteAidee, origine } =
+          requete.body;
         const { email, departement, raisonSociale, siret } = entiteAidee;
         await adaptateurMonAideCyber.creeDemandeAide({
+          ...(origine && { origine }),
           ...(emailAidant && { emailAidant }),
           ...(identifiantAidant && { identifiantAidant }),
           entiteAidee: {
             email,
             departement,
             raisonSociale,
-            siret
+            siret,
           },
         });
         reponse.sendStatus(201);
