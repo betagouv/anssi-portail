@@ -41,7 +41,6 @@ export class EntrepotFavoriPostgres implements EntrepotFavori {
 
   async ajoute(favori: Favori): Promise<void> {
     await this.knex('favoris').insert({
-      email_utilisateur: favori.utilisateur.email,
       email_utilisateur_hache: this.adaptateurHachage.hache(
         favori.utilisateur.email
       ),
