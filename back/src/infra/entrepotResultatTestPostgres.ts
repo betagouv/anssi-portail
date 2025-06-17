@@ -55,10 +55,10 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
   }
 
   async dernierPourUtilisateur(
-    emailUtilisateur: string
+    utilisateur: Utilisateur
   ): Promise<ResultatTestMaturite | undefined> {
     const donnees = await this.knex('resultats_test')
-      .where({ email_utilisateur: emailUtilisateur })
+      .where({ email_utilisateur: utilisateur.email })
       .orderBy('date_realisation', 'desc')
       .first();
     return donnees ? this.traduitEnResultatTestMaturite(donnees) : undefined;

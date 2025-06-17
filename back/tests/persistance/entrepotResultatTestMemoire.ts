@@ -1,6 +1,7 @@
 import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest';
 import { ResultatTestMaturite } from '../../src/metier/resultatTestMaturite';
 import { EntrepotMemoire } from './entrepotMemoire';
+import { Utilisateur } from '../../src/metier/utilisateur';
 
 export class EntrepotResultatTestMemoire
   extends EntrepotMemoire<ResultatTestMaturite>
@@ -22,10 +23,10 @@ export class EntrepotResultatTestMemoire
   }
 
   async dernierPourUtilisateur(
-    email: string
+    utilisateur: Utilisateur
   ): Promise<ResultatTestMaturite | undefined> {
     return this.copie(
-      this.entites.find((entite) => entite.utilisateur?.email === email)
+      this.entites.find((entite) => entite.utilisateur?.email === utilisateur.email)
     );
   }
 

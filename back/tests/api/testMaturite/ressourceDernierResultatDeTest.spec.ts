@@ -11,21 +11,25 @@ import { CodeRegion } from '../../../src/metier/referentielRegions';
 import { CodeSecteur } from '../../../src/metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../../../src/metier/referentielTranchesEffectifEtablissement';
 import { jeanneDupont } from '../objetsPretsALEmploi';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource qui gère le dernier résultat de test', () => {
   let serveur: Express;
   let entrepotResultatTest: EntrepotResultatTestMemoire;
   let cookieJeanneDupont: string;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     entrepotResultatTest = new EntrepotResultatTestMemoire();
     cookieJeanneDupont = encodeSession({
       email: jeanneDupont.email,
       token: 'token',
     });
+    const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+    await entrepotUtilisateur.ajoute(jeanneDupont);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       entrepotResultatTest,
+      entrepotUtilisateur,
     });
   });
 
