@@ -13,7 +13,7 @@ import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
 import { MockCmsCrisp } from '../mockCmsCrisp';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
-import {AdaptateurHachage} from "../../src/infra/adaptateurHachage";
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -57,11 +57,13 @@ export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
   recupere: async () => undefined,
 };
 
+const vraiMiddleware = fabriqueMiddleware({
+  adaptateurJWT: fauxAdaptateurJWT,
+  fournisseurChemin: fauxFournisseurDeChemin,
+});
+
 export const fauxMiddleware: Middleware = {
-  ajouteMethodeNonce: fabriqueMiddleware({
-    adaptateurJWT: fauxAdaptateurJWT,
-    fournisseurChemin: fauxFournisseurDeChemin,
-  }).ajouteMethodeNonce,
+  ajouteMethodeNonce: vraiMiddleware.ajouteMethodeNonce,
   positionneLesCsp: () => async (_, __, suite) => {
     suite();
   },
@@ -80,6 +82,7 @@ export const fauxMiddleware: Middleware = {
   verifieJWTNavigation: async (_, __, suite) => {
     suite();
   },
+  ajouteUtilisateurARequete: (_) => async (_, __, suite) => suite(),
 };
 
 const fauxAdaptateurMonAideCyber = { creeDemandeAide: () => Promise.resolve() };
@@ -116,16 +119,16 @@ const fauxGenerateurCodeSessionDeGroupe = {
 
 export const fauxAdaptateurHachage: AdaptateurHachage = {
   hache: (valeur: string): string => `${valeur}-hache`,
-  hacheBCrypt: async (valeur: string): Promise<string> => `${valeur}-hacheBCrypt`,
-  compareBCrypt: async (_valeurEnClair: string, _empreinte: string): Promise<boolean> => true,
+  hacheBCrypt: async (valeur: string): Promise<string> =>
+    `${valeur}-hacheBCrypt`,
+  compareBCrypt: async (
+    _valeurEnClair: string,
+    _empreinte: string
+  ): Promise<boolean> => true,
 };
-
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   fournisseurChemin: fauxFournisseurDeChemin,
-  middleware: fabriqueMiddleware({
-    adaptateurJWT: fauxAdaptateurJWT,
-    fournisseurChemin: fauxFournisseurDeChemin,
-  }),
+  middleware: vraiMiddleware,
   adaptateurOIDC: fauxAdaptateurOIDC,
   adaptateurJWT: fauxAdaptateurJWT,
   adaptateurGestionErreur: adaptateurGestionVide,

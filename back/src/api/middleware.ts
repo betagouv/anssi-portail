@@ -5,6 +5,8 @@ import fs from 'node:fs';
 import { randomBytes } from 'node:crypto';
 import helmet from 'helmet';
 import { FournisseurChemin } from './fournisseurChemin';
+import { Utilisateur } from '../metier/utilisateur';
+import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 
 type FonctionMiddleware = (
   requete: Request,
@@ -20,6 +22,9 @@ export type Middleware = {
   verifieJWTNavigation: FonctionMiddleware;
   ajouteMethodeNonce: FonctionMiddleware;
   positionneLesCsp: () => FonctionMiddleware;
+  ajouteUtilisateurARequete: (
+    entrepotUtilisateur: EntrepotUtilisateur
+  ) => FonctionMiddleware;
 };
 
 export const fabriqueMiddleware = ({
@@ -149,6 +154,18 @@ export const fabriqueMiddleware = ({
         },
       })(requete, reponse, suite);
 
+  const ajouteUtilisateurARequete =
+    (entrepotUtilisateur: EntrepotUtilisateur) =>
+    async (
+      requete: Request & { utilisateur?: Utilisateur | undefined },
+      _reponse: Response,
+      suite: NextFunction
+    ) => {
+      requete.utilisateur = await entrepotUtilisateur.parEmail(
+        requete.session?.email
+      );
+      suite();
+    };
   return {
     aseptise,
     valide,
@@ -157,5 +174,6 @@ export const fabriqueMiddleware = ({
     interdisLaMiseEnCache,
     ajouteMethodeNonce,
     positionneLesCsp,
+    ajouteUtilisateurARequete,
   };
 };
