@@ -10,19 +10,28 @@ import { fauxAdaptateurJWT, fauxFournisseurDeChemin } from './fauxObjets';
 import { JsonWebTokenError } from 'jsonwebtoken';
 import { join } from 'path';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin';
+import { jeanneDupont } from './objetsPretsALEmploi';
+import { Utilisateur } from '../../src/metier/utilisateur';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
+import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 
 describe('Le middleware', () => {
-  let requete: Request & { emailUtilisateurCourant?: string };
+  let requete: Request & {
+    emailUtilisateurCourant?: string;
+    utilisateur?: Utilisateur | undefined;
+  };
   let reponse: Response;
   let middleware: Middleware;
   let adaptateurJWT: AdaptateurJWT;
   let fournisseurChemin: FournisseurChemin;
+  let entrepotUtilisateur: EntrepotUtilisateur;
 
   beforeEach(() => {
     adaptateurJWT = fauxAdaptateurJWT;
     requete = createRequest();
     reponse = createResponse();
     fournisseurChemin = { ...fauxFournisseurDeChemin };
+    entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     middleware = fabriqueMiddleware({
       adaptateurJWT,
       fournisseurChemin,
@@ -249,6 +258,36 @@ describe('Le middleware', () => {
       });
 
       assert.deepEqual(pagesDemandee, '404.html');
+    });
+  });
+
+  describe("sur demande d'ajout de l'utilisateur courant", () => {
+    it("ajoute l'utilisateur dont l'email est dans la session à la requête", async () => {
+      requete.session = { email: jeanneDupont.email };
+      await entrepotUtilisateur.ajoute(jeanneDupont);
+
+      await (middleware.ajouteUtilisateurARequete(entrepotUtilisateur))(requete, reponse, () => {});
+
+      assert.deepEqual(requete.utilisateur, jeanneDupont);
+    });
+
+    it('est indéfini si non défini dans la session', async () => {
+      requete.session = {};
+      await entrepotUtilisateur.ajoute(jeanneDupont);
+
+      await (middleware.ajouteUtilisateurARequete(entrepotUtilisateur))(requete, reponse, () => {});
+
+      assert.equal(requete.utilisateur, undefined);
+    });
+
+    it('appelle la suite', async () => {
+      let suiteAppelee = false;
+
+      await (middleware.ajouteUtilisateurARequete(entrepotUtilisateur))(requete, reponse, () => {
+        suiteAppelee = true;
+      });
+
+      assert.equal(suiteAppelee, true);
     });
   });
 });

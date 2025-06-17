@@ -82,7 +82,10 @@ serviceCoherenceSecretsHachage
   .then(() => {
     return creeServeur({
       fournisseurChemin,
-      middleware: fabriqueMiddleware({ adaptateurJWT, fournisseurChemin }),
+      middleware: fabriqueMiddleware({
+        adaptateurJWT,
+        fournisseurChemin,
+      }),
       adaptateurOIDC,
       adaptateurJWT,
       adaptateurGestionErreur: adaptateurGestionErreurSentry,

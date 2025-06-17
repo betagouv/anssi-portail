@@ -1,6 +1,7 @@
 declare namespace Express {
   export interface Request {
     emailUtilisateurCourant?: string;
+    utilisateur: Utilisateur | undefined;
   }
 
   export interface CorpsDeRequeteTypee<T> extends Request {
@@ -11,4 +12,3 @@ declare namespace Express {
     sendFileAvecNonce: (chemin: string) => void;
   }
 }
-
