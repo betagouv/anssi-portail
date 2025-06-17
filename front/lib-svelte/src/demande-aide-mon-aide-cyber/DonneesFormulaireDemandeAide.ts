@@ -9,6 +9,7 @@ export type DonneesFormulaireDemandeAide = {
 };
 
 export type CorpsAPIDemandeAide = {
+  origine?: string;
   entiteAidee: {
     email: string;
     departement: string;
