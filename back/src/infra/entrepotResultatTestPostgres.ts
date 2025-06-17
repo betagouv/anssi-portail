@@ -35,9 +35,9 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private async traduitEnResultatTestMaturite(donneesTestMaturite: any) {
     const utilisateur: Utilisateur | undefined =
-      donneesTestMaturite.email_utilisateur
-        ? await this.entrepotUtilisateur.parEmail(
-            donneesTestMaturite.email_utilisateur
+      donneesTestMaturite.email_utilisateur_hache
+        ? await this.entrepotUtilisateur.parEmailHache(
+            donneesTestMaturite.email_utilisateur_hache
           )
         : undefined;
 

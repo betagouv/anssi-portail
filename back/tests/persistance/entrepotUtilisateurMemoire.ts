@@ -14,6 +14,9 @@ export class EntrepotUtilisateurMemoire
   parEmail = async (email: string) => {
     return this.entites.find((utilisateur) => utilisateur.email === email);
   };
+  parEmailHache = async (_emailHache: string) => {
+    throw new Error('pas utilisable pour le moment');
+  };
   parIdListeFavoris = async (idListeFavoris: string) => {
     return this.entites.find(
       (utilisateur) => utilisateur.idListeFavoris === idListeFavoris
