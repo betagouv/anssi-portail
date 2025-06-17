@@ -91,7 +91,7 @@
         </div>
         <p class="cible-du-diagnostic">
           Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et
-          micro-entreprises.
+          aux entreprises mono-salariées.
         </p>
       </div>
     </div>
