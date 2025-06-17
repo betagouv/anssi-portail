@@ -3,11 +3,14 @@ import config from '../../knexfile';
 import { EntrepotFavori } from '../metier/entrepotFavori';
 import { Favori } from '../metier/favori';
 import { Utilisateur } from '../metier/utilisateur';
+import { AdaptateurHachage } from './adaptateurHachage';
 
 export class EntrepotFavoriPostgres implements EntrepotFavori {
   knex: Knex.Knex;
+  private adaptateurHachage: AdaptateurHachage;
 
-  constructor() {
+  constructor({ adaptateurHachage }: { adaptateurHachage: AdaptateurHachage }) {
+    this.adaptateurHachage = adaptateurHachage;
     this.knex = Knex(config);
   }
 
@@ -33,6 +36,9 @@ export class EntrepotFavoriPostgres implements EntrepotFavori {
   async ajoute(favori: Favori): Promise<void> {
     await this.knex('favoris').insert({
       email_utilisateur: favori.utilisateur.email,
+      email_utilisateur_hache: this.adaptateurHachage.hache(
+        favori.utilisateur.email
+      ),
       id_item_cyber: favori.idItemCyber,
     });
   }
