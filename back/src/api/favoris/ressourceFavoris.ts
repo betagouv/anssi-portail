@@ -7,7 +7,7 @@ const ressourceFavoris = ({
   busEvenements,
   middleware,
   entrepotFavori,
-  entrepotUtilisateur,
+  entrepotUtilisateur
 }: ConfigurationServeur) => {
   const routeur = Router();
 
@@ -15,6 +15,7 @@ const ressourceFavoris = ({
     '/',
     middleware.verifieJWT,
     middleware.aseptise('idItemCyber'),
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur),
     [
       check('idItemCyber')
         .not()
@@ -25,9 +26,7 @@ const ressourceFavoris = ({
     async (requete: Request, reponse: Response) => {
       let idItemCyber = requete.body.idItemCyber;
       idItemCyber = idItemCyber.replaceAll('&#x2F;', '/');
-      const utilisateur = (await entrepotUtilisateur.parEmail(
-        requete.session?.email
-      ))!;
+      const utilisateur = requete.utilisateur;
       await entrepotFavori.ajoute({
         idItemCyber,
         utilisateur,
@@ -45,10 +44,9 @@ const ressourceFavoris = ({
   routeur.get(
     '/',
     middleware.verifieJWT,
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur),
     async (requete: Request, reponse: Response) => {
-      const utilisateur = (await entrepotUtilisateur.parEmail(
-        requete.session?.email
-      ))!;
+      const utilisateur = requete.utilisateur;
       const favoris = await entrepotFavori.tousCeuxDeUtilisateur(utilisateur);
       reponse.status(200).send(favoris.map((favori) => favori.idItemCyber));
     }

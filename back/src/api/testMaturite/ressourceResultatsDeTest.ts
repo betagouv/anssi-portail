@@ -66,6 +66,7 @@ const ressourceResultatsDeTest = ({
         ),
     ],
     middleware.valide(),
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur),
     middleware.aseptise('codeSessionGroupe'),
     async (requete: Request, reponse: Response) => {
       const {
@@ -76,9 +77,7 @@ const ressourceResultatsDeTest = ({
         codeSessionGroupe,
       } = requete.body;
 
-      const utilisateur = await entrepotUtilisateur.parEmail(
-        requete.session?.email
-      );
+      const utilisateur = requete.utilisateur;
       const resultatTest = new ResultatTestMaturite({
         tailleOrganisation,
         region,
