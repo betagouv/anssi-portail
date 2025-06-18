@@ -11,11 +11,8 @@ const hacheAvecHMAC = (valeur: string) => {
     .digest('hex');
 };
 
-exports.up = async (knex: Knex) => {
-  async function migreLaTable(
-    trx: Knex.Transaction,
-    table: string
-  ) {
+export async function up(knex: Knex) {
+  async function migreLaTable(trx: Knex.Transaction, table: string) {
     const lignes = await trx(table);
 
     const emailsDistincts = new Set(
@@ -38,13 +35,13 @@ exports.up = async (knex: Knex) => {
 
     await Promise.all([...majFavoris, ...majResultatsTest]);
   });
-};
+}
 
-exports.down = async (knex: Knex) => {
+export async function down(knex: Knex) {
   await knex.transaction(async (trx) => {
     return Promise.all([
       trx('favoris').update({ email_utilisateur_hache: null }),
       trx('resultats_test').update({ email_utilisateur_hache: null }),
     ]);
   });
-};
+}
