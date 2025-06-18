@@ -48,7 +48,7 @@ export const fauxAdaptateurJWT: AdaptateurJWT = {
 export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
   {
     rechercheOrganisations: async (siret: string, __: string | null) => [
-      { siret, nom: '', departement: '' },
+      { siret, nom: '', departement: '86' },
     ],
   };
 

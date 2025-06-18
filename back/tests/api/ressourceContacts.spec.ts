@@ -1,32 +1,37 @@
 import { beforeEach, describe, it } from 'node:test';
-import { Express } from 'express';
 import assert from 'node:assert';
 import { configurationDeTestDuServeur, fauxMiddleware } from './fauxObjets';
 import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
-import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { randomUUID } from 'node:crypto';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
+import { jeanneDupont } from './objetsPretsALEmploi';
 
 describe('La ressource Contacts', () => {
-  let serveur: Express;
-  let entrepotUtilisateur: EntrepotUtilisateur;
+  let middlewareAjouteUtilisateurARequeteAppele: boolean;
 
   beforeEach(() => {
-    entrepotUtilisateur = new EntrepotUtilisateurMemoire();
-    serveur = creeServeur({
-      ...configurationDeTestDuServeur,
-      entrepotUtilisateur,
-      middleware: fauxMiddleware,
-    });
+    middlewareAjouteUtilisateurARequeteAppele = false;
   });
+
+  const creeServeurAvecUtilisateur = (utilisateur: Utilisateur | undefined) =>
+    creeServeur({
+      ...configurationDeTestDuServeur,
+      middleware: {
+        ...fauxMiddleware,
+        ajouteUtilisateurARequete: (_) => async (requete, __, suite) => {
+          middlewareAjouteUtilisateurARequeteAppele = true;
+          requete.utilisateur = utilisateur;
+          suite();
+        },
+      },
+    });
 
   describe('sur demande GET', () => {
     it('utilise le middleware de verification de JWT', async () => {
       let middelwareAppele = false;
-      serveur = creeServeur({
+      const serveur = creeServeur({
         ...configurationDeTestDuServeur,
         middleware: {
           ...fauxMiddleware,
@@ -41,24 +46,20 @@ describe('La ressource Contacts', () => {
       assert.equal(middelwareAppele, true);
     });
 
-    it("renvoie une 404 si les informations de l'utilisateur ne sont pas disponibles dans l'entrepot utilisateur", async () => {
-      entrepotUtilisateur.parEmail = async () => undefined;
+    it("renvoie une 404 si les informations de l'utilisateur ne sont pas disponibles dans la requete", async () => {
+      const serveur = creeServeurAvecUtilisateur(undefined);
 
       const reponse = await request(serveur).get('/api/contacts');
 
       assert.equal(reponse.status, 404);
     });
 
-    it("récupère les informations de l'utilisateur via l'entrepot utilisateur", async () => {
-      let entrepotAppele;
-      entrepotUtilisateur.parEmail = async () => {
-        entrepotAppele = true;
-        return undefined;
-      };
+    it("récupère les informations de l'utilisateur via le middleware", async () => {
+      const serveur = creeServeurAvecUtilisateur(jeanneDupont);
 
       await request(serveur).get('/api/contacts');
 
-      assert.equal(entrepotAppele, true);
+      assert.equal(middlewareAjouteUtilisateurARequeteAppele, true);
     });
 
     it('retourne les informations de contacts', async () => {
@@ -67,21 +68,23 @@ describe('La ressource Contacts', () => {
           { siret: '', departement: '75', nom: '' },
         ],
       };
-      entrepotUtilisateur.parEmail = async () =>
-        new Utilisateur(
-          {
-            email: 'jeanne.dupont@user.com',
-            prenom: 'Jeanne',
-            nom: 'Dupont',
-            telephone: '0123456789',
-            domainesSpecialite: ['RSSI'],
-            siretEntite: '',
-            cguAcceptees: true,
-            infolettreAcceptee: true,
-            idListeFavoris: randomUUID(),
-          },
-          rechercheEntreprise
-        );
+
+      const jeanne = new Utilisateur(
+        {
+          email: 'jeanne.dupont@user.com',
+          prenom: 'Jeanne',
+          nom: 'Dupont',
+          telephone: '0123456789',
+          domainesSpecialite: ['RSSI'],
+          siretEntite: '',
+          cguAcceptees: true,
+          infolettreAcceptee: true,
+          idListeFavoris: randomUUID(),
+        },
+        rechercheEntreprise
+      );
+      const serveur = creeServeurAvecUtilisateur(jeanne);
+
       const reponse = await request(serveur).get('/api/contacts');
 
       assert.equal(reponse.body.CSIRT.nom, 'Urgence Cyber Île-de-France');
