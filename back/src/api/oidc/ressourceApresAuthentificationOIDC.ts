@@ -6,6 +6,7 @@ const ressourceApresAuthentificationOIDC = ({
   adaptateurJWT,
   entrepotUtilisateur,
   fournisseurChemin,
+  adaptateurHachage,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get('/', async (requete, reponse) => {
@@ -15,14 +16,13 @@ const ressourceApresAuthentificationOIDC = ({
     }
 
     try {
-      const { accessToken, idToken } = await adaptateurOIDC.recupereJeton(
-        requete
-      );
+      const { accessToken, idToken } =
+        await adaptateurOIDC.recupereJeton(requete);
       const informationsUtilisateur =
         await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
       const { email } = informationsUtilisateur;
 
-      if (!(await entrepotUtilisateur.existe(email))) {
+      if (!(await entrepotUtilisateur.existe(adaptateurHachage.hache(email)))) {
         const token = adaptateurJWT.genereToken(informationsUtilisateur);
         reponse.redirect(`/creation-compte?token=${token}`);
         return;

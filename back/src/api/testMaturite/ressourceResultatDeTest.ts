@@ -6,13 +6,17 @@ const ressourceResultatDeTest = ({
   entrepotResultatTest,
   busEvenements,
   middleware,
-  entrepotUtilisateur
+  entrepotUtilisateur,
+  adaptateurHachage,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.put(
     '/:id',
     middleware.verifieJWT,
-    middleware.ajouteUtilisateurARequete(entrepotUtilisateur),
+    middleware.ajouteUtilisateurARequete(
+      entrepotUtilisateur,
+      adaptateurHachage
+    ),
     async (requete, reponse) => {
       const resultatTest = await entrepotResultatTest.parId(requete.params.id);
       if (!resultatTest) {

@@ -9,12 +9,16 @@ import {
 const ressourceContacts = ({
   middleware,
   entrepotUtilisateur,
+  adaptateurHachage,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
     '/',
     middleware.verifieJWT,
-    middleware.ajouteUtilisateurARequete(entrepotUtilisateur),
+    middleware.ajouteUtilisateurARequete(
+      entrepotUtilisateur,
+      adaptateurHachage
+    ),
     async (requete: Request, reponse: Response) => {
       const utilisateur = requete.utilisateur;
 

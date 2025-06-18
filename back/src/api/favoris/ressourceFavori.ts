@@ -6,14 +6,18 @@ const ressourceFavori = ({
   middleware,
   entrepotFavori,
   busEvenements,
-  entrepotUtilisateur
+  entrepotUtilisateur,
+  adaptateurHachage,
 }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.delete(
     '/:id',
     middleware.verifieJWT,
-    middleware.ajouteUtilisateurARequete(entrepotUtilisateur),
+    middleware.ajouteUtilisateurARequete(
+      entrepotUtilisateur,
+      adaptateurHachage
+    ),
     middleware.aseptise('id'),
     async (requete, reponse) => {
       let id = requete.params.id;

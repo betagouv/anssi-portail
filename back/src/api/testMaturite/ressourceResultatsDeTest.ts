@@ -22,6 +22,7 @@ const ressourceResultatsDeTest = ({
   middleware,
   entrepotResultatTest,
   entrepotUtilisateur,
+  adaptateurHachage,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post(
@@ -66,7 +67,10 @@ const ressourceResultatsDeTest = ({
         ),
     ],
     middleware.valide(),
-    middleware.ajouteUtilisateurARequete(entrepotUtilisateur),
+    middleware.ajouteUtilisateurARequete(
+      entrepotUtilisateur,
+      adaptateurHachage
+    ),
     middleware.aseptise('codeSessionGroupe'),
     async (requete: Request, reponse: Response) => {
       const {

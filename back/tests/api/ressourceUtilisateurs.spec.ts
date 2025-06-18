@@ -63,8 +63,8 @@ describe('La ressource utilisateur', () => {
 
       await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
 
-      const jeanne = await entrepotUtilisateur.parEmail(
-        'jeanne.dupont@user.com'
+      const jeanne = await entrepotUtilisateur.parEmailHache(
+        'jeanne.dupont@user.com-hache'
       );
       assert.notEqual(jeanne, undefined);
       assert.equal(jeanne?.email, 'jeanne.dupont@user.com');
@@ -110,8 +110,8 @@ describe('La ressource utilisateur', () => {
           infolettreAcceptee: true,
         });
 
-      const jeanne = await entrepotUtilisateur.parEmail(
-        'jeanne.dupont@user.com'
+      const jeanne = await entrepotUtilisateur.parEmailHache(
+        'jeanne.dupont@user.com-hache'
       );
       assert.notEqual(jeanne, undefined);
       assert.equal(jeanne?.email, 'jeanne.dupont@user.com');

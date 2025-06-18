@@ -77,12 +77,13 @@ describe('La ressource des services et ressources favoris', () => {
         utilisateur: jeanneDupont,
       });
 
-      await request(serveur)
+      const reponse = await request(serveur)
         .delete(
           `/api/favoris/${encodeURIComponent('/services/mon-super-service')}`
         )
         .set('Cookie', [cookieJeanneDupont]);
 
+      assert.equal(reponse.statusCode, 200);
       const favoris = await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
       assert.equal(favoris.length, 0);
     });

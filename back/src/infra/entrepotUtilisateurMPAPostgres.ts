@@ -120,7 +120,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   async parEmailHache(emailHache: string): Promise<Utilisateur | undefined> {
     if (!emailHache) return undefined;
     const utilisateur = await this.knex('utilisateurs')
-      .where({ email_hache:emailHache })
+      .where({ email_hache: emailHache })
       .first();
     if (!utilisateur) return undefined;
     return this.hydrateUtilisateur(utilisateur);
@@ -137,9 +137,9 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     return this.hydrateUtilisateur(utilisateur);
   }
 
-  async existe(email: string) {
+  async existe(emailHache: string) {
     const utilisateur = await this.knex('utilisateurs')
-      .where({ email })
+      .where({ email_hache: emailHache })
       .first();
     return !!utilisateur;
   }
