@@ -1,14 +1,11 @@
-import { createHash } from 'crypto';
-
+// Cet adapteur n'est plus utilisé actuellement mais le sera très très bientôt. Nous le gardons pour éviter d'avoir
+// à le réecrire et à le réimporter.
 export interface AdaptateurChiffrement {
-  hacheSha256: (valeur: string) => string;
+  nom: 'adaptateurChiffrement';
 }
 
 export const fabriqueAdaptateurChiffrement = (): AdaptateurChiffrement => {
   return {
-    hacheSha256: (chaineEnClair: string) =>
-      createHash('sha256')
-        .update(chaineEnClair + process.env.CHIFFREMENT_SEL_DE_HASHAGE)
-        .digest('hex'),
+    nom: 'adaptateurChiffrement',
   };
 };

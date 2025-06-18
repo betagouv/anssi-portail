@@ -39,9 +39,6 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
       donnees: utilisateur,
       id_liste_favoris: utilisateur.idListeFavoris,
       email_hache: this.adaptateurHachage.hache(utilisateur.email),
-      email_hache_256: this.adaptateurChiffrement.hacheSha256(
-        utilisateur.email
-      ),
     };
   }
 
