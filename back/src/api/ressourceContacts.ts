@@ -14,10 +14,9 @@ const ressourceContacts = ({
   routeur.get(
     '/',
     middleware.verifieJWT,
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur),
     async (requete: Request, reponse: Response) => {
-      const utilisateur = await entrepotUtilisateur.parEmail(
-        requete.emailUtilisateurCourant!
-      );
+      const utilisateur = requete.utilisateur;
 
       if (!utilisateur) {
         reponse.sendStatus(404);
