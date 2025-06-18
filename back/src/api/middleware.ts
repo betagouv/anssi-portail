@@ -158,13 +158,17 @@ export const fabriqueMiddleware = ({
     (entrepotUtilisateur: EntrepotUtilisateur) =>
     async (
       requete: Request & { utilisateur?: Utilisateur | undefined },
-      _reponse: Response,
+      reponse: Response,
       suite: NextFunction
     ) => {
-      requete.utilisateur = await entrepotUtilisateur.parEmail(
-        requete.session?.email
-      );
-      suite();
+      try {
+        requete.utilisateur = await entrepotUtilisateur.parEmail(
+          requete.session?.email
+        );
+        suite();
+      } catch {
+        reponse.sendStatus(500);
+      }
     };
   return {
     aseptise,
