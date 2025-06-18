@@ -13,7 +13,6 @@ import { FournisseurChemin } from '../../src/api/fournisseurChemin';
 import { jeanneDupont } from './objetsPretsALEmploi';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
-import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 
 describe('Le middleware', () => {
   let requete: Request & {
@@ -24,7 +23,7 @@ describe('Le middleware', () => {
   let middleware: Middleware;
   let adaptateurJWT: AdaptateurJWT;
   let fournisseurChemin: FournisseurChemin;
-  let entrepotUtilisateur: EntrepotUtilisateur;
+  let entrepotUtilisateur: EntrepotUtilisateurMemoire;
 
   beforeEach(() => {
     adaptateurJWT = fauxAdaptateurJWT;
@@ -266,7 +265,11 @@ describe('Le middleware', () => {
       requete.session = { email: jeanneDupont.email };
       await entrepotUtilisateur.ajoute(jeanneDupont);
 
-      await (middleware.ajouteUtilisateurARequete(entrepotUtilisateur))(requete, reponse, () => {});
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur)(
+        requete,
+        reponse,
+        () => {}
+      );
 
       assert.deepEqual(requete.utilisateur, jeanneDupont);
     });
@@ -275,7 +278,11 @@ describe('Le middleware', () => {
       requete.session = {};
       await entrepotUtilisateur.ajoute(jeanneDupont);
 
-      await (middleware.ajouteUtilisateurARequete(entrepotUtilisateur))(requete, reponse, () => {});
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur)(
+        requete,
+        reponse,
+        () => {}
+      );
 
       assert.equal(requete.utilisateur, undefined);
     });
@@ -283,11 +290,31 @@ describe('Le middleware', () => {
     it('appelle la suite', async () => {
       let suiteAppelee = false;
 
-      await (middleware.ajouteUtilisateurARequete(entrepotUtilisateur))(requete, reponse, () => {
-        suiteAppelee = true;
-      });
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur)(
+        requete,
+        reponse,
+        () => {
+          suiteAppelee = true;
+        }
+      );
 
       assert.equal(suiteAppelee, true);
+    });
+
+    it("renvoie une erreur 500 lorque l'entrepôt ne fonctionne pas", async () => {
+      entrepotUtilisateur.echoueSurRechercheParMail();
+      let suiteAppelee = false;
+
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur)(
+        requete,
+        reponse,
+        () => {
+          suiteAppelee = true;
+        }
+      );
+
+      assert.equal(reponse.statusCode, 500);
+      assert.equal(suiteAppelee, false);
     });
   });
 });

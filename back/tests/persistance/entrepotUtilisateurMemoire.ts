@@ -7,11 +7,19 @@ export class EntrepotUtilisateurMemoire
   extends EntrepotMemoire<Utilisateur>
   implements EntrepotUtilisateur
 {
+  _echoueSurRechercheParMail = false;
+
   ajoute = async (utilisateur: Utilisateur) => {
     utilisateur.idListeFavoris = randomUUID();
     await super.ajoute(utilisateur);
   };
-  parEmail = async (email: string) => {
+
+  echoueSurRechercheParMail = () => (this._echoueSurRechercheParMail = true);
+
+  parEmail = async (email: string): Promise<Utilisateur | undefined> => {
+    if (this._echoueSurRechercheParMail) {
+      throw new Error('I’m sorry Dave, I’m afraid I can’t do that');
+    }
     return this.entites.find((utilisateur) => utilisateur.email === email);
   };
   parEmailHache = async (_emailHache: string) => {
