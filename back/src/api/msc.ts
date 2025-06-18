@@ -89,6 +89,21 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(cookieParser());
   app.use(json());
 
+  ['assets', 'scripts', 'lib-svelte', 'favicon.ico'].forEach((ressource) => {
+    app.use(
+      `/${ressource}`,
+      express.static(fournisseurChemin.ressourceDeBase(ressource), {
+        setHeaders: (reponse: Response) =>
+          reponse.setHeader(
+            'cache-control',
+            process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'
+          ),
+      })
+    );
+  });
+
+  app.use(configurationServeur.middleware.verifieModeMaintenance);
+
   [
     '',
     'catalogue',
@@ -136,19 +151,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ressourcePageProduit(configurationServeur, repertoireProduits)
     )
   );
-
-  ['assets', 'scripts', 'lib-svelte', 'favicon.ico'].forEach((ressource) => {
-    app.use(
-      `/${ressource}`,
-      express.static(fournisseurChemin.ressourceDeBase(ressource), {
-        setHeaders: (reponse: Response) =>
-          reponse.setHeader(
-            'cache-control',
-            process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'
-          ),
-      })
-    );
-  });
 
   app.use('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
 
