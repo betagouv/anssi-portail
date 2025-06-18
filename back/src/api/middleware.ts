@@ -8,6 +8,8 @@ import { FournisseurChemin } from './fournisseurChemin';
 import { Utilisateur } from '../metier/utilisateur';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
+import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
+import { HttpStatusCode } from 'axios';
 
 type FonctionMiddleware = (
   requete: Request,
@@ -27,14 +29,17 @@ export type Middleware = {
     entrepotUtilisateur: EntrepotUtilisateur,
     adaptateurHachage: AdaptateurHachage
   ) => FonctionMiddleware;
+  verifieModeMaintenance: FonctionMiddleware;
 };
 
 export const fabriqueMiddleware = ({
   adaptateurJWT,
   fournisseurChemin,
+  adaptateurEnvironnement,
 }: {
   adaptateurJWT: AdaptateurJWT;
   fournisseurChemin: FournisseurChemin;
+  adaptateurEnvironnement: AdaptateurEnvironnement;
 }): Middleware => {
   const aseptise =
     (...nomsParametres: string[]) =>
@@ -177,6 +182,24 @@ export const fabriqueMiddleware = ({
         reponse.sendStatus(500);
       }
     };
+
+  const verifieModeMaintenance = async (
+    _requete: Request,
+    reponse: Response,
+    suite: NextFunction
+  ) => {
+    if (adaptateurEnvironnement.maintenance().actif()) {
+      reponse
+        .status(HttpStatusCode.ServiceUnavailable)
+        .set('Content-Type', 'text/html')
+        .sendFileAvecNonce(
+          fournisseurChemin.ressourceDeBase('maintenance.html')
+        );
+    } else {
+      suite();
+    }
+  };
+
   return {
     aseptise,
     valide,
@@ -186,5 +209,6 @@ export const fabriqueMiddleware = ({
     ajouteMethodeNonce,
     positionneLesCsp,
     ajouteUtilisateurARequete,
+    verifieModeMaintenance,
   };
 };
