@@ -108,15 +108,6 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     );
   }
 
-  async parEmail(email: string): Promise<Utilisateur | undefined> {
-    if (!email) return undefined;
-    const utilisateur = await this.knex('utilisateurs')
-      .where({ email })
-      .first();
-    if (!utilisateur) return undefined;
-    return this.hydrateUtilisateur(utilisateur);
-  }
-
   async parEmailHache(emailHache: string): Promise<Utilisateur | undefined> {
     if (!emailHache) return undefined;
     const utilisateur = await this.knex('utilisateurs')
