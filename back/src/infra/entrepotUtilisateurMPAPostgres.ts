@@ -36,7 +36,6 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
   private chiffreDonneesUtilisateur(utilisateur: Utilisateur): UtilisateurBDD {
     return {
-      email: utilisateur.email,
       donnees: utilisateur,
       id_liste_favoris: utilisateur.idListeFavoris,
       email_hache: this.adaptateurHachage.hache(utilisateur.email),
@@ -49,10 +48,9 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   private dechiffreDonneesUtilisateur(
     utilisateur: UtilisateurBDD
   ): UtilisateurBDD['donnees'] {
-    const { email, donnees } = utilisateur;
+    const { donnees } = utilisateur;
     return {
       ...donnees,
-      email,
     };
   }
 
@@ -83,7 +81,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     if (!profilAnssi) {
       console.warn(
         'Utilisateur trouvé en base de données sans profil ANSSI ',
-        utilisateur.email
+        utilisateur.email_hache
       );
       return undefined;
     }
