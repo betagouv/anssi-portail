@@ -7,7 +7,8 @@ const ressourceFavoris = ({
   busEvenements,
   middleware,
   entrepotFavori,
-  entrepotUtilisateur
+  entrepotUtilisateur,
+  adaptateurHachage,
 }: ConfigurationServeur) => {
   const routeur = Router();
 
@@ -15,7 +16,10 @@ const ressourceFavoris = ({
     '/',
     middleware.verifieJWT,
     middleware.aseptise('idItemCyber'),
-    middleware.ajouteUtilisateurARequete(entrepotUtilisateur),
+    middleware.ajouteUtilisateurARequete(
+      entrepotUtilisateur,
+      adaptateurHachage
+    ),
     [
       check('idItemCyber')
         .not()
@@ -44,7 +48,10 @@ const ressourceFavoris = ({
   routeur.get(
     '/',
     middleware.verifieJWT,
-    middleware.ajouteUtilisateurARequete(entrepotUtilisateur),
+    middleware.ajouteUtilisateurARequete(
+      entrepotUtilisateur,
+      adaptateurHachage
+    ),
     async (requete: Request, reponse: Response) => {
       const utilisateur = requete.utilisateur;
       const favoris = await entrepotFavori.tousCeuxDeUtilisateur(utilisateur);

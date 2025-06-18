@@ -109,6 +109,7 @@ serviceCoherenceSecretsHachage
       generateurCodeSessionDeGroupe: new GenerateurAleatoireCodeSessionDeGroupe(
         entrepotSessionDeGroupe
       ),
+      adaptateurHachage
     }).listen(3000, () => {
       console.log('Le serveur écoute sur le port 3000');
     });

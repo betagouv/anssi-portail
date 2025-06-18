@@ -84,7 +84,7 @@ export const fauxMiddleware: Middleware = {
   verifieJWTNavigation: async (_, __, suite) => {
     suite();
   },
-  ajouteUtilisateurARequete: (_) => async (_, __, suite) => suite(),
+  ajouteUtilisateurARequete: (_, __) => async (_, __, suite) => suite(),
 };
 
 const fauxAdaptateurMonAideCyber = { creeDemandeAide: () => Promise.resolve() };
@@ -150,4 +150,5 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   cmsCrisp: new MockCmsCrisp(),
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
   generateurCodeSessionDeGroupe: fauxGenerateurCodeSessionDeGroupe,
+  adaptateurHachage: fauxAdaptateurHachage
 };

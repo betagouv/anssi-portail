@@ -29,9 +29,6 @@ describe('La ressource Profil', () => {
     });
 
     it("renvoie les informations de l'utilisateur", async () => {
-      const jeanneEntreposee = await entrepotUtilisateur.parEmail(
-        'jeanne.dupont@user.com'
-      );
       const cookie = encodeSession({
         email: 'jeanne.dupont@user.com',
       });
@@ -47,7 +44,7 @@ describe('La ressource Profil', () => {
       assert.equal(reponse.body.estAgentAnssi, true);
       assert.equal(
         reponse.body.idListeFavoris,
-        jeanneEntreposee!.idListeFavoris
+        jeanneDupont.idListeFavoris
       );
     });
 

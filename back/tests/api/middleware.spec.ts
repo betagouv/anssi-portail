@@ -6,13 +6,18 @@ import { createRequest, createResponse } from 'node-mocks-http';
 import { OutgoingHttpHeaders } from 'node:http';
 import { Context } from 'express-validator/lib/context';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import { fauxAdaptateurJWT, fauxFournisseurDeChemin } from './fauxObjets';
+import {
+  fauxAdaptateurHachage,
+  fauxAdaptateurJWT,
+  fauxFournisseurDeChemin,
+} from './fauxObjets';
 import { JsonWebTokenError } from 'jsonwebtoken';
 import { join } from 'path';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin';
 import { jeanneDupont } from './objetsPretsALEmploi';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 
 describe('Le middleware', () => {
   let requete: Request & {
@@ -261,15 +266,19 @@ describe('Le middleware', () => {
   });
 
   describe("sur demande d'ajout de l'utilisateur courant", () => {
+    let adaptateurHachage: AdaptateurHachage;
+    beforeEach(() => {
+      adaptateurHachage = fauxAdaptateurHachage;
+    });
+
     it("ajoute l'utilisateur dont l'email est dans la session à la requête", async () => {
       requete.session = { email: jeanneDupont.email };
       await entrepotUtilisateur.ajoute(jeanneDupont);
 
-      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur)(
-        requete,
-        reponse,
-        () => {}
-      );
+      await middleware.ajouteUtilisateurARequete(
+        entrepotUtilisateur,
+        adaptateurHachage
+      )(requete, reponse, () => {});
 
       assert.deepEqual(requete.utilisateur, jeanneDupont);
     });
@@ -278,11 +287,10 @@ describe('Le middleware', () => {
       requete.session = {};
       await entrepotUtilisateur.ajoute(jeanneDupont);
 
-      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur)(
-        requete,
-        reponse,
-        () => {}
-      );
+      await middleware.ajouteUtilisateurARequete(
+        entrepotUtilisateur,
+        adaptateurHachage
+      )(requete, reponse, () => {});
 
       assert.equal(requete.utilisateur, undefined);
     });
@@ -290,28 +298,44 @@ describe('Le middleware', () => {
     it('appelle la suite', async () => {
       let suiteAppelee = false;
 
-      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur)(
-        requete,
-        reponse,
-        () => {
-          suiteAppelee = true;
-        }
-      );
+      await middleware.ajouteUtilisateurARequete(
+        entrepotUtilisateur,
+        adaptateurHachage
+      )(requete, reponse, () => {
+        suiteAppelee = true;
+      });
+
+      assert.equal(suiteAppelee, true);
+    });
+
+    it("n'essaie pas de hacher si l'email est absent", async () => {
+      requete.session = {};
+      adaptateurHachage.hache = (_) => {
+        throw new Error();
+      };
+      let suiteAppelee = false;
+
+      await middleware.ajouteUtilisateurARequete(
+        entrepotUtilisateur,
+        adaptateurHachage
+      )(requete, reponse, () => {
+        suiteAppelee = true;
+      });
 
       assert.equal(suiteAppelee, true);
     });
 
     it("renvoie une erreur 500 lorque l'entrepôt ne fonctionne pas", async () => {
+      requete.session = { email: jeanneDupont.email };
       entrepotUtilisateur.echoueSurRechercheParMail();
       let suiteAppelee = false;
 
-      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur)(
-        requete,
-        reponse,
-        () => {
-          suiteAppelee = true;
-        }
-      );
+      await middleware.ajouteUtilisateurARequete(
+        entrepotUtilisateur,
+        adaptateurHachage
+      )(requete, reponse, () => {
+        suiteAppelee = true;
+      });
 
       assert.equal(reponse.statusCode, 500);
       assert.equal(suiteAppelee, false);

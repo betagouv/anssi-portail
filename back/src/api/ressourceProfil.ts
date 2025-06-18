@@ -5,11 +5,15 @@ const ressourceProfil = ({
   adaptateurJWT,
   entrepotUtilisateur,
   middleware,
+  adaptateurHachage,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
     '/',
-    middleware.ajouteUtilisateurARequete(entrepotUtilisateur),
+    middleware.ajouteUtilisateurARequete(
+      entrepotUtilisateur,
+      adaptateurHachage
+    ),
     async (requete: Request, reponse: Response) => {
       try {
         adaptateurJWT.decode(requete.session?.token);

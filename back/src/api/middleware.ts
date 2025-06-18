@@ -7,6 +7,7 @@ import helmet from 'helmet';
 import { FournisseurChemin } from './fournisseurChemin';
 import { Utilisateur } from '../metier/utilisateur';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
+import { AdaptateurHachage } from '../infra/adaptateurHachage';
 
 type FonctionMiddleware = (
   requete: Request,
@@ -23,7 +24,8 @@ export type Middleware = {
   ajouteMethodeNonce: FonctionMiddleware;
   positionneLesCsp: () => FonctionMiddleware;
   ajouteUtilisateurARequete: (
-    entrepotUtilisateur: EntrepotUtilisateur
+    entrepotUtilisateur: EntrepotUtilisateur,
+    adaptateurHachage: AdaptateurHachage
   ) => FonctionMiddleware;
 };
 
@@ -155,16 +157,21 @@ export const fabriqueMiddleware = ({
       })(requete, reponse, suite);
 
   const ajouteUtilisateurARequete =
-    (entrepotUtilisateur: EntrepotUtilisateur) =>
+    (
+      entrepotUtilisateur: EntrepotUtilisateur,
+      adaptateurHachage: AdaptateurHachage
+    ) =>
     async (
       requete: Request & { utilisateur?: Utilisateur | undefined },
       reponse: Response,
       suite: NextFunction
     ) => {
       try {
-        requete.utilisateur = await entrepotUtilisateur.parEmail(
-          requete.session?.email
-        );
+        requete.utilisateur = requete.session?.email
+          ? await entrepotUtilisateur.parEmailHache(
+              adaptateurHachage.hache(requete.session?.email)
+            )
+          : undefined;
         suite();
       } catch {
         reponse.sendStatus(500);

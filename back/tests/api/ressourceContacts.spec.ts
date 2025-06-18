@@ -20,7 +20,7 @@ describe('La ressource Contacts', () => {
       ...configurationDeTestDuServeur,
       middleware: {
         ...fauxMiddleware,
-        ajouteUtilisateurARequete: (_) => async (requete, __, suite) => {
+        ajouteUtilisateurARequete: (_, __) => async (requete, __, suite) => {
           middlewareAjouteUtilisateurARequeteAppele = true;
           requete.utilisateur = utilisateur;
           suite();

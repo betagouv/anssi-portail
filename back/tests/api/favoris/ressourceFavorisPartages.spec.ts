@@ -25,8 +25,7 @@ describe('La ressource des favoris partagés', () => {
       entrepotUtilisateur,
     });
     await entrepotUtilisateur.ajoute(jeanneDupont);
-    idListeFavoris = (await entrepotUtilisateur.parEmail(jeanneDupont.email))!
-      .idListeFavoris;
+    idListeFavoris = jeanneDupont.idListeFavoris;
     await entrepotFavori.ajoute({
       utilisateur: jeanneDupont,
       idItemCyber: '/services/mon-super-service',
