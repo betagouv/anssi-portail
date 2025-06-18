@@ -22,10 +22,6 @@ export class EntrepotUtilisateurMemoire
 
   echoueSurRechercheParMail = () => (this._echoueSurRechercheParMail = true);
 
-  parEmail = async (_email: string): Promise<Utilisateur | undefined> => {
-    throw new Error('I’m sorry Dave, I’m afraid I can’t do that');
-  };
-
   parEmailHache = async (emailHache: string) => {
     if (this._echoueSurRechercheParMail) {
       throw new Error('I’m sorry Dave, I’m afraid I can’t do that');
