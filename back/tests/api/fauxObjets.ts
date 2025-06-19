@@ -59,36 +59,6 @@ export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
 
 const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
-const vraiMiddleware = fabriqueMiddleware({
-  adaptateurJWT: fauxAdaptateurJWT,
-  fournisseurChemin: fauxFournisseurDeChemin,
-});
-
-export const fauxMiddleware: Middleware = {
-  ajouteMethodeNonce: vraiMiddleware.ajouteMethodeNonce,
-  positionneLesCsp: () => async (_, __, suite) => {
-    suite();
-  },
-  aseptise: () => async (_, __, suite) => {
-    suite();
-  },
-  valide: () => async (_, __, suite) => {
-    suite();
-  },
-  interdisLaMiseEnCache: async (_, __, suite) => {
-    suite();
-  },
-  verifieJWT: async (_, __, suite) => {
-    suite();
-  },
-  verifieJWTNavigation: async (_, __, suite) => {
-    suite();
-  },
-  ajouteUtilisateurARequete: (_, __) => async (_, __, suite) => suite(),
-};
-
-const fauxAdaptateurMonAideCyber = { creeDemandeAide: () => Promise.resolve() };
-
 export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   hachage: () => ({
     tousLesSecretsDeHachage: () => [{ version: 1, secret: 'secret' }],
@@ -113,7 +83,40 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   crisp: () => ({
     idArticle: (_: string) => '',
   }),
+  maintenance: () => ({ actif: () => false }),
 };
+
+const vraiMiddleware = fabriqueMiddleware({
+  adaptateurJWT: fauxAdaptateurJWT,
+  fournisseurChemin: fauxFournisseurDeChemin,
+  adaptateurEnvironnement: fauxAdaptateurEnvironnement,
+});
+
+export const fauxMiddleware: Middleware = {
+  ajouteMethodeNonce: vraiMiddleware.ajouteMethodeNonce,
+  positionneLesCsp: () => async (_, __, suite) => {
+    suite();
+  },
+  aseptise: () => async (_, __, suite) => {
+    suite();
+  },
+  valide: () => async (_, __, suite) => {
+    suite();
+  },
+  interdisLaMiseEnCache: async (_, __, suite) => {
+    suite();
+  },
+  verifieJWT: async (_, __, suite) => {
+    suite();
+  },
+  verifieJWTNavigation: async (_, __, suite) => {
+    suite();
+  },
+  ajouteUtilisateurARequete: (_, __) => async (_, __, suite) => suite(),
+  verifieModeMaintenance: async (_, __, suite) => suite(),
+};
+
+const fauxAdaptateurMonAideCyber = { creeDemandeAide: () => Promise.resolve() };
 
 const fauxGenerateurCodeSessionDeGroupe = {
   genere: async () => 'hello',
@@ -150,5 +153,5 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   cmsCrisp: new MockCmsCrisp(),
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
   generateurCodeSessionDeGroupe: fauxGenerateurCodeSessionDeGroupe,
-  adaptateurHachage: fauxAdaptateurHachage
+  adaptateurHachage: fauxAdaptateurHachage,
 };

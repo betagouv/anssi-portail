@@ -7,6 +7,7 @@ import { OutgoingHttpHeaders } from 'node:http';
 import { Context } from 'express-validator/lib/context';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import {
+  fauxAdaptateurEnvironnement,
   fauxAdaptateurHachage,
   fauxAdaptateurJWT,
   fauxFournisseurDeChemin,
@@ -18,6 +19,7 @@ import { jeanneDupont } from './objetsPretsALEmploi';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 
 describe('Le middleware', () => {
   let requete: Request & {
@@ -29,16 +31,20 @@ describe('Le middleware', () => {
   let adaptateurJWT: AdaptateurJWT;
   let fournisseurChemin: FournisseurChemin;
   let entrepotUtilisateur: EntrepotUtilisateurMemoire;
+  let adaptateurEnvironnement: AdaptateurEnvironnement;
 
   beforeEach(() => {
     adaptateurJWT = fauxAdaptateurJWT;
     requete = createRequest();
     reponse = createResponse();
+    reponse.sendFileAvecNonce = () => reponse;
     fournisseurChemin = { ...fauxFournisseurDeChemin };
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+    adaptateurEnvironnement = { ...fauxAdaptateurEnvironnement };
     middleware = fabriqueMiddleware({
       adaptateurJWT,
       fournisseurChemin,
+      adaptateurEnvironnement,
     });
   });
 
@@ -339,6 +345,37 @@ describe('Le middleware', () => {
 
       assert.equal(reponse.statusCode, 500);
       assert.equal(suiteAppelee, false);
+    });
+  });
+
+  describe('sur vérification du mode maintenance', () => {
+    it('affiche la page de maintenance lorsque le mode est actif', async () => {
+      adaptateurEnvironnement.maintenance = () => ({
+        actif: () => true,
+      });
+      let pageDemandee: string = '';
+      fournisseurChemin.ressourceDeBase = (nomPage) => {
+        pageDemandee = nomPage;
+        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+      };
+
+      await middleware.verifieModeMaintenance(requete, reponse, () => {});
+
+      assert.equal(reponse.statusCode, 503);
+      assert.equal(pageDemandee, 'maintenance.html');
+    });
+
+    it('appelle la suite lorsque le mode est inactif', async () => {
+      adaptateurEnvironnement.maintenance = () => ({
+        actif: () => false,
+      });
+      let suiteAppelee = false;
+
+      await middleware.verifieModeMaintenance(requete, reponse, () => {
+        suiteAppelee = true;
+      });
+
+      assert.equal(suiteAppelee, true);
     });
   });
 });

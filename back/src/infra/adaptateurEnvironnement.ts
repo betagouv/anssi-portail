@@ -22,6 +22,9 @@ type AdaptateurEnvironnement = {
   hachage: () => {
     tousLesSecretsDeHachage: () => { version: number; secret: string }[];
   };
+  maintenance: () => {
+    actif: () => boolean;
+  };
 };
 
 const adaptateurEnvironnement: AdaptateurEnvironnement = {
@@ -99,6 +102,9 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
           ({ version: version1 }, { version: version2 }) => version1 - version2
         );
     },
+  }),
+  maintenance: () => ({
+    actif: () => process.env.MODE_MAINTENANCE === "true",
   }),
 };
 

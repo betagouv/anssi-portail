@@ -4,6 +4,7 @@ import { Express } from 'express';
 import { creeServeur } from '../../../src/api/msc';
 import {
   configurationDeTestDuServeur,
+  fauxAdaptateurEnvironnement,
   fauxAdaptateurJWT,
   fauxFournisseurDeChemin,
   fauxMiddleware,
@@ -41,6 +42,7 @@ describe('La ressource des services et ressources favoris', () => {
       middleware: fabriqueMiddleware({
         adaptateurJWT: fauxAdaptateurJWT,
         fournisseurChemin: fauxFournisseurDeChemin,
+        adaptateurEnvironnement: fauxAdaptateurEnvironnement,
       }),
       busEvenements,
       entrepotFavori,
