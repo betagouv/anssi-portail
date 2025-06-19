@@ -1,0 +1,47 @@
+---
+---
+
+@use '../../assets/styles/responsive' as *;
+
+section {
+  padding: 96px var(--gouttiere);
+
+  .maintenance {
+    display: grid;
+    grid-template-areas: 'titre' 'texte' 'illustration';
+    @include a-partir-de(lg) {
+      grid-template-areas:
+        'titre illustration'
+        'texte illustration';
+      column-gap: 24px;
+      grid-template-columns: calc(50% - 12px);
+    }
+
+    h2 {
+      grid-area: titre;
+      align-self: end;
+      margin: 0 0 8px;
+      font-size: 1.75rem;
+      line-height: 2.25rem;
+      @include a-partir-de(md) {
+        font-size: 2rem;
+        line-height: 2.5rem;
+      }
+    }
+
+    p {
+      grid-area: texte;
+      align-self: start;
+      font-size: 1.25rem;
+      line-height: 2rem;
+      margin: 0 0 24px;
+    }
+
+    img {
+      grid-area: illustration;
+      width: 100%;
+      max-width: 588px;
+      justify-self: center;
+    }
+  }
+}
