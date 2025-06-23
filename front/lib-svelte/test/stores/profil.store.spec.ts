@@ -29,9 +29,9 @@ describe('Le store du profil', () => {
   it('assigne la valeur du profil au store', async () => {
     const profil = get(profilStore);
 
-    expect(profil.prenom).toEqual('Jeanne');
-    expect(profil.nom).toEqual('Dupond');
-    expect(profil.email).toEqual('jeanne.dupond@mail.fr');
-    expect(profil.siret).toEqual('123456789');
+    expect(profil!.prenom).toEqual('Jeanne');
+    expect(profil!.nom).toEqual('Dupond');
+    expect(profil!.email).toEqual('jeanne.dupond@mail.fr');
+    expect(profil!.siret).toEqual('123456789');
   });
 });

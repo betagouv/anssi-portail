@@ -19,6 +19,7 @@ describe("La recherche par droit d'accès", () => {
   it("reste robuste lorsqu'un item n'a pas de droit d'acces", () => {
     rechercheParDroitAcces.set([DroitAcces.ACCES_LIBRE]);
     const sansDroitDAcces = { ...mss() };
+    // @ts-expect-error On simule ici un markdown invalide
     delete sansDroitDAcces.droitsAcces;
 
     const resultat = rechercheParDroitAcces.ok(sansDroitDAcces);
