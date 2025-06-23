@@ -83,7 +83,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   crisp: () => ({
     idArticle: (_: string) => '',
   }),
-  maintenance: () => ({ actif: () => false }),
+  maintenance: () => ({ actif: () => false, detailsPreparation: () => undefined }),
 };
 
 const vraiMiddleware = fabriqueMiddleware({

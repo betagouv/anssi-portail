@@ -24,6 +24,7 @@ type AdaptateurEnvironnement = {
   };
   maintenance: () => {
     actif: () => boolean;
+    detailsPreparation: () => string | undefined;
   };
 };
 
@@ -104,7 +105,8 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     },
   }),
   maintenance: () => ({
-    actif: () => process.env.MODE_MAINTENANCE === "true",
+    actif: () => process.env.MODE_MAINTENANCE === 'true',
+    detailsPreparation: () => process.env.PREPARATION_MODE_MAINTENANCE,
   }),
 };
 

@@ -33,6 +33,7 @@ import { ressourceDernierResultatDeTest } from './testMaturite/ressourceDernierR
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
+import { ressourceInfosSite } from './ressourceInfosSite';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -233,6 +234,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   );
 
   app.use('/api/pages-crisp', ressourcePageCrisp(configurationServeur));
+
+  app.use("/api/infos-site", ressourceInfosSite(configurationServeur))
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 
