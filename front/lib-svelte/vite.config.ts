@@ -28,6 +28,7 @@ export default defineConfig({
         'session-groupe': 'src/main-session-groupe.ts',
         'resultats-session-groupe': 'src/main-resultats-session-groupe.ts',
         'badge-agent-anssi': 'src/main-badge-agent-anssi.ts',
+        'bandeau-maintenance': 'src/main-bandeau-maintenance.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,

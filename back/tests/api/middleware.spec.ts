@@ -352,6 +352,7 @@ describe('Le middleware', () => {
     it('affiche la page de maintenance lorsque le mode est actif', async () => {
       adaptateurEnvironnement.maintenance = () => ({
         actif: () => true,
+        detailsPreparation: () => undefined,
       });
       let pageDemandee: string = '';
       fournisseurChemin.ressourceDeBase = (nomPage) => {
@@ -368,6 +369,7 @@ describe('Le middleware', () => {
     it('appelle la suite lorsque le mode est inactif', async () => {
       adaptateurEnvironnement.maintenance = () => ({
         actif: () => false,
+        detailsPreparation: () => undefined,
       });
       let suiteAppelee = false;
 
