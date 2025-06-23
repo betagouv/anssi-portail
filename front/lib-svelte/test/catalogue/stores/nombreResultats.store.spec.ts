@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   DroitAcces,
   FormatRessource,
-  ItemCyber,
+  type ItemCyber,
   Source,
   Typologie,
 } from '../../../src/catalogue/Catalogue.types';
@@ -59,6 +59,7 @@ describe('Le store du nombre de résultats', () => {
 
     it("lorsque un service n'a pas de droit d'acces", () => {
       const sansDroitAcces = monEspaceNIS2();
+      // @ts-expect-error On simule ici un markdown invalide
       delete sansDroitAcces.droitsAcces;
       initialiseStoreCatalogue([sansDroitAcces]);
 

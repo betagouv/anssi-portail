@@ -15,7 +15,7 @@ import {
   BesoinCyber,
   DroitAcces,
   FormatRessource,
-  ItemCyber,
+  type ItemCyber,
   Source,
   Typologie,
 } from '../../../src/catalogue/Catalogue.types';
