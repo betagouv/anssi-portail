@@ -49,6 +49,12 @@ $ npm install
 $ npm run dev
 ```
 
+- Lancer la création des secrets de hachage avec la console d'administration (procédure sauvegardeLesEmpreintesDesSecretsDeHachage()) puis relancer un :
+
+```shell
+$ npm run dev
+```
+
 - Arrivé ici, le site doit être consultable sur http://127.0.0.1:3000
 
 ## Le build et la PROD
