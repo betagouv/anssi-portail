@@ -9,6 +9,12 @@ import pThrottle from 'p-throttle';
 import { AdaptateurHachage } from './adaptateurHachage';
 import { AdaptateurChiffrement } from './adaptateurChiffrement';
 
+type DonneesUtilisateurEnClair = {
+  email: string;
+  cguAcceptees: boolean;
+  infolettreAcceptee: boolean;
+};
+
 export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   knex: Knex.Knex;
   adaptateurProfilAnssi: AdaptateurProfilAnssi;
@@ -35,8 +41,14 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   }
 
   private chiffreDonneesUtilisateur(utilisateur: Utilisateur): UtilisateurBDD {
+    const donneesEnClair = {
+      email: utilisateur.email,
+      cguAcceptees: utilisateur.cguAcceptees,
+      infolettreAcceptee: utilisateur.infolettreAcceptee,
+    };
+    const donneesChiffrees = this.adaptateurChiffrement.chiffre(donneesEnClair);
     return {
-      donnees: utilisateur,
+      donnees: donneesChiffrees,
       id_liste_favoris: utilisateur.idListeFavoris,
       email_hache: this.adaptateurHachage.hache(utilisateur.email),
     };
@@ -44,11 +56,11 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
   private dechiffreDonneesUtilisateur(
     utilisateur: UtilisateurBDD
-  ): UtilisateurBDD['donnees'] {
+  ): DonneesUtilisateurEnClair {
     const { donnees } = utilisateur;
-    return {
-      ...donnees,
-    };
+    return this.adaptateurChiffrement.dechiffre(
+      donnees
+    ) as DonneesUtilisateurEnClair;
   }
 
   async ajoute(utilisateur: Utilisateur) {

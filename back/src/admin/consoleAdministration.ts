@@ -36,7 +36,7 @@ export class ConsoleAdministration {
 
   constructor() {
     const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
-    this.adaptateurChiffrement = fabriqueAdaptateurChiffrement();
+    this.adaptateurChiffrement = fabriqueAdaptateurChiffrement({adaptateurEnvironnement});
     this.adaptateurHachage = fabriqueAdaptateurHachage({
       adaptateurEnvironnement,
     });

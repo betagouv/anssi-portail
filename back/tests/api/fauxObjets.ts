@@ -60,6 +60,9 @@ export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
 const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
 export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
+  chiffrement: () => ({
+    cleChaCha20Hex: () => 'uneCléCha20Hex',
+  }),
   hachage: () => ({
     tousLesSecretsDeHachage: () => [{ version: 1, secret: 'secret' }],
   }),
@@ -83,7 +86,10 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   crisp: () => ({
     idArticle: (_: string) => '',
   }),
-  maintenance: () => ({ actif: () => false, detailsPreparation: () => undefined }),
+  maintenance: () => ({
+    actif: () => false,
+    detailsPreparation: () => undefined,
+  }),
 };
 
 const vraiMiddleware = fabriqueMiddleware({

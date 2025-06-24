@@ -1,9 +1,7 @@
+import { ObjetChiffre } from './adaptateurChiffrement';
+
 export interface UtilisateurBDD {
   email_hache: string;
-  donnees: {
-    email: string;
-    cguAcceptees: boolean;
-    infolettreAcceptee: boolean;
-  };
+  donnees: ObjetChiffre;
   id_liste_favoris: string | undefined;
 }
