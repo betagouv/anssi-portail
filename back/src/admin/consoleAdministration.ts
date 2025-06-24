@@ -317,6 +317,24 @@ export class ConsoleAdministration {
       await Promise.all(maj);
     });
   }
+
+  async chiffreDonneesChaCha20() {
+    await this.knexMSC.transaction(async (trx) => {
+      const tousLesUtilisateurs = await trx('utilisateurs');
+      
+      const promesses = tousLesUtilisateurs.map(({ donnees, email_hache }) => {
+        const donneesEnClair = {
+          email: donnees.email,
+          cguAcceptees: donnees.cguAcceptees,
+          infolettreAcceptee: donnees.infolettreAcceptee,
+        };
+        const donneesChiffrees = this.adaptateurChiffrement.chiffre(donneesEnClair);
+        return trx('utilisateurs').where({email_hache}).update({ donnees: donneesChiffrees});
+      });
+
+      await Promise.all(promesses);
+    })
+  }
 }
 
 // Usage example depuis le dossier /back
