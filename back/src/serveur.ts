@@ -25,7 +25,9 @@ import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serv
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
-const adaptateurChiffrement = fabriqueAdaptateurChiffrement();
+const adaptateurChiffrement = fabriqueAdaptateurChiffrement({
+  adaptateurEnvironnement,
+});
 const adaptateurJournal = fabriqueAdaptateurJournal();
 const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
 const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber();

@@ -26,6 +26,9 @@ type AdaptateurEnvironnement = {
     actif: () => boolean;
     detailsPreparation: () => string | undefined;
   };
+  chiffrement: () => {
+    cleChaCha20Hex: () => string;
+  }
 };
 
 const adaptateurEnvironnement: AdaptateurEnvironnement = {
@@ -107,6 +110,9 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
   maintenance: () => ({
     actif: () => process.env.MODE_MAINTENANCE === 'true',
     detailsPreparation: () => process.env.PREPARATION_MODE_MAINTENANCE,
+  }),
+  chiffrement: () => ({
+    cleChaCha20Hex: () => process.env.CHIFFREMENT_CHACHA20_CLE_HEX || "",
   }),
 };
 
