@@ -7,20 +7,40 @@
   import axios from 'axios';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import Icone from '../ui/Icone.svelte';
-  import {onMount} from "svelte";
+  import { onMount } from 'svelte';
+  import DialogueSortieDiagnostic from './DialogueSortieDiagnostic.svelte';
 
   let formulaireDemandeAide: FormulaireDemandeAide;
   let enSucces: boolean = false;
   let formulaireSoumis: boolean;
   let erreurs: string;
-  let origine : string | null;
+  let origine: string | null;
 
   let enCoursEnvoi = false;
+  let dialogueSortie: DialogueSortieDiagnostic;
 
   onMount(() => {
     const parametres = new URLSearchParams(window.location.search);
     origine = parametres.get('mtm_campaign');
-  })
+
+    const body = document.querySelector('body')!;
+
+    const ecouteSortieSouris = (e: MouseEvent) => {
+      const positionEnHauteur = e.pageY;
+      if (positionEnHauteur < 250) {
+        body.removeEventListener('mousemove', ecouteSortieSouris);
+        localStorage.setItem('sortieDiagnosticAffichee', 'true');
+        dialogueSortie.affiche();
+      }
+    };
+
+    if (localStorage.getItem('sortieDiagnosticAffichee') === null) {
+      setTimeout(
+        () => body.addEventListener('mousemove', ecouteSortieSouris),
+        7000
+      );
+    }
+  });
 
   const soumetsFormulaire = async (
     e: CustomEvent<DonneesFormulaireDemandeAide>
@@ -39,7 +59,7 @@
         identifiantAidant,
       } = e.detail;
       const corps: CorpsAPIDemandeAide = {
-        ...(origine && {origine}),
+        ...(origine && { origine }),
         entiteAidee: {
           email,
           departement: entite.departement,
@@ -67,10 +87,15 @@
   };
 </script>
 
+<DialogueSortieDiagnostic bind:this={dialogueSortie} />
+
 <article class="page-demande-aide-mon-aide-cyber">
   <section class="encart-presentation">
     <div class="contenu-section">
-      <a href="/" class="lien"><Icone type="fleche-gauche" /> Retour</a>
+      <a href="/" class="lien">
+        <Icone type="fleche-gauche" />
+        Retour</a
+      >
     </div>
     <div class="contenu-section">
       <div class="colonne-explicative">
@@ -85,7 +110,9 @@
           organisation.
         </p>
         <div class="zone-tags">
-          <span class="tag"><Icone type="check" /> Dans vos locaux ou en visio </span>
+          <span class="tag"
+            ><Icone type="check" /> Dans vos locaux ou en visio
+          </span>
           <span class="tag"><Icone type="check" /> Rapide (1h30)</span>
           <span class="tag"><Icone type="check" /> Anonyme</span>
         </div>
@@ -131,6 +158,7 @@
     text-decoration: none;
     border-bottom: 1px solid var(--noir);
     padding-bottom: 1px;
+
     &:hover {
       border-bottom-width: 2px;
       padding-bottom: 0 !important;
