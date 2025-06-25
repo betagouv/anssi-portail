@@ -1,7 +1,7 @@
 <script lang="ts">
+  import Bouton from '../ui/Bouton.svelte';
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
-  import Bouton from '../ui/Bouton.svelte';
 
   let dialogue: HTMLDialogElement;
 
@@ -23,8 +23,9 @@
         </label>
         <label>
           <input type="radio" value="pas-le-temps" />
-          <span>Je n’ai pas le temps maintenant / Je ne suis pas décisionnaire</span
-          >
+          <span>
+            Je n’ai pas le temps maintenant / Je ne suis pas décisionnaire
+          </span>
         </label>
         <label>
           <input type="radio" value="pas-besoin" />
@@ -37,9 +38,17 @@
       </div>
       <div class="contact">
         <h5>📧 Une question ? Nos équipes se tiennent à votre disposition.</h5>
-        <label>Email de contact </label>
-        <ChampTexte type="email" nom="email" id="email-contact" aideSaisie="Ex : jean.dupont@mail.com" />
-        <p>Votre email ne sera utilisé que pour vous recontacter à propos du diagnostic cyber.</p>
+        <label for="email">Email de contact </label>
+        <ChampTexte
+          type="email"
+          nom="email"
+          id="email-contact"
+          aideSaisie="Ex : jean.dupont@mail.com"
+        />
+        <p>
+          Votre email ne sera utilisé que pour vous recontacter à propos du
+          diagnostic cyber.
+        </p>
       </div>
     </div>
     <div class="actions">
@@ -50,6 +59,8 @@
 </dialog>
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
+
   dialog {
     min-width: 100%;
     height: 90vh;
@@ -59,6 +70,15 @@
 
     &::backdrop {
       background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    @include a-partir-de(md) {
+      height: min-content;
+      max-width: 588px;
+      min-width: 0;
+      margin: auto;
+      padding: 0 16px 16px 16px;
+      border-radius: 8px;
     }
   }
 
@@ -125,5 +145,9 @@
     flex-direction: column;
     gap: 16px;
     padding: 16px;
+
+    @include a-partir-de(md) {
+      flex-direction: row-reverse;
+    }
   }
 </style>
