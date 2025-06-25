@@ -2,6 +2,7 @@
   import qrcode from 'qrcode';
   import Bouton from '../ui/Bouton.svelte';
   import type { ReponseCreationSessionGroupe } from './SessionGroupe';
+  import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
 
   let modaleNouvelleSession: HTMLDialogElement;
   let codeSession: string;
@@ -35,7 +36,7 @@
 
 <dialog bind:this={modaleNouvelleSession}>
   <div class="modale">
-    <button class="fermer" on:click={ferme}>Fermer</button>
+    <BoutonFermerModale on:click={ferme}/>
     <h4>Nouvelle session de groupe</h4>
     <div class="contenu">
       <div class="information">
@@ -83,33 +84,6 @@
   .modale {
     display: flex;
     flex-direction: column;
-  }
-
-  .fermer {
-    font-size: 0.875rem;
-    line-height: 1.5rem;
-    font-weight: 500;
-    border: none;
-    background: none;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    padding: 4px 0 4px 12px;
-    cursor: pointer;
-    align-self: flex-end;
-    margin: 0 0 16px;
-
-    &:after {
-      content: '';
-      display: inline-block;
-      background-repeat: no-repeat;
-      background-size: contain;
-      width: 16px;
-      height: 16px;
-      line-height: 1.5rem;
-      background-image: url('/assets/images/icone-croix.svg');
-      filter: brightness(0) saturate(100%);
-    }
   }
 
   h4 {
