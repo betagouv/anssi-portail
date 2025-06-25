@@ -8,31 +8,36 @@
   export const affiche = () => {
     dialogue.showModal();
   };
+
+  let raison = '';
+  let precision = '';
+  let emailDeContact = '';
+  const soumetsLeFormulaire = () => {};
 </script>
 
 <dialog bind:this={dialogue}>
-  <div class="dialogue">
+  <form class="dialogue" on:submit={soumetsLeFormulaire}>
     <div class="contenu">
       <BoutonFermerModale on:click={() => dialogue.close()} />
       <h4>Aidez-nous à améliorer votre expérience️ 🙏&nbsp;!</h4>
       <h5>🤔 Pourquoi n’avez-vous pas finalisé votre demande&nbsp;?</h5>
       <div class="propositions">
         <label>
-          <input type="radio" value="pas-clair" />
+          <input type="radio" value="pas-clair" bind:group={raison} />
           <span>Ce n’est pas assez clair / J’aimerais en savoir plus</span>
         </label>
         <label>
-          <input type="radio" value="pas-le-temps" />
+          <input type="radio" value="pas-le-temps" bind:group={raison} />
           <span>
             Je n’ai pas le temps maintenant / Je ne suis pas décisionnaire
           </span>
         </label>
         <label>
-          <input type="radio" value="pas-besoin" />
+          <input type="radio" value="pas-besoin" bind:group={raison} />
           <span>Mon organisation n’a pas besoin d’accompagnement cyber</span>
         </label>
         <label>
-          <input type="radio" value="autre" />
+          <input type="radio" value="autre" bind:group={raison} />
           <span>Autre</span>
         </label>
       </div>
@@ -40,10 +45,11 @@
         <h5>📧 Une question ? Nos équipes se tiennent à votre disposition.</h5>
         <label for="email">Email de contact </label>
         <ChampTexte
-          type="email"
-          nom="email"
-          id="email-contact"
           aideSaisie="Ex : jean.dupont@mail.com"
+          id="email-contact"
+          nom="email"
+          type="email"
+          bind:valeur={emailDeContact}
         />
         <p>
           Votre email ne sera utilisé que pour vous recontacter à propos du
@@ -53,9 +59,9 @@
     </div>
     <div class="actions">
       <Bouton type="primaire" titre="Envoyer" />
-      <Bouton type="secondaire" titre="Revenir à la page d’accueil" />
+      <a href="/" class="bouton secondaire">Revenir à la page d’accueil</a>
     </div>
-  </div>
+  </form>
 </dialog>
 
 <style lang="scss">
@@ -145,6 +151,10 @@
     flex-direction: column;
     gap: 16px;
     padding: 16px;
+
+    a {
+      width: auto;
+    }
 
     @include a-partir-de(md) {
       flex-direction: row-reverse;
