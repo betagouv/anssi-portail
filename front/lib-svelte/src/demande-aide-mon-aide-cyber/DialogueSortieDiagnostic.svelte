@@ -6,6 +6,7 @@
   import ZoneTexte from '../ui/ZoneTexte.svelte';
 
   let dialogue: HTMLDialogElement;
+  let etape: 'formulaire' | 'merci' = 'formulaire';
 
   export const affiche = () => {
     dialogue.showModal();
@@ -34,74 +35,96 @@
   const soumetsLeFormulaire = () => {
     const precision = recupereLaBonnePrecision(raison);
     axios.post('/retours-experience', { raison, precision, emailDeContact });
+    etape = 'merci';
   };
 </script>
 
 <dialog bind:this={dialogue}>
-  <form class="dialogue" on:submit={soumetsLeFormulaire}>
-    <div class="contenu">
-      <BoutonFermerModale on:click={() => dialogue.close()} />
-      <h4>Aidez-nous à améliorer votre expérience️ 🙏&nbsp;!</h4>
-      <h5>🤔 Pourquoi n’avez-vous pas finalisé votre demande&nbsp;?</h5>
-      <div class="propositions">
-        <label>
-          <input type="radio" value="pas-clair" bind:group={raison} />
-          <span>Ce n’est pas assez clair / J’aimerais en savoir plus</span>
-        </label>
-        {#if raison === 'pas-clair'}
-          <ZoneTexte
-            aideSaisie="Précisez votre réponse (facultatif)"
-            bind:valeur={precisionPasClair}
+  {#if etape === 'formulaire'}
+    <form class="dialogue" on:submit={soumetsLeFormulaire}>
+      <div class="contenu">
+        <BoutonFermerModale on:click={() => dialogue.close()} />
+        <h4>Aidez-nous à améliorer votre expérience️ 🙏&nbsp;!</h4>
+        <h5>🤔 Pourquoi n’avez-vous pas finalisé votre demande&nbsp;?</h5>
+        <div class="propositions">
+          <label>
+            <input type="radio" value="pas-clair" bind:group={raison} />
+            <span>Ce n’est pas assez clair / J’aimerais en savoir plus</span>
+          </label>
+          {#if raison === 'pas-clair'}
+            <ZoneTexte
+              aideSaisie="Précisez votre réponse (facultatif)"
+              bind:valeur={precisionPasClair}
+            />
+          {/if}
+          <label>
+            <input type="radio" value="pas-le-temps" bind:group={raison} />
+            <span>
+              Je n’ai pas le temps maintenant / Je ne suis pas décisionnaire
+            </span>
+          </label>
+          <label>
+            <input type="radio" value="pas-besoin" bind:group={raison} />
+            <span>Mon organisation n’a pas besoin d’accompagnement cyber</span>
+          </label>
+          {#if raison === 'pas-besoin'}
+            <ZoneTexte
+              aideSaisie="Précisez votre réponse (facultatif)"
+              bind:valeur={precisionPasBesoin}
+            />
+          {/if}
+          <label>
+            <input type="radio" value="autre" bind:group={raison} />
+            <span>Autre</span>
+          </label>
+          {#if raison === 'autre'}
+            <ZoneTexte
+              aideSaisie="Précisez votre réponse (facultatif)"
+              bind:valeur={precisionAutre}
+            />
+          {/if}
+        </div>
+        <div class="contact">
+          <h5>
+            📧 Une question ? Nos équipes se tiennent à votre disposition.
+          </h5>
+          <label for="email">Email de contact </label>
+          <ChampTexte
+            aideSaisie="Ex : jean.dupont@mail.com"
+            id="email-contact"
+            nom="email"
+            type="email"
+            bind:valeur={emailDeContact}
           />
-        {/if}
-        <label>
-          <input type="radio" value="pas-le-temps" bind:group={raison} />
-          <span>
-            Je n’ai pas le temps maintenant / Je ne suis pas décisionnaire
-          </span>
-        </label>
-        <label>
-          <input type="radio" value="pas-besoin" bind:group={raison} />
-          <span>Mon organisation n’a pas besoin d’accompagnement cyber</span>
-        </label>
-        {#if raison === 'pas-besoin'}
-          <ZoneTexte
-            aideSaisie="Précisez votre réponse (facultatif)"
-            bind:valeur={precisionPasBesoin}
-          />
-        {/if}
-        <label>
-          <input type="radio" value="autre" bind:group={raison} />
-          <span>Autre</span>
-        </label>
-        {#if raison === 'autre'}
-          <ZoneTexte
-            aideSaisie="Précisez votre réponse (facultatif)"
-            bind:valeur={precisionAutre}
-          />
-        {/if}
+          <p>
+            Votre email ne sera utilisé que pour vous recontacter à propos du
+            diagnostic cyber.
+          </p>
+        </div>
       </div>
-      <div class="contact">
-        <h5>📧 Une question ? Nos équipes se tiennent à votre disposition.</h5>
-        <label for="email">Email de contact </label>
-        <ChampTexte
-          aideSaisie="Ex : jean.dupont@mail.com"
-          id="email-contact"
-          nom="email"
-          type="email"
-          bind:valeur={emailDeContact}
-        />
+      <div class="actions">
+        <Bouton boutonSoumission titre="Envoyer" type="primaire" />
+        <a href="/" class="bouton secondaire">Revenir à la page d’accueil</a>
+      </div>
+    </form>
+  {:else}
+    <div class="dialogue">
+      <div class="contenu">
+        <BoutonFermerModale on:click={() => dialogue.close()} />
+        <h4>
+          Merci pour votre retour&nbsp;🤩&nbsp;! Vos remarques sont précieuses
+          pour faire évoluer le service.
+        </h4>
         <p>
-          Votre email ne sera utilisé que pour vous recontacter à propos du
-          diagnostic cyber.
+          Vous avez demandé à être recontacté(e) ? Notre équipe prendra contact
+          avec vous prochainement à l’adresse fournie.
         </p>
       </div>
+      <div class="actions">
+        <a href="/" class="bouton primaire">Revenir à la page d’accueil</a>
+      </div>
     </div>
-    <div class="actions">
-      <Bouton boutonSoumission titre="Envoyer" type="primaire" />
-      <a href="/" class="bouton secondaire">Revenir à la page d’accueil</a>
-    </div>
-  </form>
+  {/if}
 </dialog>
 
 <style lang="scss">
@@ -123,7 +146,7 @@
       max-width: 588px;
       min-width: 0;
       margin: auto;
-      padding: 0 16px 16px 16px;
+      padding: 0 16px;
       border-radius: 8px;
     }
   }
@@ -139,6 +162,15 @@
     flex-direction: column;
     overflow: auto;
     padding: 16px;
+
+    p {
+      color: #3a3a3a;
+      margin: 0;
+
+      @include a-partir-de(lg) {
+        margin-bottom: 24px;
+      }
+    }
   }
 
   h4 {
@@ -198,6 +230,7 @@
 
     @include a-partir-de(md) {
       flex-direction: row-reverse;
+      padding: 48px 16px 32px;
     }
   }
 </style>
