@@ -113,6 +113,11 @@ serviceCoherenceSecretsHachage
         entrepotSessionDeGroupe
       ),
       adaptateurHachage,
+      messagerieInstantanee: {
+        notifieUnRetourExperience: async (retourExperience) => {
+          console.log('retourExperience', retourExperience);
+        },
+      },
     }).listen(3000, () => {
       console.log('Le serveur écoute sur le port 3000');
     });

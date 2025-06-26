@@ -14,6 +14,7 @@ import { MockCmsCrisp } from '../mockCmsCrisp';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -128,6 +129,10 @@ const fauxGenerateurCodeSessionDeGroupe = {
   genere: async () => 'hello',
 };
 
+const fausseMessagerieInstantanee: MessagerieInstantanee = {
+  notifieUnRetourExperience: async () => {},
+};
+
 export const fauxAdaptateurHachage: AdaptateurHachage = {
   hache: (valeur: string): string => `${valeur}-hache`,
   hacheBCrypt: async (valeur: string): Promise<string> =>
@@ -160,4 +165,5 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
   generateurCodeSessionDeGroupe: fauxGenerateurCodeSessionDeGroupe,
   adaptateurHachage: fauxAdaptateurHachage,
+  messagerieInstantanee: fausseMessagerieInstantanee,
 };

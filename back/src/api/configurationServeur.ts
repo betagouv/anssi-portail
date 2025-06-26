@@ -15,6 +15,7 @@ import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import { EntrepotSessionDeGroupe } from '../metier/entrepotSessionDeGroupe';
 import { GenerateurCodeSessionDeGroupe } from '../metier/generateurCodeSessionDeGroupe';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
+import { MessagerieInstantanee } from '../metier/messagerieInstantanee';
 
 export type ConfigurationServeur = {
   fournisseurChemin: FournisseurChemin;
@@ -39,4 +40,5 @@ export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
   generateurCodeSessionDeGroupe: GenerateurCodeSessionDeGroupe;
   adaptateurHachage: AdaptateurHachage;
+  messagerieInstantanee: MessagerieInstantanee;
 };
