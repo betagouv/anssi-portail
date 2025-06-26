@@ -91,7 +91,7 @@
     line-height: 2rem;
     font-weight: bold;
     color: #161616;
-    margin: 0 0 16px;
+    margin: 16px 0 16px;
     padding: 0;
   }
 

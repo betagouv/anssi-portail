@@ -13,6 +13,7 @@
   };
   type RaisonDisponible = 'pas-clair' | 'pas-le-temps' | 'pas-besoin' | 'autre';
   let raison: RaisonDisponible | undefined;
+  let erreurRaison = false;
   let precisionPasClair = '';
   let precisionPasBesoin = '';
   let precisionAutre = '';
@@ -32,20 +33,35 @@
     }
   };
 
+
   const soumetsLeFormulaire = () => {
+    if (!raison) {
+      erreurRaison = true;
+      return;
+    }
     const precision = recupereLaBonnePrecision(raison);
     axios.post('/retours-experience', { raison, precision, emailDeContact });
     etape = 'merci';
   };
+
+  $:{
+    if (raison) erreurRaison = false;
+  }
 </script>
 
 <dialog bind:this={dialogue}>
   {#if etape === 'formulaire'}
-    <form class="dialogue" on:submit={soumetsLeFormulaire}>
+    <div class="dialogue">
       <div class="contenu">
         <BoutonFermerModale on:click={() => dialogue.close()} />
         <h4>Aidez-nous à améliorer votre expérience️ 🙏&nbsp;!</h4>
         <h5>🤔 Pourquoi n’avez-vous pas finalisé votre demande&nbsp;?</h5>
+        {#if erreurRaison}
+          <lab-anssi-alerte
+            type="erreur"
+            description="Veuillez sélectionner une réponse."
+          ></lab-anssi-alerte>
+        {/if}
         <div class="propositions">
           <label>
             <input type="radio" value="pas-clair" bind:group={raison} />
@@ -103,10 +119,10 @@
         </div>
       </div>
       <div class="actions">
-        <Bouton boutonSoumission titre="Envoyer" type="primaire" />
+        <Bouton titre="Envoyer" type="primaire" on:click={soumetsLeFormulaire} boutonSoumission={false} />
         <a href="/" class="bouton secondaire">Revenir à la page d’accueil</a>
       </div>
-    </form>
+    </div>
   {:else}
     <div class="dialogue">
       <div class="contenu">
@@ -161,7 +177,8 @@
     display: flex;
     flex-direction: column;
     overflow: auto;
-    padding: 16px;
+    padding: 16px 16px 0;
+    gap: 16px;
 
     p {
       color: #3a3a3a;
@@ -177,7 +194,7 @@
     font-size: 1.375rem;
     font-weight: bold;
     line-height: 1.75rem;
-    margin: 0 0 16px;
+    margin: 0;
   }
 
   h5 {
@@ -187,11 +204,10 @@
   }
 
   .propositions {
-    padding: 16px 0;
+    padding: 0 0 8px;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-bottom: 24px;
 
     label {
       display: flex;
