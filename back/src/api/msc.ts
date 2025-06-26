@@ -34,6 +34,7 @@ import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGro
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceInfosSite } from './ressourceInfosSite';
+import { ressourceRetoursExperience } from './ressourceRetoursExperience';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -235,7 +236,12 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/api/pages-crisp', ressourcePageCrisp(configurationServeur));
 
-  app.use("/api/infos-site", ressourceInfosSite(configurationServeur))
+  app.use('/api/infos-site', ressourceInfosSite(configurationServeur));
+
+  app.use(
+    '/api/retours-experience',
+    ressourceRetoursExperience(configurationServeur)
+  );
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 
