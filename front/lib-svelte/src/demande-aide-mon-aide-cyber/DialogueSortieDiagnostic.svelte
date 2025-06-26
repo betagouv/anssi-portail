@@ -1,4 +1,5 @@
 <script lang="ts">
+  import axios from 'axios';
   import Bouton from '../ui/Bouton.svelte';
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
@@ -9,13 +10,31 @@
   export const affiche = () => {
     dialogue.showModal();
   };
-
-  let raison = '';
+  type RaisonDisponible = 'pas-clair' | 'pas-le-temps' | 'pas-besoin' | 'autre';
+  let raison: RaisonDisponible | undefined;
   let precisionPasClair = '';
   let precisionPasBesoin = '';
   let precisionAutre = '';
   let emailDeContact = '';
-  const soumetsLeFormulaire = () => {};
+
+  const recupereLaBonnePrecision = (raison?: RaisonDisponible) => {
+    switch (raison) {
+      case 'pas-clair':
+        return precisionPasClair;
+      case 'autre':
+        return precisionAutre;
+      case 'pas-besoin':
+        return precisionPasBesoin;
+      case 'pas-le-temps':
+      case undefined:
+        return '';
+    }
+  };
+
+  const soumetsLeFormulaire = () => {
+    const precision = recupereLaBonnePrecision(raison);
+    axios.post('/retours-experience', { raison, precision, emailDeContact });
+  };
 </script>
 
 <dialog bind:this={dialogue}>
@@ -79,7 +98,7 @@
       </div>
     </div>
     <div class="actions">
-      <Bouton type="primaire" titre="Envoyer" />
+      <Bouton boutonSoumission titre="Envoyer" type="primaire" />
       <a href="/" class="bouton secondaire">Revenir à la page d’accueil</a>
     </div>
   </form>
