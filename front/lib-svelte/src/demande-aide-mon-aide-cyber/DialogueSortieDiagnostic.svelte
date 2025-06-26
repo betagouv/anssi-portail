@@ -2,6 +2,7 @@
   import Bouton from '../ui/Bouton.svelte';
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
+  import ZoneTexte from '../ui/ZoneTexte.svelte';
 
   let dialogue: HTMLDialogElement;
 
@@ -10,7 +11,9 @@
   };
 
   let raison = '';
-  let precision = '';
+  let precisionPasClair = '';
+  let precisionPasBesoin = '';
+  let precisionAutre = '';
   let emailDeContact = '';
   const soumetsLeFormulaire = () => {};
 </script>
@@ -26,6 +29,12 @@
           <input type="radio" value="pas-clair" bind:group={raison} />
           <span>Ce n’est pas assez clair / J’aimerais en savoir plus</span>
         </label>
+        {#if raison === 'pas-clair'}
+          <ZoneTexte
+            aideSaisie="Précisez votre réponse (facultatif)"
+            bind:valeur={precisionPasClair}
+          />
+        {/if}
         <label>
           <input type="radio" value="pas-le-temps" bind:group={raison} />
           <span>
@@ -36,10 +45,22 @@
           <input type="radio" value="pas-besoin" bind:group={raison} />
           <span>Mon organisation n’a pas besoin d’accompagnement cyber</span>
         </label>
+        {#if raison === 'pas-besoin'}
+          <ZoneTexte
+            aideSaisie="Précisez votre réponse (facultatif)"
+            bind:valeur={precisionPasBesoin}
+          />
+        {/if}
         <label>
           <input type="radio" value="autre" bind:group={raison} />
           <span>Autre</span>
         </label>
+        {#if raison === 'autre'}
+          <ZoneTexte
+            aideSaisie="Précisez votre réponse (facultatif)"
+            bind:valeur={precisionAutre}
+          />
+        {/if}
       </div>
       <div class="contact">
         <h5>📧 Une question ? Nos équipes se tiennent à votre disposition.</h5>
