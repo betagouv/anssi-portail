@@ -17,7 +17,6 @@
     padding: 4px 0 4px 12px;
     cursor: pointer;
     align-self: flex-end;
-    margin: 0 0 16px;
 
     &:after {
       content: '';
