@@ -4,6 +4,7 @@
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ZoneTexte from '../ui/ZoneTexte.svelte';
+  import Formulaire from '../ui/Formulaire.svelte';
 
   let dialogue: HTMLDialogElement;
   let etape: 'formulaire' | 'merci' = 'formulaire';
@@ -33,18 +34,23 @@
     }
   };
 
-  const soumetsLeFormulaire = () => {
+  const soumetsLeFormulaire = async () => {
     if (!raison) {
       erreurRaison = true;
       return;
     }
+
     const precision = recupereLaBonnePrecision(raison);
-    axios.post('/api/retours-experience', {
-      raison,
-      precision,
-      emailDeContact,
-    });
-    etape = 'merci';
+    try {
+      await axios.post('/api/retours-experience', {
+        raison,
+        precision,
+        emailDeContact,
+      });
+      etape = 'merci';
+    } catch (erreur) {
+      console.log(erreur);
+    }
   };
 
   $: {
@@ -54,7 +60,7 @@
 
 <dialog bind:this={dialogue}>
   {#if etape === 'formulaire'}
-    <div class="dialogue">
+    <Formulaire classe="dialogue-sortie-diag" on:formulaireValide={soumetsLeFormulaire}>
       <div class="contenu">
         <BoutonFermerModale on:click={() => dialogue.close()} />
         <h4>Aidez-nous à améliorer votre expérience️ 🙏&nbsp;!</h4>
@@ -114,6 +120,7 @@
             id="email-contact"
             nom="email"
             type="email"
+            messageErreur="L'email est invalide"
             bind:valeur={emailDeContact}
           />
           <p>
@@ -123,17 +130,12 @@
         </div>
       </div>
       <div class="actions">
-        <Bouton
-          titre="Envoyer"
-          type="primaire"
-          on:click={soumetsLeFormulaire}
-          boutonSoumission={false}
-        />
+        <Bouton titre="Envoyer" type="primaire" boutonSoumission={true} />
         <a href="/" class="bouton secondaire">Revenir à la page d’accueil</a>
       </div>
-    </div>
+    </Formulaire>
   {:else}
-    <div class="dialogue">
+    <div class="dialogue-sortie-diag">
       <div class="contenu">
         <BoutonFermerModale on:click={() => dialogue.close()} />
         <h4>
@@ -176,7 +178,7 @@
     }
   }
 
-  .dialogue {
+  :global(.dialogue-sortie-diag) {
     display: grid;
     grid-template-rows: 1fr auto;
     height: 100%;
