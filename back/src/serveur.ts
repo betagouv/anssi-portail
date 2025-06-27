@@ -23,6 +23,7 @@ import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeS
 import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
+import { messagerieMattermost } from './infra/messagerieMattermost';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement({
@@ -74,6 +75,8 @@ const serviceCoherenceSecretsHachage =
     adaptateurHachage,
   });
 
+const messagerieInstantanee = messagerieMattermost();
+
 serviceCoherenceSecretsHachage
   .verifieCoherenceSecrets()
   .catch((reason) => {
@@ -113,11 +116,7 @@ serviceCoherenceSecretsHachage
         entrepotSessionDeGroupe
       ),
       adaptateurHachage,
-      messagerieInstantanee: {
-        notifieUnRetourExperience: async (retourExperience) => {
-          console.log('retourExperience', retourExperience);
-        },
-      },
+      messagerieInstantanee,
     }).listen(3000, () => {
       console.log('Le serveur écoute sur le port 3000');
     });
