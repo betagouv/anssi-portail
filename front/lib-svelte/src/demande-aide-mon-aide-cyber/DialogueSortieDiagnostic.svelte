@@ -60,6 +60,7 @@
           <lab-anssi-alerte
             type="erreur"
             description="Veuillez sélectionner une réponse."
+            fermable={false}
           ></lab-anssi-alerte>
         {/if}
         <div class="propositions">
