@@ -33,18 +33,21 @@
     }
   };
 
-
   const soumetsLeFormulaire = () => {
     if (!raison) {
       erreurRaison = true;
       return;
     }
     const precision = recupereLaBonnePrecision(raison);
-    axios.post('/retours-experience', { raison, precision, emailDeContact });
+    axios.post('/api/retours-experience', {
+      raison,
+      precision,
+      emailDeContact,
+    });
     etape = 'merci';
   };
 
-  $:{
+  $: {
     if (raison) erreurRaison = false;
   }
 </script>
@@ -120,7 +123,12 @@
         </div>
       </div>
       <div class="actions">
-        <Bouton titre="Envoyer" type="primaire" on:click={soumetsLeFormulaire} boutonSoumission={false} />
+        <Bouton
+          titre="Envoyer"
+          type="primaire"
+          on:click={soumetsLeFormulaire}
+          boutonSoumission={false}
+        />
         <a href="/" class="bouton secondaire">Revenir à la page d’accueil</a>
       </div>
     </div>
