@@ -8,16 +8,22 @@ import {
   RetourExperience,
 } from '../../src/metier/messagerieInstantanee';
 import { configurationDeTestDuServeur } from './fauxObjets';
+import { MockBusEvenement } from '../bus/busPourLesTests';
+import { RetourExperienceDonne } from '../../src/bus/evenements/retourExperienceDonne';
 
 describe("La ressource des retours d'expérience", () => {
   let serveur: Express;
   let messagerieInstantanee: MessagerieInstantanee;
+  let busEvenements: MockBusEvenement;
+
   beforeEach(() => {
     messagerieInstantanee = {
       notifieUnRetourExperience: async () => {},
     };
+    busEvenements = new MockBusEvenement();
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
+      busEvenements,
       messagerieInstantanee,
     });
   });
@@ -109,6 +115,36 @@ describe("La ressource des retours d'expérience", () => {
       });
 
       assert.equal(retourExperienceEnvoye!.precision, '&lt;&gt;');
+    });
+
+    describe("concernant la publication de l'événement", () => {
+      let representation: Record<string, string>;
+
+      beforeEach(() => {
+        representation = {
+          raison: 'pas-clair',
+          precision: 'flou',
+          emailDeContact: 'mail@mail.com',
+        };
+      });
+
+      it('publie un événement sur le bus', async () => {
+        await request(serveur)
+          .post('/api/retours-experience')
+          .send(representation);
+
+        busEvenements.aRecuUnEvenement(RetourExperienceDonne);
+      });
+
+      it("envoie la raison et l'email", async () => {
+        await request(serveur)
+          .post('/api/retours-experience')
+          .send(representation);
+
+        const evenement = busEvenements.recupereEvenement(RetourExperienceDonne);
+        assert.equal(evenement!.raison, "pas-clair")
+        assert.equal(evenement!.emailDeContact, "mail@mail.com")
+      });
     });
   });
 });

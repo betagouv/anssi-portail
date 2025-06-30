@@ -1,10 +1,12 @@
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 import { check } from 'express-validator';
+import { RetourExperienceDonne } from '../bus/evenements/retourExperienceDonne';
 
 export const ressourceRetoursExperience = ({
   messagerieInstantanee,
   middleware,
+  busEvenements,
 }: ConfigurationServeur): Router => {
   const routeur = Router();
   routeur.post(
@@ -20,8 +22,16 @@ export const ressourceRetoursExperience = ({
     ],
     middleware.valide(),
     middleware.aseptise('precision'),
-    (requete: Request, reponse: Response) => {
-      messagerieInstantanee.notifieUnRetourExperience(requete.body);
+    async (requete: Request, reponse: Response) => {
+      const { raison, emailDeContact, precision } = requete.body;
+      await messagerieInstantanee.notifieUnRetourExperience({
+        raison,
+        emailDeContact,
+        precision,
+      });
+      await busEvenements.publie(
+        new RetourExperienceDonne({ raison, emailDeContact })
+      );
       reponse.sendStatus(201);
     }
   );
