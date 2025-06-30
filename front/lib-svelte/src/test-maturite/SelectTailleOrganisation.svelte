@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import axios from 'axios';
+  import axios, { type AxiosResponse } from 'axios';
 
   export let tailleOrganisation: string | null;
   let codeTailleOrganisation: string;
@@ -13,9 +13,16 @@
   let tranchesEffectifEtablissement: TrancheEffectif[];
 
   onMount(async () => {
-    const reponse = await axios.get<TrancheEffectif[]>(
-      '/api/annuaire/tranches-effectif'
-    );
+    let reponse: AxiosResponse<TrancheEffectif[]>;
+    try {
+      reponse = await axios.get<TrancheEffectif[]>(
+        '/api/annuaire/tranches-effectif'
+      );
+    } catch {
+      reponse = await axios.get<TrancheEffectif[]>(
+        '/api/annuaire/tranches-effectif'
+      );
+    }
     tranchesEffectifEtablissement = reponse.data;
   });
 </script>
