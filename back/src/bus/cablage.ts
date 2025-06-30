@@ -14,6 +14,8 @@ import { consigneEvenementMAJFavorisUtilisateurDansJournal } from './consigneEve
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
 import { EntrepotFavori } from '../metier/entrepotFavori';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
+import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
+import { consigneEvenementRetourExperienceDonneDansJournal } from './consigneEvenementRetourExperienceDonneDansJournal';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
@@ -65,6 +67,14 @@ export const cableTousLesAbonnes = ({
       adaptateurHorloge,
       adaptateurHachage,
       entrepotFavori,
+    })
+  );
+  busEvenements.abonne(
+    RetourExperienceDonne,
+    consigneEvenementRetourExperienceDonneDansJournal({
+      adaptateurJournal,
+      adaptateurHorloge,
+      adaptateurHachage,
     })
   );
 };
