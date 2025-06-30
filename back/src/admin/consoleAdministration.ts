@@ -336,8 +336,3 @@ export class ConsoleAdministration {
     })
   }
 }
-
-// Usage example depuis le dossier /back
-// Lancer un script node: `node --import tsx --env-file ../.env`
-// Puis importer la classe ConsoleAdministration et l'utiliser
-// const consoleAdmin = new (await import("./src/admin/consoleAdministration.ts")).default.ConsoleAdministration();
