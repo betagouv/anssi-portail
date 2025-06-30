@@ -8,7 +8,8 @@ export type DonneesEvenement =
   | DonneesEvenementNouvelUtilisateur
   | DonneesEvenementProprieteTestRevendiquee
   | DonneesEvenementTestRealise
-  | DonneesEvenementMiseAJourFavorisUtilisateur;
+  | DonneesEvenementMiseAJourFavorisUtilisateur
+  | DonneesEvenementRetourExperienceDonne;
 
 interface DonneesCommunesEvenement {
   date: Date;
@@ -48,6 +49,15 @@ interface DonneesEvenementTestRealise extends DonneesCommunesEvenement {
     codeSessionGroupe?: string | undefined;
   };
   type: 'TEST_REALISE';
+}
+
+interface DonneesEvenementRetourExperienceDonne
+  extends DonneesCommunesEvenement {
+  donnees: {
+    raison: string;
+    idUtilisateur: string | undefined;
+  };
+  type: 'RETOUR_EXPERIENCE_DONNE';
 }
 
 export type AdaptateurJournal = {
