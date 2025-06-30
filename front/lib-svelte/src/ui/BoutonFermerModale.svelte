@@ -2,7 +2,7 @@
 
 </script>
 
-<button class="fermer" on:click>Fermer</button>
+<button class="fermer" on:click type="button">Fermer</button>
 
 <style lang="scss">
   .fermer {
