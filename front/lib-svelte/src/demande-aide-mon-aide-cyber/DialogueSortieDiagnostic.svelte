@@ -166,11 +166,18 @@
   @use '../../../assets/styles/responsive' as *;
 
   dialog {
+    display: block;
     min-width: 100%;
     height: 90vh;
     margin: auto 0 0;
     padding: 0;
     border: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+
+    &[open] {
+      opacity: 1;
+    }
 
     &::backdrop {
       background-color: rgba(0, 0, 0, 0.4);
