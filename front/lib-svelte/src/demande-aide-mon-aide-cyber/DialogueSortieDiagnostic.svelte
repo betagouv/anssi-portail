@@ -3,8 +3,8 @@
   import Bouton from '../ui/Bouton.svelte';
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
-  import ZoneTexte from '../ui/ZoneTexte.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
+  import ZoneTexte from '../ui/ZoneTexte.svelte';
 
   let dialogue: HTMLDialogElement;
   let etape: 'formulaire' | 'merci' = 'formulaire';
@@ -133,7 +133,12 @@
         </div>
       </div>
       <div class="actions">
-        <Bouton titre="Envoyer" type="primaire" boutonSoumission={true} />
+        <Bouton
+          titre="Envoyer"
+          type="primaire"
+          taille="md"
+          boutonSoumission={true}
+        />
         <a href="/" class="bouton secondaire">Revenir à la page d’accueil</a>
       </div>
     </Formulaire>
@@ -257,6 +262,12 @@
 
     a {
       width: auto;
+
+      &.bouton.secondaire {
+        box-sizing: border-box;
+        padding: 8px 16px;
+        height: 40px;
+      }
     }
 
     @include a-partir-de(md) {
