@@ -214,6 +214,11 @@
     font-weight: bold;
     line-height: 1.75rem;
     margin: 0;
+
+    @include a-partir-de(md) {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
   }
 
   h5 {
