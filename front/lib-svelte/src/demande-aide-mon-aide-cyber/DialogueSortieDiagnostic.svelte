@@ -60,7 +60,10 @@
 
 <dialog bind:this={dialogue}>
   {#if etape === 'formulaire'}
-    <Formulaire classe="dialogue-sortie-diag" on:formulaireValide={soumetsLeFormulaire}>
+    <Formulaire
+      classe="dialogue-sortie-diag"
+      on:formulaireValide={soumetsLeFormulaire}
+    >
       <div class="contenu">
         <BoutonFermerModale on:click={() => dialogue.close()} />
         <h4>Aidez-nous à améliorer votre expérience️ 🙏&nbsp;!</h4>
@@ -209,6 +212,7 @@
   }
 
   h5 {
+    font-size: 1rem;
     font-style: normal;
     font-weight: bold;
     margin: 0;
