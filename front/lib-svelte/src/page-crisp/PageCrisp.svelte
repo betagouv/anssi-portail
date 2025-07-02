@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Hero from '../ui/Hero.svelte';
   import { onMount } from 'svelte';
   import axios from 'axios';
+  import { profilStore } from '../stores/profil.store';
 
   export let clePageCrisp: string;
 
@@ -35,12 +35,17 @@
   $: tableDesMatieres = pageCrisp.tableDesMatieres.filter(
     (e) => e.profondeur === 2
   );
+
+  $: filAriane = $profilStore
+    ? [{ label: 'Catalogue', href: '/catalogue' }, { label: pageCrisp.titre }]
+    : [{ label: 'Accueil', href: '/' }, { label: pageCrisp.titre }];
 </script>
 
-<Hero
+<lab-anssi-bandeau-titre
   titre={pageCrisp.titre}
   description={pageCrisp.description}
-  ariane={pageCrisp.titre}
-/>
+  {filAriane}
+></lab-anssi-bandeau-titre>
 
-<lab-anssi-page-crisp {tableDesMatieres} contenu={pageCrisp.contenu}></lab-anssi-page-crisp>
+<lab-anssi-page-crisp {tableDesMatieres} contenu={pageCrisp.contenu}
+></lab-anssi-page-crisp>
