@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import axios from 'axios';
+  import axios, { type AxiosResponse } from 'axios';
 
   export let secteur: string | null;
   let codeSecteur: string;
@@ -13,9 +13,16 @@
   };
 
   onMount(async () => {
-    const reponse = await axios.get<SecteurActivite[]>(
-      '/api/annuaire/secteurs-activite'
-    );
+    let reponse: AxiosResponse<SecteurActivite[]>;
+    try {
+      reponse = await axios.get<SecteurActivite[]>(
+        '/api/annuaire/secteurs-activite'
+      );
+    } catch {
+      reponse = await axios.get<SecteurActivite[]>(
+        '/api/annuaire/secteurs-activite'
+      );
+    }
     secteurs = reponse.data;
   });
 </script>
