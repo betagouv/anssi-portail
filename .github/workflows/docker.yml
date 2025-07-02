@@ -1,0 +1,16 @@
+name: Entrepot Docker
+permissions: {}
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Construction image
+        run: echo "test"
