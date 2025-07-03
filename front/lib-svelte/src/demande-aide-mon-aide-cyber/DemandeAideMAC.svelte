@@ -27,7 +27,7 @@
 
     const ecouteSortieSouris = (e: MouseEvent) => {
       const positionEnHauteur = e.pageY;
-      if (positionEnHauteur < 250) {
+      if (positionEnHauteur < 250 && !enSucces) {
         body.removeEventListener('mousemove', ecouteSortieSouris);
         localStorage.setItem('sortieDiagnosticAffichee', 'true');
         dialogueSortie.affiche();
