@@ -42,7 +42,10 @@ section {
     }
   }
 
-  .bouton {
+
+
+
+  .bouton, lab-anssi-lien {
     margin-bottom: 16px;
     padding: 10px 24px;
     width: 100%;
@@ -66,6 +69,10 @@ section {
     }
   }
 
+  lab-anssi-lien {
+    padding: 0;
+  }
+
   .bouton.secondaire {
     color: white;
     font-size: 1.125rem;
@@ -87,7 +94,7 @@ section {
     text-align: center;
   }
 
-  .bouton.primaire {
+  lab-anssi-lien {
     margin: 16px 0;
     align-self: center;
     padding: 10px 24px;
@@ -263,7 +270,7 @@ section {
       }
     }
 
-    .bouton.primaire {
+    lab-anssi-lien {
       margin: 16px auto;
       justify-self: center;
     }
@@ -317,7 +324,7 @@ section {
       }
     }
 
-    .bouton.primaire {
+    lab-anssi-lien {
       margin: 16px auto;
       justify-self: center;
       grid-area: bouton;
