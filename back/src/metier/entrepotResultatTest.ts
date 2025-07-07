@@ -13,4 +13,6 @@ export interface EntrepotResultatTest {
   ): Promise<ResultatTestMaturite | undefined>;
 
   ceuxDeSessionGroupe(code: string): Promise<ResultatTestMaturite[]>;
+
+  taille(): Promise<number>;
 }
