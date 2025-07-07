@@ -6,11 +6,10 @@
   on:click
   on:keypress
   role="button"
-  sans-bordure
   taille="sm"
   tabindex={0}
   titre="Fermer"
-  variante="tertiaire"
+  variante="tertiaire-sans-bordure"
 >
 </lab-anssi-bouton>
 
