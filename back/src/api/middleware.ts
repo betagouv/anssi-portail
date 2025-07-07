@@ -155,6 +155,7 @@ export const fabriqueMiddleware = ({
               "'self'",
               'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com',
               'https://ressources-mac.cellar-c2.services.clever-cloud.com',
+              'https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com',
             ],
             styleSrc: ["'self'", `'nonce-${reponse.locals.nonce}'`],
           },
