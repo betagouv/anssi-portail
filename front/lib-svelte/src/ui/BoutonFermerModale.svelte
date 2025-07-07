@@ -5,6 +5,7 @@
   icone="close-line"
   on:click
   on:keypress
+  positionIcone="droite"
   role="button"
   taille="sm"
   tabindex={0}
