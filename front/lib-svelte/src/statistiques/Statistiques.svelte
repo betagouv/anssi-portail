@@ -26,10 +26,13 @@
 </div>
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
+
   .tuiles {
     display: grid;
-    margin-top: 24px;
-    margin-bottom: 48px;
     gap: 24px;
+    @include a-partir-de(sm) {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 </style>
