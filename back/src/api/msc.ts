@@ -35,6 +35,7 @@ import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroup
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceInfosSite } from './ressourceInfosSite';
 import { ressourceRetoursExperience } from './ressourceRetoursExperience';
+import { ressourceStatistiques } from './ressourceStatistiques';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -242,6 +243,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     '/api/retours-experience',
     ressourceRetoursExperience(configurationServeur)
   );
+
+  app.use('/api/statistiques', ressourceStatistiques(configurationServeur));
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 

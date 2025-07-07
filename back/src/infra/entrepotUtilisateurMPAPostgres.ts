@@ -155,4 +155,9 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     }
     return result;
   }
+
+  async taille  () {
+    const resultat = await this.knex('utilisateurs').count({ count: '*' });
+    return Number(resultat[0].count);
+  };
 }

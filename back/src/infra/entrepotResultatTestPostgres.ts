@@ -58,7 +58,11 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
     utilisateur: Utilisateur
   ): Promise<ResultatTestMaturite | undefined> {
     const donnees = await this.knex('resultats_test')
-      .where({ email_utilisateur_hache: this.adaptateurHachage.hache( utilisateur.email) })
+      .where({
+        email_utilisateur_hache: this.adaptateurHachage.hache(
+          utilisateur.email
+        ),
+      })
       .orderBy('date_realisation', 'desc')
       .first();
     return donnees ? this.traduitEnResultatTestMaturite(donnees) : undefined;
@@ -85,5 +89,10 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
         ? this.adaptateurHachage.hache(utilisateur.email)
         : null,
     });
+  }
+
+  async taille() {
+    const resultat = await this.knex('resultats_test').count({ count: '*' });
+    return Number(resultat[0].count);
   }
 }
