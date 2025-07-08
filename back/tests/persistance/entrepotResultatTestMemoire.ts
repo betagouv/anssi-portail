@@ -26,13 +26,22 @@ export class EntrepotResultatTestMemoire
     utilisateur: Utilisateur
   ): Promise<ResultatTestMaturite | undefined> {
     return this.copie(
-      this.entites.find((entite) => entite.utilisateur?.email === utilisateur.email)
+      this.entites.find(
+        (entite) => entite.utilisateur?.email === utilisateur.email
+      )
     );
   }
 
   tous = async (): Promise<ResultatTestMaturite[]> => {
     return this.entites.map(
       (entite) => new ResultatTestMaturite({ ...entite })
+    );
+  };
+
+  tousEnOmettantUtilisateur = async (): Promise<ResultatTestMaturite[]> => {
+    return this.entites.map(
+      (entite) =>
+        new ResultatTestMaturite({ ...entite, utilisateur: undefined })
     );
   };
 
