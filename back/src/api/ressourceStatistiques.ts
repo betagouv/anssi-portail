@@ -1,21 +1,20 @@
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
-
-const SERVICES_ET_RESSOURCES_CONSULTES = 1787;
+import { calculeStatistiques } from '../metier/statistiques';
 
 export const ressourceStatistiques = ({
   entrepotUtilisateur,
   entrepotResultatTest,
+  adaptateurMonAideCyber,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get('/', async (_requete: Request, reponse: Response) => {
-    reponse.send({
-      utilisateursInscrits: await entrepotUtilisateur.taille(),
-      servicesEtRessourcesConsultes: SERVICES_ET_RESSOURCES_CONSULTES,
-      testsMaturite: {
-        total: await entrepotResultatTest.taille(),
-      },
+    const statistiques = await calculeStatistiques({
+      entrepotResultatTest,
+      adaptateurMonAideCyber,
+      entrepotUtilisateur,
     });
+    reponse.send(statistiques);
   });
   return routeur;
 };

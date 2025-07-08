@@ -6,6 +6,7 @@ import { configurationDeTestDuServeur } from '../fauxObjets';
 import assert from 'node:assert';
 import { DemandeAide } from '../../../src/infra/adaptateurMonAideCyber';
 import { CorpsDemandeAide } from '../../../src/api/mon-aide-cyber/ressourceDemandesAide';
+import { adaptateurMonAideCyberVide } from '../../../src/infra/adaptateurMonAideCyberVide';
 
 const uneDemandeAide = (parametres?: {
   email?: string;
@@ -32,9 +33,7 @@ const uneDemandeAide = (parametres?: {
 
 describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
   let serveur: Express;
-  const adaptateurMonAideCyber = {
-    creeDemandeAide: async (_: DemandeAide) => {},
-  };
+  const adaptateurMonAideCyber = adaptateurMonAideCyberVide();
 
   beforeEach(() => {
     serveur = creeServeur({

@@ -95,4 +95,8 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
     const resultat = await this.knex('resultats_test').count({ count: '*' });
     return Number(resultat[0].count);
   }
+
+  async tous(): Promise<ResultatTestMaturite[]> {
+    throw new Error('not implemented');
+  }
 }
