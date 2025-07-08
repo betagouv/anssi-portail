@@ -4,7 +4,7 @@
   import axios from 'axios';
   import GraphiqueAnneau from '../test-maturite/GraphiqueAnneau.svelte';
   import type { Serie } from '../test-maturite/Serie';
-  import LegendeAnneauSessionGroupe from '../test-maturite/LegendeAnneauSessionGroupe.svelte';
+  import LegendeAnneau from '../test-maturite/LegendeAnneau.svelte';
 
   type Statistiques = {
     utilisateursInscrits: number;
@@ -68,7 +68,7 @@
     >
     <div class="donnees-graphiques">
       <GraphiqueAnneau {serie} />
-      <LegendeAnneauSessionGroupe {serie} />
+      <LegendeAnneau {serie} />
     </div>
   </div>
 {/if}
