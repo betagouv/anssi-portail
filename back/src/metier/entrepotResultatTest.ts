@@ -15,4 +15,5 @@ export interface EntrepotResultatTest {
   ceuxDeSessionGroupe(code: string): Promise<ResultatTestMaturite[]>;
 
   taille(): Promise<number>;
+  tous(): Promise<ResultatTestMaturite[]>;
 }

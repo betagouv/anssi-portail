@@ -13,8 +13,11 @@ export type DemandeAide = {
   identifiantAidant?: string;
 };
 
+export type StatistiquesMonAideCyber = { nombreDiagnostics: number };
+
 export interface AdaptateurMonAideCyber {
   creeDemandeAide: (demandeAide: DemandeAide) => Promise<void>;
+  statistiques: () => Promise<StatistiquesMonAideCyber>;
 }
 
 const adaptateurMonAideCyber = (): AdaptateurMonAideCyber => {
@@ -53,7 +56,26 @@ const adaptateurMonAideCyber = (): AdaptateurMonAideCyber => {
     }
   };
 
-  return { creeDemandeAide };
+  const statistiques = async (): Promise<StatistiquesMonAideCyber> => {
+    try {
+      const reponse = await axios.get(
+        `${process.env.MON_AIDE_CYBER_URL_BASE}/api/statistiques`
+      );
+      return { nombreDiagnostics: reponse.data.nombreDiagnostics };
+    } catch (e: unknown | Error) {
+      if (
+        axios.isAxiosError(e) &&
+        e.response &&
+        e.response.status >= 400 &&
+        e.response.status < 500
+      ) {
+        throw new Error(e.response.data.message);
+      }
+      throw e;
+    }
+  };
+
+  return { creeDemandeAide, statistiques };
 };
 
 export const fabriqueAdaptateurMonAideCyber = () =>

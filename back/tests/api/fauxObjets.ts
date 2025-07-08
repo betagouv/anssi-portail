@@ -15,6 +15,7 @@ import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee';
+import { adaptateurMonAideCyberVide } from '../../src/infra/adaptateurMonAideCyberVide';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -123,7 +124,7 @@ export const fauxMiddleware: Middleware = {
   verifieModeMaintenance: async (_, __, suite) => suite(),
 };
 
-const fauxAdaptateurMonAideCyber = { creeDemandeAide: () => Promise.resolve() };
+const fauxAdaptateurMonAideCyber = adaptateurMonAideCyberVide();
 
 const fauxGenerateurCodeSessionDeGroupe = {
   genere: async () => 'hello',
