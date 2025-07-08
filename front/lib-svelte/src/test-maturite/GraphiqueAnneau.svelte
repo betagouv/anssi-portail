@@ -83,22 +83,35 @@
     <path
       class={`secteur-${index} secteur`}
       d="M {secteur.premierPointExterieur.x} {secteur.premierPointExterieur.y}
-         A {rayonExterieur} {rayonExterieur} 0 {secteur.arcLarge ? 1 : 0} 1 {secteur.secondPointExterieur.x} {secteur.secondPointExterieur.y}
+         A {rayonExterieur} {rayonExterieur} 0 {secteur.arcLarge
+        ? 1
+        : 0} 1 {secteur.secondPointExterieur.x} {secteur.secondPointExterieur.y}
          L {secteur.premierPointInterieur.x} {secteur.premierPointInterieur.y}
-         A {rayonInterieur} {rayonInterieur} 0 {secteur.arcLarge ? 1 : 0} 0 {secteur.secondPointInterieur.x} {secteur.secondPointInterieur.y}
+         A {rayonInterieur} {rayonInterieur} 0 {secteur.arcLarge
+        ? 1
+        : 0} 0 {secteur.secondPointInterieur.x} {secteur.secondPointInterieur.y}
          Z"
-    ><title>{`${serie[index].libelle} : ${serie[index].valeur} (${Math.round(pourcentages[index])}%)`}</title></path>
+      ><title
+        >{`${serie[index].libelle} : ${serie[index].valeur} (${Math.round(pourcentages[index])}%)`}</title
+      ></path
+    >
   {/each}
 </svg>
 
-<style>
+<style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
   .total-participants {
     font-weight: bold;
   }
 
   svg {
-    width: 260px;
-    height: 260px;
+    width: 240px;
+    height: 240px;
+
+    @include a-partir-de(sm) {
+      width: 260px;
+      height: 260px;
+    }
   }
 
   .secteur {
