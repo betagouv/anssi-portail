@@ -58,8 +58,11 @@ const ressourceResultatsDeTest = ({
       body('reponses')
         .custom((reponses) =>
           Object.keys(reponses).every((cle) => {
-            const valeur = parseInt(reponses[cle]);
-            return Number.isInteger(valeur) && valeur >= 1 && valeur <= 5;
+            if (!Number.isInteger(reponses[cle])) {
+              return false;
+            }
+            const valeur = Number(reponses[cle]);
+            return valeur >= 1 && valeur <= 5;
           })
         )
         .withMessage(
