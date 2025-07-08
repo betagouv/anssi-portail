@@ -32,10 +32,13 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
     );
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private async traduitEnResultatTestMaturite(donneesTestMaturite: any) {
+  private async traduitEnResultatTestMaturite(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    donneesTestMaturite: any,
+    avecUtilisateur: boolean = true
+  ) {
     const utilisateur: Utilisateur | undefined =
-      donneesTestMaturite.email_utilisateur_hache
+      avecUtilisateur && donneesTestMaturite.email_utilisateur_hache
         ? await this.entrepotUtilisateur.parEmailHache(
             donneesTestMaturite.email_utilisateur_hache
           )
@@ -96,7 +99,12 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
     return Number(resultat[0].count);
   }
 
-  async tous(): Promise<ResultatTestMaturite[]> {
-    throw new Error('not implemented');
+  async tousEnOmettantUtilisateur(): Promise<ResultatTestMaturite[]> {
+    const resultats = await this.knex('resultats_test');
+    return Promise.all(
+      resultats.map((resultat) =>
+        this.traduitEnResultatTestMaturite(resultat, false)
+      )
+    );
   }
 }

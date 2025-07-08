@@ -31,7 +31,7 @@ export const calculeStatistiques = async ({
   adaptateurMonAideCyber: AdaptateurMonAideCyber;
 }): Promise<Statistiques> => {
   const { nombreDiagnostics } = await adaptateurMonAideCyber.statistiques();
-  const tousLesTests = await entrepotResultatTest.tous();
+  const tousLesTests = await entrepotResultatTest.tousEnOmettantUtilisateur();
   const listeDesNiveaux: IdNiveauMaturite[] = tousLesTests.map((test) =>
     test.niveau()
   );
