@@ -2,6 +2,7 @@
   import { pourcentagesSerie, type Serie, totalSerie } from './Serie';
 
   export let serie: Serie;
+  export let nomDeLaDonnee: string;
 
   $: pourcentages = pourcentagesSerie(serie);
 
@@ -63,21 +64,17 @@
 </script>
 
 <svg id="radar" viewBox="-130 -130 260 260" xmlns="http://www.w3.org/2000/svg">
-  <text
-    class="total-participants"
-    x="0"
-    y="0"
-    text-anchor="middle"
-    font-size="40">{totalSerie(serie)}</text
+  <text class="total" x="0" y="0" text-anchor="middle" font-size="40"
+    >{totalSerie(serie)}</text
   >
   <text
-    class="libelle-total-participants"
+    class="libelle-total"
     x="0"
     y="15px"
     font-size="16"
     dominant-baseline="hanging"
     text-anchor="middle"
-    >Participants
+    >{nomDeLaDonnee}
   </text>
   {#each calculeLesPointsDesSecteurs() as secteur, index (index)}
     <path
@@ -100,7 +97,7 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
-  .total-participants {
+  .total {
     font-weight: bold;
   }
 

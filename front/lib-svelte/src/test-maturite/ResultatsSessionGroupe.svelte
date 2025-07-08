@@ -76,7 +76,7 @@
       <h2>Répartition des niveaux de maturité cyber de cette session</h2>
       <div class="repartition-niveaux-maturite">
         {#if resultatsSessionGroupe && resultatsSessionGroupe.nombreParticipants > 0}
-          <GraphiqueAnneau {serie} />
+          <GraphiqueAnneau {serie} nomDeLaDonnee="Participants" />
           <LegendeAnneau {serie} />
         {:else}
           <div>Pas de résultat, rechargez la page</div>
