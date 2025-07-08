@@ -10,7 +10,7 @@
   import RadarSessionGroupe from './RadarSessionGroupe.svelte';
   import TuilesMaturiteSessionGroupe from './TuilesMaturiteSessionGroupe.svelte';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
-  import LegendeAnneauSessionGroupe from './LegendeAnneauSessionGroupe.svelte';
+  import LegendeAnneau from './LegendeAnneau.svelte';
   import LegendeRadarSessionGroupe from './LegendeRadarSessionGroupe.svelte';
 
   type ResumeNiveau = {
@@ -77,7 +77,7 @@
       <div class="repartition-niveaux-maturite">
         {#if resultatsSessionGroupe && resultatsSessionGroupe.nombreParticipants > 0}
           <GraphiqueAnneau {serie} />
-          <LegendeAnneauSessionGroupe {serie} />
+          <LegendeAnneau {serie} />
         {:else}
           <div>Pas de résultat, rechargez la page</div>
         {/if}
