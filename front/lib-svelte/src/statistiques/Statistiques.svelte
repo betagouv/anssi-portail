@@ -67,7 +67,7 @@
       tests réalisés.</span
     >
     <div class="donnees-graphiques">
-      <GraphiqueAnneau {serie} />
+      <GraphiqueAnneau {serie} nomDeLaDonnee="tests réalisés" />
       <LegendeAnneau {serie} />
     </div>
   </div>
