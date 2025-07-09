@@ -107,6 +107,7 @@
     .donnees-graphiques {
       display: flex;
       flex-direction: column;
+      align-self: center;
       gap: 48px;
       @include a-partir-de(sm) {
         align-items: center;
