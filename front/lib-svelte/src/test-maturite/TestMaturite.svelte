@@ -14,9 +14,9 @@
   import { profilStore } from '../stores/profil.store';
   import Hero from '../ui/Hero.svelte';
   import PartageTest from './PartageTest.svelte';
-  import OngletsTest from './OngletsTest.svelte';
   import ComparaisonTest from './ComparaisonTest.svelte';
   import { onMount } from 'svelte';
+  import { derived } from 'svelte/store';
 
   let afficheResultats = false;
   let introFaite = false;
@@ -40,8 +40,7 @@
       $questionnaireStore.toutesLesReponses[
         $questionnaireStore.questionCourante
       ];
-    if (contenuTest)
-      contenuTest.scrollIntoView({ behavior: 'smooth' });
+    if (contenuTest) contenuTest.scrollIntoView({ behavior: 'smooth' });
   }
 
   function valideReponse() {
@@ -64,8 +63,7 @@
     id: string;
   };
 
-  const utilisateurEstConnecte = async () =>
-    profilStore.utilisateurEstConnecte();
+  const utilisateurEstConnecte = () => profilStore.utilisateurEstConnecte();
 
   async function obtiensResultat() {
     const reponse = await axios.post<CreationTest>('/api/resultats-test', {
@@ -76,7 +74,7 @@
       codeSessionGroupe,
     });
     const { id } = reponse.data;
-    const estConnecte = await utilisateurEstConnecte();
+    const estConnecte = utilisateurEstConnecte();
     if (estConnecte) {
       window.location.href = '/ma-maturite';
     } else {
@@ -117,6 +115,18 @@
     organisateurSession = parametres.has('organisateur');
   });
 
+  const aDejaUnTest = derived<typeof profilStore, boolean>(
+    profilStore,
+    ($profilStore, set) => {
+      if ($profilStore) {
+        axios.get('/api/resultats-test/dernier').then(() => {
+          set(true);
+        });
+      }
+    },
+    false
+  );
+
   $: enSessionGroupe = !!codeSessionGroupe;
   $: organisateurSessionGroupe = enSessionGroupe && organisateurSession;
 </script>
@@ -137,8 +147,6 @@
       ? { nom: 'Maturité cyber', lien: '/ma-maturite' }
       : undefined}
   />
-
-  <OngletsTest bind:ongletActif />
 
   {#if ongletActif === 'votre-organisation'}
     <section class="test-maturite">
@@ -176,7 +184,7 @@
                         bind:group={reponseCourante}
                         value={index}
                       />
-                      <span>{index+1}.&nbsp;{proposition}</span>
+                      <span>{index + 1}.&nbsp;{proposition}</span>
                     </label>
                   {/each}
                 </div>
@@ -250,6 +258,14 @@
             </div>
           </div>
         {:else}
+          {#if $aDejaUnTest}
+            <lab-anssi-lien
+              href="/ma-maturite"
+              titre="Retour"
+              icone="arrow-go-back-line"
+              positionIcone="gauche"
+            ></lab-anssi-lien>
+          {/if}
           <div class="contenu-test">
             <div class="introduction">
               <h2>Quelle est la maturité cyber de votre organisation ?</h2>
