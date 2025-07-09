@@ -45,7 +45,7 @@
       mesure={mesures.utilisateursInscrits}
     />
     <Tuile
-      description="Test de maturité cyber"
+      description="Tests de maturité cyber"
       image="stat-test-maturite"
       mesure={mesures.testsMaturite.total}
     />
