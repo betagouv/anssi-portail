@@ -10,7 +10,7 @@
   import ComparaisonTest from './ComparaisonTest.svelte';
   import OngletsTest from './OngletsTest.svelte';
   import { profilStore } from '../stores/profil.store';
-  import EncartDeRecommandationSelonMaturite from "./EncartDeRecommandationSelonMaturite.svelte";
+  import EncartDeRecommandationSelonMaturite from './EncartDeRecommandationSelonMaturite.svelte';
 
   export let affichePubMsc = true;
   export let afficheRappelReponses = false;
@@ -45,6 +45,19 @@
   description="Ce résultat nous permet de vous guider et de vous fournir les informations et les outils essentiels pour agir sur votre maturité cyber."
   ariane={$profilStore ? 'Maturité cyber' : 'Tester votre maturité cyber'}
 />
+
+
+{#if $profilStore}
+  <section class="refaire-test">
+    <div class="contenu-section">
+      <p>
+        Mesurez l’évolution de votre maturité cyber pour savoir où vous en êtes et quelles actions renforcer.
+        <lab-anssi-lien
+          href="/test-maturite" apparence="lien-texte" titre="Débuter le test"></lab-anssi-lien>
+      </p>
+    </div>
+  </section>
+{/if}
 
 <OngletsTest bind:ongletActif />
 
@@ -110,3 +123,9 @@
 {:else}
   <ComparaisonTest testRealise={true} />
 {/if}
+
+<style lang="scss">
+  .refaire-test {
+    padding: 48px var(--gouttiere) 0;
+  }
+</style>

@@ -25,3 +25,9 @@
     </div>
   </section>
 {/if}
+
+<style lang="scss">
+  .section-onglets {
+    padding: 32px var(--gouttiere) 0;
+  }
+</style>
