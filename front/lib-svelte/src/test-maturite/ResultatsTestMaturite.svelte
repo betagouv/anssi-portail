@@ -1,16 +1,17 @@
 <script lang="ts">
   import Hero from '../ui/Hero.svelte';
   import ComparaisonTest from './ComparaisonTest.svelte';
-  import OngletsTest from './OngletsTest.svelte';
+  import OngletsTest, { type CleOnglet } from './OngletsTest.svelte';
   import { profilStore } from '../stores/profil.store';
   import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
   import PropositionRefaireTest from './PropositionRefaireTest.svelte';
+  import HistoriqueTests from './HistoriqueTests.svelte';
 
   export let affichePubMsc = true;
   export let afficheRappelReponses = false;
   export let animeTuiles = true;
 
-  let ongletActif: 'votre-organisation' | 'comparaison' = 'votre-organisation';
+  let ongletActif: CleOnglet = 'historique';
 </script>
 
 <Hero
@@ -19,12 +20,14 @@
   ariane={$profilStore ? 'Maturité cyber' : 'Tester votre maturité cyber'}
 />
 
-<PropositionRefaireTest/>
+<PropositionRefaireTest />
 
 <OngletsTest bind:ongletActif />
 
 {#if ongletActif === 'votre-organisation'}
-  <ResultatsMonOrganisation {animeTuiles} {affichePubMsc} {afficheRappelReponses}/>
+  <ResultatsMonOrganisation {animeTuiles} {affichePubMsc} {afficheRappelReponses} />
+{:else if ongletActif === 'historique' }
+  <HistoriqueTests />
 {:else}
   <ComparaisonTest testRealise={true} />
 {/if}

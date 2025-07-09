@@ -1,10 +1,13 @@
+<script context="module" lang="ts">
+  export type CleOnglet = 'votre-organisation' | 'comparaison' | 'historique';
+</script>
+
 <script lang="ts">
   import Onglet from '../ui/Onglet.svelte';
   import ConteneurOnglets from '../ui/ConteneurOnglets.svelte';
   import { profilStore } from '../stores/profil.store';
 
-  export let ongletActif: 'votre-organisation' | 'comparaison' =
-    'votre-organisation';
+  export let ongletActif: CleOnglet = 'votre-organisation';
 </script>
 
 {#if $profilStore}
@@ -15,6 +18,8 @@
           bind:ongletActif
           cetOnglet="votre-organisation"
           labelOnglet="Maturité cyber de votre organisation"
+        ></Onglet>
+        <Onglet bind:ongletActif cetOnglet="historique" labelOnglet="Historique"
         ></Onglet>
         <Onglet
           bind:ongletActif
