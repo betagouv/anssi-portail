@@ -6,9 +6,12 @@
   <section class="refaire-test">
     <div class="contenu-section">
       <p>
-        Mesurez l’évolution de votre maturité cyber pour savoir où vous en êtes et quelles actions renforcer.
+        Vous avez mené un plan d'action cyber et souhaitez mesurer vos progrès ?
         <lab-anssi-lien
-          href="/test-maturite" apparence="lien-texte" titre="Débuter le test"></lab-anssi-lien>
+          href="/test-maturite"
+          apparence="lien-texte"
+          titre="Refaire le test"
+        ></lab-anssi-lien>
       </p>
     </div>
   </section>
