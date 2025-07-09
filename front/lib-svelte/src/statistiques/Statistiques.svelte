@@ -97,6 +97,10 @@
       line-height: 2rem;
       font-weight: bold;
       margin: 0;
+      @include a-partir-de(sm) {
+        font-size: 1.75rem;
+        line-height: 2.25rem;
+      }
     }
 
     .description {
