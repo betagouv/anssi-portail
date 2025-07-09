@@ -5,6 +5,7 @@
   import GraphiqueAnneau from '../test-maturite/GraphiqueAnneau.svelte';
   import type { Serie } from '../test-maturite/Serie';
   import LegendeAnneau from '../test-maturite/LegendeAnneau.svelte';
+  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
 
   type Statistiques = {
     utilisateursInscrits: number;
@@ -29,9 +30,10 @@
     const reponse = await axios.get<Statistiques>('/api/statistiques');
     mesures = reponse.data;
     Object.entries(mesures.testsMaturite.parNiveau);
-    for (const [libelle, valeur] of Object.entries(
+    for (const [idNiveau, valeur] of Object.entries(
       mesures.testsMaturite.parNiveau
     )) {
+      const libelle = niveauxMaturite.find(niveau=>niveau.id === idNiveau)!.label;
       serie.push({ libelle, valeur });
     }
   });
