@@ -1,3 +1,7 @@
+<script lang="ts">
+
+</script>
+
 <div class="conteneur-scrollable">
   <div class="conteneur-onglet">
     <slot />

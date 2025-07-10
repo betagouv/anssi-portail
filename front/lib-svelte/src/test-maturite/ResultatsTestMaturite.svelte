@@ -1,17 +1,37 @@
 <script lang="ts">
   import Hero from '../ui/Hero.svelte';
   import ComparaisonTest from './ComparaisonTest.svelte';
-  import OngletsTest, { type CleOnglet } from './OngletsTest.svelte';
+  import OngletsTest, {
+    type CleOnglet,
+    clesOnglet,
+  } from './OngletsTest.svelte';
   import { profilStore } from '../stores/profil.store';
   import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
   import PropositionRefaireTest from './PropositionRefaireTest.svelte';
   import HistoriqueTests from './HistoriqueTests.svelte';
+  import { onMount } from 'svelte';
 
   export let affichePubMsc = true;
   export let afficheRappelReponses = false;
   export let animeTuiles = true;
 
-  let ongletActif: CleOnglet = 'historique';
+  let ongletActif: CleOnglet | undefined;
+
+  const changeOngletActif = () => {
+    const onglet = window.location.hash.slice(1);
+    ongletActif = clesOnglet.includes(onglet) ? onglet : 'votre-organisation';
+  };
+
+  onMount(() => {
+    window.addEventListener('hashchange', changeOngletActif);
+    changeOngletActif();
+  });
+
+  $: {
+    if (ongletActif) {
+      history.pushState(null, '', `${window.location.pathname}#${ongletActif}`);
+    }
+  }
 </script>
 
 <Hero
@@ -25,8 +45,12 @@
 <OngletsTest bind:ongletActif />
 
 {#if ongletActif === 'votre-organisation'}
-  <ResultatsMonOrganisation {animeTuiles} {affichePubMsc} {afficheRappelReponses} />
-{:else if ongletActif === 'historique' }
+  <ResultatsMonOrganisation
+    {animeTuiles}
+    {affichePubMsc}
+    {afficheRappelReponses}
+  />
+{:else if ongletActif === 'historique'}
   <HistoriqueTests />
 {:else}
   <ComparaisonTest testRealise={true} />

@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
-  export type CleOnglet = 'votre-organisation' | 'comparaison' | 'historique';
+  export const clesOnglet = ['votre-organisation', 'comparaison', 'historique'];
+  export type CleOnglet = (typeof clesOnglet)[number];
 </script>
 
 <script lang="ts">
@@ -7,10 +8,10 @@
   import ConteneurOnglets from '../ui/ConteneurOnglets.svelte';
   import { profilStore } from '../stores/profil.store';
 
-  export let ongletActif: CleOnglet = 'votre-organisation';
+  export let ongletActif: CleOnglet | undefined;
 </script>
 
-{#if $profilStore}
+{#if $profilStore && ongletActif}
   <section class="section-onglets">
     <div class="contenu-section">
       <ConteneurOnglets>
