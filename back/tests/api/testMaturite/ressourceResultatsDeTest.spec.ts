@@ -12,8 +12,10 @@ import { TestRealise } from '../../../src/bus/evenements/testRealise';
 import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
 import { encodeSession } from '../cookie';
 import { ProprieteTestRevendiquee } from '../../../src/bus/evenements/proprieteTestRevendiquee';
-import { jeanneDupont } from '../objetsPretsALEmploi';
+import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
+import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
+import { Utilisateur } from '../../../src/metier/utilisateur';
 
 const REGEX_UUID =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
@@ -357,6 +359,113 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       const resultatSauvegarde = (await entrepotResultatTest.tous())[0];
 
       assert.equal(resultatSauvegarde.codeSessionGroupe, 'ABC2ED');
+    });
+  });
+
+  describe('sur requête GET', () => {
+    describe("si l'utilisateur est connecté", () => {
+      let cookie: string;
+
+      beforeEach(() => {
+        cookie = encodeSession({
+          email: jeanneDupont.email,
+          token: 'token-jwt-ok',
+        });
+      });
+
+      it('répond 200', async () => {
+        const reponse = await request(serveur)
+          .get('/api/resultats-test')
+          .set('Cookie', [cookie]);
+
+        assert.equal(reponse.status, 200);
+      });
+
+      async function ajouteUnResultatDeTest(
+        id: string,
+        utilisateur: Utilisateur
+      ) {
+        await entrepotResultatTest.ajoute(
+          new ResultatTestMaturite({
+            secteur: 'A',
+            region: 'FR-NOR',
+            id,
+            utilisateur,
+            reponses: {},
+            tailleOrganisation: '01',
+          })
+        );
+      }
+
+      it('renvoie les résultats de test', async () => {
+        await ajouteUnResultatDeTest('test-id-1', jeanneDupont);
+        await ajouteUnResultatDeTest('test-id-2', jeanneDupont);
+
+        const reponse = await request(serveur)
+          .get('/api/resultats-test')
+          .set('Cookie', [cookie]);
+
+        assert.equal(reponse.body.length, 2);
+        assert.equal(reponse.body[0].id, 'test-id-1');
+        assert.equal(reponse.body[1].id, 'test-id-2');
+      });
+
+      it("renvoie uniquement les résultats de test de l'utilisateur courant", async () => {
+        await ajouteUnResultatDeTest('test-id-3', hectorDurant);
+
+        const reponse = await request(serveur)
+          .get('/api/resultats-test')
+          .set('Cookie', [cookie]);
+
+        assert.equal(reponse.body.length, 0);
+      });
+
+      it("ne renvoie pas l'utilisateur", async () => {
+        await ajouteUnResultatDeTest('test-id-1', jeanneDupont);
+
+        const reponse = await request(serveur)
+          .get('/api/resultats-test')
+          .set('Cookie', [cookie]);
+
+        assert.equal(reponse.body[0].utilisateur, undefined);
+      });
+
+      it('renvoie les informations nécessaires du test', async () => {
+        await entrepotResultatTest.ajoute(
+          new ResultatTestMaturite({
+            secteur: 'A',
+            region: 'FR-NOR',
+            id: 'test-id-1',
+            utilisateur: jeanneDupont,
+            reponses: {
+              pilotage: 5,
+              budget: 5,
+              'prise-en-compte-risque': 5,
+              'ressources-humaines': 5,
+              'adoption-solutions': 5,
+              posture: 5,
+            },
+            tailleOrganisation: '01',
+            dateRealisation: new Date(2025, 8, 11)
+          })
+        );
+
+        const reponse = await request(serveur)
+          .get('/api/resultats-test')
+          .set('Cookie', [cookie]);
+
+        const resultatTest = reponse.body[0];
+        assert.equal(resultatTest.niveau, 'optimal');
+        assert.equal(new Date(resultatTest.dateRealisation).getTime(), new Date(2025, 8, 11).getTime());
+      });
+    });
+
+    describe("si l'utilisateur n'est pas connecté", () => {
+      it('répond 401', async () => {
+        const reponse = await request(serveur).get('/api/resultats-test');
+
+        assert.equal(reponse.status, 401);
+      });
     });
   });
 });

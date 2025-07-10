@@ -7,6 +7,17 @@ export class EntrepotResultatTestMemoire
   extends EntrepotMemoire<ResultatTestMaturite>
   implements EntrepotResultatTest
 {
+  async pourUtilisateur(
+    utilisateur: Utilisateur
+  ): Promise<ResultatTestMaturite[]> {
+    return this.entites
+      .filter((entite) => entite.utilisateur === utilisateur)
+      .map(
+        (entite) =>
+          new ResultatTestMaturite({ ...entite })
+      );
+  }
+
   async ceuxDeSessionGroupe(code: string): Promise<ResultatTestMaturite[]> {
     return this.entites
       .filter((entite) => entite.codeSessionGroupe === code)
