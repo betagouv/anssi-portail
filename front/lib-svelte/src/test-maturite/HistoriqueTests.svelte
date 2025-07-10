@@ -7,7 +7,7 @@
 
   onMount(async () => {
     const reponse = await axios.get<ResultatTest[]>('/api/resultats-test');
-    resultatsTest = reponse.data;
+    resultatsTest = reponse.data.sort((a, b) => new Date(b.dateRealisation).getTime() - new Date(a.dateRealisation).getTime());
   });
 </script>
 
