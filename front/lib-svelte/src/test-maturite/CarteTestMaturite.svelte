@@ -22,7 +22,7 @@
   $: dateFormatee = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long' }).format(new Date(resultatTest.dateRealisation));
 </script>
 
-<a href="#" class="carte">
+<a href="#historique" class="carte">
   <span class="date">{dateFormatee}</span>
   <h3>{libelleNiveau}</h3>
   <p class="description">{description}</p>
