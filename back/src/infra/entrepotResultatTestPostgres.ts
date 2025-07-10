@@ -49,6 +49,7 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
       utilisateur,
       tailleOrganisation: donneesTestMaturite.taille_organisation,
       codeSessionGroupe: donneesTestMaturite.code_session_groupe,
+      dateRealisation: donneesTestMaturite.date_realisation,
     });
   }
 
@@ -82,8 +83,14 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
   }
 
   async ajoute(resultatTest: ResultatTestMaturite): Promise<void> {
-    const { utilisateur, tailleOrganisation, codeSessionGroupe, ...reste } =
-      resultatTest;
+    const {
+      utilisateur,
+      tailleOrganisation,
+      codeSessionGroupe,
+      dateRealisation: _dateRealisation,
+      ...reste
+    } = resultatTest;
+    // On ne veut pas insérer la date de réalisation qui est définie par postgres par défaut
     await this.knex('resultats_test').insert({
       ...reste,
       taille_organisation: tailleOrganisation,
@@ -105,6 +112,17 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
       resultats.map((resultat) =>
         this.traduitEnResultatTestMaturite(resultat, false)
       )
+    );
+  }
+
+  async pourUtilisateur(
+    utilisateur: Utilisateur
+  ): Promise<ResultatTestMaturite[]> {
+    const resultats = await this.knex('resultats_test').where({
+      email_utilisateur_hache: this.adaptateurHachage.hache(utilisateur.email),
+    });
+    return Promise.all(
+      resultats.map((resultat) => this.traduitEnResultatTestMaturite(resultat))
     );
   }
 }

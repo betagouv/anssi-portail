@@ -14,6 +14,7 @@ export type DonneesCreationResultatTestMaturite = {
   reponses: ReponsesTestMaturite;
   id?: string;
   codeSessionGroupe?: string;
+  dateRealisation?: Date;
 };
 
 export const tousLesIdNiveauMaturite = [
@@ -45,6 +46,7 @@ export class ResultatTestMaturite {
   reponses: ReponsesTestMaturite;
   codeSessionGroupe?: string;
   utilisateur: Utilisateur | undefined;
+  dateRealisation: Date | undefined;
 
   constructor({
     region,
@@ -54,6 +56,7 @@ export class ResultatTestMaturite {
     id,
     codeSessionGroupe,
     utilisateur,
+    dateRealisation,
   }: DonneesCreationResultatTestMaturite) {
     this.utilisateur = utilisateur;
     this.region = region;
@@ -62,6 +65,7 @@ export class ResultatTestMaturite {
     this.reponses = reponses;
     this.codeSessionGroupe = codeSessionGroupe;
     this.id = id || randomUUID();
+    this.dateRealisation = dateRealisation;
   }
 
   revendiquePropriete(utilisateur: Utilisateur) {

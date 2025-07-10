@@ -16,4 +16,6 @@ export interface EntrepotResultatTest {
 
   taille(): Promise<number>;
   tousEnOmettantUtilisateur(): Promise<ResultatTestMaturite[]>;
+
+  pourUtilisateur(utilisateur: Utilisateur): Promise<ResultatTestMaturite[]>;
 }

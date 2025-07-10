@@ -117,6 +117,27 @@ const ressourceResultatsDeTest = ({
       reponse.status(201).send({ id: resultatTest.id });
     }
   );
+  routeur.get(
+    '/',
+    middleware.verifieJWT,
+    middleware.ajouteUtilisateurARequete(
+      entrepotUtilisateur,
+      adaptateurHachage
+    ),
+    async (requete: Request, reponse: Response) => {
+      const resultatsDeTest = await entrepotResultatTest.pourUtilisateur(
+        requete.utilisateur
+      );
+
+      reponse.send(
+        resultatsDeTest.map((resultat) => ({
+          id: resultat.id,
+          niveau: resultat.niveau(),
+          dateRealisation: resultat.dateRealisation,
+        }))
+      );
+    }
+  );
   return routeur;
 };
 
