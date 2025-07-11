@@ -3,7 +3,7 @@ export type EtapeTest = {
   question: string;
   propositions: string[];
   id: IdRubrique | 'infos-complementaires';
-}
+};
 
 export type Question = {
   titre: string;
@@ -35,11 +35,11 @@ export const questions: Question[] = [
     question:
       'Quelle est la prise de conscience des risques cyber au sein de votre organisation&nbsp;?',
     propositions: [
-      "Les responsables sous-estiment le risque de cyberattaques pour leur organisation.",
-      "Les responsables ont conscience de l’existence de risques cyber mais n’en mesurent pas l’ampleur.",
-      "Un recensement des données et processus à protéger en priorité a été effectué.",
+      'Les responsables sous-estiment le risque de cyberattaques pour leur organisation.',
+      'Les responsables ont conscience de l’existence de risques cyber mais n’en mesurent pas l’ampleur.',
+      'Un recensement des données et processus à protéger en priorité a été effectué.',
       "Une analyse de risque approfondie de l'organisation a été réalisée.",
-      "La gestion des risques cyber est pleinement intégrée à la stratégie globale de gestion des risques.",
+      'La gestion des risques cyber est pleinement intégrée à la stratégie globale de gestion des risques.',
     ],
   },
   {
@@ -61,9 +61,9 @@ export const questions: Question[] = [
     question:
       'Comment est pilotée la cybersécurité de votre organisation&nbsp;?',
     propositions: [
-      "La cybersécurité ne fait pas l’objet d’actions spécifiques.",
+      'La cybersécurité ne fait pas l’objet d’actions spécifiques.',
       "Des actions ponctuelles peuvent être menées mais sans plan d'action cyber structuré.",
-      "Une première liste d’actions prioritaires à mettre en œuvre a été établie.",
+      'Une première liste d’actions prioritaires à mettre en œuvre a été établie.',
       "Un plan d'action complet et tenu à jour structure l’action cyber de l’organisation.",
       "Les objectifs cyber sont intégrés dans la stratégie globale de l'organisation.",
     ],
@@ -75,9 +75,9 @@ export const questions: Question[] = [
     propositions: [
       "L'organisation ne dispose d'aucune ressource dédiée à la cybersécurité.",
       'L’organisation dispose d’une personne référente sur les enjeux cyber, en plus de ses missions habituelles.',
-      "Une personne est, à temps plein, responsable des enjeux de cybersécurité.",
-      "Une équipe épaule la personne responsable des enjeux de cybersécurité.",
-      "Un(e) directeur(ice) cyber siège au CODIR.",
+      'Une personne est, à temps plein, responsable des enjeux de cybersécurité.',
+      'Une équipe épaule la personne responsable des enjeux de cybersécurité.',
+      'Un(e) directeur(ice) cyber siège au CODIR.',
     ],
   },
   {
@@ -86,10 +86,10 @@ export const questions: Question[] = [
     question:
       'Quels sont les moyens budgétaires alloués à la cybersécurité&nbsp;?',
     propositions: [
-      "Aucun.",
+      'Aucun.',
       'Des dépenses occasionnelles sur la cybersécurité sont autorisées.',
       'Une part du budget informatique est alloué à la cybersécurité.',
-      "Une ligne budgétaire est dédiée à la cybersécurité.",
+      'Une ligne budgétaire est dédiée à la cybersécurité.',
       "La ligne dédiée à la cybersécurité est égale > ou = à 10% du budget informatique de l'organisation.",
     ],
   },
@@ -99,14 +99,16 @@ export const questions: Question[] = [
     question:
       "Quels produits ou services cyber sont utilisés au sein de l'organisation&nbsp;?",
     propositions: [
-      "Aucun.",
+      'Aucun.',
       'Un antivirus est a minima installé sur les postes informatiques.',
       "Une ou plusieurs solutions visant à renforcer la protection des systèmes d'information sont déployées.",
-      "Un audit de sécurité approfondi a été réalisé et des solutions en matière de détection et de réponse à incidents ont été ajoutées.",
+      'Un audit de sécurité approfondi a été réalisé et des solutions en matière de détection et de réponse à incidents ont été ajoutées.',
       "L'organisation dispose d'un panel complet de services et d'outils cyber intégrés et réalise des audits réguliers.",
     ],
   },
 ];
+
+export type ReponsesResultatTest = Record<IdRubrique, number>;
 
 export const etapesTestMaturite: EtapeTest[] = [
   ...questions,
