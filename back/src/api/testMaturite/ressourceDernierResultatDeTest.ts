@@ -23,7 +23,10 @@ const ressourceDernierResultatDeTest = ({
         reponse.sendStatus(404);
         return;
       }
-      reponse.send({ reponses: resultatTest.reponses });
+      reponse.send({
+        reponses: resultatTest.reponses,
+        dateRealisation: resultatTest.dateRealisation,
+      });
     }
   );
   return routeur;
