@@ -16,9 +16,12 @@
   export let animeTuiles = true;
 
   let ongletActif: CleOnglet | undefined;
+  let idResultatTest: string | undefined;
 
   const changeOngletActif = () => {
-    const onglet = window.location.hash.slice(1);
+    const ongletRiche = window.location.hash.slice(1).split('/');
+    const onglet = ongletRiche[0];
+    idResultatTest = ongletRiche?.[1];
     ongletActif = clesOnglet.includes(onglet) ? onglet : 'votre-organisation';
   };
 
@@ -29,7 +32,12 @@
 
   $: {
     if (ongletActif) {
-      history.pushState(null, '', `${window.location.pathname}#${ongletActif}`);
+      if (ongletActif !== 'historique') idResultatTest = undefined;
+      history.pushState(
+        null,
+        '',
+        `${window.location.pathname}#${ongletActif}${idResultatTest ? '/' + idResultatTest : ''}`
+      );
     }
   }
 </script>
@@ -51,7 +59,7 @@
     {afficheRappelReponses}
   />
 {:else if ongletActif === 'historique'}
-  <HistoriqueTests />
+  <HistoriqueTests {idResultatTest} />
 {:else}
   <ComparaisonTest testRealise={true} />
 {/if}

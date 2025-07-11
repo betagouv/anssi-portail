@@ -5,6 +5,8 @@
   import { onMount } from 'svelte';
   import axios from 'axios';
 
+  export let idResultatTest: string | undefined;
+
   let resultatsTest: ResultatsParAnnee = {};
 
   type ResultatsParAnnee = Record<number, ResultatTest[]>;
@@ -30,21 +32,27 @@
     .sort((a, b) => b - a);
 </script>
 
-<section>
-  <div class="contenu-section">
-    <h2>Historique de votre maturité cyber</h2>
-    {#each annees as annee (annee)}
-      <div class="annee">
-        <h3>{annee}</h3>
-        <div class="cartes">
-          {#each resultatsTest[Number(annee)] as resultatTest (resultatTest.id)}
-            <CarteTestMaturite {resultatTest} />
-          {/each}
-        </div>
-      </div>
-    {/each}
+{#if idResultatTest}
+  <div>
+    <span>Test réalisé le ...</span>
   </div>
-</section>
+{:else}
+  <section>
+    <div class="contenu-section">
+      <h2>Historique de votre maturité cyber</h2>
+      {#each annees as annee (annee)}
+        <div class="annee">
+          <h3>{annee}</h3>
+          <div class="cartes">
+            {#each resultatsTest[Number(annee)] as resultatTest (resultatTest.id)}
+              <CarteTestMaturite {resultatTest} />
+            {/each}
+          </div>
+        </div>
+      {/each}
+    </div>
+  </section>
+{/if}
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
