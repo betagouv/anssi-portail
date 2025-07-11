@@ -64,16 +64,27 @@ describe('La ressource qui gère le dernier résultat de test', () => {
         const reponse = await requeteGET();
 
         assert.equal(reponse.status, 200);
-        assert.deepEqual(reponse.body, {
-          reponses: {
-            'prise-en-compte-risque': 2,
-            pilotage: 3,
-            budget: 5,
-            'ressources-humaines': 3,
-            'adoption-solutions': 2,
-            posture: 3,
-          },
+        assert.deepEqual(reponse.body.reponses, {
+          'prise-en-compte-risque': 2,
+          pilotage: 3,
+          budget: 5,
+          'ressources-humaines': 3,
+          'adoption-solutions': 2,
+          posture: 3,
         });
+      });
+
+      it('renvoie la date de réalisation du test', async () => {
+        await entrepotResultatTest.ajoute(
+          new ResultatTestMaturite({
+            ...donneesResultatTestCorrectes(),
+            dateRealisation: new Date(2025, 5, 11),
+          })
+        );
+
+        const reponse = await requeteGET();
+
+        assert.equal(new Date(reponse.body.dateRealisation).getTime(), new Date(2025, 5, 11).getTime());
       });
 
       it("renvoie une erreur 404 lorsque l'utilisateur n'a pas de test", async () => {
