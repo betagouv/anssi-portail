@@ -14,6 +14,7 @@
   export let affichePubMsc = true;
   export let afficheRappelReponses = false;
   export let animeTuiles = true;
+  export let dateRealisationDernierTest : Date | undefined = undefined;
 
   let ongletActif: CleOnglet | undefined;
   let idResultatTest: string | undefined;
@@ -57,6 +58,7 @@
     {animeTuiles}
     {affichePubMsc}
     {afficheRappelReponses}
+    dateRealisation={dateRealisationDernierTest}
   />
 {:else if ongletActif === 'historique'}
   <HistoriqueTests {idResultatTest} />
