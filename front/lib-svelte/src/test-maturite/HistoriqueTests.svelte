@@ -46,6 +46,16 @@
 </script>
 
 {#if resultatTestSelectionne}
+  <section class="section-retour-historique">
+    <div class="contenu-section">
+      <lab-anssi-lien
+        href="/ma-maturite#historique"
+        titre="Retour"
+        icone="arrow-go-back-line"
+        positionIcone="gauche"
+      ></lab-anssi-lien>
+    </div>
+  </section>
   <ResultatsMonOrganisation
     animeTuiles={false}
     affichePubMsc={false}
@@ -76,6 +86,10 @@
   section {
     padding-top: 32px;
     padding-bottom: 72px;
+  }
+
+  .section-retour-historique {
+    padding: 32px var(--gouttiere) 8px;
   }
 
   h2 {
