@@ -134,6 +134,7 @@ const ressourceResultatsDeTest = ({
           id: resultat.id,
           niveau: resultat.niveau(),
           dateRealisation: resultat.dateRealisation,
+          reponses: resultat.reponses,
         }))
       );
     }

@@ -446,7 +446,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
               posture: 5,
             },
             tailleOrganisation: '01',
-            dateRealisation: new Date(2025, 8, 11)
+            dateRealisation: new Date(2025, 8, 11),
           })
         );
 
@@ -456,7 +456,18 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
         const resultatTest = reponse.body[0];
         assert.equal(resultatTest.niveau, 'optimal');
-        assert.equal(new Date(resultatTest.dateRealisation).getTime(), new Date(2025, 8, 11).getTime());
+        assert.equal(
+          new Date(resultatTest.dateRealisation).getTime(),
+          new Date(2025, 8, 11).getTime()
+        );
+        assert.deepEqual(resultatTest.reponses, {
+          pilotage: 5,
+          budget: 5,
+          'prise-en-compte-risque': 5,
+          'ressources-humaines': 5,
+          'adoption-solutions': 5,
+          posture: 5,
+        });
       });
     });
 
