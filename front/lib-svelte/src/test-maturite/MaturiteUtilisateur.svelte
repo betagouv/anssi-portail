@@ -5,10 +5,13 @@
   import { questionnaireStore } from './stores/questionnaire.store';
   import type { ReponsesResultatTest } from './TestMaturite.donnees';
 
+  let dateRealisationDernierTest: Date | undefined;
+
   questionnaireStore.initialise();
 
   type DernierResultatTest = {
     reponses: ReponsesResultatTest;
+    dateRealisation: string;
   };
 
   onMount(async () => {
@@ -17,6 +20,7 @@
         '/api/resultats-test/dernier'
       );
       const reponses = reponseHttp.data.reponses;
+      dateRealisationDernierTest = new Date(reponseHttp.data.dateRealisation);
       questionnaireStore.chargeReponses(reponses);
     } catch (e) {
       if (e?.status === 404) {
@@ -32,4 +36,5 @@
   affichePubMsc={false}
   afficheRappelReponses={true}
   animeTuiles={false}
+  {dateRealisationDernierTest}
 />
