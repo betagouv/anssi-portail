@@ -5,11 +5,13 @@
     dateRealisation: string;
     niveau: IdNiveau;
     id: string;
+    reponses: ReponsesResultatTest;
   };
 </script>
 
 <script lang="ts">
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import type { ReponsesResultatTest } from './TestMaturite.donnees';
 
   export let resultatTest: ResultatTest;
 

@@ -1,5 +1,5 @@
 import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.donnees';
-import type { IdRubrique } from './TestMaturite.donnees';
+import type { ReponsesResultatTest } from './TestMaturite.donnees';
 
 export type ElementSerie = {
   valeur: number;
@@ -9,7 +9,7 @@ export type Serie = ElementSerie[];
 
 export type SerieRadar = {
   id: IdNiveau;
-  valeurs: Record<IdRubrique, number>;
+  valeurs: ReponsesResultatTest;
   couleur: string;
 };
 

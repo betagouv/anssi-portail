@@ -1,5 +1,5 @@
 import { derived, writable } from 'svelte/store';
-import type { IdRubrique } from '../TestMaturite.donnees';
+import type { ReponsesResultatTest } from '../TestMaturite.donnees';
 
 export type Questionnaire = {
   questionCourante: number;
@@ -29,8 +29,8 @@ export const questionnaireStore = {
     });
   },
 
-  chargeReponses(reponses:Record<IdRubrique, number>) {
-    update((state)=>{
+  chargeReponses(reponses: ReponsesResultatTest) {
+    update((state) => {
       state.toutesLesReponses[0] = reponses['prise-en-compte-risque'] - 1;
       state.toutesLesReponses[1] = reponses.posture - 1;
       state.toutesLesReponses[2] = reponses.pilotage - 1;
@@ -38,8 +38,8 @@ export const questionnaireStore = {
       state.toutesLesReponses[4] = reponses.budget - 1;
       state.toutesLesReponses[5] = reponses['adoption-solutions'] - 1;
       return state;
-    })
-  }
+    });
+  },
 };
 
 export const resultatsQuestionnaire = derived(

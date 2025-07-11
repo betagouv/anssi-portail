@@ -1,14 +1,14 @@
 <script lang="ts">
+  import axios from 'axios';
+  import { onMount } from 'svelte';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
   import { questionnaireStore } from './stores/questionnaire.store';
-  import { onMount } from 'svelte';
-  import type { IdRubrique } from './TestMaturite.donnees';
-  import axios from 'axios';
+  import type { ReponsesResultatTest } from './TestMaturite.donnees';
 
   questionnaireStore.initialise();
 
   type DernierResultatTest = {
-    reponses: Record<IdRubrique, number>;
+    reponses: ReponsesResultatTest;
   };
 
   onMount(async () => {

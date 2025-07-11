@@ -1,21 +1,21 @@
 <script lang="ts">
   import axios from 'axios';
-  import { type Serie, type SerieRadar } from './Serie';
   import { onMount } from 'svelte';
   import {
     type IdNiveau,
     niveauxMaturite,
   } from '../niveaux-maturite/NiveauxMaturite.donnees';
-  import type { IdRubrique } from './TestMaturite.donnees';
-  import RadarSessionGroupe from './RadarSessionGroupe.svelte';
-  import TuilesMaturiteSessionGroupe from './TuilesMaturiteSessionGroupe.svelte';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeAnneau from './LegendeAnneau.svelte';
   import LegendeRadarSessionGroupe from './LegendeRadarSessionGroupe.svelte';
+  import RadarSessionGroupe from './RadarSessionGroupe.svelte';
+  import { type Serie, type SerieRadar } from './Serie';
+  import type { ReponsesResultatTest } from './TestMaturite.donnees';
+  import TuilesMaturiteSessionGroupe from './TuilesMaturiteSessionGroupe.svelte';
 
   type ResumeNiveau = {
     total: number;
-    moyennes: Record<IdRubrique, number>;
+    moyennes: ReponsesResultatTest;
   };
   type ResultatsSessionGroupe = {
     nombreParticipants: number;
