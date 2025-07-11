@@ -26,7 +26,7 @@
   }).format(new Date(resultatTest.dateRealisation));
 </script>
 
-<a href="#historique" class="carte">
+<a href="#historique/{resultatTest.id}" class="carte">
   <div class="illustration-niveau">
     <img
       class="plante"
