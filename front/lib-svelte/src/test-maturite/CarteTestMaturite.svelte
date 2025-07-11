@@ -91,7 +91,8 @@
       align-items: center;
       position: relative;
       img {
-        width: 72px;
+        transform: scale(55%);
+        transform-origin: bottom center;
         z-index: 1;
       }
 
