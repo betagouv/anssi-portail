@@ -4,16 +4,20 @@
   } from './CarteTestMaturite.svelte';
   import { onMount } from 'svelte';
   import axios from 'axios';
+  import { questionnaireStore } from './stores/questionnaire.store';
+  import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
 
   export let idResultatTest: string | undefined;
 
-  let resultatsTest: ResultatsParAnnee = {};
+  let resultatsTest: ResultatTest[] = [];
+  let resultatsTestParAnnee: ResultatsParAnnee = {};
 
   type ResultatsParAnnee = Record<number, ResultatTest[]>;
 
   onMount(async () => {
     const reponse = await axios.get<ResultatTest[]>('/api/resultats-test');
-    resultatsTest = reponse.data
+    resultatsTest = reponse.data;
+    resultatsTestParAnnee = resultatsTest
       .sort(
         (a, b) =>
           new Date(b.dateRealisation).getTime() -
@@ -27,15 +31,27 @@
       }, {} as ResultatsParAnnee);
   });
 
-  $: annees = Object.keys(resultatsTest)
+  $: annees = Object.keys(resultatsTestParAnnee)
     .map((a) => Number(a))
     .sort((a, b) => b - a);
+
+  $: resultatTestSelectionne = idResultatTest
+    ? resultatsTest.find((resultat) => resultat.id === idResultatTest)
+    : undefined;
+
+  $: {
+    if (resultatTestSelectionne)
+      questionnaireStore.chargeReponses(resultatTestSelectionne.reponses);
+  }
 </script>
 
-{#if idResultatTest}
-  <div>
-    <span>Test réalisé le ...</span>
-  </div>
+{#if resultatTestSelectionne}
+  <ResultatsMonOrganisation
+    animeTuiles={false}
+    affichePubMsc={false}
+    afficheRappelReponses
+    dateRealisation={new Date(resultatTestSelectionne.dateRealisation)}
+  />
 {:else}
   <section>
     <div class="contenu-section">
@@ -44,7 +60,7 @@
         <div class="annee">
           <h3>{annee}</h3>
           <div class="cartes">
-            {#each resultatsTest[Number(annee)] as resultatTest (resultatTest.id)}
+            {#each resultatsTestParAnnee[Number(annee)] as resultatTest (resultatTest.id)}
               <CarteTestMaturite {resultatTest} />
             {/each}
           </div>
