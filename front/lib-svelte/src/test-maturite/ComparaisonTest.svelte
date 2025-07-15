@@ -3,6 +3,7 @@
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeAnneau from './LegendeAnneau.svelte';
   import LegendeRadarSessionGroupe from './LegendeRadarSessionGroupe.svelte';
+  import PartageTest from './PartageTest.svelte';
   import RadarSessionGroupe from './RadarSessionGroupe.svelte';
   import type { Serie, SerieRadar } from './Serie';
 
@@ -14,18 +15,20 @@
     { libelle: 'optimal', valeur: 3 },
     { libelle: 'intermédiaire', valeur: 1 },
   ];
-  let seriesRadar: SerieRadar = {
-    id: 'confirme',
-    couleur: '#456789',
-    valeurs: {
-      'adoption-solutions': 1,
-      'prise-en-compte-risque': 1,
-      'ressources-humaines': 1,
-      budget: 1,
-      pilotage: 1,
-      posture: 1,
+  let seriesRadar: SerieRadar[] = [
+    {
+      id: 'confirme',
+      couleur: '#456789',
+      valeurs: {
+        'adoption-solutions': 1,
+        'prise-en-compte-risque': 1,
+        'ressources-humaines': 1,
+        budget: 1,
+        pilotage: 1,
+        posture: 1,
+      },
     },
-  };
+  ];
 </script>
 
 <section class="comparaison">
@@ -54,12 +57,6 @@
           </div>
         </div>
       </section>
-
-      <p class="description-test-realise">
-        Améliorez l’expérience pour vous et les autres organisations en
-        partageant le test de maturité.
-      </p>
-      <BoutonsPartageTest />
     {:else}
       <h4>Bientôt disponible pour votre organisation.</h4>
       <p>
@@ -72,6 +69,7 @@
     {/if}
   </div>
 </section>
+<PartageTest />
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;

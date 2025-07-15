@@ -45,3 +45,21 @@
     />
   </button>
 </div>
+
+<style lang="scss">
+  .boutons-partage {
+    padding: 0;
+    display: flex;
+    gap: 16px;
+
+    a {
+      &:after {
+        display: none;
+      }
+    }
+
+    .bouton {
+      padding: 8px;
+    }
+  }
+</style>
