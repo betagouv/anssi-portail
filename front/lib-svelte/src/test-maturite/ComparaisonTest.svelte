@@ -5,13 +5,18 @@
   import RadarSessionGroupe from './RadarSessionGroupe.svelte';
   import type { Serie, SerieRadar } from './Serie';
   import ResumeRadarComparaison from './ResumeRadarComparaison.svelte';
-  import { type IdNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import {
+    type IdNiveau,
+    niveauxMaturite,
+  } from '../niveaux-maturite/NiveauxMaturite.donnees';
 
   export let testRealise = false;
 
   const niveauCourant: IdNiveau = 'confirme';
 
-  const libelleNiveauCourant = niveauxMaturite.find(niveau=>niveau.id === niveauCourant)!.label;
+  const libelleNiveauCourant = niveauxMaturite.find(
+    (niveau) => niveau.id === niveauCourant
+  )!.label;
 
   let serie: Serie = [
     { libelle: 'Insuffisant', valeur: 2 },
@@ -55,7 +60,7 @@
       <h2>Répartition des organisations</h2>
       <div class="repartition-niveaux-maturite">
         <GraphiqueAnneau {serie} nomDeLaDonnee="organisations" />
-        <LegendeAnneau {serie} actif={libelleNiveauCourant}/>
+        <LegendeAnneau {serie} actif={libelleNiveauCourant} />
       </div>
     </div>
   </section>
@@ -97,7 +102,6 @@
     .contenu-section {
       display: flex;
       flex-direction: column;
-      align-items: center;
       gap: 48px;
 
       .repartition-niveaux-maturite {
@@ -106,6 +110,9 @@
         align-items: center;
         justify-content: space-evenly;
         gap: 56px;
+        @include a-partir-de(md) {
+          flex-direction: row;
+        }
       }
     }
   }
@@ -118,14 +125,15 @@
       flex-direction: column;
       gap: 32px;
 
-      h2 {
-        margin-bottom: 32px;
+      @include a-partir-de(md) {
+        gap: 48px;
       }
 
-      @include a-partir-de(sm) {
-        align-items: center;
-        justify-content: space-around;
-        flex-direction: row;
+      h2 {
+        margin-bottom: 32px;
+        @include a-partir-de(md) {
+          margin: 0;
+        }
       }
 
       .message-information {
