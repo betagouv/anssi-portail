@@ -87,4 +87,11 @@
       flex-direction: row;
     }
   }
+
+  .message-information {
+    font-size: 0.75rem;
+    line-height: 1.5rem;
+    padding: 24px 0;
+    color: #666666;
+  }
 </style>
