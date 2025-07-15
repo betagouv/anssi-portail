@@ -1,52 +1,8 @@
 <script lang="ts">
-  import type { Rubrique } from './TestMaturite.donnees';
   import type { SerieRadar } from './Serie';
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import { rubriques } from './TestMaturite.donnees';
 
-  export let rubriques: Rubrique[] = [
-    {
-      id: 'pilotage',
-      label: 'Pilotage de la sécurité',
-      ancrageTexte: 'start',
-      alignementVertical: 'middle',
-      lettre: 'C',
-    },
-    {
-      id: 'budget',
-      label: 'Budget',
-      ancrageTexte: 'start',
-      alignementVertical: 'hanging',
-      lettre: 'D',
-    },
-    {
-      id: 'ressources-humaines',
-      label: 'Ressources humaines',
-      ancrageTexte: 'end',
-      alignementVertical: 'hanging',
-      lettre: 'E',
-    },
-    {
-      id: 'adoption-solutions',
-      label: 'Adoption des solutions cyber',
-      ancrageTexte: 'end',
-      alignementVertical: 'middle',
-      lettre: 'F',
-    },
-    {
-      id: 'prise-en-compte-risque',
-      label: 'Prise en compte du risque',
-      ancrageTexte: 'end',
-      alignementVertical: 'auto',
-      lettre: 'A',
-    },
-    {
-      id: 'posture',
-      label: "Posture à l'égard de la cyber",
-      ancrageTexte: 'start',
-      alignementVertical: 'auto',
-      lettre: 'B',
-    },
-  ];
   export let series: SerieRadar[];
 
   const tailleRadar = 200;

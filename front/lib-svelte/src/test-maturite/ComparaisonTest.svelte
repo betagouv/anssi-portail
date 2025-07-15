@@ -4,7 +4,7 @@
   import PartageTest from './PartageTest.svelte';
   import RadarSessionGroupe from './RadarSessionGroupe.svelte';
   import type { Serie, SerieRadar } from './Serie';
-  import LegendeRadarComparaison from './LegendeRadarComparaison.svelte';
+  import ResumeRadarComparaison from './ResumeRadarComparaison.svelte';
 
   export let testRealise = false;
 
@@ -27,6 +27,18 @@
         posture: 1,
       },
     },
+    {
+      id: 'emergent',
+      couleur: '#72722a',
+      valeurs: {
+        'adoption-solutions': 2.5,
+        'prise-en-compte-risque': 1.8,
+        'ressources-humaines': 3,
+        budget: 4.2,
+        pilotage: 1,
+        posture: 1.2,
+      },
+    },
   ];
 </script>
 
@@ -45,7 +57,7 @@
     <div class="contenu-section">
       <h2>Répartition des réponses</h2>
       <RadarSessionGroupe series={seriesRadar} />
-      <LegendeRadarComparaison />
+      <ResumeRadarComparaison series={seriesRadar}/>
       <div class="message-information">
         Le résultat obtenu est une évaluation indicative basée sur un modèle
         élaboré par l’ANSSI. La maturité cyber n’est pas une évaluation du

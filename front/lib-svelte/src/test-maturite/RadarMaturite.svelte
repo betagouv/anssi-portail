@@ -1,53 +1,9 @@
 <script lang="ts">
-  import type { IdRubrique, Rubrique } from './TestMaturite.donnees';
+  import { type IdRubrique, rubriques } from './TestMaturite.donnees';
 
   export let resultats: Record<IdRubrique, number | null>;
-  export let rubriques: Rubrique[] = [
-    {
-      id: 'pilotage',
-      label: 'Pilotage de la sécurité',
-      ancrageTexte: 'start',
-      alignementVertical: 'middle',
-      lettre: 'C',
-    },
-    {
-      id: 'budget',
-      label: 'Budget',
-      ancrageTexte: 'start',
-      alignementVertical: 'hanging',
-      lettre: 'D',
-    },
-    {
-      id: 'ressources-humaines',
-      label: 'Ressources humaines',
-      ancrageTexte: 'end',
-      alignementVertical: 'hanging',
-      lettre: 'E',
-    },
-    {
-      id: 'adoption-solutions',
-      label: 'Adoption des solutions cyber',
-      ancrageTexte: 'end',
-      alignementVertical: 'middle',
-      lettre: 'F',
-    },
-    {
-      id: 'prise-en-compte-risque',
-      label: 'Prise en compte du risque',
-      ancrageTexte: 'end',
-      alignementVertical: 'auto',
-      lettre: 'A',
-    },
-    {
-      id: 'posture',
-      label: "Posture à l'égard de la cyber",
-      ancrageTexte: 'start',
-      alignementVertical: 'auto',
-      lettre: 'B',
-    },
-  ];
 
-  $: rubriquesTrieesParLettre = rubriques.toSorted((a, b) =>
+  const rubriquesTrieesParLettre = rubriques.toSorted((a, b) =>
     a.lettre > b.lettre ? 1 : -1
   );
 
