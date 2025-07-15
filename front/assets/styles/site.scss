@@ -65,6 +65,17 @@ button {
   font-family: var(--fonts);
 }
 
+h2 {
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  font-weight: bold;
+  margin: 0;
+  @include a-partir-de(md) {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+}
+
 a {
   color: var(--noir);
   display: flex;
