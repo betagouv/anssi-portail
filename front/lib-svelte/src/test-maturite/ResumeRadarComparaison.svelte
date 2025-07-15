@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import { type IdNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { SerieRadar } from './Serie';
   import { type IdRubrique, rubriques } from './TestMaturite.donnees';
 
   export let series: SerieRadar[];
+  export let actif: IdNiveau |undefined = undefined;
 
   const rubriquesTrieesParLettre = rubriques.toSorted((a, b) =>
     a.lettre > b.lettre ? 1 : -1
@@ -18,7 +19,7 @@
 
 <div class="legende">
   {#each niveauxMaturite as niveau (niveau.id)}
-    <div class="ligne-legende ligne-legende-{niveau.id}">
+    <div class="ligne-legende ligne-legende-{niveau.id}" class:actif={actif === niveau.id}>
       <span class="libelle">{niveau.label}</span>
     </div>
   {/each}
@@ -28,8 +29,10 @@
   {#each niveauxMaturite as niveau (niveau.id)}
     <details>
       <summary>
-        <span class="pastille ligne-legende-{niveau.id}"></span>
-        {niveau.label}
+        <span class:actif={actif === niveau.id}>
+          <span class="pastille ligne-legende-{niveau.id}"></span>
+          {niveau.label}
+        </span>
       </summary>
       <ol>
         {#each rubriquesTrieesParLettre as rubrique (rubrique.id)}
@@ -63,6 +66,13 @@
     display: flex;
     gap: 10px;
     align-items: center;
+    padding: 0 8px;
+
+    &.actif {
+      outline: 2px solid #fed980;
+      outline-offset: 6px;
+      border-radius: 2px;
+    }
   }
 
   .ligne-legende:before {
@@ -119,7 +129,19 @@
         display: flex;
         align-items: center;
         cursor: pointer;
-        gap: 10px;
+
+        &>span {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding-right: 8px;
+
+          &.actif{
+            outline: 2px solid #fed980;
+            outline-offset: 6px;
+            border-radius: 2px;
+          }
+        }
 
         .pastille {
           width: 14px;
