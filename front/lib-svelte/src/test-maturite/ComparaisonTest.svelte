@@ -58,14 +58,13 @@
         </div>
       </section>
     {:else}
-      <h4>Bientôt disponible pour votre organisation.</h4>
-      <p>
-        Contribuez à enrichir l’expérience pour vous et les autres organisations
-        en evaluant votre maturité cyber.
-      </p>
-      <a href="/test-maturite" class="bouton primaire">
-        Tester votre maturité cyber
-      </a>
+      <img
+        src="/assets/images/illustration-dragon-aucun-resultat.svg"
+        alt="Bientôt disponible"
+      />
+      <h4>Vous souhaitez comparer la maturité cyber de votre organisation ?</h4>
+      <p>Pour cela vous devez d’abord réaliser le test de maturité cyber.</p>
+      <a href="/test-maturite" class="bouton primaire"> Débuter le test </a>
     {/if}
   </div>
 </section>
