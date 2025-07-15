@@ -1,3 +1,10 @@
+import { CodeRegion } from '../../src/metier/referentielRegions';
+import { CodeSecteur } from '../../src/metier/referentielSecteurs';
+import { CodeTrancheEffectif } from '../../src/metier/referentielTranchesEffectifEtablissement';
+import {
+  IdNiveauMaturite,
+  ResultatTestMaturite,
+} from '../../src/metier/resultatTestMaturite';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { fauxAdaptateurRechercheEntreprise } from './fauxObjets';
 
@@ -28,3 +35,28 @@ export const hectorDurant: Utilisateur = new Utilisateur(
   },
   fauxAdaptateurRechercheEntreprise
 );
+
+export function creeResultatTest(idNiveau?: IdNiveauMaturite) {
+  const pointsParNiveau: Record<IdNiveauMaturite, number> = {
+    insuffisant: 1,
+    emergent: 2,
+    intermediaire: 3,
+    confirme: 4,
+    optimal: 5,
+  };
+  const pointDeLaReponse = pointsParNiveau[idNiveau || 'insuffisant'];
+  return new ResultatTestMaturite({
+    utilisateur: jeanneDupont,
+    region: 'FR-NOR' as CodeRegion,
+    secteur: 'J' as CodeSecteur,
+    tailleOrganisation: '51' as CodeTrancheEffectif,
+    reponses: {
+      'prise-en-compte-risque': pointDeLaReponse,
+      pilotage: pointDeLaReponse,
+      budget: pointDeLaReponse,
+      'ressources-humaines': pointDeLaReponse,
+      'adoption-solutions': pointDeLaReponse,
+      posture: pointDeLaReponse,
+    },
+  });
+}

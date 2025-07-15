@@ -1,22 +1,20 @@
-import { beforeEach, describe, it } from 'node:test';
-import { configurationDeTestDuServeur } from './fauxObjets';
-import { creeServeur } from '../../src/api/msc';
-import request from 'supertest';
 import { Express } from 'express';
 import assert from 'node:assert';
-import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
-import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
-import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest';
-import {
-  IdNiveauMaturite,
-  ResultatTestMaturite,
-} from '../../src/metier/resultatTestMaturite';
-import { CodeRegion } from '../../src/metier/referentielRegions';
-import { CodeSecteur } from '../../src/metier/referentielSecteurs';
-import { CodeTrancheEffectif } from '../../src/metier/referentielTranchesEffectifEtablissement';
+import { beforeEach, describe, it } from 'node:test';
+import request from 'supertest';
+import { creeServeur } from '../../src/api/msc';
 import { AdaptateurMonAideCyber } from '../../src/infra/adaptateurMonAideCyber';
+import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest';
+import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
+import { IdNiveauMaturite } from '../../src/metier/resultatTestMaturite';
+import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
+import { configurationDeTestDuServeur } from './fauxObjets';
+import {
+  creeResultatTest,
+  hectorDurant,
+  jeanneDupont,
+} from './objetsPretsALEmploi';
 
 describe('La ressource Statistiques', () => {
   describe('sur demande GET', () => {
@@ -60,36 +58,6 @@ describe('La ressource Statistiques', () => {
 
       assert.equal(reponse.body.servicesEtRessourcesConsultes, 1787);
     });
-
-    function creeResultatTest(niveau?: IdNiveauMaturite) {
-      let pointDeLaReponse = 1;
-      if (niveau === 'emergent') {
-        pointDeLaReponse = 2;
-      }
-      if (niveau === 'intermediaire') {
-        pointDeLaReponse = 3;
-      }
-      if (niveau === 'confirme') {
-        pointDeLaReponse = 4;
-      }
-      if (niveau === 'optimal') {
-        pointDeLaReponse = 5;
-      }
-      return new ResultatTestMaturite({
-        utilisateur: jeanneDupont,
-        region: 'FR-NOR' as CodeRegion,
-        secteur: 'J' as CodeSecteur,
-        tailleOrganisation: '51' as CodeTrancheEffectif,
-        reponses: {
-          'prise-en-compte-risque': pointDeLaReponse,
-          pilotage: pointDeLaReponse,
-          budget: pointDeLaReponse,
-          'ressources-humaines': pointDeLaReponse,
-          'adoption-solutions': pointDeLaReponse,
-          posture: pointDeLaReponse,
-        },
-      });
-    }
 
     function creeListeResultatTest(
       niveau?: IdNiveauMaturite,

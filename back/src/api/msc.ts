@@ -1,41 +1,42 @@
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import express, { json, Request, Response } from 'express';
-import rateLimit from 'express-rate-limit';
 import { IpFilter } from 'express-ipfilter';
+import rateLimit from 'express-rate-limit';
 import { ConfigurationServeur } from './configurationServeur';
+import { ressourceFavori } from './favoris/ressourceFavori';
+import { ressourceFavoris } from './favoris/ressourceFavoris';
+import { ressourceFavorisPartages } from './favoris/ressourceFavorisPartages';
 import { fournisseurChemin } from './fournisseurChemin';
+import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
 import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionOIDC';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
 import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
-import { ressourcePageProduit } from './ressourcePageProduit';
-import { ressourcePagesJekyll } from './ressourcePagesJekyll';
-import { ressourceProfil } from './ressourceProfil';
-import { ressourceAnnuaireOrganisations } from './ressourceAnnuaireOrganisations';
 import { ressourceAnnuaireDepartements } from './ressourceAnnuaireDepartements';
-import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte';
-import { ressourceUtilisateurs } from './ressourceUtilisateurs';
-import { ressourcePageConnexion } from './ressourcePageConnexion';
+import { ressourceAnnuaireOrganisations } from './ressourceAnnuaireOrganisations';
 import { ressourceAnnuaireRegions } from './ressourceAnnuaireRegions';
 import { ressourceAnnuaireSecteursActivite } from './ressourceAnnuaireSecteursActivite';
 import { ressourceAnnuaireTranchesEffectif } from './ressourceAnnuaireTranchesEffectif';
 import { ressourceContacts } from './ressourceContacts';
-import { ressourcePagesJekyllConnectees } from './ressourcePagesJekyllConnectees';
-import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide';
-import { ressourcePageCrisp } from './ressourcePageCrisp';
-import { ressourceFavoris } from './favoris/ressourceFavoris';
-import { ressourceFavori } from './favoris/ressourceFavori';
-import { ressourceFavorisPartages } from './favoris/ressourceFavorisPartages';
-import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTest';
-import { ressourceResultatDeTest } from './testMaturite/ressourceResultatDeTest';
-import { ressourceDernierResultatDeTest } from './testMaturite/ressourceDernierResultatDeTest';
-import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
-import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
-import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
+import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte';
 import { ressourceInfosSite } from './ressourceInfosSite';
+import { ressourcePageConnexion } from './ressourcePageConnexion';
+import { ressourcePageCrisp } from './ressourcePageCrisp';
+import { ressourcePageProduit } from './ressourcePageProduit';
+import { ressourcePagesJekyll } from './ressourcePagesJekyll';
+import { ressourcePagesJekyllConnectees } from './ressourcePagesJekyllConnectees';
+import { ressourceProfil } from './ressourceProfil';
 import { ressourceRetoursExperience } from './ressourceRetoursExperience';
 import { ressourceStatistiques } from './ressourceStatistiques';
+import { ressourceUtilisateurs } from './ressourceUtilisateurs';
+import { ressourceDernierResultatDeTest } from './testMaturite/ressourceDernierResultatDeTest';
+import { ressourceResultatDeTest } from './testMaturite/ressourceResultatDeTest';
+import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTest';
+import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
+import { ressourceRepartitionDesResultatsDeTest } from './testMaturite/ressourceRepartitionDesResultatsDeTest';
+import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
+import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -247,6 +248,11 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/api/statistiques', ressourceStatistiques(configurationServeur));
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
+
+  app.use(
+    '/api/repartition-resultats-test',
+    ressourceRepartitionDesResultatsDeTest(configurationServeur)
+  );
 
   app.use((_requete: Request, reponse: Response) => {
     reponse
