@@ -447,27 +447,3 @@ section {
   }
 }
 
-.comparaison {
-  .contenu-section {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
-    text-align: center;
-  }
-
-  img {
-    max-width: 282px;
-  }
-
-  h4 {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-  }
-
-  p {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    max-width: 588px;
-  }
-}
