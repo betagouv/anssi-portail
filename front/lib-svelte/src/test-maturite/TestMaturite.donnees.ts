@@ -119,3 +119,48 @@ export const etapesTestMaturite: EtapeTest[] = [
     id: 'infos-complementaires',
   },
 ];
+
+export const rubriques: Rubrique[] = [
+  {
+    id: 'pilotage',
+    label: 'Pilotage de la sécurité',
+    ancrageTexte: 'start',
+    alignementVertical: 'middle',
+    lettre: 'C',
+  },
+  {
+    id: 'budget',
+    label: 'Budget',
+    ancrageTexte: 'start',
+    alignementVertical: 'hanging',
+    lettre: 'D',
+  },
+  {
+    id: 'ressources-humaines',
+    label: 'Ressources humaines',
+    ancrageTexte: 'end',
+    alignementVertical: 'hanging',
+    lettre: 'E',
+  },
+  {
+    id: 'adoption-solutions',
+    label: 'Adoption des solutions cyber',
+    ancrageTexte: 'end',
+    alignementVertical: 'middle',
+    lettre: 'F',
+  },
+  {
+    id: 'prise-en-compte-risque',
+    label: 'Prise en compte du risque',
+    ancrageTexte: 'end',
+    alignementVertical: 'auto',
+    lettre: 'A',
+  },
+  {
+    id: 'posture',
+    label: "Posture à l'égard de la cyber",
+    ancrageTexte: 'start',
+    alignementVertical: 'auto',
+    lettre: 'B',
+  },
+];
