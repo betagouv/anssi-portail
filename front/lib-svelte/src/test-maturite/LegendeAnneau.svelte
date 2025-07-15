@@ -2,12 +2,13 @@
   import { pourcentagesSerie, type Serie } from './Serie';
 
   export let serie: Serie;
+  export let actif: string | undefined = undefined;
 </script>
 
 <div class="legende">
   {#each pourcentagesSerie(serie) as pourcentage, index (index)}
     {@const element = serie[index]}
-    <div class="ligne-legende ligne-legende-{index}">
+    <div class="ligne-legende ligne-legende-{index}" class:actif={actif === element.libelle}>
       <span class="libelle">{element.libelle}</span>
       <div>
         <span class="total">{element.valeur}</span>
@@ -37,6 +38,12 @@
 
     .total {
       font-weight: bold;
+    }
+
+    &.actif {
+      outline: 2px solid #fed980;
+      outline-offset: 8px;
+      border-radius: 2px;
     }
   }
 

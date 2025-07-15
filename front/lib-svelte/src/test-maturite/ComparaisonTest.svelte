@@ -5,15 +5,22 @@
   import RadarSessionGroupe from './RadarSessionGroupe.svelte';
   import type { Serie, SerieRadar } from './Serie';
   import ResumeRadarComparaison from './ResumeRadarComparaison.svelte';
+  import { type IdNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
 
   export let testRealise = false;
 
+  const niveauCourant: IdNiveau = 'confirme';
+
+  const libelleNiveauCourant = niveauxMaturite.find(niveau=>niveau.id === niveauCourant)!.label;
+
   let serie: Serie = [
-    { libelle: 'insuffisant', valeur: 2 },
-    { libelle: 'emergeant', valeur: 4 },
-    { libelle: 'optimal', valeur: 3 },
-    { libelle: 'intermédiaire', valeur: 1 },
+    { libelle: 'Insuffisant', valeur: 2 },
+    { libelle: 'Émergent', valeur: 4 },
+    { libelle: 'Intermédiaire', valeur: 1 },
+    { libelle: 'Confirmé', valeur: 5 },
+    { libelle: 'Optimal', valeur: 3 },
   ];
+
   let seriesRadar: SerieRadar[] = [
     {
       id: 'confirme',
@@ -48,7 +55,7 @@
       <h2>Répartition des organisations</h2>
       <div class="repartition-niveaux-maturite">
         <GraphiqueAnneau {serie} nomDeLaDonnee="organisations" />
-        <LegendeAnneau {serie} />
+        <LegendeAnneau {serie} actif={libelleNiveauCourant}/>
       </div>
     </div>
   </section>
@@ -57,7 +64,7 @@
     <div class="contenu-section">
       <h2>Répartition des réponses</h2>
       <RadarSessionGroupe series={seriesRadar} />
-      <ResumeRadarComparaison series={seriesRadar}/>
+      <ResumeRadarComparaison series={seriesRadar} actif={niveauCourant} />
       <div class="message-information">
         Le résultat obtenu est une évaluation indicative basée sur un modèle
         élaboré par l’ANSSI. La maturité cyber n’est pas une évaluation du
