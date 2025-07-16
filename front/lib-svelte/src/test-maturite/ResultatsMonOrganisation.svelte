@@ -1,18 +1,16 @@
 <script lang="ts">
-  import {
-    type IdNiveau,
-    niveauxMaturite,
-  } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
+  import EncartDeRecommandationSelonMaturite from './EncartDeRecommandationSelonMaturite.svelte';
+  import PartageTest from './PartageTest.svelte';
+  import PubliciteMesServicesCyber from './PubliciteMesServicesCyber.svelte';
+  import RadarMaturite from './RadarMaturite.svelte';
   import {
     questionnaireStore,
     resultatsQuestionnaire,
   } from './stores/questionnaire.store';
-  import TuilesMaturite from './TuilesMaturite.svelte';
-  import PubliciteMesServicesCyber from './PubliciteMesServicesCyber.svelte';
-  import RadarMaturite from './RadarMaturite.svelte';
   import { questions } from './TestMaturite.donnees';
-  import EncartDeRecommandationSelonMaturite from './EncartDeRecommandationSelonMaturite.svelte';
-  import PartageTest from './PartageTest.svelte';
+  import TuilesMaturite from './TuilesMaturite.svelte';
 
   export let affichePubMsc = true;
   export let afficheRappelReponses = false;

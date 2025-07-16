@@ -3,15 +3,15 @@
   import { onMount } from 'svelte';
   import {
     couleursDeNiveau,
-    type IdNiveau,
     niveauxMaturite,
   } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeAnneau from './LegendeAnneau.svelte';
   import LegendeRadarSessionGroupe from './LegendeRadarSessionGroupe.svelte';
   import RadarSessionGroupe from './RadarSessionGroupe.svelte';
+  import type { ReponsesResultatTest } from './ResultatsTest.type';
   import { type Serie, type SerieRadar } from './Serie';
-  import type { ReponsesResultatTest } from './TestMaturite.donnees';
   import TuilesMaturiteSessionGroupe from './TuilesMaturiteSessionGroupe.svelte';
 
   type ResumeNiveau = {

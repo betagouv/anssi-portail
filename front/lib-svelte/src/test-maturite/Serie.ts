@@ -1,5 +1,5 @@
-import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.donnees';
-import type { ReponsesResultatTest } from './TestMaturite.donnees';
+import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
+import type { ReponsesResultatTest } from './ResultatsTest.type';
 
 export type ElementSerie = {
   valeur: number;

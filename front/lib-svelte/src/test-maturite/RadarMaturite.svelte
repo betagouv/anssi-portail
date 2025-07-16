@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { type IdRubrique, rubriques } from './TestMaturite.donnees';
+  import { rubriques } from './TestMaturite.donnees';
+  import type { IdRubrique } from './TestMaturite.type';
 
   export let resultats: Record<IdRubrique, number | null>;
 

@@ -1,5 +1,5 @@
 import { derived, writable } from 'svelte/store';
-import type { ReponsesResultatTest } from '../TestMaturite.donnees';
+import type { ReponsesResultatTest } from '../ResultatsTest.type';
 
 export type Questionnaire = {
   questionCourante: number;
