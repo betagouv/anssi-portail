@@ -1,8 +1,19 @@
 <script lang="ts" generics="T extends string">
+  import { createEventDispatcher } from 'svelte';
+
   export let ongletActif: T;
   export let cetOnglet: T;
   export let labelOnglet: string;
   export let sansBordureEnBas: boolean = false;
+
+  const emet = createEventDispatcher<{
+    click: null;
+  }>();
+
+  const clic = () => {
+    emet('click');
+    ongletActif = cetOnglet;
+  };
 </script>
 
 <button
@@ -10,7 +21,7 @@
   class="onglet"
   class:active={ongletActif === cetOnglet}
   class:sansBordureEnBas
-  on:click={() => (ongletActif = cetOnglet)}
+  on:click={clic}
 >
   <span class="label">{labelOnglet}</span>
 </button>
