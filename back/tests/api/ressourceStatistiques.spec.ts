@@ -90,7 +90,7 @@ describe('La ressource Statistiques', () => {
     it('renvoie les niveaux de maturité', async () => {
       Promise.all(
         [
-          ...creeListeResultatTest('insufisant', 1),
+          ...creeListeResultatTest('insuffisant', 1),
           ...creeListeResultatTest('emergent', 2),
           ...creeListeResultatTest('intermediaire', 3),
           ...creeListeResultatTest('confirme', 4),
