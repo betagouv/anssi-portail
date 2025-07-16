@@ -1,20 +1,29 @@
 <script lang="ts">
-  import GraphiqueAnneau from './GraphiqueAnneau.svelte';
-  import LegendeAnneau from './LegendeAnneau.svelte';
-  import PartageTest from './PartageTest.svelte';
-  import RadarSessionGroupe from './RadarSessionGroupe.svelte';
-  import type { Serie, SerieRadar } from './Serie';
-  import ResumeRadarComparaison from './ResumeRadarComparaison.svelte';
+  import axios from 'axios';
+  import { onMount } from 'svelte';
   import {
     couleursDeNiveau,
     type IdNiveau,
     niveauxMaturite,
   } from '../niveaux-maturite/NiveauxMaturite.donnees';
-  import { onMount } from 'svelte';
-  import type { IdRubrique } from './TestMaturite.donnees';
-  import axios from 'axios';
+  import GraphiqueAnneau from './GraphiqueAnneau.svelte';
+  import LegendeAnneau from './LegendeAnneau.svelte';
+  import PartageTest from './PartageTest.svelte';
+  import RadarSessionGroupe from './RadarSessionGroupe.svelte';
+  import ResumeRadarComparaison from './ResumeRadarComparaison.svelte';
+  import type { Serie, SerieRadar } from './Serie';
+  import type {
+    IdRubrique,
+    ReponsesResultatTest,
+  } from './TestMaturite.donnees';
 
   export let testRealise = false;
+
+  type DernierResultatTest = {
+    reponses: ReponsesResultatTest;
+    dateRealisation: string;
+    idNiveau: IdNiveau;
+  };
 
   type RepartitionResultatsTestPourUnNiveau = {
     id: IdNiveau;
@@ -22,17 +31,24 @@
     totalNombreTests: number;
   };
 
-  const niveauCourant: IdNiveau = 'confirme';
-
   const libelleDeNiveau = (idNiveau: IdNiveau) => {
     return niveauxMaturite.find((niveau) => niveau.id === idNiveau)!.label;
   };
 
-  const libelleNiveauCourant = libelleDeNiveau(niveauCourant);
+  let niveauCourant: IdNiveau | undefined;
+  let libelleNiveauCourant: string | undefined;
   let serie: Serie = [];
   let seriesRadar: SerieRadar[] = [];
 
-  onMount(async () => {
+  async function chargeNiveauCourant() {
+    const reponse = await axios.get<DernierResultatTest>(
+      '/api/resultats-test/dernier'
+    );
+    niveauCourant = reponse.data.idNiveau;
+    libelleNiveauCourant = libelleDeNiveau(niveauCourant);
+  }
+
+  async function chargeRepartitionsDesResultats() {
     const reponse = await axios.get<RepartitionResultatsTestPourUnNiveau[]>(
       '/api/repartition-resultats-test'
     );
@@ -46,6 +62,10 @@
       couleur: couleursDeNiveau[repartionPourUnNiveau.id],
       valeurs: repartionPourUnNiveau.valeurs,
     }));
+  }
+  onMount(async () => {
+    await chargeNiveauCourant();
+    await chargeRepartitionsDesResultats();
   });
 </script>
 

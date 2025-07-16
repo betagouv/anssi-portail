@@ -10,7 +10,7 @@ import assert from 'node:assert';
 import { CodeRegion } from '../../../src/metier/referentielRegions';
 import { CodeSecteur } from '../../../src/metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../../../src/metier/referentielTranchesEffectifEtablissement';
-import { jeanneDupont } from '../objetsPretsALEmploi';
+import { creeResultatTest, jeanneDupont } from '../objetsPretsALEmploi';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource qui gère le dernier résultat de test', () => {
@@ -84,13 +84,23 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
         const reponse = await requeteGET();
 
-        assert.equal(new Date(reponse.body.dateRealisation).getTime(), new Date(2025, 5, 11).getTime());
+        assert.equal(
+          new Date(reponse.body.dateRealisation).getTime(),
+          new Date(2025, 5, 11).getTime()
+        );
       });
 
       it("renvoie une erreur 404 lorsque l'utilisateur n'a pas de test", async () => {
         const reponse = await requeteGET();
 
         assert.equal(reponse.status, 404);
+      });
+      it('renvoie le niveau du test', async () => {
+        await entrepotResultatTest.ajoute(creeResultatTest('insuffisant'));
+
+        const reponse = await requeteGET();
+
+        assert.equal(reponse.body.idNiveau, 'insuffisant');
       });
     });
 
