@@ -26,6 +26,7 @@ const ressourceDernierResultatDeTest = ({
       reponse.send({
         reponses: resultatTest.reponses,
         dateRealisation: resultatTest.dateRealisation,
+        idNiveau: resultatTest.niveau(),
       });
     }
   );
