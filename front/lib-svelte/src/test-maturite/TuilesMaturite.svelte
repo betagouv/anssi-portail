@@ -1,15 +1,19 @@
 <script lang="ts">
   import { afterUpdate } from 'svelte';
-  import { type NiveauMaturite, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import {
+    type NiveauMaturite,
+    niveauxMaturite,
+  } from '../niveaux-maturite/NiveauxMaturite.donnees';
 
   export let niveauCourant: NiveauMaturite;
   export let animeTuiles = true;
+  export let defilementAutomatique = true;
 
   $: indexNiveauCourant = niveauxMaturite.indexOf(niveauCourant);
 
   const scrolleVersTuileCourante = () => {
     let elementCourant: HTMLDivElement | null = document.querySelector(
-      '.tuile-niveau.courant',
+      '.tuile-niveau.courant'
     );
     elementCourant!.scrollIntoView({ block: 'center' });
   };
@@ -17,7 +21,9 @@
   const estPetitEcran = window.matchMedia('(max-width: 576px)').matches;
   const animation = !estPetitEcran && animeTuiles;
 
-  afterUpdate(scrolleVersTuileCourante);
+  if (defilementAutomatique) {
+    afterUpdate(scrolleVersTuileCourante);
+  }
 </script>
 
 <div class="tuiles-niveau" class:avec-animation={animation}>

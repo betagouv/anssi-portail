@@ -32,4 +32,5 @@
   afficheRappelReponses={true}
   animeTuiles={false}
   {dateRealisationDernierTest}
+  defilementAutomatique={false}
 />
