@@ -15,7 +15,7 @@
   const valeur = (idNiveau: string, idRubrique: IdRubrique) => {
     const serie = series.find((serie) => serie.id === idNiveau);
     if (!serie) return 0;
-    return serie.valeurs[idRubrique];
+    return Math.round(serie.valeurs[idRubrique] * 100) / 100;
   };
 </script>
 
