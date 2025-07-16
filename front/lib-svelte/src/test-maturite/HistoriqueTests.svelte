@@ -61,6 +61,7 @@
     affichePubMsc={false}
     afficheRappelReponses
     dateRealisation={new Date(resultatTestSelectionne.dateRealisation)}
+    defilementAutomatique={false}
   />
 {:else}
   <section>

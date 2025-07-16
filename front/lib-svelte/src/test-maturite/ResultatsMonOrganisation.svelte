@@ -18,6 +18,7 @@
   export let afficheRappelReponses = false;
   export let animeTuiles = true;
   export let dateRealisation: Date | undefined = undefined;
+  export let defilementAutomatique = true;
 
   const calculeIdNiveau = (moyenne: number): IdNiveau => {
     if (moyenne < 1) return 'insuffisant';
@@ -53,7 +54,11 @@
       <div class="date-realisation">Test réalisé le {dateFormatee}</div>
     {/if}
     <h2>Niveau de maturité le plus proche : {niveau.label}</h2>
-    <TuilesMaturite niveauCourant={niveau} {animeTuiles} />
+    <TuilesMaturite
+      niveauCourant={niveau}
+      {animeTuiles}
+      {defilementAutomatique}
+    />
     <div class="description-niveau">
       <h5>{niveau.label}</h5>
       <p>{niveau.description}</p>
