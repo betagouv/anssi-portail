@@ -75,7 +75,7 @@
   <section class="repartition-reponses">
     <div class="contenu-section">
       <h2>Répartition des réponses</h2>
-      <RadarSessionGroupe series={seriesRadar} />
+      <RadarSessionGroupe series={seriesRadar} affichageReduit />
       <ResumeRadarComparaison series={seriesRadar} actif={niveauCourant} />
       <div class="message-information">
         Le résultat obtenu est une évaluation indicative basée sur un modèle
