@@ -36,7 +36,7 @@ const resumeNiveau = (
         resultatsDuNiveau.map((r) => r.reponses[idRubrique])
       ),
     }),
-    {}
+    {} as Record<IdRubrique, number>
   ),
 });
 
@@ -63,7 +63,7 @@ export class SessionDeGroupe {
           ...previousValue,
           [idNiveau]: resultatsTest.filter((r) => r.niveau() === idNiveau),
         }),
-        {}
+        {} as Record<IdNiveauMaturite, ResultatTestMaturite[]>
       );
 
     return {
@@ -73,7 +73,7 @@ export class SessionDeGroupe {
           ...accumulateur,
           [idNiveau]: resumeNiveau(resultatsParNiveau[idNiveau]),
         }),
-        {}
+        {} as Record<IdNiveauMaturite, ResumeNiveauMaturite>
       ),
     };
   }

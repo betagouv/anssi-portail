@@ -71,6 +71,6 @@ export class RepartitionResultatsTest {
         ...rubriqueAccumulateur,
         [rubrique]: valeurDeLaRubrique(rubrique),
       };
-    }, {});
+    }, {} as Record<IdRubrique, T>);
   }
 }

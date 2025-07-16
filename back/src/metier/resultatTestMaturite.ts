@@ -23,7 +23,7 @@ export const tousLesIdNiveauMaturite = [
   'intermediaire',
   'confirme',
   'optimal',
-];
+] as const;
 
 export type IdNiveauMaturite = (typeof tousLesIdNiveauMaturite)[number];
 
@@ -34,7 +34,7 @@ export const tousLesIdRubrique = [
   'ressources-humaines',
   'adoption-solutions',
   'posture',
-];
+] as const;
 
 export type IdRubrique = (typeof tousLesIdRubrique)[number];
 
