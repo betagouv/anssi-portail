@@ -3,27 +3,19 @@
   import { onMount } from 'svelte';
   import {
     couleursDeNiveau,
-    type IdNiveau,
     niveauxMaturite,
   } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeAnneau from './LegendeAnneau.svelte';
   import PartageTest from './PartageTest.svelte';
   import RadarSessionGroupe from './RadarSessionGroupe.svelte';
+  import type { DernierResultatTest } from './ResultatsTest.type';
   import ResumeRadarComparaison from './ResumeRadarComparaison.svelte';
   import type { Serie, SerieRadar } from './Serie';
-  import type {
-    IdRubrique,
-    ReponsesResultatTest,
-  } from './TestMaturite.donnees';
+  import type { IdRubrique } from './TestMaturite.type';
 
   export let testRealise = false;
-
-  type DernierResultatTest = {
-    reponses: ReponsesResultatTest;
-    dateRealisation: string;
-    idNiveau: IdNiveau;
-  };
 
   type RepartitionResultatsTestPourUnNiveau = {
     id: IdNiveau;

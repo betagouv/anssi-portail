@@ -1,18 +1,13 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import type { DernierResultatTest } from './ResultatsTest.type';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
   import { questionnaireStore } from './stores/questionnaire.store';
-  import type { ReponsesResultatTest } from './TestMaturite.donnees';
 
   let dateRealisationDernierTest: Date | undefined;
 
   questionnaireStore.initialise();
-
-  type DernierResultatTest = {
-    reponses: ReponsesResultatTest;
-    dateRealisation: string;
-  };
 
   onMount(async () => {
     try {

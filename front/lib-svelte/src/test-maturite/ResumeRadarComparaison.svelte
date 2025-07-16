@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { type IdNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import type { SerieRadar } from './Serie';
-  import { type IdRubrique, rubriques } from './TestMaturite.donnees';
+  import { rubriques } from './TestMaturite.donnees';
+  import type { IdRubrique } from './TestMaturite.type';
 
   export let series: SerieRadar[];
-  export let actif: IdNiveau |undefined = undefined;
+  export let actif: IdNiveau | undefined = undefined;
 
   const rubriquesTrieesParLettre = rubriques.toSorted((a, b) =>
     a.lettre > b.lettre ? 1 : -1
@@ -19,7 +21,10 @@
 
 <div class="legende">
   {#each niveauxMaturite as niveau (niveau.id)}
-    <div class="ligne-legende ligne-legende-{niveau.id}" class:actif={actif === niveau.id}>
+    <div
+      class="ligne-legende ligne-legende-{niveau.id}"
+      class:actif={actif === niveau.id}
+    >
       <span class="libelle">{niveau.label}</span>
     </div>
   {/each}
@@ -130,13 +135,13 @@
         align-items: center;
         cursor: pointer;
 
-        &>span {
+        & > span {
           display: flex;
           align-items: center;
           gap: 10px;
           padding-right: 8px;
 
-          &.actif{
+          &.actif {
             outline: 2px solid #fed980;
             outline-offset: 6px;
             border-radius: 2px;

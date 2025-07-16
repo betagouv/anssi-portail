@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
-  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.donnees';
-
+  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
+  import type { ReponsesResultatTest } from './ResultatsTest.type';
   export type ResultatTest = {
     dateRealisation: string;
     niveau: IdNiveau;
@@ -11,7 +11,6 @@
 
 <script lang="ts">
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
-  import type { ReponsesResultatTest } from './TestMaturite.donnees';
 
   export let resultatTest: ResultatTest;
 

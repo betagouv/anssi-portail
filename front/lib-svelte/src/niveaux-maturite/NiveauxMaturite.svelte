@@ -1,10 +1,8 @@
 <script lang="ts">
-  import {
-    type NiveauMaturite,
-    niveauxMaturite,
-  } from './NiveauxMaturite.donnees';
-  import SelectNiveauMaturite from './SelectNiveauMaturite.svelte';
   import IllustrationNiveauMaturite from './IllustrationNiveauMaturite.svelte';
+  import { niveauxMaturite } from './NiveauxMaturite.donnees';
+  import type { NiveauMaturite } from './NiveauxMaturite.type';
+  import SelectNiveauMaturite from './SelectNiveauMaturite.svelte';
 
   const COLONNES = 5;
 
