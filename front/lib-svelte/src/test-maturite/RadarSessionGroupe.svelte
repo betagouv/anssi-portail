@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { arrondisAuCentieme } from '../utils/arrondis';
   import type { SerieRadar } from './Serie';
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import { rubriques } from './TestMaturite.donnees';
@@ -83,7 +84,7 @@
           stroke-width="3px"
         >
           <title
-            >{`${libelleSerie(serie)} / ${rubriques[index].label} : ${Math.round(serie.valeurs[rubriques[index].id] * 100) / 100}`}</title
+            >{`${libelleSerie(serie)} / ${rubriques[index].label} : ${arrondisAuCentieme(serie.valeurs[rubriques[index].id])}`}</title
           >
         </circle>
       {/each}
