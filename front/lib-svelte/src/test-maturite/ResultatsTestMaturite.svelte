@@ -42,6 +42,11 @@
       );
     }
   }
+
+  const afficheHistorique = () => {
+    idResultatTest = undefined;
+    history.pushState(null, '', `${window.location.pathname}#historique`);
+  };
 </script>
 
 <Hero
@@ -52,7 +57,7 @@
 
 <PropositionRefaireTest />
 
-<OngletsTest bind:ongletActif />
+<OngletsTest bind:ongletActif on:reclicHistorique={afficheHistorique} />
 
 {#if ongletActif === 'votre-organisation'}
   <ResultatsMonOrganisation

@@ -4,11 +4,20 @@
 </script>
 
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
   import Onglet from '../ui/Onglet.svelte';
   import ConteneurOnglets from '../ui/ConteneurOnglets.svelte';
   import { profilStore } from '../stores/profil.store';
 
   export let ongletActif: CleOnglet | undefined;
+
+  const emet = createEventDispatcher<{
+    reclicHistorique: null;
+  }>();
+
+  const reclicHistorique = () => {
+    emet('reclicHistorique');
+  };
 </script>
 
 {#if $profilStore && ongletActif}
@@ -20,7 +29,11 @@
           cetOnglet="votre-organisation"
           labelOnglet="Maturité cyber de votre organisation"
         ></Onglet>
-        <Onglet bind:ongletActif cetOnglet="historique" labelOnglet="Historique"
+        <Onglet
+          bind:ongletActif
+          cetOnglet="historique"
+          labelOnglet="Historique"
+          on:click={reclicHistorique}
         ></Onglet>
         <Onglet
           bind:ongletActif
