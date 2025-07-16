@@ -91,11 +91,12 @@
     introFaite = true;
   }
 
-  function doitMontrerPropositions() {
+  let montreProposition = false;
+  $: {
     const avecPropositions = etapesTestMaturite.filter(
       (q) => q.propositions.length > 0
     );
-    return $questionnaireStore.questionCourante < avecPropositions.length;
+    montreProposition = $questionnaireStore.questionCourante < avecPropositions.length;
   }
 
   let ongletActif: 'votre-organisation' | 'comparaison' = 'votre-organisation';
@@ -175,7 +176,7 @@
                   .question}
               </h2>
 
-              {#if doitMontrerPropositions()}
+              {#if montreProposition}
                 <div class="propositions">
                   {#each etapesTestMaturite[$questionnaireStore.questionCourante].propositions as proposition, index (proposition)}
                     <label>
