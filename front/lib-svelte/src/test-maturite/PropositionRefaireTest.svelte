@@ -9,8 +9,9 @@
         Vous avez mené un plan d'action cyber et souhaitez mesurer vos progrès ?
         <lab-anssi-lien
           href="/test-maturite"
-          apparence="lien-texte"
+          apparence="lien"
           titre="Refaire le test"
+          taille="md"
         ></lab-anssi-lien>
       </p>
     </div>
