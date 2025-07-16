@@ -1,8 +1,7 @@
+import { randomUUID } from 'node:crypto';
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 import { Utilisateur } from '../../src/metier/utilisateur';
-import { randomUUID } from 'node:crypto';
 import { EntrepotMemoire } from './entrepotMemoire';
-import { fauxAdaptateurHachage } from '../api/fauxObjets';
 
 export class EntrepotUtilisateurMemoire
   extends EntrepotMemoire<Utilisateur>
@@ -15,7 +14,8 @@ export class EntrepotUtilisateurMemoire
     utilisateur.idListeFavoris = randomUUID();
     await super.ajoute(utilisateur);
     this.utilisateurs.set(
-      fauxAdaptateurHachage.hache(utilisateur.email),
+      // Nous n'importons le fauxAdaptateurHachage de api/fauxObjets pour éviter un import cyclique
+      `${utilisateur.email}-hache`,
       utilisateur
     );
   };
