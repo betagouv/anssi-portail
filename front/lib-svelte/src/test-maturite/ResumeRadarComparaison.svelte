@@ -1,6 +1,7 @@
 <script lang="ts">
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
+  import { arrondisAuCentieme } from '../utils/arrondis';
   import type { SerieRadar } from './Serie';
   import { rubriques } from './TestMaturite.donnees';
   import type { IdRubrique } from './TestMaturite.type';
@@ -15,7 +16,7 @@
   const valeur = (idNiveau: string, idRubrique: IdRubrique) => {
     const serie = series.find((serie) => serie.id === idNiveau);
     if (!serie) return 0;
-    return Math.round(serie.valeurs[idRubrique] * 100) / 100;
+    return arrondisAuCentieme(serie.valeurs[idRubrique]);
   };
 </script>
 
