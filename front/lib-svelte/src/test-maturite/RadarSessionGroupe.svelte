@@ -1,10 +1,11 @@
 <script lang="ts">
+  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import { arrondisAuCentieme } from '../utils/arrondis';
   import type { SerieRadar } from './Serie';
-  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import { rubriques } from './TestMaturite.donnees';
 
   export let series: SerieRadar[];
+  export let affichageReduit: boolean = false;
 
   const tailleRadar = 200;
   const polaireVersCartesien = (r: number, theta: number) => ({
@@ -30,14 +31,29 @@
     niveauxMaturite.find((niveau) => niveau.id === serie.id)?.label;
 
   let coefDistanceLibelle: number = 1.1;
+  let viewBox: string;
+  let estPetitEcran: boolean = false;
+
+  function modifieViewBox() {
+    estPetitEcran = window.matchMedia('(max-width: 576px)').matches;
+
+    if (estPetitEcran) {
+      viewBox = '-220 -220 440 440';
+      coefDistanceLibelle = 1.03;
+    } else {
+      viewBox = '-600 -225 1200 450';
+      coefDistanceLibelle = 1.1;
+    }
+  }
+  modifieViewBox();
+
+  window
+    .matchMedia('(max-width: 576px)')
+    .addEventListener('change', modifieViewBox);
 </script>
 
 <div class="radar">
-  <svg
-    id="radar"
-    viewBox="-600 -225 1200 450"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg id="radar" {viewBox} xmlns="http://www.w3.org/2000/svg">
     {#each new Array(6).fill(0).map((_, index) => index) as index (index)}
       {@const theta = (index * 2 * Math.PI) / 6}
       {@const coordonnees = polaireVersCartesien(tailleRadar, theta)}
@@ -115,17 +131,31 @@
         tailleRadar * coefDistanceLibelle,
         (index * 2 * Math.PI) / 6
       )}
-      <text
-        x={coordonnees.x}
-        y={coordonnees.y}
-        text-anchor={rubrique.ancrageTexte}
-        dominant-baseline={rubrique.alignementVertical}
-        font-size="12"
-        fill="#0D0C21"
-        class="libelle-long"
-      >
-        <tspan>{rubrique.label}</tspan>
-      </text>
+      {#if affichageReduit && estPetitEcran}
+        <text
+          x={coordonnees.x}
+          y={coordonnees.y}
+          text-anchor={rubrique.ancrageTexte}
+          dominant-baseline={rubrique.alignementVertical}
+          font-size="16"
+          fill="#0D0C21"
+          class="libelle-lettre"
+        >
+          {rubrique.lettre}
+        </text>
+      {:else}
+        <text
+          x={coordonnees.x}
+          y={coordonnees.y}
+          text-anchor={rubrique.ancrageTexte}
+          dominant-baseline={rubrique.alignementVertical}
+          font-size="12"
+          fill="#0D0C21"
+          class="libelle-long"
+        >
+          <tspan>{rubrique.label}</tspan>
+        </text>
+      {/if}
     {/each}
   </svg>
 </div>
@@ -155,7 +185,13 @@
       max-height: 350px;
 
       .libelle-long {
-        font-size: 1.375rem;
+        @include a-partir-de(sm) {
+          font-size: 1.375rem;
+        }
+      }
+
+      .libelle-lettre {
+        font-weight: bold;
       }
     }
   }
