@@ -1,5 +1,4 @@
 <script lang="ts">
-
 </script>
 
 <div class="conteneur-scrollable">
@@ -10,6 +9,7 @@
 
 <style>
   .conteneur-onglet {
+    width: min-content;
     margin: 0 0 0 -0.5px;
     display: flex;
     flex-direction: row;
