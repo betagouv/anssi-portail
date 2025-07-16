@@ -4,7 +4,7 @@ typologie: ressource
 nom: Cyber&ZeroWidthSpace;Enjeux&ZeroWidthSpace;
 titreHtml: CyberEnjeux
 description: 'Former à la cybersécurité par le jeu'
-lien: https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/CyberEnJeux.zip
+lien: https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/CyberEnJeux.zip
 illustration: cyber-enjeux/cyber-enjeux.png
 avecFicheDetaillee: true
 format: Outil
@@ -23,7 +23,7 @@ liens:
     couleurFond: '#0079D0'
   - commencer:
     titre: Téléchargez les différents supports !
-    lien: https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/CyberEnJeux.zip
+    lien: https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/CyberEnJeux.zip
     illustration: cyber-enjeux/cyber-enjeux.png
     couleurFond: '#0079D0'
 ---
