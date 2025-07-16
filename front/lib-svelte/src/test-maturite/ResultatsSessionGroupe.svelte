@@ -2,6 +2,7 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import {
+    couleursDeNiveau,
     type IdNiveau,
     niveauxMaturite,
   } from '../niveaux-maturite/NiveauxMaturite.donnees';
@@ -27,14 +28,6 @@
 
   let seriesRadar: SerieRadar[];
 
-  const couleurs = {
-    insuffisant: '#6369f1',
-    emergent: '#fec54b',
-    intermediaire: '#8248a1',
-    confirme: '#f26c85',
-    optimal: '#8ed4a3',
-  };
-
   async function rechargeResultatsGroupe() {
     let codeSessionGroupe = new URLSearchParams(window.location.search).get(
       'code'
@@ -50,7 +43,7 @@
     seriesRadar = niveauxMaturite.map((niveau) => ({
       id: niveau.id,
       valeurs: resultatsSessionGroupe.resume[niveau.id].moyennes,
-      couleur: couleurs[niveau.id],
+      couleur: couleursDeNiveau[niveau.id],
     }));
   }
 

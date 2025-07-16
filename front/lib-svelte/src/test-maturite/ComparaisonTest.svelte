@@ -6,52 +6,47 @@
   import type { Serie, SerieRadar } from './Serie';
   import ResumeRadarComparaison from './ResumeRadarComparaison.svelte';
   import {
+    couleursDeNiveau,
     type IdNiveau,
     niveauxMaturite,
   } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import { onMount } from 'svelte';
+  import type { IdRubrique } from './TestMaturite.donnees';
+  import axios from 'axios';
 
   export let testRealise = false;
 
+  type RepartitionResultatsTestPourUnNiveau = {
+    id: IdNiveau;
+    valeurs: Record<IdRubrique, number>;
+    totalNombreTests: number;
+  };
+
   const niveauCourant: IdNiveau = 'confirme';
 
-  const libelleNiveauCourant = niveauxMaturite.find(
-    (niveau) => niveau.id === niveauCourant
-  )!.label;
+  const libelleDeNiveau = (idNiveau: IdNiveau) => {
+    return niveauxMaturite.find((niveau) => niveau.id === idNiveau)!.label;
+  };
 
-  let serie: Serie = [
-    { libelle: 'Insuffisant', valeur: 2 },
-    { libelle: 'Émergent', valeur: 4 },
-    { libelle: 'Intermédiaire', valeur: 1 },
-    { libelle: 'Confirmé', valeur: 5 },
-    { libelle: 'Optimal', valeur: 3 },
-  ];
+  const libelleNiveauCourant = libelleDeNiveau(niveauCourant);
+  let serie: Serie = [];
+  let seriesRadar: SerieRadar[] = [];
 
-  let seriesRadar: SerieRadar[] = [
-    {
-      id: 'confirme',
-      couleur: '#456789',
-      valeurs: {
-        'adoption-solutions': 1,
-        'prise-en-compte-risque': 1,
-        'ressources-humaines': 1,
-        budget: 1,
-        pilotage: 1,
-        posture: 1,
-      },
-    },
-    {
-      id: 'emergent',
-      couleur: '#72722a',
-      valeurs: {
-        'adoption-solutions': 2.5,
-        'prise-en-compte-risque': 1.8,
-        'ressources-humaines': 3,
-        budget: 4.2,
-        pilotage: 1,
-        posture: 1.2,
-      },
-    },
-  ];
+  onMount(async () => {
+    const reponse = await axios.get<RepartitionResultatsTestPourUnNiveau[]>(
+      '/api/repartition-resultats-test'
+    );
+    serie = reponse.data.map((repartionPourUnNiveau) => ({
+      libelle: libelleDeNiveau(repartionPourUnNiveau.id),
+      valeur: repartionPourUnNiveau.totalNombreTests,
+    }));
+
+    seriesRadar = reponse.data.map((repartionPourUnNiveau) => ({
+      id: repartionPourUnNiveau.id,
+      couleur: couleursDeNiveau[repartionPourUnNiveau.id],
+      valeurs: repartionPourUnNiveau.valeurs,
+    }));
+  });
 </script>
 
 {#if testRealise}
