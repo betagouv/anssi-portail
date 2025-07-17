@@ -10,7 +10,10 @@
   import LegendeAnneau from './LegendeAnneau.svelte';
   import PartageTest from './PartageTest.svelte';
   import RadarSessionGroupe from './RadarSessionGroupe.svelte';
-  import type { DernierResultatTest } from './ResultatsTest.type';
+  import type {
+    DernierResultatTest,
+    InfosOrganisation,
+  } from './ResultatsTest.type';
   import ResumeRadarComparaison from './ResumeRadarComparaison.svelte';
   import type { Serie, SerieRadar } from './Serie';
   import type { IdRubrique } from './TestMaturite.type';
@@ -28,16 +31,18 @@
   };
 
   let niveauCourant: IdNiveau | undefined;
+  let infosOrganisation: InfosOrganisation;
   let libelleNiveauCourant: string | undefined;
   let serie: Serie = [];
   let seriesRadar: SerieRadar[] = [];
 
-  async function chargeNiveauCourant() {
+  async function chargeDernierResultat() {
     const reponse = await axios.get<DernierResultatTest>(
       '/api/resultats-test/dernier'
     );
     niveauCourant = reponse.data.idNiveau;
     libelleNiveauCourant = libelleDeNiveau(niveauCourant);
+    infosOrganisation = reponse.data.organisation;
   }
 
   async function chargeRepartitionsDesResultats() {
@@ -64,12 +69,30 @@
     }));
   }
   onMount(async () => {
-    await chargeNiveauCourant();
+    await chargeDernierResultat();
     await chargeRepartitionsDesResultats();
   });
 </script>
 
 {#if testRealise}
+  {#if infosOrganisation}
+    <section class="filtres">
+      <div class="contenu-section">
+        <div class="tags">
+          <lab-anssi-tag label={infosOrganisation.secteur.libelle} taille="md">
+          </lab-anssi-tag>
+          <lab-anssi-tag
+            label={infosOrganisation.trancheEffectif.libelle}
+            taille="md"
+          >
+          </lab-anssi-tag>
+          <lab-anssi-tag label={infosOrganisation.region.libelle} taille="md">
+          </lab-anssi-tag>
+        </div>
+      </div>
+    </section>
+  {/if}
+
   <section class="repartion-organisations">
     <div class="contenu-section">
       <h2>Répartition des organisations</h2>
@@ -110,6 +133,9 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
+  .filtres {
+    padding: 32px var(--gouttiere) 0;
+  }
 
   .repartion-organisations {
     padding: 32px var(--gouttiere) 48px;
