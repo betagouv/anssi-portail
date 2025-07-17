@@ -1,25 +1,33 @@
+import { Express } from 'express';
+import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { Express } from 'express';
-import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
-import { configurationDeTestDuServeur } from '../fauxObjets';
 import { creeServeur } from '../../../src/api/msc';
-import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
-import { encodeSession } from '../cookie';
-import assert from 'node:assert';
+import { AdaptateurRechercheEntreprise } from '../../../src/infra/adaptateurRechercheEntreprise';
 import { CodeRegion } from '../../../src/metier/referentielRegions';
 import { CodeSecteur } from '../../../src/metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../../../src/metier/referentielTranchesEffectifEtablissement';
-import { creeResultatTest, jeanneDupont } from '../objetsPretsALEmploi';
+import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
+import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
+import { encodeSession } from '../cookie';
+import {
+  configurationDeTestDuServeur,
+  fauxAdaptateurRechercheEntreprise,
+} from '../fauxObjets';
+import { creeResultatTest, jeanneDupont } from '../objetsPretsALEmploi';
 
 describe('La ressource qui gère le dernier résultat de test', () => {
   let serveur: Express;
   let entrepotResultatTest: EntrepotResultatTestMemoire;
+  let adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   let cookieJeanneDupont: string;
 
   beforeEach(async () => {
     entrepotResultatTest = new EntrepotResultatTestMemoire();
+    adaptateurRechercheEntreprise = {
+      ...fauxAdaptateurRechercheEntreprise,
+    };
     cookieJeanneDupont = encodeSession({
       email: jeanneDupont.email,
       token: 'token',
@@ -28,6 +36,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
     await entrepotUtilisateur.ajoute(jeanneDupont);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
+      adaptateurRechercheEntreprise,
       entrepotResultatTest,
       entrepotUtilisateur,
     });
@@ -101,6 +110,35 @@ describe('La ressource qui gère le dernier résultat de test', () => {
         const reponse = await requeteGET();
 
         assert.equal(reponse.body.idNiveau, 'insuffisant');
+      });
+      it('renvoie les détails de mon organisation', async () => {
+        await entrepotResultatTest.ajoute(
+          new ResultatTestMaturite(donneesResultatTestCorrectes())
+        );
+        adaptateurRechercheEntreprise.rechercheOrganisations = async (
+          terme
+        ) => {
+          return terme === '13000766900018'
+            ? [
+                {
+                  departement: 'Nord',
+                  nom: 'Friterie',
+                  siret: '13000766900018',
+                  codeTrancheEffectif: '21',
+                  codeSecteur: 'U',
+                  codeRegion: 'FR-HDF',
+                },
+              ]
+            : [];
+        };
+
+        const reponse = await requeteGET();
+
+        assert.deepEqual(reponse.body.organisation, {
+          trancheEffectif: { code: '21', libelle: '50 à 99 salariés' },
+          secteur: { code: 'U', libelle: 'Activités extra-territoriales' },
+          region: { code: 'FR-HDF', libelle: 'Hauts-de-France' },
+        });
       });
     });
 

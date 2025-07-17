@@ -1,13 +1,13 @@
+import { Express } from 'express';
+import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { Express } from 'express';
 import { creeServeur } from '../../src/api/msc';
-import { configurationDeTestDuServeur } from './fauxObjets';
 import {
   AdaptateurRechercheEntreprise,
   ResultatRechercheEntreprise,
 } from '../../src/infra/adaptateurRechercheEntreprise';
-import assert from 'node:assert';
+import { configurationDeTestDuServeur } from './fauxObjets';
 
 describe('quand requête GET sur `/api/annuaire/organisations`', () => {
   let serveur: Express;
@@ -68,7 +68,16 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
         adaptateurAppele = true;
         termeCherche = terme;
         departementCherche = departement;
-        return [{ nom: 'un résultat', departement: '01', siret: '1234' }];
+        return [
+          {
+            nom: 'un résultat',
+            departement: '01',
+            siret: '1234',
+            codeTrancheEffectif: '01',
+            codeRegion: 'FR-ARA',
+            codeSecteur: 'D',
+          },
+        ];
       },
     };
     serveur = creeServeur({

@@ -1,4 +1,11 @@
 import axios, { AxiosError } from 'axios';
+import {
+  CodeRegion,
+  CodeRegionINSEE,
+  regions,
+} from '../metier/referentielRegions';
+import { CodeSecteur } from '../metier/referentielSecteurs';
+import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
 
 export interface AdaptateurRechercheEntreprise {
   rechercheOrganisations(
@@ -11,6 +18,9 @@ export type ResultatRechercheEntreprise = {
   nom: string;
   departement: string | null;
   siret: string;
+  codeTrancheEffectif: CodeTrancheEffectif;
+  codeSecteur: CodeSecteur | undefined;
+  codeRegion: CodeRegion | undefined;
 };
 
 const extraisDepartement = (commune: string | undefined) => {
@@ -51,10 +61,17 @@ const extraisInfosEtablissement = (
     siretRetour = resultat.matching_etablissements[0].siret;
   }
 
+  const codeRegion = regions.find(
+    (region) => region.codeINSEE === resultat.siege.region
+  )?.codeIso;
+
   return {
     nom,
     departement: departementRetour,
     siret: siretRetour,
+    codeRegion,
+    codeSecteur: resultat.section_activite_principale,
+    codeTrancheEffectif: resultat.tranche_effectif_salarie,
   };
 };
 
@@ -64,12 +81,15 @@ type ResultatSirene = {
   siege: {
     departement: string;
     siret: string;
+    region: CodeRegionINSEE;
   };
   matching_etablissements: {
     liste_enseignes: string[];
     commune: string;
     siret: string;
   }[];
+  section_activite_principale: CodeSecteur;
+  tranche_effectif_salarie: CodeTrancheEffectif;
 };
 
 export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {

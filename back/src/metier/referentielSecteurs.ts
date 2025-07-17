@@ -46,3 +46,6 @@ export const secteurs = [
 export const codesSecteur = secteurs.map((s) => s.code);
 
 export type CodeSecteur = (typeof codesSecteur)[number];
+
+export const secteurParCode = (code: CodeSecteur) =>
+  secteurs.find((secteur) => secteur.code === code)!;

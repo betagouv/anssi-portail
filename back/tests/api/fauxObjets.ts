@@ -1,21 +1,21 @@
 import { join } from 'path';
-import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { ConfigurationServeur } from '../../src/api/configurationServeur';
-import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
-import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
-import { adaptateurGestionVide } from '../../src/infra/adaptateurGestionErreurVide';
-import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
-import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi';
-import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
-import { MockCmsCrisp } from '../mockCmsCrisp';
+import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
+import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
-import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
+import { adaptateurGestionVide } from '../../src/infra/adaptateurGestionErreurVide';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
-import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee';
 import { adaptateurMonAideCyberVide } from '../../src/infra/adaptateurMonAideCyberVide';
+import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi';
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
+import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee';
+import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
+import { MockCmsCrisp } from '../mockCmsCrisp';
+import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
+import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
+import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -50,7 +50,14 @@ export const fauxAdaptateurJWT: AdaptateurJWT = {
 export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
   {
     rechercheOrganisations: async (siret: string, __: string | null) => [
-      { siret, nom: '', departement: '86' },
+      {
+        siret,
+        nom: '',
+        departement: '86',
+        codeSecteur: 'A',
+        codeRegion: 'FR-971',
+        codeTrancheEffectif: '11',
+      },
     ],
   };
 
