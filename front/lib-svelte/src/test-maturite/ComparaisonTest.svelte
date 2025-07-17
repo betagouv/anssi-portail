@@ -44,12 +44,20 @@
     const reponse = await axios.get<RepartitionResultatsTestPourUnNiveau[]>(
       '/api/repartition-resultats-test'
     );
-    serie = reponse.data.map((repartionPourUnNiveau) => ({
-      libelle: libelleDeNiveau(repartionPourUnNiveau.id),
-      valeur: repartionPourUnNiveau.totalNombreTests,
-    }));
 
-    seriesRadar = reponse.data.map((repartionPourUnNiveau) => ({
+    const repartitions = reponse.data;
+
+    serie = niveauxMaturite.map((niveau) => {
+      const repartition = repartitions.find(
+        (repartition) => repartition.id === niveau.id
+      );
+      return {
+        libelle: niveau.label,
+        valeur: repartition?.totalNombreTests ?? 0,
+      };
+    });
+
+    seriesRadar = repartitions.map((repartionPourUnNiveau) => ({
       id: repartionPourUnNiveau.id,
       couleur: couleursDeNiveau[repartionPourUnNiveau.id],
       valeurs: repartionPourUnNiveau.valeurs,
