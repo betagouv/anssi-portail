@@ -1,6 +1,6 @@
-import { ConfigurationServeur } from './configurationServeur';
 import { Request, Response, Router } from 'express';
 import { ResultatRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
+import { ConfigurationServeur } from './configurationServeur';
 
 const ressourceInformationsCreationCompte = ({
   adaptateurJWT,
@@ -34,7 +34,13 @@ const ressourceInformationsCreationCompte = ({
         email: informationsUtilisateur.email,
         prenom: informationsUtilisateur.prenom,
         nom: informationsUtilisateur.nom,
-        ...(organisation && { organisation }),
+        ...(organisation && {
+          organisation: {
+            departement: organisation.departement,
+            nom: organisation.nom,
+            siret: organisation.siret,
+          },
+        }),
         ...profilAnssi,
         domainesSpecialite: profilAnssi?.domainesSpecialite,
       });

@@ -1,11 +1,11 @@
-import { beforeEach, describe, it } from 'node:test';
 import assert from 'node:assert';
-import { configurationDeTestDuServeur, fauxMiddleware } from './fauxObjets';
-import { creeServeur } from '../../src/api/msc';
-import request from 'supertest';
 import { randomUUID } from 'node:crypto';
-import { Utilisateur } from '../../src/metier/utilisateur';
+import { beforeEach, describe, it } from 'node:test';
+import request from 'supertest';
+import { creeServeur } from '../../src/api/msc';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
+import { Utilisateur } from '../../src/metier/utilisateur';
+import { configurationDeTestDuServeur, fauxMiddleware } from './fauxObjets';
 import { jeanneDupont } from './objetsPretsALEmploi';
 
 describe('La ressource Contacts', () => {
@@ -65,7 +65,14 @@ describe('La ressource Contacts', () => {
     it('retourne les informations de contacts', async () => {
       const rechercheEntreprise: AdaptateurRechercheEntreprise = {
         rechercheOrganisations: async (_: string, __: string | null) => [
-          { siret: '', departement: '75', nom: '' },
+          {
+            siret: '',
+            departement: '75',
+            nom: '',
+            codeTrancheEffectif: '01',
+            codeRegion: 'FR-ARA',
+            codeSecteur: 'D',
+          },
         ],
       };
 

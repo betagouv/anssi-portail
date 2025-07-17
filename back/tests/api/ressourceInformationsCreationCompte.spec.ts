@@ -1,18 +1,18 @@
-import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
+import { JsonWebTokenError } from 'jsonwebtoken';
 import assert from 'node:assert';
+import { beforeEach, describe, it } from 'node:test';
+import request from 'supertest';
+import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
+import { creeServeur } from '../../src/api/msc';
+import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi';
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurJWT,
   fauxAdaptateurProfilAnssi,
   fauxAdaptateurRechercheEntreprise,
 } from './fauxObjets';
-import { creeServeur } from '../../src/api/msc';
-import request from 'supertest';
-import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import { JsonWebTokenError } from 'jsonwebtoken';
-import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
-import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi';
 
 describe("La ressource d'informations de création de compte", () => {
   let serveur: Express;
@@ -79,6 +79,9 @@ describe("La ressource d'informations de création de compte", () => {
             siret: terme,
             departement: '75',
             nom: 'MonOrganisation',
+            codeTrancheEffectif: '01',
+            codeRegion: 'FR-ARA',
+            codeSecteur: 'D',
           },
         ];
 

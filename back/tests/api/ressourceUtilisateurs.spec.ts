@@ -1,16 +1,16 @@
-import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import assert from 'node:assert';
-import { configurationDeTestDuServeur } from './fauxObjets';
-import { creeServeur } from '../../src/api/msc';
+import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
+import { creeServeur } from '../../src/api/msc';
+import { CompteCree } from '../../src/bus/evenements/compteCree';
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 import {
   fabriqueBusPourLesTests,
   MockBusEvenement,
 } from '../bus/busPourLesTests';
-import { CompteCree } from '../../src/bus/evenements/compteCree';
-import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
+import { configurationDeTestDuServeur } from './fauxObjets';
 
 describe('La ressource utilisateur', () => {
   let serveur: Express;
@@ -58,6 +58,9 @@ describe('La ressource utilisateur', () => {
           nom: '',
           departement: '',
           siret: '13000766900018',
+          codeTrancheEffectif: '01',
+          codeRegion: 'FR-ARA',
+          codeSecteur: 'D',
         },
       ];
 
@@ -94,6 +97,9 @@ describe('La ressource utilisateur', () => {
           nom: '',
           departement: '',
           siret: '13000766900018',
+          codeTrancheEffectif: '01',
+          codeRegion: 'FR-ARA',
+          codeSecteur: 'D',
         },
       ];
 

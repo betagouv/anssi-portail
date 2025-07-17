@@ -1,8 +1,8 @@
-import { describe, it } from 'node:test';
-import { Organisation, Utilisateur } from '../../src/metier/utilisateur';
 import assert from 'node:assert';
-import { fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets';
+import { describe, it } from 'node:test';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
+import { Organisation, Utilisateur } from '../../src/metier/utilisateur';
+import { fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets';
 
 describe("L'utilisateur", () => {
   const infosUtilisateur = {
@@ -40,7 +40,16 @@ describe("L'utilisateur", () => {
     const rechercheEntreprise: AdaptateurRechercheEntreprise = {
       rechercheOrganisations: async (_: string, __: string | null) => {
         nombreRecherchesEntreprise++;
-        return [{ nom: 'tif', departement: '01', siret: '98' }];
+        return [
+          {
+            nom: 'tif',
+            departement: '01',
+            siret: '98',
+            codeTrancheEffectif: '01',
+            codeRegion: 'FR-ARA',
+            codeSecteur: 'D',
+          },
+        ];
       },
     };
     const utilisateur = new Utilisateur(
