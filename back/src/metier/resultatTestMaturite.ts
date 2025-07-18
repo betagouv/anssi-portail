@@ -8,9 +8,9 @@ export type ReponsesTestMaturite = Record<string, number>;
 
 export type DonneesCreationResultatTestMaturite = {
   utilisateur: Utilisateur | undefined;
-  region: CodeRegion;
-  secteur: CodeSecteur;
-  tailleOrganisation: CodeTrancheEffectif;
+  region: CodeRegion | undefined;
+  secteur: CodeSecteur | undefined;
+  tailleOrganisation: CodeTrancheEffectif | undefined;
   reponses: ReponsesTestMaturite;
   id?: string;
   codeSessionGroupe?: string;
