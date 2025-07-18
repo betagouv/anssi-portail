@@ -1,6 +1,8 @@
 <script lang="ts">
-  let lienTest = window.location.href;
-  let urlLinkedIn = `https://www.linkedin.com/shareArticle?url=${lienTest}&title=Test de maturité Cyber`;
+  const { protocol, host } = window.location;
+  const lienTest = `${protocol}://${host}/test-maturite`;
+  const urlLinkedIn = `https://www.linkedin.com/shareArticle?url=${lienTest}&title=Test de maturité Cyber`;
+
   const partageLinkedIn = () => {
     window.open(
       urlLinkedIn,
@@ -10,7 +12,7 @@
   };
 
   const partageLien = () => {
-    navigator.clipboard.writeText(window.location.href).then(function () {
+    navigator.clipboard.writeText(lienTest).then(function () {
       alert('Adresse copiée dans le presse papier.');
     });
   };
