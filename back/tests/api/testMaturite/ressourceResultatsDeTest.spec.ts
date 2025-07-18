@@ -135,9 +135,9 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           .post('/api/resultats-test')
           .set('Cookie', [cookie])
           .send({
-            region: 'FR-971',
-            secteur: 'A',
-            tailleOrganisation: '11',
+            region: 'FR-NOR',
+            secteur: 'J',
+            tailleOrganisation: '51',
             reponses: {
               'prise-en-compte-risque': 2,
               pilotage: 3,
@@ -153,9 +153,9 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
         assert.notEqual(resultatSauvegarde, undefined);
         assert.equal(resultatSauvegarde?.utilisateur, jeanneDupont);
-        assert.equal(resultatSauvegarde!.region, 'FR-971');
-        assert.equal(resultatSauvegarde!.secteur, 'A');
-        assert.equal(resultatSauvegarde!.tailleOrganisation, '11');
+        assert.equal(resultatSauvegarde!.region, 'FR-NOR');
+        assert.equal(resultatSauvegarde!.secteur, 'J');
+        assert.equal(resultatSauvegarde!.tailleOrganisation, '51');
         assert.deepEqual(resultatSauvegarde!.reponses, {
           'prise-en-compte-risque': 2,
           pilotage: 3,

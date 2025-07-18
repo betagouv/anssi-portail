@@ -77,9 +77,10 @@ export class ResultatTestMaturite {
         null
       )
     )[0];
-    this.region = codeRegion;
-    this.secteur = codeSecteur;
-    this.tailleOrganisation = codeTrancheEffectif;
+
+    this.region = this.region ?? codeRegion;
+    this.secteur = this.secteur ?? codeSecteur;
+    this.tailleOrganisation = this.tailleOrganisation ?? codeTrancheEffectif;
   }
 
   niveau(): IdNiveauMaturite {
