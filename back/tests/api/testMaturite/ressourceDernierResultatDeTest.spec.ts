@@ -120,11 +120,13 @@ describe('La ressource qui gère le dernier résultat de test', () => {
         let codeSecteurRenvoyeParRechercheEntreprise: CodeSecteur = 'B';
         let codeRegionRenvoyeParRechercheEntreprise: CodeRegion | undefined =
           'FR-971';
+        let resultatTestMaturite: ResultatTestMaturite;
 
         beforeEach(async () => {
-          await entrepotResultatTest.ajoute(
-            new ResultatTestMaturite(donneesResultatTestCorrectes())
+          resultatTestMaturite = new ResultatTestMaturite(
+            donneesResultatTestCorrectes()
           );
+          await entrepotResultatTest.ajoute(resultatTestMaturite);
           adaptateurRechercheEntreprise.rechercheOrganisations = async (
             terme
           ) => {
@@ -158,20 +160,42 @@ describe('La ressource qui gère le dernier résultat de test', () => {
           });
         });
 
-        it("reste robuste lorsque la tranche d'effectif n'est pas définie", async () => {
-          codeTrancheEffectifRenvoyeParRechercheEntreprise = undefined;
+        describe('en cas d’absence de données dans l’API', () => {
+          it("reste robuste lorsque la tranche d'effectif n'est pas définie", async () => {
+            codeTrancheEffectifRenvoyeParRechercheEntreprise = undefined;
+            resultatTestMaturite.tailleOrganisation = undefined;
 
-          const reponse = await requeteGET();
+            const reponse = await requeteGET();
 
-          assert.equal(reponse.body.organisation.trancheEffectif, undefined);
-        });
+            assert.equal(reponse.body.organisation.trancheEffectif, undefined);
+          });
 
-        it("reste robuste lorsque la région n'est pas définie", async () => {
-          codeRegionRenvoyeParRechercheEntreprise = undefined;
+          it("reste robuste lorsque la région n'est pas définie", async () => {
+            codeRegionRenvoyeParRechercheEntreprise = undefined;
+            resultatTestMaturite.region = undefined;
 
-          const reponse = await requeteGET();
+            const reponse = await requeteGET();
 
-          assert.equal(reponse.body.organisation.region, undefined);
+            assert.equal(reponse.body.organisation.region, undefined);
+          });
+
+          it('utilise la région du test', async () => {
+            codeRegionRenvoyeParRechercheEntreprise = undefined;
+            resultatTestMaturite.region = 'FR-COM';
+
+            const reponse = await requeteGET();
+
+            assert.equal(reponse.body.organisation.region.code, 'FR-COM');
+          });
+
+          it('utilise la tranche d’effectif du test', async () => {
+            codeTrancheEffectifRenvoyeParRechercheEntreprise = undefined;
+            resultatTestMaturite.tailleOrganisation = '53';
+
+            const reponse = await requeteGET();
+
+            assert.equal(reponse.body.organisation.trancheEffectif.code, '53');
+          });
         });
       });
     });

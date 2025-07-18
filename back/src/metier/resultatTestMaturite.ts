@@ -40,9 +40,9 @@ export type IdRubrique = (typeof tousLesIdRubrique)[number];
 
 export class ResultatTestMaturite {
   id!: string;
-  region: CodeRegion;
+  region: CodeRegion | undefined;
   secteur: CodeSecteur;
-  tailleOrganisation: CodeTrancheEffectif;
+  tailleOrganisation: CodeTrancheEffectif | undefined;
   reponses: ReponsesTestMaturite;
   codeSessionGroupe?: string;
   utilisateur: Utilisateur | undefined;
