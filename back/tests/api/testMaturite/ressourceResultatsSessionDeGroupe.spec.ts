@@ -1,19 +1,18 @@
+import { Express } from 'express';
+import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import assert from 'node:assert';
-import { Express } from 'express';
-import { EntrepotSessionDeGroupe } from '../../../src/metier/entrepotSessionDeGroupe';
-import { EntrepotSessionDeGroupeMemoire } from '../../persistance/EntrepotSessionDeGroupeMemoire';
 import { creeServeur } from '../../../src/api/msc';
-import { configurationDeTestDuServeur } from '../fauxObjets';
-import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
 import { EntrepotResultatTest } from '../../../src/metier/entrepotResultatTest';
+import { EntrepotSessionDeGroupe } from '../../../src/metier/entrepotSessionDeGroupe';
 import {
   DonneesCreationResultatTestMaturite,
   ResultatTestMaturite,
 } from '../../../src/metier/resultatTestMaturite';
 import { SessionDeGroupe } from '../../../src/metier/sessionDeGroupe';
-import { jeanneDupont } from '../objetsPretsALEmploi';
+import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
+import { EntrepotSessionDeGroupeMemoire } from '../../persistance/EntrepotSessionDeGroupeMemoire';
+import { configurationDeTestDuServeur } from '../fauxObjets';
 
 describe("La ressource qui gère les résultats d'une session de groupe", () => {
   let serveur: Express;
@@ -95,7 +94,6 @@ describe("La ressource qui gère les résultats d'une session de groupe", () => 
         new ResultatTestMaturite({
           ...donneesResultatTest,
           codeSessionGroupe: 'ABC2ED',
-          utilisateur: jeanneDupont,
         })
       );
 

@@ -1,22 +1,25 @@
+import { Express } from 'express';
+import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { Express } from 'express';
-import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
-import { configurationDeTestDuServeur } from '../fauxObjets';
 import { creeServeur } from '../../../src/api/msc';
-import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
-import { encodeSession } from '../cookie';
-import assert from 'node:assert';
+import { ProprieteTestRevendiquee } from '../../../src/bus/evenements/proprieteTestRevendiquee';
 import { CodeRegion } from '../../../src/metier/referentielRegions';
 import { CodeSecteur } from '../../../src/metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../../../src/metier/referentielTranchesEffectifEtablissement';
-import { ProprieteTestRevendiquee } from '../../../src/bus/evenements/proprieteTestRevendiquee';
+import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
 import {
   fabriqueBusPourLesTests,
   MockBusEvenement,
 } from '../../bus/busPourLesTests';
-import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
+import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
+import { encodeSession } from '../cookie';
+import {
+  configurationDeTestDuServeur,
+  fauxAdaptateurRechercheEntreprise,
+} from '../fauxObjets';
+import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
 
 describe('La ressource qui gère un résultat de test', () => {
   let serveur: Express;
@@ -58,13 +61,15 @@ describe('La ressource qui gère un résultat de test', () => {
 
   describe('sur requête PUT', () => {
     it('refuse la mise à jour si le résultat de test a déjà été revendiqué par un autre utilisateur', async () => {
-      await entrepotResultatTest.ajoute(
-        new ResultatTestMaturite({
-          ...donneesResultatTestCorrectes(),
-          id: 'r1',
-          utilisateur: hectorDurant,
-        })
+      const resultatDeHector = new ResultatTestMaturite({
+        ...donneesResultatTestCorrectes(),
+        id: 'r1',
+      });
+      resultatDeHector.revendiquePropriete(
+        hectorDurant,
+        fauxAdaptateurRechercheEntreprise
       );
+      await entrepotResultatTest.ajoute(resultatDeHector);
 
       const reponse = await request(serveur)
         .put('/api/resultats-test/r1')
@@ -78,13 +83,15 @@ describe('La ressource qui gère un résultat de test', () => {
     });
 
     it('ne fait rien si le résultat a déjà été revendiqué par cet utilisateur', async () => {
-      await entrepotResultatTest.ajoute(
-        new ResultatTestMaturite({
-          ...donneesResultatTestCorrectes(),
-          utilisateur: jeanneDupont,
-          id: 'r1',
-        })
+      const resultatDeJeanne = new ResultatTestMaturite({
+        ...donneesResultatTestCorrectes(),
+        id: 'r1',
+      });
+      resultatDeJeanne.revendiquePropriete(
+        jeanneDupont,
+        fauxAdaptateurRechercheEntreprise
       );
+      await entrepotResultatTest.ajoute(resultatDeJeanne);
 
       const reponse = await request(serveur)
         .put('/api/resultats-test/r1')
