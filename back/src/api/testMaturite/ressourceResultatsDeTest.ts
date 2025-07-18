@@ -94,7 +94,7 @@ const ressourceResultatsDeTest = ({
         codeSessionGroupe,
       });
       if (utilisateur) {
-        resultatTest.revendiquePropriete(
+        await resultatTest.revendiquePropriete(
           utilisateur,
           adaptateurRechercheEntreprise
         );
