@@ -33,8 +33,11 @@ const ressourceDernierResultatDeTest = ({
           requete.utilisateur.siretEntite,
           null
         );
-      const { codeRegion, codeSecteur, codeTrancheEffectif } =
-        resultatRechercheOrga[0];
+      const {
+        codeRegion = resultatTest.region,
+        codeSecteur,
+        codeTrancheEffectif = resultatTest.tailleOrganisation,
+      } = resultatRechercheOrga[0];
 
       const trancheEffectif = codeTrancheEffectif
         ? {
