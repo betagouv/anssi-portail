@@ -18,8 +18,8 @@ export type ResultatRechercheEntreprise = {
   nom: string;
   departement: string | null;
   siret: string;
-  codeTrancheEffectif: CodeTrancheEffectif;
-  codeSecteur: CodeSecteur | undefined;
+  codeTrancheEffectif: CodeTrancheEffectif | undefined;
+  codeSecteur: CodeSecteur;
   codeRegion: CodeRegion | undefined;
 };
 
@@ -71,7 +71,7 @@ const extraisInfosEtablissement = (
     siret: siretRetour,
     codeRegion,
     codeSecteur: resultat.section_activite_principale,
-    codeTrancheEffectif: resultat.tranche_effectif_salarie,
+    codeTrancheEffectif: resultat.tranche_effectif_salarie ?? undefined,
   };
 };
 
@@ -81,7 +81,7 @@ type ResultatSirene = {
   siege: {
     departement: string;
     siret: string;
-    region: CodeRegionINSEE;
+    region: CodeRegionINSEE | null;
   };
   matching_etablissements: {
     liste_enseignes: string[];
@@ -89,7 +89,7 @@ type ResultatSirene = {
     siret: string;
   }[];
   section_activite_principale: CodeSecteur;
-  tranche_effectif_salarie: CodeTrancheEffectif;
+  tranche_effectif_salarie: CodeTrancheEffectif | null;
 };
 
 export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {

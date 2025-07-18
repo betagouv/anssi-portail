@@ -104,6 +104,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
         assert.equal(reponse.status, 404);
       });
+
       it('renvoie le niveau du test', async () => {
         await entrepotResultatTest.ajoute(creeResultatTest('insuffisant'));
 
@@ -111,33 +112,66 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
         assert.equal(reponse.body.idNiveau, 'insuffisant');
       });
-      it('renvoie les détails de mon organisation', async () => {
-        await entrepotResultatTest.ajoute(
-          new ResultatTestMaturite(donneesResultatTestCorrectes())
-        );
-        adaptateurRechercheEntreprise.rechercheOrganisations = async (
-          terme
-        ) => {
-          return terme === '13000766900018'
-            ? [
-                {
-                  departement: 'Nord',
-                  nom: 'Friterie',
-                  siret: '13000766900018',
-                  codeTrancheEffectif: '21',
-                  codeSecteur: 'U',
-                  codeRegion: 'FR-HDF',
-                },
-              ]
-            : [];
-        };
 
-        const reponse = await requeteGET();
+      describe('concernant les informations de mon organisation', () => {
+        let codeTrancheEffectifRenvoyeParRechercheEntreprise:
+          | CodeTrancheEffectif
+          | undefined = '11';
+        let codeSecteurRenvoyeParRechercheEntreprise: CodeSecteur = 'B';
+        let codeRegionRenvoyeParRechercheEntreprise: CodeRegion | undefined =
+          'FR-971';
 
-        assert.deepEqual(reponse.body.organisation, {
-          trancheEffectif: { code: '21', libelle: '50 à 99 salariés' },
-          secteur: { code: 'U', libelle: 'Activités extra-territoriales' },
-          region: { code: 'FR-HDF', libelle: 'Hauts-de-France' },
+        beforeEach(async () => {
+          await entrepotResultatTest.ajoute(
+            new ResultatTestMaturite(donneesResultatTestCorrectes())
+          );
+          adaptateurRechercheEntreprise.rechercheOrganisations = async (
+            terme
+          ) => {
+            return terme === '13000766900018'
+              ? [
+                  {
+                    departement: 'Nord',
+                    nom: 'Friterie',
+                    siret: '13000766900018',
+                    codeTrancheEffectif:
+                      codeTrancheEffectifRenvoyeParRechercheEntreprise,
+                    codeSecteur: codeSecteurRenvoyeParRechercheEntreprise,
+                    codeRegion: codeRegionRenvoyeParRechercheEntreprise,
+                  },
+                ]
+              : [];
+          };
+        });
+
+        it('renvoie les détails', async () => {
+          codeTrancheEffectifRenvoyeParRechercheEntreprise = '21';
+          codeSecteurRenvoyeParRechercheEntreprise = 'U';
+          codeRegionRenvoyeParRechercheEntreprise = 'FR-HDF';
+
+          const reponse = await requeteGET();
+
+          assert.deepEqual(reponse.body.organisation, {
+            trancheEffectif: { code: '21', libelle: '50 à 99 salariés' },
+            secteur: { code: 'U', libelle: 'Activités extra-territoriales' },
+            region: { code: 'FR-HDF', libelle: 'Hauts-de-France' },
+          });
+        });
+
+        it("reste robuste lorsque la tranche d'effectif n'est pas définie", async () => {
+          codeTrancheEffectifRenvoyeParRechercheEntreprise = undefined;
+
+          const reponse = await requeteGET();
+
+          assert.equal(reponse.body.organisation.trancheEffectif, undefined);
+        });
+
+        it("reste robuste lorsque la région n'est pas définie", async () => {
+          codeRegionRenvoyeParRechercheEntreprise = undefined;
+
+          const reponse = await requeteGET();
+
+          assert.equal(reponse.body.organisation.region, undefined);
         });
       });
     });
