@@ -44,13 +44,14 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
           )
         : undefined;
 
-    return new ResultatTestMaturite({
+    const resultat = new ResultatTestMaturite({
       ...donneesTestMaturite,
-      utilisateur,
       tailleOrganisation: donneesTestMaturite.taille_organisation,
       codeSessionGroupe: donneesTestMaturite.code_session_groupe,
       dateRealisation: donneesTestMaturite.date_realisation,
     });
+    resultat.utilisateur = utilisateur;
+    return resultat;
   }
 
   async parId(id: string): Promise<ResultatTestMaturite | undefined> {
