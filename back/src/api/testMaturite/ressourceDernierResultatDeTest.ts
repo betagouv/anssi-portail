@@ -35,7 +35,7 @@ const ressourceDernierResultatDeTest = ({
         );
       const {
         codeRegion = resultatTest.region,
-        codeSecteur,
+        codeSecteur = resultatTest.secteur,
         codeTrancheEffectif = resultatTest.tailleOrganisation,
       } = resultatRechercheOrga[0];
 
@@ -53,16 +53,20 @@ const ressourceDernierResultatDeTest = ({
           }
         : undefined;
 
+      const secteur = codeSecteur
+        ? {
+            code: codeSecteur,
+            libelle: secteurParCode(codeSecteur).libelle,
+          }
+        : undefined;
+
       reponse.send({
         reponses: resultatTest.reponses,
         dateRealisation: resultatTest.dateRealisation,
         idNiveau: resultatTest.niveau(),
         organisation: {
           trancheEffectif,
-          secteur: {
-            code: codeSecteur,
-            libelle: secteurParCode(codeSecteur).libelle,
-          },
+          secteur,
           region,
         },
       });
