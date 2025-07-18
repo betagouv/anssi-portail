@@ -10,8 +10,8 @@ export type CodeLibelle = {
 
 export type InfosOrganisation = {
   secteur: CodeLibelle;
-  region: CodeLibelle;
-  trancheEffectif: CodeLibelle;
+  region: CodeLibelle | undefined;
+  trancheEffectif: CodeLibelle | undefined;
 };
 
 export type DernierResultatTest = {

@@ -68,6 +68,7 @@
       valeurs: repartionPourUnNiveau.valeurs,
     }));
   }
+
   onMount(async () => {
     await chargeDernierResultat();
     await chargeRepartitionsDesResultats();
@@ -81,13 +82,17 @@
         <div class="tags">
           <lab-anssi-tag label={infosOrganisation.secteur.libelle} taille="md">
           </lab-anssi-tag>
-          <lab-anssi-tag
-            label={infosOrganisation.trancheEffectif.libelle}
-            taille="md"
-          >
-          </lab-anssi-tag>
-          <lab-anssi-tag label={infosOrganisation.region.libelle} taille="md">
-          </lab-anssi-tag>
+          {#if infosOrganisation.trancheEffectif}
+            <lab-anssi-tag
+              label={infosOrganisation.trancheEffectif.libelle}
+              taille="md"
+            >
+            </lab-anssi-tag>
+          {/if}
+          {#if infosOrganisation.region}
+            <lab-anssi-tag label={infosOrganisation.region.libelle} taille="md">
+            </lab-anssi-tag>
+          {/if}
         </div>
       </div>
     </section>
@@ -133,6 +138,7 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
+
   .filtres {
     padding: 32px var(--gouttiere) 0;
   }
