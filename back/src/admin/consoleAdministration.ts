@@ -1,29 +1,32 @@
 import { AxiosError } from 'axios';
-import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { AdaptateurEmail } from '../metier/adaptateurEmail';
-import { fabriqueAdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
-import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres';
-import { fabriqueAdaptateurEmail } from '../infra/adaptateurEmailBrevo';
-import { adaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
-import { Utilisateur } from '../metier/utilisateur';
+import Knex from 'knex';
 import pThrottle from 'p-throttle';
-import { adaptateurJournalMemoire } from '../infra/adaptateurJournal';
-import { adaptateurJournalPostgres } from '../infra/adaptateurJournalPostgres';
+import config from '../../knexfile';
+import { CompteCree } from '../bus/evenements/compteCree';
+import { MiseAJourFavorisUtilisateur } from '../bus/miseAJourFavorisUtilisateur';
 import {
   AdaptateurChiffrement,
   fabriqueAdaptateurChiffrement,
 } from '../infra/adaptateurChiffrement';
-import { CompteCree } from '../bus/evenements/compteCree';
-import { MiseAJourFavorisUtilisateur } from '../bus/miseAJourFavorisUtilisateur';
-import { EntrepotFavori } from '../metier/entrepotFavori';
-import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres';
-import Knex from 'knex';
-import config from '../../knexfile';
+import { fabriqueAdaptateurEmail } from '../infra/adaptateurEmailBrevo';
 import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import {
   AdaptateurHachage,
   fabriqueAdaptateurHachage,
 } from '../infra/adaptateurHachage';
+import { adaptateurJournalMemoire } from '../infra/adaptateurJournal';
+import { adaptateurJournalPostgres } from '../infra/adaptateurJournalPostgres';
+import { fabriqueAdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
+import {
+  AdaptateurRechercheEntreprise,
+  adaptateurRechercheEntreprise,
+} from '../infra/adaptateurRechercheEntreprise';
+import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres';
+import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres';
+import { AdaptateurEmail } from '../metier/adaptateurEmail';
+import { EntrepotFavori } from '../metier/entrepotFavori';
+import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
+import { Utilisateur } from '../metier/utilisateur';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
@@ -31,12 +34,15 @@ export class ConsoleAdministration {
   private readonly adaptateurChiffrement: AdaptateurChiffrement;
   private readonly adaptateurHachage: AdaptateurHachage;
   private entrepotFavori: EntrepotFavori;
+  private adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   private knexJournal: Knex.Knex;
   private knexMSC: Knex.Knex;
 
   constructor() {
     const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
-    this.adaptateurChiffrement = fabriqueAdaptateurChiffrement({adaptateurEnvironnement});
+    this.adaptateurChiffrement = fabriqueAdaptateurChiffrement({
+      adaptateurEnvironnement,
+    });
     this.adaptateurHachage = fabriqueAdaptateurHachage({
       adaptateurEnvironnement,
     });
@@ -50,6 +56,7 @@ export class ConsoleAdministration {
     this.entrepotFavori = new EntrepotFavoriPostgres({
       adaptateurHachage: this.adaptateurHachage,
     });
+    this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
     const configDuJournal = {
       client: 'pg',
       connection: process.env.BASE_DONNEES_JOURNAL_URL_SERVEUR,
@@ -321,18 +328,75 @@ export class ConsoleAdministration {
   async chiffreDonneesChaCha20() {
     await this.knexMSC.transaction(async (trx) => {
       const tousLesUtilisateurs = await trx('utilisateurs');
-      
+
       const promesses = tousLesUtilisateurs.map(({ donnees, email_hache }) => {
         const donneesEnClair = {
           email: donnees.email,
           cguAcceptees: donnees.cguAcceptees,
           infolettreAcceptee: donnees.infolettreAcceptee,
         };
-        const donneesChiffrees = this.adaptateurChiffrement.chiffre(donneesEnClair);
-        return trx('utilisateurs').where({email_hache}).update({ donnees: donneesChiffrees});
+        const donneesChiffrees =
+          this.adaptateurChiffrement.chiffre(donneesEnClair);
+        return trx('utilisateurs')
+          .where({ email_hache })
+          .update({ donnees: donneesChiffrees });
       });
 
       await Promise.all(promesses);
-    })
+    });
+  }
+
+  async rattrapageDonneesOrganisationDansResultatTest() {
+    process.stdout.write(
+      "Rattrapage des résultats de tests ayant un utilisateur mais sans informations d'organisation\n"
+    );
+    await this.knexMSC.transaction(async (trx) => {
+      const resultatsAvecUneInfoManquante = await trx(
+        'resultats_test'
+      ).whereRaw(
+        `email_utilisateur_hache IS NOT NULL 
+        AND (region IS NULL 
+          OR secteur IS NULL 
+          OR taille_organisation IS NULL)`
+      );
+
+      process.stdout.write(
+        `...${resultatsAvecUneInfoManquante.length} résultats à rattraper...\n`
+      );
+
+      const promesses = resultatsAvecUneInfoManquante.map(
+        async ({
+          id,
+          region,
+          secteur,
+          taille_organisation,
+          email_utilisateur_hache,
+        }) => {
+          const utilisateur = await this.entrepotUtilisateur.parEmailHache(
+            email_utilisateur_hache
+          );
+          if (!utilisateur) {
+            return Promise.resolve();
+          }
+          const { codeRegion, codeSecteur, codeTrancheEffectif } =
+            (
+              await adaptateurRechercheEntreprise.rechercheOrganisations(
+                utilisateur.siretEntite,
+                null
+              )
+            )[0] ?? {};
+          return trx('resultats_test')
+            .where({ id })
+            .update({
+              region: region ?? codeRegion,
+              secteur: secteur ?? codeSecteur,
+              taille_organisation: taille_organisation ?? codeTrancheEffectif,
+            });
+        }
+      );
+      await Promise.all(promesses);
+    });
+
+    process.stdout.write('Fin du rattrapage des résultats\n');
   }
 }
