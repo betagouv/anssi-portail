@@ -80,8 +80,13 @@
     <section class="filtres">
       <div class="contenu-section">
         <div class="tags">
-          <lab-anssi-tag label={infosOrganisation.secteur.libelle} taille="md">
-          </lab-anssi-tag>
+          {#if infosOrganisation.secteur}
+            <lab-anssi-tag
+              label={infosOrganisation.secteur.libelle}
+              taille="md"
+            >
+            </lab-anssi-tag>
+          {/if}
           {#if infosOrganisation.trancheEffectif}
             <lab-anssi-tag
               label={infosOrganisation.trancheEffectif.libelle}

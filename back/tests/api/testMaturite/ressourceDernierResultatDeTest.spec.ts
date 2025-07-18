@@ -117,7 +117,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
         let codeTrancheEffectifRenvoyeParRechercheEntreprise:
           | CodeTrancheEffectif
           | undefined = '11';
-        let codeSecteurRenvoyeParRechercheEntreprise: CodeSecteur = 'B';
+        let codeSecteurRenvoyeParRechercheEntreprise: CodeSecteur |undefined = 'B';
         let codeRegionRenvoyeParRechercheEntreprise: CodeRegion | undefined =
           'FR-971';
         let resultatTestMaturite: ResultatTestMaturite;
@@ -179,6 +179,15 @@ describe('La ressource qui gère le dernier résultat de test', () => {
             assert.equal(reponse.body.organisation.region, undefined);
           });
 
+          it("reste robuste lorsque le secteur n'est pas défini", async () => {
+            codeSecteurRenvoyeParRechercheEntreprise = undefined;
+            resultatTestMaturite.secteur = undefined;
+
+            const reponse = await requeteGET();
+
+            assert.equal(reponse.body.organisation.secteur, undefined);
+          });
+
           it('utilise la région du test', async () => {
             codeRegionRenvoyeParRechercheEntreprise = undefined;
             resultatTestMaturite.region = 'FR-COM';
@@ -195,6 +204,15 @@ describe('La ressource qui gère le dernier résultat de test', () => {
             const reponse = await requeteGET();
 
             assert.equal(reponse.body.organisation.trancheEffectif.code, '53');
+          });
+
+          it('utilise le secteur du test', async () => {
+            codeSecteurRenvoyeParRechercheEntreprise = undefined;
+            resultatTestMaturite.secteur = 'B';
+
+            const reponse = await requeteGET();
+
+            assert.equal(reponse.body.organisation.secteur.code, 'B');
           });
         });
       });

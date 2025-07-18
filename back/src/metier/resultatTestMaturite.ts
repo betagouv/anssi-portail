@@ -41,7 +41,7 @@ export type IdRubrique = (typeof tousLesIdRubrique)[number];
 export class ResultatTestMaturite {
   id!: string;
   region: CodeRegion | undefined;
-  secteur: CodeSecteur;
+  secteur: CodeSecteur | undefined;
   tailleOrganisation: CodeTrancheEffectif | undefined;
   reponses: ReponsesTestMaturite;
   codeSessionGroupe?: string;

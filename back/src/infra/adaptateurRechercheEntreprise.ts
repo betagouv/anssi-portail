@@ -19,7 +19,7 @@ export type ResultatRechercheEntreprise = {
   departement: string | null;
   siret: string;
   codeTrancheEffectif: CodeTrancheEffectif | undefined;
-  codeSecteur: CodeSecteur;
+  codeSecteur: CodeSecteur | undefined;
   codeRegion: CodeRegion | undefined;
 };
 
@@ -70,7 +70,7 @@ const extraisInfosEtablissement = (
     departement: departementRetour,
     siret: siretRetour,
     codeRegion,
-    codeSecteur: resultat.section_activite_principale,
+    codeSecteur: resultat.section_activite_principale ?? undefined,
     codeTrancheEffectif: resultat.tranche_effectif_salarie ?? undefined,
   };
 };
@@ -88,8 +88,8 @@ type ResultatSirene = {
     commune: string;
     siret: string;
   }[];
-  section_activite_principale: CodeSecteur;
-  tranche_effectif_salarie: CodeTrancheEffectif | null;
+  section_activite_principale: CodeSecteur | null; // contrairement à ce que dit la documentation, null est possible
+  tranche_effectif_salarie: CodeTrancheEffectif | null; // contrairement à ce que dit la documentation, null est possible
 };
 
 export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
