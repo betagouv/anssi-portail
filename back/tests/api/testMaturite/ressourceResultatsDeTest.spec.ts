@@ -1,21 +1,24 @@
-import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
-import { creeServeur } from '../../../src/api/msc';
-import { configurationDeTestDuServeur } from '../fauxObjets';
-import request from 'supertest';
 import assert from 'node:assert';
+import { beforeEach, describe, it } from 'node:test';
+import request from 'supertest';
+import { creeServeur } from '../../../src/api/msc';
+import { ProprieteTestRevendiquee } from '../../../src/bus/evenements/proprieteTestRevendiquee';
+import { TestRealise } from '../../../src/bus/evenements/testRealise';
+import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
+import { Utilisateur } from '../../../src/metier/utilisateur';
 import {
   fabriqueBusPourLesTests,
   MockBusEvenement,
 } from '../../bus/busPourLesTests';
-import { TestRealise } from '../../../src/bus/evenements/testRealise';
 import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
-import { encodeSession } from '../cookie';
-import { ProprieteTestRevendiquee } from '../../../src/bus/evenements/proprieteTestRevendiquee';
-import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
-import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
-import { Utilisateur } from '../../../src/metier/utilisateur';
+import { encodeSession } from '../cookie';
+import {
+  configurationDeTestDuServeur,
+  fauxAdaptateurRechercheEntreprise,
+} from '../fauxObjets';
+import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
 
 const REGEX_UUID =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
@@ -385,16 +388,18 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         id: string,
         utilisateur: Utilisateur
       ) {
-        await entrepotResultatTest.ajoute(
-          new ResultatTestMaturite({
-            secteur: 'A',
-            region: 'FR-NOR',
-            id,
-            utilisateur,
-            reponses: {},
-            tailleOrganisation: '01',
-          })
+        const resultatDunUtilisateur = new ResultatTestMaturite({
+          secteur: 'A',
+          region: 'FR-NOR',
+          id,
+          reponses: {},
+          tailleOrganisation: '01',
+        });
+        resultatDunUtilisateur.revendiquePropriete(
+          utilisateur,
+          fauxAdaptateurRechercheEntreprise
         );
+        await entrepotResultatTest.ajoute(resultatDunUtilisateur);
       }
 
       it('renvoie les résultats de test', async () => {
@@ -431,24 +436,26 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       });
 
       it('renvoie les informations nécessaires du test', async () => {
-        await entrepotResultatTest.ajoute(
-          new ResultatTestMaturite({
-            secteur: 'A',
-            region: 'FR-NOR',
-            id: 'test-id-1',
-            utilisateur: jeanneDupont,
-            reponses: {
-              pilotage: 5,
-              budget: 5,
-              'prise-en-compte-risque': 5,
-              'ressources-humaines': 5,
-              'adoption-solutions': 5,
-              posture: 5,
-            },
-            tailleOrganisation: '01',
-            dateRealisation: new Date(2025, 8, 11),
-          })
+        const testDeJeanne = new ResultatTestMaturite({
+          secteur: 'A',
+          region: 'FR-NOR',
+          id: 'test-id-1',
+          reponses: {
+            pilotage: 5,
+            budget: 5,
+            'prise-en-compte-risque': 5,
+            'ressources-humaines': 5,
+            'adoption-solutions': 5,
+            posture: 5,
+          },
+          tailleOrganisation: '01',
+          dateRealisation: new Date(2025, 8, 11),
+        });
+        testDeJeanne.revendiquePropriete(
+          jeanneDupont,
+          fauxAdaptateurRechercheEntreprise
         );
+        await entrepotResultatTest.ajoute(testDeJeanne);
 
         const reponse = await request(serveur)
           .get('/api/resultats-test')

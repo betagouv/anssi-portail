@@ -12,10 +12,7 @@ export class EntrepotResultatTestMemoire
   ): Promise<ResultatTestMaturite[]> {
     return this.entites
       .filter((entite) => entite.utilisateur === utilisateur)
-      .map(
-        (entite) =>
-          new ResultatTestMaturite({ ...entite })
-      );
+      .map((entite) => new ResultatTestMaturite({ ...entite }));
   }
 
   async ceuxDeSessionGroupe(code: string): Promise<ResultatTestMaturite[]> {
@@ -51,8 +48,7 @@ export class EntrepotResultatTestMemoire
 
   tousEnOmettantUtilisateur = async (): Promise<ResultatTestMaturite[]> => {
     return this.entites.map(
-      (entite) =>
-        new ResultatTestMaturite({ ...entite, utilisateur: undefined })
+      (entite) => new ResultatTestMaturite({ ...entite })
     );
   };
 
@@ -61,6 +57,11 @@ export class EntrepotResultatTestMemoire
   }
 
   private copie(entite: ResultatTestMaturite | undefined) {
-    return entite ? new ResultatTestMaturite({ ...entite }) : undefined;
+    if (!entite) {
+      return undefined;
+    }
+    const copieDuresultat = new ResultatTestMaturite({ ...entite });
+    copieDuresultat.utilisateur = entite.utilisateur;
+    return copieDuresultat;
   }
 }
