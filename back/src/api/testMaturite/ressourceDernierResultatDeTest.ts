@@ -1,8 +1,8 @@
+import { Router } from 'express';
 import { regionParCode } from '../../metier/referentielRegions';
 import { secteurParCode } from '../../metier/referentielSecteurs';
 import { trancheEffectifParCode } from '../../metier/referentielTranchesEffectifEtablissement';
 import { ConfigurationServeur } from '../configurationServeur';
-import { Router } from 'express';
 
 const ressourceDernierResultatDeTest = ({
   entrepotResultatTest,
@@ -35,23 +35,32 @@ const ressourceDernierResultatDeTest = ({
         );
       const { codeRegion, codeSecteur, codeTrancheEffectif } =
         resultatRechercheOrga[0];
+
+      const trancheEffectif = codeTrancheEffectif
+        ? {
+            code: codeTrancheEffectif,
+            libelle: trancheEffectifParCode(codeTrancheEffectif).libelle,
+          }
+        : undefined;
+
+      const region = codeRegion
+        ? {
+            code: codeRegion,
+            libelle: regionParCode(codeRegion).nom,
+          }
+        : undefined;
+
       reponse.send({
         reponses: resultatTest.reponses,
         dateRealisation: resultatTest.dateRealisation,
         idNiveau: resultatTest.niveau(),
         organisation: {
-          trancheEffectif: {
-            code: codeTrancheEffectif,
-            libelle: trancheEffectifParCode(codeTrancheEffectif).libelle,
-          },
+          trancheEffectif,
           secteur: {
             code: codeSecteur,
-            libelle: secteurParCode(codeSecteur!).libelle,
+            libelle: secteurParCode(codeSecteur).libelle,
           },
-          region: {
-            code: codeRegion,
-            libelle: regionParCode(codeRegion!).nom,
-          },
+          region,
         },
       });
     }
