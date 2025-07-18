@@ -1,6 +1,6 @@
-import { ConfigurationServeur } from '../configurationServeur';
 import { Router } from 'express';
 import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee';
+import { ConfigurationServeur } from '../configurationServeur';
 
 const ressourceResultatDeTest = ({
   entrepotResultatTest,
@@ -8,6 +8,7 @@ const ressourceResultatDeTest = ({
   middleware,
   entrepotUtilisateur,
   adaptateurHachage,
+  adaptateurRechercheEntreprise,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.put(
@@ -38,7 +39,10 @@ const ressourceResultatDeTest = ({
         return;
       }
 
-      resultatTest.revendiquePropriete(utilisateur);
+      resultatTest.revendiquePropriete(
+        utilisateur,
+        adaptateurRechercheEntreprise
+      );
 
       await entrepotResultatTest.metsAjour(resultatTest);
       await busEvenements.publie(

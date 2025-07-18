@@ -1,13 +1,16 @@
-import { CodeRegion } from './referentielRegions';
-import { CodeSecteur } from './referentielSecteurs';
-import { CodeTrancheEffectif } from './referentielTranchesEffectifEtablissement';
 import { randomUUID } from 'node:crypto';
+import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
+import { CodeRegion, estCodeRegion } from './referentielRegions';
+import { CodeSecteur, estCodeSecteur } from './referentielSecteurs';
+import {
+  CodeTrancheEffectif,
+  trancheEffectifParCode,
+} from './referentielTranchesEffectifEtablissement';
 import { Utilisateur } from './utilisateur';
 
 export type ReponsesTestMaturite = Record<string, number>;
 
 export type DonneesCreationResultatTestMaturite = {
-  utilisateur: Utilisateur | undefined;
   region: CodeRegion | undefined;
   secteur: CodeSecteur | undefined;
   tailleOrganisation: CodeTrancheEffectif | undefined;
@@ -55,10 +58,8 @@ export class ResultatTestMaturite {
     reponses,
     id,
     codeSessionGroupe,
-    utilisateur,
     dateRealisation,
   }: DonneesCreationResultatTestMaturite) {
-    this.utilisateur = utilisateur;
     this.region = region;
     this.secteur = secteur;
     this.tailleOrganisation = tailleOrganisation;
@@ -68,8 +69,24 @@ export class ResultatTestMaturite {
     this.dateRealisation = dateRealisation;
   }
 
-  revendiquePropriete(utilisateur: Utilisateur) {
+  async revendiquePropriete(
+    utilisateur: Utilisateur,
+    adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise
+  ) {
     this.utilisateur = utilisateur;
+    const { codeRegion, codeSecteur, codeTrancheEffectif } = (
+      await adaptateurRechercheEntreprise.rechercheOrganisations(
+        utilisateur.siretEntite,
+        null
+      )
+    )[0];
+    this.region =
+      this.region ?? (estCodeRegion(codeRegion) ? codeRegion : undefined);
+    this.secteur =
+      this.secteur ?? (estCodeSecteur(codeSecteur) ? codeSecteur : undefined);
+    this.tailleOrganisation =
+      this.tailleOrganisation ??
+      trancheEffectifParCode(codeTrancheEffectif)?.code;
   }
 
   niveau(): IdNiveauMaturite {

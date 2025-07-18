@@ -1,18 +1,30 @@
+import assert from 'node:assert';
 import { describe, it } from 'node:test';
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 import {
   IdNiveauMaturite,
   ReponsesTestMaturite,
   ResultatTestMaturite,
 } from '../../src/metier/resultatTestMaturite';
-import assert from 'node:assert';
+import { jeanneDupont } from '../api/objetsPretsALEmploi';
 
-const resultatAvecReponses = (reponses: ReponsesTestMaturite) =>
+const reponsesParDefaut: ReponsesTestMaturite = {
+  'prise-en-compte-risque': 5,
+  pilotage: 5,
+  budget: 5,
+  'ressources-humaines': 5,
+  'adoption-solutions': 5,
+  posture: 5,
+};
+
+const resultatAvecReponses = (
+  reponses: ReponsesTestMaturite = reponsesParDefaut
+) =>
   new ResultatTestMaturite({
     region: 'FR-NOR',
     secteur: 'J',
     tailleOrganisation: '51',
     reponses,
-    utilisateur: undefined,
   });
 
 describe('Le résultat du test de maturité', () => {
@@ -90,6 +102,43 @@ describe('Le résultat du test de maturité', () => {
       const niveau: IdNiveauMaturite = resultatTest.niveau();
 
       assert.equal(niveau, 'optimal');
+    });
+  });
+
+  describe('sur revendication de la propriété', () => {
+    it('on recopie les information de la recherche entreprise', async () => {
+      const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
+        rechercheOrganisations: async (terme: string) => {
+          if (terme === jeanneDupont.siretEntite) {
+            return [
+              {
+                codeRegion: 'FR-ARA',
+                codeSecteur: 'U',
+                codeTrancheEffectif: '31',
+                nom: '',
+                departement: '',
+                siret: jeanneDupont.siretEntite,
+              },
+            ];
+          }
+          return [];
+        },
+      };
+      const monResultat = new ResultatTestMaturite({
+        reponses: reponsesParDefaut,
+        region: undefined,
+        secteur: undefined,
+        tailleOrganisation: undefined,
+      });
+
+      await monResultat.revendiquePropriete(
+        jeanneDupont,
+        adaptateurRechercheEntreprise
+      );
+
+      assert.equal(monResultat.tailleOrganisation, '31');
+      assert.equal(monResultat.secteur, 'U');
+      assert.equal(monResultat.region, 'FR-ARA');
     });
   });
 });

@@ -7,7 +7,10 @@ import { AdaptateurRechercheEntreprise } from '../../../src/infra/adaptateurRech
 import { CodeRegion } from '../../../src/metier/referentielRegions';
 import { CodeSecteur } from '../../../src/metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../../../src/metier/referentielTranchesEffectifEtablissement';
-import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
+import {
+  DonneesCreationResultatTestMaturite,
+  ResultatTestMaturite,
+} from '../../../src/metier/resultatTestMaturite';
 import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
@@ -42,20 +45,35 @@ describe('La ressource qui gère le dernier résultat de test', () => {
     });
   });
 
-  const donneesResultatTestCorrectes = () => ({
-    utilisateur: jeanneDupont,
-    region: 'FR-NOR' as CodeRegion,
-    secteur: 'J' as CodeSecteur,
-    tailleOrganisation: '51' as CodeTrancheEffectif,
-    reponses: {
-      'prise-en-compte-risque': 2,
-      pilotage: 3,
-      budget: 5,
-      'ressources-humaines': 3,
-      'adoption-solutions': 2,
-      posture: 3,
-    },
-  });
+  const donneesResultatTestCorrectes =
+    (): DonneesCreationResultatTestMaturite => ({
+      region: 'FR-NOR' as CodeRegion,
+      secteur: 'J' as CodeSecteur,
+      tailleOrganisation: '51' as CodeTrancheEffectif,
+      reponses: {
+        'prise-en-compte-risque': 2,
+        pilotage: 3,
+        budget: 5,
+        'ressources-humaines': 3,
+        'adoption-solutions': 2,
+        posture: 3,
+      },
+    });
+
+  async function ajouteResultatDeTestPourJeanne(
+    donneesSupplementaires: Partial<DonneesCreationResultatTestMaturite> = {}
+  ) {
+    const resultatDeJeanne = new ResultatTestMaturite({
+      ...donneesResultatTestCorrectes(),
+      ...donneesSupplementaires,
+    });
+    resultatDeJeanne.revendiquePropriete(
+      jeanneDupont,
+      fauxAdaptateurRechercheEntreprise
+    );
+    await entrepotResultatTest.ajoute(resultatDeJeanne);
+    return resultatDeJeanne;
+  }
 
   describe('sur requête GET', () => {
     describe('pour un utilisateur connecté', () => {
@@ -66,9 +84,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
           .send();
 
       it('renvoie 200 et le dernier résultat de test ', async () => {
-        await entrepotResultatTest.ajoute(
-          new ResultatTestMaturite(donneesResultatTestCorrectes())
-        );
+        await ajouteResultatDeTestPourJeanne();
 
         const reponse = await requeteGET();
 
@@ -84,12 +100,9 @@ describe('La ressource qui gère le dernier résultat de test', () => {
       });
 
       it('renvoie la date de réalisation du test', async () => {
-        await entrepotResultatTest.ajoute(
-          new ResultatTestMaturite({
-            ...donneesResultatTestCorrectes(),
-            dateRealisation: new Date(2025, 5, 11),
-          })
-        );
+        ajouteResultatDeTestPourJeanne({
+          dateRealisation: new Date(2025, 5, 11),
+        });
 
         const reponse = await requeteGET();
 
@@ -123,10 +136,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
         let resultatTestMaturite: ResultatTestMaturite;
 
         beforeEach(async () => {
-          resultatTestMaturite = new ResultatTestMaturite(
-            donneesResultatTestCorrectes()
-          );
-          await entrepotResultatTest.ajoute(resultatTestMaturite);
+          resultatTestMaturite = await ajouteResultatDeTestPourJeanne();
           adaptateurRechercheEntreprise.rechercheOrganisations = async (
             terme
           ) => {

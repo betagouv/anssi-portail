@@ -1,12 +1,12 @@
-import { ConfigurationServeur } from '../configurationServeur';
 import { Request, Response, Router } from 'express';
+import { body, check } from 'express-validator';
+import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee';
 import { TestRealise } from '../../bus/evenements/testRealise';
 import { codesRegion } from '../../metier/referentielRegions';
-import { body, check } from 'express-validator';
 import { codesSecteur } from '../../metier/referentielSecteurs';
 import { codesTranchesEffectif } from '../../metier/referentielTranchesEffectifEtablissement';
 import { ResultatTestMaturite } from '../../metier/resultatTestMaturite';
-import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee';
+import { ConfigurationServeur } from '../configurationServeur';
 
 const clesReponsesValides = [
   'prise-en-compte-risque',
@@ -23,6 +23,7 @@ const ressourceResultatsDeTest = ({
   entrepotResultatTest,
   entrepotUtilisateur,
   adaptateurHachage,
+  adaptateurRechercheEntreprise,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post(
@@ -91,8 +92,13 @@ const ressourceResultatsDeTest = ({
         secteur,
         reponses,
         codeSessionGroupe,
-        utilisateur,
       });
+      if (utilisateur) {
+        resultatTest.revendiquePropriete(
+          utilisateur,
+          adaptateurRechercheEntreprise
+        );
+      }
 
       await entrepotResultatTest.ajoute(resultatTest);
 

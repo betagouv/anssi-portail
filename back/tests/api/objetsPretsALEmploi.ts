@@ -45,8 +45,7 @@ export function creeResultatTest(idNiveau?: IdNiveauMaturite) {
     optimal: 5,
   };
   const pointDeLaReponse = pointsParNiveau[idNiveau || 'insuffisant'];
-  return new ResultatTestMaturite({
-    utilisateur: jeanneDupont,
+  const resultatDeJeanne = new ResultatTestMaturite({
     region: 'FR-NOR' as CodeRegion,
     secteur: 'J' as CodeSecteur,
     tailleOrganisation: '51' as CodeTrancheEffectif,
@@ -59,4 +58,9 @@ export function creeResultatTest(idNiveau?: IdNiveauMaturite) {
       posture: pointDeLaReponse,
     },
   });
+  resultatDeJeanne.revendiquePropriete(
+    jeanneDupont,
+    fauxAdaptateurRechercheEntreprise
+  );
+  return resultatDeJeanne;
 }
