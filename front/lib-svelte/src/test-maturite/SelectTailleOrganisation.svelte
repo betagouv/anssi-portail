@@ -16,7 +16,9 @@
     const reponse = await axios.get<TrancheEffectif[]>(
       '/api/annuaire/tranches-effectif'
     );
-    tranchesEffectifEtablissement = reponse.data;
+    tranchesEffectifEtablissement = reponse.data.filter(
+      (trancheEffectif) => trancheEffectif.code !== 'NN'
+    );
   });
 </script>
 
