@@ -56,7 +56,7 @@ describe('La ressource Statistiques', () => {
     it('renvoie le nombre de services et de ressources consultés', async () => {
       const reponse = await request(serveur).get('/api/statistiques');
 
-      assert.equal(reponse.body.servicesEtRessourcesConsultes, 1787);
+      assert.equal(reponse.body.servicesEtRessourcesConsultes, 3800);
     });
 
     function creeListeResultatTest(
