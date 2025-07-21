@@ -1,11 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import {
-  CodeRegion,
-  CodeRegionINSEE,
-  regions,
-} from '../metier/referentielRegions';
-import { CodeSecteur } from '../metier/referentielSecteurs';
-import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
+import { regions } from '../metier/referentielRegions';
 
 export interface AdaptateurRechercheEntreprise {
   rechercheOrganisations(
@@ -18,9 +12,9 @@ export type ResultatRechercheEntreprise = {
   nom: string;
   departement: string | null;
   siret: string;
-  codeTrancheEffectif: CodeTrancheEffectif | undefined;
-  codeSecteur: CodeSecteur | undefined;
-  codeRegion: CodeRegion | undefined;
+  codeTrancheEffectif: string | undefined;
+  codeSecteur: string | undefined;
+  codeRegion: string | undefined;
 };
 
 const extraisDepartement = (commune: string | undefined) => {
@@ -81,15 +75,15 @@ type ResultatSirene = {
   siege: {
     departement: string;
     siret: string;
-    region: CodeRegionINSEE | null;
+    region: string | null;
   };
   matching_etablissements: {
     liste_enseignes: string[];
     commune: string;
     siret: string;
   }[];
-  section_activite_principale: CodeSecteur | null; // contrairement à ce que dit la documentation, null est possible
-  tranche_effectif_salarie: CodeTrancheEffectif | null; // contrairement à ce que dit la documentation, null est possible
+  section_activite_principale: string | null; // contrairement à ce que dit la documentation, null est possible
+  tranche_effectif_salarie: string | null; // contrairement à ce que dit la documentation, null est possible
 };
 
 export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {

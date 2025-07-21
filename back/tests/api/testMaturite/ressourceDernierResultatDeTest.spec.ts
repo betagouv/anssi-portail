@@ -117,7 +117,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
         let codeTrancheEffectifRenvoyeParRechercheEntreprise:
           | CodeTrancheEffectif
           | undefined = '11';
-        let codeSecteurRenvoyeParRechercheEntreprise: CodeSecteur |undefined = 'B';
+        let codeSecteurRenvoyeParRechercheEntreprise: CodeSecteur | undefined;
         let codeRegionRenvoyeParRechercheEntreprise: CodeRegion | undefined =
           'FR-971';
         let resultatTestMaturite: ResultatTestMaturite;
