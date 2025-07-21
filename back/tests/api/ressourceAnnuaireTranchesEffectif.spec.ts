@@ -26,8 +26,8 @@ describe("La ressource Annuaire Tranche effectif d'établissements", () => {
         '/api/annuaire/tranches-effectif'
       );
 
-      assert.equal(reponse.body[0].libelle, '0 salarié');
-      assert.equal(reponse.body[0].code, '00');
+      assert.equal(reponse.body[1].libelle, '0 salarié');
+      assert.equal(reponse.body[1].code, '00');
     });
   });
 });
