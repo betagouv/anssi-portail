@@ -1,4 +1,5 @@
 export const tranchesEffectifEtablissement = [
+  { code: 'NN', libelle: 'Effectif inconnu' },
   { code: '00', libelle: '0 salarié' },
   { code: '01', libelle: '1 ou 2 salariés' },
   { code: '02', libelle: '3 à 5 salariés' },
@@ -7,11 +8,12 @@ export const tranchesEffectifEtablissement = [
   { code: '12', libelle: '20 à 49 salariés' },
   { code: '21', libelle: '50 à 99 salariés' },
   { code: '22', libelle: '100 à 199 salariés' },
-  { code: '31', libelle: '200 à 499 salariés' },
+  { code: '31', libelle: '200 à 249 salariés' },
+  { code: '32', libelle: '250 à 499 salariés' },
   { code: '41', libelle: '500 à 999 salariés' },
   { code: '42', libelle: '1000 à 1999 salariés' },
   { code: '51', libelle: '2000 à 4999 salariés' },
-  { code: '52', libelle: '5000 salariés ou plus' },
+  { code: '52', libelle: '5000 à 9999 salariés' },
   { code: '53', libelle: '10 000 salariés et plus' },
 ] as const;
 
@@ -23,5 +25,9 @@ export type CodeTrancheEffectif = (typeof codesTranchesEffectif)[number];
 
 export const trancheEffectifParCode = (
   code: CodeTrancheEffectif
-): (typeof tranchesEffectifEtablissement)[number] =>
-  tranchesEffectifEtablissement.find((tranche) => tranche.code === code)!;
+): (typeof tranchesEffectifEtablissement)[number] => {
+  const trancheTrouvee = tranchesEffectifEtablissement.find(
+    (tranche) => tranche.code === code
+  );
+  return trancheTrouvee ?? tranchesEffectifEtablissement[0];
+};
