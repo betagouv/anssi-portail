@@ -364,35 +364,38 @@ export class ConsoleAdministration {
         `...${resultatsAvecUneInfoManquante.length} résultats à rattraper...\n`
       );
 
+      const enCadence = pThrottle({ limit: 1, interval: 150 }); // rate limit à 7 requetes/s
       const promesses = resultatsAvecUneInfoManquante.map(
-        async ({
-          id,
-          region,
-          secteur,
-          taille_organisation,
-          email_utilisateur_hache,
-        }) => {
-          const utilisateur = await this.entrepotUtilisateur.parEmailHache(
-            email_utilisateur_hache
-          );
-          if (!utilisateur) {
-            return Promise.resolve();
+        enCadence(
+          async ({
+            id,
+            region,
+            secteur,
+            taille_organisation,
+            email_utilisateur_hache,
+          }) => {
+            const utilisateur = await this.entrepotUtilisateur.parEmailHache(
+              email_utilisateur_hache
+            );
+            if (!utilisateur) {
+              return Promise.resolve();
+            }
+            const { codeRegion, codeSecteur, codeTrancheEffectif } =
+              (
+                await adaptateurRechercheEntreprise.rechercheOrganisations(
+                  utilisateur.siretEntite,
+                  null
+                )
+              )[0] ?? {};
+            return trx('resultats_test')
+              .where({ id })
+              .update({
+                region: region ?? codeRegion,
+                secteur: secteur ?? codeSecteur,
+                taille_organisation: taille_organisation ?? codeTrancheEffectif,
+              });
           }
-          const { codeRegion, codeSecteur, codeTrancheEffectif } =
-            (
-              await adaptateurRechercheEntreprise.rechercheOrganisations(
-                utilisateur.siretEntite,
-                null
-              )
-            )[0] ?? {};
-          return trx('resultats_test')
-            .where({ id })
-            .update({
-              region: region ?? codeRegion,
-              secteur: secteur ?? codeSecteur,
-              taille_organisation: taille_organisation ?? codeTrancheEffectif,
-            });
-        }
+        )
       );
       await Promise.all(promesses);
     });
