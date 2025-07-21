@@ -46,7 +46,14 @@ export const secteurs = [
 export const codesSecteur = secteurs.map((s) => s.code);
 
 export type CodeSecteur = (typeof codesSecteur)[number];
+export type Secteur = (typeof secteurs)[number];
 
-export function secteurParCode(code: string) {
+export function secteurParCode(code: CodeSecteur): Secteur;
+export function secteurParCode(code: string | undefined): Secteur | undefined;
+export function secteurParCode(code: string | undefined) {
   return secteurs.find((secteur) => secteur.code === code);
+}
+
+export function estCodeSecteur(code: string | undefined): code is CodeSecteur {
+  return secteurs.some((secteur) => secteur.code === code);
 }

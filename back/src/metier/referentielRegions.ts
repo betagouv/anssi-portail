@@ -21,10 +21,16 @@ export const regions = [
 ] as const;
 
 export const codesRegion = regions.map((s) => s.codeIso);
-export const codesRegionINSEE = regions.map((s) => s.codeINSEE);
 
 export type CodeRegion = (typeof codesRegion)[number];
-export type CodeRegionINSEE = (typeof codesRegionINSEE)[number];
+export type Region = (typeof regions)[number];
 
-export const regionParCode = (code: CodeRegion) =>
-  regions.find((region) => region.codeIso === code)!;
+export function regionParCode(code: CodeRegion): Region;
+export function regionParCode(code: string | undefined): Region | undefined;
+export function regionParCode(code: string | undefined) {
+  return regions.find((region) => region.codeIso === code);
+}
+
+export function estCodeRegion(code: string | undefined): code is CodeRegion {
+  return regions.some((region) => region.codeIso === code);
+}

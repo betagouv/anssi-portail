@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { regionParCode } from '../../metier/referentielRegions';
+import { estCodeRegion, regionParCode } from '../../metier/referentielRegions';
 import { secteurParCode } from '../../metier/referentielSecteurs';
 import { trancheEffectifParCode } from '../../metier/referentielTranchesEffectifEtablissement';
 import { ConfigurationServeur } from '../configurationServeur';
@@ -33,6 +33,7 @@ const ressourceDernierResultatDeTest = ({
           requete.utilisateur.siretEntite,
           null
         );
+
       const {
         codeRegion = resultatTest.region,
         codeSecteur = resultatTest.secteur,
@@ -40,25 +41,16 @@ const ressourceDernierResultatDeTest = ({
       } = resultatRechercheOrga[0];
 
       const trancheEffectif = codeTrancheEffectif
-        ? {
-            code: codeTrancheEffectif,
-            libelle: trancheEffectifParCode(codeTrancheEffectif).libelle,
-          }
+        ? trancheEffectifParCode(codeTrancheEffectif)
         : undefined;
-
-      const region = codeRegion
+      const region = estCodeRegion(codeRegion)
         ? {
             code: codeRegion,
             libelle: regionParCode(codeRegion).nom,
           }
         : undefined;
 
-      const secteur = codeSecteur
-        ? {
-            code: codeSecteur,
-            libelle: secteurParCode(codeSecteur).libelle,
-          }
-        : undefined;
+      const secteur = secteurParCode(codeSecteur);
 
       reponse.send({
         reponses: resultatTest.reponses,
