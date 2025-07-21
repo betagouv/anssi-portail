@@ -65,7 +65,7 @@ describe('La ressource qui gère un résultat de test', () => {
         ...donneesResultatTestCorrectes(),
         id: 'r1',
       });
-      resultatDeHector.revendiquePropriete(
+      await resultatDeHector.revendiquePropriete(
         hectorDurant,
         fauxAdaptateurRechercheEntreprise
       );
@@ -87,7 +87,7 @@ describe('La ressource qui gère un résultat de test', () => {
         ...donneesResultatTestCorrectes(),
         id: 'r1',
       });
-      resultatDeJeanne.revendiquePropriete(
+      await resultatDeJeanne.revendiquePropriete(
         jeanneDupont,
         fauxAdaptateurRechercheEntreprise
       );

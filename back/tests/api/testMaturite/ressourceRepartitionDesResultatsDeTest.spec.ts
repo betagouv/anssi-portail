@@ -103,9 +103,9 @@ describe('La ressource qui gère les series de résultats de test de maturité',
     });
 
     it('calcule le nombre total de test par niveau', async () => {
-      await entrepotResultatTest.ajoute(creeResultatTest('insuffisant'));
-      await entrepotResultatTest.ajoute(creeResultatTest('emergent'));
-      await entrepotResultatTest.ajoute(creeResultatTest('emergent'));
+      await entrepotResultatTest.ajoute(await creeResultatTest('insuffisant'));
+      await entrepotResultatTest.ajoute(await creeResultatTest('emergent'));
+      await entrepotResultatTest.ajoute(await creeResultatTest('emergent'));
 
       const reponse = await request(serveur).get(
         '/api/repartition-resultats-test'

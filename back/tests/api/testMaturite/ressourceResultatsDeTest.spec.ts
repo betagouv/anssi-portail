@@ -395,7 +395,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           reponses: {},
           tailleOrganisation: '01',
         });
-        resultatDunUtilisateur.revendiquePropriete(
+        await resultatDunUtilisateur.revendiquePropriete(
           utilisateur,
           fauxAdaptateurRechercheEntreprise
         );
@@ -451,7 +451,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           tailleOrganisation: '01',
           dateRealisation: new Date(2025, 8, 11),
         });
-        testDeJeanne.revendiquePropriete(
+        await testDeJeanne.revendiquePropriete(
           jeanneDupont,
           fauxAdaptateurRechercheEntreprise
         );

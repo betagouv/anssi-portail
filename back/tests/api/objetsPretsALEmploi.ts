@@ -36,7 +36,7 @@ export const hectorDurant: Utilisateur = new Utilisateur(
   fauxAdaptateurRechercheEntreprise
 );
 
-export function creeResultatTest(idNiveau?: IdNiveauMaturite) {
+export async function creeResultatTest(idNiveau?: IdNiveauMaturite) {
   const pointsParNiveau: Record<IdNiveauMaturite, number> = {
     insuffisant: 1,
     emergent: 2,
@@ -58,7 +58,7 @@ export function creeResultatTest(idNiveau?: IdNiveauMaturite) {
       posture: pointDeLaReponse,
     },
   });
-  resultatDeJeanne.revendiquePropriete(
+  await resultatDeJeanne.revendiquePropriete(
     jeanneDupont,
     fauxAdaptateurRechercheEntreprise
   );

@@ -39,7 +39,7 @@ const ressourceResultatDeTest = ({
         return;
       }
 
-      resultatTest.revendiquePropriete(
+      await resultatTest.revendiquePropriete(
         utilisateur,
         adaptateurRechercheEntreprise
       );

@@ -67,7 +67,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
       ...donneesResultatTestCorrectes(),
       ...donneesSupplementaires,
     });
-    resultatDeJeanne.revendiquePropriete(
+    await resultatDeJeanne.revendiquePropriete(
       jeanneDupont,
       fauxAdaptateurRechercheEntreprise
     );
@@ -100,7 +100,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
       });
 
       it('renvoie la date de réalisation du test', async () => {
-        ajouteResultatDeTestPourJeanne({
+        await ajouteResultatDeTestPourJeanne({
           dateRealisation: new Date(2025, 5, 11),
         });
 
@@ -119,7 +119,9 @@ describe('La ressource qui gère le dernier résultat de test', () => {
       });
 
       it('renvoie le niveau du test', async () => {
-        await entrepotResultatTest.ajoute(creeResultatTest('insuffisant'));
+        await entrepotResultatTest.ajoute(
+          await creeResultatTest('insuffisant')
+        );
 
         const reponse = await requeteGET();
 
