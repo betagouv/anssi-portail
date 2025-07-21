@@ -59,20 +59,22 @@ describe('La ressource Statistiques', () => {
       assert.equal(reponse.body.servicesEtRessourcesConsultes, 3800);
     });
 
-    function creeListeResultatTest(
+    async function creeListeResultatTest(
       niveau?: IdNiveauMaturite,
       nombreDeResultats: number = 1
     ) {
-      return Array(nombreDeResultats)
-        .keys()
-        .map(() => creeResultatTest(niveau))
-        .toArray();
+      return Promise.all(
+        Array(nombreDeResultats)
+          .keys()
+          .map(() => creeResultatTest(niveau))
+          .toArray()
+      );
     }
 
     it('renvoie le nombre de tests de maturité', async () => {
-      await entrepotResultatTest.ajoute(creeResultatTest());
-      await entrepotResultatTest.ajoute(creeResultatTest());
-      await entrepotResultatTest.ajoute(creeResultatTest());
+      await entrepotResultatTest.ajoute(await creeResultatTest());
+      await entrepotResultatTest.ajoute(await creeResultatTest());
+      await entrepotResultatTest.ajoute(await creeResultatTest());
 
       const reponse = await request(serveur).get('/api/statistiques');
 
@@ -90,11 +92,11 @@ describe('La ressource Statistiques', () => {
     it('renvoie les niveaux de maturité', async () => {
       Promise.all(
         [
-          ...creeListeResultatTest('insuffisant', 1),
-          ...creeListeResultatTest('emergent', 2),
-          ...creeListeResultatTest('intermediaire', 3),
-          ...creeListeResultatTest('confirme', 4),
-          ...creeListeResultatTest('optimal', 5),
+          ...(await creeListeResultatTest('insuffisant', 1)),
+          ...(await creeListeResultatTest('emergent', 2)),
+          ...(await creeListeResultatTest('intermediaire', 3)),
+          ...(await creeListeResultatTest('confirme', 4)),
+          ...(await creeListeResultatTest('optimal', 5)),
         ].map((resultat) => entrepotResultatTest.ajoute(resultat))
       );
 
