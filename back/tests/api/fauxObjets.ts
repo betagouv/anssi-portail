@@ -99,6 +99,9 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     actif: () => false,
     detailsPreparation: () => undefined,
   }),
+  repartition: () => ({
+    nombreMinimumDeResultats: () => 2,
+  }),
 };
 
 const vraiMiddleware = fabriqueMiddleware({

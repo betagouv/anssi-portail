@@ -29,6 +29,9 @@ type AdaptateurEnvironnement = {
   chiffrement: () => {
     cleChaCha20Hex: () => string;
   };
+  repartition: () => {
+    nombreMinimumDeResultats: () => number;
+  };
 };
 
 const adaptateurEnvironnement: AdaptateurEnvironnement = {
@@ -120,6 +123,19 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
         );
       }
       return cleHex;
+    },
+  }),
+  repartition: () => ({
+    nombreMinimumDeResultats: () => {
+      const nombreMinimumDeResultats = Number(
+        process.env.NOMBRE_MINIMUM_DE_RESULTATS_COMPARAISON || 50
+      );
+      if (!Number.isInteger(nombreMinimumDeResultats)) {
+        throw new Error(
+          `La limite NOMBRE_MINIMUM_DE_RESULTATS_COMPARAISON doit être un entier`
+        );
+      }
+      return nombreMinimumDeResultats;
     },
   }),
 };
