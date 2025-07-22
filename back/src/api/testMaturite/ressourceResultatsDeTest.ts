@@ -109,6 +109,7 @@ const ressourceResultatsDeTest = ({
           tailleOrganisation: resultatTest.tailleOrganisation,
           reponses,
           codeSessionGroupe,
+          idResultatTest: resultatTest.id,
         })
       );
       if (utilisateur) {

@@ -26,6 +26,7 @@ describe("L'abonnement qui consigne la réalisation d'un test dans le journal", 
         reponses: { pilotage: 2 },
         secteur: 'A',
         tailleOrganisation: '00',
+        idResultatTest: 'ef3dc8c7-beed-4bd7-a475-409515c28a0c',
       })
     );
 
@@ -36,5 +37,9 @@ describe("L'abonnement qui consigne la réalisation d'un test dans le journal", 
     assert.equal(evenementRecu!.donnees.secteur, 'A');
     assert.equal(evenementRecu!.donnees.tailleOrganisation, '00');
     assert.deepEqual(evenementRecu!.date, new Date('2025-03-10'));
+    assert.equal(
+      evenementRecu!.donnees.idResultatTest,
+      'ef3dc8c7-beed-4bd7-a475-409515c28a0c'
+    );
   });
 });
