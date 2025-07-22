@@ -148,7 +148,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
       assert.equal(reponse.body[1].totalNombreTests, 2);
     });
 
-    it('répond 451 si trop peu de résultats', async () => {
+    it('répond 204 si trop peu de résultats', async () => {
       entrepotResultatTest.ajoute(
         new ResultatTestMaturite({
           secteur: 'A',
@@ -170,7 +170,177 @@ describe('La ressource qui gère les series de résultats de test de maturité',
         '/api/repartition-resultats-test'
       );
 
-      assert.equal(reponse.status, 451);
+      assert.equal(reponse.status, 204);
+    });
+
+    describe('avec un filtre', () => {
+      it('sur le secteur, ne remonte que les résultats de même secteur', async () => {
+        entrepotResultatTest.ajoute(
+          new ResultatTestMaturite({
+            secteur: 'A',
+            region: 'FR-NOR',
+            id: 'test-id-1',
+            reponses: {
+              'adoption-solutions': 1,
+              'prise-en-compte-risque': 1,
+              'ressources-humaines': 1,
+              budget: 1,
+              pilotage: 1,
+              posture: 1,
+            },
+            tailleOrganisation: '01',
+          })
+        );
+        entrepotResultatTest.ajoute(
+          new ResultatTestMaturite({
+            secteur: 'A',
+            region: 'FR-NOR',
+            id: 'test-id-2',
+            reponses: {
+              'adoption-solutions': 1,
+              'prise-en-compte-risque': 1,
+              'ressources-humaines': 1,
+              budget: 1,
+              pilotage: 1,
+              posture: 1,
+            },
+            tailleOrganisation: '01',
+          })
+        );
+        entrepotResultatTest.ajoute(
+          new ResultatTestMaturite({
+            secteur: 'B',
+            region: 'FR-NOR',
+            id: 'test-id-3',
+            reponses: {
+              'adoption-solutions': 1,
+              'prise-en-compte-risque': 1,
+              'ressources-humaines': 1,
+              budget: 1,
+              pilotage: 1,
+              posture: 1,
+            },
+            tailleOrganisation: '01',
+          })
+        );
+        const reponse = await request(serveur).get(
+          '/api/repartition-resultats-test?secteur=A'
+        );
+
+        assert.equal(reponse.body[0].totalNombreTests, 2);
+      });
+
+      it('sur la région, ne remonte que les résultats de la même région', async () => {
+        entrepotResultatTest.ajoute(
+          new ResultatTestMaturite({
+            secteur: 'A',
+            region: 'FR-NOR',
+            id: 'test-id-1',
+            reponses: {
+              'adoption-solutions': 1,
+              'prise-en-compte-risque': 1,
+              'ressources-humaines': 1,
+              budget: 1,
+              pilotage: 1,
+              posture: 1,
+            },
+            tailleOrganisation: '01',
+          })
+        );
+        entrepotResultatTest.ajoute(
+          new ResultatTestMaturite({
+            secteur: 'A',
+            region: 'FR-NOR',
+            id: 'test-id-2',
+            reponses: {
+              'adoption-solutions': 1,
+              'prise-en-compte-risque': 1,
+              'ressources-humaines': 1,
+              budget: 1,
+              pilotage: 1,
+              posture: 1,
+            },
+            tailleOrganisation: '01',
+          })
+        );
+        entrepotResultatTest.ajoute(
+          new ResultatTestMaturite({
+            secteur: 'B',
+            region: 'FR-20R',
+            id: 'test-id-3',
+            reponses: {
+              'adoption-solutions': 1,
+              'prise-en-compte-risque': 1,
+              'ressources-humaines': 1,
+              budget: 1,
+              pilotage: 1,
+              posture: 1,
+            },
+            tailleOrganisation: '01',
+          })
+        );
+        const reponse = await request(serveur).get(
+          '/api/repartition-resultats-test?region=FR-NOR'
+        );
+
+        assert.equal(reponse.body[0].totalNombreTests, 2);
+      });
+
+      it("sur la taille d'organisation, ne remonte que les résultats de même taille", async () => {
+        entrepotResultatTest.ajoute(
+          new ResultatTestMaturite({
+            secteur: 'A',
+            region: 'FR-NOR',
+            id: 'test-id-1',
+            reponses: {
+              'adoption-solutions': 1,
+              'prise-en-compte-risque': 1,
+              'ressources-humaines': 1,
+              budget: 1,
+              pilotage: 1,
+              posture: 1,
+            },
+            tailleOrganisation: '01',
+          })
+        );
+        entrepotResultatTest.ajoute(
+          new ResultatTestMaturite({
+            secteur: 'A',
+            region: 'FR-NOR',
+            id: 'test-id-2',
+            reponses: {
+              'adoption-solutions': 1,
+              'prise-en-compte-risque': 1,
+              'ressources-humaines': 1,
+              budget: 1,
+              pilotage: 1,
+              posture: 1,
+            },
+            tailleOrganisation: '01',
+          })
+        );
+        entrepotResultatTest.ajoute(
+          new ResultatTestMaturite({
+            secteur: 'A',
+            region: 'FR-NOR',
+            id: 'test-id-3',
+            reponses: {
+              'adoption-solutions': 1,
+              'prise-en-compte-risque': 1,
+              'ressources-humaines': 1,
+              budget: 1,
+              pilotage: 1,
+              posture: 1,
+            },
+            tailleOrganisation: '11',
+          })
+        );
+        const reponse = await request(serveur).get(
+          '/api/repartition-resultats-test?tailleOrganisation=01'
+        );
+
+        assert.equal(reponse.body[0].totalNombreTests, 2);
+      });
     });
   });
 });

@@ -44,6 +44,11 @@
     const reponse = await axios.get<RepartitionResultatsTestPourUnNiveau[]>(
       '/api/repartition-resultats-test'
     );
+    if (reponse.status === 204) {
+      serie = [];
+      seriesRadar = [];
+      return;
+    }
 
     const repartitions = reponse.data;
 
@@ -71,29 +76,44 @@
 </script>
 
 {#if testRealise}
-  <section class="repartion-organisations">
-    <div class="contenu-section">
-      <h2>Répartition des organisations</h2>
-      <div class="repartition-niveaux-maturite">
-        <GraphiqueAnneau {serie} nomDeLaDonnee="organisations" />
-        <LegendeAnneau {serie} actif={libelleNiveauCourant} />
+  {#if serie.length > 0}
+    <section class="repartion-organisations">
+      <div class="contenu-section">
+        <h2>Répartition des organisations</h2>
+        <div class="repartition-niveaux-maturite">
+          <GraphiqueAnneau {serie} nomDeLaDonnee="organisations" />
+          <LegendeAnneau {serie} actif={libelleNiveauCourant} />
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
   <hr />
-  <section class="repartition-reponses">
-    <div class="contenu-section">
-      <h2>Répartition des réponses</h2>
-      <RadarSessionGroupe series={seriesRadar} affichageReduit />
-      <ResumeRadarComparaison series={seriesRadar} actif={niveauCourant} />
-      <div class="message-information">
-        Le résultat obtenu est une évaluation indicative basée sur un modèle
-        élaboré par l’ANSSI. La maturité cyber n’est pas une évaluation du
-        niveau de sécurité des systèmes d’information d’une organisation mais de
-        sa posture à l’égard des enjeux cyber.
+    <section class="repartition-reponses">
+      <div class="contenu-section">
+        <h2>Répartition des réponses</h2>
+        <RadarSessionGroupe series={seriesRadar} affichageReduit />
+        <ResumeRadarComparaison series={seriesRadar} actif={niveauCourant} />
+        <div class="message-information">
+          Le résultat obtenu est une évaluation indicative basée sur un modèle
+          élaboré par l’ANSSI. La maturité cyber n’est pas une évaluation du
+          niveau de sécurité des systèmes d’information d’une organisation mais
+          de sa posture à l’égard des enjeux cyber.
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  {:else}
+    <section class="pas-assez-de-resultats">
+      <div class="contenu-section">
+        <img
+          src="/assets/images/illustration-dragon-aucun-resultat.svg"
+          alt="Pas assez de résultats"
+        />
+        <h4>
+          Votre recherche retourne trop peu de résultats pour être affichée
+        </h4>
+        <p>Vos filtres sont peut-être trop restrictifs</p>
+      </div>
+    </section>
+  {/if}
 {:else}
   <section class="pas-de-test">
     <div class="contenu-section">
@@ -172,7 +192,8 @@
     }
   }
 
-  .pas-de-test {
+  .pas-de-test,
+  .pas-assez-de-resultats {
     .contenu-section {
       display: flex;
       flex-direction: column;
