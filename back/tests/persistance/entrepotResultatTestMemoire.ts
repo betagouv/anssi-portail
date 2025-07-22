@@ -1,7 +1,10 @@
-import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest';
+import {
+  EntrepotResultatTest,
+  FiltreResultatsTest,
+} from '../../src/metier/entrepotResultatTest';
 import { ResultatTestMaturite } from '../../src/metier/resultatTestMaturite';
-import { EntrepotMemoire } from './entrepotMemoire';
 import { Utilisateur } from '../../src/metier/utilisateur';
+import { EntrepotMemoire } from './entrepotMemoire';
 
 export class EntrepotResultatTestMemoire
   extends EntrepotMemoire<ResultatTestMaturite>
@@ -55,6 +58,23 @@ export class EntrepotResultatTestMemoire
   async parId(id: string) {
     return this.copie(this.entites.find((entite) => entite.id === id));
   }
+
+  parFiltresEnOmettantUtilisateur = async ({
+    codeRegion,
+    codeSecteur,
+    codeTrancheEffectif,
+  }: FiltreResultatsTest): Promise<ResultatTestMaturite[]> => {
+    return this.entites
+      .filter(
+        (entite) =>
+          (codeSecteur ? entite.secteur === codeSecteur : true) &&
+          (codeRegion ? entite.region === codeRegion : true) &&
+          (codeTrancheEffectif
+            ? entite.tailleOrganisation === codeTrancheEffectif
+            : true)
+      )
+      .map((entite) => new ResultatTestMaturite({ ...entite }));
+  };
 
   private copie(entite: ResultatTestMaturite | undefined) {
     if (!entite) {

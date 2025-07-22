@@ -1,10 +1,13 @@
-import { EntrepotResultatTest } from '../metier/entrepotResultatTest';
-import { ResultatTestMaturite } from '../metier/resultatTestMaturite';
 import Knex from 'knex';
 import config from '../../knexfile';
-import { EntrepotUtilisateurMPAPostgres } from './entrepotUtilisateurMPAPostgres';
+import {
+  EntrepotResultatTest,
+  FiltreResultatsTest,
+} from '../metier/entrepotResultatTest';
+import { ResultatTestMaturite } from '../metier/resultatTestMaturite';
 import { Utilisateur } from '../metier/utilisateur';
 import { AdaptateurHachage } from './adaptateurHachage';
+import { EntrepotUtilisateurMPAPostgres } from './entrepotUtilisateurMPAPostgres';
 
 export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
   knex: Knex.Knex;
@@ -124,6 +127,25 @@ export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
     });
     return Promise.all(
       resultats.map((resultat) => this.traduitEnResultatTestMaturite(resultat))
+    );
+  }
+
+  async parFiltresEnOmettantUtilisateur({
+    codeSecteur,
+    codeRegion,
+    codeTrancheEffectif,
+  }: FiltreResultatsTest): Promise<ResultatTestMaturite[]> {
+    const resultats = await this.knex('resultats_test').where((builder) => {
+      if (codeSecteur) builder = builder.where('secteur', codeSecteur);
+      if (codeRegion) builder = builder.where('region', codeRegion);
+      if (codeTrancheEffectif)
+        builder = builder.where('taille_organisation', codeTrancheEffectif);
+      return builder;
+    });
+    return Promise.all(
+      resultats.map((resultat) =>
+        this.traduitEnResultatTestMaturite(resultat, false)
+      )
     );
   }
 }
