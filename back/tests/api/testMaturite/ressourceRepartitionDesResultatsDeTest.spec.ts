@@ -21,6 +21,39 @@ describe('La ressource qui gère les series de résultats de test de maturité',
   });
   describe('sur requête GET', () => {
     it('répond 200', async () => {
+      entrepotResultatTest.ajoute(
+        new ResultatTestMaturite({
+          secteur: 'A',
+          region: 'FR-NOR',
+          id: 'test-id-1',
+          reponses: {
+            'adoption-solutions': 1,
+            'prise-en-compte-risque': 1,
+            'ressources-humaines': 1,
+            budget: 1,
+            pilotage: 1,
+            posture: 1,
+          },
+          tailleOrganisation: '01',
+        })
+      );
+      entrepotResultatTest.ajoute(
+        new ResultatTestMaturite({
+          secteur: 'A',
+          region: 'FR-NOR',
+          id: 'test-id-2',
+          reponses: {
+            'adoption-solutions': 2,
+            'prise-en-compte-risque': 2,
+            'ressources-humaines': 2,
+            budget: 2,
+            pilotage: 2,
+            posture: 2,
+          },
+          tailleOrganisation: '01',
+        })
+      );
+
       const reponse = await request(serveur).get(
         '/api/repartition-resultats-test'
       );
@@ -113,6 +146,31 @@ describe('La ressource qui gère les series de résultats de test de maturité',
 
       assert.equal(reponse.body[0].totalNombreTests, 1);
       assert.equal(reponse.body[1].totalNombreTests, 2);
+    });
+
+    it('répond 451 si trop peu de résultats', async () => {
+      entrepotResultatTest.ajoute(
+        new ResultatTestMaturite({
+          secteur: 'A',
+          region: 'FR-NOR',
+          id: 'test-id-1',
+          reponses: {
+            'adoption-solutions': 1,
+            'prise-en-compte-risque': 1,
+            'ressources-humaines': 1,
+            budget: 1,
+            pilotage: 1,
+            posture: 1,
+          },
+          tailleOrganisation: '01',
+        })
+      );
+
+      const reponse = await request(serveur).get(
+        '/api/repartition-resultats-test'
+      );
+
+      assert.equal(reponse.status, 451);
     });
   });
 });
