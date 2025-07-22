@@ -10,6 +10,7 @@ export class TestRealise implements EvenementDuBus {
   tailleOrganisation: CodeTrancheEffectif | undefined;
   reponses: ReponsesTestMaturite;
   codeSessionGroupe: string | undefined;
+  idResultatTest: string;
 
   constructor({
     region,
@@ -17,17 +18,20 @@ export class TestRealise implements EvenementDuBus {
     tailleOrganisation,
     reponses,
     codeSessionGroupe,
+    idResultatTest,
   }: {
     region: CodeRegion | undefined;
     secteur: CodeSecteur | undefined;
     tailleOrganisation: CodeTrancheEffectif | undefined;
     reponses: ReponsesTestMaturite;
-    codeSessionGroupe?: string | undefined;
+    codeSessionGroupe?: string;
+    idResultatTest: string;
   }) {
     this.region = region;
     this.secteur = secteur;
     this.tailleOrganisation = tailleOrganisation;
     this.reponses = reponses;
     this.codeSessionGroupe = codeSessionGroupe;
+    this.idResultatTest = idResultatTest;
   }
 }
