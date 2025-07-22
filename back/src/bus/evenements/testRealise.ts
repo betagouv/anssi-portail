@@ -5,9 +5,9 @@ import { CodeTrancheEffectif } from '../../metier/referentielTranchesEffectifEta
 import { ReponsesTestMaturite } from '../../metier/resultatTestMaturite';
 
 export class TestRealise implements EvenementDuBus {
-  region: CodeRegion;
-  secteur: CodeSecteur;
-  tailleOrganisation: CodeTrancheEffectif;
+  region: CodeRegion | undefined;
+  secteur: CodeSecteur | undefined;
+  tailleOrganisation: CodeTrancheEffectif | undefined;
   reponses: ReponsesTestMaturite;
   codeSessionGroupe: string | undefined;
 
@@ -18,9 +18,9 @@ export class TestRealise implements EvenementDuBus {
     reponses,
     codeSessionGroupe,
   }: {
-    region: CodeRegion;
-    secteur: CodeSecteur;
-    tailleOrganisation: CodeTrancheEffectif;
+    region: CodeRegion | undefined;
+    secteur: CodeSecteur | undefined;
+    tailleOrganisation: CodeTrancheEffectif | undefined;
     reponses: ReponsesTestMaturite;
     codeSessionGroupe?: string | undefined;
   }) {

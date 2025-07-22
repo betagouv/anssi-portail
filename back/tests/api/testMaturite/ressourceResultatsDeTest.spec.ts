@@ -191,6 +191,52 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         assert.equal(evenement!.utilisateur, jeanneDupont);
         assert.equal(evenement!.idResultatTest, reponse.body.id);
       });
+      describe("et n'a pas renseigné des informations d'organisaton", () => {
+        it("récupère les informations d'organisation et les enregistre en base", async () => {
+          await request(serveur)
+            .post('/api/resultats-test')
+            .set('Cookie', [cookie])
+            .send({
+              reponses: {
+                'prise-en-compte-risque': 2,
+                pilotage: 3,
+                budget: 5,
+                'ressources-humaines': 3,
+                'adoption-solutions': 2,
+                posture: 3,
+              },
+            });
+
+          const resultatSauvegarde =
+            await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
+
+          assert.equal(resultatSauvegarde?.region, 'FR-971');
+          assert.equal(resultatSauvegarde?.secteur, 'A');
+          assert.equal(resultatSauvegarde?.tailleOrganisation, '11');
+        });
+
+        it("récupère les informations d'organisation et les publie dans le bus d'évènements", async () => {
+          await request(serveur)
+            .post('/api/resultats-test')
+            .set('Cookie', [cookie])
+            .send({
+              reponses: {
+                'prise-en-compte-risque': 2,
+                pilotage: 3,
+                budget: 5,
+                'ressources-humaines': 3,
+                'adoption-solutions': 2,
+                posture: 3,
+              },
+            });
+
+          busEvenements.aRecuUnEvenement(TestRealise);
+          const evenement = busEvenements.recupereEvenement(TestRealise);
+          assert.equal(evenement?.region, 'FR-971');
+          assert.equal(evenement?.secteur, 'A');
+          assert.equal(evenement?.tailleOrganisation, '11');
+        });
+      });
     });
 
     describe("lorsque l'utilisateur n'est pas connecté", () => {
