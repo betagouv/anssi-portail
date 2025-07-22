@@ -26,6 +26,10 @@ import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAP
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
 import { EntrepotFavori } from '../metier/entrepotFavori';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
+import { CodeRegion } from '../metier/referentielRegions';
+import { CodeSecteur } from '../metier/referentielSecteurs';
+import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
+import { ReponsesTestMaturite } from '../metier/resultatTestMaturite';
 import { Utilisateur } from '../metier/utilisateur';
 
 export class ConsoleAdministration {
@@ -401,5 +405,66 @@ export class ConsoleAdministration {
     });
 
     process.stdout.write('Fin du rattrapage des résultats\n');
+  }
+
+  async regenereEvenementsTestRealiseAvecId(persiste: boolean = false) {
+    await this.knexJournal.transaction(async (trx) => {
+      await trx('journal_msc.evenements')
+        .where('type', 'TEST_REALISE')
+        .delete();
+    });
+
+    const journal = persiste
+      ? adaptateurJournalPostgres()
+      : adaptateurJournalMemoire;
+
+    type DonneesResultatPourRattrapage = {
+      id: string;
+      region: CodeRegion | undefined;
+      secteur: CodeSecteur | undefined;
+      taille_organisation: CodeTrancheEffectif | undefined;
+      reponses: ReponsesTestMaturite;
+      code_session_groupe?: string;
+      date_realisation: Date | undefined;
+    };
+
+    const resultats: DonneesResultatPourRattrapage[] =
+      (await this.knexMSC.transaction(async (trx) => {
+        return trx('resultats_test');
+      }))!;
+
+    if (!resultats) {
+      process.stdout.write('resultats est void\n');
+      return;
+    }
+    const afficheErreur = (resultat: DonneesResultatPourRattrapage) =>
+      `Erreur pour ${resultat.id}`;
+
+    await ConsoleAdministration.rattrapage(
+      resultats,
+      afficheErreur,
+      async ({
+        id,
+        region,
+        secteur,
+        taille_organisation,
+        reponses,
+        code_session_groupe,
+        date_realisation,
+      }) => {
+        await journal.consigneEvenement({
+          type: 'TEST_REALISE',
+          donnees: {
+            codeSessionGroupe: code_session_groupe,
+            idResultatTest: id,
+            region,
+            reponses,
+            secteur,
+            tailleOrganisation: taille_organisation,
+          },
+          date: date_realisation ?? new Date(),
+        });
+      }
+    );
   }
 }
