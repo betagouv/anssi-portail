@@ -42,9 +42,9 @@ interface DonneesEvenementProprieteTestRevendiquee
 
 interface DonneesEvenementTestRealise extends DonneesCommunesEvenement {
   donnees: {
-    region: CodeRegion;
-    secteur: CodeSecteur;
-    tailleOrganisation: CodeTrancheEffectif;
+    region: CodeRegion | undefined;
+    secteur: CodeSecteur | undefined;
+    tailleOrganisation: CodeTrancheEffectif | undefined;
     reponses: ReponsesTestMaturite;
     codeSessionGroupe?: string | undefined;
   };

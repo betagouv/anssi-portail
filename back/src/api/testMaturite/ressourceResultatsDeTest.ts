@@ -104,9 +104,9 @@ const ressourceResultatsDeTest = ({
 
       await busEvenements.publie(
         new TestRealise({
-          region,
-          secteur,
-          tailleOrganisation,
+          region: resultatTest.region,
+          secteur: resultatTest.secteur,
+          tailleOrganisation: resultatTest.tailleOrganisation,
           reponses,
           codeSessionGroupe,
         })
