@@ -27,8 +27,23 @@
     };
   };
 
-  const calculeLesPointsDesSecteurs = () => {
-    const resultat = [];
+  type Point = {
+    x: number;
+    y: number;
+  };
+
+  type Secteur = {
+    arcLarge: boolean;
+    premierPointExterieur: Point;
+    secondPointExterieur: Point;
+    premierPointInterieur: Point;
+    secondPointInterieur: Point;
+  };
+
+  let secteurs: Secteur[] = [];
+
+  $: {
+    secteurs = [];
     for (let index = 0; index < pourcentagesCumules.length - 1; index++) {
       const angleCourant = pourcentageVersRadian(pourcentagesCumules[index]);
       let nouvelAngle = pourcentageVersRadian(pourcentagesCumules[index + 1]);
@@ -42,7 +57,7 @@
       }
       const pourcentageSecteur =
         pourcentagesCumules[index + 1] - pourcentagesCumules[index];
-      resultat.push({
+      secteurs.push({
         arcLarge: pourcentageSecteur > 50,
         premierPointExterieur: polaireVersCartesien(
           rayonExterieur,
@@ -59,8 +74,7 @@
         ),
       });
     }
-    return resultat;
-  };
+  }
 </script>
 
 <svg id="radar" viewBox="-130 -130 260 260" xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +90,7 @@
     text-anchor="middle"
     >{nomDeLaDonnee}
   </text>
-  {#each calculeLesPointsDesSecteurs() as secteur, index (index)}
+  {#each secteurs as secteur, index (index)}
     <path
       class={`secteur-${index} secteur`}
       d="M {secteur.premierPointExterieur.x} {secteur.premierPointExterieur.y}
