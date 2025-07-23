@@ -49,7 +49,10 @@ describe('quand requête GET sur `/api/pages-crisp/un-id-d-article`', () => {
       titre: 'Promouvoir MSC',
       description: 'si vous aimez MSC...',
       contenu: '<h1>Promo</h1>',
-      tableDesMatieres: ['Section 1', 'Section 2'],
+      tableDesMatieres: [
+        { id: 'Section 1', texte: 'Section 1', profondeur: 1 },
+        { id: 'Section 2', texte: 'Section 2', profondeur: 1 },
+      ],
     });
 
     const reponse = await request(serveur).get(
@@ -60,7 +63,10 @@ describe('quand requête GET sur `/api/pages-crisp/un-id-d-article`', () => {
     assert.equal(page.titre, 'Promouvoir MSC');
     assert.equal(page.description, 'si vous aimez MSC...');
     assert.equal(page.contenu, '<h1>Promo</h1>');
-    assert.deepEqual(page.tableDesMatieres, ['Section 1', 'Section 2']);
+    assert.deepEqual(page.tableDesMatieres, [
+      { id: 'Section 1', texte: 'Section 1', profondeur: 1 },
+      { id: 'Section 2', texte: 'Section 2', profondeur: 1 },
+    ]);
   });
 
   it("retourne un statut 404 lorsque l'article n'est pas trouvé", async () => {
