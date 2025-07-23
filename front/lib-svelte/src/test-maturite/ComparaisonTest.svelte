@@ -46,8 +46,13 @@
   }
 
   async function chargeRepartitionsDesResultats() {
+    const parametres = new URLSearchParams({
+      secteur: filtre.secteur ? infosOrganisation.secteur?.code || '' : '',
+      tailleOrganisation: filtre.taille ? infosOrganisation.trancheEffectif?.code || '' : '',
+      region: filtre.region ? infosOrganisation.region?.code || '' : '',
+    });
     const reponse = await axios.get<RepartitionResultatsTestPourUnNiveau[]>(
-      '/api/repartition-resultats-test'
+      '/api/repartition-resultats-test?' + parametres.toString()
     );
     if (reponse.status === 204) {
       serie = [];
@@ -78,6 +83,17 @@
     await chargeDernierResultat();
     await chargeRepartitionsDesResultats();
   });
+
+  let filtre: Record<'secteur' | 'taille' | 'region', boolean> = {
+    secteur: false,
+    taille: false,
+    region: false,
+  };
+
+  const basculeLeFiltre = async (cle: 'secteur' | 'taille' | 'region') => {
+    filtre[cle] = !filtre[cle];
+    await chargeRepartitionsDesResultats();
+  };
 </script>
 
 {#if testRealise}
@@ -87,25 +103,37 @@
         <div class="tags">
           {#if infosOrganisation.secteur}
             <lab-anssi-tag
+              role="button"
+              tabindex="0"
               label={infosOrganisation.secteur.libelle}
               taille="md"
               type="selectionnable"
+              on:click={() => basculeLeFiltre('secteur')}
+              on:keypress
             >
             </lab-anssi-tag>
           {/if}
           {#if infosOrganisation.trancheEffectif}
             <lab-anssi-tag
+              role="button"
+              tabindex="0"
               label={infosOrganisation.trancheEffectif.libelle}
               taille="md"
               type="selectionnable"
+              on:click={() => basculeLeFiltre('taille')}
+              on:keypress
             >
             </lab-anssi-tag>
           {/if}
           {#if infosOrganisation.region}
             <lab-anssi-tag
+              role="button"
+              tabindex="0"
               label={infosOrganisation.region.libelle}
               taille="md"
               type="selectionnable"
+              on:click={() => basculeLeFiltre('region')}
+              on:keypress
             >
             </lab-anssi-tag>
           {/if}
