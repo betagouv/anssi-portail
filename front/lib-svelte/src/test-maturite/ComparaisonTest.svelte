@@ -10,7 +10,10 @@
   import LegendeAnneau from './LegendeAnneau.svelte';
   import PartageTest from './PartageTest.svelte';
   import RadarSessionGroupe from './RadarSessionGroupe.svelte';
-  import type { DernierResultatTest } from './ResultatsTest.type';
+  import type {
+    DernierResultatTest,
+    InfosOrganisation,
+  } from './ResultatsTest.type';
   import ResumeRadarComparaison from './ResumeRadarComparaison.svelte';
   import type { Serie, SerieRadar } from './Serie';
   import type { IdRubrique } from './TestMaturite.type';
@@ -28,6 +31,7 @@
   };
 
   let niveauCourant: IdNiveau | undefined;
+  let infosOrganisation: InfosOrganisation;
   let libelleNiveauCourant: string | undefined;
   let serie: Serie = [];
   let seriesRadar: SerieRadar[] = [];
@@ -38,6 +42,7 @@
     );
     niveauCourant = reponse.data.idNiveau;
     libelleNiveauCourant = libelleDeNiveau(niveauCourant);
+    infosOrganisation = reponse.data.organisation;
   }
 
   async function chargeRepartitionsDesResultats() {
@@ -76,6 +81,38 @@
 </script>
 
 {#if testRealise}
+  {#if infosOrganisation}
+    <section class="filtres">
+      <div class="contenu-section">
+        <div class="tags">
+          {#if infosOrganisation.secteur}
+            <lab-anssi-tag
+              label={infosOrganisation.secteur.libelle}
+              taille="md"
+              type="selectionnable"
+            >
+            </lab-anssi-tag>
+          {/if}
+          {#if infosOrganisation.trancheEffectif}
+            <lab-anssi-tag
+              label={infosOrganisation.trancheEffectif.libelle}
+              taille="md"
+              type="selectionnable"
+            >
+            </lab-anssi-tag>
+          {/if}
+          {#if infosOrganisation.region}
+            <lab-anssi-tag
+              label={infosOrganisation.region.libelle}
+              taille="md"
+              type="selectionnable"
+            >
+            </lab-anssi-tag>
+          {/if}
+        </div>
+      </div>
+    </section>
+  {/if}
   {#if serie.length > 0}
     <section class="repartion-organisations">
       <div class="contenu-section">
