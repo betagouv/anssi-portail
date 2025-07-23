@@ -74,7 +74,7 @@ RUN set -eux; bundler exec jekyll build
 FROM node:23 AS build-le-back
 RUN npm install -g npm
 WORKDIR /usr/src/app
-COPY back/package.json back/package-lock.json back/tsconfig.json back/knexfile.ts /usr/src/app/
+COPY back/package.json package-lock.json back/tsconfig.json back/knexfile.ts /usr/src/app/
 COPY back/src /usr/src/app/src
 RUN npm install
 WORKDIR /usr/src/app/src
