@@ -48,7 +48,9 @@
   async function chargeRepartitionsDesResultats() {
     const parametres = new URLSearchParams({
       secteur: filtre.secteur ? infosOrganisation.secteur?.code || '' : '',
-      tailleOrganisation: filtre.taille ? infosOrganisation.trancheEffectif?.code || '' : '',
+      tailleOrganisation: filtre.taille
+        ? infosOrganisation.trancheEffectif?.code || ''
+        : '',
       region: filtre.region ? infosOrganisation.region?.code || '' : '',
     });
     const reponse = await axios.get<RepartitionResultatsTestPourUnNiveau[]>(
@@ -100,6 +102,17 @@
   {#if infosOrganisation}
     <section class="filtres">
       <div class="contenu-section">
+        <div class="description">
+          <p>
+            <strong>
+              Affinez votre comparaison en filtrant les résultats par secteur
+              d’activité, taille d’organisation et région.
+            </strong>
+          </p>
+          <p>
+            Ces filtres peuvent être combinés pour une analyse plus précise.
+          </p>
+        </div>
         <div class="tags">
           {#if infosOrganisation.secteur}
             <lab-anssi-tag
@@ -138,6 +151,11 @@
             </lab-anssi-tag>
           {/if}
         </div>
+        <p class="note">
+          Certains filtres ne sont pas encore accessibles. Chaque test réalisé
+          nous permet d’affiner nos analyses et d’enrichir les options
+          disponibles.
+        </p>
       </div>
     </section>
   {/if}
@@ -205,6 +223,27 @@
   }
   .filtres {
     padding: 32px var(--gouttiere) 0;
+
+    .contenu-section {
+      display: flex;
+      flex-direction: column;
+
+      .tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 8px;
+        margin-top: 16px;
+      }
+
+      .note {
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+        font-style: normal;
+        color: #666;
+        margin: 0;
+      }
+    }
   }
 
   .repartion-organisations {
