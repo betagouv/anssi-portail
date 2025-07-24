@@ -172,7 +172,8 @@
       background: var(--controle-segmente-courant-fond)
         url(/assets/images/illustration-cyberdepart.svg) no-repeat;
       background-position-x: calc(50vw + 30px);
-      background-position-y: calc(50% + 30px);
+      background-position-y: 50%;
+      background-size: auto calc(100% - 48px);
     }
 
     .colonne-explicative {
