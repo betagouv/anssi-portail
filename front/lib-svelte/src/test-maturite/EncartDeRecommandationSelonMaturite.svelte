@@ -4,9 +4,9 @@
   export let niveau: NiveauMaturite;
 
   $: afficheDiagnostic =
-    niveau.id === 'insuffisant' || niveau.id === 'emergent';
-  $: afficheParcoursApprofondir = niveau.id === 'intermediaire';
-  $: afficheCatalogue = niveau.id === 'optimal' || niveau.id === 'confirme';
+    niveau.id === 'insuffisant' ||
+    niveau.id === 'emergent' ||
+    niveau.id === 'intermediaire';
 </script>
 
 {#if afficheDiagnostic}
@@ -37,28 +37,15 @@
 {:else}
   <section class="votre-parcours">
     <div class="contenu-section">
-      {#if afficheParcoursApprofondir}
-        <div class="tuile parcours">
-          <img src="/assets/images/approfondir-cyber.png" alt="" />
-          <h3>Les services pour approfondir la cybersécurité</h3>
-          <p>
-            Découvrez les services et les ressources pour aider votre
-            organisation à approfondir la démarche de renforcement de la
-            cybersécurité.
-          </p>
-          <a href="/parcours-approfondir" class="bouton primaire">Découvrir</a>
-        </div>
-      {:else if afficheCatalogue}
-        <div class="tuile">
-          <img src="/assets/images/debuter-cyber.png" alt="" />
-          <h3>Les services et ressources cyber</h3>
-          <p>
-            Trouvez les services et les ressources adaptés à vos besoins et
-            votre maturité cyber.
-          </p>
-          <a href="/catalogue" class="bouton primaire">Découvrir</a>
-        </div>
-      {/if}
+      <div class="tuile">
+        <img src="/assets/images/debuter-cyber.png" alt="" />
+        <h3>Les services et ressources cyber</h3>
+        <p>
+          Trouvez les services et les ressources adaptés à vos besoins et votre
+          maturité cyber.
+        </p>
+        <a href="/catalogue" class="bouton primaire">Découvrir</a>
+      </div>
     </div>
   </section>
 {/if}
