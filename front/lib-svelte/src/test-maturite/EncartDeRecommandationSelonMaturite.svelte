@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { NiveauMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees.js';
+  import type { NiveauMaturite } from '../niveaux-maturite/NiveauxMaturite.type';
 
   export let niveau: NiveauMaturite;
 
