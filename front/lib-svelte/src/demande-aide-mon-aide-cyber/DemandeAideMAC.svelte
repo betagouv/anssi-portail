@@ -92,10 +92,13 @@
 <article class="page-demande-aide-mon-aide-cyber">
   <section class="encart-presentation">
     <div class="contenu-section">
-      <a href="/" class="lien">
-        <Icone type="fleche-gauche" />
-        Retour</a
-      >
+      <lab-anssi-lien
+        class="lien"
+        href="/"
+        titre="Retour"
+        icone="arrow-go-back-line"
+        positionIcone="gauche"
+      ></lab-anssi-lien>
     </div>
     <div class="contenu-section">
       <div class="colonne-explicative">
@@ -154,14 +157,8 @@
   }
 
   .lien {
-    text-decoration: none;
-    border-bottom: 1px solid var(--noir);
-    padding-bottom: 1px;
-
-    &:hover {
-      border-bottom-width: 2px;
-      padding-bottom: 0 !important;
-    }
+    display: flex;
+    margin-bottom: 24px;
   }
 
   .encart-presentation {
