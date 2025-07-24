@@ -80,7 +80,7 @@
       </div>
     </div>
   </section>
-
+  <hr />
   <section class="repartition-reponses">
     <div class="contenu-section">
       <h2>Répartition des réponses</h2>
@@ -112,6 +112,12 @@
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
+  hr {
+    margin: 0 var(--gouttiere);
+    height: 1px;
+    border: 0;
+    background-color: #dddddd;
+  }
   .filtres {
     padding: 32px var(--gouttiere) 0;
   }
