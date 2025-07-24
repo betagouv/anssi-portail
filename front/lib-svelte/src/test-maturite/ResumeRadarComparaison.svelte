@@ -61,9 +61,9 @@
     display: none;
     flex-direction: row;
     gap: 24px;
-    justify-content: space-between;
+    justify-content: center;
     padding: 24px;
-    @include a-partir-de(sm) {
+    @include a-partir-de(md) {
       display: flex;
     }
   }
@@ -110,7 +110,7 @@
   }
 
   .accordeon {
-    @include a-partir-de(sm) {
+    @include a-partir-de(md) {
       display: none;
     }
 
