@@ -7,7 +7,8 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
   .conteneur-onglet {
     width: min-content;
     margin: 0 0 0 -0.5px;
@@ -15,6 +16,10 @@
     flex-direction: row;
     gap: 8px;
     border-bottom: 1px solid var(--gris-clair);
+
+    @include a-partir-de(md) {
+      width: 100%;
+    }
   }
   .conteneur-scrollable {
     overflow-x: auto;
