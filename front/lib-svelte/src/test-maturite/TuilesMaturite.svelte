@@ -1,9 +1,7 @@
 <script lang="ts">
   import { afterUpdate } from 'svelte';
-  import {
-    type NiveauMaturite,
-    niveauxMaturite,
-  } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import type { NiveauMaturite } from '../niveaux-maturite/NiveauxMaturite.type';
 
   export let niveauCourant: NiveauMaturite;
   export let animeTuiles = true;
