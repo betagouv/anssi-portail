@@ -125,18 +125,25 @@
       </div>
     </div>
   </section>
-  <section class="contenu-section zone-formulaire">
-    {#if !enSucces}
-      <FormulaireDemandeAide
-        bind:this={formulaireDemandeAide}
-        on:formulaireSoumis={soumetsFormulaire}
-        {formulaireSoumis}
-        {enCoursEnvoi}
-        {erreurs}
-      />
-    {:else}
-      <ConfirmationCreationDemandeAide />
-    {/if}
+  <section class="zone-formulaire">
+    <div class="contenu-section">
+      {#if !enSucces}
+        <FormulaireDemandeAide
+          bind:this={formulaireDemandeAide}
+          on:formulaireSoumis={soumetsFormulaire}
+          {formulaireSoumis}
+          {enCoursEnvoi}
+          {erreurs}
+        />
+      {:else}
+        <ConfirmationCreationDemandeAide />
+      {/if}
+    </div>
+  </section>
+  <section class="zone-faq">
+    <div class="contenu-section">
+      <h6>Questions les plus fréquentes</h6>
+    </div>
   </section>
 </article>
 
@@ -148,6 +155,13 @@
     font-style: normal;
     font-weight: 700;
     line-height: 36px;
+  }
+
+  h6 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.75rem;
   }
 
   p {
@@ -189,9 +203,8 @@
     }
   }
 
-  :global(.zone-formulaire) {
-    max-width: unset;
-    padding: 0 var(--gouttiere) 96px var(--gouttiere);
+  .zone-formulaire {
+    padding: 0 var(--gouttiere) 48px var(--gouttiere);
 
     background: linear-gradient(
       to bottom,
@@ -201,13 +214,8 @@
       white 100%
     );
 
-    &.contenu-section {
-      width: unset;
-    }
-
-    @include a-partir-de(md) {
-      padding-left: 60px;
-      padding-right: 60px;
+    .contenu-section {
+      max-width: 792px;
     }
   }
 
@@ -226,6 +234,14 @@
       display: flex;
       align-items: center;
       gap: 4px;
+    }
+  }
+
+  .zone-faq {
+    padding: 0 var(--gouttiere) 96px var(--gouttiere);
+
+    .contenu-section {
+      max-width: 792px;
     }
   }
 </style>
