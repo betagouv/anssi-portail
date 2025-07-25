@@ -128,7 +128,8 @@ describe('La ressource qui gère les series de résultats de test de maturité',
           '/api/repartition-resultats-test?secteur=A'
         );
 
-        assert.equal(reponse.body[0].totalNombreTests, 2);
+        assert.equal(reponse.body[0].totalNombreTests, undefined);
+        assert.equal(reponse.body[0].ratio, 1);
       });
 
       it('sur la région, ne remonte que les résultats de la même région', async () => {
@@ -143,7 +144,8 @@ describe('La ressource qui gère les series de résultats de test de maturité',
           '/api/repartition-resultats-test?region=FR-NOR'
         );
 
-        assert.equal(reponse.body[0].totalNombreTests, 2);
+        assert.equal(reponse.body[0].totalNombreTests, undefined);
+        assert.equal(reponse.body[0].ratio, 1);
       });
 
       it("sur la taille d'organisation, ne remonte que les résultats de même taille", async () => {
@@ -167,7 +169,8 @@ describe('La ressource qui gère les series de résultats de test de maturité',
           '/api/repartition-resultats-test?tailleOrganisation=01'
         );
 
-        assert.equal(reponse.body[0].totalNombreTests, 2);
+        assert.equal(reponse.body[0].totalNombreTests, undefined);
+        assert.equal(reponse.body[0].ratio, 1);
       });
     });
   });

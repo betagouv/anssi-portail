@@ -13,11 +13,14 @@ type ScoresPourUnNiveau = {
 export type RepartitionResultatsTestPourUnNiveau = {
   id: IdNiveauMaturite;
   valeurs: Record<IdRubrique, number>;
-  totalNombreTests: number;
+  totalNombreTests: number | undefined;
 };
 
 export class RepartitionResultatsTest {
-  constructor(private readonly resultatsDeTest: ResultatTestMaturite[]) {}
+  constructor(
+    private readonly resultatsDeTest: ResultatTestMaturite[],
+    private readonly filtres: 'actifs' | 'inactifs'
+  ) {}
 
   calculeRepartitionParNiveau = () => {
     const listeDesScoresParNiveau = this.resultatsDeTest.reduce(
@@ -48,7 +51,13 @@ export class RepartitionResultatsTest {
       valeurs: this.creeObjetParRubrique((rubrique) =>
         this.calculeValeurMoyenne(rubrique, scoresParNiveau)
       ),
-      totalNombreTests: scoresParNiveau.valeurs['adoption-solutions'].length,
+      totalNombreTests:
+        this.filtres === 'inactifs'
+          ? scoresParNiveau.valeurs['adoption-solutions'].length
+          : undefined,
+      ratio:
+        scoresParNiveau.valeurs['adoption-solutions'].length /
+        this.resultatsDeTest.length,
     }));
   };
 
@@ -66,11 +75,14 @@ export class RepartitionResultatsTest {
   private creeObjetParRubrique<T>(
     valeurDeLaRubrique: (rubrique: IdRubrique) => T
   ): Record<IdRubrique, T> {
-    return tousLesIdRubrique.reduce((rubriqueAccumulateur, rubrique) => {
-      return {
-        ...rubriqueAccumulateur,
-        [rubrique]: valeurDeLaRubrique(rubrique),
-      };
-    }, {} as Record<IdRubrique, T>);
+    return tousLesIdRubrique.reduce(
+      (rubriqueAccumulateur, rubrique) => {
+        return {
+          ...rubriqueAccumulateur,
+          [rubrique]: valeurDeLaRubrique(rubrique),
+        };
+      },
+      {} as Record<IdRubrique, T>
+    );
   }
 }
