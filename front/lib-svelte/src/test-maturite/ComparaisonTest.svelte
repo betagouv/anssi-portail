@@ -24,6 +24,7 @@
   type RepartitionResultatsTestPourUnNiveau = {
     id: IdNiveau;
     valeurs: Record<IdRubrique, number>;
+    ratio: number;
     totalNombreTests: number;
   };
 
@@ -71,7 +72,9 @@
       );
       return {
         libelle: niveau.label,
-        valeur: repartition?.totalNombreTests ?? 0,
+        valeur: filtreActif
+          ? (repartition?.ratio ?? 0) * 100
+          : (repartition?.totalNombreTests ?? 0),
       };
     });
 
@@ -93,11 +96,15 @@
     region: false,
   };
 
+  $: filtreActif = filtre.secteur || filtre.taille || filtre.region;
+  $: libelleAnneau = filtreActif ? undefined : 'organisations';
+
   const basculeLeFiltre = async (cle: 'secteur' | 'taille' | 'region') => {
     filtre[cle] = !filtre[cle];
     await chargeRepartitionsDesResultats();
   };
 </script>
+
 {#if testRealise}
   {#if infosOrganisation && featureFlagFiltresComparaison}
     <section class="filtres">
@@ -164,12 +171,12 @@
       <div class="contenu-section">
         <h2>Répartition des organisations</h2>
         <div class="repartition-niveaux-maturite">
-          <GraphiqueAnneau {serie} nomDeLaDonnee="organisations" />
+          <GraphiqueAnneau {serie} nomDeLaDonnee={libelleAnneau} />
           <LegendeAnneau {serie} actif={libelleNiveauCourant} />
         </div>
       </div>
     </section>
-  <hr />
+    <hr />
     <section class="repartition-reponses">
       <div class="contenu-section">
         <h2>Répartition des réponses</h2>
