@@ -1,6 +1,7 @@
 <script lang="ts">
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
+  import SectionAccordeon from '../ui/SectionAccordeon.svelte';
   import { arrondisAuCentieme } from '../utils/arrondis';
   import type { SerieRadar } from './Serie';
   import { rubriques } from './TestMaturite.donnees';
@@ -33,14 +34,12 @@
 
 <div class="accordeon">
   {#each niveauxMaturite as niveau (niveau.id)}
-    <details>
-      <summary>
-        <span class:actif={actif === niveau.id}>
-          <span class="pastille ligne-legende-{niveau.id}"></span>
-          {niveau.label}
-        </span>
-      </summary>
-      <ol>
+    <SectionAccordeon>
+      <span slot="titre" class:actif={actif === niveau.id}>
+        <span class="pastille ligne-legende-{niveau.id}"></span>
+        {niveau.label}
+      </span>
+      <ol slot="corps">
         {#each rubriquesTrieesParLettre as rubrique (rubrique.id)}
           <li>
             <span class="lettre">{rubrique.lettre}</span> - {rubrique.label} - {valeur(
@@ -50,7 +49,7 @@
           </li>
         {/each}
       </ol>
-    </details>
+    </SectionAccordeon>
   {/each}
 </div>
 
@@ -114,78 +113,21 @@
       display: none;
     }
 
-    details {
-      border-bottom: 1px solid #ddd;
+    .actif {
+      outline: 2px solid #fed980;
+      outline-offset: 6px;
+      border-radius: 2px;
+    }
 
-      &:first-of-type {
-        border-top: 1px solid #ddd;
-      }
-
-      &[open] summary::after {
-        transform: rotate(-180deg);
-      }
-
-      &[open] summary {
-        background-color: #fcf1cf;
-      }
-
-      summary {
-        padding: 12px 16px;
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-
-        & > span {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding-right: 8px;
-
-          &.actif {
-            outline: 2px solid #fed980;
-            outline-offset: 6px;
-            border-radius: 2px;
-          }
-        }
-
-        .pastille {
-          width: 14px;
-          height: 14px;
-          border-radius: 7px;
-          content: '';
-          background-color: var(--couleur-puce);
-        }
-
-        &::marker {
-          content: '';
-        }
-
-        &::-webkit-details-marker {
-          display: none;
-        }
-
-        &:after {
-          content: '';
-          display: block;
-          width: 16px;
-          height: 16px;
-          background: url('/assets/images/icone-chevron-bas.svg');
-          transition: transform 0.3s linear;
-          margin-left: auto;
-        }
-      }
-
-      ol {
-        padding: 0;
-        margin: 16px;
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        .lettre {
-          font-weight: bold;
-        }
+    ol {
+      padding: 0;
+      margin: 16px;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      .lettre {
+        font-weight: bold;
       }
     }
   }
