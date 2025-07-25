@@ -11,6 +11,7 @@ import {
   DonneesCreationResultatTestMaturite,
   ResultatTestMaturite,
 } from '../../../src/metier/resultatTestMaturite';
+import { ResultatTestMaturiteCreateur } from '../../metier/ResultatTestMaturiteCreateur';
 import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
@@ -18,7 +19,7 @@ import {
   configurationDeTestDuServeur,
   fauxAdaptateurRechercheEntreprise,
 } from '../fauxObjets';
-import { creeResultatTest, jeanneDupont } from '../objetsPretsALEmploi';
+import { jeanneDupont } from '../objetsPretsALEmploi';
 
 describe('La ressource qui gère le dernier résultat de test', () => {
   let serveur: Express;
@@ -119,9 +120,11 @@ describe('La ressource qui gère le dernier résultat de test', () => {
       });
 
       it('renvoie le niveau du test', async () => {
-        await entrepotResultatTest.ajoute(
-          await creeResultatTest('insuffisant')
-        );
+        await new ResultatTestMaturiteCreateur()
+          .deNiveau('insuffisant')
+          .pour(jeanneDupont)
+          .dansEntrepot(entrepotResultatTest)
+          .cree();
 
         const reponse = await requeteGET();
 
