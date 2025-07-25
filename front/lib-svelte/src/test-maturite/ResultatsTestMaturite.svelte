@@ -16,6 +16,7 @@
   export let animeTuiles = true;
   export let dateRealisationDernierTest: Date | undefined = undefined;
   export let defilementAutomatique = true;
+  export let featureFlagFiltresComparaison: boolean = false;
 
   let ongletActif: CleOnglet | undefined;
   let idResultatTest: string | undefined;
@@ -70,5 +71,5 @@
 {:else if ongletActif === 'historique'}
   <HistoriqueTests {idResultatTest} />
 {:else}
-  <ComparaisonTest testRealise={true} />
+  <ComparaisonTest testRealise={true} {featureFlagFiltresComparaison} />
 {/if}

@@ -19,6 +19,7 @@
   import type { IdRubrique } from './TestMaturite.type';
 
   export let testRealise = false;
+  export let featureFlagFiltresComparaison: boolean = false;
 
   type RepartitionResultatsTestPourUnNiveau = {
     id: IdNiveau;
@@ -97,9 +98,8 @@
     await chargeRepartitionsDesResultats();
   };
 </script>
-
 {#if testRealise}
-  {#if infosOrganisation}
+  {#if infosOrganisation && featureFlagFiltresComparaison}
     <section class="filtres">
       <div class="contenu-section">
         <div class="description">
