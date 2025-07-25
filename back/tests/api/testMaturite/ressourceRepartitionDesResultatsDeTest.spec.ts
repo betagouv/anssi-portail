@@ -7,7 +7,6 @@ import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
 import { ResultatTestMaturiteCreateur } from '../../metier/ResultatTestMaturiteCreateur';
 import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
 import { configurationDeTestDuServeur } from '../fauxObjets';
-import { creeResultatTest } from '../objetsPretsALEmploi';
 
 describe('La ressource qui gère les series de résultats de test de maturité', () => {
   let serveur: Express;
@@ -22,38 +21,10 @@ describe('La ressource qui gère les series de résultats de test de maturité',
   });
   describe('sur requête GET', () => {
     it('répond 200', async () => {
-      entrepotResultatTest.ajoute(
-        new ResultatTestMaturite({
-          secteur: 'A',
-          region: 'FR-NOR',
-          id: 'test-id-1',
-          reponses: {
-            'adoption-solutions': 1,
-            'prise-en-compte-risque': 1,
-            'ressources-humaines': 1,
-            budget: 1,
-            pilotage: 1,
-            posture: 1,
-          },
-          tailleOrganisation: '01',
-        })
+      const createur = new ResultatTestMaturiteCreateur().dansEntrepot(
+        entrepotResultatTest
       );
-      entrepotResultatTest.ajoute(
-        new ResultatTestMaturite({
-          secteur: 'A',
-          region: 'FR-NOR',
-          id: 'test-id-2',
-          reponses: {
-            'adoption-solutions': 2,
-            'prise-en-compte-risque': 2,
-            'ressources-humaines': 2,
-            budget: 2,
-            pilotage: 2,
-            posture: 2,
-          },
-          tailleOrganisation: '01',
-        })
-      );
+      await createur.creePlusieurs(2);
 
       const reponse = await request(serveur).get(
         '/api/repartition-resultats-test'
@@ -63,54 +34,21 @@ describe('La ressource qui gère les series de résultats de test de maturité',
     });
 
     it('calcule la moyenne des scores de résultats de même niveau', async () => {
-      entrepotResultatTest.ajoute(
-        new ResultatTestMaturite({
-          secteur: 'A',
-          region: 'FR-NOR',
-          id: 'test-id-1',
-          reponses: {
-            'adoption-solutions': 1,
-            'prise-en-compte-risque': 1,
-            'ressources-humaines': 1,
-            budget: 1,
-            pilotage: 1,
-            posture: 1,
-          },
-          tailleOrganisation: '01',
-        })
+      const createur = new ResultatTestMaturiteCreateur().dansEntrepot(
+        entrepotResultatTest
       );
-      entrepotResultatTest.ajoute(
-        new ResultatTestMaturite({
-          secteur: 'A',
-          region: 'FR-NOR',
-          id: 'test-id-2',
-          reponses: {
-            'adoption-solutions': 2,
-            'prise-en-compte-risque': 2,
-            'ressources-humaines': 2,
-            budget: 2,
-            pilotage: 2,
-            posture: 2,
-          },
-          tailleOrganisation: '01',
+      await createur.deNiveau('insuffisant').cree();
+      await createur.deNiveau('emergent').cree();
+      await createur
+        .avecReponses({
+          'adoption-solutions': 2,
+          'prise-en-compte-risque': 1,
+          'ressources-humaines': 1,
+          budget: 2,
+          pilotage: 3,
+          posture: 3,
         })
-      );
-      entrepotResultatTest.ajoute(
-        new ResultatTestMaturite({
-          secteur: 'A',
-          region: 'FR-NOR',
-          id: 'test-id-2',
-          reponses: {
-            'adoption-solutions': 2,
-            'prise-en-compte-risque': 1,
-            'ressources-humaines': 1,
-            budget: 2,
-            pilotage: 3,
-            posture: 3,
-          },
-          tailleOrganisation: '01',
-        })
-      );
+        .cree();
       const reponse = await request(serveur).get(
         '/api/repartition-resultats-test'
       );
@@ -137,9 +75,12 @@ describe('La ressource qui gère les series de résultats de test de maturité',
     });
 
     it('calcule le nombre total de test par niveau', async () => {
-      await entrepotResultatTest.ajoute(await creeResultatTest('insuffisant'));
-      await entrepotResultatTest.ajoute(await creeResultatTest('emergent'));
-      await entrepotResultatTest.ajoute(await creeResultatTest('emergent'));
+      const createur = new ResultatTestMaturiteCreateur().dansEntrepot(
+        entrepotResultatTest
+      );
+      await createur.deNiveau('insuffisant').cree();
+      await createur.deNiveau('emergent').cree();
+      await createur.deNiveau('emergent').cree();
 
       const reponse = await request(serveur).get(
         '/api/repartition-resultats-test'
@@ -176,21 +117,12 @@ describe('La ressource qui gère les series de résultats de test de maturité',
 
     describe('avec un filtre', () => {
       it('sur le secteur, ne remonte que les résultats de même secteur', async () => {
-        await new ResultatTestMaturiteCreateur()
-          .deNiveau('insuffisant')
-          .deSecteur('A')
-          .dansEntrepot(entrepotResultatTest)
-          .cree();
-        await new ResultatTestMaturiteCreateur()
-          .deNiveau('insuffisant')
-          .deSecteur('A')
-          .dansEntrepot(entrepotResultatTest)
-          .cree();
-        await new ResultatTestMaturiteCreateur()
-          .deNiveau('insuffisant')
-          .deSecteur('B')
-          .dansEntrepot(entrepotResultatTest)
-          .cree();
+        const createur = new ResultatTestMaturiteCreateur().dansEntrepot(
+          entrepotResultatTest
+        );
+        await createur.deNiveau('insuffisant').deSecteur('A').cree();
+        await createur.deNiveau('insuffisant').deSecteur('A').cree();
+        await createur.deNiveau('insuffisant').deSecteur('B').cree();
 
         const reponse = await request(serveur).get(
           '/api/repartition-resultats-test?secteur=A'
@@ -200,21 +132,12 @@ describe('La ressource qui gère les series de résultats de test de maturité',
       });
 
       it('sur la région, ne remonte que les résultats de la même région', async () => {
-        await new ResultatTestMaturiteCreateur()
-          .deNiveau('insuffisant')
-          .deRegion('FR-NOR')
-          .dansEntrepot(entrepotResultatTest)
-          .cree();
-        await new ResultatTestMaturiteCreateur()
-          .deNiveau('insuffisant')
-          .deRegion('FR-NOR')
-          .dansEntrepot(entrepotResultatTest)
-          .cree();
-        await new ResultatTestMaturiteCreateur()
-          .deNiveau('insuffisant')
-          .deRegion('FR-20R')
-          .dansEntrepot(entrepotResultatTest)
-          .cree();
+        const createur = new ResultatTestMaturiteCreateur().dansEntrepot(
+          entrepotResultatTest
+        );
+        await createur.deNiveau('insuffisant').deRegion('FR-NOR').cree();
+        await createur.deNiveau('insuffisant').deRegion('FR-NOR').cree();
+        await createur.deNiveau('insuffisant').deRegion('FR-20R').cree();
 
         const reponse = await request(serveur).get(
           '/api/repartition-resultats-test?region=FR-NOR'
@@ -224,20 +147,20 @@ describe('La ressource qui gère les series de résultats de test de maturité',
       });
 
       it("sur la taille d'organisation, ne remonte que les résultats de même taille", async () => {
-        await new ResultatTestMaturiteCreateur()
+        const createur = new ResultatTestMaturiteCreateur().dansEntrepot(
+          entrepotResultatTest
+        );
+        await createur
           .deNiveau('insuffisant')
           .deTailleOrganisation('01')
-          .dansEntrepot(entrepotResultatTest)
           .cree();
-        await new ResultatTestMaturiteCreateur()
+        await createur
           .deNiveau('insuffisant')
           .deTailleOrganisation('01')
-          .dansEntrepot(entrepotResultatTest)
           .cree();
-        await new ResultatTestMaturiteCreateur()
+        await createur
           .deNiveau('insuffisant')
           .deTailleOrganisation('11')
-          .dansEntrepot(entrepotResultatTest)
           .cree();
 
         const reponse = await request(serveur).get(

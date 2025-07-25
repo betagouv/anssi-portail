@@ -6,15 +6,11 @@ import { creeServeur } from '../../src/api/msc';
 import { AdaptateurMonAideCyber } from '../../src/infra/adaptateurMonAideCyber';
 import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest';
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { IdNiveauMaturite } from '../../src/metier/resultatTestMaturite';
+import { ResultatTestMaturiteCreateur } from '../metier/ResultatTestMaturiteCreateur';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { configurationDeTestDuServeur } from './fauxObjets';
-import {
-  creeResultatTest,
-  hectorDurant,
-  jeanneDupont,
-} from './objetsPretsALEmploi';
+import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi';
 
 describe('La ressource Statistiques', () => {
   describe('sur demande GET', () => {
@@ -59,22 +55,10 @@ describe('La ressource Statistiques', () => {
       assert.equal(reponse.body.servicesEtRessourcesConsultes, 3800);
     });
 
-    async function creeListeResultatTest(
-      niveau?: IdNiveauMaturite,
-      nombreDeResultats: number = 1
-    ) {
-      return Promise.all(
-        Array(nombreDeResultats)
-          .keys()
-          .map(() => creeResultatTest(niveau))
-          .toArray()
-      );
-    }
-
     it('renvoie le nombre de tests de maturité', async () => {
-      await entrepotResultatTest.ajoute(await creeResultatTest());
-      await entrepotResultatTest.ajoute(await creeResultatTest());
-      await entrepotResultatTest.ajoute(await creeResultatTest());
+      await new ResultatTestMaturiteCreateur()
+        .dansEntrepot(entrepotResultatTest)
+        .creePlusieurs(3);
 
       const reponse = await request(serveur).get('/api/statistiques');
 
@@ -90,15 +74,14 @@ describe('La ressource Statistiques', () => {
     });
 
     it('renvoie les niveaux de maturité', async () => {
-      Promise.all(
-        [
-          ...(await creeListeResultatTest('insuffisant', 1)),
-          ...(await creeListeResultatTest('emergent', 2)),
-          ...(await creeListeResultatTest('intermediaire', 3)),
-          ...(await creeListeResultatTest('confirme', 4)),
-          ...(await creeListeResultatTest('optimal', 5)),
-        ].map((resultat) => entrepotResultatTest.ajoute(resultat))
+      const createur = new ResultatTestMaturiteCreateur().dansEntrepot(
+        entrepotResultatTest
       );
+      await createur.deNiveau('insuffisant').creePlusieurs(1);
+      await createur.deNiveau('emergent').creePlusieurs(2);
+      await createur.deNiveau('intermediaire').creePlusieurs(3);
+      await createur.deNiveau('confirme').creePlusieurs(4);
+      await createur.deNiveau('optimal').creePlusieurs(5);
 
       const reponse = await request(serveur).get('/api/statistiques');
 

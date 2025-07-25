@@ -7,6 +7,8 @@ import {
   ReponsesTestMaturite,
   ResultatTestMaturite,
 } from '../../src/metier/resultatTestMaturite';
+import { Utilisateur } from '../../src/metier/utilisateur';
+import { fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets';
 
 export class ResultatTestMaturiteCreateur {
   private reponses: ReponsesTestMaturite = {
@@ -18,6 +20,7 @@ export class ResultatTestMaturiteCreateur {
     posture: 1,
   };
   tailleOrganisation: CodeTrancheEffectif | undefined;
+  utilisateur: Utilisateur | undefined;
   entrepotResultatTest: EntrepotResultatTest | undefined;
   secteur: CodeSecteur | undefined;
   region: CodeRegion | undefined;
@@ -42,6 +45,11 @@ export class ResultatTestMaturiteCreateur {
     return this;
   }
 
+  avecReponses(reponses: ReponsesTestMaturite) {
+    this.reponses = reponses;
+    return this;
+  }
+
   deSecteur(secteur: CodeSecteur) {
     this.secteur = secteur;
     return this;
@@ -56,22 +64,36 @@ export class ResultatTestMaturiteCreateur {
     this.region = region;
     return this;
   }
+  pour(utilisateur: Utilisateur) {
+    this.utilisateur = utilisateur;
+    return this;
+  }
 
   dansEntrepot(entrepotResultatTest: EntrepotResultatTest) {
     this.entrepotResultatTest = entrepotResultatTest;
     return this;
   }
 
-  async cree() {
+  cree = async () => {
     const resultatConstruit = new ResultatTestMaturite({
       region: this.region,
       secteur: this.secteur,
       tailleOrganisation: this.tailleOrganisation,
       reponses: this.reponses,
     });
+    if (this.utilisateur) {
+      await resultatConstruit.revendiquePropriete(
+        this.utilisateur,
+        fauxAdaptateurRechercheEntreprise
+      );
+    }
     if (this.entrepotResultatTest) {
       await this.entrepotResultatTest.ajoute(resultatConstruit);
     }
     return resultatConstruit;
-  }
+  };
+
+  creePlusieurs = (nombre: number) => {
+    return Promise.all(new Array(nombre).fill(0).map(this.cree));
+  };
 }
