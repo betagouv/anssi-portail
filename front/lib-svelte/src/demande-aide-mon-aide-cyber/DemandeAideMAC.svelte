@@ -92,10 +92,13 @@
 <article class="page-demande-aide-mon-aide-cyber">
   <section class="encart-presentation">
     <div class="contenu-section">
-      <a href="/" class="lien">
-        <Icone type="fleche-gauche" />
-        Retour</a
-      >
+      <lab-anssi-lien
+        class="lien"
+        href="/"
+        titre="Retour"
+        icone="arrow-go-back-line"
+        positionIcone="gauche"
+      ></lab-anssi-lien>
     </div>
     <div class="contenu-section">
       <div class="colonne-explicative">
@@ -114,7 +117,6 @@
             ><Icone type="check" /> Dans vos locaux ou en visio
           </span>
           <span class="tag"><Icone type="check" /> Rapide (1h30)</span>
-          <span class="tag"><Icone type="check" /> Anonyme</span>
         </div>
         <p class="cible-du-diagnostic">
           Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et
@@ -123,18 +125,25 @@
       </div>
     </div>
   </section>
-  <section class="contenu-section zone-formulaire">
-    {#if !enSucces}
-      <FormulaireDemandeAide
-        bind:this={formulaireDemandeAide}
-        on:formulaireSoumis={soumetsFormulaire}
-        {formulaireSoumis}
-        {enCoursEnvoi}
-        {erreurs}
-      />
-    {:else}
-      <ConfirmationCreationDemandeAide />
-    {/if}
+  <section class="zone-formulaire">
+    <div class="contenu-section">
+      {#if !enSucces}
+        <FormulaireDemandeAide
+          bind:this={formulaireDemandeAide}
+          on:formulaireSoumis={soumetsFormulaire}
+          {formulaireSoumis}
+          {enCoursEnvoi}
+          {erreurs}
+        />
+      {:else}
+        <ConfirmationCreationDemandeAide />
+      {/if}
+    </div>
+  </section>
+  <section class="zone-faq">
+    <div class="contenu-section">
+      <h6>Questions les plus fréquentes</h6>
+    </div>
   </section>
 </article>
 
@@ -148,6 +157,13 @@
     line-height: 36px;
   }
 
+  h6 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.75rem;
+  }
+
   p {
     font-size: 18px;
     font-style: normal;
@@ -155,14 +171,8 @@
   }
 
   .lien {
-    text-decoration: none;
-    border-bottom: 1px solid var(--noir);
-    padding-bottom: 1px;
-
-    &:hover {
-      border-bottom-width: 2px;
-      padding-bottom: 0 !important;
-    }
+    display: flex;
+    margin-bottom: 24px;
   }
 
   .encart-presentation {
@@ -173,7 +183,8 @@
       background: var(--controle-segmente-courant-fond)
         url(/assets/images/illustration-cyberdepart.svg) no-repeat;
       background-position-x: calc(50vw + 30px);
-      background-position-y: calc(50% + 30px);
+      background-position-y: 50%;
+      background-size: auto calc(100% - 48px);
     }
 
     .colonne-explicative {
@@ -192,9 +203,8 @@
     }
   }
 
-  :global(.zone-formulaire) {
-    max-width: unset;
-    padding: 0 var(--gouttiere) 96px var(--gouttiere);
+  .zone-formulaire {
+    padding: 0 var(--gouttiere) 48px var(--gouttiere);
 
     background: linear-gradient(
       to bottom,
@@ -204,13 +214,8 @@
       white 100%
     );
 
-    &.contenu-section {
-      width: unset;
-    }
-
-    @include a-partir-de(md) {
-      padding-left: 60px;
-      padding-right: 60px;
+    .contenu-section {
+      max-width: 792px;
     }
   }
 
@@ -229,6 +234,14 @@
       display: flex;
       align-items: center;
       gap: 4px;
+    }
+  }
+
+  .zone-faq {
+    padding: 0 var(--gouttiere) 96px var(--gouttiere);
+
+    .contenu-section {
+      max-width: 792px;
     }
   }
 </style>
