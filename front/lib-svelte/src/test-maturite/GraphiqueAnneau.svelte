@@ -2,7 +2,7 @@
   import { pourcentagesSerie, type Serie, totalSerie } from './Serie';
 
   export let serie: Serie;
-  export let nomDeLaDonnee: string;
+  export let nomDeLaDonnee: string | undefined;
 
   $: pourcentages = pourcentagesSerie(serie);
 
@@ -78,18 +78,20 @@
 </script>
 
 <svg id="radar" viewBox="-130 -130 260 260" xmlns="http://www.w3.org/2000/svg">
-  <text class="total" x="0" y="0" text-anchor="middle" font-size="40"
-    >{totalSerie(serie)}</text
-  >
-  <text
-    class="libelle-total"
-    x="0"
-    y="15px"
-    font-size="16"
-    dominant-baseline="hanging"
-    text-anchor="middle"
-    >{nomDeLaDonnee}
-  </text>
+  {#if nomDeLaDonnee}
+    <text class="total" x="0" y="0" text-anchor="middle" font-size="40"
+      >{totalSerie(serie)}</text
+    >
+    <text
+      class="libelle-total"
+      x="0"
+      y="15px"
+      font-size="16"
+      dominant-baseline="hanging"
+      text-anchor="middle"
+      >{nomDeLaDonnee}
+    </text>
+  {/if}
   {#each secteurs as secteur, index (index)}
     <path
       class={`secteur-${index} secteur`}
