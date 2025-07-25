@@ -5,6 +5,8 @@
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
   import { questionnaireStore } from './stores/questionnaire.store';
 
+  export let featureFlagFiltresComparaison: boolean = false;
+
   let dateRealisationDernierTest: Date | undefined;
 
   questionnaireStore.initialise();
@@ -12,7 +14,7 @@
   onMount(async () => {
     try {
       const reponseHttp = await axios.get<DernierResultatTest>(
-        '/api/resultats-test/dernier'
+        '/api/resultats-test/dernier',
       );
       const reponses = reponseHttp.data.reponses;
       dateRealisationDernierTest = new Date(reponseHttp.data.dateRealisation);
@@ -33,4 +35,5 @@
   animeTuiles={false}
   {dateRealisationDernierTest}
   defilementAutomatique={false}
+  {featureFlagFiltresComparaison}
 />
