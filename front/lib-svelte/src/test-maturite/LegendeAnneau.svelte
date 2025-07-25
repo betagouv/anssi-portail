@@ -3,16 +3,29 @@
 
   export let serie: Serie;
   export let actif: string | undefined = undefined;
+  export let montreTotaux: boolean = true;
+
+  let pourcentages: number[] = [];
+  $: {
+    pourcentages = pourcentagesSerie(serie);
+  }
 </script>
 
 <div class="legende">
-  {#each pourcentagesSerie(serie) as pourcentage, index (index)}
+  {#each pourcentages as pourcentage, index (index)}
     {@const element = serie[index]}
-    <div class="ligne-legende ligne-legende-{index}" class:actif={actif === element.libelle}>
+    <div
+      class="ligne-legende ligne-legende-{index}"
+      class:actif={actif === element.libelle}
+    >
       <span class="libelle">{element.libelle}</span>
       <div>
-        <span class="total">{element.valeur}</span>
-        <span class="pourcentage">({Math.round(pourcentage)}%)</span>
+        {#if montreTotaux}
+          <span class="total">{element.valeur}</span>
+          <span class="pourcentage">({Math.round(pourcentage)}%)</span>
+        {:else}
+          <span class="pourcentage">{Math.round(pourcentage)}%</span>
+        {/if}
       </div>
     </div>
   {/each}
