@@ -32,14 +32,13 @@ export const ressourceRepartitionDesResultatsDeTest = ({
       const tailleOrganisation = trancheEffectifParCode(
         requete.query.tailleOrganisation
       );
+      const codeTrancheEffectif =
+        tailleOrganisation.code !== 'NN' ? tailleOrganisation.code : undefined;
       const tousLesResultats =
         await entrepotResultatTest.parFiltresEnOmettantUtilisateur({
           codeSecteur,
           codeRegion,
-          codeTrancheEffectif:
-            tailleOrganisation.code !== 'NN'
-              ? tailleOrganisation.code
-              : undefined,
+          codeTrancheEffectif,
         });
       if (
         tousLesResultats.length <
@@ -49,7 +48,8 @@ export const ressourceRepartitionDesResultatsDeTest = ({
         return;
       }
       const repartitions = new RepartitionResultatsTest(
-        tousLesResultats
+        tousLesResultats,
+        codeSecteur || codeRegion || codeTrancheEffectif ? 'actifs' : 'inactifs'
       ).calculeRepartitionParNiveau();
       reponse.send(repartitions);
     }
