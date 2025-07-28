@@ -1,14 +1,14 @@
 <script lang="ts">
-  import FormulaireDemandeAide from './FormulaireDemandeAide.svelte';
+  import axios from 'axios';
+  import { onMount } from 'svelte';
+  import Icone from '../ui/Icone.svelte';
+  import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
+  import DialogueSortieDiagnostic from './DialogueSortieDiagnostic.svelte';
   import type {
     CorpsAPIDemandeAide,
     DonneesFormulaireDemandeAide,
   } from './DonneesFormulaireDemandeAide';
-  import axios from 'axios';
-  import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
-  import Icone from '../ui/Icone.svelte';
-  import { onMount } from 'svelte';
-  import DialogueSortieDiagnostic from './DialogueSortieDiagnostic.svelte';
+  import FormulaireDemandeAide from './FormulaireDemandeAide.svelte';
 
   let formulaireDemandeAide: FormulaireDemandeAide;
   let enSucces: boolean = false;
@@ -127,17 +127,22 @@
   </section>
   <section class="zone-formulaire">
     <div class="contenu-section">
-    {#if !enSucces}
-      <FormulaireDemandeAide
-        bind:this={formulaireDemandeAide}
-        on:formulaireSoumis={soumetsFormulaire}
-        {formulaireSoumis}
-        {enCoursEnvoi}
-        {erreurs}
-      />
-    {:else}
-      <ConfirmationCreationDemandeAide />
-    {/if}
+      {#if !enSucces}
+        <FormulaireDemandeAide
+          bind:this={formulaireDemandeAide}
+          on:formulaireSoumis={soumetsFormulaire}
+          {formulaireSoumis}
+          {enCoursEnvoi}
+          {erreurs}
+        />
+      {:else}
+        <ConfirmationCreationDemandeAide />
+      {/if}
+    </div>
+  </section>
+  <section class="zone-faq">
+    <div class="contenu-section">
+      <h6>Questions les plus fréquences</h6>
     </div>
   </section>
 </article>
@@ -229,6 +234,14 @@
       display: flex;
       align-items: center;
       gap: 4px;
+    }
+  }
+
+  .zone-faq {
+    padding: 0 var(--gouttiere) 96px var(--gouttiere);
+
+    .contenu-section {
+      max-width: 792px;
     }
   }
 </style>
