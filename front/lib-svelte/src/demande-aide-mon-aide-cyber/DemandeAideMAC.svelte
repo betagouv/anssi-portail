@@ -239,6 +239,36 @@
             </p>
           </div>
         </SectionAccordeon>
+        <SectionAccordeon>
+          <span slot="titre"
+            >Que se passe-t-il après la demande de diagnostic ?</span
+          >
+          <div class="corps" slot="corps">
+            <p>📩 Une fois votre demande envoyée :</p>
+            <ol>
+              <li>
+                Un aidant cyber local vous contacte (par email) sous quelques
+                jours
+              </li>
+              <li>
+                Vous planifiez ensemble un rendez-vous, en visio ou dans vos
+                locaux
+              </li>
+              <li>Le diagnostic est ensuite réalisé en 1h30, gratuitement</li>
+              <li>
+                Vous recevez ensuite immédiatement une restitution claire avec 6
+                mesures prioritaires à mettre en œuvre, et un suivi possible à 6
+                mois
+              </li>
+            </ol>
+            <p>
+              🤝 L’objectif est simple:
+              <strong> vous accompagner pas à pas, </strong>
+              sans jargon ni pression, pour
+              <strong>renforcer concrètement votre cybersécurité.</strong>
+            </p>
+          </div>
+        </SectionAccordeon>
       </div>
     </div>
   </section>
