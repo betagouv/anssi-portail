@@ -125,7 +125,8 @@
       </div>
     </div>
   </section>
-  <section class="contenu-section zone-formulaire">
+  <section class="zone-formulaire">
+    <div class="contenu-section">
     {#if !enSucces}
       <FormulaireDemandeAide
         bind:this={formulaireDemandeAide}
@@ -137,6 +138,7 @@
     {:else}
       <ConfirmationCreationDemandeAide />
     {/if}
+    </div>
   </section>
 </article>
 
@@ -148,6 +150,13 @@
     font-style: normal;
     font-weight: 700;
     line-height: 36px;
+  }
+
+  h6 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.75rem;
   }
 
   p {
@@ -189,9 +198,8 @@
     }
   }
 
-  :global(.zone-formulaire) {
-    max-width: unset;
-    padding: 0 var(--gouttiere) 96px var(--gouttiere);
+  .zone-formulaire {
+    padding: 0 var(--gouttiere) 48px var(--gouttiere);
 
     background: linear-gradient(
       to bottom,
@@ -201,13 +209,8 @@
       white 100%
     );
 
-    &.contenu-section {
-      width: unset;
-    }
-
-    @include a-partir-de(md) {
-      padding-left: 60px;
-      padding-right: 60px;
+    .contenu-section {
+      max-width: 792px;
     }
   }
 
