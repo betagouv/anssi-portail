@@ -146,7 +146,7 @@
       <h6>Questions les plus fréquences</h6>
       <div class="accordeon">
         <SectionAccordeon>
-          <span slot="titre"> Mon organisation est-elle concernée ? </span>
+          <span slot="titre">Mon organisation est-elle concernée ?</span>
           <div class="corps" slot="corps">
             <p>
               ✅ <strong
@@ -162,6 +162,51 @@
               ><br />
               Le diagnostic n’est pas adapté à ce profil : trop de questions ne s’appliquent
               pas, et les aidants cyber ne sont pas formés pour ce type d'accompagnement.
+            </p>
+          </div>
+        </SectionAccordeon>
+        <SectionAccordeon>
+          <span slot="titre"
+            >Que risque mon organisation en cas de cyberattaques?</span
+          >
+          <div class="corps" slot="corps">
+            <p>
+              🛡️ Les cyberattaques se sont massivement multipliées ces dernières
+              années, et <strong>aucune organisation n’est à l’abri</strong>,
+              quelle que soit sa taille ou son secteur.<br />
+              <br />
+              <strong>Les principales conséquences d’une attaque sont :</strong
+              ><br />
+            </p>
+            <ul>
+              <li>La perte ou le vol de données (clients, finances, RH…)</li>
+              <li>
+                L’interruption de vos activités (outils bloqués, services
+                paralysés)
+              </li>
+              <li>
+                Une atteinte à votre réputation ou à la confiance de vos
+                partenaires
+              </li>
+              <li>
+                Des dépenses imprévues pour réparer ou récupérer vos données
+              </li>
+            </ul>
+            <p><strong>Découvrez les risques en vidéo</strong></p>
+            <!-- Les sous-titres sont intégrés dans la vidéo -->
+            <!-- svelte-ignore a11y_media_has_caption -->
+            <video
+              id="video-risques"
+              src="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.mp4"
+              controls
+            ></video>
+            <p>
+              🔐 Pour agir sans attendre, l’ANSSI (l’Agence nationale de la
+              sécurité des systèmes d’information) a créé un diagnostic cyber
+              gratuit, réalisé par des Aidants cyber. En 1h30, vous
+              <strong>identifiez 6 premières mesures prioritaires,</strong>
+              simples et concrètes, pour réduire vos risques et prendre votre “Cyberdépart”
+              en toute confiance.
             </p>
           </div>
         </SectionAccordeon>
@@ -271,6 +316,13 @@
     .accordeon {
       .corps {
         padding: 16px 16px 24px;
+
+        video {
+          width: 100%;
+          margin-top: 16px;
+          margin-bottom: 24px;
+          border-radius: 10px;
+        }
 
         p {
           font-size: 16px;
