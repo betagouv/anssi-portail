@@ -269,6 +269,33 @@
             </p>
           </div>
         </SectionAccordeon>
+        <SectionAccordeon>
+          <span slot="titre"
+            >Le diagnostic est-il confidentiel et anonyme ?</span
+          >
+          <div class="corps" slot="corps">
+            <p>
+              🔒 Oui, le diagnostic est
+              <strong>réalisé en toute confidentialité,</strong>
+              et <strong>aucune donnée sensible n’est collectée.</strong>
+              Pour en savoir plus, n’hésitez pas à consulter notre
+              <lab-anssi-lien
+                href="/securite"
+                titre="page sécurité"
+                apparence="lien-texte"
+              ></lab-anssi-lien>.<br />
+              <br />
+              🛡️ Les données sont chiffrées en interne par l’ANSSI, et
+              <strong>aucune information nominative</strong>
+              ou technique (mots de passe, fichiers, accès système...) n’est requise.<br
+              />
+              <br />
+              💡 Vous gardez le
+              <strong>contrôle total sur les échanges,</strong> et bénéficiez d’un
+              accompagnement en toute confiance.
+            </p>
+          </div>
+        </SectionAccordeon>
       </div>
     </div>
   </section>
