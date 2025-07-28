@@ -210,6 +210,35 @@
             </p>
           </div>
         </SectionAccordeon>
+        <SectionAccordeon>
+          <span slot="titre">Qu’est-ce qu’un Aidant cyber?</span>
+          <div class="corps" slot="corps">
+            <p>
+              👤 Un Aidant cyber est un tiers de confiance, issu d’un organisme
+              public ou adhérent d’une association à but non lucratif en lien
+              avec le numérique, spécialement formé sur le diagnostic cyber par
+              l’ANSSI (l’Agence nationale de la sécurité des systèmes
+              d’information). Pour en savoir plus, n’hésitez pas à consulter la
+              <lab-anssi-lien
+                href="https://monaide.cyber.gouv.fr/charte-aidant"
+                titre="charte de l’Aidant cyber"
+                apparence="lien-texte"
+              ></lab-anssi-lien>.<br />
+              <br />
+              🤝 Son rôle ? <strong>Vous accompagner bénévolement,</strong> de
+              façon neutre, confidentielle et bienveillante, pour
+              <strong>évaluer la cybersécurité de votre structure</strong>
+              et vous proposer des
+              <strong>actions concrètes,</strong> accessibles et sans jargon
+              technique.<br />
+              <br />
+              💡 Pas besoin d’être un expert en informatique :
+              <strong>
+                l’Aidant cyber s’adapte à votre niveau et à vos contraintes.
+              </strong>
+            </p>
+          </div>
+        </SectionAccordeon>
       </div>
     </div>
   </section>
