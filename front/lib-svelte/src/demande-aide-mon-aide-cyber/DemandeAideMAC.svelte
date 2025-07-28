@@ -297,7 +297,19 @@
           </div>
         </SectionAccordeon>
       </div>
+      <div class="besoin-aide">
+        <p>
+          Besoin d’informations supplémentaires ? <lab-anssi-lien
+            href="https://app.livestorm.co/anssi/webinaire-cyberdepart"
+            titre="Échangez avec nos équipes"
+            apparence="lien-texte"
+          ></lab-anssi-lien>
+        </p>
+      </div>
     </div>
+  </section>
+  <section class="zone-aide">
+    <div class="contenu-section"></div>
   </section>
 </article>
 
@@ -317,12 +329,6 @@
     font-size: 1.25rem;
     font-weight: 700;
     line-height: 1.75rem;
-  }
-
-  p {
-    font-size: 18px;
-    font-style: normal;
-    line-height: 28px;
   }
 
   .lien {
@@ -399,6 +405,10 @@
       max-width: 792px;
     }
 
+    p {
+      margin: 0;
+    }
+
     .accordeon {
       .corps {
         padding: 16px 16px 24px;
@@ -409,13 +419,11 @@
           margin-bottom: 24px;
           border-radius: 10px;
         }
-
-        p {
-          font-size: 16px;
-          line-height: 24px;
-          margin: 0;
-        }
       }
+    }
+
+    .besoin-aide {
+      margin-top: 48px;
     }
   }
 </style>
