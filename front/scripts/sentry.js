@@ -5,7 +5,6 @@ const environment =
 // Voir l'issue https://github.com/axios/axios/issues/6209#issuecomment-2299747509
 const avantEnvoiSentry = (evenement, detail) => {
   if (
-    axios?.isAxiosError(detail?.originalException) &&
     detail?.originalException?.code === 'ECONNABORTED'
   ) {
     return null;
