@@ -208,10 +208,11 @@
           src="/assets/images/illustration-dragon-aucun-resultat.svg"
           alt="Pas assez de résultats"
         />
-        <h4>
-          Votre recherche retourne trop peu de résultats pour être affichée
-        </h4>
-        <p>Vos filtres sont peut-être trop restrictifs</p>
+        <h4>Pas de résultat 😔</h4>
+        <p>
+          Nous n’avons pas encore assez de données pour afficher une comparaison
+          fiable avec les filtres sélectionnés.
+        </p>
       </div>
     </section>
   {/if}
@@ -329,9 +330,13 @@
     }
 
     h4 {
-      font-size: 1.5rem;
+      font-size: 1.375rem;
       line-height: 1.75rem;
       max-width: 588px;
+      @include a-partir-de(sm) {
+        font-size: 1.5rem;
+        line-height: 2rem;
+      }
     }
 
     p {
