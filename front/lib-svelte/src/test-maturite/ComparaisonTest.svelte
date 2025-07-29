@@ -181,6 +181,12 @@
             montreTotaux={!filtreActif}
           />
         </div>
+        {#if filtreActif}
+          <p class="note">
+            Par souci de confidentialité nous n'affichons pas le nombre
+            d'organisations une fois les filtres activés.
+          </p>
+        {/if}
       </div>
     </section>
     <section class="separator">
@@ -240,6 +246,15 @@
     background-color: #dddddd;
     max-width: var(--largeur-max-contenu);
   }
+
+  .note {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    font-style: normal;
+    color: #666;
+    margin: 0;
+  }
+
   .filtres {
     padding: 32px var(--gouttiere) 0;
 
@@ -282,6 +297,11 @@
         @include a-partir-de(md) {
           flex-direction: row;
         }
+      }
+
+      .note {
+        align-self: center;
+        text-align: center;
       }
     }
   }
