@@ -183,7 +183,11 @@
         </div>
       </div>
     </section>
-    <hr />
+    <section class="separator">
+      <div class="contenu-section">
+        <hr />
+      </div>
+    </section>
     <section class="repartition-reponses">
       <div class="contenu-section">
         <h2>Répartition des réponses</h2>
@@ -230,10 +234,10 @@
   @use '../../../assets/styles/responsive' as *;
 
   hr {
-    margin: 0 var(--gouttiere);
     height: 1px;
     border: 0;
     background-color: #dddddd;
+    max-width: var(--largeur-max-contenu);
   }
   .filtres {
     padding: 32px var(--gouttiere) 0;
