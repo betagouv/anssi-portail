@@ -159,9 +159,8 @@
           {/if}
         </div>
         <p class="note">
-          Certains filtres ne sont pas encore accessibles. Chaque test réalisé
-          nous permet d’affiner nos analyses et d’enrichir les options
-          disponibles.
+          Certains filtres peuvent ne pas donner de résultat. Nos données
+          s’enrichissent régulièrement grâce aux tests réalisés.
         </p>
       </div>
     </section>
