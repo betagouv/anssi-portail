@@ -40,7 +40,7 @@
 
   async function chargeDernierResultat() {
     const reponse = await axios.get<DernierResultatTest>(
-      '/api/resultats-test/dernier'
+      '/api/resultats-test/dernier',
     );
     niveauCourant = reponse.data.idNiveau;
     libelleNiveauCourant = libelleDeNiveau(niveauCourant);
@@ -56,7 +56,7 @@
       region: filtre.region ? infosOrganisation.region?.code || '' : '',
     });
     const reponse = await axios.get<RepartitionResultatsTestPourUnNiveau[]>(
-      '/api/repartition-resultats-test?' + parametres.toString()
+      '/api/repartition-resultats-test?' + parametres.toString(),
     );
     if (reponse.status === 204) {
       serie = [];
@@ -68,7 +68,7 @@
 
     serie = niveauxMaturite.map((niveau) => {
       const repartition = repartitions.find(
-        (repartition) => repartition.id === niveau.id
+        (repartition) => repartition.id === niveau.id,
       );
       return {
         libelle: niveau.label,
@@ -99,6 +99,15 @@
   $: filtreActif = filtre.secteur || filtre.taille || filtre.region;
   $: libelleAnneau = filtreActif ? undefined : 'organisations';
 
+  const reinitialiseLesFiltres = async () => {
+    filtre = {
+      secteur: false,
+      taille: false,
+      region: false,
+    };
+    await chargeRepartitionsDesResultats();
+  };
+
   const basculeLeFiltre = async (cle: 'secteur' | 'taille' | 'region') => {
     filtre[cle] = !filtre[cle];
     await chargeRepartitionsDesResultats();
@@ -128,6 +137,7 @@
               label={infosOrganisation.secteur.libelle}
               taille="md"
               type="selectionnable"
+              presse={filtre.secteur}
               on:click={() => basculeLeFiltre('secteur')}
               on:keypress
             >
@@ -140,6 +150,7 @@
               label={infosOrganisation.trancheEffectif.libelle}
               taille="md"
               type="selectionnable"
+              presse={filtre.taille}
               on:click={() => basculeLeFiltre('taille')}
               on:keypress
             >
@@ -152,6 +163,7 @@
               label={infosOrganisation.region.libelle}
               taille="md"
               type="selectionnable"
+              presse={filtre.region}
               on:click={() => basculeLeFiltre('region')}
               on:keypress
             >
@@ -219,6 +231,15 @@
           Nous n’avons pas encore assez de données pour afficher une comparaison
           fiable avec les filtres sélectionnés.
         </p>
+        <lab-anssi-bouton
+          on:click={reinitialiseLesFiltres}
+          on:keypress
+          role="button"
+          taille="md"
+          tabindex={0}
+          titre="Réinitialiser les filtres"
+          variante="tertiaire"
+        ></lab-anssi-bouton>
       </div>
     </section>
   {/if}
