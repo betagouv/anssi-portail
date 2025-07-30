@@ -223,6 +223,7 @@
                 href="https://monaide.cyber.gouv.fr/charte-aidant"
                 titre="charte de l’Aidant cyber"
                 apparence="lien-texte"
+                cible="_blank"
               ></lab-anssi-lien>.<br />
               <br />
               🤝 Son rôle ? <strong>Vous accompagner bénévolement,</strong> de
@@ -283,6 +284,7 @@
                 href="/securite"
                 titre="page sécurité"
                 apparence="lien-texte"
+                cible="_blank"
               ></lab-anssi-lien>.<br />
               <br />
               🛡️ Les données sont chiffrées en interne par l’ANSSI, et
@@ -304,6 +306,7 @@
             href="https://app.livestorm.co/anssi/webinaire-cyberdepart"
             titre="Échangez avec nos équipes"
             apparence="lien-texte"
+            cible="_blank"
           ></lab-anssi-lien>
         </p>
       </div>
