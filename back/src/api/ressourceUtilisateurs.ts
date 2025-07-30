@@ -8,24 +8,15 @@ const ressourceUtilisateurs = ({
   busEvenements,
   entrepotUtilisateur,
   middleware,
-  adaptateurRechercheEntreprise
+  adaptateurRechercheEntreprise,
+  adaptateurJWT,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post(
     '/',
-    middleware.aseptise(
-      'email',
-      'prenom',
-      'nom',
-      'telephone',
-      'domainesSpecialite.*',
-      'siretEntite'
-    ),
+    middleware.aseptise('telephone', 'domainesSpecialite.*', 'siretEntite'),
     [
-      check('token').not().isEmpty().withMessage("Le token est invalide"),
-      check('email').isEmail().withMessage("L'email est invalide"),
-      check('prenom').not().isEmpty().withMessage('Le prénom est invalide'),
-      check('nom').not().isEmpty().withMessage('Le nom est invalide'),
+      check('token').not().isEmpty().withMessage('Le token est invalide'),
       check('telephone')
         .optional({ values: 'falsy' })
         .matches(/^0\d{9}$/)
@@ -46,34 +37,41 @@ const ressourceUtilisateurs = ({
     middleware.valide(),
     async (requete: Request, reponse: Response) => {
       const {
-        email,
-        prenom,
-        nom,
         telephone,
         domainesSpecialite,
         siretEntite,
         cguAcceptees,
         infolettreAcceptee,
+        token,
       } = requete.body;
 
-      const utilisateur = new Utilisateur({
-        email,
-        prenom,
-        nom,
-        telephone,
-        domainesSpecialite,
-        siretEntite,
-        cguAcceptees,
-        infolettreAcceptee,
-      }, adaptateurRechercheEntreprise)
+      try {
+        const { email, nom, prenom } = adaptateurJWT.decode(token);
 
-      await entrepotUtilisateur.ajoute(utilisateur);
+        const utilisateur = new Utilisateur(
+          {
+            email,
+            prenom,
+            nom,
+            telephone,
+            domainesSpecialite,
+            siretEntite,
+            cguAcceptees,
+            infolettreAcceptee,
+          },
+          adaptateurRechercheEntreprise
+        );
 
-      await busEvenements.publie(
-        new CompteCree({ email, prenom, nom, infoLettre: infolettreAcceptee })
-      );
+        await entrepotUtilisateur.ajoute(utilisateur);
 
-      reponse.sendStatus(201);
+        await busEvenements.publie(
+          new CompteCree({ email, prenom, nom, infoLettre: infolettreAcceptee })
+        );
+
+        reponse.sendStatus(201);
+      } catch {
+        reponse.status(400).send({ erreur: 'Le token est invalide' });
+      }
     }
   );
   return routeur;

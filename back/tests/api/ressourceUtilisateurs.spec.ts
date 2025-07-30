@@ -11,20 +11,25 @@ import {
 } from '../bus/busPourLesTests';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { configurationDeTestDuServeur } from './fauxObjets';
+import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 
 describe('La ressource utilisateur', () => {
   let serveur: Express;
   let entrepotUtilisateur: EntrepotUtilisateurMemoire;
   let adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
+  let adaptateurJWT: AdaptateurJWT;
   const donneesUtilisateur = {
-    email: 'jeanne.dupont@user.com',
-    prenom: 'Jeanne',
-    nom: 'Dupont',
     telephone: '0123456789',
     domainesSpecialite: ['RSSI'],
     siretEntite: '13000766900018',
     cguAcceptees: true,
     infolettreAcceptee: true,
+    token:
+      JSON.stringify({
+        email: 'jeanne.dupont@user.com',
+        prenom: 'Jeanne',
+        nom: 'Dupont',
+      }) + '-code',
   };
   let busEvenements: MockBusEvenement;
 
@@ -34,12 +39,17 @@ describe('La ressource utilisateur', () => {
     adaptateurRechercheEntreprise = {
       rechercheOrganisations: async (_: string, __: string | null) => [],
     };
+    adaptateurJWT = {
+      decode: (token) => JSON.parse(token.slice(0, -5)),
+      genereToken: () => '',
+    };
 
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       entrepotUtilisateur,
       busEvenements,
       adaptateurRechercheEntreprise,
+      adaptateurJWT,
     });
   });
 
@@ -114,54 +124,19 @@ describe('La ressource utilisateur', () => {
           siretEntite: ' 13000766900018',
           cguAcceptees: true,
           infolettreAcceptee: true,
+          token: donneesUtilisateur.token,
         });
 
       const jeanne = await entrepotUtilisateur.parEmailHache(
         'jeanne.dupont@user.com-hache'
       );
       assert.notEqual(jeanne, undefined);
-      assert.equal(jeanne?.email, 'jeanne.dupont@user.com');
-      assert.equal(jeanne?.prenom, '&lt;Jeanne');
-      assert.equal(jeanne?.nom, '&lt;Dupont');
       assert.equal(jeanne?.telephone, '0123456789');
       assert.deepEqual(jeanne?.domainesSpecialite, ['RSSI']);
       assert.equal((await jeanne?.organisation())?.siret, '13000766900018');
     });
 
     describe('concernant la validation des données', () => {
-      it("valide l'email", async () => {
-        const reponse = await request(serveur)
-          .post('/api/utilisateurs')
-          .send({
-            ...donneesUtilisateur,
-            email: 12,
-          });
-        assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.erreur, "L'email est invalide");
-      });
-
-      it('valide le prénom', async () => {
-        const reponse = await request(serveur)
-          .post('/api/utilisateurs')
-          .send({
-            ...donneesUtilisateur,
-            prenom: '',
-          });
-        assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.erreur, 'Le prénom est invalide');
-      });
-
-      it('valide le nom', async () => {
-        const reponse = await request(serveur)
-          .post('/api/utilisateurs')
-          .send({
-            ...donneesUtilisateur,
-            nom: '',
-          });
-        assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.erreur, 'Le nom est invalide');
-      });
-
       it('valide le téléphone', async () => {
         const reponse = await request(serveur)
           .post('/api/utilisateurs')
@@ -222,16 +197,32 @@ describe('La ressource utilisateur', () => {
           "L'acceptation de l'infolettre est invalide"
         );
       });
-      
-      it('valide le token', async () => {
-        const reponse = await request(serveur)
-          .post('/api/utilisateurs')
-          .send({
-            ...donneesUtilisateur,
-            token: '',
-          });
-        assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.erreur, 'Le token est invalide');
+
+      describe('valide le token', () => {
+        it("lorsqu'il est vide", async () => {
+          const reponse = await request(serveur)
+            .post('/api/utilisateurs')
+            .send({
+              ...donneesUtilisateur,
+              token: '',
+            });
+          assert.equal(reponse.status, 400);
+          assert.equal(reponse.body.erreur, 'Le token est invalide');
+        });
+
+        it("lorsqu'il est mal signé", async () => {
+          adaptateurJWT.decode = () => {
+            throw new Error('Le token est invalide');
+          };
+          const reponse = await request(serveur)
+            .post('/api/utilisateurs')
+            .send({
+              ...donneesUtilisateur,
+              token: 'azertyui',
+            });
+          assert.equal(reponse.status, 400);
+          assert.equal(reponse.body.erreur, 'Le token est invalide');
+        });
       });
     });
   });
