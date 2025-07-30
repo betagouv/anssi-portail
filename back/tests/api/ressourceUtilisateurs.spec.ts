@@ -222,6 +222,17 @@ describe('La ressource utilisateur', () => {
           "L'acceptation de l'infolettre est invalide"
         );
       });
+      
+      it('valide le token', async () => {
+        const reponse = await request(serveur)
+          .post('/api/utilisateurs')
+          .send({
+            ...donneesUtilisateur,
+            token: '',
+          });
+        assert.equal(reponse.status, 400);
+        assert.equal(reponse.body.erreur, 'Le token est invalide');
+      });
     });
   });
 });
