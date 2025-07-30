@@ -22,6 +22,7 @@ const ressourceUtilisateurs = ({
       'siretEntite'
     ),
     [
+      check('token').not().isEmpty().withMessage("Le token est invalide"),
       check('email').isEmail().withMessage("L'email est invalide"),
       check('prenom').not().isEmpty().withMessage('Le prénom est invalide'),
       check('nom').not().isEmpty().withMessage('Le nom est invalide'),
