@@ -8,9 +8,10 @@
 
   let dialogue: HTMLDialogElement;
   let etape: 'formulaire' | 'merci' = 'formulaire';
+  let afficheDialogue = false;
 
   export const affiche = () => {
-    dialogue.showModal();
+    afficheDialogue = true;
   };
   type RaisonDisponible = 'pas-clair' | 'pas-le-temps' | 'pas-besoin' | 'autre';
   let raison: RaisonDisponible | undefined;
@@ -56,111 +57,123 @@
   $: {
     if (raison) erreurRaison = false;
   }
+  $: {
+    if (dialogue) {
+      if (afficheDialogue) {
+        dialogue.showModal();
+      } else {
+        dialogue.close();
+      }
+    }
+  }
 </script>
 
-<dialog bind:this={dialogue}>
-  {#if etape === 'formulaire'}
-    <Formulaire
-      classe="dialogue-sortie-diag"
-      on:formulaireValide={soumetsLeFormulaire}
-    >
-      <div class="contenu">
-        <BoutonFermerModale on:click={() => dialogue.close()} />
-        <h4>Aidez-nous à améliorer votre expérience️ 🙏&nbsp;!</h4>
-        <h5>🤔 Pourquoi n’avez-vous pas finalisé votre demande&nbsp;?</h5>
-        {#if erreurRaison}
-          <lab-anssi-alerte
-            type="erreur"
-            description="Veuillez sélectionner une réponse."
-            fermable={false}
-          ></lab-anssi-alerte>
-        {/if}
-        <div class="propositions">
-          <label>
-            <input type="radio" value="pas-clair" bind:group={raison} />
-            <span>Ce n’est pas assez clair / J’aimerais en savoir plus</span>
-          </label>
-          {#if raison === 'pas-clair'}
-            <ZoneTexte
-              aideSaisie="Précisez votre réponse (facultatif)"
-              bind:valeur={precisionPasClair}
-            />
+{#if afficheDialogue}
+  <dialog onclose={() => (afficheDialogue = false)} bind:this={dialogue}>
+    {#if etape === 'formulaire'}
+      <Formulaire
+        classe="dialogue-sortie-diag"
+        on:formulaireValide={soumetsLeFormulaire}
+      >
+        <div class="contenu">
+          <BoutonFermerModale on:click={() => (afficheDialogue = false)} />
+          <h4>Aidez-nous à améliorer votre expérience️ 🙏&nbsp;!</h4>
+          <h5>🤔 Pourquoi n’avez-vous pas finalisé votre demande&nbsp;?</h5>
+          {#if erreurRaison}
+            <lab-anssi-alerte
+              type="erreur"
+              description="Veuillez sélectionner une réponse."
+              fermable={false}
+            ></lab-anssi-alerte>
           {/if}
-          <label>
-            <input type="radio" value="pas-le-temps" bind:group={raison} />
-            <span>
-              Je n’ai pas le temps maintenant / Je ne suis pas décisionnaire
-            </span>
-          </label>
-          <label>
-            <input type="radio" value="pas-besoin" bind:group={raison} />
-            <span>Mon organisation n’a pas besoin d’accompagnement cyber</span>
-          </label>
-          {#if raison === 'pas-besoin'}
-            <ZoneTexte
-              aideSaisie="Précisez votre réponse (facultatif)"
-              bind:valeur={precisionPasBesoin}
+          <div class="propositions">
+            <label>
+              <input type="radio" value="pas-clair" bind:group={raison} />
+              <span>Ce n’est pas assez clair / J’aimerais en savoir plus</span>
+            </label>
+            {#if raison === 'pas-clair'}
+              <ZoneTexte
+                aideSaisie="Précisez votre réponse (facultatif)"
+                bind:valeur={precisionPasClair}
+              />
+            {/if}
+            <label>
+              <input type="radio" value="pas-le-temps" bind:group={raison} />
+              <span>
+                Je n’ai pas le temps maintenant / Je ne suis pas décisionnaire
+              </span>
+            </label>
+            <label>
+              <input type="radio" value="pas-besoin" bind:group={raison} />
+              <span>Mon organisation n’a pas besoin d’accompagnement cyber</span
+              >
+            </label>
+            {#if raison === 'pas-besoin'}
+              <ZoneTexte
+                aideSaisie="Précisez votre réponse (facultatif)"
+                bind:valeur={precisionPasBesoin}
+              />
+            {/if}
+            <label>
+              <input type="radio" value="autre" bind:group={raison} />
+              <span>Autre</span>
+            </label>
+            {#if raison === 'autre'}
+              <ZoneTexte
+                aideSaisie="Précisez votre réponse (facultatif)"
+                bind:valeur={precisionAutre}
+              />
+            {/if}
+          </div>
+          <div class="contact">
+            <h5>
+              📧 Une question ? Nos équipes se tiennent à votre disposition.
+            </h5>
+            <label for="email">Email de contact </label>
+            <ChampTexte
+              aideSaisie="Ex : jean.dupont@mail.com"
+              id="email-contact"
+              nom="email"
+              type="email"
+              messageErreur="L'email est invalide"
+              bind:valeur={emailDeContact}
             />
-          {/if}
-          <label>
-            <input type="radio" value="autre" bind:group={raison} />
-            <span>Autre</span>
-          </label>
-          {#if raison === 'autre'}
-            <ZoneTexte
-              aideSaisie="Précisez votre réponse (facultatif)"
-              bind:valeur={precisionAutre}
-            />
-          {/if}
+            <p>
+              Votre email ne sera utilisé que pour vous recontacter à propos du
+              diagnostic cyber.
+            </p>
+          </div>
         </div>
-        <div class="contact">
-          <h5>
-            📧 Une question ? Nos équipes se tiennent à votre disposition.
-          </h5>
-          <label for="email">Email de contact </label>
-          <ChampTexte
-            aideSaisie="Ex : jean.dupont@mail.com"
-            id="email-contact"
-            nom="email"
-            type="email"
-            messageErreur="L'email est invalide"
-            bind:valeur={emailDeContact}
+        <div class="actions">
+          <Bouton
+            titre="Envoyer"
+            type="primaire"
+            taille="md"
+            boutonSoumission={true}
           />
+          <a href="/" class="bouton secondaire">Revenir à la page d’accueil</a>
+        </div>
+      </Formulaire>
+    {:else}
+      <div class="dialogue-sortie-diag">
+        <div class="contenu">
+          <BoutonFermerModale on:click={() => dialogue.close()} />
+          <h4>
+            Merci pour votre retour&nbsp;🤩&nbsp;! Vos remarques sont précieuses
+            pour faire évoluer le service.
+          </h4>
           <p>
-            Votre email ne sera utilisé que pour vous recontacter à propos du
-            diagnostic cyber.
+            Vous avez demandé à être recontacté(e) ? Notre équipe prendra
+            contact avec vous prochainement à l’adresse fournie.
           </p>
         </div>
+        <div class="actions">
+          <a href="/" class="bouton primaire">Revenir à la page d’accueil</a>
+        </div>
       </div>
-      <div class="actions">
-        <Bouton
-          titre="Envoyer"
-          type="primaire"
-          taille="md"
-          boutonSoumission={true}
-        />
-        <a href="/" class="bouton secondaire">Revenir à la page d’accueil</a>
-      </div>
-    </Formulaire>
-  {:else}
-    <div class="dialogue-sortie-diag">
-      <div class="contenu">
-        <BoutonFermerModale on:click={() => dialogue.close()} />
-        <h4>
-          Merci pour votre retour&nbsp;🤩&nbsp;! Vos remarques sont précieuses
-          pour faire évoluer le service.
-        </h4>
-        <p>
-          Vous avez demandé à être recontacté(e) ? Notre équipe prendra contact
-          avec vous prochainement à l’adresse fournie.
-        </p>
-      </div>
-      <div class="actions">
-        <a href="/" class="bouton primaire">Revenir à la page d’accueil</a>
-      </div>
-    </div>
-  {/if}
-</dialog>
+    {/if}
+  </dialog>
+{/if}
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
