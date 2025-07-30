@@ -46,6 +46,7 @@
         background: url('/assets/images/icone-chevron-bas.svg');
         transition: transform 0.3s linear;
         margin-left: auto;
+        flex-shrink: 0;
       }
     }
   }
