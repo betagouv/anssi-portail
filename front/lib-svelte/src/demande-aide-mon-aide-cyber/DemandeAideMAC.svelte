@@ -146,7 +146,7 @@
       <h6>Questions les plus fréquentes</h6>
       <div class="accordeon">
         <SectionAccordeon>
-          <span slot="titre">Mon organisation est-elle concernée ?</span>
+          <span slot="titre">Mon organisation est-elle concernée&nbsp;?</span>
           <div class="corps" slot="corps">
             <p>
               ✅ <strong
@@ -167,7 +167,7 @@
         </SectionAccordeon>
         <SectionAccordeon>
           <span slot="titre"
-            >Que risque mon organisation en cas de cyberattaques?</span
+            >Que risque mon organisation en cas de cyberattaques&nbsp;?</span
           >
           <div class="corps" slot="corps">
             <p>
@@ -211,7 +211,7 @@
           </div>
         </SectionAccordeon>
         <SectionAccordeon>
-          <span slot="titre">Qu’est-ce qu’un Aidant cyber?</span>
+          <span slot="titre">Qu’est-ce qu’un Aidant cyber&nbsp;?</span>
           <div class="corps" slot="corps">
             <p>
               👤 Un Aidant cyber est un tiers de confiance, issu d’un organisme
@@ -241,7 +241,7 @@
         </SectionAccordeon>
         <SectionAccordeon>
           <span slot="titre"
-            >Que se passe-t-il après la demande de diagnostic ?</span
+            >Que se passe-t-il après la demande de diagnostic&nbsp;?</span
           >
           <div class="corps" slot="corps">
             <p>📩 Une fois votre demande envoyée :</p>
@@ -262,7 +262,7 @@
               </li>
             </ol>
             <p>
-              🤝 L’objectif est simple:
+              🤝 L’objectif est simple&nbsp;:
               <strong> vous accompagner pas à pas, </strong>
               sans jargon ni pression, pour
               <strong>renforcer concrètement votre cybersécurité.</strong>
@@ -271,7 +271,7 @@
         </SectionAccordeon>
         <SectionAccordeon>
           <span slot="titre"
-            >Le diagnostic est-il confidentiel et anonyme ?</span
+            >Le diagnostic est-il confidentiel et anonyme&nbsp;?</span
           >
           <div class="corps" slot="corps">
             <p>
@@ -299,7 +299,8 @@
       </div>
       <div class="besoin-aide">
         <p>
-          Besoin d’informations supplémentaires ? <lab-anssi-lien
+          Besoin d’informations supplémentaires&nbsp;?
+          <lab-anssi-lien
             href="https://app.livestorm.co/anssi/webinaire-cyberdepart"
             titre="Échangez avec nos équipes"
             apparence="lien-texte"
