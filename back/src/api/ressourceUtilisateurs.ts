@@ -46,7 +46,7 @@ const ressourceUtilisateurs = ({
       } = requete.body;
 
       try {
-        const { email, nom, prenom } = adaptateurJWT.decode(token);
+        const { email, nom, prenom, siret } = adaptateurJWT.decode(token);
 
         const utilisateur = new Utilisateur(
           {
@@ -55,7 +55,7 @@ const ressourceUtilisateurs = ({
             nom,
             telephone,
             domainesSpecialite,
-            siretEntite,
+            siretEntite: siret ?? siretEntite,
             cguAcceptees,
             infolettreAcceptee,
           },

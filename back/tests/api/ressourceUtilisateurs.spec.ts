@@ -90,6 +90,38 @@ describe('La ressource utilisateur', () => {
       assert.equal(jeanne?.infolettreAcceptee, true);
     });
 
+    it('utilise le SIRET du token en priorité', async () => {
+      adaptateurRechercheEntreprise.rechercheOrganisations = async (siret) => [
+        {
+          nom: '',
+          departement: '',
+          siret,
+          codeTrancheEffectif: '01',
+          codeRegion: 'FR-ARA',
+          codeSecteur: 'D',
+        },
+      ];
+
+      await request(serveur)
+        .post('/api/utilisateurs')
+        .send({
+          ...donneesUtilisateur,
+          token:
+            JSON.stringify({
+              email: 'jeanne.dupont@user.com',
+              prenom: 'Jeanne',
+              nom: 'Dupont',
+              siret: '11223344556677',
+            }) + '-code',
+        });
+
+      const jeanne = await entrepotUtilisateur.parEmailHache(
+        'jeanne.dupont@user.com-hache'
+      );
+
+      assert.equal((await jeanne?.organisation())?.siret, '11223344556677');
+    });
+
     it('publie un événement de création de compte', async () => {
       await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
 
