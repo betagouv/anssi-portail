@@ -301,10 +301,10 @@
       </div>
       <div class="besoin-aide">
         <p>
-          Besoin d’informations supplémentaires&nbsp;?
+          Participez à un webinaire pour en savoir plus sur le diagnostic cyber.
           <lab-anssi-lien
             href="https://app.livestorm.co/anssi/webinaire-cyberdepart"
-            titre="Échangez avec nos équipes"
+            titre="Je m’inscris"
             apparence="lien-texte"
             cible="_blank"
           ></lab-anssi-lien>
