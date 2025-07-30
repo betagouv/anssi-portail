@@ -10,9 +10,6 @@ export type InformationsProfessionnelles = {
 };
 
 export type FormulaireInscription = {
-  prenom: string;
-  nom: string;
-  email: string;
   siretEntite?: string;
   telephone?: string;
   domainesSpecialite: string[];

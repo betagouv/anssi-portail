@@ -14,7 +14,10 @@
   import Bouton from '../ui/Bouton.svelte';
   import { onMount } from 'svelte';
   import axios from 'axios';
-  import type { Departement, Organisation } from '../ui/formulaire/SelectionOrganisation.types.js';
+  import type {
+    Departement,
+    Organisation,
+  } from '../ui/formulaire/SelectionOrganisation.types.js';
 
   let informationsProfessionnelles: InformationsProfessionnelles = {
     prenom: '',
@@ -30,7 +33,8 @@
   let token: string | undefined;
 
   onMount(async () => {
-    token = new URLSearchParams(window.location.search).get('token') ?? undefined;
+    token =
+      new URLSearchParams(window.location.search).get('token') ?? undefined;
     try {
       informationsProfessionnelles = (
         await axios.get<InformationsProfessionnelles>(
@@ -76,7 +80,10 @@
     if (formulaireCourant.estValide()) {
       try {
         enCoursEnvoi = true;
-        await axios.post('/api/utilisateurs', {...formulaireInscription, token});
+        await axios.post('/api/utilisateurs', {
+          ...formulaireInscription,
+          token,
+        });
         window.location.href = '/oidc/connexion';
       } catch {
         enCoursEnvoi = false;
@@ -86,9 +93,6 @@
 
   let formulaireInscription: FormulaireInscription;
   $: formulaireInscription = {
-    prenom: informationsProfessionnelles.prenom,
-    nom: informationsProfessionnelles.nom,
-    email: informationsProfessionnelles.email,
     siretEntite: informationsProfessionnelles.organisation?.siret,
     telephone: informationsProfessionnelles.telephone,
     domainesSpecialite: informationsProfessionnelles.domainesSpecialite || [],
