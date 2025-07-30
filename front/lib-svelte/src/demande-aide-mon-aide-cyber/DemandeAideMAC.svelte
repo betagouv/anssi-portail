@@ -143,7 +143,7 @@
   </section>
   <section class="zone-faq">
     <div class="contenu-section">
-      <h6>Questions les plus fréquences</h6>
+      <h6>Questions les plus fréquentes</h6>
       <div class="accordeon">
         <SectionAccordeon>
           <span slot="titre">Mon organisation est-elle concernée ?</span>
