@@ -27,8 +27,10 @@
   const modeleTelephone = '^0\\d{9}$';
   let departements: Departement[] = [];
 
+  let token: string | undefined;
+
   onMount(async () => {
-    const token = new URLSearchParams(window.location.search).get('token');
+    token = new URLSearchParams(window.location.search).get('token') ?? undefined;
     try {
       informationsProfessionnelles = (
         await axios.get<InformationsProfessionnelles>(
@@ -74,7 +76,7 @@
     if (formulaireCourant.estValide()) {
       try {
         enCoursEnvoi = true;
-        await axios.post('/api/utilisateurs', formulaireInscription);
+        await axios.post('/api/utilisateurs', {...formulaireInscription, token});
         window.location.href = '/oidc/connexion';
       } catch {
         enCoursEnvoi = false;
