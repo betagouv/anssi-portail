@@ -3,6 +3,7 @@ import {
   RetourExperience,
 } from '../metier/messagerieInstantanee';
 import axios from 'axios';
+import { aseptiseMarkdown } from './markdown';
 
 export const messagerieMattermost = (): MessagerieInstantanee => ({
   notifieUnRetourExperience: async (retourExperience: RetourExperience) => {
@@ -11,7 +12,7 @@ export const messagerieMattermost = (): MessagerieInstantanee => ({
       const message = `### Retour utilisateur
 Un utilisateur a laissé un retour d’expérience suite à la non-complétion du formulaire de demande d’aide
 Raison : ${retourExperience.raison}
-Précision : ${retourExperience.precision}
+Précision : ${aseptiseMarkdown(retourExperience.precision ?? '')}
 Email de contact : ${retourExperience.emailDeContact}`;
 
       await axios.post(urlWebhook, { text: message });
