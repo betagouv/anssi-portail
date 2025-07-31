@@ -102,6 +102,10 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   repartition: () => ({
     nombreMinimumDeResultats: () => 2,
   }),
+  mattermost: () => ({
+    webhookAvisUtilisateur: () => '',
+    webhookRetourExperience: () => '',
+  }),
 };
 
 const vraiMiddleware = fabriqueMiddleware({
@@ -142,6 +146,7 @@ const fauxGenerateurCodeSessionDeGroupe = {
 
 const fausseMessagerieInstantanee: MessagerieInstantanee = {
   notifieUnRetourExperience: async () => {},
+  notifieUnAvisUtilisateur: async () => {},
 };
 
 export const fauxAdaptateurHachage: AdaptateurHachage = {

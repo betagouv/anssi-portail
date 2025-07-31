@@ -1,8 +1,8 @@
+import axios from 'axios';
 import {
   MessagerieInstantanee,
   RetourExperience,
 } from '../metier/messagerieInstantanee';
-import axios from 'axios';
 import { aseptiseMarkdown } from './markdown';
 
 export const messagerieMattermost = (): MessagerieInstantanee => ({
@@ -18,4 +18,6 @@ Email de contact : ${retourExperience.emailDeContact}`;
       await axios.post(urlWebhook, { text: message });
     }
   },
+
+  notifieUnAvisUtilisateur: async () => {},
 });
