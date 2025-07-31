@@ -8,6 +8,7 @@ export default defineConfig({
     cssCodeSplit: false,
     rollupOptions: {
       input: {
+        'avis-utilisateur': 'src/main-avis-utilisateur.ts',
         'centre-aide': 'src/main-centre-aide.ts',
         'creation-compte': 'src/main-creation-compte.ts',
         'niveaux-maturite': 'src/main-niveaux-maturite.ts',
