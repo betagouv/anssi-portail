@@ -1,5 +1,15 @@
-import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { createLogger, defineConfig } from 'vite';
+
+const loggerPersonnalise = createLogger();
+const loggerWarnOnce = loggerPersonnalise.warnOnce;
+
+loggerPersonnalise.warnOnce = (msg, options) => {
+  const regexp = /assets\/.* referenced in \/assets\/.* didn't resolve at build time, it will remain unchanged to be resolved at runtime/
+  if (msg.match(regexp)) return;
+
+  loggerWarnOnce(msg, options);
+};
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -45,4 +55,5 @@ export default defineConfig({
       },
     },
   },
+  customLogger: loggerPersonnalise,
 });
