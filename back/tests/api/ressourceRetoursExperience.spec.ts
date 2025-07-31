@@ -3,13 +3,13 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc';
+import { RetourExperienceDonne } from '../../src/bus/evenements/retourExperienceDonne';
 import {
   MessagerieInstantanee,
   RetourExperience,
 } from '../../src/metier/messagerieInstantanee';
-import { configurationDeTestDuServeur } from './fauxObjets';
 import { MockBusEvenement } from '../bus/busPourLesTests';
-import { RetourExperienceDonne } from '../../src/bus/evenements/retourExperienceDonne';
+import { configurationDeTestDuServeur } from './fauxObjets';
 
 describe("La ressource des retours d'expérience", () => {
   let serveur: Express;
@@ -19,6 +19,7 @@ describe("La ressource des retours d'expérience", () => {
   beforeEach(() => {
     messagerieInstantanee = {
       notifieUnRetourExperience: async () => {},
+      notifieUnAvisUtilisateur: async () => {},
     };
     busEvenements = new MockBusEvenement();
     serveur = creeServeur({
@@ -141,9 +142,11 @@ describe("La ressource des retours d'expérience", () => {
           .post('/api/retours-experience')
           .send(representation);
 
-        const evenement = busEvenements.recupereEvenement(RetourExperienceDonne);
-        assert.equal(evenement!.raison, "pas-clair")
-        assert.equal(evenement!.emailDeContact, "mail@mail.com")
+        const evenement = busEvenements.recupereEvenement(
+          RetourExperienceDonne
+        );
+        assert.equal(evenement!.raison, 'pas-clair');
+        assert.equal(evenement!.emailDeContact, 'mail@mail.com');
       });
     });
   });

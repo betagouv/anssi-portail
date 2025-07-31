@@ -13,5 +13,6 @@ export type AvisUtilisateur = {
 };
 
 export interface MessagerieInstantanee {
+  notifieUnAvisUtilisateur(avisUtilisateur: AvisUtilisateur): Promise<void>;
   notifieUnRetourExperience(retourExperience: RetourExperience): Promise<void>;
 }
