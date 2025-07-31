@@ -42,10 +42,8 @@ section {
     }
   }
 
-
-
-
-  .bouton, lab-anssi-lien {
+  .bouton,
+  lab-anssi-lien {
     margin-bottom: 16px;
     padding: 10px 24px;
     width: 100%;
@@ -443,5 +441,41 @@ section {
         font-weight: bold;
       }
     }
+  }
+}
+
+.equipe-bizdev {
+  padding: 56px var(--gouttiere) 72px !important;
+
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .photos {
+    margin-bottom: 32px;
+
+    img {
+      width: 164px;
+      height: 164px;
+      border-radius: 50%;
+      border: 6px solid white;
+
+      &:first-of-type {
+        margin-right: -20px;
+      }
+
+      &:last-of-type {
+        margin-left: -20px;
+      }
+    }
+  }
+
+  p {
+    margin: 8px 0 32px;
+  }
+
+  lab-anssi-lien {
+    align-self: flex-start;
   }
 }
