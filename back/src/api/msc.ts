@@ -18,6 +18,7 @@ import { ressourceAnnuaireOrganisations } from './ressourceAnnuaireOrganisations
 import { ressourceAnnuaireRegions } from './ressourceAnnuaireRegions';
 import { ressourceAnnuaireSecteursActivite } from './ressourceAnnuaireSecteursActivite';
 import { ressourceAnnuaireTranchesEffectif } from './ressourceAnnuaireTranchesEffectif';
+import { ressourceAvisUtilisateur } from './ressourceAvisUtilisateur';
 import { ressourceContacts } from './ressourceContacts';
 import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte';
 import { ressourceInfosSite } from './ressourceInfosSite';
@@ -31,10 +32,10 @@ import { ressourceRetoursExperience } from './ressourceRetoursExperience';
 import { ressourceStatistiques } from './ressourceStatistiques';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
 import { ressourceDernierResultatDeTest } from './testMaturite/ressourceDernierResultatDeTest';
+import { ressourceRepartitionDesResultatsDeTest } from './testMaturite/ressourceRepartitionDesResultatsDeTest';
 import { ressourceResultatDeTest } from './testMaturite/ressourceResultatDeTest';
 import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTest';
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
-import { ressourceRepartitionDesResultatsDeTest } from './testMaturite/ressourceRepartitionDesResultatsDeTest';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
 
@@ -252,6 +253,11 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(
     '/api/repartition-resultats-test',
     ressourceRepartitionDesResultatsDeTest(configurationServeur)
+  );
+
+  app.use(
+    '/api/avis-utilisateur',
+    ressourceAvisUtilisateur(configurationServeur)
   );
 
   app.use((_requete: Request, reponse: Response) => {
