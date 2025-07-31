@@ -1,29 +1,29 @@
-import { creeServeur } from './api/msc';
+import { CmsCrisp } from '@lab-anssi/lib';
+import { adaptateurJWT } from './api/adaptateurJWT';
 import { fournisseurChemin } from './api/fournisseurChemin';
 import { fabriqueMiddleware } from './api/middleware';
+import { creeServeur } from './api/msc';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
-import { adaptateurJWT } from './api/adaptateurJWT';
 import { BusEvenements } from './bus/busEvenements';
 import { cableTousLesAbonnes } from './bus/cablage';
-import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPostgres';
+import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
+import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
-import { adaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
 import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSentry';
+import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
 import { adaptateurHorloge } from './infra/adaptateurHorloge';
 import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
-import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
-import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres';
-import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo';
-import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
 import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber';
-import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
-import { CmsCrisp } from '@lab-anssi/lib';
-import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres';
-import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
-import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
-import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
+import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
+import { adaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
+import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
+import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
+import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres';
+import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPostgres';
 import { messagerieMattermost } from './infra/messagerieMattermost';
+import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
+import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement({
@@ -75,7 +75,7 @@ const serviceCoherenceSecretsHachage =
     adaptateurHachage,
   });
 
-const messagerieInstantanee = messagerieMattermost();
+const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
 
 serviceCoherenceSecretsHachage
   .verifieCoherenceSecrets()
