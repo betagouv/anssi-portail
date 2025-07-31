@@ -1,21 +1,23 @@
-import { BusEvenements } from './busEvenements';
-import { TestRealise } from './evenements/testRealise';
-import { consigneEvenementTestRealiseDansJournal } from './consigneEvenementTestRealiseDansJournal';
+import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../infra/adaptateurJournal';
-import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee';
-import { consigneEvenementProprieteTestRevendiqueeDansJournal } from './consigneEvenementProprieteTestRevendiqueeDansJournal';
-import { CompteCree } from './evenements/compteCree';
-import { envoieEmailCreationCompte } from './envoieEmailCreationCompte';
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
-import { creeContactBrevo } from './creeContactBrevo';
+import { EntrepotFavori } from '../metier/entrepotFavori';
+import { BusEvenements } from './busEvenements';
+import { consigneEvenementAvisUtilisateurDonneDansJournal } from './consigneEvenementAvisUtilisateurDonneDansJournal';
 import { consigneEvenementCompteCreeDansJournal } from './consigneEvenementCompteCreeDansJournal';
 import { consigneEvenementMAJFavorisUtilisateurDansJournal } from './consigneEvenementMAJFavorisUtilisateurDansJournal';
-import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
-import { EntrepotFavori } from '../metier/entrepotFavori';
-import { AdaptateurHachage } from '../infra/adaptateurHachage';
-import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
+import { consigneEvenementProprieteTestRevendiqueeDansJournal } from './consigneEvenementProprieteTestRevendiqueeDansJournal';
 import { consigneEvenementRetourExperienceDonneDansJournal } from './consigneEvenementRetourExperienceDonneDansJournal';
+import { consigneEvenementTestRealiseDansJournal } from './consigneEvenementTestRealiseDansJournal';
+import { creeContactBrevo } from './creeContactBrevo';
+import { envoieEmailCreationCompte } from './envoieEmailCreationCompte';
+import { AvisUtilisateurDonne } from './evenements/avisUtilisateurDonne';
+import { CompteCree } from './evenements/compteCree';
+import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee';
+import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
+import { TestRealise } from './evenements/testRealise';
+import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
@@ -72,6 +74,14 @@ export const cableTousLesAbonnes = ({
   busEvenements.abonne(
     RetourExperienceDonne,
     consigneEvenementRetourExperienceDonneDansJournal({
+      adaptateurJournal,
+      adaptateurHorloge,
+      adaptateurHachage,
+    })
+  );
+  busEvenements.abonne(
+    AvisUtilisateurDonne,
+    consigneEvenementAvisUtilisateurDonneDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
