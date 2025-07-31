@@ -1,15 +1,17 @@
-import { adaptateurJournalPostgres } from './adaptateurJournalPostgres';
+import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction';
 import { CodeRegion } from '../metier/referentielRegions';
 import { CodeSecteur } from '../metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
 import { ReponsesTestMaturite } from '../metier/resultatTestMaturite';
+import { adaptateurJournalPostgres } from './adaptateurJournalPostgres';
 
 export type DonneesEvenement =
   | DonneesEvenementNouvelUtilisateur
   | DonneesEvenementProprieteTestRevendiquee
   | DonneesEvenementTestRealise
   | DonneesEvenementMiseAJourFavorisUtilisateur
-  | DonneesEvenementRetourExperienceDonne;
+  | DonneesEvenementRetourExperienceDonne
+  | DonneesEvenementAvisUtilisateurDonne;
 
 interface DonneesCommunesEvenement {
   date: Date;
@@ -59,6 +61,15 @@ interface DonneesEvenementRetourExperienceDonne
     idUtilisateur: string | undefined;
   };
   type: 'RETOUR_EXPERIENCE_DONNE';
+}
+
+interface DonneesEvenementAvisUtilisateurDonne
+  extends DonneesCommunesEvenement {
+  donnees: {
+    niveauDeSatisfaction: NiveauDeSatisfaction;
+    idUtilisateur: string | undefined;
+  };
+  type: 'AVIS_UTILISATEUR_DONNE';
 }
 
 export type AdaptateurJournal = {
