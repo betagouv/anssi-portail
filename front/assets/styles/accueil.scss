@@ -276,6 +276,8 @@ section {
 }
 
 .communaute-msc {
+  background: var(--jaune-clair-msc);
+
   .contenu-section {
     display: grid;
     gap: 24px;
@@ -449,10 +451,10 @@ section {
 
   .contenu-section {
     display: grid;
-    grid-template-areas: "photos" "titre" "contenu" "bouton";
+    grid-template-areas: 'photos' 'titre' 'contenu' 'bouton';
     @include a-partir-de(lg) {
       gap: 24px;
-      grid-template-areas: "titre photos" "contenu photos" "bouton photos";
+      grid-template-areas: 'titre photos' 'contenu photos' 'bouton photos';
       grid-template-columns: 1fr 1fr;
     }
   }
