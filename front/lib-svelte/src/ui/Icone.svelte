@@ -11,11 +11,3 @@
 </script>
 
 <img src={srcDesIcones[type]} alt="" />
-
-<style lang="scss">
-  .icone {
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-  }
-</style>
