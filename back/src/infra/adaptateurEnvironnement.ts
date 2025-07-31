@@ -32,6 +32,10 @@ type AdaptateurEnvironnement = {
   repartition: () => {
     nombreMinimumDeResultats: () => number;
   };
+  mattermost: () => {
+    webhookRetourExperience: () => string | undefined;
+    webhookAvisUtilisateur: () => string | undefined;
+  };
 };
 
 const adaptateurEnvironnement: AdaptateurEnvironnement = {
@@ -137,6 +141,12 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       }
       return nombreMinimumDeResultats;
     },
+  }),
+  mattermost: () => ({
+    webhookAvisUtilisateur: () =>
+      process.env.WEBHOOK_MATTERMOST_AVIS_UTILISATEUR,
+    webhookRetourExperience: () =>
+      process.env.WEBHOOK_MATTERMOST_RETOURS_EXPERIENCE,
   }),
 };
 
