@@ -1,16 +1,30 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { fly } from 'svelte/transition';
+  import { fade, fly } from 'svelte/transition';
+  import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
 
   export let featureFlagAvisUtilisateur: boolean = false;
 
   let encartOuvert = false;
+  let dialogue: HTMLDialogElement;
+  let afficheDialogue: boolean = false;
+
   const surCliqueCTA = () => {
     encartOuvert = false;
+    afficheDialogue = true;
   };
   onMount(() => {
     encartOuvert = true;
   });
+  $: {
+    if (dialogue) {
+      if (afficheDialogue) {
+        dialogue.showModal();
+      } else {
+        dialogue.close();
+      }
+    }
+  }
 </script>
 
 {#if featureFlagAvisUtilisateur && encartOuvert}
@@ -40,8 +54,23 @@
     </button>
   </div>
 {/if}
+{#if featureFlagAvisUtilisateur && afficheDialogue}
+  <dialog
+    class="dialogue-avis-utilisateur"
+    on:close={() => (afficheDialogue = false)}
+    bind:this={dialogue}
+    transition:fade={{ duration: 500 }}
+  >
+    <div class="contenu">
+      <BoutonFermerModale on:click={() => dialogue.close()} />
+      <h4>Votre avis nous intéresse&nbsp;!</h4>
+    </div>
+  </dialog>
+{/if}
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
+
   .avis-utilisateur-cta {
     background-color: #ffffff;
     border-radius: 8px 0 0 8px;
@@ -118,6 +147,35 @@
         margin: 8px 8px 12px;
         text-align: center;
       }
+    }
+  }
+
+  .dialogue-avis-utilisateur {
+    min-width: 100%;
+    height: 90vh;
+    margin: auto 0 0;
+    padding: 0;
+    border: none;
+
+    &::backdrop {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    @include a-partir-de(md) {
+      height: min-content;
+      max-width: 588px;
+      min-width: 0;
+      margin: auto;
+      padding: 0 16px;
+      border-radius: 8px;
+    }
+
+    .contenu {
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      padding: 16px 16px 0;
+      gap: 16px;
     }
   }
 </style>
