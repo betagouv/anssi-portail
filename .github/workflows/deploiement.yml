@@ -20,6 +20,20 @@ jobs:
         with:
           fetch-depth: 0 # Cloner l'intégralité du dépôt, pour ne pas avoir de « shallow repo » rejeté par Clever
 
+      - name: Setup Ruby
+          # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
+        uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+          cache-version: 0
+          working-directory: ./front
+
+      - name: Construis avec Jekyll
+        run: bundle exec jekyll build -s ./front -d ./front/_site
+        env:
+          JEKYLL_ENV: production
+
       - name: Installer la CLI Clever Cloud
         shell: bash
         run: npm install -g clever-tools
