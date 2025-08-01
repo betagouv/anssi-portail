@@ -23,6 +23,16 @@ jobs:
         with:
           node-version-file: '.nvmrc'
 
+      - name: Installe pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.24.0
+
+      - name: Construis la lib Svelte
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm --filter @anssi-portail/svelte build
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1.276.0
         with:
