@@ -1,3 +1,9 @@
+<script type="application/json" id="donneesAvisUtilisateur">
+  {
+    "featureFlagAvisUtilisateur": {% if site.env.FEATURE_FLAG_AVIS_UTILISATEUR == 'true' %}true{% else %}false{% endif %}
+  }
+</script>
+
 <script
   type="module"
   crossorigin
