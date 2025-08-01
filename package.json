@@ -8,6 +8,8 @@
     "migre-bdd-clever": "node node_modules/knex/bin/cli.js migrate:latest --knexfile dist-back/knexfile.js",
     "dev": "npx concurrently -n \"SERVEUR,SVELTE,JEKYLL,BDD,MIGRE\" --prefix-colors \"cyan,green,magenta,blue,yellow\" \"node --watch --import tsx --env-file .env ./back/src/serveur.ts\" \"npm run watch --prefix front/lib-svelte\" \"sleep 5 && jekyll build -s ./front -d ./front/_site -w\" \"docker compose up db\" \"sleep 3 && npm run migre-bdd\"",
     "start": "npm run migre-bdd-clever && node ./dist-back/src/serveur.js",
+    "prestart": "npm run prestart --workspaces --if-present",
+    "postinstall": "npm run postinstall --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "admin": "node -e \"const admin = new (require('./dist-back/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
