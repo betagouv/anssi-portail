@@ -46,6 +46,10 @@ jobs:
           CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
         run: |
+          git config --global user.email "contact@messervicescyber.beta.gouv.fr"
+          git config --global user.name "MesServicesCyber"
+          git add --force front/_site
+          git commit -m "Ajoute le site généré"
           clever link "$ID_APP"
           clever deploy --force --same-commit-policy=rebuild
 
