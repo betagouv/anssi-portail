@@ -15,7 +15,7 @@
     </div>
     <div class="partage">
       <h3>Partager le test</h3>
-      <BoutonsPartageTest />
+      <BoutonsPartageTest {couleurFond} />
     </div>
   </div>
 </section>
@@ -33,25 +33,6 @@
     &.fond-fonce {
       background-color: #0d0c21;
       color: white;
-
-      .bouton.secondaire {
-        background-color: rgba(255, 255, 255, 0);
-        color: white;
-        border-color: #353535;
-
-        img {
-          filter: invert(99%) sepia(1%) saturate(260%) hue-rotate(290deg)
-            brightness(119%) contrast(100%);
-        }
-
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.08);
-        }
-
-        &:active {
-          background-color: rgba(255, 255, 255, 0.16);
-        }
-      }
     }
 
     .contenu-section {

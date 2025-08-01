@@ -21,11 +21,4 @@
   <div class="carte {itemCyber.typologie}">
     <ContenuCarteItem {itemCyber} {avecBoutonFavori} />
   </div>
-
 {/if}
-
-<style lang="scss">
-  .carte.service.lien-externe-produit > * {
-    pointer-events: none;
-  }
-</style>
