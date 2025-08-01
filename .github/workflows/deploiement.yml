@@ -23,6 +23,19 @@ jobs:
         with:
           node-version-file: '.nvmrc'
 
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.276.0
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+          cache-version: 0
+          working-directory: ./front
+
+      - name: Construis avec Jekyll
+        run: bundle exec jekyll build -s ./front -d ./front/_site
+        env:
+          JEKYLL_ENV: production
+
       - name: Installer la CLI Clever Cloud
         shell: bash
         run: npm install -g clever-tools@4.4.0
