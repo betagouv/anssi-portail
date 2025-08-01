@@ -30,7 +30,9 @@ jobs:
           working-directory: ./front
 
       - name: Construis avec Jekyll
-        run: bundle exec jekyll build -s ./front -d ./front/_site
+        run: |
+          bundle config set --local path './front/vendor/bundle'
+          bundle exec --gemfile=./front/Gemfile jekyll build -s ./front -d ./front/_site
         env:
           JEKYLL_ENV: production
 
@@ -44,6 +46,7 @@ jobs:
           CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
         run: |
+          echo "SALUT" > toto
           clever link "$ID_APP"
           clever deploy --force --same-commit-policy=rebuild
 
