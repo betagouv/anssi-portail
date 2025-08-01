@@ -2,12 +2,18 @@
   import { onMount } from 'svelte';
   import { fade, fly } from 'svelte/transition';
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
+  import ZoneTexte from '../ui/ZoneTexte.svelte';
+  import ChampTexte from '../ui/ChampTexte.svelte';
+  import Formulaire from '../ui/Formulaire.svelte';
 
   export let featureFlagAvisUtilisateur: boolean = false;
 
   let encartOuvert = false;
   let dialogue: HTMLDialogElement;
   let afficheDialogue: boolean = false;
+
+  let commentaire: string | undefined;
+  let emailDeContact: string | undefined;
 
   const surCliqueCTA = () => {
     encartOuvert = false;
@@ -61,10 +67,89 @@
     bind:this={dialogue}
     transition:fade={{ duration: 500 }}
   >
-    <div class="contenu">
-      <BoutonFermerModale on:click={() => dialogue.close()} />
-      <h4>Votre avis nous intéresse&nbsp;!</h4>
+    <Formulaire classe="formulaire-avis-utilisateur">
+      <div class="contenu">
+        <BoutonFermerModale on:click={() => dialogue.close()} />
+        <h4>Votre avis nous intéresse&nbsp;!</h4>
+        <div class="question">
+          <p>Le service MesServicesCyber répond-il à vos attentes&nbsp;?</p>
+          <div class="satisfaction">
+            <div class="niveaux-satisfaction">
+              <label class="niveau-satisfaction">
+                <input type="radio" name="note" value="1" />
+                <span aria-label="Pas du tout" role="img">😠</span>
+              </label>
+              <label class="niveau-satisfaction">
+                <input type="radio" name="note" value="2" />
+                <span aria-label="Pas satisfait" role="img">☹️</span>
+              </label>
+              <label class="niveau-satisfaction">
+                <input type="radio" name="note" value="3" />
+                <span aria-label="Moyennement satisfait" role="img">😕</span>
+              </label>
+              <label class="niveau-satisfaction">
+                <input type="radio" name="note" value="4" />
+                <span aria-label="Satisfait" role="img">😊</span>
+              </label>
+              <label class="niveau-satisfaction">
+                <input type="radio" name="note" value="5" />
+                <span aria-label="Tout à fait" role="img">🤩</span>
+              </label>
+            </div>
+            <div class="descriptions">
+              <span class="premier">Pas du tout</span>
+              <span class="dernier">Tout à fait</span>
+            </div>
+          </div>
+        </div>
+        <div class="question">
+          <p>Que pouvons-nous améliorer ?</p>
+          <ZoneTexte bind:valeur={commentaire} />
+        </div>
+        <p class="mis-en-avant">
+          Échangez avec nous sur votre expérience et participez aux futures
+          évolutions de la plateforme&nbsp;!
+        </p>
+        <div class="question">
+          <p>Email de contact (facultatif)</p>
+          <ChampTexte
+            aideSaisie="Ex : jean.dupont@mail.com"
+            id="email-contact"
+            nom="email"
+            type="email"
+            messageErreur="L'email est invalide"
+            bind:valeur={emailDeContact}
+          />
+          <p class="information">
+            Votre email ne sera utilisé que pour échanger sur la plateforme et
+            ses futures évolutions.
+          </p>
+        </div>
+      </div>
     </div>
+    <footer class="actions">
+      <lab-anssi-bouton
+        on:click={soumetsLeFormulaire}
+        on:keypress
+        role="button"
+        taille="md"
+        tabindex="0"
+        titre="Envoyer"
+        variante="primaire"
+        type="submit"
+        largeur-maximale
+      ></lab-anssi-bouton>
+      <lab-anssi-bouton
+        on:click={() => dialogue.close()}
+        on:keypress
+        role="button"
+        taille="md"
+        tabindex={1}
+        titre="Fermer sans répondre"
+        variante="secondaire"
+        largeur-maximale
+      ></lab-anssi-bouton>
+    </footer>
   </dialog>
 {/if}
 
@@ -152,7 +237,7 @@
 
   .dialogue-avis-utilisateur {
     min-width: 100%;
-    height: 90vh;
+    max-height: 90vh;
     margin: auto 0 0;
     padding: 0;
     border: none;
@@ -176,6 +261,116 @@
       overflow: auto;
       padding: 16px 16px 0;
       gap: 16px;
+
+      h4 {
+        font-size: 1.375rem;
+        font-weight: bold;
+        line-height: 1.75rem;
+        margin: 0;
+
+        @include a-partir-de(md) {
+          font-size: 1.5rem;
+          line-height: 2rem;
+        }
+      }
+
+      .mis-en-avant {
+        font-weight: bold;
+        margin: 8px 0 0;
+      }
+
+      .question {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        p {
+          margin: 0;
+        }
+
+        .information {
+          color: #666666;
+          font-size: 0.75rem;
+          line-height: 1.25rem;
+          margin-top: 2px;
+        }
+
+        :global(textarea) {
+          resize: vertical;
+        }
+      }
+    }
+
+    .actions {
+      background-color: #ffffff;
+      bottom: 0;
+      position: sticky;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 16px;
+
+      @include a-partir-de(md) {
+        flex-direction: row-reverse;
+        padding: 48px 16px 32px;
+      }
+    }
+
+    .satisfaction {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .niveaux-satisfaction {
+        border: 1px solid var(--gris-clair);
+        border-radius: 4px;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+
+        input[type='radio'] {
+          position: absolute;
+          opacity: 0;
+          width: 0;
+          height: 0;
+
+          + span {
+            cursor: pointer;
+          }
+
+          &:checked + span {
+            background-color: #000091;
+          }
+        }
+
+        .niveau-satisfaction {
+          display: flex;
+          flex: 1;
+
+          &:not(:last-child) {
+            border-right: 1px solid var(--gris-clair);
+          }
+
+          span {
+            flex: 1;
+            font-size: 1.25rem;
+            line-height: 1.5rem;
+            margin: 0;
+            padding: 8px 16px;
+            text-align: center;
+          }
+        }
+      }
+
+      .descriptions {
+        color: #666666;
+        display: flex;
+        flex-direction: row;
+        font-size: 0.875rem;
+        font-style: normal;
+        justify-content: space-between;
+        line-height: 1.5rem;
+      }
     }
   }
 </style>
