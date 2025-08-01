@@ -77,6 +77,8 @@ const serviceCoherenceSecretsHachage =
 
 const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
 
+const port = process.env.PORT || 3000;
+
 serviceCoherenceSecretsHachage
   .verifieCoherenceSecrets()
   .catch((reason) => {
@@ -117,7 +119,7 @@ serviceCoherenceSecretsHachage
       ),
       adaptateurHachage,
       messagerieInstantanee,
-    }).listen(3000, () => {
-      console.log('Le serveur écoute sur le port 3000');
+    }).listen(port, () => {
+      console.log(`Le serveur écoute sur le port ${port}`);
     });
   });
