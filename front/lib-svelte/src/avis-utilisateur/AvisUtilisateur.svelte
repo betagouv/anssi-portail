@@ -1,6 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { fly } from 'svelte/transition';
+
+  export let featureFlagAvisUtilisateur: boolean = false;
+
   let encartOuvert = false;
   const surCliqueCTA = () => {
     encartOuvert = false;
@@ -10,7 +13,7 @@
   });
 </script>
 
-{#if encartOuvert}
+{#if featureFlagAvisUtilisateur && encartOuvert}
   <div
     class="avis-utilisateur-cta"
     transition:fly={{ duration: 500, x: 140, opacity: 1 }}
