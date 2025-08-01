@@ -32,7 +32,9 @@ jobs:
           working-directory: ./front
 
       - name: Construis avec Jekyll
-        run: bundle exec jekyll build -s ./front -d ./front/_site
+        run: |
+          bundle config set --local path './front/vendor/bundle'
+          bundle exec --gemfile=./front/Gemfile jekyll build -s ./front -d ./front/_site
         env:
           JEKYLL_ENV: production
 
