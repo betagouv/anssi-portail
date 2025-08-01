@@ -20,6 +20,11 @@ jobs:
         with:
           fetch-depth: 0 # Cloner l'intégralité du dépôt, pour ne pas avoir de « shallow repo » rejeté par Clever
 
+      - name: Construis la lib Svelte
+        run: |
+          npm install --prefix front/lib-svelte
+          npm run build --prefix front/lib-svelte
+
       - name: Setup Ruby
           # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
         uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4
