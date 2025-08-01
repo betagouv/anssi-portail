@@ -1,15 +1,32 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import { fly } from 'svelte/transition';
+  let encartOuvert = false;
+  onMount(() => {
+    encartOuvert = true;
+  });
 </script>
 
-<div class="avis-utilisateur-cta">
-  <div class="illustration">
-    <button on:keypress tabindex={0} aria-label="Fermer" class="fermer">
-      <lab-anssi-icone nom="close-line" taille="sm"></lab-anssi-icone>
-    </button>
-    <img src="/assets/images/dragon-coeur.svg" alt="Dragon coeur" />
+{#if encartOuvert}
+  <div
+    class="avis-utilisateur-cta"
+    transition:fly={{ duration: 500, x: 140, opacity: 1 }}
+  >
+    <div class="illustration">
+      <button
+        on:keypress
+        on:click={() => (encartOuvert = false)}
+        tabindex={0}
+        aria-label="Fermer"
+        class="fermer"
+      >
+        <lab-anssi-icone nom="close-line" taille="sm"></lab-anssi-icone>
+      </button>
+      <img src="/assets/images/dragon-coeur.svg" alt="Dragon coeur" />
+    </div>
+    <p class="texte">Votre avis nous intéresse&nbsp;!</p>
   </div>
-  <p class="texte">Votre avis nous intéresse&nbsp;!</p>
-</div>
+{/if}
 
 <style lang="scss">
   .avis-utilisateur-cta {
