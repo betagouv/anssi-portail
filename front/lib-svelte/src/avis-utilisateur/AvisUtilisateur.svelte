@@ -2,9 +2,9 @@
   import { onMount } from 'svelte';
   import { fade, fly } from 'svelte/transition';
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
-  import ZoneTexte from '../ui/ZoneTexte.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
+  import ZoneTexte from '../ui/ZoneTexte.svelte';
 
   export let featureFlagAvisUtilisateur: boolean = false;
 
@@ -309,10 +309,26 @@
       flex-direction: column;
       gap: 16px;
       padding: 16px;
+      border-top-color: transparent;
 
       @include a-partir-de(md) {
         flex-direction: row-reverse;
         padding: 48px 16px 32px;
+      }
+
+      animation: ajoute-bordure-100-pourcent linear;
+      animation-timeline: scroll();
+    }
+
+    @keyframes ajoute-bordure-100-pourcent {
+      0% {
+        border-top-color: #ddd;
+      }
+      99% {
+        border-top-color: #ddd;
+      }
+      100% {
+        border-top-color: transparent;
       }
     }
 
