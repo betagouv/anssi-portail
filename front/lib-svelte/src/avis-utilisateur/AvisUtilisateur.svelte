@@ -1,4 +1,5 @@
 <script lang="ts">
+  import axios from 'axios';
   import { onMount } from 'svelte';
   import { fade, fly } from 'svelte/transition';
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
@@ -32,6 +33,13 @@
     if (!satisfaction) erreurSatisfaction = true;
     if (!commentaire) erreurCommentaire = true;
     if (erreurCommentaire || erreurSatisfaction) return;
+
+    await axios.post('/api/avis-utilisateur', {
+      niveauDeSatisfaction: Number(satisfaction),
+      commentaire,
+      emailDeContact,
+    });
+    afficheDialogue = false;
   };
 
   onMount(() => {
