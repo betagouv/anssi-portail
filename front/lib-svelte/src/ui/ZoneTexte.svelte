@@ -1,9 +1,14 @@
 <script lang="ts">
   export let aideSaisie = '';
   export let valeur: string = '';
+  export let enErreur: boolean = false;
 </script>
 
-<textarea bind:value={valeur} placeholder={aideSaisie}></textarea>
+<textarea
+  bind:value={valeur}
+  placeholder={aideSaisie}
+  class:en-erreur={enErreur}
+></textarea>
 
 <style lang="scss">
   textarea {
@@ -19,5 +24,9 @@
     margin-bottom: 0;
     box-sizing: border-box;
     font-family: var(--fonts);
+
+    &.en-erreur {
+      border-color: var(--erreur-texte);
+    }
   }
 </style>

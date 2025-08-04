@@ -3,7 +3,6 @@
   import { fade, fly } from 'svelte/transition';
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
-  import Formulaire from '../ui/Formulaire.svelte';
   import ZoneTexte from '../ui/ZoneTexte.svelte';
 
   export let featureFlagAvisUtilisateur: boolean = false;
@@ -12,13 +11,29 @@
   let dialogue: HTMLDialogElement;
   let afficheDialogue: boolean = false;
 
+  type SatisfactionDisponible = '1' | '2' | '3' | '4' | '5';
+  let satisfaction: SatisfactionDisponible | undefined;
+  let erreurSatisfaction = false;
   let commentaire: string | undefined;
+  let erreurCommentaire = false;
   let emailDeContact: string | undefined;
+
+  $: {
+    if (satisfaction) erreurSatisfaction = false;
+    if (commentaire) erreurCommentaire = false;
+  }
 
   const surCliqueCTA = () => {
     encartOuvert = false;
     afficheDialogue = true;
   };
+
+  const soumetsLeFormulaire = async () => {
+    if (!satisfaction) erreurSatisfaction = true;
+    if (!commentaire) erreurCommentaire = true;
+    if (erreurCommentaire || erreurSatisfaction) return;
+  };
+
   onMount(() => {
     encartOuvert = true;
   });
@@ -67,64 +82,96 @@
     bind:this={dialogue}
     transition:fade={{ duration: 500 }}
   >
-    <Formulaire classe="formulaire-avis-utilisateur">
-      <div class="contenu">
-        <BoutonFermerModale on:click={() => dialogue.close()} />
-        <h4>Votre avis nous intéresse&nbsp;!</h4>
-        <div class="question">
-          <p>Le service MesServicesCyber répond-il à vos attentes&nbsp;?</p>
-          <div class="satisfaction">
-            <div class="niveaux-satisfaction">
-              <label class="niveau-satisfaction">
-                <input type="radio" name="note" value="1" />
-                <span aria-label="Pas du tout" role="img">😠</span>
-              </label>
-              <label class="niveau-satisfaction">
-                <input type="radio" name="note" value="2" />
-                <span aria-label="Pas satisfait" role="img">☹️</span>
-              </label>
-              <label class="niveau-satisfaction">
-                <input type="radio" name="note" value="3" />
-                <span aria-label="Moyennement satisfait" role="img">😕</span>
-              </label>
-              <label class="niveau-satisfaction">
-                <input type="radio" name="note" value="4" />
-                <span aria-label="Satisfait" role="img">😊</span>
-              </label>
-              <label class="niveau-satisfaction">
-                <input type="radio" name="note" value="5" />
-                <span aria-label="Tout à fait" role="img">🤩</span>
-              </label>
-            </div>
-            <div class="descriptions">
-              <span class="premier">Pas du tout</span>
-              <span class="dernier">Tout à fait</span>
-            </div>
+    <div class="contenu">
+      <BoutonFermerModale on:click={() => dialogue.close()} />
+      <h4>Votre avis nous intéresse&nbsp;!</h4>
+      {#if erreurSatisfaction || erreurCommentaire}
+        <lab-anssi-alerte
+          type="erreur"
+          description="Merci de compléter les champs avant d’envoyer votre avis."
+          fermable={false}
+        ></lab-anssi-alerte>
+      {/if}
+      <div class="question">
+        <p class:erreur={erreurSatisfaction}>
+          Le service MesServicesCyber répond-il à vos attentes&nbsp;?
+        </p>
+        <div class="satisfaction">
+          <div class="niveaux-satisfaction">
+            <label class="niveau-satisfaction">
+              <input
+                type="radio"
+                name="note"
+                value="1"
+                bind:group={satisfaction}
+              />
+              <span aria-label="Pas du tout" role="img">😠</span>
+            </label>
+            <label class="niveau-satisfaction">
+              <input
+                type="radio"
+                name="note"
+                value="2"
+                bind:group={satisfaction}
+              />
+              <span aria-label="Pas satisfait" role="img">☹️</span>
+            </label>
+            <label class="niveau-satisfaction">
+              <input
+                type="radio"
+                name="note"
+                value="3"
+                bind:group={satisfaction}
+              />
+              <span aria-label="Moyennement satisfait" role="img">😕</span>
+            </label>
+            <label class="niveau-satisfaction">
+              <input
+                type="radio"
+                name="note"
+                value="4"
+                bind:group={satisfaction}
+              />
+              <span aria-label="Satisfait" role="img">😊</span>
+            </label>
+            <label class="niveau-satisfaction">
+              <input
+                type="radio"
+                name="note"
+                value="5"
+                bind:group={satisfaction}
+              />
+              <span aria-label="Tout à fait" role="img">🤩</span>
+            </label>
+          </div>
+          <div class="descriptions">
+            <span class="premier">Pas du tout</span>
+            <span class="dernier">Tout à fait</span>
           </div>
         </div>
-        <div class="question">
-          <p>Que pouvons-nous améliorer ?</p>
-          <ZoneTexte bind:valeur={commentaire} />
-        </div>
-        <p class="mis-en-avant">
-          Échangez avec nous sur votre expérience et participez aux futures
-          évolutions de la plateforme&nbsp;!
+      </div>
+      <div class="question">
+        <p class:erreur={erreurCommentaire}>Que pouvons-nous améliorer ?</p>
+        <ZoneTexte bind:valeur={commentaire} enErreur={erreurCommentaire} />
+      </div>
+      <p class="mis-en-avant">
+        Échangez avec nous sur votre expérience et participez aux futures
+        évolutions de la plateforme&nbsp;!
+      </p>
+      <div class="question">
+        <p>Email de contact (facultatif)</p>
+        <ChampTexte
+          aideSaisie="Ex : jean.dupont@mail.com"
+          id="email-contact"
+          nom="email"
+          type="email"
+          messageErreur="L'email est invalide"
+          bind:valeur={emailDeContact}
+        />
+        <p class="information">
+          Votre email ne sera utilisé que pour échanger sur la plateforme et ses
+          futures évolutions.
         </p>
-        <div class="question">
-          <p>Email de contact (facultatif)</p>
-          <ChampTexte
-            aideSaisie="Ex : jean.dupont@mail.com"
-            id="email-contact"
-            nom="email"
-            type="email"
-            messageErreur="L'email est invalide"
-            bind:valeur={emailDeContact}
-          />
-          <p class="information">
-            Votre email ne sera utilisé que pour échanger sur la plateforme et
-            ses futures évolutions.
-          </p>
-        </div>
       </div>
     </div>
     <footer class="actions">
@@ -286,6 +333,10 @@
 
         p {
           margin: 0;
+
+          &.erreur {
+            color: var(--erreur-texte);
+          }
         }
 
         .information {
