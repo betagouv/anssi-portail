@@ -1,5 +1,8 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
-import { proposeAvisUtilisteur } from '../../src/avis-utilisateur/controleAffichage';
+import {
+  calculeDelaiRestantAvisUtilisateur,
+  proposeAvisUtilisteur,
+} from '../../src/avis-utilisateur/controleAffichage';
 
 describe("Le controle de l'affichage de la demande d'avis utilisateur", () => {
   describe('doit controler le chemin courant', () => {
@@ -78,5 +81,37 @@ describe("Le controle de l'affichage de la demande d'avis utilisateur", () => {
 
       expect(affichage).toBeTruthy();
     });
+  });
+});
+
+describe("Le calcul du délai d'affichage de la demande d'avis", () => {
+  const dateCourante = new Date(2025, 7, 15, 12, 0, 0);
+  beforeAll(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(dateCourante);
+  });
+  afterAll(() => {
+    vi.restoreAllMocks();
+  });
+  it('se base sur la date de première visite et la durée minimum', () => {
+    const dureeMinimumEnSecondes = 20;
+    const datePremierVisite = new Date(2025, 7, 15, 11, 59, 55);
+
+    const delai = calculeDelaiRestantAvisUtilisateur({
+      dureeMinimumEnSecondes,
+      datePremiereVisite: datePremierVisite,
+    });
+
+    expect(delai).toEqual(15);
+  });
+
+  it("se base uniquement sur la durée minimum si il n'y a pas de date de première visite", () => {
+    const dureeMinimumEnSecondes = 20;
+
+    const delai = calculeDelaiRestantAvisUtilisateur({
+      dureeMinimumEnSecondes,
+    });
+
+    expect(delai).toEqual(20);
   });
 });
