@@ -1,6 +1,7 @@
 <script type="application/json" id="donneesAvisUtilisateur">
   {
     "featureFlagAvisUtilisateur": {% if site.env.FEATURE_FLAG_AVIS_UTILISATEUR == 'true' %}true{% else %}false{% endif %}
+    "delaiAffichageAvisUtilisateur": {% if site.env.DELAI_AFFICHAGE_AVIS_UTILISATEUR == 'true' %}true{% else %}false{% endif %}
   }
 </script>
 
