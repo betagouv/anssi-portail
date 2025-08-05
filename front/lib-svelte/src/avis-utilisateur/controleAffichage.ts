@@ -24,3 +24,19 @@ export const proposeAvisUtilisteur = ({
   }
   return true;
 };
+
+export const calculeDelaiRestantAvisUtilisateur = ({
+  dureeMinimumEnSecondes,
+  datePremiereVisite,
+}: {
+  dureeMinimumEnSecondes: number;
+  datePremiereVisite?: Date;
+}) => {
+  if (!datePremiereVisite) {
+    return dureeMinimumEnSecondes;
+  }
+  return (
+    dureeMinimumEnSecondes -
+    (new Date().getTime() - datePremiereVisite.getTime()) / 1000
+  );
+};
