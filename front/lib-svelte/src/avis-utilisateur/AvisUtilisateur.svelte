@@ -30,6 +30,11 @@
     afficheDialogue = true;
   };
 
+  const surFermetureCTA = () => {
+    encartOuvert = false;
+    localStorage.setItem('dateDerniereFermeture', new Date().toUTCString());
+  };
+
   const soumetsLeFormulaire = async () => {
     if (!satisfaction) erreurSatisfaction = true;
     if (!commentaire) erreurCommentaire = true;
@@ -44,6 +49,7 @@
     } catch (erreur) {
       console.error(erreur);
     } finally {
+      localStorage.setItem('dateDernierAvis', new Date().toUTCString());
       etape = 'merci';
     }
   };
@@ -56,6 +62,7 @@
       if (afficheDialogue) {
         dialogue.showModal();
       } else {
+        localStorage.setItem('dateDerniereFermeture', new Date().toUTCString());
         dialogue.close();
       }
     }
@@ -80,7 +87,7 @@
     </button>
     <button
       on:keypress
-      on:click={() => (encartOuvert = false)}
+      on:click={surFermetureCTA}
       tabindex={null}
       aria-label="Fermer"
       class="fermer"
