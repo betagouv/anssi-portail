@@ -11,6 +11,7 @@
   let encartOuvert = false;
   let dialogue: HTMLDialogElement;
   let afficheDialogue: boolean = false;
+  let etape: 'formulaire' | 'merci' = 'formulaire';
 
   type SatisfactionDisponible = '1' | '2' | '3' | '4' | '5';
   let satisfaction: SatisfactionDisponible | undefined;
@@ -34,12 +35,17 @@
     if (!commentaire) erreurCommentaire = true;
     if (erreurCommentaire || erreurSatisfaction) return;
 
-    await axios.post('/api/avis-utilisateur', {
-      niveauDeSatisfaction: Number(satisfaction),
-      commentaire,
-      emailDeContact,
-    });
-    afficheDialogue = false;
+    try {
+      await axios.post('/api/avis-utilisateur', {
+        niveauDeSatisfaction: Number(satisfaction),
+        commentaire,
+        emailDeContact,
+      });
+    } catch (erreur) {
+      console.error(erreur);
+    } finally {
+      etape = 'merci';
+    }
   };
 
   onMount(() => {
@@ -90,121 +96,148 @@
     bind:this={dialogue}
     transition:fade={{ duration: 500 }}
   >
-    <div class="contenu">
-      <BoutonFermerModale on:click={() => dialogue.close()} />
-      <h4>Votre avis nous intéresse&nbsp;!</h4>
-      {#if erreurSatisfaction || erreurCommentaire}
-        <lab-anssi-alerte
-          type="erreur"
-          description="Merci de compléter les champs avant d’envoyer votre avis."
-          fermable={false}
-        ></lab-anssi-alerte>
-      {/if}
-      <div class="question">
-        <p class:erreur={erreurSatisfaction}>
-          Le service MesServicesCyber répond-il à vos attentes&nbsp;?
-        </p>
-        <div class="satisfaction">
-          <div class="niveaux-satisfaction">
-            <label class="niveau-satisfaction">
-              <input
-                type="radio"
-                name="note"
-                value="1"
-                bind:group={satisfaction}
-              />
-              <span aria-label="Pas du tout" role="img">😠</span>
-            </label>
-            <label class="niveau-satisfaction">
-              <input
-                type="radio"
-                name="note"
-                value="2"
-                bind:group={satisfaction}
-              />
-              <span aria-label="Pas satisfait" role="img">☹️</span>
-            </label>
-            <label class="niveau-satisfaction">
-              <input
-                type="radio"
-                name="note"
-                value="3"
-                bind:group={satisfaction}
-              />
-              <span aria-label="Moyennement satisfait" role="img">😕</span>
-            </label>
-            <label class="niveau-satisfaction">
-              <input
-                type="radio"
-                name="note"
-                value="4"
-                bind:group={satisfaction}
-              />
-              <span aria-label="Satisfait" role="img">😊</span>
-            </label>
-            <label class="niveau-satisfaction">
-              <input
-                type="radio"
-                name="note"
-                value="5"
-                bind:group={satisfaction}
-              />
-              <span aria-label="Tout à fait" role="img">🤩</span>
-            </label>
-          </div>
-          <div class="descriptions">
-            <span class="premier">Pas du tout</span>
-            <span class="dernier">Tout à fait</span>
+    {#if etape === 'formulaire'}
+      <div class="contenu">
+        <BoutonFermerModale on:click={() => dialogue.close()} />
+        <h4>Votre avis nous intéresse&nbsp;!</h4>
+        {#if erreurSatisfaction || erreurCommentaire}
+          <lab-anssi-alerte
+            type="erreur"
+            description="Merci de compléter les champs avant d’envoyer votre avis."
+            fermable={false}
+          ></lab-anssi-alerte>
+        {/if}
+        <div class="question">
+          <p class:erreur={erreurSatisfaction}>
+            Le service MesServicesCyber répond-il à vos attentes&nbsp;?
+          </p>
+          <div class="satisfaction">
+            <div class="niveaux-satisfaction">
+              <label class="niveau-satisfaction">
+                <input
+                  type="radio"
+                  name="note"
+                  value="1"
+                  bind:group={satisfaction}
+                />
+                <span aria-label="Pas du tout" role="img">😠</span>
+              </label>
+              <label class="niveau-satisfaction">
+                <input
+                  type="radio"
+                  name="note"
+                  value="2"
+                  bind:group={satisfaction}
+                />
+                <span aria-label="Pas satisfait" role="img">☹️</span>
+              </label>
+              <label class="niveau-satisfaction">
+                <input
+                  type="radio"
+                  name="note"
+                  value="3"
+                  bind:group={satisfaction}
+                />
+                <span aria-label="Moyennement satisfait" role="img">😕</span>
+              </label>
+              <label class="niveau-satisfaction">
+                <input
+                  type="radio"
+                  name="note"
+                  value="4"
+                  bind:group={satisfaction}
+                />
+                <span aria-label="Satisfait" role="img">😊</span>
+              </label>
+              <label class="niveau-satisfaction">
+                <input
+                  type="radio"
+                  name="note"
+                  value="5"
+                  bind:group={satisfaction}
+                />
+                <span aria-label="Tout à fait" role="img">🤩</span>
+              </label>
+            </div>
+            <div class="descriptions">
+              <span class="premier">Pas du tout</span>
+              <span class="dernier">Tout à fait</span>
+            </div>
           </div>
         </div>
+        <div class="question">
+          <p class:erreur={erreurCommentaire}>Que pouvons-nous améliorer ?</p>
+          <ZoneTexte bind:valeur={commentaire} enErreur={erreurCommentaire} />
+        </div>
+        <p class="mis-en-avant">
+          Échangez avec nous sur votre expérience et participez aux futures
+          évolutions de la plateforme&nbsp;!
+        </p>
+        <div class="question">
+          <p>Email de contact (facultatif)</p>
+          <ChampTexte
+            aideSaisie="Ex : jean.dupont@mail.com"
+            id="email-contact"
+            nom="email"
+            type="email"
+            messageErreur="L'email est invalide"
+            bind:valeur={emailDeContact}
+          />
+          <p class="information">
+            Votre email ne sera utilisé que pour échanger sur la plateforme et
+            ses futures évolutions.
+          </p>
+        </div>
       </div>
-      <div class="question">
-        <p class:erreur={erreurCommentaire}>Que pouvons-nous améliorer ?</p>
-        <ZoneTexte bind:valeur={commentaire} enErreur={erreurCommentaire} />
-      </div>
-      <p class="mis-en-avant">
-        Échangez avec nous sur votre expérience et participez aux futures
-        évolutions de la plateforme&nbsp;!
-      </p>
-      <div class="question">
-        <p>Email de contact (facultatif)</p>
-        <ChampTexte
-          aideSaisie="Ex : jean.dupont@mail.com"
-          id="email-contact"
-          nom="email"
-          type="email"
-          messageErreur="L'email est invalide"
-          bind:valeur={emailDeContact}
-        />
-        <p class="information">
-          Votre email ne sera utilisé que pour échanger sur la plateforme et ses
-          futures évolutions.
+      <footer class="actions">
+        <lab-anssi-bouton
+          on:click={soumetsLeFormulaire}
+          on:keypress
+          role="button"
+          taille="md"
+          tabindex="0"
+          titre="Envoyer"
+          variante="primaire"
+          type="submit"
+          largeur-maximale
+        ></lab-anssi-bouton>
+        <lab-anssi-bouton
+          on:click={() => dialogue.close()}
+          on:keypress
+          role="button"
+          taille="md"
+          tabindex={1}
+          titre="Fermer sans répondre"
+          variante="secondaire"
+          largeur-maximale
+        ></lab-anssi-bouton>
+      </footer>
+    {:else}
+      <div class="contenu">
+        <BoutonFermerModale on:click={() => dialogue.close()} />
+        <h4>
+          Merci 🤩&nbsp;! Vos remarques sont précieuses pour faire évoluer le
+          service.
+        </h4>
+        <p>
+          Si vous avez renseigné votre adresse email, nous vous recontacterons
+          très prochainement pour échanger sur la plateforme et ses futures
+          évolutions.
         </p>
       </div>
-    </div>
-    <footer class="actions">
-      <lab-anssi-bouton
-        on:click={soumetsLeFormulaire}
-        on:keypress
-        role="button"
-        taille="md"
-        tabindex="0"
-        titre="Envoyer"
-        variante="primaire"
-        type="submit"
-        largeur-maximale
-      ></lab-anssi-bouton>
-      <lab-anssi-bouton
-        on:click={() => dialogue.close()}
-        on:keypress
-        role="button"
-        taille="md"
-        tabindex={1}
-        titre="Fermer sans répondre"
-        variante="secondaire"
-        largeur-maximale
-      ></lab-anssi-bouton>
-    </footer>
+      <footer class="actions">
+        <lab-anssi-bouton
+          on:click={() => dialogue.close()}
+          on:keypress
+          role="button"
+          taille="md"
+          tabindex={0}
+          titre="Terminer"
+          variante="primaire"
+          largeur-maximale
+        ></lab-anssi-bouton>
+      </footer>
+    {/if}
   </dialog>
 {/if}
 
