@@ -1,11 +1,14 @@
 <script lang="ts">
-  import Tuile from './Tuile.svelte';
-  import { onMount } from 'svelte';
   import axios from 'axios';
-  import GraphiqueAnneau from '../test-maturite/GraphiqueAnneau.svelte';
-  import type { Serie } from '../test-maturite/Serie';
-  import LegendeAnneau from '../test-maturite/LegendeAnneau.svelte';
+  import { onMount } from 'svelte';
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import GraphiqueAnneau from '../test-maturite/GraphiqueAnneau.svelte';
+  import LegendeAnneau from '../test-maturite/LegendeAnneau.svelte';
+  import SelectRegion from '../test-maturite/SelectRegion.svelte';
+  import SelectSecteurActivite from '../test-maturite/SelectSecteurActivite.svelte';
+  import SelectTailleOrganisation from '../test-maturite/SelectTailleOrganisation.svelte';
+  import type { Serie } from '../test-maturite/Serie';
+  import Tuile from './Tuile.svelte';
 
   type Statistiques = {
     utilisateursInscrits: number;
@@ -25,6 +28,9 @@
 
   let mesures: Statistiques | undefined = undefined;
   let serie: Serie = [];
+  let region: string | null = null;
+  let secteur: string | null = null;
+  let tailleOrganisation: string | null = null;
 
   onMount(async () => {
     const reponse = await axios.get<Statistiques>('/api/statistiques');
@@ -33,7 +39,9 @@
     for (const [idNiveau, valeur] of Object.entries(
       mesures.testsMaturite.parNiveau
     )) {
-      const libelle = niveauxMaturite.find(niveau=>niveau.id === idNiveau)!.label;
+      const libelle = niveauxMaturite.find(
+        (niveau) => niveau.id === idNiveau
+      )!.label;
       serie.push({ libelle, valeur });
     }
   });
@@ -63,11 +71,36 @@
     />
   </div>
   <div class="repartition">
-    <h2>Répartition de la maturité cyber</h2>
-    <span class="description"
-      >Répartition de la maturité cyber des organisations sur l’ensemble des
-      tests réalisés.</span
-    >
+    <div>
+      <h2>Répartition de la maturité cyber</h2>
+      <span class="description"
+        >Répartition de la maturité cyber des organisations sur l’ensemble des
+        tests réalisés.</span
+      >
+    </div>
+    <div class="filtres">
+      <p>
+        Affinez les résultats en appliquant des filtres par secteur, région ou
+        taille d’organisation.
+      </p>
+
+      <div class="champs">
+        <label class="champ-filtre">
+          <span>Secteur d'activté</span>
+          <SelectSecteurActivite bind:secteur />
+        </label>
+
+        <label class="champ-filtre">
+          <span>Région</span>
+          <SelectRegion bind:region />
+        </label>
+
+        <label class="champ-filtre">
+          <span>Taille de l'organisation</span>
+          <SelectTailleOrganisation bind:tailleOrganisation />
+        </label>
+      </div>
+    </div>
     <div class="donnees-graphiques">
       <GraphiqueAnneau {serie} nomDeLaDonnee="tests réalisés" />
       <LegendeAnneau {serie} />
@@ -93,6 +126,7 @@
     padding: 24px 24px 72px;
     border: 1px solid #ddd;
     border-radius: 8px;
+    gap: 2rem;
 
     h2 {
       font-size: 1.5rem;
@@ -107,7 +141,6 @@
 
     .description {
       color: #3a3a3a;
-      margin-bottom: 72px;
     }
 
     .donnees-graphiques {
@@ -119,6 +152,39 @@
         align-items: center;
         justify-content: space-around;
         flex-direction: row;
+      }
+    }
+
+    .filtres {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      .champs {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: 1fr;
+        @include a-partir-de(sm) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        @include a-partir-de(md) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .champ-filtre {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          flex: 1;
+        }
+      }
+
+      p {
+        color: #161616;
+        font-size: 1.125rem;
+        font-weight: bold;
+        line-height: 1.75rem;
+        margin: 0;
       }
     }
   }
