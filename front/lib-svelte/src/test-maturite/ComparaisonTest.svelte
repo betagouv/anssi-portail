@@ -13,20 +13,14 @@
   import type {
     DernierResultatTest,
     InfosOrganisation,
+    RepartitionResultatsTestPourUnNiveau,
   } from './ResultatsTest.type';
   import ResumeRadarComparaison from './ResumeRadarComparaison.svelte';
   import type { Serie, SerieRadar } from './Serie';
-  import type { IdRubrique } from './TestMaturite.type';
+  import { construisSerie } from './resultatTest';
 
   export let testRealise = false;
   export let featureFlagFiltresComparaison: boolean = false;
-
-  type RepartitionResultatsTestPourUnNiveau = {
-    id: IdNiveau;
-    valeurs: Record<IdRubrique, number>;
-    ratio: number;
-    totalNombreTests: number;
-  };
 
   const libelleDeNiveau = (idNiveau: IdNiveau) => {
     return niveauxMaturite.find((niveau) => niveau.id === idNiveau)!.label;
@@ -40,7 +34,7 @@
 
   async function chargeDernierResultat() {
     const reponse = await axios.get<DernierResultatTest>(
-      '/api/resultats-test/dernier',
+      '/api/resultats-test/dernier'
     );
     niveauCourant = reponse.data.idNiveau;
     libelleNiveauCourant = libelleDeNiveau(niveauCourant);
@@ -56,7 +50,7 @@
       region: filtre.region ? infosOrganisation.region?.code || '' : '',
     });
     const reponse = await axios.get<RepartitionResultatsTestPourUnNiveau[]>(
-      '/api/repartition-resultats-test?' + parametres.toString(),
+      '/api/repartition-resultats-test?' + parametres.toString()
     );
     if (reponse.status === 204) {
       serie = [];
@@ -66,16 +60,9 @@
 
     const repartitions = reponse.data;
 
-    serie = niveauxMaturite.map((niveau) => {
-      const repartition = repartitions.find(
-        (repartition) => repartition.id === niveau.id,
-      );
-      return {
-        libelle: niveau.label,
-        valeur: filtreActif
-          ? (repartition?.ratio ?? 0) * 100
-          : (repartition?.totalNombreTests ?? 0),
-      };
+    serie = construisSerie({
+      repartitions,
+      mode: filtreActif ? 'ratio' : 'absolu',
     });
 
     seriesRadar = repartitions.map((repartionPourUnNiveau) => ({

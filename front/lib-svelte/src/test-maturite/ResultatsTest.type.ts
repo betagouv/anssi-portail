@@ -20,3 +20,10 @@ export type DernierResultatTest = {
   idNiveau: IdNiveau;
   organisation: InfosOrganisation;
 };
+
+export type RepartitionResultatsTestPourUnNiveau = {
+  id: IdNiveau;
+  valeurs: Record<IdRubrique, number>;
+  ratio: number;
+  totalNombreTests?: number;
+};
