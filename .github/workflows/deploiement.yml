@@ -6,17 +6,40 @@ on:
   push:
     branches: [main]
   workflow_dispatch: # Pour activer le déclenchement manuel
+  pull_request:
+    branches: [main]
 
 jobs:
   deploiement-demo:
-    name: Déploiement en DÉMO
-    environment: DEMO
+    name: Déploiement sur le POC
+    environment: POC_NODE
     runs-on: ubuntu-latest
     steps:
       - name: Cloner le dépôt Git
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Cloner l'intégralité du dépôt, pour ne pas avoir de « shallow repo » rejeté par Clever
+
+      - name: Construis la lib Svelte
+        run: |
+          npm install --prefix front/lib-svelte
+          npm run build --prefix front/lib-svelte
+
+      - name: Setup Ruby
+          # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
+        uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+          cache-version: 0
+          working-directory: ./front
+
+      - name: Construis avec Jekyll
+        run: |
+          bundle config set --local path './front/vendor/bundle'
+          bundle exec --gemfile=./front/Gemfile jekyll build -s ./front -d ./front/_site
+        env:
+          JEKYLL_ENV: production
 
       - name: Installer la CLI Clever Cloud
         shell: bash
@@ -28,29 +51,10 @@ jobs:
           CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
         run: |
+          git config --global user.email "contact@messervicescyber.beta.gouv.fr"
+          git config --global user.name "MesServicesCyber"
+          git add --force front/_site
+          git commit -m "Ajoute le site généré"
           clever link "$ID_APP"
           clever deploy --force --same-commit-policy=rebuild
 
-  deploiement-prod:
-    needs: [deploiement-demo]
-    name: Déploiement en PROD
-    environment: PROD
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cloner le dépôt Git
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Cloner l'intégralité du dépôt, pour ne pas avoir de « shallow repo » rejeté par Clever
-
-      - name: Installer la CLI Clever Cloud
-        shell: bash
-        run: npm install -g clever-tools
-
-      - name: Déployer en PROD
-        env:
-          CLEVER_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
-          CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
-          ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
-        run: |
-          clever link "$ID_APP"
-          clever deploy --force --same-commit-policy=rebuild
