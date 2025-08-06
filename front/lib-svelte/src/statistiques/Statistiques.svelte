@@ -1,9 +1,10 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import GraphiqueAnneau from '../test-maturite/GraphiqueAnneau.svelte';
   import LegendeAnneau from '../test-maturite/LegendeAnneau.svelte';
+  import type { RepartitionResultatsTestPourUnNiveau } from '../test-maturite/ResultatsTest.type';
+  import { construisSerie } from '../test-maturite/resultatTest';
   import SelectRegion from '../test-maturite/SelectRegion.svelte';
   import SelectSecteurActivite from '../test-maturite/SelectSecteurActivite.svelte';
   import SelectTailleOrganisation from '../test-maturite/SelectTailleOrganisation.svelte';
@@ -32,18 +33,34 @@
   let secteur: string | null = null;
   let tailleOrganisation: string | null = null;
 
+  $: filtreActif = !!secteur || !!tailleOrganisation || !!region;
+
+  async function chargeRepartitionsDesResultats() {
+    const parametres = new URLSearchParams({
+      secteur: secteur ?? '',
+      tailleOrganisation: tailleOrganisation ?? '',
+      region: region ?? '',
+    });
+    const reponse = await axios.get<RepartitionResultatsTestPourUnNiveau[]>(
+      '/api/repartition-resultats-test?' + parametres.toString()
+    );
+    if (reponse.status === 204) {
+      serie = [];
+      return;
+    }
+
+    const repartitions = reponse.data;
+
+    serie = construisSerie({
+      repartitions,
+      mode: filtreActif ? 'ratio' : 'absolu',
+    });
+  }
+
   onMount(async () => {
     const reponse = await axios.get<Statistiques>('/api/statistiques');
     mesures = reponse.data;
-    Object.entries(mesures.testsMaturite.parNiveau);
-    for (const [idNiveau, valeur] of Object.entries(
-      mesures.testsMaturite.parNiveau
-    )) {
-      const libelle = niveauxMaturite.find(
-        (niveau) => niveau.id === idNiveau
-      )!.label;
-      serie.push({ libelle, valeur });
-    }
+    await chargeRepartitionsDesResultats();
   });
 </script>
 
