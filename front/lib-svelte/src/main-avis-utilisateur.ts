@@ -2,7 +2,7 @@ import { mount } from 'svelte';
 import AvisUtilisateur from './avis-utilisateur/AvisUtilisateur.svelte';
 import {
   ControleAvisUtilisateur,
-  EntrepotNavigateurAvisUtilisateur,
+  entrepotNavigateurAvisUtilisateur,
 } from './avis-utilisateur/ControleAvisUtilisateur';
 
 const donnees = document.getElementById('donneesAvisUtilisateur')!.textContent;
@@ -12,7 +12,7 @@ const { delaiAffichageAvisUtilisateur, ...props } = JSON.parse(donnees);
 
 const controleAvisUtilisateur = new ControleAvisUtilisateur({
   dureeMinimumEnSecondes: delaiAffichageAvisUtilisateur,
-  entrepotAvisUtilisateur: new EntrepotNavigateurAvisUtilisateur(),
+  entrepotAvisUtilisateur: entrepotNavigateurAvisUtilisateur,
 });
 
 if (controleAvisUtilisateur.proposeAvisUtilisteur()) {
