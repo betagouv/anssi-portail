@@ -5,10 +5,7 @@
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ZoneTexte from '../ui/ZoneTexte.svelte';
-  import {
-    DATE_DERNIER_AVIS_DONNE,
-    DATE_DERNIERE_FERMETURE_CLE,
-  } from './ControleAvisUtilisateur';
+  import { entrepotNavigateurAvisUtilisateur } from './ControleAvisUtilisateur';
 
   export let featureFlagAvisUtilisateur: boolean = false;
 
@@ -36,7 +33,9 @@
 
   const surFermetureCTA = () => {
     encartOuvert = false;
-    localStorage.setItem(DATE_DERNIERE_FERMETURE_CLE, new Date().toUTCString());
+    entrepotNavigateurAvisUtilisateur.modifieDateDerniereFermetureAvis(
+      new Date()
+    );
   };
 
   const soumetsLeFormulaire = async () => {
@@ -53,7 +52,7 @@
     } catch (erreur) {
       console.error(erreur);
     } finally {
-      localStorage.setItem(DATE_DERNIER_AVIS_DONNE, new Date().toUTCString());
+      entrepotNavigateurAvisUtilisateur.modifieDateDernierAvisDonne(new Date());
       etape = 'merci';
     }
   };
@@ -68,9 +67,8 @@
       if (afficheDialogue) {
         dialogue.showModal();
       } else {
-        localStorage.setItem(
-          DATE_DERNIERE_FERMETURE_CLE,
-          new Date().toUTCString()
+        entrepotNavigateurAvisUtilisateur.modifieDateDerniereFermetureAvis(
+          new Date()
         );
         dialogue.close();
       }

@@ -44,7 +44,18 @@ export class EntrepotNavigateurAvisUtilisateur
   modifieDateDebutSession = (date: Date) => {
     sessionStorage.setItem(DATE_DEBUT_SESSION, date.toUTCString());
   };
+
+  modifieDateDerniereFermetureAvis(date: Date) {
+    localStorage.setItem(DATE_DERNIERE_FERMETURE_CLE, date.toUTCString());
+  }
+
+  modifieDateDernierAvisDonne(date: Date) {
+    localStorage.setItem(DATE_DERNIER_AVIS_DONNE, date.toUTCString());
+  }
 }
+
+export const entrepotNavigateurAvisUtilisateur =
+  new EntrepotNavigateurAvisUtilisateur();
 
 export class ControleAvisUtilisateur {
   private readonly UNE_JOURNEE_EN_MILLISECONDE = 1000 * 60 * 60 * 24;
