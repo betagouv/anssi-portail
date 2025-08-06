@@ -5,7 +5,10 @@
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ZoneTexte from '../ui/ZoneTexte.svelte';
-  import { afficheAvisUtilisateur } from './controleAffichage';
+  import {
+    DATE_DERNIER_AVIS_DONNE,
+    DATE_DERNIERE_FERMETURE_CLE,
+  } from './ControleAvisUtilisateur';
 
   export let featureFlagAvisUtilisateur: boolean = false;
 
@@ -33,7 +36,7 @@
 
   const surFermetureCTA = () => {
     encartOuvert = false;
-    localStorage.setItem('dateDerniereFermeture', new Date().toUTCString());
+    localStorage.setItem(DATE_DERNIERE_FERMETURE_CLE, new Date().toUTCString());
   };
 
   const soumetsLeFormulaire = async () => {
@@ -50,22 +53,25 @@
     } catch (erreur) {
       console.error(erreur);
     } finally {
-      localStorage.setItem('dateDernierAvis', new Date().toUTCString());
+      localStorage.setItem(DATE_DERNIER_AVIS_DONNE, new Date().toUTCString());
       etape = 'merci';
     }
   };
 
   onMount(() => {
-    encartOuvert = afficheAvisUtilisateur({
-      cheminCourant: window.location.pathname,
-    });
+    encartOuvert = !RegExp(/(\/?)(cyberdepart|test-maturite)(\/?)$/).exec(
+      window.location.pathname
+    );
   });
   $: {
     if (dialogue) {
       if (afficheDialogue) {
         dialogue.showModal();
       } else {
-        localStorage.setItem('dateDerniereFermeture', new Date().toUTCString());
+        localStorage.setItem(
+          DATE_DERNIERE_FERMETURE_CLE,
+          new Date().toUTCString()
+        );
         dialogue.close();
       }
     }
