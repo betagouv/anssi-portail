@@ -34,12 +34,21 @@
   let tailleOrganisation: string | null = null;
 
   $: filtreActif = !!secteur || !!tailleOrganisation || !!region;
+  $: libelleAnneau = filtreActif ? undefined : 'tests réalisés';
 
-  async function chargeRepartitionsDesResultats() {
+  async function chargeRepartitionsDesResultats({
+    region = '',
+    secteur = '',
+    tailleOrganisation = '',
+  }: {
+    secteur?: string;
+    tailleOrganisation?: string;
+    region?: string;
+  }) {
     const parametres = new URLSearchParams({
-      secteur: secteur ?? '',
-      tailleOrganisation: tailleOrganisation ?? '',
-      region: region ?? '',
+      secteur,
+      tailleOrganisation,
+      region,
     });
     const reponse = await axios.get<RepartitionResultatsTestPourUnNiveau[]>(
       '/api/repartition-resultats-test?' + parametres.toString()
@@ -57,10 +66,22 @@
     });
   }
 
+  $: chargeRepartitionsDesResultats({
+    secteur: secteur ?? undefined,
+    region: region ?? undefined,
+    tailleOrganisation: tailleOrganisation ?? undefined,
+  });
+
   onMount(async () => {
     const reponse = await axios.get<Statistiques>('/api/statistiques');
     mesures = reponse.data;
-    await chargeRepartitionsDesResultats();
+
+    await Promise.all([
+      chargeRepartitionsDesResultats({}),
+      axios.get<Statistiques>('/api/statistiques').then((reponse) => {
+        mesures = reponse.data;
+      }),
+    ]);
   });
 </script>
 
@@ -119,8 +140,12 @@
       </div>
     </div>
     <div class="donnees-graphiques">
-      <GraphiqueAnneau {serie} nomDeLaDonnee="tests réalisés" />
-      <LegendeAnneau {serie} />
+      <GraphiqueAnneau
+        {serie}
+        nomDeLaDonnee={libelleAnneau}
+        montreTotaux={!filtreActif}
+      />
+      <LegendeAnneau {serie} montreTotaux={!filtreActif} />
     </div>
   </div>
 {/if}
