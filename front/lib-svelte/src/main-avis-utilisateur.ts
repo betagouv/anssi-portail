@@ -33,33 +33,32 @@ if (!datePremiereVisite) {
   localStorage.setItem('datePremiereVisite', new Date().toUTCString());
 }
 
-const delaiEnSecondes = calculeDelaiRestantAvisUtilisateur({
-  dureeMinimumEnSecondes: delaiAffichageAvisUtilisateur
-    ? Number(delaiAffichageAvisUtilisateur)
-    : 20,
-  datePremiereVisite,
+const dateDernierAvis = extraitDateDepuisNavigateur({
+  storage: localStorage,
+  cle: 'dateDernierAvis',
+});
+const dateDerniereFermeture = extraitDateDepuisNavigateur({
+  storage: localStorage,
+  cle: 'dateDerniereFermeture',
 });
 
-setTimeout(() => {
-  const cheminCourant = window.location.pathname;
-  const dateDernierAvis = extraitDateDepuisNavigateur({
-    storage: localStorage,
-    cle: 'dateDernierAvis',
+if (
+  proposeAvisUtilisteur({
+    dateDernierAvis,
+    dateDerniereFermeture,
+  })
+) {
+  const delaiEnSecondes = calculeDelaiRestantAvisUtilisateur({
+    dureeMinimumEnSecondes: delaiAffichageAvisUtilisateur
+      ? Number(delaiAffichageAvisUtilisateur)
+      : 20,
+    datePremiereVisite,
   });
-  const dateDerniereFermeture = extraitDateDepuisNavigateur({
-    storage: localStorage,
-    cle: 'dateDerniereFermeture',
-  });
-  if (
-    proposeAvisUtilisteur({
-      cheminCourant,
-      dateDernierAvis,
-      dateDerniereFermeture,
-    })
-  ) {
+
+  setTimeout(() => {
     mount(AvisUtilisateur, {
       target: document.getElementById('avis-utilisateur')!,
       props,
     });
-  }
-}, delaiEnSecondes * 1000);
+  }, delaiEnSecondes * 1000);
+}

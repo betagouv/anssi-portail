@@ -1,17 +1,12 @@
 const UNE_JOURNEE_EN_MILLISECONDE = 1000 * 60 * 60 * 24;
 
 export const proposeAvisUtilisteur = ({
-  cheminCourant,
   dateDernierAvis,
   dateDerniereFermeture,
 }: {
-  cheminCourant: string;
   dateDernierAvis?: Date;
   dateDerniereFermeture?: Date;
 }): boolean => {
-  if (RegExp(/(\/?)(cyberdepart|test-maturite)(\/?)$/).exec(cheminCourant)) {
-    return false;
-  }
   if (dateDernierAvis) {
     return false;
   }
@@ -23,6 +18,14 @@ export const proposeAvisUtilisteur = ({
     return false;
   }
   return true;
+};
+
+export const afficheAvisUtilisateur = ({
+  cheminCourant,
+}: {
+  cheminCourant: string;
+}): boolean => {
+  return !RegExp(/(\/?)(cyberdepart|test-maturite)(\/?)$/).exec(cheminCourant);
 };
 
 export const calculeDelaiRestantAvisUtilisateur = ({

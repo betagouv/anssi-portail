@@ -5,6 +5,7 @@
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ZoneTexte from '../ui/ZoneTexte.svelte';
+  import { afficheAvisUtilisateur } from './controleAffichage';
 
   export let featureFlagAvisUtilisateur: boolean = false;
 
@@ -55,7 +56,9 @@
   };
 
   onMount(() => {
-    encartOuvert = true;
+    encartOuvert = afficheAvisUtilisateur({
+      cheminCourant: window.location.pathname,
+    });
   });
   $: {
     if (dialogue) {
