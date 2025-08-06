@@ -1,68 +1,31 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import {
+  afficheAvisUtilisateur,
   calculeDelaiRestantAvisUtilisateur,
   proposeAvisUtilisteur,
 } from '../../src/avis-utilisateur/controleAffichage';
 
-describe("Le controle de l'affichage de la demande d'avis utilisateur", () => {
-  describe('doit controler le chemin courant', () => {
-    it("et empêcher l'affichage sur la page du cyberdépart", () => {
-      const affichage = proposeAvisUtilisteur({
-        cheminCourant: '/cyberdepart',
-      });
-
-      expect(affichage).toBeFalsy();
-    });
-
-    it("et empêcher l'affichage sur la page du test de maturité", () => {
-      const affichage = proposeAvisUtilisteur({
-        cheminCourant: '/test-maturite',
-      });
-
-      expect(affichage).toBeFalsy();
-    });
-
-    it("et autoriser l'affichage sur la page du cyberdépart", () => {
-      const affichage = proposeAvisUtilisteur({
-        cheminCourant: '/test-maturite/#votre-organisation',
-      });
-
-      expect(affichage).toBeTruthy();
-    });
+describe("La demande d'avis utilisateur", () => {
+  const dateCourante = new Date(2025, 7, 15, 12, 0, 0);
+  const uneJourneeEnMilliseconde = 1000 * 60 * 60 * 24;
+  beforeAll(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(dateCourante);
   });
-
-  describe("doit controler si l'utilisateur a déjà rempli un avis", () => {
-    it("et empêcher l'affichage si c'est le cas", () => {
+  afterAll(() => {
+    vi.restoreAllMocks();
+  });
+  describe("n'est pas proposé", () => {
+    it("quand l'utilisateur a déjà rempli un avis", () => {
       const affichage = proposeAvisUtilisteur({
-        cheminCourant: '/',
         dateDernierAvis: new Date(2025, 7, 15),
       });
 
       expect(affichage).toBeFalsy();
     });
 
-    it("et autoriser l'affichage si ce n'est pas le cas", () => {
+    it("quand l'utilisateur a fermé le CTA ou la dialogue il y a moins de 24 heures", () => {
       const affichage = proposeAvisUtilisteur({
-        cheminCourant: '/',
-      });
-
-      expect(affichage).toBeTruthy();
-    });
-  });
-
-  describe("doit controler si l'utilisateur a récemment fermé la demande d'avis", () => {
-    const dateCourante = new Date(2025, 7, 15, 12, 0, 0);
-    const uneJourneeEnMilliseconde = 1000 * 60 * 60 * 24;
-    beforeAll(() => {
-      vi.useFakeTimers();
-      vi.setSystemTime(dateCourante);
-    });
-    afterAll(() => {
-      vi.restoreAllMocks();
-    });
-    it("et empêcher l'affichage quand ça date de moins de 24 heures", () => {
-      const affichage = proposeAvisUtilisteur({
-        cheminCourant: '/',
         dateDerniereFermeture: new Date(
           dateCourante.getTime() - uneJourneeEnMilliseconde
         ),
@@ -70,10 +33,17 @@ describe("Le controle de l'affichage de la demande d'avis utilisateur", () => {
 
       expect(affichage).toBeFalsy();
     });
+  });
 
-    it("et autoriser l'affichage quand ça date de plus de 24 heures", () => {
+  describe('est proposé', () => {
+    it("quand l'utilisateur n'a jamais rempli un avis", () => {
+      const affichage = proposeAvisUtilisteur({});
+
+      expect(affichage).toBeTruthy();
+    });
+
+    it("quand l'utilisateur a fermé le CTA ou la dialogue il y a plus de 24 heures", () => {
       const affichage = proposeAvisUtilisteur({
-        cheminCourant: '/',
         dateDerniereFermeture: new Date(
           dateCourante.getTime() - uneJourneeEnMilliseconde - 1000
         ),
@@ -81,6 +51,32 @@ describe("Le controle de l'affichage de la demande d'avis utilisateur", () => {
 
       expect(affichage).toBeTruthy();
     });
+  });
+});
+
+describe("L'affichage de l'avis utilisateur", () => {
+  it('est désactivé sur la page du cyberdépart', () => {
+    const affichage = afficheAvisUtilisateur({
+      cheminCourant: '/cyberdepart',
+    });
+
+    expect(affichage).toBeFalsy();
+  });
+
+  it('est désactivé sur la page du test de maturité', () => {
+    const affichage = afficheAvisUtilisateur({
+      cheminCourant: '/test-maturite',
+    });
+
+    expect(affichage).toBeFalsy();
+  });
+
+  it('est activé sur la page du cyberdépart', () => {
+    const affichage = afficheAvisUtilisateur({
+      cheminCourant: '/test-maturite/#votre-organisation',
+    });
+
+    expect(affichage).toBeTruthy();
   });
 });
 
