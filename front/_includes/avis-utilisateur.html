@@ -1,7 +1,7 @@
 <script type="application/json" id="donneesAvisUtilisateur">
   {
     "featureFlagAvisUtilisateur": {% if site.env.FEATURE_FLAG_AVIS_UTILISATEUR == 'true' %}true{% else %}false{% endif %},
-    "delaiAffichageAvisUtilisateur": {{ site.env.DELAI_AFFICHAGE_AVIS_UTILISATEUR }}
+    "delaiAffichageAvisUtilisateur": {% if site.env.DELAI_AFFICHAGE_AVIS_UTILISATEUR != '' and site.env.DELAI_AFFICHAGE_AVIS_UTILISATEUR != undefined %}{{ site.env.DELAI_AFFICHAGE_AVIS_UTILISATEUR }}{% else %}20{% endif %}
   }
 </script>
 
