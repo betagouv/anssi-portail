@@ -73,9 +73,6 @@
   });
 
   onMount(async () => {
-    const reponse = await axios.get<Statistiques>('/api/statistiques');
-    mesures = reponse.data;
-
     await Promise.all([
       chargeRepartitionsDesResultats({}),
       axios.get<Statistiques>('/api/statistiques').then((reponse) => {
@@ -139,14 +136,39 @@
         </label>
       </div>
     </div>
-    <div class="donnees-graphiques">
-      <GraphiqueAnneau
-        {serie}
-        nomDeLaDonnee={libelleAnneau}
-        montreTotaux={!filtreActif}
-      />
-      <LegendeAnneau {serie} montreTotaux={!filtreActif} />
-    </div>
+    {#if serie.length > 0}
+      <div class="donnees-graphiques">
+        <GraphiqueAnneau
+          {serie}
+          nomDeLaDonnee={libelleAnneau}
+          montreTotaux={!filtreActif}
+        />
+        <LegendeAnneau {serie} montreTotaux={!filtreActif} />
+      </div>
+    {:else}
+      <section class="pas-assez-de-resultats">
+        <div class="contenu-section">
+          <img
+            src="/assets/images/illustration-dragon-aucun-resultat.svg"
+            alt="Pas assez de résultats"
+          />
+          <h4>Pas de résultat 😔</h4>
+          <p>
+            Nous n’avons pas encore assez de données pour afficher une
+            comparaison fiable avec les filtres sélectionnés.
+          </p>
+          <lab-anssi-bouton
+            on:click={() => null}
+            on:keypress
+            role="button"
+            taille="md"
+            tabindex={0}
+            titre="Réinitialiser les filtres"
+            variante="tertiaire"
+          ></lab-anssi-bouton>
+        </div>
+      </section>
+    {/if}
   </div>
 {/if}
 
@@ -227,6 +249,36 @@
         font-weight: bold;
         line-height: 1.75rem;
         margin: 0;
+      }
+    }
+
+    .pas-assez-de-resultats {
+      .contenu-section {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+        text-align: center;
+      }
+
+      img {
+        max-width: 282px;
+      }
+
+      h4 {
+        font-size: 1.375rem;
+        line-height: 1.75rem;
+        max-width: 588px;
+        @include a-partir-de(sm) {
+          font-size: 1.5rem;
+          line-height: 2rem;
+        }
+      }
+
+      p {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        max-width: 588px;
       }
     }
   }
