@@ -127,49 +127,54 @@
           </p>
           <div class="satisfaction">
             <div class="niveaux-satisfaction">
-              <label class="niveau-satisfaction" tabIndex={0}>
-                <input
-                  type="radio"
-                  name="note"
-                  value="1"
-                  bind:group={satisfaction}
-                />
+              <input
+                id="pas-du-tout"
+                type="radio"
+                name="note"
+                value="1"
+                bind:group={satisfaction}
+              />
+              <label class="niveau-satisfaction" for="pas-du-tout">
                 <span aria-label="Pas du tout" role="img">😠</span>
               </label>
-              <label class="niveau-satisfaction" tabIndex={0}>
-                <input
-                  type="radio"
-                  name="note"
-                  value="2"
-                  bind:group={satisfaction}
-                />
+              <input
+                id="pas-satisfait"
+                type="radio"
+                name="note"
+                value="2"
+                bind:group={satisfaction}
+              />
+              <label class="niveau-satisfaction" for="pas-satisfait">
                 <span aria-label="Pas satisfait" role="img">☹️</span>
               </label>
-              <label class="niveau-satisfaction" tabIndex={0}>
-                <input
-                  type="radio"
-                  name="note"
-                  value="3"
-                  bind:group={satisfaction}
-                />
+              <input
+                id="moyennement-satisfait"
+                type="radio"
+                name="note"
+                value="3"
+                bind:group={satisfaction}
+              />
+              <label class="niveau-satisfaction" for="moyennement-satisfait">
                 <span aria-label="Moyennement satisfait" role="img">😕</span>
               </label>
-              <label class="niveau-satisfaction" tabIndex={0}>
-                <input
-                  type="radio"
-                  name="note"
-                  value="4"
-                  bind:group={satisfaction}
-                />
+              <input
+                id="satisfait"
+                type="radio"
+                name="note"
+                value="4"
+                bind:group={satisfaction}
+              />
+              <label class="niveau-satisfaction" for="satisfait">
                 <span aria-label="Satisfait" role="img">😊</span>
               </label>
-              <label class="niveau-satisfaction" tabIndex={0}>
-                <input
-                  type="radio"
-                  name="note"
-                  value="5"
-                  bind:group={satisfaction}
-                />
+              <input
+                id="tout-a-fait"
+                type="radio"
+                name="note"
+                value="5"
+                bind:group={satisfaction}
+              />
+              <label class="niveau-satisfaction" for="tout-a-fait">
                 <span aria-label="Tout à fait" role="img">🤩</span>
               </label>
             </div>
@@ -444,16 +449,8 @@
       gap: 8px;
 
       .niveaux-satisfaction {
-        border: 1px solid var(--gris-clair);
-        border-radius: 4px;
         display: flex;
         flex-direction: row;
-        overflow: hidden;
-
-        &:focus-visible {
-          outline: 2px solid var(--bleu-contour-mis-en-valeur);
-          outline-offset: 2px;
-        }
 
         input[type='radio'] {
           position: absolute;
@@ -461,7 +458,7 @@
           width: 0;
           height: 0;
 
-          + span {
+          + label > span {
             cursor: pointer;
 
             &:hover {
@@ -469,7 +466,12 @@
             }
           }
 
-          &:checked + span {
+          &:focus-visible + label {
+            outline: 2px solid var(--bleu-contour-mis-en-valeur);
+            outline-offset: 2px;
+          }
+
+          &:checked + label > span {
             background-color: var(--jaune-msc);
             &:hover {
               background-color: var(--jaune-msc-hover);
@@ -483,9 +485,19 @@
         .niveau-satisfaction {
           display: flex;
           flex: 1;
+          border: 1px solid var(--gris-clair);
+          border-right: 0;
+          border-radius: 0;
 
-          &:not(:last-child) {
+          &[for='pas-du-tout'] {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+          }
+
+          &[for='tout-a-fait'] {
             border-right: 1px solid var(--gris-clair);
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
           }
 
           span {
