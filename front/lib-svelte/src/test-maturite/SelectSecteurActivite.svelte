@@ -2,9 +2,7 @@
   import { onMount } from 'svelte';
   import axios from 'axios';
 
-  export let secteur: string | null;
-  let codeSecteur: string;
-  $: secteur = codeSecteur === '' ? null : codeSecteur;
+  export let secteur: string | undefined = '';
 
   let secteurs: SecteurActivite[];
   type SecteurActivite = {
@@ -20,7 +18,7 @@
   });
 </script>
 
-<select bind:value={codeSecteur}>
+<select bind:value={secteur}>
   <option disabled selected value="">Sélectionner une option</option>
   {#each secteurs as secteur (secteur.code)}
     <option value={secteur.code}>{secteur.libelle}</option>

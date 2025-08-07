@@ -21,9 +21,9 @@
   let afficheResultats = false;
   let introFaite = false;
 
-  let secteur: string | null;
-  let region: string | null;
-  let tailleOrganisation: string | null;
+  let secteur: string;
+  let region: string;
+  let tailleOrganisation: string;
 
   questionnaireStore.initialise();
 
@@ -96,7 +96,8 @@
     const avecPropositions = etapesTestMaturite.filter(
       (q) => q.propositions.length > 0
     );
-    montreProposition = $questionnaireStore.questionCourante < avecPropositions.length;
+    montreProposition =
+      $questionnaireStore.questionCourante < avecPropositions.length;
   }
 
   let ongletActif: 'votre-organisation' | 'comparaison' = 'votre-organisation';

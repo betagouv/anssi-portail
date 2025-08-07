@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import axios from 'axios';
+  import { onMount } from 'svelte';
 
-  export let region: string | null;
-  let regionSelectionnee: string;
-  $: region = regionSelectionnee === '' ? null : regionSelectionnee;
+  export let region: string | undefined = '';
 
   type Region = {
     codeIso: string;
@@ -19,8 +17,8 @@
   });
 </script>
 
-<select bind:value={regionSelectionnee}>
-  <option disabled selected value="">Sélectionner une option</option>
+<select bind:value={region}>
+  <option disabled selected value="">Sélectionner une région</option>
   {#each regions as uneRegion (uneRegion.codeIso)}
     <option value={uneRegion.codeIso}>{uneRegion.nom}</option>
   {/each}
