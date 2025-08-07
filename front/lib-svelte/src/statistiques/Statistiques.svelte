@@ -29,10 +29,10 @@
 
   let mesures: Statistiques | undefined = undefined;
   let serie: Serie = [];
-  let region: string | null = null;
-  let secteur: string | null = null;
-  let tailleOrganisation: string | null = null;
 
+  let region: string = '';
+  let secteur: string = '';
+  let tailleOrganisation: string = '';
   $: filtreActif = !!secteur || !!tailleOrganisation || !!region;
   $: libelleAnneau = filtreActif ? undefined : 'tests réalisés';
 
@@ -67,9 +67,9 @@
   }
 
   $: chargeRepartitionsDesResultats({
-    secteur: secteur ?? undefined,
-    region: region ?? undefined,
-    tailleOrganisation: tailleOrganisation ?? undefined,
+    secteur,
+    region,
+    tailleOrganisation,
   });
 
   onMount(async () => {

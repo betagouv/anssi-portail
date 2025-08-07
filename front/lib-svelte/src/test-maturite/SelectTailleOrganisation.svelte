@@ -1,11 +1,9 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import axios from 'axios';
+  import { onMount } from 'svelte';
 
-  export let tailleOrganisation: string | null;
-  let codeTailleOrganisation: string;
-  $: tailleOrganisation =
-    codeTailleOrganisation === '' ? null : codeTailleOrganisation;
+  export let tailleOrganisation: string | undefined = '';
+
   type TrancheEffectif = {
     code: string;
     libelle: string;
@@ -22,7 +20,7 @@
   });
 </script>
 
-<select bind:value={codeTailleOrganisation}>
+<select bind:value={tailleOrganisation}>
   <option disabled selected value="">Sélectionner une option</option>
   {#each tranchesEffectifEtablissement as tranche (tranche.code)}
     <option value={tranche.code}>{tranche.libelle}</option>
