@@ -79,7 +79,7 @@
 {#if featureFlagAvisUtilisateur && encartOuvert}
   <div
     class="avis-utilisateur-cta"
-    transition:fly={{ duration: 500, x: 140, opacity: 1 }}
+    transition:fly={{ duration: 1000, x: 140, opacity: 1 }}
   >
     <button
       class="zone-cliquable"
