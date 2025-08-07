@@ -1,25 +1,32 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import type { Option } from './SelecteurSimple';
+  import SelecteurSimple from './SelecteurSimple.svelte';
 
-  export let region: string | undefined = '';
+  export let region: string;
+  export let optionDefautIntitule: string | undefined = undefined;
+  export let optionDefautSelectionnable: boolean = false;
 
   type Region = {
     codeIso: string;
     nom: string;
   };
 
-  let regions: Region[];
+  let options: Option[];
 
   onMount(async () => {
     const reponse = await axios.get<Region[]>('/api/annuaire/regions');
-    regions = reponse.data;
+    options = reponse.data.map((region) => ({
+      valeur: region.codeIso,
+      libelle: region.nom,
+    }));
   });
 </script>
 
-<select bind:value={region}>
-  <option disabled selected value="">Sélectionner une région</option>
-  {#each regions as uneRegion (uneRegion.codeIso)}
-    <option value={uneRegion.codeIso}>{uneRegion.nom}</option>
-  {/each}
-</select>
+<SelecteurSimple
+  {options}
+  bind:valeurSeclectionne={region}
+  {optionDefautIntitule}
+  {optionDefautSelectionnable}
+/>

@@ -1,26 +1,34 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import axios from 'axios';
+  import { onMount } from 'svelte';
+  import type { Option } from './SelecteurSimple';
+  import SelecteurSimple from './SelecteurSimple.svelte';
 
-  export let secteur: string | undefined = '';
+  export let secteur: string;
+  export let optionDefautIntitule: string | undefined = undefined;
+  export let optionDefautSelectionnable: boolean = false;
 
-  let secteurs: SecteurActivite[];
   type SecteurActivite = {
     code: string;
     libelle: string;
   };
 
+  let options: Option[];
+
   onMount(async () => {
     const reponse = await axios.get<SecteurActivite[]>(
       '/api/annuaire/secteurs-activite'
     );
-    secteurs = reponse.data;
+    options = reponse.data.map((secteur) => ({
+      valeur: secteur.code,
+      libelle: secteur.libelle,
+    }));
   });
 </script>
 
-<select bind:value={secteur}>
-  <option disabled selected value="">Sélectionner une option</option>
-  {#each secteurs as secteur (secteur.code)}
-    <option value={secteur.code}>{secteur.libelle}</option>
-  {/each}
-</select>
+<SelecteurSimple
+  {options}
+  bind:valeurSeclectionne={secteur}
+  {optionDefautIntitule}
+  {optionDefautSelectionnable}
+/>
