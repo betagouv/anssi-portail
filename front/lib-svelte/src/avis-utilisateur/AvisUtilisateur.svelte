@@ -127,7 +127,7 @@
           </p>
           <div class="satisfaction">
             <div class="niveaux-satisfaction">
-              <label class="niveau-satisfaction">
+              <label class="niveau-satisfaction" tabIndex={0}>
                 <input
                   type="radio"
                   name="note"
@@ -136,7 +136,7 @@
                 />
                 <span aria-label="Pas du tout" role="img">😠</span>
               </label>
-              <label class="niveau-satisfaction">
+              <label class="niveau-satisfaction" tabIndex={0}>
                 <input
                   type="radio"
                   name="note"
@@ -145,7 +145,7 @@
                 />
                 <span aria-label="Pas satisfait" role="img">☹️</span>
               </label>
-              <label class="niveau-satisfaction">
+              <label class="niveau-satisfaction" tabIndex={0}>
                 <input
                   type="radio"
                   name="note"
@@ -154,7 +154,7 @@
                 />
                 <span aria-label="Moyennement satisfait" role="img">😕</span>
               </label>
-              <label class="niveau-satisfaction">
+              <label class="niveau-satisfaction" tabIndex={0}>
                 <input
                   type="radio"
                   name="note"
@@ -163,7 +163,7 @@
                 />
                 <span aria-label="Satisfait" role="img">😊</span>
               </label>
-              <label class="niveau-satisfaction">
+              <label class="niveau-satisfaction" tabIndex={0}>
                 <input
                   type="radio"
                   name="note"
@@ -281,7 +281,7 @@
       margin: 2px 4px;
 
       &:focus-visible {
-        outline: 2px solid #0a76f6;
+        outline: 2px solid var(--bleu-contour-mis-en-valeur);
         outline-offset: 2px;
       }
 
@@ -300,7 +300,7 @@
       border-radius: 8px 0 0 8px;
 
       &:focus-visible {
-        outline: 2px solid #0a76f6;
+        outline: 2px solid var(--bleu-contour-mis-en-valeur);
         outline-offset: 2px;
       }
 
@@ -450,6 +450,11 @@
         flex-direction: row;
         overflow: hidden;
 
+        &:focus-visible {
+          outline: 2px solid var(--bleu-contour-mis-en-valeur);
+          outline-offset: 2px;
+        }
+
         input[type='radio'] {
           position: absolute;
           opacity: 0;
@@ -458,10 +463,20 @@
 
           + span {
             cursor: pointer;
+
+            &:hover {
+              background-color: var(--jaune-msc-hover);
+            }
           }
 
           &:checked + span {
-            background-color: #000091;
+            background-color: var(--jaune-msc);
+            &:hover {
+              background-color: var(--jaune-msc-hover);
+            }
+            &:active {
+              background-color: var(--jaune-msc-clique);
+            }
           }
         }
 

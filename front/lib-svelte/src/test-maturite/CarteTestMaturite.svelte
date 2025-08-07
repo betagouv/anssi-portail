@@ -72,7 +72,7 @@
     }
 
     &:focus {
-      outline: 2px solid #0a76f6;
+      outline: 2px solid var(--bleu-contour-mis-en-valeur);
       outline-offset: 2px;
     }
   }
