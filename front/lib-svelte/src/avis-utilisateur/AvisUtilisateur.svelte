@@ -462,7 +462,11 @@
             cursor: pointer;
 
             &:hover {
-              background-color: var(--jaune-msc-hover);
+              background-color: var(--gris-secondaire-fond-hover);
+            }
+
+            &:active {
+              background-color: var(--gris-secondaire-fond-clique);
             }
           }
 
