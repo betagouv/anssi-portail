@@ -10,6 +10,7 @@
   --jaune-msc-hover: #ecca79;
   --jaune-msc-clique: #ddbd70;
   --jaune-clair-msc: #fff7db;
+  --bleu-contour-mis-en-valeur: #0a76f6;
   --gris-aide-saisie: #3a3a3a;
   --gris-desactive-fond: #e5e5e5;
   --gris-desactive-texte: #929292;
@@ -120,7 +121,7 @@ a {
   }
 
   &:focus {
-    outline: 2px solid #0a76f6;
+    outline: 2px solid var(--bleu-contour-mis-en-valeur);
     outline-offset: 2px;
     border-style: none;
   }
