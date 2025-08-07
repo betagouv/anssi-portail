@@ -139,17 +139,29 @@
       <div class="champs">
         <label class="champ-filtre">
           <span>Secteur d'activté</span>
-          <SelectSecteurActivite bind:secteur />
+          <SelectSecteurActivite
+            bind:secteur
+            optionDefautIntitule="Tous les secteurs"
+            optionDefautSelectionnable
+          />
         </label>
 
         <label class="champ-filtre">
           <span>Région</span>
-          <SelectRegion bind:region />
+          <SelectRegion
+            bind:region
+            optionDefautIntitule="Toutes les régions"
+            optionDefautSelectionnable
+          />
         </label>
 
         <label class="champ-filtre">
           <span>Taille de l'organisation</span>
-          <SelectTailleOrganisation bind:tailleOrganisation />
+          <SelectTailleOrganisation
+            bind:tailleOrganisation
+            optionDefautIntitule="Toutes les tailles d'organisation"
+            optionDefautSelectionnable
+          />
         </label>
       </div>
     </div>
