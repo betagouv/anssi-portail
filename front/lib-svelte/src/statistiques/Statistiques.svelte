@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import GraphiqueAnneau from '../test-maturite/GraphiqueAnneau.svelte';
   import LegendeAnneau from '../test-maturite/LegendeAnneau.svelte';
   import type { RepartitionResultatsTestPourUnNiveau } from '../test-maturite/ResultatsTest.type';
@@ -28,6 +29,7 @@
   };
 
   let mesures: Statistiques | undefined = undefined;
+  let serieNonFiltree: Serie = [];
   let serie: Serie = [];
 
   let region: string = '';
@@ -36,15 +38,25 @@
   $: filtreActif = !!secteur || !!tailleOrganisation || !!region;
   $: libelleAnneau = filtreActif ? undefined : 'tests réalisés';
 
+  $: chargeRepartitionsDesResultats({
+    secteur,
+    region,
+    tailleOrganisation,
+  });
+
   async function chargeRepartitionsDesResultats({
-    region = '',
-    secteur = '',
-    tailleOrganisation = '',
+    region,
+    secteur,
+    tailleOrganisation,
   }: {
-    secteur?: string;
-    tailleOrganisation?: string;
-    region?: string;
+    secteur: string;
+    tailleOrganisation: string;
+    region: string;
   }) {
+    if (!filtreActif) {
+      serie = serieNonFiltree;
+      return;
+    }
     const parametres = new URLSearchParams({
       secteur,
       tailleOrganisation,
@@ -62,23 +74,28 @@
 
     serie = construisSerie({
       repartitions,
-      mode: filtreActif ? 'ratio' : 'absolu',
+      mode: 'ratio',
     });
   }
 
-  $: chargeRepartitionsDesResultats({
-    secteur,
-    region,
-    tailleOrganisation,
-  });
+  const reinitialiseLesFiltres = async () => {
+    region = '';
+    secteur = '';
+    tailleOrganisation = '';
+  };
 
   onMount(async () => {
-    await Promise.all([
-      chargeRepartitionsDesResultats({}),
-      axios.get<Statistiques>('/api/statistiques').then((reponse) => {
-        mesures = reponse.data;
-      }),
-    ]);
+    const reponse = await axios.get<Statistiques>('/api/statistiques');
+    mesures = reponse.data;
+    Object.entries(mesures.testsMaturite.parNiveau);
+    for (const [idNiveau, valeur] of Object.entries(
+      mesures.testsMaturite.parNiveau
+    )) {
+      const libelle = niveauxMaturite.find(
+        (niveau) => niveau.id === idNiveau
+      )!.label;
+      serieNonFiltree.push({ libelle, valeur });
+    }
   });
 </script>
 
@@ -158,7 +175,7 @@
             comparaison fiable avec les filtres sélectionnés.
           </p>
           <lab-anssi-bouton
-            on:click={() => null}
+            on:click={reinitialiseLesFiltres}
             on:keypress
             role="button"
             taille="md"
