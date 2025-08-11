@@ -34,3 +34,10 @@ export function regionParCode(code: string | undefined) {
 export function estCodeRegion(code: string | undefined): code is CodeRegion {
   return regions.some((region) => region.codeIso === code);
 }
+
+export function regionParNom(nom: string): Region | undefined {
+  return regions.find(
+    (region) =>
+      region.nom.toLocaleLowerCase().trim() === nom.toLocaleLowerCase().trim()
+  );
+}
