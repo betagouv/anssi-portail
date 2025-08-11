@@ -38,7 +38,9 @@ const adaptateurHachage = fabriqueAdaptateurHachage({
 });
 
 const entrepotFavori = new EntrepotFavoriPostgres({ adaptateurHachage });
-const entrepotFinancement = new EntrepotFinancementGrist({});
+const entrepotFinancement = new EntrepotFinancementGrist({
+  adaptateurEnvironnement,
+});
 const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({

@@ -107,6 +107,11 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     webhookAvisUtilisateur: () => '',
     webhookRetourExperience: () => '',
   }),
+  grist: () => ({
+    urlFinancements: () =>
+      'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records',
+    cleApiFinancements: () => 'FAUSSE_CLE_API',
+  }),
 };
 
 const vraiMiddleware = fabriqueMiddleware({
