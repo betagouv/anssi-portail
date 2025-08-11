@@ -17,6 +17,7 @@ import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
 import { adaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
+import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist';
 import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
 import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres';
@@ -37,6 +38,7 @@ const adaptateurHachage = fabriqueAdaptateurHachage({
 });
 
 const entrepotFavori = new EntrepotFavoriPostgres({ adaptateurHachage });
+const entrepotFinancement = new EntrepotFinancementGrist();
 const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
@@ -117,6 +119,7 @@ serviceCoherenceSecretsHachage
       ),
       adaptateurHachage,
       messagerieInstantanee,
+      entrepotFinancement,
     }).listen(3000, () => {
       console.log('Le serveur écoute sur le port 3000');
     });

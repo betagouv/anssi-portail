@@ -1,21 +1,22 @@
+import { CmsCrisp } from '@lab-anssi/lib';
+import { BusEvenements } from '../bus/busEvenements';
+import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
+import { AdaptateurGestionErreur } from '../infra/adaptateurGestionErreurSentry';
+import { AdaptateurHachage } from '../infra/adaptateurHachage';
+import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber';
+import { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
+import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
+import { EntrepotFavori } from '../metier/entrepotFavori';
+import { EntrepotFinancement } from '../metier/entrepotFinancement';
+import { EntrepotResultatTest } from '../metier/entrepotResultatTest';
+import { EntrepotSessionDeGroupe } from '../metier/entrepotSessionDeGroupe';
+import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
+import { GenerateurCodeSessionDeGroupe } from '../metier/generateurCodeSessionDeGroupe';
+import { MessagerieInstantanee } from '../metier/messagerieInstantanee';
+import { AdaptateurJWT } from './adaptateurJWT';
 import { FournisseurChemin } from './fournisseurChemin';
 import { Middleware } from './middleware';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
-import { AdaptateurJWT } from './adaptateurJWT';
-import { BusEvenements } from '../bus/busEvenements';
-import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
-import { AdaptateurGestionErreur } from '../infra/adaptateurGestionErreurSentry';
-import { EntrepotResultatTest } from '../metier/entrepotResultatTest';
-import { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
-import { EntrepotFavori } from '../metier/entrepotFavori';
-import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber';
-import { CmsCrisp } from '@lab-anssi/lib';
-import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
-import { EntrepotSessionDeGroupe } from '../metier/entrepotSessionDeGroupe';
-import { GenerateurCodeSessionDeGroupe } from '../metier/generateurCodeSessionDeGroupe';
-import { AdaptateurHachage } from '../infra/adaptateurHachage';
-import { MessagerieInstantanee } from '../metier/messagerieInstantanee';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -29,6 +30,7 @@ export type ConfigurationServeur = {
   busEvenements: BusEvenements;
   cmsCrisp: CmsCrisp;
   entrepotFavori: EntrepotFavori;
+  entrepotFinancement: EntrepotFinancement;
   entrepotResultatTest: EntrepotResultatTest;
   entrepotSessionDeGroupe: EntrepotSessionDeGroupe;
   entrepotUtilisateur: EntrepotUtilisateur;
