@@ -28,17 +28,18 @@ describe('La ressource Financements', () => {
     it('renvoie une liste de financements', async () => {
       entrepotFinancement.ajoute(
         new Financement({
+          id: 1,
           nom: 'Cyber PME',
           financeur: 'BPI France',
           entitesElligibles: ['PME', 'ETI'],
           perimetreGeographique: ['France'],
-          régions: undefined,
+          regions: [],
           objectifs: 'objectif 1',
           operationsElligibles: 'opération 2',
           benificiaires: 'Tout le monde',
           montant: 'Mille milliards',
-          conditions: 'Avoir 10 doigts',
-          sources: 'Le Gorafi',
+          sources: ['Le Gorafi'],
+          contact: 'aide.entreprise@mail.fr',
         })
       );
 
@@ -46,16 +47,18 @@ describe('La ressource Financements', () => {
 
       assert.deepEqual(reponse.body, [
         {
+          id: 1,
           nom: 'Cyber PME',
           financeur: 'BPI France',
           entitesElligibles: ['PME', 'ETI'],
           perimetreGeographique: ['France'],
+          regions: [],
           objectifs: 'objectif 1',
           operationsElligibles: 'opération 2',
           benificiaires: 'Tout le monde',
           montant: 'Mille milliards',
-          conditions: 'Avoir 10 doigts',
-          sources: 'Le Gorafi',
+          sources: ['Le Gorafi'],
+          contact: 'aide.entreprise@mail.fr',
         },
       ]);
     });

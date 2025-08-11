@@ -3,6 +3,26 @@ import { EntrepotFinancement } from '../metier/entrepotFinancement';
 import { Financement } from '../metier/financement';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 
+export type RetourApiGrist = {
+  records: {
+    id: number;
+    fields: {
+      Nom_du_dispositif: string | null;
+      Financeur: string | null;
+      Entites_eligibles: string[] | null;
+      Perimetre_geographique: string[] | null;
+      Financement: string[] | null;
+      Objectifs: string | null;
+      Operations_eligibles: string | null;
+      Beneficiaire: string | null;
+      Montant: string | null;
+      Region: string | null;
+      Contact: string | null;
+      Source: string | null;
+    };
+  }[];
+};
+
 export type ClientHttp = {
   get: (
     url: string,
@@ -31,7 +51,26 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
     const cleApi = this.adaptateurEnvironnement.grist().cleApiFinancements();
     const reponse = (await this.clientHttp.get(urlDocFinancement, {
       headers: { Authorization: `Bearer ${cleApi}` },
-    })) as AxiosResponse;
-    return reponse.data as Financement[];
+    })) as AxiosResponse<RetourApiGrist>;
+
+    return reponse.data.records.map(
+      ({ fields, id }) =>
+        new Financement({
+          id,
+          nom: fields.Nom_du_dispositif ?? '',
+          financeur: fields.Financeur ?? '',
+          entitesElligibles:
+            fields.Entites_eligibles?.filter((p) => p !== 'L') ?? [],
+          perimetreGeographique:
+            fields.Perimetre_geographique?.filter((p) => p !== 'L') ?? [],
+          objectifs: fields.Objectifs ?? '',
+          operationsElligibles: fields.Operations_eligibles ?? '',
+          benificiaires: fields.Beneficiaire ?? '',
+          montant: fields.Montant ?? '',
+          sources: fields.Source ? [fields.Source] : [],
+          contact: fields.Contact ?? '',
+          regions: fields.Region ? [fields.Region] : [],
+        })
+    );
   };
 }

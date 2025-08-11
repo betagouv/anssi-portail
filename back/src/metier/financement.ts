@@ -1,51 +1,61 @@
+import { CodeRegion, regionParNom } from './referentielRegions';
+
 export class Financement {
+  id: number;
   nom: string;
   financeur: string;
   entitesElligibles: string[];
   perimetreGeographique: string[];
-  régions?: string[];
+  regions: Array<CodeRegion | 'FRANCE'>;
   objectifs: string;
   operationsElligibles: string;
   benificiaires: string;
   montant: string;
-  conditions: string;
-  sources: string;
+  sources: string[];
+  contact: string;
 
   constructor({
+    id,
     nom,
     financeur,
     entitesElligibles,
     perimetreGeographique,
-    régions,
+    regions,
     objectifs,
     operationsElligibles,
     benificiaires,
     montant,
-    conditions,
     sources,
+    contact,
   }: {
+    id: number;
     nom: string;
     financeur: string;
     entitesElligibles: string[];
     perimetreGeographique: string[];
-    régions?: string[];
+    regions: string[];
     objectifs: string;
     operationsElligibles: string;
     benificiaires: string;
     montant: string;
-    conditions: string;
-    sources: string;
+    sources: string[];
+    contact: string;
   }) {
+    this.id = id;
     this.nom = nom;
     this.financeur = financeur;
     this.entitesElligibles = entitesElligibles;
     this.perimetreGeographique = perimetreGeographique;
-    this.régions = régions;
     this.objectifs = objectifs;
     this.operationsElligibles = operationsElligibles;
     this.benificiaires = benificiaires;
     this.montant = montant;
-    this.conditions = conditions;
     this.sources = sources;
+    this.contact = contact;
+    this.regions = regions.includes('France')
+      ? ['FRANCE']
+      : regions
+          .map((region) => regionParNom(region)?.codeIso)
+          .filter((codeRegion) => !!codeRegion);
   }
 }
