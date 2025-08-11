@@ -304,6 +304,7 @@
     }
 
     .pas-assez-de-resultats {
+      margin-bottom: 3rem;
       .contenu-section {
         display: flex;
         flex-direction: column;
