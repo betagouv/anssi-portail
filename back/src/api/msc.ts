@@ -20,6 +20,7 @@ import { ressourceAnnuaireSecteursActivite } from './ressourceAnnuaireSecteursAc
 import { ressourceAnnuaireTranchesEffectif } from './ressourceAnnuaireTranchesEffectif';
 import { ressourceAvisUtilisateur } from './ressourceAvisUtilisateur';
 import { ressourceContacts } from './ressourceContacts';
+import { ressourceFinancements } from './ressourceFinancements';
 import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte';
 import { ressourceInfosSite } from './ressourceInfosSite';
 import { ressourcePageConnexion } from './ressourcePageConnexion';
@@ -259,6 +260,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     '/api/avis-utilisateur',
     ressourceAvisUtilisateur(configurationServeur)
   );
+
+  app.use('/api/financements', ressourceFinancements(configurationServeur));
 
   app.use((_requete: Request, reponse: Response) => {
     reponse

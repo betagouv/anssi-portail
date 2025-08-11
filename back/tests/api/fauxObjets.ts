@@ -13,6 +13,7 @@ import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 import { MockCmsCrisp } from '../mockCmsCrisp';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
+import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
@@ -170,6 +171,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   busEvenements: fabriqueBusPourLesTests(),
   cmsCrisp: new MockCmsCrisp(),
   entrepotFavori: new EntrepotFavoriMemoire(),
+  entrepotFinancement: new EntrepotFinancementMemoire(),
   entrepotResultatTest: new EntrepotResultatTestMemoire(),
   entrepotSessionDeGroupe: new EntrepotSessionDeGroupeMemoire(),
   entrepotUtilisateur,

@@ -1,0 +1,63 @@
+import { Express } from 'express';
+import assert from 'node:assert';
+import { beforeEach, describe, it } from 'node:test';
+import request from 'supertest';
+import { creeServeur } from '../../src/api/msc';
+import { Financement } from '../../src/metier/financement';
+import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire';
+import { configurationDeTestDuServeur } from './fauxObjets';
+
+describe('La ressource Financements', () => {
+  let serveur: Express;
+  let entrepotFinancement: EntrepotFinancementMemoire;
+
+  beforeEach(() => {
+    entrepotFinancement = new EntrepotFinancementMemoire();
+    serveur = creeServeur({
+      ...configurationDeTestDuServeur,
+      entrepotFinancement,
+    });
+  });
+  describe('sur demande GET', () => {
+    it('renvoie un 200', async () => {
+      const reponse = await request(serveur).get('/api/financements');
+
+      assert.equal(reponse.status, 200);
+    });
+
+    it('renvoie une liste de financements', async () => {
+      entrepotFinancement.ajoute(
+        new Financement({
+          nom: 'Cyber PME',
+          financeur: 'BPI France',
+          entitesElligibles: ['PME', 'ETI'],
+          perimetreGeographique: ['France'],
+          régions: undefined,
+          objectifs: 'objectif 1',
+          operationsElligibles: 'opération 2',
+          benificiaires: 'Tout le monde',
+          montant: 'Mille milliards',
+          conditions: 'Avoir 10 doigts',
+          sources: 'Le Gorafi',
+        })
+      );
+
+      const reponse = await request(serveur).get('/api/financements');
+
+      assert.deepEqual(reponse.body, [
+        {
+          nom: 'Cyber PME',
+          financeur: 'BPI France',
+          entitesElligibles: ['PME', 'ETI'],
+          perimetreGeographique: ['France'],
+          objectifs: 'objectif 1',
+          operationsElligibles: 'opération 2',
+          benificiaires: 'Tout le monde',
+          montant: 'Mille milliards',
+          conditions: 'Avoir 10 doigts',
+          sources: 'Le Gorafi',
+        },
+      ]);
+    });
+  });
+});
