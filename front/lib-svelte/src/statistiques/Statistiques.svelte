@@ -320,6 +320,7 @@
         font-size: 1.375rem;
         line-height: 1.75rem;
         max-width: 588px;
+        margin: 0;
         @include a-partir-de(sm) {
           font-size: 1.5rem;
           line-height: 2rem;
@@ -330,6 +331,7 @@
         font-size: 1.125rem;
         line-height: 1.75rem;
         max-width: 588px;
+        margin: 0;
       }
     }
   }
