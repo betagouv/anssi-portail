@@ -36,6 +36,10 @@ type AdaptateurEnvironnement = {
     webhookRetourExperience: () => string | undefined;
     webhookAvisUtilisateur: () => string | undefined;
   };
+  grist: () => {
+    urlFinancements: () => string;
+    cleApiFinancements: () => string;
+  };
 };
 
 const adaptateurEnvironnement: AdaptateurEnvironnement = {
@@ -147,6 +151,10 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       process.env.WEBHOOK_MATTERMOST_AVIS_UTILISATEUR,
     webhookRetourExperience: () =>
       process.env.WEBHOOK_MATTERMOST_RETOURS_EXPERIENCE,
+  }),
+  grist: () => ({
+    urlFinancements: () => process.env.FINANCEMENTS_GRIST_URL || '',
+    cleApiFinancements: () => process.env.FINANCEMENTS_GRIST_API_KEY || '',
   }),
 };
 
