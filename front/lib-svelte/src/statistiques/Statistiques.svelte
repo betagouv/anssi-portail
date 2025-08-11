@@ -239,8 +239,11 @@
     .donnees-graphiques {
       display: flex;
       flex-direction: column;
-      align-self: center;
+      flex-wrap: wrap;
+      align-items: center;
+      align-self: stretch;
       gap: 48px;
+      padding: 3rem 0;
       @include a-partir-de(sm) {
         align-items: center;
         justify-content: space-around;
