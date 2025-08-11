@@ -138,7 +138,7 @@
 
       <div class="champs">
         <label class="champ-filtre">
-          <span>Secteur d'activté</span>
+          <span>Secteur d'activité</span>
           <SelectSecteurActivite
             bind:secteur
             optionDefautIntitule="Tous les secteurs"
