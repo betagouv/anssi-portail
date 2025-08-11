@@ -173,6 +173,12 @@
           montreTotaux={!filtreActif}
         />
         <LegendeAnneau {serie} montreTotaux={!filtreActif} />
+        {#if filtreActif}
+          <p class="note">
+            Par souci de confidentialité nous n'affichons pas le nombre
+            d'organisations une fois les filtres activés.
+          </p>
+        {/if}
       </div>
     {:else}
       <section class="pas-assez-de-resultats">
@@ -216,10 +222,14 @@
     display: flex;
     flex-direction: column;
     margin-top: 24px;
-    padding: 24px 24px 72px;
+    padding: 1.5rem;
     border: 1px solid #ddd;
     border-radius: 8px;
     gap: 2rem;
+
+    @include a-partir-de(sm) {
+      padding: 2rem;
+    }
 
     h2 {
       font-size: 1.5rem;
@@ -249,6 +259,15 @@
         justify-content: space-around;
         flex-direction: row;
       }
+    }
+
+    .note {
+      align-self: center;
+      font-size: 0.75rem;
+      line-height: 1.25rem;
+      font-style: normal;
+      color: #666;
+      margin: 0;
     }
 
     .filtres {
