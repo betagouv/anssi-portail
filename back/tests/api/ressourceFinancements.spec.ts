@@ -62,5 +62,14 @@ describe('La ressource Financements', () => {
         },
       ]);
     });
+
+    it("renvoie un 500 si l'entrepot renvoie une erreur", async () => {
+      entrepotFinancement.tous = () => {
+        throw new Error('Erreur technique');
+      };
+      const reponse = await request(serveur).get('/api/financements');
+
+      assert.equal(reponse.status, 500);
+    });
   });
 });

@@ -6,8 +6,12 @@ export const ressourceFinancements = ({
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get('/', async (_requete: Request, reponse: Response) => {
-    const financements = await entrepotFinancement.tous();
-    reponse.send(financements);
+    try {
+      const financements = await entrepotFinancement.tous();
+      reponse.send(financements);
+    } catch {
+      reponse.sendStatus(500);
+    }
   });
   return routeur;
 };
