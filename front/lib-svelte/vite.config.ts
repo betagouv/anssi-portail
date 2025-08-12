@@ -5,7 +5,8 @@ const loggerPersonnalise = createLogger();
 const loggerWarnOnce = loggerPersonnalise.warnOnce;
 
 loggerPersonnalise.warnOnce = (msg, options) => {
-  const regexp = /assets\/.* referenced in \/assets\/.* didn't resolve at build time, it will remain unchanged to be resolved at runtime/
+  const regexp =
+    /assets\/.* referenced in \/assets\/.* didn't resolve at build time, it will remain unchanged to be resolved at runtime/;
   if (msg.match(regexp)) return;
 
   loggerWarnOnce(msg, options);
@@ -41,6 +42,7 @@ export default defineConfig({
         'badge-agent-anssi': 'src/main-badge-agent-anssi.ts',
         'bandeau-maintenance': 'src/main-bandeau-maintenance.ts',
         statistiques: 'src/main-statistiques.ts',
+        financements: 'src/main-financements.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,

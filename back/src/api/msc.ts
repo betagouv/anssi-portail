@@ -133,6 +133,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'promouvoir-diagnostic-cyber',
     'session-groupe',
     'resultats-session-groupe',
+    'financements',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
