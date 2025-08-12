@@ -68,9 +68,9 @@
   async function obtiensResultat() {
     const reponse = await axios.post<CreationTest>('/api/resultats-test', {
       reponses: $resultatsQuestionnaire,
-      secteur,
-      region,
-      tailleOrganisation,
+      secteur: secteur ? secteur : null,
+      region: region ? region : null,
+      tailleOrganisation: tailleOrganisation ? tailleOrganisation : null,
       codeSessionGroupe,
     });
     const { id } = reponse.data;
