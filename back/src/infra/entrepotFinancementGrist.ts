@@ -48,6 +48,9 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
     const urlDocFinancement = this.adaptateurEnvironnement
       .grist()
       .urlFinancements();
+    if (!urlDocFinancement) {
+      return [];
+    }
     const cleApi = this.adaptateurEnvironnement.grist().cleApiFinancements();
     const reponse = (await this.clientHttp.get(urlDocFinancement, {
       headers: { Authorization: `Bearer ${cleApi}` },

@@ -17,6 +17,23 @@ describe("L'entrepot de financement Grist", () => {
     adaptateurEnvironnement: fauxAdaptateurEnvironnement,
   });
 
+  it("ne renvoie rien si l'url source n'est pas définie", async () => {
+    const entrepotFinancementGristHorsLigne = new EntrepotFinancementGrist({
+      clientHttp,
+      adaptateurEnvironnement: {
+        ...fauxAdaptateurEnvironnement,
+        grist: () => ({
+          urlFinancements: () => '',
+          cleApiFinancements: () => '',
+        }),
+      },
+    });
+
+    const financements = await entrepotFinancementGristHorsLigne.tous();
+
+    assert.deepEqual(financements, []);
+  });
+
   it('sait récupérer des financements en appelant Grist', async () => {
     let urlAppelee = '';
     let headerAuthent;
