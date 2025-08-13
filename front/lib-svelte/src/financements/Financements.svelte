@@ -1,6 +1,7 @@
 <script lang="ts">
-  import Hero from '../ui/Hero.svelte';
   import { profilStore } from '../stores/profil.store';
+  import Hero from '../ui/Hero.svelte';
+  import CarteFinancement from './CarteFinancement.svelte';
 </script>
 
 <Hero
@@ -13,10 +14,42 @@
   <div class="entete-filtres"></div>
   <div class="contenu-section">
     <div class="grille-cartes">
-      <p>test</p>
-      <p>sg</p>
-      <p>gds</p>
-      <p>gsdgds</p>
+      <CarteFinancement
+        entitesElligible={['PME', 'ETI']}
+        financeur="BPI France"
+        nom="Cyber PME"
+        typesDeFinancement={[
+          'prestations de Conseil',
+          'appui à l’investissement',
+        ]}
+      />
+      <CarteFinancement
+        entitesElligible={['PME', 'ETI']}
+        financeur="BPI France"
+        nom="Cyber PME"
+        typesDeFinancement={[
+          'prestations de Conseil',
+          'appui à l’investissement',
+        ]}
+      />
+      <CarteFinancement
+        entitesElligible={['PME', 'ETI']}
+        financeur="BPI France"
+        nom="Cyber PME"
+        typesDeFinancement={[
+          'prestations de Conseil',
+          'appui à l’investissement',
+        ]}
+      />
+      <CarteFinancement
+        entitesElligible={['PME', 'ETI']}
+        financeur="BPI France"
+        nom="Cyber PME"
+        typesDeFinancement={[
+          'prestations de Conseil',
+          'appui à l’investissement',
+        ]}
+      />
     </div>
   </div>
 </section>
