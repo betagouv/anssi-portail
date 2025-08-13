@@ -2,6 +2,10 @@
   import { profilStore } from '../stores/profil.store';
   import Hero from '../ui/Hero.svelte';
   import CarteFinancement from './CarteFinancement.svelte';
+  import type { Financement } from './financement';
+  import SqueletteCarteFinancement from './SqueletteCarteFinancement.svelte';
+
+  let financements: Financement[] | undefined;
 </script>
 
 <Hero
@@ -14,42 +18,50 @@
   <div class="entete-filtres"></div>
   <div class="contenu-section">
     <div class="grille-cartes">
-      <CarteFinancement
-        entitesElligible={['PME', 'ETI']}
-        financeur="BPI France"
-        nom="Cyber PME"
-        typesDeFinancement={[
-          'prestations de Conseil',
-          'appui à l’investissement',
-        ]}
-      />
-      <CarteFinancement
-        entitesElligible={['PME', 'ETI']}
-        financeur="BPI France"
-        nom="Cyber PME"
-        typesDeFinancement={[
-          'prestations de Conseil',
-          'appui à l’investissement',
-        ]}
-      />
-      <CarteFinancement
-        entitesElligible={['PME', 'ETI']}
-        financeur="BPI France"
-        nom="Cyber PME"
-        typesDeFinancement={[
-          'prestations de Conseil',
-          'appui à l’investissement',
-        ]}
-      />
-      <CarteFinancement
-        entitesElligible={['PME', 'ETI']}
-        financeur="BPI France"
-        nom="Cyber PME"
-        typesDeFinancement={[
-          'prestations de Conseil',
-          'appui à l’investissement',
-        ]}
-      />
+      {#if !financements}
+        <SqueletteCarteFinancement />
+        <SqueletteCarteFinancement />
+        <SqueletteCarteFinancement />
+        <SqueletteCarteFinancement />
+        <SqueletteCarteFinancement />
+      {:else}
+        <CarteFinancement
+          entitesElligible={['PME', 'ETI']}
+          financeur="BPI France"
+          nom="Cyber PME"
+          typesDeFinancement={[
+            'prestations de Conseil',
+            'appui à l’investissement',
+          ]}
+        />
+        <CarteFinancement
+          entitesElligible={['PME', 'ETI']}
+          financeur="BPI France"
+          nom="Cyber PME"
+          typesDeFinancement={[
+            'prestations de Conseil',
+            'appui à l’investissement',
+          ]}
+        />
+        <CarteFinancement
+          entitesElligible={['PME', 'ETI']}
+          financeur="BPI France"
+          nom="Cyber PME"
+          typesDeFinancement={[
+            'prestations de Conseil',
+            'appui à l’investissement',
+          ]}
+        />
+        <CarteFinancement
+          entitesElligible={['PME', 'ETI']}
+          financeur="BPI France"
+          nom="Cyber PME"
+          typesDeFinancement={[
+            'prestations de Conseil',
+            'appui à l’investissement',
+          ]}
+        />
+      {/if}
     </div>
   </div>
 </section>
