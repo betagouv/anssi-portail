@@ -1,4 +1,6 @@
 <script lang="ts">
+  import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
+
   export let nom: string;
   export let typesDeFinancement: string[];
   export let entitesElligible: string[];
@@ -8,7 +10,7 @@
 <div class="contenu">
   <div class="type-financement">
     {#each typesDeFinancement as type (type)}
-      <lab-anssi-tag label={type} taille="sm" type="defaut"></lab-anssi-tag>
+      <BadgeTypeFinancement>{type}</BadgeTypeFinancement>
     {/each}
   </div>
   <h6>{nom}</h6>
@@ -41,6 +43,15 @@
 
     &:active {
       background-color: var(--controle-segmente-fond-clique);
+    }
+
+    .type-financement {
+      display: flex;
+      align-items: flex-start;
+      align-content: flex-start;
+      gap: 8px;
+      align-self: stretch;
+      flex-wrap: wrap;
     }
 
     h6 {
