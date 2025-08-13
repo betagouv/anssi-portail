@@ -1,11 +1,29 @@
 <script lang="ts">
+  import axios from 'axios';
+  import { onMount } from 'svelte';
   import { profilStore } from '../stores/profil.store';
   import Hero from '../ui/Hero.svelte';
   import CarteFinancement from './CarteFinancement.svelte';
   import type { Financement } from './financement';
   import SqueletteCarteFinancement from './SqueletteCarteFinancement.svelte';
 
+  type ReponseAxios = {
+    id: number;
+    nom: string;
+    financeur: string;
+    entitesElligibles: string[];
+    typesDeFinancement: string[];
+  }[];
+
   let financements: Financement[] | undefined;
+  onMount(async () => {
+    try {
+      const reponse = await axios.get<ReponseAxios>('/api/financements');
+      financements = reponse.data;
+    } catch {
+      financements = [];
+    }
+  });
 </script>
 
 <Hero
@@ -25,42 +43,14 @@
         <SqueletteCarteFinancement />
         <SqueletteCarteFinancement />
       {:else}
-        <CarteFinancement
-          entitesElligible={['PME', 'ETI']}
-          financeur="BPI France"
-          nom="Cyber PME"
-          typesDeFinancement={[
-            'prestations de Conseil',
-            'appui à l’investissement',
-          ]}
-        />
-        <CarteFinancement
-          entitesElligible={['PME', 'ETI']}
-          financeur="BPI France"
-          nom="Cyber PME"
-          typesDeFinancement={[
-            'prestations de Conseil',
-            'appui à l’investissement',
-          ]}
-        />
-        <CarteFinancement
-          entitesElligible={['PME', 'ETI']}
-          financeur="BPI France"
-          nom="Cyber PME"
-          typesDeFinancement={[
-            'prestations de Conseil',
-            'appui à l’investissement',
-          ]}
-        />
-        <CarteFinancement
-          entitesElligible={['PME', 'ETI']}
-          financeur="BPI France"
-          nom="Cyber PME"
-          typesDeFinancement={[
-            'prestations de Conseil',
-            'appui à l’investissement',
-          ]}
-        />
+        {#each financements as financement (financement.id)}
+          <CarteFinancement
+            entitesElligible={financement.entitesElligibles}
+            financeur={financement.financeur}
+            nom={financement.nom}
+            typesDeFinancement={financement.typesDeFinancement}
+          />
+        {/each}
       {/if}
     </div>
   </div>
