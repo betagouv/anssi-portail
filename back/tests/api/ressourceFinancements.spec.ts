@@ -39,6 +39,7 @@ describe('La ressource Financements', () => {
           operationsElligibles: 'opération 2',
           benificiaires: 'Tout le monde',
           montant: 'Mille milliards',
+          condition: 'Avoir 10 doigts',
           sources: ['Le Gorafi'],
           contact: 'aide.entreprise@mail.fr',
         })
@@ -59,6 +60,7 @@ describe('La ressource Financements', () => {
           operationsElligibles: 'opération 2',
           benificiaires: 'Tout le monde',
           montant: 'Mille milliards',
+          condition: 'Avoir 10 doigts',
           sources: ['Le Gorafi'],
           contact: 'aide.entreprise@mail.fr',
         },

@@ -16,6 +16,7 @@ export type RetourApiGrist = {
       Operations_eligibles: string | null;
       Beneficiaire: string | null;
       Montant: string | null;
+      Conditions: string | null;
       Region: string | null;
       Contact: string | null;
       Source: string | null;
@@ -72,6 +73,7 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
           operationsElligibles: fields.Operations_eligibles ?? '',
           benificiaires: fields.Beneficiaire ?? '',
           montant: fields.Montant ?? '',
+          condition: fields.Conditions ?? '',
           sources: fields.Source ? [fields.Source] : [],
           contact: fields.Contact ?? '',
           regions: fields.Region ? [fields.Region] : [],
