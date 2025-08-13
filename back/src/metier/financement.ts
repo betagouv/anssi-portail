@@ -12,6 +12,7 @@ export class Financement {
   operationsElligibles: string;
   benificiaires: string;
   montant: string;
+  condition: string;
   sources: string[];
   contact: string;
 
@@ -27,6 +28,7 @@ export class Financement {
     operationsElligibles,
     benificiaires,
     montant,
+    condition,
     sources,
     contact,
   }: {
@@ -41,6 +43,7 @@ export class Financement {
     operationsElligibles: string;
     benificiaires: string;
     montant: string;
+    condition: string;
     sources: string[];
     contact: string;
   }) {
@@ -54,6 +57,7 @@ export class Financement {
     this.operationsElligibles = operationsElligibles;
     this.benificiaires = benificiaires;
     this.montant = montant;
+    this.condition = condition;
     this.sources = sources;
     this.contact = contact;
     this.regions = regions.includes('France')
