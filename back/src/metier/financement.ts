@@ -4,6 +4,7 @@ export class Financement {
   id: number;
   nom: string;
   financeur: string;
+  typesDeFinancement: string[];
   entitesElligibles: string[];
   perimetreGeographique: string[];
   regions: Array<CodeRegion | 'FRANCE'>;
@@ -18,6 +19,7 @@ export class Financement {
     id,
     nom,
     financeur,
+    typesDeFinancement,
     entitesElligibles,
     perimetreGeographique,
     regions,
@@ -32,6 +34,7 @@ export class Financement {
     nom: string;
     financeur: string;
     entitesElligibles: string[];
+    typesDeFinancement: string[];
     perimetreGeographique: string[];
     regions: string[];
     objectifs: string;
@@ -44,6 +47,7 @@ export class Financement {
     this.id = id;
     this.nom = nom;
     this.financeur = financeur;
+    this.typesDeFinancement = typesDeFinancement;
     this.entitesElligibles = entitesElligibles;
     this.perimetreGeographique = perimetreGeographique;
     this.objectifs = objectifs;

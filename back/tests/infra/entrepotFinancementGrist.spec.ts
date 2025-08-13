@@ -111,6 +111,10 @@ describe("L'entrepot de financement Grist", () => {
         nom: 'Cyber PME',
         benificiaires: 'Tout le monde',
         financeur: 'BPI France',
+        typesDeFinancement: [
+          'Prestations de conseil',
+          "Appui à l'investissement",
+        ],
         entitesElligibles: ['PME', 'ETI'],
         perimetreGeographique: ['France'],
         regions: ['FRANCE'],
@@ -124,6 +128,7 @@ describe("L'entrepot de financement Grist", () => {
         id: 21,
         nom: 'Pass Cyber formation',
         financeur: 'CCI des Hauts-de-France',
+        typesDeFinancement: ['Formation'],
         entitesElligibles: ['TPE', 'PME'],
         perimetreGeographique: ['Hauts-de-France'],
         regions: ['FR-HDF'],
