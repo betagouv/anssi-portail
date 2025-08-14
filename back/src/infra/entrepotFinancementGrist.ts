@@ -70,7 +70,7 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
           perimetreGeographique:
             fields.Perimetre_geographique?.filter((p) => p !== 'L') ?? [],
           objectifs: fields.Objectifs ?? '',
-          operationsElligibles: fields.Operations_eligibles ?? '',
+          operationsEligibles: fields.Operations_eligibles ?? '',
           benificiaires: fields.Beneficiaire ?? '',
           montant: fields.Montant ?? '',
           condition: fields.Conditions ?? '',

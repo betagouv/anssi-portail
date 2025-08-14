@@ -6,3 +6,13 @@ export type ResumeFinancement = {
   typesDeFinancement: string[];
   perimetreGeographique: string;
 };
+
+export type Financement = ResumeFinancement & {
+  objectifs: string;
+  operationsEligibles: string;
+  benificiaires: string;
+  montant: string;
+  condition: string;
+  sources: string[];
+  contact: string;
+};

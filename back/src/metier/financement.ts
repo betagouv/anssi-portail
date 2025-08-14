@@ -9,7 +9,7 @@ export class Financement {
   perimetreGeographique: string[];
   regions: Array<CodeRegion | 'FRANCE'>;
   objectifs: string;
-  operationsElligibles: string;
+  operationsEligibles: string;
   benificiaires: string;
   montant: string;
   condition: string;
@@ -25,7 +25,7 @@ export class Financement {
     perimetreGeographique,
     regions,
     objectifs,
-    operationsElligibles,
+    operationsEligibles,
     benificiaires,
     montant,
     condition,
@@ -40,7 +40,7 @@ export class Financement {
     perimetreGeographique: string[];
     regions: string[];
     objectifs: string;
-    operationsElligibles: string;
+    operationsEligibles: string;
     benificiaires: string;
     montant: string;
     condition: string;
@@ -54,7 +54,7 @@ export class Financement {
     this.entitesElligibles = entitesElligibles;
     this.perimetreGeographique = perimetreGeographique;
     this.objectifs = objectifs;
-    this.operationsElligibles = operationsElligibles;
+    this.operationsEligibles = operationsEligibles;
     this.benificiaires = benificiaires;
     this.montant = montant;
     this.condition = condition;
