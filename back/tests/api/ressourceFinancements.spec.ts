@@ -55,14 +55,6 @@ describe('La ressource Financements', () => {
           typesDeFinancement: ['Formation'],
           entitesElligibles: ['PME', 'ETI'],
           perimetreGeographique: ['France'],
-          regions: [],
-          objectifs: 'objectif 1',
-          operationsEligibles: 'opération 2',
-          benificiaires: 'Tout le monde',
-          montant: 'Mille milliards',
-          condition: 'Avoir 10 doigts',
-          sources: ['Le Gorafi'],
-          contact: 'aide.entreprise@mail.fr',
         },
       ]);
     });

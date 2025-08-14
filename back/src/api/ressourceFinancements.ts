@@ -8,7 +8,16 @@ export const ressourceFinancements = ({
   routeur.get('/', async (_requete: Request, reponse: Response) => {
     try {
       const financements = await entrepotFinancement.tous();
-      reponse.send(financements);
+      reponse.send(
+        financements.map((financement) => ({
+          id: financement.id,
+          nom: financement.nom,
+          financeur: financement.financeur,
+          typesDeFinancement: financement.typesDeFinancement,
+          entitesElligibles: financement.entitesElligibles,
+          perimetreGeographique: financement.perimetreGeographique,
+        }))
+      );
     } catch {
       reponse.sendStatus(500);
     }
