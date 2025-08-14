@@ -1,34 +1,91 @@
 <script lang="ts">
   import FilAriane from '../ui/FilAriane.svelte';
   import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
-  import type { ResumeFinancement } from './financement';
+  import type { Financement, ResumeFinancement } from './financement';
+  import { onMount } from 'svelte';
+  import axios from 'axios';
+  import SectionDetailsFinancement from './SectionDetailsFinancement.svelte';
 
-  export let financement: ResumeFinancement;
+  type ReponseAxios = {
+    id: number;
+    nom: string;
+    financeur: string;
+    typesDeFinancement: string[];
+    entitesElligibles: string[];
+    perimetresGeographiques: string[];
+    regions: string[];
+    objectifs: string;
+    operationsEligibles: string;
+    benificiaires: string;
+    montant: string;
+    condition: string;
+    sources: string[];
+    contact: string;
+  };
+
+  export let resumeFinancement: ResumeFinancement;
+  let financement: Financement | undefined;
+
+  onMount(async () => {
+    try {
+      const reponse = await axios.get<ReponseAxios>(
+        `/api/financements/${resumeFinancement.id}`
+      );
+      financement = reponse.data;
+    } catch {
+      financement = undefined;
+    }
+  });
 </script>
 
 <section class="chapeau">
   <div class="contenu-section">
     <FilAriane
-      feuille={financement.nom}
+      feuille={resumeFinancement.nom}
       branche={{ nom: 'Financements cyber', lien: '/financements' }}
     />
     <div class="badges">
-      {#each financement.typesDeFinancement as type (type)}
+      {#each resumeFinancement.typesDeFinancement as type (type)}
         <BadgeTypeFinancement>{type}</BadgeTypeFinancement>
       {/each}
     </div>
-    <h1>{financement.nom}</h1>
+    <h1>{resumeFinancement.nom}</h1>
     <p>
-      {`Zone géographique éligible pour cette aide : ${financement.perimetresGeographiques}`}
+      {`Zone géographique éligible pour cette aide : ${resumeFinancement.perimetresGeographiques}`}
     </p>
   </div>
 </section>
 
-<section class="operations-eligibles">
-  <div class="contenu-section">
-    <h2>Opérations éligibles</h2>
-  </div>
-</section>
+{#if financement}
+  <SectionDetailsFinancement
+    ancre="objectifs"
+    titre="Objectifs"
+    detail={financement.objectifs}
+  />
+  <SectionDetailsFinancement
+    ancre="operations-eligibles"
+    titre="Opérations éligibles"
+    detail={financement.operationsEligibles}
+  />
+
+  <SectionDetailsFinancement
+    ancre="beneficiaires"
+    titre="Bénéficiaires"
+    detail={financement.benificiaires}
+  />
+
+  <SectionDetailsFinancement
+    ancre="montant"
+    titre="Montant"
+    detail={financement.montant}
+  />
+
+  <SectionDetailsFinancement
+    ancre="conditions"
+    titre="Conditions"
+    detail={financement.condition}
+  />
+{/if}
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
