@@ -1,6 +1,4 @@
-import { IdNiveauMaturite } from '../../src/metier/resultatTestMaturite';
 import { Utilisateur } from '../../src/metier/utilisateur';
-import { ResultatTestMaturiteCreateur } from '../metier/ResultatTestMaturiteCreateur';
 import { fauxAdaptateurRechercheEntreprise } from './fauxObjets';
 
 export const jeanneDupont: Utilisateur = new Utilisateur(
@@ -30,11 +28,3 @@ export const hectorDurant: Utilisateur = new Utilisateur(
   },
   fauxAdaptateurRechercheEntreprise
 );
-
-export const creeResultatTestRevendique = async (
-  idNiveau: IdNiveauMaturite = 'insuffisant'
-) =>
-  new ResultatTestMaturiteCreateur()
-    .deNiveau(idNiveau)
-    .pour(jeanneDupont)
-    .cree();
