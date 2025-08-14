@@ -3,9 +3,9 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc';
-import { Financement } from '../../src/metier/financement';
 import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire';
 import { configurationDeTestDuServeur } from './fauxObjets';
+import { financementCyberPME } from './objetsPretsALEmploi';
 
 describe('La ressource Financements', () => {
   let serveur: Express;
@@ -26,24 +26,7 @@ describe('La ressource Financements', () => {
     });
 
     it('renvoie une liste de financements', async () => {
-      entrepotFinancement.ajoute(
-        new Financement({
-          id: 1,
-          nom: 'Cyber PME',
-          financeur: 'BPI France',
-          typesDeFinancement: ['Formation'],
-          entitesElligibles: ['PME', 'ETI'],
-          perimetreGeographique: ['France'],
-          regions: [],
-          objectifs: 'objectif 1',
-          operationsEligibles: 'opération 2',
-          benificiaires: 'Tout le monde',
-          montant: 'Mille milliards',
-          condition: 'Avoir 10 doigts',
-          sources: ['Le Gorafi'],
-          contact: 'aide.entreprise@mail.fr',
-        })
-      );
+      await entrepotFinancement.ajoute(financementCyberPME);
 
       const reponse = await request(serveur).get('/api/financements');
 
