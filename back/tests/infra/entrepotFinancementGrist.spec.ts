@@ -55,6 +55,95 @@ describe("L'entrepot de financement Grist", () => {
     );
   });
 
+  it('sait récupérer un financement en appelant Grist puis en filtrant par id', async () => {
+    const idFinancement = 10;
+
+    clientHttp.get = async () => {
+      return {
+        data: {
+          records: [
+            {
+              id: 10,
+              fields: {
+                Nom_du_dispositif: 'Cyber PME',
+                Financement: [
+                  'L',
+                  'Prestations de conseil',
+                  "Appui à l'investissement",
+                ],
+                Financeur: 'BPI France',
+                Entites_eligibles: ['L', 'PME', 'ETI'],
+                Perimetre_geographique: ['L', 'France'],
+                Objectifs: 'Lune',
+                Operations_eligibles: 'La division euclidienne',
+                Beneficiaire: 'Tout le monde',
+                Montant: 'Mille milliards',
+                Conditions: 'Avoir 10 doigts',
+                Region: 'France',
+                Contact: 'president.du.monde@mail.org',
+                Source: 'https://www.aides-entreprises.fr/aide/11454',
+              },
+            },
+            {
+              id: 21,
+              fields: {
+                Nom_du_dispositif: 'Pass Cyber formation',
+                Financement: ['L', 'Formation'],
+                Financeur: 'CCI des Hauts-de-France',
+                Entites_eligibles: ['L', 'TPE', 'PME'],
+                Perimetre_geographique: ['L', 'Hauts-de-France'],
+                Objectifs: null,
+                Operations_eligibles: null,
+                Beneficiaire: null,
+                Montant: null,
+                Conditions: null,
+                Region: 'Hauts-de-France',
+                Contact: null,
+                Source: 'https://www.aides-entreprises.fr/aide/10124',
+              },
+            },
+          ],
+        } satisfies RetourApiGrist,
+      };
+    };
+
+    const financement = await entrepotFinancementGrist.parId(idFinancement);
+
+    assert.deepEqual(financement, {
+      id: 10,
+      nom: 'Cyber PME',
+      benificiaires: 'Tout le monde',
+      financeur: 'BPI France',
+      typesDeFinancement: [
+        'Prestations de conseil',
+        "Appui à l'investissement",
+      ],
+      entitesElligibles: ['PME', 'ETI'],
+      perimetreGeographique: ['France'],
+      regions: ['FRANCE'],
+      objectifs: 'Lune',
+      operationsEligibles: 'La division euclidienne',
+      montant: 'Mille milliards',
+      condition: 'Avoir 10 doigts',
+      sources: ['https://www.aides-entreprises.fr/aide/11454'],
+      contact: 'president.du.monde@mail.org',
+    });
+  });
+
+  it('renvoie undefined si aucun id n‘a été fourni', async () => {
+    clientHttp.get = async () => {
+      return {
+        data: {
+          records: [],
+        } satisfies RetourApiGrist,
+      };
+    };
+
+    const financement = await entrepotFinancementGrist.parId(1);
+
+    assert.equal(financement, undefined);
+  });
+
   it("sait transfomer le retour de l'API Grist en financements", async () => {
     clientHttp.get = async () => {
       return {

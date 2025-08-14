@@ -80,4 +80,9 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
         })
     );
   };
+
+  parId = async (id: number) => {
+    const tous = await this.tous();
+    return tous.find((f) => f.id === id);
+  };
 }

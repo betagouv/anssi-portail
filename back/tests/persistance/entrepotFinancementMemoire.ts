@@ -4,4 +4,9 @@ import { EntrepotMemoire } from './entrepotMemoire';
 
 export class EntrepotFinancementMemoire
   extends EntrepotMemoire<Financement>
-  implements EntrepotFinancement {}
+  implements EntrepotFinancement
+{
+  parId: (id: number) => Promise<Financement | undefined> = (_id: number) => {
+    return Promise.resolve(undefined);
+  };
+}
