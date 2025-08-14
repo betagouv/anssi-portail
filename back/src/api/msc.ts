@@ -39,6 +39,7 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
+import { ressourceFinancement } from './ressourceFinancement';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -262,7 +263,11 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourceAvisUtilisateur(configurationServeur)
   );
 
-  app.use('/api/financements', ressourceFinancements(configurationServeur));
+  app.use(
+    '/api/financements',
+    ressourceFinancements(configurationServeur),
+    ressourceFinancement(configurationServeur)
+  );
 
   app.use((_requete: Request, reponse: Response) => {
     reponse

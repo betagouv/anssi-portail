@@ -1,82 +1,88 @@
 <script lang="ts">
   import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
+  import type { ResumeFinancement } from './financement';
 
-  export let nom: string;
-  export let typesDeFinancement: string[];
-  export let entitesElligible: string[];
-  export let financeur: string;
+  export let financement: ResumeFinancement;
 </script>
 
-<div class="contenu">
-  <div class="type-financement">
-    {#each typesDeFinancement as type (type)}
-      <BadgeTypeFinancement>{type}</BadgeTypeFinancement>
-    {/each}
+<a class="lien-carte" href={`/financements?idFinancement=${financement.id}`}>
+  <div class="contenu">
+    <div class="type-financement">
+      {#each financement.typesDeFinancement as type (type)}
+        <BadgeTypeFinancement>{type}</BadgeTypeFinancement>
+      {/each}
+    </div>
+    <h6>{financement.nom}</h6>
+    <div class="tags">
+      {#each financement.entitesElligibles as entite (entite)}
+        <lab-anssi-tag label={entite} taille="sm" type="defaut"></lab-anssi-tag>
+      {/each}
+    </div>
+    <div class="actions">
+      <div class="financeur">{financement.financeur}</div>
+      <lab-anssi-icone nom="arrow-right-line" taille="sm"></lab-anssi-icone>
+    </div>
   </div>
-  <h6>{nom}</h6>
-  <div class="tags">
-    {#each entitesElligible as entite (entite)}
-      <lab-anssi-tag label={entite} taille="sm" type="defaut"></lab-anssi-tag>
-    {/each}
-  </div>
-  <div class="actions">
-    <div class="financeur">{financeur}</div>
-    <lab-anssi-icone nom="arrow-right-line" taille="sm"></lab-anssi-icone>
-  </div>
-</div>
+</a>
 
 <style lang="scss">
-  .contenu {
+  .lien-carte {
     display: flex;
-    padding: 24px;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    align-self: stretch;
-    border-radius: 8px;
-    border: 1px solid var(--gris-clair);
-
-    &:hover {
-      background-color: var(--controle-segmente-fond-hover);
-      cursor: pointer;
-    }
-
-    &:active {
-      background-color: var(--controle-segmente-fond-clique);
-    }
-
-    .type-financement {
+    width: auto;
+    .contenu {
       display: flex;
+      flex-direction: column;
       align-items: flex-start;
-      align-content: flex-start;
-      gap: 8px;
       align-self: stretch;
-      flex-wrap: wrap;
-    }
+      gap: 12px;
+      padding: 24px;
+      border: 1px solid var(--gris-clair);
+      border-radius: 8px;
+      height: 100%;
 
-    h6 {
-      margin: 0;
-      font-size: 1.25rem;
-      font-weight: 700;
-      line-height: 1.75rem;
-    }
+      &:hover {
+        background-color: var(--controle-segmente-fond-hover);
+        cursor: pointer;
+      }
 
-    .tags {
-      display: flex;
-      margin-top: auto;
-      gap: 8px;
-    }
+      &:active {
+        background-color: var(--controle-segmente-fond-clique);
+      }
 
-    .actions {
-      display: flex;
-      align-self: stretch;
-      align-items: end;
-      justify-content: space-between;
+      .type-financement {
+        display: flex;
+        align-items: flex-start;
+        align-content: flex-start;
+        gap: 8px;
+        align-self: stretch;
+        flex-wrap: wrap;
+      }
 
-      .financeur {
-        color: #666;
-        font-size: 0.75rem;
-        line-height: 1.25rem;
+      h6 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.75rem;
+      }
+
+      .tags {
+        display: flex;
+        margin-top: auto;
+        gap: 8px;
+      }
+
+      .actions {
+        display: flex;
+        align-self: stretch;
+        align-items: end;
+        justify-content: space-between;
+
+        .financeur {
+          color: #666;
+          font-size: 0.75rem;
+          line-height: 1.25rem;
+        }
       }
     }
   }

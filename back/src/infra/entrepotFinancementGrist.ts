@@ -67,10 +67,10 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
             fields.Financement?.filter((p) => p !== 'L') ?? [],
           entitesElligibles:
             fields.Entites_eligibles?.filter((p) => p !== 'L') ?? [],
-          perimetreGeographique:
+          perimetresGeographiques:
             fields.Perimetre_geographique?.filter((p) => p !== 'L') ?? [],
           objectifs: fields.Objectifs ?? '',
-          operationsElligibles: fields.Operations_eligibles ?? '',
+          operationsEligibles: fields.Operations_eligibles ?? '',
           benificiaires: fields.Beneficiaire ?? '',
           montant: fields.Montant ?? '',
           condition: fields.Conditions ?? '',
@@ -79,5 +79,10 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
           regions: fields.Region ? [fields.Region] : [],
         })
     );
+  };
+
+  parId = async (id: number) => {
+    const tous = await this.tous();
+    return tous.find((f) => f.id === id);
   };
 }

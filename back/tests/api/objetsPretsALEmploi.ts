@@ -1,7 +1,6 @@
-import { IdNiveauMaturite } from '../../src/metier/resultatTestMaturite';
 import { Utilisateur } from '../../src/metier/utilisateur';
-import { ResultatTestMaturiteCreateur } from '../metier/ResultatTestMaturiteCreateur';
 import { fauxAdaptateurRechercheEntreprise } from './fauxObjets';
+import { Financement } from '../../src/metier/financement';
 
 export const jeanneDupont: Utilisateur = new Utilisateur(
   {
@@ -31,10 +30,19 @@ export const hectorDurant: Utilisateur = new Utilisateur(
   fauxAdaptateurRechercheEntreprise
 );
 
-export const creeResultatTestRevendique = async (
-  idNiveau: IdNiveauMaturite = 'insuffisant'
-) =>
-  new ResultatTestMaturiteCreateur()
-    .deNiveau(idNiveau)
-    .pour(jeanneDupont)
-    .cree();
+export const financementCyberPME: Financement = new Financement({
+  id: 1,
+  nom: 'Cyber PME',
+  financeur: 'BPI France',
+  typesDeFinancement: ['Formation'],
+  entitesElligibles: ['PME', 'ETI'],
+  perimetresGeographiques: ['France'],
+  regions: [],
+  objectifs: 'objectif 1',
+  operationsEligibles: 'opération 2',
+  benificiaires: 'Tout le monde',
+  montant: 'Mille milliards',
+  condition: 'Avoir 10 doigts',
+  sources: ['Le Gorafi'],
+  contact: 'aide.entreprise@mail.fr',
+});
