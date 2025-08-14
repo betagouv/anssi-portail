@@ -19,7 +19,7 @@
     </div>
     <h1>{financement.nom}</h1>
     <p>
-      {`Zone géographique éligible pour cette aide : ${financement.perimetreGeographique}`}
+      {`Zone géographique éligible pour cette aide : ${financement.perimetresGeographiques}`}
     </p>
   </div>
 </section>

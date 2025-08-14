@@ -67,7 +67,7 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
             fields.Financement?.filter((p) => p !== 'L') ?? [],
           entitesElligibles:
             fields.Entites_eligibles?.filter((p) => p !== 'L') ?? [],
-          perimetreGeographique:
+          perimetresGeographiques:
             fields.Perimetre_geographique?.filter((p) => p !== 'L') ?? [],
           objectifs: fields.Objectifs ?? '',
           operationsEligibles: fields.Operations_eligibles ?? '',

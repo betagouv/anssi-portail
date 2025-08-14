@@ -11,7 +11,7 @@
     financeur: string;
     entitesElligibles: string[];
     typesDeFinancement: string[];
-    perimetreGeographique: string;
+    perimetresGeographiques: string[];
   }[];
 
   let financements: ResumeFinancement[] | undefined;
@@ -36,7 +36,7 @@
 </script>
 
 {#if financementSeclectionne}
-  <DetailsFinancement financement={financementSeclectionne} />
+  <DetailsFinancement resumeFinancement={financementSeclectionne} />
 {:else if !idFinancement}
   <ListeDesFinancements {financements} />
 {/if}

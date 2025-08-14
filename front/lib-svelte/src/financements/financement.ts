@@ -4,7 +4,7 @@ export type ResumeFinancement = {
   financeur: string;
   nom: string;
   typesDeFinancement: string[];
-  perimetreGeographique: string;
+  perimetresGeographiques: string[];
 };
 
 export type Financement = ResumeFinancement & {

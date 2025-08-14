@@ -15,7 +15,7 @@ export const ressourceFinancements = ({
           financeur: financement.financeur,
           typesDeFinancement: financement.typesDeFinancement,
           entitesElligibles: financement.entitesElligibles,
-          perimetreGeographique: financement.perimetreGeographique,
+          perimetresGeographiques: financement.perimetresGeographiques,
         }))
       );
     } catch {

@@ -37,7 +37,7 @@ describe('La ressource Financements', () => {
           financeur: 'BPI France',
           typesDeFinancement: ['Formation'],
           entitesElligibles: ['PME', 'ETI'],
-          perimetreGeographique: ['France'],
+          perimetresGeographiques: ['France'],
         },
       ]);
     });
