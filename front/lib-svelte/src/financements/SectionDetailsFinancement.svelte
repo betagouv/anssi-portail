@@ -5,9 +5,9 @@
 </script>
 
 {#if detail}
-  <section id={ancre}>
+  <section>
     <div class="contenu-section">
-      <h2>{titre}</h2>
+      <h2 id={ancre}>{titre}</h2>
       <!-- On affiche des données provenant d'une source interne -->
       <!-- eslint-disable-next-line svelte/no-at-html-tags -->
       <div>{@html detail}</div>

@@ -60,11 +60,6 @@
         row-gap: 24px;
         column-gap: 24px;
         flex: 1 0 0;
-        grid-template-rows:
-          fit-content(100%) fit-content(100%) fit-content(100%) fit-content(
-            100%
-          )
-          fit-content(100%) 216px;
         grid-template-columns: 1fr;
 
         @include a-partir-de(sm) {
