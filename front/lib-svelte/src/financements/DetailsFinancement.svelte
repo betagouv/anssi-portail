@@ -53,6 +53,18 @@
     <p>
       {`Zone géographique éligible pour cette aide : ${resumeFinancement.perimetresGeographiques}`}
     </p>
+    {#if financement?.sources?.[0]}
+      <div class="source">
+        <lab-anssi-lien
+          href={financement.sources[0]}
+          cible="_blank"
+          apparence="bouton"
+          variante="primaire"
+          taille="lg"
+          titre="Bénéficier de cette aide"
+        ></lab-anssi-lien>
+      </div>
+    {/if}
   </div>
 </section>
 
@@ -212,6 +224,11 @@
     .contenu-section {
       display: flex;
       flex-direction: column;
+
+      .source {
+        display: flex;
+        margin-top: 24px;
+      }
     }
 
     @include a-partir-de(md) {
