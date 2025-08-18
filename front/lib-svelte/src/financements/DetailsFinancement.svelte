@@ -59,7 +59,30 @@
 {#if financement}
   <section class="corps">
     <div class="contenu-section">
-      <div class="sommaire"></div>
+      <div class="sommaire">
+        {#if financement.objectifs}
+          <a href="#objectifs">Objectifs</a>
+        {/if}
+        {#if financement.operationsEligibles}
+          <a href="#operations-eligibles">Opérations éligibles</a>
+        {/if}
+        {#if financement.benificiaires}
+          <a href="#beneficiaires">Bénéficiaires</a>
+        {/if}
+        {#if financement.montant}
+          <a href="#montant">Montant</a>
+        {/if}
+        {#if financement.condition}
+          <a href="#conditions">Conditions</a>
+        {/if}
+        <p class="titreTags">tags</p>
+        <div class="tags">
+          {#each financement.entitesElligibles as entite (entite)}
+            <lab-anssi-tag label={entite} taille="sm" type="defaut"
+            ></lab-anssi-tag>
+          {/each}
+        </div>
+      </div>
       <div class="fiche">
         <div class="financePar">
           <p>Financé par : <strong>{financement.financeur}</strong></p>
@@ -115,6 +138,71 @@
     @include a-partir-de(md) {
       padding: 24px 24px 72px;
     }
+
+    .contenu-section {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      align-self: stretch;
+
+      .sommaire {
+        display: none;
+
+        @include a-partir-de(md) {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          position: sticky;
+          top: 0;
+          max-width: 282px;
+          flex: 1 0 0;
+        }
+
+        a {
+          display: flex;
+          align-self: stretch;
+          width: auto;
+          font-weight: bold;
+          font-size: 1rem;
+          line-height: 1.5rem;
+          padding: 12px 8px;
+
+          &:hover {
+            background: rgb(0, 0, 0, 4%);
+          }
+
+          &:active {
+            background: rgb(0, 0, 0, 8%);
+          }
+        }
+
+        .titreTags {
+          text-transform: uppercase;
+          margin-top: 40px 0 0 0;
+        }
+
+        .tags {
+          display: flex;
+          align-items: flex-start;
+          align-content: flex-start;
+          align-self: stretch;
+          flex-wrap: wrap;
+          margin-top: 16px 0 0 0;
+          gap: 8px;
+        }
+      }
+
+      .fiche {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex: 1 0 0;
+        .financePar {
+          margin-top: 24px;
+          margin-bottom: 32px;
+        }
+      }
+    }
   }
 
   .chapeau {
@@ -160,19 +248,6 @@
       @include a-partir-de(md) {
         font-size: 1.375rem;
         line-height: 2rem;
-      }
-    }
-  }
-
-  .contenu-aide {
-    display: flex;
-
-    .fiche {
-      display: flex;
-      flex-direction: column;
-      .financePar {
-        margin-top: 24px;
-        margin-bottom: 32px;
       }
     }
   }
