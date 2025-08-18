@@ -92,6 +92,12 @@
           titre="Conditions"
           detail={financement.condition}
         />
+        <lab-anssi-lien
+          href="#"
+          titre="Haut de page"
+          icone="arrow-up-fill"
+          positionIcone="gauche"
+        ></lab-anssi-lien>
       </div>
     </div>
   </section>
