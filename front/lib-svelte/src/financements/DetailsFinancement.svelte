@@ -4,6 +4,7 @@
   import FilAriane from '../ui/FilAriane.svelte';
   import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
   import type { Financement, ResumeFinancement } from './financement';
+  import MenuFinancement from './MenuFinancement.svelte';
   import SectionDetailsFinancement from './SectionDetailsFinancement.svelte';
 
   type ReponseAxios = {
@@ -29,7 +30,7 @@
 
   let { resumeFinancement }: Props = $props();
   let financement: Financement | undefined = $state();
-  let detailsElement: HTMLDetailsElement | undefined = $state();
+  let entreesMenuFinancement: Record<string, string> | undefined = $state();
 
   onMount(async () => {
     try {
@@ -37,6 +38,15 @@
         `/api/financements/${resumeFinancement.id}`
       );
       financement = reponse.data;
+      const entrees: [string, string][] = [];
+      if (financement.objectifs) entrees.push(['objectifs', 'Objectifs']);
+      if (financement.operationsEligibles)
+        entrees.push(['operations-eligibles', 'Opérations éligibles']);
+      if (financement.benificiaires)
+        entrees.push(['beneficiaires', 'Bénéficiaires']);
+      if (financement.montant) entrees.push(['montant', 'Montant']);
+      if (financement.condition) entrees.push(['conditions', 'Conditions']);
+      entreesMenuFinancement = Object.fromEntries(entrees);
     } catch {
       financement = undefined;
     }
@@ -66,7 +76,7 @@
             lesLiens.forEach((l) => l.parentElement!.classList.remove('actif'));
         });
       },
-      { rootMargin: '-30% 0% -70% 0%' }
+      { rootMargin: '-10% 0% -20% 0%' }
     );
 
     const lesSections = contenu.querySelectorAll('section');
@@ -111,12 +121,6 @@
       if (observateurDIntersection) observateurDIntersection.unobserve(s);
     });
   });
-
-  const fermeSommaire = () => {
-    if (detailsElement) {
-      detailsElement.open = false;
-    }
-  };
 </script>
 
 <section class="chapeau">
@@ -150,91 +154,24 @@
 </section>
 
 <div bind:this={contenu}>
-  <div class="sommaire sommaire-replie">
-    <details bind:this={detailsElement}>
-      <summary>
-        <div class="entete-filtres">
-          <img
-            class="menu"
-            src="/assets/images/icone-menu-lateral.svg"
-            alt=""
-          />
-          <span id="section-active" class="titre-menu">Objectifs</span>
-          <img
-            class="chevron"
-            src="/assets/images/icone-chevron-bas.svg"
-            alt=""
-          />
-        </div>
-      </summary>
-
-      <ul>
-        {#if financement?.objectifs}
-          <li class="actif">
-            <a href="#objectifs" onclick={fermeSommaire}>Objectifs</a>
-          </li>
-        {/if}
-        {#if financement?.operationsEligibles}
-          <li>
-            <a href="#operations-eligibles" onclick={fermeSommaire}
-              >Opérations éligibles</a
-            >
-          </li>
-        {/if}
-        {#if financement?.benificiaires}
-          <li>
-            <a href="#beneficiaires" onclick={fermeSommaire}>Bénéficiaires</a>
-          </li>
-        {/if}
-        {#if financement?.montant}
-          <li><a href="#montant" onclick={fermeSommaire}>Montant</a></li>
-        {/if}
-        {#if financement?.condition}
-          <li><a href="#conditions" onclick={fermeSommaire}>Conditions</a></li>
-        {/if}
-      </ul>
-    </details>
-  </div>
-
   {#if financement}
+    {#if entreesMenuFinancement}
+      <MenuFinancement
+        dictionnaireAncreLibelle={entreesMenuFinancement}
+        mode="mobile"
+        tags={financement.entitesElligibles}
+      />
+    {/if}
+
     <section class="corps">
       <div class="contenu-section">
-        <div class="sommaire sommaire-deplie">
-          <ul>
-            {#if financement.objectifs}
-              <li class="actif">
-                <a href="#objectifs">Objectifs</a>
-              </li>
-            {/if}
-            {#if financement.operationsEligibles}
-              <li>
-                <a href="#operations-eligibles">Opérations éligibles</a>
-              </li>
-            {/if}
-            {#if financement.benificiaires}
-              <li>
-                <a href="#beneficiaires">Bénéficiaires</a>
-              </li>
-            {/if}
-            {#if financement.montant}
-              <li>
-                <a href="#montant">Montant</a>
-              </li>
-            {/if}
-            {#if financement.condition}
-              <li>
-                <a href="#conditions">Conditions</a>
-              </li>
-            {/if}
-            <p class="titreTags">tags</p>
-            <div class="tags">
-              {#each financement.entitesElligibles as entite (entite)}
-                <lab-anssi-tag label={entite} taille="sm" type="defaut"
-                ></lab-anssi-tag>
-              {/each}
-            </div>
-          </ul>
-        </div>
+        {#if entreesMenuFinancement}
+          <MenuFinancement
+            dictionnaireAncreLibelle={entreesMenuFinancement}
+            mode="desktop"
+            tags={financement.entitesElligibles}
+          />
+        {/if}
         <div class="fiche">
           <div class="financePar">
             <p>Financé par : <strong>{financement.financeur}</strong></p>
@@ -286,199 +223,6 @@
     padding: 0 var(--gouttiere) 40px;
   }
 
-  .sommaire-replie {
-    padding: 0;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    background: white;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-
-    @include a-partir-de(desktop) {
-      display: none;
-    }
-
-    &:has(details[open]) {
-      position: fixed;
-      top: 0;
-      height: 100vh;
-      width: 100%;
-      box-sizing: border-box;
-      overflow: auto;
-    }
-
-    details {
-      .entete-filtres {
-        padding: 12px 16px;
-        background: white;
-        color: var(--sommaire-actif-couleur);
-        font-size: 1rem;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 1.5rem;
-      }
-
-      ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 16px;
-
-        li {
-          border-bottom: 1px solid #ddd;
-          padding-top: 12px;
-          padding-bottom: 12px;
-
-          a {
-            border-left: 2px solid transparent;
-            text-decoration: none;
-            padding-left: 14px;
-            display: inline-block;
-            border-bottom: none;
-            font-size: 1rem;
-            font-weight: 700;
-            line-height: 1.5rem;
-          }
-
-          &.actif {
-            a {
-              color: var(--sommaire-actif-couleur);
-              border-left-color: var(--sommaire-actif-indicateur-couleur);
-            }
-          }
-        }
-      }
-
-      &[open] {
-        summary {
-          .entete-filtres {
-            background: var(--sommaire-mobile-fond);
-
-            :global(.chevron) {
-              transform: rotate(180deg);
-            }
-          }
-        }
-      }
-
-      summary {
-        list-style: none;
-        &::marker {
-          content: '';
-        }
-
-        &::-webkit-details-marker {
-          display: none;
-        }
-
-        .entete-filtres {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-      }
-
-      .titre-menu {
-        flex-grow: 1;
-      }
-    }
-  }
-
-  .corps {
-    padding: 48px 16px 72px;
-    @include a-partir-de(md) {
-      padding: 24px 24px 72px;
-    }
-
-    .contenu-section {
-      display: flex;
-      align-items: flex-start;
-      gap: 24px;
-      align-self: stretch;
-
-      .sommaire-deplie {
-        display: none;
-        width: 282px;
-        flex: 0 0 auto;
-        align-self: flex-start;
-
-        @include a-partir-de(lg) {
-          display: flex;
-          flex-direction: column;
-          position: sticky;
-          top: 0;
-        }
-
-        ul {
-          list-style-type: none;
-          padding: 0;
-          margin: 0 0 40px;
-
-          li {
-            &.actif {
-              a {
-                color: var(--sommaire-actif-couleur);
-                border-left: 2px solid var(--sommaire-actif-indicateur-couleur);
-                padding-left: 6px;
-              }
-            }
-
-            a {
-              width: 100%;
-              border-bottom: none;
-              text-decoration: none;
-              padding: 12px 8px;
-              display: inline-block;
-              font-size: 1rem;
-              font-style: normal;
-              font-weight: 700;
-              line-height: 1.5rem;
-
-              &:hover {
-                background: rgb(0, 0, 0, 4%);
-              }
-
-              &:active {
-                background: rgb(0, 0, 0, 8%);
-              }
-            }
-          }
-        }
-
-        span {
-          margin-bottom: 16px;
-          font-size: 0.85rem;
-          line-height: 1.5rem;
-        }
-
-        .titreTags {
-          text-transform: uppercase;
-          margin-top: 40px 0 0 0;
-        }
-
-        .tags {
-          display: flex;
-          align-items: flex-start;
-          align-content: flex-start;
-          align-self: stretch;
-          flex-wrap: wrap;
-          margin-top: 16px 0 0 0;
-          gap: 8px;
-        }
-      }
-      .fiche {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        flex: 1 0 0;
-        .financePar {
-          margin-top: 24px;
-          margin-bottom: 32px;
-        }
-      }
-    }
-  }
-
   .chapeau {
     background: #f4f4f4 url('/assets/images/motif-fond-service.png');
     padding-top: 24px;
@@ -527,6 +271,31 @@
       @include a-partir-de(md) {
         font-size: 1.375rem;
         line-height: 2rem;
+      }
+    }
+  }
+
+  .corps {
+    padding: 48px 16px 72px;
+    @include a-partir-de(md) {
+      padding: 24px 24px 72px;
+    }
+
+    .contenu-section {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      align-self: stretch;
+
+      .fiche {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex: 1 0 0;
+        .financePar {
+          margin-top: 24px;
+          margin-bottom: 32px;
+        }
       }
     }
   }
