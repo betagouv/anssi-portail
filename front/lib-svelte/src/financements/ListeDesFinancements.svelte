@@ -5,8 +5,18 @@
   import type { ResumeFinancement } from './financement';
   import SqueletteCarteFinancement from './SqueletteCarteFinancement.svelte';
   import EnteteFiltres from '../catalogue/EnteteFiltres.svelte';
+  import { onMount } from 'svelte';
 
   export let financements: ResumeFinancement[] | undefined;
+
+  let estBureau = false;
+  onMount(() => {
+    const mql = window.matchMedia('(min-width: 992px)');
+    mql.addEventListener('change', (e: MediaQueryListEvent) => {
+      estBureau = e.matches;
+    });
+    estBureau = mql.matches;
+  });
 </script>
 
 <Hero
@@ -15,112 +25,215 @@
   ariane={$profilStore ? undefined : 'Financements cyber'}
 />
 
-<div class="sommaire sommaire-replie">
-  <details>
-    <summary>
-      <EnteteFiltres />
-    </summary>
+{#if !estBureau}
+  <div class="sommaire sommaire-replie">
+    <details>
+      <summary>
+        <EnteteFiltres />
+      </summary>
 
-    <div class="barre-filtres">
-      <fieldset class="filtres regions">
-        <legend>Région</legend>
-        <label class="colonne">
-          <span class="libelle">Sélectionner une région</span>
-          <select name="region">
-            <option value="toutes">Toutes les régions</option>
-            <option value="ile-de-france">Île-de-France</option>
-            <option value="auvergne-rhone-alpes">Auvergne-Rhône-Alpes</option>
-            <option value="nouvelle-aquitaine">Nouvelle-Aquitaine</option>
-            <option value="occitanie">Occitanie</option>
-          </select>
-        </label>
-      </fieldset>
-      <fieldset class="filtres organisations">
-        <legend>Type d'organisation</legend>
-        <ul>
-          <li>
-            <label>
-              <input type="checkbox" value="TPE" />
-              <span class="libelle">TPE</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="checkbox" value="PME" />
-              <span class="libelle">PME</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="checkbox" value="ETI" />
-              <span class="libelle">ETI</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="checkbox" value="Collectivités" />
-              <span class="libelle">Collectivités</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="checkbox" value="Associations" />
-              <span class="libelle">Associations</span>
-            </label>
-          </li>
-        </ul>
-      </fieldset>
-      <fieldset class="filtres financements">
-        <legend>Type de financement</legend>
-        <ul>
-          <li>
-            <label>
-              <input type="checkbox" value="Aide à l'innovation" />
-              <span class="libelle">Aide à l'innovation</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="checkbox" value="Appui à l'investissement" />
-              <span class="libelle">Appui à l'investissement</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="checkbox" value="Audits" />
-              <span class="libelle">Audits</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="checkbox" value="Formation" />
-              <span class="libelle">Formation</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="checkbox" value="Prestations de conseils" />
-              <span class="libelle">Prestations de conseils</span>
-            </label>
-          </li>
-        </ul>
-      </fieldset>
-      <lab-anssi-bouton
-        on:keypress
-        role="button"
-        taille="md"
-        tabindex={0}
-        titre="Réinitialiser les filtres"
-        variante="primaire"
-        largeurMaximale
-      ></lab-anssi-bouton>
-    </div>
-  </details>
-</div>
+      <div class="barre-filtres">
+        <fieldset class="filtres regions">
+          <legend>Région</legend>
+          <label class="colonne">
+            <span class="libelle">Sélectionner une région</span>
+            <select name="region">
+              <option value="toutes">Toutes les régions</option>
+              <option value="ile-de-france">Île-de-France</option>
+              <option value="auvergne-rhone-alpes">Auvergne-Rhône-Alpes</option>
+              <option value="nouvelle-aquitaine">Nouvelle-Aquitaine</option>
+              <option value="occitanie">Occitanie</option>
+            </select>
+          </label>
+        </fieldset>
+        <fieldset class="filtres organisations">
+          <legend>Type d'organisation</legend>
+          <ul>
+            <li>
+              <label>
+                <input type="checkbox" value="TPE" />
+                <span class="libelle">TPE</span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" value="PME" />
+                <span class="libelle">PME</span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" value="ETI" />
+                <span class="libelle">ETI</span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" value="Collectivités" />
+                <span class="libelle">Collectivités</span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" value="Associations" />
+                <span class="libelle">Associations</span>
+              </label>
+            </li>
+          </ul>
+        </fieldset>
+        <fieldset class="filtres financements">
+          <legend>Type de financement</legend>
+          <ul>
+            <li>
+              <label>
+                <input type="checkbox" value="Aide à l'innovation" />
+                <span class="libelle">Aide à l'innovation</span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" value="Appui à l'investissement" />
+                <span class="libelle">Appui à l'investissement</span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" value="Audits" />
+                <span class="libelle">Audits</span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" value="Formation" />
+                <span class="libelle">Formation</span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" value="Prestations de conseils" />
+                <span class="libelle">Prestations de conseils</span>
+              </label>
+            </li>
+          </ul>
+        </fieldset>
+        <lab-anssi-bouton
+          on:keypress
+          role="button"
+          taille="md"
+          tabindex={0}
+          titre="Réinitialiser les filtres"
+          variante="primaire"
+          largeurMaximale
+        ></lab-anssi-bouton>
+      </div>
+    </details>
+  </div>
+{/if}
 
 <section class="financements">
-  <div class="entete-filtres"></div>
   <div class="contenu-section">
+    {#if estBureau}
+      <div class="sommaire sommaire-deplie">
+        <div class="barre-filtres">
+          <EnteteFiltres />
+          <fieldset class="filtres regions">
+            <legend>Région</legend>
+            <label class="colonne">
+              <span class="libelle">Sélectionner une région</span>
+              <select name="region">
+                <option value="toutes">Toutes les régions</option>
+                <option value="ile-de-france">Île-de-France</option>
+                <option value="auvergne-rhone-alpes"
+                  >Auvergne-Rhône-Alpes</option
+                >
+                <option value="nouvelle-aquitaine">Nouvelle-Aquitaine</option>
+                <option value="occitanie">Occitanie</option>
+              </select>
+            </label>
+          </fieldset>
+          <fieldset class="filtres organisations">
+            <legend>Type d'organisation</legend>
+            <ul>
+              <li></li>
+              <li>
+                <label>
+                  <input type="checkbox" value="TPE" />
+                  <span class="libelle">TPE</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" value="PME" />
+                  <span class="libelle">PME</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" value="ETI" />
+                  <span class="libelle">ETI</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" value="Collectivités" />
+                  <span class="libelle">Collectivités</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" value="Associations" />
+                  <span class="libelle">Associations</span>
+                </label>
+              </li>
+            </ul>
+          </fieldset>
+          <fieldset class="filtres financements">
+            <legend>Type de financement</legend>
+            <ul>
+              <li>
+                <label>
+                  <input type="checkbox" value="Aide à l'innovation" />
+                  <span class="libelle">Aide à l'innovation</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" value="Appui à l'investissement" />
+                  <span class="libelle">Appui à l'investissement</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" value="Audits" />
+                  <span class="libelle">Audits</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" value="Formation" />
+                  <span class="libelle">Formation</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" value="Prestations de conseils" />
+                  <span class="libelle">Prestations de conseils</span>
+                </label>
+              </li>
+            </ul>
+          </fieldset>
+          <lab-anssi-bouton
+            on:keypress
+            role="button"
+            taille="md"
+            tabindex={0}
+            titre="Réinitialiser les filtres"
+            variante="primaire"
+            largeurMaximale
+          ></lab-anssi-bouton>
+        </div>
+      </div>
+    {/if}
     <div class="grille-cartes">
       {#if !financements}
         <SqueletteCarteFinancement />
@@ -245,6 +358,15 @@
           box-sizing: border-box;
           padding: 1rem;
         }
+      }
+    }
+
+    &.sommaire-deplie {
+      flex: 1;
+      max-width: 282px;
+
+      :global(.chevron) {
+        display: none;
       }
     }
   }
