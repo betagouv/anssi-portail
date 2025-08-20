@@ -58,6 +58,8 @@ export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
         codeSecteur: 'A',
         codeRegion: 'FR-971',
         codeTrancheEffectif: '11',
+        estAssociation: false,
+        estCollectivite: false,
       },
     ],
   };

@@ -117,6 +117,8 @@ describe('Le résultat du test de maturité', () => {
               nom: '',
               departement: '',
               siret: jeanneDupont.siretEntite,
+              estAssociation: false,
+              estCollectivite: false,
             },
           ];
         }

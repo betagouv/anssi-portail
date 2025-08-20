@@ -72,6 +72,8 @@ describe('La ressource Contacts', () => {
             codeTrancheEffectif: '01',
             codeRegion: 'FR-ARA',
             codeSecteur: 'D',
+            estAssociation: false,
+            estCollectivite: false,
           },
         ],
       };
