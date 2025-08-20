@@ -1,13 +1,16 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import EnteteFiltres from '../catalogue/EnteteFiltres.svelte';
   import { profilStore } from '../stores/profil.store';
+  import SelectRegion from '../test-maturite/SelectRegion.svelte';
   import Hero from '../ui/Hero.svelte';
   import CarteFinancement from './CarteFinancement.svelte';
-  import type { ResumeFinancement } from './financement';
   import SqueletteCarteFinancement from './SqueletteCarteFinancement.svelte';
-  import EnteteFiltres from '../catalogue/EnteteFiltres.svelte';
-  import { onMount } from 'svelte';
-
-  export let financements: ResumeFinancement[] | undefined;
+  import { rechercheParRegion } from './stores/rechercheParRegion.store';
+  import { financementsFiltre } from './stores/financementsFiltre.store';
+  import { financementsStore } from './stores/financements.store';
+  import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
+  import { rechercheParTypeFinancement } from './stores/rechercheParTypeFinancement.store';
 
   let estBureau = false;
   onMount(() => {
@@ -37,83 +40,46 @@
           <legend>Région</legend>
           <label class="colonne">
             <span class="libelle">Sélectionner une région</span>
-            <select name="region">
-              <option value="toutes">Toutes les régions</option>
-              <option value="ile-de-france">Île-de-France</option>
-              <option value="auvergne-rhone-alpes">Auvergne-Rhône-Alpes</option>
-              <option value="nouvelle-aquitaine">Nouvelle-Aquitaine</option>
-              <option value="occitanie">Occitanie</option>
-            </select>
+            <SelectRegion
+              bind:region={$rechercheParRegion}
+              optionDefautSelectionnable
+            />
           </label>
         </fieldset>
         <fieldset class="filtres organisations">
           <legend>Type d'organisation</legend>
           <ul>
-            <li>
-              <label>
-                <input type="checkbox" value="TPE" />
-                <span class="libelle">TPE</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" value="PME" />
-                <span class="libelle">PME</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" value="ETI" />
-                <span class="libelle">ETI</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" value="Collectivités" />
-                <span class="libelle">Collectivités</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" value="Associations" />
-                <span class="libelle">Associations</span>
-              </label>
-            </li>
+            {#each $financementsFiltre.typesOrganisation as type (type)}
+              <li>
+                <label>
+                  <input
+                    type="checkbox"
+                    value={type}
+                    name="filtreOrganisation"
+                    bind:group={$rechercheParTypeOrganisation}
+                  />
+                  <span class="libelle">{type}</span>
+                </label>
+              </li>
+            {/each}
           </ul>
         </fieldset>
         <fieldset class="filtres financements">
           <legend>Type de financement</legend>
           <ul>
-            <li>
-              <label>
-                <input type="checkbox" value="Aide à l'innovation" />
-                <span class="libelle">Aide à l'innovation</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" value="Appui à l'investissement" />
-                <span class="libelle">Appui à l'investissement</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" value="Audits" />
-                <span class="libelle">Audits</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" value="Formation" />
-                <span class="libelle">Formation</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" value="Prestations de conseils" />
-                <span class="libelle">Prestations de conseils</span>
-              </label>
-            </li>
+            {#each $financementsFiltre.typesFinancement as type (type)}
+              <li>
+                <label>
+                  <input
+                    type="checkbox"
+                    value={type}
+                    name="filtreFinancement"
+                    bind:group={$rechercheParTypeFinancement}
+                  />
+                  <span class="libelle">{type}</span>
+                </label>
+              </li>
+            {/each}
           </ul>
         </fieldset>
         <lab-anssi-bouton
@@ -140,86 +106,46 @@
             <legend>Région</legend>
             <label class="colonne">
               <span class="libelle">Sélectionner une région</span>
-              <select name="region">
-                <option value="toutes">Toutes les régions</option>
-                <option value="ile-de-france">Île-de-France</option>
-                <option value="auvergne-rhone-alpes"
-                  >Auvergne-Rhône-Alpes</option
-                >
-                <option value="nouvelle-aquitaine">Nouvelle-Aquitaine</option>
-                <option value="occitanie">Occitanie</option>
-              </select>
+              <SelectRegion
+                bind:region={$rechercheParRegion}
+                optionDefautSelectionnable
+              />
             </label>
           </fieldset>
           <fieldset class="filtres organisations">
             <legend>Type d'organisation</legend>
             <ul>
-              <li></li>
-              <li>
-                <label>
-                  <input type="checkbox" value="TPE" />
-                  <span class="libelle">TPE</span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" value="PME" />
-                  <span class="libelle">PME</span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" value="ETI" />
-                  <span class="libelle">ETI</span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" value="Collectivités" />
-                  <span class="libelle">Collectivités</span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" value="Associations" />
-                  <span class="libelle">Associations</span>
-                </label>
-              </li>
+              {#each $financementsFiltre.typesOrganisation as type (type)}
+                <li>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value={type}
+                      name="filtreOrganisation"
+                      bind:group={$rechercheParTypeOrganisation}
+                    />
+                    <span class="libelle">{type}</span>
+                  </label>
+                </li>
+              {/each}
             </ul>
           </fieldset>
           <fieldset class="filtres financements">
             <legend>Type de financement</legend>
             <ul>
-              <li>
-                <label>
-                  <input type="checkbox" value="Aide à l'innovation" />
-                  <span class="libelle">Aide à l'innovation</span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" value="Appui à l'investissement" />
-                  <span class="libelle">Appui à l'investissement</span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" value="Audits" />
-                  <span class="libelle">Audits</span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" value="Formation" />
-                  <span class="libelle">Formation</span>
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox" value="Prestations de conseils" />
-                  <span class="libelle">Prestations de conseils</span>
-                </label>
-              </li>
+              {#each $financementsFiltre.typesFinancement as type (type)}
+                <li>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value={type}
+                      name="filtreFinancement"
+                      bind:group={$rechercheParTypeFinancement}
+                    />
+                    <span class="libelle">{type}</span>
+                  </label>
+                </li>
+              {/each}
             </ul>
           </fieldset>
           <lab-anssi-bouton
@@ -235,14 +161,14 @@
       </div>
     {/if}
     <div class="grille-cartes">
-      {#if !financements}
+      {#if !$financementsFiltre.resultat}
         <SqueletteCarteFinancement />
         <SqueletteCarteFinancement />
         <SqueletteCarteFinancement />
         <SqueletteCarteFinancement />
         <SqueletteCarteFinancement />
       {:else}
-        {#each financements as financement (financement.id)}
+        {#each $financementsFiltre.resultat as financement (financement.id)}
           <CarteFinancement {financement} />
         {/each}
       {/if}
