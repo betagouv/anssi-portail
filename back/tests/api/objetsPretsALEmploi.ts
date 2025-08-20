@@ -37,7 +37,7 @@ export const financementCyberPME: Financement = new Financement({
   typesDeFinancement: ['Formation'],
   entitesElligibles: ['PME', 'ETI'],
   perimetresGeographiques: ['France'],
-  regions: [],
+  regions: ['France'],
   objectifs: 'objectif 1',
   operationsEligibles: 'opération 2',
   benificiaires: 'Tout le monde',
