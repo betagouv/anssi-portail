@@ -15,6 +15,8 @@ export type ResultatRechercheEntreprise = {
   codeTrancheEffectif: string | undefined;
   codeSecteur: string | undefined;
   codeRegion: string | undefined;
+  estCollectivite: boolean;
+  estAssociation: boolean;
 };
 
 const extraisDepartement = (commune: string | undefined) => {
@@ -66,6 +68,8 @@ const extraisInfosEtablissement = (
     codeRegion,
     codeSecteur: resultat.section_activite_principale ?? undefined,
     codeTrancheEffectif: resultat.tranche_effectif_salarie ?? undefined,
+    estAssociation: resultat.complements.est_association,
+    estCollectivite: Boolean(resultat.complements.collectivite_territoriale),
   };
 };
 
@@ -84,6 +88,12 @@ type ResultatSirene = {
   }[];
   section_activite_principale: string | null; // contrairement à ce que dit la documentation, null est possible
   tranche_effectif_salarie: string | null; // contrairement à ce que dit la documentation, null est possible
+  complements: {
+    collectivite_territoriale: {
+      code_insee: string;
+    } | null;
+    est_association: boolean;
+  };
 };
 
 export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {

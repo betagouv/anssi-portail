@@ -82,6 +82,8 @@ describe("La ressource d'informations de création de compte", () => {
             codeTrancheEffectif: '01',
             codeRegion: 'FR-ARA',
             codeSecteur: 'D',
+            estAssociation: false,
+            estCollectivite: false,
           },
         ];
 

@@ -155,6 +155,8 @@ describe('La ressource qui gère le dernier résultat de test', () => {
                       codeTrancheEffectifRenvoyeParRechercheEntreprise,
                     codeSecteur: codeSecteurRenvoyeParRechercheEntreprise,
                     codeRegion: codeRegionRenvoyeParRechercheEntreprise,
+                    estCollectivite: false,
+                    estAssociation: false,
                   },
                 ]
               : [];
