@@ -4,6 +4,7 @@
   import DetailsFinancement from './DetailsFinancement.svelte';
   import type { ResumeFinancement } from './financement';
   import ListeDesFinancements from './ListeDesFinancements.svelte';
+  import { financementsStore } from './stores/financements.store';
 
   type ReponseAxios = {
     id: number;
@@ -27,6 +28,8 @@
       financements = reponse.data.map((f) => ({ ...f, regions: [] }));
     } catch {
       financements = [];
+    } finally {
+      financementsStore.initialise(financements ?? []);
     }
   });
 
@@ -38,5 +41,5 @@
 {#if financementSeclectionne}
   <DetailsFinancement resumeFinancement={financementSeclectionne} />
 {:else if !idFinancement}
-  <ListeDesFinancements {financements} />
+  <ListeDesFinancements />
 {/if}
