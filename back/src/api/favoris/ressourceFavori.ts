@@ -28,7 +28,7 @@ const ressourceFavori = ({
       await busEvenements.publie(
         new MiseAJourFavorisUtilisateur({ utilisateur })
       );
-      reponse.send(200);
+      reponse.sendStatus(200);
     }
   );
 
