@@ -24,7 +24,7 @@
   onMount(async () => {
     try {
       const reponse = await axios.get<ReponseAxios>('/api/financements');
-      financements = reponse.data;
+      financements = reponse.data.map((f) => ({ ...f, regions: [] }));
     } catch {
       financements = [];
     }
