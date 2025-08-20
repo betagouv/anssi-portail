@@ -4,9 +4,11 @@
   import { profilStore } from '../stores/profil.store';
   import Hero from '../ui/Hero.svelte';
   import CarteFinancement from './CarteFinancement.svelte';
+  import FiltresFinancements from './FiltresFinancements.svelte';
   import SqueletteCarteFinancement from './SqueletteCarteFinancement.svelte';
   import { financementsFiltre } from './stores/financementsFiltre.store';
-  import FiltresFinancements from './FiltresFinancements.svelte';
+
+  export let chargement: boolean;
 
   let estBureau = false;
   onMount(() => {
@@ -31,7 +33,7 @@
         <EnteteFiltres />
       </summary>
       <div class="barre-filtres">
-        <FiltresFinancements />
+        <FiltresFinancements {chargement} />
       </div>
     </details>
   </div>
@@ -43,12 +45,12 @@
       <div class="sommaire sommaire-deplie">
         <div class="barre-filtres">
           <EnteteFiltres />
-          <FiltresFinancements />
+          <FiltresFinancements {chargement} />
         </div>
       </div>
     {/if}
     <div class="grille-cartes">
-      {#if !$financementsFiltre.resultat}
+      {#if chargement}
         <SqueletteCarteFinancement />
         <SqueletteCarteFinancement />
         <SqueletteCarteFinancement />
