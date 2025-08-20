@@ -311,6 +311,7 @@
         column-gap: 24px;
         flex: 1 0 0;
         grid-template-columns: 1fr;
+        margin-bottom: auto;
 
         @include a-partir-de(sm) {
           grid-template-columns: repeat(2, minmax(0, 1fr));
