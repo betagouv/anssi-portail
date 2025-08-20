@@ -13,6 +13,7 @@
     entitesElligibles: string[];
     typesDeFinancement: string[];
     perimetresGeographiques: string[];
+    regions: string[];
   }[];
 
   let financements: ResumeFinancement[] | undefined;
@@ -25,7 +26,7 @@
   onMount(async () => {
     try {
       const reponse = await axios.get<ReponseAxios>('/api/financements');
-      financements = reponse.data.map((f) => ({ ...f, regions: [] }));
+      financements = reponse.data;
     } catch {
       financements = [];
     } finally {

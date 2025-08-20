@@ -38,6 +38,7 @@ describe('La ressource Financements', () => {
           typesDeFinancement: ['Formation'],
           entitesElligibles: ['PME', 'ETI'],
           perimetresGeographiques: ['France'],
+          regions: ["FRANCE"],
         },
       ]);
     });
