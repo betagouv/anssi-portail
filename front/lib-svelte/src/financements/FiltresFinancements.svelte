@@ -4,6 +4,12 @@
   import { financementsFiltre } from './stores/financementsFiltre.store';
   import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
   import { rechercheParTypeFinancement } from './stores/rechercheParTypeFinancement.store';
+
+  const reinitialiseFiltres = () => {
+    rechercheParRegion.reinitialise();
+    rechercheParTypeOrganisation.reinitialise();
+    rechercheParTypeFinancement.reinitialise();
+  };
 </script>
 
 <fieldset class="filtres regions">
@@ -53,6 +59,7 @@
   </ul>
 </fieldset>
 <lab-anssi-bouton
+  on:click={reinitialiseFiltres}
   on:keypress
   role="button"
   taille="md"
@@ -68,7 +75,7 @@
     flex-direction: column;
     width: 100%;
   }
-  
+
   fieldset {
     margin: 0;
     padding: 0 0 2rem;
