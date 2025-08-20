@@ -1,9 +1,12 @@
 <script lang="ts">
-  import { rechercheParRegion } from './stores/rechercheParRegion.store';
   import SelectRegion from '../test-maturite/SelectRegion.svelte';
+  import SqueletteCheckbox from './SqueletteCheckbox.svelte';
   import { financementsFiltre } from './stores/financementsFiltre.store';
-  import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
+  import { rechercheParRegion } from './stores/rechercheParRegion.store';
   import { rechercheParTypeFinancement } from './stores/rechercheParTypeFinancement.store';
+  import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
+
+  export let chargement: boolean;
 
   const reinitialiseFiltres = () => {
     rechercheParRegion.reinitialise();
@@ -25,37 +28,51 @@
 <fieldset class="filtres organisations">
   <legend>Type d'organisation</legend>
   <ul>
-    {#each $financementsFiltre.typesOrganisation as type (type)}
-      <li>
-        <label>
-          <input
-            type="checkbox"
-            value={type}
-            name="filtreOrganisation"
-            bind:group={$rechercheParTypeOrganisation}
-          />
-          <span class="libelle">{type}</span>
-        </label>
-      </li>
-    {/each}
+    {#if chargement}
+      <SqueletteCheckbox />
+      <SqueletteCheckbox />
+      <SqueletteCheckbox />
+      <SqueletteCheckbox />
+    {:else}
+      {#each $financementsFiltre.typesOrganisation as type (type)}
+        <li>
+          <label>
+            <input
+              type="checkbox"
+              value={type}
+              name="filtreOrganisation"
+              bind:group={$rechercheParTypeOrganisation}
+            />
+            <span class="libelle">{type}</span>
+          </label>
+        </li>
+      {/each}
+    {/if}
   </ul>
 </fieldset>
 <fieldset class="filtres financements">
   <legend>Type de financement</legend>
   <ul>
-    {#each $financementsFiltre.typesFinancement as type (type)}
-      <li>
-        <label>
-          <input
-            type="checkbox"
-            value={type}
-            name="filtreFinancement"
-            bind:group={$rechercheParTypeFinancement}
-          />
-          <span class="libelle">{type}</span>
-        </label>
-      </li>
-    {/each}
+    {#if chargement}
+      <SqueletteCheckbox />
+      <SqueletteCheckbox />
+      <SqueletteCheckbox />
+      <SqueletteCheckbox />
+    {:else}
+      {#each $financementsFiltre.typesFinancement as type (type)}
+        <li>
+          <label>
+            <input
+              type="checkbox"
+              value={type}
+              name="filtreFinancement"
+              bind:group={$rechercheParTypeFinancement}
+            />
+            <span class="libelle">{type}</span>
+          </label>
+        </li>
+      {/each}
+    {/if}
   </ul>
 </fieldset>
 <lab-anssi-bouton

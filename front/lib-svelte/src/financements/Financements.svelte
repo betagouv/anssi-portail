@@ -18,6 +18,7 @@
 
   let financements: ResumeFinancement[] | undefined;
   let financementSeclectionne: ResumeFinancement | undefined;
+  let chargement: boolean = true;
 
   const idFinancement = Number(
     new URLSearchParams(window.location.search).get('idFinancement')
@@ -25,11 +26,13 @@
 
   onMount(async () => {
     try {
+      chargement = true;
       const reponse = await axios.get<ReponseAxios>('/api/financements');
       financements = reponse.data;
     } catch {
       financements = [];
     } finally {
+      chargement = false;
       financementsStore.initialise(financements ?? []);
     }
   });
@@ -42,5 +45,5 @@
 {#if financementSeclectionne}
   <DetailsFinancement resumeFinancement={financementSeclectionne} />
 {:else if !idFinancement}
-  <ListeDesFinancements />
+  <ListeDesFinancements {chargement} />
 {/if}
