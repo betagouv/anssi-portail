@@ -280,7 +280,7 @@
   .corps {
     padding: 48px 16px 72px;
     @include a-partir-de(md) {
-      padding: 24px 24px 72px;
+      padding: 48px 24px 72px;
     }
 
     .contenu-section {
