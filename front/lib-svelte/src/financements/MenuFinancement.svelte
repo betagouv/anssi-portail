@@ -35,7 +35,7 @@
       </summary>
       <ul>
         {#each Object.entries(dictionnaireAncreLibelle) as [ancre, libelle] (ancre)}
-          <li class="actif">
+          <li>
             <a href={`#${ancre}`} onclick={fermeSommaire}>{libelle}</a>
           </li>
         {/each}
@@ -46,7 +46,7 @@
   <div class="sommaire sommaire-deplie">
     <ul>
       {#each Object.entries(dictionnaireAncreLibelle) as [ancre, libelle] (ancre)}
-        <li class="actif">
+        <li>
           <a href={`#${ancre}`}>{libelle}</a>
         </li>
       {/each}
@@ -71,6 +71,7 @@
     position: sticky;
     top: 0;
     z-index: 2;
+    box-sizing: border-box;
 
     @include a-partir-de(desktop) {
       display: none;
@@ -81,7 +82,6 @@
       top: 0;
       height: 100vh;
       width: 100%;
-      box-sizing: border-box;
       overflow: auto;
     }
 
@@ -107,7 +107,6 @@
           padding-bottom: 12px;
 
           a {
-            border-left: 2px solid transparent;
             text-decoration: none;
             padding-left: 14px;
             display: inline-block;
@@ -115,13 +114,6 @@
             font-size: 1rem;
             font-weight: 700;
             line-height: 1.5rem;
-          }
-
-          &.actif {
-            a {
-              color: var(--sommaire-actif-couleur);
-              border-left-color: var(--sommaire-actif-indicateur-couleur);
-            }
           }
         }
       }
@@ -180,14 +172,6 @@
       margin: 0 0 40px;
 
       li {
-        &.actif {
-          a {
-            color: var(--sommaire-actif-couleur);
-            border-left: 2px solid var(--sommaire-actif-indicateur-couleur);
-            padding-left: 6px;
-          }
-        }
-
         a {
           width: 100%;
           border-bottom: none;
@@ -232,6 +216,17 @@
       align-self: stretch;
       flex-wrap: wrap;
       gap: 8px;
+    }
+  }
+
+  :global .sommaire ul li {
+    a {
+      border-left: 2px solid transparent;
+    }
+
+    &.actif a {
+      color: var(--sommaire-actif-couleur);
+      border-left-color: var(--sommaire-actif-indicateur-couleur);
     }
   }
 </style>
