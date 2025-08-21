@@ -10,6 +10,9 @@
   import SqueletteCarteFinancement from './SqueletteCarteFinancement.svelte';
   import { financementsStore } from './stores/financements.store';
   import { financementsFiltre } from './stores/financementsFiltre.store';
+  import { rechercheParRegion } from './stores/rechercheParRegion.store';
+  import { rechercheParTypeFinancement } from './stores/rechercheParTypeFinancement.store';
+  import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
 
   type ReponseAxios = {
     id: number;
@@ -25,6 +28,12 @@
   let financements: ResumeFinancement[] = [];
   let chargement: boolean = true;
   let estBureau = false;
+
+  const reinitialiseFiltres = () => {
+    rechercheParRegion.reinitialise();
+    rechercheParTypeOrganisation.reinitialise();
+    rechercheParTypeFinancement.reinitialise();
+  };
 
   onMount(async () => {
     const mql = window.matchMedia('(min-width: 992px)');
@@ -84,6 +93,24 @@
       {:else}
         {#each $financementsFiltre.resultat as financement (financement.id)}
           <CarteFinancement {financement} />
+        {:else}
+          <div class="aucun-resultat">
+            <img
+              src="/assets/images/illustration-aucun-resultat.svg"
+              alt="Aucun résultat"
+            />
+            <h1>Désolé, aucun résultat trouvé</h1>
+            <lab-anssi-bouton
+              on:click={reinitialiseFiltres}
+              on:keypress
+              role="button"
+              taille="md"
+              tabindex={0}
+              titre="Réinitialiser les filtres"
+              variante="primaire"
+              largeurMaximale
+            ></lab-anssi-bouton>
+          </div>
         {/each}
       {/if}
     </div>
@@ -150,6 +177,28 @@
 
         @include a-partir-de(sm) {
           grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .aucun-resultat {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
+          grid-column: 1 / -1;
+          text-align: center;
+
+          h1 {
+            font-size: 1.75rem;
+            line-height: 2.25rem;
+            @include a-partir-de(sm) {
+              font-size: 2rem;
+              line-height: 2.5rem;
+            }
+          }
+
+          img {
+            height: 250px;
+          }
         }
       }
     }
