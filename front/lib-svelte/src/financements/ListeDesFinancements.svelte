@@ -1,31 +1,54 @@
 <script lang="ts">
+  import axios from 'axios';
   import { onMount } from 'svelte';
   import EnteteFiltres from '../catalogue/EnteteFiltres.svelte';
   import { profilStore } from '../stores/profil.store';
   import Hero from '../ui/Hero.svelte';
   import CarteFinancement from './CarteFinancement.svelte';
   import FiltresFinancements from './FiltresFinancements.svelte';
+  import type { ResumeFinancement } from './financement';
   import SqueletteCarteFinancement from './SqueletteCarteFinancement.svelte';
+  import { financementsStore } from './stores/financements.store';
   import { financementsFiltre } from './stores/financementsFiltre.store';
 
-  export let chargement: boolean;
+  type ReponseAxios = {
+    id: number;
+    nom: string;
+    financeur: string;
+    entitesElligibles: string[];
+    typesDeFinancement: string[];
+    perimetresGeographiques: string[];
+    regions: string[];
+  }[];
 
   const estConnecte = profilStore.utilisateurEstConnecte();
-
+  let financements: ResumeFinancement[] = [];
+  let chargement: boolean = true;
   let estBureau = false;
-  onMount(() => {
+
+  onMount(async () => {
     const mql = window.matchMedia('(min-width: 992px)');
     mql.addEventListener('change', (e: MediaQueryListEvent) => {
       estBureau = e.matches;
     });
     estBureau = mql.matches;
+    try {
+      chargement = true;
+      const reponse = await axios.get<ReponseAxios>('/api/financements');
+      financements = reponse.data;
+    } catch {
+      financements = [];
+    } finally {
+      chargement = false;
+      financementsStore.initialise(financements ?? []);
+    }
   });
 </script>
 
 <Hero
   titre="Financements cyber"
   description="Bénéficiez d’aides et de subventions pour renforcer la maturité cyber de votre organisation."
-  ariane={$profilStore ? undefined : 'Financements cyber'}
+  ariane="Financements cyber"
 />
 
 {#if !estBureau}

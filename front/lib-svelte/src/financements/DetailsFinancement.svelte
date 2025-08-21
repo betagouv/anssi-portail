@@ -3,7 +3,7 @@
   import { onDestroy, onMount, tick } from 'svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
-  import type { Financement, ResumeFinancement } from './financement';
+  import type { Financement } from './financement';
   import MenuFinancement from './MenuFinancement.svelte';
   import SectionDetailsFinancement from './SectionDetailsFinancement.svelte';
 
@@ -24,18 +24,17 @@
     contact: string;
   };
 
-  interface Props {
-    resumeFinancement: ResumeFinancement;
-  }
-
-  let { resumeFinancement }: Props = $props();
   let financement: Financement | undefined = $state();
   let entreesMenuFinancement: Record<string, string> | undefined = $state();
+
+  const idFinancement = Number(
+    new URLSearchParams(window.location.search).get('idFinancement')
+  );
 
   onMount(async () => {
     try {
       const reponse = await axios.get<ReponseAxios>(
-        `/api/financements/${resumeFinancement.id}`
+        `/api/financements/${idFinancement}`
       );
       financement = reponse.data;
       const entrees: [string, string][] = [];
@@ -126,17 +125,19 @@
 <section class="chapeau">
   <div class="contenu-section">
     <FilAriane
-      feuille={resumeFinancement.nom}
+      feuille={financement?.nom ?? '...'}
       branche={{ nom: 'Financements cyber', lien: '/financements' }}
     />
     <div class="badges">
-      {#each resumeFinancement.typesDeFinancement as type (type)}
-        <BadgeTypeFinancement>{type}</BadgeTypeFinancement>
-      {/each}
+      {#if financement}
+        {#each financement.typesDeFinancement as type (type)}
+          <BadgeTypeFinancement>{type}</BadgeTypeFinancement>
+        {/each}
+      {/if}
     </div>
-    <h1>{resumeFinancement.nom}</h1>
+    <h1>{financement?.nom}</h1>
     <p>
-      {`Zone géographique éligible pour cette aide : ${resumeFinancement.perimetresGeographiques}`}
+      Zone géographique éligible pour cette aide&nbsp;: {financement?.perimetresGeographiques}
     </p>
     {#if financement?.sources?.[0]}
       <div class="source">
