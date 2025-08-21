@@ -127,6 +127,7 @@
     <FilAriane
       feuille={financement?.nom ?? '...'}
       branche={{ nom: 'Financements cyber', lien: '/financements' }}
+      brancheConnectee={{ nom: 'Financements cyber', lien: '/financements' }}
     />
     <div class="badges">
       {#if financement}
