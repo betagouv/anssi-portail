@@ -1,7 +1,13 @@
 <script lang="ts">
+  import DOMPurify from 'dompurify';
+
   export let ancre: string;
   export let titre: string;
   export let detail: string;
+
+  const detailPurifie = DOMPurify.sanitize(detail, {
+    ALLOWED_TAGS: ['a', 'b', 'br', 'em', 'i', 'li', 'ol', 'p', 'strong', 'ul'],
+  });
 </script>
 
 {#if detail}
@@ -10,7 +16,7 @@
       <h2 id={ancre}>{titre}</h2>
       <!-- On affiche des données provenant d'une source interne -->
       <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-      <div>{@html detail}</div>
+      {@html detailPurifie}
     </div>
   </section>
 {/if}
@@ -20,11 +26,6 @@
     :global(a) {
       display: inline-flex;
       text-decoration: underline;
-    }
-    .contenu-section {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
     }
   }
 </style>
