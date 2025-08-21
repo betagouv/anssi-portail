@@ -7,6 +7,7 @@
   import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
 
   export let chargement: boolean;
+  export let estConnecte: boolean;
 
   const reinitialiseFiltres = () => {
     rechercheParRegion.reinitialise();
@@ -15,41 +16,45 @@
   };
 </script>
 
-<fieldset class="filtres regions">
-  <legend>Région</legend>
-  <label class="colonne">
-    <span class="libelle">Sélectionner une région</span>
-    <SelectRegion
-      bind:region={$rechercheParRegion}
-      optionDefautSelectionnable
-    />
-  </label>
-</fieldset>
-<fieldset class="filtres organisations">
-  <legend>Type d'organisation</legend>
-  <ul>
-    {#if chargement}
-      <SqueletteCheckbox />
-      <SqueletteCheckbox />
-      <SqueletteCheckbox />
-      <SqueletteCheckbox />
-    {:else}
-      {#each $financementsFiltre.typesOrganisation as type (type)}
-        <li>
-          <label>
-            <input
-              type="checkbox"
-              value={type}
-              name="filtreOrganisation"
-              bind:group={$rechercheParTypeOrganisation}
-            />
-            <span class="libelle">{type}</span>
-          </label>
-        </li>
-      {/each}
-    {/if}
-  </ul>
-</fieldset>
+{#if !estConnecte}
+  <fieldset class="filtres regions">
+    <legend>Région</legend>
+    <label class="colonne">
+      <span class="libelle">Sélectionner une région</span>
+      <SelectRegion
+        bind:region={$rechercheParRegion}
+        optionDefautSelectionnable
+      />
+    </label>
+  </fieldset>
+{/if}
+{#if !estConnecte}
+  <fieldset class="filtres organisations">
+    <legend>Type d'organisation</legend>
+    <ul>
+      {#if chargement}
+        <SqueletteCheckbox />
+        <SqueletteCheckbox />
+        <SqueletteCheckbox />
+        <SqueletteCheckbox />
+      {:else}
+        {#each $financementsFiltre.typesOrganisation as type (type)}
+          <li>
+            <label>
+              <input
+                type="checkbox"
+                value={type}
+                name="filtreOrganisation"
+                bind:group={$rechercheParTypeOrganisation}
+              />
+              <span class="libelle">{type}</span>
+            </label>
+          </li>
+        {/each}
+      {/if}
+    </ul>
+  </fieldset>
+{/if}
 <fieldset class="filtres financements">
   <legend>Type de financement</legend>
   <ul>
