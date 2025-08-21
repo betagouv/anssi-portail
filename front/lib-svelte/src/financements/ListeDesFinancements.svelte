@@ -10,6 +10,8 @@
 
   export let chargement: boolean;
 
+  const estConnecte = profilStore.utilisateurEstConnecte();
+
   let estBureau = false;
   onMount(() => {
     const mql = window.matchMedia('(min-width: 992px)');
@@ -33,7 +35,7 @@
         <EnteteFiltres />
       </summary>
       <div class="barre-filtres">
-        <FiltresFinancements {chargement} />
+        <FiltresFinancements {chargement} {estConnecte} />
       </div>
     </details>
   </div>
@@ -45,7 +47,7 @@
       <div class="sommaire sommaire-deplie">
         <div class="barre-filtres">
           <EnteteFiltres />
-          <FiltresFinancements {chargement} />
+          <FiltresFinancements {chargement} {estConnecte} />
         </div>
       </div>
     {/if}
