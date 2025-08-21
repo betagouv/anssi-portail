@@ -55,31 +55,42 @@
   let observateurDIntersection: IntersectionObserver;
 
   const observeLesSections = () => {
+    const toutesLesSections = contenu.querySelectorAll('section:not(.corps)');
+    let titreActif: HTMLHeadingElement | undefined =
+      toutesLesSections[0].querySelector<HTMLHeadingElement>('h2') ?? undefined;
     observateurDIntersection = new IntersectionObserver(
-      (sections) => {
-        sections.forEach((section) => {
-          const titreDeLaSection = section.target.querySelector('h2');
-          const lesLiens = contenu.querySelectorAll(
-            `.sommaire ul li a[href='#${titreDeLaSection!.id}']`
+      (entrees) => {
+        // ATTENTION :`entrees` PEUT contenir toutes les sections lors du premier appel mais
+        // contient uniquement les sections qui entrent ou sortent du viewport lors des appels suivants !
+        const liensActifs = contenu.querySelectorAll('.sommaire ul li.actif a');
+        let titreAActiver =
+          entrees
+            .filter((e) => e.isIntersecting)
+            .map((entree) => entree.target.querySelector('h2'))
+            .filter((titre) => !!titre)[0] ?? titreActif;
+
+        liensActifs.forEach((lien) =>
+          lien.parentElement!.classList.remove('actif')
+        );
+
+        if (titreAActiver) {
+          const liens = contenu.querySelectorAll<HTMLElement>(
+            `.sommaire ul li a[href='#${titreAActiver.id}']`
           );
+          liens.forEach((lien) => lien.parentElement!.classList.add('actif'));
 
-          if (!lesLiens || !lesLiens.length) return;
+          const menuMobileVisible = contenu.querySelector('#section-active');
+          if (menuMobileVisible)
+            menuMobileVisible.textContent = titreAActiver.textContent;
 
-          if (section.isIntersecting) {
-            lesLiens.forEach((l) => l.parentElement!.classList.add('actif'));
-
-            const menuMobileVisible = contenu.querySelector('#section-active');
-            if (menuMobileVisible)
-              menuMobileVisible.textContent = titreDeLaSection!.textContent;
-          } else
-            lesLiens.forEach((l) => l.parentElement!.classList.remove('actif'));
-        });
+          titreActif = titreAActiver;
+        }
       },
-      { rootMargin: '-10% 0% -20% 0%' }
+      {
+        rootMargin: '-20% 0% -80% 0%',
+      }
     );
-
-    const lesSections = contenu.querySelectorAll('section');
-    lesSections.forEach((s) => observateurDIntersection.observe(s));
+    toutesLesSections.forEach((s) => observateurDIntersection.observe(s));
   };
 
   const attendChargementImages = async () => {
