@@ -1,49 +1,14 @@
 <script lang="ts">
-  import axios from 'axios';
-  import { onMount } from 'svelte';
   import DetailsFinancement from './DetailsFinancement.svelte';
-  import type { ResumeFinancement } from './financement';
   import ListeDesFinancements from './ListeDesFinancements.svelte';
-  import { financementsStore } from './stores/financements.store';
-
-  type ReponseAxios = {
-    id: number;
-    nom: string;
-    financeur: string;
-    entitesElligibles: string[];
-    typesDeFinancement: string[];
-    perimetresGeographiques: string[];
-    regions: string[];
-  }[];
-
-  let financements: ResumeFinancement[] | undefined;
-  let financementSeclectionne: ResumeFinancement | undefined;
-  let chargement: boolean = true;
 
   const idFinancement = Number(
     new URLSearchParams(window.location.search).get('idFinancement')
   );
-
-  onMount(async () => {
-    try {
-      chargement = true;
-      const reponse = await axios.get<ReponseAxios>('/api/financements');
-      financements = reponse.data;
-    } catch {
-      financements = [];
-    } finally {
-      chargement = false;
-      financementsStore.initialise(financements ?? []);
-    }
-  });
-
-  $: financementSeclectionne = financements?.find(
-    (f) => f.id === idFinancement
-  );
 </script>
 
-{#if financementSeclectionne}
-  <DetailsFinancement resumeFinancement={financementSeclectionne} />
-{:else if !idFinancement}
-  <ListeDesFinancements {chargement} />
+{#if idFinancement}
+  <DetailsFinancement />
+{:else}
+  <ListeDesFinancements />
 {/if}
