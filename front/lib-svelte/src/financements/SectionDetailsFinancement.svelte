@@ -16,11 +16,11 @@
 {/if}
 
 <style lang="scss">
-  :global a {
-    display: inline-flex;
-    text-decoration: underline;
-  }
   section {
+    :global(a) {
+      display: inline-flex;
+      text-decoration: underline;
+    }
     .contenu-section {
       display: flex;
       flex-direction: column;
