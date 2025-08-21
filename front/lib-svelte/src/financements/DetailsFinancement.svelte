@@ -294,10 +294,6 @@
         flex-direction: column;
         align-items: flex-start;
         flex: 1 0 0;
-        .financePar {
-          margin-top: 24px;
-          margin-bottom: 32px;
-        }
       }
     }
   }
