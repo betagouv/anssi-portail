@@ -217,8 +217,12 @@
     }
 
     .titreTags {
+      color: var(--gris-aide-saisie);
       text-transform: uppercase;
-      margin-top: 40px 0 0 0;
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
     }
 
     .tags {
@@ -227,7 +231,6 @@
       align-content: flex-start;
       align-self: stretch;
       flex-wrap: wrap;
-      margin-top: 16px 0 0 0;
       gap: 8px;
     }
   }
