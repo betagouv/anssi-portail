@@ -171,7 +171,7 @@
       display: flex;
       flex-direction: column;
       position: sticky;
-      top: 0;
+      top: 24px;
     }
 
     ul {
