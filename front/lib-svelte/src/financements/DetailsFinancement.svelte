@@ -256,7 +256,7 @@
     h1 {
       font-size: 2.5rem;
       line-height: 2.875rem;
-      margin: 0 0 8px;
+      margin: 0 0 16px;
 
       @include a-partir-de(md) {
         font-size: 3.5rem;
