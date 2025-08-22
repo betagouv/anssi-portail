@@ -40,6 +40,10 @@
         <LienNavigationMobile href="/" label="Accueil" />
       {/if}
       <LienNavigationMobile
+        href={estConnecte ? '/ma-maturite' : '/test-maturite/'}
+        label={estConnecte ? 'Maturité cyber' : 'Test de maturité cyber'}
+      />
+      <LienNavigationMobile
         href="/catalogue/"
         label={estConnecte
           ? 'Le catalogue des services'
@@ -70,10 +74,6 @@
           />
         </div>
       </details>
-      <LienNavigationMobile
-        href={estConnecte ? '/ma-maturite' : '/test-maturite/'}
-        label={estConnecte ? 'Maturité cyber' : 'Test de maturité cyber'}
-      />
       <details
         class:actif={cheminRelatif === '/promouvoir-messervicescyber/' ||
           cheminRelatif === '/promouvoir-diagnostic-cyber/'}
