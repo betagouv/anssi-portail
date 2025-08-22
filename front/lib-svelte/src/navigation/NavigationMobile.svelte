@@ -95,9 +95,28 @@
           />
         </div>
       </details>
+      <details
+        class:actif={cheminRelatif === '/contacts/' ||
+          cheminRelatif === '/prestataires-labellises/'}
+      >
+        <summary>Contacts utiles</summary>
+        <div class="choix">
+          {#if estConnecte}
+            <LienNavigationMobile
+              href="/contacts/"
+              label="Contacts cyber de votre région"
+              dansMenuDeroulant
+            />
+          {/if}
+          <LienNavigationMobile
+            href="/prestataires-labellises/"
+            label="Prestataires labellisés"
+            dansMenuDeroulant
+          />
+        </div>
+      </details>
 
       {#if estConnecte}
-        <LienNavigationMobile href="/contacts/" label="Contacts utiles" />
         <LienNavigationMobile href="/favoris/" label="Favoris" />
         <LienNavigationMobile
           href="/services-anssi/"
