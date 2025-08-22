@@ -45,15 +45,13 @@
     </details>
     <LienNavigation
       href={estConnecte ? '/ma-maturite' : '/test-maturite/'}
-      label={estConnecte ? 'Maturité cyber' : 'Tester votre maturité cyber'}
+      label={estConnecte ? 'Maturité cyber' : 'Test de maturité cyber'}
     />
     <details
       class:actif={cheminRelatif === '/promouvoir-messervicescyber/' ||
-          cheminRelatif === '/promouvoir-diagnostic-cyber/'}
+        cheminRelatif === '/promouvoir-diagnostic-cyber/'}
     >
-      <summary>
-        Promouvoir
-      </summary>
+      <summary> Promouvoir </summary>
       <div class="choix">
         <LienNavigation
           href="/promouvoir-messervicescyber/"

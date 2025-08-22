@@ -1,22 +1,22 @@
 <script lang="ts">
+  import axios from 'axios';
+  import { onMount } from 'svelte';
+  import { derived } from 'svelte/store';
+  import { profilStore } from '../stores/profil.store';
+  import Etapier from '../ui/Etapier.svelte';
+  import Hero from '../ui/Hero.svelte';
+  import ComparaisonTest from './ComparaisonTest.svelte';
+  import PartageTest from './PartageTest.svelte';
+  import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
+  import SelectRegion from './SelectRegion.svelte';
+  import SelectSecteurActivite from './SelectSecteurActivite.svelte';
+  import SelectTailleOrganisation from './SelectTailleOrganisation.svelte';
   import { etapesTestMaturite } from './TestMaturite.donnees';
+  import { enregistreIdResultatTestPourRevendication } from './resultatTest';
   import {
     questionnaireStore,
     resultatsQuestionnaire,
   } from './stores/questionnaire.store';
-  import Etapier from '../ui/Etapier.svelte';
-  import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
-  import SelectSecteurActivite from './SelectSecteurActivite.svelte';
-  import SelectRegion from './SelectRegion.svelte';
-  import SelectTailleOrganisation from './SelectTailleOrganisation.svelte';
-  import axios from 'axios';
-  import { enregistreIdResultatTestPourRevendication } from './resultatTest';
-  import { profilStore } from '../stores/profil.store';
-  import Hero from '../ui/Hero.svelte';
-  import PartageTest from './PartageTest.svelte';
-  import ComparaisonTest from './ComparaisonTest.svelte';
-  import { onMount } from 'svelte';
-  import { derived } from 'svelte/store';
 
   let afficheResultats = false;
   let introFaite = false;
@@ -139,11 +139,9 @@
   <Hero
     titre="Test de maturité cyber"
     description="Obtenez en 5 minutes une évaluation indicative de la maturité cyber de votre organisation."
-    ariane={enSessionGroupe
-      ? 'Session de groupe'
-      : 'Tester votre maturité cyber'}
+    ariane={enSessionGroupe ? 'Session de groupe' : 'Test de maturité cyber'}
     arianeBranche={enSessionGroupe
-      ? { nom: 'Tester votre maturité cyber', lien: '/test-maturite' }
+      ? { nom: 'Test de maturité cyber', lien: '/test-maturite' }
       : undefined}
     arianeBrancheConnectee={enSessionGroupe
       ? { nom: 'Maturité cyber', lien: '/ma-maturite' }
