@@ -43,20 +43,23 @@
         href={estConnecte ? '/ma-maturite' : '/test-maturite/'}
         label={estConnecte ? 'Maturité cyber' : 'Test de maturité cyber'}
       />
-      <LienNavigationMobile
-        href="/catalogue/"
-        label={estConnecte
-          ? 'Le catalogue des services'
-          : 'Explorer le catalogue complet'}
-      />
       <details
-        class:actif={cheminRelatif === '/parcours-debuter/' ||
-          cheminRelatif === '/parcours-approfondir/'}
+        class:actif={[
+          '/catalogue/',
+          '/nis2/',
+          '/parcours-debuter/',
+          '/parcours-approfondir/',
+        ].includes(cheminRelatif)}
       >
-        <summary>
-          {estConnecte ? 'Nos sélections' : 'Découvrir nos sélections'}
-        </summary>
+        <summary>Catalogue et sélections</summary>
         <div class="choix">
+          <LienNavigationMobile
+            href="/catalogue/"
+            label={estConnecte
+              ? 'Le catalogue des services'
+              : 'Explorer le catalogue'}
+            dansMenuDeroulant
+          />
           <LienNavigationMobile
             href="/nis2/"
             label="Les services pour vous accompagner avec NIS2"
