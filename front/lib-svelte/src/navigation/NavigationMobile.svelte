@@ -1,11 +1,11 @@
 <script lang="ts">
   import { fly } from 'svelte/transition';
 
+  import { mount, onDestroy, onMount, unmount } from 'svelte';
+  import ZoneIdentification from '../identification/ZoneIdentification.svelte';
   import { profilStore } from '../stores/profil.store';
   import LienNavigationMobile from './LienNavigationMobile.svelte';
-  import { mount, onDestroy, onMount, unmount } from 'svelte';
   import MenuBurger from './MenuBurger.svelte';
-  import ZoneIdentification from '../identification/ZoneIdentification.svelte';
 
   const cheminRelatif = window.location.pathname;
   let ouvert = false;
@@ -72,15 +72,13 @@
       </details>
       <LienNavigationMobile
         href={estConnecte ? '/ma-maturite' : '/test-maturite/'}
-        label={estConnecte ? 'Maturité cyber' : 'Tester votre maturité cyber'}
+        label={estConnecte ? 'Maturité cyber' : 'Test de maturité cyber'}
       />
       <details
         class:actif={cheminRelatif === '/promouvoir-messervicescyber/' ||
           cheminRelatif === '/promouvoir-diagnostic-cyber/'}
       >
-        <summary>
-          Promouvoir
-        </summary>
+        <summary> Promouvoir </summary>
         <div class="choix">
           <LienNavigationMobile
             href="/promouvoir-messervicescyber/"
@@ -94,7 +92,6 @@
           />
         </div>
       </details>
-
 
       {#if estConnecte}
         <LienNavigationMobile href="/contacts/" label="Contacts utiles" />

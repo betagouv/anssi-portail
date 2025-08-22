@@ -1,15 +1,15 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import { profilStore } from '../stores/profil.store';
   import Hero from '../ui/Hero.svelte';
   import ComparaisonTest from './ComparaisonTest.svelte';
+  import HistoriqueTests from './HistoriqueTests.svelte';
   import OngletsTest, {
     type CleOnglet,
     clesOnglet,
   } from './OngletsTest.svelte';
-  import { profilStore } from '../stores/profil.store';
-  import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
   import PropositionRefaireTest from './PropositionRefaireTest.svelte';
-  import HistoriqueTests from './HistoriqueTests.svelte';
-  import { onMount } from 'svelte';
+  import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
 
   export let affichePubMsc = true;
   export let afficheRappelReponses = false;
@@ -53,7 +53,7 @@
 <Hero
   titre="Maturité cyber"
   description="Testez la maturité cyber de votre organisation, suivez vos progrès et comparez-vous aux autres organisations."
-  ariane={$profilStore ? 'Maturité cyber' : 'Tester votre maturité cyber'}
+  ariane={$profilStore ? 'Maturité cyber' : 'Test de maturité cyber'}
 />
 
 <PropositionRefaireTest />
