@@ -78,24 +78,6 @@
         </div>
       </details>
       <details
-        class:actif={cheminRelatif === '/promouvoir-messervicescyber/' ||
-          cheminRelatif === '/promouvoir-diagnostic-cyber/'}
-      >
-        <summary> Promouvoir </summary>
-        <div class="choix">
-          <LienNavigationMobile
-            href="/promouvoir-messervicescyber/"
-            label="Promouvoir MesServicesCyber"
-            dansMenuDeroulant
-          />
-          <LienNavigationMobile
-            href="/promouvoir-diagnostic-cyber/"
-            label="Promouvoir le diagnostic cyber"
-            dansMenuDeroulant
-          />
-        </div>
-      </details>
-      <details
         class:actif={cheminRelatif === '/contacts/' ||
           cheminRelatif === '/prestataires-labellises/'}
       >
@@ -115,7 +97,7 @@
           />
         </div>
       </details>
-
+      <LienNavigationMobile href="/financements/" label="Financements" />
       {#if estConnecte}
         <LienNavigationMobile href="/favoris/" label="Favoris" />
         <LienNavigationMobile
@@ -124,6 +106,24 @@
         />
         <LienNavigationMobile href="/cyberdepart/" label="Diagnostic cyber" />
       {/if}
+      <details
+        class:actif={cheminRelatif === '/promouvoir-messervicescyber/' ||
+          cheminRelatif === '/promouvoir-diagnostic-cyber/'}
+      >
+        <summary> Promouvoir </summary>
+        <div class="choix">
+          <LienNavigationMobile
+            href="/promouvoir-messervicescyber/"
+            label="Promouvoir MesServicesCyber"
+            dansMenuDeroulant
+          />
+          <LienNavigationMobile
+            href="/promouvoir-diagnostic-cyber/"
+            label="Promouvoir le diagnostic cyber"
+            dansMenuDeroulant
+          />
+        </div>
+      </details>
     </div>
   </nav>
 {/if}
