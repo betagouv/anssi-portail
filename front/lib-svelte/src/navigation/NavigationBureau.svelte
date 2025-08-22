@@ -51,24 +51,6 @@
       </div>
     </details>
     <details
-      class:actif={cheminRelatif === '/promouvoir-messervicescyber/' ||
-        cheminRelatif === '/promouvoir-diagnostic-cyber/'}
-    >
-      <summary> Promouvoir </summary>
-      <div class="choix">
-        <LienNavigation
-          href="/promouvoir-messervicescyber/"
-          label="Promouvoir MesServicesCyber"
-          dansMenuDeroulant
-        />
-        <LienNavigation
-          href="/promouvoir-diagnostic-cyber/"
-          label="Promouvoir le diagnostic cyber"
-          dansMenuDeroulant
-        />
-      </div>
-    </details>
-    <details
       class:actif={cheminRelatif === '/contacts/' ||
         cheminRelatif === '/prestataires-labellises/'}
     >
@@ -88,12 +70,31 @@
         />
       </div>
     </details>
-
+    <LienNavigation href="/financements/" label="Financements" />
     {#if estConnecte}
       <LienNavigation href="/favoris/" label="Favoris" />
       <LienNavigation href="/services-anssi/" label="Services ANSSI utilisés" />
       <LienNavigation href="/cyberdepart/" label="Diagnostic cyber" />
-    {:else}
+    {/if}
+    <details
+      class:actif={cheminRelatif === '/promouvoir-messervicescyber/' ||
+        cheminRelatif === '/promouvoir-diagnostic-cyber/'}
+    >
+      <summary> Promouvoir </summary>
+      <div class="choix">
+        <LienNavigation
+          href="/promouvoir-messervicescyber/"
+          label="Promouvoir MesServicesCyber"
+          dansMenuDeroulant
+        />
+        <LienNavigation
+          href="/promouvoir-diagnostic-cyber/"
+          label="Promouvoir le diagnostic cyber"
+          dansMenuDeroulant
+        />
+      </div>
+    </details>
+    {#if !estConnecte}
       <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart"
       ></lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
     {/if}
