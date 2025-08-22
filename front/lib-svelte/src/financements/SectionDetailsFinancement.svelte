@@ -24,8 +24,12 @@
 <style lang="scss">
   section {
     :global(a) {
-      display: inline-flex;
+      display: inline;
       text-decoration: underline;
+
+      &:after {
+        display: none;
+      }
     }
   }
 </style>
