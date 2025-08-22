@@ -3,14 +3,17 @@
 
 @use '../../assets/styles/responsive' as *;
 
-.prestataires-qualifies .contenu-section {
-  display: grid;
-  gap: 24px;
-  flex: 1 0 0;
-  grid-template-columns: 1fr;
-  margin-bottom: auto;
+.prestataires-qualifies {
+  padding: 48px var(--gouttiere) 72px;
+  .contenu-section {
+    display: grid;
+    gap: 24px;
+    flex: 1 0 0;
+    grid-template-columns: 1fr;
+    margin-bottom: auto;
 
-  @include a-partir-de(sm) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    @include a-partir-de(sm) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 }
