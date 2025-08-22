@@ -3,31 +3,87 @@
 
 @use '../../assets/styles/responsive' as *;
 
-.carte.ressource,
-.carte.service {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+a.carte {
+  &:after {
+    display: none;
+  }
+}
+
+.carte {
   display: flex;
   flex-direction: column;
-  width: 286px;
-  text-decoration: none;
-  color: var(--noir);
   align-items: stretch;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  color: var(--noir);
+  text-decoration: none;
+
+  &:hover {
+    .contenu {
+      background: #f6f6f6;
+    }
+  }
+
+  &:active {
+    .contenu {
+      background: var(--gris-secondaire-fond-clique);
+    }
+  }
+
+  &:focus {
+    border: 1px solid #ddd;
+  }
+
+  .contenu {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 24px;
+    background: white;
+    border-radius: 8px;
+
+    h6 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      line-height: 1.75rem;
+      margin: 0 0 8px;
+    }
+    .description {
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      margin: 0 0 12px;
+    }
+
+    .labels {
+      span {
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+      }
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+.carte.ressource,
+.carte.service {
+  width: 286px;
   gap: 0;
 
   @include a-partir-de(md) {
     height: 406px;
   }
 
-  &:after {
-    display: none;
-  }
-
   &:hover {
     figure img {
       transform: translateY(0);
     }
+  }
 
+  &:active {
     .contenu {
       background: #f6f6f6;
     }
@@ -76,15 +132,9 @@
   }
 
   .contenu {
-    background: white;
     z-index: 1;
     border-bottom: 4px solid black;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+    border-radius: 0 0 8px 8px;
 
     .nom-item {
       margin: 0;
@@ -94,7 +144,8 @@
       font-weight: 400;
       text-wrap: nowrap;
       text-overflow: ellipsis;
-      overflow: hidden;    }
+      overflow: hidden;
+    }
 
     .description {
       font-weight: bold;
