@@ -101,12 +101,6 @@
         </div>
       </details>
       <LienNavigationMobile href="/financements/" label="Financements" />
-      {#if estConnecte}
-        <LienNavigationMobile
-          href="/services-anssi/"
-          label="Services ANSSI utilisés"
-        />
-      {/if}
       <details
         class:actif={cheminRelatif === '/promouvoir-messervicescyber/' ||
           cheminRelatif === '/promouvoir-diagnostic-cyber/'}
@@ -125,6 +119,12 @@
           />
         </div>
       </details>
+      {#if estConnecte}
+        <LienNavigationMobile
+          href="/services-anssi/"
+          label="Services ANSSI utilisés"
+        />
+      {/if}
     </div>
   </nav>
 {/if}
