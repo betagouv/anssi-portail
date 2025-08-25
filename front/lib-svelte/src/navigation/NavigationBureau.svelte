@@ -76,7 +76,6 @@
     <LienNavigation href="/financements/" label="Financements" />
     {#if estConnecte}
       <LienNavigation href="/services-anssi/" label="Services ANSSI utilisés" />
-      <LienNavigation href="/cyberdepart/" label="Diagnostic cyber" />
     {/if}
     <details
       class:actif={cheminRelatif === '/promouvoir-messervicescyber/' ||
@@ -96,10 +95,8 @@
         />
       </div>
     </details>
-    {#if !estConnecte}
-      <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart"
-      ></lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
-    {/if}
+    <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart"
+    ></lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
   </div>
 </nav>
 
