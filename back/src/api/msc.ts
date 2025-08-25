@@ -19,7 +19,6 @@ import { ressourceAnnuaireRegions } from './ressourceAnnuaireRegions';
 import { ressourceAnnuaireSecteursActivite } from './ressourceAnnuaireSecteursActivite';
 import { ressourceAnnuaireTranchesEffectif } from './ressourceAnnuaireTranchesEffectif';
 import { ressourceAvisUtilisateur } from './ressourceAvisUtilisateur';
-import { ressourceContacts } from './ressourceContacts';
 import { ressourceFinancement } from './ressourceFinancement';
 import { ressourceFinancements } from './ressourceFinancements';
 import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte';
@@ -177,8 +176,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
 
   app.use('/oidc/apres-deconnexion', ressourceApresDeconnexionOIDC());
-
-  app.use('/api/contacts', ressourceContacts(configurationServeur));
 
   app.use('/api/profil', ressourceProfil(configurationServeur));
 
