@@ -34,9 +34,9 @@
     <button class="fermer" on:click={() => (ouvert = false)}>Fermer</button>
     <ZoneIdentification estMobile />
     <div class="choix">
+      <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart"
+      ></lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
       {#if !estConnecte}
-        <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart"
-        ></lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
         <LienNavigationMobile href="/" label="Accueil" />
       {/if}
       <LienNavigationMobile
@@ -106,7 +106,6 @@
           href="/services-anssi/"
           label="Services ANSSI utilisés"
         />
-        <LienNavigationMobile href="/cyberdepart/" label="Diagnostic cyber" />
       {/if}
       <details
         class:actif={cheminRelatif === '/promouvoir-messervicescyber/' ||
