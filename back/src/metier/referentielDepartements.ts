@@ -122,8 +122,8 @@ export const estCodeDepartement = (code: CodeDepartement) =>
   departements.map((d) => d.code).includes(code);
 
 export const regionDuDepartement = (
-  codeDepartement: CodeDepartement
-): CodeRegion =>
-  departements.find((d) => d.code === codeDepartement)!.codeRegion;
+  codeDepartement: CodeDepartement | undefined
+): CodeRegion | undefined =>
+  departements.find((d) => d.code === codeDepartement)?.codeRegion;
 
 export type CodeDepartement = (typeof codeDepartement)[number];

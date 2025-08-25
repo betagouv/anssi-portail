@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { Organisation } from '../metier/utilisateur';
 import { ConfigurationServeur } from './configurationServeur';
 
 const ressourceProfil = ({
@@ -21,13 +22,17 @@ const ressourceProfil = ({
         reponse.clearCookie('session');
       } finally {
         const utilisateurConnecte = requete.utilisateur;
+        const organisation: Organisation =
+          await utilisateurConnecte?.organisation();
         reponse.send({
-          email: requete.utilisateur?.email,
+          email: utilisateurConnecte?.email,
           nom: utilisateurConnecte?.nom,
           prenom: utilisateurConnecte?.prenom,
-          siret: (await utilisateurConnecte?.organisation())?.siret,
+          siret: organisation?.siret,
           estAgentAnssi: await utilisateurConnecte?.estAgentAnssi(),
           idListeFavoris: utilisateurConnecte?.idListeFavoris,
+          codeDepartement: organisation?.departement,
+          codeRegion: organisation?.region,
         });
       }
     }

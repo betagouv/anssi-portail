@@ -1,12 +1,12 @@
-import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { configurationDeTestDuServeur, fauxAdaptateurJWT } from './fauxObjets';
-import { creeServeur } from '../../src/api/msc';
-import request from 'supertest';
-import { encodeSession, enObjet } from './cookie';
 import { JsonWebTokenError } from 'jsonwebtoken';
+import assert from 'node:assert';
+import { beforeEach, describe, it } from 'node:test';
+import request from 'supertest';
+import { creeServeur } from '../../src/api/msc';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
+import { encodeSession, enObjet } from './cookie';
+import { configurationDeTestDuServeur, fauxAdaptateurJWT } from './fauxObjets';
 import { jeanneDupont } from './objetsPretsALEmploi';
 
 describe('La ressource Profil', () => {
@@ -42,10 +42,9 @@ describe('La ressource Profil', () => {
       assert.equal(reponse.body.email, 'jeanne.dupont@user.com');
       assert.equal(reponse.body.siret, '13000766900018');
       assert.equal(reponse.body.estAgentAnssi, true);
-      assert.equal(
-        reponse.body.idListeFavoris,
-        jeanneDupont.idListeFavoris
-      );
+      assert.equal(reponse.body.idListeFavoris, jeanneDupont.idListeFavoris);
+      assert.equal(reponse.body.codeDepartement, '86');
+      assert.equal(reponse.body.codeRegion, 'FR-971');
     });
 
     it('supprime la session si le token JWT est invalide', async () => {
