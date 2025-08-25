@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import axios from 'axios';
-  import type { Contacts } from './contacts';
   import Hero from '../ui/Hero.svelte';
+  import { contactsParRegion } from './contacts.donnees';
+  import { estCodeRegion, type Contacts } from './contacts.type';
 
-  let contacts: Contacts;
+  let contacts: Contacts | undefined = undefined;
 
-  onMount(async () => {
-    const reponseContacts = await axios.get<Contacts>('/api/contacts');
-    contacts = reponseContacts.data;
-  });
+  const [codeRegionExtrait] = window.location.pathname.split('/').slice(-1);
+  const codeRegion = codeRegionExtrait.toUpperCase();
+  if (estCodeRegion(codeRegion)) {
+    contacts = contactsParRegion[codeRegion];
+  }
 </script>
 
 <Hero
