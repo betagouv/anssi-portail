@@ -135,7 +135,7 @@
       border: none;
       background: none;
       text-decoration: underline solid var(--noir) 1px;
-      -webkit-text-decoration: underline solid var(--noir) 1px;
+      -webkit-text-decoration: underline;
       text-underline-offset: 4px;
       cursor: pointer;
       font-size: 0.875rem;
