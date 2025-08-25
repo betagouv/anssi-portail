@@ -26,6 +26,7 @@
     :global(a) {
       display: inline;
       text-decoration: underline;
+      -webkit-text-decoration: underline;
 
       &:after {
         display: none;
