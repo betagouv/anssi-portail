@@ -1,8 +1,8 @@
-import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
+import assert from 'node:assert';
+import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc';
-import assert from 'node:assert';
 import { configurationDeTestDuServeur, fauxMiddleware } from './fauxObjets';
 
 describe("La ressource d'une page Jekyll connectée", () => {
@@ -28,7 +28,7 @@ describe("La ressource d'une page Jekyll connectée", () => {
           },
         },
       });
-      const reponse = await request(serveur).get('/contacts');
+      const reponse = await request(serveur).get('/favoris');
 
       assert.equal(middelwareAppele, true);
       assert.equal(reponse.status, 200);
