@@ -74,9 +74,6 @@
       </div>
     </details>
     <LienNavigation href="/financements/" label="Financements" />
-    {#if estConnecte}
-      <LienNavigation href="/services-anssi/" label="Services ANSSI utilisés" />
-    {/if}
     <details
       class:actif={cheminRelatif === '/promouvoir-messervicescyber/' ||
         cheminRelatif === '/promouvoir-diagnostic-cyber/'}
