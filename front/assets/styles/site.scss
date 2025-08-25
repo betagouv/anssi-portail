@@ -114,7 +114,7 @@ a {
 
   &.lien {
     text-decoration: underline solid var(--noir) 1px;
-    -webkit-text-decoration: underline solid var(--noir) 1px;
+    -webkit-text-decoration: underline;
     text-underline-offset: 4px;
 
     &:hover {
@@ -340,7 +340,7 @@ footer {
 
       &:hover {
         text-decoration: underline solid var(--noir) 1px;
-        -webkit-text-decoration: underline solid var(--noir) 1px;
+        -webkit-text-decoration: underline;
       }
     }
 
