@@ -1,11 +1,11 @@
-import { derived } from "svelte/store";
-import { catalogueStore } from "./catalogue.store";
+import { derived } from 'svelte/store';
 import {
   DroitAcces,
   FormatRessource,
   Source,
   Typologie,
-} from "../Catalogue.types";
+} from '../Catalogue.types';
+import { catalogueStore } from './catalogue.store';
 
 type NombreResultats = {
   parDroitAcces: Partial<Record<DroitAcces, number>>;
@@ -20,12 +20,12 @@ export const nombreResultats = derived<
 >([catalogueStore], ([$catalogueStore]) => {
   const creeObjetDepuisEnum = <T>(
     type: { [s: string]: T },
-    calculNombre: (valeur: T) => number,
+    calculNombre: (valeur: T) => number
   ) => Object.fromEntries(Object.values(type).map((f) => [f, calculNombre(f)]));
 
   const nombreParDroitAcces = (droitAcces: DroitAcces) =>
     $catalogueStore.items.filter(
-      (item) => item.droitsAcces && item.droitsAcces.includes(droitAcces),
+      (item) => item.droitsAcces && item.droitsAcces.includes(droitAcces)
     ).length;
 
   const nombreParTypologie = (typologie: Typologie) =>
@@ -37,9 +37,18 @@ export const nombreResultats = derived<
   const nombreParSource = (source: Source) =>
     $catalogueStore.items.filter((item) => {
       if (!item.sources) return false;
-      if (!item.sources.includes(Source.ANSSI) && source === Source.PARTENAIRES)
-        return true;
-      return item.sources.includes(source);
+      switch (source) {
+        case Source.PARTENAIRES:
+          return !item.sources.includes(Source.ANSSI);
+        case Source.ANSSI_TOUTES:
+          return item.sources.includes(Source.ANSSI);
+        case Source.ANSSI: {
+          const secondaire = item.sources.find((s) => s !== Source.ANSSI);
+          return !secondaire;
+        }
+        default:
+          return item.sources.includes(source);
+      }
     }).length;
 
   return {
@@ -47,7 +56,7 @@ export const nombreResultats = derived<
     parTypologie: creeObjetDepuisEnum(Typologie, nombreParTypologie),
     parFormatDeRessource: creeObjetDepuisEnum(
       FormatRessource,
-      nombreParFormatDeRessource,
+      nombreParFormatDeRessource
     ),
     parSource: creeObjetDepuisEnum(Source, nombreParSource),
   };
