@@ -41,6 +41,7 @@ export enum FormatRessource {
 }
 
 export enum Source {
+  ANSSI_TOUTES = 'ANSSI_TOUTES',
   ANSSI = 'ANSSI',
   CERTFR = 'CERT-FR',
   INNOVATION_ANSSI = 'Innovation ANSSI',
