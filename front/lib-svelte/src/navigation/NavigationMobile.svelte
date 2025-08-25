@@ -77,6 +77,9 @@
           />
         </div>
       </details>
+      {#if estConnecte}
+        <LienNavigationMobile href="/favoris/" label="Favoris" />
+      {/if}
       <details
         class:actif={cheminRelatif === '/contacts/' ||
           cheminRelatif === '/prestataires-labellises/'}
@@ -99,7 +102,6 @@
       </details>
       <LienNavigationMobile href="/financements/" label="Financements" />
       {#if estConnecte}
-        <LienNavigationMobile href="/favoris/" label="Favoris" />
         <LienNavigationMobile
           href="/services-anssi/"
           label="Services ANSSI utilisés"

@@ -50,6 +50,9 @@
         />
       </div>
     </details>
+    {#if estConnecte}
+      <LienNavigation href="/favoris/" label="Favoris" />
+    {/if}
     <details
       class:actif={cheminRelatif === '/contacts/' ||
         cheminRelatif === '/prestataires-labellises/'}
@@ -72,7 +75,6 @@
     </details>
     <LienNavigation href="/financements/" label="Financements" />
     {#if estConnecte}
-      <LienNavigation href="/favoris/" label="Favoris" />
       <LienNavigation href="/services-anssi/" label="Services ANSSI utilisés" />
       <LienNavigation href="/cyberdepart/" label="Diagnostic cyber" />
     {/if}
