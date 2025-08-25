@@ -20,6 +20,7 @@ import { ressourceAnnuaireSecteursActivite } from './ressourceAnnuaireSecteursAc
 import { ressourceAnnuaireTranchesEffectif } from './ressourceAnnuaireTranchesEffectif';
 import { ressourceAvisUtilisateur } from './ressourceAvisUtilisateur';
 import { ressourceContacts } from './ressourceContacts';
+import { ressourceFinancement } from './ressourceFinancement';
 import { ressourceFinancements } from './ressourceFinancements';
 import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte';
 import { ressourceInfosSite } from './ressourceInfosSite';
@@ -39,7 +40,6 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
-import { ressourceFinancement } from './ressourceFinancement';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -136,6 +136,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'resultats-session-groupe',
     'financements',
     'prestataires-labellises',
+    'contacts',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
@@ -145,7 +146,12 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourcePagesJekyll(configurationServeur, 'favoris-partages')
   );
 
-  ['contacts', 'ma-maturite', 'favoris', 'services-anssi'].forEach((page) =>
+  app.use(
+    '/contacts/:code',
+    ressourcePagesJekyll(configurationServeur, 'contacts')
+  );
+
+  ['ma-maturite', 'favoris', 'services-anssi'].forEach((page) =>
     app.use(
       `/${page}`,
       ressourcePagesJekyllConnectees(configurationServeur, page)
