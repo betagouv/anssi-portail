@@ -73,7 +73,7 @@
     z-index: 2;
     box-sizing: border-box;
 
-    @include a-partir-de(desktop) {
+    @include a-partir-de(lg) {
       display: none;
     }
 
