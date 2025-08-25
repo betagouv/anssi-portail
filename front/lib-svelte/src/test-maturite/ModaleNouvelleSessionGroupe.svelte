@@ -8,7 +8,7 @@
   let codeSession: string;
   let codeSessionFormate: string;
   let canvas: HTMLCanvasElement;
-  let lienPourParticipants : string;
+  let lienPourParticipants: string;
 
   export const ouvre = ({
     code,
@@ -27,16 +27,16 @@
   $: codeSessionFormate =
     codeSession && codeSession.slice(0, 3) + '-' + codeSession.slice(3);
 
-  const copieLienParticipant = ()=>{
+  const copieLienParticipant = () => {
     navigator.clipboard.writeText(lienPourParticipants).then(function () {
       alert('Lien participant copié dans le presse papier.');
     });
-  }
+  };
 </script>
 
 <dialog bind:this={modaleNouvelleSession}>
   <div class="modale">
-    <BoutonFermerModale on:click={ferme}/>
+    <BoutonFermerModale on:click={ferme} />
     <h4>Nouvelle session de groupe</h4>
     <div class="contenu">
       <div class="information">
@@ -51,7 +51,10 @@
         <div class="conteneur-qrcode">
           <canvas id="canvas" bind:this={canvas}></canvas>
         </div>
-        <button title="Copier dans le presse-papier le lien de participation à la session de groupe" on:click={copieLienParticipant}>
+        <button
+          title="Copier dans le presse-papier le lien de participation à la session de groupe"
+          on:click={copieLienParticipant}
+        >
           Copier le lien participant
         </button>
       </div>
@@ -132,6 +135,7 @@
       border: none;
       background: none;
       text-decoration: underline solid var(--noir) 1px;
+      -webkit-text-decoration: underline solid var(--noir) 1px;
       text-underline-offset: 4px;
       cursor: pointer;
       font-size: 0.875rem;
