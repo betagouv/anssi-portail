@@ -1,10 +1,10 @@
-import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
-import request from 'supertest';
-import { creeServeur } from '../../src/api/msc';
 import assert from 'node:assert';
+import { beforeEach, describe, it } from 'node:test';
 import { join } from 'path';
+import request from 'supertest';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin';
+import { creeServeur } from '../../src/api/msc';
 import {
   configurationDeTestDuServeur,
   fauxFournisseurDeChemin,
@@ -77,6 +77,60 @@ describe('La ressource pages jekyll', () => {
       await request(serveur).get('/favoris-partages/monSuperId');
 
       assert.equal(nomPageDemande!, 'favoris-partages');
+    });
+  });
+
+  describe('sur demande de la page liste des contacts', () => {
+    it('répond 200', async () => {
+      const reponse = await request(serveur).get('/contacts');
+
+      assert.equal(reponse.status, 200);
+    });
+
+    it('renvoie un contenu html', async () => {
+      const reponse = await request(serveur).get('/contacts');
+
+      assert.notEqual(reponse.headers['content-type'], undefined);
+      assert.match(reponse.headers['content-type'], /html/);
+    });
+
+    it('sers le fichier html de jekyll', async () => {
+      let nomPageDemande: string;
+      fournisseurChemin.cheminPageJekyll = (nomPage: string) => {
+        nomPageDemande = nomPage;
+        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+      };
+
+      await request(serveur).get('/contacts');
+
+      assert.equal(nomPageDemande!, 'contacts');
+    });
+  });
+
+  describe('sur demande de la page contacts', () => {
+    it('répond 200', async () => {
+      const reponse = await request(serveur).get('/contacts/FR-IDF');
+
+      assert.equal(reponse.status, 200);
+    });
+
+    it('renvoie un contenu html', async () => {
+      const reponse = await request(serveur).get('/contacts/FR-IDF');
+
+      assert.notEqual(reponse.headers['content-type'], undefined);
+      assert.match(reponse.headers['content-type'], /html/);
+    });
+
+    it('sers le fichier html de jekyll', async () => {
+      let nomPageDemande: string;
+      fournisseurChemin.cheminPageJekyll = (nomPage: string) => {
+        nomPageDemande = nomPage;
+        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+      };
+
+      await request(serveur).get('/contacts/FR-IDF');
+
+      assert.equal(nomPageDemande!, 'contacts');
     });
   });
 });
