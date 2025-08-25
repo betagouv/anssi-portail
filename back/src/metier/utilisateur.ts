@@ -4,19 +4,23 @@ export class Organisation {
   nom: string;
   siret: string;
   departement: string | null;
+  region: string | undefined;
 
   constructor({
     nom,
     siret,
     departement,
+    codeRegion,
   }: {
     nom: string;
     siret: string;
     departement: string | null;
+    codeRegion?: string;
   }) {
     this.nom = nom;
     this.siret = siret;
     this.departement = departement;
+    this.region = codeRegion;
   }
 
   estAnssi = () => {
