@@ -1,7 +1,9 @@
 <script lang="ts">
   import axios from 'axios';
-  import { onDestroy, onMount, tick } from 'svelte';
+  import { onMount } from 'svelte';
+  import Article from '../ui/Article.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
+  import ListeDeBadges from '../ui/ListeDeBadges.svelte';
   import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
   import type { Financement } from './financement';
   import MenuFinancement from './MenuFinancement.svelte';
@@ -25,13 +27,21 @@
   };
 
   let financement: Financement | undefined = $state();
+  let afficheNouveau = $state(true);
+
   let entreesMenuFinancement: Record<string, string> | undefined = $state();
 
   const idFinancement = Number(
     new URLSearchParams(window.location.search).get('idFinancement')
   );
 
+  let estMobile = $state(false);
   onMount(async () => {
+    const mql = window.matchMedia('(max-width: 768px)');
+    const metAJourEstMobile = () => (estMobile = mql.matches);
+    mql.addEventListener('change', metAJourEstMobile);
+    metAJourEstMobile();
+
     try {
       const reponse = await axios.get<ReponseAxios>(
         `/api/financements/${idFinancement}`
@@ -54,83 +64,44 @@
   let contenu: HTMLDivElement;
   let observateurDIntersection: IntersectionObserver;
 
-  const observeLesSections = () => {
-    const toutesLesSections = contenu.querySelectorAll('section:not(.corps)');
-    let titreActif: HTMLHeadingElement | undefined =
-      toutesLesSections[0].querySelector<HTMLHeadingElement>('h2') ?? undefined;
-    observateurDIntersection = new IntersectionObserver(
-      (entrees) => {
-        // ATTENTION :`entrees` PEUT contenir toutes les sections lors du premier appel mais
-        // contient uniquement les sections qui entrent ou sortent du viewport lors des appels suivants !
-        const liensActifs = contenu.querySelectorAll('.sommaire ul li.actif a');
-        let titreAActiver =
-          entrees
-            .filter((e) => e.isIntersecting)
-            .map((entree) => entree.target.querySelector('h2'))
-            .filter((titre) => !!titre)[0] ?? titreActif;
+  // const observeLesSections = () => {
+  //   const toutesLesSections = contenu.querySelectorAll('section:not(.corps)');
+  //   let titreActif: HTMLHeadingElement | undefined =
+  //     toutesLesSections[0].querySelector<HTMLHeadingElement>('h2') ?? undefined;
+  //   observateurDIntersection = new IntersectionObserver(
+  //     (entrees) => {
+  //       // ATTENTION :`entrees` PEUT contenir toutes les sections lors du premier appel mais
+  //       // contient uniquement les sections qui entrent ou sortent du viewport lors des appels suivants !
+  //       const liensActifs = contenu.querySelectorAll('.sommaire ul li.actif a');
+  //       let titreAActiver =
+  //         entrees
+  //           .filter((e) => e.isIntersecting)
+  //           .map((entree) => entree.target.querySelector('h2'))
+  //           .filter((titre) => !!titre)[0] ?? titreActif;
 
-        liensActifs.forEach((lien) =>
-          lien.parentElement!.classList.remove('actif')
-        );
+  //       liensActifs.forEach((lien) =>
+  //         lien.parentElement!.classList.remove('actif')
+  //       );
 
-        if (titreAActiver) {
-          const liens = contenu.querySelectorAll<HTMLElement>(
-            `.sommaire ul li a[href='#${titreAActiver.id}']`
-          );
-          liens.forEach((lien) => lien.parentElement!.classList.add('actif'));
+  //       if (titreAActiver) {
+  //         const liens = contenu.querySelectorAll<HTMLElement>(
+  //           `.sommaire ul li a[href='#${titreAActiver.id}']`
+  //         );
+  //         liens.forEach((lien) => lien.parentElement!.classList.add('actif'));
 
-          const menuMobileVisible = contenu.querySelector('#section-active');
-          if (menuMobileVisible)
-            menuMobileVisible.textContent = titreAActiver.textContent;
+  //         const menuMobileVisible = contenu.querySelector('#section-active');
+  //         if (menuMobileVisible)
+  //           menuMobileVisible.textContent = titreAActiver.textContent;
 
-          titreActif = titreAActiver;
-        }
-      },
-      {
-        rootMargin: '-20% 0% -80% 0%',
-      }
-    );
-    toutesLesSections.forEach((s) => observateurDIntersection.observe(s));
-  };
-
-  const attendChargementImages = async () => {
-    const images = contenu.querySelectorAll('img');
-    await Promise.all(
-      Array.from(images).map((image) => {
-        if (image.complete) return Promise.resolve();
-        return new Promise((res) => {
-          image.addEventListener('load', res);
-          image.addEventListener('error', res);
-        });
-      })
-    );
-  };
-
-  const scroll = (cible: string) => {
-    if (cible) {
-      tick().then(async () => {
-        const ancre = contenu && contenu.querySelector(cible);
-        if (ancre) {
-          await attendChargementImages();
-          ancre.scrollIntoView(true);
-        }
-      });
-    }
-  };
-
-  $effect(() => {
-    if (financement) {
-      scroll(window.location.hash);
-      tick().then(observeLesSections);
-    }
-  });
-
-  onDestroy(() => {
-    const lesSections = contenu!.querySelectorAll('section');
-    lesSections.forEach((s) => {
-      if (observateurDIntersection) observateurDIntersection.unobserve(s);
-    });
-  });
+  //         titreActif = titreAActiver;
+  //       }
+  //     },
+  //     {
+  //       rootMargin: '-20% 0% -80% 0%',
+  //     }
+  //   );
+  //   toutesLesSections.forEach((s) => observateurDIntersection.observe(s));
+  // };
 </script>
 
 <section class="chapeau">
@@ -166,25 +137,20 @@
   </div>
 </section>
 
-<div bind:this={contenu}>
-  {#if financement}
-    {#if entreesMenuFinancement}
-      <MenuFinancement
-        dictionnaireAncreLibelle={entreesMenuFinancement}
-        mode="mobile"
-        tags={financement.entitesElligibles}
-      />
-    {/if}
+<label>
+  <input type="checkbox" bind:checked={afficheNouveau} />
+  Nouvel affichage
+</label>
 
-    <section class="corps">
-      <div class="contenu-section">
-        {#if entreesMenuFinancement}
-          <MenuFinancement
-            dictionnaireAncreLibelle={entreesMenuFinancement}
-            mode="desktop"
-            tags={financement.entitesElligibles}
-          />
-        {/if}
+{#if financement && afficheNouveau}
+  <section class="nouveau corps">
+    <div class="contenu-section">
+      <Article surligneUnSeulElementDansTableDesMatieres>
+        {#snippet apresMenu()}
+          {#if !estMobile}
+            <ListeDeBadges badges={financement!.entitesElligibles} />
+          {/if}
+        {/snippet}
         <div class="fiche">
           <div class="financePar">
             <p>Financé par : <strong>{financement.financeur}</strong></p>
@@ -199,35 +165,91 @@
             titre="Opérations éligibles"
             detail={financement.operationsEligibles}
           />
-
           <SectionDetailsFinancement
             ancre="beneficiaires"
             titre="Bénéficiaires"
             detail={financement.benificiaires}
           />
-
           <SectionDetailsFinancement
             ancre="montant"
             titre="Montant"
             detail={financement.montant}
           />
-
           <SectionDetailsFinancement
             ancre="conditions"
             titre="Conditions"
             detail={financement.condition}
           />
-          <lab-anssi-lien
-            href="#"
-            titre="Haut de page"
-            icone="arrow-up-fill"
-            positionIcone="gauche"
-          ></lab-anssi-lien>
         </div>
-      </div>
-    </section>
+        <lab-anssi-lien
+          href="#"
+          titre="Haut de page"
+          icone="arrow-up-fill"
+          positionIcone="gauche"
+        ></lab-anssi-lien>
+      </Article>
+    </div>
+  </section>
+{:else if financement}
+  {#if entreesMenuFinancement}
+    <MenuFinancement
+      dictionnaireAncreLibelle={entreesMenuFinancement}
+      mode="mobile"
+      tags={financement.entitesElligibles}
+    />
   {/if}
-</div>
+
+  <section class="corps">
+    <div class="contenu-section">
+      {#if entreesMenuFinancement}
+        <MenuFinancement
+          dictionnaireAncreLibelle={entreesMenuFinancement}
+          mode="desktop"
+          tags={financement.entitesElligibles}
+        />
+      {/if}
+      <div class="fiche">
+        <div class="financePar">
+          <p>Financé par : <strong>{financement.financeur}</strong></p>
+        </div>
+        <SectionDetailsFinancement
+          ancre="objectifs"
+          titre="Objectifs"
+          detail={financement.objectifs}
+        />
+        <SectionDetailsFinancement
+          ancre="operations-eligibles"
+          titre="Opérations éligibles"
+          detail={financement.operationsEligibles}
+        />
+
+        <SectionDetailsFinancement
+          ancre="beneficiaires"
+          titre="Bénéficiaires"
+          detail={financement.benificiaires}
+        />
+
+        <SectionDetailsFinancement
+          ancre="montant"
+          titre="Montant"
+          detail={financement.montant}
+        />
+
+        <SectionDetailsFinancement
+          ancre="conditions"
+          titre="Conditions"
+          detail={financement.condition}
+        />
+        <lab-anssi-lien
+          href="#"
+          titre="Haut de page"
+          icone="arrow-up-fill"
+          positionIcone="gauche"
+        ></lab-anssi-lien>
+      </div>
+    </div>
+  </section>
+{/if}
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
@@ -306,6 +328,19 @@
         align-items: flex-start;
         flex: 1 0 0;
         gap: 32px;
+        // margin-bottom: 32px;
+      }
+    }
+
+    // remove me
+    &.nouveau,
+    &.nouveau .contenu-section {
+      display: block;
+    }
+    &.nouveau .contenu-section {
+      gap: 24px;
+      .fiche {
+        margin-bottom: 32px;
       }
     }
   }
