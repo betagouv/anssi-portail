@@ -34,11 +34,6 @@
           dansMenuDeroulant
         />
         <LienNavigation
-          href="/nis2/"
-          label="Les services pour vous accompagner avec NIS2"
-          dansMenuDeroulant
-        />
-        <LienNavigation
           href="/parcours-debuter/"
           label="Les services pour se lancer"
           dansMenuDeroulant
@@ -46,6 +41,11 @@
         <LienNavigation
           href="/parcours-approfondir/"
           label="Les services pour approfondir"
+          dansMenuDeroulant
+        />
+        <LienNavigation
+          href="/nis2/"
+          label="Les services pour vous accompagner avec NIS2"
           dansMenuDeroulant
         />
       </div>

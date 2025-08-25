@@ -61,11 +61,6 @@
             dansMenuDeroulant
           />
           <LienNavigationMobile
-            href="/nis2/"
-            label="Les services pour vous accompagner avec NIS2"
-            dansMenuDeroulant
-          />
-          <LienNavigationMobile
             href="/parcours-debuter/"
             label="Les services pour se lancer"
             dansMenuDeroulant
@@ -73,6 +68,11 @@
           <LienNavigationMobile
             href="/parcours-approfondir/"
             label="Les services pour approfondir"
+            dansMenuDeroulant
+          />
+          <LienNavigationMobile
+            href="/nis2/"
+            label="Les services pour vous accompagner avec NIS2"
             dansMenuDeroulant
           />
         </div>
