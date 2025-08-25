@@ -1,3 +1,4 @@
+import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
 import {
   DroitAcces,
@@ -6,9 +7,8 @@ import {
   Source,
   Typologie,
 } from '../../../src/catalogue/Catalogue.types';
-import { nombreResultats } from '../../../src/catalogue/stores/nombreResultats.store';
-import { get } from 'svelte/store';
 import { catalogueStore } from '../../../src/catalogue/stores/catalogue.store';
+import { nombreResultats } from '../../../src/catalogue/stores/nombreResultats.store';
 import {
   demainSpecialisteCyber,
   guidesTechniques,
@@ -130,6 +130,17 @@ describe('Le store du nombre de résultats', () => {
 
       expect(parSource[Source.ANSSI]).toBe(0);
       expect(parSource[Source.PARTENAIRES]).toBe(0);
+    });
+
+    it('pour tous les items ANSSI', () => {
+      initialiseStoreCatalogue([guidesTechniques(), mss(), kitCyber()]);
+
+      const parSource = get(nombreResultats).parSource;
+
+      expect(parSource[Source.ANSSI_TOUTES]).toBe(2);
+      expect(parSource[Source.INNOVATION_ANSSI]).toBe(1);
+      expect(parSource[Source.CERTFR]).toBe(0);
+      expect(parSource[Source.ANSSI]).toBe(1);
     });
   });
 });

@@ -24,7 +24,7 @@ SECURISER:
   - /services/mon-espace-nis2
   - /services/NIS2
   - /ressources/publications
-  - /ressources/nl-industries
+  - /ressources/nl-industrie
   - /services/conseil-technique
   - /services/pack-parcours-secu
 REAGIR:
@@ -73,7 +73,7 @@ TOUS:
   - /ressources/ebios
   - /ressources/prestas-ebios
   - /ressources/publications
-  - /ressources/nl-industries
+  - /ressources/nl-industrie
   - /services/assistance-reponse-incidents
   - /services/transmission-signalements
   - /ressources/revue-presse
