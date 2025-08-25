@@ -1,13 +1,13 @@
-import { describe, expect, it } from 'vitest';
-import { rechercheParSource } from '../../../src/catalogue/stores/rechercheParSource.store';
-import { Source } from '../../../src/catalogue/Catalogue.types';
-import { guidesTechniques, kitCyber, mss } from './objetsExemples';
 import { get } from 'svelte/store';
+import { describe, expect, it } from 'vitest';
+import { Source } from '../../../src/catalogue/Catalogue.types';
+import { rechercheParSource } from '../../../src/catalogue/stores/rechercheParSource.store';
+import { guidesTechniques, kitCyber, mss } from './objetsExemples';
 
 describe('La recherche par source', () => {
   describe("lors d'un filtre ANSSI", () => {
     it("ne retourne pas l'item lorsque la primaire est ANSSI et la secondaire sélectionnée ne correspond pas", () => {
-      rechercheParSource.set([Source.ANSSI, Source.CERTFR]);
+      rechercheParSource.set([Source.ANSSI_TOUTES, Source.CERTFR]);
 
       const resultat = rechercheParSource.ok(mss()); // mss = innovation
 
@@ -15,7 +15,7 @@ describe('La recherche par source', () => {
     });
 
     it("ne retourne pas l'item lorsque la primaire est ANSSI et qu'il n'a pas de source secondaire", () => {
-      rechercheParSource.set([Source.ANSSI, Source.CERTFR]);
+      rechercheParSource.set([Source.ANSSI_TOUTES, Source.CERTFR]);
 
       const resultat = rechercheParSource.ok(guidesTechniques()); // uniquement ANSSI
 
@@ -23,11 +23,27 @@ describe('La recherche par source', () => {
     });
 
     it('ne retourne pas un item partenaire', () => {
-      rechercheParSource.set([Source.ANSSI]);
+      rechercheParSource.set([Source.ANSSI_TOUTES, Source.ANSSI]);
 
       const resultat = rechercheParSource.ok(kitCyber()); // Gendarmerie
 
       expect(resultat).toBe(false);
+    });
+
+    it("retourne l'item lorsque la primaire est ANSSI et que la secondaire sélectionnée correspond", () => {
+      rechercheParSource.set([Source.ANSSI_TOUTES,  Source.INNOVATION_ANSSI]);
+
+      const resultat = rechercheParSource.ok(mss()); // mss = innovation
+
+      expect(resultat).toBe(true);
+    });
+
+    it("retourne l'item qui n'a que la primaire ANSSI", () => {
+      rechercheParSource.set([Source.ANSSI_TOUTES,  Source.ANSSI]);
+
+      const resultat = rechercheParSource.ok(guidesTechniques()); // uniquement ANSSI
+
+      expect(resultat).toBe(true);
     });
   });
 
