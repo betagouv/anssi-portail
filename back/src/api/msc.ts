@@ -135,7 +135,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'session-groupe',
     'resultats-session-groupe',
     'financements',
-    'prestataires-qualifies',
+    'prestataires-labellises',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
