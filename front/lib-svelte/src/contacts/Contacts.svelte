@@ -229,7 +229,6 @@
   .contacts {
     display: flex;
     flex-direction: column;
-    padding: 32px 16px;
     gap: 24px;
     @include a-partir-de(lg) {
       align-items: center;
