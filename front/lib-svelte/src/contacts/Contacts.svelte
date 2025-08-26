@@ -103,12 +103,35 @@
           </p>
         </div>
       </div>
+    {:else}
+      <h4>Sélectionnez une région</h4>
+      <div class="regions">
+        {#each Object.entries(nomParRegion).sort( (a, b) => a[1].localeCompare(b[1]) ) as [codeRegion, nom] (codeRegion)}
+          <lab-anssi-lien
+            href="/contacts/{codeRegion}"
+            apparence="lien"
+            variante="primaire"
+            taille="lg"
+            titre={nom}
+            icone="arrow-right-line"
+            positionIcone="gauche"
+          ></lab-anssi-lien>
+        {/each}
+      </div>
     {/if}
   </div>
 </section>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive.scss' as *;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  section {
+    padding: 48px var(--gouttiere) 72px;
+  }
 
   h3,
   h2,
@@ -130,6 +153,20 @@
     margin-bottom: 8px;
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  h4 {
+    color: #161616;
+    font-size: 1.375rem;
+    font-weight: bold;
+    line-height: 1.75rem;
+    margin: 0;
+    margin-bottom: 2rem;
+
+    @include a-partir-de(lg) {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
   }
 
   p {
@@ -184,7 +221,19 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     @include a-partir-de(lg) {
-      width: 726px;
+      width: 792px;
+    }
+  }
+
+  .regions {
+    display: grid;
+    grid-template-rows: 1fr;
+    gap: 1rem;
+
+    @include a-partir-de(md) {
+      grid-auto-flow: column;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(10, 1fr);
     }
   }
 </style>
