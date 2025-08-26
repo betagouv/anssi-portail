@@ -1,21 +1,34 @@
 <script lang="ts">
+  import type { Branche } from '../ui/filAriane';
   import Hero from '../ui/Hero.svelte';
-  import { contactsParRegion } from './contacts.donnees';
+  import { contactsParRegion, nomParRegion } from './contacts.donnees';
   import { estCodeRegion, type Contacts } from './contacts.type';
 
   let contacts: Contacts | undefined = undefined;
+  let nomDeLaRegion: string | undefined;
+  let branche: Branche | undefined;
+  let description: string =
+    'Des contacts cyber de proximité pour vous orienter et répondre à vos questions.';
 
   const [codeRegionExtrait] = window.location.pathname.split('/').slice(-1);
   const codeRegion = codeRegionExtrait.toUpperCase();
   if (estCodeRegion(codeRegion)) {
     contacts = contactsParRegion[codeRegion];
+    nomDeLaRegion = nomParRegion[codeRegion];
+    description = '';
+    branche = {
+      nom: 'Contacts cyber de votre région',
+      lien: '/contacts/',
+    };
   }
 </script>
 
 <Hero
-  titre="Contacts utiles"
-  description="Des contacts cyber utiles de proximité pour vous orienter."
-  ariane="Contacts utiles"
+  titre={nomDeLaRegion ?? 'Contacts cyber de votre région'}
+  {description}
+  ariane={nomDeLaRegion ?? 'Contacts cyber de votre région'}
+  arianeBranche={branche}
+  arianeBrancheConnectee={branche}
 ></Hero>
 
 <section>
