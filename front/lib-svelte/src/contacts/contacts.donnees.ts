@@ -1,26 +1,5 @@
 import type { CodeRegion, Contacts } from './contacts.type';
 
-export const nomParRegion: Record<CodeRegion, string> = {
-  'FR-ARA': 'Auvergne-Rhône-Alpes',
-  'FR-BFC': 'Bourgogne-Franche-Comté',
-  'FR-BRE': 'Bretagne',
-  'FR-CVL': 'Centre-Val de Loire',
-  'FR-COM': "Collectivités d'Outre-Mer",
-  'FR-20R': 'Corse',
-  'FR-GES': 'Grand Est',
-  'FR-HDF': 'Hauts-de-France',
-  'FR-IDF': 'Ile-de-France',
-  'FR-976': 'Mayotte',
-  'FR-NAQ': 'Nouvelle-Aquitaine',
-  'FR-NOR': 'Normandie',
-  'FR-OCC': 'Occitanie',
-  'FR-PDL': 'Pays de la Loire',
-  'FR-PAC': "Provence-Alpes-Côte d'Azur",
-  'FR-972': 'Martinique',
-  'FR-971': 'Guadeloupe',
-  'FR-973': 'Guyane',
-  'FR-974': 'La Réunion',
-};
 export const contactsParRegion: Record<CodeRegion, Contacts> = {
   'FR-ARA': {
     COT: {

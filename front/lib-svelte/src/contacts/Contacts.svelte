@@ -1,26 +1,44 @@
 <script lang="ts">
+  import axios from 'axios';
+  import { onMount } from 'svelte';
   import type { Branche } from '../ui/filAriane';
   import Hero from '../ui/Hero.svelte';
-  import { contactsParRegion, nomParRegion } from './contacts.donnees';
-  import { estCodeRegion, type Contacts } from './contacts.type';
+  import { contactsParRegion } from './contacts.donnees';
+  import {
+    estCodeRegion,
+    type CodeRegion,
+    type Contacts,
+  } from './contacts.type';
+
+  type Region = { nom: string; codeIso: CodeRegion };
 
   let contacts: Contacts | undefined = undefined;
   let nomDeLaRegion: string | undefined;
   let branche: Branche | undefined;
   let description: string =
     'Des contacts cyber de proximité pour vous orienter et répondre à vos questions.';
+  let nomParRegion: Region[] = [];
 
   const [codeRegionExtrait] = window.location.pathname.split('/').slice(-1);
   const codeRegion = codeRegionExtrait.toUpperCase();
   if (estCodeRegion(codeRegion)) {
     contacts = contactsParRegion[codeRegion];
-    nomDeLaRegion = nomParRegion[codeRegion];
     description = '';
     branche = {
       nom: 'Contacts cyber de votre région',
       lien: '/contacts/',
     };
   }
+
+  onMount(async () => {
+    const reponse = await axios.get<Region[]>('/api/annuaire/regions');
+    nomParRegion = reponse.data;
+    if (estCodeRegion(codeRegion)) {
+      nomDeLaRegion = nomParRegion.find(
+        (region) => region.codeIso === codeRegion
+      )?.nom;
+    }
+  });
 </script>
 
 <Hero
@@ -106,9 +124,9 @@
     {:else}
       <h4>Sélectionnez une région</h4>
       <div class="regions">
-        {#each Object.entries(nomParRegion).sort( (a, b) => a[1].localeCompare(b[1]) ) as [codeRegion, nom] (codeRegion)}
+        {#each nomParRegion.sort( (a, b) => a.nom.localeCompare(b.nom) ) as { nom, codeIso } (codeIso)}
           <lab-anssi-lien
-            href="/contacts/{codeRegion}"
+            href="/contacts/{codeIso}"
             apparence="lien"
             variante="primaire"
             taille="lg"
