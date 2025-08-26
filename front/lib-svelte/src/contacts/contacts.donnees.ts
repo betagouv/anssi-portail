@@ -81,6 +81,11 @@ export const contactsParRegion: Record<CodeRegion, Contacts> = {
       telephone: '0 800 730 647',
     },
     COT: { nom: 'Guillaume CRÉPIN', email: 'ile-de-france@ssi.gouv.fr' },
+    campus: {
+      adresse: '5-7 rue Bellini 92800 La Défense',
+      nom: 'Le Campus Cyber',
+      siteWeb: 'https://campuscyber.fr/',
+    },
   },
   'FR-NOR': {
     CSIRT: {
@@ -109,7 +114,7 @@ export const contactsParRegion: Record<CodeRegion, Contacts> = {
       email: 'nouvelle-aquitaine@ssi.gouv.fr',
     },
     campus: {
-      nom: 'Campus Cyber Nouvelle Aquitaine',
+      nom: 'Campus Régional de Cybersécurité et de Confiance Numérique de Nouvelle Aquitaine',
       siteWeb: 'https://www.campuscyber-na.fr/',
       adresse:
         'Parc Ampéris - Batiment Colibri - 3eme étage - 4 Rue Adrienne Bolland, 33600 Pessac',
@@ -126,6 +131,12 @@ export const contactsParRegion: Record<CodeRegion, Contacts> = {
     COT: {
       nom: 'Rémy DAUDIGNY /Christophe FLEURY',
       email: 'occitanie@ssi.gouv.fr',
+    },
+    campus: {
+      nom: 'Le Centre Régional Cybersécurité Cyber’Occ',
+      adresse: "Data Valley 1000 l'Occitanie 31670 Labège",
+      siteWeb: 'https://www.cyberocc.com/',
+      email: 'contact@cyberocc.fr',
     },
   },
   'FR-PDL': {
@@ -149,7 +160,7 @@ export const contactsParRegion: Record<CodeRegion, Contacts> = {
     COT: { nom: 'Kevin HEYDON /Célia NOWAK', email: 'paca@ssi.gouv.fr' },
     campus: {
       nom: 'Campus Cyber Région Sud Euromed',
-      siteWeb: 'https://www.linkedin.com/company/campus-cyber-r%C3%A9gion-sud/',
+      siteWeb: 'https://ares.campuscyber-regionsud.fr/',
       adresse: 'Tour Mirabeau 1 Boulevard Saade - Quai Arenc 13002 Marseille',
       email: 'contact@campuscyber-regionsud.fr',
     },
