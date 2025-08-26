@@ -150,6 +150,10 @@
 
   section {
     padding: 48px var(--gouttiere) 72px;
+
+    .contenu-section {
+      max-width: 996px;
+    }
   }
 
   h3,
