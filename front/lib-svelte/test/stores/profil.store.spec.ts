@@ -9,6 +9,8 @@ const mocks = vi.hoisted(() => ({
       nom: 'Dupond',
       email: 'jeanne.dupond@mail.fr',
       siret: '123456789',
+      codeDepartement: '44',
+      codeRegion: 'FR-PDL',
     },
   })),
 }));
@@ -33,5 +35,7 @@ describe('Le store du profil', () => {
     expect(profil!.nom).toEqual('Dupond');
     expect(profil!.email).toEqual('jeanne.dupond@mail.fr');
     expect(profil!.siret).toEqual('123456789');
+    expect(profil!.codeDepartement).toEqual('44');
+    expect(profil!.codeRegion).toEqual('FR-PDL');
   });
 });

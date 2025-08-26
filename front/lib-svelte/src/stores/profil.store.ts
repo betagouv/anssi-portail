@@ -9,6 +9,8 @@ type Profil = {
   siret: string;
   estAgentAnssi: boolean;
   idListeFavoris: string;
+  codeDepartement: string | undefined;
+  codeRegion: string | undefined;
 };
 
 const { subscribe, set } = writable<Profil | undefined>(undefined);
