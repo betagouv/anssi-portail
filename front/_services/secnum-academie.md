@@ -5,6 +5,7 @@ nom: SecNumAcadémie
 titreHtml: SecNumAcadémie
 avecFicheDetaillee: true
 description: "Se former avec le MOOC de l'ANSSI"
+lien: https://secnumacademie.gouv.fr/
 illustration: secnumacademie/secnum-academie.png
 sources:
   - ANSSI
