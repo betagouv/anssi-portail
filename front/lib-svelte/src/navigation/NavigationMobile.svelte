@@ -27,6 +27,7 @@
   });
 
   $: estConnecte = !!$profilStore;
+  $: codeRegion = $profilStore?.codeRegion ?? '';
 </script>
 
 {#if ouvert}
@@ -81,18 +82,16 @@
         <LienNavigationMobile href="/favoris/" label="Favoris" />
       {/if}
       <details
-        class:actif={cheminRelatif === '/contacts/' ||
+        class:actif={cheminRelatif.startsWith('/contacts/') ||
           cheminRelatif === '/prestataires-labellises/'}
       >
         <summary>Contacts utiles</summary>
         <div class="choix">
-          {#if estConnecte}
-            <LienNavigationMobile
-              href="/contacts/"
-              label="Contacts cyber de votre région"
-              dansMenuDeroulant
-            />
-          {/if}
+          <LienNavigationMobile
+            href={`/contacts/${codeRegion}`}
+            label="Contacts cyber de votre région"
+            dansMenuDeroulant
+          />
           <LienNavigationMobile
             href="/prestataires-labellises/"
             label="Prestataires labellisés"
