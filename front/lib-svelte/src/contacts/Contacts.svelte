@@ -25,7 +25,7 @@
     contacts = contactsParRegion[codeRegion];
     description = '';
     branche = {
-      nom: 'Contacts cyber de votre région',
+      nom: 'Contacts cyber',
       lien: '/contacts/',
     };
   }
@@ -42,9 +42,9 @@
 </script>
 
 <Hero
-  titre={nomDeLaRegion ?? 'Contacts cyber de votre région'}
+  titre={nomDeLaRegion ?? 'Contacts cyber'}
   {description}
-  ariane={nomDeLaRegion ?? 'Contacts cyber de votre région'}
+  ariane={nomDeLaRegion ?? 'Contacts cyber'}
   arianeBranche={branche}
   arianeBrancheConnectee={branche}
 ></Hero>

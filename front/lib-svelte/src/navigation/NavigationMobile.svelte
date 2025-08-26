@@ -89,7 +89,7 @@
         <div class="choix">
           <LienNavigationMobile
             href={`/contacts/${codeRegion}`}
-            label="Contacts cyber de votre région"
+            label="Contacts cyber"
             dansMenuDeroulant
             prefixCheminActif="/contacts"
           />
