@@ -16,9 +16,9 @@
   @use '../../../assets/styles/responsive' as *;
 
   a {
+    border-bottom: 2px solid transparent;
     padding: 16px 8px;
     font-size: 0.875rem;
-    border-bottom: none;
 
     &:hover {
       background: var(--menu-fond-hover);
@@ -30,7 +30,7 @@
 
     &.actif {
       font-weight: 500;
-      border-bottom: 2px solid var(--jaune-msc);
+      border-bottom-color: var(--jaune-msc);
     }
   }
 
