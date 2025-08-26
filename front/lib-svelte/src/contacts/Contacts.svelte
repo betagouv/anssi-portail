@@ -123,19 +123,20 @@
       </div>
     {:else}
       <h4>Sélectionnez une région</h4>
-      <div class="regions">
+      <ul class="regions">
         {#each nomParRegion.sort( (a, b) => a.nom.localeCompare(b.nom) ) as { nom, codeIso } (codeIso)}
-          <lab-anssi-lien
-            href="/contacts/{codeIso}"
-            apparence="lien"
-            variante="primaire"
-            taille="lg"
-            titre={nom}
-            icone="arrow-right-line"
-            positionIcone="gauche"
-          ></lab-anssi-lien>
+          <li>
+            <lab-anssi-icone nom="arrow-right-line"></lab-anssi-icone>
+            <lab-anssi-lien
+              href="/contacts/{codeIso}"
+              apparence="lien"
+              variante="primaire"
+              taille="md"
+              titre={nom}
+            ></lab-anssi-lien>
+          </li>
         {/each}
-      </div>
+      </ul>
     {/if}
   </div>
 </section>
@@ -244,6 +245,7 @@
   }
 
   .regions {
+    padding: 0;
     display: grid;
     grid-template-rows: 1fr;
     gap: 1rem;
@@ -252,6 +254,11 @@
       grid-auto-flow: column;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: repeat(10, 1fr);
+    }
+
+    li {
+      display: flex;
+      gap: 4px;
     }
   }
 </style>
