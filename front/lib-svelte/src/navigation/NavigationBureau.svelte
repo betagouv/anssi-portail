@@ -98,6 +98,9 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
+  * {
+    box-sizing: border-box;
+  }
 
   .conteneur-nav {
     padding: 0 var(--gouttiere);
@@ -118,6 +121,7 @@
       align-items: center;
 
       details {
+        border-bottom: 2px solid transparent;
         font-size: 0.875rem;
 
         &:hover {
@@ -130,7 +134,7 @@
 
         &.actif {
           font-weight: 500;
-          border-bottom: 2px solid var(--jaune-msc);
+          border-bottom-color: var(--jaune-msc);
         }
       }
 
