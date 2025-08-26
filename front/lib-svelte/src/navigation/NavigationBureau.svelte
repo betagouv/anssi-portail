@@ -29,9 +29,7 @@
       <div class="choix">
         <LienNavigation
           href="/catalogue/"
-          label={estConnecte
-            ? 'Le catalogue des services'
-            : 'Explorer le catalogue'}
+          label="Le catalogue cyber complet"
           dansMenuDeroulant
         />
         <LienNavigation
