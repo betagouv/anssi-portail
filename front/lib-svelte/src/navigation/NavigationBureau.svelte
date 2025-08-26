@@ -64,6 +64,7 @@
           href={`/contacts/${codeRegion}`}
           label="Contacts cyber de votre région"
           dansMenuDeroulant
+          prefixCheminActif="/contacts"
         />
         <LienNavigation
           href="/prestataires-labellises/"

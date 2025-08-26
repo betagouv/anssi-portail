@@ -2,13 +2,16 @@
   export let href: string;
   export let label: string;
   export let dansMenuDeroulant = false;
+  export let prefixCheminActif: string | undefined = undefined;
 
   const cheminRelatif = window.location.pathname;
 </script>
 
 <a
   {href}
-  class:actif={cheminRelatif === href}
+  class:actif={prefixCheminActif
+    ? cheminRelatif.startsWith(prefixCheminActif)
+    : cheminRelatif === href}
   class:dans-menu-deroulant={dansMenuDeroulant}>{label}</a
 >
 
