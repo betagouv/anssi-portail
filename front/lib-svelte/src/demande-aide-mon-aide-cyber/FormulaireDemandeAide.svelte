@@ -11,6 +11,7 @@
   import Alerte from '../ui/Alerte.svelte';
 
   let formulaire: Formulaire;
+  export let id: string = '';
   export let enCoursEnvoi: boolean;
   export let formulaireSoumis: boolean;
 
@@ -27,12 +28,16 @@
 
   onMount(() => {
     let urlSearchParams = new URLSearchParams(window.location.search);
-    let parametreEmailUtilisateurMAC = urlSearchParams.get('email-utilisateur-mac');
+    let parametreEmailUtilisateurMAC = urlSearchParams.get(
+      'email-utilisateur-mac'
+    );
     if (parametreEmailUtilisateurMAC) {
       utilisateurMACPrerempli = true;
       estEnRelationAvecUnUtilisateur = true;
-      emailUtilisateurMAC = atob(decodeURIComponent(parametreEmailUtilisateurMAC));
-      return
+      emailUtilisateurMAC = atob(
+        decodeURIComponent(parametreEmailUtilisateurMAC)
+      );
+      return;
     }
     let nomUsage = urlSearchParams.get('nom-usage');
     identifiantAidant = urlSearchParams.get('identifiant-utilisateur-mac');
@@ -41,11 +46,11 @@
       utilisateurMACPrerempli = true;
       estEnRelationAvecUnUtilisateur = true;
       emailUtilisateurMAC = new TextDecoder().decode(
-              Uint8Array.from(atob(decodeURIComponent(nomUsage)), (car) =>
-                      car.charCodeAt(0)
-              )
-      )
-      return
+        Uint8Array.from(atob(decodeURIComponent(nomUsage)), (car) =>
+          car.charCodeAt(0)
+        )
+      );
+      return;
     }
   });
 
@@ -66,7 +71,7 @@
   };
 </script>
 
-<Formulaire classe="carte-formulaire" bind:this={formulaire}>
+<Formulaire classe="carte-formulaire" bind:this={formulaire} {id}>
   <div class="champ recherche-organisation">
     <label class="libelle" for="entite">Recherchez votre organisation</label>
     <SelectionOrganisation

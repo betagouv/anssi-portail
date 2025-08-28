@@ -135,6 +135,7 @@
           {formulaireSoumis}
           {enCoursEnvoi}
           {erreurs}
+          id="demande-diagnostic"
         />
       {:else}
         <ConfirmationCreationDemandeAide />
