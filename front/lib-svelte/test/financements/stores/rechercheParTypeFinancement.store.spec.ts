@@ -18,7 +18,7 @@ describe('La recherche par type de financement', () => {
   });
 
   it('est vide quand on la réinitialise', () => {
-    rechercheParTypeFinancement.set(["Aide à l'innovation"]);
+    rechercheParTypeFinancement.set(["Aide à l'innovation cyber"]);
 
     rechercheParTypeFinancement.reinitialise();
 
@@ -27,7 +27,7 @@ describe('La recherche par type de financement', () => {
 
   describe('permet de filtrer les financements', () => {
     it('en rejetant un financement dont le type de financement ne correspond pas', () => {
-      rechercheParTypeFinancement.set(["Aide à l'innovation"]);
+      rechercheParTypeFinancement.set(["Aide à l'innovation cyber"]);
 
       const resultat = rechercheParTypeFinancement.ok(resumeFinancement);
 
@@ -35,7 +35,10 @@ describe('La recherche par type de financement', () => {
     });
 
     it('en incluant un financement dont le type de financement correspond', () => {
-      rechercheParTypeFinancement.set(['Formation', "Aide à l'innovation"]);
+      rechercheParTypeFinancement.set([
+        'Formation',
+        "Aide à l'innovation cyber",
+      ]);
 
       const resultat = rechercheParTypeFinancement.ok(resumeFinancement);
 

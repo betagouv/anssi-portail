@@ -18,10 +18,13 @@ export const financementsFiltre = derived(
         rechercheParTypeFinancement.ok(f) &&
         rechercheParTypeOrganisation.ok(f)
     );
-    
+
     const typesFinancement = [
       ...new Set($financementsStore.map((t) => t.typesDeFinancement).flat()),
-    ].sort();
+    ].sort((a, b) => {
+      if (a === "Aide à l'innovation cyber") return 1;
+      return a.localeCompare(b);
+    });
 
     const typesOrganisation = [
       ...new Set($financementsStore.map((t) => t.entitesElligibles).flat()),
