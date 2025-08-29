@@ -1,7 +1,7 @@
+import { get } from 'svelte/store';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { financementsStore } from '../../../src/financements/stores/financements.store';
 import { financementsFiltre } from '../../../src/financements/stores/financementsFiltre.store';
-import { get } from 'svelte/store';
 
 describe('Le store qui contient la liste des financements', () => {
   beforeAll(() => {
@@ -19,7 +19,7 @@ describe('Le store qui contient la liste des financements', () => {
         id: 2,
         nom: 'Cyber PME 2',
         financeur: 'BPI France',
-        typesDeFinancement: ['Formation', "Aide à l'innovation"],
+        typesDeFinancement: ['Formation', "Aide à l'innovation cyber"],
         entitesElligibles: [
           'PME',
           'TPE',
@@ -36,9 +36,9 @@ describe('Le store qui contient la liste des financements', () => {
 
   it('retourne la liste dédupliquée des types de financements existants', () => {
     const typesFinancementAttendus = [
-      "Aide à l'innovation",
       'Audits',
       'Formation',
+      "Aide à l'innovation cyber",
     ];
 
     const resultat = get(financementsFiltre).typesFinancement;
