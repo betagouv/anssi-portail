@@ -57,7 +57,7 @@
       </div>
 
       <div class="detail">
-        <h3>Resources humaines</h3>
+        <h3>Ressources humaines</h3>
         {#each { length: COLONNES } as _, i (i)}
           <p>{niveauxSelectionnes[i].ressourcesHumaines}</p>
         {/each}
