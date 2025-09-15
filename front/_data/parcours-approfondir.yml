@@ -30,6 +30,9 @@ securiser:
     - /ressources/visa-secu
     - /ressources/visa-secu-produit
     - /ressources/cnil-reco
+    - /services/ads
+    - /services/silene
+
 
 reagir:
   titre: Réagir
