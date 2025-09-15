@@ -23,6 +23,8 @@ SECURISER:
   - /ressources/label-expert-cyber
   - /services/mon-espace-nis2
   - /services/NIS2
+  - /services/silene
+  - /services/ads
   - /ressources/publications
   - /ressources/nl-industrie
   - /services/conseil-technique
@@ -59,6 +61,8 @@ TOUS:
   - /services/mon-service-securise
   - /ressources/cyber-13questions
   - /ressources/guides-hygiene
+  - /services/silene
+  - /services/ads
   - /ressources/visa-secu
   - /ressources/visa-secu-produit
   - /ressources/cyber-enjeux
