@@ -136,9 +136,17 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'financements',
     'prestataires-labellises',
     'contacts',
+    "formulaire-matomo"
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
+
+  app.post('/formulaire-matomo', (_requete: Request, reponse: Response) => {
+    reponse
+      .contentType('text/html')
+      .status(200)
+      .sendFileAvecNonce(fournisseurChemin.cheminPageJekyll("formulaire-matomo"));
+  });
 
   app.use(
     '/favoris-partages/:id',
