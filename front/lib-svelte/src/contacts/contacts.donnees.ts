@@ -4,7 +4,7 @@ export const contactsParRegion: Record<CodeRegion, Contacts> = {
   'FR-ARA': {
     COT: {
       nom: 'Mathieu DELAPLACE / Marianne DELARUE',
-      email: 'auvergne-rhone-alpes[@ssi.gouv.fr',
+      email: 'auvergne-rhone-alpes@ssi.gouv.fr',
     },
   },
   'FR-BFC': {
