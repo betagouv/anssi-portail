@@ -98,27 +98,51 @@
 
         <div class="carte-contact">
           <h3>CERT-FR</h3>
-          <ul class="telephone">
-            <li>
-              Depuis la France métropolitaine au <a href="tel:3218">3218</a>
-              (service gratuit + prix d’un appel) ou
-              <a href="tel:09 70 83 32 18">09 70 83 32 18</a>
-            </li>
-            <li>
-              Depuis certaines collectivités territoriales situées en Outre-mer
-              ou depuis l’étranger au <a href="tel:+33 9 70 83 32 18"
-                >+33 9 70 83 32 18</a
-              >
-            </li>
-          </ul>
-          <p class="email">
-            <a href="mailto:cert-fr@ssi.gouv.fr">cert-fr@ssi.gouv.fr</a>
-          </p>
-          <p class="site-web">
-            <a href="https://www.cert.ssi.gouv.fr" target="_blank"
-              >https://www.cert.ssi.gouv.fr</a
-            >
-          </p>
+          <div>
+            <p>
+              Le CERT-FR est l'interlocuteur de référence des entités publiques
+              et régulées (opérateurs d'importance vitale, opérateurs de
+              services essentiels).
+            </p>
+            <br />
+            <p>Contactez le CERT-FR pour :</p>
+            <ul>
+              <li>
+                <a
+                  href="https://club.ssi.gouv.fr/#/declaration-incident"
+                  target="_blank"
+                  >Déclarer un incident et/ou demander une assistance</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://club.ssi.gouv.fr/#/declaration-art-2321-4-1"
+                  target="_blank">Signaler une vulnérabilité produit</a
+                >
+              </li>
+            </ul>
+            <a href="https://www.cert.ssi.gouv.fr/contact/" target="_blank"
+              >Toutes les coordonnées du CERT-FR
+            </a>
+          </div>
+        </div>
+
+        <div class="carte-contact">
+          <h3>17 Cyber</h3>
+          <div>
+            <p>
+              Le 17cyber propose aux particuliers et aux autres entités, un
+              diagnostic permettant d'obtenir des recommandations en cas
+              d'incident et d'être mis en relation avec un policier, un
+              gendarme, un prestataire ou un CSIRT territorial .
+            </p>
+            <br />
+            <a
+              href="https://www.cybermalveillance.gouv.fr/diagnostic"
+              target="_blank"
+              >Aller sur le 17Cyber
+            </a>
+          </div>
         </div>
       </div>
     {:else}
