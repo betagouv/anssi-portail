@@ -8,15 +8,15 @@
   import ComparaisonTest from './ComparaisonTest.svelte';
   import PartageTest from './PartageTest.svelte';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
+  import { enregistreIdResultatTestPourRevendication } from './resultatTest';
   import SelectRegion from './SelectRegion.svelte';
   import SelectSecteurActivite from './SelectSecteurActivite.svelte';
   import SelectTailleOrganisation from './SelectTailleOrganisation.svelte';
-  import { etapesTestMaturite } from './TestMaturite.donnees';
-  import { enregistreIdResultatTestPourRevendication } from './resultatTest';
   import {
     questionnaireStore,
     resultatsQuestionnaire,
   } from './stores/questionnaire.store';
+  import { etapesTestMaturite } from './TestMaturite.donnees';
 
   let afficheResultats = false;
   let introFaite = false;
@@ -121,9 +121,10 @@
     profilStore,
     ($profilStore, set) => {
       if ($profilStore) {
-        axios.get('/api/resultats-test/dernier').then(() => {
-          set(true);
-        });
+        axios
+          .get('/api/resultats-test/dernier')
+          .then(() => set(true))
+          .catch(() => set(false));
       }
     },
     false
