@@ -26,7 +26,7 @@ export const contactsParRegion: Record<CodeRegion, Contacts> = {
       adresse: '5 rue de la Chataigneraie\n35511 \nCesson-Sévigné',
       telephone: '0 800 200 008',
     },
-    COT: { nom: 'Christian CEVAËR', email: 'bretagne@ssi.gouv.fr' },
+    COT: { nom: 'Jérôme LAINE', email: 'bretagne@ssi.gouv.fr' },
     campus: {
       nom: 'Bretagne Cyber Alliance',
       siteWeb: 'https://www.cyberalliance.bzh/',
