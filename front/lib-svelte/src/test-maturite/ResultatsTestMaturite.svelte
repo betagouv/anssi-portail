@@ -68,8 +68,8 @@
     dateRealisation={dateRealisationDernierTest}
     {defilementAutomatique}
   />
-{:else if ongletActif === 'historique'}
+{:else if ongletActif === 'historique' && $profilStore}
   <HistoriqueTests {idResultatTest} />
-{:else}
+{:else if $profilStore}
   <ComparaisonTest testRealise={true} {featureFlagFiltresComparaison} />
 {/if}
