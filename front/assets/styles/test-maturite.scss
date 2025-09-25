@@ -270,7 +270,9 @@ section {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    justify-content: center;
+    @include a-partir-de(sm) {
+      justify-content: center;
+    }
 
     .carte {
       flex: 0 0 282px;
@@ -446,4 +448,3 @@ section {
     }
   }
 }
-
