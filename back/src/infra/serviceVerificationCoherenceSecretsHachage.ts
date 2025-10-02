@@ -56,6 +56,10 @@ export const fabriqueServiceVerificationCoherenceSecretsHachage = ({
   adaptateurEnvironnement: AdaptateurEnvironnement;
 }) => ({
   verifieCoherenceSecrets: async () => {
+    if (adaptateurEnvironnement.maintenance().actif()) {
+      console.log('🏗 Pas de vérification des sels en mode maintenance');
+      return;
+    }
     const empreintesDesSecretsAppliques = await entrepotSecretHachage.tous();
     const tousLesSecretsDeHachageDeLaConfig = adaptateurEnvironnement
       .hachage()
