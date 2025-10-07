@@ -124,7 +124,7 @@
   </div>
   <div class="repartition">
     <div>
-      <h2>Répartition de la maturité cyber</h2>
+      <h2>Baromètre de la maturité cyber</h2>
       <span class="description"
         >Répartition de la maturité cyber des organisations sur l’ensemble des
         tests réalisés.</span
