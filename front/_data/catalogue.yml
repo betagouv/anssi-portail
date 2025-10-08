@@ -29,6 +29,7 @@ SECURISER:
   - /ressources/nl-industrie
   - /services/conseil-technique
   - /services/pack-parcours-secu
+  - /services/mooc-club-ebios
 REAGIR:
   - /services/assistance-reponse-incidents
   - /services/cot
@@ -39,6 +40,7 @@ REAGIR:
   - /ressources/avis-bulletin
   - /ressources/rapport-menace
   - /services/transmission-signalements
+  - ressources/sensy-crise
 SE_FORMER:
   - /ressources/livret-cyber-enjeux
   - /ressources/cyber-enjeux
@@ -53,6 +55,8 @@ SE_FORMER:
   - /ressources/cyber-dico
   - /ressources/risques-cyber
   - /ressources/revue-presse
+  - /services/mooc-club-ebios
+  - ressources/sensy-crise
 TOUS:
   - /ressources/risques-cyber
   - /services/mon-aide-cyber
@@ -76,6 +80,7 @@ TOUS:
   - /services/cot
   - /ressources/ebios
   - /ressources/prestas-ebios
+  - /services/mooc-club-ebios
   - /ressources/publications
   - /ressources/nl-industrie
   - /services/assistance-reponse-incidents
@@ -99,3 +104,4 @@ TOUS:
   - /ressources/malette-cyber
   - /ressources/cnil-reco
   - /ressources/cnil-ensemble
+  - ressources/sensy-crise
