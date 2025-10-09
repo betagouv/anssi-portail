@@ -1,11 +1,11 @@
 ---
 layout: service
 typologie: service
-nom: MOOC Club EBIOS
+nom: MooC EBIOS RM
 avecFicheDetaillee: true
 description: Se former à l’analyse de risque avec EBIOS RM
-titreHtml: MOOC Club EBIOS
-illustration: mooc-club-ebios/mooc-club-ebios.png
+titreHtml: MooC EBIOS RM
+illustration: mooc-ebios-rm/mooc-ebios-rm.png
 lien: https://lms.club-ebios.org/formations/ebiosrm
 droitsAcces:
   - ACCES_LIBRE
