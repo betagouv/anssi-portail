@@ -40,7 +40,7 @@ REAGIR:
   - /ressources/avis-bulletin
   - /ressources/rapport-menace
   - /services/transmission-signalements
-  - ressources/sensy-crise
+  - /ressources/sensy-crise
 SE_FORMER:
   - /ressources/livret-cyber-enjeux
   - /ressources/cyber-enjeux
@@ -56,7 +56,7 @@ SE_FORMER:
   - /ressources/risques-cyber
   - /ressources/revue-presse
   - /services/mooc-club-ebios
-  - ressources/sensy-crise
+  - /ressources/sensy-crise
 TOUS:
   - /ressources/risques-cyber
   - /services/mon-aide-cyber
@@ -104,4 +104,4 @@ TOUS:
   - /ressources/malette-cyber
   - /ressources/cnil-reco
   - /ressources/cnil-ensemble
-  - ressources/sensy-crise
+  - /ressources/sensy-crise
