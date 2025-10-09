@@ -29,7 +29,7 @@ SECURISER:
   - /ressources/nl-industrie
   - /services/conseil-technique
   - /services/pack-parcours-secu
-  - /services/mooc-club-ebios
+  - /services/mooc-ebios-rm
 REAGIR:
   - /services/assistance-reponse-incidents
   - /services/cot
@@ -55,7 +55,7 @@ SE_FORMER:
   - /ressources/cyber-dico
   - /ressources/risques-cyber
   - /ressources/revue-presse
-  - /services/mooc-club-ebios
+  - /services/mooc-ebios-rm
   - /ressources/sensy-crise
 TOUS:
   - /ressources/risques-cyber
@@ -80,7 +80,7 @@ TOUS:
   - /services/cot
   - /ressources/ebios
   - /ressources/prestas-ebios
-  - /services/mooc-club-ebios
+  - /services/mooc-ebios-rm
   - /ressources/publications
   - /ressources/nl-industrie
   - /services/assistance-reponse-incidents
