@@ -18,6 +18,8 @@ reduire-risques:
   explication: Mettez en place des mesures de sécurité adaptées.
   items:
     - /services/mon-aide-cyber
+    - /services/silene
+    - /services/ads
     - /services/conseil-technique
     - /ressources/revue-presse
 
