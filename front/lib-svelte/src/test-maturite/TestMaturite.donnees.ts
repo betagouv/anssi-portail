@@ -75,7 +75,7 @@ export const questions: Question[] = [
       'Un antivirus est a minima installé sur les postes informatiques.',
       "Une ou plusieurs solutions visant à renforcer la protection des systèmes d'information sont déployées.",
       'Un audit de sécurité approfondi a été réalisé et des solutions en matière de détection et de réponse à incidents ont été ajoutées.',
-      "L'organisation dispose d'un panel complet de services et d'outils cyber intégrés et réalise des audits réguliers.",
+      "L'organisation dispose d'un panel complet de services, outils et d'assurance cyber et réalise des audits réguliers.",
     ],
   },
 ];
