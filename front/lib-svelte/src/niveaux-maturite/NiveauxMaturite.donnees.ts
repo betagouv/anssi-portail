@@ -105,7 +105,7 @@ export const niveauxMaturite: NiveauMaturite[] = [
     budget:
       "La ligne dédiée à la cybersécurité est égale > ou = à 10% du budget informatique de l'organisation.",
     adoptionSolutions:
-      "L'organisation dispose d'un panel complet de services et d'outils cyber intégrés et réalise des audits réguliers.",
+      "L'organisation dispose d'un panel complet de services, outils et d'assurance cyber et réalise des audits réguliers.",
     niveauSecurite:
       "L'organisation a mis en oeuvre des mesures lui permettant de se protéger contre des attaques élaborées et est parfaitement préparée à réagir à une crise d'origine cyber.",
   },
