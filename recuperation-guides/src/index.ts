@@ -1,8 +1,8 @@
 import { lecteurDeSiteHttp } from './lecteurDeSiteHttp';
 import { RecuperateurDAdressesDesGuides } from './recuperateurDAdressesDesGuides';
 import { RecuperateurGuide } from './recuperateurGuide';
+import { transformeEnCsv } from './transformateurCsv';
 
-console.log('Récupération des guides de sécurité...');
 const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(
   lecteurDeSiteHttp
 );
@@ -12,10 +12,12 @@ const adresses = await recuperateurDeGuides.recupere(
   2
 );
 
-console.log(adresses);
+const guides = await Promise.all(
+  adresses.map(async (adresse) =>
+    new RecuperateurGuide(lecteurDeSiteHttp).recupere(adresse)
+  )
+);
 
-const guides = await Promise.all(adresses.map(async (adresse) =>
-  new RecuperateurGuide(lecteurDeSiteHttp).recupere(adresse)
-));
+const guidesEnCsv = transformeEnCsv(guides);
 
-console.log('Guides', guides);
+console.log(guidesEnCsv);
