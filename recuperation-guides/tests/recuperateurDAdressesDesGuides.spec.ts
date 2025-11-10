@@ -23,7 +23,7 @@ describe('Récupérateur des adresses des guides', () => {
       'https://example.com/guide'
     );
 
-    assert.equal(adresse, '/guide-xyz');
+    assert.equal(adresse, 'https://example.com/guide-xyz');
   });
 
   it('appelle la bonne URL', async () => {
@@ -68,11 +68,11 @@ describe('Récupérateur des adresses des guides', () => {
 
     assert.equal(adresses.length, 2);
     const [adresse1, adresse2] = adresses;
-    assert.deepEqual(adresse1, '/guide-abc');
-    assert.deepEqual(adresse2, '/guide-def');
+    assert.deepEqual(adresse1, 'https://example.com/guide-abc');
+    assert.deepEqual(adresse2, 'https://example.com/guide-def');
   });
 
-  it('récupère uniquement les liens des guides', async () => {
+  it('récupère uniquement les adresses des guides', async () => {
     const lecteurDeSite = {
       lis: async (url: string): Promise<string> => {
         return `<html>
