@@ -78,7 +78,8 @@ describe('Récupérateur des adresses des guides', () => {
     );
 
     const adresses = await recuperateurDeGuides.recupere(
-      'https://example.com/guides'
+      'https://example.com/guides',
+      1
     );
 
     assert.equal(adresses.length, 0);
@@ -96,6 +97,7 @@ describe('Récupérateur des adresses des guides', () => {
         if (url === 'https://example.com/guides?page=1') {
           return ` <div class="views-row"><a href="/guide-page-2">Lien</a></div>`;
         }
+        return '';
       },
     };
     const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(
