@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { describe, it , beforeEach} from 'node:test';
+import { describe, it, beforeEach } from 'node:test';
 import { RecuperateurGuide } from '../src/recuperateurGuide';
 
 describe("Le récupérateur d'un guide", () => {
@@ -11,6 +11,12 @@ describe("Le récupérateur d'un guide", () => {
     </div>
     <span class="published-on"> Publié le 26 août 2025 </span>
     <span class="updated-on"> Mis à jour le 2 octobre 2025 </span>
+    <div class="text-riche">
+      <div>
+        <p>La description du guide.</p>
+        <p>Sur plusieurs paragraphes.</p>
+      </div>
+    </div>
 `;
 
   let recuperateurGuide: RecuperateurGuide;
@@ -48,12 +54,21 @@ describe("Le récupérateur d'un guide", () => {
   it('récupère la date de publication', async () => {
     const guide = await recuperateurGuide.recupere('/guide1');
 
-    assert.equal(guide.datePublication, "26 août 2025");
+    assert.equal(guide.datePublication, '26 août 2025');
   });
 
   it('récupère la date de mise à jour', async () => {
     const guide = await recuperateurGuide.recupere('/guide1');
 
-    assert.equal(guide.dateMiseAJour, "2 octobre 2025");
+    assert.equal(guide.dateMiseAJour, '2 octobre 2025');
+  });
+
+  it('récupère la description', async () => {
+    const guide = await recuperateurGuide.recupere('/guide1');
+
+    assert.equal(
+      guide.description,
+      '<p>La description du guide.</p><p>Sur plusieurs paragraphes.</p>'
+    );
   });
 });

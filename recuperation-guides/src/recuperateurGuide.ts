@@ -6,6 +6,7 @@ export type Guide = {
   datePublication: string;
   resume: string;
   titre: string;
+  description: string;
 };
 
 export class RecuperateurGuide {
@@ -19,6 +20,7 @@ export class RecuperateurGuide {
       resume: this.recupereTexte(document, '.banniere-group p'),
       datePublication: this.recupereTexte(document, '.published-on', 10),
       dateMiseAJour: this.recupereTexte(document, '.updated-on', 14),
+      description: this.recupereHtml(document, '.text-riche > div')
     };
   }
 
@@ -28,5 +30,13 @@ export class RecuperateurGuide {
     debut: number = 0
   ) {
     return document.querySelector(selecteur)!.innerText.trim().substring(debut);
+  }
+
+  private recupereHtml(document: HTMLElement, selecteur: string) {
+    return document
+      .querySelector(selecteur)!
+      .innerHTML.trim()
+      .replaceAll(/\s+/g, ' ')
+      .replaceAll('> <', '><');
   }
 }
