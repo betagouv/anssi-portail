@@ -1,5 +1,6 @@
 import { lecteurDeSiteHttp } from './lecteurDeSiteHttp';
 import { RecuperateurDAdressesDesGuides } from './recuperateurDAdressesDesGuides';
+import { RecuperateurGuide } from './recuperateurGuide';
 
 console.log('Récupération des guides de sécurité...');
 const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(
@@ -12,3 +13,5 @@ const adresses = await recuperateurDeGuides.recupere(
 );
 
 console.log(adresses);
+
+console.log("Premier guide", await new RecuperateurGuide(lecteurDeSiteHttp).recupere(adresses[0]))
