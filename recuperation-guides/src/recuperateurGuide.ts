@@ -9,6 +9,7 @@ export type Guide = {
   description: string;
   image: string;
   documents: string;
+  contenusLies: string;
 };
 
 export class RecuperateurGuide {
@@ -27,6 +28,11 @@ export class RecuperateurGuide {
         urlDeBase: urlGuide,
       }),
       documents: this.recupereDocuments(document, { urlDeBase: urlGuide }),
+      contenusLies: this.recuperecontenusLies(
+        document,
+        '.field--name-field-contenu-lie > div',
+        { urlDeBase: urlGuide }
+      ),
     };
   }
 
@@ -71,6 +77,19 @@ export class RecuperateurGuide {
         });
         const nom = this.recupereTexte(element, '.document > a > .name');
         return `${nom} : ${lien}`;
+      })
+      .join('\n');
+  }
+
+  private recuperecontenusLies(
+    document: HTMLElement,
+    selecteur: string,
+    { urlDeBase }: { urlDeBase?: string }
+  ) {
+    const elements = document.querySelectorAll(selecteur);
+    return elements
+      .map((element) => {
+        return this.recupereLien(element, 'a', 'href', { urlDeBase });
       })
       .join('\n');
   }
