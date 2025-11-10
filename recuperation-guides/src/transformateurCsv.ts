@@ -8,6 +8,7 @@ export const transformeEnCsv = (guides: Guide[]): string => {
       { id: 'resume', title: 'Résumé' },
       { id: 'datePublication', title: 'Date de publication' },
       { id: 'dateMiseAJour', title: 'Date de mise à jour' },
+      { id: 'description', title: 'Description' },
     ],
     alwaysQuote: true,
   });
