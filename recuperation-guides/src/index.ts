@@ -14,4 +14,8 @@ const adresses = await recuperateurDeGuides.recupere(
 
 console.log(adresses);
 
-console.log("Premier guide", await new RecuperateurGuide(lecteurDeSiteHttp).recupere(adresses[0]))
+const guides = await Promise.all(adresses.map(async (adresse) =>
+  new RecuperateurGuide(lecteurDeSiteHttp).recupere(adresse)
+));
+
+console.log('Guides', guides);
