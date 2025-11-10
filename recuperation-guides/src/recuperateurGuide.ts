@@ -1,13 +1,16 @@
 import { parse } from 'node-html-parser';
+import { LecteurSite } from './lecteurDeSiteHttp';
+
+type Guide = {
+  dateMiseAJour: string;
+  datePublication: string;
+  resume: string;
+  titre: string;
+};
 
 export class RecuperateurGuide {
-  constructor(private lecteurSite: { lis: (url: string) => Promise<string> }) {}
-  async recupere(urlGuide: string): Promise<{
-    dateMiseAJour: string;
-    datePublication: string;
-    resume: string;
-    titre: string;
-  }> {
+  constructor(private lecteurSite: LecteurSite) {}
+  async recupere(urlGuide: string): Promise<Guide> {
     const contenuHtml = await this.lecteurSite.lis(urlGuide);
     const document = parse(contenuHtml);
     return {
@@ -17,7 +20,7 @@ export class RecuperateurGuide {
         .querySelector('.published-on')!
         .innerText.trim()
         .substring(10),
-      dateMiseAJour:document
+      dateMiseAJour: document
         .querySelector('.updated-on')!
         .innerText.trim()
         .substring(14),

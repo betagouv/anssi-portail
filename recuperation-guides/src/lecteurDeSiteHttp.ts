@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+export type LecteurSite = { lis: (url: string) => Promise<string> };
+
 export const lecteurDeSiteHttp = {
   lis: async (url: string) => {
     const reponseChallenge = await axios.get(url);
