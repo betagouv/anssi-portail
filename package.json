@@ -25,6 +25,7 @@
   "workspaces": [
     "back",
     "front",
-    "front/lib-svelte"
+    "front/lib-svelte",
+    "recuperation-guides"
   ]
 }

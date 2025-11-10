@@ -1,0 +1,13 @@
+{
+  "name": "recuperation-guides",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "node --import tsx src/index.ts",
+    "test": "node --import tsx --test './tests/**/*.spec.ts'"
+  },
+  "dependencies": {
+    "node-html-parser": "^7.0.1"
+  }
+}
