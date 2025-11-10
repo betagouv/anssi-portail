@@ -8,6 +8,7 @@ export type Guide = {
   titre: string;
   description: string;
   image: string;
+  documents: string;
 };
 
 export class RecuperateurGuide {
@@ -25,6 +26,7 @@ export class RecuperateurGuide {
       image: this.recupereLien(document, '.img-princiale img', 'src', {
         urlDeBase: urlGuide,
       }),
+      documents: this.recupereDocuments(document, { urlDeBase: urlGuide }),
     };
   }
 
@@ -52,5 +54,24 @@ export class RecuperateurGuide {
   ) {
     const lien = document.querySelector(selecteur)!.getAttribute(attribut)!;
     return new URL(lien, urlDeBase).toString();
+  }
+
+  private recupereDocuments(
+    document: HTMLElement,
+    { urlDeBase }: { urlDeBase?: string }
+  ) {
+    const elements = [
+      ...document.querySelectorAll('.paragraph--type--piece-jointe'),
+      ...document.querySelectorAll('.field--name-field-fichier-pdf'),
+    ];
+    return elements
+      .map((element) => {
+        const lien = this.recupereLien(element, '.document > a', 'href', {
+          urlDeBase,
+        });
+        const nom = this.recupereTexte(element, '.document > a > .name');
+        return `${nom} : ${lien}`;
+      })
+      .join('\n');
   }
 }
