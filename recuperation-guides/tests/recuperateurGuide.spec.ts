@@ -37,6 +37,22 @@ describe("Le récupérateur d'un guide", () => {
         </a>
       </div>
     </div>
+    <div class="field--name-field-contenu-lie">
+      <div>
+        <a href="/autre-guide-1">
+          <article>
+            etc...
+          </article>
+        </a>
+      </div>
+      <div>
+        <a href="/autre-guide-2">
+          <article>
+            etc...
+          </article>
+        </a>
+      </div>
+    </div>
 `;
 
   let recuperateurGuide: RecuperateurGuide;
@@ -119,6 +135,18 @@ describe("Le récupérateur d'un guide", () => {
       guide.documents,
       `Les essentiels : https://example.com/doc1.pdf
 Les approfondissements : https://example.com/doc2.pdf`
+    );
+  });
+
+  it('récupère les contenus liés', async () => {
+    const guide = await recuperateurGuide.recupere(
+      'https://example.com/guide1'
+    );
+
+    assert.equal(
+      guide.contenusLies,
+      `https://example.com/autre-guide-1
+https://example.com/autre-guide-2`
     );
   });
 });
