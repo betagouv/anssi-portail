@@ -23,6 +23,20 @@ describe("Le récupérateur d'un guide", () => {
         <figcaption>Légende</figcaption>
       </figure>
     </div>
+    <div class="paragraph--type--piece-jointe">
+      <div class="document">
+        <a href="/doc1.pdf">
+          <div class="name">Les essentiels</div>
+        </a>
+      </div>
+    </div>  
+    <div class="field--name-field-fichier-pdf">
+      <div class="document">
+        <a href="/doc2.pdf">
+          <div class="name">Les approfondissements</div>
+        </a>
+      </div>
+    </div>
 `;
 
   let recuperateurGuide: RecuperateurGuide;
@@ -94,5 +108,17 @@ describe("Le récupérateur d'un guide", () => {
     );
 
     assert.equal(guide.image, 'https://example.com/mon-image.jpg');
+  });
+
+  it('récupère les documents associés', async () => {
+    const guide = await recuperateurGuide.recupere(
+      'https://example.com/guide1'
+    );
+
+    assert.equal(
+      guide.documents,
+      `Les essentiels : https://example.com/doc1.pdf
+Les approfondissements : https://example.com/doc2.pdf`
+    );
   });
 });
