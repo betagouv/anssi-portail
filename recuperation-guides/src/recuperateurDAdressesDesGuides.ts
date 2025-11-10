@@ -1,12 +1,11 @@
 import { parse } from 'node-html-parser';
+import { LecteurSite } from './lecteurDeSiteHttp';
 
 export class RecuperateurDAdressesDesGuides {
-  constructor(
-    private lecteurDeSite: { lis: (url: string) => Promise<string> }
-  ) {}
+  constructor(private lecteurDeSite: LecteurSite) {}
 
   async recupere(url: string, nombreDePages: number): Promise<string[]> {
-    const strings = [];
+    const resultat = [];
     for (let page = 0; page < nombreDePages; page++) {
       const vraieUrl = new URL(url);
       vraieUrl.searchParams.set('page', page.toString());
@@ -15,12 +14,12 @@ export class RecuperateurDAdressesDesGuides {
 
       const adresses = document.querySelectorAll('.views-row a');
 
-      strings.push(
+      resultat.push(
         ...adresses.map((adresse) =>
           new URL(adresse.getAttribute('href')!, url).toString()
         )
       );
     }
-    return strings;
+    return resultat;
   }
 }
