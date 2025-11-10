@@ -3,9 +3,9 @@ import assert from 'node:assert';
 import { RecuperateurDAdressesDesGuides } from '../src/recuperateurDAdressesDesGuides';
 
 describe('Récupérateur des adresses des guides', () => {
-  it('récupère un guide', () => {
+  it('récupère un guide', async () => {
     const lecteurDeSite = {
-      lis: (url: string): string => {
+      lis: async (url: string): Promise<string> => {
         return `<html>
   <body>
     <div class="views-row">
@@ -19,17 +19,17 @@ describe('Récupérateur des adresses des guides', () => {
       lecteurDeSite
     );
 
-    const [adresse] = recuperateurDeGuides.recupere(
+    const [adresse] = await recuperateurDeGuides.recupere(
       'https://example.com/guide'
     );
 
     assert.equal(adresse, '/guide-xyz');
   });
 
-  it('appelle la bonne URL', () => {
+  it('appelle la bonne URL', async () => {
     let urlAppelee = '';
     const lecteurDeSite = {
-      lis: (url: string): string => {
+      lis: async (url: string): Promise<string> => {
         urlAppelee = url;
         return '<h3></h3>';
       },
@@ -38,14 +38,14 @@ describe('Récupérateur des adresses des guides', () => {
       lecteurDeSite
     );
 
-    recuperateurDeGuides.recupere('https://example.com/guide');
+    await recuperateurDeGuides.recupere('https://example.com/guide');
 
     assert.equal(urlAppelee, 'https://example.com/guide');
   });
 
-  it('récupère plusieurs guides', () => {
+  it('récupère plusieurs guides', async () => {
     const lecteurDeSite = {
-      lis: (url: string): string => {
+      lis: async (url: string): Promise<string> => {
         return `<html>
   <body>
     <div class="views-row">
@@ -62,7 +62,7 @@ describe('Récupérateur des adresses des guides', () => {
       lecteurDeSite
     );
 
-    const adresses = recuperateurDeGuides.recupere(
+    const adresses = await recuperateurDeGuides.recupere(
       'https://example.com/guides'
     );
 
@@ -70,5 +70,26 @@ describe('Récupérateur des adresses des guides', () => {
     const [adresse1, adresse2] = adresses;
     assert.deepEqual(adresse1, '/guide-abc');
     assert.deepEqual(adresse2, '/guide-def');
+  });
+
+  it('récupère uniquement les liens des guides', async () => {
+    const lecteurDeSite = {
+      lis: async (url: string): Promise<string> => {
+        return `<html>
+  <body>
+    <a href="/autre-lien">Lien</a>
+  </body>
+</html>`;
+      },
+    };
+    const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(
+      lecteurDeSite
+    );
+
+    const adresses = await recuperateurDeGuides.recupere(
+      'https://example.com/guides'
+    );
+
+    assert.equal(adresses.length, 0);
   });
 });
