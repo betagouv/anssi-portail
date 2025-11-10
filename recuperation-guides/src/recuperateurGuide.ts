@@ -7,6 +7,7 @@ export type Guide = {
   resume: string;
   titre: string;
   description: string;
+  image: string;
 };
 
 export class RecuperateurGuide {
@@ -20,7 +21,10 @@ export class RecuperateurGuide {
       resume: this.recupereTexte(document, '.banniere-group p'),
       datePublication: this.recupereTexte(document, '.published-on', 10),
       dateMiseAJour: this.recupereTexte(document, '.updated-on', 14),
-      description: this.recupereHtml(document, '.text-riche > div')
+      description: this.recupereHtml(document, '.text-riche > div'),
+      image: this.recupereLien(document, '.img-princiale img', 'src', {
+        urlDeBase: urlGuide,
+      }),
     };
   }
 
@@ -38,5 +42,15 @@ export class RecuperateurGuide {
       .innerHTML.trim()
       .replaceAll(/\s+/g, ' ')
       .replaceAll('> <', '><');
+  }
+
+  private recupereLien(
+    document: HTMLElement,
+    selecteur: string,
+    attribut: string,
+    { urlDeBase }: { urlDeBase?: string }
+  ) {
+    const lien = document.querySelector(selecteur)!.getAttribute(attribut)!;
+    return new URL(lien, urlDeBase).toString();
   }
 }
