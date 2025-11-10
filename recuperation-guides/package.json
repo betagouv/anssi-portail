@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^1.13.2",
+    "csv-writer": "^1.6.0",
     "node-html-parser": "^7.0.1"
   }
 }

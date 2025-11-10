@@ -1,7 +1,7 @@
 import { HTMLElement, parse } from 'node-html-parser';
 import { LecteurSite } from './lecteurDeSiteHttp';
 
-type Guide = {
+export type Guide = {
   dateMiseAJour: string;
   datePublication: string;
   resume: string;
