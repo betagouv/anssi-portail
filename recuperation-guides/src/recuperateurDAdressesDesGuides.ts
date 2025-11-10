@@ -1,7 +1,9 @@
 import { parse } from 'node-html-parser';
 
 export class RecuperateurDAdressesDesGuides {
-  constructor(private lecteurDeSite: { lis: (url: string) => Promise<string> }) {}
+  constructor(
+    private lecteurDeSite: { lis: (url: string) => Promise<string> }
+  ) {}
 
   async recupere(url: string, nombreDePages: number): Promise<string[]> {
     const strings = [];
@@ -15,7 +17,7 @@ export class RecuperateurDAdressesDesGuides {
 
       strings.push(
         ...adresses.map((adresse) =>
-          new URL(adresse.getAttribute('href'), url).toString()
+          new URL(adresse.getAttribute('href')!, url).toString()
         )
       );
     }
