@@ -17,6 +17,12 @@ describe("Le récupérateur d'un guide", () => {
         <p>Sur plusieurs paragraphes.</p>
       </div>
     </div>
+    <div class="img-princiale">
+      <figure>
+        <img src="/mon-image.jpg" />
+        <figcaption>Légende</figcaption>
+      </figure>
+    </div>
 `;
 
   let recuperateurGuide: RecuperateurGuide;
@@ -26,7 +32,9 @@ describe("Le récupérateur d'un guide", () => {
   });
 
   it('récupère le titre', async () => {
-    const guide = await recuperateurGuide.recupere('/guide1');
+    const guide = await recuperateurGuide.recupere(
+      'https://example.com/guide1'
+    );
 
     assert.equal(guide.titre, 'Guide 1');
   });
@@ -40,35 +48,51 @@ describe("Le récupérateur d'un guide", () => {
       },
     });
 
-    await recuperateurGuide.recupere('/guide1');
+    await recuperateurGuide.recupere('https://example.com/guide1');
 
-    assert.equal(urlAppelee, '/guide1');
+    assert.equal(urlAppelee, 'https://example.com/guide1');
   });
 
   it('récupère le résumé', async () => {
-    const guide = await recuperateurGuide.recupere('/guide1');
+    const guide = await recuperateurGuide.recupere(
+      'https://example.com/guide1'
+    );
 
     assert.equal(guide.resume, 'Dans un contexte de prolifération…');
   });
 
   it('récupère la date de publication', async () => {
-    const guide = await recuperateurGuide.recupere('/guide1');
+    const guide = await recuperateurGuide.recupere(
+      'https://example.com/guide1'
+    );
 
     assert.equal(guide.datePublication, '26 août 2025');
   });
 
   it('récupère la date de mise à jour', async () => {
-    const guide = await recuperateurGuide.recupere('/guide1');
+    const guide = await recuperateurGuide.recupere(
+      'https://example.com/guide1'
+    );
 
     assert.equal(guide.dateMiseAJour, '2 octobre 2025');
   });
 
   it('récupère la description', async () => {
-    const guide = await recuperateurGuide.recupere('/guide1');
+    const guide = await recuperateurGuide.recupere(
+      'https://example.com/guide1'
+    );
 
     assert.equal(
       guide.description,
       '<p>La description du guide.</p><p>Sur plusieurs paragraphes.</p>'
     );
+  });
+
+  it("récupère l'image", async () => {
+    const guide = await recuperateurGuide.recupere(
+      'https://example.com/guide1'
+    );
+
+    assert.equal(guide.image, 'https://example.com/mon-image.jpg');
   });
 });
