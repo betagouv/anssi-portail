@@ -52,7 +52,7 @@ describe('La ressource Statistiques', () => {
     it('renvoie le nombre de services et de ressources consultés', async () => {
       const reponse = await request(serveur).get('/api/statistiques');
 
-      assert.equal(reponse.body.servicesEtRessourcesConsultes, 7800);
+      assert.equal(reponse.body.servicesEtRessourcesConsultes, 8300);
     });
 
     it('renvoie le nombre de tests de maturité', async () => {
