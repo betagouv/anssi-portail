@@ -24,8 +24,8 @@ export class RecuperateurGuide {
       id: partiesURL.at(-1)!,
       titre: this.recupereTexte(document, 'h1'),
       resume: this.recupereTexte(document, '.banniere-group p'),
-      datePublication: this.recupereTexte(document, '.published-on', 10),
-      dateMiseAJour: this.recupereTexte(document, '.updated-on', 14),
+      datePublication: this.recupereDate(document, '.published-on'),
+      dateMiseAJour: this.recupereDate(document, '.updated-on'),
       description: this.recupereHtml(document, '.text-riche > div'),
       image: this.recupereLien(document, '.img-princiale img', 'src', {
         urlDeBase: urlGuide,
@@ -45,6 +45,11 @@ export class RecuperateurGuide {
     debut: number = 0
   ) {
     return document.querySelector(selecteur)!.innerText.trim().substring(debut);
+  }
+
+  private recupereDate(document: HTMLElement, selecteur: string) {
+    const texteBrut = document.querySelector(selecteur)!.innerText.trim();
+    return texteBrut.substring(texteBrut.search(/\d/));
   }
 
   private recupereHtml(document: HTMLElement, selecteur: string) {
