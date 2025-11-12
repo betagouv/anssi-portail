@@ -12,6 +12,7 @@ export const transformeEnCsv = (guides: Guide[]): string => {
       { id: 'description', title: 'Description' },
       { id: 'image', title: 'Image' },
       { id: 'documents', title: 'Documents' },
+      { id: 'langue', title: 'Langue' },
     ],
     alwaysQuote: true,
   });

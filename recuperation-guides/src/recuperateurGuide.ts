@@ -11,6 +11,7 @@ export type Guide = {
   image: string;
   documents: string;
   contenusLies: string;
+  langue: 'FR' | 'EN';
 };
 
 export class RecuperateurGuide {
@@ -20,6 +21,7 @@ export class RecuperateurGuide {
     const contenuHtml = await this.lecteurSite.lis(urlGuide);
     const document = parse(contenuHtml);
     const partiesURL = urlGuide.split('/');
+    const langue = urlGuide.includes('/en/') ? 'EN' : 'FR';
     return {
       id: partiesURL.at(-1)!,
       titre: this.recupereTexte(document, 'h1'),
@@ -36,6 +38,7 @@ export class RecuperateurGuide {
         '.field--name-field-contenu-lie > div',
         { urlDeBase: urlGuide }
       ),
+      langue,
     };
   }
 
