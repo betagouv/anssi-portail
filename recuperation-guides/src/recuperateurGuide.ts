@@ -2,6 +2,7 @@ import { HTMLElement, parse } from 'node-html-parser';
 import { LecteurSite } from './lecteurDeSiteHttp';
 
 export type Guide = {
+  id: string;
   dateMiseAJour: string;
   datePublication: string;
   resume: string;
@@ -18,7 +19,9 @@ export class RecuperateurGuide {
   async recupere(urlGuide: string): Promise<Guide> {
     const contenuHtml = await this.lecteurSite.lis(urlGuide);
     const document = parse(contenuHtml);
+    const partiesURL = urlGuide.split('/');
     return {
+      id: partiesURL.at(-1)!,
       titre: this.recupereTexte(document, 'h1'),
       resume: this.recupereTexte(document, '.banniere-group p'),
       datePublication: this.recupereTexte(document, '.published-on', 10),

@@ -4,6 +4,7 @@ import { Guide } from './recuperateurGuide';
 export const transformeEnCsv = (guides: Guide[]): string => {
   const stringifier = createObjectCsvStringifier({
     header: [
+      { id: 'id', title: 'Identifiant' },
       { id: 'titre', title: 'Titre' },
       { id: 'resume', title: 'Résumé' },
       { id: 'datePublication', title: 'Date de publication' },
