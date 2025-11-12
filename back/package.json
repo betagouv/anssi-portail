@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npx eslint . && tsc --noemit && node --import tsx --test './tests/**/*.spec.ts'",
     "lint": "npx eslint .",
-    "lint:fix": "npx eslint . --fix"
+    "lint:fix": "npx eslint . --fix",
+    "prestart": "tsc"
   },
   "engines": {
     "node": ">=23"
