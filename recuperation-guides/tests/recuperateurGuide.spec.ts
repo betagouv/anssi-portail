@@ -149,4 +149,12 @@ Les approfondissements : https://example.com/doc2.pdf`
 https://example.com/autre-guide-2`
     );
   });
+
+  it("récupère l'id du guide", async () => {
+    const guide = await recuperateurGuide.recupere(
+      'https://example.com/publication/guide1-sur-un-sujet'
+    );
+
+    assert.equal(guide.id, 'guide1-sur-un-sujet');
+  });
 });
