@@ -1,7 +1,8 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { EntrepotFinancement } from '../metier/entrepotFinancement';
 import { Financement } from '../metier/financement';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
+import { ClientHttp } from './clientHttp';
 
 export type RetourApiGrist = {
   records: {
@@ -24,21 +25,14 @@ export type RetourApiGrist = {
   }[];
 };
 
-export type ClientHttp = {
-  get: (
-    url: string,
-    config?: { headers?: Record<string, string> }
-  ) => Promise<unknown>;
-};
-
 export class EntrepotFinancementGrist implements EntrepotFinancement {
-  clientHttp: ClientHttp;
+  clientHttp: ClientHttp<RetourApiGrist>;
   adaptateurEnvironnement: AdaptateurEnvironnement;
   constructor({
     clientHttp = axios,
     adaptateurEnvironnement,
   }: {
-    clientHttp?: ClientHttp;
+    clientHttp?: ClientHttp<RetourApiGrist>;
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
     this.clientHttp = clientHttp;
@@ -53,9 +47,9 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
       return [];
     }
     const cleApi = this.adaptateurEnvironnement.grist().cleApiFinancements();
-    const reponse = (await this.clientHttp.get(urlDocFinancement, {
+    const reponse = await this.clientHttp.get(urlDocFinancement, {
       headers: { Authorization: `Bearer ${cleApi}` },
-    })) as AxiosResponse<RetourApiGrist>;
+    });
 
     return reponse.data.records.map(
       ({ fields, id }) =>

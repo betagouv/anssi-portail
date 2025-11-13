@@ -2,6 +2,7 @@ import axios from 'axios';
 import { EntrepotGuide } from '../metier/entrepotGuide';
 import { Guide } from '../metier/guide';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
+import { ClientHttp } from './clientHttp';
 
 export type GuideGrist = {
   id: number;
@@ -12,13 +13,6 @@ export type GuideGrist = {
 
 export type RetourGuideGrist = {
   records: GuideGrist[];
-};
-
-export type ClientHttp<T> = {
-  get: (
-    url: string,
-    config?: { headers?: Record<string, string> }
-  ) => Promise<{ data: T }>;
 };
 
 export class EntrepotGuideGrist implements EntrepotGuide {
