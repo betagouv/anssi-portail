@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
+import { ClientHttp } from '../../src/infra/clientHttp';
 import {
-  ClientHttp,
   EntrepotGuideGrist,
   RetourGuideGrist,
 } from '../../src/infra/entrepotGuideGrist';

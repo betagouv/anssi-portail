@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
+import { ClientHttp } from '../../src/infra/clientHttp';
 import {
-  ClientHttp,
   EntrepotFinancementGrist,
   RetourApiGrist,
 } from '../../src/infra/entrepotFinancementGrist';
@@ -9,8 +9,8 @@ import { Financement } from '../../src/metier/financement';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
 
 describe("L'entrepot de financement Grist", () => {
-  const clientHttp: ClientHttp = {
-    get: async () => {},
+  const clientHttp: ClientHttp<RetourApiGrist> = {
+    get: async () => ({ data: { records: [] } }),
   };
   const entrepotFinancementGrist = new EntrepotFinancementGrist({
     clientHttp,
@@ -44,7 +44,7 @@ describe("L'entrepot de financement Grist", () => {
       urlAppelee = url;
       headerAuthent = config?.headers?.Authorization;
       return {
-        data: { records: [] } satisfies RetourApiGrist,
+        data: { records: [] },
       };
     };
 
