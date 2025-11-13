@@ -26,6 +26,7 @@ import { messagerieMattermost } from './infra/messagerieMattermost';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 import { EntrepotGuide } from './metier/entrepotGuide';
+import { EntrepotGuideGrist } from './infra/entrepotGuideGrist';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement({
@@ -55,9 +56,9 @@ const entrepotResultatTest = new EntrepotResultatTestPostgres({
   entrepotUtilisateur,
 });
 
-const entrepotGuide: EntrepotGuide = {
-  tous: async () => [],
-};
+const entrepotGuide: EntrepotGuide = new EntrepotGuideGrist({
+  adaptateurEnvironnement,
+});
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({

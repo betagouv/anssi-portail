@@ -39,6 +39,8 @@ type AdaptateurEnvironnement = {
   grist: () => {
     urlFinancements: () => string;
     cleApiFinancements: () => string;
+    urlGuides: () => string;
+    cleApiGuides: () => string;
   };
 };
 
@@ -155,6 +157,8 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
   grist: () => ({
     urlFinancements: () => process.env.FINANCEMENTS_GRIST_URL || '',
     cleApiFinancements: () => process.env.FINANCEMENTS_GRIST_API_KEY || '',
+    urlGuides: () => process.env.GUIDES_GRIST_URL || '',
+    cleApiGuides: () => process.env.GUIDES_GRIST_API_KEY || '',
   }),
 };
 
