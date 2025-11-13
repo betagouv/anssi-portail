@@ -5,6 +5,7 @@ import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { configurationDeTestDuServeur } from '../fauxObjets';
 import { EntrepotGuide } from '../../../src/metier/entrepotGuide';
+import { guideDevsecops, guideZeroTrust } from '../objetsPretsALEmploi';
 
 describe('La ressource qui gère les guides', () => {
   let serveur: Express;
@@ -12,18 +13,7 @@ describe('La ressource qui gère les guides', () => {
 
   beforeEach(() => {
     entrepotGuide = {
-      tous: async () => [
-        {
-          id: 'guide1',
-          lienVignette: 'http://localhost/vignette1',
-          titre: 'Premier guide',
-        },
-        {
-          id: 'guide2',
-          lienVignette: 'http://localhost/vignette2',
-          titre: 'Deuxième guide',
-        },
-      ],
+      tous: async () => [guideZeroTrust, guideDevsecops],
     };
     serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotGuide });
   });
@@ -39,14 +29,16 @@ describe('La ressource qui gère les guides', () => {
 
       assert.equal(reponse.body.length, 2);
       assert.deepEqual(reponse.body[0], {
-        id: 'guide1',
-        lienVignette: 'http://localhost/vignette1',
-        titre: 'Premier guide',
+        id: 'zero-trust',
+        titre: 'Zero Trust',
+        lienVignette:
+          'https://cyber.gouv.fr/sites/default/files/image/anssi-fondamentaux-zero-trust-v1_publication.jpg',
       });
       assert.deepEqual(reponse.body[1], {
-        id: 'guide2',
-        lienVignette: 'http://localhost/vignette2',
-        titre: 'Deuxième guide',
+        id: 'devsecops',
+        titre: 'DevSecOps',
+        lienVignette:
+          'https://cyber.gouv.fr/sites/default/files/image/anssi_essentiels_devsecops_v1.jpg',
       });
     });
 
