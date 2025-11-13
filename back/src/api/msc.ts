@@ -8,6 +8,7 @@ import { ressourceFavori } from './favoris/ressourceFavori';
 import { ressourceFavoris } from './favoris/ressourceFavoris';
 import { ressourceFavorisPartages } from './favoris/ressourceFavorisPartages';
 import { fournisseurChemin } from './fournisseurChemin';
+import { ressourceGuides } from './guides/ressourceGuides';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
 import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionOIDC';
@@ -136,7 +137,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'financements',
     'prestataires-labellises',
     'contacts',
-    "formulaire-matomo"
+    'formulaire-matomo',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
@@ -145,7 +146,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     reponse
       .contentType('text/html')
       .status(200)
-      .sendFileAvecNonce(fournisseurChemin.cheminPageJekyll("formulaire-matomo"));
+      .sendFileAvecNonce(
+        fournisseurChemin.cheminPageJekyll('formulaire-matomo')
+      );
   });
 
   app.use(
@@ -263,8 +266,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/api/statistiques', ressourceStatistiques(configurationServeur));
 
-  app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
-
   app.use(
     '/api/repartition-resultats-test',
     ressourceRepartitionDesResultatsDeTest(configurationServeur)
@@ -280,6 +281,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourceFinancements(configurationServeur),
     ressourceFinancement(configurationServeur)
   );
+
+  app.use('/api/guides', ressourceGuides());
+
+  app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 
   app.use((_requete: Request, reponse: Response) => {
     reponse
