@@ -1,6 +1,7 @@
+import { Financement } from '../../src/metier/financement';
+import { Guide } from '../../src/metier/guide';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { fauxAdaptateurRechercheEntreprise } from './fauxObjets';
-import { Financement } from '../../src/metier/financement';
 
 export const jeanneDupont: Utilisateur = new Utilisateur(
   {
@@ -46,3 +47,17 @@ export const financementCyberPME: Financement = new Financement({
   sources: ['Le Gorafi'],
   contact: 'aide.entreprise@mail.fr',
 });
+
+export const guideZeroTrust: Guide = {
+  id: 'zero-trust',
+  titre: 'Zero Trust',
+  lienVignette:
+    'https://cyber.gouv.fr/sites/default/files/image/anssi-fondamentaux-zero-trust-v1_publication.jpg',
+};
+
+export const guideDevsecops: Guide = {
+  id: 'devsecops',
+  titre: 'DevSecOps',
+  lienVignette:
+    'https://cyber.gouv.fr/sites/default/files/image/anssi_essentiels_devsecops_v1.jpg',
+};
