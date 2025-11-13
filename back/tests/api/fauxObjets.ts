@@ -114,6 +114,9 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     urlFinancements: () =>
       'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records',
     cleApiFinancements: () => 'FAUSSE_CLE_API',
+    urlGuides: () =>
+      'http://grist/api/docs/idDocumentGuides/tables/idTableGuides/records',
+    cleApiGuides: () => 'FAUSSE_CLE_API_GUIDES',
   }),
 };
 

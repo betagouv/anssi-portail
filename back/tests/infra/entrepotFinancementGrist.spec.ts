@@ -23,8 +23,10 @@ describe("L'entrepot de financement Grist", () => {
       adaptateurEnvironnement: {
         ...fauxAdaptateurEnvironnement,
         grist: () => ({
-          urlFinancements: () => '',
           cleApiFinancements: () => '',
+          cleApiGuides: () => '',
+          urlFinancements: () => '',
+          urlGuides: () => '',
         }),
       },
     });
