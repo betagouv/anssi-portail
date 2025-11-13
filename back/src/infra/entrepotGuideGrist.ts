@@ -30,6 +30,12 @@ export class EntrepotGuideGrist implements EntrepotGuide {
     this.adaptateurEnvironnement = adaptateurEnvironnement;
   }
 
+  private convertisGuideGrist(guideGrist: GuideGrist): Guide {
+    return {
+      id: guideGrist.fields.Identifiant ?? '',
+    };
+  }
+
   async tous(): Promise<Guide[]> {
     const urlDocGuides = this.adaptateurEnvironnement.grist().urlGuides();
     const cleApi = this.adaptateurEnvironnement.grist().cleApiGuides();
@@ -37,8 +43,6 @@ export class EntrepotGuideGrist implements EntrepotGuide {
       headers: { Authorization: `Bearer ${cleApi}` },
     });
 
-    return guidesGrist.records.map((ligneGrist) => ({
-      id: ligneGrist.fields.Identifiant ?? '',
-    }));
+    return guidesGrist.records.map(this.convertisGuideGrist);
   }
 }
