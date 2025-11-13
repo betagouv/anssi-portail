@@ -6,6 +6,7 @@ import {
   RetourGuideGrist,
 } from '../../src/infra/entrepotGuideGrist';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
+import { ConstructeurGuideGrist } from '../api/guides/constructeurGuideGrist';
 
 describe("L'entrepot de guide Grist", () => {
   it('sait récupérer des guides en appelant Grist', async () => {
@@ -37,18 +38,14 @@ describe("L'entrepot de guide Grist", () => {
   it("sait transfomer le retour de l'API Grist en guides", async () => {
     const guidesGrist: RetourGuideGrist = {
       records: [
-        {
-          id: 1,
-          fields: {
-            Identifiant: 'guide1',
-          },
-        },
-        {
-          id: 2,
-          fields: {
-            Identifiant: 'guide2',
-          },
-        },
+        new ConstructeurGuideGrist()
+          .avecLeNumeroDeLigne(1)
+          .avecLIdentifiant('guide1')
+          .construis(),
+        new ConstructeurGuideGrist()
+          .avecLeNumeroDeLigne(2)
+          .avecLIdentifiant('guide2')
+          .construis(),
       ],
     };
     const clientHttp: ClientHttp<RetourGuideGrist> = {
