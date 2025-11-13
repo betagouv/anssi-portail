@@ -3,13 +3,15 @@ import { EntrepotGuide } from '../metier/entrepotGuide';
 import { Guide } from '../metier/guide';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 
+export type GuideGrist = {
+  id: number;
+  fields: {
+    Identifiant: string | null;
+  };
+};
+
 export type RetourGuideGrist = {
-  records: {
-    id: number;
-    fields: {
-      Identifiant: string | null;
-    };
-  }[];
+  records: GuideGrist[];
 };
 
 export type ClientHttp<T> = {
