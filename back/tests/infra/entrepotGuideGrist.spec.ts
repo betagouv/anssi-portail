@@ -9,6 +9,28 @@ import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
 import { ConstructeurGuideGrist } from '../api/guides/constructeurGuideGrist';
 
 describe("L'entrepot de guide Grist", () => {
+  it("ne renvoie rien si l'url source n'est pas définie", async () => {
+    const entrepotGuideGristHorsLigne = new EntrepotGuideGrist({
+      clientHttp: {
+        get: async () => {
+          throw new Error('Ne devrait pas être appelé');
+        },
+      },
+      adaptateurEnvironnement: {
+        ...fauxAdaptateurEnvironnement,
+        grist: () => ({
+          cleApiFinancements: () => '',
+          cleApiGuides: () => '',
+          urlFinancements: () => '',
+          urlGuides: () => '',
+        }),
+      },
+    });
+
+    const guides = await entrepotGuideGristHorsLigne.tous();
+
+    assert.deepEqual(guides, []);
+  });
   it('sait récupérer des guides en appelant Grist', async () => {
     let urlAppelee = '';
     let headerAuthent;
