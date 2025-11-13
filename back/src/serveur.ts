@@ -25,6 +25,7 @@ import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPo
 import { messagerieMattermost } from './infra/messagerieMattermost';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
+import { EntrepotGuide } from './metier/entrepotGuide';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement({
@@ -53,6 +54,10 @@ const entrepotResultatTest = new EntrepotResultatTestPostgres({
   adaptateurHachage,
   entrepotUtilisateur,
 });
+
+const entrepotGuide: EntrepotGuide = {
+  tous: async () => [],
+};
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
@@ -122,6 +127,7 @@ serviceCoherenceSecretsHachage
       adaptateurHachage,
       messagerieInstantanee,
       entrepotFinancement,
+      entrepotGuide,
     }).listen(3000, () => {
       console.log('Le serveur écoute sur le port 3000');
     });

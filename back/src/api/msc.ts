@@ -282,7 +282,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourceFinancement(configurationServeur)
   );
 
-  app.use('/api/guides', ressourceGuides());
+  app.use('/api/guides', ressourceGuides(configurationServeur));
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 
