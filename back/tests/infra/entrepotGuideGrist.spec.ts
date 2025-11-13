@@ -41,10 +41,14 @@ describe("L'entrepot de guide Grist", () => {
         new ConstructeurGuideGrist()
           .avecLeNumeroDeLigne(1)
           .avecLIdentifiant('guide1')
+          .avecLeTitre('Premier guide')
+          .avecLImage('http://localhost:8080/vignette-1')
           .construis(),
         new ConstructeurGuideGrist()
           .avecLeNumeroDeLigne(2)
           .avecLIdentifiant('guide2')
+          .avecLeTitre('Deuxième guide')
+          .avecLImage('http://localhost:8080/vignette-2')
           .construis(),
       ],
     };
@@ -59,6 +63,17 @@ describe("L'entrepot de guide Grist", () => {
 
     const guides = await entrepotGuideGrist.tous();
 
-    assert.deepEqual(guides, [{ id: 'guide1' }, { id: 'guide2' }]);
+    assert.deepEqual(guides, [
+      {
+        id: 'guide1',
+        titre: 'Premier guide',
+        lienVignette: 'http://localhost:8080/vignette-1',
+      },
+      {
+        id: 'guide2',
+        titre: 'Deuxième guide',
+        lienVignette: 'http://localhost:8080/vignette-2',
+      },
+    ]);
   });
 });

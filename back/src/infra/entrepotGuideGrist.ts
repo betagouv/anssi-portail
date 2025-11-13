@@ -8,6 +8,8 @@ export type GuideGrist = {
   id: number;
   fields: {
     Identifiant: string | null;
+    Titre: string | null;
+    Image: string | null;
   };
 };
 
@@ -33,6 +35,8 @@ export class EntrepotGuideGrist implements EntrepotGuide {
   private convertisGuideGrist(guideGrist: GuideGrist): Guide {
     return {
       id: guideGrist.fields.Identifiant ?? '',
+      titre: guideGrist.fields.Titre ?? '',
+      lienVignette: guideGrist.fields.Image ?? '',
     };
   }
 
