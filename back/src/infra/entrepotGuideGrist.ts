@@ -42,6 +42,9 @@ export class EntrepotGuideGrist implements EntrepotGuide {
 
   async tous(): Promise<Guide[]> {
     const urlDocGuides = this.adaptateurEnvironnement.grist().urlGuides();
+    if (!urlDocGuides) {
+      return [];
+    }
     const cleApi = this.adaptateurEnvironnement.grist().cleApiGuides();
     const { data: guidesGrist } = await this.clientHttp.get(urlDocGuides, {
       headers: { Authorization: `Bearer ${cleApi}` },
