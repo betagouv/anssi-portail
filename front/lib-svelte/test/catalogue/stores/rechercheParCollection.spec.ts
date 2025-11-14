@@ -3,9 +3,13 @@ import type { Guide } from '../../../src/catalogue/Catalogue.types';
 import { rechercheParCollection } from '../../../src/catalogue/stores/rechercheParCollection.store';
 
 const guideZeroTrust: Guide = {
+  type: 'Guide',
   id: 'zero-trust',
-  titre: 'Zero Trust',
-  lienVignette:
+  nom: 'Zero Trust',
+  resume: 'Les fondamentaux du modèle Zero Trust',
+  description:
+    "Les fondamentaux du modèle Zero Trust pour sécuriser les systèmes d'information",
+  illustration:
     'https://cyber.gouv.fr/sites/default/files/image/anssi-fondamentaux-zero-trust-v1_publication.jpg',
   langue: 'FR',
   collections: ['Les essentiels'],
