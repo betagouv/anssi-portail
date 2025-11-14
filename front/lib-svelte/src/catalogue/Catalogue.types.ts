@@ -13,6 +13,14 @@ export interface ItemCyber {
   lienExterne: string;
 }
 
+export interface Guide {
+  id: string;
+  titre: string;
+  lienVignette: string;
+  langue: string;
+  collections: string[];
+}
+
 export enum BesoinCyber {
   REAGIR = 'REAGIR',
   ETRE_SENSIBILISE = 'ETRE_SENSIBILISE',
