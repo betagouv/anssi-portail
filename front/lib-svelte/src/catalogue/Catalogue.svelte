@@ -13,6 +13,11 @@
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
 
   const reinitialiseFiltres = () => recherches.reinitialise();
+
+  let afficheLesGuides = $state(false);
+  const changeAffichage = () => {
+    afficheLesGuides = !afficheLesGuides;
+  };
 </script>
 
 <Hero
@@ -42,7 +47,7 @@
         type="button"
         class="bouton primaire"
         value="Réinitialiser les filtres"
-        on:click={reinitialiseFiltres}
+        onclick={reinitialiseFiltres}
       />
     </div>
   </details>
@@ -53,6 +58,25 @@
     <ChampRecherche bind:recherche={$rechercheTextuelle} />
   </div>
 </section>
+
+<div class="controle-segmente">
+  <button
+    class="bouton-segmente"
+    class:actif={!afficheLesGuides}
+    onclick={changeAffichage}
+  >
+    <img src="/assets/images/icone-liste.svg" alt="" />
+    <span>Services et outils</span>
+  </button>
+  <button
+    class="bouton-segmente"
+    class:actif={afficheLesGuides}
+    onclick={changeAffichage}
+  >
+    <img src="/assets/images/icone-livre.svg" alt="" />
+    <span>Guides de l'ANSSI</span>
+  </button>
+</div>
 
 <div class="contenu-catalogue">
   <div class="contenu-section">
@@ -68,7 +92,7 @@
             type="button"
             class="bouton primaire"
             value="Réinitialiser les filtres"
-            on:click={reinitialiseFiltres}
+            onclick={reinitialiseFiltres}
           />
         </div>
       </div>
@@ -86,10 +110,25 @@
             type="button"
             class="bouton primaire"
             value="Réinitialiser les filtres"
-            on:click={reinitialiseFiltres}
+            onclick={reinitialiseFiltres}
           />
         </div>
       {/each}
     </div>
   </div>
 </div>
+
+<style lang="scss">
+  .controle-segmente {
+    margin: 3rem auto 1rem;
+    width: min-content;
+
+    .bouton-segmente {
+      padding: 0.5rem 1rem 0.5rem 0.75rem;
+
+      img {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+</style>
