@@ -24,7 +24,7 @@ describe('Le store des guides filtrés', () => {
       const { resultats } = get(guidesFiltres);
 
       expect(resultats.length).toBe(1);
-      expect(resultats[0].titre).toBe('Zero Trust');
+      expect(resultats[0].nom).toBe('Zero Trust');
     });
 
     it('le filtre sur le nom peut être partiel', () => {
@@ -33,7 +33,7 @@ describe('Le store des guides filtrés', () => {
       const { resultats } = get(guidesFiltres);
 
       expect(resultats.length).toBe(1);
-      expect(resultats[0].titre).toBe('Zero Trust');
+      expect(resultats[0].nom).toBe('Zero Trust');
     });
 
     it('le filtre est insensible à la casse', () => {
@@ -42,7 +42,7 @@ describe('Le store des guides filtrés', () => {
       const { resultats } = get(guidesFiltres);
 
       expect(resultats.length).toBe(1);
-      expect(resultats[0].titre).toBe('Zero Trust');
+      expect(resultats[0].nom).toBe('Zero Trust');
     });
 
     it('filtre sur la description', () => {
@@ -51,7 +51,7 @@ describe('Le store des guides filtrés', () => {
       const { resultats } = get(guidesFiltres);
 
       expect(resultats.length).toBe(1);
-      expect(resultats[0].titre).toBe('Zero Trust');
+      expect(resultats[0].nom).toBe('Zero Trust');
     });
   });
 
@@ -64,7 +64,7 @@ describe('Le store des guides filtrés', () => {
       const { resultats } = get(guidesFiltres);
 
       expect(resultats.length).toBe(1);
-      expect(resultats[0].titre).toBe('Zero Trust');
+      expect(resultats[0].nom).toBe('Zero Trust');
     });
 
     it("conserve tous les items en cas d'absence de langue", () => {

@@ -1,10 +1,15 @@
 export type IdItemCyber = string;
 
-export interface ItemCyber {
-  id: IdItemCyber;
-  typologie: Typologie;
+export interface Item {
+  type: 'ItemCyber' | 'Guide';
+  id: string;
   nom: string;
   illustration: string;
+}
+
+export interface ItemCyber extends Item {
+  type: 'ItemCyber';
+  typologie: Typologie;
   description: string;
   lienInterne: string;
   sources?: string[];
@@ -13,11 +18,10 @@ export interface ItemCyber {
   lienExterne: string;
 }
 
-export interface Guide {
-  id: string;
-  titre: string;
+export interface Guide extends Item {
+  type: 'Guide';
+  resume: string;
   description: string;
-  lienVignette: string;
   langue: string;
   collections: string[];
 }
