@@ -8,7 +8,7 @@
 
 <div class="grille">
   {#each itemsEnFavori as itemCyber (itemCyber.id)}
-    <CarteItem {itemCyber} {avecBoutonFavori} />
+    <CarteItem item={itemCyber} {avecBoutonFavori} />
   {/each}
 </div>
 

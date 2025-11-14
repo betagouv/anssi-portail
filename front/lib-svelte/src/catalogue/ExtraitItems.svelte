@@ -16,6 +16,6 @@
 
 <div class="services">
   {#each $catalogueFiltre.resultats as itemCyber (itemCyber.id)}
-    <CarteItem {itemCyber}></CarteItem>
+    <CarteItem item={itemCyber}></CarteItem>
   {/each}
 </div>
