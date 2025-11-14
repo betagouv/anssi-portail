@@ -1,6 +1,7 @@
 import {
   DroitAcces,
   FormatRessource,
+  type Guide,
   type ItemCyber,
   Source,
   Typologie,
@@ -81,3 +82,36 @@ export const kitCyber = (): ItemCyber => ({
   sources: ['Gendarmerie'],
   droitsAcces: [DroitAcces.ACCES_LIBRE],
 });
+
+export const guideZeroTrust: Guide = {
+  id: 'zero-trust',
+  titre: 'Zero Trust',
+  description:
+    "Les fondamentaux du modèle Zero Trust pour sécuriser les systèmes d'information",
+  lienVignette:
+    'https://cyber.gouv.fr/sites/default/files/image/anssi-fondamentaux-zero-trust-v1_publication.jpg',
+  langue: 'FR',
+  collections: ['Les essentiels'],
+};
+
+export const guideDevsecops: Guide = {
+  id: 'devsecops',
+  titre: 'DevSecOps',
+  description:
+    'Intégrer la sécurité dans les pratiques DevOps pour renforcer la sécurité du développement logiciel',
+  lienVignette:
+    'https://cyber.gouv.fr/sites/default/files/image/anssi_essentiels_devsecops_v1.jpg',
+  langue: 'FR',
+  collections: ['Les essentiels'],
+};
+
+export const guideDevsecopsEN: Guide = {
+  id: 'devsecops',
+  titre: 'DevSecOps',
+  description:
+    'Integrating security into DevOps practices to enhance software development security',
+  lienVignette:
+    'https://cyber.gouv.fr/sites/default/files/image/anssi_essentiels_devsecops_v1.jpg',
+  langue: 'EN',
+  collections: ['The essentiels'],
+};
