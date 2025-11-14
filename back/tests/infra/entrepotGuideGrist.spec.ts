@@ -65,6 +65,8 @@ describe("L'entrepot de guide Grist", () => {
           .avecLeNumeroDeLigne(1)
           .avecLIdentifiant('guide1')
           .avecLeTitre('Premier guide')
+          .avecLeResume('Résumé du premier guide')
+          .avecLaDescription('<p>Description du premier guide</p>')
           .avecLImage('http://localhost:8080/vignette-1')
           .avecLaLangue('FR')
           .avecLesCollections(['Les essentiels'])
@@ -73,6 +75,8 @@ describe("L'entrepot de guide Grist", () => {
           .avecLeNumeroDeLigne(2)
           .avecLIdentifiant('guide2')
           .avecLeTitre('Deuxième guide')
+          .avecLeResume('Résumé du deuxième guide')
+          .avecLaDescription('<p>Description du deuxième guide</p>')
           .avecLImage('http://localhost:8080/vignette-2')
           .avecLaLangue('FR')
           .avecLesCollections(['Les essentiels'])
@@ -93,15 +97,19 @@ describe("L'entrepot de guide Grist", () => {
     assert.deepEqual(guides, [
       {
         id: 'guide1',
-        titre: 'Premier guide',
-        lienVignette: 'http://localhost:8080/vignette-1',
+        nom: 'Premier guide',
+        resume: 'Résumé du premier guide',
+        description: '<p>Description du premier guide</p>',
+        illustration: 'http://localhost:8080/vignette-1',
         langue: 'FR',
         collections: ['Les essentiels'],
       },
       {
         id: 'guide2',
-        titre: 'Deuxième guide',
-        lienVignette: 'http://localhost:8080/vignette-2',
+        nom: 'Deuxième guide',
+        resume: 'Résumé du deuxième guide',
+        description: '<p>Description du deuxième guide</p>',
+        illustration: 'http://localhost:8080/vignette-2',
         langue: 'FR',
         collections: ['Les essentiels'],
       },
