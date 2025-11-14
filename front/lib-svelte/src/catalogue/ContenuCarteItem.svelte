@@ -1,58 +1,67 @@
 <script lang="ts">
-  import { type ItemCyber, Typologie } from './Catalogue.types';
   import BoutonFavori from '../favoris/BoutonFavori.svelte';
+  import type { Guide, ItemCyber } from './Catalogue.types';
+  import { Typologie } from './Catalogue.types';
 
-  export let itemCyber: ItemCyber;
+  export let item: ItemCyber | Guide;
   export let avecBoutonFavori: boolean = false;
 
-  const libelleBadge = (item: ItemCyber) =>
-    item.typologie === Typologie.SERVICE ? 'Service' : item.format;
+  const libelleBadge = (item: ItemCyber | Guide) => {
+    if (item.type === 'Guide') return 'Guide';
+    return item.typologie === Typologie.SERVICE ? 'Service' : item.format;
+  };
 
   const tronque = (texte: string) => {
     const LONGUEUR_MAX = 54;
-    return texte.length > LONGUEUR_MAX
+    return texte?.length > LONGUEUR_MAX
       ? texte.slice(0, LONGUEUR_MAX) + '&hellip;'
       : texte;
   };
 </script>
 
 <figure>
-  <img
-    src="/assets/images/illustrations-services/{itemCyber.illustration}"
-    alt="Illustration du service"
-  />
-  <figcaption>{libelleBadge(itemCyber)}</figcaption>
+  {#if item.type === 'Guide'}
+    <img src={item.illustration} alt="Illustration du guide" />
+  {:else}
+    <img
+      src="/assets/images/illustrations-services/{item.illustration}"
+      alt="Illustration du service"
+    />
+  {/if}
+  <figcaption>{libelleBadge(item)}</figcaption>
 </figure>
 <div class="contenu">
   <div class="en-tete">
     <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-    <div class="nom-item">{@html itemCyber.nom}</div>
+    <div class="nom-item">{@html item.nom}</div>
     {#if avecBoutonFavori}
-      <BoutonFavori idItemCyber={itemCyber.id} />
+      <BoutonFavori idItemCyber={item.id} />
     {/if}
   </div>
   <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-  <span class="description">{@html tronque(itemCyber.description)}</span>
-  <div class="labels">
-    {#if itemCyber.sources}
-      {#each itemCyber.sources as source (source)}<span>{source}</span>{/each}
-    {/if}
-    {#if itemCyber.lienInterne || itemCyber.lienExterne}
-      <img
-        src={`/assets/images/${
-          itemCyber.lienInterne
-            ? 'icone-fleche-droite.svg'
-            : 'icone-lien-externe.svg'
-        }`}
-        alt={itemCyber.lienInterne
-          ? 'Voir le détail'
-          : 'Ouvrir dans un nouvel onglet'}
-        title={itemCyber.lienInterne
-          ? 'Voir le détail'
-          : 'Ouvrir dans un nouvel onglet'}
-      />
-    {/if}
-  </div>
+  <span class="description">{@html tronque(item.description)}</span>
+  {#if item.type !== 'Guide'}
+    <div class="labels">
+      {#if item.sources}
+        {#each item.sources as source (source)}<span>{source}</span>{/each}
+      {/if}
+      {#if item.lienInterne || item.lienExterne}
+        <img
+          src={`/assets/images/${
+            item.lienInterne
+              ? 'icone-fleche-droite.svg'
+              : 'icone-lien-externe.svg'
+          }`}
+          alt={item.lienInterne
+            ? 'Voir le détail'
+            : 'Ouvrir dans un nouvel onglet'}
+          title={item.lienInterne
+            ? 'Voir le détail'
+            : 'Ouvrir dans un nouvel onglet'}
+        />
+      {/if}
+    </div>
+  {/if}
 </div>
 
 <style lang="scss">
@@ -99,5 +108,4 @@
       }
     }
   }
-
 </style>
