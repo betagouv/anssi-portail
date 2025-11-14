@@ -16,6 +16,7 @@ export interface ItemCyber {
 export interface Guide {
   id: string;
   titre: string;
+  description: string;
   lienVignette: string;
   langue: string;
   collections: string[];

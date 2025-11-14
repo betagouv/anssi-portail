@@ -1,15 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { rechercheParLangue } from '../../../src/catalogue/stores/rechercheParLangue.store';
-import type { Guide } from '../../../src/catalogue/Catalogue.types';
-
-const guideZeroTrust: Guide = {
-  id: 'zero-trust',
-  titre: 'Zero Trust',
-  lienVignette:
-    'https://cyber.gouv.fr/sites/default/files/image/anssi-fondamentaux-zero-trust-v1_publication.jpg',
-  langue: 'FR',
-  collections: ['Les essentiels'],
-};
+import { guideZeroTrust } from './objetsExemples';
 
 describe('La recherche par langue', () => {
   it('retourne vrai lorsque la langue du filtre correspond à la langue du guide', () => {
