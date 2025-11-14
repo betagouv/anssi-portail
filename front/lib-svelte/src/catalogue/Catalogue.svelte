@@ -85,9 +85,11 @@
         <ChampRecherche bind:recherche={$rechercheTextuelle} />
         <EnteteFiltres />
         <div class="barre-filtres">
-          <FiltreAccessibilite />
-          <FiltreTypologieEtFormat />
-          <FiltreSource />
+          {#if !afficheLesGuides}
+            <FiltreAccessibilite />
+            <FiltreTypologieEtFormat />
+            <FiltreSource />
+          {/if}
           <input
             type="button"
             class="bouton primaire"
@@ -97,23 +99,25 @@
         </div>
       </div>
 
-      {#each $catalogueFiltre.resultats as itemCyber (itemCyber.id)}
-        <CarteItem {itemCyber} avecBoutonFavori />
-      {:else}
-        <div class="aucun-resultat">
-          <img
-            src="/assets/images/illustration-aucun-resultat.svg"
-            alt="Aucun résultat"
-          />
-          <h1>Désolé, aucun résultat trouvé</h1>
-          <input
-            type="button"
-            class="bouton primaire"
-            value="Réinitialiser les filtres"
-            onclick={reinitialiseFiltres}
-          />
-        </div>
-      {/each}
+      {#if !afficheLesGuides}
+        {#each $catalogueFiltre.resultats as itemCyber (itemCyber.id)}
+          <CarteItem {itemCyber} avecBoutonFavori />
+        {:else}
+          <div class="aucun-resultat">
+            <img
+              src="/assets/images/illustration-aucun-resultat.svg"
+              alt="Aucun résultat"
+            />
+            <h1>Désolé, aucun résultat trouvé</h1>
+            <input
+              type="button"
+              class="bouton primaire"
+              value="Réinitialiser les filtres"
+              onclick={reinitialiseFiltres}
+            />
+          </div>
+        {/each}
+      {/if}
     </div>
   </div>
 </div>
