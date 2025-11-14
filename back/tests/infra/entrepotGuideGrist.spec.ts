@@ -31,6 +31,7 @@ describe("L'entrepot de guide Grist", () => {
 
     assert.deepEqual(guides, []);
   });
+
   it('sait récupérer des guides en appelant Grist', async () => {
     let urlAppelee = '';
     let headerAuthent;
@@ -65,12 +66,16 @@ describe("L'entrepot de guide Grist", () => {
           .avecLIdentifiant('guide1')
           .avecLeTitre('Premier guide')
           .avecLImage('http://localhost:8080/vignette-1')
+          .avecLaLangue('FR')
+          .avecLesCollections(['Les essentiels'])
           .construis(),
         new ConstructeurGuideGrist()
           .avecLeNumeroDeLigne(2)
           .avecLIdentifiant('guide2')
           .avecLeTitre('Deuxième guide')
           .avecLImage('http://localhost:8080/vignette-2')
+          .avecLaLangue('FR')
+          .avecLesCollections(['Les essentiels'])
           .construis(),
       ],
     };
@@ -90,11 +95,15 @@ describe("L'entrepot de guide Grist", () => {
         id: 'guide1',
         titre: 'Premier guide',
         lienVignette: 'http://localhost:8080/vignette-1',
+        langue: 'FR',
+        collections: ['Les essentiels'],
       },
       {
         id: 'guide2',
         titre: 'Deuxième guide',
         lienVignette: 'http://localhost:8080/vignette-2',
+        langue: 'FR',
+        collections: ['Les essentiels'],
       },
     ]);
   });
