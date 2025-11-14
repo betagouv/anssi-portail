@@ -1,19 +1,20 @@
 import { get, writable } from 'svelte/store';
-import type { ItemCyber } from '../Catalogue.types';
+import type { Guide, ItemCyber } from '../Catalogue.types';
 
 const store = writable<string>('');
 
 export const rechercheTextuelle = {
   subscribe: store.subscribe,
   set: store.set,
-  ok: (item: ItemCyber) => {
+  reinitialise: () => store.set(''),
+  ok: (item: ItemCyber | Guide) => {
     if (!get(rechercheTextuelle)) return true;
     return (
       item.nom
         .replace('&ZeroWidthSpace;', '')
         .toLowerCase()
         .includes(get(rechercheTextuelle).toLowerCase()) ||
-      item.description
+      (item.description ?? '')
         .toLowerCase()
         .includes(get(rechercheTextuelle).toLowerCase())
     );

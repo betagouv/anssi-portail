@@ -1,16 +1,29 @@
 export type IdItemCyber = string;
 
-export interface ItemCyber {
-  id: IdItemCyber;
-  typologie: Typologie;
+export interface Item {
+  type: 'ItemCyber' | 'Guide';
+  id: string;
   nom: string;
   illustration: string;
+}
+
+export interface ItemCyber extends Item {
+  type: 'ItemCyber';
+  typologie: Typologie;
   description: string;
   lienInterne: string;
   sources?: string[];
   droitsAcces: DroitAcces[];
   format?: FormatRessource;
   lienExterne: string;
+}
+
+export interface Guide extends Item {
+  type: 'Guide';
+  resume: string;
+  description: string;
+  langue: string;
+  collections: string[];
 }
 
 export enum BesoinCyber {

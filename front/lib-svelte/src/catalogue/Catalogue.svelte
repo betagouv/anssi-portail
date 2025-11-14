@@ -11,8 +11,27 @@
   import { profilStore } from '../stores/profil.store';
   import ChampRecherche from '../ui/ChampRecherche.svelte';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
+  import { onMount } from 'svelte';
+  import { guidesStore } from './stores/guides.store';
+  import axios from 'axios';
+  import { guidesFiltres } from './stores/guidesFiltres.store';
+  import type { Guide } from './Catalogue.types';
 
   const reinitialiseFiltres = () => recherches.reinitialise();
+
+  let afficheLesGuides = $state(false);
+  const changeAffichage = () => {
+    afficheLesGuides = !afficheLesGuides;
+  };
+
+  onMount(async () => {
+    const reponse = await axios.get<Guide[]>('/api/guides');
+    const guides = reponse.data.map((guide) => ({
+      ...guide,
+      type: 'Guide' as const,
+    }));
+    guidesStore.initialise(guides);
+  });
 </script>
 
 <Hero
@@ -42,7 +61,7 @@
         type="button"
         class="bouton primaire"
         value="Réinitialiser les filtres"
-        on:click={reinitialiseFiltres}
+        onclick={reinitialiseFiltres}
       />
     </div>
   </details>
@@ -54,6 +73,25 @@
   </div>
 </section>
 
+<div class="controle-segmente">
+  <button
+    class="bouton-segmente"
+    class:actif={!afficheLesGuides}
+    onclick={changeAffichage}
+  >
+    <img src="/assets/images/icone-liste.svg" alt="" />
+    <span>Services et outils</span>
+  </button>
+  <button
+    class="bouton-segmente"
+    class:actif={afficheLesGuides}
+    onclick={changeAffichage}
+  >
+    <img src="/assets/images/icone-livre.svg" alt="" />
+    <span>Guides de l'ANSSI</span>
+  </button>
+</div>
+
 <div class="contenu-catalogue">
   <div class="contenu-section">
     <div class="grille">
@@ -61,35 +99,74 @@
         <ChampRecherche bind:recherche={$rechercheTextuelle} />
         <EnteteFiltres />
         <div class="barre-filtres">
-          <FiltreAccessibilite />
-          <FiltreTypologieEtFormat />
-          <FiltreSource />
+          {#if afficheLesGuides}
+            <p>À venir</p>
+          {:else}
+            <FiltreAccessibilite />
+            <FiltreTypologieEtFormat />
+            <FiltreSource />
+          {/if}
           <input
             type="button"
             class="bouton primaire"
             value="Réinitialiser les filtres"
-            on:click={reinitialiseFiltres}
+            onclick={reinitialiseFiltres}
           />
         </div>
       </div>
 
-      {#each $catalogueFiltre.resultats as itemCyber (itemCyber.id)}
-        <CarteItem {itemCyber} avecBoutonFavori />
+      {#if afficheLesGuides}
+        {#each $guidesFiltres.resultats as guide (guide.id)}
+          <CarteItem item={guide} avecBoutonFavori />
+        {:else}
+          <div class="aucun-resultat">
+            <img
+              src="/assets/images/illustration-aucun-resultat.svg"
+              alt="Aucun résultat"
+            />
+            <h1>Désolé, aucun résultat trouvé</h1>
+            <input
+              type="button"
+              class="bouton primaire"
+              value="Réinitialiser les filtres"
+              onclick={reinitialiseFiltres}
+            />
+          </div>
+        {/each}
       {:else}
-        <div class="aucun-resultat">
-          <img
-            src="/assets/images/illustration-aucun-resultat.svg"
-            alt="Aucun résultat"
-          />
-          <h1>Désolé, aucun résultat trouvé</h1>
-          <input
-            type="button"
-            class="bouton primaire"
-            value="Réinitialiser les filtres"
-            on:click={reinitialiseFiltres}
-          />
-        </div>
-      {/each}
+        {#each $catalogueFiltre.resultats as itemCyber (itemCyber.id)}
+          <CarteItem item={itemCyber} avecBoutonFavori />
+        {:else}
+          <div class="aucun-resultat">
+            <img
+              src="/assets/images/illustration-aucun-resultat.svg"
+              alt="Aucun résultat"
+            />
+            <h1>Désolé, aucun résultat trouvé</h1>
+            <input
+              type="button"
+              class="bouton primaire"
+              value="Réinitialiser les filtres"
+              onclick={reinitialiseFiltres}
+            />
+          </div>
+        {/each}
+      {/if}
     </div>
   </div>
 </div>
+
+<style lang="scss">
+  .controle-segmente {
+    margin: 3rem auto 1rem;
+    width: min-content;
+
+    .bouton-segmente {
+      padding: 0.5rem 1rem 0.5rem 0.75rem;
+
+      img {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+</style>
