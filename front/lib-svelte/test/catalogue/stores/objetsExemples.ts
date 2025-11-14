@@ -84,33 +84,39 @@ export const kitCyber = (): ItemCyber => ({
 });
 
 export const guideZeroTrust: Guide = {
+  type: 'Guide',
   id: 'zero-trust',
-  titre: 'Zero Trust',
+  nom: 'Zero Trust',
+  resume: 'Les fondamentaux du modèle Zero Trust',
   description:
     "Les fondamentaux du modèle Zero Trust pour sécuriser les systèmes d'information",
-  lienVignette:
+  illustration:
     'https://cyber.gouv.fr/sites/default/files/image/anssi-fondamentaux-zero-trust-v1_publication.jpg',
   langue: 'FR',
   collections: ['Les essentiels'],
 };
 
 export const guideDevsecops: Guide = {
+  type: 'Guide',
   id: 'devsecops',
-  titre: 'DevSecOps',
+  nom: 'DevSecOps',
+  resume: 'Intégrer la sécurité dans les pratiques DevOps',
   description:
     'Intégrer la sécurité dans les pratiques DevOps pour renforcer la sécurité du développement logiciel',
-  lienVignette:
+  illustration:
     'https://cyber.gouv.fr/sites/default/files/image/anssi_essentiels_devsecops_v1.jpg',
   langue: 'FR',
   collections: ['Les essentiels'],
 };
 
 export const guideDevsecopsEN: Guide = {
+  type: 'Guide',
   id: 'devsecops',
-  titre: 'DevSecOps',
+  nom: 'DevSecOps',
+  resume: 'Integrating security into DevOps practices',
   description:
     'Integrating security into DevOps practices to enhance software development security',
-  lienVignette:
+  illustration:
     'https://cyber.gouv.fr/sites/default/files/image/anssi_essentiels_devsecops_v1.jpg',
   langue: 'EN',
   collections: ['The essentiels'],
