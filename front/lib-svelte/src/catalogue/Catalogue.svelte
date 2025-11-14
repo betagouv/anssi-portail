@@ -11,6 +11,11 @@
   import { profilStore } from '../stores/profil.store';
   import ChampRecherche from '../ui/ChampRecherche.svelte';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
+  import { onMount } from 'svelte';
+  import { guidesStore } from './stores/guides.store';
+  import axios from 'axios';
+  import { guidesFiltres } from './stores/guidesFiltres.store';
+  import type { Guide } from './Catalogue.types';
 
   const reinitialiseFiltres = () => recherches.reinitialise();
 
@@ -18,6 +23,15 @@
   const changeAffichage = () => {
     afficheLesGuides = !afficheLesGuides;
   };
+
+  onMount(async () => {
+    const reponse = await axios.get<Guide[]>('/api/guides');
+    const guides = reponse.data.map((guide) => ({
+      ...guide,
+      type: 'Guide' as const,
+    }));
+    guidesStore.initialise(guides);
+  });
 </script>
 
 <Hero
@@ -85,7 +99,9 @@
         <ChampRecherche bind:recherche={$rechercheTextuelle} />
         <EnteteFiltres />
         <div class="barre-filtres">
-          {#if !afficheLesGuides}
+          {#if afficheLesGuides}
+            <p>À venir</p>
+          {:else}
             <FiltreAccessibilite />
             <FiltreTypologieEtFormat />
             <FiltreSource />
@@ -99,9 +115,27 @@
         </div>
       </div>
 
-      {#if !afficheLesGuides}
+      {#if afficheLesGuides}
+        {#each $guidesFiltres.resultats as guide (guide.id)}
+          <CarteItem item={guide} avecBoutonFavori />
+        {:else}
+          <div class="aucun-resultat">
+            <img
+              src="/assets/images/illustration-aucun-resultat.svg"
+              alt="Aucun résultat"
+            />
+            <h1>Désolé, aucun résultat trouvé</h1>
+            <input
+              type="button"
+              class="bouton primaire"
+              value="Réinitialiser les filtres"
+              onclick={reinitialiseFiltres}
+            />
+          </div>
+        {/each}
+      {:else}
         {#each $catalogueFiltre.resultats as itemCyber (itemCyber.id)}
-          <CarteItem {itemCyber} avecBoutonFavori />
+          <CarteItem item={itemCyber} avecBoutonFavori />
         {:else}
           <div class="aucun-resultat">
             <img

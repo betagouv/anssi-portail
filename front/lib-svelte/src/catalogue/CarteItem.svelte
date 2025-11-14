@@ -1,24 +1,36 @@
 <script lang="ts">
-  import { type ItemCyber } from './Catalogue.types';
+  import type { Guide, ItemCyber } from './Catalogue.types';
   import ContenuCarteItem from './ContenuCarteItem.svelte';
 
-  export let itemCyber: ItemCyber;
+  export let item: ItemCyber | Guide;
   export let avecBoutonFavori: boolean = false;
 </script>
 
-{#if itemCyber.lienInterne || itemCyber.lienExterne}
+{#if item.type === 'Guide'}
   <a
-    class="carte {itemCyber.typologie}"
-    target={itemCyber.lienInterne ? '' : '_blank'}
-    href={itemCyber.lienInterne ?? itemCyber.lienExterne}
-    class:lien-externe-produit={!itemCyber.lienInterne}
-    data-source="Catalogue"
-    data-cible={itemCyber.nom}
+    class="carte guide"
+    href={'/guides/' + item.id}
+    data-source="Guide"
+    data-cible={item.nom}
   >
-    <ContenuCarteItem {itemCyber} {avecBoutonFavori} />
+    <ContenuCarteItem
+      item={{ ...item, description: item.resume }}
+      {avecBoutonFavori}
+    />
+  </a>
+{:else if item.lienInterne || item.lienExterne}
+  <a
+    class="carte {item.typologie}"
+    target={item.lienInterne ? '' : '_blank'}
+    href={item.lienInterne ?? item.lienExterne}
+    class:lien-externe-produit={!item.lienInterne}
+    data-source="Catalogue"
+    data-cible={item.nom}
+  >
+    <ContenuCarteItem {item} {avecBoutonFavori} />
   </a>
 {:else}
-  <div class="carte {itemCyber.typologie}">
-    <ContenuCarteItem {itemCyber} {avecBoutonFavori} />
+  <div class="carte {item.typologie}">
+    <ContenuCarteItem {item} {avecBoutonFavori} />
   </div>
 {/if}
