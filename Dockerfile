@@ -9,7 +9,7 @@
 ####
 ## BUILD du front
 ###
-FROM ruby:3.3.5-alpine3.20 AS build-le-site
+FROM docker.io/ruby:3.3.5-alpine3.20 AS build-le-site
 
 ENV SETUPDIR=/setup
 WORKDIR ${SETUPDIR}
@@ -75,7 +75,7 @@ RUN set -eux; bundler exec jekyll build
 ####
 ## BUILD du back
 ####
-FROM node:23 AS build-le-back
+FROM docker.io/node:23 AS build-le-back
 RUN npm install -g npm
 WORKDIR /usr/src/app
 COPY back/package.json package-lock.json back/tsconfig.json back/knexfile.ts /usr/src/app/
@@ -88,7 +88,7 @@ COPY back/migrations /usr/src/dist-back/migrations
 ####
 ## SERVEUR
 ####
-FROM node:23-alpine
+FROM docker.io/node:23-alpine
 EXPOSE 3000
 
 RUN set -eux; \
