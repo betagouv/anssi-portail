@@ -1,7 +1,9 @@
 export type Guide = {
   id: string;
-  titre: string;
-  lienVignette: string;
+  nom: string;
+  resume: string;
+  description: string;
+  illustration: string;
   langue: 'FR' | 'EN';
   collections: string[];
 };
