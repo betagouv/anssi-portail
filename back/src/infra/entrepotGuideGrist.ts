@@ -9,6 +9,8 @@ export type GuideGrist = {
   fields: {
     Identifiant: string | null;
     Titre: string | null;
+    Resume: string | null;
+    Description: string | null;
     Image: string | null;
     Langue: 'FR' | 'EN' | null;
     Collections: string[];
@@ -37,8 +39,10 @@ export class EntrepotGuideGrist implements EntrepotGuide {
   private convertisGuideGrist(guideGrist: GuideGrist): Guide {
     return {
       id: guideGrist.fields.Identifiant ?? '',
-      titre: guideGrist.fields.Titre ?? '',
-      lienVignette: guideGrist.fields.Image ?? '',
+      nom: guideGrist.fields.Titre ?? '',
+      resume: guideGrist.fields.Resume ?? '',
+      description: guideGrist.fields.Description ?? '',
+      illustration: guideGrist.fields.Image ?? '',
       langue: guideGrist.fields.Langue ?? 'FR',
       collections: guideGrist.fields.Collections ?? [],
     };
