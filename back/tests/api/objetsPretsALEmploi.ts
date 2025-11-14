@@ -53,6 +53,8 @@ export const guideZeroTrust: Guide = {
   titre: 'Zero Trust',
   lienVignette:
     'https://cyber.gouv.fr/sites/default/files/image/anssi-fondamentaux-zero-trust-v1_publication.jpg',
+  langue: 'FR',
+  collections: ['Les essentiels'],
 };
 
 export const guideDevsecops: Guide = {
@@ -60,4 +62,6 @@ export const guideDevsecops: Guide = {
   titre: 'DevSecOps',
   lienVignette:
     'https://cyber.gouv.fr/sites/default/files/image/anssi_essentiels_devsecops_v1.jpg',
+  langue: 'FR',
+  collections: ['Les essentiels'],
 };

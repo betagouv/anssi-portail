@@ -10,6 +10,8 @@ export type GuideGrist = {
     Identifiant: string | null;
     Titre: string | null;
     Image: string | null;
+    Langue: 'FR' | 'EN' | null;
+    Collections: string[];
   };
 };
 
@@ -37,6 +39,8 @@ export class EntrepotGuideGrist implements EntrepotGuide {
       id: guideGrist.fields.Identifiant ?? '',
       titre: guideGrist.fields.Titre ?? '',
       lienVignette: guideGrist.fields.Image ?? '',
+      langue: guideGrist.fields.Langue ?? 'FR',
+      collections: guideGrist.fields.Collections ?? [],
     };
   }
 
