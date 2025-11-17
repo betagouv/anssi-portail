@@ -23,7 +23,7 @@ export class RecuperateurGuide {
     const partiesURL = urlGuide.split('/');
     const langue = urlGuide.includes('/en/') ? 'EN' : 'FR';
     return {
-      id: partiesURL.at(-1)!,
+      id: (langue === 'EN' ? 'en-' : '') + partiesURL.at(-1)!,
       titre: this.recupereTexte(document, 'h1'),
       resume: this.recupereTexte(document, '.banniere-group p'),
       datePublication: this.recupereDate(document, '.published-on'),
