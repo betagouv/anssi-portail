@@ -9,6 +9,7 @@ import {
 } from './objetsExemples';
 import { guidesFiltres } from '../../../src/catalogue/stores/guidesFiltres.store';
 import { rechercheParLangue } from '../../../src/catalogue/stores/rechercheParLangue.store';
+import { Langue } from '../../../src/catalogue/Catalogue.types';
 
 describe('Le store des guides filtrés', () => {
   beforeEach(() => {
@@ -59,7 +60,7 @@ describe('Le store des guides filtrés', () => {
     // d'autres tests plus spécifiques sont dans rechercheParSource.store.spec
     it('conserve uniquement les items correspondants', () => {
       guidesStore.initialise([guideZeroTrust, guideDevsecopsEN]);
-      rechercheParLangue.set('FR');
+      rechercheParLangue.set([Langue.FR]);
 
       const { resultats } = get(guidesFiltres);
 
@@ -68,7 +69,7 @@ describe('Le store des guides filtrés', () => {
     });
 
     it("conserve tous les items en cas d'absence de langue", () => {
-      rechercheParLangue.set('');
+      rechercheParLangue.set([]);
 
       const { resultats } = get(guidesFiltres);
 

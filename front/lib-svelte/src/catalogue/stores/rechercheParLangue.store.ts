@@ -1,14 +1,15 @@
 import { get, writable } from 'svelte/store';
 import type { Guide, Langue } from '../Catalogue.types';
 
-const selectionDeLangue = writable<Langue | undefined>();
+const selectionDeLangue = writable<Langue[]>([]);
 
 export const rechercheParLangue = {
-  ...selectionDeLangue,
-  reinitialise: () => selectionDeLangue.set(undefined),
+  subscribe: selectionDeLangue.subscribe,
+  set: selectionDeLangue.set,
+  reinitialise: () => selectionDeLangue.set([]),
   ok: (guide: Guide) => {
-    const langue = get(selectionDeLangue);
-    if (!langue) return true;
-    return guide.langue === langue;
+    const langues = get(selectionDeLangue);
+    if (!langues.length) return true;
+    return langues.some((langue) => langue.valueOf() === guide.langue);
   },
 };
