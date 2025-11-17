@@ -1,3 +1,4 @@
+import fs from 'node:fs/promises';
 import { lecteurDeSiteHttp } from './lecteurDeSiteHttp';
 import { RecuperateurDAdressesDesGuides } from './recuperateurDAdressesDesGuides';
 import { RecuperateurGuide } from './recuperateurGuide';
@@ -26,4 +27,9 @@ const guides = await Promise.all(
 
 const guidesEnCsv = transformeEnCsv(guides);
 
-console.log(guidesEnCsv);
+console.log('Ecriture des guides dans un CSV...');
+
+await fs.mkdir('sortie');
+await fs.writeFile('sortie/guides.csv', guidesEnCsv);
+
+console.log('... Terminé !');
