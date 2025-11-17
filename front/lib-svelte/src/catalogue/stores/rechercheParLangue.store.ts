@@ -1,10 +1,10 @@
 import { get, writable } from 'svelte/store';
-import type { Guide } from '../Catalogue.types';
+import type { Guide, Langue } from '../Catalogue.types';
 
-const selectionDeLangue = writable<string | undefined>(undefined);
+const selectionDeLangue = writable<Langue | undefined>();
 
 export const rechercheParLangue = {
-  set: selectionDeLangue.set,
+  ...selectionDeLangue,
   reinitialise: () => selectionDeLangue.set(undefined),
   ok: (guide: Guide) => {
     const langue = get(selectionDeLangue);

@@ -60,3 +60,8 @@ export enum Source {
   INNOVATION_ANSSI = 'Innovation ANSSI',
   PARTENAIRES = 'Partenaires',
 }
+
+export enum Langue {
+  FR = 'FR',
+  EN = 'EN',
+}
