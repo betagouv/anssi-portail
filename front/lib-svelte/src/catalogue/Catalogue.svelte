@@ -1,21 +1,22 @@
 <script lang="ts">
-  import { catalogueFiltre } from './stores/catalogueFiltre.store';
-  import FiltreBesoin from './FiltreBesoin.svelte';
-  import FiltreAccessibilite from './FiltreAccessibilite.svelte';
-  import FiltreTypologieEtFormat from './FiltreTypologieEtFormat.svelte';
-  import FiltreSource from './FiltreSource.svelte';
-  import { recherches } from './stores/recherches.store';
-  import CarteItem from './CarteItem.svelte';
-  import EnteteFiltres from './EnteteFiltres.svelte';
-  import Hero from '../ui/Hero.svelte';
+  import axios from 'axios';
+  import { onMount } from 'svelte';
   import { profilStore } from '../stores/profil.store';
   import ChampRecherche from '../ui/ChampRecherche.svelte';
-  import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
-  import { onMount } from 'svelte';
-  import { guidesStore } from './stores/guides.store';
-  import axios from 'axios';
-  import { guidesFiltres } from './stores/guidesFiltres.store';
+  import Hero from '../ui/Hero.svelte';
+  import CarteItem from './CarteItem.svelte';
   import type { Guide } from './Catalogue.types';
+  import EnteteFiltres from './EnteteFiltres.svelte';
+  import FiltreAccessibilite from './FiltreAccessibilite.svelte';
+  import FiltreBesoin from './FiltreBesoin.svelte';
+  import FiltreLangue from './FiltreLangue.svelte';
+  import FiltreSource from './FiltreSource.svelte';
+  import FiltreTypologieEtFormat from './FiltreTypologieEtFormat.svelte';
+  import { catalogueFiltre } from './stores/catalogueFiltre.store';
+  import { guidesStore } from './stores/guides.store';
+  import { guidesFiltres } from './stores/guidesFiltres.store';
+  import { recherches } from './stores/recherches.store';
+  import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
 
   const reinitialiseFiltres = () => recherches.reinitialise();
 
@@ -100,7 +101,7 @@
         <EnteteFiltres />
         <div class="barre-filtres">
           {#if afficheLesGuides}
-            <p>À venir</p>
+            <FiltreLangue />
           {:else}
             <FiltreAccessibilite />
             <FiltreTypologieEtFormat />

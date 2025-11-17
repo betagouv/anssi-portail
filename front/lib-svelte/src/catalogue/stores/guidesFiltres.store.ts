@@ -1,11 +1,14 @@
-import { derived, get } from 'svelte/store';
+import { derived } from 'svelte/store';
 import { guidesStore } from './guides.store';
-import { rechercheTextuelle } from './rechercheTextuelle.store';
 import { rechercheParLangue } from './rechercheParLangue.store';
+import { rechercheTextuelle } from './rechercheTextuelle.store';
 
-export const guidesFiltres = derived([guidesStore], () => {
-  const resultats = get(guidesStore)
-    .filter(rechercheTextuelle.ok)
-    .filter(rechercheParLangue.ok);
-  return { resultats };
-});
+export const guidesFiltres = derived(
+  [guidesStore, rechercheTextuelle, rechercheParLangue],
+  ([guidesStore]) => {
+    const resultats = guidesStore
+      .filter(rechercheTextuelle.ok)
+      .filter(rechercheParLangue.ok);
+    return { resultats };
+  }
+);
