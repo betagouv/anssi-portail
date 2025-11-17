@@ -3,6 +3,7 @@ import { lecteurDeSiteHttp } from './lecteurDeSiteHttp';
 import { RecuperateurDAdressesDesGuides } from './recuperateurDAdressesDesGuides';
 import { RecuperateurGuide } from './recuperateurGuide';
 import { transformeEnCsv } from './transformateurCsv';
+import { recupereDocuments } from './recuperateurDocuments';
 
 const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(
   lecteurDeSiteHttp
@@ -29,7 +30,11 @@ const guidesEnCsv = transformeEnCsv(guides);
 
 console.log('Ecriture des guides dans un CSV...');
 
-await fs.mkdir('sortie');
+await fs.access('sortie').catch(async () => {
+  await fs.mkdir('sortie');
+});
 await fs.writeFile('sortie/guides.csv', guidesEnCsv);
 
+console.log('Récupération des images...');
+await recupereDocuments(guides);
 console.log('... Terminé !');
