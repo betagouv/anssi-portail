@@ -1,9 +1,10 @@
-import { derived } from "svelte/store";
-import { rechercheParBesoin } from "./rechercheParBesoin.store";
-import { rechercheParDroitAcces } from "./rechercheParDroitAcces.store";
-import { rechercheParTypologie } from "./rechercheParTypologie.store";
-import { rechercheParFormat } from "./rechercheParFormat.store";
-import { rechercheParSource } from "./rechercheParSource.store";
+import { derived } from 'svelte/store';
+import { rechercheParBesoin } from './rechercheParBesoin.store';
+import { rechercheParDroitAcces } from './rechercheParDroitAcces.store';
+import { rechercheParTypologie } from './rechercheParTypologie.store';
+import { rechercheParFormat } from './rechercheParFormat.store';
+import { rechercheParSource } from './rechercheParSource.store';
+import { rechercheParLangue } from './rechercheParLangue.store';
 
 const recherches2 = derived(
   [
@@ -12,6 +13,7 @@ const recherches2 = derived(
     rechercheParTypologie,
     rechercheParFormat,
     rechercheParSource,
+    rechercheParLangue,
   ],
   ([
     $rechercheParDroitAcces,
@@ -19,14 +21,16 @@ const recherches2 = derived(
     $rechercheParTypologie,
     $rechercheParFormat,
     $rechercheParSource,
+    $rechercheParLangue,
   ]) => ({
     filtreActif:
       $rechercheParDroitAcces.length !== 0 ||
       !!$rechercheParBesoin ||
       $rechercheParTypologie.length !== 0 ||
       $rechercheParFormat.length !== 0 ||
-      $rechercheParSource.length !== 0,
-  }),
+      $rechercheParSource.length !== 0 ||
+      $rechercheParLangue.length !== 0,
+  })
 );
 
 export const recherches = {
@@ -37,5 +41,6 @@ export const recherches = {
     rechercheParTypologie.reinitialise();
     rechercheParFormat.reinitialise();
     rechercheParSource.reinitialise();
+    rechercheParLangue.reinitialise();
   },
 };
