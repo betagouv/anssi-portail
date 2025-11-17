@@ -70,6 +70,9 @@ export class RecuperateurGuide {
     { urlDeBase }: { urlDeBase?: string }
   ) {
     const lien = document.querySelector(selecteur)!.getAttribute(attribut)!;
+    if (!lien) {
+      return '';
+    }
     return new URL(lien, urlDeBase).toString();
   }
 
