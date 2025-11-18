@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import type { Guide } from '../../../src/catalogue/Catalogue.types';
+import {
+  CollectionGuide,
+  type Guide,
+} from '../../../src/catalogue/Catalogue.types';
 import { rechercheParCollection } from '../../../src/catalogue/stores/rechercheParCollection.store';
 
 const guideZeroTrust: Guide = {
@@ -17,7 +20,7 @@ const guideZeroTrust: Guide = {
 
 describe('La recherche par collection', () => {
   it('retourne vrai lorsque la collection du filtre correspond à la collection du guide', () => {
-    rechercheParCollection.set(['Les essentiels']);
+    rechercheParCollection.set([CollectionGuide.LES_ESSENTIELS]);
 
     const resultat = rechercheParCollection.ok(guideZeroTrust);
 
@@ -25,7 +28,7 @@ describe('La recherche par collection', () => {
   });
 
   it('retourne faux lorsque la collection du filtre ne correspond pas à la collection du guide', () => {
-    rechercheParCollection.set(['Autre collection']);
+    rechercheParCollection.set([CollectionGuide.CRISE_CYBER]);
 
     const resultat = rechercheParCollection.ok(guideZeroTrust);
 
@@ -33,7 +36,7 @@ describe('La recherche par collection', () => {
   });
 
   it('retourne vrai quand on la réinitialise', () => {
-    rechercheParCollection.set(['Autre collection']);
+    rechercheParCollection.set([CollectionGuide.CRISE_CYBER]);
 
     rechercheParCollection.reinitialise();
 
@@ -42,7 +45,10 @@ describe('La recherche par collection', () => {
   });
 
   it("retourne vrai lorsque plusieurs collections sont sélectionnées et qu'une correspond", () => {
-    rechercheParCollection.set(['Autre collection', 'Les essentiels']);
+    rechercheParCollection.set([
+      CollectionGuide.CRISE_CYBER,
+      CollectionGuide.LES_ESSENTIELS,
+    ]);
 
     const resultat = rechercheParCollection.ok(guideZeroTrust);
 
