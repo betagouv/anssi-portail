@@ -7,9 +7,10 @@
   "scripts": {
     "build": "vite build",
     "watch": "vite build -w --minify false",
-    "test": "npx eslint . && vitest --run",
+    "test": "npm run typecheck && npx eslint . && vitest --run",
     "lint": "npx eslint .",
-    "lint:fix": "npx eslint . --fix"
+    "lint:fix": "npx eslint . --fix",
+    "typecheck": "tsc --noEmit && svelte-check"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^5.1.1",

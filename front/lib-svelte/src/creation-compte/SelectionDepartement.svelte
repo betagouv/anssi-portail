@@ -1,7 +1,7 @@
 <script lang="ts">
   import ChampTexte from '../ui/ChampTexte.svelte';
-  import type { Departement } from './creationCompte';
   import FermetureSurClicEnDehors from '../ui/FermetureSurClicEnDehors.svelte';
+  import type { Departement } from '../ui/formulaire/SelectionOrganisation.types';
 
   export let departements: Departement[];
   export let valeur: Departement | '' = '';
