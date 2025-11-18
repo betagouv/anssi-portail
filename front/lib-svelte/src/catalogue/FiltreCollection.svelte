@@ -1,5 +1,6 @@
 <script lang="ts">
   import { CollectionGuide } from './Catalogue.types';
+  import { nombreGuides } from './stores/nombreGuides.store';
   import { rechercheParCollection } from './stores/rechercheParCollection.store';
 
   $: toutesLesExpertiseTechnique =
@@ -36,6 +37,10 @@
       type="checkbox"
     />
     <span class="libelle">Expertise technique</span>
+    <span class="compte">
+      {($nombreGuides.parCollection[CollectionGuide.LES_ESSENTIELS] ?? 0) +
+        ($nombreGuides.parCollection[CollectionGuide.LES_FONDAMENTAUX] ?? 0)}
+    </span>
   </label>
   <fieldset>
     <label>
@@ -45,6 +50,9 @@
         bind:group={$rechercheParCollection}
       />
       <span class="libelle">{CollectionGuide.LES_ESSENTIELS}</span>
+      <span class="compte">
+        {$nombreGuides.parCollection[CollectionGuide.LES_ESSENTIELS]}
+      </span>
     </label>
     <label>
       <input
@@ -53,6 +61,9 @@
         bind:group={$rechercheParCollection}
       />
       <span class="libelle">{CollectionGuide.LES_FONDAMENTAUX}</span>
+      <span class="compte">
+        {$nombreGuides.parCollection[CollectionGuide.LES_FONDAMENTAUX]}
+      </span>
     </label>
   </fieldset>
   <label>
@@ -62,6 +73,9 @@
       bind:group={$rechercheParCollection}
     />
     <span class="libelle">{CollectionGuide.CRISE_CYBER}</span>
+    <span class="compte">
+      {$nombreGuides.parCollection[CollectionGuide.CRISE_CYBER]}
+    </span>
   </label>
   <label>
     <input
@@ -70,6 +84,9 @@
       bind:group={$rechercheParCollection}
     />
     <span class="libelle">{CollectionGuide.GESTION_DES_RISQUES_CYBER}</span>
+    <span class="compte">
+      {$nombreGuides.parCollection[CollectionGuide.GESTION_DES_RISQUES_CYBER]}
+    </span>
   </label>
   <label>
     <input
@@ -78,6 +95,9 @@
       bind:group={$rechercheParCollection}
     />
     <span class="libelle">{CollectionGuide.SUPERVISION_DE_SECURITE}</span>
+    <span class="compte">
+      {$nombreGuides.parCollection[CollectionGuide.SUPERVISION_DE_SECURITE]}
+    </span>
   </label>
   <label>
     <input
@@ -86,5 +106,8 @@
       bind:group={$rechercheParCollection}
     />
     <span class="libelle">{CollectionGuide.REMEDIATION}</span>
+    <span class="compte">
+      {$nombreGuides.parCollection[CollectionGuide.REMEDIATION]}
+    </span>
   </label>
 </fieldset>
