@@ -1,3 +1,4 @@
+import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
 import {
   CollectionGuide,
@@ -53,5 +54,39 @@ describe('La recherche par collection', () => {
     const resultat = rechercheParCollection.ok(guideZeroTrust);
 
     expect(resultat).toBe(true);
+  });
+
+  it('ajoute une liste de collection à la liste existante sans doublon', () => {
+    rechercheParCollection.set([
+      CollectionGuide.CRISE_CYBER,
+      CollectionGuide.LES_ESSENTIELS,
+    ]);
+
+    rechercheParCollection.ajoute([
+      CollectionGuide.CRISE_CYBER,
+      CollectionGuide.LES_FONDAMENTAUX,
+    ]);
+
+    expect(get(rechercheParCollection)).toEqual([
+      CollectionGuide.CRISE_CYBER,
+      CollectionGuide.LES_ESSENTIELS,
+      CollectionGuide.LES_FONDAMENTAUX,
+    ]);
+  });
+
+  it('retire une liste de collection à la liste existante si les items existent', () => {
+    rechercheParCollection.set([
+      CollectionGuide.CRISE_CYBER,
+      CollectionGuide.LES_ESSENTIELS,
+    ]);
+
+    rechercheParCollection.retire([
+      CollectionGuide.CRISE_CYBER,
+      CollectionGuide.LES_FONDAMENTAUX,
+    ]);
+
+    expect(get(rechercheParCollection)).toEqual([
+      CollectionGuide.LES_ESSENTIELS,
+    ]);
   });
 });
