@@ -9,12 +9,17 @@ import {
 } from './objetsExemples';
 import { guidesFiltres } from '../../../src/catalogue/stores/guidesFiltres.store';
 import { rechercheParLangue } from '../../../src/catalogue/stores/rechercheParLangue.store';
-import { Langue } from '../../../src/catalogue/Catalogue.types';
+import {
+  CollectionGuide,
+  Langue,
+} from '../../../src/catalogue/Catalogue.types';
+import { rechercheParCollection } from '../../../src/catalogue/stores/rechercheParCollection.store';
 
 describe('Le store des guides filtrés', () => {
   beforeEach(() => {
     rechercheTextuelle.reinitialise();
     rechercheParLangue.reinitialise();
+    rechercheParCollection.reinitialise();
     guidesStore.initialise([guideZeroTrust, guideDevsecops]);
   });
 
@@ -57,7 +62,7 @@ describe('Le store des guides filtrés', () => {
   });
 
   describe("sur application d'un filtre de langue", () => {
-    // d'autres tests plus spécifiques sont dans rechercheParSource.store.spec
+    // d'autres tests plus spécifiques sont dans rechercheParLangue.store.spec
     it('conserve uniquement les items correspondants', () => {
       guidesStore.initialise([guideZeroTrust, guideDevsecopsEN]);
       rechercheParLangue.set([Langue.FR]);
@@ -70,6 +75,26 @@ describe('Le store des guides filtrés', () => {
 
     it("conserve tous les items en cas d'absence de langue", () => {
       rechercheParLangue.set([]);
+
+      const { resultats } = get(guidesFiltres);
+
+      expect(resultats.length).toBe(2);
+    });
+  });
+
+  describe("sur application d'un filtre de collection", () => {
+    it('conserve uniquement les items correspondants', () => {
+      guidesStore.initialise([guideZeroTrust, guideDevsecopsEN]);
+      rechercheParCollection.set([CollectionGuide.LES_ESSENTIELS]);
+
+      const { resultats } = get(guidesFiltres);
+
+      expect(resultats.length).toBe(1);
+      expect(resultats[0].nom).toBe('Zero Trust');
+    });
+
+    it("conserve tous les items en cas d'absence de collection", () => {
+      rechercheParCollection.set([]);
 
       const { resultats } = get(guidesFiltres);
 
