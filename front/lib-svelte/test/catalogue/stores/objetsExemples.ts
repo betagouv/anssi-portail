@@ -111,7 +111,7 @@ export const guideDevsecops: Guide = {
     'Intégrer la sécurité dans les pratiques DevOps pour renforcer la sécurité du développement logiciel',
   illustration: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
   langue: 'FR',
-  collections: ['Les essentiels'],
+  collections: ['Les fondamentaux'],
 };
 
 export const guideDevsecopsEN: Guide = {

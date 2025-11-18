@@ -17,6 +17,7 @@
   import { guidesFiltres } from './stores/guidesFiltres.store';
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
+  import FiltreCollection from './FiltreCollection.svelte';
 
   const { featureFlagGuides }: { featureFlagGuides: boolean } = $props();
 
@@ -106,6 +107,7 @@
         <div class="barre-filtres">
           {#if afficheLesGuides}
             <FiltreLangue />
+            <FiltreCollection />
           {:else}
             <FiltreAccessibilite />
             <FiltreTypologieEtFormat />

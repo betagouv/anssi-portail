@@ -5,6 +5,7 @@ const selectionDeCollection = writable<CollectionGuide[]>([]);
 
 export const rechercheParCollection = {
   set: selectionDeCollection.set,
+  subscribe: selectionDeCollection.subscribe,
   reinitialise: () => selectionDeCollection.set([]),
   ok: (guide: Guide) => {
     const collections = get(selectionDeCollection);
