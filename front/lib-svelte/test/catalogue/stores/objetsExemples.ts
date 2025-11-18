@@ -8,6 +8,7 @@ import {
 } from '../../../src/catalogue/Catalogue.types';
 
 export const mss = (): ItemCyber => ({
+  type: 'ItemCyber',
   id: '/services/mss',
   typologie: Typologie.SERVICE,
   nom: 'mss',
@@ -20,6 +21,7 @@ export const mss = (): ItemCyber => ({
 });
 
 export const demainSpecialisteCyber = (): ItemCyber => ({
+  type: 'ItemCyber',
   id: '/services/demainspecialistecyber',
   typologie: Typologie.SERVICE,
   nom: 'DemainSpécialisteCyber',
@@ -32,6 +34,7 @@ export const demainSpecialisteCyber = (): ItemCyber => ({
 });
 
 export const monEspaceNIS2 = (): ItemCyber => ({
+  type: 'ItemCyber',
   id: '/services/mon-espace-nis2',
   typologie: Typologie.SERVICE,
   nom: 'MonEspaceNIS2',
@@ -45,6 +48,7 @@ export const monEspaceNIS2 = (): ItemCyber => ({
 });
 
 export const livretEnJeux = (): ItemCyber => ({
+  type: 'ItemCyber',
   id: '/ressources/livret-cyber-enjeux',
   typologie: Typologie.RESSOURCE,
   nom: 'enjeux',
@@ -58,6 +62,7 @@ export const livretEnJeux = (): ItemCyber => ({
 });
 
 export const guidesTechniques = (): ItemCyber => ({
+  type: 'ItemCyber',
   id: '/ressources/guides-techniques',
   typologie: Typologie.RESSOURCE,
   nom: 'Guides techniques',
@@ -71,6 +76,7 @@ export const guidesTechniques = (): ItemCyber => ({
 });
 
 export const kitCyber = (): ItemCyber => ({
+  type: 'ItemCyber',
   id: '/ressources/kit-cyber',
   typologie: Typologie.RESSOURCE,
   nom: 'KIT CYBER',
@@ -91,7 +97,7 @@ export const guideZeroTrust: Guide = {
   description:
     "Les fondamentaux du modèle Zero Trust pour sécuriser les systèmes d'information",
   illustration:
-    'https://cyber.gouv.fr/sites/default/files/image/anssi-fondamentaux-zero-trust-v1_publication.jpg',
+    'http://localhost/anssi-fondamentaux-zero-trust-v1_publication.jpg',
   langue: 'FR',
   collections: ['Les essentiels'],
 };
@@ -103,8 +109,7 @@ export const guideDevsecops: Guide = {
   resume: 'Intégrer la sécurité dans les pratiques DevOps',
   description:
     'Intégrer la sécurité dans les pratiques DevOps pour renforcer la sécurité du développement logiciel',
-  illustration:
-    'https://cyber.gouv.fr/sites/default/files/image/anssi_essentiels_devsecops_v1.jpg',
+  illustration: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
   langue: 'FR',
   collections: ['Les essentiels'],
 };
@@ -116,8 +121,7 @@ export const guideDevsecopsEN: Guide = {
   resume: 'Integrating security into DevOps practices',
   description:
     'Integrating security into DevOps practices to enhance software development security',
-  illustration:
-    'https://cyber.gouv.fr/sites/default/files/image/anssi_essentiels_devsecops_v1.jpg',
+  illustration: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
   langue: 'EN',
   collections: ['The essentiels'],
 };
