@@ -1,7 +1,7 @@
 import { get, writable } from 'svelte/store';
-import type { Guide } from '../Catalogue.types';
+import type { CollectionGuide, Guide } from '../Catalogue.types';
 
-const selectionDeCollection = writable<string[]>([]);
+const selectionDeCollection = writable<CollectionGuide[]>([]);
 
 export const rechercheParCollection = {
   set: selectionDeCollection.set,
