@@ -2,13 +2,39 @@
   import { CollectionGuide } from './Catalogue.types';
   import { rechercheParCollection } from './stores/rechercheParCollection.store';
 
-  const gereCocheExpertiseTechnique = () => {};
+  $: toutesLesExpertiseTechnique =
+    $rechercheParCollection.includes(CollectionGuide.LES_ESSENTIELS) &&
+    $rechercheParCollection.includes(CollectionGuide.LES_FONDAMENTAUX);
+
+  $: quelquesExpertiseTechnique =
+    !toutesLesExpertiseTechnique &&
+    ($rechercheParCollection.includes(CollectionGuide.LES_ESSENTIELS) ||
+      $rechercheParCollection.includes(CollectionGuide.LES_FONDAMENTAUX));
+
+  const gereCocheExpertiseTechnique = () => {
+    if (toutesLesExpertiseTechnique) {
+      rechercheParCollection.retire([
+        CollectionGuide.LES_ESSENTIELS,
+        CollectionGuide.LES_FONDAMENTAUX,
+      ]);
+    } else {
+      rechercheParCollection.ajoute([
+        CollectionGuide.LES_ESSENTIELS,
+        CollectionGuide.LES_FONDAMENTAUX,
+      ]);
+    }
+  };
 </script>
 
 <fieldset>
   <legend>Collection</legend>
   <label>
-    <input type="checkbox" value="" on:click={gereCocheExpertiseTechnique} />
+    <input
+      checked={toutesLesExpertiseTechnique || quelquesExpertiseTechnique}
+      indeterminate={quelquesExpertiseTechnique}
+      on:click={gereCocheExpertiseTechnique}
+      type="checkbox"
+    />
     <span class="libelle">Expertise technique</span>
   </label>
   <fieldset>
