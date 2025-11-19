@@ -1,5 +1,6 @@
 <script lang="ts">
-  import type { Guide, ItemCyber } from './Catalogue.types';
+  import type { ItemCyber } from './Catalogue.types';
+  import type { Guide } from './Guide.types';
   import ContenuCarteItem from './ContenuCarteItem.svelte';
 
   export let item: ItemCyber | Guide;

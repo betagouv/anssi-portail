@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Langue } from '../Catalogue.types';
+  import { Langue } from '../Guide.types';
   import { nombreGuides } from '../stores/guides/nombreGuides.store';
   import { rechercheParLangue } from '../stores/guides/rechercheParLangue.store';
 </script>

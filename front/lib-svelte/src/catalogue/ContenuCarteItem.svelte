@@ -1,6 +1,7 @@
 <script lang="ts">
   import BoutonFavori from '../favoris/BoutonFavori.svelte';
-  import type { Guide, ItemCyber } from './Catalogue.types';
+  import type { ItemCyber } from './Catalogue.types';
+  import type { Guide } from './Guide.types';
   import { Typologie } from './Catalogue.types';
 
   export let item: ItemCyber | Guide;

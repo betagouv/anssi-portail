@@ -1,11 +1,11 @@
 import {
   DroitAcces,
   FormatRessource,
-  type Guide,
   type ItemCyber,
   Source,
   Typologie,
 } from '../../../src/catalogue/Catalogue.types';
+import { type Guide } from '../../../src/catalogue/Guide.types';
 
 export const mss = (): ItemCyber => ({
   type: 'ItemCyber',

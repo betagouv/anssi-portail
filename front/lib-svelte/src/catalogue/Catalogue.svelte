@@ -5,7 +5,7 @@
   import ChampRecherche from '../ui/ChampRecherche.svelte';
   import Hero from '../ui/Hero.svelte';
   import CarteItem from './CarteItem.svelte';
-  import type { Guide } from './Catalogue.types';
+  import type { Guide } from './Guide.types';
   import EnteteFiltres from './EnteteFiltres.svelte';
   import FiltreAccessibilite from './FiltreAccessibilite.svelte';
   import FiltreBesoin from './FiltreBesoin.svelte';
