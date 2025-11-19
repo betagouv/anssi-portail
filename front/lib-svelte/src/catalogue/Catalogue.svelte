@@ -18,6 +18,8 @@
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
 
+  const { featureFlagGuides }: { featureFlagGuides: boolean } = $props();
+
   const reinitialiseFiltres = () => recherches.reinitialise();
 
   let afficheLesGuides = $state(false);
@@ -74,24 +76,26 @@
   </div>
 </section>
 
-<div class="controle-segmente">
-  <button
-    class="bouton-segmente"
-    class:actif={!afficheLesGuides}
-    onclick={changeAffichage}
-  >
-    <lab-anssi-icone nom="list-check"></lab-anssi-icone>
-    <span>Services et outils</span>
-  </button>
-  <button
-    class="bouton-segmente"
-    class:actif={afficheLesGuides}
-    onclick={changeAffichage}
-  >
-    <lab-anssi-icone nom="book-2-line"></lab-anssi-icone>
-    <span>Guides de l'ANSSI</span>
-  </button>
-</div>
+{#if featureFlagGuides}
+  <div class="controle-segmente">
+    <button
+      class="bouton-segmente"
+      class:actif={!afficheLesGuides}
+      onclick={changeAffichage}
+    >
+      <lab-anssi-icone nom="list-check"></lab-anssi-icone>
+      <span>Services et outils</span>
+    </button>
+    <button
+      class="bouton-segmente"
+      class:actif={afficheLesGuides}
+      onclick={changeAffichage}
+    >
+      <lab-anssi-icone nom="book-2-line"></lab-anssi-icone>
+      <span>Guides de l'ANSSI</span>
+    </button>
+  </div>
+{/if}
 
 <div class="contenu-catalogue">
   <div class="contenu-section">
