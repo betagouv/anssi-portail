@@ -6,6 +6,7 @@ import { rechercheParFormat } from './rechercheParFormat.store';
 import { rechercheParLangue } from './rechercheParLangue.store';
 import { rechercheParSource } from './rechercheParSource.store';
 import { rechercheParTypologie } from './rechercheParTypologie.store';
+import { rechercheTextuelle } from './rechercheTextuelle.store';
 
 const recherches2 = derived(
   [
@@ -16,6 +17,7 @@ const recherches2 = derived(
     rechercheParSource,
     rechercheParLangue,
     rechercheParCollection,
+    rechercheTextuelle,
   ],
   ([
     $rechercheParDroitAcces,
@@ -25,6 +27,7 @@ const recherches2 = derived(
     $rechercheParSource,
     $rechercheParLangue,
     $rechercheParCollection,
+    $rechercheTextuelle,
   ]) => ({
     filtreActif:
       $rechercheParDroitAcces.length !== 0 ||
@@ -33,7 +36,8 @@ const recherches2 = derived(
       $rechercheParFormat.length !== 0 ||
       $rechercheParSource.length !== 0 ||
       $rechercheParLangue.length !== 0 ||
-      $rechercheParCollection.length !== 0,
+      $rechercheParCollection.length !== 0 ||
+      !!$rechercheTextuelle?.trim(),
   })
 );
 
@@ -47,5 +51,6 @@ export const recherches = {
     rechercheParSource.reinitialise();
     rechercheParLangue.reinitialise();
     rechercheParCollection.reinitialise();
+    rechercheTextuelle.reinitialise();
   },
 };

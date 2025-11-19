@@ -1,5 +1,5 @@
+import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { rechercheParDroitAcces } from '../../../src/catalogue/stores/rechercheParDroitAcces.store';
 import {
   BesoinCyber,
   CollectionGuide,
@@ -9,14 +9,15 @@ import {
   Source,
   Typologie,
 } from '../../../src/catalogue/Catalogue.types';
-import { get } from 'svelte/store';
-import { recherches } from '../../../src/catalogue/stores/recherches.store';
 import { rechercheParBesoin } from '../../../src/catalogue/stores/rechercheParBesoin.store';
-import { rechercheParFormat } from '../../../src/catalogue/stores/rechercheParFormat.store';
-import { rechercheParTypologie } from '../../../src/catalogue/stores/rechercheParTypologie.store';
-import { rechercheParSource } from '../../../src/catalogue/stores/rechercheParSource.store';
-import { rechercheParLangue } from '../../../src/catalogue/stores/rechercheParLangue.store';
 import { rechercheParCollection } from '../../../src/catalogue/stores/rechercheParCollection.store';
+import { rechercheParDroitAcces } from '../../../src/catalogue/stores/rechercheParDroitAcces.store';
+import { rechercheParFormat } from '../../../src/catalogue/stores/rechercheParFormat.store';
+import { rechercheParLangue } from '../../../src/catalogue/stores/rechercheParLangue.store';
+import { rechercheParSource } from '../../../src/catalogue/stores/rechercheParSource.store';
+import { rechercheParTypologie } from '../../../src/catalogue/stores/rechercheParTypologie.store';
+import { recherches } from '../../../src/catalogue/stores/recherches.store';
+import { rechercheTextuelle } from '../../../src/catalogue/stores/rechercheTextuelle.store';
 
 describe('Le store des recherches', () => {
   beforeEach(() => {
@@ -27,6 +28,7 @@ describe('Le store des recherches', () => {
     rechercheParSource.set([]);
     rechercheParLangue.set([]);
     rechercheParCollection.set([]);
+    rechercheTextuelle.set('');
   });
 
   describe("indique qu'un filtre est actif lorsque ", () => {
@@ -80,6 +82,14 @@ describe('Le store des recherches', () => {
 
     it('la recherche par collection est active', () => {
       rechercheParCollection.set([CollectionGuide.CRISE_CYBER]);
+
+      const { filtreActif } = get(recherches);
+
+      expect(filtreActif).toBe(true);
+    });
+
+    it('la recherche par texte est active', () => {
+      rechercheTextuelle.set('terme');
 
       const { filtreActif } = get(recherches);
 
