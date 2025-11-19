@@ -19,7 +19,7 @@ async function telecharge(url: string, id: string): Promise<void> {
   });
 
   const fluxDeSortie = createWriteStream(
-    `sortie/${id}/${url.split('/').at(-1)}`
+    `sortie/${id}/${decodeURI(url.split('/').at(-1)!)}`
   );
   reponse.data.pipe(fluxDeSortie);
 
