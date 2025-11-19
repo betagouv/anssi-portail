@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createWriteStream } from 'node:fs';
 import fs from 'node:fs/promises';
+import { join } from 'node:path';
 import { Guide } from './recuperateurGuide';
 
 export const recupereDocuments = async (guides: Guide[]): Promise<void> => {
@@ -10,23 +11,22 @@ export const recupereDocuments = async (guides: Guide[]): Promise<void> => {
   }
 };
 
-async function telecharge(url: string, id: string): Promise<void> {
+async function telecharge(url: string, id: string = ''): Promise<void> {
+  const chemin = join('sortie', id, decodeURI(url.split('/').at(-1)!));
   const reponse = await axios.get(url, {
     responseType: 'stream',
   });
-  await fs.access(`sortie/${id}`).catch(async () => {
-    await fs.mkdir(`sortie/${id}`);
+  await fs.access(join(`sortie`, id)).catch(async () => {
+    await fs.mkdir(join(`sortie`, id));
   });
 
-  const fluxDeSortie = createWriteStream(
-    `sortie/${id}/${decodeURI(url.split('/').at(-1)!)}`
-  );
+  const fluxDeSortie = createWriteStream(chemin);
   reponse.data.pipe(fluxDeSortie);
 
   return new Promise((resolve, reject) => {
     fluxDeSortie.on('finish', resolve);
     fluxDeSortie.on('error', (erreur) => {
-      console.log("Erreur de récupération du document", id, erreur);
+      console.log('Erreur de récupération du document', id, erreur);
       resolve();
     });
   });
@@ -50,7 +50,7 @@ const recupereDocumentsLies = async ({
       donneesDocument.indexOf('https://')
     );
 
-    await telecharge(urlDocument, id);
+    await telecharge(urlDocument);
     console.log('Document récupéré : ', urlDocument);
   }
 };
