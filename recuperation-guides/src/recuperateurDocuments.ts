@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { createWriteStream } from 'node:fs';
 import fs from 'node:fs/promises';
 import { Guide } from './recuperateurGuide';
 
@@ -9,20 +10,33 @@ export const recupereDocuments = async (guides: Guide[]): Promise<void> => {
   }
 };
 
-const recupereIllustration = async ({ id, image }: Guide): Promise<void> => {
-  if (!image) {
-    return;
-  }
-  const reponseImage = await axios.get(image, {
-    responseType: 'blob',
+async function telecharge(url: string, id: string): Promise<void> {
+  const reponse = await axios.get(url, {
+    responseType: 'stream',
   });
   await fs.access(`sortie/${id}`).catch(async () => {
     await fs.mkdir(`sortie/${id}`);
   });
-  await fs.writeFile(
-    `sortie/${id}/${image.split('/').at(-1)}`,
-    reponseImage.data
+
+  const fluxDeSortie = createWriteStream(
+    `sortie/${id}/${url.split('/').at(-1)}`
   );
+  reponse.data.pipe(fluxDeSortie);
+
+  return new Promise((resolve, reject) => {
+    fluxDeSortie.on('finish', resolve);
+    fluxDeSortie.on('error', (erreur) => {
+      console.log("Erreur de récupération du document", id, erreur);
+      resolve();
+    });
+  });
+}
+
+const recupereIllustration = async ({ id, image }: Guide): Promise<void> => {
+  if (!image) {
+    return;
+  }
+  await telecharge(image, id);
   console.log('Image récupérée : ', image);
 };
 
@@ -35,16 +49,8 @@ const recupereDocumentsLies = async ({
     const urlDocument = donneesDocument.slice(
       donneesDocument.indexOf('https://')
     );
-    const reponseDocument = await axios.get(urlDocument, {
-      responseType: 'blob',
-    });
-    await fs.access(`sortie/${id}`).catch(async () => {
-      await fs.mkdir(`sortie/${id}`);
-    });
-    await fs.writeFile(
-      `sortie/${id}/${urlDocument.split('/').at(-1)}`,
-      reponseDocument.data
-    );
+
+    await telecharge(urlDocument, id);
     console.log('Document récupéré : ', urlDocument);
   }
 };
