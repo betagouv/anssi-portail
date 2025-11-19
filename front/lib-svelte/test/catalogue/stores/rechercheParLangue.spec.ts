@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Langue } from '../../../src/catalogue/Catalogue.types';
+import { Langue } from '../../../src/catalogue/Guide.types';
 import { rechercheParLangue } from '../../../src/catalogue/stores/guides/rechercheParLangue.store';
 import { guideZeroTrust } from './objetsExemples';
 

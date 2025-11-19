@@ -1,5 +1,6 @@
 import { get, writable } from 'svelte/store';
-import type { Guide, ItemCyber } from '../Catalogue.types';
+import type { ItemCyber } from '../Catalogue.types';
+import type { Guide } from '../Guide.types';
 
 const store = writable<string>('');
 

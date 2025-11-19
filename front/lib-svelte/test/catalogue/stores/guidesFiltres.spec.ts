@@ -1,9 +1,7 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import {
-  CollectionGuide,
-  Langue,
-} from '../../../src/catalogue/Catalogue.types';
+import { Langue } from '../../../src/catalogue/Guide.types';
+import { CollectionGuide } from '../../../src/catalogue/Guide.types';
 import { guidesStore } from '../../../src/catalogue/stores/guides/guides.store';
 import { guidesFiltres } from '../../../src/catalogue/stores/guides/guidesFiltres.store';
 import { rechercheParCollection } from '../../../src/catalogue/stores/guides/rechercheParCollection.store';

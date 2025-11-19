@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CollectionGuide } from '../Catalogue.types';
+  import { CollectionGuide } from '../Guide.types';
   import CaseACocherDeCollection from '../guides/CaseACocherDeCollection.svelte';
   import { nombreGuides } from '../stores/guides/nombreGuides.store';
   import { rechercheParCollection } from '../stores/guides/rechercheParCollection.store';

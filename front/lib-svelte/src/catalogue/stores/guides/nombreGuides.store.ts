@@ -1,5 +1,6 @@
 import { derived } from 'svelte/store';
-import { CollectionGuide, Langue } from '../../Catalogue.types';
+import { Langue } from '../../Guide.types';
+import { CollectionGuide } from '../../Guide.types';
 import { guidesStore } from './guides.store';
 
 type NombreResultats = {

@@ -18,14 +18,6 @@ export interface ItemCyber extends Item {
   lienExterne: string;
 }
 
-export interface Guide extends Item {
-  type: 'Guide';
-  resume: string;
-  description: string;
-  langue: string;
-  collections: string[];
-}
-
 export enum BesoinCyber {
   REAGIR = 'REAGIR',
   ETRE_SENSIBILISE = 'ETRE_SENSIBILISE',
@@ -59,18 +51,4 @@ export enum Source {
   CERTFR = 'CERT-FR',
   INNOVATION_ANSSI = 'Innovation ANSSI',
   PARTENAIRES = 'Partenaires',
-}
-
-export enum Langue {
-  FR = 'FR',
-  EN = 'EN',
-}
-
-export enum CollectionGuide {
-  LES_ESSENTIELS = 'Les essentiels',
-  LES_FONDAMENTAUX = 'Les fondamentaux',
-  CRISE_CYBER = 'Crise cyber',
-  GESTION_DES_RISQUES_CYBER = 'Gestion des risques cyber',
-  SUPERVISION_DE_SECURITE = 'Supervision de sécurité',
-  REMEDIATION = 'Remédiation',
 }

@@ -1,9 +1,7 @@
 import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
-import {
-  CollectionGuide,
-  type Guide,
-} from '../../../src/catalogue/Catalogue.types';
+import { type Guide } from '../../../src/catalogue/Guide.types';
+import { CollectionGuide } from '../../../src/catalogue/Guide.types';
 import { rechercheParCollection } from '../../../src/catalogue/stores/guides/rechercheParCollection.store';
 
 const guideZeroTrust: Guide = {
