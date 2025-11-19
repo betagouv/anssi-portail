@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { type Guide } from '../Catalogue.types';
+import { type Guide } from '../../Catalogue.types';
 
 const { subscribe, set } = writable<Guide[]>([]);
 

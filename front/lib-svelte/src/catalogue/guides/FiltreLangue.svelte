@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Langue } from './Catalogue.types';
-  import { nombreGuides } from './stores/nombreGuides.store';
-  import { rechercheParLangue } from './stores/rechercheParLangue.store';
+  import { Langue } from '../Catalogue.types';
+  import { nombreGuides } from '../stores/guides/nombreGuides.store';
+  import { rechercheParLangue } from '../stores/guides/rechercheParLangue.store';
 </script>
 
 <fieldset>

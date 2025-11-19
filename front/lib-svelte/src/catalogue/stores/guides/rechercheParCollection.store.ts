@@ -1,5 +1,5 @@
 import { get, writable } from 'svelte/store';
-import { CollectionGuide, type Guide } from '../Catalogue.types';
+import { CollectionGuide, type Guide } from '../../Catalogue.types';
 
 const selectionDeCollection = writable<CollectionGuide[]>([]);
 

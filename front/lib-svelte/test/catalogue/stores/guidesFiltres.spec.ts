@@ -1,19 +1,19 @@
-import { beforeEach, describe, expect, it } from 'vitest';
-import { rechercheTextuelle } from '../../../src/catalogue/stores/rechercheTextuelle.store';
 import { get } from 'svelte/store';
-import { guidesStore } from '../../../src/catalogue/stores/guides.store';
+import { beforeEach, describe, expect, it } from 'vitest';
+import {
+  CollectionGuide,
+  Langue,
+} from '../../../src/catalogue/Catalogue.types';
+import { guidesStore } from '../../../src/catalogue/stores/guides/guides.store';
+import { guidesFiltres } from '../../../src/catalogue/stores/guides/guidesFiltres.store';
+import { rechercheParCollection } from '../../../src/catalogue/stores/guides/rechercheParCollection.store';
+import { rechercheParLangue } from '../../../src/catalogue/stores/guides/rechercheParLangue.store';
+import { rechercheTextuelle } from '../../../src/catalogue/stores/rechercheTextuelle.store';
 import {
   guideDevsecops,
   guideDevsecopsEN,
   guideZeroTrust,
 } from './objetsExemples';
-import { guidesFiltres } from '../../../src/catalogue/stores/guidesFiltres.store';
-import { rechercheParLangue } from '../../../src/catalogue/stores/rechercheParLangue.store';
-import {
-  CollectionGuide,
-  Langue,
-} from '../../../src/catalogue/Catalogue.types';
-import { rechercheParCollection } from '../../../src/catalogue/stores/rechercheParCollection.store';
 
 describe('Le store des guides filtrés', () => {
   beforeEach(() => {

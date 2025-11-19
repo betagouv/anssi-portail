@@ -9,15 +9,15 @@
   import EnteteFiltres from './EnteteFiltres.svelte';
   import FiltreAccessibilite from './FiltreAccessibilite.svelte';
   import FiltreBesoin from './FiltreBesoin.svelte';
-  import FiltreLangue from './FiltreLangue.svelte';
   import FiltreSource from './FiltreSource.svelte';
   import FiltreTypologieEtFormat from './FiltreTypologieEtFormat.svelte';
+  import FiltreCollection from './guides/FiltreCollection.svelte';
+  import FiltreLangue from './guides/FiltreLangue.svelte';
   import { catalogueFiltre } from './stores/catalogueFiltre.store';
-  import { guidesStore } from './stores/guides.store';
-  import { guidesFiltres } from './stores/guidesFiltres.store';
+  import { guidesStore } from './stores/guides/guides.store';
+  import { guidesFiltres } from './stores/guides/guidesFiltres.store';
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
-  import FiltreCollection from './FiltreCollection.svelte';
 
   const { featureFlagGuides }: { featureFlagGuides: boolean } = $props();
 

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import CaseACocherDeCollection from './CaseACocherDeCollection.svelte';
-  import { CollectionGuide } from './Catalogue.types';
-  import { nombreGuides } from './stores/nombreGuides.store';
-  import { rechercheParCollection } from './stores/rechercheParCollection.store';
+  import { CollectionGuide } from '../Catalogue.types';
+  import CaseACocherDeCollection from '../guides/CaseACocherDeCollection.svelte';
+  import { nombreGuides } from '../stores/guides/nombreGuides.store';
+  import { rechercheParCollection } from '../stores/guides/rechercheParCollection.store';
 
   $: toutesLesExpertisesTechniques =
     $rechercheParCollection.includes(CollectionGuide.LES_ESSENTIELS) &&

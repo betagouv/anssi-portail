@@ -4,8 +4,8 @@ import {
   CollectionGuide,
   Langue,
 } from '../../../src/catalogue/Catalogue.types';
-import { guidesStore } from '../../../src/catalogue/stores/guides.store';
-import { nombreGuides } from '../../../src/catalogue/stores/nombreGuides.store';
+import { guidesStore } from '../../../src/catalogue/stores/guides/guides.store';
+import { nombreGuides } from '../../../src/catalogue/stores/guides/nombreGuides.store';
 import {
   guideDevsecops,
   guideDevsecopsEN,
