@@ -1,8 +1,8 @@
 import { derived } from 'svelte/store';
+import { rechercheTextuelle } from '../rechercheTextuelle.store';
 import { guidesStore } from './guides.store';
-import { rechercheParLangue } from './rechercheParLangue.store';
-import { rechercheTextuelle } from './rechercheTextuelle.store';
 import { rechercheParCollection } from './rechercheParCollection.store';
+import { rechercheParLangue } from './rechercheParLangue.store';
 
 export const guidesFiltres = derived(
   [guidesStore, rechercheTextuelle, rechercheParLangue, rechercheParCollection],

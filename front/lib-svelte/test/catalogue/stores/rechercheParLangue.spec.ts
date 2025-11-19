@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { rechercheParLangue } from '../../../src/catalogue/stores/rechercheParLangue.store';
-import { guideZeroTrust } from './objetsExemples';
 import { Langue } from '../../../src/catalogue/Catalogue.types';
+import { rechercheParLangue } from '../../../src/catalogue/stores/guides/rechercheParLangue.store';
+import { guideZeroTrust } from './objetsExemples';
 
 describe('La recherche par langue', () => {
   it('retourne vrai lorsque la langue du filtre correspond à la langue du guide', () => {

@@ -4,7 +4,7 @@ import {
   CollectionGuide,
   type Guide,
 } from '../../../src/catalogue/Catalogue.types';
-import { rechercheParCollection } from '../../../src/catalogue/stores/rechercheParCollection.store';
+import { rechercheParCollection } from '../../../src/catalogue/stores/guides/rechercheParCollection.store';
 
 const guideZeroTrust: Guide = {
   type: 'Guide',

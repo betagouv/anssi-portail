@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { CollectionGuide } from './Catalogue.types';
-  import { nombreGuides } from './stores/nombreGuides.store';
-  import { rechercheParCollection } from './stores/rechercheParCollection.store';
+  import type { CollectionGuide } from '../Catalogue.types';
+  import { nombreGuides } from '../stores/guides/nombreGuides.store';
+  import { rechercheParCollection } from '../stores/guides/rechercheParCollection.store';
 
   export let collection: CollectionGuide;
 </script>
