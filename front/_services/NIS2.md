@@ -3,8 +3,9 @@ layout: service
 typologie: service
 nom: NIS2
 titreHtml: NIS2
-description: "S'enregistrer auprès de l'ANSSI (bientôt)"
+description: "Se pré-enregistrer auprès de l'ANSSI"
 illustration: nis2/nis2.png
+lien: https://club.ssi.gouv.fr/index_nis2.html#/nis2/introduction
 sources:
   - ANSSI
 droitsAcces:
