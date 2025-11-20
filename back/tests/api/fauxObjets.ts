@@ -18,6 +18,7 @@ import { EntrepotGuideMemoire } from '../persistance/entrepotGuideMemoire';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
+import { adaptateurCellar } from '../../src/infra/adaptateurCellar';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -197,4 +198,5 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
     maxRequetesParMinutes: 3,
     ipAutorisees: false,
   },
+  cellar: adaptateurCellar,
 };

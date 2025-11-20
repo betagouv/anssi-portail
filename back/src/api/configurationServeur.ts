@@ -18,6 +18,7 @@ import { AdaptateurJWT } from './adaptateurJWT';
 import { FournisseurChemin } from './fournisseurChemin';
 import { Middleware } from './middleware';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
+import { AdaptateurCellar } from '../infra/adaptateurCellar';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -45,4 +46,5 @@ export type ConfigurationServeur = {
     maxRequetesParMinutes: number;
     ipAutorisees: string[] | false;
   };
+  cellar: AdaptateurCellar;
 };
