@@ -40,6 +40,7 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
+import { ressourceQualification } from './ressourceQualification';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -283,6 +284,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   );
 
   app.use('/api/guides', ressourceGuides(configurationServeur));
+
+  app.use('/qualifications', ressourceQualification(configurationServeur));
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 

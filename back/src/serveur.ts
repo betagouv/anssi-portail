@@ -27,6 +27,7 @@ import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serv
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 import { EntrepotGuide } from './metier/entrepotGuide';
 import { EntrepotGuideGrist } from './infra/entrepotGuideGrist';
+import { adaptateurCellar } from './infra/adaptateurCellar';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement({
@@ -129,6 +130,7 @@ serviceCoherenceSecretsHachage
       messagerieInstantanee,
       entrepotFinancement,
       entrepotGuide,
+      cellar: adaptateurCellar,
     }).listen(3000, () => {
       console.log('Le serveur écoute sur le port 3000');
     });
