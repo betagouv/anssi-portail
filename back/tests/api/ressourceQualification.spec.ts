@@ -48,5 +48,16 @@ describe('La ressource de qualification', () => {
       assert.equal(nomDuFichierDemande!, '/qualifications/123456789012.pdf');
       assert.equal(reponse.body, 'ABCD');
     });
+
+    describe("lorsque le fichier de qualification n'existe pas", () => {
+      it('répond 404', async () => {
+        configurationDuServeur.cellar.get = async () => undefined;
+        const reponse = await request(serveur).get(
+          '/qualifications/fichier-qui-n-existe-pas.pdf'
+        );
+
+        assert.equal(reponse.status, 404);
+      });
+    });
   });
 });
