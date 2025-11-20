@@ -130,7 +130,7 @@ serviceCoherenceSecretsHachage
       messagerieInstantanee,
       entrepotFinancement,
       entrepotGuide,
-      cellar: adaptateurCellar,
+      cellar: adaptateurCellar(adaptateurEnvironnement),
     }).listen(3000, () => {
       console.log('Le serveur écoute sur le port 3000');
     });

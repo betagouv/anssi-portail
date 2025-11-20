@@ -198,5 +198,5 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
     maxRequetesParMinutes: 3,
     ipAutorisees: false,
   },
-  cellar: adaptateurCellar,
+  cellar: adaptateurCellar(fauxAdaptateurEnvironnement),
 };
