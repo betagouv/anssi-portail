@@ -32,7 +32,7 @@ describe("Le récupérateur d'un guide", () => {
     </div>  
     <div class="field--name-field-fichier-pdf">
       <div class="document">
-        <a href="/doc2.pdf">
+        <a href="/doc%202.pdf">
           <div class="name">Les approfondissements</div>
         </a>
       </div>
@@ -133,7 +133,7 @@ describe("Le récupérateur d'un guide", () => {
 
     assert.deepEqual(guide.urlDocuments, [
       'https://example.com/doc1.pdf',
-      'https://example.com/doc2.pdf',
+      'https://example.com/doc%202.pdf',
     ]);
   });
 
@@ -145,7 +145,7 @@ describe("Le récupérateur d'un guide", () => {
     assert.equal(
       guide.documents,
       `Les essentiels : doc1.pdf
-Les approfondissements : doc2.pdf`
+Les approfondissements : doc 2.pdf`
     );
   });
 
