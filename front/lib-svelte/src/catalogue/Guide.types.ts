@@ -18,4 +18,8 @@ export interface Guide extends Item {
   description: string;
   langue: string;
   collections: string[];
+  image: {
+    petite: string;
+    grande: string;
+  };
 }
