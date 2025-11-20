@@ -62,15 +62,9 @@ const recupereIllustration = async ({ id, image }: Guide): Promise<void> => {
 };
 
 const recupereDocumentsLies = async ({
-  id,
-  documents,
+  urlDocuments,
 }: Guide): Promise<void> => {
-  const donneesDocuments = documents.split('\n').filter((d) => !!d.trim());
-  for (const donneesDocument of donneesDocuments) {
-    const urlDocument = donneesDocument.slice(
-      donneesDocument.indexOf('https://')
-    );
-
+  for (const urlDocument of urlDocuments) {
     await telecharge(urlDocument);
     console.log('Document récupéré : ', urlDocument);
   }
