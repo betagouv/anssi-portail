@@ -67,7 +67,7 @@ describe("L'entrepot de guide Grist", () => {
           .avecLeTitre('Premier guide')
           .avecLeResume('Résumé du premier guide')
           .avecLaDescription('<p>Description du premier guide</p>')
-          .avecLImage('http://localhost:8080/vignette-1')
+          .avecLImage('vignette-1')
           .avecLaLangue('FR')
           .avecLesCollections(['Les essentiels'])
           .construis(),
@@ -77,7 +77,7 @@ describe("L'entrepot de guide Grist", () => {
           .avecLeTitre('Deuxième guide')
           .avecLeResume('Résumé du deuxième guide')
           .avecLaDescription('<p>Description du deuxième guide</p>')
-          .avecLImage('http://localhost:8080/vignette-2')
+          .avecLImage('vignette-2')
           .avecLaLangue('FR')
           .avecLesCollections(['Les essentiels'])
           .construis(),
@@ -100,7 +100,7 @@ describe("L'entrepot de guide Grist", () => {
         nom: 'Premier guide',
         resume: 'Résumé du premier guide',
         description: '<p>Description du premier guide</p>',
-        illustration: 'http://localhost:8080/vignette-1',
+        nomImage: 'vignette-1',
         langue: 'FR',
         collections: ['Les essentiels'],
       },
@@ -109,7 +109,7 @@ describe("L'entrepot de guide Grist", () => {
         nom: 'Deuxième guide',
         resume: 'Résumé du deuxième guide',
         description: '<p>Description du deuxième guide</p>',
-        illustration: 'http://localhost:8080/vignette-2',
+        nomImage: 'vignette-2',
         langue: 'FR',
         collections: ['Les essentiels'],
       },

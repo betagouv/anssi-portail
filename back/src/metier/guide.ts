@@ -3,7 +3,7 @@ export type Guide = {
   nom: string;
   resume: string;
   description: string;
-  illustration: string;
+  nomImage: string;
   langue: 'FR' | 'EN';
   collections: string[];
 };

@@ -118,6 +118,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
       'http://grist/api/docs/idDocumentGuides/tables/idTableGuides/records',
     cleApiGuides: () => 'FAUSSE_CLE_API_GUIDES',
   }),
+  urlCellar: () => 'https://notre-cellar',
 };
 
 const vraiMiddleware = fabriqueMiddleware({

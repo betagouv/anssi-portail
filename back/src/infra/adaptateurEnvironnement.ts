@@ -42,6 +42,7 @@ type AdaptateurEnvironnement = {
     urlGuides: () => string;
     cleApiGuides: () => string;
   };
+  urlCellar: () => string;
 };
 
 const adaptateurEnvironnement: AdaptateurEnvironnement = {
@@ -160,6 +161,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     urlGuides: () => process.env.GUIDES_GRIST_URL || '',
     cleApiGuides: () => process.env.GUIDES_GRIST_API_KEY || '',
   }),
+  urlCellar: () => process.env.CELLAR_URL ?? '',
 };
 
 export { AdaptateurEnvironnement, adaptateurEnvironnement };
