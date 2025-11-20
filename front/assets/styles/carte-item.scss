@@ -216,3 +216,10 @@ a.carte {
     }
   }
 }
+
+.carte.guide {
+  figure img {
+    object-fit: cover;
+    object-position: top;
+  }
+}
