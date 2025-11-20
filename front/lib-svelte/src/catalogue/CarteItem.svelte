@@ -13,10 +13,7 @@
     data-source="Guide"
     data-cible={item.nom}
   >
-    <ContenuCarteItem
-      item={{ ...item, description: item.resume }}
-      {avecBoutonFavori}
-    />
+    <ContenuCarteItem item={{ ...item, description: item.resume }} />
   </a>
 {:else if item.lienInterne || item.lienExterne}
   <a
