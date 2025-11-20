@@ -108,7 +108,7 @@ export class RecuperateurGuide {
           urlDeBase,
         });
         const nom = this.recupereTexte(element, '.document > a > .name');
-        const nomDocument = lien.split('/').at(-1);
+        const nomDocument = decodeURI(lien.split('/').at(-1) ?? '');
         return `${nom} : ${nomDocument}`;
       })
       .join('\n');
