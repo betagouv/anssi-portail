@@ -16,10 +16,12 @@ const ressourceGuides = ({
           guides.map((guide) => ({
             ...guide,
             nomImage: undefined,
-            image: {
-              petite: `${adaptateurEnvironnement.urlCellar()}/guides/${guide.id}/${guide.nomImage}-234.avif`,
-              grande: `${adaptateurEnvironnement.urlCellar()}/guides/${guide.id}/${guide.nomImage}-588.avif`,
-            },
+            image: guide.nomImage
+              ? {
+                  petite: `${adaptateurEnvironnement.urlCellar()}/guides/${guide.id}/${guide.nomImage}-234.avif`,
+                  grande: `${adaptateurEnvironnement.urlCellar()}/guides/${guide.id}/${guide.nomImage}-588.avif`,
+                }
+              : null,
           }))
         );
       } catch (e) {

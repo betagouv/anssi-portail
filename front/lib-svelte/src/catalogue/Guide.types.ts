@@ -21,5 +21,5 @@ export interface Guide extends Item {
   image: {
     petite: string;
     grande: string;
-  };
+  } | null;
 }

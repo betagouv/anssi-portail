@@ -42,7 +42,7 @@ export class EntrepotGuideGrist implements EntrepotGuide {
       nom: guideGrist.fields.Titre ?? '',
       resume: guideGrist.fields.Resume ?? '',
       description: guideGrist.fields.Description ?? '',
-      nomImage: guideGrist.fields.Image ?? '',
+      nomImage: guideGrist.fields.Image ?? null,
       langue: guideGrist.fields.Langue ?? 'FR',
       collections: guideGrist.fields.Collections ?? [],
     };

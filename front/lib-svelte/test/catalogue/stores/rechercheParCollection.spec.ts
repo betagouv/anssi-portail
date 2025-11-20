@@ -12,9 +12,15 @@ const guideZeroTrust: Guide = {
   description:
     "Les fondamentaux du modèle Zero Trust pour sécuriser les systèmes d'information",
   illustration:
-    'https://cyber.gouv.fr/sites/default/files/image/anssi-fondamentaux-zero-trust-v1_publication.jpg',
+    'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-234.avif',
   langue: 'FR',
   collections: ['Les essentiels'],
+  image: {
+    petite:
+      'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-234.avif',
+    grande:
+      'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-588.avif',
+  },
 };
 
 describe('La recherche par collection', () => {

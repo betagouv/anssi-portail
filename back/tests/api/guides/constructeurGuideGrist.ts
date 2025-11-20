@@ -35,7 +35,7 @@ export class ConstructeurGuideGrist {
     return this;
   }
 
-  avecLImage(image: string) {
+  avecLImage(image: string | null) {
     this.image = image;
     return this;
   }
