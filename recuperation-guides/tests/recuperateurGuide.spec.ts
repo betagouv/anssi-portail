@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { describe, it, beforeEach } from 'node:test';
+import { beforeEach, describe, it } from 'node:test';
 import { RecuperateurGuide } from '../src/recuperateurGuide';
 
 describe("Le récupérateur d'un guide", () => {
@@ -126,6 +126,17 @@ describe("Le récupérateur d'un guide", () => {
     assert.equal(guide.image, 'https://example.com/mon-imag%C3%A9.jpg');
   });
 
+  it('récupère les URLs des documents associés', async () => {
+    const guide = await recuperateurGuide.recupere(
+      'https://example.com/guide1'
+    );
+
+    assert.deepEqual(guide.urlDocuments, [
+      'https://example.com/doc1.pdf',
+      'https://example.com/doc2.pdf',
+    ]);
+  });
+
   it('récupère les documents associés', async () => {
     const guide = await recuperateurGuide.recupere(
       'https://example.com/guide1'
@@ -133,8 +144,8 @@ describe("Le récupérateur d'un guide", () => {
 
     assert.equal(
       guide.documents,
-      `Les essentiels : https://example.com/doc1.pdf
-Les approfondissements : https://example.com/doc2.pdf`
+      `Les essentiels : doc1.pdf
+Les approfondissements : doc2.pdf`
     );
   });
 

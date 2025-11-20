@@ -9,6 +9,7 @@ export type Guide = {
   titre: string;
   description: string;
   image: string;
+  urlDocuments: string[];
   documents: string;
   contenusLies: string;
   langue: 'FR' | 'EN';
@@ -27,9 +28,13 @@ export class RecuperateurGuide {
       urlDeBase: urlGuide,
     });
     const nomImageAvecExtension = image.split('/').at(-1);
-    const nomImage =
-      decodeURI(nomImageAvecExtension?.slice(0, nomImageAvecExtension.lastIndexOf('.'))??
-      '');
+    const nomImage = decodeURI(
+      nomImageAvecExtension?.slice(0, nomImageAvecExtension.lastIndexOf('.')) ??
+        ''
+    );
+    const [urlDocuments, documents] = this.recupereDocuments(document, {
+      urlDeBase: urlGuide,
+    });
     return {
       id: (langue === 'EN' ? 'en-' : '') + partiesURL.at(-1)!,
       titre: this.recupereTexte(document, 'h1'),
@@ -39,7 +44,8 @@ export class RecuperateurGuide {
       description: this.recupereHtml(document, '.text-riche > div'),
       image: image,
       nomImage,
-      documents: this.recupereDocuments(document, { urlDeBase: urlGuide }),
+      urlDocuments,
+      documents,
       contenusLies: this.recuperecontenusLies(
         document,
         '.field--name-field-contenu-lie > div',
@@ -86,20 +92,27 @@ export class RecuperateurGuide {
   private recupereDocuments(
     document: HTMLElement,
     { urlDeBase }: { urlDeBase?: string }
-  ) {
+  ): [string[], string] {
     const elements = [
       ...document.querySelectorAll('.paragraph--type--piece-jointe'),
       ...document.querySelectorAll('.field--name-field-fichier-pdf'),
     ];
-    return elements
+    const urlDocuments = elements.map((element) =>
+      this.recupereLien(element, '.document > a', 'href', {
+        urlDeBase,
+      })
+    );
+    const documents = elements
       .map((element) => {
         const lien = this.recupereLien(element, '.document > a', 'href', {
           urlDeBase,
         });
         const nom = this.recupereTexte(element, '.document > a > .name');
-        return `${nom} : ${lien}`;
+        const nomDocument = lien.split('/').at(-1);
+        return `${nom} : ${nomDocument}`;
       })
       .join('\n');
+    return [urlDocuments, documents];
   }
 
   private recuperecontenusLies(
