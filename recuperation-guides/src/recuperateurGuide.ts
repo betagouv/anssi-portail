@@ -12,6 +12,7 @@ export type Guide = {
   documents: string;
   contenusLies: string;
   langue: 'FR' | 'EN';
+  nomImage: string;
 };
 
 export class RecuperateurGuide {
@@ -22,6 +23,13 @@ export class RecuperateurGuide {
     const document = parse(contenuHtml);
     const partiesURL = urlGuide.split('/');
     const langue = urlGuide.includes('/en/') ? 'EN' : 'FR';
+    const image = this.recupereLien(document, '.img-princiale img', 'src', {
+      urlDeBase: urlGuide,
+    });
+    const nomImageAvecExtension = image.split('/').at(-1);
+    const nomImage =
+      decodeURI(nomImageAvecExtension?.slice(0, nomImageAvecExtension.lastIndexOf('.'))??
+      '');
     return {
       id: (langue === 'EN' ? 'en-' : '') + partiesURL.at(-1)!,
       titre: this.recupereTexte(document, 'h1'),
@@ -29,9 +37,8 @@ export class RecuperateurGuide {
       datePublication: this.recupereDate(document, '.published-on'),
       dateMiseAJour: this.recupereDate(document, '.updated-on'),
       description: this.recupereHtml(document, '.text-riche > div'),
-      image: this.recupereLien(document, '.img-princiale img', 'src', {
-        urlDeBase: urlGuide,
-      }),
+      image: image,
+      nomImage,
       documents: this.recupereDocuments(document, { urlDeBase: urlGuide }),
       contenusLies: this.recuperecontenusLies(
         document,

@@ -19,7 +19,7 @@ describe("Le récupérateur d'un guide", () => {
     </div>
     <div class="img-princiale">
       <figure>
-        <img src="/mon-image.jpg" />
+        <img src="/mon-imag%C3%A9.jpg" />
         <figcaption>Légende</figcaption>
       </figure>
     </div>
@@ -123,7 +123,7 @@ describe("Le récupérateur d'un guide", () => {
       'https://example.com/guide1'
     );
 
-    assert.equal(guide.image, 'https://example.com/mon-image.jpg');
+    assert.equal(guide.image, 'https://example.com/mon-imag%C3%A9.jpg');
   });
 
   it('récupère les documents associés', async () => {
@@ -156,5 +156,13 @@ https://example.com/autre-guide-2`
     );
 
     assert.equal(guide.id, 'guide1-sur-un-sujet');
+  });
+
+  it("récupère le nom de l'image sans l'extension", async () => {
+    const guide = await recuperateurGuide.recupere(
+      'https://example.com/guide1'
+    );
+
+    assert.equal(guide.nomImage, 'mon-imagé');
   });
 });
