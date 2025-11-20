@@ -100,6 +100,10 @@ export const guideZeroTrust: Guide = {
     'http://localhost/anssi-fondamentaux-zero-trust-v1_publication.jpg',
   langue: 'FR',
   collections: ['Les essentiels'],
+  image: {
+    grande: '',
+    petite: '',
+  },
 };
 
 export const guideDevsecops: Guide = {
@@ -112,6 +116,10 @@ export const guideDevsecops: Guide = {
   illustration: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
   langue: 'FR',
   collections: ['Les fondamentaux'],
+  image: {
+    grande: '',
+    petite: '',
+  },
 };
 
 export const guideDevsecopsEN: Guide = {
@@ -124,4 +132,8 @@ export const guideDevsecopsEN: Guide = {
   illustration: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
   langue: 'EN',
   collections: ['The essentiels'],
+  image: {
+    grande: '',
+    petite: '',
+  },
 };

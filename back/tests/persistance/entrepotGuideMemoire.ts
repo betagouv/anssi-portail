@@ -4,4 +4,9 @@ import { EntrepotMemoire } from './entrepotMemoire';
 
 export class EntrepotGuideMemoire
   extends EntrepotMemoire<Guide>
-  implements EntrepotGuide {}
+  implements EntrepotGuide
+{
+  async vide() {
+    this.entites = [];
+  }
+}

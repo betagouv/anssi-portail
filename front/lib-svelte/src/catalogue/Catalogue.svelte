@@ -33,7 +33,8 @@
     const guides = reponse.data.map((guide) => ({
       ...guide,
       type: 'Guide' as const,
-      illustration: guide.image.petite,
+      illustration:
+        guide.image?.petite ?? '/assets/images/image-generique.avif',
     }));
     guidesStore.initialise(guides);
   });

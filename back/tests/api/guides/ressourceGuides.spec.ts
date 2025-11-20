@@ -62,6 +62,15 @@ describe('La ressource qui gère les guides', () => {
       });
     });
 
+    it("gère l'absence d'image sur un guide", async () => {
+      await entrepotGuide.vide();
+      await entrepotGuide.ajoute({ ...guideZeroTrust, nomImage: null });
+
+      const reponse = await request(serveur).get('/api/guides');
+
+      assert.equal(reponse.body[0].image, null);
+    });
+
     it("renvoie un 500 si l'entrepot renvoie une erreur", async () => {
       entrepotGuide.tous = () => {
         throw new Error('Erreur technique');

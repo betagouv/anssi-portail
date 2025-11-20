@@ -115,4 +115,22 @@ describe("L'entrepot de guide Grist", () => {
       },
     ]);
   });
+
+  it("sait gérer l'absence d'image dans un guide", async () => {
+    const guidesGrist: RetourGuideGrist = {
+      records: [new ConstructeurGuideGrist().avecLImage(null).construis()],
+    };
+    const clientHttp: ClientHttp<RetourGuideGrist> = {
+      get: async () => ({ data: guidesGrist }),
+    };
+
+    const entrepotGuideGrist = new EntrepotGuideGrist({
+      clientHttp,
+      adaptateurEnvironnement: fauxAdaptateurEnvironnement,
+    });
+
+    const guides = await entrepotGuideGrist.tous();
+
+    assert.equal(guides[0].nomImage, null);
+  });
 });
