@@ -3,18 +3,18 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
+import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire';
 import { configurationDeTestDuServeur } from '../fauxObjets';
-import { EntrepotGuide } from '../../../src/metier/entrepotGuide';
 import { guideDevsecops, guideZeroTrust } from '../objetsPretsALEmploi';
 
 describe('La ressource qui gère les guides', () => {
   let serveur: Express;
-  let entrepotGuide: EntrepotGuide;
+  let entrepotGuide: EntrepotGuideMemoire;
 
-  beforeEach(() => {
-    entrepotGuide = {
-      tous: async () => [guideZeroTrust, guideDevsecops],
-    };
+  beforeEach(async () => {
+    entrepotGuide = new EntrepotGuideMemoire();
+    await entrepotGuide.ajoute(guideZeroTrust);
+    await entrepotGuide.ajoute(guideDevsecops);
     serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotGuide });
   });
   describe('sur requête GET', () => {
