@@ -42,32 +42,23 @@
   <!-- eslint-disable-next-line svelte/no-at-html-tags -->
   <span class="description">{@html tronque(item.description)}</span>
   <div class="labels">
-    {#if item.type === 'Guide'}
-      <span>ANSSI</span>
+    {#if item.sources}
+      {#each item.sources as source (source)}<span>{source}</span>{/each}
+    {/if}
+    {#if item.lienInterne || (item.type !== 'Guide' && item.lienExterne)}
       <img
-        src="/assets/images/icone-fleche-droite.svg"
-        alt="Ouvrir dans un nouvel onglet"
-        title="Ouvrir dans un nouvel onglet"
+        src={`/assets/images/${
+          item.lienInterne
+            ? 'icone-fleche-droite.svg'
+            : 'icone-lien-externe.svg'
+        }`}
+        alt={item.lienInterne
+          ? 'Voir le détail'
+          : 'Ouvrir dans un nouvel onglet'}
+        title={item.lienInterne
+          ? 'Voir le détail'
+          : 'Ouvrir dans un nouvel onglet'}
       />
-    {:else}
-      {#if item.sources}
-        {#each item.sources as source (source)}<span>{source}</span>{/each}
-      {/if}
-      {#if item.lienInterne || item.lienExterne}
-        <img
-          src={`/assets/images/${
-            item.lienInterne
-              ? 'icone-fleche-droite.svg'
-              : 'icone-lien-externe.svg'
-          }`}
-          alt={item.lienInterne
-            ? 'Voir le détail'
-            : 'Ouvrir dans un nouvel onglet'}
-          title={item.lienInterne
-            ? 'Voir le détail'
-            : 'Ouvrir dans un nouvel onglet'}
-        />
-      {/if}
     {/if}
   </div>
 </div>
