@@ -194,12 +194,6 @@
       }
     }
 
-    span {
-      margin-bottom: 16px;
-      font-size: 0.85rem;
-      line-height: 1.5rem;
-    }
-
     .titreTags {
       color: var(--gris-aide-saisie);
       text-transform: uppercase;
