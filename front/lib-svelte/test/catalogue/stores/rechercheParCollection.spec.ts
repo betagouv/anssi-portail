@@ -1,29 +1,8 @@
 import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
-import { type Guide } from '../../../src/catalogue/Guide.types';
 import { CollectionGuide } from '../../../src/catalogue/Guide.types';
 import { rechercheParCollection } from '../../../src/catalogue/stores/guides/rechercheParCollection.store';
-
-const guideZeroTrust: Guide = {
-  type: 'Guide',
-  id: 'zero-trust',
-  nom: 'Zero Trust',
-  resume: 'Les fondamentaux du modèle Zero Trust',
-  description:
-    "Les fondamentaux du modèle Zero Trust pour sécuriser les systèmes d'information",
-  illustration:
-    'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-234.avif',
-  langue: 'FR',
-  collections: ['Les essentiels'],
-  image: {
-    petite:
-      'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-234.avif',
-    grande:
-      'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-588.avif',
-  },
-  lienInterne: '/guides/zero-trust',
-  sources: ['ANSSI'],
-};
+import { guideZeroTrust } from './objetsExemples';
 
 describe('La recherche par collection', () => {
   it('retourne vrai lorsque la collection du filtre correspond à la collection du guide', () => {
