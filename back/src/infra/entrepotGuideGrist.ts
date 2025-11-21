@@ -14,6 +14,7 @@ export type GuideGrist = {
     Image: string | null;
     Langue: 'FR' | 'EN' | null;
     Collections: string[];
+    Documents: string;
   };
 };
 
@@ -45,6 +46,12 @@ export class EntrepotGuideGrist implements EntrepotGuide {
       nomImage: guideGrist.fields.Image ?? null,
       langue: guideGrist.fields.Langue ?? 'FR',
       collections: guideGrist.fields.Collections ?? [],
+      documents: guideGrist.fields.Documents
+        ? guideGrist.fields.Documents.split('\n').map((ligne) => ({
+            libelle: ligne.split(' : ')[0],
+            nomFichier: ligne.split(' : ')[1],
+          }))
+        : [],
     };
   }
 

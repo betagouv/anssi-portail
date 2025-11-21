@@ -58,6 +58,12 @@ export const guideZeroTrust: Guide = {
   nomImage: 'anssi-fondamentaux-zero-trust-v1_publication',
   langue: 'FR',
   collections: ['Les essentiels'],
+  documents: [
+    {
+      libelle: 'Les Fondamentaux de l&#039;ANSSI - Zero Trust - v1.0',
+      nomFichier: 'anssi-fondamentaux-zero-trust-v1.0.pdf',
+    },
+  ],
 };
 
 export const guideDevsecops: Guide = {
@@ -70,4 +76,10 @@ export const guideDevsecops: Guide = {
   nomImage: 'anssi_essentiels_devsecops_v1',
   langue: 'FR',
   collections: ['Les essentiels'],
+  documents: [
+    {
+      libelle: 'Les Essentiels de l&#039;ANSSI - DevSecOps - v1.0',
+      nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
+    },
+  ],
 };

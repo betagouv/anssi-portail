@@ -11,4 +11,8 @@ export const guidePresentation =
           grande: `${adaptateurEnvironnement.urlCellar()}/guides/${guide.id}/${guide.nomImage}-588.avif`,
         }
       : null,
+    documents: guide.documents.map((document) => ({
+      libelle: document.libelle,
+      url: `${adaptateurEnvironnement.urlCellar()}/guides/${document.nomFichier}`,
+    })),
   });

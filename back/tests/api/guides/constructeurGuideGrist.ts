@@ -1,4 +1,5 @@
 import { GuideGrist } from '../../../src/infra/entrepotGuideGrist';
+import { DocumentGuide } from '../../../src/metier/guide';
 
 export class ConstructeurGuideGrist {
   private numeroDeLigne: number = 0;
@@ -9,6 +10,7 @@ export class ConstructeurGuideGrist {
   private image: string | null = null;
   private langue: 'FR' | 'EN' | null = null;
   private collections: string[] = [];
+  private documents: DocumentGuide[] = [];
 
   avecLeNumeroDeLigne(numerodeLigne: number) {
     this.numeroDeLigne = numerodeLigne;
@@ -50,6 +52,11 @@ export class ConstructeurGuideGrist {
     return this;
   }
 
+  avecLeDocument(libelle: string, nomFichier: string) {
+    this.documents.push({ libelle, nomFichier });
+    return this;
+  }
+
   construis() {
     return {
       id: this.numeroDeLigne,
@@ -61,6 +68,9 @@ export class ConstructeurGuideGrist {
         Image: this.image,
         Langue: this.langue,
         Collections: this.collections,
+        Documents: this.documents
+          .map((document) => `${document.libelle} : ${document.nomFichier}`)
+          .join('\n'),
       },
     } satisfies GuideGrist;
   }
