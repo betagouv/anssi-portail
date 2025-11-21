@@ -22,4 +22,5 @@ export interface Guide extends Item {
     petite: string;
     grande: string;
   } | null;
+  documents: { libelle: string; url: string }[];
 }
