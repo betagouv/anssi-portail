@@ -133,4 +133,31 @@ describe('La ressource pages jekyll', () => {
       assert.equal(nomPageDemande!, 'contacts');
     });
   });
+
+  describe("sur demande d'un guide", () => {
+    it('répond un 200', async () => {
+      const reponse = await request(serveur).get('/guides/zero-trust');
+
+      assert.equal(reponse.status, 200);
+    });
+
+    it('renvoie un contenu html', async () => {
+      const reponse = await request(serveur).get('/guides/zero-trust');
+
+      assert.notEqual(reponse.headers['content-type'], undefined);
+      assert.match(reponse.headers['content-type'], /html/);
+    });
+
+    it('sers le fichier html de jekyll', async () => {
+      let nomPageDemande: string;
+      fournisseurChemin.cheminPageJekyll = (nomPage: string) => {
+        nomPageDemande = nomPage;
+        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+      };
+
+      await request(serveur).get('/guides/zero-trust');
+
+      assert.equal(nomPageDemande!, 'guides');
+    });
+  });
 });

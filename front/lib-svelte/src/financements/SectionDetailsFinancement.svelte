@@ -1,13 +1,11 @@
 <script lang="ts">
-  import DOMPurify from 'dompurify';
+  import { aseptiseHtml } from '../utils/aseptisationDuHtml';
 
   export let ancre: string;
   export let titre: string;
   export let detail: string;
 
-  const detailPurifie = DOMPurify.sanitize(detail, {
-    ALLOWED_TAGS: ['a', 'b', 'br', 'em', 'i', 'li', 'ol', 'p', 'strong', 'ul'],
-  });
+  const detailPurifie = aseptiseHtml(detail);
 </script>
 
 {#if detail}
