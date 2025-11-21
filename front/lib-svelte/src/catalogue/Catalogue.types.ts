@@ -5,14 +5,14 @@ export interface Item {
   id: string;
   nom: string;
   illustration: string;
+  sources?: string[];
+  lienInterne: string;
 }
 
 export interface ItemCyber extends Item {
   type: 'ItemCyber';
   typologie: Typologie;
   description: string;
-  lienInterne: string;
-  sources?: string[];
   droitsAcces: DroitAcces[];
   format?: FormatRessource;
   lienExterne: string;

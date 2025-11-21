@@ -21,6 +21,8 @@ const guideZeroTrust: Guide = {
     grande:
       'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-588.avif',
   },
+  lienInterne: '/guides/zero-trust',
+  sources: ['ANSSI'],
 };
 
 describe('La recherche par collection', () => {

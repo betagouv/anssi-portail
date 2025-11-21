@@ -104,6 +104,8 @@ export const guideZeroTrust: Guide = {
     grande: '',
     petite: '',
   },
+  lienInterne: '/guides/zero-trust',
+  sources: ['ANSSI'],
 };
 
 export const guideDevsecops: Guide = {
@@ -120,6 +122,8 @@ export const guideDevsecops: Guide = {
     grande: '',
     petite: '',
   },
+  lienInterne: '/guides/devsecops',
+  sources: ['ANSSI'],
 };
 
 export const guideDevsecopsEN: Guide = {
@@ -136,4 +140,6 @@ export const guideDevsecopsEN: Guide = {
     grande: '',
     petite: '',
   },
+  lienInterne: '/guides/en/devsecops',
+  sources: ['ANSSI'],
 };
