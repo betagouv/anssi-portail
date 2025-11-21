@@ -22,6 +22,7 @@
   const { featureFlagGuides }: { featureFlagGuides: boolean } = $props();
 
   const reinitialiseFiltres = () => recherches.reinitialise();
+  let chargement = $state(false);
 
   let modeAffichage = $state<'guides' | 'ressourcesEtServices'>(
     window.location.hash === '#guides' ? 'guides' : 'ressourcesEtServices'
@@ -37,14 +38,19 @@
   };
 
   onMount(async () => {
-    const reponse = await axios.get<Guide[]>('/api/guides');
-    const guides = reponse.data.map((guide) => ({
-      ...guide,
-      type: 'Guide' as const,
-      illustration:
-        guide.image?.petite ?? '/assets/images/image-generique.avif',
-    }));
-    guidesStore.initialise(guides);
+    try {
+      chargement = true;
+      const reponse = await axios.get<Guide[]>('/api/guides');
+      const guides = reponse.data.map((guide) => ({
+        ...guide,
+        type: 'Guide' as const,
+        illustration:
+          guide.image?.petite ?? '/assets/images/image-generique.avif',
+      }));
+      guidesStore.initialise(guides);
+    } finally {
+      chargement = false;
+    }
   });
 </script>
 
@@ -141,7 +147,11 @@
               src="/assets/images/illustration-aucun-resultat.svg"
               alt="Aucun résultat"
             />
-            <h1>Désolé, aucun résultat trouvé</h1>
+            {#if chargement}
+              <h1>Chargement...</h1>
+            {:else}
+              <h1>Désolé, aucun résultat trouvé</h1>
+            {/if}
             <input
               type="button"
               class="bouton primaire"
