@@ -48,6 +48,10 @@ export class EntrepotGuideGrist implements EntrepotGuide {
     };
   }
 
+  parId(_id: string): Promise<Guide | undefined> {
+    throw new Error('Method not implemented.');
+  }
+
   async tous(): Promise<Guide[]> {
     const urlDocGuides = this.adaptateurEnvironnement.grist().urlGuides();
     if (!urlDocGuides) {
