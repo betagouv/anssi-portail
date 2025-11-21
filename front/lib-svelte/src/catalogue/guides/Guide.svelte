@@ -5,6 +5,7 @@
   import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
   import type { Guide } from '../Guide.types';
   import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
+  import { decodeEntitesHtml } from './guide';
 
   let guide: Guide | undefined;
   onMount(async () => {
@@ -30,7 +31,7 @@
       />
       <div class="resume">
         <div>
-          <h1>{guide.nom}</h1>
+          <h1>{decodeEntitesHtml(guide.nom)}</h1>
           <BoutonsDocumentsGuide {guide} />
         </div>
         <div class="conteneur-illustration">
