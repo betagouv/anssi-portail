@@ -43,6 +43,7 @@ export default defineConfig({
         'bandeau-maintenance': 'src/main-bandeau-maintenance.ts',
         statistiques: 'src/main-statistiques.ts',
         financements: 'src/main-financements.ts',
+        guide: 'src/main-guide.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
