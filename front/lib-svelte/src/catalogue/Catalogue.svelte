@@ -5,12 +5,12 @@
   import ChampRecherche from '../ui/ChampRecherche.svelte';
   import Hero from '../ui/Hero.svelte';
   import CarteItem from './CarteItem.svelte';
-  import type { Guide } from './Guide.types';
   import EnteteFiltres from './EnteteFiltres.svelte';
   import FiltreAccessibilite from './FiltreAccessibilite.svelte';
   import FiltreBesoin from './FiltreBesoin.svelte';
   import FiltreSource from './FiltreSource.svelte';
   import FiltreTypologieEtFormat from './FiltreTypologieEtFormat.svelte';
+  import type { Guide } from './Guide.types';
   import FiltreCollection from './guides/FiltreCollection.svelte';
   import FiltreLangue from './guides/FiltreLangue.svelte';
   import { catalogueFiltre } from './stores/catalogueFiltre.store';
@@ -23,9 +23,17 @@
 
   const reinitialiseFiltres = () => recherches.reinitialise();
 
-  let afficheLesGuides = $state(false);
-  const changeAffichage = () => {
-    afficheLesGuides = !afficheLesGuides;
+  let modeAffichage = $state<'guides' | 'ressourcesEtServices'>(
+    window.location.hash === '#guides' ? 'guides' : 'ressourcesEtServices'
+  );
+
+  const afficheLesServicesEtRessources = () => {
+    modeAffichage = 'ressourcesEtServices';
+    window.location.hash = '#ressourcesEtServices';
+  };
+  const afficheLesGuides = () => {
+    modeAffichage = 'guides';
+    window.location.hash = '#guides';
   };
 
   onMount(async () => {
@@ -83,16 +91,16 @@
   <div class="controle-segmente">
     <button
       class="bouton-segmente"
-      class:actif={!afficheLesGuides}
-      onclick={changeAffichage}
+      class:actif={modeAffichage === 'ressourcesEtServices'}
+      onclick={afficheLesServicesEtRessources}
     >
       <lab-anssi-icone nom="list-check"></lab-anssi-icone>
       <span>Services et outils</span>
     </button>
     <button
       class="bouton-segmente"
-      class:actif={afficheLesGuides}
-      onclick={changeAffichage}
+      class:actif={modeAffichage === 'guides'}
+      onclick={afficheLesGuides}
     >
       <lab-anssi-icone nom="book-2-line"></lab-anssi-icone>
       <span>Guides de l'ANSSI</span>
@@ -107,7 +115,7 @@
         <ChampRecherche bind:recherche={$rechercheTextuelle} />
         <EnteteFiltres />
         <div class="barre-filtres">
-          {#if afficheLesGuides}
+          {#if modeAffichage === 'guides'}
             <FiltreLangue />
             <FiltreCollection />
           {:else}
@@ -124,7 +132,7 @@
         </div>
       </div>
 
-      {#if afficheLesGuides}
+      {#if modeAffichage === 'guides'}
         {#each $guidesFiltres.resultats as guide (guide.id)}
           <CarteItem item={guide} avecBoutonFavori />
         {:else}
