@@ -30,8 +30,12 @@
       <div class="resume">
         <div>
           <h1>{guide.nom}</h1>
-          <a href="/" target="_blank" class="bouton primaire">
-            Télecharger le guide
+          <a
+            href={guide.documents[0].url}
+            target="_blank"
+            class="bouton primaire"
+          >
+            Télécharger le guide
           </a>
         </div>
         <div class="conteneur-illustration">
@@ -96,8 +100,12 @@
 
           <img src={guide.illustration} alt="Capture d’écran" />
 
-          <a href="/" target="_blank" class="bouton primaire">
-            Télecharger le guide
+          <a
+            href={guide.documents[0].url}
+            target="_blank"
+            class="bouton primaire"
+          >
+            Télécharger le guide
           </a>
         </section>
 
