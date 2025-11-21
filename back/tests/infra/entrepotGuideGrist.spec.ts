@@ -133,4 +133,24 @@ describe("L'entrepot de guide Grist", () => {
 
     assert.equal(guides[0].nomImage, null);
   });
+
+  it('sait récupérer un guide avec son id', async () => {
+    const guidesGrist: RetourGuideGrist = {
+      records: [
+        new ConstructeurGuideGrist().avecLIdentifiant('guide1').construis(),
+      ],
+    };
+    const clientHttp: ClientHttp<RetourGuideGrist> = {
+      get: async () => ({ data: guidesGrist }),
+    };
+
+    const entrepotGuideGrist = new EntrepotGuideGrist({
+      clientHttp,
+      adaptateurEnvironnement: fauxAdaptateurEnvironnement,
+    });
+
+    const guide1 = await entrepotGuideGrist.parId('guide1');
+
+    assert.equal(guide1!.id, 'guide1');
+  });
 });
