@@ -44,8 +44,7 @@ describe('La ressource guide', () => {
           'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-588.avif',
       });
       assert.equal(guide.langue, 'FR');
-      assert.deepEqual(guide.collections, ["Les essentiels"])
-
+      assert.deepEqual(guide.collections, ['Les essentiels']);
     });
 
     it("répond 404 si le guide n'existe pas", async () => {
@@ -63,6 +62,17 @@ describe('La ressource guide', () => {
       const reponse = await request(serveur).get('/api/guides/zero-trust');
 
       assert.equal(reponse.status, 500);
+    });
+
+    it('renvoie les document du guide', async () => {
+      const reponse = await request(serveur).get('/api/guides/zero-trust');
+
+      assert.deepEqual(reponse.body.documents, [
+        {
+          libelle: 'Les Fondamentaux de l&#039;ANSSI - Zero Trust - v1.0',
+          url: 'https://notre-cellar/guides/anssi-fondamentaux-zero-trust-v1.0.pdf',
+        },
+      ]);
     });
   });
 });
