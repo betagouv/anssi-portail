@@ -41,8 +41,15 @@
   </div>
   <!-- eslint-disable-next-line svelte/no-at-html-tags -->
   <span class="description">{@html tronque(item.description)}</span>
-  {#if item.type !== 'Guide'}
-    <div class="labels">
+  <div class="labels">
+    {#if item.type === 'Guide'}
+      <span>ANSSI</span>
+      <img
+        src="/assets/images/icone-fleche-droite.svg"
+        alt="Ouvrir dans un nouvel onglet"
+        title="Ouvrir dans un nouvel onglet"
+      />
+    {:else}
       {#if item.sources}
         {#each item.sources as source (source)}<span>{source}</span>{/each}
       {/if}
@@ -61,8 +68,8 @@
             : 'Ouvrir dans un nouvel onglet'}
         />
       {/if}
-    </div>
-  {/if}
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
