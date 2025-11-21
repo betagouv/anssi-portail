@@ -48,8 +48,8 @@ export class EntrepotGuideGrist implements EntrepotGuide {
     };
   }
 
-  parId(_id: string): Promise<Guide | undefined> {
-    throw new Error('Method not implemented.');
+  async parId(id: string): Promise<Guide | undefined> {
+    return (await this.tous()).find((guide) => guide.id === id);
   }
 
   async tous(): Promise<Guide[]> {

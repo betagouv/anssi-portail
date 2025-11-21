@@ -1,65 +1,64 @@
 <script lang="ts">
-  import { guideZeroTrust } from '../../../test/catalogue/stores/objetsExemples';
+  import axios from 'axios';
+  import { onMount } from 'svelte';
   import FilAriane from '../../ui/FilAriane.svelte';
   import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
   import type { Guide } from '../Guide.types';
 
-  const guide: Guide = {
-    ...guideZeroTrust,
-    illustration: '/assets/images/image-generique.avif',
-  };
-  const aDesCollections = guide.collections.length > 0;
-  const descriptionAspetisee = aseptiseHtml(guide.description);
+  let guide: Guide | undefined;
+  onMount(async () => {
+    const slug = window.location.href.split('/').at(-1);
+    const reponse = await axios.get(`/api/guides/${slug}`);
+    guide = {
+      ...reponse.data,
+      type: 'Guide' as const,
+      illustration:
+        reponse.data.image?.grande ?? '/assets/images/image-generique.avif',
+    };
+  });
+  $: aDesCollections = guide && guide.collections.length > 0;
+  $: descriptionAspetisee = aseptiseHtml(guide?.description ?? '');
 </script>
 
-<section class="chapeau">
-  <div class="contenu-section">
-    <FilAriane
-      branche={{ nom: 'Catalogue cyber', lien: '/catalogue' }}
-      feuille={guide.nom}
-    />
-    <div class="resume">
-      <div>
-        <h1>{guide.nom}</h1>
-        <a href="/" target="_blank" class="bouton primaire">
-          Télecharger le guide
-        </a>
-      </div>
-      <div class="conteneur-illustration">
-        <img src={guide.illustration} alt="Capture d’écran" />
+{#if guide}
+  <section class="chapeau">
+    <div class="contenu-section">
+      <FilAriane
+        branche={{ nom: 'Catalogue cyber', lien: '/catalogue' }}
+        feuille={guide.nom}
+      />
+      <div class="resume">
+        <div>
+          <h1>{guide.nom}</h1>
+          <a href="/" target="_blank" class="bouton primaire">
+            Télecharger le guide
+          </a>
+        </div>
+        <div class="conteneur-illustration">
+          <img src={guide.illustration} alt="Capture d’écran" />
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="sommaire sommaire-replie">
-  <details>
-    <summary>
-      <div class="entete-filtres">
-        <img class="menu" src="/assets/images/icone-menu-lateral.svg" alt="" />
-        <span id="section-active" class="titre-menu">Présentation</span>
-        <img
-          class="chevron"
-          src="/assets/images/icone-chevron-bas.svg"
-          alt=""
-        />
-      </div>
-    </summary>
+  <div class="sommaire sommaire-replie">
+    <details>
+      <summary>
+        <div class="entete-filtres">
+          <img
+            class="menu"
+            src="/assets/images/icone-menu-lateral.svg"
+            alt=""
+          />
+          <span id="section-active" class="titre-menu">Présentation</span>
+          <img
+            class="chevron"
+            src="/assets/images/icone-chevron-bas.svg"
+            alt=""
+          />
+        </div>
+      </summary>
 
-    <ul>
-      <li class="actif">
-        <a href="#presentation">Présentation</a>
-      </li>
-      {#if aDesCollections}
-        <li><a href="#collection">Dans la même collection</a></li>
-      {/if}
-    </ul>
-  </details>
-</div>
-
-<div class="article">
-  <div class="contenu-section">
-    <div class="sommaire sommaire-deplie">
       <ul>
         <li class="actif">
           <a href="#presentation">Présentation</a>
@@ -68,38 +67,53 @@
           <li><a href="#collection">Dans la même collection</a></li>
         {/if}
       </ul>
-      <span>TAGS</span>
-      <div class="labels">
-        <span>ANSSI</span>
+    </details>
+  </div>
+
+  <div class="article">
+    <div class="contenu-section">
+      <div class="sommaire sommaire-deplie">
+        <ul>
+          <li class="actif">
+            <a href="#presentation">Présentation</a>
+          </li>
+          {#if aDesCollections}
+            <li><a href="#collection">Dans la même collection</a></li>
+          {/if}
+        </ul>
+        <span>TAGS</span>
+        <div class="labels">
+          <span>ANSSI</span>
+        </div>
       </div>
-    </div>
 
-    <div class="contenu">
-      <section class="presentation" id="presentation">
-        <h2>Présentation</h2>
-        <!-- On affiche des données provenant d'une source interne -->
-        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-        {@html descriptionAspetisee}
+      <div class="contenu">
+        <section class="presentation" id="presentation">
+          <h2>Présentation</h2>
+          <!-- On affiche des données provenant d'une source interne -->
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+          {@html descriptionAspetisee}
 
-        <img src={guide.illustration} alt="Capture d’écran" />
+          <img src={guide.illustration} alt="Capture d’écran" />
 
-        <a href="/" target="_blank" class="bouton primaire">
-          Télecharger le guide
-        </a>
-      </section>
-
-      {#if aDesCollections}
-        <section class="collections" id="collection">
-          <h2>Dans la même collection</h2>
+          <a href="/" target="_blank" class="bouton primaire">
+            Télecharger le guide
+          </a>
         </section>
-      {/if}
 
-      <div class="haut-de-page">
-        <a href="#haut-de-page" class="lien">Haut de page</a>
+        {#if aDesCollections}
+          <section class="collections" id="collection">
+            <h2>Dans la même collection</h2>
+          </section>
+        {/if}
+
+        <div class="haut-de-page">
+          <a href="#haut-de-page" class="lien">Haut de page</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
+{/if}
 
 <style lang="scss">
   @use '../../../../assets/styles/responsive.scss' as *;
