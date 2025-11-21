@@ -4,6 +4,7 @@
   import FilAriane from '../../ui/FilAriane.svelte';
   import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
   import type { Guide } from '../Guide.types';
+  import BoutonTelechargementGuide from './BoutonTelechargementGuide.svelte';
 
   let guide: Guide | undefined;
   onMount(async () => {
@@ -30,13 +31,7 @@
       <div class="resume">
         <div>
           <h1>{guide.nom}</h1>
-          <a
-            href={guide.documents[0].url}
-            target="_blank"
-            class="bouton primaire"
-          >
-            Télécharger le guide
-          </a>
+          <BoutonTelechargementGuide {guide} />
         </div>
         <div class="conteneur-illustration">
           <img src={guide.illustration} alt="Capture d’écran" />
@@ -100,13 +95,7 @@
 
           <img src={guide.illustration} alt="Capture d’écran" />
 
-          <a
-            href={guide.documents[0].url}
-            target="_blank"
-            class="bouton primaire"
-          >
-            Télécharger le guide
-          </a>
+          <BoutonTelechargementGuide {guide} />
         </section>
 
         {#if aDesCollections}
