@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
+import { guidePresentation } from './guidePresentation';
 
 const ressourceGuide = ({
   adaptateurEnvironnement,
@@ -17,16 +18,9 @@ const ressourceGuide = ({
           return;
         }
 
-        reponse.status(200).send({
-          ...guide,
-          nomImage: undefined,
-          image: guide.nomImage
-            ? {
-                petite: `${adaptateurEnvironnement.urlCellar()}/guides/${guide.id}/${guide.nomImage}-234.avif`,
-                grande: `${adaptateurEnvironnement.urlCellar()}/guides/${guide.id}/${guide.nomImage}-588.avif`,
-              }
-            : null,
-        });
+        reponse
+          .status(200)
+          .send(guidePresentation(adaptateurEnvironnement)(guide));
       } catch (err) {
         suivante(err);
       }

@@ -1,0 +1,14 @@
+import { AdaptateurEnvironnement } from '../../infra/adaptateurEnvironnement';
+import { Guide } from '../../metier/guide';
+
+export const guidePresentation =
+  (adaptateurEnvironnement: AdaptateurEnvironnement) => (guide: Guide) => ({
+    ...guide,
+    nomImage: undefined,
+    image: guide.nomImage
+      ? {
+          petite: `${adaptateurEnvironnement.urlCellar()}/guides/${guide.id}/${guide.nomImage}-234.avif`,
+          grande: `${adaptateurEnvironnement.urlCellar()}/guides/${guide.id}/${guide.nomImage}-588.avif`,
+        }
+      : null,
+  });

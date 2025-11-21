@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
+import { guidePresentation } from './guidePresentation';
 
 const ressourceGuides = ({
   adaptateurEnvironnement,
@@ -12,18 +13,9 @@ const ressourceGuides = ({
     async (_requete: Request, reponse: Response, suivante: NextFunction) => {
       try {
         const guides = await entrepotGuide.tous();
-        reponse.status(200).send(
-          guides.map((guide) => ({
-            ...guide,
-            nomImage: undefined,
-            image: guide.nomImage
-              ? {
-                  petite: `${adaptateurEnvironnement.urlCellar()}/guides/${guide.id}/${guide.nomImage}-234.avif`,
-                  grande: `${adaptateurEnvironnement.urlCellar()}/guides/${guide.id}/${guide.nomImage}-588.avif`,
-                }
-              : null,
-          }))
-        );
+        reponse
+          .status(200)
+          .send(guides.map(guidePresentation(adaptateurEnvironnement)));
       } catch (e) {
         suivante(e);
       }
