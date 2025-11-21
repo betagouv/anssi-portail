@@ -41,6 +41,7 @@ import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResul
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
 import { ressourceQualification } from './ressourceQualification';
+import { ressourceGuide } from './guides/ressourceGuide';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -288,7 +289,11 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourceFinancement(configurationServeur)
   );
 
-  app.use('/api/guides', ressourceGuides(configurationServeur));
+  app.use(
+    '/api/guides',
+    ressourceGuides(configurationServeur),
+    ressourceGuide(configurationServeur)
+  );
 
   app.use('/qualifications', ressourceQualification(configurationServeur));
 
