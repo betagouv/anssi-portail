@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Guide } from '../Guide.types';
+  import { decodeEntitesHtml } from './guide';
 
   export let guide: Guide;
   export let autoriseMultiple: boolean = false;
@@ -13,7 +14,7 @@
   <div class="documents">
     {#each guide.documents as document (document.libelle)}
       <a href={document.url} target="_blank" class="bouton primaire">
-         {document.libelle}
+        {decodeEntitesHtml(document.libelle)}
       </a>
     {/each}
   </div>
