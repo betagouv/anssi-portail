@@ -6,4 +6,10 @@ export type Guide = {
   nomImage: string | null;
   langue: 'FR' | 'EN';
   collections: string[];
+  documents: DocumentGuide[];
+};
+
+export type DocumentGuide = {
+  libelle: string;
+  nomFichier: string;
 };
