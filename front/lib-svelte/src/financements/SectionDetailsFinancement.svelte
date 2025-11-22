@@ -9,7 +9,7 @@
 </script>
 
 {#if detail}
-  <section>
+  <section id={ancre}>
     <div class="contenu-section">
       <h2 id={ancre}>{titre}</h2>
       <!-- On affiche des données provenant d'une source interne -->
@@ -20,6 +20,10 @@
 {/if}
 
 <style lang="scss">
+  section :global a {
+    display: inline-flex;
+    text-decoration: underline;
+  }
   section {
     :global(a) {
       display: inline;
