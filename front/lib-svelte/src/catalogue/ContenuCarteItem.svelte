@@ -3,7 +3,7 @@
   import type { ItemCyber } from './Catalogue.types';
   import { Typologie } from './Catalogue.types';
   import type { Guide } from './Guide.types';
-  import { laCouleurDuBadgeSelonLaCollection } from './guides/guide';
+  import BadgesDeCollections from './guides/BadgesDeCollections.svelte';
 
   export let item: ItemCyber | Guide;
   export let avecBoutonFavori: boolean = false;
@@ -19,20 +19,12 @@
       ? texte.slice(0, LONGUEUR_MAX) + '&hellip;'
       : texte;
   };
-
-  const badges =
-    item.type === 'Guide'
-      ? item.collections.map((collection) => ({
-          label: collection,
-          accent: laCouleurDuBadgeSelonLaCollection(collection),
-        }))
-      : [];
 </script>
 
 <figure>
   {#if item.type === 'Guide'}
     <img src={item.illustration} alt="Illustration du guide" />
-    <dsfr-badges-group {badges} size="sm"></dsfr-badges-group>
+    <div class="badges-collection"><BadgesDeCollections guide={item} /></div>
   {:else}
     <img
       src="/assets/images/illustrations-services/{item.illustration}"
@@ -75,7 +67,7 @@
 
 <style lang="scss">
   figure {
-    dsfr-badges-group {
+    .badges-collection {
       position: absolute;
       top: 12px;
       right: 12px;
