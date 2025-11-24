@@ -46,7 +46,7 @@ describe('La ressource qui gère les guides', () => {
           'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-588.avif',
       });
       assert.equal(premierGuide.langue, 'FR');
-      assert.deepEqual(premierGuide.collections, ["Les essentiels"])
+      assert.deepEqual(premierGuide.collections, ['Les essentiels']);
 
       const secondGuide = reponse.body[1];
       assert.equal(secondGuide.id, 'devsecops');
@@ -66,7 +66,14 @@ describe('La ressource qui gère les guides', () => {
           'https://notre-cellar/guides/devsecops/anssi_essentiels_devsecops_v1-588.avif',
       });
       assert.equal(secondGuide.langue, 'FR');
-      assert.deepEqual(premierGuide.collections, ["Les essentiels"])
+      assert.deepEqual(premierGuide.collections, ['Les essentiels']);
+    });
+
+    it("expose les dates d'un guide", async () => {
+      const reponse = await request(serveur).get('/api/guides');
+
+      assert.equal(reponse.body[0].datePublication, '20 Juin 2025');
+      assert.equal(reponse.body[0].dateMiseAJour, '20 Juin 2025');
     });
 
     it("gère l'absence d'image sur un guide", async () => {

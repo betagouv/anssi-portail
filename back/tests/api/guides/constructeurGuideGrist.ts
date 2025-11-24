@@ -11,6 +11,8 @@ export class ConstructeurGuideGrist {
   private langue: 'FR' | 'EN' | null = null;
   private collections: string[] = [];
   private documents: DocumentGuide[] = [];
+  private datePublication: string | null = null;
+  private dateMiseAJour: string | null = null;
 
   avecLeNumeroDeLigne(numerodeLigne: number) {
     this.numeroDeLigne = numerodeLigne;
@@ -56,6 +58,14 @@ export class ConstructeurGuideGrist {
     this.documents.push({ libelle, nomFichier });
     return this;
   }
+  avecLaDateDePublication(datePublication: string) {
+    this.datePublication = datePublication;
+    return this;
+  }
+  avecLaDateDeMiseAJour(dateMiseAJour: string) {
+    this.dateMiseAJour = dateMiseAJour;
+    return this;
+  }
 
   construis() {
     return {
@@ -71,6 +81,8 @@ export class ConstructeurGuideGrist {
         Documents: this.documents
           .map((document) => `${document.libelle} : ${document.nomFichier}`)
           .join('\n'),
+        Date_de_publication: this.datePublication,
+        Date_de_mise_a_jour: this.dateMiseAJour,
       },
     } satisfies GuideGrist;
   }

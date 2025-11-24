@@ -15,6 +15,8 @@ export type GuideGrist = {
     Langue: 'FR' | 'EN' | null;
     Collections: string[];
     Documents: string;
+    Date_de_publication: string | null;
+    Date_de_mise_a_jour: string | null;
   };
 };
 
@@ -52,6 +54,8 @@ export class EntrepotGuideGrist implements EntrepotGuide {
             nomFichier: ligne.split(' : ')[1],
           }))
         : [],
+      dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour ?? '',
+      datePublication: guideGrist.fields.Date_de_publication ?? '',
     };
   }
 

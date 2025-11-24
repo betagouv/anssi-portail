@@ -96,28 +96,33 @@ describe("L'entrepot de guide Grist", () => {
 
     const guides = await entrepotGuideGrist.tous();
 
-    assert.deepEqual(guides, [
-      {
-        id: 'guide1',
-        nom: 'Premier guide',
-        resume: 'Résumé du premier guide',
-        description: '<p>Description du premier guide</p>',
-        nomImage: 'vignette-1',
-        langue: 'FR',
-        collections: ['Les essentiels'],
-        documents: [],
-      },
-      {
-        id: 'guide2',
-        nom: 'Deuxième guide',
-        resume: 'Résumé du deuxième guide',
-        description: '<p>Description du deuxième guide</p>',
-        nomImage: 'vignette-2',
-        langue: 'FR',
-        collections: ['Les essentiels'],
-        documents: [],
-      },
-    ]);
+    assert.equal(guides.length, 2);
+
+    const premierGuide = guides[0];
+    assert.equal(premierGuide.id, 'guide1');
+    assert.equal(premierGuide.nom, 'Premier guide');
+    assert.equal(premierGuide.resume, 'Résumé du premier guide');
+    assert.equal(
+      premierGuide.description,
+      '<p>Description du premier guide</p>'
+    );
+    assert.equal(premierGuide.nomImage, 'vignette-1');
+    assert.equal(premierGuide.langue, 'FR');
+    assert.deepEqual(premierGuide.collections, ['Les essentiels']);
+    assert.deepEqual(premierGuide.documents, []);
+
+    const deuxiemeGuide = guides[1];
+    assert.equal(deuxiemeGuide.id, 'guide2');
+    assert.equal(deuxiemeGuide.nom, 'Deuxième guide');
+    assert.equal(deuxiemeGuide.resume, 'Résumé du deuxième guide');
+    assert.equal(
+      deuxiemeGuide.description,
+      '<p>Description du deuxième guide</p>'
+    );
+    assert.equal(deuxiemeGuide.nomImage, 'vignette-2');
+    assert.equal(deuxiemeGuide.langue, 'FR');
+    assert.deepEqual(deuxiemeGuide.collections, ['Les essentiels']);
+    assert.deepEqual(deuxiemeGuide.documents, []);
   });
 
   it("sait gérer l'absence d'image dans un guide", async () => {
@@ -155,5 +160,20 @@ describe("L'entrepot de guide Grist", () => {
       { libelle: 'Le guide', nomFichier: 'guide.pdf' },
       { libelle: 'Le guide obsolète', nomFichier: 'guide-obsolete.pdf' },
     ]);
+  });
+
+  it('sait récupérer les dates', async () => {
+    const entrepotGuideGrist = prepareEntrepotGristAvecEnregistrements([
+      new ConstructeurGuideGrist()
+        .avecLIdentifiant('guide1')
+        .avecLaDateDeMiseAJour('12 Novembre 2024')
+        .avecLaDateDePublication('09 Mars 2023')
+        .construis(),
+    ]);
+
+    const guide1 = await entrepotGuideGrist.parId('guide1');
+
+    assert.equal(guide1!.datePublication, '09 Mars 2023');
+    assert.equal(guide1!.dateMiseAJour, '12 Novembre 2024');
   });
 });
