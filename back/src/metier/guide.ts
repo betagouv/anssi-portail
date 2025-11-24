@@ -7,6 +7,8 @@ export type Guide = {
   langue: 'FR' | 'EN';
   collections: string[];
   documents: DocumentGuide[];
+  datePublication: string;
+  dateMiseAJour: string;
 };
 
 export type DocumentGuide = {
