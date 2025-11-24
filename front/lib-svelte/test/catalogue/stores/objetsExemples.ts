@@ -107,6 +107,8 @@ export const guideZeroTrust: Guide = {
   lienInterne: '/guides/zero-trust',
   sources: ['ANSSI'],
   documents: [],
+  dateMiseAJour: '20 Juin 2025',
+  datePublication: '20 Juin 2025',
 };
 
 export const guideDevsecops: Guide = {
@@ -126,6 +128,8 @@ export const guideDevsecops: Guide = {
   lienInterne: '/guides/devsecops',
   sources: ['ANSSI'],
   documents: [],
+  dateMiseAJour: '13 Mars 2024',
+  datePublication: '13 Mars 2024',
 };
 
 export const guideDevsecopsEN: Guide = {
@@ -145,4 +149,6 @@ export const guideDevsecopsEN: Guide = {
   lienInterne: '/guides/en/devsecops',
   sources: ['ANSSI'],
   documents: [],
+  dateMiseAJour: '26 September 2024',
+  datePublication: '26 September 2024',
 };

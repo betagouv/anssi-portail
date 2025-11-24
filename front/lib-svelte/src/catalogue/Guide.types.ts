@@ -23,4 +23,6 @@ export interface Guide extends Item {
     grande: string;
   } | null;
   documents: { libelle: string; url: string }[];
+  datePublication: string;
+  dateMiseAJour: string;
 }
