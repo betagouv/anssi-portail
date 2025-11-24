@@ -1,8 +1,8 @@
 <script lang="ts">
   import BoutonFavori from '../favoris/BoutonFavori.svelte';
   import type { ItemCyber } from './Catalogue.types';
-  import type { Guide } from './Guide.types';
   import { Typologie } from './Catalogue.types';
+  import type { Guide } from './Guide.types';
 
   export let item: ItemCyber | Guide;
   export let avecBoutonFavori: boolean = false;
@@ -18,18 +18,27 @@
       ? texte.slice(0, LONGUEUR_MAX) + '&hellip;'
       : texte;
   };
+
+  const badges =
+    item.type === 'Guide'
+      ? item.collections.map((collection) => ({
+          label: collection,
+          accent: 'green-menthe',
+        }))
+      : [];
 </script>
 
 <figure>
   {#if item.type === 'Guide'}
     <img src={item.illustration} alt="Illustration du guide" />
+    <dsfr-badges-group {badges} size="sm"></dsfr-badges-group>
   {:else}
     <img
       src="/assets/images/illustrations-services/{item.illustration}"
       alt="Illustration du service"
     />
+    <figcaption>{libelleBadge(item)}</figcaption>
   {/if}
-  <figcaption>{libelleBadge(item)}</figcaption>
 </figure>
 <div class="contenu">
   <div class="en-tete">
@@ -64,6 +73,15 @@
 </div>
 
 <style lang="scss">
+  figure {
+    dsfr-badges-group {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      left: 12px;
+      width: 100%;
+    }
+  }
   .contenu {
     background: white;
     z-index: 1;
