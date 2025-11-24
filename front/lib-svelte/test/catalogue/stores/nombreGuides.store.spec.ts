@@ -39,7 +39,7 @@ describe('Le store du nombre de guides', () => {
 
       expect(parCollection[CollectionGuide.CRISE_CYBER]).toBe(0);
       expect(parCollection[CollectionGuide.GESTION_DES_RISQUES_CYBER]).toBe(0);
-      expect(parCollection[CollectionGuide.LES_ESSENTIELS]).toBe(1);
+      expect(parCollection[CollectionGuide.LES_ESSENTIELS]).toBe(2);
       expect(parCollection[CollectionGuide.LES_FONDAMENTAUX]).toBe(1);
       expect(parCollection[CollectionGuide.REMEDIATION]).toBe(0);
       expect(parCollection[CollectionGuide.SUPERVISION_DE_SECURITE]).toBe(0);

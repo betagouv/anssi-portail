@@ -87,7 +87,7 @@ describe('Le store des guides filtrés', () => {
 
       const { resultats } = get(guidesFiltres);
 
-      expect(resultats.length).toBe(1);
+      expect(resultats.length).toBe(2);
       expect(resultats[0].nom).toBe('Zero Trust');
     });
 
