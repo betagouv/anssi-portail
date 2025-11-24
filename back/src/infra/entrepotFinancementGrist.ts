@@ -3,6 +3,7 @@ import { EntrepotFinancement } from '../metier/entrepotFinancement';
 import { Financement } from '../metier/financement';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { ClientHttp } from './clientHttp';
+import { aseptiseListeGrist } from './grist';
 
 export type RetourApiGrist = {
   records: {
@@ -57,12 +58,11 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
           id,
           nom: fields.Nom_du_dispositif ?? '',
           financeur: fields.Financeur ?? '',
-          typesDeFinancement:
-            fields.Financement?.filter((p) => p !== 'L') ?? [],
-          entitesElligibles:
-            fields.Entites_eligibles?.filter((p) => p !== 'L') ?? [],
-          perimetresGeographiques:
-            fields.Perimetre_geographique?.filter((p) => p !== 'L') ?? [],
+          typesDeFinancement: aseptiseListeGrist(fields.Financement),
+          entitesElligibles: aseptiseListeGrist(fields.Entites_eligibles),
+          perimetresGeographiques: aseptiseListeGrist(
+            fields.Perimetre_geographique
+          ),
           objectifs: fields.Objectifs ?? '',
           operationsEligibles: fields.Operations_eligibles ?? '',
           benificiaires: fields.Beneficiaire ?? '',

@@ -3,6 +3,7 @@ import { EntrepotGuide } from '../metier/entrepotGuide';
 import { Guide } from '../metier/guide';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { ClientHttp } from './clientHttp';
+import { aseptiseListeGrist } from './grist';
 
 export type GuideGrist = {
   id: number;
@@ -47,8 +48,7 @@ export class EntrepotGuideGrist implements EntrepotGuide {
       description: guideGrist.fields.Description ?? '',
       nomImage: guideGrist.fields.Image ?? null,
       langue: guideGrist.fields.Langue ?? 'FR',
-      collections:
-        guideGrist.fields.Collections?.filter((p) => p !== 'L') ?? [],
+      collections: aseptiseListeGrist(guideGrist.fields.Collections),
       documents: guideGrist.fields.Documents
         ? guideGrist.fields.Documents.split('\n').map((ligne) => ({
             libelle: ligne.split(' : ')[0],
