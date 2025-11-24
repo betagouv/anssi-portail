@@ -50,7 +50,7 @@ export class ConstructeurGuideGrist {
   }
 
   avecLesCollections(collections: string[]) {
-    this.collections = [...collections];
+    this.collections = ['L', ...collections];
     return this;
   }
 

@@ -47,7 +47,8 @@ export class EntrepotGuideGrist implements EntrepotGuide {
       description: guideGrist.fields.Description ?? '',
       nomImage: guideGrist.fields.Image ?? null,
       langue: guideGrist.fields.Langue ?? 'FR',
-      collections: guideGrist.fields.Collections ?? [],
+      collections:
+        guideGrist.fields.Collections?.filter((p) => p !== 'L') ?? [],
       documents: guideGrist.fields.Documents
         ? guideGrist.fields.Documents.split('\n').map((ligne) => ({
             libelle: ligne.split(' : ')[0],
