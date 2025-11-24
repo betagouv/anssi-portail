@@ -122,7 +122,7 @@ export const fabriqueMiddleware = ({
     reponse.sendFileAvecNonce = (chemin: string) => {
       try {
         const fichier = fs.readFileSync(chemin, 'utf-8');
-        const avecNonce = fichier.replace('%%NONCE%%', nonceAleatoire);
+        const avecNonce = fichier.replaceAll('%%NONCE%%', nonceAleatoire);
         reponse.send(avecNonce);
       } catch {
         reponse
