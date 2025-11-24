@@ -88,6 +88,9 @@
       </div>
 
       <div class="contenu">
+        <p class="dates">
+          Publié le {guide.datePublication} &bullet; Mis à jour le {guide.dateMiseAJour}
+        </p>
         <section class="presentation" id="presentation">
           <h2>Présentation</h2>
           <!-- On affiche des données provenant d'une source interne -->
@@ -189,6 +192,15 @@
       @include a-partir-de(lg) {
         flex-direction: row;
         gap: 32px;
+      }
+
+      .contenu {
+        .dates {
+          font-size: 0.75rem;
+          line-height: 1.25rem;
+          color: #666;
+          margin-block: 0 32px;
+        }
       }
     }
   }
