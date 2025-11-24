@@ -3,6 +3,7 @@
   import type { ItemCyber } from './Catalogue.types';
   import { Typologie } from './Catalogue.types';
   import type { Guide } from './Guide.types';
+  import { laCouleurDuBadgeSelonLaCollection } from './guides/guide';
 
   export let item: ItemCyber | Guide;
   export let avecBoutonFavori: boolean = false;
@@ -23,7 +24,7 @@
     item.type === 'Guide'
       ? item.collections.map((collection) => ({
           label: collection,
-          accent: 'green-menthe',
+          accent: laCouleurDuBadgeSelonLaCollection(collection),
         }))
       : [];
 </script>

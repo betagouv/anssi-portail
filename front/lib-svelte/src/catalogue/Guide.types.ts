@@ -17,7 +17,7 @@ export interface Guide extends Item {
   resume: string;
   description: string;
   langue: string;
-  collections: string[];
+  collections: CollectionGuide[];
   image: {
     petite: string;
     grande: string;

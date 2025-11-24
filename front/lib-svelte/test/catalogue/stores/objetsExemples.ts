@@ -5,7 +5,10 @@ import {
   Source,
   Typologie,
 } from '../../../src/catalogue/Catalogue.types';
-import { type Guide } from '../../../src/catalogue/Guide.types';
+import {
+  CollectionGuide,
+  type Guide,
+} from '../../../src/catalogue/Guide.types';
 
 export const mss = (): ItemCyber => ({
   type: 'ItemCyber',
@@ -99,7 +102,7 @@ export const guideZeroTrust: Guide = {
   illustration:
     'http://localhost/anssi-fondamentaux-zero-trust-v1_publication.jpg',
   langue: 'FR',
-  collections: ['Les essentiels'],
+  collections: [CollectionGuide.LES_ESSENTIELS],
   image: {
     grande: '',
     petite: '',
@@ -120,7 +123,7 @@ export const guideDevsecops: Guide = {
     'Intégrer la sécurité dans les pratiques DevOps pour renforcer la sécurité du développement logiciel',
   illustration: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
   langue: 'FR',
-  collections: ['Les fondamentaux'],
+  collections: [CollectionGuide.LES_FONDAMENTAUX],
   image: {
     grande: '',
     petite: '',
@@ -141,7 +144,7 @@ export const guideDevsecopsEN: Guide = {
     'Integrating security into DevOps practices to enhance software development security',
   illustration: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
   langue: 'EN',
-  collections: ['The essentiels'],
+  collections: [CollectionGuide.LES_ESSENTIELS],
   image: {
     grande: '',
     petite: '',
