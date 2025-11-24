@@ -6,6 +6,7 @@
   import type { Guide } from '../Guide.types';
   import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
   import { decodeEntitesHtml } from './guide';
+  import BadgesDeCollections from './BadgesDeCollections.svelte';
 
   let guide: Guide | undefined;
   onMount(async () => {
@@ -29,6 +30,7 @@
         branche={{ nom: 'Catalogue cyber', lien: '/catalogue' }}
         feuille={guide.nom}
       />
+      <div class="badges-collections"><BadgesDeCollections {guide} /></div>
       <div class="resume">
         <div>
           <h1>{decodeEntitesHtml(guide.nom)}</h1>
@@ -126,6 +128,10 @@
     .contenu-section {
       display: flex;
       flex-direction: column;
+
+      .badges-collections {
+        margin-top: 24px;
+      }
     }
 
     @include a-partir-de(xxl) {
@@ -157,7 +163,7 @@
     }
 
     h1 {
-      margin: 8px 0 16px;
+      margin: 0 0 16px;
       font-size: 2.5rem;
       line-height: 2.875rem;
 
