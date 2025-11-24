@@ -21,10 +21,20 @@
 {/if}
 
 <style lang="scss">
+  @use '../../../../assets/styles/responsive.scss' as *;
   .documents {
     display: flex;
     flex-direction: column;
     align-items: start;
     gap: 24px;
+  }
+  .bouton {
+    margin-top: 24px;
+    margin-bottom: 40px;
+    padding: 10px 28px;
+
+    @include a-partir-de(md) {
+      width: fit-content;
+    }
   }
 </style>

@@ -166,16 +166,6 @@
         line-height: 4.125rem;
       }
     }
-
-    .bouton {
-      margin-top: 24px;
-      margin-bottom: 40px;
-      padding: 10px 28px;
-
-      @include a-partir-de(md) {
-        width: fit-content;
-      }
-    }
   }
 
   .article {
@@ -298,20 +288,11 @@
 
     img {
       width: 100%;
-      margin-top: 2rem;
+      margin-top: 32px;
+      margin-bottom: 8px;
 
       @include a-partir-de(xxl) {
         display: none;
-      }
-    }
-
-    .bouton {
-      margin-top: 32px;
-      margin-bottom: 0;
-      padding: 10px 24px;
-
-      @include a-partir-de(lg) {
-        width: fit-content;
       }
     }
   }
