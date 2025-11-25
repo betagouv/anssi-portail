@@ -334,7 +334,7 @@
   }
 
   .haut-de-page {
-    margin: 0 auto 40px;
+    margin: 48px auto 40px;
     text-align: center;
 
     @include a-partir-de(md) {
