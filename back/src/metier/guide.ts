@@ -1,3 +1,5 @@
+import { EntrepotGuide } from './entrepotGuide';
+
 export class Guide {
   id: string;
   nom: string;
@@ -32,6 +34,12 @@ export class Guide {
     this.documents = parametres.documents;
     this.datePublication = parametres.datePublication;
     this.dateMiseAJour = parametres.dateMiseAJour;
+  }
+
+  async deMemesCollections(entrepotGuide: EntrepotGuide) {
+    return (await entrepotGuide.parCollections(this.collections)).filter(
+      (guide) => guide.id !== this.id
+    );
   }
 }
 

@@ -16,9 +16,7 @@ export const ressourceGuidesMemesCollections = ({
         reponse.sendStatus(404);
         return;
       }
-      const guides = (
-        await entrepotGuide.parCollections(guideCible.collections)
-      ).filter((guide) => guide.id !== guideCible.id);
+      const guides = await guideCible.deMemesCollections(entrepotGuide);
 
       reponse
         .status(200)
