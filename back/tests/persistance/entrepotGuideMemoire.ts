@@ -12,4 +12,11 @@ export class EntrepotGuideMemoire
   async vide() {
     this.entites = [];
   }
+  async parCollections(collections: string[]): Promise<Guide[]> {
+    return this.entites.filter((guide) =>
+      guide.collections.some((uneCollectionDuGuide) =>
+        collections.includes(uneCollectionDuGuide)
+      )
+    );
+  }
 }
