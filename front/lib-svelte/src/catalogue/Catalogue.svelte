@@ -13,6 +13,7 @@
   import type { Guide } from './Guide.types';
   import FiltreCollection from './guides/FiltreCollection.svelte';
   import FiltreLangue from './guides/FiltreLangue.svelte';
+  import { guidePourCarteItem } from './guides/guide';
   import { catalogueFiltre } from './stores/catalogueFiltre.store';
   import { guidesStore } from './stores/guides/guides.store';
   import { guidesFiltres } from './stores/guides/guidesFiltres.store';
@@ -41,14 +42,7 @@
     try {
       chargement = true;
       const reponse = await axios.get<Guide[]>('/api/guides');
-      const guides = reponse.data.map((guide) => ({
-        ...guide,
-        type: 'Guide' as const,
-        illustration:
-          guide.image?.petite ?? '/assets/images/image-generique.avif',
-        lienInterne: '/guides/' + guide.id,
-        sources: ['ANSSI'],
-      }));
+      const guides = reponse.data.map(guidePourCarteItem);
       guidesStore.initialise(guides);
     } finally {
       chargement = false;
