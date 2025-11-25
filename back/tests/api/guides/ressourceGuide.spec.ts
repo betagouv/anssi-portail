@@ -75,4 +75,14 @@ describe('La ressource guide', () => {
       ]);
     });
   });
+
+  describe('sur demande des guides de même collection', () => {
+    it('répond 200', async () => {
+      const reponse = await request(serveur).get(
+        '/api/guides/zero-trust/memes-collections'
+      );
+
+      assert.equal(reponse.status, 200);
+    });
+  });
 });
