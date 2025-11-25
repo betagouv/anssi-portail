@@ -3,6 +3,7 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
+import { Guide } from '../../../src/metier/guide';
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire';
 import { configurationDeTestDuServeur } from '../fauxObjets';
 import { guideDevsecops, guideZeroTrust } from '../objetsPretsALEmploi';
@@ -78,7 +79,7 @@ describe('La ressource qui gère les guides', () => {
 
     it("gère l'absence d'image sur un guide", async () => {
       await entrepotGuide.vide();
-      await entrepotGuide.ajoute({ ...guideZeroTrust, nomImage: null });
+      await entrepotGuide.ajoute(new Guide({ ...guideZeroTrust, nomImage: null }));
 
       const reponse = await request(serveur).get('/api/guides');
 

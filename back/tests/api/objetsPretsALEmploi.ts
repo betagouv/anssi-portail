@@ -48,7 +48,7 @@ export const financementCyberPME: Financement = new Financement({
   contact: 'aide.entreprise@mail.fr',
 });
 
-export const guideZeroTrust: Guide = {
+export const guideZeroTrust = new Guide({
   id: 'zero-trust',
   nom: 'Zero Trust',
   resume:
@@ -66,9 +66,9 @@ export const guideZeroTrust: Guide = {
   ],
   dateMiseAJour: '20 Juin 2025',
   datePublication: '20 Juin 2025',
-};
+});
 
-export const guideDevsecops: Guide = {
+export const guideDevsecops = new Guide({
   id: 'devsecops',
   nom: 'DevSecOps',
   resume:
@@ -86,4 +86,4 @@ export const guideDevsecops: Guide = {
   ],
   dateMiseAJour: '13 Mars 2024',
   datePublication: '13 Mars 2024',
-};
+});
