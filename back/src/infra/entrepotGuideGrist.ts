@@ -41,7 +41,7 @@ export class EntrepotGuideGrist implements EntrepotGuide {
   }
 
   private convertisGuideGrist(guideGrist: GuideGrist): Guide {
-    return {
+    return new Guide({
       id: guideGrist.fields.Identifiant ?? '',
       nom: guideGrist.fields.Titre ?? '',
       resume: guideGrist.fields.Resume ?? '',
@@ -57,7 +57,7 @@ export class EntrepotGuideGrist implements EntrepotGuide {
         : [],
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour ?? '',
       datePublication: guideGrist.fields.Date_de_publication ?? '',
-    };
+    });
   }
 
   async parId(id: string): Promise<Guide | undefined> {

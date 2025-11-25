@@ -3,6 +3,7 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
+import { Guide } from '../../../src/metier/guide';
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire';
 import { configurationDeTestDuServeur } from '../fauxObjets';
 import { guideDevsecops, guideZeroTrust } from '../objetsPretsALEmploi';
@@ -15,8 +16,7 @@ describe('La ressource des guides de mêmes collections', () => {
       entrepotGuide = new EntrepotGuideMemoire();
       await entrepotGuide.ajoute(guideZeroTrust);
       await entrepotGuide.ajoute(guideDevsecops);
-      serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotGuide });
-      await entrepotGuide.ajoute({
+      await entrepotGuide.ajoute(new Guide({
         id: 'guide-sans-collection',
         nom: 'Guide sans collection',
         resume: '',
@@ -27,7 +27,8 @@ describe('La ressource des guides de mêmes collections', () => {
         documents: [],
         dateMiseAJour: '',
         datePublication: '',
-      });
+      }));
+      serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotGuide });
     });
     it('répond 200', async () => {
       const reponse = await request(serveur).get(
