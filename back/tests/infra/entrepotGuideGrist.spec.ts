@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'node:test';
 import { ClientHttp } from '../../src/infra/clientHttp';
 import {
   EntrepotGuideGrist,
@@ -175,5 +175,52 @@ describe("L'entrepot de guide Grist", () => {
 
     assert.equal(guide1!.datePublication, '09 Mars 2023');
     assert.equal(guide1!.dateMiseAJour, '12 Novembre 2024');
+  });
+
+  describe("lors d'une recherche par collection", () => {
+    let entrepotGuideGrist: EntrepotGuideGrist;
+    beforeEach(() => {
+      entrepotGuideGrist = prepareEntrepotGristAvecEnregistrements([
+        new ConstructeurGuideGrist()
+          .avecLIdentifiant('guide1')
+          .avecLesCollections(['Les essentiels'])
+          .construis(),
+        new ConstructeurGuideGrist()
+          .avecLIdentifiant('guide2')
+          .avecLesCollections(['Les fondamentaux'])
+          .construis(),
+        new ConstructeurGuideGrist()
+          .avecLIdentifiant('guide3')
+          .avecLesCollections(['Les essentiels', 'Les fondamentaux'])
+          .construis(),
+      ]);
+    });
+    it('retourne une liste vide si les collections sont vides', async () => {
+      const guides = await entrepotGuideGrist.parCollections([]);
+
+      assert.equal(guides.length, 0);
+    });
+
+    it('sait retourner les guides correspondants à une collection', async () => {
+      const guides = await entrepotGuideGrist.parCollections([
+        'Les essentiels',
+      ]);
+
+      assert.equal(guides.length, 2);
+      assert.equal(guides[0].id, 'guide1');
+      assert.equal(guides[1].id, 'guide3');
+    });
+
+    it('sait retourner les guides correspondants à plusieurs collections', async () => {
+      const guides = await entrepotGuideGrist.parCollections([
+        'Les essentiels',
+        'Les fondamentaux',
+      ]);
+
+      assert.equal(guides.length, 3);
+      assert.equal(guides[0].id, 'guide1');
+      assert.equal(guides[1].id, 'guide2');
+      assert.equal(guides[2].id, 'guide3');
+    });
   });
 });
