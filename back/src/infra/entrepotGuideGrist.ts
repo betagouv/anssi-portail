@@ -76,4 +76,8 @@ export class EntrepotGuideGrist implements EntrepotGuide {
 
     return guidesGrist.records.map(this.convertisGuideGrist);
   }
+
+  async parCollections(): Promise<Guide[]> {
+    return [];
+  }
 }
