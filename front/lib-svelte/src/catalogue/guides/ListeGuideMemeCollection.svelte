@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import CarteItem from '../CarteItem.svelte';
   import type { Guide } from '../Guide.types';
+  import { guidePourCarteItem } from './guide';
   import SqueletteCarteGuide from './SqueletteCarteGuide.svelte';
 
   export let guide: Guide;
@@ -14,14 +15,7 @@
       const reponse = await axios.get<Guide[]>(
         `/api/guides/${guide.id}/memes-collections`
       );
-      guideDeMemesCollections = reponse.data.map((guide) => ({
-        ...guide,
-        type: 'Guide' as const,
-        illustration:
-          guide.image?.petite ?? '/assets/images/image-generique.avif',
-        lienInterne: '/guides/' + guide.id,
-        sources: ['ANSSI'],
-      }));
+      guideDeMemesCollections = reponse.data.map(guidePourCarteItem);
     } finally {
       chargement = false;
     }

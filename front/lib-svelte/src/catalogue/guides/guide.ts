@@ -1,5 +1,5 @@
 import type { CouleurDeBadge } from '../../ui/badge.type';
-import type { CollectionGuide } from '../Guide.types';
+import type { CollectionGuide, Guide } from '../Guide.types';
 
 export const decodeEntitesHtml = (chaine: string) => {
   return chaine.replaceAll('&#039;', "'");
@@ -19,3 +19,11 @@ export const laCouleurDuBadgeSelonLaCollection = (
 
   return (collection && couleursTypes[collection]) ?? 'purple-glycine';
 };
+
+export const guidePourCarteItem = (guide: Guide): Guide => ({
+  ...guide,
+  type: 'Guide' as const,
+  illustration: guide.image?.petite ?? '/assets/images/image-generique.avif',
+  lienInterne: '/guides/' + guide.id,
+  sources: ['ANSSI'],
+});
