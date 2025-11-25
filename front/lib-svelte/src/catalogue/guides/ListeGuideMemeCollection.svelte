@@ -1,4 +1,5 @@
 <script lang="ts">
+  import axios from 'axios';
   import { onMount } from 'svelte';
   import CarteItem from '../CarteItem.svelte';
   import type { Guide } from '../Guide.types';
@@ -6,11 +7,21 @@
 
   export let guide: Guide;
   let chargement = false;
-  const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+  let guideDeMemesCollections: Guide[] = [];
   onMount(async () => {
     try {
       chargement = true;
-      await delay(3000);
+      const reponse = await axios.get<Guide[]>(
+        `/api/guides/${guide.id}/memes-collections`
+      );
+      guideDeMemesCollections = reponse.data.map((guide) => ({
+        ...guide,
+        type: 'Guide' as const,
+        illustration:
+          guide.image?.petite ?? '/assets/images/image-generique.avif',
+        lienInterne: '/guides/' + guide.id,
+        sources: ['ANSSI'],
+      }));
     } finally {
       chargement = false;
     }
@@ -22,12 +33,10 @@
     <SqueletteCarteGuide />
     <SqueletteCarteGuide />
     <SqueletteCarteGuide />
-    <SqueletteCarteGuide />
   {:else}
-    <CarteItem item={guide} />
-    <CarteItem item={guide} />
-    <CarteItem item={guide} />
-    <CarteItem item={guide} />
+    {#each guideDeMemesCollections as guide (guide.id)}
+      <CarteItem item={guide} />
+    {/each}
   {/if}
 </div>
 
@@ -36,14 +45,7 @@
 
   .grille-cartes {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
     gap: 24px;
-
-    @include a-partir-de(sm) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    @include a-partir-de(md) {
-      grid-template-columns: repeat(3, 1fr);
-    }
   }
 </style>
