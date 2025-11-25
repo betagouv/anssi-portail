@@ -4,9 +4,9 @@
   import FilAriane from '../../ui/FilAriane.svelte';
   import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
   import type { Guide } from '../Guide.types';
+  import BadgesDeCollections from './BadgesDeCollections.svelte';
   import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
   import { decodeEntitesHtml } from './guide';
-  import BadgesDeCollections from './BadgesDeCollections.svelte';
 
   let guide: Guide | undefined;
   onMount(async () => {
@@ -30,7 +30,9 @@
         branche={{ nom: 'Catalogue cyber', lien: '/catalogue' }}
         feuille={guide.nom}
       />
-      <div class="badges-collections"><BadgesDeCollections {guide} /></div>
+      <div class="badges-collections">
+        <BadgesDeCollections {guide} />
+      </div>
       <div class="resume">
         <div>
           <h1>{decodeEntitesHtml(guide.nom)}</h1>
@@ -155,7 +157,11 @@
 
       img {
         display: none;
-        max-width: 588px;
+        width: 588px;
+        object-fit: cover;
+        object-position: top;
+        height: 330px;
+
         @include a-partir-de(xxl) {
           display: block;
         }
