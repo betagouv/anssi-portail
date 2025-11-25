@@ -101,7 +101,9 @@
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           {@html descriptionAspetisee}
 
-          <img src={guide.illustration} alt="Capture d’écran" />
+          <div class="grille-cartes">
+            <img src={guide.illustration} alt="Capture d’écran" />
+          </div>
 
           <BoutonsDocumentsGuide {guide} autoriseMultiple />
         </section>
@@ -298,13 +300,21 @@
       }
     }
 
-    img {
-      width: 100%;
-      margin-top: 32px;
-      margin-bottom: 8px;
+    .grille-cartes {
+      display: grid;
+      grid-template-columns: 1fr;
 
-      @include a-partir-de(xxl) {
-        display: none;
+      @include a-partir-de(sm) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @include a-partir-de(md) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      img {
+        width: 100%;
+        margin-top: 32px;
+        margin-bottom: 8px;
       }
     }
   }
