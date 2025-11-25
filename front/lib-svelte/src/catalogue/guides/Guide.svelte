@@ -7,6 +7,7 @@
   import BadgesDeCollections from './BadgesDeCollections.svelte';
   import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
   import { decodeEntitesHtml } from './guide';
+  import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
 
   let guide: Guide | undefined;
   onMount(async () => {
@@ -111,6 +112,7 @@
         {#if aDesCollections}
           <section class="collections" id="collection">
             <h2>Dans la même collection</h2>
+            <ListeGuideMemeCollection {guide} />
           </section>
         {/if}
 
