@@ -5,7 +5,7 @@ import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire';
 import { configurationDeTestDuServeur } from '../fauxObjets';
-import { guideDevsecops, guideZeroTrust } from '../objetsPretsALEmploi';
+import { guideZeroTrust } from '../objetsPretsALEmploi';
 
 describe('La ressource guide', () => {
   let serveur: Express;
@@ -14,7 +14,6 @@ describe('La ressource guide', () => {
   beforeEach(async () => {
     entrepotGuide = new EntrepotGuideMemoire();
     await entrepotGuide.ajoute(guideZeroTrust);
-    await entrepotGuide.ajoute(guideDevsecops);
     serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotGuide });
   });
   describe('sur requête GET', () => {
@@ -74,56 +73,6 @@ describe('La ressource guide', () => {
           url: 'https://notre-cellar/guides/anssi-fondamentaux-zero-trust-v1.0.pdf',
         },
       ]);
-    });
-  });
-
-  describe('sur demande des guides de même collection', () => {
-    beforeEach(() => {
-      entrepotGuide.ajoute({
-        id: 'guide-sans-collection',
-        nom: 'Guide sans collection',
-        resume: '',
-        description: '',
-        nomImage: '',
-        langue: 'FR',
-        collections: [],
-        documents: [],
-        dateMiseAJour: '',
-        datePublication: '',
-      });
-    });
-    it('répond 200', async () => {
-      const reponse = await request(serveur).get(
-        '/api/guides/zero-trust/memes-collections'
-      );
-
-      assert.equal(reponse.status, 200);
-    });
-
-    it("répond 404 si le guide n'existe pas", async () => {
-      const reponse = await request(serveur).get(
-        '/api/guides/slug-de-guide-inconnu/memes-collections'
-      );
-
-      assert.equal(reponse.status, 404);
-    });
-
-    it('renvoie une liste de guides dont les collections correspondent à au moins une collection du guide ciblé', async () => {
-      const reponse = await request(serveur).get(
-        '/api/guides/zero-trust/memes-collections'
-      );
-
-      assert.equal(reponse.body.length, 2);
-      assert.equal(reponse.body[0].id, 'zero-trust');
-      assert.equal(reponse.body[1].id, 'devsecops');
-    });
-
-    it("renvoie une liste vide si le guide ciblé n'a pas de collection", async () => {
-      const reponse = await request(serveur).get(
-        '/api/guides/guide-sans-collection/memes-collections'
-      );
-
-      assert.equal(reponse.body.length, 0);
     });
   });
 });

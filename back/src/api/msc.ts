@@ -8,7 +8,9 @@ import { ressourceFavori } from './favoris/ressourceFavori';
 import { ressourceFavoris } from './favoris/ressourceFavoris';
 import { ressourceFavorisPartages } from './favoris/ressourceFavorisPartages';
 import { fournisseurChemin } from './fournisseurChemin';
+import { ressourceGuide } from './guides/ressourceGuide';
 import { ressourceGuides } from './guides/ressourceGuides';
+import { ressourceGuidesMemesCollections } from './guides/ressourceGuidesMemesCollections';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
 import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionOIDC';
@@ -30,6 +32,7 @@ import { ressourcePageProduit } from './ressourcePageProduit';
 import { ressourcePagesJekyll } from './ressourcePagesJekyll';
 import { ressourcePagesJekyllConnectees } from './ressourcePagesJekyllConnectees';
 import { ressourceProfil } from './ressourceProfil';
+import { ressourceQualification } from './ressourceQualification';
 import { ressourceRetoursExperience } from './ressourceRetoursExperience';
 import { ressourceStatistiques } from './ressourceStatistiques';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
@@ -40,8 +43,6 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
-import { ressourceQualification } from './ressourceQualification';
-import { ressourceGuide } from './guides/ressourceGuide';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -292,7 +293,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(
     '/api/guides',
     ressourceGuides(configurationServeur),
-    ressourceGuide(configurationServeur)
+    ressourceGuide(configurationServeur),
+    ressourceGuidesMemesCollections(configurationServeur)
   );
 
   app.use('/qualifications', ressourceQualification(configurationServeur));

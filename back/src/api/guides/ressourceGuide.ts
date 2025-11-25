@@ -27,21 +27,6 @@ const ressourceGuide = ({
     }
   );
 
-  routeur.get(
-    '/:slug/memes-collections',
-    async (requete: Request, reponse: Response) => {
-      const guideCible = await entrepotGuide.parId(requete.params.slug);
-      if (!guideCible) {
-        reponse.sendStatus(404);
-        return;
-      }
-      const guides = await entrepotGuide.parCollections(guideCible.collections);
-      reponse
-        .status(200)
-        .send(guides.map(guidePresentation(adaptateurEnvironnement)));
-    }
-  );
-
   return routeur;
 };
 
