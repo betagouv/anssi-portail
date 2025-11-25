@@ -50,9 +50,8 @@ describe('La ressource des guides de mêmes collections', () => {
         '/api/guides/zero-trust/memes-collections'
       );
 
-      assert.equal(reponse.body.length, 2);
-      assert.equal(reponse.body[0].id, 'zero-trust');
-      assert.equal(reponse.body[1].id, 'devsecops');
+      assert.equal(reponse.body.length, 1);
+      assert.equal(reponse.body[0].id, 'devsecops');
     });
 
     it("renvoie une liste vide si le guide ciblé n'a pas de collection", async () => {
