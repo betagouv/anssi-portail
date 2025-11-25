@@ -27,6 +27,13 @@ const ressourceGuide = ({
     }
   );
 
+  routeur.get(
+    '/:slug/memes-collections',
+    (_requete: Request, reponse: Response) => {
+      reponse.sendStatus(200);
+    }
+  );
+
   return routeur;
 };
 
