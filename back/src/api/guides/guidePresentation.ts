@@ -13,6 +13,6 @@ export const guidePresentation =
       : null,
     documents: guide.documents.map((document) => ({
       libelle: document.libelle,
-      url: `${adaptateurEnvironnement.urlCellar()}/guides/${document.nomFichier}`,
+      url: `${adaptateurEnvironnement.urlBaseMSC()}/documents-guides/${document.nomFichier}`,
     })),
   });
