@@ -13,7 +13,10 @@ describe("La ressource de document d'un guide", () => {
   beforeEach(() => {
     configurationDuServeur = {
       ...configurationDeTestDuServeur,
-      cellar: { get: () => Promise.resolve({ contenu: Buffer.from('') }) },
+      cellar: {
+        get: () =>
+          Promise.resolve({ contenu: Buffer.from(''), typeDeContenu: '' }),
+      },
     };
     serveur = creeServeur(configurationDuServeur);
   });
@@ -31,7 +34,10 @@ describe("La ressource de document d'un guide", () => {
       let nomDuFichierDemande: string;
       configurationDuServeur.cellar.get = (chemin: string) => {
         nomDuFichierDemande = chemin;
-        return Promise.resolve({ contenu: Buffer.from('ABCD') });
+        return Promise.resolve({
+          contenu: Buffer.from('ABCD'),
+          typeDeContenu: '',
+        });
       };
       const reponse = await request(serveur).get(
         '/documents-guides/anssi_back to basics_pki_1.0.pdf'
@@ -62,6 +68,18 @@ describe("La ressource de document d'un guide", () => {
       );
 
       assert.equal(reponse.status, 500);
+    });
+
+    it('indique le type de contenu', async () => {
+      configurationDuServeur.cellar.get = async () => ({
+        contenu: Buffer.from(''),
+        typeDeContenu: 'application/pdf',
+      });
+      const reponse = await request(serveur).get(
+        '/documents-guides/anssi_back to basics_pki_1.0.pdf'
+      );
+
+      assert.equal(reponse.headers['content-type'], 'application/pdf');
     });
   });
 });

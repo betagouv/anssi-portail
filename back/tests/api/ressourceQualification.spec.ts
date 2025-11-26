@@ -13,7 +13,10 @@ describe('La ressource de qualification', () => {
   beforeEach(() => {
     configurationDuServeur = {
       ...configurationDeTestDuServeur,
-      cellar: { get: () => Promise.resolve({ contenu: Buffer.from('') }) },
+      cellar: {
+        get: () =>
+          Promise.resolve({ contenu: Buffer.from(''), typeDeContenu: '' }),
+      },
     };
     serveur = creeServeur(configurationDuServeur);
   });
@@ -39,7 +42,10 @@ describe('La ressource de qualification', () => {
       let nomDuFichierDemande: string;
       configurationDuServeur.cellar.get = (chemin: string) => {
         nomDuFichierDemande = chemin;
-        return Promise.resolve({ contenu: Buffer.from('ABCD') });
+        return Promise.resolve({
+          contenu: Buffer.from('ABCD'),
+          typeDeContenu: '',
+        });
       };
       const reponse = await request(serveur).get(
         '/qualifications/123456789012.pdf'
