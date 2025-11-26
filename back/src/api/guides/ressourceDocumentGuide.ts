@@ -1,26 +1,25 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { ConfigurationServeur } from './configurationServeur';
+import { ConfigurationServeur } from '../configurationServeur';
 
-const ressourceQualification = ({ cellar }: ConfigurationServeur): Router => {
+export const ressourceDocumentGuide = ({ cellar }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get(
-    '/:slug',
+    '/:nomFichier',
     async (requete: Request, reponse: Response, suite: NextFunction) => {
       try {
         const documentCellar = await cellar.get(
-          `/qualifications/${requete.params.slug}`
+          `/guides/${requete.params.nomFichier}`
         );
         if (!documentCellar) {
           reponse.sendStatus(404);
           return;
         }
-
         reponse
-          .contentType('application/pdf')
+          .contentType(documentCellar.typeDeContenu)
           .status(200)
           .send(documentCellar.contenu);
-      } catch (erreur: Error | unknown) {
+      } catch (erreur) {
         suite(erreur);
       }
     }
@@ -28,4 +27,3 @@ const ressourceQualification = ({ cellar }: ConfigurationServeur): Router => {
 
   return routeur;
 };
-export { ressourceQualification };

@@ -43,6 +43,7 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
+import { ressourceDocumentGuide } from './guides/ressourceDocumentGuide';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -296,6 +297,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourceGuide(configurationServeur),
     ressourceGuidesMemesCollections(configurationServeur)
   );
+
+  app.use('/documents-guides', ressourceDocumentGuide(configurationServeur));
 
   app.use('/qualifications', ressourceQualification(configurationServeur));
 
