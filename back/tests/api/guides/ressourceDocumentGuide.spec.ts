@@ -13,7 +13,7 @@ describe("La ressource de document d'un guide", () => {
   beforeEach(() => {
     configurationDuServeur = {
       ...configurationDeTestDuServeur,
-      cellar: { get: () => Promise.resolve(Buffer.from('')) },
+      cellar: { get: () => Promise.resolve({ contenu: Buffer.from('') }) },
     };
     serveur = creeServeur(configurationDuServeur);
   });
@@ -31,7 +31,7 @@ describe("La ressource de document d'un guide", () => {
       let nomDuFichierDemande: string;
       configurationDuServeur.cellar.get = (chemin: string) => {
         nomDuFichierDemande = chemin;
-        return Promise.resolve(Buffer.from('ABCD'));
+        return Promise.resolve({ contenu: Buffer.from('ABCD') });
       };
       const reponse = await request(serveur).get(
         '/documents-guides/anssi_back to basics_pki_1.0.pdf'

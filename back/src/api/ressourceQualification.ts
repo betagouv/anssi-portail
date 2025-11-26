@@ -16,7 +16,7 @@ const ressourceQualification = ({ cellar }: ConfigurationServeur): Router => {
           return;
         }
 
-        reponse.contentType('application/pdf').status(200).send(tampon);
+        reponse.contentType('application/pdf').status(200).send(tampon.contenu);
       } catch (erreur: Error | unknown) {
         suite(erreur);
       }

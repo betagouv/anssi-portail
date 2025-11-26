@@ -13,7 +13,7 @@ export const ressourceDocumentGuide = ({ cellar }: ConfigurationServeur) => {
           reponse.sendStatus(404);
           return;
         }
-        reponse.status(200).send(tampon);
+        reponse.status(200).send(tampon.contenu);
       } catch (erreur) {
         suite(erreur);
       }
