@@ -8,15 +8,18 @@ const ressourceQualification = ({ cellar }: ConfigurationServeur): Router => {
     '/:slug',
     async (requete: Request, reponse: Response, suite: NextFunction) => {
       try {
-        const tampon = await cellar.get(
+        const documentCellar = await cellar.get(
           `/qualifications/${requete.params.slug}`
         );
-        if (!tampon) {
+        if (!documentCellar) {
           reponse.sendStatus(404);
           return;
         }
 
-        reponse.contentType('application/pdf').status(200).send(tampon.contenu);
+        reponse
+          .contentType('application/pdf')
+          .status(200)
+          .send(documentCellar.contenu);
       } catch (erreur: Error | unknown) {
         suite(erreur);
       }
