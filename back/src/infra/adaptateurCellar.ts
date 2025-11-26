@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 
+export type DocumentCellar = {
+  contenu: Buffer;
+  typeDeContenu: string;
+};
+
 export interface AdaptateurCellar {
-  get(
-    chemin: string
-  ): Promise<{ contenu: Buffer; typeDeContenu: string } | undefined>;
+  get(chemin: string): Promise<DocumentCellar | undefined>;
 }
 
 export const adaptateurCellar = (
