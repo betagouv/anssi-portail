@@ -8,15 +8,17 @@ export const ressourceDocumentGuide = ({ cellar }: ConfigurationServeur) => {
     '/:nomFichier',
     async (requete: Request, reponse: Response, suite: NextFunction) => {
       try {
-        const tampon = await cellar.get(`/guides/${requete.params.nomFichier}`);
-        if (!tampon) {
+        const documentCellar = await cellar.get(
+          `/guides/${requete.params.nomFichier}`
+        );
+        if (!documentCellar) {
           reponse.sendStatus(404);
           return;
         }
         reponse
-          .contentType(tampon.typeDeContenu)
+          .contentType(documentCellar.typeDeContenu)
           .status(200)
-          .send(tampon.contenu);
+          .send(documentCellar.contenu);
       } catch (erreur) {
         suite(erreur);
       }
