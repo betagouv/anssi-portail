@@ -64,13 +64,13 @@ describe('La ressource guide', () => {
       assert.equal(reponse.status, 500);
     });
 
-    it('renvoie les document du guide', async () => {
+    it('renvoie les documents du guide', async () => {
       const reponse = await request(serveur).get('/api/guides/zero-trust');
 
       assert.deepEqual(reponse.body.documents, [
         {
           libelle: 'Les Fondamentaux de l&#039;ANSSI - Zero Trust - v1.0',
-          url: 'https://notre-cellar/guides/anssi-fondamentaux-zero-trust-v1.0.pdf',
+          url: 'http://localhost/documents-guides/anssi-fondamentaux-zero-trust-v1.0.pdf',
         },
       ]);
     });
