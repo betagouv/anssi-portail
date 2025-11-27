@@ -24,7 +24,7 @@
 </script>
 
 <fieldset>
-  <legend>Services ou ressources</legend>
+  <legend>Type</legend>
   <label>
     <input
       type="checkbox"
