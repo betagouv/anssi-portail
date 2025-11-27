@@ -44,6 +44,38 @@
   <label>
     <input
       type="checkbox"
+      value={Typologie.OUTIL}
+      bind:group={$rechercheParTypologie}
+    />
+    <span class="libelle"
+    ><img
+      src="/assets/images/icone-outil.svg"
+      alt="Logo outils"
+    />Outils</span
+    >
+    <span class="compte"
+    >{$nombreResultats.parTypologie[Typologie.OUTIL]}</span
+    >
+  </label>
+  <label>
+    <input
+      type="checkbox"
+      value={Typologie.CONTENU}
+      bind:group={$rechercheParTypologie}
+    />
+    <span class="libelle"
+    ><img
+      src="/assets/images/icone-contenu.svg"
+      alt="Logo contenus"
+    />Contenus</span
+    >
+    <span class="compte"
+    >{$nombreResultats.parTypologie[Typologie.CONTENU]}</span
+    >
+  </label>
+  <label>
+    <input
+      type="checkbox"
       value={Typologie.RESSOURCE}
       bind:indeterminate={ressourcesPartielles}
       bind:group={$rechercheParTypologie}
