@@ -35,6 +35,7 @@ describe("L'entrepot de guide Grist", () => {
           cleApiGuides: () => '',
           urlFinancements: () => '',
           urlGuides: () => '',
+          dureeCacheEnSecondes: () => 0,
         }),
       },
     });

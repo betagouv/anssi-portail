@@ -1,8 +1,8 @@
 // import { add, isAfter } from 'date-fns';
 import { FournisseurHorloge } from './fournisseurHorloge';
 
-const add = (date: Date, duration: { minutes: number }) => {
-  return new Date(date.getTime() + duration.minutes * 60000);
+const add = (date: Date, duration: { seconds: number }) => {
+  return new Date(date.getTime() + duration.seconds * 1000);
 };
 
 const isAfter = (dateA: Date, dateB: Date): boolean => {
@@ -14,12 +14,12 @@ type EntreeDeCache<T> = {
   valeur: T;
 };
 
-type Minutes = number;
+type Secondes = number;
 
 export class Cache<T> {
   private readonly cache: Map<string, EntreeDeCache<T>> = new Map();
 
-  constructor(private readonly configuration?: { ttl: Minutes }) {}
+  constructor(private readonly configuration?: { ttl: Secondes }) {}
 
   get(clefCache: string, fonction: () => T): T {
     if (this.cache.has(clefCache)) {
@@ -42,7 +42,7 @@ export class Cache<T> {
         valeur: resultat,
         ...(this.configuration && {
           dateExpiration: add(FournisseurHorloge.maintenant(), {
-            minutes: this.configuration.ttl,
+            seconds: this.configuration.ttl,
           }),
         }),
       });
