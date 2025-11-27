@@ -8,8 +8,6 @@ export type ReponseGrist<TYPE_DOCUMENT> = {
 
 type Filtre = Record<string, unknown[]>;
 
-const CINQ_MINUTES = 5;
-
 export class EntrepotGrist<TYPE_DOCUMENT> {
   private readonly urlDeBase: string;
   private readonly cleApi: string;
@@ -22,7 +20,7 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
     const grist = this.adaptateurEnvironnement.grist();
     this.urlDeBase = grist.urlGuides();
     this.cleApi = grist.cleApiGuides();
-    this.cache = new Cache({ ttl: CINQ_MINUTES });
+    this.cache = new Cache({ ttl: grist.dureeCacheEnSecondes() });
   }
 
   protected async appelleGrist(filtre?: Filtre) {

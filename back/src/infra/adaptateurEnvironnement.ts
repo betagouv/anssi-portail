@@ -41,9 +41,12 @@ type AdaptateurEnvironnement = {
     cleApiFinancements: () => string;
     urlGuides: () => string;
     cleApiGuides: () => string;
+    dureeCacheEnSecondes: () => number;
   };
   urlCellar: () => string;
 };
+
+const CINQ_MINUTES = 300;
 
 const adaptateurEnvironnement: AdaptateurEnvironnement = {
   urlBaseMSC: () => process.env.URL_BASE_MSC || '',
@@ -160,6 +163,11 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     cleApiFinancements: () => process.env.FINANCEMENTS_GRIST_API_KEY || '',
     urlGuides: () => process.env.GUIDES_GRIST_URL || '',
     cleApiGuides: () => process.env.GUIDES_GRIST_API_KEY || '',
+    dureeCacheEnSecondes: () => {
+      const dureeEnChaine = process.env.GUIDES_GRIST_DUREE_CACHE_EN_SECONDES;
+      const dureeEnNombre = Number(dureeEnChaine);
+      return isNaN(dureeEnNombre) ? CINQ_MINUTES : dureeEnNombre;
+    },
   }),
   urlCellar: () => process.env.CELLAR_URL ?? '',
 };
