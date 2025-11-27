@@ -1,13 +1,12 @@
 ---
 layout: service
-typologie: ressource
+typologie: outil
 nom: Cyber&ZeroWidthSpace;Enjeux&ZeroWidthSpace;
 titreHtml: CyberEnjeux
 description: 'Former à la cybersécurité par le jeu'
 lien: https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/CyberEnJeux.zip
 illustration: cyber-enjeux/cyber-enjeux.png
 avecFicheDetaillee: true
-format: Outil
 sources:
   - ANSSI
 droitsAcces:

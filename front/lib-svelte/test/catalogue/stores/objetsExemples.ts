@@ -1,6 +1,5 @@
 import {
   DroitAcces,
-  FormatRessource,
   type ItemCyber,
   Source,
   Typologie,
@@ -53,9 +52,8 @@ export const monEspaceNIS2 = (): ItemCyber => ({
 export const livretEnJeux = (): ItemCyber => ({
   type: 'ItemCyber',
   id: '/ressources/livret-cyber-enjeux',
-  typologie: Typologie.RESSOURCE,
+  typologie: Typologie.OUTIL,
   nom: 'enjeux',
-  format: FormatRessource.OUTIL,
   description: '',
   illustration: 'livret.png',
   lienInterne: 'https://...',
@@ -67,9 +65,8 @@ export const livretEnJeux = (): ItemCyber => ({
 export const guidesTechniques = (): ItemCyber => ({
   type: 'ItemCyber',
   id: '/ressources/guides-techniques',
-  typologie: Typologie.RESSOURCE,
+  typologie: Typologie.CONTENU,
   nom: 'Guides techniques',
-  format: FormatRessource.PUBLICATION,
   description: '',
   illustration: 'guide.png',
   lienInterne: 'https://...',
@@ -81,9 +78,8 @@ export const guidesTechniques = (): ItemCyber => ({
 export const kitCyber = (): ItemCyber => ({
   type: 'ItemCyber',
   id: '/ressources/kit-cyber',
-  typologie: Typologie.RESSOURCE,
+  typologie: Typologie.CONTENU,
   nom: 'KIT CYBER',
-  format: FormatRessource.PUBLICATION,
   description: '',
   illustration: 'kit.png',
   lienInterne: 'https://...',

@@ -1,11 +1,10 @@
 ---
 layout: service
-typologie: ressource
+typologie: contenu
 nom: Protection des données
 titreHtml: Protection des données
 description: Apprendre la prudence sur internet
 illustration: cnil-ensemble/cnil-ensemble.png
-format: Publication
 lien: https://www.cnil.fr/fr/education
 droitsAcces:
   - ACCES_LIBRE

@@ -2,7 +2,6 @@ import { get } from 'svelte/store';
 import { describe, expect, it } from 'vitest';
 import {
   DroitAcces,
-  FormatRessource,
   type ItemCyber,
   Source,
   Typologie,
@@ -13,7 +12,6 @@ import {
   demainSpecialisteCyber,
   guidesTechniques,
   kitCyber,
-  livretEnJeux,
   monEspaceNIS2,
   mss,
 } from './objetsExemples';
@@ -78,7 +76,8 @@ describe('Le store du nombre de résultats', () => {
       const parTypologie = get(nombreResultats).parTypologie;
 
       expect(parTypologie[Typologie.SERVICE]).toBe(1);
-      expect(parTypologie[Typologie.RESSOURCE]).toBe(0);
+      expect(parTypologie[Typologie.OUTIL]).toBe(0);
+      expect(parTypologie[Typologie.CONTENU]).toBe(0);
     });
 
     it('pour une ressource', () => {
@@ -87,27 +86,8 @@ describe('Le store du nombre de résultats', () => {
       const parTypologie = get(nombreResultats).parTypologie;
 
       expect(parTypologie[Typologie.SERVICE]).toBe(0);
-      expect(parTypologie[Typologie.RESSOURCE]).toBe(1);
-    });
-  });
-
-  describe('peut retourner le nombre par format', () => {
-    it('pour un pdf', () => {
-      initialiseStoreCatalogue([guidesTechniques()]);
-
-      const parFormatDeRessource = get(nombreResultats).parFormatDeRessource;
-
-      expect(parFormatDeRessource[FormatRessource.PUBLICATION]).toBe(1);
-      expect(parFormatDeRessource[FormatRessource.OUTIL]).toBe(0);
-    });
-
-    it('pour une vidéo', () => {
-      initialiseStoreCatalogue([livretEnJeux()]);
-
-      const parFormatDeRessource = get(nombreResultats).parFormatDeRessource;
-
-      expect(parFormatDeRessource[FormatRessource.PUBLICATION]).toBe(0);
-      expect(parFormatDeRessource[FormatRessource.OUTIL]).toBe(1);
+      expect(parTypologie[Typologie.CONTENU]).toBe(1);
+      expect(parTypologie[Typologie.OUTIL]).toBe(0);
     });
   });
 
