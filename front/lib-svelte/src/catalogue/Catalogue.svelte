@@ -1,5 +1,4 @@
 <script lang="ts">
-  import axios from 'axios';
   import { onMount } from 'svelte';
   import { profilStore } from '../stores/profil.store';
   import ChampRecherche from '../ui/ChampRecherche.svelte';
@@ -10,12 +9,10 @@
   import FiltreBesoin from './FiltreBesoin.svelte';
   import FiltreSource from './FiltreSource.svelte';
   import FiltreTypologieEtFormat from './FiltreTypologieEtFormat.svelte';
-  import type { Guide } from './Guide.types';
   import FiltreCollection from './guides/FiltreCollection.svelte';
   import FiltreLangue from './guides/FiltreLangue.svelte';
-  import { guidePourCarteItem } from './guides/guide';
   import { catalogueFiltre } from './stores/catalogueFiltre.store';
-  import { guidesStore } from './stores/guides/guides.store';
+  import { chargeGuidesDansLeStore } from './stores/guides/guides.store';
   import { guidesFiltres } from './stores/guides/guidesFiltres.store';
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
@@ -41,9 +38,7 @@
   onMount(async () => {
     try {
       chargement = true;
-      const reponse = await axios.get<Guide[]>('/api/guides');
-      const guides = reponse.data.map(guidePourCarteItem);
-      guidesStore.initialise(guides);
+      await chargeGuidesDansLeStore();
     } finally {
       chargement = false;
     }

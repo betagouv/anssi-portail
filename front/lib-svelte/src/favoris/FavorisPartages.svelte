@@ -3,13 +3,15 @@
   import { onMount } from 'svelte';
   import type { ItemCyber } from '../catalogue/Catalogue.types';
   import type { Guide } from '../catalogue/Guide.types';
-  import { guidePourCarteItem } from '../catalogue/guides/guide';
   import { catalogueStore } from '../catalogue/stores/catalogue.store';
-  import { guidesStore } from '../catalogue/stores/guides/guides.store';
+  import {
+    chargeGuidesDansLeStore,
+    guidesStore,
+  } from '../catalogue/stores/guides/guides.store';
+  import { listeItemsFavoris } from '../catalogue/stores/itemsCatalogueEnFavori';
   import { profilStore } from '../stores/profil.store';
   import Hero from '../ui/Hero.svelte';
   import ContenuFavoris from './ContenuFavoris.svelte';
-  import { listeItemsFavoris } from '../catalogue/stores/itemsCatalogueEnFavori';
 
   let prenom: string = '';
   let itemsCyberPartages: (ItemCyber | Guide)[] = [];
@@ -27,12 +29,11 @@
     try {
       const reponse = await axios.get<FavorisPartagesAPI>(`/api${urlDemandee}`);
       prenom = reponse.data.prenom;
-      const reponseGuides = await axios.get<Guide[]>('/api/guides');
-      const guides = reponseGuides.data.map(guidePourCarteItem);
+      await chargeGuidesDansLeStore();
       itemsCyberPartages = listeItemsFavoris(
         reponse.data.favorisPartages,
         $catalogueStore.items,
-        guides
+        $guidesStore
       );
     } catch {
       prenom = '?';
