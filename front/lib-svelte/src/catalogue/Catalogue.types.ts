@@ -36,7 +36,9 @@ export enum DroitAcces {
 
 export enum Typologie {
   SERVICE = 'service',
+  OUTIL = "outil",
   RESSOURCE = 'ressource',
+  CONTENU = "contenu"
 }
 
 export enum FormatRessource {
