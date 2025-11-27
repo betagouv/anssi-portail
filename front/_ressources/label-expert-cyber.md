@@ -1,12 +1,11 @@
 ---
 layout: service
-typologie: ressource
+typologie: outil
 nom: Label ExpertCyber
 titreHtml: Label ExpertCyber
 description: Trouver un prestataire ExpertCyber
 lien: https://www.cybermalveillance.gouv.fr/tous-nos-contenus/label-expertcyber/decouvrir-le-label-expertcyber
 illustration: label-cyber-expert/label-cyber-expert.png
-format: Label
 sources:
   - Cybermalveillance
 droitsAcces:

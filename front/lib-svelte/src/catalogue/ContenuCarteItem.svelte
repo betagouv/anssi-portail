@@ -1,7 +1,6 @@
 <script lang="ts">
   import BoutonFavori from '../favoris/BoutonFavori.svelte';
-  import type { ItemCyber } from './Catalogue.types';
-  import { Typologie } from './Catalogue.types';
+  import { type ItemCyber, Typologie } from './Catalogue.types';
   import type { Guide } from './Guide.types';
   import BadgesDeCollections from './guides/BadgesDeCollections.svelte';
 
@@ -10,7 +9,11 @@
 
   const libelleBadge = (item: ItemCyber | Guide) => {
     if (item.type === 'Guide') return 'Guide';
-    return item.typologie === Typologie.SERVICE ? 'Service' : item.format;
+    return item.typologie === Typologie.SERVICE
+      ? 'Service'
+      : item.typologie === Typologie.OUTIL
+        ? 'Outil'
+        : item.format;
   };
 
   const tronque = (texte: string) => {
