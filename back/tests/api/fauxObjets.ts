@@ -73,6 +73,8 @@ export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
 
 const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 
+const CINQ_MINUTES = 300;
+
 export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   chiffrement: () => ({
     cleChaCha20Hex: () => 'uneCléCha20Hex',
@@ -118,6 +120,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     urlGuides: () =>
       'http://grist/api/docs/idDocumentGuides/tables/idTableGuides/records',
     cleApiGuides: () => 'FAUSSE_CLE_API_GUIDES',
+    dureeCacheEnSecondes: () => CINQ_MINUTES,
   }),
   urlCellar: () => 'https://notre-cellar',
 };

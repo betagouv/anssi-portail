@@ -35,6 +35,7 @@ describe("L'entrepot de guide Grist", () => {
           cleApiGuides: () => '',
           urlFinancements: () => '',
           urlGuides: () => '',
+          dureeCacheEnSecondes: () => 0,
         }),
       },
     });
@@ -50,7 +51,7 @@ describe("L'entrepot de guide Grist", () => {
     const clientHttp: ClientHttp<RetourGuideGrist> = {
       get: async (url, config) => {
         urlAppelee = url;
-        headerAuthent = config?.headers?.Authorization;
+        headerAuthent = config?.headers?.authorization;
         return {
           data: { records: [] },
         };

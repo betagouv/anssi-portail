@@ -4,6 +4,7 @@ import { Guide } from '../metier/guide';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { ClientHttp } from './clientHttp';
 import { aseptiseListeGrist } from './grist';
+import { EntrepotGrist } from './entrepotGrist';
 
 export type GuideGrist = {
   id: number;
@@ -25,10 +26,10 @@ export type RetourGuideGrist = {
   records: GuideGrist[];
 };
 
-export class EntrepotGuideGrist implements EntrepotGuide {
-  clientHttp: ClientHttp<RetourGuideGrist>;
-  adaptateurEnvironnement: AdaptateurEnvironnement;
-
+export class EntrepotGuideGrist
+  extends EntrepotGrist<GuideGrist>
+  implements EntrepotGuide
+{
   constructor({
     clientHttp = axios,
     adaptateurEnvironnement,
@@ -36,8 +37,13 @@ export class EntrepotGuideGrist implements EntrepotGuide {
     clientHttp?: ClientHttp<RetourGuideGrist>;
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
-    this.clientHttp = clientHttp;
-    this.adaptateurEnvironnement = adaptateurEnvironnement;
+    const grist = adaptateurEnvironnement.grist();
+    super(
+      clientHttp,
+      grist.urlGuides(),
+      grist.cleApiGuides(),
+      grist.dureeCacheEnSecondes()
+    );
   }
 
   private convertisGuideGrist(guideGrist: GuideGrist): Guide {
@@ -65,15 +71,7 @@ export class EntrepotGuideGrist implements EntrepotGuide {
   }
 
   async tous(): Promise<Guide[]> {
-    const urlDocGuides = this.adaptateurEnvironnement.grist().urlGuides();
-    if (!urlDocGuides) {
-      return [];
-    }
-    const cleApi = this.adaptateurEnvironnement.grist().cleApiGuides();
-    const { data: guidesGrist } = await this.clientHttp.get(urlDocGuides, {
-      headers: { Authorization: `Bearer ${cleApi}` },
-    });
-
+    const guidesGrist = await this.appelleGrist();
     return guidesGrist.records.map(this.convertisGuideGrist);
   }
 
