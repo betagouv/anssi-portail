@@ -9,11 +9,16 @@
 
   const libelleBadge = (item: ItemCyber | Guide) => {
     if (item.type === 'Guide') return 'Guide';
-    return item.typologie === Typologie.SERVICE
-      ? 'Service'
-      : item.typologie === Typologie.OUTIL
-        ? 'Outil'
-        : item.format;
+    switch (item.typologie) {
+      case Typologie.CONTENU:
+        return 'Contenu';
+      case Typologie.OUTIL:
+        return 'Outil';
+      case Typologie.SERVICE:
+        return 'Service';
+      case Typologie.RESSOURCE:
+        return item.format;
+    }
   };
 
   const tronque = (texte: string) => {
