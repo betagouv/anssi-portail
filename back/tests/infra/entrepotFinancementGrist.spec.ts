@@ -27,6 +27,7 @@ describe("L'entrepot de financement Grist", () => {
           cleApiGuides: () => '',
           urlFinancements: () => '',
           urlGuides: () => '',
+          dureeCacheEnSecondes: () => 0,
         }),
       },
     });
