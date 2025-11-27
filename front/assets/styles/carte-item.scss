@@ -127,7 +127,6 @@ a.carte {
 
       &:before {
         content: '';
-        background-image: url('/assets/images/icone-ressource.svg');
         width: 12px;
         height: 12px;
       }
@@ -213,8 +212,41 @@ a.carte {
       color: var(--noir);
 
       &:before {
+        background-size: 12px 12px;
         background-image: url('/assets/images/icone-service.svg');
       }
+    }
+  }
+}
+
+.carte.contenu {
+  .contenu {
+    border-bottom-color: #0d0c21;
+  }
+
+  figcaption {
+    background: #0d0c21;
+
+    &:before {
+      background-size: 12px 12px;
+      filter: brightness(100%) saturate(100%) invert(100%) contrast(100%);
+      background-image: url('/assets/images/icone-contenu.svg');
+    }
+  }
+}
+
+.carte.outil {
+  .contenu {
+    border-bottom-color: #0d0c21;
+  }
+
+  figcaption {
+    background: #0d0c21;
+
+    &:before {
+      filter: brightness(100%) saturate(100%) invert(100%) contrast(100%);
+      background-size: 12px 12px;
+      background-image: url('/assets/images/icone-outil.svg');
     }
   }
 }
