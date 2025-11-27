@@ -3,7 +3,6 @@ import { rechercheParCollection } from './guides/rechercheParCollection.store';
 import { rechercheParLangue } from './guides/rechercheParLangue.store';
 import { rechercheParBesoin } from './rechercheParBesoin.store';
 import { rechercheParDroitAcces } from './rechercheParDroitAcces.store';
-import { rechercheParFormat } from './rechercheParFormat.store';
 import { rechercheParSource } from './rechercheParSource.store';
 import { rechercheParTypologie } from './rechercheParTypologie.store';
 
@@ -12,7 +11,6 @@ const recherches2 = derived(
     rechercheParDroitAcces,
     rechercheParBesoin,
     rechercheParTypologie,
-    rechercheParFormat,
     rechercheParSource,
     rechercheParLangue,
     rechercheParCollection,
@@ -21,7 +19,6 @@ const recherches2 = derived(
     $rechercheParDroitAcces,
     $rechercheParBesoin,
     $rechercheParTypologie,
-    $rechercheParFormat,
     $rechercheParSource,
     $rechercheParLangue,
     $rechercheParCollection,
@@ -30,7 +27,6 @@ const recherches2 = derived(
       $rechercheParDroitAcces.length !== 0 ||
       !!$rechercheParBesoin ||
       $rechercheParTypologie.length !== 0 ||
-      $rechercheParFormat.length !== 0 ||
       $rechercheParSource.length !== 0 ||
       $rechercheParLangue.length !== 0 ||
       $rechercheParCollection.length !== 0,
@@ -43,7 +39,6 @@ export const recherches = {
     rechercheParBesoin.reinitialise();
     rechercheParDroitAcces.reinitialise();
     rechercheParTypologie.reinitialise();
-    rechercheParFormat.reinitialise();
     rechercheParSource.reinitialise();
     rechercheParLangue.reinitialise();
     rechercheParCollection.reinitialise();
