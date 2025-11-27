@@ -1,16 +1,10 @@
 import { derived } from 'svelte/store';
-import {
-  DroitAcces,
-  FormatRessource,
-  Source,
-  Typologie,
-} from '../Catalogue.types';
+import { DroitAcces, Source, Typologie } from '../Catalogue.types';
 import { catalogueStore } from './catalogue.store';
 
 type NombreResultats = {
   parDroitAcces: Partial<Record<DroitAcces, number>>;
   parTypologie: Partial<Record<Typologie, number>>;
-  parFormatDeRessource: Partial<Record<FormatRessource, number>>;
   parSource: Partial<Record<Source, number>>;
 };
 
@@ -30,9 +24,6 @@ export const nombreResultats = derived<
 
   const nombreParTypologie = (typologie: Typologie) =>
     $catalogueStore.items.filter((item) => item.typologie === typologie).length;
-
-  const nombreParFormatDeRessource = (format: FormatRessource) =>
-    $catalogueStore.items.filter((item) => item.format === format).length;
 
   const nombreParSource = (source: Source) =>
     $catalogueStore.items.filter((item) => {
@@ -54,10 +45,6 @@ export const nombreResultats = derived<
   return {
     parDroitAcces: creeObjetDepuisEnum(DroitAcces, nombreParDroitAcces),
     parTypologie: creeObjetDepuisEnum(Typologie, nombreParTypologie),
-    parFormatDeRessource: creeObjetDepuisEnum(
-      FormatRessource,
-      nombreParFormatDeRessource
-    ),
     parSource: creeObjetDepuisEnum(Source, nombreParSource),
   };
 });

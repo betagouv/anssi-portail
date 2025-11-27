@@ -8,7 +8,7 @@
   import FiltreAccessibilite from './FiltreAccessibilite.svelte';
   import FiltreBesoin from './FiltreBesoin.svelte';
   import FiltreSource from './FiltreSource.svelte';
-  import FiltreTypologieEtFormat from './FiltreTypologieEtFormat.svelte';
+  import FiltreTypologie from './FiltreTypologie.svelte';
   import FiltreCollection from './guides/FiltreCollection.svelte';
   import FiltreLangue from './guides/FiltreLangue.svelte';
   import { catalogueFiltre } from './stores/catalogueFiltre.store';
@@ -66,7 +66,7 @@
     <div class="barre-filtres">
       <FiltreBesoin />
       <FiltreAccessibilite />
-      <FiltreTypologieEtFormat />
+      <FiltreTypologie />
       <FiltreSource />
       <input
         type="button"
@@ -117,7 +117,7 @@
             <FiltreCollection />
           {:else}
             <FiltreAccessibilite />
-            <FiltreTypologieEtFormat />
+            <FiltreTypologie />
             <FiltreSource />
           {/if}
           <input

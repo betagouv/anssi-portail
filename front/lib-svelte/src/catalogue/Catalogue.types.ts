@@ -13,7 +13,6 @@ export interface ItemCyber extends Item {
   typologie: Typologie;
   description: string;
   droitsAcces: DroitAcces[];
-  format?: FormatRessource;
   lienExterne: string;
   illustration: string;
 }
@@ -37,14 +36,7 @@ export enum DroitAcces {
 export enum Typologie {
   SERVICE = 'service',
   OUTIL = "outil",
-  RESSOURCE = 'ressource',
   CONTENU = "contenu"
-}
-
-export enum FormatRessource {
-  PUBLICATION = 'Publication',
-  OUTIL = 'Outil',
-  LABEL = 'Label',
 }
 
 export enum Source {
