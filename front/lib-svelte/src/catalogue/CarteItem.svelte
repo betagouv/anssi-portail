@@ -10,11 +10,14 @@
 {#if item.type === 'Guide'}
   <a
     class="carte guide"
-    href={'/guides/' + item.id}
+    href={item.id}
     data-source="Guide"
     data-cible={item.nom}
   >
-    <ContenuCarteItem item={{ ...item, description: item.resume }} />
+    <ContenuCarteItem
+      item={{ ...item, description: item.resume }}
+      {avecBoutonFavori}
+    />
   </a>
 {:else if item.lienInterne || item.lienExterne}
   <a

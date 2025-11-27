@@ -2,7 +2,7 @@ import { derived, writable } from 'svelte/store';
 import axios from 'axios';
 import { profilStore } from './profil.store';
 
-type ListeFavoris = string[];
+export type ListeFavoris = string[];
 
 const favoris = writable<ListeFavoris>([]);
 

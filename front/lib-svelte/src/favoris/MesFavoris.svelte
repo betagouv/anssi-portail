@@ -1,9 +1,14 @@
 <script lang="ts">
+  import axios from 'axios';
+  import { onMount } from 'svelte';
+  import { guidePourCarteItem } from '../catalogue/guides/guide';
+  import { guidesStore } from '../catalogue/stores/guides/guides.store';
   import { itemsCatalogueEnFavori } from '../catalogue/stores/itemsCatalogueEnFavori';
-  import ContenuFavoris from './ContenuFavoris.svelte';
-  import Bouton from '../ui/Bouton.svelte';
   import { profilStore } from '../stores/profil.store';
+  import Bouton from '../ui/Bouton.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
+  import ContenuFavoris from './ContenuFavoris.svelte';
+  import type { Guide } from '../catalogue/Guide.types';
 
   const partageLien = () => {
     const hote = new URL(window.location.href).origin;
@@ -12,6 +17,11 @@
       alert('Adresse copiée dans le presse papier.');
     });
   };
+  onMount(async () => {
+    const reponse = await axios.get<Guide[]>('/api/guides');
+    const guides = reponse.data.map(guidePourCarteItem);
+    guidesStore.initialise(guides);
+  });
 </script>
 
 <section class="chapeau fond-sombre">
