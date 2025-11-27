@@ -1,5 +1,4 @@
 import { ClientHttp } from './clientHttp';
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { Cache } from './cache';
 
 export type ReponseGrist<TYPE_DOCUMENT> = {
@@ -9,21 +8,22 @@ export type ReponseGrist<TYPE_DOCUMENT> = {
 type Filtre = Record<string, unknown[]>;
 
 export class EntrepotGrist<TYPE_DOCUMENT> {
-  private readonly urlDeBase: string;
-  private readonly cleApi: string;
   private cache: Cache<Promise<ReponseGrist<TYPE_DOCUMENT>>>;
 
   constructor(
-    private readonly adaptateurEnvironnement: AdaptateurEnvironnement,
-    private readonly clientHttp: ClientHttp<ReponseGrist<TYPE_DOCUMENT>>
+    private readonly clientHttp: ClientHttp<ReponseGrist<TYPE_DOCUMENT>>,
+    private readonly urlDeBase: string,
+    private readonly cleApi: string,
+    dureeCacheEnSecondes: number
   ) {
-    const grist = this.adaptateurEnvironnement.grist();
-    this.urlDeBase = grist.urlGuides();
-    this.cleApi = grist.cleApiGuides();
-    this.cache = new Cache({ ttl: grist.dureeCacheEnSecondes() });
+    this.cache = new Cache({ ttl: dureeCacheEnSecondes });
   }
 
   protected async appelleGrist(filtre?: Filtre) {
+    if (!this.urlDeBase) {
+      return { records: [] };
+    }
+
     const url = filtre
       ? `${this.urlDeBase}?filter=${encodeURIComponent(JSON.stringify(filtre))}`
       : this.urlDeBase;

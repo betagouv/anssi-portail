@@ -3,7 +3,6 @@ import assert from 'node:assert';
 import { ClientHttp } from '../../src/infra/clientHttp';
 import { ReponseGrist } from '../../src/infra/entrepotGrist';
 import { EntrepotGristGenerique } from './EntrepotGristGenerique';
-import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
 
 describe("L'entrepôt Grist générique", () => {
   it('mets en cache le résultat de l’appel à Grist', async () => {
@@ -15,8 +14,10 @@ describe("L'entrepôt Grist générique", () => {
       },
     };
     const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(
-      fauxAdaptateurEnvironnement,
-      clientHttp
+      clientHttp,
+      'urlDeBase',
+      'cleApi',
+      60
     );
 
     await entrepotRessourcesCyberGrist.tous();
@@ -33,8 +34,10 @@ describe("L'entrepôt Grist générique", () => {
       },
     };
     const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(
-      fauxAdaptateurEnvironnement,
-      clientHttp
+      clientHttp,
+      'urlDeBase',
+      'cleApi',
+      60
     );
 
     const premier = await entrepotRessourcesCyberGrist.avecFiltre(1);
