@@ -5,7 +5,7 @@ import { rechercheParTypologie } from "../../../src/catalogue/stores/recherchePa
 
 describe("La recherche par typologie", () => {
   it("est vide quand on la réinitialise", () => {
-    rechercheParTypologie.set([Typologie.RESSOURCE]);
+    rechercheParTypologie.set([Typologie.SERVICE]);
 
     rechercheParTypologie.reinitialise();
 

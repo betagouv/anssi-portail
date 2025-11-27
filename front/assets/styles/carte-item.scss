@@ -69,7 +69,6 @@ a.carte {
 }
 
 .carte.guide,
-.carte.ressource,
 .carte.service,
 .carte.outil,
 .carte.contenu {
@@ -182,21 +181,6 @@ a.carte {
           height: 20px;
         }
       }
-    }
-  }
-}
-
-.carte.ressource {
-  .contenu {
-    border-bottom-color: #0d0c21;
-  }
-
-  figcaption {
-    background: #0d0c21;
-    color: white;
-
-    &:before {
-      background-image: url('/assets/images/icone-ressource.svg');
     }
   }
 }

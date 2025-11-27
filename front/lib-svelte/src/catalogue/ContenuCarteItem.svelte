@@ -16,8 +16,6 @@
         return 'Outil';
       case Typologie.SERVICE:
         return 'Service';
-      case Typologie.RESSOURCE:
-        return item.format;
     }
   };
 

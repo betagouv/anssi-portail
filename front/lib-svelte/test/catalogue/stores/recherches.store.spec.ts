@@ -3,7 +3,6 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import {
   BesoinCyber,
   DroitAcces,
-  FormatRessource,
   Source,
   Typologie,
 } from '../../../src/catalogue/Catalogue.types';
@@ -13,7 +12,6 @@ import { rechercheParCollection } from '../../../src/catalogue/stores/guides/rec
 import { rechercheParLangue } from '../../../src/catalogue/stores/guides/rechercheParLangue.store';
 import { rechercheParBesoin } from '../../../src/catalogue/stores/rechercheParBesoin.store';
 import { rechercheParDroitAcces } from '../../../src/catalogue/stores/rechercheParDroitAcces.store';
-import { rechercheParFormat } from '../../../src/catalogue/stores/rechercheParFormat.store';
 import { rechercheParSource } from '../../../src/catalogue/stores/rechercheParSource.store';
 import { rechercheParTypologie } from '../../../src/catalogue/stores/rechercheParTypologie.store';
 import { recherches } from '../../../src/catalogue/stores/recherches.store';
@@ -22,7 +20,6 @@ describe('Le store des recherches', () => {
   beforeEach(() => {
     rechercheParDroitAcces.set([]);
     rechercheParBesoin.set(null);
-    rechercheParFormat.set([]);
     rechercheParTypologie.set([]);
     rechercheParSource.set([]);
     rechercheParLangue.set([]);
@@ -48,14 +45,6 @@ describe('Le store des recherches', () => {
 
     it('la recherche par typologie est active', () => {
       rechercheParTypologie.set([Typologie.SERVICE]);
-
-      const { filtreActif } = get(recherches);
-
-      expect(filtreActif).toBe(true);
-    });
-
-    it('la recherche par format est active', () => {
-      rechercheParFormat.set([FormatRessource.PUBLICATION]);
 
       const { filtreActif } = get(recherches);
 

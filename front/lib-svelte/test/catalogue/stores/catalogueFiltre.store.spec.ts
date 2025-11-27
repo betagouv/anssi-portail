@@ -1,36 +1,32 @@
-import { beforeEach, describe, expect, it } from 'vitest';
 import { get } from 'svelte/store';
-import {
-  demainSpecialisteCyber,
-  guidesTechniques,
-  kitCyber,
-  livretEnJeux,
-  mss,
-} from './objetsExemples';
-import { catalogueStore } from '../../../src/catalogue/stores/catalogue.store';
-import { rechercheParBesoin } from '../../../src/catalogue/stores/rechercheParBesoin.store';
-import { catalogueFiltre } from '../../../src/catalogue/stores/catalogueFiltre.store';
-import { rechercheParDroitAcces } from '../../../src/catalogue/stores/rechercheParDroitAcces.store';
+import { beforeEach, describe, expect, it } from 'vitest';
 import {
   BesoinCyber,
   DroitAcces,
-  FormatRessource,
   type ItemCyber,
   Source,
   Typologie,
 } from '../../../src/catalogue/Catalogue.types';
-import { rechercheParTypologie } from '../../../src/catalogue/stores/rechercheParTypologie.store';
-import { rechercheParFormat } from '../../../src/catalogue/stores/rechercheParFormat.store';
-import { rechercheParSource } from '../../../src/catalogue/stores/rechercheParSource.store';
+import { catalogueStore } from '../../../src/catalogue/stores/catalogue.store';
+import { catalogueFiltre } from '../../../src/catalogue/stores/catalogueFiltre.store';
 import { limitationRecherche } from '../../../src/catalogue/stores/limitationRecherche';
+import { rechercheParBesoin } from '../../../src/catalogue/stores/rechercheParBesoin.store';
+import { rechercheParDroitAcces } from '../../../src/catalogue/stores/rechercheParDroitAcces.store';
+import { rechercheParSource } from '../../../src/catalogue/stores/rechercheParSource.store';
+import { rechercheParTypologie } from '../../../src/catalogue/stores/rechercheParTypologie.store';
 import { rechercheTextuelle } from '../../../src/catalogue/stores/rechercheTextuelle.store';
+import {
+  demainSpecialisteCyber,
+  kitCyber,
+  livretEnJeux,
+  mss,
+} from './objetsExemples';
 
 describe('Le store du catalogue filtré', () => {
   beforeEach(() => {
     rechercheParBesoin.set(null);
     rechercheParDroitAcces.set([]);
     rechercheParTypologie.set([]);
-    rechercheParFormat.set([]);
     rechercheParSource.set([]);
     limitationRecherche.set(0);
   });
@@ -115,27 +111,6 @@ describe('Le store du catalogue filtré', () => {
     it('conserve tous les items quand aucun filtre actif', () => {
       initialiseStoreCatalogue([mss(), livretEnJeux()]);
       rechercheParTypologie.set([]);
-
-      const { resultats } = get(catalogueFiltre);
-
-      expect(resultats.length).toBe(2);
-    });
-  });
-
-  describe("sur application d'un filtre de format", () => {
-    it('conserve uniquement les items correspondant', () => {
-      initialiseStoreCatalogue([livretEnJeux(), guidesTechniques()]);
-      rechercheParFormat.set([FormatRessource.PUBLICATION]);
-
-      const { resultats } = get(catalogueFiltre);
-
-      expect(resultats.length).toBe(1);
-      expect(resultats[0].nom).toBe('Guides techniques');
-    });
-
-    it('conserve tous les items quand aucun filtre actif', () => {
-      initialiseStoreCatalogue([livretEnJeux(), guidesTechniques()]);
-      rechercheParFormat.set([]);
 
       const { resultats } = get(catalogueFiltre);
 
