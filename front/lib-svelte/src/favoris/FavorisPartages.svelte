@@ -1,14 +1,18 @@
 <script lang="ts">
-  import ContenuFavoris from './ContenuFavoris.svelte';
-  import type { ItemCyber } from '../catalogue/Catalogue.types';
-  import { onMount } from 'svelte';
   import axios from 'axios';
+  import { onMount } from 'svelte';
+  import type { ItemCyber } from '../catalogue/Catalogue.types';
+  import type { Guide } from '../catalogue/Guide.types';
+  import { guidePourCarteItem } from '../catalogue/guides/guide';
   import { catalogueStore } from '../catalogue/stores/catalogue.store';
-  import Hero from '../ui/Hero.svelte';
+  import { guidesStore } from '../catalogue/stores/guides/guides.store';
   import { profilStore } from '../stores/profil.store';
+  import Hero from '../ui/Hero.svelte';
+  import ContenuFavoris from './ContenuFavoris.svelte';
+  import { listeItemsFavoris } from '../catalogue/stores/itemsCatalogueEnFavori';
 
   let prenom: string = '';
-  let itemsCyberPartages: ItemCyber[] = [];
+  let itemsCyberPartages: (ItemCyber | Guide)[] = [];
 
   type FavorisPartagesAPI = {
     prenom: string;
@@ -23,11 +27,13 @@
     try {
       const reponse = await axios.get<FavorisPartagesAPI>(`/api${urlDemandee}`);
       prenom = reponse.data.prenom;
-      itemsCyberPartages = reponse.data.favorisPartages
-        .map((idFavori) =>
-          $catalogueStore.items.find((itemCyber) => itemCyber.id === idFavori)
-        )
-        .filter((item) => !!item);
+      const reponseGuides = await axios.get<Guide[]>('/api/guides');
+      const guides = reponseGuides.data.map(guidePourCarteItem);
+      itemsCyberPartages = listeItemsFavoris(
+        reponse.data.favorisPartages,
+        $catalogueStore.items,
+        guides
+      );
     } catch {
       prenom = '?';
       itemsCyberPartages = [];
