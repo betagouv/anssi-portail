@@ -99,8 +99,10 @@ export const guideZeroTrust: Guide = {
   resume: 'Les fondamentaux du modèle Zero Trust',
   description:
     "Les fondamentaux du modèle Zero Trust pour sécuriser les systèmes d'information",
-  illustration:
-    'http://localhost/anssi-fondamentaux-zero-trust-v1_publication.jpg',
+  illustration: {
+    petite: 'http://localhost/anssi-fondamentaux-zero-trust-v1_publication.jpg',
+    grande: 'http://localhost/anssi-fondamentaux-zero-trust-v1_publication.jpg',
+  },
   langue: 'FR',
   collections: [CollectionGuide.LES_ESSENTIELS],
   image: {
@@ -121,7 +123,10 @@ export const guideDevsecops: Guide = {
   resume: 'Intégrer la sécurité dans les pratiques DevOps',
   description:
     'Intégrer la sécurité dans les pratiques DevOps pour renforcer la sécurité du développement logiciel',
-  illustration: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
+  illustration: {
+    petite: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
+    grande: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
+  },
   langue: 'FR',
   collections: [CollectionGuide.LES_FONDAMENTAUX],
   image: {
@@ -142,7 +147,10 @@ export const guideDevsecopsEN: Guide = {
   resume: 'Integrating security into DevOps practices',
   description:
     'Integrating security into DevOps practices to enhance software development security',
-  illustration: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
+  illustration: {
+    petite: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
+    grande: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
+  },
   langue: 'EN',
   collections: [CollectionGuide.LES_ESSENTIELS],
   image: {
