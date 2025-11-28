@@ -23,7 +23,7 @@
 
 <figure>
   {#if item.type === 'Guide'}
-    <img src={item.illustration} alt="Illustration du guide" />
+    <img src={item.illustration.petite} alt="Illustration du guide" />
     <div class="badges-collection"><BadgesDeCollections guide={item} /></div>
   {:else}
     <img
