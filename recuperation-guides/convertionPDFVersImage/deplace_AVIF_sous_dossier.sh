@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# Usage: ./move_avif_to_folders.sh mapping.txt
+# mapping format: folder name : pdf_filename.pdf
+
+INPUT_LIST="$1"
+
+if [[ -z "$INPUT_LIST" ]]; then
+    echo "Usage: $0 <mapping_file>"
+    exit 1
+fi
+
+while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+
+    # Extract folder name (left of the first " : ")
+    folder=$(echo "$line" | sed -E 's/^[[:space:]]*(.+)[[:space:]]+:[[:space:]]+(.+)$/\1/')
+    # Extract pdf filename (right of the first " : ")
+    pdf=$(echo "$line" | sed -E 's/^[[:space:]]*(.+)[[:space:]]+:[[:space:]]+(.+)$/\2/')
+
+    if [[ -z "$folder" || -z "$pdf" ]]; then
+        echo "Skipping malformed line: $line"
+        continue
+    fi
+
+    base=$(basename "$pdf" .pdf)
+
+    avif_588="${base}_588.avif"
+    avif_234="${base}_234.avif"
+
+    # Ensure folder exists
+    mkdir -p "$folder"
+
+    # Move files if they exist
+    for f in "$avif_588" "$avif_234"; do
+        if [[ -f "$f" ]]; then
+            echo "→ Moving $f → $folder/"
+            mv "$f" "$folder/"
+        else
+            echo "Warning: $f not found."
+        fi
+    done
+
+done < "$INPUT_LIST"
+
+echo "Done moving AVIF files."
