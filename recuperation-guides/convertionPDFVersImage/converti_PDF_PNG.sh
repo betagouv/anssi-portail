@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Usage: ./pdf_first_page_to_image.sh pdf_list.txt
+# Usage: ./converti_PDF_PNG.sh listeCheminsPDF.txt
 # Each line in pdf_list.txt must contain a path to a PDF file.
 
 INPUT_LIST="$1"
