@@ -150,11 +150,6 @@ section {
   .informations-complementaires {
     margin-top: 8px;
 
-    .note {
-      color: #666666;
-      margin-bottom: 24px;
-    }
-
     label {
       display: flex;
       flex-direction: column;
@@ -248,25 +243,6 @@ section {
     p {
       font-size: 1.125rem;
       line-height: 1.75rem;
-    }
-  }
-}
-
-.repartition {
-  padding-top: 0;
-
-  .contenu-section {
-    padding-top: 72px;
-    border-top: 1px solid var(--gris-clair);
-
-    h2 {
-      margin-bottom: 24px;
-      font-size: 2rem;
-      line-height: 2.5rem;
-      @include a-partir-de(sm) {
-        font-size: 2.5rem;
-        line-height: 3rem;
-      }
     }
   }
 }
