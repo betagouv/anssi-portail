@@ -3,7 +3,6 @@
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import EncartDeRecommandationSelonMaturite from './EncartDeRecommandationSelonMaturite.svelte';
   import PartageTest from './PartageTest.svelte';
-  import PubliciteMesServicesCyber from './PubliciteMesServicesCyber.svelte';
   import RadarMaturite from './RadarMaturite.svelte';
   import {
     questionnaireStore,
@@ -12,7 +11,6 @@
   import { questions } from './TestMaturite.donnees';
   import TuilesMaturite from './TuilesMaturite.svelte';
 
-  export let affichePubMsc = true;
   export let afficheRappelReponses = false;
   export let animeTuiles = true;
   export let dateRealisation: Date | undefined = undefined;
@@ -67,14 +65,6 @@
     >
   </div>
 </section>
-
-{#if affichePubMsc}
-  <section class="pour-aller-plus-loin">
-    <div class="contenu-section">
-      <PubliciteMesServicesCyber />
-    </div>
-  </section>
-{/if}
 
 <section class="repartition">
   <div class="contenu-section">
