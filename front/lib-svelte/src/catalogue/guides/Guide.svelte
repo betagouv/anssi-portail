@@ -8,6 +8,8 @@
   import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
   import { decodeEntitesHtml } from './guide';
   import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
+  import BoutonFavori from '../../favoris/BoutonFavori.svelte';
+  import { chargeGuidesDansLeStore } from '../stores/guides/guides.store';
 
   let guide: Guide | undefined;
   onMount(async () => {
@@ -15,10 +17,12 @@
     const reponse = await axios.get(`/api/guides/${slug}`);
     guide = {
       ...reponse.data,
+      id: '/guides/' + reponse.data.id,
       type: 'Guide' as const,
       illustration:
         reponse.data.image?.grande ?? '/assets/images/image-generique.avif',
     };
+    await chargeGuidesDansLeStore();
   });
   $: aDesCollections = guide && guide.collections.length > 0;
   $: descriptionAspetisee = aseptiseHtml(guide?.description ?? '');
@@ -93,6 +97,9 @@
       </div>
 
       <div class="contenu">
+        <div class="favori">
+          <BoutonFavori idItemCyber={guide.id} />
+        </div>
         <p class="dates">
           Publié le {guide.datePublication} &bullet; Mis à jour le {guide.dateMiseAJour}
         </p>
@@ -185,10 +192,10 @@
   }
 
   .article {
-    padding: 40px var(--gouttiere) 0;
+    padding: 24px var(--gouttiere) 0;
 
     @include a-partir-de(lg) {
-      padding-top: 48px;
+      padding-top: 32px;
     }
 
     .contenu-section {
@@ -201,6 +208,11 @@
       }
 
       .contenu {
+        .favori {
+          display: flex;
+          justify-content: flex-end;
+        }
+
         .dates {
           font-size: 0.75rem;
           line-height: 1.25rem;
@@ -249,6 +261,7 @@
     width: 300px;
     flex: 0 0 auto;
     align-self: flex-start;
+    padding-top: 8px;
 
     @include a-partir-de(lg) {
       display: flex;
