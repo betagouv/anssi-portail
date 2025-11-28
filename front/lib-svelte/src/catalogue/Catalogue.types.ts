@@ -4,7 +4,6 @@ export interface Item {
   type: 'ItemCyber' | 'Guide';
   id: IdItem;
   nom: string;
-  illustration: string;
   sources?: string[];
   lienInterne: string;
 }
@@ -16,6 +15,7 @@ export interface ItemCyber extends Item {
   droitsAcces: DroitAcces[];
   format?: FormatRessource;
   lienExterne: string;
+  illustration: string;
 }
 
 export enum BesoinCyber {

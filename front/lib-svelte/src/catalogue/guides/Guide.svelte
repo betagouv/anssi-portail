@@ -1,5 +1,4 @@
 <script lang="ts">
-  import axios from 'axios';
   import { onMount } from 'svelte';
   import FilAriane from '../../ui/FilAriane.svelte';
   import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
@@ -9,20 +8,16 @@
   import { decodeEntitesHtml } from './guide';
   import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
   import BoutonFavori from '../../favoris/BoutonFavori.svelte';
-  import { chargeGuidesDansLeStore } from '../stores/guides/guides.store';
+  import {
+    chargeGuidesDansLeStore,
+    guidesStore,
+  } from '../stores/guides/guides.store';
 
   let guide: Guide | undefined;
   onMount(async () => {
     const slug = window.location.href.split('/').at(-1);
-    const reponse = await axios.get(`/api/guides/${slug}`);
-    guide = {
-      ...reponse.data,
-      id: '/guides/' + reponse.data.id,
-      type: 'Guide' as const,
-      illustration:
-        reponse.data.image?.grande ?? '/assets/images/image-generique.avif',
-    };
     await chargeGuidesDansLeStore();
+    guide = $guidesStore.find((g) => g.id === `/guides/${slug}`);
   });
   $: aDesCollections = guide && guide.collections.length > 0;
   $: descriptionAspetisee = aseptiseHtml(guide?.description ?? '');
@@ -44,7 +39,7 @@
           <BoutonsDocumentsGuide {guide} />
         </div>
         <div class="conteneur-illustration">
-          <img src={guide.illustration} alt="Capture d’écran" />
+          <img src={guide.illustration.grande} alt="Capture d’écran" />
         </div>
       </div>
     </div>
@@ -110,7 +105,7 @@
           {@html descriptionAspetisee}
 
           <div class="grille-cartes">
-            <img src={guide.illustration} alt="Capture d’écran" />
+            <img src={guide.illustration.grande} alt="Capture d’écran" />
           </div>
 
           <BoutonsDocumentsGuide {guide} autoriseMultiple />
