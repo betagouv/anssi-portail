@@ -22,8 +22,12 @@ export const laCouleurDuBadgeSelonLaCollection = (
 
 export const guidePourCarteItem = (guide: Guide): Guide => ({
   ...guide,
+  id: '/guides/' + guide.id,
   type: 'Guide' as const,
-  illustration: guide.image?.petite ?? '/assets/images/image-generique.avif',
+  illustration: {
+    petite: guide.image?.petite ?? '/assets/images/image-generique.avif',
+    grande: guide.image?.grande ?? '/assets/images/image-generique.avif',
+  },
   lienInterne: '/guides/' + guide.id,
   sources: ['ANSSI'],
 });

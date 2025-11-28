@@ -1,5 +1,4 @@
 <script lang="ts">
-  import axios from 'axios';
   import { onMount } from 'svelte';
   import FilAriane from '../../ui/FilAriane.svelte';
   import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
@@ -8,17 +7,17 @@
   import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
   import { decodeEntitesHtml } from './guide';
   import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
+  import BoutonFavori from '../../favoris/BoutonFavori.svelte';
+  import {
+    chargeGuidesDansLeStore,
+    guidesStore,
+  } from '../stores/guides/guides.store';
 
   let guide: Guide | undefined;
   onMount(async () => {
     const slug = window.location.href.split('/').at(-1);
-    const reponse = await axios.get(`/api/guides/${slug}`);
-    guide = {
-      ...reponse.data,
-      type: 'Guide' as const,
-      illustration:
-        reponse.data.image?.grande ?? '/assets/images/image-generique.avif',
-    };
+    await chargeGuidesDansLeStore();
+    guide = $guidesStore.find((g) => g.id === `/guides/${slug}`);
   });
   $: aDesCollections = guide && guide.collections.length > 0;
   $: descriptionAspetisee = aseptiseHtml(guide?.description ?? '');
@@ -40,7 +39,7 @@
           <BoutonsDocumentsGuide {guide} />
         </div>
         <div class="conteneur-illustration">
-          <img src={guide.illustration} alt="Capture d’écran" />
+          <img src={guide.illustration.grande} alt="Capture d’écran" />
         </div>
       </div>
     </div>
@@ -93,6 +92,9 @@
       </div>
 
       <div class="contenu">
+        <div class="favori">
+          <BoutonFavori idItem={guide.id} />
+        </div>
         <p class="dates">
           Publié le {guide.datePublication} &bullet; Mis à jour le {guide.dateMiseAJour}
         </p>
@@ -103,7 +105,7 @@
           {@html descriptionAspetisee}
 
           <div class="grille-cartes">
-            <img src={guide.illustration} alt="Capture d’écran" />
+            <img src={guide.illustration.grande} alt="Capture d’écran" />
           </div>
 
           <BoutonsDocumentsGuide {guide} autoriseMultiple />
@@ -185,10 +187,10 @@
   }
 
   .article {
-    padding: 40px var(--gouttiere) 0;
+    padding: 24px var(--gouttiere) 0;
 
     @include a-partir-de(lg) {
-      padding-top: 48px;
+      padding-top: 32px;
     }
 
     .contenu-section {
@@ -201,6 +203,11 @@
       }
 
       .contenu {
+        .favori {
+          display: flex;
+          justify-content: flex-end;
+        }
+
         .dates {
           font-size: 0.75rem;
           line-height: 1.25rem;
@@ -249,6 +256,7 @@
     width: 300px;
     flex: 0 0 auto;
     align-self: flex-start;
+    padding-top: 8px;
 
     @include a-partir-de(lg) {
       display: flex;

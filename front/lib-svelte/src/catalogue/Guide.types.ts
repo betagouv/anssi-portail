@@ -25,4 +25,5 @@ export interface Guide extends Item {
   documents: { libelle: string; url: string }[];
   datePublication: string;
   dateMiseAJour: string;
+  illustration: { petite: string; grande: string };
 }

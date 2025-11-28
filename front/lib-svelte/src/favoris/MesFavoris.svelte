@@ -1,9 +1,11 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import { chargeGuidesDansLeStore } from '../catalogue/stores/guides/guides.store';
   import { itemsCatalogueEnFavori } from '../catalogue/stores/itemsCatalogueEnFavori';
-  import ContenuFavoris from './ContenuFavoris.svelte';
-  import Bouton from '../ui/Bouton.svelte';
   import { profilStore } from '../stores/profil.store';
+  import Bouton from '../ui/Bouton.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
+  import ContenuFavoris from './ContenuFavoris.svelte';
 
   const partageLien = () => {
     const hote = new URL(window.location.href).origin;
@@ -12,6 +14,7 @@
       alert('Adresse copiée dans le presse papier.');
     });
   };
+  onMount(chargeGuidesDansLeStore);
 </script>
 
 <section class="chapeau fond-sombre">

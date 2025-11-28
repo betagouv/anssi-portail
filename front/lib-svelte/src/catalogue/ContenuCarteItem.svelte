@@ -23,7 +23,7 @@
 
 <figure>
   {#if item.type === 'Guide'}
-    <img src={item.illustration} alt="Illustration du guide" />
+    <img src={item.illustration.petite} alt="Illustration du guide" />
     <div class="badges-collection"><BadgesDeCollections guide={item} /></div>
   {:else}
     <img
@@ -38,7 +38,7 @@
     <!-- eslint-disable-next-line svelte/no-at-html-tags -->
     <div class="nom-item">{@html item.nom}</div>
     {#if avecBoutonFavori}
-      <BoutonFavori idItemCyber={item.id} />
+      <BoutonFavori idItem={item.id} />
     {/if}
   </div>
   <!-- eslint-disable-next-line svelte/no-at-html-tags -->

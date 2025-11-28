@@ -1,10 +1,9 @@
-export type IdItemCyber = string;
+export type IdItem = string;
 
 export interface Item {
   type: 'ItemCyber' | 'Guide';
-  id: string;
+  id: IdItem;
   nom: string;
-  illustration: string;
   sources?: string[];
   lienInterne: string;
 }
@@ -16,6 +15,7 @@ export interface ItemCyber extends Item {
   droitsAcces: DroitAcces[];
   format?: FormatRessource;
   lienExterne: string;
+  illustration: string;
 }
 
 export enum BesoinCyber {
@@ -26,7 +26,7 @@ export enum BesoinCyber {
   TOUS = 'TOUS',
 }
 
-export type RepartitionParBesoin = Record<BesoinCyber, IdItemCyber[]>;
+export type RepartitionParBesoin = Record<BesoinCyber, IdItem[]>;
 
 export enum DroitAcces {
   ACCES_LIBRE = 'ACCES_LIBRE',

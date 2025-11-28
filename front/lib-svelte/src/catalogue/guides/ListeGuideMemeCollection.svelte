@@ -13,7 +13,7 @@
     try {
       chargement = true;
       const reponse = await axios.get<Guide[]>(
-        `/api/guides/${guide.id}/memes-collections`
+        `/api${guide.id}/memes-collections`
       );
       guideDeMemesCollections = reponse.data.map(guidePourCarteItem);
     } finally {
