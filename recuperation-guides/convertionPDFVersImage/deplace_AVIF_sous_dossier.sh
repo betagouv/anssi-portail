@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Usage: ./move_avif_to_folders.sh mapping.txt
+# Usage: ./deplace_AVIF_sous_dossier.sh listeIdGuideNomPDF.txt
 # mapping format: folder name : pdf_filename.pdf
 
 INPUT_LIST="$1"
