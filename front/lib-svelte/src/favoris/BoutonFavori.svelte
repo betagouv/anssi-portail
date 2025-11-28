@@ -1,19 +1,19 @@
 <script lang="ts">
   import axios from 'axios';
-  import type { IdItemCyber } from '../catalogue/Catalogue.types';
+  import type { IdItem } from '../catalogue/Catalogue.types';
   import { favorisStore } from '../stores/favoris.store';
   import { profilStore } from '../stores/profil.store';
 
-  export let idItemCyber: IdItemCyber;
+  export let idItem: IdItem;
 
-  $: estFavori = $favorisStore.includes(idItemCyber)
+  $: estFavori = $favorisStore.includes(idItem);
 
   $: cheminIcone = `/assets/images/icone-favori-${estFavori ? 'plein' : 'vide'}.svg`;
 
   $: titre = $profilStore ? '' : 'Connectez-vous pour profiter des favoris';
 
   const actionSurClick = async () => {
-    const idFavori = idItemCyber;
+    const idFavori = idItem;
     if (!$profilStore) return;
 
     try {

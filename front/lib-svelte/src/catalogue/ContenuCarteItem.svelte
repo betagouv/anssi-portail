@@ -38,7 +38,7 @@
     <!-- eslint-disable-next-line svelte/no-at-html-tags -->
     <div class="nom-item">{@html item.nom}</div>
     {#if avecBoutonFavori}
-      <BoutonFavori idItemCyber={item.id} />
+      <BoutonFavori idItem={item.id} />
     {/if}
   </div>
   <!-- eslint-disable-next-line svelte/no-at-html-tags -->
