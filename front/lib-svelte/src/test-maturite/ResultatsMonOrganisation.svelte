@@ -3,7 +3,6 @@
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import EncartDeRecommandationSelonMaturite from './EncartDeRecommandationSelonMaturite.svelte';
   import PartageTest from './PartageTest.svelte';
-  import RadarMaturite from './RadarMaturite.svelte';
   import {
     questionnaireStore,
     resultatsQuestionnaire,
@@ -66,18 +65,6 @@
   </div>
 </section>
 
-<section class="repartition">
-  <div class="contenu-section">
-    <h2>Répartition de votre maturité cyber</h2>
-    <RadarMaturite resultats={$resultatsQuestionnaire} />
-    <div class="note">
-      Ce résultat est une évaluation indicative basé sur un modèle élaboré par
-      l’ANSSI. La maturité cyber n’est pas une évaluation du niveau de sécurité
-      des systèmes d’information d’une organisation.
-    </div>
-  </div>
-</section>
-
 {#if afficheRappelReponses}
   <section class="rappel-reponses">
     <div class="contenu-section">
@@ -100,11 +87,33 @@
 
 <EncartDeRecommandationSelonMaturite {niveau} />
 
+<section class="message-information">
+  <div class="contenu-section">
+    <p class="note">
+      Ce résultat est une évaluation indicative basé sur un modèle élaboré par
+      l’ANSSI. La maturité cyber n’est pas une évaluation du niveau de sécurité
+      des systèmes d’information d’une organisation.
+    </p>
+  </div>
+</section>
+
 <PartageTest couleurFond="fonce" />
 
 <style lang="scss">
   .date-realisation {
     color: #3a3a3a;
     margin-bottom: 4px;
+  }
+
+  .message-information {
+    padding-block: 48px 56px;
+
+    .note {
+      color: #666666;
+      font-size: 0.875rem;
+      font-style: normal;
+      line-height: 1.5rem;
+      margin: 0;
+    }
   }
 </style>
