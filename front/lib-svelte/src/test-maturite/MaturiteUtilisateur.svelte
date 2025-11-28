@@ -30,7 +30,6 @@
 </script>
 
 <ResultatsTestMaturite
-  affichePubMsc={false}
   afficheRappelReponses={true}
   animeTuiles={false}
   {dateRealisationDernierTest}
