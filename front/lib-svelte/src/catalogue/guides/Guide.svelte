@@ -98,7 +98,7 @@
 
       <div class="contenu">
         <div class="favori">
-          <BoutonFavori idItemCyber={guide.id} />
+          <BoutonFavori idItem={guide.id} />
         </div>
         <p class="dates">
           Publié le {guide.datePublication} &bullet; Mis à jour le {guide.dateMiseAJour}
