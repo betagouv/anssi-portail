@@ -97,7 +97,7 @@
   </div>
 </section>
 
-<PartageTest couleurFond="fonce" />
+<PartageTest couleurFond="clair" />
 
 <style lang="scss">
   .date-realisation {
