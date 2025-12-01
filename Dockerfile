@@ -12,7 +12,7 @@ FROM docker.io/node:23 AS build-le-svelte
 
 WORKDIR /usr/src/app
 COPY front ./front
-COPY package.json package-lock.json .
+COPY package.json package-lock.json ./
 RUN npm ci && npm run -w front/lib-svelte build
 
 ####
