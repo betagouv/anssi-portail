@@ -5,6 +5,15 @@
 ## Sur le PaaS, on veut aller jusqu'à démarrer un serveur web pour servir le site statique.
 ##
 
+####
+## BUILD du svelte
+###
+FROM docker.io/node:23 AS build-le-svelte
+
+WORKDIR /usr/src/app
+COPY front ./front
+COPY package.json package-lock.json .
+RUN npm ci && npm run -w front/lib-svelte build
 
 ####
 ## BUILD du front
@@ -49,9 +58,7 @@ RUN apk update && apk add nodejs npm
 
 COPY front /srv/jekyll
 
-# Build du catalogue
-WORKDIR /srv/jekyll/lib-svelte
-RUN npm ci && npm run build
+COPY --from=build-le-svelte /usr/src/app/front/lib-svelte/dist /srv/jekyll/lib-svelte/dist
 
 # Build du site
 WORKDIR /srv/jekyll
