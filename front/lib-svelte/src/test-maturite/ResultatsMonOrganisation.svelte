@@ -3,14 +3,9 @@
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import EncartDeRecommandationSelonMaturite from './EncartDeRecommandationSelonMaturite.svelte';
   import PartageTest from './PartageTest.svelte';
-  import {
-    questionnaireStore,
-    resultatsQuestionnaire,
-  } from './stores/questionnaire.store';
-  import { questions } from './TestMaturite.donnees';
+  import { questionnaireStore } from './stores/questionnaire.store';
   import TuilesMaturite from './TuilesMaturite.svelte';
 
-  export let afficheRappelReponses = false;
   export let animeTuiles = true;
   export let dateRealisation: Date | undefined = undefined;
   export let defilementAutomatique = true;
@@ -64,26 +59,6 @@
     >
   </div>
 </section>
-
-{#if afficheRappelReponses}
-  <section class="rappel-reponses">
-    <div class="contenu-section">
-      <h2>Rappel de vos réponses</h2>
-      <div class="reponses">
-        {#each questions as question (question.id)}
-          <div class="reponse">
-            <h3>{question.titre}</h3>
-            <p>
-              {question.propositions[
-                ($resultatsQuestionnaire[question.id] || 1) - 1
-              ]}
-            </p>
-          </div>
-        {/each}
-      </div>
-    </div>
-  </section>
-{/if}
 
 <EncartDeRecommandationSelonMaturite {niveau} />
 

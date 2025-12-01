@@ -58,7 +58,6 @@
   </section>
   <ResultatsMonOrganisation
     animeTuiles={false}
-    afficheRappelReponses
     dateRealisation={new Date(resultatTestSelectionne.dateRealisation)}
     defilementAutomatique={false}
   />
