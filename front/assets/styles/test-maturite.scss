@@ -326,38 +326,3 @@ section {
   font-style: italic;
   margin: 24px 0 16px;
 }
-
-.rappel-reponses {
-  padding-top: 24px;
-
-  h2 {
-    margin: 0 0 16px;
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
-
-  h3 {
-    margin: 24px 0 8px;
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-  }
-
-  p {
-    color: #3a3a3a;
-  }
-
-  .reponses {
-    display: flex;
-    flex-direction: column;
-    @include a-partir-de(md) {
-      flex-direction: row;
-      flex-wrap: wrap;
-      column-gap: 24px;
-      row-gap: 32px;
-
-      .reponse {
-        flex: calc(50% - 12px);
-      }
-    }
-  }
-}

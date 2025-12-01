@@ -11,7 +11,6 @@
   import PropositionRefaireTest from './PropositionRefaireTest.svelte';
   import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
 
-  export let afficheRappelReponses = false;
   export let animeTuiles = true;
   export let dateRealisationDernierTest: Date | undefined = undefined;
   export let defilementAutomatique = true;
@@ -62,7 +61,6 @@
 {#if ongletActif === 'votre-organisation'}
   <ResultatsMonOrganisation
     {animeTuiles}
-    {afficheRappelReponses}
     dateRealisation={dateRealisationDernierTest}
     {defilementAutomatique}
   />
