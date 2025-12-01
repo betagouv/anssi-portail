@@ -83,7 +83,7 @@ COPY back/package.json package-lock.json back/tsconfig.json back/knexfile.ts /us
 COPY back/src /usr/src/app/src
 RUN npm ci
 WORKDIR /usr/src/app/src
-RUN npx tsc
+RUN ../node_modules/.bin/tsc
 COPY back/migrations /usr/src/dist-back/migrations
 
 ####
