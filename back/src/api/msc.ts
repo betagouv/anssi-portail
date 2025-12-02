@@ -300,7 +300,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/documents-guides', ressourceDocumentGuide(configurationServeur));
 
-  app.use('/qualifications', ressourceQualification(configurationServeur));
+  app.use('/visas', ressourceQualification(configurationServeur));
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 

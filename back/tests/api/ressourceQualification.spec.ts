@@ -23,17 +23,13 @@ describe('La ressource de qualification', () => {
 
   describe('sur un GET', () => {
     it('répond 200', async () => {
-      const reponse = await request(serveur).get(
-        '/qualifications/123456789012'
-      );
+      const reponse = await request(serveur).get('/visas/123456789012');
 
       assert.equal(reponse.status, 200);
     });
 
     it('renvoie un contenu PDF', async () => {
-      const reponse = await request(serveur).get(
-        '/qualifications/123456789012'
-      );
+      const reponse = await request(serveur).get('/visas/123456789012');
 
       assert.equal(reponse.headers['content-type'], 'application/pdf');
     });
@@ -47,9 +43,7 @@ describe('La ressource de qualification', () => {
           typeDeContenu: '',
         });
       };
-      const reponse = await request(serveur).get(
-        '/qualifications/123456789012.pdf'
-      );
+      const reponse = await request(serveur).get('/visas/123456789012.pdf');
 
       assert.equal(nomDuFichierDemande!, '/qualifications/123456789012.pdf');
       assert.equal(reponse.body, 'ABCD');
