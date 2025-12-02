@@ -38,9 +38,9 @@ describe('La ressource qui gère les guides', () => {
       );
       assert.deepEqual(premierGuide.image, {
         petite:
-          'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-588.avif',
+          'https://guides.notre-cellar/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-588.avif',
         grande:
-          'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-origine.avif',
+          'https://guides.notre-cellar/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-origine.avif',
       });
       assert.equal(premierGuide.langue, 'FR');
       assert.equal(premierGuide.thematique, 'Les essentiels');
@@ -56,9 +56,9 @@ describe('La ressource qui gère les guides', () => {
       );
       assert.deepEqual(secondGuide.image, {
         petite:
-          'https://notre-cellar/guides/devsecops/anssi_essentiels_devsecops_v1-588.avif',
+          'https://guides.notre-cellar/devsecops/anssi_essentiels_devsecops_v1-588.avif',
         grande:
-          'https://notre-cellar/guides/devsecops/anssi_essentiels_devsecops_v1-origine.avif',
+          'https://guides.notre-cellar/devsecops/anssi_essentiels_devsecops_v1-origine.avif',
       });
       assert.equal(secondGuide.langue, 'FR');
       assert.equal(secondGuide.thematique, 'Les essentiels');

@@ -122,7 +122,11 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     cleApiGuides: () => 'FAUSSE_CLE_API_GUIDES',
     dureeCacheEnSecondes: () => CINQ_MINUTES,
   }),
-  urlCellar: () => 'https://notre-cellar',
+  urlCellar: () => ({
+    guides: () => 'https://guides.notre-cellar',
+    ressourcesCyber: () => 'https://ressources-cyber.notre-cellar',
+    visas: () => 'https://visas.notre-cellar',
+  }),
 };
 
 const vraiMiddleware = fabriqueMiddleware({

@@ -43,7 +43,11 @@ type AdaptateurEnvironnement = {
     cleApiGuides: () => string;
     dureeCacheEnSecondes: () => number;
   };
-  urlCellar: () => string;
+  urlCellar: () => {
+    ressourcesCyber: () => string;
+    guides: () => string;
+    visas: () => string;
+  };
 };
 
 const CINQ_MINUTES = 300;
@@ -169,7 +173,32 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       return isNaN(dureeEnNombre) ? CINQ_MINUTES : dureeEnNombre;
     },
   }),
-  urlCellar: () => process.env.CELLAR_URL ?? '',
+  urlCellar: () => {
+    const pattternURLDeBase = process.env.CELLAR_URL ?? '';
+    return {
+      guides: () =>
+        process.env.CELLAR_BUCKET_GUIDES
+          ? pattternURLDeBase.replace(
+              '%BUCKET%',
+              process.env.CELLAR_BUCKET_GUIDES
+            )
+          : '',
+      ressourcesCyber: () =>
+        process.env.CELLAR_BUCKET_RESSOURCES_CYBER
+          ? pattternURLDeBase.replace(
+              '%BUCKET%',
+              process.env.CELLAR_BUCKET_RESSOURCES_CYBER
+            )
+          : '',
+      visas: () =>
+        process.env.CELLAR_BUCKET_VISAS
+          ? pattternURLDeBase.replace(
+              '%BUCKET%',
+              process.env.CELLAR_BUCKET_VISAS
+            )
+          : '',
+    };
+  },
 };
 
 export { AdaptateurEnvironnement, adaptateurEnvironnement };
