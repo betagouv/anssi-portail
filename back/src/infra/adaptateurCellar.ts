@@ -19,9 +19,11 @@ export const adaptateurCellar = (
         `${adaptateurEnvironnement.urlCellar()}${chemin}`,
         { responseType: 'arraybuffer' }
       );
+      const typeDeContenu =
+        reponse.headers['content-type'] ?? 'application/octet-stream';
       return {
         contenu: Buffer.from(reponse.data),
-        typeDeContenu: `${reponse.headers['Content-Type'] ?? 'application/octet-stream'}`,
+        typeDeContenu,
       };
     } catch (erreur: Error | unknown) {
       if (axios.isAxiosError(erreur) && erreur.response?.status === 403) {
