@@ -9,7 +9,8 @@ export const ressourceDocumentGuide = ({ cellar }: ConfigurationServeur) => {
     async (requete: Request, reponse: Response, suite: NextFunction) => {
       try {
         const documentCellar = await cellar.get(
-          `/guides/${requete.params.nomFichier}`
+          requete.params.nomFichier,
+          'GUIDES'
         );
         if (!documentCellar) {
           reponse.sendStatus(404);
