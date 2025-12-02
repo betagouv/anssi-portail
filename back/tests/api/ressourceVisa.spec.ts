@@ -36,8 +36,8 @@ describe('La ressource de visa', () => {
     });
 
     it('sers le fichier PDF correspondant', async () => {
-      let nomDuFichierDemande: string;
-      let cleDuBucketDemandee: CleDuBucket;
+      let nomDuFichierDemande: string | undefined;
+      let cleDuBucketDemandee: CleDuBucket | undefined;
       configurationDuServeur.cellar.get = (
         nomDuFichier: string,
         cleDuBucket: CleDuBucket
@@ -51,8 +51,8 @@ describe('La ressource de visa', () => {
       };
       const reponse = await request(serveur).get('/visas/123456789012.pdf');
 
-      assert.equal(nomDuFichierDemande!, '123456789012.pdf');
-      assert.equal(cleDuBucketDemandee!, 'VISAS');
+      assert.equal(nomDuFichierDemande, '123456789012.pdf');
+      assert.equal(cleDuBucketDemandee, 'VISAS');
       assert.equal(reponse.body, 'ABCD');
     });
 
