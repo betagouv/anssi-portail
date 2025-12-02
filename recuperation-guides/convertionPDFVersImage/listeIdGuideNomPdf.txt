@@ -45,4 +45,5 @@ en-security-recommendations-tls : security-recommendations-for-tls_v1.1.pdf
 en-bgp-configuration-best-practices : bgp-configuration-best-practices.pdf
 en-recommendations-securing-networks-ipsec : NT_IPsec_EN.pdf
 en-openssh-secure-use-recommendations : NT_OpenSSH_en.pdf
+en-managing-cybersecurity-industrial-control-systems : Managing_Cybe_for_ICS_EN.pdf
 
