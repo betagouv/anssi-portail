@@ -45,3 +45,4 @@
 ../sortie/bgp-configuration-best-practices.pdf
 ../sortie/NT_IPsec_EN.pdf
 ../sortie/NT_OpenSSH_en.pdf
+../sortie/Managing_Cybe_for_ICS_EN.pdf

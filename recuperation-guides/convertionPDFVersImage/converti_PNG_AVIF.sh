@@ -12,8 +12,8 @@ for png in *.png; do
 
     base="${png%.png}"
 
-    out_588="${base}_588.avif"
-    out_234="${base}_234.avif"
+    out_588="${base}-588.avif"
+    out_234="${base}-234.avif"
 
     echo "Processing $png → $out_588 / $out_234"
 

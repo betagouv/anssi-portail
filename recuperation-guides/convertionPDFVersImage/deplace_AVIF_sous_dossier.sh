@@ -25,8 +25,8 @@ while IFS= read -r line; do
 
     base=$(basename "$pdf" .pdf)
 
-    avif_588="${base}_588.avif"
-    avif_234="${base}_234.avif"
+    avif_588="${base}-588.avif"
+    avif_234="${base}-234.avif"
 
     # Ensure folder exists
     mkdir -p "$folder"
