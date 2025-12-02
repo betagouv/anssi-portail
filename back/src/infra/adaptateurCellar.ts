@@ -18,10 +18,10 @@ export interface AdaptateurCellar {
 export const adaptateurCellar = (
   adaptateurEnvironnement: AdaptateurEnvironnement
 ): AdaptateurCellar => ({
-  async get(nomDuFichier: string, _cleDuBucket: CleDuBucket) {
+  async get(nomDuFichier: string, cleDuBucket: CleDuBucket) {
     try {
       const reponse = await axios.get(
-        `${adaptateurEnvironnement.urlCellar()}${nomDuFichier}`,
+        `${selectionneURLCellarPourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
         { responseType: 'arraybuffer' }
       );
       const typeDeContenu =
@@ -38,3 +38,17 @@ export const adaptateurCellar = (
     }
   },
 });
+
+const selectionneURLCellarPourUnBucket = (
+  adaptateurEnvironnement: AdaptateurEnvironnement,
+  cleDeBucket: CleDuBucket
+): string => {
+  switch (cleDeBucket) {
+    case 'GUIDES':
+      return adaptateurEnvironnement.urlCellar().guides();
+    case 'RESSOURCES_CYBER':
+      return adaptateurEnvironnement.urlCellar().ressourcesCyber();
+    case 'VISAS':
+      return adaptateurEnvironnement.urlCellar().visas();
+  }
+};
