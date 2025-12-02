@@ -8,9 +8,7 @@ export const ressourceVisa = ({ cellar }: ConfigurationServeur): Router => {
     '/:slug',
     async (requete: Request, reponse: Response, suite: NextFunction) => {
       try {
-        const documentCellar = await cellar.get(
-          `/qualifications/${requete.params.slug}`
-        );
+        const documentCellar = await cellar.get(requete.params.slug, 'VISAS');
         if (!documentCellar) {
           reponse.sendStatus(404);
           return;
