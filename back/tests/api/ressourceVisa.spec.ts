@@ -6,7 +6,7 @@ import assert from 'node:assert';
 import { Express } from 'express';
 import { ConfigurationServeur } from '../../src/api/configurationServeur';
 
-describe('La ressource de qualification', () => {
+describe('La ressource de visa', () => {
   let serveur: Express;
   let configurationDuServeur: ConfigurationServeur;
 

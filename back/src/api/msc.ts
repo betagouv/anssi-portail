@@ -8,6 +8,7 @@ import { ressourceFavori } from './favoris/ressourceFavori';
 import { ressourceFavoris } from './favoris/ressourceFavoris';
 import { ressourceFavorisPartages } from './favoris/ressourceFavorisPartages';
 import { fournisseurChemin } from './fournisseurChemin';
+import { ressourceDocumentGuide } from './guides/ressourceDocumentGuide';
 import { ressourceGuide } from './guides/ressourceGuide';
 import { ressourceGuides } from './guides/ressourceGuides';
 import { ressourceGuidesMemesCollections } from './guides/ressourceGuidesMemesCollections';
@@ -32,10 +33,10 @@ import { ressourcePageProduit } from './ressourcePageProduit';
 import { ressourcePagesJekyll } from './ressourcePagesJekyll';
 import { ressourcePagesJekyllConnectees } from './ressourcePagesJekyllConnectees';
 import { ressourceProfil } from './ressourceProfil';
-import { ressourceQualification } from './ressourceQualification';
 import { ressourceRetoursExperience } from './ressourceRetoursExperience';
 import { ressourceStatistiques } from './ressourceStatistiques';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
+import { ressourceVisa } from './ressourceVisa';
 import { ressourceDernierResultatDeTest } from './testMaturite/ressourceDernierResultatDeTest';
 import { ressourceRepartitionDesResultatsDeTest } from './testMaturite/ressourceRepartitionDesResultatsDeTest';
 import { ressourceResultatDeTest } from './testMaturite/ressourceResultatDeTest';
@@ -43,7 +44,6 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
-import { ressourceDocumentGuide } from './guides/ressourceDocumentGuide';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -300,7 +300,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/documents-guides', ressourceDocumentGuide(configurationServeur));
 
-  app.use('/visas', ressourceQualification(configurationServeur));
+  app.use('/visas', ressourceVisa(configurationServeur));
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 

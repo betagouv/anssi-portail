@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 
-const ressourceQualification = ({ cellar }: ConfigurationServeur): Router => {
+export const ressourceVisa = ({ cellar }: ConfigurationServeur): Router => {
   const routeur = Router();
 
   routeur.get(
@@ -28,4 +28,3 @@ const ressourceQualification = ({ cellar }: ConfigurationServeur): Router => {
 
   return routeur;
 };
-export { ressourceQualification };
