@@ -326,13 +326,6 @@
   }
 }
 
-.carte.service,
-.carte.ressource {
-  display: flex;
-  flex-direction: column;
-  width: auto;
-}
-
 .carte.service.lien-externe-produit > * {
   pointer-events: none;
 }
