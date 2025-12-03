@@ -29,7 +29,7 @@
     <SqueletteCarteGuide />
   {:else}
     {#each guideDeMemesCollections as guide (guide.id)}
-      <CarteItem item={guide} />
+      <CarteItem item={guide} modeLargeur="automatique" />
     {/each}
   {/if}
 </div>
@@ -39,7 +39,7 @@
 
   .grille-cartes {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(273px, 1fr));
     gap: 24px;
   }
 </style>
