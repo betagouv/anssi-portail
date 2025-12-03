@@ -309,17 +309,10 @@
         margin-top: 0;
       }
     }
-
     .grille-cartes {
       display: grid;
-      grid-template-columns: 1fr;
-
-      @include a-partir-de(sm) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      @include a-partir-de(md) {
-        grid-template-columns: repeat(3, 1fr);
-      }
+      grid-template-columns: repeat(auto-fill, minmax(273px, 1fr));
+      gap: 24px;
 
       img {
         width: 100%;
