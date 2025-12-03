@@ -139,13 +139,6 @@
     text-align: center;
   }
 
-  :global(.carte.service),
-  :global(.carte.ressource) {
-    display: flex;
-    flex-direction: column;
-    width: auto;
-  }
-
   .banniere-partage-favoris {
     background-color: #fef6e3;
     border-radius: 8px;
