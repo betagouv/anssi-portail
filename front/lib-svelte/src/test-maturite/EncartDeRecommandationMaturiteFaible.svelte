@@ -126,6 +126,12 @@
         }
       }
 
+      .formulaire {
+        background-color: white;
+        padding: 24px;
+        border: 1px solid #ddd;
+        margin-bottom: 24px;
+      }
       details {
         summary {
           padding: 8px 16px 8px 12px;
