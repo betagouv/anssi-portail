@@ -1,0 +1,143 @@
+<script lang="ts">
+  import FoireAuxQuestions from '../demande-aide-mon-aide-cyber/FoireAuxQuestions.svelte';
+  import FormulaireDemandeSimplifiee from '../demande-aide-mon-aide-cyber/FormulaireDemandeSimplifiee.svelte';
+</script>
+
+<section>
+  <hgroup>
+    <h1>Passez à l'étape suivante</h1>
+    <p>
+      Votre résultat montre que votre organisation n’est pas suffisamment
+      protégée face aux cyber menaces. L’ANSSI vous recommande de réaliser un
+      diagnostic cyber (gratuit) afin de définir rapidement les actions
+      prioritaires à mettre en place et renforcer votre cybersécurité.
+    </p>
+  </hgroup>
+  <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
+  <div class="demande-diagnostic">
+    <hgroup>
+      <h2>Protégez rapidement votre organisation des cyberattaques.</h2>
+      <p>
+        Profitez d’un premier diagnostic cyber gratuit accompagné par un Aidant
+        cyber et recevez 6 recommandations prioritaires à mettre en place pour
+        améliorer la cybersécurité de votre organisation.
+      </p>
+    </hgroup>
+    <ol>
+      <li>Complétez et envoyez votre demande</li>
+      <li><span>Un <u>Aidant cyber</u> vous contacte rapidement</span></li>
+      <li>Réalisez votre diagnostic (en visio ou sur site – 1h)</li>
+      <li>
+        Recevez vos 6 recommandations prioritaires pour renforcer votre
+        cybersécurité
+      </li>
+    </ol>
+    <FormulaireDemandeSimplifiee />
+    <details>
+      <summary>
+        <lab-anssi-icone nom="questionnaire-line"></lab-anssi-icone>
+        Questions fréquentes
+      </summary>
+      <div class="faq">
+        <h6>Questions les plus fréquentes</h6>
+        <FoireAuxQuestions />
+      </div>
+    </details>
+  </div>
+</section>
+
+<style lang="scss">
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    h1 {
+      font-size: 2rem;
+      line-height: 2.5rem;
+      text-align: center;
+      margin: 0 0 24px;
+    }
+
+    p {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
+
+    lab-anssi-icone {
+      align-self: center;
+    }
+
+    .demande-diagnostic {
+      background-color: #fef6e3;
+      padding: 40px 16px;
+      border-radius: 8px;
+
+      h2 {
+        margin-bottom: 16px;
+      }
+
+      p {
+        margin-bottom: 32px;
+      }
+
+      ol {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        counter-reset: li;
+        list-style: none;
+        padding: 0;
+        li {
+          display: flex;
+          gap: 12px;
+
+          &::before {
+            flex: 0 0 16px;
+            align-self: flex-start;
+            height: 16px;
+            line-height: 100%;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 4px;
+            padding: 4px;
+            background-color: var(--noir);
+            color: white;
+            content: counter(li);
+            counter-increment: li;
+          }
+        }
+      }
+
+      details {
+        summary {
+          padding: 8px 16px 8px 12px;
+          border-radius: 8px;
+          &:hover {
+            background-color: rgb(from var(--noir) r g b / 4%);
+            cursor: pointer;
+          }
+          &:active {
+            background-color: rgb(from var(--noir) r g b / 8%);
+            cursor: pointer;
+          }
+          &::marker {
+            content: '';
+          }
+          &::-webkit-details-marker {
+            display: none;
+          }
+        }
+        .faq {
+          h6 {
+            font-weight: bold;
+            font-size: 1.125rem;
+            line-height: 1.5rem;
+            margin-block: 0 24px;
+          }
+          background-color: white;
+          padding: 48px 16px;
+        }
+      }
+    }
+  }
+</style>
