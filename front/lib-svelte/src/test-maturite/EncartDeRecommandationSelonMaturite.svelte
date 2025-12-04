@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { NiveauMaturite } from '../niveaux-maturite/NiveauxMaturite.type';
+  import EncartDeRecommandationMaturiteFaible from './EncartDeRecommandationMaturiteFaible.svelte';
 
   export let niveau: NiveauMaturite;
 
@@ -9,7 +10,9 @@
     niveau.id === 'intermediaire';
 </script>
 
-{#if !afficheDiagnostic}
+{#if afficheDiagnostic}
+  <EncartDeRecommandationMaturiteFaible />
+{:else}
   <section class="votre-parcours">
     <div class="contenu-section">
       <div class="tuile">
