@@ -9,7 +9,7 @@ SECURISER:
 REAGIR:
   - /services/assistance-reponse-incidents
   - /ressources/avis-bulletin
-  - /ressources/guides-remediation
+  - /services/transmission-signalements
 SE_FORMER:
   - /services/secnum-academie
   - /ressources/secnumedu
