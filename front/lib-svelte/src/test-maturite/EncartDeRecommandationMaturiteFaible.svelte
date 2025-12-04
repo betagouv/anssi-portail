@@ -47,6 +47,7 @@
 </section>
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
   section {
     display: flex;
     flex-direction: column;
@@ -56,6 +57,11 @@
       line-height: 2.5rem;
       text-align: center;
       margin: 0 0 24px;
+
+      @include a-partir-de(md) {
+        font-size: 2.5rem;
+        line-height: 3rem;
+      }
     }
 
     p {
