@@ -10,6 +10,11 @@
     niveau.id === 'intermediaire';
 </script>
 
+<section class="separation">
+  <div class="contenu-section">
+    <hr />
+  </div>
+</section>
 {#if afficheDiagnostic}
   <EncartDeRecommandationMaturiteFaible />
 {:else}
@@ -27,3 +32,15 @@
     </div>
   </section>
 {/if}
+
+<style lang="scss">
+  section.separation {
+    padding-block: 0;
+
+    hr {
+      height: 1px;
+      border: 0;
+      background-color: #dddddd;
+    }
+  }
+</style>
