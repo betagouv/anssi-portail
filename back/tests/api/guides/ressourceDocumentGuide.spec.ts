@@ -5,6 +5,7 @@ import request from 'supertest';
 import { ConfigurationServeur } from '../../../src/api/configurationServeur';
 import { creeServeur } from '../../../src/api/msc';
 import { configurationDeTestDuServeur } from '../fauxObjets';
+import { CleDuBucket } from '../../../src/infra/adaptateurCellar';
 
 describe("La ressource de document d'un guide", () => {
   let serveur: Express;
@@ -32,8 +33,13 @@ describe("La ressource de document d'un guide", () => {
 
     it('sers le fichier correspondant', async () => {
       let nomDuFichierDemande: string;
-      configurationDuServeur.cellar.get = (chemin: string) => {
-        nomDuFichierDemande = chemin;
+      let cleDuBucketDemandee: CleDuBucket;
+      configurationDuServeur.cellar.get = (
+        nomDuFichier: string,
+        cleDuBucket: CleDuBucket
+      ) => {
+        nomDuFichierDemande = nomDuFichier;
+        cleDuBucketDemandee = cleDuBucket;
         return Promise.resolve({
           contenu: Buffer.from('ABCD'),
           typeDeContenu: '',
@@ -43,10 +49,8 @@ describe("La ressource de document d'un guide", () => {
         '/documents-guides/anssi_back to basics_pki_1.0.pdf'
       );
 
-      assert.equal(
-        nomDuFichierDemande!,
-        '/guides/anssi_back to basics_pki_1.0.pdf'
-      );
+      assert.equal(nomDuFichierDemande!, 'anssi_back to basics_pki_1.0.pdf');
+      assert.equal(cleDuBucketDemandee!, 'GUIDES');
       assert.equal(reponse.body, 'ABCD');
     });
 

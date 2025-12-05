@@ -5,6 +5,7 @@ import request from 'supertest';
 import assert from 'node:assert';
 import { Express } from 'express';
 import { ConfigurationServeur } from '../../src/api/configurationServeur';
+import { CleDuBucket } from '../../src/infra/adaptateurCellar';
 
 describe('La ressource de visa', () => {
   let serveur: Express;
@@ -35,9 +36,14 @@ describe('La ressource de visa', () => {
     });
 
     it('sers le fichier PDF correspondant', async () => {
-      let nomDuFichierDemande: string;
-      configurationDuServeur.cellar.get = (chemin: string) => {
-        nomDuFichierDemande = chemin;
+      let nomDuFichierDemande: string | undefined;
+      let cleDuBucketDemandee: CleDuBucket | undefined;
+      configurationDuServeur.cellar.get = (
+        nomDuFichier: string,
+        cleDuBucket: CleDuBucket
+      ) => {
+        nomDuFichierDemande = nomDuFichier;
+        cleDuBucketDemandee = cleDuBucket;
         return Promise.resolve({
           contenu: Buffer.from('ABCD'),
           typeDeContenu: '',
@@ -45,7 +51,8 @@ describe('La ressource de visa', () => {
       };
       const reponse = await request(serveur).get('/visas/123456789012.pdf');
 
-      assert.equal(nomDuFichierDemande!, '/qualifications/123456789012.pdf');
+      assert.equal(nomDuFichierDemande, '123456789012.pdf');
+      assert.equal(cleDuBucketDemandee, 'VISAS');
       assert.equal(reponse.body, 'ABCD');
     });
 

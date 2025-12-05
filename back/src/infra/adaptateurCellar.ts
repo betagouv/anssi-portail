@@ -6,17 +6,22 @@ export type DocumentCellar = {
   typeDeContenu: string;
 };
 
+export type CleDuBucket = 'RESSOURCES_CYBER' | 'GUIDES' | 'VISAS';
+
 export interface AdaptateurCellar {
-  get(chemin: string): Promise<DocumentCellar | undefined>;
+  get(
+    nomDuFichier: string,
+    cleDuBucket: CleDuBucket
+  ): Promise<DocumentCellar | undefined>;
 }
 
 export const adaptateurCellar = (
   adaptateurEnvironnement: AdaptateurEnvironnement
 ): AdaptateurCellar => ({
-  async get(chemin: string) {
+  async get(nomDuFichier: string, cleDuBucket: CleDuBucket) {
     try {
       const reponse = await axios.get(
-        `${adaptateurEnvironnement.urlCellar()}${chemin}`,
+        `${selectionneURLCellarPourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
         { responseType: 'arraybuffer' }
       );
       const typeDeContenu =
@@ -33,3 +38,17 @@ export const adaptateurCellar = (
     }
   },
 });
+
+const selectionneURLCellarPourUnBucket = (
+  adaptateurEnvironnement: AdaptateurEnvironnement,
+  cleDeBucket: CleDuBucket
+): string => {
+  switch (cleDeBucket) {
+    case 'GUIDES':
+      return adaptateurEnvironnement.urlCellar().guides();
+    case 'RESSOURCES_CYBER':
+      return adaptateurEnvironnement.urlCellar().ressourcesCyber();
+    case 'VISAS':
+      return adaptateurEnvironnement.urlCellar().visas();
+  }
+};
