@@ -1,5 +1,7 @@
 <script lang="ts">
+  import axios from 'axios';
   import { validationChamp } from '../directives/validationChamp';
+  import Alerte from '../ui/Alerte.svelte';
   import type { CouleurDeBadge } from '../ui/badge.type';
   import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
@@ -8,6 +10,7 @@
   import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
   import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
+  import type { CorpsAPIDemandeAide } from './DonneesFormulaireDemandeAide';
 
   const badges: { label: string; accent: CouleurDeBadge }[] = [
     {
@@ -25,12 +28,39 @@
   let email: string;
   let cguSontValidees: boolean;
   let enSucces: boolean = false;
+  let enCoursEnvoi: boolean = false;
+  let erreurs: string;
 
-  const soumetsFormulaire = () => {
+  const soumetsFormulaire = async () => {
     if (!formulaire.estValide()) {
       return;
     }
-    enSucces = true;
+    try {
+      enCoursEnvoi = true;
+
+      const corps: CorpsAPIDemandeAide = {
+        entiteAidee: {
+          email,
+          departement: entite.departement,
+          raisonSociale: entite.nom,
+          siret: entite.siret,
+        },
+        validationCGU: cguSontValidees,
+      };
+      const reponse = await axios.post(
+        '/api/mon-aide-cyber/demandes-aide',
+        corps
+      );
+      if (reponse.status === 201) {
+        enSucces = true;
+      }
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        erreurs = e.response?.data?.erreur;
+      }
+    } finally {
+      enCoursEnvoi = false;
+    }
   };
 </script>
 
@@ -94,8 +124,16 @@
           taille="md"
           titre="Envoyer ma demande"
           on:click={soumetsFormulaire}
+          {enCoursEnvoi}
         />
       </div>
+      {#if erreurs}
+        <Alerte
+          type="ERREUR"
+          titre="Une erreur est survenue"
+          message={erreurs}
+        />
+      {/if}
     </div>
   </Formulaire>
 {:else}
@@ -110,7 +148,7 @@
     display: flex;
     flex-direction: column;
 
-    dsfr-badges-groups {
+    dsfr-badges-group {
       align-self: flex-start;
     }
 
