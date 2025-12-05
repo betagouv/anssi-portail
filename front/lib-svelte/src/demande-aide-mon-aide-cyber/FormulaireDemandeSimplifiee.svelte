@@ -29,7 +29,7 @@
   let cguSontValidees: boolean;
   let enSucces: boolean = false;
   let enCoursEnvoi: boolean = false;
-  let erreurs: string;
+  let erreur: string;
 
   const soumetsFormulaire = async () => {
     if (!formulaire.estValide()) {
@@ -56,7 +56,7 @@
       }
     } catch (e) {
       if (axios.isAxiosError(e)) {
-        erreurs = e.response?.data?.erreur;
+        erreur = e.response?.data?.erreur;
       }
     } finally {
       enCoursEnvoi = false;
@@ -127,11 +127,11 @@
           {enCoursEnvoi}
         />
       </div>
-      {#if erreurs}
+      {#if erreur}
         <Alerte
           type="ERREUR"
           titre="Une erreur est survenue"
-          message={erreurs}
+          message={erreur}
         />
       {/if}
     </div>

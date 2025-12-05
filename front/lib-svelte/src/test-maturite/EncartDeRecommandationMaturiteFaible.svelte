@@ -33,6 +33,7 @@
           cybersécurité
         </li>
       </ol>
+
       <div class="formulaire">
         <FormulaireDemandeSimplifiee />
       </div>
@@ -86,19 +87,35 @@
     }
 
     .demande-diagnostic {
+      display: grid;
+      grid-template-areas:
+        'preambule'
+        'etapes'
+        'formulaire'
+        'faq';
       background-color: #fef6e3;
       padding: 40px 16px;
       border-radius: 8px;
 
-      h2 {
-        margin-bottom: 16px;
+      @include a-partir-de(lg) {
+        grid-template-areas:
+          'preambule formulaire'
+          'etapes formulaire'
+          'faq faq';
       }
 
-      p {
-        margin-bottom: 32px;
-      }
+      hgroup {
+        grid-area: preambule;
+        h2 {
+          margin-bottom: 16px;
+        }
 
+        p {
+          margin-bottom: 32px;
+        }
+      }
       ol {
+        grid-area: etapes;
         display: flex;
         flex-direction: column;
         gap: 16px;
@@ -127,15 +144,18 @@
       }
 
       .formulaire {
+        grid-area: formulaire;
         background-color: white;
         padding: 24px;
         border: 1px solid #ddd;
         margin-bottom: 24px;
       }
       details {
+        grid-area: faq;
         summary {
           padding: 8px 16px 8px 12px;
           border-radius: 8px;
+          width: max-content;
           &:hover {
             background-color: rgb(from var(--noir) r g b / 4%);
             cursor: pointer;
@@ -152,14 +172,15 @@
           }
         }
         .faq {
+          background-color: white;
+          padding: 48px 16px;
+          margin-top: 32px;
           h6 {
             font-weight: bold;
             font-size: 1.125rem;
             line-height: 1.5rem;
             margin-block: 0 24px;
           }
-          background-color: white;
-          padding: 48px 16px;
         }
       }
     }
