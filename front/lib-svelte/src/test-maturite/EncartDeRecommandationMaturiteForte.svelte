@@ -1,4 +1,5 @@
-<script lang="ts"></script>
+<script lang="ts">
+</script>
 
 <section>
   <div class="contenu-section">
@@ -61,6 +62,10 @@
       padding: 200px 16px;
       border-radius: 8px;
 
+      @include  a-partir-de(md) {
+        background-image: url('/assets/images/test-maturite/comparaison-floue-md.avif');
+      }
+
       .connexion {
         background: white;
         border-radius: 8px;
@@ -68,6 +73,16 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-inline: auto;
+
+        @include a-partir-de(md){
+          max-width: taille-pour-colonnes(8);
+        }
+
+        @include a-partir-de(lg){
+          max-width: taille-pour-colonnes(6);
+        }
+
         p {
           margin: 0 0 24px;
           color: #3a3a3a;
