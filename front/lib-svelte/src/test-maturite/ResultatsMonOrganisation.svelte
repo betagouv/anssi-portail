@@ -81,7 +81,7 @@
   }
 
   .message-information {
-    padding-block: 48px 56px;
+    padding-block: 0 56px;
 
     .note {
       color: #666666;
