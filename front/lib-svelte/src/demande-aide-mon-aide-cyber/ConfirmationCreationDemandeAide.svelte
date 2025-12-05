@@ -1,8 +1,10 @@
 <script lang="ts">
   import Bouton from '../ui/Bouton.svelte';
+
+  export let mode: 'carte' | 'embarque' = 'carte';
 </script>
 
-<div class="carte-confirmation">
+<div class={['confirmation', mode]}>
   <h3>Votre demande a bien été envoyée&nbsp;!</h3>
   <p>
     Un Aidant cyber prendra bientôt contact avec vous pour vous accompagner dans
@@ -20,21 +22,24 @@
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
-  .carte-confirmation {
+  .confirmation {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    max-width: 792px;
-    padding: 48px 24px 72px 24px;
-    margin: auto;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    background: #fff;
 
-    @include a-partir-de(md) {
-      padding: 48px 80px 72px 80px;
+    &.carte {
+      max-width: 792px;
+      padding: 48px 24px 72px 24px;
+      margin: auto;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      background: #fff;
+
+      @include a-partir-de(md) {
+        padding: 48px 80px 72px 80px;
+      }
     }
 
     h3 {
