@@ -4,6 +4,7 @@
   import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
+  import Formulaire from '../ui/Formulaire.svelte';
   import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
   import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
@@ -18,73 +19,85 @@
       accent: 'yellow-tournesol',
     },
   ];
+
+  let formulaire: Formulaire;
   let entite: Organisation;
   let email: string;
   let cguSontValidees: boolean;
   let enSucces: boolean = false;
+
+  const soumetsFormulaire = () => {
+    if (!formulaire.estValide()) {
+      return;
+    }
+    enSucces = true;
+  };
 </script>
 
 {#if !enSucces}
-  <form id="demande-diagnostic-simplifiee">
-    <dsfr-badges-group {badges} size="sm"></dsfr-badges-group>
-    <h5>Demande de diagnostic cyber</h5>
-    <div class="champ recherche-organisation">
-      <label class="libelle" for="entite">Recherchez votre organisation</label>
-      <SelectionOrganisation
-        id="entite"
-        bind:valeur={entite}
-        filtreDepartement={undefined}
-      />
-      {#if entite}
-        <div>Votre entreprise : {entite.nom} ({entite.departement})</div>
-      {/if}
-    </div>
-
-    <div class="champ">
-      <ControleFormulaire requis={true} libelle="Email de contact">
-        <ChampTexte
-          id="email"
-          nom="email"
-          type="email"
-          aideSaisie="Ex : jean.dupont@mail.com"
-          requis={true}
-          bind:valeur={email}
-          messageErreur="Le format du mail est invalide"
+  <Formulaire id="demande-diagnostic-simplifiee" bind:this={formulaire}>
+    <div class="formulaire">
+      <dsfr-badges-group {badges} size="sm"></dsfr-badges-group>
+      <h5>Demande de diagnostic cyber</h5>
+      <div class="champ recherche-organisation">
+        <label class="libelle" for="entite">Recherchez votre organisation</label
+        >
+        <SelectionOrganisation
+          id="entite"
+          bind:valeur={entite}
+          filtreDepartement={undefined}
         />
-      </ControleFormulaire>
-    </div>
+        {#if entite}
+          <div>Votre entreprise : {entite.nom} ({entite.departement})</div>
+        {/if}
+      </div>
 
-    <div class="case-a-cocher cgu">
-      <input
-        id="cguAcceptees"
-        type="checkbox"
-        required
-        bind:checked={cguSontValidees}
-        use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
-      />
-      <label for="cguAcceptees">
-        <span class="requis">
-          J'accepte les
-          <dsfr-link
-            class="lien"
-            blank
-            label="conditions générales d'utilisation"
-            href="https://monaide.cyber.gouv.fr/cgu"
-          ></dsfr-link>
-          de MonAideCyber au nom de l’entité que je représente.
-        </span>
-      </label>
-    </div>
+      <div class="champ">
+        <ControleFormulaire requis={true} libelle="Email de contact">
+          <ChampTexte
+            id="email"
+            nom="email"
+            type="email"
+            aideSaisie="Ex : jean.dupont@mail.com"
+            requis={true}
+            bind:valeur={email}
+            messageErreur="Le format du mail est invalide"
+          />
+        </ControleFormulaire>
+      </div>
 
-    <div>
-      <Bouton
-        type="primaire"
-        taille="md"
-        titre="Envoyer ma demande"
-        on:click={() => (enSucces = true)}
-      />
+      <div class="case-a-cocher cgu">
+        <input
+          id="cguAcceptees"
+          type="checkbox"
+          required
+          bind:checked={cguSontValidees}
+          use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
+        />
+        <label for="cguAcceptees">
+          <span class="requis">
+            J'accepte les
+            <dsfr-link
+              class="lien"
+              blank
+              label="conditions générales d'utilisation"
+              href="https://monaide.cyber.gouv.fr/cgu"
+            ></dsfr-link>
+            de MonAideCyber au nom de l’entité que je représente.
+          </span>
+        </label>
+      </div>
+
+      <div>
+        <Bouton
+          type="primaire"
+          taille="md"
+          titre="Envoyer ma demande"
+          on:click={soumetsFormulaire}
+        />
+      </div>
     </div>
-  </form>
+  </Formulaire>
 {:else}
   <div class="confirmation">
     <ConfirmationCreationDemandeAide mode="embarque" />
@@ -93,7 +106,7 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
-  form {
+  .formulaire {
     display: flex;
     flex-direction: column;
 
