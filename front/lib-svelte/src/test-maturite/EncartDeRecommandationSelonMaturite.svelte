@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { NiveauMaturite } from '../niveaux-maturite/NiveauxMaturite.type';
+  import { profilStore } from '../stores/profil.store';
   import EncartDeRecommandationMaturiteFaible from './EncartDeRecommandationMaturiteFaible.svelte';
+  import EncartDeRecommandationMaturiteForte from './EncartDeRecommandationMaturiteForte.svelte';
 
   export let niveau: NiveauMaturite;
 
@@ -17,7 +19,7 @@
 </section>
 {#if afficheDiagnostic}
   <EncartDeRecommandationMaturiteFaible />
-{:else}
+{:else if $profilStore}
   <section class="votre-parcours">
     <div class="contenu-section">
       <div class="tuile">
@@ -31,6 +33,8 @@
       </div>
     </div>
   </section>
+{:else}
+  <EncartDeRecommandationMaturiteForte />
 {/if}
 
 <style lang="scss">

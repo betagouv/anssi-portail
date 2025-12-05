@@ -1,15 +1,15 @@
+import { HttpStatusCode } from 'axios';
 import { NextFunction, Request, Response } from 'express';
 import { check, validationResult } from 'express-validator';
-import { AdaptateurJWT } from './adaptateurJWT';
-import fs from 'node:fs';
-import { randomBytes } from 'node:crypto';
 import helmet from 'helmet';
-import { FournisseurChemin } from './fournisseurChemin';
-import { Utilisateur } from '../metier/utilisateur';
-import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { AdaptateurHachage } from '../infra/adaptateurHachage';
+import { randomBytes } from 'node:crypto';
+import fs from 'node:fs';
 import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
-import { HttpStatusCode } from 'axios';
+import { AdaptateurHachage } from '../infra/adaptateurHachage';
+import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
+import { Utilisateur } from '../metier/utilisateur';
+import { AdaptateurJWT } from './adaptateurJWT';
+import { FournisseurChemin } from './fournisseurChemin';
 
 type FonctionMiddleware = (
   requete: Request,
@@ -150,6 +150,7 @@ export const fabriqueMiddleware = ({
               'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
               'https://storage.crisp.chat',
               'https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com',
+              'data:',
             ],
             connectSrc: ["'self'", 'https://stats.beta.gouv.fr'],
             mediaSrc: [
@@ -158,7 +159,11 @@ export const fabriqueMiddleware = ({
               'https://ressources-mac.cellar-c2.services.clever-cloud.com',
               'https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com',
             ],
-            styleSrc: ["'self'", `'nonce-${reponse.locals.nonce}'`],
+            styleSrc: [
+              "'self'",
+              `'nonce-${reponse.locals.nonce}'`,
+              'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
+            ],
           },
         },
       })(requete, reponse, suite);
