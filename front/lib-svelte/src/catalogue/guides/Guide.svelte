@@ -28,14 +28,14 @@
     <div class="contenu-section">
       <FilAriane
         branche={{ nom: 'Catalogue cyber', lien: '/catalogue' }}
-        feuille={guide.nom}
+        feuille={guide.resume}
       />
       <div class="badges-collections">
         <BadgesDeCollections {guide} />
       </div>
       <div class="resume">
         <div>
-          <h1>{decodeEntitesHtml(guide.nom)}</h1>
+          <h1>{decodeEntitesHtml(guide.resume)}</h1>
           <BoutonsDocumentsGuide {guide} />
         </div>
         <div class="conteneur-illustration">
