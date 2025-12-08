@@ -215,6 +215,21 @@
           color: #666;
           margin-block: 0 32px;
         }
+
+        .presentation {
+          :global(a:not(.bouton)) {
+            display: inline;
+            text-decoration: underline;
+            -webkit-text-decoration: underline;
+
+            &:hover {
+              text-decoration-thickness: 2px;
+            }
+            &:after {
+              display: none;
+            }
+          }
+        }
       }
     }
   }
