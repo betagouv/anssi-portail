@@ -167,6 +167,7 @@
         object-fit: cover;
         object-position: top;
         height: 330px;
+        background-color: white;
 
         @include a-partir-de(xxl) {
           display: block;
