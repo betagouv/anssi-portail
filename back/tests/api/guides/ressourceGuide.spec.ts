@@ -39,9 +39,9 @@ describe('La ressource guide', () => {
       );
       assert.deepEqual(guide.image, {
         petite:
-          'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-234.avif',
-        grande:
           'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-588.avif',
+        grande:
+          'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-origine.avif',
       });
       assert.equal(guide.langue, 'FR');
       assert.deepEqual(guide.collections, ['Les essentiels']);

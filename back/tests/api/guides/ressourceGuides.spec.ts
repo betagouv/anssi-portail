@@ -42,9 +42,9 @@ describe('La ressource qui gère les guides', () => {
       );
       assert.deepEqual(premierGuide.image, {
         petite:
-          'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-234.avif',
-        grande:
           'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-588.avif',
+        grande:
+          'https://notre-cellar/guides/zero-trust/anssi-fondamentaux-zero-trust-v1_publication-origine.avif',
       });
       assert.equal(premierGuide.langue, 'FR');
       assert.deepEqual(premierGuide.collections, ['Les essentiels']);
@@ -62,9 +62,9 @@ describe('La ressource qui gère les guides', () => {
       );
       assert.deepEqual(secondGuide.image, {
         petite:
-          'https://notre-cellar/guides/devsecops/anssi_essentiels_devsecops_v1-234.avif',
-        grande:
           'https://notre-cellar/guides/devsecops/anssi_essentiels_devsecops_v1-588.avif',
+        grande:
+          'https://notre-cellar/guides/devsecops/anssi_essentiels_devsecops_v1-origine.avif',
       });
       assert.equal(secondGuide.langue, 'FR');
       assert.deepEqual(premierGuide.collections, ['Les essentiels']);
@@ -79,7 +79,9 @@ describe('La ressource qui gère les guides', () => {
 
     it("gère l'absence d'image sur un guide", async () => {
       await entrepotGuide.vide();
-      await entrepotGuide.ajoute(new Guide({ ...guideZeroTrust, nomImage: null }));
+      await entrepotGuide.ajoute(
+        new Guide({ ...guideZeroTrust, nomImage: null })
+      );
 
       const reponse = await request(serveur).get('/api/guides');
 
