@@ -5,7 +5,7 @@ nom: Visas de sécurité
 titreHtml: Visas de sécurité
 description: Trouver un produit qualifié par l’ANSSI
 illustration: visa-secu/visa-secu.png
-lien: https://cyber.gouv.fr/decouvrir-les-solutions-qualifiees
+lien: https://cyber.gouv.fr/offre-de-service/solutions-certifiees-et-qualifiees/services-de-securite-evalue/decouvrir-les-solutions-certifiees-qualifiees/
 droitsAcces:
   - ACCES_LIBRE
 sources:
