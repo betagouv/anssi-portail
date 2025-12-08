@@ -47,15 +47,20 @@ const recupereIllustration = async ({ id, image }: Guide): Promise<void> => {
   await telecharge(image, id, async (chemin, flux) => {
     const retailleEn234px = sharp().resize(234).avif({ quality: 80 });
     const retailleEn588px = sharp().resize(588).avif({ quality: 80 });
+    const origineAvif = sharp().avif({ quality: 80 });
 
     const cheminSansExtension = chemin.slice(0, chemin.lastIndexOf('.'));
     const flux234 = createWriteStream(cheminSansExtension + '-234.avif');
     const flux588 = createWriteStream(cheminSansExtension + '-588.avif');
+    const fluxOrigine = createWriteStream(
+      cheminSansExtension + '-origine.avif'
+    );
 
     flux.pipe(retailleEn234px).pipe(flux234);
     flux.pipe(retailleEn588px).pipe(flux588);
+    flux.pipe(origineAvif).pipe(fluxOrigine);
     return new Promise((resolve) => {
-      flux588.on('finish', resolve);
+      fluxOrigine.on('finish', resolve);
     });
   });
   console.log('Image récupérée : ', image);
