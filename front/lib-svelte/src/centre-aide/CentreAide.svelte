@@ -62,7 +62,7 @@
       >
       <a
         class="bouton secondaire centre-aide-contacter-anssi"
-        href="https://cyber.gouv.fr/contacter-lanssi"
+        href="https://cyber.gouv.fr/contact-acces/"
         target="_blank">️📩 Contacter d’autres services de l’ANSSI</a
       >
     </div>
