@@ -12,10 +12,14 @@ for png in *.png; do
 
     base="${png%.png}"
 
+    out_origine="${base}-origine.avif"
     out_588="${base}-588.avif"
     out_234="${base}-234.avif"
 
-    echo "Processing $png → $out_588 / $out_234"
+    echo "Processing $png → $out_origine / $out_588 / $out_234"
+
+    # Convert to AVIF
+    convert "$png" -quality 80 "$out_origine"
 
     # Convert to AVIF at 588px width
     convert "$png" -resize 588x -quality 80 "$out_588"

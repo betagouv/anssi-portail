@@ -25,6 +25,7 @@ while IFS= read -r line; do
 
     base=$(basename "$pdf" .pdf)
 
+    avif_origine="${base}-origine.avif"
     avif_588="${base}-588.avif"
     avif_234="${base}-234.avif"
 
@@ -32,7 +33,7 @@ while IFS= read -r line; do
     mkdir -p "$folder"
 
     # Move files if they exist
-    for f in "$avif_588" "$avif_234"; do
+    for f in "$avif_588" "$avif_234" "$avif_origine"; do
         if [[ -f "$f" ]]; then
             echo "→ Moving $f → $folder/"
             mv "$f" "$folder/"
