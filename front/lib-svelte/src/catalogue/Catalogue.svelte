@@ -142,13 +142,13 @@
               <h1>Chargement...</h1>
             {:else}
               <h1>Désolé, aucun résultat trouvé</h1>
+              <input
+                type="button"
+                class="bouton primaire"
+                value="Réinitialiser les filtres"
+                onclick={reinitialiseFiltres}
+              />
             {/if}
-            <input
-              type="button"
-              class="bouton primaire"
-              value="Réinitialiser les filtres"
-              onclick={reinitialiseFiltres}
-            />
           </div>
         {/each}
       {:else}
