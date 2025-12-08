@@ -56,10 +56,12 @@ export class EntrepotGuideGrist
       langue: guideGrist.fields.Langue ?? 'FR',
       collections: aseptiseListeGrist(guideGrist.fields.Collections),
       documents: guideGrist.fields.Documents
-        ? guideGrist.fields.Documents.split('\n').map((ligne) => ({
-            libelle: ligne.split(' : ')[0],
-            nomFichier: ligne.split(' : ')[1],
-          }))
+        ? guideGrist.fields.Documents.split('\n')
+            .filter((l) => !!l)
+            .map((ligne) => ({
+              libelle: ligne.split(' : ')[0],
+              nomFichier: ligne.split(' : ')[1],
+            }))
         : [],
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour ?? '',
       datePublication: guideGrist.fields.Date_de_publication ?? '',

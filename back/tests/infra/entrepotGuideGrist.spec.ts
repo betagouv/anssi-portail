@@ -146,21 +146,38 @@ describe("L'entrepot de guide Grist", () => {
     assert.equal(guide1!.id, 'guide1');
   });
 
-  it('sait récupérer les documents', async () => {
-    const entrepotGuideGrist = prepareEntrepotGristAvecEnregistrements([
-      new ConstructeurGuideGrist()
-        .avecLIdentifiant('guide1')
-        .avecLeDocument('Le guide', 'guide.pdf')
-        .avecLeDocument('Le guide obsolète', 'guide-obsolete.pdf')
-        .construis(),
-    ]);
+  describe('concernant les documents', () => {
+    it('sait les récupérer', async () => {
+      const entrepotGuideGrist = prepareEntrepotGristAvecEnregistrements([
+        new ConstructeurGuideGrist()
+          .avecLIdentifiant('guide1')
+          .avecLeDocument('Le guide', 'guide.pdf')
+          .avecLeDocument('Le guide obsolète', 'guide-obsolete.pdf')
+          .construis(),
+      ]);
 
-    const guide1 = await entrepotGuideGrist.parId('guide1');
+      const guide1 = await entrepotGuideGrist.parId('guide1');
 
-    assert.deepEqual(guide1!.documents, [
-      { libelle: 'Le guide', nomFichier: 'guide.pdf' },
-      { libelle: 'Le guide obsolète', nomFichier: 'guide-obsolete.pdf' },
-    ]);
+      assert.deepEqual(guide1!.documents, [
+        { libelle: 'Le guide', nomFichier: 'guide.pdf' },
+        { libelle: 'Le guide obsolète', nomFichier: 'guide-obsolete.pdf' },
+      ]);
+    });
+
+    it('ignore les lignes vides', async () => {
+      const entrepotGuideGrist = prepareEntrepotGristAvecEnregistrements([
+        new ConstructeurGuideGrist()
+          .avecLIdentifiant('guide1')
+          .avecLaChaineDeDocument('Le guide : guide.pdf\n')
+          .construis(),
+      ]);
+
+      const guide1 = await entrepotGuideGrist.parId('guide1');
+
+      assert.deepEqual(guide1!.documents, [
+        { libelle: 'Le guide', nomFichier: 'guide.pdf' },
+      ]);
+    });
   });
 
   it('sait récupérer les dates', async () => {
