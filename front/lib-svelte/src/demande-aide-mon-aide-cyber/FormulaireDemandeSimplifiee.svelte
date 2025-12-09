@@ -119,7 +119,7 @@
         </label>
       </div>
 
-      <div>
+      <div class="envoi-demande">
         <Bouton
           type="primaire"
           taille="md"
@@ -127,6 +127,10 @@
           on:click={soumetsFormulaire}
           {enCoursEnvoi}
         />
+        <p>
+          Ce diagnostic gratuit proposé par l'État n'est pas adapté aux
+          particuliers et micro-entreprises.
+        </p>
       </div>
       {#if erreur}
         <Alerte
@@ -145,6 +149,7 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
+
   .formulaire {
     display: flex;
     flex-direction: column;
@@ -231,7 +236,20 @@
       margin-right: 4px;
       font-size: 1rem;
     }
+
+    .envoi-demande {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      p {
+        color: #666;
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+      }
+    }
   }
+
   .confirmation {
     padding-bottom: 24px;
   }
