@@ -97,6 +97,10 @@
       padding: 40px 16px;
       border-radius: 8px;
 
+      @include a-partir-de(md) {
+        padding: 40px;
+      }
+
       @include a-partir-de(lg) {
         grid-template-areas:
           'preambule formulaire'
