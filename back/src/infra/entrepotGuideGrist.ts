@@ -11,7 +11,6 @@ export type GuideGrist = {
   fields: {
     Identifiant: string | null;
     Titre: string | null;
-    Resume: string | null;
     Description: string | null;
     Image: string | null;
     Langue: 'FR' | 'EN' | null;
@@ -51,7 +50,6 @@ export class EntrepotGuideGrist
     return new Guide({
       id: guideGrist.fields.Identifiant ?? '',
       nom: guideGrist.fields.Titre ?? '',
-      resume: guideGrist.fields.Resume ?? '',
       description: guideGrist.fields.Description ?? '',
       nomImage: guideGrist.fields.Image ?? null,
       langue: guideGrist.fields.Langue ?? 'FR',

@@ -3,7 +3,6 @@ import { EntrepotGuide } from './entrepotGuide';
 export class Guide {
   id: string;
   nom: string;
-  resume: string;
   description: string;
   nomImage: string | null;
   langue: 'FR' | 'EN';
@@ -16,7 +15,6 @@ export class Guide {
   constructor(parametres: {
     id: string;
     nom: string;
-    resume: string;
     description: string;
     nomImage: string | null;
     langue: 'FR' | 'EN';
@@ -28,7 +26,6 @@ export class Guide {
   }) {
     this.id = parametres.id;
     this.nom = parametres.nom;
-    this.resume = parametres.resume;
     this.description = parametres.description;
     this.nomImage = parametres.nomImage;
     this.langue = parametres.langue;

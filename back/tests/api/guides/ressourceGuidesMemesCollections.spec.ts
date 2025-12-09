@@ -16,18 +16,20 @@ describe('La ressource des guides de mêmes collections', () => {
       entrepotGuide = new EntrepotGuideMemoire();
       await entrepotGuide.ajoute(guideZeroTrust);
       await entrepotGuide.ajoute(guideDevsecops);
-      await entrepotGuide.ajoute(new Guide({
-        id: 'guide-sans-collection',
-        nom: 'Guide sans collection',
-        resume: '',
-        description: '',
-        nomImage: '',
-        langue: 'FR',
-        collections: [],
-        documents: [],
-        dateMiseAJour: '',
-        datePublication: '',
-      }));
+      await entrepotGuide.ajoute(
+        new Guide({
+          id: 'guide-sans-collection',
+          nom: 'Guide sans collection',
+          description: '',
+          nomImage: '',
+          langue: 'FR',
+          collections: [],
+          documents: [],
+          dateMiseAJour: '',
+          datePublication: '',
+          thematique: '',
+        })
+      );
       serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotGuide });
     });
     it('répond 200', async () => {

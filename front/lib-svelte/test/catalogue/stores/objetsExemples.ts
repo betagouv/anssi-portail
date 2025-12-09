@@ -92,7 +92,6 @@ export const guideZeroTrust: Guide = {
   type: 'Guide',
   id: 'zero-trust',
   nom: 'Zero Trust',
-  resume: 'Les fondamentaux du modèle Zero Trust',
   description:
     "Les fondamentaux du modèle Zero Trust pour sécuriser les systèmes d'information",
   illustration: {
@@ -110,13 +109,13 @@ export const guideZeroTrust: Guide = {
   documents: [],
   dateMiseAJour: '20 Juin 2025',
   datePublication: '20 Juin 2025',
+  thematique: 'Les essentiels',
 };
 
 export const guideDevsecops: Guide = {
   type: 'Guide',
   id: 'devsecops',
   nom: 'DevSecOps',
-  resume: 'Intégrer la sécurité dans les pratiques DevOps',
   description:
     'Intégrer la sécurité dans les pratiques DevOps pour renforcer la sécurité du développement logiciel',
   illustration: {
@@ -134,13 +133,13 @@ export const guideDevsecops: Guide = {
   documents: [],
   dateMiseAJour: '13 Mars 2024',
   datePublication: '13 Mars 2024',
+  thematique: 'Les essentiels',
 };
 
 export const guideDevsecopsEN: Guide = {
   type: 'Guide',
   id: 'devsecops',
   nom: 'DevSecOps',
-  resume: 'Integrating security into DevOps practices',
   description:
     'Integrating security into DevOps practices to enhance software development security',
   illustration: {
@@ -158,4 +157,5 @@ export const guideDevsecopsEN: Guide = {
   documents: [],
   dateMiseAJour: '26 September 2024',
   datePublication: '26 September 2024',
+  thematique: 'Les essentiels',
 };

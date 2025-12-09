@@ -14,7 +14,6 @@ export enum Langue {
 }
 export interface Guide extends Item {
   type: 'Guide';
-  resume: string;
   description: string;
   langue: string;
   collections: CollectionGuide[];
