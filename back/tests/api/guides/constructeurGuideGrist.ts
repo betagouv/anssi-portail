@@ -5,7 +5,6 @@ export class ConstructeurGuideGrist {
   private numeroDeLigne: number = 0;
   private identifiant: string | null = null;
   private titre: string | null = null;
-  private resume: string | null = null;
   private description: string | null = null;
   private image: string | null = null;
   private langue: 'FR' | 'EN' | null = null;
@@ -28,11 +27,6 @@ export class ConstructeurGuideGrist {
 
   avecLeTitre(titre: string) {
     this.titre = titre;
-    return this;
-  }
-
-  avecLeResume(resume: string) {
-    this.resume = resume;
     return this;
   }
 
@@ -86,7 +80,6 @@ this.thematique = thematique;
       fields: {
         Identifiant: this.identifiant,
         Titre: this.titre,
-        Resume: this.resume,
         Description: this.description,
         Image: this.image,
         Langue: this.langue,

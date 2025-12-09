@@ -77,7 +77,6 @@ describe("L'entrepot de guide Grist", () => {
         .avecLeNumeroDeLigne(1)
         .avecLIdentifiant('guide1')
         .avecLeTitre('Premier guide')
-        .avecLeResume('Résumé du premier guide')
         .avecLaDescription('<p>Description du premier guide</p>')
         .avecLImage('vignette-1')
         .avecLaLangue('FR')
@@ -87,7 +86,6 @@ describe("L'entrepot de guide Grist", () => {
         .avecLeNumeroDeLigne(2)
         .avecLIdentifiant('guide2')
         .avecLeTitre('Deuxième guide')
-        .avecLeResume('Résumé du deuxième guide')
         .avecLaDescription('<p>Description du deuxième guide</p>')
         .avecLImage('vignette-2')
         .avecLaLangue('FR')
@@ -102,7 +100,6 @@ describe("L'entrepot de guide Grist", () => {
     const premierGuide = guides[0];
     assert.equal(premierGuide.id, 'guide1');
     assert.equal(premierGuide.nom, 'Premier guide');
-    assert.equal(premierGuide.resume, 'Résumé du premier guide');
     assert.equal(
       premierGuide.description,
       '<p>Description du premier guide</p>'
@@ -115,7 +112,6 @@ describe("L'entrepot de guide Grist", () => {
     const deuxiemeGuide = guides[1];
     assert.equal(deuxiemeGuide.id, 'guide2');
     assert.equal(deuxiemeGuide.nom, 'Deuxième guide');
-    assert.equal(deuxiemeGuide.resume, 'Résumé du deuxième guide');
     assert.equal(
       deuxiemeGuide.description,
       '<p>Description du deuxième guide</p>'
