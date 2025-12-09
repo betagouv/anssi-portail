@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { NiveauMaturite } from '../niveaux-maturite/NiveauxMaturite.type';
   import { profilStore } from '../stores/profil.store';
+  import Separateur from '../ui/Separateur.svelte';
   import EncartDeRecommandationMaturiteFaible from './EncartDeRecommandationMaturiteFaible.svelte';
   import EncartDeRecommandationMaturiteForte from './EncartDeRecommandationMaturiteForte.svelte';
 
@@ -12,12 +13,8 @@
     niveau.id === 'intermediaire';
 </script>
 
-<section class="separation">
-  <div class="contenu-section">
-    <hr />
-  </div>
-</section>
 {#if afficheDiagnostic}
+  <Separateur />
   <EncartDeRecommandationMaturiteFaible />
 {:else if $profilStore}
   <section class="votre-parcours">
@@ -34,17 +31,6 @@
     </div>
   </section>
 {:else}
+  <Separateur />
   <EncartDeRecommandationMaturiteForte />
 {/if}
-
-<style lang="scss">
-  section.separation {
-    padding-block: 0;
-
-    hr {
-      height: 1px;
-      border: 0;
-      background-color: #dddddd;
-    }
-  }
-</style>
