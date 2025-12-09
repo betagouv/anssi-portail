@@ -174,6 +174,26 @@ describe("L'entrepot de guide Grist", () => {
         { libelle: 'Le guide', nomFichier: 'guide.pdf' },
       ]);
     });
+
+    it('gère les libellés avec un caractère deux-points', async () => {
+      const entrepotGuideGrist = prepareEntrepotGristAvecEnregistrements([
+        new ConstructeurGuideGrist()
+          .avecLIdentifiant('guide1')
+          .avecLaChaineDeDocument(
+            'Le guide : la base de la cybersécurité : guide_base_cybersecu.pdf\n'
+          )
+          .construis(),
+      ]);
+
+      const guide1 = await entrepotGuideGrist.parId('guide1');
+
+      assert.deepEqual(guide1!.documents, [
+        {
+          libelle: 'Le guide : la base de la cybersécurité',
+          nomFichier: 'guide_base_cybersecu.pdf',
+        },
+      ]);
+    });
   });
 
   it('sait récupérer les dates', async () => {
@@ -191,10 +211,10 @@ describe("L'entrepot de guide Grist", () => {
     assert.equal(guide1!.dateMiseAJour, '12 Novembre 2024');
   });
 
-  it("sait récupérer les thématiques", async () => {
+  it('sait récupérer les thématiques', async () => {
     const entrepotGuideGrist = prepareEntrepotGristAvecEnregistrements([
       new ConstructeurGuideGrist()
-        .avecThematique("Internet des objets")
+        .avecThematique('Internet des objets')
         .construis(),
     ]);
 
@@ -203,7 +223,6 @@ describe("L'entrepot de guide Grist", () => {
     const guide = guides[0];
     assert.equal(guide.thematique, 'Internet des objets');
   });
-
 
   describe("lors d'une recherche par collection", () => {
     let entrepotGuideGrist: EntrepotGuideGrist;

@@ -57,10 +57,14 @@ export class EntrepotGuideGrist
       documents: guideGrist.fields.Documents
         ? guideGrist.fields.Documents.split('\n')
             .filter((l) => !!l)
-            .map((ligne) => ({
-              libelle: ligne.split(' : ')[0],
-              nomFichier: ligne.split(' : ')[1],
-            }))
+            .map((ligne) => {
+              const indexDernierDeuxPoints = ligne.lastIndexOf(':');
+
+              return {
+                libelle: ligne.substring(0, indexDernierDeuxPoints).trim(),
+                nomFichier: ligne.substring(indexDernierDeuxPoints + 1).trim(),
+              };
+            })
         : [],
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour ?? '',
       datePublication: guideGrist.fields.Date_de_publication ?? '',
