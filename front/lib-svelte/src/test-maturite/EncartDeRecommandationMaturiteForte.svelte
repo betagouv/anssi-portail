@@ -13,7 +13,7 @@
     <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
     <div class="apercu-comparaison">
       <div class="connexion">
-        <p>Connectez-vous ou inscrivez-vous sur MesServicesCyber.</p>
+        <p>Connectez-vous ou inscrivez-vous sur MesServicesCyber pour accéder à la comparaison de votre maturité cyber.</p>
         <dsfr-connect href="/oidc/connexion"></dsfr-connect>
       </div>
     </div>
