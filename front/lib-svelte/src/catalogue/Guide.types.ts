@@ -26,4 +26,5 @@ export interface Guide extends Item {
   datePublication: string;
   dateMiseAJour: string;
   illustration: { petite: string; grande: string };
+  thematique: string;
 }
