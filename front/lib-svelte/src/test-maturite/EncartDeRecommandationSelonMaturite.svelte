@@ -4,33 +4,26 @@
   import Separateur from '../ui/Separateur.svelte';
   import EncartDeRecommandationMaturiteFaible from './EncartDeRecommandationMaturiteFaible.svelte';
   import EncartDeRecommandationMaturiteForte from './EncartDeRecommandationMaturiteForte.svelte';
+  import EncartDeRecommandationVersCatalogue from './EncartDeRecommandationVersCatalogue.svelte';
+  import MessageNonResponsabilite from './MessageNonResponsabilite.svelte';
 
   export let niveau: NiveauMaturite;
 
-  $: afficheDiagnostic =
+  $: niveauFaible =
     niveau.id === 'insuffisant' ||
     niveau.id === 'emergent' ||
     niveau.id === 'intermediaire';
 </script>
 
-{#if afficheDiagnostic}
+{#if niveauFaible}
   <Separateur />
   <EncartDeRecommandationMaturiteFaible />
+  <MessageNonResponsabilite />
 {:else if $profilStore}
-  <section class="votre-parcours">
-    <div class="contenu-section">
-      <div class="tuile">
-        <img src="/assets/images/debuter-cyber.png" alt="" />
-        <h3>Les services et ressources cyber</h3>
-        <p>
-          Trouvez les services et les ressources adaptés à vos besoins et votre
-          maturité cyber.
-        </p>
-        <a href="/catalogue" class="bouton primaire">Découvrir</a>
-      </div>
-    </div>
-  </section>
+  <MessageNonResponsabilite />
+  <EncartDeRecommandationVersCatalogue />
 {:else}
   <Separateur />
   <EncartDeRecommandationMaturiteForte />
+  <MessageNonResponsabilite />
 {/if}
