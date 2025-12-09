@@ -1,4 +1,7 @@
 <script lang="ts">
+  const connexion = () => {
+    sessionStorage.setItem('pagePostConnexion', 'comparaison-maturite');
+  };
 </script>
 
 <section>
@@ -13,8 +16,12 @@
     <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
     <div class="apercu-comparaison">
       <div class="connexion">
-        <p>Connectez-vous ou inscrivez-vous sur MesServicesCyber pour accéder à la comparaison de votre maturité cyber.</p>
-        <dsfr-connect href="/oidc/connexion"></dsfr-connect>
+        <p>
+          Connectez-vous ou inscrivez-vous sur MesServicesCyber pour accéder à
+          la comparaison de votre maturité cyber.
+        </p>
+        <dsfr-connect on:click={connexion} href="/oidc/connexion"
+        ></dsfr-connect>
       </div>
     </div>
   </div>
@@ -62,7 +69,7 @@
       padding: 200px 16px;
       border-radius: 8px;
 
-      @include  a-partir-de(md) {
+      @include a-partir-de(md) {
         background-image: url('/assets/images/test-maturite/comparaison-floue-md.avif');
       }
 
@@ -75,11 +82,11 @@
         align-items: center;
         margin-inline: auto;
 
-        @include a-partir-de(md){
+        @include a-partir-de(md) {
           max-width: taille-pour-colonnes(8);
         }
 
-        @include a-partir-de(lg){
+        @include a-partir-de(lg) {
           max-width: taille-pour-colonnes(6);
         }
 
