@@ -156,6 +156,9 @@
           padding: 8px 16px 8px 12px;
           border-radius: 8px;
           width: max-content;
+          display: flex;
+          gap: 4px;
+
           &:hover {
             background-color: rgb(from var(--noir) r g b / 4%);
             cursor: pointer;
