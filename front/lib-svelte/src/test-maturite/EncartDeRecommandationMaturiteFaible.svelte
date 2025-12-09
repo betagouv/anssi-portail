@@ -26,7 +26,7 @@
       </hgroup>
       <ol>
         <li>Complétez et envoyez votre demande</li>
-        <li><span>Un <u>Aidant cyber</u> vous contacte rapidement</span></li>
+        <li>Un aidant cyber vous contacte rapidement</li>
         <li>Réalisez votre diagnostic (en visio ou sur site – 1h)</li>
         <li>
           Recevez vos 6 recommandations prioritaires pour renforcer votre
