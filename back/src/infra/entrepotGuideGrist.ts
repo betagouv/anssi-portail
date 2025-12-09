@@ -3,8 +3,8 @@ import { EntrepotGuide } from '../metier/entrepotGuide';
 import { Guide } from '../metier/guide';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { ClientHttp } from './clientHttp';
-import { aseptiseListeGrist } from './grist';
 import { EntrepotGrist } from './entrepotGrist';
+import { aseptiseListeGrist } from './grist';
 
 export type GuideGrist = {
   id: number;
@@ -19,6 +19,7 @@ export type GuideGrist = {
     Documents: string;
     Date_de_publication: string | null;
     Date_de_mise_a_jour: string | null;
+    Thematique: string | null;
   };
 };
 
@@ -65,6 +66,7 @@ export class EntrepotGuideGrist
         : [],
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour ?? '',
       datePublication: guideGrist.fields.Date_de_publication ?? '',
+      thematique: guideGrist.fields.Thematique ?? '',
     });
   }
 

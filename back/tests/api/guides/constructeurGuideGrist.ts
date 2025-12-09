@@ -14,6 +14,7 @@ export class ConstructeurGuideGrist {
   private documentsBruts: string | null = null;
   private datePublication: string | null = null;
   private dateMiseAJour: string | null = null;
+  private thematique: string | null = null;
 
   avecLeNumeroDeLigne(numerodeLigne: number) {
     this.numeroDeLigne = numerodeLigne;
@@ -74,6 +75,11 @@ export class ConstructeurGuideGrist {
     return this;
   }
 
+  avecThematique(thematique: string) {
+this.thematique = thematique;
+    return this;
+  }
+
   construis() {
     return {
       id: this.numeroDeLigne,
@@ -92,6 +98,7 @@ export class ConstructeurGuideGrist {
               .join('\n'),
         Date_de_publication: this.datePublication,
         Date_de_mise_a_jour: this.dateMiseAJour,
+        Thematique: this.thematique
       },
     } satisfies GuideGrist;
   }
