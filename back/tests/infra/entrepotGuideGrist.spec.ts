@@ -195,6 +195,20 @@ describe("L'entrepot de guide Grist", () => {
     assert.equal(guide1!.dateMiseAJour, '12 Novembre 2024');
   });
 
+  it("sait récupérer les thématiques", async () => {
+    const entrepotGuideGrist = prepareEntrepotGristAvecEnregistrements([
+      new ConstructeurGuideGrist()
+        .avecThematique("Internet des objets")
+        .construis(),
+    ]);
+
+    const guides = await entrepotGuideGrist.tous();
+
+    const guide = guides[0];
+    assert.equal(guide.thematique, 'Internet des objets');
+  });
+
+
   describe("lors d'une recherche par collection", () => {
     let entrepotGuideGrist: EntrepotGuideGrist;
     beforeEach(() => {

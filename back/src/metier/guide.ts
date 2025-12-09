@@ -11,6 +11,7 @@ export class Guide {
   documents: DocumentGuide[];
   datePublication: string;
   dateMiseAJour: string;
+  thematique: string;
 
   constructor(parametres: {
     id: string;
@@ -23,6 +24,7 @@ export class Guide {
     documents: DocumentGuide[];
     datePublication: string;
     dateMiseAJour: string;
+    thematique: string;
   }) {
     this.id = parametres.id;
     this.nom = parametres.nom;
@@ -34,6 +36,7 @@ export class Guide {
     this.documents = parametres.documents;
     this.datePublication = parametres.datePublication;
     this.dateMiseAJour = parametres.dateMiseAJour;
+    this.thematique = parametres.thematique;
   }
 
   async deMemesCollections(entrepotGuide: EntrepotGuide) {
