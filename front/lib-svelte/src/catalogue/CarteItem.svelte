@@ -16,7 +16,7 @@
     data-cible={item.nom}
   >
     <ContenuCarteItem
-      item={{ ...item, description: item.resume }}
+      item={{ ...item, description: item.nom }}
       {avecBoutonFavori}
     />
   </a>

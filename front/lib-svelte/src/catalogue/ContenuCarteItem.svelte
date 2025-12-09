@@ -41,8 +41,12 @@
 </figure>
 <div class="contenu">
   <div class="en-tete">
-    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-    <div class="nom-item">{@html item.nom}</div>
+    {#if item.type === 'Guide'}
+      <div class="nom-item">{item.thematique}</div>
+    {:else}
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+      <div class="nom-item">{@html item.nom}</div>
+    {/if}
     {#if avecBoutonFavori}
       <BoutonFavori idItem={item.id} />
     {/if}
