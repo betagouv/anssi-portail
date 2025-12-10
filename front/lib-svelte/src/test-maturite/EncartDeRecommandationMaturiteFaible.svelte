@@ -96,6 +96,7 @@
       background-color: #fef6e3;
       padding: 40px 16px;
       border-radius: 8px;
+      gap: 24px;
 
       @include a-partir-de(md) {
         padding: 40px;
@@ -152,7 +153,6 @@
         background-color: white;
         padding: 24px;
         border: 1px solid #ddd;
-        margin-bottom: 24px;
       }
       details {
         grid-area: faq;
