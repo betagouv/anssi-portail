@@ -1,3 +1,4 @@
+import { BesoinCyber } from './besoinCyber';
 import { EntrepotGuide } from './entrepotGuide';
 
 export class Guide {
@@ -11,6 +12,7 @@ export class Guide {
   datePublication: string;
   dateMiseAJour: string;
   thematique: string;
+  besoins: BesoinCyber[];
 
   constructor(parametres: {
     id: string;
@@ -23,6 +25,7 @@ export class Guide {
     datePublication: string;
     dateMiseAJour: string;
     thematique: string;
+    besoins: BesoinCyber[];
   }) {
     this.id = parametres.id;
     this.nom = parametres.nom;
@@ -34,6 +37,7 @@ export class Guide {
     this.datePublication = parametres.datePublication;
     this.dateMiseAJour = parametres.dateMiseAJour;
     this.thematique = parametres.thematique;
+    this.besoins = parametres.besoins;
   }
 
   async deMemesCollections(entrepotGuide: EntrepotGuide) {

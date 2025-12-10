@@ -270,4 +270,26 @@ describe("L'entrepot de guide Grist", () => {
       assert.equal(guides[2].id, 'guide3');
     });
   });
+
+  it('sait récupérer les besoins', async () => {
+    const entrepotGuideGrist = prepareEntrepotGristAvecEnregistrements([
+      new ConstructeurGuideGrist()
+        .avecBesoin('Réagir')
+        .avecBesoin('Sensibiliser')
+        .avecBesoin('Former')
+        .avecBesoin('Sécuriser')
+        .avecBesoin('Un besoin inconnu')
+        .construis(),
+    ]);
+
+    const guides = await entrepotGuideGrist.tous();
+
+    const guide = guides[0];
+    assert.deepEqual(guide.besoins, [
+      'REAGIR',
+      'ETRE_SENSIBILISE',
+      'SE_FORMER',
+      'SECURISER',
+    ]);
+  });
 });

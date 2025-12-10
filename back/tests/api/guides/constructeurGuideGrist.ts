@@ -9,11 +9,12 @@ export class ConstructeurGuideGrist {
   private image: string | null = null;
   private langue: 'FR' | 'EN' | null = null;
   private collections: string[] = [];
-  private documents: DocumentGuide[] = [];
+  private readonly documents: DocumentGuide[] = [];
   private documentsBruts: string | null = null;
   private datePublication: string | null = null;
   private dateMiseAJour: string | null = null;
   private thematique: string | null = null;
+  private readonly besoins: string[] = [];
 
   avecLeNumeroDeLigne(numerodeLigne: number) {
     this.numeroDeLigne = numerodeLigne;
@@ -70,7 +71,12 @@ export class ConstructeurGuideGrist {
   }
 
   avecThematique(thematique: string) {
-this.thematique = thematique;
+    this.thematique = thematique;
+    return this;
+  }
+
+  avecBesoin(besoin: string) {
+    this.besoins.push(besoin);
     return this;
   }
 
@@ -91,7 +97,8 @@ this.thematique = thematique;
               .join('\n'),
         Date_de_publication: this.datePublication,
         Date_de_mise_a_jour: this.dateMiseAJour,
-        Thematique: this.thematique
+        Thematique: this.thematique,
+        Besoins_cyber: this.besoins.length ? ['L', ...this.besoins] : [],
       },
     } satisfies GuideGrist;
   }
