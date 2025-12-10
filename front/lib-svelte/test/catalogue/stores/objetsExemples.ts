@@ -1,4 +1,5 @@
 import {
+  BesoinCyber,
   DroitAcces,
   type ItemCyber,
   Source,
@@ -110,6 +111,7 @@ export const guideZeroTrust: Guide = {
   dateMiseAJour: '20 Juin 2025',
   datePublication: '20 Juin 2025',
   thematique: 'Les essentiels',
+  besoins: [BesoinCyber.ETRE_SENSIBILISE, BesoinCyber.SE_FORMER],
 };
 
 export const guideDevsecops: Guide = {
@@ -134,6 +136,7 @@ export const guideDevsecops: Guide = {
   dateMiseAJour: '13 Mars 2024',
   datePublication: '13 Mars 2024',
   thematique: 'Les essentiels',
+  besoins: [],
 };
 
 export const guideDevsecopsEN: Guide = {
@@ -158,4 +161,5 @@ export const guideDevsecopsEN: Guide = {
   dateMiseAJour: '26 September 2024',
   datePublication: '26 September 2024',
   thematique: 'Les essentiels',
+  besoins: [],
 };

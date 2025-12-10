@@ -1,4 +1,4 @@
-import type { Item } from './Catalogue.types';
+import type { BesoinCyber, Item } from './Catalogue.types';
 
 export enum CollectionGuide {
   LES_ESSENTIELS = 'Les essentiels',
@@ -26,4 +26,5 @@ export interface Guide extends Item {
   dateMiseAJour: string;
   illustration: { petite: string; grande: string };
   thematique: string;
+  besoins: BesoinCyber[];
 }
