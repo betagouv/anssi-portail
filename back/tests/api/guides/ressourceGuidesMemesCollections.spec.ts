@@ -28,6 +28,7 @@ describe('La ressource des guides de mêmes collections', () => {
           dateMiseAJour: '',
           datePublication: '',
           thematique: '',
+          besoins: [],
         })
       );
       serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotGuide });

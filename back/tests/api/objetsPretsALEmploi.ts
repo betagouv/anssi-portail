@@ -65,6 +65,7 @@ export const guideZeroTrust = new Guide({
   dateMiseAJour: '20 Juin 2025',
   datePublication: '20 Juin 2025',
   thematique: 'Les essentiels',
+  besoins: ['REAGIR', 'SE_FORMER'],
 });
 
 export const guideDevsecops = new Guide({
@@ -84,4 +85,5 @@ export const guideDevsecops = new Guide({
   dateMiseAJour: '13 Mars 2024',
   datePublication: '13 Mars 2024',
   thematique: 'Les essentiels',
+  besoins: ['SECURISER'],
 });

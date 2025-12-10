@@ -5,6 +5,7 @@ import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { ClientHttp } from './clientHttp';
 import { EntrepotGrist } from './entrepotGrist';
 import { aseptiseListeGrist } from './grist';
+import { BesoinCyber } from '../metier/besoinCyber';
 
 export type GuideGrist = {
   id: number;
@@ -19,6 +20,7 @@ export type GuideGrist = {
     Date_de_publication: string | null;
     Date_de_mise_a_jour: string | null;
     Thematique: string | null;
+    Besoins_cyber: string[];
   };
 };
 
@@ -46,7 +48,23 @@ export class EntrepotGuideGrist
     );
   }
 
-  private convertisGuideGrist(guideGrist: GuideGrist): Guide {
+  private readonly convertiBesoin = (
+    besoin: string
+  ): BesoinCyber | undefined => {
+    switch (besoin) {
+      case 'Réagir':
+        return 'REAGIR';
+      case 'Sensibiliser':
+        return 'ETRE_SENSIBILISE';
+      case 'Former':
+        return 'SE_FORMER';
+      case 'Sécuriser':
+        return 'SECURISER';
+    }
+    return undefined;
+  };
+
+  private readonly convertisGuideGrist = (guideGrist: GuideGrist): Guide => {
     return new Guide({
       id: guideGrist.fields.Identifiant ?? '',
       nom: guideGrist.fields.Titre ?? '',
@@ -69,8 +87,11 @@ export class EntrepotGuideGrist
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour ?? '',
       datePublication: guideGrist.fields.Date_de_publication ?? '',
       thematique: guideGrist.fields.Thematique ?? '',
+      besoins: aseptiseListeGrist(guideGrist.fields.Besoins_cyber)
+        .map(this.convertiBesoin)
+        .filter((b) => !!b),
     });
-  }
+  };
 
   async parId(id: string): Promise<Guide | undefined> {
     return (await this.tous()).find((guide) => guide.id === id);

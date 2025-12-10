@@ -45,6 +45,7 @@ describe('La ressource qui gère les guides', () => {
       assert.equal(premierGuide.langue, 'FR');
       assert.equal(premierGuide.thematique, 'Les essentiels');
       assert.deepEqual(premierGuide.collections, ['Les essentiels']);
+      assert.deepEqual(premierGuide.besoins, ['REAGIR', 'SE_FORMER']);
 
       const secondGuide = reponse.body[1];
       assert.equal(secondGuide.id, 'devsecops');
@@ -60,8 +61,9 @@ describe('La ressource qui gère les guides', () => {
           'https://notre-cellar/guides/devsecops/anssi_essentiels_devsecops_v1-origine.avif',
       });
       assert.equal(secondGuide.langue, 'FR');
-      assert.equal(premierGuide.thematique, 'Les essentiels');
-      assert.deepEqual(premierGuide.collections, ['Les essentiels']);
+      assert.equal(secondGuide.thematique, 'Les essentiels');
+      assert.deepEqual(secondGuide.collections, ['Les essentiels']);
+      assert.deepEqual(secondGuide.besoins, ['SECURISER']);
     });
 
     it("expose les dates d'un guide", async () => {
