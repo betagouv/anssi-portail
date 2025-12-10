@@ -16,23 +16,25 @@
     </hgroup>
     <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
     <div class="demande-diagnostic">
-      <hgroup>
-        <h2>Protégez rapidement votre organisation des cyberattaques.</h2>
-        <p>
-          Profitez d’un premier diagnostic cyber gratuit accompagné par un
-          Aidant cyber et recevez 6 recommandations prioritaires à mettre en
-          place pour améliorer la cybersécurité de votre organisation.
-        </p>
-      </hgroup>
-      <ol>
-        <li>Complétez et envoyez votre demande</li>
-        <li>Un aidant cyber vous contacte rapidement</li>
-        <li>Réalisez votre diagnostic (en visio ou sur site – 1h)</li>
-        <li>
-          Recevez vos 6 recommandations prioritaires pour renforcer votre
-          cybersécurité
-        </li>
-      </ol>
+      <div class="explications">
+        <hgroup>
+          <h2>Protégez rapidement votre organisation des cyberattaques.</h2>
+          <p>
+            Profitez d’un premier diagnostic cyber gratuit accompagné par un
+            Aidant cyber et recevez 6 recommandations prioritaires à mettre en
+            place pour améliorer la cybersécurité de votre organisation.
+          </p>
+        </hgroup>
+        <ol>
+          <li>Complétez et envoyez votre demande</li>
+          <li>Un aidant cyber vous contacte rapidement</li>
+          <li>Réalisez votre diagnostic (en visio ou sur site – 1h)</li>
+          <li>
+            Recevez vos 6 recommandations prioritaires pour renforcer votre
+            cybersécurité
+          </li>
+        </ol>
+      </div>
 
       <div class="formulaire">
         <FormulaireDemandeSimplifiee />
@@ -89,7 +91,7 @@
     .demande-diagnostic {
       display: grid;
       grid-template-areas:
-        'preambule'
+        'explications'
         'etapes'
         'formulaire'
         'faq';
@@ -104,23 +106,23 @@
 
       @include a-partir-de(lg) {
         grid-template-areas:
-          'preambule formulaire'
-          'etapes formulaire'
+          'explications formulaire'
           'faq faq';
       }
 
-      hgroup {
-        grid-area: preambule;
-        h2 {
-          margin-bottom: 16px;
-        }
+      .explications {
+        grid-area: explications;
+        hgroup {
+          h2 {
+            margin-bottom: 16px;
+          }
 
-        p {
-          margin-bottom: 32px;
+          p {
+            margin-bottom: 32px;
+          }
         }
       }
       ol {
-        grid-area: etapes;
         display: flex;
         flex-direction: column;
         gap: 16px;
