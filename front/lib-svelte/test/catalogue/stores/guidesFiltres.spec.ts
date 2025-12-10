@@ -1,11 +1,12 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { Langue } from '../../../src/catalogue/Guide.types';
-import { CollectionGuide } from '../../../src/catalogue/Guide.types';
+import { BesoinCyber } from '../../../src/catalogue/Catalogue.types';
+import { CollectionGuide, Langue } from '../../../src/catalogue/Guide.types';
 import { guidesStore } from '../../../src/catalogue/stores/guides/guides.store';
 import { guidesFiltres } from '../../../src/catalogue/stores/guides/guidesFiltres.store';
 import { rechercheParCollection } from '../../../src/catalogue/stores/guides/rechercheParCollection.store';
 import { rechercheParLangue } from '../../../src/catalogue/stores/guides/rechercheParLangue.store';
+import { rechercheParBesoin } from '../../../src/catalogue/stores/rechercheParBesoin.store';
 import { rechercheTextuelle } from '../../../src/catalogue/stores/rechercheTextuelle.store';
 import {
   guideDevsecops,
@@ -97,6 +98,18 @@ describe('Le store des guides filtrés', () => {
       const { resultats } = get(guidesFiltres);
 
       expect(resultats.length).toBe(2);
+    });
+  });
+
+  describe("sur application d'un filtre de besoin", () => {
+    it('conserve uniquement les items correspondants', () => {
+      guidesStore.initialise([guideZeroTrust, guideDevsecopsEN]);
+      rechercheParBesoin.set(BesoinCyber.SE_FORMER);
+
+      const { resultats } = get(guidesFiltres);
+
+      expect(resultats.length).toBe(1);
+      expect(resultats[0].nom).toBe('Zero Trust');
     });
   });
 });
