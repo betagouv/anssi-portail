@@ -16,25 +16,62 @@
   import { guidesFiltres } from './stores/guides/guidesFiltres.store';
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
+  import { rechercheParLangue } from './stores/guides/rechercheParLangue.store';
+  import { Langue } from './Guide.types';
+  import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
+  import type { BesoinCyber } from './Catalogue.types';
+  import { creeLeFragmentDeNavigation } from './fragmentDeNavigation';
+  import { rechercheParCollection } from './stores/guides/rechercheParCollection.store';
 
   const { featureFlagGuides }: { featureFlagGuides: boolean } = $props();
 
-  const reinitialiseFiltres = () => recherches.reinitialise();
-  let chargement = $state(false);
-
-  let modeAffichage = $state<'guides' | 'ressourcesEtServices'>(
-    window.location.hash === '#guides' ? 'guides' : 'ressourcesEtServices'
+  // Gestion du fragment
+  let fragmentDeNavigation = $state(
+    creeLeFragmentDeNavigation(window.location.hash)
   );
-
-  const afficheLesServicesEtRessources = () => {
-    modeAffichage = 'ressourcesEtServices';
-    window.location.hash = '#ressourcesEtServices';
+  const changeLeFragmentDeNavigation = () => {
+    fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
+    appliqueLesFiltres();
   };
-  const afficheLesGuides = () => {
-    modeAffichage = 'guides';
-    window.location.hash = '#guides';
+  $effect(() => {
+    window.addEventListener('hashchange', changeLeFragmentDeNavigation);
+    return () => {
+      window.removeEventListener('hashchange', changeLeFragmentDeNavigation);
+    };
+  });
+
+  // Gestion de la section
+  type Section = 'guides' | 'ressourcesEtServices';
+  let sectionActive = $derived<Section>(
+    fragmentDeNavigation.section === 'guides'
+      ? 'guides'
+      : 'ressourcesEtServices'
+  );
+  const changeDeSection = (section: Section) => {
+    sectionActive = section;
+    fragmentDeNavigation.changeSection(section);
+    window.location.hash = fragmentDeNavigation.serialise();
   };
 
+  // Gestion des filtres
+  const reinitialiseFiltres = () => recherches.reinitialise();
+  const appliqueLesFiltres = () => {
+    $rechercheParBesoin = fragmentDeNavigation.extraisValeur<BesoinCyber>(
+      'besoin',
+      null
+    );
+    $rechercheParLangue =
+      fragmentDeNavigation.extraisTableau<Langue>('langues');
+  };
+  appliqueLesFiltres();
+  $effect(() => {
+    fragmentDeNavigation.change('besoin', $rechercheParBesoin);
+    fragmentDeNavigation.change('langues', $rechercheParLangue);
+    window.location.hash = fragmentDeNavigation.serialise();
+  });
+
+  // Gestion du chargement
+  let chargement = $state(false);
   onMount(async () => {
     try {
       chargement = true;
@@ -88,16 +125,16 @@
   <div class="controle-segmente">
     <button
       class="bouton-segmente"
-      class:actif={modeAffichage === 'ressourcesEtServices'}
-      onclick={afficheLesServicesEtRessources}
+      class:actif={sectionActive === 'ressourcesEtServices'}
+      onclick={() => changeDeSection('ressourcesEtServices')}
     >
       <lab-anssi-icone nom="list-check"></lab-anssi-icone>
       <span>Services et outils</span>
     </button>
     <button
       class="bouton-segmente"
-      class:actif={modeAffichage === 'guides'}
-      onclick={afficheLesGuides}
+      class:actif={sectionActive === 'guides'}
+      onclick={() => changeDeSection('guides')}
     >
       <lab-anssi-icone nom="book-2-line"></lab-anssi-icone>
       <span>Guides de l'ANSSI</span>
@@ -112,7 +149,7 @@
         <ChampRecherche bind:recherche={$rechercheTextuelle} />
         <EnteteFiltres />
         <div class="barre-filtres">
-          {#if modeAffichage === 'guides'}
+          {#if sectionActive === 'guides'}
             <FiltreLangue />
             <FiltreCollection />
           {:else}
@@ -129,7 +166,7 @@
         </div>
       </div>
 
-      {#if modeAffichage === 'guides'}
+      {#if sectionActive === 'guides'}
         {#each $guidesFiltres.resultats as guide (guide.id)}
           <CarteItem item={guide} avecBoutonFavori />
         {:else}
