@@ -27,7 +27,7 @@
   <section class="chapeau">
     <div class="contenu-section">
       <FilAriane
-        branche={{ nom: 'Catalogue cyber', lien: '/catalogue' }}
+        branche={{ nom: 'Catalogue cyber', lien: '/catalogue#guides' }}
         feuille={guide.nom}
       />
       <div class="badges-collections">
