@@ -7,8 +7,8 @@ export const guidePresentation =
     nomImage: undefined,
     image: guide.nomImage
       ? {
-          petite: `${adaptateurEnvironnement.urlCellar().guides()}/${guide.id}/${guide.nomImage}-588.avif`,
-          grande: `${adaptateurEnvironnement.urlCellar().guides()}/${guide.id}/${guide.nomImage}-origine.avif`,
+          petite: `${adaptateurEnvironnement.urlCellar().guides()}${guide.id}/${guide.nomImage}-588.avif`,
+          grande: `${adaptateurEnvironnement.urlCellar().guides()}${guide.id}/${guide.nomImage}-origine.avif`,
         }
       : null,
     documents: guide.documents.map((document) => ({

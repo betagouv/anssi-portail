@@ -123,9 +123,9 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     dureeCacheEnSecondes: () => CINQ_MINUTES,
   }),
   urlCellar: () => ({
-    guides: () => 'https://guides.notre-cellar',
-    ressourcesCyber: () => 'https://ressources-cyber.notre-cellar',
-    visas: () => 'https://visas.notre-cellar',
+    guides: () => 'https://guides.notre-cellar/',
+    ressourcesCyber: () => 'https://ressources-cyber.notre-cellar/',
+    visas: () => 'https://visas.notre-cellar/',
   }),
 };
 

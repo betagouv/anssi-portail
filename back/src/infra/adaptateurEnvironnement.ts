@@ -50,6 +50,10 @@ type AdaptateurEnvironnement = {
   };
 };
 
+const ajouteBarreObliqueFinale = (url: string): string => {
+  return url.endsWith('/') ? url : `${url}/`;
+};
+
 const CINQ_MINUTES = 300;
 
 const adaptateurEnvironnement: AdaptateurEnvironnement = {
@@ -178,23 +182,29 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     return {
       guides: () =>
         process.env.CELLAR_BUCKET_GUIDES
-          ? pattternURLDeBase.replace(
-              '%BUCKET%',
-              process.env.CELLAR_BUCKET_GUIDES
+          ? ajouteBarreObliqueFinale(
+              pattternURLDeBase.replace(
+                '%BUCKET%',
+                process.env.CELLAR_BUCKET_GUIDES
+              )
             )
           : '',
       ressourcesCyber: () =>
         process.env.CELLAR_BUCKET_RESSOURCES_CYBER
-          ? pattternURLDeBase.replace(
-              '%BUCKET%',
-              process.env.CELLAR_BUCKET_RESSOURCES_CYBER
+          ? ajouteBarreObliqueFinale(
+              pattternURLDeBase.replace(
+                '%BUCKET%',
+                process.env.CELLAR_BUCKET_RESSOURCES_CYBER
+              )
             )
           : '',
       visas: () =>
         process.env.CELLAR_BUCKET_VISAS
-          ? pattternURLDeBase.replace(
-              '%BUCKET%',
-              process.env.CELLAR_BUCKET_VISAS
+          ? ajouteBarreObliqueFinale(
+              pattternURLDeBase.replace(
+                '%BUCKET%',
+                process.env.CELLAR_BUCKET_VISAS
+              )
             )
           : '',
     };
