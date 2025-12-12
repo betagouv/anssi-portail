@@ -5,6 +5,7 @@ import { rechercheParBesoin } from './rechercheParBesoin.store';
 import { rechercheParDroitAcces } from './rechercheParDroitAcces.store';
 import { rechercheParSource } from './rechercheParSource.store';
 import { rechercheParTypologie } from './rechercheParTypologie.store';
+import { rechercheTextuelle } from './rechercheTextuelle.store';
 
 const recherches2 = derived(
   [
@@ -42,5 +43,6 @@ export const recherches = {
     rechercheParSource.reinitialise();
     rechercheParLangue.reinitialise();
     rechercheParCollection.reinitialise();
+    rechercheTextuelle.reinitialise();
   },
 };
