@@ -85,6 +85,7 @@
     $rechercheParCollection = depuisIdsCollection(
       fragmentDeNavigation.extraisTableau<CollectionGuide>('collections')
     );
+    $rechercheTextuelle = fragmentDeNavigation.extraisValeur('q', '');
   };
   appliqueLesFiltres();
   $effect(() => {
@@ -94,6 +95,7 @@
       'collections',
       versIdsCollection($rechercheParCollection)
     );
+    fragmentDeNavigation.change('q', $rechercheTextuelle);
     window.location.hash = fragmentDeNavigation.serialise();
   });
 
