@@ -15,6 +15,7 @@ import { rechercheParDroitAcces } from '../../../src/catalogue/stores/rechercheP
 import { rechercheParSource } from '../../../src/catalogue/stores/rechercheParSource.store';
 import { rechercheParTypologie } from '../../../src/catalogue/stores/rechercheParTypologie.store';
 import { recherches } from '../../../src/catalogue/stores/recherches.store';
+import { rechercheTextuelle } from '../../../src/catalogue/stores/rechercheTextuelle.store';
 
 describe('Le store des recherches', () => {
   beforeEach(() => {
@@ -24,6 +25,7 @@ describe('Le store des recherches', () => {
     rechercheParSource.set([]);
     rechercheParLangue.set([]);
     rechercheParCollection.set([]);
+    rechercheTextuelle.set('');
   });
 
   describe("indique qu'un filtre est actif lorsque ", () => {
@@ -69,6 +71,14 @@ describe('Le store des recherches', () => {
 
     it('la recherche par collection est active', () => {
       rechercheParCollection.set([CollectionGuide.CRISE_CYBER]);
+
+      const { filtreActif } = get(recherches);
+
+      expect(filtreActif).toBe(true);
+    });
+
+    it('la recherche textuelle est active', () => {
+      rechercheTextuelle.set('bonjour');
 
       const { filtreActif } = get(recherches);
 

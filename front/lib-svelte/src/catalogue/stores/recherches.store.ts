@@ -15,6 +15,7 @@ const recherches2 = derived(
     rechercheParSource,
     rechercheParLangue,
     rechercheParCollection,
+    rechercheTextuelle,
   ],
   ([
     $rechercheParDroitAcces,
@@ -23,6 +24,7 @@ const recherches2 = derived(
     $rechercheParSource,
     $rechercheParLangue,
     $rechercheParCollection,
+    $rechercheTextuelle,
   ]) => ({
     filtreActif:
       $rechercheParDroitAcces.length !== 0 ||
@@ -30,7 +32,8 @@ const recherches2 = derived(
       $rechercheParTypologie.length !== 0 ||
       $rechercheParSource.length !== 0 ||
       $rechercheParLangue.length !== 0 ||
-      $rechercheParCollection.length !== 0,
+      $rechercheParCollection.length !== 0 ||
+      $rechercheTextuelle.length > 0,
   })
 );
 
