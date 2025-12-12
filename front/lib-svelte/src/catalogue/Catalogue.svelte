@@ -17,13 +17,33 @@
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
   import { rechercheParLangue } from './stores/guides/rechercheParLangue.store';
-  import { Langue } from './Guide.types';
+  import { CollectionGuide, Langue } from './Guide.types';
   import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
   import type { BesoinCyber } from './Catalogue.types';
   import { creeLeFragmentDeNavigation } from './fragmentDeNavigation';
   import { rechercheParCollection } from './stores/guides/rechercheParCollection.store';
 
   const { featureFlagGuides }: { featureFlagGuides: boolean } = $props();
+
+  const idsCollectionsGuide: Record<CollectionGuide, string> = {
+    [CollectionGuide.LES_ESSENTIELS]: 'essentiels',
+    [CollectionGuide.LES_FONDAMENTAUX]: 'fondamentaux',
+    [CollectionGuide.CRISE_CYBER]: 'crise-cyber',
+    [CollectionGuide.GESTION_DES_RISQUES_CYBER]: 'gestion-risques-cyber',
+    [CollectionGuide.SUPERVISION_DE_SECURITE]: 'supervision-securite',
+    [CollectionGuide.REMEDIATION]: 'remediation',
+  };
+  const nomsCollectionsGuide = Object.fromEntries(
+    Object.entries(idsCollectionsGuide).map(([cle, valeur]) => [
+      valeur,
+      cle as CollectionGuide,
+    ])
+  );
+  const versIdsCollection = (collections: CollectionGuide[]): string[] =>
+    collections.map((c) => idsCollectionsGuide[c]);
+
+  const depuisIdsCollection = (idsCollection: string[]): CollectionGuide[] =>
+    idsCollection.map((i) => nomsCollectionsGuide[i]);
 
   // Gestion du fragment
   let fragmentDeNavigation = $state(
@@ -62,14 +82,18 @@
     );
     $rechercheParLangue =
       fragmentDeNavigation.extraisTableau<Langue>('langues');
-    $rechercheParCollection =
-      fragmentDeNavigation.extraisTableau('collections');
+    $rechercheParCollection = depuisIdsCollection(
+      fragmentDeNavigation.extraisTableau<CollectionGuide>('collections')
+    );
   };
   appliqueLesFiltres();
   $effect(() => {
     fragmentDeNavigation.change('besoin', $rechercheParBesoin);
     fragmentDeNavigation.change('langues', $rechercheParLangue);
-    fragmentDeNavigation.change('collections', $rechercheParCollection);
+    fragmentDeNavigation.change(
+      'collections',
+      versIdsCollection($rechercheParCollection)
+    );
     window.location.hash = fragmentDeNavigation.serialise();
   });
 
