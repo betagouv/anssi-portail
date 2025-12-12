@@ -7,6 +7,7 @@ type ExtraisValeur = {
 export type FragmentDeNavigation = {
   section?: string;
   change: <T>(cle: string, valeur: T | T[]) => void;
+  changeSection: (section: string) => void;
   extraisTableau: <T>(cle: string) => T[];
   extraisValeur: ExtraisValeur;
   serialise(): string;
@@ -21,11 +22,15 @@ export const creeLeFragmentDeNavigation = (
   for (const [cle, valeur] of parametres.entries()) {
     if (valeur) filtres[cle] = valeur.split(',').filter((v) => !!v);
   }
+  let sectionEffective = section || undefined;
   return {
-    section: section || undefined,
+    section: sectionEffective,
     change: <T>(cle: string, valeur: T | T[]) => {
       const tmp = Array.isArray(valeur) ? valeur : valeur ? [valeur] : [];
       filtres[cle] = tmp.map((valeur) => valeur as unknown as string);
+    },
+    changeSection: (section: string) => {
+      sectionEffective = section;
     },
     extraisTableau: <T>(cle: string): T[] =>
       filtres[cle]?.map((valeur: string) => valeur as unknown as T) ?? [],
@@ -43,7 +48,11 @@ export const creeLeFragmentDeNavigation = (
         })
         .filter((v) => !!v)
         .join('&');
-      return '#' + section + (chaineFiltres.length ? `?${chaineFiltres}` : '');
+      return (
+        '#' +
+        (sectionEffective ?? '') +
+        (chaineFiltres.length ? `?${chaineFiltres}` : '')
+      );
     },
   };
 };
