@@ -62,11 +62,14 @@
     );
     $rechercheParLangue =
       fragmentDeNavigation.extraisTableau<Langue>('langues');
+    $rechercheParCollection =
+      fragmentDeNavigation.extraisTableau('collections');
   };
   appliqueLesFiltres();
   $effect(() => {
     fragmentDeNavigation.change('besoin', $rechercheParBesoin);
     fragmentDeNavigation.change('langues', $rechercheParLangue);
+    fragmentDeNavigation.change('collections', $rechercheParCollection);
     window.location.hash = fragmentDeNavigation.serialise();
   });
 
