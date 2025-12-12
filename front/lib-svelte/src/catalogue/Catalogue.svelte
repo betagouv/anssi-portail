@@ -14,12 +14,13 @@
   import { catalogueFiltre } from './stores/catalogueFiltre.store';
   import { chargeGuidesDansLeStore } from './stores/guides/guides.store';
   import { guidesFiltres } from './stores/guides/guidesFiltres.store';
+  import { rechercheParDroitAcces } from './stores/rechercheParDroitAcces.store';
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
   import { rechercheParLangue } from './stores/guides/rechercheParLangue.store';
   import { CollectionGuide, Langue } from './Guide.types';
   import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
-  import type { BesoinCyber } from './Catalogue.types';
+  import { type BesoinCyber, DroitAcces } from './Catalogue.types';
   import { creeLeFragmentDeNavigation } from './fragmentDeNavigation';
   import { rechercheParCollection } from './stores/guides/rechercheParCollection.store';
 
@@ -86,6 +87,8 @@
       fragmentDeNavigation.extraisTableau<CollectionGuide>('collections')
     );
     $rechercheTextuelle = fragmentDeNavigation.extraisValeur('q', '');
+    $rechercheParDroitAcces =
+      fragmentDeNavigation.extraisTableau<DroitAcces>('accessibilite');
   };
   appliqueLesFiltres();
   $effect(() => {
@@ -96,6 +99,7 @@
       versIdsCollection($rechercheParCollection)
     );
     fragmentDeNavigation.change('q', $rechercheTextuelle);
+    fragmentDeNavigation.change('accessibilite', $rechercheParDroitAcces);
     window.location.hash = fragmentDeNavigation.serialise();
   });
 
