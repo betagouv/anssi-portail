@@ -67,4 +67,54 @@ describe('Le fragment de navigation', () => {
       expect(rechercheTextuel).toEqual('');
     });
   });
+
+  it('sérialise le fragment de navigation', () => {
+    const fragmentDeNavigation = creeLeFragmentDeNavigation(
+      '#section?besoin=REAGIR&langues=EN,FR'
+    );
+
+    const versionSerialisee = fragmentDeNavigation.serialise();
+
+    expect(versionSerialisee).toBe('#section?besoin=REAGIR&langues=EN,FR');
+  });
+
+  it('modifie le filtre avec une seule valeur', () => {
+    const fragmentDeNavigation = creeLeFragmentDeNavigation('#?besoin=REAGIR');
+
+    fragmentDeNavigation.change('besoin', BesoinCyber.SECURISER);
+
+    expect(fragmentDeNavigation.extraisValeur<BesoinCyber>('besoin')).toBe(
+      BesoinCyber.SECURISER
+    );
+  });
+
+  it('modifie le filtre avec plusieurs valeurs', () => {
+    const fragmentDeNavigation = creeLeFragmentDeNavigation('#?langues=FR');
+
+    fragmentDeNavigation.change('langues', [Langue.EN, Langue.FR]);
+
+    expect(fragmentDeNavigation.extraisTableau<Langue>('langues')).toEqual([
+      Langue.EN,
+      Langue.FR,
+    ]);
+  });
+
+  describe("lorsqu'on affecte une valeur vide", () => {
+    it('supprime le filtre de type tableau', () => {
+      const fragmentDeNavigation = creeLeFragmentDeNavigation('#?langues=FR');
+
+      fragmentDeNavigation.change('langues', []);
+
+      expect(fragmentDeNavigation.serialise()).toEqual('#');
+    });
+
+    it('supprime le filtre de type chaine', () => {
+      const fragmentDeNavigation =
+        creeLeFragmentDeNavigation('#?besoin=REAGIR');
+
+      fragmentDeNavigation.change('besoin', null);
+
+      expect(fragmentDeNavigation.serialise()).toEqual('#');
+    });
+  });
 });
