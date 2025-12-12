@@ -117,4 +117,12 @@ describe('Le fragment de navigation', () => {
       expect(fragmentDeNavigation.serialise()).toEqual('#');
     });
   });
+
+  it('permet de modifier la section', () => {
+    const fragmentDeNavigation = creeLeFragmentDeNavigation('#section');
+
+    fragmentDeNavigation.changeSection('autre-section');
+
+    expect(fragmentDeNavigation.serialise()).toBe('#autre-section');
+  });
 });
