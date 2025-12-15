@@ -6,7 +6,7 @@ avecFicheDetaillee: true
 titreHtml: DemainSpécialisteCyber
 description: S’informer sur la cybersécurité et ses métiers
 illustration: demainspecialistecyber/demainspecialistecyber.png
-lien: https://www.demainspecialistecyber.fr/
+lien: https://demainspecialiste.cyber.gouv.fr/
 droitsAcces:
   - ACCES_LIBRE
 sources:
