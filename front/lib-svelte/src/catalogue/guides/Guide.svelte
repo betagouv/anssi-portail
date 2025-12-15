@@ -1,23 +1,26 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import BoutonFavori from '../../favoris/BoutonFavori.svelte';
   import FilAriane from '../../ui/FilAriane.svelte';
   import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
   import type { Guide } from '../Guide.types';
-  import BadgesDeCollections from './BadgesDeCollections.svelte';
-  import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
-  import { decodeEntitesHtml } from './guide';
-  import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
-  import BoutonFavori from '../../favoris/BoutonFavori.svelte';
   import {
     chargeGuidesDansLeStore,
     guidesStore,
   } from '../stores/guides/guides.store';
+  import BadgesDeCollections from './BadgesDeCollections.svelte';
+  import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
+  import { decodeEntitesHtml } from './guide';
+  import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
 
   let guide: Guide | undefined;
   onMount(async () => {
     const slug = window.location.href.split('/').at(-1);
     await chargeGuidesDansLeStore();
     guide = $guidesStore.find((g) => g.id === `/guides/${slug}`);
+    if (guide) {
+      document.title = decodeEntitesHtml(guide.nom) + ' | MesServicesCyber';
+    }
   });
   $: aDesCollections = guide && guide.collections.length > 0;
   $: descriptionAspetisee = aseptiseHtml(guide?.description ?? '');
