@@ -16,7 +16,7 @@ describe('La ressource de visa', () => {
       ...configurationDeTestDuServeur,
       cellar: {
         get: () =>
-          Promise.resolve({ contenu: Buffer.from(''), typeDeContenu: '' }),
+          Promise.resolve({ contenu: Buffer.from(''), typeDeContenu: 'application/pdf' }),
       },
     };
     serveur = creeServeur(configurationDuServeur);
@@ -56,11 +56,23 @@ describe('La ressource de visa', () => {
       assert.equal(reponse.body, 'ABCD');
     });
 
+    it('indique le type de contenu', async () => {
+      configurationDuServeur.cellar.get = async () => ({
+        contenu: Buffer.from(''),
+        typeDeContenu: 'application/xml',
+      });
+      const reponse = await request(serveur).get(
+        '/visas/anssi_back to basics_pki_1.0.xml'
+      );
+
+      assert.equal(reponse.headers['content-type'], 'application/xml');
+    });
+
     describe("lorsque le fichier de qualification n'existe pas", () => {
       it('répond 404', async () => {
         configurationDuServeur.cellar.get = async () => undefined;
         const reponse = await request(serveur).get(
-          '/qualifications/fichier-qui-n-existe-pas.pdf'
+          '/visas/fichier-qui-n-existe-pas.pdf'
         );
 
         assert.equal(reponse.status, 404);
