@@ -151,7 +151,7 @@
   <p>
     Participez à un webinaire pour en savoir plus sur le diagnostic cyber.
     <lab-anssi-lien
-      href="https://app.livestorm.co/anssi/webinaire-cyberdepart"
+      href="https://app.livestorm.co/lab-anssi/webinaire-cyberdepart"
       titre="Je m’inscris"
       apparence="lien-texte"
       cible="_blank"
