@@ -15,7 +15,7 @@ export const ressourceVisa = ({ cellar }: ConfigurationServeur): Router => {
         }
 
         reponse
-          .contentType('application/pdf')
+          .contentType(documentCellar.typeDeContenu)
           .status(200)
           .send(documentCellar.contenu);
       } catch (erreur: Error | unknown) {
