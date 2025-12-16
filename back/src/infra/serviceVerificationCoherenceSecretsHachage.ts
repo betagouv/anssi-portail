@@ -1,6 +1,10 @@
-import { EntrepotSecretHachage } from './entrepotSecretHachagePostgres';
-import { AdaptateurHachage } from './adaptateurHachage';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
+import { AdaptateurHachage } from './adaptateurHachage';
+import { EntrepotSecretHachage } from './entrepotSecretHachagePostgres';
+
+export type ServiceCoherenceSecretsDeHachage = {
+  verifieCoherenceSecrets: () => Promise<void>;
+};
 
 const verifieQueChaqueSecretEstCoherent = async (
   tousLesSecretsDeHachageDeLaConfig: { version: number; secret: string }[],
@@ -54,7 +58,7 @@ export const fabriqueServiceVerificationCoherenceSecretsHachage = ({
   entrepotSecretHachage: EntrepotSecretHachage;
   adaptateurHachage: AdaptateurHachage;
   adaptateurEnvironnement: AdaptateurEnvironnement;
-}) => ({
+}): ServiceCoherenceSecretsDeHachage => ({
   verifieCoherenceSecrets: async () => {
     const empreintesDesSecretsAppliques = await entrepotSecretHachage.tous();
     const tousLesSecretsDeHachageDeLaConfig = adaptateurEnvironnement
