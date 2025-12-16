@@ -11,6 +11,7 @@ export type AdaptateurHachage = {
   hacheBCrypt: (valeur: string) => Promise<string>;
   compareBCrypt: (valeurEnClair: string, empreinte: string) => Promise<boolean>;
   hache: (valeur: string) => string;
+  hacheAvecUnSeulSecret: (valeur: string, secret: string) => string;
 };
 
 export const fabriqueAdaptateurHachage = ({
@@ -23,6 +24,8 @@ export const fabriqueAdaptateurHachage = ({
 
   compareBCrypt: (valeurEnClair, empreinte) =>
     compareBCrypt(valeurEnClair, empreinte),
+
+  hacheAvecUnSeulSecret,
 
   hache: (valeur: string): string => {
     const secrets = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
