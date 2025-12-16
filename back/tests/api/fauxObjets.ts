@@ -178,6 +178,8 @@ export const fauxAdaptateurHachage: AdaptateurHachage = {
     _valeurEnClair: string,
     _empreinte: string
   ): Promise<boolean> => true,
+  hacheAvecUnSeulSecret: (valeur: string, secret: string): string =>
+    `${valeur}-${secret}-hache`,
 };
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
