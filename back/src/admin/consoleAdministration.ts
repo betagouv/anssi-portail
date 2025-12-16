@@ -31,6 +31,7 @@ import { CodeSecteur } from '../metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
 import { ReponsesTestMaturite } from '../metier/resultatTestMaturite';
 import { Utilisateur } from '../metier/utilisateur';
+import { MigrationHash } from './migrationHash';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
@@ -466,5 +467,9 @@ export class ConsoleAdministration {
         });
       }
     );
+  }
+
+  async migreTousLesHaches(version: number, sel: string) {
+    await new MigrationHash().migreTout(version, sel);
   }
 }
