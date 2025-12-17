@@ -23,11 +23,5 @@
     "concurrently": "~9.2.1",
     "tsx": "~4.19.3",
     "vitest": "~3.0.5"
-  },
-  "workspaces": [
-    "back",
-    "front",
-    "front/lib-svelte",
-    "recuperation-guides"
-  ]
+  }
 }

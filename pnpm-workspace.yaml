@@ -1,4 +1,10 @@
 # _c.f._ https://pnpm.io/settings
 
+packages:
+  - 'back'
+  - 'front'
+  - 'front/lib-svelte'
+  - 'recuperation-guides'
+
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 preferFrozenLockfile: true
