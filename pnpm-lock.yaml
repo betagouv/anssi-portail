@@ -138,6 +138,9 @@ importers:
         specifier: ~1.5.4
         version: 1.5.4
     devDependencies:
+      '@eslint/js':
+        specifier: ~9.39.1
+        version: 9.39.1
       '@sveltejs/vite-plugin-svelte':
         specifier: ~5.1.1
         version: 5.1.1(svelte@5.25.12)(vite@6.4.1(@types/node@22.13.17)(sass@1.93.3)(tsx@4.19.3))
