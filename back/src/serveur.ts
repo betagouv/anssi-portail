@@ -6,6 +6,7 @@ import { creeServeur } from './api/msc';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
 import { BusEvenements } from './bus/busEvenements';
 import { cableTousLesAbonnes } from './bus/cablage';
+import { adaptateurCellar } from './infra/adaptateurCellar';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
@@ -18,21 +19,20 @@ import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
 import { adaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist';
+import { EntrepotGuideGrist } from './infra/entrepotGuideGrist';
 import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
 import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres';
 import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPostgres';
 import { messagerieMattermost } from './infra/messagerieMattermost';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
-import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 import { EntrepotGuide } from './metier/entrepotGuide';
-import { EntrepotGuideGrist } from './infra/entrepotGuideGrist';
-import { adaptateurCellar } from './infra/adaptateurCellar';
+import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
-const adaptateurChiffrement = fabriqueAdaptateurChiffrement({
-  adaptateurEnvironnement,
-});
+const adaptateurChiffrement = fabriqueAdaptateurChiffrement(
+  adaptateurEnvironnement
+);
 const adaptateurJournal = fabriqueAdaptateurJournal();
 const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
 const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber();
