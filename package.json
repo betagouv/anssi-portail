@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "serveur.ts",
+  "packageManager": "pnpm@10.24.0",
   "scripts": {
     "migre-bdd": "node --env-file=.env --import tsx ./node_modules/knex/bin/cli.js migrate:latest --knexfile back/knexfile.ts",
     "migre-bdd-clever": "node node_modules/knex/bin/cli.js migrate:latest --knexfile dist-back/knexfile.js",
