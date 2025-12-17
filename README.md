@@ -71,3 +71,18 @@ RUN echo "MA_VARIABLE=${MA_VARIABLE}" >> .env
 ```
 
 Ces variables sont passées à Jekyll via le plugin [jekyll-dotenv](https://www.rubydoc.info/gems/jekyll-dotenv/0.2.0)
+
+## Exploitation
+
+### Re-hachage avec un nouveau sel
+
+Il est possible de hacher avec un nouveau sel nos données hachées en base de données.
+Pour celà, on procède en plusieurs étapes :
+
+1. Faire un dump de la base au cas où
+2. Redémarre le portail en mode maintenance (variable d'environnement MODE_MAINTENANCE=true)
+3. lancer la console d'administration (`npm run admin`)
+4. exécuter la commande de migration de hache (`> await admin.migreToutLesHaches(2, 'leNouveauSel')`)
+   > Où le premier paramètre est la nouvelle version du hache, et le deuxième paramètre est le nouveau
+5. Rajouter la nouvelle variable d'environnement contenant le nouveau sel (ici, puisque la nouvelle version est la 2, on aura la variable d'env `HACHAGE_SECRET_DE_HACHAGE_2=leNouveauSel`)
+6. Redémarre le portail en désactivant le mode maintenance
