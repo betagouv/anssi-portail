@@ -31,6 +31,7 @@ import { CodeSecteur } from '../metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
 import { ReponsesTestMaturite } from '../metier/resultatTestMaturite';
 import { Utilisateur } from '../metier/utilisateur';
+import { MigrationChiffrement } from './migrationChiffrement';
 import { MigrationHash } from './migrationHash';
 
 export class ConsoleAdministration {
@@ -471,5 +472,11 @@ export class ConsoleAdministration {
 
   async migreTousLesHaches(version: number, sel: string) {
     await new MigrationHash().migreTout(version, sel);
+  }
+
+  async remplaceLaCleDeChiffrement(ancienneCle: string, nouvelleCle: string) {
+    await new MigrationChiffrement(
+      adaptateurEnvironnement
+    ).remplaceLaCleDeChiffrement(ancienneCle, nouvelleCle);
   }
 }
