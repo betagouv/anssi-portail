@@ -8,14 +8,9 @@ export type ObjetChiffre = {
   tag: string;
 };
 
-export const adaptateurChiffrement = ({
-  adaptateurEnvironnement,
-}: {
-  adaptateurEnvironnement: AdaptateurEnvironnement;
-}): AdaptateurChiffrement => {
-  const clefSecreteEnChaine = adaptateurEnvironnement
-    .chiffrement()
-    .cleChaCha20Hex();
+const adaptateurChiffrement = (
+  clefSecreteEnChaine: string
+): AdaptateurChiffrement => {
   const clefSecrete = Buffer.from(clefSecreteEnChaine, 'hex');
 
   return {
@@ -72,8 +67,18 @@ export interface AdaptateurChiffrement {
   dechiffre<T>(objetChiffre: ObjetChiffre): T;
 }
 
-export const fabriqueAdaptateurChiffrement = ({
-  adaptateurEnvironnement,
-}: {
-  adaptateurEnvironnement: AdaptateurEnvironnement;
-}) => adaptateurChiffrement({ adaptateurEnvironnement });
+type FabriqueAdaptateurChiffrement = {
+  (adaptateurEnvironnement: AdaptateurEnvironnement): AdaptateurChiffrement;
+  (cle: string): AdaptateurChiffrement;
+};
+
+export const fabriqueAdaptateurChiffrement: FabriqueAdaptateurChiffrement = (
+  adaptateurEnvironnementOuCle: AdaptateurEnvironnement | string
+) => {
+  if (typeof adaptateurEnvironnementOuCle === 'string') {
+    return adaptateurChiffrement(adaptateurEnvironnementOuCle);
+  }
+  return adaptateurChiffrement(
+    adaptateurEnvironnementOuCle.chiffrement().cleChaCha20Hex()
+  );
+};
