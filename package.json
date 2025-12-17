@@ -5,8 +5,8 @@
   "main": "serveur.ts",
   "packageManager": "pnpm@10.24.0",
   "scripts": {
-    "migre-bdd": "node --env-file=.env --import tsx ./node_modules/knex/bin/cli.js migrate:latest --knexfile back/knexfile.ts",
-    "migre-bdd-clever": "node node_modules/knex/bin/cli.js migrate:latest --knexfile dist-back/knexfile.js",
+    "migre-bdd": "node --env-file=.env --import tsx ./back/node_modules/knex/bin/cli.js migrate:latest --knexfile back/knexfile.ts",
+    "migre-bdd-clever": "node back/node_modules/knex/bin/cli.js migrate:latest --knexfile dist-back/knexfile.js",
     "dev": "concurrently -n \"SERVEUR,SVELTE,JEKYLL,BDD,MIGRE\" --prefix-colors \"cyan,green,magenta,blue,yellow\" \"node --watch --import tsx --env-file .env ./back/src/serveur.ts\" \"pnpm --filter anssi-portail-svelte watch\" \"sleep 5 && jekyll build -s ./front -d ./front/_site -w\" \"docker compose up db\" \"sleep 3 && pnpm run migre-bdd\"",
     "start": "pnpm run migre-bdd-clever && node ./dist-back/src/serveur.js",
     "lint": "pnpm -r --if-present run lint",
