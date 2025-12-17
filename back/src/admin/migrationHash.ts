@@ -23,6 +23,7 @@ export const tenteDeHacherAvecUnNouveauSel = (
   if (!chaine) return undefined;
   const [versionActuelle, hashActuel] = chaine.split(':');
   if (versionActuelle !== versionPrecedenteAttendue) {
+    console.warn("Incohérence de version détectée pour hacher la chaine : ", chaine);
     return chaine;
   }
   const nouvelleVersion = `${versionActuelle}-v${version}`;
