@@ -11,9 +11,14 @@
 FROM docker.io/node:23 AS build-le-svelte
 
 WORKDIR /usr/src/app
+
+RUN corepack enable && corepack prepare pnpm@latest --activate
+ENV PNPM_HOME=/usr/local/bin
+
+COPY package.json pnpm-lock.yaml  pnpm-workspace.yaml ./
 COPY front ./front
-COPY package.json package-lock.json ./
-RUN npm ci && npm run -w front/lib-svelte build
+RUN pnpm install --frozen-lockfile
+RUN pnpm --filter anssi-portail-svelte build
 
 ####
 ## BUILD du front
@@ -53,9 +58,6 @@ RUN set -eux; \
         /root/.bundle/cache \
     ;
 
-# Installation de node
-RUN apk update && apk add nodejs npm
-
 COPY front /srv/jekyll
 
 COPY --from=build-le-svelte /usr/src/app/front/lib-svelte/dist /srv/jekyll/lib-svelte/dist
@@ -86,18 +88,29 @@ RUN set -eux; bundler exec jekyll build
 ####
 FROM docker.io/node:23 AS build-le-back
 WORKDIR /usr/src/app
-COPY back/package.json package-lock.json back/tsconfig.json back/knexfile.ts /usr/src/app/
-COPY back/src /usr/src/app/src
-RUN npm ci
-WORKDIR /usr/src/app/src
+RUN corepack enable && corepack prepare pnpm@10.24.0 --activate
+ENV PNPM_HOME=/usr/local/bin
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /usr/src/app/
+COPY back/package.json /usr/src/app/back/
+
+RUN pnpm install --frozen-lockfile
+
+COPY back/tsconfig.json back/knexfile.ts /usr/src/app/back/
+COPY back/src /usr/src/app/back/src
+
+WORKDIR /usr/src/app/back/src
 RUN ../node_modules/.bin/tsc
-COPY back/migrations /usr/src/dist-back/migrations
+COPY back/migrations /usr/src/app/dist-back/migrations
 
 ####
 ## SERVEUR
 ####
 FROM docker.io/node:23-alpine
 EXPOSE 3000
+
+RUN corepack enable && corepack prepare pnpm@10.24.0 --activate
+ENV PNPM_HOME=/usr/local/bin
 
 RUN set -eux; \
     apk add --no-cache bash ;
@@ -108,6 +121,7 @@ USER appuser
 
 COPY package.json /usr/src/app/
 COPY --from=build-le-back /usr/src/app/node_modules/ /usr/src/app/node_modules/
+COPY --from=build-le-back /usr/src/app/back/node_modules/ /usr/src/app/dist-back/node_modules/
 COPY --from=build-le-site /srv/jekyll/_site/ /usr/src/app/front/_site/
-COPY --from=build-le-back /usr/src/dist-back/ /usr/src/app/dist-back/
-CMD ["npm", "start"]
+COPY --from=build-le-back /usr/src/app/dist-back/ /usr/src/app/dist-back/
+CMD ["pnpm", "start"]

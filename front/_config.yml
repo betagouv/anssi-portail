@@ -25,6 +25,6 @@ exclude:
   - test/
   - node_modules/
   - package.json
-  - package-lock.json
+  - pnpm-lock.yaml
   - '*.config.js'
   - src/
