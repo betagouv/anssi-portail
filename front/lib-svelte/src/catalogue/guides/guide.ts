@@ -15,6 +15,7 @@ export const laCouleurDuBadgeSelonLaCollection = (
     'Les fondamentaux': 'purple-glycine',
     Remédiation: 'pink-tuile',
     'Supervision de sécurité': 'beige-gris-galet',
+    Autre: 'brown-opera',
   };
 
   return (collection && couleursTypes[collection]) ?? 'purple-glycine';
