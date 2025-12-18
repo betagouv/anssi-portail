@@ -5,11 +5,13 @@
 
   $: toutesLesExpertisesTechniques =
     $rechercheParCollection.includes(CollectionGuide.LES_ESSENTIELS) &&
-    $rechercheParCollection.includes(CollectionGuide.LES_FONDAMENTAUX);
+    $rechercheParCollection.includes(CollectionGuide.LES_FONDAMENTAUX) &&
+    $rechercheParCollection.includes(CollectionGuide.AUTRE);
 
   $: quelquesExpertisesTechniques =
     $rechercheParCollection.includes(CollectionGuide.LES_ESSENTIELS) ||
-    $rechercheParCollection.includes(CollectionGuide.LES_FONDAMENTAUX);
+    $rechercheParCollection.includes(CollectionGuide.LES_FONDAMENTAUX) ||
+    $rechercheParCollection.includes(CollectionGuide.AUTRE);
 
   $: unePartieSeulementDesExpertisesTechniques =
     !toutesLesExpertisesTechniques && quelquesExpertisesTechniques;
@@ -19,11 +21,13 @@
       rechercheParCollection.retire([
         CollectionGuide.LES_ESSENTIELS,
         CollectionGuide.LES_FONDAMENTAUX,
+        CollectionGuide.AUTRE,
       ]);
     } else {
       rechercheParCollection.ajoute([
         CollectionGuide.LES_ESSENTIELS,
         CollectionGuide.LES_FONDAMENTAUX,
+        CollectionGuide.AUTRE,
       ]);
     }
   };
@@ -41,7 +45,8 @@
     <span class="libelle">Expertise technique</span>
     <span class="compte">
       {($nombreGuides.parCollection[CollectionGuide.LES_ESSENTIELS] ?? 0) +
-      ($nombreGuides.parCollection[CollectionGuide.LES_FONDAMENTAUX] ?? 0)}
+      ($nombreGuides.parCollection[CollectionGuide.LES_FONDAMENTAUX] ?? 0) +
+        ($nombreGuides.parCollection[CollectionGuide.AUTRE] ?? 0)}
     </span>
   </label>
   <fieldset>
@@ -65,6 +70,17 @@
       <span class="libelle">{CollectionGuide.LES_FONDAMENTAUX}</span>
       <span class="compte">
         {$nombreGuides.parCollection[CollectionGuide.LES_FONDAMENTAUX]}
+      </span>
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        value={CollectionGuide.AUTRE}
+        bind:group={$rechercheParCollection}
+      />
+      <span class="libelle">{CollectionGuide.AUTRE}</span>
+      <span class="compte">
+        {$nombreGuides.parCollection[CollectionGuide.AUTRE]}
       </span>
     </label>
   </fieldset>

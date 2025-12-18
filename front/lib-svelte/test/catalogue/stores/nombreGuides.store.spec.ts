@@ -32,7 +32,7 @@ describe('Le store du nombre de guides', () => {
     it("pour retourner autant d'entrée que de collection", () => {
       const parCollection = get(nombreGuides).parCollection;
 
-      expect(Object.keys(parCollection)).toHaveLength(6);
+      expect(Object.keys(parCollection)).toHaveLength(7);
     });
     it('pour retourner le nombre de guide pour chaque collection', () => {
       const parCollection = get(nombreGuides).parCollection;

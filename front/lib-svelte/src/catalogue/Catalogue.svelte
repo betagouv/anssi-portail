@@ -4,32 +4,32 @@
   import ChampRecherche from '../ui/ChampRecherche.svelte';
   import Hero from '../ui/Hero.svelte';
   import CarteItem from './CarteItem.svelte';
-  import EnteteFiltres from './EnteteFiltres.svelte';
-  import FiltreAccessibilite from './FiltreAccessibilite.svelte';
-  import FiltreBesoin from './FiltreBesoin.svelte';
-  import FiltreSource from './FiltreSource.svelte';
-  import FiltreTypologie from './FiltreTypologie.svelte';
-  import FiltreCollection from './guides/FiltreCollection.svelte';
-  import FiltreLangue from './guides/FiltreLangue.svelte';
-  import { catalogueFiltre } from './stores/catalogueFiltre.store';
-  import { chargeGuidesDansLeStore } from './stores/guides/guides.store';
-  import { guidesFiltres } from './stores/guides/guidesFiltres.store';
-  import { rechercheParDroitAcces } from './stores/rechercheParDroitAcces.store';
-  import { rechercheParSource } from './stores/rechercheParSource.store';
-  import { rechercheParTypologie } from './stores/rechercheParTypologie.store';
-  import { recherches } from './stores/recherches.store';
-  import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
-  import { rechercheParLangue } from './stores/guides/rechercheParLangue.store';
-  import { CollectionGuide, Langue } from './Guide.types';
-  import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
   import {
     type BesoinCyber,
     DroitAcces,
     Source,
     Typologie,
   } from './Catalogue.types';
+  import EnteteFiltres from './EnteteFiltres.svelte';
+  import FiltreAccessibilite from './FiltreAccessibilite.svelte';
+  import FiltreBesoin from './FiltreBesoin.svelte';
+  import FiltreSource from './FiltreSource.svelte';
+  import FiltreTypologie from './FiltreTypologie.svelte';
   import { creeLeFragmentDeNavigation } from './fragmentDeNavigation';
+  import { CollectionGuide, Langue } from './Guide.types';
+  import FiltreCollection from './guides/FiltreCollection.svelte';
+  import FiltreLangue from './guides/FiltreLangue.svelte';
+  import { catalogueFiltre } from './stores/catalogueFiltre.store';
+  import { chargeGuidesDansLeStore } from './stores/guides/guides.store';
+  import { guidesFiltres } from './stores/guides/guidesFiltres.store';
   import { rechercheParCollection } from './stores/guides/rechercheParCollection.store';
+  import { rechercheParLangue } from './stores/guides/rechercheParLangue.store';
+  import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
+  import { rechercheParDroitAcces } from './stores/rechercheParDroitAcces.store';
+  import { rechercheParSource } from './stores/rechercheParSource.store';
+  import { rechercheParTypologie } from './stores/rechercheParTypologie.store';
+  import { recherches } from './stores/recherches.store';
+  import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
 
   const { featureFlagGuides }: { featureFlagGuides: boolean } = $props();
 
@@ -40,6 +40,7 @@
     [CollectionGuide.GESTION_DES_RISQUES_CYBER]: 'gestion-risques-cyber',
     [CollectionGuide.SUPERVISION_DE_SECURITE]: 'supervision-securite',
     [CollectionGuide.REMEDIATION]: 'remediation',
+    [CollectionGuide.AUTRE]: 'autre',
   };
   const nomsCollectionsGuide = Object.fromEntries(
     Object.entries(idsCollectionsGuide).map(([cle, valeur]) => [
