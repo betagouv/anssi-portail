@@ -12,7 +12,8 @@
     "lint": "pnpm -r lint",
     "test": "pnpm -r test",
     "admin": "node -e \"const admin = new (require('./dist-back/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
-    "admin:dev": "tsc -p back && node --env-file .env -e \"const admin = new (require('./dist-back/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i"
+    "admin:dev": "tsc -p back && node --env-file .env -e \"const admin = new (require('./dist-back/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
+    "preinstall": "npx only-allow@1.2.2 pnpm"
   },
   "repository": {
     "type": "git",
