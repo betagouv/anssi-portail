@@ -7,7 +7,7 @@
   "scripts": {
     "build": "vite build",
     "watch": "vite build -w --minify false",
-    "test": "pnpm run typecheck && eslint . && vitest --run",
+    "test": "pnpm typecheck && eslint . && vitest --run",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit && svelte-check"
