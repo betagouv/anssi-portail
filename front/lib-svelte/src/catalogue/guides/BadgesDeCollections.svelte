@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { Guide } from '../Guide.types';
+  import { CollectionGuide, type Guide } from '../Guide.types';
   import { laCouleurDuBadgeSelonLaCollection } from './guide';
 
   export let guide: Guide;
-  const badges = guide.collections.map((collection) => ({
+  const badges = guide.collections.filter(c => c !== CollectionGuide.AUTRE).map((collection) => ({
     label: collection,
     accent: laCouleurDuBadgeSelonLaCollection(collection),
   }));

@@ -7,6 +7,7 @@ export enum CollectionGuide {
   GESTION_DES_RISQUES_CYBER = 'Gestion des risques cyber',
   SUPERVISION_DE_SECURITE = 'Supervision de sécurité',
   REMEDIATION = 'Remédiation',
+  AUTRE = "Autre"
 }
 export enum Langue {
   FR = 'FR',
