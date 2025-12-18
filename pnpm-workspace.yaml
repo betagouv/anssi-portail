@@ -1,5 +1,6 @@
 # _c.f._ https://pnpm.io/settings
 
+color: always
 packages:
   - 'back'
   - 'front'
