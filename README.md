@@ -45,14 +45,14 @@ $ docker compose exec db createdb -U postgres msc
 
 ```shell
 $ cd ..
-$ npm ci
-$ npm run dev
+$ pnpm install --frozen-lockfile
+$ pnpm dev
 ```
 
 - Lancer la création des secrets de hachage avec la console d'administration (procédure sauvegardeLesEmpreintesDesSecretsDeHachage()) puis relancer un :
 
 ```shell
-$ npm run dev
+$ pnpm dev
 ```
 
 - Arrivé ici, le site doit être consultable sur http://127.0.0.1:3000
@@ -81,7 +81,7 @@ Pour celà, on procède en plusieurs étapes :
 
 1. Faire un dump de la base au cas où
 2. Redémarre le portail en mode maintenance (variable d'environnement MODE_MAINTENANCE=true)
-3. lancer la console d'administration (`npm run admin`)
+3. lancer la console d'administration (`pnpm admin`)
 4. exécuter la commande de migration de hache (`> await admin.migreToutLesHaches(2, 'leNouveauSel')`)
    > Où le premier paramètre est la nouvelle version du hache, et le deuxième paramètre est le nouveau
 5. Rajouter la nouvelle variable d'environnement contenant le nouveau sel (ici, puisque la nouvelle version est la 2, on aura la variable d'env `HACHAGE_SECRET_DE_HACHAGE_2=leNouveauSel`)
@@ -94,7 +94,7 @@ Pour celà, on procède en plusieurs étapes :
 
 1. Faire un dump de la base au cas où
 2. Redémarre le portail en mode maintenance (variable d'environnement MODE_MAINTENANCE=true)
-3. lancer la console d'administration (`npm run admin`)
+3. lancer la console d'administration (`pnpm admin`)
 4. exécuter la commande de rotation (`> await admin.remplaceLaCleDeChiffrement('ancienneCle', 'nouvelleCle')`)
 5. Modifier la variable d'environnement CHIFFREMENT_CHACHA20_CLE_HEX (`CHIFFREMENT_CHACHA20_CLE_HEX=nouvelleCle`)
 6. Redémarre le portail en désactivant le mode maintenance

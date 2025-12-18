@@ -21,11 +21,16 @@ jobs:
         with:
           node-version: 23
 
+      - name: Installe pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.24.0
+
       - name: (TOUS) Installe les dépendances
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Exécute les tests
-        run: npm run test
+        run: pnpm test
 
       - name: (CONSTRUCTION) Construis le site via Docker
         run: docker build --target build-le-site -t anssi-portail-site .
