@@ -1,15 +1,17 @@
 <script lang="ts">
+  import FiltresBureau from '../ui/FiltresBureau.svelte';
+  import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Hero from '../ui/Hero.svelte';
   import { contactsParRegion } from './contacts.donnees';
-  import { estCodeRegion, type Contacts } from './contacts.type';
-  import FiltresMobile from '../ui/FiltresMobile.svelte';
-  import SelectRegion from '../test-maturite/SelectRegion.svelte';
-  import FiltresBureau from '../ui/FiltresBureau.svelte';
+  import { type Contacts, estCodeRegion } from './contacts.type';
+  import FiltresContacts from './FiltresContacts.svelte';
 
   let contacts: Contacts | undefined = undefined;
 
   $: if (estCodeRegion(regionSelectionnee)) {
     contacts = contactsParRegion[regionSelectionnee];
+  } else {
+    contacts = undefined;
   }
 
   let regionSelectionnee: string = '';
@@ -24,31 +26,13 @@
 ></Hero>
 
 <FiltresMobile filtreActif={false}>
-  <fieldset class="filtres regions">
-    <legend>Région</legend>
-    <label class="colonne">
-      <span class="libelle">Sélectionner une région</span>
-      <SelectRegion
-        bind:region={regionSelectionnee}
-        optionDefautSelectionnable
-      />
-    </label>
-  </fieldset>
+  <FiltresContacts bind:regionSelectionnee/>
 </FiltresMobile>
 
 <section>
   <div class="contenu-section">
     <FiltresBureau filtreActif={false}>
-      <fieldset class="filtres regions">
-        <legend>Région</legend>
-        <label class="colonne">
-          <span class="libelle">Sélectionner une région</span>
-          <SelectRegion
-            bind:region={regionSelectionnee}
-            optionDefautSelectionnable
-          />
-        </label>
-      </fieldset>
+      <FiltresContacts bind:regionSelectionnee/>
     </FiltresBureau>
 
     {#if contacts}
@@ -253,17 +237,6 @@
     @include a-partir-de(lg) {
       width: 792px;
     }
-  }
-
-  .filtres {
-    display: flex;
-    flex-direction: column;
-  }
-
-  label.colonne {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
   }
 
   .aucun-resultat {
