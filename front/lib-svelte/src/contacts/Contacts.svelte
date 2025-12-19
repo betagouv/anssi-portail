@@ -1,7 +1,4 @@
 <script lang="ts">
-  import axios from 'axios';
-  import { onMount } from 'svelte';
-  import type { Branche } from '../ui/filAriane';
   import Hero from '../ui/Hero.svelte';
   import { contactsParRegion } from './contacts.donnees';
   import {
@@ -9,48 +6,58 @@
     type CodeRegion,
     type Contacts,
   } from './contacts.type';
+  import FiltresMobile from '../ui/FiltresMobile.svelte';
+  import SelectRegion from '../test-maturite/SelectRegion.svelte';
+  import FiltresBureau from '../ui/FiltresBureau.svelte';
 
   type Region = { nom: string; codeIso: CodeRegion };
 
   let contacts: Contacts | undefined = undefined;
-  let nomDeLaRegion: string | undefined;
-  let branche: Branche | undefined;
-  let description: string =
-    'Des contacts cyber de proximité pour vous orienter et répondre à vos questions.';
   let nomParRegion: Region[] = [];
 
-  const [codeRegionExtrait] = window.location.pathname.split('/').slice(-1);
-  const codeRegion = codeRegionExtrait.toUpperCase();
-  if (estCodeRegion(codeRegion)) {
-    contacts = contactsParRegion[codeRegion];
-    description = '';
-    branche = {
-      nom: 'Contacts cyber',
-      lien: '/contacts/',
-    };
+  $: if (estCodeRegion(regionSelectionnee)) {
+    contacts = contactsParRegion[regionSelectionnee];
   }
 
-  onMount(async () => {
-    const reponse = await axios.get<Region[]>('/api/annuaire/regions');
-    nomParRegion = reponse.data;
-    if (estCodeRegion(codeRegion)) {
-      nomDeLaRegion = nomParRegion.find(
-        (region) => region.codeIso === codeRegion
-      )?.nom;
-    }
-  });
+  let regionSelectionnee: string = '';
 </script>
 
 <Hero
-  titre={nomDeLaRegion ?? 'Contacts cyber'}
-  {description}
-  ariane={nomDeLaRegion ?? 'Contacts cyber'}
-  arianeBranche={branche}
-  arianeBrancheConnectee={branche}
+  titre="Contacts cyber"
+  description="Des contacts cyber de proximité pour vous orienter et répondre à vos questions."
+  ariane="Contacts cyber"
+  arianeBranche={{ nom: 'Contacts cyber', lien: '/contacts/' }}
+  arianeBrancheConnectee={{ nom: 'Contacts cyber', lien: '/contacts/' }}
 ></Hero>
+
+<FiltresMobile filtreActif={false}>
+  <fieldset class="filtres regions">
+    <legend>Région</legend>
+    <label class="colonne">
+      <span class="libelle">Sélectionner une région</span>
+      <SelectRegion
+        bind:region={regionSelectionnee}
+        optionDefautSelectionnable
+      />
+    </label>
+  </fieldset>
+</FiltresMobile>
 
 <section>
   <div class="contenu-section">
+    <FiltresBureau filtreActif={false}>
+      <fieldset class="filtres regions">
+        <legend>Région</legend>
+        <label class="colonne">
+          <span class="libelle">Sélectionner une région</span>
+          <SelectRegion
+            bind:region={regionSelectionnee}
+            optionDefautSelectionnable
+          />
+        </label>
+      </fieldset>
+    </FiltresBureau>
+
     {#if contacts}
       <div class="contacts">
         <h2>Contacts régionaux</h2>
@@ -287,5 +294,16 @@
       display: flex;
       gap: 4px;
     }
+  }
+
+  .filtres {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label.colonne {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 </style>
