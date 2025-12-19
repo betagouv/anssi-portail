@@ -7,18 +7,19 @@
   import { contactsParRegion } from './contacts.donnees';
   import { estCodeRegion } from './contacts.type';
   import FiltresContacts from './FiltresContacts.svelte';
+  import { profilStore } from '../stores/profil.store';
 
   let regionSelectionnee: string = $state('');
 
   const contacts = $derived(
     estCodeRegion(regionSelectionnee)
       ? contactsParRegion[regionSelectionnee]
-      : undefined,
+      : undefined
   );
 
   // Gestion du fragment
   let fragmentDeNavigation = $state(
-    creeLeFragmentDeNavigation(window.location.hash),
+    creeLeFragmentDeNavigation(window.location.hash)
   );
   const changeLeFragmentDeNavigation = () => {
     fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
@@ -42,15 +43,14 @@
     window.location.hash = fragmentDeNavigation.serialise();
   });
 
-  onMount(()=>{
-
-  const [codeRegionExtrait] = window.location.pathname.split('/').slice(-1);
-  const codeRegion = codeRegionExtrait.toUpperCase();
-  if (estCodeRegion(codeRegion)) {
-    history.replaceState({}, "", "/contacts/")
-    window.location.hash = `#?region=${codeRegion}`
-  }
-  })
+  onMount(() => {
+    const [codeRegionExtrait] = window.location.pathname.split('/').slice(-1);
+    const codeRegion = codeRegionExtrait.toUpperCase();
+    if (estCodeRegion(codeRegion)) {
+      history.replaceState({}, '', '/contacts/');
+      window.location.hash = `#?region=${codeRegion}`;
+    }
+  });
 </script>
 
 <Hero
@@ -61,16 +61,19 @@
   arianeBrancheConnectee={{ nom: 'Contacts cyber', lien: '/contacts/' }}
 ></Hero>
 
-<FiltresMobile filtreActif={false}>
-  <FiltresContacts bind:regionSelectionnee />
-</FiltresMobile>
+{#if !$profilStore}
+  <FiltresMobile filtreActif={false}>
+    <FiltresContacts bind:regionSelectionnee />
+  </FiltresMobile>
+{/if}
 
 <section>
   <div class="contenu-section">
-    <FiltresBureau filtreActif={false}>
-      <FiltresContacts bind:regionSelectionnee />
-    </FiltresBureau>
-
+    {#if !$profilStore}
+      <FiltresBureau filtreActif={false}>
+        <FiltresContacts bind:regionSelectionnee />
+      </FiltresBureau>
+    {/if}
     {#if contacts}
       <div class="contacts">
         <h2>Contacts régionaux</h2>
@@ -131,7 +134,7 @@
                 <a
                   href="https://club.ssi.gouv.fr/#/declaration-incident"
                   target="_blank"
-                >Déclarer un incident et/ou demander une assistance</a
+                  >Déclarer un incident et/ou demander une assistance</a
                 >
               </li>
               <li>
@@ -142,7 +145,7 @@
               </li>
             </ul>
             <a href="https://www.cert.ssi.gouv.fr/contact/" target="_blank"
-            >Toutes les coordonnées du CERT-FR
+              >Toutes les coordonnées du CERT-FR
             </a>
           </div>
         </div>
@@ -160,7 +163,7 @@
             <a
               href="https://www.cybermalveillance.gouv.fr/diagnostic"
               target="_blank"
-            >Aller sur le 17Cyber
+              >Aller sur le 17Cyber
             </a>
           </div>
         </div>
