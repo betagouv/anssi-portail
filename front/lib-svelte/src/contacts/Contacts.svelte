@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { creeLeFragmentDeNavigation } from '../catalogue/fragmentDeNavigation';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Hero from '../ui/Hero.svelte';
@@ -13,6 +14,32 @@
       ? contactsParRegion[regionSelectionnee]
       : undefined
   );
+
+  // Gestion du fragment
+  let fragmentDeNavigation = $state(
+    creeLeFragmentDeNavigation(window.location.hash)
+  );
+  const changeLeFragmentDeNavigation = () => {
+    fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
+    appliqueLesFiltres();
+  };
+  $effect(() => {
+    window.addEventListener('hashchange', changeLeFragmentDeNavigation);
+    return () => {
+      window.removeEventListener('hashchange', changeLeFragmentDeNavigation);
+    };
+  });
+
+  // Gestion des filtres
+  const appliqueLesFiltres = () => {
+    const parametreRegion = fragmentDeNavigation.extraisValeur('region', '');
+    regionSelectionnee = estCodeRegion(parametreRegion) ? parametreRegion : '';
+  };
+  appliqueLesFiltres();
+  $effect(() => {
+    fragmentDeNavigation.change('region', regionSelectionnee);
+    window.location.hash = fragmentDeNavigation.serialise();
+  });
 </script>
 
 <Hero
