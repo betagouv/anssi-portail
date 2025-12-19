@@ -3,18 +3,16 @@
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Hero from '../ui/Hero.svelte';
   import { contactsParRegion } from './contacts.donnees';
-  import { type Contacts, estCodeRegion } from './contacts.type';
+  import { estCodeRegion } from './contacts.type';
   import FiltresContacts from './FiltresContacts.svelte';
 
-  let contacts: Contacts | undefined = undefined;
+  let regionSelectionnee: string = $state('');
 
-  $: if (estCodeRegion(regionSelectionnee)) {
-    contacts = contactsParRegion[regionSelectionnee];
-  } else {
-    contacts = undefined;
-  }
-
-  let regionSelectionnee: string = '';
+  const contacts = $derived(
+    estCodeRegion(regionSelectionnee)
+      ? contactsParRegion[regionSelectionnee]
+      : undefined
+  );
 </script>
 
 <Hero
@@ -26,13 +24,13 @@
 ></Hero>
 
 <FiltresMobile filtreActif={false}>
-  <FiltresContacts bind:regionSelectionnee/>
+  <FiltresContacts bind:regionSelectionnee />
 </FiltresMobile>
 
 <section>
   <div class="contenu-section">
     <FiltresBureau filtreActif={false}>
-      <FiltresContacts bind:regionSelectionnee/>
+      <FiltresContacts bind:regionSelectionnee />
     </FiltresBureau>
 
     {#if contacts}
