@@ -30,6 +30,7 @@
   import { rechercheParTypologie } from './stores/rechercheParTypologie.store';
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
+  import FiltresMobile from '../ui/FiltresMobile.svelte';
 
   const { featureFlagGuides }: { featureFlagGuides: boolean } = $props();
 
@@ -141,26 +142,18 @@
   </div>
 </div>
 
-<div class="sommaire sommaire-replie">
-  <details>
-    <summary>
-      <EnteteFiltres />
-    </summary>
-
-    <div class="barre-filtres">
-      <FiltreBesoin />
-      <FiltreAccessibilite />
-      <FiltreTypologie />
-      <FiltreSource />
-      <input
-        type="button"
-        class="bouton primaire"
-        value="Réinitialiser les filtres"
-        onclick={reinitialiseFiltres}
-      />
-    </div>
-  </details>
-</div>
+<FiltresMobile filtreActif={$recherches.filtreActif}>
+  <FiltreBesoin />
+  <FiltreAccessibilite />
+  <FiltreTypologie />
+  <FiltreSource />
+  <input
+    type="button"
+    class="bouton primaire"
+    value="Réinitialiser les filtres"
+    onclick={reinitialiseFiltres}
+  />
+</FiltresMobile>
 
 <section class="barre-recherche-mobile">
   <div class="contenu-section">
@@ -194,7 +187,7 @@
     <div class="grille">
       <div class="sommaire sommaire-deplie">
         <ChampRecherche bind:recherche={$rechercheTextuelle} />
-        <EnteteFiltres />
+        <EnteteFiltres filtreActif={$recherches.filtreActif} />
         <div class="barre-filtres">
           {#if sectionActive === 'guides'}
             <FiltreLangue />
