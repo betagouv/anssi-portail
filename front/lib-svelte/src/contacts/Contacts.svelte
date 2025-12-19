@@ -1,19 +1,12 @@
 <script lang="ts">
   import Hero from '../ui/Hero.svelte';
   import { contactsParRegion } from './contacts.donnees';
-  import {
-    estCodeRegion,
-    type CodeRegion,
-    type Contacts,
-  } from './contacts.type';
+  import { estCodeRegion, type Contacts } from './contacts.type';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import SelectRegion from '../test-maturite/SelectRegion.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
 
-  type Region = { nom: string; codeIso: CodeRegion };
-
   let contacts: Contacts | undefined = undefined;
-  let nomParRegion: Region[] = [];
 
   $: if (estCodeRegion(regionSelectionnee)) {
     contacts = contactsParRegion[regionSelectionnee];
@@ -153,21 +146,16 @@
         </div>
       </div>
     {:else}
-      <h4>Sélectionnez une région</h4>
-      <ul class="regions">
-        {#each nomParRegion.sort( (a, b) => a.nom.localeCompare(b.nom) ) as { nom, codeIso } (codeIso)}
-          <li>
-            <lab-anssi-icone nom="arrow-right-line"></lab-anssi-icone>
-            <lab-anssi-lien
-              href="/contacts/{codeIso}"
-              apparence="lien"
-              variante="primaire"
-              taille="md"
-              titre={nom}
-            ></lab-anssi-lien>
-          </li>
-        {/each}
-      </ul>
+      <div class="aucun-resultat">
+        <img
+          src="/assets/images/contacts-resultat-vide.svg"
+          alt="Aucun résultat"
+        />
+        <h5>
+          Sélectionnez une région ou un secteur d’activité depuis le menu de
+          filtres.
+        </h5>
+      </div>
     {/if}
   </div>
 </section>
@@ -305,5 +293,28 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .aucun-resultat {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    img {
+      width: 187px;
+    }
+
+    h5 {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      margin: 0 0 0 24px;
+      max-width: 588px;
+      text-align: center;
+
+      @include a-partir-de(md) {
+        font-size: 1.375rem;
+      }
+    }
   }
 </style>
