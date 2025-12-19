@@ -10,7 +10,6 @@
     Source,
     Typologie,
   } from './Catalogue.types';
-  import EnteteFiltres from './EnteteFiltres.svelte';
   import FiltreAccessibilite from './FiltreAccessibilite.svelte';
   import FiltreBesoin from './FiltreBesoin.svelte';
   import FiltreSource from './FiltreSource.svelte';
@@ -31,6 +30,7 @@
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
+  import FiltresBureau from '../ui/FiltresBureau.svelte';
 
   const { featureFlagGuides }: { featureFlagGuides: boolean } = $props();
 
@@ -185,26 +185,26 @@
 <div class="contenu-catalogue">
   <div class="contenu-section">
     <div class="grille">
-      <div class="sommaire sommaire-deplie">
-        <ChampRecherche bind:recherche={$rechercheTextuelle} />
-        <EnteteFiltres filtreActif={$recherches.filtreActif} />
-        <div class="barre-filtres">
-          {#if sectionActive === 'guides'}
-            <FiltreLangue />
-            <FiltreCollection />
-          {:else}
-            <FiltreAccessibilite />
-            <FiltreTypologie />
-            <FiltreSource />
-          {/if}
-          <input
-            type="button"
-            class="bouton primaire"
-            value="Réinitialiser les filtres"
-            onclick={reinitialiseFiltres}
-          />
-        </div>
-      </div>
+      <FiltresBureau filtreActif={$recherches.filtreActif}>
+        <ChampRecherche
+          slot="avant-entete"
+          bind:recherche={$rechercheTextuelle}
+        />
+        {#if sectionActive === 'guides'}
+          <FiltreLangue />
+          <FiltreCollection />
+        {:else}
+          <FiltreAccessibilite />
+          <FiltreTypologie />
+          <FiltreSource />
+        {/if}
+        <input
+          type="button"
+          class="bouton primaire"
+          value="Réinitialiser les filtres"
+          onclick={reinitialiseFiltres}
+        />
+      </FiltresBureau>
 
       {#if sectionActive === 'guides'}
         {#each $guidesFiltres.resultats as guide (guide.id)}
