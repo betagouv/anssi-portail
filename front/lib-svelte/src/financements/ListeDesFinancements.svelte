@@ -1,7 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import EnteteFiltres from '../catalogue/EnteteFiltres.svelte';
   import { profilStore } from '../stores/profil.store';
   import Hero from '../ui/Hero.svelte';
   import CarteFinancement from './CarteFinancement.svelte';
@@ -14,6 +13,7 @@
   import { rechercheParTypeFinancement } from './stores/rechercheParTypeFinancement.store';
   import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
+  import FiltresBureau from '../ui/FiltresBureau.svelte';
 
   type ReponseAxios = {
     id: number;
@@ -28,7 +28,6 @@
   const estConnecte = profilStore.utilisateurEstConnecte();
   let financements: ResumeFinancement[] = [];
   let chargement: boolean = true;
-  let estBureau = false;
 
   const reinitialiseFiltres = () => {
     rechercheParRegion.reinitialise();
@@ -37,11 +36,6 @@
   };
 
   onMount(async () => {
-    const mql = window.matchMedia('(min-width: 992px)');
-    mql.addEventListener('change', (e: MediaQueryListEvent) => {
-      estBureau = e.matches;
-    });
-    estBureau = mql.matches;
     try {
       chargement = true;
       const reponse = await axios.get<ReponseAxios>('/api/financements');
@@ -67,14 +61,9 @@
 
 <section class="financements">
   <div class="contenu-section">
-    {#if estBureau}
-      <div class="sommaire sommaire-deplie">
-        <div class="barre-filtres">
-          <EnteteFiltres filtreActif={false} />
-          <FiltresFinancements {chargement} {estConnecte} />
-        </div>
-      </div>
-    {/if}
+    <FiltresBureau filtreActif={false}>
+      <FiltresFinancements {chargement} {estConnecte} />
+    </FiltresBureau>
     <div class="grille-cartes">
       {#if chargement}
         <SqueletteCarteFinancement />
