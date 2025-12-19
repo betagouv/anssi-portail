@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { recherches } from './stores/recherches.store.js';
+  export let filtreActif: boolean;
 </script>
 
 <div class="entete-filtres">
-  {#if $recherches.filtreActif}
+  {#if filtreActif}
     <img
       class="menu"
       src="/assets/images/icone-filtre-plein.svg"

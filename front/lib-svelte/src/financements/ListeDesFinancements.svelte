@@ -13,6 +13,7 @@
   import { rechercheParRegion } from './stores/rechercheParRegion.store';
   import { rechercheParTypeFinancement } from './stores/rechercheParTypeFinancement.store';
   import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
+  import FiltresMobile from '../ui/FiltresMobile.svelte';
 
   type ReponseAxios = {
     id: number;
@@ -60,25 +61,16 @@
   ariane="Financements cyber"
 />
 
-{#if !estBureau}
-  <div class="sommaire sommaire-replie">
-    <details>
-      <summary>
-        <EnteteFiltres />
-      </summary>
-      <div class="barre-filtres">
-        <FiltresFinancements {chargement} {estConnecte} />
-      </div>
-    </details>
-  </div>
-{/if}
+<FiltresMobile filtreActif={false}>
+  <FiltresFinancements {chargement} {estConnecte} />
+</FiltresMobile>
 
 <section class="financements">
   <div class="contenu-section">
     {#if estBureau}
       <div class="sommaire sommaire-deplie">
         <div class="barre-filtres">
-          <EnteteFiltres />
+          <EnteteFiltres filtreActif={false} />
           <FiltresFinancements {chargement} {estConnecte} />
         </div>
       </div>
@@ -119,45 +111,6 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
-
-  .sommaire {
-    .barre-filtres {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-
-    .barre-filtres {
-      gap: 1rem;
-    }
-
-    &.sommaire-replie {
-      z-index: 9;
-
-      &:has(details[open]) {
-        padding: 0;
-
-        summary {
-          background-color: var(--jaune-clair-msc);
-          padding: 12px 16px;
-        }
-
-        .barre-filtres {
-          box-sizing: border-box;
-          padding: 1rem;
-        }
-      }
-    }
-
-    &.sommaire-deplie {
-      flex: 1;
-      max-width: 282px;
-
-      :global(.chevron) {
-        display: none;
-      }
-    }
-  }
 
   section {
     padding: 0 var(--gouttiere) 40px;
