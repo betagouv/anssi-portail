@@ -75,7 +75,12 @@
       </FiltresBureau>
     {/if}
     {#if contacts}
-      <div class="contacts">
+      <div class={['contacts', $profilStore ? 'centre' : '']}>
+        <p class="note-information">
+          Contactez en priorité les personnes responsables des questions
+          numériques et de cybersécurité au sein de votre organisation.
+        </p>
+
         <h2>Contacts régionaux</h2>
 
         {#if contacts.COT}
@@ -170,6 +175,10 @@
       </div>
     {:else}
       <div class="aucun-resultat">
+        <p class="note-information">
+          Contactez en priorité les personnes responsables des questions
+          numériques et de cybersécurité au sein de votre organisation.
+        </p>
         <img
           src="/assets/images/contacts-resultat-vide.svg"
           alt="Aucun résultat"
@@ -261,8 +270,14 @@
     flex-direction: column;
     gap: 24px;
 
-    @include a-partir-de(lg) {
-      align-items: center;
+    &.centre {
+      @include a-partir-de(lg) {
+        align-items: center;
+      }
+    }
+
+    > * {
+      width: min(100%, 792px);
     }
   }
 
@@ -273,9 +288,6 @@
     gap: 8px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    @include a-partir-de(lg) {
-      width: 792px;
-    }
   }
 
   .aucun-resultat {
@@ -299,6 +311,18 @@
       @include a-partir-de(md) {
         font-size: 1.375rem;
       }
+    }
+  }
+
+  .note-information {
+    margin-bottom: 40px;
+
+    @include a-partir-de(md) {
+      margin-bottom: 24px;
+    }
+
+    .contacts & {
+      margin-bottom: 0;
     }
   }
 </style>
