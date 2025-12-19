@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { creeLeFragmentDeNavigation } from '../catalogue/fragmentDeNavigation';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
@@ -12,12 +13,12 @@
   const contacts = $derived(
     estCodeRegion(regionSelectionnee)
       ? contactsParRegion[regionSelectionnee]
-      : undefined
+      : undefined,
   );
 
   // Gestion du fragment
   let fragmentDeNavigation = $state(
-    creeLeFragmentDeNavigation(window.location.hash)
+    creeLeFragmentDeNavigation(window.location.hash),
   );
   const changeLeFragmentDeNavigation = () => {
     fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
@@ -40,6 +41,16 @@
     fragmentDeNavigation.change('region', regionSelectionnee);
     window.location.hash = fragmentDeNavigation.serialise();
   });
+
+  onMount(()=>{
+
+  const [codeRegionExtrait] = window.location.pathname.split('/').slice(-1);
+  const codeRegion = codeRegionExtrait.toUpperCase();
+  if (estCodeRegion(codeRegion)) {
+    history.replaceState({}, "", "/contacts/")
+    window.location.hash = `#?region=${codeRegion}`
+  }
+  })
 </script>
 
 <Hero
@@ -120,7 +131,7 @@
                 <a
                   href="https://club.ssi.gouv.fr/#/declaration-incident"
                   target="_blank"
-                  >Déclarer un incident et/ou demander une assistance</a
+                >Déclarer un incident et/ou demander une assistance</a
                 >
               </li>
               <li>
@@ -131,7 +142,7 @@
               </li>
             </ul>
             <a href="https://www.cert.ssi.gouv.fr/contact/" target="_blank"
-              >Toutes les coordonnées du CERT-FR
+            >Toutes les coordonnées du CERT-FR
             </a>
           </div>
         </div>
@@ -149,7 +160,7 @@
             <a
               href="https://www.cybermalveillance.gouv.fr/diagnostic"
               target="_blank"
-              >Aller sur le 17Cyber
+            >Aller sur le 17Cyber
             </a>
           </div>
         </div>
