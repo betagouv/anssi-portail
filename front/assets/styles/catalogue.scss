@@ -125,34 +125,13 @@
 
   fieldset {
     margin: 0 0 32px;
-    padding: 0 0 32px;
-    border: none;
-    border-bottom: 1px solid #d9dadb;
     display: flex;
     flex-direction: column;
     gap: 16px;
     width: 100%;
 
-    legend {
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 0.875rem;
-      line-height: 1.25rem;
-      padding: 0;
-      margin-bottom: 16px;
-    }
-
     label {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      cursor: pointer;
-
       .libelle {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-
         img {
           width: 24px;
           height: 24px;
@@ -165,41 +144,6 @@
         color: #939699;
         font-size: 0.75rem;
         line-height: 1rem;
-      }
-
-      input[type='checkbox'] {
-        appearance: none;
-        border: 1px solid var(--noir);
-        border-radius: 4px;
-        width: 24px;
-        height: 24px;
-        margin: 0;
-        cursor: pointer;
-
-        &:checked {
-          background-color: var(--jaune-msc);
-
-          &::before {
-            content: '';
-            display: block;
-            margin: auto;
-            width: 6px;
-            height: 12px;
-            border-right: 2px var(--noir) solid;
-            border-bottom: 2px var(--noir) solid;
-            transform: translateY(2px) rotate(0.12turn);
-          }
-        }
-
-        &:indeterminate {
-          /* Ce style est prévu pour être cumulatif avec l'état coché */
-          &::before {
-            width: 9px;
-            height: 10px;
-            border-right: none;
-            transform: none;
-          }
-        }
       }
     }
 
