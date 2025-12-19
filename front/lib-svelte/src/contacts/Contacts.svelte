@@ -161,7 +161,7 @@
 </section>
 
 <style lang="scss">
-  @use '../../../assets/styles/responsive.scss' as *;
+  @use '../../../assets/styles/responsive' as *;
 
   * {
     box-sizing: border-box;
@@ -171,7 +171,8 @@
     padding: 48px var(--gouttiere) 72px;
 
     .contenu-section {
-      max-width: 996px;
+      display: flex;
+      gap: 1.5rem;
     }
   }
 
@@ -195,20 +196,6 @@
     margin-bottom: 8px;
     font-size: 1.25rem;
     line-height: 1.75rem;
-  }
-
-  h4 {
-    color: #161616;
-    font-size: 1.375rem;
-    font-weight: bold;
-    line-height: 1.75rem;
-    margin: 0;
-    margin-bottom: 2rem;
-
-    @include a-partir-de(lg) {
-      font-size: 1.5rem;
-      line-height: 2rem;
-    }
   }
 
   p {
@@ -247,8 +234,10 @@
 
   .contacts {
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 24px;
+
     @include a-partir-de(lg) {
       align-items: center;
     }
@@ -266,24 +255,6 @@
     }
   }
 
-  .regions {
-    padding: 0;
-    display: grid;
-    grid-template-rows: 1fr;
-    gap: 1rem;
-
-    @include a-partir-de(md) {
-      grid-auto-flow: column;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(10, 1fr);
-    }
-
-    li {
-      display: flex;
-      gap: 4px;
-    }
-  }
-
   .filtres {
     display: flex;
     flex-direction: column;
@@ -298,6 +269,7 @@
   .aucun-resultat {
     align-items: center;
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 16px;
 
@@ -308,7 +280,7 @@
     h5 {
       font-size: 1.25rem;
       line-height: 1.75rem;
-      margin: 0 0 0 24px;
+      margin: 0 0 24px;
       max-width: 588px;
       text-align: center;
 
