@@ -1,6 +1,6 @@
-import { type CodeRegion, type Contacts } from './contacts.type';
+import { type CodeRegion, type ContactsRegionaux } from './contacts.type';
 
-export const contactsParRegion: Record<CodeRegion, Contacts> = {
+export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
   'FR-ARA': {
     COT: {
       nom: 'Mathieu DELAPLACE / Marianne DELARUE',
