@@ -44,3 +44,8 @@ export type CodeRegion = (typeof CodeRegions)[number];
 export const estCodeRegion = (codeRegion: string): codeRegion is CodeRegion => {
   return (CodeRegions as readonly string[]).includes(codeRegion);
 };
+
+export type ContactSectoriel = {
+  nom: string;
+  siteWeb: string;
+};

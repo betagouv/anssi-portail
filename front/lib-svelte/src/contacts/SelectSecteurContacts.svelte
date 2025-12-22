@@ -5,7 +5,10 @@
 
   export let secteur: string;
 
-  const options: Option[] = secteursContacts;
+  const options: Option[] = secteursContacts.map((s) => ({
+    valeur: s.valeur,
+    libelle: s.libelle,
+  }));
 </script>
 
 <SelecteurSimple
