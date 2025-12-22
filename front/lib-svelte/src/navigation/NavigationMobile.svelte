@@ -1,7 +1,7 @@
 <script lang="ts">
   import { mount, onDestroy, onMount, unmount } from 'svelte';
   import { fly } from 'svelte/transition';
-  import { creeLienContactsUtiles } from '../contacts/contacts.donnees';
+  import { creeLienContactsUtiles } from '../contacts/contacts';
   import ZoneIdentification from '../identification/ZoneIdentification.svelte';
   import { profilStore } from '../stores/profil.store';
   import LienNavigationMobile from './LienNavigationMobile.svelte';

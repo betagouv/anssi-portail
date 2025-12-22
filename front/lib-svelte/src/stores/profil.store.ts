@@ -11,6 +11,7 @@ export type Profil = {
   idListeFavoris: string;
   codeDepartement: string | undefined;
   codeRegion: string | undefined;
+  codeActivite: string;
 };
 
 const { subscribe, set } = writable<Profil | undefined>(undefined);

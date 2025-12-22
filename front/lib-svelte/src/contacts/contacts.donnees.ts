@@ -1,6 +1,6 @@
-import { type Profil } from '../stores/profil.store';
 import {
   type CodeRegion,
+  type CodeSecteurContact,
   type ContactSectoriel,
   type ContactsRegionaux,
 } from './contacts.type';
@@ -226,25 +226,6 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
   },
 };
 
-export const secteursContacts = [
-  { valeur: 'aviation', libelle: 'Aviation' },
-  { valeur: 'defense', libelle: 'Défense' },
-  { valeur: 'sante', libelle: 'Santé' },
-  { valeur: 'maritime', libelle: 'Maritime' },
-  { valeur: 'enseignement-recherche', libelle: 'Enseignement, recherche' },
-  { valeur: 'social', libelle: 'Social' },
-] as const;
-
-const codesSecteurContact = secteursContacts.map((s) => s.valeur);
-
-type CodeSecteurContact = (typeof codesSecteurContact)[number];
-
-export const estCodeSecteurContact = (
-  codeSecteur: string
-): codeSecteur is CodeSecteurContact => {
-  return (codesSecteurContact as readonly string[]).includes(codeSecteur);
-};
-
 export const contactsParSecteur: Record<CodeSecteurContact, ContactSectoriel> =
   {
     aviation: {
@@ -271,11 +252,3 @@ export const contactsParSecteur: Record<CodeSecteurContact, ContactSectoriel> =
         'https://www.assurance-maladie.ameli.fr/pages-d-informations-legales/cert-social',
     },
   };
-
-export const creeLienContactsUtiles = (profil: Profil | undefined) => {
-  if (profil) {
-    return `/contacts/#?region=${profil?.codeRegion}`;
-  } else {
-    return '/contacts';
-  }
-};

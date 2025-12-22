@@ -5,10 +5,10 @@
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Hero from '../ui/Hero.svelte';
+  import { estCodeSecteurContact } from './contacts';
   import {
     contactsParRegion,
     contactsParSecteur,
-    estCodeSecteurContact,
   } from './contacts.donnees';
   import { estCodeRegion } from './contacts.type';
   import FiltresContacts from './FiltresContacts.svelte';

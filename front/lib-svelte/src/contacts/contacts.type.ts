@@ -49,3 +49,15 @@ export type ContactSectoriel = {
   nom: string;
   siteWeb: string;
 };
+export const secteursContacts = [
+  { valeur: 'aviation', libelle: 'Aviation' },
+  { valeur: 'defense', libelle: 'Défense' },
+  { valeur: 'sante', libelle: 'Santé' },
+  { valeur: 'maritime', libelle: 'Maritime' },
+  { valeur: 'enseignement-recherche', libelle: 'Enseignement, recherche' },
+  { valeur: 'social', libelle: 'Social' },
+] as const;
+
+export const codesSecteurContact = secteursContacts.map((s) => s.valeur);
+
+export type CodeSecteurContact = (typeof codesSecteurContact)[number];

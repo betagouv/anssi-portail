@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { creeLienContactsUtiles } from '../contacts/contacts.donnees';
+  import { creeLienContactsUtiles } from '../contacts/contacts';
   import { profilStore } from '../stores/profil.store';
   import LienNavigation from './LienNavigation.svelte';
 
@@ -76,7 +76,7 @@
       class:actif={cheminRelatif === '/promouvoir-messervicescyber/' ||
         cheminRelatif === '/promouvoir-diagnostic-cyber/'}
     >
-      <summary> Promouvoir </summary>
+      <summary> Promouvoir</summary>
       <div class="choix">
         <LienNavigation
           href="/promouvoir-messervicescyber/"
