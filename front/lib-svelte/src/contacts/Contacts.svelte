@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { creeLeFragmentDeNavigation } from '../catalogue/fragmentDeNavigation';
+  import { profilStore } from '../stores/profil.store';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Hero from '../ui/Hero.svelte';
   import { contactsParRegion } from './contacts.donnees';
   import { estCodeRegion } from './contacts.type';
   import FiltresContacts from './FiltresContacts.svelte';
-  import { profilStore } from '../stores/profil.store';
 
   let regionSelectionnee: string = $state('');
 
@@ -57,8 +57,8 @@
   titre="Contacts cyber"
   description="Des contacts cyber de proximité pour vous orienter et répondre à vos questions."
   ariane="Contacts cyber"
-  arianeBranche={{ nom: 'Contacts cyber', lien: '/contacts/' }}
-  arianeBrancheConnectee={{ nom: 'Contacts cyber', lien: '/contacts/' }}
+  arianeBranche={undefined}
+  arianeBrancheConnectee={undefined}
 ></Hero>
 
 {#if !$profilStore}
