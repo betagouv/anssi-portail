@@ -1,4 +1,4 @@
-import type { CodeRegion, Contacts } from './contacts.type';
+import { type CodeRegion, type Contacts } from './contacts.type';
 
 export const contactsParRegion: Record<CodeRegion, Contacts> = {
   'FR-ARA': {
@@ -219,4 +219,17 @@ export const contactsParRegion: Record<CodeRegion, Contacts> = {
     },
     COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
   },
+};
+
+export const secteursContacts = [
+  { valeur: 'aviation', libelle: 'Aviation' },
+  { valeur: 'defense', libelle: 'Défense' },
+  { valeur: 'sante', libelle: 'Santé' },
+  { valeur: 'maritime', libelle: 'Maritime' },
+  { valeur: 'enseignement-recherche', libelle: 'Enseignement, recherche' },
+  { valeur: 'social', libelle: 'Social' },
+];
+
+export const estCodeSecteurContact = (codeSecteur: string): boolean => {
+  return secteursContacts.map((s) => s.valeur).includes(codeSecteur);
 };

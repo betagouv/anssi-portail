@@ -5,11 +5,12 @@
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Hero from '../ui/Hero.svelte';
-  import { contactsParRegion } from './contacts.donnees';
+  import { contactsParRegion, estCodeSecteurContact } from './contacts.donnees';
   import { estCodeRegion } from './contacts.type';
   import FiltresContacts from './FiltresContacts.svelte';
 
   let regionSelectionnee: string = $state('');
+  let secteurSelectionne: string = $state('');
 
   const contacts = $derived(
     estCodeRegion(regionSelectionnee)
@@ -36,10 +37,15 @@
   const appliqueLesFiltres = () => {
     const parametreRegion = fragmentDeNavigation.extraisValeur('region', '');
     regionSelectionnee = estCodeRegion(parametreRegion) ? parametreRegion : '';
+    const parametreSecteur = fragmentDeNavigation.extraisValeur('secteur', '');
+    secteurSelectionne = estCodeSecteurContact(parametreSecteur)
+      ? parametreSecteur
+      : '';
   };
   appliqueLesFiltres();
   $effect(() => {
     fragmentDeNavigation.change('region', regionSelectionnee);
+    fragmentDeNavigation.change('secteur', secteurSelectionne);
     window.location.hash = fragmentDeNavigation.serialise();
   });
 
@@ -63,7 +69,7 @@
 
 {#if !$profilStore}
   <FiltresMobile filtreActif={false}>
-    <FiltresContacts bind:regionSelectionnee />
+    <FiltresContacts bind:regionSelectionnee bind:secteurSelectionne />
   </FiltresMobile>
 {/if}
 
@@ -71,7 +77,7 @@
   <div class="contenu-section">
     {#if !$profilStore}
       <FiltresBureau filtreActif={false}>
-        <FiltresContacts bind:regionSelectionnee />
+        <FiltresContacts bind:regionSelectionnee bind:secteurSelectionne />
       </FiltresBureau>
     {/if}
     {#if contacts}
