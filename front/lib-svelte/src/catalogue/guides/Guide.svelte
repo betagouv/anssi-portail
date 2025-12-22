@@ -3,7 +3,7 @@
   import BoutonFavori from '../../favoris/BoutonFavori.svelte';
   import FilAriane from '../../ui/FilAriane.svelte';
   import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
-  import type { Guide } from '../Guide.types';
+  import { CollectionGuide, type Guide } from '../Guide.types';
   import {
     chargeGuidesDansLeStore,
     guidesStore,
@@ -22,7 +22,9 @@
       document.title = decodeEntitesHtml(guide.nom) + ' | MesServicesCyber';
     }
   });
-  $: aDesCollections = guide && guide.collections.length > 0;
+  $: aDesCollections =
+    guide &&
+    guide.collections.filter((c) => c !== CollectionGuide.AUTRE).length > 0;
   $: descriptionAspetisee = aseptiseHtml(guide?.description ?? '');
 </script>
 
@@ -228,6 +230,7 @@
             &:hover {
               text-decoration-thickness: 2px;
             }
+
             &:after {
               display: none;
             }
@@ -328,6 +331,7 @@
         margin-top: 0;
       }
     }
+
     .grille-cartes {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(273px, 1fr));
