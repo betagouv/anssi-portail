@@ -203,8 +203,10 @@
     padding: 48px var(--gouttiere) 72px;
 
     .contenu-section {
-      display: flex;
-      gap: 1.5rem;
+      @include a-partir-de(md) {
+        display: flex;
+        gap: 1.5rem;
+      }
     }
   }
 
