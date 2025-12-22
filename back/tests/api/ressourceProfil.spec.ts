@@ -5,12 +5,12 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
+import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { encodeSession, enObjet } from './cookie';
 import { configurationDeTestDuServeur, fauxAdaptateurJWT } from './fauxObjets';
 import { jeanneDupont } from './objetsPretsALEmploi';
-import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 
 describe('La ressource Profil', () => {
   let serveur: Express;
@@ -63,6 +63,7 @@ describe('La ressource Profil', () => {
             codeTrancheEffectif: '11',
             estAssociation: false,
             estCollectivite: false,
+            codeActivite: '1234',
           },
         ],
       };
@@ -119,6 +120,18 @@ describe('La ressource Profil', () => {
       assert.notEqual(headerCookie, undefined);
       const cookieSessionDecode = enObjet(headerCookie[0]);
       assert.equal(cookieSessionDecode.session, '');
+    });
+
+    it("renvoie le code d'activité de l'organisation", async () => {
+      const cookie = encodeSession({
+        email: 'jeanne.dupont@user.com',
+      });
+
+      const reponse = await request(serveur)
+        .get('/api/profil')
+        .set('Cookie', [cookie]);
+
+      assert.equal(reponse.body.codeActivite, '84.11Z');
     });
   });
 });

@@ -1,13 +1,13 @@
 import Knex from 'knex';
+import pThrottle from 'p-throttle';
+import config from '../../knexfile';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { Organisation, Utilisateur } from '../metier/utilisateur';
-import config from '../../knexfile';
-import { UtilisateurBDD } from './utilisateurBDD';
+import { AdaptateurChiffrement } from './adaptateurChiffrement';
+import { AdaptateurHachage } from './adaptateurHachage';
 import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi';
 import { AdaptateurRechercheEntreprise } from './adaptateurRechercheEntreprise';
-import pThrottle from 'p-throttle';
-import { AdaptateurHachage } from './adaptateurHachage';
-import { AdaptateurChiffrement } from './adaptateurChiffrement';
+import { UtilisateurBDD } from './utilisateurBDD';
 
 type DonneesUtilisateurEnClair = {
   email: string;
@@ -98,6 +98,14 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     const { prenom, nom, telephone, domainesSpecialite, organisation } =
       profilAnssi;
 
+    const organisationRelue =
+      await this.adaptateurRechercheEntreprise.rechercheOrganisations(
+        organisation.siret,
+        organisation.departement
+      );
+
+    const codeActivite = organisationRelue[0].codeActivite;
+
     return new Utilisateur(
       {
         email: donnees.email,
@@ -109,7 +117,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         infolettreAcceptee: donnees.infolettreAcceptee,
         siretEntite: organisation.siret,
         idListeFavoris: utilisateur.id_liste_favoris,
-        organisation: new Organisation(organisation),
+        organisation: new Organisation({ ...organisation, codeActivite }),
       },
       this.adaptateurRechercheEntreprise
     );
@@ -156,8 +164,8 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     return result;
   }
 
-  async taille  () {
+  async taille() {
     const resultat = await this.knex('utilisateurs').count({ count: '*' });
     return Number(resultat[0].count);
-  };
+  }
 }

@@ -45,6 +45,7 @@ const ressourceProfil = ({
           idListeFavoris: utilisateurConnecte?.idListeFavoris,
           codeDepartement,
           codeRegion,
+          codeActivite: organisation?.codeActivite,
         });
       }
     }

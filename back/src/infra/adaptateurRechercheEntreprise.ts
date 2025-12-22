@@ -17,6 +17,7 @@ export type ResultatRechercheEntreprise = {
   codeRegion: string | undefined;
   estCollectivite: boolean;
   estAssociation: boolean;
+  codeActivite: string;
 };
 
 const extraisDepartement = (commune: string | undefined) => {
@@ -70,6 +71,7 @@ const extraisInfosEtablissement = (
     codeTrancheEffectif: resultat.tranche_effectif_salarie ?? undefined,
     estAssociation: resultat.complements.est_association,
     estCollectivite: Boolean(resultat.complements.collectivite_territoriale),
+    codeActivite: resultat.activite_principale,
   };
 };
 
@@ -94,6 +96,7 @@ type ResultatSirene = {
     } | null;
     est_association: boolean;
   };
+  activite_principale: string;
 };
 
 export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {

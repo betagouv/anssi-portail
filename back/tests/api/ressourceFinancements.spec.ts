@@ -89,6 +89,7 @@ describe('La ressource Financements', () => {
         codeRegion: 'FR-HDF',
         estAssociation: false,
         estCollectivite: false,
+        codeActivite: '62.01Z',
       };
       beforeEach(async () => {
         await entrepotFinancement.ajoute(financementCyberPME);

@@ -84,6 +84,7 @@ describe("La ressource d'informations de création de compte", () => {
             codeSecteur: 'D',
             estAssociation: false,
             estCollectivite: false,
+            codeActivite: '62.01Z',
           },
         ];
 
