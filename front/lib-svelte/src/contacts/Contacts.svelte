@@ -12,7 +12,7 @@
   let regionSelectionnee: string = $state('');
   let secteurSelectionne: string = $state('');
 
-  const contacts = $derived(
+  const contactsRegionaux = $derived(
     estCodeRegion(regionSelectionnee)
       ? contactsParRegion[regionSelectionnee]
       : undefined
@@ -80,7 +80,7 @@
         <FiltresContacts bind:regionSelectionnee bind:secteurSelectionne />
       </FiltresBureau>
     {/if}
-    {#if contacts}
+    {#if contactsRegionaux}
       <div class={['contacts', $profilStore ? 'centre' : '']}>
         <p class="note-information">
           Contactez en priorité les personnes responsables des questions
@@ -89,8 +89,8 @@
 
         <h2>Contacts régionaux</h2>
 
-        {#if contacts.COT}
-          {@const { nom, email } = contacts.COT}
+        {#if contactsRegionaux.COT}
+          {@const { nom, email } = contactsRegionaux.COT}
           <div class="carte-contact">
             <h3>Délégué(e)s ANSSI de votre région</h3>
             <p class="nom">{nom}</p>
@@ -98,8 +98,8 @@
           </div>
         {/if}
 
-        {#if contacts.CSIRT}
-          {@const { nom, telephone, siteWeb, adresse } = contacts.CSIRT}
+        {#if contactsRegionaux.CSIRT}
+          {@const { nom, telephone, siteWeb, adresse } = contactsRegionaux.CSIRT}
           <div class="carte-contact">
             <h3>{nom}</h3>
             {#if telephone}
@@ -114,8 +114,8 @@
           </div>
         {/if}
 
-        {#if contacts.campus}
-          {@const { nom, siteWeb, adresse, email } = contacts.campus}
+        {#if contactsRegionaux.campus}
+          {@const { nom, siteWeb, adresse, email } = contactsRegionaux.campus}
           <div class="carte-contact">
             <h3>{nom}</h3>
             {#if email}

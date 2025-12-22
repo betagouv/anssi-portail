@@ -1,4 +1,4 @@
-export type Contacts = {
+export type ContactsRegionaux = {
   CSIRT?: {
     nom: string;
     siteWeb: string;
