@@ -1,4 +1,8 @@
-import { type CodeRegion, type ContactsRegionaux } from './contacts.type';
+import {
+  type CodeRegion,
+  type ContactSectoriel,
+  type ContactsRegionaux,
+} from './contacts.type';
 
 export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
   'FR-ARA': {
@@ -228,8 +232,41 @@ export const secteursContacts = [
   { valeur: 'maritime', libelle: 'Maritime' },
   { valeur: 'enseignement-recherche', libelle: 'Enseignement, recherche' },
   { valeur: 'social', libelle: 'Social' },
-];
+] as const;
 
-export const estCodeSecteurContact = (codeSecteur: string): boolean => {
-  return secteursContacts.map((s) => s.valeur).includes(codeSecteur);
+const codesSecteurContact = secteursContacts.map((s) => s.valeur);
+
+type CodeSecteurContact = (typeof codesSecteurContact)[number];
+
+export const estCodeSecteurContact = (
+  codeSecteur: string
+): codeSecteur is CodeSecteurContact => {
+  return (codesSecteurContact as readonly string[]).includes(codeSecteur);
 };
+
+export const contactsParSecteur: Record<CodeSecteurContact, ContactSectoriel> =
+  {
+    aviation: {
+      nom: 'CERT Aviation',
+      siteWeb: 'https://www.cert-aviation.fr/',
+    },
+    'enseignement-recherche': {
+      nom: 'CERT Renater',
+      siteWeb: 'https://www.renater.fr/securite/le-cert-renater/',
+    },
+    defense: {
+      nom: 'CERT Entreprise Défense (CERT ED)',
+      siteWeb:
+        'https://www.defense.gouv.fr/drsd/ressources-entreprises/cert-entreprises-defense',
+    },
+    maritime: { nom: 'CERT Maritime', siteWeb: 'https://www.m-cert.fr/' },
+    sante: {
+      nom: 'CERT Santé',
+      siteWeb: 'https://cyberveille.esante.gouv.fr/',
+    },
+    social: {
+      nom: 'CERT Social',
+      siteWeb:
+        'https://www.assurance-maladie.ameli.fr/pages-d-informations-legales/cert-social',
+    },
+  };

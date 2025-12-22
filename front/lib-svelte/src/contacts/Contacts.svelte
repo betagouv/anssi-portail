@@ -5,7 +5,11 @@
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Hero from '../ui/Hero.svelte';
-  import { contactsParRegion, estCodeSecteurContact } from './contacts.donnees';
+  import {
+    contactsParRegion,
+    contactsParSecteur,
+    estCodeSecteurContact,
+  } from './contacts.donnees';
   import { estCodeRegion } from './contacts.type';
   import FiltresContacts from './FiltresContacts.svelte';
 
@@ -15,6 +19,12 @@
   const contactsRegionaux = $derived(
     estCodeRegion(regionSelectionnee)
       ? contactsParRegion[regionSelectionnee]
+      : undefined
+  );
+
+  const contactSectoriel = $derived(
+    estCodeSecteurContact(secteurSelectionne)
+      ? contactsParSecteur[secteurSelectionne]
       : undefined
   );
 
@@ -80,51 +90,69 @@
         <FiltresContacts bind:regionSelectionnee bind:secteurSelectionne />
       </FiltresBureau>
     {/if}
-    {#if contactsRegionaux}
+
+    {#if contactsRegionaux || contactSectoriel}
       <div class={['contacts', $profilStore ? 'centre' : '']}>
         <p class="note-information">
           Contactez en priorité les personnes responsables des questions
           numériques et de cybersécurité au sein de votre organisation.
         </p>
 
-        <h2>Contacts régionaux</h2>
+        {#if contactsRegionaux}
+          <h2>Contacts régionaux</h2>
 
-        {#if contactsRegionaux.COT}
-          {@const { nom, email } = contactsRegionaux.COT}
-          <div class="carte-contact">
-            <h3>Délégué(e)s ANSSI de votre région</h3>
-            <p class="nom">{nom}</p>
-            <p class="email"><a href="mailto:{email}">{email}</a></p>
-          </div>
-        {/if}
-
-        {#if contactsRegionaux.CSIRT}
-          {@const { nom, telephone, siteWeb, adresse } = contactsRegionaux.CSIRT}
-          <div class="carte-contact">
-            <h3>{nom}</h3>
-            {#if telephone}
-              <p class="telephone"><a href="tel:{telephone}">{telephone}</a></p>
-            {/if}
-            <p class="site-web">
-              <a href={siteWeb} target="_blank">{siteWeb}</a>
-            </p>
-            {#if adresse}
-              <p class="adresse">{adresse}</p>
-            {/if}
-          </div>
-        {/if}
-
-        {#if contactsRegionaux.campus}
-          {@const { nom, siteWeb, adresse, email } = contactsRegionaux.campus}
-          <div class="carte-contact">
-            <h3>{nom}</h3>
-            {#if email}
+          {#if contactsRegionaux.COT}
+            {@const { nom, email } = contactsRegionaux.COT}
+            <div class="carte-contact">
+              <h3>Délégué(e)s ANSSI de votre région</h3>
+              <p class="nom">{nom}</p>
               <p class="email"><a href="mailto:{email}">{email}</a></p>
-            {/if}
+            </div>
+          {/if}
+
+          {#if contactsRegionaux.CSIRT}
+            {@const { nom, telephone, siteWeb, adresse } =
+              contactsRegionaux.CSIRT}
+            <div class="carte-contact">
+              <h3>{nom}</h3>
+              {#if telephone}
+                <p class="telephone">
+                  <a href="tel:{telephone}">{telephone}</a>
+                </p>
+              {/if}
+              <p class="site-web">
+                <a href={siteWeb} target="_blank">{siteWeb}</a>
+              </p>
+              {#if adresse}
+                <p class="adresse">{adresse}</p>
+              {/if}
+            </div>
+          {/if}
+
+          {#if contactsRegionaux.campus}
+            {@const { nom, siteWeb, adresse, email } = contactsRegionaux.campus}
+            <div class="carte-contact">
+              <h3>{nom}</h3>
+              {#if email}
+                <p class="email"><a href="mailto:{email}">{email}</a></p>
+              {/if}
+              <p class="site-web">
+                <a href={siteWeb} target="_blank">{siteWeb}</a>
+              </p>
+              <p class="adresse">{adresse}</p>
+            </div>
+          {/if}
+        {/if}
+
+        {#if contactSectoriel}
+          <h2>Contacts sectoriels</h2>
+          <div class="carte-contact">
+            <h3>{contactSectoriel.nom}</h3>
             <p class="site-web">
-              <a href={siteWeb} target="_blank">{siteWeb}</a>
+              <a href={contactSectoriel.siteWeb} target="_blank"
+                >{contactSectoriel.siteWeb}</a
+              >
             </p>
-            <p class="adresse">{adresse}</p>
           </div>
         {/if}
 
