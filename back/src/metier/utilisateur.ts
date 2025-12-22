@@ -5,22 +5,26 @@ export class Organisation {
   siret: string;
   departement: string | null;
   region: string | undefined;
+  codeActivite: string;
 
   constructor({
     nom,
     siret,
     departement,
     codeRegion,
+    codeActivite,
   }: {
     nom: string;
     siret: string;
     departement: string | null;
     codeRegion?: string;
+    codeActivite: string;
   }) {
     this.nom = nom;
     this.siret = siret;
     this.departement = departement;
     this.region = codeRegion;
+    this.codeActivite = codeActivite;
   }
 
   estAnssi = () => {

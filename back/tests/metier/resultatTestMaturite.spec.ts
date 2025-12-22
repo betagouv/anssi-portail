@@ -119,6 +119,7 @@ describe('Le résultat du test de maturité', () => {
               siret: jeanneDupont.siretEntite,
               estAssociation: false,
               estCollectivite: false,
+              codeActivite: '62.01Z',
             },
           ];
         }

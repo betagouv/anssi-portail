@@ -2,6 +2,7 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
+import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { creeServeur } from '../../src/api/msc';
 import { CompteCree } from '../../src/bus/evenements/compteCree';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
@@ -11,7 +12,6 @@ import {
 } from '../bus/busPourLesTests';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { configurationDeTestDuServeur } from './fauxObjets';
-import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 
 describe('La ressource utilisateur', () => {
   let serveur: Express;
@@ -73,6 +73,7 @@ describe('La ressource utilisateur', () => {
           codeSecteur: 'D',
           estAssociation: false,
           estCollectivite: false,
+          codeActivite: '62.01Z',
         },
       ];
 
@@ -103,6 +104,7 @@ describe('La ressource utilisateur', () => {
           codeSecteur: 'D',
           estAssociation: false,
           estCollectivite: false,
+          codeActivite: '62.01Z',
         },
       ];
 
@@ -148,6 +150,7 @@ describe('La ressource utilisateur', () => {
           codeSecteur: 'D',
           estAssociation: false,
           estCollectivite: false,
+          codeActivite: '62.01Z',
         },
       ];
 

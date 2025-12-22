@@ -157,6 +157,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
                     codeRegion: codeRegionRenvoyeParRechercheEntreprise,
                     estCollectivite: false,
                     estAssociation: false,
+                    codeActivite: '62.01Z',
                   },
                 ]
               : [];

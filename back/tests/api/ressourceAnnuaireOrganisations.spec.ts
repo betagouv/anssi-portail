@@ -78,6 +78,7 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
             codeSecteur: 'D',
             estAssociation: false,
             estCollectivite: false,
+            codeActivite: '6201Z',
           },
         ];
       },

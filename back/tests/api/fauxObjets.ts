@@ -3,6 +3,7 @@ import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
+import { adaptateurCellar } from '../../src/infra/adaptateurCellar';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { adaptateurGestionVide } from '../../src/infra/adaptateurGestionErreurVide';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
@@ -18,7 +19,6 @@ import { EntrepotGuideMemoire } from '../persistance/entrepotGuideMemoire';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
-import { adaptateurCellar } from '../../src/infra/adaptateurCellar';
 
 export const fauxFournisseurDeChemin = {
   cheminPageJekyll: (_: string) =>
@@ -62,6 +62,7 @@ export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
         codeTrancheEffectif: '11',
         estAssociation: false,
         estCollectivite: false,
+        codeActivite: '84.11Z',
       },
     ],
   };

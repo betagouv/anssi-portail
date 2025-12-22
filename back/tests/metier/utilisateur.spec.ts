@@ -23,6 +23,7 @@ describe("L'utilisateur", () => {
           nom: 'beta',
           departement: '33',
           siret: '1234',
+          codeActivite: '62.01Z',
         }),
       },
       fauxAdaptateurRechercheEntreprise
@@ -50,6 +51,7 @@ describe("L'utilisateur", () => {
             codeSecteur: 'D',
             estAssociation: false,
             estCollectivite: false,
+            codeActivite: '62.01Z',
           },
         ];
       },
@@ -79,6 +81,7 @@ describe("L'utilisateur", () => {
           nom: 'ANSSI',
           departement: '75',
           siret: '13000766900018',
+          codeActivite: '62.01Z',
         }),
       },
       fauxAdaptateurRechercheEntreprise
@@ -97,6 +100,7 @@ describe("L'utilisateur", () => {
           nom: 'ANSSI',
           departement: '75',
           siret: '2424242000023',
+          codeActivite: '62.01Z',
         }),
       },
       fauxAdaptateurRechercheEntreprise
@@ -115,6 +119,7 @@ describe("L'utilisateur", () => {
           nom: 'ANSSI',
           departement: '75',
           siret: '13000766912345',
+          codeActivite: '62.01Z',
         }),
       },
       fauxAdaptateurRechercheEntreprise
