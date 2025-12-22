@@ -1,3 +1,4 @@
+import { type Profil } from '../stores/profil.store';
 import {
   type CodeRegion,
   type ContactSectoriel,
@@ -270,3 +271,11 @@ export const contactsParSecteur: Record<CodeSecteurContact, ContactSectoriel> =
         'https://www.assurance-maladie.ameli.fr/pages-d-informations-legales/cert-social',
     },
   };
+
+export const creeLienContactsUtiles = (profil: Profil | undefined) => {
+  if (profil) {
+    return `/contacts/#?region=${profil?.codeRegion}`;
+  } else {
+    return '/contacts';
+  }
+};

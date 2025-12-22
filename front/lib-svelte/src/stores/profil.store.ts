@@ -2,7 +2,7 @@ import { get, writable } from 'svelte/store';
 import axios from 'axios';
 import { verifieResultatTestARevendiquer } from '../test-maturite/resultatTest';
 
-type Profil = {
+export type Profil = {
   prenom: string;
   nom: string;
   email: string;

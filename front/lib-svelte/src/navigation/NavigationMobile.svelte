@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { fly } from 'svelte/transition';
-
   import { mount, onDestroy, onMount, unmount } from 'svelte';
+  import { fly } from 'svelte/transition';
+  import { creeLienContactsUtiles } from '../contacts/contacts.donnees';
   import ZoneIdentification from '../identification/ZoneIdentification.svelte';
   import { profilStore } from '../stores/profil.store';
   import LienNavigationMobile from './LienNavigationMobile.svelte';
@@ -27,7 +27,6 @@
   });
 
   $: estConnecte = !!$profilStore;
-  $: codeRegion = $profilStore?.codeRegion ?? '';
 </script>
 
 {#if ouvert}
@@ -86,7 +85,7 @@
         <summary>Contacts utiles</summary>
         <div class="choix">
           <LienNavigationMobile
-            href={`/contacts/${codeRegion}`}
+            href={creeLienContactsUtiles($profilStore)}
             label="Contacts cyber"
             dansMenuDeroulant
             prefixCheminActif="/contacts"

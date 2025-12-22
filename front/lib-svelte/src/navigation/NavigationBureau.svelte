@@ -1,11 +1,11 @@
 <script lang="ts">
+  import { creeLienContactsUtiles } from '../contacts/contacts.donnees';
   import { profilStore } from '../stores/profil.store';
   import LienNavigation from './LienNavigation.svelte';
 
   const cheminRelatif = window.location.pathname;
 
   $: estConnecte = !!$profilStore;
-  $: codeRegion = $profilStore?.codeRegion ?? '';
 </script>
 
 <nav class="conteneur-nav">
@@ -59,7 +59,7 @@
       <summary>Contacts utiles</summary>
       <div class="choix">
         <LienNavigation
-          href={`/contacts/${codeRegion}`}
+          href={creeLienContactsUtiles($profilStore)}
           label="Contacts cyber"
           dansMenuDeroulant
           prefixCheminActif="/contacts"
