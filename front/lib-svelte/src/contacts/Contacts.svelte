@@ -16,18 +16,18 @@
   const contactsRegionaux = $derived(
     estCodeRegion(regionSelectionnee)
       ? contactsParRegion[regionSelectionnee]
-      : undefined,
+      : undefined
   );
 
   const contactSectoriel = $derived(
     estCodeSecteurContact(secteurSelectionne)
       ? contactsParSecteur[secteurSelectionne]
-      : undefined,
+      : undefined
   );
 
   // Gestion du fragment
   let fragmentDeNavigation = $state(
-    creeLeFragmentDeNavigation(window.location.hash),
+    creeLeFragmentDeNavigation(window.location.hash)
   );
   const changeLeFragmentDeNavigation = () => {
     fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
@@ -101,9 +101,13 @@
           {#if contactsRegionaux.COT}
             {@const { nom, email } = contactsRegionaux.COT}
             <div class="carte-contact">
-              <h3>Délégué(e)s ANSSI de votre {contactsRegionaux.designation}</h3>
+              <h3>
+                Délégué(e)s ANSSI de votre {contactsRegionaux.designation}
+              </h3>
               <p class="nom">{nom}</p>
-              <p class="email"><a href="mailto:{email}">{email}</a></p>
+              <p class="email">
+                <a href="mailto:{email}" class="lien">{email}</a>
+              </p>
             </div>
           {/if}
 
@@ -114,11 +118,11 @@
               <h3>{nom}</h3>
               {#if telephone}
                 <p class="telephone">
-                  <a href="tel:{telephone}">{telephone}</a>
+                  <a href="tel:{telephone}" class="lien">{telephone}</a>
                 </p>
               {/if}
               <p class="site-web">
-                <a href={siteWeb} target="_blank">{siteWeb}</a>
+                <a href={siteWeb} target="_blank" class="lien">{siteWeb}</a>
               </p>
               {#if adresse}
                 <p class="adresse">{adresse}</p>
@@ -131,10 +135,12 @@
             <div class="carte-contact">
               <h3>{nom}</h3>
               {#if email}
-                <p class="email"><a href="mailto:{email}">{email}</a></p>
+                <p class="email">
+                  <a href="mailto:{email}" class="lien">{email}</a>
+                </p>
               {/if}
               <p class="site-web">
-                <a href={siteWeb} target="_blank">{siteWeb}</a>
+                <a href={siteWeb} target="_blank" class="lien">{siteWeb}</a>
               </p>
               <p class="adresse">{adresse}</p>
             </div>
@@ -146,8 +152,8 @@
           <div class="carte-contact">
             <h3>{contactSectoriel.nom}</h3>
             <p class="site-web">
-              <a href={contactSectoriel.siteWeb} target="_blank"
-              >{contactSectoriel.siteWeb}</a
+              <a href={contactSectoriel.siteWeb} target="_blank" class="lien"
+                >{contactSectoriel.siteWeb}</a
               >
             </p>
           </div>
@@ -170,18 +176,23 @@
                 <a
                   href="https://club.ssi.gouv.fr/#/declaration-incident"
                   target="_blank"
-                >Déclarer un incident et/ou demander une assistance</a
+                  class="lien"
+                  >Déclarer un incident et/ou demander une assistance</a
                 >
               </li>
               <li>
                 <a
                   href="https://club.ssi.gouv.fr/#/declaration-art-2321-4-1"
+                  class="lien"
                   target="_blank">Signaler une vulnérabilité produit</a
                 >
               </li>
             </ul>
-            <a href="https://www.cert.ssi.gouv.fr/contact/" target="_blank"
-            >Toutes les coordonnées du CERT-FR
+            <a
+              href="https://www.cert.ssi.gouv.fr/contact/"
+              target="_blank"
+              class="lien"
+              >Toutes les coordonnées du CERT-FR
             </a>
           </div>
         </div>
@@ -199,7 +210,8 @@
             <a
               href="https://www.cybermalveillance.gouv.fr/diagnostic"
               target="_blank"
-            >Aller sur le 17Cyber
+              class="lien"
+              >Aller sur le 17Cyber
             </a>
           </div>
         </div>
@@ -312,7 +324,6 @@
         width: min(100%, 792px);
       }
     }
-
   }
 
   .carte-contact {
