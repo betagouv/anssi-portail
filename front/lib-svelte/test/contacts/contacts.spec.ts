@@ -38,15 +38,14 @@ describe("Le secteur de contact est retrouvé pour un code d'activité", () => {
 
   describe('concernant le secteur Santé', () => {
     it('pour la division des activités de santé humaine', () => {
-      const codeSecteur = calculeCodeSecteurContact('86.23Z');
-
-      expect(codeSecteur).toBe('sante');
+      expect(calculeCodeSecteurContact('86.23Z')).toBe('sante');
+      expect(calculeCodeSecteurContact('86.90F')).toBe('sante');
     });
 
     it("pour la division des services d'administration publique et de défense ; services de sécurité sociale obligatoire", () => {
-      const codeSecteur = calculeCodeSecteurContact('84.12Z');
-
-      expect(codeSecteur).toBe('sante');
+      expect(calculeCodeSecteurContact('84.12Z')).toBe('sante');
+      expect(calculeCodeSecteurContact('84.30B')).toBe('sante');
+      expect(calculeCodeSecteurContact('84.11Z')).toBe(undefined);
     });
   });
 
