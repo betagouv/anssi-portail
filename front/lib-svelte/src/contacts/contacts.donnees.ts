@@ -170,15 +170,6 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       email: 'contact@campuscyber-regionsud.fr',
     },
   },
-  'FR-COM': {
-    CSIRT: {
-      nom: 'Centre Cyber du Pacifique',
-      siteWeb: 'https://centrecyberpacifique.nc/',
-      adresse: '0 rue Anatole France, Galerie Nouméa Centre, 98800 Nouméa',
-      telephone: '505.300',
-    },
-    COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
-  },
   'FR-971': {
     CSIRT: {
       nom: 'CSIRT-ATLANTIC',

@@ -101,19 +101,19 @@ export const departements = [
   { nom: 'Martinique', code: '972', codeRegion: 'FR-972' },
   { nom: 'Guyane', code: '973', codeRegion: 'FR-973' },
   { nom: 'La Réunion', code: '974', codeRegion: 'FR-974' },
-  { nom: 'Saint-Pierre-et-Miquelon', code: '975', codeRegion: 'FR-COM' },
-  { nom: 'Mayotte', code: '976', codeRegion: 'FR-COM' },
-  { nom: 'Saint-Barthélemy', code: '977', codeRegion: 'FR-COM' },
-  { nom: 'Saint-Martin', code: '978', codeRegion: 'FR-COM' },
+  { nom: 'Saint-Pierre-et-Miquelon', code: '975', codeRegion: 'FR-PM' },
+  { nom: 'Mayotte', code: '976', codeRegion: 'FR-976' },
+  { nom: 'Saint-Barthélemy', code: '977', codeRegion: 'FR-BL' },
+  { nom: 'Saint-Martin', code: '978', codeRegion: 'FR-MF' },
   {
     nom: 'Terres australes et antarctiques françaises',
     code: '984',
-    codeRegion: 'FR-COM',
+    codeRegion: 'FR-TF',
   },
-  { nom: 'Wallis et Futuna', code: '986', codeRegion: 'FR-COM' },
-  { nom: 'Polynésie française', code: '987', codeRegion: 'FR-COM' },
-  { nom: 'Nouvelle-Calédonie', code: '988', codeRegion: 'FR-COM' },
-  { nom: 'Île de Clipperton', code: '989', codeRegion: 'FR-COM' },
+  { nom: 'Wallis et Futuna', code: '986', codeRegion: 'FR-WF' },
+  { nom: 'Polynésie française', code: '987', codeRegion: 'FR-PF' },
+  { nom: 'Nouvelle-Calédonie', code: '988', codeRegion: 'FR-NC' },
+  { nom: 'Île de Clipperton', code: '989', codeRegion: 'FR-CP' },
 ] as const;
 
 export const codeDepartement = departements.map((s) => s.code);

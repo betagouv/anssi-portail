@@ -3,7 +3,6 @@ export const regions = [
   { codeINSEE: '27', codeIso: 'FR-BFC', nom: 'Bourgogne-Franche-Comté' },
   { codeINSEE: '53', codeIso: 'FR-BRE', nom: 'Bretagne' },
   { codeINSEE: '24', codeIso: 'FR-CVL', nom: 'Centre-Val de Loire' },
-  { codeINSEE: '', codeIso: 'FR-COM', nom: "Collectivités d'Outre-Mer" },
   { codeINSEE: '94', codeIso: 'FR-20R', nom: 'Corse' },
   { codeINSEE: '44', codeIso: 'FR-GES', nom: 'Grand Est' },
   { codeINSEE: '32', codeIso: 'FR-HDF', nom: 'Hauts-de-France' },
