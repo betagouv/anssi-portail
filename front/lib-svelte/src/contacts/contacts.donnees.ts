@@ -216,6 +216,9 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
     COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
   },
   'FR-976': {
+    COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+  },
+  'FR-BL': {
     CSIRT: {
       nom: 'CSIRT-ATLANTIC',
       siteWeb: 'https://www.accyb.org/fr/FindOutAtlantic',
@@ -224,6 +227,47 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
     },
     COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
   },
+  'FR-MF': {
+    CSIRT: {
+      nom: 'CSIRT-ATLANTIC',
+      siteWeb: 'https://www.accyb.org/fr/FindOutAtlantic',
+      adresse: '60 Chemin de Reynald\n97170, PETIT-BOURG',
+      telephone: '0 970 260 801',
+    },
+    COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+  },
+  'FR-PF': {
+    COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+  },
+  'FR-PM': {
+    CSIRT: {
+      nom: 'CSIRT-ATLANTIC',
+      siteWeb: 'https://www.accyb.org/fr/FindOutAtlantic',
+      adresse: '60 Chemin de Reynald\n97170, PETIT-BOURG',
+      telephone: '0 970 260 801',
+    },
+    COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+  },
+  'FR-WF': {
+    CSIRT: {
+      nom: 'Centre Cyber du Pacifique',
+      siteWeb: 'https://centrecyberpacifique.nc/',
+      adresse: '0 rue Anatole France, Galerie Nouméa Centre, 98800 Nouméa',
+      telephone: '505.300',
+    },
+    COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+  },
+  'FR-NC': {
+    CSIRT: {
+      nom: 'Centre Cyber du Pacifique',
+      siteWeb: 'https://centrecyberpacifique.nc/',
+      adresse: '0 rue Anatole France, Galerie Nouméa Centre, 98800 Nouméa',
+      telephone: '505.300',
+    },
+    COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+  },
+  'FR-CP': { COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' } },
+  'FR-TF': { COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' } },
 };
 
 export const contactsParSecteur: Record<CodeSecteurContact, ContactSectoriel> =

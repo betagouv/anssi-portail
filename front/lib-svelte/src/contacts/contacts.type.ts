@@ -37,6 +37,14 @@ export const CodeRegions = [
   'FR-971',
   'FR-973',
   'FR-974',
+  'FR-PM',
+  'FR-BL',
+  'FR-MF',
+  'FR-WF',
+  'FR-PF',
+  'FR-NC',
+  'FR-TF',
+  'FR-CP',
 ] as const;
 
 export type CodeRegion = (typeof CodeRegions)[number];
