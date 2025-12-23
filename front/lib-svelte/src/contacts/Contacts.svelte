@@ -104,7 +104,7 @@
           {#if contactsRegionaux.COT}
             {@const { nom, email } = contactsRegionaux.COT}
             <div class="carte-contact">
-              <h3>Délégué(e)s ANSSI de votre région</h3>
+              <h3>Délégué(e)s ANSSI de votre {contactsRegionaux.designation}</h3>
               <p class="nom">{nom}</p>
               <p class="email"><a href="mailto:{email}">{email}</a></p>
             </div>

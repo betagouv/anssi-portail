@@ -15,6 +15,7 @@ export type ContactsRegionaux = {
     adresse: string;
     email?: string;
   };
+  designation: 'territoire' | 'région';
 };
 
 export const CodeRegions = [

@@ -11,6 +11,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       nom: 'Mathieu DELAPLACE / Marianne DELARUE',
       email: 'auvergne-rhone-alpes@ssi.gouv.fr',
     },
+    designation: 'région',
   },
   'FR-BFC': {
     CSIRT: {
@@ -23,6 +24,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       nom: 'Véronique BRUNET / Françoise MARMOT',
       email: 'bourgogne-franche-comt@ssi.gouv.fr',
     },
+    designation: 'région',
   },
   'FR-BRE': {
     CSIRT: {
@@ -38,6 +40,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       adresse: '1c-1d avenue de Belle Fontaine, 35510 Cesson-Sévigné',
       email: 'contact@cyberalliance.bzh',
     },
+    designation: 'région',
   },
   'FR-CVL': {
     CSIRT: {
@@ -47,6 +50,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       telephone: '0 805 69 15 05',
     },
     COT: { nom: 'Mélodie FOUREZ', email: 'centre-val-de-loire@ssi.gouv.fr' },
+    designation: 'région',
   },
   'FR-20R': {
     CSIRT: {
@@ -55,6 +59,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       adresse: '10 Rue Général Fiorella 20000 Ajaccio',
     },
     COT: { nom: 'Moïse MOYAL', email: 'corse@ssi.gouv.fr' },
+    designation: 'région',
   },
   'FR-GES': {
     CSIRT: {
@@ -63,6 +68,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       telephone: '0 970 512 525',
     },
     COT: { nom: 'Vincent RHIN', email: 'grand-est@ssi.gouv.fr' },
+    designation: 'région',
   },
   'FR-HDF': {
     CSIRT: {
@@ -77,6 +83,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       siteWeb: 'https://hdf.campuscyber.fr/',
       adresse: '177 All. Clémentine Deman, 59000 Lille',
     },
+    designation: 'région',
   },
   'FR-IDF': {
     CSIRT: {
@@ -91,6 +98,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       nom: 'Le Campus Cyber',
       siteWeb: 'https://campuscyber.fr/',
     },
+    designation: 'région',
   },
   'FR-NOR': {
     CSIRT: {
@@ -106,6 +114,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       adresse: 'Campus Effiscience 2 Espace Anton Philips14460 Colombelles',
       email: 'contact@campus-normandie-cyber.fr',
     },
+    designation: 'région',
   },
   'FR-NAQ': {
     CSIRT: {
@@ -125,6 +134,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
         'Parc Ampéris - Batiment Colibri - 3eme étage - 4 Rue Adrienne Bolland, 33600 Pessac',
       email: 'contact@campuscyber-na.fr',
     },
+    designation: 'région',
   },
   'FR-OCC': {
     CSIRT: {
@@ -143,6 +153,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       siteWeb: 'https://www.cyberocc.com/',
       email: 'contact@cyberocc.fr',
     },
+    designation: 'région',
   },
   'FR-PDL': {
     CSIRT: {
@@ -153,6 +164,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       telephone: '0 800 100 200',
     },
     COT: { nom: 'Régis DUBRULLE', email: 'pays-de-la-loire@ssi.gouv.fr' },
+    designation: 'région',
   },
   'FR-PAC': {
     CSIRT: {
@@ -169,6 +181,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       adresse: 'Tour Mirabeau 1 Boulevard Saade - Quai Arenc 13002 Marseille',
       email: 'contact@campuscyber-regionsud.fr',
     },
+    designation: 'région',
   },
   'FR-971': {
     CSIRT: {
@@ -178,6 +191,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       telephone: '0 970 260 801',
     },
     COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+    designation: 'région',
   },
   'FR-972': {
     CSIRT: {
@@ -187,6 +201,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       telephone: '0 970 260 801',
     },
     COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+    designation: 'région',
   },
   'FR-973': {
     CSIRT: {
@@ -196,6 +211,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       telephone: '0 970 260 801',
     },
     COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+    designation: 'région',
   },
   'FR-974': {
     CSIRT: {
@@ -205,9 +221,11 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       telephone: '0 262 974 999',
     },
     COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+    designation: 'région',
   },
   'FR-976': {
     COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+    designation: 'région',
   },
   'FR-BL': {
     CSIRT: {
@@ -217,6 +235,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       telephone: '0 970 260 801',
     },
     COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+    designation: 'territoire',
   },
   'FR-MF': {
     CSIRT: {
@@ -226,9 +245,11 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       telephone: '0 970 260 801',
     },
     COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+    designation: 'territoire',
   },
   'FR-PF': {
     COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+    designation: 'territoire',
   },
   'FR-PM': {
     CSIRT: {
@@ -238,6 +259,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       telephone: '0 970 260 801',
     },
     COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+    designation: 'territoire',
   },
   'FR-WF': {
     CSIRT: {
@@ -247,6 +269,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       telephone: '505.300',
     },
     COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+    designation: 'territoire',
   },
   'FR-NC': {
     CSIRT: {
@@ -256,9 +279,16 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       telephone: '505.300',
     },
     COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+    designation: 'territoire',
   },
-  'FR-CP': { COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' } },
-  'FR-TF': { COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' } },
+  'FR-CP': {
+    COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+    designation: 'territoire',
+  },
+  'FR-TF': {
+    COT: { nom: 'Moïse MOYAL', email: 'outre-mer@ssi.gouv.fr' },
+    designation: 'territoire',
+  },
 };
 
 export const contactsParSecteur: Record<CodeSecteurContact, ContactSectoriel> =
