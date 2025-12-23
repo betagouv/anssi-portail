@@ -12,9 +12,9 @@
 </script>
 
 <fieldset class="filtres regions">
-  <legend>Région</legend>
+  <legend>Région et territoire</legend>
   <label class="colonne">
-    <span class="libelle">Sélectionner une région</span>
+    <span class="libelle">Sélectionner une région / un territoire</span>
     <SelectRegion bind:region={regionSelectionnee} optionDefautSelectionnable />
   </label>
 </fieldset>

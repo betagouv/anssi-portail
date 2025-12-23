@@ -215,7 +215,7 @@
                   </label>
 
                   <label>
-                    Dans quelle région se trouve votre organisation&nbsp;?
+                    Dans quelle région / territoire se trouve votre organisation&nbsp;?
                     <SelectRegion bind:region />
                   </label>
 
