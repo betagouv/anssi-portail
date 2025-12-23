@@ -351,6 +351,7 @@
   }
 
   .note-information {
+    align-self: flex-start;
     margin-bottom: 40px;
 
     @include a-partir-de(md) {
