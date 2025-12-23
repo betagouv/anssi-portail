@@ -144,9 +144,15 @@
 
 <FiltresMobile filtreActif={$recherches.filtreActif}>
   <FiltreBesoin />
-  <FiltreAccessibilite />
-  <FiltreTypologie />
-  <FiltreSource />
+  {#if sectionActive === 'guides'}
+    <FiltreLangue />
+    <FiltreCollection />
+  {:else}
+    <FiltreAccessibilite />
+    <FiltreTypologie />
+    <FiltreSource />
+  {/if}
+
   <input
     type="button"
     class="bouton primaire"
