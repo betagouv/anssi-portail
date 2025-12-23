@@ -6,10 +6,7 @@
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Hero from '../ui/Hero.svelte';
   import { estCodeSecteurContact } from './contacts';
-  import {
-    contactsParRegion,
-    contactsParSecteur,
-  } from './contacts.donnees';
+  import { contactsParRegion, contactsParSecteur } from './contacts.donnees';
   import { estCodeRegion } from './contacts.type';
   import FiltresContacts from './FiltresContacts.svelte';
 
@@ -19,18 +16,18 @@
   const contactsRegionaux = $derived(
     estCodeRegion(regionSelectionnee)
       ? contactsParRegion[regionSelectionnee]
-      : undefined
+      : undefined,
   );
 
   const contactSectoriel = $derived(
     estCodeSecteurContact(secteurSelectionne)
       ? contactsParSecteur[secteurSelectionne]
-      : undefined
+      : undefined,
   );
 
   // Gestion du fragment
   let fragmentDeNavigation = $state(
-    creeLeFragmentDeNavigation(window.location.hash)
+    creeLeFragmentDeNavigation(window.location.hash),
   );
   const changeLeFragmentDeNavigation = () => {
     fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
@@ -150,7 +147,7 @@
             <h3>{contactSectoriel.nom}</h3>
             <p class="site-web">
               <a href={contactSectoriel.siteWeb} target="_blank"
-                >{contactSectoriel.siteWeb}</a
+              >{contactSectoriel.siteWeb}</a
               >
             </p>
           </div>
@@ -173,7 +170,7 @@
                 <a
                   href="https://club.ssi.gouv.fr/#/declaration-incident"
                   target="_blank"
-                  >Déclarer un incident et/ou demander une assistance</a
+                >Déclarer un incident et/ou demander une assistance</a
                 >
               </li>
               <li>
@@ -184,7 +181,7 @@
               </li>
             </ul>
             <a href="https://www.cert.ssi.gouv.fr/contact/" target="_blank"
-              >Toutes les coordonnées du CERT-FR
+            >Toutes les coordonnées du CERT-FR
             </a>
           </div>
         </div>
@@ -202,7 +199,7 @@
             <a
               href="https://www.cybermalveillance.gouv.fr/diagnostic"
               target="_blank"
-              >Aller sur le 17Cyber
+            >Aller sur le 17Cyber
             </a>
           </div>
         </div>
@@ -310,11 +307,12 @@
       @include a-partir-de(lg) {
         align-items: center;
       }
+
+      > * {
+        width: min(100%, 792px);
+      }
     }
 
-    > * {
-      width: min(100%, 792px);
-    }
   }
 
   .carte-contact {
