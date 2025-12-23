@@ -22,7 +22,6 @@ export const CodeRegions = [
   'FR-BFC',
   'FR-BRE',
   'FR-CVL',
-  'FR-COM',
   'FR-20R',
   'FR-GES',
   'FR-HDF',

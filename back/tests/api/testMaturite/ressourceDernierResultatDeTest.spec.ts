@@ -208,11 +208,11 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
           it('utilise la région du test', async () => {
             codeRegionRenvoyeParRechercheEntreprise = undefined;
-            resultatTestMaturite.region = 'FR-COM';
+            resultatTestMaturite.region = 'FR-ARA';
 
             const reponse = await requeteGET();
 
-            assert.equal(reponse.body.organisation.region.code, 'FR-COM');
+            assert.equal(reponse.body.organisation.region.code, 'FR-ARA');
           });
 
           it('utilise la tranche d’effectif du test', async () => {
