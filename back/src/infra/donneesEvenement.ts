@@ -1,3 +1,4 @@
+import { GuideTelecharge } from '../bus/evenements/guideTelecharge';
 import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction';
 import { CodeRegion } from '../metier/referentielRegions';
 import { CodeSecteur } from '../metier/referentielSecteurs';
@@ -13,69 +14,68 @@ export type DonneesEvenement =
   | DonneesEvenementAvisUtilisateurDonne
   | DonneesEvenementGuideTelecharge;
 
-interface DonneesCommunesEvenement {
+type Evenement<Type extends string, Donnees extends object> = {
+  donnees: Donnees;
+  type: Type;
   date: Date;
-}
+};
 
-interface DonneesEvenementNouvelUtilisateur extends DonneesCommunesEvenement {
-  donnees: {
-    idUtilisateur: string;
-  };
-  type: 'NOUVEL_UTILISATEUR_INSCRIT';
-}
+type DonneesEvenementNouvelUtilisateur = Evenement<
+  'NOUVEL_UTILISATEUR_INSCRIT',
+  { idUtilisateur: string }
+>;
 
-interface DonneesEvenementMiseAJourFavorisUtilisateur
-  extends DonneesCommunesEvenement {
-  donnees: {
+type DonneesEvenementMiseAJourFavorisUtilisateur = Evenement<
+  'MISE_A_JOUR_FAVORIS_UTILISATEUR',
+  {
     idUtilisateur: string;
     listeIdFavoris: string[];
-  };
-  type: 'MISE_A_JOUR_FAVORIS_UTILISATEUR';
-}
+  }
+>;
 
-interface DonneesEvenementProprieteTestRevendiquee
-  extends DonneesCommunesEvenement {
-  donnees: {
+type DonneesEvenementProprieteTestRevendiquee = Evenement<
+  'PROPRIETE_TEST_REVENDIQUEE',
+  {
     idUtilisateur: string;
     idResultatTest: string;
-  };
-  type: 'PROPRIETE_TEST_REVENDIQUEE';
-}
+  }
+>;
 
-interface DonneesEvenementTestRealise extends DonneesCommunesEvenement {
-  donnees: {
+type DonneesEvenementTestRealise = Evenement<
+  'TEST_REALISE',
+  {
     region: CodeRegion | undefined;
     secteur: CodeSecteur | undefined;
     tailleOrganisation: CodeTrancheEffectif | undefined;
     reponses: ReponsesTestMaturite;
     codeSessionGroupe?: string;
     idResultatTest: string;
-  };
-  type: 'TEST_REALISE';
-}
+  }
+>;
 
-interface DonneesEvenementRetourExperienceDonne
-  extends DonneesCommunesEvenement {
-  donnees: {
+type DonneesEvenementRetourExperienceDonne = Evenement<
+  'RETOUR_EXPERIENCE_DONNE',
+  {
     raison: string;
     idUtilisateur: string | undefined;
-  };
-  type: 'RETOUR_EXPERIENCE_DONNE';
-}
+  }
+>;
 
-interface DonneesEvenementAvisUtilisateurDonne
-  extends DonneesCommunesEvenement {
-  donnees: {
+type DonneesEvenementAvisUtilisateurDonne = Evenement<
+  'AVIS_UTILISATEUR_DONNE',
+  {
     niveauDeSatisfaction: NiveauDeSatisfaction;
     idUtilisateur: string | undefined;
-  };
-  type: 'AVIS_UTILISATEUR_DONNE';
-}
+  }
+>;
 
-interface DonneesEvenementGuideTelecharge extends DonneesCommunesEvenement {
-  donnees: {
-    id: string;
-    nom: string;
-  };
-  type: 'GUIDE_TELECHARGE';
-}
+type DonneesEvenementGuideTelecharge = Evenement<
+  'GUIDE_TELECHARGE',
+  ProprietesDeClasse<GuideTelecharge>
+>;
+
+type ProprietesDeClasse<C> = {
+  [Key in keyof C as C[Key] extends (...args: never) => unknown
+    ? never
+    : Key]: C[Key];
+};
