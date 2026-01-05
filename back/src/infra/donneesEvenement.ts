@@ -10,7 +10,8 @@ export type DonneesEvenement =
   | DonneesEvenementTestRealise
   | DonneesEvenementMiseAJourFavorisUtilisateur
   | DonneesEvenementRetourExperienceDonne
-  | DonneesEvenementAvisUtilisateurDonne;
+  | DonneesEvenementAvisUtilisateurDonne
+  | DonneesEvenementGuideTelecharge;
 
 interface DonneesCommunesEvenement {
   date: Date;
@@ -69,4 +70,12 @@ interface DonneesEvenementAvisUtilisateurDonne
     idUtilisateur: string | undefined;
   };
   type: 'AVIS_UTILISATEUR_DONNE';
+}
+
+interface DonneesEvenementGuideTelecharge extends DonneesCommunesEvenement {
+  donnees: {
+    id: string;
+    nom: string;
+  };
+  type: 'GUIDE_TELECHARGE';
 }
