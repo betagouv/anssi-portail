@@ -13,7 +13,12 @@
 {:else if guide.documents.length > 1 && autoriseMultiple}
   <div class="documents">
     {#each guide.documents as document (document.libelle)}
-      <a href={document.url} target="_blank" class="bouton primaire">
+      <a
+        href={document.url}
+        target="_blank"
+        class="bouton primaire lien-externe-produit"
+        data-source="Page guide"
+      >
         {decodeEntitesHtml(document.libelle)}
       </a>
     {/each}
@@ -22,12 +27,14 @@
 
 <style lang="scss">
   @use '../../../../assets/styles/responsive.scss' as *;
+
   .documents {
     display: flex;
     flex-direction: column;
     align-items: start;
     gap: 24px;
   }
+
   .bouton {
     margin-top: 24px;
     margin-bottom: 40px;
