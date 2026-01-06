@@ -3,12 +3,12 @@ import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { ClientHttpPosteur } from './clientHttp';
 import {
   DonneesEvenement,
-  DonneesEvenementGuideTelecharge,
+  DonneesEvenementDocumentGuideTelecharge,
 } from './donneesEvenement';
 
 export type AdaptateurAnalytique = {
   rapporteEvenement: (
-    donneesEvenement: DonneesEvenementGuideTelecharge
+    donneesEvenement: DonneesEvenementDocumentGuideTelecharge
   ) => Promise<void>;
 };
 
@@ -17,13 +17,14 @@ export const fabriqueAdaptateurMatamo = (
   adaptateurEnvironnement: AdaptateurEnvironnement
 ): AdaptateurAnalytique => ({
   rapporteEvenement: async (
-    donneesEvenement: DonneesEvenementGuideTelecharge
+    donneesEvenement: DonneesEvenementDocumentGuideTelecharge
   ) => {
     const parametres = new URLSearchParams();
     parametres.append('rec', '1');
-    parametres.append('action_name', 'Guide Téléchargé');
     parametres.append('idsite', adaptateurEnvironnement.matomo().idSite());
-    parametres.append('c_t', donneesEvenement.donnees.id);
+    parametres.append('e_c', 'Guides');
+    parametres.append('e_a', 'Document téléchargé');
+    parametres.append('e_n', donneesEvenement.donnees.nomFichier);
 
     await clientHttpPosteur.post(
       'https://stats.beta.gouv.fr/matomo.php?' + parametres.toString(),

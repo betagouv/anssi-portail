@@ -3,7 +3,7 @@ import { beforeEach, describe, it } from 'node:test';
 import { rapporteEvenementGuideTelechargeDansTraqueur } from '../../src/bus/rapporteEvenementGuideTelechargeDansTraqueur';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
 import { AdaptateurAnalytique } from '../../src/infra/adaptateurAnalytique';
-import { GuideTelecharge } from '../../src/bus/evenements/guideTelecharge';
+import { DocumentGuideTelecharge } from '../../src/bus/evenements/documentGuideTelecharge';
 
 describe("L'abonnement qui rapporte le téléchargement d'un guide dans Matomo", () => {
   let adaptateurAnalytique: AdaptateurAnalytique;
@@ -34,12 +34,12 @@ describe("L'abonnement qui rapporte le téléchargement d'un guide dans Matomo",
     };
 
     await rapporteEvenementDansMatomo()(
-      new GuideTelecharge({ id: 'zero-trust' })
+      new DocumentGuideTelecharge({ nomFichier: 'zero-trust' })
     );
 
     assert.notEqual(evenementRecu, undefined);
-    assert.equal(evenementRecu!.type, 'GUIDE_TELECHARGE');
-    assert.equal(evenementRecu!.donnees.id, 'zero-trust');
+    assert.equal(evenementRecu!.type, 'DOCUMENT_GUIDE_TELECHARGE');
+    assert.equal(evenementRecu!.donnees.nomFichier, 'zero-trust');
     assert.deepEqual(evenementRecu!.date, new Date('2025-03-10'));
   });
 });
