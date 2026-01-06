@@ -28,12 +28,18 @@ import { messagerieMattermost } from './infra/messagerieMattermost';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { EntrepotGuide } from './metier/entrepotGuide';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
+import { fabriqueAdaptateurMatamo } from './infra/adaptateurAnalytique';
+import axios from 'axios';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(
   adaptateurEnvironnement
 );
 const adaptateurJournal = fabriqueAdaptateurJournal();
+const adaptateurAnalytique = fabriqueAdaptateurMatamo(
+  axios,
+  adaptateurEnvironnement
+);
 const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
 const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber();
 const adaptateurHachage = fabriqueAdaptateurHachage({
@@ -64,6 +70,7 @@ const entrepotGuide: EntrepotGuide = new EntrepotGuideGrist({
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
   busEvenements,
+  adaptateurAnalytique,
   adaptateurEmail,
   adaptateurJournal,
   adaptateurHorloge,
