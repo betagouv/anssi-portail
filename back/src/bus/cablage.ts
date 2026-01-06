@@ -1,3 +1,4 @@
+import { AdaptateurAnalytique } from '../infra/adaptateurAnalytique';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../infra/adaptateurJournal';
@@ -14,13 +15,16 @@ import { creeContactBrevo } from './creeContactBrevo';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte';
 import { AvisUtilisateurDonne } from './evenements/avisUtilisateurDonne';
 import { CompteCree } from './evenements/compteCree';
+import { GuideTelecharge } from './evenements/guideTelecharge';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
 import { TestRealise } from './evenements/testRealise';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
+import { rapporteEvenementGuideTelechargeDansTraqueur } from './rapporteEvenementGuideTelechargeDansTraqueur';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
+  adaptateurAnalytique,
   adaptateurEmail,
   adaptateurJournal,
   adaptateurHorloge,
@@ -28,6 +32,7 @@ export const cableTousLesAbonnes = ({
   entrepotFavori,
 }: {
   busEvenements: BusEvenements;
+  adaptateurAnalytique: AdaptateurAnalytique;
   adaptateurEmail: AdaptateurEmail;
   adaptateurJournal: AdaptateurJournal;
   adaptateurHorloge: AdaptateurHorloge;
@@ -85,6 +90,14 @@ export const cableTousLesAbonnes = ({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
+    })
+  );
+
+  busEvenements.abonne(
+    GuideTelecharge,
+    rapporteEvenementGuideTelechargeDansTraqueur({
+      adaptateurAnalytique,
+      adaptateurHorloge,
     })
   );
 };
