@@ -23,7 +23,6 @@ export const fabriqueAdaptateurMatamo = (
     parametres.append('rec', '1');
     parametres.append('action_name', 'Guide Téléchargé');
     parametres.append('idsite', adaptateurEnvironnement.matomo().idSite());
-    parametres.append('c_n', donneesEvenement.donnees.nom);
     parametres.append('c_t', donneesEvenement.donnees.id);
 
     await clientHttpPosteur.post(

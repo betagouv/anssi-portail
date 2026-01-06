@@ -1,9 +1,7 @@
 export class GuideTelecharge {
   readonly id: string;
-  readonly nom: string;
 
-  constructor({ id, nom }: { id: string; nom: string }) {
+  constructor({ id }: { id: string }) {
     this.id = id;
-    this.nom = nom;
   }
 }

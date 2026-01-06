@@ -9,8 +9,7 @@ describe("L'adpatateur Matomo", () => {
   const evenement: DonneesEvenement = {
     type: 'GUIDE_TELECHARGE',
     donnees: {
-      id: 'zero-trust',
-      nom: 'Zero Trust',
+      id: 'zero-trust.pdf',
     },
     date: new Date('2026-01-01T10:11:12.000'),
   };
@@ -32,7 +31,7 @@ describe("L'adpatateur Matomo", () => {
 
       assert.equal(
         urlAppelee,
-        'https://stats.beta.gouv.fr/matomo.php?rec=1&action_name=Guide+T%C3%A9l%C3%A9charg%C3%A9&idsite=227&c_n=Zero+Trust&c_t=zero-trust'
+        'https://stats.beta.gouv.fr/matomo.php?rec=1&action_name=Guide+T%C3%A9l%C3%A9charg%C3%A9&idsite=227&c_t=zero-trust.pdf'
       );
     });
   });
