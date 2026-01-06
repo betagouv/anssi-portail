@@ -6,17 +6,20 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "watch": "vite build -w --minify false",
-    "test": "pnpm typecheck && eslint . && vitest --run",
+    "dev": "vite build --watch --mode=development",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "tsc --noEmit && svelte-check"
+    "pretest": "npm-run-all --parallel typecheck lint",
+    "test": "vitest run",
+    "test:ci": "vitest run",
+    "typecheck": "tsc --noEmit && svelte-check",
+    "watch": "vite build -w --minify false"
   },
   "devDependencies": {
+    "@eslint/js": "~9.39.1",
     "@sveltejs/vite-plugin-svelte": "~5.1.1",
     "@tsconfig/svelte": "~5.0.4",
     "@types/qrcode": "~1.5.5",
-    "@eslint/js": "~9.39.1",
     "eslint": "~9.39.1",
     "eslint-plugin-svelte": "~3.5.1",
     "globals": "~16.0.0",
@@ -35,6 +38,7 @@
   "dependencies": {
     "axios": "~1.13.2",
     "dompurify": "~3.2.6",
+    "npm-run-all2": "^8.0.4",
     "qrcode": "~1.5.4"
   },
   "main": "svelte.config.js",
