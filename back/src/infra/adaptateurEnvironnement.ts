@@ -48,6 +48,9 @@ type AdaptateurEnvironnement = {
     guides: () => string;
     visas: () => string;
   };
+  matomo: () => {
+    idSite: () => string;
+  };
 };
 
 const ajouteBarreObliqueFinale = (url: string): string => {
@@ -209,6 +212,9 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
           : '',
     };
   },
+  matomo: () => ({
+    idSite: () => process.env.MATOMO_ID || '',
+  }),
 };
 
 export { AdaptateurEnvironnement, adaptateurEnvironnement };

@@ -128,6 +128,9 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     ressourcesCyber: () => 'https://ressources-cyber.notre-cellar/',
     visas: () => 'https://visas.notre-cellar/',
   }),
+  matomo: () => ({
+    idSite: () => '227',
+  }),
 };
 
 const vraiMiddleware = fabriqueMiddleware({
