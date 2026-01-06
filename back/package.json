@@ -1,5 +1,5 @@
 {
-  "name": "anssi-portail-back",
+  "name": "@anssi-portail/back",
   "version": "1.0.0",
   "description": "",
   "main": "serveur.ts",
