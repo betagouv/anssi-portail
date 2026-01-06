@@ -5,7 +5,7 @@ _site
 .jekyll-metadata
 vendor
 node_modules
-dist-back
+dist/
 .vscode
 .env
 .idea

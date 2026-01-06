@@ -4,9 +4,20 @@
   "description": "",
   "main": "serveur.ts",
   "scripts": {
-    "test": "eslint . && tsc --noemit && node --import tsx --test './tests/**/*.spec.ts'",
+    "build": "tsc",
+    "dev": "npm-run-all --parallel --race dev:bdd dev:server",
+    "dev:bdd": "docker compose up db",
+    "dev:server": "sleep 3 && pnpm migre-bdd && node --import tsx --env-file ../.env --watch src/serveur.ts",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "migre-bdd": "node --env-file=../.env --import tsx ./node_modules/knex/bin/cli.js migrate:latest --knexfile knexfile.ts",
+    "migre-bdd:clever": "node ./node_modules/knex/bin/cli.js migrate:latest --knexfile dist/knexfile.js",
+    "prestart": "tsc",
+    "pretest": "npm-run-all --parallel typecheck lint",
+    "start": "pnpm migre-bdd:clever && node ./dist/src/serveur.js",
+    "test": "node --import tsx --test './tests/**/*.spec.ts'",
+    "test:ci": "node --import tsx --test './tests/**/*.spec.ts'",
+    "typecheck": "tsc --noEmit"
   },
   "engines": {
     "node": ">=23"
@@ -46,6 +57,7 @@
     "html-entities": "~2.6.0",
     "jsonwebtoken": "~9.0.2",
     "knex": "~3.1.0",
+    "npm-run-all2": "^8.0.4",
     "openid-client": "~5.7.1",
     "p-throttle": "~7.0.0",
     "pg": "~8.16.3",
