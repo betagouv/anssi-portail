@@ -12,9 +12,8 @@
     "lint:fix": "eslint . --fix",
     "migre-bdd": "node --env-file=../.env --import tsx ./node_modules/knex/bin/cli.js migrate:latest --knexfile knexfile.ts",
     "migre-bdd:clever": "node ./node_modules/knex/bin/cli.js migrate:latest --knexfile dist/knexfile.js",
-    "prestart": "tsc",
+    "prestart": "tsc && pnpm migre-bdd:clever",
     "pretest": "npm-run-all --parallel typecheck lint",
-    "start": "pnpm migre-bdd:clever && node ./dist/src/serveur.js",
     "test": "node --import tsx --test './tests/**/*.spec.ts'",
     "test:ci": "node --import tsx --test './tests/**/*.spec.ts'",
     "typecheck": "tsc --noEmit"
