@@ -110,8 +110,7 @@
         <p>
           <b>Prenez votre cyberdépart !</b> Bénéficiez d’un
           <b>premier diagnostic gratuit accompagné d’un Aidant cyber</b>
-          et commencez à renforcer rapidement le niveau de cybersécurité de votre
-          organisation.
+          et recevez <b>6 recommandations prioritaires</b> à mettre en place pour améliorer la cybersécurité de votre organisation.
         </p>
         <div class="zone-tags">
           <span class="tag"
