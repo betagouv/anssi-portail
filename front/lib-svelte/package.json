@@ -1,5 +1,5 @@
 {
-  "name": "anssi-portail-svelte",
+  "name": "@anssi-portail/svelte",
   "private": true,
   "version": "1.0.0",
   "description": "Partie svelte pour le catalogue du portail de l’ANSSI",

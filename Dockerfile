@@ -18,7 +18,7 @@ ENV PNPM_HOME=/usr/local/bin
 COPY package.json pnpm-lock.yaml  pnpm-workspace.yaml ./
 COPY front ./front
 RUN pnpm install --frozen-lockfile
-RUN pnpm --filter anssi-portail-svelte build
+RUN pnpm --filter @anssi-portail/svelte build
 
 ####
 ## BUILD du front
