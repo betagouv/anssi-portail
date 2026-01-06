@@ -15,7 +15,7 @@ import { creeContactBrevo } from './creeContactBrevo';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte';
 import { AvisUtilisateurDonne } from './evenements/avisUtilisateurDonne';
 import { CompteCree } from './evenements/compteCree';
-import { GuideTelecharge } from './evenements/guideTelecharge';
+import { DocumentGuideTelecharge } from './evenements/documentGuideTelecharge';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
 import { TestRealise } from './evenements/testRealise';
@@ -94,7 +94,7 @@ export const cableTousLesAbonnes = ({
   );
 
   busEvenements.abonne(
-    GuideTelecharge,
+    DocumentGuideTelecharge,
     rapporteEvenementGuideTelechargeDansTraqueur({
       adaptateurAnalytique,
       adaptateurHorloge,

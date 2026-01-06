@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
+import { DocumentGuideTelecharge } from '../../bus/evenements/documentGuideTelecharge';
 import { ConfigurationServeur } from '../configurationServeur';
-import { GuideTelecharge } from '../../bus/evenements/guideTelecharge';
 
 export const ressourceDocumentGuide = ({
   busEvenements,
@@ -26,7 +26,9 @@ export const ressourceDocumentGuide = ({
           .send(documentCellar.contenu);
 
         await busEvenements.publie(
-          new GuideTelecharge({ id: requete.params.nomFichier })
+          new DocumentGuideTelecharge({
+            nomFichier: requete.params.nomFichier,
+          })
         );
       } catch (erreur) {
         suite(erreur);

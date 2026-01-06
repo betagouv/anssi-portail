@@ -1,4 +1,4 @@
-import { GuideTelecharge } from '../bus/evenements/guideTelecharge';
+import { DocumentGuideTelecharge } from '../bus/evenements/documentGuideTelecharge';
 import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction';
 import { CodeRegion } from '../metier/referentielRegions';
 import { CodeSecteur } from '../metier/referentielSecteurs';
@@ -12,7 +12,7 @@ export type DonneesEvenement =
   | DonneesEvenementMiseAJourFavorisUtilisateur
   | DonneesEvenementRetourExperienceDonne
   | DonneesEvenementAvisUtilisateurDonne
-  | DonneesEvenementGuideTelecharge;
+  | DonneesEvenementDocumentGuideTelecharge;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -69,9 +69,9 @@ type DonneesEvenementAvisUtilisateurDonne = Evenement<
   }
 >;
 
-export type DonneesEvenementGuideTelecharge = Evenement<
-  'GUIDE_TELECHARGE',
-  ProprietesDeClasse<GuideTelecharge>
+export type DonneesEvenementDocumentGuideTelecharge = Evenement<
+  'DOCUMENT_GUIDE_TELECHARGE',
+  ProprietesDeClasse<DocumentGuideTelecharge>
 >;
 
 type ProprietesDeClasse<C> = {

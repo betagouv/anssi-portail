@@ -5,11 +5,11 @@ import { DonneesEvenement } from '../../src/infra/donneesEvenement';
 import assert from 'node:assert';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
 
-describe("L'adpatateur Matomo", () => {
+describe("L'adaptateur Matomo", () => {
   const evenement: DonneesEvenement = {
-    type: 'GUIDE_TELECHARGE',
+    type: 'DOCUMENT_GUIDE_TELECHARGE',
     donnees: {
-      id: 'zero-trust.pdf',
+      nomFichier: 'zero-trust.pdf',
     },
     date: new Date('2026-01-01T10:11:12.000'),
   };
@@ -31,7 +31,7 @@ describe("L'adpatateur Matomo", () => {
 
       assert.equal(
         urlAppelee,
-        'https://stats.beta.gouv.fr/matomo.php?rec=1&action_name=Guide+T%C3%A9l%C3%A9charg%C3%A9&idsite=227&c_t=zero-trust.pdf'
+        'https://stats.beta.gouv.fr/matomo.php?rec=1&idsite=227&e_c=Guides&e_a=Document+t%C3%A9l%C3%A9charg%C3%A9&e_n=zero-trust.pdf'
       );
     });
   });
