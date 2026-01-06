@@ -34,13 +34,12 @@ describe("L'abonnement qui rapporte le téléchargement d'un guide dans Matomo",
     };
 
     await rapporteEvenementDansMatomo()(
-      new GuideTelecharge({ id: 'zero-trust', nom: 'Zero Trust' })
+      new GuideTelecharge({ id: 'zero-trust' })
     );
 
     assert.notEqual(evenementRecu, undefined);
     assert.equal(evenementRecu!.type, 'GUIDE_TELECHARGE');
     assert.equal(evenementRecu!.donnees.id, 'zero-trust');
-    assert.equal(evenementRecu!.donnees.nom, 'Zero Trust');
     assert.deepEqual(evenementRecu!.date, new Date('2025-03-10'));
   });
 });

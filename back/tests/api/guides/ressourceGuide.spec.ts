@@ -3,7 +3,6 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
-import { GuideTelecharge } from '../../../src/bus/evenements/guideTelecharge';
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire';
 import { configurationDeTestDuServeur } from '../fauxObjets';
 import { guideZeroTrust } from '../objetsPretsALEmploi';
@@ -78,17 +77,6 @@ describe('La ressource guide', () => {
           url: 'http://localhost/documents-guides/anssi-fondamentaux-zero-trust-v1.0.pdf',
         },
       ]);
-    });
-
-    it('publie un évènement sur le bus', async () => {
-      await request(serveur).get('/api/guides/zero-trust');
-
-      const evenement = busEvenements.recupereEvenement(GuideTelecharge);
-
-      assert.deepEqual(evenement, {
-        id: 'zero-trust',
-        nom: 'Zero Trust',
-      });
     });
   });
 });

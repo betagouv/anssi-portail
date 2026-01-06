@@ -1,7 +1,11 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
+import { GuideTelecharge } from '../../bus/evenements/guideTelecharge';
 
-export const ressourceDocumentGuide = ({ cellar }: ConfigurationServeur) => {
+export const ressourceDocumentGuide = ({
+  busEvenements,
+  cellar,
+}: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get(
@@ -20,6 +24,10 @@ export const ressourceDocumentGuide = ({ cellar }: ConfigurationServeur) => {
           .contentType(documentCellar.typeDeContenu)
           .status(200)
           .send(documentCellar.contenu);
+
+        await busEvenements.publie(
+          new GuideTelecharge({ id: requete.params.nomFichier })
+        );
       } catch (erreur) {
         suite(erreur);
       }

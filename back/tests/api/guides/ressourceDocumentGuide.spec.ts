@@ -4,16 +4,21 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { ConfigurationServeur } from '../../../src/api/configurationServeur';
 import { creeServeur } from '../../../src/api/msc';
-import { configurationDeTestDuServeur } from '../fauxObjets';
+import { GuideTelecharge } from '../../../src/bus/evenements/guideTelecharge';
 import { CleDuBucket } from '../../../src/infra/adaptateurCellar';
+import { MockBusEvenement } from '../../bus/busPourLesTests';
+import { configurationDeTestDuServeur } from '../fauxObjets';
 
 describe("La ressource de document d'un guide", () => {
   let serveur: Express;
   let configurationDuServeur: ConfigurationServeur;
+  let busEvenements: MockBusEvenement;
 
   beforeEach(() => {
+    busEvenements = new MockBusEvenement();
     configurationDuServeur = {
       ...configurationDeTestDuServeur,
+      busEvenements,
       cellar: {
         get: () =>
           Promise.resolve({ contenu: Buffer.from(''), typeDeContenu: '' }),
@@ -84,6 +89,16 @@ describe("La ressource de document d'un guide", () => {
       );
 
       assert.equal(reponse.headers['content-type'], 'application/pdf');
+    });
+
+    it('publie un évènement sur le bus', async () => {
+      await request(serveur).get('/documents-guides/zero-trust.pdf');
+
+      const evenement = busEvenements.recupereEvenement(GuideTelecharge);
+
+      assert.deepEqual(evenement, {
+        id: 'zero-trust.pdf',
+      });
     });
   });
 });
