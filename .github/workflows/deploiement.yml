@@ -10,13 +10,18 @@ on:
 jobs:
   deploiement-demo-node:
     name: Déploiement en DÉMO (NODE)
-    environment: DEMO_PNPM
+    environment: POC_NODE
     runs-on: ubuntu-latest
     steps:
       - name: Cloner le dépôt Git
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Cloner l'intégralité du dépôt, pour ne pas avoir de « shallow repo » rejeté par Clever
+
+      - name: Configurer Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
 
       - name: Installer la CLI Clever Cloud
         shell: bash
