@@ -4,6 +4,9 @@
   "description": "",
   "main": "serveur.ts",
   "packageManager": "pnpm@10.24.0",
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
     "admin": "node -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
     "admin:dev": "tsc -p back && node --env-file .env -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
