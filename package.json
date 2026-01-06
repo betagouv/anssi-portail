@@ -16,7 +16,7 @@
     "test": "pnpm --reporter=append-only -r test",
     "migre-bdd": "pnpm --filter @anssi-portail/back migre-bdd",
     "preinstall": "npx only-allow@1.2.2 pnpm",
-    "start": "pnpm -r start"
+    "start": "pnpm --filter @anssi-portail/back start"
   },
   "repository": {
     "type": "git",
