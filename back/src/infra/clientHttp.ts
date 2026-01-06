@@ -4,3 +4,11 @@ export type ClientHttp<T> = {
     config?: { headers?: Record<string, string> }
   ) => Promise<{ data: T }>;
 };
+
+export type ClientHttpPosteur<C, R> = {
+  post: (
+    url: string,
+    corps: C,
+    config?: { headers?: Record<string, string> }
+  ) => Promise<{ data: R }>;
+};

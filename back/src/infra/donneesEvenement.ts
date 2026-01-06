@@ -69,7 +69,7 @@ type DonneesEvenementAvisUtilisateurDonne = Evenement<
   }
 >;
 
-type DonneesEvenementGuideTelecharge = Evenement<
+export type DonneesEvenementGuideTelecharge = Evenement<
   'GUIDE_TELECHARGE',
   ProprietesDeClasse<GuideTelecharge>
 >;
