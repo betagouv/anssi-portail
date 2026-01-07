@@ -42,10 +42,15 @@ describe("Le secteur de contact est retrouvé pour un code d'activité", () => {
       expect(calculeCodeSecteurContact('86.90F')).toBe('sante');
     });
 
-    it("pour la division des services d'administration publique et de défense ; services de sécurité sociale obligatoire", () => {
+    it("pour la division des services d'administration publique (tutelle) de la santé, de la formation, de la culture et des services sociaux, autre que sécurité sociale", () => {
       expect(calculeCodeSecteurContact('84.12Z')).toBe('sante');
-      expect(calculeCodeSecteurContact('84.30B')).toBe('sante');
       expect(calculeCodeSecteurContact('84.11Z')).toBe(undefined);
+    });
+  });
+
+  describe('concernant le secteur Social', () => {
+    it('pour la division de la gestion des retraites complémentaires', () => {
+      expect(calculeCodeSecteurContact('84.30B')).toBe('social');
     });
   });
 
