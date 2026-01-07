@@ -18,6 +18,7 @@
         target="_blank"
         class="bouton primaire lien-externe-produit"
         data-source="Page guide"
+        data-cible={guide.nom}
       >
         {decodeEntitesHtml(document.libelle)}
       </a>
