@@ -13,11 +13,14 @@
   export const affiche = () => {
     afficheDialogue = true;
   };
-  type RaisonDisponible = 'pas-clair' | 'pas-le-temps' | 'pas-besoin' | 'autre';
+  type RaisonDisponible =
+    | 'pas-clair'
+    | 'pas-le-temps'
+    | 'pas-decisionnaire'
+    | 'autre';
   let raison: RaisonDisponible | undefined;
   let erreurRaison = false;
   let precisionPasClair = '';
-  let precisionPasBesoin = '';
   let precisionAutre = '';
   let emailDeContact = '';
 
@@ -27,8 +30,7 @@
         return precisionPasClair;
       case 'autre':
         return precisionAutre;
-      case 'pas-besoin':
-        return precisionPasBesoin;
+      case 'pas-decisionnaire':
       case 'pas-le-temps':
       case undefined:
         return '';
@@ -99,21 +101,16 @@
             {/if}
             <label>
               <input type="radio" value="pas-le-temps" bind:group={raison} />
-              <span>
-                Je n’ai pas le temps maintenant / Je ne suis pas décisionnaire
-              </span>
+              <span> Je n’ai pas le temps maintenant </span>
             </label>
             <label>
-              <input type="radio" value="pas-besoin" bind:group={raison} />
-              <span>Mon organisation n’a pas besoin d’accompagnement cyber</span
-              >
-            </label>
-            {#if raison === 'pas-besoin'}
-              <ZoneTexte
-                aideSaisie="Précisez votre réponse (facultatif)"
-                bind:valeur={precisionPasBesoin}
+              <input
+                type="radio"
+                value="pas-decisionnaire"
+                bind:group={raison}
               />
-            {/if}
+              <span>Je ne suis pas décisionnaire</span>
+            </label>
             <label>
               <input type="radio" value="autre" bind:group={raison} />
               <span>Autre</span>
