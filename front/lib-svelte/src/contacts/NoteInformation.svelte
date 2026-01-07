@@ -2,8 +2,9 @@
 </script>
 
 <p class="note-information">
-  Contactez en priorité les personnes responsables des questions numériques et
-  de cybersécurité au sein de votre organisation.
+  Ces contacts sont fournis à titre indicatif et leur pertinence peut varier
+  selon les spécificités de votre organisation. Contactez toujours en priorité
+  les personnes responsables au sein de votre organisation.
 </p>
 
 <style lang="scss">
