@@ -9,6 +9,7 @@
   import { contactsParRegion, contactsParSecteur } from './contacts.donnees';
   import { estCodeRegion } from './contacts.type';
   import FiltresContacts from './FiltresContacts.svelte';
+  import NoteInformation from './NoteInformation.svelte';
 
   let regionSelectionnee: string = $state('');
   let secteurSelectionne: string = $state('');
@@ -90,10 +91,7 @@
 
     {#if contactsRegionaux || contactSectoriel}
       <div class={['contacts', $profilStore ? 'centre' : '']}>
-        <p class="note-information">
-          Contactez en priorité les personnes responsables des questions
-          numériques et de cybersécurité au sein de votre organisation.
-        </p>
+        <NoteInformation />
 
         {#if contactsRegionaux}
           <h2>Contacts régionaux</h2>
@@ -218,10 +216,7 @@
       </div>
     {:else}
       <div class="aucun-resultat">
-        <p class="note-information">
-          Contactez en priorité les personnes responsables des questions
-          numériques et de cybersécurité au sein de votre organisation.
-        </p>
+        <NoteInformation />
         <img
           src="/assets/images/contacts-resultat-vide.svg"
           alt="Aucun résultat"
@@ -356,19 +351,6 @@
       @include a-partir-de(md) {
         font-size: 1.375rem;
       }
-    }
-  }
-
-  .note-information {
-    align-self: flex-start;
-    margin-bottom: 40px;
-
-    @include a-partir-de(md) {
-      margin-bottom: 24px;
-    }
-
-    .contacts & {
-      margin-bottom: 0;
     }
   }
 </style>
