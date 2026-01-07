@@ -118,6 +118,16 @@ describe("La ressource des retours d'expérience", () => {
       assert.equal(retourExperienceEnvoye!.precision, '&lt;&gt;');
     });
 
+    it('accepte la raison pas-decisionnaire', async () => {
+      const reponse = await request(serveur)
+        .post('/api/retours-experience')
+        .send({
+          raison: 'pas-decisionnaire',
+        });
+
+      assert.equal(reponse.status, 201);
+    });
+
     describe("concernant la publication de l'événement", () => {
       let representation: Record<string, string>;
 
