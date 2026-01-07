@@ -1,6 +1,7 @@
 url: https://messervices.cyber.gouv.fr
 plugins:
   - jekyll-dotenv
+  - jekyll-environment-variables
 collections:
   services:
     output: true
