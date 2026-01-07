@@ -1,25 +1,24 @@
 name: L'intégration continue
-permissions: {}
+permissions: { }
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   build:
     name: Construction du site
-
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Cloner le dépôt Git
+        uses: actions/checkout@v4
 
-      - name: Utilise la version Node.js 23
-        uses: actions/setup-node@v4
+      - name: Configurer Node.js
+        uses: actions/setup-node@v6
         with:
-          node-version: 23
+          node-version-file: '.nvmrc'
 
       - name: Installe pnpm
         uses: pnpm/action-setup@v4
@@ -32,8 +31,23 @@ jobs:
       - name: Exécute les tests
         run: pnpm test
 
-      - name: (CONSTRUCTION) Construis le site via Docker
-        run: docker build --target build-le-site -t anssi-portail-site .
+      - name: Construis le back
+        run: pnpm --filter @anssi-portail/back build
 
-      - name: (CONSTRUCTION) Construis le back via Docker
-        run: docker build --target build-le-back -t anssi-portail-back .
+      - name: Construis la lib Svelte
+        run: pnpm --filter @anssi-portail/svelte build
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.276.0
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+          cache-version: 0
+          working-directory: ./front
+
+      - name: Construis avec Jekyll
+        run: |
+          bundle config set --local path './front/vendor/bundle'
+          bundle exec --gemfile=./front/Gemfile jekyll build -s ./front -d ./front/_site
+        env:
+          JEKYLL_ENV: production
