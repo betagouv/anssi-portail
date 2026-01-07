@@ -41,16 +41,25 @@ jobs:
           cache-version: 0
           working-directory: ./front
 
+      - name: Installer la CLI Clever Cloud
+        shell: bash
+        run: npm install -g clever-tools@4.4.0
+
+      - name: Connecter à Clever
+        env:
+          CLEVER_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
+          CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
+          ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
+        run: |
+          clever link "$ID_APP"
+          clever env | grep -v "^#" | tr -d '"' >> "$GITHUB_ENV"
+
       - name: Construis avec Jekyll
         run: |
           bundle config set --local path './front/vendor/bundle'
           bundle exec --gemfile=./front/Gemfile jekyll build -s ./front -d ./front/_site
         env:
           JEKYLL_ENV: production
-
-      - name: Installer la CLI Clever Cloud
-        shell: bash
-        run: npm install -g clever-tools@4.4.0
 
       - name: Déployer en DÉMO (NODE)
         env:
@@ -62,7 +71,6 @@ jobs:
           git config --global user.name "MesServicesCyber"
           git add --force front/_site
           git commit -m "Ajoute le site généré"
-          clever link "$ID_APP"
           clever deploy --force --same-commit-policy=rebuild
 
   # deploiement-demo:
