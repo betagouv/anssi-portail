@@ -13,7 +13,7 @@ export const ressourceRetoursExperience = ({
     '/',
     [
       check('raison')
-        .isIn(['pas-clair', 'pas-le-temps', 'pas-besoin', 'autre'])
+        .isIn(['pas-clair', 'pas-le-temps', 'pas-decisionnaire', 'autre'])
         .withMessage('La raison est invalide'),
       check('emailDeContact')
         .optional({ values: 'falsy' })
