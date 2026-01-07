@@ -13,12 +13,12 @@ export const calculeCodeSecteurContact = (
   if (codeActivite === '25.40Z' || codeActivite === '84.22Z') {
     return 'defense';
   }
-  if (
-    codeActivite.startsWith('86.') ||
-    codeActivite.startsWith('84.12') ||
-    codeActivite.startsWith('84.3')
-  ) {
+  if (codeActivite.startsWith('86.') || codeActivite.startsWith('84.12')) {
     return 'sante';
+  }
+
+  if (codeActivite.startsWith('84.3')) {
+    return 'social';
   }
 
   if (
