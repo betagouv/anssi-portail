@@ -73,26 +73,69 @@ jobs:
           git commit -m "Ajoute le site généré"
           clever deploy --force --same-commit-policy=rebuild
 
-  # deploiement-prod:
-  #   needs: [deploiement-demo]
-  #   name: Déploiement en PROD
-  #   environment: PROD_NODE
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Cloner le dépôt Git
-  #       uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 0 # Cloner l'intégralité du dépôt, pour ne pas avoir de « shallow repo » rejeté par Clever
+  deploiement-prod:
+    needs: [ deploiement-demo-node ]
+    name: Déploiement en PROD
+    environment: PROD_NODE
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloner le dépôt Git
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Cloner l'intégralité du dépôt, pour ne pas avoir de « shallow repo » rejeté par Clever
 
-  #     - name: Installer la CLI Clever Cloud
-  #       shell: bash
-  #       run: npm install -g clever-tools@4.4.0
+      - name: Configurer Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
 
-  #     - name: Déployer en PROD
-  #       env:
-  #         CLEVER_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
-  #         CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
-  #         ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
-  #       run: |
-  #         clever link "$ID_APP"
-  #         clever deploy --force --same-commit-policy=rebuild
+      - name: Installe pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.24.0
+
+      - name: Construis la lib Svelte
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm --filter @anssi-portail/svelte build
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.276.0
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+          cache-version: 0
+          working-directory: ./front
+
+      - name: Installer la CLI Clever Cloud
+        shell: bash
+        run: npm install -g clever-tools@4.4.0
+
+      - name: Connecter à Clever
+        env:
+          CLEVER_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
+          CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
+          ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
+        run: |
+          clever link "$ID_APP"
+          clever env | grep -v "^#" | tr -d '"' >> "$GITHUB_ENV"
+
+      - name: Construis avec Jekyll
+        run: |
+          bundle config set --local path './front/vendor/bundle'
+          bundle exec --gemfile=./front/Gemfile jekyll build -s ./front -d ./front/_site
+        env:
+          JEKYLL_ENV: production
+
+      - name: Déployer en PROD
+        env:
+          CLEVER_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
+          CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
+          ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
+        run: |
+          git config --global user.email "contact@messervicescyber.beta.gouv.fr"
+          git config --global user.name "MesServicesCyber"
+          git add --force front/_site
+          git commit -m "Ajoute le site généré"
+          clever deploy --force --same-commit-policy=rebuild       
+  
