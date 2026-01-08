@@ -12,10 +12,12 @@
   import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
   import { decodeEntitesHtml } from './guide';
   import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
+  import { profilStore } from '../../stores/profil.store';
+  import InciteCreerUnCompte from './InciteCreerUnCompte.svelte';
 
   let guide: Guide | undefined;
   onMount(async () => {
-    const idGuideACharger = new URL(window.location.href).pathname
+    const idGuideACharger = new URL(window.location.href).pathname;
     await chargeGuidesDansLeStore();
     guide = $guidesStore.find((g) => g.id === idGuideACharger);
     if (guide) {
@@ -97,8 +99,11 @@
       </div>
 
       <div class="contenu">
-        <div class="favori">
+        <div class="entete">
           <BoutonFavori idItem={guide.id} />
+          {#if !$profilStore}
+            <InciteCreerUnCompte />
+          {/if}
         </div>
         <p class="dates">
           Publié le {guide.datePublication} &bullet; Mis à jour le {guide.dateMiseAJour}
@@ -209,9 +214,10 @@
       }
 
       .contenu {
-        .favori {
+        .entete {
           display: flex;
-          justify-content: flex-end;
+          flex-direction: row-reverse;
+          gap: 1rem;
         }
 
         .dates {
