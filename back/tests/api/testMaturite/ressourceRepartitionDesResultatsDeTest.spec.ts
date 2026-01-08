@@ -128,7 +128,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
           '/api/repartition-resultats-test?secteur=A'
         );
 
-        assert.equal(reponse.body[0].totalNombreTests, undefined);
+        assert.equal(reponse.body[0].totalNombreTests, 2);
         assert.equal(reponse.body[0].ratio, 1);
       });
 
@@ -144,7 +144,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
           '/api/repartition-resultats-test?region=FR-NOR'
         );
 
-        assert.equal(reponse.body[0].totalNombreTests, undefined);
+        assert.equal(reponse.body[0].totalNombreTests, 2);
         assert.equal(reponse.body[0].ratio, 1);
       });
 
@@ -169,7 +169,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
           '/api/repartition-resultats-test?tailleOrganisation=01'
         );
 
-        assert.equal(reponse.body[0].totalNombreTests, undefined);
+        assert.equal(reponse.body[0].totalNombreTests, 2);
         assert.equal(reponse.body[0].ratio, 1);
       });
     });

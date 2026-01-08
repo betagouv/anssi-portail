@@ -48,8 +48,7 @@ export const ressourceRepartitionDesResultatsDeTest = ({
         return;
       }
       const repartitions = new RepartitionResultatsTest(
-        tousLesResultats,
-        codeSecteur || codeRegion || codeTrancheEffectif ? 'actifs' : 'inactifs'
+        tousLesResultats
       ).calculeRepartitionParNiveau();
       reponse.send(repartitions);
     }
