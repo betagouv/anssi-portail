@@ -169,8 +169,8 @@
       <div class="contenu-section">
         <h2>Répartition des organisations</h2>
         <div class="repartition-niveaux-maturite">
-          <GraphiqueAnneau {serie} nomDeLaDonnee="organisations" montreTotaux />
-          <LegendeAnneau {serie} actif={libelleNiveauCourant} montreTotaux />
+          <GraphiqueAnneau {serie} nomDeLaDonnee="organisations" />
+          <LegendeAnneau {serie} actif={libelleNiveauCourant} />
         </div>
       </div>
     </section>

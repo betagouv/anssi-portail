@@ -3,7 +3,6 @@
 
   export let serie: Serie;
   export let nomDeLaDonnee: string | undefined;
-  export let montreTotaux: boolean = true;
 
   $: pourcentages = pourcentagesSerie(serie);
 
@@ -94,9 +93,7 @@
     </text>
   {/if}
   {#each secteurs as secteur, index (index)}
-    {@const valeurSerieAffichee = montreTotaux
-      ? `${serie[index].valeur} (${Math.round(pourcentages[index])}%)`
-      : `${Math.round(pourcentages[index])}%`}
+    {@const valeurSerieAffichee = `${serie[index].valeur} (${Math.round(pourcentages[index])}%)`}
     <path
       class={`secteur-${index} secteur`}
       d="M {secteur.premierPointExterieur.x} {secteur.premierPointExterieur.y}
