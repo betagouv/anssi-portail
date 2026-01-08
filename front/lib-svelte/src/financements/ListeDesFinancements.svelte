@@ -61,39 +61,48 @@
 
 <section class="financements">
   <div class="contenu-section">
-    <FiltresBureau filtreActif={false}>
-      <FiltresFinancements {chargement} {estConnecte} />
-    </FiltresBureau>
-    <div class="grille-cartes">
-      {#if chargement}
-        <SqueletteCarteFinancement />
-        <SqueletteCarteFinancement />
-        <SqueletteCarteFinancement />
-        <SqueletteCarteFinancement />
-        <SqueletteCarteFinancement />
-      {:else}
-        {#each $financementsFiltre.resultat as financement (financement.id)}
-          <CarteFinancement {financement} />
+    <div class="entete">
+      <lab-anssi-lien
+        href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert"
+        cible="_blank"
+        titre="Proposer un financement"
+      ></lab-anssi-lien>
+    </div>
+    <div class="contenu">
+      <FiltresBureau filtreActif={false}>
+        <FiltresFinancements {chargement} {estConnecte} />
+      </FiltresBureau>
+      <div class="grille-cartes">
+        {#if chargement}
+          <SqueletteCarteFinancement />
+          <SqueletteCarteFinancement />
+          <SqueletteCarteFinancement />
+          <SqueletteCarteFinancement />
+          <SqueletteCarteFinancement />
         {:else}
-          <div class="aucun-resultat">
-            <img
-              src="/assets/images/illustration-aucun-resultat.svg"
-              alt="Aucun résultat"
-            />
-            <h1>Désolé, aucun résultat trouvé</h1>
-            <lab-anssi-bouton
-              on:click={reinitialiseFiltres}
-              on:keypress
-              role="button"
-              taille="md"
-              tabindex={0}
-              titre="Réinitialiser les filtres"
-              variante="primaire"
-              largeurMaximale
-            ></lab-anssi-bouton>
-          </div>
-        {/each}
-      {/if}
+          {#each $financementsFiltre.resultat as financement (financement.id)}
+            <CarteFinancement {financement} />
+          {:else}
+            <div class="aucun-resultat">
+              <img
+                src="/assets/images/illustration-aucun-resultat.svg"
+                alt="Aucun résultat"
+              />
+              <h1>Désolé, aucun résultat trouvé</h1>
+              <lab-anssi-bouton
+                on:click={reinitialiseFiltres}
+                on:keypress
+                role="button"
+                taille="md"
+                tabindex={0}
+                titre="Réinitialiser les filtres"
+                variante="primaire"
+                largeurMaximale
+              ></lab-anssi-bouton>
+            </div>
+          {/each}
+        {/if}
+      </div>
     </div>
   </div>
 </section>
@@ -104,10 +113,19 @@
   section {
     padding: 0 var(--gouttiere) 40px;
     .contenu-section {
-      display: flex;
-      gap: 1.5rem;
-      padding-top: 3rem;
+      padding-top: 2rem;
       padding-bottom: 3rem;
+
+      .entete {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 2rem;
+      }
+
+      .contenu {
+        display: flex;
+        gap: 1.5rem;
+      }
 
       .grille-cartes {
         display: grid;
