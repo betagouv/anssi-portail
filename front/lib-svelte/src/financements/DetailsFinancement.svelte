@@ -223,6 +223,17 @@
             icone="arrow-up-fill"
             positionIcone="gauche"
           ></lab-anssi-lien>
+          <p class="note-information">
+            Nous vous recommandons de vous adresser directement aux organismes
+            gestionnaires mentionnés dans la fiche pour déterminer si votre
+            projet est éligible à une aide. Enfin, si vous notez des omissions
+            ou des erreurs dans cette fiche, merci de nous adresser vos
+            remarques en nous contactant sur le <a
+              href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert"
+            >
+              chat</a
+            >.
+          </p>
         </div>
       </div>
     </section>
@@ -290,6 +301,7 @@
 
   .corps {
     padding: 48px 16px 72px;
+
     @include a-partir-de(md) {
       padding: 48px 24px 72px;
     }
@@ -307,6 +319,12 @@
         flex: 1 0 0;
         gap: 32px;
       }
+    }
+
+    a {
+      display: inline-flex;
+      color: inherit;
+      text-decoration: underline;
     }
   }
 </style>
