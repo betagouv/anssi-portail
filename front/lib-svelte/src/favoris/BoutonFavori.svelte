@@ -45,7 +45,7 @@
     background: transparent;
     cursor: pointer;
     border: none;
-    width: 40px;
+    min-width: 40px;
     height: 40px;
     display: flex;
     justify-content: center;
