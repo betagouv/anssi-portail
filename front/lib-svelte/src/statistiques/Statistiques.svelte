@@ -36,7 +36,6 @@
   let secteur: string = '';
   let tailleOrganisation: string = '';
   $: filtreActif = !!secteur || !!tailleOrganisation || !!region;
-  $: libelleAnneau = filtreActif ? undefined : 'tests réalisés';
 
   $: chargeRepartitionsDesResultats({
     secteur,
@@ -74,7 +73,7 @@
 
     serie = construisSerie({
       repartitions,
-      mode: 'ratio',
+      mode: 'absolu',
     });
   }
 
@@ -167,18 +166,8 @@
     </div>
     {#if serie.length > 0}
       <div class="donnees-graphiques">
-        <GraphiqueAnneau
-          {serie}
-          nomDeLaDonnee={libelleAnneau}
-          montreTotaux={!filtreActif}
-        />
-        <LegendeAnneau {serie} montreTotaux={!filtreActif} />
-        {#if filtreActif}
-          <p class="note">
-            Par souci de confidentialité nous n'affichons pas le nombre
-            d'organisations une fois les filtres activés.
-          </p>
-        {/if}
+        <GraphiqueAnneau {serie} nomDeLaDonnee="tests réalisés" />
+        <LegendeAnneau {serie} />
       </div>
     {:else}
       <section class="pas-assez-de-resultats">
