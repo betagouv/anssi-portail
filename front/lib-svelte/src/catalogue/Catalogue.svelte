@@ -31,6 +31,7 @@
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
+  import InciteCreerUnCompte from './guides/InciteCreerUnCompte.svelte';
 
   const { featureFlagGuides }: { featureFlagGuides: boolean } = $props();
 
@@ -190,6 +191,12 @@
 
 <div class="contenu-catalogue">
   <div class="contenu-section">
+    {#if !$profilStore && sectionActive === 'guides'}
+      <div class="entete">
+        <InciteCreerUnCompte />
+      </div>
+    {/if}
+
     <div class="grille">
       <FiltresBureau filtreActif={$recherches.filtreActif}>
         <ChampRecherche
@@ -259,7 +266,7 @@
 
 <style lang="scss">
   .controle-segmente {
-    margin: 3rem auto 1rem;
+    margin: 3rem auto 0;
     width: min-content;
 
     .bouton-segmente {
@@ -268,6 +275,14 @@
       lab-anssi-icone {
         margin-right: 0.5rem;
       }
+    }
+  }
+
+  .contenu-section {
+    flex-direction: column;
+
+    .entete {
+      padding-bottom: 0.5rem;
     }
   }
 </style>
