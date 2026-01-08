@@ -157,14 +157,6 @@
 }
 
 .contenu-catalogue {
-  .contenu-section {
-    display: flex;
-    flex-direction: column;
-    @include a-partir-de(lg) {
-      flex-direction: row;
-      gap: 24px;
-    }
-  }
   & {
     padding: 32px var(--gouttiere) 80px;
   }
