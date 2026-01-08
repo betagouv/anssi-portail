@@ -217,6 +217,16 @@
             titre="Conditions"
             detail={financement.condition}
           />
+          {#if financement?.sources?.[0]}
+            <lab-anssi-lien
+              href={financement.sources[0]}
+              cible="_blank"
+              apparence="bouton"
+              variante="primaire"
+              taille="md"
+              titre="Bénéficier de cette aide"
+            ></lab-anssi-lien>
+          {/if}
           <lab-anssi-lien
             href="#"
             titre="Haut de page"
