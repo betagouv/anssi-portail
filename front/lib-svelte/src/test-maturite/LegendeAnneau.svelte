@@ -3,7 +3,6 @@
 
   export let serie: Serie;
   export let actif: string | undefined = undefined;
-  export let montreTotaux: boolean = true;
 
   let pourcentages: number[] = [];
   $: {
@@ -20,12 +19,8 @@
     >
       <span class="libelle">{element.libelle}</span>
       <div>
-        {#if montreTotaux}
-          <span class="total">{element.valeur}</span>
-          <span class="pourcentage">({Math.round(pourcentage)}%)</span>
-        {:else}
-          <span class="pourcentage">{Math.round(pourcentage)}%</span>
-        {/if}
+        <span class="total">{element.valeur}</span>
+        <span class="pourcentage">({Math.round(pourcentage)}%)</span>
       </div>
     </div>
   {/each}
