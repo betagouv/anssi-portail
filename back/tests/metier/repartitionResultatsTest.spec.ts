@@ -14,8 +14,7 @@ describe('Les répartitions des résultats de test', () => {
       ];
 
       const repartitions = new RepartitionResultatsTest(
-        resultats,
-        'actifs'
+        resultats
       ).calculeRepartitionParNiveau();
 
       assert.equal(repartitions[0].ratio, 0.75);

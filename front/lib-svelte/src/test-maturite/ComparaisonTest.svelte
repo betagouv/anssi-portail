@@ -62,7 +62,7 @@
 
     serie = construisSerie({
       repartitions,
-      mode: filtreActif ? 'ratio' : 'absolu',
+      mode: 'absolu',
     });
 
     seriesRadar = repartitions.map((repartionPourUnNiveau) => ({
@@ -83,8 +83,8 @@
     region: false,
   };
 
-  $: filtreActif = filtre.secteur || filtre.taille || filtre.region;
-  $: libelleAnneau = filtreActif ? undefined : 'organisations';
+  // $: filtreActif = filtre.secteur || filtre.taille || filtre.region;
+  // $: libelleAnneau = filtreActif ? undefined : 'organisations';
 
   const reinitialiseLesFiltres = async () => {
     filtre = {
@@ -169,23 +169,9 @@
       <div class="contenu-section">
         <h2>Répartition des organisations</h2>
         <div class="repartition-niveaux-maturite">
-          <GraphiqueAnneau
-            {serie}
-            nomDeLaDonnee={libelleAnneau}
-            montreTotaux={!filtreActif}
-          />
-          <LegendeAnneau
-            {serie}
-            actif={libelleNiveauCourant}
-            montreTotaux={!filtreActif}
-          />
+          <GraphiqueAnneau {serie} nomDeLaDonnee="organisations" montreTotaux />
+          <LegendeAnneau {serie} actif={libelleNiveauCourant} montreTotaux />
         </div>
-        {#if filtreActif}
-          <p class="note">
-            Par souci de confidentialité nous n'affichons pas le nombre
-            d'organisations une fois les filtres activés.
-          </p>
-        {/if}
       </div>
     </section>
     <section class="separator">

@@ -17,10 +17,7 @@ export type RepartitionResultatsTestPourUnNiveau = {
 };
 
 export class RepartitionResultatsTest {
-  constructor(
-    private readonly resultatsDeTest: ResultatTestMaturite[],
-    private readonly filtres: 'actifs' | 'inactifs'
-  ) {}
+  constructor(private readonly resultatsDeTest: ResultatTestMaturite[]) {}
 
   calculeRepartitionParNiveau = () => {
     const listeDesScoresParNiveau = this.resultatsDeTest.reduce(
@@ -51,10 +48,7 @@ export class RepartitionResultatsTest {
       valeurs: this.creeObjetParRubrique((rubrique) =>
         this.calculeValeurMoyenne(rubrique, scoresParNiveau)
       ),
-      totalNombreTests:
-        this.filtres === 'inactifs'
-          ? scoresParNiveau.valeurs['adoption-solutions'].length
-          : undefined,
+      totalNombreTests: scoresParNiveau.valeurs['adoption-solutions'].length,
       ratio:
         scoresParNiveau.valeurs['adoption-solutions'].length /
         this.resultatsDeTest.length,
