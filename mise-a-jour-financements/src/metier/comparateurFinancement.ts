@@ -4,38 +4,45 @@ import { Financement } from './financement.js';
 
 export type DifferenceFinancement = {
   idFinancement: Financement['id'];
-  donneesDifferentes: {
+  donneesDifferentes?: {
     nomDeLaDonnee: keyof Omit<Financement, 'id'>;
     valeurSurGrist: string;
     nouvelleValeur: string;
   };
+  etat?: 'supprimé';
 };
 
 export class ComparateurFinancement {
   financements: Financement[];
-  private financementsSourceExterne: Financement[];
+  private readonly financementsSourceExterne: Map<
+    number,
+    Financement | undefined
+  >;
   constructor(
     private readonly entrepotFinancement: EntrepotFinancement,
     private readonly adaptateurSourceExterne: AdaptateurSourceExterne
   ) {
     this.financements = [];
-    this.financementsSourceExterne = [];
+    this.financementsSourceExterne = new Map();
   }
 
   async chargeFinancements() {
     this.financements = await this.entrepotFinancement.tous();
-    this.financementsSourceExterne = await Promise.all(
-      this.financements.map((f) => this.adaptateurSourceExterne.parId(f.id))
-    );
+    this.financements.forEach(async (f) => {
+      const source = await this.adaptateurSourceExterne.parId(f.id);
+      this.financementsSourceExterne.set(f.id, source);
+    });
   }
 
   compareSourceExterne() {
     return this.financements.reduce((accumulateur, financement) => {
-      const financementSource = this.financementsSourceExterne.find(
-        (f) => f.id === financement.id
+      const financementSource = this.financementsSourceExterne.get(
+        financement.id
       );
       if (!financementSource) {
-        return accumulateur;
+        return accumulateur.concat([
+          { idFinancement: financement.id, etat: 'supprimé' },
+        ]);
       }
 
       const differences = (
