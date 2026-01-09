@@ -65,10 +65,10 @@
       mode: 'absolu',
     });
 
-    seriesRadar = repartitions.map((repartionPourUnNiveau) => ({
-      id: repartionPourUnNiveau.id,
-      couleur: couleursDeNiveau[repartionPourUnNiveau.id],
-      valeurs: repartionPourUnNiveau.valeurs,
+    seriesRadar = repartitions.map((repartitionPourUnNiveau) => ({
+      id: repartitionPourUnNiveau.id,
+      couleur: couleursDeNiveau[repartitionPourUnNiveau.id],
+      valeurs: repartitionPourUnNiveau.valeurs,
     }));
   }
 
@@ -165,7 +165,7 @@
     </section>
   {/if}
   {#if serie.length > 0}
-    <section class="repartion-organisations">
+    <section class="repartition-organisations">
       <div class="contenu-section">
         <h2>Répartition des organisations</h2>
         <div class="repartition-niveaux-maturite">
@@ -274,7 +274,7 @@
     }
   }
 
-  .repartion-organisations {
+  .repartition-organisations {
     padding: 32px var(--gouttiere) 48px;
 
     .contenu-section {
