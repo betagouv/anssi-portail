@@ -39,10 +39,15 @@ export class ComparateurFinancement {
       }
 
       const differences = (
-        ['objectifs', 'operationsEligibles', 'montant'] satisfies (keyof Omit<
-          Financement,
-          'id'
-        >)[]
+        [
+          'nom',
+          'financeur',
+          'objectifs',
+          'operationsEligibles',
+          'benificiaires',
+          'montant',
+          'condition',
+        ] satisfies (keyof Omit<Financement, 'id'>)[]
       )
         .map((champAComparer) =>
           this.compareChampFinancement(
