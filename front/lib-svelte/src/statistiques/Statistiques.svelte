@@ -250,15 +250,6 @@
       }
     }
 
-    .note {
-      align-self: center;
-      font-size: 0.75rem;
-      line-height: 1.25rem;
-      font-style: normal;
-      color: #666;
-      margin: 0;
-    }
-
     .filtres {
       display: flex;
       flex-direction: column;

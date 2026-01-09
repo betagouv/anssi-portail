@@ -292,11 +292,6 @@
           flex-direction: row;
         }
       }
-
-      .note {
-        align-self: center;
-        text-align: center;
-      }
     }
   }
 
