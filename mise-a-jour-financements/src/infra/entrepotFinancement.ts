@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { Financement } from '../metier/financement.js';
-import { ClientHttp } from './clientHttp.js';
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
+import { Financement } from '../metier/financement';
+import { ClientHttp } from './clientHttp';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 
 export interface EntrepotFinancement {
   tous(): Promise<Financement[]>;

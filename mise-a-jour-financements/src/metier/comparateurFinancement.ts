@@ -1,6 +1,6 @@
-import { AdaptateurSourceExterne } from '../infra/adaptateurSourceExterne.js';
-import { EntrepotFinancement } from '../infra/entrepotFinancement.js';
-import { Financement } from './financement.js';
+import { AdaptateurSourceExterne } from '../infra/adaptateurSourceExterne';
+import { EntrepotFinancement } from '../infra/entrepotFinancement';
+import { Financement } from './financement';
 
 export type DifferenceFinancement = {
   idFinancement: Financement['id'];
