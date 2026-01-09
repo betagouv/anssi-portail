@@ -5,7 +5,7 @@ import { Financement } from './financement.js';
 export type DifferenceFinancement = {
   idFinancement: Financement['id'];
   donneesDifferentes: {
-    nomDeLaDonnee: 'Montant';
+    nomDeLaDonnee: keyof Financement;
     valeurSurGrist: string;
     nouvelleValeur: string;
   };
@@ -37,15 +37,27 @@ export class ComparateurFinancement {
       if (!financementSource) {
         return accumulateur;
       }
-      if (financement.montant !== financementSource.montant)
+
+      if (financement.objectifs !== financementSource.objectifs) {
         (await accumulateur).push({
           idFinancement: financement.id,
           donneesDifferentes: {
-            nomDeLaDonnee: 'Montant',
+            nomDeLaDonnee: 'objectifs',
+            nouvelleValeur: financementSource.objectifs,
+            valeurSurGrist: financement.objectifs,
+          },
+        });
+      }
+      if (financement.montant !== financementSource.montant) {
+        (await accumulateur).push({
+          idFinancement: financement.id,
+          donneesDifferentes: {
+            nomDeLaDonnee: 'montant',
             nouvelleValeur: financementSource.montant,
             valeurSurGrist: financement.montant,
           },
         });
+      }
       return accumulateur;
     }, Promise.resolve([] as DifferenceFinancement[]));
   }
