@@ -52,17 +52,38 @@ describe('Le comparateur de financement', () => {
     });
 
     it('consulte les détails de chaque financement sur la source externe pour trouver des différences', async () => {
-      adaptateurSourceExterne.parId = async () => ({
-        ...financement1,
-        objectifs: 'objectif 2',
-        montant: 'Dix mille',
-        operationsEligibles: 'Nouvelle Operation',
-      });
+      adaptateurSourceExterne.parId = async () =>
+        ({
+          ...financement1,
+          nom: 'Cyber PME 2026',
+          financeur: "BPI France, Région Sud Provence-Alpes-Côte d'Azur",
+          objectifs: 'objectif 2',
+          operationsEligibles: 'Nouvelle Operation',
+          benificiaires: 'Tout le monde sauf une personne',
+          montant: 'Dix mille',
+          condition: 'Savoir compter 2 par 2',
+        } satisfies Financement);
 
       await comparateur.chargeFinancements();
       const resultatComparaison = comparateur.compareSourceExterne();
 
       assert.deepEqual(resultatComparaison, [
+        {
+          idFinancement: 1,
+          donneesDifferentes: {
+            nomDeLaDonnee: 'nom',
+            valeurSurGrist: 'Cyber PME',
+            nouvelleValeur: 'Cyber PME 2026',
+          },
+        },
+        {
+          idFinancement: 1,
+          donneesDifferentes: {
+            nomDeLaDonnee: 'financeur',
+            valeurSurGrist: 'BPI France',
+            nouvelleValeur: "BPI France, Région Sud Provence-Alpes-Côte d'Azur",
+          },
+        },
         {
           idFinancement: 1,
           donneesDifferentes: {
@@ -82,9 +103,25 @@ describe('Le comparateur de financement', () => {
         {
           idFinancement: 1,
           donneesDifferentes: {
+            nomDeLaDonnee: 'benificiaires',
+            valeurSurGrist: 'Tout le monde',
+            nouvelleValeur: 'Tout le monde sauf une personne',
+          },
+        },
+        {
+          idFinancement: 1,
+          donneesDifferentes: {
             nomDeLaDonnee: 'montant',
             valeurSurGrist: 'Mille milliards',
             nouvelleValeur: 'Dix mille',
+          },
+        },
+        {
+          idFinancement: 1,
+          donneesDifferentes: {
+            nomDeLaDonnee: 'condition',
+            valeurSurGrist: 'Avoir 10 doigts',
+            nouvelleValeur: 'Savoir compter 2 par 2',
           },
         },
       ] satisfies DifferenceFinancement[]);
