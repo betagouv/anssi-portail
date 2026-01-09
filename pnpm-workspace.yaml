@@ -6,6 +6,7 @@ packages:
   - 'front'
   - 'front/lib-svelte'
   - 'recuperation-guides'
+  - 'mise-a-jour-financements'
 
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 preferFrozenLockfile: true
