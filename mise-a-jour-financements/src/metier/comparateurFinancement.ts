@@ -5,7 +5,7 @@ import { Financement } from './financement.js';
 export type DifferenceFinancement = {
   idFinancement: Financement['id'];
   donneesDifferentes: {
-    nomDeLaDonnee: keyof Financement;
+    nomDeLaDonnee: keyof Omit<Financement, 'id'>;
     valeurSurGrist: string;
     nouvelleValeur: string;
   };
@@ -29,8 +29,8 @@ export class ComparateurFinancement {
     );
   }
 
-  async compareSourceExterne() {
-    return this.financements.reduce(async (accumulateur, financement) => {
+  compareSourceExterne() {
+    return this.financements.reduce((accumulateur, financement) => {
       const financementSource = this.financementsSourceExterne.find(
         (f) => f.id === financement.id
       );
@@ -38,27 +38,40 @@ export class ComparateurFinancement {
         return accumulateur;
       }
 
-      if (financement.objectifs !== financementSource.objectifs) {
-        (await accumulateur).push({
-          idFinancement: financement.id,
-          donneesDifferentes: {
-            nomDeLaDonnee: 'objectifs',
-            nouvelleValeur: financementSource.objectifs,
-            valeurSurGrist: financement.objectifs,
-          },
-        });
-      }
-      if (financement.montant !== financementSource.montant) {
-        (await accumulateur).push({
-          idFinancement: financement.id,
-          donneesDifferentes: {
-            nomDeLaDonnee: 'montant',
-            nouvelleValeur: financementSource.montant,
-            valeurSurGrist: financement.montant,
-          },
-        });
-      }
-      return accumulateur;
-    }, Promise.resolve([] as DifferenceFinancement[]));
+      const differences = (
+        ['objectifs', 'operationsEligibles', 'montant'] satisfies (keyof Omit<
+          Financement,
+          'id'
+        >)[]
+      )
+        .map((champAComparer) =>
+          this.compareChampFinancement(
+            financement,
+            financementSource,
+            champAComparer
+          )
+        )
+        .filter((difference) => !!difference);
+      return [...accumulateur, ...differences];
+    }, [] as DifferenceFinancement[]);
+  }
+
+  private compareChampFinancement(
+    financementGrist: Financement,
+    financementSource: Financement,
+    champAComparer: keyof Omit<Financement, 'id'>
+  ): DifferenceFinancement | undefined {
+    if (
+      financementGrist[champAComparer] !== financementSource[champAComparer]
+    ) {
+      return {
+        idFinancement: financementGrist.id,
+        donneesDifferentes: {
+          nomDeLaDonnee: champAComparer,
+          nouvelleValeur: financementSource[champAComparer],
+          valeurSurGrist: financementGrist[champAComparer],
+        },
+      };
+    }
   }
 }

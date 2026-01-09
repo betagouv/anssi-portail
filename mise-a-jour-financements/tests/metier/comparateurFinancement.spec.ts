@@ -2,7 +2,10 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import { AdaptateurSourceExterne } from '../../src/infra/adaptateurSourceExterne.js';
 import { EntrepotFinancement } from '../../src/infra/entrepotFinancement.js';
-import { ComparateurFinancement } from '../../src/metier/comparateurFinancement.js';
+import {
+  ComparateurFinancement,
+  DifferenceFinancement,
+} from '../../src/metier/comparateurFinancement.js';
 import { Financement } from '../../src/metier/financement.js';
 
 describe('Le comparateur de financement', () => {
@@ -43,21 +46,21 @@ describe('Le comparateur de financement', () => {
   describe("lorsqu'on compare un financement", () => {
     it("ne retourne rien si aucune différence n'est trouvée", async () => {
       await comparateur.chargeFinancements();
-      const resultatComparaison = await comparateur.compareSourceExterne();
+      const resultatComparaison = comparateur.compareSourceExterne();
 
       assert.deepEqual(resultatComparaison, []);
     });
-  });
 
-  describe('consulte les détails de chaque financement sur la source externe pour trouver des différences', () => {
-    it("sur l'objectif", async () => {
+    it('consulte les détails de chaque financement sur la source externe pour trouver des différences', async () => {
       adaptateurSourceExterne.parId = async () => ({
         ...financement1,
         objectifs: 'objectif 2',
+        montant: 'Dix mille',
+        operationsEligibles: 'Nouvelle Operation',
       });
 
       await comparateur.chargeFinancements();
-      const resultatComparaison = await comparateur.compareSourceExterne();
+      const resultatComparaison = comparateur.compareSourceExterne();
 
       assert.deepEqual(resultatComparaison, [
         {
@@ -68,19 +71,14 @@ describe('Le comparateur de financement', () => {
             nouvelleValeur: 'objectif 2',
           },
         },
-      ]);
-    });
-
-    it('sur le montant', async () => {
-      adaptateurSourceExterne.parId = async () => ({
-        ...financement1,
-        montant: 'Dix mille',
-      });
-
-      await comparateur.chargeFinancements();
-      const resultatComparaison = await comparateur.compareSourceExterne();
-
-      assert.deepEqual(resultatComparaison, [
+        {
+          idFinancement: 1,
+          donneesDifferentes: {
+            nomDeLaDonnee: 'operationsEligibles',
+            valeurSurGrist: 'opération 2',
+            nouvelleValeur: 'Nouvelle Operation',
+          },
+        },
         {
           idFinancement: 1,
           donneesDifferentes: {
@@ -89,7 +87,7 @@ describe('Le comparateur de financement', () => {
             nouvelleValeur: 'Dix mille',
           },
         },
-      ]);
+      ] satisfies DifferenceFinancement[]);
     });
   });
 });
