@@ -10,6 +10,7 @@ describe('Le comparateur de financement', () => {
     id: 1,
     nom: 'Cyber PME',
     financeur: 'BPI France',
+    objectifs: 'objectif 1',
     operationsEligibles: 'opération 2',
     benificiaires: 'Tout le monde',
     montant: 'Mille milliards',
@@ -49,6 +50,27 @@ describe('Le comparateur de financement', () => {
   });
 
   describe('consulte les détails de chaque financement sur la source externe pour trouver des différences', () => {
+    it("sur l'objectif", async () => {
+      adaptateurSourceExterne.parId = async () => ({
+        ...financement1,
+        objectifs: 'objectif 2',
+      });
+
+      await comparateur.chargeFinancements();
+      const resultatComparaison = await comparateur.compareSourceExterne();
+
+      assert.deepEqual(resultatComparaison, [
+        {
+          idFinancement: 1,
+          donneesDifferentes: {
+            nomDeLaDonnee: 'objectifs',
+            valeurSurGrist: 'objectif 1',
+            nouvelleValeur: 'objectif 2',
+          },
+        },
+      ]);
+    });
+
     it('sur le montant', async () => {
       adaptateurSourceExterne.parId = async () => ({
         ...financement1,
@@ -62,7 +84,7 @@ describe('Le comparateur de financement', () => {
         {
           idFinancement: 1,
           donneesDifferentes: {
-            nomDeLaDonnee: 'Montant',
+            nomDeLaDonnee: 'montant',
             valeurSurGrist: 'Mille milliards',
             nouvelleValeur: 'Dix mille',
           },
