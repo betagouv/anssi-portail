@@ -51,6 +51,20 @@ describe('Le comparateur de financement', () => {
       assert.deepEqual(resultatComparaison, []);
     });
 
+    it("indique que le financement n'existe pas si il n'est pas trouvé", async () => {
+      adaptateurSourceExterne.parId = async () => undefined;
+
+      await comparateur.chargeFinancements();
+      const resultatComparaison = comparateur.compareSourceExterne();
+
+      assert.deepEqual(resultatComparaison, [
+        {
+          idFinancement: 1,
+          etat: 'supprimé',
+        },
+      ] satisfies DifferenceFinancement[]);
+    });
+
     it('consulte les détails de chaque financement sur la source externe pour trouver des différences', async () => {
       adaptateurSourceExterne.parId = async () =>
         ({
