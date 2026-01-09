@@ -24,5 +24,10 @@
     "concurrently": "~9.2.1",
     "tsx": "~4.19.3",
     "vitest": "~3.0.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "qs": "~6.14.1"
+    }
   }
 }
