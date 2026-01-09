@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { clic } from '../directives/actions.svelte';
+
   const connexion = () => {
     sessionStorage.setItem('pagePostConnexion', 'comparaison-maturite');
   };
@@ -20,7 +22,7 @@
           Connectez-vous ou inscrivez-vous sur MesServicesCyber pour accéder à
           la comparaison de votre maturité cyber.
         </p>
-        <dsfr-connect on:click={connexion} href="/oidc/connexion"
+        <dsfr-connect use:clic={connexion} href="/oidc/connexion"
         ></dsfr-connect>
       </div>
     </div>
