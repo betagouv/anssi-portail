@@ -1,7 +1,7 @@
-import { EntrepotFinancementGrist } from './infra/entrepotFinancement.js';
-import { ComparateurFinancement } from './metier/comparateurFinancement.js';
-import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement.js';
-import { adaptateurAPIAidesEntreprises } from './infra/adaptateurSourceExterne.js';
+import { EntrepotFinancementGrist } from './infra/entrepotFinancement';
+import { ComparateurFinancement } from './metier/comparateurFinancement';
+import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
+import { adaptateurAPIAidesEntreprises } from './infra/adaptateurSourceExterne';
 
 const entrepotFinancementGrist = new EntrepotFinancementGrist({
   adaptateurEnvironnement,

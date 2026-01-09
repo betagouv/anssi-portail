@@ -1,4 +1,4 @@
-import { Financement } from '../metier/financement.js';
+import { Financement } from '../metier/financement';
 
 export interface AdaptateurSourceExterne {
   parId(id: Financement['id']): Promise<Financement | undefined>;
