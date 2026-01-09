@@ -83,9 +83,6 @@
     region: false,
   };
 
-  // $: filtreActif = filtre.secteur || filtre.taille || filtre.region;
-  // $: libelleAnneau = filtreActif ? undefined : 'organisations';
-
   const reinitialiseLesFiltres = async () => {
     filtre = {
       secteur: false,
