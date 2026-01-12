@@ -13,12 +13,16 @@ export function elementLePlusVisible(elements, hauteurFenetre) {
       hauteurFenetre,
     });
 
+  if (elements.length < 1) {
+    return null;
+  }
+
   const vainqueur = elements.reduce((vainqueur, candidat) => {
     const ratioVainqueur = leRatioDe(vainqueur);
     const ratioCandidat = leRatioDe(candidat);
 
     return ratioCandidat > ratioVainqueur ? candidat : vainqueur;
-  });
+  }, elements[0]);
 
   const vainqueurEstInvisible = leRatioDe(vainqueur) === 0;
   return vainqueurEstInvisible ? null : vainqueur;
