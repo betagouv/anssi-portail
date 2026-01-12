@@ -102,5 +102,17 @@ describe("La ressource de document d'un guide", () => {
         nomFichier: 'zero-trust.pdf',
       });
     });
+
+    it("ne publie pas d'évènement sur le bus si l'action provient d'un robot", async () => {
+      await request(serveur)
+        .get('/documents-guides/zero-trust.pdf')
+        .set('User-Agent', 'curl');
+
+      const evenement = busEvenements.recupereEvenement(
+        DocumentGuideTelecharge
+      );
+
+      assert.equal(evenement, undefined);
+    });
   });
 });
