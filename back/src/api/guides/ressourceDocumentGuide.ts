@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response, Router } from 'express';
+import { UserAgent } from 'express-useragent';
 import { DocumentGuideTelecharge } from '../../bus/evenements/documentGuideTelecharge';
 import { ConfigurationServeur } from '../configurationServeur';
 
@@ -25,11 +26,15 @@ export const ressourceDocumentGuide = ({
           .status(200)
           .send(documentCellar.contenu);
 
-        await busEvenements.publie(
-          new DocumentGuideTelecharge({
-            nomFichier: requete.params.nomFichier,
-          })
-        );
+        const source = requete.headers['user-agent'] ?? 'unknown';
+        const parser = new UserAgent().hydrate(source);
+        if (!parser.Agent.isBot) {
+          await busEvenements.publie(
+            new DocumentGuideTelecharge({
+              nomFichier: requete.params.nomFichier,
+            })
+          );
+        }
       } catch (erreur) {
         suite(erreur);
       }
