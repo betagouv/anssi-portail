@@ -27,8 +27,10 @@ const activeItems = (idPourSurlignage) =>
   );
 
 const metsAJourLeTexteDeLaSectionActive = (hash) => {
-  document.querySelector('#section-active').textContent =
-    trouveLeTexte(hash) ?? '';
+  const sectionActive = document.querySelector('#section-active');
+  if (sectionActive) {
+    sectionActive.textContent = trouveLeTexte(hash) ?? '';
+  }
 };
 
 const metsAJourSectionActive = (hashSectionActive) => {
