@@ -273,7 +273,7 @@
     right: 0;
     top: 208px;
     width: 124px;
-    z-index: 8;
+    z-index: 11;
 
     .fermer {
       cursor: pointer;
