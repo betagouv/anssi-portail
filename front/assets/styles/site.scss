@@ -405,6 +405,8 @@ footer {
     }
 
     summary {
+      display: flex;
+
       &::marker {
         content: '';
       }
@@ -415,6 +417,7 @@ footer {
 
       .entete-filtres {
         display: flex;
+        width: 100%;
         align-items: center;
         gap: 8px;
       }
