@@ -25,6 +25,7 @@ export type RetourApiGrist = {
       Region: string | null;
       Contact: string | null;
       Source: string | null;
+      Date_derniere_modification: number | null;
     };
   }[];
 };
@@ -67,7 +68,10 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
             benificiaires: fields.Beneficiaire ?? '',
             montant: fields.Montant ?? '',
             condition: fields.Conditions ?? '',
-          }) satisfies Financement
+            derniereModification: fields.Date_derniere_modification
+              ? new Date(fields.Date_derniere_modification * 1000)
+              : undefined,
+          } satisfies Financement)
       )
       .filter((f) => f.id > 0);
   };

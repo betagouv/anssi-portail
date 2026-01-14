@@ -92,6 +92,7 @@ describe("L'entrepot de financement Grist", () => {
                 Region: 'France',
                 Contact: 'president.du.monde@mail.org',
                 Source: 'https://www.aides-entreprises.fr/aide/11454',
+                Date_derniere_modification: null,
               },
             },
             {
@@ -111,6 +112,7 @@ describe("L'entrepot de financement Grist", () => {
                 Region: 'Hauts-de-France',
                 Contact: null,
                 Source: 'https://www.aides-entreprises.fr/aide/10124',
+                Date_derniere_modification: 1759269600,
               },
             },
           ],
@@ -130,6 +132,7 @@ describe("L'entrepot de financement Grist", () => {
         operationsEligibles: 'La division euclidienne',
         montant: 'Mille milliards',
         condition: 'Avoir 10 doigts',
+        derniereModification: undefined,
       },
       {
         id: 10235,
@@ -140,6 +143,7 @@ describe("L'entrepot de financement Grist", () => {
         benificiaires: '',
         condition: '',
         montant: '',
+        derniereModification: new Date(1759269600000),
       },
     ] satisfies Financement[]);
   });
