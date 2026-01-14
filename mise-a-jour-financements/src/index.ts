@@ -1,14 +1,17 @@
 import { EntrepotFinancementGrist } from './infra/entrepotFinancement';
 import { ComparateurFinancement } from './metier/comparateurFinancement';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
-import { adaptateurAPIAidesEntreprises } from './infra/adaptateurSourceExterne';
+import { AdapateurAidesEntreprisesAPI } from './infra/adaptateurSourceExterne';
 
 const entrepotFinancementGrist = new EntrepotFinancementGrist({
   adaptateurEnvironnement,
 });
+const adaptateuAidesEntreprisesAPI = new AdapateurAidesEntreprisesAPI({
+  adaptateurEnvironnement,
+});
 const comparateurFinancement = new ComparateurFinancement(
   entrepotFinancementGrist,
-  adaptateurAPIAidesEntreprises
+  adaptateuAidesEntreprisesAPI
 );
 
 console.info('Récupération des financements...');

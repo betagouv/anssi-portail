@@ -6,16 +6,9 @@ import {
   RetourApiGrist,
 } from '../../src/infra/entrepotFinancement';
 import { Financement } from '../../src/metier/financement';
-import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
+import { fauxAdaptateurEnvironnement } from './fauxAdaptateurEnvironnement';
 
 describe("L'entrepot de financement Grist", () => {
-  const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
-    grist: () => ({
-      urlFinancements: () =>
-        'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records',
-      cleApiFinancements: () => 'FAUSSE_CLE_API',
-    }),
-  };
   const clientHttp: ClientHttp<RetourApiGrist> = {
     get: async () => ({ data: { records: [] } }),
   };
