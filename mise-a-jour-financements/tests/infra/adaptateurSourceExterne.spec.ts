@@ -25,6 +25,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
       aid_objet: 'Lune',
       aid_operations_el: 'La division euclidienne',
       financeurs: [{ org_nom: 'BPI France' }],
+      horodatage: '2025-12-31 10:00:01',
     },
   ];
 
@@ -100,6 +101,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
       operationsEligibles: 'La division euclidienne',
       montant: 'Mille milliards',
       condition: 'Avoir 10 doigts',
+      derniereModification: new Date('2025-12-31 10:00:01'),
     } satisfies Financement);
   });
 
@@ -139,6 +141,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
         operationsEligibles: 'La division euclidienne',
         montant: 'Mille milliards',
         condition: 'Avoir 10 doigts',
+        derniereModification: new Date('2025-12-31 10:00:01'),
       } satisfies Financement);
     });
 
@@ -168,6 +171,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
         operationsEligibles: 'La division euclidienne',
         montant: 'Mille milliards',
         condition: 'Avoir 10 doigts',
+        derniereModification: new Date('2025-12-31 10:00:01'),
       } satisfies Financement);
     });
   });

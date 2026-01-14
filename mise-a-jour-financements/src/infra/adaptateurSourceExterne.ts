@@ -12,6 +12,7 @@ type Aide = {
   aid_benef: string;
   financeurs: { org_nom: string }[];
   aid_conditions: string;
+  horodatage: string;
 };
 
 export type RetourAidesEntreprisesAPI = Aide[] | false;
@@ -67,6 +68,7 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
       nom: aide.aid_nom,
       objectifs: aide.aid_objet,
       operationsEligibles: aide.aid_operations_el,
+      derniereModification: new Date(aide.horodatage),
     };
   }
 }
