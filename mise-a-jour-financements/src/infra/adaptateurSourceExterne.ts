@@ -58,7 +58,7 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
     return {
       benificiaires: aide.aid_benef,
       condition: aide.aid_conditions,
-      financeur: aide.financeurs[0].org_nom,
+      financeur: aide.financeurs.map((f) => f.org_nom).join(', '),
       id,
       montant: aide.aid_montant,
       nom: aide.aid_nom,
