@@ -11,6 +11,7 @@ export type RetourApiGrist = {
   records: {
     id: number;
     fields: {
+      ID_Aides_entreprises: number;
       Nom_du_dispositif: string | null;
       Financeur: string | null;
       Entites_eligibles: string[] | null;
@@ -54,18 +55,20 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
       headers: { Authorization: `Bearer ${cleApi}` },
     });
 
-    return reponse.data.records.map(
-      ({ fields, id }) =>
-        ({
-          id,
-          nom: fields.Nom_du_dispositif ?? '',
-          financeur: fields.Financeur ?? '',
-          objectifs: fields.Objectifs ?? '',
-          operationsEligibles: fields.Operations_eligibles ?? '',
-          benificiaires: fields.Beneficiaire ?? '',
-          montant: fields.Montant ?? '',
-          condition: fields.Conditions ?? '',
-        } satisfies Financement)
-    );
+    return reponse.data.records
+      .map(
+        ({ fields }) =>
+          ({
+            id: fields.ID_Aides_entreprises,
+            nom: fields.Nom_du_dispositif ?? '',
+            financeur: fields.Financeur ?? '',
+            objectifs: fields.Objectifs ?? '',
+            operationsEligibles: fields.Operations_eligibles ?? '',
+            benificiaires: fields.Beneficiaire ?? '',
+            montant: fields.Montant ?? '',
+            condition: fields.Conditions ?? '',
+          }) satisfies Financement
+      )
+      .filter((f) => f.id > 0);
   };
 }
