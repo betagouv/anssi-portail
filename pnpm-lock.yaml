@@ -211,9 +211,27 @@ importers:
         specifier: ~1.13.2
         version: 1.13.2
     devDependencies:
+      '@eslint/js':
+        specifier: ~9.39.1
+        version: 9.39.1
       '@types/node':
         specifier: ~22.13.4
         version: 22.13.17
+      eslint:
+        specifier: ~9.39.1
+        version: 9.39.1
+      npm-run-all2:
+        specifier: ^8.0.4
+        version: 8.0.4
+      tsx:
+        specifier: ~4.19.3
+        version: 4.19.3
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+      typescript-eslint:
+        specifier: ~8.29.1
+        version: 8.29.1(eslint@9.39.1)(typescript@5.8.3)
 
   recuperation-guides:
     dependencies:
