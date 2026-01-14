@@ -32,9 +32,9 @@ describe("L'adaptateur Aides Entreprises API", () => {
     adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
       aidesEntreprises: () => ({
-        url: () => '',
-        apiId: () => '',
-        apiKey: () => '',
+        url: () => 'http://example.com/financements',
+        apiId: () => 'mon-api-id',
+        apiKey: () => 'mon-api-key',
       }),
     };
     clientHttp = {
@@ -48,11 +48,6 @@ describe("L'adaptateur Aides Entreprises API", () => {
   });
 
   it("sait récupérer des aides en appelant l'API Aides Entreprises", async () => {
-    adaptateurEnvironnement.aidesEntreprises = () => ({
-      url: () => 'http://example.com/financements',
-      apiId: () => 'mon-api-id',
-      apiKey: () => 'mon-api-key',
-    });
     let urlAppelee = '';
     let apiId = '';
     let apiKey = '';
@@ -73,17 +68,18 @@ describe("L'adaptateur Aides Entreprises API", () => {
   });
 
   it("ne renvoie rien si l'url source n'est pas définie", async () => {
+    adaptateurEnvironnement.aidesEntreprises = () => ({
+      url: () => '',
+      apiId: () => '',
+      apiKey: () => '',
+    });
+
     const aide = await adapateurAidesEntreprisesAPI.parId(10234);
 
     assert.deepEqual(aide, undefined);
   });
 
   it("sait transfomer le retour de l'API en financements", async () => {
-    adaptateurEnvironnement.aidesEntreprises = () => ({
-      url: () => 'http://example.com/financements',
-      apiId: () => 'mon-api-id',
-      apiKey: () => 'mon-api-key',
-    });
     clientHttp.get = async (_url, _config) => {
       return {
         data: retourAPI,
@@ -105,11 +101,6 @@ describe("L'adaptateur Aides Entreprises API", () => {
   });
 
   it("renvoie undefined si l'API ne retourne pas d'aide", async () => {
-    adaptateurEnvironnement.aidesEntreprises = () => ({
-      url: () => 'http://example.com/financements',
-      apiId: () => 'mon-api-id',
-      apiKey: () => 'mon-api-key',
-    });
     clientHttp.get = async (_url, _config) => {
       return {
         data: false,
