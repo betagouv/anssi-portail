@@ -39,16 +39,19 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
     if (!url) {
       return undefined;
     }
-    const { data: aides } = await this.clientHttp.get(url + '/' + id, {
-      headers: {
-        'X-Aidesentreprises-Id': this.adaptateurEnvironnement
-          .aidesEntreprises()
-          .apiId(),
-        'X-Aidesentreprises-Key': this.adaptateurEnvironnement
-          .aidesEntreprises()
-          .apiKey(),
-      },
-    });
+    const { data: aides } = await this.clientHttp.get(
+      url + '/' + id + '?clean_html=true',
+      {
+        headers: {
+          'X-Aidesentreprises-Id': this.adaptateurEnvironnement
+            .aidesEntreprises()
+            .apiId(),
+          'X-Aidesentreprises-Key': this.adaptateurEnvironnement
+            .aidesEntreprises()
+            .apiKey(),
+        },
+      }
+    );
 
     if (!aides) {
       return undefined;
