@@ -28,10 +28,10 @@ export class ComparateurFinancement {
 
   async chargeFinancements() {
     this.financements = await this.entrepotFinancement.tous();
-    this.financements.forEach(async (f) => {
+    for (const f of this.financements) {
       const source = await this.adaptateurSourceExterne.parId(f.id);
       this.financementsSourceExterne.set(f.id, source);
-    });
+    }
   }
 
   compareSourceExterne() {
