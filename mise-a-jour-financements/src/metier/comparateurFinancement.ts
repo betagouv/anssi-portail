@@ -45,6 +45,14 @@ export class ComparateurFinancement {
         ]);
       }
 
+      if (
+        financementSource.derniereModification &&
+        financement.derniereModification &&
+        financementSource.derniereModification.getTime() <=
+          financement.derniereModification.getTime()
+      ) {
+        return accumulateur;
+      }
       const differences = (
         [
           'nom',
@@ -54,7 +62,7 @@ export class ComparateurFinancement {
           'benificiaires',
           'montant',
           'condition',
-        ] satisfies (keyof Omit<Financement, 'id'>)[]
+        ] satisfies (keyof Omit<Financement, 'id' | 'derniereModification'>)[]
       )
         .map((champAComparer) =>
           this.compareChampFinancement(
@@ -71,7 +79,7 @@ export class ComparateurFinancement {
   private compareChampFinancement(
     financementGrist: Financement,
     financementSource: Financement,
-    champAComparer: keyof Omit<Financement, 'id'>
+    champAComparer: keyof Omit<Financement, 'id' | 'derniereModification'>
   ): DifferenceFinancement | undefined {
     if (
       financementGrist[champAComparer] !== financementSource[champAComparer]

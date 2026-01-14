@@ -7,4 +7,5 @@ export type Financement = {
   benificiaires: string;
   montant: string;
   condition: string;
+  derniereModification: Date;
 };
