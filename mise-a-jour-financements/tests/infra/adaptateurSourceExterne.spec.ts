@@ -111,4 +111,61 @@ describe("L'adaptateur Aides Entreprises API", () => {
 
     assert.deepEqual(aide, undefined);
   });
+
+  describe('sait gérer les financeurs', () => {
+    it("quand il n'y en a pas", async () => {
+      clientHttp.get = async (_url, _config) => {
+        return {
+          data: [
+            {
+              ...retourAPI[0],
+              financeurs: [],
+            },
+          ],
+        };
+      };
+
+      const aide = await adapateurAidesEntreprisesAPI.parId(10234);
+
+      assert.deepEqual(aide, {
+        id: 10234,
+        nom: 'Cyber PME',
+        benificiaires: 'Tout le monde',
+        financeur: '',
+        objectifs: 'Lune',
+        operationsEligibles: 'La division euclidienne',
+        montant: 'Mille milliards',
+        condition: 'Avoir 10 doigts',
+      } satisfies Financement);
+    });
+
+    it('quand il y en a plusieurs', async () => {
+      clientHttp.get = async (_url, _config) => {
+        return {
+          data: [
+            {
+              ...retourAPI[0],
+              financeurs: [
+                { org_nom: 'Financeur 1' },
+                { org_nom: 'Financeur 2' },
+              ],
+            },
+          ],
+        };
+      };
+
+      const aide = await adapateurAidesEntreprisesAPI.parId(10234);
+
+      assert.deepEqual(aide, {
+        id: 10234,
+        nom: 'Cyber PME',
+        benificiaires: 'Tout le monde',
+        financeur: 'Financeur 1, Financeur 2',
+        objectifs: 'Lune',
+        operationsEligibles: 'La division euclidienne',
+        montant: 'Mille milliards',
+        condition: 'Avoir 10 doigts',
+      } satisfies Financement);
+    });
+  });
 });
