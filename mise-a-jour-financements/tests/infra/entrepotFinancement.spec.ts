@@ -1,7 +1,9 @@
 import assert from 'node:assert';
-import { describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'node:test';
+import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { ClientHttp } from '../../src/infra/clientHttp';
 import {
+  EntrepotFinancement,
   EntrepotFinancementGrist,
   RetourApiGrist,
 } from '../../src/infra/entrepotFinancement';
@@ -9,30 +11,36 @@ import { Financement } from '../../src/metier/financement';
 import { fauxAdaptateurEnvironnement } from './fauxAdaptateurEnvironnement';
 
 describe("L'entrepot de financement Grist", () => {
-  const clientHttp: ClientHttp<RetourApiGrist> = {
-    get: async () => ({ data: { records: [] } }),
-  };
-  const entrepotFinancementGrist = new EntrepotFinancementGrist({
-    clientHttp,
-    adaptateurEnvironnement: fauxAdaptateurEnvironnement,
+  let adaptateurEnvironnement: AdaptateurEnvironnement;
+  let clientHttp: ClientHttp<RetourApiGrist>;
+  let entrepotFinancementGrist: EntrepotFinancement;
+
+  beforeEach(() => {
+    adaptateurEnvironnement = {
+      ...fauxAdaptateurEnvironnement,
+      grist: () => ({
+        urlFinancements: () =>
+          'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records',
+        cleApiFinancements: () => 'FAUSSE_CLE_API',
+      }),
+    };
+    clientHttp = {
+      get: async () => ({ data: { records: [] } }),
+    };
+
+    entrepotFinancementGrist = new EntrepotFinancementGrist({
+      clientHttp,
+      adaptateurEnvironnement,
+    });
   });
 
   it("ne renvoie rien si l'url source n'est pas définie", async () => {
-    const entrepotFinancementGristHorsLigne = new EntrepotFinancementGrist({
-      clientHttp,
-      adaptateurEnvironnement: {
-        ...fauxAdaptateurEnvironnement,
-        grist: () => ({
-          cleApiFinancements: () => '',
-          cleApiGuides: () => '',
-          urlFinancements: () => '',
-          urlGuides: () => '',
-          dureeCacheEnSecondes: () => 0,
-        }),
-      },
+    adaptateurEnvironnement.grist = () => ({
+      cleApiFinancements: () => '',
+      urlFinancements: () => '',
     });
 
-    const financements = await entrepotFinancementGristHorsLigne.tous();
+    const financements = await entrepotFinancementGrist.tous();
 
     assert.deepEqual(financements, []);
   });
