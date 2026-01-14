@@ -66,6 +66,7 @@ describe("L'entrepot de financement Grist", () => {
             {
               id: 10,
               fields: {
+                ID_Aides_entreprises: 10234,
                 Nom_du_dispositif: 'Cyber PME',
                 Financement: [
                   'L',
@@ -88,6 +89,7 @@ describe("L'entrepot de financement Grist", () => {
             {
               id: 21,
               fields: {
+                ID_Aides_entreprises: 10235,
                 Nom_du_dispositif: 'Pass Cyber formation',
                 Financement: ['L', 'Formation'],
                 Financeur: 'CCI des Hauts-de-France',
@@ -112,7 +114,7 @@ describe("L'entrepot de financement Grist", () => {
 
     assert.deepEqual(financements, [
       {
-        id: 10,
+        id: 10234,
         nom: 'Cyber PME',
         benificiaires: 'Tout le monde',
         financeur: 'BPI France',
@@ -122,7 +124,7 @@ describe("L'entrepot de financement Grist", () => {
         condition: 'Avoir 10 doigts',
       },
       {
-        id: 21,
+        id: 10235,
         nom: 'Pass Cyber formation',
         financeur: 'CCI des Hauts-de-France',
         objectifs: '',
