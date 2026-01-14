@@ -14,7 +14,7 @@ type Aide = {
   aid_conditions: string;
 };
 
-export type RetourAidesEntreprisesAPI = Aide[];
+export type RetourAidesEntreprisesAPI = Aide[] | false;
 
 export interface AdaptateurSourceExterne {
   parId(id: Financement['id']): Promise<Financement | undefined>;
@@ -49,6 +49,10 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
           .apiKey(),
       },
     });
+
+    if (!aides) {
+      return undefined;
+    }
 
     const aide = aides[0];
     return {

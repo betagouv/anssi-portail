@@ -103,4 +103,21 @@ describe("L'adaptateur Aides Entreprises API", () => {
       condition: 'Avoir 10 doigts',
     } satisfies Financement);
   });
+
+  it("renvoie undefined si l'API ne retourne pas d'aide", async () => {
+    adaptateurEnvironnement.aidesEntreprises = () => ({
+      url: () => 'http://example.com/financements',
+      apiId: () => 'mon-api-id',
+      apiKey: () => 'mon-api-key',
+    });
+    clientHttp.get = async (_url, _config) => {
+      return {
+        data: false,
+      };
+    };
+
+    const aide = await adapateurAidesEntreprisesAPI.parId(10234);
+
+    assert.deepEqual(aide, undefined);
+  });
 });
