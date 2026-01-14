@@ -18,6 +18,7 @@ describe('Le comparateur de financement', () => {
     benificiaires: 'Tout le monde',
     montant: 'Mille milliards',
     condition: 'Avoir 10 doigts',
+    derniereModification: new Date('2026-01-14T15:54:00'),
   };
 
   let entrepotFinancement: EntrepotFinancement;
@@ -76,6 +77,7 @@ describe('Le comparateur de financement', () => {
           benificiaires: 'Tout le monde sauf une personne',
           montant: 'Dix mille',
           condition: 'Savoir compter 2 par 2',
+          derniereModification: new Date('2026-01-14T16:54:00'),
         } satisfies Financement);
 
       await comparateur.chargeFinancements();
@@ -139,6 +141,25 @@ describe('Le comparateur de financement', () => {
           },
         },
       ] satisfies DifferenceFinancement[]);
+    });
+
+    it("ignore les financements sources qui n'ont pas évolués depuis la dernière vérification", async () => {
+      adaptateurSourceExterne.parId = async () =>
+        ({
+          ...financement1,
+          nom: 'Cyber PME 2026',
+          financeur: "BPI France, Région Sud Provence-Alpes-Côte d'Azur",
+          objectifs: 'objectif 2',
+          operationsEligibles: 'Nouvelle Operation',
+          benificiaires: 'Tout le monde sauf une personne',
+          montant: 'Dix mille',
+          condition: 'Savoir compter 2 par 2',
+        } satisfies Financement);
+
+      await comparateur.chargeFinancements();
+      const resultatComparaison = comparateur.compareSourceExterne();
+
+      assert.deepEqual(resultatComparaison, []);
     });
   });
 });
