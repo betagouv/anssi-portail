@@ -57,7 +57,7 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
     }
     const { data: aides } =
       await this.clientHttp.get<DetailsAidesEntreprisesAPI>(
-        url + '/' + id + '?clean_html=true',
+        `${url}/${id}?clean_html=true`,
         {
           headers: this.headers,
         }
