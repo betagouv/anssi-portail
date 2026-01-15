@@ -77,7 +77,12 @@ export class ComparateurFinancement {
   }
 
   async detecteNouvellesAides() {
-    return this.adaptateurSourceExterne.chercheAidesCyber();
+    const nouvellesAides =
+      await this.adaptateurSourceExterne.chercheAidesCyber();
+    const identifiantsConnus = new Set(this.financements.map((f) => f.id));
+    return nouvellesAides.filter(
+      (nouvelleAide) => !identifiantsConnus.has(nouvelleAide.id)
+    );
   }
 
   private compareChampFinancement(
