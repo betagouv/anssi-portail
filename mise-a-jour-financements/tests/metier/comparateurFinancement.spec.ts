@@ -31,6 +31,7 @@ describe('Le comparateur de financement', () => {
     };
     adaptateurSourceExterne = {
       parId: async () => financement1,
+      chercheAidesCyber: async () => [],
     };
     comparateur = new ComparateurFinancement(
       entrepotFinancement,
@@ -160,6 +161,16 @@ describe('Le comparateur de financement', () => {
       const resultatComparaison = comparateur.compareSourceExterne();
 
       assert.deepEqual(resultatComparaison, []);
+    });
+  });
+
+  describe('détecte de nouvelles aides', () => {
+    it('en cherchant des aides liées à la cyberscurité', async () => {
+      adaptateurSourceExterne.chercheAidesCyber = async () =>
+        [financement1] satisfies Financement[];
+      const nouvellesAides = await comparateur.detecteNouvellesAides();
+
+      assert.deepEqual(nouvellesAides, [financement1]);
     });
   });
 });

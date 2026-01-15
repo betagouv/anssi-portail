@@ -20,4 +20,6 @@ console.info('...compare avec les financements sur aides-entreprise...');
 const resultats = comparateurFinancement.compareSourceExterne();
 console.info(resultats);
 console.info('...cherche de nouveaux financement cyber...');
+const nouvellesAides = comparateurFinancement.detecteNouvellesAides();
+console.info('nouvellesAides : ', nouvellesAides);
 console.info('... Terminé !');
