@@ -25,6 +25,7 @@ export interface AdaptateurSourceExterne {
 export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
   private readonly clientHttp: ClientHttp<RetourAidesEntreprisesAPI>;
   private readonly adaptateurEnvironnement: AdaptateurEnvironnement;
+  private readonly headers: Record<string, string>;
   constructor({
     clientHttp = axios,
     adaptateurEnvironnement,
@@ -34,6 +35,14 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
   }) {
     this.clientHttp = clientHttp;
     this.adaptateurEnvironnement = adaptateurEnvironnement;
+    this.headers = {
+      'X-Aidesentreprises-Id': this.adaptateurEnvironnement
+        .aidesEntreprises()
+        .apiId(),
+      'X-Aidesentreprises-Key': this.adaptateurEnvironnement
+        .aidesEntreprises()
+        .apiKey(),
+    };
   }
 
   async parId(id: Financement['id']): Promise<Financement | undefined> {
@@ -44,14 +53,7 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
     const { data: aides } = await this.clientHttp.get(
       url + '/' + id + '?clean_html=true',
       {
-        headers: {
-          'X-Aidesentreprises-Id': this.adaptateurEnvironnement
-            .aidesEntreprises()
-            .apiId(),
-          'X-Aidesentreprises-Key': this.adaptateurEnvironnement
-            .aidesEntreprises()
-            .apiKey(),
-        },
+        headers: this.headers,
       }
     );
 
@@ -80,14 +82,7 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
     const { data } = await this.clientHttp.get(
       url + '?full_text=cyber&limit=50&offset=0',
       {
-        headers: {
-          'X-Aidesentreprises-Id': this.adaptateurEnvironnement
-            .aidesEntreprises()
-            .apiId(),
-          'X-Aidesentreprises-Key': this.adaptateurEnvironnement
-            .aidesEntreprises()
-            .apiKey(),
-        },
+        headers: this.headers,
       }
     );
     if (!data || !('data' in data)) {
