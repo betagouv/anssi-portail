@@ -18,6 +18,7 @@ type Aide = {
 export type RetourAidesEntreprisesAPI = Aide[] | false;
 
 export interface AdaptateurSourceExterne {
+  chercheAidesCyber: () => Promise<Financement[]>;
   parId(id: Financement['id']): Promise<Financement | undefined>;
 }
 
@@ -70,5 +71,8 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
       operationsEligibles: aide.aid_operations_el,
       derniereModification: new Date(aide.horodatage),
     };
+  }
+  async chercheAidesCyber() {
+    return [];
   }
 }

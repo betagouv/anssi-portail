@@ -76,6 +76,10 @@ export class ComparateurFinancement {
     }, [] as DifferenceFinancement[]);
   }
 
+  async detecteNouvellesAides() {
+    return this.adaptateurSourceExterne.chercheAidesCyber();
+  }
+
   private compareChampFinancement(
     financementGrist: Financement,
     financementSource: Financement,
