@@ -166,11 +166,24 @@ describe('Le comparateur de financement', () => {
 
   describe('détecte de nouvelles aides', () => {
     it('en cherchant des aides liées à la cyberscurité', async () => {
-      adaptateurSourceExterne.chercheAidesCyber = async () =>
-        [financement1] satisfies Financement[];
+      const nouveauFinancement = { ...financement1, id: 123 };
+      adaptateurSourceExterne.chercheAidesCyber = async () => [
+        nouveauFinancement,
+      ];
+
+      await comparateur.chargeFinancements();
       const nouvellesAides = await comparateur.detecteNouvellesAides();
 
-      assert.deepEqual(nouvellesAides, [financement1]);
+      assert.deepEqual(nouvellesAides, [nouveauFinancement]);
+    });
+
+    it("en ignorant celles déjà présentes dans l'entrepot", async () => {
+      adaptateurSourceExterne.chercheAidesCyber = async () => [financement1];
+
+      await comparateur.chargeFinancements();
+      const nouvellesAides = await comparateur.detecteNouvellesAides();
+
+      assert.deepEqual(nouvellesAides, []);
     });
   });
 });
