@@ -14,10 +14,11 @@ export type Aide = {
   aid_conditions: string;
   horodatage: string;
 };
+export type ResumeAide = Omit<Aide, 'financeurs'>;
 
 export type DetailsAidesEntreprisesAPI = Aide[] | false;
 export type RechercheAidesEntreprisesAPI = {
-  data: Omit<Aide, 'financeurs'>[];
+  data: ResumeAide[];
 };
 
 export interface AdaptateurSourceExterne {
@@ -29,6 +30,7 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
   private readonly clientHttp: ClientHttp;
   private readonly adaptateurEnvironnement: AdaptateurEnvironnement;
   private readonly headers: Record<string, string>;
+  private readonly itemParPage = 50;
   constructor({
     clientHttp = axios,
     adaptateurEnvironnement,
@@ -66,39 +68,47 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
     }
 
     const aide = aides[0];
-    return {
-      benificiaires: aide.aid_benef,
-      condition: aide.aid_conditions,
-      financeur: aide.financeurs.map((f) => f.org_nom).join(', '),
-      id,
-      montant: aide.aid_montant,
-      nom: aide.aid_nom,
-      objectifs: aide.aid_objet,
-      operationsEligibles: aide.aid_operations_el,
-      derniereModification: new Date(aide.horodatage),
-    };
+    return this.mapper(aide);
   }
   async chercheAidesCyber() {
     const url = this.adaptateurEnvironnement.aidesEntreprises().urlAPI();
     if (!url) {
       return [];
     }
-    const { data } = await this.clientHttp.get<RechercheAidesEntreprisesAPI>(
-      url + '?full_text=cyber&limit=50&offset=0',
-      {
-        headers: this.headers,
-      }
-    );
-    return data.data.map((aide) => ({
+    let resultatRecherche: RechercheAidesEntreprisesAPI;
+    const nouvellesAides: Financement[] = [];
+
+    do {
+      const reponse = await this.clientHttp.get<RechercheAidesEntreprisesAPI>(
+        url +
+          `?full_text=cyber&limit=${this.itemParPage}&offset=${
+            this.itemParPage *
+            Math.floor(nouvellesAides.length / this.itemParPage)
+          }`,
+        {
+          headers: this.headers,
+        }
+      );
+      resultatRecherche = reponse.data;
+      nouvellesAides.push(...resultatRecherche.data.map(this.mapper));
+    } while (resultatRecherche.data.length === this.itemParPage);
+    return nouvellesAides;
+  }
+
+  mapper(aide: ResumeAide | Aide) {
+    return {
       id: Number(aide.id_aid),
       benificiaires: aide.aid_benef,
       condition: aide.aid_conditions,
-      financeur: '',
+      financeur:
+        'financeurs' in aide
+          ? aide.financeurs.map((f) => f.org_nom).join(', ')
+          : '',
       montant: aide.aid_montant,
       nom: aide.aid_nom,
       objectifs: aide.aid_objet,
       operationsEligibles: aide.aid_operations_el,
       derniereModification: new Date(aide.horodatage),
-    }));
+    };
   }
 }
