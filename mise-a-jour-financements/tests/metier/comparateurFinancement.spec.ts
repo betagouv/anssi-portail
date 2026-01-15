@@ -5,6 +5,7 @@ import { EntrepotFinancement } from '../../src/infra/entrepotFinancement.js';
 import { ComparateurFinancement } from '../../src/metier/comparateurFinancement.js';
 import { DifferenceFinancement } from '../../src/metier/differenceFinancement.js';
 import { Financement } from '../../src/metier/financement.js';
+import { NouveauFinancement } from '../../src/metier/nouveauFinancement.js';
 
 describe('Le comparateur de financement', () => {
   const financement1: Financement = {
@@ -172,7 +173,13 @@ describe('Le comparateur de financement', () => {
       await comparateur.chargeFinancements();
       const nouvellesAides = await comparateur.detecteNouvellesAides();
 
-      assert.deepEqual(nouvellesAides, [nouveauFinancement]);
+      assert.deepEqual(nouvellesAides, [
+        {
+          idFinancement: nouveauFinancement.id,
+          nom: nouveauFinancement.nom,
+          url: nouveauFinancement.id.toString(),
+        },
+      ] satisfies NouveauFinancement[]);
     });
 
     it("en ignorant celles déjà présentes dans l'entrepot", async () => {

@@ -2,6 +2,7 @@ import { AdaptateurSourceExterne } from '../infra/adaptateurSourceExterne';
 import { EntrepotFinancement } from '../infra/entrepotFinancement';
 import { DifferenceFinancement } from './differenceFinancement';
 import { Financement } from './financement';
+import { NouveauFinancement } from './nouveauFinancement';
 
 export class ComparateurFinancement {
   financements: Financement[];
@@ -67,13 +68,17 @@ export class ComparateurFinancement {
     }, [] as DifferenceFinancement[]);
   }
 
-  async detecteNouvellesAides() {
+  async detecteNouvellesAides(): Promise<NouveauFinancement[]> {
     const nouvellesAides =
       await this.adaptateurSourceExterne.chercheAidesCyber();
     const identifiantsConnus = new Set(this.financements.map((f) => f.id));
-    return nouvellesAides.filter(
-      (nouvelleAide) => !identifiantsConnus.has(nouvelleAide.id)
-    );
+    return nouvellesAides
+      .filter((nouvelleAide) => !identifiantsConnus.has(nouvelleAide.id))
+      .map((nouvelleAide) => ({
+        idFinancement: nouvelleAide.id,
+        nom: nouvelleAide.nom,
+        url: `${nouvelleAide.id}`,
+      }));
   }
 
   private compareChampFinancement(
