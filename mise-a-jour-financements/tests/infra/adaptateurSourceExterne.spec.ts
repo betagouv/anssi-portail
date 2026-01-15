@@ -15,7 +15,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
   let clientHttp: ClientHttp<RetourAidesEntreprisesAPI>;
   let adapateurAidesEntreprisesAPI: AdaptateurSourceExterne;
 
-  const retourAPI: RetourAidesEntreprisesAPI = [
+  const aidesDeLAPI: RetourAidesEntreprisesAPI = [
     {
       id_aid: '10234',
       aid_benef: 'Tout le monde',
@@ -48,85 +48,46 @@ describe("L'adaptateur Aides Entreprises API", () => {
     });
   });
 
-  it("sait récupérer des aides en appelant l'API Aides Entreprises", async () => {
-    let urlAppelee = '';
-    let apiId = '';
-    let apiKey = '';
+  describe('sait récupérer une aide', () => {
+    it("en appelant l'API Aides Entreprises", async () => {
+      let urlAppelee = '';
+      let apiId = '';
+      let apiKey = '';
 
-    clientHttp.get = async (url, config) => {
-      urlAppelee = url;
-      apiId = config?.headers?.['X-Aidesentreprises-Id'] ?? '';
-      apiKey = config?.headers?.['X-Aidesentreprises-Key'] ?? '';
-      return {
-        data: retourAPI,
+      clientHttp.get = async (url, config) => {
+        urlAppelee = url;
+        apiId = config?.headers?.['X-Aidesentreprises-Id'] ?? '';
+        apiKey = config?.headers?.['X-Aidesentreprises-Key'] ?? '';
+        return {
+          data: aidesDeLAPI,
+        };
       };
-    };
-    await adapateurAidesEntreprisesAPI.parId(10234);
+      await adapateurAidesEntreprisesAPI.parId(10234);
 
-    assert.equal(
-      urlAppelee,
-      'http://example.com/financements/10234?clean_html=true'
-    );
-    assert.equal(apiId, 'mon-api-id');
-    assert.equal(apiKey, 'mon-api-key');
-  });
-
-  it("ne renvoie rien si l'url source n'est pas définie", async () => {
-    adaptateurEnvironnement.aidesEntreprises = () => ({
-      url: () => '',
-      apiId: () => '',
-      apiKey: () => '',
+      assert.equal(
+        urlAppelee,
+        'http://example.com/financements/10234?clean_html=true'
+      );
+      assert.equal(apiId, 'mon-api-id');
+      assert.equal(apiKey, 'mon-api-key');
     });
 
-    const aide = await adapateurAidesEntreprisesAPI.parId(10234);
+    it("et ne rien renvoyer si l'url source n'est pas définie", async () => {
+      adaptateurEnvironnement.aidesEntreprises = () => ({
+        url: () => '',
+        apiId: () => '',
+        apiKey: () => '',
+      });
 
-    assert.deepEqual(aide, undefined);
-  });
+      const aide = await adapateurAidesEntreprisesAPI.parId(10234);
 
-  it("sait transfomer le retour de l'API en financements", async () => {
-    clientHttp.get = async (_url, _config) => {
-      return {
-        data: retourAPI,
-      };
-    };
+      assert.deepEqual(aide, undefined);
+    });
 
-    const aide = await adapateurAidesEntreprisesAPI.parId(10234);
-
-    assert.deepEqual(aide, {
-      id: 10234,
-      nom: 'Cyber PME',
-      benificiaires: 'Tout le monde',
-      financeur: 'BPI France',
-      objectifs: 'Lune',
-      operationsEligibles: 'La division euclidienne',
-      montant: 'Mille milliards',
-      condition: 'Avoir 10 doigts',
-      derniereModification: new Date('2025-12-31 10:00:01'),
-    } satisfies Financement);
-  });
-
-  it("renvoie undefined si l'API ne retourne pas d'aide", async () => {
-    clientHttp.get = async (_url, _config) => {
-      return {
-        data: false,
-      };
-    };
-
-    const aide = await adapateurAidesEntreprisesAPI.parId(10234);
-
-    assert.deepEqual(aide, undefined);
-  });
-
-  describe('sait gérer les financeurs', () => {
-    it("quand il n'y en a pas", async () => {
+    it("et transfomer le retour de l'API en financements", async () => {
       clientHttp.get = async (_url, _config) => {
         return {
-          data: [
-            {
-              ...retourAPI[0],
-              financeurs: [],
-            },
-          ],
+          data: aidesDeLAPI,
         };
       };
 
@@ -136,7 +97,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
         id: 10234,
         nom: 'Cyber PME',
         benificiaires: 'Tout le monde',
-        financeur: '',
+        financeur: 'BPI France',
         objectifs: 'Lune',
         operationsEligibles: 'La division euclidienne',
         montant: 'Mille milliards',
@@ -145,34 +106,138 @@ describe("L'adaptateur Aides Entreprises API", () => {
       } satisfies Financement);
     });
 
-    it('quand il y en a plusieurs', async () => {
+    it("et renvoyer une résultat non défini si l'API ne retourne pas d'aide", async () => {
       clientHttp.get = async (_url, _config) => {
         return {
-          data: [
-            {
-              ...retourAPI[0],
-              financeurs: [
-                { org_nom: 'Financeur 1' },
-                { org_nom: 'Financeur 2' },
-              ],
-            },
-          ],
+          data: false,
         };
       };
 
       const aide = await adapateurAidesEntreprisesAPI.parId(10234);
 
-      assert.deepEqual(aide, {
-        id: 10234,
-        nom: 'Cyber PME',
-        benificiaires: 'Tout le monde',
-        financeur: 'Financeur 1, Financeur 2',
-        objectifs: 'Lune',
-        operationsEligibles: 'La division euclidienne',
-        montant: 'Mille milliards',
-        condition: 'Avoir 10 doigts',
-        derniereModification: new Date('2025-12-31 10:00:01'),
-      } satisfies Financement);
+      assert.deepEqual(aide, undefined);
+    });
+
+    describe('et gérer les financeurs', () => {
+      it("quand il n'y en a pas", async () => {
+        clientHttp.get = async (_url, _config) => {
+          return {
+            data: [
+              {
+                ...aidesDeLAPI[0],
+                financeurs: [],
+              },
+            ],
+          };
+        };
+
+        const aide = await adapateurAidesEntreprisesAPI.parId(10234);
+
+        assert.deepEqual(aide, {
+          id: 10234,
+          nom: 'Cyber PME',
+          benificiaires: 'Tout le monde',
+          financeur: '',
+          objectifs: 'Lune',
+          operationsEligibles: 'La division euclidienne',
+          montant: 'Mille milliards',
+          condition: 'Avoir 10 doigts',
+          derniereModification: new Date('2025-12-31 10:00:01'),
+        } satisfies Financement);
+      });
+
+      it('quand il y en a plusieurs', async () => {
+        clientHttp.get = async (_url, _config) => {
+          return {
+            data: [
+              {
+                ...aidesDeLAPI[0],
+                financeurs: [
+                  { org_nom: 'Financeur 1' },
+                  { org_nom: 'Financeur 2' },
+                ],
+              },
+            ],
+          };
+        };
+
+        const aide = await adapateurAidesEntreprisesAPI.parId(10234);
+
+        assert.deepEqual(aide, {
+          id: 10234,
+          nom: 'Cyber PME',
+          benificiaires: 'Tout le monde',
+          financeur: 'Financeur 1, Financeur 2',
+          objectifs: 'Lune',
+          operationsEligibles: 'La division euclidienne',
+          montant: 'Mille milliards',
+          condition: 'Avoir 10 doigts',
+          derniereModification: new Date('2025-12-31 10:00:01'),
+        } satisfies Financement);
+      });
+    });
+  });
+
+  describe('sait rechercher de nouvelles aides cyber', () => {
+    it("en appelant l'API Aides Entreprises", async () => {
+      let urlAppelee = '';
+      let apiId = '';
+      let apiKey = '';
+
+      clientHttp.get = async (url, config) => {
+        urlAppelee = url;
+        apiId = config?.headers?.['X-Aidesentreprises-Id'] ?? '';
+        apiKey = config?.headers?.['X-Aidesentreprises-Key'] ?? '';
+        return {
+          data: aidesDeLAPI,
+        };
+      };
+      await adapateurAidesEntreprisesAPI.chercheAidesCyber();
+
+      assert.equal(
+        urlAppelee,
+        'http://example.com/financements?full_text=cyber&limit=50&offset=0'
+      );
+      assert.equal(apiId, 'mon-api-id');
+      assert.equal(apiKey, 'mon-api-key');
+    });
+
+    it("et ne rien renvoyer si l'url source n'est pas définie", async () => {
+      adaptateurEnvironnement.aidesEntreprises = () => ({
+        url: () => '',
+        apiId: () => '',
+        apiKey: () => '',
+      });
+
+      const nouvellesAides =
+        await adapateurAidesEntreprisesAPI.chercheAidesCyber();
+
+      assert.deepEqual(nouvellesAides, []);
+    });
+
+    it("et transfomer le retour de l'API en financements", async () => {
+      clientHttp.get = async (_url, _config) => {
+        return {
+          data: { data: aidesDeLAPI },
+        };
+      };
+
+      const nouvellesAides =
+        await adapateurAidesEntreprisesAPI.chercheAidesCyber();
+
+      assert.deepEqual(nouvellesAides, [
+        {
+          id: 10234,
+          nom: 'Cyber PME',
+          benificiaires: 'Tout le monde',
+          financeur: 'BPI France',
+          objectifs: 'Lune',
+          operationsEligibles: 'La division euclidienne',
+          montant: 'Mille milliards',
+          condition: 'Avoir 10 doigts',
+          derniereModification: new Date('2025-12-31 10:00:01'),
+        },
+      ] satisfies Financement[]);
     });
   });
 });
