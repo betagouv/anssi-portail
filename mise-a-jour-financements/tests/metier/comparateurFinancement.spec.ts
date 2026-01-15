@@ -2,10 +2,8 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import { AdaptateurSourceExterne } from '../../src/infra/adaptateurSourceExterne.js';
 import { EntrepotFinancement } from '../../src/infra/entrepotFinancement.js';
-import {
-  ComparateurFinancement,
-  DifferenceFinancement,
-} from '../../src/metier/comparateurFinancement.js';
+import { ComparateurFinancement } from '../../src/metier/comparateurFinancement.js';
+import { DifferenceFinancement } from '../../src/metier/differenceFinancement.js';
 import { Financement } from '../../src/metier/financement.js';
 
 describe('Le comparateur de financement', () => {
