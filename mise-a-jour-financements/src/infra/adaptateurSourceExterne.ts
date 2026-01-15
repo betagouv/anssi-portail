@@ -15,7 +15,7 @@ type Aide = {
   horodatage: string;
 };
 
-export type RetourAidesEntreprisesAPI = Aide[] | false;
+export type RetourAidesEntreprisesAPI = { data: Aide[] } | Aide[] | false;
 
 export interface AdaptateurSourceExterne {
   chercheAidesCyber: () => Promise<Financement[]>;
@@ -55,7 +55,7 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
       }
     );
 
-    if (!aides) {
+    if (!aides || 'data' in aides) {
       return undefined;
     }
 
@@ -73,6 +73,36 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
     };
   }
   async chercheAidesCyber() {
-    return [];
+    const url = this.adaptateurEnvironnement.aidesEntreprises().url();
+    if (!url) {
+      return [];
+    }
+    const { data } = await this.clientHttp.get(
+      url + '?full_text=cyber&limit=50&offset=0',
+      {
+        headers: {
+          'X-Aidesentreprises-Id': this.adaptateurEnvironnement
+            .aidesEntreprises()
+            .apiId(),
+          'X-Aidesentreprises-Key': this.adaptateurEnvironnement
+            .aidesEntreprises()
+            .apiKey(),
+        },
+      }
+    );
+    if (!data || !('data' in data)) {
+      return [];
+    }
+    return data.data.map((aide) => ({
+      id: Number(aide.id_aid),
+      benificiaires: aide.aid_benef,
+      condition: aide.aid_conditions,
+      financeur: aide.financeurs.map((f) => f.org_nom).join(', '),
+      montant: aide.aid_montant,
+      nom: aide.aid_nom,
+      objectifs: aide.aid_objet,
+      operationsEligibles: aide.aid_operations_el,
+      derniereModification: new Date(aide.horodatage),
+    }));
   }
 }
