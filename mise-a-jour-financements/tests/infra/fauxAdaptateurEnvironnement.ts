@@ -7,6 +7,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     cleApiFinancements: () => 'FAUSSE_CLE_API',
   }),
   aidesEntreprises: () => ({
+    url: () => 'http://example.com/aide',
     urlAPI: () => 'http://example.com/financements',
     apiId: () => 'mon-api-id',
     apiKey: () => 'mon-api-key',

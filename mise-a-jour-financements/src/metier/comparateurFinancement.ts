@@ -1,3 +1,4 @@
+import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import { AdaptateurSourceExterne } from '../infra/adaptateurSourceExterne';
 import { EntrepotFinancement } from '../infra/entrepotFinancement';
 import { DifferenceFinancement } from './differenceFinancement';
@@ -12,7 +13,8 @@ export class ComparateurFinancement {
   >;
   constructor(
     private readonly entrepotFinancement: EntrepotFinancement,
-    private readonly adaptateurSourceExterne: AdaptateurSourceExterne
+    private readonly adaptateurSourceExterne: AdaptateurSourceExterne,
+    private readonly adaptateurEnvironnement: AdaptateurEnvironnement
   ) {
     this.financements = [];
     this.financementsSourceExterne = new Map();
@@ -77,7 +79,9 @@ export class ComparateurFinancement {
       .map((nouvelleAide) => ({
         idFinancement: nouvelleAide.id,
         nom: nouvelleAide.nom,
-        url: `${nouvelleAide.id}`,
+        url: `${this.adaptateurEnvironnement.aidesEntreprises().url()}/${
+          nouvelleAide.id
+        }`,
       }));
   }
 

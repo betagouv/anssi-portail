@@ -11,7 +11,8 @@ const adaptateuAidesEntreprisesAPI = new AdapateurAidesEntreprisesAPI({
 });
 const comparateurFinancement = new ComparateurFinancement(
   entrepotFinancementGrist,
-  adaptateuAidesEntreprisesAPI
+  adaptateuAidesEntreprisesAPI,
+  adaptateurEnvironnement
 );
 
 console.info('Récupération des financements...');
@@ -20,6 +21,6 @@ console.info('...compare avec les financements sur aides-entreprise...');
 const resultats = comparateurFinancement.compareSourceExterne();
 console.info(resultats);
 console.info('...cherche de nouveaux financement cyber...');
-const nouvellesAides = comparateurFinancement.detecteNouvellesAides();
+const nouvellesAides = await comparateurFinancement.detecteNouvellesAides();
 console.info('nouvellesAides : ', nouvellesAides);
 console.info('... Terminé !');
