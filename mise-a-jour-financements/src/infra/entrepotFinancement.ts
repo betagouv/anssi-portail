@@ -31,13 +31,13 @@ export type RetourApiGrist = {
 };
 
 export class EntrepotFinancementGrist implements EntrepotFinancement {
-  clientHttp: ClientHttp<RetourApiGrist>;
+  clientHttp: ClientHttp;
   adaptateurEnvironnement: AdaptateurEnvironnement;
   constructor({
     clientHttp = axios,
     adaptateurEnvironnement,
   }: {
-    clientHttp?: ClientHttp<RetourApiGrist>;
+    clientHttp?: ClientHttp;
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
     this.clientHttp = clientHttp;
@@ -52,9 +52,12 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
       return [];
     }
     const cleApi = this.adaptateurEnvironnement.grist().cleApiFinancements();
-    const reponse = await this.clientHttp.get(urlDocFinancement, {
-      headers: { Authorization: `Bearer ${cleApi}` },
-    });
+    const reponse = await this.clientHttp.get<RetourApiGrist>(
+      urlDocFinancement,
+      {
+        headers: { Authorization: `Bearer ${cleApi}` },
+      }
+    );
 
     return reponse.data.records
       .map(

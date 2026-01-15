@@ -3,7 +3,7 @@ import { Financement } from '../metier/financement';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { ClientHttp } from './clientHttp';
 
-type Aide = {
+export type Aide = {
   id_aid: string;
   aid_nom: string;
   aid_objet: string;
@@ -15,7 +15,10 @@ type Aide = {
   horodatage: string;
 };
 
-export type RetourAidesEntreprisesAPI = { data: Aide[] } | Aide[] | false;
+export type DetailsAidesEntreprisesAPI = Aide[] | false;
+export type RechercheAidesEntreprisesAPI = {
+  data: Omit<Aide, 'financeurs'>[];
+};
 
 export interface AdaptateurSourceExterne {
   chercheAidesCyber: () => Promise<Financement[]>;
@@ -23,14 +26,14 @@ export interface AdaptateurSourceExterne {
 }
 
 export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
-  private readonly clientHttp: ClientHttp<RetourAidesEntreprisesAPI>;
+  private readonly clientHttp: ClientHttp;
   private readonly adaptateurEnvironnement: AdaptateurEnvironnement;
   private readonly headers: Record<string, string>;
   constructor({
     clientHttp = axios,
     adaptateurEnvironnement,
   }: {
-    clientHttp?: ClientHttp<RetourAidesEntreprisesAPI>;
+    clientHttp?: ClientHttp;
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
     this.clientHttp = clientHttp;
@@ -50,14 +53,15 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
     if (!url) {
       return undefined;
     }
-    const { data: aides } = await this.clientHttp.get(
-      url + '/' + id + '?clean_html=true',
-      {
-        headers: this.headers,
-      }
-    );
+    const { data: aides } =
+      await this.clientHttp.get<DetailsAidesEntreprisesAPI>(
+        url + '/' + id + '?clean_html=true',
+        {
+          headers: this.headers,
+        }
+      );
 
-    if (!aides || 'data' in aides) {
+    if (!aides) {
       return undefined;
     }
 
@@ -79,20 +83,17 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
     if (!url) {
       return [];
     }
-    const { data } = await this.clientHttp.get(
+    const { data } = await this.clientHttp.get<RechercheAidesEntreprisesAPI>(
       url + '?full_text=cyber&limit=50&offset=0',
       {
         headers: this.headers,
       }
     );
-    if (!data || !('data' in data)) {
-      return [];
-    }
     return data.data.map((aide) => ({
       id: Number(aide.id_aid),
       benificiaires: aide.aid_benef,
       condition: aide.aid_conditions,
-      financeur: aide.financeurs.map((f) => f.org_nom).join(', '),
+      financeur: '',
       montant: aide.aid_montant,
       nom: aide.aid_nom,
       objectifs: aide.aid_objet,
