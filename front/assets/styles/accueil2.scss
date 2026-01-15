@@ -23,3 +23,67 @@
     }
   }
 }
+
+.organisations-concernees {
+  padding: 56px var(--gouttiere);
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+
+    .toutes-organisations {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      hgroup {
+        h2 {
+          margin-bottom: 16px;
+        }
+      }
+      img {
+        margin-bottom: 24px;
+      }
+      lab-anssi-lien {
+        color: #666;
+        margin-bottom: 0;
+      }
+    }
+
+    .demande-diag {
+      background-color: #FEF6E3;
+      border-radius: 8px;
+      height: 420px;
+    }
+
+    .acces-catalogue {
+      display: flex;
+      flex-direction: column;
+
+      h2 {
+        text-align: center;
+        margin-bottom: 72px;
+      }
+
+      .selections {
+        .texte-detail-sm {
+          color: #3a3a3a;
+          margin-bottom: 16px;
+        }
+        .caroussel-selections {
+          height: 420px;
+          border: 1px solid #3a3a3a;
+          margin-bottom: 48px;
+        }
+      }
+      .texte-chapo-xl {
+        color: #3a3a3a;
+        text-align: center;
+      }
+
+      lab-anssi-lien {
+        align-self: center;
+        margin-block: 24px;
+      }
+    }
+  }
+}
