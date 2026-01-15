@@ -33,9 +33,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
     adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
       aidesEntreprises: () => ({
-        urlAPI: () => 'http://example.com/financements',
-        apiId: () => 'mon-api-id',
-        apiKey: () => 'mon-api-key',
+        ...fauxAdaptateurEnvironnement.aidesEntreprises(),
       }),
     };
     clientHttp = {
@@ -78,6 +76,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
 
     it("et ne rien renvoyer si l'url source n'est pas définie", async () => {
       adaptateurEnvironnement.aidesEntreprises = () => ({
+        url: () => '',
         urlAPI: () => '',
         apiId: () => '',
         apiKey: () => '',
@@ -211,6 +210,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
 
     it("et ne rien renvoyer si l'url source n'est pas définie", async () => {
       adaptateurEnvironnement.aidesEntreprises = () => ({
+        url: () => '',
         urlAPI: () => '',
         apiId: () => '',
         apiKey: () => '',

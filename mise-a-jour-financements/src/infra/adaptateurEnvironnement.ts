@@ -5,6 +5,7 @@ export type AdaptateurEnvironnement = {
   };
 
   aidesEntreprises: () => {
+    url: () => string;
     urlAPI: () => string;
     apiId: () => string;
     apiKey: () => string;
@@ -17,6 +18,7 @@ export const adaptateurEnvironnement: AdaptateurEnvironnement = {
     cleApiFinancements: () => process.env.FINANCEMENTS_GRIST_API_KEY || '',
   }),
   aidesEntreprises: () => ({
+    url: () => process.env.AIDES_ENTREPRISES_URL || '',
     urlAPI: () => process.env.AIDES_ENTREPRISES_API_URL || '',
     apiId: () => process.env.AIDES_ENTREPRISES_API_ID || '',
     apiKey: () => process.env.AIDES_ENTREPRISES_API_KEY || '',

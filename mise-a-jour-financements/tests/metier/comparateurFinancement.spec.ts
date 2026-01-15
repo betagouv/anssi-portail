@@ -6,6 +6,7 @@ import { ComparateurFinancement } from '../../src/metier/comparateurFinancement.
 import { DifferenceFinancement } from '../../src/metier/differenceFinancement.js';
 import { Financement } from '../../src/metier/financement.js';
 import { NouveauFinancement } from '../../src/metier/nouveauFinancement.js';
+import { fauxAdaptateurEnvironnement } from '../infra/fauxAdaptateurEnvironnement.js';
 
 describe('Le comparateur de financement', () => {
   const financement1: Financement = {
@@ -34,7 +35,8 @@ describe('Le comparateur de financement', () => {
     };
     comparateur = new ComparateurFinancement(
       entrepotFinancement,
-      adaptateurSourceExterne
+      adaptateurSourceExterne,
+      fauxAdaptateurEnvironnement
     );
   });
 
@@ -177,7 +179,7 @@ describe('Le comparateur de financement', () => {
         {
           idFinancement: nouveauFinancement.id,
           nom: nouveauFinancement.nom,
-          url: nouveauFinancement.id.toString(),
+          url: `http://example.com/aide/${nouveauFinancement.id}`,
         },
       ] satisfies NouveauFinancement[]);
     });
