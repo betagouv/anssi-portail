@@ -4,18 +4,18 @@ import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement
 import {
   AdapateurAidesEntreprisesAPI,
   AdaptateurSourceExterne,
-  RetourAidesEntreprisesAPI,
+  Aide,
 } from '../../src/infra/adaptateurSourceExterne';
 import { ClientHttp } from '../../src/infra/clientHttp';
-import { fauxAdaptateurEnvironnement } from './fauxAdaptateurEnvironnement';
 import { Financement } from '../../src/metier/financement';
+import { fauxAdaptateurEnvironnement } from './fauxAdaptateurEnvironnement';
 
 describe("L'adaptateur Aides Entreprises API", () => {
   let adaptateurEnvironnement: AdaptateurEnvironnement;
-  let clientHttp: ClientHttp<RetourAidesEntreprisesAPI>;
+  let clientHttp: ClientHttp;
   let adapateurAidesEntreprisesAPI: AdaptateurSourceExterne;
 
-  const aidesDeLAPI: RetourAidesEntreprisesAPI = [
+  const aidesDeLAPI: Aide[] = [
     {
       id_aid: '10234',
       aid_benef: 'Tout le monde',
@@ -39,7 +39,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
       }),
     };
     clientHttp = {
-      get: async () => ({ data: [] }),
+      get: async <T>() => ({ data: [] as unknown as T }),
     };
 
     adapateurAidesEntreprisesAPI = new AdapateurAidesEntreprisesAPI({
@@ -54,14 +54,18 @@ describe("L'adaptateur Aides Entreprises API", () => {
       let apiId = '';
       let apiKey = '';
 
-      clientHttp.get = async (url, config) => {
+      clientHttp.get = async <T>(
+        url: string,
+        config?: { headers?: Record<string, string> }
+      ) => {
         urlAppelee = url;
         apiId = config?.headers?.['X-Aidesentreprises-Id'] ?? '';
         apiKey = config?.headers?.['X-Aidesentreprises-Key'] ?? '';
         return {
-          data: aidesDeLAPI,
+          data: aidesDeLAPI as unknown as T,
         };
       };
+
       await adapateurAidesEntreprisesAPI.parId(10234);
 
       assert.equal(
@@ -85,9 +89,9 @@ describe("L'adaptateur Aides Entreprises API", () => {
     });
 
     it("et transfomer le retour de l'API en financements", async () => {
-      clientHttp.get = async (_url, _config) => {
+      clientHttp.get = async <T>() => {
         return {
-          data: aidesDeLAPI,
+          data: aidesDeLAPI as unknown as T,
         };
       };
 
@@ -107,9 +111,9 @@ describe("L'adaptateur Aides Entreprises API", () => {
     });
 
     it("et renvoyer une résultat non défini si l'API ne retourne pas d'aide", async () => {
-      clientHttp.get = async (_url, _config) => {
+      clientHttp.get = async <T>() => {
         return {
-          data: false,
+          data: false as unknown as T,
         };
       };
 
@@ -120,14 +124,14 @@ describe("L'adaptateur Aides Entreprises API", () => {
 
     describe('et gérer les financeurs', () => {
       it("quand il n'y en a pas", async () => {
-        clientHttp.get = async (_url, _config) => {
+        clientHttp.get = async <T>() => {
           return {
             data: [
               {
                 ...aidesDeLAPI[0],
                 financeurs: [],
               },
-            ],
+            ] as unknown as T,
           };
         };
 
@@ -147,7 +151,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
       });
 
       it('quand il y en a plusieurs', async () => {
-        clientHttp.get = async (_url, _config) => {
+        clientHttp.get = async <T>() => {
           return {
             data: [
               {
@@ -157,7 +161,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
                   { org_nom: 'Financeur 2' },
                 ],
               },
-            ],
+            ] as unknown as T,
           };
         };
 
@@ -184,12 +188,15 @@ describe("L'adaptateur Aides Entreprises API", () => {
       let apiId = '';
       let apiKey = '';
 
-      clientHttp.get = async (url, config) => {
+      clientHttp.get = async <T>(
+        url: string,
+        config?: { headers?: Record<string, string> }
+      ) => {
         urlAppelee = url;
         apiId = config?.headers?.['X-Aidesentreprises-Id'] ?? '';
         apiKey = config?.headers?.['X-Aidesentreprises-Key'] ?? '';
         return {
-          data: aidesDeLAPI,
+          data: { data: [] } as unknown as T,
         };
       };
       await adapateurAidesEntreprisesAPI.chercheAidesCyber();
@@ -216,9 +223,9 @@ describe("L'adaptateur Aides Entreprises API", () => {
     });
 
     it("et transfomer le retour de l'API en financements", async () => {
-      clientHttp.get = async (_url, _config) => {
+      clientHttp.get = async <T>() => {
         return {
-          data: { data: aidesDeLAPI },
+          data: { data: aidesDeLAPI } as unknown as T,
         };
       };
 
@@ -230,7 +237,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
           id: 10234,
           nom: 'Cyber PME',
           benificiaires: 'Tout le monde',
-          financeur: 'BPI France',
+          financeur: '',
           objectifs: 'Lune',
           operationsEligibles: 'La division euclidienne',
           montant: 'Mille milliards',

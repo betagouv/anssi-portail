@@ -12,7 +12,7 @@ import { fauxAdaptateurEnvironnement } from './fauxAdaptateurEnvironnement';
 
 describe("L'entrepot de financement Grist", () => {
   let adaptateurEnvironnement: AdaptateurEnvironnement;
-  let clientHttp: ClientHttp<RetourApiGrist>;
+  let clientHttp: ClientHttp;
   let entrepotFinancementGrist: EntrepotFinancement;
 
   beforeEach(() => {
@@ -25,7 +25,7 @@ describe("L'entrepot de financement Grist", () => {
       }),
     };
     clientHttp = {
-      get: async () => ({ data: { records: [] } }),
+      get: async <T>() => ({ data: { records: [] } as unknown as T }),
     };
 
     entrepotFinancementGrist = new EntrepotFinancementGrist({
@@ -49,11 +49,14 @@ describe("L'entrepot de financement Grist", () => {
     let urlAppelee = '';
     let headerAuthent;
 
-    clientHttp.get = async (url, config) => {
+    clientHttp.get = async <T>(
+      url: string,
+      config?: { headers?: Record<string, string> }
+    ) => {
       urlAppelee = url;
       headerAuthent = config?.headers?.Authorization;
       return {
-        data: { records: [] },
+        data: { records: [] } as unknown as T,
       };
     };
 
@@ -67,56 +70,57 @@ describe("L'entrepot de financement Grist", () => {
   });
 
   it("sait transfomer le retour de l'API Grist en financements", async () => {
-    clientHttp.get = async () => {
+    const retourAPI: RetourApiGrist = {
+      records: [
+        {
+          id: 10,
+          fields: {
+            ID_Aides_entreprises: 10234,
+            Nom_du_dispositif: 'Cyber PME',
+            Financement: [
+              'L',
+              'Prestations de conseil',
+              "Appui à l'investissement",
+            ],
+            Financeur: 'BPI France',
+            Entites_eligibles: ['L', 'PME', 'ETI'],
+            Perimetre_geographique: ['L', 'France'],
+            Objectifs: 'Lune',
+            Operations_eligibles: 'La division euclidienne',
+            Beneficiaire: 'Tout le monde',
+            Montant: 'Mille milliards',
+            Conditions: 'Avoir 10 doigts',
+            Region: 'France',
+            Contact: 'president.du.monde@mail.org',
+            Source: 'https://www.aides-entreprises.fr/aide/11454',
+            Date_derniere_modification: null,
+          },
+        },
+        {
+          id: 21,
+          fields: {
+            ID_Aides_entreprises: 10235,
+            Nom_du_dispositif: 'Pass Cyber formation',
+            Financement: ['L', 'Formation'],
+            Financeur: 'CCI des Hauts-de-France',
+            Entites_eligibles: ['L', 'TPE', 'PME'],
+            Perimetre_geographique: ['L', 'Hauts-de-France'],
+            Objectifs: null,
+            Operations_eligibles: null,
+            Beneficiaire: null,
+            Montant: null,
+            Conditions: null,
+            Region: 'Hauts-de-France',
+            Contact: null,
+            Source: 'https://www.aides-entreprises.fr/aide/10124',
+            Date_derniere_modification: 1759269600,
+          },
+        },
+      ],
+    };
+    clientHttp.get = async <T>() => {
       return {
-        data: {
-          records: [
-            {
-              id: 10,
-              fields: {
-                ID_Aides_entreprises: 10234,
-                Nom_du_dispositif: 'Cyber PME',
-                Financement: [
-                  'L',
-                  'Prestations de conseil',
-                  "Appui à l'investissement",
-                ],
-                Financeur: 'BPI France',
-                Entites_eligibles: ['L', 'PME', 'ETI'],
-                Perimetre_geographique: ['L', 'France'],
-                Objectifs: 'Lune',
-                Operations_eligibles: 'La division euclidienne',
-                Beneficiaire: 'Tout le monde',
-                Montant: 'Mille milliards',
-                Conditions: 'Avoir 10 doigts',
-                Region: 'France',
-                Contact: 'president.du.monde@mail.org',
-                Source: 'https://www.aides-entreprises.fr/aide/11454',
-                Date_derniere_modification: null,
-              },
-            },
-            {
-              id: 21,
-              fields: {
-                ID_Aides_entreprises: 10235,
-                Nom_du_dispositif: 'Pass Cyber formation',
-                Financement: ['L', 'Formation'],
-                Financeur: 'CCI des Hauts-de-France',
-                Entites_eligibles: ['L', 'TPE', 'PME'],
-                Perimetre_geographique: ['L', 'Hauts-de-France'],
-                Objectifs: null,
-                Operations_eligibles: null,
-                Beneficiaire: null,
-                Montant: null,
-                Conditions: null,
-                Region: 'Hauts-de-France',
-                Contact: null,
-                Source: 'https://www.aides-entreprises.fr/aide/10124',
-                Date_derniere_modification: 1759269600,
-              },
-            },
-          ],
-        } satisfies RetourApiGrist,
+        data: retourAPI as unknown as T,
       };
     };
 
