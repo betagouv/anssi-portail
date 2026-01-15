@@ -18,6 +18,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
 
   const aidesDeLAPI: Aide[] = [
     {
+      status: '1',
       id_aid: '10234',
       aid_benef: 'Tout le monde',
       aid_conditions: 'Avoir 10 doigts',
@@ -83,6 +84,17 @@ describe("L'adaptateur Aides Entreprises API", () => {
         apiKey: () => '',
       });
 
+      const aide = await adapateurAidesEntreprisesAPI.parId(10234);
+
+      assert.deepEqual(aide, undefined);
+    });
+
+    it("et ne rien renvoyer si l'aide n'est pas active", async () => {
+      clientHttp.get = async <T>() => {
+        return {
+          data: [{ ...aidesDeLAPI, status: '0' }] as unknown as T,
+        };
+      };
       const aide = await adapateurAidesEntreprisesAPI.parId(10234);
 
       assert.deepEqual(aide, undefined);
@@ -184,6 +196,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
 
   describe('sait rechercher de nouvelles aides cyber', () => {
     const resumesAides: ResumeAide = {
+      status: '1',
       id_aid: '10234',
       aid_benef: 'Tout le monde',
       aid_conditions: 'Avoir 10 doigts',

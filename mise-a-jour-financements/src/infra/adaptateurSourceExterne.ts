@@ -13,6 +13,7 @@ export type Aide = {
   financeurs: { org_nom: string }[];
   aid_conditions: string;
   horodatage: string;
+  status: '0' | '1' | '2';
 };
 export type ResumeAide = Omit<Aide, 'financeurs'>;
 
@@ -68,6 +69,9 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
     }
 
     const aide = aides[0];
+    if (aide.status !== '1') {
+      return undefined;
+    }
     return this.mapper(aide);
   }
   async chercheAidesCyber() {
