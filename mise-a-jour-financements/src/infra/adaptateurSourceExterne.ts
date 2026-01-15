@@ -49,7 +49,7 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
   }
 
   async parId(id: Financement['id']): Promise<Financement | undefined> {
-    const url = this.adaptateurEnvironnement.aidesEntreprises().url();
+    const url = this.adaptateurEnvironnement.aidesEntreprises().urlAPI();
     if (!url) {
       return undefined;
     }
@@ -79,7 +79,7 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
     };
   }
   async chercheAidesCyber() {
-    const url = this.adaptateurEnvironnement.aidesEntreprises().url();
+    const url = this.adaptateurEnvironnement.aidesEntreprises().urlAPI();
     if (!url) {
       return [];
     }
