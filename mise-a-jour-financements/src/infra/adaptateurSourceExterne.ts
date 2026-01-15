@@ -81,7 +81,7 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
     do {
       const reponse = await this.clientHttp.get<RechercheAidesEntreprisesAPI>(
         url +
-          `?full_text=cyber&limit=${this.itemParPage}&offset=${
+          `?full_text=cyber&status=1&limit=${this.itemParPage}&offset=${
             this.itemParPage *
             Math.floor(nouvellesAides.length / this.itemParPage)
           }`,

@@ -213,7 +213,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
 
       assert.equal(
         urlAppelee,
-        'http://example.com/financements?full_text=cyber&limit=50&offset=0'
+        'http://example.com/financements?full_text=cyber&status=1&limit=50&offset=0'
       );
       assert.equal(apiId, 'mon-api-id');
       assert.equal(apiKey, 'mon-api-key');
@@ -279,8 +279,8 @@ describe("L'adaptateur Aides Entreprises API", () => {
       await adapateurAidesEntreprisesAPI.chercheAidesCyber();
 
       assert.deepEqual(urlsAppelees, [
-        'http://example.com/financements?full_text=cyber&limit=50&offset=0',
-        'http://example.com/financements?full_text=cyber&limit=50&offset=50',
+        'http://example.com/financements?full_text=cyber&status=1&limit=50&offset=0',
+        'http://example.com/financements?full_text=cyber&status=1&limit=50&offset=50',
       ]);
     });
   });
