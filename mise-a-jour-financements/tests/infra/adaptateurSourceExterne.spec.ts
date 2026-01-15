@@ -5,6 +5,7 @@ import {
   AdapateurAidesEntreprisesAPI,
   AdaptateurSourceExterne,
   Aide,
+  ResumeAide,
 } from '../../src/infra/adaptateurSourceExterne';
 import { ClientHttp } from '../../src/infra/clientHttp';
 import { Financement } from '../../src/metier/financement';
@@ -182,6 +183,16 @@ describe("L'adaptateur Aides Entreprises API", () => {
   });
 
   describe('sait rechercher de nouvelles aides cyber', () => {
+    const resumesAides: ResumeAide = {
+      id_aid: '10234',
+      aid_benef: 'Tout le monde',
+      aid_conditions: 'Avoir 10 doigts',
+      aid_montant: 'Mille milliards',
+      aid_nom: 'Cyber PME',
+      aid_objet: 'Lune',
+      aid_operations_el: 'La division euclidienne',
+      horodatage: '2025-12-31 10:00:01',
+    };
     it("en appelant l'API Aides Entreprises", async () => {
       let urlAppelee = '';
       let apiId = '';
@@ -225,7 +236,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
     it("et transfomer le retour de l'API en financements", async () => {
       clientHttp.get = async <T>() => {
         return {
-          data: { data: aidesDeLAPI } as unknown as T,
+          data: { data: [resumesAides] } as unknown as T,
         };
       };
 
@@ -245,6 +256,32 @@ describe("L'adaptateur Aides Entreprises API", () => {
           derniereModification: new Date('2025-12-31 10:00:01'),
         },
       ] satisfies Financement[]);
+    });
+
+    it('en gérant une nombre élevé de resultats via la pagination', async () => {
+      const resultats50 = new Array(50).fill(resumesAides);
+      const urlsAppelees: string[] = [];
+
+      clientHttp.get = async <T>(url: string) => {
+        urlsAppelees.push(url);
+        if (url.includes('offset=0')) {
+          return {
+            data: { data: resultats50 } as unknown as T,
+          };
+        }
+        if (url.includes('offset=50')) {
+          return {
+            data: { data: [resumesAides] } as unknown as T,
+          };
+        }
+        throw new Error('échec du test !! erreur non prévue');
+      };
+      await adapateurAidesEntreprisesAPI.chercheAidesCyber();
+
+      assert.deepEqual(urlsAppelees, [
+        'http://example.com/financements?full_text=cyber&limit=50&offset=0',
+        'http://example.com/financements?full_text=cyber&limit=50&offset=50',
+      ]);
     });
   });
 });
