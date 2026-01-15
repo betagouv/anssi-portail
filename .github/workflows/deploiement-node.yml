@@ -1,5 +1,5 @@
 name: Déploiement Node
-permissions: { }
+permissions: {}
 
 on:
   workflow_call:
@@ -26,7 +26,6 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
-          cache: 'pnpm'
 
       - name: Installe pnpm
         uses: pnpm/action-setup@v4
