@@ -3,3 +3,23 @@
 
 @use '../../assets/styles/responsive' as *;
 
+.chapeau.fond-sombre {
+  padding: 48px var(--gouttiere);
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    hgroup {
+      h1 {
+        margin-bottom: 8px;
+      }
+      .texte-chapo-xl {
+        margin-bottom: 0;
+      }
+    }
+    .texte-detail-sm {
+      margin-bottom: 0;
+    }
+  }
+}
