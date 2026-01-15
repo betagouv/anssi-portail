@@ -1,0 +1,25 @@
+---
+---
+
+@use '../../assets/styles/responsive' as *;
+
+h2 {
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  font-weight: bold;
+  margin: 0 0 24px;
+  @include a-partir-de(md) {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+}
+
+.alternatif-xs {
+  font-size: 2.5rem;
+  line-height: 3rem;
+  margin: 0 0 32px;
+  @include a-partir-de(md) {
+    font-size: 3rem;
+    line-height: 3.5rem;
+  }
+}
