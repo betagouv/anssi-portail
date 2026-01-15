@@ -1,16 +1,7 @@
 import { AdaptateurSourceExterne } from '../infra/adaptateurSourceExterne';
 import { EntrepotFinancement } from '../infra/entrepotFinancement';
+import { DifferenceFinancement } from './differenceFinancement';
 import { Financement } from './financement';
-
-export type DifferenceFinancement = {
-  idFinancement: Financement['id'];
-  donneesDifferentes?: {
-    nomDeLaDonnee: keyof Omit<Financement, 'id'>;
-    valeurSurGrist: string;
-    nouvelleValeur: string;
-  };
-  etat?: 'supprimé';
-};
 
 export class ComparateurFinancement {
   financements: Financement[];
