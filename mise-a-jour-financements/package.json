@@ -17,8 +17,7 @@
   "dependencies": {
     "axios": "~1.13.2",
     "diff": "~8.0.2",
-    "isomorphic-dompurify": "~2.35.0",
-    "picocolors": "~1.1.1"
+    "isomorphic-dompurify": "~2.35.0"
   },
   "devDependencies": {
     "@eslint/js": "~9.39.1",
