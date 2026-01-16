@@ -10,19 +10,20 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
     differences: DifferenceFinancement[],
     nouveauxFinancements: NouveauFinancement[]
   ) {
-    const differencesParFinancement = differences.reduce((acc, difference) => {
-      if (difference.donneesDifferentes) {
-        const listeDifferences = acc.get(difference.idFinancement) || [];
-        listeDifferences.push(difference.donneesDifferentes);
-        acc.set(difference.idFinancement, listeDifferences);
-      }
-      return acc;
-    }, new Map<number, NonNullable<DifferenceFinancement['donneesDifferentes']>[]>());
-
     this.sortie('<!DOCTYPE html>');
     this.sortie('<html>');
     this.sortie('<body>');
     this.sortie('<h1>Rapport des différences de financements</h1>');
+    this.imprimeNouveauxFinancements(nouveauxFinancements);
+    this.imprimeFinancementsModifies(differences);
+    this.imprimeFinancementsSupprimes(differences);
+    this.sortie('</body>');
+    this.sortie('</html>');
+  }
+
+  private imprimeNouveauxFinancements(
+    nouveauxFinancements: NouveauFinancement[]
+  ) {
     this.sortie('<h2>Nouveaux financements</h2>');
     if (nouveauxFinancements.length > 0) {
       this.sortie('<ul><li>');
@@ -38,9 +39,23 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
     } else {
       this.sortie('<p>Pas de nouveau financement trouvé</p>');
     }
+  }
+
+  private imprimeFinancementsModifies(differences: DifferenceFinancement[]) {
+    const differencesParFinancement = differences.reduce((acc, difference) => {
+      if (difference.donneesDifferentes) {
+        const listeDifferences = acc.get(difference.idFinancement) || [];
+        listeDifferences.push(difference.donneesDifferentes);
+        acc.set(difference.idFinancement, listeDifferences);
+      }
+      return acc;
+    }, new Map<number, NonNullable<DifferenceFinancement['donneesDifferentes']>[]>());
+
     this.sortie('<h2>Financements modifiés</h2>');
+
     if (differencesParFinancement.size === 0) {
       this.sortie('<p>Aucun financement modifié</p>');
+      return;
     }
     for (const [idFinancement, listeDifferences] of differencesParFinancement) {
       this.sortie(`<h3>Financement ID ${idFinancement}</h3>`);
@@ -64,6 +79,9 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
         this.sortie('</code>');
       }
     }
+  }
+
+  private imprimeFinancementsSupprimes(differences: DifferenceFinancement[]) {
     const finacementsSupprimes = differences.filter(
       (diff) => diff.etat === 'supprimé'
     );
@@ -77,8 +95,6 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
     } else {
       this.sortie('<p>Aucun financement à supprimer</p>');
     }
-    this.sortie('</body>');
-    this.sortie('</html>');
   }
 }
 
