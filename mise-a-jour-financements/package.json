@@ -5,6 +5,7 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
+    "start": "node --import tsx src/index.ts",
     "dev": "node --env-file ../.env --env-file .env --import tsx src/index.ts",
     "lint:fix": "eslint . --fix",
     "lint": "eslint .",
