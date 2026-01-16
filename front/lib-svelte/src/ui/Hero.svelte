@@ -18,7 +18,7 @@
         brancheConnectee={arianeBrancheConnectee}
       />
     {/if}
-    <h1>{titre}</h1>
-    <p>{description}</p>
+    <h1 class="alternatif-xs-ns">{titre}</h1>
+    <p class="texte-chapo-xl-ns">{description}</p>
   </div>
 </section>

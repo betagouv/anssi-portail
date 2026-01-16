@@ -20,11 +20,11 @@
 <section class="chapeau fond-sombre">
   <div class="contenu-section">
     <FilAriane feuille="Favoris" />
-    <h1>Services et ressources favoris</h1>
-    <p>Retrouvez tous vos contenus cyber à partager.</p>
+    <h1 class="alternatif-xs-ns">Services et ressources favoris</h1>
+    <p class="texte-chapo-xl-ns">Retrouvez tous vos contenus cyber à partager.</p>
     {#if $itemsCatalogueEnFavori.length > 0}
       <div class="cta">
-        <p>
+        <p class="texte-chapo-xl-ns">
           Parcourez le catalogue pour ajouter plus de services et ressources.
         </p>
         <a href="/catalogue/" class="bouton primaire">Explorer le catalogue</a>
