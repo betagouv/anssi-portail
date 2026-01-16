@@ -29,10 +29,25 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Lance le script de comparaison
+        env:
+          FINANCEMENTS_GRIST_URL: ${{ secrets.FINANCEMENTS_GRIST_URL }}
+          FINANCEMENTS_GRIST_API_KEY: ${{ secrets.FINANCEMENTS_GRIST_API_KEY }}
+          AIDES_ENTREPRISES_URL: ${{ secrets.AIDES_ENTREPRISES_URL }}
+          AIDES_ENTREPRISES_API_URL: ${{ secrets.AIDES_ENTREPRISES_API_URL }}
+          AIDES_ENTREPRISES_API_ID: ${{ secrets.AIDES_ENTREPRISES_API_ID }}
+          AIDES_ENTREPRISES_API_KEY: ${{ secrets.AIDES_ENTREPRISES_API_KEY }}
         run: pnpm -F mise-a-jour-financements start
 
       - name: Publie le rapport
         uses: actions/upload-artifact@v4
+        id: rapport-financements
         with:
           name: rapport
           path: ./mise-a-jour-financements/rapports/financements-en-differences.html
+
+      - name: Poste l'url du rapport
+        uses: mattermost/action-mattermost-notify@master
+        with:
+          MATTERMOST_WEBHOOK_URL: ${{ secrets.MATTERMOST_FINANCEMENT_WEBHOOK_URL }}
+          TEXT: |
+            Nouveau rapport publié [ici](${{ steps.rapport-financements.outputs.artifact-url }})
