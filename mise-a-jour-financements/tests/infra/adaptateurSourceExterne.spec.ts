@@ -68,10 +68,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
 
       await adapateurAidesEntreprisesAPI.parId(10234);
 
-      assert.equal(
-        urlAppelee,
-        'http://example.com/financements/10234?clean_html=true'
-      );
+      assert.equal(urlAppelee, 'http://example.com/financements/10234');
       assert.equal(apiId, 'mon-api-id');
       assert.equal(apiKey, 'mon-api-key');
     });

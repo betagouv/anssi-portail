@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Financement } from '../metier/financement';
 import { ClientHttp } from './clientHttp';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
+import { aseptiseHtml } from './aseptisationDuHtml';
 
 export interface EntrepotFinancement {
   tous(): Promise<Financement[]>;
@@ -64,13 +65,15 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
         ({ fields }) =>
           ({
             id: fields.ID_Aides_entreprises,
-            nom: fields.Nom_du_dispositif ?? '',
-            financeur: fields.Financeur ?? '',
-            objectifs: fields.Objectifs ?? '',
-            operationsEligibles: fields.Operations_eligibles ?? '',
-            benificiaires: fields.Beneficiaire ?? '',
-            montant: fields.Montant ?? '',
-            condition: fields.Conditions ?? '',
+            nom: aseptiseHtml(fields.Nom_du_dispositif ?? ''),
+            financeur: aseptiseHtml(fields.Financeur ?? ''),
+            objectifs: aseptiseHtml(fields.Objectifs ?? ''),
+            operationsEligibles: aseptiseHtml(
+              fields.Operations_eligibles ?? ''
+            ),
+            benificiaires: aseptiseHtml(fields.Beneficiaire ?? ''),
+            montant: aseptiseHtml(fields.Montant ?? ''),
+            condition: aseptiseHtml(fields.Conditions ?? ''),
             derniereModification: fields.Date_derniere_modification
               ? new Date(fields.Date_derniere_modification * 1000)
               : undefined,
