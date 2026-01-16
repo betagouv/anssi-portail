@@ -1,11 +1,15 @@
 import { diffWords } from 'diff';
 import { DifferenceFinancement } from '../metier/differenceFinancement';
 import { GenerateurDeRapports } from '../metier/generateurDeRapports';
+import { NouveauFinancement } from '../metier/nouveauFinancement';
 
 export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
   constructor(private readonly sortie: (ligne: string) => void) {}
 
-  async genereRapportDifference(differences: DifferenceFinancement[]) {
+  async genereRapports(
+    differences: DifferenceFinancement[],
+    nouveauxFinancements: NouveauFinancement[]
+  ) {
     const differencesParFinancement = differences.reduce((acc, difference) => {
       if (difference.donneesDifferentes) {
         const listeDifferences = acc.get(difference.idFinancement) || [];
@@ -19,6 +23,21 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
     this.sortie('<html>');
     this.sortie('<body>');
     this.sortie('<h1>Rapport des différences de financements</h1>');
+    this.sortie('<h2>Nouveaux financements</h2>');
+    if (nouveauxFinancements.length > 0) {
+      this.sortie('<ul><li>');
+      this.sortie(
+        nouveauxFinancements
+          .map(
+            (financement) =>
+              `<a href=${financement.url} target="blank_">${financement.nom}</a>`
+          )
+          .join('</li><li>')
+      );
+      this.sortie('</li></ul>');
+    } else {
+      this.sortie('<p>Pas de nouveau financement trouvé</p>');
+    }
     this.sortie('<h2>Financements modifiés</h2>');
     if (differencesParFinancement.size === 0) {
       this.sortie('<p>Aucun financement modifié</p>');
