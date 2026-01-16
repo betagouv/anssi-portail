@@ -4,30 +4,30 @@ import { GenerateurDeRapports } from '../metier/generateurDeRapports';
 import { NouveauFinancement } from '../metier/nouveauFinancement';
 
 export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
-  constructor(private readonly sortie: (ligne: string) => void) {}
+  constructor(private readonly ecris: (ligne: string) => void) {}
 
   async genereRapports(
     differences: DifferenceFinancement[],
     nouveauxFinancements: NouveauFinancement[]
   ) {
-    this.sortie('<!DOCTYPE html>');
-    this.sortie('<html>');
-    this.sortie('<body>');
-    this.sortie('<h1>Rapport des financements</h1>');
+    this.ecris('<!DOCTYPE html>');
+    this.ecris('<html>');
+    this.ecris('<body>');
+    this.ecris('<h1>Rapport des financements</h1>');
     this.imprimeNouveauxFinancements(nouveauxFinancements);
     this.imprimeFinancementsModifies(differences);
     this.imprimeFinancementsSupprimes(differences);
-    this.sortie('</body>');
-    this.sortie('</html>');
+    this.ecris('</body>');
+    this.ecris('</html>');
   }
 
   private imprimeNouveauxFinancements(
     nouveauxFinancements: NouveauFinancement[]
   ) {
-    this.sortie('<h2>Nouveaux financements</h2>');
+    this.ecris('<h2>Nouveaux financements</h2>');
     if (nouveauxFinancements.length > 0) {
-      this.sortie('<ul><li>');
-      this.sortie(
+      this.ecris('<ul><li>');
+      this.ecris(
         nouveauxFinancements
           .map(
             (financement) =>
@@ -35,9 +35,9 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
           )
           .join('</li><li>')
       );
-      this.sortie('</li></ul>');
+      this.ecris('</li></ul>');
     } else {
-      this.sortie('<p>Pas de nouveau financement trouvé</p>');
+      this.ecris('<p>Pas de nouveau financement trouvé</p>');
     }
   }
 
@@ -51,16 +51,16 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
       return acc;
     }, new Map<number, NonNullable<DifferenceFinancement['donneesDifferentes']>[]>());
 
-    this.sortie('<h2>Financements modifiés</h2>');
+    this.ecris('<h2>Financements modifiés</h2>');
 
     if (differencesParFinancement.size === 0) {
-      this.sortie('<p>Aucun financement modifié</p>');
+      this.ecris('<p>Aucun financement modifié</p>');
       return;
     }
     for (const [idFinancement, listeDifferences] of differencesParFinancement) {
-      this.sortie(`<h3>Financement ID ${idFinancement}</h3>`);
+      this.ecris(`<h3>Financement ID ${idFinancement}</h3>`);
       for (const difference of listeDifferences) {
-        this.sortie('<h4>' + difference.nomDeLaDonnee + '</h4>');
+        this.ecris('<h4>' + difference.nomDeLaDonnee + '</h4>');
         const resultat = diffWords(
           difference.valeurSurGrist ?? '',
           difference.nouvelleValeur ?? ''
@@ -74,11 +74,11 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
               : `<span style="color: gray;">${escape(part.value)}</span>`;
           })
           .join('');
-        this.sortie('<code>');
-        this.sortie(text);
-        this.sortie('</code>');
+        this.ecris('<code>');
+        this.ecris(text);
+        this.ecris('</code>');
       }
-      this.sortie('<hr>');
+      this.ecris('<hr>');
     }
   }
 
@@ -86,15 +86,15 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
     const finacementsSupprimes = differences.filter(
       (diff) => diff.etat === 'supprimé'
     );
-    this.sortie('<h2>Financements supprimés</h2>');
+    this.ecris('<h2>Financements supprimés</h2>');
     if (finacementsSupprimes.length > 0) {
-      this.sortie('<ul><li>');
-      this.sortie(
+      this.ecris('<ul><li>');
+      this.ecris(
         finacementsSupprimes.map((diff) => diff.idFinancement).join('</li><li>')
       );
-      this.sortie('</li></ul>');
+      this.ecris('</li></ul>');
     } else {
-      this.sortie('<p>Aucun financement à supprimer</p>');
+      this.ecris('<p>Aucun financement à supprimer</p>');
     }
   }
 }
