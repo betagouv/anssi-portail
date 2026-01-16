@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { regions } from '../metier/referentielRegions';
+import { RechercheEntrepriseAvecCache } from './RechercheEntrepriseAvecCache';
 
 export interface AdaptateurRechercheEntreprise {
   rechercheOrganisations(
@@ -99,7 +100,7 @@ type ResultatSirene = {
   activite_principale: string;
 };
 
-export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
+const rechercheSansCache = {
   async rechercheOrganisations(
     terme: string,
     departement: string | null
@@ -137,3 +138,7 @@ export const adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
     }
   },
 };
+
+export const adaptateurRechercheEntreprise = new RechercheEntrepriseAvecCache(
+  rechercheSansCache
+);
