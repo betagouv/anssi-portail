@@ -44,6 +44,7 @@ export default defineConfig({
         statistiques: 'src/main-statistiques.ts',
         financements: 'src/main-financements.ts',
         guide: 'src/main-guide.ts',
+        'demande-diagnostic': 'src/main-demande-diagnostic.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
