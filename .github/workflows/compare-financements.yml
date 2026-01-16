@@ -3,9 +3,9 @@ run-name: Génère le rapport de comparaison des financements
 permissions: {}
 
 on:
-  pull_request:
-    branches: [main]
   workflow_dispatch: # Pour activer le déclenchement manuel
+  schedule:
+    - cron: '0 6 * * 1' # Tous les lundis à 06:00
 
 jobs:
   genere-rapport:
