@@ -67,11 +67,13 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
         );
         const text = resultat
           .map((part) => {
-            return part.added
-              ? `<span style="color: green;">${escape(part.value)}</span>`
-              : part.removed
-              ? `<span style="color: red;">${escape(part.value)}</span>`
-              : `<span style="color: gray;">${escape(part.value)}</span>`;
+            if (part.added) {
+              return `<span style="color: green;">${escape(part.value)}</span>`;
+            }
+            if (part.removed) {
+              return `<span style="color: red;">${escape(part.value)}</span>`;
+            }
+            return `<span style="color: gray;">${escape(part.value)}</span>`;
           })
           .join('');
         this.ecris('<code>');
