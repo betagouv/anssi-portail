@@ -3,11 +3,8 @@ import { DifferenceFinancement } from '../metier/differenceFinancement';
 import { GenerateurDeRapports } from '../metier/generateurDeRapports';
 import pc from 'picocolors';
 
-export const generateurDeRapportsConsole: GenerateurDeRapports = {
-  async genereRapportDifference(
-    differences: DifferenceFinancement[],
-    sortie: (str: string) => void = (s) => console.info(s)
-  ) {
+export class GenerateurDeRapportsConsole implements GenerateurDeRapports {
+  async genereRapportDifference(differences: DifferenceFinancement[]) {
     const differencesParFinancement = differences.reduce((acc, difference) => {
       if (difference.donneesDifferentes) {
         const listeDifferences = acc.get(difference.idFinancement) || [];
@@ -17,12 +14,12 @@ export const generateurDeRapportsConsole: GenerateurDeRapports = {
       return acc;
     }, new Map<number, NonNullable<DifferenceFinancement['donneesDifferentes']>[]>());
 
-    sortie('# Rapport des différences de financements :');
+    console.info('# Rapport des différences de financements :');
     for (const [idFinancement, listeDifferences] of differencesParFinancement) {
-      sortie('----------------------------------------');
-      sortie(`## Financement ID ${idFinancement} :`);
+      console.info('----------------------------------------');
+      console.info(`## Financement ID ${idFinancement} :`);
       for (const difference of listeDifferences) {
-        sortie('### ' + difference.nomDeLaDonnee + ' :');
+        console.info('### ' + difference.nomDeLaDonnee + ' :');
         const resultat = diffWords(
           difference.valeurSurGrist,
           difference.nouvelleValeur
@@ -36,9 +33,9 @@ export const generateurDeRapportsConsole: GenerateurDeRapports = {
                 : pc.gray(part.value);
           })
           .join('');
-        sortie(text);
+        console.info(text);
       }
     }
-    sortie('----------------------------------------');
-  },
-};
+    console.info('----------------------------------------');
+  }
+}

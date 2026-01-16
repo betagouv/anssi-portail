@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Financement } from '../metier/financement';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { ClientHttp } from './clientHttp';
+import { aseptiseHtml } from './aseptisationDuHtml';
 
 export type Aide = {
   id_aid: string;
@@ -57,12 +58,9 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
       return undefined;
     }
     const { data: aides } =
-      await this.clientHttp.get<DetailsAidesEntreprisesAPI>(
-        `${url}/${id}?clean_html=true`,
-        {
-          headers: this.headers,
-        }
-      );
+      await this.clientHttp.get<DetailsAidesEntreprisesAPI>(`${url}/${id}`, {
+        headers: this.headers,
+      });
 
     if (!aides) {
       return undefined;
@@ -102,16 +100,16 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
   mapper(aide: ResumeAide | Aide) {
     return {
       id: Number(aide.id_aid),
-      benificiaires: aide.aid_benef,
-      condition: aide.aid_conditions,
+      benificiaires: aseptiseHtml(aide.aid_benef),
+      condition: aseptiseHtml(aide.aid_conditions),
       financeur:
         'financeurs' in aide
-          ? aide.financeurs.map((f) => f.org_nom).join(', ')
+          ? aide.financeurs.map((f) => aseptiseHtml(f.org_nom)).join(', ')
           : '',
-      montant: aide.aid_montant,
-      nom: aide.aid_nom,
-      objectifs: aide.aid_objet,
-      operationsEligibles: aide.aid_operations_el,
+      montant: aseptiseHtml(aide.aid_montant),
+      nom: aseptiseHtml(aide.aid_nom),
+      objectifs: aseptiseHtml(aide.aid_objet),
+      operationsEligibles: aseptiseHtml(aide.aid_operations_el),
       derniereModification: new Date(aide.horodatage),
     };
   }
