@@ -1,5 +1,9 @@
 import { DifferenceFinancement } from './differenceFinancement';
+import { NouveauFinancement } from './nouveauFinancement';
 
 export interface GenerateurDeRapports {
-  genereRapportDifference(differences: DifferenceFinancement[]): Promise<void>;
+  genereRapports(
+    differences: DifferenceFinancement[],
+    nouveauxFinancements: NouveauFinancement[]
+  ): Promise<void>;
 }

@@ -2,9 +2,13 @@ import { diffWords } from 'diff';
 import { DifferenceFinancement } from '../metier/differenceFinancement';
 import { GenerateurDeRapports } from '../metier/generateurDeRapports';
 import pc from 'picocolors';
+import { NouveauFinancement } from '../metier/nouveauFinancement';
 
 export class GenerateurDeRapportsConsole implements GenerateurDeRapports {
-  async genereRapportDifference(differences: DifferenceFinancement[]) {
+  async genereRapports(
+    differences: DifferenceFinancement[],
+    nouveauxFinancements: NouveauFinancement[]
+  ) {
     const differencesParFinancement = differences.reduce((acc, difference) => {
       if (difference.donneesDifferentes) {
         const listeDifferences = acc.get(difference.idFinancement) || [];
@@ -29,13 +33,14 @@ export class GenerateurDeRapportsConsole implements GenerateurDeRapports {
             return part.added
               ? pc.green(part.value)
               : part.removed
-                ? pc.red(part.value)
-                : pc.gray(part.value);
+              ? pc.red(part.value)
+              : pc.gray(part.value);
           })
           .join('');
         console.info(text);
       }
     }
     console.info('----------------------------------------');
+    console.info('nouveauxFinancements : ', nouveauxFinancements);
   }
 }

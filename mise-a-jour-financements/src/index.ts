@@ -16,18 +16,14 @@ const comparateurFinancement = new ComparateurFinancement(
   adaptateurEnvironnement
 );
 
-const generateurDeRapportsMattermost = new GenerateurDeRapportsFichier();
+const generateurDeRapportsFichier = new GenerateurDeRapportsFichier();
 
 console.info('Récupération des financements...');
 await comparateurFinancement.chargeFinancements();
 
 console.info('...compare avec les financements sur aides-entreprise...');
 const resultats = comparateurFinancement.compareSourceExterne();
-// console.info(resultats);
-await generateurDeRapportsMattermost.genereRapportDifference(resultats);
-
-// console.info('...cherche de nouveaux financement cyber...');
-// const nouvellesAides = await comparateurFinancement.detecteNouvellesAides();
-// console.info('nouvellesAides : ', nouvellesAides);
+const nouvellesAides = await comparateurFinancement.detecteNouvellesAides();
+await generateurDeRapportsFichier.genereRapports(resultats, nouvellesAides);
 
 console.info('... Terminé !');
