@@ -13,7 +13,7 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
     this.sortie('<!DOCTYPE html>');
     this.sortie('<html>');
     this.sortie('<body>');
-    this.sortie('<h1>Rapport des différences de financements</h1>');
+    this.sortie('<h1>Rapport des financements</h1>');
     this.imprimeNouveauxFinancements(nouveauxFinancements);
     this.imprimeFinancementsModifies(differences);
     this.imprimeFinancementsSupprimes(differences);
@@ -78,6 +78,7 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
         this.sortie(text);
         this.sortie('</code>');
       }
+      this.sortie('<hr>');
     }
   }
 
