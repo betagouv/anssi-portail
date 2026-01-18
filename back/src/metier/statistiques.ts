@@ -19,7 +19,7 @@ export type Statistiques = {
   servicesEtRessourcesConsultes: number;
 };
 
-const SERVICES_ET_RESSOURCES_CONSULTES = 13300;
+const SERVICES_ET_RESSOURCES_CONSULTES = 19000;
 
 export const calculeStatistiques = async ({
   entrepotUtilisateur,
