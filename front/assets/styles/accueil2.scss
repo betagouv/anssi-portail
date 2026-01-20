@@ -50,7 +50,7 @@
     }
 
     .demande-diag {
-      background-color: #FEF6E3;
+      background-color: #fef6e3;
       border-radius: 8px;
       height: 420px;
     }
@@ -69,11 +69,18 @@
           color: #3a3a3a;
           margin-bottom: 16px;
         }
-        .caroussel-selections {
-          display: grid;
-          grid-template-columns: repeat(3, minmax(254px, 1fr));
-          gap:16px;
-          margin-bottom: 48px;
+
+        lab-anssi-carrousel-tuiles {
+          min-width: 794px;
+
+          > dsfr-card {
+            flex: 0 0 254px;
+            scroll-snap-align: center;
+            @include a-partir-de(md) {
+              width: auto;
+              flex: 1;
+            }
+          }
         }
       }
       .texte-chapo-xl {
