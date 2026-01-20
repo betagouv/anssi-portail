@@ -95,3 +95,21 @@
     }
   }
 }
+
+.test-maturite {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  align-items: center;
+  padding: 56px 16px 72px 16px;
+  gap: 24px;
+  background: #f6f6f6;
+
+  .recapitulatif {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    align-items: flex-start;
+    gap: 24px;
+  }
+}
