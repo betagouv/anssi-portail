@@ -262,3 +262,15 @@
     }
   }
 }
+
+.partenaires {
+  background-color: #f6f6f6;
+  padding: 56px var(--gouttiere);
+  .logos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 48px;
+  }
+}
