@@ -164,3 +164,56 @@
     }
   }
 }
+
+.equipe-bizdev {
+  background-color: #fef6e3;
+  padding: 56px var(--gouttiere);
+
+  .contenu-section {
+    display: grid;
+    grid-template-areas: 'titre' 'contenu' 'bouton' 'photos';
+    @include a-partir-de(lg) {
+      grid-template-areas: 'titre photos' 'contenu photos' 'bouton photos';
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  .photos {
+    grid-area: photos;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+
+    img {
+      width: 164px;
+      height: 164px;
+      border-radius: 50%;
+      border: 6px solid white;
+
+      &:first-of-type {
+        margin-right: -20px;
+      }
+
+      &:last-of-type {
+        margin-left: -20px;
+      }
+    }
+  }
+
+  h2 {
+    grid-area: titre;
+    margin-bottom: 12px;
+  }
+
+  p {
+    grid-area: contenu;
+    margin: 0 0 32px;
+  }
+
+  lab-anssi-lien {
+    grid-area: bouton;
+    justify-self: flex-start;
+    margin: 0 0 32px;
+  }
+}
