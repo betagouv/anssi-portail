@@ -110,6 +110,9 @@
     flex-direction: column;
     align-self: stretch;
     align-items: flex-start;
-    gap: 24px;
+
+    lab-anssi-lien {
+      margin-bottom: 24px;
+    }
   }
 }
