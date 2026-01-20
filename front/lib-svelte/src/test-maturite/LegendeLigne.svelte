@@ -2,24 +2,38 @@
   export let index: number;
   export let actif = false;
   export let libelle: string;
-  export let valeur: number;
-  export let pourcentage: number;
+  export let valeur: number | undefined;
+  export let pourcentage: number | undefined;
 </script>
 
-<div class="ligne-legende ligne-legende-{index}" class:actif>
+<div
+  class="ligne-legende ligne-legende-{index}"
+  class:actif
+  class:avec-valeur={valeur || pourcentage}
+>
   <span class="libelle">{libelle}</span>
-  <div>
-    <span class="total">{valeur}</span>
-    <span class="pourcentage">({Math.round(pourcentage)}%)</span>
-  </div>
+  {#if valeur || pourcentage}
+    <div>
+      {#if valeur}
+        <span class="total">{valeur}</span>
+      {/if}
+      {#if pourcentage}
+        <span class="pourcentage">({Math.round(pourcentage)}%)</span>
+      {/if}
+    </div>
+  {/if}
 </div>
 
 <style lang="scss">
   .ligne-legende {
     display: grid;
     gap: 10px;
-    grid-template-columns: 24px 2fr 1fr;
+    grid-template-columns: 24px 2fr;
     align-items: center;
+
+    &.avec-valeur {
+      grid-template-columns: 24px 2fr 1fr;
+    }
 
     div {
       text-wrap: nowrap;
