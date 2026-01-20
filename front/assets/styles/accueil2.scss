@@ -119,5 +119,21 @@
     #lien-session-groupe {
       white-space: nowrap;
     }
+
+    .texte-mention-xs {
+      color: #666;
+    }
+  }
+
+  .barometre {
+    padding: 24px;
+    background-color: white;
+    border: solid 1px #ddd;
+
+    hgroup {
+      h6 {
+        margin-bottom: 0;
+      }
+    }
   }
 }
