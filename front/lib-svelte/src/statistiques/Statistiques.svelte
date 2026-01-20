@@ -10,23 +10,8 @@
   import SelectSecteurActivite from '../test-maturite/SelectSecteurActivite.svelte';
   import SelectTailleOrganisation from '../test-maturite/SelectTailleOrganisation.svelte';
   import type { Serie } from '../test-maturite/Serie';
+  import type { Statistiques } from './statistiques.type';
   import Tuile from './Tuile.svelte';
-
-  type Statistiques = {
-    utilisateursInscrits: number;
-    testsMaturite: {
-      total: number;
-      parNiveau: {
-        insuffisant: number;
-        emergent: number;
-        intermediaire: number;
-        confirme: number;
-        optimal: number;
-      };
-    };
-    diagnosticsCyber: number;
-    servicesEtRessourcesConsultes: number;
-  };
 
   let mesures: Statistiques | undefined = undefined;
   let serieNonFiltree: Serie = [];
@@ -86,7 +71,6 @@
   onMount(async () => {
     const reponse = await axios.get<Statistiques>('/api/statistiques');
     mesures = reponse.data;
-    Object.entries(mesures.testsMaturite.parNiveau);
     for (const [idNiveau, valeur] of Object.entries(
       mesures.testsMaturite.parNiveau
     )) {
