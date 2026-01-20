@@ -101,7 +101,7 @@
   flex-direction: column;
   align-self: stretch;
   align-items: center;
-  padding: 56px 16px 72px 16px;
+  padding: 56px var(--gouttiere) 72px;
   gap: 24px;
   background: #f6f6f6;
 
@@ -133,6 +133,33 @@
     hgroup {
       h6 {
         margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.interlocuteurs {
+  padding: 56px var(--gouttiere);
+
+  h2 {
+    text-align: center;
+  }
+
+  lab-anssi-carrousel-tuiles {
+    margin-top: 24px;
+    min-width: 794px;
+
+    dsfr-tile {
+      flex: 0 0 254px;
+      scroll-snap-align: center;
+      @include a-partir-de(md) {
+        width: auto;
+        flex: 1;
+      }
+
+      img {
+        width: 80px;
+        height: 80px;
       }
     }
   }
