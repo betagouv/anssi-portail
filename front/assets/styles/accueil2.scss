@@ -110,9 +110,14 @@
     flex-direction: column;
     align-self: stretch;
     align-items: flex-start;
+    overflow: clip;
 
     lab-anssi-lien {
       margin-bottom: 24px;
+    }
+
+    #lien-session-groupe {
+      white-space: nowrap;
     }
   }
 }
