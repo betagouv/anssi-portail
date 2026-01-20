@@ -15,7 +15,7 @@
         bind:group={$rechercheParBesoin}
       />
       <img
-        src="/assets/images/illustration-filtre-besoins-tous.svg"
+        src="/assets/images/coche-jaune-sur-rond-noir.svg"
         alt="Illustration pour pour le filtre sur tous les besoins"
       />
       <span>Tous les besoins</span>
