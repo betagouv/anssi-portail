@@ -50,7 +50,7 @@
     }
 
     .demande-diag {
-      background-color: #fef6e3;
+      background-color: var(--jaune-clair-msc);
       border-radius: 8px;
       height: 420px;
     }
@@ -166,7 +166,7 @@
 }
 
 .equipe-bizdev {
-  background-color: #fef6e3;
+  background-color: var(--jaune-clair-msc);
   padding: 56px var(--gouttiere);
 
   .contenu-section {
@@ -215,5 +215,50 @@
     grid-area: bouton;
     justify-self: flex-start;
     margin: 0 0 32px;
+  }
+}
+
+.communaute-msc {
+  padding: 56px var(--gouttiere);
+  .contenu-section {
+    display: grid;
+    grid-template-areas:
+      'titre'
+      'contenu'
+      'bouton'
+      'illustration';
+
+    @include a-partir-de(lg) {
+      grid-template-areas:
+        'illustration titre'
+        'illustration contenu'
+        'illustration bouton';
+      grid-auto-columns: 384px auto;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+    }
+
+    .contenu {
+      grid-area: contenu;
+      margin-bottom: 32px;
+
+      ul {
+        padding-left: 24px;
+        margin: 0;
+      }
+    }
+
+    img {
+      margin: 32px 0 16px;
+      width: 100%;
+      grid-area: illustration;
+    }
+
+    lab-anssi-lien {
+      grid-area: bouton;
+      justify-self: start;
+    }
   }
 }
