@@ -33,6 +33,12 @@ permalink: /accueil2/
   src="/lib-svelte/dist/assets/demande-diagnostic.js"
 ></script>
 
+<script
+  type="module"
+  crossorigin
+  src="/lib-svelte/dist/assets/barometre-simplifie.js"
+></script>
+
 <section class="organisations-concernees">
   <div class="contenu-section">
     <div class="toutes-organisations">
@@ -133,5 +139,19 @@ permalink: /accueil2/
       apparence="lien"
       titre="Disponible aussi pour les sessions en groupe"
     ></lab-anssi-lien>
+    <p class="texte-mention-xs">
+      La maturité cyber n’est pas une évaluation du niveau de sécurité des
+      systèmes d’information d’une organisation.
+    </p>
+    <div class="barometre">
+      <hgroup>
+        <h6>Baromètre de la maturité cyber</h6>
+        <p class="texte-detail-sm">
+          Répartition de la maturité cyber des organisations sur l’ensemble des
+          tests réalisés.
+        </p>
+      </hgroup>
+      <div id="barometre-simplifie" />
+    </div>
   </div>
 </section>

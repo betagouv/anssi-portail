@@ -45,6 +45,7 @@ export default defineConfig({
         financements: 'src/main-financements.ts',
         guide: 'src/main-guide.ts',
         'demande-diagnostic': 'src/main-demande-diagnostic.ts',
+        'barometre-simplifie': 'src/main-barometre-simplifie.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
