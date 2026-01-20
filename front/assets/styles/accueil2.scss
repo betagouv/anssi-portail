@@ -274,3 +274,33 @@
     gap: 48px;
   }
 }
+
+.anssi {
+  padding: 72px var(--gouttiere);
+
+  .contenu-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    h2 {
+      margin-bottom: 16px;
+    }
+
+    .logo {
+      margin-bottom: 24px;
+    }
+  }
+
+  .bouton.secondaire {
+    display: flex;
+    align-self: stretch;
+    padding: 8px 12px 8px 16px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    border-color: var(--noir);
+    gap: 8px;
+    margin: 0 0 16px;
+  }
+}
