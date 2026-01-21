@@ -46,8 +46,8 @@
     gap: 24px;
     .legende {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 16px;
     }
   }
