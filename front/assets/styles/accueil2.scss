@@ -44,6 +44,12 @@
       text-align: center;
       display: flex;
       flex-direction: column;
+
+      @include a-partir-de(md) {
+        align-self: center;
+        max-width: taille-pour-colonnes(10);
+      }
+
       hgroup {
         h2 {
           margin-bottom: 16px;
@@ -51,6 +57,10 @@
       }
       img {
         margin-bottom: 24px;
+        @include a-partir-de(md) {
+          align-self: center;
+          max-width: taille-pour-colonnes(10);
+        }
       }
       lab-anssi-lien {
         color: #666;
@@ -118,11 +128,11 @@
     display: flex;
     flex-direction: column;
     align-self: stretch;
-    align-items: flex-start;
     overflow: clip;
 
     lab-anssi-lien {
       margin-bottom: 24px;
+      align-self: start;
     }
 
     #lien-session-groupe {
@@ -152,6 +162,7 @@
 
   h2 {
     text-align: center;
+    margin-bottom: 48px;
   }
 
   lab-anssi-carrousel-tuiles {
@@ -159,12 +170,8 @@
     min-width: 794px;
 
     dsfr-tile {
-      flex: 0 0 254px;
+      flex: 1 0 254px;
       scroll-snap-align: center;
-      @include a-partir-de(md) {
-        width: auto;
-        flex: 1;
-      }
 
       img {
         width: 80px;
@@ -263,6 +270,10 @@
       margin: 32px 0 16px;
       width: 100%;
       grid-area: illustration;
+      @include a-partir-de(md) {
+        justify-self: center;
+        max-width: taille-pour-colonnes(10);
+      }
     }
 
     lab-anssi-lien {
@@ -277,7 +288,8 @@
   padding: 56px var(--gouttiere);
   .logos {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
     margin-bottom: 24px;
     gap: 48px;
@@ -286,25 +298,34 @@
 
 .anssi {
   padding: 72px var(--gouttiere);
-
   .contenu-section {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
+    flex-direction: column;
+    .contenu-anssi {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
 
-    h2 {
-      margin-bottom: 16px;
-    }
+      @include a-partir-de(md) {
+        max-width: taille-pour-colonnes(10);
+      }
 
-    .logo {
-      margin-bottom: 24px;
+      h2 {
+        margin-bottom: 16px;
+      }
+
+      .logo {
+        margin-bottom: 24px;
+        width: 140px;
+        height: 140px;
+      }
     }
   }
 
   .bouton.secondaire {
     display: flex;
-    align-self: stretch;
     padding: 8px 12px 8px 16px;
     font-size: 1rem;
     line-height: 1.5rem;
