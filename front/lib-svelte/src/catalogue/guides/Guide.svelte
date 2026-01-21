@@ -140,7 +140,7 @@
   @use '../../../../assets/styles/responsive.scss' as *;
 
   .chapeau {
-    background: #f4f4f4 url('/assets/images/motif-fond-service.png');
+    background: #f4f4f4 url('/assets/images/motif-fond-service.avif');
     padding: 24px var(--gouttiere);
 
     .contenu-section {
