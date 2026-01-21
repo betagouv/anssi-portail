@@ -27,7 +27,7 @@
   /* thème ui kit */
   --titre-couleur-primaire: #0d0c21;
   --centre-aide-background-entete: #0d0c21
-    url('/assets/images/motif-fond-service-opacite-16.png');
+    url('/assets/images/motif-fond-service-opacite-16.avif');
   --bandeau-titre-background: var(--centre-aide-background-entete);
   --brique-carrousel-bouton-action-texte-couleur: #161616;
   --couleur-lien: #0d0c21;
@@ -510,7 +510,7 @@ footer {
 }
 
 .chapeau.fond-sombre {
-  background: #0d0c21 url('/assets/images/motif-fond-service-opacite-16.png');
+  background: #0d0c21 url('/assets/images/motif-fond-service-opacite-16.avif');
   padding: 24px var(--gouttiere) 40px;
   color: white;
 
@@ -614,7 +614,7 @@ footer {
   }
 
   &.fond-sombre {
-    background: #0d0c21 url('/assets/images/motif-fond-service-opacite-16.png');
+    background: #0d0c21 url('/assets/images/motif-fond-service-opacite-16.avif');
 
     h1 {
       color: white;
