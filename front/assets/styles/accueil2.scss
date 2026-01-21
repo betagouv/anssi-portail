@@ -78,6 +78,10 @@
         max-width: taille-pour-colonnes(10);
       }
 
+      @include a-partir-de(lg) {
+        max-width: taille-pour-colonnes(8);
+      }
+
       hgroup {
         h2 {
           margin-bottom: 16px;
@@ -106,6 +110,11 @@
       display: flex;
       flex-direction: column;
 
+      @include a-partir-de(lg) {
+        align-self: center;
+        max-width: taille-pour-colonnes(10);
+      }
+
       h2 {
         text-align: center;
         margin-bottom: 72px;
@@ -133,6 +142,11 @@
       .texte-chapo-xl {
         color: #3a3a3a;
         text-align: center;
+
+        @include a-partir-de(lg) {
+          align-self: center;
+          max-width: 80%;
+        }
       }
 
       lab-anssi-lien {
@@ -144,42 +158,56 @@
 }
 
 .test-maturite {
-  display: flex;
-  flex-direction: column;
-  align-self: stretch;
-  align-items: center;
   padding: 56px var(--gouttiere) 72px;
-  gap: 24px;
   background: #f6f6f6;
 
-  .recapitulatif {
+  .contenu-section {
     display: flex;
     flex-direction: column;
     align-self: stretch;
-    overflow: clip;
 
-    lab-anssi-lien {
-      margin-bottom: 24px;
-      align-self: start;
+    @include a-partir-de(lg) {
+      gap: 24px;
+      flex-direction: row;
     }
 
-    #lien-session-groupe {
-      white-space: nowrap;
+    .recapitulatif {
+      display: flex;
+      flex-direction: column;
+      align-self: stretch;
+      overflow: clip;
+
+      @include a-partir-de(lg) {
+        width: 50%;
+      }
+
+      lab-anssi-lien {
+        margin-bottom: 24px;
+        align-self: start;
+      }
+
+      #lien-session-groupe {
+        white-space: nowrap;
+      }
+
+      .texte-mention-xs {
+        color: #666;
+      }
     }
 
-    .texte-mention-xs {
-      color: #666;
-    }
-  }
+    .barometre {
+      padding: 24px;
+      background-color: white;
+      border: solid 1px #ddd;
 
-  .barometre {
-    padding: 24px;
-    background-color: white;
-    border: solid 1px #ddd;
+      @include a-partir-de(lg) {
+        width: 50%;
+      }
 
-    hgroup {
-      h6 {
-        margin-bottom: 0;
+      hgroup {
+        h6 {
+          margin-bottom: 0;
+        }
       }
     }
   }
@@ -188,22 +216,31 @@
 .interlocuteurs {
   padding: 56px var(--gouttiere);
 
-  h2 {
-    text-align: center;
-    margin-bottom: 48px;
-  }
+  .contenu-interlocuteurs {
+    @include a-partir-de(lg) {
+      max-width: taille-pour-colonnes(10);
+      margin-inline: auto;
+    }
 
-  lab-anssi-carrousel-tuiles {
-    margin-top: 24px;
-    min-width: 794px;
+    h2 {
+      text-align: center;
+      margin-bottom: 48px;
+    }
 
-    dsfr-tile {
-      flex: 1 0 254px;
-      scroll-snap-align: center;
+    lab-anssi-carrousel-tuiles {
+      margin-top: 24px;
+      min-width: 794px;
 
-      img {
-        width: 80px;
-        height: 80px;
+      dsfr-tile {
+        flex: 1 0 254px;
+        scroll-snap-align: center;
+        @include a-partir-de(lg) {
+          flex: 1 0 241px;
+        }
+        img {
+          width: 80px;
+          height: 80px;
+        }
       }
     }
   }
@@ -277,7 +314,8 @@
         'illustration titre'
         'illustration contenu'
         'illustration bouton';
-      grid-auto-columns: 384px auto;
+      grid-auto-columns: taille-pour-colonnes(4) auto;
+      gap: 0 32px;
     }
 
     h2 {
@@ -302,6 +340,10 @@
         justify-self: center;
         max-width: taille-pour-colonnes(10);
       }
+      @include a-partir-de(lg) {
+        align-self: center;
+        max-width: 288px;
+      }
     }
 
     lab-anssi-lien {
@@ -321,6 +363,11 @@
     align-items: center;
     margin-bottom: 24px;
     gap: 48px;
+
+    @include a-partir-de(lg) {
+      gap: 0;
+      justify-content: space-between;
+    }
   }
 }
 
@@ -330,35 +377,60 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+
     .contenu-anssi {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display: grid;
+      grid-template-areas:
+        'illustration'
+        'titre'
+        'description'
+        'lien';
+      place-items: center;
       text-align: center;
 
       @include a-partir-de(md) {
         max-width: taille-pour-colonnes(10);
       }
-
+      @include a-partir-de(lg) {
+        grid-template-areas:
+          'titre illustration'
+          'description illustration'
+          'lien illustration';
+        grid-template-columns: auto 40%;
+        place-items: flex-start;
+        text-align: left;
+      }
       h2 {
+        grid-area: titre;
         margin-bottom: 16px;
       }
 
+      .texte-standard-md {
+        grid-area: description;
+      }
+
       .logo {
+        grid-area: illustration;
         margin-bottom: 24px;
         width: 140px;
         height: 140px;
+
+        @include a-partir-de(lg) {
+          place-self: center;
+          margin-bottom: 0;
+        }
+      }
+
+      .bouton.secondaire {
+        grid-area: lien;
+        display: flex;
+        padding: 8px 12px 8px 16px;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        border-color: var(--noir);
+        gap: 8px;
+        margin: 0 0 16px;
       }
     }
-  }
-
-  .bouton.secondaire {
-    display: flex;
-    padding: 8px 12px 8px 16px;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    border-color: var(--noir);
-    gap: 8px;
-    margin: 0 0 16px;
   }
 }
