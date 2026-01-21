@@ -7,11 +7,24 @@
 .chapeau.fond-sombre {
   padding: 48px var(--gouttiere);
   .contenu-section {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas:
+      'titre'
+      'demande'
+      'illustration'
+      'mention';
+
+    @include a-partir-de(lg) {
+      grid-template-areas:
+        'titre illustration'
+        'demande illustration'
+        'mention illustration';
+      grid-template-columns: 1fr 1fr;
+    }
     gap: 32px;
 
     hgroup {
+      grid-area: titre;
       h1 {
         margin-bottom: 8px;
       }
@@ -19,15 +32,30 @@
         margin-bottom: 0;
       }
     }
+
+    lab-anssi-lien {
+      grid-area: demande;
+      @include a-partir-de(lg) {
+        justify-self: flex-start;
+      }
+    }
+
     .texte-detail-sm {
+      grid-area: mention;
       margin-bottom: 0;
     }
 
     img {
+      grid-area: illustration;
       aspect-ratio: 16 /9;
+      width: 100%;
+      justify-self: center;
       @include a-partir-de(md) {
         align-self: center;
         max-width: taille-pour-colonnes(10);
+      }
+      @include a-partir-de(lg) {
+        max-width: none;
       }
     }
   }
