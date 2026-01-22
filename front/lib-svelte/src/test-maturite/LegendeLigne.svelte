@@ -4,6 +4,9 @@
   export let libelle: string;
   export let valeur: number | undefined;
   export let pourcentage: number | undefined;
+  export let affichePourcentages = true;
+
+  const pourcentageLisible = pourcentage ? `${Math.round(pourcentage)}%` : '';
 </script>
 
 <div
@@ -11,14 +14,20 @@
   class:actif
   class:avec-valeur={valeur || pourcentage}
 >
-  <span class="libelle">{libelle}</span>
-  {#if valeur || pourcentage}
+  <span
+    role="listitem"
+    class="libelle"
+    aria-label={`${libelle} ${pourcentageLisible}`}
+  >
+    {libelle}
+  </span>
+  {#if valeur || (pourcentage && affichePourcentages)}
     <div>
       {#if valeur}
-        <span class="total">{valeur}</span>
+        <span class="total" aria-hidden="true">{valeur}</span>
       {/if}
-      {#if pourcentage}
-        <span class="pourcentage">({Math.round(pourcentage)}%)</span>
+      {#if pourcentage && affichePourcentages}
+        <span class="pourcentage" aria-hidden="true">{pourcentageLisible}</span>
       {/if}
     </div>
   {/if}
