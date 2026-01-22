@@ -23,6 +23,8 @@
     },
   ];
 
+  export let origine: string;
+
   let formulaire: Formulaire;
   let entite: Organisation;
   let email: string;
@@ -39,7 +41,7 @@
       enCoursEnvoi = true;
 
       const corps: CorpsAPIDemandeAide = {
-        origine: 'test-maturité',
+        origine,
         entiteAidee: {
           email,
           departement: entite.departement,
