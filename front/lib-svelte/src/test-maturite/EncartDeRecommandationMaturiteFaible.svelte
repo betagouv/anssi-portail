@@ -14,7 +14,7 @@
       </p>
     </hgroup>
     <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
-    <DemandeDiagnosticSimplifiee></DemandeDiagnosticSimplifiee>
+    <DemandeDiagnosticSimplifiee origine="test-maturité" />
   </div>
 </section>
 

@@ -1,7 +1,8 @@
 <script lang="ts">
-
   import FoireAuxQuestions from './FoireAuxQuestions.svelte';
   import FormulaireDemandeSimplifiee from './FormulaireDemandeSimplifiee.svelte';
+
+  export let origine: string;
 </script>
 
 <div class="demande-diagnostic">
@@ -9,9 +10,9 @@
     <hgroup>
       <h2>Protégez rapidement votre organisation des cyberattaques.</h2>
       <p>
-        Profitez d’un premier diagnostic cyber gratuit accompagné par un
-        Aidant cyber et recevez 6 recommandations prioritaires à mettre en
-        place pour améliorer la cybersécurité de votre organisation.
+        Profitez d’un premier diagnostic cyber gratuit accompagné par un Aidant
+        cyber et recevez 6 recommandations prioritaires à mettre en place pour
+        améliorer la cybersécurité de votre organisation.
       </p>
     </hgroup>
     <ol>
@@ -26,7 +27,7 @@
   </div>
 
   <div class="formulaire">
-    <FormulaireDemandeSimplifiee />
+    <FormulaireDemandeSimplifiee {origine} />
   </div>
   <details>
     <summary>
@@ -46,10 +47,10 @@
   .demande-diagnostic {
     display: grid;
     grid-template-areas:
-        'explications'
-        'etapes'
-        'formulaire'
-        'faq';
+      'explications'
+      'etapes'
+      'formulaire'
+      'faq';
     background-color: #fef6e3;
     padding: 40px 16px;
     border-radius: 8px;
@@ -61,8 +62,8 @@
 
     @include a-partir-de(lg) {
       grid-template-areas:
-          'explications formulaire'
-          'faq faq';
+        'explications formulaire'
+        'faq faq';
     }
 
     .explications {
