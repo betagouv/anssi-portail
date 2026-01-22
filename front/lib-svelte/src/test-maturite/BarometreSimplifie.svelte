@@ -5,7 +5,7 @@
   import type { Statistiques } from '../statistiques/statistiques.type';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeLigne from './LegendeLigne.svelte';
-  import type { Serie } from './Serie';
+  import { pourcentagesSerie, type Serie } from './Serie';
 
   let serie: Serie = [];
 
@@ -21,6 +21,10 @@
     }
     serie = serieConstruite;
   });
+  let pourcentages: number[] = [];
+  $: {
+    pourcentages = pourcentagesSerie(serie);
+  }
 </script>
 
 <div class="barometre-simplifie">
@@ -32,7 +36,8 @@
         {index}
         libelle={element.libelle}
         valeur={undefined}
-        pourcentage={undefined}
+        pourcentage={pourcentages[index]}
+        affichePourcentages={false}
       />
     {/each}
   </div>
