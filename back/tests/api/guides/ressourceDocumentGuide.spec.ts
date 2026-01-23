@@ -124,14 +124,14 @@ describe("La ressource de document d'un guide", () => {
         assert.equal(evenement?.origine, 'mqc');
       });
 
-      it("avec l'origine 'MSC·' si aucun referer n'est fourni dans le query string", async () => {
+      it("sans origine si aucun referer n'est fourni dans le query string", async () => {
         await request(serveur).get('/documents-guides/zero-trust.pdf');
 
         const evenement = busEvenements.recupereEvenement(
           DocumentGuideTelecharge
         );
 
-        assert.equal(evenement?.origine, 'msc');
+        assert.equal(evenement?.origine, undefined);
       });
     });
   });

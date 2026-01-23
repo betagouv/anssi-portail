@@ -36,5 +36,29 @@ describe("L'adaptateur Matomo", () => {
         'https://stats.beta.gouv.fr/matomo.php?rec=1&idsite=227&e_c=Guides&e_a=Document+t%C3%A9l%C3%A9charg%C3%A9+depuis+msc&e_n=zero-trust.pdf'
       );
     });
+
+    it('précise que la source est inconnue', () => {
+      let urlAppelee: string = '';
+      const posteur: ClientHttpPosteur<DonneesEvenement, undefined> = {
+        post: async (url, _corps) => {
+          urlAppelee = url;
+          return { data: undefined };
+        },
+      };
+      const adaptateurMatomo = fabriqueAdaptateurMatamo(
+        posteur,
+        fauxAdaptateurEnvironnement
+      );
+
+      adaptateurMatomo.rapporteEvenement({
+        ...evenement,
+        donnees: { ...evenement.donnees, origine: undefined },
+      });
+
+      assert.equal(
+        urlAppelee,
+        'https://stats.beta.gouv.fr/matomo.php?rec=1&idsite=227&e_c=Guides&e_a=Document+t%C3%A9l%C3%A9charg%C3%A9+depuis+source+inconnue&e_n=zero-trust.pdf'
+      );
+    });
   });
 });
