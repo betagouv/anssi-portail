@@ -32,6 +32,7 @@ export const ressourceDocumentGuide = ({
           await busEvenements.publie(
             new DocumentGuideTelecharge({
               nomFichier: requete.params.nomFichier,
+              origine: requete.query.ref?.toString(),
             })
           );
         }

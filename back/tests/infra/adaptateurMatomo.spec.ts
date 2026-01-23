@@ -10,9 +10,11 @@ describe("L'adaptateur Matomo", () => {
     type: 'DOCUMENT_GUIDE_TELECHARGE',
     donnees: {
       nomFichier: 'zero-trust.pdf',
+      origine: 'msc',
     },
     date: new Date('2026-01-01T10:11:12.000'),
   };
+
   describe("Lors du rapport d'un événement", () => {
     it('envoie une requete POST à la bonne URL', () => {
       let urlAppelee: string = '';

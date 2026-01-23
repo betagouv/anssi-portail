@@ -91,28 +91,48 @@ describe("La ressource de document d'un guide", () => {
       assert.equal(reponse.headers['content-type'], 'application/pdf');
     });
 
-    it('publie un évènement sur le bus', async () => {
-      await request(serveur).get('/documents-guides/zero-trust.pdf');
+    describe('publie un évènement sur le bus', () => {
+      it('avec le nom du fichier', async () => {
+        await request(serveur).get('/documents-guides/zero-trust.pdf');
 
-      const evenement = busEvenements.recupereEvenement(
-        DocumentGuideTelecharge
-      );
+        const evenement = busEvenements.recupereEvenement(
+          DocumentGuideTelecharge
+        );
 
-      assert.deepEqual(evenement, {
-        nomFichier: 'zero-trust.pdf',
+        assert.equal(evenement?.nomFichier, 'zero-trust.pdf');
       });
-    });
 
-    it("ne publie pas d'évènement sur le bus si l'action provient d'un robot", async () => {
-      await request(serveur)
-        .get('/documents-guides/zero-trust.pdf')
-        .set('User-Agent', 'curl');
+      it("sauf si l'action provient d'un robot", async () => {
+        await request(serveur)
+          .get('/documents-guides/zero-trust.pdf')
+          .set('User-Agent', 'curl');
 
-      const evenement = busEvenements.recupereEvenement(
-        DocumentGuideTelecharge
-      );
+        const evenement = busEvenements.recupereEvenement(
+          DocumentGuideTelecharge
+        );
 
-      assert.equal(evenement, undefined);
+        assert.equal(evenement, undefined);
+      });
+
+      it('avec une origine si un referer est fourni dans le query string', async () => {
+        await request(serveur).get('/documents-guides/zero-trust.pdf?ref=mqc');
+
+        const evenement = busEvenements.recupereEvenement(
+          DocumentGuideTelecharge
+        );
+
+        assert.equal(evenement?.origine, 'mqc');
+      });
+
+      it("avec l'origine 'MSC·' si aucun referer n'est fourni dans le query string", async () => {
+        await request(serveur).get('/documents-guides/zero-trust.pdf');
+
+        const evenement = busEvenements.recupereEvenement(
+          DocumentGuideTelecharge
+        );
+
+        assert.equal(evenement?.origine, 'msc');
+      });
     });
   });
 });

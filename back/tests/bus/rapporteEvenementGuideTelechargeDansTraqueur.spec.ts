@@ -33,13 +33,13 @@ describe("L'abonnement qui rapporte le téléchargement d'un guide dans Matomo",
       },
     };
 
-    await rapporteEvenementDansMatomo()(
-      new DocumentGuideTelecharge({ nomFichier: 'zero-trust' })
-    );
+    const donnees = { nomFichier: 'zero-trust', origine: 'msc' };
+
+    await rapporteEvenementDansMatomo()(new DocumentGuideTelecharge(donnees));
 
     assert.notEqual(evenementRecu, undefined);
     assert.equal(evenementRecu!.type, 'DOCUMENT_GUIDE_TELECHARGE');
-    assert.equal(evenementRecu!.donnees.nomFichier, 'zero-trust');
+    assert.deepEqual(evenementRecu!.donnees, donnees);
     assert.deepEqual(evenementRecu!.date, new Date('2025-03-10'));
   });
 });
