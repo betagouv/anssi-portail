@@ -20,11 +20,15 @@
         'demande illustration'
         'mention illustration';
       grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr auto 1fr;
     }
-    gap: 32px;
+    gap: 24px 32px;
 
     hgroup {
       grid-area: titre;
+      @include a-partir-de(lg) {
+        align-self: end;
+      }
       h1 {
         margin-bottom: 8px;
       }
@@ -35,7 +39,7 @@
 
     lab-anssi-lien {
       grid-area: demande;
-      @include a-partir-de(lg) {
+      @include a-partir-de(md) {
         justify-self: flex-start;
       }
     }
