@@ -14,7 +14,7 @@
 
   const badges: { label: string; accent: CouleurDeBadge }[] = [
     {
-      label: '+4000 organisations accompagnées',
+      label: '+4900 organisations accompagnées',
       accent: 'yellow-tournesol',
     },
     {
