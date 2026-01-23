@@ -33,7 +33,7 @@ describe("L'adaptateur Matomo", () => {
 
       assert.equal(
         urlAppelee,
-        'https://stats.beta.gouv.fr/matomo.php?rec=1&idsite=227&e_c=Guides&e_a=Document+t%C3%A9l%C3%A9charg%C3%A9&e_n=zero-trust.pdf'
+        'https://stats.beta.gouv.fr/matomo.php?rec=1&idsite=227&e_c=Guides&e_a=Document+t%C3%A9l%C3%A9charg%C3%A9+depuis+msc&e_n=zero-trust.pdf'
       );
     });
   });
