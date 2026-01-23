@@ -162,7 +162,7 @@
 }
 
 .test-maturite {
-  padding: 56px var(--gouttiere) 72px;
+  padding: 72px var(--gouttiere) 72px;
   background: #f6f6f6;
 
   .contenu-section {
@@ -365,7 +365,7 @@
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
-    margin-bottom: 24px;
+    margin-block: 48px 24px;
     gap: 48px;
 
     @include a-partir-de(lg) {
