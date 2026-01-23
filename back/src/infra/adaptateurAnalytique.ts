@@ -23,7 +23,10 @@ export const fabriqueAdaptateurMatamo = (
     parametres.append('rec', '1');
     parametres.append('idsite', adaptateurEnvironnement.matomo().idSite());
     parametres.append('e_c', 'Guides');
-    parametres.append('e_a', 'Document téléchargé');
+    parametres.append(
+      'e_a',
+      `Document téléchargé depuis ${donneesEvenement.donnees.origine}`
+    );
     parametres.append('e_n', donneesEvenement.donnees.nomFichier);
 
     await clientHttpPosteur.post(
