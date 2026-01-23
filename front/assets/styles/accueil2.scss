@@ -83,7 +83,7 @@
       }
 
       @include a-partir-de(lg) {
-        max-width: taille-pour-colonnes(8);
+        max-width: taille-pour-colonnes(7);
       }
 
       hgroup {
