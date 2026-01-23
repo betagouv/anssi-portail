@@ -8,7 +8,7 @@ const estUneOrigineConnue = (
 
 export class DocumentGuideTelecharge {
   readonly nomFichier: string;
-  readonly origine: Origines;
+  readonly origine: Origines | undefined;
 
   constructor({
     nomFichier,
@@ -18,6 +18,6 @@ export class DocumentGuideTelecharge {
     origine: string | undefined;
   }) {
     this.nomFichier = nomFichier;
-    this.origine = estUneOrigineConnue(origine) ? origine : 'msc';
+    this.origine = estUneOrigineConnue(origine) ? origine : undefined;
   }
 }

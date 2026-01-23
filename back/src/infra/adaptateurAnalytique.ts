@@ -25,7 +25,7 @@ export const fabriqueAdaptateurMatamo = (
     parametres.append('e_c', 'Guides');
     parametres.append(
       'e_a',
-      `Document téléchargé depuis ${donneesEvenement.donnees.origine}`
+      `Document téléchargé depuis ${donneesEvenement.donnees.origine ?? 'source inconnue'}`
     );
     parametres.append('e_n', donneesEvenement.donnees.nomFichier);
 
