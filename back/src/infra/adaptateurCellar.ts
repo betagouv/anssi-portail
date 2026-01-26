@@ -1,9 +1,16 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import { Readable } from 'node:stream';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 
 export type DocumentCellar = {
   contenu: Buffer;
   typeDeContenu: string;
+};
+
+export type FluxCellar = {
+  flux: Readable;
+  typeDeContenu: string;
+  tailleDuContenu: number;
 };
 
 export type CleDuBucket = 'RESSOURCES_CYBER' | 'GUIDES' | 'VISAS';
@@ -13,6 +20,10 @@ export interface AdaptateurCellar {
     nomDuFichier: string,
     cleDuBucket: CleDuBucket
   ): Promise<DocumentCellar | undefined>;
+  getStream(
+    nomDuFichier: string,
+    cleDuBucket: CleDuBucket
+  ): Promise<FluxCellar | undefined>;
 }
 
 export const adaptateurCellar = (
@@ -29,6 +40,26 @@ export const adaptateurCellar = (
       return {
         contenu: Buffer.from(reponse.data),
         typeDeContenu,
+      };
+    } catch (erreur: Error | unknown) {
+      if (axios.isAxiosError(erreur) && erreur.response?.status === 403) {
+        return undefined;
+      }
+      throw erreur;
+    }
+  },
+
+  async getStream(nomDuFichier, cleDuBucket): Promise<FluxCellar | undefined> {
+    try {
+      const reponse: AxiosResponse<Readable> = await axios.get(
+        `${selectionneURLCellarPourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
+        { responseType: 'stream' }
+      );
+      return {
+        flux: reponse.data,
+        typeDeContenu:
+          reponse.headers['content-type'] ?? 'application/octet-stream',
+        tailleDuContenu: Number(reponse.headers['content-length']),
       };
     } catch (erreur: Error | unknown) {
       if (axios.isAxiosError(erreur) && erreur.response?.status === 403) {
