@@ -142,7 +142,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'prestataires-labellises',
     'contacts',
     'formulaire-matomo',
-    'accueil2'
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
