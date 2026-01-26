@@ -12,17 +12,19 @@ export const ressourceVisa = ({
     '/:slug',
     async (requete: Request, reponse: Response, suite: NextFunction) => {
       try {
-        const documentCellar = await cellar.get(requete.params.slug, 'VISAS');
-        if (!documentCellar) {
+        const fluxCellar = await cellar.getStream(requete.params.slug, 'VISAS');
+        if (!fluxCellar) {
           reponse.sendStatus(404);
           return;
         }
 
-        reponse
-          .contentType(documentCellar.typeDeContenu)
-          .status(200)
-          .send(documentCellar.contenu);
+        reponse.contentType(fluxCellar.typeDeContenu);
+        reponse.setHeader('content-length', fluxCellar.tailleDuContenu);
+        fluxCellar.flux.pipe(reponse);
 
+        fluxCellar.flux.on('error', (err) => {
+          suite(err);
+        });
         await busEvenements.publie(
           new VisaTelecharge({
             nomFichier: requete.params.slug,

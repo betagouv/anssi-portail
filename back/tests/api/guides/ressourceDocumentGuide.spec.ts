@@ -22,6 +22,9 @@ describe("La ressource de document d'un guide", () => {
       cellar: {
         get: () =>
           Promise.resolve({ contenu: Buffer.from(''), typeDeContenu: '' }),
+        getStream: () => {
+          throw new Error('On ne devrait pas appeler cette méthode !');
+        },
       },
     };
     serveur = creeServeur(configurationDuServeur);
