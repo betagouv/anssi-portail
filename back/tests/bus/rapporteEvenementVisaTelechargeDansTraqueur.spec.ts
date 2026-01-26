@@ -1,11 +1,11 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
-import { DocumentGuideTelecharge } from '../../src/bus/evenements/documentGuideTelecharge';
-import { rapporteEvenementGuideTelechargeDansTraqueur } from '../../src/bus/rapporteEvenementGuideTelechargeDansTraqueur';
+import { VisaTelecharge } from '../../src/bus/evenements/visaTelecharge';
+import { rapporteEvenementVisaTelechargeDansTraqueur } from '../../src/bus/rapporteEvenementVisaTelechargeDansTraqueur';
 import { AdaptateurAnalytique } from '../../src/infra/adaptateurAnalytique';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
 
-describe("L'abonnement qui rapporte le téléchargement d'un guide dans Matomo", () => {
+describe("L'abonnement qui rapporte le téléchargement d'un visa dans Matomo", () => {
   let adaptateurAnalytique: AdaptateurAnalytique;
   let adaptateurHorloge: AdaptateurHorloge;
 
@@ -19,13 +19,13 @@ describe("L'abonnement qui rapporte le téléchargement d'un guide dans Matomo",
   });
 
   const rapporteEvenementDansMatomo = () => {
-    return rapporteEvenementGuideTelechargeDansTraqueur({
+    return rapporteEvenementVisaTelechargeDansTraqueur({
       adaptateurAnalytique,
       adaptateurHorloge,
     });
   };
 
-  it('écoute un évènement de GuideTecharge', async () => {
+  it('écoute un évènement de VisaTecharge', async () => {
     let evenementRecu;
     adaptateurAnalytique = {
       rapporteEvenement: async (donneesEvenement: unknown) => {
@@ -33,12 +33,12 @@ describe("L'abonnement qui rapporte le téléchargement d'un guide dans Matomo",
       },
     };
 
-    const donnees = { nomFichier: 'zero-trust', origine: 'msc' };
+    const donnees = { nomFichier: 'tl-fr.xml' };
 
-    await rapporteEvenementDansMatomo()(new DocumentGuideTelecharge(donnees));
+    await rapporteEvenementDansMatomo()(new VisaTelecharge(donnees));
 
     assert.notEqual(evenementRecu, undefined);
-    assert.equal(evenementRecu!.type, 'DOCUMENT_GUIDE_TELECHARGE');
+    assert.equal(evenementRecu!.type, 'VISA_TELECHARGE');
     assert.deepEqual(evenementRecu!.donnees, donnees);
     assert.deepEqual(evenementRecu!.date, new Date('2025-03-10'));
   });

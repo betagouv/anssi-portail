@@ -4,11 +4,14 @@ import { ClientHttpPosteur } from './clientHttp';
 import {
   DonneesEvenement,
   DonneesEvenementDocumentGuideTelecharge,
+  DonneesEvenementVisaTelecharge,
 } from './donneesEvenement';
 
 export type AdaptateurAnalytique = {
   rapporteEvenement: (
-    donneesEvenement: DonneesEvenementDocumentGuideTelecharge
+    donneesEvenement:
+      | DonneesEvenementDocumentGuideTelecharge
+      | DonneesEvenementVisaTelecharge
   ) => Promise<void>;
 };
 
@@ -16,17 +19,16 @@ export const fabriqueAdaptateurMatamo = (
   clientHttpPosteur: ClientHttpPosteur<DonneesEvenement, unknown>,
   adaptateurEnvironnement: AdaptateurEnvironnement
 ): AdaptateurAnalytique => ({
-  rapporteEvenement: async (
-    donneesEvenement: DonneesEvenementDocumentGuideTelecharge
-  ) => {
+  rapporteEvenement: async (donneesEvenement) => {
+    const nomAction =
+      'origine' in donneesEvenement.donnees
+        ? `Document téléchargé depuis ${donneesEvenement.donnees.origine ?? 'source inconnue'}`
+        : 'Visa téléchargé';
     const parametres = new URLSearchParams();
     parametres.append('rec', '1');
     parametres.append('idsite', adaptateurEnvironnement.matomo().idSite());
     parametres.append('e_c', 'Guides');
-    parametres.append(
-      'e_a',
-      `Document téléchargé depuis ${donneesEvenement.donnees.origine ?? 'source inconnue'}`
-    );
+    parametres.append('e_a', nomAction);
     parametres.append('e_n', donneesEvenement.donnees.nomFichier);
 
     await clientHttpPosteur.post(
