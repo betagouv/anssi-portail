@@ -19,8 +19,10 @@ import { DocumentGuideTelecharge } from './evenements/documentGuideTelecharge';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
 import { TestRealise } from './evenements/testRealise';
+import { VisaTelecharge } from './evenements/visaTelecharge';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
 import { rapporteEvenementGuideTelechargeDansTraqueur } from './rapporteEvenementGuideTelechargeDansTraqueur';
+import { rapporteEvenementVisaTelechargeDansTraqueur } from './rapporteEvenementVisaTelechargeDansTraqueur';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
@@ -96,6 +98,14 @@ export const cableTousLesAbonnes = ({
   busEvenements.abonne(
     DocumentGuideTelecharge,
     rapporteEvenementGuideTelechargeDansTraqueur({
+      adaptateurAnalytique,
+      adaptateurHorloge,
+    })
+  );
+
+  busEvenements.abonne(
+    VisaTelecharge,
+    rapporteEvenementVisaTelechargeDansTraqueur({
       adaptateurAnalytique,
       adaptateurHorloge,
     })

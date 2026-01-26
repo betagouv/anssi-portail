@@ -1,4 +1,5 @@
 import { DocumentGuideTelecharge } from '../bus/evenements/documentGuideTelecharge';
+import { VisaTelecharge } from '../bus/evenements/visaTelecharge';
 import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction';
 import { CodeRegion } from '../metier/referentielRegions';
 import { CodeSecteur } from '../metier/referentielSecteurs';
@@ -12,7 +13,8 @@ export type DonneesEvenement =
   | DonneesEvenementMiseAJourFavorisUtilisateur
   | DonneesEvenementRetourExperienceDonne
   | DonneesEvenementAvisUtilisateurDonne
-  | DonneesEvenementDocumentGuideTelecharge;
+  | DonneesEvenementDocumentGuideTelecharge
+  | DonneesEvenementVisaTelecharge;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -72,6 +74,11 @@ type DonneesEvenementAvisUtilisateurDonne = Evenement<
 export type DonneesEvenementDocumentGuideTelecharge = Evenement<
   'DOCUMENT_GUIDE_TELECHARGE',
   ProprietesDeClasse<DocumentGuideTelecharge>
+>;
+
+export type DonneesEvenementVisaTelecharge = Evenement<
+  'VISA_TELECHARGE',
+  ProprietesDeClasse<VisaTelecharge>
 >;
 
 type ProprietesDeClasse<C> = {
