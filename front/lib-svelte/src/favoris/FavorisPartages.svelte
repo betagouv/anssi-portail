@@ -74,7 +74,7 @@
     <div class="liste-parcours">
       <div class="carte parcours">
         <img
-          src="/assets/images/illustration-tester.svg"
+          src="/assets/images/ecrans-virtuels-avec-femme-au-centre.svg"
           alt="Illustration découvrez plus de services et ressources cyber"
           class="illustration"
         />
