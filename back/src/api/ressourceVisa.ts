@@ -1,7 +1,11 @@
 import { NextFunction, Request, Response, Router } from 'express';
+import { VisaTelecharge } from '../bus/evenements/visaTelecharge';
 import { ConfigurationServeur } from './configurationServeur';
 
-export const ressourceVisa = ({ cellar }: ConfigurationServeur): Router => {
+export const ressourceVisa = ({
+  busEvenements,
+  cellar,
+}: ConfigurationServeur): Router => {
   const routeur = Router();
 
   routeur.get(
@@ -18,6 +22,12 @@ export const ressourceVisa = ({ cellar }: ConfigurationServeur): Router => {
           .contentType(documentCellar.typeDeContenu)
           .status(200)
           .send(documentCellar.contenu);
+
+        await busEvenements.publie(
+          new VisaTelecharge({
+            nomFichier: requete.params.slug,
+          })
+        );
       } catch (erreur: Error | unknown) {
         suite(erreur);
       }
