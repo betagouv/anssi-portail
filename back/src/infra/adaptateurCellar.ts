@@ -15,26 +15,34 @@ export interface AdaptateurCellar {
   ): Promise<DocumentCellar | undefined>;
 }
 
+const NOMBRE_TENTATIVES_MAXIMUM = 2;
+
 export const adaptateurCellar = (
   adaptateurEnvironnement: AdaptateurEnvironnement
 ): AdaptateurCellar => ({
   async get(nomDuFichier: string, cleDuBucket: CleDuBucket) {
-    try {
-      const reponse = await axios.get(
-        `${selectionneURLCellarPourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
-        { responseType: 'arraybuffer' }
-      );
-      const typeDeContenu =
-        reponse.headers['content-type'] ?? 'application/octet-stream';
-      return {
-        contenu: Buffer.from(reponse.data),
-        typeDeContenu,
-      };
-    } catch (erreur: Error | unknown) {
-      if (axios.isAxiosError(erreur) && erreur.response?.status === 403) {
-        return undefined;
+    let nombreTentatives = 0;
+    while (nombreTentatives <= NOMBRE_TENTATIVES_MAXIMUM) {
+      try {
+        nombreTentatives++;
+        const reponse = await axios.get(
+          `${selectionneURLCellarPourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
+          { responseType: 'arraybuffer' }
+        );
+        const typeDeContenu =
+          reponse.headers['content-type'] ?? 'application/octet-stream';
+        return {
+          contenu: Buffer.from(reponse.data),
+          typeDeContenu,
+        };
+      } catch (erreur: Error | unknown) {
+        if (axios.isAxiosError(erreur) && erreur.response?.status === 403) {
+          return undefined;
+        }
+        if (nombreTentatives >= NOMBRE_TENTATIVES_MAXIMUM) {
+          throw erreur;
+        }
       }
-      throw erreur;
     }
   },
 });
