@@ -6,17 +6,25 @@ import assert from 'node:assert';
 import { Express } from 'express';
 import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { CleDuBucket } from '../../src/infra/adaptateurCellar';
+import { VisaTelecharge } from '../../src/bus/evenements/visaTelecharge';
+import { MockBusEvenement } from '../bus/busPourLesTests';
 
 describe('La ressource de visa', () => {
   let serveur: Express;
   let configurationDuServeur: ConfigurationServeur;
+  let busEvenements: MockBusEvenement;
 
   beforeEach(() => {
+    busEvenements = new MockBusEvenement();
     configurationDuServeur = {
       ...configurationDeTestDuServeur,
+      busEvenements,
       cellar: {
         get: () =>
-          Promise.resolve({ contenu: Buffer.from(''), typeDeContenu: 'application/pdf' }),
+          Promise.resolve({
+            contenu: Buffer.from(''),
+            typeDeContenu: 'application/pdf',
+          }),
       },
     };
     serveur = creeServeur(configurationDuServeur);
@@ -76,6 +84,16 @@ describe('La ressource de visa', () => {
         );
 
         assert.equal(reponse.status, 404);
+      });
+    });
+
+    describe('publie un évènement de téléchergement sur le bus', () => {
+      it('avec le nom du fichier', async () => {
+        await request(serveur).get('/visas/tl-fr.xml');
+
+        const evenement = busEvenements.recupereEvenement(VisaTelecharge);
+
+        assert.equal(evenement?.nomFichier, 'tl-fr.xml');
       });
     });
   });
