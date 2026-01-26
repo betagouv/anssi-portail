@@ -54,6 +54,7 @@
       aspect-ratio: 16 /9;
       width: 100%;
       justify-self: center;
+      transform: scaleX(-1);
       @include a-partir-de(md) {
         align-self: center;
         max-width: taille-pour-colonnes(10);
