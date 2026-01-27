@@ -3,7 +3,7 @@
   import FormulaireDemandeSimplifiee from './FormulaireDemandeSimplifiee.svelte';
 
   export let origine: string;
-  export let urlBase: string | undefined = '/api';
+  export let urlBase: string = '';
 </script>
 
 <div class="demande-diagnostic">

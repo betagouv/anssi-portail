@@ -1,9 +1,10 @@
-import { ConfigurationServeur } from './configurationServeur';
+import cors from 'cors';
 import { Router } from 'express';
 import {
   CodeDepartement,
   estCodeDepartement,
 } from '../metier/referentielDepartements';
+import { ConfigurationServeur } from './configurationServeur';
 
 const ressourceAnnuaireOrganisations = ({
   middleware,
@@ -12,6 +13,7 @@ const ressourceAnnuaireOrganisations = ({
   const routeur = Router();
   routeur.get(
     '/',
+    cors(),
     middleware.aseptise('recherche', 'departement'),
     async (requete, reponse) => {
       const recherche = requete.query.recherche

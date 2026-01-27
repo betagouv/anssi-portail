@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
+  "main": "index.ts",
   "scripts": {
-    "build": "vite build"
+    "build:dev": "VITE_API_URL=http://localhost:3000 ENV=dev vite build",
+    "build:demo": "VITE_API_URL=https://demo.messervicescyber.beta.gouv.fr ENV=demo vite build",
+    "build:prod": "VITE_API_URL=https://messervices.cyber.gouv.fr ENV=prod vite build"
   },
   "packageManager": "pnpm@10.24.0",
   "devDependencies": {
@@ -28,6 +31,5 @@
   "dependencies": {
     "@anssi-portail/svelte": "workspace:*",
     "axios": "~1.13.2"
-  },
-  "main": "svelte.config.js"
+  }
 }
