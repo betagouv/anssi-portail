@@ -23,6 +23,7 @@
   ];
 
   export let origine: string;
+  export let urlBase: string | undefined;
 
   let formulaire: Formulaire;
   let entite: Organisation;
@@ -50,7 +51,7 @@
         validationCGU: cguSontValidees,
       };
       const reponse = await axios.post(
-        '/api/mon-aide-cyber/demandes-aide',
+        `${urlBase}/api/mon-aide-cyber/demandes-aide`,
         corps
       );
       if (reponse.status === 201) {
@@ -78,6 +79,7 @@
           id="entite"
           bind:valeur={entite}
           filtreDepartement={undefined}
+          {urlBase}
         />
         {#if entite}
           <div>Votre entreprise : {entite.nom} ({entite.departement})</div>
