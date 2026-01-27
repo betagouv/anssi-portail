@@ -1,0 +1,233 @@
+@use './responsive' as *;
+
+@mixin polices-marianne($base-url: '/assets/fonts/') {
+  @font-face {
+    font-display: swap;
+    font-family: Marianne;
+    font-style: normal;
+    font-weight: 300;
+    src:
+      url('#{$base-url}Marianne-Light.woff2') format('woff2'),
+      url('#{$base-url}Marianne-Light.woff') format('woff');
+  }
+
+  @font-face {
+    font-display: swap;
+    font-family: Marianne;
+    font-style: italic;
+    font-weight: 300;
+    src:
+      url('#{$base-url}Marianne-Light_Italic.woff2') format('woff2'),
+      url('#{$base-url}Marianne-Light_Italic.woff') format('woff');
+  }
+
+  @font-face {
+    font-display: swap;
+    font-family: Marianne;
+    font-style: normal;
+    font-weight: 400;
+    src:
+      url('#{$base-url}Marianne-Regular.woff2') format('woff2'),
+      url('#{$base-url}Marianne-Regular.woff') format('woff');
+  }
+
+  @font-face {
+    font-display: swap;
+    font-family: Marianne;
+    font-style: italic;
+    font-weight: 400;
+    src:
+      url('#{$base-url}Marianne-Regular_Italic.woff2') format('woff2'),
+      url('#{$base-url}Marianne-Regular_Italic.woff') format('woff');
+  }
+
+  @font-face {
+    font-display: swap;
+    font-family: Marianne;
+    font-style: normal;
+    font-weight: 500;
+    src:
+      url('#{$base-url}Marianne-Medium.woff2') format('woff2'),
+      url('#{$base-url}Marianne-Medium.woff') format('woff');
+  }
+
+  @font-face {
+    font-display: swap;
+    font-family: Marianne;
+    font-style: italic;
+    font-weight: 500;
+    src:
+      url('#{$base-url}Marianne-Medium_Italic.woff2') format('woff2'),
+      url('#{$base-url}Marianne-Medium_Italic.woff') format('woff');
+  }
+
+  @font-face {
+    font-display: swap;
+    font-family: Marianne;
+    font-style: normal;
+    font-weight: 700;
+    src:
+      url('#{$base-url}Marianne-Bold.woff2') format('woff2'),
+      url('#{$base-url}Marianne-Bold.woff') format('woff');
+  }
+
+  @font-face {
+    font-display: swap;
+    font-family: Marianne;
+    font-style: italic;
+    font-weight: 700;
+    src:
+      url('#{$base-url}Marianne-Bold_Italic.woff2') format('woff2'),
+      url('#{$base-url}Marianne-Bold_Italic.woff') format('woff');
+  }
+}
+
+@mixin titres {
+  h2 {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    font-weight: bold;
+    margin: 0 0 24px;
+
+    @include a-partir-de(md) {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  h5 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: bold;
+    margin: 0 0 24px;
+
+    @include a-partir-de(md) {
+      font-size: 1.375rem;
+      line-height: 1.75rem;
+    }
+  }
+
+  h6 {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    margin: 0 0 24px;
+
+    @include a-partir-de(md) {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+  }
+}
+
+@mixin bouton {
+  .bouton {
+    font-family: Marianne;
+    display: flex;
+    justify-content: center;
+    border-radius: 6px;
+    text-align: center;
+    padding: 10px 24px;
+    text-decoration: none;
+    font-weight: 500;
+    border: none;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    cursor: pointer;
+  }
+
+  .bouton.primaire {
+    background: var(--jaune-msc);
+    color: var(--noir);
+
+    &[disabled] {
+      background: var(--gris-desactive-fond);
+      color: var(--gris-desactive-texte);
+      cursor: not-allowed;
+    }
+
+    &:not([disabled]) {
+      &:hover {
+        background: var(--jaune-msc-hover);
+      }
+      &:active {
+        background: var(--jaune-msc-clique);
+      }
+    }
+  }
+
+  .bouton.secondaire {
+    border: 1px solid var(--noir);
+    color: var(--noir);
+    padding: 16px 24px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    background: white;
+
+    &:not([disabled]).actif {
+      background: var(--jaune-msc);
+
+      &:not([disabled]):hover {
+        background: var(--jaune-msc-hover);
+      }
+
+      &:not([disabled]):active {
+        background: var(--jaune-msc-clique);
+      }
+    }
+
+    &[disabled] {
+      border-color: var(--gris-desactive-fond);
+      background: white;
+      color: var(--gris-desactive-texte);
+      cursor: not-allowed;
+    }
+
+    &:not([disabled]):hover {
+      background: var(--gris-secondaire-fond-hover);
+    }
+
+    &:not([disabled]):active {
+      background: var(--gris-secondaire-fond-clique);
+    }
+  }
+
+  .fond-sombre {
+    .bouton.secondaire {
+      background: transparent;
+      border: 1px solid white;
+      color: white;
+    }
+  }
+
+  .bouton.taille-moyenne {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    padding: 8px 16px;
+  }
+}
+
+@mixin erreur-champ-saisie {
+  .erreur-champ-saisie {
+    font-size: 12px;
+    line-height: 14px;
+    margin-top: 16px;
+  }
+
+  .erreur-champ-saisie {
+    color: var(--erreur-texte);
+  }
+
+  .erreur-champ-saisie:before {
+    content: '';
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+
+  .erreur-champ-saisie:before {
+    background-image: url('/assets/images/erreur.svg');
+  }
+}
