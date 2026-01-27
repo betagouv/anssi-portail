@@ -6,7 +6,11 @@
   export let pourcentage: number | undefined;
   export let affichePourcentages = true;
 
-  const pourcentageLisible = pourcentage ? `${Math.round(pourcentage)}%` : '';
+  let pourcentageLisible: string;
+
+  $: {
+    pourcentageLisible = pourcentage ? `${Math.round(pourcentage)}%` : '';
+  }
 </script>
 
 <div
