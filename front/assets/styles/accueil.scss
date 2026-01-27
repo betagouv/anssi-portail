@@ -38,19 +38,18 @@
     }
 
     .actions {
+      grid-area: demande;
       display: flex;
       flex-direction: column;
       gap: 16px;
 
+      @include a-partir-de(md) {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
       .bouton.secondaire {
         width: auto;
-      }
-    }
-
-    lab-anssi-lien {
-      grid-area: demande;
-      @include a-partir-de(md) {
-        justify-self: flex-start;
       }
     }
 
