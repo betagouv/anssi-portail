@@ -2,22 +2,17 @@
   customElement={{
     tag: 'lab-anssi-demande-diagnostic-simplifiee',
     shadow: 'none',
-    props: {
-      origine: { attribute: 'origine', type: 'String' },
-    },
   }}
 />
 
 <script lang="ts">
   import DemandeDiagnosticSimplifiee from '@anssi-portail/svelte/src/demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
-  type Props = {
-    origine: string;
-  };
-  const { origine } = $$props as Props;
 </script>
 
 <div class="lab-anssi-demande-diagnostic-simplifiee">
-  <DemandeDiagnosticSimplifiee {origine} urlBase="/wp-json/demande-diag"
+  <DemandeDiagnosticSimplifiee
+    origine={window.location.hostname}
+    urlBase={import.meta.env.VITE_API_URL}
   ></DemandeDiagnosticSimplifiee>
 </div>
 

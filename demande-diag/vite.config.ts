@@ -6,12 +6,12 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/wc-demande-diag.ts'),
+      entry: resolve(__dirname, 'src/index.ts'),
       name: 'WebComponents',
       fileName: 'demande-diag',
       formats: ['iife'],
     },
-    outDir: 'dist',
+    outDir: 'dist-' + process.env.ENV,
   },
   resolve: {
     alias: {
