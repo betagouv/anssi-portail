@@ -24,7 +24,7 @@
   ];
 
   export let origine: string;
-  export let urlBase: string | undefined;
+  export let urlBase: string | undefined = '/api';
 
   let formulaire: Formulaire;
   let entite: Organisation;
@@ -52,7 +52,7 @@
         validationCGU: cguSontValidees,
       };
       const reponse = await axios.post(
-        `${urlBase}/api/mon-aide-cyber/demandes-aide`,
+        `${urlBase}/mon-aide-cyber/demandes-aide`,
         corps
       );
       if (reponse.status === 201) {
