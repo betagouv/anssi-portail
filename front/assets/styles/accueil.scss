@@ -37,6 +37,16 @@
       }
     }
 
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      .bouton.secondaire {
+        width: auto;
+      }
+    }
+
     lab-anssi-lien {
       grid-area: demande;
       @include a-partir-de(md) {
