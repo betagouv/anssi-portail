@@ -3,7 +3,6 @@
   import { validationChamp } from '../directives/validationChamp';
   import Alerte from '../ui/Alerte.svelte';
   import type { CouleurDeBadge } from '../ui/badge.type';
-  import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
@@ -11,6 +10,7 @@
   import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import type { CorpsAPIDemandeAide } from './DonneesFormulaireDemandeAide';
+  import { clic } from '../directives/actions.svelte';
 
   const badges: { label: string; accent: CouleurDeBadge }[] = [
     {
@@ -122,13 +122,15 @@
       </div>
 
       <div class="envoi-demande">
-        <Bouton
-          type="primaire"
+        <lab-anssi-bouton
+          use:clic={soumetsFormulaire}
           taille="md"
           titre="Envoyer ma demande"
-          on:click={soumetsFormulaire}
-          {enCoursEnvoi}
-        />
+          variante="primaire"
+          type="submit"
+          largeur-maximale
+          actif={!enCoursEnvoi}
+        ></lab-anssi-bouton>
         <p>
           Ce diagnostic gratuit proposé par l'État n'est pas adapté aux
           particuliers et micro-entreprises.
