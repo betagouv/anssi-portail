@@ -18,7 +18,7 @@
   export let filtreDepartement: Departement | undefined;
   export let valeur: Organisation | undefined;
   export let id: string = '';
-  export let urlBase: string | undefined = '/api';
+  export let urlBase: string = '';
 
   let saisie: string;
   let minuteur: ReturnType<typeof setTimeout>;
@@ -59,9 +59,8 @@
       suggestions = [];
       return;
     }
-    console.log('urlBase', urlBase);
     const reponse = await axios.get<ReponseApiAnnuaireOrganisations>(
-      `${urlBase}/annuaire/organisations`,
+      `${urlBase}/api/annuaire/organisations`,
       {
         params: {
           recherche: saisie,

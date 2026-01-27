@@ -1,8 +1,9 @@
+import cors from 'cors';
 import { Router } from 'express';
-import { ConfigurationServeur } from '../configurationServeur';
-import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 import { body, check } from 'express-validator';
 import { codeDepartement } from '../../metier/referentielDepartements';
+import { ConfigurationServeur } from '../configurationServeur';
+import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 export type CorpsDemandeAide = {
   origine?: string;
@@ -23,8 +24,10 @@ const ressourceDemandesAide = ({
 }: ConfigurationServeur): Router => {
   const routeur = Router();
 
+  routeur.options('/', cors());
   routeur.post(
     '/',
+    cors(),
     middleware.aseptise(
       'entiteAidee.email',
       'entiteAidee.departement',
