@@ -8,7 +8,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/wc-demande-diag.ts'),
       name: 'WebComponents',
-      fileName: 'lab-anssi-demande-diag',
+      fileName: 'demande-diag',
       formats: ['iife'],
     },
     outDir: 'dist',
