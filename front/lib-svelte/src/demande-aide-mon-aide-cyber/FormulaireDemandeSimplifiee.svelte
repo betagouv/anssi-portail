@@ -3,7 +3,6 @@
   import { validationChamp } from '../directives/validationChamp';
   import Alerte from '../ui/Alerte.svelte';
   import type { CouleurDeBadge } from '../ui/badge.type';
-  import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
@@ -122,13 +121,18 @@
       </div>
 
       <div class="envoi-demande">
-        <Bouton
-          type="primaire"
-          taille="md"
-          titre="Envoyer ma demande"
+        <lab-anssi-bouton
           on:click={soumetsFormulaire}
-          {enCoursEnvoi}
-        />
+          on:keypress
+          role="button"
+          taille="md"
+          tabindex="0"
+          titre="Envoyer ma demande"
+          variante="primaire"
+          type="submit"
+          largeur-maximale
+          actif={!enCoursEnvoi}
+        ></lab-anssi-bouton>
         <p>
           Ce diagnostic gratuit proposé par l'État n'est pas adapté aux
           particuliers et micro-entreprises.
