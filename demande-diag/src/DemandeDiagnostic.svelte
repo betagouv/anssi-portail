@@ -17,7 +17,10 @@
 </script>
 
 <div class="lab-anssi-demande-diagnostic-simplifiee">
-  <DemandeDiagnosticSimplifiee {origine}></DemandeDiagnosticSimplifiee>
+  <DemandeDiagnosticSimplifiee
+    {origine}
+    urlBase="https://lab-anssi-msc-demo.cleverapps.io"
+  ></DemandeDiagnosticSimplifiee>
 </div>
 
 <style lang="scss">

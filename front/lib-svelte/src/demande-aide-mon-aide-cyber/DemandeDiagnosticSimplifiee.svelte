@@ -3,6 +3,7 @@
   import FormulaireDemandeSimplifiee from './FormulaireDemandeSimplifiee.svelte';
 
   export let origine: string;
+  export let urlBase: string | undefined;
 </script>
 
 <div class="demande-diagnostic">
@@ -27,7 +28,7 @@
   </div>
 
   <div class="formulaire">
-    <FormulaireDemandeSimplifiee {origine} />
+    <FormulaireDemandeSimplifiee {origine} {urlBase} />
   </div>
   <details>
     <summary>
