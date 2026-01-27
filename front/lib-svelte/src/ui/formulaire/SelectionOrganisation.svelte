@@ -18,6 +18,7 @@
   export let filtreDepartement: Departement | undefined;
   export let valeur: Organisation | undefined;
   export let id: string = '';
+  export let urlBase: string | undefined;
 
   let saisie: string;
   let minuteur: ReturnType<typeof setTimeout>;
@@ -45,9 +46,7 @@
     return `(${organisation.departement}) ${organisation.nom} - ${siretFormatte}`;
   };
 
-  const uneSuggestion = (
-    organisation: Organisation
-  ): OrganisationAvecLabel => {
+  const uneSuggestion = (organisation: Organisation): OrganisationAvecLabel => {
     return { ...organisation, label: construisLabel(organisation) };
   };
 
@@ -61,7 +60,7 @@
       return;
     }
     const reponse = await axios.get<ReponseApiAnnuaireOrganisations>(
-      '/api/annuaire/organisations',
+      `${urlBase}/api/annuaire/organisations`,
       {
         params: {
           recherche: saisie,
