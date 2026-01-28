@@ -5,7 +5,6 @@
   "type": "module",
   "main": "index.ts",
   "scripts": {
-    "build:dev": "VERSION_UI_KIT=1.36.1 VITE_API_URL=http://localhost:3000 ENV=dev vite build",
     "build:demo": "VERSION_UI_KIT=1.36.1 VITE_API_URL=https://demo.messervicescyber.beta.gouv.fr ENV=demo vite build",
     "build:prod": "VERSION_UI_KIT=1.36.1 VITE_API_URL=https://messervices.cyber.gouv.fr ENV=prod vite build"
   },
