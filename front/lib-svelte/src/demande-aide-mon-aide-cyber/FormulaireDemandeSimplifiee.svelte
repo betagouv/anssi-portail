@@ -24,6 +24,7 @@
 
   export let origine: string;
   export let urlBase: string = '';
+  export let cacheLesLiensDeRetour = false;
 
   let formulaire: Formulaire;
   let entite: Organisation;
@@ -151,7 +152,10 @@
   </Formulaire>
 {:else}
   <div class="confirmation">
-    <ConfirmationCreationDemandeAide mode="embarque" />
+    <ConfirmationCreationDemandeAide
+      mode="embarque"
+      cacheLesLiens={cacheLesLiensDeRetour}
+    />
   </div>
 {/if}
 
