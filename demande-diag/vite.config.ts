@@ -12,7 +12,7 @@ export default defineConfig({
       fileName: 'demande-diag',
       formats: ['iife'],
     },
-    outDir: 'dist-' + process.env.ENV,
+    outDir: 'dist-' + (process.env.ENV ?? "prod"),
   },
   resolve: {
     alias: {
@@ -54,6 +54,10 @@ export default defineConfig({
       compilerOptions: { customElement: true },
       emitCss: true,
     }),
-    remplaceVersionsDansPhp(process.env.VERSION_UI_KIT ?? "1.0"),
+    remplaceVersionsDansPhp(
+      process.env.VERSION_UI_KIT ?? '1.0',
+      process.env.VERSION ?? '1.0',
+      process.env.ENV ?? 'prod'
+    ),
   ],
 });

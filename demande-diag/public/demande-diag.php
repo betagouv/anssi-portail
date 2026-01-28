@@ -17,14 +17,14 @@ function ajouter_assets_demande_diag() {
     );
     wp_enqueue_style(
         'lab-anssi-demande-diag-styles', 
-        get_stylesheet_directory_uri() . '/lab-anssi/demande-diag.css', 
+        'https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/<VERSION>/<ENV>/demande-diag.css',
         '', 
         '1.0', 
         'screen'
     );
     wp_enqueue_script(
         'lab-anssi-demande-diag-script',
-        get_stylesheet_directory_uri() . '/lab-anssi/demande-diag.iife.js',
+        'https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/<VERSION>/<ENV>/demande-diag.iife.js',
         array(),
         null,
         true

@@ -2,11 +2,18 @@ import * as fs from 'node:fs';
 import path from 'path';
 import * as Vite from 'vite';
 
-export const remplaceVersionsDansPhp = (versionUiKit: string): Vite.Plugin => {
+export const remplaceVersionsDansPhp = (
+  versionUiKit: string,
+  version: string,
+  env: string
+): Vite.Plugin => {
   let configurationResolue: Vite.ResolvedConfig;
 
   const remplace = (source: string) => {
-    return source.replaceAll('<VERSION_UI_KIT>', versionUiKit);
+    return source
+      .replaceAll('<VERSION_UI_KIT>', versionUiKit)
+      .replaceAll('<VERSION>', version)
+      .replaceAll('<ENV>', env);
   };
 
   return {
@@ -28,7 +35,7 @@ export const remplaceVersionsDansPhp = (versionUiKit: string): Vite.Plugin => {
       );
       fs.writeFileSync(cheminSortie, contenu);
       console.info(
-        `Fichier ${cheminSortie} écrit avec la version de l’ui kit ${versionUiKit}`
+        `Fichier ${cheminSortie} écrit avec [VERSION_UI_KIT=${versionUiKit}] [VERSION=${version}] [ENV=${env}]`
       );
     },
   };
