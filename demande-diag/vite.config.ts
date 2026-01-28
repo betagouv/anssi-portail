@@ -2,6 +2,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import cssnano from 'cssnano';
 import path, { resolve } from 'path';
 import { defineConfig } from 'vite';
+import { remplaceVersionsDansPhp } from './plugin/remplaceVersionsDansPhp';
 
 export default defineConfig({
   build: {
@@ -53,5 +54,6 @@ export default defineConfig({
       compilerOptions: { customElement: true },
       emitCss: true,
     }),
+    remplaceVersionsDansPhp(process.env.VERSION_UI_KIT ?? "1.0"),
   ],
 });
