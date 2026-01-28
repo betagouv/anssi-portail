@@ -3,7 +3,6 @@
   import { validationChamp } from '../directives/validationChamp';
   import Alerte from '../ui/Alerte.svelte';
   import type { CouleurDeBadge } from '../ui/badge.type';
-  import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
@@ -24,6 +23,8 @@
   ];
 
   export let origine: string;
+  export let urlBase: string = '';
+  export let cacheLesLiensDeRetour = false;
 
   let formulaire: Formulaire;
   let entite: Organisation;
@@ -51,7 +52,7 @@
         validationCGU: cguSontValidees,
       };
       const reponse = await axios.post(
-        '/api/mon-aide-cyber/demandes-aide',
+        `${urlBase}/api/mon-aide-cyber/demandes-aide`,
         corps
       );
       if (reponse.status === 201) {
@@ -79,6 +80,7 @@
           id="entite"
           bind:valeur={entite}
           filtreDepartement={undefined}
+          {urlBase}
         />
         {#if entite}
           <div>Votre entreprise : {entite.nom} ({entite.departement})</div>
@@ -122,13 +124,18 @@
       </div>
 
       <div class="envoi-demande">
-        <Bouton
-          type="primaire"
-          taille="md"
-          titre="Envoyer ma demande"
+        <lab-anssi-bouton
           on:click={soumetsFormulaire}
-          {enCoursEnvoi}
-        />
+          on:keypress
+          role="button"
+          taille="md"
+          tabindex="0"
+          titre="Envoyer ma demande"
+          variante="primaire"
+          type="submit"
+          largeur-maximale
+          actif={!enCoursEnvoi}
+        ></lab-anssi-bouton>
         <p>
           Ce diagnostic gratuit proposé par l'État n'est pas adapté aux
           particuliers et micro-entreprises.
@@ -145,7 +152,10 @@
   </Formulaire>
 {:else}
   <div class="confirmation">
-    <ConfirmationCreationDemandeAide mode="embarque" />
+    <ConfirmationCreationDemandeAide
+      mode="embarque"
+      cacheLesLiens={cacheLesLiensDeRetour}
+    />
   </div>
 {/if}
 

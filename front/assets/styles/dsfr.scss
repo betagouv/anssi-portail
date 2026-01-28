@@ -1,28 +1,10 @@
 ---
 ---
 
-@use '../../assets/styles/responsive' as *;
+@use './responsive' as *;
+@use './commun.scss' as commun;
 
-h2 {
-  font-size: 1.75rem;
-  line-height: 2.25rem;
-  font-weight: bold;
-  margin: 0 0 24px;
-  @include a-partir-de(md) {
-    font-size: 2rem;
-    line-height: 2.5rem;
-  }
-}
-
-h6 {
-  font-size: 1.125rem;
-  line-height: 1.5rem;
-  margin: 0 0 24px;
-  @include a-partir-de(md) {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-  }
-}
+@include commun.titres();
 
 .alternatif-xs {
   font-size: 2.5rem;
