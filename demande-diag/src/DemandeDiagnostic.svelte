@@ -13,6 +13,7 @@
   <DemandeDiagnosticSimplifiee
     origine={window.location.hostname}
     urlBase={import.meta.env.VITE_API_URL}
+    cacheLesLiensDeRetour={true}
   ></DemandeDiagnosticSimplifiee>
 </div>
 
