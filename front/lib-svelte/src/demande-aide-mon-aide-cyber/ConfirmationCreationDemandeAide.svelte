@@ -2,6 +2,7 @@
   import Bouton from '../ui/Bouton.svelte';
 
   export let mode: 'carte' | 'embarque' = 'carte';
+  export let cacheLesLiens: boolean = false;
 </script>
 
 <div class={['confirmation', mode]}>
@@ -10,13 +11,15 @@
     Un Aidant cyber prendra bientôt contact avec vous pour vous accompagner dans
     les prochaines étapes.
   </p>
-  <Bouton
-    type="primaire"
-    taille="md"
-    titre="Explorer les services pour se lancer"
-    on:click={() => (window.location.pathname = '/')}
-  />
-  <a href="/" class="lien">Revenir à la page d'accueil</a>
+  {#if !cacheLesLiens}
+    <Bouton
+      type="primaire"
+      taille="md"
+      titre="Explorer les services pour se lancer"
+      on:click={() => (window.location.pathname = '/')}
+    />
+    <a href="/" class="lien">Revenir à la page d'accueil</a>
+  {/if}
 </div>
 
 <style lang="scss">
