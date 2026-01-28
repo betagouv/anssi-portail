@@ -1,11 +1,8 @@
-name: deploiement-wc-demande-diag.yml
+name: Déploiement WebComponent demande de diag
 permissions: {}
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch: # Pour activer le déclenchement manuel
 
 jobs:
   deploiement:
@@ -32,9 +29,12 @@ jobs:
         run: echo release_version=$(pnpm -F demande-diag exec node -p "require('./package.json').version") >> $GITHUB_ENV
 
       - name: Construis la lib
+        env:
+          VERSION: ${{ env.release_version }}
         run: |
           pnpm install --frozen-lockfile
           pnpm --filter demande-diag build:demo
+          pnpm --filter demande-diag build:prod
 
       - name: Installer et configurer la CLI de S3cmd
         uses: s3-actions/s3cmd@v1.10.0
@@ -48,3 +48,9 @@ jobs:
           s3cmd put --acl-public --mime-type='application/javascript' ./demande-diag/dist-demo/demande-diag.iife.js s3://messervicescyber-web-components/${{ env.release_version }}/demo/
           s3cmd put --acl-public --mime-type='text/css' ./demande-diag/dist-demo/demande-diag.css s3://messervicescyber-web-components/${{ env.release_version }}/demo/
           s3cmd put --acl-public --mime-type='text/plain' ./demande-diag/dist-demo/demande-diag.php s3://messervicescyber-web-components/${{ env.release_version }}/demo/
+
+      - name: Envoyer les fichiers en prod
+        run: |
+          s3cmd put --acl-public --mime-type='application/javascript' ./demande-diag/dist-prod/demande-diag.iife.js s3://messervicescyber-web-components/${{ env.release_version }}/prod/
+          s3cmd put --acl-public --mime-type='text/css' ./demande-diag/dist-prod/demande-diag.css s3://messervicescyber-web-components/${{ env.release_version }}/prod/
+          s3cmd put --acl-public --mime-type='text/plain' ./demande-diag/dist-prod/demande-diag.php s3://messervicescyber-web-components/${{ env.release_version }}/prod/
