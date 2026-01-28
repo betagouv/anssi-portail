@@ -20,14 +20,13 @@ export const fabriqueAdaptateurMatamo = (
   adaptateurEnvironnement: AdaptateurEnvironnement
 ): AdaptateurAnalytique => ({
   rapporteEvenement: async (donneesEvenement) => {
-    const nomAction =
-      'origine' in donneesEvenement.donnees
-        ? `Document téléchargé depuis ${donneesEvenement.donnees.origine ?? 'source inconnue'}`
-        : 'Visa téléchargé';
+    const { categorie, nomAction } =
+      recupereCaracteristiquesEvenement(donneesEvenement);
+
     const parametres = new URLSearchParams();
     parametres.append('rec', '1');
     parametres.append('idsite', adaptateurEnvironnement.matomo().idSite());
-    parametres.append('e_c', 'Guides');
+    parametres.append('e_c', categorie);
     parametres.append('e_a', nomAction);
     parametres.append('e_n', donneesEvenement.donnees.nomFichier);
 
@@ -37,3 +36,21 @@ export const fabriqueAdaptateurMatamo = (
     );
   },
 });
+
+function recupereCaracteristiquesEvenement(
+  donneesEvenement:
+    | DonneesEvenementDocumentGuideTelecharge
+    | DonneesEvenementVisaTelecharge
+): { categorie: string; nomAction: string } {
+  if (donneesEvenement.type === 'DOCUMENT_GUIDE_TELECHARGE') {
+    return {
+      nomAction: `Document téléchargé depuis ${donneesEvenement.donnees.origine ?? 'source inconnue'}`,
+      categorie: 'Guides',
+    };
+  } else {
+    return {
+      categorie: 'Visas',
+      nomAction: 'Visa téléchargé',
+    };
+  }
+}
