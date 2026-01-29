@@ -62,16 +62,32 @@ export const fabriqueMiddleware = ({
     };
 
   const interdisLaMiseEnCache = async (
-    _requete: Request,
+    requete: Request,
     reponse: Response,
     suite: NextFunction
   ) => {
-    reponse.set({
-      'cache-control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-      pragma: 'no-cache',
-      expires: '0',
-      'surrogate-control': 'no-store',
-    });
+    const motifsDeRoutes = adaptateurEnvironnement
+      .serveur()
+      .motifsDeRoutesMisesEnCache();
+    const doitEtreMiseEnCache = motifsDeRoutes.some((motif) =>
+      motif.exec(requete.url)
+    );
+    const entetesDeCache = doitEtreMiseEnCache
+      ? {
+          'cache-control':
+            'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate',
+          expires: '3600',
+          'surrogate-control':
+            'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate',
+        }
+      : {
+          'cache-control':
+            'no-store, no-cache, must-revalidate, proxy-revalidate',
+          pragma: 'no-cache',
+          expires: '0',
+          'surrogate-control': 'no-store',
+        };
+    reponse.set(entetesDeCache);
     suite();
   };
 

@@ -95,6 +95,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     trustProxy: () => '',
     maxRequetesParMinute: () => 0,
     ipAutorisees: () => false,
+    motifsDeRoutesMisesEnCache: () => [],
   }),
   sentry: () => ({
     dsn: () => '',
