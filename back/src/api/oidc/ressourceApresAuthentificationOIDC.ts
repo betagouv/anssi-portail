@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
+import { UtilisateurConnecte } from '../../bus/evenements/utilisateurConnecte';
 
 const ressourceApresAuthentificationOIDC = ({
   adaptateurOIDC,
@@ -7,6 +8,7 @@ const ressourceApresAuthentificationOIDC = ({
   entrepotUtilisateur,
   fournisseurChemin,
   adaptateurHachage,
+  busEvenements,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get('/', async (requete, reponse) => {
@@ -22,7 +24,9 @@ const ressourceApresAuthentificationOIDC = ({
         await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
       const { email } = informationsUtilisateur;
 
-      if (!(await entrepotUtilisateur.existe(adaptateurHachage.hache(email)))) {
+      const emailHache = adaptateurHachage.hache(email);
+      const utilisateurExiste = await entrepotUtilisateur.existe(emailHache);
+      if (!utilisateurExiste) {
         const token = adaptateurJWT.genereToken(informationsUtilisateur);
         reponse.redirect(`/creation-compte?token=${token}`);
         return;
@@ -34,6 +38,8 @@ const ressourceApresAuthentificationOIDC = ({
       reponse.sendFileAvecNonce(
         fournisseurChemin.cheminPageJekyll('apres-authentification')
       );
+
+      await busEvenements.publie(new UtilisateurConnecte(emailHache));
     } catch {
       reponse.sendStatus(401);
     }

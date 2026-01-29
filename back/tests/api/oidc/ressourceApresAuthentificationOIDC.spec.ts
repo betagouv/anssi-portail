@@ -17,6 +17,8 @@ import { decodeSessionDuCookie } from '../cookie';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { Utilisateur } from '../../../src/metier/utilisateur';
+import { MockBusEvenement } from '../../bus/busPourLesTests';
+import { UtilisateurConnecte } from '../../../src/bus/evenements/utilisateurConnecte';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {
@@ -25,17 +27,20 @@ describe('La ressource apres authentification OIDC', () => {
     let adaptateurOIDC: AdaptateurOIDC;
     let adaptateurJWT: AdaptateurJWT;
     let entrepotUtilisateur: EntrepotUtilisateurMemoire;
+    let busEvenements: MockBusEvenement;
 
     beforeEach(() => {
       adaptateurOIDC = { ...fauxAdaptateurOIDC };
       adaptateurJWT = fauxAdaptateurJWT;
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+      busEvenements = new MockBusEvenement();
       const configurationServeur: ConfigurationServeur = {
         ...configurationDeTestDuServeur,
         fournisseurChemin,
         adaptateurOIDC,
         adaptateurJWT,
         entrepotUtilisateur,
+        busEvenements,
       };
       serveur = creeServeur(configurationServeur);
     });
@@ -134,6 +139,14 @@ describe('La ressource apres authentification OIDC', () => {
 
         const session = decodeSessionDuCookie(reponse, 0);
         assert.equal(session.AgentConnectIdToken, 'tokenAgentConnect');
+      });
+
+      it('publie un évènement sur le bus', async () => {
+        await requeteGet();
+
+        const evenement = busEvenements.recupereEvenement(UtilisateurConnecte);
+
+        assert.equal(evenement?.emailHache, 'jeanne.dupont-hache');
       });
     });
 
