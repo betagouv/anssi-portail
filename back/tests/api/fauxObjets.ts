@@ -36,7 +36,11 @@ export const fauxAdaptateurOIDC: AdaptateurOIDC = {
     prenom: '',
     siret: '',
   }),
-  recupereJeton: async (_requete) => ({ accessToken: '', idToken: '' }),
+  recupereJeton: async (_requete) => ({
+    accessToken: '',
+    idToken: '',
+    connexionAvecMFA: false,
+  }),
   genereDemandeAutorisation: async () => ({
     url: '',
     nonce: '',

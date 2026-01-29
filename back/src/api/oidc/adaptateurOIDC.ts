@@ -18,6 +18,7 @@ type InformationsUtilisateur = {
 type JetonsOIDC = {
   idToken: string;
   accessToken: string;
+  connexionAvecMFA: boolean;
 };
 
 export interface AdaptateurOIDC {
@@ -53,6 +54,8 @@ const genereDemandeAutorisation = async () => {
     scope: 'openid email given_name usual_name siret',
     nonce,
     state,
+    // https://partenaires.proconnect.gouv.fr/docs/fournisseur-service/niveaux-acr#les-m%C3%A9thodes-dauthentifications
+    claims: { id_token: { amr: null } },
   });
 
   return {
@@ -96,6 +99,7 @@ const recupereJeton = async (requete: Request) => {
   return {
     idToken: token.id_token,
     accessToken: token.access_token,
+    connexionAvecMFA: token.claims().amr?.includes('mfa') ?? false,
   };
 };
 

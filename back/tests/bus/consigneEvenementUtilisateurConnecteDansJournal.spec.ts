@@ -20,11 +20,14 @@ describe("L'abonnement qui consigne la connexion d'un utilisateur dans le journa
     await consigneEvenementUtilisateurConnecteDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
-    })(new UtilisateurConnecte('u1@example.com-hache'));
+    })(new UtilisateurConnecte('u1@example.com-hache', true));
 
     assert.deepEqual(evenementRecu, {
       type: 'UTILISATEUR_CONNECTE',
-      donnees: { idUtilisateur: 'u1@example.com-hache' },
+      donnees: {
+        idUtilisateur: 'u1@example.com-hache',
+        connexionAvecMFA: true,
+      },
       date: new Date('2025-03-10'),
     });
   });

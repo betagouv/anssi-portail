@@ -94,7 +94,7 @@ describe('La ressource apres authentification OIDC', () => {
 
       it("ajoute les informations de l'utilisateur à la session", async () => {
         adaptateurOIDC.recupereJeton = async () => {
-          return { idToken: 'xx', accessToken: 'y' };
+          return { idToken: 'xx', accessToken: 'y', connexionAvecMFA: false };
         };
         adaptateurOIDC.recupereInformationsUtilisateur = async (
           accessToken
@@ -132,7 +132,11 @@ describe('La ressource apres authentification OIDC', () => {
 
       it('ajoute un tokenId AgentConnect à la session', async () => {
         adaptateurOIDC.recupereJeton = async () => {
-          return { idToken: 'tokenAgentConnect', accessToken: 'y' };
+          return {
+            idToken: 'tokenAgentConnect',
+            accessToken: 'y',
+            connexionAvecMFA: false,
+          };
         };
 
         const reponse = await requeteGet();
@@ -142,11 +146,19 @@ describe('La ressource apres authentification OIDC', () => {
       });
 
       it('publie un évènement sur le bus', async () => {
+        adaptateurOIDC.recupereJeton = async () => {
+          return {
+            idToken: 'tokenAgentConnect',
+            accessToken: 'y',
+            connexionAvecMFA: true,
+          };
+        };
         await requeteGet();
 
         const evenement = busEvenements.recupereEvenement(UtilisateurConnecte);
 
         assert.equal(evenement?.emailHache, 'jeanne.dupont-hache');
+        assert.equal(evenement?.connexionAvecMFA, true);
       });
     });
 
