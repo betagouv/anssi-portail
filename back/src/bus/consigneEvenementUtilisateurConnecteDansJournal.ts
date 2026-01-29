@@ -13,6 +13,7 @@ export const consigneEvenementUtilisateurConnecteDansJournal = ({
     await adaptateurJournal.consigneEvenement({
       donnees: {
         idUtilisateur: evenement.emailHache,
+        connexionAvecMFA: evenement.connexionAvecMFA,
       },
       type: 'UTILISATEUR_CONNECTE',
       date: adaptateurHorloge.maintenant(),

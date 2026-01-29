@@ -84,7 +84,7 @@ export type DonneesEvenementVisaTelecharge = Evenement<
 
 export type DonneesEvenementUtilisateurConnecte = Evenement<
   'UTILISATEUR_CONNECTE',
-  { idUtilisateur: string }
+  { idUtilisateur: string; connexionAvecMFA: boolean }
 >;
 
 type ProprietesDeClasse<C> = {

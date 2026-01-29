@@ -18,7 +18,7 @@ const ressourceApresAuthentificationOIDC = ({
     }
 
     try {
-      const { accessToken, idToken } =
+      const { accessToken, idToken, connexionAvecMFA } =
         await adaptateurOIDC.recupereJeton(requete);
       const informationsUtilisateur =
         await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
@@ -39,7 +39,9 @@ const ressourceApresAuthentificationOIDC = ({
         fournisseurChemin.cheminPageJekyll('apres-authentification')
       );
 
-      await busEvenements.publie(new UtilisateurConnecte(emailHache));
+      await busEvenements.publie(
+        new UtilisateurConnecte(emailHache, connexionAvecMFA)
+      );
     } catch {
       reponse.sendStatus(401);
     }
