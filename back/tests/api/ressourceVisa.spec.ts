@@ -80,6 +80,23 @@ describe('La ressource de visa', () => {
       assert.equal(reponse.headers['content-type'], 'application/xml');
     });
 
+    it('rend les contenus servi cachable', async () => {
+      const reponse = await request(serveur).get(
+        '/visas/anssi_back to basics_pki_1.0.xml'
+      );
+
+      assert.equal(
+        reponse.headers['cache-control'],
+        'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate'
+      );
+      assert.equal(reponse.headers['pragma'], '');
+      assert.equal(reponse.headers['expires'], '3600');
+      assert.equal(
+        reponse.headers['surrogate-control'],
+        'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate'
+      );
+    });
+
     describe("lorsque le fichier de qualification n'existe pas", () => {
       it('répond 404', async () => {
         configurationDuServeur.cellar.getStream = async () => undefined;
