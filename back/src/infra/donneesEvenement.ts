@@ -14,7 +14,8 @@ export type DonneesEvenement =
   | DonneesEvenementRetourExperienceDonne
   | DonneesEvenementAvisUtilisateurDonne
   | DonneesEvenementDocumentGuideTelecharge
-  | DonneesEvenementVisaTelecharge;
+  | DonneesEvenementVisaTelecharge
+  | DonneesEvenementUtilisateurConnecte;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -79,6 +80,11 @@ export type DonneesEvenementDocumentGuideTelecharge = Evenement<
 export type DonneesEvenementVisaTelecharge = Evenement<
   'VISA_TELECHARGE',
   ProprietesDeClasse<VisaTelecharge>
+>;
+
+export type DonneesEvenementUtilisateurConnecte = Evenement<
+  'UTILISATEUR_CONNECTE',
+  { idUtilisateur: string }
 >;
 
 type ProprietesDeClasse<C> = {

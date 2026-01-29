@@ -11,6 +11,7 @@ import { consigneEvenementMAJFavorisUtilisateurDansJournal } from './consigneEve
 import { consigneEvenementProprieteTestRevendiqueeDansJournal } from './consigneEvenementProprieteTestRevendiqueeDansJournal';
 import { consigneEvenementRetourExperienceDonneDansJournal } from './consigneEvenementRetourExperienceDonneDansJournal';
 import { consigneEvenementTestRealiseDansJournal } from './consigneEvenementTestRealiseDansJournal';
+import { consigneEvenementUtilisateurConnecteDansJournal } from './consigneEvenementUtilisateurConnecteDansJournal';
 import { creeContactBrevo } from './creeContactBrevo';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte';
 import { AvisUtilisateurDonne } from './evenements/avisUtilisateurDonne';
@@ -19,6 +20,7 @@ import { DocumentGuideTelecharge } from './evenements/documentGuideTelecharge';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
 import { TestRealise } from './evenements/testRealise';
+import { UtilisateurConnecte } from './evenements/utilisateurConnecte';
 import { VisaTelecharge } from './evenements/visaTelecharge';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
 import { rapporteEvenementGuideTelechargeDansTraqueur } from './rapporteEvenementGuideTelechargeDansTraqueur';
@@ -107,6 +109,14 @@ export const cableTousLesAbonnes = ({
     VisaTelecharge,
     rapporteEvenementVisaTelechargeDansTraqueur({
       adaptateurAnalytique,
+      adaptateurHorloge,
+    })
+  );
+
+  busEvenements.abonne(
+    UtilisateurConnecte,
+    consigneEvenementUtilisateurConnecteDansJournal({
+      adaptateurJournal,
       adaptateurHorloge,
     })
   );
