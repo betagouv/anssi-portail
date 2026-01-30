@@ -15,6 +15,7 @@ export type CorpsDemandeAide = {
   };
   emailAidant?: string;
   identifiantAidant?: string;
+  siretAidant?: string;
   validationCGU: boolean;
 };
 
@@ -59,6 +60,10 @@ const ressourceDemandesAide = ({
       .trim()
       .isUUID()
       .withMessage('Veuillez saisir un identifiant Aidant cyber valide.'),
+    body('siretAidant')
+      .optional()
+      .matches(/^\d{14}$/)
+      .withMessage('Veuillez saisir un SIRET Aidant cyber valide.'),
     body('origine')
       .optional({ checkFalsy: true })
       .custom((origine) => origine && origine.trim().length > 0)
@@ -69,14 +74,20 @@ const ressourceDemandesAide = ({
     middleware.valide(),
     async (requete: CorpsDeRequeteTypee<CorpsDemandeAide>, reponse) => {
       try {
-        const { emailAidant, identifiantAidant, entiteAidee, origine } =
-          requete.body;
+        const {
+          emailAidant,
+          identifiantAidant,
+          siretAidant,
+          entiteAidee,
+          origine,
+        } = requete.body;
         const { email, departement, raisonSociale, siret } = entiteAidee;
         await adaptateurMonAideCyber.creeDemandeAide({
           ...(origine && { origine }),
           aidant: {
             ...(emailAidant && { email: emailAidant }),
             ...(identifiantAidant && { identifiant: identifiantAidant }),
+            ...(siretAidant && { siret: siretAidant }),
           },
           entiteAidee: {
             email,
