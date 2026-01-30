@@ -74,8 +74,10 @@ const ressourceDemandesAide = ({
         const { email, departement, raisonSociale, siret } = entiteAidee;
         await adaptateurMonAideCyber.creeDemandeAide({
           ...(origine && { origine }),
-          ...(emailAidant && { emailAidant }),
-          ...(identifiantAidant && { identifiantAidant }),
+          aidant: {
+            ...(emailAidant && { email: emailAidant }),
+            ...(identifiantAidant && { identifiant: identifiantAidant }),
+          },
           entiteAidee: {
             email,
             departement,

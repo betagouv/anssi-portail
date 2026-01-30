@@ -1,12 +1,12 @@
+import { Express } from 'express';
+import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { Express } from 'express';
-import { creeServeur } from '../../../src/api/msc';
-import { configurationDeTestDuServeur } from '../fauxObjets';
-import assert from 'node:assert';
-import { DemandeAide } from '../../../src/infra/adaptateurMonAideCyber';
 import { CorpsDemandeAide } from '../../../src/api/mon-aide-cyber/ressourceDemandesAide';
+import { creeServeur } from '../../../src/api/msc';
+import { DemandeAide } from '../../../src/infra/adaptateurMonAideCyber';
 import { adaptateurMonAideCyberVide } from '../../../src/infra/adaptateurMonAideCyberVide';
+import { configurationDeTestDuServeur } from '../fauxObjets';
 
 const uneDemandeAide = (parametres?: {
   email?: string;
@@ -71,6 +71,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
         raisonSociale: 'Une raison sociale',
         siret: '09876543214321',
       },
+      aidant: {},
     });
   });
 
@@ -108,9 +109,9 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
     it('pour le mail de l’Aidant si l’entité est en relation', async () => {
       let emailEnvoye: string | undefined = undefined;
       adaptateurMonAideCyber.creeDemandeAide = async ({
-        emailAidant,
+        aidant,
       }: DemandeAide) => {
-        emailEnvoye = emailAidant;
+        emailEnvoye = aidant.email;
       };
 
       await request(serveur)
@@ -159,9 +160,9 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
     it('pour l’identifiant de l’Aidant', async () => {
       let identifiantAidantEnvoye: string | undefined = undefined;
       adaptateurMonAideCyber.creeDemandeAide = async ({
-        identifiantAidant,
+        aidant,
       }: DemandeAide) => {
-        identifiantAidantEnvoye = identifiantAidant;
+        identifiantAidantEnvoye = aidant.identifiant;
       };
 
       await request(serveur)
