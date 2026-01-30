@@ -26,3 +26,15 @@ Ouvrir le fichier `wp-content/themes/<votre-thème>/functions.php` et ajouter ce
 ```php
 require_once( get_stylesheet_directory() . '/lab-anssi/demande-diag.php' );
 ```
+
+## Intégration dans les pages HTML
+
+```html
+<lab-anssi-demande-diagnostic></lab-anssi-demande-diagnostic>
+```
+
+Pour ajouter un SIRET d’aidant, utile pour flécher la demande d’aide :
+
+```html
+<lab-anssi-demande-diagnostic siret-aidant="01234..."></lab-anssi-demande-diagnostic>
+```
