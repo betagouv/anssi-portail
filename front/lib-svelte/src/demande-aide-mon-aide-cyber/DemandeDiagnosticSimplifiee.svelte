@@ -5,6 +5,7 @@
   export let origine: string;
   export let urlBase: string = '';
   export let cacheLesLiensDeRetour = false;
+  export let siretAidant: string | undefined = undefined;
 </script>
 
 <div class="demande-diagnostic">
@@ -29,7 +30,7 @@
   </div>
 
   <div class="formulaire">
-    <FormulaireDemandeSimplifiee {origine} {urlBase} {cacheLesLiensDeRetour} />
+    <FormulaireDemandeSimplifiee {origine} {urlBase} {cacheLesLiensDeRetour} {siretAidant} />
   </div>
   <details>
     <summary>
