@@ -2,11 +2,17 @@
   customElement={{
     tag: 'lab-anssi-demande-diagnostic-simplifiee',
     shadow: 'none',
+    props: {
+      siretAidant: {type:'String', attribute: "siret-aidant"}
+    }
   }}
 />
 
 <script lang="ts">
-  import DemandeDiagnosticSimplifiee from '@anssi-portail/svelte/src/demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
+  import DemandeDiagnosticSimplifiee
+    from '@anssi-portail/svelte/src/demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
+
+  const { siretAidant }: { siretAidant?: string } = $props();
 </script>
 
 <div class="lab-anssi-demande-diagnostic-simplifiee">
@@ -14,6 +20,7 @@
     origine={window.location.hostname}
     urlBase={import.meta.env.VITE_API_URL}
     cacheLesLiensDeRetour={true}
+    {siretAidant}
   ></DemandeDiagnosticSimplifiee>
 </div>
 

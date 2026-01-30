@@ -1,5 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
+  import { clic } from '../directives/actions.svelte';
   import { validationChamp } from '../directives/validationChamp';
   import Alerte from '../ui/Alerte.svelte';
   import type { CouleurDeBadge } from '../ui/badge.type';
@@ -10,7 +11,6 @@
   import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import type { CorpsAPIDemandeAide } from './DonneesFormulaireDemandeAide';
-  import { clic } from '../directives/actions.svelte';
 
   const badges: { label: string; accent: CouleurDeBadge }[] = [
     {
@@ -26,6 +26,7 @@
   export let origine: string;
   export let urlBase: string = '';
   export let cacheLesLiensDeRetour = false;
+  export let siretAidant: string | undefined;
 
   let formulaire: Formulaire;
   let entite: Organisation;
@@ -50,11 +51,12 @@
           raisonSociale: entite.nom,
           siret: entite.siret,
         },
+        siretAidant,
         validationCGU: cguSontValidees,
       };
       const reponse = await axios.post(
         `${urlBase}/api/mon-aide-cyber/demandes-aide`,
-        corps
+        corps,
       );
       if (reponse.status === 201) {
         enSucces = true;

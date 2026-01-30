@@ -18,5 +18,6 @@ export type CorpsAPIDemandeAide = {
   };
   emailAidant?: string;
   identifiantAidant?: string;
+  siretAidant?: string;
   validationCGU: boolean;
 };
