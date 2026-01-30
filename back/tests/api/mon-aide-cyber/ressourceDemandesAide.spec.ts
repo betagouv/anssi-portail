@@ -16,9 +16,13 @@ const uneDemandeAide = (parametres?: {
   raisonSociale?: string;
   siret?: string;
   origine?: string;
+  siretAidant?: string;
 }): CorpsDemandeAide => ({
   ...(parametres?.origine && { origine: parametres.origine }),
   ...(parametres?.emailAidant && { emailAidant: parametres?.emailAidant }),
+  ...(parametres?.siretAidant && {
+    siretAidant: parametres?.siretAidant,
+  }),
   ...(parametres?.identifiantAidant && {
     identifiantAidant: parametres?.identifiantAidant,
   }),
@@ -50,28 +54,59 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
     assert.equal(reponse.status, 201);
   });
 
-  it('envoie la demande d’aide à MAC', async () => {
-    let demandeAideEnvoyee: DemandeAide | undefined = undefined;
-    adaptateurMonAideCyber.creeDemandeAide = async (
-      demandeAide: DemandeAide
-    ) => {
-      demandeAideEnvoyee = demandeAide;
-    };
+  describe('envoie la demande d’aide à MAC', () => {
+    it('pour une demande sans aidant', async () => {
+      let demandeAideEnvoyee: DemandeAide | undefined = undefined;
+      adaptateurMonAideCyber.creeDemandeAide = async (
+        demandeAide: DemandeAide
+      ) => {
+        demandeAideEnvoyee = demandeAide;
+      };
 
-    await request(serveur)
-      .post('/api/mon-aide-cyber/demandes-aide')
-      .send(
-        uneDemandeAide({ email: 'durant@mail.fr', siret: '09876543214321' })
-      );
+      await request(serveur)
+        .post('/api/mon-aide-cyber/demandes-aide')
+        .send(
+          uneDemandeAide({ email: 'durant@mail.fr', siret: '09876543214321' })
+        );
 
-    assert.deepEqual(demandeAideEnvoyee, {
-      entiteAidee: {
-        email: 'durant@mail.fr',
-        departement: '12',
-        raisonSociale: 'Une raison sociale',
-        siret: '09876543214321',
-      },
-      aidant: {},
+      assert.deepEqual(demandeAideEnvoyee, {
+        entiteAidee: {
+          email: 'durant@mail.fr',
+          departement: '12',
+          raisonSociale: 'Une raison sociale',
+          siret: '09876543214321',
+        },
+        aidant: {},
+      });
+    });
+
+    it("pour une demande avec siret de l'aidant", async () => {
+      let demandeAideEnvoyee: DemandeAide | undefined = undefined;
+      adaptateurMonAideCyber.creeDemandeAide = async (
+        demandeAide: DemandeAide
+      ) => {
+        demandeAideEnvoyee = demandeAide;
+      };
+
+      await request(serveur)
+        .post('/api/mon-aide-cyber/demandes-aide')
+        .send(
+          uneDemandeAide({
+            email: 'durant@mail.fr',
+            siret: '09876543214321',
+            siretAidant: '12345678910234',
+          })
+        );
+
+      assert.deepEqual(demandeAideEnvoyee, {
+        entiteAidee: {
+          email: 'durant@mail.fr',
+          departement: '12',
+          raisonSociale: 'Une raison sociale',
+          siret: '09876543214321',
+        },
+        aidant: { siret: '12345678910234' },
+      });
     });
   });
 
@@ -313,6 +348,27 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
       assert.equal(
         await reponse.body.erreur,
         'Veuillez saisir un identifiant Aidant cyber valide.'
+      );
+    });
+
+    it('pour la validation du SIRET Aidant', async () => {
+      const reponse = await request(serveur)
+        .post('/api/mon-aide-cyber/demandes-aide')
+        .send({
+          validationCGU: true,
+          entiteAidee: {
+            departement: '33',
+            raisonSociale: 'beta-gouv',
+            email: 'jean.dupont@mail.fr',
+            siret: '12345678901234',
+          },
+          siretAidant: '01234',
+        });
+
+      assert.equal(reponse.status, 400);
+      assert.equal(
+        await reponse.body.erreur,
+        'Veuillez saisir un SIRET Aidant cyber valide.'
       );
     });
 

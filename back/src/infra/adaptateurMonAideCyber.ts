@@ -12,6 +12,7 @@ export type DemandeAide = {
   aidant: {
     email?: string;
     identifiant?: string;
+    siret?: string;
   };
 };
 
@@ -30,7 +31,11 @@ const adaptateurMonAideCyber = (): AdaptateurMonAideCyber => {
   }: DemandeAide) => {
     try {
       const { email, raisonSociale, departement, siret } = entiteAidee;
-      const { email: emailAidant, identifiant: identifiantAidant } = aidant;
+      const {
+        email: emailAidant,
+        identifiant: identifiantAidant,
+        siret: siretAidant,
+      } = aidant;
       const demandeMAC = {
         ...(origine && { origine }),
         cguValidees: true,
@@ -40,6 +45,7 @@ const adaptateurMonAideCyber = (): AdaptateurMonAideCyber => {
         siret,
         ...(emailAidant && { relationUtilisateur: emailAidant }),
         ...(identifiantAidant && { identifiantAidant }),
+        ...(siretAidant && { siretAidant }),
       };
       await axios.post(
         `${process.env.MON_AIDE_CYBER_URL_BASE}/api/demandes/etre-aide`,
