@@ -1,25 +1,25 @@
-import { beforeEach, describe, it } from 'node:test';
-import { Request, Response } from 'express';
-import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
 import assert from 'assert';
+import { NextFunction, Request, Response } from 'express';
+import { Context } from 'express-validator/lib/context';
+import { JsonWebTokenError } from 'jsonwebtoken';
 import { createRequest, createResponse } from 'node-mocks-http';
 import { OutgoingHttpHeaders } from 'node:http';
-import { Context } from 'express-validator/lib/context';
+import { beforeEach, describe, it } from 'node:test';
+import { join } from 'path';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
+import { FournisseurChemin } from '../../src/api/fournisseurChemin';
+import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
+import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import { Utilisateur } from '../../src/metier/utilisateur';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import {
   fauxAdaptateurEnvironnement,
   fauxAdaptateurHachage,
   fauxAdaptateurJWT,
   fauxFournisseurDeChemin,
 } from './fauxObjets';
-import { JsonWebTokenError } from 'jsonwebtoken';
-import { join } from 'path';
-import { FournisseurChemin } from '../../src/api/fournisseurChemin';
 import { jeanneDupont } from './objetsPretsALEmploi';
-import { Utilisateur } from '../../src/metier/utilisateur';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
-import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 
 describe('Le middleware', () => {
   let requete: Request & {
@@ -101,11 +101,55 @@ describe('Le middleware', () => {
   });
 
   describe("sur demande d'interdiction de mise en cache", () => {
-    it('interdit la mise en cache', async () => {
-      let headers: OutgoingHttpHeaders = {};
-      const suite = () => {
+    let headers: OutgoingHttpHeaders = {};
+    let suite: NextFunction;
+    beforeEach(() => {
+      requete.url = '/visas/un-visa.pdf';
+      suite = () => {
         headers = reponse.getHeaders();
       };
+    });
+    it('interdit la mise en cache par defaut', async () => {
+      await middleware.interdisLaMiseEnCache(requete, reponse, suite);
+
+      assert.equal(
+        headers['cache-control'],
+        'no-store, no-cache, must-revalidate, proxy-revalidate'
+      );
+      assert.equal(headers.pragma, 'no-cache');
+      assert.equal(headers.expires, '0');
+      assert.equal(headers['surrogate-control'], 'no-store');
+    });
+
+    it('autorise la mise en cache sur les routes identifiées', async () => {
+      adaptateurEnvironnement.serveur = () => ({
+        ipAutorisees: () => false,
+        maxRequetesParMinute: () => 0,
+        trustProxy: () => 0,
+        motifsDeRoutesMisesEnCache: () => [/^\/assets\//, /^\/visas\//],
+      });
+
+      await middleware.interdisLaMiseEnCache(requete, reponse, suite);
+
+      assert.equal(
+        headers['cache-control'],
+        'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate'
+      );
+      assert.equal(headers['expires'], '3600');
+      assert.equal(
+        headers['surrogate-control'],
+        'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate'
+      );
+    });
+
+    it('interdit la mise en cache sur les routes non explicitement identifiées', async () => {
+      adaptateurEnvironnement.serveur = () => ({
+        ipAutorisees: () => false,
+        maxRequetesParMinute: () => 0,
+        trustProxy: () => 0,
+        motifsDeRoutesMisesEnCache: () => [/^\/assets\//, /^\/guides\//],
+      });
+
       await middleware.interdisLaMiseEnCache(requete, reponse, suite);
 
       assert.equal(

@@ -11,6 +11,7 @@ type AdaptateurEnvironnement = {
     trustProxy: () => string | number;
     maxRequetesParMinute: () => number;
     ipAutorisees: () => false | string[];
+    motifsDeRoutesMisesEnCache: () => RegExp[];
   };
   sentry: () => {
     dsn: () => string | undefined;
@@ -96,6 +97,10 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     },
     ipAutorisees: () =>
       process.env.SERVEUR_ADRESSES_IP_AUTORISEES?.split(',') ?? false,
+    motifsDeRoutesMisesEnCache: () =>
+      (process.env.SERVEUR_ROUTES_CACHABLES?.split(',') ?? []).map(
+        (expression) => new RegExp(expression)
+      ),
   }),
   sentry: () => ({
     dsn: () => process.env.SENTRY_DSN,
