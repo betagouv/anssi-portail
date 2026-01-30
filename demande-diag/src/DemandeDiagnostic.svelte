@@ -1,6 +1,6 @@
 <svelte:options
   customElement={{
-    tag: 'lab-anssi-demande-diagnostic-simplifiee',
+    tag: 'lab-anssi-demande-diagnostic',
     shadow: 'none',
     props: {
       siretAidant: {type:'String', attribute: "siret-aidant"}
