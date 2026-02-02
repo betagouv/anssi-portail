@@ -5,7 +5,7 @@
     format: 'banniere' | 'heros' | 'heros-centre' | 'details';
     theme: 'sombre' | 'clair'; // inversé / clair
     filAriane?: Snippet;
-    cacheFilAriane: boolean;
+    cacheFilAriane?: boolean;
     lienRetour?: Snippet;
     tags?: Snippet;
     cacheTags: boolean;
@@ -25,19 +25,19 @@
     format,
     theme = 'sombre',
     filAriane,
-    cacheFilAriane,
+    cacheFilAriane = false,
     lienRetour,
     tags,
-    cacheTags,
+    cacheTags = false,
     preambule,
     titre,
     description,
     actions,
-    cacheActions,
+    cacheActions = false,
     illustration,
     illustrationSource,
     illustrationAlt,
-    cacheIllustration,
+    cacheIllustration = false,
     children,
   }: Props = $props();
 
@@ -65,24 +65,31 @@
         {@render lienRetour()}
       </div>
     {/if}
-    {#if !cacheTags && tags}
-      <div class={['tags']}>
-        {@render tags()}
-      </div>
-    {/if}
-    <hgroup>
-      {#if preambule}
-        {@render preambule({ titre, description })}
-      {:else}
-        <h1 class={[styleTitreH1]}>{titre}</h1>
-        <p class={['texte-chapo-xl']}>{description}</p>
+    <div class="texte">
+      {#if !cacheTags && tags}
+        <div class={['tags']}>
+          {@render tags()}
+        </div>
       {/if}
-    </hgroup>
-    {#if !cacheActions && actions}
-      <div class={['actions']}>
-        {@render actions()}
-      </div>
-    {/if}
+      <hgroup>
+        {#if preambule}
+          {@render preambule({ titre, description })}
+        {:else}
+          <h1 class={[styleTitreH1]}>{titre}</h1>
+          <p class={['texte-chapo-xl']}>{description}</p>
+        {/if}
+      </hgroup>
+      {#if !cacheActions && actions}
+        <div class={['actions']}>
+          {@render actions()}
+        </div>
+      {/if}
+      {#if !cacheMentions && children}
+        <div class={['mentions']}>
+          {@render children()}
+        </div>
+      {/if}
+    </div>
     {#if !cacheIllustration}
       <picture class={['illustration']}>
         {#if illustration}
@@ -94,11 +101,6 @@
           <img src={illustrationSource} alt={illustrationAlt} />
         {/if}
       </picture>
-    {/if}
-    {#if !cacheMentions && children}
-      <div class={['mentions']}>
-        {@render children()}
-      </div>
     {/if}
   </div>
 </section>
@@ -134,11 +136,8 @@
       gap: 0 1.5rem;
       grid-template-areas:
         'haut'
-        'tags'
-        'titre'
-        'actions'
-        'illustration'
-        'mentions';
+        'texte'
+        'illustration';
       width: clamp(288px, calc(100% - var(--gouttiere) * 2), 75rem);
 
       .fil-ariane,
@@ -146,24 +145,21 @@
         grid-area: haut;
       }
 
-      .tags {
-        grid-area: tags;
-      }
-
-      hgroup {
-        grid-area: titre;
-      }
-
-      .actions {
-        grid-area: actions;
+      .texte {
+        align-self: center;
+        grid-area: texte;
       }
 
       .illustration {
+        align-self: center;
+        aspect-ratio: 16 / 9;
+        display: grid;
         grid-area: illustration;
-      }
 
-      .mentions {
-        grid-area: mentions;
+        img {
+          align-self: center;
+          justify-self: center;
+        }
       }
 
       hgroup {
@@ -203,12 +199,9 @@
       @include a-partir-de(lg) {
         grid-template-areas:
           'haut haut'
-          'tags illustration'
-          'titre illustration'
-          'actions illustration'
-          'mentions illustration';
+          'texte illustration';
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto 1fr auto auto;
+        grid-template-rows: auto 1fr;
       }
     }
   }
@@ -247,6 +240,12 @@
 
         hgroup {
           margin: 1.5rem 0 0.5rem;
+        }
+
+        @include a-partir-de(lg) {
+          hgroup {
+            margin-top: 0;
+          }
         }
       }
 
