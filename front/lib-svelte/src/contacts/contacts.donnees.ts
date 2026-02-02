@@ -22,7 +22,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
     },
     COT: {
       nom: 'Véronique BRUNET / Françoise MARMOT',
-      email: 'bourgogne-franche-comt@ssi.gouv.fr',
+      email: 'bourgogne-franche-comte@ssi.gouv.fr',
     },
     designation: 'région',
   },
