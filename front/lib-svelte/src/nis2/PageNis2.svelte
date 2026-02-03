@@ -4,6 +4,7 @@
   import Heros from '../ui/Heros.svelte';
   import Onglets from './Onglets.svelte';
   import Presentation from './Presentation.svelte';
+  import Solutions from './Solutions.svelte';
 
   let estBureau = $state(false);
   onMount(() => {
@@ -64,7 +65,7 @@
 {#if ongletActif === 0}
   <Presentation />
 {:else if ongletActif === 1}
-  <!-- <Solutions /> -->
+   <Solutions />
 {:else if ongletActif === 2}
   <!-- <div></div> -->
 {/if}
