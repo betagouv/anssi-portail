@@ -72,7 +72,7 @@
     <p>
       Deux types d’entités relevant des secteurs précités sont concernées par la
       directive NIS2, définies, selon leur degré de criticité, leur taille et
-      leur chiffre d'affaires (pour les entreprises) :
+      leur chiffre d'affaires (pour les entreprises)&nbsp;:
     </p>
     <ul>
       <li>
