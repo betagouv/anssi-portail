@@ -6,12 +6,14 @@
   export let urlBase: string = '';
   export let cacheLesLiensDeRetour = false;
   export let siretAidant: string | undefined = undefined;
+  export let titre: string =
+    'Protégez rapidement votre organisation des cyberattaques.';
 </script>
 
 <div class="demande-diagnostic">
   <div class="explications">
     <hgroup>
-      <h2>Protégez rapidement votre organisation des cyberattaques.</h2>
+      <h2>{titre}</h2>
       <p>
         Profitez d’un premier diagnostic cyber gratuit accompagné par un Aidant
         cyber et recevez 6 recommandations prioritaires à mettre en place pour
@@ -30,7 +32,12 @@
   </div>
 
   <div class="formulaire">
-    <FormulaireDemandeSimplifiee {origine} {urlBase} {cacheLesLiensDeRetour} {siretAidant} />
+    <FormulaireDemandeSimplifiee
+      {origine}
+      {urlBase}
+      {cacheLesLiensDeRetour}
+      {siretAidant}
+    />
   </div>
   <details>
     <summary>
