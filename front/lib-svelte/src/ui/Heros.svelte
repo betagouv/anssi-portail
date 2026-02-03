@@ -248,13 +248,6 @@
           }
         }
       }
-
-      .fil-ariane,
-      .lien-retour {
-        + hgroup {
-          margin: 1.5rem 0 0;
-        }
-      }
     }
   }
 
@@ -262,36 +255,14 @@
     .contenu-section {
       padding: 16px var(--gouttiere) 0;
 
-      .fil-ariane,
-      .lien-retour {
-        + hgroup {
-          margin: 1.5rem 0 0;
-        }
-      }
-
       .actions {
         flex-direction: row;
         min-height: 2.5rem;
-
-        + .illustration {
-          margin: 3rem 0 0;
-        }
       }
 
       @include a-partir-de(md) {
-        .fil-ariane,
-        .lien-retour {
-          + hgroup {
-            margin-top: 4.5rem;
-          }
-        }
-
         .actions {
           margin-bottom: 4.5rem;
-
-          + .illustration {
-            margin: 0;
-          }
         }
       }
     }

@@ -16,7 +16,7 @@
     },
 
     {
-      titre: "Enregistrer votre entité auprès de l'ANSSI",
+      titre: 'Enregistrer votre entité auprès de l\'ANSSI',
       description:
         'Accédez dès à présent au service de pré-enregistrement en ligne.',
       lien: {
@@ -35,7 +35,7 @@
         'Mettez en oeuvre les exigences de sécurité issues de la directive pour réduire vos risques cyber et signalez à l’ANSSI vos incidents de sécurité. ',
       lien: {
         href: '#',
-        texte: "Découvrir les solutions pour m'aider",
+        texte: 'Découvrir les solutions pour m\'aider',
         target: '_self',
       },
       illustration: {
@@ -53,16 +53,13 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
+  @use '../../../assets/styles/grille' as *;
 
-  .marelle {
-    padding-block: 72px;
-    background: #f6f6f6;
-
-    lab-anssi-marelle {
-      justify-self: center;
-      @include a-partir-de(lg) {
-        max-width: taille-pour-colonnes(10);
-      }
+  lab-anssi-marelle {
+    margin-inline: auto;
+    display: block;
+    @include a-partir-de(lg) {
+      max-width: taille-pour-colonnes(10);
     }
   }
 </style>

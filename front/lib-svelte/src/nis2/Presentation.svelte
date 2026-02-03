@@ -48,6 +48,7 @@
 
   .marelle {
     background-color: #f6f6f6;
+    padding-block: 72px;
   }
 
   .diagnostic {
