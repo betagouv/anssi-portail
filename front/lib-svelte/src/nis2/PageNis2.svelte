@@ -4,6 +4,7 @@
   import Heros from '../ui/Heros.svelte';
   import Accordeon from './Accordeon.svelte';
   import Marelle from './Marelle.svelte';
+  import DemandeDiagnosticSimplifiee from '../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
 
   let estBureau = false;
   onMount(() => {
@@ -68,6 +69,10 @@
   <Marelle />
 </dsfr-container>
 
+<dsfr-container class="diagnostic">
+  <DemandeDiagnosticSimplifiee origine="directive-nis2" />
+</dsfr-container>
+
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
   @use '../../../assets/styles/grille' as *;
@@ -81,5 +86,9 @@
 
   .marelle {
     background-color: #f6f6f6;
+  }
+
+  .diagnostic {
+    padding: 4.5rem 0;
   }
 </style>
