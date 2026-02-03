@@ -40,7 +40,7 @@
   @use '../../../assets/styles/grille' as *;
 
   .introduction {
-    justify-self: center;
+    margin-inline: auto;
     @include a-partir-de(lg) {
       max-width: taille-pour-colonnes(8);
     }
