@@ -2,11 +2,10 @@
   import { onMount } from 'svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
-  import Accordeon from './Accordeon.svelte';
-  import Marelle from './Marelle.svelte';
-  import DemandeDiagnosticSimplifiee from '../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
+  import Onglets from './Onglets.svelte';
+  import Presentation from './Presentation.svelte';
 
-  let estBureau = false;
+  let estBureau = $state(false);
   onMount(() => {
     const mql = window.matchMedia('(min-width: 992px)');
     mql.addEventListener('change', (e: MediaQueryListEvent) => {
@@ -14,6 +13,22 @@
     });
     estBureau = mql.matches;
   });
+
+  const onglets = [
+    {
+      label: 'La directive NIS 2',
+      fragment: '#presentation',
+    },
+    {
+      label: 'Solutions pour vous accompagner',
+      fragment: '#solutions',
+    },
+    {
+      label: 'Documentation',
+      fragment: '#documentation',
+    },
+  ];
+  let ongletActif = $state(0);
 </script>
 
 <Heros
@@ -44,51 +59,15 @@
   {/snippet}
 </Heros>
 
-<dsfr-container>
-  <div class="introduction">
-    <h2>Qu’est-ce que NIS&nbsp;2&nbsp;?</h2>
-    <p>
-      Entrée en vigueur en octobre 2024, la directive NIS&nbsp;2 (sécurité des
-      réseaux et des systèmes d'Information) vise à renforcer le niveau de
-      cybersécurité des tissus économique et administratif des pays membres de
-      l'UE.
-    </p>
-    <p>
-      La transposition de la directive NIS&nbsp;2 en France est en cours. En
-      attendant la publication de l’ensemble des textes de transposition, et
-      compte tenu de la menace actuelle, les futures entités essentielles et
-      importantes sont invitées à s’engager dès à présent dans une démarche
-      visant à renforcer leur niveau de sécurité.
-    </p>
+<Onglets {onglets} bind:ongletActif />
 
-    <Accordeon />
-  </div>
-</dsfr-container>
-
-<dsfr-container class="marelle">
-  <Marelle />
-</dsfr-container>
-
-<dsfr-container class="diagnostic">
-  <DemandeDiagnosticSimplifiee origine="directive-nis2" />
-</dsfr-container>
+{#if ongletActif === 0}
+  <Presentation />
+{:else if ongletActif === 1}
+  <!-- <Solutions /> -->
+{:else if ongletActif === 2}
+  <!-- <div></div> -->
+{/if}
 
 <style lang="scss">
-  @use '../../../assets/styles/responsive' as *;
-  @use '../../../assets/styles/grille' as *;
-
-  .introduction {
-    justify-self: center;
-    @include a-partir-de(lg) {
-      max-width: taille-pour-colonnes(8);
-    }
-  }
-
-  .marelle {
-    background-color: #f6f6f6;
-  }
-
-  .diagnostic {
-    padding: 4.5rem 0;
-  }
 </style>
