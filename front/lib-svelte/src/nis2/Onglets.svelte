@@ -55,7 +55,7 @@
     aria-expanded={open}
     use:clic={surLeClicDeLEntete}
   >
-    <span>Naviguer dans CyberEnJeux</span>
+    <span>Naviguer</span>
   </button>
   <div class="fr-text onglets" id="onglets">
     <ol>
@@ -98,6 +98,7 @@
     margin-inline: -1rem;
     font-size: 1rem;
     line-height: 1.5rem;
+    margin-bottom: 48px;
 
     .entete {
       appearance: none;
