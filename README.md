@@ -8,8 +8,8 @@ Ce site est construit avec Jekyll.
 
 ### Démarrage
 
-> N.B. : Jekyll est construit en Ruby.  
-> Nous ne sommes pas développeurs Ruby et nous découvrons son écosystème.  
+> N.B. : Jekyll est construit en Ruby.
+> Nous ne sommes pas développeurs Ruby et nous découvrons son écosystème.
 > Il se peut que les instructions ci-dessous semblent mauvaises à une personne connaissant bien Ruby 🙏
 
 - Installer les [pré-requis Jekyll](https://jekyllrb.com/docs/#prerequisites) (suivre les pages détaillées de prérequis pour chaque OS)
@@ -17,6 +17,9 @@ Ce site est construit avec Jekyll.
 - Installer `bundler`
 
 ```shell
+$ export GEM_HOME="$HOME/gems/" # Pointer vers un dossier sur lequel vous avez des droits en écriture
+
+# Ne pas installer avec `sudo`
 $ gem install bundler -V
 ```
 
@@ -49,7 +52,15 @@ $ pnpm install --frozen-lockfile
 $ pnpm dev
 ```
 
-- Lancer la création des secrets de hachage avec la console d'administration (procédure sauvegardeLesEmpreintesDesSecretsDeHachage()) puis relancer un :
+- Lancer la création des secrets de hachage dans un nouveau terminal :
+
+```shell
+pnpm admin:dev
+
+> await admin.sauvegardeLesEmpreintesDesSecretsDeHachage()
+```
+
+Ensuite relancer un :
 
 ```shell
 $ pnpm dev
@@ -59,7 +70,7 @@ $ pnpm dev
 
 ## Le build et la PROD
 
-On utilise un unique `Dockerfile` pour le build via CI/CD et l'hébergement sur notre PaaS.  
+On utilise un unique `Dockerfile` pour le build via CI/CD et l'hébergement sur notre PaaS.
 Le `Dockerfile` unique est la solution qui semble la plus simple.
 Certaines variables d'environnement sont nécessaires au moment de la construction du site statique (avec Jekyll).
 Pour ce faire, ces variables sont passées via les `--build-arg` par CleverCloud. On peut donc les utiliser dans notre Dockerfile.
