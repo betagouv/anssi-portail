@@ -1,9 +1,12 @@
 <script lang="ts">
+  import CarteItem from '../catalogue/CarteItem.svelte';
+  import type { ItemCyber } from '../catalogue/Catalogue.types';
+
   export let id: string;
   export let fondAlternatif: boolean;
   export let titre: string;
   export let explication: string;
-  export let items: string[];
+  export let items: ItemCyber[];
 </script>
 
 <dsfr-container {id} class="action" class:fond-alternatif={fondAlternatif}>
@@ -18,7 +21,9 @@
       />
     </div>
     <h4>Ressources</h4>
-    {#each items as idItem (idItem)}{/each}
+    {#each items as item (item.id)}
+      <CarteItem {item}/>
+    {/each}
   </div>
 </dsfr-container>
 
@@ -64,7 +69,7 @@
       }
     }
 
-    .carte {
+    :global(.carte) {
       width: auto;
       margin-bottom: 24px;
     }
