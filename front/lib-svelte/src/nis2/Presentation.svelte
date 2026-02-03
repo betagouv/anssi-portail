@@ -31,7 +31,7 @@
   </dsfr-container>
 
   <dsfr-container class="diagnostic">
-    <DemandeDiagnosticSimplifiee origine="directive-nis2" />
+    <DemandeDiagnosticSimplifiee origine="directive-nis2" titre="Commencez à agir pour protéger  votre organisation des cyberattaques"/>
   </dsfr-container>
 </div>
 
