@@ -230,28 +230,6 @@
       max-width: taille-pour-colonnes(10);
       margin-inline: auto;
     }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    lab-anssi-carrousel-tuiles {
-      margin-top: 24px;
-      min-width: 794px;
-
-      dsfr-tile {
-        flex: 1 0 254px;
-        scroll-snap-align: center;
-        @include a-partir-de(lg) {
-          flex: 1 0 241px;
-        }
-        img {
-          width: 80px;
-          height: 80px;
-        }
-      }
-    }
   }
 }
 
