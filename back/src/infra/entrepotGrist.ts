@@ -8,7 +8,7 @@ export type ReponseGrist<TYPE_DOCUMENT> = {
 type Filtre = Record<string, unknown[]>;
 
 export class EntrepotGrist<TYPE_DOCUMENT> {
-  private cache: Cache<Promise<ReponseGrist<TYPE_DOCUMENT>>>;
+  private readonly cache: Cache<Promise<ReponseGrist<TYPE_DOCUMENT>>>;
 
   constructor(
     private readonly clientHttp: ClientHttp<ReponseGrist<TYPE_DOCUMENT>>,

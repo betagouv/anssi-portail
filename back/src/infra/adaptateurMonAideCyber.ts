@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { adaptateurMonAideCyberVide } from './adaptateurMonAideCyberVide';
+import { Cache } from './cache';
 
 export type DemandeAide = {
   origine?: string;
@@ -23,12 +24,13 @@ export interface AdaptateurMonAideCyber {
   statistiques: () => Promise<StatistiquesMonAideCyber>;
 }
 
-const adaptateurMonAideCyber = (): AdaptateurMonAideCyber => {
-  const creeDemandeAide = async ({
-    entiteAidee,
-    aidant,
-    origine,
-  }: DemandeAide) => {
+class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
+  private cacheStatistiques: Cache<Promise<StatistiquesMonAideCyber>>;
+  constructor() {
+    this.cacheStatistiques = new Cache({ ttl: 300 });
+  }
+
+  async creeDemandeAide({ entiteAidee, aidant, origine }: DemandeAide) {
     try {
       const { email, raisonSociale, departement, siret } = entiteAidee;
       const {
@@ -62,31 +64,18 @@ const adaptateurMonAideCyber = (): AdaptateurMonAideCyber => {
       }
       throw e;
     }
-  };
+  }
 
-  const statistiques = async (): Promise<StatistiquesMonAideCyber> => {
-    try {
-      const reponse = await axios.get(
-        `${process.env.MON_AIDE_CYBER_URL_BASE}/api/statistiques`
-      );
+  async statistiques(): Promise<StatistiquesMonAideCyber> {
+    const url = `${process.env.MON_AIDE_CYBER_URL_BASE}/api/statistiques`;
+    return this.cacheStatistiques.get(url, async () => {
+      const reponse = await axios.get(url.toString());
       return { nombreDiagnostics: reponse.data.nombreDiagnostics };
-    } catch (e: unknown | Error) {
-      if (
-        axios.isAxiosError(e) &&
-        e.response &&
-        e.response.status >= 400 &&
-        e.response.status < 500
-      ) {
-        throw new Error(e.response.data.message);
-      }
-      throw e;
-    }
-  };
-
-  return { creeDemandeAide, statistiques };
-};
+    });
+  }
+}
 
 export const fabriqueAdaptateurMonAideCyber = () =>
   process.env.MON_AIDE_CYBER_URL_BASE
-    ? adaptateurMonAideCyber()
+    ? new AdaptateurHttpMonAideCyber()
     : adaptateurMonAideCyberVide();
