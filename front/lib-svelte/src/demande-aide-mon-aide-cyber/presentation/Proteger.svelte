@@ -1,4 +1,5 @@
 <script lang="ts">
+  import CarrouselDesInterlocuteurs from '../../interlocuteurs/CarrouselDesInterlocuteurs.svelte';
   import DemandeDiagnosticSimplifiee from '../DemandeDiagnosticSimplifiee.svelte';
 </script>
 
@@ -15,8 +16,13 @@
       controls
     ></video>
   </div>
+
   <div class="demande">
     <DemandeDiagnosticSimplifiee origine="landing-diag" />
+  </div>
+
+  <div class="interlocuteurs">
+    <CarrouselDesInterlocuteurs />
   </div>
 </dsfr-container>
 
@@ -48,5 +54,12 @@
 
   .demande {
     padding-block: 40px;
+  }
+
+  .interlocuteurs {
+    margin-inline: auto;
+    @include a-partir-de(lg) {
+      max-width: taille-pour-colonnes(10);
+    }
   }
 </style>
