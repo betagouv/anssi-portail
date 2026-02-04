@@ -1,13 +1,14 @@
 <script lang="ts">
   import type { ItemCyber } from '../catalogue/Catalogue.types';
   import ActionParcoursAvecItems from './ActionParcoursAvecItems.svelte';
+  import ControleSegmente from './ControleSegmente.svelte';
 
   export let itemsCyber: ItemCyber[];
 
   const versItemsCyber = (idsItem: string[]) =>
     idsItem
       .map((idItem: string) =>
-        itemsCyber.find((itemCyber) => itemCyber.id === idItem),
+        itemsCyber.find((itemCyber) => itemCyber.id === idItem)
       )
       .filter((i) => i !== undefined);
 
@@ -22,43 +23,37 @@
       id: 'se-declarer',
       titre: 'Se déclarer',
       explication:
-        'Vérifiez si votre entité est concernée et procédez son enregistrement auprès de l\'ANSSI.',
+        "Vérifiez si votre entité est concernée et procédez son enregistrement auprès de l'ANSSI.",
       items: versItemsCyber(['/services/NIS2']),
     },
     {
       id: 'reduire-risques',
       titre: 'Réduire les risques',
       explication: 'Mettez en place des mesures de sécurité adaptées.',
-      items: versItemsCyber(['/services/mon-aide-cyber',
+      items: versItemsCyber([
+        '/services/mon-aide-cyber',
         '/services/silene',
         '/services/ads',
         '/services/conseil-technique',
-        '/ressources/revue-presse']),
+        '/ressources/revue-presse',
+      ]),
     },
     {
       id: 'se-preparer',
       titre: 'Se préparer',
       explication: 'Signalez à l’ANSSI vos incidents de sécurité.',
-      items: versItemsCyber(["/services/assistance-reponse-incidents"]),
+      items: versItemsCyber(['/services/assistance-reponse-incidents']),
     },
     {
       id: 'declarer-incident',
       titre: 'Déclarer un incident',
       explication: 'Signalez à l’ANSSI vos incidents de sécurité.',
-      items: versItemsCyber(["/services/assistance-reponse-incidents"]),
+      items: versItemsCyber(['/services/assistance-reponse-incidents']),
     },
   ];
 </script>
 
-<dsfr-container class="sommaire">
-  <div class="controle-segmente">
-    {#each actions as action, index (action.id)}
-      <a href="#{action.id}" class="bouton-segmente" class:actif={index === 0}
-      >{action.titre}</a
-      >
-    {/each}
-  </div>
-</dsfr-container>
+<ControleSegmente elements={actions}></ControleSegmente>
 
 {#each actions as action, index (action.id)}
   <ActionParcoursAvecItems
@@ -71,12 +66,4 @@
 {/each}
 
 <style lang="scss">
-  .sommaire {
-    padding-block: 16px;
-    overflow: auto;
-    background: white;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-  }
 </style>
