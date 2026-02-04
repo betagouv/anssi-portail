@@ -98,7 +98,7 @@
     margin-inline: -1rem;
     font-size: 1rem;
     line-height: 1.5rem;
-    margin-bottom: 48px;
+    margin-bottom: 32px;
 
     .entete {
       appearance: none;
@@ -160,7 +160,8 @@
         display,
         max-height 0.2s ease;
       transition-behavior: allow-discrete;
-      margin-bottom: 48px;
+      padding-top: 1rem;
+      margin-bottom: 32px;
     }
 
     &.open {
