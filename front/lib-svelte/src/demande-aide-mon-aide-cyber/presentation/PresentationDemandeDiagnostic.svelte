@@ -2,6 +2,8 @@
   import Onglets from '../../nis2/Onglets.svelte';
   import FilAriane from '../../ui/FilAriane.svelte';
   import Heros from '../../ui/Heros.svelte';
+  import Proteger from './Proteger.svelte';
+  import Solutions from './Solutions.svelte';
 
   const onglets = [
     {
@@ -33,3 +35,9 @@
 </Heros>
 
 <Onglets {onglets} bind:ongletActif />
+
+{#if ongletActif === 0}
+  <Proteger />
+{:else}
+  <Solutions />
+{/if}
