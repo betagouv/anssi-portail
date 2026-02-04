@@ -8,7 +8,7 @@
   const versItemsCyber = (idsItem: string[]) =>
     idsItem
       .map((idItem: string) =>
-        itemsCyber.find((itemCyber) => itemCyber.id === idItem)
+        itemsCyber.find((itemCyber) => itemCyber.id === idItem),
       )
       .filter((i) => i !== undefined);
 
@@ -23,7 +23,7 @@
       id: 'se-declarer',
       titre: 'Se déclarer',
       explication:
-        "Vérifiez si votre entité est concernée et procédez son enregistrement auprès de l'ANSSI.",
+        'Vérifiez si votre entité est concernée et procédez son enregistrement auprès de l\'ANSSI.',
       items: versItemsCyber(['/services/NIS2']),
     },
     {
@@ -53,17 +53,17 @@
   ];
 </script>
 
-<ControleSegmente elements={actions}></ControleSegmente>
-
-{#each actions as action, index (action.id)}
-  <ActionParcoursAvecItems
-    id={action.id}
-    titre={action.titre}
-    explication={action.explication}
-    items={action.items}
-    fondAlternatif={index % 2 === 1}
-  ></ActionParcoursAvecItems>
-{/each}
+<ControleSegmente elements={actions} selecteurSections=".action">
+  {#each actions as action, index (action.id)}
+    <ActionParcoursAvecItems
+      id={action.id}
+      titre={action.titre}
+      explication={action.explication}
+      items={action.items}
+      fondAlternatif={index % 2 === 1}
+    ></ActionParcoursAvecItems>
+  {/each}
+</ControleSegmente>
 
 <style lang="scss">
 </style>
