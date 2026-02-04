@@ -1,4 +1,6 @@
-<script lang="ts"></script>
+<script lang="ts">
+  import DemandeDiagnosticSimplifiee from '../DemandeDiagnosticSimplifiee.svelte';
+</script>
 
 <dsfr-container>
   <div class="introduction">
@@ -12,6 +14,9 @@
       src="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.mp4"
       controls
     ></video>
+  </div>
+  <div class="demande">
+    <DemandeDiagnosticSimplifiee origine="landing-diag" />
   </div>
 </dsfr-container>
 
@@ -39,5 +44,9 @@
     video {
       width: 100%;
     }
+  }
+
+  .demande {
+    padding-block: 40px;
   }
 </style>
