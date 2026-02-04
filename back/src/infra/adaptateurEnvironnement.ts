@@ -223,7 +223,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     url: () => process.env.MON_AIDE_CYBER_URL_BASE ?? '',
     dureeCacheStatistiquesEnSecondes: () => {
       const dureeEnChaine =
-        process.env.MON_AIDE_DUREE_CACHE_STATISTIQUES_EN_SECONDES;
+        process.env.MON_AIDE_CYBER_DUREE_CACHE_STATISTIQUES_EN_SECONDES;
       const dureeEnNombre = Number(dureeEnChaine);
       return Number.isNaN(dureeEnNombre) ? CINQ_MINUTES : dureeEnNombre;
     },
