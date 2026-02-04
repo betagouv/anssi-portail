@@ -157,8 +157,13 @@
         grid-area: illustration;
 
         img {
+          max-width: 100%;
           align-self: center;
           justify-self: center;
+
+          @include a-partir-de(md) {
+            max-width: none;
+          }
         }
       }
 
