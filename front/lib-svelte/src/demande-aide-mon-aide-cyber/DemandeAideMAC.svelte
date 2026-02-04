@@ -10,6 +10,7 @@
   } from './DonneesFormulaireDemandeAide';
   import FoireAuxQuestions from './FoireAuxQuestions.svelte';
   import FormulaireDemandeAide from './FormulaireDemandeAide.svelte';
+  import IllustrationCyberDepart from './IllustrationCyberDepart.svelte';
 
   let formulaireDemandeAide: FormulaireDemandeAide;
   let enSucces: boolean = false;
@@ -91,7 +92,11 @@
 <DialogueSortieDiagnostic bind:this={dialogueSortie} />
 
 <article class="page-demande-aide-mon-aide-cyber">
+
   <section class="encart-presentation">
+    <div class="illustration">
+      <IllustrationCyberDepart nombreOrganisations={5000} />
+    </div>
     <div class="contenu-section">
       <lab-anssi-lien
         class="lien"
@@ -176,16 +181,9 @@
   }
 
   .encart-presentation {
+    position: relative;
     padding: var(--gouttiere) var(--gouttiere) 24px var(--gouttiere);
     background: var(--controle-segmente-courant-fond);
-
-    @include a-partir-de(md) {
-      background: var(--controle-segmente-courant-fond)
-        url(/assets/images/illustration-cyberdepart.svg) no-repeat;
-      background-position-x: calc(50vw + 30px);
-      background-position-y: 50%;
-      background-size: auto calc(100% - 48px);
-    }
 
     .colonne-explicative {
       @include a-partir-de(md) {
@@ -199,6 +197,18 @@
         font-weight: 400;
         line-height: 1.5rem;
         margin: 0;
+      }
+    }
+
+    .illustration {
+      display: flex;
+      flex-direction: column;
+      position:absolute;
+      @include a-partir-de(md) {
+        left: calc(50vw + 30px);
+        top:24px;
+        width: auto;
+        height: calc(100% - 48px);
       }
     }
   }
