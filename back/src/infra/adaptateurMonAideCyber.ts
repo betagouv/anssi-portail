@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { adaptateurMonAideCyberVide } from './adaptateurMonAideCyberVide';
 import { Cache } from './cache';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 
 export type DemandeAide = {
   origine?: string;
@@ -26,8 +27,14 @@ export interface AdaptateurMonAideCyber {
 
 class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
   private cacheStatistiques: Cache<Promise<StatistiquesMonAideCyber>>;
-  constructor() {
-    this.cacheStatistiques = new Cache({ ttl: 300 });
+  constructor(
+    private readonly adaptateurEnvironnement: AdaptateurEnvironnement
+  ) {
+    this.cacheStatistiques = new Cache({
+      ttl: adaptateurEnvironnement
+        .monAideCyber()
+        .dureeCacheStatistiquesEnSecondes(),
+    });
   }
 
   async creeDemandeAide({ entiteAidee, aidant, origine }: DemandeAide) {
@@ -50,7 +57,7 @@ class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
         ...(siretAidant && { siretAidant }),
       };
       await axios.post(
-        `${process.env.MON_AIDE_CYBER_URL_BASE}/api/demandes/etre-aide`,
+        `${this.adaptateurEnvironnement.monAideCyber().url()}/api/demandes/etre-aide`,
         demandeMAC
       );
     } catch (e: unknown | Error) {
@@ -67,7 +74,7 @@ class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
   }
 
   async statistiques(): Promise<StatistiquesMonAideCyber> {
-    const url = `${process.env.MON_AIDE_CYBER_URL_BASE}/api/statistiques`;
+    const url = `${this.adaptateurEnvironnement.monAideCyber().url()}/api/statistiques`;
     return this.cacheStatistiques.get(url, async () => {
       const reponse = await axios.get(url.toString());
       return { nombreDiagnostics: reponse.data.nombreDiagnostics };
@@ -75,7 +82,9 @@ class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
   }
 }
 
-export const fabriqueAdaptateurMonAideCyber = () =>
+export const fabriqueAdaptateurMonAideCyber = (
+  adaptateurEnvironnement: AdaptateurEnvironnement
+) =>
   process.env.MON_AIDE_CYBER_URL_BASE
-    ? new AdaptateurHttpMonAideCyber()
+    ? new AdaptateurHttpMonAideCyber(adaptateurEnvironnement)
     : adaptateurMonAideCyberVide();

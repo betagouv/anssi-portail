@@ -1,4 +1,5 @@
 import { CmsCrisp } from '@lab-anssi/lib';
+import axios from 'axios';
 import { adaptateurJWT } from './api/adaptateurJWT';
 import { fournisseurChemin } from './api/fournisseurChemin';
 import { fabriqueMiddleware } from './api/middleware';
@@ -6,6 +7,7 @@ import { creeServeur } from './api/msc';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
 import { BusEvenements } from './bus/busEvenements';
 import { cableTousLesAbonnes } from './bus/cablage';
+import { fabriqueAdaptateurMatamo } from './infra/adaptateurAnalytique';
 import { adaptateurCellar } from './infra/adaptateurCellar';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo';
@@ -28,8 +30,6 @@ import { messagerieMattermost } from './infra/messagerieMattermost';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { EntrepotGuide } from './metier/entrepotGuide';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
-import { fabriqueAdaptateurMatamo } from './infra/adaptateurAnalytique';
-import axios from 'axios';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(
@@ -41,7 +41,9 @@ const adaptateurAnalytique = fabriqueAdaptateurMatamo(
   adaptateurEnvironnement
 );
 const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
-const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber();
+const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber(
+  adaptateurEnvironnement
+);
 const adaptateurHachage = fabriqueAdaptateurHachage({
   adaptateurEnvironnement,
 });
