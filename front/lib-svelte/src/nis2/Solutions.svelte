@@ -72,7 +72,11 @@
 
 <style lang="scss">
   .sommaire {
-    padding-bottom: 16px;
+    padding-block: 16px;
     overflow: auto;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 2;
   }
 </style>
