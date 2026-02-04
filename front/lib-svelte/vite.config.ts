@@ -48,6 +48,8 @@ export default defineConfig({
         'page-directive-nis2': 'src/main-page-directive-nis2.ts',
         'presentation-demande-diagnostic':
           'src/main-presentation-demande-diagnostic.ts',
+        'carrousel-des-interlocuteurs':
+          'src/main-carrousel-des-interlocuteurs.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,

@@ -50,6 +50,12 @@ permalink: /
   src="/lib-svelte/dist/assets/barometre-simplifie.js"
 ></script>
 
+<script
+  type="module"
+  crossorigin
+  src="/lib-svelte/dist/assets/carrousel-des-interlocuteurs.js"
+></script>
+
 <section class="organisations-concernees">
   <div class="contenu-section">
     <div class="toutes-organisations">
@@ -178,51 +184,7 @@ permalink: /
 <section class="interlocuteurs">
   <div class="contenu-section">
     <div class="contenu-interlocuteurs">
-      <h2>
-        Trouvez les interlocuteurs et dispositifs pour vous soutenir dans vos
-        efforts.
-      </h2>
-      <lab-anssi-carrousel-tuiles>
-        <dsfr-tile
-          title="Contacts cyber"
-          has-description="true"
-          description="Des contacts cyber de proximité pour vous orienter et répondre à vos questions."
-          href="/contacts"
-          enlarge="true"
-        >
-          <img
-            slot="pictogram"
-            src="/assets/images/trois-mains-croisees.svg"
-            alt="Contacts cyber"
-          />
-        </dsfr-tile>
-        <dsfr-tile
-          title="Prestataires labellisés"
-          has-description="true"
-          description="Tous les prestataires de confiance et produits/services labellisés afin de vous accompagner sur vos différents enjeux cyber&nbsp;: audits, homologations, réponses à incidents..."
-          href="/prestataires-labellises"
-          enlarge="true"
-        >
-          <img
-            slot="pictogram"
-            src="/assets/images/coche-jaune-sur-rond-noir.svg"
-            alt="Prestataires labellisés"
-          />
-        </dsfr-tile>
-        <dsfr-tile
-          title="Financements cyber"
-          has-description="true"
-          description="Bénéficiez d’aides et de subventions pour renforcer la maturité cyber de votre organisation."
-          href="/financements"
-          enlarge="true"
-        >
-          <img
-            slot="pictogram"
-            src="/assets/images/pile-de-pieces.svg"
-            alt="Financements cyber"
-          />
-        </dsfr-tile>
-      </lab-anssi-carrousel-tuiles>
+      <div id="carrousel-des-interlocuteurs" />
     </div>
   </div>
 </section>
