@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Onglets from '../nis2/Onglets.svelte';
-  import FilAriane from '../ui/FilAriane.svelte';
-  import Heros from '../ui/Heros.svelte';
+  import Onglets from '../../nis2/Onglets.svelte';
+  import FilAriane from '../../ui/FilAriane.svelte';
+  import Heros from '../../ui/Heros.svelte';
 
   const onglets = [
     {
