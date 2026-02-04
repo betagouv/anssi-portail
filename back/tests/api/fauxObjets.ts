@@ -135,6 +135,10 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   matomo: () => ({
     idSite: () => '227',
   }),
+  monAideCyber: () => ({
+    url: () => 'https://demo.monaidecyber.fr',
+    dureeCacheStatistiquesEnSecondes: () => 300,
+  }),
 };
 
 const vraiMiddleware = fabriqueMiddleware({
