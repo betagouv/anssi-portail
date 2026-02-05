@@ -78,7 +78,8 @@
     right: 24px;
     border-radius: 100px;
     border: 1px solid #fff;
-    background: #0d0c21 url('/assets/images/motif-fond-service-opacite-16.avif');
+    background: var(--background-flat-blue-france-lab)
+      url('/assets/images/motif-fond-service-opacite-16.avif');
     box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
     color: #f5f5fe;
     text-align: center;
@@ -124,7 +125,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #0d0c21
+      background: var(--background-flat-blue-france-lab)
         url('/assets/images/motif-fond-service-opacite-16.avif');
 
       @include a-partir-de(sm) {

@@ -51,7 +51,7 @@
   button {
     display: flex;
     align-items: center;
-    background: var(--noir);
+    background: var(--background-flat-blue-france-lab);
     border: none;
     cursor: pointer;
     justify-content: center;

@@ -75,7 +75,7 @@ section.connexion {
 
       .contenu-secondaire {
         flex: 1 0 0;
-        background: #0d0c21
+        background: var(--background-flat-blue-france-lab)
           url('/assets/images/motif-fond-service-opacite-16.avif');
         display: flex;
         justify-content: center;

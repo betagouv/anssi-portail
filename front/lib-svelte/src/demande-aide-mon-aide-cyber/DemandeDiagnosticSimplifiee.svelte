@@ -111,7 +111,7 @@
           font-weight: bold;
           border-radius: 4px;
           padding: 4px;
-          background-color: var(--noir);
+          background-color: var(--background-flat-blue-france-lab);
           color: white;
           content: counter(li);
           counter-increment: li;
@@ -137,12 +137,16 @@
         gap: 4px;
 
         &:hover {
-          background-color: rgb(from var(--noir) r g b / 4%);
+          background-color: rgb(
+            from var(--background-flat-blue-france-lab) r g b / 4%
+          );
           cursor: pointer;
         }
 
         &:active {
-          background-color: rgb(from var(--noir) r g b / 8%);
+          background-color: rgb(
+            from var(--background-flat-blue-france-lab) r g b / 8%
+          );
           cursor: pointer;
         }
 

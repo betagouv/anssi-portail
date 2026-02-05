@@ -115,7 +115,7 @@
     box-sizing: border-box;
 
     &.fond-sombre {
-      background-color: var(--couleur-fond-sombre, #0d0c21);
+      background-color: var(--background-flat-blue-france-lab);
       background-image: url(/assets/images/motif-fond-service-opacite-16.avif);
       color: var(--couleur-texte-sombre, #fff);
     }

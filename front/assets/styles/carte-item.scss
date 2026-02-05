@@ -121,7 +121,7 @@ a.carte {
       padding: 2px 8px;
       line-height: 1.25rem;
       font-size: 0.75rem;
-      background: #0d0c21;
+      background: var(--background-flat-blue-france-lab);
       color: white;
       border-radius: 8px;
 
@@ -210,7 +210,7 @@ a.carte {
   }
 
   figcaption {
-    background: #0d0c21;
+    background: var(--background-flat-blue-france-lab);
 
     &:before {
       background-size: 12px 12px;
@@ -226,7 +226,7 @@ a.carte {
   }
 
   figcaption {
-    background: #0d0c21;
+    background: var(--background-flat-blue-france-lab);
 
     &:before {
       filter: brightness(100%) saturate(100%) invert(100%) contrast(100%);
