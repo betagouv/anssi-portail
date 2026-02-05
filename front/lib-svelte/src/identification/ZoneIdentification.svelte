@@ -68,7 +68,7 @@
           position: absolute;
           top: 100%;
           width: 320px;
-          background-color: white;
+          background-color: var(--background-default-grey);
           z-index: 5;
           box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
         }

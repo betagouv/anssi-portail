@@ -59,7 +59,7 @@
     transform: translateX(-100%);
     z-index: 100;
     border: 1px solid var(--jaune-msc);
-    background-color: #fff;
+    background-color: var(--background-default-grey);
     width: calc(100% - 2px);
     border-radius: 6px;
     color: black;

@@ -74,7 +74,7 @@
     padding: 16px 32px;
     border: none;
     border-radius: 8px;
-    background-color: white;
+    background-color: var(--background-default-grey);
     box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
     max-width: 588px;
     box-sizing: border-box;
