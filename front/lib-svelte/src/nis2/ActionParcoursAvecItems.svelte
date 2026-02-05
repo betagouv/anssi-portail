@@ -7,9 +7,10 @@
   export let titre: string;
   export let explication: string;
   export let items: ItemCyber[];
+  export let ancre: string;
 </script>
 
-<dsfr-container {id} class="action" class:fond-alternatif={fondAlternatif}>
+<dsfr-container id={ancre} class="action" class:fond-alternatif={fondAlternatif}>
   <div class="contenu-action">
     <div class="description">
       <h2>{titre}</h2>

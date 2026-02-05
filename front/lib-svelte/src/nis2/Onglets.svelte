@@ -16,13 +16,6 @@
     if (ongletDansLUrl) {
       ongletActif =
         onglets.findIndex((o) => o.fragment === `#${ongletDansLUrl[0]}`) ?? 0;
-
-      const section = document.querySelector('.menu-onglets');
-      section?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'nearest',
-      });
     }
   };
 
