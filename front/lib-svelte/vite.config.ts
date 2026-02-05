@@ -45,6 +45,12 @@ export default defineConfig({
         guide: 'src/main-guide.ts',
         'demande-diagnostic': 'src/main-demande-diagnostic.ts',
         'barometre-simplifie': 'src/main-barometre-simplifie.ts',
+        'page-directive-nis2': 'src/page-directive-nis2.ts',
+        'presentation-demande-diagnostic':
+          'src/main-presentation-demande-diagnostic.ts',
+        'carrousel-des-interlocuteurs':
+          'src/main-carrousel-des-interlocuteurs.ts',
+        'equipe-biz-dev': 'src/main-equipe-biz-dev.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
