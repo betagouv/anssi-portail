@@ -50,6 +50,7 @@ export default defineConfig({
           'src/main-presentation-demande-diagnostic.ts',
         'carrousel-des-interlocuteurs':
           'src/main-carrousel-des-interlocuteurs.ts',
+        'equipe-biz-dev': 'src/main-equipe-biz-dev.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
