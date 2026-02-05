@@ -253,7 +253,7 @@
 
   input[type='checkbox'] {
     appearance: none;
-    border: 1px solid var(--noir);
+    border: 1px solid var(--border-action-high-blue-france);
     border-radius: 4px;
     min-width: 24px;
     height: 24px;
