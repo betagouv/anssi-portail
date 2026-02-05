@@ -13,7 +13,7 @@ a.carte {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-default-grey);
   border-radius: 8px;
   color: var(--noir);
   text-decoration: none;
@@ -31,7 +31,7 @@ a.carte {
   }
 
   &:focus {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-default-grey);
   }
 
   .contenu {
@@ -188,7 +188,7 @@ a.carte {
 
 .carte.service {
   .contenu {
-    border-bottom-color: var(--jaune-msc);
+    border-bottom-color: var(--border-default-blue-france);
   }
 
   figure {

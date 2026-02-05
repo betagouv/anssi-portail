@@ -37,7 +37,7 @@
       padding: 48px 24px 72px 24px;
       margin: auto;
       border-radius: 8px;
-      border: 1px solid #ddd;
+      border: 1px solid var(--border-default-grey);
       background: #fff;
 
       @include a-partir-de(md) {

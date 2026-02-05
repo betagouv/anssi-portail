@@ -208,7 +208,7 @@
     max-width: 792px;
     margin: auto;
     border-radius: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-default-grey);
     background: #fff;
     padding: 48px 16px 72px 16px;
 

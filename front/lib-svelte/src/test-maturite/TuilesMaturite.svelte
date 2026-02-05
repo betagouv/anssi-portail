@@ -69,7 +69,7 @@
     .tuile-niveau {
       scroll-snap-align: center;
 
-      border: 1px solid #dddddd;
+      border: 1px solid var(--border-default-grey);
       border-radius: 8px;
       padding: 16px;
       background: #f6f6f6;

@@ -77,7 +77,7 @@
   }
 
   .conteneur-zone-indentification.mobile {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid var(--border-default-grey);
     padding-bottom: 12px;
 
     display: block;

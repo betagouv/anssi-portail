@@ -21,7 +21,7 @@
   a {
     font-weight: bold;
     width: calc(100% - 32px);
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid var(--border-default-grey);
     padding: 12px 16px;
 
     &.actif {

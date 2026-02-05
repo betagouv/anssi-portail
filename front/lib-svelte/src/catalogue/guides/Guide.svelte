@@ -253,7 +253,7 @@
         padding: 0;
 
         li {
-          border-bottom: 1px solid #ddd;
+          border-bottom: 1px solid var(--border-default-grey);
           padding-top: 12px;
           padding-bottom: 12px;
 

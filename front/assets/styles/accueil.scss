@@ -212,7 +212,7 @@
     .barometre {
       padding: 24px;
       background-color: white;
-      border: solid 1px #ddd;
+      border: solid 1px var(--border-default-grey);
 
       @include a-partir-de(lg) {
         width: 50%;

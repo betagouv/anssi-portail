@@ -119,7 +119,7 @@
     align-items: center;
 
     .conteneur-qrcode {
-      border: 1px solid var(--gris-clair);
+      border: 1px solid var(--border-default-grey);
       border-radius: 8px;
       padding: 16px;
       margin-bottom: 8px;

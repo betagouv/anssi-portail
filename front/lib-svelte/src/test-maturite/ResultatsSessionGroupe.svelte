@@ -118,7 +118,7 @@
       flex-direction: column;
       gap: 32px;
       padding-bottom: 48px;
-      border-bottom: 1px solid var(--gris-clair);
+      border-bottom: 1px solid var(--border-default-grey);
     }
   }
 

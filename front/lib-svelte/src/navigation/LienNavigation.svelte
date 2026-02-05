@@ -40,14 +40,14 @@
   .dans-menu-deroulant {
     width: 100%;
     padding: 12px 16px;
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid var(--border-default-grey);
     position: relative;
     font-weight: normal;
     box-sizing: border-box;
 
     &.actif {
       font-weight: normal;
-      border-bottom: 1px solid #dddddd;
+      border-bottom: 1px solid var(--border-default-grey);
 
       &:before {
         content: '';
