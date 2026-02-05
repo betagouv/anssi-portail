@@ -121,7 +121,7 @@
 
     .formulaire {
       grid-area: formulaire;
-      background-color: white;
+      background-color: var(--background-default-grey);
       padding: 24px;
       border: 1px solid var(--border-default-grey);
     }
@@ -160,7 +160,7 @@
       }
 
       .faq {
-        background-color: white;
+        background-color: var(--background-default-grey);
         padding: 48px 16px;
         margin-top: 32px;
 

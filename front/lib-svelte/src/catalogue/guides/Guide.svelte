@@ -177,7 +177,7 @@
         object-fit: cover;
         object-position: top;
         height: 330px;
-        background-color: white;
+        background-color: var(--background-default-grey);
 
         @include a-partir-de(xxl) {
           display: block;

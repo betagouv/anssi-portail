@@ -322,7 +322,7 @@
     flex-direction: column;
     gap: 32px;
     padding: 32px 16px;
-    background-color: white;
+    background-color: var(--background-default-grey);
     text-align: left;
     color: #000;
     @include a-partir-de(sm) {
