@@ -16,13 +16,6 @@
     if (ongletDansLUrl) {
       ongletActif =
         onglets.findIndex((o) => o.fragment === `#${ongletDansLUrl[0]}`) ?? 0;
-
-      const section = document.querySelector('.menu-onglets');
-      section?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-        inline: 'nearest',
-      });
     }
   };
 
@@ -98,7 +91,7 @@
     margin-inline: -1rem;
     font-size: 1rem;
     line-height: 1.5rem;
-    margin-bottom: 48px;
+    margin-bottom: 32px;
 
     .entete {
       appearance: none;
@@ -162,7 +155,7 @@
         max-height 0.2s ease;
       transition-behavior: allow-discrete;
       padding-top: 1rem;
-      margin-bottom: 48px;
+      margin-bottom: 32px;
     }
 
     &.open {
