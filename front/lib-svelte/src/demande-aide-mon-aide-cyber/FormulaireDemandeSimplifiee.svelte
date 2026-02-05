@@ -56,7 +56,7 @@
       };
       const reponse = await axios.post(
         `${urlBase}/api/mon-aide-cyber/demandes-aide`,
-        corps,
+        corps
       );
       if (reponse.status === 201) {
         enSucces = true;
@@ -192,7 +192,7 @@
 
     input[type='checkbox'] {
       appearance: none;
-      border: 1px solid var(--noir);
+      border: 1px solid var(--border-action-high-blue-france);
       border-radius: 4px;
       min-width: 24px;
       height: 24px;
