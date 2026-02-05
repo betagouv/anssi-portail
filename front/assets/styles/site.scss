@@ -513,7 +513,7 @@ footer {
   background: var(--background-flat-blue-france-lab)
     url('/assets/images/motif-fond-service-opacite-16.avif');
   padding: 24px var(--gouttiere) 40px;
-  color: white;
+  color: var(--text-inverted-grey);
 
   .contenu-section {
     display: flex;
@@ -532,7 +532,7 @@ footer {
     }
 
     a {
-      color: white;
+      color: var(--text-inverted-grey);
       text-decoration-color: white;
     }
   }
@@ -619,7 +619,7 @@ footer {
       url('/assets/images/motif-fond-service-opacite-16.avif');
 
     h1 {
-      color: white;
+      color: var(--text-inverted-grey);
     }
   }
 

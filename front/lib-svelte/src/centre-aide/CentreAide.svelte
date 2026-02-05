@@ -134,7 +134,7 @@
       }
 
       h4 {
-        color: white;
+        color: var(--text-inverted-grey);
         font-size: 22px;
         font-weight: 700;
         line-height: 28px;

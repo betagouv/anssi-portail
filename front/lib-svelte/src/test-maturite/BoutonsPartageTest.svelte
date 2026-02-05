@@ -69,12 +69,12 @@
     &.fond-fonce {
       .bouton.secondaire {
         background-color: rgba(255, 255, 255, 0);
-        color: white;
+        color: var(--text-inverted-grey);
         border-color: #353535;
 
         img {
           filter: invert(99%) sepia(1%) saturate(260%) hue-rotate(290deg)
-          brightness(119%) contrast(100%);
+            brightness(119%) contrast(100%);
         }
 
         &:hover {
