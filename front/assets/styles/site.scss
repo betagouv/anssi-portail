@@ -6,7 +6,6 @@
 
 :root {
   --noir: #0d0c21;
-  --gris-clair: #dddddd;
   --jaune-msc: #fed980;
   --jaune-msc-hover: #ecca79;
   --jaune-msc-clique: #ddbd70;
@@ -143,7 +142,7 @@ a {
 header {
   padding-left: var(--gouttiere);
   padding-right: var(--gouttiere);
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid var(--border-default-grey);
   box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
 
   @include a-partir-de(lg) {
@@ -184,7 +183,7 @@ header {
 
   .entete-secondaire {
     display: block;
-    border-top: 1px solid var(--gris-clair);
+    border-top: 1px solid var(--border-default-grey);
     padding: 12px 0;
     @include a-partir-de(lg) {
       display: none;
@@ -286,7 +285,7 @@ footer {
 
   .officiel {
     padding: 0 0 16px;
-    border-bottom: 1px solid var(--gris-clair);
+    border-bottom: 1px solid var(--border-default-grey);
     display: flex;
     flex-direction: column;
 
@@ -348,7 +347,7 @@ footer {
 
     hr {
       border: none;
-      border-left: 1px solid var(--gris-clair);
+      border-left: 1px solid var(--border-default-grey);
       margin: 2px 0;
     }
   }
@@ -382,7 +381,7 @@ footer {
 
 .sommaire-replie {
   padding: 12px var(--gouttiere);
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-default-grey);
   background: white;
   position: sticky;
   top: 0;
@@ -441,7 +440,7 @@ footer {
     margin: 0;
     padding: 0 0 2rem;
     border: 0;
-    border-bottom: 1px solid var(--gris-clair);
+    border-bottom: 1px solid var(--border-default-grey);
 
     legend {
       text-transform: uppercase;

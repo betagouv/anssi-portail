@@ -15,7 +15,7 @@
     display: flex;
     flex-direction: row;
     gap: 8px;
-    border-bottom: 1px solid var(--gris-clair);
+    border-bottom: 1px solid var(--border-default-grey);
 
     @include a-partir-de(md) {
       width: 100%;

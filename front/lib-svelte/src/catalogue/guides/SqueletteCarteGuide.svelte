@@ -27,7 +27,7 @@
 <style>
   .carte {
     box-sizing: border-box;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-default-grey);
     border-radius: 8px;
     padding: 1rem;
     background: white;

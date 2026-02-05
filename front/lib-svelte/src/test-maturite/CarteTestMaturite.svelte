@@ -53,7 +53,7 @@
       'illustration niveau'
       'illustration description'
       'illustration lien';
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-default-grey);
     border-radius: 8px;
     cursor: pointer;
     background: white;

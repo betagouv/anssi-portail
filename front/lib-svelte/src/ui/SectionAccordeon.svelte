@@ -10,10 +10,10 @@
 
 <style lang="scss">
   details {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-default-grey);
 
     &:first-of-type {
-      border-top: 1px solid #ddd;
+      border-top: 1px solid var(--border-default-grey);
     }
 
     &[open] summary::after {

@@ -37,7 +37,7 @@
       align-self: stretch;
       gap: 12px;
       padding: 24px;
-      border: 1px solid var(--gris-clair);
+      border: 1px solid var(--border-default-grey);
       border-radius: 8px;
       height: 100%;
 

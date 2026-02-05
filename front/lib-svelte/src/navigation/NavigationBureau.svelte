@@ -105,7 +105,7 @@
     padding: 0 var(--gouttiere);
     display: none;
     margin-left: -8px;
-    border-top: 1px solid #dddddd;
+    border-top: 1px solid var(--border-default-grey);
 
     @include a-partir-de(xl) {
       margin-left: -32px;
@@ -154,7 +154,7 @@
           font-size: 0.875rem;
           line-height: 1.5rem;
           z-index: 5;
-          border-top: 1px solid #ddd;
+          border-top: 1px solid var(--border-default-grey);
         }
 
         summary {

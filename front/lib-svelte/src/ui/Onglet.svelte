@@ -49,7 +49,7 @@
   }
 
   .onglet:not(.sansBordureEnBas):not(.active) {
-    border-bottom: 1px solid var(--gris-clair);
+    border-bottom: 1px solid var(--border-default-grey);
   }
 
   .onglet:hover {
@@ -59,8 +59,8 @@
   .onglet.active {
     background: white;
     border-top: 2px solid var(--jaune-msc);
-    border-left: 1px solid var(--gris-clair);
-    border-right: 1px solid var(--gris-clair);
+    border-left: 1px solid var(--border-default-grey);
+    border-right: 1px solid var(--border-default-grey);
     border-bottom: 1px solid white;
   }
 </style>

@@ -433,10 +433,10 @@
 
     @keyframes ajoute-bordure-100-pourcent {
       0% {
-        border-top-color: #ddd;
+        border-top-color: var(--border-default-grey);
       }
       99% {
-        border-top-color: #ddd;
+        border-top-color: var(--border-default-grey);
       }
       100% {
         border-top-color: transparent;
@@ -489,7 +489,7 @@
         .niveau-satisfaction {
           display: flex;
           flex: 1;
-          border: 1px solid var(--gris-clair);
+          border: 1px solid var(--border-default-grey);
           border-right: 0;
           border-radius: 0;
 
@@ -499,7 +499,7 @@
           }
 
           &[for='tout-a-fait'] {
-            border-right: 1px solid var(--gris-clair);
+            border-right: 1px solid var(--border-default-grey);
             border-top-right-radius: 4px;
             border-bottom-right-radius: 4px;
           }

@@ -114,7 +114,7 @@
       padding: 0;
 
       li {
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid var(--border-default-grey);
         padding-top: 12px;
         padding-bottom: 12px;
 
@@ -248,7 +248,7 @@ h2 {
   display: flex;
   width: 286px;
   flex-direction: column;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-default-grey);
   border-radius: 8px;
 
   @include a-partir-de(md) {

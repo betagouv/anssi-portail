@@ -326,7 +326,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-default-grey);
     border-radius: 8px;
   }
 

@@ -196,7 +196,7 @@
     flex-direction: column;
     margin-top: 24px;
     padding: 1.5rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-default-grey);
     border-radius: 8px;
     gap: 2rem;
 

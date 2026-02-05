@@ -65,8 +65,8 @@
 
   .sommaire-replie {
     padding: 0;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border-top: 1px solid var(--border-default-grey);
+    border-bottom: 1px solid var(--border-default-grey);
     background: white;
     position: sticky;
     top: 0;
@@ -102,7 +102,7 @@
         padding: 16px;
 
         li {
-          border-bottom: 1px solid #ddd;
+          border-bottom: 1px solid var(--border-default-grey);
           padding-top: 12px;
           padding-bottom: 12px;
 

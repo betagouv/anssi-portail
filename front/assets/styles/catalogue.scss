@@ -47,7 +47,7 @@
   }
 
   label {
-    border: 1px solid var(--gris-clair);
+    border: 1px solid var(--border-default-grey);
     border-radius: 8px;
     text-transform: uppercase;
     padding: 0 8px;
@@ -86,7 +86,7 @@
       &:last-of-type {
         border-top-right-radius: 8px;
         border-bottom-right-radius: 8px;
-        border-right: 1px solid var(--gris-clair);
+        border-right: 1px solid var(--border-default-grey);
       }
 
       span {

@@ -12,7 +12,7 @@
   button {
     background: transparent;
     cursor: pointer;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-default-grey);
     width: 40px;
     height: 40px;
     display: flex;

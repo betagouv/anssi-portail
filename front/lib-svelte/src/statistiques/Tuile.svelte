@@ -17,7 +17,7 @@
     align-items: center;
     padding: 24px 32px 32px;
 
-    border: 1px #ddd solid;
+    border: 1px var(--border-default-grey) solid;
     border-radius: 8px;
 
     img {
