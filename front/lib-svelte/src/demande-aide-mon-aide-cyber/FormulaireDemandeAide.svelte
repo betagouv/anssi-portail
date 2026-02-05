@@ -269,8 +269,8 @@
         margin: auto;
         width: 6px;
         height: 12px;
-        border-right: 2px var(--noir) solid;
-        border-bottom: 2px var(--noir) solid;
+        border-right: 2px var(--border-active-blue-france) solid;
+        border-bottom: 2px var(--border-active-blue-france) solid;
         transform: translateY(2px) rotate(0.12turn);
       }
     }
