@@ -54,7 +54,7 @@
         display: block;
         width: 2px;
         height: 24px;
-        background: var(--jaune-msc);
+        background: var(--background-active-blue-france);
         position: absolute;
         left: 0;
       }
