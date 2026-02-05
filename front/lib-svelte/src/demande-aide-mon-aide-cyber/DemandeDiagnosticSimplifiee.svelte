@@ -61,7 +61,7 @@
       'etapes'
       'formulaire'
       'faq';
-    background-color: #fef6e3;
+    background-color: var(--background-alt-blue-france);
     padding: 40px 16px;
     border-radius: 8px;
     gap: 24px;

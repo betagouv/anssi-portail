@@ -21,7 +21,9 @@
   <div class="contenu-section">
     <FilAriane feuille="Favoris" />
     <h1 class="alternatif-xs-ns">Services et ressources favoris</h1>
-    <p class="texte-chapo-xl-ns">Retrouvez tous vos contenus cyber à partager.</p>
+    <p class="texte-chapo-xl-ns">
+      Retrouvez tous vos contenus cyber à partager.
+    </p>
     {#if $itemsCatalogueEnFavori.length > 0}
       <div class="cta">
         <p class="texte-chapo-xl-ns">
@@ -140,7 +142,7 @@
   }
 
   .banniere-partage-favoris {
-    background-color: #fef6e3;
+    background-color: var(--background-alt-blue-france);
     border-radius: 8px;
     padding: 24px;
     display: flex;
