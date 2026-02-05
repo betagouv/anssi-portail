@@ -31,7 +31,7 @@
     }
 
     &.fond-fonce {
-      background-color: #0d0c21;
+      background-color: var(--background-flat-blue-france-lab);
       color: white;
     }
 

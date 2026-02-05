@@ -510,7 +510,8 @@ footer {
 }
 
 .chapeau.fond-sombre {
-  background: #0d0c21 url('/assets/images/motif-fond-service-opacite-16.avif');
+  background: var(--background-flat-blue-france-lab)
+    url('/assets/images/motif-fond-service-opacite-16.avif');
   padding: 24px var(--gouttiere) 40px;
   color: white;
 
@@ -614,7 +615,8 @@ footer {
   }
 
   &.fond-sombre {
-    background: #0d0c21 url('/assets/images/motif-fond-service-opacite-16.avif');
+    background: var(--background-flat-blue-france-lab)
+      url('/assets/images/motif-fond-service-opacite-16.avif');
 
     h1 {
       color: white;
@@ -818,7 +820,7 @@ footer {
   }
 
   .accessible {
-    background-color: var(--noir);
+    background-color: var(--background-flat-blue-france-lab);
   }
 }
 
