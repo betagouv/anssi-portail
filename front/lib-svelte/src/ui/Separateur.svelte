@@ -14,7 +14,7 @@
     hr {
       height: 1px;
       border: 0;
-      background-color: #dddddd;
+      background-color: var(--background-default-grey);
     }
   }
 </style>
