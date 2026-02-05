@@ -164,7 +164,7 @@
     background: white;
 
     &:not([disabled]).actif {
-      background: var(--jaune-msc);
+      background: var(--background-active-blue-france);
 
       &:not([disabled]):hover {
         background: var(--jaune-msc-hover);

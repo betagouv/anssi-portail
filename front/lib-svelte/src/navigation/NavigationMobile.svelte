@@ -178,7 +178,7 @@
             width: 2px;
             height: 24px;
             left: 0;
-            background-color: var(--jaune-msc);
+            background-color: var(--background-active-blue-france);
             position: absolute;
           }
         }

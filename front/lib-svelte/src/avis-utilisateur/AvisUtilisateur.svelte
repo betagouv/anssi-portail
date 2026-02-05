@@ -476,7 +476,7 @@
           }
 
           &:checked + label > span {
-            background-color: var(--jaune-msc);
+            background-color: var(--background-active-blue-france);
             &:hover {
               background-color: var(--jaune-msc-hover);
             }

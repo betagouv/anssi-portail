@@ -213,7 +213,7 @@
           color: var(--noir);
 
           &::before {
-            background-color: var(--jaune-msc);
+            background-color: var(--background-active-blue-france);
           }
         }
       }

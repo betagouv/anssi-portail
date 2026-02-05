@@ -259,7 +259,7 @@ header {
 .badge {
   justify-content: center;
   border-radius: 8px;
-  background: var(--jaune-msc);
+  background: var(--background-active-blue-france);
   text-align: center;
   padding: 2px 8px;
   color: var(--noir);
@@ -481,7 +481,7 @@ footer {
         cursor: pointer;
 
         &:checked {
-          background-color: var(--jaune-msc);
+          background: var(--background-active-blue-france);
 
           &::before {
             content: '';
@@ -582,7 +582,7 @@ footer {
       border-radius: 6px;
       height: calc(100% - 6px);
       min-width: 6px;
-      background: var(--jaune-msc);
+      background: var(--background-active-blue-france);
     }
 
     p {
