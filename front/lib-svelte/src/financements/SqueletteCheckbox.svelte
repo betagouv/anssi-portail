@@ -23,14 +23,14 @@
     width: 16px;
     height: 16px;
     border-radius: 4px;
-    background-color: #ddd;
+    background-color: var(--background-default-grey);
     animation: pulse 1.5s infinite;
   }
 
   .skeleton-libelle {
     flex: 1;
     height: 1rem;
-    background-color: #ddd;
+    background-color: var(--background-default-grey);
     border-radius: 4px;
     animation: pulse 1.5s infinite;
   }

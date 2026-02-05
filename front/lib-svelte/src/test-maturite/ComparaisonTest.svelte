@@ -234,7 +234,7 @@
   hr {
     height: 1px;
     border: 0;
-    background-color: #dddddd;
+    background-color: var(--background-default-grey) ddd;
     max-width: var(--largeur-max-contenu);
   }
 
