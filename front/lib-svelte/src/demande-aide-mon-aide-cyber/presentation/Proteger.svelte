@@ -1,6 +1,7 @@
 <script lang="ts">
   import CarrouselDesInterlocuteurs from '../../interlocuteurs/CarrouselDesInterlocuteurs.svelte';
   import DemandeDiagnosticSimplifiee from '../DemandeDiagnosticSimplifiee.svelte';
+  import EquipeBizDev from '../../interlocuteurs/EquipeBizDev.svelte';
 </script>
 
 <dsfr-container>
@@ -25,6 +26,12 @@
     <CarrouselDesInterlocuteurs />
   </div>
 </dsfr-container>
+
+<section class="equipe-bizdev">
+  <div class="contenu-section">
+    <EquipeBizDev />
+  </div>
+</section>
 
 <style lang="scss">
   @use '../../../../assets/styles/responsive' as *;
@@ -61,5 +68,10 @@
     @include a-partir-de(lg) {
       max-width: taille-pour-colonnes(10);
     }
+  }
+
+  .equipe-bizdev {
+    background-color: var(--jaune-clair-msc);
+    padding: 56px var(--gouttiere);
   }
 </style>
