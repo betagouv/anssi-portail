@@ -112,7 +112,7 @@
           border-radius: 4px;
           padding: 4px;
           background-color: var(--background-flat-blue-france-lab);
-          color: white;
+          color: var(--text-inverted-grey);
           content: counter(li);
           counter-increment: li;
         }

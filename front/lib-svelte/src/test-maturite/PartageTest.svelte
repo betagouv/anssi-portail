@@ -32,7 +32,7 @@
 
     &.fond-fonce {
       background-color: var(--background-flat-blue-france-lab);
-      color: white;
+      color: var(--text-inverted-grey);
     }
 
     .contenu-section {
