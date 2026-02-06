@@ -105,7 +105,7 @@
             <InciteCreerUnCompte />
           {/if}
         </div>
-        <p class="dates">
+        <p class="dates texte-mention-xs">
           Publié le {guide.datePublication} &bullet; Mis à jour le {guide.dateMiseAJour}
         </p>
         <section class="presentation" id="presentation">
@@ -221,9 +221,6 @@
         }
 
         .dates {
-          font-size: 0.75rem;
-          line-height: 1.25rem;
-          color: #666;
           margin-block: 0 32px;
         }
 

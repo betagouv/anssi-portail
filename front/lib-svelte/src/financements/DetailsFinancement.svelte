@@ -233,7 +233,7 @@
             icone="arrow-up-fill"
             positionIcone="gauche"
           ></lab-anssi-lien>
-          <p class="note-information">
+          <p class="note-information texte-mention-xs">
             Nous vous recommandons de vous adresser directement aux organismes
             gestionnaires mentionnés dans la fiche pour déterminer si votre
             projet est éligible à une aide. Enfin, si vous notez des omissions

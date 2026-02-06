@@ -154,7 +154,7 @@
             </lab-anssi-tag>
           {/if}
         </div>
-        <p class="note">
+        <p class="note texte-mention-xs">
           Certains filtres peuvent ne pas donner de résultat. Nos données
           s’enrichissent régulièrement grâce aux tests réalisés.
         </p>
@@ -181,7 +181,7 @@
         <h2>Répartition des réponses</h2>
         <RadarSessionGroupe series={seriesRadar} affichageReduit />
         <ResumeRadarComparaison series={seriesRadar} actif={niveauCourant} />
-        <div class="message-information">
+        <div class="message-information texte-mention-xs">
           Le résultat obtenu est une évaluation indicative basée sur un modèle
           élaboré par l’ANSSI. La maturité cyber n’est pas une évaluation du
           niveau de sécurité des systèmes d’information d’une organisation mais
@@ -239,10 +239,7 @@
   }
 
   .note {
-    font-size: 0.75rem;
-    line-height: 1.25rem;
     font-style: normal;
-    color: #666;
     margin: 0;
   }
 
@@ -262,10 +259,7 @@
       }
 
       .note {
-        font-size: 0.75rem;
-        line-height: 1.25rem;
         font-style: normal;
-        color: #666;
         margin: 0;
       }
     }
@@ -313,10 +307,7 @@
 
       .message-information {
         margin-top: 16px;
-        font-size: 0.75rem;
-        line-height: 1.5rem;
         padding: 24px 0;
-        color: #666666;
       }
     }
   }
