@@ -52,7 +52,7 @@
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     border: none;
-    border-bottom: 2px solid #3a3a3a;
+    border-bottom: 2px solid var(--border-plain-grey);
     font-size: 1rem;
     padding: 8px;
     line-height: 1.5rem;
