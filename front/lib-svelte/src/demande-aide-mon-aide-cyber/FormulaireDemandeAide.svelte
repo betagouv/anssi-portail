@@ -317,7 +317,7 @@
 
   .requis:before {
     content: '*';
-    color: #e3271c;
+    color: var(--text-default-error);
     margin-right: 4px;
     font-size: 1rem;
   }

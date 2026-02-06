@@ -41,8 +41,6 @@
     --bouton-primaire-couleur-fond-survol: #ecca79;
     --bouton-primaire-couleur-fond-clique: #ddbd70;
 
-    --erreur-texte: #ce0500;
-
     :global .demande-diagnostic {
       @media (min-width: 767px) {
         padding: 40px;
