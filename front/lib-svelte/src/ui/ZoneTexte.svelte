@@ -26,7 +26,7 @@
     font-family: var(--fonts);
 
     &.en-erreur {
-      border-color: var(--erreur-texte);
+      border-color: var(--border-plain-error);
     }
   }
 </style>
