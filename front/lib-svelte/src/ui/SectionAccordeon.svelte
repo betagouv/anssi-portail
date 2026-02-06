@@ -21,7 +21,7 @@
     }
 
     &[open] summary {
-      background-color: var(--jaune-clair-msc);
+      background-color: var(--background-open-blue-france);
     }
     summary {
       padding: 12px 16px;
