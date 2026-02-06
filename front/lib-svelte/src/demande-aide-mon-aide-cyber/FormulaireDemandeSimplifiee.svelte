@@ -238,10 +238,6 @@
       }
     }
 
-    .lien {
-      --text-action-high-blue-france: var(--noir);
-    }
-
     .requis:before {
       content: '*';
       color: var(--text-default-error);
