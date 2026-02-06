@@ -32,7 +32,7 @@
       justify-content: center;
       align-items: start;
 
-      background-color: var(--erreur-texte);
+      background-color: var(--background-flat-error);
 
       img {
         margin: 1rem 0.5rem;
