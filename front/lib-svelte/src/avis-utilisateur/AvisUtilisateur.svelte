@@ -395,7 +395,7 @@
           margin: 0;
 
           &.erreur {
-            color: var(--erreur-texte);
+            color: var(--text-default-error);
           }
         }
 
