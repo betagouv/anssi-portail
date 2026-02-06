@@ -111,7 +111,7 @@
           font-weight: bold;
           border-radius: 4px;
           padding: 4px;
-          background-color: var(--background-flat-blue-france-lab);
+          background-color: var(--artwork-major-blue-france);
           color: var(--text-inverted-grey);
           content: counter(li);
           counter-increment: li;
@@ -138,14 +138,14 @@
 
         &:hover {
           background-color: rgb(
-            from var(--background-flat-blue-france-lab) r g b / 4%
+            from var(--artwork-major-blue-france) r g b / 4%
           );
           cursor: pointer;
         }
 
         &:active {
           background-color: rgb(
-            from var(--background-flat-blue-france-lab) r g b / 8%
+            from var(--artwork-major-blue-france) r g b / 8%
           );
           cursor: pointer;
         }
