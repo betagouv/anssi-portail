@@ -53,7 +53,7 @@
         font-size: 1.25rem;
       }
 
-      border: 1px solid var(--erreur-texte);
+      border: 1px solid var(--border-plain-error);
 
       p {
         margin: unset;
