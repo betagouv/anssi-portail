@@ -83,7 +83,7 @@
       <h2>Répartition des réponses</h2>
       <RadarSessionGroupe series={seriesRadar} />
       <LegendeRadarSessionGroupe />
-      <div class="message-information">
+      <div class="message-information texte-mention-xs">
         Le résultat obtenu est une évaluation indicative basée sur un modèle
         élaboré par l’ANSSI. La maturité cyber n’est pas une évaluation du
         niveau de sécurité des systèmes d’information d’une organisation mais de
@@ -142,11 +142,8 @@
   }
 
   .message-information {
-    font-size: 0.75rem;
-    line-height: 1.5rem;
-    font-style: italic;
     padding: 24px 0;
-    color: #666666;
+    margin-bottom: 0;
   }
 
   .contenu-section {

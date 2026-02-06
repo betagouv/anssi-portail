@@ -136,7 +136,7 @@
           largeur-maximale
           actif={!enCoursEnvoi}
         ></lab-anssi-bouton>
-        <p>
+        <p class="texte-mention-xs">
           Ce diagnostic gratuit proposé par l'État n'est pas adapté aux
           particuliers et micro-entreprises.
         </p>
@@ -255,9 +255,7 @@
       gap: 8px;
 
       p {
-        color: #666;
-        font-size: 0.75rem;
-        line-height: 1.25rem;
+        margin-bottom: 0;
       }
     }
   }

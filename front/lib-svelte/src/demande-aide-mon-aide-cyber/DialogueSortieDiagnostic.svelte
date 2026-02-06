@@ -135,7 +135,7 @@
               messageErreur="L'email est invalide"
               bind:valeur={emailDeContact}
             />
-            <p>
+            <p class="texte-mention-xs">
               Votre email ne sera utilisé que pour vous recontacter à propos du
               diagnostic cyber.
             </p>
@@ -269,9 +269,6 @@
 
     p {
       margin: 0;
-      font-size: 0.75rem;
-      line-height: 1.25rem;
-      color: #666666;
     }
   }
 

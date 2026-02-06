@@ -109,7 +109,7 @@
 
   .date {
     grid-area: date;
-    color: #666;
+    color: var(--text-mention-grey);
     font-size: 0.875rem;
     line-height: 1.5rem;
     margin-bottom: 8px;

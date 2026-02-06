@@ -400,7 +400,7 @@
         }
 
         .information {
-          color: #666666;
+          color: var(--text-mention-grey);
           font-size: 0.75rem;
           line-height: 1.25rem;
           margin-top: 2px;
@@ -516,7 +516,7 @@
       }
 
       .descriptions {
-        color: #666666;
+        color: var(--text-mention-grey);
         display: flex;
         flex-direction: row;
         font-size: 0.875rem;

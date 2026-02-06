@@ -19,7 +19,7 @@
       {/each}
     </div>
     <div class="actions">
-      <div class="financeur">{financement.financeur}</div>
+      <div class="financeur texte-mention-xs">{financement.financeur}</div>
       <lab-anssi-icone nom="arrow-right-line" taille="sm"></lab-anssi-icone>
     </div>
   </div>
@@ -80,9 +80,7 @@
         justify-content: space-between;
 
         .financeur {
-          color: #666;
-          font-size: 0.75rem;
-          line-height: 1.25rem;
+          margin-bottom: 0;
         }
       }
     }
