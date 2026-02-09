@@ -144,6 +144,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'formulaire-matomo',
     'directive-nis2',
     'collectivites',
+    'associations',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
