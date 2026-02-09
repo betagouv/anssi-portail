@@ -1,5 +1,5 @@
 import { mount } from 'svelte';
-import Page from './demande-aide-mon-aide-cyber/presentation/PresentationDemandeDiagnostic.svelte';
+import Page from './protection/collectivites/Presentation.svelte';
 import type { ItemCyber } from './catalogue/Catalogue.types';
 
 const donnees = document.getElementById('donnees')!.textContent;
@@ -10,6 +10,6 @@ const { itemsCyber } = JSON.parse(donnees) as {
 };
 
 mount(Page, {
-  target: document.getElementById('page-presentation-demande-diagnostic')!,
+  target: document.getElementById('page-collectivites')!,
   props: { itemsCyber },
 });

@@ -2,7 +2,7 @@
   import Onglets from '../../nis2/Onglets.svelte';
   import FilAriane from '../../ui/FilAriane.svelte';
   import Heros from '../../ui/Heros.svelte';
-  import Proteger from './Proteger.svelte';
+  import Proteger from '../Proteger.svelte';
   import Solutions from './Solutions.svelte';
 
   let { itemsCyber } = $props();
