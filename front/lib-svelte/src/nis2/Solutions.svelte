@@ -58,12 +58,12 @@
   <ControleSegmente elements={actions} selecteurSections=".action">
     {#each actions as action, index (action.id)}
       <ActionParcoursAvecItems
-        id={action.id}
         titre={action.titre}
         explication={action.explication}
         items={action.items}
         fondAlternatif={index % 2 === 1}
         ancre={action.ancre}
+        sourceIllustration={`/assets/images/illustration-${action.id}.svg`}
       ></ActionParcoursAvecItems>
     {/each}
   </ControleSegmente>
