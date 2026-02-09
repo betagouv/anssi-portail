@@ -5,6 +5,8 @@
   import Proteger from './Proteger.svelte';
   import Solutions from './Solutions.svelte';
 
+  let { itemsCyber } = $props();
+
   const onglets = [
     {
       label: 'Protéger ma collectivité',
@@ -39,5 +41,5 @@
 {#if ongletActif === 0}
   <Proteger />
 {:else}
-  <Solutions />
+  <Solutions {itemsCyber} />
 {/if}
