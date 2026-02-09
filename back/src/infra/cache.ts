@@ -21,23 +21,26 @@ export class Cache<T> {
 
   constructor(private readonly configuration?: { ttl: Secondes }) {}
 
-  get(clefCache: string, fonction: () => T): T {
+  async get(clefCache: string, fonction: () => Promise<T>): Promise<T> {
     if (this.cache.has(clefCache)) {
       const { valeur, dateExpiration } = this.cache.get(clefCache)!;
       if (
         dateExpiration &&
         isAfter(FournisseurHorloge.maintenant(), dateExpiration)
       ) {
-        return this.metsEnCache(fonction, clefCache);
+        return await this.metsEnCache(fonction, clefCache);
       }
       return valeur;
     }
-    return this.metsEnCache(fonction, clefCache);
+    return await this.metsEnCache(fonction, clefCache);
   }
 
-  private metsEnCache(fonction: () => T, clefCache: string): T {
+  private async metsEnCache(
+    fonction: () => Promise<T>,
+    clefCache: string
+  ): Promise<T> {
     try {
-      const resultat = fonction();
+      const resultat = await fonction();
       this.cache.set(clefCache, {
         valeur: resultat,
         ...(this.configuration && {

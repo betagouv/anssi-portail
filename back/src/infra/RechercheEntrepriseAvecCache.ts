@@ -9,7 +9,7 @@ const TRENTE_MINUTES = 60 * 30;
 export class RechercheEntrepriseAvecCache
   implements AdaptateurRechercheEntreprise
 {
-  cache: Cache<Promise<ResultatRechercheEntreprise[]>>;
+  cache: Cache<ResultatRechercheEntreprise[]>;
 
   constructor(private adaptateurDecore: AdaptateurRechercheEntreprise) {
     this.cache = new Cache({ ttl: TRENTE_MINUTES });

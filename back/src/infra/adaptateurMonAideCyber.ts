@@ -26,7 +26,7 @@ export interface AdaptateurMonAideCyber {
 }
 
 class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
-  private cacheStatistiques: Cache<Promise<StatistiquesMonAideCyber>>;
+  private cacheStatistiques: Cache<StatistiquesMonAideCyber>;
   constructor(
     private readonly adaptateurEnvironnement: AdaptateurEnvironnement
   ) {
