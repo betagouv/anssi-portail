@@ -1,20 +1,30 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import type { ItemCyber } from '../../catalogue/Catalogue.types';
+  import {
+    chargeGuidesDansLeStore,
+    guidesStore,
+  } from '../../catalogue/stores/guides/guides.store';
   import ControleSegmente from '../../navigation/ControleSegmente.svelte';
   import ActionParcoursAvecItems from '../../parcours/ActionParcoursAvecItems.svelte';
-  import { versItemsCyber } from '../../parcours/versItemCyber';
+  import { versItemsCyberOuGuide } from '../../parcours/itemDuParcours';
 
   export let itemsCyber: ItemCyber[];
 
-  const versMesItems = versItemsCyber(itemsCyber);
+  onMount(chargeGuidesDansLeStore);
 
-  const actions = [
+  $: versMesItems = versItemsCyberOuGuide(itemsCyber, $guidesStore);
+  $: actions = [
     {
       id: 'comprendre',
       titre: 'Comprendre',
       explication:
         'Découvrez les enjeux de sécurité et les obligations pesant sur les collectivités',
-      items: versMesItems([]),
+      items: versMesItems([
+        '/guides/securite-numerique-des-collectivites-territoriales-lessentiel-de-la-reglementation',
+        '/guides/recommandations-pour-le-reconditionnement-des-ordinateurs-de-bureau-ou-portables',
+        '/guides/cybersecurite-toutes-les-communes-et-intercommunalites-sont-concernees',
+      ]),
       ancre: 'solutions&comprendre',
     },
     {
@@ -25,6 +35,7 @@
       items: versMesItems([
         '/ressources/risques-cyber',
         '/ressources/malette-cyber',
+        '/guides/attaques-par-rancongiciels-tous-concernes',
         '/ressources/panorama',
       ]),
       ancre: 'solutions&sensibiliser',
@@ -58,14 +69,20 @@
       titre: 'Se préparer',
       explication:
         "Organisez et exercez votre organisation à faire face à une crise d'origine cyber.",
-      items: versMesItems([]),
+      items: versMesItems([
+        '/guides/organiser-un-exercice-de-gestion-de-crise-cyber',
+      ]),
       ancre: 'solutions&se-preparer',
     },
     {
       id: 'reagir',
       titre: 'Réagir',
       explication: "Agissez en cas d'incident de sécurité.",
-      items: versMesItems(['/services/diagnostic-17cyber']),
+      items: versMesItems([
+        '/guides/la-supervision-de-securite-les-cles-de-decision',
+        '/services/diagnostic-17cyber',
+        '/guides/anticiper-et-gerer-sa-communication-de-crise-cyber',
+      ]),
       ancre: 'solutions&reagir',
     },
   ];
