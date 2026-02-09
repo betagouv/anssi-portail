@@ -1,11 +1,12 @@
 <script lang="ts">
   import CarteItem from '../catalogue/CarteItem.svelte';
   import type { ItemCyber } from '../catalogue/Catalogue.types';
+  import type { Guide } from '../catalogue/Guide.types';
 
   export let fondAlternatif: boolean;
   export let titre: string;
   export let explication: string;
-  export let items: ItemCyber[];
+  export let items: Array<ItemCyber | Guide>;
   export let ancre: string;
   export let sourceIllustration: string | undefined = undefined;
 </script>

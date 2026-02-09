@@ -2,11 +2,11 @@
   import type { ItemCyber } from '../catalogue/Catalogue.types';
   import ActionParcoursAvecItems from '../parcours/ActionParcoursAvecItems.svelte';
   import ControleSegmente from '../navigation/ControleSegmente.svelte';
-  import { versItemsCyber } from '../parcours/versItemCyber';
+  import { versItemsCyberOuGuide } from '../parcours/itemDuParcours';
 
   export let itemsCyber: ItemCyber[];
 
-  const versMesItems = versItemsCyber(itemsCyber);
+  const versMesItems = versItemsCyberOuGuide(itemsCyber, []);
 
   const actions = [
     {
