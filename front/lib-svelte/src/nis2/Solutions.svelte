@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ItemCyber } from '../catalogue/Catalogue.types';
   import ActionParcoursAvecItems from './ActionParcoursAvecItems.svelte';
-  import ControleSegmente from './ControleSegmente.svelte';
+  import ControleSegmente from '../navigation/ControleSegmente.svelte';
 
   export let itemsCyber: ItemCyber[];
 
