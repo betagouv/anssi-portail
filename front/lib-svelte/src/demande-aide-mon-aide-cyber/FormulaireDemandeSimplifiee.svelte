@@ -127,15 +127,15 @@
       </div>
 
       <div class="envoi-demande">
-        <lab-anssi-bouton
+        <dsfr-button
           use:clic={soumetsFormulaire}
-          taille="md"
-          titre="Envoyer ma demande"
-          variante="primaire"
+          size="md"
+          label="Envoyer ma demande"
+          variantkind="primary"
           type="submit"
-          largeur-maximale
-          actif={!enCoursEnvoi}
-        ></lab-anssi-bouton>
+          centered
+          disabled={enCoursEnvoi}
+        ></dsfr-button>
         <p class="texte-mention-xs">
           Ce diagnostic gratuit proposé par l'État n'est pas adapté aux
           particuliers et micro-entreprises.
