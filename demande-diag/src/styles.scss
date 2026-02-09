@@ -6,7 +6,7 @@
   }
 
   @include commun.polices-marianne('../../front/assets/fonts/');
-  @include commun.titres();
+  @include commun.titres-dsfr();
   @include commun.bouton();
   @include commun.erreur-champ-saisie();
 }
