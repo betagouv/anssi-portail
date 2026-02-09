@@ -1,7 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
   import { clic } from '../directives/actions.svelte';
-  import { validationChamp } from '../directives/validationChamp';
   import Alerte from '../ui/Alerte.svelte';
   import type { CouleurDeBadge } from '../ui/badge.type';
   import ChampTexte from '../ui/ChampTexte.svelte';
@@ -35,9 +34,11 @@
   let enSucces: boolean = false;
   let enCoursEnvoi: boolean = false;
   let erreur: string;
+  let erreurValidation = false;
 
   const soumetsFormulaire = async () => {
     if (!formulaire.estValide()) {
+      erreurValidation = true;
       return;
     }
     try {
@@ -104,27 +105,24 @@
         </ControleFormulaire>
       </div>
 
-      <div class="case-a-cocher cgu">
-        <input
-          id="cguAcceptees"
-          type="checkbox"
-          required
-          bind:checked={cguSontValidees}
-          use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
-        />
-        <label for="cguAcceptees">
-          <span class="requis">
-            J'accepte les
-            <dsfr-link
-              class="lien"
-              blank
-              label="conditions générales d'utilisation"
-              href="https://monaide.cyber.gouv.fr/cgu"
-            ></dsfr-link>
-            de MonAideCyber au nom de l’entité que je représente.
-          </span>
-        </label>
-      </div>
+      <dsfr-checkbox
+        id="cgu"
+        name="cgu"
+        status={cguSontValidees || !erreurValidation ? 'default' : 'error'}
+        value={cguSontValidees}
+        onvaluechanged={(e: CustomEvent) => (cguSontValidees = e.detail)}
+        errorMessage="Ce champ est obligatoire. Veuillez le cocher."
+        required
+      >
+        <span
+          >J’accepte les <dsfr-link
+            href="https://monaide.cyber.gouv.fr/cgu"
+            label="conditions générales d’utilisation"
+            blank
+          ></dsfr-link>
+          de MonAideCyber au nom de l’entité que je représente.
+        </span>
+      </dsfr-checkbox>
 
       <div class="envoi-demande">
         <dsfr-button
@@ -190,59 +188,8 @@
       }
     }
 
-    input[type='checkbox'] {
-      appearance: none;
-      border: 1px solid var(--border-action-high-blue-france);
-      border-radius: 4px;
-      min-width: 24px;
-      height: 24px;
-      margin: 0;
-      cursor: pointer;
-
-      &:checked {
-        background-color: var(--background-active-blue-france);
-
-        &::before {
-          content: '';
-          display: block;
-          margin: auto;
-          width: 6px;
-          height: 12px;
-          border-right: 2px var(--border-active-blue-france) solid;
-          border-bottom: 2px var(--border-active-blue-france) solid;
-          transform: translateY(2px) rotate(0.12turn);
-        }
-      }
-    }
-
-    .case-a-cocher {
-      display: grid;
-      grid-template-areas:
-        'input label'
-        'erreur erreur';
-      gap: 8px;
+    dsfr-checkbox {
       margin-bottom: 32px;
-      grid-template-columns: 24px 1fr;
-
-      input {
-        grid-area: input;
-      }
-
-      label {
-        grid-area: label;
-      }
-
-      :global(.erreur-champ-saisie) {
-        grid-area: erreur;
-        margin-top: 0;
-      }
-    }
-
-    .requis:before {
-      content: '*';
-      color: var(--text-default-error);
-      margin-right: 4px;
-      font-size: 1rem;
     }
 
     .envoi-demande {
