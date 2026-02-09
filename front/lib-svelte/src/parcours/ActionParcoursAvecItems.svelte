@@ -2,28 +2,34 @@
   import CarteItem from '../catalogue/CarteItem.svelte';
   import type { ItemCyber } from '../catalogue/Catalogue.types';
 
-  export let id: string;
   export let fondAlternatif: boolean;
   export let titre: string;
   export let explication: string;
   export let items: ItemCyber[];
   export let ancre: string;
+  export let sourceIllustration: string | undefined = undefined;
 </script>
 
-<dsfr-container id={ancre} class="action" class:fond-alternatif={fondAlternatif}>
+<dsfr-container
+  id={ancre}
+  class="action"
+  class:fond-alternatif={fondAlternatif}
+>
   <div class="contenu-action">
     <div class="description">
       <h2>{titre}</h2>
       <p class="explication">{explication}</p>
-      <img
-        class="illustration"
-        src="/assets/images/illustration-{id}.svg"
-        alt="Illustration {titre}"
-      />
+      {#if sourceIllustration}
+        <img
+          class="illustration"
+          src={sourceIllustration}
+          alt="Illustration {titre}"
+        />
+      {/if}
     </div>
     <h4>Ressources</h4>
     {#each items as item (item.id)}
-      <CarteItem {item}/>
+      <CarteItem {item} />
     {/each}
   </div>
 </dsfr-container>

@@ -81,7 +81,6 @@
   <ControleSegmente elements={actions} selecteurSections=".action">
     {#each actions as action, index (action.id)}
       <ActionParcoursAvecItems
-        id={action.id}
         titre={action.titre}
         explication={action.explication}
         items={action.items}
