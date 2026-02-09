@@ -1,7 +1,7 @@
 <script lang="ts">
-  import CarrouselDesInterlocuteurs from '../../interlocuteurs/CarrouselDesInterlocuteurs.svelte';
-  import EquipeBizDev from '../../interlocuteurs/EquipeBizDev.svelte';
-  import DemandeDiagnosticSimplifiee from '../DemandeDiagnosticSimplifiee.svelte';
+  import DemandeDiagnosticSimplifiee from '../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
+  import CarrouselDesInterlocuteurs from '../interlocuteurs/CarrouselDesInterlocuteurs.svelte';
+  import EquipeBizDev from '../interlocuteurs/EquipeBizDev.svelte';
 </script>
 
 <dsfr-container>
@@ -32,8 +32,8 @@
 </dsfr-container>
 
 <style lang="scss">
-  @use '../../../../assets/styles/responsive' as *;
-  @use '../../../../assets/styles/grille' as *;
+  @use '../../../assets/styles/responsive' as *;
+  @use '../../../assets/styles/grille' as *;
 
   .introduction {
     padding-bottom: 72px;
