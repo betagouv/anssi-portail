@@ -82,7 +82,7 @@
   }
 }
 
-@mixin titres {
+@mixin titres-dsfr {
   h2 {
     font-size: 1.75rem;
     line-height: 2.25rem;
@@ -128,6 +128,50 @@
       font-size: 1.25rem;
       line-height: 1.75rem;
     }
+  }
+
+  .alternatif-xs {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    margin: 0 0 32px;
+
+    @include a-partir-de(md) {
+      font-size: 3rem;
+      line-height: 3.5rem;
+    }
+  }
+}
+
+@mixin textes-dsfr {
+  .texte-chapo-xl {
+    font-size: 1.25rem;
+    line-height: 2rem;
+    margin: 0 0 24px;
+  }
+
+  .texte-article-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    margin: 0 0 24px;
+  }
+
+  .texte-standard-md {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin: 0 0 24px;
+  }
+
+  .texte-detail-sm {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    margin: 0 0 24px;
+  }
+
+  .texte-mention-xs {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    margin: 0 0 24px;
+    color: var(--text-mention-grey);
   }
 }
 
