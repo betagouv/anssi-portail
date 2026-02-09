@@ -1,5 +1,5 @@
-import { ClientHttp } from './clientHttp';
 import { Cache } from './cache';
+import { ClientHttp } from './clientHttp';
 
 export type ReponseGrist<TYPE_DOCUMENT> = {
   records: TYPE_DOCUMENT[];
@@ -8,7 +8,7 @@ export type ReponseGrist<TYPE_DOCUMENT> = {
 type Filtre = Record<string, unknown[]>;
 
 export class EntrepotGrist<TYPE_DOCUMENT> {
-  private readonly cache: Cache<Promise<ReponseGrist<TYPE_DOCUMENT>>>;
+  private readonly cache: Cache<ReponseGrist<TYPE_DOCUMENT>>;
 
   constructor(
     private readonly clientHttp: ClientHttp<ReponseGrist<TYPE_DOCUMENT>>,
@@ -19,7 +19,7 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
     this.cache = new Cache({ ttl: dureeCacheEnSecondes });
   }
 
-  protected async appelleGrist(filtre?: Filtre) {
+  protected appelleGrist(filtre?: Filtre) {
     if (!this.urlDeBase) {
       return { records: [] };
     }
