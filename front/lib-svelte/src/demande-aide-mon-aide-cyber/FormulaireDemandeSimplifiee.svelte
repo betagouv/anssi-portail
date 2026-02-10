@@ -159,6 +159,7 @@
               src={`${urlBase}/assets/images/marianne-dark.svg`}
               class="marianne"
               alt="Marianne"
+              crossorigin="anonymous"
             />
           </a>
           <a href="https://cyber.gouv.fr" aria-label="Site de l’ANSSI">
@@ -166,6 +167,7 @@
               class="logo-anssi"
               src={`${urlBase}/assets/images/logo-anssi.svg`}
               alt="Logo ANSSI"
+              crossorigin="anonymous"
             />
           </a>
           <a
@@ -174,11 +176,8 @@
             aria-label="Site MesServicesCyber"
           >
             <div class="titre-site">
-              <div class="titre-principal">
-                <h1>MesServicesCyber</h1>
-                <div class="zone-badge-agent-anssi"></div>
-              </div>
-              <h2>Innovation ANSSI</h2>
+              <p class="site">MesServicesCyber</p>
+              <p class="organisation">Innovation ANSSI</p>
             </div>
           </a>
         </div>
@@ -242,5 +241,45 @@
 
   .confirmation {
     padding-bottom: 24px;
+  }
+
+  .entete-principale {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 1.5rem;
+
+    .titre-msc {
+      display: flex;
+    }
+
+    .marianne {
+      width: 67px;
+      height: 67px;
+      transform: translateX(-9px);
+    }
+
+    .logo-anssi {
+      width: 49.5px;
+      height: 49.5px;
+      margin: 9px;
+    }
+
+    .titre-site {
+      p {
+        margin: 0;
+      }
+      .site {
+        color: var(--text-title-grey);
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.4rem;
+      }
+      .organisation {
+        color: var(--text-default-grey);
+        font-size: 0.75rem;
+        line-height: 1.125rem;
+      }
+    }
   }
 </style>
