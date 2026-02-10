@@ -1,3 +1,4 @@
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import express, { json, Request, Response } from 'express';
@@ -101,18 +102,30 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(cookieParser());
   app.use(json());
 
-  ['assets', 'scripts', 'lib-svelte', 'favicon.ico'].forEach((ressource) => {
-    app.use(
-      `/${ressource}`,
-      express.static(fournisseurChemin.ressourceDeBase(ressource), {
-        setHeaders: (reponse: Response) =>
-          reponse.setHeader(
-            'cache-control',
-            process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'
-          ),
-      })
-    );
-  });
+  const brancheLesRessourcesStatiques =
+    (avecCors: boolean) => (ressource: string) => {
+      const sertLesFichiersStatiques = express.static(
+        fournisseurChemin.ressourceDeBase(ressource),
+        {
+          setHeaders: (reponse: Response) =>
+            reponse.setHeader(
+              'cache-control',
+              process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'
+            ),
+        }
+      );
+
+      if (avecCors) {
+        app.use(`/${ressource}`, cors(), sertLesFichiersStatiques);
+      } else {
+        app.use(`/${ressource}`, sertLesFichiersStatiques);
+      }
+    };
+
+  brancheLesRessourcesStatiques(true)('assets');
+  ['scripts', 'lib-svelte', 'favicon.ico'].forEach(
+    brancheLesRessourcesStatiques(false)
+  );
 
   app.use(configurationServeur.middleware.verifieModeMaintenance);
 
@@ -307,7 +320,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/visas', ressourceVisa(configurationServeur));
 
-  app.use("/api/diagnostic/statistiques", ressourceStatistiquesDiagnostic())
+  app.use('/api/diagnostic/statistiques', ressourceStatistiquesDiagnostic());
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 
