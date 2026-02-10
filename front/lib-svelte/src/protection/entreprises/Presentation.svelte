@@ -41,7 +41,7 @@
   {/snippet}
 </Heros>
 
-<Proteger />
+<Proteger origine="landing-entreprises" />
 
 <style lang="scss">
   .preambule {

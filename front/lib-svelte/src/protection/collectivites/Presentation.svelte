@@ -39,7 +39,7 @@
 <Onglets {onglets} bind:ongletActif />
 
 {#if ongletActif === 0}
-  <Proteger />
+  <Proteger origine="landing-collectivites" />
 {:else}
   <Solutions {itemsCyber} />
 {/if}
