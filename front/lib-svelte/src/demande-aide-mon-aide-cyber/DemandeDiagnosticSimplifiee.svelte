@@ -2,23 +2,22 @@
   import FoireAuxQuestions from './FoireAuxQuestions.svelte';
   import FormulaireDemandeSimplifiee from './FormulaireDemandeSimplifiee.svelte';
 
+  export let titre: string =
+    'Protégez rapidement votre organisation des cyberattaques';
+  export let description: string =
+    'Profitez d’un premier diagnostic cyber gratuit accompagné par un Aidant cyber et recevez 6 recommandations prioritaires à mettre en place pour améliorer la cybersécurité de votre organisation.';
+  export let mode: 'autonome' | undefined = undefined;
   export let origine: string;
   export let urlBase: string = '';
   export let cacheLesLiensDeRetour = false;
   export let siretAidant: string | undefined = undefined;
-  export let titre: string =
-    'Protégez rapidement votre organisation des cyberattaques';
 </script>
 
 <div class="demande-diagnostic">
   <div class="explications">
     <hgroup>
       <h2>{titre}</h2>
-      <p>
-        Profitez d’un premier diagnostic cyber gratuit accompagné par un Aidant
-        cyber et recevez 6 recommandations prioritaires à mettre en place pour
-        améliorer la cybersécurité de votre organisation.
-      </p>
+      <p>{description}</p>
     </hgroup>
     <ol>
       <li>Complétez et envoyez votre demande.</li>
@@ -33,6 +32,7 @@
 
   <div class="formulaire">
     <FormulaireDemandeSimplifiee
+      {mode}
       {origine}
       {urlBase}
       {cacheLesLiensDeRetour}
