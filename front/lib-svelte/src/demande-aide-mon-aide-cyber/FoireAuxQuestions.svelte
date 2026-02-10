@@ -1,5 +1,6 @@
 <script lang="ts">
   import SectionAccordeon from '../ui/SectionAccordeon.svelte';
+  export let urlBase: string = '';
 </script>
 
 <div class="accordeon">
@@ -129,7 +130,7 @@
         et <strong>aucune donnée sensible n’est collectée.</strong>
         Pour en savoir plus, n’hésitez pas à consulter notre
         <lab-anssi-lien
-          href="/securite"
+          href={`${urlBase}/securite`}
           titre="page sécurité"
           apparence="lien-texte"
           cible="_blank"
