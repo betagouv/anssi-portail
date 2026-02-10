@@ -35,6 +35,7 @@ import { ressourcePagesJekyllConnectees } from './ressourcePagesJekyllConnectees
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceRetoursExperience } from './ressourceRetoursExperience';
 import { ressourceStatistiques } from './ressourceStatistiques';
+import { ressourceStatistiquesDiagnostic } from './ressourceStatistiquesDiagnostic';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
 import { ressourceVisa } from './ressourceVisa';
 import { ressourceDernierResultatDeTest } from './testMaturite/ressourceDernierResultatDeTest';
@@ -305,6 +306,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/documents-guides', ressourceDocumentGuide(configurationServeur));
 
   app.use('/visas', ressourceVisa(configurationServeur));
+
+  app.use("/api/diagnostic/statistiques", ressourceStatistiquesDiagnostic())
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 
