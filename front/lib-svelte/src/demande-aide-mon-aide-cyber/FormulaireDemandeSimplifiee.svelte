@@ -1,5 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
+  import { onMount } from 'svelte';
   import { clic } from '../directives/actions.svelte';
   import Alerte from '../ui/Alerte.svelte';
   import type { CouleurDeBadge } from '../ui/badge.type';
@@ -10,17 +11,6 @@
   import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import type { CorpsAPIDemandeAide } from './DonneesFormulaireDemandeAide';
-
-  const badges: { label: string; accent: CouleurDeBadge }[] = [
-    {
-      label: '+4900 organisations accompagnées',
-      accent: 'yellow-tournesol',
-    },
-    {
-      label: '92% de satisfaction',
-      accent: 'yellow-tournesol',
-    },
-  ];
 
   export let origine: string;
   export let urlBase: string = '';
@@ -35,6 +25,23 @@
   let enCoursEnvoi: boolean = false;
   let erreur: string;
   let erreurValidation = false;
+  let badges: { label: string; accent: CouleurDeBadge }[] = [];
+
+  onMount(async () => {
+    const reponse = await axios.get<{
+      organisationsAccompagnees: number;
+      satisfaction: number;
+    }>(`${urlBase}/api/diagnostic/statistiques`);
+    badges = [
+      {
+        label: `+${reponse.data.organisationsAccompagnees} organisations accompagnées`,
+        accent: 'yellow-tournesol',
+      },
+      {
+        label: `${reponse.data.satisfaction}% de satisfaction`,
+        accent: 'yellow-tournesol',
+      }];
+  });
 
   const soumetsFormulaire = async () => {
     if (!formulaire.estValide()) {
@@ -57,7 +64,7 @@
       };
       const reponse = await axios.post(
         `${urlBase}/api/mon-aide-cyber/demandes-aide`,
-        corps
+        corps,
       );
       if (reponse.status === 201) {
         enSucces = true;
@@ -115,11 +122,11 @@
         required
       >
         <span
-          >J’accepte les <dsfr-link
-            href="https://monaide.cyber.gouv.fr/cgu"
-            label="conditions générales d’utilisation"
-            blank
-          ></dsfr-link>
+        >J’accepte les <dsfr-link
+          href="https://monaide.cyber.gouv.fr/cgu"
+          label="conditions générales d’utilisation"
+          blank
+        ></dsfr-link>
           de MonAideCyber au nom de l’entité que je représente.
         </span>
       </dsfr-checkbox>
