@@ -7,7 +7,7 @@
   export let cacheLesLiensDeRetour = false;
   export let siretAidant: string | undefined = undefined;
   export let titre: string =
-    'Protégez rapidement votre organisation des cyberattaques.';
+    'Protégez rapidement votre organisation des cyberattaques';
 </script>
 
 <div class="demande-diagnostic">
@@ -21,14 +21,14 @@
       </p>
     </hgroup>
     <ol>
-      <li>Complétez et envoyez votre demande</li>
-      <li>Un aidant cyber vous contacte rapidement</li>
-      <li>Réalisez votre diagnostic (en visio ou sur site – 1h)</li>
-      <li>
-        Recevez vos 6 recommandations prioritaires pour renforcer votre
-        cybersécurité
-      </li>
+      <li>Complétez et envoyez votre demande.</li>
+      <li>Un aidant cyber vous contacte rapidement.</li>
+      <li>Réalisez votre diagnostic (en visio ou sur site – 1h).</li>
+      <li>Recevez 6 recommandations prioritaires pour commencer à agir.</li>
     </ol>
+    <p class="texte-mention-xs">
+      Ce diagnostic n'est pas adapté aux particuliers et micro-entreprises.
+    </p>
   </div>
 
   <div class="formulaire">
@@ -58,7 +58,6 @@
     display: grid;
     grid-template-areas:
       'explications'
-      'etapes'
       'formulaire'
       'faq';
     background-color: var(--background-alt-blue-france);
@@ -122,7 +121,7 @@
     .formulaire {
       grid-area: formulaire;
       background-color: var(--background-default-grey);
-      padding: 24px;
+      padding: 40px;
       border: 1px solid var(--border-default-grey);
     }
 

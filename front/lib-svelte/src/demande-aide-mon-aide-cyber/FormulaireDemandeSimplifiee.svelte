@@ -126,8 +126,7 @@
           href="https://monaide.cyber.gouv.fr/cgu"
           label="conditions générales d’utilisation"
           blank
-        ></dsfr-link>
-          de MonAideCyber au nom de l’entité que je représente.
+        ></dsfr-link>.
         </span>
       </dsfr-checkbox>
 
@@ -141,10 +140,6 @@
           centered
           disabled={enCoursEnvoi}
         ></dsfr-button>
-        <p class="texte-mention-xs">
-          Ce diagnostic gratuit proposé par l'État n'est pas adapté aux
-          particuliers et micro-entreprises.
-        </p>
       </div>
       {#if erreur}
         <Alerte
