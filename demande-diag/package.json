@@ -5,8 +5,8 @@
   "type": "module",
   "main": "index.ts",
   "scripts": {
-    "build:demo": "VERSION_UI_KIT=1.41.3 VITE_API_URL=https://demo.messervicescyber.beta.gouv.fr ENV=demo vite build",
-    "build:prod": "VERSION_UI_KIT=1.41.3 VITE_API_URL=https://messervices.cyber.gouv.fr ENV=prod vite build"
+    "build:demo": "VITE_API_URL=https://demo.messervicescyber.beta.gouv.fr ENV=demo vite build",
+    "build:prod": "VITE_API_URL=https://messervices.cyber.gouv.fr ENV=prod vite build"
   },
   "packageManager": "pnpm@10.24.0",
   "devDependencies": {

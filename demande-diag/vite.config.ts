@@ -1,8 +1,13 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import cssnano from 'cssnano';
-import path, { resolve } from 'path';
+import { readFileSync } from 'node:fs';
+import path, { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import { remplaceVersionsDansPhp } from './plugin/remplaceVersionsDansPhp';
+
+const rootPkgPath = resolve(__dirname, '..', 'package.json');
+const pkg = JSON.parse(readFileSync(rootPkgPath, 'utf-8'));
+const version_lab_ui_kit = pkg.runtimeDependencies?.['@lab-anssi/ui-kit'];
 
 export default defineConfig({
   build: {
@@ -12,7 +17,7 @@ export default defineConfig({
       fileName: 'demande-diag',
       formats: ['iife'],
     },
-    outDir: 'dist-' + (process.env.ENV ?? "prod"),
+    outDir: 'dist-' + (process.env.ENV ?? 'prod'),
   },
   resolve: {
     alias: {
@@ -55,7 +60,7 @@ export default defineConfig({
       emitCss: true,
     }),
     remplaceVersionsDansPhp(
-      process.env.VERSION_UI_KIT ?? '1.0',
+      version_lab_ui_kit ?? '1.0',
       process.env.VERSION ?? '1.0',
       process.env.ENV ?? 'prod'
     ),
