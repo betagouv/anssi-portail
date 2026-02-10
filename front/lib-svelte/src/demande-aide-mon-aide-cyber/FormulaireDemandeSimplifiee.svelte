@@ -220,12 +220,12 @@
       gap: 8px;
 
       &.recherche-organisation {
-        margin-bottom: 16px;
+        margin-bottom: 1rem;
       }
     }
 
     dsfr-checkbox {
-      margin-bottom: 32px;
+      margin-bottom: 1.5rem;
     }
 
     .envoi-demande {
@@ -240,7 +240,11 @@
   }
 
   .confirmation {
-    padding-bottom: 24px;
+    padding-bottom: 1.5rem;
+  }
+
+  dsfr-badges-group + .recherche-organisation {
+    margin-top: 1rem;
   }
 
   .entete-principale {
@@ -251,6 +255,10 @@
 
     .titre-msc {
       display: flex;
+    }
+
+    a.titre-msc {
+      text-decoration: none;
     }
 
     .marianne {
