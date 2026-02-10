@@ -1,7 +1,7 @@
 <script lang="ts">
 </script>
 
-<details>
+<details on:toggle>
   <summary>
     <slot name="titre" />
   </summary>

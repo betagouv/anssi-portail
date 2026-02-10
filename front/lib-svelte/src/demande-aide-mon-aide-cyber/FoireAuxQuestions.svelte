@@ -1,6 +1,18 @@
 <script lang="ts">
   import SectionAccordeon from '../ui/SectionAccordeon.svelte';
   export let urlBase: string = '';
+
+  let videoRisques: HTMLVideoElement;
+  let videoRisquesMetadataLoaded = false;
+  const afficheLaVideo = (e: Event) => {
+    const details = e.target as HTMLDetailsElement;
+    if (details.open && videoRisques && !videoRisquesMetadataLoaded) {
+      // Permet d'afficher la durée de la vidéo avant que l'utilisateur clique sur play.
+      videoRisques.preload = 'metadata';
+      videoRisques.load();
+      videoRisquesMetadataLoaded = true;
+    }
+  };
 </script>
 
 <div class="accordeon">
@@ -23,7 +35,7 @@
       </p>
     </div>
   </SectionAccordeon>
-  <SectionAccordeon>
+  <SectionAccordeon on:toggle={afficheLaVideo}>
     <span slot="titre"
       >Que risque mon organisation en cas de cyberattaques&nbsp;?</span
     >
@@ -49,10 +61,25 @@
       <!-- Les sous-titres sont intégrés dans la vidéo -->
       <!-- svelte-ignore a11y_media_has_caption -->
       <video
+        bind:this={videoRisques}
         id="video-risques"
-        src="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.mp4"
         controls
-      ></video>
+        preload="none"
+        poster="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.avif"
+      >
+        <source
+          src="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.av1.mp4"
+          type="video/mp4; codecs=av01.0.05M.08"
+        />
+        <source
+          src="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.webm"
+          type='video/webm; codecs="vp9,opus"'
+        />
+        <source
+          src="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.mp4"
+          type="video/mp4; codecs=avc1.42E01E"
+        />
+      </video>
       <p>
         🔐 Pour agir sans attendre, l’ANSSI (l’Agence nationale de la sécurité
         des systèmes d’information) a créé un diagnostic cyber gratuit, réalisé
@@ -164,6 +191,7 @@
   p {
     margin: 0;
   }
+
   .accordeon {
     .corps {
       padding: 16px 16px 24px;
@@ -179,5 +207,9 @@
 
   .besoin-aide {
     margin-top: 48px;
+  }
+
+  video {
+    aspect-ratio: 16 / 9;
   }
 </style>
