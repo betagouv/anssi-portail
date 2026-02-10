@@ -48,6 +48,7 @@ export default defineConfig({
         'page-directive-nis2': 'src/main-page-directive-nis2.ts',
         collectivites: 'src/main-collectivites.ts',
         associations: 'src/main-associations.ts',
+        entreprises: 'src/main-entreprises.ts',
         'carrousel-des-interlocuteurs':
           'src/main-carrousel-des-interlocuteurs.ts',
         'equipe-biz-dev': 'src/main-equipe-biz-dev.ts',

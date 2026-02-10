@@ -145,6 +145,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'directive-nis2',
     'collectivites',
     'associations',
+    'entreprises',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
