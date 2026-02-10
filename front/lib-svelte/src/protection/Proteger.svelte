@@ -15,9 +15,23 @@
     <!-- svelte-ignore a11y_media_has_caption -->
     <video
       id="video-risques"
-      src="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.mp4"
       controls
-    ></video>
+      preload="metadata"
+      poster="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.avif"
+    >
+      <source
+        src="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.av1.mp4"
+        type="video/mp4; codecs=av01.0.05M.08"
+      />
+      <source
+        src="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.webm"
+        type='video/webm; codecs="vp9,opus"'
+      />
+      <source
+        src="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.mp4"
+        type="video/mp4; codecs=avc1.42E01E"
+      />
+    </video>
   </div>
 
   <div class="demande">
