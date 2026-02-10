@@ -1,3 +1,4 @@
+import cors from 'cors';
 import { Router } from 'express';
 
 export const STATS_DIAGNOSTIC = {
@@ -7,7 +8,7 @@ export const STATS_DIAGNOSTIC = {
 
 export const ressourceStatistiquesDiagnostic = () => {
   const routeur = Router();
-  routeur.get('/', (_requete, reponse) => {
+  routeur.get('/', cors(), (_requete, reponse) => {
     reponse.send(STATS_DIAGNOSTIC);
   });
   return routeur;
