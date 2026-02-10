@@ -7,7 +7,7 @@ packages:
   - 'front/lib-svelte'
   - 'recuperation-guides'
   - 'mise-a-jour-financements'
-  - demande-diag
+  - 'demande-diag'
 
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 preferFrozenLockfile: true
