@@ -46,7 +46,7 @@
     </summary>
     <div class="faq">
       <h6>Questions les plus fréquentes</h6>
-      <FoireAuxQuestions />
+      <FoireAuxQuestions {urlBase} />
     </div>
   </details>
 </div>
