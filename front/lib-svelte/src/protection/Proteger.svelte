@@ -2,6 +2,8 @@
   import DemandeDiagnosticSimplifiee from '../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
   import CarrouselDesInterlocuteurs from '../interlocuteurs/CarrouselDesInterlocuteurs.svelte';
   import EquipeBizDev from '../interlocuteurs/EquipeBizDev.svelte';
+
+  export let origine: string;
 </script>
 
 <dsfr-container>
@@ -19,7 +21,7 @@
   </div>
 
   <div class="demande">
-    <DemandeDiagnosticSimplifiee origine="landing-diag" />
+    <DemandeDiagnosticSimplifiee {origine} />
   </div>
 
   <div class="interlocuteurs">

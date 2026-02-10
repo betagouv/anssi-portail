@@ -40,7 +40,7 @@
   {/snippet}
 </Heros>
 
-<Proteger />
+<Proteger origine="landing-associations" />
 
 <style lang="scss">
   .preambule {
