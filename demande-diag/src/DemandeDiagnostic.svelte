@@ -16,6 +16,9 @@
 
 <div class="lab-anssi-demande-diagnostic-simplifiee" data-themeable>
   <DemandeDiagnosticSimplifiee
+    titre="Bénéficiez d'un premier accompagnement cyber gratuit"
+    description="Grâce au diagnostic cyberdépart, commencez à protéger votre organisation contre le risque de cyberattaques."
+    mode="autonome"
     origine={window.location.hostname}
     urlBase={import.meta.env.VITE_API_URL}
     cacheLesLiensDeRetour={true}

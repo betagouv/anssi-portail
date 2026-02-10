@@ -12,6 +12,7 @@
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import type { CorpsAPIDemandeAide } from './DonneesFormulaireDemandeAide';
 
+  export let mode: 'autonome' | undefined = undefined;
   export let origine: string;
   export let urlBase: string = '';
   export let cacheLesLiensDeRetour = false;
@@ -40,7 +41,8 @@
       {
         label: `${reponse.data.satisfaction}% de satisfaction`,
         accent: 'yellow-tournesol',
-      }];
+      },
+    ];
   });
 
   const soumetsFormulaire = async () => {
@@ -64,7 +66,7 @@
       };
       const reponse = await axios.post(
         `${urlBase}/api/mon-aide-cyber/demandes-aide`,
-        corps,
+        corps
       );
       if (reponse.status === 201) {
         enSucces = true;
@@ -83,7 +85,9 @@
   <Formulaire id="demande-diagnostic-simplifiee" bind:this={formulaire}>
     <div class="formulaire">
       <dsfr-badges-group {badges} size="sm"></dsfr-badges-group>
-      <h5>Demande de diagnostic cyber</h5>
+      {#if mode !== 'autonome'}
+        <h5>Demande de diagnostic cyber</h5>
+      {/if}
       <div class="champ recherche-organisation">
         <label class="libelle" for="entite">Recherchez votre organisation</label
         >
@@ -122,11 +126,11 @@
         required
       >
         <span
-        >J’accepte les <dsfr-link
-          href="https://monaide.cyber.gouv.fr/cgu"
-          label="conditions générales d’utilisation"
-          blank
-        ></dsfr-link>.
+          >J’accepte les <dsfr-link
+            href="https://monaide.cyber.gouv.fr/cgu"
+            label="conditions générales d’utilisation"
+            blank
+          ></dsfr-link>.
         </span>
       </dsfr-checkbox>
 
@@ -147,6 +151,37 @@
           titre="Une erreur est survenue"
           message={erreur}
         />
+      {/if}
+      {#if mode === 'autonome'}
+        <div class="entete-principale">
+          <a href={urlBase}>
+            <img
+              src={`${urlBase}/assets/images/marianne-dark.svg`}
+              class="marianne"
+              alt="Marianne"
+            />
+          </a>
+          <a href="https://cyber.gouv.fr" aria-label="Site de l’ANSSI">
+            <img
+              class="logo-anssi"
+              src={`${urlBase}/assets/images/logo-anssi.svg`}
+              alt="Logo ANSSI"
+            />
+          </a>
+          <a
+            href={urlBase}
+            class="titre-msc"
+            aria-label="Site MesServicesCyber"
+          >
+            <div class="titre-site">
+              <div class="titre-principal">
+                <h1>MesServicesCyber</h1>
+                <div class="zone-badge-agent-anssi"></div>
+              </div>
+              <h2>Innovation ANSSI</h2>
+            </div>
+          </a>
+        </div>
       {/if}
     </div>
   </Formulaire>
