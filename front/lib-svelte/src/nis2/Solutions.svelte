@@ -85,7 +85,6 @@
         items={action.items}
         fondAlternatif={index % 2 === 1}
         ancre={action.ancre}
-        sourceIllustration={`/assets/images/illustration-${action.id}.svg`}
       ></ActionParcoursAvecItems>
     {/each}
   </ControleSegmente>
