@@ -1,6 +1,19 @@
 <script lang="ts">
-  export let nombreOrganisations: number;
-  export let satisfaction: number;
+  import axios from 'axios';
+  import { onMount } from 'svelte';
+
+  let nombreOrganisations: number;
+  let satisfaction: number;
+
+  onMount(async()=>{
+    const reponse = await axios.get<{
+      organisationsAccompagnees: number;
+      satisfaction: number;
+    }>(`/api/diagnostic/statistiques`);
+
+    nombreOrganisations = reponse.data.organisationsAccompagnees;
+    satisfaction = reponse.data.satisfaction;
+  });
 </script>
 
 <svg viewBox="0 0 589 337" fill="none" xmlns="http://www.w3.org/2000/svg">
