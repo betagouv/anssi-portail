@@ -13,7 +13,7 @@
   export let siretAidant: string | undefined = undefined;
 </script>
 
-<div class="demande-diagnostic">
+<div class="demande-diagnostic" class:autonome={mode === 'autonome'}>
   <div class="explications">
     <hgroup>
       <h2>{titre}</h2>
@@ -62,8 +62,12 @@
       'faq';
     background-color: var(--background-alt-blue-france);
     padding: 40px 16px;
-    border-radius: 8px;
     gap: 24px;
+
+    &.autonome {
+      background-color: white;
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
+    }
 
     @include a-partir-de(md) {
       padding: 40px;
