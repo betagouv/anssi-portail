@@ -5,6 +5,7 @@
   import Onglets from './Onglets.svelte';
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
+  import DocumentationNis2 from './DocumentationNis2.svelte';
 
   let { itemsCyber } = $props();
 
@@ -67,9 +68,9 @@
 {#if ongletActif === 0}
   <Presentation />
 {:else if ongletActif === 1}
-   <Solutions {itemsCyber} />
+  <Solutions {itemsCyber} />
 {:else if ongletActif === 2}
-  <!-- <div></div> -->
+  <DocumentationNis2 />
 {/if}
 
 <style lang="scss">
