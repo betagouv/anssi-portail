@@ -1,0 +1,29 @@
+{
+  "name": "comparaison-grist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "type": "module",
+  "packageManager": "pnpm@10.24.0",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "start:guides": "node src/guides.ts",
+    "lint:fix": "eslint . --fix",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "axios": "~1.13.2",
+    "diff": "~8.0.3",
+    "isomorphic-dompurify": "~2.35.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "~9.39.1",
+    "@types/node": "~22.13.4",
+    "eslint": "~9.39.1",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "~8.29.1"
+  }
+}
