@@ -1,20 +1,24 @@
 import assert from 'node:assert';
-import { describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'node:test';
 import { ClientHttp } from '../../src/infra/clientHttp';
 import {
   EntrepotFinancementGrist,
-  RetourApiGrist,
+  FinancementGrist,
 } from '../../src/infra/entrepotFinancementGrist';
 import { Financement } from '../../src/metier/financement';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
+import { ReponseGrist } from '../../src/infra/entrepotGrist';
 
 describe("L'entrepot de financement Grist", () => {
-  const clientHttp: ClientHttp<RetourApiGrist> = {
-    get: async () => ({ data: { records: [] } }),
-  };
-  const entrepotFinancementGrist = new EntrepotFinancementGrist({
-    clientHttp,
-    adaptateurEnvironnement: fauxAdaptateurEnvironnement,
+  let clientHttp: ClientHttp<ReponseGrist<FinancementGrist>>;
+  let entrepotFinancementGrist: EntrepotFinancementGrist;
+
+  beforeEach(() => {
+    clientHttp = { get: async () => ({ data: { records: [] } }) };
+    entrepotFinancementGrist = new EntrepotFinancementGrist({
+      clientHttp,
+      adaptateurEnvironnement: fauxAdaptateurEnvironnement,
+    });
   });
 
   it("ne renvoie rien si l'url source n'est pas définie", async () => {
@@ -43,7 +47,7 @@ describe("L'entrepot de financement Grist", () => {
 
     clientHttp.get = async (url, config) => {
       urlAppelee = url;
-      headerAuthent = config?.headers?.Authorization;
+      headerAuthent = config?.headers?.authorization;
       return {
         data: { records: [] },
       };
@@ -105,8 +109,8 @@ describe("L'entrepot de financement Grist", () => {
                 Source: 'https://www.aides-entreprises.fr/aide/10124',
               },
             },
-          ],
-        } satisfies RetourApiGrist,
+          ] satisfies FinancementGrist[],
+        },
       };
     };
 
@@ -137,8 +141,8 @@ describe("L'entrepot de financement Grist", () => {
     clientHttp.get = async () => {
       return {
         data: {
-          records: [],
-        } satisfies RetourApiGrist,
+          records: [] satisfies FinancementGrist[],
+        },
       };
     };
 
@@ -192,8 +196,8 @@ describe("L'entrepot de financement Grist", () => {
                 Source: 'https://www.aides-entreprises.fr/aide/10124',
               },
             },
-          ],
-        } satisfies RetourApiGrist,
+          ] satisfies FinancementGrist[],
+        },
       };
     };
 
@@ -236,5 +240,20 @@ describe("L'entrepot de financement Grist", () => {
         contact: '',
       },
     ] satisfies Financement[]);
+  });
+
+  it("n'appelle pas Grist si les données sont en cache", async () => {
+    let nombreAppel = 0;
+    clientHttp.get = async <T>() => {
+      nombreAppel++;
+      return {
+        data: { records: [] } as unknown as T,
+      };
+    };
+
+    await entrepotFinancementGrist.tous();
+    await entrepotFinancementGrist.tous();
+
+    assert.equal(nombreAppel, 1);
   });
 });

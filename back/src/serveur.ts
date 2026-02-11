@@ -50,6 +50,7 @@ const adaptateurHachage = fabriqueAdaptateurHachage({
 
 const entrepotFavori = new EntrepotFavoriPostgres({ adaptateurHachage });
 const entrepotFinancement = new EntrepotFinancementGrist({
+  clientHttp: axios,
   adaptateurEnvironnement,
 });
 const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
