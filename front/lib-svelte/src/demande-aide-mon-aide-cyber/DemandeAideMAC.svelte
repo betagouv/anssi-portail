@@ -95,7 +95,7 @@
 
   <section class="encart-presentation">
     <div class="illustration">
-      <IllustrationCyberDepart nombreOrganisations={5000} />
+      <IllustrationCyberDepart nombreOrganisations={5000} satisfaction={92} />
     </div>
     <div class="contenu-section">
       <lab-anssi-lien
