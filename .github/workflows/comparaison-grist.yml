@@ -1,0 +1,30 @@
+name: Compare des contenus provenant de grist
+run-name: Génère un rapport de différence entre les contenus de 2 documents Grist
+permissions: {}
+
+on:
+  workflow_dispatch: # Pour activer le déclenchement manuel
+
+jobs:
+  genere-differences-guides:
+    name: 'Génère rapport différences guides'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloner le dépôt Git
+        uses: actions/checkout@v4
+
+      - name: Configurer Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Installe pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.24.0
+
+      - name: (TOUS) Installe les dépendances
+        run: pnpm install --frozen-lockfile
+
+      - name: Lance le script de comparaison
+        run: pnpm -F comparaison-grist start:guides
