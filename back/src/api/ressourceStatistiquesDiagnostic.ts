@@ -2,7 +2,7 @@ import cors from 'cors';
 import { Router } from 'express';
 
 export const STATS_DIAGNOSTIC = {
-  organisationsAccompagnees: 4900,
+  organisationsAccompagnees: 5000,
   satisfaction: 92,
 };
 
