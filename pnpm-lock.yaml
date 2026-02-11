@@ -139,6 +139,34 @@ importers:
         specifier: ~3.0.5
         version: 3.0.5(@types/node@22.13.17)(jsdom@27.4.0)(sass@1.93.3)(tsx@4.19.3)
 
+  comparaison-grist:
+    dependencies:
+      axios:
+        specifier: ~1.13.2
+        version: 1.13.2
+      diff:
+        specifier: ~8.0.3
+        version: 8.0.3
+      isomorphic-dompurify:
+        specifier: ~2.35.0
+        version: 2.35.0
+    devDependencies:
+      '@eslint/js':
+        specifier: ~9.39.1
+        version: 9.39.1
+      '@types/node':
+        specifier: ~22.13.4
+        version: 22.13.17
+      eslint:
+        specifier: ~9.39.1
+        version: 9.39.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+      typescript-eslint:
+        specifier: ~8.29.1
+        version: 8.29.1(eslint@9.39.1)(typescript@5.8.3)
+
   demande-diag:
     dependencies:
       '@anssi-portail/svelte':
