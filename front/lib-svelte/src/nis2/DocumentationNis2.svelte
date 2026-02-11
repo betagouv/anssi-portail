@@ -4,7 +4,12 @@
   <div class="contenu">
     <h2>Plaquette de présentation de la directive NIS 2</h2>
     <p>
-      <dsfr-link href="#" label="Télécharger la plaquette" download></dsfr-link>
+      <dsfr-link
+        href="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Plaquette_NIS2_2024.pdf"
+        label="Télécharger la plaquette"
+        download
+        blank
+      ></dsfr-link>
     </p>
     <img src="/assets/images/plaquette-nis2.avif" alt="Plaquette NIS 2" />
 
