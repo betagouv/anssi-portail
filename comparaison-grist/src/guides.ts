@@ -3,7 +3,7 @@ import { ConsignateurDeComparaisonDeGuides } from './infrastructure/consignateur
 import { ComparateurDeGuides } from './metier/guides/comparateurDeGuides';
 import { Guide } from './metier/guides/guide.type';
 
-const summaryFile = process.env.GITHUB_STEP_SUMMARY ?? 'rapport-guides.txt';
+const summaryFile = process.env.GITHUB_STEP_SUMMARY ?? 'rapport-guides.md';
 
 // Pour tester le temps du dévelppement
 const guideZeroTrust: Guide = {
@@ -36,7 +36,7 @@ const comparateurDeGuides = new ComparateurDeGuides(
 );
 
 await comparateurDeGuides.chargeLesDonnees();
-const comparaison = await comparateurDeGuides.compare();
+const comparaison = comparateurDeGuides.compare();
 
 const consignateurDeComparaisonDeGuides =
   new ConsignateurDeComparaisonDeGuides();

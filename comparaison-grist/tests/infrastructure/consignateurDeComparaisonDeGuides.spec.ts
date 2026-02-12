@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { ConsignateurDeComparaisonDeGuides } from '../../src/infrastructure/consignateurDeComparaisonDeGuides';
-import { Guide } from '../../src/metier/guides/guide.type';
+import { ComparaisonDeGuides, Guide } from '../../src/metier/guides/guide.type';
 
 export const guideZeroTrust: Guide = {
   id: 'zero-trust',
@@ -63,13 +63,15 @@ describe('Le consignateur de comparaison de guides', () => {
 `;
   const postlude = '</tbody>\n</table>';
 
-  it('sait initialiser la comparaison en Markdown', () => {
-    const consignateurDeComparaisonDeGuides =
-      new ConsignateurDeComparaisonDeGuides();
-    const comparaisonVide = {
-      ajouts: [],
-    };
+  const consignateurDeComparaisonDeGuides =
+    new ConsignateurDeComparaisonDeGuides();
 
+  const comparaisonVide: ComparaisonDeGuides = {
+    ajouts: [],
+    suppressions: [],
+  };
+
+  it('sait initialiser la comparaison en Markdown', () => {
     const markdown =
       consignateurDeComparaisonDeGuides.consigneComparaison(comparaisonVide);
 
@@ -104,10 +106,48 @@ describe('Le consignateur de comparaison de guides', () => {
       '```diff\n+ REAGIR, SE_FORMER\n```\n</td>\n' +
       '</tr>\n' +
       postlude;
-    const consignateurDeComparaisonDeGuides =
-      new ConsignateurDeComparaisonDeGuides();
+
     const comparaison = {
+      ...comparaisonVide,
       ajouts: [guideZeroTrust],
+    };
+    const markdown =
+      consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
+
+    expect(markdown).toEqual(attendu);
+  });
+
+  it('sait traduire les suppressions en Markdown', () => {
+    const attendu =
+      prelude +
+      '<tr>\n' +
+      '<td>\n\n' +
+      '```diff\n- zero-trust\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- Zero Trust\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- Les essentiels\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- 20 Juin 2025\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- 20 Juin 2025\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- <p>Avec l’accroissement des usages liés au télétravail, ...</p>\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- anssi-fondamentaux-zero-trust-v1_publication\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- Les Fondamentaux de l&#039;ANSSI - Zero Trust - v1.0 : anssi-fondamentaux-zero-trust-v1.0.pdf\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- FR\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- Les essentiels\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- REAGIR, SE_FORMER\n```\n</td>\n' +
+      '</tr>\n' +
+      postlude;
+    const comparaison = {
+      ...comparaisonVide,
+      suppressions: [guideZeroTrust],
     };
     const markdown =
       consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
