@@ -1,5 +1,5 @@
 import { EntrepotGuide } from './entrepotGuide';
-import { Guide } from './guide.type';
+import { ComparaisonDeGuides, Guide } from './guide.type';
 
 export class ComparateurDeGuides {
   guidesSource: Guide[] = [];
@@ -20,13 +20,21 @@ export class ComparateurDeGuides {
     this.guidesCible = donneesCible;
   }
 
-  async compare() {
+  compare(): ComparaisonDeGuides {
     const ajouts = this.guidesSource.filter(
       (guideSource) =>
         !this.guidesCible.some((guideCible) => guideCible.id === guideSource.id)
     );
+
+    const suppressions = this.guidesCible.filter(
+      (guideCible) =>
+        !this.guidesSource.some(
+          (guideSource) => guideCible.id === guideSource.id
+        )
+    );
     return {
       ajouts,
+      suppressions,
     };
   }
 }
