@@ -9,6 +9,7 @@ export class ComparateurDeGuides {
     private readonly entrepotSource: EntrepotGuide,
     private readonly entrepotCible: EntrepotGuide
   ) {}
+
   async chargeLesDonnees() {
     const [donneesSource, donneesCible] = await Promise.all([
       this.entrepotSource.tous(),
@@ -17,5 +18,15 @@ export class ComparateurDeGuides {
 
     this.guidesSource = donneesSource;
     this.guidesCible = donneesCible;
+  }
+
+  async compare() {
+    const ajouts = this.guidesSource.filter(
+      (guideSource) =>
+        !this.guidesCible.some((guideCible) => guideCible.id === guideSource.id)
+    );
+    return {
+      ajouts,
+    };
   }
 }

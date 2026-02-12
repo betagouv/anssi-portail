@@ -74,4 +74,25 @@ describe('Le comparateur de guides', () => {
       guide2.fields.Identifiant
     );
   });
+
+  describe('lors de la comparaison des guides', () => {
+    it('sait retourner les guides à créer dans la cible', async () => {
+      const guide1 = new ConstructeurGuideGrist()
+        .avecLeNumeroDeLigne(1)
+        .avecLIdentifiant('guide1')
+        .construis();
+      clientHttpSource.get = async () => {
+        return {
+          data: {
+            records: [guide1],
+          },
+        };
+      };
+      await comparateurDeGuides.chargeLesDonnees();
+
+      const comparaison = await comparateurDeGuides.compare();
+
+      expect(comparaison.ajouts).toHaveLength(1);
+    });
+  });
 });
