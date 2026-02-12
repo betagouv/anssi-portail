@@ -16,3 +16,7 @@ export type DocumentGuide = {
   libelle: string;
   nomFichier: string;
 };
+export type ComparaisonDeGuides = {
+  ajouts: Guide[];
+  suppressions: Guide[];
+};

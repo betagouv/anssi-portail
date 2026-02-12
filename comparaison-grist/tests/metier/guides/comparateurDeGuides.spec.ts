@@ -90,9 +90,28 @@ describe('Le comparateur de guides', () => {
       };
       await comparateurDeGuides.chargeLesDonnees();
 
-      const comparaison = await comparateurDeGuides.compare();
+      const comparaison = comparateurDeGuides.compare();
 
       expect(comparaison.ajouts).toHaveLength(1);
+    });
+
+    it('sait retourner les guides à supprimer dans la cible', async () => {
+      const guide1 = new ConstructeurGuideGrist()
+        .avecLeNumeroDeLigne(1)
+        .avecLIdentifiant('guide1')
+        .construis();
+      clientHttpCible.get = async () => {
+        return {
+          data: {
+            records: [guide1],
+          },
+        };
+      };
+      await comparateurDeGuides.chargeLesDonnees();
+
+      const comparaison = comparateurDeGuides.compare();
+
+      expect(comparaison.suppressions).toHaveLength(1);
     });
   });
 });
