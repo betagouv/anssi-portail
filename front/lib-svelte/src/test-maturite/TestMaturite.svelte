@@ -1,7 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { derived } from 'svelte/store';
   import { profilStore } from '../stores/profil.store';
   import Etapier from '../ui/Etapier.svelte';
   import Hero from '../ui/Hero.svelte';
