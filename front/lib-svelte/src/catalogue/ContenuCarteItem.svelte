@@ -59,7 +59,13 @@
 
   <div class="pied-carte">
     {#if estUnGuide(item)}
-      <p class="date texte-mention-xs">Publié le {item.datePublication}</p>
+      <p class="date texte-mention-xs">
+        {#if item.dateMiseAJour === item.datePublication}
+          Publié le {item.datePublication}
+        {:else}
+          Mis à jour le {item.dateMiseAJour}
+        {/if}
+      </p>
     {/if}
     <div class="labels">
       {#if item.sources}
