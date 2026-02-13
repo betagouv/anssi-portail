@@ -26,7 +26,7 @@ export const guideDevsecops: Guide = {
   id: 'devsecops',
   nom: 'DevSecOps',
   description:
-    '<p>Les Essentiels de l’ANSSI visent à éclairer l’ensemble de nos lecteurs, quel que soit leur niveau de connaissance technique, sur les grands enjeux de la cybersécurité. Ils reflètent le point de vue de l’agence au moment de leur publication et ne se positionnent pas comme des documents de recommandations détaillées, comme nos guides. Il s’agit plutôt de l’énonciation de bonnes pratiques indépendantes pouvant être mises en place de façon complémentaire. Ces recommandations sont susceptibles d’être mises à jour régulièrement suivant l’évolution de la menace, des technologies utilisées, de nos retours d’expérience, etc.</p>',
+    '<p>Les Essentiels de l’ANSSI visent à éclairer l’ensemble de nos lecteurs, ...</p>',
   nomImage: 'anssi_essentiels_devsecops_v1',
   langue: 'FR',
   collections: ['Les essentiels'],
@@ -149,6 +149,49 @@ describe('Le consignateur de comparaison de guides', () => {
     const comparaison = {
       ...comparaisonVide,
       suppressions: [guideZeroTrust],
+    };
+    const markdown =
+      consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
+
+    expect(markdown).toEqual(attendu);
+  });
+
+  it('sait traduire les modifications en Markdown', () => {
+    const attendu =
+      prelude +
+      '<tr>\n' +
+      '<td>\n\n' +
+      '```diff\nzero-trust\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- Zero Trust\n+ DevSecOps\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\nLes essentiels\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- 20 Juin 2025\n+ 13 Mars 2024\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- 20 Juin 2025\n+ 13 Mars 2024\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- <p>Avec l’accroissement des usages liés au télétravail, ...</p>\n+ <p>Les Essentiels de l’ANSSI visent à éclairer l’ensemble de nos lecteurs, ...</p>\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- anssi-fondamentaux-zero-trust-v1_publication\n+ anssi_essentiels_devsecops_v1\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- Les Fondamentaux de l&#039;ANSSI - Zero Trust - v1.0 : anssi-fondamentaux-zero-trust-v1.0.pdf\n+ Les Essentiels de l&#039;ANSSI - DevSecOps - v1.0 : anssi_essentiels_devsecops_v1.0.pdf\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\nFR\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\nLes essentiels\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n- REAGIR, SE_FORMER\n+ SECURISER\n```\n</td>\n' +
+      '</tr>\n' +
+      postlude;
+    const comparaison: ComparaisonDeGuides = {
+      ...comparaisonVide,
+      modifications: [
+        {
+          source: guideZeroTrust,
+          cible: { ...guideDevsecops, id: guideZeroTrust.id },
+        },
+      ],
     };
     const markdown =
       consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
