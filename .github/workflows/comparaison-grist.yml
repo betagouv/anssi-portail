@@ -61,6 +61,9 @@ jobs:
       - name: Affiche les empreintes sources
         run: |
           echo "Empreintes téléchargées:"
-          ls -la empreinte*.txt
+          ls -1 empreinte*.txt | sort
           echo "---"
-          cat empreinte*.txt
+          for file in $(ls -1 empreinte*.txt | sort); do
+            echo "=== $file ==="
+            cat "$file"
+          done
