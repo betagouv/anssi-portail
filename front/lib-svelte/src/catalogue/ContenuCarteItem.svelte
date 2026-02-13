@@ -25,6 +25,9 @@
       ? texte.slice(0, LONGUEUR_MAX) + '&hellip;'
       : texte;
   };
+
+  const estUnGuide = (item: ItemCyber | Guide): item is Guide =>
+    item.type === 'Guide';
 </script>
 
 <figure>
@@ -53,25 +56,37 @@
   </div>
   <!-- eslint-disable-next-line svelte/no-at-html-tags -->
   <span class="description">{@html tronque(item.description)}</span>
-  <div class="labels">
-    {#if item.sources}
-      {#each item.sources as source (source)}<span>{source}</span>{/each}
+
+  <div class="pied-carte">
+    {#if estUnGuide(item)}
+      {#if item.dateMiseAJour === item.datePublication}
+        <p class="date texte-mention-xs">Publié le {item.datePublication}</p>
+      {:else}
+        <p class="date texte-mention-xs">
+          Mis à jour le {item.dateMiseAJour}
+        </p>
+      {/if}
     {/if}
-    {#if item.lienInterne || (item.type !== 'Guide' && item.lienExterne)}
-      <img
-        src={`/assets/images/${
-          item.lienInterne
-            ? 'icone-fleche-droite.svg'
-            : 'icone-lien-externe.svg'
-        }`}
-        alt={item.lienInterne
-          ? 'Voir le détail'
-          : 'Ouvrir dans un nouvel onglet'}
-        title={item.lienInterne
-          ? 'Voir le détail'
-          : 'Ouvrir dans un nouvel onglet'}
-      />
-    {/if}
+    <div class="labels">
+      {#if item.sources}
+        {#each item.sources as source (source)}<span>{source}</span>{/each}
+      {/if}
+      {#if item.lienInterne || (item.type !== 'Guide' && item.lienExterne)}
+        <img
+          src={`/assets/images/${
+            item.lienInterne
+              ? 'icone-fleche-droite.svg'
+              : 'icone-lien-externe.svg'
+          }`}
+          alt={item.lienInterne
+            ? 'Voir le détail'
+            : 'Ouvrir dans un nouvel onglet'}
+          title={item.lienInterne
+            ? 'Voir le détail'
+            : 'Ouvrir dans un nouvel onglet'}
+        />
+      {/if}
+    </div>
   </div>
 </div>
 
@@ -116,15 +131,23 @@
       line-height: 1.5rem;
     }
 
-    .labels {
-      span {
-        font-size: 0.75rem;
-        line-height: 1.25rem;
-      }
+    .date {
+      margin: 4px 0 10px;
+    }
 
-      img {
-        width: 20px;
-        height: 20px;
+    .pied-carte {
+      margin-top: auto;
+      .labels {
+        margin-top: 0;
+        span {
+          font-size: 0.75rem;
+          line-height: 1.25rem;
+        }
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
       }
     }
   }
