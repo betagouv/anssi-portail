@@ -198,4 +198,94 @@ describe('Le consignateur de comparaison de guides', () => {
 
     expect(markdown).toEqual(attendu);
   });
+
+  it('sait traduire les modifications de documents en Markdown', () => {
+    const attendu =
+      prelude +
+      '<tr>\n' +
+      '<td>\n\n' +
+      '```diff\nzero-trust\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\nZero Trust\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\nLes essentiels\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n20 Juin 2025\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n20 Juin 2025\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n<p>Avec l’accroissement des usages liés au télétravail, ...</p>\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\nanssi-fondamentaux-zero-trust-v1_publication\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\n' +
+      'Document 1 : document-1.pdf\n' +
+      '- Document 2 : document-2.pdf\n' +
+      '+ Document 2 Bis : document-2-bis.pdf\n' +
+      '+ Document 4 : document-4.pdf\n' +
+      'Document 3 : document-3.pdf\n' +
+      '- Document 9 : document-9.pdf\n' +
+      '```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\nFR\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\nLes essentiels\n```\n</td>\n' +
+      '<td>\n\n' +
+      '```diff\nREAGIR, SE_FORMER\n```\n</td>\n' +
+      '</tr>\n' +
+      postlude;
+    const comparaison: ComparaisonDeGuides = {
+      ...comparaisonVide,
+      modifications: [
+        {
+          source: {
+            ...guideZeroTrust,
+            documents: [
+              {
+                libelle: 'Document 1',
+                nomFichier: 'document-1.pdf',
+              },
+              {
+                libelle: 'Document 2',
+                nomFichier: 'document-2.pdf',
+              },
+              {
+                libelle: 'Document 3',
+                nomFichier: 'document-3.pdf',
+              },
+              {
+                libelle: 'Document 9',
+                nomFichier: 'document-9.pdf',
+              },
+            ],
+          },
+          cible: {
+            ...guideZeroTrust,
+            documents: [
+              {
+                libelle: 'Document 1',
+                nomFichier: 'document-1.pdf',
+              },
+              {
+                libelle: 'Document 2 Bis',
+                nomFichier: 'document-2-bis.pdf',
+              },
+              {
+                libelle: 'Document 4',
+                nomFichier: 'document-4.pdf',
+              },
+              {
+                libelle: 'Document 3',
+                nomFichier: 'document-3.pdf',
+              },
+            ],
+          },
+        },
+      ],
+    };
+    const markdown =
+      consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
+
+    expect(markdown).toEqual(attendu);
+  });
 });
