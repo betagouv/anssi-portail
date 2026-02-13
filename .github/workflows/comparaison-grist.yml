@@ -39,3 +39,9 @@ jobs:
           GUIDES_CIBLE_GRIST_URL: ${{ secrets.GUIDES_CIBLE_GRIST_URL }}
           GUIDES_CIBLE_GRIST_ID_TABLE: ${{ secrets.GUIDES_CIBLE_GRIST_ID_TABLE }}
           GUIDES_CIBLE_GRIST_API_KEY: ${{ secrets.GUIDES_CIBLE_GRIST_API_KEY }}
+
+      - name: Sauvegarde l'empreinte source
+        uses: actions/upload-artifact@v4
+        with:
+          name: empreinte-data
+          path: comparaison-grist/empreinte.txt

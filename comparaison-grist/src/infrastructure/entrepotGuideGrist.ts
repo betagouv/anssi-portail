@@ -2,6 +2,12 @@ import { ClientHttp } from '../metier/clientHttp';
 import { EntrepotGuide } from '../metier/guides/entrepotGuide';
 import { Guide } from '../metier/guides/guide.type';
 
+export type SnapshotGrist = {
+  snapshots: {
+    docId: string;
+  }[];
+};
+
 export type GuideGrist = {
   id: number;
   fields: {
@@ -37,7 +43,14 @@ export class EntrepotGuideGrist implements EntrepotGuide {
   }
 
   async empreinte(): Promise<string> {
-    return '';
+    const url = `${this.urlDeBase}/snapshots`;
+    const reponse = await this.clientHttp.get<SnapshotGrist>(url, {
+      headers: {
+        authorization: `Bearer ${this.cleApi}`,
+        accept: 'application/json',
+      },
+    });
+    return reponse.data.snapshots[0].docId;
   }
 
   protected async appelleGrist() {
