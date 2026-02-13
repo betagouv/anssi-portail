@@ -25,7 +25,7 @@
   theme="sombre"
   cacheTags
   titre="Protéger ma collectivité contre les cyberattaques"
-  description="Les collectivités sont exposées aux cyberattaques, notamment aux rançongiciels. En 2024, elles ont représenté 17 % des cibles de rançongiciels, ce qui en fait le deuxième type d’entités le plus visé."
+  description="Toutes les collectivités sont exposées au risque de cyberattaques. En 2024, elles ont notamment représenté 17&nbsp;% des victimes de rançongiciels ou ransowmare."
   cacheActions
   illustrationSource="/assets/images/personne-qui-cogite.svg"
   illustrationAlt=""

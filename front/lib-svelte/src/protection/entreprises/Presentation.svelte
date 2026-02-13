@@ -21,15 +21,8 @@
         Protéger mon entreprise contre les cyberattaques
       </h1>
       <p class="texte-chapo-xl">
-        Quelle que soit leur taille - TPE/PME/ETI - ou leur secteur, toutes les
-        entreprises sont exposées au risque de cyberattaques, comme les
-        rançongiciels (ransomwares) ou les fuites de données. Les conséquences
-        financières, juridiques ou réputationnelles peuvent être très graves.
-      </p>
-      <p class="texte-chapo-xl">
-        Comprendre les risques cyber et agir concrètement est essentiel et
-        possible ! Découvrez toutes les solutions gratuites proposées par l'Etat
-        pour vous aider dans vos efforts de sécurisation.
+        Toutes les entreprises sont exposées au risque de cyberattaques. En 2024, les TPE/PME et ETI ont notamment
+        représenté 37&nbsp;% des victimes de rançongiciels ou ransowmare représentant les premières entités visées.
       </p>
     </hgroup>
   {/snippet}

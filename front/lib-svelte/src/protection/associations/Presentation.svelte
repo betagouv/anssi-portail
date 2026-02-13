@@ -21,17 +21,10 @@
         Protéger mon association contre les cyberattaques
       </h1>
       <p class="texte-chapo-xl">
-        Tout comme les entreprises et les administrations publiques, les
-        associations sont exposées aux cyberattaques&nbsp;: rançongiciels
-        (ransomwares), fuites de données, hameçonnage… Les impacts peuvent être
-        financiers, juridiques et réputationnels, parfois majeurs.
-      </p>
-      <p class="texte-chapo-xl">
-        Bonne nouvelle&nbsp;: il est possible de réduire les risques avec des
-        actions simples et concrètes. Découvrez les solutions gratuites
-        proposées par l’État pour renforcer la cybersécurité de votre
-        association et vous accompagner pas à pas dans votre démarche de
-        sécurisation.
+        Les associations sont aussi concernées par le risque de cyberattaques.
+        Elles peuvent être la cible de campagnes de hameçonnage / phishing ou de
+        rançongiciels / ransomwares. Il n'est pas trop tard pour agir et des
+        solutions existent&nbsp;!
       </p>
     </hgroup>
   {/snippet}
