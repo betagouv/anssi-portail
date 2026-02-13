@@ -19,4 +19,5 @@ export type DocumentGuide = {
 export type ComparaisonDeGuides = {
   ajouts: Guide[];
   suppressions: Guide[];
+  modifications: { source: Guide; cible: Guide }[];
 };
