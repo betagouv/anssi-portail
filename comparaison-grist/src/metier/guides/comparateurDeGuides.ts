@@ -14,7 +14,10 @@ export class ComparateurDeGuides {
     const [donneesSource, donneesCible] = await Promise.all([
       this.entrepotSource.tous(),
       this.entrepotCible.tous(),
-    ]);
+    ]).catch((error) => {
+      console.error('Erreur lors de la récupération des données :', error);
+      return [[], []];
+    });
 
     this.guidesSource = donneesSource;
     this.guidesCible = donneesCible;
