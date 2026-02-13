@@ -95,7 +95,7 @@
       fournisseurs de services de communications électroniques accessibles au
       public et l'administration publique. <dsfr-link
         label="En savoir plus"
-        href="#"
+        href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank
       ></dsfr-link>
     </p>
   </dsfr-accordion>
@@ -121,15 +121,7 @@
       Les entités concernées par la directive NIS2 sont tenues de mettre en
       place des mesures juridiques, techniques et organisationnelles visant à
       gérer les risques qui menacent la sécurité de leurs réseaux et de leurs
-      systèmes d'information. <dsfr-link label="En savoir plus" href="#"
-      ></dsfr-link>
-    </p>
-    <h6>La gestion des risques cyber</h6>
-    <p>
-      Les entités concernées par la directive NIS2 sont tenues de mettre en
-      place des mesures juridiques, techniques et organisationnelles visant à
-      gérer les risques qui menacent la sécurité de leurs réseaux et de leurs
-      systèmes d'information. <dsfr-link label="En savoir plus" href="#"
+      systèmes d'information. <dsfr-link label="En savoir plus" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank
       ></dsfr-link>
     </p>
     <p>
@@ -139,17 +131,17 @@
       fournisseurs numériques font l'objet d'un règlement d'exécution spécifique
       de la Commission européenne (<dsfr-link
         label="accessible en français ici"
-        href="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=OJ:L_202402690"
+        href="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=OJ:L_202402690" blank
       ></dsfr-link>). Par conséquent, elles ne sont pas soumises au socle de
       mesures de sécurité NIS&nbsp;2 définies pour les entités établies en
       France.
-      <dsfr-link label="En savoir plus" href="#"></dsfr-link>
+      <dsfr-link label="En savoir plus" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank></dsfr-link>
     </p>
     <dsfr-button
       label="Découvrir les solutions pour m'aider"
       kind="secondary"
       markup="a"
-      href="#"
+      href="/directive-nis2#solutions&comprendre"
     ></dsfr-button>
     <h6>La déclaration d’incidents</h6>
     <p>
@@ -161,7 +153,7 @@
       label="Déclarer un incident"
       kind="secondary"
       markup="a"
-      href="#"
+      href="https://club.ssi.gouv.fr/#/declarations"
       target="_blank"
       has-icon
       icon-place="right"
@@ -174,8 +166,8 @@
       sanctions. La directive prévoit la capacité d'imposer, entre autres, des
       sanctions financières aux entités régulées. Ces sanctions, qui doivent
       être proportionnées au(x) manquement(s), pourront aller jusqu'à un
-      pourcentage du chiffre d'affaires mondial des entités (2% pour les EE et
-      1,4% pour les EI).
+      pourcentage du chiffre d'affaires mondial des entités (2&nbsp;% pour les EE et
+      1,4&nbsp;% pour les EI).
     </p>
   </dsfr-accordion>
 </div>
