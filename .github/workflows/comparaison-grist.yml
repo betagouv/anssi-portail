@@ -43,7 +43,7 @@ jobs:
       - name: Sauvegarde l'empreinte source
         uses: actions/upload-artifact@v4
         with:
-          name: empreinte-data
+          name: empreinte-data-${{ matrix.ressource.nom }}
           path: comparaison-grist/empreinte.txt
 
   publie-ressources-grist:
@@ -52,10 +52,15 @@ jobs:
     needs: genere-tableau-comparatif
     environment: PROD_NODE
     steps:
-      - name: Télécharger l'empreinte source
+      - name: Télécharger les empreintes sources
         uses: actions/download-artifact@v4
         with:
-          name: empreinte-data
+          pattern: empreinte-data-*
+          merge-multiple: true
 
-      - name: Affiche l'empreinte source
-        run: cat empreinte.txt
+      - name: Affiche les empreintes sources
+        run: |
+          echo "Empreintes téléchargées:"
+          ls -la empreinte*.txt
+          echo "---"
+          cat empreinte*.txt
