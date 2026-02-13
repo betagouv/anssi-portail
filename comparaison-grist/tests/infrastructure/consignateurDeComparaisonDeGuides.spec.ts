@@ -69,6 +69,7 @@ describe('Le consignateur de comparaison de guides', () => {
   const comparaisonVide: ComparaisonDeGuides = {
     ajouts: [],
     suppressions: [],
+    modifications: [],
   };
 
   it('sait initialiser la comparaison en Markdown', () => {
