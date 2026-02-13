@@ -25,7 +25,7 @@ export type RetourGuideGrist = {
 
 export class EntrepotGuideGrist implements EntrepotGuide {
   constructor(
-    private readonly clientHttp: ClientHttp<RetourGuideGrist>,
+    private readonly clientHttp: ClientHttp,
     private readonly urlDeBase: string,
     private readonly idTable: string,
     private readonly cleApi: string
@@ -46,7 +46,7 @@ export class EntrepotGuideGrist implements EntrepotGuide {
     }
 
     const url = `${this.urlDeBase}/tables/${this.idTable}/records`;
-    const reponse = await this.clientHttp.get(url, {
+    const reponse = await this.clientHttp.get<RetourGuideGrist>(url, {
       headers: {
         authorization: `Bearer ${this.cleApi}`,
         accept: 'application/json',
