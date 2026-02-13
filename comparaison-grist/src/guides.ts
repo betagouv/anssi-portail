@@ -7,13 +7,14 @@ import axios from 'axios';
 
 const summaryFile = process.env.GITHUB_STEP_SUMMARY ?? 'rapport-guides.md';
 
+const entrepotSource = new EntrepotGuideGrist(
+  axios,
+  adaptateurEnvironnement.grist().source().urlDoc(),
+  adaptateurEnvironnement.grist().source().idTable(),
+  adaptateurEnvironnement.grist().source().cleApi()
+);
 const comparateurDeGuides = new ComparateurDeGuides(
-  new EntrepotGuideGrist(
-    axios,
-    adaptateurEnvironnement.grist().source().urlDoc(),
-    adaptateurEnvironnement.grist().source().idTable(),
-    adaptateurEnvironnement.grist().source().cleApi()
-  ),
+  entrepotSource,
   new EntrepotGuideGrist(
     axios,
     adaptateurEnvironnement.grist().cible().urlDoc(),
@@ -21,6 +22,8 @@ const comparateurDeGuides = new ComparateurDeGuides(
     adaptateurEnvironnement.grist().cible().cleApi()
   )
 );
+
+const empreinte = await entrepotSource.empreinte();
 
 await comparateurDeGuides.chargeLesDonnees();
 const comparaison = comparateurDeGuides.compare();
@@ -32,3 +35,4 @@ const markdown =
   consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
 
 fs.appendFileSync(summaryFile, markdown);
+fs.writeFileSync('empreinte.txt', empreinte);
