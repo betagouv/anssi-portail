@@ -2,33 +2,32 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import {
   EntrepotGuideGrist,
   GuideGrist,
-  RetourGuideGrist,
 } from '../../../src/infrastructure/entrepotGuideGrist';
 import { ClientHttp } from '../../../src/metier/clientHttp';
 import { ComparateurDeGuides } from '../../../src/metier/guides/comparateurDeGuides';
 import { ConstructeurGuideGrist } from './constructeurGuideGrist';
 
 describe('Le comparateur de guides', () => {
-  let clientHttpSource: ClientHttp<RetourGuideGrist>;
-  let clientHttpCible: ClientHttp<RetourGuideGrist>;
+  let clientHttpSource: ClientHttp;
+  let clientHttpCible: ClientHttp;
   let comparateurDeGuides: ComparateurDeGuides;
 
   beforeEach(() => {
     clientHttpSource = {
-      get: async () => {
+      get: async <T>() => {
         return {
           data: {
             records: [],
-          },
+          } as unknown as T,
         };
       },
     };
     clientHttpCible = {
-      get: async () => {
+      get: async <T>() => {
         return {
           data: {
             records: [],
-          },
+          } as unknown as T,
         };
       },
     };
@@ -53,19 +52,19 @@ describe('Le comparateur de guides', () => {
       .avecLIdentifiant('guide2')
       .construis();
 
-    clientHttpSource.get = async () => {
+    clientHttpSource.get = async <T>() => {
       return {
         data: {
           records: [guide1],
-        },
+        } as unknown as T,
       };
     };
 
-    clientHttpCible.get = async () => {
+    clientHttpCible.get = async <T>() => {
       return {
         data: {
           records: [guide2],
-        },
+        } as unknown as T,
       };
     };
 
@@ -87,11 +86,11 @@ describe('Le comparateur de guides', () => {
         .avecLeNumeroDeLigne(1)
         .avecLIdentifiant('guide1')
         .construis();
-      clientHttpSource.get = async () => {
+      clientHttpSource.get = async <T>() => {
         return {
           data: {
             records: [guide1],
-          },
+          } as unknown as T,
         };
       };
       await comparateurDeGuides.chargeLesDonnees();
@@ -106,11 +105,11 @@ describe('Le comparateur de guides', () => {
         .avecLeNumeroDeLigne(1)
         .avecLIdentifiant('guide1')
         .construis();
-      clientHttpCible.get = async () => {
+      clientHttpCible.get = async <T>() => {
         return {
           data: {
             records: [guide1],
-          },
+          } as unknown as T,
         };
       };
       await comparateurDeGuides.chargeLesDonnees();
@@ -144,18 +143,18 @@ describe('Le comparateur de guides', () => {
         guideOriginal: GuideGrist,
         guideCible: GuideGrist
       ) => {
-        clientHttpSource.get = async () => {
+        clientHttpSource.get = async <T>() => {
           return {
             data: {
               records: [guideOriginal],
-            },
+            } as unknown as T,
           };
         };
-        clientHttpCible.get = async () => {
+        clientHttpCible.get = async <T>() => {
           return {
             data: {
               records: [guideCible],
-            },
+            } as unknown as T,
           };
         };
         return comparateurDeGuides.chargeLesDonnees();
