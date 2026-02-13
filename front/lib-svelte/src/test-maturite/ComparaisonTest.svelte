@@ -20,7 +20,6 @@
   import { construisSerie } from './resultatTest';
 
   export let testRealise = false;
-  export let featureFlagFiltresComparaison: boolean = false;
 
   const libelleDeNiveau = (idNiveau: IdNiveau) => {
     return niveauxMaturite.find((niveau) => niveau.id === idNiveau)!.label;
@@ -99,7 +98,7 @@
 </script>
 
 {#if testRealise}
-  {#if infosOrganisation && featureFlagFiltresComparaison}
+  {#if infosOrganisation}
     <section class="filtres">
       <div class="contenu-section">
         <div class="description">

@@ -5,8 +5,6 @@
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
   import { questionnaireStore } from './stores/questionnaire.store';
 
-  export let featureFlagFiltresComparaison: boolean = false;
-
   let dateRealisationDernierTest: Date | undefined;
 
   questionnaireStore.initialise();
@@ -33,5 +31,4 @@
   animeTuiles={false}
   {dateRealisationDernierTest}
   defilementAutomatique={false}
-  {featureFlagFiltresComparaison}
 />
