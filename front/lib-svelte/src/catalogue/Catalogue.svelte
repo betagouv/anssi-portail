@@ -33,8 +33,6 @@
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import InciteCreerUnCompte from './guides/InciteCreerUnCompte.svelte';
 
-  const { featureFlagGuides }: { featureFlagGuides: boolean } = $props();
-
   const idsCollectionsGuide: Record<CollectionGuide, string> = {
     [CollectionGuide.LES_ESSENTIELS]: 'essentiels',
     [CollectionGuide.LES_FONDAMENTAUX]: 'fondamentaux',
@@ -168,26 +166,24 @@
   </div>
 </section>
 
-{#if featureFlagGuides}
-  <div class="controle-segmente">
-    <button
-      class="bouton-segmente"
-      class:actif={sectionActive === 'ressourcesEtServices'}
-      onclick={() => changeDeSection('ressourcesEtServices')}
-    >
-      <lab-anssi-icone nom="list-check"></lab-anssi-icone>
-      <span>Services et outils</span>
-    </button>
-    <button
-      class="bouton-segmente"
-      class:actif={sectionActive === 'guides'}
-      onclick={() => changeDeSection('guides')}
-    >
-      <lab-anssi-icone nom="book-2-line"></lab-anssi-icone>
-      <span>Guides de l'ANSSI</span>
-    </button>
-  </div>
-{/if}
+<div class="controle-segmente">
+  <button
+    class="bouton-segmente"
+    class:actif={sectionActive === 'ressourcesEtServices'}
+    onclick={() => changeDeSection('ressourcesEtServices')}
+  >
+    <lab-anssi-icone nom="list-check"></lab-anssi-icone>
+    <span>Services et outils</span>
+  </button>
+  <button
+    class="bouton-segmente"
+    class:actif={sectionActive === 'guides'}
+    onclick={() => changeDeSection('guides')}
+  >
+    <lab-anssi-icone nom="book-2-line"></lab-anssi-icone>
+    <span>Guides de l'ANSSI</span>
+  </button>
+</div>
 
 <div class="contenu-catalogue">
   <div class="contenu-section">

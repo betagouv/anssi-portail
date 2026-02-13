@@ -1,6 +1,5 @@
 <script type="application/json" id="donnees">
   {
-    "featureFlagGuides": {% if site.env.FEATURE_FLAG_GUIDES == 'true' %}true{% else %}false{% endif %},
     "itemsCyber": [
       {% assign items = site.services | concat: site.ressources %}
       {% for item in items %}
