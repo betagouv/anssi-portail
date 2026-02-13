@@ -33,8 +33,13 @@ describe('Le comparateur de guides', () => {
       },
     };
     comparateurDeGuides = new ComparateurDeGuides(
-      new EntrepotGuideGrist(clientHttpSource, 'http://localhost', ''),
-      new EntrepotGuideGrist(clientHttpCible, 'http://localhost', '')
+      new EntrepotGuideGrist(
+        clientHttpSource,
+        'http://localhost',
+        'source',
+        ''
+      ),
+      new EntrepotGuideGrist(clientHttpCible, 'http://localhost', 'cible', '')
     );
   });
 

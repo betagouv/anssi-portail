@@ -34,6 +34,8 @@ jobs:
         run: pnpm -F comparaison-grist ${{ matrix.ressource.script }}
         env:
           GUIDES_SOURCE_GRIST_URL: ${{ secrets.GUIDES_SOURCE_GRIST_URL }}
+          GUIDES_SOURCE_GRIST_ID_TABLE: ${{ secrets.GUIDES_SOURCE_GRIST_ID_TABLE }}
           GUIDES_SOURCE_GRIST_API_KEY: ${{ secrets.GUIDES_SOURCE_GRIST_API_KEY }}
           GUIDES_CIBLE_GRIST_URL: ${{ secrets.GUIDES_CIBLE_GRIST_URL }}
+          GUIDES_CIBLE_GRIST_ID_TABLE: ${{ secrets.GUIDES_CIBLE_GRIST_ID_TABLE }}
           GUIDES_CIBLE_GRIST_API_KEY: ${{ secrets.GUIDES_CIBLE_GRIST_API_KEY }}
