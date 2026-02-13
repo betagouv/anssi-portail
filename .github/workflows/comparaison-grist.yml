@@ -43,5 +43,27 @@ jobs:
       - name: Sauvegarde l'empreinte source
         uses: actions/upload-artifact@v4
         with:
-          name: empreinte-data
+          name: empreinte-data-${{ matrix.ressource.nom }}
           path: comparaison-grist/empreinte.txt
+
+  publie-ressources-grist:
+    name: Publie les ressources Grist
+    runs-on: ubuntu-latest
+    needs: genere-tableau-comparatif
+    environment: PROD_NODE
+    steps:
+      - name: Télécharger les empreintes sources
+        uses: actions/download-artifact@v4
+        with:
+          pattern: empreinte-data-*
+          merge-multiple: true
+
+      - name: Affiche les empreintes sources
+        run: |
+          echo "Empreintes téléchargées:"
+          ls -1 empreinte*.txt | sort
+          echo "---"
+          for file in $(ls -1 empreinte*.txt | sort); do
+            echo "=== $file ==="
+            cat "$file"
+          done
