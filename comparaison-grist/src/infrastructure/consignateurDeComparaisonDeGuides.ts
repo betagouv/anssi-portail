@@ -105,15 +105,15 @@ ${this.construisUneCelluleDeDiff(source.besoins.join(', '), cible.besoins.join('
       return this.construisUneCelluleAvecLeContenu(contenuSource);
     }
 
-    return this.construisUneCelluleAvecLeContenu(`- ${contenuSource}
-+ ${contenuCible}`);
+    return this.construisUneCelluleAvecLeContenu(`- ${contenuCible}
++ ${contenuSource}`);
   }
 
   private construisUneCelluleDeDiffPourTableaux(
     source: string[],
     cible: string[]
   ) {
-    const contenu = diffArrays(source, cible, {
+    const contenu = diffArrays(cible, source, {
       oneChangePerToken: true,
     })
       .map((part) => {
