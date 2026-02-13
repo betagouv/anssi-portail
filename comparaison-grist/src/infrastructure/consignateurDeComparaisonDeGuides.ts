@@ -1,3 +1,4 @@
+import { diffArrays } from 'diff';
 import { ComparaisonDeGuides, Guide } from '../metier/guides/guide.type';
 
 export class ConsignateurDeComparaisonDeGuides {
@@ -81,7 +82,14 @@ ${this.construisUneCelluleDeDiff(source.datePublication, cible.datePublication)}
 ${this.construisUneCelluleDeDiff(source.dateMiseAJour, cible.dateMiseAJour)}
 ${this.construisUneCelluleDeDiff(source.description, cible.description)}
 ${this.construisUneCelluleDeDiff(source.nomImage ?? '', cible.nomImage ?? '')}
-${this.construisUneCelluleDeDiff(source.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n'), cible.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n'))}
+${this.construisUneCelluleAvecContenuDifferentPourDesTableaux(
+  source.documents.map(
+    (document) => `${document.libelle} : ${document.nomFichier}`
+  ),
+  cible.documents.map(
+    (document) => `${document.libelle} : ${document.nomFichier}`
+  )
+)}
 ${this.construisUneCelluleDeDiff(source.langue, cible.langue)}
 ${this.construisUneCelluleDeDiff(source.collections.join(', '), cible.collections.join(', '))}
 ${this.construisUneCelluleDeDiff(source.besoins.join(', '), cible.besoins.join(', '))}
@@ -116,6 +124,32 @@ ${contenuSource}
 
 \`\`\`diff
 ${prefix} ${contenu}
+\`\`\`
+</td>`;
+  }
+
+  private construisUneCelluleAvecContenuDifferentPourDesTableaux(
+    source: string[],
+    cible: string[]
+  ) {
+    const contenu = diffArrays(source, cible, {
+      oneChangePerToken: true,
+    })
+      .map((part) => {
+        if (part.added) {
+          return `+ ${part.value}`;
+        }
+        if (part.removed) {
+          return `- ${part.value}`;
+        }
+        return part.value;
+      })
+      .join('\n');
+
+    return `<td>
+
+\`\`\`diff
+${contenu}
 \`\`\`
 </td>`;
   }

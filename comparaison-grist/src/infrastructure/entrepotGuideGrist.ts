@@ -76,7 +76,7 @@ export class EntrepotGuideGrist implements EntrepotGuide {
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour ?? '',
       datePublication: guideGrist.fields.Date_de_publication ?? '',
       thematique: guideGrist.fields.Thematique ?? '',
-      besoins: guideGrist.fields.Besoins_cyber,
+      besoins: this.aseptiseListe(guideGrist.fields.Besoins_cyber),
     };
   };
 }
