@@ -27,6 +27,7 @@ export class EntrepotGuideGrist implements EntrepotGuide {
   constructor(
     private readonly clientHttp: ClientHttp<RetourGuideGrist>,
     private readonly urlDeBase: string,
+    private readonly idTable: string,
     private readonly cleApi: string
   ) {}
 
@@ -35,12 +36,17 @@ export class EntrepotGuideGrist implements EntrepotGuide {
     return guidesGrist.records.map(this.convertisGuideGrist);
   }
 
+  async empreinte(): Promise<string> {
+    return '';
+  }
+
   protected async appelleGrist() {
     if (!this.urlDeBase) {
       return { records: [] };
     }
 
-    const reponse = await this.clientHttp.get(this.urlDeBase.toString(), {
+    const url = `${this.urlDeBase}/tables/${this.idTable}/records`;
+    const reponse = await this.clientHttp.get(url, {
       headers: {
         authorization: `Bearer ${this.cleApi}`,
         accept: 'application/json',

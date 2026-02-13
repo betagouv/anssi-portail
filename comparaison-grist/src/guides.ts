@@ -10,13 +10,15 @@ const summaryFile = process.env.GITHUB_STEP_SUMMARY ?? 'rapport-guides.md';
 const comparateurDeGuides = new ComparateurDeGuides(
   new EntrepotGuideGrist(
     axios,
-    adaptateurEnvironnement.grist().urlGuideSource(),
-    adaptateurEnvironnement.grist().cleApiSource()
+    adaptateurEnvironnement.grist().source().urlDoc(),
+    adaptateurEnvironnement.grist().source().idTable(),
+    adaptateurEnvironnement.grist().source().cleApi()
   ),
   new EntrepotGuideGrist(
     axios,
-    adaptateurEnvironnement.grist().urlGuideCible(),
-    adaptateurEnvironnement.grist().cleApiCible()
+    adaptateurEnvironnement.grist().cible().urlDoc(),
+    adaptateurEnvironnement.grist().cible().idTable(),
+    adaptateurEnvironnement.grist().cible().cleApi()
   )
 );
 
