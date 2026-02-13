@@ -35,34 +35,34 @@ ${contenuDuTableau}</tbody>
 
   private construisUneLigneAjout(guide: Guide) {
     return `<tr>
-${this.construisUneCelluleAvecLeContenu('+', guide.id)}
-${this.construisUneCelluleAvecLeContenu('+', guide.nom)}
-${this.construisUneCelluleAvecLeContenu('+', guide.thematique)}
-${this.construisUneCelluleAvecLeContenu('+', guide.datePublication)}
-${this.construisUneCelluleAvecLeContenu('+', guide.dateMiseAJour)}
-${this.construisUneCelluleAvecLeContenu('+', guide.description)}
-${this.construisUneCelluleAvecLeContenu('+', guide.nomImage ?? '')}
-${this.construisUneCelluleAvecLeContenu('+', guide.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n'))}
-${this.construisUneCelluleAvecLeContenu('+', guide.langue)}
-${this.construisUneCelluleAvecLeContenu('+', guide.collections.join(', '))}
-${this.construisUneCelluleAvecLeContenu('+', guide.besoins.join(', '))}
+${this.construisUneCelluleAvecLeContenu(`+ ${guide.id}`)}
+${this.construisUneCelluleAvecLeContenu(`+ ${guide.nom}`)}
+${this.construisUneCelluleAvecLeContenu(`+ ${guide.thematique}`)}
+${this.construisUneCelluleAvecLeContenu(`+ ${guide.datePublication}`)}
+${this.construisUneCelluleAvecLeContenu(`+ ${guide.dateMiseAJour}`)}
+${this.construisUneCelluleAvecLeContenu(`+ ${guide.description}`)}
+${this.construisUneCelluleAvecLeContenu(`+ ${guide.nomImage ?? ''}`)}
+${this.construisUneCelluleAvecLeContenu(`+ ${guide.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n')}`)}
+${this.construisUneCelluleAvecLeContenu(`+ ${guide.langue}`)}
+${this.construisUneCelluleAvecLeContenu(`+ ${guide.collections.join(', ')}`)}
+${this.construisUneCelluleAvecLeContenu(`+ ${guide.besoins.join(', ')}`)}
 </tr>
 `;
   }
 
   private construisUneLigneSuppression(guide: Guide) {
     return `<tr>
-${this.construisUneCelluleAvecLeContenu('-', guide.id)}
-${this.construisUneCelluleAvecLeContenu('-', guide.nom)}
-${this.construisUneCelluleAvecLeContenu('-', guide.thematique)}
-${this.construisUneCelluleAvecLeContenu('-', guide.datePublication)}
-${this.construisUneCelluleAvecLeContenu('-', guide.dateMiseAJour)}
-${this.construisUneCelluleAvecLeContenu('-', guide.description)}
-${this.construisUneCelluleAvecLeContenu('-', guide.nomImage ?? '')}
-${this.construisUneCelluleAvecLeContenu('-', guide.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n'))}
-${this.construisUneCelluleAvecLeContenu('-', guide.langue)}
-${this.construisUneCelluleAvecLeContenu('-', guide.collections.join(', '))}
-${this.construisUneCelluleAvecLeContenu('-', guide.besoins.join(', '))}
+${this.construisUneCelluleAvecLeContenu(`- ${guide.id}`)}
+${this.construisUneCelluleAvecLeContenu(`- ${guide.nom}`)}
+${this.construisUneCelluleAvecLeContenu(`- ${guide.thematique}`)}
+${this.construisUneCelluleAvecLeContenu(`- ${guide.datePublication}`)}
+${this.construisUneCelluleAvecLeContenu(`- ${guide.dateMiseAJour}`)}
+${this.construisUneCelluleAvecLeContenu(`- ${guide.description}`)}
+${this.construisUneCelluleAvecLeContenu(`- ${guide.nomImage ?? ''}`)}
+${this.construisUneCelluleAvecLeContenu(`- ${guide.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n')}`)}
+${this.construisUneCelluleAvecLeContenu(`- ${guide.langue}`)}
+${this.construisUneCelluleAvecLeContenu(`- ${guide.collections.join(', ')}`)}
+${this.construisUneCelluleAvecLeContenu(`- ${guide.besoins.join(', ')}`)}
 </tr>
 `;
   }
@@ -82,7 +82,7 @@ ${this.construisUneCelluleDeDiff(source.datePublication, cible.datePublication)}
 ${this.construisUneCelluleDeDiff(source.dateMiseAJour, cible.dateMiseAJour)}
 ${this.construisUneCelluleDeDiff(source.description, cible.description)}
 ${this.construisUneCelluleDeDiff(source.nomImage ?? '', cible.nomImage ?? '')}
-${this.construisUneCelluleAvecContenuDifferentPourDesTableaux(
+${this.construisUneCelluleDeDiffPourTableaux(
   source.documents.map(
     (document) => `${document.libelle} : ${document.nomFichier}`
   ),
@@ -102,33 +102,14 @@ ${this.construisUneCelluleDeDiff(source.besoins.join(', '), cible.besoins.join('
     contenuCible: string
   ) {
     if (contenuCible === contenuSource) {
-      return `<td>
-
-\`\`\`diff
-${contenuSource}
-\`\`\`
-</td>`;
+      return this.construisUneCelluleAvecLeContenu(contenuSource);
     }
 
-    return `<td>
-
-\`\`\`diff
-- ${contenuSource}
-+ ${contenuCible}
-\`\`\`
-</td>`;
+    return this.construisUneCelluleAvecLeContenu(`- ${contenuSource}
++ ${contenuCible}`);
   }
 
-  private construisUneCelluleAvecLeContenu(prefix: '+' | '-', contenu: string) {
-    return `<td>
-
-\`\`\`diff
-${prefix} ${contenu}
-\`\`\`
-</td>`;
-  }
-
-  private construisUneCelluleAvecContenuDifferentPourDesTableaux(
+  private construisUneCelluleDeDiffPourTableaux(
     source: string[],
     cible: string[]
   ) {
@@ -146,6 +127,10 @@ ${prefix} ${contenu}
       })
       .join('\n');
 
+    return this.construisUneCelluleAvecLeContenu(contenu);
+  }
+
+  private construisUneCelluleAvecLeContenu(contenu: string) {
     return `<td>
 
 \`\`\`diff
