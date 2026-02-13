@@ -7,8 +7,6 @@
   import ZoneTexte from '../ui/ZoneTexte.svelte';
   import { entrepotNavigateurAvisUtilisateur } from './ControleAvisUtilisateur';
 
-  export let featureFlagAvisUtilisateur: boolean = false;
-
   let encartOuvert = false;
   let dialogue: HTMLDialogElement;
   let afficheDialogue: boolean = false;
@@ -76,7 +74,7 @@
   }
 </script>
 
-{#if featureFlagAvisUtilisateur && encartOuvert}
+{#if encartOuvert}
   <div
     class="avis-utilisateur-cta"
     transition:fly={{ duration: 1000, x: 140, opacity: 1 }}
@@ -103,7 +101,7 @@
     </button>
   </div>
 {/if}
-{#if featureFlagAvisUtilisateur && afficheDialogue}
+{#if afficheDialogue}
   <dialog
     class="dialogue-avis-utilisateur"
     on:close={() => (afficheDialogue = false)}
