@@ -163,25 +163,25 @@ describe('Le consignateur de comparaison de guides', () => {
       '<td>\n\n' +
       '```diff\nzero-trust\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n- Zero Trust\n+ DevSecOps\n```\n</td>\n' +
+      '```diff\n- DevSecOps\n+ Zero Trust\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\nLes essentiels\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n- 20 Juin 2025\n+ 13 Mars 2024\n```\n</td>\n' +
+      '```diff\n- 13 Mars 2024\n+ 20 Juin 2025\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n- 20 Juin 2025\n+ 13 Mars 2024\n```\n</td>\n' +
+      '```diff\n- 13 Mars 2024\n+ 20 Juin 2025\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n- <p>Avec l’accroissement des usages liés au télétravail, ...</p>\n+ <p>Les Essentiels de l’ANSSI visent à éclairer l’ensemble de nos lecteurs, ...</p>\n```\n</td>\n' +
+      '```diff\n- <p>Les Essentiels de l’ANSSI visent à éclairer l’ensemble de nos lecteurs, ...</p>\n+ <p>Avec l’accroissement des usages liés au télétravail, ...</p>\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n- anssi-fondamentaux-zero-trust-v1_publication\n+ anssi_essentiels_devsecops_v1\n```\n</td>\n' +
+      '```diff\n- anssi_essentiels_devsecops_v1\n+ anssi-fondamentaux-zero-trust-v1_publication\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n- Les Fondamentaux de l&#039;ANSSI - Zero Trust - v1.0 : anssi-fondamentaux-zero-trust-v1.0.pdf\n+ Les Essentiels de l&#039;ANSSI - DevSecOps - v1.0 : anssi_essentiels_devsecops_v1.0.pdf\n```\n</td>\n' +
+      '```diff\n- Les Essentiels de l&#039;ANSSI - DevSecOps - v1.0 : anssi_essentiels_devsecops_v1.0.pdf\n+ Les Fondamentaux de l&#039;ANSSI - Zero Trust - v1.0 : anssi-fondamentaux-zero-trust-v1.0.pdf\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\nFR\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\nLes essentiels\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n- REAGIR, SE_FORMER\n+ SECURISER\n```\n</td>\n' +
+      '```diff\n- SECURISER\n+ REAGIR, SE_FORMER\n```\n</td>\n' +
       '</tr>\n' +
       postlude;
     const comparaison: ComparaisonDeGuides = {
@@ -220,11 +220,11 @@ describe('Le consignateur de comparaison de guides', () => {
       '<td>\n\n' +
       '```diff\n' +
       'Document 1 : document-1.pdf\n' +
-      '- Document 2 : document-2.pdf\n' +
-      '+ Document 2 Bis : document-2-bis.pdf\n' +
-      '+ Document 4 : document-4.pdf\n' +
+      '- Document 2 Bis : document-2-bis.pdf\n' +
+      '- Document 4 : document-4.pdf\n' +
+      '+ Document 2 : document-2.pdf\n' +
       'Document 3 : document-3.pdf\n' +
-      '- Document 9 : document-9.pdf\n' +
+      '+ Document 9 : document-9.pdf\n' +
       '```\n</td>\n' +
       '<td>\n\n' +
       '```diff\nFR\n```\n</td>\n' +
