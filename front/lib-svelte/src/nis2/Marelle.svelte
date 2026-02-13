@@ -5,9 +5,9 @@
       description:
         'Réalisez un test en ligne pour déterminer si votre entité est régulée par la directive NIS 2 et à quelle catégorie elle appartient.',
       lien: {
-        href: '#',
+        href: 'https://monespacenis2.cyber.gouv.fr/simulateur',
         texte: 'Débuter le test',
-        target: '_self',
+        target: '_blank',
       },
       illustration: {
         lien: '/assets/images/personne-reflechissant-devant-un-ecran.svg',
@@ -20,9 +20,9 @@
       description:
         'Accédez dès à présent au service de pré-enregistrement en ligne.',
       lien: {
-        href: '#',
+        href: 'https://club.ssi.gouv.fr/#/nis2/introduction',
         texte: 'Se déclarer',
-        target: '_self',
+        target: '_blank',
       },
       illustration: {
         lien: '/assets/images/homme-remplissant-ecran-login.svg',
@@ -34,7 +34,7 @@
       description:
         'Mettez en oeuvre les exigences de sécurité issues de la directive pour réduire vos risques cyber et signalez à l’ANSSI vos incidents de sécurité. ',
       lien: {
-        href: '#',
+        href: '/directive-nis2#solutions',
         texte: 'Découvrir les solutions pour m\'aider',
         target: '_self',
       },
