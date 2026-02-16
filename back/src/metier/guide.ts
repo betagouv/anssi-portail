@@ -45,6 +45,8 @@ export class Guide {
       (guide) => guide.id !== this.id
     );
   }
+
+  estPublie = (): boolean => this.datePublication <= new Date();
 }
 
 export type DocumentGuide = {

@@ -13,9 +13,10 @@ const ressourceGuides = ({
     async (_requete: Request, reponse: Response, suivante: NextFunction) => {
       try {
         const guides = await entrepotGuide.tous();
-        reponse
-          .status(200)
-          .send(guides.map(guidePresentation(adaptateurEnvironnement)));
+        const guidesPublies = guides
+          .filter((guide) => guide.estPublie())
+          .map(guidePresentation(adaptateurEnvironnement));
+        reponse.status(200).send(guidesPublies);
       } catch (e) {
         suivante(e);
       }

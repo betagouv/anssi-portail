@@ -87,3 +87,32 @@ export const guideDevsecops = new Guide({
   thematique: 'Les essentiels',
   besoins: ['SECURISER'],
 });
+
+const aujourdhui = new Date();
+export const guidePublieDemain = new Guide({
+  id: 'devsecops',
+  nom: 'DevSecOps',
+  description:
+    '<p>Les Essentiels de l’ANSSI visent à éclairer l’ensemble de nos lecteurs, quel que soit leur niveau de connaissance technique, sur les grands enjeux de la cybersécurité. Ils reflètent le point de vue de l’agence au moment de leur publication et ne se positionnent pas comme des documents de recommandations détaillées, comme nos guides. Il s’agit plutôt de l’énonciation de bonnes pratiques indépendantes pouvant être mises en place de façon complémentaire. Ces recommandations sont susceptibles d’être mises à jour régulièrement suivant l’évolution de la menace, des technologies utilisées, de nos retours d’expérience, etc.</p>',
+  nomImage: 'anssi_essentiels_devsecops_v1',
+  langue: 'FR',
+  collections: ['Les essentiels'],
+  documents: [
+    {
+      libelle: 'Les Essentiels de l&#039;ANSSI - DevSecOps - v1.0',
+      nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
+    },
+  ],
+  dateMiseAJour: new Date(
+    aujourdhui.getFullYear(),
+    aujourdhui.getMonth(),
+    aujourdhui.getDate() + 1
+  ),
+  datePublication: new Date(
+    aujourdhui.getFullYear(),
+    aujourdhui.getMonth(),
+    aujourdhui.getDate() + 1
+  ),
+  thematique: 'Les essentiels',
+  besoins: ['SECURISER'],
+});
