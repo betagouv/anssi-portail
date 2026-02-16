@@ -200,15 +200,15 @@ describe("L'entrepot de guide Grist", () => {
     const entrepotGuideGrist = prepareEntrepotGristAvecEnregistrements([
       new ConstructeurGuideGrist()
         .avecLIdentifiant('guide1')
-        .avecLaDateDeMiseAJour('12 Novembre 2024')
-        .avecLaDateDePublication('09 Mars 2023')
+        .avecLaDateDeMiseAJour(new Date(2024, 10, 12).getTime() / 1000)
+        .avecLaDateDePublication(new Date(2023, 2, 9).getTime() / 1000)
         .construis(),
     ]);
 
     const guide1 = await entrepotGuideGrist.parId('guide1');
 
-    assert.equal(guide1!.datePublication, '09 Mars 2023');
-    assert.equal(guide1!.dateMiseAJour, '12 Novembre 2024');
+    assert.equal(guide1!.datePublication.getTime(), new Date(2023, 2, 9).getTime());
+    assert.equal(guide1!.dateMiseAJour.getTime(), new Date(2024, 10, 12).getTime());
   });
 
   it('sait récupérer les thématiques', async () => {

@@ -62,8 +62,8 @@ export const guideZeroTrust = new Guide({
       nomFichier: 'anssi-fondamentaux-zero-trust-v1.0.pdf',
     },
   ],
-  dateMiseAJour: '20 Juin 2025',
-  datePublication: '20 Juin 2025',
+  dateMiseAJour: new Date(2025, 5, 20),
+  datePublication: new Date(2025, 5, 20),
   thematique: 'Les essentiels',
   besoins: ['REAGIR', 'SE_FORMER'],
 });
@@ -82,8 +82,8 @@ export const guideDevsecops = new Guide({
       nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
     },
   ],
-  dateMiseAJour: '13 Mars 2024',
-  datePublication: '13 Mars 2024',
+  dateMiseAJour: new Date(2024, 2, 13),
+  datePublication: new Date(2024, 2, 13),
   thematique: 'Les essentiels',
   besoins: ['SECURISER'],
 });
