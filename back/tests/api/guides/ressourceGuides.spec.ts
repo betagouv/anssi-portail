@@ -69,8 +69,8 @@ describe('La ressource qui gère les guides', () => {
     it("expose les dates d'un guide", async () => {
       const reponse = await request(serveur).get('/api/guides');
 
-      assert.equal(reponse.body[0].datePublication, '20 Juin 2025');
-      assert.equal(reponse.body[0].dateMiseAJour, '20 Juin 2025');
+      assert.equal(reponse.body[0].datePublication, new Date(2025, 5, 20).toISOString());
+      assert.equal(reponse.body[0].dateMiseAJour, new Date(2025, 5, 20).toISOString());
     });
 
     it("gère l'absence d'image sur un guide", async () => {

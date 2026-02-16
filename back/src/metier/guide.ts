@@ -9,8 +9,8 @@ export class Guide {
   langue: 'FR' | 'EN';
   collections: string[];
   documents: DocumentGuide[];
-  datePublication: string;
-  dateMiseAJour: string;
+  datePublication: Date;
+  dateMiseAJour: Date;
   thematique: string;
   besoins: BesoinCyber[];
 
@@ -22,8 +22,8 @@ export class Guide {
     langue: 'FR' | 'EN';
     collections: string[];
     documents: DocumentGuide[];
-    datePublication: string;
-    dateMiseAJour: string;
+    datePublication: Date;
+    dateMiseAJour: Date;
     thematique: string;
     besoins: BesoinCyber[];
   }) {

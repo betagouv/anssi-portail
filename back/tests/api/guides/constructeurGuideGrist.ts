@@ -11,8 +11,8 @@ export class ConstructeurGuideGrist {
   private collections: string[] = [];
   private readonly documents: DocumentGuide[] = [];
   private documentsBruts: string | null = null;
-  private datePublication: string | null = null;
-  private dateMiseAJour: string | null = null;
+  private datePublication: number | null = null;
+  private dateMiseAJour: number | null = null;
   private thematique: string | null = null;
   private readonly besoins: string[] = [];
 
@@ -61,11 +61,11 @@ export class ConstructeurGuideGrist {
     return this;
   }
 
-  avecLaDateDePublication(datePublication: string) {
+  avecLaDateDePublication(datePublication: number) {
     this.datePublication = datePublication;
     return this;
   }
-  avecLaDateDeMiseAJour(dateMiseAJour: string) {
+  avecLaDateDeMiseAJour(dateMiseAJour: number) {
     this.dateMiseAJour = dateMiseAJour;
     return this;
   }
@@ -95,8 +95,8 @@ export class ConstructeurGuideGrist {
           : this.documents
               .map((document) => `${document.libelle} : ${document.nomFichier}`)
               .join('\n'),
-        Date_de_publication: this.datePublication,
-        Date_de_mise_a_jour: this.dateMiseAJour,
+        Date_de_publication_s_: this.datePublication,
+        Date_de_mise_a_jour_s_: this.dateMiseAJour,
         Thematique: this.thematique,
         Besoins_cyber: this.besoins.length ? ['L', ...this.besoins] : [],
       },
