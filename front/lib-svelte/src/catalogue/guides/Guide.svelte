@@ -106,7 +106,7 @@
           {/if}
         </div>
         <p class="dates texte-mention-xs">
-          Publié le {guide.datePublication} &bullet; Mis à jour le {guide.dateMiseAJour}
+          Publié le {guide.datePublicationFormatee} &bullet; Mis à jour le {guide.dateMiseAJourFormatee}
         </p>
         <section class="presentation" id="presentation">
           <h2>Présentation</h2>

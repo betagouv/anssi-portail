@@ -28,4 +28,6 @@ export interface Guide extends Item {
   illustration: { petite: string; grande: string };
   thematique: string;
   besoins: BesoinCyber[];
+  datePublicationFormatee: string;
+  dateMiseAJourFormatee: string;
 }

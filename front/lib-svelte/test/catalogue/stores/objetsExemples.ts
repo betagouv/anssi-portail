@@ -110,6 +110,8 @@ export const guideZeroTrust: Guide = {
   documents: [],
   dateMiseAJour: '20 Juin 2025',
   datePublication: '20 Juin 2025',
+  dateMiseAJourFormatee: '20 Juin 2025',
+  datePublicationFormatee: '20 Juin 2025',
   thematique: 'Les essentiels',
   besoins: [BesoinCyber.ETRE_SENSIBILISE, BesoinCyber.SE_FORMER],
 };
@@ -135,6 +137,8 @@ export const guideDevsecops: Guide = {
   documents: [],
   dateMiseAJour: '13 Mars 2024',
   datePublication: '13 Mars 2024',
+  dateMiseAJourFormatee: '13 Mars 2024',
+  datePublicationFormatee: '13 Mars 2024',
   thematique: 'Les essentiels',
   besoins: [],
 };
@@ -160,6 +164,8 @@ export const guideDevsecopsEN: Guide = {
   documents: [],
   dateMiseAJour: '26 September 2024',
   datePublication: '26 September 2024',
+  dateMiseAJourFormatee: '26 September 2024',
+  datePublicationFormatee: '26 September 2024',
   thematique: 'Les essentiels',
   besoins: [],
 };
