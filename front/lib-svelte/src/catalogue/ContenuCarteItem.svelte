@@ -61,9 +61,9 @@
     {#if estUnGuide(item)}
       <p class="date texte-mention-xs">
         {#if item.dateMiseAJour === item.datePublication}
-          Publié le {item.datePublication}
+          Publié le {item.datePublicationFormatee}
         {:else}
-          Mis à jour le {item.dateMiseAJour}
+          Mis à jour le {item.dateMiseAJourFormatee}
         {/if}
       </p>
     {/if}
