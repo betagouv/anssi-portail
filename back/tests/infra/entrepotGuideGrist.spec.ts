@@ -67,7 +67,7 @@ describe("L'entrepot de guide Grist", () => {
     assert.equal(headerAuthent, 'Bearer FAUSSE_CLE_API_GUIDES');
     assert.equal(
       urlAppelee,
-      'http://grist/api/docs/idDocumentGuides/tables/idTableGuides/records'
+      'http://grist/api/docs/idDocumentGuides/tables/idTableGuides/records?sort=-Date_de_mise_a_jour_s_'
     );
   });
 
