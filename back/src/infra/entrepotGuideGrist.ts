@@ -98,7 +98,7 @@ export class EntrepotGuideGrist
   }
 
   async tous(): Promise<Guide[]> {
-    const guidesGrist = await this.appelleGrist();
+    const guidesGrist = await this.appelleGrist({ tri: { cle: "Date_de_mise_a_jour_s_", ordre: "DESC" } });
     return guidesGrist.records.map(this.convertisGuideGrist);
   }
 
