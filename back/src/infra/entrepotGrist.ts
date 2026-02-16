@@ -19,7 +19,7 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
     this.cache = new Cache({ ttl: dureeCacheEnSecondes });
   }
 
-  protected appelleGrist(filtre?: Filtre) {
+  protected appelleGrist({ filtre }: { filtre?: Filtre } = {}) {
     if (!this.urlDeBase) {
       return { records: [] };
     }

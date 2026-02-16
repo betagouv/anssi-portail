@@ -7,7 +7,7 @@ export class EntrepotGristGenerique extends EntrepotGrist<{ test: string }> {
   }
 
   async avecFiltre(filtre: number): Promise<{ test: string }[]> {
-    const resultat = await this.appelleGrist({ id: [filtre] });
+    const resultat = await this.appelleGrist({ filtre: { id: [filtre] } });
     return resultat.records;
   }
 }
