@@ -95,7 +95,8 @@
       fournisseurs de services de communications électroniques accessibles au
       public et l'administration publique. <dsfr-link
         label="En savoir plus"
-        href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank
+        href="https://aide.monespacenis2.cyber.gouv.fr/fr/"
+        blank
       ></dsfr-link>
     </p>
   </dsfr-accordion>
@@ -121,7 +122,10 @@
       Les entités concernées par la directive NIS2 sont tenues de mettre en
       place des mesures juridiques, techniques et organisationnelles visant à
       gérer les risques qui menacent la sécurité de leurs réseaux et de leurs
-      systèmes d'information. <dsfr-link label="En savoir plus" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank
+      systèmes d'information. <dsfr-link
+        label="En savoir plus"
+        href="https://aide.monespacenis2.cyber.gouv.fr/fr/"
+        blank
       ></dsfr-link>
     </p>
     <p>
@@ -131,11 +135,16 @@
       fournisseurs numériques font l'objet d'un règlement d'exécution spécifique
       de la Commission européenne (<dsfr-link
         label="accessible en français ici"
-        href="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=OJ:L_202402690" blank
+        href="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=OJ:L_202402690"
+        blank
       ></dsfr-link>). Par conséquent, elles ne sont pas soumises au socle de
       mesures de sécurité NIS&nbsp;2 définies pour les entités établies en
       France.
-      <dsfr-link label="En savoir plus" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank></dsfr-link>
+      <dsfr-link
+        label="En savoir plus"
+        href="https://aide.monespacenis2.cyber.gouv.fr/fr/"
+        blank
+      ></dsfr-link>
     </p>
     <dsfr-button
       label="Découvrir les solutions pour m'aider"
@@ -166,8 +175,8 @@
       sanctions. La directive prévoit la capacité d'imposer, entre autres, des
       sanctions financières aux entités régulées. Ces sanctions, qui doivent
       être proportionnées au(x) manquement(s), pourront aller jusqu'à un
-      pourcentage du chiffre d'affaires mondial des entités (2&nbsp;% pour les EE et
-      1,4&nbsp;% pour les EI).
+      pourcentage du chiffre d'affaires mondial des entités (2&nbsp;% pour les
+      EE et 1,4&nbsp;% pour les EI).
     </p>
   </dsfr-accordion>
 </div>
@@ -176,7 +185,6 @@
   .accordeons {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     margin: 2rem 0;
 
     dsfr-button {
