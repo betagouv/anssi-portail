@@ -127,14 +127,13 @@
     }
 
     .liens {
-      border-bottom: 1px solid var(--jaune-msc);
+      border-bottom: 1px solid var(--border-default-grey);
       display: none;
       max-height: 0;
       transition:
         display,
         max-height 0.2s ease;
       transition-behavior: allow-discrete;
-      padding-top: 1rem;
       margin-bottom: 32px;
     }
 
@@ -188,7 +187,10 @@
           color: var(--noir);
 
           &::before {
-            background-color: var(--background-active-blue-france);
+            background-color: var(--border-active-blue-france);
+            @include a-partir-de(md) {
+              background-color: var(--background-active-blue-france);
+            }
           }
         }
       }
@@ -230,7 +232,7 @@
 
             &:hover {
               background-color: var(--background-default-grey-hover);
-              border-bottom-color: var(--jaune-msc);
+              border-bottom-color: var(--background-active-blue-france);
             }
           }
 
@@ -239,7 +241,7 @@
           }
 
           &.actif a {
-            border-bottom-color: var(--jaune-msc);
+            border-bottom-color: var(--background-active-blue-france);
 
             &::before {
               bottom: 0;
