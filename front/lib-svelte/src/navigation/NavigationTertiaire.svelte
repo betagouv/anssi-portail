@@ -48,7 +48,13 @@
     aria-expanded={open}
     use:clic={surLeClicDeLEntete}
   >
+    <lab-anssi-icone nom="menu-2-fill" taille="sm"></lab-anssi-icone>
     <span>Naviguer</span>
+    {#if open}
+      <lab-anssi-icone nom="arrow-up-s-line" taille="sm"></lab-anssi-icone>
+    {:else}
+      <lab-anssi-icone nom="arrow-down-s-line" taille="sm"></lab-anssi-icone>
+    {/if}
   </button>
   <div class="fr-text liens" id="navigation-tertiaire">
     <ol>
@@ -88,7 +94,6 @@
   .navigation-tertiaire {
     background-color: var(--background-default-grey);
     box-sizing: border-box;
-    margin-inline: -1rem;
     font-size: 1rem;
     line-height: 1.5rem;
     margin-bottom: 32px;
@@ -96,7 +101,7 @@
     .entete {
       appearance: none;
       background-color: var(--background-default-grey);
-      border-block: 1px solid var(--jaune-msc);
+      border-block: 1px solid var(--border-default-grey);
       border-inline-width: 0;
       cursor: pointer;
       display: flex;
@@ -116,30 +121,6 @@
       &::marker,
       &::-webkit-details-marker {
         display: none;
-      }
-
-      &::before,
-      &::after {
-        --icon-size: 1rem;
-
-        background-color: currentColor;
-        content: '';
-        flex: 0 0 auto;
-        height: var(--icon-size);
-        width: var(--icon-size);
-        mask-size: 100% 100%;
-      }
-
-      &::before {
-        -webkit-mask-image: url('/icons/system/menu-2-fill.svg');
-        mask-image: url('/icons/system/menu-2-fill.svg');
-      }
-
-      &::after {
-        -webkit-mask-image: url('/icons/arrows/arrow-down-s-line.svg');
-        mask-image: url('/icons/arrows/arrow-down-s-line.svg');
-        transform: rotate(0deg);
-        transition: transform 0.2s ease-in-out;
       }
 
       @include focus();
