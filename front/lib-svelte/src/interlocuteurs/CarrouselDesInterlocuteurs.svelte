@@ -1,8 +1,7 @@
 <script lang="ts"></script>
 
 <h2>
-  Trouvez les interlocuteurs et dispositifs<br />pour vous soutenir dans vos
-  efforts.
+  Trouvez les interlocuteurs et dispositifs pour vous soutenir dans vos efforts.
 </h2>
 <lab-anssi-carrousel-tuiles>
   <dsfr-tile
@@ -52,6 +51,10 @@
   h2 {
     text-align: center;
     margin-bottom: 48px;
+    margin-inline: auto;
+    @include a-partir-de(lg) {
+      max-width: 66%;
+    }
   }
 
   lab-anssi-carrousel-tuiles {
