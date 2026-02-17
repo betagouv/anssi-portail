@@ -88,6 +88,7 @@
     line-height: 2.25rem;
     font-weight: bold;
     margin: 0 0 24px;
+    color: var(--text-title-grey);
 
     @include a-partir-de(md) {
       font-size: 2rem;
@@ -100,6 +101,7 @@
     line-height: 1.75rem;
     font-weight: bold;
     margin: 0 0 24px;
+    color: var(--text-title-grey);
 
     @include a-partir-de(md) {
       font-size: 1.5rem;
