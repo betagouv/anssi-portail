@@ -1,0 +1,16 @@
+name: Compare les guides
+run-name: Génère un rapport de différence entre 2 les guides en démo et en prod
+permissions: {}
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch: # Pour activer le déclenchement manuel
+
+jobs:
+  compare-et-publie-guides:
+    name: 'Comparaison'
+    uses: ./.github/workflows/comparaison-grist.yml
+    with:
+      cible: guides
+    secrets: inherit
