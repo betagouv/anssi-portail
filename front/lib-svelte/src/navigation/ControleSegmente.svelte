@@ -56,10 +56,12 @@
 <style lang="scss">
   .conteneur {
     padding-block: 16px;
-    overflow: auto;
     background: var(--background-default-grey);
     position: sticky;
     top: 0;
     z-index: 2;
+    .controle-segmente {
+      overflow: auto;
+    }
   }
 </style>
