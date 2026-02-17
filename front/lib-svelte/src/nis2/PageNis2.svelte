@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import Onglets from '../navigation/Onglets.svelte';
+  import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import DocumentationNis2 from './DocumentationNis2.svelte';
@@ -18,7 +18,7 @@
     estBureau = mql.matches;
   });
 
-  const onglets = [
+  const liens = [
     {
       label: 'La directive NIS 2',
       fragment: '#presentation',
@@ -32,7 +32,7 @@
       fragment: '#documentation',
     },
   ];
-  let ongletActif = $state(0);
+  let lienActif = $state(0);
 </script>
 
 <Heros
@@ -63,13 +63,13 @@
   {/snippet}
 </Heros>
 
-<Onglets {onglets} bind:ongletActif />
+<NavigationTertiaire {liens} bind:lienActif />
 
-{#if ongletActif === 0}
+{#if lienActif === 0}
   <Presentation />
-{:else if ongletActif === 1}
+{:else if lienActif === 1}
   <Solutions {itemsCyber} />
-{:else if ongletActif === 2}
+{:else if lienActif === 2}
   <DocumentationNis2 />
 {/if}
 
