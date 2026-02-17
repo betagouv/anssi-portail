@@ -13,7 +13,7 @@
     "start:guides:compare": "node --import tsx src/guides.ts",
     "lint:fix": "eslint . --fix",
     "lint": "eslint .",
-    "test": "vitest",
+    "test": "pnpm typecheck && vitest",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

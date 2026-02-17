@@ -38,8 +38,8 @@ ${contenuDuTableau}</tbody>
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.id}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.nom}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.thematique}`)}
-${this.construisUneCelluleAvecLeContenu(`+ ${guide.datePublication}`)}
-${this.construisUneCelluleAvecLeContenu(`+ ${guide.dateMiseAJour}`)}
+${this.construisUneCelluleAvecLeContenu(`+ ${guide.datePublication.toLocaleDateString()}`)}
+${this.construisUneCelluleAvecLeContenu(`+ ${guide.dateMiseAJour.toLocaleDateString()}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.description}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.nomImage ?? ''}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n')}`)}
@@ -55,8 +55,8 @@ ${this.construisUneCelluleAvecLeContenu(`+ ${guide.besoins.join(', ')}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.id}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.nom}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.thematique}`)}
-${this.construisUneCelluleAvecLeContenu(`- ${guide.datePublication}`)}
-${this.construisUneCelluleAvecLeContenu(`- ${guide.dateMiseAJour}`)}
+${this.construisUneCelluleAvecLeContenu(`- ${guide.datePublication.toLocaleDateString()}`)}
+${this.construisUneCelluleAvecLeContenu(`- ${guide.dateMiseAJour.toLocaleDateString()}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.description}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.nomImage ?? ''}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n')}`)}
@@ -78,8 +78,8 @@ ${this.construisUneCelluleAvecLeContenu(`- ${guide.besoins.join(', ')}`)}
 ${this.construisUneCelluleDeDiff(source.id, cible.id)}
 ${this.construisUneCelluleDeDiff(source.nom, cible.nom)}
 ${this.construisUneCelluleDeDiff(source.thematique, cible.thematique)}
-${this.construisUneCelluleDeDiff(source.datePublication, cible.datePublication)}
-${this.construisUneCelluleDeDiff(source.dateMiseAJour, cible.dateMiseAJour)}
+${this.construisUneCelluleDeDiff(source.datePublication.toLocaleDateString(), cible.datePublication.toLocaleDateString())}
+${this.construisUneCelluleDeDiff(source.dateMiseAJour.toLocaleDateString(), cible.dateMiseAJour.toLocaleDateString())}
 ${this.construisUneCelluleDeDiff(source.description, cible.description)}
 ${this.construisUneCelluleDeDiff(source.nomImage ?? '', cible.nomImage ?? '')}
 ${this.construisUneCelluleDeDiffPourTableaux(

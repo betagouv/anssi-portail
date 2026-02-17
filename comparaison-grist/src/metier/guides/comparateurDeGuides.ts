@@ -68,7 +68,9 @@ export class ComparateurDeGuides {
         ];
         if (
           methodesExtractionValeursAComparer.some(
-            (value) => value(guideSource) !== value(guideCibleCorrespondant)
+            (methodeDeComparaison) =>
+              methodeDeComparaison(guideSource) !==
+              methodeDeComparaison(guideCibleCorrespondant)
           )
         ) {
           liste.push({ source: guideSource, cible: guideCibleCorrespondant });
