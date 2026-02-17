@@ -72,7 +72,7 @@
       }
 
       @include a-partir-de(lg) {
-        max-width: taille-pour-colonnes(10);
+        max-width: taille-pour-colonnes(8);
       }
     }
   }
