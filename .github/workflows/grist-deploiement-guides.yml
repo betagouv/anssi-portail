@@ -3,8 +3,6 @@ run-name: Compare et déploie les guides de démo en prod
 permissions: {}
 
 on:
-  pull_request:
-    branches: [main]
   workflow_dispatch: # Pour activer le déclenchement manuel
 
 jobs:

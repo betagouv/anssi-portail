@@ -54,7 +54,7 @@ jobs:
     name: Déploiement
     runs-on: ubuntu-latest
     needs: genere-tableau-comparatif
-    # environment: PROD_NODE
+    environment: PROD_NODE
     strategy:
       matrix:
         cible: ['${{ inputs.cible }}']
