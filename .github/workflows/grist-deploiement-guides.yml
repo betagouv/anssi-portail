@@ -1,0 +1,16 @@
+name: Déploie les guides
+run-name: Compare et déploie les guides de démo en prod
+permissions: {}
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch: # Pour activer le déclenchement manuel
+
+jobs:
+  compare-et-deploie-guides:
+    name: 'Guides'
+    uses: ./.github/workflows/grist-deploiement.yml
+    with:
+      cible: guides
+    secrets: inherit
