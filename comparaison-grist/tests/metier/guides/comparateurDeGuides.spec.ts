@@ -132,8 +132,8 @@ describe('Le comparateur de guides', () => {
           .avecLaLangue('FR')
           .avecLesCollections(['REAGIR', 'SENSIBILISER'])
           .avecLeDocument('document 1', 'nom_du_document_1.pdf')
-          .avecLaDateDeMiseAJour('13 Mars 2025')
-          .avecLaDateDePublication('13 Mars 2025')
+          .avecLaDateDeMiseAJour(new Date(2025, 2, 13).getTime() / 1000)
+          .avecLaDateDePublication(new Date(2025, 2, 13).getTime() / 1000)
           .avecThematique('Thématique')
           .avecBesoin('ancien besoin');
         guideOriginal = coquilleDeGuide.construis();
@@ -224,7 +224,7 @@ describe('Le comparateur de guides', () => {
 
       it('lorsque la date de mise à jour a changé', async () => {
         const guideCible = coquilleDeGuide
-          .avecLaDateDeMiseAJour('20 Juin 2025')
+          .avecLaDateDeMiseAJour(new Date(2025, 5, 20).getTime() / 1000)
           .construis();
         await prepareLesDonnees(guideOriginal, guideCible);
 
@@ -235,7 +235,7 @@ describe('Le comparateur de guides', () => {
 
       it('lorsque la date de publication a changé', async () => {
         const guideCible = coquilleDeGuide
-          .avecLaDateDePublication('20 Juin 2025')
+          .avecLaDateDePublication(new Date(2025, 5, 20).getTime() / 1000)
           .construis();
         await prepareLesDonnees(guideOriginal, guideCible);
 

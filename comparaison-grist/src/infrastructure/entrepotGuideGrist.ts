@@ -18,8 +18,8 @@ export type GuideGrist = {
     Langue: 'FR' | 'EN' | null;
     Collections: string[];
     Documents: string;
-    Date_de_publication: string | null;
-    Date_de_mise_a_jour: string | null;
+    Date_de_publication_s_: number | null;
+    Date_de_mise_a_jour_s_: number | null;
     Thematique: string | null;
     Besoins_cyber: string[];
   };
@@ -92,8 +92,12 @@ export class EntrepotGuideGrist implements EntrepotGuide {
               };
             })
         : [],
-      dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour ?? '',
-      datePublication: guideGrist.fields.Date_de_publication ?? '',
+      dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour_s_
+        ? new Date(guideGrist.fields.Date_de_mise_a_jour_s_ * 1000)
+        : new Date(),
+      datePublication: guideGrist.fields.Date_de_publication_s_
+        ? new Date(guideGrist.fields.Date_de_publication_s_ * 1000)
+        : new Date(),
       thematique: guideGrist.fields.Thematique ?? '',
       besoins: this.aseptiseListe(guideGrist.fields.Besoins_cyber),
     };
