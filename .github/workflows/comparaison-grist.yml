@@ -4,15 +4,21 @@ permissions: {}
 
 on:
   workflow_dispatch: # Pour activer le déclenchement manuel
+    inputs:
+      cible:
+        description: 'Cible'
+        required: true
+        type: choice
+        options:
+          - guides
 
 jobs:
   genere-tableau-comparatif:
-    name: ${{ matrix.ressource.nom }}
+    name: Comparaison ${{ inputs.cible }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ressource:
-          - { nom: 'Les guides', script: 'start:guides' }
+        cible: ['${{ inputs.cible }}']
     steps:
       - name: Cloner le dépôt Git
         uses: actions/checkout@v4
@@ -31,7 +37,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Lance le script de comparaison
-        run: pnpm -F comparaison-grist ${{ matrix.ressource.script }}
+        run: pnpm -F comparaison-grist start:${{ matrix.cible }}:compare
         env:
           GUIDES_SOURCE_GRIST_URL: ${{ secrets.GUIDES_SOURCE_GRIST_URL }}
           GUIDES_SOURCE_GRIST_ID_TABLE: ${{ secrets.GUIDES_SOURCE_GRIST_ID_TABLE }}
@@ -43,27 +49,22 @@ jobs:
       - name: Sauvegarde l'empreinte source
         uses: actions/upload-artifact@v4
         with:
-          name: empreinte-data-${{ matrix.ressource.nom }}
+          name: empreinte-data-${{ matrix.cible }}
           path: comparaison-grist/empreinte.txt
 
   publie-ressources-grist:
-    name: Publie les ressources Grist
+    name: Publie ${{ matrix.cible }}
     runs-on: ubuntu-latest
     needs: genere-tableau-comparatif
     environment: PROD_NODE
+    strategy:
+      matrix:
+        cible: ['${{ inputs.cible }}']
     steps:
       - name: Télécharger les empreintes sources
         uses: actions/download-artifact@v4
         with:
-          pattern: empreinte-data-*
-          merge-multiple: true
+          name: empreinte-data-${{ matrix.cible }}
 
       - name: Affiche les empreintes sources
-        run: |
-          echo "Empreintes téléchargées:"
-          ls -1 empreinte*.txt | sort
-          echo "---"
-          for file in $(ls -1 empreinte*.txt | sort); do
-            echo "=== $file ==="
-            cat "$file"
-          done
+        run: cat empreinte.txt

@@ -9,8 +9,8 @@
     "node": ">=24.0.0"
   },
   "scripts": {
-    "dev:guides": "node --import tsx --env-file .env src/guides.ts",
-    "start:guides": "node --import tsx src/guides.ts",
+    "dev:guides:compare": "node --import tsx --env-file .env src/guides.ts",
+    "start:guides:compare": "node --import tsx src/guides.ts",
     "lint:fix": "eslint . --fix",
     "lint": "eslint .",
     "test": "vitest",
