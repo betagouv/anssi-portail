@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Onglets from '../../navigation/Onglets.svelte';
+  import NavigationTertiaire from '../../navigation/NavigationTertiaire.svelte';
   import FilAriane from '../../ui/FilAriane.svelte';
   import Heros from '../../ui/Heros.svelte';
   import Proteger from '../Proteger.svelte';
@@ -7,7 +7,7 @@
 
   let { itemsCyber } = $props();
 
-  const onglets = [
+  const liens = [
     {
       label: 'Protéger ma collectivité',
       fragment: '#proteger',
@@ -17,7 +17,7 @@
       fragment: '#solutions',
     },
   ];
-  let ongletActif = $state(0);
+  let lienActif = $state(0);
 </script>
 
 <Heros
@@ -36,9 +36,9 @@
   {/snippet}
 </Heros>
 
-<Onglets {onglets} bind:ongletActif />
+<NavigationTertiaire {liens} bind:lienActif />
 
-{#if ongletActif === 0}
+{#if lienActif === 0}
   <Proteger origine="landing-collectivites" />
 {:else}
   <Solutions {itemsCyber} />

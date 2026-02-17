@@ -2,30 +2,30 @@
   import { onMount } from 'svelte';
   import { clic } from '../directives/actions.svelte';
 
-  type Onglet = { emoji?: string; label: string; fragment: string };
+  type Lien = { emoji?: string; label: string; fragment: string };
   type Props = {
-    onglets: Onglet[];
-    ongletActif: number;
+    liens: Lien[];
+    lienActif: number;
   };
 
-  let { onglets, ongletActif = $bindable() }: Props = $props();
+  let { liens, lienActif = $bindable() }: Props = $props();
 
-  const changeLOngletCourant = () => {
+  const changeLeLienCourant = () => {
     const hash = new URLSearchParams(window.location.hash?.substring(1));
-    const ongletDansLUrl = Array.from(hash)[0];
-    if (ongletDansLUrl) {
-      ongletActif =
-        onglets.findIndex((o) => o.fragment === `#${ongletDansLUrl[0]}`) ?? 0;
+    const lienDansLUrl = Array.from(hash)[0];
+    if (lienDansLUrl) {
+      lienActif =
+        liens.findIndex((o) => o.fragment === `#${lienDansLUrl[0]}`) ?? 0;
     }
   };
 
   onMount(() => {
-    changeLOngletCourant();
+    changeLeLienCourant();
   });
 
   $effect(() => {
-    window.addEventListener('hashchange', changeLOngletCourant);
-    return () => window.removeEventListener('hashchange', changeLOngletCourant);
+    window.addEventListener('hashchange', changeLeLienCourant);
+    return () => window.removeEventListener('hashchange', changeLeLienCourant);
   });
 
   let open = $state(false);
@@ -34,34 +34,34 @@
     open = !open;
   };
 
-  const surLeClicDUnOnglet = (onglet: Onglet, indice: number) => {
-    ongletActif = indice;
+  const surLeClicDUnLien = (_lien: Lien, indice: number) => {
+    lienActif = indice;
     open = false;
   };
 </script>
 
-<div class={['menu-onglets', { open }]}>
+<div class={['navigation-tertiaire', { open }]}>
   <button
     class="entete"
     type="button"
-    aria-controls="onglets"
+    aria-controls="navigation-tertiaire"
     aria-expanded={open}
     use:clic={surLeClicDeLEntete}
   >
     <span>Naviguer</span>
   </button>
-  <div class="fr-text onglets" id="onglets">
+  <div class="fr-text liens" id="navigation-tertiaire">
     <ol>
-      {#each onglets as onglet, indice (onglet.label)}
-        <li class={{ actif: onglets[ongletActif] === onglet }}>
+      {#each liens as lien, indice (lien.label)}
+        <li class={{ actif: liens[lienActif] === lien }}>
           <a
-            href={onglet.fragment}
-            use:clic={() => surLeClicDUnOnglet(onglet, indice)}
+            href={lien.fragment}
+            use:clic={() => surLeClicDUnLien(lien, indice)}
           >
-            {#if onglet.emoji}
-              <span aria-hidden="true">{onglet.emoji}</span>
+            {#if lien.emoji}
+              <span aria-hidden="true">{lien.emoji}</span>
             {/if}
-            <span>{onglet.label}</span>
+            <span>{lien.label}</span>
           </a>
         </li>
       {/each}
@@ -85,7 +85,7 @@
     }
   }
 
-  .menu-onglets {
+  .navigation-tertiaire {
     background-color: var(--background-default-grey);
     box-sizing: border-box;
     margin-inline: -1rem;
@@ -145,7 +145,7 @@
       @include focus();
     }
 
-    .onglets {
+    .liens {
       border-bottom: 1px solid var(--jaune-msc);
       display: none;
       max-height: 0;
@@ -166,7 +166,7 @@
         }
       }
 
-      .onglets {
+      .liens {
         display: block;
         max-height: initial;
       }
@@ -223,7 +223,7 @@
         display: none;
       }
 
-      .onglets {
+      .liens {
         display: block;
         font-size: 0.875rem;
         font-weight: normal;
