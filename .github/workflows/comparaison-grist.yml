@@ -9,6 +9,7 @@ on:
         description: 'Cible'
         required: true
         type: choice
+        default: guides
         options:
           - guides
 
