@@ -65,4 +65,14 @@ jobs:
           name: empreinte-data-${{ matrix.cible }}
 
       - name: Affiche les empreintes sources
-        run: cat empreinte.txt
+        run: echo EMPREINTE=$(cat empreinte.txt) >> "$GITHUB_ENV"
+
+      - name: Recopie le contenu
+        run: |
+          curl --request POST \
+            --url ${{ secrets.TEST_GUIDES_CIBLE_GRIST_URL }}/replace \
+            --header 'authorization: Bearer ${{ secrets.TEST_GUIDES_CIBLE_GRIST_API_KEY }}' \
+            --header 'content-type: application/json' \
+            --data '{
+              "sourceDocId": "${{ env.EMPREINTE }}"
+            }'
