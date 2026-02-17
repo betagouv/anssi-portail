@@ -16,8 +16,8 @@ export const guideZeroTrust: Guide = {
       nomFichier: 'anssi-fondamentaux-zero-trust-v1.0.pdf',
     },
   ],
-  dateMiseAJour: '20 Juin 2025',
-  datePublication: '20 Juin 2025',
+  dateMiseAJour: new Date(2025, 5, 20),
+  datePublication: new Date(2025, 5, 20),
   thematique: 'Les essentiels',
   besoins: ['REAGIR', 'SE_FORMER'],
 };
@@ -36,8 +36,8 @@ export const guideDevsecops: Guide = {
       nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
     },
   ],
-  dateMiseAJour: '13 Mars 2024',
-  datePublication: '13 Mars 2024',
+  dateMiseAJour: new Date(2024, 2, 13),
+  datePublication: new Date(2024, 2, 13),
   thematique: 'Les essentiels',
   besoins: ['SECURISER'],
 };
@@ -90,9 +90,13 @@ describe('Le consignateur de comparaison de guides', () => {
       '<td>\n\n' +
       '```diff\n+ Les essentiels\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n+ 20 Juin 2025\n```\n</td>\n' +
+      '```diff\n+ ' +
+      new Date(2025, 5, 20).toLocaleDateString() +
+      '\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n+ 20 Juin 2025\n```\n</td>\n' +
+      '```diff\n+ ' +
+      new Date(2025, 5, 20).toLocaleDateString() +
+      '\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n+ <p>Avec l’accroissement des usages liés au télétravail, ...</p>\n```\n</td>\n' +
       '<td>\n\n' +
@@ -129,9 +133,13 @@ describe('Le consignateur de comparaison de guides', () => {
       '<td>\n\n' +
       '```diff\n- Les essentiels\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n- 20 Juin 2025\n```\n</td>\n' +
+      '```diff\n- ' +
+      new Date(2025, 5, 20).toLocaleDateString() +
+      '\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n- 20 Juin 2025\n```\n</td>\n' +
+      '```diff\n- ' +
+      new Date(2025, 5, 20).toLocaleDateString() +
+      '\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n- <p>Avec l’accroissement des usages liés au télétravail, ...</p>\n```\n</td>\n' +
       '<td>\n\n' +
@@ -167,9 +175,17 @@ describe('Le consignateur de comparaison de guides', () => {
       '<td>\n\n' +
       '```diff\nLes essentiels\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n- 13 Mars 2024\n+ 20 Juin 2025\n```\n</td>\n' +
+      '```diff\n- ' +
+      new Date(2024, 2, 13).toLocaleDateString() +
+      '\n+ ' +
+      new Date(2025, 5, 20).toLocaleDateString() +
+      '\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n- 13 Mars 2024\n+ 20 Juin 2025\n```\n</td>\n' +
+      '```diff\n- ' +
+      new Date(2024, 2, 13).toLocaleDateString() +
+      '\n+ ' +
+      new Date(2025, 5, 20).toLocaleDateString() +
+      '\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n- <p>Les Essentiels de l’ANSSI visent à éclairer l’ensemble de nos lecteurs, ...</p>\n+ <p>Avec l’accroissement des usages liés au télétravail, ...</p>\n```\n</td>\n' +
       '<td>\n\n' +
@@ -210,9 +226,13 @@ describe('Le consignateur de comparaison de guides', () => {
       '<td>\n\n' +
       '```diff\nLes essentiels\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n20 Juin 2025\n```\n</td>\n' +
+      '```diff\n' +
+      new Date(2025, 5, 20).toLocaleDateString() +
+      '\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n20 Juin 2025\n```\n</td>\n' +
+      '```diff\n' +
+      new Date(2025, 5, 20).toLocaleDateString() +
+      '\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n<p>Avec l’accroissement des usages liés au télétravail, ...</p>\n```\n</td>\n' +
       '<td>\n\n' +
