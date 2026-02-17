@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Onglets from '../../nis2/Onglets.svelte';
+  import Onglets from '../../navigation/Onglets.svelte';
   import FilAriane from '../../ui/FilAriane.svelte';
   import Heros from '../../ui/Heros.svelte';
   import Proteger from '../Proteger.svelte';

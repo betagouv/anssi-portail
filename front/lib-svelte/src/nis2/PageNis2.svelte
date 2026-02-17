@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import Onglets from '../navigation/Onglets.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
-  import Onglets from './Onglets.svelte';
+  import DocumentationNis2 from './DocumentationNis2.svelte';
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
-  import DocumentationNis2 from './DocumentationNis2.svelte';
 
   let { itemsCyber } = $props();
 
