@@ -20,7 +20,7 @@
 
   const liens = [
     {
-      label: 'La directive NIS 2',
+      label: 'Présentation NIS 2',
       fragment: '#presentation',
     },
     {
@@ -28,7 +28,7 @@
       fragment: '#solutions',
     },
     {
-      label: 'Documentation',
+      label: 'Documentation et FAQ',
       fragment: '#documentation',
     },
   ];
