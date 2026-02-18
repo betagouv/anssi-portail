@@ -134,7 +134,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'catalogue',
     'parcours-debuter',
     'parcours-approfondir',
-    'nis2',
     'test-maturite',
     'niveaux-maturite',
     'apres-authentification',
@@ -323,6 +322,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/api/diagnostic/statistiques', ressourceStatistiquesDiagnostic());
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
+
+  app.use('/nis2', (_requete: Request, reponse: Response) => {
+    reponse.redirect(301, '/directive-nis2#solutions');
+  });
 
   app.use((_requete: Request, reponse: Response) => {
     reponse
