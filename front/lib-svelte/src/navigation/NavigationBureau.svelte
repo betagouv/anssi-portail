@@ -17,7 +17,6 @@
     <details
       class:actif={[
         '/catalogue/',
-        '/nis2/',
         '/parcours-debuter/',
         '/parcours-approfondir/',
       ].includes(cheminRelatif)}
@@ -37,11 +36,6 @@
         <LienNavigation
           href="/parcours-approfondir/"
           label="Les services pour approfondir"
-          dansMenuDeroulant
-        />
-        <LienNavigation
-          href="/nis2/"
-          label="Les services pour vous accompagner avec NIS2"
           dansMenuDeroulant
         />
       </div>
