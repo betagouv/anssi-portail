@@ -103,24 +103,30 @@ export class ConsoleAdministration {
     console.log(`\n${rapportExecution}`);
   }
 
-  async rattrapageProfilsContactBrevo() {
-    const tousUtilisateurs = await this.entrepotUtilisateur.tous();
+  async rattrapageProfilContactBrevo(email: string) {
+    const unUtilisateur = await this.entrepotUtilisateur.parEmailHache(
+      this.adaptateurHachage.hache(email)
+    );
+    if (!unUtilisateur) {
+      console.log('Utilisateur non trouvé');
+      return;
+    }
+
     const afficheErreur = (utilisateur: Utilisateur) =>
       `Erreur pour ${utilisateur.email}`;
-    const enCadence = pThrottle({ limit: 1, interval: 150 });
 
-    const rattrapeUtilisateur = enCadence(async (utilisateur: Utilisateur) => {
+    const rattrapeUtilisateur = async (utilisateur: Utilisateur) => {
       const { prenom, nom, email, infolettreAcceptee } = utilisateur;
-      this.adaptateurEmail.creeContactBrevo({
+      await this.adaptateurEmail.creeContactBrevo({
         prenom,
         nom,
         email,
         infoLettre: infolettreAcceptee,
       });
-    });
+    };
 
     return ConsoleAdministration.rattrapage(
-      tousUtilisateurs,
+      [unUtilisateur],
       afficheErreur,
       rattrapeUtilisateur
     );
