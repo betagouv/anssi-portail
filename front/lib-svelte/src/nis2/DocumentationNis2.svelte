@@ -36,6 +36,27 @@
         />
       </video>
     </div>
+
+    <div class="faq">
+      <hgroup>
+        <h2>Foire aux questions</h2>
+        <p>
+          Certaines questions-réponses dépendent de l’issue du débat
+          parlementaire et des consultations sur les textes réglementaires, dans
+          le cadre du processus de transposition. Les questions-réponses de
+          cette FAQ seront mises à jour en conséquence.
+        </p>
+      </hgroup>
+      <dsfr-link
+        label="Consulter la FAQ"
+        href="https://aide.monespacenis2.cyber.gouv.fr/fr/"
+        blank
+      ></dsfr-link>
+      <img
+        src="/assets/images/illustration-faq-NIS2.avif"
+        alt="Foire aux questions de mon espace NIS 2"
+      />
+    </div>
   </div>
 </dsfr-container>
 
@@ -73,6 +94,20 @@
 
       @include a-partir-de(lg) {
         max-width: taille-pour-colonnes(8);
+      }
+      .faq {
+        display: flex;
+        flex-direction: column;
+        margin-top: 48px;
+        gap: 32px;
+
+        h2 {
+          margin-bottom: 8px;
+        }
+        p,
+        img {
+          margin: 0;
+        }
       }
     }
   }
