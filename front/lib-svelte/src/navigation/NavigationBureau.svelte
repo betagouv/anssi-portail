@@ -10,9 +10,6 @@
 
 <nav class="conteneur-nav">
   <div class="contenu-section">
-    {#if !estConnecte}
-      <LienNavigation href="/" label="Accueil" />
-    {/if}
     <LienNavigation
       href={estConnecte ? '/ma-maturite' : '/test-maturite/'}
       label={estConnecte ? 'Maturité cyber' : 'Test de maturité cyber'}
@@ -49,6 +46,7 @@
         />
       </div>
     </details>
+    <LienNavigation label="Directive NIS 2" href="/directive-nis2" />
     {#if estConnecte}
       <LienNavigation href="/favoris/" label="Favoris" />
     {/if}
