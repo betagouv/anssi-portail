@@ -6,7 +6,7 @@
   export let origine: string;
 </script>
 
-<dsfr-container>
+<dsfr-container class="proteger">
   <div class="introduction">
     <h2>
       Découvrez les risques pour votre organisation en cas de cyberattaque
@@ -51,25 +51,28 @@
   @use '../../../assets/styles/responsive' as *;
   @use '../../../assets/styles/grille' as *;
 
-  .introduction {
-    padding-bottom: 72px;
-    margin-inline: auto;
-    max-width: 100%;
-    @include a-partir-de(md) {
-      max-width: taille-pour-colonnes(10);
-    }
-    @include a-partir-de(lg) {
-      padding-top: 24px;
-      max-width: taille-pour-colonnes(6);
-    }
+  .proteger {
+    margin-top: 48px;
+    
+    .introduction {
+      padding-bottom: 72px;
+      margin-inline: auto;
+      max-width: 100%;
+      @include a-partir-de(md) {
+        max-width: taille-pour-colonnes(10);
+      }
+      @include a-partir-de(lg) {
+        max-width: taille-pour-colonnes(6);
+      }
 
-    h2 {
-      text-align: center;
-      margin-bottom: 48px;
-    }
+      h2 {
+        text-align: center;
+        margin-bottom: 48px;
+      }
 
-    video {
-      width: 100%;
+      video {
+        width: 100%;
+      }
     }
   }
 
