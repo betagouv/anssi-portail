@@ -65,13 +65,18 @@
 
 <NavigationTertiaire {liens} bind:lienActif />
 
-{#if lienActif === 0}
-  <Presentation />
-{:else if lienActif === 1}
-  <Solutions {itemsCyber} />
-{:else if lienActif === 2}
-  <DocumentationNis2 />
-{/if}
+<div class="contenu">
+  {#if lienActif === 0}
+    <Presentation />
+  {:else if lienActif === 1}
+    <Solutions {itemsCyber} />
+  {:else if lienActif === 2}
+    <DocumentationNis2 />
+  {/if}
+</div>
 
 <style lang="scss">
+  .contenu {
+    margin-top: 48px;
+  }
 </style>

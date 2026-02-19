@@ -96,7 +96,6 @@
     box-sizing: border-box;
     font-size: 1rem;
     line-height: 1.5rem;
-    margin-bottom: 32px;
 
     .entete {
       appearance: none;
@@ -134,7 +133,6 @@
         display,
         max-height 0.2s ease;
       transition-behavior: allow-discrete;
-      margin-bottom: 32px;
     }
 
     &.open {
@@ -198,7 +196,7 @@
 
     @include a-partir-de(md) {
       display: flex;
-      margin: 2rem auto 0;
+      margin: 2rem auto 1.5rem;
       justify-content: center;
       width: clamp(200px, 100%, 639px);
 
