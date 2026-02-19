@@ -11,6 +11,14 @@
   {% endif %}
 
   <title>{{page.titreHtml}}</title>
+  <script type="application/ld+json">
+    {
+      "@context" : "https://schema.org",
+      "@type" : "WebSite",
+      "name" : "messervices.cyber.gouv.fr",
+      "url" : "https://messervices.cyber.gouv.fr/"
+    }
+  </script>
   <meta name="description" content="{{ site.data.meta-description[page.url] | escape }}">
 
   <link rel="stylesheet" href="{{ "/assets/styles/dsfr.css" | relative_url }}">
