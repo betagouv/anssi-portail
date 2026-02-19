@@ -5,7 +5,7 @@
   type Lien = { emoji?: string; label: string; fragment: string };
   type Props = {
     liens: Lien[];
-    lienActif: number;
+    lienActif: string;
   };
 
   let { liens, lienActif = $bindable() }: Props = $props();
@@ -15,7 +15,7 @@
     const lienDansLUrl = Array.from(hash)[0];
     if (lienDansLUrl) {
       lienActif =
-        liens.findIndex((o) => o.fragment === `#${lienDansLUrl[0]}`) ?? 0;
+        liens.find((o) => o.fragment === `#${lienDansLUrl[0]}`)?.fragment ?? liens[0].fragment;
     }
   };
 
@@ -34,8 +34,8 @@
     open = !open;
   };
 
-  const surLeClicDUnLien = (_lien: Lien, indice: number) => {
-    lienActif = indice;
+  const surLeClicDUnLien = (lien: Lien) => {
+    lienActif = lien.fragment;
     open = false;
   };
 </script>
@@ -58,11 +58,11 @@
   </button>
   <div class="fr-text liens" id="navigation-tertiaire">
     <ol>
-      {#each liens as lien, indice (lien.label)}
-        <li class={{ actif: liens[lienActif] === lien }}>
+      {#each liens as lien (lien.label)}
+        <li class={{ actif: lien.fragment===lienActif }}>
           <a
             href={lien.fragment}
-            use:clic={() => surLeClicDUnLien(lien, indice)}
+            use:clic={() => surLeClicDUnLien(lien)}
           >
             {#if lien.emoji}
               <span aria-hidden="true">{lien.emoji}</span>

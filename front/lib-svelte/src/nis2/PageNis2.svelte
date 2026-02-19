@@ -32,7 +32,7 @@
       fragment: '#documentation',
     },
   ];
-  let lienActif = $state(0);
+  let lienActif = $state("#presentation");
 </script>
 
 <Heros
@@ -66,11 +66,11 @@
 <NavigationTertiaire {liens} bind:lienActif />
 
 <div class="contenu">
-  {#if lienActif === 0}
+  {#if lienActif === "#presentation"}
     <Presentation />
-  {:else if lienActif === 1}
+  {:else if lienActif === "#solutions"}
     <Solutions {itemsCyber} />
-  {:else if lienActif === 2}
+  {:else if lienActif === "#documentation"}
     <DocumentationNis2 />
   {/if}
 </div>
