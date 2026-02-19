@@ -239,6 +239,13 @@
         }
       }
 
+      .fil-ariane,
+      .lien-retour {
+        @include a-partir-de(lg) {
+          margin-bottom: 0.75rem;
+        }
+      }
+
       &:has(.fil-ariane),
       &:has(.lien-retour) {
         padding: 16px var(--gouttiere) 48px;
