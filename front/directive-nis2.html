@@ -8,6 +8,11 @@ styles:
   - /assets/styles/carte-item.css
 ---
 
+<script type="application/json" id="donnees-nis2">
+  {
+  "featureFlagExigencesNis2": {% if site.env.FEATURE_FLAG_EXIGENCES_NIS2 == 'true' %}true{% else %}false{% endif %}
+  }
+</script>
 <script
   type="module"
   crossorigin
