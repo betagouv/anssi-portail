@@ -16,17 +16,15 @@
   titre=""
 >
   {#snippet preambule()}
-    <hgroup class="preambule">
-      <h1 class="alternatif-xs">
-        Protéger mon association contre les cyberattaques
-      </h1>
-      <p class="texte-chapo-xl">
-        Les associations sont aussi concernées par le risque de cyberattaques.
-        Elles peuvent être la cible de campagnes de hameçonnage / phishing ou de
-        rançongiciels / ransomwares. Il n'est pas trop tard pour agir et des
-        solutions existent&nbsp;!
-      </p>
-    </hgroup>
+    <h1 class="alternatif-xs">
+      Protéger mon association contre les cyberattaques
+    </h1>
+    <p class="texte-chapo-xl">
+      Les associations sont aussi concernées par le risque de cyberattaques.
+      Elles peuvent être la cible de campagnes de hameçonnage / phishing ou de
+      rançongiciels / ransomwares. Il n'est pas trop tard pour agir et des
+      solutions existent&nbsp;!
+    </p>
   {/snippet}
   {#snippet filAriane()}
     <FilAriane fondSombre={true} feuille="Protéger mon association" />
@@ -34,9 +32,3 @@
 </Heros>
 
 <Proteger origine="landing-associations" />
-
-<style lang="scss">
-  .preambule {
-    padding-right: 32px;
-  }
-</style>
