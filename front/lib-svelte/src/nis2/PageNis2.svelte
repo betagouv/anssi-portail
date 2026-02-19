@@ -7,7 +7,7 @@
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
 
-  let { itemsCyber } = $props();
+  let { itemsCyber, featureFlagExigencesNis2 = false } = $props();
 
   let estBureau = $state(false);
   onMount(() => {
@@ -23,6 +23,9 @@
       label: 'Présentation NIS 2',
       fragment: '#presentation',
     },
+    ...(featureFlagExigencesNis2
+      ? [{ label: 'Exigences et comparaison', fragment: '#exigences' }]
+      : []),
     {
       label: 'Solutions pour vous accompagner',
       fragment: '#solutions',
@@ -32,7 +35,7 @@
       fragment: '#documentation',
     },
   ];
-  let lienActif = $state("#presentation");
+  let lienActif = $state('#presentation');
 </script>
 
 <Heros
@@ -66,11 +69,15 @@
 <NavigationTertiaire {liens} bind:lienActif />
 
 <div class="contenu">
-  {#if lienActif === "#presentation"}
+  {#if lienActif === '#presentation'}
     <Presentation />
-  {:else if lienActif === "#solutions"}
+  {:else if lienActif === '#exigences'}
+    <dsfr-container>
+      <h2>Liste des exigences NIS 2</h2>
+    </dsfr-container>
+  {:else if lienActif === '#solutions'}
     <Solutions {itemsCyber} />
-  {:else if lienActif === "#documentation"}
+  {:else if lienActif === '#documentation'}
     <DocumentationNis2 />
   {/if}
 </div>
