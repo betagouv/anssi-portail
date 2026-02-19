@@ -1,5 +1,5 @@
 import { mount } from 'svelte';
-import Page from './protection/collectivites/Presentation.svelte';
+import Page from './protection/collectivites/PresentationCollectivites.svelte';
 import type { ItemCyber } from './catalogue/Catalogue.types';
 
 const donnees = document.getElementById('donnees')!.textContent;
