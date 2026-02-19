@@ -237,6 +237,9 @@
         h1 {
           margin: 0 0 0.5rem;
         }
+        @include a-partir-de(lg) {
+          padding-right: 32px;
+        }
       }
 
       .fil-ariane,

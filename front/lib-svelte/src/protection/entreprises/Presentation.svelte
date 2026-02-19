@@ -16,15 +16,14 @@
   titre=""
 >
   {#snippet preambule()}
-    <hgroup class="preambule">
-      <h1 class="alternatif-xs">
-        Protéger mon entreprise contre les cyberattaques
-      </h1>
-      <p class="texte-chapo-xl">
-        Toutes les entreprises sont exposées au risque de cyberattaques. En 2024, les TPE/PME et ETI ont notamment
-        représenté 37&nbsp;% des victimes de rançongiciels ou ransowmare représentant les premières entités visées.
-      </p>
-    </hgroup>
+    <h1 class="alternatif-xs">
+      Protéger mon entreprise contre les cyberattaques
+    </h1>
+    <p class="texte-chapo-xl">
+      Toutes les entreprises sont exposées au risque de cyberattaques. En 2024,
+      les TPE/PME et ETI ont notamment représenté 37&nbsp;% des victimes de
+      rançongiciels ou ransowmare représentant les premières entités visées.
+    </p>
   {/snippet}
   {#snippet filAriane()}
     <FilAriane
@@ -35,9 +34,3 @@
 </Heros>
 
 <Proteger origine="landing-entreprises" />
-
-<style lang="scss">
-  .preambule {
-    padding-right: 32px;
-  }
-</style>
