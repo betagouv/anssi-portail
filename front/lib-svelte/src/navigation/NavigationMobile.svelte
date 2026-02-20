@@ -72,6 +72,8 @@
       {#if estConnecte}
         <LienNavigationMobile href="/favoris/" label="Favoris" />
       {/if}
+      <LienNavigationMobile label="Directive NIS 2" href="/directive-nis2" />
+
       <details
         class:actif={cheminRelatif.startsWith('/contacts/') ||
           cheminRelatif === '/prestataires-labellises/'}
