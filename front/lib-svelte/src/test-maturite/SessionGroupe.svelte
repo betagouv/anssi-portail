@@ -76,8 +76,8 @@
       <p>
         <b>Vous participez à une session de groupe ?</b>
         <br /><br />
-        Saisissez-le ci-dessous pour accéder au test de maturité cyber lancé par
-        votre animateur. Votre résultat est anonyme.
+        Saisissez le code de session partagé par votre organisateur pour accéder
+        au test de maturité cyber. Votre résultat est anonyme.
       </p>
       <Formulaire bind:this={formulaire}>
         <ControleFormulaire
