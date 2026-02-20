@@ -1,6 +1,6 @@
-import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
+import cors from 'cors';
 import express, { json, Request, Response } from 'express';
 import { IpFilter } from 'express-ipfilter';
 import rateLimit from 'express-rate-limit';
@@ -24,6 +24,7 @@ import { ressourceAnnuaireRegions } from './ressourceAnnuaireRegions';
 import { ressourceAnnuaireSecteursActivite } from './ressourceAnnuaireSecteursActivite';
 import { ressourceAnnuaireTranchesEffectif } from './ressourceAnnuaireTranchesEffectif';
 import { ressourceAvisUtilisateur } from './ressourceAvisUtilisateur';
+import { ressourceExigencesNis2 } from './ressourceExigencesNis2';
 import { ressourceFinancement } from './ressourceFinancement';
 import { ressourceFinancements } from './ressourceFinancements';
 import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte';
@@ -326,6 +327,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/nis2', (_requete: Request, reponse: Response) => {
     reponse.redirect(301, '/directive-nis2#solutions');
   });
+
+  app.use('/api/exigences-nis2', ressourceExigencesNis2(configurationServeur));
 
   app.use((_requete: Request, reponse: Response) => {
     reponse
