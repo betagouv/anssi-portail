@@ -17,7 +17,7 @@
       fragment: '#solutions',
     },
   ];
-  let lienActif = $state(0);
+  let lienActif = $state("#proteger");
 </script>
 
 <Heros
@@ -38,7 +38,7 @@
 
 <NavigationTertiaire {liens} bind:lienActif />
 
-{#if lienActif === 0}
+{#if lienActif === "#proteger" }
   <Proteger origine="landing-collectivites" />
 {:else}
   <Solutions {itemsCyber} />

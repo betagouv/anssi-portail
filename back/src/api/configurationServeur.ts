@@ -1,11 +1,13 @@
 import { CmsCrisp } from '@lab-anssi/lib';
 import { BusEvenements } from '../bus/busEvenements';
+import { AdaptateurCellar } from '../infra/adaptateurCellar';
 import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import { AdaptateurGestionErreur } from '../infra/adaptateurGestionErreurSentry';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber';
 import { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
+import { EntrepotExigence } from '../metier/EntrepotExigence';
 import { EntrepotFavori } from '../metier/entrepotFavori';
 import { EntrepotFinancement } from '../metier/entrepotFinancement';
 import { EntrepotGuide } from '../metier/entrepotGuide';
@@ -18,7 +20,6 @@ import { AdaptateurJWT } from './adaptateurJWT';
 import { FournisseurChemin } from './fournisseurChemin';
 import { Middleware } from './middleware';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
-import { AdaptateurCellar } from '../infra/adaptateurCellar';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -37,6 +38,7 @@ export type ConfigurationServeur = {
   entrepotResultatTest: EntrepotResultatTest;
   entrepotSessionDeGroupe: EntrepotSessionDeGroupe;
   entrepotUtilisateur: EntrepotUtilisateur;
+  entrepotExigence: EntrepotExigence;
   fournisseurChemin: FournisseurChemin;
   generateurCodeSessionDeGroupe: GenerateurCodeSessionDeGroupe;
   messagerieInstantanee: MessagerieInstantanee;

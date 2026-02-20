@@ -4,10 +4,11 @@
   import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import DocumentationNis2 from './DocumentationNis2.svelte';
+  import ExigencesNis2 from './ExigencesNis2.svelte';
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
 
-  let { itemsCyber } = $props();
+  let { itemsCyber, featureFlagExigencesNis2 = false } = $props();
 
   let estBureau = $state(false);
   onMount(() => {
@@ -23,6 +24,9 @@
       label: 'Présentation NIS 2',
       fragment: '#presentation',
     },
+    ...(featureFlagExigencesNis2
+      ? [{ label: 'Exigences et comparaison', fragment: '#exigences' }]
+      : []),
     {
       label: 'Solutions pour vous accompagner',
       fragment: '#solutions',
@@ -32,7 +36,7 @@
       fragment: '#documentation',
     },
   ];
-  let lienActif = $state(0);
+  let lienActif = $state('#presentation');
 </script>
 
 <Heros
@@ -66,11 +70,13 @@
 <NavigationTertiaire {liens} bind:lienActif />
 
 <div class="contenu">
-  {#if lienActif === 0}
+  {#if lienActif === '#presentation'}
     <Presentation />
-  {:else if lienActif === 1}
+  {:else if lienActif === '#exigences'}
+    <ExigencesNis2 />
+  {:else if lienActif === '#solutions'}
     <Solutions {itemsCyber} />
-  {:else if lienActif === 2}
+  {:else if lienActif === '#documentation'}
     <DocumentationNis2 />
   {/if}
 </div>
