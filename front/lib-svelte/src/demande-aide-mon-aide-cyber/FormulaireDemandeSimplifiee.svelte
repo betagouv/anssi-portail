@@ -175,9 +175,9 @@
             class="titre-msc"
             aria-label="Site MesServicesCyber"
           >
-            <div class="titre-site">
-              <p class="site">MesServicesCyber</p>
-              <p class="organisation">Innovation ANSSI</p>
+            <div class="titre-site-msc">
+              <p class="site-msc">MesServicesCyber</p>
+              <p class="organisation-anssi">Innovation ANSSI</p>
             </div>
           </a>
         </div>
@@ -273,17 +273,18 @@
       margin: 9px;
     }
 
-    .titre-site {
+    .titre-site-msc {
       p {
         margin: 0;
       }
-      .site {
+      .site-msc {
         color: var(--text-title-grey);
         font-size: 1rem;
         font-weight: 700;
         line-height: 1.4rem;
+        min-height: auto;
       }
-      .organisation {
+      .organisation-anssi {
         color: var(--text-default-grey);
         font-size: 0.75rem;
         line-height: 1.125rem;
