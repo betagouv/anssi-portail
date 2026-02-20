@@ -4,6 +4,7 @@
   import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import DocumentationNis2 from './DocumentationNis2.svelte';
+  import ExigencesNis2 from './ExigencesNis2.svelte';
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
 
@@ -72,9 +73,7 @@
   {#if lienActif === '#presentation'}
     <Presentation />
   {:else if lienActif === '#exigences'}
-    <dsfr-container>
-      <h2>Liste des exigences NIS 2</h2>
-    </dsfr-container>
+    <ExigencesNis2 />
   {:else if lienActif === '#solutions'}
     <Solutions {itemsCyber} />
   {:else if lienActif === '#documentation'}
