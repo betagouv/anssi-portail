@@ -13,6 +13,7 @@ import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRecherc
 import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 import { MockCmsCrisp } from '../mockCmsCrisp';
+import { EntrepotExigenceMemoire } from '../persistance/EntrepotExigenceMemoire';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
 import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire';
 import { EntrepotGuideMemoire } from '../persistance/entrepotGuideMemoire';
@@ -209,6 +210,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   entrepotGuide: new EntrepotGuideMemoire(),
   entrepotResultatTest: new EntrepotResultatTestMemoire(),
   entrepotSessionDeGroupe: new EntrepotSessionDeGroupeMemoire(),
+  entrepotExigence: new EntrepotExigenceMemoire(),
   entrepotUtilisateur,
   fournisseurChemin: fauxFournisseurDeChemin,
   generateurCodeSessionDeGroupe: fauxGenerateurCodeSessionDeGroupe,

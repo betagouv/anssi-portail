@@ -19,6 +19,7 @@ import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
 import { adaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
+import { EntrepotExigenceGrist } from './infra/EntrepotExigenceGrist';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist';
 import { EntrepotGuideGrist } from './infra/entrepotGuideGrist';
@@ -28,6 +29,7 @@ import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupe
 import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPostgres';
 import { messagerieMattermost } from './infra/messagerieMattermost';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
+import { EntrepotExigence } from './metier/EntrepotExigence';
 import { EntrepotGuide } from './metier/entrepotGuide';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 
@@ -69,6 +71,8 @@ const entrepotResultatTest = new EntrepotResultatTestPostgres({
 const entrepotGuide: EntrepotGuide = new EntrepotGuideGrist({
   adaptateurEnvironnement,
 });
+
+const entrepotExigence : EntrepotExigence = new EntrepotExigenceGrist();
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
@@ -142,6 +146,7 @@ serviceCoherenceSecretsHachage
       messagerieInstantanee,
       entrepotFinancement,
       entrepotGuide,
+      entrepotExigence,
       cellar: adaptateurCellar(adaptateurEnvironnement),
     }).listen(port, () => {
       console.log(`Le serveur écoute sur le port ${port}`);
