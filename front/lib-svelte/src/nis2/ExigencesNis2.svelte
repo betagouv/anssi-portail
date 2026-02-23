@@ -65,7 +65,7 @@
             ></dsfr-badges-group>
             <dsfr-tags-group
               tags={[
-                { label: exigence.objectifSecurite },
+                ...(exigence.objectifSecurite ? [{ label: exigence.objectifSecurite }]:[]),
                 { label: exigence.thematique },
                 { label: exigence.reference },
               ]}
