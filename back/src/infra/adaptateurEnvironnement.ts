@@ -42,6 +42,8 @@ type AdaptateurEnvironnement = {
     urlGuides: () => string;
     cleApiGuides: () => string;
     dureeCacheEnSecondes: () => number;
+    urlExigencesNis2: () => string;
+    cleApiExigencesNis2: () => string;
   };
   urlCellar: () => {
     ressourcesCyber: () => string;
@@ -178,6 +180,8 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     cleApiFinancements: () => process.env.FINANCEMENTS_GRIST_API_KEY || '',
     urlGuides: () => process.env.GUIDES_GRIST_URL || '',
     cleApiGuides: () => process.env.GUIDES_GRIST_API_KEY || '',
+    urlExigencesNis2: () => process.env.EXIGENCES_NIS2_GRIST_URL || '',
+    cleApiExigencesNis2: () => process.env.EXIGENCES_NIS2_GRIST_API_KEY || '',
     dureeCacheEnSecondes: () => {
       const dureeEnChaine = process.env.GUIDES_GRIST_DUREE_CACHE_EN_SECONDES;
       const dureeEnNombre = Number(dureeEnChaine);

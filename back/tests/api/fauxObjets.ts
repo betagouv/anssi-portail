@@ -126,6 +126,9 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     urlGuides: () =>
       'http://grist/api/docs/idDocumentGuides/tables/idTableGuides/records',
     cleApiGuides: () => 'FAUSSE_CLE_API_GUIDES',
+    urlExigencesNis2: () =>
+      'http://grist/api/docs/idDeDocumentSocle/tables/idTableExigencesNis2/records',
+    cleApiExigencesNis2: () => 'FAUSSE_CLE_API_SOCLE',
     dureeCacheEnSecondes: () => CINQ_MINUTES,
   }),
   urlCellar: () => ({

@@ -72,7 +72,9 @@ const entrepotGuide: EntrepotGuide = new EntrepotGuideGrist({
   adaptateurEnvironnement,
 });
 
-const entrepotExigence : EntrepotExigence = new EntrepotExigenceGrist();
+const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
+  adaptateurEnvironnement,
+});
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({

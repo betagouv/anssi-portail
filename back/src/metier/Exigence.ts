@@ -1,4 +1,4 @@
-type CategorieEntite = 'EntiteEssentielle' | 'EntiteImportante';
+export type CategorieEntite = 'EntiteEssentielle' | 'EntiteImportante';
 
 export class Exigence {
   reference: string;
