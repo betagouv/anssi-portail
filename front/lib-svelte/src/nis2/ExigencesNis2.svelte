@@ -72,7 +72,7 @@
               size="sm"
               groupMarkup="div"
             ></dsfr-tags-group>
-            {exigence.contenu}
+            <p class="texte-detail-sm">{exigence.contenu}</p>
           </td>
         </tr>
       {/each}
@@ -102,6 +102,10 @@
       th {
         padding: 0.5rem 1rem;
         border: 1px solid black;
+
+        .texte-detail-sm {
+          margin-bottom: 0;
+        }
       }
     }
   }
