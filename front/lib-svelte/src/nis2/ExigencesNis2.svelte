@@ -97,6 +97,7 @@
 
     table {
       margin-bottom: 1.5rem;
+      border-collapse: collapse;
 
       td,
       th {
