@@ -1,10 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
-  import DocumentationNis2 from './DocumentationNis2.svelte';
-  import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
 
   let { itemsCyber } = $props();
@@ -18,21 +15,6 @@
     estBureau = mql.matches;
   });
 
-  const liens = [
-    {
-      label: 'Présentation NIS 2',
-      fragment: '#presentation',
-    },
-    {
-      label: 'Solutions pour vous accompagner',
-      fragment: '#solutions',
-    },
-    {
-      label: 'Documentation et FAQ',
-      fragment: '#documentation',
-    },
-  ];
-  let lienActif = $state(0);
 </script>
 
 <Heros
@@ -47,32 +29,12 @@
   cacheIllustration={!estBureau}
 >
   {#snippet filAriane()}
-    <FilAriane fondSombre={true} feuille="Directive NIS 2" />
-  {/snippet}
-  {#snippet actions()}
-    <dsfr-button
-      label="Pré-enregistrer mon entité"
-      markup="a"
-      href="https://club.ssi.gouv.fr/#/nis2/introduction"
-      target="_blank"
-      has-icon
-      icon-place="right"
-      icon="external-link-line"
-      centered
-    ></dsfr-button>
+    <FilAriane fondSombre={true} feuille="Vous accompagner avec NIS2" />
   {/snippet}
 </Heros>
 
-<NavigationTertiaire {liens} bind:lienActif />
-
 <div class="contenu">
-  {#if lienActif === 0}
-    <Presentation />
-  {:else if lienActif === 1}
-    <Solutions {itemsCyber} />
-  {:else if lienActif === 2}
-    <DocumentationNis2 />
-  {/if}
+  <Solutions {itemsCyber} />
 </div>
 
 <style lang="scss">
