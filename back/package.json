@@ -44,7 +44,7 @@
     "@sentry/node": "~7.120.3",
     "@types/bcrypt": "~5.0.2",
     "@types/cors": "~2.8.19",
-    "axios": "~1.13.2",
+    "axios": "~1.13.5",
     "bcrypt": "~6.0.0",
     "cookie-parser": "~1.4.7",
     "cookie-session": "~2.1.1",
