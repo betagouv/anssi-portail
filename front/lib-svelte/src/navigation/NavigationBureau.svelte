@@ -19,6 +19,7 @@
         '/catalogue/',
         '/parcours-debuter/',
         '/parcours-approfondir/',
+        '/directive-nis2/',
       ].includes(cheminRelatif)}
     >
       <summary>Catalogue et sélections</summary>
@@ -38,9 +39,13 @@
           label="Les services pour approfondir"
           dansMenuDeroulant
         />
+        <LienNavigation
+          href="/directive-nis2/"
+          label="Les services pour vous accompagner avec NIS2"
+          dansMenuDeroulant
+        />
       </div>
     </details>
-    <LienNavigation label="Directive NIS 2" href="/directive-nis2" />
     {#if estConnecte}
       <LienNavigation href="/favoris/" label="Favoris" />
     {/if}

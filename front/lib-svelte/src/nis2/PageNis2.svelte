@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import DocumentationNis2 from './DocumentationNis2.svelte';
   import ExigencesNis2 from './ExigencesNis2.svelte';
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
+  import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
 
   let { itemsCyber, featureFlagNis2 = false } = $props();
 
