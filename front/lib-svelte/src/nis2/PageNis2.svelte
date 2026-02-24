@@ -8,7 +8,7 @@
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
 
-  let { itemsCyber, featureFlagExigencesNis2 = false } = $props();
+  let { itemsCyber, featureFlagNis2 = false } = $props();
 
   let estBureau = $state(false);
   onMount(() => {
@@ -24,9 +24,7 @@
       label: 'Présentation NIS 2',
       fragment: '#presentation',
     },
-    ...(featureFlagExigencesNis2
-      ? [{ label: 'Exigences et comparaison', fragment: '#exigences' }]
-      : []),
+    { label: 'Exigences et comparaison', fragment: '#exigences' },
     {
       label: 'Solutions pour vous accompagner',
       fragment: '#solutions',
@@ -51,33 +49,45 @@
   cacheIllustration={!estBureau}
 >
   {#snippet filAriane()}
-    <FilAriane fondSombre={true} feuille="Directive NIS 2" />
+    {#if featureFlagNis2}
+      <FilAriane fondSombre={true} feuille="Directive NIS 2" />
+    {:else}
+      <FilAriane fondSombre={true} feuille="Vous accompagner avec NIS2" />
+    {/if}
   {/snippet}
   {#snippet actions()}
-    <dsfr-button
-      label="Pré-enregistrer mon entité"
-      markup="a"
-      href="https://club.ssi.gouv.fr/#/nis2/introduction"
-      target="_blank"
-      has-icon
-      icon-place="right"
-      icon="external-link-line"
-      centered
-    ></dsfr-button>
+    {#if featureFlagNis2}
+      <dsfr-button
+        label="Pré-enregistrer mon entité"
+        markup="a"
+        href="https://club.ssi.gouv.fr/#/nis2/introduction"
+        target="_blank"
+        has-icon
+        icon-place="right"
+        icon="external-link-line"
+        centered
+      ></dsfr-button>
+    {/if}
   {/snippet}
 </Heros>
 
-<NavigationTertiaire {liens} bind:lienActif />
+{#if featureFlagNis2}
+  <NavigationTertiaire {liens} bind:lienActif />
+{/if}
 
 <div class="contenu">
-  {#if lienActif === '#presentation'}
-    <Presentation />
-  {:else if lienActif === '#exigences'}
-    <ExigencesNis2 />
-  {:else if lienActif === '#solutions'}
+  {#if featureFlagNis2}
+    {#if lienActif === '#presentation'}
+      <Presentation />
+    {:else if lienActif === '#exigences'}
+      <ExigencesNis2 />
+    {:else if lienActif === '#solutions'}
+      <Solutions {itemsCyber} />
+    {:else if lienActif === '#documentation'}
+      <DocumentationNis2 />
+    {/if}
+  {:else}
     <Solutions {itemsCyber} />
-  {:else if lienActif === '#documentation'}
-    <DocumentationNis2 />
   {/if}
 </div>
 
