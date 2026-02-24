@@ -7,6 +7,8 @@ import {
 } from '../../src/infra/EntrepotExigenceGrist';
 import { ReponseGrist } from '../../src/infra/entrepotGrist';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
+import { FournisseurHorlogeDeTest } from './fournisseurHorlogeDeTest';
+import { FournisseurHorloge } from '../../src/infra/fournisseurHorloge';
 
 describe("L'entrepot d'exigence Grist", () => {
   let clientHttp: ClientHttp<ReponseGrist<ExigenceGrist>>;
@@ -19,6 +21,12 @@ describe("L'entrepot d'exigence Grist", () => {
       adaptateurEnvironnement: fauxAdaptateurEnvironnement,
     });
   });
+
+  const ilSePasse20Secondes = (): void => {
+    FournisseurHorlogeDeTest.initialise(
+      new Date(FournisseurHorloge.maintenant().getTime() + 20000)
+    );
+  };
 
   it("ne renvoie rien si l'url source n'est pas définie", async () => {
     const entrepotExigenceGristHorsLigne = new EntrepotExigenceGrist({
@@ -112,5 +120,21 @@ describe("L'entrepot d'exigence Grist", () => {
       'EntiteEssentielle',
     ]);
     assert.equal(exigences[1].reference, '2.A.3-EI/EE');
+  });
+
+  it("n'appelle pas Grist si les données sont en cache", async () => {
+    let nombreAppel = 0;
+    clientHttp.get = async <T>() => {
+      nombreAppel++;
+      return {
+        data: { records: [] } as unknown as T,
+      };
+    };
+
+    await entrepotExigenceGrist.parReferentiel('nis2');
+    ilSePasse20Secondes();
+    await entrepotExigenceGrist.parReferentiel('nis2');
+
+    assert.equal(nombreAppel, 1);
   });
 });

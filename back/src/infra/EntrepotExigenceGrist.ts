@@ -32,7 +32,7 @@ export class EntrepotExigenceGrist
       clientHttp,
       adaptateurEnvironnement.grist().urlExigencesNis2(),
       adaptateurEnvironnement.grist().cleApiExigencesNis2(),
-      5
+      adaptateurEnvironnement.grist().dureeCacheEnSecondes()
     );
   }
 
@@ -42,7 +42,9 @@ export class EntrepotExigenceGrist
     return exigences.records.map(
       (exigenceGrist) =>
         new Exigence({
-          reference: aseptiseListeGrist(exigenceGrist.fields.References_New_)[0],
+          reference: aseptiseListeGrist(
+            exigenceGrist.fields.References_New_
+          )[0],
           contenu: exigenceGrist.fields.Contenu,
           thematique: exigenceGrist.fields.Thematique,
           entitesCible: aseptiseListeGrist(exigenceGrist.fields.EIEE)
