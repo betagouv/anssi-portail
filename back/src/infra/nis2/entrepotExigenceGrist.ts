@@ -28,11 +28,13 @@ export class EntrepotExigenceGrist
     clientHttp?: ClientHttp<ReponseGrist<ExigenceGrist>>;
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
+    const configGrist = adaptateurEnvironnement.grist();
+    const url = `${configGrist.baseURL()}/api/docs/${configGrist.nis2().idDocument()}/tables/${configGrist.nis2().idTableExigencesNIS2()}/records`;
     super(
       clientHttp,
-      adaptateurEnvironnement.grist().urlExigencesNis2(),
-      adaptateurEnvironnement.grist().cleApiExigencesNis2(),
-      adaptateurEnvironnement.grist().dureeCacheEnSecondes()
+      url,
+      configGrist.nis2().cleApi(),
+      configGrist.dureeCacheEnSecondes()
     );
   }
 

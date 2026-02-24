@@ -42,8 +42,8 @@ export class EntrepotGuideGrist
     const grist = adaptateurEnvironnement.grist();
     super(
       clientHttp,
-      grist.urlGuides(),
-      grist.cleApiGuides(),
+      grist.guides().urlTable(),
+      grist.guides().cleApi(),
       grist.dureeCacheEnSecondes()
     );
   }
@@ -84,8 +84,12 @@ export class EntrepotGuideGrist
               };
             })
         : [],
-      dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour_s_ ? new Date(guideGrist.fields.Date_de_mise_a_jour_s_ * 1000) : new Date(),
-      datePublication:  guideGrist.fields.Date_de_publication_s_ ? new Date(guideGrist.fields.Date_de_publication_s_ * 1000) : new Date(),
+      dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour_s_
+        ? new Date(guideGrist.fields.Date_de_mise_a_jour_s_ * 1000)
+        : new Date(),
+      datePublication: guideGrist.fields.Date_de_publication_s_
+        ? new Date(guideGrist.fields.Date_de_publication_s_ * 1000)
+        : new Date(),
       thematique: guideGrist.fields.Thematique ?? '',
       besoins: aseptiseListeGrist(guideGrist.fields.Besoins_cyber)
         .map(this.convertiBesoin)
@@ -98,7 +102,9 @@ export class EntrepotGuideGrist
   }
 
   async tous(): Promise<Guide[]> {
-    const guidesGrist = await this.appelleGrist({ tri: { cle: "Date_de_mise_a_jour_s_", ordre: "DESC" } });
+    const guidesGrist = await this.appelleGrist({
+      tri: { cle: 'Date_de_mise_a_jour_s_', ordre: 'DESC' },
+    });
     return guidesGrist.records.map(this.convertisGuideGrist);
   }
 

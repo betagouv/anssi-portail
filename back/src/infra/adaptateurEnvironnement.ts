@@ -37,13 +37,23 @@ type AdaptateurEnvironnement = {
     webhookAvisUtilisateur: () => string | undefined;
   };
   grist: () => {
-    urlFinancements: () => string;
-    cleApiFinancements: () => string;
-    urlGuides: () => string;
-    cleApiGuides: () => string;
+    baseURL: () => string;
+    financement: () => {
+      urlTable: () => string;
+      cleApi: () => string;
+    };
+    guides: () => {
+      urlTable: () => string;
+      cleApi: () => string;
+    };
+    nis2: () => {
+      idDocument: () => string;
+      idTableExigencesNIS2: () => string;
+      idTableComparaisonNIS2_ISO: () => string;
+      idTableComparaisonISO_NIS2: () => string;
+      cleApi: () => string;
+    };
     dureeCacheEnSecondes: () => number;
-    urlExigencesNis2: () => string;
-    cleApiExigencesNis2: () => string;
   };
   urlCellar: () => {
     ressourcesCyber: () => string;
@@ -176,12 +186,26 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       process.env.WEBHOOK_MATTERMOST_RETOURS_EXPERIENCE,
   }),
   grist: () => ({
-    urlFinancements: () => process.env.FINANCEMENTS_GRIST_URL || '',
-    cleApiFinancements: () => process.env.FINANCEMENTS_GRIST_API_KEY || '',
-    urlGuides: () => process.env.GUIDES_GRIST_URL || '',
-    cleApiGuides: () => process.env.GUIDES_GRIST_API_KEY || '',
-    urlExigencesNis2: () => process.env.EXIGENCES_NIS2_GRIST_URL || '',
-    cleApiExigencesNis2: () => process.env.EXIGENCES_NIS2_GRIST_API_KEY || '',
+    baseURL: () => process.env.GRIST_BASE_URL || '',
+    cleApi: () => process.env.GRIST_API_KEY || '',
+    financement: () => ({
+      urlTable: () => process.env.FINANCEMENTS_GRIST_URL || '',
+      cleApi: () => process.env.FINANCEMENTS_GRIST_API_KEY || '',
+    }),
+    guides: () => ({
+      urlTable: () => process.env.GUIDES_GRIST_URL || '',
+      cleApi: () => process.env.GUIDES_GRIST_API_KEY || '',
+    }),
+    nis2: () => ({
+      idDocument: () => process.env.NIS2_GRIST_ID_DOCUMENT || '',
+      idTableComparaisonISO_NIS2: () =>
+        process.env.NIS2_GRIST_ID_TABLE_COMPARAISON_ISO_NIS2 || '',
+      idTableComparaisonNIS2_ISO: () =>
+        process.env.NIS2_GRIST_ID_TABLE_COMPARAISON_NIS2_ISO || '',
+      idTableExigencesNIS2: () =>
+        process.env.NIS2_GRIST_ID_TABLE_EXIGENCES_NIS2 || '',
+      cleApi: () => process.env.GRIST_API_KEY || '',
+    }),
     dureeCacheEnSecondes: () => {
       const dureeEnChaine = process.env.GUIDES_GRIST_DUREE_CACHE_EN_SECONDES;
       const dureeEnNombre = Number(dureeEnChaine);
