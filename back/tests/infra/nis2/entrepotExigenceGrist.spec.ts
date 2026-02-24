@@ -1,14 +1,14 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
-import { ClientHttp } from '../../src/infra/clientHttp';
+import { ClientHttp } from '../../../src/infra/clientHttp';
 import {
   EntrepotExigenceGrist,
   ExigenceGrist,
-} from '../../src/infra/EntrepotExigenceGrist';
-import { ReponseGrist } from '../../src/infra/entrepotGrist';
-import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
-import { FournisseurHorlogeDeTest } from './fournisseurHorlogeDeTest';
-import { FournisseurHorloge } from '../../src/infra/fournisseurHorloge';
+} from '../../../src/infra/nis2/entrepotExigenceGrist';
+import { ReponseGrist } from '../../../src/infra/entrepotGrist';
+import { fauxAdaptateurEnvironnement } from '../../api/fauxObjets';
+import { FournisseurHorlogeDeTest } from '../fournisseurHorlogeDeTest';
+import { FournisseurHorloge } from '../../../src/infra/fournisseurHorloge';
 
 describe("L'entrepot d'exigence Grist", () => {
   let clientHttp: ClientHttp<ReponseGrist<ExigenceGrist>>;

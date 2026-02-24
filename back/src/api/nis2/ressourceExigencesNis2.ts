@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ConfigurationServeur } from './configurationServeur';
+import { ConfigurationServeur } from '../configurationServeur';
 
 export const ressourceExigencesNis2 = ({
   entrepotExigence,

@@ -7,7 +7,7 @@ import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber';
 import { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
-import { EntrepotExigence } from '../metier/EntrepotExigence';
+import { EntrepotExigence } from '../metier/nis2/entrepotExigence';
 import { EntrepotFavori } from '../metier/entrepotFavori';
 import { EntrepotFinancement } from '../metier/entrepotFinancement';
 import { EntrepotGuide } from '../metier/entrepotGuide';

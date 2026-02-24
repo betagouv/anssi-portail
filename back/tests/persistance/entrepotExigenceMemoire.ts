@@ -1,5 +1,5 @@
-import { EntrepotExigence } from '../../src/metier/EntrepotExigence';
-import { Exigence } from '../../src/metier/Exigence';
+import { EntrepotExigence } from '../../src/metier/nis2/entrepotExigence';
+import { Exigence } from '../../src/metier/nis2/exigence';
 import { EntrepotMemoire } from './entrepotMemoire';
 
 export class EntrepotExigenceMemoire
