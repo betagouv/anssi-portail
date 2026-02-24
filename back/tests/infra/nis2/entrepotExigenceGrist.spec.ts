@@ -34,13 +34,8 @@ describe("L'entrepot d'exigence Grist", () => {
       adaptateurEnvironnement: {
         ...fauxAdaptateurEnvironnement,
         grist: () => ({
-          cleApiFinancements: () => '',
-          cleApiGuides: () => '',
-          urlFinancements: () => '',
-          urlGuides: () => '',
+          ...fauxAdaptateurEnvironnement.grist(),
           dureeCacheEnSecondes: () => 0,
-          cleApiExigencesNis2: () => '',
-          urlExigencesNis2: () => '',
         }),
       },
     });

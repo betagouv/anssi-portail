@@ -36,11 +36,12 @@ export class EntrepotFinancementGrist
     clientHttp: ClientHttp<ReponseGrist<FinancementGrist>>;
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
+    const configGrist = adaptateurEnvironnement.grist();
     super(
       clientHttp,
-      adaptateurEnvironnement.grist().urlFinancements(),
-      adaptateurEnvironnement.grist().cleApiFinancements(),
-      adaptateurEnvironnement.grist().dureeCacheEnSecondes()
+      configGrist.financement().urlTable(),
+      configGrist.financement().cleApi(),
+      configGrist.dureeCacheEnSecondes()
     );
   }
 

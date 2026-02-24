@@ -31,13 +31,11 @@ describe("L'entrepot de guide Grist", () => {
       adaptateurEnvironnement: {
         ...fauxAdaptateurEnvironnement,
         grist: () => ({
-          cleApiFinancements: () => '',
-          cleApiGuides: () => '',
-          urlFinancements: () => '',
-          urlGuides: () => '',
-          cleApiExigencesNis2: () => '',
-          urlExigencesNis2: () => '',
-          dureeCacheEnSecondes: () => 0,
+          ...fauxAdaptateurEnvironnement.grist(),
+          guides: () => ({
+            cleApi: () => '',
+            urlTable: () => '',
+          }),
         }),
       },
     });
@@ -209,8 +207,14 @@ describe("L'entrepot de guide Grist", () => {
 
     const guide1 = await entrepotGuideGrist.parId('guide1');
 
-    assert.equal(guide1!.datePublication.getTime(), new Date(2023, 2, 9).getTime());
-    assert.equal(guide1!.dateMiseAJour.getTime(), new Date(2024, 10, 12).getTime());
+    assert.equal(
+      guide1!.datePublication.getTime(),
+      new Date(2023, 2, 9).getTime()
+    );
+    assert.equal(
+      guide1!.dateMiseAJour.getTime(),
+      new Date(2024, 10, 12).getTime()
+    );
   });
 
   it('sait récupérer les thématiques', async () => {

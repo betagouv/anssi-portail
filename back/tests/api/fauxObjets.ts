@@ -13,7 +13,7 @@ import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRecherc
 import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 import { MockCmsCrisp } from '../mockCmsCrisp';
-import { EntrepotExigenceMemoire } from '../persistance/EntrepotExigenceMemoire';
+import { EntrepotExigenceMemoire } from '../persistance/entrepotExigenceMemoire';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
 import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire';
 import { EntrepotGuideMemoire } from '../persistance/entrepotGuideMemoire';
@@ -120,15 +120,24 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     webhookRetourExperience: () => '',
   }),
   grist: () => ({
-    urlFinancements: () =>
-      'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records',
-    cleApiFinancements: () => 'FAUSSE_CLE_API',
-    urlGuides: () =>
-      'http://grist/api/docs/idDocumentGuides/tables/idTableGuides/records',
-    cleApiGuides: () => 'FAUSSE_CLE_API_GUIDES',
-    urlExigencesNis2: () =>
-      'http://grist/api/docs/idDeDocumentSocle/tables/idTableExigencesNis2/records',
-    cleApiExigencesNis2: () => 'FAUSSE_CLE_API_SOCLE',
+    baseURL: () => 'http://grist',
+    financement: () => ({
+      urlTable: () =>
+        'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records',
+      cleApi: () => 'FAUSSE_CLE_API',
+    }),
+    guides: () => ({
+      urlTable: () =>
+        'http://grist/api/docs/idDocumentGuides/tables/idTableGuides/records',
+      cleApi: () => 'FAUSSE_CLE_API_GUIDES',
+    }),
+    nis2: () => ({
+      idDocument: () => 'idDeDocumentSocle',
+      idTableExigencesNIS2: () => 'idTableExigencesNis2',
+      idTableComparaisonISO_NIS2: () => 'idTableComparaisonISO_NIS2',
+      idTableComparaisonNIS2_ISO: () => 'idTableComparaisonNIS2_ISO',
+      cleApi: () => 'FAUSSE_CLE_API_SOCLE',
+    }),
     dureeCacheEnSecondes: () => CINQ_MINUTES,
   }),
   urlCellar: () => ({
