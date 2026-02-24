@@ -2,10 +2,10 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/msc';
-import { Exigence } from '../../src/metier/Exigence';
-import { EntrepotExigenceMemoire } from '../persistance/EntrepotExigenceMemoire';
-import { configurationDeTestDuServeur } from './fauxObjets';
+import { creeServeur } from '../../../src/api/msc';
+import { Exigence } from '../../../src/metier/nis2/exigence';
+import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire';
+import { configurationDeTestDuServeur } from '../fauxObjets';
 
 describe('La ressource des Exigences NIS 2', () => {
   let serveur: Express;

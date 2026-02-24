@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { EntrepotExigence } from '../metier/EntrepotExigence';
-import { CategorieEntite, Exigence } from '../metier/Exigence';
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
-import { ClientHttp } from './clientHttp';
-import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
-import { aseptiseListeGrist } from './grist';
+import { EntrepotExigence } from '../../metier/nis2/entrepotExigence';
+import { CategorieEntite, Exigence } from '../../metier/nis2/exigence';
+import { AdaptateurEnvironnement } from '../adaptateurEnvironnement';
+import { ClientHttp } from '../clientHttp';
+import { EntrepotGrist, ReponseGrist } from '../entrepotGrist';
+import { aseptiseListeGrist } from '../grist';
 
 export type ExigenceGrist = {
   id: number;

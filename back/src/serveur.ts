@@ -19,7 +19,6 @@ import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
 import { adaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
-import { EntrepotExigenceGrist } from './infra/EntrepotExigenceGrist';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist';
 import { EntrepotGuideGrist } from './infra/entrepotGuideGrist';
@@ -28,10 +27,11 @@ import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePost
 import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres';
 import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPostgres';
 import { messagerieMattermost } from './infra/messagerieMattermost';
+import { EntrepotExigenceGrist } from './infra/nis2/entrepotExigenceGrist';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
-import { EntrepotExigence } from './metier/EntrepotExigence';
 import { EntrepotGuide } from './metier/entrepotGuide';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
+import { EntrepotExigence } from './metier/nis2/entrepotExigence';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(
