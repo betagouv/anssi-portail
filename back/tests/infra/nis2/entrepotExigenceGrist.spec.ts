@@ -28,6 +28,26 @@ describe("L'entrepot d'exigence Grist", () => {
     );
   };
 
+  it('sait récupérer des exigences en appelant Grist', async () => {
+    let urlAppelee = '';
+    let headerAuthent;
+
+    clientHttp.get = async (url, config) => {
+      urlAppelee = url;
+      headerAuthent = config?.headers?.authorization;
+      return {
+        data: { records: [] },
+      };
+    };
+
+    await entrepotExigenceGrist.parReferentiel('NIS2');
+
+    assert.equal(headerAuthent, 'Bearer FAUSSE_CLE_API_SOCLE');
+    assert.ok(
+      urlAppelee.startsWith('http://grist/api/docs/idDeDocumentSocle/sql?q=')
+    );
+  });
+
   it("ne renvoie rien si l'url source n'est pas définie", async () => {
     const entrepotExigenceGristHorsLigne = new EntrepotExigenceGrist({
       clientHttp,
@@ -46,84 +66,6 @@ describe("L'entrepot d'exigence Grist", () => {
     assert.deepEqual(exigences, []);
   });
 
-  it('sait récupérer des exigences en appelant Grist', async () => {
-    let urlAppelee = '';
-    let headerAuthent;
-
-    clientHttp.get = async (url, config) => {
-      urlAppelee = url;
-      headerAuthent = config?.headers?.authorization;
-      return {
-        data: { records: [] },
-      };
-    };
-
-    await entrepotExigenceGrist.parReferentiel('NIS2');
-
-    assert.equal(headerAuthent, 'Bearer FAUSSE_CLE_API_SOCLE');
-    assert.equal(
-      urlAppelee,
-      'http://grist/api/docs/idDeDocumentSocle/tables/idTableExigencesNis2/records'
-    );
-  });
-
-  it('sait récupérer les données des exigences', async () => {
-    clientHttp.get = async () => {
-      return {
-        data: {
-          records: [
-            {
-              id: 10,
-              fields: {
-                References_New_: '1.1-EI/EE',
-                Objectif_de_securite:
-                  "Objectif de sécurité 1: Recensement des systèmes d'information",
-                Thematique: 'Recensement des SI',
-                Contenu: 'L’entité liste l’ensemble de ses activités',
-                EIEE: ['L', 'EI', 'EE'],
-                ExigencesCible: null,
-                Niveau: null,
-                Observations: null,
-              },
-            },
-            {
-              id: 21,
-              fields: {
-                References_New_: '2.A.3-EI/EE',
-                Objectif_de_securite:
-                  "Objectif de sécurité 2: Mise en œuvre d'un cadre de gouvernance de la sécurité numérique",
-                Thematique: 'Rôles et responsabilités',
-                Contenu: 'L’entité définit et met en œuvre une organisation',
-                EIEE: ['L', 'EE'],
-                ExigencesCible: null,
-                Niveau: null,
-                Observations: null,
-              },
-            },
-          ] satisfies ExigenceGrist[],
-        },
-      };
-    };
-
-    const exigences = await entrepotExigenceGrist.parReferentiel('NIS2');
-
-    assert.equal(exigences[0].reference, '1.1-EI/EE');
-    assert.equal(
-      exigences[0].contenu,
-      'L’entité liste l’ensemble de ses activités'
-    );
-    assert.equal(exigences[0].thematique, 'Recensement des SI');
-    assert.equal(
-      exigences[0].objectifSecurite,
-      "Objectif de sécurité 1: Recensement des systèmes d'information"
-    );
-    assert.deepEqual(exigences[0].entitesCible, [
-      'EntiteImportante',
-      'EntiteEssentielle',
-    ]);
-    assert.equal(exigences[1].reference, '2.A.3-EI/EE');
-  });
-
   it("n'appelle pas Grist si les données sont en cache", async () => {
     let nombreAppel = 0;
     clientHttp.get = async <T>() => {
@@ -140,47 +82,103 @@ describe("L'entrepot d'exigence Grist", () => {
     assert.equal(nombreAppel, 1);
   });
 
-  it('sait récupérer, pour chaque exigence, la liste des correspondances', async () => {
-    clientHttp.get = async () => {
-      return {
-        data: {
-          records: [
-            {
-              id: 10,
-              fields: {
-                References_New_: '1.1-EI/EE',
-                Objectif_de_securite:
-                  "Objectif de sécurité 1: Recensement des systèmes d'information",
-                Thematique: 'Recensement des SI',
-                Contenu: 'L’entité liste l’ensemble de ses activités',
-                EIEE: ['L', 'EI', 'EE'],
-                Niveau: 'O',
-                Observations: 'Des observations',
-                ExigencesCible:
-                  '[{"reference":"","contenu":"27001:2022-5.1 Leadership et engagement"},{"reference":"","contenu":"27002:2022-5.4 Responsabilités de la direction"}]',
+  describe("lorsqu'il récupère les exigences NIS2", () => {
+    it('sait récupérer les données des exigences', async () => {
+      clientHttp.get = async () => {
+        return {
+          data: {
+            records: [
+              {
+                fields: {
+                  References_New_: '1.1-EI/EE',
+                  Objectif_de_securite:
+                    "Objectif de sécurité 1: Recensement des systèmes d'information",
+                  Thematique: 'Recensement des SI',
+                  Contenu: 'L’entité liste l’ensemble de ses activités',
+                  EIEE: '["EI","EE"]',
+                  ExigencesCible: null,
+                  Niveau: null,
+                  Observations: null,
+                },
               },
-            },
-          ] satisfies ExigenceGrist[],
-        },
+              {
+                fields: {
+                  References_New_: '2.A.3-EI/EE',
+                  Objectif_de_securite:
+                    "Objectif de sécurité 2: Mise en œuvre d'un cadre de gouvernance de la sécurité numérique",
+                  Thematique: 'Rôles et responsabilités',
+                  Contenu: 'L’entité définit et met en œuvre une organisation',
+                  EIEE: '["EE"]',
+                  ExigencesCible: null,
+                  Niveau: null,
+                  Observations: null,
+                },
+              },
+            ] satisfies ExigenceGrist[],
+          },
+        };
       };
-    };
 
-    const exigences = await entrepotExigenceGrist.parReferentiel('NIS2');
+      const exigences = await entrepotExigenceGrist.parReferentiel('NIS2');
 
-    assert.equal(exigences[0].correspondances['ISO']?.niveau, 'O');
-    assert.equal(
-      exigences[0].correspondances['ISO']?.observations,
-      'Des observations'
-    );
-    assert.deepEqual(exigences[0].correspondances['ISO']?.exigences, [
-      {
-        reference: '',
-        contenu: '27001:2022-5.1 Leadership et engagement',
-      },
-      {
-        reference: '',
-        contenu: '27002:2022-5.4 Responsabilités de la direction',
-      },
-    ]);
+      assert.equal(exigences[0].reference, '1.1-EI/EE');
+      assert.equal(
+        exigences[0].contenu,
+        'L’entité liste l’ensemble de ses activités'
+      );
+      assert.equal(exigences[0].thematique, 'Recensement des SI');
+      assert.equal(
+        exigences[0].objectifSecurite,
+        "Objectif de sécurité 1: Recensement des systèmes d'information"
+      );
+      assert.deepEqual(exigences[0].entitesCible, [
+        'EntiteImportante',
+        'EntiteEssentielle',
+      ]);
+      assert.equal(exigences[1].reference, '2.A.3-EI/EE');
+    });
+
+    it('sait récupérer, pour chaque exigence, la liste des correspondances', async () => {
+      clientHttp.get = async () => {
+        return {
+          data: {
+            records: [
+              {
+                fields: {
+                  References_New_: '1.1-EI/EE',
+                  Objectif_de_securite:
+                    "Objectif de sécurité 1: Recensement des systèmes d'information",
+                  Thematique: 'Recensement des SI',
+                  Contenu: 'L’entité liste l’ensemble de ses activités',
+                  EIEE: '["EI","EE"]',
+                  Niveau: 'O',
+                  Observations: 'Des observations',
+                  ExigencesCible:
+                    '[{"reference":"","contenu":"27001:2022-5.1 Leadership et engagement"},{"reference":"","contenu":"27002:2022-5.4 Responsabilités de la direction"}]',
+                },
+              },
+            ] satisfies ExigenceGrist[],
+          },
+        };
+      };
+
+      const exigences = await entrepotExigenceGrist.parReferentiel('NIS2');
+
+      assert.equal(exigences[0].correspondances['ISO']?.niveau, 'O');
+      assert.equal(
+        exigences[0].correspondances['ISO']?.observations,
+        'Des observations'
+      );
+      assert.deepEqual(exigences[0].correspondances['ISO']?.exigences, [
+        {
+          reference: '',
+          contenu: '27001:2022-5.1 Leadership et engagement',
+        },
+        {
+          reference: '',
+          contenu: '27002:2022-5.4 Responsabilités de la direction',
+        },
+      ]);
+    });
   });
 });

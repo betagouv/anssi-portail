@@ -26,12 +26,15 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
     this.cache = new Cache({ ttl: dureeCacheEnSecondes });
   }
 
-  protected appelleGrist(options: OptionsAppelGrist = {}) {
-    if (!this.urlDeBase) {
+  protected appelleGrist(
+    options: OptionsAppelGrist = {},
+    urlPreConstruite?: string
+  ) {
+    if (!this.urlDeBase && !urlPreConstruite) {
       return { records: [] };
     }
 
-    const url = this.construisUrl(options);
+    const url = urlPreConstruite ?? this.construisUrl(options);
     return this.cache.get(url, async () => {
       const reponse = await this.clientHttp.get(url.toString(), {
         headers: {
