@@ -15,7 +15,7 @@ import { aseptiseListeGrist } from '../grist';
 export type ExigenceGrist = {
   id: number;
   fields: {
-    References_New_: string[];
+    References_New_: string;
     Objectif_de_securite: string;
     Thematique: string;
     Contenu: string;
@@ -52,9 +52,7 @@ export class EntrepotExigenceGrist
     return exigences.records.map(
       (exigenceGrist) =>
         new ExigenceNIS2({
-          reference: aseptiseListeGrist(
-            exigenceGrist.fields.References_New_
-          )[0],
+          reference: exigenceGrist.fields.References_New_,
           contenu: exigenceGrist.fields.Contenu,
           thematique: exigenceGrist.fields.Thematique,
           entitesCible: aseptiseListeGrist(exigenceGrist.fields.EIEE)
