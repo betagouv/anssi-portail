@@ -27,6 +27,38 @@
     </p>
   </dsfr-alert>
   <h2>Liste des exigences NIS 2</h2>
+  <div class="panneau-comparaison">
+    <div class="conteneur">
+      <div class="comparaison-libelle">
+        <p class="texte-standard-md">Comparer les exigences NIS 2</p>
+        <p class="texte-mention-xs">
+          Comparez les exigences NIS 2 avec des référentiels déjà en place au
+          sein de votre organisation.
+        </p>
+      </div>
+      <div class="selecteurs">
+        <dsfr-select
+          id="referentielSource"
+          label=""
+          options
+          placeholder="Sélectionner"
+        ></dsfr-select>
+        <dsfr-button
+          label=""
+          has-icon="true"
+          icon-place="only"
+          icon="arrow-left-right-line"
+          kind="tertiary"
+        ></dsfr-button>
+        <dsfr-select
+          id="referentielCible"
+          label=""
+          options
+          placeholder="Sélectionner"
+        ></dsfr-select>
+      </div>
+    </div>
+  </div>
   <TableauExigencesNIS2Simple {exigencesNis2} />
   <dsfr-link
     label="Haut de page"
@@ -43,6 +75,41 @@
 
     dsfr-alert {
       margin-bottom: 1.5rem;
+    }
+
+    .panneau-comparaison {
+      display: grid;
+      gap: 24px;
+      grid-template-rows: repeat(1, fit-content(100%));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin: 0 0 24px;
+      padding: 0 0 16px;
+
+      .conteneur {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        grid-column: 1 / span 2;
+        grid-row: 1;
+
+        .comparaison-libelle {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+
+          p {
+            margin: 0;
+          }
+        }
+
+        .selecteurs {
+          display: grid;
+          gap: 16px;
+          grid-template-columns: 1fr 40px 1fr;
+          align-items: flex-end;
+        }
+      }
     }
   }
 </style>
