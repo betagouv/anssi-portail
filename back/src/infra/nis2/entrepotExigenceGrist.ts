@@ -90,11 +90,13 @@ export class EntrepotExigenceGrist
           nis2.Thematique,
           nis2.Contenu,
           nis2.EIEE,
-          '' as Niveau,
-          '' as Observations,
+          cr.Correspondance as Niveau,
+          cr.Commentaires_externes as Observations,
           '[]' as ExigencesCible
         FROM 
           Exigences_NIS2_2_4_1 as nis2
+        LEFT OUTER JOIN
+          Croisement_NIS2_ISO as cr ON nis2.id = cr.Ref_New_NIS2
       `;
     }
 
