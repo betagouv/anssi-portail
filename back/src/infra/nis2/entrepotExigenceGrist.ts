@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { EntrepotExigence } from '../../metier/nis2/entrepotExigence';
-import { CategorieEntite, Exigence } from '../../metier/nis2/exigence';
+import {
+  CategorieEntite,
+  Exigence,
+  ExigenceISO,
+  ExigenceNIS2,
+  Referentiel,
+} from '../../metier/nis2/exigence';
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement';
 import { ClientHttp } from '../clientHttp';
 import { EntrepotGrist, ReponseGrist } from '../entrepotGrist';
@@ -38,12 +44,14 @@ export class EntrepotExigenceGrist
     );
   }
 
-  async parReferentiel(_referentiel: string): Promise<Exigence[]> {
+  parReferentiel(referentiel: 'NIS2'): Promise<ExigenceNIS2[]>;
+  parReferentiel(referentiel: 'ISO'): Promise<ExigenceISO[]>;
+  async parReferentiel(_referentiel: Referentiel): Promise<Exigence[]> {
     const exigences = await this.appelleGrist();
 
     return exigences.records.map(
       (exigenceGrist) =>
-        new Exigence({
+        new ExigenceNIS2({
           reference: aseptiseListeGrist(
             exigenceGrist.fields.References_New_
           )[0],
