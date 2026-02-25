@@ -92,7 +92,21 @@ export class EntrepotExigenceGrist
           nis2.EIEE,
           cr.Correspondance as Niveau,
           cr.Commentaires_externes as Observations,
-          '[]' as ExigencesCible
+          (
+              SELECT
+                  json_group_array (
+                      json_object ('reference', '', 'contenu', iso.Ref_ISO_27001_27002)
+                  )
+              FROM
+                  ISO_27001_27002_2022 iso
+              WHERE
+                  iso.id IN (
+                      SELECT
+                          value
+                      FROM
+                          json_each (cr.Ref_ISO_27001_27002)
+                  )
+          ) as ExigencesCible
         FROM 
           Exigences_NIS2_2_4_1 as nis2
         LEFT OUTER JOIN
