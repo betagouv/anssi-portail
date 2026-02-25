@@ -1,14 +1,14 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import { ClientHttp } from '../../../src/infra/clientHttp';
+import { ReponseGrist } from '../../../src/infra/entrepotGrist';
+import { FournisseurHorloge } from '../../../src/infra/fournisseurHorloge';
 import {
   EntrepotExigenceGrist,
   ExigenceGrist,
 } from '../../../src/infra/nis2/entrepotExigenceGrist';
-import { ReponseGrist } from '../../../src/infra/entrepotGrist';
 import { fauxAdaptateurEnvironnement } from '../../api/fauxObjets';
 import { FournisseurHorlogeDeTest } from '../fournisseurHorlogeDeTest';
-import { FournisseurHorloge } from '../../../src/infra/fournisseurHorloge';
 
 describe("L'entrepot d'exigence Grist", () => {
   let clientHttp: ClientHttp<ReponseGrist<ExigenceGrist>>;
@@ -40,7 +40,8 @@ describe("L'entrepot d'exigence Grist", () => {
       },
     });
 
-    const exigences = await entrepotExigenceGristHorsLigne.parReferentiel('');
+    const exigences =
+      await entrepotExigenceGristHorsLigne.parReferentiel('NIS2');
 
     assert.deepEqual(exigences, []);
   });
@@ -57,7 +58,7 @@ describe("L'entrepot d'exigence Grist", () => {
       };
     };
 
-    await entrepotExigenceGrist.parReferentiel('nis2');
+    await entrepotExigenceGrist.parReferentiel('NIS2');
 
     assert.equal(headerAuthent, 'Bearer FAUSSE_CLE_API_SOCLE');
     assert.equal(
@@ -98,7 +99,7 @@ describe("L'entrepot d'exigence Grist", () => {
       };
     };
 
-    const exigences = await entrepotExigenceGrist.parReferentiel('nis2');
+    const exigences = await entrepotExigenceGrist.parReferentiel('NIS2');
 
     assert.equal(exigences[0].reference, '1.1-EI/EE');
     assert.equal(
@@ -126,9 +127,9 @@ describe("L'entrepot d'exigence Grist", () => {
       };
     };
 
-    await entrepotExigenceGrist.parReferentiel('nis2');
+    await entrepotExigenceGrist.parReferentiel('NIS2');
     ilSePasse20Secondes();
-    await entrepotExigenceGrist.parReferentiel('nis2');
+    await entrepotExigenceGrist.parReferentiel('NIS2');
 
     assert.equal(nombreAppel, 1);
   });

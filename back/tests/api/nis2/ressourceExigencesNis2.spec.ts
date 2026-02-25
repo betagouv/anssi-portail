@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
-import { Exigence } from '../../../src/metier/nis2/exigence';
+import { ExigenceNIS2 } from '../../../src/metier/nis2/exigence';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire';
 import { configurationDeTestDuServeur } from '../fauxObjets';
 
@@ -28,7 +28,7 @@ describe('La ressource des Exigences NIS 2', () => {
 
     it('renvoie la liste des exigences', async () => {
       await entrepotExigence.ajoute(
-        new Exigence({
+        new ExigenceNIS2({
           reference: '1.1-EI/EE',
           entitesCible: ['EntiteEssentielle', 'EntiteImportante'],
           objectifSecurite: 'Obj 1 : recensement',
