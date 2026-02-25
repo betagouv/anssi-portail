@@ -20,6 +20,9 @@ export type ExigenceGrist = {
     Thematique: string;
     Contenu: string;
     EIEE: string[];
+    Niveau: string | null;
+    Observations: string | null;
+    ExigencesCible: string | null;
   };
 };
 
@@ -64,6 +67,12 @@ export class EntrepotExigenceGrist
             )
             .filter((c) => c !== undefined),
           objectifSecurite: exigenceGrist.fields.Objectif_de_securite,
+          exigences: exigenceGrist.fields.ExigencesCible
+            ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[])
+            : undefined,
+          niveau: exigenceGrist.fields.Niveau ?? undefined,
+          observations: exigenceGrist.fields.Observations ?? undefined,
+          referentielCompare: 'ISO',
         })
     );
   }

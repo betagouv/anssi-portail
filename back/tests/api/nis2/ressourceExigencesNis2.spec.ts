@@ -46,6 +46,7 @@ describe('La ressource des Exigences NIS 2', () => {
           objectifSecurite: 'Obj 1 : recensement',
           thematique: 'Recensement des SI',
           contenu: 'L’entité liste l’ensemble…',
+          correspondances: {},
         },
       ]);
     });

@@ -81,6 +81,9 @@ describe("L'entrepot d'exigence Grist", () => {
                 Thematique: 'Recensement des SI',
                 Contenu: 'L’entité liste l’ensemble de ses activités',
                 EIEE: ['L', 'EI', 'EE'],
+                ExigencesCible: null,
+                Niveau: null,
+                Observations: null,
               },
             },
             {
@@ -92,6 +95,9 @@ describe("L'entrepot d'exigence Grist", () => {
                 Thematique: 'Rôles et responsabilités',
                 Contenu: 'L’entité définit et met en œuvre une organisation',
                 EIEE: ['L', 'EE'],
+                ExigencesCible: null,
+                Niveau: null,
+                Observations: null,
               },
             },
           ] satisfies ExigenceGrist[],
@@ -132,5 +138,49 @@ describe("L'entrepot d'exigence Grist", () => {
     await entrepotExigenceGrist.parReferentiel('NIS2');
 
     assert.equal(nombreAppel, 1);
+  });
+
+  it('sait récupérer, pour chaque exigence, la liste des correspondances', async () => {
+    clientHttp.get = async () => {
+      return {
+        data: {
+          records: [
+            {
+              id: 10,
+              fields: {
+                References_New_: '1.1-EI/EE',
+                Objectif_de_securite:
+                  "Objectif de sécurité 1: Recensement des systèmes d'information",
+                Thematique: 'Recensement des SI',
+                Contenu: 'L’entité liste l’ensemble de ses activités',
+                EIEE: ['L', 'EI', 'EE'],
+                Niveau: 'O',
+                Observations: 'Des observations',
+                ExigencesCible:
+                  '[{"reference":"","contenu":"27001:2022-5.1 Leadership et engagement"},{"reference":"","contenu":"27002:2022-5.4 Responsabilités de la direction"}]',
+              },
+            },
+          ] satisfies ExigenceGrist[],
+        },
+      };
+    };
+
+    const exigences = await entrepotExigenceGrist.parReferentiel('NIS2');
+
+    assert.equal(exigences[0].correspondances['ISO']?.niveau, 'O');
+    assert.equal(
+      exigences[0].correspondances['ISO']?.observations,
+      'Des observations'
+    );
+    assert.deepEqual(exigences[0].correspondances['ISO']?.exigences, [
+      {
+        reference: '',
+        contenu: '27001:2022-5.1 Leadership et engagement',
+      },
+      {
+        reference: '',
+        contenu: '27002:2022-5.4 Responsabilités de la direction',
+      },
+    ]);
   });
 });
