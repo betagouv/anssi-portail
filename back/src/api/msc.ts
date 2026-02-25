@@ -160,6 +160,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'collectivites',
     'associations',
     'entreprises',
+    'sante'
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
