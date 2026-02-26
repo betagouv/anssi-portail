@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { badgesExigence, type ExigenceNis2 } from '../exigence.type';
+  import { type ExigenceNis2 } from '../exigence.type';
+  import CelluleExigenceISO from './CelluleExigenceISO.svelte';
+  import CelluleExigenceNis2 from './CelluleExigenceNis2.svelte';
 
   export let exigencesNis2: ExigenceNis2[];
 </script>
@@ -17,30 +19,13 @@
     {#each exigencesNis2 as exigence (exigence.reference)}
       <tr>
         <td>
-          <dsfr-badges-group badges={badgesExigence(exigence)}
-          ></dsfr-badges-group>
-          <dsfr-tags-group
-            tags={[
-              ...(exigence.objectifSecurite
-                ? [{ label: exigence.objectifSecurite }]
-                : []),
-              { label: exigence.thematique },
-              { label: exigence.reference },
-            ]}
-            size="sm"
-            groupMarkup="div"
-          ></dsfr-tags-group>
-          <p class="texte-detail-sm">{exigence.contenu}</p>
+          <CelluleExigenceNis2 {exigence} />
         </td>
         <td>
           {exigence.correspondances.ISO.niveau}
         </td>
         <td>
-          <ul>
-            {#each exigence.correspondances.ISO.exigences.map((e) => e.contenu) as exigenceCorrespondante (exigenceCorrespondante)}
-              <li>{exigenceCorrespondante}</li>
-            {/each}
-          </ul>
+          <CelluleExigenceISO {exigence} />
         </td>
         <td>
           {exigence.correspondances.ISO.observations}
@@ -59,10 +44,6 @@
     th {
       padding: 0.5rem 1rem;
       border: 1px solid black;
-    }
-
-    td .texte-detail-sm {
-      margin-bottom: 0;
     }
   }
 </style>
