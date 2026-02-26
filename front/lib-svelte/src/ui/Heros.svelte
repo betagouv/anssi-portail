@@ -43,13 +43,13 @@
 
   let styleTitreH1 = $state('');
   let cacheMentions = $state(false);
-  if (format === 'banniere') {
+  if ((()=>format === 'banniere')()) {
     cacheTags = true;
     cacheActions = true;
     cacheIllustration = true;
     cacheMentions = true;
   }
-  if (format === 'heros') {
+  if ((()=>format === 'heros')()) {
     styleTitreH1 = 'alternatif-xs';
   }
 </script>
