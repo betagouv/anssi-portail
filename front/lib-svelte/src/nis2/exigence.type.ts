@@ -6,6 +6,29 @@ export type ExigenceNis2 = {
   thematique: string;
   contenu: string;
   entitesCible: CategorieEntite[];
+  correspondances: {
+    ISO: {
+      niveau: string;
+      exigences: {
+        reference: string;
+        contenu: string;
+      }[];
+      observations: string;
+    };
+  };
+};
+
+export const badgesExigence = (exigence: ExigenceNis2) => {
+  return exigence.entitesCible.map((categorie) => ({
+    label: {
+      EntiteImportante: 'EI',
+      EntiteEssentielle: 'EE',
+    }[categorie],
+    accent: {
+      EntiteImportante: 'green-archipel',
+      EntiteEssentielle: 'green-bourgeon',
+    }[categorie],
+  }));
 };
 
 export type Referentiel = 'NIS2' | 'ISO' | '';

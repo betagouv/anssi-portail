@@ -1,9 +1,5 @@
 <script lang="ts">
-  import {
-    badgesExigence,
-    type CategorieEntite,
-    type ExigenceNis2,
-  } from '../exigence.type';
+  import { badgesExigence, type ExigenceNis2 } from '../exigence.type';
 
   export let exigencesNis2: ExigenceNis2[];
 </script>
@@ -12,6 +8,9 @@
   <thead>
     <tr>
       <th>Exigence NIS&nbsp;2</th>
+      <th>Correspondance</th>
+      <th>Référence ISO 27001/27002</th>
+      <th>Observations</th>
     </tr>
   </thead>
   <tbody>
@@ -32,6 +31,19 @@
             groupMarkup="div"
           ></dsfr-tags-group>
           <p class="texte-detail-sm">{exigence.contenu}</p>
+        </td>
+        <td>
+          {exigence.correspondances.ISO.niveau}
+        </td>
+        <td>
+          <ul>
+            {#each exigence.correspondances.ISO.exigences.map((e) => e.contenu) as exigenceCorrespondante (exigenceCorrespondante)}
+              <li>{exigenceCorrespondante}</li>
+            {/each}
+          </ul>
+        </td>
+        <td>
+          {exigence.correspondances.ISO.observations}
         </td>
       </tr>
     {/each}
