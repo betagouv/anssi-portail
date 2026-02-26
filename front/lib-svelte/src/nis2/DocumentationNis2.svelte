@@ -16,7 +16,6 @@
     <h2>Vidéo de présentation de la directive NIS 2</h2>
     <div class="video">
       <!-- Les sous-titres sont intégrés dans la vidéo -->
-      <!-- svelte-ignore a11y_media_has_caption -->
       <video
         controls
         preload="metadata"
