@@ -36,6 +36,7 @@ import { ressourcePagesJekyll } from './ressourcePagesJekyll';
 import { ressourcePagesJekyllConnectees } from './ressourcePagesJekyllConnectees';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceRetoursExperience } from './ressourceRetoursExperience';
+import { ressourceSanteGuides } from './ressourceSanteGuides';
 import { ressourceStatistiques } from './ressourceStatistiques';
 import { ressourceStatistiquesDiagnostic } from './ressourceStatistiquesDiagnostic';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
@@ -330,6 +331,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   });
 
   app.use('/api/exigences-nis2', ressourceExigencesNis2(configurationServeur));
+
+  app.use("/api/sante-guides", ressourceSanteGuides(configurationServeur))
 
   app.use((_requete: Request, reponse: Response) => {
     reponse

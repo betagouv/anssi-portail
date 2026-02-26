@@ -16,6 +16,7 @@ import { EntrepotSessionDeGroupe } from '../metier/entrepotSessionDeGroupe';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { GenerateurCodeSessionDeGroupe } from '../metier/generateurCodeSessionDeGroupe';
 import { MessagerieInstantanee } from '../metier/messagerieInstantanee';
+import { ServiceSanteGuides } from '../metier/serviceSanteGuides';
 import { AdaptateurJWT } from './adaptateurJWT';
 import { FournisseurChemin } from './fournisseurChemin';
 import { Middleware } from './middleware';
@@ -49,4 +50,5 @@ export type ConfigurationServeur = {
     ipAutorisees: string[] | false;
   };
   cellar: AdaptateurCellar;
+  serviceSanteGuides: ServiceSanteGuides;
 };
