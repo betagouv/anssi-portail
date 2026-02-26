@@ -7,3 +7,6 @@ export type ExigenceNis2 = {
   contenu: string;
   entitesCible: CategorieEntite[];
 };
+
+export type Referentiel = 'NIS2' | 'ISO' | '';
+export type ReferentielSelectionne = Exclude<Referentiel, 'NIS2'>;
