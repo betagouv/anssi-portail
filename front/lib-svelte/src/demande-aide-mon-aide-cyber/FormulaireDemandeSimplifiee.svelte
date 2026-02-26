@@ -232,10 +232,6 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-
-      p {
-        margin-bottom: 0;
-      }
     }
   }
 
