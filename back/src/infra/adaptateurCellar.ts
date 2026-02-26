@@ -24,6 +24,8 @@ export interface AdaptateurCellar {
     nomDuFichier: string,
     cleDuBucket: CleDuBucket
   ): Promise<FluxCellar | undefined>;
+
+  existe(nomDuFichier: string, cleDuBucket: CleDuBucket): Promise<boolean>;
 }
 
 export const adaptateurCellar = (
@@ -67,6 +69,10 @@ export const adaptateurCellar = (
       }
       throw erreur;
     }
+  },
+
+  async existe(): Promise<boolean> {
+    return true;
   },
 });
 

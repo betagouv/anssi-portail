@@ -7,7 +7,7 @@ export const ressourceSanteGuides = ({
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get('/', async (_requete, reponse) => {
-    reponse.send(serviceSanteGuides.calculeSante(await entrepotGuide.tous()));
+    reponse.send(await serviceSanteGuides.calculeSante(await entrepotGuide.tous()));
   });
   return routeur;
 };

@@ -23,13 +23,15 @@ describe('La ressource de visa', () => {
 
   beforeEach(() => {
     busEvenements = new MockBusEvenement();
+    const erreur = () => {
+      throw new Error('On ne devrait pas appeler cette méthode !');
+    };
     configurationDuServeur = {
       ...configurationDeTestDuServeur,
       busEvenements,
       cellar: {
-        get: () => {
-          throw new Error('On ne devrait pas appeler cette méthode !');
-        },
+        get: erreur,
+        existe: erreur,
         getStream: async () => construitUnFluxCellar(),
       },
     };

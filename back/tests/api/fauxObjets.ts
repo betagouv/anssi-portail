@@ -235,6 +235,9 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   },
   cellar: adaptateurCellar(fauxAdaptateurEnvironnement),
   serviceSanteGuides: {
-    calculeSante: () => ({ guidesEnBonneSante: [], guidesAvecProbleme: [] }),
+    calculeSante: async () => ({
+      guidesEnBonneSante: [],
+      guidesAvecProbleme: [],
+    }),
   },
 };

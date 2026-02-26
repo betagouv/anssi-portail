@@ -105,7 +105,9 @@ const serviceCoherenceSecretsHachage =
 
 const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
 
-const serviceSanteGuides = fabriqueServiceSanteGuides();
+const cellar = adaptateurCellar(adaptateurEnvironnement);
+
+const serviceSanteGuides = fabriqueServiceSanteGuides(cellar);
 
 const port = process.env.PORT || 3000;
 
@@ -152,7 +154,7 @@ serviceCoherenceSecretsHachage
       entrepotFinancement,
       entrepotGuide,
       entrepotExigence,
-      cellar: adaptateurCellar(adaptateurEnvironnement),
+      cellar,
       serviceSanteGuides,
     }).listen(port, () => {
       console.log(`Le serveur écoute sur le port ${port}`);

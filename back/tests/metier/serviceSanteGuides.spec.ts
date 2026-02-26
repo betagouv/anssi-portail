@@ -1,6 +1,10 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import {
+  AdaptateurCellar,
+  CleDuBucket,
+} from '../../src/infra/adaptateurCellar';
+import {
   fabriqueServiceSanteGuides,
   ServiceSanteGuides,
 } from '../../src/metier/serviceSanteGuides';
@@ -8,12 +12,22 @@ import { guideDevsecops, guideZeroTrust } from '../api/objetsPretsALEmploi';
 
 describe('Le service de calcul de la santé des guildes', () => {
   let serviceSanteGuides: ServiceSanteGuides;
+  let mockAdaptateurCellar: AdaptateurCellar;
 
   beforeEach(() => {
-    serviceSanteGuides = fabriqueServiceSanteGuides();
+    const erreur = () => {
+      throw new Error();
+    };
+    mockAdaptateurCellar = {
+      get: erreur,
+      getStream: erreur,
+      existe: async () => true,
+    };
+    serviceSanteGuides = fabriqueServiceSanteGuides(mockAdaptateurCellar);
   });
-  it('retourne les guides en bonne santé', () => {
-    const sante = serviceSanteGuides.calculeSante([guideZeroTrust()]);
+
+  it('retourne les guides en bonne santé', async () => {
+    const sante = await serviceSanteGuides.calculeSante([guideZeroTrust()]);
 
     const guidesEnBonneSante = sante.guidesEnBonneSante;
     assert.equal(guidesEnBonneSante.length, 1);
@@ -28,8 +42,8 @@ describe('Le service de calcul de la santé des guildes', () => {
     });
   });
 
-  it('peut retourner plusieurs guides en bonne santé', () => {
-    const sante = serviceSanteGuides.calculeSante([
+  it('peut retourner plusieurs guides en bonne santé', async () => {
+    const sante = await serviceSanteGuides.calculeSante([
       guideZeroTrust(),
       guideDevsecops(),
     ]);
@@ -39,14 +53,14 @@ describe('Le service de calcul de la santé des guildes', () => {
     assert.equal(guidesEnBonneSante[1].id, 'devsecops');
   });
 
-  it('retourne la santé de tous les documents', () => {
+  it('retourne la santé de tous les documents', async () => {
     const guideAvecPlusieursDocuments = guideZeroTrust();
     guideAvecPlusieursDocuments.documents = [
       { libelle: '', nomFichier: 'doc1.pdf' },
       { libelle: '', nomFichier: 'doc2.pdf' },
     ];
 
-    const sante = serviceSanteGuides.calculeSante([
+    const sante = await serviceSanteGuides.calculeSante([
       guideAvecPlusieursDocuments,
     ]);
 
@@ -54,5 +68,28 @@ describe('Le service de calcul de la santé des guildes', () => {
     assert.equal(guidesEnBonneSante[0].documents.length, 2);
     assert.equal(guidesEnBonneSante[0].documents[0].nom, 'doc1.pdf');
     assert.equal(guidesEnBonneSante[0].documents[1].nom, 'doc2.pdf');
+  });
+
+  it('indique si un guide a un document manquant', async () => {
+    mockAdaptateurCellar.existe = async (
+      nomFichier: string,
+      cleDuBucket: CleDuBucket
+    ) => {
+      return nomFichier === 'doc1.pdf' && cleDuBucket === 'GUIDES';
+    };
+
+    const guideAvecPlusieursDocuments = guideZeroTrust();
+    guideAvecPlusieursDocuments.documents = [
+      { libelle: '', nomFichier: 'doc1.pdf' },
+      { libelle: '', nomFichier: 'doc2.pdf' },
+    ];
+
+    const sante = await serviceSanteGuides.calculeSante([
+      guideAvecPlusieursDocuments,
+    ]);
+
+    const santeDocumentGuides = sante.guidesEnBonneSante[0].documents;
+    assert.equal(santeDocumentGuides[0].etat, 'ok');
+    assert.equal(santeDocumentGuides[1].etat, 'ko');
   });
 });
