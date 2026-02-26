@@ -13,7 +13,7 @@ describe('Le service de calcul de la santé des guildes', () => {
     serviceSanteGuides = fabriqueServiceSanteGuides();
   });
   it('retourne les guides en bonne santé', () => {
-    const sante = serviceSanteGuides.calculeSante([guideZeroTrust]);
+    const sante = serviceSanteGuides.calculeSante([guideZeroTrust()]);
 
     const guidesEnBonneSante = sante.guidesEnBonneSante;
     assert.equal(guidesEnBonneSante.length, 1);
@@ -30,8 +30,8 @@ describe('Le service de calcul de la santé des guildes', () => {
 
   it('peut retourner plusieurs guides en bonne santé', () => {
     const sante = serviceSanteGuides.calculeSante([
-      guideZeroTrust,
-      guideDevsecops,
+      guideZeroTrust(),
+      guideDevsecops(),
     ]);
 
     const guidesEnBonneSante = sante.guidesEnBonneSante;
@@ -40,12 +40,15 @@ describe('Le service de calcul de la santé des guildes', () => {
   });
 
   it('retourne la santé de tous les documents', () => {
-    guideZeroTrust.documents = [
+    const guideAvecPlusieursDocuments = guideZeroTrust();
+    guideAvecPlusieursDocuments.documents = [
       { libelle: '', nomFichier: 'doc1.pdf' },
       { libelle: '', nomFichier: 'doc2.pdf' },
     ];
 
-    const sante = serviceSanteGuides.calculeSante([guideZeroTrust]);
+    const sante = serviceSanteGuides.calculeSante([
+      guideAvecPlusieursDocuments,
+    ]);
 
     const guidesEnBonneSante = sante.guidesEnBonneSante;
     assert.equal(guidesEnBonneSante[0].documents.length, 2);
