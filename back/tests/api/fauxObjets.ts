@@ -234,4 +234,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
     ipAutorisees: false,
   },
   cellar: adaptateurCellar(fauxAdaptateurEnvironnement),
+  serviceSanteGuides: {
+    calculeSante: () => ({ guidesEnBonneSante: [], guidesAvecProbleme: [] }),
+  },
 };
