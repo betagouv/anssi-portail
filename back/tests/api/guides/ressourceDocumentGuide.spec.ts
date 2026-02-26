@@ -25,6 +25,7 @@ describe("La ressource de document d'un guide", () => {
         getStream: () => {
           throw new Error('On ne devrait pas appeler cette méthode !');
         },
+        existe: async () => true,
       },
     };
     serveur = creeServeur(configurationDuServeur);

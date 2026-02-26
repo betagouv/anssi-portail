@@ -18,7 +18,7 @@ describe('La ressource Sante des guides', () => {
     beforeEach(() => {
       entrepotGuide = new EntrepotGuideMemoire();
       serviceSanteGuides = {
-        calculeSante: () => ({
+        calculeSante: async () => ({
           guidesAvecProbleme: [],
           guidesEnBonneSante: [],
         }),
@@ -48,7 +48,7 @@ describe('La ressource Sante des guides', () => {
     it('fournis les guides au service', async () => {
       let guidesUtilises: Guide[] = [];
       await entrepotGuide.ajoute(guideZeroTrust());
-      serviceSanteGuides.calculeSante = (guides: Guide[]) => {
+      serviceSanteGuides.calculeSante = async (guides: Guide[]) => {
         guidesUtilises = guides;
         return { guidesAvecProbleme: [], guidesEnBonneSante: [] };
       };
