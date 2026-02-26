@@ -2,6 +2,7 @@
   import { clic } from '../directives/actions.svelte';
 
   type Props = {
+    estBureau: boolean;
     mode: 'COMPARAISON' | 'LISTE';
     sensComparaison: 'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2';
     referentielSelectionne: 'ISO' | '';
@@ -12,6 +13,7 @@
   type ReferentielSelectionne = Exclude<Referentiel, 'NIS2'>;
 
   let {
+    estBureau,
     mode = $bindable(),
     sensComparaison = $bindable(),
     referentielSelectionne = $bindable(),
@@ -31,7 +33,7 @@
   };
 </script>
 
-<div class="panneau-comparaison">
+<div class="panneau-comparaison" class:bureau={estBureau}>
   <div class="conteneur">
     <div class="comparaison-libelle">
       <p class="texte-standard-md">Comparer les exigences NIS 2</p>
@@ -55,7 +57,7 @@
         label=""
         has-icon="true"
         icon-place="only"
-        icon="arrow-left-right-line"
+        icon={estBureau ? 'arrow-left-right-line' : 'arrow-up-down-line'}
         kind="tertiary"
         use:clic={inverseComparaison}
       ></dsfr-button>
@@ -84,12 +86,46 @@
 
 <style lang="scss">
   .panneau-comparaison {
-    display: grid;
-    gap: 24px;
-    grid-template-rows: repeat(1, fit-content(100%));
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin: 0 0 24px;
-    padding: 0 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .selecteurs {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      &.inverse {
+        flex-direction: column-reverse;
+      }
+    }
+
+    &.bureau {
+      display: grid;
+      gap: 24px;
+      grid-template-rows: repeat(1, fit-content(100%));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+
+      .selecteurs {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 1fr 40px 1fr;
+        align-items: flex-end;
+
+        &.inverse {
+          direction: rtl;
+
+          > * {
+            direction: ltr;
+          }
+        }
+      }
+
+      .conteneur + dsfr-button {
+        align-items: self-end;
+        grid-column: 3 / span 2;
+      }
+    }
 
     .conteneur {
       align-self: stretch;
@@ -108,26 +144,6 @@
           margin: 0;
         }
       }
-
-      .selecteurs {
-        display: grid;
-        gap: 16px;
-        grid-template-columns: 1fr 40px 1fr;
-        align-items: flex-end;
-
-        &.inverse {
-          direction: rtl;
-
-          > * {
-            direction: ltr;
-          }
-        }
-      }
-    }
-
-    .conteneur + dsfr-button {
-      align-items: self-end;
-      grid-column: 3 / span 2;
     }
   }
 </style>
