@@ -27,6 +27,14 @@
       images: { '234': 'ok', '588': 'ok', origine: 'ok' },
     },
   ];
+
+  const guidesOk: SanteGuide[] = [
+    {
+      id: 'xxx',
+      documents: [{ nom: 'xxx.pdf', etat: 'ok' }],
+      images: { '234': 'ok', '588': 'ok', origine: 'ok' },
+    },
+  ];
 </script>
 
 <dsfr-container>
@@ -35,6 +43,8 @@
   <h3>Documents/images absents</h3>
   <TableSanteGuides guides={guidesAvecDocumentsManquants}></TableSanteGuides>
 
+  <h3>Ok</h3>
+  <TableSanteGuides guides={guidesOk}></TableSanteGuides>
 </dsfr-container>
 
 <style lang="scss">
