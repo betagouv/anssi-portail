@@ -59,7 +59,6 @@
       </ul>
       <p><strong>Découvrez les risques en vidéo</strong></p>
       <!-- Les sous-titres sont intégrés dans la vidéo -->
-      <!-- svelte-ignore a11y_media_has_caption -->
       <video
         bind:this={videoRisques}
         id="video-risques"

@@ -12,7 +12,6 @@
       Découvrez les risques pour votre organisation en cas de cyberattaque
     </h2>
     <!-- Les sous-titres sont intégrés dans la vidéo -->
-    <!-- svelte-ignore a11y_media_has_caption -->
     <video
       id="video-risques"
       controls
