@@ -13,7 +13,7 @@ import { EntrepotGrist, ReponseGrist } from '../entrepotGrist';
 
 export type ExigenceGrist = {
   fields: {
-    References_New_: string;
+    Reference: string;
     Objectif_de_securite: string;
     Thematique: string;
     Contenu: string;
@@ -50,6 +50,7 @@ export class EntrepotExigenceGrist
   parReferentiel(referentiel: 'ISO'): Promise<ExigenceISO[]>;
   async parReferentiel(referentiel: Referentiel): Promise<Exigence[]> {
     const requete = this.construitRequeteSQL(referentiel);
+
     const exigences = await this.appelleGrist(
       {},
       `${this.urlDocument}/sql?q=${requete}`
@@ -58,7 +59,7 @@ export class EntrepotExigenceGrist
     return exigences.records.map(
       (exigenceGrist) =>
         new ExigenceNIS2({
-          reference: exigenceGrist.fields.References_New_,
+          reference: exigenceGrist.fields.Reference,
           contenu: exigenceGrist.fields.Contenu,
           thematique: exigenceGrist.fields.Thematique,
           entitesCible: exigenceGrist.fields.EIEE
@@ -81,18 +82,35 @@ export class EntrepotExigenceGrist
         })
     );
   }
-  construitRequeteSQL(referentiel: Referentiel) {
+  private construitRequeteSQL(
+    referentiel: Referentiel,
+    cible: Referentiel = 'ISO'
+  ) {
     if (referentiel === 'NIS2') {
-      return `
-        SELECT
-          nis2.References_New_,
-          nis2.Objectif_de_securite,
-          nis2.Thematique,
-          nis2.Contenu,
-          nis2.EIEE,
-          cr.Correspondance as Niveau,
-          cr.Commentaires_externes as Observations,
-          (
+      const selections = this.construitSelection(referentiel, cible);
+      const tableEtJointure = this.construitTableEtJoiture(referentiel, cible);
+      return ['SELECT', selections.join(','), ...tableEtJointure].join(' ');
+    }
+
+    throw new Error('Referentiel non pris en charge');
+  }
+
+  private construitSelection(source: Referentiel, cible?: Referentiel) {
+    const base = ['source.References_New_ as Reference', 'source.Contenu'];
+    const optionnel = [];
+    const projectionCible: string[] = [];
+    if (source === 'NIS2') {
+      optionnel.push(
+        'source.Objectif_de_securite',
+        'source.Thematique',
+        'source.EIEE'
+      );
+    }
+    if (cible === 'ISO') {
+      projectionCible.push(
+        'cr.Correspondance as Niveau',
+        'cr.Commentaires_externes as Observations',
+        `(
               SELECT
                   json_group_array (
                       json_object ('reference', '', 'contenu', iso.Ref_ISO_27001_27002)
@@ -106,14 +124,31 @@ export class EntrepotExigenceGrist
                       FROM
                           json_each (cr.Ref_ISO_27001_27002)
                   )
-          ) as ExigencesCible
-        FROM 
-          Exigences_NIS2_2_4_1 as nis2
-        LEFT OUTER JOIN
-          Croisement_NIS2_ISO as cr ON nis2.id = cr.Ref_New_NIS2
-      `;
+          ) as ExigencesCible`
+      );
     }
 
-    throw new Error('Referentiel non pris en charge');
+    return base.concat(optionnel).concat(projectionCible);
+  }
+
+  private construitTableEtJoiture(source: Referentiel, cible?: Referentiel) {
+    const table = [];
+    const jointure = [];
+    if (source === 'NIS2') {
+      table.push('FROM', 'Exigences_NIS2_2_4_1 as source');
+    } else {
+      throw new Error('Referentiel source autre que NIS2 non pris en charge');
+    }
+
+    if (cible === 'ISO') {
+      jointure.push(
+        'LEFT OUTER JOIN',
+        'Croisement_NIS2_ISO as cr ON source.id = cr.Ref_New_NIS2'
+      );
+    } else {
+      return table;
+    }
+
+    return table.concat(jointure);
   }
 }

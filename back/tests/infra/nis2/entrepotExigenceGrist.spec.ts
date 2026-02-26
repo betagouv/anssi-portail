@@ -90,7 +90,7 @@ describe("L'entrepot d'exigence Grist", () => {
             records: [
               {
                 fields: {
-                  References_New_: '1.1-EI/EE',
+                  Reference: '1.1-EI/EE',
                   Objectif_de_securite:
                     "Objectif de sécurité 1: Recensement des systèmes d'information",
                   Thematique: 'Recensement des SI',
@@ -103,7 +103,7 @@ describe("L'entrepot d'exigence Grist", () => {
               },
               {
                 fields: {
-                  References_New_: '2.A.3-EI/EE',
+                  Reference: '2.A.3-EI/EE',
                   Objectif_de_securite:
                     "Objectif de sécurité 2: Mise en œuvre d'un cadre de gouvernance de la sécurité numérique",
                   Thematique: 'Rôles et responsabilités',
@@ -145,7 +145,7 @@ describe("L'entrepot d'exigence Grist", () => {
             records: [
               {
                 fields: {
-                  References_New_: '1.1-EI/EE',
+                  Reference: '1.1-EI/EE',
                   Objectif_de_securite:
                     "Objectif de sécurité 1: Recensement des systèmes d'information",
                   Thematique: 'Recensement des SI',
