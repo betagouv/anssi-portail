@@ -16,7 +16,7 @@ describe('La ressource guide', () => {
   beforeEach(async () => {
     entrepotGuide = new EntrepotGuideMemoire();
     busEvenements = new MockBusEvenement();
-    await entrepotGuide.ajoute(guideZeroTrust);
+    await entrepotGuide.ajoute(guideZeroTrust());
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements,

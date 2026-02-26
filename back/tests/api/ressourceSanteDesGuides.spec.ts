@@ -47,7 +47,7 @@ describe('La ressource Sante des guides', () => {
 
     it('fournis les guides au service', async () => {
       let guidesUtilises: Guide[] = [];
-      await entrepotGuide.ajoute(guideZeroTrust);
+      await entrepotGuide.ajoute(guideZeroTrust());
       serviceSanteGuides.calculeSante = (guides: Guide[]) => {
         guidesUtilises = guides;
         return { guidesAvecProbleme: [], guidesEnBonneSante: [] };

@@ -24,8 +24,8 @@ describe('La ressource qui gère les guides', () => {
   describe('sur requête GET', () => {
     describe("lorsqu'il y a 2 guides", () => {
       beforeEach(async () => {
-        await entrepotGuide.ajoute(guideZeroTrust);
-        await entrepotGuide.ajoute(guideDevsecops);
+        await entrepotGuide.ajoute(guideZeroTrust());
+        await entrepotGuide.ajoute(guideDevsecops());
       });
       it('répond 200', async () => {
         const reponse = await request(serveur).get('/api/guides');
@@ -90,7 +90,7 @@ describe('La ressource qui gère les guides', () => {
       it("gère l'absence d'image sur un guide", async () => {
         await entrepotGuide.vide();
         await entrepotGuide.ajoute(
-          new Guide({ ...guideZeroTrust, nomImage: null })
+          new Guide({ ...guideZeroTrust(), nomImage: null })
         );
 
         const reponse = await request(serveur).get('/api/guides');
@@ -110,7 +110,7 @@ describe('La ressource qui gère les guides', () => {
 
     describe("lorsqu'il n'y a pas de guide", () => {
       it('ne retourne pas les guides non publiés', async () => {
-        await entrepotGuide.ajoute(guidePublieDemain);
+        await entrepotGuide.ajoute(guidePublieDemain());
 
         const reponse = await request(serveur).get('/api/guides');
 
