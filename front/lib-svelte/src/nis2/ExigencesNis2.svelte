@@ -3,6 +3,10 @@
   import { onMount } from 'svelte';
   import type { ExigenceNis2 } from './exigence.type';
   import TableauExigencesNIS2Simple from './tableaux/TableauExigencesNIS2Simple.svelte';
+  import { clic } from '../directives/actions.svelte';
+
+  type Referentiel = 'NIS2' | 'ISO' | '';
+  type ReferentielSelectionne = Exclude<Referentiel, 'NIS2'>;
 
   let exigencesNis2: ExigenceNis2[] = [];
 
@@ -12,6 +16,28 @@
     );
     exigencesNis2 = axiosResponse.data;
   });
+
+  let sensComparaison: 'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2' =
+    'NIS2_VERS_CIBLE';
+  $: mode = referentielSelectionne ? 'COMPARAISON' : 'LISTE';
+
+  let referentielSelectionne: ReferentielSelectionne = '';
+
+  const inverseComparaison = () => {
+    sensComparaison =
+      sensComparaison === 'NIS2_VERS_CIBLE'
+        ? 'SOURCE_VERS_NIS2'
+        : 'NIS2_VERS_CIBLE';
+  };
+
+  const selectionneLeReferentiel = (referentiel: ReferentielSelectionne) => {
+    referentielSelectionne = referentiel;
+  };
+
+  const reinitialise = () => {
+    referentielSelectionne = '';
+    sensComparaison = 'NIS2_VERS_CIBLE';
+  };
 </script>
 
 <dsfr-container>
@@ -36,12 +62,16 @@
           sein de votre organisation.
         </p>
       </div>
-      <div class="selecteurs">
+      <div
+        class="selecteurs"
+        class:inverse={sensComparaison === 'SOURCE_VERS_NIS2'}
+      >
         <dsfr-select
-          id="referentielSource"
+          id="referentielNIS2"
           label=""
-          options
-          placeholder="Sélectionner"
+          options={[{ label: 'NIS 2', value: 'NIS2' }]}
+          value="NIS2"
+          disabled
         ></dsfr-select>
         <dsfr-button
           label=""
@@ -49,17 +79,36 @@
           icon-place="only"
           icon="arrow-left-right-line"
           kind="tertiary"
+          use:clic={inverseComparaison}
         ></dsfr-button>
         <dsfr-select
-          id="referentielCible"
+          id="referentielAutre"
           label=""
-          options
-          placeholder="Sélectionner"
+          value={referentielSelectionne}
+          onvaluechanged={(e: CustomEvent) =>
+            selectionneLeReferentiel(e.detail)}
+          placeholder="Sélectionner une option"
+          placeholderDisabled={false}
+          options={[{ label: 'ISO 27001', value: 'ISO' }]}
         ></dsfr-select>
       </div>
     </div>
+    {#if mode === 'COMPARAISON'}
+      <dsfr-button
+        label="Réinitialiser"
+        has-icon="true"
+        icon-place="left"
+        icon="close-circle-line"
+        kind="tertiary"
+        use:clic={reinitialise}
+      ></dsfr-button>
+    {/if}
   </div>
-  <TableauExigencesNIS2Simple {exigencesNis2} />
+  {#if mode === 'LISTE'}
+    <TableauExigencesNIS2Simple {exigencesNis2} />
+  {:else}
+    <p>À venir...</p>
+  {/if}
   <dsfr-link
     label="Haut de page"
     href="#"
@@ -108,7 +157,20 @@
           gap: 16px;
           grid-template-columns: 1fr 40px 1fr;
           align-items: flex-end;
+
+          &.inverse {
+            direction: rtl;
+
+            > * {
+              direction: ltr;
+            }
+          }
         }
+      }
+
+      .conteneur + dsfr-button {
+        align-items: self-end;
+        grid-column: 3 / span 2;
       }
     }
   }
