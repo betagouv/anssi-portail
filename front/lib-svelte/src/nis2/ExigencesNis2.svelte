@@ -43,17 +43,13 @@
 </script>
 
 <dsfr-container>
-  <dsfr-alert type="info" size="md">
-    <p slot="description">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce blandit
-      blandit mattis. Duis convallis orci dolor, in vulputate neque ultricies
-      cursus. Vestibulum tempus quam quis scelerisque viverra. Vestibulum at
-      luctus tortor, eu eleifend justo. Vivamus posuere diam ac ultricies
-      gravida.
-      <dsfr-link label="En savoir plus sur le référentiel ReCyF" href="#" blank
-      ></dsfr-link>
-    </p>
-  </dsfr-alert>
+  {#if !estBureau}
+    <dsfr-alert type="info" size="sm" hasTitle={false} dismissible>
+      <span slot="description">
+        Cette page n’est pas optimisée pour un affichage mobile.
+      </span>
+    </dsfr-alert>
+  {/if}
   <div class="entete">
     <h2>Liste des exigences NIS 2</h2>
     {#if estBureau}
