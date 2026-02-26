@@ -6,6 +6,7 @@
   import PanneauComparaison from './PanneauComparaison.svelte';
   import { clic } from '../directives/actions.svelte';
   import Modale from '../ui/Modale.svelte';
+  import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
 
   let exigencesNis2 = $state<ExigenceNis2[]>([]);
 
@@ -98,7 +99,7 @@
   {#if mode === 'LISTE'}
     <TableauExigencesNIS2Simple {exigencesNis2} />
   {:else}
-    <p>À venir...</p>
+    <TableauCorrespondancesExigences {exigencesNis2} />
   {/if}
   <dsfr-link
     label="Haut de page"
