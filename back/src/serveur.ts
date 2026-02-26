@@ -31,6 +31,7 @@ import { EntrepotExigenceGrist } from './infra/nis2/entrepotExigenceGrist';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { EntrepotGuide } from './metier/entrepotGuide';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
+import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
@@ -104,6 +105,8 @@ const serviceCoherenceSecretsHachage =
 
 const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
 
+const serviceSanteGuides = fabriqueServiceSanteGuides();
+
 const port = process.env.PORT || 3000;
 
 serviceCoherenceSecretsHachage
@@ -150,6 +153,7 @@ serviceCoherenceSecretsHachage
       entrepotGuide,
       entrepotExigence,
       cellar: adaptateurCellar(adaptateurEnvironnement),
+      serviceSanteGuides,
     }).listen(port, () => {
       console.log(`Le serveur écoute sur le port ${port}`);
     });
