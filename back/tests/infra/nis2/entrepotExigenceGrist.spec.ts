@@ -184,7 +184,10 @@ describe("L'entrepot d'exigence Grist", () => {
         };
       };
 
-      const exigences = await entrepotExigenceGrist.parReferentiel('NIS2');
+      const exigences = await entrepotExigenceGrist.parReferentiel(
+        'NIS2',
+        'ISO'
+      );
 
       assert.equal(exigences[0].correspondances['ISO']?.niveau, 'moyen');
       assert.equal(
@@ -229,7 +232,10 @@ describe("L'entrepot d'exigence Grist", () => {
         };
       };
 
-      const exigences = await entrepotExigenceGrist.parReferentiel('ISO');
+      const exigences = await entrepotExigenceGrist.parReferentiel(
+        'ISO',
+        'NIS2'
+      );
 
       assert.equal(exigences[0].correspondances['NIS2']?.niveau, 'moyen');
       assert.equal(

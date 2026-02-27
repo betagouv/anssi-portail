@@ -36,7 +36,8 @@ type Croisements = {
       | {
           nomTableAssociation: string;
           nomTableCible: string;
-          nomColonne: string;
+          nomColonneReferenceCible: string;
+          nomColonneContenuCible: string;
         }
       | undefined;
   };
@@ -67,7 +68,8 @@ export class EntrepotExigenceGrist
         ISO: undefined,
         NIS2: {
           nomTableAssociation: configGrist.nis2().idTableComparaisonISO_NIS2(),
-          nomColonne: 'Ref_NIS2_New',
+          nomColonneReferenceCible: 'References_New_',
+          nomColonneContenuCible: 'Contenu',
           nomTableCible: 'Exigences_NIS2_2_4_1',
         },
       },
@@ -75,7 +77,8 @@ export class EntrepotExigenceGrist
         NIS2: undefined,
         ISO: {
           nomTableAssociation: configGrist.nis2().idTableComparaisonNIS2_ISO(),
-          nomColonne: 'Ref_ISO_27001_27002',
+          nomColonneReferenceCible: 'Ref_ISO_27001_27002',
+          nomColonneContenuCible: 'Contenu',
           nomTableCible: 'ISO_27001_27002_2022',
         },
       },
@@ -83,10 +86,19 @@ export class EntrepotExigenceGrist
     this.urlDocument = `${configGrist.baseURL()}/api/docs/${configGrist.nis2().idDocument()}`;
   }
 
-  parReferentiel(referentiel: 'NIS2'): Promise<ExigenceNIS2[]>;
-  parReferentiel(referentiel: 'ISO'): Promise<ExigenceISO[]>;
-  async parReferentiel(referentiel: Referentiel): Promise<Exigence[]> {
-    const requete = this.construitRequeteSQL(referentiel);
+  parReferentiel(
+    referentiel: 'NIS2',
+    cible?: Referentiel
+  ): Promise<ExigenceNIS2[]>;
+  parReferentiel(
+    referentiel: 'ISO',
+    cible?: Referentiel
+  ): Promise<ExigenceISO[]>;
+  async parReferentiel(
+    referentiel: Referentiel,
+    cible?: Referentiel
+  ): Promise<Exigence[]> {
+    const requete = this.construitRequeteSQL(referentiel, cible);
 
     const exigences = await this.appelleGrist(
       {},
@@ -160,10 +172,7 @@ export class EntrepotExigenceGrist
     }
   }
 
-  private construitRequeteSQL(
-    referentiel: Referentiel,
-    cible: Referentiel = 'ISO'
-  ) {
+  private construitRequeteSQL(referentiel: Referentiel, cible?: Referentiel) {
     if (referentiel === 'NIS2') {
       const selections = this.construitSelection(referentiel, cible);
       const tableEtJointure = this.construitTableEtJoiture(referentiel, cible);
@@ -179,16 +188,21 @@ export class EntrepotExigenceGrist
   }
 
   private construitSelection(source: Referentiel, cible?: Referentiel) {
-    const base = ['source.References_New_ as Reference', 'source.Contenu'];
+    const base = ['source.Contenu'];
     const optionnel = [];
     const projectionCible: string[] = [];
     const croisement = this.croisements[source][cible ?? source];
     if (source === 'NIS2') {
+      base.push('source.References_New_ as Reference');
       optionnel.push(
         'source.Objectif_de_securite',
         'source.Thematique',
         'source.EIEE'
       );
+    }
+    if (source === 'ISO') {
+      base.push('source.Ref_ISO_27001_27002 as Reference');
+      optionnel.push('source.Norme', 'source.Chapitre');
     }
     if (croisement) {
       projectionCible.push(
@@ -197,7 +211,7 @@ export class EntrepotExigenceGrist
         `(
               SELECT
                   json_group_array (
-                      json_object ('reference', '', 'contenu', cible.${croisement.nomColonne})
+                      json_object ('reference', cible.${croisement.nomColonneReferenceCible}, 'contenu', cible.${croisement.nomColonneContenuCible})
                   )
               FROM
                   ${croisement.nomTableCible} cible
@@ -206,7 +220,7 @@ export class EntrepotExigenceGrist
                       SELECT
                           value
                       FROM
-                          json_each (cr.${croisement.nomColonne})
+                          json_each (cr.${croisement.nomColonneReferenceCible})
                   )
           ) as ExigencesCible`
       );
@@ -232,7 +246,7 @@ export class EntrepotExigenceGrist
     if (croisement) {
       jointure.push(
         'LEFT OUTER JOIN',
-        `${croisement.nomTableAssociation} as cr ON source.id = cr.Ref_New_NIS2`
+        `${croisement.nomTableAssociation} as cr ON source.id = cr.Reference_source`
       );
     } else {
       return table;
