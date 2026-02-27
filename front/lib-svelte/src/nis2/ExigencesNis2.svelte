@@ -27,8 +27,6 @@
 
   let menuComparaisonAffiche = $state(false);
 
-  let modale: Modale | undefined = $state(undefined);
-
   onMount(async () => {
     const mql = window.matchMedia('(min-width: 992px)');
     mql.addEventListener('change', (e: MediaQueryListEvent) => {
@@ -77,7 +75,7 @@
         kind="secondary"
         use:clic={() => (menuComparaisonAffiche = true)}
       ></dsfr-button>
-      <Modale bind:this={modale} bind:estOuverte={menuComparaisonAffiche}>
+      <Modale bind:estOuverte={menuComparaisonAffiche}>
         <h4>Comparer</h4>
         <PanneauComparaison
           bind:mode
