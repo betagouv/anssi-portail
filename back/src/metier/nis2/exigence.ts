@@ -1,6 +1,10 @@
 export type CategorieEntite = 'EntiteEssentielle' | 'EntiteImportante';
 
-export type Referentiel = 'NIS2' | 'ISO';
+const referentiels = ['NIS2', 'ISO'] as const;
+export type Referentiel = (typeof referentiels)[number];
+
+export const estReferentiel = (valeur: string): valeur is Referentiel =>
+  referentiels.some((r) => r === valeur);
 
 export class Exigence {
   reference: string;
@@ -53,4 +57,24 @@ export class ExigenceNIS2 extends Exigence {
   }
 }
 
-export class ExigenceISO extends Exigence {}
+export class ExigenceISO extends Exigence {
+  norme: string;
+  chapitre: string;
+  correspondances: Partial<Record<Referentiel, Correspondance>>;
+
+  constructor(parametres: {
+    reference: string;
+    norme: string;
+    chapitre: string;
+    contenu: string;
+    referentielCompare?: Referentiel;
+    niveau?: Correspondance['niveau'];
+    observations?: Correspondance['observations'];
+    exigences?: Correspondance['exigences'];
+  }) {
+    super(parametres);
+    this.norme = parametres.norme;
+    this.chapitre = parametres.chapitre;
+    this.correspondances = {};
+  }
+}
