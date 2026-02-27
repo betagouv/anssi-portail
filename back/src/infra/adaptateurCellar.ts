@@ -71,8 +71,15 @@ export const adaptateurCellar = (
     }
   },
 
-  async existe(): Promise<boolean> {
-    return true;
+  async existe(nomDuFichier, cleDuBucket): Promise<boolean> {
+    try {
+      await axios.head(
+        `${selectionneURLCellarPourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`
+      );
+      return true;
+    } catch {
+      return false;
+    }
   },
 });
 
