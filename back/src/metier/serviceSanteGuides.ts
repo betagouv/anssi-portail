@@ -15,6 +15,8 @@ type SanteGuide = {
   images: SanteImagesGuide;
   id: string;
   documents: SanteDocumentGuide[];
+  enBonneSante: () => boolean;
+  avecProbleme: () => boolean;
 };
 
 export type ServiceSanteGuides = {
@@ -29,7 +31,7 @@ export const fabriqueServiceSanteGuides = (
 ): ServiceSanteGuides => {
   return {
     calculeSante: async (guides: Guide[]) => {
-      const guidesEnBonneSante:SanteGuide[] = await Promise.all(
+      const tousLesGuides = await Promise.all(
         guides.map(async (guide) => {
           const documents = await Promise.all(
             guide.documents.map(async (document) => {
@@ -46,19 +48,21 @@ export const fabriqueServiceSanteGuides = (
 
           return {
             id: guide.id,
-            documents: documents,
+            documents,
             images: {
-              '234': 'ok',
-              '588': 'ok',
-              origine: 'ok',
+              '234': 'ok' as Etat,
+              '588': 'ok' as Etat,
+              origine: 'ok' as Etat,
             },
+            enBonneSante: () => documents.every((d) => d.etat === 'ok'),
+            avecProbleme: () => documents.some((d) => d.etat === 'ko'),
           };
         })
       );
 
       return {
-        guidesAvecProbleme: [],
-        guidesEnBonneSante,
+        guidesAvecProbleme: tousLesGuides.filter((g) => g.avecProbleme()),
+        guidesEnBonneSante: tousLesGuides.filter((g) => g.enBonneSante()),
       };
     },
   };
