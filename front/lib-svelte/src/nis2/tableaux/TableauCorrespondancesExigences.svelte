@@ -1,33 +1,49 @@
 <script lang="ts">
-  import { type ExigenceNis2 } from '../exigence.type';
+  import {
+    type Correspondance,
+    type Exigence,
+    type ExigenceComparee,
+    type Referentiel,
+  } from '../exigence.type';
   import CelluleNiveauCorrespondance from './CelluleNiveauCorrespondance.svelte';
-  import CelluleExigenceISO from './CelluleExigenceISO.svelte';
-  import CelluleExigenceNis2 from './CelluleExigenceNis2.svelte';
+  import type { Snippet } from 'svelte';
 
-  export let exigencesNis2: ExigenceNis2[];
+  type Props = {
+    titreColonneSource: string;
+    titreColonneCible: string;
+    recupereCorrespondance: (exigence: Exigence) => Correspondance;
+    exigences: Exigence[];
+    colonneSource: Snippet<[Exigence]>;
+    colonneCible: Snippet<[ExigenceComparee[]]>;
+  };
+
+  const {
+    exigences,
+    titreColonneSource,
+    titreColonneCible,
+    colonneSource,
+    colonneCible,
+    recupereCorrespondance,
+  }: Props = $props();
 </script>
 
 <table>
   <thead>
     <tr>
-      <th>Exigence NIS&nbsp;2</th>
+      <th>{titreColonneSource}</th>
       <th>Correspondance</th>
-      <th>Référence ISO 27001/27002</th>
+      <th>{titreColonneCible}</th>
       <th>Observations</th>
     </tr>
   </thead>
   <tbody>
-    {#each exigencesNis2 as exigence (exigence.reference)}
+    {#each exigences as exigence}
+      {@const correpondance = recupereCorrespondance(exigence)}
       <tr>
-        <CelluleExigenceNis2 {exigence} />
-        <CelluleNiveauCorrespondance
-          niveau={exigence.correspondances.ISO.niveau}
-        />
-        <CelluleExigenceISO {exigence} />
-
-        <td>
-          {exigence.correspondances.ISO.observations}
-        </td>
+        {@render colonneSource(exigence)}
+        <CelluleNiveauCorrespondance niveau={correpondance.niveau} />
+        {@render colonneCible(correpondance.exigences)}
+        <td> {correpondance.observations} </td>
       </tr>
     {/each}
   </tbody>

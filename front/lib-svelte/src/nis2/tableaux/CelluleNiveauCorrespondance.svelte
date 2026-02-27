@@ -17,7 +17,7 @@
       },
     };
 
-  const proprieteBadge = badgeNiveauxConnus[niveau] ?? {
+  $: proprieteBadge = badgeNiveauxConnus[niveau] ?? {
     label: 'non applicable',
     accent: 'beige-gris-galet',
   };

@@ -1,36 +1,31 @@
 <script lang="ts">
-  import type { ExigenceNis2 } from '../exigence.type';
+  import { type ExigenceISO } from '../exigence.type';
 
-  export let exigence: ExigenceNis2;
+  export let exigence: ExigenceISO;
 </script>
 
 <td>
-  <ul>
-    {#each exigence.correspondances.ISO.exigences.map((e) => e.contenu) as exigenceCorrespondante (exigenceCorrespondante)}
-      <li>{exigenceCorrespondante}</li>
-    {/each}
-  </ul>
+  <dsfr-badges-group badges={{ label: exigence.norme, accent: 'rose' }}
+  ></dsfr-badges-group>
+  <p class="texte-detail-sm gras">{exigence.chapitre}</p>
+  <p class="texte-detail-sm">{exigence.contenu}</p>
 </td>
 
 <style lang="scss">
   td {
     padding: 0.5rem 1rem;
     border: 1px solid black;
-    ul {
-      padding-left: 0;
-      margin: 0;
-      list-style: none;
 
-      li {
-        padding-left: 20px;
-        position: relative;
+    .gras {
+      font-weight: bold;
+    }
 
-        &::before {
-          position: absolute;
-          left: 0;
-          content: '\2192';
-        }
-      }
+    .texte-detail-sm {
+      margin-bottom: 0;
+    }
+
+    .texte-detail-sm {
+      margin-bottom: 0;
     }
   }
 </style>
