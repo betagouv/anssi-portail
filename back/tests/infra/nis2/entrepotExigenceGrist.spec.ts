@@ -157,6 +157,34 @@ describe("L'entrepot d'exigence Grist", () => {
                     '[{"reference":"","contenu":"27001:2022-5.1 Leadership et engagement"},{"reference":"","contenu":"27002:2022-5.4 Responsabilités de la direction"}]',
                 },
               },
+              {
+                fields: {
+                  Reference: '1.1-EI/EE',
+                  Objectif_de_securite:
+                    "Objectif de sécurité 1: Recensement des systèmes d'information",
+                  Thematique: 'Recensement des SI',
+                  Contenu: 'L’entité liste l’ensemble de ses activités',
+                  EIEE: '["EI","EE"]',
+                  Niveau: 'V',
+                  Observations: 'Des observations',
+                  ExigencesCible:
+                    '[{"reference":"","contenu":"27001:2022-5.1 Leadership et engagement"},{"reference":"","contenu":"27002:2022-5.4 Responsabilités de la direction"}]',
+                },
+              },
+              {
+                fields: {
+                  Reference: '1.1-EI/EE',
+                  Objectif_de_securite:
+                    "Objectif de sécurité 1: Recensement des systèmes d'information",
+                  Thematique: 'Recensement des SI',
+                  Contenu: 'L’entité liste l’ensemble de ses activités',
+                  EIEE: '["EI","EE"]',
+                  Niveau: 'R',
+                  Observations: 'Des observations',
+                  ExigencesCible:
+                    '[{"reference":"","contenu":"27001:2022-5.1 Leadership et engagement"},{"reference":"","contenu":"27002:2022-5.4 Responsabilités de la direction"}]',
+                },
+              },
             ] satisfies ExigenceGrist[],
           },
         };
@@ -164,7 +192,7 @@ describe("L'entrepot d'exigence Grist", () => {
 
       const exigences = await entrepotExigenceGrist.parReferentiel('NIS2');
 
-      assert.equal(exigences[0].correspondances['ISO']?.niveau, 'O');
+      assert.equal(exigences[0].correspondances['ISO']?.niveau, 'moyen');
       assert.equal(
         exigences[0].correspondances['ISO']?.observations,
         'Des observations'
@@ -179,6 +207,8 @@ describe("L'entrepot d'exigence Grist", () => {
           contenu: '27002:2022-5.4 Responsabilités de la direction',
         },
       ]);
+      assert.equal(exigences[1].correspondances['ISO']?.niveau, 'élevé');
+      assert.equal(exigences[2].correspondances['ISO']?.niveau, 'faible');
     });
   });
 });

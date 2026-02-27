@@ -3,15 +3,15 @@
 
   const badgeNiveauxConnus: Record<string, { label: string; accent: string }> =
     {
-      O: {
+      moyen: {
         label: 'moyenne',
         accent: 'yellow-tournesol',
       },
-      R: {
-        label: 'faible/nulle',
+      faible: {
+        label: 'faible / nulle',
         accent: 'pink-macaron',
       },
-      V: {
+      élevé: {
         label: 'élevée',
         accent: 'green-emeraude',
       },

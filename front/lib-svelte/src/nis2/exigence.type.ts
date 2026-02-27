@@ -8,7 +8,7 @@ export type ExigenceNis2 = {
   entitesCible: CategorieEntite[];
   correspondances: {
     ISO: {
-      niveau: string;
+      niveau: 'NA' | 'faible' | 'moyen' | 'élevé';
       exigences: {
         reference: string;
         contenu: string;

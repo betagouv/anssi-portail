@@ -2,6 +2,7 @@ import axios from 'axios';
 import { EntrepotExigence } from '../../metier/nis2/entrepotExigence';
 import {
   CategorieEntite,
+  Correspondance,
   Exigence,
   ExigenceISO,
   ExigenceNIS2,
@@ -107,12 +108,26 @@ export class EntrepotExigenceGrist
           exigences: exigenceGrist.fields.ExigencesCible
             ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[])
             : undefined,
-          niveau: exigenceGrist.fields.Niveau ?? undefined,
+          niveau: this.versNiveau(exigenceGrist.fields.Niveau) ?? undefined,
           observations: exigenceGrist.fields.Observations ?? undefined,
           referentielCompare: 'ISO',
         })
     );
   }
+
+  private versNiveau(niveau: string | null): Correspondance['niveau'] {
+    switch (niveau) {
+      case 'O':
+        return 'moyen';
+      case 'R':
+        return 'faible';
+      case 'V':
+        return 'élevé';
+      default:
+        return 'NA';
+    }
+  }
+
   private construitRequeteSQL(
     referentiel: Referentiel,
     cible: Referentiel = 'ISO'
