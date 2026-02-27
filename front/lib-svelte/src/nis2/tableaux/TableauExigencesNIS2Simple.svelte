@@ -14,9 +14,7 @@
   <tbody>
     {#each exigencesNis2 as exigence (exigence.reference)}
       <tr>
-        <td>
-          <CelluleExigenceNis2 {exigence} />
-        </td>
+        <CelluleExigenceNis2 {exigence} />
       </tr>
     {/each}
   </tbody>
@@ -27,7 +25,6 @@
     margin-bottom: 1.5rem;
     border-collapse: collapse;
 
-    td,
     th {
       padding: 0.5rem 1rem;
       border: 1px solid black;
