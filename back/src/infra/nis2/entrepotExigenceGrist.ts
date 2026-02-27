@@ -15,10 +15,15 @@ import { EntrepotGrist, ReponseGrist } from '../entrepotGrist';
 export type ExigenceGrist = {
   fields: {
     Reference: string;
-    Objectif_de_securite: string;
-    Thematique: string;
     Contenu: string;
-    EIEE: string;
+    // NIS2
+    Objectif_de_securite?: string;
+    Thematique?: string;
+    EIEE?: string;
+    // ISO
+    Norme?: string;
+    Chapitre?: string;
+    // Comparaison
     Niveau: string | null;
     Observations: string | null;
     ExigencesCible: string | null;
@@ -88,31 +93,52 @@ export class EntrepotExigenceGrist
       `${this.urlDocument}/sql?q=${requete}`
     );
 
-    return exigences.records.map(
-      (exigenceGrist) =>
-        new ExigenceNIS2({
-          reference: exigenceGrist.fields.Reference,
-          contenu: exigenceGrist.fields.Contenu,
-          thematique: exigenceGrist.fields.Thematique,
-          entitesCible: exigenceGrist.fields.EIEE
-            ? (JSON.parse(exigenceGrist.fields.EIEE) as string[])
-                .map(
-                  (categorie) =>
-                    ({ EI: 'EntiteImportante', EE: 'EntiteEssentielle' })[
-                      categorie
-                    ] as CategorieEntite
-                )
-                .filter((c) => c !== undefined)
-            : [],
-          objectifSecurite: exigenceGrist.fields.Objectif_de_securite,
-          exigences: exigenceGrist.fields.ExigencesCible
-            ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[])
-            : undefined,
-          niveau: this.versNiveau(exigenceGrist.fields.Niveau) ?? undefined,
-          observations: exigenceGrist.fields.Observations ?? undefined,
-          referentielCompare: 'ISO',
-        })
-    );
+    if (referentiel === 'NIS2') {
+      return exigences.records.map(
+        (exigenceGrist) =>
+          new ExigenceNIS2({
+            reference: exigenceGrist.fields.Reference,
+            contenu: exigenceGrist.fields.Contenu,
+            thematique: exigenceGrist.fields.Thematique ?? '',
+            entitesCible: exigenceGrist.fields.EIEE
+              ? (JSON.parse(exigenceGrist.fields.EIEE) as string[])
+                  .map(
+                    (categorie) =>
+                      ({ EI: 'EntiteImportante', EE: 'EntiteEssentielle' })[
+                        categorie
+                      ] as CategorieEntite
+                  )
+                  .filter((c) => c !== undefined)
+              : [],
+            objectifSecurite: exigenceGrist.fields.Objectif_de_securite ?? '',
+            exigences: exigenceGrist.fields.ExigencesCible
+              ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[])
+              : undefined,
+            niveau: this.versNiveau(exigenceGrist.fields.Niveau) ?? undefined,
+            observations: exigenceGrist.fields.Observations ?? undefined,
+            referentielCompare: 'ISO',
+          })
+      );
+    }
+
+    if (referentiel === 'ISO') {
+      return exigences.records.map(
+        (exigenceGrist) =>
+          new ExigenceISO({
+            reference: exigenceGrist.fields.Reference,
+            norme: exigenceGrist.fields.Norme ?? '',
+            chapitre: exigenceGrist.fields.Chapitre ?? '',
+            contenu: exigenceGrist.fields.Contenu,
+            exigences: exigenceGrist.fields.ExigencesCible
+              ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[])
+              : undefined,
+            niveau: this.versNiveau(exigenceGrist.fields.Niveau) ?? undefined,
+            observations: exigenceGrist.fields.Observations ?? undefined,
+          })
+      );
+    }
+
+    throw new Error('Referentiel non pris en charge');
   }
 
   private versNiveau(niveau: string | null): Correspondance['niveau'] {
@@ -133,6 +159,11 @@ export class EntrepotExigenceGrist
     cible: Referentiel = 'ISO'
   ) {
     if (referentiel === 'NIS2') {
+      const selections = this.construitSelection(referentiel, cible);
+      const tableEtJointure = this.construitTableEtJoiture(referentiel, cible);
+      return ['SELECT', selections.join(','), ...tableEtJointure].join(' ');
+    }
+    if (referentiel === 'ISO') {
       const selections = this.construitSelection(referentiel, cible);
       const tableEtJointure = this.construitTableEtJoiture(referentiel, cible);
       return ['SELECT', selections.join(','), ...tableEtJointure].join(' ');
@@ -184,8 +215,12 @@ export class EntrepotExigenceGrist
     const croisement = this.croisements[source][cible ?? source];
     if (source === 'NIS2') {
       table.push('FROM', 'Exigences_NIS2_2_4_1 as source');
+    } else if (source === 'ISO') {
+      table.push('FROM', 'ISO_27001_27002_2022 as source');
     } else {
-      throw new Error('Referentiel source autre que NIS2 non pris en charge');
+      throw new Error(
+        'Referentiel source autre que NIS2 ou ISO non pris en charge'
+      );
     }
 
     if (croisement) {
