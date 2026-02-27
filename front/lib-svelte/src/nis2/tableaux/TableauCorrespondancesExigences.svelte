@@ -1,5 +1,6 @@
 <script lang="ts">
   import { type ExigenceNis2 } from '../exigence.type';
+  import CelluleNiveauCorrespondance from './CelluleNiveauCorrespondance.svelte';
   import CelluleExigenceISO from './CelluleExigenceISO.svelte';
   import CelluleExigenceNis2 from './CelluleExigenceNis2.svelte';
 
@@ -18,15 +19,12 @@
   <tbody>
     {#each exigencesNis2 as exigence (exigence.reference)}
       <tr>
-        <td>
-          <CelluleExigenceNis2 {exigence} />
-        </td>
-        <td>
-          {exigence.correspondances.ISO.niveau}
-        </td>
-        <td>
-          <CelluleExigenceISO {exigence} />
-        </td>
+        <CelluleExigenceNis2 {exigence} />
+        <CelluleNiveauCorrespondance
+          niveau={exigence.correspondances.ISO.niveau}
+        />
+        <CelluleExigenceISO {exigence} />
+
         <td>
           {exigence.correspondances.ISO.observations}
         </td>

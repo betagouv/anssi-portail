@@ -4,26 +4,32 @@
   export let exigence: ExigenceNis2;
 </script>
 
-<ul>
-  {#each exigence.correspondances.ISO.exigences.map((e) => e.contenu) as exigenceCorrespondante (exigenceCorrespondante)}
-    <li>{exigenceCorrespondante}</li>
-  {/each}
-</ul>
+<td>
+  <ul>
+    {#each exigence.correspondances.ISO.exigences.map((e) => e.contenu) as exigenceCorrespondante (exigenceCorrespondante)}
+      <li>{exigenceCorrespondante}</li>
+    {/each}
+  </ul>
+</td>
 
 <style lang="scss">
-  ul {
-    padding-left: 0;
-    margin: 0;
-    list-style: none;
+  td {
+    padding: 0.5rem 1rem;
+    border: 1px solid black;
+    ul {
+      padding-left: 0;
+      margin: 0;
+      list-style: none;
 
-    li {
-      padding-left: 20px;
-      position: relative;
+      li {
+        padding-left: 20px;
+        position: relative;
 
-      &::before {
-        position: absolute;
-        left: 0;
-        content: '\2192';
+        &::before {
+          position: absolute;
+          left: 0;
+          content: '\2192';
+        }
       }
     }
   }
