@@ -88,7 +88,9 @@ describe('Le service de calcul de la santé des guildes', () => {
       guideAvecPlusieursDocuments,
     ]);
 
-    const santeDocumentGuides = sante.guidesEnBonneSante[0].documents;
+    assert.equal(sante.guidesEnBonneSante.length, 0);
+    assert.equal(sante.guidesAvecProbleme.length, 1);
+    const santeDocumentGuides = sante.guidesAvecProbleme[0].documents;
     assert.equal(santeDocumentGuides[0].etat, 'ok');
     assert.equal(santeDocumentGuides[1].etat, 'ko');
   });
