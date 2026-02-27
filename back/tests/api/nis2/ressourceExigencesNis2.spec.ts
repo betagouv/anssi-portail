@@ -30,6 +30,14 @@ describe('La ressource des Exigences NIS 2', () => {
       assert.equal(status, 200);
     });
 
+    it('renvoie une 404 si NIS2 ne figure ni dans la cible, ni dans la source', async () => {
+      const { status } = await request(serveur)
+        .get('/api/exigences-nis2')
+        .query({ source: 'ISO', cible: 'ISO' });
+
+      assert.equal(status, 404);
+    });
+
     it('renvoie la liste des exigences', async () => {
       await entrepotExigence.ajoute(
         new ExigenceNIS2({
@@ -73,7 +81,9 @@ describe('La ressource des Exigences NIS 2', () => {
         })
       );
 
-      const { body } = await request(serveur).get('/api/exigences-nis2');
+      const { body } = await request(serveur)
+        .get('/api/exigences-nis2')
+        .query({ cible: 'ISO' });
 
       assert.equal(body[0].correspondances['ISO'].niveau, 'faible');
       assert.equal(
@@ -104,7 +114,7 @@ describe('La ressource des Exigences NIS 2', () => {
 
       const { body } = await request(serveur)
         .get('/api/exigences-nis2')
-        .query({ source });
+        .query({ source, cible: 'NIS2' });
 
       assert.deepEqual(body, [
         {
