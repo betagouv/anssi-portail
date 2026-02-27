@@ -94,4 +94,24 @@ describe('Le service de calcul de la santé des guildes', () => {
     assert.equal(santeDocumentGuides[0].etat, 'ok');
     assert.equal(santeDocumentGuides[1].etat, 'ko');
   });
+
+  it("inspecte l'etat des images", async () => {
+    mockAdaptateurCellar.existe = async (
+      nomFichier: string,
+      cleDuBucket: CleDuBucket
+    ) =>
+      [
+        'zero-trust/anssi-fondamentaux-zero-trust-v1_publication-origine.avif',
+        'anssi-fondamentaux-zero-trust-v1.0.pdf',
+      ].includes(nomFichier) && cleDuBucket === 'GUIDES';
+
+    const sante = await serviceSanteGuides.calculeSante([guideZeroTrust()]);
+
+    assert.equal(sante.guidesEnBonneSante.length, 0);
+    assert.equal(sante.guidesAvecProbleme.length, 1);
+    const santeImages = sante.guidesAvecProbleme[0].images;
+    assert.equal(santeImages.origine, 'ok');
+    assert.equal(santeImages['234'], 'ko');
+    assert.equal(santeImages['588'], 'ko');
+  });
 });
