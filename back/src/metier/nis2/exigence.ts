@@ -67,7 +67,6 @@ export class ExigenceISO extends Exigence {
     norme: string;
     chapitre: string;
     contenu: string;
-    referentielCompare?: Referentiel;
     niveau?: Correspondance['niveau'];
     observations?: Correspondance['observations'];
     exigences?: Correspondance['exigences'];
@@ -75,6 +74,12 @@ export class ExigenceISO extends Exigence {
     super(parametres);
     this.norme = parametres.norme;
     this.chapitre = parametres.chapitre;
-    this.correspondances = {};
+    this.correspondances = {
+      NIS2: {
+        niveau: parametres.niveau ?? 'NA',
+        exigences: parametres.exigences ?? [],
+        observations: parametres.observations,
+      },
+    };
   }
 }

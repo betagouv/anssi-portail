@@ -211,4 +211,47 @@ describe("L'entrepot d'exigence Grist", () => {
       assert.equal(exigences[2].correspondances['ISO']?.niveau, 'faible');
     });
   });
+
+  describe("lorsqu'il récupère les exigences ISO 27001", () => {
+    it('sait récupérer, pour chaque exigence, la liste des correspondances', async () => {
+      clientHttp.get = async () => {
+        return {
+          data: {
+            records: [
+              {
+                fields: {
+                  Reference: 'ISO 27001:2022-5.1 Leadership et engagement',
+                  Norme: 'ISO 27001',
+                  Chapitre: '5 Leadership',
+                  Contenu: '5.1 Leadership et engagement',
+                  Niveau: 'O',
+                  Observations: 'Des observations',
+                  ExigencesCible:
+                    '[{"reference":"2.A.1-EI/EE","contenu":"Le dirigeant exécutif de l’entité..."},{"reference":"2.A.3-EI/EE","contenu":"L’entité définit et met en œuvre..."}]',
+                },
+              },
+            ] satisfies ExigenceGrist[],
+          },
+        };
+      };
+
+      const exigences = await entrepotExigenceGrist.parReferentiel('ISO');
+
+      assert.equal(exigences[0].correspondances['NIS2']?.niveau, 'moyen');
+      assert.equal(
+        exigences[0].correspondances['NIS2']?.observations,
+        'Des observations'
+      );
+      assert.deepEqual(exigences[0].correspondances['NIS2']?.exigences, [
+        {
+          reference: '2.A.1-EI/EE',
+          contenu: 'Le dirigeant exécutif de l’entité...',
+        },
+        {
+          reference: '2.A.3-EI/EE',
+          contenu: 'L’entité définit et met en œuvre...',
+        },
+      ]);
+    });
+  });
 });
