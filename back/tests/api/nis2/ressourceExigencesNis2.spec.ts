@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
-import { ExigenceNIS2 } from '../../../src/metier/nis2/exigence';
+import { ExigenceISO, ExigenceNIS2 } from '../../../src/metier/nis2/exigence';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire';
 import { configurationDeTestDuServeur } from '../fauxObjets';
 
@@ -82,6 +82,34 @@ describe('La ressource des Exigences NIS 2', () => {
         {
           contenu: 'contenu 1',
           reference: 'reference_1',
+        },
+      ]);
+    });
+  });
+
+  describe('Si une source est spécifiée', () => {
+    it('renvoie la liste des exigences de la source comparée à NIS 2', async () => {
+      const source = 'ISO';
+      await entrepotExigence.ajoute(
+        new ExigenceISO({
+          norme: 'ISO 27001',
+          chapitre: '5.1 Leadership et engagement',
+          reference: '27001:2022-5.1 Titre de l’exigence',
+          contenu: '5.1 Titre de l’exigence',
+        })
+      );
+
+      const { body } = await request(serveur)
+        .get('/api/exigences-nis2')
+        .query({ source });
+
+      assert.deepEqual(body, [
+        {
+          norme: 'ISO 27001',
+          chapitre: '5.1 Leadership et engagement',
+          reference: '27001:2022-5.1 Titre de l’exigence',
+          contenu: '5.1 Titre de l’exigence',
+          correspondances: {},
         },
       ]);
     });
