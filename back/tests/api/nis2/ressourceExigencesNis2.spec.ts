@@ -3,7 +3,11 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
-import { ExigenceISO, ExigenceNIS2 } from '../../../src/metier/nis2/exigence';
+import {
+  Correspondance,
+  ExigenceISO,
+  ExigenceNIS2,
+} from '../../../src/metier/nis2/exigence';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire';
 import { configurationDeTestDuServeur } from '../fauxObjets';
 
@@ -59,15 +63,13 @@ describe('La ressource des Exigences NIS 2', () => {
           objectifSecurite: '',
           thematique: '',
           contenu: '',
-          niveau: 'faible',
-          observations: 'Des observations',
           referentielCompare: 'ISO',
-          exigences: [
+          correspondance: new Correspondance('faible', 'Des observations', [
             {
-              contenu: 'contenu 1',
               reference: 'reference_1',
+              contenu: 'contenu 1',
             },
-          ],
+          ]),
         })
       );
 
@@ -96,6 +98,7 @@ describe('La ressource des Exigences NIS 2', () => {
           chapitre: '5.1 Leadership et engagement',
           reference: '27001:2022-5.1 Titre de l’exigence',
           contenu: '5.1 Titre de l’exigence',
+          correspondance: new Correspondance('faible', 'Des observations', []),
         })
       );
 
@@ -109,7 +112,13 @@ describe('La ressource des Exigences NIS 2', () => {
           chapitre: '5.1 Leadership et engagement',
           reference: '27001:2022-5.1 Titre de l’exigence',
           contenu: '5.1 Titre de l’exigence',
-          correspondances: {},
+          correspondances: {
+            NIS2: {
+              niveau: 'faible',
+              observations: 'Des observations',
+              exigences: [],
+            },
+          },
         },
       ]);
     });

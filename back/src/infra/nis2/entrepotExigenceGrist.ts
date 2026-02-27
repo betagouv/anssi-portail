@@ -24,9 +24,9 @@ export type ExigenceGrist = {
     Norme?: string;
     Chapitre?: string;
     // Comparaison
-    Niveau: string | null;
-    Observations: string | null;
-    ExigencesCible: string | null;
+    Niveau?: string;
+    Observations?: string;
+    ExigencesCible?: string;
   };
 };
 
@@ -94,54 +94,60 @@ export class EntrepotExigenceGrist
     );
 
     if (referentiel === 'NIS2') {
-      return exigences.records.map(
-        (exigenceGrist) =>
-          new ExigenceNIS2({
-            reference: exigenceGrist.fields.Reference,
-            contenu: exigenceGrist.fields.Contenu,
-            thematique: exigenceGrist.fields.Thematique ?? '',
-            entitesCible: exigenceGrist.fields.EIEE
-              ? (JSON.parse(exigenceGrist.fields.EIEE) as string[])
-                  .map(
-                    (categorie) =>
-                      ({ EI: 'EntiteImportante', EE: 'EntiteEssentielle' })[
-                        categorie
-                      ] as CategorieEntite
-                  )
-                  .filter((c) => c !== undefined)
-              : [],
-            objectifSecurite: exigenceGrist.fields.Objectif_de_securite ?? '',
-            exigences: exigenceGrist.fields.ExigencesCible
-              ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[])
-              : undefined,
-            niveau: this.versNiveau(exigenceGrist.fields.Niveau) ?? undefined,
-            observations: exigenceGrist.fields.Observations ?? undefined,
-            referentielCompare: 'ISO',
-          })
-      );
+      return exigences.records.map((exigenceGrist) => {
+        const correspondance = new Correspondance(
+          this.versNiveau(exigenceGrist.fields.Niveau),
+          exigenceGrist.fields.Observations ?? undefined,
+          exigenceGrist.fields.ExigencesCible
+            ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[])
+            : []
+        );
+
+        return new ExigenceNIS2({
+          reference: exigenceGrist.fields.Reference,
+          contenu: exigenceGrist.fields.Contenu,
+          thematique: exigenceGrist.fields.Thematique ?? '',
+          entitesCible: exigenceGrist.fields.EIEE
+            ? (JSON.parse(exigenceGrist.fields.EIEE) as string[])
+                .map(
+                  (categorie) =>
+                    ({ EI: 'EntiteImportante', EE: 'EntiteEssentielle' })[
+                      categorie
+                    ] as CategorieEntite
+                )
+                .filter((c) => c !== undefined)
+            : [],
+          objectifSecurite: exigenceGrist.fields.Objectif_de_securite ?? '',
+          referentielCompare: 'ISO',
+          correspondance,
+        });
+      });
     }
 
     if (referentiel === 'ISO') {
-      return exigences.records.map(
-        (exigenceGrist) =>
-          new ExigenceISO({
-            reference: exigenceGrist.fields.Reference,
-            norme: exigenceGrist.fields.Norme ?? '',
-            chapitre: exigenceGrist.fields.Chapitre ?? '',
-            contenu: exigenceGrist.fields.Contenu,
-            exigences: exigenceGrist.fields.ExigencesCible
-              ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[])
-              : undefined,
-            niveau: this.versNiveau(exigenceGrist.fields.Niveau) ?? undefined,
-            observations: exigenceGrist.fields.Observations ?? undefined,
-          })
-      );
+      return exigences.records.map((exigenceGrist) => {
+        const correspondance = new Correspondance(
+          this.versNiveau(exigenceGrist.fields.Niveau),
+          exigenceGrist.fields.Observations ?? undefined,
+          exigenceGrist.fields.ExigencesCible
+            ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[])
+            : []
+        );
+
+        return new ExigenceISO({
+          reference: exigenceGrist.fields.Reference,
+          norme: exigenceGrist.fields.Norme ?? '',
+          chapitre: exigenceGrist.fields.Chapitre ?? '',
+          contenu: exigenceGrist.fields.Contenu,
+          correspondance,
+        });
+      });
     }
 
     throw new Error('Referentiel non pris en charge');
   }
 
-  private versNiveau(niveau: string | null): Correspondance['niveau'] {
+  private versNiveau(niveau?: string): Correspondance['niveau'] {
     switch (niveau) {
       case 'O':
         return 'moyen';

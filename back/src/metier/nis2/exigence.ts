@@ -16,11 +16,19 @@ export class Exigence {
   }
 }
 
-export type Correspondance = {
-  niveau: 'NA' | 'faible' | 'moyen' | 'élevé';
-  observations?: string;
-  exigences: Exigence[];
-};
+export type Niveau = 'NA' | 'faible' | 'moyen' | 'élevé';
+
+export class Correspondance {
+  readonly niveau: Niveau;
+  readonly observations: string;
+  readonly exigences: Exigence[];
+
+  constructor(niveau?: Niveau, observations?: string, exigences?: Exigence[]) {
+    this.niveau = niveau ?? 'NA';
+    this.observations = observations ?? '';
+    this.exigences = exigences ?? [];
+  }
+}
 
 export class ExigenceNIS2 extends Exigence {
   entitesCible: CategorieEntite[];
@@ -35,23 +43,16 @@ export class ExigenceNIS2 extends Exigence {
     thematique: string;
     contenu: string;
     referentielCompare?: Referentiel;
-    niveau?: Correspondance['niveau'];
-    observations?: Correspondance['observations'];
-    exigences?: Correspondance['exigences'];
+    correspondance?: Correspondance;
   }) {
     super(parametres);
     this.entitesCible = parametres.entitesCible;
     this.objectifSecurite = parametres.objectifSecurite;
     this.thematique = parametres.thematique;
     this.correspondances = {};
-    if (parametres.referentielCompare) {
-      const correspondance: Correspondance = {
-        niveau: parametres.niveau ?? 'NA',
-        exigences: parametres.exigences ?? [],
-        observations: parametres.observations,
-      };
+    if (parametres.referentielCompare && parametres.correspondance) {
       this.correspondances = {
-        [parametres.referentielCompare]: correspondance,
+        [parametres.referentielCompare]: parametres.correspondance,
       };
     }
   }
@@ -67,19 +68,13 @@ export class ExigenceISO extends Exigence {
     norme: string;
     chapitre: string;
     contenu: string;
-    niveau?: Correspondance['niveau'];
-    observations?: Correspondance['observations'];
-    exigences?: Correspondance['exigences'];
+    correspondance: Correspondance;
   }) {
     super(parametres);
     this.norme = parametres.norme;
     this.chapitre = parametres.chapitre;
     this.correspondances = {
-      NIS2: {
-        niveau: parametres.niveau ?? 'NA',
-        exigences: parametres.exigences ?? [],
-        observations: parametres.observations,
-      },
+      NIS2: parametres.correspondance,
     };
   }
 }
