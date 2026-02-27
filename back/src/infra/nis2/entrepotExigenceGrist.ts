@@ -24,11 +24,24 @@ export type ExigenceGrist = {
   };
 };
 
+type Croisements = {
+  [K in Referentiel]: {
+    [L in Referentiel]:
+      | {
+          nomTableAssociation: string;
+          nomTableCible: string;
+          nomColonne: string;
+        }
+      | undefined;
+  };
+};
+
 export class EntrepotExigenceGrist
   extends EntrepotGrist<ExigenceGrist>
   implements EntrepotExigence
 {
   private readonly urlDocument: string;
+  private readonly croisements: Croisements;
   constructor({
     clientHttp = axios,
     adaptateurEnvironnement,
@@ -43,6 +56,24 @@ export class EntrepotExigenceGrist
       configGrist.nis2().cleApi(),
       configGrist.dureeCacheEnSecondes()
     );
+    this.croisements = {
+      ISO: {
+        ISO: undefined,
+        NIS2: {
+          nomTableAssociation: configGrist.nis2().idTableComparaisonISO_NIS2(),
+          nomColonne: 'Ref_NIS2_New',
+          nomTableCible: 'Exigences_NIS2_2_4_1',
+        },
+      },
+      NIS2: {
+        NIS2: undefined,
+        ISO: {
+          nomTableAssociation: configGrist.nis2().idTableComparaisonNIS2_ISO(),
+          nomColonne: 'Ref_ISO_27001_27002',
+          nomTableCible: 'ISO_27001_27002_2022',
+        },
+      },
+    };
     this.urlDocument = `${configGrist.baseURL()}/api/docs/${configGrist.nis2().idDocument()}`;
   }
 
@@ -99,6 +130,7 @@ export class EntrepotExigenceGrist
     const base = ['source.References_New_ as Reference', 'source.Contenu'];
     const optionnel = [];
     const projectionCible: string[] = [];
+    const croisement = this.croisements[source][cible ?? source];
     if (source === 'NIS2') {
       optionnel.push(
         'source.Objectif_de_securite',
@@ -106,23 +138,23 @@ export class EntrepotExigenceGrist
         'source.EIEE'
       );
     }
-    if (cible === 'ISO') {
+    if (croisement) {
       projectionCible.push(
         'cr.Correspondance as Niveau',
         'cr.Commentaires_externes as Observations',
         `(
               SELECT
                   json_group_array (
-                      json_object ('reference', '', 'contenu', iso.Ref_ISO_27001_27002)
+                      json_object ('reference', '', 'contenu', cible.${croisement.nomColonne})
                   )
               FROM
-                  ISO_27001_27002_2022 iso
+                  ${croisement.nomTableCible} cible
               WHERE
-                  iso.id IN (
+                  cible.id IN (
                       SELECT
                           value
                       FROM
-                          json_each (cr.Ref_ISO_27001_27002)
+                          json_each (cr.${croisement.nomColonne})
                   )
           ) as ExigencesCible`
       );
@@ -134,16 +166,17 @@ export class EntrepotExigenceGrist
   private construitTableEtJoiture(source: Referentiel, cible?: Referentiel) {
     const table = [];
     const jointure = [];
+    const croisement = this.croisements[source][cible ?? source];
     if (source === 'NIS2') {
       table.push('FROM', 'Exigences_NIS2_2_4_1 as source');
     } else {
       throw new Error('Referentiel source autre que NIS2 non pris en charge');
     }
 
-    if (cible === 'ISO') {
+    if (croisement) {
       jointure.push(
         'LEFT OUTER JOIN',
-        'Croisement_NIS2_ISO as cr ON source.id = cr.Ref_New_NIS2'
+        `${croisement.nomTableAssociation} as cr ON source.id = cr.Ref_New_NIS2`
       );
     } else {
       return table;
