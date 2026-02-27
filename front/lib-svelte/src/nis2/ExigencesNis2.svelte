@@ -1,14 +1,24 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import type { ExigenceNis2, ReferentielSelectionne } from './exigence.type';
-  import TableauExigencesNIS2Simple from './tableaux/TableauExigencesNIS2Simple.svelte';
-  import PanneauComparaison from './PanneauComparaison.svelte';
   import { clic } from '../directives/actions.svelte';
   import Modale from '../ui/Modale.svelte';
+  import {
+    recupereCorrespondance,
+    type ExigenceISO,
+    type ExigenceNis2,
+    type Referentiel,
+    type ReferentielSelectionne,
+  } from './exigence.type';
+  import PanneauComparaison from './PanneauComparaison.svelte';
+  import CelluleExigenceISO from './tableaux/CelluleExigenceISO.svelte';
+  import CelluleExigenceNis2 from './tableaux/CelluleExigenceNis2.svelte';
+  import CelluleExigencesISOCibles from './tableaux/CelluleExigencesISOCibles.svelte';
+  import CelluleExigencesNIS2Cibles from './tableaux/CelluleExigencesNIS2Cibles.svelte';
   import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
+  import TableauExigencesNIS2Simple from './tableaux/TableauExigencesNIS2Simple.svelte';
 
-  let exigencesNis2 = $state<ExigenceNis2[]>([]);
+  let exigences = $state<ExigenceNis2[]>([]);
 
   let sensComparaison = $state<'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2'>(
     'NIS2_VERS_CIBLE'
@@ -16,16 +26,51 @@
   let mode = $state<'COMPARAISON' | 'LISTE'>('LISTE');
 
   let referentielSelectionne = $state<ReferentielSelectionne>('');
+  $effect(() => {
+    const charge = async () => {
+      if (mode === 'LISTE') {
+        await recupereLesExigences();
+      } else {
+        const source =
+          sensComparaison === 'NIS2_VERS_CIBLE'
+            ? 'NIS2'
+            : referentielSelectionne;
+        const cible =
+          sensComparaison === 'SOURCE_VERS_NIS2'
+            ? 'NIS2'
+            : referentielSelectionne;
+        await recupereLesExigences({ source, cible });
+      }
+    };
+    charge();
+  });
 
   let estBureau = $state(false);
 
-  const reinitialise = () => {
+  const reinitialise = async () => {
     referentielSelectionne = '';
     mode = 'LISTE';
     sensComparaison = 'NIS2_VERS_CIBLE';
+    await recupereLesExigences();
   };
 
   let menuComparaisonAffiche = $state(false);
+
+  const recupereLesExigences = async ({
+    source,
+    cible,
+  }: { source?: Referentiel; cible?: Referentiel } = {}) => {
+    const axiosResponse = await axios.get<ExigenceNis2[]>(
+      '/api/exigences-nis2',
+      {
+        params: {
+          source,
+          cible,
+        },
+      }
+    );
+    exigences = axiosResponse.data;
+  };
 
   onMount(async () => {
     const mql = window.matchMedia('(min-width: 992px)');
@@ -33,11 +78,6 @@
       estBureau = e.matches;
     });
     estBureau = mql.matches;
-
-    const axiosResponse = await axios.get<ExigenceNis2[]>(
-      '/api/exigences-nis2'
-    );
-    exigencesNis2 = axiosResponse.data;
   });
 </script>
 
@@ -95,9 +135,37 @@
     {/if}
   </div>
   {#if mode === 'LISTE'}
-    <TableauExigencesNIS2Simple {exigencesNis2} />
+    <TableauExigencesNIS2Simple exigencesNis2={exigences} />
+  {:else if sensComparaison === 'NIS2_VERS_CIBLE'}
+    <TableauCorrespondancesExigences
+      titreColonneSource="Exigence NIS&nbsp;2"
+      titreColonneCible="Référence ISO 27001/27002"
+      {exigences}
+      {recupereCorrespondance}
+    >
+      {#snippet colonneSource(exigenceSource)}
+        {@const e = exigenceSource as ExigenceNis2}
+        <CelluleExigenceNis2 exigence={e} />
+      {/snippet}
+      {#snippet colonneCible(exigencesCibles)}
+        <CelluleExigencesISOCibles exigences={exigencesCibles} />
+      {/snippet}
+    </TableauCorrespondancesExigences>
   {:else}
-    <TableauCorrespondancesExigences {exigencesNis2} />
+    <TableauCorrespondancesExigences
+      titreColonneSource="Référence ISO 27001/27002"
+      titreColonneCible="Exigence NIS&nbsp;2"
+      {exigences}
+      {recupereCorrespondance}
+    >
+      {#snippet colonneSource(exigenceSource)}
+        {@const e = exigenceSource as ExigenceISO}
+        <CelluleExigenceISO exigence={e} />
+      {/snippet}
+      {#snippet colonneCible(exigences)}
+        <CelluleExigencesNIS2Cibles {exigences} />
+      {/snippet}
+    </TableauCorrespondancesExigences>
   {/if}
   <dsfr-link
     label="Haut de page"

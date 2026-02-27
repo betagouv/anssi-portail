@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    {#each exigencesNis2 as exigence (exigence.reference)}
+    {#each exigencesNis2 as exigence}
       <tr>
         <CelluleExigenceNis2 {exigence} />
       </tr>
