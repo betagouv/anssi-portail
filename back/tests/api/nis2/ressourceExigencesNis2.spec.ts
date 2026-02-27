@@ -50,5 +50,40 @@ describe('La ressource des Exigences NIS 2', () => {
         },
       ]);
     });
+
+    it('renvoie le détails des correspondances des exigences', async () => {
+      await entrepotExigence.ajoute(
+        new ExigenceNIS2({
+          reference: '',
+          entitesCible: [],
+          objectifSecurite: '',
+          thematique: '',
+          contenu: '',
+          niveau: 'faible',
+          observations: 'Des observations',
+          referentielCompare: 'ISO',
+          exigences: [
+            {
+              contenu: 'contenu 1',
+              reference: 'reference_1',
+            },
+          ],
+        })
+      );
+
+      const { body } = await request(serveur).get('/api/exigences-nis2');
+
+      assert.equal(body[0].correspondances['ISO'].niveau, 'faible');
+      assert.equal(
+        body[0].correspondances['ISO'].observations,
+        'Des observations'
+      );
+      assert.deepEqual(body[0].correspondances['ISO'].exigences, [
+        {
+          contenu: 'contenu 1',
+          reference: 'reference_1',
+        },
+      ]);
+    });
   });
 });

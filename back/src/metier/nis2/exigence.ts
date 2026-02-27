@@ -12,8 +12,8 @@ export class Exigence {
   }
 }
 
-type Correspondance = {
-  niveau?: string;
+export type Correspondance = {
+  niveau: 'NA' | 'faible' | 'moyen' | 'élevé';
   observations?: string;
   exigences: Exigence[];
 };
@@ -42,7 +42,7 @@ export class ExigenceNIS2 extends Exigence {
     this.correspondances = {};
     if (parametres.referentielCompare) {
       const correspondance: Correspondance = {
-        niveau: parametres.niveau,
+        niveau: parametres.niveau ?? 'NA',
         exigences: parametres.exigences ?? [],
         observations: parametres.observations,
       };
