@@ -2,7 +2,7 @@
 
 <div class="carte">
   <div class="tags">
-    {#each Array(2) as id (id)}
+    {#each ['1', '2'] as id (id)}
       <div class="skeleton tag" {id}></div>
     {/each}
   </div>
@@ -14,7 +14,7 @@
   </div>
 
   <div class="tags">
-    {#each Array(2) as id (id)}
+    {#each ['1', '2'] as id (id)}
       <div class="skeleton tag" {id}></div>
     {/each}
   </div>
