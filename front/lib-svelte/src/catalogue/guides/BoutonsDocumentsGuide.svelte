@@ -12,7 +12,7 @@
   </a>
 {:else if guide.documents.length > 1 && autoriseMultiple}
   <div class="documents">
-    {#each guide.documents as document (document.libelle)}
+    {#each guide.documents as document (document.url)}
       <a
         href={document.url}
         target="_blank"
