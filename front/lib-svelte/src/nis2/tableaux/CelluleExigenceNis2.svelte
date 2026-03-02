@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { badgesExigence, type ExigenceNis2 } from '../exigence.type';
+  import {
+    badgesExigence,
+    formateContenuExigence,
+    type ExigenceNis2,
+  } from '../exigence.type';
 
   export let exigence: ExigenceNis2;
 </script>
@@ -17,9 +21,9 @@
     size="sm"
     groupMarkup="div"
   ></dsfr-tags-group>
-  {#each exigence.contenu.split('\n') as paragraphe (paragraphe)}
-    <p class="texte-detail-sm">{paragraphe}</p>
-  {/each}
+  <div class="texte-detail-sm">
+    {@html formateContenuExigence(exigence)}
+  </div>
 </td>
 
 <style lang="scss">

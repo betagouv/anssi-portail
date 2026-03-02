@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { type ExigenceISO } from '../exigence.type';
+  import { formateContenuExigence, type ExigenceISO } from '../exigence.type';
 
   export let exigence: ExigenceISO;
 </script>
@@ -8,7 +8,9 @@
   <dsfr-badges-group badges={{ label: exigence.norme, accent: 'rose' }}
   ></dsfr-badges-group>
   <p class="texte-detail-sm gras">{exigence.chapitre}</p>
-  <p class="texte-detail-sm">{exigence.contenu}</p>
+  <div class="texte-detail-sm">
+    {@html formateContenuExigence(exigence)}
+  </div>
 </td>
 
 <style lang="scss">

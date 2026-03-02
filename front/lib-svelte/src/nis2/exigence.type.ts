@@ -1,5 +1,8 @@
 export type CategorieEntite = 'EntiteEssentielle' | 'EntiteImportante';
 
+export type Referentiel = 'NIS2' | 'ISO' | '';
+export type ReferentielSelectionne = Exclude<Referentiel, 'NIS2'>;
+
 export type ExigenceComparee = {
   reference: string;
   contenu: string;
@@ -55,5 +58,18 @@ export const badgesExigence = (exigence: ExigenceNis2) => {
   }));
 };
 
-export type Referentiel = 'NIS2' | 'ISO' | '';
-export type ReferentielSelectionne = Exclude<Referentiel, 'NIS2'>;
+export const formateContenuExigence = ({
+  contenu,
+}: Exigence | ExigenceComparee) => {
+  return contenu
+    .split('\n')
+    .map((p) => {
+      if (p.startsWith('•')) {
+        return `<li>${p.replace('•', '')}</li>`;
+      }
+      return `<p>${p}</p>`;
+    })
+    .join('')
+    .replace(/(?<!<\/li>)\s*<li>/g, '<ul><li>')
+    .replace(/<\/li>(?!\s*<li>)/g, '</li></ul>');
+};
