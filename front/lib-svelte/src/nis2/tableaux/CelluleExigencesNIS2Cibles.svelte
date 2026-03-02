@@ -1,5 +1,8 @@
 <script lang="ts">
-  import type { ExigenceComparee } from '../exigence.type';
+  import {
+    formateContenuExigence,
+    type ExigenceComparee,
+  } from '../exigence.type';
 
   export let exigences: ExigenceComparee[];
 </script>
@@ -9,7 +12,9 @@
     {#each exigences as exigenceCorrespondante}
       <div class="exigence-nis2">
         <dsfr-tag label={exigenceCorrespondante.reference}></dsfr-tag>
-        <p>{exigenceCorrespondante.contenu}</p>
+        <div class="texte-detail-sm">
+          {@html formateContenuExigence(exigenceCorrespondante)}
+        </div>
       </div>
     {/each}
   </div>
