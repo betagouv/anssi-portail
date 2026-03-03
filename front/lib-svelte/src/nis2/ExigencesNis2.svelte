@@ -20,6 +20,10 @@
   import TableauExigencesNIS2Simple from './tableaux/TableauExigencesNIS2Simple.svelte';
   import ConteneurLarge from '../ui/ConteneurLarge.svelte';
 
+  const {
+    featureFlagNis2Observations,
+  }: { featureFlagNis2Observations: boolean } = $props();
+
   let exigences = $state<Exigence[]>([]);
 
   let sensComparaison = $state<'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2'>(
@@ -141,6 +145,7 @@
       titreColonneCible="Référence ISO 27001/27002"
       {exigences}
       {recupereCorrespondance}
+      {featureFlagNis2Observations}
     >
       {#snippet colonneSource(exigenceSource)}
         {@const e = exigenceSource as ExigenceNis2}
@@ -156,6 +161,7 @@
       titreColonneCible="Exigence NIS&nbsp;2"
       {exigences}
       {recupereCorrespondance}
+      {featureFlagNis2Observations}
     >
       {#snippet colonneSource(exigenceSource)}
         {@const e = exigenceSource as ExigenceISO}

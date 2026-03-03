@@ -64,6 +64,11 @@ type AdaptateurEnvironnement = {
     url: () => string;
     dureeCacheStatistiquesEnSecondes: () => number;
   };
+  fonctionnalites: () => {
+    nis2: () => {
+      afficheObservations: () => boolean;
+    };
+  };
 };
 
 const ajouteBarreObliqueFinale = (url: string): string => {
@@ -246,6 +251,12 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       const dureeEnNombre = Number(dureeEnChaine);
       return Number.isNaN(dureeEnNombre) ? CINQ_MINUTES : dureeEnNombre;
     },
+  }),
+  fonctionnalites: () => ({
+    nis2: () => ({
+      afficheObservations: () =>
+        process.env.FEATURE_FLAG_NIS2_OBSERVATIONS === 'true',
+    }),
   }),
 };
 

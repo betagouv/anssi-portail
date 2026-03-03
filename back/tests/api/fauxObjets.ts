@@ -149,6 +149,11 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     url: () => 'https://demo.monaidecyber.fr',
     dureeCacheStatistiquesEnSecondes: () => 300,
   }),
+  fonctionnalites: () => ({
+    nis2: () => ({
+      afficheObservations: () => true,
+    }),
+  }),
 };
 
 const vraiMiddleware = fabriqueMiddleware({
