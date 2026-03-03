@@ -133,9 +133,6 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     }),
     nis2: () => ({
       idDocument: () => 'idDeDocumentSocle',
-      idTableExigencesNIS2: () => 'idTableExigencesNis2',
-      idTableComparaisonISO_NIS2: () => 'idTableComparaisonISO_NIS2',
-      idTableComparaisonNIS2_ISO: () => 'idTableComparaisonNIS2_ISO',
       cleApi: () => 'FAUSSE_CLE_API_SOCLE',
     }),
     dureeCacheEnSecondes: () => CINQ_MINUTES,
