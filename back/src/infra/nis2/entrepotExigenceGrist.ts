@@ -11,6 +11,7 @@ import {
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement';
 import { ClientHttp } from '../clientHttp';
 import { EntrepotGrist, ReponseGrist } from '../entrepotGrist';
+import knex, { QueryBuilder } from 'knex';
 
 export type ExigenceGrist = {
   fields: {
@@ -31,7 +32,7 @@ export type ExigenceGrist = {
 };
 
 type Croisements = {
-  [K in Referentiel]: {
+  [K in Referentiel]: { table: string; champs: string[] } & {
     [L in Referentiel]:
       | {
           nomTableAssociation: string;
@@ -65,6 +66,13 @@ export class EntrepotExigenceGrist
     );
     this.croisements = {
       ISO: {
+        table: 'ISO_27001_27002_2022',
+        champs: [
+          'source.Contenu',
+          'source.Ref_ISO_27001_27002 as Reference',
+          'source.Norme',
+          'source.Chapitre',
+        ],
         ISO: undefined,
         NIS2: {
           nomTableAssociation: configGrist.nis2().idTableComparaisonISO_NIS2(),
@@ -74,7 +82,15 @@ export class EntrepotExigenceGrist
         },
       },
       NIS2: {
+        table: 'Exigences_NIS2_2_4_1',
         NIS2: undefined,
+        champs: [
+          'source.Contenu',
+          'source.References_New_ as Reference',
+          'source.Objectif_de_securite',
+          'source.Thematique',
+          'source.EIEE',
+        ],
         ISO: {
           nomTableAssociation: configGrist.nis2().idTableComparaisonNIS2_ISO(),
           nomColonneReferenceCible: 'Ref_ISO_27001_27002',
@@ -172,100 +188,46 @@ export class EntrepotExigenceGrist
     }
   }
 
-  private construitRequeteSQL(referentiel: Referentiel, cible?: Referentiel) {
-    if (referentiel === 'NIS2') {
-      const selections = this.construitSelection(referentiel, cible);
-      const tableEtJointure = this.construitTableEtJoiture(referentiel, cible);
-      return ['SELECT', selections.join(','), ...tableEtJointure].join(' ');
-    }
-    if (referentiel === 'ISO') {
-      const selections = this.construitSelection(referentiel, cible);
-      const tableEtJointure = this.construitTableEtJoiture(referentiel, cible);
-      const condtions = this.construitConditions(referentiel);
-      return [
-        'SELECT',
-        selections.join(','),
-        ...tableEtJointure,
-        ...condtions,
-      ].join(' ');
-    }
-
-    throw new Error('Referentiel non pris en charge');
-  }
-
-  private construitSelection(source: Referentiel, cible?: Referentiel) {
-    const base = ['source.Contenu'];
-    const optionnel = [];
-    const projectionCible: string[] = [];
-    const croisement = this.croisements[source][cible ?? source];
-    if (source === 'NIS2') {
-      base.push('source.References_New_ as Reference');
-      optionnel.push(
-        'source.Objectif_de_securite',
-        'source.Thematique',
-        'source.EIEE'
-      );
-    }
+  private construitRequeteSQL(source: Referentiel, cible?: Referentiel) {
+    const k = knex({ client: 'sqlite', useNullAsDefault: true });
+    const constructeurDeRequete = k({
+      source: this.croisements[source].table,
+    });
+    const champs: QueryBuilder[] = [...this.croisements[source].champs];
     if (source === 'ISO') {
-      base.push('source.Ref_ISO_27001_27002 as Reference');
-      optionnel.push('source.Norme', 'source.Chapitre');
+      constructeurDeRequete
+        .where('source.Norme', 'ISO 27002')
+        .orWhere('source.Chapitre', '<>', '');
     }
+    const croisement = this.croisements[source][cible ?? source];
     if (croisement) {
-      projectionCible.push(
+      constructeurDeRequete.leftJoin(
+        { cr: croisement.nomTableAssociation },
+        'source.id',
+        'cr.Reference_source'
+      );
+      champs.push(
         'cr.Correspondance as Niveau',
         'cr.Commentaires_externes as Observations',
-        `(
-              SELECT
-                  json_group_array (
-                      json_object ('reference', cible.${croisement.nomColonneReferenceCible}, 'contenu', cible.${croisement.nomColonneContenuCible})
-                  )
-              FROM
-                  ${croisement.nomTableCible} cible
-              WHERE
-                  cible.id IN (
-                      SELECT
-                          value
-                      FROM
-                          json_each (cr.${croisement.nomColonneReferenceCible})
-                  )
-          ) as ExigencesCible`
+        k({ cible: croisement.nomTableCible })
+          .where(
+            'cible.id',
+            'IN',
+            k
+              .from(
+                k.raw(`json_each (cr.${croisement.nomColonneReferenceCible})`)
+              )
+              .select('value')
+          )
+          .select(
+            k.raw(
+              `json_group_array (json_object ('reference', cible.${croisement.nomColonneReferenceCible}, 'contenu', cible.${croisement.nomColonneContenuCible}))`
+            )
+          )
+          .as('ExigencesCible')
       );
     }
 
-    return base.concat(optionnel).concat(projectionCible);
-  }
-
-  private construitTableEtJoiture(source: Referentiel, cible?: Referentiel) {
-    const table = [];
-    const jointure = [];
-    const croisement = this.croisements[source][cible ?? source];
-    if (source === 'NIS2') {
-      table.push('FROM', 'Exigences_NIS2_2_4_1 as source');
-    } else if (source === 'ISO') {
-      table.push('FROM', 'ISO_27001_27002_2022 as source');
-    } else {
-      throw new Error(
-        'Referentiel source autre que NIS2 ou ISO non pris en charge'
-      );
-    }
-
-    if (croisement) {
-      jointure.push(
-        'LEFT OUTER JOIN',
-        `${croisement.nomTableAssociation} as cr ON source.id = cr.Reference_source`
-      );
-    } else {
-      return table;
-    }
-
-    return table.concat(jointure);
-  }
-
-  private construitConditions(source: Referentiel) {
-    if (source === 'ISO') {
-      return ["WHERE source.Norme = 'ISO 27002' OR source.Chapitre <> ''"];
-    }
-
-    return [];
+    return constructeurDeRequete.select(champs).toString();
   }
 }
