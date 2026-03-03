@@ -14,6 +14,7 @@
     exigences: Exigence[];
     colonneSource: Snippet<[Exigence]>;
     colonneCible: Snippet<[ExigenceComparee[]]>;
+    featureFlagNis2Observations: boolean;
   };
 
   const {
@@ -23,6 +24,7 @@
     colonneSource,
     colonneCible,
     recupereCorrespondance,
+    featureFlagNis2Observations,
   }: Props = $props();
 </script>
 
@@ -32,7 +34,9 @@
       <th>{titreColonneSource}</th>
       <th>Correspondance</th>
       <th>{titreColonneCible}</th>
-      <th>Observations</th>
+      {#if featureFlagNis2Observations}
+        <th>Observations</th>
+      {/if}
     </tr>
   </thead>
   <tbody>
@@ -42,7 +46,9 @@
         {@render colonneSource(exigence)}
         <CelluleNiveauCorrespondance niveau={correpondance.niveau} />
         {@render colonneCible(correpondance.exigences)}
-        <td> {correpondance.observations} </td>
+        {#if featureFlagNis2Observations}
+          <td> {correpondance.observations} </td>
+        {/if}
       </tr>
     {/each}
   </tbody>

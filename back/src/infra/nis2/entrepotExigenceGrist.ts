@@ -49,6 +49,7 @@ export class EntrepotExigenceGrist
 {
   private readonly urlDocument: string;
   private readonly croisements: Croisements;
+  private readonly afficheObservations: boolean;
   constructor({
     clientHttp = axios,
     adaptateurEnvironnement,
@@ -97,6 +98,10 @@ export class EntrepotExigenceGrist
       },
     };
     this.urlDocument = `${configGrist.baseURL()}/api/docs/${configGrist.nis2().idDocument()}`;
+    this.afficheObservations = adaptateurEnvironnement
+      .fonctionnalites()
+      .nis2()
+      .afficheObservations();
   }
 
   parReferentiel(
@@ -123,7 +128,8 @@ export class EntrepotExigenceGrist
     ): Correspondance =>
       new Correspondance(
         this.versNiveau(exigenceGrist.fields.Niveau),
-        exigenceGrist.fields.Observations ?? undefined,
+        (this.afficheObservations && exigenceGrist.fields.Observations) ||
+          undefined,
         exigenceGrist.fields.ExigencesCible
           ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[])
           : []

@@ -1,14 +1,18 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import DocumentationNis2 from './DocumentationNis2.svelte';
   import ExigencesNis2 from './ExigencesNis2.svelte';
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
-  import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
 
-  let { itemsCyber, featureFlagNis2Exigences = false } = $props();
+  let {
+    itemsCyber,
+    featureFlagNis2Exigences = false,
+    featureFlagNis2Observations = false,
+  } = $props();
 
   let estBureau = $state(false);
   onMount(() => {
@@ -74,7 +78,7 @@
   {#if lienActif === '#presentation'}
     <Presentation />
   {:else if lienActif === '#exigences' && featureFlagNis2Exigences}
-    <ExigencesNis2 />
+    <ExigencesNis2 {featureFlagNis2Observations} />
   {:else if lienActif === '#solutions'}
     <Solutions {itemsCyber} />
   {:else if lienActif === '#documentation'}
