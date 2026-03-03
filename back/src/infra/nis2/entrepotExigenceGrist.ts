@@ -118,16 +118,19 @@ export class EntrepotExigenceGrist
       `${this.urlDocument}/sql?q=${requete}`
     );
 
+    const fabriqueCorrespondance = (
+      exigenceGrist: ExigenceGrist
+    ): Correspondance =>
+      new Correspondance(
+        this.versNiveau(exigenceGrist.fields.Niveau),
+        exigenceGrist.fields.Observations ?? undefined,
+        exigenceGrist.fields.ExigencesCible
+          ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[])
+          : []
+      );
+
     if (referentiel === 'NIS2') {
       return exigences.records.map((exigenceGrist) => {
-        const correspondance = new Correspondance(
-          this.versNiveau(exigenceGrist.fields.Niveau),
-          exigenceGrist.fields.Observations ?? undefined,
-          exigenceGrist.fields.ExigencesCible
-            ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[])
-            : []
-        );
-
         return new ExigenceNIS2({
           reference: exigenceGrist.fields.Reference,
           contenu: exigenceGrist.fields.Contenu,
@@ -144,27 +147,19 @@ export class EntrepotExigenceGrist
             : [],
           objectifSecurite: exigenceGrist.fields.Objectif_de_securite ?? '',
           referentielCompare: 'ISO',
-          correspondance,
+          correspondance: fabriqueCorrespondance(exigenceGrist),
         });
       });
     }
 
     if (referentiel === 'ISO') {
       return exigences.records.map((exigenceGrist) => {
-        const correspondance = new Correspondance(
-          this.versNiveau(exigenceGrist.fields.Niveau),
-          exigenceGrist.fields.Observations ?? undefined,
-          exigenceGrist.fields.ExigencesCible
-            ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[])
-            : []
-        );
-
         return new ExigenceISO({
           reference: exigenceGrist.fields.Reference,
           norme: exigenceGrist.fields.Norme ?? '',
           chapitre: exigenceGrist.fields.Chapitre ?? '',
           contenu: exigenceGrist.fields.Contenu,
-          correspondance,
+          correspondance: fabriqueCorrespondance(exigenceGrist),
         });
       });
     }
