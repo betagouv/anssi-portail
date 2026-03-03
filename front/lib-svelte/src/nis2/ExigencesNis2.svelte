@@ -5,6 +5,7 @@
   import Modale from '../ui/Modale.svelte';
   import {
     recupereCorrespondance,
+    type Exigence,
     type ExigenceISO,
     type ExigenceNis2,
     type Referentiel,
@@ -19,7 +20,7 @@
   import TableauExigencesNIS2Simple from './tableaux/TableauExigencesNIS2Simple.svelte';
   import ConteneurLarge from '../ui/ConteneurLarge.svelte';
 
-  let exigences = $state<ExigenceNis2[]>([]);
+  let exigences = $state<Exigence[]>([]);
 
   let sensComparaison = $state<'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2'>(
     'NIS2_VERS_CIBLE'
@@ -61,15 +62,12 @@
     source,
     cible,
   }: { source?: Referentiel; cible?: Referentiel } = {}) => {
-    const axiosResponse = await axios.get<ExigenceNis2[]>(
-      '/api/exigences-nis2',
-      {
-        params: {
-          source,
-          cible,
-        },
-      }
-    );
+    const axiosResponse = await axios.get<Exigence[]>('/api/exigences-nis2', {
+      params: {
+        source,
+        cible,
+      },
+    });
     exigences = axiosResponse.data;
   };
 
@@ -136,7 +134,7 @@
     {/if}
   </div>
   {#if mode === 'LISTE'}
-    <TableauExigencesNIS2Simple exigencesNis2={exigences} />
+    <TableauExigencesNIS2Simple exigencesNis2={exigences as ExigenceNis2[]} />
   {:else if sensComparaison === 'NIS2_VERS_CIBLE'}
     <TableauCorrespondancesExigences
       titreColonneSource="Exigence NIS&nbsp;2"
