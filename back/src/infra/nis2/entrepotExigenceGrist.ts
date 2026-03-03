@@ -38,7 +38,6 @@ type Croisements = {
           nomTableAssociation: string;
           nomTableCible: string;
           nomColonneReferenceCible: string;
-          nomColonneContenuCible: string;
         }
       | undefined;
   };
@@ -75,15 +74,13 @@ export class EntrepotExigenceGrist
         ],
         ISO: undefined,
         NIS2: {
-          nomTableAssociation: configGrist.nis2().idTableComparaisonISO_NIS2(),
+          nomTableAssociation: 'Croisement_ISO_NIS2',
           nomColonneReferenceCible: 'References_New_',
-          nomColonneContenuCible: 'Contenu',
-          nomTableCible: 'Exigences_NIS2_2_4_1',
+          nomTableCible: 'Exigences_NIS2_2_5',
         },
       },
       NIS2: {
-        table: 'Exigences_NIS2_2_4_1',
-        NIS2: undefined,
+        table: 'Exigences_NIS2_2_5',
         champs: [
           'source.Contenu',
           'source.References_New_ as Reference',
@@ -91,10 +88,10 @@ export class EntrepotExigenceGrist
           'source.Thematique',
           'source.EIEE',
         ],
+        NIS2: undefined,
         ISO: {
-          nomTableAssociation: configGrist.nis2().idTableComparaisonNIS2_ISO(),
+          nomTableAssociation: 'Croisement_NIS2_ISO',
           nomColonneReferenceCible: 'Ref_ISO_27001_27002',
-          nomColonneContenuCible: 'Contenu',
           nomTableCible: 'ISO_27001_27002_2022',
         },
       },
@@ -213,15 +210,11 @@ export class EntrepotExigenceGrist
           .where(
             'cible.id',
             'IN',
-            k
-              .from(
-                k.raw(`json_each (cr.${croisement.nomColonneReferenceCible})`)
-              )
-              .select('value')
+            k.from(k.raw(`json_each (cr.References_cibles)`)).select('value')
           )
           .select(
             k.raw(
-              `json_group_array (json_object ('reference', cible.${croisement.nomColonneReferenceCible}, 'contenu', cible.${croisement.nomColonneContenuCible}))`
+              `json_group_array (json_object ('reference', cible.${croisement.nomColonneReferenceCible}, 'contenu', cible.Contenu))`
             )
           )
           .as('ExigencesCible')

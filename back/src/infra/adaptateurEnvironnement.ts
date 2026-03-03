@@ -48,9 +48,6 @@ type AdaptateurEnvironnement = {
     };
     nis2: () => {
       idDocument: () => string;
-      idTableExigencesNIS2: () => string;
-      idTableComparaisonNIS2_ISO: () => string;
-      idTableComparaisonISO_NIS2: () => string;
       cleApi: () => string;
     };
     dureeCacheEnSecondes: () => number;
@@ -198,12 +195,6 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     }),
     nis2: () => ({
       idDocument: () => process.env.NIS2_GRIST_ID_DOCUMENT || '',
-      idTableComparaisonISO_NIS2: () =>
-        process.env.NIS2_GRIST_ID_TABLE_COMPARAISON_ISO_NIS2 || '',
-      idTableComparaisonNIS2_ISO: () =>
-        process.env.NIS2_GRIST_ID_TABLE_COMPARAISON_NIS2_ISO || '',
-      idTableExigencesNIS2: () =>
-        process.env.NIS2_GRIST_ID_TABLE_EXIGENCES_NIS2 || '',
       cleApi: () => process.env.GRIST_API_KEY || '',
     }),
     dureeCacheEnSecondes: () => {
