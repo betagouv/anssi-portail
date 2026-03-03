@@ -68,6 +68,11 @@
       </p>
     {/if}
     <div class="labels">
+      {#if item.tagsSpecifiques}
+        {#each item.tagsSpecifiques as tagSpecifique (tagSpecifique)}
+          <span class="tag-specifique">{tagSpecifique}</span>
+        {/each}
+      {/if}
       {#if item.sources}
         {#each item.sources as source (source)}<span>{source}</span>{/each}
       {/if}
