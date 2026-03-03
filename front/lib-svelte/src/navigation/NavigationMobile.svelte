@@ -46,7 +46,6 @@
       <details
         class:actif={[
           '/catalogue/',
-          '/directive-nis2/',
           '/parcours-debuter/',
           '/parcours-approfondir/',
         ].includes(cheminRelatif)}
@@ -68,13 +67,9 @@
             label="Les services pour approfondir"
             dansMenuDeroulant
           />
-          <LienNavigationMobile
-            href="/directive-nis2/"
-            label="Les services pour vous accompagner avec NIS2"
-            dansMenuDeroulant
-          />
         </div>
       </details>
+      <LienNavigationMobile label="Directive NIS 2" href="/directive-nis2" />
       {#if estConnecte}
         <LienNavigationMobile href="/favoris/" label="Favoris" />
       {/if}
