@@ -17,6 +17,7 @@
   import CelluleExigencesNIS2Cibles from './tableaux/CelluleExigencesNIS2Cibles.svelte';
   import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
   import TableauExigencesNIS2Simple from './tableaux/TableauExigencesNIS2Simple.svelte';
+  import ConteneurLarge from '../ui/ConteneurLarge.svelte';
 
   let exigences = $state<ExigenceNis2[]>([]);
 
@@ -81,7 +82,7 @@
   });
 </script>
 
-<dsfr-container>
+<ConteneurLarge mode={mode === 'COMPARAISON' ? 'LARGE' : 'STANDARD'}>
   {#if !estBureau}
     <dsfr-alert type="info" size="sm" hasTitle={false} dismissible>
       <span slot="description">
@@ -174,30 +175,26 @@
     has-icon
     icon="arrow-up-fill"
   ></dsfr-link>
-</dsfr-container>
+</ConteneurLarge>
 
 <style lang="scss">
-  dsfr-container {
-    padding-bottom: 4.5rem;
+  dsfr-alert {
+    margin-bottom: 1.5rem;
+  }
 
-    dsfr-alert {
-      margin-bottom: 1.5rem;
-    }
+  .entete {
+    margin: 0 0 24px;
+    padding: 0 0 16px;
+  }
 
-    .entete {
-      margin: 0 0 24px;
-      padding: 0 0 16px;
-    }
+  .comparaison-libelle {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 16px;
 
-    .comparaison-libelle {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-bottom: 16px;
-
-      p {
-        margin: 0;
-      }
+    p {
+      margin: 0;
     }
   }
 </style>
