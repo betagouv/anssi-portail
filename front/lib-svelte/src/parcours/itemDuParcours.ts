@@ -9,7 +9,7 @@ export const versItemsCyberOuGuide =
           itemsCyber.find((itemCyber) => itemCyber.id === id) ??
           guides.find((guide) => guide.id === id);
         if (item) {
-          accumulateur.push(item);
+          accumulateur.push({ ...item, tagsSpecifiques:["NIS2"] });
         }
         return accumulateur;
       },

@@ -6,6 +6,7 @@ export interface Item {
   nom: string;
   sources?: string[];
   lienInterne: string;
+  tagsSpecifiques?: string[];
 }
 
 export interface ItemCyber extends Item {
