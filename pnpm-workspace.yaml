@@ -15,4 +15,4 @@ preferFrozenLockfile: true
 
 minimumReleaseAgeExclude:
   - svelte@5.53.5
-  - minimatch@3.1.4 || 9.0.7
+  - minimatch@3.1.4 || 9.0.7 || 10.2.3

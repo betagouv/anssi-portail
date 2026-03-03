@@ -10,6 +10,7 @@ overrides:
   svelte@<=5.53.4: '>=5.53.5'
   minimatch@<3.1.4: 3.1.4
   minimatch@>=9.0.0 <9.0.7: 9.0.7
+  minimatch@>=10.0.0 <10.2.3: '>=10.2.3'
 
 importers:
 
@@ -2540,8 +2541,8 @@ packages:
     engines: {node: '>=4.0.0'}
     hasBin: true
 
-  minimatch@10.2.2:
-    resolution: {integrity: sha512-+G4CpNBxa5MprY+04MbgOw1v7So6n5JY166pFi9KfYwT78fxScCeSNQSNzp6dpPSW2rONOps6Ocam1wFhCgoVw==}
+  minimatch@10.2.3:
+    resolution: {integrity: sha512-Rwi3pnapEqirPSbWbrZaa6N3nmqq4Xer/2XooiOKyV3q12ML06f7MOuc5DVH8ONZIFhwIYQ3yzPH4nt7iWHaTg==}
     engines: {node: 18 || 20 || >=22}
 
   minimatch@3.1.4:
@@ -4542,7 +4543,7 @@ snapshots:
       '@typescript-eslint/types': 8.56.1
       '@typescript-eslint/visitor-keys': 8.56.1
       debug: 4.4.3
-      minimatch: 10.2.2
+      minimatch: 10.2.3
       semver: 7.7.4
       tinyglobby: 0.2.15
       ts-api-utils: 2.4.0(typescript@5.9.3)
@@ -4596,6 +4597,14 @@ snapshots:
       '@vitest/utils': 3.2.4
       chai: 5.3.3
       tinyrainbow: 2.0.0
+
+  '@vitest/mocker@3.0.5(vite@6.4.1(@types/node@22.13.17)(sass@1.97.3)(tsx@4.19.3))':
+    dependencies:
+      '@vitest/spy': 3.0.5
+      estree-walker: 3.0.3
+      magic-string: 0.30.21
+    optionalDependencies:
+      vite: 6.4.1(@types/node@22.13.17)(sass@1.97.3)(tsx@4.19.3)
 
   '@vitest/mocker@3.0.5(vite@6.4.1(@types/node@25.3.0)(sass@1.97.3)(tsx@4.19.3))':
     dependencies:
@@ -5824,7 +5833,7 @@ snapshots:
 
   mime@2.6.0: {}
 
-  minimatch@10.2.2:
+  minimatch@10.2.3:
     dependencies:
       brace-expansion: 5.0.3
 
@@ -6852,7 +6861,7 @@ snapshots:
   vitest@3.0.5(@types/node@22.13.17)(jsdom@27.4.0)(sass@1.97.3)(tsx@4.19.3):
     dependencies:
       '@vitest/expect': 3.0.5
-      '@vitest/mocker': 3.0.5(vite@6.4.1(@types/node@25.3.0)(sass@1.97.3)(tsx@4.19.3))
+      '@vitest/mocker': 3.0.5(vite@6.4.1(@types/node@22.13.17)(sass@1.97.3)(tsx@4.19.3))
       '@vitest/pretty-format': 3.1.1
       '@vitest/runner': 3.0.5
       '@vitest/snapshot': 3.0.5
