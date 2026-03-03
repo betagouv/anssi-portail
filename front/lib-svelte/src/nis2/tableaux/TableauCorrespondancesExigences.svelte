@@ -3,7 +3,6 @@
     type Correspondance,
     type Exigence,
     type ExigenceComparee,
-    type Referentiel,
   } from '../exigence.type';
   import CelluleNiveauCorrespondance from './CelluleNiveauCorrespondance.svelte';
   import type { Snippet } from 'svelte';
@@ -37,7 +36,7 @@
     </tr>
   </thead>
   <tbody>
-    {#each exigences as exigence}
+    {#each exigences as exigence (exigence.reference)}
       {@const correpondance = recupereCorrespondance(exigence)}
       <tr>
         {@render colonneSource(exigence)}

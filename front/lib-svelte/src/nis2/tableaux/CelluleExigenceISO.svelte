@@ -13,6 +13,7 @@
     <p class="texte-detail-sm gras">{exigence.chapitre}</p>
   {/if}
   <div class="texte-detail-sm">
+    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
     {@html formateContenuExigence(exigence)}
   </div>
 </td>

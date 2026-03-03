@@ -22,6 +22,7 @@
     groupMarkup="div"
   ></dsfr-tags-group>
   <div class="texte-detail-sm">
+    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
     {@html formateContenuExigence(exigence)}
   </div>
 </td>
@@ -32,10 +33,6 @@
     border: 1px solid black;
     .texte-detail-sm {
       margin-bottom: 0;
-
-      + .texte-detail-sm {
-        margin-top: 24px;
-      }
     }
   }
 </style>

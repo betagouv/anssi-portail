@@ -6,7 +6,7 @@
 
 <td>
   <ul>
-    {#each exigences as exigenceCorrespondante}
+    {#each exigences as exigenceCorrespondante (exigenceCorrespondante.reference)}
       <li>{exigenceCorrespondante.reference}</li>
     {/each}
   </ul>
