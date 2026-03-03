@@ -2,12 +2,16 @@
   import { formateContenuExigence, type ExigenceISO } from '../exigence.type';
 
   export let exigence: ExigenceISO;
+
+  $: accent =
+    exigence.norme === 'ISO 27001' ? 'purple-glycine' : 'blue-cumulus';
 </script>
 
 <td>
-  <dsfr-badges-group badges={{ label: exigence.norme, accent: 'rose' }}
-  ></dsfr-badges-group>
-  <p class="texte-detail-sm gras">{exigence.chapitre}</p>
+  <dsfr-badge label={exigence.norme} type="accent" {accent}></dsfr-badge>
+  {#if exigence.chapitre}
+    <p class="texte-detail-sm gras">{exigence.chapitre}</p>
+  {/if}
   <div class="texte-detail-sm">
     {@html formateContenuExigence(exigence)}
   </div>
@@ -23,11 +27,11 @@
     }
 
     .texte-detail-sm {
-      margin-bottom: 0;
-    }
+      margin: 8px 0 0;
 
-    .texte-detail-sm {
-      margin-bottom: 0;
+      :global(p) {
+        margin: 0;
+      }
     }
   }
 </style>
