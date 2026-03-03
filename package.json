@@ -25,9 +25,9 @@
   },
   "private": true,
   "devDependencies": {
-    "concurrently": "~9.2.1",
-    "tsx": "~4.19.3",
-    "vitest": "~3.0.5"
+    "concurrently": "^9.2.1",
+    "tsx": "^4.19.3",
+    "vitest": "^3.0.5"
   },
   "runtimeDependencies": {
     "@lab-anssi/ui-kit": "1.41.3"
