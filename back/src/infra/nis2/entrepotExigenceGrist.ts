@@ -181,7 +181,13 @@ export class EntrepotExigenceGrist
     if (referentiel === 'ISO') {
       const selections = this.construitSelection(referentiel, cible);
       const tableEtJointure = this.construitTableEtJoiture(referentiel, cible);
-      return ['SELECT', selections.join(','), ...tableEtJointure].join(' ');
+      const condtions = this.construitConditions(referentiel);
+      return [
+        'SELECT',
+        selections.join(','),
+        ...tableEtJointure,
+        ...condtions,
+      ].join(' ');
     }
 
     throw new Error('Referentiel non pris en charge');
@@ -253,5 +259,13 @@ export class EntrepotExigenceGrist
     }
 
     return table.concat(jointure);
+  }
+
+  private construitConditions(source: Referentiel) {
+    if (source === 'ISO') {
+      return ["WHERE source.Norme = 'ISO 27002' OR source.Chapitre <> ''"];
+    }
+
+    return [];
   }
 }
