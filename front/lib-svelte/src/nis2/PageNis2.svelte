@@ -8,7 +8,7 @@
   import Solutions from './Solutions.svelte';
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
 
-  let { itemsCyber, featureFlagNis2 = false } = $props();
+  let { itemsCyber, featureFlagNis2Exigences = false } = $props();
 
   let estBureau = $state(false);
   onMount(() => {
@@ -19,12 +19,15 @@
     estBureau = mql.matches;
   });
 
-  const liens = [
+  const liens = $derived([
     {
       label: 'Présentation NIS 2',
       fragment: '#presentation',
     },
-    { label: 'Exigences et comparaison', fragment: '#exigences' },
+
+    ...(featureFlagNis2Exigences
+      ? [{ label: 'Exigences et comparaison', fragment: '#exigences' }]
+      : []),
     {
       label: 'Solutions pour vous accompagner',
       fragment: '#solutions',
@@ -33,7 +36,7 @@
       label: 'Documentation et FAQ',
       fragment: '#documentation',
     },
-  ];
+  ]);
   let lienActif = $state('#presentation');
 </script>
 
@@ -49,45 +52,33 @@
   cacheIllustration={!estBureau}
 >
   {#snippet filAriane()}
-    {#if featureFlagNis2}
-      <FilAriane fondSombre={true} feuille="Directive NIS 2" />
-    {:else}
-      <FilAriane fondSombre={true} feuille="Vous accompagner avec NIS2" />
-    {/if}
+    <FilAriane fondSombre={true} feuille="Directive NIS 2" />
   {/snippet}
   {#snippet actions()}
-    {#if featureFlagNis2}
-      <dsfr-button
-        label="Pré-enregistrer mon entité"
-        markup="a"
-        href="https://club.ssi.gouv.fr/#/nis2/introduction"
-        target="_blank"
-        has-icon
-        icon-place="right"
-        icon="external-link-line"
-        centered
-      ></dsfr-button>
-    {/if}
+    <dsfr-button
+      label="Pré-enregistrer mon entité"
+      markup="a"
+      href="https://club.ssi.gouv.fr/#/nis2/introduction"
+      target="_blank"
+      has-icon
+      icon-place="right"
+      icon="external-link-line"
+      centered
+    ></dsfr-button>
   {/snippet}
 </Heros>
 
-{#if featureFlagNis2}
-  <NavigationTertiaire {liens} bind:lienActif />
-{/if}
+<NavigationTertiaire {liens} bind:lienActif />
 
 <div class="contenu">
-  {#if featureFlagNis2}
-    {#if lienActif === '#presentation'}
-      <Presentation />
-    {:else if lienActif === '#exigences'}
-      <ExigencesNis2 />
-    {:else if lienActif === '#solutions'}
-      <Solutions {itemsCyber} />
-    {:else if lienActif === '#documentation'}
-      <DocumentationNis2 />
-    {/if}
-  {:else}
+  {#if lienActif === '#presentation'}
+    <Presentation />
+  {:else if lienActif === '#exigences' && featureFlagNis2Exigences}
+    <ExigencesNis2 />
+  {:else if lienActif === '#solutions'}
     <Solutions {itemsCyber} />
+  {:else if lienActif === '#documentation'}
+    <DocumentationNis2 />
   {/if}
 </div>
 
