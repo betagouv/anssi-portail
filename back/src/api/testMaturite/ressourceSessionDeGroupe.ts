@@ -5,7 +5,7 @@ export const ressourceSessionDeGroupe = ({entrepotSessionDeGroupe, middleware}: 
   const routeur = Router();
   routeur.get('/:code', middleware.aseptise('code'), async (requete: Request, reponse: Response) => {
 
-    const session =  await entrepotSessionDeGroupe.parCode(requete.params.code)
+    const session =  await entrepotSessionDeGroupe.parCode(requete.params.code as string)
     reponse.sendStatus(session ? 200 : 404);
   });
   return routeur;

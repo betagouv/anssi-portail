@@ -1,6 +1,6 @@
+import { Router } from 'express';
 import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur';
 import { ConfigurationServeur } from '../configurationServeur';
-import { Router } from 'express';
 
 const ressourceFavori = ({
   middleware,
@@ -20,7 +20,7 @@ const ressourceFavori = ({
     ),
     middleware.aseptise('id'),
     async (requete, reponse) => {
-      let id = requete.params.id;
+      let id = requete.params.id as string;
       id = id.replaceAll('&#x2F;', '/');
       const utilisateur = requete.utilisateur;
       await entrepotFavori.retire({ idItemCyber: id, utilisateur });

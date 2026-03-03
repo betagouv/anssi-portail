@@ -12,7 +12,7 @@ const ressourceGuide = ({
     '/:slug',
     async (requete: Request, reponse: Response, suivante: NextFunction) => {
       try {
-        const guide = await entrepotGuide.parId(requete.params.slug);
+        const guide = await entrepotGuide.parId(requete.params.slug as string);
         if (!guide) {
           reponse.sendStatus(404);
           return;

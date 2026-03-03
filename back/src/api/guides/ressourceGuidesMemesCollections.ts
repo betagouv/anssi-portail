@@ -11,7 +11,7 @@ export const ressourceGuidesMemesCollections = ({
   routeur.get(
     '/:slug/memes-collections',
     async (requete: Request, reponse: Response) => {
-      const guideCible = await entrepotGuide.parId(requete.params.slug);
+      const guideCible = await entrepotGuide.parId(requete.params.slug as string);
       if (!guideCible) {
         reponse.sendStatus(404);
         return;
