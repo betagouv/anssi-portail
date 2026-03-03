@@ -19,7 +19,7 @@ const ressourceResultatDeTest = ({
       adaptateurHachage
     ),
     async (requete, reponse) => {
-      const resultatTest = await entrepotResultatTest.parId(requete.params.id);
+      const resultatTest = await entrepotResultatTest.parId(requete.params.id as string);
       if (!resultatTest) {
         reponse.sendStatus(404);
         return;

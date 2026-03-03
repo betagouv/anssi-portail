@@ -13,7 +13,7 @@ const ressourcePageCrisp = ({
     async (requete: Request, reponse: Response) => {
       const idArticle = adaptateurEnvironnement
         .crisp()
-        .idArticle(requete.params.id.toUpperCase());
+        .idArticle((requete.params.id as string).toUpperCase());
       if (!idArticle) {
         reponse.sendStatus(404);
         return;

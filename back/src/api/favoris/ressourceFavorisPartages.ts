@@ -15,7 +15,7 @@ const ressourceFavorisPartages = ({
     middleware.valide(),
     async (requete: Request, reponse: Response) => {
       const utilisateurPartageur = await entrepotUtilisateur.parIdListeFavoris(
-        requete.params.id
+        requete.params.id as string
       );
 
       if (!utilisateurPartageur) {

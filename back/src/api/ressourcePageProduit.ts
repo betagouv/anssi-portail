@@ -17,7 +17,7 @@ const ressourcePageProduit = (
         .sendFileAvecNonce(
           fournisseurChemin.cheminProduitJekyll(
             repertoireProduits,
-            requete.params.id
+            requete.params.id as string
           )
         );
     }

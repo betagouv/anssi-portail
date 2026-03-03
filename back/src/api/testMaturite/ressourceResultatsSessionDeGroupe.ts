@@ -12,7 +12,7 @@ export const ressourceResultatsSessionDeGroupe = ({
     middleware.aseptise('code'),
     async (requete: Request, reponse: Response) => {
       const session = await entrepotSessionDeGroupe.parCode(
-        requete.params.code
+        requete.params.code as string
       );
       if (!session) {
         reponse.sendStatus(404);

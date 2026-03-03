@@ -14,7 +14,7 @@ export const ressourceDocumentGuide = ({
     async (requete: Request, reponse: Response, suite: NextFunction) => {
       try {
         const documentCellar = await cellar.get(
-          requete.params.nomFichier,
+          requete.params.nomFichier as string,
           'GUIDES'
         );
         if (!documentCellar) {
@@ -31,7 +31,7 @@ export const ressourceDocumentGuide = ({
         if (!parser.Agent.isBot) {
           await busEvenements.publie(
             new DocumentGuideTelecharge({
-              nomFichier: requete.params.nomFichier,
+              nomFichier: requete.params.nomFichier as string,
               origine: requete.query.ref?.toString(),
             })
           );

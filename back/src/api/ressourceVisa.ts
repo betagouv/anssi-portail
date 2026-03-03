@@ -12,7 +12,7 @@ export const ressourceVisa = ({
     '/:slug',
     async (requete: Request, reponse: Response, suite: NextFunction) => {
       try {
-        const fluxCellar = await cellar.getStream(requete.params.slug, 'VISAS');
+        const fluxCellar = await cellar.getStream(requete.params.slug as string, 'VISAS');
         if (!fluxCellar) {
           reponse.sendStatus(404);
           return;
@@ -35,7 +35,7 @@ export const ressourceVisa = ({
         });
         await busEvenements.publie(
           new VisaTelecharge({
-            nomFichier: requete.params.slug,
+            nomFichier: requete.params.slug as string,
           })
         );
       } catch (erreur: Error | unknown) {
