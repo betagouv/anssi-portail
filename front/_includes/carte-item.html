@@ -8,10 +8,7 @@
         src="/assets/images/illustrations-services/{{item.illustration}}"
         alt="Capture d’écran de {{item.nom}}"
       />
-      <figcaption>
-        {% if item.typologie == 'service' %} Service {% else %} {{item.format}}
-        {% endif %}
-      </figcaption>
+      <figcaption>{{ item.typologie || capitalize }}</figcaption>
     </figure>
     <div class="contenu">
       <div class="nom-item">
