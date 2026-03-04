@@ -1,12 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { ItemCyber } from '../catalogue/Catalogue.types';
-  import {
-    chargeGuidesDansLeStore,
-    guidesStore,
-  } from '../catalogue/stores/guides/guides.store';
-  import ActionParcoursAvecItems from '../parcours/ActionParcoursAvecItems.svelte';
+  import { chargeGuidesDansLeStore, guidesStore } from '../catalogue/stores/guides/guides.store';
   import ControleSegmente from '../navigation/ControleSegmente.svelte';
+  import ActionParcoursAvecItems from '../parcours/ActionParcoursAvecItems.svelte';
   import { versItemsCyberOuGuide } from '../parcours/itemDuParcours';
 
   export let itemsCyber: ItemCyber[];
@@ -31,7 +28,7 @@
       id: 'se-declarer',
       titre: 'Se déclarer',
       explication:
-        "Vérifiez si votre entité est concernée et procédez à son enregistrement auprès de l'ANSSI.",
+        'Vérifiez si votre entité est concernée et procédez à son enregistrement auprès de l\'ANSSI.',
       items: versMesItems(['/services/NIS2', '/services/mon-espace-nis2']),
       ancre: 'solutions&se-declarer',
     },
@@ -41,8 +38,8 @@
       explication: 'Mettez en place des mesures de sécurité adaptées.',
       items: versMesItems([
         '/services/mon-aide-cyber',
-        '/services/silene',
-        '/services/ads',
+        { id: '/services/silene', tagsSpecifiques: ['Entités publiques', 'Entités régulées'] },
+        { id: '/services/ads', tagsSpecifiques: ['Entités publiques', 'Entités régulées'] },
         '/services/conseil-technique',
         '/ressources/revue-presse',
         '/guides/la-cybersecurite-pour-les-tpepme-en-treize-questions',
