@@ -1,3 +1,4 @@
+import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import cors from 'cors';
@@ -53,6 +54,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
 
   configurationServeur.adaptateurGestionErreur.initialise(app);
+
+  app.use(compression());
 
   app.use(configurationServeur.middleware.ajouteMethodeNonce);
 
@@ -161,7 +164,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'collectivites',
     'associations',
     'entreprises',
-    'sante'
+    'sante',
   ].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
   );
@@ -332,7 +335,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/api/exigences-nis2', ressourceExigencesNis2(configurationServeur));
 
-  app.use("/api/sante-guides", ressourceSanteGuides(configurationServeur))
+  app.use('/api/sante-guides', ressourceSanteGuides(configurationServeur));
 
   app.use((_requete: Request, reponse: Response) => {
     reponse
