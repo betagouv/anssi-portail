@@ -46,7 +46,7 @@ export const recupereCorrespondance = (exigence: Exigence): Correspondance => {
 };
 
 export const badgesExigence = (exigence: ExigenceNis2) => {
-  return exigence?.entitesCible.map((categorie) => ({
+  return exigence?.entitesCible?.map((categorie) => ({
     label: {
       EntiteImportante: 'EI',
       EntiteEssentielle: 'EE',
