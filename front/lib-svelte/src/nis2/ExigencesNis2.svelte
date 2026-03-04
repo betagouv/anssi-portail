@@ -4,7 +4,6 @@
   import { clic } from '../directives/actions.svelte';
   import Modale from '../ui/Modale.svelte';
   import {
-    recupereCorrespondance,
     type Exigence,
     type ExigenceISO,
     type ExigenceNis2,
@@ -144,7 +143,6 @@
       titreColonneSource="Exigence NIS&nbsp;2"
       titreColonneCible="Référence ISO 27001/27002"
       {exigences}
-      {recupereCorrespondance}
       {featureFlagNis2Observations}
     >
       {#snippet colonneSource(exigenceSource)}
@@ -160,7 +158,6 @@
       titreColonneSource="Référence ISO 27001/27002"
       titreColonneCible="Exigence NIS&nbsp;2"
       {exigences}
-      {recupereCorrespondance}
       {featureFlagNis2Observations}
     >
       {#snippet colonneSource(exigenceSource)}

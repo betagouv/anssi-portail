@@ -1,16 +1,15 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import {
-    type Correspondance,
+    recupereCorrespondance,
     type Exigence,
     type ExigenceComparee,
   } from '../exigence.type';
   import CelluleNiveauCorrespondance from './CelluleNiveauCorrespondance.svelte';
-  import type { Snippet } from 'svelte';
 
   type Props = {
     titreColonneSource: string;
     titreColonneCible: string;
-    recupereCorrespondance: (exigence: Exigence) => Correspondance;
     exigences: Exigence[];
     colonneSource: Snippet<[Exigence]>;
     colonneCible: Snippet<[ExigenceComparee[]]>;
@@ -23,7 +22,6 @@
     titreColonneCible,
     colonneSource,
     colonneCible,
-    recupereCorrespondance,
     featureFlagNis2Observations,
   }: Props = $props();
 </script>
