@@ -1,10 +1,11 @@
 import js from '@eslint/js';
 import svelte from 'eslint-plugin-svelte';
-import globals from 'globals';
+import { defineConfig } from 'eslint/config';
 import ts from 'typescript-eslint';
+import globals from 'globals';
 import svelteConfig from './svelte.config.js';
 
-export default ts.config(
+export default defineConfig(
   {
     ignores: ['dist/**'],
   },
