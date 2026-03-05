@@ -163,10 +163,10 @@ describe('La ressource pages jekyll', () => {
 
   describe("sur demande de l'ancienne page NIS2", () => {
     it('redirige vers la sélection de la nouvelle page NIS2', async () => {
-      const reponse = await request(serveur).get('/nis2');
+      const reponse = await request(serveur).get('/directive-nis2');
 
       assert.equal(reponse.status, 301);
-      assert.equal(reponse.headers.location, '/directive-nis2#solutions');
+      assert.equal(reponse.headers.location, '/nis2');
     });
   });
 });

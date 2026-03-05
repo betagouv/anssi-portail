@@ -150,7 +150,7 @@
       label="Découvrir les solutions pour m'aider"
       kind="secondary"
       markup="a"
-      href="/directive-nis2#solutions&comprendre"
+      href="/nis2#solutions&comprendre"
     ></dsfr-button>
     <h6>La déclaration d’incidents</h6>
     <p>

@@ -69,7 +69,7 @@
           />
         </div>
       </details>
-      <LienNavigationMobile label="Directive NIS 2" href="/directive-nis2" />
+      <LienNavigationMobile label="Directive NIS 2" href="/nis2" />
       {#if estConnecte}
         <LienNavigationMobile href="/favoris/" label="Favoris" />
       {/if}

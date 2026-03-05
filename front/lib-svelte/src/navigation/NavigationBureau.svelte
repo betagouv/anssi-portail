@@ -40,7 +40,7 @@
         />
       </div>
     </details>
-    <LienNavigation label="Directive NIS 2" href="/directive-nis2" />
+    <LienNavigation label="Directive NIS 2" href="/nis2" />
     {#if estConnecte}
       <LienNavigation href="/favoris/" label="Favoris" />
     {/if}
