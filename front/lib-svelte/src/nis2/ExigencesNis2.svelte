@@ -24,42 +24,16 @@
   }: { featureFlagNis2Observations: boolean } = $props();
 
   let exigences = $state<Exigence[]>([]);
-
   let sensComparaison = $state<'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2'>(
     'NIS2_VERS_CIBLE'
   );
-  let mode = $state<'COMPARAISON' | 'LISTE'>('LISTE');
-
+  let mode = $state<'LISTE' | 'COMPARAISON_NIS2_ISO' | 'COMPARAISON_ISO_NIS2'>(
+    'LISTE'
+  );
   let referentielSelectionne = $state<ReferentielSelectionne>('');
-  $effect(() => {
-    const charge = async () => {
-      if (mode === 'LISTE') {
-        await recupereLesExigences();
-      } else {
-        const source =
-          sensComparaison === 'NIS2_VERS_CIBLE'
-            ? 'NIS2'
-            : referentielSelectionne;
-        const cible =
-          sensComparaison === 'SOURCE_VERS_NIS2'
-            ? 'NIS2'
-            : referentielSelectionne;
-        await recupereLesExigences({ source, cible });
-      }
-    };
-    charge();
-  });
-
   let estBureau = $state(false);
-
-  const reinitialise = async () => {
-    referentielSelectionne = '';
-    mode = 'LISTE';
-    sensComparaison = 'NIS2_VERS_CIBLE';
-    await recupereLesExigences();
-  };
-
   let menuComparaisonAffiche = $state(false);
+  let chargement = $state(false);
 
   const recupereLesExigences = async ({
     source,
@@ -81,9 +55,33 @@
     });
     estBureau = mql.matches;
   });
+
+  $effect(() => {
+    const charge = async () => {
+      chargement = true;
+      const source =
+        sensComparaison === 'NIS2_VERS_CIBLE' ? 'NIS2' : referentielSelectionne;
+      const cible =
+        sensComparaison === 'SOURCE_VERS_NIS2'
+          ? 'NIS2'
+          : referentielSelectionne;
+      await recupereLesExigences({ source, cible });
+
+      chargement = false;
+      if (!referentielSelectionne) {
+        mode = 'LISTE';
+      } else {
+        mode =
+          sensComparaison === 'NIS2_VERS_CIBLE'
+            ? 'COMPARAISON_NIS2_ISO'
+            : 'COMPARAISON_ISO_NIS2';
+      }
+    };
+    charge();
+  });
 </script>
 
-<ConteneurLarge mode={mode === 'COMPARAISON' ? 'LARGE' : 'STANDARD'}>
+<ConteneurLarge mode={mode === 'LISTE' ? 'STANDARD' : 'LARGE'}>
   {#if !estBureau}
     <dsfr-alert type="info" size="sm" hasTitle={false} dismissible>
       <span slot="description">
@@ -95,10 +93,8 @@
     <h2>Liste des exigences NIS 2</h2>
     {#if estBureau}
       <PanneauComparaison
-        bind:mode
         bind:sensComparaison
         bind:referentielSelectionne
-        {reinitialise}
         estBureau={true}
       />
     {:else}
@@ -120,10 +116,8 @@
       <Modale bind:estOuverte={menuComparaisonAffiche}>
         <h4>Comparer</h4>
         <PanneauComparaison
-          bind:mode
           bind:sensComparaison
           bind:referentielSelectionne
-          {reinitialise}
           estBureau={false}
         />
         {#snippet actions()}
@@ -137,13 +131,17 @@
     {/if}
   </div>
   {#if mode === 'LISTE'}
-    <TableauExigencesNIS2Simple exigencesNis2={exigences as ExigenceNis2[]} />
-  {:else if sensComparaison === 'NIS2_VERS_CIBLE'}
+    <TableauExigencesNIS2Simple
+      exigencesNis2={exigences as ExigenceNis2[]}
+      {chargement}
+    />
+  {:else if mode === 'COMPARAISON_NIS2_ISO'}
     <TableauCorrespondancesExigences
       titreColonneSource="Exigence NIS&nbsp;2"
       titreColonneCible="Référence ISO 27001/27002"
       {exigences}
       {featureFlagNis2Observations}
+      {chargement}
     >
       {#snippet colonneSource(exigenceSource)}
         {@const e = exigenceSource as ExigenceNis2}
@@ -159,6 +157,7 @@
       titreColonneCible="Exigence NIS&nbsp;2"
       {exigences}
       {featureFlagNis2Observations}
+      {chargement}
     >
       {#snippet colonneSource(exigenceSource)}
         {@const e = exigenceSource as ExigenceISO}
@@ -197,5 +196,9 @@
     p {
       margin: 0;
     }
+  }
+
+  :global(table.chargement) {
+    opacity: 0.25;
   }
 </style>

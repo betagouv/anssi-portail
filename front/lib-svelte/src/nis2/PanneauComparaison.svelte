@@ -3,10 +3,8 @@
 
   type Props = {
     estBureau: boolean;
-    mode: 'COMPARAISON' | 'LISTE';
     sensComparaison: 'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2';
     referentielSelectionne: 'ISO' | '';
-    reinitialise: () => void;
   };
 
   type Referentiel = 'NIS2' | 'ISO' | '';
@@ -14,11 +12,14 @@
 
   let {
     estBureau,
-    mode = $bindable(),
     sensComparaison = $bindable(),
     referentielSelectionne = $bindable(),
-    reinitialise,
   }: Props = $props();
+
+  const reinitialise = async () => {
+    referentielSelectionne = '';
+    sensComparaison = 'NIS2_VERS_CIBLE';
+  };
 
   const inverseComparaison = () => {
     sensComparaison =
@@ -29,7 +30,6 @@
 
   const selectionneLeReferentiel = (referentiel: ReferentielSelectionne) => {
     referentielSelectionne = referentiel;
-    mode = referentiel ? 'COMPARAISON' : 'LISTE';
   };
 </script>
 
@@ -72,7 +72,7 @@
       ></dsfr-select>
     </div>
   </div>
-  {#if mode === 'COMPARAISON'}
+  {#if referentielSelectionne || sensComparaison !== 'NIS2_VERS_CIBLE'}
     <dsfr-button
       label="Réinitialiser"
       has-icon="true"

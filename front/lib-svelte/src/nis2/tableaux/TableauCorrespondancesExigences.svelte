@@ -14,6 +14,7 @@
     colonneSource: Snippet<[Exigence]>;
     colonneCible: Snippet<[ExigenceComparee[]]>;
     featureFlagNis2Observations: boolean;
+    chargement: boolean;
   };
 
   const {
@@ -23,10 +24,11 @@
     colonneSource,
     colonneCible,
     featureFlagNis2Observations,
+    chargement,
   }: Props = $props();
 </script>
 
-<table>
+<table class:chargement>
   <thead>
     <tr>
       <th>{titreColonneSource}</th>

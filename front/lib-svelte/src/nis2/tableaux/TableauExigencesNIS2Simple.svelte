@@ -3,9 +3,10 @@
   import CelluleExigenceNis2 from './CelluleExigenceNis2.svelte';
 
   export let exigencesNis2: ExigenceNis2[];
+  export let chargement: boolean = false;
 </script>
 
-<table>
+<table class:chargement>
   <thead>
     <tr>
       <th>Exigence NIS&nbsp;2</th>
