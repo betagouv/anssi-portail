@@ -160,7 +160,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'prestataires-labellises',
     'contacts',
     'formulaire-matomo',
-    'directive-nis2',
+    'nis2',
     'collectivites',
     'associations',
     'entreprises',
@@ -329,8 +329,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 
-  app.use('/nis2', (_requete: Request, reponse: Response) => {
-    reponse.redirect(301, '/directive-nis2#solutions');
+  app.use('/directive-nis2', (_requete: Request, reponse: Response) => {
+    reponse.redirect(301, '/nis2');
   });
 
   app.use('/api/exigences-nis2', ressourceExigencesNis2(configurationServeur));

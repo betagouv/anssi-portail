@@ -16,7 +16,7 @@
     },
 
     {
-      titre: 'Enregistrer votre entité auprès de l\'ANSSI',
+      titre: "Enregistrer votre entité auprès de l'ANSSI",
       description:
         'Accédez dès à présent au service de pré-enregistrement en ligne.',
       lien: {
@@ -34,8 +34,8 @@
       description:
         'Mettez en oeuvre les exigences de sécurité issues de la directive pour réduire vos risques cyber et signalez à l’ANSSI vos incidents de sécurité. ',
       lien: {
-        href: '/directive-nis2#solutions',
-        texte: 'Découvrir les solutions pour m\'aider',
+        href: '/nis2#solutions',
+        texte: "Découvrir les solutions pour m'aider",
         target: '_self',
       },
       illustration: {
