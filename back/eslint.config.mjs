@@ -1,15 +1,16 @@
 // @ts-check
 
 import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import { defineConfig } from 'eslint/config';
+import tseslilnt from 'typescript-eslint';
 
-export default tseslint.config(
+export default defineConfig(
   {
     ignores: ['dist/**', 'node_modules/**'],
   },
   {
     files: ['**/*.ts'],
-    extends: [eslint.configs.recommended, tseslint.configs.recommended],
+    extends: [eslint.configs.recommended, tseslilnt.configs.recommended],
     rules: {
       '@typescript-eslint/no-unused-vars': [
         'error',
