@@ -26,7 +26,7 @@
     bind:referentielSelectionne
     estBureau={true}
   />
-  <PanneauFiltres />
+  <PanneauFiltres cible={referentielSelectionne} />
 {:else}
   <div class="comparaison-libelle">
     <p class="texte-standard-md">Comparer les exigences NIS 2</p>
