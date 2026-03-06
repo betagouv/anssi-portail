@@ -5,7 +5,12 @@
   } from '../exigence.type';
   import { rechercheParCorrespondance } from '../stores/rechercheParCorrespondance';
 
-  export let cible: ReferentielSelectionne | undefined = undefined;
+  type Props = {
+    estBureau: boolean;
+    cible: ReferentielSelectionne | undefined;
+  };
+
+  const { cible, estBureau }: Props = $props();
 
   const optionsCorrespondances = [
     { value: 'NA', label: 'Non Applicable' },
@@ -15,7 +20,7 @@
   ] satisfies { value: Correspondance['niveau']; label: string }[];
 </script>
 
-<div class="panneau-filtres">
+<div class="panneau-filtres" class:bureau={estBureau}>
   {#if cible}
     <dsfr-select
       label="Correspondance"
@@ -30,9 +35,15 @@
 
 <style lang="scss">
   .panneau-filtres {
-    display: grid;
-    gap: 24px;
-    grid-template-rows: repeat(1, fit-content(100%));
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &.bureau {
+      display: grid;
+      gap: 24px;
+      grid-template-rows: repeat(1, fit-content(100%));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
 </style>
