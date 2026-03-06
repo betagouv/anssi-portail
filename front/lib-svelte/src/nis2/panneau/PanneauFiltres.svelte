@@ -15,7 +15,7 @@
     label="Correspondance"
     placeholder="Sélectionner une option"
     options={optionsCorrespondances}
-    value={$rechercheParCorrespondance}
+    value={$rechercheParCorrespondance ?? ''}
     onvaluechanged={(e: CustomEvent) =>
       ($rechercheParCorrespondance = e.detail)}
   ></dsfr-select>

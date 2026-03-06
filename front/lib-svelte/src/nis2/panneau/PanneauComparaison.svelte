@@ -1,6 +1,7 @@
 <script lang="ts">
   import { clic } from '../../directives/actions.svelte';
   import type { ReferentielSelectionne } from '../exigence.type';
+  import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
 
   type Props = {
     estBureau: boolean;
@@ -17,6 +18,7 @@
   const reinitialise = async () => {
     referentielSelectionne = undefined;
     sensComparaison = 'NIS2_VERS_CIBLE';
+    $exigencesFiltrees.reinitialise();
   };
 
   const inverseComparaison = () => {
@@ -70,7 +72,7 @@
       ></dsfr-select>
     </div>
   </div>
-  {#if referentielSelectionne || sensComparaison !== 'NIS2_VERS_CIBLE'}
+  {#if referentielSelectionne || sensComparaison !== 'NIS2_VERS_CIBLE' || $exigencesFiltrees.filtresActifs}
     <dsfr-button
       label="Réinitialiser"
       has-icon="true"
