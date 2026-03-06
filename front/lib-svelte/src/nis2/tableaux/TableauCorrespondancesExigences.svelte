@@ -55,6 +55,7 @@
   table {
     margin-bottom: 1.5rem;
     border-collapse: collapse;
+    width: 100%;
 
     td,
     th {
