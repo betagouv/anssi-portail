@@ -1,10 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import {
-    recupereCorrespondance,
-    type Exigence,
-    type ExigenceComparee,
-  } from '../exigence.type';
+  import { type Exigence, type ExigenceComparee } from '../exigence.type';
   import CelluleNiveauCorrespondance from './CelluleNiveauCorrespondance.svelte';
 
   type Props = {
@@ -41,13 +37,14 @@
   </thead>
   <tbody>
     {#each exigences as exigence (exigence.reference)}
-      {@const correpondance = recupereCorrespondance(exigence)}
       <tr>
         {@render colonneSource(exigence)}
-        <CelluleNiveauCorrespondance niveau={correpondance.niveau} />
-        {@render colonneCible(correpondance.exigences)}
+        <CelluleNiveauCorrespondance
+          niveau={exigence.correspondance?.niveau ?? 'NA'}
+        />
+        {@render colonneCible(exigence.correspondance?.exigences ?? [])}
         {#if featureFlagNis2Observations}
-          <td> {correpondance.observations} </td>
+          <td> {exigence.correspondance?.observations} </td>
         {/if}
       </tr>
     {/each}
