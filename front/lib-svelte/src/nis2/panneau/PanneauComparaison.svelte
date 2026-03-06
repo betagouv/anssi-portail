@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { clic } from '../directives/actions.svelte';
-  import type { ReferentielSelectionne } from './exigence.type';
+  import { clic } from '../../directives/actions.svelte';
+  import type { ReferentielSelectionne } from '../exigence.type';
 
   type Props = {
     estBureau: boolean;
