@@ -1,6 +1,6 @@
 export type CategorieEntite = 'EntiteEssentielle' | 'EntiteImportante';
 
-export type Referentiel = 'NIS2' | 'ISO' | '';
+export type Referentiel = 'NIS2' | 'ISO';
 export type ReferentielSelectionne = Exclude<Referentiel, 'NIS2'>;
 
 export type ExigenceComparee = {
@@ -14,36 +14,25 @@ export type Correspondance = {
   observations: string;
 };
 
-export type ExigenceNis2 = {
+export type ExigenceBase = {
   reference: string;
+  contenu: string;
+};
+
+export interface ExigenceNis2 extends ExigenceBase {
   objectifSecurite: string;
   thematique: string;
-  contenu: string;
   entitesCible: CategorieEntite[];
-  correspondances: {
-    ISO: Correspondance;
-  };
-};
+  correspondance?: Correspondance;
+}
 
-export type ExigenceISO = {
+export interface ExigenceISO extends ExigenceBase {
   norme: string;
   chapitre: string;
-  reference: string;
-  contenu: string;
-  correspondances: {
-    NIS2: Correspondance;
-  };
-};
+  correspondance: Correspondance;
+}
 
 export type Exigence = ExigenceNis2 | ExigenceISO;
-
-export const recupereCorrespondance = (exigence: Exigence): Correspondance => {
-  if ('objectifSecurite' in exigence) {
-    return exigence.correspondances.ISO;
-  } else {
-    return exigence.correspondances.NIS2;
-  }
-};
 
 export const badgesExigence = (exigence: ExigenceNis2) => {
   return exigence?.entitesCible?.map((categorie) => ({
@@ -60,7 +49,7 @@ export const badgesExigence = (exigence: ExigenceNis2) => {
 
 export const formateContenuExigence = ({
   contenu,
-}: Exigence | ExigenceComparee) => {
+}: ExigenceBase | ExigenceComparee) => {
   return contenu
     .split('\n')
     .map((p) => {
@@ -72,4 +61,37 @@ export const formateContenuExigence = ({
     .join('')
     .replace(/(?<!<\/li>)\s*<li>/g, '<ul><li>')
     .replace(/<\/li>(?!\s*<li>)/g, '</li></ul>');
+};
+
+export const fabriqueDExigence = (
+  source: Referentiel,
+  cible: Referentiel | undefined,
+  exigence: Record<string, unknown>
+): Exigence => {
+  const correspondances = exigence.correspondances as Record<
+    string,
+    Correspondance
+  >;
+  if (source === 'NIS2') {
+    return {
+      reference: (exigence.reference as string) ?? '',
+      contenu: (exigence.contenu as string) ?? '',
+
+      objectifSecurite: (exigence.objectifSecurite as string) ?? '',
+      thematique: (exigence.thematique as string) ?? '',
+      entitesCible: (exigence.entitesCible as CategorieEntite[]) ?? [],
+
+      correspondance: cible && correspondances[cible],
+    } satisfies ExigenceNis2;
+  }
+
+  return {
+    reference: (exigence.reference as string) ?? '',
+    contenu: (exigence.contenu as string) ?? '',
+
+    norme: (exigence.norme as string) ?? '',
+    chapitre: (exigence.chapitre as string) ?? '',
+
+    correspondance: correspondances['NIS2'],
+  } satisfies ExigenceISO;
 };

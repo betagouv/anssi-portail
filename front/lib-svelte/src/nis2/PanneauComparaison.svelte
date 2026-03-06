@@ -1,14 +1,12 @@
 <script lang="ts">
   import { clic } from '../directives/actions.svelte';
+  import type { ReferentielSelectionne } from './exigence.type';
 
   type Props = {
     estBureau: boolean;
     sensComparaison: 'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2';
-    referentielSelectionne: 'ISO' | '';
+    referentielSelectionne: ReferentielSelectionne | undefined;
   };
-
-  type Referentiel = 'NIS2' | 'ISO' | '';
-  type ReferentielSelectionne = Exclude<Referentiel, 'NIS2'>;
 
   let {
     estBureau,
@@ -17,7 +15,7 @@
   }: Props = $props();
 
   const reinitialise = async () => {
-    referentielSelectionne = '';
+    referentielSelectionne = undefined;
     sensComparaison = 'NIS2_VERS_CIBLE';
   };
 

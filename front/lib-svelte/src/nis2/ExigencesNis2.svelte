@@ -4,6 +4,7 @@
   import { clic } from '../directives/actions.svelte';
   import Modale from '../ui/Modale.svelte';
   import {
+    fabriqueDExigence,
     type Exigence,
     type ExigenceISO,
     type ExigenceNis2,
@@ -30,7 +31,9 @@
   let mode = $state<'LISTE' | 'COMPARAISON_NIS2_ISO' | 'COMPARAISON_ISO_NIS2'>(
     'LISTE'
   );
-  let referentielSelectionne = $state<ReferentielSelectionne>('');
+  let referentielSelectionne = $state<ReferentielSelectionne | undefined>(
+    undefined
+  );
   let estBureau = $state(false);
   let menuComparaisonAffiche = $state(false);
   let chargement = $state(false);
@@ -39,13 +42,18 @@
     source,
     cible,
   }: { source?: Referentiel; cible?: Referentiel } = {}) => {
-    const axiosResponse = await axios.get<Exigence[]>('/api/exigences-nis2', {
-      params: {
-        source,
-        cible,
-      },
-    });
-    exigences = axiosResponse.data;
+    const axiosResponse = await axios.get<Record<string, unknown>[]>(
+      '/api/exigences-nis2',
+      {
+        params: {
+          source,
+          cible,
+        },
+      }
+    );
+    exigences = axiosResponse.data.map((e) =>
+      fabriqueDExigence(source ?? 'NIS2', cible, e)
+    );
   };
 
   onMount(async () => {
