@@ -2,6 +2,7 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { clic } from '../directives/actions.svelte';
+  import ConteneurLarge from '../ui/ConteneurLarge.svelte';
   import Modale from '../ui/Modale.svelte';
   import {
     fabriqueDExigence,
@@ -13,15 +14,15 @@
     type ReferentielSelectionne,
   } from './exigence.type';
   import PanneauComparaison from './PanneauComparaison.svelte';
+  import { exigencesFiltrees } from './stores/exigencesFiltrees.store';
+  import { rechercheParCorrespondance } from './stores/rechercheParCorrespondance';
   import CelluleExigenceISO from './tableaux/CelluleExigenceISO.svelte';
   import CelluleExigenceNis2 from './tableaux/CelluleExigenceNis2.svelte';
   import CelluleExigencesISOCibles from './tableaux/CelluleExigencesISOCibles.svelte';
   import CelluleExigencesNIS2Cibles from './tableaux/CelluleExigencesNIS2Cibles.svelte';
   import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
   import TableauExigencesNIS2Simple from './tableaux/TableauExigencesNIS2Simple.svelte';
-  import ConteneurLarge from '../ui/ConteneurLarge.svelte';
-  import { rechercheParCorrespondance } from './stores/rechercheParCorrespondance';
-  import { derived } from 'svelte/store';
+  import { exigencesStore } from './stores/exigences.store';
 
   const {
     featureFlagNis2Observations,
@@ -57,6 +58,7 @@
     exigences = axiosResponse.data.map((e) =>
       fabriqueDExigence(source ?? 'NIS2', cible, e)
     );
+    $exigencesStore = exigences;
   };
   const optionsCorrespondances = [
     { value: 'NA', label: 'Non Applicable' },
@@ -71,10 +73,6 @@
       estBureau = e.matches;
     });
     estBureau = mql.matches;
-  });
-
-  const exigencesFiltrees = derived([rechercheParCorrespondance], () => {
-    return exigences.filter(rechercheParCorrespondance.ok);
   });
 
   $effect(() => {
