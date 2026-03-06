@@ -2,6 +2,7 @@
   import { clic } from '../../directives/actions.svelte';
   import Modale from '../../ui/Modale.svelte';
   import type { ReferentielSelectionne } from '../exigence.type';
+  import { etatPanneau } from '../stores/etatPanneau.store';
   import BoutonReinitialisation from './BoutonReinitialisation.svelte';
   import PanneauComparaison from './PanneauComparaison.svelte';
   import PanneauFiltres from './PanneauFiltres.svelte';
@@ -17,9 +18,6 @@
     sensComparaison = $bindable(),
     referentielSelectionne = $bindable(),
   }: Props = $props();
-
-  let menuComparaisonAffiche = $state(false);
-  let menuFiltresAffiche = $state(false);
 </script>
 
 <div class="panneau" class:bureau={estBureau}>
@@ -44,9 +42,9 @@
       icon-place="left"
       icon="arrow-left-right-line"
       kind="secondary"
-      use:clic={() => (menuComparaisonAffiche = true)}
+      use:clic={() => ($etatPanneau.menuComparaisonAffiche = true)}
     ></dsfr-button>
-    <Modale estOuverte={menuComparaisonAffiche}>
+    <Modale bind:estOuverte={$etatPanneau.menuComparaisonAffiche}>
       <h4>Comparer</h4>
       <PanneauComparaison
         bind:sensComparaison
@@ -57,7 +55,7 @@
         <dsfr-button
           label="Afficher le tableau"
           kind="primary"
-          use:clic={() => (menuComparaisonAffiche = false)}
+          use:clic={() => ($etatPanneau.menuComparaisonAffiche = false)}
         ></dsfr-button>
         <BoutonReinitialisation
           bind:referentielSelectionne
@@ -72,16 +70,16 @@
       icon-place="left"
       icon="filter-line"
       kind="secondary"
-      use:clic={() => (menuFiltresAffiche = true)}
+      use:clic={() => ($etatPanneau.menuFiltresAffiche = true)}
     ></dsfr-button>
-    <Modale estOuverte={menuFiltresAffiche}>
+    <Modale bind:estOuverte={$etatPanneau.menuFiltresAffiche}>
       <h4>Filtrer le tableau</h4>
       <PanneauFiltres cible={referentielSelectionne} {estBureau} />
       {#snippet actions()}
         <dsfr-button
           label="Afficher le tableau"
           kind="primary"
-          use:clic={() => (menuFiltresAffiche = false)}
+          use:clic={() => ($etatPanneau.menuFiltresAffiche = false)}
         ></dsfr-button>
         <BoutonReinitialisation
           bind:referentielSelectionne
