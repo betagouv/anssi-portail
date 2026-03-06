@@ -13,7 +13,7 @@ describe("Le mapper de données de l'API", () => {
       thematique: 'Gouvernance',
       objectifSecurite: "Assurer la sécurité des systèmes d'information",
       entitesCible: ['EntiteEssentielle', 'EntiteImportante'],
-      correspondance: {
+      correspondances: {
         ISO: { niveau: 'faible', exigences: [], observations: '' },
       },
     };
@@ -40,7 +40,7 @@ describe("Le mapper de données de l'API", () => {
       contenu: "Contenu de l'exigence 2",
       norme: 'ISO 27001',
       chapitre: '5.1',
-      correspondance: {
+      correspondances: {
         NIS2: { niveau: 'faible', exigences: [], observations: '' },
       },
     };
