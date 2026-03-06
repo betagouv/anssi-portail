@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Correspondance } from './exigence.type';
-  import { rechercheParCorrespondance } from './stores/rechercheParCorrespondance';
+  import type { Correspondance } from '../exigence.type';
+  import { rechercheParCorrespondance } from '../stores/rechercheParCorrespondance';
 
   const optionsCorrespondances = [
     { value: 'NA', label: 'Non Applicable' },
