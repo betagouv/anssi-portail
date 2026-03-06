@@ -25,7 +25,7 @@
   theme="sombre"
   cacheTags
   titre="Protéger ma collectivité contre les cyberattaques"
-  description="Toutes les collectivités sont exposées au risque de cyberattaques. En 2024, elles ont notamment représenté 17&nbsp;% des victimes de rançongiciels ou ransowmare."
+  description="Toutes les collectivités sont exposées au risque de cyberattaques. En 2025, elles ont notamment représenté 11&nbsp;% des victimes de rançongiciels ou ransowmare."
   cacheActions
   illustrationSource="/assets/images/personne-qui-cogite.svg"
   illustrationAlt=""
