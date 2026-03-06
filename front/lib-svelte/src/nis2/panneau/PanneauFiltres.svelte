@@ -1,6 +1,11 @@
 <script lang="ts">
-  import type { Correspondance } from '../exigence.type';
+  import type {
+    Correspondance,
+    ReferentielSelectionne,
+  } from '../exigence.type';
   import { rechercheParCorrespondance } from '../stores/rechercheParCorrespondance';
+
+  export let cible: ReferentielSelectionne | undefined = undefined;
 
   const optionsCorrespondances = [
     { value: 'NA', label: 'Non Applicable' },
@@ -11,14 +16,16 @@
 </script>
 
 <div class="panneau-filtres">
-  <dsfr-select
-    label="Correspondance"
-    placeholder="Sélectionner une option"
-    options={optionsCorrespondances}
-    value={$rechercheParCorrespondance ?? ''}
-    onvaluechanged={(e: CustomEvent) =>
-      ($rechercheParCorrespondance = e.detail)}
-  ></dsfr-select>
+  {#if cible}
+    <dsfr-select
+      label="Correspondance"
+      placeholder="Sélectionner une option"
+      options={optionsCorrespondances}
+      value={$rechercheParCorrespondance ?? ''}
+      onvaluechanged={(e: CustomEvent) =>
+        ($rechercheParCorrespondance = e.detail)}
+    ></dsfr-select>
+  {/if}
 </div>
 
 <style lang="scss">
