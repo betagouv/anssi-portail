@@ -4,7 +4,11 @@ import { rechercheParCorrespondance } from './rechercheParCorrespondance';
 
 export const exigencesFiltrees = derived(
   [exigencesStore, rechercheParCorrespondance],
-  ([$exigences]) => {
-    return $exigences.filter(rechercheParCorrespondance.ok);
-  }
+  ([$exigences, $rechercheParCorrespondance]) => ({
+    exigences: $exigences.filter(rechercheParCorrespondance.ok),
+    filtresActifs: !!$rechercheParCorrespondance,
+    reinitialise: () => {
+      rechercheParCorrespondance.reinitialise();
+    },
+  })
 );

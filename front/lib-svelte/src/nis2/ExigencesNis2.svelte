@@ -110,7 +110,7 @@
     <TableauCorrespondancesExigences
       titreColonneSource="Exigence NIS&nbsp;2"
       titreColonneCible="Référence ISO 27001/27002"
-      exigences={$exigencesFiltrees}
+      exigences={$exigencesFiltrees.exigences}
       {featureFlagNis2Observations}
       {chargement}
     >
@@ -126,7 +126,7 @@
     <TableauCorrespondancesExigences
       titreColonneSource="Référence ISO 27001/27002"
       titreColonneCible="Exigence NIS&nbsp;2"
-      exigences={$exigencesFiltrees}
+      exigences={$exigencesFiltrees.exigences}
       {featureFlagNis2Observations}
       {chargement}
     >
