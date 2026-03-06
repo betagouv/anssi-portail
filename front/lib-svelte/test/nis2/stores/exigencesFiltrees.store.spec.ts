@@ -10,8 +10,32 @@ describe('Le store des exigences filtrées', () => {
     rechercheParCorrespondance.reinitialise();
   });
 
+  it('sait réinitialiser les filtres utilsés', () => {
+    rechercheParCorrespondance.set('moyen');
+
+    get(exigencesFiltrees).reinitialise();
+
+    expect(get(rechercheParCorrespondance)).toBeUndefined();
+  });
+
+  describe('lorsque le filtre de correspondance', () => {
+    it("est valorisé, detecte qu'un filtre est actif", () => {
+      rechercheParCorrespondance.set('moyen');
+
+      const filtresActifs = get(exigencesFiltrees).filtresActifs;
+
+      expect(filtresActifs).toBeTruthy();
+    });
+
+    it("n'est pas valorisé, detecte qu'aucun filtre n'est actif", () => {
+      const filtresActifs = get(exigencesFiltrees).filtresActifs;
+
+      expect(filtresActifs).toBeFalsy();
+    });
+  });
+
   describe("sur application d'un filtre de correspondance", () => {
-    const exigences: Exigence[] = [
+    const exigencesDansLeStore: Exigence[] = [
       {
         reference: 'EX-01',
         contenu: "Contenu de l'exigence 1",
@@ -36,23 +60,23 @@ describe('Le store des exigences filtrées', () => {
       },
     ];
     it('conserve uniquement les exigences avec le même niveau de correspondances', () => {
-      exigencesStore.initialise(exigences);
+      exigencesStore.initialise(exigencesDansLeStore);
       rechercheParCorrespondance.set('moyen');
 
-      const resultats = get(exigencesFiltrees);
+      const { exigences } = get(exigencesFiltrees);
 
-      expect(resultats.length).toBe(1);
-      expect(resultats[0].reference).toBe('EX-02');
+      expect(exigences.length).toBe(1);
+      expect(exigences[0].reference).toBe('EX-02');
     });
 
     it("conserve tous les items en cas d'absence de besoins", () => {
-      exigencesStore.initialise(exigences);
+      exigencesStore.initialise(exigencesDansLeStore);
 
-      const resultats = get(exigencesFiltrees);
+      const { exigences } = get(exigencesFiltrees);
 
-      expect(resultats.length).toBe(2);
-      expect(resultats[0].reference).toBe('EX-01');
-      expect(resultats[1].reference).toBe('EX-02');
+      expect(exigences.length).toBe(2);
+      expect(exigences[0].reference).toBe('EX-01');
+      expect(exigences[1].reference).toBe('EX-02');
     });
   });
 });

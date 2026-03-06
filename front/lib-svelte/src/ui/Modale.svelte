@@ -59,6 +59,8 @@
     }
 
     .actions {
+      display: flex;
+      flex-direction: column;
       border-top: 1px solid var(--border-default-grey);
       padding: 16px;
     }

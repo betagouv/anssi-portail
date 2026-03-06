@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { clic } from '../directives/actions.svelte';
-  import type { ReferentielSelectionne } from './exigence.type';
+  import { clic } from '../../directives/actions.svelte';
+  import type { ReferentielSelectionne } from '../exigence.type';
+  import BoutonReinitialisation from './BoutonReinitialisation.svelte';
 
   type Props = {
     estBureau: boolean;
@@ -13,11 +14,6 @@
     sensComparaison = $bindable(),
     referentielSelectionne = $bindable(),
   }: Props = $props();
-
-  const reinitialise = async () => {
-    referentielSelectionne = undefined;
-    sensComparaison = 'NIS2_VERS_CIBLE';
-  };
 
   const inverseComparaison = () => {
     sensComparaison =
@@ -63,22 +59,22 @@
         id="referentielAutre"
         label=""
         value={referentielSelectionne}
-        onvaluechanged={(e: CustomEvent) => selectionneLeReferentiel(e.detail)}
+        onvaluechanged={(e: CustomEvent) => {
+          selectionneLeReferentiel(e.detail);
+        }}
         placeholder="Sélectionner"
         placeholderDisabled={false}
         options={[{ label: 'ISO 27001', value: 'ISO' }]}
       ></dsfr-select>
     </div>
   </div>
-  {#if referentielSelectionne || sensComparaison !== 'NIS2_VERS_CIBLE'}
-    <dsfr-button
-      label="Réinitialiser"
-      has-icon="true"
-      icon-place="left"
-      icon="close-circle-line"
-      kind="tertiary"
-      use:clic={reinitialise}
-    ></dsfr-button>
+  {#if estBureau}
+    <div class="actions">
+      <BoutonReinitialisation
+        bind:referentielSelectionne
+        bind:sensComparaison
+      />
+    </div>
   {/if}
 </div>
 
@@ -119,8 +115,8 @@
         }
       }
 
-      .conteneur + dsfr-button {
-        align-items: self-end;
+      .conteneur + .actions {
+        align-self: self-end;
         grid-column: 3 / span 2;
       }
     }

@@ -1,28 +1,24 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { clic } from '../directives/actions.svelte';
   import ConteneurLarge from '../ui/ConteneurLarge.svelte';
-  import Modale from '../ui/Modale.svelte';
   import {
     fabriqueDExigence,
-    type Correspondance,
     type Exigence,
     type ExigenceISO,
     type ExigenceNis2,
     type Referentiel,
     type ReferentielSelectionne,
   } from './exigence.type';
-  import PanneauComparaison from './PanneauComparaison.svelte';
+  import Panneau from './panneau/Panneau.svelte';
+  import { exigencesStore } from './stores/exigences.store';
   import { exigencesFiltrees } from './stores/exigencesFiltrees.store';
-  import { rechercheParCorrespondance } from './stores/rechercheParCorrespondance';
   import CelluleExigenceISO from './tableaux/CelluleExigenceISO.svelte';
   import CelluleExigenceNis2 from './tableaux/CelluleExigenceNis2.svelte';
   import CelluleExigencesISOCibles from './tableaux/CelluleExigencesISOCibles.svelte';
   import CelluleExigencesNIS2Cibles from './tableaux/CelluleExigencesNIS2Cibles.svelte';
   import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
   import TableauExigencesNIS2Simple from './tableaux/TableauExigencesNIS2Simple.svelte';
-  import { exigencesStore } from './stores/exigences.store';
 
   const {
     featureFlagNis2Observations,
@@ -39,7 +35,6 @@
     undefined
   );
   let estBureau = $state(false);
-  let menuComparaisonAffiche = $state(false);
   let chargement = $state(false);
 
   const recupereLesExigences = async ({
@@ -60,12 +55,6 @@
     );
     $exigencesStore = exigences;
   };
-  const optionsCorrespondances = [
-    { value: 'NA', label: 'Non Applicable' },
-    { value: 'faible', label: 'Faible / Nulle' },
-    { value: 'moyen', label: 'Moyenne' },
-    { value: 'élevé', label: 'Élevée' },
-  ] satisfies { value: Correspondance['niveau']; label: string }[];
 
   onMount(async () => {
     const mql = window.matchMedia('(min-width: 992px)');
@@ -110,44 +99,7 @@
   {/if}
   <div class="entete">
     <h2>Liste des exigences NIS 2</h2>
-    {#if estBureau}
-      <PanneauComparaison
-        bind:sensComparaison
-        bind:referentielSelectionne
-        estBureau={true}
-      />
-    {:else}
-      <div class="comparaison-libelle">
-        <p class="texte-standard-md">Comparer les exigences NIS 2</p>
-        <p class="texte-mention-xs">
-          Comparez les exigences NIS 2 avec des référentiels déjà en place au
-          sein de votre organisation.
-        </p>
-      </div>
-      <dsfr-button
-        label="Comparer"
-        has-icon
-        icon-place="left"
-        icon="arrow-left-right-line"
-        kind="secondary"
-        use:clic={() => (menuComparaisonAffiche = true)}
-      ></dsfr-button>
-      <Modale bind:estOuverte={menuComparaisonAffiche}>
-        <h4>Comparer</h4>
-        <PanneauComparaison
-          bind:sensComparaison
-          bind:referentielSelectionne
-          estBureau={false}
-        />
-        {#snippet actions()}
-          <dsfr-button
-            label="Afficher le tableau"
-            kind="primary"
-            use:clic={() => (menuComparaisonAffiche = false)}
-          ></dsfr-button>
-        {/snippet}
-      </Modale>
-    {/if}
+    <Panneau bind:referentielSelectionne bind:sensComparaison {estBureau} />
   </div>
   {#if mode === 'LISTE'}
     <TableauExigencesNIS2Simple
@@ -155,18 +107,10 @@
       {chargement}
     />
   {:else if mode === 'COMPARAISON_NIS2_ISO'}
-    <dsfr-select
-      label="Correspondance"
-      placeholder="Sélectionner une option"
-      options={optionsCorrespondances}
-      value={$rechercheParCorrespondance}
-      onvaluechanged={(e: CustomEvent) =>
-        ($rechercheParCorrespondance = e.detail)}
-    ></dsfr-select>
     <TableauCorrespondancesExigences
       titreColonneSource="Exigence NIS&nbsp;2"
       titreColonneCible="Référence ISO 27001/27002"
-      exigences={$exigencesFiltrees}
+      exigences={$exigencesFiltrees.exigences}
       {featureFlagNis2Observations}
       {chargement}
     >
@@ -179,18 +123,10 @@
       {/snippet}
     </TableauCorrespondancesExigences>
   {:else}
-    <dsfr-select
-      label="Correspondance"
-      placeholder="Sélectionner une option"
-      options={optionsCorrespondances}
-      value={$rechercheParCorrespondance}
-      onvaluechanged={(e: CustomEvent) =>
-        ($rechercheParCorrespondance = e.detail)}
-    ></dsfr-select>
     <TableauCorrespondancesExigences
       titreColonneSource="Référence ISO 27001/27002"
       titreColonneCible="Exigence NIS&nbsp;2"
-      exigences={$exigencesFiltrees}
+      exigences={$exigencesFiltrees.exigences}
       {featureFlagNis2Observations}
       {chargement}
     >
@@ -220,17 +156,6 @@
   .entete {
     margin: 0 0 24px;
     padding: 0 0 16px;
-  }
-
-  .comparaison-libelle {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    margin-bottom: 16px;
-
-    p {
-      margin: 0;
-    }
   }
 
   :global(table.chargement) {
