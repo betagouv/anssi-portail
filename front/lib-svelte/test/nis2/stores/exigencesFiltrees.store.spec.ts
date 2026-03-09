@@ -5,6 +5,7 @@ import { exigencesFiltrees } from '../../../src/nis2/stores/exigencesFiltrees.st
 import { rechercheParCorrespondance } from '../../../src/nis2/stores/rechercheParCorrespondance';
 import type { Exigence } from '../../../src/nis2/exigence.type';
 import { rechercheParEntiteNis2 } from '../../../src/nis2/stores/rechercheParEntiteNis2';
+import { rechercheParObjectifNis2 } from '../../../src/nis2/stores/rechercheParObjectifNis2';
 
 describe('Le store des exigences filtrées', () => {
   beforeEach(() => {
@@ -86,6 +87,24 @@ describe('Le store des exigences filtrées', () => {
   describe('lorsque le filtre des entités NIS 2', () => {
     it("est valorisé, detecte qu'un filtre est actif", () => {
       rechercheParEntiteNis2.set('EntiteImportante');
+
+      const filtresActifs = get(exigencesFiltrees).filtresActifs;
+
+      expect(filtresActifs).toBeTruthy();
+    });
+
+    it("n'est pas valorisé, detecte qu'aucun filtre n'est actif", () => {
+      const filtresActifs = get(exigencesFiltrees).filtresActifs;
+
+      expect(filtresActifs).toBeFalsy();
+    });
+  });
+
+  describe('lorsque le filtre des objectifs de sécurité NIS 2', () => {
+    it("est valorisé, detecte qu'un filtre est actif", () => {
+      rechercheParObjectifNis2.set(
+        "Objectif de sécurité 3: Maîtrise de l'écosystème"
+      );
 
       const filtresActifs = get(exigencesFiltrees).filtresActifs;
 
