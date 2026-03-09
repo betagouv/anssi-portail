@@ -1,7 +1,7 @@
 <script lang="ts">
   import { clic } from '../../directives/actions.svelte';
   import Modale from '../../ui/Modale.svelte';
-  import type { ReferentielSelectionne } from '../exigence.type';
+  import type { Referentiel, ReferentielSelectionne } from '../exigence.type';
   import { etatPanneau } from '../stores/etatPanneau.store';
   import BoutonReinitialisation from './BoutonReinitialisation.svelte';
   import PanneauComparaison from './PanneauComparaison.svelte';
@@ -10,11 +10,13 @@
   type Props = {
     estBureau: boolean;
     sensComparaison: 'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2';
+    source: Referentiel;
     referentielSelectionne: ReferentielSelectionne | undefined;
   };
 
   let {
     estBureau,
+    source,
     sensComparaison = $bindable(),
     referentielSelectionne = $bindable(),
   }: Props = $props();
@@ -27,7 +29,7 @@
       bind:referentielSelectionne
       estBureau={true}
     />
-    <PanneauFiltres cible={referentielSelectionne} {estBureau} />
+    <PanneauFiltres {source} cible={referentielSelectionne} {estBureau} />
   {:else}
     <div class="comparaison-libelle">
       <p class="texte-standard-md">Comparer les exigences NIS 2</p>
@@ -74,7 +76,7 @@
     ></dsfr-button>
     <Modale bind:estOuverte={$etatPanneau.menuFiltresAffiche}>
       <h4>Filtrer le tableau</h4>
-      <PanneauFiltres cible={referentielSelectionne} {estBureau} />
+      <PanneauFiltres {source} cible={referentielSelectionne} {estBureau} />
       {#snippet actions()}
         <dsfr-button
           label="Afficher le tableau"
