@@ -4,8 +4,10 @@
     Referentiel,
     ReferentielSelectionne,
   } from '../exigence.type';
+  import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
   import { rechercheParCorrespondance } from '../stores/rechercheParCorrespondance';
   import { rechercheParEntiteNis2 } from '../stores/rechercheParEntiteNis2';
+  import { rechercheParObjectifNis2 } from '../stores/rechercheParObjectifNis2';
 
   type Props = {
     estBureau: boolean;
@@ -34,6 +36,14 @@
       ]}
       value={$rechercheParEntiteNis2 ?? ''}
       onvaluechanged={(e: CustomEvent) => ($rechercheParEntiteNis2 = e.detail)}
+    ></dsfr-select>
+    <dsfr-select
+      label="Objectif de sécurité"
+      placeholder="Sélectionner une option"
+      options={$exigencesFiltrees.objectifs}
+      value={$rechercheParObjectifNis2 ?? ''}
+      onvaluechanged={(e: CustomEvent) =>
+        ($rechercheParObjectifNis2 = e.detail)}
     ></dsfr-select>
   {/if}
   {#if cible}
