@@ -99,11 +99,18 @@
   {/if}
   <div class="entete">
     <h2>Liste des exigences NIS 2</h2>
-    <Panneau bind:referentielSelectionne bind:sensComparaison {estBureau} />
+    <Panneau
+      source={mode === 'COMPARAISON_NIS2_ISO'
+        ? 'NIS2'
+        : (referentielSelectionne ?? 'NIS2')}
+      bind:referentielSelectionne
+      bind:sensComparaison
+      {estBureau}
+    />
   </div>
   {#if mode === 'LISTE'}
     <TableauExigencesNIS2Simple
-      exigencesNis2={exigences as ExigenceNis2[]}
+      exigencesNis2={$exigencesFiltrees.exigences as ExigenceNis2[]}
       {chargement}
     />
   {:else if mode === 'COMPARAISON_NIS2_ISO'}

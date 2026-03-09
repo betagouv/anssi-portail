@@ -4,18 +4,20 @@ import { exigencesStore } from '../../../src/nis2/stores/exigences.store';
 import { exigencesFiltrees } from '../../../src/nis2/stores/exigencesFiltrees.store';
 import { rechercheParCorrespondance } from '../../../src/nis2/stores/rechercheParCorrespondance';
 import type { Exigence } from '../../../src/nis2/exigence.type';
+import { rechercheParEntiteNis2 } from '../../../src/nis2/stores/rechercheParEntiteNis2';
 
 describe('Le store des exigences filtrées', () => {
   beforeEach(() => {
-    rechercheParCorrespondance.reinitialise();
+    get(exigencesFiltrees).reinitialise();
   });
 
-  it('sait réinitialiser les filtres utilsés', () => {
+  it('sait réinitialiser les filtres utilisés', () => {
     rechercheParCorrespondance.set('moyen');
 
     get(exigencesFiltrees).reinitialise();
 
     expect(get(rechercheParCorrespondance)).toBeUndefined();
+    expect(get(rechercheParEntiteNis2)).toBeUndefined();
   });
 
   describe('lorsque le filtre de correspondance', () => {
@@ -59,6 +61,7 @@ describe('Le store des exigences filtrées', () => {
         },
       },
     ];
+
     it('conserve uniquement les exigences avec le même niveau de correspondances', () => {
       exigencesStore.initialise(exigencesDansLeStore);
       rechercheParCorrespondance.set('moyen');
@@ -77,6 +80,22 @@ describe('Le store des exigences filtrées', () => {
       expect(exigences.length).toBe(2);
       expect(exigences[0].reference).toBe('EX-01');
       expect(exigences[1].reference).toBe('EX-02');
+    });
+  });
+
+  describe('lorsque le filtre des entités NIS 2', () => {
+    it("est valorisé, detecte qu'un filtre est actif", () => {
+      rechercheParEntiteNis2.set('EntiteImportante');
+
+      const filtresActifs = get(exigencesFiltrees).filtresActifs;
+
+      expect(filtresActifs).toBeTruthy();
+    });
+
+    it("n'est pas valorisé, detecte qu'aucun filtre n'est actif", () => {
+      const filtresActifs = get(exigencesFiltrees).filtresActifs;
+
+      expect(filtresActifs).toBeFalsy();
     });
   });
 });

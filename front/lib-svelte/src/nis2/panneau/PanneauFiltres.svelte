@@ -1,16 +1,19 @@
 <script lang="ts">
   import type {
     Correspondance,
+    Referentiel,
     ReferentielSelectionne,
   } from '../exigence.type';
   import { rechercheParCorrespondance } from '../stores/rechercheParCorrespondance';
+  import { rechercheParEntiteNis2 } from '../stores/rechercheParEntiteNis2';
 
   type Props = {
     estBureau: boolean;
+    source: Referentiel;
     cible: ReferentielSelectionne | undefined;
   };
 
-  const { cible, estBureau }: Props = $props();
+  const { source, cible, estBureau }: Props = $props();
 
   const optionsCorrespondances = [
     { value: 'NA', label: 'Non Applicable' },
@@ -21,6 +24,18 @@
 </script>
 
 <div class="panneau-filtres" class:bureau={estBureau}>
+  {#if source === 'NIS2'}
+    <dsfr-select
+      label="Type d'entité"
+      placeholder="Sélectionner une option"
+      options={[
+        { value: 'EntiteEssentielle', label: 'Entité essentielle' },
+        { value: 'EntiteImportante', label: 'Entité importante' },
+      ]}
+      value={$rechercheParEntiteNis2 ?? ''}
+      onvaluechanged={(e: CustomEvent) => ($rechercheParEntiteNis2 = e.detail)}
+    ></dsfr-select>
+  {/if}
   {#if cible}
     <dsfr-select
       label="Correspondance"
