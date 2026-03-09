@@ -6,6 +6,7 @@ import { rechercheParCorrespondance } from '../../../src/nis2/stores/recherchePa
 import type { Exigence } from '../../../src/nis2/exigence.type';
 import { rechercheParEntiteNis2 } from '../../../src/nis2/stores/rechercheParEntiteNis2';
 import { rechercheParObjectifNis2 } from '../../../src/nis2/stores/rechercheParObjectifNis2';
+import { rechercheParThematiqueNis2 } from '../../../src/nis2/stores/rechercheParThematiqueNis2';
 
 describe('Le store des exigences filtrées', () => {
   beforeEach(() => {
@@ -105,6 +106,22 @@ describe('Le store des exigences filtrées', () => {
       rechercheParObjectifNis2.set(
         "Objectif de sécurité 3: Maîtrise de l'écosystème"
       );
+
+      const filtresActifs = get(exigencesFiltrees).filtresActifs;
+
+      expect(filtresActifs).toBeTruthy();
+    });
+
+    it("n'est pas valorisé, detecte qu'aucun filtre n'est actif", () => {
+      const filtresActifs = get(exigencesFiltrees).filtresActifs;
+
+      expect(filtresActifs).toBeFalsy();
+    });
+  });
+
+  describe('lorsque le filtre des thématiques NIS 2', () => {
+    it("est valorisé, detecte qu'un filtre est actif", () => {
+      rechercheParThematiqueNis2.set('Gouvernance');
 
       const filtresActifs = get(exigencesFiltrees).filtresActifs;
 

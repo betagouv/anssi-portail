@@ -8,6 +8,7 @@
   import { rechercheParCorrespondance } from '../stores/rechercheParCorrespondance';
   import { rechercheParEntiteNis2 } from '../stores/rechercheParEntiteNis2';
   import { rechercheParObjectifNis2 } from '../stores/rechercheParObjectifNis2';
+  import { rechercheParThematiqueNis2 } from '../stores/rechercheParThematiqueNis2';
 
   type Props = {
     estBureau: boolean;
@@ -44,6 +45,14 @@
       value={$rechercheParObjectifNis2 ?? ''}
       onvaluechanged={(e: CustomEvent) =>
         ($rechercheParObjectifNis2 = e.detail)}
+    ></dsfr-select>
+    <dsfr-select
+      label="Thématique"
+      placeholder="Sélectionner une option"
+      options={$exigencesFiltrees.thematiques}
+      value={$rechercheParThematiqueNis2 ?? ''}
+      onvaluechanged={(e: CustomEvent) =>
+        ($rechercheParThematiqueNis2 = e.detail)}
     ></dsfr-select>
   {/if}
   {#if cible}
