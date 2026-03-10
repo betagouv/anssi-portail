@@ -65,6 +65,13 @@ export class EntrepotExigenceGrist
       configGrist.dureeCacheEnSecondes()
     );
     this.croisements = {
+      AE: {
+        table: '',
+        champs: [],
+        AE: undefined,
+        NIS2: undefined,
+        ISO: undefined,
+      },
       ISO: {
         table: 'ISO_27001_27002_2022',
         champs: [
@@ -73,6 +80,7 @@ export class EntrepotExigenceGrist
           'source.Norme',
           'source.Chapitre',
         ],
+        AE: undefined,
         ISO: undefined,
         NIS2: {
           nomTableAssociation: 'Croisement_ISO_NIS2',
@@ -89,6 +97,7 @@ export class EntrepotExigenceGrist
           'source.Thematique',
           'source.EIEE',
         ],
+        AE: undefined,
         NIS2: undefined,
         ISO: {
           nomTableAssociation: 'Croisement_NIS2_ISO',
