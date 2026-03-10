@@ -5,6 +5,7 @@
   import {
     fabriqueDExigence,
     type Exigence,
+    type ExigenceAE,
     type ExigenceISO,
     type ExigenceNis2,
     type Referentiel,
@@ -13,10 +14,11 @@
   import Panneau from './panneau/Panneau.svelte';
   import { exigencesStore } from './stores/exigences.store';
   import { exigencesFiltrees } from './stores/exigencesFiltrees.store';
+  import CelluleExigenceAE from './tableaux/CelluleExigenceAE.svelte';
   import CelluleExigenceISO from './tableaux/CelluleExigenceISO.svelte';
   import CelluleExigenceNis2 from './tableaux/CelluleExigenceNis2.svelte';
   import CelluleExigencesISOCibles from './tableaux/CelluleExigencesISOCibles.svelte';
-  import CelluleExigencesNIS2Cibles from './tableaux/CelluleSimpleExigencesCibles.svelte';
+  import CelluleSimpleExigencesCibles from './tableaux/CelluleSimpleExigencesCibles.svelte';
   import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
   import TableauExigencesNIS2Simple from './tableaux/TableauExigencesNIS2Simple.svelte';
 
@@ -28,9 +30,9 @@
   let sensComparaison = $state<'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2'>(
     'NIS2_VERS_CIBLE'
   );
-  let mode = $state<'LISTE' | 'COMPARAISON_NIS2_ISO' | 'COMPARAISON_ISO_NIS2'>(
-    'LISTE'
-  );
+  type Comparaison = `COMPARAISON_${Referentiel}_${Referentiel}`;
+  let mode = $state<'LISTE' | Comparaison>('LISTE');
+
   let referentielSelectionne = $state<ReferentielSelectionne | undefined>(
     undefined
   );
@@ -81,8 +83,8 @@
       } else {
         mode =
           sensComparaison === 'NIS2_VERS_CIBLE'
-            ? 'COMPARAISON_NIS2_ISO'
-            : 'COMPARAISON_ISO_NIS2';
+            ? `COMPARAISON_NIS2_${referentielSelectionne}`
+            : `COMPARAISON_${referentielSelectionne}_NIS2`;
       }
     };
     charge();
@@ -129,7 +131,7 @@
         <CelluleExigencesISOCibles exigences={exigencesCibles} />
       {/snippet}
     </TableauCorrespondancesExigences>
-  {:else}
+  {:else if mode === 'COMPARAISON_ISO_NIS2'}
     <TableauCorrespondancesExigences
       titreColonneSource="Référence ISO 27001/27002"
       titreColonneCible="Exigence NIS&nbsp;2"
@@ -142,7 +144,39 @@
         <CelluleExigenceISO exigence={e} />
       {/snippet}
       {#snippet colonneCible(exigences)}
-        <CelluleExigencesNIS2Cibles {exigences} />
+        <CelluleSimpleExigencesCibles {exigences} />
+      {/snippet}
+    </TableauCorrespondancesExigences>
+  {:else if mode === 'COMPARAISON_NIS2_AE'}
+    <TableauCorrespondancesExigences
+      titreColonneSource="Exigence NIS&nbsp;2"
+      titreColonneCible="Référence AE 2690"
+      exigences={$exigencesFiltrees.exigences}
+      {featureFlagNis2Observations}
+      {chargement}
+    >
+      {#snippet colonneSource(exigenceSource)}
+        {@const e = exigenceSource as ExigenceNis2}
+        <CelluleExigenceNis2 exigence={e} />
+      {/snippet}
+      {#snippet colonneCible(exigences)}
+        <CelluleSimpleExigencesCibles {exigences} />
+      {/snippet}
+    </TableauCorrespondancesExigences>
+  {:else if mode === 'COMPARAISON_AE_NIS2'}
+    <TableauCorrespondancesExigences
+      titreColonneSource="Référence AE 2690"
+      titreColonneCible="Exigence NIS&nbsp;2"
+      exigences={$exigencesFiltrees.exigences}
+      {featureFlagNis2Observations}
+      {chargement}
+    >
+      {#snippet colonneSource(exigenceSource)}
+        {@const e = exigenceSource as ExigenceAE}
+        <CelluleExigenceAE exigence={e} />
+      {/snippet}
+      {#snippet colonneCible(exigences)}
+        <CelluleSimpleExigencesCibles {exigences} />
       {/snippet}
     </TableauCorrespondancesExigences>
   {/if}
