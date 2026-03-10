@@ -100,7 +100,7 @@
   <div class="entete">
     <h2>Liste des exigences NIS 2</h2>
     <Panneau
-      source={mode === 'COMPARAISON_NIS2_ISO'
+      source={sensComparaison === 'NIS2_VERS_CIBLE'
         ? 'NIS2'
         : (referentielSelectionne ?? 'NIS2')}
       bind:referentielSelectionne
