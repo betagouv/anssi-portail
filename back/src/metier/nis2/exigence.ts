@@ -61,7 +61,9 @@ export class ExigenceNIS2 extends Exigence {
 export class ExigenceISO extends Exigence {
   norme: string;
   chapitre: string;
-  correspondances: Partial<Record<Referentiel, Correspondance>>;
+  correspondances: {
+    NIS2: Correspondance;
+  };
 
   constructor(parametres: {
     reference: string;
@@ -80,7 +82,9 @@ export class ExigenceISO extends Exigence {
 }
 
 export class ExigenceAE extends Exigence {
-  correspondances: Partial<Record<Referentiel, Correspondance>>;
+  correspondances: {
+    NIS2: Correspondance;
+  };
 
   constructor(parametres: {
     reference: string;
