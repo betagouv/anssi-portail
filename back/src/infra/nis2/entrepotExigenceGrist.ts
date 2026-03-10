@@ -4,6 +4,7 @@ import {
   CategorieEntite,
   Correspondance,
   Exigence,
+  ExigenceAE,
   ExigenceISO,
   ExigenceNIS2,
   Referentiel,
@@ -121,6 +122,7 @@ export class EntrepotExigenceGrist
     referentiel: 'ISO',
     cible?: Referentiel
   ): Promise<ExigenceISO[]>;
+  parReferentiel(referentiel: 'AE', cible?: Referentiel): Promise<ExigenceAE[]>;
   async parReferentiel(
     referentiel: Referentiel,
     cible?: Referentiel
@@ -173,6 +175,16 @@ export class EntrepotExigenceGrist
           reference: exigenceGrist.fields.Reference,
           norme: exigenceGrist.fields.Norme ?? '',
           chapitre: exigenceGrist.fields.Chapitre ?? '',
+          contenu: exigenceGrist.fields.Contenu,
+          correspondance: fabriqueCorrespondance(exigenceGrist),
+        });
+      });
+    }
+
+    if (referentiel === 'AE') {
+      return exigences.records.map((exigenceGrist) => {
+        return new ExigenceAE({
+          reference: exigenceGrist.fields.Reference,
           contenu: exigenceGrist.fields.Contenu,
           correspondance: fabriqueCorrespondance(exigenceGrist),
         });

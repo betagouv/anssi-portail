@@ -1,4 +1,10 @@
-import { Exigence, ExigenceISO, ExigenceNIS2, Referentiel } from './exigence';
+import {
+  Exigence,
+  ExigenceAE,
+  ExigenceISO,
+  ExigenceNIS2,
+  Referentiel,
+} from './exigence';
 
 export interface EntrepotExigence {
   parReferentiel(
@@ -9,6 +15,10 @@ export interface EntrepotExigence {
     referentiel: 'ISO',
     referentielCible?: Referentiel
   ): Promise<ExigenceISO[]>;
+  parReferentiel(
+    referentiel: 'AE',
+    referentielCible?: Referentiel
+  ): Promise<ExigenceAE[]>;
   parReferentiel(
     referentiel: Referentiel,
     referentielCible?: Referentiel
