@@ -8,6 +8,7 @@ import { rechercheParEntiteNis2 } from '../../../src/nis2/stores/rechercheParEnt
 import { rechercheParObjectifNis2 } from '../../../src/nis2/stores/rechercheParObjectifNis2';
 import { rechercheParThematiqueNis2 } from '../../../src/nis2/stores/rechercheParThematiqueNis2';
 import {
+  exigenceISODeNiveauEleve,
   exigenceNIS2DeNiveauEleve,
   exigenceNIS2DeNiveauFaible,
 } from '../objetsPretsALEmploi';
@@ -20,11 +21,24 @@ describe('Le store des exigences filtrées', () => {
 
   it('sait réinitialiser les filtres utilisés', () => {
     rechercheParCorrespondance.set('moyen');
+    rechercheParEntiteNis2.set('EntiteEssentielle');
+    rechercheParObjectifNis2.set('Un objectif');
+    rechercheParThematiqueNis2.set('une thématique');
+    rechercheParNormeISO.set('ISO 27001');
 
     get(exigencesFiltrees).reinitialise();
 
     expect(get(rechercheParCorrespondance)).toBeUndefined();
     expect(get(rechercheParEntiteNis2)).toBeUndefined();
+    expect(get(rechercheParObjectifNis2)).toBeUndefined();
+    expect(get(rechercheParThematiqueNis2)).toBeUndefined();
+    expect(get(rechercheParNormeISO)).toBeUndefined();
+  });
+
+  it("n'est pas valorisé, detecte qu'aucun filtre n'est actif", () => {
+    const filtresActifs = get(exigencesFiltrees).filtresActifs;
+
+    expect(filtresActifs).toBeFalsy();
   });
 
   describe('lorsque le filtre de correspondance', () => {
@@ -36,27 +50,19 @@ describe('Le store des exigences filtrées', () => {
       expect(filtresActifs).toBeTruthy();
     });
 
-    it("n'est pas valorisé, detecte qu'aucun filtre n'est actif", () => {
-      const filtresActifs = get(exigencesFiltrees).filtresActifs;
-
-      expect(filtresActifs).toBeFalsy();
-    });
-  });
-
-  describe("sur application d'un filtre de correspondance", () => {
-    const exigencesDansLeStore: Exigence[] = [
-      exigenceNIS2DeNiveauFaible(),
-      {
-        ...exigenceNIS2DeNiveauEleve(),
-        correspondance: {
-          niveau: 'moyen',
-          exigences: [],
-          observations: '',
+    it('est appliqué, conserve uniquement les exigences avec le même niveau de correspondances', () => {
+      const exigencesDansLeStore: Exigence[] = [
+        exigenceNIS2DeNiveauFaible(),
+        {
+          ...exigenceNIS2DeNiveauEleve(),
+          correspondance: {
+            niveau: 'moyen',
+            exigences: [],
+            observations: '',
+          },
         },
-      },
-    ];
+      ];
 
-    it('conserve uniquement les exigences avec le même niveau de correspondances', () => {
       exigencesStore.initialise(exigencesDansLeStore);
       rechercheParCorrespondance.set('moyen');
 
@@ -64,16 +70,6 @@ describe('Le store des exigences filtrées', () => {
 
       expect(exigences.length).toBe(1);
       expect(exigences[0].reference).toBe('EX-02');
-    });
-
-    it("conserve tous les items en cas d'absence de besoins", () => {
-      exigencesStore.initialise(exigencesDansLeStore);
-
-      const { exigences } = get(exigencesFiltrees);
-
-      expect(exigences.length).toBe(2);
-      expect(exigences[0].reference).toBe('EX-01');
-      expect(exigences[1].reference).toBe('EX-02');
     });
   });
 
@@ -86,10 +82,19 @@ describe('Le store des exigences filtrées', () => {
       expect(filtresActifs).toBeTruthy();
     });
 
-    it("n'est pas valorisé, detecte qu'aucun filtre n'est actif", () => {
-      const filtresActifs = get(exigencesFiltrees).filtresActifs;
+    it("est appliqué, conserve uniquement les exigences avec le même type d'entité", () => {
+      const exigencesDansLeStore: Exigence[] = [
+        exigenceNIS2DeNiveauFaible(),
+        exigenceNIS2DeNiveauEleve(),
+      ];
 
-      expect(filtresActifs).toBeFalsy();
+      exigencesStore.initialise(exigencesDansLeStore);
+      rechercheParEntiteNis2.set('EntiteImportante');
+
+      const { exigences } = get(exigencesFiltrees);
+
+      expect(exigences.length).toBe(1);
+      expect(exigences[0].reference).toBe('EX-02');
     });
   });
 
@@ -104,10 +109,21 @@ describe('Le store des exigences filtrées', () => {
       expect(filtresActifs).toBeTruthy();
     });
 
-    it("n'est pas valorisé, detecte qu'aucun filtre n'est actif", () => {
-      const filtresActifs = get(exigencesFiltrees).filtresActifs;
+    it('est appliqué, conserve uniquement les exigences avec le même objectif de sécurité', () => {
+      const exigencesDansLeStore: Exigence[] = [
+        exigenceNIS2DeNiveauFaible(),
+        exigenceNIS2DeNiveauEleve(),
+      ];
 
-      expect(filtresActifs).toBeFalsy();
+      exigencesStore.initialise(exigencesDansLeStore);
+      rechercheParObjectifNis2.set(
+        "Objectif de sécurité 3: Maîtrise de l'écosystème"
+      );
+
+      const { exigences } = get(exigencesFiltrees);
+
+      expect(exigences.length).toBe(1);
+      expect(exigences[0].reference).toBe('EX-02');
     });
   });
 
@@ -120,10 +136,19 @@ describe('Le store des exigences filtrées', () => {
       expect(filtresActifs).toBeTruthy();
     });
 
-    it("n'est pas valorisé, detecte qu'aucun filtre n'est actif", () => {
-      const filtresActifs = get(exigencesFiltrees).filtresActifs;
+    it('est appliqué, conserve uniquement les exigences avec la même thématique', () => {
+      const exigencesDansLeStore: Exigence[] = [
+        exigenceNIS2DeNiveauFaible(),
+        exigenceNIS2DeNiveauEleve(),
+      ];
 
-      expect(filtresActifs).toBeFalsy();
+      exigencesStore.initialise(exigencesDansLeStore);
+      rechercheParThematiqueNis2.set('Recensement');
+
+      const { exigences } = get(exigencesFiltrees);
+
+      expect(exigences.length).toBe(1);
+      expect(exigences[0].reference).toBe('EX-02');
     });
   });
 
@@ -134,6 +159,25 @@ describe('Le store des exigences filtrées', () => {
       const filtresActifs = get(exigencesFiltrees).filtresActifs;
 
       expect(filtresActifs).toBeTruthy();
+    });
+
+    it('est appliqué, conserve uniquement les exigences avec la même norme', () => {
+      const exigencesDansLeStore: Exigence[] = [
+        exigenceISODeNiveauEleve(),
+        {
+          ...exigenceISODeNiveauEleve(),
+          reference: '5.2 EX-02',
+          norme: 'ISO 27002',
+        },
+      ];
+
+      exigencesStore.initialise(exigencesDansLeStore);
+      rechercheParNormeISO.set('ISO 27002');
+
+      const { exigences } = get(exigencesFiltrees);
+
+      expect(exigences.length).toBe(1);
+      expect(exigences[0].reference).toBe('5.2 EX-02');
     });
   });
 });
