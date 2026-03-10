@@ -7,6 +7,10 @@ import type { Exigence } from '../../../src/nis2/exigence.type';
 import { rechercheParEntiteNis2 } from '../../../src/nis2/stores/rechercheParEntiteNis2';
 import { rechercheParObjectifNis2 } from '../../../src/nis2/stores/rechercheParObjectifNis2';
 import { rechercheParThematiqueNis2 } from '../../../src/nis2/stores/rechercheParThematiqueNis2';
+import {
+  exigenceNIS2DeNiveauEleve,
+  exigenceNIS2DeNiveauFaible,
+} from '../objetsPretsALEmploi';
 
 describe('Le store des exigences filtrées', () => {
   beforeEach(() => {
@@ -40,22 +44,9 @@ describe('Le store des exigences filtrées', () => {
 
   describe("sur application d'un filtre de correspondance", () => {
     const exigencesDansLeStore: Exigence[] = [
+      exigenceNIS2DeNiveauFaible(),
       {
-        reference: 'EX-01',
-        contenu: "Contenu de l'exigence 1",
-        norme: 'ISO 27001',
-        chapitre: '5.1',
-        correspondance: {
-          niveau: 'faible',
-          exigences: [],
-          observations: '',
-        },
-      },
-      {
-        reference: 'EX-02',
-        contenu: "Contenu de l'exigence 2",
-        norme: 'ISO 27001',
-        chapitre: '5.2',
+        ...exigenceNIS2DeNiveauEleve(),
         correspondance: {
           niveau: 'moyen',
           exigences: [],
