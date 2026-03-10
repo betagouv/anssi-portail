@@ -64,7 +64,10 @@
         }}
         placeholder="Sélectionner"
         placeholderDisabled={false}
-        options={[{ label: 'ISO 27001', value: 'ISO' }]}
+        options={[
+          { label: 'ISO 27001', value: 'ISO' },
+          { label: 'AE 2690', value: 'AE' },
+        ]}
       ></dsfr-select>
     </div>
   </div>

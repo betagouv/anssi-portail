@@ -1,6 +1,6 @@
 export type CategorieEntite = 'EntiteEssentielle' | 'EntiteImportante';
 
-export type Referentiel = 'NIS2' | 'ISO';
+export type Referentiel = 'NIS2' | 'ISO' | 'AE';
 export type ReferentielSelectionne = Exclude<Referentiel, 'NIS2'>;
 
 export type ExigenceComparee = {
