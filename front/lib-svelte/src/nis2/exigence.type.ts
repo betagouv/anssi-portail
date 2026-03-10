@@ -32,7 +32,11 @@ export interface ExigenceISO extends ExigenceBase {
   correspondance: Correspondance;
 }
 
-export type Exigence = ExigenceNis2 | ExigenceISO;
+export interface ExigenceAE extends ExigenceBase {
+  correspondance: Correspondance;
+}
+
+export type Exigence = ExigenceNis2 | ExigenceISO | ExigenceAE;
 
 export const badgesExigence = (exigence: ExigenceNis2) => {
   return exigence?.entitesCible?.map((categorie) => ({
@@ -110,15 +114,21 @@ export const fabriqueDExigence = (
 
       correspondance: cible && correspondances[cible],
     } satisfies ExigenceNis2;
-  }
+  } else if (source === 'ISO') {
+    return {
+      reference: (exigence.reference as string) ?? '',
+      contenu: (exigence.contenu as string) ?? '',
 
+      norme: (exigence.norme as string) ?? '',
+      chapitre: (exigence.chapitre as string) ?? '',
+
+      correspondance: correspondances['NIS2'],
+    } satisfies ExigenceISO;
+  }
   return {
     reference: (exigence.reference as string) ?? '',
     contenu: (exigence.contenu as string) ?? '',
 
-    norme: (exigence.norme as string) ?? '',
-    chapitre: (exigence.chapitre as string) ?? '',
-
     correspondance: correspondances['NIS2'],
-  } satisfies ExigenceISO;
+  };
 };
