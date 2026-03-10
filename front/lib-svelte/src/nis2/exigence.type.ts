@@ -49,18 +49,45 @@ export const badgesExigence = (exigence: ExigenceNis2) => {
 
 export const formateContenuExigence = ({
   contenu,
-}: ExigenceBase | ExigenceComparee) => {
-  return contenu
-    .split('\n')
-    .map((p) => {
-      if (p.startsWith('•')) {
-        return `<li>${p.replace('•', '')}</li>`;
-      }
-      return `<p>${p}</p>`;
-    })
-    .join('')
-    .replace(/(?<!<\/li>)\s*<li>/g, '<ul><li>')
-    .replace(/<\/li>(?!\s*<li>)/g, '</li></ul>');
+}: ExigenceBase | ExigenceComparee): string => {
+  const lignes = contenu.split('\n');
+  const htmlParts: string[] = [];
+
+  let niveauCourant = -1;
+
+  const ouvreListe = () => {
+    htmlParts.push('<ul>');
+    niveauCourant++;
+  };
+
+  const fermeListe = () => {
+    htmlParts.push('</ul>');
+    niveauCourant--;
+  };
+
+  for (const ligne of lignes) {
+    let niveau = -1;
+    let texte = ligne.trim();
+
+    if (ligne.startsWith('•')) {
+      niveau = 0;
+      texte = ligne.slice(1).trim();
+    } else if (ligne.startsWith('o\t')) {
+      niveau = 1;
+      texte = ligne.slice(2).trim();
+    }
+
+    if (niveau >= 0) {
+      while (niveauCourant < niveau) ouvreListe();
+      while (niveauCourant > niveau) fermeListe();
+
+      htmlParts.push(`<li>${texte}</li>`);
+    } else {
+      while (niveauCourant >= 0) fermeListe();
+      htmlParts.push(`<p>${texte}</p>`);
+    }
+  }
+  return htmlParts.join('');
 };
 
 export const fabriqueDExigence = (
