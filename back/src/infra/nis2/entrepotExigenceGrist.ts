@@ -67,10 +67,14 @@ export class EntrepotExigenceGrist
     );
     this.croisements = {
       AE: {
-        table: '',
-        champs: [],
+        table: 'AE_2690',
+        champs: ['source.Contenu', 'source.ID2 as Reference'],
         AE: undefined,
-        NIS2: undefined,
+        NIS2: {
+          nomTableAssociation: 'Croisement_AE_NIS2',
+          nomColonneReferenceCible: 'References_New_',
+          nomTableCible: 'Exigences_NIS2_2_5',
+        },
         ISO: undefined,
       },
       ISO: {
@@ -98,7 +102,11 @@ export class EntrepotExigenceGrist
           'source.Thematique',
           'source.EIEE',
         ],
-        AE: undefined,
+        AE: {
+          nomTableAssociation: 'Croisement_NIS2_AE',
+          nomColonneReferenceCible: 'ID2',
+          nomTableCible: 'AE_2690',
+        },
         NIS2: undefined,
         ISO: {
           nomTableAssociation: 'Croisement_NIS2_ISO',
@@ -163,7 +171,7 @@ export class EntrepotExigenceGrist
                 .filter((c) => c !== undefined)
             : [],
           objectifSecurite: exigenceGrist.fields.Objectif_de_securite ?? '',
-          referentielCompare: 'ISO',
+          referentielCompare: cible,
           correspondance: fabriqueCorrespondance(exigenceGrist),
         });
       });
