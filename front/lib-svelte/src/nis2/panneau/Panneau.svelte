@@ -100,6 +100,7 @@
     gap: 16px;
 
     &.bureau {
+      align-items: stretch;
       gap: 24px;
     }
 
