@@ -94,9 +94,11 @@
 
 <style lang="scss">
   .panneau {
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
     gap: 16px;
+
     &.bureau {
       gap: 24px;
     }
