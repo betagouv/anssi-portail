@@ -16,7 +16,7 @@
   import CelluleExigenceISO from './tableaux/CelluleExigenceISO.svelte';
   import CelluleExigenceNis2 from './tableaux/CelluleExigenceNis2.svelte';
   import CelluleExigencesISOCibles from './tableaux/CelluleExigencesISOCibles.svelte';
-  import CelluleExigencesNIS2Cibles from './tableaux/CelluleExigencesNIS2Cibles.svelte';
+  import CelluleExigencesNIS2Cibles from './tableaux/CelluleSimpleExigencesCibles.svelte';
   import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
   import TableauExigencesNIS2Simple from './tableaux/TableauExigencesNIS2Simple.svelte';
 
