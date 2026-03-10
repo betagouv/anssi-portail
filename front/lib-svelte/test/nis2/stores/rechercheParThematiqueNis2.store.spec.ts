@@ -1,49 +1,13 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import type {
-  ExigenceISO,
-  ExigenceNis2,
-} from '../../../src/nis2/exigence.type';
 import { rechercheParThematiqueNis2 } from '../../../src/nis2/stores/rechercheParThematiqueNis2';
+import {
+  exigenceISODeNiveauEleve,
+  exigenceNIS2DeNiveauFaible as exigenceNIS2AvecThematiqueGouvernance,
+  exigenceNIS2DeNiveauEleve as exigenceNIS2AvecThematiqueRecensement,
+} from '../objetsPretsALEmploi';
 
 describe('La recherche par thématique', () => {
-  const exigenceNIS2AvecThematiqueGouvernance: ExigenceNis2 = {
-    reference: 'EX-01',
-    contenu: "Contenu de l'exigence 1",
-    thematique: 'Gouvernance',
-    objectifSecurite:
-      "Objectif de sécurité 5: Maitrise des systèmes d'information",
-    entitesCible: [],
-    correspondance: {
-      niveau: 'faible',
-      exigences: [],
-      observations: '',
-    },
-  };
-  const exigenceNIS2AvecThematiqueRecensement: ExigenceNis2 = {
-    reference: 'EX-02',
-    contenu: "Contenu de l'exigence 2",
-    thematique: 'Recensement',
-    objectifSecurite: "Objectif de sécurité 3: Maîtrise de l'écosystème",
-    entitesCible: [],
-    correspondance: {
-      niveau: 'élevé',
-      exigences: [],
-      observations: '',
-    },
-  };
-  const exigenceISO: ExigenceISO = {
-    norme: 'ISO 27001',
-    chapitre: '5.1',
-    reference: '5.1 EX-02',
-    contenu: "Contenu de l'exigence 2",
-    correspondance: {
-      niveau: 'élevé',
-      exigences: [],
-      observations: '',
-    },
-  };
-
   beforeEach(() => {
     rechercheParThematiqueNis2.reinitialise();
   });
@@ -61,7 +25,7 @@ describe('La recherche par thématique', () => {
       rechercheParThematiqueNis2.set('Recensement');
 
       const resultat = rechercheParThematiqueNis2.ok(
-        exigenceNIS2AvecThematiqueGouvernance
+        exigenceNIS2AvecThematiqueGouvernance()
       );
 
       expect(resultat).toBe(false);
@@ -71,7 +35,7 @@ describe('La recherche par thématique', () => {
       rechercheParThematiqueNis2.set('Recensement');
 
       const resultat = rechercheParThematiqueNis2.ok(
-        exigenceNIS2AvecThematiqueRecensement
+        exigenceNIS2AvecThematiqueRecensement()
       );
 
       expect(resultat).toBe(true);
@@ -79,14 +43,16 @@ describe('La recherche par thématique', () => {
 
     it("en incluant une exigence comparée si il n'y pas de filtre actif", () => {
       const resultat = rechercheParThematiqueNis2.ok(
-        exigenceNIS2AvecThematiqueRecensement
+        exigenceNIS2AvecThematiqueRecensement()
       );
 
       expect(resultat).toBe(true);
     });
 
     it("en incluant une exigence comparée si l'exigence source n'est pas une exigence NIS 2", () => {
-      const resultat = rechercheParThematiqueNis2.ok(exigenceISO);
+      const resultat = rechercheParThematiqueNis2.ok(
+        exigenceISODeNiveauEleve()
+      );
 
       expect(resultat).toBe(true);
     });
