@@ -11,6 +11,7 @@ import {
   exigenceNIS2DeNiveauEleve,
   exigenceNIS2DeNiveauFaible,
 } from '../objetsPretsALEmploi';
+import { rechercheParNormeISO } from '../../../src/nis2/stores/rechercheParNormeISO';
 
 describe('Le store des exigences filtrées', () => {
   beforeEach(() => {
@@ -123,6 +124,16 @@ describe('Le store des exigences filtrées', () => {
       const filtresActifs = get(exigencesFiltrees).filtresActifs;
 
       expect(filtresActifs).toBeFalsy();
+    });
+  });
+
+  describe('lorsque le filtre des normes ISO', () => {
+    it("est valorisé, detecte qu'un filtre est actif", () => {
+      rechercheParNormeISO.set('ISO 27001');
+
+      const filtresActifs = get(exigencesFiltrees).filtresActifs;
+
+      expect(filtresActifs).toBeTruthy();
     });
   });
 });
