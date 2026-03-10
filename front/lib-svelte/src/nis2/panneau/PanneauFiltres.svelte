@@ -7,6 +7,7 @@
   import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
   import { rechercheParCorrespondance } from '../stores/rechercheParCorrespondance';
   import { rechercheParEntiteNis2 } from '../stores/rechercheParEntiteNis2';
+  import { rechercheParNormeISO } from '../stores/rechercheParNormeISO';
   import { rechercheParObjectifNis2 } from '../stores/rechercheParObjectifNis2';
   import { rechercheParThematiqueNis2 } from '../stores/rechercheParThematiqueNis2';
 
@@ -53,6 +54,14 @@
       value={$rechercheParThematiqueNis2 ?? ''}
       onvaluechanged={(e: CustomEvent) =>
         ($rechercheParThematiqueNis2 = e.detail)}
+    ></dsfr-select>
+  {:else if source === 'ISO'}
+    <dsfr-select
+      label="Norme ISO"
+      placeholder="Sélectionner une option"
+      options={$exigencesFiltrees.normesISO}
+      value={$rechercheParNormeISO ?? ''}
+      onvaluechanged={(e: CustomEvent) => ($rechercheParNormeISO = e.detail)}
     ></dsfr-select>
   {/if}
   {#if cible}
