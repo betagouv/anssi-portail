@@ -98,10 +98,19 @@ export class ExigenceAE extends Exigence {
   }
 }
 
+export type CyFun23Fonction =
+  | 'Identifier'
+  | 'Protéger'
+  | 'Détecter'
+  | 'Répondre'
+  | 'Rétablir';
+
+export type CyFun23NiveauAssurance = 'Basique' | 'Important' | 'Essentiel';
+
 export class ExigenceCyFun23 extends Exigence {
-  fonction: string;
+  fonction?: CyFun23Fonction;
   estMesureCle: boolean;
-  niveauAssurance: string;
+  niveauAssurance?: CyFun23NiveauAssurance;
   correspondances: {
     NIS2: Correspondance;
   };
@@ -109,9 +118,9 @@ export class ExigenceCyFun23 extends Exigence {
   constructor(parametres: {
     reference: string;
     contenu: string;
-    fonction: string;
+    fonction?: CyFun23Fonction;
     estMesureCle: boolean;
-    niveauAssurance: string;
+    niveauAssurance?: CyFun23NiveauAssurance;
     correspondance: Correspondance;
   }) {
     super(parametres);
