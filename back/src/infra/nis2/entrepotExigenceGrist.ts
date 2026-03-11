@@ -228,7 +228,7 @@ export class EntrepotExigenceGrist
     }
     const croisement = this.croisements[source][cible ?? source];
     if (croisement) {
-      constructeurDeRequete.leftJoin(
+      constructeurDeRequete.join(
         { cr: croisement.nomTableAssociation },
         'source.id',
         'cr.Reference_source'
