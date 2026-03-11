@@ -20,7 +20,6 @@
   const { source, cible, estBureau }: Props = $props();
 
   const optionsCorrespondances = [
-    { value: 'NA', label: 'Non Applicable' },
     { value: 'faible', label: 'Faible / Nulle' },
     { value: 'moyen', label: 'Moyenne' },
     { value: 'élevé', label: 'Élevée' },
