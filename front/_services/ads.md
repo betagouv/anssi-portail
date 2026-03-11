@@ -5,7 +5,7 @@ nom: ADS (Active Directory Security)
 avecFicheDetaillee: true
 description: Auditer vos annuaires Active Directory
 titreHtml: ADS
-illustration: ads/ads.png
+illustration: ads/active-directory-security.png
 lien: https://club.ssi.gouv.fr/beta/#/login
 droitsAcces:
   - ENTITES_PUBLIQUES
