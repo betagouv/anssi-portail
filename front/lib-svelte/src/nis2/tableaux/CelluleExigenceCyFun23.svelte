@@ -1,5 +1,6 @@
 <script lang="ts">
   import {
+    badgesExigence,
     formateContenuExigence,
     type ExigenceCyFun23,
   } from '../exigence.type';
@@ -8,6 +9,7 @@
 </script>
 
 <td>
+  <dsfr-badges-group badges={badgesExigence(exigence)}></dsfr-badges-group>
   <dsfr-tag label={exigence.reference}></dsfr-tag>
   <div class="texte-detail-sm">
     <!-- eslint-disable-next-line svelte/no-at-html-tags -->

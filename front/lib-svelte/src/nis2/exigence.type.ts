@@ -52,19 +52,55 @@ export interface ExigenceCyFun23 extends ExigenceBase {
   correspondance: Correspondance;
 }
 
-export type Exigence = ExigenceNis2 | ExigenceISO | ExigenceAE;
+export type Exigence =
+  | ExigenceNis2
+  | ExigenceISO
+  | ExigenceAE
+  | ExigenceCyFun23;
 
-export const badgesExigence = (exigence: ExigenceNis2) => {
-  return exigence?.entitesCible?.map((categorie) => ({
-    label: {
-      EntiteImportante: 'EI',
-      EntiteEssentielle: 'EE',
-    }[categorie],
-    accent: {
-      EntiteImportante: 'green-archipel',
-      EntiteEssentielle: 'green-bourgeon',
-    }[categorie],
-  }));
+export const badgesExigence = (exigence: ExigenceNis2 | ExigenceCyFun23) => {
+  if ('entitesCible' in exigence) {
+    return exigence?.entitesCible?.map((categorie) => ({
+      label: {
+        EntiteImportante: 'EI',
+        EntiteEssentielle: 'EE',
+      }[categorie],
+      accent: {
+        EntiteImportante: 'green-archipel',
+        EntiteEssentielle: 'green-bourgeon',
+      }[categorie],
+    }));
+  }
+  return [
+    ...(exigence.estMesureCle
+      ? [
+          {
+            label: 'mesure clé',
+            type: 'default',
+            hasIcon: true,
+            icon: 'checkbox-line',
+          },
+        ]
+      : []),
+    {
+      label: exigence.fonction,
+      accent: {
+        Identifier: 'green-archipel',
+        Protéger: 'blue-ecume',
+        Détecter: 'yellow-moutarde',
+        Répondre: 'pink-tuile',
+        Rétablir: 'green-emeraude',
+      }[exigence.fonction],
+    },
+    {
+      label: exigence.niveauAssurance,
+      accent: {
+        Basique: 'green-bourgeon',
+        Important: 'brown-cafe-creme',
+        Essentiel: 'purple-glycine',
+      }[exigence.niveauAssurance],
+    },
+  ];
 };
 
 export const formateContenuExigence = ({
@@ -140,11 +176,22 @@ export const fabriqueDExigence = (
 
       correspondance: correspondances['NIS2'],
     } satisfies ExigenceISO;
-  }
-  return {
-    reference: (exigence.reference as string) ?? '',
-    contenu: (exigence.contenu as string) ?? '',
+  } else if (source === 'AE') {
+    return {
+      reference: (exigence.reference as string) ?? '',
+      contenu: (exigence.contenu as string) ?? '',
 
-    correspondance: correspondances['NIS2'],
-  };
+      correspondance: correspondances['NIS2'],
+    } satisfies ExigenceAE;
+  } else {
+    return {
+      reference: (exigence.reference as string) ?? '',
+      contenu: (exigence.contenu as string) ?? '',
+      estMesureCle: Boolean(exigence.estMesureCle),
+      fonction: exigence.fonction as CyFun23Fonction,
+      niveauAssurance: exigence.niveauAssurance as CyFun23NiveauAssurance,
+
+      correspondance: correspondances['NIS2'],
+    } satisfies ExigenceCyFun23;
+  }
 };
