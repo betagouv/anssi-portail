@@ -3,8 +3,11 @@ import { EntrepotExigence } from '../../metier/nis2/entrepotExigence';
 import {
   CategorieEntite,
   Correspondance,
+  CyFun23Fonction,
+  CyFun23NiveauAssurance,
   Exigence,
   ExigenceAE,
+  ExigenceCyFun23,
   ExigenceISO,
   ExigenceNIS2,
   Referentiel,
@@ -25,6 +28,10 @@ export type ExigenceGrist = {
     // ISO
     Norme?: string;
     Chapitre?: string;
+    // CyFun23
+    Fonction?: string;
+    NiveauAssurance?: string;
+    EstMesureCle?: number;
     // Comparaison
     Niveau?: string;
     Observations?: string;
@@ -142,6 +149,10 @@ export class EntrepotExigenceGrist
     cible?: Referentiel
   ): Promise<ExigenceISO[]>;
   parReferentiel(referentiel: 'AE', cible?: Referentiel): Promise<ExigenceAE[]>;
+  parReferentiel(
+    referentiel: 'CyFun23',
+    cible?: Referentiel
+  ): Promise<ExigenceCyFun23[]>;
   async parReferentiel(
     referentiel: Referentiel,
     cible?: Referentiel
@@ -210,6 +221,21 @@ export class EntrepotExigenceGrist
       });
     }
 
+    if (referentiel === 'CyFun23') {
+      return exigences.records.map((exigenceGrist) => {
+        return new ExigenceCyFun23({
+          reference: exigenceGrist.fields.Reference,
+          contenu: exigenceGrist.fields.Contenu,
+          fonction: this.traduitFonction(exigenceGrist.fields.Fonction),
+          niveauAssurance: this.traduitNiveauAssurance(
+            exigenceGrist.fields.NiveauAssurance
+          ),
+          estMesureCle: Boolean(exigenceGrist.fields.EstMesureCle),
+          correspondance: fabriqueCorrespondance(exigenceGrist),
+        });
+      });
+    }
+
     throw new Error('Referentiel non pris en charge');
   }
 
@@ -223,6 +249,38 @@ export class EntrepotExigenceGrist
         return 'élevé';
       default:
         return 'NA';
+    }
+  }
+
+  private traduitFonction(fonction?: string): CyFun23Fonction | undefined {
+    switch (fonction) {
+      case 'Identify':
+        return 'Identifier';
+      case 'Protect':
+        return 'Protéger';
+      case 'Detect':
+        return 'Détecter';
+      case 'Respond':
+        return 'Répondre';
+      case 'Recover':
+        return 'Rétablir';
+      default:
+        return undefined;
+    }
+  }
+
+  private traduitNiveauAssurance(
+    niveau?: string
+  ): CyFun23NiveauAssurance | undefined {
+    switch (niveau) {
+      case 'Basic':
+        return 'Basique';
+      case 'Important':
+        return 'Important';
+      case 'Essential':
+        return 'Essentiel';
+      default:
+        return undefined;
     }
   }
 

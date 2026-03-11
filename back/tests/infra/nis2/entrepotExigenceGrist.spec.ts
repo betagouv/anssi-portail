@@ -298,4 +298,85 @@ describe("L'entrepot d'exigence Grist", () => {
       ]);
     });
   });
+
+  describe("lorsqu'il récupère les exigences CyFun23", () => {
+    it('sait récupérer les informations des exigences', async () => {
+      clientHttp.get = async () => {
+        return {
+          data: {
+            records: [
+              {
+                fields: {
+                  Reference: 'ID.AM-1.3',
+                  Contenu: 'Lorsque du matériel non autorisé est détecté, ...',
+                  Fonction: 'Identify',
+                  NiveauAssurance: 'Essential',
+                  EstMesureCle: 1,
+                  Niveau: undefined,
+                  Observations: undefined,
+                  ExigencesCible: '[]',
+                },
+              },
+            ] satisfies ExigenceGrist[],
+          },
+        };
+      };
+
+      const exigences = await entrepotExigenceGrist.parReferentiel(
+        'CyFun23',
+        'NIS2'
+      );
+
+      assert.equal(exigences[0].reference, 'ID.AM-1.3');
+      assert.equal(
+        exigences[0].contenu,
+        'Lorsque du matériel non autorisé est détecté, ...'
+      );
+      assert.equal(exigences[0].fonction, 'Identifier');
+      assert.equal(exigences[0].niveauAssurance, 'Essentiel');
+      assert.equal(exigences[0].estMesureCle, true);
+    });
+
+    it('sait récupérer, pour chaque exigence, la liste des correspondances', async () => {
+      clientHttp.get = async () => {
+        return {
+          data: {
+            records: [
+              {
+                fields: {
+                  Reference: 'ID.AM-1.3',
+                  Contenu: 'Lorsque du matériel non autorisé est détecté, ...',
+                  Niveau: 'O',
+                  Observations: 'Des observations',
+                  ExigencesCible:
+                    '[{"reference":"2.A.1-EI/EE","contenu":"Le dirigeant exécutif de l’entité..."},{"reference":"2.A.3-EI/EE","contenu":"L’entité définit et met en œuvre..."}]',
+                },
+              },
+            ] satisfies ExigenceGrist[],
+          },
+        };
+      };
+
+      const exigences = await entrepotExigenceGrist.parReferentiel(
+        'CyFun23',
+        'NIS2'
+      );
+
+      assert.equal(exigences[0].correspondances['NIS2']?.niveau, 'moyen');
+      assert.equal(
+        exigences[0].correspondances['NIS2']?.observations,
+        'Des observations'
+      );
+      assert.deepEqual(exigences[0].correspondances['NIS2']?.exigences, [
+        {
+          reference: '2.A.1-EI/EE',
+          contenu: 'Le dirigeant exécutif de l’entité...',
+        },
+        {
+          reference: '2.A.3-EI/EE',
+          contenu: 'L’entité définit et met en œuvre...',
+        },
+      ]);
+    });
+  });
 });
