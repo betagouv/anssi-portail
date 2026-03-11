@@ -40,6 +40,24 @@ describe('La ressource des Exigences NIS 2', () => {
       assert.equal(status, 404);
     });
 
+    describe('Renvoit une 400', () => {
+      it("si la source n'est pas une chaîne de caractères", async () => {
+        const { status } = await request(serveur)
+          .get('/api/exigences-nis2')
+          .query({ source: [123, 456] });
+
+        assert.equal(status, 400);
+      });
+
+      it("si la cible n'est pas une chaîne de caractères", async () => {
+        const { status } = await request(serveur)
+          .get('/api/exigences-nis2')
+          .query({ cible: [123, 456] });
+
+        assert.equal(status, 400);
+      });
+    });
+
     it('renvoie la liste des exigences', async () => {
       await entrepotExigence.ajoute(
         new ExigenceNIS2({
