@@ -70,17 +70,6 @@
       colonneSource: colonneSourceCyFun23,
       colonneCible: colonneCibleSimple,
     },
-
-    // Combinaisons impossibles
-    COMPARAISON_ISO_ISO: undefined,
-    COMPARAISON_ISO_AE: undefined,
-    COMPARAISON_AE_ISO: undefined,
-    COMPARAISON_AE_AE: undefined,
-    COMPARAISON_AE_CyFun23: undefined,
-    COMPARAISON_CyFun23_AE: undefined,
-    COMPARAISON_CyFun23_CyFun23: undefined,
-    COMPARAISON_CyFun23_ISO: undefined,
-    COMPARAISON_ISO_CyFun23: undefined,
   };
 
   const configurationCourante = $derived(configurationTableau[comparaison]);

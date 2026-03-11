@@ -2,13 +2,12 @@ import type { Snippet } from 'svelte';
 import type {
   Exigence,
   ExigenceComparee,
-  Referentiel,
   ReferentielSelectionne,
 } from '../exigence.type';
 
 export type Comparaison =
-  | `COMPARAISON_${Referentiel}_${ReferentielSelectionne}`
-  | `COMPARAISON_${ReferentielSelectionne}_${Referentiel}`;
+  | `COMPARAISON_NIS2_${ReferentielSelectionne}`
+  | `COMPARAISON_${ReferentielSelectionne}_NIS2`;
 export type ConfigurationTableauComparaison = Record<
   Comparaison,
   | {
