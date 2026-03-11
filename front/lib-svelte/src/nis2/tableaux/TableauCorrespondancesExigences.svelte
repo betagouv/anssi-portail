@@ -3,10 +3,12 @@
     type Exigence,
     type ExigenceAE,
     type ExigenceComparee,
+    type ExigenceCyFun23,
     type ExigenceISO,
     type ExigenceNis2,
   } from '../exigence.type';
   import CelluleExigenceAE from './CelluleExigenceAE.svelte';
+  import CelluleExigenceCyFun23 from './CelluleExigenceCyFun23.svelte';
   import CelluleExigenceISO from './CelluleExigenceISO.svelte';
   import CelluleExigenceNis2 from './CelluleExigenceNis2.svelte';
   import CelluleExigencesISOCibles from './CelluleExigencesISOCibles.svelte';
@@ -56,12 +58,29 @@
       colonneSource: colonneSourceAE,
       colonneCible: colonneCibleSimple,
     },
+    COMPARAISON_NIS2_CyFun23: {
+      titreColonneSource: 'Exigence NIS 2',
+      titreColonneCible: 'CyFun 2023',
+      colonneSource: colonneSourceNIS2,
+      colonneCible: colonneCibleSimple,
+    },
+    COMPARAISON_CyFun23_NIS2: {
+      titreColonneSource: 'CyFun 2023',
+      titreColonneCible: 'Exigence NIS 2',
+      colonneSource: colonneSourceCyFun23,
+      colonneCible: colonneCibleSimple,
+    },
 
     // Combinaisons impossibles
     COMPARAISON_ISO_ISO: undefined,
     COMPARAISON_ISO_AE: undefined,
     COMPARAISON_AE_ISO: undefined,
     COMPARAISON_AE_AE: undefined,
+    COMPARAISON_AE_CyFun23: undefined,
+    COMPARAISON_CyFun23_AE: undefined,
+    COMPARAISON_CyFun23_CyFun23: undefined,
+    COMPARAISON_CyFun23_ISO: undefined,
+    COMPARAISON_ISO_CyFun23: undefined,
   };
 
   const configurationCourante = $derived(configurationTableau[comparaison]);
@@ -80,6 +99,11 @@
 {#snippet colonneSourceAE(exigenceSource: Exigence)}
   {@const exigence = exigenceSource as ExigenceAE}
   <CelluleExigenceAE {exigence} />
+{/snippet}
+
+{#snippet colonneSourceCyFun23(exigenceSource: Exigence)}
+  {@const exigence = exigenceSource as ExigenceCyFun23}
+  <CelluleExigenceCyFun23 {exigence} />
 {/snippet}
 
 {#snippet colonneCibleSimple(exigences: ExigenceComparee[])}

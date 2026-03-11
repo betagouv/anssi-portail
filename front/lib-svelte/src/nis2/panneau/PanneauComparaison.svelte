@@ -67,6 +67,7 @@
         options={[
           { label: 'ISO 27001', value: 'ISO' },
           { label: 'AE 2690', value: 'AE' },
+          { label: 'CyFun 2023', value: 'CyFun23' },
         ]}
       ></dsfr-select>
     </div>

@@ -1,6 +1,6 @@
 export type CategorieEntite = 'EntiteEssentielle' | 'EntiteImportante';
 
-export type Referentiel = 'NIS2' | 'ISO' | 'AE';
+export type Referentiel = 'NIS2' | 'ISO' | 'AE' | 'CyFun23';
 export type ReferentielSelectionne = Exclude<Referentiel, 'NIS2'>;
 
 export type ExigenceComparee = {
@@ -33,6 +33,22 @@ export interface ExigenceISO extends ExigenceBase {
 }
 
 export interface ExigenceAE extends ExigenceBase {
+  correspondance: Correspondance;
+}
+
+export type CyFun23Fonction =
+  | 'Identifier'
+  | 'Protéger'
+  | 'Détecter'
+  | 'Répondre'
+  | 'Rétablir';
+
+export type CyFun23NiveauAssurance = 'Basique' | 'Important' | 'Essentiel';
+
+export interface ExigenceCyFun23 extends ExigenceBase {
+  fonction: CyFun23Fonction;
+  niveauAssurance: CyFun23NiveauAssurance;
+  estMesureCle: boolean;
   correspondance: Correspondance;
 }
 
