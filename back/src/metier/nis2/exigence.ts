@@ -1,6 +1,6 @@
 export type CategorieEntite = 'EntiteEssentielle' | 'EntiteImportante';
 
-const referentiels = ['NIS2', 'ISO', 'AE'] as const;
+const referentiels = ['NIS2', 'ISO', 'AE', 'CyFun23'] as const;
 export type Referentiel = (typeof referentiels)[number];
 
 export const estReferentiel = (valeur: string): valeur is Referentiel =>
@@ -92,6 +92,32 @@ export class ExigenceAE extends Exigence {
     correspondance: Correspondance;
   }) {
     super(parametres);
+    this.correspondances = {
+      NIS2: parametres.correspondance,
+    };
+  }
+}
+
+export class ExigenceCyFun23 extends Exigence {
+  fonction: string;
+  estMesureCle: boolean;
+  niveauAssurance: string;
+  correspondances: {
+    NIS2: Correspondance;
+  };
+
+  constructor(parametres: {
+    reference: string;
+    contenu: string;
+    fonction: string;
+    estMesureCle: boolean;
+    niveauAssurance: string;
+    correspondance: Correspondance;
+  }) {
+    super(parametres);
+    this.fonction = parametres.fonction;
+    this.estMesureCle = parametres.estMesureCle;
+    this.niveauAssurance = parametres.niveauAssurance;
     this.correspondances = {
       NIS2: parametres.correspondance,
     };

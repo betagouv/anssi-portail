@@ -6,6 +6,7 @@ import { creeServeur } from '../../../src/api/msc';
 import {
   Correspondance,
   ExigenceAE,
+  ExigenceCyFun23,
   ExigenceISO,
   ExigenceNIS2,
 } from '../../../src/metier/nis2/exigence';
@@ -137,6 +138,43 @@ describe('La ressource des Exigences NIS 2', () => {
         ]);
       });
     });
+
+    describe('Si la cible est CyFun23', () => {
+      it('renvoie le détail des correspondances des exigences', async () => {
+        await entrepotExigence.ajoute(
+          new ExigenceNIS2({
+            reference: '',
+            entitesCible: [],
+            objectifSecurite: '',
+            thematique: '',
+            contenu: '',
+            referentielCompare: 'CyFun23',
+            correspondance: new Correspondance('faible', 'Des observations', [
+              {
+                reference: 'reference_1',
+                contenu: 'contenu 1',
+              },
+            ]),
+          })
+        );
+
+        const { body } = await request(serveur)
+          .get('/api/exigences-nis2')
+          .query({ cible: 'CyFun23' });
+
+        assert.equal(body[0].correspondances['CyFun23'].niveau, 'faible');
+        assert.equal(
+          body[0].correspondances['CyFun23'].observations,
+          'Des observations'
+        );
+        assert.deepEqual(body[0].correspondances['CyFun23'].exigences, [
+          {
+            contenu: 'contenu 1',
+            reference: 'reference_1',
+          },
+        ]);
+      });
+    });
   });
 
   describe('Si une source est spécifiée', () => {
@@ -191,6 +229,41 @@ describe('La ressource des Exigences NIS 2', () => {
         {
           reference: '1.2.3',
           contenu: 'Contenu de l’exigence AE',
+          correspondances: {
+            NIS2: {
+              niveau: 'faible',
+              observations: 'Des observations',
+              exigences: [],
+            },
+          },
+        },
+      ]);
+    });
+
+    it('renvoie la liste des exigences de la source CyFun23 comparée à NIS 2', async () => {
+      const source = 'CyFun23';
+      await entrepotExigence.ajoute(
+        new ExigenceCyFun23({
+          reference: 'ID.AM-1.3',
+          contenu: 'Lorsque du matériel non autorisé est détecté, ...',
+          fonction: 'Identifier',
+          estMesureCle: true,
+          niveauAssurance: 'Important',
+          correspondance: new Correspondance('faible', 'Des observations', []),
+        })
+      );
+
+      const { body } = await request(serveur)
+        .get('/api/exigences-nis2')
+        .query({ source, cible: 'NIS2' });
+
+      assert.deepEqual(body, [
+        {
+          reference: 'ID.AM-1.3',
+          contenu: 'Lorsque du matériel non autorisé est détecté, ...',
+          fonction: 'Identifier',
+          niveauAssurance: 'Important',
+          estMesureCle: true,
           correspondances: {
             NIS2: {
               niveau: 'faible',
