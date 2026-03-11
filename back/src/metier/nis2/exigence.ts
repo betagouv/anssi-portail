@@ -3,8 +3,12 @@ export type CategorieEntite = 'EntiteEssentielle' | 'EntiteImportante';
 const referentiels = ['NIS2', 'ISO', 'AE', 'CyFun23'] as const;
 export type Referentiel = (typeof referentiels)[number];
 
-export const estReferentiel = (valeur: string): valeur is Referentiel =>
-  referentiels.some((r) => r === valeur);
+export const versReferentiel = (valeur?: string): Referentiel => {
+  if (!valeur) return 'NIS2';
+  return (
+    referentiels.find((r) => r.toUpperCase() === valeur.toUpperCase()) ?? 'NIS2'
+  );
+};
 
 export class Exigence {
   reference: string;
