@@ -70,12 +70,21 @@ export class EntrepotExigenceGrist
         table: 'AE_2690',
         champs: ['source.Contenu', 'source.ID2 as Reference'],
         AE: undefined,
+        CyFun23: undefined,
         NIS2: {
           nomTableAssociation: 'Croisement_AE_NIS2',
           nomColonneReferenceCible: 'References_New_',
           nomTableCible: 'Exigences_NIS2_2_5',
         },
         ISO: undefined,
+      },
+      CyFun23: {
+        table: '',
+        champs: [],
+        AE: undefined,
+        CyFun23: undefined,
+        ISO: undefined,
+        NIS2: undefined,
       },
       ISO: {
         table: 'ISO_27001_27002_2022',
@@ -86,6 +95,7 @@ export class EntrepotExigenceGrist
           'source.Chapitre',
         ],
         AE: undefined,
+        CyFun23: undefined,
         ISO: undefined,
         NIS2: {
           nomTableAssociation: 'Croisement_ISO_NIS2',
@@ -107,6 +117,7 @@ export class EntrepotExigenceGrist
           nomColonneReferenceCible: 'ID2',
           nomTableCible: 'AE_2690',
         },
+        CyFun23: undefined,
         NIS2: undefined,
         ISO: {
           nomTableAssociation: 'Croisement_NIS2_ISO',
