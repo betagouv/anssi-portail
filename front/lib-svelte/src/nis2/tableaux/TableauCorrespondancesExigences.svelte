@@ -33,26 +33,26 @@
 
   const configurationTableau: ConfigurationTableauComparaison = {
     COMPARAISON_NIS2_ISO: {
-      titreColonneSource: '',
-      titreColonneCible: '',
+      titreColonneSource: 'Exigence NIS 2',
+      titreColonneCible: 'Référence ISO 27001/27002',
       colonneSource: colonneSourceNIS2,
       colonneCible: colonneCibleISO,
     },
     COMPARAISON_NIS2_AE: {
-      titreColonneSource: '',
-      titreColonneCible: '',
+      titreColonneSource: 'Exigence NIS 2',
+      titreColonneCible: 'AE 2690',
       colonneSource: colonneSourceNIS2,
       colonneCible: colonneCibleSimple,
     },
     COMPARAISON_ISO_NIS2: {
-      titreColonneSource: '',
-      titreColonneCible: '',
+      titreColonneSource: 'Référence ISO 27001/27002',
+      titreColonneCible: 'Exigence NIS 2',
       colonneSource: colonneSourceISO,
       colonneCible: colonneCibleSimple,
     },
     COMPARAISON_AE_NIS2: {
-      titreColonneSource: '',
-      titreColonneCible: '',
+      titreColonneSource: 'AE 2690',
+      titreColonneCible: 'Exigence NIS 2',
       colonneSource: colonneSourceAE,
       colonneCible: colonneCibleSimple,
     },
