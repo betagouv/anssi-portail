@@ -17,10 +17,6 @@
     padding: 0.5rem 1rem;
     border: 1px solid black;
 
-    .gras {
-      font-weight: bold;
-    }
-
     .texte-detail-sm {
       margin: 8px 0 0;
 
