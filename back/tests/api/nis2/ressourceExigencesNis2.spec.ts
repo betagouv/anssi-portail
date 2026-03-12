@@ -11,16 +11,34 @@ import {
   ExigenceNIS2,
 } from '../../../src/metier/nis2/exigence';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire';
-import { configurationDeTestDuServeur } from '../fauxObjets';
+import {
+  configurationDeTestDuServeur,
+  fauxAdaptateurEnvironnement,
+} from '../fauxObjets';
+import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
 
 describe('La ressource des Exigences NIS 2', () => {
   let serveur: Express;
   let entrepotExigence: EntrepotExigenceMemoire;
+  let adaptateurEnvironnement: AdaptateurEnvironnement;
+  let afficheCyFun23: boolean;
 
   beforeEach(() => {
+    afficheCyFun23 = true;
     entrepotExigence = new EntrepotExigenceMemoire();
+    adaptateurEnvironnement = {
+      ...fauxAdaptateurEnvironnement,
+      fonctionnalites: () => ({
+        ...fauxAdaptateurEnvironnement.fonctionnalites(),
+        nis2: () => ({
+          afficheObservations: () => true,
+          afficheCyFun23: () => afficheCyFun23,
+        }),
+      }),
+    };
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
+      adaptateurEnvironnement,
       entrepotExigence,
     });
   });
@@ -36,6 +54,16 @@ describe('La ressource des Exigences NIS 2', () => {
       const { status } = await request(serveur)
         .get('/api/exigences-nis2')
         .query({ source: 'ISO', cible: 'ISO' });
+
+      assert.equal(status, 404);
+    });
+
+    it('renvoie une 404 si une comparaison avec CyFun23 est demandée, et que le FF est désactivé', async () => {
+      afficheCyFun23 = false;
+
+      const { status } = await request(serveur)
+        .get('/api/exigences-nis2')
+        .query({ cible: 'CyFun23' });
 
       assert.equal(status, 404);
     });

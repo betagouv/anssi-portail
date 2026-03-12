@@ -3,6 +3,7 @@ import { ConfigurationServeur } from '../configurationServeur';
 import { versReferentiel } from '../../metier/nis2/exigence';
 
 export const ressourceExigencesNis2 = ({
+  adaptateurEnvironnement,
   entrepotExigence,
 }: ConfigurationServeur) => {
   const routeur = Router();
@@ -23,6 +24,14 @@ export const ressourceExigencesNis2 = ({
     if (referentielCible !== 'NIS2' && referentielSource !== 'NIS2') {
       return reponse.sendStatus(404);
     }
+
+    if (
+      !adaptateurEnvironnement.fonctionnalites().nis2().afficheCyFun23() &&
+      (referentielCible === 'CyFun23' || referentielSource === 'CyFun23')
+    ) {
+      return reponse.sendStatus(404);
+    }
+
     const exigences = await entrepotExigence.parReferentiel(
       referentielSource,
       referentielCible
