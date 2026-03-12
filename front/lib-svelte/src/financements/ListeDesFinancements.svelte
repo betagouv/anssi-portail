@@ -85,7 +85,7 @@
           {:else}
             <div class="aucun-resultat">
               <img
-                src="/assets/images/illustration-aucun-resultat.svg"
+                src="/assets/images/homme-cherchant-avec-loupe.svg"
                 alt="Aucun résultat"
               />
               <h1>Désolé, aucun résultat trouvé</h1>
