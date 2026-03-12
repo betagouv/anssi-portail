@@ -34,7 +34,7 @@ export const ressourceExigencesNis2Csv = ({
     const strategieExportCsv = new StrategieExportCsvUneLigneParExigence();
 
     const stringifier = createObjectCsvStringifier({
-      header: strategieExportCsv.entetes(),
+      header: strategieExportCsv.entetes(exigences),
       alwaysQuote: true,
       fieldDelimiter: ';',
     });
