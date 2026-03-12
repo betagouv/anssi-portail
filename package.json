@@ -30,7 +30,7 @@
     "vitest": "^3.2.4"
   },
   "runtimeDependencies": {
-    "@lab-anssi/ui-kit": "1.41.3"
+    "@lab-anssi/ui-kit": "1.44.5"
   },
   "pnpm": {
     "overrides": {
