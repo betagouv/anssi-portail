@@ -1,9 +1,6 @@
 <script lang="ts">
-  import {
-    badgesExigence,
-    formateContenuExigence,
-    type ExigenceNis2,
-  } from '../exigence.type';
+  import { badgesExigence, type ExigenceNis2 } from '../exigence.type';
+  import ContenuExigenceFormate from './ContenuExigenceFormate.svelte';
 
   export let exigence: ExigenceNis2;
 </script>
@@ -21,18 +18,12 @@
     size="sm"
     groupMarkup="div"
   ></dsfr-tags-group>
-  <div class="texte-detail-sm">
-    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-    {@html formateContenuExigence(exigence)}
-  </div>
+  <ContenuExigenceFormate {exigence} />
 </td>
 
 <style lang="scss">
   td {
     padding: 0.5rem 1rem;
     border: 1px solid black;
-    .texte-detail-sm {
-      margin-bottom: 0;
-    }
   }
 </style>

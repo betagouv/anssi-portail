@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { formateContenuExigence, type ExigenceISO } from '../exigence.type';
+  import { type ExigenceISO } from '../exigence.type';
+  import ContenuExigenceFormate from './ContenuExigenceFormate.svelte';
 
   export let exigence: ExigenceISO;
 
@@ -12,10 +13,7 @@
   {#if exigence.chapitre}
     <p class="texte-detail-sm gras">{exigence.chapitre}</p>
   {/if}
-  <div class="texte-detail-sm">
-    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-    {@html formateContenuExigence(exigence)}
-  </div>
+  <ContenuExigenceFormate {exigence} />
 </td>
 
 <style lang="scss">
@@ -25,14 +23,6 @@
 
     .gras {
       font-weight: bold;
-    }
-
-    .texte-detail-sm {
-      margin: 8px 0 0;
-
-      :global(p) {
-        margin: 0;
-      }
     }
   }
 </style>
