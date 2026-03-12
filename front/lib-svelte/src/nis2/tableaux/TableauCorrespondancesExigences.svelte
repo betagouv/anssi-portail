@@ -42,7 +42,7 @@
     },
     COMPARAISON_NIS2_AE: {
       titreColonneSource: 'Exigence NIS 2',
-      titreColonneCible: 'AE 2690',
+      titreColonneCible: 'Annexe au Règlement d’exécution 2024/2690',
       colonneSource: colonneSourceNIS2,
       colonneCible: colonneCibleSimple,
     },
@@ -53,7 +53,7 @@
       colonneCible: colonneCibleSimple,
     },
     COMPARAISON_AE_NIS2: {
-      titreColonneSource: 'AE 2690',
+      titreColonneSource: 'Annexe au Règlement d’exécution 2024/2690',
       titreColonneCible: 'Exigence NIS 2',
       colonneSource: colonneSourceAE,
       colonneCible: colonneCibleSimple,
