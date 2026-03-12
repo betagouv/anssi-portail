@@ -8,11 +8,13 @@ import { rechercheParEntiteNis2 } from '../../../src/nis2/stores/rechercheParEnt
 import { rechercheParObjectifNis2 } from '../../../src/nis2/stores/rechercheParObjectifNis2';
 import { rechercheParThematiqueNis2 } from '../../../src/nis2/stores/rechercheParThematiqueNis2';
 import {
+  exigenceCyFun23,
   exigenceISODeNiveauEleve,
   exigenceNIS2DeNiveauEleve,
   exigenceNIS2DeNiveauFaible,
 } from '../objetsPretsALEmploi';
 import { rechercheParNormeISO } from '../../../src/nis2/stores/rechercheParNormeISO';
+import { rechercheParFonctionCyFun23 } from '../../../src/nis2/stores/rechercheParFonctionCyFun23';
 
 describe('Le store des exigences filtrées', () => {
   beforeEach(() => {
@@ -25,6 +27,7 @@ describe('Le store des exigences filtrées', () => {
     rechercheParObjectifNis2.set('Un objectif');
     rechercheParThematiqueNis2.set('une thématique');
     rechercheParNormeISO.set('ISO 27001');
+    rechercheParFonctionCyFun23.set('Identifier');
 
     get(exigencesFiltrees).reinitialise();
 
@@ -33,6 +36,7 @@ describe('Le store des exigences filtrées', () => {
     expect(get(rechercheParObjectifNis2)).toBeUndefined();
     expect(get(rechercheParThematiqueNis2)).toBeUndefined();
     expect(get(rechercheParNormeISO)).toBeUndefined();
+    expect(get(rechercheParFonctionCyFun23)).toBeUndefined();
   });
 
   it("n'est pas valorisé, detecte qu'aucun filtre n'est actif", () => {
@@ -178,6 +182,31 @@ describe('Le store des exigences filtrées', () => {
 
       expect(exigences.length).toBe(1);
       expect(exigences[0].reference).toBe('5.2 EX-02');
+    });
+  });
+
+  describe('lorsque le filtre de fonction CyFun23', () => {
+    it("est valorisé, detecte qu'un filtre est actif", () => {
+      rechercheParFonctionCyFun23.set('Identifier');
+
+      const filtresActifs = get(exigencesFiltrees).filtresActifs;
+
+      expect(filtresActifs).toBeTruthy();
+    });
+
+    it('est appliqué, conserve uniquement les exigences avec la même fonction', () => {
+      const exigencesDansLeStore: Exigence[] = [
+        exigenceCyFun23({ reference: 'ID.AM-1.1', fonction: 'Identifier' }),
+        exigenceCyFun23({ reference: 'ID.AM-1.2', fonction: 'Protéger' }),
+      ];
+
+      exigencesStore.initialise(exigencesDansLeStore);
+      rechercheParFonctionCyFun23.set('Protéger');
+
+      const { exigences } = get(exigencesFiltrees);
+
+      expect(exigences.length).toBe(1);
+      expect(exigences[0].reference).toBe('ID.AM-1.2');
     });
   });
 });

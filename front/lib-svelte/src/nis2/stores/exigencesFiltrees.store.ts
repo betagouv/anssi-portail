@@ -6,6 +6,7 @@ import type { ExigenceNis2 } from '../exigence.type';
 import { rechercheParObjectifNis2 } from './rechercheParObjectifNis2';
 import { rechercheParThematiqueNis2 } from './rechercheParThematiqueNis2';
 import { rechercheParNormeISO } from './rechercheParNormeISO';
+import { rechercheParFonctionCyFun23 } from './rechercheParFonctionCyFun23';
 
 export const exigencesFiltrees = derived(
   [
@@ -15,6 +16,7 @@ export const exigencesFiltrees = derived(
     rechercheParObjectifNis2,
     rechercheParThematiqueNis2,
     rechercheParNormeISO,
+    rechercheParFonctionCyFun23,
   ],
   ([
     $exigences,
@@ -23,6 +25,7 @@ export const exigencesFiltrees = derived(
     $rechercheParObjectifNis2,
     $rechercheParThematiqueNis2,
     $rechercheParNormeISO,
+    $rechercheParFonctionCyFun23,
   ]) => ({
     objectifs: [
       ...new Set($exigences.map((e) => (e as ExigenceNis2).objectifSecurite)),
@@ -47,26 +50,40 @@ export const exigencesFiltrees = derived(
     ]
       .map((norme) => (norme ? { value: norme, label: norme } : null))
       .filter(Boolean),
+    fonctionsCyFun23: [
+      ...new Set(
+        $exigences.map((exigence) =>
+          'fonction' in exigence ? exigence.fonction : null
+        )
+      ),
+    ]
+      .map((fonction) =>
+        fonction ? { value: fonction, label: fonction } : null
+      )
+      .filter(Boolean),
     exigences: $exigences.filter(
       (e) =>
         rechercheParCorrespondance.ok(e) &&
         rechercheParEntiteNis2.ok(e as ExigenceNis2) &&
         rechercheParObjectifNis2.ok(e as ExigenceNis2) &&
         rechercheParThematiqueNis2.ok(e as ExigenceNis2) &&
-        rechercheParNormeISO.ok(e)
+        rechercheParNormeISO.ok(e) &&
+        rechercheParFonctionCyFun23.ok(e)
     ),
     filtresActifs:
       !!$rechercheParCorrespondance ||
       !!$rechercheParEntiteNis2 ||
       !!$rechercheParObjectifNis2 ||
       !!$rechercheParThematiqueNis2 ||
-      !!$rechercheParNormeISO,
+      !!$rechercheParNormeISO ||
+      !!$rechercheParFonctionCyFun23,
     reinitialise: () => {
       rechercheParCorrespondance.reinitialise();
       rechercheParEntiteNis2.reinitialise();
       rechercheParObjectifNis2.reinitialise();
       rechercheParThematiqueNis2.reinitialise();
       rechercheParNormeISO.reinitialise();
+      rechercheParFonctionCyFun23.reinitialise();
     },
   })
 );
