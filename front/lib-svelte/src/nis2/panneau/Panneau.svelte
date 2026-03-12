@@ -34,13 +34,6 @@
     />
     <PanneauFiltres {source} cible={referentielSelectionne} {estBureau} />
   {:else}
-    <div class="comparaison-libelle">
-      <p class="texte-standard-md">Comparer les exigences NIS 2</p>
-      <p class="texte-mention-xs">
-        Comparez les exigences NIS 2 avec des référentiels déjà en place au sein
-        de votre organisation.
-      </p>
-    </div>
     <dsfr-button
       label="Comparer"
       has-icon
