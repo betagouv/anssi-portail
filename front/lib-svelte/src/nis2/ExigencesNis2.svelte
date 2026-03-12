@@ -97,6 +97,14 @@
   {/if}
   <div class="entete">
     <h2>Liste des exigences NIS 2</h2>
+    <p class="texte-detail-sm">
+      Téléchargez la liste au format PDF sur le
+      <dsfr-link
+        href="https://cyber.gouv.fr/reglementation/cybersecurite-systemes-dinformation/directives-nis-nis2-et-dispositif-saiv/directive-nis-2/"
+        label="site de l'ANSSI"
+        blank
+      ></dsfr-link>
+    </p>
     <Panneau
       source={sensComparaison === 'NIS2_VERS_CIBLE'
         ? 'NIS2'
@@ -132,6 +140,10 @@
 <style lang="scss">
   dsfr-alert {
     margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    margin-bottom: 8px;
   }
 
   .entete {
