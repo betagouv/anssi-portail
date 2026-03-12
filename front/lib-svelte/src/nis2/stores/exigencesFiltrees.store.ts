@@ -7,6 +7,7 @@ import { rechercheParObjectifNis2 } from './rechercheParObjectifNis2';
 import { rechercheParThematiqueNis2 } from './rechercheParThematiqueNis2';
 import { rechercheParNormeISO } from './rechercheParNormeISO';
 import { rechercheParFonctionCyFun23 } from './rechercheParFonctionCyFun23';
+import { rechercheParNiveauAssuranceCyFun23 } from './rechercheParNiveauAssuranceCyFun23';
 
 const extraisLesOptions = (exigences: Exigence[]) => {
   const groupeDeFiltre = exigences.reduce(
@@ -48,6 +49,7 @@ export const exigencesFiltrees = derived(
     rechercheParThematiqueNis2,
     rechercheParNormeISO,
     rechercheParFonctionCyFun23,
+    rechercheParNiveauAssuranceCyFun23,
   ],
   ([
     $exigences,
@@ -57,6 +59,7 @@ export const exigencesFiltrees = derived(
     $rechercheParThematiqueNis2,
     $rechercheParNormeISO,
     $rechercheParFonctionCyFun23,
+    $rechercheParNiveauAssuranceCyFun23,
   ]) => ({
     ...extraisLesOptions($exigences),
     exigences: $exigences.filter(
@@ -66,7 +69,8 @@ export const exigencesFiltrees = derived(
         rechercheParObjectifNis2.ok(e) &&
         rechercheParThematiqueNis2.ok(e) &&
         rechercheParNormeISO.ok(e) &&
-        rechercheParFonctionCyFun23.ok(e)
+        rechercheParFonctionCyFun23.ok(e) &&
+        rechercheParNiveauAssuranceCyFun23.ok(e)
     ),
     filtresActifs:
       !!$rechercheParCorrespondance ||
@@ -74,7 +78,8 @@ export const exigencesFiltrees = derived(
       !!$rechercheParObjectifNis2 ||
       !!$rechercheParThematiqueNis2 ||
       !!$rechercheParNormeISO ||
-      !!$rechercheParFonctionCyFun23,
+      !!$rechercheParFonctionCyFun23 ||
+      !!$rechercheParNiveauAssuranceCyFun23,
     reinitialise: () => {
       rechercheParCorrespondance.reinitialise();
       rechercheParEntiteNis2.reinitialise();
@@ -82,6 +87,7 @@ export const exigencesFiltrees = derived(
       rechercheParThematiqueNis2.reinitialise();
       rechercheParNormeISO.reinitialise();
       rechercheParFonctionCyFun23.reinitialise();
+      rechercheParNiveauAssuranceCyFun23.reinitialise();
     },
   })
 );
