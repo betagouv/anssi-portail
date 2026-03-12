@@ -26,7 +26,7 @@
 
   const optionsReferentiels = $derived([
     { label: 'ISO 2700x', value: 'ISO' },
-    { label: 'AE 2690', value: 'AE' },
+    { label: 'Annexe au Règlement d’exécution 2024/2690', value: 'AE' },
     ...(featureFlagNis2CyFun23
       ? [{ label: 'CyFun 2023', value: 'CyFun23' }]
       : []),
