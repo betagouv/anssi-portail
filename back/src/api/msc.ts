@@ -49,6 +49,7 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
+import { ressourceExigencesNis2Csv } from './nis2/ressourceExigencesNis2Csv';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -334,6 +335,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   });
 
   app.use('/api/exigences-nis2', ressourceExigencesNis2(configurationServeur));
+  app.use('/api/exigences-nis2.csv', ressourceExigencesNis2Csv(configurationServeur));
 
   app.use('/api/sante-guides', ressourceSanteGuides(configurationServeur));
 
