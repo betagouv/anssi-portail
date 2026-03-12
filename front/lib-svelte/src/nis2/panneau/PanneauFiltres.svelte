@@ -2,6 +2,7 @@
   import type {
     Correspondance,
     CyFun23Fonction,
+    CyFun23NiveauAssurance,
     Referentiel,
     ReferentielSelectionne,
   } from '../exigence.type';
@@ -9,6 +10,7 @@
   import { rechercheParCorrespondance } from '../stores/rechercheParCorrespondance';
   import { rechercheParEntiteNis2 } from '../stores/rechercheParEntiteNis2';
   import { rechercheParFonctionCyFun23 } from '../stores/rechercheParFonctionCyFun23';
+  import { rechercheParNiveauAssuranceCyFun23 } from '../stores/rechercheParNiveauAssuranceCyFun23';
   import { rechercheParNormeISO } from '../stores/rechercheParNormeISO';
   import { rechercheParObjectifNis2 } from '../stores/rechercheParObjectifNis2';
   import { rechercheParThematiqueNis2 } from '../stores/rechercheParThematiqueNis2';
@@ -34,6 +36,12 @@
     { value: 'Répondre', label: 'Répondre' },
     { value: 'Rétablir', label: 'Rétablir' },
   ] satisfies { value: CyFun23Fonction; label: string }[];
+
+  const optionsNiveauxAssuranceCyFun23 = [
+    { value: 'Basique', label: 'Basique' },
+    { value: 'Important', label: 'Important' },
+    { value: 'Essentiel', label: 'Essentiel' },
+  ] satisfies { value: CyFun23NiveauAssurance; label: string }[];
 </script>
 
 <div class="panneau-filtres" class:bureau={estBureau}>
@@ -80,6 +88,14 @@
       value={$rechercheParFonctionCyFun23 ?? ''}
       onvaluechanged={(e: CustomEvent) =>
         ($rechercheParFonctionCyFun23 = e.detail)}
+    ></dsfr-select>
+    <dsfr-select
+      label="Niveau d'assurance"
+      placeholder="Sélectionner une option"
+      options={optionsNiveauxAssuranceCyFun23}
+      value={$rechercheParNiveauAssuranceCyFun23 ?? ''}
+      onvaluechanged={(e: CustomEvent) =>
+        ($rechercheParNiveauAssuranceCyFun23 = e.detail)}
     ></dsfr-select>
   {/if}
   {#if cible}

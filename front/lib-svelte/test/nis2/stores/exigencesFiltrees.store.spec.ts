@@ -15,6 +15,7 @@ import {
 } from '../objetsPretsALEmploi';
 import { rechercheParNormeISO } from '../../../src/nis2/stores/rechercheParNormeISO';
 import { rechercheParFonctionCyFun23 } from '../../../src/nis2/stores/rechercheParFonctionCyFun23';
+import { rechercheParNiveauAssuranceCyFun23 } from '../../../src/nis2/stores/rechercheParNiveauAssuranceCyFun23';
 
 describe('Le store des exigences filtrées', () => {
   beforeEach(() => {
@@ -28,6 +29,7 @@ describe('Le store des exigences filtrées', () => {
     rechercheParThematiqueNis2.set('une thématique');
     rechercheParNormeISO.set('ISO 27001');
     rechercheParFonctionCyFun23.set('Identifier');
+    rechercheParNiveauAssuranceCyFun23.set('Basique');
 
     get(exigencesFiltrees).reinitialise();
 
@@ -37,6 +39,7 @@ describe('Le store des exigences filtrées', () => {
     expect(get(rechercheParThematiqueNis2)).toBeUndefined();
     expect(get(rechercheParNormeISO)).toBeUndefined();
     expect(get(rechercheParFonctionCyFun23)).toBeUndefined();
+    expect(get(rechercheParNiveauAssuranceCyFun23)).toBeUndefined();
   });
 
   it("n'est pas valorisé, detecte qu'aucun filtre n'est actif", () => {
@@ -202,6 +205,34 @@ describe('Le store des exigences filtrées', () => {
 
       exigencesStore.initialise(exigencesDansLeStore);
       rechercheParFonctionCyFun23.set('Protéger');
+
+      const { exigences } = get(exigencesFiltrees);
+
+      expect(exigences.length).toBe(1);
+      expect(exigences[0].reference).toBe('ID.AM-1.2');
+    });
+  });
+
+  describe("lorsque le filtre de niveau d'assurance CyFun23", () => {
+    it("est valorisé, detecte qu'un filtre est actif", () => {
+      rechercheParNiveauAssuranceCyFun23.set('Basique');
+
+      const filtresActifs = get(exigencesFiltrees).filtresActifs;
+
+      expect(filtresActifs).toBeTruthy();
+    });
+
+    it("est appliqué, conserve uniquement les exigences avec le même niveau d'assurance", () => {
+      const exigencesDansLeStore: Exigence[] = [
+        exigenceCyFun23({ reference: 'ID.AM-1.1', niveauAssurance: 'Basique' }),
+        exigenceCyFun23({
+          reference: 'ID.AM-1.2',
+          niveauAssurance: 'Essentiel',
+        }),
+      ];
+
+      exigencesStore.initialise(exigencesDansLeStore);
+      rechercheParNiveauAssuranceCyFun23.set('Essentiel');
 
       const { exigences } = get(exigencesFiltrees);
 
