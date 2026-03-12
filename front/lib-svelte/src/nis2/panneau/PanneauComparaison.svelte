@@ -25,7 +25,7 @@
   };
 
   const optionsReferentiels = $derived([
-    { label: 'ISO 27001', value: 'ISO' },
+    { label: 'ISO 2700x', value: 'ISO' },
     { label: 'AE 2690', value: 'AE' },
     ...(featureFlagNis2CyFun23
       ? [{ label: 'CyFun 2023', value: 'CyFun23' }]
