@@ -4,7 +4,7 @@ typologie: contenu
 nom: Panorama de la menace
 titreHtml: Panorama de la menace
 description: Découvrir les tendances de la menace
-illustration: panorama/panorama.png
+illustration: panorama/panorama.avif
 lien: https://cyber.gouv.fr/nous-connaitre/publications/panoramas-de-la-cybermenace/
 droitsAcces:
   - ACCES_LIBRE
