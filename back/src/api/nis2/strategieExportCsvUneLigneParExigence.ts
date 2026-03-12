@@ -41,16 +41,14 @@ export class StrategieExportCsvUneLigneParExigence {
   };
 
   lignes = (exigences: Exigence[]) =>
-    exigences.map((exigence) => ({
-      reference: exigence.reference,
-      contenu: exigence.contenu,
-      objectif: 'Obj 1 : recensement',
-      thematique: 'Recensement des SI',
-      cibles: 'EntiteEssentielle, EntiteImportante',
-      correspondance: 'faible',
-      reference_iso_1: 'reference_1',
-      contenu_iso_1: 'contenu 1',
-      reference_iso_2: 'reference_2',
-      contenu_iso_2: 'contenu 2',
-    }));
+    exigences.map((exigence) => {
+      const exigenceNIS2 = exigence as ExigenceNIS2;
+      return {
+        reference: exigenceNIS2.reference,
+        contenu: exigenceNIS2.contenu,
+        objectif: exigenceNIS2.objectifSecurite,
+        thematique: exigenceNIS2.thematique,
+        cibles: exigenceNIS2.entitesCible.join(', '),
+      };
+    });
 }

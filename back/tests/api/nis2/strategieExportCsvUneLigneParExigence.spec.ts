@@ -26,6 +26,30 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         { id: 'cibles', title: 'Cibles' },
       ]);
     });
+
+    it('retourne les lignes des exigences NIS2', () => {
+      const strategieExport = new StrategieExportCsvUneLigneParExigence();
+
+      const lignes = strategieExport.lignes([
+        new ExigenceNIS2({
+          reference: 'ref',
+          contenu: 'contenu',
+          entitesCible: ['EntiteEssentielle'],
+          thematique: 'thème',
+          objectifSecurite: 'objectif',
+        }),
+      ]);
+
+      assert.deepEqual(lignes, [
+        {
+          reference: 'ref',
+          contenu: 'contenu',
+          objectif: 'objectif',
+          thematique: 'thème',
+          cibles: 'EntiteEssentielle',
+        },
+      ]);
+    });
   });
 
   describe('lorsque NIS2 est comparé à ISO', () => {
