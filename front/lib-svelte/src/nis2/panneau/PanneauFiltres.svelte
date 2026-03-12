@@ -1,12 +1,14 @@
 <script lang="ts">
   import type {
     Correspondance,
+    CyFun23Fonction,
     Referentiel,
     ReferentielSelectionne,
   } from '../exigence.type';
   import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
   import { rechercheParCorrespondance } from '../stores/rechercheParCorrespondance';
   import { rechercheParEntiteNis2 } from '../stores/rechercheParEntiteNis2';
+  import { rechercheParFonctionCyFun23 } from '../stores/rechercheParFonctionCyFun23';
   import { rechercheParNormeISO } from '../stores/rechercheParNormeISO';
   import { rechercheParObjectifNis2 } from '../stores/rechercheParObjectifNis2';
   import { rechercheParThematiqueNis2 } from '../stores/rechercheParThematiqueNis2';
@@ -24,6 +26,14 @@
     { value: 'moyen', label: 'Moyenne' },
     { value: 'élevé', label: 'Élevée' },
   ] satisfies { value: Correspondance['niveau']; label: string }[];
+
+  const optionsFonctionsCyFun23 = [
+    { value: 'Identifier', label: 'Identifier' },
+    { value: 'Protéger', label: 'Protéger' },
+    { value: 'Détecter', label: 'Détecter' },
+    { value: 'Répondre', label: 'Répondre' },
+    { value: 'Rétablir', label: 'Rétablir' },
+  ] satisfies { value: CyFun23Fonction; label: string }[];
 </script>
 
 <div class="panneau-filtres" class:bureau={estBureau}>
@@ -61,6 +71,15 @@
       options={$exigencesFiltrees.normesISO}
       value={$rechercheParNormeISO ?? ''}
       onvaluechanged={(e: CustomEvent) => ($rechercheParNormeISO = e.detail)}
+    ></dsfr-select>
+  {:else if source === 'CyFun23'}
+    <dsfr-select
+      label="Fonction"
+      placeholder="Sélectionner une option"
+      options={optionsFonctionsCyFun23}
+      value={$rechercheParFonctionCyFun23 ?? ''}
+      onvaluechanged={(e: CustomEvent) =>
+        ($rechercheParFonctionCyFun23 = e.detail)}
     ></dsfr-select>
   {/if}
   {#if cible}

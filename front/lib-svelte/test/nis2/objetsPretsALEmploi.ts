@@ -1,4 +1,10 @@
-import type { ExigenceISO, ExigenceNis2 } from '../../src/nis2/exigence.type';
+import type {
+  CyFun23Fonction,
+  CyFun23NiveauAssurance,
+  ExigenceCyFun23,
+  ExigenceISO,
+  ExigenceNis2,
+} from '../../src/nis2/exigence.type';
 
 export const exigenceNIS2DeNiveauFaible = (): ExigenceNis2 => ({
   reference: 'EX-01',
@@ -32,6 +38,29 @@ export const exigenceISODeNiveauEleve = (): ExigenceISO => ({
   chapitre: '5.1',
   reference: '5.1 EX-02',
   contenu: "Contenu de l'exigence 2",
+  correspondance: {
+    niveau: 'élevé',
+    exigences: [],
+    observations: '',
+  },
+});
+
+export const exigenceCyFun23 = ({
+  reference = 'ID.AM-1.1',
+  fonction = 'Identifier',
+  niveauAssurance = 'Basique',
+  estMesureCle = false,
+}: Partial<{
+  reference: string;
+  fonction: CyFun23Fonction;
+  niveauAssurance: CyFun23NiveauAssurance;
+  estMesureCle: boolean;
+}> = {}): ExigenceCyFun23 => ({
+  fonction,
+  niveauAssurance,
+  estMesureCle,
+  reference,
+  contenu: 'Un inventaire des actifs associés...',
   correspondance: {
     niveau: 'élevé',
     exigences: [],
