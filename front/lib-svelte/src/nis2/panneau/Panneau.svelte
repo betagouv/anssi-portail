@@ -12,6 +12,7 @@
     sensComparaison: 'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2';
     source: Referentiel;
     referentielSelectionne: ReferentielSelectionne | undefined;
+    featureFlagNis2CyFun23: boolean;
   };
 
   let {
@@ -19,6 +20,7 @@
     source,
     sensComparaison = $bindable(),
     referentielSelectionne = $bindable(),
+    featureFlagNis2CyFun23,
   }: Props = $props();
 </script>
 
@@ -28,6 +30,7 @@
       bind:sensComparaison
       bind:referentielSelectionne
       estBureau={true}
+      {featureFlagNis2CyFun23}
     />
     <PanneauFiltres {source} cible={referentielSelectionne} {estBureau} />
   {:else}
@@ -52,6 +55,7 @@
         bind:sensComparaison
         bind:referentielSelectionne
         estBureau={false}
+        {featureFlagNis2CyFun23}
       />
       {#snippet actions()}
         <dsfr-button

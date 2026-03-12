@@ -7,12 +7,14 @@
     estBureau: boolean;
     sensComparaison: 'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2';
     referentielSelectionne: ReferentielSelectionne | undefined;
+    featureFlagNis2CyFun23: boolean;
   };
 
   let {
     estBureau,
     sensComparaison = $bindable(),
     referentielSelectionne = $bindable(),
+    featureFlagNis2CyFun23,
   }: Props = $props();
 
   const inverseComparaison = () => {
@@ -21,6 +23,14 @@
         ? 'SOURCE_VERS_NIS2'
         : 'NIS2_VERS_CIBLE';
   };
+
+  const optionsReferentiels = $derived([
+    { label: 'ISO 27001', value: 'ISO' },
+    { label: 'AE 2690', value: 'AE' },
+    ...(featureFlagNis2CyFun23
+      ? [{ label: 'CyFun 2023', value: 'CyFun23' }]
+      : []),
+  ]);
 
   const selectionneLeReferentiel = (referentiel: ReferentielSelectionne) => {
     referentielSelectionne = referentiel;
@@ -64,11 +74,7 @@
         }}
         placeholder="Sélectionner"
         placeholderDisabled={false}
-        options={[
-          { label: 'ISO 27001', value: 'ISO' },
-          { label: 'AE 2690', value: 'AE' },
-          { label: 'CyFun 2023', value: 'CyFun23' },
-        ]}
+        options={optionsReferentiels}
       ></dsfr-select>
     </div>
   </div>

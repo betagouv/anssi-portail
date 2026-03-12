@@ -8,10 +8,11 @@
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
 
-  let {
+  const {
     itemsCyber,
     featureFlagNis2Exigences = false,
     featureFlagNis2Observations = false,
+    featureFlagNis2CyFun23 = false,
   } = $props();
 
   let estBureau = $state(false);
@@ -78,7 +79,7 @@
   {#if lienActif === '#presentation'}
     <Presentation />
   {:else if lienActif === '#exigences' && featureFlagNis2Exigences}
-    <ExigencesNis2 {featureFlagNis2Observations} />
+    <ExigencesNis2 {featureFlagNis2Observations} {featureFlagNis2CyFun23} />
   {:else if lienActif === '#solutions'}
     <Solutions {itemsCyber} />
   {:else if lienActif === '#documentation'}
