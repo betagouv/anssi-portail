@@ -43,12 +43,35 @@ export class StrategieExportCsvUneLigneParExigence {
   lignes = (exigences: Exigence[]) =>
     exigences.map((exigence) => {
       const exigenceNIS2 = exigence as ExigenceNIS2;
-      return {
-        reference: exigenceNIS2.reference,
-        contenu: exigenceNIS2.contenu,
-        objectif: exigenceNIS2.objectifSecurite,
-        thematique: exigenceNIS2.thematique,
-        cibles: exigenceNIS2.entitesCible.join(', '),
-      };
+      if (exigenceNIS2.correspondances.ISO) {
+        const exigencesISO = exigenceNIS2.correspondances.ISO.exigences.reduce(
+          (previousValue, currentValue, currentIndex) => {
+            return {
+              ...previousValue,
+              [`reference_iso_${currentIndex + 1}`]: currentValue.reference,
+              [`contenu_iso_${currentIndex + 1}`]: currentValue.contenu,
+            };
+          },
+          {}
+        );
+        return {
+          reference: exigenceNIS2.reference,
+          contenu: exigenceNIS2.contenu,
+          objectif: exigenceNIS2.objectifSecurite,
+          thematique: exigenceNIS2.thematique,
+          cibles: exigenceNIS2.entitesCible.join(', '),
+          correspondance: exigenceNIS2.correspondances.ISO.niveau,
+          ...exigencesISO,
+        };
+      } else {
+        return {
+          reference: exigenceNIS2.reference,
+          contenu: exigenceNIS2.contenu,
+          objectif: exigenceNIS2.objectifSecurite,
+
+          thematique: exigenceNIS2.thematique,
+          cibles: exigenceNIS2.entitesCible.join(', '),
+        };
+      }
     });
 }
