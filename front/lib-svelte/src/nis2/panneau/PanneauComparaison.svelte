@@ -40,10 +40,10 @@
 <div class="panneau-comparaison" class:bureau={estBureau}>
   <div class="conteneur">
     <div class="comparaison-libelle">
-      <p class="texte-standard-md">Comparer les exigences NIS 2</p>
+      <p class="texte-standard-md">Comparaison NIS&nbsp;2</p>
       <p class="texte-mention-xs">
-        Comparez les exigences NIS 2 avec des référentiels déjà en place au sein
-        de votre organisation.
+        Comparez les exigences NIS&nbsp;2 avec des référentiels déjà en place au
+        sein de votre organisation.
       </p>
     </div>
     <div
