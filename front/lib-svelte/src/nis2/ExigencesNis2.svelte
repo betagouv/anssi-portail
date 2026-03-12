@@ -17,8 +17,10 @@
   import type { Comparaison } from './tableaux/configuration.type';
 
   const {
+    featureFlagNis2CyFun23,
     featureFlagNis2Observations,
-  }: { featureFlagNis2Observations: boolean } = $props();
+  }: { featureFlagNis2Observations: boolean; featureFlagNis2CyFun23: boolean } =
+    $props();
 
   let exigences = $state<Exigence[]>([]);
   let sensComparaison = $state<'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2'>(
@@ -102,6 +104,7 @@
       bind:referentielSelectionne
       bind:sensComparaison
       {estBureau}
+      {featureFlagNis2CyFun23}
     />
   </div>
   {#if mode === 'LISTE'}

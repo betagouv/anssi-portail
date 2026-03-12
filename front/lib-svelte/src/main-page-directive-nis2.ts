@@ -11,14 +11,22 @@ const { itemsCyber } = JSON.parse(donnees) as {
 
 const donneesNis2 = document.getElementById('donnees-nis2')!.textContent ?? '';
 
-const { featureFlagNis2Exigences, featureFlagNis2Observations } = JSON.parse(
-  donneesNis2
-) as {
+const {
+  featureFlagNis2Exigences,
+  featureFlagNis2Observations,
+  featureFlagNis2CyFun23,
+} = JSON.parse(donneesNis2) as {
   featureFlagNis2Exigences: boolean;
   featureFlagNis2Observations: boolean;
+  featureFlagNis2CyFun23: boolean;
 };
 
 mount(Page, {
   target: document.getElementById('page-directive-nis2')!,
-  props: { itemsCyber, featureFlagNis2Exigences, featureFlagNis2Observations },
+  props: {
+    itemsCyber,
+    featureFlagNis2Exigences,
+    featureFlagNis2Observations,
+    featureFlagNis2CyFun23,
+  },
 });
