@@ -7,6 +7,8 @@
     type ExigenceISO,
     type ExigenceNis2,
   } from '../exigence.type';
+  import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
+  import AucunResultat from './AucunResultat.svelte';
   import CelluleExigenceAE from './CelluleExigenceAE.svelte';
   import CelluleExigenceCyFun23 from './CelluleExigenceCyFun23.svelte';
   import CelluleExigenceISO from './CelluleExigenceISO.svelte';
@@ -103,7 +105,7 @@
   <CelluleExigencesISOCibles {exigences} />
 {/snippet}
 
-{#if configurationCourante}
+{#if exigences.length > 0 || chargement}
   <table class:chargement>
     <thead>
       <tr>
@@ -132,6 +134,8 @@
       {/each}
     </tbody>
   </table>
+{:else if $exigencesFiltrees.filtresActifs}
+  <AucunResultat />
 {/if}
 
 <style lang="scss">
