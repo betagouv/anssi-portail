@@ -1,4 +1,4 @@
-import { Exigence, ExigenceNIS2 } from '../../metier/nis2/exigence';
+import { Exigence, ExigenceAE, ExigenceNIS2 } from '../../metier/nis2/exigence';
 
 class ConvertisseurCsvExigenceNIS2 {
   entetes(_exigences: Exigence[]) {
@@ -11,7 +11,7 @@ class ConvertisseurCsvExigenceNIS2 {
     ];
   }
 
-  enLigne(exigence: ExigenceNIS2) {
+  enLigne(exigence: ExigenceNIS2): Record<string, string> {
     return {
       reference: exigence.reference,
       contenu: exigence.contenu,
@@ -105,6 +105,50 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsv
   }
 }
 
+class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigenceNIS2 {
+  entetes(exigences: Exigence[]) {
+    const resultat = [
+      { id: 'reference', title: 'Référence' },
+      { id: 'contenu', title: 'Contenu' },
+      { id: 'correspondance', title: 'Correspondance' },
+    ];
+
+    const nombreCorrespondanceMax = Math.max(
+      ...exigences.map(
+        (e) => (e as ExigenceAE).correspondances.NIS2.exigences.length ?? 0
+      )
+    );
+
+    for (let i = 1; i < nombreCorrespondanceMax + 1; i++) {
+      resultat.push({
+        id: `reference_nis2_${i}`,
+        title: `Référence NIS2 (${i})`,
+      });
+      resultat.push({ id: `contenu_nis2_${i}`, title: `Contenu NIS2 (${i})` });
+    }
+    return resultat;
+  }
+
+  enLigne(exigence: ExigenceNIS2) {
+    const exigencesNIS2 = exigence.correspondances.NIS2!.exigences.reduce(
+      (previousValue, currentValue, currentIndex) => {
+        return {
+          ...previousValue,
+          [`reference_nis2_${currentIndex + 1}`]: currentValue.reference,
+          [`contenu_nis2_${currentIndex + 1}`]: currentValue.contenu,
+        };
+      },
+      {}
+    );
+    return {
+      reference: exigence.reference,
+      contenu: exigence.contenu,
+      correspondance: exigence.correspondances.NIS2!.niveau,
+      ...exigencesNIS2,
+    };
+  }
+}
+
 export class StrategieExportCsvUneLigneParExigence {
   entetes = (exigences: Exigence[]) => {
     if (exigences.length === 0) return [];
@@ -123,6 +167,8 @@ export class StrategieExportCsvUneLigneParExigence {
       return new ConvertisseurCsvExigenceNIS2AvecCorrespondances();
     } else if ((exigence as ExigenceNIS2).correspondances.AE) {
       return new ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE();
+    } else if (exigence instanceof ExigenceAE) {
+      return new ConvertisseurCsvExigenceAE();
     } else {
       return new ConvertisseurCsvExigenceNIS2();
     }
