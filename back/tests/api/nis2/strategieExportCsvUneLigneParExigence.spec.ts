@@ -273,11 +273,78 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
       ]);
     });
   });
+
+  describe('lorsque ISO est comparé à NIS 2', () => {
+    it('retourne les entêtes avec la correspondance', () => {
+      const exigences = [exigenceISOAvecCorrespondancesNIS2(0)];
+
+      const entetes = strategieExport.entetes(exigences);
+
+      assert.deepEqual(entetes, [
+        { id: 'reference', title: 'Référence' },
+        { id: 'contenu', title: 'Contenu' },
+        { id: 'norme', title: 'Norme' },
+        { id: 'chapitre', title: 'Chapitre' },
+        { id: 'correspondance', title: 'Correspondance' },
+      ]);
+    });
+
+    it('adapte le nombre de colonnes au nombre d’exigences correspondantes maximum ', () => {
+      const exigences = [
+        exigenceISOAvecCorrespondancesNIS2(0),
+        exigenceISOAvecCorrespondancesNIS2(3),
+      ];
+
+      const entetes = strategieExport.entetes(exigences);
+
+      assert.deepEqual(entetes.slice(5), [
+        { id: 'reference_nis2_1', title: 'Référence NIS2 (1)' },
+        { id: 'contenu_nis2_1', title: 'Contenu NIS2 (1)' },
+        { id: 'reference_nis2_2', title: 'Référence NIS2 (2)' },
+        { id: 'contenu_nis2_2', title: 'Contenu NIS2 (2)' },
+        { id: 'reference_nis2_3', title: 'Référence NIS2 (3)' },
+        { id: 'contenu_nis2_3', title: 'Contenu NIS2 (3)' },
+      ]);
+    });
+
+    it('retourne les lignes des exigences ISO avec les correspondances', () => {
+      const exigences = [
+        new ExigenceISO({
+          reference: '',
+          contenu: '',
+          norme: '271',
+          chapitre: '9',
+          correspondance: {
+            exigences: [
+              exigenceNIS2SansCorrespondance('refnis2-1', 'contenunis2-1'),
+              exigenceNIS2SansCorrespondance('refnis2-2', 'contenunis2-2'),
+            ],
+            niveau: 'faible',
+            observations: '',
+          },
+        }),
+      ];
+
+      const lignes = strategieExport.lignes(exigences);
+
+      assert.deepEqual(lignes, [
+        {
+          reference: '',
+          contenu: '',
+          norme: '271',
+          chapitre: '9',
+          correspondance: 'faible',
+          reference_nis2_1: 'refnis2-1',
+          contenu_nis2_1: 'contenunis2-1',
+          reference_nis2_2: 'refnis2-2',
+          contenu_nis2_2: 'contenunis2-2',
+        },
+      ]);
+    });
+  });
 });
 
-const exigenceAEAvecCorrespondancesNIS2 = (
-  nombreCorrespondances: number
-) =>
+const exigenceAEAvecCorrespondancesNIS2 = (nombreCorrespondances: number) =>
   new ExigenceAE({
     reference: '',
     contenu: '',
@@ -286,6 +353,22 @@ const exigenceAEAvecCorrespondancesNIS2 = (
         exigenceNIS2SansCorrespondance()
       ),
       niveau: 'faible',
+      observations: '',
+    },
+  });
+
+const exigenceISOAvecCorrespondancesNIS2 = (nombreCorrespondances: number) =>
+  new ExigenceISO({
+    reference: '',
+    contenu: '',
+    norme: '2701',
+    chapitre: 'chapitre 6',
+    correspondance: {
+      exigences: new Array(nombreCorrespondances).map((_) =>
+        exigenceNIS2SansCorrespondance()
+      ),
+      niveau: 'faible',
+
       observations: '',
     },
   });
