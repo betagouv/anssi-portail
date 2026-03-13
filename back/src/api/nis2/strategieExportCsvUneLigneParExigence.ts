@@ -1,8 +1,10 @@
 import {
+  Correspondance,
   Exigence,
   ExigenceAE,
   ExigenceISO,
   ExigenceNIS2,
+  Referentiel,
 } from '../../metier/nis2/exigence';
 
 class ConvertisseurCsvExigence<T extends Exigence> {
@@ -12,6 +14,7 @@ class ConvertisseurCsvExigence<T extends Exigence> {
       { id: 'contenu', title: 'Contenu' },
     ];
   }
+
   enLigne(exigence: T): Record<string, string> {
     return {
       reference: exigence.reference,
@@ -40,27 +43,42 @@ class ConvertisseurCsvExigenceNIS2 extends ConvertisseurCsvExigence<ExigenceNIS2
   }
 }
 
-class ConvertisseurCsvExigenceNIS2AvecCorrespondances extends ConvertisseurCsvExigenceNIS2 {
+type ExigenceAvecCorrespondances = {
+  correspondances: Partial<Record<Referentiel, Correspondance>>;
+};
+
+function colonnesEntetesCorrespondances(
+  exigences: ExigenceAvecCorrespondances[],
+  referentielCompare: Referentiel
+) {
+  const nombreCorrespondanceMax = Math.max(
+    ...exigences.map(
+      (e) => e.correspondances[referentielCompare]?.exigences.length ?? 0
+    )
+  );
+
+  const resultat = [];
+
+  for (let i = 1; i < nombreCorrespondanceMax + 1; i++) {
+    resultat.push({
+      id: `reference_${referentielCompare.toLowerCase()}_${i}`,
+      title: `Référence ${referentielCompare} (${i})`,
+    });
+    resultat.push({
+      id: `contenu_${referentielCompare.toLowerCase()}_${i}`,
+      title: `Contenu ${referentielCompare} (${i})`,
+    });
+  }
+  return resultat;
+}
+
+class ConvertisseurCsvExigenceNIS2AvecCorrespondancesISO extends ConvertisseurCsvExigenceNIS2 {
   entetes(exigences: ExigenceNIS2[]) {
-    const resultat = [
+    return [
       ...super.entetes(exigences),
       { id: 'correspondance', title: 'Correspondance' },
+      ...colonnesEntetesCorrespondances(exigences, 'ISO'),
     ];
-
-    const nombreCorrespondanceMax = Math.max(
-      ...exigences.map(
-        (e) => (e as ExigenceNIS2).correspondances.ISO?.exigences.length ?? 0
-      )
-    );
-
-    for (let i = 1; i < nombreCorrespondanceMax + 1; i++) {
-      resultat.push({
-        id: `reference_iso_${i}`,
-        title: `Référence ISO (${i})`,
-      });
-      resultat.push({ id: `contenu_iso_${i}`, title: `Contenu ISO (${i})` });
-    }
-    return resultat;
   }
 
   enLigne(exigenceNIS2: ExigenceNIS2) {
@@ -84,24 +102,11 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondances extends ConvertisseurCsvEx
 
 class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsvExigenceNIS2 {
   entetes(exigences: ExigenceNIS2[]) {
-    const resultat = [
+    return [
       ...super.entetes(exigences),
       { id: 'correspondance', title: 'Correspondance' },
+      ...colonnesEntetesCorrespondances(exigences, 'AE'),
     ];
-    const nombreCorrespondanceMax = Math.max(
-      ...exigences.map(
-        (e) => (e as ExigenceNIS2).correspondances.AE?.exigences.length ?? 0
-      )
-    );
-
-    for (let i = 1; i < nombreCorrespondanceMax + 1; i++) {
-      resultat.push({
-        id: `reference_ae_${i}`,
-        title: `Référence AE (${i})`,
-      });
-      resultat.push({ id: `contenu_ae_${i}`, title: `Contenu AE (${i})` });
-    }
-    return resultat;
   }
 
   enLigne(exigenceNIS2: ExigenceNIS2) {
@@ -125,25 +130,11 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsv
 
 class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigence<ExigenceAE> {
   entetes(exigences: ExigenceAE[]) {
-    const resultat = [
+    return [
       ...super.entetes(exigences),
       { id: 'correspondance', title: 'Correspondance' },
+      ...colonnesEntetesCorrespondances(exigences, 'NIS2'),
     ];
-
-    const nombreCorrespondanceMax = Math.max(
-      ...exigences.map(
-        (e) => (e as ExigenceAE).correspondances.NIS2.exigences.length ?? 0
-      )
-    );
-
-    for (let i = 1; i < nombreCorrespondanceMax + 1; i++) {
-      resultat.push({
-        id: `reference_nis2_${i}`,
-        title: `Référence NIS2 (${i})`,
-      });
-      resultat.push({ id: `contenu_nis2_${i}`, title: `Contenu NIS2 (${i})` });
-    }
-    return resultat;
   }
 
   enLigne(exigence: ExigenceAE) {
@@ -165,29 +156,15 @@ class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigence<ExigenceAE> {
   }
 }
 
-class ConvertisseurCsvExigenceISO extends ConvertisseurCsvExigence<ExigenceAE> {
-  entetes(exigences: ExigenceAE[]) {
-    const resultat = [
+class ConvertisseurCsvExigenceISO extends ConvertisseurCsvExigence<ExigenceISO> {
+  entetes(exigences: ExigenceISO[]) {
+    return [
       ...super.entetes(exigences),
       { id: 'norme', title: 'Norme' },
       { id: 'chapitre', title: 'Chapitre' },
       { id: 'correspondance', title: 'Correspondance' },
+      ...colonnesEntetesCorrespondances(exigences, 'NIS2'),
     ];
-
-    const nombreCorrespondanceMax = Math.max(
-      ...exigences.map(
-        (e) => (e as ExigenceAE).correspondances.NIS2.exigences.length ?? 0
-      )
-    );
-
-    for (let i = 1; i < nombreCorrespondanceMax + 1; i++) {
-      resultat.push({
-        id: `reference_nis2_${i}`,
-        title: `Référence NIS2 (${i})`,
-      });
-      resultat.push({ id: `contenu_nis2_${i}`, title: `Contenu NIS2 (${i})` });
-    }
-    return resultat;
   }
 
   enLigne(exigence: ExigenceISO) {
@@ -230,7 +207,7 @@ export class StrategieExportCsvUneLigneParExigence {
     if (exigence instanceof ExigenceISO) {
       return new ConvertisseurCsvExigenceISO();
     } else if ((exigence as ExigenceNIS2).correspondances.ISO) {
-      return new ConvertisseurCsvExigenceNIS2AvecCorrespondances();
+      return new ConvertisseurCsvExigenceNIS2AvecCorrespondancesISO();
     } else if ((exigence as ExigenceNIS2).correspondances.AE) {
       return new ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE();
     } else if (exigence instanceof ExigenceAE) {
