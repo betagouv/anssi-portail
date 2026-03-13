@@ -15,6 +15,7 @@
   import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
   import TableauExigencesNIS2Simple from './tableaux/TableauExigencesNIS2Simple.svelte';
   import type { Comparaison } from './tableaux/configuration.type';
+  import Avertissements from './Avertissements.svelte';
 
   const {
     featureFlagNis2CyFun23,
@@ -88,13 +89,7 @@
 </script>
 
 <ConteneurLarge mode={mode === 'LISTE' ? 'STANDARD' : 'LARGE'}>
-  {#if !estBureau}
-    <dsfr-alert type="info" size="sm" hasTitle={false} dismissible>
-      <span slot="description">
-        Cette page n’est pas optimisée pour un affichage mobile.
-      </span>
-    </dsfr-alert>
-  {/if}
+  <Avertissements {estBureau} />
   <div class="entete">
     <h2>Liste des exigences NIS 2</h2>
     <p class="texte-detail-sm">
@@ -138,10 +133,6 @@
 </ConteneurLarge>
 
 <style lang="scss">
-  dsfr-alert {
-    margin-bottom: 1.5rem;
-  }
-
   h2 {
     margin-bottom: 8px;
   }
