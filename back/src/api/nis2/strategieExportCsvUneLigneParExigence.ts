@@ -57,13 +57,50 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondances extends ConvertisseurCsvEx
       {}
     );
     return {
-      reference: exigenceNIS2.reference,
-      contenu: exigenceNIS2.contenu,
-      objectif: exigenceNIS2.objectifSecurite,
-      thematique: exigenceNIS2.thematique,
-      cibles: exigenceNIS2.entitesCible.join(', '),
+      ...super.enLigne(exigenceNIS2),
       correspondance: exigenceNIS2.correspondances.ISO!.niveau,
       ...exigencesISO,
+    };
+  }
+}
+
+class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsvExigenceNIS2 {
+  entetes(exigences: Exigence[]) {
+    const resultat = [
+      ...super.entetes(exigences),
+      { id: 'correspondance', title: 'Correspondance' },
+    ];
+    const nombreCorrespondanceMax = Math.max(
+      ...exigences.map(
+        (e) => (e as ExigenceNIS2).correspondances.AE?.exigences.length ?? 0
+      )
+    );
+
+    for (let i = 1; i < nombreCorrespondanceMax + 1; i++) {
+      resultat.push({
+        id: `reference_ae_${i}`,
+        title: `Référence AE (${i})`,
+      });
+      resultat.push({ id: `contenu_ae_${i}`, title: `Contenu AE (${i})` });
+    }
+    return resultat;
+  }
+
+  enLigne(exigenceNIS2: ExigenceNIS2) {
+    const exigencesAE = exigenceNIS2.correspondances.AE!.exigences.reduce(
+      (previousValue, currentValue, currentIndex) => {
+        return {
+          ...previousValue,
+          [`reference_ae_${currentIndex + 1}`]: currentValue.reference,
+          [`contenu_ae_${currentIndex + 1}`]: currentValue.contenu,
+        };
+      },
+      {}
+    );
+    return {
+      ...super.enLigne(exigenceNIS2),
+      correspondance: exigenceNIS2.correspondances.AE!.niveau,
+      ...exigencesAE,
     };
   }
 }
@@ -80,9 +117,11 @@ export class StrategieExportCsvUneLigneParExigence {
       return convertisseurCsv.enLigne(exigence as ExigenceNIS2);
     });
 
-  private convertisseurCsv(exigence: Exigence) {
+  private convertisseurCsv(exigence: Exigence): ConvertisseurCsvExigenceNIS2 {
     if ((exigence as ExigenceNIS2).correspondances.ISO) {
       return new ConvertisseurCsvExigenceNIS2AvecCorrespondances();
+    } else if ((exigence as ExigenceNIS2).correspondances.AE) {
+      return new ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE();
     } else {
       return new ConvertisseurCsvExigenceNIS2();
     }
