@@ -107,6 +107,7 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsv
 
 export class StrategieExportCsvUneLigneParExigence {
   entetes = (exigences: Exigence[]) => {
+    if (exigences.length === 0) return [];
     const convertisseurCsv = this.convertisseurCsv(exigences[0]);
     return convertisseurCsv.entetes(exigences);
   };
