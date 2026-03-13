@@ -15,6 +15,12 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
     strategieExport = new StrategieExportCsvUneLigneParExigence();
   });
 
+  it('reste robuste lorsqu’il n’y a pas d’exigence', () => {
+    const entetes = strategieExport.entetes([]);
+
+    assert.deepEqual(entetes, []);
+  });
+
   describe('lorsqu’il n’a pas de référentiel comparé', () => {
     it('retourne les entêtes NIS2', () => {
       const entetes = strategieExport.entetes([
