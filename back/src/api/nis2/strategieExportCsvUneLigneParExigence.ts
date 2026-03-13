@@ -1,10 +1,24 @@
 import { Exigence, ExigenceAE, ExigenceNIS2 } from '../../metier/nis2/exigence';
 
-class ConvertisseurCsvExigenceNIS2 {
-  entetes(_exigences: Exigence[]) {
+class ConvertisseurCsvExigence<T extends Exigence> {
+  entetes(_exigences: T[]): { id: string; title: string }[] {
     return [
       { id: 'reference', title: 'Référence' },
       { id: 'contenu', title: 'Contenu' },
+    ];
+  }
+  enLigne(exigence: T): Record<string, string> {
+    return {
+      reference: exigence.reference,
+      contenu: exigence.contenu,
+    };
+  }
+}
+
+class ConvertisseurCsvExigenceNIS2 extends ConvertisseurCsvExigence<ExigenceNIS2> {
+  entetes(exigences: ExigenceNIS2[]) {
+    return [
+      ...super.entetes(exigences),
       { id: 'objectif', title: 'Objectif' },
       { id: 'thematique', title: 'Thématique' },
       { id: 'cibles', title: 'Cibles' },
@@ -13,8 +27,7 @@ class ConvertisseurCsvExigenceNIS2 {
 
   enLigne(exigence: ExigenceNIS2): Record<string, string> {
     return {
-      reference: exigence.reference,
-      contenu: exigence.contenu,
+      ...super.enLigne(exigence),
       objectif: exigence.objectifSecurite,
       thematique: exigence.thematique,
       cibles: exigence.entitesCible.join(', '),
@@ -23,7 +36,7 @@ class ConvertisseurCsvExigenceNIS2 {
 }
 
 class ConvertisseurCsvExigenceNIS2AvecCorrespondances extends ConvertisseurCsvExigenceNIS2 {
-  entetes(exigences: Exigence[]) {
+  entetes(exigences: ExigenceNIS2[]) {
     const resultat = [
       ...super.entetes(exigences),
       { id: 'correspondance', title: 'Correspondance' },
@@ -65,7 +78,7 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondances extends ConvertisseurCsvEx
 }
 
 class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsvExigenceNIS2 {
-  entetes(exigences: Exigence[]) {
+  entetes(exigences: ExigenceNIS2[]) {
     const resultat = [
       ...super.entetes(exigences),
       { id: 'correspondance', title: 'Correspondance' },
@@ -105,11 +118,10 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsv
   }
 }
 
-class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigenceNIS2 {
-  entetes(exigences: Exigence[]) {
+class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigence<ExigenceAE> {
+  entetes(exigences: ExigenceAE[]) {
     const resultat = [
-      { id: 'reference', title: 'Référence' },
-      { id: 'contenu', title: 'Contenu' },
+      ...super.entetes(exigences),
       { id: 'correspondance', title: 'Correspondance' },
     ];
 
@@ -129,7 +141,7 @@ class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigenceNIS2 {
     return resultat;
   }
 
-  enLigne(exigence: ExigenceNIS2) {
+  enLigne(exigence: ExigenceAE) {
     const exigencesNIS2 = exigence.correspondances.NIS2!.exigences.reduce(
       (previousValue, currentValue, currentIndex) => {
         return {
@@ -141,8 +153,7 @@ class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigenceNIS2 {
       {}
     );
     return {
-      reference: exigence.reference,
-      contenu: exigence.contenu,
+      ...super.enLigne(exigence),
       correspondance: exigence.correspondances.NIS2!.niveau,
       ...exigencesNIS2,
     };
@@ -159,10 +170,12 @@ export class StrategieExportCsvUneLigneParExigence {
   lignes = (exigences: Exigence[]) =>
     exigences.map((exigence) => {
       const convertisseurCsv = this.convertisseurCsv(exigence);
-      return convertisseurCsv.enLigne(exigence as ExigenceNIS2);
+      return convertisseurCsv.enLigne(exigence);
     });
 
-  private convertisseurCsv(exigence: Exigence): ConvertisseurCsvExigenceNIS2 {
+  private convertisseurCsv(
+    exigence: Exigence
+  ): ConvertisseurCsvExigence<Exigence> {
     if ((exigence as ExigenceNIS2).correspondances.ISO) {
       return new ConvertisseurCsvExigenceNIS2AvecCorrespondances();
     } else if ((exigence as ExigenceNIS2).correspondances.AE) {
