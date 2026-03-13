@@ -9,10 +9,22 @@
   };
 
   let { estOuverte = $bindable(), children, actions }: Props = $props();
+
+  let dialogue = $state<HTMLDialogElement | undefined>();
+
+  $effect(() => {
+    if (dialogue) {
+      if (estOuverte) {
+        dialogue.showModal();
+      } else {
+        dialogue.close();
+      }
+    }
+  });
 </script>
 
 {#if estOuverte}
-  <div class="modale">
+  <dialog bind:this={dialogue}>
     <div class="entete">
       <dsfr-button
         label="Fermer"
@@ -31,20 +43,35 @@
         {@render actions()}
       </div>
     {/if}
-  </div>
+  </dialog>
 {/if}
 
 <style lang="scss">
-  .modale {
+  @use '../../../assets/styles/responsive' as *;
+  dialog {
     display: flex;
     flex-direction: column;
-    position: fixed;
-    z-index: 11;
-    background: white;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
-    top: 0;
-    left: 0;
+    max-width: 100vw;
+    max-height: 100vh;
+    padding: 0;
+    margin: 0;
+    border: none;
+    z-index: 11;
+
+    &::backdrop {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    @include a-partir-de(lg) {
+      max-height: 90vh;
+      max-width: 588px;
+      min-width: 0;
+      margin: auto;
+      padding: 0 16px;
+      border-radius: 8px;
+    }
 
     .entete {
       display: flex;
