@@ -1,4 +1,9 @@
-import { Exigence, ExigenceAE, ExigenceNIS2 } from '../../metier/nis2/exigence';
+import {
+  Exigence,
+  ExigenceAE,
+  ExigenceISO,
+  ExigenceNIS2,
+} from '../../metier/nis2/exigence';
 
 class ConvertisseurCsvExigence<T extends Exigence> {
   entetes(_exigences: T[]): { id: string; title: string }[] {
@@ -160,6 +165,52 @@ class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigence<ExigenceAE> {
   }
 }
 
+class ConvertisseurCsvExigenceISO extends ConvertisseurCsvExigence<ExigenceAE> {
+  entetes(exigences: ExigenceAE[]) {
+    const resultat = [
+      ...super.entetes(exigences),
+      { id: 'norme', title: 'Norme' },
+      { id: 'chapitre', title: 'Chapitre' },
+      { id: 'correspondance', title: 'Correspondance' },
+    ];
+
+    const nombreCorrespondanceMax = Math.max(
+      ...exigences.map(
+        (e) => (e as ExigenceAE).correspondances.NIS2.exigences.length ?? 0
+      )
+    );
+
+    for (let i = 1; i < nombreCorrespondanceMax + 1; i++) {
+      resultat.push({
+        id: `reference_nis2_${i}`,
+        title: `Référence NIS2 (${i})`,
+      });
+      resultat.push({ id: `contenu_nis2_${i}`, title: `Contenu NIS2 (${i})` });
+    }
+    return resultat;
+  }
+
+  enLigne(exigence: ExigenceISO) {
+    const exigencesNIS2 = exigence.correspondances.NIS2!.exigences.reduce(
+      (previousValue, currentValue, currentIndex) => {
+        return {
+          ...previousValue,
+          [`reference_nis2_${currentIndex + 1}`]: currentValue.reference,
+          [`contenu_nis2_${currentIndex + 1}`]: currentValue.contenu,
+        };
+      },
+      {}
+    );
+    return {
+      ...super.enLigne(exigence),
+      norme: exigence.norme,
+      chapitre: exigence.chapitre,
+      correspondance: exigence.correspondances.NIS2!.niveau,
+      ...exigencesNIS2,
+    };
+  }
+}
+
 export class StrategieExportCsvUneLigneParExigence {
   entetes = (exigences: Exigence[]) => {
     if (exigences.length === 0) return [];
@@ -176,7 +227,9 @@ export class StrategieExportCsvUneLigneParExigence {
   private convertisseurCsv(
     exigence: Exigence
   ): ConvertisseurCsvExigence<Exigence> {
-    if ((exigence as ExigenceNIS2).correspondances.ISO) {
+    if (exigence instanceof ExigenceISO) {
+      return new ConvertisseurCsvExigenceISO();
+    } else if ((exigence as ExigenceNIS2).correspondances.ISO) {
       return new ConvertisseurCsvExigenceNIS2AvecCorrespondances();
     } else if ((exigence as ExigenceNIS2).correspondances.AE) {
       return new ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE();
