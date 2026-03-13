@@ -210,7 +210,97 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
       ]);
     });
   });
+
+  describe('lorsque AE est comparé à NIS 2', () => {
+    it('retourne les entêtes avec la correspondance', () => {
+      const exigences = [exigenceAEAvecCorrespondancesNIS2(0)];
+
+      const entetes = strategieExport.entetes(exigences);
+
+      assert.deepEqual(entetes, [
+        { id: 'reference', title: 'Référence' },
+        { id: 'contenu', title: 'Contenu' },
+        { id: 'correspondance', title: 'Correspondance' },
+      ]);
+    });
+
+    it('adapte le nombre de colonnes au nombre d’exigences correspondantes maximum ', () => {
+      const exigences = [
+        exigenceAEAvecCorrespondancesNIS2(0),
+        exigenceAEAvecCorrespondancesNIS2(3),
+      ];
+
+      const entetes = strategieExport.entetes(exigences);
+
+      assert.deepEqual(entetes.slice(3), [
+        { id: 'reference_nis2_1', title: 'Référence NIS2 (1)' },
+        { id: 'contenu_nis2_1', title: 'Contenu NIS2 (1)' },
+        { id: 'reference_nis2_2', title: 'Référence NIS2 (2)' },
+        { id: 'contenu_nis2_2', title: 'Contenu NIS2 (2)' },
+        { id: 'reference_nis2_3', title: 'Référence NIS2 (3)' },
+        { id: 'contenu_nis2_3', title: 'Contenu NIS2 (3)' },
+      ]);
+    });
+
+    it('retourne les lignes des exigences AE avec les correspondances', () => {
+      const exigences = [
+        new ExigenceAE({
+          reference: '',
+          contenu: '',
+          correspondance: {
+            exigences: [
+              exigenceNIS2SansCorrespondance('refnis2-1', 'contenunis2-1'),
+              exigenceNIS2SansCorrespondance('refnis2-2', 'contenunis2-2'),
+            ],
+            niveau: 'faible',
+            observations: '',
+          },
+        }),
+      ];
+
+      const lignes = strategieExport.lignes(exigences);
+
+      assert.deepEqual(lignes, [
+        {
+          reference: '',
+          contenu: '',
+          correspondance: 'faible',
+          reference_nis2_1: 'refnis2-1',
+          contenu_nis2_1: 'contenunis2-1',
+          reference_nis2_2: 'refnis2-2',
+          contenu_nis2_2: 'contenunis2-2',
+        },
+      ]);
+    });
+  });
 });
+
+const exigenceAEAvecCorrespondancesNIS2 = (
+  nombreCorrespondances: number
+) =>
+  new ExigenceAE({
+    reference: '',
+    contenu: '',
+    correspondance: {
+      exigences: new Array(nombreCorrespondances).map((_) =>
+        exigenceNIS2SansCorrespondance()
+      ),
+      niveau: 'faible',
+      observations: '',
+    },
+  });
+
+const exigenceNIS2SansCorrespondance = (
+  reference: string = '',
+  contenu: string = ''
+) =>
+  new ExigenceNIS2({
+    reference,
+    contenu,
+    entitesCible: [],
+    thematique: '',
+    objectifSecurite: '',
+  });
 
 const exigenceNIS2AvecCorrespondancesISO = (nombreCorrespondances: number) =>
   exigenceNIS2AvecCorrespondances(nombreCorrespondances, 'ISO', exigenceISO);
