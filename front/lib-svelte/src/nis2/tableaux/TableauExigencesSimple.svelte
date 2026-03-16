@@ -1,14 +1,17 @@
 <script lang="ts">
-  import { type ExigenceNis2 } from '../exigence.type';
+  import { type Exigence, type ExigenceNis2 } from '../exigence.type';
   import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
   import AucunResultat from './AucunResultat.svelte';
   import CelluleExigenceNis2 from './CelluleExigenceNis2.svelte';
 
-  export let exigencesNis2: ExigenceNis2[];
+  export let exigences: Exigence[];
   export let chargement: boolean = false;
+
+  const estUneExigenceNis2 = (exigence: Exigence): exigence is ExigenceNis2 =>
+    !!(exigence as ExigenceNis2).entitesCible;
 </script>
 
-{#if exigencesNis2.length > 0 || chargement}
+{#if exigences.length > 0 || chargement}
   <table class:chargement>
     <thead>
       <tr>
@@ -16,9 +19,11 @@
       </tr>
     </thead>
     <tbody>
-      {#each exigencesNis2 as exigence (exigence.reference)}
+      {#each exigences as exigence (exigence.reference)}
         <tr>
-          <CelluleExigenceNis2 {exigence} />
+          {#if estUneExigenceNis2(exigence)}
+            <CelluleExigenceNis2 {exigence} />
+          {/if}
         </tr>
       {/each}
     </tbody>

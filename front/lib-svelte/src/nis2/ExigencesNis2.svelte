@@ -2,20 +2,18 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import ConteneurLarge from '../ui/ConteneurLarge.svelte';
+  import Avertissements from './Avertissements.svelte';
   import {
-    fabriqueDExigence,
     type Exigence,
-    type ExigenceNis2,
-    type Referentiel,
+    fabriqueDExigence,
     type ReferentielSelectionne,
   } from './exigence.type';
   import Panneau from './panneau/Panneau.svelte';
   import { exigencesStore } from './stores/exigences.store';
   import { exigencesFiltrees } from './stores/exigencesFiltrees.store';
-  import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
-  import TableauExigencesNIS2Simple from './tableaux/TableauExigencesNIS2Simple.svelte';
   import type { Comparaison } from './tableaux/configuration.type';
-  import Avertissements from './Avertissements.svelte';
+  import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
+  import TableauExigencesSimple from './tableaux/TableauExigencesSimple.svelte';
 
   const {
     featureFlagNis2CyFun23,
@@ -126,8 +124,8 @@
     />
   </div>
   {#if mode === 'LISTE'}
-    <TableauExigencesNIS2Simple
-      exigencesNis2={$exigencesFiltrees.exigences as ExigenceNis2[]}
+    <TableauExigencesSimple
+      exigences={$exigencesFiltrees.exigences}
       {chargement}
     />
   {:else}
