@@ -182,8 +182,4 @@
       }
     }
   }
-
-  :global(table.chargement) {
-    opacity: 0.25;
-  }
 </style>

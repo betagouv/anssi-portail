@@ -80,7 +80,7 @@
 
 {#snippet colonneSourceNIS2(exigenceSource: Exigence)}
   {@const exigence = exigenceSource as ExigenceNis2}
-  <CelluleExigenceNis2 {exigence} />
+  <td><CelluleExigenceNis2 {exigence} /></td>
 {/snippet}
 
 {#snippet colonneSourceISO(exigenceSource: Exigence)}

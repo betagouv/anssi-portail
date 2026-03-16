@@ -12,34 +12,35 @@
 </script>
 
 {#if exigences.length > 0 || chargement}
-  <table class:chargement>
-    <thead>
-      <tr>
-        <th>Exigence applicable à NIS&nbsp;2</th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each exigences as exigence (exigence.reference)}
-        <tr>
-          {#if estUneExigenceNis2(exigence)}
-            <CelluleExigenceNis2 {exigence} />
-          {/if}
-        </tr>
-      {/each}
-    </tbody>
-  </table>
+  <dsfr-table
+    class:chargement
+    id="table-nis2"
+    caption="Exigences NIS&nbsp;2"
+    multiline
+    rich
+    columns={[
+      {
+        key: 'exigence',
+        label: 'Exigence applicable à NIS 2',
+        multiline: true,
+      },
+    ]}
+    rows={exigences}
+  >
+    {#each exigences as exigence, i (exigence.reference)}
+      <div slot={`cell:exigence:${i}`}>
+        {#if estUneExigenceNis2(exigence)}
+          <CelluleExigenceNis2 {exigence} />
+        {/if}
+      </div>
+    {/each}
+  </dsfr-table>
 {:else if $exigencesFiltrees.filtresActifs}
   <AucunResultat />
 {/if}
 
 <style lang="scss">
-  table {
-    margin-bottom: 1.5rem;
-    border-collapse: collapse;
-
-    th {
-      padding: 0.5rem 1rem;
-      border: 1px solid black;
-    }
+  dsfr-table.chargement {
+    opacity: 0.25;
   }
 </style>
