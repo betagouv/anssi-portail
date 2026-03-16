@@ -21,10 +21,15 @@
       }
     }
   });
+
+  const fermeDialogue = () => {
+    dialogue?.close();
+    estOuverte = false;
+  };
 </script>
 
 {#if estOuverte}
-  <dialog bind:this={dialogue}>
+  <dialog bind:this={dialogue} onclose={fermeDialogue}>
     <div class="entete">
       <dsfr-button
         label="Fermer"
@@ -32,7 +37,7 @@
         icon-place="right"
         icon="close-line"
         kind="tertiary-no-outline"
-        use:clic={() => (estOuverte = false)}
+        use:clic={fermeDialogue}
       ></dsfr-button>
     </div>
     <div class="contenu">
@@ -48,7 +53,7 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
-  dialog {
+  dialog[open] {
     display: flex;
     flex-direction: column;
     width: 100vw;
