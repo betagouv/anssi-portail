@@ -65,6 +65,13 @@
     sensComparaison === 'SOURCE_VERS_NIS2' ? 'NIS2' : referentielSelectionne
   );
 
+  const lienExportTableau = $derived(
+    `/api/exigences-nis2.csv?${new URLSearchParams({
+      ...(source && { source }),
+      ...(cible && { cible }),
+    }).toString()}`
+  );
+
   $effect(() => {
     const charge = async () => {
       chargement = true;
@@ -87,15 +94,27 @@
 <ConteneurLarge mode={mode === 'LISTE' ? 'STANDARD' : 'LARGE'}>
   <Avertissements {estBureau} />
   <div class="entete">
-    <h2>Liste des exigences NIS 2</h2>
-    <p class="texte-detail-sm">
-      Téléchargez la liste au format PDF sur le
-      <dsfr-link
-        href="https://cyber.gouv.fr/reglementation/cybersecurite-systemes-dinformation/directives-nis-nis2-et-dispositif-saiv/directive-nis-2/"
-        label="site de l'ANSSI"
-        blank
-      ></dsfr-link>
-    </p>
+    <div class="titre">
+      <h2>Liste des exigences NIS 2</h2>
+      <p class="texte-detail-sm">
+        Téléchargez la liste au format PDF sur le
+        <dsfr-link
+          href="https://cyber.gouv.fr/reglementation/cybersecurite-systemes-dinformation/directives-nis-nis2-et-dispositif-saiv/directive-nis-2/"
+          label="site de l'ANSSI"
+          blank
+        ></dsfr-link>
+      </p>
+      <dsfr-button
+        label="Exporter le tableau"
+        markup="a"
+        href={lienExportTableau}
+        has-icon
+        icon-place="left"
+        icon="download-line"
+        centered
+      ></dsfr-button>
+    </div>
+
     <Panneau
       source={sensComparaison === 'NIS2_VERS_CIBLE'
         ? 'NIS2'
@@ -129,13 +148,43 @@
 </ConteneurLarge>
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
+
   h2 {
-    margin-bottom: 8px;
+    margin-bottom: 0;
   }
 
   .entete {
     margin: 0 0 24px;
     padding: 0 0 16px;
+
+    .titre {
+      display: grid;
+      grid-template-areas: 'titre' 'telechargement' 'export';
+      margin-bottom: 1rem;
+
+      @include a-partir-de(md) {
+        grid-template-areas: 'titre export' 'telechargement telechargement';
+        grid-template-columns: auto auto;
+        row-gap: 8px;
+        margin-bottom: 0;
+      }
+      h2 {
+        grid-area: titre;
+      }
+
+      p {
+        grid-area: telechargement;
+      }
+
+      dsfr-button {
+        grid-area: export;
+        @include a-partir-de(md) {
+          width: fit-content;
+          justify-self: end;
+        }
+      }
+    }
   }
 
   :global(table.chargement) {
