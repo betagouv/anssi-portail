@@ -105,6 +105,7 @@
     }
 
     &.bureau {
+      margin-top: 24px;
       display: grid;
       gap: 24px;
       grid-template-rows: repeat(1, fit-content(100%));
