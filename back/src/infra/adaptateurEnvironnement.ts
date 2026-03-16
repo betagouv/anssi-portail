@@ -201,7 +201,8 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     }),
     nis2: () => ({
       idDocument: () => process.env.NIS2_GRIST_ID_DOCUMENT || '',
-      cleApi: () => process.env.GRIST_API_KEY || '',
+      cleApi: () =>
+        process.env.NIS2_GRIST_API_KEY || process.env.GRIST_API_KEY || '',
     }),
     dureeCacheEnSecondes: () => {
       const dureeEnChaine = process.env.GUIDES_GRIST_DUREE_CACHE_EN_SECONDES;
