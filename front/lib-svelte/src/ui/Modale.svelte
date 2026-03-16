@@ -65,7 +65,7 @@
     }
 
     @include a-partir-de(lg) {
-      height: auto;
+      height: min-content;
       max-height: 90vh;
       max-width: 588px;
       min-width: 0;
@@ -81,7 +81,7 @@
     }
 
     .contenu {
-      flex: 1 0 0;
+      flex: 1 1 auto;
       overflow-y: auto;
       padding: 0 16px;
     }
