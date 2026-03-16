@@ -95,11 +95,11 @@
     <div class="titre">
       <h2>Liste des exigences NIS 2</h2>
       <p class="texte-detail-sm">
-        Téléchargez la liste au format PDF sur le
         <dsfr-link
-          href="https://cyber.gouv.fr/reglementation/cybersecurite-systemes-dinformation/directives-nis-nis2-et-dispositif-saiv/directive-nis-2/"
-          label="site de l'ANSSI"
+          href="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/20260216_ANSSI_NIS2_Regles_de_securite-version_beta.pdf"
+          label="Télécharger les exigences (PDF)"
           blank
+          download
         ></dsfr-link>
       </p>
       <dsfr-button
