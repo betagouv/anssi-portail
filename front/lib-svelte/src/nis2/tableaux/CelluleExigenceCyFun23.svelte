@@ -6,8 +6,9 @@
 </script>
 
 <td>
-  <dsfr-badges-group badges={badgesExigence(exigence)}></dsfr-badges-group>
-  <dsfr-tag label={exigence.reference}></dsfr-tag>
+  <dsfr-badges-group badges={badgesExigence(exigence)} size="sm"
+  ></dsfr-badges-group>
+  <dsfr-tag label={exigence.reference} size="sm"></dsfr-tag>
   <ContenuExigenceFormate {exigence} />
 </td>
 

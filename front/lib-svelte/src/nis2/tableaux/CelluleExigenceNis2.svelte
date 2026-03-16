@@ -6,7 +6,8 @@
 </script>
 
 <td>
-  <dsfr-badges-group badges={badgesExigence(exigence)}></dsfr-badges-group>
+  <dsfr-badges-group badges={badgesExigence(exigence)} size="sm"
+  ></dsfr-badges-group>
   <dsfr-tags-group
     tags={[
       ...(exigence.objectifSecurite

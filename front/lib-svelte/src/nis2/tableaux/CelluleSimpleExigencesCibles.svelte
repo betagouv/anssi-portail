@@ -11,7 +11,7 @@
   <div class="exigences">
     {#each exigences as exigenceCorrespondante (exigenceCorrespondante.reference)}
       <div class="exigence-nis2">
-        <dsfr-tag label={exigenceCorrespondante.reference}></dsfr-tag>
+        <dsfr-tag label={exigenceCorrespondante.reference} size="sm"></dsfr-tag>
         <div class="texte-detail-sm">
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           {@html formateContenuExigence(exigenceCorrespondante)}

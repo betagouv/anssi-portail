@@ -6,7 +6,7 @@
 </script>
 
 <td>
-  <dsfr-tag label={exigence.reference}></dsfr-tag>
+  <dsfr-tag label={exigence.reference} size="sm"></dsfr-tag>
   <ContenuExigenceFormate {exigence} />
 </td>
 
