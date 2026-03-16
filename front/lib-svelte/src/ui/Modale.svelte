@@ -65,6 +65,7 @@
     }
 
     @include a-partir-de(lg) {
+      height: auto;
       max-height: 90vh;
       max-width: 588px;
       min-width: 0;
