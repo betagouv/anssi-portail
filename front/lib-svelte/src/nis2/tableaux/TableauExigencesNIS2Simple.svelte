@@ -12,7 +12,7 @@
   <table class:chargement>
     <thead>
       <tr>
-        <th>Exigence NIS&nbsp;2</th>
+        <th>Exigence applicable à NIS&nbsp;2</th>
       </tr>
     </thead>
     <tbody>

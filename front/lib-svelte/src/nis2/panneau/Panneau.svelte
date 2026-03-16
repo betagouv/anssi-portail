@@ -35,7 +35,7 @@
     <PanneauFiltres {source} cible={referentielSelectionne} {estBureau} />
   {:else}
     <dsfr-button
-      label="Comparer"
+      label="Comparer ReCyF (NIS 2)"
       has-icon
       icon-place="left"
       icon="arrow-left-right-line"
