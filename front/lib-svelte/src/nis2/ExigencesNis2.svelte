@@ -94,14 +94,14 @@
   <div class="entete">
     <div class="titre">
       <h2>Exigences applicables à NIS&nbsp;2</h2>
-      <p class="texte-detail-sm">
-        <dsfr-link
-          href="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/20260216_ANSSI_NIS2_Regles_de_securite-version_beta.pdf"
-          label="Télécharger les exigences (PDF)"
-          blank
-          download
-        ></dsfr-link>
-      </p>
+
+      <dsfr-link
+        href="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/20260216_ANSSI_NIS2_Regles_de_securite-version_beta.pdf"
+        label="Télécharger les exigences (PDF)"
+        blank
+        download
+      ></dsfr-link>
+
       <dsfr-button
         label="Exporter le tableau"
         markup="a"
@@ -171,7 +171,7 @@
         grid-area: titre;
       }
 
-      p {
+      dsfr-link {
         grid-area: telechargement;
       }
 
