@@ -15,3 +15,4 @@ preferFrozenLockfile: true
 
 minimumReleaseAgeExclude:
   - devalue@5.6.4
+  - undici@7.24.0
