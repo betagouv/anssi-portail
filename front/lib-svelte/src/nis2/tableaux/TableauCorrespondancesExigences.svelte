@@ -129,7 +129,11 @@
             exigence.correspondance?.exigences ?? []
           )}
           {#if featureFlagNis2Observations}
-            <td> {exigence.correspondance?.observations} </td>
+            <td>
+              <p class="texte-detail-sm">
+                {exigence.correspondance?.observations}
+              </p>
+            </td>
           {/if}
         </tr>
       {/each}

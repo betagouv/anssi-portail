@@ -5,7 +5,7 @@
 </script>
 
 <td>
-  <ul>
+  <ul class="texte-detail-sm">
     {#each exigences as exigenceCorrespondante (exigenceCorrespondante.reference)}
       <li>{exigenceCorrespondante.reference}</li>
     {/each}
