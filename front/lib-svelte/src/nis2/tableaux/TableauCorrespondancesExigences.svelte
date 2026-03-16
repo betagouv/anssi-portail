@@ -35,40 +35,41 @@
     chargement,
   }: Props = $props();
 
+  const titreColonneNIS2 = 'Exigence applicable à NIS 2';
   const configurationTableau: ConfigurationTableauComparaison = {
     COMPARAISON_NIS2_ISO: {
-      titreColonneSource: 'Exigence NIS 2',
+      titreColonneSource: titreColonneNIS2,
       titreColonneCible: 'Référence ISO 2700x',
       colonneSource: colonneSourceNIS2,
       colonneCible: colonneCibleISO,
     },
     COMPARAISON_NIS2_AE: {
-      titreColonneSource: 'Exigence NIS 2',
+      titreColonneSource: titreColonneNIS2,
       titreColonneCible: 'Annexe au Règlement d’exécution 2024/2690',
       colonneSource: colonneSourceNIS2,
       colonneCible: colonneCibleSimple,
     },
     COMPARAISON_ISO_NIS2: {
       titreColonneSource: 'Référence ISO 2700x',
-      titreColonneCible: 'Exigence NIS 2',
+      titreColonneCible: titreColonneNIS2,
       colonneSource: colonneSourceISO,
       colonneCible: colonneCibleSimple,
     },
     COMPARAISON_AE_NIS2: {
       titreColonneSource: 'Annexe au Règlement d’exécution 2024/2690',
-      titreColonneCible: 'Exigence NIS 2',
+      titreColonneCible: titreColonneNIS2,
       colonneSource: colonneSourceAE,
       colonneCible: colonneCibleSimple,
     },
     COMPARAISON_NIS2_CyFun23: {
-      titreColonneSource: 'Exigence NIS 2',
+      titreColonneSource: titreColonneNIS2,
       titreColonneCible: 'CyFun 2023',
       colonneSource: colonneSourceNIS2,
       colonneCible: colonneCibleSimple,
     },
     COMPARAISON_CyFun23_NIS2: {
       titreColonneSource: 'CyFun 2023',
-      titreColonneCible: 'Exigence NIS 2',
+      titreColonneCible: titreColonneNIS2,
       colonneSource: colonneSourceCyFun23,
       colonneCible: colonneCibleSimple,
     },

@@ -40,10 +40,10 @@
 <div class="panneau-comparaison" class:bureau={estBureau}>
   <div class="conteneur">
     <div class="comparaison-libelle">
-      <p class="texte-standard-md">Comparaison NIS&nbsp;2</p>
+      <p class="texte-standard-md">Comparaison entre référentiels d'exigence</p>
       <p class="texte-mention-xs">
-        Comparez les exigences NIS&nbsp;2 avec des référentiels déjà en place au
-        sein de votre organisation.
+        Comparez les exigences issues du référentiel cyber français (ReCyF)
+        applicables à NIS&nbsp;2 à celles d'autres référentiels.
       </p>
     </div>
     <div
@@ -53,7 +53,7 @@
       <dsfr-select
         id="referentielNIS2"
         label=""
-        options={[{ label: 'NIS 2', value: 'NIS2' }]}
+        options={[{ label: 'ReCyF (NIS 2)', value: 'NIS2' }]}
         value="NIS2"
         disabled
       ></dsfr-select>
