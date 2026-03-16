@@ -36,17 +36,11 @@
   let estBureau = $state(false);
   let chargement = $state(false);
 
-  const recupereLesExigences = async ({
-    source,
-    cible,
-  }: { source?: Referentiel; cible?: Referentiel } = {}) => {
+  const recupereLesExigences = async () => {
     const axiosResponse = await axios.get<Record<string, unknown>[]>(
       '/api/exigences-nis2',
       {
-        params: {
-          source,
-          cible,
-        },
+        params: { source, cible },
       }
     );
     exigences = axiosResponse.data.map((e) =>
@@ -63,16 +57,18 @@
     estBureau = mql.matches;
   });
 
+  const source = $derived(
+    sensComparaison === 'NIS2_VERS_CIBLE' ? 'NIS2' : referentielSelectionne
+  );
+
+  const cible = $derived(
+    sensComparaison === 'SOURCE_VERS_NIS2' ? 'NIS2' : referentielSelectionne
+  );
+
   $effect(() => {
     const charge = async () => {
       chargement = true;
-      const source =
-        sensComparaison === 'NIS2_VERS_CIBLE' ? 'NIS2' : referentielSelectionne;
-      const cible =
-        sensComparaison === 'SOURCE_VERS_NIS2'
-          ? 'NIS2'
-          : referentielSelectionne;
-      await recupereLesExigences({ source, cible });
+      await recupereLesExigences();
 
       chargement = false;
       if (!referentielSelectionne) {
