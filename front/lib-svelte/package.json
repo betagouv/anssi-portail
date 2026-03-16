@@ -16,18 +16,18 @@
     "watch": "vite build -w --minify false"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.3",
+    "@eslint/js": "^9.39.4",
     "@sveltejs/vite-plugin-svelte": "^5.1.1",
     "@tsconfig/svelte": "^5.0.8",
     "@types/qrcode": "^1.5.6",
-    "eslint": "^9.39.3",
-    "eslint-plugin-svelte": "^3.15.0",
+    "eslint": "^9.39.4",
+    "eslint-plugin-svelte": "^3.15.1",
     "globals": "^16.5.0",
     "prettier": "3.3.3",
-    "prettier-plugin-svelte": "^3.5.0",
+    "prettier-plugin-svelte": "^3.5.1",
     "sass": "^1.97.3",
-    "svelte": "^5.53.5",
-    "svelte-check": "^4.4.3",
+    "svelte": "^5.53.7",
+    "svelte-check": "^4.4.5",
     "tslib": "^2.8.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.1",
@@ -36,8 +36,8 @@
     "vitest-localstorage-mock": "^0.1.2"
   },
   "dependencies": {
-    "axios": "^1.13.5",
-    "dompurify": "^3.3.1",
+    "axios": "^1.13.6",
+    "dompurify": "^3.3.2",
     "npm-run-all2": "^8.0.4",
     "qrcode": "^1.5.4"
   },
