@@ -93,7 +93,7 @@
   <Avertissements {estBureau} />
   <div class="entete">
     <div class="titre">
-      <h2>Liste des exigences NIS 2</h2>
+      <h2>Exigences applicables à NIS&nbsp;2</h2>
       <p class="texte-detail-sm">
         <dsfr-link
           href="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/20260216_ANSSI_NIS2_Regles_de_securite-version_beta.pdf"
