@@ -32,6 +32,13 @@
       estBureau={true}
       {featureFlagNis2CyFun23}
     />
+    {#if referentielSelectionne === 'ISO'}
+      <p class="texte-detail-sm">
+        Les normes ISO étant protégées par le droit d’auteur, pour accéder au
+        contenu complet de ces normes, il convient de se référer aux
+        publications officielles de l'ISO et de l'IEC.
+      </p>
+    {/if}
     <PanneauFiltres {source} cible={referentielSelectionne} {estBureau} />
   {:else}
     <dsfr-button
@@ -98,18 +105,11 @@
 
     &.bureau {
       align-items: stretch;
-      gap: 24px;
+      gap: 0;
     }
 
-    .comparaison-libelle {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-bottom: 16px;
-
-      p {
-        margin: 0;
-      }
+    p {
+      margin: 8px 0 0;
     }
   }
 </style>
