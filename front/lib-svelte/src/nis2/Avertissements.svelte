@@ -19,11 +19,11 @@
 
 <dsfr-alert type="info" size="sm" hasTitle={false} dismissible>
   <p slot="description" class="contenu">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce blandit
-    blandit mattis. Duis convallis orci dolor, in vulputate neque ultricies
-    cursus. Vestibulum tempus quam quis scelerisque viverra. Vestibulum at
-    luctus tortor, eu eleifend justo. Vivamus posuere diam ac ultricies gravida. <dsfr-link
-      label="En savoir plus sur le référentiel ReCyF"
+    Le présent outil de comparaison de référentiels est mis à disposition par
+    l’Agence nationale de la sécurité des systèmes d'information (ci-après,
+    l’Agence) à titre purement informatif et indicatif, afin de faciliter la
+    compréhension par l’écosystème du référentiel NIS 2 qu’elle a élaboré. <dsfr-link
+      label="Afficher la suite"
       href="#exigences"
       use:clic={() => {
         detailsReCyFOuvert = true;
@@ -33,29 +33,38 @@
 </dsfr-alert>
 {#if detailsReCyFOuvert}
   <Modale bind:estOuverte={detailsReCyFOuvert}>
-    <h4>À propos de NIS&nbsp;2</h4>
+    <h4>Exigences applicables à NIS&nbsp;2</h4>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Porta nam turpis
-      ut amet faucibus porttitor. Metus, nisi, mauris condimentum id cursus eget
-      purus feugiat leo. Praesent dictum purus ullamcorper eget vitae felis,
-      sagittis vel pharetra. Pharetra, sit duis suspendisse risus, consequat,
-      vitae, tristique egestas arcu. Velit praesent nulla eu et amet, eleifend
-      ut nullam lorem. Condimentum gravida dui at pharetra ut. Dolor, ipsum
-      nullam ac dis ac nunc, facilisis faucibus. Magna nulla ut eget duis eu
-      lorem malesuada. Dignissim amet, nulla dolor viverra at mauris
-      pellentesque faucibus. Porta at mi velit, et volutpat tincidunt urna in
-      orci. Ut dui erat cras leo tempor vitae. Placerat amet quam porta odio
-      laoreet quam amet, tellus non. Lectus sed tortor condimentum egestas leo.
-      Tempus in elementum quis sed. Commodo, ullamcorper magna a, lectus metus,
-      risus morbi. Adipiscing tincidunt lorem hendrerit orci, senectus sed
-      lorem. Imperdiet nunc, ut ipsum non nulla nunc, adipiscing. Ultrices enim
-      eu, consectetur augue sit laoreet aliquam venenatis. Eget leo vitae
-      egestas nisi in nec cursus lobortis. Viverra sit turpis nunc convallis.
-      Etiam vel sit lectus non, vitae aenean nisl cursus. Vitae ac purus, tempor
-      velit urna volutpat vestibulum semper. Semper in fringilla tellus sapien
-      scelerisque nisl, nisi. Viverra purus molestie malesuada viverra volutpat
-      orci.
+      Le présent outil de comparaison de référentiels est mis à disposition par
+      l’Agence nationale de la sécurité des systèmes d'information (ci-après,
+      l’Agence) à titre purement informatif et indicatif, afin de faciliter la
+      compréhension par l’écosystème du référentiel NIS 2 qu’elle a élaboré. Les
+      correspondances et les analyses complémentaires qu’il présente ne
+      sauraient être interprétées comme des prescriptions à l’égard des entités
+      qui souhaiteraient s’y référer et ne constituent pas une position
+      officielle de l’Agence quant à la conformité d’une entité aux exigences
+      référencées qui relève de la seule appréciation et responsabilité de
+      l’entité qui l’utilise.
     </p>
+    <p>
+      Il ne constitue en aucun cas une décision d’équivalence en application de
+      l’article 15 du projet de loi relative à la résilience des infrastructures
+      critiques et au renforcement de la cybersécurité actuellement en
+      discussion au Parlement.
+    </p>
+    <p>
+      Les résultats présentés ne sauraient lier l’appréciation qui pourrait être
+      portée par l’Agence dans l’exercice de ses missions auprès des entités,
+      notamment dans le cadre de son activité de supervision et de contrôle.
+    </p>
+    {#snippet actions()}
+      <dsfr-button
+        label="J'ai compris"
+        use:clic={() => {
+          detailsReCyFOuvert = false;
+        }}
+      ></dsfr-button>
+    {/snippet}
   </Modale>
 {/if}
 
@@ -66,5 +75,9 @@
 
   .contenu {
     margin: 0px 0 4px;
+  }
+
+  dsfr-button {
+    align-self: flex-end;
   }
 </style>
