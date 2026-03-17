@@ -78,6 +78,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         { id: 'thematique', title: 'Thématique' },
         { id: 'cibles', title: 'Cibles' },
         { id: 'correspondance', title: 'Correspondance' },
+        { id: 'observations', title: 'Observations' },
       ]);
     });
 
@@ -89,7 +90,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes.slice(6), [
+      assert.deepEqual(entetes.slice(7), [
         { id: 'reference_iso_1', title: 'Référence ISO (1)' },
         { id: 'contenu_iso_1', title: 'Contenu ISO (1)' },
         { id: 'reference_iso_2', title: 'Référence ISO (2)' },
@@ -114,7 +115,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
               exigenceISO('refiso2', 'contenuiso2'),
             ],
             niveau: 'faible',
-            observations: '',
+            observations: 'bla bla',
           },
         }),
       ];
@@ -129,6 +130,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
           thematique: '',
           cibles: '',
           correspondance: 'faible',
+          observations: 'bla bla',
           reference_iso_1: 'refiso1',
           contenu_iso_1: 'contenuiso1',
           reference_iso_2: 'refiso2',
@@ -151,6 +153,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         { id: 'thematique', title: 'Thématique' },
         { id: 'cibles', title: 'Cibles' },
         { id: 'correspondance', title: 'Correspondance' },
+        { id: 'observations', title: 'Observations' },
       ]);
     });
 
@@ -162,7 +165,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes.slice(6), [
+      assert.deepEqual(entetes.slice(7), [
         {
           id: 'reference_ae_1',
           title: 'Référence Annexe au Règlement d’exécution 2024/2690 (1)',
@@ -205,7 +208,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
               exigenceAE('refae2', 'contenuae2'),
             ],
             niveau: 'faible',
-            observations: '',
+            observations: 'bla bla',
           },
         }),
       ];
@@ -220,6 +223,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
           thematique: '',
           cibles: '',
           correspondance: 'faible',
+          observations: 'bla bla',
           reference_ae_1: 'refae1',
           contenu_ae_1: 'contenuae1',
           reference_ae_2: 'refae2',
@@ -239,6 +243,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         { id: 'reference', title: 'Référence' },
         { id: 'contenu', title: 'Contenu' },
         { id: 'correspondance', title: 'Correspondance' },
+        { id: 'observations', title: 'Observations' },
       ]);
     });
 
@@ -250,7 +255,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes.slice(3), [
+      assert.deepEqual(entetes.slice(4), [
         {
           id: 'reference_nis2_1',
           title: 'Référence exigence applicable à NIS 2 (1)',
@@ -289,7 +294,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
               exigenceNIS2SansCorrespondance('refnis2-2', 'contenunis2-2'),
             ],
             niveau: 'faible',
-            observations: '',
+            observations: 'bla bla',
           },
         }),
       ];
@@ -301,6 +306,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
           reference: '',
           contenu: '',
           correspondance: 'faible',
+          observations: 'bla bla',
           reference_nis2_1: 'refnis2-1',
           contenu_nis2_1: 'contenunis2-1',
           reference_nis2_2: 'refnis2-2',
@@ -322,6 +328,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         { id: 'norme', title: 'Norme' },
         { id: 'chapitre', title: 'Chapitre' },
         { id: 'correspondance', title: 'Correspondance' },
+        { id: 'observations', title: 'Observations' },
       ]);
     });
 
@@ -333,7 +340,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes.slice(5), [
+      assert.deepEqual(entetes.slice(6), [
         {
           id: 'reference_nis2_1',
           title: 'Référence exigence applicable à NIS 2 (1)',
@@ -374,7 +381,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
               exigenceNIS2SansCorrespondance('refnis2-2', 'contenunis2-2'),
             ],
             niveau: 'faible',
-            observations: '',
+            observations: 'bla bla',
           },
         }),
       ];
@@ -388,6 +395,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
           norme: '271',
           chapitre: '9',
           correspondance: 'faible',
+          observations: 'bla bla',
           reference_nis2_1: 'refnis2-1',
           contenu_nis2_1: 'contenunis2-1',
           reference_nis2_2: 'refnis2-2',

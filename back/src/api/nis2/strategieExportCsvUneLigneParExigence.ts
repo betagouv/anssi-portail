@@ -79,6 +79,7 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesISO extends ConvertisseurCs
     return [
       ...super.entetes(exigences),
       { id: 'correspondance', title: 'Correspondance' },
+      { id: 'observations', title: 'Observations' },
       ...colonnesEntetesCorrespondances(
         exigences,
         'ISO',
@@ -102,6 +103,7 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesISO extends ConvertisseurCs
     return {
       ...super.enLigne(exigenceNIS2),
       correspondance: exigenceNIS2.correspondances.ISO!.niveau,
+      observations: exigenceNIS2.correspondances.ISO!.observations,
       ...exigencesISO,
     };
   }
@@ -112,6 +114,7 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsv
     return [
       ...super.entetes(exigences),
       { id: 'correspondance', title: 'Correspondance' },
+      { id: 'observations', title: 'Observations' },
       ...colonnesEntetesCorrespondances(
         exigences,
         'AE',
@@ -135,6 +138,7 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsv
     return {
       ...super.enLigne(exigenceNIS2),
       correspondance: exigenceNIS2.correspondances.AE!.niveau,
+      observations: exigenceNIS2.correspondances.AE!.observations,
       ...exigencesAE,
     };
   }
@@ -145,6 +149,7 @@ class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigence<ExigenceAE> {
     return [
       ...super.entetes(exigences),
       { id: 'correspondance', title: 'Correspondance' },
+      { id: 'observations', title: 'Observations' },
       ...colonnesEntetesCorrespondances(
         exigences,
         'NIS2',
@@ -168,6 +173,7 @@ class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigence<ExigenceAE> {
     return {
       ...super.enLigne(exigence),
       correspondance: exigence.correspondances.NIS2!.niveau,
+      observations: exigence.correspondances.NIS2!.observations,
       ...exigencesNIS2,
     };
   }
@@ -180,6 +186,7 @@ class ConvertisseurCsvExigenceISO extends ConvertisseurCsvExigence<ExigenceISO> 
       { id: 'norme', title: 'Norme' },
       { id: 'chapitre', title: 'Chapitre' },
       { id: 'correspondance', title: 'Correspondance' },
+      { id: 'observations', title: 'Observations' },
       ...colonnesEntetesCorrespondances(
         exigences,
         'NIS2',
@@ -205,6 +212,7 @@ class ConvertisseurCsvExigenceISO extends ConvertisseurCsvExigence<ExigenceISO> 
       norme: exigence.norme,
       chapitre: exigence.chapitre,
       correspondance: exigence.correspondances.NIS2!.niveau,
+      observations: exigence.correspondances.NIS2!.observations,
       ...exigencesNIS2,
     };
   }
