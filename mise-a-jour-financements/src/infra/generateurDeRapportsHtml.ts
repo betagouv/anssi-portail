@@ -6,10 +6,7 @@ import { NouveauFinancement } from '../metier/nouveauFinancement';
 export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
   constructor(private readonly ecris: (ligne: string) => void) {}
 
-  async genereRapports(
-    differences: DifferenceFinancement[],
-    nouveauxFinancements: NouveauFinancement[]
-  ) {
+  async genereRapports(differences: DifferenceFinancement[], nouveauxFinancements: NouveauFinancement[]) {
     this.ecris('<!DOCTYPE html>');
     this.ecris('<html>');
     this.ecris('<body>');
@@ -21,18 +18,13 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
     this.ecris('</html>');
   }
 
-  private imprimeNouveauxFinancements(
-    nouveauxFinancements: NouveauFinancement[]
-  ) {
+  private imprimeNouveauxFinancements(nouveauxFinancements: NouveauFinancement[]) {
     this.ecris('<h2>Nouveaux financements</h2>');
     if (nouveauxFinancements.length > 0) {
       this.ecris('<ul><li>');
       this.ecris(
         nouveauxFinancements
-          .map(
-            (financement) =>
-              `<a href=${financement.url} target="blank_">${financement.nom}</a>`
-          )
+          .map((financement) => `<a href=${financement.url} target="blank_">${financement.nom}</a>`)
           .join('</li><li>')
       );
       this.ecris('</li></ul>');
@@ -61,10 +53,7 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
       this.ecris(`<h3>Financement ID ${idFinancement}</h3>`);
       for (const difference of listeDifferences) {
         this.ecris('<h4>' + difference.nomDeLaDonnee + '</h4>');
-        const resultat = diffWords(
-          difference.valeurSurGrist ?? '',
-          difference.nouvelleValeur ?? ''
-        );
+        const resultat = diffWords(difference.valeurSurGrist ?? '', difference.nouvelleValeur ?? '');
         const text = resultat
           .map((part) => {
             if (part.added) {
@@ -85,15 +74,11 @@ export class GenerateurDeRapportsHtml implements GenerateurDeRapports {
   }
 
   private imprimeFinancementsSupprimes(differences: DifferenceFinancement[]) {
-    const finacementsSupprimes = differences.filter(
-      (diff) => diff.etat === 'supprimé'
-    );
+    const finacementsSupprimes = differences.filter((diff) => diff.etat === 'supprimé');
     this.ecris('<h2>Financements supprimés</h2>');
     if (finacementsSupprimes.length > 0) {
       this.ecris('<ul><li>');
-      this.ecris(
-        finacementsSupprimes.map((diff) => diff.idFinancement).join('</li><li>')
-      );
+      this.ecris(finacementsSupprimes.map((diff) => diff.idFinancement).join('</li><li>'));
       this.ecris('</li></ul>');
     } else {
       this.ecris('<p>Aucun financement à supprimer</p>');

@@ -15,7 +15,7 @@ export async function up(knex: Knex): Promise<void> {
         return trx('resultats_test').where({ id: ligne.id }).delete();
       }
     });
-    const suppressions = promesses.filter(p=>p!== undefined);
+    const suppressions = promesses.filter((p) => p !== undefined);
     console.log(`Suppression de ${suppressions.length} lignes`);
     return Promise.all(suppressions);
   });

@@ -68,10 +68,7 @@ describe('Pour la synchronisation avec le scroll', () => {
         getBoundingClientRect: () => ({ top: -80, height: 40 }),
       };
 
-      const lePlusVisible = elementLePlusVisible(
-        [invisible1, invisible2],
-        fenetre
-      );
+      const lePlusVisible = elementLePlusVisible([invisible1, invisible2], fenetre);
 
       expect(lePlusVisible).toBe(null);
     });

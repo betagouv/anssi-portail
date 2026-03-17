@@ -24,10 +24,7 @@ export class Cache<T> {
   async get(clefCache: string, fonction: () => Promise<T>): Promise<T> {
     if (this.cache.has(clefCache)) {
       const { valeur, dateExpiration } = this.cache.get(clefCache)!;
-      if (
-        dateExpiration &&
-        isAfter(FournisseurHorloge.maintenant(), dateExpiration)
-      ) {
+      if (dateExpiration && isAfter(FournisseurHorloge.maintenant(), dateExpiration)) {
         return await this.metsEnCache(fonction, clefCache);
       }
       return valeur;
@@ -35,10 +32,7 @@ export class Cache<T> {
     return await this.metsEnCache(fonction, clefCache);
   }
 
-  private async metsEnCache(
-    fonction: () => Promise<T>,
-    clefCache: string
-  ): Promise<T> {
+  private async metsEnCache(fonction: () => Promise<T>, clefCache: string): Promise<T> {
     try {
       const resultat = await fonction();
       this.cache.set(clefCache, {

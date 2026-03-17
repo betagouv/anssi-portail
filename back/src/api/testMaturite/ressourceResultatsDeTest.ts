@@ -29,32 +29,18 @@ const ressourceResultatsDeTest = ({
   routeur.post(
     '/',
     [
-      check('region')
-        .isString()
-        .optional({ values: 'null' })
-        .isIn(codesRegion)
-        .withMessage('Région invalide'),
-      check('secteur')
-        .isString()
-        .optional({ values: 'null' })
-        .isIn(codesSecteur)
-        .withMessage('Secteur invalide'),
+      check('region').isString().optional({ values: 'null' }).isIn(codesRegion).withMessage('Région invalide'),
+      check('secteur').isString().optional({ values: 'null' }).isIn(codesSecteur).withMessage('Secteur invalide'),
       check('tailleOrganisation')
         .isString()
         .optional({ values: 'null' })
         .isIn(codesTranchesEffectif)
         .withMessage("Taille d'organisation invalide"),
       body('reponses')
-        .custom(
-          (reponses) => typeof reponses === 'object' && !Array.isArray(reponses)
-        )
+        .custom((reponses) => typeof reponses === 'object' && !Array.isArray(reponses))
         .withMessage('Les réponses doivent être dans un objet'),
       body('reponses')
-        .custom((reponses) =>
-          Object.keys(reponses).every((cle) =>
-            clesReponsesValides.includes(cle)
-          )
-        )
+        .custom((reponses) => Object.keys(reponses).every((cle) => clesReponsesValides.includes(cle)))
         .withMessage('Les clés de réponse sont invalides'),
       body('reponses')
         .custom((reponses) =>
@@ -66,24 +52,13 @@ const ressourceResultatsDeTest = ({
             return valeur >= 1 && valeur <= 5;
           })
         )
-        .withMessage(
-          'Les valeurs de réponses doivent être comprises entre 1 et 5'
-        ),
+        .withMessage('Les valeurs de réponses doivent être comprises entre 1 et 5'),
     ],
     middleware.valide(),
-    middleware.ajouteUtilisateurARequete(
-      entrepotUtilisateur,
-      adaptateurHachage
-    ),
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     middleware.aseptise('codeSessionGroupe'),
     async (requete: Request, reponse: Response) => {
-      const {
-        tailleOrganisation,
-        region,
-        secteur,
-        reponses,
-        codeSessionGroupe,
-      } = requete.body;
+      const { tailleOrganisation, region, secteur, reponses, codeSessionGroupe } = requete.body;
 
       const utilisateur = requete.utilisateur;
       const resultatTest = new ResultatTestMaturite({
@@ -94,10 +69,7 @@ const ressourceResultatsDeTest = ({
         codeSessionGroupe,
       });
       if (utilisateur) {
-        await resultatTest.revendiquePropriete(
-          utilisateur,
-          adaptateurRechercheEntreprise
-        );
+        await resultatTest.revendiquePropriete(utilisateur, adaptateurRechercheEntreprise);
       }
 
       await entrepotResultatTest.ajoute(resultatTest);
@@ -127,14 +99,9 @@ const ressourceResultatsDeTest = ({
   routeur.get(
     '/',
     middleware.verifieJWT,
-    middleware.ajouteUtilisateurARequete(
-      entrepotUtilisateur,
-      adaptateurHachage
-    ),
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     async (requete: Request, reponse: Response) => {
-      const resultatsDeTest = await entrepotResultatTest.pourUtilisateur(
-        requete.utilisateur
-      );
+      const resultatsDeTest = await entrepotResultatTest.pourUtilisateur(requete.utilisateur);
 
       reponse.send(
         resultatsDeTest.map((resultat) => ({

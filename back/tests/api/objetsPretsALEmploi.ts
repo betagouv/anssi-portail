@@ -107,16 +107,8 @@ export const guidePublieDemain = () =>
         nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
       },
     ],
-    dateMiseAJour: new Date(
-      aujourdhui.getFullYear(),
-      aujourdhui.getMonth(),
-      aujourdhui.getDate() + 1
-    ),
-    datePublication: new Date(
-      aujourdhui.getFullYear(),
-      aujourdhui.getMonth(),
-      aujourdhui.getDate() + 1
-    ),
+    dateMiseAJour: new Date(aujourdhui.getFullYear(), aujourdhui.getMonth(), aujourdhui.getDate() + 1),
+    datePublication: new Date(aujourdhui.getFullYear(), aujourdhui.getMonth(), aujourdhui.getDate() + 1),
     thematique: 'Les essentiels',
     besoins: ['SECURISER'],
   });

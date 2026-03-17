@@ -56,9 +56,7 @@ describe('La ressource Statistiques', () => {
     });
 
     it('renvoie le nombre de tests de maturité', async () => {
-      await new ResultatTestMaturiteCreateur()
-        .dansEntrepot(entrepotResultatTest)
-        .creePlusieurs(3);
+      await new ResultatTestMaturiteCreateur().dansEntrepot(entrepotResultatTest).creePlusieurs(3);
 
       const reponse = await request(serveur).get('/api/statistiques');
 
@@ -74,9 +72,7 @@ describe('La ressource Statistiques', () => {
     });
 
     it('renvoie les niveaux de maturité', async () => {
-      const createur = new ResultatTestMaturiteCreateur().dansEntrepot(
-        entrepotResultatTest
-      );
+      const createur = new ResultatTestMaturiteCreateur().dansEntrepot(entrepotResultatTest);
       await createur.deNiveau('insuffisant').creePlusieurs(1);
       await createur.deNiveau('emergent').creePlusieurs(2);
       await createur.deNiveau('intermediaire').creePlusieurs(3);

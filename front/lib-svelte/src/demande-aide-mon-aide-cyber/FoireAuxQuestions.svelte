@@ -13,6 +13,7 @@
       videoRisquesMetadataLoaded = true;
     }
   };
+  const codecVideoWebM = 'video/webm; codecs="vp9,opus"';
 </script>
 
 <div class="accordeon">
@@ -72,7 +73,7 @@
         />
         <source
           src="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.webm"
-          type='video/webm; codecs="vp9,opus"'
+          type={codecVideoWebM}
         />
         <source
           src="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.mp4"

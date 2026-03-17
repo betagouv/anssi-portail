@@ -33,11 +33,7 @@ describe('Le comparateur de financement', () => {
       parId: async () => financement1,
       chercheAidesCyber: async () => [],
     };
-    comparateur = new ComparateurFinancement(
-      entrepotFinancement,
-      adaptateurSourceExterne,
-      fauxAdaptateurEnvironnement
-    );
+    comparateur = new ComparateurFinancement(entrepotFinancement, adaptateurSourceExterne, fauxAdaptateurEnvironnement);
   });
 
   it("sait récupérer tous les financements de l'entrepot", async () => {
@@ -80,7 +76,7 @@ describe('Le comparateur de financement', () => {
           montant: 'Dix mille',
           condition: 'Savoir compter 2 par 2',
           derniereModification: new Date('2026-01-14T16:54:00'),
-        } satisfies Financement);
+        }) satisfies Financement;
 
       await comparateur.chargeFinancements();
       const resultatComparaison = comparateur.compareSourceExterne();
@@ -156,7 +152,7 @@ describe('Le comparateur de financement', () => {
           benificiaires: 'Tout le monde sauf une personne',
           montant: 'Dix mille',
           condition: 'Savoir compter 2 par 2',
-        } satisfies Financement);
+        }) satisfies Financement;
 
       await comparateur.chargeFinancements();
       const resultatComparaison = comparateur.compareSourceExterne();
@@ -168,9 +164,7 @@ describe('Le comparateur de financement', () => {
   describe('détecte de nouvelles aides', () => {
     it('en cherchant des aides liées à la cyberscurité', async () => {
       const nouveauFinancement = { ...financement1, id: 123 };
-      adaptateurSourceExterne.chercheAidesCyber = async () => [
-        nouveauFinancement,
-      ];
+      adaptateurSourceExterne.chercheAidesCyber = async () => [nouveauFinancement];
 
       await comparateur.chargeFinancements();
       const nouvellesAides = await comparateur.detecteNouvellesAides();

@@ -5,7 +5,7 @@ import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
 import { ProprieteTestRevendiquee } from '../../src/bus/evenements/proprieteTestRevendiquee';
 import { consigneEvenementProprieteTestRevendiqueeDansJournal } from '../../src/bus/consigneEvenementProprieteTestRevendiqueeDansJournal';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
-import {fauxAdaptateurHachage} from "../api/fauxObjets";
+import { fauxAdaptateurHachage } from '../api/fauxObjets';
 import { jeanneDupont } from '../api/objetsPretsALEmploi';
 
 describe("L'abonnement qui consigne la revendication de la propriété d'un test dans le journal", () => {
@@ -64,7 +64,7 @@ describe("L'abonnement qui consigne la revendication de la propriété d'un test
     await consigneEvenementDansJournal()(
       new ProprieteTestRevendiquee({
         idResultatTest: '1',
-        utilisateur:jeanneDupont
+        utilisateur: jeanneDupont,
       })
     );
 

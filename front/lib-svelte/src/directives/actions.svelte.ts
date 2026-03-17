@@ -5,7 +5,7 @@ export const clic: Action<
   (e: MouseEvent | KeyboardEvent) => void
 > = (
   element: HTMLElement,
-  clicOuTouchePressee: (e: MouseEvent | KeyboardEvent) => void,
+  clicOuTouchePressee: (e: MouseEvent | KeyboardEvent) => void
 ) => {
   const gereLeClic = (event: MouseEvent) => {
     clicOuTouchePressee(event);

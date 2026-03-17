@@ -1,5 +1,4 @@
-const elementConsentement = () =>
-  document.getElementById('consentement-matomo');
+const elementConsentement = () => document.getElementById('consentement-matomo');
 
 const modifieLabelConsentement = () => {
   const optOutMatomo = localStorage.getItem('optOutMatomo') === 'true';

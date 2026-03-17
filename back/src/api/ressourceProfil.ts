@@ -1,10 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { Organisation } from '../metier/utilisateur';
 import { ConfigurationServeur } from './configurationServeur';
-import {
-  estCodeDepartement,
-  regionDuDepartement,
-} from '../metier/referentielDepartements';
+import { estCodeDepartement, regionDuDepartement } from '../metier/referentielDepartements';
 
 const ressourceProfil = ({
   adaptateurJWT,
@@ -15,10 +12,7 @@ const ressourceProfil = ({
   const routeur = Router();
   routeur.get(
     '/',
-    middleware.ajouteUtilisateurARequete(
-      entrepotUtilisateur,
-      adaptateurHachage
-    ),
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     async (requete: Request, reponse: Response) => {
       try {
         adaptateurJWT.decode(requete.session?.token);
@@ -26,15 +20,11 @@ const ressourceProfil = ({
         reponse.clearCookie('session');
       } finally {
         const utilisateurConnecte = requete.utilisateur;
-        const organisation: Organisation =
-          await utilisateurConnecte?.organisation();
+        const organisation: Organisation = await utilisateurConnecte?.organisation();
 
-        const codeDepartement = estCodeDepartement(organisation?.departement)
-          ? organisation.departement
-          : undefined;
+        const codeDepartement = estCodeDepartement(organisation?.departement) ? organisation.departement : undefined;
 
-        const codeRegion =
-          organisation?.region ?? regionDuDepartement(codeDepartement);
+        const codeRegion = organisation?.region ?? regionDuDepartement(codeDepartement);
 
         reponse.send({
           email: utilisateurConnecte?.email,

@@ -21,29 +21,16 @@ const ressourceUtilisateurs = ({
         .optional({ values: 'falsy' })
         .matches(/^0\d{9}$/)
         .withMessage('Le téléphone est invalide'),
-      check('domainesSpecialite')
-        .isArray({ min: 1 })
-        .withMessage('Les domaines de spécialité sont invalides'),
+      check('domainesSpecialite').isArray({ min: 1 }).withMessage('Les domaines de spécialité sont invalides'),
       check('siretEntite')
         .matches(/^\d{14}$/)
         .withMessage('Le siret est invalide'),
-      check('cguAcceptees')
-        .isBoolean()
-        .withMessage("L'acceptation des CGU est invalide"),
-      check('infolettreAcceptee')
-        .isBoolean()
-        .withMessage("L'acceptation de l'infolettre est invalide"),
+      check('cguAcceptees').isBoolean().withMessage("L'acceptation des CGU est invalide"),
+      check('infolettreAcceptee').isBoolean().withMessage("L'acceptation de l'infolettre est invalide"),
     ],
     middleware.valide(),
     async (requete: Request, reponse: Response) => {
-      const {
-        telephone,
-        domainesSpecialite,
-        siretEntite,
-        cguAcceptees,
-        infolettreAcceptee,
-        token,
-      } = requete.body;
+      const { telephone, domainesSpecialite, siretEntite, cguAcceptees, infolettreAcceptee, token } = requete.body;
 
       try {
         const { email, nom, prenom, siret } = adaptateurJWT.decode(token);
@@ -64,9 +51,7 @@ const ressourceUtilisateurs = ({
 
         await entrepotUtilisateur.ajoute(utilisateur);
 
-        await busEvenements.publie(
-          new CompteCree({ email, prenom, nom, infoLettre: infolettreAcceptee })
-        );
+        await busEvenements.publie(new CompteCree({ email, prenom, nom, infoLettre: infolettreAcceptee }));
 
         reponse.sendStatus(201);
       } catch {

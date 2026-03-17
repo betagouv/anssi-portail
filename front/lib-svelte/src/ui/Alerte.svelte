@@ -7,7 +7,10 @@
 {#if type === 'ERREUR'}
   <div class="alerte">
     <div class="icone">
-      <img src="../../../assets/images/icone-erreur-blanche.svg" alt="Icone d'erreur" />
+      <img
+        src="../../../assets/images/icone-erreur-blanche.svg"
+        alt="Icone d'erreur"
+      />
     </div>
     <div class="contenu">
       <b>{titre}</b>
@@ -15,9 +18,7 @@
     </div>
   </div>
 {/if}
-<div>
-
-</div>
+<div></div>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
@@ -57,7 +58,7 @@
 
       p {
         margin: unset;
-        font-size: .75rem;
+        font-size: 0.75rem;
 
         @include a-partir-de(md) {
           font-size: 1rem;

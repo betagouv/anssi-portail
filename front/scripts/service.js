@@ -1,20 +1,16 @@
 import { elementLePlusVisible } from './scroll.js';
 
-const sectionsSommaireReplie = () =>
-  Array.from(document.querySelectorAll('.sommaire.sommaire-replie ul li'));
+const sectionsSommaireReplie = () => Array.from(document.querySelectorAll('.sommaire.sommaire-replie ul li'));
 
 const trouveLesLiDuSommaireReplie = (hash) =>
-  sectionsSommaireReplie().filter(
-    (li) => new URL(li.querySelector('a').href).hash === hash
-  );
+  sectionsSommaireReplie().filter((li) => new URL(li.querySelector('a').href).hash === hash);
 
 const trouveLesLiDesSommaires = (hash) =>
   Array.from(document.querySelectorAll('.sommaire ul li')).filter(
     (li) => new URL(li.querySelector('a').href).hash === hash
   );
 
-const trouveLeTexte = (hash) =>
-  trouveLesLiDuSommaireReplie(hash)[0]?.textContent;
+const trouveLeTexte = (hash) => trouveLesLiDuSommaireReplie(hash)[0]?.textContent;
 
 const desactiveTousLesItems = () => {
   const sections = Array.from(document.querySelectorAll('.sommaire ul li'));
@@ -22,9 +18,7 @@ const desactiveTousLesItems = () => {
 };
 
 const activeItems = (idPourSurlignage) =>
-  trouveLesLiDesSommaires(idPourSurlignage).forEach((li) =>
-    li.classList.add('actif')
-  );
+  trouveLesLiDesSommaires(idPourSurlignage).forEach((li) => li.classList.add('actif'));
 
 const metsAJourLeTexteDeLaSectionActive = (hash) => {
   const sectionActive = document.querySelector('#section-active');
@@ -54,10 +48,7 @@ const scrolle = () => {
     scrollEnAttenteDeMiseAJour = true;
     setTimeout(() => {
       const sections = document.querySelectorAll('.article .contenu section');
-      const laPlusVisible = elementLePlusVisible(
-        [...sections],
-        window.innerHeight
-      );
+      const laPlusVisible = elementLePlusVisible([...sections], window.innerHeight);
 
       if (!laPlusVisible) return;
       metsAJourSectionActive(`#${laPlusVisible.id}`);

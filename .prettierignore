@@ -1,0 +1,2 @@
+front/**/*.html
+!front/lib-svelte/**/*.html

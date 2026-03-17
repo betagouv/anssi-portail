@@ -10,14 +10,9 @@ describe('Récupérateur des adresses des guides', () => {
       <a href="/guide-xyz">Lien</a>
     </div>`,
     };
-    const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(
-      lecteurDeSite
-    );
+    const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(lecteurDeSite);
 
-    const [adresse] = await recuperateurDeGuides.recupere(
-      'https://example.com/guide',
-      1
-    );
+    const [adresse] = await recuperateurDeGuides.recupere('https://example.com/guide', 1);
 
     assert.equal(adresse, 'https://example.com/guide-xyz');
   });
@@ -30,9 +25,7 @@ describe('Récupérateur des adresses des guides', () => {
         return '<h3></h3>';
       },
     };
-    const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(
-      lecteurDeSite
-    );
+    const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(lecteurDeSite);
 
     await recuperateurDeGuides.recupere('https://example.com/guide', 1);
 
@@ -49,14 +42,9 @@ describe('Récupérateur des adresses des guides', () => {
       <a href="/guide-def">Lien</a>
     </div>`,
     };
-    const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(
-      lecteurDeSite
-    );
+    const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(lecteurDeSite);
 
-    const adresses = await recuperateurDeGuides.recupere(
-      'https://example.com/guides',
-      1
-    );
+    const adresses = await recuperateurDeGuides.recupere('https://example.com/guides', 1);
 
     assert.equal(adresses.length, 2);
     const [adresse1, adresse2] = adresses;
@@ -73,14 +61,9 @@ describe('Récupérateur des adresses des guides', () => {
   </body>
 </html>`,
     };
-    const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(
-      lecteurDeSite
-    );
+    const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(lecteurDeSite);
 
-    const adresses = await recuperateurDeGuides.recupere(
-      'https://example.com/guides',
-      1
-    );
+    const adresses = await recuperateurDeGuides.recupere('https://example.com/guides', 1);
 
     assert.equal(adresses.length, 0);
   });
@@ -88,10 +71,7 @@ describe('Récupérateur des adresses des guides', () => {
   it('récupère les adresses sur toutes les pages', async () => {
     const lecteurDeSite = {
       lis: async (url: string): Promise<string> => {
-        if (
-          url === 'https://example.com/guides' ||
-          url === 'https://example.com/guides?page=0'
-        ) {
+        if (url === 'https://example.com/guides' || url === 'https://example.com/guides?page=0') {
           return ` <div class="views-row"><a href="/guide-page-1">Lien</a></div>`;
         }
         if (url === 'https://example.com/guides?page=1') {
@@ -100,14 +80,9 @@ describe('Récupérateur des adresses des guides', () => {
         return '';
       },
     };
-    const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(
-      lecteurDeSite
-    );
+    const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(lecteurDeSite);
 
-    const adresses = await recuperateurDeGuides.recupere(
-      'https://example.com/guides',
-      2
-    );
+    const adresses = await recuperateurDeGuides.recupere('https://example.com/guides', 2);
 
     assert.equal(adresses.length, 2);
     assert.equal(adresses[0], 'https://example.com/guide-page-1');
@@ -122,14 +97,9 @@ describe('Récupérateur des adresses des guides', () => {
         return '';
       },
     };
-    const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(
-      lecteurDeSite
-    );
+    const recuperateurDeGuides = new RecuperateurDAdressesDesGuides(lecteurDeSite);
 
-    await recuperateurDeGuides.recupere(
-      'https://example.com/guides?filtre=A',
-      1
-    );
+    await recuperateurDeGuides.recupere('https://example.com/guides?filtre=A', 1);
 
     assert.equal(adresseAppelee, 'https://example.com/guides?filtre=A&page=0');
   });

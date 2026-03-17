@@ -25,15 +25,11 @@ export class ComparateurDeGuides {
 
   compare(): ComparaisonDeGuides {
     const ajouts = this.guidesSource.filter(
-      (guideSource) =>
-        !this.guidesCible.some((guideCible) => guideCible.id === guideSource.id)
+      (guideSource) => !this.guidesCible.some((guideCible) => guideCible.id === guideSource.id)
     );
 
     const suppressions = this.guidesCible.filter(
-      (guideCible) =>
-        !this.guidesSource.some(
-          (guideSource) => guideCible.id === guideSource.id
-        )
+      (guideCible) => !this.guidesSource.some((guideSource) => guideCible.id === guideSource.id)
     );
     const modifications = this.recupereLesGuidesModifies();
     return {
@@ -46,15 +42,11 @@ export class ComparateurDeGuides {
   private recupereLesGuidesModifies() {
     return this.guidesSource.reduce(
       (liste, guideSource) => {
-        const guideCibleCorrespondant = this.guidesCible.find(
-          (guideCible) => guideCible.id === guideSource.id
-        );
+        const guideCibleCorrespondant = this.guidesCible.find((guideCible) => guideCible.id === guideSource.id);
         if (!guideCibleCorrespondant) {
           return liste;
         }
-        const methodesExtractionValeursAComparer: Array<
-          (guide: Guide) => string
-        > = [
+        const methodesExtractionValeursAComparer: Array<(guide: Guide) => string> = [
           (guide) => guide.nom,
           (guide) => guide.description,
           (guide) => guide.nomImage ?? '',
@@ -69,8 +61,7 @@ export class ComparateurDeGuides {
         if (
           methodesExtractionValeursAComparer.some(
             (methodeDeComparaison) =>
-              methodeDeComparaison(guideSource) !==
-              methodeDeComparaison(guideCibleCorrespondant)
+              methodeDeComparaison(guideSource) !== methodeDeComparaison(guideCibleCorrespondant)
           )
         ) {
           liste.push({ source: guideSource, cible: guideCibleCorrespondant });

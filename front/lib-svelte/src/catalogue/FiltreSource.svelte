@@ -44,7 +44,8 @@
       on:click={gereCocheANSSI}
     />
     <span class="libelle">Toutes les sources ANSSI</span>
-    <span class="compte">{$nombreResultats.parSource[Source.ANSSI_TOUTES]}</span>
+    <span class="compte">{$nombreResultats.parSource[Source.ANSSI_TOUTES]}</span
+    >
   </label>
   <fieldset>
     <label>
@@ -74,9 +75,7 @@
         bind:group={$rechercheParSource}
       />
       <span class="libelle">ANSSI</span>
-      <span class="compte"
-      >{$nombreResultats.parSource[Source.ANSSI]}</span
-      >
+      <span class="compte">{$nombreResultats.parSource[Source.ANSSI]}</span>
     </label>
   </fieldset>
   <label>

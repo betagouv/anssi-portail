@@ -11,11 +11,7 @@ import { Utilisateur } from '../metier/utilisateur';
 import { AdaptateurJWT } from './adaptateurJWT';
 import { FournisseurChemin } from './fournisseurChemin';
 
-type FonctionMiddleware = (
-  requete: Request,
-  reponse: Response,
-  suite: NextFunction
-) => Promise<void>;
+type FonctionMiddleware = (requete: Request, reponse: Response, suite: NextFunction) => Promise<void>;
 
 export type Middleware = {
   aseptise: (...nomsParametres: string[]) => FonctionMiddleware;
@@ -44,28 +40,21 @@ export const fabriqueMiddleware = ({
   const aseptise =
     (...nomsParametres: string[]) =>
     async (requete: Request, _reponse: Response, suite: NextFunction) => {
-      const aseptisations = nomsParametres.map((p) =>
-        check(p).trim().escape().run(requete)
-      );
+      const aseptisations = nomsParametres.map((p) => check(p).trim().escape().run(requete));
       await Promise.all(aseptisations);
       suite();
     };
 
-  const valide =
-    () => async (requete: Request, reponse: Response, suite: NextFunction) => {
-      const erreurs = validationResult(requete);
-      if (!erreurs.isEmpty()) {
-        reponse.status(400).json({ erreur: erreurs.array()[0].msg });
-        return;
-      }
-      suite();
-    };
+  const valide = () => async (requete: Request, reponse: Response, suite: NextFunction) => {
+    const erreurs = validationResult(requete);
+    if (!erreurs.isEmpty()) {
+      reponse.status(400).json({ erreur: erreurs.array()[0].msg });
+      return;
+    }
+    suite();
+  };
 
-  const interdisLaMiseEnCache = async (
-    _requete: Request,
-    reponse: Response,
-    suite: NextFunction
-  ) => {
+  const interdisLaMiseEnCache = async (_requete: Request, reponse: Response, suite: NextFunction) => {
     reponse.set({
       'cache-control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
       pragma: 'no-cache',
@@ -94,11 +83,7 @@ export const fabriqueMiddleware = ({
     }
   };
 
-  const verifieJWTNavigation = async (
-    requete: Request,
-    reponse: Response,
-    suite: NextFunction
-  ) => {
+  const verifieJWTNavigation = async (requete: Request, reponse: Response, suite: NextFunction) => {
     if (!requete.session?.token) {
       reponse.redirect('/connexion');
       return;
@@ -112,11 +97,7 @@ export const fabriqueMiddleware = ({
     }
   };
 
-  const ajouteMethodeNonce = async (
-    _: Request,
-    reponse: Response,
-    suite: NextFunction
-  ) => {
+  const ajouteMethodeNonce = async (_: Request, reponse: Response, suite: NextFunction) => {
     const nonceAleatoire = randomBytes(16).toString('base64');
     reponse.locals.nonce = nonceAleatoire;
     reponse.sendFileAvecNonce = (chemin: string) => {
@@ -134,56 +115,46 @@ export const fabriqueMiddleware = ({
     suite();
   };
 
-  const positionneLesCsp =
-    () => async (requete: Request, reponse: Response, suite: NextFunction) =>
-      helmet({
-        contentSecurityPolicy: {
-          directives: {
-            scriptSrc: [
-              "'self'",
-              'https://stats.beta.gouv.fr',
-              'https://browser.sentry-cdn.com',
-              'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
-            ],
-            imgSrc: [
-              "'self'",
-              'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
-              'https://storage.crisp.chat',
-              adaptateurEnvironnement.urlCellar().ressourcesCyber(),
-              adaptateurEnvironnement.urlCellar().guides(),
-              'data:',
-            ],
-            connectSrc: ["'self'", 'https://stats.beta.gouv.fr'],
-            mediaSrc: [
-              "'self'",
-              'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com',
-              'https://ressources-mac.cellar-c2.services.clever-cloud.com',
-              adaptateurEnvironnement.urlCellar().ressourcesCyber(),
-            ],
-            styleSrc: [
-              "'self'",
-              `'nonce-${reponse.locals.nonce}'`,
-              'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
-            ],
-          },
+  const positionneLesCsp = () => async (requete: Request, reponse: Response, suite: NextFunction) =>
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          scriptSrc: [
+            "'self'",
+            'https://stats.beta.gouv.fr',
+            'https://browser.sentry-cdn.com',
+            'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
+          ],
+          imgSrc: [
+            "'self'",
+            'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
+            'https://storage.crisp.chat',
+            adaptateurEnvironnement.urlCellar().ressourcesCyber(),
+            adaptateurEnvironnement.urlCellar().guides(),
+            'data:',
+          ],
+          connectSrc: ["'self'", 'https://stats.beta.gouv.fr'],
+          mediaSrc: [
+            "'self'",
+            'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com',
+            'https://ressources-mac.cellar-c2.services.clever-cloud.com',
+            adaptateurEnvironnement.urlCellar().ressourcesCyber(),
+          ],
+          styleSrc: [
+            "'self'",
+            `'nonce-${reponse.locals.nonce}'`,
+            'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
+          ],
         },
-      })(requete, reponse, suite);
+      },
+    })(requete, reponse, suite);
 
   const ajouteUtilisateurARequete =
-    (
-      entrepotUtilisateur: EntrepotUtilisateur,
-      adaptateurHachage: AdaptateurHachage
-    ) =>
-    async (
-      requete: Request & { utilisateur?: Utilisateur | undefined },
-      reponse: Response,
-      suite: NextFunction
-    ) => {
+    (entrepotUtilisateur: EntrepotUtilisateur, adaptateurHachage: AdaptateurHachage) =>
+    async (requete: Request & { utilisateur?: Utilisateur | undefined }, reponse: Response, suite: NextFunction) => {
       try {
         requete.utilisateur = requete.session?.email
-          ? await entrepotUtilisateur.parEmailHache(
-              adaptateurHachage.hache(requete.session?.email)
-            )
+          ? await entrepotUtilisateur.parEmailHache(adaptateurHachage.hache(requete.session?.email))
           : undefined;
         suite();
       } catch {
@@ -191,18 +162,12 @@ export const fabriqueMiddleware = ({
       }
     };
 
-  const verifieModeMaintenance = async (
-    _requete: Request,
-    reponse: Response,
-    suite: NextFunction
-  ) => {
+  const verifieModeMaintenance = async (_requete: Request, reponse: Response, suite: NextFunction) => {
     if (adaptateurEnvironnement.maintenance().actif()) {
       reponse
         .status(HttpStatusCode.ServiceUnavailable)
         .set('Content-Type', 'text/html')
-        .sendFileAvecNonce(
-          fournisseurChemin.ressourceDeBase('maintenance.html')
-        );
+        .sendFileAvecNonce(fournisseurChemin.ressourceDeBase('maintenance.html'));
     } else {
       suite();
     }

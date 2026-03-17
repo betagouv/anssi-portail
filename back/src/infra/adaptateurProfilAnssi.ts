@@ -28,14 +28,7 @@ export interface AdaptateurProfilAnssi {
 }
 
 const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
-  const metsAJour = async ({
-    nom,
-    prenom,
-    email,
-    organisation,
-    telephone,
-    domainesSpecialite,
-  }: ProfilAnssi) => {
+  const metsAJour = async ({ nom, prenom, email, organisation, telephone, domainesSpecialite }: ProfilAnssi) => {
     const urlProfil = `${process.env.PROFIL_ANSSI_URL_BASE}/profil/${email}`;
     await axios.put(
       urlProfil,
@@ -53,10 +46,7 @@ const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
   const recupere = async (email: string) => {
     const urlProfil = `${process.env.PROFIL_ANSSI_URL_BASE}/profil/${email}`;
     try {
-      const reponse = await axios.get(
-        urlProfil,
-        CONFIGURATION_AUTHENTIFICATION
-      );
+      const reponse = await axios.get(urlProfil, CONFIGURATION_AUTHENTIFICATION);
       return reponse.data;
     } catch (e) {
       if (axios.isAxiosError(e) && e.response?.status !== 404) {
@@ -73,6 +63,4 @@ const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
 };
 
 export const fabriqueAdaptateurProfilAnssi = () =>
-  process.env.PROFIL_ANSSI_URL_BASE
-    ? adaptateurProfilAnssi()
-    : adaptateurProfilAnssiVide();
+  process.env.PROFIL_ANSSI_URL_BASE ? adaptateurProfilAnssi() : adaptateurProfilAnssiVide();

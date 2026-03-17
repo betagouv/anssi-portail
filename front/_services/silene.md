@@ -22,6 +22,7 @@ L’ANSSI met à disposition de la sphère publique et des entités régulées u
 Ce service vise à donner de la visibilité à ces entités sur leur niveau d’exposition et à les accompagner par l’application progressive de mesures adéquates pour le réduire. Il s’appuie sur l’expérience et l’expertise acquises par l’ANSSI lors des audits et s’enrichit également, au fil du temps, de l’observation des modes opératoires utilisés par les attaquants.
 
 Dès réception des adresses IP et des noms de domaine transmis à SILENE :
+
 <ul>
 <li>Recevez un rapport détaillé présentant les différents points de contrôle qui ont révélé des défauts de configuration pouvant entraîner des risques de sécurité.
 </li>

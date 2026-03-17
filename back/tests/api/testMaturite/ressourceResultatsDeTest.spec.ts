@@ -7,21 +7,14 @@ import { ProprieteTestRevendiquee } from '../../../src/bus/evenements/proprieteT
 import { TestRealise } from '../../../src/bus/evenements/testRealise';
 import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
 import { Utilisateur } from '../../../src/metier/utilisateur';
-import {
-  fabriqueBusPourLesTests,
-  MockBusEvenement,
-} from '../../bus/busPourLesTests';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
 import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurRechercheEntreprise,
-} from '../fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise } from '../fauxObjets';
 import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
 
-const REGEX_UUID =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+const REGEX_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 
 describe('La ressource qui gère les résultats de test de maturité', () => {
   let serveur: Express;
@@ -59,9 +52,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
   describe('sur requête POST', () => {
     it('répond 201', async () => {
-      const reponse = await request(serveur)
-        .post('/api/resultats-test')
-        .send(donneesCorrectes);
+      const reponse = await request(serveur).post('/api/resultats-test').send(donneesCorrectes);
 
       assert.equal(reponse.status, 201);
     });
@@ -148,8 +139,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
             },
           });
 
-        const resultatSauvegarde =
-          await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
+        const resultatSauvegarde = await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
 
         assert.notEqual(resultatSauvegarde, undefined);
         assert.equal(resultatSauvegarde?.utilisateur, jeanneDupont);
@@ -172,8 +162,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           .set('Cookie', [cookie])
           .send(donneesCorrectes);
 
-        const resultatSauvegarde =
-          await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
+        const resultatSauvegarde = await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
         assert.match(resultatSauvegarde!.id, REGEX_UUID);
         assert.deepEqual(reponse.body, { id: resultatSauvegarde!.id });
       });
@@ -185,9 +174,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           .send(donneesCorrectes);
 
         busEvenements.aRecuUnEvenement(ProprieteTestRevendiquee);
-        const evenement = busEvenements.recupereEvenement(
-          ProprieteTestRevendiquee
-        );
+        const evenement = busEvenements.recupereEvenement(ProprieteTestRevendiquee);
         assert.equal(evenement!.utilisateur, jeanneDupont);
         assert.equal(evenement!.idResultatTest, reponse.body.id);
       });
@@ -207,8 +194,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
               },
             });
 
-          const resultatSauvegarde =
-            await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
+          const resultatSauvegarde = await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
 
           assert.equal(resultatSauvegarde?.region, 'FR-971');
           assert.equal(resultatSauvegarde?.secteur, 'A');
@@ -241,27 +227,21 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
     describe("lorsque l'utilisateur n'est pas connecté", () => {
       it('sauvegarde le résultat du test sans email', async () => {
-        await request(serveur)
-          .post('/api/resultats-test')
-          .send(donneesCorrectes);
+        await request(serveur).post('/api/resultats-test').send(donneesCorrectes);
 
         const resultatSauvegarde = (await entrepotResultatTest.tous())[0];
         assert.notEqual(resultatSauvegarde, undefined);
         assert.equal(resultatSauvegarde?.utilisateur, undefined);
       });
       it("ne publie pas d'événement sur le bus qui indique que l'utilisateur est relié au test", async () => {
-        await request(serveur)
-          .post('/api/resultats-test')
-          .send(donneesCorrectes);
+        await request(serveur).post('/api/resultats-test').send(donneesCorrectes);
 
         busEvenements.naPasRecuDEvenement(ProprieteTestRevendiquee);
       });
     });
 
     describe('concernant la validation des données', () => {
-      const requeteAvecDonneeIncorrecte = async (
-        donnees: Record<string, unknown>
-      ) => {
+      const requeteAvecDonneeIncorrecte = async (donnees: Record<string, unknown>) => {
         return await request(serveur)
           .post('/api/resultats-test')
           .send({
@@ -334,10 +314,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           });
 
           assert.equal(reponse.status, 400);
-          assert.equal(
-            reponse.body.erreur,
-            'Les réponses doivent être dans un objet'
-          );
+          assert.equal(reponse.body.erreur, 'Les réponses doivent être dans un objet');
         });
 
         it('valide les clés de réponses', async () => {
@@ -346,10 +323,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           });
 
           assert.equal(reponse.status, 400);
-          assert.equal(
-            reponse.body.erreur,
-            'Les clés de réponse sont invalides'
-          );
+          assert.equal(reponse.body.erreur, 'Les clés de réponse sont invalides');
         });
 
         it('valide les valeurs de reponses', async () => {
@@ -358,10 +332,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           });
 
           assert.equal(reponse.status, 400);
-          assert.equal(
-            reponse.body.erreur,
-            'Les valeurs de réponses doivent être comprises entre 1 et 5'
-          );
+          assert.equal(reponse.body.erreur, 'Les valeurs de réponses doivent être comprises entre 1 et 5');
         });
 
         it('resiste aux réponses sous forme de tableau', async () => {
@@ -370,10 +341,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           });
 
           assert.equal(reponse.status, 400);
-          assert.equal(
-            reponse.body.erreur,
-            'Les valeurs de réponses doivent être comprises entre 1 et 5'
-          );
+          assert.equal(reponse.body.erreur, 'Les valeurs de réponses doivent être comprises entre 1 et 5');
         });
 
         it('aseptise le code de session de groupe', async () => {
@@ -423,17 +391,12 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       });
 
       it('répond 200', async () => {
-        const reponse = await request(serveur)
-          .get('/api/resultats-test')
-          .set('Cookie', [cookie]);
+        const reponse = await request(serveur).get('/api/resultats-test').set('Cookie', [cookie]);
 
         assert.equal(reponse.status, 200);
       });
 
-      async function ajouteUnResultatDeTest(
-        id: string,
-        utilisateur: Utilisateur
-      ) {
+      async function ajouteUnResultatDeTest(id: string, utilisateur: Utilisateur) {
         const resultatDunUtilisateur = new ResultatTestMaturite({
           secteur: 'A',
           region: 'FR-NOR',
@@ -441,10 +404,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           reponses: {},
           tailleOrganisation: '01',
         });
-        await resultatDunUtilisateur.revendiquePropriete(
-          utilisateur,
-          fauxAdaptateurRechercheEntreprise
-        );
+        await resultatDunUtilisateur.revendiquePropriete(utilisateur, fauxAdaptateurRechercheEntreprise);
         await entrepotResultatTest.ajoute(resultatDunUtilisateur);
       }
 
@@ -452,9 +412,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         await ajouteUnResultatDeTest('test-id-1', jeanneDupont);
         await ajouteUnResultatDeTest('test-id-2', jeanneDupont);
 
-        const reponse = await request(serveur)
-          .get('/api/resultats-test')
-          .set('Cookie', [cookie]);
+        const reponse = await request(serveur).get('/api/resultats-test').set('Cookie', [cookie]);
 
         assert.equal(reponse.body.length, 2);
         assert.equal(reponse.body[0].id, 'test-id-1');
@@ -464,9 +422,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       it("renvoie uniquement les résultats de test de l'utilisateur courant", async () => {
         await ajouteUnResultatDeTest('test-id-3', hectorDurant);
 
-        const reponse = await request(serveur)
-          .get('/api/resultats-test')
-          .set('Cookie', [cookie]);
+        const reponse = await request(serveur).get('/api/resultats-test').set('Cookie', [cookie]);
 
         assert.equal(reponse.body.length, 0);
       });
@@ -474,9 +430,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       it("ne renvoie pas l'utilisateur", async () => {
         await ajouteUnResultatDeTest('test-id-1', jeanneDupont);
 
-        const reponse = await request(serveur)
-          .get('/api/resultats-test')
-          .set('Cookie', [cookie]);
+        const reponse = await request(serveur).get('/api/resultats-test').set('Cookie', [cookie]);
 
         assert.equal(reponse.body[0].utilisateur, undefined);
       });
@@ -497,22 +451,14 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           tailleOrganisation: '01',
           dateRealisation: new Date(2025, 8, 11),
         });
-        await testDeJeanne.revendiquePropriete(
-          jeanneDupont,
-          fauxAdaptateurRechercheEntreprise
-        );
+        await testDeJeanne.revendiquePropriete(jeanneDupont, fauxAdaptateurRechercheEntreprise);
         await entrepotResultatTest.ajoute(testDeJeanne);
 
-        const reponse = await request(serveur)
-          .get('/api/resultats-test')
-          .set('Cookie', [cookie]);
+        const reponse = await request(serveur).get('/api/resultats-test').set('Cookie', [cookie]);
 
         const resultatTest = reponse.body[0];
         assert.equal(resultatTest.niveau, 'optimal');
-        assert.equal(
-          new Date(resultatTest.dateRealisation).getTime(),
-          new Date(2025, 8, 11).getTime()
-        );
+        assert.equal(new Date(resultatTest.dateRealisation).getTime(), new Date(2025, 8, 11).getTime());
         assert.deepEqual(resultatTest.reponses, {
           pilotage: 5,
           budget: 5,

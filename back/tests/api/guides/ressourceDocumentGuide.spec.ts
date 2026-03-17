@@ -20,8 +20,7 @@ describe("La ressource de document d'un guide", () => {
       ...configurationDeTestDuServeur,
       busEvenements,
       cellar: {
-        get: () =>
-          Promise.resolve({ contenu: Buffer.from(''), typeDeContenu: '' }),
+        get: () => Promise.resolve({ contenu: Buffer.from(''), typeDeContenu: '' }),
         getStream: () => {
           throw new Error('On ne devrait pas appeler cette méthode !');
         },
@@ -33,9 +32,7 @@ describe("La ressource de document d'un guide", () => {
 
   describe('sur un GET', () => {
     it('répond 200', async () => {
-      const reponse = await request(serveur).get(
-        '/documents-guides/anssi_back to basics_pki_1.0.pdf'
-      );
+      const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
       assert.equal(reponse.status, 200);
     });
@@ -43,10 +40,7 @@ describe("La ressource de document d'un guide", () => {
     it('sers le fichier correspondant', async () => {
       let nomDuFichierDemande: string;
       let cleDuBucketDemandee: CleDuBucket;
-      configurationDuServeur.cellar.get = (
-        nomDuFichier: string,
-        cleDuBucket: CleDuBucket
-      ) => {
+      configurationDuServeur.cellar.get = (nomDuFichier: string, cleDuBucket: CleDuBucket) => {
         nomDuFichierDemande = nomDuFichier;
         cleDuBucketDemandee = cleDuBucket;
         return Promise.resolve({
@@ -54,9 +48,7 @@ describe("La ressource de document d'un guide", () => {
           typeDeContenu: '',
         });
       };
-      const reponse = await request(serveur).get(
-        '/documents-guides/anssi_back to basics_pki_1.0.pdf'
-      );
+      const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
       assert.equal(nomDuFichierDemande!, 'anssi_back to basics_pki_1.0.pdf');
       assert.equal(cleDuBucketDemandee!, 'GUIDES');
@@ -65,9 +57,7 @@ describe("La ressource de document d'un guide", () => {
 
     it("répond 404 lorsque le fichier de qualification n'existe pas", async () => {
       configurationDuServeur.cellar.get = async () => undefined;
-      const reponse = await request(serveur).get(
-        '/documents-guides/anssi_back to basics_pki_1.0.pdf'
-      );
+      const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
       assert.equal(reponse.status, 404);
     });
@@ -76,9 +66,7 @@ describe("La ressource de document d'un guide", () => {
       configurationDuServeur.cellar.get = async () => {
         throw new Error('Erreur de test');
       };
-      const reponse = await request(serveur).get(
-        '/documents-guides/anssi_back to basics_pki_1.0.pdf'
-      );
+      const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
       assert.equal(reponse.status, 500);
     });
@@ -88,9 +76,7 @@ describe("La ressource de document d'un guide", () => {
         contenu: Buffer.from(''),
         typeDeContenu: 'application/pdf',
       });
-      const reponse = await request(serveur).get(
-        '/documents-guides/anssi_back to basics_pki_1.0.pdf'
-      );
+      const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
       assert.equal(reponse.headers['content-type'], 'application/pdf');
     });
@@ -99,21 +85,15 @@ describe("La ressource de document d'un guide", () => {
       it('avec le nom du fichier', async () => {
         await request(serveur).get('/documents-guides/zero-trust.pdf');
 
-        const evenement = busEvenements.recupereEvenement(
-          DocumentGuideTelecharge
-        );
+        const evenement = busEvenements.recupereEvenement(DocumentGuideTelecharge);
 
         assert.equal(evenement?.nomFichier, 'zero-trust.pdf');
       });
 
       it("sauf si l'action provient d'un robot", async () => {
-        await request(serveur)
-          .get('/documents-guides/zero-trust.pdf')
-          .set('User-Agent', 'curl');
+        await request(serveur).get('/documents-guides/zero-trust.pdf').set('User-Agent', 'curl');
 
-        const evenement = busEvenements.recupereEvenement(
-          DocumentGuideTelecharge
-        );
+        const evenement = busEvenements.recupereEvenement(DocumentGuideTelecharge);
 
         assert.equal(evenement, undefined);
       });
@@ -121,9 +101,7 @@ describe("La ressource de document d'un guide", () => {
       it('avec une origine si un referer est fourni dans le query string', async () => {
         await request(serveur).get('/documents-guides/zero-trust.pdf?ref=mqc');
 
-        const evenement = busEvenements.recupereEvenement(
-          DocumentGuideTelecharge
-        );
+        const evenement = busEvenements.recupereEvenement(DocumentGuideTelecharge);
 
         assert.equal(evenement?.origine, 'mqc');
       });
@@ -131,9 +109,7 @@ describe("La ressource de document d'un guide", () => {
       it("sans origine si aucun referer n'est fourni dans le query string", async () => {
         await request(serveur).get('/documents-guides/zero-trust.pdf');
 
-        const evenement = busEvenements.recupereEvenement(
-          DocumentGuideTelecharge
-        );
+        const evenement = busEvenements.recupereEvenement(DocumentGuideTelecharge);
 
         assert.equal(evenement?.origine, undefined);
       });

@@ -28,10 +28,7 @@ export type RetourGuideGrist = {
   records: GuideGrist[];
 };
 
-export class EntrepotGuideGrist
-  extends EntrepotGrist<GuideGrist>
-  implements EntrepotGuide
-{
+export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements EntrepotGuide {
   constructor({
     clientHttp = axios,
     adaptateurEnvironnement,
@@ -40,17 +37,10 @@ export class EntrepotGuideGrist
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
     const grist = adaptateurEnvironnement.grist();
-    super(
-      clientHttp,
-      grist.guides().urlTable(),
-      grist.guides().cleApi(),
-      grist.dureeCacheEnSecondes()
-    );
+    super(clientHttp, grist.guides().urlTable(), grist.guides().cleApi(), grist.dureeCacheEnSecondes());
   }
 
-  private readonly convertiBesoin = (
-    besoin: string
-  ): BesoinCyber | undefined => {
+  private readonly convertiBesoin = (besoin: string): BesoinCyber | undefined => {
     switch (besoin) {
       case 'Réagir':
         return 'REAGIR';
@@ -114,9 +104,7 @@ export class EntrepotGuideGrist
     }
     const tousLesGuides = await this.tous();
     return tousLesGuides.filter((guide) =>
-      guide.collections.some((uneCollectionDuGuide) =>
-        collections.includes(uneCollectionDuGuide)
-      )
+      guide.collections.some((uneCollectionDuGuide) => collections.includes(uneCollectionDuGuide))
     );
   }
 }

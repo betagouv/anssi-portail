@@ -1,8 +1,5 @@
 import { describe, it } from 'node:test';
-import {
-  fauxAdaptateurEnvironnement,
-  fauxAdaptateurHachage,
-} from '../api/fauxObjets';
+import { fauxAdaptateurEnvironnement, fauxAdaptateurHachage } from '../api/fauxObjets';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from '../../src/infra/serviceVerificationCoherenceSecretsHachage';
 import { EntrepotSecretHachage } from '../../src/infra/entrepotSecretHachagePostgres';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
@@ -13,9 +10,7 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
     const adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
       hachage: () => ({
-        tousLesSecretsDeHachage: () => [
-          { version: 1, secret: 'unAutreSecret' },
-        ],
+        tousLesSecretsDeHachage: () => [{ version: 1, secret: 'unAutreSecret' }],
       }),
     };
     const entrepotSecretHachage: EntrepotSecretHachage = {
@@ -35,8 +30,7 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
     await assert.rejects(
       () => service.verifieCoherenceSecrets(),
       {
-        message:
-          '💥 La version 1 du secret de la config a une valeur différente de celle déjà appliquée.',
+        message: '💥 La version 1 du secret de la config a une valeur différente de celle déjà appliquée.',
       },
       'La méthode aurait dû lever une erreur'
     );
@@ -72,8 +66,7 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
     await assert.rejects(
       () => service.verifieCoherenceSecrets(),
       {
-        message:
-          '💥 La version 2 du secret de la config a une valeur différente de celle déjà appliquée.',
+        message: '💥 La version 2 du secret de la config a une valeur différente de celle déjà appliquée.',
       },
       'La méthode aurait dû lever une erreur'
     );
@@ -136,8 +129,7 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
     await assert.rejects(
       () => service.verifieCoherenceSecrets(),
       {
-        message:
-          '💥 La version 1 du secret noté dans la config est manquante dans la persistance.',
+        message: '💥 La version 1 du secret noté dans la config est manquante dans la persistance.',
       },
       'La méthode aurait dû lever une erreur'
     );
@@ -170,8 +162,7 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
     await assert.rejects(
       () => service.verifieCoherenceSecrets(),
       {
-        message:
-          '💥 La version 1 du secret déjà appliquée est manquante dans la config.',
+        message: '💥 La version 1 du secret déjà appliquée est manquante dans la config.',
       },
       'La méthode aurait dû lever une erreur'
     );

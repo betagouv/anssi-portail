@@ -4,13 +4,11 @@ export const secteurs = [
   { code: 'C', libelle: 'Industrie manufacturière' },
   {
     code: 'D',
-    libelle:
-      "Production et distribution d'électricité, de gaz, de vapeur et d'air conditionné",
+    libelle: "Production et distribution d'électricité, de gaz, de vapeur et d'air conditionné",
   },
   {
     code: 'E',
-    libelle:
-      "Production et distribution d'eau ; assainissement, gestion des déchets et dépollution",
+    libelle: "Production et distribution d'eau ; assainissement, gestion des déchets et dépollution",
   },
   { code: 'F', libelle: 'Construction' },
   {

@@ -18,10 +18,8 @@ const ressourceApresAuthentificationOIDC = ({
     }
 
     try {
-      const { accessToken, idToken, connexionAvecMFA } =
-        await adaptateurOIDC.recupereJeton(requete);
-      const informationsUtilisateur =
-        await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
+      const { accessToken, idToken, connexionAvecMFA } = await adaptateurOIDC.recupereJeton(requete);
+      const informationsUtilisateur = await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
       const { email } = informationsUtilisateur;
 
       const emailHache = adaptateurHachage.hache(email);
@@ -35,13 +33,9 @@ const ressourceApresAuthentificationOIDC = ({
       requete.session = { ...requete.session, ...informationsUtilisateur };
       requete.session.token = adaptateurJWT.genereToken({ email });
       requete.session.AgentConnectIdToken = idToken;
-      reponse.sendFileAvecNonce(
-        fournisseurChemin.cheminPageJekyll('apres-authentification')
-      );
+      reponse.sendFileAvecNonce(fournisseurChemin.cheminPageJekyll('apres-authentification'));
 
-      await busEvenements.publie(
-        new UtilisateurConnecte(emailHache, connexionAvecMFA)
-      );
+      await busEvenements.publie(new UtilisateurConnecte(emailHache, connexionAvecMFA));
     } catch {
       reponse.sendStatus(401);
     }

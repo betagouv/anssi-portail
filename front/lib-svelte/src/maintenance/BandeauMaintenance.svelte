@@ -15,11 +15,11 @@
     <div class="contenu-section">
       <p>
         <span class="prevision"
-        >Une maintenance est prévue le {maintenanceEnPreparation.jour}
+          >Une maintenance est prévue le {maintenanceEnPreparation.jour}
           sur MesServicesCyber, de {maintenanceEnPreparation.heure}.</span
         >
         <span
-        >La plateforme sera inaccessible. Nous nous excusons pour la gêne
+          >La plateforme sera inaccessible. Nous nous excusons pour la gêne
           occasionnée.</span
         >
       </p>
@@ -39,8 +39,8 @@
     gap: 8px;
 
     &:before {
-      content: "";
-      background: url("/assets/icones/icone-danger.svg");
+      content: '';
+      background: url('/assets/icones/icone-danger.svg');
       min-width: 24px;
       height: 24px;
     }

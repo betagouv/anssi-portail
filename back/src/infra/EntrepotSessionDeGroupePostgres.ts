@@ -3,9 +3,7 @@ import { SessionDeGroupe } from '../metier/sessionDeGroupe';
 import Knex from 'knex';
 import config from '../../knexfile';
 
-export class EntrepotSessionDeGroupePostgres
-  implements EntrepotSessionDeGroupe
-{
+export class EntrepotSessionDeGroupePostgres implements EntrepotSessionDeGroupe {
   knex: Knex.Knex;
 
   constructor() {
@@ -14,7 +12,7 @@ export class EntrepotSessionDeGroupePostgres
 
   async tous(): Promise<SessionDeGroupe[]> {
     const sessions = await this.knex('sessions_groupe');
-    return sessions.map((d) => (new SessionDeGroupe(d.code)));
+    return sessions.map((d) => new SessionDeGroupe(d.code));
   }
 
   async ajoute(sessionDeGroupe: SessionDeGroupe): Promise<void> {

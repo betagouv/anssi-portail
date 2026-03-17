@@ -1,10 +1,7 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import { ClientHttp } from '../../src/infra/clientHttp';
-import {
-  EntrepotFinancementGrist,
-  FinancementGrist,
-} from '../../src/infra/entrepotFinancementGrist';
+import { EntrepotFinancementGrist, FinancementGrist } from '../../src/infra/entrepotFinancementGrist';
 import { Financement } from '../../src/metier/financement';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
 import { ReponseGrist } from '../../src/infra/entrepotGrist';
@@ -53,10 +50,7 @@ describe("L'entrepot de financement Grist", () => {
     await entrepotFinancementGrist.tous();
 
     assert.equal(headerAuthent, 'Bearer FAUSSE_CLE_API');
-    assert.equal(
-      urlAppelee,
-      'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records'
-    );
+    assert.equal(urlAppelee, 'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records');
   });
 
   it('sait récupérer un financement en appelant Grist puis en filtrant par id', async () => {
@@ -70,11 +64,7 @@ describe("L'entrepot de financement Grist", () => {
               id: 10,
               fields: {
                 Nom_du_dispositif: 'Cyber PME',
-                Financement: [
-                  'L',
-                  'Prestations de conseil',
-                  "Appui à l'investissement",
-                ],
+                Financement: ['L', 'Prestations de conseil', "Appui à l'investissement"],
                 Financeur: 'BPI France',
                 Entites_eligibles: ['L', 'PME', 'ETI'],
                 Perimetre_geographique: ['L', 'France'],
@@ -118,10 +108,7 @@ describe("L'entrepot de financement Grist", () => {
       nom: 'Cyber PME',
       benificiaires: 'Tout le monde',
       financeur: 'BPI France',
-      typesDeFinancement: [
-        'Prestations de conseil',
-        "Appui à l'investissement",
-      ],
+      typesDeFinancement: ['Prestations de conseil', "Appui à l'investissement"],
       entitesElligibles: ['PME', 'ETI'],
       perimetresGeographiques: ['France'],
       regions: ['FRANCE'],
@@ -157,11 +144,7 @@ describe("L'entrepot de financement Grist", () => {
               id: 10,
               fields: {
                 Nom_du_dispositif: 'Cyber PME',
-                Financement: [
-                  'L',
-                  'Prestations de conseil',
-                  "Appui à l'investissement",
-                ],
+                Financement: ['L', 'Prestations de conseil', "Appui à l'investissement"],
                 Financeur: 'BPI France',
                 Entites_eligibles: ['L', 'PME', 'ETI'],
                 Perimetre_geographique: ['L', 'France'],
@@ -206,10 +189,7 @@ describe("L'entrepot de financement Grist", () => {
         nom: 'Cyber PME',
         benificiaires: 'Tout le monde',
         financeur: 'BPI France',
-        typesDeFinancement: [
-          'Prestations de conseil',
-          "Appui à l'investissement",
-        ],
+        typesDeFinancement: ['Prestations de conseil', "Appui à l'investissement"],
         entitesElligibles: ['PME', 'ETI'],
         perimetresGeographiques: ['France'],
         regions: ['FRANCE'],

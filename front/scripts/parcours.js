@@ -6,13 +6,9 @@ window.addEventListener('scroll', () => {
 
   if (!laPlusVisible) return;
 
-  document
-    .querySelectorAll('.sommaire a')
-    .forEach((element) => element.classList.remove('actif'));
+  document.querySelectorAll('.sommaire a').forEach((element) => element.classList.remove('actif'));
 
   const idPourSurlignage = `#${laPlusVisible.id}`;
-  const cible = document.querySelector(
-    `.sommaire a[href='${idPourSurlignage}']`
-  );
+  const cible = document.querySelector(`.sommaire a[href='${idPourSurlignage}']`);
   cible.classList.add('actif');
 });

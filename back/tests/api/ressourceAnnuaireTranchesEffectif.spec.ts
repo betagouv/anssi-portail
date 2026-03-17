@@ -14,17 +14,13 @@ describe("La ressource Annuaire Tranche effectif d'établissements", () => {
 
   describe('sur demande GET', () => {
     it('répond 200', async () => {
-      const reponse = await request(serveur).get(
-        '/api/annuaire/tranches-effectif'
-      );
+      const reponse = await request(serveur).get('/api/annuaire/tranches-effectif');
 
       assert.equal(reponse.status, 200);
     });
 
     it("renvoie les tranches d'effectif du référentiel", async () => {
-      const reponse = await request(serveur).get(
-        '/api/annuaire/tranches-effectif'
-      );
+      const reponse = await request(serveur).get('/api/annuaire/tranches-effectif');
 
       assert.equal(reponse.body[1].libelle, '0 salarié');
       assert.equal(reponse.body[1].code, '00');

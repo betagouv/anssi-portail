@@ -26,10 +26,7 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
     this.cache = new Cache({ ttl: dureeCacheEnSecondes });
   }
 
-  protected appelleGrist(
-    options: OptionsAppelGrist = {},
-    urlPreConstruite?: string
-  ) {
+  protected appelleGrist(options: OptionsAppelGrist = {}, urlPreConstruite?: string) {
     if (!this.urlDeBase && !urlPreConstruite) {
       return { records: [] };
     }

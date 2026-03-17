@@ -54,20 +54,14 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     };
   }
 
-  private dechiffreDonneesUtilisateur(
-    utilisateur: UtilisateurBDD
-  ): DonneesUtilisateurEnClair {
+  private dechiffreDonneesUtilisateur(utilisateur: UtilisateurBDD): DonneesUtilisateurEnClair {
     const { donnees } = utilisateur;
-    return this.adaptateurChiffrement.dechiffre(
-      donnees
-    ) as DonneesUtilisateurEnClair;
+    return this.adaptateurChiffrement.dechiffre(donnees) as DonneesUtilisateurEnClair;
   }
 
   async ajoute(utilisateur: Utilisateur) {
     // Enregistrement dans la BDD
-    await this.knex('utilisateurs').insert(
-      this.chiffreDonneesUtilisateur(utilisateur)
-    );
+    await this.knex('utilisateurs').insert(this.chiffreDonneesUtilisateur(utilisateur));
 
     // Enregistrement dans MPA
     const organisation = await utilisateur.organisation();
@@ -84,25 +78,18 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
   private async hydrateUtilisateur(utilisateur: UtilisateurBDD) {
     const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
-    const profilAnssi = await this.adaptateurProfilAnssi.recupere(
-      donnees.email
-    );
+    const profilAnssi = await this.adaptateurProfilAnssi.recupere(donnees.email);
     if (!profilAnssi) {
-      console.warn(
-        'Utilisateur trouvé en base de données sans profil ANSSI ',
-        utilisateur.email_hache
-      );
+      console.warn('Utilisateur trouvé en base de données sans profil ANSSI ', utilisateur.email_hache);
       return undefined;
     }
 
-    const { prenom, nom, telephone, domainesSpecialite, organisation } =
-      profilAnssi;
+    const { prenom, nom, telephone, domainesSpecialite, organisation } = profilAnssi;
 
-    const organisationRelue =
-      await this.adaptateurRechercheEntreprise.rechercheOrganisations(
-        organisation.siret,
-        organisation.departement
-      );
+    const organisationRelue = await this.adaptateurRechercheEntreprise.rechercheOrganisations(
+      organisation.siret,
+      organisation.departement
+    );
 
     const codeActivite = organisationRelue[0].codeActivite;
 
@@ -125,28 +112,20 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
   async parEmailHache(emailHache: string): Promise<Utilisateur | undefined> {
     if (!emailHache) return undefined;
-    const utilisateur = await this.knex('utilisateurs')
-      .where({ email_hache: emailHache })
-      .first();
+    const utilisateur = await this.knex('utilisateurs').where({ email_hache: emailHache }).first();
     if (!utilisateur) return undefined;
     return this.hydrateUtilisateur(utilisateur);
   }
 
-  async parIdListeFavoris(
-    idListeFavoris: string
-  ): Promise<Utilisateur | undefined> {
-    const utilisateur = await this.knex('utilisateurs')
-      .where({ id_liste_favoris: idListeFavoris })
-      .first();
+  async parIdListeFavoris(idListeFavoris: string): Promise<Utilisateur | undefined> {
+    const utilisateur = await this.knex('utilisateurs').where({ id_liste_favoris: idListeFavoris }).first();
     if (!utilisateur) return undefined;
 
     return this.hydrateUtilisateur(utilisateur);
   }
 
   async existe(emailHache: string) {
-    const utilisateur = await this.knex('utilisateurs')
-      .where({ email_hache: emailHache })
-      .first();
+    const utilisateur = await this.knex('utilisateurs').where({ email_hache: emailHache }).first();
     return !!utilisateur;
   }
 
@@ -156,9 +135,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     const enCadence = pThrottle({ limit: 1, interval: 700 });
 
     for (const utilisateurBDD of utilisateursBDD) {
-      const utilisateur = await enCadence(() =>
-        this.hydrateUtilisateur(utilisateurBDD)
-      )();
+      const utilisateur = await enCadence(() => this.hydrateUtilisateur(utilisateurBDD))();
       if (utilisateur) result.push(utilisateur);
     }
     return result;

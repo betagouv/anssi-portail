@@ -88,11 +88,7 @@ export class Utilisateur {
 
   async organisation(): Promise<Organisation> {
     if (!this._organisation) {
-      const organisations =
-        await this.adaptateurRechercheEntreprise.rechercheOrganisations(
-          this.siretEntite,
-          null
-        );
+      const organisations = await this.adaptateurRechercheEntreprise.rechercheOrganisations(this.siretEntite, null);
       this._organisation = new Organisation(organisations[0]);
     }
     return this._organisation;

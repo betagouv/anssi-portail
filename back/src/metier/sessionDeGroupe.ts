@@ -25,16 +25,12 @@ const moyenne = (numbers: number[]) => {
   return numbers.reduce((acc, n) => acc + n, 0) / numbers.length;
 };
 
-const resumeNiveau = (
-  resultatsDuNiveau: ResultatTestMaturite[]
-): ResumeNiveauMaturite => ({
+const resumeNiveau = (resultatsDuNiveau: ResultatTestMaturite[]): ResumeNiveauMaturite => ({
   total: resultatsDuNiveau.length,
   moyennes: tousLesIdRubrique.reduce(
     (accumulateur, idRubrique) => ({
       ...accumulateur,
-      [idRubrique]: moyenne(
-        resultatsDuNiveau.map((r) => r.reponses[idRubrique])
-      ),
+      [idRubrique]: moyenne(resultatsDuNiveau.map((r) => r.reponses[idRubrique])),
     }),
     {} as Record<IdRubrique, number>
   ),
@@ -43,28 +39,21 @@ const resumeNiveau = (
 export class SessionDeGroupe {
   constructor(public readonly code: string) {}
 
-  static async cree(
-    generateurCodeSessionDeGroupe: GenerateurCodeSessionDeGroupe
-  ) {
+  static async cree(generateurCodeSessionDeGroupe: GenerateurCodeSessionDeGroupe) {
     const code = await generateurCodeSessionDeGroupe.genere();
     return new SessionDeGroupe(code);
   }
 
-  async resultatSession(
-    entrepotResultatTest: EntrepotResultatTest
-  ): Promise<ResultatSession> {
-    const resultatsTest = await entrepotResultatTest.ceuxDeSessionGroupe(
-      this.code
-    );
+  async resultatSession(entrepotResultatTest: EntrepotResultatTest): Promise<ResultatSession> {
+    const resultatsTest = await entrepotResultatTest.ceuxDeSessionGroupe(this.code);
 
-    const resultatsParNiveau: Record<IdNiveauMaturite, ResultatTestMaturite[]> =
-      tousLesIdNiveauMaturite.reduce(
-        (previousValue, idNiveau) => ({
-          ...previousValue,
-          [idNiveau]: resultatsTest.filter((r) => r.niveau() === idNiveau),
-        }),
-        {} as Record<IdNiveauMaturite, ResultatTestMaturite[]>
-      );
+    const resultatsParNiveau: Record<IdNiveauMaturite, ResultatTestMaturite[]> = tousLesIdNiveauMaturite.reduce(
+      (previousValue, idNiveau) => ({
+        ...previousValue,
+        [idNiveau]: resultatsTest.filter((r) => r.niveau() === idNiveau),
+      }),
+      {} as Record<IdNiveauMaturite, ResultatTestMaturite[]>
+    );
 
     return {
       nombreParticipants: resultatsTest.length,

@@ -1,8 +1,4 @@
-import {
-  BusEvenements,
-  ClasseDEvenementDeBus,
-  EvenementDuBus,
-} from '../../src/bus/busEvenements';
+import { BusEvenements, ClasseDEvenementDeBus, EvenementDuBus } from '../../src/bus/busEvenements';
 
 export class MockBusEvenement extends BusEvenements {
   evenementsRecus: EvenementDuBus[] = [];
@@ -11,9 +7,7 @@ export class MockBusEvenement extends BusEvenements {
     this.evenementsRecus.push(evenement);
   }
 
-  aRecuUnEvenement<T extends EvenementDuBus>(
-    typeAttendu: ClasseDEvenementDeBus<T>
-  ) {
+  aRecuUnEvenement<T extends EvenementDuBus>(typeAttendu: ClasseDEvenementDeBus<T>) {
     if (this.evenementsRecus.find((e) => e instanceof typeAttendu)) return true;
 
     throw new Error(
@@ -23,9 +17,7 @@ export class MockBusEvenement extends BusEvenements {
     );
   }
 
-  naPasRecuDEvenement<T extends EvenementDuBus>(
-    typeAttendu: ClasseDEvenementDeBus<T>
-  ) {
+  naPasRecuDEvenement<T extends EvenementDuBus>(typeAttendu: ClasseDEvenementDeBus<T>) {
     if (this.evenementsRecus.find((e) => e instanceof typeAttendu)) {
       throw new Error(
         `Événement non attendu reçu. Événements reçus : ${this.evenementsRecus
@@ -36,12 +28,8 @@ export class MockBusEvenement extends BusEvenements {
     return true;
   }
 
-  recupereEvenement<T extends EvenementDuBus>(
-    typeAttendu: ClasseDEvenementDeBus<T>
-  ) {
-    return this.evenementsRecus.find(
-      (e: EvenementDuBus) => e instanceof typeAttendu
-    ) as T | undefined;
+  recupereEvenement<T extends EvenementDuBus>(typeAttendu: ClasseDEvenementDeBus<T>) {
+    return this.evenementsRecus.find((e: EvenementDuBus) => e instanceof typeAttendu) as T | undefined;
   }
 }
 

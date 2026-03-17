@@ -9,9 +9,7 @@ export const ressourceSessionsDeGroupe = ({
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post('/', async (_: Request, reponse: Response) => {
-    const sessionDeGroupe = await SessionDeGroupe.cree(
-      generateurCodeSessionDeGroupe
-    );
+    const sessionDeGroupe = await SessionDeGroupe.cree(generateurCodeSessionDeGroupe);
     await entrepotSessionDeGroupe.ajoute(sessionDeGroupe);
     reponse.status(201).send({
       code: sessionDeGroupe.code,

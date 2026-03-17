@@ -64,11 +64,7 @@ describe('Le middleware', () => {
       let valeurAseptisee;
       const suite = () => (valeurAseptisee = requete.body.paramRenseigne);
 
-      await middleware.aseptise('paramAbsent', 'paramRenseigne')(
-        requete,
-        reponse,
-        suite
-      );
+      await middleware.aseptise('paramAbsent', 'paramRenseigne')(requete, reponse, suite);
 
       assert.equal(valeurAseptisee, 'une valeur');
     });
@@ -80,10 +76,7 @@ describe('Le middleware', () => {
 
       await middleware.aseptise('paramRenseigne')(requete, reponse, suite);
 
-      assert.equal(
-        paramRenseigne,
-        '&lt;script&gt;alert(&quot;hacked!&quot;);&lt;&#x2F;script&gt;'
-      );
+      assert.equal(paramRenseigne, '&lt;script&gt;alert(&quot;hacked!&quot;);&lt;&#x2F;script&gt;');
     });
 
     it('aseptise les paramètres de la requête', async () => {
@@ -93,10 +86,7 @@ describe('Le middleware', () => {
 
       await middleware.aseptise('paramRenseigne')(requete, reponse, suite);
 
-      assert.equal(
-        paramRenseigne,
-        '&lt;script&gt;alert(&quot;hacked!&quot;);&lt;&#x2F;script&gt;'
-      );
+      assert.equal(paramRenseigne, '&lt;script&gt;alert(&quot;hacked!&quot;);&lt;&#x2F;script&gt;');
     });
   });
 
@@ -108,10 +98,7 @@ describe('Le middleware', () => {
       };
       await middleware.interdisLaMiseEnCache(requete, reponse, suite);
 
-      assert.equal(
-        headers['cache-control'],
-        'no-store, no-cache, must-revalidate, proxy-revalidate'
-      );
+      assert.equal(headers['cache-control'], 'no-store, no-cache, must-revalidate, proxy-revalidate');
       assert.equal(headers.pragma, 'no-cache');
       assert.equal(headers.expires, '0');
       assert.equal(headers['surrogate-control'], 'no-store');
@@ -193,10 +180,7 @@ describe('Le middleware', () => {
       };
 
       await middleware.verifieJWT(requete, reponse, () => {});
-      assert.equal(
-        requete.emailUtilisateurCourant,
-        'jeanne.dupond@beta.gouv.fr'
-      );
+      assert.equal(requete.emailUtilisateurCourant, 'jeanne.dupond@beta.gouv.fr');
     });
   });
 
@@ -247,9 +231,7 @@ describe('Le middleware', () => {
 
       await middleware.ajouteMethodeNonce(requete, reponse, () => {
         assert.notEqual(reponse.sendFileAvecNonce, undefined);
-        reponse.sendFileAvecNonce(
-          join(process.cwd(), 'tests', 'ressources', 'factice.html')
-        );
+        reponse.sendFileAvecNonce(join(process.cwd(), 'tests', 'ressources', 'factice.html'));
       });
 
       assert.equal(true, aAppeleSend);
@@ -281,10 +263,7 @@ describe('Le middleware', () => {
       requete.session = { email: jeanneDupont.email };
       await entrepotUtilisateur.ajoute(jeanneDupont);
 
-      await middleware.ajouteUtilisateurARequete(
-        entrepotUtilisateur,
-        adaptateurHachage
-      )(requete, reponse, () => {});
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {});
 
       assert.deepEqual(requete.utilisateur, jeanneDupont);
     });
@@ -293,10 +272,7 @@ describe('Le middleware', () => {
       requete.session = {};
       await entrepotUtilisateur.ajoute(jeanneDupont);
 
-      await middleware.ajouteUtilisateurARequete(
-        entrepotUtilisateur,
-        adaptateurHachage
-      )(requete, reponse, () => {});
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {});
 
       assert.equal(requete.utilisateur, undefined);
     });
@@ -304,10 +280,7 @@ describe('Le middleware', () => {
     it('appelle la suite', async () => {
       let suiteAppelee = false;
 
-      await middleware.ajouteUtilisateurARequete(
-        entrepotUtilisateur,
-        adaptateurHachage
-      )(requete, reponse, () => {
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {
         suiteAppelee = true;
       });
 
@@ -321,10 +294,7 @@ describe('Le middleware', () => {
       };
       let suiteAppelee = false;
 
-      await middleware.ajouteUtilisateurARequete(
-        entrepotUtilisateur,
-        adaptateurHachage
-      )(requete, reponse, () => {
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {
         suiteAppelee = true;
       });
 
@@ -336,10 +306,7 @@ describe('Le middleware', () => {
       entrepotUtilisateur.echoueSurRechercheParMail();
       let suiteAppelee = false;
 
-      await middleware.ajouteUtilisateurARequete(
-        entrepotUtilisateur,
-        adaptateurHachage
-      )(requete, reponse, () => {
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {
         suiteAppelee = true;
       });
 

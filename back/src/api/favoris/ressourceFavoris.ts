@@ -16,16 +16,8 @@ const ressourceFavoris = ({
     '/',
     middleware.verifieJWT,
     middleware.aseptise('idItemCyber'),
-    middleware.ajouteUtilisateurARequete(
-      entrepotUtilisateur,
-      adaptateurHachage
-    ),
-    [
-      check('idItemCyber')
-        .not()
-        .isEmpty()
-        .withMessage("L'idItemCyber est invalide"),
-    ],
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
+    [check('idItemCyber').not().isEmpty().withMessage("L'idItemCyber est invalide")],
     middleware.valide(),
     async (requete: Request, reponse: Response) => {
       let idItemCyber = requete.body.idItemCyber;
@@ -48,10 +40,7 @@ const ressourceFavoris = ({
   routeur.get(
     '/',
     middleware.verifieJWT,
-    middleware.ajouteUtilisateurARequete(
-      entrepotUtilisateur,
-      adaptateurHachage
-    ),
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     async (requete: Request, reponse: Response) => {
       const utilisateur = requete.utilisateur;
       const favoris = await entrepotFavori.tousCeuxDeUtilisateur(utilisateur);

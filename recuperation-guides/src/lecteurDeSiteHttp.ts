@@ -5,9 +5,7 @@ export type LecteurSite = { lis: (url: string) => Promise<string> };
 export const lecteurDeSiteHttp = {
   lis: async (url: string) => {
     const reponseChallenge = await axios.get(url);
-    const challengeExtrait = (reponseChallenge.data as string).match(
-      /var __blnChallengeStore=\{.*"value":"([^"]*)"/
-    );
+    const challengeExtrait = (reponseChallenge.data as string).match(/var __blnChallengeStore=\{.*"value":"([^"]*)"/);
     if (!challengeExtrait) {
       return reponseChallenge.data;
     }

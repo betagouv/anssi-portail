@@ -7,10 +7,7 @@ import fs from 'node:fs/promises';
 export class GenerateurDeRapportsFichier implements GenerateurDeRapports {
   private readonly repertoire = 'rapports';
 
-  async genereRapports(
-    differences: DifferenceFinancement[],
-    nouveauxFinancements: NouveauFinancement[]
-  ) {
+  async genereRapports(differences: DifferenceFinancement[], nouveauxFinancements: NouveauFinancement[]) {
     let chaineHtml = '';
     const generateurInterne = new GenerateurDeRapportsHtml((ligne: string) => {
       chaineHtml += ligne + '\n';
@@ -19,9 +16,6 @@ export class GenerateurDeRapportsFichier implements GenerateurDeRapports {
     await fs.access(this.repertoire).catch(async () => {
       await fs.mkdir(this.repertoire);
     });
-    await fs.writeFile(
-      `${process.cwd()}/${this.repertoire}/financements-en-differences.html`,
-      chaineHtml
-    );
+    await fs.writeFile(`${process.cwd()}/${this.repertoire}/financements-en-differences.html`, chaineHtml);
   }
 }

@@ -5,10 +5,7 @@ import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { EntrepotResultatTest } from '../../../src/metier/entrepotResultatTest';
 import { EntrepotSessionDeGroupe } from '../../../src/metier/entrepotSessionDeGroupe';
-import {
-  DonneesCreationResultatTestMaturite,
-  ResultatTestMaturite,
-} from '../../../src/metier/resultatTestMaturite';
+import { DonneesCreationResultatTestMaturite, ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
 import { SessionDeGroupe } from '../../../src/metier/sessionDeGroupe';
 import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
 import { EntrepotSessionDeGroupeMemoire } from '../../persistance/EntrepotSessionDeGroupeMemoire';
@@ -22,10 +19,7 @@ describe("La ressource qui gère les résultats d'une session de groupe", () => 
     genere: async () => code,
   });
 
-  const donneesResultatTest: Omit<
-    DonneesCreationResultatTestMaturite,
-    'utilisateur'
-  > = {
+  const donneesResultatTest: Omit<DonneesCreationResultatTestMaturite, 'utilisateur'> = {
     region: 'FR-NOR',
     secteur: 'J',
     tailleOrganisation: '51',
@@ -52,43 +46,31 @@ describe("La ressource qui gère les résultats d'une session de groupe", () => 
 
   describe('sur requête GET', () => {
     it('répond 200 lorsque la session existe', async () => {
-      const sessionDeGroupe = await SessionDeGroupe.cree(
-        generateurCodeSessionDeGroupe('ABC2ED')
-      );
+      const sessionDeGroupe = await SessionDeGroupe.cree(generateurCodeSessionDeGroupe('ABC2ED'));
       await entrepotSessionDeGroupe.ajoute(sessionDeGroupe);
 
-      const reponse = await request(serveur)
-        .get('/api/sessions-groupe/ABC2ED/resultats')
-        .send();
+      const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED/resultats').send();
 
       assert.equal(reponse.status, 200);
     });
 
     it("répond 404 si la session n'existe pas", async () => {
-      const reponse = await request(serveur)
-        .get('/api/sessions-groupe/ABC2ED/resultats')
-        .send();
+      const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED/resultats').send();
 
       assert.equal(reponse.status, 404);
     });
 
     it("répond 0 participant en cas d'absence de résultats", async () => {
-      const sessionDeGroupe = await SessionDeGroupe.cree(
-        generateurCodeSessionDeGroupe('ABC2ED')
-      );
+      const sessionDeGroupe = await SessionDeGroupe.cree(generateurCodeSessionDeGroupe('ABC2ED'));
       await entrepotSessionDeGroupe.ajoute(sessionDeGroupe);
 
-      const reponse = await request(serveur)
-        .get('/api/sessions-groupe/ABC2ED/resultats')
-        .send();
+      const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED/resultats').send();
 
       assert.deepEqual(reponse.body.nombreParticipants, 0);
     });
 
     it('répond le nombre de participants en cas de résultats', async () => {
-      const sessionDeGroupe = await SessionDeGroupe.cree(
-        generateurCodeSessionDeGroupe('ABC2ED')
-      );
+      const sessionDeGroupe = await SessionDeGroupe.cree(generateurCodeSessionDeGroupe('ABC2ED'));
       await entrepotSessionDeGroupe.ajoute(sessionDeGroupe);
       await entrepotResultatTest.ajoute(
         new ResultatTestMaturite({
@@ -97,9 +79,7 @@ describe("La ressource qui gère les résultats d'une session de groupe", () => 
         })
       );
 
-      const reponse = await request(serveur)
-        .get('/api/sessions-groupe/ABC2ED/resultats')
-        .send();
+      const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED/resultats').send();
 
       assert.deepEqual(reponse.body.nombreParticipants, 1);
     });

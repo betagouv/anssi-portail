@@ -2,21 +2,13 @@ import { Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
 import { versReferentiel } from '../../metier/nis2/exigence';
 
-export const ressourceExigencesNis2 = ({
-  adaptateurEnvironnement,
-  entrepotExigence,
-}: ConfigurationServeur) => {
+export const ressourceExigencesNis2 = ({ adaptateurEnvironnement, entrepotExigence }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get('/', async (requete, reponse) => {
     const { source, cible } = requete.query;
-    if (
-      (source && typeof source !== 'string') ||
-      (cible && typeof cible !== 'string')
-    ) {
-      return reponse
-        .status(400)
-        .send('Les paramètres doivent être des chaînes de caractères');
+    if ((source && typeof source !== 'string') || (cible && typeof cible !== 'string')) {
+      return reponse.status(400).send('Les paramètres doivent être des chaînes de caractères');
     }
 
     const referentielSource = versReferentiel(source);
@@ -32,10 +24,7 @@ export const ressourceExigencesNis2 = ({
       return reponse.sendStatus(404);
     }
 
-    const exigences = await entrepotExigence.parReferentiel(
-      referentielSource,
-      referentielCible
-    );
+    const exigences = await entrepotExigence.parReferentiel(referentielSource, referentielCible);
     reponse.send(exigences);
   });
 

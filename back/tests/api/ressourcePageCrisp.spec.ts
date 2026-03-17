@@ -2,10 +2,7 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { Express } from 'express';
 import { creeServeur } from '../../src/api/msc';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurEnvironnement,
-} from './fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from './fauxObjets';
 import assert from 'node:assert';
 import { MockCmsCrisp } from '../mockCmsCrisp';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
@@ -37,9 +34,7 @@ describe('quand requête GET sur `/api/pages-crisp/un-id-d-article`', () => {
   });
 
   it('retourne un statut 200', async () => {
-    const reponse = await request(serveur).get(
-      '/api/pages-crisp/promouvoir_msc'
-    );
+    const reponse = await request(serveur).get('/api/pages-crisp/promouvoir_msc');
 
     assert.equal(reponse.status, 200);
   });
@@ -55,9 +50,7 @@ describe('quand requête GET sur `/api/pages-crisp/un-id-d-article`', () => {
       ],
     });
 
-    const reponse = await request(serveur).get(
-      '/api/pages-crisp/promouvoir_msc'
-    );
+    const reponse = await request(serveur).get('/api/pages-crisp/promouvoir_msc');
 
     const page = reponse.body;
     assert.equal(page.titre, 'Promouvoir MSC');

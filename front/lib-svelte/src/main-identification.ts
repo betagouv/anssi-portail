@@ -1,4 +1,4 @@
-import { mount } from "svelte";
+import { mount } from 'svelte';
 import ZoneIdentification from './identification/ZoneIdentification.svelte';
 
 mount(ZoneIdentification, {

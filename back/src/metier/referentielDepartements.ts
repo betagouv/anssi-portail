@@ -118,13 +118,10 @@ export const departements = [
 
 export const codeDepartement = departements.map((s) => s.code);
 
-export const estCodeDepartement = (
-  code: string | undefined | null
-): code is CodeDepartement => departements.some((d) => d.code === code);
+export const estCodeDepartement = (code: string | undefined | null): code is CodeDepartement =>
+  departements.some((d) => d.code === code);
 
-export const regionDuDepartement = (
-  codeDepartement: CodeDepartement | undefined
-): CodeRegion | undefined =>
+export const regionDuDepartement = (codeDepartement: CodeDepartement | undefined): CodeRegion | undefined =>
   departements.find((d) => d.code === codeDepartement)?.codeRegion;
 
 export type CodeDepartement = (typeof codeDepartement)[number];

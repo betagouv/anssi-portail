@@ -12,7 +12,7 @@ export async function down(knex: Knex): Promise<void> {
     table.dropPrimary('utilisateurs_pkey');
     table.string('email');
   });
-  await knex.raw("update utilisateurs set email=donnees->>'email'")
+  await knex.raw("update utilisateurs set email=donnees->>'email'");
   await knex.schema.alterTable('utilisateurs', (table) => {
     table.primary(['email']);
   });

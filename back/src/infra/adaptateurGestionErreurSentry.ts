@@ -5,12 +5,7 @@ import { IpDeniedError } from 'express-ipfilter';
 
 export interface AdaptateurGestionErreur {
   initialise(applicationExpress: Express): void;
-  controleurErreurs(
-    erreur: Error,
-    requete: Request,
-    reponse: Response,
-    suite: NextFunction
-  ): void;
+  controleurErreurs(erreur: Error, requete: Request, reponse: Response, suite: NextFunction): void;
 }
 
 export const adaptateurGestionErreurSentry: AdaptateurGestionErreur = {
@@ -31,12 +26,7 @@ export const adaptateurGestionErreurSentry: AdaptateurGestionErreur = {
     applicationExpress.use(Sentry.Handlers.requestHandler());
     applicationExpress.use(Sentry.Handlers.tracingHandler());
   },
-  controleurErreurs: (
-    erreur: Error,
-    requete: Request,
-    reponse: Response,
-    suite: NextFunction
-  ) => {
+  controleurErreurs: (erreur: Error, requete: Request, reponse: Response, suite: NextFunction) => {
     if (erreur instanceof IpDeniedError) {
       reponse.status(401);
       reponse.end();

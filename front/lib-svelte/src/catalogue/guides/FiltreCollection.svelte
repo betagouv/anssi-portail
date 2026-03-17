@@ -45,7 +45,7 @@
     <span class="libelle">Expertise technique</span>
     <span class="compte">
       {($nombreGuides.parCollection[CollectionGuide.LES_ESSENTIELS] ?? 0) +
-      ($nombreGuides.parCollection[CollectionGuide.LES_FONDAMENTAUX] ?? 0) +
+        ($nombreGuides.parCollection[CollectionGuide.LES_FONDAMENTAUX] ?? 0) +
         ($nombreGuides.parCollection[CollectionGuide.AUTRE] ?? 0)}
     </span>
   </label>

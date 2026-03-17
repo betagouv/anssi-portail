@@ -38,17 +38,13 @@ describe('La ressource des favoris partagés', () => {
 
   describe('sur requête GET', () => {
     it('répond 200', async () => {
-      const reponse = await request(serveur).get(
-        `/api/favoris-partages/${idListeFavoris}`
-      );
+      const reponse = await request(serveur).get(`/api/favoris-partages/${idListeFavoris}`);
 
       assert.equal(reponse.statusCode, 200);
     });
 
     it("retourne les favoris de l'utilisateur qui a partagé sa liste", async () => {
-      const reponse = await request(serveur).get(
-        `/api/favoris-partages/${idListeFavoris}`
-      );
+      const reponse = await request(serveur).get(`/api/favoris-partages/${idListeFavoris}`);
 
       assert.equal(reponse.body.prenom, 'Jeanne');
       assert.deepEqual(reponse.body.favorisPartages, [
@@ -58,17 +54,13 @@ describe('La ressource des favoris partagés', () => {
     });
 
     it('répond 404 si aucun utilisateur ne possède cet id de liste de favoris', async () => {
-      const reponse = await request(serveur).get(
-        `/api/favoris-partages/${randomUUID()}`
-      );
+      const reponse = await request(serveur).get(`/api/favoris-partages/${randomUUID()}`);
 
       assert.equal(reponse.statusCode, 404);
     });
 
     it("retourne 400 si l'id de la liste de favoris n'est pas un uuid", async () => {
-      const reponse = await request(serveur).get(
-        `/api/favoris-partages/pasunuuid`
-      );
+      const reponse = await request(serveur).get(`/api/favoris-partages/pasunuuid`);
 
       assert.equal(reponse.statusCode, 400);
     });

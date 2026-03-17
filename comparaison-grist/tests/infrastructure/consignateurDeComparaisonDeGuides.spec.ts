@@ -5,8 +5,7 @@ import { ComparaisonDeGuides, Guide } from '../../src/metier/guides/guide.type';
 export const guideZeroTrust: Guide = {
   id: 'zero-trust',
   nom: 'Zero Trust',
-  description:
-    '<p>Avec l’accroissement des usages liés au télétravail, ...</p>',
+  description: '<p>Avec l’accroissement des usages liés au télétravail, ...</p>',
   nomImage: 'anssi-fondamentaux-zero-trust-v1_publication',
   langue: 'FR',
   collections: ['Les essentiels'],
@@ -25,8 +24,7 @@ export const guideZeroTrust: Guide = {
 export const guideDevsecops: Guide = {
   id: 'devsecops',
   nom: 'DevSecOps',
-  description:
-    '<p>Les Essentiels de l’ANSSI visent à éclairer l’ensemble de nos lecteurs, ...</p>',
+  description: '<p>Les Essentiels de l’ANSSI visent à éclairer l’ensemble de nos lecteurs, ...</p>',
   nomImage: 'anssi_essentiels_devsecops_v1',
   langue: 'FR',
   collections: ['Les essentiels'],
@@ -63,8 +61,7 @@ describe('Le consignateur de comparaison de guides', () => {
 `;
   const postlude = '</tbody>\n</table>';
 
-  const consignateurDeComparaisonDeGuides =
-    new ConsignateurDeComparaisonDeGuides();
+  const consignateurDeComparaisonDeGuides = new ConsignateurDeComparaisonDeGuides();
 
   const comparaisonVide: ComparaisonDeGuides = {
     ajouts: [],
@@ -73,8 +70,7 @@ describe('Le consignateur de comparaison de guides', () => {
   };
 
   it('sait initialiser la comparaison en Markdown', () => {
-    const markdown =
-      consignateurDeComparaisonDeGuides.consigneComparaison(comparaisonVide);
+    const markdown = consignateurDeComparaisonDeGuides.consigneComparaison(comparaisonVide);
 
     expect(markdown).toEqual(prelude + postlude);
   });
@@ -116,8 +112,7 @@ describe('Le consignateur de comparaison de guides', () => {
       ...comparaisonVide,
       ajouts: [guideZeroTrust],
     };
-    const markdown =
-      consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
+    const markdown = consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
 
     expect(markdown).toEqual(attendu);
   });
@@ -158,8 +153,7 @@ describe('Le consignateur de comparaison de guides', () => {
       ...comparaisonVide,
       suppressions: [guideZeroTrust],
     };
-    const markdown =
-      consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
+    const markdown = consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
 
     expect(markdown).toEqual(attendu);
   });
@@ -209,8 +203,7 @@ describe('Le consignateur de comparaison de guides', () => {
         },
       ],
     };
-    const markdown =
-      consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
+    const markdown = consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
 
     expect(markdown).toEqual(attendu);
   });
@@ -303,8 +296,7 @@ describe('Le consignateur de comparaison de guides', () => {
         },
       ],
     };
-    const markdown =
-      consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
+    const markdown = consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
 
     expect(markdown).toEqual(attendu);
   });

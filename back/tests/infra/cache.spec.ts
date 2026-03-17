@@ -13,9 +13,7 @@ const add = (date: Date, duration: { hours: number }) => {
 };
 
 const ilSePasse25Heures = (): void => {
-  FournisseurHorlogeDeTest.initialise(
-    add(FournisseurHorloge.maintenant(), { hours: 25 })
-  );
+  FournisseurHorlogeDeTest.initialise(add(FournisseurHorloge.maintenant(), { hours: 25 }));
 };
 
 describe('Le système de mise en cache', () => {

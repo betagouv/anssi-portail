@@ -15,12 +15,7 @@ describe("L'entrepôt Grist générique", () => {
         return { data: { records: [{ test: 'une chaine' }] } };
       },
     };
-    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(
-      clientHttp,
-      'urlDeBase',
-      'cleApi',
-      60
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'urlDeBase', 'cleApi', 60);
 
     await entrepotRessourcesCyberGrist.tous();
     const resultat = await entrepotRessourcesCyberGrist.tous();
@@ -35,12 +30,7 @@ describe("L'entrepôt Grist générique", () => {
         return { data: { records: [{ test: 'une chaine de ' + url }] } };
       },
     };
-    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(
-      clientHttp,
-      'urlDeBase',
-      'cleApi',
-      60
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'urlDeBase', 'cleApi', 60);
 
     const premier = await entrepotRessourcesCyberGrist.avecFiltre(1);
     const second = await entrepotRessourcesCyberGrist.avecFiltre(2);
@@ -53,9 +43,7 @@ describe("L'entrepôt Grist générique", () => {
   };
 
   const ilSePasse2Heures = (): void => {
-    FournisseurHorlogeDeTest.initialise(
-      add(FournisseurHorloge.maintenant(), { hours: 2 })
-    );
+    FournisseurHorlogeDeTest.initialise(add(FournisseurHorloge.maintenant(), { hours: 2 }));
   };
 
   it("retourne la valeur précédente en cas d'erreur Grist", async () => {
@@ -64,19 +52,14 @@ describe("L'entrepôt Grist générique", () => {
       get: async (_url: string) => {
         if (i === 0) {
           i++;
-          return { data: { records: [{ test: 'une chaine'  }] } };
+          return { data: { records: [{ test: 'une chaine' }] } };
         }
         return Promise.reject(new Error('Erreur 404'));
       },
     };
-    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(
-      clientHttp,
-      'urlDeBase',
-      'cleApi',
-      60
-    );
+    const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'urlDeBase', 'cleApi', 60);
     await entrepotRessourcesCyberGrist.tous();
-    ilSePasse2Heures()
+    ilSePasse2Heures();
 
     const resultat = await entrepotRessourcesCyberGrist.tous();
 

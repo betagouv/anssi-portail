@@ -24,17 +24,13 @@ describe('La ressource qui gère une session de groupe', () => {
     it('répond 200 lorsque la session existe', async () => {
       await entrepotSessionDeGroupe.ajoute(new SessionDeGroupe('ABC2ED'));
 
-      const reponse = await request(serveur)
-        .get('/api/sessions-groupe/ABC2ED')
-        .send({});
+      const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED').send({});
 
       assert.equal(reponse.status, 200);
     });
 
     it("répond 404 lorsque la session n'existe pas", async () => {
-      const reponse = await request(serveur)
-        .get('/api/sessions-groupe/ABC2ED')
-        .send({});
+      const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED').send({});
 
       assert.equal(reponse.status, 404);
     });
@@ -42,9 +38,7 @@ describe('La ressource qui gère une session de groupe', () => {
     it('aseptise le code passé en paramètre', async () => {
       await entrepotSessionDeGroupe.ajoute(new SessionDeGroupe('ABC2&lt;D'));
 
-      const reponse = await request(serveur)
-        .get('/api/sessions-groupe/ABC2<D')
-        .send({});
+      const reponse = await request(serveur).get('/api/sessions-groupe/ABC2<D').send({});
 
       assert.equal(reponse.status, 200);
     });

@@ -1,10 +1,7 @@
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import assert from 'node:assert';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurEnvironnement,
-} from './fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from './fauxObjets';
 import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';

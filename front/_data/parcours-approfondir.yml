@@ -32,7 +32,6 @@ securiser:
     - /services/ads
     - /services/silene
 
-
 reagir:
   titre: Réagir
   explication: Préparez-vous à un incident ou une crise d’origine cyber afin de mieux y répondre.

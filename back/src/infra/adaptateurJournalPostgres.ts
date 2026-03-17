@@ -9,9 +9,7 @@ export const adaptateurJournalPostgres = (): AdaptateurJournal => {
     connection: process.env.BASE_DONNEES_JOURNAL_URL_SERVEUR,
     pool: {
       min: 0,
-      max: Number.parseInt(
-        process.env.BASE_DONNEES_JOURNAL_POOL_CONNEXION_MAX || '0'
-      ),
+      max: Number.parseInt(process.env.BASE_DONNEES_JOURNAL_POOL_CONNEXION_MAX || '0'),
     },
   };
   const knex = Knex(config);

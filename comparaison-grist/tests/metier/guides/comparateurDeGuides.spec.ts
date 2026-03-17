@@ -1,8 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import {
-  EntrepotGuideGrist,
-  GuideGrist,
-} from '../../../src/infrastructure/entrepotGuideGrist';
+import { EntrepotGuideGrist, GuideGrist } from '../../../src/infrastructure/entrepotGuideGrist';
 import { ClientHttp } from '../../../src/metier/clientHttp';
 import { ComparateurDeGuides } from '../../../src/metier/guides/comparateurDeGuides';
 import { ConstructeurGuideGrist } from './constructeurGuideGrist';
@@ -32,25 +29,14 @@ describe('Le comparateur de guides', () => {
       },
     };
     comparateurDeGuides = new ComparateurDeGuides(
-      new EntrepotGuideGrist(
-        clientHttpSource,
-        'http://localhost',
-        'source',
-        ''
-      ),
+      new EntrepotGuideGrist(clientHttpSource, 'http://localhost', 'source', ''),
       new EntrepotGuideGrist(clientHttpCible, 'http://localhost', 'cible', '')
     );
   });
 
   it('sait charger les données sources et cibles', async () => {
-    const guide1 = new ConstructeurGuideGrist()
-      .avecLeNumeroDeLigne(1)
-      .avecLIdentifiant('guide1')
-      .construis();
-    const guide2 = new ConstructeurGuideGrist()
-      .avecLeNumeroDeLigne(2)
-      .avecLIdentifiant('guide2')
-      .construis();
+    const guide1 = new ConstructeurGuideGrist().avecLeNumeroDeLigne(1).avecLIdentifiant('guide1').construis();
+    const guide2 = new ConstructeurGuideGrist().avecLeNumeroDeLigne(2).avecLIdentifiant('guide2').construis();
 
     clientHttpSource.get = async <T>() => {
       return {
@@ -71,21 +57,14 @@ describe('Le comparateur de guides', () => {
     await comparateurDeGuides.chargeLesDonnees();
 
     expect(comparateurDeGuides.guidesSource).toHaveLength(1);
-    expect(comparateurDeGuides.guidesSource[0].id).toEqual(
-      guide1.fields.Identifiant
-    );
+    expect(comparateurDeGuides.guidesSource[0].id).toEqual(guide1.fields.Identifiant);
     expect(comparateurDeGuides.guidesCible).toHaveLength(1);
-    expect(comparateurDeGuides.guidesCible[0].id).toEqual(
-      guide2.fields.Identifiant
-    );
+    expect(comparateurDeGuides.guidesCible[0].id).toEqual(guide2.fields.Identifiant);
   });
 
   describe('lors de la comparaison des guides', () => {
     it('sait retourner les guides à créer dans la cible', async () => {
-      const guide1 = new ConstructeurGuideGrist()
-        .avecLeNumeroDeLigne(1)
-        .avecLIdentifiant('guide1')
-        .construis();
+      const guide1 = new ConstructeurGuideGrist().avecLeNumeroDeLigne(1).avecLIdentifiant('guide1').construis();
       clientHttpSource.get = async <T>() => {
         return {
           data: {
@@ -101,10 +80,7 @@ describe('Le comparateur de guides', () => {
     });
 
     it('sait retourner les guides à supprimer dans la cible', async () => {
-      const guide1 = new ConstructeurGuideGrist()
-        .avecLeNumeroDeLigne(1)
-        .avecLIdentifiant('guide1')
-        .construis();
+      const guide1 = new ConstructeurGuideGrist().avecLeNumeroDeLigne(1).avecLIdentifiant('guide1').construis();
       clientHttpCible.get = async <T>() => {
         return {
           data: {
@@ -139,10 +115,7 @@ describe('Le comparateur de guides', () => {
         guideOriginal = coquilleDeGuide.construis();
       });
 
-      const prepareLesDonnees = (
-        guideOriginal: GuideGrist,
-        guideCible: GuideGrist
-      ) => {
+      const prepareLesDonnees = (guideOriginal: GuideGrist, guideCible: GuideGrist) => {
         clientHttpSource.get = async <T>() => {
           return {
             data: {
@@ -161,9 +134,7 @@ describe('Le comparateur de guides', () => {
       };
 
       it('lorsque le titre a changé', async () => {
-        const guideCible = coquilleDeGuide
-          .avecLeTitre('Nouveau titre')
-          .construis();
+        const guideCible = coquilleDeGuide.avecLeTitre('Nouveau titre').construis();
         await prepareLesDonnees(guideOriginal, guideCible);
 
         const comparaison = comparateurDeGuides.compare();
@@ -172,9 +143,7 @@ describe('Le comparateur de guides', () => {
       });
 
       it('lorsque la description a changé', async () => {
-        const guideCible = coquilleDeGuide
-          .avecLaDescription('Nouvelle description')
-          .construis();
+        const guideCible = coquilleDeGuide.avecLaDescription('Nouvelle description').construis();
         await prepareLesDonnees(guideOriginal, guideCible);
 
         const comparaison = comparateurDeGuides.compare();
@@ -201,9 +170,7 @@ describe('Le comparateur de guides', () => {
       });
 
       it('lorsque les collections ont changé', async () => {
-        const guideCible = coquilleDeGuide
-          .avecLesCollections(['REAGIR', 'SE FORMER'])
-          .construis();
+        const guideCible = coquilleDeGuide.avecLesCollections(['REAGIR', 'SE FORMER']).construis();
         await prepareLesDonnees(guideOriginal, guideCible);
 
         const comparaison = comparateurDeGuides.compare();
@@ -212,9 +179,7 @@ describe('Le comparateur de guides', () => {
       });
 
       it('lorsque les documents ont changé', async () => {
-        const guideCible = coquilleDeGuide
-          .avecLeDocument('document 2', 'nom_du_document_2.pdf')
-          .construis();
+        const guideCible = coquilleDeGuide.avecLeDocument('document 2', 'nom_du_document_2.pdf').construis();
         await prepareLesDonnees(guideOriginal, guideCible);
 
         const comparaison = comparateurDeGuides.compare();
@@ -223,9 +188,7 @@ describe('Le comparateur de guides', () => {
       });
 
       it('lorsque la date de mise à jour a changé', async () => {
-        const guideCible = coquilleDeGuide
-          .avecLaDateDeMiseAJour(new Date(2025, 5, 20).getTime() / 1000)
-          .construis();
+        const guideCible = coquilleDeGuide.avecLaDateDeMiseAJour(new Date(2025, 5, 20).getTime() / 1000).construis();
         await prepareLesDonnees(guideOriginal, guideCible);
 
         const comparaison = comparateurDeGuides.compare();
@@ -234,9 +197,7 @@ describe('Le comparateur de guides', () => {
       });
 
       it('lorsque la date de publication a changé', async () => {
-        const guideCible = coquilleDeGuide
-          .avecLaDateDePublication(new Date(2025, 5, 20).getTime() / 1000)
-          .construis();
+        const guideCible = coquilleDeGuide.avecLaDateDePublication(new Date(2025, 5, 20).getTime() / 1000).construis();
         await prepareLesDonnees(guideOriginal, guideCible);
 
         const comparaison = comparateurDeGuides.compare();
@@ -245,9 +206,7 @@ describe('Le comparateur de guides', () => {
       });
 
       it('lorsque la thématique a changé', async () => {
-        const guideCible = coquilleDeGuide
-          .avecThematique('Nouvelle thématique')
-          .construis();
+        const guideCible = coquilleDeGuide.avecThematique('Nouvelle thématique').construis();
         await prepareLesDonnees(guideOriginal, guideCible);
 
         const comparaison = comparateurDeGuides.compare();
@@ -256,9 +215,7 @@ describe('Le comparateur de guides', () => {
       });
 
       it('lorsque les besoins ont changé', async () => {
-        const guideCible = coquilleDeGuide
-          .avecBesoin('nouveau besoin')
-          .construis();
+        const guideCible = coquilleDeGuide.avecBesoin('nouveau besoin').construis();
         await prepareLesDonnees(guideOriginal, guideCible);
 
         const comparaison = comparateurDeGuides.compare();

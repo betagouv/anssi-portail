@@ -31,7 +31,7 @@ describe('La recherche par source', () => {
     });
 
     it("retourne l'item lorsque la primaire est ANSSI et que la secondaire sélectionnée correspond", () => {
-      rechercheParSource.set([Source.ANSSI_TOUTES,  Source.INNOVATION_ANSSI]);
+      rechercheParSource.set([Source.ANSSI_TOUTES, Source.INNOVATION_ANSSI]);
 
       const resultat = rechercheParSource.ok(mss()); // mss = innovation
 
@@ -39,7 +39,7 @@ describe('La recherche par source', () => {
     });
 
     it("retourne l'item qui n'a que la primaire ANSSI", () => {
-      rechercheParSource.set([Source.ANSSI_TOUTES,  Source.ANSSI]);
+      rechercheParSource.set([Source.ANSSI_TOUTES, Source.ANSSI]);
 
       const resultat = rechercheParSource.ok(guidesTechniques()); // uniquement ANSSI
 

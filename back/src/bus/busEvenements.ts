@@ -1,6 +1,4 @@
-export type GestionnaireDEvenement<T extends EvenementDuBus> = (
-  evenement: T
-) => Promise<void>;
+export type GestionnaireDEvenement<T extends EvenementDuBus> = (evenement: T) => Promise<void>;
 
 export type EvenementDuBus = object;
 
@@ -13,10 +11,7 @@ export class BusEvenements {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   gestionnaires: Record<string, GestionnaireDEvenement<any>[]> = {};
 
-  abonne<T extends EvenementDuBus>(
-    classeEvenement: ClasseDEvenementDeBus<T>,
-    gestionnaire: GestionnaireDEvenement<T>
-  ) {
+  abonne<T extends EvenementDuBus>(classeEvenement: ClasseDEvenementDeBus<T>, gestionnaire: GestionnaireDEvenement<T>) {
     this.gestionnaires[classeEvenement.name] ??= [];
     this.gestionnaires[classeEvenement.name].push(gestionnaire);
   }
@@ -31,12 +26,10 @@ export class BusEvenements {
   async publie<T extends EvenementDuBus>(evenement: T) {
     // On fonctionne exprès en `fire & forget` pour les handlers.
     // Dans un souci de performance : on ne veut pas attendre les exécutions.
-    this.gestionnaires[evenement.constructor.name]?.forEach(
-      (gestionnaire: GestionnaireDEvenement<T>) => {
-        gestionnaire(evenement).catch((e: Error) => {
-          console.error(`Erreur lors du traitement de l'évènement`, e.message);
-        });
-      }
-    );
+    this.gestionnaires[evenement.constructor.name]?.forEach((gestionnaire: GestionnaireDEvenement<T>) => {
+      gestionnaire(evenement).catch((e: Error) => {
+        console.error(`Erreur lors du traitement de l'évènement`, e.message);
+      });
+    });
   }
 }

@@ -32,9 +32,7 @@ export const calculeStatistiques = async ({
 }): Promise<Statistiques> => {
   const { nombreDiagnostics } = await adaptateurMonAideCyber.statistiques();
   const tousLesTests = await entrepotResultatTest.tousEnOmettantUtilisateur();
-  const listeDesNiveaux: IdNiveauMaturite[] = tousLesTests.map((test) =>
-    test.niveau()
-  );
+  const listeDesNiveaux: IdNiveauMaturite[] = tousLesTests.map((test) => test.niveau());
   const parNiveau = listeDesNiveaux.reduce(
     (accumulateur, niveau) => {
       if (niveau === 'insuffisant') {

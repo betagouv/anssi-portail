@@ -5,9 +5,7 @@ export type Referentiel = (typeof referentiels)[number];
 
 export const versReferentiel = (valeur?: string): Referentiel => {
   if (!valeur) return 'NIS2';
-  return (
-    referentiels.find((r) => r.toUpperCase() === valeur.toUpperCase()) ?? 'NIS2'
-  );
+  return referentiels.find((r) => r.toUpperCase() === valeur.toUpperCase()) ?? 'NIS2';
 };
 
 export class Exigence {
@@ -90,11 +88,7 @@ export class ExigenceAE extends Exigence {
     NIS2: Correspondance;
   };
 
-  constructor(parametres: {
-    reference: string;
-    contenu: string;
-    correspondance: Correspondance;
-  }) {
+  constructor(parametres: { reference: string; contenu: string; correspondance: Correspondance }) {
     super(parametres);
     this.correspondances = {
       NIS2: parametres.correspondance,
@@ -102,12 +96,7 @@ export class ExigenceAE extends Exigence {
   }
 }
 
-export type CyFun23Fonction =
-  | 'Identifier'
-  | 'Protéger'
-  | 'Détecter'
-  | 'Répondre'
-  | 'Rétablir';
+export type CyFun23Fonction = 'Identifier' | 'Protéger' | 'Détecter' | 'Répondre' | 'Rétablir';
 
 export type CyFun23NiveauAssurance = 'Basique' | 'Important' | 'Essentiel';
 

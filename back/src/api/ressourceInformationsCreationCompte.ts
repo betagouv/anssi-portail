@@ -17,16 +17,11 @@ const ressourceInformationsCreationCompte = ({
 
       let organisation: ResultatRechercheEntreprise | undefined;
 
-      const profilAnssi = await adaptateurProfilAnssi.recupere(
-        informationsUtilisateur.email
-      );
+      const profilAnssi = await adaptateurProfilAnssi.recupere(informationsUtilisateur.email);
 
       if (!profilAnssi && informationsUtilisateur.siret) {
         organisation = (
-          await adaptateurRechercheEntreprise.rechercheOrganisations(
-            informationsUtilisateur.siret,
-            null
-          )
+          await adaptateurRechercheEntreprise.rechercheOrganisations(informationsUtilisateur.siret, null)
         )[0];
       }
 

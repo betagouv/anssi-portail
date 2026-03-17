@@ -6,10 +6,7 @@ import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { creeServeur } from '../../src/api/msc';
 import { CompteCree } from '../../src/bus/evenements/compteCree';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
-import {
-  fabriqueBusPourLesTests,
-  MockBusEvenement,
-} from '../bus/busPourLesTests';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { configurationDeTestDuServeur } from './fauxObjets';
 
@@ -55,9 +52,7 @@ describe('La ressource utilisateur', () => {
 
   describe('sur demande POST', () => {
     it('répond 201', async () => {
-      const reponse = await request(serveur)
-        .post('/api/utilisateurs')
-        .send(donneesUtilisateur);
+      const reponse = await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
 
       assert.equal(reponse.status, 201);
     });
@@ -79,9 +74,7 @@ describe('La ressource utilisateur', () => {
 
       await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
 
-      const jeanne = await entrepotUtilisateur.parEmailHache(
-        'jeanne.dupont@user.com-hache'
-      );
+      const jeanne = await entrepotUtilisateur.parEmailHache('jeanne.dupont@user.com-hache');
       assert.notEqual(jeanne, undefined);
       assert.equal(jeanne?.email, 'jeanne.dupont@user.com');
       assert.equal(jeanne?.prenom, 'Jeanne');
@@ -121,9 +114,7 @@ describe('La ressource utilisateur', () => {
             }) + '-code',
         });
 
-      const jeanne = await entrepotUtilisateur.parEmailHache(
-        'jeanne.dupont@user.com-hache'
-      );
+      const jeanne = await entrepotUtilisateur.parEmailHache('jeanne.dupont@user.com-hache');
 
       assert.equal((await jeanne?.organisation())?.siret, '11223344556677');
     });
@@ -168,9 +159,7 @@ describe('La ressource utilisateur', () => {
           token: donneesUtilisateur.token,
         });
 
-      const jeanne = await entrepotUtilisateur.parEmailHache(
-        'jeanne.dupont@user.com-hache'
-      );
+      const jeanne = await entrepotUtilisateur.parEmailHache('jeanne.dupont@user.com-hache');
       assert.notEqual(jeanne, undefined);
       assert.equal(jeanne?.telephone, '0123456789');
       assert.deepEqual(jeanne?.domainesSpecialite, ['RSSI']);
@@ -197,10 +186,7 @@ describe('La ressource utilisateur', () => {
             domainesSpecialite: [],
           });
         assert.equal(reponse.status, 400);
-        assert.equal(
-          reponse.body.erreur,
-          'Les domaines de spécialité sont invalides'
-        );
+        assert.equal(reponse.body.erreur, 'Les domaines de spécialité sont invalides');
       });
 
       it('valide le siret', async () => {
@@ -233,10 +219,7 @@ describe('La ressource utilisateur', () => {
             infolettreAcceptee: 12,
           });
         assert.equal(reponse.status, 400);
-        assert.equal(
-          reponse.body.erreur,
-          "L'acceptation de l'infolettre est invalide"
-        );
+        assert.equal(reponse.body.erreur, "L'acceptation de l'infolettre est invalide");
       });
 
       describe('valide le token', () => {

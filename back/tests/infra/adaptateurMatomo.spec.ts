@@ -23,10 +23,7 @@ describe("L'adaptateur Matomo", () => {
           return { data: undefined };
         },
       };
-      const adaptateurMatomo = fabriqueAdaptateurMatamo(
-        posteur,
-        fauxAdaptateurEnvironnement
-      );
+      const adaptateurMatomo = fabriqueAdaptateurMatamo(posteur, fauxAdaptateurEnvironnement);
 
       adaptateurMatomo.rapporteEvenement(evenement);
 
@@ -44,10 +41,7 @@ describe("L'adaptateur Matomo", () => {
           return { data: undefined };
         },
       };
-      const adaptateurMatomo = fabriqueAdaptateurMatamo(
-        posteur,
-        fauxAdaptateurEnvironnement
-      );
+      const adaptateurMatomo = fabriqueAdaptateurMatamo(posteur, fauxAdaptateurEnvironnement);
 
       adaptateurMatomo.rapporteEvenement({
         ...evenement,
@@ -77,10 +71,7 @@ describe("L'adaptateur Matomo", () => {
           return { data: undefined };
         },
       };
-      const adaptateurMatomo = fabriqueAdaptateurMatamo(
-        posteur,
-        fauxAdaptateurEnvironnement
-      );
+      const adaptateurMatomo = fabriqueAdaptateurMatamo(posteur, fauxAdaptateurEnvironnement);
 
       adaptateurMatomo.rapporteEvenement(evenement);
 

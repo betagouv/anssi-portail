@@ -7,22 +7,15 @@ export const ressourceResultatsSessionDeGroupe = ({
   entrepotResultatTest,
 }: ConfigurationServeur) => {
   const routeur = Router();
-  routeur.get(
-    '/:code/resultats',
-    middleware.aseptise('code'),
-    async (requete: Request, reponse: Response) => {
-      const session = await entrepotSessionDeGroupe.parCode(
-        requete.params.code as string
-      );
-      if (!session) {
-        reponse.sendStatus(404);
-        return;
-      }
-
-      const resultatsSession =
-        await session.resultatSession(entrepotResultatTest);
-      reponse.status(200).send(resultatsSession);
+  routeur.get('/:code/resultats', middleware.aseptise('code'), async (requete: Request, reponse: Response) => {
+    const session = await entrepotSessionDeGroupe.parCode(requete.params.code as string);
+    if (!session) {
+      reponse.sendStatus(404);
+      return;
     }
-  );
+
+    const resultatsSession = await session.resultatSession(entrepotResultatTest);
+    reponse.status(200).send(resultatsSession);
+  });
   return routeur;
 };

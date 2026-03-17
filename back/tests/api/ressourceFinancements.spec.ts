@@ -7,10 +7,7 @@ import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRecherc
 import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from './cookie';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurRechercheEntreprise,
-} from './fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise } from './fauxObjets';
 import { financementCyberPME, jeanneDupont } from './objetsPretsALEmploi';
 
 describe('La ressource Financements', () => {
@@ -96,9 +93,7 @@ describe('La ressource Financements', () => {
       });
 
       it("renvoie une liste de financements préfiltrés sur la région de l'organisation de l'utilisateur", async () => {
-        adaptateurRechercheEntreprise.rechercheOrganisations = async () => [
-          resultatRechercheEntreprise,
-        ];
+        adaptateurRechercheEntreprise.rechercheOrganisations = async () => [resultatRechercheEntreprise];
 
         await entrepotFinancement.ajoute({
           ...financementCyberPME,
@@ -106,10 +101,7 @@ describe('La ressource Financements', () => {
           regions: ['FR-IDF'],
         });
 
-        const reponse = await request(serveur)
-          .get('/api/financements')
-          .set('Cookie', [cookieJeanneDupont])
-          .send();
+        const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
 
         assert.deepEqual(reponse.body, listeDeFinancementsAttendus);
       });
@@ -124,10 +116,7 @@ describe('La ressource Financements', () => {
           entitesElligibles: ['TPE'],
         });
 
-        const reponse = await request(serveur)
-          .get('/api/financements')
-          .set('Cookie', [cookieJeanneDupont])
-          .send();
+        const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
 
         assert.deepEqual(reponse.body, [
           {
@@ -152,10 +141,7 @@ describe('La ressource Financements', () => {
           entitesElligibles: ['TPE'],
         });
 
-        const reponse = await request(serveur)
-          .get('/api/financements')
-          .set('Cookie', [cookieJeanneDupont])
-          .send();
+        const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
 
         assert.deepEqual(reponse.body, listeDeFinancementsAttendus);
       });
@@ -170,10 +156,7 @@ describe('La ressource Financements', () => {
           entitesElligibles: ['TPE'],
         });
 
-        const reponse = await request(serveur)
-          .get('/api/financements')
-          .set('Cookie', [cookieJeanneDupont])
-          .send();
+        const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
 
         assert.deepEqual(reponse.body, listeDeFinancementsAttendus);
       });
@@ -188,10 +171,7 @@ describe('La ressource Financements', () => {
           entitesElligibles: ['Entreprises'],
         });
 
-        const reponse = await request(serveur)
-          .get('/api/financements')
-          .set('Cookie', [cookieJeanneDupont])
-          .send();
+        const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
 
         assert.deepEqual(reponse.body, [
           {
@@ -216,10 +196,7 @@ describe('La ressource Financements', () => {
           entitesElligibles: ['Collectivités'],
         });
 
-        const reponse = await request(serveur)
-          .get('/api/financements')
-          .set('Cookie', [cookieJeanneDupont])
-          .send();
+        const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
 
         assert.deepEqual(reponse.body, [
           {
@@ -244,10 +221,7 @@ describe('La ressource Financements', () => {
           entitesElligibles: ['Associations'],
         });
 
-        const reponse = await request(serveur)
-          .get('/api/financements')
-          .set('Cookie', [cookieJeanneDupont])
-          .send();
+        const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
 
         assert.deepEqual(reponse.body, [
           {

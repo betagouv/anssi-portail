@@ -5,10 +5,7 @@ import { creeServeur } from '../../src/api/msc';
 import assert from 'node:assert';
 import { join } from 'path';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin';
-import {
-  configurationDeTestDuServeur,
-  fauxFournisseurDeChemin,
-} from './fauxObjets';
+import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets';
 import { encodeSession, enObjet } from './cookie';
 
 describe('La ressource de la page connexion', () => {
@@ -52,9 +49,7 @@ describe('La ressource de la page connexion', () => {
     it("supprime la session de l'utilisateur", async () => {
       const cookieSession = encodeSession({ token: 'token-session' });
 
-      const reponse = await request(serveur)
-        .get('/connexion')
-        .set('Cookie', [cookieSession]);
+      const reponse = await request(serveur).get('/connexion').set('Cookie', [cookieSession]);
 
       const headerCookie = reponse.headers['set-cookie'];
       assert.notEqual(headerCookie, undefined);

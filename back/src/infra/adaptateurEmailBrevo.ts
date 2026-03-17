@@ -13,13 +13,7 @@ const enteteJSON = {
 const urlBase = process.env.BREVO_API_URL_BASE;
 
 export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
-  envoieEmailBienvenue: async ({
-    email,
-    prenom,
-  }: {
-    email: string;
-    prenom: string;
-  }) => {
+  envoieEmailBienvenue: async ({ email, prenom }: { email: string; prenom: string }) => {
     await axios.post(
       `${urlBase}/smtp/email`,
       {
@@ -56,8 +50,7 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
         enteteJSON
       )
       .catch((e) => {
-        if (e.response.data.message === 'Contact already exist')
-          return Promise.resolve();
+        if (e.response.data.message === 'Contact already exist') return Promise.resolve();
 
         console.error(e, {
           'Erreur renvoyée par API Brevo': e.response.data,

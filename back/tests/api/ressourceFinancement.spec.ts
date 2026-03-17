@@ -58,9 +58,7 @@ describe('La ressource Financement', () => {
     });
 
     it("renvoie un 400 si l'id n'est pas un nombre", async () => {
-      const { status } = await request(serveur).get(
-        '/api/financements/un_mauvais_id'
-      );
+      const { status } = await request(serveur).get('/api/financements/un_mauvais_id');
 
       assert.equal(status, 400);
     });

@@ -4,6 +4,8 @@
   import EquipeBizDev from '../interlocuteurs/EquipeBizDev.svelte';
 
   export let origine: string;
+
+  const codecVideoWebM = 'video/webm; codecs="vp9,opus"';
 </script>
 
 <dsfr-container class="proteger">
@@ -24,7 +26,7 @@
       />
       <source
         src="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.webm"
-        type='video/webm; codecs="vp9,opus"'
+        type={codecVideoWebM}
       />
       <source
         src="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.mp4"
@@ -52,7 +54,7 @@
 
   .proteger {
     margin-top: 48px;
-    
+
     .introduction {
       padding-bottom: 72px;
       margin-inline: auto;

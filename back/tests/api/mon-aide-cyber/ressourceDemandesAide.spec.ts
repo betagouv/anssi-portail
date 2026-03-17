@@ -47,9 +47,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
   });
 
   it('retourne une 201', async () => {
-    const reponse = await request(serveur)
-      .post('/api/mon-aide-cyber/demandes-aide')
-      .send(uneDemandeAide());
+    const reponse = await request(serveur).post('/api/mon-aide-cyber/demandes-aide').send(uneDemandeAide());
 
     assert.equal(reponse.status, 201);
   });
@@ -57,17 +55,13 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
   describe('envoie la demande d’aide à MAC', () => {
     it('pour une demande sans aidant', async () => {
       let demandeAideEnvoyee: DemandeAide | undefined = undefined;
-      adaptateurMonAideCyber.creeDemandeAide = async (
-        demandeAide: DemandeAide
-      ) => {
+      adaptateurMonAideCyber.creeDemandeAide = async (demandeAide: DemandeAide) => {
         demandeAideEnvoyee = demandeAide;
       };
 
       await request(serveur)
         .post('/api/mon-aide-cyber/demandes-aide')
-        .send(
-          uneDemandeAide({ email: 'durant@mail.fr', siret: '09876543214321' })
-        );
+        .send(uneDemandeAide({ email: 'durant@mail.fr', siret: '09876543214321' }));
 
       assert.deepEqual(demandeAideEnvoyee, {
         entiteAidee: {
@@ -82,9 +76,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
 
     it("pour une demande avec siret de l'aidant", async () => {
       let demandeAideEnvoyee: DemandeAide | undefined = undefined;
-      adaptateurMonAideCyber.creeDemandeAide = async (
-        demandeAide: DemandeAide
-      ) => {
+      adaptateurMonAideCyber.creeDemandeAide = async (demandeAide: DemandeAide) => {
         demandeAideEnvoyee = demandeAide;
       };
 
@@ -111,9 +103,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
   });
 
   it('gère les cas d’erreurs lors de la demande d’Aide', async () => {
-    adaptateurMonAideCyber.creeDemandeAide = async (
-      _demandeAide: DemandeAide
-    ) => {
+    adaptateurMonAideCyber.creeDemandeAide = async (_demandeAide: DemandeAide) => {
       throw new Error('une erreur quelconque');
     };
 
@@ -128,9 +118,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
   describe('aseptise les paramètres', () => {
     it('pour le mail de l’entité Aidée', async () => {
       let emailEnvoye = '';
-      adaptateurMonAideCyber.creeDemandeAide = async ({
-        entiteAidee: { email },
-      }: DemandeAide) => {
+      adaptateurMonAideCyber.creeDemandeAide = async ({ entiteAidee: { email } }: DemandeAide) => {
         emailEnvoye = email;
       };
 
@@ -143,9 +131,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
 
     it('pour le mail de l’Aidant si l’entité est en relation', async () => {
       let emailEnvoye: string | undefined = undefined;
-      adaptateurMonAideCyber.creeDemandeAide = async ({
-        aidant,
-      }: DemandeAide) => {
+      adaptateurMonAideCyber.creeDemandeAide = async ({ aidant }: DemandeAide) => {
         emailEnvoye = aidant.email;
       };
 
@@ -158,9 +144,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
 
     it('pour le département de l’entité', async () => {
       let departementEnvoye: string = '';
-      adaptateurMonAideCyber.creeDemandeAide = async ({
-        entiteAidee: { departement },
-      }: DemandeAide) => {
+      adaptateurMonAideCyber.creeDemandeAide = async ({ entiteAidee: { departement } }: DemandeAide) => {
         departementEnvoye = departement;
       };
 
@@ -173,9 +157,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
 
     it('pour la raison sociale de l’entité', async () => {
       let raisonSocialeEnvoyee: string = '';
-      adaptateurMonAideCyber.creeDemandeAide = async ({
-        entiteAidee: { raisonSociale },
-      }: DemandeAide) => {
+      adaptateurMonAideCyber.creeDemandeAide = async ({ entiteAidee: { raisonSociale } }: DemandeAide) => {
         raisonSocialeEnvoyee = raisonSociale;
       };
 
@@ -194,9 +176,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
 
     it('pour l’identifiant de l’Aidant', async () => {
       let identifiantAidantEnvoye: string | undefined = undefined;
-      adaptateurMonAideCyber.creeDemandeAide = async ({
-        aidant,
-      }: DemandeAide) => {
+      adaptateurMonAideCyber.creeDemandeAide = async ({ aidant }: DemandeAide) => {
         identifiantAidantEnvoye = aidant.identifiant;
       };
 
@@ -211,10 +191,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
           })
         );
 
-      assert.equal(
-        identifiantAidantEnvoye,
-        'a5b9ee4c-4eca-432d-ba96-da387fe6d5ed'
-      );
+      assert.equal(identifiantAidantEnvoye, 'a5b9ee4c-4eca-432d-ba96-da387fe6d5ed');
     });
   });
 
@@ -232,10 +209,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
         });
 
       assert.equal(reponse.status, 400);
-      assert.equal(
-        await reponse.body.erreur,
-        'Veuillez saisir un email valide.'
-      );
+      assert.equal(await reponse.body.erreur, 'Veuillez saisir un email valide.');
     });
 
     it('pour le SIRET de l’entité', async () => {
@@ -251,10 +225,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
         });
 
       assert.equal(reponse.status, 400);
-      assert.equal(
-        await reponse.body.erreur,
-        'Veuillez saisir un SIRET valide.'
-      );
+      assert.equal(await reponse.body.erreur, 'Veuillez saisir un SIRET valide.');
     });
 
     it('pour le mail de l’Aidant si l’entité est en relation', async () => {
@@ -271,10 +242,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
         });
 
       assert.equal(reponse.status, 400);
-      assert.equal(
-        await reponse.body.erreur,
-        'Veuillez saisir un email valide pour l’Aidant cyber.'
-      );
+      assert.equal(await reponse.body.erreur, 'Veuillez saisir un email valide pour l’Aidant cyber.');
     });
 
     it('pour la validation des CGU', async () => {
@@ -304,10 +272,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
         });
 
       assert.equal(reponse.status, 400);
-      assert.equal(
-        await reponse.body.erreur,
-        'Veuillez saisir un département valide.'
-      );
+      assert.equal(await reponse.body.erreur, 'Veuillez saisir un département valide.');
     });
 
     it('pour la validation de la raison sociale', async () => {
@@ -324,10 +289,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
         });
 
       assert.equal(reponse.status, 400);
-      assert.equal(
-        await reponse.body.erreur,
-        'Veuillez saisir une raison sociale valide.'
-      );
+      assert.equal(await reponse.body.erreur, 'Veuillez saisir une raison sociale valide.');
     });
 
     it('pour la validation de l’identifiant Aidant', async () => {
@@ -345,10 +307,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
         });
 
       assert.equal(reponse.status, 400);
-      assert.equal(
-        await reponse.body.erreur,
-        'Veuillez saisir un identifiant Aidant cyber valide.'
-      );
+      assert.equal(await reponse.body.erreur, 'Veuillez saisir un identifiant Aidant cyber valide.');
     });
 
     it('pour la validation du SIRET Aidant', async () => {
@@ -366,10 +325,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
         });
 
       assert.equal(reponse.status, 400);
-      assert.equal(
-        await reponse.body.erreur,
-        'Veuillez saisir un SIRET Aidant cyber valide.'
-      );
+      assert.equal(await reponse.body.erreur, 'Veuillez saisir un SIRET Aidant cyber valide.');
     });
 
     it('pour l’origine de la demande', async () => {
@@ -387,10 +343,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
         });
 
       assert.equal(reponse.status, 400);
-      assert.equal(
-        await reponse.body.erreur,
-        'Veuillez saisir une origine valide.'
-      );
+      assert.equal(await reponse.body.erreur, 'Veuillez saisir une origine valide.');
     });
   });
 });

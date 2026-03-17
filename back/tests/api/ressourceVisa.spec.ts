@@ -55,10 +55,7 @@ describe('La ressource de visa', () => {
     it('sers le fichier PDF correspondant', async () => {
       let nomDuFichierDemande: string | undefined;
       let cleDuBucketDemandee: CleDuBucket | undefined;
-      configurationDuServeur.cellar.getStream = async (
-        nomDuFichier: string,
-        cleDuBucket: CleDuBucket
-      ) => {
+      configurationDuServeur.cellar.getStream = async (nomDuFichier: string, cleDuBucket: CleDuBucket) => {
         nomDuFichierDemande = nomDuFichier;
         cleDuBucketDemandee = cleDuBucket;
         return construitUnFluxCellar();
@@ -75,17 +72,13 @@ describe('La ressource de visa', () => {
         ...construitUnFluxCellar(),
         typeDeContenu: 'application/xml',
       });
-      const reponse = await request(serveur).get(
-        '/visas/anssi_back to basics_pki_1.0.xml'
-      );
+      const reponse = await request(serveur).get('/visas/anssi_back to basics_pki_1.0.xml');
 
       assert.equal(reponse.headers['content-type'], 'application/xml');
     });
 
     it('rend les contenus servi cachable', async () => {
-      const reponse = await request(serveur).get(
-        '/visas/anssi_back to basics_pki_1.0.xml'
-      );
+      const reponse = await request(serveur).get('/visas/anssi_back to basics_pki_1.0.xml');
 
       assert.equal(
         reponse.headers['cache-control'],
@@ -102,9 +95,7 @@ describe('La ressource de visa', () => {
     describe("lorsque le fichier de qualification n'existe pas", () => {
       it('répond 404', async () => {
         configurationDuServeur.cellar.getStream = async () => undefined;
-        const reponse = await request(serveur).get(
-          '/visas/fichier-qui-n-existe-pas.pdf'
-        );
+        const reponse = await request(serveur).get('/visas/fichier-qui-n-existe-pas.pdf');
 
         assert.equal(reponse.status, 404);
       });

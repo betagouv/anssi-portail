@@ -1,9 +1,5 @@
 import axios from 'axios';
-import {
-  AvisUtilisateur,
-  MessagerieInstantanee,
-  RetourExperience,
-} from '../metier/messagerieInstantanee';
+import { AvisUtilisateur, MessagerieInstantanee, RetourExperience } from '../metier/messagerieInstantanee';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { aseptiseMarkdown } from './markdown';
 
@@ -13,9 +9,7 @@ export const messagerieMattermost = ({
   adaptateurEnvironnement: AdaptateurEnvironnement;
 }): MessagerieInstantanee => ({
   notifieUnRetourExperience: async (retourExperience: RetourExperience) => {
-    const urlWebhook = adaptateurEnvironnement
-      .mattermost()
-      .webhookRetourExperience();
+    const urlWebhook = adaptateurEnvironnement.mattermost().webhookRetourExperience();
     if (urlWebhook) {
       const message = `### Retour utilisateur
 Un utilisateur a laissé un retour d’expérience suite à la non-complétion du formulaire de demande d’aide
@@ -28,9 +22,7 @@ Email de contact : ${retourExperience.emailDeContact}`;
   },
 
   notifieUnAvisUtilisateur: async (avisUtilisateur: AvisUtilisateur) => {
-    const urlWebhook = adaptateurEnvironnement
-      .mattermost()
-      .webhookAvisUtilisateur();
+    const urlWebhook = adaptateurEnvironnement.mattermost().webhookAvisUtilisateur();
 
     if (urlWebhook) {
       const message = `### Avis utilisateur
