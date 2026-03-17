@@ -16,6 +16,7 @@
     class:chargement
     id="table-nis2"
     caption="Exigences NIS&nbsp;2"
+    noCaption
     multiline
     rich
     columns={[
