@@ -49,7 +49,9 @@ type ExigenceAvecCorrespondances = {
 
 function colonnesEntetesCorrespondances(
   exigences: ExigenceAvecCorrespondances[],
-  referentielCompare: Referentiel
+  referentielCompare: Referentiel,
+  titreColonneReference: string,
+  titreColonneContenu: string
 ) {
   const nombreCorrespondanceMax = Math.max(
     ...exigences.map(
@@ -62,11 +64,11 @@ function colonnesEntetesCorrespondances(
   for (let i = 1; i < nombreCorrespondanceMax + 1; i++) {
     resultat.push({
       id: `reference_${referentielCompare.toLowerCase()}_${i}`,
-      title: `Référence ${referentielCompare} (${i})`,
+      title: `${titreColonneReference} (${i})`,
     });
     resultat.push({
       id: `contenu_${referentielCompare.toLowerCase()}_${i}`,
-      title: `Contenu ${referentielCompare} (${i})`,
+      title: `${titreColonneContenu} (${i})`,
     });
   }
   return resultat;
@@ -77,7 +79,12 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesISO extends ConvertisseurCs
     return [
       ...super.entetes(exigences),
       { id: 'correspondance', title: 'Correspondance' },
-      ...colonnesEntetesCorrespondances(exigences, 'ISO'),
+      ...colonnesEntetesCorrespondances(
+        exigences,
+        'ISO',
+        'Référence ISO',
+        'Contenu ISO'
+      ),
     ];
   }
 
@@ -105,7 +112,12 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsv
     return [
       ...super.entetes(exigences),
       { id: 'correspondance', title: 'Correspondance' },
-      ...colonnesEntetesCorrespondances(exigences, 'AE'),
+      ...colonnesEntetesCorrespondances(
+        exigences,
+        'AE',
+        'Référence AE',
+        'Contenu AE'
+      ),
     ];
   }
 
@@ -133,7 +145,12 @@ class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigence<ExigenceAE> {
     return [
       ...super.entetes(exigences),
       { id: 'correspondance', title: 'Correspondance' },
-      ...colonnesEntetesCorrespondances(exigences, 'NIS2'),
+      ...colonnesEntetesCorrespondances(
+        exigences,
+        'NIS2',
+        'Référence exigence applicable à NIS 2',
+        'Contenu exigence applicable à NIS 2'
+      ),
     ];
   }
 
@@ -163,7 +180,12 @@ class ConvertisseurCsvExigenceISO extends ConvertisseurCsvExigence<ExigenceISO> 
       { id: 'norme', title: 'Norme' },
       { id: 'chapitre', title: 'Chapitre' },
       { id: 'correspondance', title: 'Correspondance' },
-      ...colonnesEntetesCorrespondances(exigences, 'NIS2'),
+      ...colonnesEntetesCorrespondances(
+        exigences,
+        'NIS2',
+        'Référence exigence applicable à NIS 2',
+        'Contenu exigence applicable à NIS 2'
+      ),
     ];
   }
 
