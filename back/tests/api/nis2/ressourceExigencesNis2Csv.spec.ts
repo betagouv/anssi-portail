@@ -93,12 +93,12 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
       assert.equal(
         lignes[0],
         '"Référence";"Contenu";"Objectif";"Thématique";' +
-          '"Cibles";"Correspondance";"Référence ISO (1)";"Contenu ISO (1)";"Référence ISO (2)";"Contenu ISO (2)"'
+          '"Cibles";"Correspondance";"Observations";"Référence ISO (1)";"Contenu ISO (1)";"Référence ISO (2)";"Contenu ISO (2)"'
       );
       assert.equal(
         lignes[1],
         '"1.1-EI/EE";"L’entité liste l’ensemble…";"Obj 1 : recensement";"Recensement des SI";' +
-          '"EntiteEssentielle, EntiteImportante";"faible";"reference_1";"contenu 1";"reference_2";"contenu 2"'
+          '"EntiteEssentielle, EntiteImportante";"faible";"Des observations";"reference_1";"contenu 1";"reference_2";"contenu 2"'
       );
       assert.equal('', lignes[2]);
     });
