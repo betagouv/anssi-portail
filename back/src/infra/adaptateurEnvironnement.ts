@@ -66,7 +66,6 @@ type AdaptateurEnvironnement = {
   };
   fonctionnalites: () => {
     nis2: () => {
-      afficheObservations: () => boolean;
       afficheCyFun23: () => boolean;
     };
   };
@@ -216,29 +215,29 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       guides: () =>
         process.env.CELLAR_BUCKET_GUIDES
           ? ajouteBarreObliqueFinale(
-              pattternURLDeBase.replace(
-                '%BUCKET%',
-                process.env.CELLAR_BUCKET_GUIDES
-              )
+            pattternURLDeBase.replace(
+              '%BUCKET%',
+              process.env.CELLAR_BUCKET_GUIDES
             )
+          )
           : '',
       ressourcesCyber: () =>
         process.env.CELLAR_BUCKET_RESSOURCES_CYBER
           ? ajouteBarreObliqueFinale(
-              pattternURLDeBase.replace(
-                '%BUCKET%',
-                process.env.CELLAR_BUCKET_RESSOURCES_CYBER
-              )
+            pattternURLDeBase.replace(
+              '%BUCKET%',
+              process.env.CELLAR_BUCKET_RESSOURCES_CYBER
             )
+          )
           : '',
       visas: () =>
         process.env.CELLAR_BUCKET_VISAS
           ? ajouteBarreObliqueFinale(
-              pattternURLDeBase.replace(
-                '%BUCKET%',
-                process.env.CELLAR_BUCKET_VISAS
-              )
+            pattternURLDeBase.replace(
+              '%BUCKET%',
+              process.env.CELLAR_BUCKET_VISAS
             )
+          )
           : '',
     };
   },
@@ -256,8 +255,6 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
   }),
   fonctionnalites: () => ({
     nis2: () => ({
-      afficheObservations: () =>
-        process.env.FEATURE_FLAG_NIS2_OBSERVATIONS === 'true',
       afficheCyFun23: () => process.env.FEATURE_FLAG_NIS2_CYFUN23 === 'true',
     }),
   }),
