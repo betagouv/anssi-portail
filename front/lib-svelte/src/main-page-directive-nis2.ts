@@ -11,13 +11,10 @@ const { itemsCyber } = JSON.parse(donnees) as {
 
 const donneesNis2 = document.getElementById('donnees-nis2')!.textContent ?? '';
 
-const {
-  featureFlagNis2Exigences,
-  featureFlagNis2Observations,
-  featureFlagNis2CyFun23,
-} = JSON.parse(donneesNis2) as {
+const { featureFlagNis2Exigences, featureFlagNis2CyFun23 } = JSON.parse(
+  donneesNis2
+) as {
   featureFlagNis2Exigences: boolean;
-  featureFlagNis2Observations: boolean;
   featureFlagNis2CyFun23: boolean;
 };
 
@@ -26,7 +23,6 @@ mount(Page, {
   props: {
     itemsCyber,
     featureFlagNis2Exigences,
-    featureFlagNis2Observations,
     featureFlagNis2CyFun23,
   },
 });

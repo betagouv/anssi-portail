@@ -15,10 +15,7 @@
   import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
   import TableauExigencesSimple from './tableaux/TableauExigencesSimple.svelte';
 
-  const {
-    featureFlagNis2CyFun23,
-    featureFlagNis2Observations,
-  }: { featureFlagNis2Observations: boolean; featureFlagNis2CyFun23: boolean } =
+  const { featureFlagNis2CyFun23 }: { featureFlagNis2CyFun23: boolean } =
     $props();
 
   let exigences = $state<Exigence[]>([]);
