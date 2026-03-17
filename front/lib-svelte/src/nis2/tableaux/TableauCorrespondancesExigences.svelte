@@ -24,16 +24,10 @@
   type Props = {
     comparaison: Comparaison;
     exigences: Exigence[];
-    featureFlagNis2Observations: boolean;
     chargement: boolean;
   };
 
-  const {
-    exigences,
-    comparaison,
-    featureFlagNis2Observations,
-    chargement,
-  }: Props = $props();
+  const { exigences, comparaison, chargement }: Props = $props();
 
   const titreColonneNIS2 = 'Exigence applicable à NIS 2';
   const configurationTableau: ConfigurationTableauComparaison = {
