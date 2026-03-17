@@ -103,7 +103,9 @@
 {#if exigences.length > 0 || chargement}
   <dsfr-table
     class:chargement
-    id="table-nis2"
+    id="table-comparaison-nis2"
+    caption="Comparaison NIS&nbsp;2"
+    noCaption
     multiline
     rich
     columns={[
