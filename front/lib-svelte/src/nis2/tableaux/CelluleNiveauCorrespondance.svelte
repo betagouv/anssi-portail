@@ -23,18 +23,9 @@
   };
 </script>
 
-<td>
-  <dsfr-badge
-    accent={proprieteBadge.accent}
-    label={proprieteBadge.label.toUpperCase()}
-    size="sm"
-    type="accent"
-  ></dsfr-badge>
-</td>
-
-<style lang="scss">
-  td {
-    padding: 0.5rem 1rem;
-    border: 1px solid black;
-  }
-</style>
+<dsfr-badge
+  accent={proprieteBadge.accent}
+  label={proprieteBadge.label.toUpperCase()}
+  size="sm"
+  type="accent"
+></dsfr-badge>

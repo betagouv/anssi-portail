@@ -80,7 +80,7 @@
 
 {#snippet colonneSourceNIS2(exigenceSource: Exigence)}
   {@const exigence = exigenceSource as ExigenceNis2}
-  <td><CelluleExigenceNis2 {exigence} /></td>
+  <CelluleExigenceNis2 {exigence} />
 {/snippet}
 
 {#snippet colonneSourceISO(exigenceSource: Exigence)}
@@ -107,52 +107,56 @@
 {/snippet}
 
 {#if exigences.length > 0 || chargement}
-  <table class:chargement>
-    <thead>
-      <tr>
-        <th>{configurationCourante.titreColonneSource}</th>
-        <th>Correspondance</th>
-        <th>{configurationCourante.titreColonneCible}</th>
-        {#if featureFlagNis2Observations}
-          <th>Observations</th>
-        {/if}
-      </tr>
-    </thead>
-    <tbody>
-      {#each exigences as exigence (exigence.reference)}
-        <tr>
-          {@render configurationCourante.colonneSource(exigence)}
-          <CelluleNiveauCorrespondance
-            niveau={exigence.correspondance?.niveau ?? 'NA'}
-          />
-          {@render configurationCourante.colonneCible(
-            exigence.correspondance?.exigences ?? []
-          )}
-          {#if featureFlagNis2Observations}
-            <td>
-              <p class="texte-detail-sm">
-                {exigence.correspondance?.observations}
-              </p>
-            </td>
-          {/if}
-        </tr>
-      {/each}
-    </tbody>
-  </table>
+  <dsfr-table
+    class:chargement
+    id="table-nis2"
+    multiline
+    rich
+    columns={[
+      {
+        key: 'source',
+        label: configurationCourante.titreColonneSource,
+        multiline: true,
+      },
+      {
+        key: 'niveauCorrespondance',
+        label: 'Correspondance',
+        multiline: true,
+      },
+      {
+        key: 'cible',
+        label: configurationCourante.titreColonneCible,
+        multiline: true,
+      },
+      {
+        key: 'observations',
+        label: 'Observations',
+        multiline: true,
+      },
+    ]}
+    rows={exigences}
+  >
+    {#each exigences as exigence, i (exigence.reference)}
+      <div slot={`cell:source:${i}`}>
+        {@render configurationCourante.colonneSource(exigence)}
+      </div>
+      <div slot={`cell:niveauCorrespondance:${i}`}>
+        <CelluleNiveauCorrespondance
+          niveau={exigence.correspondance?.niveau ?? 'NA'}
+        />
+      </div>
+      <div slot={`cell:cible:${i}`}>
+        {@render configurationCourante.colonneCible(
+          exigence.correspondance?.exigences ?? []
+        )}
+      </div>
+      <div slot={`cell:observations:${i}`}>
+        <p class="texte-detail-sm">
+          {exigence.correspondance?.observations}
+        </p>
+      </div>
+    {/each}
+  </dsfr-table>
 {:else if $exigencesFiltrees.filtresActifs}
   <AucunResultat />
 {/if}
-
-<style lang="scss">
-  table {
-    margin-bottom: 1.5rem;
-    border-collapse: collapse;
-    width: 100%;
-
-    td,
-    th {
-      padding: 0.5rem 1rem;
-      border: 1px solid black;
-    }
-  }
-</style>
