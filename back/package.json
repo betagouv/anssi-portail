@@ -10,6 +10,7 @@
     "dev:server": "sleep 3 && pnpm migre-bdd && node --import tsx --env-file ../.env --watch src/serveur.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
     "migre-bdd": "node --env-file=../.env --import tsx ./node_modules/knex/bin/cli.js migrate:latest --knexfile knexfile.ts",
     "migre-bdd:clever": "node ./node_modules/knex/bin/cli.js migrate:latest --knexfile dist/knexfile.js",
     "prestart": "tsc && pnpm migre-bdd:clever",

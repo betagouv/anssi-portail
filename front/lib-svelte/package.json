@@ -9,6 +9,7 @@
     "dev": "vite build --watch --mode=development",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
     "pretest": "npm-run-all --parallel typecheck lint",
     "test": "vitest run",
     "test:ci": "vitest run",
