@@ -7,7 +7,6 @@
   };
 
   export let type: Icone;
-
 </script>
 
 <img src={srcDesIcones[type]} alt="" />

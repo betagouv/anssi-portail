@@ -9,9 +9,7 @@ import {
 
 export type AdaptateurAnalytique = {
   rapporteEvenement: (
-    donneesEvenement:
-      | DonneesEvenementDocumentGuideTelecharge
-      | DonneesEvenementVisaTelecharge
+    donneesEvenement: DonneesEvenementDocumentGuideTelecharge | DonneesEvenementVisaTelecharge
   ) => Promise<void>;
 };
 
@@ -20,8 +18,7 @@ export const fabriqueAdaptateurMatamo = (
   adaptateurEnvironnement: AdaptateurEnvironnement
 ): AdaptateurAnalytique => ({
   rapporteEvenement: async (donneesEvenement) => {
-    const { categorie, nomAction } =
-      recupereCaracteristiquesEvenement(donneesEvenement);
+    const { categorie, nomAction } = recupereCaracteristiquesEvenement(donneesEvenement);
 
     const parametres = new URLSearchParams();
     parametres.append('rec', '1');
@@ -30,17 +27,12 @@ export const fabriqueAdaptateurMatamo = (
     parametres.append('e_a', nomAction);
     parametres.append('e_n', donneesEvenement.donnees.nomFichier);
 
-    await clientHttpPosteur.post(
-      'https://stats.beta.gouv.fr/matomo.php?' + parametres.toString(),
-      donneesEvenement
-    );
+    await clientHttpPosteur.post('https://stats.beta.gouv.fr/matomo.php?' + parametres.toString(), donneesEvenement);
   },
 });
 
 function recupereCaracteristiquesEvenement(
-  donneesEvenement:
-    | DonneesEvenementDocumentGuideTelecharge
-    | DonneesEvenementVisaTelecharge
+  donneesEvenement: DonneesEvenementDocumentGuideTelecharge | DonneesEvenementVisaTelecharge
 ): { categorie: string; nomAction: string } {
   if (donneesEvenement.type === 'DOCUMENT_GUIDE_TELECHARGE') {
     return {

@@ -7,29 +7,29 @@
 
 <table>
   <thead>
-  <tr>
-    <th>Identifiant</th>
-    <th>Documents</th>
-    <th>Image 234px</th>
-    <th>Image 588px</th>
-    <th>Image origine</th>
-  </tr>
+    <tr>
+      <th>Identifiant</th>
+      <th>Documents</th>
+      <th>Image 234px</th>
+      <th>Image 588px</th>
+      <th>Image origine</th>
+    </tr>
   </thead>
   <tbody>
-  {#each guides as guide (guide.id)}
-    <tr>
-      <td>{guide.id}</td>
-      <td>
-        {#each guide.documents as document (document.nom)}
-          {iconeEtat(document.etat)}
-          {document.nom}<br />
-        {/each}
-      </td>
-      <td class="image">{iconeEtat(guide.images['234'])}</td>
-      <td class="image">{iconeEtat(guide.images['588'])}</td>
-      <td class="image">{iconeEtat(guide.images['origine'])}</td>
-    </tr>
-  {/each}
+    {#each guides as guide (guide.id)}
+      <tr>
+        <td>{guide.id}</td>
+        <td>
+          {#each guide.documents as document (document.nom)}
+            {iconeEtat(document.etat)}
+            {document.nom}<br />
+          {/each}
+        </td>
+        <td class="image">{iconeEtat(guide.images['234'])}</td>
+        <td class="image">{iconeEtat(guide.images['588'])}</td>
+        <td class="image">{iconeEtat(guide.images['origine'])}</td>
+      </tr>
+    {/each}
   </tbody>
 </table>
 

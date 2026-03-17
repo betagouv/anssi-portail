@@ -26,34 +26,23 @@ export type ServiceSanteGuides = {
   }>;
 };
 
-export const fabriqueServiceSanteGuides = (
-  adaptateurCellar: AdaptateurCellar
-): ServiceSanteGuides => {
+export const fabriqueServiceSanteGuides = (adaptateurCellar: AdaptateurCellar): ServiceSanteGuides => {
   const booleanVersEtat = (valeur: boolean): Etat => (valeur ? 'ok' : 'ko');
 
   const santeDocuments = async (guide: Guide): Promise<SanteDocumentGuide[]> =>
     await Promise.all(
       guide.documents.map(async (document) => ({
         nom: document.nomFichier,
-        etat: booleanVersEtat(
-          await adaptateurCellar.existe(document.nomFichier, 'GUIDES')
-        ),
+        etat: booleanVersEtat(await adaptateurCellar.existe(document.nomFichier, 'GUIDES')),
       }))
     );
 
   const etatImage = async (guide: Guide, format: string) =>
-    booleanVersEtat(
-      await adaptateurCellar.existe(
-        `${guide.id}/${guide.nomImage}-${format}.avif`,
-        'GUIDES'
-      )
-    );
+    booleanVersEtat(await adaptateurCellar.existe(`${guide.id}/${guide.nomImage}-${format}.avif`, 'GUIDES'));
 
-  const tousOk = (objet: { [p: string]: Etat } | ArrayLike<Etat>) =>
-    Object.values(objet).every((v) => v === 'ok');
+  const tousOk = (objet: { [p: string]: Etat } | ArrayLike<Etat>) => Object.values(objet).every((v) => v === 'ok');
 
-  const auMoinsUnKo = (objet: { [p: string]: Etat } | ArrayLike<Etat>) =>
-    Object.values(objet).some((v) => v === 'ko');
+  const auMoinsUnKo = (objet: { [p: string]: Etat } | ArrayLike<Etat>) => Object.values(objet).some((v) => v === 'ko');
 
   return {
     calculeSante: async (guides: Guide[]) => {
@@ -71,10 +60,8 @@ export const fabriqueServiceSanteGuides = (
             id: guide.id,
             documents,
             images,
-            enBonneSante: () =>
-              tousOk(documents.map((d) => d.etat)) && tousOk(images),
-            avecProbleme: () =>
-              auMoinsUnKo(documents.map((d) => d.etat)) || auMoinsUnKo(images),
+            enBonneSante: () => tousOk(documents.map((d) => d.etat)) && tousOk(images),
+            avecProbleme: () => auMoinsUnKo(documents.map((d) => d.etat)) || auMoinsUnKo(images),
           };
         })
       );

@@ -92,12 +92,8 @@ export class ConstructeurGuideGrist {
         Collections: this.collections,
         Documents: this.documentsBruts
           ? this.documentsBruts
-          : this.documents
-              .map((document) => `${document.libelle} : ${document.nomFichier}`)
-              .join('\n'),
-        Date_de_publication_s_: this.datePublication
-          ? this.datePublication
-          : null,
+          : this.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n'),
+        Date_de_publication_s_: this.datePublication ? this.datePublication : null,
         Date_de_mise_a_jour_s_: this.dateMiseAJour ? this.dateMiseAJour : null,
         Thematique: this.thematique,
         Besoins_cyber: this.besoins.length ? ['L', ...this.besoins] : [],

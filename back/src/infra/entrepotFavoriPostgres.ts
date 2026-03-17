@@ -17,9 +17,7 @@ export class EntrepotFavoriPostgres implements EntrepotFavori {
   async retire(favori: Favori): Promise<void> {
     await this.knex('favoris')
       .where({
-        email_utilisateur_hache: this.adaptateurHachage.hache(
-          favori.utilisateur.email
-        ),
+        email_utilisateur_hache: this.adaptateurHachage.hache(favori.utilisateur.email),
         id_item_cyber: favori.idItemCyber,
       })
       .delete();
@@ -28,9 +26,7 @@ export class EntrepotFavoriPostgres implements EntrepotFavori {
   async tousCeuxDeUtilisateur(utilisateur: Utilisateur): Promise<Favori[]> {
     const favoris = await this.knex('favoris')
       .where({
-        email_utilisateur_hache: this.adaptateurHachage.hache(
-          utilisateur.email
-        ),
+        email_utilisateur_hache: this.adaptateurHachage.hache(utilisateur.email),
       })
       .orderBy('date_ajout', 'desc');
     return favoris.map(({ id_item_cyber: idItemCyber }) => ({
@@ -41,9 +37,7 @@ export class EntrepotFavoriPostgres implements EntrepotFavori {
 
   async ajoute(favori: Favori): Promise<void> {
     await this.knex('favoris').insert({
-      email_utilisateur_hache: this.adaptateurHachage.hache(
-        favori.utilisateur.email
-      ),
+      email_utilisateur_hache: this.adaptateurHachage.hache(favori.utilisateur.email),
       id_item_cyber: favori.idItemCyber,
     });
   }

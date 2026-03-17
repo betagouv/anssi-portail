@@ -15,17 +15,13 @@ describe('La ressource Statistiques de diagnostic', () => {
     });
 
     it('renvoie 200', async () => {
-      const reponse = await request(serveur).get(
-        '/api/diagnostic/statistiques'
-      );
+      const reponse = await request(serveur).get('/api/diagnostic/statistiques');
 
       assert.equal(reponse.status, 200);
     });
 
     it('renvoie les statistiques', async () => {
-      const reponse = await request(serveur).get(
-        '/api/diagnostic/statistiques'
-      );
+      const reponse = await request(serveur).get('/api/diagnostic/statistiques');
 
       assert.deepEqual(reponse.body, STATS_DIAGNOSTIC);
     });

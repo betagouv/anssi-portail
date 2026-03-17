@@ -256,4 +256,3 @@
     <PartageTest couleurFond="clair" />
   {/if}
 {/if}
-

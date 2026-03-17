@@ -3,10 +3,7 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
-import {
-  Correspondance,
-  ExigenceNIS2,
-} from '../../../src/metier/nis2/exigence';
+import { Correspondance, ExigenceNIS2 } from '../../../src/metier/nis2/exigence';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire';
 import { configurationDeTestDuServeur } from '../fauxObjets';
 
@@ -36,9 +33,7 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
     });
 
     it('renvoie une 404 si NIS2 ne figure ni dans la cible, ni dans la source', async () => {
-      const { status } = await request(serveur)
-        .get('/api/exigences-nis2.csv')
-        .query({ source: 'ISO', cible: 'ISO' });
+      const { status } = await request(serveur).get('/api/exigences-nis2.csv').query({ source: 'ISO', cible: 'ISO' });
 
       assert.equal(status, 404);
     });
@@ -83,9 +78,7 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
         })
       );
 
-      const { text } = await request(serveur)
-        .get('/api/exigences-nis2.csv')
-        .query({ cible: 'ISO' });
+      const { text } = await request(serveur).get('/api/exigences-nis2.csv').query({ cible: 'ISO' });
 
       assert.equal('string', typeof text);
       const lignes = text.split('\n');
@@ -105,9 +98,7 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
 
     describe('renvoie le bon nom de fichier', () => {
       it('pour les exigences NIS2 uniquement', async () => {
-        const { headers } = await request(serveur).get(
-          '/api/exigences-nis2.csv'
-        );
+        const { headers } = await request(serveur).get('/api/exigences-nis2.csv');
 
         assert.equal(
           headers['content-disposition'],
@@ -116,20 +107,13 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
       });
 
       it('pour les exigences NIS2 comparées à ISO', async () => {
-        const { headers } = await request(serveur).get(
-          '/api/exigences-nis2.csv?source=NIS2&cible=ISO'
-        );
+        const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=NIS2&cible=ISO');
 
-        assert.equal(
-          headers['content-disposition'],
-          'attachment; filename="Comparaison_ReCyf-NIS2_ISO.csv"'
-        );
+        assert.equal(headers['content-disposition'], 'attachment; filename="Comparaison_ReCyf-NIS2_ISO.csv"');
       });
 
       it('pour les exigences NIS2 comparées à AE', async () => {
-        const { headers } = await request(serveur).get(
-          '/api/exigences-nis2.csv?source=NIS2&cible=AE'
-        );
+        const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=NIS2&cible=AE');
 
         assert.equal(
           headers['content-disposition'],
@@ -138,19 +122,12 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
       });
 
       it('pour les exigences ISO comparées à NIS2', async () => {
-        const { headers } = await request(serveur).get(
-          '/api/exigences-nis2.csv?source=ISO&cible=NIS2'
-        );
+        const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=ISO&cible=NIS2');
 
-        assert.equal(
-          headers['content-disposition'],
-          'attachment; filename="Comparaison_ISO_ReCyf-NIS2.csv"'
-        );
+        assert.equal(headers['content-disposition'], 'attachment; filename="Comparaison_ISO_ReCyf-NIS2.csv"');
       });
       it('pour les exigences AE comparées à NIS2', async () => {
-        const { headers } = await request(serveur).get(
-          '/api/exigences-nis2.csv?source=AE&cible=NIS2'
-        );
+        const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=AE&cible=NIS2');
 
         assert.equal(
           headers['content-disposition'],

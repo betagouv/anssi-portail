@@ -15,9 +15,7 @@ describe('La ressource apres deconnexion OIDC', () => {
     });
 
     it("redirige vers la page d'accueil", async () => {
-      const cookie = encodeURIComponent(
-        'j:' + JSON.stringify({ state: 'le-bon-state' })
-      );
+      const cookie = encodeURIComponent('j:' + JSON.stringify({ state: 'le-bon-state' }));
 
       const reponse = await request(serveur)
         .get('/oidc/apres-deconnexion?state=le-bon-state')
@@ -28,9 +26,7 @@ describe('La ressource apres deconnexion OIDC', () => {
     });
 
     it("ne deconnecte l'utilisateur si le state ne correspond pas", async () => {
-      const cookie = encodeURIComponent(
-        'j:' + JSON.stringify({ state: 'le-bon-state' })
-      );
+      const cookie = encodeURIComponent('j:' + JSON.stringify({ state: 'le-bon-state' }));
 
       const reponse = await request(serveur)
         .get('/oidc/apres-deconnexion?state=pas-le-bon-state')
@@ -40,9 +36,7 @@ describe('La ressource apres deconnexion OIDC', () => {
     });
 
     it('supprime le cookie contenant le state', async () => {
-      const cookie = encodeURIComponent(
-        `j:${JSON.stringify({ state: 'le-bon-state' })}`
-      );
+      const cookie = encodeURIComponent(`j:${JSON.stringify({ state: 'le-bon-state' })}`);
 
       const reponse = await request(serveur)
         .get('/oidc/apres-deconnexion?state=le-bon-state')
@@ -56,17 +50,12 @@ describe('La ressource apres deconnexion OIDC', () => {
     });
 
     it('supprime le cookie contenant le session', async () => {
-      const cookieAgentConnect = encodeURIComponent(
-        `j:${JSON.stringify({ state: 'le-bon-state' })}`
-      );
+      const cookieAgentConnect = encodeURIComponent(`j:${JSON.stringify({ state: 'le-bon-state' })}`);
       const cookieSession = encodeSession({ token: 'token-session' });
 
       const reponse = await request(serveur)
         .get('/oidc/apres-deconnexion?state=le-bon-state')
-        .set('Cookie', [
-          `AgentConnectInfo=${cookieAgentConnect}`,
-          cookieSession,
-        ]);
+        .set('Cookie', [`AgentConnectInfo=${cookieAgentConnect}`, cookieSession]);
 
       const headerCookie = reponse.headers['set-cookie'];
 

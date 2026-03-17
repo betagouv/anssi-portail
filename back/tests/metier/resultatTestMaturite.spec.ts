@@ -1,11 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
-import {
-  IdNiveauMaturite,
-  ReponsesTestMaturite,
-  ResultatTestMaturite,
-} from '../../src/metier/resultatTestMaturite';
+import { IdNiveauMaturite, ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite';
 import { jeanneDupont } from '../api/objetsPretsALEmploi';
 
 const reponsesParDefaut: ReponsesTestMaturite = {
@@ -17,9 +13,7 @@ const reponsesParDefaut: ReponsesTestMaturite = {
   posture: 5,
 };
 
-const resultatAvecReponses = (
-  reponses: ReponsesTestMaturite = reponsesParDefaut
-) =>
+const resultatAvecReponses = (reponses: ReponsesTestMaturite = reponsesParDefaut) =>
   new ResultatTestMaturite({
     region: 'FR-NOR',
     secteur: 'J',
@@ -134,10 +128,7 @@ describe('Le résultat du test de maturité', () => {
         tailleOrganisation: undefined,
       });
 
-      await monResultat.revendiquePropriete(
-        jeanneDupont,
-        adaptateurRechercheEntreprise
-      );
+      await monResultat.revendiquePropriete(jeanneDupont, adaptateurRechercheEntreprise);
 
       assert.equal(monResultat.tailleOrganisation, '31');
       assert.equal(monResultat.secteur, 'U');
@@ -152,10 +143,7 @@ describe('Le résultat du test de maturité', () => {
         tailleOrganisation: '11',
       });
 
-      await monResultat.revendiquePropriete(
-        jeanneDupont,
-        adaptateurRechercheEntreprise
-      );
+      await monResultat.revendiquePropriete(jeanneDupont, adaptateurRechercheEntreprise);
 
       assert.equal(monResultat.tailleOrganisation, '11');
       assert.equal(monResultat.secteur, 'A');

@@ -9,30 +9,12 @@ describe('Le markdown', () => {
     assert.equal('bonjour tout le monde', markdown);
   });
 
-  [
-    '!',
-    '\\',
-    '[',
-    ']',
-    '`',
-    '{',
-    '}',
-    '*',
-    '_',
-    '<',
-    '>',
-    '(',
-    ')',
-    '#',
-    '+',
-    '-',
-    '.',
-    '|',
-  ].forEach((caractereAEchapper) =>
-    it(`échappe les ${caractereAEchapper}`, () => {
-      const markdown = aseptiseMarkdown(caractereAEchapper);
+  ['!', '\\', '[', ']', '`', '{', '}', '*', '_', '<', '>', '(', ')', '#', '+', '-', '.', '|'].forEach(
+    (caractereAEchapper) =>
+      it(`échappe les ${caractereAEchapper}`, () => {
+        const markdown = aseptiseMarkdown(caractereAEchapper);
 
-      assert.equal(`\\${caractereAEchapper}`, markdown);
-    })
+        assert.equal(`\\${caractereAEchapper}`, markdown);
+      })
   );
 });

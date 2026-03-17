@@ -67,10 +67,7 @@ describe("L'abonnement qui consigne le don d'un avis utilisateur dans le journal
       })
     );
 
-    assert.equal(
-      evenementRecu!.donnees.idUtilisateur,
-      `jean@dupont.fr-hacheHMAC`
-    );
+    assert.equal(evenementRecu!.donnees.idUtilisateur, `jean@dupont.fr-hacheHMAC`);
   });
 
   it("ne consigne pas d'email si celui-ci est absent", async () => {

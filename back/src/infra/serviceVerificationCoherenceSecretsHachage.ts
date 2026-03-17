@@ -12,8 +12,7 @@ const verifieQueChaqueSecretEstCoherent = async (
   adaptateurHachage: AdaptateurHachage
 ) => {
   for (let i = 0; i < tousLesSecretsDeHachageDeLaConfig.length; i += 1) {
-    const { version: versionDeLaConfig, secret: valeurSecretEnClair } =
-      tousLesSecretsDeHachageDeLaConfig[i];
+    const { version: versionDeLaConfig, secret: valeurSecretEnClair } = tousLesSecretsDeHachageDeLaConfig[i];
     const leSecretAppliqueCorrespondant = empreintesDesSecretsAppliques.find(
       ({ version: versionEnBase }) => versionEnBase === versionDeLaConfig
     );
@@ -39,13 +38,10 @@ const verifieQueChaqueSecretEstCoherent = async (
     const { version: versionAppliquee } = empreintesDesSecretsAppliques[i];
     if (
       !tousLesSecretsDeHachageDeLaConfig.some(
-        ({ version: versionDansLaConfig }) =>
-          versionAppliquee === versionDansLaConfig
+        ({ version: versionDansLaConfig }) => versionAppliquee === versionDansLaConfig
       )
     ) {
-      throw new Error(
-        `💥 La version ${versionAppliquee} du secret déjà appliquée est manquante dans la config.`
-      );
+      throw new Error(`💥 La version ${versionAppliquee} du secret déjà appliquée est manquante dans la config.`);
     }
   }
 };
@@ -65,9 +61,7 @@ export const fabriqueServiceVerificationCoherenceSecretsHachage = ({
       return;
     }
     const empreintesDesSecretsAppliques = await entrepotSecretHachage.tous();
-    const tousLesSecretsDeHachageDeLaConfig = adaptateurEnvironnement
-      .hachage()
-      .tousLesSecretsDeHachage();
+    const tousLesSecretsDeHachageDeLaConfig = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
     if (tousLesSecretsDeHachageDeLaConfig.length === 0) {
       throw new Error('💥 Aucun secret de hachage dans la config.');

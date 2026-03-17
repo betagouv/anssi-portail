@@ -49,10 +49,7 @@ describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur
 
     assert.notEqual(evenementRecu, undefined);
     assert.equal(evenementRecu!.type, 'MISE_A_JOUR_FAVORIS_UTILISATEUR');
-    assert.equal(
-      evenementRecu!.donnees.idUtilisateur,
-      'jeanne.dupont@user.com-hacheHMAC'
-    );
+    assert.equal(evenementRecu!.donnees.idUtilisateur, 'jeanne.dupont@user.com-hacheHMAC');
     assert.equal(evenementRecu!.donnees.listeIdFavoris.length, 2);
     assert.deepEqual(evenementRecu!.date, new Date('2025-04-16'));
   });

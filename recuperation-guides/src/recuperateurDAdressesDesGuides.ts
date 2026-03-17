@@ -14,11 +14,7 @@ export class RecuperateurDAdressesDesGuides {
 
       const adresses = document.querySelectorAll('.views-row a');
 
-      resultat.push(
-        ...adresses.map((adresse) =>
-          new URL(adresse.getAttribute('href')!, url).toString()
-        )
-      );
+      resultat.push(...adresses.map((adresse) => new URL(adresse.getAttribute('href')!, url).toString()));
     }
     return resultat;
   }

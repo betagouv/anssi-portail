@@ -28,10 +28,7 @@ export class RecuperateurGuide {
       urlDeBase: urlGuide,
     });
     const nomImageAvecExtension = image.split('/').at(-1);
-    const nomImage = decodeURI(
-      nomImageAvecExtension?.slice(0, nomImageAvecExtension.lastIndexOf('.')) ??
-        ''
-    );
+    const nomImage = decodeURI(nomImageAvecExtension?.slice(0, nomImageAvecExtension.lastIndexOf('.')) ?? '');
     const [urlDocuments, documents] = this.recupereDocuments(document, {
       urlDeBase: urlGuide,
     });
@@ -46,20 +43,14 @@ export class RecuperateurGuide {
       nomImage,
       urlDocuments,
       documents,
-      contenusLies: this.recuperecontenusLies(
-        document,
-        '.field--name-field-contenu-lie > div',
-        { urlDeBase: urlGuide }
-      ),
+      contenusLies: this.recuperecontenusLies(document, '.field--name-field-contenu-lie > div', {
+        urlDeBase: urlGuide,
+      }),
       langue,
     };
   }
 
-  private recupereTexte(
-    document: HTMLElement,
-    selecteur: string,
-    debut: number = 0
-  ) {
+  private recupereTexte(document: HTMLElement, selecteur: string, debut: number = 0) {
     return document.querySelector(selecteur)!.innerText.trim().substring(debut);
   }
 
@@ -69,11 +60,7 @@ export class RecuperateurGuide {
   }
 
   private recupereHtml(document: HTMLElement, selecteur: string) {
-    return document
-      .querySelector(selecteur)!
-      .innerHTML.trim()
-      .replaceAll(/\s+/g, ' ')
-      .replaceAll('> <', '><');
+    return document.querySelector(selecteur)!.innerHTML.trim().replaceAll(/\s+/g, ' ').replaceAll('> <', '><');
   }
 
   private recupereLien(
@@ -89,10 +76,7 @@ export class RecuperateurGuide {
     return new URL(lien, urlDeBase).toString();
   }
 
-  private recupereDocuments(
-    document: HTMLElement,
-    { urlDeBase }: { urlDeBase?: string }
-  ): [string[], string] {
+  private recupereDocuments(document: HTMLElement, { urlDeBase }: { urlDeBase?: string }): [string[], string] {
     const elements = [
       ...document.querySelectorAll('.paragraph--type--piece-jointe'),
       ...document.querySelectorAll('.field--name-field-fichier-pdf'),
@@ -115,11 +99,7 @@ export class RecuperateurGuide {
     return [urlDocuments, documents];
   }
 
-  private recuperecontenusLies(
-    document: HTMLElement,
-    selecteur: string,
-    { urlDeBase }: { urlDeBase?: string }
-  ) {
+  private recuperecontenusLies(document: HTMLElement, selecteur: string, { urlDeBase }: { urlDeBase?: string }) {
     const elements = document.querySelectorAll(selecteur);
     return elements
       .map((element) => {

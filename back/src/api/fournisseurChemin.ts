@@ -7,10 +7,8 @@ export interface FournisseurChemin {
 }
 
 export const fournisseurChemin: FournisseurChemin = {
-  cheminPageJekyll: (nomPage: string) =>
-    join(process.cwd(), 'front', '_site', nomPage, 'index.html'),
+  cheminPageJekyll: (nomPage: string) => join(process.cwd(), 'front', '_site', nomPage, 'index.html'),
   cheminProduitJekyll: (repertoireProduits: string, idProduit: string) =>
     join(process.cwd(), 'front', '_site', repertoireProduits, idProduit),
-  ressourceDeBase: (ressource) =>
-    join(process.cwd(), 'front', '_site', ressource),
+  ressourceDeBase: (ressource) => join(process.cwd(), 'front', '_site', ressource),
 };

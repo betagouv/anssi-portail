@@ -5,12 +5,8 @@ export class ConsignateurDeComparaisonDeGuides {
   consigneComparaison(comparaison: ComparaisonDeGuides) {
     const contenuDuTableau = [
       ...comparaison.ajouts.map((ajout) => this.construisUneLigneAjout(ajout)),
-      ...comparaison.suppressions.map((suppression) =>
-        this.construisUneLigneSuppression(suppression)
-      ),
-      ...comparaison.modifications.map((modification) =>
-        this.construisUneLigneModification(modification)
-      ),
+      ...comparaison.suppressions.map((suppression) => this.construisUneLigneSuppression(suppression)),
+      ...comparaison.modifications.map((modification) => this.construisUneLigneModification(modification)),
     ].join('\n');
     return `<table>
 <thead>
@@ -67,13 +63,7 @@ ${this.construisUneCelluleAvecLeContenu(`- ${guide.besoins.join(', ')}`)}
 `;
   }
 
-  private construisUneLigneModification({
-    cible,
-    source,
-  }: {
-    source: Guide;
-    cible: Guide;
-  }) {
+  private construisUneLigneModification({ cible, source }: { source: Guide; cible: Guide }) {
     return `<tr>
 ${this.construisUneCelluleDeDiff(source.id, cible.id)}
 ${this.construisUneCelluleDeDiff(source.nom, cible.nom)}
@@ -83,12 +73,8 @@ ${this.construisUneCelluleDeDiff(source.dateMiseAJour.toLocaleDateString(), cibl
 ${this.construisUneCelluleDeDiff(source.description, cible.description)}
 ${this.construisUneCelluleDeDiff(source.nomImage ?? '', cible.nomImage ?? '')}
 ${this.construisUneCelluleDeDiffPourTableaux(
-  source.documents.map(
-    (document) => `${document.libelle} : ${document.nomFichier}`
-  ),
-  cible.documents.map(
-    (document) => `${document.libelle} : ${document.nomFichier}`
-  )
+  source.documents.map((document) => `${document.libelle} : ${document.nomFichier}`),
+  cible.documents.map((document) => `${document.libelle} : ${document.nomFichier}`)
 )}
 ${this.construisUneCelluleDeDiff(source.langue, cible.langue)}
 ${this.construisUneCelluleDeDiff(source.collections.join(', '), cible.collections.join(', '))}
@@ -97,10 +83,7 @@ ${this.construisUneCelluleDeDiff(source.besoins.join(', '), cible.besoins.join('
 `;
   }
 
-  private construisUneCelluleDeDiff(
-    contenuSource: string,
-    contenuCible: string
-  ) {
+  private construisUneCelluleDeDiff(contenuSource: string, contenuCible: string) {
     if (contenuCible === contenuSource) {
       return this.construisUneCelluleAvecLeContenu(contenuSource);
     }
@@ -109,10 +92,7 @@ ${this.construisUneCelluleDeDiff(source.besoins.join(', '), cible.besoins.join('
 + ${contenuSource}`);
   }
 
-  private construisUneCelluleDeDiffPourTableaux(
-    source: string[],
-    cible: string[]
-  ) {
+  private construisUneCelluleDeDiffPourTableaux(source: string[], cible: string[]) {
     const contenu = diffArrays(cible, source, {
       oneChangePerToken: true,
     })

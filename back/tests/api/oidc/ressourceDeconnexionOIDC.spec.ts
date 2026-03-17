@@ -4,10 +4,7 @@ import request from 'supertest';
 import assert from 'node:assert';
 import { creeServeur } from '../../../src/api/msc';
 import { AgentConnectInfo, encodeSession, enObjet } from '../cookie';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurOIDC,
-} from '../fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurOIDC } from '../fauxObjets';
 
 describe('La ressource deconnexion OIDC', () => {
   describe('quand on requete GET sur /oidc/deconnexion', () => {
@@ -33,9 +30,7 @@ describe('La ressource deconnexion OIDC', () => {
         AgentConnectIdToken: 'idToken',
       });
 
-      const reponse = await request(serveur)
-        .get('/oidc/deconnexion')
-        .set('Cookie', [cookie]);
+      const reponse = await request(serveur).get('/oidc/deconnexion').set('Cookie', [cookie]);
 
       assert.equal(reponse.status, 302);
       assert.equal(reponse.headers.location, 'une-adresse-proconnect');
@@ -47,16 +42,11 @@ describe('La ressource deconnexion OIDC', () => {
         AgentConnectIdToken: 'idToken',
       });
 
-      const reponse = await request(serveur)
-        .get('/oidc/deconnexion')
-        .set('Cookie', [cookie]);
+      const reponse = await request(serveur).get('/oidc/deconnexion').set('Cookie', [cookie]);
       const headerCookie = reponse.headers['set-cookie'];
       const cookieSession = enObjet(headerCookie[0]);
 
-      assert.equal(
-        (cookieSession.AgentConnectInfo as AgentConnectInfo).state,
-        'un faux state'
-      );
+      assert.equal((cookieSession.AgentConnectInfo as AgentConnectInfo).state, 'un faux state');
     });
   });
 });

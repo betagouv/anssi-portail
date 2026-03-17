@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {niveauxMaturite} from "../niveaux-maturite/NiveauxMaturite.donnees";
+  import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
 </script>
 
 <div class="legende">

@@ -27,24 +27,16 @@ export interface AdaptateurMonAideCyber {
 
 class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
   private cacheStatistiques: Cache<StatistiquesMonAideCyber>;
-  constructor(
-    private readonly adaptateurEnvironnement: AdaptateurEnvironnement
-  ) {
+  constructor(private readonly adaptateurEnvironnement: AdaptateurEnvironnement) {
     this.cacheStatistiques = new Cache({
-      ttl: adaptateurEnvironnement
-        .monAideCyber()
-        .dureeCacheStatistiquesEnSecondes(),
+      ttl: adaptateurEnvironnement.monAideCyber().dureeCacheStatistiquesEnSecondes(),
     });
   }
 
   async creeDemandeAide({ entiteAidee, aidant, origine }: DemandeAide) {
     try {
       const { email, raisonSociale, departement, siret } = entiteAidee;
-      const {
-        email: emailAidant,
-        identifiant: identifiantAidant,
-        siret: siretAidant,
-      } = aidant;
+      const { email: emailAidant, identifiant: identifiantAidant, siret: siretAidant } = aidant;
       const demandeMAC = {
         ...(origine && { origine }),
         cguValidees: true,
@@ -56,17 +48,9 @@ class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
         ...(identifiantAidant && { identifiantAidant }),
         ...(siretAidant && { siretAidant }),
       };
-      await axios.post(
-        `${this.adaptateurEnvironnement.monAideCyber().url()}/api/demandes/etre-aide`,
-        demandeMAC
-      );
+      await axios.post(`${this.adaptateurEnvironnement.monAideCyber().url()}/api/demandes/etre-aide`, demandeMAC);
     } catch (e: unknown | Error) {
-      if (
-        axios.isAxiosError(e) &&
-        e.response &&
-        e.response.status >= 400 &&
-        e.response.status < 500
-      ) {
+      if (axios.isAxiosError(e) && e.response && e.response.status >= 400 && e.response.status < 500) {
         throw new Error(e.response.data.message);
       }
       throw e;
@@ -82,9 +66,7 @@ class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
   }
 }
 
-export const fabriqueAdaptateurMonAideCyber = (
-  adaptateurEnvironnement: AdaptateurEnvironnement
-) =>
+export const fabriqueAdaptateurMonAideCyber = (adaptateurEnvironnement: AdaptateurEnvironnement) =>
   process.env.MON_AIDE_CYBER_URL_BASE
     ? new AdaptateurHttpMonAideCyber(adaptateurEnvironnement)
     : adaptateurMonAideCyberVide();

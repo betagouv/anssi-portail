@@ -3,10 +3,7 @@ import { beforeEach, describe, it } from 'node:test';
 import { ClientHttp } from '../../../src/infra/clientHttp';
 import { ReponseGrist } from '../../../src/infra/entrepotGrist';
 import { FournisseurHorloge } from '../../../src/infra/fournisseurHorloge';
-import {
-  EntrepotExigenceGrist,
-  ExigenceGrist,
-} from '../../../src/infra/nis2/entrepotExigenceGrist';
+import { EntrepotExigenceGrist, ExigenceGrist } from '../../../src/infra/nis2/entrepotExigenceGrist';
 import { fauxAdaptateurEnvironnement } from '../../api/fauxObjets';
 import { FournisseurHorlogeDeTest } from '../fournisseurHorlogeDeTest';
 
@@ -23,9 +20,7 @@ describe("L'entrepot d'exigence Grist", () => {
   });
 
   const ilSePasse20Secondes = (): void => {
-    FournisseurHorlogeDeTest.initialise(
-      new Date(FournisseurHorloge.maintenant().getTime() + 20000)
-    );
+    FournisseurHorlogeDeTest.initialise(new Date(FournisseurHorloge.maintenant().getTime() + 20000));
   };
 
   it('sait récupérer des exigences en appelant Grist', async () => {
@@ -43,9 +38,7 @@ describe("L'entrepot d'exigence Grist", () => {
     await entrepotExigenceGrist.parReferentiel('NIS2');
 
     assert.equal(headerAuthent, 'Bearer FAUSSE_CLE_API_SOCLE');
-    assert.ok(
-      urlAppelee.startsWith('http://grist/api/docs/idDeDocumentSocle/sql?q=')
-    );
+    assert.ok(urlAppelee.startsWith('http://grist/api/docs/idDeDocumentSocle/sql?q='));
   });
 
   it("ne renvoie rien si l'url source n'est pas définie", async () => {
@@ -60,8 +53,7 @@ describe("L'entrepot d'exigence Grist", () => {
       },
     });
 
-    const exigences =
-      await entrepotExigenceGristHorsLigne.parReferentiel('NIS2');
+    const exigences = await entrepotExigenceGristHorsLigne.parReferentiel('NIS2');
 
     assert.deepEqual(exigences, []);
   });
@@ -91,8 +83,7 @@ describe("L'entrepot d'exigence Grist", () => {
               {
                 fields: {
                   Reference: '1.1-EI/EE',
-                  Objectif_de_securite:
-                    "Objectif de sécurité 1: Recensement des systèmes d'information",
+                  Objectif_de_securite: "Objectif de sécurité 1: Recensement des systèmes d'information",
                   Thematique: 'Recensement des SI',
                   Contenu: 'L’entité liste l’ensemble de ses activités',
                   EIEE: '["EI","EE"]',
@@ -116,19 +107,10 @@ describe("L'entrepot d'exigence Grist", () => {
       const exigences = await entrepotExigenceGrist.parReferentiel('NIS2');
 
       assert.equal(exigences[0].reference, '1.1-EI/EE');
-      assert.equal(
-        exigences[0].contenu,
-        'L’entité liste l’ensemble de ses activités'
-      );
+      assert.equal(exigences[0].contenu, 'L’entité liste l’ensemble de ses activités');
       assert.equal(exigences[0].thematique, 'Recensement des SI');
-      assert.equal(
-        exigences[0].objectifSecurite,
-        "Objectif de sécurité 1: Recensement des systèmes d'information"
-      );
-      assert.deepEqual(exigences[0].entitesCible, [
-        'EntiteImportante',
-        'EntiteEssentielle',
-      ]);
+      assert.equal(exigences[0].objectifSecurite, "Objectif de sécurité 1: Recensement des systèmes d'information");
+      assert.deepEqual(exigences[0].entitesCible, ['EntiteImportante', 'EntiteEssentielle']);
       assert.equal(exigences[1].reference, '2.A.3-EI/EE');
     });
 
@@ -140,8 +122,7 @@ describe("L'entrepot d'exigence Grist", () => {
               {
                 fields: {
                   Reference: '1.1-EI/EE',
-                  Objectif_de_securite:
-                    "Objectif de sécurité 1: Recensement des systèmes d'information",
+                  Objectif_de_securite: "Objectif de sécurité 1: Recensement des systèmes d'information",
                   Thematique: 'Recensement des SI',
                   Contenu: 'L’entité liste l’ensemble de ses activités',
                   EIEE: '["EI","EE"]',
@@ -154,8 +135,7 @@ describe("L'entrepot d'exigence Grist", () => {
               {
                 fields: {
                   Reference: '1.1-EI/EE',
-                  Objectif_de_securite:
-                    "Objectif de sécurité 1: Recensement des systèmes d'information",
+                  Objectif_de_securite: "Objectif de sécurité 1: Recensement des systèmes d'information",
                   Thematique: 'Recensement des SI',
                   Contenu: 'L’entité liste l’ensemble de ses activités',
                   EIEE: '["EI","EE"]',
@@ -168,8 +148,7 @@ describe("L'entrepot d'exigence Grist", () => {
               {
                 fields: {
                   Reference: '1.1-EI/EE',
-                  Objectif_de_securite:
-                    "Objectif de sécurité 1: Recensement des systèmes d'information",
+                  Objectif_de_securite: "Objectif de sécurité 1: Recensement des systèmes d'information",
                   Thematique: 'Recensement des SI',
                   Contenu: 'L’entité liste l’ensemble de ses activités',
                   EIEE: '["EI","EE"]',
@@ -184,16 +163,10 @@ describe("L'entrepot d'exigence Grist", () => {
         };
       };
 
-      const exigences = await entrepotExigenceGrist.parReferentiel(
-        'NIS2',
-        'ISO'
-      );
+      const exigences = await entrepotExigenceGrist.parReferentiel('NIS2', 'ISO');
 
       assert.equal(exigences[0].correspondances['ISO']?.niveau, 'moyen');
-      assert.equal(
-        exigences[0].correspondances['ISO']?.observations,
-        'Des observations'
-      );
+      assert.equal(exigences[0].correspondances['ISO']?.observations, 'Des observations');
       assert.deepEqual(exigences[0].correspondances['ISO']?.exigences, [
         {
           reference: '',
@@ -232,16 +205,10 @@ describe("L'entrepot d'exigence Grist", () => {
         };
       };
 
-      const exigences = await entrepotExigenceGrist.parReferentiel(
-        'ISO',
-        'NIS2'
-      );
+      const exigences = await entrepotExigenceGrist.parReferentiel('ISO', 'NIS2');
 
       assert.equal(exigences[0].correspondances['NIS2']?.niveau, 'moyen');
-      assert.equal(
-        exigences[0].correspondances['NIS2']?.observations,
-        'Des observations'
-      );
+      assert.equal(exigences[0].correspondances['NIS2']?.observations, 'Des observations');
       assert.deepEqual(exigences[0].correspondances['NIS2']?.exigences, [
         {
           reference: '2.A.1-EI/EE',
@@ -276,16 +243,10 @@ describe("L'entrepot d'exigence Grist", () => {
         };
       };
 
-      const exigences = await entrepotExigenceGrist.parReferentiel(
-        'AE',
-        'NIS2'
-      );
+      const exigences = await entrepotExigenceGrist.parReferentiel('AE', 'NIS2');
 
       assert.equal(exigences[0].correspondances['NIS2']?.niveau, 'moyen');
-      assert.equal(
-        exigences[0].correspondances['NIS2']?.observations,
-        'Des observations'
-      );
+      assert.equal(exigences[0].correspondances['NIS2']?.observations, 'Des observations');
       assert.deepEqual(exigences[0].correspondances['NIS2']?.exigences, [
         {
           reference: '2.A.1-EI/EE',
@@ -322,16 +283,10 @@ describe("L'entrepot d'exigence Grist", () => {
         };
       };
 
-      const exigences = await entrepotExigenceGrist.parReferentiel(
-        'CyFun23',
-        'NIS2'
-      );
+      const exigences = await entrepotExigenceGrist.parReferentiel('CyFun23', 'NIS2');
 
       assert.equal(exigences[0].reference, 'ID.AM-1.3');
-      assert.equal(
-        exigences[0].contenu,
-        'Lorsque du matériel non autorisé est détecté, ...'
-      );
+      assert.equal(exigences[0].contenu, 'Lorsque du matériel non autorisé est détecté, ...');
       assert.equal(exigences[0].fonction, 'Identifier');
       assert.equal(exigences[0].niveauAssurance, 'Essentiel');
       assert.equal(exigences[0].estMesureCle, true);
@@ -357,16 +312,10 @@ describe("L'entrepot d'exigence Grist", () => {
         };
       };
 
-      const exigences = await entrepotExigenceGrist.parReferentiel(
-        'CyFun23',
-        'NIS2'
-      );
+      const exigences = await entrepotExigenceGrist.parReferentiel('CyFun23', 'NIS2');
 
       assert.equal(exigences[0].correspondances['NIS2']?.niveau, 'moyen');
-      assert.equal(
-        exigences[0].correspondances['NIS2']?.observations,
-        'Des observations'
-      );
+      assert.equal(exigences[0].correspondances['NIS2']?.observations, 'Des observations');
       assert.deepEqual(exigences[0].correspondances['NIS2']?.exigences, [
         {
           reference: '2.A.1-EI/EE',

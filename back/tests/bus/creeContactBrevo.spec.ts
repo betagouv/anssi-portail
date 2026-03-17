@@ -9,12 +9,7 @@ describe("L'abonnement qui crée un contact Brevo", () => {
     let contactCree;
     const adaptateurEmail: AdaptateurEmail = {
       envoieEmailBienvenue: async () => {},
-      creeContactBrevo: async (donneesRecu: {
-        email: string;
-        nom: string;
-        prenom: string;
-        infoLettre: boolean;
-      }) => {
+      creeContactBrevo: async (donneesRecu: { email: string; nom: string; prenom: string; infoLettre: boolean }) => {
         contactCree = { ...donneesRecu };
       },
     };

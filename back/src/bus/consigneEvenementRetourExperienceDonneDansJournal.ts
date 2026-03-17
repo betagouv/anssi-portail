@@ -13,9 +13,7 @@ export const consigneEvenementRetourExperienceDonneDansJournal = ({
   adaptateurHachage: AdaptateurHachage;
 }) => {
   return async (evenement: RetourExperienceDonne) => {
-    const idUtilisateur = evenement.emailDeContact
-      ? adaptateurHachage.hache(evenement.emailDeContact)
-      : undefined;
+    const idUtilisateur = evenement.emailDeContact ? adaptateurHachage.hache(evenement.emailDeContact) : undefined;
     await adaptateurJournal.consigneEvenement({
       donnees: {
         idUtilisateur,

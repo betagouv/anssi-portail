@@ -38,9 +38,7 @@ describe("La ressource d'informations de création de compte", () => {
       adaptateurJWT.decode = () => {
         throw new JsonWebTokenError('Token manquant');
       };
-      const reponse = await request(serveur).get(
-        '/api/informations-creation-compte?token=unMauvaisToken'
-      );
+      const reponse = await request(serveur).get('/api/informations-creation-compte?token=unMauvaisToken');
 
       assert.equal(reponse.status, 401);
     });
@@ -54,9 +52,7 @@ describe("La ressource d'informations de création de compte", () => {
           nom: 'Dupont',
         };
       };
-      const reponse = await request(serveur).get(
-        '/api/informations-creation-compte?token=unBonToken'
-      );
+      const reponse = await request(serveur).get('/api/informations-creation-compte?token=unBonToken');
 
       assert.equal(reponse.status, 200);
       assert.deepEqual(reponse.body, {
@@ -72,9 +68,7 @@ describe("La ressource d'informations de création de compte", () => {
           siret: '1234',
         });
         adaptateurProfilAnssi.recupere = async () => undefined;
-        adaptateurRechercheEntreprise.rechercheOrganisations = async (
-          terme: string
-        ) => [
+        adaptateurRechercheEntreprise.rechercheOrganisations = async (terme: string) => [
           {
             siret: terme,
             departement: '75',
@@ -88,9 +82,7 @@ describe("La ressource d'informations de création de compte", () => {
           },
         ];
 
-        const reponse = await request(serveur).get(
-          '/api/informations-creation-compte?token=unBonToken'
-        );
+        const reponse = await request(serveur).get('/api/informations-creation-compte?token=unBonToken');
         assert.deepEqual(reponse.body.organisation, {
           siret: '1234',
           departement: '75',
@@ -108,9 +100,7 @@ describe("La ressource d'informations de création de compte", () => {
           return [];
         };
 
-        const reponse = await request(serveur).get(
-          '/api/informations-creation-compte?token=unBonToken'
-        );
+        const reponse = await request(serveur).get('/api/informations-creation-compte?token=unBonToken');
 
         assert.equal(rechercheEntrepriseAppelee, false);
         assert.equal(reponse.body.organisation, undefined);
@@ -136,9 +126,7 @@ describe("La ressource d'informations de création de compte", () => {
           };
         };
 
-        const reponse = await request(serveur).get(
-          '/api/informations-creation-compte?token=unBonToken'
-        );
+        const reponse = await request(serveur).get('/api/informations-creation-compte?token=unBonToken');
 
         assert.equal(reponse.body.nom, 'Dujardin');
         assert.equal(reponse.body.prenom, 'Jeanne');
@@ -163,16 +151,12 @@ describe("La ressource d'informations de création de compte", () => {
           email,
         });
         let rechercheEntrepriseAppelee = false;
-        adaptateurRechercheEntreprise.rechercheOrganisations = async (
-          _terme: string
-        ) => {
+        adaptateurRechercheEntreprise.rechercheOrganisations = async (_terme: string) => {
           rechercheEntrepriseAppelee = true;
           return [];
         };
 
-        const reponse = await request(serveur).get(
-          '/api/informations-creation-compte?token=unBonToken'
-        );
+        const reponse = await request(serveur).get('/api/informations-creation-compte?token=unBonToken');
 
         assert.equal(rechercheEntrepriseAppelee, false);
         assert.equal(reponse.body.organisation.siret, '1234');

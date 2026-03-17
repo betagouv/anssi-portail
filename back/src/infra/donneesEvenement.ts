@@ -23,10 +23,7 @@ type Evenement<Type extends string, Donnees extends object> = {
   date: Date;
 };
 
-type DonneesEvenementNouvelUtilisateur = Evenement<
-  'NOUVEL_UTILISATEUR_INSCRIT',
-  { idUtilisateur: string }
->;
+type DonneesEvenementNouvelUtilisateur = Evenement<'NOUVEL_UTILISATEUR_INSCRIT', { idUtilisateur: string }>;
 
 type DonneesEvenementMiseAJourFavorisUtilisateur = Evenement<
   'MISE_A_JOUR_FAVORIS_UTILISATEUR',
@@ -77,10 +74,7 @@ export type DonneesEvenementDocumentGuideTelecharge = Evenement<
   ProprietesDeClasse<DocumentGuideTelecharge>
 >;
 
-export type DonneesEvenementVisaTelecharge = Evenement<
-  'VISA_TELECHARGE',
-  ProprietesDeClasse<VisaTelecharge>
->;
+export type DonneesEvenementVisaTelecharge = Evenement<'VISA_TELECHARGE', ProprietesDeClasse<VisaTelecharge>>;
 
 export type DonneesEvenementUtilisateurConnecte = Evenement<
   'UTILISATEUR_CONNECTE',
@@ -88,7 +82,5 @@ export type DonneesEvenementUtilisateurConnecte = Evenement<
 >;
 
 type ProprietesDeClasse<C> = {
-  [Key in keyof C as C[Key] extends (...args: never) => unknown
-    ? never
-    : Key]: C[Key];
+  [Key in keyof C as C[Key] extends (...args: never) => unknown ? never : Key]: C[Key];
 };

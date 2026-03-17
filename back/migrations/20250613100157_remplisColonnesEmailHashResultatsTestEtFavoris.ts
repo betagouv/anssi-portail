@@ -6,26 +6,18 @@ const hacheAvecHMAC = (valeur: string) => {
     throw new Error('Missing HACHAGE_SECRET_DE_HACHAGE_1');
   }
 
-  return createHmac('sha256', process.env.HACHAGE_SECRET_DE_HACHAGE_1)
-    .update(valeur)
-    .digest('hex');
+  return createHmac('sha256', process.env.HACHAGE_SECRET_DE_HACHAGE_1).update(valeur).digest('hex');
 };
 
 export async function up(knex: Knex) {
   async function migreLaTable(trx: Knex.Transaction, table: string) {
     const lignes = await trx(table);
 
-    const emailsDistincts = new Set(
-      lignes
-        .map(({ email_utilisateur: email }) => email)
-        .filter((email) => !!email)
-    );
+    const emailsDistincts = new Set(lignes.map(({ email_utilisateur: email }) => email).filter((email) => !!email));
 
     return emailsDistincts.values().map((email) => {
       const emailHacheHMAC = `v1:${hacheAvecHMAC(email)}`;
-      return trx(table)
-        .where({ email_utilisateur: email })
-        .update({ email_utilisateur_hache: emailHacheHMAC });
+      return trx(table).where({ email_utilisateur: email }).update({ email_utilisateur_hache: emailHacheHMAC });
     });
   }
 

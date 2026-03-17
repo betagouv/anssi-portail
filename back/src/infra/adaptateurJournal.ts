@@ -7,9 +7,7 @@ export type AdaptateurJournal = {
 
 export const adaptateurJournalMemoire: AdaptateurJournal = {
   async consigneEvenement(donneesEvenement: DonneesEvenement): Promise<void> {
-    console.log(
-      `[JOURNAL MSC] Nouvel évènement \n${JSON.stringify(donneesEvenement)}`
-    );
+    console.log(`[JOURNAL MSC] Nouvel évènement \n${JSON.stringify(donneesEvenement)}`);
   },
 };
 

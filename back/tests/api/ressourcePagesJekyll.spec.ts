@@ -5,10 +5,7 @@ import { join } from 'path';
 import request from 'supertest';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin';
 import { creeServeur } from '../../src/api/msc';
-import {
-  configurationDeTestDuServeur,
-  fauxFournisseurDeChemin,
-} from './fauxObjets';
+import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets';
 
 describe('La ressource pages jekyll', () => {
   let serveur: Express;
@@ -51,17 +48,13 @@ describe('La ressource pages jekyll', () => {
 
   describe('sur demande de la page favoris partagés', () => {
     it('répond 200', async () => {
-      const reponse = await request(serveur).get(
-        '/favoris-partages/monSuperId'
-      );
+      const reponse = await request(serveur).get('/favoris-partages/monSuperId');
 
       assert.equal(reponse.status, 200);
     });
 
     it('renvoie un contenu html', async () => {
-      const reponse = await request(serveur).get(
-        '/favoris-partages/monSuperId'
-      );
+      const reponse = await request(serveur).get('/favoris-partages/monSuperId');
 
       assert.notEqual(reponse.headers['content-type'], undefined);
       assert.match(reponse.headers['content-type'], /html/);

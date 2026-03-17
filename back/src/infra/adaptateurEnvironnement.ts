@@ -80,10 +80,8 @@ const CINQ_MINUTES = 300;
 const adaptateurEnvironnement: AdaptateurEnvironnement = {
   urlBaseMSC: () => process.env.URL_BASE_MSC || '',
   oidc: () => ({
-    urlRedirectionApresAuthentification: () =>
-      `${process.env.URL_BASE_MSC}/oidc/apres-authentification`,
-    urlRedirectionApresDeconnexion: () =>
-      `${process.env.URL_BASE_MSC}/oidc/apres-deconnexion`,
+    urlRedirectionApresAuthentification: () => `${process.env.URL_BASE_MSC}/oidc/apres-authentification`,
+    urlRedirectionApresDeconnexion: () => `${process.env.URL_BASE_MSC}/oidc/apres-deconnexion`,
     urlBase: () => process.env.OIDC_URL_BASE || '/',
     clientId: () => process.env.OIDC_CLIENT_ID || '',
     clientSecret: () => process.env.OIDC_CLIENT_SECRET || '',
@@ -93,9 +91,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       const trustProxyEnChaine = process.env.SERVEUR_TRUST_PROXY || '0';
       const trustProxyEnNombre = Number(trustProxyEnChaine);
       if (isNaN(trustProxyEnNombre)) {
-        console.warn(
-          `Attention ! SERVEUR_TRUST_PROXY positionné à ${trustProxyEnChaine}`
-        );
+        console.warn(`Attention ! SERVEUR_TRUST_PROXY positionné à ${trustProxyEnChaine}`);
         return trustProxyEnChaine;
       } else {
         return trustProxyEnNombre;
@@ -105,15 +101,12 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       const maxEnChaine = process.env.SERVEUR_MAX_REQUETES_PAR_MINUTE || '600';
       const maxEnNombre = Number(maxEnChaine);
       if (isNaN(maxEnNombre)) {
-        throw new Error(
-          `SERVEUR_MAX_REQUETES_PAR_MINUTE n'est pas un nombre : ${maxEnChaine}`
-        );
+        throw new Error(`SERVEUR_MAX_REQUETES_PAR_MINUTE n'est pas un nombre : ${maxEnChaine}`);
       } else {
         return maxEnNombre;
       }
     },
-    ipAutorisees: () =>
-      process.env.SERVEUR_ADRESSES_IP_AUTORISEES?.split(',') ?? false,
+    ipAutorisees: () => process.env.SERVEUR_ADRESSES_IP_AUTORISEES?.split(',') ?? false,
   }),
   sentry: () => ({
     dsn: () => process.env.SENTRY_DSN,
@@ -139,18 +132,14 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
         .filter((objet): objet is VersionDeSecret => !!objet.version)
         .map(({ version, valeur }) => {
           if (!valeur) {
-            throw new Error(
-              `Le secret de hachage HACHAGE_SECRET_DE_HACHAGE_${version} ne doit pas être vide`
-            );
+            throw new Error(`Le secret de hachage HACHAGE_SECRET_DE_HACHAGE_${version} ne doit pas être vide`);
           }
           return {
             version: parseInt(version, 10),
             secret: valeur,
           };
         })
-        .sort(
-          ({ version: version1 }, { version: version2 }) => version1 - version2
-        );
+        .sort(({ version: version1 }, { version: version2 }) => version1 - version2);
     },
   }),
   maintenance: () => ({
@@ -161,31 +150,23 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     cleChaCha20Hex: () => {
       const cleHex = process.env.CHIFFREMENT_CHACHA20_CLE_HEX;
       if (!cleHex) {
-        throw new Error(
-          `La clé de chiffrement CHIFFREMENT_CHACHA20_CLE_HEX ne doit pas être vide`
-        );
+        throw new Error(`La clé de chiffrement CHIFFREMENT_CHACHA20_CLE_HEX ne doit pas être vide`);
       }
       return cleHex;
     },
   }),
   repartition: () => ({
     nombreMinimumDeResultats: () => {
-      const nombreMinimumDeResultats = Number(
-        process.env.NOMBRE_MINIMUM_DE_RESULTATS_COMPARAISON || 50
-      );
+      const nombreMinimumDeResultats = Number(process.env.NOMBRE_MINIMUM_DE_RESULTATS_COMPARAISON || 50);
       if (!Number.isInteger(nombreMinimumDeResultats)) {
-        throw new Error(
-          `La limite NOMBRE_MINIMUM_DE_RESULTATS_COMPARAISON doit être un entier`
-        );
+        throw new Error(`La limite NOMBRE_MINIMUM_DE_RESULTATS_COMPARAISON doit être un entier`);
       }
       return nombreMinimumDeResultats;
     },
   }),
   mattermost: () => ({
-    webhookAvisUtilisateur: () =>
-      process.env.WEBHOOK_MATTERMOST_AVIS_UTILISATEUR,
-    webhookRetourExperience: () =>
-      process.env.WEBHOOK_MATTERMOST_RETOURS_EXPERIENCE,
+    webhookAvisUtilisateur: () => process.env.WEBHOOK_MATTERMOST_AVIS_UTILISATEUR,
+    webhookRetourExperience: () => process.env.WEBHOOK_MATTERMOST_RETOURS_EXPERIENCE,
   }),
   grist: () => ({
     baseURL: () => process.env.GRIST_BASE_URL || '',
@@ -200,8 +181,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     }),
     nis2: () => ({
       idDocument: () => process.env.NIS2_GRIST_ID_DOCUMENT || '',
-      cleApi: () =>
-        process.env.NIS2_GRIST_API_KEY || process.env.GRIST_API_KEY || '',
+      cleApi: () => process.env.NIS2_GRIST_API_KEY || process.env.GRIST_API_KEY || '',
     }),
     dureeCacheEnSecondes: () => {
       const dureeEnChaine = process.env.GUIDES_GRIST_DUREE_CACHE_EN_SECONDES;
@@ -214,30 +194,15 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     return {
       guides: () =>
         process.env.CELLAR_BUCKET_GUIDES
-          ? ajouteBarreObliqueFinale(
-            pattternURLDeBase.replace(
-              '%BUCKET%',
-              process.env.CELLAR_BUCKET_GUIDES
-            )
-          )
+          ? ajouteBarreObliqueFinale(pattternURLDeBase.replace('%BUCKET%', process.env.CELLAR_BUCKET_GUIDES))
           : '',
       ressourcesCyber: () =>
         process.env.CELLAR_BUCKET_RESSOURCES_CYBER
-          ? ajouteBarreObliqueFinale(
-            pattternURLDeBase.replace(
-              '%BUCKET%',
-              process.env.CELLAR_BUCKET_RESSOURCES_CYBER
-            )
-          )
+          ? ajouteBarreObliqueFinale(pattternURLDeBase.replace('%BUCKET%', process.env.CELLAR_BUCKET_RESSOURCES_CYBER))
           : '',
       visas: () =>
         process.env.CELLAR_BUCKET_VISAS
-          ? ajouteBarreObliqueFinale(
-            pattternURLDeBase.replace(
-              '%BUCKET%',
-              process.env.CELLAR_BUCKET_VISAS
-            )
-          )
+          ? ajouteBarreObliqueFinale(pattternURLDeBase.replace('%BUCKET%', process.env.CELLAR_BUCKET_VISAS))
           : '',
     };
   },
@@ -247,17 +212,18 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
   monAideCyber: () => ({
     url: () => process.env.MON_AIDE_CYBER_URL_BASE ?? '',
     dureeCacheStatistiquesEnSecondes: () => {
-      const dureeEnChaine =
-        process.env.MON_AIDE_CYBER_DUREE_CACHE_STATISTIQUES_EN_SECONDES;
+      const dureeEnChaine = process.env.MON_AIDE_CYBER_DUREE_CACHE_STATISTIQUES_EN_SECONDES;
       const dureeEnNombre = Number(dureeEnChaine);
       return Number.isNaN(dureeEnNombre) ? CINQ_MINUTES : dureeEnNombre;
     },
   }),
   fonctionnalites: () => ({
     nis2: () => ({
+      afficheObservations: () => process.env.FEATURE_FLAG_NIS2_OBSERVATIONS === 'true',
       afficheCyFun23: () => process.env.FEATURE_FLAG_NIS2_CYFUN23 === 'true',
     }),
   }),
 };
 
 export { AdaptateurEnvironnement, adaptateurEnvironnement };
+

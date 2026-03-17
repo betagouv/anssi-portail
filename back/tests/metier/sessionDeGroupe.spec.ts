@@ -2,15 +2,9 @@ import { describe, it } from 'node:test';
 import { SessionDeGroupe } from '../../src/metier/sessionDeGroupe';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import assert from 'assert';
-import {
-  ReponsesTestMaturite,
-  ResultatTestMaturite,
-} from '../../src/metier/resultatTestMaturite';
+import { ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite';
 
-const resultatAvecReponses = (
-  reponses: ReponsesTestMaturite,
-  codeSession: string
-) =>
+const resultatAvecReponses = (reponses: ReponsesTestMaturite, codeSession: string) =>
   new ResultatTestMaturite({
     region: 'FR-NOR',
     secteur: 'J',
@@ -27,8 +21,7 @@ describe('La session de groupe', () => {
       });
       const entrepotResultatTest = new EntrepotResultatTestMemoire();
 
-      const resultatSession =
-        await sessionDeGroupe.resultatSession(entrepotResultatTest);
+      const resultatSession = await sessionDeGroupe.resultatSession(entrepotResultatTest);
 
       assert.equal(resultatSession.nombreParticipants, 0);
       assert.equal(resultatSession.resume['insuffisant'].total, 0);
@@ -44,26 +37,11 @@ describe('La session de groupe', () => {
         'adoption-solutions': 0,
         posture: 0,
       };
-      assert.deepEqual(
-        resultatSession.resume['insuffisant'].moyennes,
-        moyennesAZero
-      );
-      assert.deepEqual(
-        resultatSession.resume['emergent'].moyennes,
-        moyennesAZero
-      );
-      assert.deepEqual(
-        resultatSession.resume['intermediaire'].moyennes,
-        moyennesAZero
-      );
-      assert.deepEqual(
-        resultatSession.resume['confirme'].moyennes,
-        moyennesAZero
-      );
-      assert.deepEqual(
-        resultatSession.resume['optimal'].moyennes,
-        moyennesAZero
-      );
+      assert.deepEqual(resultatSession.resume['insuffisant'].moyennes, moyennesAZero);
+      assert.deepEqual(resultatSession.resume['emergent'].moyennes, moyennesAZero);
+      assert.deepEqual(resultatSession.resume['intermediaire'].moyennes, moyennesAZero);
+      assert.deepEqual(resultatSession.resume['confirme'].moyennes, moyennesAZero);
+      assert.deepEqual(resultatSession.resume['optimal'].moyennes, moyennesAZero);
     });
 
     it('donne un résumé avec résultats avec les totaux de participant par niveau', async () => {
@@ -98,8 +76,7 @@ describe('La session de groupe', () => {
         )
       );
 
-      const resultatSession =
-        await sessionDeGroupe.resultatSession(entrepotResultatTest);
+      const resultatSession = await sessionDeGroupe.resultatSession(entrepotResultatTest);
 
       assert.equal(resultatSession.nombreParticipants, 2);
       assert.equal(resultatSession.resume['insuffisant'].total, 1);
@@ -141,15 +118,11 @@ describe('La session de groupe', () => {
         )
       );
 
-      const resultatSession =
-        await sessionDeGroupe.resultatSession(entrepotResultatTest);
+      const resultatSession = await sessionDeGroupe.resultatSession(entrepotResultatTest);
 
       assert.equal(resultatSession.nombreParticipants, 2);
       assert.equal(resultatSession.resume['insuffisant'].total, 2);
-      assert.equal(
-        resultatSession.resume['insuffisant'].moyennes['ressources-humaines'],
-        3.5
-      );
+      assert.equal(resultatSession.resume['insuffisant'].moyennes['ressources-humaines'], 3.5);
     });
   });
 });

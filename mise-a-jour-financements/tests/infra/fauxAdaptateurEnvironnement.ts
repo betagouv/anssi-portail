@@ -2,8 +2,7 @@ import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement
 
 export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   grist: () => ({
-    urlFinancements: () =>
-      'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records',
+    urlFinancements: () => 'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records',
     cleApiFinancements: () => 'FAUSSE_CLE_API',
   }),
   aidesEntreprises: () => ({

@@ -54,10 +54,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
       let apiId = '';
       let apiKey = '';
 
-      clientHttp.get = async <T>(
-        url: string,
-        config?: { headers?: Record<string, string> }
-      ) => {
+      clientHttp.get = async <T>(url: string, config?: { headers?: Record<string, string> }) => {
         urlAppelee = url;
         apiId = config?.headers?.['X-Aidesentreprises-Id'] ?? '';
         apiKey = config?.headers?.['X-Aidesentreprises-Key'] ?? '';
@@ -165,10 +162,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
             data: [
               {
                 ...aidesDeLAPI[0],
-                financeurs: [
-                  { org_nom: 'Financeur 1' },
-                  { org_nom: 'Financeur 2' },
-                ],
+                financeurs: [{ org_nom: 'Financeur 1' }, { org_nom: 'Financeur 2' }],
               },
             ] as unknown as T,
           };
@@ -208,10 +202,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
       let apiId = '';
       let apiKey = '';
 
-      clientHttp.get = async <T>(
-        url: string,
-        config?: { headers?: Record<string, string> }
-      ) => {
+      clientHttp.get = async <T>(url: string, config?: { headers?: Record<string, string> }) => {
         urlAppelee = url;
         apiId = config?.headers?.['X-Aidesentreprises-Id'] ?? '';
         apiKey = config?.headers?.['X-Aidesentreprises-Key'] ?? '';
@@ -221,10 +212,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
       };
       await adapateurAidesEntreprisesAPI.chercheAidesCyber();
 
-      assert.equal(
-        urlAppelee,
-        'http://example.com/financements?full_text=cyber&status=1&limit=50&offset=0'
-      );
+      assert.equal(urlAppelee, 'http://example.com/financements?full_text=cyber&status=1&limit=50&offset=0');
       assert.equal(apiId, 'mon-api-id');
       assert.equal(apiKey, 'mon-api-key');
     });
@@ -237,8 +225,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
         apiKey: () => '',
       });
 
-      const nouvellesAides =
-        await adapateurAidesEntreprisesAPI.chercheAidesCyber();
+      const nouvellesAides = await adapateurAidesEntreprisesAPI.chercheAidesCyber();
 
       assert.deepEqual(nouvellesAides, []);
     });
@@ -250,8 +237,7 @@ describe("L'adaptateur Aides Entreprises API", () => {
         };
       };
 
-      const nouvellesAides =
-        await adapateurAidesEntreprisesAPI.chercheAidesCyber();
+      const nouvellesAides = await adapateurAidesEntreprisesAPI.chercheAidesCyber();
 
       assert.deepEqual(nouvellesAides, [
         {

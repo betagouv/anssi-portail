@@ -62,8 +62,6 @@ export class Financement {
     this.contact = contact;
     this.regions = regions.includes('France')
       ? ['FRANCE']
-      : regions
-          .map((region) => regionParNom(region)?.codeIso)
-          .filter((codeRegion) => !!codeRegion);
+      : regions.map((region) => regionParNom(region)?.codeIso).filter((codeRegion) => !!codeRegion);
   }
 }

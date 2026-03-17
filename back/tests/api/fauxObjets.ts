@@ -22,12 +22,9 @@ import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDe
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 
 export const fauxFournisseurDeChemin = {
-  cheminPageJekyll: (_: string) =>
-    join(process.cwd(), 'tests', 'ressources', 'factice.html'),
-  cheminProduitJekyll: (_a: string, _b: string) =>
-    join(process.cwd(), 'tests', 'ressources', 'factice.html'),
-  ressourceDeBase: (_: string) =>
-    join(process.cwd(), 'tests', 'ressources', 'factice.html'),
+  cheminPageJekyll: (_: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
+  cheminProduitJekyll: (_a: string, _b: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
+  ressourceDeBase: (_: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
 };
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
@@ -55,8 +52,7 @@ export const fauxAdaptateurJWT: AdaptateurJWT = {
   decode: (_: string) => ({}),
 };
 
-export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
-{
+export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
   rechercheOrganisations: async (siret: string, __: string | null) => [
     {
       siret,
@@ -122,13 +118,11 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   grist: () => ({
     baseURL: () => 'http://grist',
     financement: () => ({
-      urlTable: () =>
-        'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records',
+      urlTable: () => 'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records',
       cleApi: () => 'FAUSSE_CLE_API',
     }),
     guides: () => ({
-      urlTable: () =>
-        'http://grist/api/docs/idDocumentGuides/tables/idTableGuides/records',
+      urlTable: () => 'http://grist/api/docs/idDocumentGuides/tables/idTableGuides/records',
       cleApi: () => 'FAUSSE_CLE_API_GUIDES',
     }),
     nis2: () => ({
@@ -199,14 +193,9 @@ const fausseMessagerieInstantanee: MessagerieInstantanee = {
 
 export const fauxAdaptateurHachage: AdaptateurHachage = {
   hache: (valeur: string): string => `${valeur}-hache`,
-  hacheBCrypt: async (valeur: string): Promise<string> =>
-    `${valeur}-hacheBCrypt`,
-  compareBCrypt: async (
-    _valeurEnClair: string,
-    _empreinte: string
-  ): Promise<boolean> => true,
-  hacheAvecUnSeulSecret: (valeur: string, secret: string): string =>
-    `${valeur}-${secret}-hache`,
+  hacheBCrypt: async (valeur: string): Promise<string> => `${valeur}-hacheBCrypt`,
+  compareBCrypt: async (_valeurEnClair: string, _empreinte: string): Promise<boolean> => true,
+  hacheAvecUnSeulSecret: (valeur: string, secret: string): string => `${valeur}-${secret}-hache`,
 };
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,

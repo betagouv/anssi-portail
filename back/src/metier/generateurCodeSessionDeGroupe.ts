@@ -4,9 +4,7 @@ export interface GenerateurCodeSessionDeGroupe {
   genere: () => Promise<string>;
 }
 
-export class GenerateurAleatoireCodeSessionDeGroupe
-  implements GenerateurCodeSessionDeGroupe
-{
+export class GenerateurAleatoireCodeSessionDeGroupe implements GenerateurCodeSessionDeGroupe {
   constructor(private entrepotSessionDeGroupe: EntrepotSessionDeGroupe) {}
 
   genere = async () => {

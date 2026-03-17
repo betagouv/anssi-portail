@@ -8,17 +8,11 @@ import { CodeRegion } from '../../../src/metier/referentielRegions';
 import { CodeSecteur } from '../../../src/metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../../../src/metier/referentielTranchesEffectifEtablissement';
 import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
-import {
-  fabriqueBusPourLesTests,
-  MockBusEvenement,
-} from '../../bus/busPourLesTests';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
 import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurRechercheEntreprise,
-} from '../fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise } from '../fauxObjets';
 import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
 
 describe('La ressource qui gère un résultat de test', () => {
@@ -65,16 +59,10 @@ describe('La ressource qui gère un résultat de test', () => {
         ...donneesResultatTestCorrectes(),
         id: 'r1',
       });
-      await resultatDeHector.revendiquePropriete(
-        hectorDurant,
-        fauxAdaptateurRechercheEntreprise
-      );
+      await resultatDeHector.revendiquePropriete(hectorDurant, fauxAdaptateurRechercheEntreprise);
       await entrepotResultatTest.ajoute(resultatDeHector);
 
-      const reponse = await request(serveur)
-        .put('/api/resultats-test/r1')
-        .set('Cookie', [cookieJeanneDupont])
-        .send();
+      const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
       assert.equal(reponse.status, 403);
       const resultatTest = await entrepotResultatTest.parId('r1');
@@ -87,16 +75,10 @@ describe('La ressource qui gère un résultat de test', () => {
         ...donneesResultatTestCorrectes(),
         id: 'r1',
       });
-      await resultatDeJeanne.revendiquePropriete(
-        jeanneDupont,
-        fauxAdaptateurRechercheEntreprise
-      );
+      await resultatDeJeanne.revendiquePropriete(jeanneDupont, fauxAdaptateurRechercheEntreprise);
       await entrepotResultatTest.ajoute(resultatDeJeanne);
 
-      const reponse = await request(serveur)
-        .put('/api/resultats-test/r1')
-        .set('Cookie', [cookieJeanneDupont])
-        .send();
+      const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
       assert.equal(reponse.status, 200);
       busEvenements.naPasRecuDEvenement(ProprieteTestRevendiquee);
@@ -110,10 +92,7 @@ describe('La ressource qui gère un résultat de test', () => {
         })
       );
 
-      const reponse = await request(serveur)
-        .put('/api/resultats-test/r1')
-        .set('Cookie', [cookieJeanneDupont])
-        .send();
+      const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
       assert.equal(reponse.status, 200);
       const resultatTest = await entrepotResultatTest.parId('r1');
@@ -121,10 +100,7 @@ describe('La ressource qui gère un résultat de test', () => {
     });
 
     it("renvoie une erreur 404 lorsque le résultat de test n'existe pas", async () => {
-      const reponse = await request(serveur)
-        .put('/api/resultats-test/r1')
-        .set('Cookie', [cookieJeanneDupont])
-        .send();
+      const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
       assert.equal(reponse.status, 404);
     });
@@ -137,24 +113,16 @@ describe('La ressource qui gère un résultat de test', () => {
         })
       );
 
-      await request(serveur)
-        .put('/api/resultats-test/r1')
-        .set('Cookie', [cookieJeanneDupont])
-        .send();
+      await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
       busEvenements.aRecuUnEvenement(ProprieteTestRevendiquee);
-      const evenement = busEvenements.recupereEvenement(
-        ProprieteTestRevendiquee
-      );
+      const evenement = busEvenements.recupereEvenement(ProprieteTestRevendiquee);
       assert.equal(evenement!.utilisateur, jeanneDupont);
       assert.equal(evenement!.idResultatTest, 'r1');
     });
 
     it('refuse les requêtes non connectées', async () => {
-      const reponse = await request(serveur)
-        .put('/api/resultats-test/r1')
-        .set('Cookie', [])
-        .send();
+      const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', []).send();
 
       assert.equal(reponse.status, 401);
     });

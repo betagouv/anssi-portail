@@ -4,10 +4,7 @@ import request from 'supertest';
 import assert from 'node:assert';
 import { creeServeur } from '../../../src/api/msc';
 import { AgentConnectInfo, enObjet } from '../cookie';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurOIDC,
-} from '../fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurOIDC } from '../fauxObjets';
 
 describe('La ressource connexion OIDC', () => {
   describe('quand on requete GET sur /oidc/connexion', () => {

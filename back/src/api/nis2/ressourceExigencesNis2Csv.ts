@@ -4,15 +4,10 @@ import { Referentiel, versReferentiel } from '../../metier/nis2/exigence';
 import { ConfigurationServeur } from '../configurationServeur';
 import { StrategieExportCsvUneLigneParExigence } from './strategieExportCsvUneLigneParExigence';
 
-export const ressourceExigencesNis2Csv = ({
-  entrepotExigence,
-}: ConfigurationServeur) => {
+export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationServeur) => {
   const routeur = Router();
 
-  function nomFichierCsv(
-    referentielSource: Referentiel,
-    referentielCible: Referentiel
-  ) {
+  function nomFichierCsv(referentielSource: Referentiel, referentielCible: Referentiel) {
     if (referentielCible === 'ISO') {
       return 'Comparaison_ReCyf-NIS2_ISO';
     } else if (referentielCible === 'AE') {
@@ -28,13 +23,8 @@ export const ressourceExigencesNis2Csv = ({
 
   routeur.get('/', async (requete, reponse) => {
     const { source, cible } = requete.query;
-    if (
-      (source && typeof source !== 'string') ||
-      (cible && typeof cible !== 'string')
-    ) {
-      return reponse
-        .status(400)
-        .send('Les paramètres doivent être des chaînes de caractères');
+    if ((source && typeof source !== 'string') || (cible && typeof cible !== 'string')) {
+      return reponse.status(400).send('Les paramètres doivent être des chaînes de caractères');
     }
 
     const referentielSource = versReferentiel(source);
@@ -43,10 +33,7 @@ export const ressourceExigencesNis2Csv = ({
       return reponse.sendStatus(404);
     }
 
-    const exigences = await entrepotExigence.parReferentiel(
-      referentielSource,
-      referentielCible
-    );
+    const exigences = await entrepotExigence.parReferentiel(referentielSource, referentielCible);
 
     const strategieExportCsv = new StrategieExportCsvUneLigneParExigence();
 
@@ -56,13 +43,9 @@ export const ressourceExigencesNis2Csv = ({
       fieldDelimiter: ';',
     });
 
-    const csv =
-      stringifier.getHeaderString() +
-      stringifier.stringifyRecords(strategieExportCsv.lignes(exigences));
+    const csv = stringifier.getHeaderString() + stringifier.stringifyRecords(strategieExportCsv.lignes(exigences));
 
-    reponse
-      .attachment(nomFichierCsv(referentielSource, referentielCible) + '.csv')
-      .send(csv);
+    reponse.attachment(nomFichierCsv(referentielSource, referentielCible) + '.csv').send(csv);
   });
 
   return routeur;

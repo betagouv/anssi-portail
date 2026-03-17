@@ -28,11 +28,9 @@ const empreinte = await entrepotSource.empreinte();
 await comparateurDeGuides.chargeLesDonnees();
 const comparaison = comparateurDeGuides.compare();
 
-const consignateurDeComparaisonDeGuides =
-  new ConsignateurDeComparaisonDeGuides();
+const consignateurDeComparaisonDeGuides = new ConsignateurDeComparaisonDeGuides();
 
-const markdown =
-  consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
+const markdown = consignateurDeComparaisonDeGuides.consigneComparaison(comparaison);
 
 fs.appendFileSync(summaryFile, markdown);
 fs.writeFileSync('empreinte.txt', empreinte);

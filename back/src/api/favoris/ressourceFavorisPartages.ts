@@ -2,11 +2,7 @@ import { ConfigurationServeur } from '../configurationServeur';
 import { Request, Response, Router } from 'express';
 import { check } from 'express-validator';
 
-const ressourceFavorisPartages = ({
-  middleware,
-  entrepotFavori,
-  entrepotUtilisateur,
-}: ConfigurationServeur) => {
+const ressourceFavorisPartages = ({ middleware, entrepotFavori, entrepotUtilisateur }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get(
@@ -14,17 +10,14 @@ const ressourceFavorisPartages = ({
     [check('id').isUUID().withMessage("L'id est invalide")],
     middleware.valide(),
     async (requete: Request, reponse: Response) => {
-      const utilisateurPartageur = await entrepotUtilisateur.parIdListeFavoris(
-        requete.params.id as string
-      );
+      const utilisateurPartageur = await entrepotUtilisateur.parIdListeFavoris(requete.params.id as string);
 
       if (!utilisateurPartageur) {
         reponse.sendStatus(404);
         return;
       }
 
-      const favoris =
-        await entrepotFavori.tousCeuxDeUtilisateur(utilisateurPartageur);
+      const favoris = await entrepotFavori.tousCeuxDeUtilisateur(utilisateurPartageur);
       const favorisPartages = favoris.map((favori) => favori.idItemCyber);
 
       reponse.send({

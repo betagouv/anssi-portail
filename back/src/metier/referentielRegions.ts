@@ -47,8 +47,5 @@ export function estCodeRegion(code: string | undefined): code is CodeRegion {
 }
 
 export function regionParNom(nom: string): Region | undefined {
-  return regions.find(
-    (region) =>
-      region.nom.toLocaleLowerCase().trim() === nom.toLocaleLowerCase().trim()
-  );
+  return regions.find((region) => region.nom.toLocaleLowerCase().trim() === nom.toLocaleLowerCase().trim());
 }

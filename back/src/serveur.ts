@@ -35,18 +35,11 @@ import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
-const adaptateurChiffrement = fabriqueAdaptateurChiffrement(
-  adaptateurEnvironnement
-);
+const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
 const adaptateurJournal = fabriqueAdaptateurJournal();
-const adaptateurAnalytique = fabriqueAdaptateurMatamo(
-  axios,
-  adaptateurEnvironnement
-);
+const adaptateurAnalytique = fabriqueAdaptateurMatamo(axios, adaptateurEnvironnement);
 const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
-const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber(
-  adaptateurEnvironnement
-);
+const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber(adaptateurEnvironnement);
 const adaptateurHachage = fabriqueAdaptateurHachage({
   adaptateurEnvironnement,
 });
@@ -96,12 +89,11 @@ if (!crispIdSite || !crispCleApi) {
 
 const cmsCrisp = new CmsCrisp(crispIdSite, crispCleApi);
 
-const serviceCoherenceSecretsHachage =
-  fabriqueServiceVerificationCoherenceSecretsHachage({
-    adaptateurEnvironnement,
-    entrepotSecretHachage,
-    adaptateurHachage,
-  });
+const serviceCoherenceSecretsHachage = fabriqueServiceVerificationCoherenceSecretsHachage({
+  adaptateurEnvironnement,
+  entrepotSecretHachage,
+  adaptateurHachage,
+});
 
 const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
 
@@ -133,9 +125,7 @@ serviceCoherenceSecretsHachage
       entrepotUtilisateur,
       reseau: {
         trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
-        maxRequetesParMinutes: adaptateurEnvironnement
-          .serveur()
-          .maxRequetesParMinute(),
+        maxRequetesParMinutes: adaptateurEnvironnement.serveur().maxRequetesParMinute(),
         ipAutorisees: adaptateurEnvironnement.serveur().ipAutorisees(),
       },
       adaptateurRechercheEntreprise,
@@ -146,9 +136,7 @@ serviceCoherenceSecretsHachage
       adaptateurMonAideCyber,
       adaptateurEnvironnement,
       cmsCrisp,
-      generateurCodeSessionDeGroupe: new GenerateurAleatoireCodeSessionDeGroupe(
-        entrepotSessionDeGroupe
-      ),
+      generateurCodeSessionDeGroupe: new GenerateurAleatoireCodeSessionDeGroupe(entrepotSessionDeGroupe),
       adaptateurHachage,
       messagerieInstantanee,
       entrepotFinancement,

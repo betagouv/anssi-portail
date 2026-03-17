@@ -19,25 +19,18 @@ export const fabriqueAdaptateurHachage = ({
 }: {
   adaptateurEnvironnement: AdaptateurEnvironnement;
 }): AdaptateurHachage => ({
-  hacheBCrypt: async (chaineEnClair: string): Promise<string> =>
-    hashBCrypt(chaineEnClair, NOMBRE_DE_PASSES),
+  hacheBCrypt: async (chaineEnClair: string): Promise<string> => hashBCrypt(chaineEnClair, NOMBRE_DE_PASSES),
 
-  compareBCrypt: (valeurEnClair, empreinte) =>
-    compareBCrypt(valeurEnClair, empreinte),
+  compareBCrypt: (valeurEnClair, empreinte) => compareBCrypt(valeurEnClair, empreinte),
 
   hacheAvecUnSeulSecret,
 
   hache: (valeur: string): string => {
     const secrets = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
-    const hashFinal = secrets.reduce(
-      (acc, { secret }) => hacheAvecUnSeulSecret(acc, secret),
-      valeur
-    );
+    const hashFinal = secrets.reduce((acc, { secret }) => hacheAvecUnSeulSecret(acc, secret), valeur);
 
-    const version = secrets
-      .map(({ version: numVersion }) => `v${numVersion}`)
-      .join('-');
+    const version = secrets.map(({ version: numVersion }) => `v${numVersion}`).join('-');
 
     return `${version}:${hashFinal}`;
   },

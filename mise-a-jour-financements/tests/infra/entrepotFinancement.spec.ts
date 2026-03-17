@@ -2,11 +2,7 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { ClientHttp } from '../../src/infra/clientHttp';
-import {
-  EntrepotFinancement,
-  EntrepotFinancementGrist,
-  RetourApiGrist,
-} from '../../src/infra/entrepotFinancement';
+import { EntrepotFinancement, EntrepotFinancementGrist, RetourApiGrist } from '../../src/infra/entrepotFinancement';
 import { Financement } from '../../src/metier/financement';
 import { fauxAdaptateurEnvironnement } from './fauxAdaptateurEnvironnement';
 
@@ -19,8 +15,7 @@ describe("L'entrepot de financement Grist", () => {
     adaptateurEnvironnement = {
       ...fauxAdaptateurEnvironnement,
       grist: () => ({
-        urlFinancements: () =>
-          'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records',
+        urlFinancements: () => 'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records',
         cleApiFinancements: () => 'FAUSSE_CLE_API',
       }),
     };
@@ -49,10 +44,7 @@ describe("L'entrepot de financement Grist", () => {
     let urlAppelee = '';
     let headerAuthent;
 
-    clientHttp.get = async <T>(
-      url: string,
-      config?: { headers?: Record<string, string> }
-    ) => {
+    clientHttp.get = async <T>(url: string, config?: { headers?: Record<string, string> }) => {
       urlAppelee = url;
       headerAuthent = config?.headers?.Authorization;
       return {
@@ -63,10 +55,7 @@ describe("L'entrepot de financement Grist", () => {
     await entrepotFinancementGrist.tous();
 
     assert.equal(headerAuthent, 'Bearer FAUSSE_CLE_API');
-    assert.equal(
-      urlAppelee,
-      'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records'
-    );
+    assert.equal(urlAppelee, 'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records');
   });
 
   it("sait transfomer le retour de l'API Grist en financements", async () => {
@@ -77,11 +66,7 @@ describe("L'entrepot de financement Grist", () => {
           fields: {
             ID_Aides_entreprises: 10234,
             Nom_du_dispositif: 'Cyber PME',
-            Financement: [
-              'L',
-              'Prestations de conseil',
-              "Appui à l'investissement",
-            ],
+            Financement: ['L', 'Prestations de conseil', "Appui à l'investissement"],
             Financeur: 'BPI France',
             Entites_eligibles: ['L', 'PME', 'ETI'],
             Perimetre_geographique: ['L', 'France'],

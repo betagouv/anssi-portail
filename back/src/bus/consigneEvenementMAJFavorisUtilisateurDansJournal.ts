@@ -16,9 +16,9 @@ export const consigneEvenementMAJFavorisUtilisateurDansJournal = ({
   entrepotFavori: EntrepotFavori;
 }) => {
   return async function (evenement: MiseAJourFavorisUtilisateur) {
-    const listeIdFavoris = (
-      await entrepotFavori.tousCeuxDeUtilisateur(evenement?.utilisateur)
-    ).map(({ idItemCyber }) => idItemCyber);
+    const listeIdFavoris = (await entrepotFavori.tousCeuxDeUtilisateur(evenement?.utilisateur)).map(
+      ({ idItemCyber }) => idItemCyber
+    );
     await adaptateurJournal.consigneEvenement({
       donnees: {
         idUtilisateur: adaptateurHachage.hache(evenement.utilisateur.email),

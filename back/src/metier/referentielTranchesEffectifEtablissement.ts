@@ -17,17 +17,11 @@ export const tranchesEffectifEtablissement = [
   { code: '53', libelle: '10 000 salariés et plus' },
 ] as const;
 
-export const codesTranchesEffectif = tranchesEffectifEtablissement.map(
-  (t) => t.code
-);
+export const codesTranchesEffectif = tranchesEffectifEtablissement.map((t) => t.code);
 
 export type CodeTrancheEffectif = (typeof codesTranchesEffectif)[number];
 
-export const trancheEffectifParCode = (
-  code: string | undefined
-): (typeof tranchesEffectifEtablissement)[number] => {
-  const trancheTrouvee = tranchesEffectifEtablissement.find(
-    (tranche) => tranche.code === code
-  );
+export const trancheEffectifParCode = (code: string | undefined): (typeof tranchesEffectifEtablissement)[number] => {
+  const trancheTrouvee = tranchesEffectifEtablissement.find((tranche) => tranche.code === code);
   return trancheTrouvee ?? tranchesEffectifEtablissement[0];
 };

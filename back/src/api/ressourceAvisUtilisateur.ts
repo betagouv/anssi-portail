@@ -13,31 +13,20 @@ export const ressourceAvisUtilisateur = ({
   routeur.post(
     '/',
     [
-      check('niveauDeSatisfaction')
-        .isIn([1, 2, 3, 4, 5])
-        .withMessage('Le niveau de satisfaction est invalide'),
-      check('commentaire')
-        .not()
-        .isEmpty()
-        .withMessage('Le commentaire est requis'),
-      check('emailDeContact')
-        .optional({ values: 'falsy' })
-        .isEmail()
-        .withMessage("L'email est invalide"),
+      check('niveauDeSatisfaction').isIn([1, 2, 3, 4, 5]).withMessage('Le niveau de satisfaction est invalide'),
+      check('commentaire').not().isEmpty().withMessage('Le commentaire est requis'),
+      check('emailDeContact').optional({ values: 'falsy' }).isEmail().withMessage("L'email est invalide"),
     ],
     middleware.valide(),
     middleware.aseptise('commentaire'),
     async (requete: Request, reponse: Response) => {
-      const { niveauDeSatisfaction, commentaire, emailDeContact } =
-        requete.body as AvisUtilisateur;
+      const { niveauDeSatisfaction, commentaire, emailDeContact } = requete.body as AvisUtilisateur;
       await messagerieInstantanee.notifieUnAvisUtilisateur({
         niveauDeSatisfaction,
         commentaire,
         emailDeContact,
       });
-      await busEvenements.publie(
-        new AvisUtilisateurDonne({ niveauDeSatisfaction, emailDeContact })
-      );
+      await busEvenements.publie(new AvisUtilisateurDonne({ niveauDeSatisfaction, emailDeContact }));
       reponse.sendStatus(201);
     }
   );

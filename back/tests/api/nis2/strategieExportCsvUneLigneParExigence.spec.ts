@@ -1,13 +1,7 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import { StrategieExportCsvUneLigneParExigence } from '../../../src/api/nis2/strategieExportCsvUneLigneParExigence';
-import {
-  Exigence,
-  ExigenceAE,
-  ExigenceISO,
-  ExigenceNIS2,
-  Referentiel,
-} from '../../../src/metier/nis2/exigence';
+import { Exigence, ExigenceAE, ExigenceISO, ExigenceNIS2, Referentiel } from '../../../src/metier/nis2/exigence';
 
 describe('La stratégie d’export CSV avec une ligne par exigence', () => {
   let strategieExport: StrategieExportCsvUneLigneParExigence;
@@ -83,10 +77,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
     });
 
     it('adapte le nombre de colonnes au nombre d’exigences correspondantes maximum ', () => {
-      const exigences = [
-        exigenceNIS2AvecCorrespondancesISO(0),
-        exigenceNIS2AvecCorrespondancesISO(3),
-      ];
+      const exigences = [exigenceNIS2AvecCorrespondancesISO(0), exigenceNIS2AvecCorrespondancesISO(3)];
 
       const entetes = strategieExport.entetes(exigences);
 
@@ -110,10 +101,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
           objectifSecurite: '',
           referentielCompare: 'ISO',
           correspondance: {
-            exigences: [
-              exigenceISO('refiso1', 'contenuiso1'),
-              exigenceISO('refiso2', 'contenuiso2'),
-            ],
+            exigences: [exigenceISO('refiso1', 'contenuiso1'), exigenceISO('refiso2', 'contenuiso2')],
             niveau: 'faible',
             observations: 'bla bla',
           },
@@ -158,10 +146,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
     });
 
     it('adapte le nombre de colonnes au nombre d’exigences correspondantes maximum ', () => {
-      const exigences = [
-        exigenceNIS2AvecCorrespondancesAE(0),
-        exigenceNIS2AvecCorrespondancesAE(3),
-      ];
+      const exigences = [exigenceNIS2AvecCorrespondancesAE(0), exigenceNIS2AvecCorrespondancesAE(3)];
 
       const entetes = strategieExport.entetes(exigences);
 
@@ -203,10 +188,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
           objectifSecurite: '',
           referentielCompare: 'AE',
           correspondance: {
-            exigences: [
-              exigenceAE('refae1', 'contenuae1'),
-              exigenceAE('refae2', 'contenuae2'),
-            ],
+            exigences: [exigenceAE('refae1', 'contenuae1'), exigenceAE('refae2', 'contenuae2')],
             niveau: 'faible',
             observations: 'bla bla',
           },
@@ -248,10 +230,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
     });
 
     it('adapte le nombre de colonnes au nombre d’exigences correspondantes maximum ', () => {
-      const exigences = [
-        exigenceAEAvecCorrespondancesNIS2(0),
-        exigenceAEAvecCorrespondancesNIS2(3),
-      ];
+      const exigences = [exigenceAEAvecCorrespondancesNIS2(0), exigenceAEAvecCorrespondancesNIS2(3)];
 
       const entetes = strategieExport.entetes(exigences);
 
@@ -333,10 +312,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
     });
 
     it('adapte le nombre de colonnes au nombre d’exigences correspondantes maximum ', () => {
-      const exigences = [
-        exigenceISOAvecCorrespondancesNIS2(0),
-        exigenceISOAvecCorrespondancesNIS2(3),
-      ];
+      const exigences = [exigenceISOAvecCorrespondancesNIS2(0), exigenceISOAvecCorrespondancesNIS2(3)];
 
       const entetes = strategieExport.entetes(exigences);
 
@@ -411,9 +387,7 @@ const exigenceAEAvecCorrespondancesNIS2 = (nombreCorrespondances: number) =>
     reference: '',
     contenu: '',
     correspondance: {
-      exigences: new Array(nombreCorrespondances).map((_) =>
-        exigenceNIS2SansCorrespondance()
-      ),
+      exigences: new Array(nombreCorrespondances).map((_) => exigenceNIS2SansCorrespondance()),
       niveau: 'faible',
       observations: '',
     },
@@ -426,19 +400,14 @@ const exigenceISOAvecCorrespondancesNIS2 = (nombreCorrespondances: number) =>
     norme: '2701',
     chapitre: 'chapitre 6',
     correspondance: {
-      exigences: new Array(nombreCorrespondances).map((_) =>
-        exigenceNIS2SansCorrespondance()
-      ),
+      exigences: new Array(nombreCorrespondances).map((_) => exigenceNIS2SansCorrespondance()),
       niveau: 'faible',
 
       observations: '',
     },
   });
 
-const exigenceNIS2SansCorrespondance = (
-  reference: string = '',
-  contenu: string = ''
-) =>
+const exigenceNIS2SansCorrespondance = (reference: string = '', contenu: string = '') =>
   new ExigenceNIS2({
     reference,
     contenu,

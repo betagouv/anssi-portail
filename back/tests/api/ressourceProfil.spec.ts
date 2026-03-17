@@ -37,9 +37,7 @@ describe('La ressource Profil', () => {
         email: 'jeanne.dupont@user.com',
       });
 
-      const reponse = await request(serveur)
-        .get('/api/profil')
-        .set('Cookie', [cookie]);
+      const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 
       assert.equal(reponse.body.nom, 'Dupont');
       assert.equal(reponse.body.prenom, 'Jeanne');
@@ -86,9 +84,7 @@ describe('La ressource Profil', () => {
         email: 'jean.martin@user.com',
       });
 
-      const reponse = await request(serveur)
-        .get('/api/profil')
-        .set('Cookie', [cookie]);
+      const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 
       assert.equal(reponse.body.nom, 'Martin');
       assert.equal(reponse.body.prenom, 'Jean');
@@ -112,9 +108,7 @@ describe('La ressource Profil', () => {
           },
         },
       });
-      const reponse = await request(serveur)
-        .get('/api/profil')
-        .set('Cookie', [cookieSession]);
+      const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookieSession]);
 
       const headerCookie = reponse.headers['set-cookie'];
       assert.notEqual(headerCookie, undefined);
@@ -127,9 +121,7 @@ describe('La ressource Profil', () => {
         email: 'jeanne.dupont@user.com',
       });
 
-      const reponse = await request(serveur)
-        .get('/api/profil')
-        .set('Cookie', [cookie]);
+      const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 
       assert.equal(reponse.body.codeActivite, '84.11Z');
     });

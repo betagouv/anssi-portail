@@ -108,30 +108,21 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(cookieParser());
   app.use(json());
 
-  const brancheLesRessourcesStatiques =
-    (avecCors: boolean) => (ressource: string) => {
-      const sertLesFichiersStatiques = express.static(
-        fournisseurChemin.ressourceDeBase(ressource),
-        {
-          setHeaders: (reponse: Response) =>
-            reponse.setHeader(
-              'cache-control',
-              process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'
-            ),
-        }
-      );
+  const brancheLesRessourcesStatiques = (avecCors: boolean) => (ressource: string) => {
+    const sertLesFichiersStatiques = express.static(fournisseurChemin.ressourceDeBase(ressource), {
+      setHeaders: (reponse: Response) =>
+        reponse.setHeader('cache-control', process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'),
+    });
 
-      if (avecCors) {
-        app.use(`/${ressource}`, cors(), sertLesFichiersStatiques);
-      } else {
-        app.use(`/${ressource}`, sertLesFichiersStatiques);
-      }
-    };
+    if (avecCors) {
+      app.use(`/${ressource}`, cors(), sertLesFichiersStatiques);
+    } else {
+      app.use(`/${ressource}`, sertLesFichiersStatiques);
+    }
+  };
 
   brancheLesRessourcesStatiques(true)('assets');
-  ['scripts', 'lib-svelte', 'favicon.ico'].forEach(
-    brancheLesRessourcesStatiques(false)
-  );
+  ['scripts', 'lib-svelte', 'favicon.ico'].forEach(brancheLesRessourcesStatiques(false));
 
   app.use(configurationServeur.middleware.verifieModeMaintenance);
 
@@ -166,56 +157,34 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'associations',
     'entreprises',
     'sante',
-  ].forEach((page) =>
-    app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page))
-  );
+  ].forEach((page) => app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
 
   app.post('/formulaire-matomo', (_requete: Request, reponse: Response) => {
     reponse
       .contentType('text/html')
       .status(200)
-      .sendFileAvecNonce(
-        fournisseurChemin.cheminPageJekyll('formulaire-matomo')
-      );
+      .sendFileAvecNonce(fournisseurChemin.cheminPageJekyll('formulaire-matomo'));
   });
 
-  app.use(
-    '/favoris-partages/:id',
-    ressourcePagesJekyll(configurationServeur, 'favoris-partages')
-  );
+  app.use('/favoris-partages/:id', ressourcePagesJekyll(configurationServeur, 'favoris-partages'));
 
-  app.use(
-    '/contacts/:code',
-    ressourcePagesJekyll(configurationServeur, 'contacts')
-  );
+  app.use('/contacts/:code', ressourcePagesJekyll(configurationServeur, 'contacts'));
 
-  app.use(
-    '/guides/:slug',
-    ressourcePagesJekyll(configurationServeur, 'guides')
-  );
+  app.use('/guides/:slug', ressourcePagesJekyll(configurationServeur, 'guides'));
 
   ['ma-maturite', 'favoris', 'services-anssi'].forEach((page) =>
-    app.use(
-      `/${page}`,
-      ressourcePagesJekyllConnectees(configurationServeur, page)
-    )
+    app.use(`/${page}`, ressourcePagesJekyllConnectees(configurationServeur, page))
   );
 
   app.use('/connexion', ressourcePageConnexion(configurationServeur));
 
   ['services', 'ressources'].forEach((repertoireProduits) =>
-    app.use(
-      `/${repertoireProduits}`,
-      ressourcePageProduit(configurationServeur, repertoireProduits)
-    )
+    app.use(`/${repertoireProduits}`, ressourcePageProduit(configurationServeur, repertoireProduits))
   );
 
   app.use('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
 
-  app.use(
-    '/oidc/apres-authentification',
-    ressourceApresAuthentificationOIDC(configurationServeur)
-  );
+  app.use('/oidc/apres-authentification', ressourceApresAuthentificationOIDC(configurationServeur));
 
   app.use('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
 
@@ -225,36 +194,20 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/api/utilisateurs', ressourceUtilisateurs(configurationServeur));
 
-  app.use(
-    '/api/mon-aide-cyber/demandes-aide',
-    ressourceDemandesAide(configurationServeur)
-  );
+  app.use('/api/mon-aide-cyber/demandes-aide', ressourceDemandesAide(configurationServeur));
 
-  app.use(
-    '/api/favoris',
-    ressourceFavoris(configurationServeur),
-    ressourceFavori(configurationServeur)
-  );
+  app.use('/api/favoris', ressourceFavoris(configurationServeur), ressourceFavori(configurationServeur));
 
-  app.use(
-    '/api/favoris-partages',
-    ressourceFavorisPartages(configurationServeur)
-  );
+  app.use('/api/favoris-partages', ressourceFavorisPartages(configurationServeur));
 
-  app.use(
-    '/api/informations-creation-compte',
-    ressourceInformationsCreationCompte(configurationServeur)
-  );
+  app.use('/api/informations-creation-compte', ressourceInformationsCreationCompte(configurationServeur));
 
   app.use(
     '/api/resultats-test',
     ressourceResultatsDeTest(configurationServeur),
     ressourceResultatDeTest(configurationServeur)
   );
-  app.use(
-    '/api/resultats-test/dernier',
-    ressourceDernierResultatDeTest(configurationServeur)
-  );
+  app.use('/api/resultats-test/dernier', ressourceDernierResultatDeTest(configurationServeur));
 
   app.use(
     '/api/sessions-groupe',
@@ -263,57 +216,29 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourceResultatsSessionDeGroupe(configurationServeur)
   );
 
-  app.use(
-    '/api/annuaire/organisations',
-    ressourceAnnuaireOrganisations(configurationServeur)
-  );
+  app.use('/api/annuaire/organisations', ressourceAnnuaireOrganisations(configurationServeur));
 
-  app.use(
-    '/api/annuaire/departements',
-    ressourceAnnuaireDepartements(configurationServeur)
-  );
+  app.use('/api/annuaire/departements', ressourceAnnuaireDepartements(configurationServeur));
 
-  app.use(
-    '/api/annuaire/regions',
-    ressourceAnnuaireRegions(configurationServeur)
-  );
+  app.use('/api/annuaire/regions', ressourceAnnuaireRegions(configurationServeur));
 
-  app.use(
-    '/api/annuaire/secteurs-activite',
-    ressourceAnnuaireSecteursActivite(configurationServeur)
-  );
+  app.use('/api/annuaire/secteurs-activite', ressourceAnnuaireSecteursActivite(configurationServeur));
 
-  app.use(
-    '/api/annuaire/tranches-effectif',
-    ressourceAnnuaireTranchesEffectif(configurationServeur)
-  );
+  app.use('/api/annuaire/tranches-effectif', ressourceAnnuaireTranchesEffectif(configurationServeur));
 
   app.use('/api/pages-crisp', ressourcePageCrisp(configurationServeur));
 
   app.use('/api/infos-site', ressourceInfosSite(configurationServeur));
 
-  app.use(
-    '/api/retours-experience',
-    ressourceRetoursExperience(configurationServeur)
-  );
+  app.use('/api/retours-experience', ressourceRetoursExperience(configurationServeur));
 
   app.use('/api/statistiques', ressourceStatistiques(configurationServeur));
 
-  app.use(
-    '/api/repartition-resultats-test',
-    ressourceRepartitionDesResultatsDeTest(configurationServeur)
-  );
+  app.use('/api/repartition-resultats-test', ressourceRepartitionDesResultatsDeTest(configurationServeur));
 
-  app.use(
-    '/api/avis-utilisateur',
-    ressourceAvisUtilisateur(configurationServeur)
-  );
+  app.use('/api/avis-utilisateur', ressourceAvisUtilisateur(configurationServeur));
 
-  app.use(
-    '/api/financements',
-    ressourceFinancements(configurationServeur),
-    ressourceFinancement(configurationServeur)
-  );
+  app.use('/api/financements', ressourceFinancements(configurationServeur), ressourceFinancement(configurationServeur));
 
   app.use(
     '/api/guides',

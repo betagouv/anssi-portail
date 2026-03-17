@@ -52,7 +52,7 @@ export default defineConfig({
         'carrousel-des-interlocuteurs':
           'src/main-carrousel-des-interlocuteurs.ts',
         'equipe-biz-dev': 'src/main-equipe-biz-dev.ts',
-        'sante': 'src/main-sante.ts',
+        sante: 'src/main-sante.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,

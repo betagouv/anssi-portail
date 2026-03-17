@@ -2,11 +2,7 @@ import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest';
 import { CodeRegion } from '../../src/metier/referentielRegions';
 import { CodeSecteur } from '../../src/metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../../src/metier/referentielTranchesEffectifEtablissement';
-import {
-  IdNiveauMaturite,
-  ReponsesTestMaturite,
-  ResultatTestMaturite,
-} from '../../src/metier/resultatTestMaturite';
+import { IdNiveauMaturite, ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets';
 
@@ -82,10 +78,7 @@ export class ResultatTestMaturiteCreateur {
       reponses: this.reponses,
     });
     if (this.utilisateur) {
-      await resultatConstruit.revendiquePropriete(
-        this.utilisateur,
-        fauxAdaptateurRechercheEntreprise
-      );
+      await resultatConstruit.revendiquePropriete(this.utilisateur, fauxAdaptateurRechercheEntreprise);
     }
     if (this.entrepotResultatTest) {
       await this.entrepotResultatTest.ajoute(resultatConstruit);

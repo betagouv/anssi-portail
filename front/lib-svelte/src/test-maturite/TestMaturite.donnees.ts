@@ -30,8 +30,7 @@ export const questions: Question[] = [
   {
     titre: 'Pilotage de la sécurité',
     id: 'pilotage',
-    question:
-      "Comment est structurée l'action cyber de l'organisation&nbsp;?",
+    question: "Comment est structurée l'action cyber de l'organisation&nbsp;?",
     propositions: [
       'La cybersécurité ne fait pas l’objet d’actions spécifiques.',
       "Des actions ponctuelles peuvent être menées mais sans plan d'action cyber structuré.",

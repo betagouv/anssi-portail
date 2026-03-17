@@ -2,11 +2,7 @@ import * as fs from 'node:fs';
 import path from 'path';
 import * as Vite from 'vite';
 
-export const remplaceVersionsDansPhp = (
-  versionUiKit: string,
-  version: string,
-  env: string
-): Vite.Plugin => {
+export const remplaceVersionsDansPhp = (versionUiKit: string, version: string, env: string): Vite.Plugin => {
   let configurationResolue: Vite.ResolvedConfig;
 
   const remplace = (source: string) => {
@@ -23,10 +19,7 @@ export const remplaceVersionsDansPhp = (
       configurationResolue = configuration;
     },
     closeBundle() {
-      const chemin = path.resolve(
-        configurationResolue.publicDir,
-        'demande-diag.php'
-      );
+      const chemin = path.resolve(configurationResolue.publicDir, 'demande-diag.php');
       const contenu = remplace(fs.readFileSync(chemin, 'utf-8'));
       const cheminSortie = path.resolve(
         configurationResolue.root,

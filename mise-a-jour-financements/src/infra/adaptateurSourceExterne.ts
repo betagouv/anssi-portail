@@ -43,12 +43,8 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
     this.clientHttp = clientHttp;
     this.adaptateurEnvironnement = adaptateurEnvironnement;
     this.headers = {
-      'X-Aidesentreprises-Id': this.adaptateurEnvironnement
-        .aidesEntreprises()
-        .apiId(),
-      'X-Aidesentreprises-Key': this.adaptateurEnvironnement
-        .aidesEntreprises()
-        .apiKey(),
+      'X-Aidesentreprises-Id': this.adaptateurEnvironnement.aidesEntreprises().apiId(),
+      'X-Aidesentreprises-Key': this.adaptateurEnvironnement.aidesEntreprises().apiKey(),
     };
   }
 
@@ -57,10 +53,9 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
     if (!url) {
       return undefined;
     }
-    const { data: aides } =
-      await this.clientHttp.get<DetailsAidesEntreprisesAPI>(`${url}/${id}`, {
-        headers: this.headers,
-      });
+    const { data: aides } = await this.clientHttp.get<DetailsAidesEntreprisesAPI>(`${url}/${id}`, {
+      headers: this.headers,
+    });
 
     if (!aides) {
       return undefined;
@@ -84,8 +79,7 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
       const reponse = await this.clientHttp.get<RechercheAidesEntreprisesAPI>(
         url +
           `?full_text=cyber&status=1&limit=${this.itemParPage}&offset=${
-            this.itemParPage *
-            Math.floor(nouvellesAides.length / this.itemParPage)
+            this.itemParPage * Math.floor(nouvellesAides.length / this.itemParPage)
           }`,
         {
           headers: this.headers,
@@ -102,10 +96,7 @@ export class AdapateurAidesEntreprisesAPI implements AdaptateurSourceExterne {
       id: Number(aide.id_aid),
       benificiaires: aseptiseHtml(aide.aid_benef),
       condition: aseptiseHtml(aide.aid_conditions),
-      financeur:
-        'financeurs' in aide
-          ? aide.financeurs.map((f) => aseptiseHtml(f.org_nom)).join(', ')
-          : '',
+      financeur: 'financeurs' in aide ? aide.financeurs.map((f) => aseptiseHtml(f.org_nom)).join(', ') : '',
       montant: aseptiseHtml(aide.aid_montant),
       nom: aseptiseHtml(aide.aid_nom),
       objectifs: aseptiseHtml(aide.aid_objet),

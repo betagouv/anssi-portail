@@ -4,23 +4,14 @@ import pThrottle from 'p-throttle';
 import config from '../../knexfile';
 import { CompteCree } from '../bus/evenements/compteCree';
 import { MiseAJourFavorisUtilisateur } from '../bus/miseAJourFavorisUtilisateur';
-import {
-  AdaptateurChiffrement,
-  fabriqueAdaptateurChiffrement,
-} from '../infra/adaptateurChiffrement';
+import { AdaptateurChiffrement, fabriqueAdaptateurChiffrement } from '../infra/adaptateurChiffrement';
 import { fabriqueAdaptateurEmail } from '../infra/adaptateurEmailBrevo';
 import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
-import {
-  AdaptateurHachage,
-  fabriqueAdaptateurHachage,
-} from '../infra/adaptateurHachage';
+import { AdaptateurHachage, fabriqueAdaptateurHachage } from '../infra/adaptateurHachage';
 import { adaptateurJournalMemoire } from '../infra/adaptateurJournal';
 import { adaptateurJournalPostgres } from '../infra/adaptateurJournalPostgres';
 import { fabriqueAdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
-import {
-  AdaptateurRechercheEntreprise,
-  adaptateurRechercheEntreprise,
-} from '../infra/adaptateurRechercheEntreprise';
+import { AdaptateurRechercheEntreprise, adaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres';
 import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres';
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
@@ -46,9 +37,7 @@ export class ConsoleAdministration {
 
   constructor() {
     const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
-    this.adaptateurChiffrement = fabriqueAdaptateurChiffrement(
-      adaptateurEnvironnement
-    );
+    this.adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
     this.adaptateurHachage = fabriqueAdaptateurHachage({
       adaptateurEnvironnement,
     });
@@ -68,9 +57,7 @@ export class ConsoleAdministration {
       connection: process.env.BASE_DONNEES_JOURNAL_URL_SERVEUR,
       pool: {
         min: 0,
-        max: Number.parseInt(
-          process.env.BASE_DONNEES_JOURNAL_POOL_CONNEXION_MAX || '0'
-        ),
+        max: Number.parseInt(process.env.BASE_DONNEES_JOURNAL_POOL_CONNEXION_MAX || '0'),
       },
     };
     this.knexJournal = Knex(configDuJournal);
@@ -104,16 +91,13 @@ export class ConsoleAdministration {
   }
 
   async rattrapageProfilContactBrevo(email: string) {
-    const unUtilisateur = await this.entrepotUtilisateur.parEmailHache(
-      this.adaptateurHachage.hache(email)
-    );
+    const unUtilisateur = await this.entrepotUtilisateur.parEmailHache(this.adaptateurHachage.hache(email));
     if (!unUtilisateur) {
       console.log('Utilisateur non trouvé');
       return;
     }
 
-    const afficheErreur = (utilisateur: Utilisateur) =>
-      `Erreur pour ${utilisateur.email}`;
+    const afficheErreur = (utilisateur: Utilisateur) => `Erreur pour ${utilisateur.email}`;
 
     const rattrapeUtilisateur = async (utilisateur: Utilisateur) => {
       const { prenom, nom, email, infolettreAcceptee } = utilisateur;
@@ -125,61 +109,37 @@ export class ConsoleAdministration {
       });
     };
 
-    return ConsoleAdministration.rattrapage(
-      [unUtilisateur],
-      afficheErreur,
-      rattrapeUtilisateur
-    );
+    return ConsoleAdministration.rattrapage([unUtilisateur], afficheErreur, rattrapeUtilisateur);
   }
 
   async rattrapageMAJFavorisUtilisateurs(persiste: boolean = false) {
-    const journal = persiste
-      ? adaptateurJournalPostgres()
-      : adaptateurJournalMemoire;
+    const journal = persiste ? adaptateurJournalPostgres() : adaptateurJournalMemoire;
 
     const tousUtilisateurs = await this.entrepotUtilisateur.tous();
-    const tousEvenementsUtilisateurs: MiseAJourFavorisUtilisateur[] =
-      tousUtilisateurs.map(
-        (utilisateur) => new MiseAJourFavorisUtilisateur({ utilisateur })
-      );
-    const constitueListeIdFavorisUtilisateur = async (
-      utilisateur: Utilisateur
-    ) => {
-      return (await this.entrepotFavori.tousCeuxDeUtilisateur(utilisateur)).map(
-        ({ idItemCyber }) => idItemCyber
-      );
+    const tousEvenementsUtilisateurs: MiseAJourFavorisUtilisateur[] = tousUtilisateurs.map(
+      (utilisateur) => new MiseAJourFavorisUtilisateur({ utilisateur })
+    );
+    const constitueListeIdFavorisUtilisateur = async (utilisateur: Utilisateur) => {
+      return (await this.entrepotFavori.tousCeuxDeUtilisateur(utilisateur)).map(({ idItemCyber }) => idItemCyber);
     };
 
     const rattrapeEvenement = async (evenement: MiseAJourFavorisUtilisateur) =>
       journal.consigneEvenement({
         type: 'MISE_A_JOUR_FAVORIS_UTILISATEUR',
         donnees: {
-          idUtilisateur: this.adaptateurHachage.hache(
-            evenement.utilisateur.email
-          ),
-          listeIdFavoris: await constitueListeIdFavorisUtilisateur(
-            evenement.utilisateur
-          ),
+          idUtilisateur: this.adaptateurHachage.hache(evenement.utilisateur.email),
+          listeIdFavoris: await constitueListeIdFavorisUtilisateur(evenement.utilisateur),
         },
         date: new Date(),
       });
 
-    const afficheErreur = (evenement: MiseAJourFavorisUtilisateur) =>
-      `Erreur pour ${evenement.utilisateur.email}`;
+    const afficheErreur = (evenement: MiseAJourFavorisUtilisateur) => `Erreur pour ${evenement.utilisateur.email}`;
 
-    return ConsoleAdministration.rattrapage(
-      tousEvenementsUtilisateurs,
-      afficheErreur,
-      rattrapeEvenement
-    );
+    return ConsoleAdministration.rattrapage(tousEvenementsUtilisateurs, afficheErreur, rattrapeEvenement);
   }
 
-  async genereTousEvenementsNouvelUtilisateurInscrit(
-    persiste: boolean = false
-  ) {
-    const journal = persiste
-      ? adaptateurJournalPostgres()
-      : adaptateurJournalMemoire;
+  async genereTousEvenementsNouvelUtilisateurInscrit(persiste: boolean = false) {
+    const journal = persiste ? adaptateurJournalPostgres() : adaptateurJournalMemoire;
 
     const tousUtilisateurs = await this.entrepotUtilisateur.tous();
     const tousEvenementsUtilisateurs: CompteCree[] = tousUtilisateurs.map(
@@ -200,34 +160,23 @@ export class ConsoleAdministration {
         date: new Date(),
       });
 
-    const afficheErreur = (evenement: CompteCree) =>
-      `Erreur pour ${evenement.email}`;
+    const afficheErreur = (evenement: CompteCree) => `Erreur pour ${evenement.email}`;
 
-    return ConsoleAdministration.rattrapage(
-      tousEvenementsUtilisateurs,
-      afficheErreur,
-      rattrapeEvenement
-    );
+    return ConsoleAdministration.rattrapage(tousEvenementsUtilisateurs, afficheErreur, rattrapeEvenement);
   }
 
   async corrigeEvenementsAvecMailEnClair() {
-    process.stdout.write(
-      'Migration des événements PROPRIETE_TEST_REVENDIQUEE avec email en clair\n'
-    );
+    process.stdout.write('Migration des événements PROPRIETE_TEST_REVENDIQUEE avec email en clair\n');
     await this.knexJournal.transaction(async (trx) => {
-      const evenements = await trx('journal_msc.evenements').where(
-        'type',
-        'PROPRIETE_TEST_REVENDIQUEE'
-      );
+      const evenements = await trx('journal_msc.evenements').where('type', 'PROPRIETE_TEST_REVENDIQUEE');
       process.stdout.write('\n');
       let compteur = 0;
 
       const majEvenements = evenements.map(({ id, donnees }, index) => {
         process.stdout.write(
-          `\rConstruction des données: ${(
-            (index / evenements.length) *
-            100.0
-          ).toFixed(2)}% (${index}/${evenements.length})`
+          `\rConstruction des données: ${((index / evenements.length) * 100.0).toFixed(
+            2
+          )}% (${index}/${evenements.length})`
         );
 
         const nouvellesDonnees = {
@@ -242,10 +191,9 @@ export class ConsoleAdministration {
           .then(() => {
             compteur += 1;
             process.stdout.write(
-              `\rExécution des promesses: ${(
-                (compteur / evenements.length) *
-                100.0
-              ).toFixed(2)}% (${compteur}/${evenements.length})`
+              `\rExécution des promesses: ${((compteur / evenements.length) * 100.0).toFixed(
+                2
+              )}% (${compteur}/${evenements.length})`
             );
           });
       });
@@ -259,56 +207,46 @@ export class ConsoleAdministration {
 
   async migreLesHashSha256DuJournal() {
     const leHashHMACCorrespondantA = async (leHash256: string) => {
-      const ligne = await this.knexMSC('utilisateurs')
-        .where({ email_hache_256: leHash256 })
-        .first();
+      const ligne = await this.knexMSC('utilisateurs').where({ email_hache_256: leHash256 }).first();
       return ligne ? ligne.email_hache : null;
     };
 
-    process.stdout.write(
-      'Migration des événements avec email hachés avec algo SHA256\n'
-    );
+    process.stdout.write('Migration des événements avec email hachés avec algo SHA256\n');
     await this.knexJournal.transaction(async (trx) => {
-      const evenements = await trx('journal_msc.evenements').whereRaw(
-        "donnees->>'idUtilisateur' IS NOT NULL"
-      );
+      const evenements = await trx('journal_msc.evenements').whereRaw("donnees->>'idUtilisateur' IS NOT NULL");
       process.stdout.write('\n');
       let compteur = 0;
 
       await this.knexJournal.transaction(async (trx) => {
         const majEvenements = evenements.map(({ id, donnees }, index) => {
           process.stdout.write(
-            `\rConstruction des données: ${(
-              (index / evenements.length) *
-              100.0
-            ).toFixed(2)}% (${index}/${evenements.length})`
+            `\rConstruction des données: ${((index / evenements.length) * 100.0).toFixed(
+              2
+            )}% (${index}/${evenements.length})`
           );
 
-          return leHashHMACCorrespondantA(donnees.idUtilisateur).then(
-            (emailHacheAvecHMAC) => {
-              if (!emailHacheAvecHMAC) {
-                return new Promise((resolve) => resolve(null));
-              }
-
-              const nouvellesDonnees = {
-                ...donnees,
-                idUtilisateur: emailHacheAvecHMAC,
-              };
-
-              return trx('journal_msc.evenements')
-                .where({ id })
-                .update({ donnees: nouvellesDonnees })
-                .then(() => {
-                  compteur += 1;
-                  process.stdout.write(
-                    `\rExécution des promesses: ${(
-                      (compteur / evenements.length) *
-                      100.0
-                    ).toFixed(2)}% (${compteur}/${evenements.length})`
-                  );
-                });
+          return leHashHMACCorrespondantA(donnees.idUtilisateur).then((emailHacheAvecHMAC) => {
+            if (!emailHacheAvecHMAC) {
+              return new Promise((resolve) => resolve(null));
             }
-          );
+
+            const nouvellesDonnees = {
+              ...donnees,
+              idUtilisateur: emailHacheAvecHMAC,
+            };
+
+            return trx('journal_msc.evenements')
+              .where({ id })
+              .update({ donnees: nouvellesDonnees })
+              .then(() => {
+                compteur += 1;
+                process.stdout.write(
+                  `\rExécution des promesses: ${((compteur / evenements.length) * 100.0).toFixed(
+                    2
+                  )}% (${compteur}/${evenements.length})`
+                );
+              });
+          });
         });
 
         process.stdout.write('\n');
@@ -321,16 +259,11 @@ export class ConsoleAdministration {
 
   async sauvegardeLesEmpreintesDesSecretsDeHachage() {
     await this.knexMSC.transaction(async (trx) => {
-      const tousLesSecretsDeHachage = adaptateurEnvironnement
-        .hachage()
-        .tousLesSecretsDeHachage();
+      const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
       const maj = tousLesSecretsDeHachage.map(async ({ version, secret }) => {
         const empreinte = await this.adaptateurHachage.hacheBCrypt(secret);
-        return trx('secrets_hachage')
-          .insert({ version, empreinte })
-          .onConflict()
-          .ignore();
+        return trx('secrets_hachage').insert({ version, empreinte }).onConflict().ignore();
       });
 
       await Promise.all(maj);
@@ -347,11 +280,8 @@ export class ConsoleAdministration {
           cguAcceptees: donnees.cguAcceptees,
           infolettreAcceptee: donnees.infolettreAcceptee,
         };
-        const donneesChiffrees =
-          this.adaptateurChiffrement.chiffre(donneesEnClair);
-        return trx('utilisateurs')
-          .where({ email_hache })
-          .update({ donnees: donneesChiffrees });
+        const donneesChiffrees = this.adaptateurChiffrement.chiffre(donneesEnClair);
+        return trx('utilisateurs').where({ email_hache }).update({ donnees: donneesChiffrees });
       });
 
       await Promise.all(promesses);
@@ -363,51 +293,32 @@ export class ConsoleAdministration {
       "Rattrapage des résultats de tests ayant un utilisateur mais sans informations d'organisation\n"
     );
     await this.knexMSC.transaction(async (trx) => {
-      const resultatsAvecUneInfoManquante = await trx(
-        'resultats_test'
-      ).whereRaw(
+      const resultatsAvecUneInfoManquante = await trx('resultats_test').whereRaw(
         `email_utilisateur_hache IS NOT NULL 
         AND (region IS NULL 
           OR secteur IS NULL 
           OR taille_organisation IS NULL)`
       );
 
-      process.stdout.write(
-        `...${resultatsAvecUneInfoManquante.length} résultats à rattraper...\n`
-      );
+      process.stdout.write(`...${resultatsAvecUneInfoManquante.length} résultats à rattraper...\n`);
 
       const enCadence = pThrottle({ limit: 1, interval: 150 }); // rate limit à 7 requetes/s
       const promesses = resultatsAvecUneInfoManquante.map(
-        enCadence(
-          async ({
-            id,
-            region,
-            secteur,
-            taille_organisation,
-            email_utilisateur_hache,
-          }) => {
-            const utilisateur = await this.entrepotUtilisateur.parEmailHache(
-              email_utilisateur_hache
-            );
-            if (!utilisateur) {
-              return Promise.resolve();
-            }
-            const { codeRegion, codeSecteur, codeTrancheEffectif } =
-              (
-                await adaptateurRechercheEntreprise.rechercheOrganisations(
-                  utilisateur.siretEntite,
-                  null
-                )
-              )[0] ?? {};
-            return trx('resultats_test')
-              .where({ id })
-              .update({
-                region: region ?? codeRegion,
-                secteur: secteur ?? codeSecteur,
-                taille_organisation: taille_organisation ?? codeTrancheEffectif,
-              });
+        enCadence(async ({ id, region, secteur, taille_organisation, email_utilisateur_hache }) => {
+          const utilisateur = await this.entrepotUtilisateur.parEmailHache(email_utilisateur_hache);
+          if (!utilisateur) {
+            return Promise.resolve();
           }
-        )
+          const { codeRegion, codeSecteur, codeTrancheEffectif } =
+            (await adaptateurRechercheEntreprise.rechercheOrganisations(utilisateur.siretEntite, null))[0] ?? {};
+          return trx('resultats_test')
+            .where({ id })
+            .update({
+              region: region ?? codeRegion,
+              secteur: secteur ?? codeSecteur,
+              taille_organisation: taille_organisation ?? codeTrancheEffectif,
+            });
+        })
       );
       await Promise.all(promesses);
     });
@@ -417,14 +328,10 @@ export class ConsoleAdministration {
 
   async regenereEvenementsTestRealiseAvecId(persiste: boolean = false) {
     await this.knexJournal.transaction(async (trx) => {
-      await trx('journal_msc.evenements')
-        .where('type', 'TEST_REALISE')
-        .delete();
+      await trx('journal_msc.evenements').where('type', 'TEST_REALISE').delete();
     });
 
-    const journal = persiste
-      ? adaptateurJournalPostgres()
-      : adaptateurJournalMemoire;
+    const journal = persiste ? adaptateurJournalPostgres() : adaptateurJournalMemoire;
 
     type DonneesResultatPourRattrapage = {
       id: string;
@@ -436,30 +343,20 @@ export class ConsoleAdministration {
       date_realisation: Date | undefined;
     };
 
-    const resultats: DonneesResultatPourRattrapage[] =
-      (await this.knexMSC.transaction(async (trx) => {
-        return trx('resultats_test');
-      }))!;
+    const resultats: DonneesResultatPourRattrapage[] = (await this.knexMSC.transaction(async (trx) => {
+      return trx('resultats_test');
+    }))!;
 
     if (!resultats) {
       process.stdout.write('resultats est void\n');
       return;
     }
-    const afficheErreur = (resultat: DonneesResultatPourRattrapage) =>
-      `Erreur pour ${resultat.id}`;
+    const afficheErreur = (resultat: DonneesResultatPourRattrapage) => `Erreur pour ${resultat.id}`;
 
     await ConsoleAdministration.rattrapage(
       resultats,
       afficheErreur,
-      async ({
-        id,
-        region,
-        secteur,
-        taille_organisation,
-        reponses,
-        code_session_groupe,
-        date_realisation,
-      }) => {
+      async ({ id, region, secteur, taille_organisation, reponses, code_session_groupe, date_realisation }) => {
         await journal.consigneEvenement({
           type: 'TEST_REALISE',
           donnees: {
@@ -481,8 +378,6 @@ export class ConsoleAdministration {
   }
 
   async remplaceLaCleDeChiffrement(ancienneCle: string, nouvelleCle: string) {
-    await new MigrationChiffrement(
-      adaptateurEnvironnement
-    ).remplaceLaCleDeChiffrement(ancienneCle, nouvelleCle);
+    await new MigrationChiffrement(adaptateurEnvironnement).remplaceLaCleDeChiffrement(ancienneCle, nouvelleCle);
   }
 }

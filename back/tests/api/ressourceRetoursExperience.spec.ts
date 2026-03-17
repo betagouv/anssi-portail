@@ -4,10 +4,7 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc';
 import { RetourExperienceDonne } from '../../src/bus/evenements/retourExperienceDonne';
-import {
-  MessagerieInstantanee,
-  RetourExperience,
-} from '../../src/metier/messagerieInstantanee';
+import { MessagerieInstantanee, RetourExperience } from '../../src/metier/messagerieInstantanee';
 import { MockBusEvenement } from '../bus/busPourLesTests';
 import { configurationDeTestDuServeur } from './fauxObjets';
 
@@ -31,19 +28,15 @@ describe("La ressource des retours d'expérience", () => {
 
   describe('sur demande de création', () => {
     it('retourne un 201', async () => {
-      const reponse = await request(serveur)
-        .post('/api/retours-experience')
-        .send({
-          raison: 'pas-clair',
-        });
+      const reponse = await request(serveur).post('/api/retours-experience').send({
+        raison: 'pas-clair',
+      });
       assert.equal(reponse.status, 201);
     });
 
     it('envoie les données du questionnaire à mattermost', async () => {
       let retourExperienceEnvoye: RetourExperience | null = null;
-      messagerieInstantanee.notifieUnRetourExperience = async (
-        retourExperience: RetourExperience
-      ) => {
+      messagerieInstantanee.notifieUnRetourExperience = async (retourExperience: RetourExperience) => {
         retourExperienceEnvoye = retourExperience;
       };
 
@@ -62,17 +55,13 @@ describe("La ressource des retours d'expérience", () => {
 
     it('renvoie une erreur si la raison est invalide', async () => {
       let retourExperienceEnvoye: RetourExperience | null = null;
-      messagerieInstantanee.notifieUnRetourExperience = async (
-        retourExperience: RetourExperience
-      ) => {
+      messagerieInstantanee.notifieUnRetourExperience = async (retourExperience: RetourExperience) => {
         retourExperienceEnvoye = retourExperience;
       };
 
-      const reponse = await request(serveur)
-        .post('/api/retours-experience')
-        .send({
-          raison: 'raison-invalide',
-        });
+      const reponse = await request(serveur).post('/api/retours-experience').send({
+        raison: 'raison-invalide',
+      });
 
       assert.equal(reponse.status, 400);
       assert.equal(reponse.body.erreur, 'La raison est invalide');
@@ -80,33 +69,27 @@ describe("La ressource des retours d'expérience", () => {
     });
 
     it('renvoie une erreur si le mail est invalide', async () => {
-      const reponse = await request(serveur)
-        .post('/api/retours-experience')
-        .send({
-          emailDeContact: 'email-invalide',
-          raison: 'pas-clair',
-        });
+      const reponse = await request(serveur).post('/api/retours-experience').send({
+        emailDeContact: 'email-invalide',
+        raison: 'pas-clair',
+      });
 
       assert.equal(reponse.status, 400);
       assert.equal(reponse.body.erreur, "L'email est invalide");
     });
 
     it("ignore l'email s'il est vide", async () => {
-      const reponse = await request(serveur)
-        .post('/api/retours-experience')
-        .send({
-          emailDeContact: '',
-          raison: 'pas-clair',
-        });
+      const reponse = await request(serveur).post('/api/retours-experience').send({
+        emailDeContact: '',
+        raison: 'pas-clair',
+      });
 
       assert.equal(reponse.status, 201);
     });
 
     it('aseptise les paramètres', async () => {
       let retourExperienceEnvoye: RetourExperience | null = null;
-      messagerieInstantanee.notifieUnRetourExperience = async (
-        retourExperience: RetourExperience
-      ) => {
+      messagerieInstantanee.notifieUnRetourExperience = async (retourExperience: RetourExperience) => {
         retourExperienceEnvoye = retourExperience;
       };
 
@@ -119,11 +102,9 @@ describe("La ressource des retours d'expérience", () => {
     });
 
     it('accepte la raison pas-decisionnaire', async () => {
-      const reponse = await request(serveur)
-        .post('/api/retours-experience')
-        .send({
-          raison: 'pas-decisionnaire',
-        });
+      const reponse = await request(serveur).post('/api/retours-experience').send({
+        raison: 'pas-decisionnaire',
+      });
 
       assert.equal(reponse.status, 201);
     });
@@ -140,21 +121,15 @@ describe("La ressource des retours d'expérience", () => {
       });
 
       it('publie un événement sur le bus', async () => {
-        await request(serveur)
-          .post('/api/retours-experience')
-          .send(representation);
+        await request(serveur).post('/api/retours-experience').send(representation);
 
         busEvenements.aRecuUnEvenement(RetourExperienceDonne);
       });
 
       it("envoie la raison et l'email", async () => {
-        await request(serveur)
-          .post('/api/retours-experience')
-          .send(representation);
+        await request(serveur).post('/api/retours-experience').send(representation);
 
-        const evenement = busEvenements.recupereEvenement(
-          RetourExperienceDonne
-        );
+        const evenement = busEvenements.recupereEvenement(RetourExperienceDonne);
         assert.equal(evenement!.raison, 'pas-clair');
         assert.equal(evenement!.emailDeContact, 'mail@mail.com');
       });

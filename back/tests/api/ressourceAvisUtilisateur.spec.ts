@@ -4,10 +4,7 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc';
 import { AvisUtilisateurDonne } from '../../src/bus/evenements/avisUtilisateurDonne';
-import {
-  AvisUtilisateur,
-  MessagerieInstantanee,
-} from '../../src/metier/messagerieInstantanee';
+import { AvisUtilisateur, MessagerieInstantanee } from '../../src/metier/messagerieInstantanee';
 import { MockBusEvenement } from '../bus/busPourLesTests';
 import { configurationDeTestDuServeur } from './fauxObjets';
 
@@ -35,24 +32,18 @@ describe('La ressource avis utilisateur', () => {
 
   describe('sur demande POST', () => {
     it('retourne un 201', async () => {
-      const reponse = await request(serveur)
-        .post('/api/avis-utilisateur')
-        .send(avisUtilisateur);
+      const reponse = await request(serveur).post('/api/avis-utilisateur').send(avisUtilisateur);
 
       assert.equal(reponse.status, 201);
     });
 
     it('envoie les données à la messagerie instantannée', async () => {
       let avisUtilisateurEnvoye: AvisUtilisateur | undefined;
-      messagerieInstantanee.notifieUnAvisUtilisateur = async (
-        avisUtilisateur: AvisUtilisateur
-      ) => {
+      messagerieInstantanee.notifieUnAvisUtilisateur = async (avisUtilisateur: AvisUtilisateur) => {
         avisUtilisateurEnvoye = avisUtilisateur;
       };
 
-      await request(serveur)
-        .post('/api/avis-utilisateur')
-        .send(avisUtilisateur);
+      await request(serveur).post('/api/avis-utilisateur').send(avisUtilisateur);
 
       assert.deepEqual(avisUtilisateurEnvoye, {
         niveauDeSatisfaction: 2,
@@ -62,9 +53,7 @@ describe('La ressource avis utilisateur', () => {
     });
 
     it('publie un évènement sur le bus', async () => {
-      await request(serveur)
-        .post('/api/avis-utilisateur')
-        .send(avisUtilisateur);
+      await request(serveur).post('/api/avis-utilisateur').send(avisUtilisateur);
 
       const evenement = busEvenements.recupereEvenement(AvisUtilisateurDonne);
 
@@ -75,15 +64,10 @@ describe('La ressource avis utilisateur', () => {
     });
 
     it('renvoie une erreur si le niveau de satisfaction est invalide', async () => {
-      const reponse = await request(serveur)
-        .post('/api/avis-utilisateur')
-        .send({ niveauDeSatisfaction: 0 });
+      const reponse = await request(serveur).post('/api/avis-utilisateur').send({ niveauDeSatisfaction: 0 });
 
       assert.equal(reponse.status, 400);
-      assert.equal(
-        reponse.body.erreur,
-        'Le niveau de satisfaction est invalide'
-      );
+      assert.equal(reponse.body.erreur, 'Le niveau de satisfaction est invalide');
     });
 
     it('renvoie une erreur si le commentaire est vide', async () => {
@@ -106,9 +90,7 @@ describe('La ressource avis utilisateur', () => {
 
     it('asseptise le champ commentaire', async () => {
       let avisUtilisateurEnvoye: AvisUtilisateur | undefined;
-      messagerieInstantanee.notifieUnAvisUtilisateur = async (
-        avisUtilisateur: AvisUtilisateur
-      ) => {
+      messagerieInstantanee.notifieUnAvisUtilisateur = async (avisUtilisateur: AvisUtilisateur) => {
         avisUtilisateurEnvoye = avisUtilisateur;
       };
 

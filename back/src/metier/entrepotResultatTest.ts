@@ -17,9 +17,7 @@ export interface EntrepotResultatTest {
 
   metsAjour(resultatTest: ResultatTestMaturite): Promise<void>;
 
-  dernierPourUtilisateur(
-    utilisateur: Utilisateur
-  ): Promise<ResultatTestMaturite | undefined>;
+  dernierPourUtilisateur(utilisateur: Utilisateur): Promise<ResultatTestMaturite | undefined>;
 
   ceuxDeSessionGroupe(code: string): Promise<ResultatTestMaturite[]>;
 
@@ -28,7 +26,5 @@ export interface EntrepotResultatTest {
 
   pourUtilisateur(utilisateur: Utilisateur): Promise<ResultatTestMaturite[]>;
 
-  parFiltresEnOmettantUtilisateur(
-    filtres: FiltreResultatsTest
-  ): Promise<ResultatTestMaturite[]>;
+  parFiltresEnOmettantUtilisateur(filtres: FiltreResultatsTest): Promise<ResultatTestMaturite[]>;
 }

@@ -14,10 +14,7 @@ import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire';
 import { encodeSession } from '../cookie';
 import { fabriqueMiddleware } from '../../../src/api/middleware';
 import { MiseAJourFavorisUtilisateur } from '../../../src/bus/miseAJourFavorisUtilisateur';
-import {
-  fabriqueBusPourLesTests,
-  MockBusEvenement,
-} from '../../bus/busPourLesTests';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
 import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 
@@ -70,10 +67,7 @@ describe('La ressource des services et ressources favoris', () => {
     });
 
     it("retourne 400 si l'id est vide", async () => {
-      const reponse = await request(serveur)
-        .post('/api/favoris')
-        .set('Cookie', [cookieJeanneDupont])
-        .send({});
+      const reponse = await request(serveur).post('/api/favoris').set('Cookie', [cookieJeanneDupont]).send({});
 
       await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
 
@@ -86,8 +80,7 @@ describe('La ressource des services et ressources favoris', () => {
         .set('Cookie', [cookieJeanneDupont])
         .send({ idItemCyber: 'unId' });
 
-      const ceuxDeUtilisateur =
-        await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
+      const ceuxDeUtilisateur = await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
 
       assert.equal(reponse.status, 201);
       assert.equal(ceuxDeUtilisateur.length, 1);
@@ -101,13 +94,9 @@ describe('La ressource des services et ressources favoris', () => {
         .set('Cookie', [cookieJeanneDupont])
         .send({ idItemCyber: '/services/mon-service-cyber  ' });
 
-      const ceuxDeUtilisateur =
-        await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
+      const ceuxDeUtilisateur = await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
 
-      assert.equal(
-        ceuxDeUtilisateur[0].idItemCyber,
-        '/services/mon-service-cyber'
-      );
+      assert.equal(ceuxDeUtilisateur[0].idItemCyber, '/services/mon-service-cyber');
     });
   });
 
@@ -145,9 +134,7 @@ describe('La ressource des services et ressources favoris', () => {
         utilisateur: hectorDurant,
       });
 
-      const reponse = await request(serveur)
-        .get('/api/favoris')
-        .set('Cookie', [cookieJeanneDupont]);
+      const reponse = await request(serveur).get('/api/favoris').set('Cookie', [cookieJeanneDupont]);
 
       assert.equal(reponse.status, 200);
       assert.equal(reponse.body.length, 2);
@@ -166,9 +153,7 @@ describe('La ressource des services et ressources favoris', () => {
         .send({ idItemCyber: '/services/mon-service-service' });
 
       busEvenements.aRecuUnEvenement(MiseAJourFavorisUtilisateur);
-      const evenement = busEvenements.recupereEvenement(
-        MiseAJourFavorisUtilisateur
-      );
+      const evenement = busEvenements.recupereEvenement(MiseAJourFavorisUtilisateur);
       assert.equal(evenement!.utilisateur, jeanneDupont);
     });
   });

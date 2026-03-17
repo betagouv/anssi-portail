@@ -15,10 +15,7 @@ export const ressourceRetoursExperience = ({
       check('raison')
         .isIn(['pas-clair', 'pas-le-temps', 'pas-decisionnaire', 'autre'])
         .withMessage('La raison est invalide'),
-      check('emailDeContact')
-        .optional({ values: 'falsy' })
-        .isEmail()
-        .withMessage("L'email est invalide"),
+      check('emailDeContact').optional({ values: 'falsy' }).isEmail().withMessage("L'email est invalide"),
     ],
     middleware.valide(),
     middleware.aseptise('precision'),
@@ -29,9 +26,7 @@ export const ressourceRetoursExperience = ({
         emailDeContact,
         precision,
       });
-      await busEvenements.publie(
-        new RetourExperienceDonne({ raison, emailDeContact })
-      );
+      await busEvenements.publie(new RetourExperienceDonne({ raison, emailDeContact }));
       reponse.sendStatus(201);
     }
   );

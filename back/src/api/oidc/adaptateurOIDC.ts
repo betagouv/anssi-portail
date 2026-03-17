@@ -24,12 +24,8 @@ type JetonsOIDC = {
 export interface AdaptateurOIDC {
   genereDemandeAutorisation: () => Promise<DemandeAutorisation>;
   recupereJeton: (requete: Request) => Promise<JetonsOIDC>;
-  recupereInformationsUtilisateur: (
-    accessToken: string
-  ) => Promise<InformationsUtilisateur>;
-  genereDemandeDeconnexion: (
-    idToken: string
-  ) => Promise<{ url: string; state: string }>;
+  recupereInformationsUtilisateur: (accessToken: string) => Promise<InformationsUtilisateur>;
+  genereDemandeDeconnexion: (idToken: string) => Promise<{ url: string; state: string }>;
 }
 
 const configurationOidc = adaptateurEnvironnement.oidc();
@@ -69,8 +65,7 @@ const genereDemandeDeconnexion = async (idToken: string) => {
   const state = generators.state(32);
   const client = await recupereClient();
   const url = client.endSessionUrl({
-    post_logout_redirect_uri:
-      configurationOidc.urlRedirectionApresDeconnexion(),
+    post_logout_redirect_uri: configurationOidc.urlRedirectionApresDeconnexion(),
     id_token_hint: idToken,
     state,
   });
@@ -86,11 +81,10 @@ const recupereJeton = async (requete: Request) => {
   const params = client.callbackParams(requete);
 
   const { nonce, state } = requete.cookies.AgentConnectInfo;
-  const token = await client.callback(
-    configurationOidc.urlRedirectionApresAuthentification(),
-    params,
-    { nonce, state }
-  );
+  const token = await client.callback(configurationOidc.urlRedirectionApresAuthentification(), params, {
+    nonce,
+    state,
+  });
 
   if (!token.id_token || !token.access_token) {
     throw new Error("Les tokens n'ont pas pu être récupérés");
@@ -105,12 +99,7 @@ const recupereJeton = async (requete: Request) => {
 
 const recupereInformationsUtilisateur = async (accessToken: string) => {
   const client = await recupereClient();
-  const {
-    given_name: prenom,
-    usual_name: nom,
-    email,
-    siret,
-  } = await client.userinfo(accessToken);
+  const { given_name: prenom, usual_name: nom, email, siret } = await client.userinfo(accessToken);
   return { prenom, nom, email, siret } as InformationsUtilisateur;
 };
 

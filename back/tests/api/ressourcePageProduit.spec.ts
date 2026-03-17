@@ -5,10 +5,7 @@ import { join } from 'path';
 import { creeServeur } from '../../src/api/msc';
 import request from 'supertest';
 import assert from 'node:assert';
-import {
-  configurationDeTestDuServeur,
-  fauxFournisseurDeChemin,
-} from './fauxObjets';
+import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets';
 
 describe('La ressource page produit', () => {
   let serveur: Express;
@@ -24,17 +21,13 @@ describe('La ressource page produit', () => {
 
   describe("sur demande d'une page de service", () => {
     it('répond 200', async () => {
-      const reponse = await request(serveur).get(
-        '/services/mon-service-securise'
-      );
+      const reponse = await request(serveur).get('/services/mon-service-securise');
 
       assert.equal(reponse.status, 200);
     });
 
     it('renvoie un contenu html', async () => {
-      const reponse = await request(serveur).get(
-        '/services/mon-service-securise'
-      );
+      const reponse = await request(serveur).get('/services/mon-service-securise');
 
       assert.notEqual(reponse.headers['content-type'], undefined);
       assert.match(reponse.headers['content-type'], /html/);
@@ -43,10 +36,7 @@ describe('La ressource page produit', () => {
     it('sers le fichier html de jekyll', async () => {
       let idProduitDemande: string;
       let repertoireProduitsDemande: string;
-      fournisseurChemin.cheminProduitJekyll = (
-        repertoireProduits: string,
-        idProduit: string
-      ) => {
+      fournisseurChemin.cheminProduitJekyll = (repertoireProduits: string, idProduit: string) => {
         idProduitDemande = idProduit;
         repertoireProduitsDemande = repertoireProduits;
         return join(process.cwd(), 'tests', 'ressources', 'factice.html');
@@ -60,10 +50,7 @@ describe('La ressource page produit', () => {
 
     it("aseptise l'id du produit", async () => {
       let idProduitDemande: string;
-      fournisseurChemin.cheminProduitJekyll = (
-        _: string,
-        idProduit: string
-      ) => {
+      fournisseurChemin.cheminProduitJekyll = (_: string, idProduit: string) => {
         idProduitDemande = idProduit;
         return join(process.cwd(), 'tests', 'ressources', 'factice.html');
       };
@@ -77,10 +64,7 @@ describe('La ressource page produit', () => {
   it("sers un fichier sur demande d'une ressource", async () => {
     let idProduitDemande: string;
     let repertoireProduitsDemande: string;
-    fournisseurChemin.cheminProduitJekyll = (
-      repertoireProduits: string,
-      idProduit: string
-    ) => {
+    fournisseurChemin.cheminProduitJekyll = (repertoireProduits: string, idProduit: string) => {
       idProduitDemande = idProduit;
       repertoireProduitsDemande = repertoireProduits;
       return join(process.cwd(), 'tests', 'ressources', 'factice.html');

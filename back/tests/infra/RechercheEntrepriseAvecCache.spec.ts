@@ -32,10 +32,7 @@ describe('La recherche entreprise avec cache', () => {
   });
 
   it('retourne le résultat de la recherche entreprise décorée', async () => {
-    const resultat = await rechercheEntrepriseAvecCache.rechercheOrganisations(
-      'siret',
-      '33'
-    );
+    const resultat = await rechercheEntrepriseAvecCache.rechercheOrganisations('siret', '33');
 
     assert.deepEqual(resultat, resultatRecherchePour('siret', '33'));
   });
@@ -48,14 +45,8 @@ describe('La recherche entreprise avec cache', () => {
   });
 
   it('distingue les éléments à mettre en cache', async () => {
-    const resultat1 = await rechercheEntrepriseAvecCache.rechercheOrganisations(
-      'siret1',
-      '33'
-    );
-    const resultat2 = await rechercheEntrepriseAvecCache.rechercheOrganisations(
-      'siret2',
-      null
-    );
+    const resultat1 = await rechercheEntrepriseAvecCache.rechercheOrganisations('siret1', '33');
+    const resultat2 = await rechercheEntrepriseAvecCache.rechercheOrganisations('siret2', null);
 
     assert.deepEqual(resultat1, resultatRecherchePour('siret1', '33'));
     assert.deepEqual(resultat2, resultatRecherchePour('siret2', null));

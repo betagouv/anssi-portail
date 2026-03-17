@@ -59,10 +59,6 @@ export default defineConfig({
       compilerOptions: { customElement: true },
       emitCss: true,
     }),
-    remplaceVersionsDansPhp(
-      version_lab_ui_kit ?? '1.0',
-      process.env.VERSION ?? '1.0',
-      process.env.ENV ?? 'prod'
-    ),
+    remplaceVersionsDansPhp(version_lab_ui_kit ?? '1.0', process.env.VERSION ?? '1.0', process.env.ENV ?? 'prod'),
   ],
 });

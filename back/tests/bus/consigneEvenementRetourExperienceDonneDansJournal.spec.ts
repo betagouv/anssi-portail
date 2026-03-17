@@ -67,10 +67,7 @@ describe("L'abonnement qui consigne le don d'un retour d’expérience dans le j
       })
     );
 
-    assert.equal(
-      evenementRecu!.donnees.idUtilisateur,
-      `jean@dupont.fr-hacheHMAC`
-    );
+    assert.equal(evenementRecu!.donnees.idUtilisateur, `jean@dupont.fr-hacheHMAC`);
   });
 
   it("ne consigne pas d'email si celui-ci est absent", async () => {
@@ -81,9 +78,7 @@ describe("L'abonnement qui consigne le don d'un retour d’expérience dans le j
       },
     };
 
-    await consigneEvenementDansJournal()(
-      new RetourExperienceDonne({ raison: 'x' })
-    );
+    await consigneEvenementDansJournal()(new RetourExperienceDonne({ raison: 'x' }));
 
     assert.equal(evenementRecu!.donnees.idUtilisateur, undefined);
   });

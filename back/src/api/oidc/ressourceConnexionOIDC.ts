@@ -4,8 +4,7 @@ import { ConfigurationServeur } from '../configurationServeur';
 const ressourceConnexionOIDC = (configurationServeur: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get('/', async (_requete, reponse) => {
-    const demandeAutorisation =
-      await configurationServeur.adaptateurOIDC.genereDemandeAutorisation();
+    const demandeAutorisation = await configurationServeur.adaptateurOIDC.genereDemandeAutorisation();
 
     const { url, state, nonce } = demandeAutorisation;
     reponse.cookie(

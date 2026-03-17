@@ -1,11 +1,11 @@
 import type { Knex } from 'knex';
 
 type Correspondance = {
-  origine:string;
-  destinations:string[];
-}
+  origine: string;
+  destinations: string[];
+};
 
-const correspondancesUp:Correspondance[] = [
+const correspondancesUp: Correspondance[] = [
   {
     origine: '/ressources/cyber-13questions',
     destinations: ['/guides/la-cybersecurite-pour-les-tpepme-en-13-questions'],
@@ -35,25 +35,18 @@ const correspondancesUp:Correspondance[] = [
 async function migreFavoris(knex: Knex, correspondances: Correspondance[]) {
   await knex.transaction(async (trx) => {
     const origines = correspondances.map((c) => c.origine);
-    const favorisDeGuide = await trx('favoris').whereIn(
-      'id_item_cyber',
-      origines
-    );
+    const favorisDeGuide = await trx('favoris').whereIn('id_item_cyber', origines);
 
-    const maj = favorisDeGuide.flatMap(
-      ({ id_item_cyber, date_ajout, email_utilisateur_hache }) => {
-        const destinations =
-          correspondances.find((c) => c.origine === id_item_cyber)
-            ?.destinations ?? [];
-        return destinations.map((destination) => {
-          return trx('favoris').insert({
-            id_item_cyber: destination,
-            date_ajout,
-            email_utilisateur_hache,
-          });
+    const maj = favorisDeGuide.flatMap(({ id_item_cyber, date_ajout, email_utilisateur_hache }) => {
+      const destinations = correspondances.find((c) => c.origine === id_item_cyber)?.destinations ?? [];
+      return destinations.map((destination) => {
+        return trx('favoris').insert({
+          id_item_cyber: destination,
+          date_ajout,
+          email_utilisateur_hache,
         });
-      }
-    );
+      });
+    });
 
     await Promise.all(maj);
 

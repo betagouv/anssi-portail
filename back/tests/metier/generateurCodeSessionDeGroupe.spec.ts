@@ -10,9 +10,7 @@ describe('Le générateur aléatoire de code de session de groupe', () => {
 
   beforeEach(() => {
     entrepotSessionsDeGroupe = new EntrepotSessionDeGroupeMemoire();
-    generateur = new GenerateurAleatoireCodeSessionDeGroupe(
-      entrepotSessionsDeGroupe
-    );
+    generateur = new GenerateurAleatoireCodeSessionDeGroupe(entrepotSessionsDeGroupe);
   });
 
   it('génère un code de 6 caractères', async () => {
@@ -49,9 +47,7 @@ describe('Le générateur aléatoire de code de session de groupe', () => {
     let essai = 0;
     let aTireUnCodeExistant: boolean = false;
     let codeInexistantDansLEntrepot: string = '';
-    entrepotSessionsDeGroupe.parCode = async (
-      code: string
-    ): Promise<SessionDeGroupe | undefined> => {
+    entrepotSessionsDeGroupe.parCode = async (code: string): Promise<SessionDeGroupe | undefined> => {
       if (essai === 0) {
         aTireUnCodeExistant = true;
         essai++;

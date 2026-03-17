@@ -92,7 +92,6 @@
 <DialogueSortieDiagnostic bind:this={dialogueSortie} />
 
 <article class="page-demande-aide-mon-aide-cyber">
-
   <section class="encart-presentation">
     <div class="illustration">
       <IllustrationCyberDepart />
@@ -115,7 +114,8 @@
         <p>
           <b>Prenez votre cyberdépart !</b> Bénéficiez d’un
           <b>premier diagnostic gratuit accompagné d’un Aidant cyber</b>
-          et recevez <b>6 recommandations prioritaires</b> à mettre en place pour améliorer la cybersécurité de votre organisation.
+          et recevez <b>6 recommandations prioritaires</b> à mettre en place pour
+          améliorer la cybersécurité de votre organisation.
         </p>
         <div class="zone-tags">
           <span class="tag"
@@ -203,10 +203,10 @@
     .illustration {
       display: flex;
       flex-direction: column;
-      position:absolute;
+      position: absolute;
       @include a-partir-de(md) {
         left: calc(50vw + 30px);
-        top:24px;
+        top: 24px;
         width: auto;
         height: calc(100% - 48px);
       }

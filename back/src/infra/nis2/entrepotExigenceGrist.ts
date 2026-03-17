@@ -1,4 +1,5 @@
 import axios from 'axios';
+import knex, { QueryBuilder } from 'knex';
 import { EntrepotExigence } from '../../metier/nis2/entrepotExigence';
 import {
   CategorieEntite,
@@ -15,7 +16,6 @@ import {
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement';
 import { ClientHttp } from '../clientHttp';
 import { EntrepotGrist, ReponseGrist } from '../entrepotGrist';
-import knex, { QueryBuilder } from 'knex';
 
 export type ExigenceGrist = {
   fields: {
@@ -51,9 +51,7 @@ type Croisements = {
   };
 };
 
-export class EntrepotExigenceGrist
-  extends EntrepotGrist<ExigenceGrist>
-  implements EntrepotExigence {
+export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implements EntrepotExigence {
   private readonly urlDocument: string;
   private readonly croisements: Croisements;
   constructor({
@@ -64,12 +62,7 @@ export class EntrepotExigenceGrist
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
     const configGrist = adaptateurEnvironnement.grist();
-    super(
-      clientHttp,
-      '',
-      configGrist.nis2().cleApi(),
-      configGrist.dureeCacheEnSecondes()
-    );
+    super(clientHttp, '', configGrist.nis2().cleApi(), configGrist.dureeCacheEnSecondes());
     this.croisements = {
       AE: {
         table: 'AE_2690',
@@ -103,12 +96,7 @@ export class EntrepotExigenceGrist
       },
       ISO: {
         table: 'ISO_27001_27002_2022',
-        champs: [
-          'source.Contenu',
-          'source.Ref_ISO_27001_27002 as Reference',
-          'source.Norme',
-          'source.Chapitre',
-        ],
+        champs: ['source.Contenu', 'source.Ref_ISO_27001_27002 as Reference', 'source.Norme', 'source.Chapitre'],
         AE: undefined,
         CyFun23: undefined,
         ISO: undefined,
@@ -148,39 +136,20 @@ export class EntrepotExigenceGrist
     this.urlDocument = `${configGrist.baseURL()}/api/docs/${configGrist.nis2().idDocument()}`;
   }
 
-  parReferentiel(
-    referentiel: 'NIS2',
-    cible?: Referentiel
-  ): Promise<ExigenceNIS2[]>;
-  parReferentiel(
-    referentiel: 'ISO',
-    cible?: Referentiel
-  ): Promise<ExigenceISO[]>;
+  parReferentiel(referentiel: 'NIS2', cible?: Referentiel): Promise<ExigenceNIS2[]>;
+  parReferentiel(referentiel: 'ISO', cible?: Referentiel): Promise<ExigenceISO[]>;
   parReferentiel(referentiel: 'AE', cible?: Referentiel): Promise<ExigenceAE[]>;
-  parReferentiel(
-    referentiel: 'CyFun23',
-    cible?: Referentiel
-  ): Promise<ExigenceCyFun23[]>;
-  async parReferentiel(
-    referentiel: Referentiel,
-    cible?: Referentiel
-  ): Promise<Exigence[]> {
+  parReferentiel(referentiel: 'CyFun23', cible?: Referentiel): Promise<ExigenceCyFun23[]>;
+  async parReferentiel(referentiel: Referentiel, cible?: Referentiel): Promise<Exigence[]> {
     const requete = this.construitRequeteSQL(referentiel, cible);
 
-    const exigences = await this.appelleGrist(
-      {},
-      `${this.urlDocument}/sql?q=${requete}`
-    );
+    const exigences = await this.appelleGrist({}, `${this.urlDocument}/sql?q=${requete}`);
 
-    const fabriqueCorrespondance = (
-      exigenceGrist: ExigenceGrist
-    ): Correspondance =>
+    const fabriqueCorrespondance = (exigenceGrist: ExigenceGrist): Correspondance =>
       new Correspondance(
         this.versNiveau(exigenceGrist.fields.Niveau),
         exigenceGrist.fields.Observations,
-        exigenceGrist.fields.ExigencesCible
-          ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[])
-          : []
+        exigenceGrist.fields.ExigencesCible ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[]) : []
       );
 
     if (referentiel === 'NIS2') {
@@ -191,12 +160,7 @@ export class EntrepotExigenceGrist
           thematique: exigenceGrist.fields.Thematique ?? '',
           entitesCible: exigenceGrist.fields.EIEE
             ? (JSON.parse(exigenceGrist.fields.EIEE) as string[])
-              .map(
-                (categorie) =>
-                  ({ EI: 'EntiteImportante', EE: 'EntiteEssentielle' })[
-                  categorie
-                  ] as CategorieEntite
-              )
+              .map((categorie) => ({ EI: 'EntiteImportante', EE: 'EntiteEssentielle' })[categorie] as CategorieEntite)
               .filter((c) => c !== undefined)
             : [],
           objectifSecurite: exigenceGrist.fields.Objectif_de_securite ?? '',
@@ -234,9 +198,7 @@ export class EntrepotExigenceGrist
           reference: exigenceGrist.fields.Reference,
           contenu: exigenceGrist.fields.Contenu,
           fonction: this.traduitFonction(exigenceGrist.fields.Fonction),
-          niveauAssurance: this.traduitNiveauAssurance(
-            exigenceGrist.fields.NiveauAssurance
-          ),
+          niveauAssurance: this.traduitNiveauAssurance(exigenceGrist.fields.NiveauAssurance),
           estMesureCle: Boolean(exigenceGrist.fields.EstMesureCle),
           correspondance: fabriqueCorrespondance(exigenceGrist),
         });
@@ -276,9 +238,7 @@ export class EntrepotExigenceGrist
     }
   }
 
-  private traduitNiveauAssurance(
-    niveau?: string
-  ): CyFun23NiveauAssurance | undefined {
+  private traduitNiveauAssurance(niveau?: string): CyFun23NiveauAssurance | undefined {
     switch (niveau) {
       case 'Basic':
         return 'Basique';
@@ -298,26 +258,16 @@ export class EntrepotExigenceGrist
     });
     const champs: QueryBuilder[] = [...this.croisements[source].champs];
     if (source === 'ISO') {
-      constructeurDeRequete
-        .where('source.Norme', 'ISO 27002')
-        .orWhere('source.Chapitre', '<>', '');
+      constructeurDeRequete.where('source.Norme', 'ISO 27002').orWhere('source.Chapitre', '<>', '');
     }
     const croisement = this.croisements[source][cible ?? source];
     if (croisement) {
-      constructeurDeRequete.join(
-        { cr: croisement.nomTableAssociation },
-        'source.id',
-        'cr.Reference_source'
-      );
+      constructeurDeRequete.join({ cr: croisement.nomTableAssociation }, 'source.id', 'cr.Reference_source');
       champs.push(
         'cr.Correspondance as Niveau',
         'cr.Commentaires_externes as Observations',
         k({ cible: croisement.nomTableCible })
-          .where(
-            'cible.id',
-            'IN',
-            k.from(k.raw(`json_each (cr.References_cibles)`)).select('value')
-          )
+          .where('cible.id', 'IN', k.from(k.raw(`json_each (cr.References_cibles)`)).select('value'))
           .select(
             k.raw(
               `json_group_array (json_object ('reference', cible.${croisement.nomColonneReferenceCible}, 'contenu', cible.Contenu))`

@@ -3,7 +3,8 @@ import request from 'supertest';
 import { Express } from 'express';
 import { creeServeur } from '../../../src/api/msc';
 import {
-  configurationDeTestDuServeur, fauxAdaptateurEnvironnement,
+  configurationDeTestDuServeur,
+  fauxAdaptateurEnvironnement,
   fauxAdaptateurJWT,
   fauxFournisseurDeChemin,
   fauxMiddleware,
@@ -12,10 +13,7 @@ import assert from 'node:assert';
 import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire';
 import { encodeSession } from '../cookie';
 import { fabriqueMiddleware } from '../../../src/api/middleware';
-import {
-  fabriqueBusPourLesTests,
-  MockBusEvenement,
-} from '../../bus/busPourLesTests';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
 import { MiseAJourFavorisUtilisateur } from '../../../src/bus/miseAJourFavorisUtilisateur';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { jeanneDupont } from '../objetsPretsALEmploi';
@@ -42,7 +40,7 @@ describe('La ressource des services et ressources favoris', () => {
       middleware: fabriqueMiddleware({
         adaptateurJWT: fauxAdaptateurJWT,
         fournisseurChemin: fauxFournisseurDeChemin,
-        adaptateurEnvironnement: fauxAdaptateurEnvironnement
+        adaptateurEnvironnement: fauxAdaptateurEnvironnement,
       }),
       busEvenements,
       entrepotFavori,
@@ -65,9 +63,7 @@ describe('La ressource des services et ressources favoris', () => {
         },
       });
 
-      await request(serveur).delete(
-        `/api/favoris/${encodeURIComponent('/services/mon-super-service')}`
-      );
+      await request(serveur).delete(`/api/favoris/${encodeURIComponent('/services/mon-super-service')}`);
 
       assert.equal(middelwareAppele, true);
     });
@@ -79,9 +75,7 @@ describe('La ressource des services et ressources favoris', () => {
       });
 
       const reponse = await request(serveur)
-        .delete(
-          `/api/favoris/${encodeURIComponent('/services/mon-super-service')}`
-        )
+        .delete(`/api/favoris/${encodeURIComponent('/services/mon-super-service')}`)
         .set('Cookie', [cookieJeanneDupont]);
 
       assert.equal(reponse.statusCode, 200);
@@ -95,9 +89,7 @@ describe('La ressource des services et ressources favoris', () => {
         utilisateur: jeanneDupont,
       });
 
-      await request(serveur)
-        .delete(`/api/favoris/unId<truc`)
-        .set('Cookie', [cookieJeanneDupont]);
+      await request(serveur).delete(`/api/favoris/unId<truc`).set('Cookie', [cookieJeanneDupont]);
 
       const favoris = await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
       assert.equal(favoris.length, 0);
@@ -110,15 +102,11 @@ describe('La ressource des services et ressources favoris', () => {
       });
 
       await request(serveur)
-        .delete(
-          `/api/favoris/${encodeURIComponent('/services/mon-super-service')}`
-        )
+        .delete(`/api/favoris/${encodeURIComponent('/services/mon-super-service')}`)
         .set('Cookie', [cookieJeanneDupont]);
 
       busEvenements.aRecuUnEvenement(MiseAJourFavorisUtilisateur);
-      const evenement = busEvenements.recupereEvenement(
-        MiseAJourFavorisUtilisateur
-      );
+      const evenement = busEvenements.recupereEvenement(MiseAJourFavorisUtilisateur);
       assert.equal(evenement!.utilisateur, jeanneDupont);
     });
   });

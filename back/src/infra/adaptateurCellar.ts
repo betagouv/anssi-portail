@@ -16,29 +16,20 @@ export type FluxCellar = {
 export type CleDuBucket = 'RESSOURCES_CYBER' | 'GUIDES' | 'VISAS';
 
 export interface AdaptateurCellar {
-  get(
-    nomDuFichier: string,
-    cleDuBucket: CleDuBucket
-  ): Promise<DocumentCellar | undefined>;
-  getStream(
-    nomDuFichier: string,
-    cleDuBucket: CleDuBucket
-  ): Promise<FluxCellar | undefined>;
+  get(nomDuFichier: string, cleDuBucket: CleDuBucket): Promise<DocumentCellar | undefined>;
+  getStream(nomDuFichier: string, cleDuBucket: CleDuBucket): Promise<FluxCellar | undefined>;
 
   existe(nomDuFichier: string, cleDuBucket: CleDuBucket): Promise<boolean>;
 }
 
-export const adaptateurCellar = (
-  adaptateurEnvironnement: AdaptateurEnvironnement
-): AdaptateurCellar => ({
+export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnement): AdaptateurCellar => ({
   async get(nomDuFichier: string, cleDuBucket: CleDuBucket) {
     try {
       const reponse = await axios.get(
         `${selectionneURLCellarPourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
         { responseType: 'arraybuffer' }
       );
-      const typeDeContenu =
-        reponse.headers['content-type'] ?? 'application/octet-stream';
+      const typeDeContenu = reponse.headers['content-type'] ?? 'application/octet-stream';
       return {
         contenu: Buffer.from(reponse.data),
         typeDeContenu,
@@ -59,8 +50,7 @@ export const adaptateurCellar = (
       );
       return {
         flux: reponse.data,
-        typeDeContenu:
-          reponse.headers['content-type'] ?? 'application/octet-stream',
+        typeDeContenu: reponse.headers['content-type'] ?? 'application/octet-stream',
         tailleDuContenu: Number(reponse.headers['content-length']),
       };
     } catch (erreur: Error | unknown) {
@@ -73,9 +63,7 @@ export const adaptateurCellar = (
 
   async existe(nomDuFichier, cleDuBucket): Promise<boolean> {
     try {
-      await axios.head(
-        `${selectionneURLCellarPourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`
-      );
+      await axios.head(`${selectionneURLCellarPourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`);
       return true;
     } catch {
       return false;

@@ -19,10 +19,7 @@ export type CorpsDemandeAide = {
   validationCGU: boolean;
 };
 
-const ressourceDemandesAide = ({
-  adaptateurMonAideCyber,
-  middleware,
-}: ConfigurationServeur): Router => {
+const ressourceDemandesAide = ({ adaptateurMonAideCyber, middleware }: ConfigurationServeur): Router => {
   const routeur = Router();
 
   routeur.options('/', cors());
@@ -43,14 +40,8 @@ const ressourceDemandesAide = ({
     check('entiteAidee.siret')
       .matches(/^\d{14}$/)
       .withMessage('Veuillez saisir un SIRET valide.'),
-    body('entiteAidee.raisonSociale')
-      .isString()
-      .notEmpty()
-      .withMessage('Veuillez saisir une raison sociale valide.'),
-    body('entiteAidee.email')
-      .notEmpty()
-      .isEmail()
-      .withMessage('Veuillez saisir un email valide.'),
+    body('entiteAidee.raisonSociale').isString().notEmpty().withMessage('Veuillez saisir une raison sociale valide.'),
+    body('entiteAidee.email').notEmpty().isEmail().withMessage('Veuillez saisir un email valide.'),
     body('emailAidant')
       .optional({ checkFalsy: true })
       .isEmail()
@@ -74,13 +65,7 @@ const ressourceDemandesAide = ({
     middleware.valide(),
     async (requete: CorpsDeRequeteTypee<CorpsDemandeAide>, reponse) => {
       try {
-        const {
-          emailAidant,
-          identifiantAidant,
-          siretAidant,
-          entiteAidee,
-          origine,
-        } = requete.body;
+        const { emailAidant, identifiantAidant, siretAidant, entiteAidee, origine } = requete.body;
         const { email, departement, raisonSociale, siret } = entiteAidee;
         await adaptateurMonAideCyber.creeDemandeAide({
           ...(origine && { origine }),

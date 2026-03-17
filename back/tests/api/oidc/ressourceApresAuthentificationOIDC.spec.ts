@@ -46,9 +46,7 @@ describe('La ressource apres authentification OIDC', () => {
     });
 
     const requeteGet = () =>
-      request(serveur)
-        .get('/oidc/apres-authentification')
-        .set('Cookie', ['AgentConnectInfo={}']);
+      request(serveur).get('/oidc/apres-authentification').set('Cookie', ['AgentConnectInfo={}']);
 
     describe("si l'utilisateur est connu", () => {
       beforeEach(() => {
@@ -96,9 +94,7 @@ describe('La ressource apres authentification OIDC', () => {
         adaptateurOIDC.recupereJeton = async () => {
           return { idToken: 'xx', accessToken: 'y', connexionAvecMFA: false };
         };
-        adaptateurOIDC.recupereInformationsUtilisateur = async (
-          accessToken
-        ) => {
+        adaptateurOIDC.recupereInformationsUtilisateur = async (accessToken) => {
           if (accessToken === 'y') {
             return {
               prenom: 'Jeanne',
@@ -121,8 +117,7 @@ describe('La ressource apres authentification OIDC', () => {
       });
 
       it('ajoute un token JWT à la session', async () => {
-        adaptateurJWT.genereToken = (donnees: Record<string, unknown>) =>
-          `tokenJWT-${donnees.email}`;
+        adaptateurJWT.genereToken = (donnees: Record<string, unknown>) => `tokenJWT-${donnees.email}`;
 
         const reponse = await requeteGet();
 
@@ -183,10 +178,7 @@ describe('La ressource apres authentification OIDC', () => {
         const reponse = await requeteGet();
 
         assert.equal(reponse.status, 302);
-        assert.equal(
-          reponse.headers.location,
-          '/creation-compte?token=tokenJWT-'
-        );
+        assert.equal(reponse.headers.location, '/creation-compte?token=tokenJWT-');
       });
     });
   });

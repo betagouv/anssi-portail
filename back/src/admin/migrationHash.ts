@@ -1,10 +1,7 @@
 import knex from 'knex';
 import config from '../../knexfile';
 import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
-import {
-  AdaptateurHachage,
-  fabriqueAdaptateurHachage,
-} from '../infra/adaptateurHachage';
+import { AdaptateurHachage, fabriqueAdaptateurHachage } from '../infra/adaptateurHachage';
 import {
   fabriqueServiceVerificationCoherenceSecretsHachage,
   ServiceCoherenceSecretsDeHachage,
@@ -23,7 +20,7 @@ export const tenteDeHacherAvecUnNouveauSel = (
   if (!chaine) return undefined;
   const [versionActuelle, hashActuel] = chaine.split(':');
   if (versionActuelle !== versionPrecedenteAttendue) {
-    console.warn("Incohérence de version détectée pour hacher la chaine : ", chaine);
+    console.warn('Incohérence de version détectée pour hacher la chaine : ', chaine);
     return chaine;
   }
   const nouvelleVersion = `${versionActuelle}-v${version}`;
@@ -49,86 +46,55 @@ export class MigrationHash {
     this.knexMSCJournal = knex(configDuJournal);
     this.knexMSC = knex(config);
     if (!adaptateurEnvironnement.maintenance().actif()) {
-      throw new Error(
-        `La migration des hash requiert que l'application soit en mode maintenance !`
-      );
+      throw new Error(`La migration des hash requiert que l'application soit en mode maintenance !`);
     }
     this.adaptateurHachage = fabriqueAdaptateurHachage({
       adaptateurEnvironnement,
     });
 
-    this.serviceVerificationSecretsHachage =
-      fabriqueServiceVerificationCoherenceSecretsHachage({
-        adaptateurEnvironnement,
-        entrepotSecretHachage: new EntrepotSecretHachagePostgres(),
-        adaptateurHachage: this.adaptateurHachage,
-      });
+    this.serviceVerificationSecretsHachage = fabriqueServiceVerificationCoherenceSecretsHachage({
+      adaptateurEnvironnement,
+      entrepotSecretHachage: new EntrepotSecretHachagePostgres(),
+      adaptateurHachage: this.adaptateurHachage,
+    });
   }
 
   async migreLesHashDeMsc(fonctionDeMigration: FonctionDeMigration) {
     await this.knexMSC.transaction(async (trx) => {
-      const utilisateurs = await trx<{ email_hache: string }>(
-        'utilisateurs'
-      ).distinct('email_hache');
-      const majUtilisateurs = utilisateurs.map(
-        ({ email_hache: emailHacheActuel }) => {
-          const emailHacheNouveau = fonctionDeMigration(emailHacheActuel);
+      const utilisateurs = await trx<{ email_hache: string }>('utilisateurs').distinct('email_hache');
+      const majUtilisateurs = utilisateurs.map(({ email_hache: emailHacheActuel }) => {
+        const emailHacheNouveau = fonctionDeMigration(emailHacheActuel);
 
-          return trx('utilisateurs')
-            .where({ email_hache: emailHacheActuel })
-            .update({ email_hache: emailHacheNouveau });
-        }
-      );
+        return trx('utilisateurs').where({ email_hache: emailHacheActuel }).update({ email_hache: emailHacheNouveau });
+      });
 
-      const favoris = await trx<{ email_utilisateur_hache: string }>(
-        'favoris'
-      ).distinct('email_utilisateur_hache');
-      const majFavoris = favoris.map(
-        ({ email_utilisateur_hache: emailUtilisateurActuel }) => {
-          const emailUtilisateurNouveau = fonctionDeMigration(
-            emailUtilisateurActuel
-          );
+      const favoris = await trx<{ email_utilisateur_hache: string }>('favoris').distinct('email_utilisateur_hache');
+      const majFavoris = favoris.map(({ email_utilisateur_hache: emailUtilisateurActuel }) => {
+        const emailUtilisateurNouveau = fonctionDeMigration(emailUtilisateurActuel);
 
-          return trx('favoris')
-            .where({ email_utilisateur_hache: emailUtilisateurActuel })
-            .update({
-              email_utilisateur_hache: emailUtilisateurNouveau,
-            });
-        }
-      );
+        return trx('favoris').where({ email_utilisateur_hache: emailUtilisateurActuel }).update({
+          email_utilisateur_hache: emailUtilisateurNouveau,
+        });
+      });
 
-      const resultatsTests = await trx<{ email_utilisateur_hache: string }>(
-        'resultats_test'
-      )
+      const resultatsTests = await trx<{ email_utilisateur_hache: string }>('resultats_test')
         .distinct('email_utilisateur_hache')
         .whereNotNull('email_utilisateur_hache');
-      const majResultatsTests = resultatsTests.map(
-        ({ email_utilisateur_hache: emailUtilisateurActuel }) => {
-          const emailUtilisateurNouveau = fonctionDeMigration(
-            emailUtilisateurActuel
-          );
+      const majResultatsTests = resultatsTests.map(({ email_utilisateur_hache: emailUtilisateurActuel }) => {
+        const emailUtilisateurNouveau = fonctionDeMigration(emailUtilisateurActuel);
 
-          return trx('resultats_test')
-            .where({ email_utilisateur_hache: emailUtilisateurActuel })
-            .update({
-              email_utilisateur_hache: emailUtilisateurNouveau,
-            });
-        }
-      );
+        return trx('resultats_test').where({ email_utilisateur_hache: emailUtilisateurActuel }).update({
+          email_utilisateur_hache: emailUtilisateurNouveau,
+        });
+      });
 
-      await Promise.all([
-        ...majFavoris,
-        ...majResultatsTests,
-        ...majUtilisateurs,
-      ]);
+      await Promise.all([...majFavoris, ...majResultatsTests, ...majUtilisateurs]);
     });
   }
 
   async migreLesEvenementsDuJournal(fonctionDeMigration: FonctionDeMigration) {
     await this.knexMSCJournal.transaction(async (trx) => {
-      const evenements = await trx('journal_msc.evenements').whereRaw(
-        "donnees->>'idUtilisateur' IS NOT NULL"
-      );
+      const evenements = await trx('journal_msc.evenements').whereRaw("donnees->>'idUtilisateur' IS NOT NULL");
       process.stdout.write('\n');
       let compteur = 0;
 
@@ -179,12 +145,8 @@ export class MigrationHash {
       .map(({ version: numVersion }) => `v${numVersion}`)
       .join('-');
 
-    console.log(
-      `Version précédente de sel attendue pour les données à migrer : ${versionPrecedenteAttendue}`
-    );
-    console.log(
-      `Nouvelle version après migration : ${versionPrecedenteAttendue}-v${version}`
-    );
+    console.log(`Version précédente de sel attendue pour les données à migrer : ${versionPrecedenteAttendue}`);
+    console.log(`Nouvelle version après migration : ${versionPrecedenteAttendue}-v${version}`);
 
     const appliqueNouveauSel: FonctionDeMigration = (chaine) =>
       tenteDeHacherAvecUnNouveauSel(
@@ -195,15 +157,11 @@ export class MigrationHash {
         versionPrecedenteAttendue
       );
 
-    console.log(
-      'Migration des Hash de MSC (utilisateurs, favoris et resultats test)...'
-    );
+    console.log('Migration des Hash de MSC (utilisateurs, favoris et resultats test)...');
     await this.migreLesHashDeMsc(appliqueNouveauSel);
     console.log('Migration des Hash des évènements du journal...');
     await this.migreLesEvenementsDuJournal(appliqueNouveauSel);
-    console.log(
-      `Ajout de la version ${version} dans la table sels_de_hachage...`
-    );
+    console.log(`Ajout de la version ${version} dans la table sels_de_hachage...`);
     await this.ajouteVersionDansTableSecretsHachage(version, sel);
     console.log('Migration terminée.');
   }

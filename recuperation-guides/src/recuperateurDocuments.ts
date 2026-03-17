@@ -52,9 +52,7 @@ const recupereIllustration = async ({ id, image }: Guide): Promise<void> => {
     const cheminSansExtension = chemin.slice(0, chemin.lastIndexOf('.'));
     const flux234 = createWriteStream(cheminSansExtension + '-234.avif');
     const flux588 = createWriteStream(cheminSansExtension + '-588.avif');
-    const fluxOrigine = createWriteStream(
-      cheminSansExtension + '-origine.avif'
-    );
+    const fluxOrigine = createWriteStream(cheminSansExtension + '-origine.avif');
 
     flux.pipe(retailleEn234px).pipe(flux234);
     flux.pipe(retailleEn588px).pipe(flux588);
@@ -66,9 +64,7 @@ const recupereIllustration = async ({ id, image }: Guide): Promise<void> => {
   console.log('Image récupérée : ', image);
 };
 
-const recupereDocumentsLies = async ({
-  urlDocuments,
-}: Guide): Promise<void> => {
+const recupereDocumentsLies = async ({ urlDocuments }: Guide): Promise<void> => {
   for (const urlDocument of urlDocuments) {
     await telecharge(urlDocument);
     console.log('Document récupéré : ', urlDocument);

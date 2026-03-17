@@ -7,8 +7,7 @@ export class MockCmsCrisp extends CmsCrisp {
     super('', '');
   }
 
-  recupereArticle = async (id: string): Promise<PageHtmlCrisp> =>
-    this.articles[id];
+  recupereArticle = async (id: string): Promise<PageHtmlCrisp> => this.articles[id];
 
   ajouteArticle(id: string, article: PageHtmlCrisp) {
     this.articles[id] = article;

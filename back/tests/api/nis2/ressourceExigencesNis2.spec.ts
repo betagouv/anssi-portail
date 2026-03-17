@@ -11,10 +11,7 @@ import {
   ExigenceNIS2,
 } from '../../../src/metier/nis2/exigence';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurEnvironnement,
-} from '../fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
 
 describe('La ressource des Exigences NIS 2', () => {
@@ -50,9 +47,7 @@ describe('La ressource des Exigences NIS 2', () => {
     });
 
     it('renvoie une 404 si NIS2 ne figure ni dans la cible, ni dans la source', async () => {
-      const { status } = await request(serveur)
-        .get('/api/exigences-nis2')
-        .query({ source: 'ISO', cible: 'ISO' });
+      const { status } = await request(serveur).get('/api/exigences-nis2').query({ source: 'ISO', cible: 'ISO' });
 
       assert.equal(status, 404);
     });
@@ -60,9 +55,7 @@ describe('La ressource des Exigences NIS 2', () => {
     it('renvoie une 404 si une comparaison avec CyFun23 est demandée, et que le FF est désactivé', async () => {
       afficheCyFun23 = false;
 
-      const { status } = await request(serveur)
-        .get('/api/exigences-nis2')
-        .query({ cible: 'CyFun23' });
+      const { status } = await request(serveur).get('/api/exigences-nis2').query({ cible: 'CyFun23' });
 
       assert.equal(status, 404);
     });
@@ -129,15 +122,10 @@ describe('La ressource des Exigences NIS 2', () => {
           })
         );
 
-        const { body } = await request(serveur)
-          .get('/api/exigences-nis2')
-          .query({ cible: 'ISO' });
+        const { body } = await request(serveur).get('/api/exigences-nis2').query({ cible: 'ISO' });
 
         assert.equal(body[0].correspondances['ISO'].niveau, 'faible');
-        assert.equal(
-          body[0].correspondances['ISO'].observations,
-          'Des observations'
-        );
+        assert.equal(body[0].correspondances['ISO'].observations, 'Des observations');
         assert.deepEqual(body[0].correspondances['ISO'].exigences, [
           {
             contenu: 'contenu 1',
@@ -166,15 +154,10 @@ describe('La ressource des Exigences NIS 2', () => {
           })
         );
 
-        const { body } = await request(serveur)
-          .get('/api/exigences-nis2')
-          .query({ cible: 'AE' });
+        const { body } = await request(serveur).get('/api/exigences-nis2').query({ cible: 'AE' });
 
         assert.equal(body[0].correspondances['AE'].niveau, 'faible');
-        assert.equal(
-          body[0].correspondances['AE'].observations,
-          'Des observations'
-        );
+        assert.equal(body[0].correspondances['AE'].observations, 'Des observations');
         assert.deepEqual(body[0].correspondances['AE'].exigences, [
           {
             contenu: 'contenu 1',
@@ -203,15 +186,10 @@ describe('La ressource des Exigences NIS 2', () => {
           })
         );
 
-        const { body } = await request(serveur)
-          .get('/api/exigences-nis2')
-          .query({ cible: 'CyFun23' });
+        const { body } = await request(serveur).get('/api/exigences-nis2').query({ cible: 'CyFun23' });
 
         assert.equal(body[0].correspondances['CyFun23'].niveau, 'faible');
-        assert.equal(
-          body[0].correspondances['CyFun23'].observations,
-          'Des observations'
-        );
+        assert.equal(body[0].correspondances['CyFun23'].observations, 'Des observations');
         assert.deepEqual(body[0].correspondances['CyFun23'].exigences, [
           {
             contenu: 'contenu 1',
@@ -235,9 +213,7 @@ describe('La ressource des Exigences NIS 2', () => {
         })
       );
 
-      const { body } = await request(serveur)
-        .get('/api/exigences-nis2')
-        .query({ source, cible: 'NIS2' });
+      const { body } = await request(serveur).get('/api/exigences-nis2').query({ source, cible: 'NIS2' });
 
       assert.deepEqual(body, [
         {
@@ -266,9 +242,7 @@ describe('La ressource des Exigences NIS 2', () => {
         })
       );
 
-      const { body } = await request(serveur)
-        .get('/api/exigences-nis2')
-        .query({ source, cible: 'NIS2' });
+      const { body } = await request(serveur).get('/api/exigences-nis2').query({ source, cible: 'NIS2' });
 
       assert.deepEqual(body, [
         {
@@ -298,9 +272,7 @@ describe('La ressource des Exigences NIS 2', () => {
         })
       );
 
-      const { body } = await request(serveur)
-        .get('/api/exigences-nis2')
-        .query({ source, cible: 'NIS2' });
+      const { body } = await request(serveur).get('/api/exigences-nis2').query({ source, cible: 'NIS2' });
 
       assert.deepEqual(body, [
         {

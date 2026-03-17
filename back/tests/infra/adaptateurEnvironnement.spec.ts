@@ -19,9 +19,7 @@ describe("L'adaptateur environnement", () => {
       HACHAGE_SECRET_DE_HACHAGE_2: 'secret2',
     };
 
-    const tousLesSecretsDeHachage = adaptateurEnvironnement
-      .hachage()
-      .tousLesSecretsDeHachage();
+    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
     assert.deepEqual(tousLesSecretsDeHachage, [
       { version: 1, secret: 'secret1' },
@@ -36,9 +34,7 @@ describe("L'adaptateur environnement", () => {
       HACHAGE_SECRET_DE_HACHAGE_2: 'secret2',
     };
 
-    const tousLesSecretsDeHachage = adaptateurEnvironnement
-      .hachage()
-      .tousLesSecretsDeHachage();
+    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
     assert.deepEqual(tousLesSecretsDeHachage, [
       { version: 1, secret: 'secret1' },
@@ -54,9 +50,7 @@ describe("L'adaptateur environnement", () => {
       HACHAGE_SECRET_DE_HACHAGE_2: 'secret2',
     };
 
-    const tousLesSecretsDeHachage = adaptateurEnvironnement
-      .hachage()
-      .tousLesSecretsDeHachage();
+    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
     assert.deepEqual(tousLesSecretsDeHachage, [
       { version: 1, secret: 'secret1' },
@@ -67,9 +61,7 @@ describe("L'adaptateur environnement", () => {
   it('utilise des entiers pour les versions', () => {
     process.env = { HACHAGE_SECRET_DE_HACHAGE_1: 'secret1' };
 
-    const tousLesSecretsDeHachage = adaptateurEnvironnement
-      .hachage()
-      .tousLesSecretsDeHachage();
+    const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
     assert.equal(tousLesSecretsDeHachage[0].version, 1);
   });

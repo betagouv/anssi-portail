@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploiement-demo-node:
-    name: "Déploiement"
+    name: 'Déploiement'
     uses: ./.github/workflows/deploiement-node.yml
     with:
       nom: Démo
@@ -17,9 +17,9 @@ jobs:
     secrets: inherit
 
   deploiement-prod-node:
-    name: "Déploiement"
+    name: 'Déploiement'
     uses: ./.github/workflows/deploiement-node.yml
-    needs: [ deploiement-demo-node ]
+    needs: [deploiement-demo-node]
     with:
       nom: Production
       environnement: PROD_NODE

@@ -13,9 +13,7 @@ describe('Les répartitions des résultats de test', () => {
         await createur.deNiveau('emergent').cree(),
       ];
 
-      const repartitions = new RepartitionResultatsTest(
-        resultats
-      ).calculeRepartitionParNiveau();
+      const repartitions = new RepartitionResultatsTest(resultats).calculeRepartitionParNiveau();
 
       assert.equal(repartitions[0].ratio, 0.75);
       assert.equal(repartitions[1].ratio, 0.25);

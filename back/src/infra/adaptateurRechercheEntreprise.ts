@@ -3,10 +3,7 @@ import { regions } from '../metier/referentielRegions';
 import { RechercheEntrepriseAvecCache } from './RechercheEntrepriseAvecCache';
 
 export interface AdaptateurRechercheEntreprise {
-  rechercheOrganisations(
-    terme: string,
-    departement: string | null
-  ): Promise<ResultatRechercheEntreprise[]>;
+  rechercheOrganisations(terme: string, departement: string | null): Promise<ResultatRechercheEntreprise[]>;
 }
 
 export type ResultatRechercheEntreprise = {
@@ -26,15 +23,10 @@ const extraisDepartement = (commune: string | undefined) => {
     return null;
   }
 
-  return commune.startsWith('97') || commune.startsWith('98')
-    ? commune.slice(0, 3)
-    : commune.slice(0, 2);
+  return commune.startsWith('97') || commune.startsWith('98') ? commune.slice(0, 3) : commune.slice(0, 2);
 };
 
-const extraisInfosEtablissement = (
-  terme: string,
-  resultat: ResultatSirene
-): ResultatRechercheEntreprise => {
+const extraisInfosEtablissement = (terme: string, resultat: ResultatSirene): ResultatRechercheEntreprise => {
   let nom = resultat.nom_complet;
   const { departement, siret } = resultat.siege;
   let departementRetour: string | null = departement;
@@ -42,9 +34,7 @@ const extraisInfosEtablissement = (
 
   const estUneRechercheParSiret = terme.match('^[0-9 ]+$');
 
-  const aUnEtablissement =
-    resultat.matching_etablissements &&
-    resultat.matching_etablissements.length > 0;
+  const aUnEtablissement = resultat.matching_etablissements && resultat.matching_etablissements.length > 0;
 
   if (estUneRechercheParSiret && aUnEtablissement) {
     const aUneListeEnseigne =
@@ -53,15 +43,11 @@ const extraisInfosEtablissement = (
     if (aUneListeEnseigne) {
       nom = resultat.matching_etablissements[0].liste_enseignes[0];
     }
-    departementRetour = extraisDepartement(
-      resultat.matching_etablissements[0].commune
-    );
+    departementRetour = extraisDepartement(resultat.matching_etablissements[0].commune);
     siretRetour = resultat.matching_etablissements[0].siret;
   }
 
-  const codeRegion = regions.find(
-    (region) => region.codeINSEE === resultat.siege.region
-  )?.codeIso;
+  const codeRegion = regions.find((region) => region.codeINSEE === resultat.siege.region)?.codeIso;
 
   return {
     nom,
@@ -101,25 +87,19 @@ type ResultatSirene = {
 };
 
 const rechercheSansCache = {
-  async rechercheOrganisations(
-    terme: string,
-    departement: string | null
-  ): Promise<ResultatRechercheEntreprise[]> {
+  async rechercheOrganisations(terme: string, departement: string | null): Promise<ResultatRechercheEntreprise[]> {
     try {
-      const reponse = await axios.get(
-        'https://recherche-entreprises.api.gouv.fr/search',
-        {
-          params: {
-            q: terme,
-            ...(departement && { departement }),
-            per_page: 25,
-            page: 1,
-            limite_matching_etablissements: 1,
-            est_entrepreneur_individuel: false,
-            mtm_campaign: 'mes-services-cyber',
-          },
-        }
-      );
+      const reponse = await axios.get('https://recherche-entreprises.api.gouv.fr/search', {
+        params: {
+          q: terme,
+          ...(departement && { departement }),
+          per_page: 25,
+          page: 1,
+          limite_matching_etablissements: 1,
+          est_entrepreneur_individuel: false,
+          mtm_campaign: 'mes-services-cyber',
+        },
+      });
 
       return reponse.data.results
         .filter((r: ResultatSirene) => r.siege.departement !== null)
@@ -139,6 +119,4 @@ const rechercheSansCache = {
   },
 };
 
-export const adaptateurRechercheEntreprise = new RechercheEntrepriseAvecCache(
-  rechercheSansCache
-);
+export const adaptateurRechercheEntreprise = new RechercheEntrepriseAvecCache(rechercheSansCache);

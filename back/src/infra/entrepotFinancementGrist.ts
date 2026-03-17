@@ -25,10 +25,7 @@ export type FinancementGrist = {
   };
 };
 
-export class EntrepotFinancementGrist
-  extends EntrepotGrist<FinancementGrist>
-  implements EntrepotFinancement
-{
+export class EntrepotFinancementGrist extends EntrepotGrist<FinancementGrist> implements EntrepotFinancement {
   constructor({
     clientHttp = axios,
     adaptateurEnvironnement,
@@ -54,19 +51,14 @@ export class EntrepotFinancementGrist
     return financementsGrist.records.map(this.convertisFinancementGrist);
   }
 
-  private readonly convertisFinancementGrist = ({
-    fields,
-    id,
-  }: FinancementGrist) =>
+  private readonly convertisFinancementGrist = ({ fields, id }: FinancementGrist) =>
     new Financement({
       id,
       nom: fields.Nom_du_dispositif ?? '',
       financeur: fields.Financeur ?? '',
       typesDeFinancement: aseptiseListeGrist(fields.Financement),
       entitesElligibles: aseptiseListeGrist(fields.Entites_eligibles),
-      perimetresGeographiques: aseptiseListeGrist(
-        fields.Perimetre_geographique
-      ),
+      perimetresGeographiques: aseptiseListeGrist(fields.Perimetre_geographique),
       objectifs: fields.Objectifs ?? '',
       operationsEligibles: fields.Operations_eligibles ?? '',
       benificiaires: fields.Beneficiaire ?? '',

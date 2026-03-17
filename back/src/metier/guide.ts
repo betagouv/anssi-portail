@@ -41,9 +41,7 @@ export class Guide {
   }
 
   async deMemesCollections(entrepotGuide: EntrepotGuide) {
-    return (await entrepotGuide.parCollections(this.collections)).filter(
-      (guide) => guide.id !== this.id
-    );
+    return (await entrepotGuide.parCollections(this.collections)).filter((guide) => guide.id !== this.id);
   }
 
   estPublie = (): boolean => this.datePublication <= new Date();

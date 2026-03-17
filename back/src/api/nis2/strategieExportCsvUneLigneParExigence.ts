@@ -54,9 +54,7 @@ function colonnesEntetesCorrespondances(
   titreColonneContenu: string
 ) {
   const nombreCorrespondanceMax = Math.max(
-    ...exigences.map(
-      (e) => e.correspondances[referentielCompare]?.exigences.length ?? 0
-    )
+    ...exigences.map((e) => e.correspondances[referentielCompare]?.exigences.length ?? 0)
   );
 
   const resultat = [];
@@ -80,12 +78,7 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesISO extends ConvertisseurCs
       ...super.entetes(exigences),
       { id: 'correspondance', title: 'Correspondance' },
       { id: 'observations', title: 'Observations' },
-      ...colonnesEntetesCorrespondances(
-        exigences,
-        'ISO',
-        'Référence ISO',
-        'Contenu ISO'
-      ),
+      ...colonnesEntetesCorrespondances(exigences, 'ISO', 'Référence ISO', 'Contenu ISO'),
     ];
   }
 
@@ -231,9 +224,7 @@ export class StrategieExportCsvUneLigneParExigence {
       return convertisseurCsv.enLigne(exigence);
     });
 
-  private convertisseurCsv(
-    exigence: Exigence
-  ): ConvertisseurCsvExigence<Exigence> {
+  private convertisseurCsv(exigence: Exigence): ConvertisseurCsvExigence<Exigence> {
     if (exigence instanceof ExigenceISO) {
       return new ConvertisseurCsvExigenceISO();
     } else if ((exigence as ExigenceNIS2).correspondances.ISO) {

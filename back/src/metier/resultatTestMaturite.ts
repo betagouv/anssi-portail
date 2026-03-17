@@ -2,10 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { CodeRegion, estCodeRegion } from './referentielRegions';
 import { CodeSecteur, estCodeSecteur } from './referentielSecteurs';
-import {
-  CodeTrancheEffectif,
-  trancheEffectifParCode,
-} from './referentielTranchesEffectifEtablissement';
+import { CodeTrancheEffectif, trancheEffectifParCode } from './referentielTranchesEffectifEtablissement';
 import { Utilisateur } from './utilisateur';
 
 export type ReponsesTestMaturite = Record<string, number>;
@@ -20,13 +17,7 @@ export type DonneesCreationResultatTestMaturite = {
   dateRealisation?: Date;
 };
 
-export const tousLesIdNiveauMaturite = [
-  'insuffisant',
-  'emergent',
-  'intermediaire',
-  'confirme',
-  'optimal',
-] as const;
+export const tousLesIdNiveauMaturite = ['insuffisant', 'emergent', 'intermediaire', 'confirme', 'optimal'] as const;
 
 export type IdNiveauMaturite = (typeof tousLesIdNiveauMaturite)[number];
 
@@ -69,24 +60,14 @@ export class ResultatTestMaturite {
     this.dateRealisation = dateRealisation;
   }
 
-  async revendiquePropriete(
-    utilisateur: Utilisateur,
-    adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise
-  ) {
+  async revendiquePropriete(utilisateur: Utilisateur, adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise) {
     this.utilisateur = utilisateur;
     const { codeRegion, codeSecteur, codeTrancheEffectif } = (
-      await adaptateurRechercheEntreprise.rechercheOrganisations(
-        utilisateur.siretEntite,
-        null
-      )
+      await adaptateurRechercheEntreprise.rechercheOrganisations(utilisateur.siretEntite, null)
     )[0];
-    this.region =
-      this.region ?? (estCodeRegion(codeRegion) ? codeRegion : undefined);
-    this.secteur =
-      this.secteur ?? (estCodeSecteur(codeSecteur) ? codeSecteur : undefined);
-    this.tailleOrganisation =
-      this.tailleOrganisation ??
-      trancheEffectifParCode(codeTrancheEffectif)?.code;
+    this.region = this.region ?? (estCodeRegion(codeRegion) ? codeRegion : undefined);
+    this.secteur = this.secteur ?? (estCodeSecteur(codeSecteur) ? codeSecteur : undefined);
+    this.tailleOrganisation = this.tailleOrganisation ?? trancheEffectifParCode(codeTrancheEffectif)?.code;
   }
 
   niveau(): IdNiveauMaturite {

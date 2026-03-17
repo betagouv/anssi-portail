@@ -7,21 +7,12 @@ const ressourcePageProduit = (
 ): Router => {
   const routeur = Router();
 
-  routeur.get(
-    '/:id',
-    middleware.aseptise('id'),
-    (requete: Request, reponse: Response) => {
-      reponse
-        .contentType('text/html')
-        .status(200)
-        .sendFileAvecNonce(
-          fournisseurChemin.cheminProduitJekyll(
-            repertoireProduits,
-            requete.params.id as string
-          )
-        );
-    }
-  );
+  routeur.get('/:id', middleware.aseptise('id'), (requete: Request, reponse: Response) => {
+    reponse
+      .contentType('text/html')
+      .status(200)
+      .sendFileAvecNonce(fournisseurChemin.cheminProduitJekyll(repertoireProduits, requete.params.id as string));
+  });
 
   return routeur;
 };

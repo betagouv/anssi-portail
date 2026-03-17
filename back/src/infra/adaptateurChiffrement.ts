@@ -8,9 +8,7 @@ export type ObjetChiffre = {
   tag: string;
 };
 
-const adaptateurChiffrement = (
-  clefSecreteEnChaine: string
-): AdaptateurChiffrement => {
+const adaptateurChiffrement = (clefSecreteEnChaine: string): AdaptateurChiffrement => {
   const clefSecrete = Buffer.from(clefSecreteEnChaine, 'hex');
 
   return {
@@ -26,10 +24,7 @@ const adaptateurChiffrement = (
         plaintextLength: Buffer.byteLength(donneesAChiffrer),
       });
 
-      const donneesChiffrees = Buffer.concat([
-        chiffreur.update(donneesAChiffrer, 'utf-8'),
-        chiffreur.final(),
-      ]);
+      const donneesChiffrees = Buffer.concat([chiffreur.update(donneesAChiffrer, 'utf-8'), chiffreur.final()]);
       const tag = chiffreur.getAuthTag();
 
       return {
@@ -42,21 +37,15 @@ const adaptateurChiffrement = (
     dechiffre: (donneesChiffrees) => {
       const { iv, aad, donnees, tag } = donneesChiffrees;
 
-      const dechiffreur = createDecipheriv(
-        'chacha20-poly1305',
-        clefSecrete,
-        Buffer.from(iv, 'hex'),
-        { authTagLength: 16 }
-      );
+      const dechiffreur = createDecipheriv('chacha20-poly1305', clefSecrete, Buffer.from(iv, 'hex'), {
+        authTagLength: 16,
+      });
       dechiffreur.setAAD(Buffer.from(aad, 'hex'), {
         plaintextLength: donnees.length,
       });
       dechiffreur.setAuthTag(Buffer.from(tag, 'hex'));
 
-      const chaineDechiffree = Buffer.concat([
-        dechiffreur.update(Buffer.from(donnees, 'hex')),
-        dechiffreur.final(),
-      ]);
+      const chaineDechiffree = Buffer.concat([dechiffreur.update(Buffer.from(donnees, 'hex')), dechiffreur.final()]);
       return JSON.parse(chaineDechiffree.toString());
     },
   };
@@ -78,7 +67,5 @@ export const fabriqueAdaptateurChiffrement: FabriqueAdaptateurChiffrement = (
   if (typeof adaptateurEnvironnementOuCle === 'string') {
     return adaptateurChiffrement(adaptateurEnvironnementOuCle);
   }
-  return adaptateurChiffrement(
-    adaptateurEnvironnementOuCle.chiffrement().cleChaCha20Hex()
-  );
+  return adaptateurChiffrement(adaptateurEnvironnementOuCle.chiffrement().cleChaCha20Hex());
 };
