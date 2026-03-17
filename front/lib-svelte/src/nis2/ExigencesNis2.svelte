@@ -129,7 +129,6 @@
   {:else}
     <TableauCorrespondancesExigences
       {chargement}
-      {featureFlagNis2Observations}
       exigences={$exigencesFiltrees.exigences}
       comparaison={mode}
     />
