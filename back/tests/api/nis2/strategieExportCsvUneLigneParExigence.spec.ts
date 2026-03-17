@@ -163,12 +163,30 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
       const entetes = strategieExport.entetes(exigences);
 
       assert.deepEqual(entetes.slice(6), [
-        { id: 'reference_ae_1', title: 'Référence AE (1)' },
-        { id: 'contenu_ae_1', title: 'Contenu AE (1)' },
-        { id: 'reference_ae_2', title: 'Référence AE (2)' },
-        { id: 'contenu_ae_2', title: 'Contenu AE (2)' },
-        { id: 'reference_ae_3', title: 'Référence AE (3)' },
-        { id: 'contenu_ae_3', title: 'Contenu AE (3)' },
+        {
+          id: 'reference_ae_1',
+          title: 'Référence Annexe au Règlement d’exécution 2024/2690 (1)',
+        },
+        {
+          id: 'contenu_ae_1',
+          title: 'Contenu Annexe au Règlement d’exécution 2024/2690 (1)',
+        },
+        {
+          id: 'reference_ae_2',
+          title: 'Référence Annexe au Règlement d’exécution 2024/2690 (2)',
+        },
+        {
+          id: 'contenu_ae_2',
+          title: 'Contenu Annexe au Règlement d’exécution 2024/2690 (2)',
+        },
+        {
+          id: 'reference_ae_3',
+          title: 'Référence Annexe au Règlement d’exécution 2024/2690 (3)',
+        },
+        {
+          id: 'contenu_ae_3',
+          title: 'Contenu Annexe au Règlement d’exécution 2024/2690 (3)',
+        },
       ]);
     });
 

@@ -115,8 +115,8 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsv
       ...colonnesEntetesCorrespondances(
         exigences,
         'AE',
-        'Référence AE',
-        'Contenu AE'
+        'Référence Annexe au Règlement d’exécution 2024/2690',
+        'Contenu Annexe au Règlement d’exécution 2024/2690'
       ),
     ];
   }
