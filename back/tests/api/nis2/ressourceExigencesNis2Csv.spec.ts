@@ -102,5 +102,61 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
       );
       assert.equal('', lignes[2]);
     });
+
+    describe('renvoie le bon nom de fichier', () => {
+      it('pour les exigences NIS2 uniquement', async () => {
+        const { headers } = await request(serveur).get(
+          '/api/exigences-nis2.csv'
+        );
+
+        assert.equal(
+          headers['content-disposition'],
+          'attachment; filename="Liste_des_exigences_applicables_a_NIS2.csv"'
+        );
+      });
+
+      it('pour les exigences NIS2 comparées à ISO', async () => {
+        const { headers } = await request(serveur).get(
+          '/api/exigences-nis2.csv?source=NIS2&cible=ISO'
+        );
+
+        assert.equal(
+          headers['content-disposition'],
+          'attachment; filename="Comparaison_ReCyf-NIS2_ISO.csv"'
+        );
+      });
+
+      it('pour les exigences NIS2 comparées à AE', async () => {
+        const { headers } = await request(serveur).get(
+          '/api/exigences-nis2.csv?source=NIS2&cible=AE'
+        );
+
+        assert.equal(
+          headers['content-disposition'],
+          'attachment; filename="Comparaison_ReCyf-NIS2_Annexe_Reglement_execution_2024_2690.csv"'
+        );
+      });
+
+      it('pour les exigences ISO comparées à NIS2', async () => {
+        const { headers } = await request(serveur).get(
+          '/api/exigences-nis2.csv?source=ISO&cible=NIS2'
+        );
+
+        assert.equal(
+          headers['content-disposition'],
+          'attachment; filename="Comparaison_ISO_ReCyf-NIS2.csv"'
+        );
+      });
+      it('pour les exigences AE comparées à NIS2', async () => {
+        const { headers } = await request(serveur).get(
+          '/api/exigences-nis2.csv?source=AE&cible=NIS2'
+        );
+
+        assert.equal(
+          headers['content-disposition'],
+          'attachment; filename="Comparaison_Annexe_Reglement_execution_2024_2690_ReCyf-NIS2.csv"'
+        );
+      });
+    });
   });
 });
