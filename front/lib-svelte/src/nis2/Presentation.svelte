@@ -2,6 +2,11 @@
   import Accordeon from './Accordeon.svelte';
   import Marelle from './Marelle.svelte';
   import DemandeDiagnosticSimplifiee from '../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
+  import { clic } from '../directives/actions.svelte';
+
+  const retourEnHautDePage = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 </script>
 
 <div id="presentation">
@@ -23,6 +28,14 @@
       </p>
 
       <Accordeon />
+
+      <div class="lien-nis2">
+        <dsfr-link
+          href="/nis2#exigences"
+          label="Consulter les exigences applicables à NIS 2"
+          use:clic={retourEnHautDePage}
+        ></dsfr-link>
+      </div>
     </div>
   </dsfr-container>
 
@@ -51,10 +64,16 @@
 
   .marelle {
     background-color: #f6f6f6;
-    padding-block: 72px;
   }
 
   .diagnostic {
     padding: 4.5rem 0;
+  }
+
+  .lien-nis2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 32px 0 72px;
   }
 </style>
