@@ -31,7 +31,6 @@ describe('La ressource des Exigences NIS 2', () => {
       fonctionnalites: () => ({
         ...fauxAdaptateurEnvironnement.fonctionnalites(),
         nis2: () => ({
-          afficheObservations: () => true,
           afficheCyFun23: () => afficheCyFun23,
         }),
       }),

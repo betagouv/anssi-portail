@@ -56,21 +56,21 @@ export const fauxAdaptateurJWT: AdaptateurJWT = {
 };
 
 export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise =
-  {
-    rechercheOrganisations: async (siret: string, __: string | null) => [
-      {
-        siret,
-        nom: '',
-        departement: '86',
-        codeSecteur: 'A',
-        codeRegion: 'FR-971',
-        codeTrancheEffectif: '11',
-        estAssociation: false,
-        estCollectivite: false,
-        codeActivite: '84.11Z',
-      },
-    ],
-  };
+{
+  rechercheOrganisations: async (siret: string, __: string | null) => [
+    {
+      siret,
+      nom: '',
+      departement: '86',
+      codeSecteur: 'A',
+      codeRegion: 'FR-971',
+      codeTrancheEffectif: '11',
+      estAssociation: false,
+      estCollectivite: false,
+      codeActivite: '84.11Z',
+    },
+  ],
+};
 
 export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
   metsAJour: async () => undefined,
@@ -151,7 +151,6 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   }),
   fonctionnalites: () => ({
     nis2: () => ({
-      afficheObservations: () => true,
       afficheCyFun23: () => true,
     }),
   }),
@@ -194,8 +193,8 @@ const fauxGenerateurCodeSessionDeGroupe = {
 };
 
 const fausseMessagerieInstantanee: MessagerieInstantanee = {
-  notifieUnRetourExperience: async () => {},
-  notifieUnAvisUtilisateur: async () => {},
+  notifieUnRetourExperience: async () => { },
+  notifieUnAvisUtilisateur: async () => { },
 };
 
 export const fauxAdaptateurHachage: AdaptateurHachage = {
