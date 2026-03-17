@@ -233,12 +233,30 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
       const entetes = strategieExport.entetes(exigences);
 
       assert.deepEqual(entetes.slice(3), [
-        { id: 'reference_nis2_1', title: 'Référence NIS2 (1)' },
-        { id: 'contenu_nis2_1', title: 'Contenu NIS2 (1)' },
-        { id: 'reference_nis2_2', title: 'Référence NIS2 (2)' },
-        { id: 'contenu_nis2_2', title: 'Contenu NIS2 (2)' },
-        { id: 'reference_nis2_3', title: 'Référence NIS2 (3)' },
-        { id: 'contenu_nis2_3', title: 'Contenu NIS2 (3)' },
+        {
+          id: 'reference_nis2_1',
+          title: 'Référence exigence applicable à NIS 2 (1)',
+        },
+        {
+          id: 'contenu_nis2_1',
+          title: 'Contenu exigence applicable à NIS 2 (1)',
+        },
+        {
+          id: 'reference_nis2_2',
+          title: 'Référence exigence applicable à NIS 2 (2)',
+        },
+        {
+          id: 'contenu_nis2_2',
+          title: 'Contenu exigence applicable à NIS 2 (2)',
+        },
+        {
+          id: 'reference_nis2_3',
+          title: 'Référence exigence applicable à NIS 2 (3)',
+        },
+        {
+          id: 'contenu_nis2_3',
+          title: 'Contenu exigence applicable à NIS 2 (3)',
+        },
       ]);
     });
 
@@ -298,12 +316,30 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
       const entetes = strategieExport.entetes(exigences);
 
       assert.deepEqual(entetes.slice(5), [
-        { id: 'reference_nis2_1', title: 'Référence NIS2 (1)' },
-        { id: 'contenu_nis2_1', title: 'Contenu NIS2 (1)' },
-        { id: 'reference_nis2_2', title: 'Référence NIS2 (2)' },
-        { id: 'contenu_nis2_2', title: 'Contenu NIS2 (2)' },
-        { id: 'reference_nis2_3', title: 'Référence NIS2 (3)' },
-        { id: 'contenu_nis2_3', title: 'Contenu NIS2 (3)' },
+        {
+          id: 'reference_nis2_1',
+          title: 'Référence exigence applicable à NIS 2 (1)',
+        },
+        {
+          id: 'contenu_nis2_1',
+          title: 'Contenu exigence applicable à NIS 2 (1)',
+        },
+        {
+          id: 'reference_nis2_2',
+          title: 'Référence exigence applicable à NIS 2 (2)',
+        },
+        {
+          id: 'contenu_nis2_2',
+          title: 'Contenu exigence applicable à NIS 2 (2)',
+        },
+        {
+          id: 'reference_nis2_3',
+          title: 'Référence exigence applicable à NIS 2 (3)',
+        },
+        {
+          id: 'contenu_nis2_3',
+          title: 'Contenu exigence applicable à NIS 2 (3)',
+        },
       ]);
     });
 
