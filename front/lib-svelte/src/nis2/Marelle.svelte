@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { clic } from '../directives/actions.svelte';
+
   const etapesMarelle = [
     {
       titre: 'Savoir si votre entité est concernée',
@@ -14,7 +16,6 @@
         alt: '',
       },
     },
-
     {
       titre: "Enregistrer votre entité auprès de l'ANSSI",
       description:
@@ -31,8 +32,6 @@
     },
     {
       titre: 'Agir pour réduire les risques cyber',
-      description:
-        'Mettez en oeuvre les exigences de sécurité issues de la directive pour réduire vos risques cyber et signalez à l’ANSSI vos incidents de sécurité. ',
       lien: {
         href: '/nis2#solutions',
         texte: "Découvrir les solutions pour m'aider",
@@ -44,12 +43,31 @@
       },
     },
   ];
+
+  const retourEnHautDePage = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 </script>
 
 <lab-anssi-marelle
   titre="NIS&nbsp;2&nbsp;: Comment se lancer&nbsp;?"
   etapesmarelle={etapesMarelle}
-></lab-anssi-marelle>
+>
+  <lab-anssi-marelle-etape etapeMarelle={etapesMarelle[0]} index={0}
+  ></lab-anssi-marelle-etape>
+  <lab-anssi-marelle-etape etapeMarelle={etapesMarelle[1]} index={1}
+  ></lab-anssi-marelle-etape>
+  <lab-anssi-marelle-etape etapeMarelle={etapesMarelle[2]} index={2}>
+    <p slot="etape-description">
+      Mettez en oeuvre <dsfr-link
+        label="les exigences de sécurité"
+        href="/nis2#exigences"
+        use:clic={retourEnHautDePage}
+      ></dsfr-link> issues de la directive pour réduire vos risques cyber et signalez
+      à l’ANSSI vos incidents de sécurité.
+    </p>
+  </lab-anssi-marelle-etape>
+</lab-anssi-marelle>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
