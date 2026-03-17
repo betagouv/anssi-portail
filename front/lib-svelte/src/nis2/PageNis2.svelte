@@ -8,11 +8,7 @@
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
 
-  const {
-    itemsCyber,
-    featureFlagNis2Exigences = false,
-    featureFlagNis2CyFun23 = false,
-  } = $props();
+  const { itemsCyber, featureFlagNis2CyFun23 = false } = $props();
 
   let estBureau = $state(false);
   onMount(() => {
@@ -28,10 +24,7 @@
       label: 'Présentation NIS 2',
       fragment: '#presentation',
     },
-
-    ...(featureFlagNis2Exigences
-      ? [{ label: 'Exigences et comparaison', fragment: '#exigences' }]
-      : []),
+    { label: 'Exigences et comparaison', fragment: '#exigences' },
     {
       label: 'Solutions pour vous accompagner',
       fragment: '#solutions',
@@ -77,7 +70,7 @@
 <div class="contenu">
   {#if lienActif === '#presentation'}
     <Presentation />
-  {:else if lienActif === '#exigences' && featureFlagNis2Exigences}
+  {:else if lienActif === '#exigences'}
     <ExigencesNis2 {featureFlagNis2CyFun23} />
   {:else if lienActif === '#solutions'}
     <Solutions {itemsCyber} />
