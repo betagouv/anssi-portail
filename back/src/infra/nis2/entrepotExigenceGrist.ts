@@ -42,12 +42,12 @@ export type ExigenceGrist = {
 type Croisements = {
   [K in Referentiel]: { table: string; champs: string[] } & {
     [L in Referentiel]:
-    | {
-      nomTableAssociation: string;
-      nomTableCible: string;
-      nomColonneReferenceCible: string;
-    }
-    | undefined;
+      | {
+          nomTableAssociation: string;
+          nomTableCible: string;
+          nomColonneReferenceCible: string;
+        }
+      | undefined;
   };
 };
 
@@ -160,8 +160,8 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
           thematique: exigenceGrist.fields.Thematique ?? '',
           entitesCible: exigenceGrist.fields.EIEE
             ? (JSON.parse(exigenceGrist.fields.EIEE) as string[])
-              .map((categorie) => ({ EI: 'EntiteImportante', EE: 'EntiteEssentielle' })[categorie] as CategorieEntite)
-              .filter((c) => c !== undefined)
+                .map((categorie) => ({ EI: 'EntiteImportante', EE: 'EntiteEssentielle' })[categorie] as CategorieEntite)
+                .filter((c) => c !== undefined)
             : [],
           objectifSecurite: exigenceGrist.fields.Objectif_de_securite ?? '',
           referentielCompare: cible,

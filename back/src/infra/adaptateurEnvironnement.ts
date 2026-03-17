@@ -226,4 +226,3 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
 };
 
 export { AdaptateurEnvironnement, adaptateurEnvironnement };
-

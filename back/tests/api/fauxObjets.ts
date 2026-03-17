@@ -187,8 +187,8 @@ const fauxGenerateurCodeSessionDeGroupe = {
 };
 
 const fausseMessagerieInstantanee: MessagerieInstantanee = {
-  notifieUnRetourExperience: async () => { },
-  notifieUnAvisUtilisateur: async () => { },
+  notifieUnRetourExperience: async () => {},
+  notifieUnAvisUtilisateur: async () => {},
 };
 
 export const fauxAdaptateurHachage: AdaptateurHachage = {

@@ -11,9 +11,7 @@ const { itemsCyber } = JSON.parse(donnees) as {
 
 const donneesNis2 = document.getElementById('donnees-nis2')!.textContent ?? '';
 
-const { featureFlagNis2CyFun23 } = JSON.parse(
-  donneesNis2
-) as {
+const { featureFlagNis2CyFun23 } = JSON.parse(donneesNis2) as {
   featureFlagNis2CyFun23: boolean;
 };
 
