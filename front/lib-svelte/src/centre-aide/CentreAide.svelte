@@ -103,9 +103,9 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100dvh;
     background: white;
-    z-index: 9;
+    z-index: 12;
 
     @include a-partir-de(sm) {
       width: 520px;
