@@ -12,10 +12,14 @@ export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationSer
       return 'Comparaison_ReCyf-NIS2_ISO';
     } else if (referentielCible === 'AE') {
       return 'Comparaison_ReCyf-NIS2_Annexe_Reglement_execution_2024_2690';
+    } else if (referentielCible === 'CyFun23') {
+      return 'Comparaison_ReCyf-NIS2_CyFun23';
     } else if (referentielSource === 'ISO') {
       return 'Comparaison_ISO_ReCyf-NIS2';
     } else if (referentielSource === 'AE') {
       return 'Comparaison_Annexe_Reglement_execution_2024_2690_ReCyf-NIS2';
+    } else if (referentielSource === 'CyFun23') {
+      return 'Comparaison_CyFun23_ReCyf-NIS2';
     } else {
       return 'Liste_des_exigences_applicables_a_NIS2';
     }
