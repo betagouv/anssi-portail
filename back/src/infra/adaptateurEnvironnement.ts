@@ -69,6 +69,7 @@ type AdaptateurEnvironnement = {
       afficheCyFun23: () => boolean;
     };
   };
+  nodeEnv: () => string | undefined;
 };
 
 const ajouteBarreObliqueFinale = (url: string): string => {
@@ -223,6 +224,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       afficheCyFun23: () => process.env.FEATURE_FLAG_NIS2_CYFUN23 === 'true',
     }),
   }),
+  nodeEnv: () => process.env.NODE_ENV,
 };
 
 export { AdaptateurEnvironnement, adaptateurEnvironnement };

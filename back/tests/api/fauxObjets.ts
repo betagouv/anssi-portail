@@ -148,6 +148,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
       afficheCyFun23: () => true,
     }),
   }),
+  nodeEnv: () => 'developpement',
 };
 
 const vraiMiddleware = fabriqueMiddleware({
