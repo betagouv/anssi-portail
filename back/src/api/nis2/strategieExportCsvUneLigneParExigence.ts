@@ -83,32 +83,45 @@ function colonnesEntetesCorrespondances(
   return resultat;
 }
 
-class ConvertisseurCsvExigenceNIS2AvecCorrespondancesISO extends ConvertisseurCsvExigenceNIS2 {
+abstract class ConvertisseurCsvExigenceNIS2AvecCorrespondances extends ConvertisseurCsvExigenceNIS2 {
   entetes(exigences: ExigenceNIS2[]) {
     return [
       ...super.entetes(exigences),
       { id: 'correspondance', title: 'Correspondance' },
       { id: 'observations', title: 'Observations' },
-      ...colonnesEntetesCorrespondances(exigences, 'ISO', 'Référence ISO', 'Contenu ISO'),
     ];
   }
 
   enLigne(exigenceNIS2: ExigenceNIS2) {
+    const referentiel = this.referentielDeCorrespondance();
     return {
       ...super.enLigne(exigenceNIS2),
-      correspondance: exigenceNIS2.correspondances.ISO!.niveau,
-      observations: exigenceNIS2.correspondances.ISO!.observations,
-      ...this.extraisCorrespondances(exigenceNIS2, 'ISO'),
+      correspondance: exigenceNIS2.correspondances[referentiel]!.niveau,
+      observations: exigenceNIS2.correspondances[referentiel]!.observations,
+      ...this.extraisCorrespondances(exigenceNIS2, referentiel),
     };
   }
+
+  protected abstract referentielDeCorrespondance(): Referentiel;
 }
 
-class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsvExigenceNIS2 {
+class ConvertisseurCsvExigenceNIS2AvecCorrespondancesISO extends ConvertisseurCsvExigenceNIS2AvecCorrespondances {
   entetes(exigences: ExigenceNIS2[]) {
     return [
       ...super.entetes(exigences),
-      { id: 'correspondance', title: 'Correspondance' },
-      { id: 'observations', title: 'Observations' },
+      ...colonnesEntetesCorrespondances(exigences, 'ISO', 'Référence ISO', 'Contenu ISO'),
+    ];
+  }
+
+  protected override referentielDeCorrespondance(): Referentiel {
+    return 'ISO';
+  }
+}
+
+class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsvExigenceNIS2AvecCorrespondances {
+  entetes(exigences: ExigenceNIS2[]) {
+    return [
+      ...super.entetes(exigences),
       ...colonnesEntetesCorrespondances(
         exigences,
         'AE',
@@ -118,33 +131,21 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsv
     ];
   }
 
-  enLigne(exigenceNIS2: ExigenceNIS2) {
-    return {
-      ...super.enLigne(exigenceNIS2),
-      correspondance: exigenceNIS2.correspondances.AE!.niveau,
-      observations: exigenceNIS2.correspondances.AE!.observations,
-      ...this.extraisCorrespondances(exigenceNIS2, 'AE'),
-    };
+  protected override referentielDeCorrespondance(): Referentiel {
+    return 'AE';
   }
 }
 
-class ConvertisseurCsvExigenceNIS2AvecCorrespondancesCyFun23 extends ConvertisseurCsvExigenceNIS2 {
+class ConvertisseurCsvExigenceNIS2AvecCorrespondancesCyFun23 extends ConvertisseurCsvExigenceNIS2AvecCorrespondances {
   entetes(exigences: ExigenceNIS2[]) {
     return [
       ...super.entetes(exigences),
-      { id: 'correspondance', title: 'Correspondance' },
-      { id: 'observations', title: 'Observations' },
       ...colonnesEntetesCorrespondances(exigences, 'CyFun23', 'Référence CyFun23', 'Contenu CyFun23'),
     ];
   }
 
-  enLigne(exigenceNIS2: ExigenceNIS2) {
-    return {
-      ...super.enLigne(exigenceNIS2),
-      correspondance: exigenceNIS2.correspondances.CyFun23!.niveau,
-      observations: exigenceNIS2.correspondances.CyFun23!.observations,
-      ...this.extraisCorrespondances(exigenceNIS2, 'CyFun23'),
-    };
+  protected override referentielDeCorrespondance(): Referentiel {
+    return 'CyFun23';
   }
 }
 
