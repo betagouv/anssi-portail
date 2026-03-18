@@ -469,6 +469,130 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
       ]);
     });
   });
+
+  describe('lorsque CyFun23 est comparé à NIS 2', () => {
+    it('retourne les entêtes avec la correspondance', () => {
+      const exigences = [exigenceCyFun23AvecCorrespondancesNIS2(0)];
+
+      const entetes = strategieExport.entetes(exigences);
+
+      assert.deepEqual(entetes, [
+        { id: 'reference', title: 'Référence' },
+        { id: 'contenu', title: 'Contenu' },
+        { id: 'fonction', title: 'Fonction' },
+        { id: 'est_mesure_cle', title: 'Mesure clé' },
+        { id: 'niveau_assurance', title: 'Niveau d’assurance' },
+        { id: 'correspondance', title: 'Correspondance' },
+        { id: 'observations', title: 'Observations' },
+      ]);
+    });
+
+    it('adapte le nombre de colonnes au nombre d’exigences correspondantes maximum', () => {
+      const exigences = [exigenceCyFun23AvecCorrespondancesNIS2(0), exigenceCyFun23AvecCorrespondancesNIS2(2)];
+
+      const entetes = strategieExport.entetes(exigences);
+
+      assert.deepEqual(entetes.slice(7), [
+        {
+          id: 'reference_nis2_1',
+          title: 'Référence exigence applicable à NIS 2 (1)',
+        },
+        {
+          id: 'contenu_nis2_1',
+          title: 'Contenu exigence applicable à NIS 2 (1)',
+        },
+        {
+          id: 'reference_nis2_2',
+          title: 'Référence exigence applicable à NIS 2 (2)',
+        },
+        {
+          id: 'contenu_nis2_2',
+          title: 'Contenu exigence applicable à NIS 2 (2)',
+        },
+      ]);
+    });
+
+    it('retourne les lignes des exigences CyFun23 avec les correspondances', () => {
+      const exigences = [
+        new ExigenceCyFun23({
+          reference: '',
+          contenu: '',
+          fonction: 'Détecter',
+          estMesureCle: true,
+          niveauAssurance: 'Basique',
+          correspondance: {
+            exigences: [
+              exigenceNIS2SansCorrespondance('refnis2-1', 'contenunis2-1'),
+              exigenceNIS2SansCorrespondance('refnis2-2', 'contenunis2-2'),
+            ],
+            niveau: 'faible',
+            observations: 'bla bla',
+          },
+        }),
+      ];
+
+      const lignes = strategieExport.lignes(exigences);
+
+      assert.deepEqual(lignes, [
+        {
+          reference: '',
+          contenu: '',
+          fonction: 'Détecter',
+          niveau_assurance: 'Basique',
+          est_mesure_cle: 'Oui',
+          correspondance: 'faible',
+          observations: 'bla bla',
+          reference_nis2_1: 'refnis2-1',
+          contenu_nis2_1: 'contenunis2-1',
+          reference_nis2_2: 'refnis2-2',
+          contenu_nis2_2: 'contenunis2-2',
+        },
+      ]);
+    });
+
+    it("retourne les lignes des exigences CyFun23 lorsque la mesure n'est pas clé", () => {
+      const exigences = [
+        new ExigenceCyFun23({
+          reference: '',
+          contenu: '',
+          fonction: 'Détecter',
+          estMesureCle: false,
+          niveauAssurance: 'Basique',
+          correspondance: {
+            exigences: [],
+            niveau: 'faible',
+            observations: 'bla bla',
+          },
+        }),
+      ];
+
+      const lignes = strategieExport.lignes(exigences);
+
+      assert.equal(lignes[0].est_mesure_cle, 'Non');
+    });
+
+    it('retourne les lignes des exigences CyFun23 lorsque les valeurs optionnelles sont absentes', () => {
+      const exigences = [
+        new ExigenceCyFun23({
+          reference: '',
+          contenu: '',
+          fonction: undefined,
+          estMesureCle: false,
+          niveauAssurance: undefined,
+          correspondance: {
+            exigences: [],
+            niveau: 'faible',
+            observations: 'bla bla',
+          },
+        }),
+      ];
+
+      const lignes = strategieExport.lignes(exigences);
+
+      assert.equal(lignes[0].fonction, '');
+      assert.equal(lignes[0].niveau_assurance, '');
+    });
+  });
 });
 
 const exigenceAEAvecCorrespondancesNIS2 = (nombreCorrespondances: number) =>
@@ -492,6 +616,20 @@ const exigenceISOAvecCorrespondancesNIS2 = (nombreCorrespondances: number) =>
       exigences: new Array(nombreCorrespondances).map((_) => exigenceNIS2SansCorrespondance()),
       niveau: 'faible',
 
+      observations: '',
+    },
+  });
+
+const exigenceCyFun23AvecCorrespondancesNIS2 = (nombreCorrespondances: number) =>
+  new ExigenceCyFun23({
+    reference: '',
+    contenu: '',
+    fonction: 'Détecter',
+    estMesureCle: true,
+    niveauAssurance: 'Basique',
+    correspondance: {
+      exigences: new Array(nombreCorrespondances).map((_) => exigenceNIS2SansCorrespondance()),
+      niveau: 'faible',
       observations: '',
     },
   });

@@ -2,6 +2,7 @@ import {
   Correspondance,
   Exigence,
   ExigenceAE,
+  ExigenceCyFun23,
   ExigenceISO,
   ExigenceNIS2,
   Referentiel,
@@ -240,6 +241,47 @@ class ConvertisseurCsvExigenceISO extends ConvertisseurCsvExigence<ExigenceISO> 
   }
 }
 
+class ConvertisseurCsvExigenceCyFun23 extends ConvertisseurCsvExigence<ExigenceCyFun23> {
+  entetes(exigences: ExigenceCyFun23[]) {
+    return [
+      ...super.entetes(exigences),
+      { id: 'fonction', title: 'Fonction' },
+      { id: 'est_mesure_cle', title: 'Mesure clé' },
+      { id: 'niveau_assurance', title: 'Niveau d’assurance' },
+      { id: 'correspondance', title: 'Correspondance' },
+      { id: 'observations', title: 'Observations' },
+      ...colonnesEntetesCorrespondances(
+        exigences,
+        'NIS2',
+        'Référence exigence applicable à NIS 2',
+        'Contenu exigence applicable à NIS 2'
+      ),
+    ];
+  }
+
+  enLigne(exigence: ExigenceCyFun23) {
+    const exigencesNIS2 = exigence.correspondances.NIS2!.exigences.reduce(
+      (previousValue, currentValue, currentIndex) => {
+        return {
+          ...previousValue,
+          [`reference_nis2_${currentIndex + 1}`]: currentValue.reference,
+          [`contenu_nis2_${currentIndex + 1}`]: currentValue.contenu,
+        };
+      },
+      {}
+    );
+    return {
+      ...super.enLigne(exigence),
+      fonction: exigence.fonction ?? '',
+      niveau_assurance: exigence.niveauAssurance ?? '',
+      est_mesure_cle: exigence.estMesureCle ? 'Oui' : 'Non',
+      correspondance: exigence.correspondances.NIS2!.niveau,
+      observations: exigence.correspondances.NIS2!.observations,
+      ...exigencesNIS2,
+    };
+  }
+}
+
 export class StrategieExportCsvUneLigneParExigence {
   entetes = (exigences: Exigence[]) => {
     if (exigences.length === 0) return [];
@@ -264,6 +306,8 @@ export class StrategieExportCsvUneLigneParExigence {
       return new ConvertisseurCsvExigenceNIS2AvecCorrespondancesCyFun23();
     } else if (exigence instanceof ExigenceAE) {
       return new ConvertisseurCsvExigenceAE();
+    } else if (exigence instanceof ExigenceCyFun23) {
+      return new ConvertisseurCsvExigenceCyFun23();
     } else {
       return new ConvertisseurCsvExigenceNIS2();
     }
