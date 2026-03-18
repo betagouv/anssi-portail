@@ -57,9 +57,13 @@
     display: flex;
     flex-direction: column;
     width: 100vw;
+    width: 100dvw;
     height: 100vh;
+    height: 100dvh;
     max-width: 100vw;
+    max-width: 100dvw;
     max-height: 100vh;
+    max-height: 100dvh;
     padding: 0;
     margin: 0;
     border: none;
@@ -72,6 +76,7 @@
     @include a-partir-de(lg) {
       height: min-content;
       max-height: 90vh;
+      max-height: 90dvh;
       max-width: 588px;
       min-width: 0;
       margin: auto;
