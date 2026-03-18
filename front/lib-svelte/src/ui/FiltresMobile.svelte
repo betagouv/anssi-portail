@@ -30,10 +30,12 @@
 
 <style lang="scss">
   .sommaire {
+    max-height: 100dvh;
+
     .barre-filtres {
       display: flex;
       flex-direction: column;
-      width: 100%;
+      width: calc(100dvw - 32px);
     }
 
     .barre-filtres {
