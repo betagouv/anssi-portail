@@ -137,6 +137,35 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsv
   }
 }
 
+class ConvertisseurCsvExigenceNIS2AvecCorrespondancesCyFun23 extends ConvertisseurCsvExigenceNIS2 {
+  entetes(exigences: ExigenceNIS2[]) {
+    return [
+      ...super.entetes(exigences),
+      { id: 'correspondance', title: 'Correspondance' },
+      { id: 'observations', title: 'Observations' },
+      ...colonnesEntetesCorrespondances(exigences, 'CyFun23', 'Référence CyFun23', 'Contenu CyFun23'),
+    ];
+  }
+
+  enLigne(exigenceNIS2: ExigenceNIS2) {
+    const exigencesCyFun23 = exigenceNIS2.correspondances.CyFun23!.exigences.reduce(
+      (previousValue, currentValue, currentIndex) => {
+        return {
+          ...previousValue,
+          [`reference_cyfun23_${currentIndex + 1}`]: currentValue.reference,
+          [`contenu_cyfun23_${currentIndex + 1}`]: currentValue.contenu,
+        };
+      },
+      {}
+    );
+    return {
+      ...super.enLigne(exigenceNIS2),
+      correspondance: exigenceNIS2.correspondances.CyFun23!.niveau,
+      observations: exigenceNIS2.correspondances.CyFun23!.observations,
+      ...exigencesCyFun23,
+    };
+  }
+}
 class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigence<ExigenceAE> {
   entetes(exigences: ExigenceAE[]) {
     return [
@@ -231,6 +260,8 @@ export class StrategieExportCsvUneLigneParExigence {
       return new ConvertisseurCsvExigenceNIS2AvecCorrespondancesISO();
     } else if ((exigence as ExigenceNIS2).correspondances.AE) {
       return new ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE();
+    } else if ((exigence as ExigenceNIS2).correspondances.CyFun23) {
+      return new ConvertisseurCsvExigenceNIS2AvecCorrespondancesCyFun23();
     } else if (exigence instanceof ExigenceAE) {
       return new ConvertisseurCsvExigenceAE();
     } else {
