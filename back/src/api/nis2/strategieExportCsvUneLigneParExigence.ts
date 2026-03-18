@@ -22,6 +22,16 @@ class ConvertisseurCsvExigence<T extends Exigence> {
       contenu: exigence.contenu,
     };
   }
+
+  protected extraisCorrespondances(exigence: ExigenceAvecCorrespondances, referentiel: Referentiel) {
+    return exigence.correspondances[referentiel]!.exigences.reduce((valeurPrecedente, valeurActuelle, index) => {
+      return {
+        ...valeurPrecedente,
+        [`reference_${referentiel.toLowerCase()}_${index + 1}`]: valeurActuelle.reference,
+        [`contenu_${referentiel.toLowerCase()}_${index + 1}`]: valeurActuelle.contenu,
+      };
+    }, {});
+  }
 }
 
 class ConvertisseurCsvExigenceNIS2 extends ConvertisseurCsvExigence<ExigenceNIS2> {
@@ -84,21 +94,11 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesISO extends ConvertisseurCs
   }
 
   enLigne(exigenceNIS2: ExigenceNIS2) {
-    const exigencesISO = exigenceNIS2.correspondances.ISO!.exigences.reduce(
-      (previousValue, currentValue, currentIndex) => {
-        return {
-          ...previousValue,
-          [`reference_iso_${currentIndex + 1}`]: currentValue.reference,
-          [`contenu_iso_${currentIndex + 1}`]: currentValue.contenu,
-        };
-      },
-      {}
-    );
     return {
       ...super.enLigne(exigenceNIS2),
       correspondance: exigenceNIS2.correspondances.ISO!.niveau,
       observations: exigenceNIS2.correspondances.ISO!.observations,
-      ...exigencesISO,
+      ...this.extraisCorrespondances(exigenceNIS2, 'ISO'),
     };
   }
 }
@@ -119,21 +119,11 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesAE extends ConvertisseurCsv
   }
 
   enLigne(exigenceNIS2: ExigenceNIS2) {
-    const exigencesAE = exigenceNIS2.correspondances.AE!.exigences.reduce(
-      (previousValue, currentValue, currentIndex) => {
-        return {
-          ...previousValue,
-          [`reference_ae_${currentIndex + 1}`]: currentValue.reference,
-          [`contenu_ae_${currentIndex + 1}`]: currentValue.contenu,
-        };
-      },
-      {}
-    );
     return {
       ...super.enLigne(exigenceNIS2),
       correspondance: exigenceNIS2.correspondances.AE!.niveau,
       observations: exigenceNIS2.correspondances.AE!.observations,
-      ...exigencesAE,
+      ...this.extraisCorrespondances(exigenceNIS2, 'AE'),
     };
   }
 }
@@ -149,24 +139,15 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesCyFun23 extends Convertisse
   }
 
   enLigne(exigenceNIS2: ExigenceNIS2) {
-    const exigencesCyFun23 = exigenceNIS2.correspondances.CyFun23!.exigences.reduce(
-      (previousValue, currentValue, currentIndex) => {
-        return {
-          ...previousValue,
-          [`reference_cyfun23_${currentIndex + 1}`]: currentValue.reference,
-          [`contenu_cyfun23_${currentIndex + 1}`]: currentValue.contenu,
-        };
-      },
-      {}
-    );
     return {
       ...super.enLigne(exigenceNIS2),
       correspondance: exigenceNIS2.correspondances.CyFun23!.niveau,
       observations: exigenceNIS2.correspondances.CyFun23!.observations,
-      ...exigencesCyFun23,
+      ...this.extraisCorrespondances(exigenceNIS2, 'CyFun23'),
     };
   }
 }
+
 class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigence<ExigenceAE> {
   entetes(exigences: ExigenceAE[]) {
     return [
@@ -183,21 +164,11 @@ class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigence<ExigenceAE> {
   }
 
   enLigne(exigence: ExigenceAE) {
-    const exigencesNIS2 = exigence.correspondances.NIS2!.exigences.reduce(
-      (previousValue, currentValue, currentIndex) => {
-        return {
-          ...previousValue,
-          [`reference_nis2_${currentIndex + 1}`]: currentValue.reference,
-          [`contenu_nis2_${currentIndex + 1}`]: currentValue.contenu,
-        };
-      },
-      {}
-    );
     return {
       ...super.enLigne(exigence),
       correspondance: exigence.correspondances.NIS2!.niveau,
       observations: exigence.correspondances.NIS2!.observations,
-      ...exigencesNIS2,
+      ...this.extraisCorrespondances(exigence, 'NIS2'),
     };
   }
 }
@@ -220,23 +191,13 @@ class ConvertisseurCsvExigenceISO extends ConvertisseurCsvExigence<ExigenceISO> 
   }
 
   enLigne(exigence: ExigenceISO) {
-    const exigencesNIS2 = exigence.correspondances.NIS2!.exigences.reduce(
-      (previousValue, currentValue, currentIndex) => {
-        return {
-          ...previousValue,
-          [`reference_nis2_${currentIndex + 1}`]: currentValue.reference,
-          [`contenu_nis2_${currentIndex + 1}`]: currentValue.contenu,
-        };
-      },
-      {}
-    );
     return {
       ...super.enLigne(exigence),
       norme: exigence.norme,
       chapitre: exigence.chapitre,
       correspondance: exigence.correspondances.NIS2!.niveau,
       observations: exigence.correspondances.NIS2!.observations,
-      ...exigencesNIS2,
+      ...this.extraisCorrespondances(exigence, 'NIS2'),
     };
   }
 }
@@ -260,16 +221,6 @@ class ConvertisseurCsvExigenceCyFun23 extends ConvertisseurCsvExigence<ExigenceC
   }
 
   enLigne(exigence: ExigenceCyFun23) {
-    const exigencesNIS2 = exigence.correspondances.NIS2!.exigences.reduce(
-      (previousValue, currentValue, currentIndex) => {
-        return {
-          ...previousValue,
-          [`reference_nis2_${currentIndex + 1}`]: currentValue.reference,
-          [`contenu_nis2_${currentIndex + 1}`]: currentValue.contenu,
-        };
-      },
-      {}
-    );
     return {
       ...super.enLigne(exigence),
       fonction: exigence.fonction ?? '',
@@ -277,7 +228,7 @@ class ConvertisseurCsvExigenceCyFun23 extends ConvertisseurCsvExigence<ExigenceC
       est_mesure_cle: exigence.estMesureCle ? 'Oui' : 'Non',
       correspondance: exigence.correspondances.NIS2!.niveau,
       observations: exigence.correspondances.NIS2!.observations,
-      ...exigencesNIS2,
+      ...this.extraisCorrespondances(exigence, 'NIS2'),
     };
   }
 }
