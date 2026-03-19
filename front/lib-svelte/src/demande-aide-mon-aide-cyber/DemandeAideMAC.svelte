@@ -201,10 +201,12 @@
     }
 
     .illustration {
-      display: flex;
+      display: none;
       flex-direction: column;
       position: absolute;
+
       @include a-partir-de(md) {
+        display: flex;
         left: calc(50vw + 30px);
         top: 24px;
         width: auto;
