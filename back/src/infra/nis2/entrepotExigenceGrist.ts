@@ -152,6 +152,13 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         exigenceGrist.fields.ExigencesCible ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[]) : []
       );
 
+    exigences.records.sort((a, b) => {
+      return a.fields.Reference.localeCompare(b.fields.Reference, undefined, {
+        numeric: true,
+        sensitivity: 'base',
+      });
+    });
+
     if (referentiel === 'NIS2') {
       return exigences.records.map((exigenceGrist) => {
         return new ExigenceNIS2({
