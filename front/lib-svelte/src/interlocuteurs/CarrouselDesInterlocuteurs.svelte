@@ -33,7 +33,7 @@
   <dsfr-tile
     title="Financements cyber"
     has-description="true"
-    description="Bénéficiez d’aides et de subventions pour renforcer la maturité cyber de votre organisation."
+    description="Bénéficiez d'accompagnements financés ou de subventions pour renforcer la maturité cyber de votre organisation."
     href="/financements"
     enlarge="true"
   >

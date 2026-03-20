@@ -51,7 +51,7 @@
 
 <Hero
   titre="Financements cyber"
-  description="Bénéficiez d’aides et de subventions pour renforcer la maturité cyber de votre organisation."
+  description="Bénéficiez d'accompagnements financés ou de subventions pour renforcer la maturité cyber de votre organisation."
   ariane="Financements cyber"
 />
 
