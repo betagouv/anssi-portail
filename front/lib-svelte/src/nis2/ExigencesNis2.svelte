@@ -95,15 +95,13 @@
         <dsfr-link
           href="/documents-ressources/20260317_NIS_V2_ReCyF_v2.5.pdf"
           label="Télécharger les exigences"
-          blank
-          download
+          download=""
           detail="PDF - 965,8 ko"
         ></dsfr-link>
         <dsfr-link
           href="/documents-ressources/20260317_NIS_V2_Suivi des modifications ReCyF v2.4 vers v2.5-vfinale.pdf"
           label="Télécharger le suivi des modifications"
-          blank
-          download
+          download=""
           detail="PDF - 1 383,4 ko"
         ></dsfr-link>
       </div>
