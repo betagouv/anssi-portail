@@ -86,5 +86,13 @@ describe('La ressource des documents de ressource', () => {
         'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate'
       );
     });
+
+    it("répond 404 si la ressource n'existe pas", async () => {
+      configurationDuServeur.cellar.getStream = async () => undefined;
+
+      const reponse = await request(serveur).get('/documents-ressources/fichier-qui-n-existe-pas.pdf');
+
+      assert.equal(reponse.status, 404);
+    });
   });
 });
