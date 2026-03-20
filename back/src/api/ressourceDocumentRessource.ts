@@ -1,32 +1,11 @@
-import { NextFunction, Request, Response, Router } from 'express';
+import { Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
+import { fabriqueGestionnaireRessourceCellar } from './gestionnaireRessourceCellar';
 
 export const ressourceDocumentRessource = ({ cellar }: ConfigurationServeur) => {
   const routeur = Router();
 
-  routeur.get('/:nomFichier', async (requete: Request, reponse: Response, suite: NextFunction) => {
-    try {
-      const fluxCellar = await cellar.getStream(requete.params.nomFichier as string, 'RESSOURCES_CYBER');
-      if (!fluxCellar) {
-        reponse.sendStatus(404);
-        return;
-      }
-      reponse.contentType(fluxCellar.typeDeContenu);
-      reponse.setHeader('content-length', fluxCellar.tailleDuContenu);
-      reponse.set({
-        'cache-control': 'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate',
-        pragma: '',
-        expires: '3600',
-        'surrogate-control': 'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate',
-      });
-      fluxCellar.flux.pipe(reponse);
-      fluxCellar.flux.on('error', (err) => {
-        suite(err);
-      });
-    } catch (erreur: Error | unknown) {
-      suite(erreur);
-    }
-  });
+  routeur.get('/:slug', fabriqueGestionnaireRessourceCellar(cellar, 'RESSOURCES_CYBER'));
 
   return routeur;
 };
