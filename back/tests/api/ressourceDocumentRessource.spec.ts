@@ -71,5 +71,20 @@ describe('La ressource des documents de ressource', () => {
 
       assert.equal(reponse.headers['content-type'], 'application/xml');
     });
+
+    it('rend les contenus servi cachable', async () => {
+      const reponse = await request(serveur).get('/documents-ressources/fichier_ressource.pdf');
+
+      assert.equal(
+        reponse.headers['cache-control'],
+        'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate'
+      );
+      assert.equal(reponse.headers['pragma'], '');
+      assert.equal(reponse.headers['expires'], '3600');
+      assert.equal(
+        reponse.headers['surrogate-control'],
+        'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate'
+      );
+    });
   });
 });
