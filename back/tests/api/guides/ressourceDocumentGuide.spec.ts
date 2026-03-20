@@ -1,5 +1,6 @@
 import { Express } from 'express';
 import assert from 'node:assert';
+import { Readable } from 'node:stream';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { ConfigurationServeur } from '../../../src/api/configurationServeur';
@@ -14,17 +15,25 @@ describe("La ressource de document d'un guide", () => {
   let configurationDuServeur: ConfigurationServeur;
   let busEvenements: MockBusEvenement;
 
+  const construitUnFluxCellar = (contenu: string = '0123456789') => ({
+    flux: Readable.from([contenu]),
+    typeDeContenu: 'application/pdf',
+    tailleDuContenu: contenu.length,
+  });
+
+  const erreur = () => {
+    throw new Error('On ne devrait pas appeler cette méthode !');
+  };
+
   beforeEach(() => {
     busEvenements = new MockBusEvenement();
     configurationDuServeur = {
       ...configurationDeTestDuServeur,
       busEvenements,
       cellar: {
-        get: () => Promise.resolve({ contenu: Buffer.from(''), typeDeContenu: '' }),
-        getStream: () => {
-          throw new Error('On ne devrait pas appeler cette méthode !');
-        },
-        existe: async () => true,
+        get: erreur,
+        getStream: async () => construitUnFluxCellar(),
+        existe: erreur,
       },
     };
     serveur = creeServeur(configurationDuServeur);
@@ -40,14 +49,12 @@ describe("La ressource de document d'un guide", () => {
     it('sers le fichier correspondant', async () => {
       let nomDuFichierDemande: string;
       let cleDuBucketDemandee: CleDuBucket;
-      configurationDuServeur.cellar.get = (nomDuFichier: string, cleDuBucket: CleDuBucket) => {
+      configurationDuServeur.cellar.getStream = async (nomDuFichier: string, cleDuBucket: CleDuBucket) => {
         nomDuFichierDemande = nomDuFichier;
         cleDuBucketDemandee = cleDuBucket;
-        return Promise.resolve({
-          contenu: Buffer.from('ABCD'),
-          typeDeContenu: '',
-        });
+        return construitUnFluxCellar('ABCD');
       };
+
       const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
       assert.equal(nomDuFichierDemande!, 'anssi_back to basics_pki_1.0.pdf');
@@ -56,14 +63,14 @@ describe("La ressource de document d'un guide", () => {
     });
 
     it("répond 404 lorsque le fichier de qualification n'existe pas", async () => {
-      configurationDuServeur.cellar.get = async () => undefined;
+      configurationDuServeur.cellar.getStream = async () => undefined;
       const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
       assert.equal(reponse.status, 404);
     });
 
     it("répond 500 lorsque qu'une erreur technique survient", async () => {
-      configurationDuServeur.cellar.get = async () => {
+      configurationDuServeur.cellar.getStream = async () => {
         throw new Error('Erreur de test');
       };
       const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
@@ -72,13 +79,14 @@ describe("La ressource de document d'un guide", () => {
     });
 
     it('indique le type de contenu', async () => {
-      configurationDuServeur.cellar.get = async () => ({
-        contenu: Buffer.from(''),
-        typeDeContenu: 'application/pdf',
+      configurationDuServeur.cellar.getStream = async () => ({
+        ...construitUnFluxCellar(),
+        typeDeContenu: 'application/xml',
       });
-      const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
-      assert.equal(reponse.headers['content-type'], 'application/pdf');
+      const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.xml');
+
+      assert.equal(reponse.headers['content-type'], 'application/xml');
     });
 
     describe('publie un évènement sur le bus', () => {
@@ -113,6 +121,21 @@ describe("La ressource de document d'un guide", () => {
 
         assert.equal(evenement?.origine, undefined);
       });
+    });
+
+    it('rend les contenus servis cachable', async () => {
+      const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.xml');
+
+      assert.equal(
+        reponse.headers['cache-control'],
+        'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate'
+      );
+      assert.equal(reponse.headers['pragma'], '');
+      assert.equal(reponse.headers['expires'], '3600');
+      assert.equal(
+        reponse.headers['surrogate-control'],
+        'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate'
+      );
     });
   });
 });
