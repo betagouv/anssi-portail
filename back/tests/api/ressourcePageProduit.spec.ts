@@ -78,4 +78,11 @@ describe('La ressource page produit', () => {
     assert.equal(repertoireProduitsDemande!, 'ressources');
     assert.equal(idProduitDemande!, 'cot');
   });
+
+  it('redirige le service `Mon Espace NIS 2` vers la page NIS2', async () => {
+    const reponse = await request(serveur).get('/services/mon-espace-nis2.html');
+
+    assert.equal(reponse.status, 301);
+    assert.equal(reponse.headers.location, '/nis2');
+  });
 });
