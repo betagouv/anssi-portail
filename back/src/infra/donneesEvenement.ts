@@ -1,4 +1,3 @@
-import { DocumentGuideTelecharge } from '../bus/evenements/documentGuideTelecharge';
 import { VisaTelecharge } from '../bus/evenements/visaTelecharge';
 import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction';
 import { CodeRegion } from '../metier/referentielRegions';
@@ -13,7 +12,6 @@ export type DonneesEvenement =
   | DonneesEvenementMiseAJourFavorisUtilisateur
   | DonneesEvenementRetourExperienceDonne
   | DonneesEvenementAvisUtilisateurDonne
-  | DonneesEvenementDocumentGuideTelecharge
   | DonneesEvenementVisaTelecharge
   | DonneesEvenementUtilisateurConnecte;
 
@@ -67,11 +65,6 @@ type DonneesEvenementAvisUtilisateurDonne = Evenement<
     niveauDeSatisfaction: NiveauDeSatisfaction;
     idUtilisateur: string | undefined;
   }
->;
-
-export type DonneesEvenementDocumentGuideTelecharge = Evenement<
-  'DOCUMENT_GUIDE_TELECHARGE',
-  ProprietesDeClasse<DocumentGuideTelecharge>
 >;
 
 export type DonneesEvenementVisaTelecharge = Evenement<'VISA_TELECHARGE', ProprietesDeClasse<VisaTelecharge>>;

@@ -1,16 +1,10 @@
 import { URLSearchParams } from 'node:url';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { ClientHttpPosteur } from './clientHttp';
-import {
-  DonneesEvenement,
-  DonneesEvenementDocumentGuideTelecharge,
-  DonneesEvenementVisaTelecharge,
-} from './donneesEvenement';
+import { DonneesEvenement, DonneesEvenementVisaTelecharge } from './donneesEvenement';
 
 export type AdaptateurAnalytique = {
-  rapporteEvenement: (
-    donneesEvenement: DonneesEvenementDocumentGuideTelecharge | DonneesEvenementVisaTelecharge
-  ) => Promise<void>;
+  rapporteEvenement: (donneesEvenement: DonneesEvenementVisaTelecharge) => Promise<void>;
 };
 
 export const fabriqueAdaptateurMatamo = (
@@ -31,18 +25,12 @@ export const fabriqueAdaptateurMatamo = (
   },
 });
 
-function recupereCaracteristiquesEvenement(
-  donneesEvenement: DonneesEvenementDocumentGuideTelecharge | DonneesEvenementVisaTelecharge
-): { categorie: string; nomAction: string } {
-  if (donneesEvenement.type === 'DOCUMENT_GUIDE_TELECHARGE') {
-    return {
-      nomAction: `Document téléchargé depuis ${donneesEvenement.donnees.origine ?? 'source inconnue'}`,
-      categorie: 'Guides',
-    };
-  } else {
-    return {
-      categorie: 'Visas',
-      nomAction: 'Visa téléchargé',
-    };
-  }
+function recupereCaracteristiquesEvenement(_donneesEvenement: DonneesEvenementVisaTelecharge): {
+  categorie: string;
+  nomAction: string;
+} {
+  return {
+    categorie: 'Visas',
+    nomAction: 'Visa téléchargé',
+  };
 }
