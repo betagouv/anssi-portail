@@ -91,12 +91,22 @@
   <div class="entete">
     <div class="titre">
       <h2>Exigences applicables à NIS&nbsp;2</h2>
-      <dsfr-link
-        href="https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/20260317_NIS_V2_ReCyF_v2.5.pdf"
-        label="Télécharger les exigences (PDF)"
-        blank
-        download
-      ></dsfr-link>
+      <div class="telechargements">
+        <dsfr-link
+          href="/documents-ressources/20260317_NIS_V2_ReCyF_v2.5.pdf"
+          label="Télécharger les exigences"
+          blank
+          download
+          detail="PDF - 965,8 ko"
+        ></dsfr-link>
+        <dsfr-link
+          href="/documents-ressources/20260317_NIS_V2_Suivi des modifications ReCyF v2.4 vers v2.5-vfinale.pdf"
+          label="Télécharger le suivi des modifications"
+          blank
+          download
+          detail="PDF - 1 383,4 ko"
+        ></dsfr-link>
+      </div>
       <dsfr-button
         label="Exporter le tableau"
         markup="a"
@@ -165,8 +175,12 @@
         grid-area: titre;
       }
 
-      dsfr-link {
+      .telechargements {
         grid-area: telechargement;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
       }
 
       dsfr-button {
