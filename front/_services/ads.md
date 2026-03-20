@@ -5,7 +5,7 @@ nom: ADS (Active Directory Security)
 avecFicheDetaillee: true
 description: Auditer vos annuaires Active Directory
 titreHtml: ADS
-illustration: ads/active-directory-security.png
+illustration: ads/active-directory-security.avif
 lien: https://club.ssi.gouv.fr/beta/#/login
 droitsAcces:
   - ENTITES_PUBLIQUES
@@ -16,7 +16,7 @@ sources:
 cible: |
   Le service ADS n’est accessible qu’aux entités publiques et aux entités régulées (opérateur d’importance vitale et opérateur de service essentiel, …) après inscription sur le portail Club SSI. **A terme, les entités assujetties à NIS2 auront accès au service lorsqu’elles se seront enregistrées comme telles auprès de l’ANSSI.**
 
-  Le service ADS peut être utile : 
+  Le service ADS peut être utile :
   <ul>
   <li>A la chaine SSI, en offrant une vue globale et synthétique du niveau de sécurité, à travers des tableaux de bord et des indicateurs associés.
   </li>
@@ -34,7 +34,7 @@ L’annuaire Active Directory est, en effet, un élément critique permettant la
 Le service ADS vous permet de :
 
 <ul>
-<li> Quantifier le niveau de sécurité de l’annuaire grâce à une échelle de 1 à 5, d’un score et des recommandations pour corriger les vulnérabilités identifiées ; 
+<li> Quantifier le niveau de sécurité de l’annuaire grâce à une échelle de 1 à 5, d’un score et des recommandations pour corriger les vulnérabilités identifiées ;
 </li>
 <li> Vous accompagner progressivement vers un niveau de sécurité à l’état de l’art.
 </li>

@@ -5,7 +5,7 @@ nom: Le diagnostic cyber gratuit
 avecFicheDetaillee: true
 description: Bénéficier d'un diagnostic cyber gratuit et accompagné
 titreHtml: MonAideCyber
-illustration: mac/mac-diag.png
+illustration: mac/mac-diag.avif
 lien: https://messervices.cyber.gouv.fr/cyberdepart
 droitsAcces:
   - ACCES_LIBRE
@@ -21,7 +21,7 @@ liens:
   - accompagnement:
     titre: Bénéficiez d’un accompagnement
     lien: https://messervices.cyber.gouv.fr/cyberdepart
-    illustration: mac/mac-diag.png
+    illustration: mac/mac-diag.avif
     couleurFond: '#5d2b9d'
 ---
 

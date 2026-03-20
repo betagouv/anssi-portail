@@ -6,7 +6,7 @@ avecFicheDetaillee: true
 titreHtml: MonServiceSécurisé
 description: 'Sécuriser et homologuer en équipe'
 lien: https://monservicesecurise.cyber.gouv.fr/
-illustration: mss/mss.png
+illustration: mss/mss.avif
 cible: |
   <ul>
   <li> Toutes les entités publiques en France (ministères, établissements publics, collectivités, opérateurs publics de services numériques, etc.). </li>
@@ -21,7 +21,7 @@ liens:
   - accompagnement:
     titre: Bénéficier d’un accompagnement
     lien: https://calendly.com/fabien-giraud/presentation-de-monservicesecurise-1
-    illustration: mss/mss-accompagnement.png
+    illustration: mss/mss-accompagnement.avif
     couleurFond: '#0079D0'
   - commencer:
     titre: Commencer à sécuriser

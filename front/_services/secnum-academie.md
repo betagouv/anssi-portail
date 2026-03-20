@@ -6,7 +6,7 @@ titreHtml: SecNumAcadémie
 avecFicheDetaillee: true
 description: "Se former avec le MOOC de l'ANSSI"
 lien: https://secnumacademie.gouv.fr/
-illustration: secnumacademie/secnum-academie.png
+illustration: secnumacademie/secnum-academie.avif
 sources:
   - ANSSI
 droitsAcces:
@@ -19,7 +19,7 @@ liens:
   - accompagnement:
     titre: Découvrir le service
     lien: https://www.dailymotion.com/video/x8ad119
-    illustration: secnumacademie/secnumacademie-video.png
+    illustration: secnumacademie/secnumacademie-video.avif
     couleurFond: '#FFFFFF'
 ---
 

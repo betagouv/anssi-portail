@@ -5,7 +5,7 @@ nom: Cyber&ZeroWidthSpace;Enjeux&ZeroWidthSpace;
 titreHtml: CyberEnjeux
 description: 'Former à la cybersécurité par le jeu'
 lien: https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/CyberEnJeux.zip
-illustration: cyber-enjeux/cyber-enjeux.png
+illustration: cyber-enjeux/cyber-enjeux.avif
 avecFicheDetaillee: true
 sources:
   - ANSSI
@@ -18,12 +18,12 @@ liens:
   - accompagnement:
     titre: Découvrez DemainSpécialisteCyber
     lien: /services/demainspecialistecyber.html
-    illustration: cyber-enjeux/cyber-enjeux-demainspe.png
+    illustration: cyber-enjeux/cyber-enjeux-demainspe.avif
     couleurFond: '#0079D0'
   - commencer:
     titre: Téléchargez les différents supports !
     lien: https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/CyberEnJeux.zip
-    illustration: cyber-enjeux/cyber-enjeux.png
+    illustration: cyber-enjeux/cyber-enjeux.avif
     couleurFond: '#0079D0'
 ---
 
@@ -33,7 +33,7 @@ CyberEnJeux c’est :
 
 1/ Pour les enseignants
 
-<ul> 
+<ul>
   <li>3 livrets enseignant présentant le dispositif, se former et former les élèves à la cybersécurité, accompagner les élèves à la création de jeux.</li>
   <li>1 présentation (diapositives) permettant de dérouler la formation cyber des élèves en classe.</li>
 </ul>

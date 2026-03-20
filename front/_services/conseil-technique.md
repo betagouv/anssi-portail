@@ -4,7 +4,7 @@ typologie: service
 nom: Conseil Technique
 description: Poser une question technique
 titreHtml: Conseil Technique
-illustration: conseil-technique/conseil-technique.png
+illustration: conseil-technique/conseil-technique.avif
 avecFicheDetaillee: true
 droitsAcces:
   - ENTITES_PUBLIQUES

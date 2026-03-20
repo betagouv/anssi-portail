@@ -4,7 +4,7 @@ typologie: contenu
 nom: Rapports sur la menace
 titreHtml: Rapports sur la menace
 description: Connaître l'état de la menace
-illustration: rapport-menace/rapport-menace.png
+illustration: rapport-menace/rapport-menace.avif
 lien: https://www.cert.ssi.gouv.fr/cti/
 droitsAcces:
   - ACCES_LIBRE

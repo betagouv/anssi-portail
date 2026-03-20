@@ -4,7 +4,7 @@ typologie: service
 nom: 17Cyber
 titreHtml: 17Cyber
 description: 'Être assisté en cas de cybermalveillance'
-illustration: diagnostic-17cyber/diagnostic-17cyber.png
+illustration: diagnostic-17cyber/diagnostic-17cyber.avif
 lien: https://www.cybermalveillance.gouv.fr/17cyber
 sources:
   - Police et Gendarmerie Nationales
