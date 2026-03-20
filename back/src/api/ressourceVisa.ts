@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { VisaTelecharge } from '../bus/evenements/visaTelecharge';
 import { ConfigurationServeur } from './configurationServeur';
 
-export const ressourceVisa = ({ busEvenements, cellar }: ConfigurationServeur): Router => {
+export const ressourceVisa = ({ cellar }: ConfigurationServeur): Router => {
   const routeur = Router();
 
   routeur.get('/:slug', async (requete: Request, reponse: Response, suite: NextFunction) => {
@@ -26,11 +25,6 @@ export const ressourceVisa = ({ busEvenements, cellar }: ConfigurationServeur): 
       fluxCellar.flux.on('error', (err) => {
         suite(err);
       });
-      await busEvenements.publie(
-        new VisaTelecharge({
-          nomFichier: requete.params.slug as string,
-        })
-      );
     } catch (erreur: Error | unknown) {
       suite(erreur);
     }

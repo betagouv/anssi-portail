@@ -1,4 +1,3 @@
-import { AdaptateurAnalytique } from '../infra/adaptateurAnalytique';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../infra/adaptateurJournal';
@@ -20,13 +19,10 @@ import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee'
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
 import { TestRealise } from './evenements/testRealise';
 import { UtilisateurConnecte } from './evenements/utilisateurConnecte';
-import { VisaTelecharge } from './evenements/visaTelecharge';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
-import { rapporteEvenementVisaTelechargeDansTraqueur } from './rapporteEvenementVisaTelechargeDansTraqueur';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
-  adaptateurAnalytique,
   adaptateurEmail,
   adaptateurJournal,
   adaptateurHorloge,
@@ -34,7 +30,6 @@ export const cableTousLesAbonnes = ({
   entrepotFavori,
 }: {
   busEvenements: BusEvenements;
-  adaptateurAnalytique: AdaptateurAnalytique;
   adaptateurEmail: AdaptateurEmail;
   adaptateurJournal: AdaptateurJournal;
   adaptateurHorloge: AdaptateurHorloge;
@@ -92,14 +87,6 @@ export const cableTousLesAbonnes = ({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
-    })
-  );
-
-  busEvenements.abonne(
-    VisaTelecharge,
-    rapporteEvenementVisaTelechargeDansTraqueur({
-      adaptateurAnalytique,
-      adaptateurHorloge,
     })
   );
 

@@ -5,7 +5,6 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { creeServeur } from '../../src/api/msc';
-import { VisaTelecharge } from '../../src/bus/evenements/visaTelecharge';
 import { CleDuBucket } from '../../src/infra/adaptateurCellar';
 import { MockBusEvenement } from '../bus/busPourLesTests';
 import { configurationDeTestDuServeur } from './fauxObjets';
@@ -98,16 +97,6 @@ describe('La ressource de visa', () => {
         const reponse = await request(serveur).get('/visas/fichier-qui-n-existe-pas.pdf');
 
         assert.equal(reponse.status, 404);
-      });
-    });
-
-    describe('publie un évènement de téléchergement sur le bus', () => {
-      it('avec le nom du fichier', async () => {
-        await request(serveur).get('/visas/tl-fr.xml');
-
-        const evenement = busEvenements.recupereEvenement(VisaTelecharge);
-
-        assert.equal(evenement?.nomFichier, 'tl-fr.xml');
       });
     });
   });

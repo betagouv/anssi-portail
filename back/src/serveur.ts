@@ -7,7 +7,6 @@ import { creeServeur } from './api/msc';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
 import { BusEvenements } from './bus/busEvenements';
 import { cableTousLesAbonnes } from './bus/cablage';
-import { fabriqueAdaptateurMatamo } from './infra/adaptateurAnalytique';
 import { adaptateurCellar } from './infra/adaptateurCellar';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo';
@@ -31,13 +30,12 @@ import { EntrepotExigenceGrist } from './infra/nis2/entrepotExigenceGrist';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { EntrepotGuide } from './metier/entrepotGuide';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
-import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence';
+import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
 const adaptateurJournal = fabriqueAdaptateurJournal();
-const adaptateurAnalytique = fabriqueAdaptateurMatamo(axios, adaptateurEnvironnement);
 const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
 const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber(adaptateurEnvironnement);
 const adaptateurHachage = fabriqueAdaptateurHachage({
@@ -73,7 +71,6 @@ const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
   busEvenements,
-  adaptateurAnalytique,
   adaptateurEmail,
   adaptateurJournal,
   adaptateurHorloge,

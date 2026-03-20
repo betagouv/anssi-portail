@@ -1,4 +1,3 @@
-import { VisaTelecharge } from '../bus/evenements/visaTelecharge';
 import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction';
 import { CodeRegion } from '../metier/referentielRegions';
 import { CodeSecteur } from '../metier/referentielSecteurs';
@@ -12,7 +11,6 @@ export type DonneesEvenement =
   | DonneesEvenementMiseAJourFavorisUtilisateur
   | DonneesEvenementRetourExperienceDonne
   | DonneesEvenementAvisUtilisateurDonne
-  | DonneesEvenementVisaTelecharge
   | DonneesEvenementUtilisateurConnecte;
 
 type Evenement<Type extends string, Donnees extends object> = {
@@ -67,13 +65,7 @@ type DonneesEvenementAvisUtilisateurDonne = Evenement<
   }
 >;
 
-export type DonneesEvenementVisaTelecharge = Evenement<'VISA_TELECHARGE', ProprietesDeClasse<VisaTelecharge>>;
-
 export type DonneesEvenementUtilisateurConnecte = Evenement<
   'UTILISATEUR_CONNECTE',
   { idUtilisateur: string; connexionAvecMFA: boolean }
 >;
-
-type ProprietesDeClasse<C> = {
-  [Key in keyof C as C[Key] extends (...args: never) => unknown ? never : Key]: C[Key];
-};
