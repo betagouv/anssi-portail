@@ -16,14 +16,12 @@ import { creeContactBrevo } from './creeContactBrevo';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte';
 import { AvisUtilisateurDonne } from './evenements/avisUtilisateurDonne';
 import { CompteCree } from './evenements/compteCree';
-import { DocumentGuideTelecharge } from './evenements/documentGuideTelecharge';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
 import { TestRealise } from './evenements/testRealise';
 import { UtilisateurConnecte } from './evenements/utilisateurConnecte';
 import { VisaTelecharge } from './evenements/visaTelecharge';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
-import { rapporteEvenementGuideTelechargeDansTraqueur } from './rapporteEvenementGuideTelechargeDansTraqueur';
 import { rapporteEvenementVisaTelechargeDansTraqueur } from './rapporteEvenementVisaTelechargeDansTraqueur';
 
 export const cableTousLesAbonnes = ({
@@ -94,14 +92,6 @@ export const cableTousLesAbonnes = ({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
-    })
-  );
-
-  busEvenements.abonne(
-    DocumentGuideTelecharge,
-    rapporteEvenementGuideTelechargeDansTraqueur({
-      adaptateurAnalytique,
-      adaptateurHorloge,
     })
   );
 

@@ -5,7 +5,6 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { ConfigurationServeur } from '../../../src/api/configurationServeur';
 import { creeServeur } from '../../../src/api/msc';
-import { DocumentGuideTelecharge } from '../../../src/bus/evenements/documentGuideTelecharge';
 import { CleDuBucket } from '../../../src/infra/adaptateurCellar';
 import { MockBusEvenement } from '../../bus/busPourLesTests';
 import { configurationDeTestDuServeur } from '../fauxObjets';
@@ -87,40 +86,6 @@ describe("La ressource de document d'un guide", () => {
       const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.xml');
 
       assert.equal(reponse.headers['content-type'], 'application/xml');
-    });
-
-    describe('publie un évènement sur le bus', () => {
-      it('avec le nom du fichier', async () => {
-        await request(serveur).get('/documents-guides/zero-trust.pdf');
-
-        const evenement = busEvenements.recupereEvenement(DocumentGuideTelecharge);
-
-        assert.equal(evenement?.nomFichier, 'zero-trust.pdf');
-      });
-
-      it("sauf si l'action provient d'un robot", async () => {
-        await request(serveur).get('/documents-guides/zero-trust.pdf').set('User-Agent', 'curl');
-
-        const evenement = busEvenements.recupereEvenement(DocumentGuideTelecharge);
-
-        assert.equal(evenement, undefined);
-      });
-
-      it('avec une origine si un referer est fourni dans le query string', async () => {
-        await request(serveur).get('/documents-guides/zero-trust.pdf?ref=mqc');
-
-        const evenement = busEvenements.recupereEvenement(DocumentGuideTelecharge);
-
-        assert.equal(evenement?.origine, 'mqc');
-      });
-
-      it("sans origine si aucun referer n'est fourni dans le query string", async () => {
-        await request(serveur).get('/documents-guides/zero-trust.pdf');
-
-        const evenement = busEvenements.recupereEvenement(DocumentGuideTelecharge);
-
-        assert.equal(evenement?.origine, undefined);
-      });
     });
 
     it('rend les contenus servis cachable', async () => {
