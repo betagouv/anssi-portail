@@ -77,7 +77,7 @@ describe('La ressource de visa', () => {
       assert.equal(reponse.headers['content-type'], 'application/xml');
     });
 
-    it('rend les contenus servi cachable', async () => {
+    it('rend les contenus servis cachable', async () => {
       const reponse = await request(serveur).get('/visas/anssi_back to basics_pki_1.0.xml');
 
       assert.equal(
