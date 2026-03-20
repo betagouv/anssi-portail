@@ -16,6 +16,7 @@ import { ressourceGuides } from './guides/ressourceGuides';
 import { ressourceGuidesMemesCollections } from './guides/ressourceGuidesMemesCollections';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide';
 import { ressourceExigencesNis2 } from './nis2/ressourceExigencesNis2';
+import { ressourceExigencesNis2Csv } from './nis2/ressourceExigencesNis2Csv';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
 import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionOIDC';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
@@ -26,6 +27,7 @@ import { ressourceAnnuaireRegions } from './ressourceAnnuaireRegions';
 import { ressourceAnnuaireSecteursActivite } from './ressourceAnnuaireSecteursActivite';
 import { ressourceAnnuaireTranchesEffectif } from './ressourceAnnuaireTranchesEffectif';
 import { ressourceAvisUtilisateur } from './ressourceAvisUtilisateur';
+import { ressourceDocumentRessource } from './ressourceDocumentRessource';
 import { ressourceFinancement } from './ressourceFinancement';
 import { ressourceFinancements } from './ressourceFinancements';
 import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte';
@@ -49,7 +51,6 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
-import { ressourceExigencesNis2Csv } from './nis2/ressourceExigencesNis2Csv';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -248,6 +249,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   );
 
   app.use('/documents-guides', ressourceDocumentGuide(configurationServeur));
+  app.use('/documents-ressources', ressourceDocumentRessource());
 
   app.use('/visas', ressourceVisa(configurationServeur));
 
