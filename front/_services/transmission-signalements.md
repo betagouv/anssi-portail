@@ -5,7 +5,7 @@ nom: Signalement
 titreHtml: Signalement
 description: 'Signaler une vulnérabilité produit au CERT-FR'
 lien: https://club.ssi.gouv.fr/#/declaration-art-2321-4-1
-illustration: transmission-signalements/transmission-signalements.png
+illustration: transmission-signalements/transmission-signalements.avif
 sources:
   - ANSSI
   - CERT-FR

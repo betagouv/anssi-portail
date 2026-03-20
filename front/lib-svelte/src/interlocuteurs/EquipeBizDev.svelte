@@ -2,7 +2,7 @@
 
 <div class="contenu">
   <div class="photos">
-    <img src="/assets/images/floriane-bizdev.jpg" alt="Floriane Gallego" />
+    <img src="/assets/images/floriane-bizdev.avif" alt="Floriane Gallego" />
   </div>
   <h2>Notre équipe est à votre écoute</h2>
   <p class="texte-standard-md">

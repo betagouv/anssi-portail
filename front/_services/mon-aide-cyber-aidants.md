@@ -5,7 +5,7 @@ nom: Mon&ZeroWidthSpace;Aide&ZeroWidthSpace;Cyber
 avecFicheDetaillee: true
 description: Devenir Aidant cyber !
 titreHtml: MonAideCyber
-illustration: mac/mac.png
+illustration: mac/mac.avif
 lien: https://monaide.cyber.gouv.fr/
 droitsAcces:
   - ACCES_LIBRE
@@ -13,7 +13,7 @@ sources:
   - ANSSI
   - Innovation ANSSI
 cible: |
-  Pour devenir Aidant cyber vous devez : 
+  Pour devenir Aidant cyber vous devez :
   <ul>
   <li>Représenter ou faire partie au titre de son activité professionnelle ou associative d’un service de l’État, d’une administration, d’une réserve citoyenne ou d’une entité morale à but non lucratif</li>
   <li>Être dans une démarche non lucrative tout au long du dispositif
@@ -23,13 +23,13 @@ liens:
   - accompagnement:
     titre: Devenir Aidant cyber !
     lien: https://www.monaide.cyber.gouv.fr/
-    illustration: mac/mac-accompagnement.png
+    illustration: mac/mac-accompagnement.avif
     couleurFond: '#5d2b9d'
   - commencer:
     titre: Découvrez notre vidéo&nbsp;!
     video: true
     lien: https://ressources-mac.cellar-c2.services.clever-cloud.com/Video_MAC.mp4
-    illustration: mac/mac.png
+    illustration: mac/mac.avif
     couleurFond: '#6f479f'
 ---
 

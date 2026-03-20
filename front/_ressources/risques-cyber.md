@@ -4,7 +4,7 @@ typologie: contenu
 nom: Vidéo
 titreHtml: Vidéo
 description: Découvrir les risques cyber en 2mn
-illustration: risques-cyber/risques-cyber.png
+illustration: risques-cyber/risques-cyber.avif
 lien: https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/Video_Risques.mp4
 droitsAcces:
   - ACCES_LIBRE

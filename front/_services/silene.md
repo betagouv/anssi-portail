@@ -5,7 +5,7 @@ nom: SILENE
 avecFicheDetaillee: true
 description: Cartographier son exposition sur internet
 titreHtml: SILENE
-illustration: silene/silene.png
+illustration: silene/silene.avif
 lien: https://club.ssi.gouv.fr/beta/#/login
 droitsAcces:
   - ENTITES_PUBLIQUES

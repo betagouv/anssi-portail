@@ -5,7 +5,7 @@ nom: MooC EBIOS RM
 avecFicheDetaillee: true
 description: Se former à l’analyse de risque avec EBIOS RM
 titreHtml: MooC EBIOS RM
-illustration: mooc-ebios-rm/mooc-ebios-rm.png
+illustration: mooc-ebios-rm/mooc-ebios-rm.avif
 lien: https://lms.club-ebios.org/formations/ebiosrm
 droitsAcces:
   - ACCES_LIBRE

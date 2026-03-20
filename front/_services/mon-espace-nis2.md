@@ -6,7 +6,7 @@ avecFicheDetaillee: true
 titreHtml: MonEspaceNIS2
 description: 'Se préparer à NIS2'
 lien: https://monespacenis2.cyber.gouv.fr/
-illustration: nis2/menis2.png
+illustration: nis2/menis2.avif
 sources:
   - ANSSI
   - Innovation ANSSI
@@ -21,7 +21,7 @@ liens:
   - accompagnement:
     titre: Parcours NIS2 sur MesServicesCyber
     lien: https://messervices.cyber.gouv.fr/nis2/
-    illustration: nis2/nis2parcours.png
+    illustration: nis2/nis2parcours.avif
     couleurFond: '#272771'
 ---
 

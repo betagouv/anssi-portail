@@ -5,7 +5,7 @@ nom: Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber
 avecFicheDetaillee: true
 titreHtml: DemainSpécialisteCyber
 description: S’informer sur la cybersécurité et ses métiers
-illustration: demainspecialistecyber/demainspecialistecyber.png
+illustration: demainspecialistecyber/demainspecialistecyber.avif
 lien: https://demainspecialiste.cyber.gouv.fr/
 droitsAcces:
   - ACCES_LIBRE
@@ -20,7 +20,7 @@ liens:
   - accompagnement:
     titre: CyberEnJeux
     lien: /ressources/cyber-enjeux.html
-    illustration: demainspecialistecyber/demainspecialistecyber-cyberenjeux.png
+    illustration: demainspecialistecyber/demainspecialistecyber-cyberenjeux.avif
     couleurFond: '#4cbab6'
 ---
 

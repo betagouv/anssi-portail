@@ -4,7 +4,7 @@ typologie: contenu
 nom: Cybermalveillance
 titreHtml: Cybermalveillance
 description: Comprendre les risques et adopter les bonnes pratiques
-illustration: cybermalveillance/cybermalveillance.png
+illustration: cybermalveillance/cybermalveillance.avif
 lien: https://www.cybermalveillance.gouv.fr/bonnes-pratiques
 droitsAcces:
   - ACCES_LIBRE
