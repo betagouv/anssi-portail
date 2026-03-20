@@ -249,7 +249,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   );
 
   app.use('/documents-guides', ressourceDocumentGuide(configurationServeur));
-  app.use('/documents-ressources', ressourceDocumentRessource());
+  app.use('/documents-ressources', ressourceDocumentRessource(configurationServeur));
 
   app.use('/visas', ressourceVisa(configurationServeur));
 
