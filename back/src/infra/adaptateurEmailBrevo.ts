@@ -2,6 +2,7 @@ import { adaptateurEmailConsole } from './adaptateurEmailConsole';
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
 import axios from 'axios';
 import { decode } from 'html-entities';
+import { Telephone } from '../metier/telephone';
 
 const enteteJSON = {
   headers: {
@@ -47,7 +48,7 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
           attributes: {
             PRENOM: decode(prenom),
             NOM: decode(nom),
-            SMS: telephone ?? '',
+            SMS: new Telephone(telephone).auFormatInternational(),
           },
         },
         enteteJSON
