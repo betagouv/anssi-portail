@@ -88,21 +88,34 @@ type ResultatSirene = {
 
 const rechercheSansCache = {
   async rechercheOrganisations(terme: string, departement: string | null): Promise<ResultatRechercheEntreprise[]> {
+    const etablissementEnFrance = (resultat: ResultatSirene) => {
+      const aUnEtablissement = resultat.matching_etablissements && resultat.matching_etablissements.length > 0;
+      if (!aUnEtablissement) return false;
+      return resultat.matching_etablissements[0].commune !== null;
+    };
+
+    const siegeEnFrance = (resultat: ResultatSirene) => resultat.siege.departement !== null;
+
     try {
-      const reponse = await axios.get('https://recherche-entreprises.api.gouv.fr/search', {
-        params: {
-          q: terme,
-          ...(departement && { departement }),
-          per_page: 25,
-          page: 1,
-          limite_matching_etablissements: 1,
-          est_entrepreneur_individuel: false,
-          mtm_campaign: 'mes-services-cyber',
-        },
-      });
+      const reponse = await axios.get<{ results: ResultatSirene[] }>(
+        'https://recherche-entreprises.api.gouv.fr/search',
+        {
+          params: {
+            q: terme,
+            ...(departement && { departement }),
+            per_page: 25,
+            page: 1,
+            limite_matching_etablissements: 1,
+            est_entrepreneur_individuel: false,
+            mtm_campaign: 'mes-services-cyber',
+          },
+        }
+      );
+
+      const estUneRechercheParSiret = terme.match('^[0-9 ]+$');
 
       return reponse.data.results
-        .filter((r: ResultatSirene) => r.siege.departement !== null)
+        .filter(estUneRechercheParSiret ? etablissementEnFrance : siegeEnFrance)
         .map((r: ResultatSirene) => extraisInfosEtablissement(terme, r));
     } catch (e) {
       if (e instanceof AxiosError) {
