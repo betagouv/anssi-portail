@@ -14,6 +14,7 @@
   import type { Comparaison } from './tableaux/configuration.type';
   import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
   import TableauExigencesSimple from './tableaux/TableauExigencesSimple.svelte';
+  import { clic } from '../directives/actions.svelte';
 
   const { featureFlagNis2CyFun23 }: { featureFlagNis2CyFun23: boolean } =
     $props();
@@ -84,6 +85,14 @@
     };
     charge();
   });
+
+  const traceTelechargement = (url: string) => {
+    window._paq?.push([
+      'trackLink',
+      `https://${window.location.host}${url}`,
+      'download',
+    ]);
+  };
 </script>
 
 <ConteneurLarge mode={mode === 'LISTE' ? 'STANDARD' : 'LARGE'}>
@@ -97,12 +106,20 @@
           label="Télécharger les exigences"
           download=""
           detail="PDF - 965,8 ko"
+          use:clic={() =>
+            traceTelechargement(
+              '/documents-ressources/20260317_NIS_V2_ReCyF_v2.5.pdf'
+            )}
         ></dsfr-link>
         <dsfr-link
           href="/documents-ressources/20260317_NIS_V2_Suivi des modifications ReCyF v2.4 vers v2.5-vfinale.pdf"
           label="Télécharger le suivi des modifications"
           download=""
           detail="PDF - 1 383,4 ko"
+          use:clic={() =>
+            traceTelechargement(
+              '/documents-ressources/20260317_NIS_V2_Suivi des modifications ReCyF v2.4 vers v2.5-vfinale.pdf'
+            )}
         ></dsfr-link>
       </div>
       <dsfr-button
