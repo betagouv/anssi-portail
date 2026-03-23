@@ -1,93 +1,124 @@
 <script lang="ts">
   import qrcode from 'qrcode';
-  import Bouton from '../ui/Bouton.svelte';
+  import { tick } from 'svelte';
+  import { clic } from '../directives/actions.svelte';
+  import Modale from '../ui/Modale.svelte';
   import type { ReponseCreationSessionGroupe } from './SessionGroupe';
-  import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
 
-  let modaleNouvelleSession: HTMLDialogElement;
-  let codeSession: string;
-  let codeSessionFormate: string;
-  let canvas: HTMLCanvasElement;
-  let lienPourParticipants: string;
+  let codeSession = $state<string>('');
+  let canvas = $state<HTMLCanvasElement>();
+  let lienPourParticipants = $state<string>('');
 
-  export const ouvre = ({
+  let modaleEstOuverte = $state(false);
+
+  export const ouvre = async ({
     code,
     lienParticipant,
   }: ReponseCreationSessionGroupe) => {
     codeSession = code;
     lienPourParticipants = lienParticipant;
-    qrcode.toCanvas(canvas, lienParticipant, { width: 148, margin: 0 });
-    modaleNouvelleSession.showModal();
+    modaleEstOuverte = true;
+    await tick();
+    await qrcode.toCanvas(canvas, lienParticipant, { width: 148, margin: 0 });
   };
 
   const ferme = () => {
-    modaleNouvelleSession.close();
+    modaleEstOuverte = false;
   };
 
-  $: codeSessionFormate =
-    codeSession && codeSession.slice(0, 3) + '-' + codeSession.slice(3);
+  let codeSessionFormate = $derived(
+    codeSession && codeSession.slice(0, 3) + '-' + codeSession.slice(3)
+  );
 
   const copieLienParticipant = () => {
     navigator.clipboard.writeText(lienPourParticipants).then(function () {
       alert('Lien participant copié dans le presse papier.');
     });
   };
+
+  let lienPourOrganisateur = $derived(
+    `${window.location.origin}/test-maturite?session-groupe=${codeSession}&organisateur`
+  );
+
+  const copieLienOrganisateur = () => {
+    navigator.clipboard.writeText(lienPourOrganisateur).then(function () {
+      alert('Lien organisateur copié dans le presse papier.');
+    });
+  };
 </script>
 
-<dialog bind:this={modaleNouvelleSession}>
-  <div class="modale">
-    <BoutonFermerModale on:click={ferme} />
-    <h4>Nouvelle session de groupe</h4>
-    <div class="contenu">
-      <div class="information">
-        <p>
-          Partagez ce code ou le QR code aux participants pour leur permettre
-          d’accéder à la session de test de maturité cyber. Ce code est unique
-          et valable pour cette session uniquement.
-        </p>
-        <div class="code">{codeSessionFormate}</div>
-      </div>
-      <div class="qrcode">
-        <div class="conteneur-qrcode">
-          <canvas id="canvas" bind:this={canvas}></canvas>
-        </div>
-        <button
-          title="Copier dans le presse-papier le lien de participation à la session de groupe"
-          on:click={copieLienParticipant}
-        >
-          Copier le lien participant
-        </button>
-      </div>
-    </div>
-    <div class="actions">
-      <Bouton titre="Annuler" type="secondaire" taille="md" on:click={ferme} />
-      <a
-        href={`/test-maturite?session-groupe=${codeSession}&organisateur`}
-        class="bouton primaire taille-moyenne">Débuter le test</a
+<Modale bind:estOuverte={modaleEstOuverte}>
+  <h4>
+    <lab-anssi-icone nom="team-fill" taille="lg"></lab-anssi-icone>
+    Nouvelle session de groupe
+  </h4>
+  <div class="information">
+    <p>
+      Partagez ce code ou le QR code aux participants pour leur permettre
+      d’accéder à la session de test de maturité cyber. Ce code est unique et
+      valable pour cette session uniquement.
+    </p>
+  </div>
+  <div class="qrcode">
+    <canvas bind:this={canvas}></canvas>
+    <div>
+      <p class="texte-standard-md">Code de session</p>
+      <h2 class="code">{codeSessionFormate}</h2>
+      <dsfr-button
+        label="Copier le lien participant"
+        title="Copier dans le presse-papier le lien de participation à la session de groupe"
+        size="sm"
+        kind="tertiary"
+        hasIcon
+        iconPlace="left"
+        icon="link"
+        use:clic={copieLienParticipant}
       >
+      </dsfr-button>
     </div>
   </div>
-</dialog>
+  <div class="organisateur texte-detail-sm">
+    <p>
+      Copiez ce lien si vous souhaitez accéder à votre session organisateur
+      ultérieurement&nbsp;:<br />
+      <u>session-groupe={codeSession}&organisateur</u>
+      <dsfr-button
+        title="Copier dans le presse-papier le lien organisateur de la session de groupe"
+        size="sm"
+        kind="tertiary-no-outline"
+        hasIcon
+        iconPlace="only"
+        icon="link"
+        use:clic={copieLienOrganisateur}
+      >
+      </dsfr-button>
+    </p>
+  </div>
+  {#snippet actions()}
+    <div class="actions">
+      <dsfr-button
+        label="Débuter le test"
+        title="Débuter le test de maturité cyber en tant qu'organisateur"
+        size="md"
+        kind="primary"
+        markup="a"
+        href={`/test-maturite?session-groupe=${codeSession}&organisateur`}
+        centered
+      ></dsfr-button>
+      <dsfr-button
+        label="Annuler"
+        title="Annuler"
+        kind="secondary"
+        size="md"
+        use:clic={ferme}
+        centered
+      ></dsfr-button>
+    </div>
+  {/snippet}
+</Modale>
 
 <style lang="scss">
-  dialog {
-    padding: 16px 32px;
-    border: none;
-    border-radius: 8px;
-    background-color: var(--background-default-grey);
-    box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
-    max-width: 588px;
-    box-sizing: border-box;
-
-    &::backdrop {
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-  }
-
-  .modale {
-    display: flex;
-    flex-direction: column;
-  }
+  @use '../../../assets/styles/responsive' as *;
 
   h4 {
     font-size: 1.5rem;
@@ -102,56 +133,51 @@
     margin: 0 0 16px;
   }
 
-  .code {
-    font-size: 2rem;
-    font-weight: bold;
-    line-height: 2.5rem;
-  }
-
-  .contenu {
-    display: flex;
-    gap: 24px;
+  .information {
+    margin-bottom: 24px;
   }
 
   .qrcode {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin-bottom: 24px;
+    gap: 0 24px;
 
-    .conteneur-qrcode {
+    canvas {
       border: 1px solid var(--border-default-grey);
       border-radius: 8px;
+      margin-bottom: 16px;
       padding: 16px;
-      margin-bottom: 8px;
-
-      canvas {
-        width: 148px;
-        height: 148px;
-      }
+      width: 148px;
+      height: 148px;
     }
 
-    button {
-      padding: 0;
-      border: none;
-      background: none;
-      text-decoration: underline solid var(--noir) 1px;
-      -webkit-text-decoration: underline;
-      text-underline-offset: 4px;
-      cursor: pointer;
-      font-size: 0.875rem;
-      line-height: 1.5rem;
+    .texte-standard-md {
+      margin-bottom: 0;
+    }
 
-      &:hover {
-        text-decoration-thickness: 2px;
-      }
+    .code {
+      margin-bottom: 16px;
     }
   }
 
   .actions {
     display: flex;
-    padding: 48px 0 16px;
-    justify-content: flex-end;
-    align-items: center;
+    align-items: stretch;
+    flex-direction: column;
     gap: 16px;
+  }
+
+  @include a-partir-de(md) {
+    .qrcode {
+      flex-direction: row;
+    }
+  }
+
+  @include a-partir-de(lg) {
+    .actions {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
   }
 </style>
