@@ -28,7 +28,10 @@ export const financementsFiltre = derived(
 
     const typesOrganisation = [
       ...new Set($financementsStore.map((t) => t.entitesElligibles).flat()),
-    ].sort((a, b) => b.localeCompare(a));
+    ].sort((a, b) => {
+      if (a === 'Toutes entités publiques') return 1;
+      return b.localeCompare(a);
+    });
 
     return { resultat, typesFinancement, typesOrganisation };
   }
