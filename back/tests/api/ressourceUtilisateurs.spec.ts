@@ -128,6 +128,7 @@ describe('La ressource utilisateur', () => {
       assert.equal(evenement!.prenom, 'Jeanne');
       assert.equal(evenement!.nom, 'Dupont');
       assert.equal(evenement!.infoLettre, true);
+      assert.equal(evenement!.telephone, '0123456789');
     });
 
     it('aseptise les paramètres', async () => {
