@@ -51,7 +51,7 @@ const ressourceUtilisateurs = ({
 
         await entrepotUtilisateur.ajoute(utilisateur);
 
-        await busEvenements.publie(new CompteCree({ email, prenom, nom, infoLettre: infolettreAcceptee }));
+        await busEvenements.publie(new CompteCree({ email, prenom, nom, infoLettre: infolettreAcceptee, telephone }));
 
         reponse.sendStatus(201);
       } catch {
