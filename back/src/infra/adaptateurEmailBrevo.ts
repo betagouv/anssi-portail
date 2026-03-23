@@ -29,11 +29,13 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
     prenom,
     nom,
     infoLettre,
+    telephone,
   }: {
     email: string;
     prenom: string;
     nom: string;
     infoLettre: boolean;
+    telephone?: string;
   }) => {
     axios
       .post(
@@ -45,6 +47,7 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
           attributes: {
             PRENOM: decode(prenom),
             NOM: decode(nom),
+            SMS: telephone ?? '',
           },
         },
         enteteJSON

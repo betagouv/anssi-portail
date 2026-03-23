@@ -9,8 +9,14 @@ describe("L'abonnement qui crée un contact Brevo", () => {
     let contactCree;
     const adaptateurEmail: AdaptateurEmail = {
       envoieEmailBienvenue: async () => {},
-      creeContactBrevo: async (donneesRecu: { email: string; nom: string; prenom: string; infoLettre: boolean }) => {
-        contactCree = { ...donneesRecu };
+      creeContactBrevo: async (donneesRecues: {
+        email: string;
+        nom: string;
+        prenom: string;
+        infoLettre: boolean;
+        telephone?: string;
+      }) => {
+        contactCree = { ...donneesRecues };
       },
     };
 
@@ -20,6 +26,7 @@ describe("L'abonnement qui crée un contact Brevo", () => {
         prenom: 'Jeanne',
         nom: 'Dupont',
         infoLettre: true,
+        telephone: '0123456789',
       })
     );
 
@@ -29,6 +36,7 @@ describe("L'abonnement qui crée un contact Brevo", () => {
       prenom: 'Jeanne',
       nom: 'Dupont',
       infoLettre: true,
+      telephone: '0123456789',
     });
   });
 });
