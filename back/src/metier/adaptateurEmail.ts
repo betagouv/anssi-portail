@@ -5,10 +5,12 @@ export interface AdaptateurEmail {
     prenom,
     nom,
     infoLettre,
+    telephone,
   }: {
     email: string;
     prenom: string;
     nom: string;
     infoLettre: boolean;
+    telephone?: string;
   }) => Promise<void>;
 }
