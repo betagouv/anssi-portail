@@ -295,17 +295,17 @@
 .partenaires {
   background-color: #f6f6f6;
   padding: 56px var(--gouttiere);
+
   .logos {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
     margin-block: 48px 24px;
-    gap: 48px;
+    gap: 32px 72px;
 
     @include a-partir-de(lg) {
-      gap: 0;
-      justify-content: space-between;
+      justify-content: space-around;
     }
   }
 }
