@@ -100,12 +100,13 @@ export class ConsoleAdministration {
     const afficheErreur = (utilisateur: Utilisateur) => `Erreur pour ${utilisateur.email}`;
 
     const rattrapeUtilisateur = async (utilisateur: Utilisateur) => {
-      const { prenom, nom, email, infolettreAcceptee } = utilisateur;
+      const { prenom, nom, email, infolettreAcceptee, telephone } = utilisateur;
       await this.adaptateurEmail.creeContactBrevo({
         prenom,
         nom,
         email,
         infoLettre: infolettreAcceptee,
+        telephone,
       });
     };
 
