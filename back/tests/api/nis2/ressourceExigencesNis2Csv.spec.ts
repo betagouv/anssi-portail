@@ -32,6 +32,12 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
       assert.equal(headers['content-type'], 'text/csv; charset=utf-8');
     });
 
+    it('commence le contenu CSV avec un BOM', async () => {
+      const { text } = await request(serveur).get('/api/exigences-nis2.csv');
+
+      assert.equal(text[0], '\uFEFF');
+    });
+
     it('renvoie une 404 si NIS2 ne figure ni dans la cible, ni dans la source', async () => {
       const { status } = await request(serveur).get('/api/exigences-nis2.csv').query({ source: 'ISO', cible: 'ISO' });
 
@@ -84,7 +90,7 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
       const lignes = text.split('\n');
       assert.equal(lignes.length, 3);
       assert.equal(
-        lignes[0],
+        lignes[0].slice(1),
         '"Référence";"Contenu";"Objectif";"Thématique";' +
           '"Cibles";"Correspondance";"Observations";"Référence ISO (1)";"Contenu ISO (1)";"Référence ISO (2)";"Contenu ISO (2)"'
       );

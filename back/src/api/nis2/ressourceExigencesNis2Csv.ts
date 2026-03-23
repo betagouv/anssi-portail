@@ -47,7 +47,7 @@ export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationSer
       fieldDelimiter: ';',
     });
 
-    const csv = stringifier.getHeaderString() + stringifier.stringifyRecords(strategieExportCsv.lignes(exigences));
+    const csv = `\uFEFF${stringifier.getHeaderString()}${stringifier.stringifyRecords(strategieExportCsv.lignes(exigences))}`;
 
     reponse.attachment(nomFichierCsv(referentielSource, referentielCible) + '.csv').send(csv);
   });
