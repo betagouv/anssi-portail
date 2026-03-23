@@ -18,7 +18,7 @@ jobs:
     environment: ${{ inputs.environnement }}
     steps:
       - name: Cloner le dépôt Git
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0 # Cloner l'intégralité du dépôt, pour ne pas avoir de « shallow repo » rejeté par Clever
 
