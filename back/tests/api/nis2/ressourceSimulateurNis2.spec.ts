@@ -1,7 +1,6 @@
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import assert from 'node:assert';
-
 import { Express } from 'express';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
 import { creeServeur } from '../../../src/api/msc';
@@ -39,6 +38,12 @@ describe('La ressource qui gère le simulateur NIS2', () => {
       await request(serveur).post('/api/simulateur-nis2').send({ question1: false });
 
       assert.equal(busEvenements.aRecuUnEvenement(SimulationNis2Terminee), true);
+    });
+
+    it("retourne 400 si le corps de la requête n'est pas un questionnaire correctement rempli", async () => {
+      const { status } = await request(serveur).post('/api/simulateur-nis2').send({ question1: 'pas-un-booleen' });
+
+      assert.equal(status, 400);
     });
   });
 });
