@@ -158,7 +158,13 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'associations',
     'entreprises',
     'sante',
-  ].forEach((page) => app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
+  ]
+    .concat(
+      configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()
+        ? ['simulateur-nis2']
+        : []
+    )
+    .forEach((page) => app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
 
   app.post('/formulaire-matomo', (_requete: Request, reponse: Response) => {
     reponse
