@@ -51,6 +51,7 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
+import { ressourceSimulateurNis2 } from './nis2/ressourceSimulateurNis2';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -269,6 +270,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/api/exigences-nis2', ressourceExigencesNis2(configurationServeur));
   app.use('/api/exigences-nis2.csv', ressourceExigencesNis2Csv(configurationServeur));
+
+  if (configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur())
+    app.use('/api/simulateur-nis2', ressourceSimulateurNis2());
 
   app.use('/api/sante-guides', ressourceSanteGuides(configurationServeur));
 
