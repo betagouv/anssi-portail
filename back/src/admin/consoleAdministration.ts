@@ -10,10 +10,11 @@ import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import { AdaptateurHachage, fabriqueAdaptateurHachage } from '../infra/adaptateurHachage';
 import { adaptateurJournalMemoire } from '../infra/adaptateurJournal';
 import { adaptateurJournalPostgres } from '../infra/adaptateurJournalPostgres';
-import { fabriqueAdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
-import { AdaptateurRechercheEntreprise, adaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
+import { AdaptateurProfilAnssi, fabriqueAdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
+import { adaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres';
 import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres';
+import { UtilisateurBDD } from '../infra/utilisateurBDD';
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
 import { EntrepotFavori } from '../metier/entrepotFavori';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
@@ -31,7 +32,7 @@ export class ConsoleAdministration {
   private readonly adaptateurChiffrement: AdaptateurChiffrement;
   private readonly adaptateurHachage: AdaptateurHachage;
   private entrepotFavori: EntrepotFavori;
-  private adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
+  private adaptateurProfilAnssi: AdaptateurProfilAnssi;
   private knexJournal: Knex.Knex;
   private knexMSC: Knex.Knex;
 
@@ -51,7 +52,7 @@ export class ConsoleAdministration {
     this.entrepotFavori = new EntrepotFavoriPostgres({
       adaptateurHachage: this.adaptateurHachage,
     });
-    this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
+    this.adaptateurProfilAnssi = adaptateurProfilAnssi;
     const configDuJournal = {
       client: 'pg',
       connection: process.env.BASE_DONNEES_JOURNAL_URL_SERVEUR,
@@ -111,6 +112,60 @@ export class ConsoleAdministration {
     };
 
     return ConsoleAdministration.rattrapage([unUtilisateur], afficheErreur, rattrapeUtilisateur);
+  }
+
+  async rattrapageDeTousLesProfilsContactBrevo(tailleLot: number = 500) {
+    let lotCourant = 0;
+    let lotUtilisateurs: UtilisateurBDD[] = [];
+    do {
+      lotUtilisateurs = await this.knexMSC('utilisateurs')
+        .offset(lotCourant * tailleLot)
+        .limit(tailleLot);
+      console.info(`Traitement du lot ${lotCourant + 1} : ${lotUtilisateurs.length} utilisateurs ...`);
+
+      const donneesDechiffrees = lotUtilisateurs
+        .map((u) => {
+          try {
+            return this.adaptateurChiffrement.dechiffre(u.donnees) as {
+              email: string;
+              infolettreAcceptee: boolean;
+            };
+          } catch {
+            console.error('Erreur déchiffrement : ', u.email_hache);
+            return null;
+          }
+        })
+        .filter((d) => !!d);
+
+      const correspondanceEmailsInfolettre = donneesDechiffrees.reduce(
+        (map, donnee) => {
+          map.set(donnee.email, donnee.infolettreAcceptee);
+          return map;
+        },
+        new Map() as Map<string, boolean>
+      );
+
+      const profilsAnssi = await this.adaptateurProfilAnssi.recherche({
+        emails: Array.from(correspondanceEmailsInfolettre.keys()),
+      });
+
+      for (const { email, nom, prenom, telephone } of profilsAnssi) {
+        try {
+          await this.adaptateurEmail.creeContactBrevo({
+            prenom,
+            nom,
+            email,
+            infoLettre: correspondanceEmailsInfolettre.get(email) ?? false,
+            telephone,
+          });
+        } catch (e) {
+          console.error('Erreur mise à jour brevo : ', e);
+        }
+      }
+
+      lotCourant++;
+    } while (lotUtilisateurs.length === tailleLot);
+    console.info('Traitement terminé');
   }
 
   async rattrapageMAJFavorisUtilisateurs(persiste: boolean = false) {
