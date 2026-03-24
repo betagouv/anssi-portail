@@ -5,9 +5,9 @@ import { SimulationNis2Terminee } from '../../bus/evenements/simulationNis2Termi
 export const ressourceSimulateurNis2 = ({ busEvenements }: ConfigurationServeur) => {
   const routeur = Router();
 
-  routeur.post('/', async (requete, reponse) => {
+  routeur.post('/', async (_requete, reponse) => {
     await busEvenements.publie(new SimulationNis2Terminee());
-    reponse.status(201).json(requete.body);
+    reponse.sendStatus(201);
   });
 
   return routeur;
