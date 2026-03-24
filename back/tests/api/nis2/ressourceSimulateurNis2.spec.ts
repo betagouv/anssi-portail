@@ -29,11 +29,10 @@ describe('La ressource qui gère le simulateur NIS2', () => {
   });
 
   describe('sur requête POST', () => {
-    it('répond 201 avec le contenu de ce qui est reçu, temporairement', async () => {
+    it('répond 201', async () => {
       const reponse = await request(serveur).post('/api/simulateur-nis2').send({ question1: false });
 
       assert.equal(reponse.status, 201);
-      assert.deepEqual(reponse.body, { question1: false });
     });
 
     it("publie sur le bus le résultat du test d'éligibilité", async () => {
