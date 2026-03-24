@@ -25,6 +25,7 @@ export type ProfilAnssi = {
 export interface AdaptateurProfilAnssi {
   metsAJour: (profilAnssi: ProfilAnssi) => Promise<void>;
   recupere: (email: string) => Promise<ProfilAnssi | undefined>;
+  recherche: (criteres: { emails: string[] }) => Promise<ProfilAnssi[]>;
 }
 
 const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
@@ -59,7 +60,23 @@ const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
     }
   };
 
-  return { recupere, metsAJour };
+  const recherche = async ({ emails }: { emails: string[] }): Promise<ProfilAnssi[]> => {
+    const urlProfil = `${process.env.PROFIL_ANSSI_URL_BASE}/profils/recherche`;
+    try {
+      const reponse = await axios.post<ProfilAnssi[]>(urlProfil, { emails }, CONFIGURATION_AUTHENTIFICATION);
+      return reponse.data;
+    } catch (e) {
+      if (axios.isAxiosError(e) && e.response?.status !== 404) {
+        console.error({
+          'Erreur renvoyée par API MonProfilAnssi': e.response?.data,
+          'Statut renvoyé par API MonProfilAnssi': e.response?.status,
+        });
+      }
+      return [];
+    }
+  };
+
+  return { recupere, metsAJour, recherche };
 };
 
 export const fabriqueAdaptateurProfilAnssi = () =>
