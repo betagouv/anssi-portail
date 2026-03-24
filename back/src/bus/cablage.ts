@@ -20,6 +20,8 @@ import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
 import { TestRealise } from './evenements/testRealise';
 import { UtilisateurConnecte } from './evenements/utilisateurConnecte';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
+import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee';
+import { consigneEvenementSimulationNis2TermineeDansJournal } from './consigneEvenementSimulationNis2TermineeDansJournal';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
@@ -93,6 +95,14 @@ export const cableTousLesAbonnes = ({
   busEvenements.abonne(
     UtilisateurConnecte,
     consigneEvenementUtilisateurConnecteDansJournal({
+      adaptateurJournal,
+      adaptateurHorloge,
+    })
+  );
+
+  busEvenements.abonne(
+    SimulationNis2Terminee,
+    consigneEvenementSimulationNis2TermineeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
     })

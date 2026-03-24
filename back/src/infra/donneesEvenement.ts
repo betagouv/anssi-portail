@@ -11,7 +11,8 @@ export type DonneesEvenement =
   | DonneesEvenementMiseAJourFavorisUtilisateur
   | DonneesEvenementRetourExperienceDonne
   | DonneesEvenementAvisUtilisateurDonne
-  | DonneesEvenementUtilisateurConnecte;
+  | DonneesEvenementUtilisateurConnecte
+  | DonneesSimulationNis2Terminee;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -69,3 +70,5 @@ export type DonneesEvenementUtilisateurConnecte = Evenement<
   'UTILISATEUR_CONNECTE',
   { idUtilisateur: string; connexionAvecMFA: boolean }
 >;
+
+export type DonneesSimulationNis2Terminee = Evenement<'SIMULATION_NIS2_TERMINEE', { question1EstTrue: boolean }>;
