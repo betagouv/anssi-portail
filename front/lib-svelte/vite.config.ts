@@ -46,6 +46,7 @@ export default defineConfig({
         'demande-diagnostic': 'src/main-demande-diagnostic.ts',
         'barometre-simplifie': 'src/main-barometre-simplifie.ts',
         'page-directive-nis2': 'src/main-page-directive-nis2.ts',
+        'simulateur-nis2': 'src/main-simulateur-nis2.ts',
         collectivites: 'src/main-collectivites.ts',
         associations: 'src/main-associations.ts',
         entreprises: 'src/main-entreprises.ts',
