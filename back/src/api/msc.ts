@@ -272,7 +272,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/api/exigences-nis2.csv', ressourceExigencesNis2Csv(configurationServeur));
 
   if (configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur())
-    app.use('/api/simulateur-nis2', ressourceSimulateurNis2());
+    app.use('/api/simulateur-nis2', ressourceSimulateurNis2(configurationServeur));
 
   app.use('/api/sante-guides', ressourceSanteGuides(configurationServeur));
 
