@@ -71,6 +71,7 @@ export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = 
 export const fauxAdaptateurProfilAnssi: AdaptateurProfilAnssi = {
   metsAJour: async () => undefined,
   recupere: async () => undefined,
+  recherche: async () => [],
 };
 
 const entrepotUtilisateur = new EntrepotUtilisateurMemoire();

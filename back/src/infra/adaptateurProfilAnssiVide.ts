@@ -1,4 +1,4 @@
-import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi';
+import { AdaptateurProfilAnssi, ProfilAnssi } from './adaptateurProfilAnssi';
 
 export const adaptateurProfilAnssiVide = (): AdaptateurProfilAnssi => ({
   recupere: async (email: string) => ({
@@ -9,4 +9,8 @@ export const adaptateurProfilAnssiVide = (): AdaptateurProfilAnssi => ({
     organisation: { nom: 'ANSSI', siret: '13000766900018', departement: '33' },
   }),
   metsAJour: async () => {},
+
+  recherche: async (): Promise<ProfilAnssi[]> => {
+    return [];
+  },
 });
