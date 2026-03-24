@@ -147,7 +147,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   fonctionnalites: () => ({
     nis2: () => ({
       afficheCyFun23: () => true,
-      afficheSimulateur: () => true,
+      afficheSimulateur: () => false,
     }),
   }),
   nodeEnv: () => 'developpement',
