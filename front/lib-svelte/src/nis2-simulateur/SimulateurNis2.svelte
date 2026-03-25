@@ -1,8 +1,12 @@
 <script lang="ts">
   import { questionnaireStore } from './stores/questionnaire.store';
-  import { valideEtapePrealable } from './stores/actions';
+  import {
+    valideEtapeDesignation,
+    valideEtapePrealable,
+  } from './stores/actions';
   import EtapePrealable from './etapes/EtapePrealable.svelte';
   import Hero from '../ui/Hero.svelte';
+  import EtapeDesignation from './etapes/EtapeDesignation.svelte';
 </script>
 
 <Hero
@@ -18,9 +22,11 @@
       onsuivant={() => questionnaireStore.repond(valideEtapePrealable())}
     />
   {:else if $questionnaireStore.etapeCourante === 'designationOperateurServicesEssentiels'}
-    <h1>Désignation</h1>
+    <EtapeDesignation
+      onsuivant={(reponse) =>
+        questionnaireStore.repond(valideEtapeDesignation([reponse]))}
+    />
   {/if}
-
 </dsfr-container>
 
 <style lang="scss">
