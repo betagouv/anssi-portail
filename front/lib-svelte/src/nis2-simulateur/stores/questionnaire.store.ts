@@ -2,6 +2,11 @@ import { writable } from 'svelte/store';
 import type { ActionQuestionnaire } from './actions';
 import type { EtatQuestionnaire } from '../../../../../back/src/metier/nis2-simulateur/EtatQuestionnaire';
 import { EtatQuestionnaireVide } from '../../../../../back/src/metier/nis2-simulateur/EtatQuestionnaire';
+import { certains, tous } from './arrays.predicats';
+import {
+  estSecteurAutre,
+  estUnSecteurAvecDesSousSecteurs,
+} from './SecteurActivite.predicats';
 
 const etatInitial = () => EtatQuestionnaireVide;
 
@@ -42,6 +47,18 @@ const repond = (reponse: ActionQuestionnaire) => {
       trancheNombreEmployes: reponse.nombreEmployes,
       trancheChiffreAffaire: reponse.chiffreAffaire,
       trancheBilanFinancier: reponse.bilanFinancier,
+    }));
+  } else if (reponse.type === 'VALIDE_ETAPE_SECTEURS_ACTIVITE') {
+    const prochaineEtape = tous(estSecteurAutre)(reponse.secteurs)
+      ? 'resultat'
+      : certains(estUnSecteurAvecDesSousSecteurs)(reponse.secteurs)
+        ? 'sousSecteursActivite'
+        : 'activites';
+
+    update((etat) => ({
+      ...etat,
+      etapeCourante: prochaineEtape,
+      secteurActivite: reponse.secteurs,
     }));
   }
 };

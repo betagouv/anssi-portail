@@ -4,6 +4,7 @@ import { get } from 'svelte/store';
 import {
   valideEtapeAppartenanceUE,
   valideEtapeDesignation,
+  valideSecteursActivite,
   valideTailleEntitePrivee,
   valideTypeStructure,
 } from '../../../src/nis2-simulateur/stores/actions';
@@ -94,6 +95,46 @@ describe('le store du questionnaire NIS2', () => {
     it("passe à l'étape « Secteurs d'activité »", () => {
       const etat = get(questionnaireStore);
       expect(etat.etapeCourante).toBe('secteursActivite');
+    });
+  });
+
+  describe("à la validation de l'étape « Secteurs d'activité »", () => {
+    beforeEach(() => {
+      questionnaireStore.reset();
+    });
+
+    it("sauvegarde les informations de l'étape", () => {
+      questionnaireStore.repond(valideSecteursActivite(['energie']));
+
+      const etat = get(questionnaireStore);
+      expect(etat.secteurActivite).toEqual(['energie']);
+    });
+
+    it("passe à l'étape « Résultat » s'il n'y a que des secteurs classés « Autre »", () => {
+      questionnaireStore.repond(
+        valideSecteursActivite(['autreSecteurActivite'])
+      );
+
+      const etat = get(questionnaireStore);
+      expect(etat.etapeCourante).toBe('resultat');
+    });
+
+    it("passe à l'étape « Sous secteurs d'activité » si certains secteurs ont des sous-secteurs", () => {
+      const secteurSansSousSecteur = 'sante';
+      const secteurAvecSousSecteur = 'energie';
+      questionnaireStore.repond(
+        valideSecteursActivite([secteurSansSousSecteur, secteurAvecSousSecteur])
+      );
+
+      const etat = get(questionnaireStore);
+      expect(etat.etapeCourante).toBe('sousSecteursActivite');
+    });
+
+    it("passe à l'étape « Activités » dans les autres cas", () => {
+      questionnaireStore.repond(valideSecteursActivite(['banqueSecteurBancaire']));
+
+      const etat = get(questionnaireStore);
+      expect(etat.etapeCourante).toBe('activites');
     });
   });
 });
