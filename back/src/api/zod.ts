@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import { Request, Response, NextFunction } from 'express';
 
-export const valideBody =
+export const valideCorpsRequete =
   <TZod extends z.ZodType, TBody extends z.infer<TZod>>(objet: TZod) =>
   async (requete: Request<unknown, unknown, TBody, unknown, never>, reponse: Response, suite: NextFunction) => {
     const resultat = objet.safeParse(requete.body);
