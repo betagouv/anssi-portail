@@ -5,6 +5,7 @@ import {
   valideEtapeAppartenanceUE,
   valideEtapeDesignation,
   valideSecteursActivite,
+  valideSousSecteursActivite,
   valideTailleEntitePrivee,
   valideTypeStructure,
 } from '../../../src/nis2-simulateur/stores/actions';
@@ -131,7 +132,56 @@ describe('le store du questionnaire NIS2', () => {
     });
 
     it("passe à l'étape « Activités » dans les autres cas", () => {
-      questionnaireStore.repond(valideSecteursActivite(['banqueSecteurBancaire']));
+      questionnaireStore.repond(
+        valideSecteursActivite(['banqueSecteurBancaire'])
+      );
+
+      const etat = get(questionnaireStore);
+      expect(etat.etapeCourante).toBe('activites');
+    });
+  });
+
+  describe("à la validation de l'étape « Sous-secteurs d'activité »", () => {
+    beforeEach(() => {
+      questionnaireStore.reset();
+    });
+
+    it("sauvegarde les informations de l'étape", () => {
+      questionnaireStore.repond(valideSousSecteursActivite(['electricite']));
+
+      const etat = get(questionnaireStore);
+      expect(etat.sousSecteurActivite).toEqual(['electricite']);
+    });
+
+    it("passe à l'etape « Résultat » si tous les secteurs & sous-secteurs sont du « Autre » (donc aucun intérêt à aller vers « Activités »)", () => {
+      const secteurAvecSousSecteur = 'fabrication';
+      questionnaireStore.repond(
+        valideSecteursActivite(['autreSecteurActivite', secteurAvecSousSecteur])
+      );
+      questionnaireStore.repond(
+        valideSousSecteursActivite(['autreSousSecteurFabrication'])
+      );
+
+      const etat = get(questionnaireStore);
+      expect(etat.etapeCourante).toBe('resultat');
+    });
+
+    it("passe à l'étape « Activités » s'il y a un secteur qui n'est pas du « Autre » (même si tous les sous-secteurs sont « Autres ») car on va vouloir ses activités", () => {
+      const necessiteEtapeActivite = 'eauxUsees';
+
+      questionnaireStore.repond(
+        valideSecteursActivite(['transports', necessiteEtapeActivite])
+      );
+      questionnaireStore.repond(
+        valideSousSecteursActivite(['autreSousSecteurTransports'])
+      );
+
+      const avecUnSecteurATraiter = get(questionnaireStore);
+      expect(avecUnSecteurATraiter.etapeCourante).toBe('activites');
+    });
+
+    it("passe à l'étape « Activités » s'il y a des sous-secteurs qui ne sont pas du « Autre »", () => {
+      questionnaireStore.repond(valideSousSecteursActivite(['electricite']));
 
       const etat = get(questionnaireStore);
       expect(etat.etapeCourante).toBe('activites');
