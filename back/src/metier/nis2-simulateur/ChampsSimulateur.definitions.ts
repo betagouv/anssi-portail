@@ -1,5 +1,5 @@
-import { UnionDe } from "./UnionDe";
-import { Activite } from "./Activite.definitions";
+import type { UnionDe } from "./UnionDe";
+import type { Activite } from "./Activite.definitions";
 import {
   ValeursappartenancePaysUnionEuropeenne,
   ValeursDesignationOperateurServicesEssentiels,
@@ -8,8 +8,8 @@ import {
   ValeursTypeEntitePublique,
   ValeursTypeStructure,
 } from "./ChampsSimulateur.valeurs";
-import { SecteurActivite } from "./SecteurActivite.definitions";
-import { SousSecteurActivite } from "./SousSecteurActivite.definitions";
+import type { SecteurActivite } from "./SecteurActivite.definitions";
+import type { SousSecteurActivite } from "./SousSecteurActivite.definitions";
 
 export type DesignationOperateurServicesEssentiels = UnionDe<
   typeof ValeursDesignationOperateurServicesEssentiels
