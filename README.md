@@ -6,7 +6,7 @@ Ce site est construit avec Jekyll.
 
 ## Développement
 
-### Démarrage
+### Installation de Jekyll
 
 > N.B. : Jekyll est construit en Ruby.
 > Nous ne sommes pas développeurs Ruby et nous découvrons son écosystème.
@@ -30,7 +30,11 @@ $ cd front
 $ bundler install
 ```
 
+### Initialisation du fichier de variables d'environnement
+
 - Créer un fichier de variables d'environnement, en se basant sur le fichier `.env.template`
+
+### Premier démarrage de la base de données
 
 - Démarrer le conteneur de base de données
 
@@ -44,6 +48,8 @@ $ docker compose up db
 $ docker compose exec db createdb -U postgres msc
 ```
 
+### Installation des dépendances du projet
+
 - Revenir à la racine, installer les dépendances Node et lancer le projet en mode "dev"
 
 ```shell
@@ -51,6 +57,8 @@ $ cd ..
 $ pnpm install --frozen-lockfile
 $ pnpm dev
 ```
+
+### Initialisation des clés de hachage
 
 - Lancer la création des secrets de hachage dans un nouveau terminal :
 
@@ -60,13 +68,32 @@ pnpm admin:dev
 > await admin.sauvegardeLesEmpreintesDesSecretsDeHachage()
 ```
 
-Ensuite relancer un :
+### Démarrer l'application en local
 
 ```shell
 $ pnpm dev
 ```
 
 - Arrivé ici, le site doit être consultable sur http://127.0.0.1:3000
+
+### Installation de prek
+
+Prek sert à executer des commandes au moment du commit. Ça nous sert en l'occurence à formatter nos fichiers avant de les pousser sur Git.
+
+```
+pnpm add -g @j178/prek
+OU
+npm install -g @j178/prek
+```
+
+suivi de
+
+```
+prek install
+```
+
+> [!TIP]
+> prek install crée un hook de pre-commit dans le répertoire `$HOME/.git-template`
 
 ## Le build et la PROD
 
