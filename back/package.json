@@ -67,7 +67,7 @@
     "p-throttle": "^7.0.0",
     "pg": "^8.20.0",
     "uuid": "^11.1.0",
-    "zod": "~4.3.6"
+    "zod": "^4.3.6"
   },
   "directories": {
     "test": "tests"
