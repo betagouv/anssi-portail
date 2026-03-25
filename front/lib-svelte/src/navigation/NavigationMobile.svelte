@@ -88,7 +88,7 @@
           />
           <LienNavigationMobile
             href="/prestataires-labellises/"
-            label="Prestataires labellisés"
+            label="Prestataires qualifiés et labellisés"
             dansMenuDeroulant
           />
         </div>
