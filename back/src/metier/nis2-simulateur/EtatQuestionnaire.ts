@@ -1,5 +1,5 @@
-import { TypeEtape } from "./InformationsEtape";
-import {
+import type { TypeEtape } from "./InformationsEtape";
+import type {
   AppartenancePaysUnionEuropeenne,
   DesignationOperateurServicesEssentiels,
   TrancheBilanFinancier,
@@ -8,9 +8,9 @@ import {
   TypeEntitePublique,
   TypeStructure,
 } from "./ChampsSimulateur.definitions";
-import { SecteurActivite } from "./SecteurActivite.definitions";
-import { SousSecteurActivite } from "./SousSecteurActivite.definitions";
-import { Activite } from "./Activite.definitions";
+import type { SecteurActivite } from "./SecteurActivite.definitions";
+import type { SousSecteurActivite } from "./SousSecteurActivite.definitions";
+import type { Activite } from "./Activite.definitions";
 
 export type EtatQuestionnaire = {
   etapeCourante: TypeEtape;

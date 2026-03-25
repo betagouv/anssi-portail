@@ -1,4 +1,4 @@
-const typeEtapes = [
+const _typeEtapes = [
   "designationOperateurServicesEssentiels",
   "appartenanceUnionEuropeenne",
   "typeStructure",
@@ -14,4 +14,4 @@ const typeEtapes = [
   "inexistante",
   "variante",
 ] as const;
-export type TypeEtape = (typeof typeEtapes)[number];
+export type TypeEtape = (typeof _typeEtapes)[number];
