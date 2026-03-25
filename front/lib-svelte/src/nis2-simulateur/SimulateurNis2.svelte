@@ -1,25 +1,26 @@
 <script lang="ts">
-  import * as api from './simulateurNi2.api';
   import { questionnaireStore } from './stores/questionnaire.store';
-  import { clic } from '../directives/actions.svelte';
+  import { valideEtapePrealable } from './stores/actions';
+  import EtapePrealable from './etapes/EtapePrealable.svelte';
+  import Hero from '../ui/Hero.svelte';
 </script>
 
+<Hero
+  titre="Mon entité est-elle concernée&nbsp;?"
+  description="Déterminez si votre entité est régulée par la directive NIS&nbsp;2."
+  arianeBranche={{ nom: 'Directive NIS 2', lien: '/nis2' }}
+  ariane="Simulateur"
+/>
+
 <dsfr-container>
-  {#if ($questionnaireStore.etapeCourante === "prealable")}
-    <h1 use:clic={() => {
-      questionnaireStore.repond({type: "VALIDE_ETAPE_PREALABLE"});
-    }}>Étape préalable</h1>
-  {:else if ($questionnaireStore.etapeCourante === "designationOperateurServicesEssentiels")}
+  {#if $questionnaireStore.etapeCourante === 'prealable'}
+    <EtapePrealable
+      onsuivant={() => questionnaireStore.repond(valideEtapePrealable())}
+    />
+  {:else if $questionnaireStore.etapeCourante === 'designationOperateurServicesEssentiels'}
     <h1>Désignation</h1>
   {/if}
 
-  <h1>SIMULATEUR NIS 2</h1>
-
-  <dsfr-button
-    label="ENVOYER"
-    size="sm"
-    use:clic={async () => await api.envoyerReponses({ question1: true })}
-  ></dsfr-button>
 </dsfr-container>
 
 <style lang="scss">
