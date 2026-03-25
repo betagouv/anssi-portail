@@ -1,11 +1,8 @@
 <script lang="ts">
   import { clic } from '../../directives/actions.svelte';
   import Etape from './Etape.svelte';
-  import type {
-    DesignationOperateurServicesEssentiels
-  } from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
+  import type { DesignationOperateurServicesEssentiels } from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
   import { TitresEtapes } from './TitresEtapes';
-  import { optionsOuiNonNsp, type OuiNonNsp } from './etapes.types';
 
   interface Props {
     onsuivant: (reponse: DesignationOperateurServicesEssentiels) => void;
@@ -13,9 +10,15 @@
 
   let props: Props = $props();
 
-  let reponse: OuiNonNsp | undefined = $state();
+  export const options = [
+    { label: 'Oui', name: 'radios', id: 'radio-oui', value: 'oui' },
+    { label: 'Non', name: 'radios', id: 'radio-non', value: 'non' },
+    { label: 'Ne sais pas', name: 'radios', id: 'radio-nsp', value: 'nsp' },
+  ];
 
-  const choisis = (e: { detail: OuiNonNsp }) => {
+  let reponse: DesignationOperateurServicesEssentiels | undefined = $state();
+
+  const choisis = (e: { detail: DesignationOperateurServicesEssentiels }) => {
     reponse = e.detail;
   };
 
@@ -33,7 +36,7 @@
 
   <dsfr-radios-group
     legend="Avez-vous été désigné opérateur de services essentiels (OSE) au titre de NIS 1 ?"
-    radios={optionsOuiNonNsp}
+    radios={options}
     onvaluechanged={choisis}
   >
   </dsfr-radios-group>
