@@ -159,6 +159,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'associations',
     'entreprises',
     'sante',
+    'gestion-guides/ajout-document',
   ]
     .concat(
       configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()
