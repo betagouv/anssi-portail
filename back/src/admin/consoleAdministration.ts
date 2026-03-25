@@ -148,16 +148,19 @@ export class ConsoleAdministration {
       const profilsAnssi = await this.adaptateurProfilAnssi.recherche({
         emails: Array.from(correspondanceEmailsInfolettre.keys()),
       });
+      const enCadence = pThrottle({ limit: 1, interval: 100 });
 
       for (const { email, nom, prenom, telephone } of profilsAnssi) {
         try {
-          await this.adaptateurEmail.creeContactBrevo({
-            prenom,
-            nom,
-            email,
-            infoLettre: correspondanceEmailsInfolettre.get(email) ?? false,
-            telephone,
-          });
+          await enCadence(() =>
+            this.adaptateurEmail.creeContactBrevo({
+              prenom,
+              nom,
+              email,
+              infoLettre: correspondanceEmailsInfolettre.get(email) ?? false,
+              telephone,
+            })
+          )();
         } catch (e) {
           console.error('Erreur mise à jour brevo : ', e);
         }
