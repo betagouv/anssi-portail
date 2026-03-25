@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { clic } from '../../directives/actions.svelte';
   import Etape from './Etape.svelte';
   import type { DesignationOperateurServicesEssentiels } from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
   import { TitresEtapes } from './TitresEtapes';
+  import PrecedentSuivant from './PrecedentSuivant.svelte';
 
   interface Props {
     onsuivant: (reponse: DesignationOperateurServicesEssentiels) => void;
@@ -41,9 +41,9 @@
   >
   </dsfr-radios-group>
 
-  <div class="actions">
-    <dsfr-button disabled={reponse === undefined} use:clic={valide}>
-      Suivant
-    </dsfr-button>
-  </div>
+  <PrecedentSuivant
+    message="Sélectionnez une réponse"
+    onsuivant={valide}
+    suivantdisabled={reponse === undefined}
+  />
 </Etape>

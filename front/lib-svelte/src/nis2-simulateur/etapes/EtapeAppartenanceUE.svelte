@@ -1,8 +1,8 @@
 <script lang="ts">
   import Etape from './Etape.svelte';
-  import { clic } from '../../directives/actions.svelte';
   import { TitresEtapes } from './TitresEtapes';
   import type { AppartenancePaysUnionEuropeenne } from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
+  import PrecedentSuivant from './PrecedentSuivant.svelte';
 
   interface Props {
     onsuivant: (reponse: AppartenancePaysUnionEuropeenne) => void;
@@ -59,9 +59,9 @@
     text="Le test est dans un premier temps focalisé sur les entités établies en France, il sera par la suite disponible pour les entités établies dans les autres États de l'Union Européenne et dans les États hors Union Européenne."
   ></dsfr-highlight>
 
-  <div class="actions">
-    <dsfr-button disabled={reponse === undefined} use:clic={valide}>
-      Suivant
-    </dsfr-button>
-  </div>
+  <PrecedentSuivant
+    message="Sélectionnez une réponse"
+    onsuivant={valide}
+    suivantdisabled={reponse === undefined}
+  />
 </Etape>
