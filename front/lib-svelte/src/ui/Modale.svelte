@@ -53,6 +53,7 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
+
   dialog[open] {
     display: flex;
     flex-direction: column;
@@ -73,17 +74,6 @@
       background-color: rgba(0, 0, 0, 0.4);
     }
 
-    @include a-partir-de(lg) {
-      height: min-content;
-      max-height: 90vh;
-      max-height: 90dvh;
-      max-width: 588px;
-      min-width: 0;
-      margin: auto;
-      padding: 0 16px;
-      border-radius: 8px;
-    }
-
     .entete {
       display: flex;
       flex-direction: row-reverse;
@@ -97,11 +87,28 @@
     }
 
     .actions {
+      align-items: stretch;
+      border-top: 1px solid var(--border-default-grey);
       display: flex;
       flex-direction: column;
-      border-top: 1px solid var(--border-default-grey);
-      padding: 16px;
       gap: 16px;
+      padding: 16px;
+    }
+
+    @include a-partir-de(lg) {
+      height: min-content;
+      max-height: 90vh;
+      max-height: 90dvh;
+      max-width: 588px;
+      min-width: 0;
+      margin: auto;
+      padding: 0 16px;
+      border-radius: 8px;
+
+      .actions {
+        border-top: none;
+        flex-direction: row-reverse;
+      }
     }
   }
 </style>

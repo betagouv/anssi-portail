@@ -95,25 +95,23 @@
     </p>
   </div>
   {#snippet actions()}
-    <div class="actions">
-      <dsfr-button
-        label="Débuter le test"
-        title="Débuter le test de maturité cyber en tant qu'organisateur"
-        size="md"
-        kind="primary"
-        markup="a"
-        href={`/test-maturite?session-groupe=${codeSession}&organisateur`}
-        centered
-      ></dsfr-button>
-      <dsfr-button
-        label="Annuler"
-        title="Annuler"
-        kind="secondary"
-        size="md"
-        use:clic={ferme}
-        centered
-      ></dsfr-button>
-    </div>
+    <dsfr-button
+      label="Débuter le test"
+      title="Débuter le test de maturité cyber en tant qu'organisateur"
+      size="md"
+      kind="primary"
+      markup="a"
+      href={`/test-maturite?session-groupe=${codeSession}&organisateur`}
+      centered
+    ></dsfr-button>
+    <dsfr-button
+      label="Annuler"
+      title="Annuler"
+      kind="secondary"
+      size="md"
+      use:clic={ferme}
+      centered
+    ></dsfr-button>
   {/snippet}
 </Modale>
 
@@ -161,23 +159,9 @@
     }
   }
 
-  .actions {
-    display: flex;
-    align-items: stretch;
-    flex-direction: column;
-    gap: 16px;
-  }
-
   @include a-partir-de(md) {
     .qrcode {
       flex-direction: row;
-    }
-  }
-
-  @include a-partir-de(lg) {
-    .actions {
-      align-self: flex-end;
-      flex-direction: row-reverse;
     }
   }
 </style>
