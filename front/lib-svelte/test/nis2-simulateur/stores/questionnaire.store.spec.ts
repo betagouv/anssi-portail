@@ -2,14 +2,19 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { get } from 'svelte/store';
 
 import {
+  valideActivites,
   valideEtapeAppartenanceUE,
   valideEtapeDesignation,
+  valideLocalisationEtablissementPrincipal,
+  valideLocalisationServicesNumeriques,
   valideSecteursActivite,
   valideSousSecteursActivite,
   valideTailleEntitePrivee,
   valideTypeStructure,
 } from '../../../src/nis2-simulateur/stores/actions';
 import { questionnaireStore } from '../../../src/nis2-simulateur/stores/questionnaire.store';
+import type { SecteurActivite } from '../../../../../back/src/metier/nis2-simulateur/SecteurActivite.definitions';
+import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions';
 
 describe('le store du questionnaire NIS2', () => {
   it("indique l'étape préalable comme l'étape de départ", () => {
@@ -185,6 +190,175 @@ describe('le store du questionnaire NIS2', () => {
 
       const etat = get(questionnaireStore);
       expect(etat.etapeCourante).toBe('activites');
+    });
+  });
+
+  describe("à la validation de l'étape « Activités »", () => {
+    beforeEach(() => {
+      questionnaireStore.reset();
+    });
+
+    it("sauvegarde les informations de l'étape", () => {
+      questionnaireStore.repond(valideActivites(['etablissementCredit']));
+
+      const etat = get(questionnaireStore);
+      expect(etat.activites).toEqual(['etablissementCredit']);
+    });
+
+    describe("navigue vers l'étape « Localisation de l'établissement principal » ...", () => {
+      const secteurs: SecteurActivite[] = [
+        'gestionServicesTic',
+        'fournisseursNumeriques',
+      ];
+
+      it.each(secteurs)(
+        "... si le secteur d'activité « %s » est présent",
+        (secteur) => {
+          questionnaireStore.repond(valideSecteursActivite([secteur]));
+          questionnaireStore.repond(
+            valideActivites(['autreActiviteHydrogene'])
+          );
+
+          const etat = get(questionnaireStore);
+          expect(etat.etapeCourante).toBe('localisationEtablissementPrincipal');
+        }
+      );
+
+      const activites: Activite[] = [
+        'registresNomsDomainesPremierNiveau',
+        'fournisseurServicesDNS',
+        'fournisseurServicesInformatiqueNuage',
+        'fournisseurServiceCentresDonnees',
+        'fournisseurReseauxDiffusionContenu',
+        'fournisseurServicesEnregristrementNomDomaine',
+      ];
+
+      it.each(activites)(
+        "... si l'activité « %s » est présente",
+        (activite) => {
+          questionnaireStore.repond(valideActivites([activite]));
+
+          const etat = get(questionnaireStore);
+          expect(etat.etapeCourante).toBe('localisationEtablissementPrincipal');
+        }
+      );
+    });
+
+    describe("navigue vers l'étape « Localisation de la fourniture des services numériques »", () => {
+      const activites: Activite[] = [
+        'fournisseurReseauxCommunicationElectroniquesPublics',
+        'fournisseurServiceCommunicationElectroniquesPublics',
+      ];
+
+      it.each(activites)(
+        "... si l'activité « %s » est présente",
+        (activite) => {
+          questionnaireStore.repond(valideActivites([activite]));
+
+          const etat = get(questionnaireStore);
+          expect(etat.etapeCourante).toBe(
+            'localisationFournitureServicesNumeriques'
+          );
+        }
+      );
+    });
+
+    it("navigue en priorité vers l'étape « Localisation de l'établissement principal » si les 2 sont possibles", () => {
+      questionnaireStore.repond(
+        valideActivites([
+          'fournisseurReseauxCommunicationElectroniquesPublics',
+          'registresNomsDomainesPremierNiveau',
+        ])
+      );
+
+      const etat = get(questionnaireStore);
+      expect(etat.etapeCourante).toBe('localisationEtablissementPrincipal');
+    });
+
+    it("navigue vers l'étape « Résultat » sinon", () => {
+      questionnaireStore.repond(valideActivites(['acteurDuMarche']));
+
+      const etat = get(questionnaireStore);
+      expect(etat.etapeCourante).toBe('resultat');
+    });
+  });
+
+  describe("à la validation de l'étape « Localisation de l'établissement principal »", () => {
+    beforeEach(() => {
+      questionnaireStore.reset();
+    });
+
+    it("sauvegarde les informations de l'étape", () => {
+      questionnaireStore.repond(
+        valideLocalisationEtablissementPrincipal(
+          ['horsue'],
+          ['autre'],
+          ['france']
+        )
+      );
+
+      const etat = get(questionnaireStore);
+      expect(etat.paysDecisionsCyber).toEqual(['horsue']);
+      expect(etat.paysOperationsCyber).toEqual(['autre']);
+      expect(etat.paysPlusGrandNombreSalaries).toEqual(['france']);
+    });
+
+    describe("navigue vers l'étape « Localisation des services numériques »", () => {
+      const activites: Activite[] = [
+        'fournisseurReseauxCommunicationElectroniquesPublics',
+        'fournisseurServiceCommunicationElectroniquesPublics',
+      ];
+
+      it.each(activites)(
+        "... si l'activité « %s » est présente",
+        (activite) => {
+          questionnaireStore.repond(
+            valideActivites(['fournisseurServicesDNS', activite])
+          );
+
+          questionnaireStore.repond(
+            valideLocalisationEtablissementPrincipal(['france'], [], [])
+          );
+
+          const etat = get(questionnaireStore);
+          expect(etat.etapeCourante).toBe(
+            'localisationFournitureServicesNumeriques'
+          );
+        }
+      );
+    });
+
+    it('sinon navigue vers « Résultat »', () => {
+      questionnaireStore.repond(
+        valideLocalisationEtablissementPrincipal(['france'], [], [])
+      );
+
+      const etat = get(questionnaireStore);
+      expect(etat.etapeCourante).toBe('resultat');
+    });
+  });
+
+  describe("à la validation de l'étape « Localisation des services numériques »", () => {
+    beforeEach(() => {
+      questionnaireStore.reset();
+    });
+
+    it("sauvegarde les informations de l'étape", () => {
+      questionnaireStore.repond(
+        valideLocalisationServicesNumeriques(['france'])
+      );
+
+      const etat = get(questionnaireStore);
+      expect(etat.localisationFournitureServicesNumeriques).toEqual(['france']);
+    });
+
+    it("navigue vers l'étape « Résultat »", () => {
+      questionnaireStore.repond(
+        valideLocalisationServicesNumeriques(['france'])
+      );
+
+      const etat = get(questionnaireStore);
+      expect(etat.etapeCourante).toBe('resultat');
     });
   });
 });
