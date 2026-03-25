@@ -5,5 +5,5 @@ type Reponses = {
 };
 
 export const envoyerReponses = async (reponses: Reponses) => {
-  await axios.post('/api/simulateur-nis2', reponses)
+  await axios.post('/api/simulateur-nis2', reponses);
 };
