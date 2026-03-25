@@ -7,6 +7,8 @@ import {
   estSecteurAutre,
   estUnSecteurAvecDesSousSecteurs,
 } from './SecteurActivite.predicats';
+import { estSousSecteurAutre } from './SousSecteurActivite.predicats';
+import { ou } from '../../../../../back/src/metier/nis2-simulateur/commun.predicats';
 
 const etatInitial = () => EtatQuestionnaireVide;
 
@@ -60,6 +62,21 @@ const repond = (reponse: ActionQuestionnaire) => {
       etapeCourante: prochaineEtape,
       secteurActivite: reponse.secteurs,
     }));
+  } else if (reponse.type === 'VALIDE_ETAPE_SOUS_SECTEURS_ACTIVITE') {
+    update((etat) => {
+      const prochaineEtape =
+        etat.secteurActivite.every(
+          ou(estSecteurAutre, estUnSecteurAvecDesSousSecteurs)
+        ) && reponse.sousSecteurs.every(estSousSecteurAutre)
+          ? 'resultat'
+          : 'activites';
+
+      return {
+        ...etat,
+        etapeCourante: prochaineEtape,
+        sousSecteurActivite: reponse.sousSecteurs,
+      };
+    });
   }
 };
 
