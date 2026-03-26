@@ -4,6 +4,7 @@
     valideEtapeAppartenanceUE,
     valideEtapeDesignation,
     valideEtapePrealable,
+    valideSecteursActivite,
     valideTailleEntitePrivee,
     valideTypeStructure,
   } from './stores/actions';
@@ -13,6 +14,7 @@
   import EtapeAppartenanceUE from './etapes/EtapeAppartenanceUE.svelte';
   import EtapeTypeStructure from './etapes/EtapeTypeStructure.svelte';
   import EtapeTailleEntitePrivee from './etapes/EtapeTailleEntitePrivee.svelte';
+  import EtapeSecteursActivite from './etapes/EtapeSecteursActivite.svelte';
 </script>
 
 <Hero
@@ -52,6 +54,11 @@
             [reponse.bilanFinancier]
           )
         )}
+    />
+  {:else if $questionnaireStore.etapeCourante === 'secteursActivite'}
+    <EtapeSecteursActivite
+      onsuivant={(reponse) =>
+        questionnaireStore.repond(valideSecteursActivite(reponse))}
     />
   {/if}
 </dsfr-container>
