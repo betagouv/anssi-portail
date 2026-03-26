@@ -13,6 +13,7 @@ export const jeanneDupont: Utilisateur = new Utilisateur(
     siretEntite: '13000766900018',
     cguAcceptees: true,
     infolettreAcceptee: true,
+    roles: ['GESTION_GUIDES'],
   },
   fauxAdaptateurRechercheEntreprise
 );
