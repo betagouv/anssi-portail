@@ -1,6 +1,8 @@
 import { NextFunction, Request, RequestHandler, Response, Router } from 'express';
 import multer from 'multer';
 import { ConfigurationServeur } from '../configurationServeur';
+import { valideCorpsRequete } from '../zod';
+import { schemaAjoutDocumentGuide } from './ressourceDocumentsGuide.schema';
 
 const valideLesDocuments = (): RequestHandler => {
   return async (requete: Request, reponse: Response, suite: NextFunction) => {
@@ -28,6 +30,7 @@ const ressourceDocumentsGuide = (_: ConfigurationServeur) => {
   routeur.post(
     '/:slug/documents',
     valideLesDocuments(),
+    valideCorpsRequete(schemaAjoutDocumentGuide),
     async (_requete: Request, reponse: Response, suite: NextFunction) => {
       try {
         reponse.status(201).send();

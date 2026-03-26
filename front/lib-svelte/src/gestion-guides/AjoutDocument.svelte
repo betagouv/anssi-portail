@@ -3,6 +3,7 @@
   import { clic } from '../directives/actions.svelte';
 
   let nouveauDocument: File | undefined = $state(undefined);
+  let libelleDuLien: string = $state('');
 
   const surAjoutDocument = async (event: Event): Promise<void> => {
     const target = event.target as HTMLInputElement;
@@ -12,6 +13,7 @@
   const ajoute = async () => {
     const formulaire = new FormData();
     if (nouveauDocument) {
+      formulaire.append('libelleDuLien', libelleDuLien);
       formulaire.append('document-guide', nouveauDocument);
       await axios.post('/api/guides/xxxxxx/documents', formulaire);
     }
@@ -25,6 +27,15 @@
     name="document-guide"
     oninput={surAjoutDocument}
   />
-  <dsfr-button label="Ajouter" use:clic={ajoute} disabled={!nouveauDocument}
+  <dsfr-input
+    id="libelleDuLien"
+    label="Libellé du lien"
+    onvaluechanged={(e: CustomEvent) => (libelleDuLien = e.detail)}
+    value={libelleDuLien}
+  ></dsfr-input>
+  <dsfr-button
+    label="Ajouter"
+    use:clic={ajoute}
+    disabled={!nouveauDocument || !libelleDuLien}
   ></dsfr-button>
 </dsfr-container>
