@@ -11,12 +11,14 @@ import { ressourceFavoris } from './favoris/ressourceFavoris';
 import { ressourceFavorisPartages } from './favoris/ressourceFavorisPartages';
 import { fournisseurChemin } from './fournisseurChemin';
 import { ressourceDocumentGuide } from './guides/ressourceDocumentGuide';
+import { ressourceDocumentsGuide } from './guides/ressourceDocumentsGuide';
 import { ressourceGuide } from './guides/ressourceGuide';
 import { ressourceGuides } from './guides/ressourceGuides';
 import { ressourceGuidesMemesCollections } from './guides/ressourceGuidesMemesCollections';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide';
 import { ressourceExigencesNis2 } from './nis2/ressourceExigencesNis2';
 import { ressourceExigencesNis2Csv } from './nis2/ressourceExigencesNis2Csv';
+import { ressourceSimulateurNis2 } from './nis2/ressourceSimulateurNis2';
 import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthentificationOIDC';
 import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionOIDC';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
@@ -51,7 +53,6 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
-import { ressourceSimulateurNis2 } from './nis2/ressourceSimulateurNis2';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -253,7 +254,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     '/api/guides',
     ressourceGuides(configurationServeur),
     ressourceGuide(configurationServeur),
-    ressourceGuidesMemesCollections(configurationServeur)
+    ressourceGuidesMemesCollections(configurationServeur),
+    ressourceDocumentsGuide(configurationServeur)
   );
 
   app.use('/documents-guides', ressourceDocumentGuide(configurationServeur));
