@@ -100,6 +100,7 @@
 
   {#if nombre && chiffreAffaire && doitDemanderBilanFinancier(nombre, chiffreAffaire)}
     <dsfr-radios-group
+      value={bilanFinancier}
       legend="Bilan financier annuel de l'année passée"
       radios={[
         {
@@ -107,21 +108,18 @@
           name: 'radios-c',
           id: 'radio-c-1',
           value: 'petit',
-          checked: bilanFinancier === 'petit',
         },
         {
           label: '10 à 43 millions €',
           name: 'radios-c',
           id: 'radio-c-2',
           value: 'moyen',
-          checked: bilanFinancier === 'moyen',
         },
         {
           label: '≥ 43 millions €',
           name: 'radios-c',
           id: 'radio-c-3',
           value: 'grand',
-          checked: bilanFinancier === 'grand',
         },
       ]}
       onvaluechanged={choisisBilanFinancier}
