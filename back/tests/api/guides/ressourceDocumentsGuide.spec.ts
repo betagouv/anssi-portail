@@ -16,7 +16,7 @@ describe('La ressource de gestion des documents des guides', () => {
     it('Répond 201', async () => {
       const reponse = await request(serveur)
         .post('/api/guides/zero-trust/documents')
-        .attach('document-guide', Buffer.from('une-texte'), 'ducment.pdf');
+        .attach('document-guide', Buffer.from('une-texte'), 'document.pdf');
 
       assert.equal(reponse.status, 201);
     });
