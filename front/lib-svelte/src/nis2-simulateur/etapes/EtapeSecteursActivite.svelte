@@ -71,3 +71,10 @@
     suivantdisabled={reponse.size === 0}
   />
 </Etape>
+
+
+<style lang="scss">
+  dsfr-checkbox {
+    margin-bottom: 8px;
+  }
+</style>
