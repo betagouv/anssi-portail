@@ -8,6 +8,7 @@
   let identifiantGuide: string = $state('');
   let succes: boolean = $state(false);
   let erreur = $state('');
+  let fichier = $state<HTMLInputElement | undefined>();
 
   const surAjoutDocument = async (event: Event): Promise<void> => {
     const target = event.target as HTMLInputElement;
@@ -28,7 +29,12 @@
         libelleDuLien = '';
         nouveauDocument = undefined;
         succes = true;
+        erreur = '';
+        if (fichier) {
+          fichier.value = '';
+        }
       } catch (error: unknown) {
+        succes = false;
         const erreurAxios = error as AxiosError;
         if (erreurAxios.response) {
           const data = erreurAxios.response.data as { erreur: string };
@@ -45,21 +51,30 @@
   <div class="formulaire-ajout">
     <h2>Ajout d'un document de guide</h2>
     {#if succes}
-      <dsfr-alert type="success" size="sm" hasTitle={false} dismissible>
-        <p slot="description">Document ajouté avec succès.</p>
+      <dsfr-alert
+        type="success"
+        size="sm"
+        title="Document ajouté avec succès"
+        dismissible
+      >
         <p slot="description">
           Vous pouvez ajouter un autre document ou continuer votre navigation
           sur le site.
         </p>
       </dsfr-alert>
     {:else if erreur}
-      <dsfr-alert type="error" size="sm" hasTitle={false} dismissible>
-        <p slot="description">Erreur lors de l'ajout du document&nbsp;:</p>
+      <dsfr-alert
+        type="error"
+        size="sm"
+        title="Erreur lors de l'ajout du document"
+        dismissible
+      >
         <p slot="description">{erreur}</p>
       </dsfr-alert>
     {/if}
     <SelectionIdentifiantGuide bind:valeur={identifiantGuide} />
     <input
+      bind:this={fichier}
       type="file"
       id="document-guide"
       name="document-guide"
