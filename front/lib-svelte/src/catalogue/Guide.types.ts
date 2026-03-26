@@ -23,11 +23,9 @@ export interface Guide extends Item {
     grande: string;
   } | null;
   documents: { libelle: string; url: string }[];
-  datePublication: string;
   dateMiseAJour: string;
   illustration: { petite: string; grande: string };
   thematique: string;
   besoins: BesoinCyber[];
-  datePublicationFormatee: string;
   dateMiseAJourFormatee: string;
 }
