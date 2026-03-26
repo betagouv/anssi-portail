@@ -5,6 +5,7 @@
     valideEtapeAppartenanceUE,
     valideEtapeDesignation,
     valideEtapePrealable,
+    valideLocalisationEtablissementPrincipal,
     valideSecteursActivite,
     valideSousSecteursActivite,
     valideTailleEntitePrivee,
@@ -21,6 +22,7 @@
   import { estUnSecteurAvecDesSousSecteurs } from './stores/SecteurActivite.predicats';
   import EtapeActivites from './etapes/EtapeActivites.svelte';
   import { selectSecteursPourSaisieActivites } from './stores/questionnaire.selecteurs.ts';
+  import EtapeLocalisationEtablissementPrincipal from './etapes/EtapeLocalisationEtablissementPrincipal.svelte';
 </script>
 
 <Hero
@@ -77,10 +79,19 @@
   {:else if $questionnaireStore.etapeCourante === 'activites'}
     <EtapeActivites
       secteursChoisis={selectSecteursPourSaisieActivites($questionnaireStore)}
-      onsuivant={(reponse) => {
-        console.log(reponse);
-        questionnaireStore.repond(valideActivites(reponse));
-      }}
+      onsuivant={(reponse) =>
+        questionnaireStore.repond(valideActivites(reponse))}
+    />
+  {:else if $questionnaireStore.etapeCourante === 'localisationEtablissementPrincipal'}
+    <EtapeLocalisationEtablissementPrincipal
+      onsuivant={(reponse) =>
+        questionnaireStore.repond(
+          valideLocalisationEtablissementPrincipal(
+            [reponse.paysDecision],
+            [reponse.paysOperation],
+            [reponse.paysSalaries]
+          )
+        )}
     />
   {/if}
 </dsfr-container>
