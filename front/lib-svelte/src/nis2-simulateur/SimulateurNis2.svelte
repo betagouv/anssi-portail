@@ -4,6 +4,7 @@
     valideEtapeAppartenanceUE,
     valideEtapeDesignation,
     valideEtapePrealable,
+    valideTailleEntitePrivee,
     valideTypeStructure,
   } from './stores/actions';
   import EtapePrealable from './etapes/EtapePrealable.svelte';
@@ -11,6 +12,7 @@
   import EtapeDesignation from './etapes/EtapeDesignation.svelte';
   import EtapeAppartenanceUE from './etapes/EtapeAppartenanceUE.svelte';
   import EtapeTypeStructure from './etapes/EtapeTypeStructure.svelte';
+  import EtapeTailleEntitePrivee from './etapes/EtapeTailleEntitePrivee.svelte';
 </script>
 
 <Hero
@@ -39,6 +41,17 @@
     <EtapeTypeStructure
       onsuivant={(reponse) =>
         questionnaireStore.repond(valideTypeStructure([reponse]))}
+    />
+  {:else if $questionnaireStore.etapeCourante === 'tailleEntitePrivee'}
+    <EtapeTailleEntitePrivee
+      onsuivant={(reponse) =>
+        questionnaireStore.repond(
+          valideTailleEntitePrivee(
+            [reponse.nombre],
+            [reponse.chiffreAffaire],
+            [reponse.bilanFinancier]
+          )
+        )}
     />
   {/if}
 </dsfr-container>
