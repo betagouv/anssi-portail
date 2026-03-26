@@ -6,6 +6,7 @@
   let nouveauDocument: File | undefined = $state(undefined);
   let libelleDuLien: string = $state('');
   let identifiantGuide: string = $state('');
+  let succes: boolean = $state(false);
 
   const surAjoutDocument = async (event: Event): Promise<void> => {
     const target = event.target as HTMLInputElement;
@@ -18,6 +19,10 @@
       formulaire.append('libelleDuLien', libelleDuLien);
       formulaire.append('document-guide', nouveauDocument);
       await axios.post(`/api/guides/${identifiantGuide}/documents`, formulaire);
+      identifiantGuide = '';
+      libelleDuLien = '';
+      nouveauDocument = undefined;
+      succes = true;
     }
   };
 </script>
@@ -25,6 +30,15 @@
 <dsfr-container>
   <div class="formulaire-ajout">
     <h2>Ajout d'un document de guide</h2>
+    {#if succes}
+      <dsfr-alert type="success" size="sm" hasTitle={false} dismissible>
+        <p slot="description">Document ajouté avec succès.</p>
+        <p slot="description">
+          Vous pouvez ajouter un autre document ou continuer votre navigation
+          sur le site.
+        </p>
+      </dsfr-alert>
+    {/if}
     <SelectionIdentifiantGuide bind:valeur={identifiantGuide} />
     <input
       type="file"
