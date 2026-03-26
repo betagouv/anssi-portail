@@ -58,6 +58,7 @@
     title={TitresEtapes['tailleEntitePrivee']}
     current-step="4"
     step-count="6"
+    hide-details="true"
   ></dsfr-stepper>
 
   <p>Quelles sont les caractéristiques clés de votre entité</p>

@@ -80,6 +80,7 @@
     title={TitresEtapes['activites']}
     current-step="6"
     step-count="6"
+    hide-details="true"
   ></dsfr-stepper>
 
   <p>
