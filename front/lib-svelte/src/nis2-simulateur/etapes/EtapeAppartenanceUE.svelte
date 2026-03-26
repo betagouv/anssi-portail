@@ -12,24 +12,6 @@
 
   let reponse: AppartenancePaysUnionEuropeenne | undefined = $state();
 
-  const options = [
-    { label: 'France', name: 'radios', id: 'radio-fr', value: 'france' },
-    {
-      label: "Autres états membres de l'Union Européenne",
-      name: 'radios',
-      id: 'radio-autre',
-      value: 'autre',
-      disabled: true,
-    },
-    {
-      label: 'Autres états hors Union Européenne',
-      name: 'radios',
-      id: 'radio-horsue',
-      value: 'horsue',
-      disabled: true,
-    },
-  ];
-
   const choisis = (e: { detail: AppartenancePaysUnionEuropeenne }) => {
     reponse = e.detail;
   };
@@ -52,7 +34,23 @@
     hint="Pour votre entreprise filiale si celle-ci fait partie d’un groupe,
             ou pour le groupe si celui-ci mène une activité économique.
             Ce sujet pourra être précisé par la Commission Européenne."
-    radios={options}
+    radios={[
+      { label: 'France', name: 'radios', id: 'radio-fr', value: 'france' },
+      {
+        label: "Autres états membres de l'Union Européenne",
+        name: 'radios',
+        id: 'radio-autre',
+        value: 'autre',
+        disabled: true,
+      },
+      {
+        label: 'Autres états hors Union Européenne',
+        name: 'radios',
+        id: 'radio-horsue',
+        value: 'horsue',
+        disabled: true,
+      },
+    ]}
     onvaluechanged={choisis}
   ></dsfr-radios-group>
 
