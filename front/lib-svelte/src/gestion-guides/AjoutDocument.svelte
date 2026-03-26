@@ -1,5 +1,5 @@
 <script lang="ts">
-  import axios from 'axios';
+  import axios, { AxiosError } from 'axios';
   import { clic } from '../directives/actions.svelte';
   import SelectionIdentifiantGuide from './SelectionIdentifiantGuide.svelte';
 
@@ -7,6 +7,7 @@
   let libelleDuLien: string = $state('');
   let identifiantGuide: string = $state('');
   let succes: boolean = $state(false);
+  let erreur = $state('');
 
   const surAjoutDocument = async (event: Event): Promise<void> => {
     const target = event.target as HTMLInputElement;
@@ -18,11 +19,24 @@
     if (nouveauDocument) {
       formulaire.append('libelleDuLien', libelleDuLien);
       formulaire.append('document-guide', nouveauDocument);
-      await axios.post(`/api/guides/${identifiantGuide}/documents`, formulaire);
-      identifiantGuide = '';
-      libelleDuLien = '';
-      nouveauDocument = undefined;
-      succes = true;
+      try {
+        await axios.post(
+          `/api/guides/${identifiantGuide}/documents`,
+          formulaire
+        );
+        identifiantGuide = '';
+        libelleDuLien = '';
+        nouveauDocument = undefined;
+        succes = true;
+      } catch (error: unknown) {
+        const erreurAxios = error as AxiosError;
+        if (erreurAxios.response) {
+          const data = erreurAxios.response.data as { erreur: string };
+          erreur = data.erreur;
+        } else {
+          erreur = erreurAxios.message;
+        }
+      }
     }
   };
 </script>
@@ -37,6 +51,11 @@
           Vous pouvez ajouter un autre document ou continuer votre navigation
           sur le site.
         </p>
+      </dsfr-alert>
+    {:else if erreur}
+      <dsfr-alert type="error" size="sm" hasTitle={false} dismissible>
+        <p slot="description">Erreur lors de l'ajout du document&nbsp;:</p>
+        <p slot="description">{erreur}</p>
       </dsfr-alert>
     {/if}
     <SelectionIdentifiantGuide bind:valeur={identifiantGuide} />
