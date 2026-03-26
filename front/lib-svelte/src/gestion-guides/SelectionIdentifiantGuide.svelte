@@ -8,12 +8,11 @@
   import ChampTexte from '../ui/ChampTexte.svelte';
 
   type Props = {
-    valeur: string | undefined;
+    valeur: string;
   };
 
   let { valeur = $bindable() }: Props = $props();
 
-  let saisie: string = $state('');
   let listeIdentifiants: string[] = $state([]);
   let minuteur: ReturnType<typeof setTimeout>;
   let suggestions: string[] = $state([]);
@@ -38,22 +37,18 @@
   };
 
   const rechercheSuggestions = async () => {
-    if (saisie.length === 0) {
-      valeur = undefined;
-    }
-    if (saisie.length < 2) {
+    if (valeur.length < 2) {
       suggestionsVisibles = false;
       suggestions = [];
       return;
     }
 
-    suggestions = listeIdentifiants.filter((id) => rechercheVague(id, saisie));
+    suggestions = listeIdentifiants.filter((id) => rechercheVague(id, valeur));
     suggestionsVisibles = suggestions.length > 0;
   };
 
   const choisisIdentifiant = (identifiantGuide: string) => {
     valeur = identifiantGuide;
-    saisie = identifiantGuide;
     suggestionsVisibles = false;
   };
 
@@ -69,7 +64,7 @@
   <ChampTexte
     id="selection-id-guide"
     nom="organisation"
-    bind:valeur={saisie}
+    bind:valeur
     on:input={() => avecTemporisation(rechercheSuggestions)}
     aideSaisie="ex : guide-pour-une-formation-sur-la-cybersecurite-des-systemes-industriels"
     autocomplete="off"
@@ -100,7 +95,6 @@
     position: absolute;
     background: white;
     width: calc(100% - 34px);
-    /* 34px = paddings gauche et droite + bords = 2 x 16 + 2 x 1 */
     z-index: 1;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
