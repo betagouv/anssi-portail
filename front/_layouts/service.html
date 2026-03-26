@@ -28,7 +28,7 @@ script: /scripts/service.js
     <div id="fil-ariane"></div>
     <div class="resume">
       <div>
-        <span class="badge service">Service</span>
+        <span class="badge {{ page.typologie }}">{{ page.typologie || capitalize }}</span>
         <h1>{{page.nom}}</h1>
         <p>{{page.description}}</p>
         {% if page.lien %}
