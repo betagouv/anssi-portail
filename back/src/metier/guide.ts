@@ -9,7 +9,6 @@ export class Guide {
   langue: 'FR' | 'EN';
   collections: string[];
   documents: DocumentGuide[];
-  datePublication: Date;
   dateMiseAJour: Date;
   thematique: string;
   besoins: BesoinCyber[];
@@ -22,7 +21,6 @@ export class Guide {
     langue: 'FR' | 'EN';
     collections: string[];
     documents: DocumentGuide[];
-    datePublication: Date;
     dateMiseAJour: Date;
     thematique: string;
     besoins: BesoinCyber[];
@@ -34,7 +32,6 @@ export class Guide {
     this.langue = parametres.langue;
     this.collections = parametres.collections;
     this.documents = parametres.documents;
-    this.datePublication = parametres.datePublication;
     this.dateMiseAJour = parametres.dateMiseAJour;
     this.thematique = parametres.thematique;
     this.besoins = parametres.besoins;
@@ -44,7 +41,7 @@ export class Guide {
     return (await entrepotGuide.parCollections(this.collections)).filter((guide) => guide.id !== this.id);
   }
 
-  estPublie = (): boolean => this.datePublication <= new Date();
+  estPublie = (): boolean => this.dateMiseAJour <= new Date();
 }
 
 export type DocumentGuide = {

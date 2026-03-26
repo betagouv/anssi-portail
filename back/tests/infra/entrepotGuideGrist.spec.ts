@@ -187,13 +187,11 @@ describe("L'entrepot de guide Grist", () => {
       new ConstructeurGuideGrist()
         .avecLIdentifiant('guide1')
         .avecLaDateDeMiseAJour(new Date(2024, 10, 12).getTime() / 1000)
-        .avecLaDateDePublication(new Date(2023, 2, 9).getTime() / 1000)
         .construis(),
     ]);
 
     const guide1 = await entrepotGuideGrist.parId('guide1');
 
-    assert.equal(guide1!.datePublication.getTime(), new Date(2023, 2, 9).getTime());
     assert.equal(guide1!.dateMiseAJour.getTime(), new Date(2024, 10, 12).getTime());
   });
 

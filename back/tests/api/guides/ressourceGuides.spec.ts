@@ -69,7 +69,6 @@ describe('La ressource qui gère les guides', () => {
       it("expose les dates d'un guide", async () => {
         const reponse = await request(serveur).get('/api/guides');
 
-        assert.equal(reponse.body[0].datePublication, new Date(2025, 5, 20).toISOString());
         assert.equal(reponse.body[0].dateMiseAJour, new Date(2025, 5, 20).toISOString());
       });
 
