@@ -18,3 +18,4 @@ minimumReleaseAgeExclude:
   - undici@7.24.0
   - flatted@3.4.2
   - picomatch@4.0.4
+  - yaml@1.10.3
