@@ -6,6 +6,7 @@
     valideEtapeDesignation,
     valideEtapePrealable,
     valideLocalisationEtablissementPrincipal,
+    valideLocalisationServicesNumeriques,
     valideSecteursActivite,
     valideSousSecteursActivite,
     valideTailleEntitePrivee,
@@ -23,6 +24,7 @@
   import EtapeActivites from './etapes/EtapeActivites.svelte';
   import { selectSecteursPourSaisieActivites } from './stores/questionnaire.selecteurs.ts';
   import EtapeLocalisationEtablissementPrincipal from './etapes/EtapeLocalisationEtablissementPrincipal.svelte';
+  import EtapeLocalisationServicesNumeriques from './etapes/EtapeLocalisationServicesNumeriques.svelte';
 </script>
 
 <Hero
@@ -91,6 +93,13 @@
             [reponse.paysOperation],
             [reponse.paysSalaries]
           )
+        )}
+    />
+  {:else if $questionnaireStore.etapeCourante === 'localisationFournitureServicesNumeriques'}
+    <EtapeLocalisationServicesNumeriques
+      onsuivant={(reponse) =>
+        questionnaireStore.repond(
+          valideLocalisationServicesNumeriques(reponse)
         )}
     />
   {/if}
