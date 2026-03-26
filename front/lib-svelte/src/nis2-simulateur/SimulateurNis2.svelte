@@ -1,6 +1,7 @@
 <script lang="ts">
   import { questionnaireStore } from './stores/questionnaire.store';
   import {
+    valideActivites,
     valideEtapeAppartenanceUE,
     valideEtapeDesignation,
     valideEtapePrealable,
@@ -18,6 +19,8 @@
   import EtapeSecteursActivite from './etapes/EtapeSecteursActivite.svelte';
   import EtapeSousSecteursActivite from './etapes/EtapeSousSecteursActivite.svelte';
   import { estUnSecteurAvecDesSousSecteurs } from './stores/SecteurActivite.predicats';
+  import EtapeActivites from './etapes/EtapeActivites.svelte';
+  import { selectSecteursPourSaisieActivites } from './stores/questionnaire.selecteurs.ts';
 </script>
 
 <Hero
@@ -70,6 +73,14 @@
       )}
       onsuivant={(reponse) =>
         questionnaireStore.repond(valideSousSecteursActivite(reponse))}
+    />
+  {:else if $questionnaireStore.etapeCourante === 'activites'}
+    <EtapeActivites
+      secteursChoisis={selectSecteursPourSaisieActivites($questionnaireStore)}
+      onsuivant={(reponse) => {
+        console.log(reponse);
+        questionnaireStore.repond(valideActivites(reponse));
+      }}
     />
   {/if}
 </dsfr-container>

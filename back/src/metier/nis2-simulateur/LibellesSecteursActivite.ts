@@ -1,4 +1,4 @@
-import { SecteurActivite } from "./SecteurActivite.definitions";
+import type { SecteurActivite } from "./SecteurActivite.definitions";
 
 export const libellesSecteursActivite: Record<SecteurActivite, string> = {
   banqueSecteurBancaire: "Banques (secteur bancaire)",
