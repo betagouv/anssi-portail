@@ -31,9 +31,6 @@ export const guidePourCarteItem = (guide: Guide): Guide => ({
   },
   lienInterne: '/guides/' + guide.id,
   sources: ['ANSSI'],
-  datePublicationFormatee: new Intl.DateTimeFormat('fr-FR', {
-    dateStyle: 'long',
-  }).format(new Date(guide.datePublication)),
   dateMiseAJourFormatee: new Intl.DateTimeFormat('fr-FR', {
     dateStyle: 'long',
   }).format(new Date(guide.dateMiseAJour)),
