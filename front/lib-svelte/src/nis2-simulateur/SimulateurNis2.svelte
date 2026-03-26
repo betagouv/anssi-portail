@@ -4,11 +4,13 @@
     valideEtapeAppartenanceUE,
     valideEtapeDesignation,
     valideEtapePrealable,
+    valideTypeStructure,
   } from './stores/actions';
   import EtapePrealable from './etapes/EtapePrealable.svelte';
   import Hero from '../ui/Hero.svelte';
   import EtapeDesignation from './etapes/EtapeDesignation.svelte';
   import EtapeAppartenanceUE from './etapes/EtapeAppartenanceUE.svelte';
+  import EtapeTypeStructure from './etapes/EtapeTypeStructure.svelte';
 </script>
 
 <Hero
@@ -32,6 +34,11 @@
     <EtapeAppartenanceUE
       onsuivant={(reponse) =>
         questionnaireStore.repond(valideEtapeAppartenanceUE([reponse]))}
+    />
+  {:else if $questionnaireStore.etapeCourante === 'typeStructure'}
+    <EtapeTypeStructure
+      onsuivant={(reponse) =>
+        questionnaireStore.repond(valideTypeStructure([reponse]))}
     />
   {/if}
 </dsfr-container>
