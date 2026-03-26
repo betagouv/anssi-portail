@@ -64,7 +64,6 @@ export const guideZeroTrust = () =>
       },
     ],
     dateMiseAJour: new Date(2025, 5, 20),
-    datePublication: new Date(2025, 5, 20),
     thematique: 'Les essentiels',
     besoins: ['REAGIR', 'SE_FORMER'],
   });
@@ -85,7 +84,6 @@ export const guideDevsecops = () =>
       },
     ],
     dateMiseAJour: new Date(2024, 2, 13),
-    datePublication: new Date(2024, 2, 13),
     thematique: 'Les essentiels',
     besoins: ['SECURISER'],
   });
@@ -108,7 +106,6 @@ export const guidePublieDemain = () =>
       },
     ],
     dateMiseAJour: new Date(aujourdhui.getFullYear(), aujourdhui.getMonth(), aujourdhui.getDate() + 1),
-    datePublication: new Date(aujourdhui.getFullYear(), aujourdhui.getMonth(), aujourdhui.getDate() + 1),
     thematique: 'Les essentiels',
     besoins: ['SECURISER'],
   });
