@@ -29,6 +29,7 @@
     title={TitresEtapes['secteursActivite']}
     current-step="5"
     step-count="6"
+    hide-details="true"
   ></dsfr-stepper>
 
   <p>

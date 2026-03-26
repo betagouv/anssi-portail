@@ -42,6 +42,7 @@
     title={TitresEtapes['typeStructure']}
     current-step="3"
     step-count="6"
+    hide-details="true"
   ></dsfr-stepper>
 
   <dsfr-radios-group

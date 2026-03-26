@@ -44,6 +44,7 @@
     title={TitresEtapes['appartenanceUnionEuropeenne']}
     current-step="2"
     step-count="6"
+    hide-details="true"
   ></dsfr-stepper>
 
   <dsfr-radios-group
