@@ -9,11 +9,12 @@ illustration: reflexes-cyber/RC-home.png
 avecFicheDetaillee: true
 sources:
   - ANSSI
+  - Innovation ANSSI
 droitsAcces:
   - ACCES_LIBRE
 cible: |
   <p>
-    <strong>RÉFLEXES CYBER</strong> est destiné aux organisations de toutes tailles, n’ayant notamment jamais réalisé d'exercice d'origine cyber, souhaitant vivre une première simulation pour sensibiliser les participant(e)s aux impacts que pourrait avoir une crise d'origine cyber sur l'organisation.
+    <strong>RÉFLEXES CYBER est destiné aux organisations de toutes tailles, n’ayant notamment jamais réalisé d'exercice d'origine cyber</strong>, souhaitant vivre une première simulation pour sensibiliser les participant(e)s aux impacts que pourrait avoir une crise d'origine cyber sur l'organisation.
     <strong>Il est particulièrement adapté aux TPE/PME/ETI, aux collectivités territoriales.</strong>
     <strong>Il peut également être utilisé par des administrations et des associations.</strong>
   </p>
