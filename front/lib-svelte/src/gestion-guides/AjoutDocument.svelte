@@ -1,9 +1,11 @@
 <script lang="ts">
   import axios from 'axios';
   import { clic } from '../directives/actions.svelte';
+  import SelectionIdentifiantGuide from './SelectionIdentifiantGuide.svelte';
 
   let nouveauDocument: File | undefined = $state(undefined);
   let libelleDuLien: string = $state('');
+  let identifiantGuide: string = $state('');
 
   const surAjoutDocument = async (event: Event): Promise<void> => {
     const target = event.target as HTMLInputElement;
@@ -15,12 +17,13 @@
     if (nouveauDocument) {
       formulaire.append('libelleDuLien', libelleDuLien);
       formulaire.append('document-guide', nouveauDocument);
-      await axios.post('/api/guides/xxxxxx/documents', formulaire);
+      await axios.post(`/api/guides/${identifiantGuide}/documents`, formulaire);
     }
   };
 </script>
 
 <dsfr-container>
+  <SelectionIdentifiantGuide bind:valeur={identifiantGuide} />
   <input
     type="file"
     id="document-guide"
@@ -36,6 +39,6 @@
   <dsfr-button
     label="Ajouter"
     use:clic={ajoute}
-    disabled={!nouveauDocument || !libelleDuLien}
+    disabled={!nouveauDocument || !libelleDuLien || !identifiantGuide}
   ></dsfr-button>
 </dsfr-container>
