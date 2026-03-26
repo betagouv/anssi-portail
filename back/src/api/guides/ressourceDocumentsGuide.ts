@@ -24,7 +24,7 @@ const valideLesDocuments = (): RequestHandler => {
   };
 };
 
-const ressourceDocumentsGuide = (_: ConfigurationServeur) => {
+const ressourceDocumentsGuide = ({ entrepotGuide }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.post(
@@ -33,6 +33,14 @@ const ressourceDocumentsGuide = (_: ConfigurationServeur) => {
     valideCorpsRequete(schemaAjoutDocumentGuide),
     async (_requete: Request, reponse: Response, suite: NextFunction) => {
       try {
+        const identifiantGuide = _requete.params.slug as string;
+        const guide = await entrepotGuide.parId(identifiantGuide as string);
+        if (!guide) {
+          return reponse.status(404).json({
+            erreur: `Le guide "${identifiantGuide}" est introuvable`,
+          });
+        }
+
         reponse.status(201).send();
       } catch (err) {
         suite(err);
