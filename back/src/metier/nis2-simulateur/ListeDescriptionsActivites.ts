@@ -1,9 +1,6 @@
-import { Activite, DescriptionActivite } from './Activite.definitions';
+import type { Activite, DescriptionActivite } from './Activite.definitions';
 
-export const listeDescriptionsActivites: Record<
-  Activite,
-  DescriptionActivite[]
-> = {
+export const listeDescriptionsActivites: Record<Activite, DescriptionActivite[]> = {
   autreActiviteConstructionVehiculesAutomobilesRemorquesSemi: [],
   autreActiviteEauPotable: [],
   autreActiviteEauxUsees: [],
@@ -34,21 +31,21 @@ export const listeDescriptionsActivites: Record<
   autreActiviteTransportsRoutiers: [],
   acteurDuMarche: [
     {
-      titre: "Acteur du marché",
+      titre: 'Acteur du marché',
       description:
-        "Toute personne physique ou morale qui produit, achète ou vend des services liés à l’électricité, " +
+        'Toute personne physique ou morale qui produit, achète ou vend des services liés à l’électricité, ' +
         "qui participe à l'agrégation ou qui est un gestionnaire de la participation active de la demande " +
         "ou aux services de stockage de l'énergie, y compris la passation d'ordres, sur un ou plusieurs marchés " +
         "de l'électricité, y compris des marchés de l'énergie d’équilibrage.",
     },
     {
-      titre: "Agrégation",
+      titre: 'Agrégation',
       description:
-        "Une fonction exercée par une personne physique ou morale qui combine, en vue de la vente, " +
+        'Une fonction exercée par une personne physique ou morale qui combine, en vue de la vente, ' +
         "de l'achat ou de la mise aux enchères sur tout marché de l'électricité, de multiples charges de consommation ou productions d’électricité.",
     },
     {
-      titre: "Participation active de la demande",
+      titre: 'Participation active de la demande',
       description:
         "Le changement qu'apporte le client final à sa charge d'électricité par rapport à son profil de consommation " +
         "habituel ou actuel pour réagir aux signaux du marché, y compris à des variations de prix de l'électricité en " +
@@ -66,26 +63,26 @@ export const listeDescriptionsActivites: Record<
   ],
   autoritesRoutieresControleGestionCirculation: [
     {
-      titre: "Autorité routière",
+      titre: 'Autorité routière',
       description:
-        "Une autorité publique responsable de la planification, du contrôle et de la gestion des routes relevant de sa compétence territoriale.",
+        'Une autorité publique responsable de la planification, du contrôle et de la gestion des routes relevant de sa compétence territoriale.',
     },
   ],
   collectantEvacuantTraitantEaux: [
     {
-      titre: "Eaux urbaines résiduaires",
+      titre: 'Eaux urbaines résiduaires',
       description:
-        "Les eaux ménagères usées ou le mélange des eaux ménagères usées avec des eaux industrielles usées et/ou des eaux de ruissellement.",
+        'Les eaux ménagères usées ou le mélange des eaux ménagères usées avec des eaux industrielles usées et/ou des eaux de ruissellement.',
     },
     {
-      titre: "Eaux ménagères usées",
+      titre: 'Eaux ménagères usées',
       description:
-        "Les eaux usées provenant des établissements et services résidentiels et produites essentiellement par le métabolisme humain et les activités ménagères.",
+        'Les eaux usées provenant des établissements et services résidentiels et produites essentiellement par le métabolisme humain et les activités ménagères.',
     },
     {
-      titre: "Eaux industrielles usées",
+      titre: 'Eaux industrielles usées',
       description:
-        "Toutes les eaux usées provenant de locaux utilisés à des fins commerciales ou industrielles, autres que les eaux ménagères usées et les eaux de ruissellement.",
+        'Toutes les eaux usées provenant de locaux utilisés à des fins commerciales ou industrielles, autres que les eaux ménagères usées et les eaux de ruissellement.',
     },
   ],
   constructionAeronautiqueSpatiale: [],
@@ -98,7 +95,7 @@ export const listeDescriptionsActivites: Record<
   constructionVehiculesAutomobiles: [],
   contrepartieCentrales: [
     {
-      titre: "Contrepartie centrale",
+      titre: 'Contrepartie centrale',
       description:
         "Une personne morale qui s'interpose entre les contreparties à des contrats négociés sur un " +
         "ou plusieurs marchés financiers, en devenant l'acheteur vis-à-vis de tout vendeur et le vendeur vis-à-vis de tout acheteur.",
@@ -106,91 +103,89 @@ export const listeDescriptionsActivites: Record<
   ],
   entiteCentralesStockage: [
     {
-      titre: "Entité centrale de stockage (ECS)",
+      titre: 'Entité centrale de stockage (ECS)',
       description:
-        "L’organisme ou le service auquel des pouvoirs peuvent être conférés pour agir afin d’acquérir, de maintenir ou de vendre des stocks de pétrole, notamment des stocks de sécurité et des stocks spécifiques.",
+        'L’organisme ou le service auquel des pouvoirs peuvent être conférés pour agir afin d’acquérir, de maintenir ou de vendre des stocks de pétrole, notamment des stocks de sécurité et des stocks spécifiques.',
     },
   ],
   entiteGestionnaireAeroports: [
     {
-      titre: "Entité gestionnaire d’aéroport",
+      titre: 'Entité gestionnaire d’aéroport',
       description:
-        "L’entité qui, conjointement ou non avec d’autres activités, tient de la législation nationale, " +
-        "de la réglementation ou de contrats la mission d’administration et de gestion des infrastructures de l’aéroport ou du réseau aéroportuaire, " +
-        "ainsi que de coordination et de contrôle des activités des différents opérateurs présents dans les aéroports ou le réseau aéroportuaire concernés.",
+        'L’entité qui, conjointement ou non avec d’autres activités, tient de la législation nationale, ' +
+        'de la réglementation ou de contrats la mission d’administration et de gestion des infrastructures de l’aéroport ou du réseau aéroportuaire, ' +
+        'ainsi que de coordination et de contrôle des activités des différents opérateurs présents dans les aéroports ou le réseau aéroportuaire concernés.',
     },
     {
-      titre: "Liste des aéroports du réseau central",
+      titre: 'Liste des aéroports du réseau central',
       description:
-        "[https://eur-lex.europa.eu/legal-content/FR/TXT/HTML/?uri=CELEX:32013R1315]()",
+        '<a href="https://eur-lex.europa.eu/legal-content/FR/TXT/HTML/?uri=CELEX:32013R1315" target="_blank" rel="noopener noreferrer">https://eur-lex.europa.eu/legal-content/FR/TXT/HTML/?uri=CELEX:32013R1315</a>',
     },
   ],
   entiteGestionnairePorts: [
     {
-      titre: "Port",
+      titre: 'Port',
       description:
         "Toute étendue déterminée de terre et d'eau, dont le périmètre est défini par les États membres dans lequel " +
-        "le port est situé, comprenant des infrastructures et équipements destinés à faciliter les opérations de transport maritime commercial",
+        'le port est situé, comprenant des infrastructures et équipements destinés à faciliter les opérations de transport maritime commercial',
     },
     {
-      titre: "Installation portuaire",
+      titre: 'Installation portuaire',
       description:
         "Un emplacement où a lieu l'interface navire/port; elle comprend les zones telles que les zones de mouillage, les postes d'attente et leurs abords à partir de la mer, selon le cas.",
     },
   ],
   entrepriseElectriciteRemplissantFonctionFourniture: [
     {
-      titre: "Entreprise d’électricité",
+      titre: 'Entreprise d’électricité',
       description:
-        "Toute personne physique ou morale qui assure au moins une des " +
-        "fonctions suivantes : la production, le transport, la distribution, " +
+        'Toute personne physique ou morale qui assure au moins une des ' +
+        'fonctions suivantes : la production, le transport, la distribution, ' +
         "l'agrégation, la participation active de la demande, le stockage " +
         "d'énergie, la fourniture ou l'achat d'électricité et qui est " +
-        "chargée des missions commerciales, techniques ou de maintenance " +
+        'chargée des missions commerciales, techniques ou de maintenance ' +
         "liées à ces fonctions, à l'exclusion des clients finaux.",
     },
     {
-      titre: "Fourniture",
-      description:
-        "La vente, y compris la revente, d'électricité à des clients.",
+      titre: 'Fourniture',
+      description: "La vente, y compris la revente, d'électricité à des clients.",
     },
   ],
   entrepriseFerroviaire: [
     {
-      titre: "Entreprise ferroviaire",
+      titre: 'Entreprise ferroviaire',
       description:
         "Toute entreprise à statut privé ou public et titulaire d'une licence conformément à la présente directive, " +
         "dont l'activité principale est la fourniture de prestations de transport de marchandises et/ou de voyageurs par chemin de fer, " +
-        "la traction devant obligatoirement être assurée par cette entreprise; ce terme recouvre aussi les entreprises qui assurent uniquement la traction.",
+        'la traction devant obligatoirement être assurée par cette entreprise; ce terme recouvre aussi les entreprises qui assurent uniquement la traction.',
     },
     {
       titre: "Exploitant d'installation de service",
       description:
-        "Toute entité publique ou privée chargée de gérer une ou plusieurs installations de service " +
+        'Toute entité publique ou privée chargée de gérer une ou plusieurs installations de service ' +
         "ou de fournir à des entreprises ferroviaires un ou plusieurs des services visés à l'annexe II, points 2, 3 et 4.",
     },
   ],
   entrepriseFourniture: [
     {
-      titre: "Entreprise de fourniture",
-      description:
-        "Toute personne physique ou morale qui effectue la fourniture.",
+      titre: 'Entreprise de fourniture',
+      description: 'Toute personne physique ou morale qui effectue la fourniture.',
     },
   ],
   etablissementCredit: [
     {
-      titre: "Établissement de crédit",
+      titre: 'Établissement de crédit',
       description:
         "Une entreprise dont l'activité consiste à recevoir du public des dépôts ou d'autres fonds remboursables et à octroyer des crédits pour son propre compte.",
     },
   ],
   executantOperationGestionDechets: [
     {
-      titre: "Gestion des déchets",
+      titre: 'Gestion des déchets',
       description:
         "La collecte, le transport, la valorisation et l'élimination des déchets, y compris la surveillance " +
-        "de ces opérations ainsi que la surveillance des sites de décharge après leur fermeture et notamment " +
-        "les actions menées en tant que négociant ou courtier.",
+        'de ces opérations ainsi que la surveillance des sites de décharge après leur fermeture et notamment ' +
+        'les actions menées en tant que négociant ou courtier.',
     },
   ],
   exploitantsInfrastructureTerrestresFournitureServicesSpaciaux: [],
@@ -198,8 +193,8 @@ export const listeDescriptionsActivites: Record<
   exploitantsOleoduc: [],
   exploitantsPlateformesNegociation: [
     {
-      titre: "Plate-forme de négociation",
-      description: "Un marché réglementé, un MTF ou un OTF.",
+      titre: 'Plate-forme de négociation',
+      description: 'Un marché réglementé, un MTF ou un OTF.',
     },
   ],
   exploitantsPointRecharge: [],
@@ -207,30 +202,30 @@ export const listeDescriptionsActivites: Record<
   exploitantsSystemeHydrogene: [],
   exploitantsSystemeTransportIntelligents: [
     {
-      titre: "Systèmes de transport intelligents ou STI",
+      titre: 'Systèmes de transport intelligents ou STI',
       description:
-        "Les systèmes dans lesquels des technologies de l’information et de la communication sont appliquées, " +
-        "dans le domaine du transport routier, y compris les infrastructures, les véhicules et les usagers, et " +
-        "dans la gestion de la circulation et la gestion de la mobilité, ainsi que pour les interfaces avec d’autres modes de transport.",
+        'Les systèmes dans lesquels des technologies de l’information et de la communication sont appliquées, ' +
+        'dans le domaine du transport routier, y compris les infrastructures, les véhicules et les usagers, et ' +
+        'dans la gestion de la circulation et la gestion de la mobilité, ainsi que pour les interfaces avec d’autres modes de transport.',
     },
   ],
   fabricationDistributionSubstances: [
     {
-      titre: "Fabricant",
+      titre: 'Fabricant',
       description:
-        "Toute personne physique ou morale établie dans la Communauté qui fabrique une substance dans la Communauté",
+        'Toute personne physique ou morale établie dans la Communauté qui fabrique une substance dans la Communauté',
     },
     {
-      titre: "Distributeur",
+      titre: 'Distributeur',
       description:
         "Toute personne physique ou morale établie dans la Communauté, y compris un détaillant, qui n'exécute " +
         "que des opérations de stockage et de mise sur le marché d'une substance, telle quelle ou contenue dans une préparation, pour des tiers.",
     },
     {
-      titre: "Article",
+      titre: 'Article',
       description:
-        "Un objet auquel sont donnés, au cours du processus de fabrication, une forme, une surface " +
-        "ou un dessin particuliers qui sont plus déterminants pour sa fonction que sa composition chimique.",
+        'Un objet auquel sont donnés, au cours du processus de fabrication, une forme, une surface ' +
+        'ou un dessin particuliers qui sont plus déterminants pour sa fonction que sa composition chimique.',
     },
   ],
   fabricationMaterielTransportNCA: [],
@@ -242,67 +237,65 @@ export const listeDescriptionsActivites: Record<
   fabriquantComposantCartesElectroniques: [],
   fabriquantDispositifsMedicaux: [
     {
-      titre: "Dispositif médical",
+      titre: 'Dispositif médical',
       description:
         "Tout dispositif médical qui consiste en un réactif, un produit réactif, un matériau d'étalonnage, un matériau de contrôle, " +
-        "une trousse, un instrument, un appareil, un équipement, un logiciel ou un système, utilisé seul ou en association, destiné " +
+        'une trousse, un instrument, un appareil, un équipement, un logiciel ou un système, utilisé seul ou en association, destiné ' +
         "par le fabricant à être utilisé in vitro dans l'examen d'échantillons provenant du corps humain, y compris les dons de sang " +
-        "et de tissus, uniquement ou principalement dans le but de fournir des informations sur un ou plusieurs des éléments suivants :" +
-        "\n" +
-        "\n- diagnostic, prévention, contrôle, prédiction, pronostic, traitement ou atténuation d'une maladie, " +
-        "\n- diagnostic, contrôle, traitement, atténuation d'une blessure ou d'un handicap ou compensation de ceux-ci, " +
-        "\n- investigation, remplacement ou modification d'une structure ou fonction anatomique ou d'un processus ou état physiologique ou pathologique, " +
-        "\n- communication d'informations au moyen d'un examen in vitro d'échantillons provenant du corps humain, y compris les dons d'organes, de sang et de tissus, " +
-        "\n" +
-        "\net dont l'action principale voulue dans ou sur le corps humain n'est pas obtenue par des moyens pharmacologiques ou immunologiques ni par métabolisme, mais dont la fonction peut être assistée par de tels moyens. " +
-        "\n" +
-        "\nLes produits ci-après sont également réputés être des dispositifs médicaux : " +
-        "\n- les dispositifs destinés à la maîtrise de la conception ou à l'assistance à celle-ci, " +
-        "\n- Les produits spécifiquement destinés au nettoyage, à la désinfection ou à la stérilisation des dispositifs visés à l'article 1er, paragraphe 4, et de ceux visés au premier alinéa du présent point. ",
+        'et de tissus, uniquement ou principalement dans le but de fournir des informations sur un ou plusieurs des éléments suivants :' +
+        '<ul>' +
+        "<li>diagnostic, prévention, contrôle, prédiction, pronostic, traitement ou atténuation d'une maladie,</li>" +
+        "<li>diagnostic, contrôle, traitement, atténuation d'une blessure ou d'un handicap ou compensation de ceux-ci,</li>" +
+        "<li>investigation, remplacement ou modification d'une structure ou fonction anatomique ou d'un processus ou état physiologique ou pathologique,</li>" +
+        "<li>communication d'informations au moyen d'un examen in vitro d'échantillons provenant du corps humain, y compris les dons d'organes, de sang et de tissus,</li>" +
+        "<li>et dont l'action principale voulue dans ou sur le corps humain n'est pas obtenue par des moyens pharmacologiques ou immunologiques ni par métabolisme, mais dont la fonction peut être assistée par de tels moyens.</li>" +
+        '</ul>' +
+        'Les produits ci-après sont également réputés être des dispositifs médicaux :' +
+        '<ul>' +
+        "<li>les dispositifs destinés à la maîtrise de la conception ou à l'assistance à celle-ci,</li>" +
+        "<li>Les produits spécifiquement destinés au nettoyage, à la désinfection ou à la stérilisation des dispositifs visés à l'article 1er, paragraphe 4, et de ceux visés au premier alinéa du présent point.</li>" +
+        '</ul>',
     },
     {
-      titre: "Dispositif médical de diagnostic in vitro",
+      titre: 'Dispositif médical de diagnostic in vitro',
       description:
         "Tout dispositif médical qui consiste en un réactif, un produit réactif, un matériau d'étalonnage, un matériau de contrôle, " +
-        "une trousse, un instrument, un appareil, un équipement, un logiciel ou un système, utilisé seul ou en association, destiné " +
+        'une trousse, un instrument, un appareil, un équipement, un logiciel ou un système, utilisé seul ou en association, destiné ' +
         "par le fabricant à être utilisé in vitro dans l'examen d'échantillons provenant du corps humain, y compris les dons de sang " +
-        "et de tissus, uniquement ou principalement dans le but de fournir des informations sur un ou plusieurs des éléments suivants :" +
-        "\\\n\\\n" +
-        "a) concernant un processus ou état physiologique ou pathologique ; " +
-        "\n\nb) concernant des déficiences congénitales physiques ou mentales ; " +
-        "\n\nc) concernant la prédisposition à une affection ou à une maladie ; " +
-        "\n\nd) permettant de déterminer si un traitement donné est sûr pour des receveurs potentiels et compatible avec eux ; " +
-        "\n\ne) permettant de prévoir la réponse ou les réactions à un traitement ; " +
-        "\n\nf) permettant de définir ou de contrôler des mesures thérapeutiques. " +
-        "\\\n\\\n" +
-        "Les récipients pour échantillons sont également réputés être des dispositifs médicaux de diagnostic in vitro.",
+        'et de tissus, uniquement ou principalement dans le but de fournir des informations sur un ou plusieurs des éléments suivants :' +
+        '<ul>' +
+        '<li>a) concernant un processus ou état physiologique ou pathologique</li>' +
+        '<li>b) concernant des déficiences congénitales physiques ou mentales</li>' +
+        '<li>c) concernant la prédisposition à une affection ou à une maladie</li>' +
+        '<li>d) permettant de déterminer si un traitement donné est sûr pour des receveurs potentiels et compatible avec eux</li>' +
+        '<li>e) permettant de prévoir la réponse ou les réactions à un traitement</li>' +
+        '<li>f) permettant de définir ou de contrôler des mesures thérapeutiques.</li>' +
+        '</ul>' +
+        'Les récipients pour échantillons sont également réputés être des dispositifs médicaux de diagnostic in vitro.',
     },
   ],
   fabriquantDispositifsMedicauxCritiques: [],
   fabriquantEquipementCommunication: [
     {
-      titre:
-        "Nomenclature des activités économiques : NACE Rév. 2, section C, division 26",
+      titre: 'Nomenclature des activités économiques : NACE Rév. 2, section C, division 26',
       description:
-        "[https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137]()",
+        '<a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137" target="_blank" rel="noopener noreferrer">https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137</a>',
     },
   ],
   fabriquantEquipementIrradiationMedicaleElectromedicauxElectrotherapeutiques: [
     {
-      titre:
-        "Nomenclature des activités économiques : NACE Rév. 2, section C, division 26",
+      titre: 'Nomenclature des activités économiques : NACE Rév. 2, section C, division 26',
       description:
-        "[https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137]()",
+        '<a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137" target="_blank" rel="noopener noreferrer">https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137</a>',
     },
   ],
   fabriquantEquipementsAutomobiles: [],
   fabriquantFilsCablesMaterielInstallationElectrique: [],
   fabriquantInstrumentsMesureEssaiNavigationHorlogerie: [
     {
-      titre:
-        "Nomenclature des activités économiques : NACE Rév. 2, section C, division 26",
+      titre: 'Nomenclature des activités économiques : NACE Rév. 2, section C, division 26',
       description:
-        "[https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137](",
+        '<a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137" target="_blank" rel="noopener noreferrer">https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137</a>',
     },
   ],
   fabriquantMachineEquipementNCA: [],
@@ -311,195 +304,201 @@ export const listeDescriptionsActivites: Record<
   fabriquantMachinesFormageMetauxMachinesOutils: [],
   fabriquantMaterielOptiquePhotographiquesSupportsMagnetiquesOptiques: [
     {
-      titre:
-        "Nomenclature des activités économiques : NACE Rév. 2, section C, division 26",
+      titre: 'Nomenclature des activités économiques : NACE Rév. 2, section C, division 26',
       description:
-        "[https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137]()",
+        '<a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137" target="_blank" rel="noopener noreferrer">https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137</a>',
     },
   ],
   fabriquantMoteursGeneratriceTransformation: [],
   fabriquantOrdinateursEquipementsPeripheriques: [
     {
-      titre:
-        "Nomenclature des activités économiques : NACE Rév. 2, section C, division 26",
+      titre: 'Nomenclature des activités économiques : NACE Rév. 2, section C, division 26',
       description:
-        "[https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137]()",
+        '<a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137" target="_blank" rel="noopener noreferrer">https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137</a>',
     },
   ],
   fabriquantPilesAccumulateursElectriques: [],
   fabriquantProduitPreparationsPharmaceutiques: [
     {
-      titre: "Produits pharmaceutiques de base",
+      titre: 'Produits pharmaceutiques de base',
       description:
-        "-  la production des principes actifs destinés à la fabrication de médicaments : antibiotiques, vitamines de base, acides salicylique et O-acétylsalicylique, etc." +
-        "\n-  la transformation du sang" +
-        "\n-  la fabrication de sucres chimiquement purs" +
-        "\n-  la transformation de glandes et la production d’extraits de glandes, etc.",
+        '<ul>' +
+        '<li>la production des principes actifs destinés à la fabrication de médicaments : antibiotiques, vitamines de base, acides salicylique et O-acétylsalicylique, etc.</li>' +
+        '<li>la transformation du sang</li>' +
+        '<li>la fabrication de sucres chimiquement purs</li>' +
+        '<li>la transformation de glandes et la production d’extraits de glandes, etc.</li>' +
+        '</ul>',
     },
     {
-      titre: "Préparations pharmaceutiques",
+      titre: 'Préparations pharmaceutiques',
       description:
-        "- la fabrication de médicaments : sérums thérapeutiques et autres constituants du sang, vaccins, médicaments divers, y compris les préparations homéopathiques" +
-        "\n-  la fabrication de préparations chimiques contraceptives à usage externe et de médicaments contraceptifs à base d’hormones" +
-        "\n-  la fabrication de préparations de diagnostic, y compris les tests de grossesse" +
-        "\n-  la fabrication de substances radioactives de diagnostic in vivo" +
-        "\n-  la fabrication de produits pharmaceutiques issus des biotechnologies" +
-        "\n-  la fabrication d’ouates, de gazes et de bandes imprégnées à usage médical, de pansements, de catguts, etc." +
-        "\n-  la préparation de produits d’herboristerie (broyage, triage, mouture) à usage pharmaceutique",
+        '<ul>' +
+        '<li>la fabrication de médicaments : sérums thérapeutiques et autres constituants du sang, vaccins, médicaments divers, y compris les préparations homéopathiques</li>' +
+        '<li>la fabrication de préparations chimiques contraceptives à usage externe et de médicaments contraceptifs à base d’hormones</li>' +
+        '<li>la fabrication de préparations de diagnostic, y compris les tests de grossesse</li>' +
+        '<li>la fabrication de substances radioactives de diagnostic in vivo</li>' +
+        '<li>la fabrication de produits pharmaceutiques issus des biotechnologies</li>' +
+        '<li>la fabrication d’ouates, de gazes et de bandes imprégnées à usage médical, de pansements, de catguts, etc.</li>' +
+        '<li>la préparation de produits d’herboristerie (broyage, triage, mouture) à usage pharmaceutique</li>' +
+        '</ul>',
     },
   ],
   fabriquantProduitsElectroniquesGrandPublic: [
     {
-      titre:
-        "Nomenclature des activités économiques : NACE Rév. 2, section C, division 26",
+      titre: 'Nomenclature des activités économiques : NACE Rév. 2, section C, division 26',
       description:
-        "[https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137]()",
+        '<a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137" target="_blank" rel="noopener noreferrer">https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137</a>',
     },
   ],
   fabriquantProduitsInformatiquesElectroniquesOptiques: [
     {
-      titre:
-        "Nomenclature des activités économiques : NACE Rév. 2, section C, division 26",
+      titre: 'Nomenclature des activités économiques : NACE Rév. 2, section C, division 26',
       description:
-        "[https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137]()",
+        '<a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137" target="_blank" rel="noopener noreferrer">https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex:32023R0137</a>',
     },
   ],
   fournisseurPointEchangeInternet: [
     {
-      titre: "Point d’échange internet",
+      titre: 'Point d’échange internet',
       description:
-        "Une structure de réseau qui permet l’interconnexion de plus de deux réseaux indépendants (systèmes autonomes), " +
-        "essentiellement aux fins de faciliter l’échange de trafic internet, qui n’assure l’interconnexion que pour des " +
-        "systèmes autonomes et qui n’exige pas que le trafic internet passant entre une paire quelconque de systèmes " +
-        "autonomes participants transite par un système autonome tiers, pas plus qu’il ne modifie ou n’altère par ailleurs un tel trafic.",
+        'Une structure de réseau qui permet l’interconnexion de plus de deux réseaux indépendants (systèmes autonomes), ' +
+        'essentiellement aux fins de faciliter l’échange de trafic internet, qui n’assure l’interconnexion que pour des ' +
+        'systèmes autonomes et qui n’exige pas que le trafic internet passant entre une paire quelconque de systèmes ' +
+        'autonomes participants transite par un système autonome tiers, pas plus qu’il ne modifie ou n’altère par ailleurs un tel trafic.',
     },
   ],
   fournisseurReseauxCommunicationElectroniquesPublics: [
     {
-      titre: "Réseau de communications électroniques public",
+      titre: 'Réseau de communications électroniques public',
       description:
-        "Un réseau de communications électroniques utilisé entièrement ou principalement pour la fourniture " +
-        "de services de communications électroniques accessibles au public permettant la transmission d’informations " +
-        "entre les points de terminaison du réseau.",
+        'Un réseau de communications électroniques utilisé entièrement ou principalement pour la fourniture ' +
+        'de services de communications électroniques accessibles au public permettant la transmission d’informations ' +
+        'entre les points de terminaison du réseau.',
     },
   ],
   fournisseurReseauxDiffusionContenu: [
     {
-      titre: "Réseau de diffusion de contenu",
+      titre: 'Réseau de diffusion de contenu',
       description:
-        "Un réseau de serveurs géographiquement répartis visant à assurer la haute disponibilité, l’accessibilité " +
-        "ou la fourniture rapide de contenu et de services numériques aux utilisateurs d’internet pour le compte de fournisseurs de contenu et de services.",
+        'Un réseau de serveurs géographiquement répartis visant à assurer la haute disponibilité, l’accessibilité ' +
+        'ou la fourniture rapide de contenu et de services numériques aux utilisateurs d’internet pour le compte de fournisseurs de contenu et de services.',
     },
   ],
   fournisseurServiceCentresDonnees: [
     {
-      titre: "Service de centres de données",
+      titre: 'Service de centres de données',
       description:
-        "Un service qui englobe les structures, ou groupes de structures, dédiées à l’hébergement, l’interconnexion " +
-        "et l’exploitation centralisées des équipements informatiques et de réseau fournissant des services de stockage, " +
-        "de traitement et de transport des données, ainsi que l’ensemble des installations et infrastructures de distribution d’électricité et de contrôle environnemental.",
+        'Un service qui englobe les structures, ou groupes de structures, dédiées à l’hébergement, l’interconnexion ' +
+        'et l’exploitation centralisées des équipements informatiques et de réseau fournissant des services de stockage, ' +
+        'de traitement et de transport des données, ainsi que l’ensemble des installations et infrastructures de distribution d’électricité et de contrôle environnemental.',
     },
   ],
   fournisseurServiceCommunicationElectroniquesPublics: [
     {
-      titre: "Service de communications électroniques",
+      titre: 'Service de communications électroniques',
       description:
-        "Le service fourni normalement contre rémunération via des réseaux de communications électroniques qui, à l’exception des services consistant à fournir des contenus " +
-        "transmis à l’aide de réseaux et de services de communications électroniques ou à exercer une responsabilité éditoriale sur ces contenus, comprend les types de services suivants : \n\n" +
-        "a) un « service d’accès à l'internet » défini à l’article 2, deuxième alinéa, point 2, du règlement (UE) 2015/2120 ;\n\n" +
-        "b) un service de communications interpersonnelles ; et\n\n" +
-        "c) des services consistant entièrement ou principalement en la transmission de signaux tels que les services de transmission utilisés pour la fourniture de services de machine à " +
-        "machine et pour la radiodiffusion",
+        'Le service fourni normalement contre rémunération via des réseaux de communications électroniques qui, à l’exception des services consistant à fournir des contenus ' +
+        'transmis à l’aide de réseaux et de services de communications électroniques ou à exercer une responsabilité éditoriale sur ces contenus, comprend les types de services suivants :' +
+        '<ul>' +
+        "<li>a) un « service d’accès à l'internet » défini à l’article 2, deuxième alinéa, point 2, du règlement (UE) 2015/2120 ;</li>" +
+        '<li>b) un service de communications interpersonnelles ; et</li>' +
+        '<li>c) des services consistant entièrement ou principalement en la transmission de signaux tels que les services de transmission utilisés pour la fourniture de services de machine à ' +
+        'machine et pour la radiodiffusion.</li>' +
+        '</ul>',
     },
   ],
   fournisseurServicesDNS: [
     {
-      titre: "Fournisseur de services DNS",
+      titre: 'Fournisseur de services DNS',
       description:
-        "Une entité qui fournit :" +
-        "\n\na)  des services de résolution de noms de domaines récursifs accessibles au public destinés aux utilisateurs finaux de l’internet; ou" +
-        "\n\nb)  des services de résolution de noms de domaine faisant autorité pour une utilisation par des tiers, à l’exception des serveurs de noms de racines.",
+        'Une entité qui fournit :' +
+        '<ul>' +
+        '<li>a) des services de résolution de noms de domaines récursifs accessibles au public destinés aux utilisateurs finaux de l’internet; ou</li>' +
+        '<li>b) des services de résolution de noms de domaine faisant autorité pour une utilisation par des tiers, à l’exception des serveurs de noms de racines.</li>' +
+        '</ul>',
     },
     {
-      titre: "Système de noms de domaines, ou « DNS »",
+      titre: 'Système de noms de domaines, ou « DNS »',
       description:
-        "Un système hiérarchique et distribué d’affectation de noms qui permet l’identification des services et " +
+        'Un système hiérarchique et distribué d’affectation de noms qui permet l’identification des services et ' +
         "des ressources internet, ce qui rend possible l'utilisation services de routage et de connectivité internet " +
-        "par les dispositifs des utilisateurs finaux pour accéder à ces services et ressources.",
+        'par les dispositifs des utilisateurs finaux pour accéder à ces services et ressources.',
     },
   ],
   fournisseurServicesGeres: [
     {
-      titre: "Fournisseur de services gérés",
+      titre: 'Fournisseur de services gérés',
       description:
-        "Une entité qui fournit des services liés à l’installation, à la gestion, à l’exploitation " +
-        "ou à l’entretien de produits, de réseaux, d’infrastructures ou d’applications TIC ou d’autres " +
-        "réseaux et systèmes d’information, par l’intermédiaire d’une assistance ou d’une administration " +
-        "active, soit dans les locaux des clients, soit à distance.",
+        'Une entité qui fournit des services liés à l’installation, à la gestion, à l’exploitation ' +
+        'ou à l’entretien de produits, de réseaux, d’infrastructures ou d’applications TIC ou d’autres ' +
+        'réseaux et systèmes d’information, par l’intermédiaire d’une assistance ou d’une administration ' +
+        'active, soit dans les locaux des clients, soit à distance.',
     },
   ],
   fournisseurServicesInformatiqueNuage: [
     {
-      titre: "Service d’informatique en nuage",
+      titre: 'Service d’informatique en nuage',
       description:
-        "Un service numérique qui permet l’administration à la demande et l’accès large à distance à un ensemble modulable " +
-        "et variable de ressources informatiques pouvant être partagées, y compris lorsque ces ressources sont réparties à différents endroits.",
+        'Un service numérique qui permet l’administration à la demande et l’accès large à distance à un ensemble modulable ' +
+        'et variable de ressources informatiques pouvant être partagées, y compris lorsque ces ressources sont réparties à différents endroits.',
     },
   ],
   fournisseurServicesSecuriteGeres: [
     {
-      titre: "Fournisseur de services de sécurité gérés",
+      titre: 'Fournisseur de services de sécurité gérés',
       description:
-        "Un fournisseur de services gérés qui effectue ou fournit une assistance pour des activités liées à la gestion " +
-        "des risques en matière de cybersécurité.",
+        'Un fournisseur de services gérés qui effectue ou fournit une assistance pour des activités liées à la gestion ' +
+        'des risques en matière de cybersécurité.',
     },
   ],
   fournisseursDistributeursEauxConsommation: [
     {
-      titre: "Eaux destinées à la consommation humaine",
+      titre: 'Eaux destinées à la consommation humaine',
       description:
-        "\n\na) Toutes les eaux, soit en l’état, soit après traitement, destinées à la boisson, à la cuisson, à la préparation d’aliments, " +
-        "ou à d’autres usages domestiques dans des lieux publics comme dans des lieux privés, quelle que soit leur origine et qu’elles soient " +
-        "fournies par un réseau de distribution, à partir d’un camion-citerne ou d’un bateau-citerne, ou en bouteilles ou en récipients, y compris les eaux de source ;" +
-        "\n\nb) Toutes les eaux utilisées dans les entreprises du secteur alimentaire pour la fabrication, la transformation, " +
-        "la conservation ou la commercialisation de produits ou de substances destinés à la consommation humaine.",
+        '<ul>' +
+        '<li>a) Toutes les eaux, soit en l’état, soit après traitement, destinées à la boisson, à la cuisson, à la préparation d’aliments, ' +
+        'ou à d’autres usages domestiques dans des lieux publics comme dans des lieux privés, quelle que soit leur origine et qu’elles soient ' +
+        'fournies par un réseau de distribution, à partir d’un camion-citerne ou d’un bateau-citerne, ou en bouteilles ou en récipients, y compris les eaux de source</li>' +
+        '<li>b) Toutes les eaux utilisées dans les entreprises du secteur alimentaire pour la fabrication, la transformation, ' +
+        'la conservation ou la commercialisation de produits ou de substances destinés à la consommation humaine.</li>' +
+        '</ul>',
     },
   ],
   fournisseursMoteursRechercheEnLigne: [
     {
-      titre: "Fournisseur de moteur de recherche en ligne",
+      titre: 'Fournisseur de moteur de recherche en ligne',
       description:
-        "Toute personne physique ou morale qui fournit, ou propose de fournir, des moteurs de recherche en ligne aux consommateurs.",
+        'Toute personne physique ou morale qui fournit, ou propose de fournir, des moteurs de recherche en ligne aux consommateurs.',
     },
     {
-      titre: "Moteur de recherche en ligne",
+      titre: 'Moteur de recherche en ligne',
       description:
-        "Un service numérique qui permet aux utilisateurs de formuler des requêtes afin d’effectuer des recherches sur, en principe, " +
-        "tous les sites internet ou les sites internet dans une langue donnée, sur la base d’une requête lancée sur n’importe quel sujet " +
-        "sous la forme d’un mot-clé, d’une demande vocale, d’une expression ou d’une autre entrée, et qui renvoie des résultats dans quelque " +
-        "format que ce soit dans lesquels il est possible de trouver des informations en rapport avec le contenu demandé.",
+        'Un service numérique qui permet aux utilisateurs de formuler des requêtes afin d’effectuer des recherches sur, en principe, ' +
+        'tous les sites internet ou les sites internet dans une langue donnée, sur la base d’une requête lancée sur n’importe quel sujet ' +
+        'sous la forme d’un mot-clé, d’une demande vocale, d’une expression ou d’une autre entrée, et qui renvoie des résultats dans quelque ' +
+        'format que ce soit dans lesquels il est possible de trouver des informations en rapport avec le contenu demandé.',
     },
   ],
   fournisseursPlaceMarcheEnLigne: [
     {
-      titre: "Place de marché en ligne",
+      titre: 'Place de marché en ligne',
       description:
-        "Un service utilisant un logiciel, y compris un site Internet, une partie de site Internet ou une application, " +
-        "exploité par un professionnel ou pour son compte, qui permet aux consommateurs de conclure des contrats à distance avec d’autres professionnels ou consommateurs.",
+        'Un service utilisant un logiciel, y compris un site Internet, une partie de site Internet ou une application, ' +
+        'exploité par un professionnel ou pour son compte, qui permet aux consommateurs de conclure des contrats à distance avec d’autres professionnels ou consommateurs.',
     },
   ],
   fournisseursPlateformesServicesReseauxSociaux: [
     {
-      titre: "Plateformes de services de réseaux sociaux",
+      titre: 'Plateformes de services de réseaux sociaux',
       description:
-        "Une plateforme qui permet aux utilisateurs finaux de se connecter, de partager, de découvrir et de communiquer " +
-        "entre eux sur plusieurs terminaux, notamment par conversations en ligne, publications, vidéos et recommandations",
+        'Une plateforme qui permet aux utilisateurs finaux de se connecter, de partager, de découvrir et de communiquer ' +
+        'entre eux sur plusieurs terminaux, notamment par conversations en ligne, publications, vidéos et recommandations',
     },
   ],
   fournisseurServicesEnregristrementNomDomaine: [],
   gestionnaireInfrastructure: [
     {
-      titre: "Gestionnaire de l’infrastructure",
+      titre: 'Gestionnaire de l’infrastructure',
       description:
         "Toute entité ou entreprise chargée notamment de l'établissement, de la gestion et de l'entretien de l'infrastructure ferroviaire, " +
         "y compris la gestion du trafic, et du système de signalisation et de contrôle-commande; les fonctions de gestionnaire de l'infrastructure " +
@@ -508,34 +507,34 @@ export const listeDescriptionsActivites: Record<
   ],
   gestionnaireInstallationGNL: [
     {
-      titre: "Gestionnaire d’installation de GNL",
+      titre: 'Gestionnaire d’installation de GNL',
       description:
-        "Toute personne physique ou morale qui effectue la liquéfaction du gaz naturel ou l’importation, le déchargement et la regazéification du GNL, et qui est responsable de l’exploitation d’une installation de GNL.",
+        'Toute personne physique ou morale qui effectue la liquéfaction du gaz naturel ou l’importation, le déchargement et la regazéification du GNL, et qui est responsable de l’exploitation d’une installation de GNL.',
     },
   ],
   gestionnaireInstallationStockage: [
     {
-      titre: "Gestionnaire d’installation de stockage",
+      titre: 'Gestionnaire d’installation de stockage',
       description:
-        "Une personne physique ou morale qui effectue le stockage et est responsable de l’exploitation d’une installation de stockage.",
+        'Une personne physique ou morale qui effectue le stockage et est responsable de l’exploitation d’une installation de stockage.',
     },
   ],
   gestionnaireReseau: [],
   gestionnaireReseauDistribution: [
     {
-      titre: "Gestionnaire de réseau de distribution",
+      titre: 'Gestionnaire de réseau de distribution',
       description:
         "Une personne physique ou morale responsable de l'exploitation, de la maintenance et, si nécessaire, " +
-        "du développement du réseau de distribution dans une zone donnée et, le cas échéant, de ses interconnexions " +
+        'du développement du réseau de distribution dans une zone donnée et, le cas échéant, de ses interconnexions ' +
         "avec d'autres réseaux, et chargée de garantir la capacité à long terme du réseau à satisfaire une demande raisonnable de distribution d’électricité.",
     },
   ],
   gestionnaireReseauTransportElectricite: [
     {
-      titre: "Gestionnaire de réseau de transport",
+      titre: 'Gestionnaire de réseau de transport',
       description:
         "Une personne physique ou morale qui est responsable de l'exploitation, de la maintenance et, si nécessaire, " +
-        "du développement du réseau de transport dans une zone donnée et, le cas échéant, de ses interconnexions " +
+        'du développement du réseau de transport dans une zone donnée et, le cas échéant, de ses interconnexions ' +
         "avec d'autres réseaux, et chargée de garantir la capacité à long terme du réseau à satisfaire une demande raisonnable de transport d’électricité.",
     },
   ],
@@ -545,114 +544,117 @@ export const listeDescriptionsActivites: Record<
     {
       titre: "Opérateur désigné du marché de l'électricité ou NEMO",
       description:
-        "Un opérateur du marché désigné par l’autorité compétente pour exécuter des tâches en lien avec le couplage unique journalier ou le couplage unique infrajournalier.",
+        'Un opérateur du marché désigné par l’autorité compétente pour exécuter des tâches en lien avec le couplage unique journalier ou le couplage unique infrajournalier.',
     },
   ],
   operateurReseauChaleurFroid: [
     {
-      titre: "Réseau de chaleur ou réseau de froid ",
+      titre: 'Réseau de chaleur ou réseau de froid ',
       description:
         "La distribution d'énergie thermique sous forme de vapeur, d'eau chaude ou de fluides réfrigérants, à partir d'une installation " +
-        "centrale ou décentralisée de production et à travers un réseau vers plusieurs bâtiments ou sites, pour le chauffage ou le " +
-        "refroidissement de locaux ou pour le chauffage ou le refroidissement industriel.",
+        'centrale ou décentralisée de production et à travers un réseau vers plusieurs bâtiments ou sites, pour le chauffage ou le ' +
+        'refroidissement de locaux ou pour le chauffage ou le refroidissement industriel.',
     },
   ],
   organismeRecherche: [
     {
-      titre: "Organismes de recherche",
+      titre: 'Organismes de recherche',
       description:
         "Selon l'Article 6 point 41 de la directive NIS&nbsp;2, voici la définition d'un organisme de recherche : \"«organisme de recherche» : une entité dont l'objectif premier " +
         "est de mener des activités de recherche appliquée ou de développement expérimental en vue d'exploiter les résultats de cette recherche à des fins commerciales, à l'exclusion " +
-        "des établissements d'enseignement.\"",
+        'des établissements d\'enseignement."',
     },
   ],
   prestataireServiceConfianceQualifie: [
     {
-      titre: "Service de confiance",
+      titre: 'Service de confiance',
       description:
-        "Un service électronique normalement fourni contre rémunération qui consiste en l’une des activités suivantes :\n\n" +
-        "&nbsp;- la délivrance de certificats de signature électronique, de certificats de cachet électronique, de certificats pour l’authentification de site internet ou de certificats pour la fourniture d’autres services de confiance ;\n\n" +
-        "&nbsp;- la validation de certificats de signature électronique, de certificats de cachet électronique, de certificats pour l’authentification de site internet ou de certificats pour la fourniture d’autres services de confiance ;\n\n" +
-        "&nbsp;- la création de signatures électroniques ou de cachets électroniques ;\n\n" +
-        "&nbsp;- la validation de signatures électroniques ou de cachets électroniques ;\n\n" +
-        "&nbsp;- la préservation de signatures électroniques, de cachets électroniques, de certificats de signature électronique ou de certificats de cachet électronique ;\n\n" +
-        "&nbsp;- la gestion de dispositifs de création de signature électronique à distance ou de dispositifs de création de cachet électronique à distance ;\n\n" +
-        "&nbsp;- la délivrance d’attestations électroniques d’attributs ;\n\n" +
-        "&nbsp;- la validation d’attestations électroniques d’attributs ;\n\n" +
-        "&nbsp;- la création d’horodatages électroniques ;\n\n" +
-        "&nbsp;- la validation d’horodatages électroniques ;\n\n" +
-        "&nbsp;- la fourniture de services d’envoi recommandé électronique ;\n\n" +
-        "&nbsp;- la validation de données transmises au moyen de services d’envoi recommandé électronique, ainsi que de preuves connexes ;\n\n" +
-        "&nbsp;- l’archivage électronique de données électroniques et de documents électroniques ; \n\n" +
-        "&nbsp;- l’enregistrement de données électroniques dans un registre électronique.",
+        'Un service électronique normalement fourni contre rémunération qui consiste en l’une des activités suivantes :' +
+        '<ul>' +
+        '<li>la délivrance de certificats de signature électronique, de certificats de cachet électronique, de certificats pour l’authentification de site internet ou de certificats pour la fourniture d’autres services de confiance</li>' +
+        '<li>la validation de certificats de signature électronique, de certificats de cachet électronique, de certificats pour l’authentification de site internet ou de certificats pour la fourniture d’autres services de confiance</li>' +
+        '<li>la création de signatures électroniques ou de cachets électroniques</li>' +
+        '<li>la validation de signatures électroniques ou de cachets électroniques</li>' +
+        '<li>la préservation de signatures électroniques, de cachets électroniques, de certificats de signature électronique ou de certificats de cachet électronique</li>' +
+        '<li>la gestion de dispositifs de création de signature électronique à distance ou de dispositifs de création de cachet électronique à distance</li>' +
+        '<li>la délivrance d’attestations électroniques d’attributs</li>' +
+        '<li>la validation d’attestations électroniques d’attributs</li>' +
+        '<li>la création d’horodatages électroniques</li>' +
+        '<li>la validation d’horodatages électroniques</li>' +
+        '<li>la fourniture de services d’envoi recommandé électronique</li>' +
+        '<li>la validation de données transmises au moyen de services d’envoi recommandé électronique, ainsi que de preuves connexes</li>' +
+        '<li>l’archivage électronique de données électroniques et de documents électroniques</li>' +
+        '<li>l’enregistrement de données électroniques dans un registre électronique.</li>' +
+        '</ul>',
     },
     {
-      titre: "Service de confiance qualifié",
+      titre: 'Service de confiance qualifié',
       description:
-        "Un service de confiance qui satisfait aux exigences du règlement n°910/2014 " +
-        "du Parlement européen et du Conseil du 23 juillet 2014 sur l’identification électronique " +
-        "et les services de confiance pour les transactions électroniques au sein du marché " +
-        "intérieur modifié par le règlement n°2024/1183 du Parlement européen et du Conseil du 11 avril 2024.",
+        'Un service de confiance qui satisfait aux exigences du règlement n°910/2014 ' +
+        'du Parlement européen et du Conseil du 23 juillet 2014 sur l’identification électronique ' +
+        'et les services de confiance pour les transactions électroniques au sein du marché ' +
+        'intérieur modifié par le règlement n°2024/1183 du Parlement européen et du Conseil du 11 avril 2024.',
     },
     {
-      titre: "Prestataire de services de confiance qualifié",
+      titre: 'Prestataire de services de confiance qualifié',
       description:
-        "Un prestataire de services de confiance qui fournit un ou plusieurs " +
-        "services de confiance qualifiés et a obtenu de l’organe de contrôle " +
-        "le statut qualifié",
+        'Un prestataire de services de confiance qui fournit un ou plusieurs ' +
+        'services de confiance qualifiés et a obtenu de l’organe de contrôle ' +
+        'le statut qualifié',
     },
   ],
   prestataireServiceConfianceNonQualifie: [
     {
-      titre: "Service de confiance",
+      titre: 'Service de confiance',
       description:
-        "Un service électronique normalement fourni contre rémunération qui consiste en l’une des activités suivantes :\n\n" +
-        "&nbsp;- la délivrance de certificats de signature électronique, de certificats de cachet électronique, de certificats pour l’authentification de site internet ou de certificats pour la fourniture d’autres services de confiance ;\n\n" +
-        "&nbsp;- la validation de certificats de signature électronique, de certificats de cachet électronique, de certificats pour l’authentification de site internet ou de certificats pour la fourniture d’autres services de confiance ;\n\n" +
-        "&nbsp;- la création de signatures électroniques ou de cachets électroniques ;\n\n" +
-        "&nbsp;- la validation de signatures électroniques ou de cachets électroniques ;\n\n" +
-        "&nbsp;- la préservation de signatures électroniques, de cachets électroniques, de certificats de signature électronique ou de certificats de cachet électronique ;\n\n" +
-        "&nbsp;- la gestion de dispositifs de création de signature électronique à distance ou de dispositifs de création de cachet électronique à distance ;\n\n" +
-        "&nbsp;- la délivrance d’attestations électroniques d’attributs ;\n\n" +
-        "&nbsp;- la validation d’attestations électroniques d’attributs ;\n\n" +
-        "&nbsp;- la création d’horodatages électroniques ;\n\n" +
-        "&nbsp;- la validation d’horodatages électroniques ;\n\n" +
-        "&nbsp;- la fourniture de services d’envoi recommandé électronique ;\n\n" +
-        "&nbsp;- la validation de données transmises au moyen de services d’envoi recommandé électronique, ainsi que de preuves connexes ;\n\n" +
-        "&nbsp;- l’archivage électronique de données électroniques et de documents électroniques ; \n\n" +
-        "&nbsp;- l’enregistrement de données électroniques dans un registre électronique.",
+        'Un service électronique normalement fourni contre rémunération qui consiste en l’une des activités suivantes :' +
+        '<ul>' +
+        '<li>la délivrance de certificats de signature électronique, de certificats de cachet électronique, de certificats pour l’authentification de site internet ou de certificats pour la fourniture d’autres services de confiance</li>' +
+        '<li>la validation de certificats de signature électronique, de certificats de cachet électronique, de certificats pour l’authentification de site internet ou de certificats pour la fourniture d’autres services de confiance</li>' +
+        '<li>la création de signatures électroniques ou de cachets électroniques</li>' +
+        '<li>la validation de signatures électroniques ou de cachets électroniques</li>' +
+        '<li>la préservation de signatures électroniques, de cachets électroniques, de certificats de signature électronique ou de certificats de cachet électronique</li>' +
+        '<li>la gestion de dispositifs de création de signature électronique à distance ou de dispositifs de création de cachet électronique à distance</li>' +
+        '<li>la délivrance d’attestations électroniques d’attributs</li>' +
+        '<li>la validation d’attestations électroniques d’attributs</li>' +
+        '<li>la création d’horodatages électroniques</li>' +
+        '<li>la validation d’horodatages électroniques</li>' +
+        '<li>la fourniture de services d’envoi recommandé électronique</li>' +
+        '<li>la validation de données transmises au moyen de services d’envoi recommandé électronique, ainsi que de preuves connexes</li>' +
+        '<li>l’archivage électronique de données électroniques et de documents électroniques</li>' +
+        '<li>l’enregistrement de données électroniques dans un registre électronique.</li>' +
+        '</ul>',
     },
     {
-      titre: "Prestataire de services de confiance",
+      titre: 'Prestataire de services de confiance',
       description:
-        "Une personne physique ou morale qui fournit un ou plusieurs services de confiance, " +
-        "en tant que prestataire de services de confiance.",
+        'Une personne physique ou morale qui fournit un ou plusieurs services de confiance, ' +
+        'en tant que prestataire de services de confiance.',
     },
   ],
   prestataireSoinsSante: [
     {
-      titre: "Prestataire de soins de santé",
+      titre: 'Prestataire de soins de santé',
       description:
-        "Toute personne physique ou morale ou toute autre entité qui dispense légalement des soins de santé sur le territoire d’un État membre.",
+        'Toute personne physique ou morale ou toute autre entité qui dispense légalement des soins de santé sur le territoire d’un État membre.',
     },
   ],
   prestatairesServicesPostauxExpedition: [
     {
-      titre: "Services postaux",
+      titre: 'Services postaux',
       description:
         "Des services qui consistent en la levée, le tri, l'acheminement et la distribution des envois postaux.",
     },
   ],
   producteur: [
     {
-      titre: "Producteur",
-      description:
-        "Une personne physique ou morale qui produit de l’électricité.",
+      titre: 'Producteur',
+      description: 'Une personne physique ou morale qui produit de l’électricité.',
     },
   ],
   rechercheDeveloppementMedicament: [
     {
-      titre: "Médicament",
+      titre: 'Médicament',
       description:
         "Toute substance ou composition présentée comme possédant des propriétés curatives ou préventives à l'égard des maladies humaines. " +
         "Toute substance ou composition pouvant être administrée à l'homme en vue d'établir un diagnostic médical ou de restaurer, " +
@@ -661,45 +663,44 @@ export const listeDescriptionsActivites: Record<
   ],
   registresNomsDomainesPremierNiveau: [
     {
-      titre: "Registre de noms de domaines de premier niveau",
+      titre: 'Registre de noms de domaines de premier niveau',
       description:
-        "Une entité à laquelle un domaine de premier niveau spécifique a été délégué et qui est responsable " +
-        "de l’administration du domaine de premier niveau, y compris de l’enregistrement des noms de domaines " +
-        "relevant du domaine de premier niveau et du fonctionnement technique du domaine de premier niveau, " +
-        "notamment l’exploitation de ses serveurs de noms, la maintenance de ses bases de données et la distribution " +
-        "des fichiers de zone du domaine de premier niveau sur les serveurs de noms, que ces opérations soient effectuées " +
-        "par l’entité elle-même ou qu’elles soient sous-traitées, mais à l’exclusion des situations où les noms de domaines " +
-        "de premier niveau sont utilisés par un registre uniquement pour son propre usage.",
+        'Une entité à laquelle un domaine de premier niveau spécifique a été délégué et qui est responsable ' +
+        'de l’administration du domaine de premier niveau, y compris de l’enregistrement des noms de domaines ' +
+        'relevant du domaine de premier niveau et du fonctionnement technique du domaine de premier niveau, ' +
+        'notamment l’exploitation de ses serveurs de noms, la maintenance de ses bases de données et la distribution ' +
+        'des fichiers de zone du domaine de premier niveau sur les serveurs de noms, que ces opérations soient effectuées ' +
+        'par l’entité elle-même ou qu’elles soient sous-traitées, mais à l’exclusion des situations où les noms de domaines ' +
+        'de premier niveau sont utilisés par un registre uniquement pour son propre usage.',
     },
   ],
   secteurAlimentaireDistributionGrosProductionTransformationIndustrielle: [
     {
-      titre: "Entreprise du secteur alimentaire",
+      titre: 'Entreprise du secteur alimentaire',
       description:
-        "Toute entreprise publique ou privée assurant, dans un but lucratif ou non, des activités " +
-        "liées aux étapes de la production, de la transformation et de la distribution de denrées alimentaires.",
+        'Toute entreprise publique ou privée assurant, dans un but lucratif ou non, des activités ' +
+        'liées aux étapes de la production, de la transformation et de la distribution de denrées alimentaires.',
     },
   ],
   serviceControleCirculationAerienne: [
     {
-      titre: "Service du contrôle de la circulation aérienne",
+      titre: 'Service du contrôle de la circulation aérienne',
       description:
         "Un service assuré dans le but d’empêcher les abordages entre aéronefs, les collisions (sur l'aire de manoeuvre, entre les aéronefs et des obstacles) et d'accélérer et de régulariser la circulation aérienne.",
     },
   ],
   societeTransportEaux: [
     {
-      titre:
-        "Sociétés de transport par voie d’eau intérieure, maritime et côtier de passagers et de fret",
+      titre: 'Sociétés de transport par voie d’eau intérieure, maritime et côtier de passagers et de fret',
       description:
-        "[https://eur-lex.europa.eu/legal-content/FR/TXT/HTML/?uri=CELEX:32004R0725]()",
+        '<a href="https://eur-lex.europa.eu/legal-content/FR/TXT/HTML/?uri=CELEX:32004R0725" target="_blank" rel="noopener noreferrer">https://eur-lex.europa.eu/legal-content/FR/TXT/HTML/?uri=CELEX:32004R0725</a>',
     },
   ],
   transporteursAeriensCommercial: [
     {
-      titre: "Transporteur aérien",
+      titre: 'Transporteur aérien',
       description:
-        "Une entreprise de transport aérien titulaire d’une licence d’exploitation valable ou d’un document équivalent.",
+        'Une entreprise de transport aérien titulaire d’une licence d’exploitation valable ou d’un document équivalent.',
     },
   ],
 };
