@@ -23,22 +23,38 @@
 </script>
 
 <dsfr-container>
-  <SelectionIdentifiantGuide bind:valeur={identifiantGuide} />
-  <input
-    type="file"
-    id="document-guide"
-    name="document-guide"
-    oninput={surAjoutDocument}
-  />
-  <dsfr-input
-    id="libelleDuLien"
-    label="Libellé du lien"
-    onvaluechanged={(e: CustomEvent) => (libelleDuLien = e.detail)}
-    value={libelleDuLien}
-  ></dsfr-input>
-  <dsfr-button
-    label="Ajouter"
-    use:clic={ajoute}
-    disabled={!nouveauDocument || !libelleDuLien || !identifiantGuide}
-  ></dsfr-button>
+  <div class="formulaire-ajout">
+    <h2>Ajout d'un document de guide</h2>
+    <SelectionIdentifiantGuide bind:valeur={identifiantGuide} />
+    <input
+      type="file"
+      id="document-guide"
+      name="document-guide"
+      oninput={surAjoutDocument}
+    />
+    <dsfr-input
+      id="libelleDuLien"
+      label="Libellé du lien"
+      onvaluechanged={(e: CustomEvent) => (libelleDuLien = e.detail)}
+      value={libelleDuLien}
+    ></dsfr-input>
+    <dsfr-button
+      label="Ajouter"
+      use:clic={ajoute}
+      disabled={!nouveauDocument || !libelleDuLien || !identifiantGuide}
+    ></dsfr-button>
+  </div>
 </dsfr-container>
+
+<style lang="scss">
+  @use '../../../assets/styles/grille' as *;
+
+  .formulaire-ajout {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 72px 0;
+    max-width: taille-pour-colonnes(8);
+    margin: auto;
+  }
+</style>
