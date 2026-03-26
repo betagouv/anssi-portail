@@ -1,4 +1,4 @@
-import { Activite } from "./Activite.definitions";
+import type { Activite } from "./Activite.definitions";
 import {
   ValeursActivitesConstructionVehiculesAutomobiles,
   ValeursActivitesEauPotable,
@@ -30,8 +30,8 @@ import {
   ValeursActivitesTransportsParEau,
   ValeursActivitesTransportsRoutiers,
 } from "./Activite.valeurs";
-import { SecteurSimple } from "./SecteurActivite.definitions";
-import { SousSecteurActivite } from "./SousSecteurActivite.definitions";
+import type { SecteurSimple } from "./SecteurActivite.definitions";
+import type { SousSecteurActivite } from "./SousSecteurActivite.definitions";
 
 export const activitesParSecteurEtSousSecteur: Record<
   SecteurSimple | SousSecteurActivite,
