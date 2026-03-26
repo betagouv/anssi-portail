@@ -5,6 +5,7 @@
     valideEtapeDesignation,
     valideEtapePrealable,
     valideSecteursActivite,
+    valideSousSecteursActivite,
     valideTailleEntitePrivee,
     valideTypeStructure,
   } from './stores/actions';
@@ -15,6 +16,8 @@
   import EtapeTypeStructure from './etapes/EtapeTypeStructure.svelte';
   import EtapeTailleEntitePrivee from './etapes/EtapeTailleEntitePrivee.svelte';
   import EtapeSecteursActivite from './etapes/EtapeSecteursActivite.svelte';
+  import EtapeSousSecteursActivite from './etapes/EtapeSousSecteursActivite.svelte';
+  import { estUnSecteurAvecDesSousSecteurs } from './stores/SecteurActivite.predicats';
 </script>
 
 <Hero
@@ -59,6 +62,14 @@
     <EtapeSecteursActivite
       onsuivant={(reponse) =>
         questionnaireStore.repond(valideSecteursActivite(reponse))}
+    />
+  {:else if $questionnaireStore.etapeCourante === 'sousSecteursActivite'}
+    <EtapeSousSecteursActivite
+      secteursChoisis={$questionnaireStore.secteurActivite.filter((s) =>
+        estUnSecteurAvecDesSousSecteurs(s)
+      )}
+      onsuivant={(reponse) =>
+        questionnaireStore.repond(valideSousSecteursActivite(reponse))}
     />
   {/if}
 </dsfr-container>
