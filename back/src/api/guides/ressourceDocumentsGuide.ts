@@ -6,8 +6,8 @@ const valideLesDocuments = (): RequestHandler => {
   return async (requete: Request, reponse: Response, suite: NextFunction) => {
     return multer({
       storage: multer.memoryStorage(),
-    }).fields([{ name: 'document-guide' }])(requete, reponse, (err) => {
-      if (!requete.files || requete.files.length === 0) {
+    }).single('document-guide')(requete, reponse, (err) => {
+      if (!requete.file) {
         return reponse.status(400).json({
           erreur: 'Document obligatoire',
         });
