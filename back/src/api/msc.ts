@@ -160,7 +160,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'associations',
     'entreprises',
     'sante',
-    'gestion-guides/ajout-document',
   ]
     .concat(
       configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()
@@ -182,7 +181,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/guides/:slug', ressourcePagesJekyll(configurationServeur, 'guides'));
 
-  ['ma-maturite', 'favoris', 'services-anssi'].forEach((page) =>
+  ['ma-maturite', 'favoris', 'services-anssi', 'gestion-guides/ajout-document'].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyllConnectees(configurationServeur, page))
   );
 

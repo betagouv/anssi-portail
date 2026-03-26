@@ -24,17 +24,30 @@ const valideLesDocuments = (): RequestHandler => {
   };
 };
 
-const ressourceDocumentsGuide = ({ entrepotGuide }: ConfigurationServeur) => {
+const ressourceDocumentsGuide = ({
+  adaptateurHachage,
+  entrepotGuide,
+  entrepotUtilisateur,
+  middleware,
+}: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.post(
     '/:slug/documents',
+    middleware.verifieJWT,
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideLesDocuments(),
     valideCorpsRequete(schemaAjoutDocumentGuide),
-    async (_requete: Request, reponse: Response, suite: NextFunction) => {
+    async (requete: Request, reponse: Response, suite: NextFunction) => {
       try {
-        const identifiantGuide = _requete.params.slug as string;
-        const guide = await entrepotGuide.parId(identifiantGuide as string);
+        if (!requete.utilisateur || !requete.utilisateur.peutAjouterUnDocumentAUnGuide()) {
+          return reponse.status(403).json({
+            erreur: "Vous n'êtes pas autorisé à ajouter un document",
+          });
+        }
+
+        const identifiantGuide = requete.params.slug as string;
+        const guide = await entrepotGuide.parId(identifiantGuide);
         if (!guide) {
           return reponse.status(404).json({
             erreur: `Le guide "${identifiantGuide}" est introuvable`,
