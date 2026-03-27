@@ -1,9 +1,6 @@
 import axios from 'axios';
+import type { EtatQuestionnaire } from '../../../../back/src/metier/nis2-simulateur/EtatQuestionnaire';
 
-type Reponses = {
-  question1: boolean;
-};
-
-export const envoyerReponses = async (reponses: Reponses) => {
+export const envoyerReponses = async (reponses: EtatQuestionnaire) => {
   await axios.post('/api/simulateur-nis2', reponses);
 };

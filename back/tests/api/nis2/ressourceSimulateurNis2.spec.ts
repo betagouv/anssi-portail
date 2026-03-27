@@ -28,14 +28,32 @@ describe('La ressource qui gère le simulateur NIS2', () => {
   });
 
   describe('sur requête POST', () => {
+    const reponseComplete = () => ({
+      etapeCourante: 'resultat',
+      designationOperateurServicesEssentiels: ['nsp'],
+      appartenancePaysUnionEuropeenne: ['france'],
+      typeStructure: ['privee'],
+      trancheNombreEmployes: ['petit'],
+      trancheChiffreAffaire: ['petit'],
+      trancheBilanFinancier: [],
+      secteurActivite: ['banqueSecteurBancaire'],
+      sousSecteurActivite: [],
+      activites: ['etablissementCredit'],
+      typeEntitePublique: [],
+      localisationFournitureServicesNumeriques: [],
+      paysDecisionsCyber: [],
+      paysOperationsCyber: [],
+      paysPlusGrandNombreSalaries: [],
+    });
+
     it('répond 201', async () => {
-      const reponse = await request(serveur).post('/api/simulateur-nis2').send({ question1: false });
+      const reponse = await request(serveur).post('/api/simulateur-nis2').send(reponseComplete());
 
       assert.equal(reponse.status, 201);
     });
 
     it("publie sur le bus le résultat du test d'éligibilité", async () => {
-      await request(serveur).post('/api/simulateur-nis2').send({ question1: false });
+      await request(serveur).post('/api/simulateur-nis2').send(reponseComplete());
 
       assert.equal(busEvenements.aRecuUnEvenement(SimulationNis2Terminee), true);
     });

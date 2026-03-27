@@ -1,4 +1,4 @@
-import type { Activite } from "./Activite.definitions";
+import type { Activite } from './Activite.definitions';
 import {
   ValeursActivitesConstructionVehiculesAutomobiles,
   ValeursActivitesEauPotable,
@@ -29,35 +29,27 @@ import {
   ValeursActivitesTransportsFerroviaires,
   ValeursActivitesTransportsParEau,
   ValeursActivitesTransportsRoutiers,
-} from "./Activite.valeurs";
-import type { SecteurSimple } from "./SecteurActivite.definitions";
-import type { SousSecteurActivite } from "./SousSecteurActivite.definitions";
+} from './Activite.valeurs';
+import type { SecteurSimple } from './SecteurActivite.definitions';
+import type { SousSecteurActivite } from './SousSecteurActivite.definitions';
 
-export const activitesParSecteurEtSousSecteur: Record<
-  SecteurSimple | SousSecteurActivite,
-  readonly Activite[]
-> = {
+export const activitesParSecteurEtSousSecteur: Record<SecteurSimple | SousSecteurActivite, readonly Activite[]> = {
   autreSecteurActivite: [],
   autreSousSecteurEnergie: [],
   autreSousSecteurFabrication: [],
   autreSousSecteurTransports: [],
   banqueSecteurBancaire: ValeursActivitesSecteurBancaire,
-  constructionVehiculesAutomobiles:
-    ValeursActivitesConstructionVehiculesAutomobiles,
+  constructionVehiculesAutomobiles: ValeursActivitesConstructionVehiculesAutomobiles,
   eauPotable: ValeursActivitesEauPotable,
   eauxUsees: ValeursActivitesEauUsees,
   electricite: ValeursActivitesElectricite,
   espace: ValeursActivitesEspace,
-  fabricationAutresMaterielTransports:
-    ValeursActivitesFabricationAutresMaterielTransports,
-  fabricationDispositifsMedicaux:
-    ValeursActivitesFabricationDispositifsMedicaux,
-  fabricationEquipementsElectroniques:
-    ValeursActivitesFabricationEquipementsElectroniques,
+  fabricationAutresMaterielTransports: ValeursActivitesFabricationAutresMaterielTransports,
+  fabricationDispositifsMedicaux: ValeursActivitesFabricationDispositifsMedicaux,
+  fabricationEquipementsElectroniques: ValeursActivitesFabricationEquipementsElectroniques,
   fabricationProduitsInformatiquesElectroniquesOptiques:
     ValeursActivitesFabricationProduitsInformatiquesElectroniquesOptiques,
-  fabricationMachinesEquipements:
-    ValeursActivitesFabricationMachinesEquipements,
+  fabricationMachinesEquipements: ValeursActivitesFabricationMachinesEquipements,
   fabricationProductionDistributionProduitsChimiques:
     ValeursActivitesFabricationProductionDistributionProduitsChimiques,
   fournisseursNumeriques: ValeursActivitesFournisseursNumeriques,
@@ -65,8 +57,7 @@ export const activitesParSecteurEtSousSecteur: Record<
   gestionDechets: ValeursActivitesGestionDechets,
   gestionServicesTic: ValeursActivitesGestionServicesTic,
   hydrogene: ValeursActivitesHydrogene,
-  infrastructureMarchesFinanciers:
-    ValeursActivitesInfrastructureMarcheFinancier,
+  infrastructureMarchesFinanciers: ValeursActivitesInfrastructureMarcheFinancier,
   infrastructureNumerique: ValeursActivitesInfrastructureNumerique,
   petrole: ValeursActivitesPetrole,
   productionTransformationDistributionDenreesAlimentaires:
@@ -80,3 +71,5 @@ export const activitesParSecteurEtSousSecteur: Record<
   transportsParEau: ValeursActivitesTransportsParEau,
   transportsRoutiers: ValeursActivitesTransportsRoutiers,
 };
+
+export const ToutesLesActivites = Object.values(activitesParSecteurEtSousSecteur).flat() as readonly Activite[];
