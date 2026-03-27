@@ -137,6 +137,13 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     ressourcesCyber: () => 'https://ressources-cyber.notre-cellar/',
     visas: () => 'https://visas.notre-cellar/',
   }),
+  cellar: () => ({
+    region: () => '',
+    url: () => '',
+    gestionGuides: () => ({
+      nomDuBucket: () => '',
+    }),
+  }),
   matomo: () => ({
     idSite: () => '227',
   }),

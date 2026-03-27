@@ -57,6 +57,13 @@ type AdaptateurEnvironnement = {
     guides: () => string;
     visas: () => string;
   };
+  cellar: () => {
+    url: () => string;
+    region: () => string;
+    gestionGuides: () => {
+      nomDuBucket: () => string;
+    };
+  };
   matomo: () => {
     idSite: () => string;
   };
@@ -208,6 +215,13 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
           : '',
     };
   },
+  cellar: () => ({
+    region: () => process.env.CELLAR_REGION ?? '',
+    url: () => process.env.CELLAR_BASE_URL ?? '',
+    gestionGuides: () => ({
+      nomDuBucket: () => process.env.CELLAR_BUCKET_GESTION_GUIDES ?? '',
+    }),
+  }),
   matomo: () => ({
     idSite: () => process.env.MATOMO_ID || '',
   }),
