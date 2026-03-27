@@ -5,12 +5,6 @@ titreHtml: '5 niveaux de maturité cyber | MesServicesCyber'
 styles: /assets/styles/niveaux-maturite.css
 ---
 
-<script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/fil-ariane.js"
-></script>
-
 <script type="application/json" id="donnees">
   {
     "feuille": "5 niveaux de maturité cyber"
@@ -19,7 +13,7 @@ styles: /assets/styles/niveaux-maturite.css
 
 <section class="chapeau fond-sombre">
   <div class="contenu-section">
-    <div id="fil-ariane"></div>
+    {% include composant-svelte.html id="fil-ariane" %}
     <h1 class="alternatif-xs-ns">5 niveaux de maturité cyber</h1>
     <p class="texte-chapo-xl-ns">
       Découvrez les différents niveaux de maturité cyber, de l’organisation en
@@ -28,10 +22,4 @@ styles: /assets/styles/niveaux-maturite.css
   </div>
 </section>
 
-<script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/niveaux-maturite.js"
-></script>
-
-<div id="niveaux-maturite"></div>
+{% include composant-svelte.html id="niveaux-maturite" %}

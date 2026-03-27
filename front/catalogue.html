@@ -7,16 +7,8 @@ styles:
   - /assets/styles/carte-item.css
 ---
 
-<script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/catalogue.js"
-></script>
-
+{% include composant-svelte.html id="catalogue" %}
 {% include script-donnees-json.html repartition=site.data.catalogue %}
-
-<div id="catalogue"></div>
-
 {% include encart-nis2.html fond='sombre' %}
 
 <div class="encart fond-clair">

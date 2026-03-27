@@ -4,11 +4,6 @@ permalink: /parcours-approfondir/
 titreHtml: 'Cybersécurité : approfondir ! | MesServicesCyber'
 ---
 
-<script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/fil-ariane.js"
-></script>
 
 <script type="application/json" id="donnees">
   {
@@ -24,7 +19,7 @@ titreHtml: 'Cybersécurité : approfondir ! | MesServicesCyber'
 
 <section class="chapeau fond-sombre">
   <div class="contenu-section">
-    <div id="fil-ariane"></div>
+    {% include composant-svelte.html id="fil-ariane" %}
     <h1 class="alternatif-xs-ns">Les services pour approfondir</h1>
     <p class="texte-chapo-xl-ns">
       Votre organisation a déjà mis en œuvre des premières actions pour

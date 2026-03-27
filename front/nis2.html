@@ -13,11 +13,6 @@ styles:
   "featureFlagNis2CyFun23": {% if site.env.FEATURE_FLAG_NIS2_CYFUN23 == 'true' %}true{% else %}false{% endif %}
   }
 </script>
-<script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/page-directive-nis2.js"
-></script>
-<div id="page-directive-nis2"></div>
 
+{% include composant-svelte.html id="page-directive-nis2" %}
 {% include script-donnees-json.html %}

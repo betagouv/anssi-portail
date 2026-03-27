@@ -2,12 +2,10 @@ import { mount } from 'svelte';
 import BoutonFavori from './favoris/BoutonFavori.svelte';
 import { profilStore } from './stores/profil.store';
 
-const idItem = (
-  document.getElementById(`script-bouton-favori`)!.attributes as {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
-  }
-)['id-item-cyber'].value;
+const donnees = document.getElementById('donneesBoutonFavoris')!.textContent;
+if (!donnees) throw new Error('Impossible de trouver les données');
+
+const { idItem } = JSON.parse(donnees);
 
 let boutonFavori;
 if (profilStore) {

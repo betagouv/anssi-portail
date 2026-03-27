@@ -38,30 +38,6 @@ permalink: /
   }
 </script>
 
-<script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/demande-diagnostic.js"
-></script>
-
-<script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/barometre-simplifie.js"
-></script>
-
-<script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/carrousel-des-interlocuteurs.js"
-></script>
-
-<script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/equipe-biz-dev.js"
-></script>
-
 <section class="organisations-concernees">
   <div class="contenu-section">
     <div class="toutes-organisations">
@@ -89,7 +65,7 @@ permalink: /
         titre="Panorama de la menace 2025, ANSSI"
       ></lab-anssi-lien>
     </div>
-    <div id="demande-diagnostic"></div>
+    {% include composant-svelte.html id="demande-diagnostic" %}
     <div class="acces-catalogue">
       <h2>
         Accédez à un catalogue complet de ressources cyber proposées par l'ANSSI
@@ -183,19 +159,23 @@ permalink: /
           tests réalisés.
         </p>
       </hgroup>
-      <div id="barometre-simplifie" />
+      {% include composant-svelte.html id="barometre-simplifie" %}
     </div>
   </div>
 </section>
 
 <section class="interlocuteurs">
   <div class="contenu-section">
-    <div class="contenu-interlocuteurs" id="carrousel-des-interlocuteurs" />
+    <div class="contenu-interlocuteurs" >
+      {% include composant-svelte.html id="carrousel-des-interlocuteurs" %}
+    </div>
   </div>
 </section>
 
 <section class="equipe-bizdev">
-  <div class="contenu-section" id="equipe-biz-dev" />
+  <div class="contenu-section" id="" >
+    {% include composant-svelte.html id="equipe-biz-dev" %}
+  </div>
 </section>
 
 <section class="communaute-msc">
