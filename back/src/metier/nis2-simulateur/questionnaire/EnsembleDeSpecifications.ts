@@ -1,6 +1,6 @@
 import { Specifications } from './Specifications';
-import { EtatQuestionnaire } from '../EtatQuestionnaire';
-import { ResultatAvecAnalyse } from './ResultatAvecAnalyse';
+import type { EtatQuestionnaire } from '../EtatQuestionnaire';
+import type { ResultatAvecAnalyse } from './ResultatAvecAnalyse';
 
 export class EnsembleDeSpecifications {
   constructor(private readonly specifications: Specifications[]) {}

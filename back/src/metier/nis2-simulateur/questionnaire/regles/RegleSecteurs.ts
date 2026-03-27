@@ -1,8 +1,8 @@
-import { estValeurVide, Regle } from '../Specifications';
+import { estValeurVide, type Regle } from '../Specifications';
 import { ErreurLectureDeRegle } from './ErreurLectureDeRegle';
-import { EtatQuestionnaire } from '../../EtatQuestionnaire';
-import { SpecificationTexte } from '../FormatDesSpecificationsCSV';
-import { SecteurActivite } from '../../SecteurActivite.definitions';
+import type { EtatQuestionnaire } from '../../EtatQuestionnaire';
+import type { SpecificationTexte } from '../FormatDesSpecificationsCSV';
+import type { SecteurActivite } from '../../SecteurActivite.definitions';
 import { contientUnParmi } from '../../commun.predicats';
 import { libellesSecteursActivite } from '../../LibellesSecteursActivite';
 

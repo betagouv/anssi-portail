@@ -1,6 +1,6 @@
 import { parse } from 'papaparse';
 import { FabriqueDeSpecifications } from './FabriqueDeSpecifications';
-import { SpecificationTexte, valideColonnesDuCSV } from './FormatDesSpecificationsCSV';
+import { type SpecificationTexte, valideColonnesDuCSV } from './FormatDesSpecificationsCSV';
 import { EnsembleDeSpecifications } from './EnsembleDeSpecifications';
 
 export class LecteurDeSpecifications {

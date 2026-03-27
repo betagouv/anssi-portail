@@ -1,4 +1,4 @@
-import { ResultatEligibilite } from '../Regulation.definitions';
+import type { ResultatEligibilite } from '../Regulation.definitions';
 
 export type ResultatAvecAnalyse = {
   resultat: ResultatEligibilite;
