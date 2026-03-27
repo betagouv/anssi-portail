@@ -129,4 +129,16 @@ describe("L'utilisateur", () => {
 
     assert.equal(estAgentAnssi, true);
   });
+
+  it('Peut ajouter un guide', () => {
+    const utilisateur = new Utilisateur(
+      {
+        ...infosUtilisateur,
+        roles: ['GESTION_GUIDES'],
+      },
+      fauxAdaptateurRechercheEntreprise
+    );
+
+    assert.equal(utilisateur.peutAjouterUnDocumentAUnGuide(), true);
+  });
 });
