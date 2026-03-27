@@ -25,7 +25,7 @@
   import { selectSecteursPourSaisieActivites } from './stores/questionnaire.selecteurs.ts';
   import EtapeLocalisationEtablissementPrincipal from './etapes/EtapeLocalisationEtablissementPrincipal.svelte';
   import EtapeLocalisationServicesNumeriques from './etapes/EtapeLocalisationServicesNumeriques.svelte';
-  import EtapeResultat from './etapes/EtapeResultat.svelte';
+  import EtapeResultat from './resultat/EtapeResultat.svelte';
 </script>
 
 <Hero
