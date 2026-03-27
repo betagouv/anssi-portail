@@ -14,7 +14,7 @@
     "test": "vitest run",
     "test:ci": "vitest run",
     "typecheck": "tsc --noEmit && svelte-check",
-    "watch": "vite build -w --minify false"
+    "watch": "vite dev"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",

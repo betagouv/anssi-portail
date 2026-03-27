@@ -12,7 +12,6 @@ const ressourcePageProduit = (
     if (requete.params.id === 'mon-espace-nis2.html') {
       return reponse.redirect(HttpStatusCode.MovedPermanently, '/nis2');
     }
-    console.log(requete.params.id);
     reponse
       .contentType('text/html')
       .status(200)

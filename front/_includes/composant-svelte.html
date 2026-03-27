@@ -1,8 +1,18 @@
+{% if site.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD == 'true' %}
+<script
+  type="module"
+  crossorigin
+  src="http://localhost:3001/src/main-{{include.id}}.ts"
+  nonce="%%NONCE%%"
+></script>
+{% else %}
 <script
   type="module"
   crossorigin
   src="/lib-svelte/dist/assets/{{include.id}}.js"
 ></script>
+{% endif %}
+
 
 {% if include.genere-div != false %}
 <div id="{{include.id}}"></div>

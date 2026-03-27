@@ -69,4 +69,7 @@ export default defineConfig({
     },
   },
   customLogger: loggerPersonnalise,
+  server: {
+    port: 3001,
+  },
 });
