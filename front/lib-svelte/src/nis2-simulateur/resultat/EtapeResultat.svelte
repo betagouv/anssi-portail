@@ -5,6 +5,8 @@
   import { evalueEligibilite } from '../../../../../back/src/metier/nis2-simulateur/questionnaire/evalueEligibilite';
   import SpecificationsCompletes from '../../../../../back/src/metier/nis2-simulateur/questionnaire/specifications-completes.csv?raw';
   import PointsAttention from './PointsAttention.svelte';
+  import { Regulation } from '../../../../../back/src/metier/nis2-simulateur/Regulation.definitions';
+  import LigneEtMaintenant from './LigneEtMaintenant.svelte';
 
   interface Props {
     reponses: EtatQuestionnaire;
@@ -28,6 +30,10 @@
     resumes={resultat.pointsAttention.resumes}
     precisions={resultat.pointsAttention.precisions}
   />
+
+  {#if resultat.regulation === Regulation.Regule}
+    <LigneEtMaintenant />
+  {/if}
 </div>
 
 <style lang="scss">
@@ -40,7 +46,7 @@
     margin: 40px auto;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 
     @include a-partir-de(lg) {
       max-width: taille-pour-colonnes(8);
