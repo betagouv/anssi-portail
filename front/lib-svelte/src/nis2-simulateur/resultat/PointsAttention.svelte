@@ -35,9 +35,6 @@
 
 <style lang="scss">
   .points-attention {
-    background-color: #f6f6f6;
-    padding: 24px 32px;
-
     h6 {
       margin-bottom: 0;
       font-size: 1rem;
