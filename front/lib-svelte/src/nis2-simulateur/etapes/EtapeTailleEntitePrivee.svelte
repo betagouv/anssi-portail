@@ -22,7 +22,7 @@
     onsuivant: (reponse: {
       nombre: TrancheNombreEmployes;
       chiffreAffaire: TrancheChiffreAffaire;
-      bilanFinancier: TrancheBilanFinancier;
+      bilanFinancier?: TrancheBilanFinancier;
     }) => void;
   }
 
@@ -48,7 +48,7 @@
     props.onsuivant({
       nombre: nombre!,
       chiffreAffaire: chiffreAffaire!,
-      bilanFinancier: bilanFinancier!,
+      bilanFinancier,
     });
   };
 </script>

@@ -1,9 +1,7 @@
 <script lang="ts">
   import Etape from './Etape.svelte';
   import { TitresEtapes } from './TitresEtapes';
-  import type {
-    AppartenancePaysUnionEuropeenne,
-  } from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
+  import type { AppartenancePaysUnionEuropeenne } from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
   import PrecedentSuivant from './PrecedentSuivant.svelte';
   import {
     optionAutre,
@@ -15,8 +13,8 @@
   interface Props {
     onsuivant: (reponse: {
       paysDecision: AppartenancePaysUnionEuropeenne;
-      paysOperation: AppartenancePaysUnionEuropeenne;
-      paysSalaries: AppartenancePaysUnionEuropeenne;
+      paysOperation?: AppartenancePaysUnionEuropeenne;
+      paysSalaries?: AppartenancePaysUnionEuropeenne;
     }) => void;
   }
 
@@ -45,8 +43,8 @@
   const valide = () => {
     props.onsuivant({
       paysDecision: paysDecision!,
-      paysOperation: paysOperation!,
-      paysSalaries: paysSalaries!,
+      paysOperation,
+      paysSalaries,
     });
   };
 </script>

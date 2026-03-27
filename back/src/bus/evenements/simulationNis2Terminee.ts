@@ -1,7 +1,9 @@
-export class SimulationNis2Terminee {
-  readonly question1: boolean;
+import { EtatQuestionnaire } from '../../metier/nis2-simulateur/EtatQuestionnaire';
 
-  constructor(donnees: { question1: boolean }) {
-    this.question1 = donnees.question1;
+export class SimulationNis2Terminee {
+  readonly reponses: EtatQuestionnaire;
+
+  constructor(donnees: EtatQuestionnaire) {
+    this.reponses = donnees;
   }
 }

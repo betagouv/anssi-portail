@@ -62,7 +62,7 @@
           valideTailleEntitePrivee(
             [reponse.nombre],
             [reponse.chiffreAffaire],
-            [reponse.bilanFinancier]
+            reponse.bilanFinancier ? [reponse.bilanFinancier] : []
           )
         )}
     />
@@ -91,8 +91,8 @@
         questionnaireStore.repond(
           valideLocalisationEtablissementPrincipal(
             [reponse.paysDecision],
-            [reponse.paysOperation],
-            [reponse.paysSalaries]
+            reponse.paysOperation ? [reponse.paysOperation] : [],
+            reponse.paysSalaries ? [reponse.paysSalaries] : []
           )
         )}
     />

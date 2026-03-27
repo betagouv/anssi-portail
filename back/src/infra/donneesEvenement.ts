@@ -3,6 +3,7 @@ import { CodeRegion } from '../metier/referentielRegions';
 import { CodeSecteur } from '../metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
 import { ReponsesTestMaturite } from '../metier/resultatTestMaturite';
+import { EtatQuestionnaire } from '../metier/nis2-simulateur/EtatQuestionnaire';
 
 export type DonneesEvenement =
   | DonneesEvenementNouvelUtilisateur
@@ -71,4 +72,4 @@ export type DonneesEvenementUtilisateurConnecte = Evenement<
   { idUtilisateur: string; connexionAvecMFA: boolean }
 >;
 
-export type DonneesSimulationNis2Terminee = Evenement<'SIMULATION_NIS2_TERMINEE', { question1EstTrue: boolean }>;
+export type DonneesSimulationNis2Terminee = Evenement<'SIMULATION_NIS2_TERMINEE', EtatQuestionnaire>;

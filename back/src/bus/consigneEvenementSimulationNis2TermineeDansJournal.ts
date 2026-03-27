@@ -11,9 +11,7 @@ export const consigneEvenementSimulationNis2TermineeDansJournal = ({
 }) => {
   return async function (evenement: SimulationNis2Terminee) {
     await adaptateurJournal.consigneEvenement({
-      donnees: {
-        question1EstTrue: evenement.question1,
-      },
+      donnees: evenement.reponses,
       type: 'SIMULATION_NIS2_TERMINEE',
       date: adaptateurHorloge.maintenant(),
     });
