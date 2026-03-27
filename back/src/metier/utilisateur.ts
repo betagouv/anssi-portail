@@ -1,5 +1,7 @@
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 
+export type Role = 'GESTION_GUIDES';
+
 export class Organisation {
   nom: string;
   siret: string;
@@ -43,6 +45,7 @@ interface InformationsCreationUtilisateur {
   infolettreAcceptee: boolean;
   idListeFavoris?: string;
   organisation?: Organisation;
+  roles?: Role[];
 }
 
 export class Utilisateur {
@@ -57,6 +60,7 @@ export class Utilisateur {
   idListeFavoris: string | undefined;
   private adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   private _organisation: Organisation | undefined;
+  roles: Role[];
 
   constructor(
     {
@@ -70,6 +74,7 @@ export class Utilisateur {
       siretEntite,
       idListeFavoris,
       organisation,
+      roles = [],
     }: InformationsCreationUtilisateur,
     adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise
   ) {
@@ -84,6 +89,7 @@ export class Utilisateur {
     this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
     this.idListeFavoris = idListeFavoris ?? undefined;
     this._organisation = organisation;
+    this.roles = roles;
   }
 
   async organisation(): Promise<Organisation> {
@@ -96,5 +102,9 @@ export class Utilisateur {
 
   estAgentAnssi = async () => {
     return (await this.organisation()).estAnssi();
+  };
+
+  peutAjouterUnDocumentAUnGuide = () => {
+    return this.roles.includes('GESTION_GUIDES');
   };
 }
