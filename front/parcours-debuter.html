@@ -4,12 +4,6 @@ permalink: /parcours-debuter/
 titreHtml: 'Cybersécurité : se lancer ! | MesServicesCyber'
 ---
 
-<script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/fil-ariane.js"
-></script>
-
 <script type="application/json" id="donnees">
   {
     "branche": {
@@ -24,7 +18,7 @@ titreHtml: 'Cybersécurité : se lancer ! | MesServicesCyber'
 
 <section class="chapeau fond-sombre">
   <div class="contenu-section">
-    <div id="fil-ariane"></div>
+    {% include composant-svelte.html id="fil-ariane" %}
     <h1 class="alternatif-xs-ns">Les services pour se lancer</h1>
     <p class="texte-chapo-xl-ns">
       Votre organisation souhaite mettre en œuvre des premières actions

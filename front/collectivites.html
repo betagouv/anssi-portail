@@ -7,11 +7,5 @@ styles:
   - /assets/styles/carte-item.css
 ---
 
-<script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/collectivites.js"
-></script>
-<div id="page-collectivites"></div>
-
+{% include composant-svelte.html id="collectivites" %}
 {% include script-donnees-json.html %}

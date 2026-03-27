@@ -4,12 +4,6 @@ layout: defaut
 titreHtml: 'Session de groupe | MesServicesCyber'
 ---
 
-<script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/fil-ariane.js"
-></script>
-
 <script type="application/json" id="donnees">
   {
     "branche": {
@@ -22,16 +16,10 @@ titreHtml: 'Session de groupe | MesServicesCyber'
 
 <section class="chapeau fond-sombre">
   <div class="contenu-section">
-    <div id="fil-ariane"></div>
+    {% include composant-svelte.html id="fil-ariane" %}
     <h1 class="alternatif-xs-ns">Session de groupe</h1>
     <p class="texte-chapo-xl-ns">Déterminez la maturité cyber de votre organisation en 5 minutes.</p>
   </div>
 </section>
 
-<script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/session-groupe.js"
-></script>
-
-<div id="session-groupe"></div>
+{% include composant-svelte.html id="session-groupe" %}

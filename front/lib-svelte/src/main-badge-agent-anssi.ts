@@ -1,7 +1,7 @@
 import { mount } from 'svelte';
 import BadgeAgentAnssi from './badge-agent-anssi/BadgeAgentAnssi.svelte';
 
-const zones = document.getElementsByClassName('zone-badge-agent-anssi');
+const zones = document.getElementsByClassName('badge-agent-anssi');
 
 for (const zone of zones) {
   mount(BadgeAgentAnssi, {

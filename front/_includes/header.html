@@ -1,10 +1,6 @@
 <header id="haut-de-page" class="fr-header__brand">
   <div class="contenu-section">
-    <script
-      type="module"
-      crossorigin
-      src="/lib-svelte/dist/assets/badge-agent-anssi.js"
-    ></script>
+    {% include composant-svelte.html id="badge-agent-anssi" genere-div=false %}
 
     <div class="entete-principale">
       <a href="/">
@@ -27,21 +23,15 @@
         <div class="titre-site">
           <div class="titre-principal">
             <h1>MesServicesCyber</h1>
-            <div class="zone-badge-agent-anssi"></div>
+            <div class="badge-agent-anssi"></div>
           </div>
           <h2>Innovation ANSSI</h2>
         </div>
       </a>
 
-      <script
-        type="module"
-        crossorigin
-        src="/lib-svelte/dist/assets/identification.js"
-      ></script>
-
       <lab-anssi-bouton-suite-cyber-navigation></lab-anssi-bouton-suite-cyber-navigation>
 
-      <div id="zone-identification"></div>
+      {% include composant-svelte.html id="identification" %}
 
       <div id="menu-burger-mobile"></div>
     </div>
@@ -51,7 +41,7 @@
         <div class="titre-site">
           <div class="titre-principal">
             <h1>MesServicesCyber</h1>
-            <div class="zone-badge-agent-anssi"></div>
+            <div class="badge-agent-anssi"></div>
           </div>
           <h2>Innovation ANSSI</h2>
         </div>
@@ -60,10 +50,4 @@
   </div>
 </header>
 
-<script
-  type="module"
-  crossorigin
-  src="/lib-svelte/dist/assets/navigation.js"
-></script>
-
-<div id="navigation"></div>
+{% include composant-svelte.html id="navigation" %}

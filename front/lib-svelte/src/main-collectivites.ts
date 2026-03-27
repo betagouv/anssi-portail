@@ -10,6 +10,6 @@ const { itemsCyber } = JSON.parse(donnees) as {
 };
 
 mount(Page, {
-  target: document.getElementById('page-collectivites')!,
+  target: document.getElementById('collectivites')!,
   props: { itemsCyber },
 });
