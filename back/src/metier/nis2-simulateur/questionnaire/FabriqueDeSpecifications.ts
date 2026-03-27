@@ -1,21 +1,21 @@
-import { RegleEntiteOSE } from "./regles/RegleEntiteOSE";
-import { estValeurVide, Regle, Specifications } from "./Specifications";
-import { RegleLocalisation } from "./regles/RegleLocalisation";
-import { SpecificationTexte } from "./FormatDesSpecificationsCSV";
-import { RegleTypeDeStructure } from "./regles/RegleTypeDeStructure";
-import { RegleTaille } from "./regles/RegleTaille";
-import { ErreurLectureDeRegle } from "./regles/ErreurLectureDeRegle";
-import { RegleSecteurs } from "./regles/RegleSecteurs";
-import { RegleSousSecteurs } from "./regles/RegleSousSecteurs";
-import { RegleActivites } from "./regles/RegleActivites";
-import { RegleFournitureDeServicesNumerique } from "./regles/RegleFournitureDeServicesNumerique";
-import { RegleEtablissementPrincipal } from "./regles/RegleEtablissementPrincipal";
+import { RegleEntiteOSE } from './regles/RegleEntiteOSE';
+import { estValeurVide, type Regle, Specifications } from './Specifications';
+import { RegleLocalisation } from './regles/RegleLocalisation';
+import type { SpecificationTexte } from './FormatDesSpecificationsCSV';
+import { RegleTypeDeStructure } from './regles/RegleTypeDeStructure';
+import { RegleTaille } from './regles/RegleTaille';
+import { ErreurLectureDeRegle } from './regles/ErreurLectureDeRegle';
+import { RegleSecteurs } from './regles/RegleSecteurs';
+import { RegleSousSecteurs } from './regles/RegleSousSecteurs';
+import { RegleActivites } from './regles/RegleActivites';
+import { RegleFournitureDeServicesNumerique } from './regles/RegleFournitureDeServicesNumerique';
+import { RegleEtablissementPrincipal } from './regles/RegleEtablissementPrincipal';
 import {
   CodesPrecisionsPointsAttention,
   CodesResumesPointsAttention,
-  PointsAttentionPrecis,
-  ResultatEligibilite,
-  ResumesPointsAttention,
+  type PointsAttentionPrecis,
+  type ResultatEligibilite,
+  type ResumesPointsAttention,
 } from '../Regulation.definitions';
 
 export class FabriqueDeSpecifications {
@@ -34,61 +34,61 @@ export class FabriqueDeSpecifications {
 
     const resultat = this.transformeResultat(texte);
 
-    return new Specifications(regles, resultat, texte["Code"]);
+    return new Specifications(regles, resultat, texte['Code']);
   }
 
   private transformeResultat(texte: SpecificationTexte): ResultatEligibilite {
-    const valeur = texte["Resultat"];
+    const valeur = texte['Resultat'];
 
     const pointsAttention = this.getPointsAttention(texte);
 
-    if (valeur === "Régulée EE")
+    if (valeur === 'Régulée EE')
       return {
-        regulation: "Regule",
-        typeEntite: "EntiteEssentielle",
+        regulation: 'Regule',
+        typeEntite: 'EntiteEssentielle',
         pointsAttention,
       };
 
-    if (valeur === "Régulée EI")
+    if (valeur === 'Régulée EI')
       return {
-        regulation: "Regule",
-        typeEntite: "EntiteImportante",
+        regulation: 'Regule',
+        typeEntite: 'EntiteImportante',
         pointsAttention,
       };
 
-    if (valeur === "Régulée, enregistrement seul")
+    if (valeur === 'Régulée, enregistrement seul')
       return {
-        regulation: "Regule",
-        typeEntite: "EnregistrementUniquement",
+        regulation: 'Regule',
+        typeEntite: 'EnregistrementUniquement',
         pointsAttention,
       };
 
-    if (valeur === "Régulée, sans précision EE/EI")
+    if (valeur === 'Régulée, sans précision EE/EI')
       return {
-        regulation: "Regule",
-        typeEntite: "AutreEtatMembreUE",
+        regulation: 'Regule',
+        typeEntite: 'AutreEtatMembreUE',
         pointsAttention,
       };
 
-    if (valeur === "Non régulée")
+    if (valeur === 'Non régulée')
       return {
-        regulation: "NonRegule",
-        typeEntite: "AutreEtatMembreUE", // Le type est sans importance ici.
+        regulation: 'NonRegule',
+        typeEntite: 'AutreEtatMembreUE', // Le type est sans importance ici.
         pointsAttention,
       };
 
-    if (valeur === "Incertain")
+    if (valeur === 'Incertain')
       return {
-        regulation: "Incertain",
-        typeEntite: "AutreEtatMembreUE", // Le type est sans importance ici.
+        regulation: 'Incertain',
+        typeEntite: 'AutreEtatMembreUE', // Le type est sans importance ici.
         pointsAttention,
       };
 
-    throw new ErreurLectureDeRegle(valeur, "Resultat");
+    throw new ErreurLectureDeRegle(valeur, 'Resultat');
   }
 
   private getPointsAttention = (
-    texte: SpecificationTexte,
+    texte: SpecificationTexte
   ): {
     resumes: ResumesPointsAttention[];
     precisions: PointsAttentionPrecis[];
@@ -97,15 +97,12 @@ export class FabriqueDeSpecifications {
 
     if (estValeurVide(valeur)) return { resumes: [], precisions: [] };
 
-    const nettoyees = valeur.split(",").map((v) => v.trim().replace("#", ""));
+    const nettoyees = valeur.split(',').map((v) => v.trim().replace('#', ''));
 
     const inconnus = nettoyees.filter(
-      (v) =>
-        !CodesResumesPointsAttention.includes(v) &&
-        !CodesPrecisionsPointsAttention.includes(v),
+      (v) => !CodesResumesPointsAttention.includes(v) && !CodesPrecisionsPointsAttention.includes(v)
     );
-    if (inconnus.length > 0)
-      throw new ErreurLectureDeRegle(inconnus.join(","), "Points d'attention");
+    if (inconnus.length > 0) throw new ErreurLectureDeRegle(inconnus.join(','), "Points d'attention");
 
     const resumes: ResumesPointsAttention[] = [];
     const precisions: PointsAttentionPrecis[] = [];
