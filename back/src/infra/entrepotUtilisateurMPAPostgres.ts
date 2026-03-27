@@ -51,6 +51,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
       donnees: donneesChiffrees,
       id_liste_favoris: utilisateur.idListeFavoris,
       email_hache: this.adaptateurHachage.hache(utilisateur.email),
+      roles: utilisateur.roles,
     };
   }
 
@@ -105,6 +106,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         siretEntite: organisation.siret,
         idListeFavoris: utilisateur.id_liste_favoris,
         organisation: new Organisation({ ...organisation, codeActivite }),
+        roles: utilisateur.roles,
       },
       this.adaptateurRechercheEntreprise
     );
