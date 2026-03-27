@@ -5,6 +5,7 @@ import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 export type DocumentCellar = {
   contenu: Buffer;
   typeDeContenu: string;
+  nom: string;
 };
 
 export type FluxCellar = {
@@ -16,9 +17,9 @@ export type FluxCellar = {
 export type CleDuBucket = 'RESSOURCES_CYBER' | 'GUIDES' | 'VISAS';
 
 export interface AdaptateurCellar {
+  depose: (fichier: DocumentCellar) => Promise<void>;
   get(nomDuFichier: string, cleDuBucket: CleDuBucket): Promise<DocumentCellar | undefined>;
   getStream(nomDuFichier: string, cleDuBucket: CleDuBucket): Promise<FluxCellar | undefined>;
-
   existe(nomDuFichier: string, cleDuBucket: CleDuBucket): Promise<boolean>;
 }
 
@@ -33,6 +34,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
       return {
         contenu: Buffer.from(reponse.data),
         typeDeContenu,
+        nom: nomDuFichier,
       };
     } catch (erreur: Error | unknown) {
       if (axios.isAxiosError(erreur) && erreur.response?.status === 403) {
@@ -68,6 +70,9 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
     } catch {
       return false;
     }
+  },
+  depose: function (_fichier: DocumentCellar): Promise<void> {
+    throw new Error('Fonction non implementée.');
   },
 });
 
