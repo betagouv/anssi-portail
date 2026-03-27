@@ -9,7 +9,7 @@ import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateu
 import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur, fauxAdaptateurCellar } from '../fauxObjets';
 import { guideZeroTrust, hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
-import { AdaptateurCellar, DocumentCellar } from '../../../src/infra/adaptateurCellar';
+import { AdaptateurCellar, CleDuBucket, DocumentCellar } from '../../../src/infra/adaptateurCellar';
 
 describe('La ressource de gestion des documents des guides', () => {
   let serveur: Express;
@@ -57,8 +57,10 @@ describe('La ressource de gestion des documents des guides', () => {
         contenu: Buffer.from(''),
         typeDeContenu: '',
       };
-      adaptateurCellar.depose = async (document: DocumentCellar) => {
+      let cleDuBucketFournie = '';
+      adaptateurCellar.depose = async (document: DocumentCellar, cleDuBucket: CleDuBucket) => {
         fichierDepose = document;
+        cleDuBucketFournie = cleDuBucket;
       };
 
       await request(serveur)
@@ -70,6 +72,7 @@ describe('La ressource de gestion des documents des guides', () => {
       assert.equal(fichierDepose.contenu.length, 9);
       assert.equal(fichierDepose.nom, 'document.pdf');
       assert.equal(fichierDepose.typeDeContenu, 'application/pdf');
+      assert.equal(cleDuBucketFournie, 'GESTION_GUIDES');
     });
 
     it('répond 401 si l’utilisateur n’est pas authentifié', async () => {

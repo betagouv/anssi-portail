@@ -56,11 +56,14 @@ const ressourceDocumentsGuide = ({
         }
 
         const fichier = requete.file!; // Le fichier est forcément présent àa ce stade, car validé par "valideLesDocuments()"
-        await cellar.depose({
-          contenu: fichier.buffer,
-          nom: fichier.originalname,
-          typeDeContenu: fichier.mimetype,
-        });
+        await cellar.depose(
+          {
+            contenu: fichier.buffer,
+            nom: fichier.originalname,
+            typeDeContenu: fichier.mimetype,
+          },
+          'GESTION_GUIDES'
+        );
 
         reponse.status(201).send();
       } catch (err) {
