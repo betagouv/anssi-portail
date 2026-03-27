@@ -25,6 +25,7 @@
   import { selectSecteursPourSaisieActivites } from './stores/questionnaire.selecteurs.ts';
   import EtapeLocalisationEtablissementPrincipal from './etapes/EtapeLocalisationEtablissementPrincipal.svelte';
   import EtapeLocalisationServicesNumeriques from './etapes/EtapeLocalisationServicesNumeriques.svelte';
+  import EtapeResultat from './etapes/EtapeResultat.svelte';
 </script>
 
 <Hero
@@ -102,6 +103,8 @@
           valideLocalisationServicesNumeriques(reponse)
         )}
     />
+  {:else if $questionnaireStore.etapeCourante === 'resultat'}
+    <EtapeResultat reponses={$questionnaireStore} />
   {/if}
 </dsfr-container>
 
