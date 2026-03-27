@@ -11,7 +11,7 @@
     "admin": "node -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
     "admin:dev": "pnpm -F @anssi-portail/back build && node --env-file .env -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
     "build": "pnpm -r build",
-    "dev": "concurrently -n \"SERVEUR,SVELTE,JEKYLL,BDD,MIGRE\" --prefix-colors \"cyan,green,magenta,blue,yellow\" \"node --watch --import tsx --env-file .env ./back/src/serveur.ts\" \"pnpm --filter @anssi-portail/svelte watch\" \"sleep 5 && SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD=true ${GEM_HOME}/bin/jekyll build -s ./front -d ./front/_site -w\" \"docker compose up db\" \"sleep 3 && pnpm migre-bdd\"",
+    "dev": "concurrently -n \"SERVEUR,SVELTE,JEKYLL,BDD,MIGRE\" --prefix-colors \"cyan,green,magenta,blue,yellow\" \"SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD=true node --watch --import tsx --env-file .env ./back/src/serveur.ts\" \"pnpm --filter @anssi-portail/svelte watch\" \"sleep 5 && SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD=true ${GEM_HOME}/bin/jekyll build -s ./front -d ./front/_site -w\" \"docker compose up db\" \"sleep 3 && pnpm migre-bdd\"",
     "lint": "pnpm -r lint",
     "format": "pnpm -r format",
     "test": "pnpm --reporter=append-only -r test",
