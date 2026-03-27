@@ -2,6 +2,7 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import { AdaptateurCellar, CleDuBucket } from '../../src/infra/adaptateurCellar';
 import { fabriqueServiceSanteGuides, ServiceSanteGuides } from '../../src/metier/serviceSanteGuides';
+import { fauxAdaptateurCellar } from '../api/fauxObjets';
 import { guideDevsecops, guideZeroTrust } from '../api/objetsPretsALEmploi';
 
 describe('Le service de calcul de la santé des guildes', () => {
@@ -9,12 +10,8 @@ describe('Le service de calcul de la santé des guildes', () => {
   let mockAdaptateurCellar: AdaptateurCellar;
 
   beforeEach(() => {
-    const erreur = () => {
-      throw new Error();
-    };
     mockAdaptateurCellar = {
-      get: erreur,
-      getStream: erreur,
+      ...fauxAdaptateurCellar,
       existe: async () => true,
     };
     serviceSanteGuides = fabriqueServiceSanteGuides(mockAdaptateurCellar);
