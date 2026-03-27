@@ -353,9 +353,9 @@ export class ConsoleAdministration {
     );
     await this.knexMSC.transaction(async (trx) => {
       const resultatsAvecUneInfoManquante = await trx('resultats_test').whereRaw(
-        `email_utilisateur_hache IS NOT NULL 
-        AND (region IS NULL 
-          OR secteur IS NULL 
+        `email_utilisateur_hache IS NOT NULL
+        AND (region IS NULL
+          OR secteur IS NULL
           OR taille_organisation IS NULL)`
       );
 
@@ -438,5 +438,40 @@ export class ConsoleAdministration {
 
   async remplaceLaCleDeChiffrement(ancienneCle: string, nouvelleCle: string) {
     await new MigrationChiffrement(adaptateurEnvironnement).remplaceLaCleDeChiffrement(ancienneCle, nouvelleCle);
+  }
+
+  async ajouteRoleDeGestionGuide(email: string) {
+    const emailHache = this.adaptateurHachage.hache(email);
+    const utilisateur = await this.knexMSC('utilisateurs').where({ email_hache: emailHache });
+    if (utilisateur.length === 0) {
+      console.log('Aucun utilisateur trouvé');
+      return;
+    }
+    const nouveauxRoles = new Set(utilisateur[0].roles).add('GESTION_GUIDES');
+
+    const nombreMiseAJour = await this.knexMSC('utilisateurs')
+      .where({ email_hache: emailHache })
+      .update({
+        roles: this.knexMSC.raw('?::jsonb', JSON.stringify([...nouveauxRoles])),
+      });
+    console.log('Lignes mises à jour  :', nombreMiseAJour);
+  }
+
+  async supprimeRoleDeGestionGuide(email: string) {
+    const emailHache = this.adaptateurHachage.hache(email);
+    const utilisateur = await this.knexMSC('utilisateurs').where({ email_hache: emailHache });
+    if (utilisateur.length === 0) {
+      console.log('Aucun utilisateur trouvé');
+      return;
+    }
+
+    const nouveauxRoles = utilisateur[0].roles.filter((role: string) => role !== 'GESTION_GUIDES');
+
+    const nombreMiseAJour = await this.knexMSC('utilisateurs')
+      .where({ email_hache: emailHache })
+      .update({
+        roles: this.knexMSC.raw('?::jsonb', JSON.stringify(nouveauxRoles)),
+      });
+    console.log('Lignes mises à jour  :', nombreMiseAJour);
   }
 }
