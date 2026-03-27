@@ -5,14 +5,15 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { ConfigurationServeur } from '../../../src/api/configurationServeur';
 import { creeServeur } from '../../../src/api/msc';
-import { CleDuBucket } from '../../../src/infra/adaptateurCellar';
+import { AdaptateurCellar, CleDuBucket } from '../../../src/infra/adaptateurCellar';
 import { MockBusEvenement } from '../../bus/busPourLesTests';
-import { configurationDeTestDuServeur } from '../fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurCellar } from '../fauxObjets';
 
 describe("La ressource de document d'un guide", () => {
   let serveur: Express;
   let configurationDuServeur: ConfigurationServeur;
   let busEvenements: MockBusEvenement;
+  let adaptateurCellar: AdaptateurCellar;
 
   const construitUnFluxCellar = (contenu: string = '0123456789') => ({
     flux: Readable.from([contenu]),
@@ -20,20 +21,16 @@ describe("La ressource de document d'un guide", () => {
     tailleDuContenu: contenu.length,
   });
 
-  const erreur = () => {
-    throw new Error('On ne devrait pas appeler cette méthode !');
-  };
-
   beforeEach(() => {
     busEvenements = new MockBusEvenement();
+    adaptateurCellar = {
+      ...fauxAdaptateurCellar,
+      getStream: async () => construitUnFluxCellar(),
+    };
     configurationDuServeur = {
       ...configurationDeTestDuServeur,
       busEvenements,
-      cellar: {
-        get: erreur,
-        getStream: async () => construitUnFluxCellar(),
-        existe: erreur,
-      },
+      cellar: adaptateurCellar,
     };
     serveur = creeServeur(configurationDuServeur);
   });

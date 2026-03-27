@@ -3,7 +3,7 @@ import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
-import { adaptateurCellar } from '../../src/infra/adaptateurCellar';
+import { AdaptateurCellar } from '../../src/infra/adaptateurCellar';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { adaptateurGestionVide } from '../../src/infra/adaptateurGestionErreurVide';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
@@ -200,6 +200,14 @@ export const fauxAdaptateurHachage: AdaptateurHachage = {
   compareBCrypt: async (_valeurEnClair: string, _empreinte: string): Promise<boolean> => true,
   hacheAvecUnSeulSecret: (valeur: string, secret: string): string => `${valeur}-${secret}-hache`,
 };
+
+export const fauxAdaptateurCellar: AdaptateurCellar = {
+  existe: async () => true,
+  get: async () => undefined,
+  getStream: async () => undefined,
+  depose: async () => undefined,
+};
+
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
   adaptateurGestionErreur: adaptateurGestionVide,
@@ -227,7 +235,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
     maxRequetesParMinutes: 3,
     ipAutorisees: false,
   },
-  cellar: adaptateurCellar(fauxAdaptateurEnvironnement),
+  cellar: fauxAdaptateurCellar,
   serviceSanteGuides: {
     calculeSante: async () => ({
       guidesEnBonneSante: [],

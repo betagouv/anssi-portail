@@ -7,7 +7,7 @@ import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
-import { configurationDeTestDuServeur } from '../fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurCellar } from '../fauxObjets';
 import { guideZeroTrust, hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
 import { AdaptateurCellar, DocumentCellar } from '../../../src/infra/adaptateurCellar';
 
@@ -22,9 +22,7 @@ describe('La ressource de gestion des documents des guides', () => {
     entrepotGuide = new EntrepotGuideMemoire();
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     adaptateurCellar = {
-      existe: async () => true,
-      get: async () => undefined,
-      getStream: async () => undefined,
+      ...fauxAdaptateurCellar,
       depose: async () => undefined,
     };
     cookieJeanneDupont = encodeSession({

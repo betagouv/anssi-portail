@@ -5,14 +5,15 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { ConfigurationServeur } from '../../src/api/configurationServeur';
 import { creeServeur } from '../../src/api/msc';
-import { CleDuBucket } from '../../src/infra/adaptateurCellar';
+import { AdaptateurCellar, CleDuBucket } from '../../src/infra/adaptateurCellar';
 import { MockBusEvenement } from '../bus/busPourLesTests';
-import { configurationDeTestDuServeur } from './fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurCellar } from './fauxObjets';
 
 describe('La ressource de visa', () => {
   let serveur: Express;
   let configurationDuServeur: ConfigurationServeur;
   let busEvenements: MockBusEvenement;
+  let adaptateurCellar: AdaptateurCellar;
 
   const construitUnFluxCellar = () => ({
     flux: Readable.from(['0123456789']),
@@ -22,17 +23,14 @@ describe('La ressource de visa', () => {
 
   beforeEach(() => {
     busEvenements = new MockBusEvenement();
-    const erreur = () => {
-      throw new Error('On ne devrait pas appeler cette méthode !');
+    adaptateurCellar = {
+      ...fauxAdaptateurCellar,
+      getStream: async () => construitUnFluxCellar(),
     };
     configurationDuServeur = {
       ...configurationDeTestDuServeur,
       busEvenements,
-      cellar: {
-        get: erreur,
-        existe: erreur,
-        getStream: async () => construitUnFluxCellar(),
-      },
+      cellar: adaptateurCellar,
     };
     serveur = creeServeur(configurationDuServeur);
   });
