@@ -1,7 +1,8 @@
 <script lang="ts">
-  import type {
-    RegulationEntite,
-    ResultatEligibilite,
+  import {
+    Regulation,
+    type RegulationEntite,
+    type ResultatEligibilite,
   } from '../../../../../back/src/metier/nis2-simulateur/Regulation.definitions';
   import { sousTitre, titres } from './TamponResultat.textes';
 
@@ -23,9 +24,9 @@
 
 <div
   class="tampon"
-  class:eligible={resultat.regulation === 'Regule'}
-  class:non-eligible={resultat.regulation === 'NonRegule'}
-  class:incertain-UE={resultat.regulation === 'Incertain'}
+  class:eligible={resultat.regulation === Regulation.Regule}
+  class:non-eligible={resultat.regulation === Regulation.NonRegule}
+  class:incertain-UE={resultat.regulation === Regulation.Incertain}
 >
   <lab-anssi-icone nom={icones[resultat.regulation]} taille="lg"
   ></lab-anssi-icone>
