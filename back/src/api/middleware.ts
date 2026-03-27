@@ -121,7 +121,7 @@ export const fabriqueMiddleware = ({
         directives: {
           scriptSrc: [
             "'self'",
-            `'nonce-${reponse.locals.nonce}'`,
+            ...(process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true' ? [`'nonce-${reponse.locals.nonce}'`] : []),
             'https://stats.beta.gouv.fr',
             'https://browser.sentry-cdn.com',
             'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
@@ -134,7 +134,11 @@ export const fabriqueMiddleware = ({
             adaptateurEnvironnement.urlCellar().guides(),
             'data:',
           ],
-          connectSrc: ["'self'", 'https://stats.beta.gouv.fr', 'ws://localhost:3001'],
+          connectSrc: [
+            "'self'",
+            'https://stats.beta.gouv.fr',
+            ...(process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true' ? ['ws://localhost:3001'] : []),
+          ],
           mediaSrc: [
             "'self'",
             'https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com',
