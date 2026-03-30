@@ -118,6 +118,7 @@
           color: var(--text-inverted-grey);
           content: counter(li);
           counter-increment: li;
+          box-sizing: content-box;
         }
       }
     }
