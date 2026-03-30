@@ -25,6 +25,7 @@ describe('La ressource des guides de mêmes collections', () => {
           langue: 'FR',
           collections: [],
           documents: [],
+          listeDocuments: [],
           dateMiseAJour: new Date(),
           thematique: '',
           besoins: [],

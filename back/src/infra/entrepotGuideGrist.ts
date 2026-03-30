@@ -17,6 +17,7 @@ export type GuideGrist = {
     Langue: 'FR' | 'EN' | null;
     Collections: string[];
     Documents: string;
+    Liste_documents: string | null;
     Date_de_mise_a_jour_s_: number | null;
     Thematique: string | null;
     Besoins_cyber: string[];
@@ -73,6 +74,7 @@ export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements Ent
               };
             })
         : [],
+      listeDocuments: JSON.parse(guideGrist.fields.Liste_documents ?? '[]'),
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour_s_
         ? new Date(guideGrist.fields.Date_de_mise_a_jour_s_ * 1000)
         : new Date(),
@@ -103,6 +105,4 @@ export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements Ent
       guide.collections.some((uneCollectionDuGuide) => collections.includes(uneCollectionDuGuide))
     );
   }
-
-  async ajouteDocument(_idGuide: string, _nomDocument: string, _libelleDuLien: string): Promise<void> {}
 }

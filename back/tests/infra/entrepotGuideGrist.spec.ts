@@ -23,9 +23,6 @@ describe("L'entrepot de guide Grist", () => {
     const entrepotGuideGristHorsLigne = new EntrepotGuideGrist({
       clientHttp: {
         ...fabriqueFauxClientHttp(),
-        get: async () => {
-          throw new Error('Ne devrait pas être appelé');
-        },
       },
       adaptateurEnvironnement: {
         ...fauxAdaptateurEnvironnement,

@@ -9,6 +9,7 @@ export class Guide {
   langue: 'FR' | 'EN';
   collections: string[];
   documents: DocumentGuide[];
+  listeDocuments: DocumentGuide[];
   dateMiseAJour: Date;
   thematique: string;
   besoins: BesoinCyber[];
@@ -21,6 +22,7 @@ export class Guide {
     langue: 'FR' | 'EN';
     collections: string[];
     documents: DocumentGuide[];
+    listeDocuments: DocumentGuide[];
     dateMiseAJour: Date;
     thematique: string;
     besoins: BesoinCyber[];
@@ -32,6 +34,7 @@ export class Guide {
     this.langue = parametres.langue;
     this.collections = parametres.collections;
     this.documents = parametres.documents;
+    this.listeDocuments = parametres.listeDocuments ?? [];
     this.dateMiseAJour = parametres.dateMiseAJour;
     this.thematique = parametres.thematique;
     this.besoins = parametres.besoins;

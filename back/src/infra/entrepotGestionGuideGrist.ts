@@ -17,7 +17,7 @@ export class EntrepotGestionGuideGrist extends EntrepotGrist<GuideGrist> impleme
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
     const grist = adaptateurEnvironnement.grist();
-    super(clientHttp, grist.guides().urlTable(), grist.guides().cleApi(), grist.dureeCacheEnSecondes());
+    super(clientHttp, grist.gestionGuides().urlTable(), grist.gestionGuides().cleApi(), grist.dureeCacheEnSecondes());
   }
 
   private readonly convertiBesoin = (besoin: string): BesoinCyber | undefined => {
@@ -54,7 +54,7 @@ export class EntrepotGestionGuideGrist extends EntrepotGrist<GuideGrist> impleme
               };
             })
         : [],
-      listeDocuments: JSON.parse(guideGrist.fields.Liste_documents ?? '[]'),
+      listeDocuments: JSON.parse(guideGrist.fields.Liste_documents || '[]'),
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour_s_
         ? new Date(guideGrist.fields.Date_de_mise_a_jour_s_ * 1000)
         : new Date(),
@@ -66,15 +66,11 @@ export class EntrepotGestionGuideGrist extends EntrepotGrist<GuideGrist> impleme
   };
 
   async parId(id: string, options: { sansCache?: boolean } = {}): Promise<Guide | undefined> {
-    return (await this.tous(options)).find((guide) => guide.id === id);
-  }
-
-  async tous(options: { sansCache?: boolean } = {}): Promise<Guide[]> {
     const guidesGrist = await this.appelleGrist({
-      tri: { cle: 'Date_de_mise_a_jour_s_', ordre: 'DESC' },
+      filtre: { Identifiant: [id] },
       sansCache: options.sansCache,
     });
-    return guidesGrist.records.map(this.convertisGuideGrist);
+    return guidesGrist.records.map(this.convertisGuideGrist)[0];
   }
 
   async ajouteDocument(idGuide: string, nomFichier: string, libelleDuLien: string): Promise<void> {

@@ -12,7 +12,9 @@ type Tri = {
   ordre: 'ASC' | 'DESC';
 };
 
-type OptionsAppelGrist = { filtre?: Filtre; tri?: Tri };
+type OptionsAppelGrist = { filtre?: Filtre; tri?: Tri; sansCache?: boolean };
+
+type ValeurGrist = string | number | boolean | string[];
 
 export class EntrepotGrist<TYPE_DOCUMENT> {
   private readonly cache: Cache<ReponseGrist<TYPE_DOCUMENT>>;
@@ -32,7 +34,7 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
     }
 
     const url = urlPreConstruite ?? this.construisUrl(options);
-    return this.cache.get(url, async () => {
+    const appelleGristSansCache = async () => {
       const reponse = await this.clientHttp.get<ReponseGrist<TYPE_DOCUMENT>>(url.toString(), {
         headers: {
           authorization: `Bearer ${this.cleApi}`,
@@ -40,7 +42,41 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
         },
       });
       return reponse.data;
+    };
+
+    if (options.sansCache) {
+      return appelleGristSansCache();
+    }
+
+    return this.cache.get(url, async () => {
+      return await appelleGristSansCache();
     });
+  }
+
+  protected async modifieEnregistrementGrist(
+    colonneId: string,
+    valeurId: string,
+    valeurs: Record<string, ValeurGrist>
+  ) {
+    await this.clientHttp.put(
+      `${this.urlDeBase}?noadd=true&onmany=none`,
+      {
+        records: [
+          {
+            require: {
+              [colonneId]: valeurId, // WHERE
+            },
+            fields: valeurs, // SET
+          },
+        ],
+      },
+      {
+        headers: {
+          authorization: `Bearer ${this.cleApi}`,
+          accept: 'application/json',
+        },
+      }
+    );
   }
 
   private construisUrl({ filtre, tri }: OptionsAppelGrist = {}) {
