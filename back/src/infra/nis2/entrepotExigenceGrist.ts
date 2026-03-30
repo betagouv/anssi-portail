@@ -15,7 +15,7 @@ import {
 } from '../../metier/nis2/exigence';
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement';
 import { ClientHttp } from '../clientHttp';
-import { EntrepotGrist, ReponseGrist } from '../entrepotGrist';
+import { EntrepotGrist } from '../entrepotGrist';
 
 export type ExigenceGrist = {
   fields: {
@@ -58,7 +58,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
     clientHttp = axios,
     adaptateurEnvironnement,
   }: {
-    clientHttp?: ClientHttp<ReponseGrist<ExigenceGrist>>;
+    clientHttp?: ClientHttp;
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
     const configGrist = adaptateurEnvironnement.grist();

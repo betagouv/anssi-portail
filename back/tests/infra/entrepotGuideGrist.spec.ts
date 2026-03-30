@@ -1,14 +1,15 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import { ClientHttp } from '../../src/infra/clientHttp';
-import { EntrepotGuideGrist, GuideGrist, RetourGuideGrist } from '../../src/infra/entrepotGuideGrist';
+import { EntrepotGuideGrist, GuideGrist } from '../../src/infra/entrepotGuideGrist';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
 import { ConstructeurGuideGrist } from '../api/guides/constructeurGuideGrist';
+import { fabriqueClientGet } from './fournisseurClientHttp';
 
 describe("L'entrepot de guide Grist", () => {
   function prepareEntrepotGristAvecEnregistrements(records: GuideGrist[]) {
-    const clientHttp: ClientHttp<RetourGuideGrist> = {
-      get: async () => ({ data: { records } }),
+    const clientHttp: ClientHttp = {
+      get: fabriqueClientGet(async () => ({ data: { records } })),
     };
 
     return new EntrepotGuideGrist({
@@ -44,14 +45,14 @@ describe("L'entrepot de guide Grist", () => {
   it('sait récupérer des guides en appelant Grist', async () => {
     let urlAppelee = '';
     let headerAuthent;
-    const clientHttp: ClientHttp<RetourGuideGrist> = {
-      get: async (url, config) => {
+    const clientHttp: ClientHttp = {
+      get: fabriqueClientGet(async (url, config) => {
         urlAppelee = url;
         headerAuthent = config?.headers?.authorization;
         return {
           data: { records: [] },
         };
-      },
+      }),
     };
     const entrepotGuideGrist = new EntrepotGuideGrist({
       clientHttp,

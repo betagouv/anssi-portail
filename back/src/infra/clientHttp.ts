@@ -1,5 +1,9 @@
-export type ClientHttp<T> = {
-  get: (url: string, config?: { headers?: Record<string, string> }) => Promise<{ data: T }>;
+export type Config = {
+  headers?: Record<string, string>;
+};
+
+export type ClientHttp = {
+  get: <T>(url: string, config?: Config) => Promise<{ data: T }>;
 };
 
 export type ClientHttpPosteur<C, R> = {

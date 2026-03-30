@@ -1,18 +1,18 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import { ClientHttp } from '../../../src/infra/clientHttp';
-import { ReponseGrist } from '../../../src/infra/entrepotGrist';
 import { FournisseurHorloge } from '../../../src/infra/fournisseurHorloge';
 import { EntrepotExigenceGrist, ExigenceGrist } from '../../../src/infra/nis2/entrepotExigenceGrist';
 import { fauxAdaptateurEnvironnement } from '../../api/fauxObjets';
+import { fabriqueClientGet } from '../fournisseurClientHttp';
 import { FournisseurHorlogeDeTest } from '../fournisseurHorlogeDeTest';
 
 describe("L'entrepot d'exigence Grist", () => {
-  let clientHttp: ClientHttp<ReponseGrist<ExigenceGrist>>;
+  let clientHttp: ClientHttp;
   let entrepotExigenceGrist: EntrepotExigenceGrist;
 
   beforeEach(() => {
-    clientHttp = { get: async () => ({ data: { records: [] } }) };
+    clientHttp = { get: fabriqueClientGet(async () => ({ data: { records: [] } })) };
     entrepotExigenceGrist = new EntrepotExigenceGrist({
       clientHttp,
       adaptateurEnvironnement: fauxAdaptateurEnvironnement,
@@ -27,13 +27,13 @@ describe("L'entrepot d'exigence Grist", () => {
     let urlAppelee = '';
     let headerAuthent;
 
-    clientHttp.get = async (url, config) => {
+    clientHttp.get = fabriqueClientGet(async (url, config) => {
       urlAppelee = url;
       headerAuthent = config?.headers?.authorization;
       return {
         data: { records: [] },
       };
-    };
+    });
 
     await entrepotExigenceGrist.parReferentiel('NIS2');
 
@@ -76,7 +76,7 @@ describe("L'entrepot d'exigence Grist", () => {
 
   describe("lorsqu'il récupère les exigences NIS2", () => {
     it('sait récupérer les données des exigences', async () => {
-      clientHttp.get = async () => {
+      clientHttp.get = fabriqueClientGet(async () => {
         return {
           data: {
             records: [
@@ -102,7 +102,7 @@ describe("L'entrepot d'exigence Grist", () => {
             ] satisfies ExigenceGrist[],
           },
         };
-      };
+      });
 
       const exigences = await entrepotExigenceGrist.parReferentiel('NIS2');
 
@@ -115,7 +115,7 @@ describe("L'entrepot d'exigence Grist", () => {
     });
 
     it('sait récupérer, pour chaque exigence, la liste des correspondances', async () => {
-      clientHttp.get = async () => {
+      clientHttp.get = fabriqueClientGet(async () => {
         return {
           data: {
             records: [
@@ -161,7 +161,7 @@ describe("L'entrepot d'exigence Grist", () => {
             ] satisfies ExigenceGrist[],
           },
         };
-      };
+      });
 
       const exigences = await entrepotExigenceGrist.parReferentiel('NIS2', 'ISO');
 
@@ -184,7 +184,7 @@ describe("L'entrepot d'exigence Grist", () => {
 
   describe("lorsqu'il récupère les exigences ISO 27001", () => {
     it('sait récupérer, pour chaque exigence, la liste des correspondances', async () => {
-      clientHttp.get = async () => {
+      clientHttp.get = fabriqueClientGet(async () => {
         return {
           data: {
             records: [
@@ -203,7 +203,7 @@ describe("L'entrepot d'exigence Grist", () => {
             ] satisfies ExigenceGrist[],
           },
         };
-      };
+      });
 
       const exigences = await entrepotExigenceGrist.parReferentiel('ISO', 'NIS2');
 
@@ -224,7 +224,7 @@ describe("L'entrepot d'exigence Grist", () => {
 
   describe("lorsqu'il récupère les exigences AE", () => {
     it('sait récupérer, pour chaque exigence, la liste des correspondances', async () => {
-      clientHttp.get = async () => {
+      clientHttp.get = fabriqueClientGet(async () => {
         return {
           data: {
             records: [
@@ -241,7 +241,7 @@ describe("L'entrepot d'exigence Grist", () => {
             ] satisfies ExigenceGrist[],
           },
         };
-      };
+      });
 
       const exigences = await entrepotExigenceGrist.parReferentiel('AE', 'NIS2');
 
@@ -262,7 +262,7 @@ describe("L'entrepot d'exigence Grist", () => {
 
   describe("lorsqu'il récupère les exigences CyFun23", () => {
     it('sait récupérer les informations des exigences', async () => {
-      clientHttp.get = async () => {
+      clientHttp.get = fabriqueClientGet(async () => {
         return {
           data: {
             records: [
@@ -281,7 +281,7 @@ describe("L'entrepot d'exigence Grist", () => {
             ] satisfies ExigenceGrist[],
           },
         };
-      };
+      });
 
       const exigences = await entrepotExigenceGrist.parReferentiel('CyFun23', 'NIS2');
 
@@ -293,7 +293,7 @@ describe("L'entrepot d'exigence Grist", () => {
     });
 
     it('sait récupérer, pour chaque exigence, la liste des correspondances', async () => {
-      clientHttp.get = async () => {
+      clientHttp.get = fabriqueClientGet(async () => {
         return {
           data: {
             records: [
@@ -310,7 +310,7 @@ describe("L'entrepot d'exigence Grist", () => {
             ] satisfies ExigenceGrist[],
           },
         };
-      };
+      });
 
       const exigences = await entrepotExigenceGrist.parReferentiel('CyFun23', 'NIS2');
 
