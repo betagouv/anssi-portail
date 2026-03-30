@@ -7,6 +7,7 @@
   import PointsAttention from './PointsAttention.svelte';
   import { Regulation } from '../../../../../back/src/metier/nis2-simulateur/Regulation.definitions';
   import LigneEtMaintenant from './LigneEtMaintenant.svelte';
+  import { quiScroll } from '../../ui/quiScroll.attachment';
 
   interface Props {
     reponses: EtatQuestionnaire;
@@ -23,7 +24,7 @@
   );
 </script>
 
-<div class="resultat">
+<div class="resultat" {@attach quiScroll}>
   <TamponResultat {resultat} />
 
   <PointsAttention
