@@ -10,6 +10,7 @@ export class ConstructeurGuideGrist {
   private langue: 'FR' | 'EN' | null = null;
   private collections: string[] = [];
   private readonly documents: DocumentGuide[] = [];
+  private readonly listeDocuments: DocumentGuide[] = [];
   private documentsBruts: string | null = null;
   private dateMiseAJour: number | null = null;
   private thematique: string | null = null;
@@ -88,6 +89,7 @@ export class ConstructeurGuideGrist {
         Documents: this.documentsBruts
           ? this.documentsBruts
           : this.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n'),
+        Liste_documents: JSON.stringify(this.listeDocuments),
         Date_de_mise_a_jour_s_: this.dateMiseAJour,
         Thematique: this.thematique,
         Besoins_cyber: this.besoins.length ? ['L', ...this.besoins] : [],

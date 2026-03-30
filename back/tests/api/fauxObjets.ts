@@ -123,6 +123,10 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
       urlTable: () => 'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records',
       cleApi: () => 'FAUSSE_CLE_API',
     }),
+    gestionGuides: () => ({
+      urlTable: () => 'http://grist/api/docs/idDocumentGestionGuides/tables/idTableGestionGuides/records',
+      cleApi: () => 'FAUSSE_CLE_API_GESTION_GUIDES',
+    }),
     guides: () => ({
       urlTable: () => 'http://grist/api/docs/idDocumentGuides/tables/idTableGuides/records',
       cleApi: () => 'FAUSSE_CLE_API_GUIDES',

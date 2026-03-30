@@ -42,6 +42,10 @@ type AdaptateurEnvironnement = {
       urlTable: () => string;
       cleApi: () => string;
     };
+    gestionGuides: () => {
+      urlTable: () => string;
+      cleApi: () => string;
+    };
     guides: () => {
       urlTable: () => string;
       cleApi: () => string;
@@ -183,6 +187,10 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     financement: () => ({
       urlTable: () => process.env.FINANCEMENTS_GRIST_URL || '',
       cleApi: () => process.env.FINANCEMENTS_GRIST_API_KEY || '',
+    }),
+    gestionGuides: () => ({
+      urlTable: () => process.env.GESTION_GUIDES_GRIST_URL || '',
+      cleApi: () => process.env.GESTION_GUIDES_GRIST_API_KEY || '',
     }),
     guides: () => ({
       urlTable: () => process.env.GUIDES_GRIST_URL || '',

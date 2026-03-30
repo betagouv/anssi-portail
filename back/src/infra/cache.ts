@@ -21,6 +21,10 @@ export class Cache<T> {
 
   constructor(private readonly configuration?: { ttl: Secondes }) {}
 
+  supprimeTout() {
+    this.cache.clear();
+  }
+
   async get(clefCache: string, fonction: () => Promise<T>): Promise<T> {
     if (this.cache.has(clefCache)) {
       const { valeur, dateExpiration } = this.cache.get(clefCache)!;
