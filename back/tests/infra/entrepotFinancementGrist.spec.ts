@@ -4,14 +4,14 @@ import { ClientHttp } from '../../src/infra/clientHttp';
 import { EntrepotFinancementGrist, FinancementGrist } from '../../src/infra/entrepotFinancementGrist';
 import { Financement } from '../../src/metier/financement';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
-import { fabriqueClientGet } from './fournisseurClientHttp';
+import { fabriqueClientGet, fabriqueFauxClientHttp } from './fournisseurClientHttp';
 
 describe("L'entrepot de financement Grist", () => {
   let clientHttp: ClientHttp;
   let entrepotFinancementGrist: EntrepotFinancementGrist;
 
   beforeEach(() => {
-    clientHttp = { get: fabriqueClientGet(async () => ({ data: { records: [] } })) };
+    clientHttp = { ...fabriqueFauxClientHttp(), get: fabriqueClientGet(async () => ({ data: { records: [] } })) };
     entrepotFinancementGrist = new EntrepotFinancementGrist({
       clientHttp,
       adaptateurEnvironnement: fauxAdaptateurEnvironnement,

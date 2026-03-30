@@ -4,11 +4,12 @@ import { ClientHttp } from '../../src/infra/clientHttp';
 import { EntrepotGuideGrist, GuideGrist } from '../../src/infra/entrepotGuideGrist';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
 import { ConstructeurGuideGrist } from '../api/guides/constructeurGuideGrist';
-import { fabriqueClientGet } from './fournisseurClientHttp';
+import { fabriqueClientGet, fabriqueFauxClientHttp } from './fournisseurClientHttp';
 
 describe("L'entrepot de guide Grist", () => {
   function prepareEntrepotGristAvecEnregistrements(records: GuideGrist[]) {
     const clientHttp: ClientHttp = {
+      ...fabriqueFauxClientHttp(),
       get: fabriqueClientGet(async () => ({ data: { records } })),
     };
 
@@ -21,6 +22,7 @@ describe("L'entrepot de guide Grist", () => {
   it("ne renvoie rien si l'url source n'est pas définie", async () => {
     const entrepotGuideGristHorsLigne = new EntrepotGuideGrist({
       clientHttp: {
+        ...fabriqueFauxClientHttp(),
         get: async () => {
           throw new Error('Ne devrait pas être appelé');
         },
@@ -46,6 +48,7 @@ describe("L'entrepot de guide Grist", () => {
     let urlAppelee = '';
     let headerAuthent;
     const clientHttp: ClientHttp = {
+      ...fabriqueFauxClientHttp(),
       get: fabriqueClientGet(async (url, config) => {
         urlAppelee = url;
         headerAuthent = config?.headers?.authorization;
