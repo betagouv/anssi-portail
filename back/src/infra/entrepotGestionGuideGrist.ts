@@ -1,33 +1,14 @@
 import axios from 'axios';
 import { BesoinCyber } from '../metier/besoinCyber';
-import { EntrepotGuide } from '../metier/entrepotGuide';
+import { EntrepotGestionGuide } from '../metier/entrepotGestionGuide';
 import { Guide } from '../metier/guide';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { ClientHttp } from './clientHttp';
 import { EntrepotGrist } from './entrepotGrist';
+import { GuideGrist } from './entrepotGuideGrist';
 import { aseptiseListeGrist } from './grist';
 
-export type GuideGrist = {
-  id: number;
-  fields: {
-    Identifiant: string | null;
-    Titre: string | null;
-    Description: string | null;
-    Image: string | null;
-    Langue: 'FR' | 'EN' | null;
-    Collections: string[];
-    Documents: string;
-    Date_de_mise_a_jour_s_: number | null;
-    Thematique: string | null;
-    Besoins_cyber: string[];
-  };
-};
-
-export type RetourGuideGrist = {
-  records: GuideGrist[];
-};
-
-export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements EntrepotGuide {
+export class EntrepotGestionGuideGrist extends EntrepotGrist<GuideGrist> implements EntrepotGestionGuide {
   constructor({
     clientHttp = axios,
     adaptateurEnvironnement,
@@ -73,6 +54,7 @@ export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements Ent
               };
             })
         : [],
+      listeDocuments: JSON.parse(guideGrist.fields.Liste_documents ?? '[]'),
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour_s_
         ? new Date(guideGrist.fields.Date_de_mise_a_jour_s_ * 1000)
         : new Date(),
@@ -83,26 +65,31 @@ export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements Ent
     });
   };
 
-  async parId(id: string): Promise<Guide | undefined> {
-    return (await this.tous()).find((guide) => guide.id === id);
+  async parId(id: string, options: { sansCache?: boolean } = {}): Promise<Guide | undefined> {
+    return (await this.tous(options)).find((guide) => guide.id === id);
   }
 
-  async tous(): Promise<Guide[]> {
+  async tous(options: { sansCache?: boolean } = {}): Promise<Guide[]> {
     const guidesGrist = await this.appelleGrist({
       tri: { cle: 'Date_de_mise_a_jour_s_', ordre: 'DESC' },
+      sansCache: options.sansCache,
     });
     return guidesGrist.records.map(this.convertisGuideGrist);
   }
 
-  async parCollections(collections: string[]): Promise<Guide[]> {
-    if (!collections.length) {
-      return [];
-    }
-    const tousLesGuides = await this.tous();
-    return tousLesGuides.filter((guide) =>
-      guide.collections.some((uneCollectionDuGuide) => collections.includes(uneCollectionDuGuide))
-    );
+  async ajouteDocument(idGuide: string, nomFichier: string, libelleDuLien: string): Promise<void> {
+    const guide = await this.parId(idGuide, { sansCache: true });
+    const listeDocuments = guide?.listeDocuments ?? [];
+    listeDocuments.push({
+      libelle: libelleDuLien,
+      nomFichier: nomFichier,
+    });
+    await this.sauvegardeDocuments(idGuide, listeDocuments);
   }
 
-  async ajouteDocument(_idGuide: string, _nomDocument: string, _libelleDuLien: string): Promise<void> {}
+  private async sauvegardeDocuments(idGuide: string, documents: { libelle: string; nomFichier: string }[]) {
+    this.modifieEnregistrementGrist('Identifiant', idGuide, {
+      Liste_documents: JSON.stringify(documents),
+    });
+  }
 }

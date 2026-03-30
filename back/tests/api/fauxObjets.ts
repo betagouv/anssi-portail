@@ -16,6 +16,7 @@ import { MockCmsCrisp } from '../mockCmsCrisp';
 import { EntrepotExigenceMemoire } from '../persistance/entrepotExigenceMemoire';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
 import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire';
+import { EntrepotGestionGuideMemoire } from '../persistance/entrepotGestionGuideMemoire';
 import { EntrepotGuideMemoire } from '../persistance/entrepotGuideMemoire';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
@@ -229,6 +230,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   entrepotFavori: new EntrepotFavoriMemoire(),
   entrepotFinancement: new EntrepotFinancementMemoire(),
   entrepotGuide: new EntrepotGuideMemoire(),
+  entrepotGestionGuide: new EntrepotGestionGuideMemoire(),
   entrepotResultatTest: new EntrepotResultatTestMemoire(),
   entrepotSessionDeGroupe: new EntrepotSessionDeGroupeMemoire(),
   entrepotExigence: new EntrepotExigenceMemoire(),
