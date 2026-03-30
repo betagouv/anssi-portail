@@ -16,7 +16,6 @@ export const guideZeroTrust: Guide = {
     },
   ],
   dateMiseAJour: new Date(2025, 5, 20),
-  datePublication: new Date(2025, 5, 20),
   thematique: 'Les essentiels',
   besoins: ['REAGIR', 'SE_FORMER'],
 };
@@ -35,7 +34,6 @@ export const guideDevsecops: Guide = {
     },
   ],
   dateMiseAJour: new Date(2024, 2, 13),
-  datePublication: new Date(2024, 2, 13),
   thematique: 'Les essentiels',
   besoins: ['SECURISER'],
 };
@@ -47,7 +45,6 @@ describe('Le consignateur de comparaison de guides', () => {
 <th>Identifiant</th>
 <th>Titre</th>
 <th>Thématique</th>
-<th>Date de publication</th>
 <th>Date de mise à jour</th>
 <th>Description</th>
 <th>Image</th>
@@ -90,10 +87,6 @@ describe('Le consignateur de comparaison de guides', () => {
       new Date(2025, 5, 20).toLocaleDateString() +
       '\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n+ ' +
-      new Date(2025, 5, 20).toLocaleDateString() +
-      '\n```\n</td>\n' +
-      '<td>\n\n' +
       '```diff\n+ <p>Avec l’accroissement des usages liés au télétravail, ...</p>\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n+ anssi-fondamentaux-zero-trust-v1_publication\n```\n</td>\n' +
@@ -127,10 +120,6 @@ describe('Le consignateur de comparaison de guides', () => {
       '```diff\n- Zero Trust\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n- Les essentiels\n```\n</td>\n' +
-      '<td>\n\n' +
-      '```diff\n- ' +
-      new Date(2025, 5, 20).toLocaleDateString() +
-      '\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n- ' +
       new Date(2025, 5, 20).toLocaleDateString() +
@@ -175,12 +164,6 @@ describe('Le consignateur de comparaison de guides', () => {
       new Date(2025, 5, 20).toLocaleDateString() +
       '\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n- ' +
-      new Date(2024, 2, 13).toLocaleDateString() +
-      '\n+ ' +
-      new Date(2025, 5, 20).toLocaleDateString() +
-      '\n```\n</td>\n' +
-      '<td>\n\n' +
       '```diff\n- <p>Les Essentiels de l’ANSSI visent à éclairer l’ensemble de nos lecteurs, ...</p>\n+ <p>Avec l’accroissement des usages liés au télétravail, ...</p>\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n- anssi_essentiels_devsecops_v1\n+ anssi-fondamentaux-zero-trust-v1_publication\n```\n</td>\n' +
@@ -218,10 +201,6 @@ describe('Le consignateur de comparaison de guides', () => {
       '```diff\nZero Trust\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\nLes essentiels\n```\n</td>\n' +
-      '<td>\n\n' +
-      '```diff\n' +
-      new Date(2025, 5, 20).toLocaleDateString() +
-      '\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n' +
       new Date(2025, 5, 20).toLocaleDateString() +

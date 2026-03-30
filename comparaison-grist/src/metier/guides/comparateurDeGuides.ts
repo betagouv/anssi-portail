@@ -54,7 +54,6 @@ export class ComparateurDeGuides {
           (guide) => guide.collections.toString(),
           (guide) => JSON.stringify(guide.documents),
           (guide) => guide.dateMiseAJour.toISOString(),
-          (guide) => guide.datePublication.toISOString(),
           (guide) => guide.thematique,
           (guide) => guide.besoins.toString(),
         ];

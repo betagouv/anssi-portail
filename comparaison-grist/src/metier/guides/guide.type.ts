@@ -6,7 +6,6 @@ export type Guide = {
   langue: string;
   collections: string[];
   documents: DocumentGuide[];
-  datePublication: Date;
   dateMiseAJour: Date;
   thematique: string;
   besoins: string[];
