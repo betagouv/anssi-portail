@@ -4,8 +4,6 @@ export type Config = {
 
 export type ClientHttp = {
   get: <T>(url: string, config?: Config) => Promise<{ data: T }>;
-};
-
-export type ClientHttpPosteur<C, R> = {
-  post: (url: string, corps: C, config?: { headers?: Record<string, string> }) => Promise<{ data: R }>;
+  post: <C, R>(url: string, corps: C, config?: Config) => Promise<{ data: R }>;
+  put: <C, R>(url: string, corps: C, config?: Config) => Promise<{ data: R }>;
 };

@@ -4,7 +4,7 @@ import { ClientHttp } from '../../../src/infra/clientHttp';
 import { FournisseurHorloge } from '../../../src/infra/fournisseurHorloge';
 import { EntrepotExigenceGrist, ExigenceGrist } from '../../../src/infra/nis2/entrepotExigenceGrist';
 import { fauxAdaptateurEnvironnement } from '../../api/fauxObjets';
-import { fabriqueClientGet } from '../fournisseurClientHttp';
+import { fabriqueClientGet, fabriqueFauxClientHttp } from '../fournisseurClientHttp';
 import { FournisseurHorlogeDeTest } from '../fournisseurHorlogeDeTest';
 
 describe("L'entrepot d'exigence Grist", () => {
@@ -12,7 +12,10 @@ describe("L'entrepot d'exigence Grist", () => {
   let entrepotExigenceGrist: EntrepotExigenceGrist;
 
   beforeEach(() => {
-    clientHttp = { get: fabriqueClientGet(async () => ({ data: { records: [] } })) };
+    clientHttp = {
+      ...fabriqueFauxClientHttp(),
+      get: fabriqueClientGet(async () => ({ data: { records: [] } })),
+    };
     entrepotExigenceGrist = new EntrepotExigenceGrist({
       clientHttp,
       adaptateurEnvironnement: fauxAdaptateurEnvironnement,

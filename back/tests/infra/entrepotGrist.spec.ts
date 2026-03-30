@@ -3,13 +3,14 @@ import { describe, it } from 'node:test';
 import { ClientHttp } from '../../src/infra/clientHttp';
 import { FournisseurHorloge } from '../../src/infra/fournisseurHorloge';
 import { EntrepotGristGenerique } from './EntrepotGristGenerique';
-import { fabriqueClientGet } from './fournisseurClientHttp';
+import { fabriqueClientGet, fabriqueFauxClientHttp } from './fournisseurClientHttp';
 import { FournisseurHorlogeDeTest } from './fournisseurHorlogeDeTest';
 
 describe("L'entrepôt Grist générique", () => {
   it('mets en cache le résultat de l’appel à Grist', async () => {
     let nombreAppel = 0;
     const clientHttp: ClientHttp = {
+      ...fabriqueFauxClientHttp(),
       get: fabriqueClientGet(async () => {
         nombreAppel++;
         return { data: { records: [{ test: 'une chaine' }] } };
@@ -26,6 +27,7 @@ describe("L'entrepôt Grist générique", () => {
 
   it("mets en cache les résultats d'appels à Grist avec des filtres différents", async () => {
     const clientHttp: ClientHttp = {
+      ...fabriqueFauxClientHttp(),
       get: fabriqueClientGet(async (url: string) => {
         return { data: { records: [{ test: 'une chaine de ' + url }] } };
       }),
@@ -49,6 +51,7 @@ describe("L'entrepôt Grist générique", () => {
   it("retourne la valeur précédente en cas d'erreur Grist", async () => {
     let i = 0;
     const clientHttp: ClientHttp = {
+      ...fabriqueFauxClientHttp(),
       get: fabriqueClientGet(async (_url: string) => {
         if (i === 0) {
           i++;
