@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { quiScroll } from '../../ui/quiScroll.attachment';
+
   let { children } = $props();
 </script>
 
-<div class="etape">
+<div class="etape" {@attach quiScroll}>
   {@render children()}
 </div>
 
