@@ -3,23 +3,23 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
+import { AdaptateurCellar, CleDuBucket, DocumentCellar } from '../../../src/infra/adaptateurCellar';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
-import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire';
+import { EntrepotGestionGuideMemoire } from '../../persistance/entrepotGestionGuideMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur, fauxAdaptateurCellar } from '../fauxObjets';
 import { guideZeroTrust, hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
-import { AdaptateurCellar, CleDuBucket, DocumentCellar } from '../../../src/infra/adaptateurCellar';
 
 describe('La ressource de gestion des documents des guides', () => {
   let serveur: Express;
-  let entrepotGuide: EntrepotGuideMemoire;
+  let entrepotGestionGuide: EntrepotGestionGuideMemoire;
   let entrepotUtilisateur: EntrepotUtilisateur;
   let adaptateurCellar: AdaptateurCellar;
   let cookieJeanneDupont: string;
 
   beforeEach(async () => {
-    entrepotGuide = new EntrepotGuideMemoire();
+    entrepotGestionGuide = new EntrepotGestionGuideMemoire();
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     adaptateurCellar = {
       ...fauxAdaptateurCellar,
@@ -31,11 +31,12 @@ describe('La ressource de gestion des documents des guides', () => {
     });
     await entrepotUtilisateur.ajoute(jeanneDupont);
     await entrepotUtilisateur.ajoute(hectorDurant);
-    await entrepotGuide.ajoute(guideZeroTrust());
+    await entrepotGestionGuide.ajoute(guideZeroTrust());
+    await entrepotGestionGuide.ajoute(guideZeroTrust());
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       cellar: adaptateurCellar,
-      entrepotGuide,
+      entrepotGestionGuide,
       entrepotUtilisateur,
     });
   });
@@ -73,6 +74,27 @@ describe('La ressource de gestion des documents des guides', () => {
       assert.equal(fichierDepose.nom, 'document.pdf');
       assert.equal(fichierDepose.typeDeContenu, 'application/pdf');
       assert.equal(cleDuBucketFournie, 'GESTION_GUIDES');
+    });
+
+    it('ajoute le document dans Grist', async () => {
+      let idGuidePourLequelLeDocumentEstAjoute = '';
+      let nomDocumentAjoute = '';
+      let libelleDuLienAjoute = '';
+      entrepotGestionGuide.ajouteDocument = async (idGuide: string, nomDocument: string, libelleDuLien: string) => {
+        idGuidePourLequelLeDocumentEstAjoute = idGuide;
+        nomDocumentAjoute = nomDocument;
+        libelleDuLienAjoute = libelleDuLien;
+      };
+
+      await request(serveur)
+        .post('/api/guides/zero-trust/documents')
+        .set('Cookie', [cookieJeanneDupont])
+        .field('libelleDuLien', 'Cliquez pour télécharger le document')
+        .attach('document-guide', Buffer.from('une-texte'), 'document.pdf');
+
+      assert.equal(idGuidePourLequelLeDocumentEstAjoute, 'zero-trust');
+      assert.equal(nomDocumentAjoute, 'document.pdf');
+      assert.equal(libelleDuLienAjoute, 'Cliquez pour télécharger le document');
     });
 
     it('répond 401 si l’utilisateur n’est pas authentifié', async () => {

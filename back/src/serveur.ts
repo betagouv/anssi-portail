@@ -20,6 +20,7 @@ import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
 import { adaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist';
+import { EntrepotGestionGuideGrist } from './infra/entrepotGestionGuideGrist';
 import { EntrepotGuideGrist } from './infra/entrepotGuideGrist';
 import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
@@ -28,6 +29,7 @@ import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPo
 import { messagerieMattermost } from './infra/messagerieMattermost';
 import { EntrepotExigenceGrist } from './infra/nis2/entrepotExigenceGrist';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
+import { EntrepotGestionGuide } from './metier/entrepotGestionGuide';
 import { EntrepotGuide } from './metier/entrepotGuide';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence';
@@ -61,6 +63,10 @@ const entrepotResultatTest = new EntrepotResultatTestPostgres({
 });
 
 const entrepotGuide: EntrepotGuide = new EntrepotGuideGrist({
+  adaptateurEnvironnement,
+});
+
+const entrepotGestionGuide: EntrepotGestionGuide = new EntrepotGestionGuideGrist({
   adaptateurEnvironnement,
 });
 
@@ -138,6 +144,7 @@ serviceCoherenceSecretsHachage
       messagerieInstantanee,
       entrepotFinancement,
       entrepotGuide,
+      entrepotGestionGuide,
       entrepotExigence,
       cellar,
       serviceSanteGuides,
