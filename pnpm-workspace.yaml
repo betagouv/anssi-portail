@@ -5,7 +5,6 @@ packages:
   - 'back'
   - 'front'
   - 'front/lib-svelte'
-  - 'recuperation-guides'
   - 'mise-a-jour-financements'
   - 'demande-diag'
   - 'comparaison-grist'
