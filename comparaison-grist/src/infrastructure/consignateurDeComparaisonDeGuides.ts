@@ -14,7 +14,6 @@ export class ConsignateurDeComparaisonDeGuides {
 <th>Identifiant</th>
 <th>Titre</th>
 <th>Thématique</th>
-<th>Date de publication</th>
 <th>Date de mise à jour</th>
 <th>Description</th>
 <th>Image</th>
@@ -34,7 +33,6 @@ ${contenuDuTableau}</tbody>
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.id}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.nom}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.thematique}`)}
-${this.construisUneCelluleAvecLeContenu(`+ ${guide.datePublication.toLocaleDateString()}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.dateMiseAJour.toLocaleDateString()}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.description}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.nomImage ?? ''}`)}
@@ -51,7 +49,6 @@ ${this.construisUneCelluleAvecLeContenu(`+ ${guide.besoins.join(', ')}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.id}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.nom}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.thematique}`)}
-${this.construisUneCelluleAvecLeContenu(`- ${guide.datePublication.toLocaleDateString()}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.dateMiseAJour.toLocaleDateString()}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.description}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.nomImage ?? ''}`)}
@@ -68,7 +65,6 @@ ${this.construisUneCelluleAvecLeContenu(`- ${guide.besoins.join(', ')}`)}
 ${this.construisUneCelluleDeDiff(source.id, cible.id)}
 ${this.construisUneCelluleDeDiff(source.nom, cible.nom)}
 ${this.construisUneCelluleDeDiff(source.thematique, cible.thematique)}
-${this.construisUneCelluleDeDiff(source.datePublication.toLocaleDateString(), cible.datePublication.toLocaleDateString())}
 ${this.construisUneCelluleDeDiff(source.dateMiseAJour.toLocaleDateString(), cible.dateMiseAJour.toLocaleDateString())}
 ${this.construisUneCelluleDeDiff(source.description, cible.description)}
 ${this.construisUneCelluleDeDiff(source.nomImage ?? '', cible.nomImage ?? '')}

@@ -196,15 +196,6 @@ describe('Le comparateur de guides', () => {
         expect(comparaison.modifications).toHaveLength(1);
       });
 
-      it('lorsque la date de publication a changé', async () => {
-        const guideCible = coquilleDeGuide.avecLaDateDePublication(new Date(2025, 5, 20).getTime() / 1000).construis();
-        await prepareLesDonnees(guideOriginal, guideCible);
-
-        const comparaison = comparateurDeGuides.compare();
-
-        expect(comparaison.modifications).toHaveLength(1);
-      });
-
       it('lorsque la thématique a changé', async () => {
         const guideCible = coquilleDeGuide.avecThematique('Nouvelle thématique').construis();
         await prepareLesDonnees(guideOriginal, guideCible);
