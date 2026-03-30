@@ -10,7 +10,7 @@
 }
 
 .chapeau.fond-sombre {
-  padding-bottom: 80px;
+  padding-bottom: 90px;
   p {
     margin-bottom: 24px;
   }
@@ -19,8 +19,8 @@
 .barre-filtre-besoin {
   display: none;
   position: relative;
-  top: -80px;
-  margin-bottom: -80px;
+  top: -66px;
+  margin-bottom: -66px;
   margin-left: 24px;
   margin-right: 24px;
 
@@ -43,7 +43,6 @@
   @include a-partir-de(lg) {
     flex-direction: row;
     gap: 0;
-    height: 160px;
   }
 
   label {
@@ -53,7 +52,6 @@
     padding: 0 8px;
     display: flex;
     align-items: center;
-    gap: 8px;
     cursor: pointer;
     background: white;
 
@@ -92,6 +90,7 @@
       span {
         @include a-partir-de(lg) {
           width: 200px;
+          margin-bottom: 8px;
         }
       }
     }
@@ -106,8 +105,9 @@
       height: 48px;
 
       @include a-partir-de(lg) {
-        width: 80px;
-        height: 80px;
+        width: 56px;
+        height: 56px;
+        margin-bottom: 8px;
       }
     }
 
