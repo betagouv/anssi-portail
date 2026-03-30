@@ -39,26 +39,48 @@ describe("L'abonnement qui consigne une simulation NIS2 terminée dans le journa
     await consigneEvenementSimulationNis2TermineeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
-    })(new SimulationNis2Terminee(reponseComplete()));
+    })(
+      new SimulationNis2Terminee({
+        reponses: reponseComplete(),
+        eligibilite: {
+          resultat: {
+            regulation: 'Regule',
+            typeEntite: 'EntiteImportante',
+            pointsAttention: { resumes: [], precisions: [] },
+          },
+          specificationsRetenues: ['R1370'],
+        },
+      })
+    );
 
     assert.deepEqual(evenementRecu, {
       type: 'SIMULATION_NIS2_TERMINEE',
       donnees: {
-        etapeCourante: 'resultat',
-        designationOperateurServicesEssentiels: ['nsp'],
-        appartenancePaysUnionEuropeenne: ['france'],
-        typeStructure: ['privee'],
-        trancheNombreEmployes: ['petit'],
-        trancheChiffreAffaire: ['petit'],
-        trancheBilanFinancier: [],
-        secteurActivite: ['banqueSecteurBancaire'],
-        sousSecteurActivite: [],
-        activites: ['etablissementCredit'],
-        typeEntitePublique: [],
-        localisationFournitureServicesNumeriques: [],
-        paysDecisionsCyber: [],
-        paysOperationsCyber: [],
-        paysPlusGrandNombreSalaries: [],
+        reponses: {
+          etapeCourante: 'resultat',
+          designationOperateurServicesEssentiels: ['nsp'],
+          appartenancePaysUnionEuropeenne: ['france'],
+          typeStructure: ['privee'],
+          trancheNombreEmployes: ['petit'],
+          trancheChiffreAffaire: ['petit'],
+          trancheBilanFinancier: [],
+          secteurActivite: ['banqueSecteurBancaire'],
+          sousSecteurActivite: [],
+          activites: ['etablissementCredit'],
+          typeEntitePublique: [],
+          localisationFournitureServicesNumeriques: [],
+          paysDecisionsCyber: [],
+          paysOperationsCyber: [],
+          paysPlusGrandNombreSalaries: [],
+        },
+        eligibilite: {
+          resultat: {
+            regulation: 'Regule',
+            typeEntite: 'EntiteImportante',
+            pointsAttention: { resumes: [], precisions: [] },
+          },
+          specificationsRetenues: ['R1370'],
+        },
       },
       date: new Date('2026-03-24'),
     });

@@ -1,9 +1,9 @@
-import { EtatQuestionnaire } from '../../metier/nis2-simulateur/EtatQuestionnaire';
+import { ReponsesEtResultatAvecAnalyse } from '../../metier/nis2-simulateur/questionnaire/calculEligibilite';
 
 export class SimulationNis2Terminee {
-  readonly reponses: EtatQuestionnaire;
+  readonly reponses: ReponsesEtResultatAvecAnalyse;
 
-  constructor(donnees: EtatQuestionnaire) {
+  constructor(donnees: ReponsesEtResultatAvecAnalyse) {
     this.reponses = donnees;
   }
 }
