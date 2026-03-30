@@ -46,5 +46,6 @@
     message="Sélectionnez une réponse"
     onsuivant={valide}
     suivantdisabled={reponse === undefined}
+    precedentdisabled={true}
   />
 </Etape>

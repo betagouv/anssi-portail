@@ -26,6 +26,7 @@
   import EtapeLocalisationEtablissementPrincipal from './etapes/EtapeLocalisationEtablissementPrincipal.svelte';
   import EtapeLocalisationServicesNumeriques from './etapes/EtapeLocalisationServicesNumeriques.svelte';
   import EtapeResultat from './resultat/EtapeResultat.svelte';
+  import { questionnaireAvecUndo } from './stores/questionnaireAvecUndo.store';
 </script>
 
 <Hero
@@ -36,29 +37,29 @@
 />
 
 <dsfr-container>
-  {#if $questionnaireStore.etapeCourante === 'prealable'}
+  {#if $questionnaireAvecUndo.etapeCourante === 'prealable'}
     <EtapePrealable
-      onsuivant={() => questionnaireStore.repond(valideEtapePrealable())}
+      onsuivant={() => questionnaireAvecUndo.repond(valideEtapePrealable())}
     />
-  {:else if $questionnaireStore.etapeCourante === 'designationOperateurServicesEssentiels'}
+  {:else if $questionnaireAvecUndo.etapeCourante === 'designationOperateurServicesEssentiels'}
     <EtapeDesignation
       onsuivant={(reponse) =>
-        questionnaireStore.repond(valideEtapeDesignation([reponse]))}
+        questionnaireAvecUndo.repond(valideEtapeDesignation([reponse]))}
     />
-  {:else if $questionnaireStore.etapeCourante === 'appartenanceUnionEuropeenne'}
+  {:else if $questionnaireAvecUndo.etapeCourante === 'appartenanceUnionEuropeenne'}
     <EtapeAppartenanceUE
       onsuivant={(reponse) =>
-        questionnaireStore.repond(valideEtapeAppartenanceUE([reponse]))}
+        questionnaireAvecUndo.repond(valideEtapeAppartenanceUE([reponse]))}
     />
-  {:else if $questionnaireStore.etapeCourante === 'typeStructure'}
+  {:else if $questionnaireAvecUndo.etapeCourante === 'typeStructure'}
     <EtapeTypeStructure
       onsuivant={(reponse) =>
-        questionnaireStore.repond(valideTypeStructure([reponse]))}
+        questionnaireAvecUndo.repond(valideTypeStructure([reponse]))}
     />
-  {:else if $questionnaireStore.etapeCourante === 'tailleEntitePrivee'}
+  {:else if $questionnaireAvecUndo.etapeCourante === 'tailleEntitePrivee'}
     <EtapeTailleEntitePrivee
       onsuivant={(reponse) =>
-        questionnaireStore.repond(
+        questionnaireAvecUndo.repond(
           valideTailleEntitePrivee(
             [reponse.nombre],
             [reponse.chiffreAffaire],
@@ -66,29 +67,31 @@
           )
         )}
     />
-  {:else if $questionnaireStore.etapeCourante === 'secteursActivite'}
+  {:else if $questionnaireAvecUndo.etapeCourante === 'secteursActivite'}
     <EtapeSecteursActivite
       onsuivant={(reponse) =>
-        questionnaireStore.repond(valideSecteursActivite(reponse))}
+        questionnaireAvecUndo.repond(valideSecteursActivite(reponse))}
     />
-  {:else if $questionnaireStore.etapeCourante === 'sousSecteursActivite'}
+  {:else if $questionnaireAvecUndo.etapeCourante === 'sousSecteursActivite'}
     <EtapeSousSecteursActivite
-      secteursChoisis={$questionnaireStore.secteurActivite.filter((s) =>
+      secteursChoisis={$questionnaireAvecUndo.secteurActivite.filter((s) =>
         estUnSecteurAvecDesSousSecteurs(s)
       )}
       onsuivant={(reponse) =>
-        questionnaireStore.repond(valideSousSecteursActivite(reponse))}
+        questionnaireAvecUndo.repond(valideSousSecteursActivite(reponse))}
     />
-  {:else if $questionnaireStore.etapeCourante === 'activites'}
+  {:else if $questionnaireAvecUndo.etapeCourante === 'activites'}
     <EtapeActivites
-      secteursChoisis={selectSecteursPourSaisieActivites($questionnaireStore)}
+      secteursChoisis={selectSecteursPourSaisieActivites(
+        $questionnaireAvecUndo
+      )}
       onsuivant={(reponse) =>
-        questionnaireStore.repond(valideActivites(reponse))}
+        questionnaireAvecUndo.repond(valideActivites(reponse))}
     />
-  {:else if $questionnaireStore.etapeCourante === 'localisationEtablissementPrincipal'}
+  {:else if $questionnaireAvecUndo.etapeCourante === 'localisationEtablissementPrincipal'}
     <EtapeLocalisationEtablissementPrincipal
       onsuivant={(reponse) =>
-        questionnaireStore.repond(
+        questionnaireAvecUndo.repond(
           valideLocalisationEtablissementPrincipal(
             [reponse.paysDecision],
             reponse.paysOperation ? [reponse.paysOperation] : [],
@@ -96,14 +99,14 @@
           )
         )}
     />
-  {:else if $questionnaireStore.etapeCourante === 'localisationFournitureServicesNumeriques'}
+  {:else if $questionnaireAvecUndo.etapeCourante === 'localisationFournitureServicesNumeriques'}
     <EtapeLocalisationServicesNumeriques
       onsuivant={(reponse) =>
-        questionnaireStore.repond(
+        questionnaireAvecUndo.repond(
           valideLocalisationServicesNumeriques(reponse)
         )}
     />
-  {:else if $questionnaireStore.etapeCourante === 'resultat'}
+  {:else if $questionnaireAvecUndo.etapeCourante === 'resultat'}
     <EtapeResultat reponses={$questionnaireStore} />
   {/if}
 </dsfr-container>

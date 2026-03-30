@@ -149,8 +149,4 @@ const repond = (reponse: ActionQuestionnaire) => {
   }
 };
 
-export const questionnaireStore = {
-  subscribe,
-  repond,
-  reset,
-};
+export const questionnaireStore = { subscribe, repond, reset, set };
