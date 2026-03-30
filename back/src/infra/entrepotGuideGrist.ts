@@ -32,7 +32,7 @@ export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements Ent
     clientHttp = axios,
     adaptateurEnvironnement,
   }: {
-    clientHttp?: ClientHttp<RetourGuideGrist>;
+    clientHttp?: ClientHttp;
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
     const grist = adaptateurEnvironnement.grist();

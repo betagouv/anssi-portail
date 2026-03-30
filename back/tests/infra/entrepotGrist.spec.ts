@@ -1,19 +1,19 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { ClientHttp } from '../../src/infra/clientHttp';
-import { ReponseGrist } from '../../src/infra/entrepotGrist';
 import { FournisseurHorloge } from '../../src/infra/fournisseurHorloge';
 import { EntrepotGristGenerique } from './EntrepotGristGenerique';
+import { fabriqueClientGet } from './fournisseurClientHttp';
 import { FournisseurHorlogeDeTest } from './fournisseurHorlogeDeTest';
 
 describe("L'entrepôt Grist générique", () => {
   it('mets en cache le résultat de l’appel à Grist', async () => {
     let nombreAppel = 0;
-    const clientHttp: ClientHttp<ReponseGrist<{ test: string }>> = {
-      get: async (_url: string) => {
+    const clientHttp: ClientHttp = {
+      get: fabriqueClientGet(async () => {
         nombreAppel++;
         return { data: { records: [{ test: 'une chaine' }] } };
-      },
+      }),
     };
     const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'urlDeBase', 'cleApi', 60);
 
@@ -25,10 +25,10 @@ describe("L'entrepôt Grist générique", () => {
   });
 
   it("mets en cache les résultats d'appels à Grist avec des filtres différents", async () => {
-    const clientHttp: ClientHttp<ReponseGrist<{ test: string }>> = {
-      get: async (url: string) => {
+    const clientHttp: ClientHttp = {
+      get: fabriqueClientGet(async (url: string) => {
         return { data: { records: [{ test: 'une chaine de ' + url }] } };
-      },
+      }),
     };
     const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'urlDeBase', 'cleApi', 60);
 
@@ -48,14 +48,14 @@ describe("L'entrepôt Grist générique", () => {
 
   it("retourne la valeur précédente en cas d'erreur Grist", async () => {
     let i = 0;
-    const clientHttp: ClientHttp<ReponseGrist<{ test: string }>> = {
-      get: async (_url: string) => {
+    const clientHttp: ClientHttp = {
+      get: fabriqueClientGet(async (_url: string) => {
         if (i === 0) {
           i++;
           return { data: { records: [{ test: 'une chaine' }] } };
         }
         return Promise.reject(new Error('Erreur 404'));
-      },
+      }),
     };
     const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'urlDeBase', 'cleApi', 60);
     await entrepotRessourcesCyberGrist.tous();

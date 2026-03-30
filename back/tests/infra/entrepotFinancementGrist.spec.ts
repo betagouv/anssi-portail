@@ -4,14 +4,14 @@ import { ClientHttp } from '../../src/infra/clientHttp';
 import { EntrepotFinancementGrist, FinancementGrist } from '../../src/infra/entrepotFinancementGrist';
 import { Financement } from '../../src/metier/financement';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
-import { ReponseGrist } from '../../src/infra/entrepotGrist';
+import { fabriqueClientGet } from './fournisseurClientHttp';
 
 describe("L'entrepot de financement Grist", () => {
-  let clientHttp: ClientHttp<ReponseGrist<FinancementGrist>>;
+  let clientHttp: ClientHttp;
   let entrepotFinancementGrist: EntrepotFinancementGrist;
 
   beforeEach(() => {
-    clientHttp = { get: async () => ({ data: { records: [] } }) };
+    clientHttp = { get: fabriqueClientGet(async () => ({ data: { records: [] } })) };
     entrepotFinancementGrist = new EntrepotFinancementGrist({
       clientHttp,
       adaptateurEnvironnement: fauxAdaptateurEnvironnement,
@@ -39,13 +39,13 @@ describe("L'entrepot de financement Grist", () => {
     let urlAppelee = '';
     let headerAuthent;
 
-    clientHttp.get = async (url, config) => {
+    clientHttp.get = fabriqueClientGet(async (url, config) => {
       urlAppelee = url;
       headerAuthent = config?.headers?.authorization;
       return {
         data: { records: [] },
       };
-    };
+    });
 
     await entrepotFinancementGrist.tous();
 
@@ -56,7 +56,7 @@ describe("L'entrepot de financement Grist", () => {
   it('sait récupérer un financement en appelant Grist puis en filtrant par id', async () => {
     const idFinancement = 10;
 
-    clientHttp.get = async () => {
+    clientHttp.get = fabriqueClientGet(async () => {
       return {
         data: {
           records: [
@@ -99,7 +99,7 @@ describe("L'entrepot de financement Grist", () => {
           ] satisfies FinancementGrist[],
         },
       };
-    };
+    });
 
     const financement = await entrepotFinancementGrist.parId(idFinancement);
 
@@ -122,13 +122,13 @@ describe("L'entrepot de financement Grist", () => {
   });
 
   it('renvoie undefined si aucun id n‘a été fourni', async () => {
-    clientHttp.get = async () => {
+    clientHttp.get = fabriqueClientGet(async () => {
       return {
         data: {
           records: [] satisfies FinancementGrist[],
         },
       };
-    };
+    });
 
     const financement = await entrepotFinancementGrist.parId(1);
 
@@ -136,7 +136,7 @@ describe("L'entrepot de financement Grist", () => {
   });
 
   it("sait transfomer le retour de l'API Grist en financements", async () => {
-    clientHttp.get = async () => {
+    clientHttp.get = fabriqueClientGet(async () => {
       return {
         data: {
           records: [
@@ -179,7 +179,7 @@ describe("L'entrepot de financement Grist", () => {
           ] satisfies FinancementGrist[],
         },
       };
-    };
+    });
 
     const financements = await entrepotFinancementGrist.tous();
 

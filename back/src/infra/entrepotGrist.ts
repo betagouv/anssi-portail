@@ -18,7 +18,7 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
   private readonly cache: Cache<ReponseGrist<TYPE_DOCUMENT>>;
 
   constructor(
-    private readonly clientHttp: ClientHttp<ReponseGrist<TYPE_DOCUMENT>>,
+    private readonly clientHttp: ClientHttp,
     private readonly urlDeBase: string,
     private readonly cleApi: string,
     dureeCacheEnSecondes: number
@@ -33,7 +33,7 @@ export class EntrepotGrist<TYPE_DOCUMENT> {
 
     const url = urlPreConstruite ?? this.construisUrl(options);
     return this.cache.get(url, async () => {
-      const reponse = await this.clientHttp.get(url.toString(), {
+      const reponse = await this.clientHttp.get<ReponseGrist<TYPE_DOCUMENT>>(url.toString(), {
         headers: {
           authorization: `Bearer ${this.cleApi}`,
           accept: 'application/json',

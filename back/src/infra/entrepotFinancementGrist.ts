@@ -3,8 +3,8 @@ import { EntrepotFinancement } from '../metier/entrepotFinancement';
 import { Financement } from '../metier/financement';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { ClientHttp } from './clientHttp';
+import { EntrepotGrist } from './entrepotGrist';
 import { aseptiseListeGrist } from './grist';
-import { EntrepotGrist, ReponseGrist } from './entrepotGrist';
 
 export type FinancementGrist = {
   id: number;
@@ -30,7 +30,7 @@ export class EntrepotFinancementGrist extends EntrepotGrist<FinancementGrist> im
     clientHttp = axios,
     adaptateurEnvironnement,
   }: {
-    clientHttp: ClientHttp<ReponseGrist<FinancementGrist>>;
+    clientHttp: ClientHttp;
     adaptateurEnvironnement: AdaptateurEnvironnement;
   }) {
     const configGrist = adaptateurEnvironnement.grist();
