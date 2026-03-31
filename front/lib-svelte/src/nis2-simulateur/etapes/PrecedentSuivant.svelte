@@ -38,7 +38,7 @@
 
     p {
       font-size: 0.9rem;
-      color: #929292;
+      color: var(--text-disabled-grey);
     }
   }
 </style>
