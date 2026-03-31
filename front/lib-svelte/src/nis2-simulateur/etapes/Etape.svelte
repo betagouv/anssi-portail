@@ -14,7 +14,7 @@
 
   .etape {
     box-sizing: border-box;
-    background: #f6f6f6;
+    background-color: var(--background-alt-grey);
     padding: 40px taille-pour-colonnes(1);
     margin: 40px auto;
 
