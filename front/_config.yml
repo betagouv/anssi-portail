@@ -8,10 +8,7 @@ collections:
   ressources:
     output: true
 exclude:
-  - '*.iml'
   - README.md
-  - Dockerfile
-  - dev.sh
   - lib-svelte/.vscode/
   - lib-svelte/node_modules/
   - lib-svelte/src/
