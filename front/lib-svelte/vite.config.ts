@@ -56,6 +56,7 @@ export default defineConfig({
         sante: 'src/main-sante.ts',
         'gestion-guides-ajout-document':
           'src/main-gestion-guides-ajout-document.ts',
+        sentry: 'src/main-sentry.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
