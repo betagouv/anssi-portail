@@ -77,24 +77,28 @@ describe('La ressource de gestion des documents des guides', () => {
     });
 
     it('ajoute le document dans Grist', async () => {
-      let idGuidePourLequelLeDocumentEstAjoute = '';
-      let nomDocumentAjoute = '';
-      let libelleDuLienAjoute = '';
-      entrepotGuideTravail.ajouteDocument = async (idGuide: string, nomDocument: string, libelleDuLien: string) => {
-        idGuidePourLequelLeDocumentEstAjoute = idGuide;
-        nomDocumentAjoute = nomDocument;
-        libelleDuLienAjoute = libelleDuLien;
-      };
-
       await request(serveur)
         .post('/api/guides/zero-trust/documents')
         .set('Cookie', [cookieJeanneDupont])
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
         .attach('document-guide', Buffer.from('une-texte'), 'document.pdf');
 
-      assert.equal(idGuidePourLequelLeDocumentEstAjoute, 'zero-trust');
-      assert.equal(nomDocumentAjoute, 'document.pdf');
-      assert.equal(libelleDuLienAjoute, 'Cliquez pour télécharger le document');
+      const monGuide = await entrepotGuideTravail.parId('zero-trust');
+      assert.equal(monGuide?.listeDocuments.length, 1);
+      assert.equal(monGuide?.listeDocuments[0].libelle, 'Cliquez pour télécharger le document');
+      assert.equal(monGuide?.listeDocuments[0].nomFichier, 'document.pdf');
+    });
+
+    it('génère les illustrations', async () => {
+      await request(serveur)
+        .post('/api/guides/zero-trust/documents')
+        .set('Cookie', [cookieJeanneDupont])
+        .field('libelleDuLien', 'Cliquez pour télécharger le document')
+        .field('generationDeVisuel', 'true')
+        .attach('document-guide', Buffer.from('une-texte'), 'le_guide_en_pdf.pdf');
+
+      const monGuide = await entrepotGuideTravail.parId('zero-trust');
+      assert.equal(monGuide?.nomImage, 'le_guide_en_pdf');
     });
 
     it('répond 401 si l’utilisateur n’est pas authentifié', async () => {
