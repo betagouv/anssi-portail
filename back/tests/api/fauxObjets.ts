@@ -10,6 +10,7 @@ import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import { adaptateurMonAideCyberVide } from '../../src/infra/adaptateurMonAideCyberVide';
 import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
+import { AdaptateurEmail } from '../../src/metier/adaptateurEmail';
 import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests';
 import { MockCmsCrisp } from '../mockCmsCrisp';
@@ -202,8 +203,8 @@ const fauxGenerateurCodeSessionDeGroupe = {
 };
 
 const fausseMessagerieInstantanee: MessagerieInstantanee = {
-  notifieUnRetourExperience: async () => {},
-  notifieUnAvisUtilisateur: async () => {},
+  notifieUnRetourExperience: async () => { },
+  notifieUnAvisUtilisateur: async () => { },
 };
 
 export const fauxAdaptateurHachage: AdaptateurHachage = {
@@ -220,6 +221,11 @@ export const fauxAdaptateurCellar: AdaptateurCellar = {
   depose: async () => undefined,
 };
 
+const fauxAdaptateurEmail: AdaptateurEmail = {
+  envoieEmailBienvenue: async () => { },
+  inscrisAInfolettre: async () => { },
+  creeContactBrevo: async () => { },
+};
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
   adaptateurGestionErreur: adaptateurGestionVide,
@@ -255,6 +261,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
       guidesAvecProbleme: [],
     }),
   },
+  adaptateurEmail: fauxAdaptateurEmail,
   generateurImage: {
     depuisPdf: async (pdfOriginal) => {
       return pdfOriginal;

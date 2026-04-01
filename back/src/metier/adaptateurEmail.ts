@@ -13,4 +13,5 @@ export interface AdaptateurEmail {
     infoLettre: boolean;
     telephone?: string;
   }) => Promise<void>;
+  inscrisAInfolettre: (email: string) => Promise<void>;
 }

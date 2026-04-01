@@ -26,6 +26,7 @@ import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgr
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
 import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres';
 import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPostgres';
+import { GenerateurImageAvif } from './infra/generateurImage';
 import { messagerieMattermost } from './infra/messagerieMattermost';
 import { EntrepotExigenceGrist } from './infra/nis2/entrepotExigenceGrist';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
@@ -34,7 +35,6 @@ import { EntrepotGuideTravail } from './metier/entrepotGuideTravail';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides';
-import { GenerateurImageAvif } from './infra/generateurImage';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
@@ -149,6 +149,7 @@ serviceCoherenceSecretsHachage
       entrepotExigence,
       cellar,
       serviceSanteGuides,
+      adaptateurEmail,
       generateurImage: new GenerateurImageAvif(),
     }).listen(port, () => {
       console.log(`Le serveur écoute sur le port ${port}`);

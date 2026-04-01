@@ -7,4 +7,7 @@ export const adaptateurEmailConsole = (): AdaptateurEmail => ({
   creeContactBrevo: async ({ email, prenom, infoLettre }) => {
     console.log(`On crée le compte pour l'utilisateur ${email} avec prénom ${prenom} avec l'infolettre ${infoLettre}`);
   },
+  inscrisAInfolettre: async (email: string) => {
+    console.log(`On inscrit ${email} à l’infolettre`);
+  },
 });

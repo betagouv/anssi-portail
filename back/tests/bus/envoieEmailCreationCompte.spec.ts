@@ -12,6 +12,7 @@ describe("L'abonnement qui envoie un email de création de compte", () => {
         donneesRecues = { email, prenom };
       },
       creeContactBrevo: async () => {},
+      inscrisAInfolettre: async () => {},
     };
 
     envoieEmailCreationCompte({ adaptateurEmail })(
