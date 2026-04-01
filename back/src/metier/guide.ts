@@ -5,7 +5,6 @@ export class Guide {
   id: string;
   nom: string;
   description: string;
-  nomImage: string | null;
   langue: 'FR' | 'EN';
   collections: string[];
   documents: DocumentGuide[];
@@ -18,7 +17,6 @@ export class Guide {
     id: string;
     nom: string;
     description: string;
-    nomImage: string | null;
     langue: 'FR' | 'EN';
     collections: string[];
     documents: DocumentGuide[];
@@ -30,7 +28,6 @@ export class Guide {
     this.id = parametres.id;
     this.nom = parametres.nom;
     this.description = parametres.description;
-    this.nomImage = parametres.nomImage;
     this.langue = parametres.langue;
     this.collections = parametres.collections;
     this.documents = parametres.documents;

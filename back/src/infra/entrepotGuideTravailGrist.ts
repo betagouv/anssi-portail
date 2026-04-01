@@ -39,7 +39,6 @@ export class EntrepotGuideTravailGrist extends EntrepotGrist<GuideGrist> impleme
       id: guideGrist.fields.Identifiant ?? '',
       nom: guideGrist.fields.Titre ?? '',
       description: guideGrist.fields.Description ?? '',
-      nomImage: guideGrist.fields.Image ?? null,
       langue: guideGrist.fields.Langue ?? 'FR',
       collections: aseptiseListeGrist(guideGrist.fields.Collections),
       documents: guideGrist.fields.Documents

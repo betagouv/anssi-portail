@@ -21,7 +21,6 @@ describe('La ressource des guides de mêmes collections', () => {
           id: 'guide-sans-collection',
           nom: 'Guide sans collection',
           description: '',
-          nomImage: '',
           langue: 'FR',
           collections: [],
           documents: [],

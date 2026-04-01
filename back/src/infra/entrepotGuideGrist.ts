@@ -13,7 +13,6 @@ export type GuideGrist = {
     Identifiant: string | null;
     Titre: string | null;
     Description: string | null;
-    Image: string | null;
     Langue: 'FR' | 'EN' | null;
     Collections: string[];
     Documents: string;
@@ -59,7 +58,6 @@ export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements Ent
       id: guideGrist.fields.Identifiant ?? '',
       nom: guideGrist.fields.Titre ?? '',
       description: guideGrist.fields.Description ?? '',
-      nomImage: guideGrist.fields.Image ?? null,
       langue: guideGrist.fields.Langue ?? 'FR',
       collections: aseptiseListeGrist(guideGrist.fields.Collections),
       documents: guideGrist.fields.Documents
