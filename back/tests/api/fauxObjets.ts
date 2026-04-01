@@ -16,8 +16,8 @@ import { MockCmsCrisp } from '../mockCmsCrisp';
 import { EntrepotExigenceMemoire } from '../persistance/entrepotExigenceMemoire';
 import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
 import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire';
-import { EntrepotGestionGuideMemoire } from '../persistance/entrepotGestionGuideMemoire';
 import { EntrepotGuideMemoire } from '../persistance/entrepotGuideMemoire';
+import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravailMemoire';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
@@ -124,8 +124,8 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
       cleApi: () => 'FAUSSE_CLE_API',
     }),
     gestionGuides: () => ({
-      urlTable: () => 'http://grist/api/docs/idDocumentGestionGuides/tables/idTableGestionGuides/records',
-      cleApi: () => 'FAUSSE_CLE_API_GESTION_GUIDES',
+      urlTable: () => 'http://grist/api/docs/idDocumentGuidesTravail/tables/idTableGuidesTravail/records',
+      cleApi: () => 'FAUSSE_CLE_API_GUIDES_TRAVAIL',
     }),
     guides: () => ({
       urlTable: () => 'http://grist/api/docs/idDocumentGuides/tables/idTableGuides/records',
@@ -234,7 +234,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   entrepotFavori: new EntrepotFavoriMemoire(),
   entrepotFinancement: new EntrepotFinancementMemoire(),
   entrepotGuide: new EntrepotGuideMemoire(),
-  entrepotGestionGuide: new EntrepotGestionGuideMemoire(),
+  entrepotGuideTravail: new EntrepotGuideTravailMemoire(),
   entrepotResultatTest: new EntrepotResultatTestMemoire(),
   entrepotSessionDeGroupe: new EntrepotSessionDeGroupeMemoire(),
   entrepotExigence: new EntrepotExigenceMemoire(),
