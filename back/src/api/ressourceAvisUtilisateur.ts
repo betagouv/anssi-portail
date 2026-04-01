@@ -3,6 +3,7 @@ import { check } from 'express-validator';
 import { AvisUtilisateurDonne } from '../bus/evenements/avisUtilisateurDonne';
 import { AvisUtilisateur } from '../metier/messagerieInstantanee';
 import { ConfigurationServeur } from './configurationServeur';
+import { filetRouteAsynchrone } from './middleware';
 
 export const ressourceAvisUtilisateur = ({
   busEvenements,
@@ -19,7 +20,7 @@ export const ressourceAvisUtilisateur = ({
     ],
     middleware.valide(),
     middleware.aseptise('commentaire'),
-    async (requete: Request, reponse: Response) => {
+    filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const { niveauDeSatisfaction, commentaire, emailDeContact } = requete.body as AvisUtilisateur;
       await messagerieInstantanee.notifieUnAvisUtilisateur({
         niveauDeSatisfaction,
@@ -28,7 +29,7 @@ export const ressourceAvisUtilisateur = ({
       });
       await busEvenements.publie(new AvisUtilisateurDonne({ niveauDeSatisfaction, emailDeContact }));
       reponse.sendStatus(201);
-    }
+    })
   );
   return routeur;
 };

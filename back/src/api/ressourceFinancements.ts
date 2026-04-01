@@ -3,6 +3,7 @@ import { Financement } from '../metier/financement';
 import { estCodeRegion } from '../metier/referentielRegions';
 import { trancheEffectifParCode } from '../metier/referentielTranchesEffectifEtablissement';
 import { ConfigurationServeur } from './configurationServeur';
+import { filetRouteAsynchrone } from './middleware';
 
 const construitFiltreFinancementParRegion = (codeRegion?: string) => {
   if (!estCodeRegion(codeRegion)) {
@@ -55,7 +56,7 @@ export const ressourceFinancements = ({
   routeur.get(
     '/',
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
-    async (requete: Request, reponse: Response) => {
+    filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       try {
         let financements = await entrepotFinancement.tous();
 
@@ -90,7 +91,7 @@ export const ressourceFinancements = ({
       } catch {
         reponse.sendStatus(500);
       }
-    }
+    })
   );
   return routeur;
 };

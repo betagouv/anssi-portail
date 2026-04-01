@@ -1,5 +1,5 @@
 import { HttpStatusCode } from 'axios';
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { check, validationResult } from 'express-validator';
 import helmet from 'helmet';
 import { randomBytes } from 'node:crypto';
@@ -191,3 +191,8 @@ export const fabriqueMiddleware = ({
     verifieModeMaintenance,
   };
 };
+
+export const filetRouteAsynchrone =
+  (route: RequestHandler) => (requete: Request, reponse: Response, suite: NextFunction) => {
+    Promise.resolve(route(requete, reponse, suite)).catch(suite);
+  };

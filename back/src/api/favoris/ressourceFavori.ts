@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur';
 import { ConfigurationServeur } from '../configurationServeur';
+import { filetRouteAsynchrone } from '../middleware';
 
 const ressourceFavori = ({
   middleware,
@@ -16,7 +17,7 @@ const ressourceFavori = ({
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     middleware.aseptise('id'),
-    async (requete, reponse) => {
+    filetRouteAsynchrone(async (requete, reponse) => {
       let id = requete.params.id as string;
       id = id.replaceAll('&#x2F;', '/');
       const utilisateur = requete.utilisateur;
@@ -24,7 +25,7 @@ const ressourceFavori = ({
 
       await busEvenements.publie(new MiseAJourFavorisUtilisateur({ utilisateur }));
       reponse.sendStatus(200);
-    }
+    })
   );
 
   return routeur;

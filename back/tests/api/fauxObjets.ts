@@ -203,8 +203,8 @@ const fauxGenerateurCodeSessionDeGroupe = {
 };
 
 const fausseMessagerieInstantanee: MessagerieInstantanee = {
-  notifieUnRetourExperience: async () => { },
-  notifieUnAvisUtilisateur: async () => { },
+  notifieUnRetourExperience: async () => {},
+  notifieUnAvisUtilisateur: async () => {},
 };
 
 export const fauxAdaptateurHachage: AdaptateurHachage = {
@@ -222,9 +222,9 @@ export const fauxAdaptateurCellar: AdaptateurCellar = {
 };
 
 export const fauxAdaptateurEmail: AdaptateurEmail = {
-  envoieEmailBienvenue: async () => { },
-  inscrisAInfolettre: async () => { },
-  creeContactBrevo: async () => { },
+  envoieEmailBienvenue: async () => {},
+  inscrisAInfolettre: async () => {},
+  creeContactBrevo: async () => {},
 };
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,

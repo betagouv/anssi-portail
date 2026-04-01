@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { AdaptateurCellar, CleDuBucket } from '../infra/adaptateurCellar';
+import { filetRouteAsynchrone } from './middleware';
 
-export const fabriqueGestionnaireRessourceCellar =
-  (cellar: AdaptateurCellar, cleDuBucket: CleDuBucket) =>
-  async (requete: Request, reponse: Response, suite: NextFunction) => {
+export const fabriqueGestionnaireRessourceCellar = (cellar: AdaptateurCellar, cleDuBucket: CleDuBucket) =>
+  filetRouteAsynchrone(async (requete: Request, reponse: Response, suite: NextFunction) => {
     try {
       const fluxCellar = await cellar.getStream(requete.params.slug as string, cleDuBucket);
       if (!fluxCellar) {
@@ -27,4 +27,4 @@ export const fabriqueGestionnaireRessourceCellar =
     } catch (erreur: Error | unknown) {
       suite(erreur);
     }
-  };
+  });

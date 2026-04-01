@@ -2,6 +2,7 @@ import { Request, Response, Router } from 'express';
 import { Organisation } from '../metier/utilisateur';
 import { ConfigurationServeur } from './configurationServeur';
 import { estCodeDepartement, regionDuDepartement } from '../metier/referentielDepartements';
+import { filetRouteAsynchrone } from './middleware';
 
 const ressourceProfil = ({
   adaptateurJWT,
@@ -13,7 +14,7 @@ const ressourceProfil = ({
   routeur.get(
     '/',
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
-    async (requete: Request, reponse: Response) => {
+    filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       try {
         adaptateurJWT.decode(requete.session?.token);
       } catch {
@@ -38,7 +39,7 @@ const ressourceProfil = ({
           codeActivite: organisation?.codeActivite,
         });
       }
-    }
+    })
   );
   return routeur;
 };

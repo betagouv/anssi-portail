@@ -1,6 +1,7 @@
 import { ConfigurationServeur } from '../configurationServeur';
 import { Request, Response, Router } from 'express';
 import { check } from 'express-validator';
+import { filetRouteAsynchrone } from '../middleware';
 
 const ressourceFavorisPartages = ({ middleware, entrepotFavori, entrepotUtilisateur }: ConfigurationServeur) => {
   const routeur = Router();
@@ -9,7 +10,7 @@ const ressourceFavorisPartages = ({ middleware, entrepotFavori, entrepotUtilisat
     '/:id',
     [check('id').isUUID().withMessage("L'id est invalide")],
     middleware.valide(),
-    async (requete: Request, reponse: Response) => {
+    filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const utilisateurPartageur = await entrepotUtilisateur.parIdListeFavoris(requete.params.id as string);
 
       if (!utilisateurPartageur) {
@@ -24,7 +25,7 @@ const ressourceFavorisPartages = ({ middleware, entrepotFavori, entrepotUtilisat
         prenom: utilisateurPartageur.prenom,
         favorisPartages: favorisPartages,
       });
-    }
+    })
   );
   return routeur;
 };
