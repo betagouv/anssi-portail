@@ -72,7 +72,7 @@ a.carte {
 .carte.service,
 .carte.outil,
 .carte.contenu {
-  width: 286px;
+  width: 282px;
   gap: 0;
 
   @include a-partir-de(md) {
