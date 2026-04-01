@@ -3,12 +3,13 @@ import { AdaptateurEmail } from '../../src/metier/adaptateurEmail';
 import { creeContactBrevo } from '../../src/bus/creeContactBrevo';
 import assert from 'assert';
 import { CompteCree } from '../../src/bus/evenements/compteCree';
+import { fauxAdaptateurEmail } from '../api/fauxObjets';
 
 describe("L'abonnement qui crée un contact Brevo", () => {
   it('crée un contact dans Brevo', () => {
     let contactCree;
     const adaptateurEmail: AdaptateurEmail = {
-      envoieEmailBienvenue: async () => {},
+      ...fauxAdaptateurEmail,
       creeContactBrevo: async (donneesRecues: {
         email: string;
         nom: string;
@@ -18,7 +19,6 @@ describe("L'abonnement qui crée un contact Brevo", () => {
       }) => {
         contactCree = { ...donneesRecues };
       },
-      inscrisAInfolettre: async () => {},
     };
 
     creeContactBrevo({ adaptateurEmail })(
