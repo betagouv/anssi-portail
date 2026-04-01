@@ -137,6 +137,7 @@ export const fabriqueMiddleware = ({
           connectSrc: [
             "'self'",
             'https://stats.beta.gouv.fr',
+            'https://sentry.incubateur.net',
             ...(process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true' ? ['ws://localhost:3001'] : []),
           ],
           mediaSrc: [
