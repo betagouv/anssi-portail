@@ -7,7 +7,7 @@ type SanteDocumentGuide = {
   nom: string;
   etat: Etat;
 };
-type TailleImage = '234' | '588' | 'origine';
+type TailleImage = '588' | 'origine';
 
 type SanteImagesGuide = Record<TailleImage, Etat>;
 
@@ -51,7 +51,6 @@ export const fabriqueServiceSanteGuides = (adaptateurCellar: AdaptateurCellar): 
           const documents = await santeDocuments(guide);
 
           const images = {
-            '234': await etatImage(guide, '234'),
             '588': await etatImage(guide, '588'),
             origine: await etatImage(guide, 'origine'),
           };
