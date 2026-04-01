@@ -255,4 +255,9 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
       guidesAvecProbleme: [],
     }),
   },
+  generateurImage: {
+    depuisPdf: async (pdfOriginal) => {
+      return pdfOriginal;
+    },
+  },
 };

@@ -10,17 +10,24 @@ import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateu
 import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur, fauxAdaptateurCellar } from '../fauxObjets';
 import { guideZeroTrust, hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
+import { GenerateurImage } from '../../../src/infra/generateurImage';
 
 describe('La ressource de gestion des documents des guides', () => {
   let serveur: Express;
   let entrepotGuideTravail: EntrepotGuideTravailMemoire;
   let entrepotUtilisateur: EntrepotUtilisateur;
   let adaptateurCellar: AdaptateurCellar;
+  let generateurImage: GenerateurImage;
   let cookieJeanneDupont: string;
 
   beforeEach(async () => {
     entrepotGuideTravail = new EntrepotGuideTravailMemoire();
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+    generateurImage = {
+      depuisPdf: async (pdfOriginal) => {
+        return pdfOriginal;
+      },
+    };
     adaptateurCellar = {
       ...fauxAdaptateurCellar,
       depose: async () => undefined,
@@ -38,6 +45,7 @@ describe('La ressource de gestion des documents des guides', () => {
       cellar: adaptateurCellar,
       entrepotGuideTravail: entrepotGuideTravail,
       entrepotUtilisateur,
+      generateurImage,
     });
   });
 
@@ -47,7 +55,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .post('/api/guides/zero-trust/documents')
         .set('Cookie', [cookieJeanneDupont])
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
-        .attach('document-guide', Buffer.from('une-texte'), 'document.pdf');
+        .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
       assert.equal(reponse.status, 201);
     });
@@ -68,9 +76,9 @@ describe('La ressource de gestion des documents des guides', () => {
         .post('/api/guides/zero-trust/documents')
         .set('Cookie', [cookieJeanneDupont])
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
-        .attach('document-guide', Buffer.from('une-texte'), 'document.pdf');
+        .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
-      assert.equal(fichierDepose.contenu.length, 9);
+      assert.equal(fichierDepose.contenu.length, 8);
       assert.equal(fichierDepose.nom, 'document.pdf');
       assert.equal(fichierDepose.typeDeContenu, 'application/pdf');
       assert.equal(cleDuBucketFournie, 'GESTION_GUIDES');
@@ -81,7 +89,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .post('/api/guides/zero-trust/documents')
         .set('Cookie', [cookieJeanneDupont])
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
-        .attach('document-guide', Buffer.from('une-texte'), 'document.pdf');
+        .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
       const monGuide = await entrepotGuideTravail.parId('zero-trust');
       assert.equal(monGuide?.listeDocuments.length, 1);
@@ -89,16 +97,31 @@ describe('La ressource de gestion des documents des guides', () => {
       assert.equal(monGuide?.listeDocuments[0].nomFichier, 'document.pdf');
     });
 
-    it('génère les illustrations', async () => {
+    it('génère les illustrations et les dépose', async () => {
+      const fichiersDeposes: DocumentCellar[] = [];
+      const fichiersFournis: Buffer[] = [];
+      adaptateurCellar.depose = async (document: DocumentCellar) => {
+        fichiersDeposes.push(document);
+      };
+      generateurImage.depuisPdf = async (fichier) => {
+        fichiersFournis.push(fichier);
+        return fichier;
+      };
+
       await request(serveur)
         .post('/api/guides/zero-trust/documents')
         .set('Cookie', [cookieJeanneDupont])
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
-        .field('generationDeVisuel', 'true')
-        .attach('document-guide', Buffer.from('une-texte'), 'le_guide_en_pdf.pdf');
+        .field('genereVisuel', true)
+        .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
-      const monGuide = await entrepotGuideTravail.parId('zero-trust');
-      assert.equal(monGuide?.nomImage, 'le_guide_en_pdf');
+      assert.equal(fichiersDeposes.length, 3);
+      assert.equal(fichiersDeposes[0].nom, 'document.pdf');
+      assert.equal(fichiersDeposes[1].nom, 'zero-trust/origine.avif');
+      assert.equal(fichiersDeposes[2].nom, 'zero-trust/588.avif');
+      assert.equal(fichiersFournis.length, 2);
+      assert.equal(fichiersFournis[0].length, 8);
+      assert.equal(fichiersFournis[1].length, 8);
     });
 
     it('répond 401 si l’utilisateur n’est pas authentifié', async () => {
@@ -117,7 +140,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .post('/api/guides/zero-trust/documents')
         .set('Cookie', [cookieHectorDurant])
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
-        .attach('document-guide', Buffer.from('une-texte'), 'document.pdf');
+        .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
       assert.equal(reponse.status, 403);
     });
@@ -136,7 +159,7 @@ describe('La ressource de gestion des documents des guides', () => {
         const reponse = await request(serveur)
           .post('/api/guides/zero-trust/documents')
           .set('Cookie', [cookieJeanneDupont])
-          .attach('document-guide', Buffer.from('une-texte'), 'document.pdf');
+          .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
         assert.equal(reponse.status, 400);
       });
@@ -148,7 +171,7 @@ describe('La ressource de gestion des documents des guides', () => {
           .post('/api/guides/guide-inexistant/documents')
           .set('Cookie', [cookieJeanneDupont])
           .field('libelleDuLien', 'Cliquez pour télécharger le document')
-          .attach('document-guide', Buffer.from('une-texte'), 'document.pdf');
+          .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
         assert.equal(reponse.status, 404);
         assert.equal(reponse.body.erreur, 'Le guide "guide-inexistant" est introuvable');

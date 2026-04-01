@@ -148,6 +148,11 @@ serviceCoherenceSecretsHachage
       entrepotExigence,
       cellar,
       serviceSanteGuides,
+      generateurImage: {
+        depuisPdf: () => {
+          throw new Error('A remplacer par une vraie implémentation');
+        },
+      },
     }).listen(port, () => {
       console.log(`Le serveur écoute sur le port ${port}`);
     });
