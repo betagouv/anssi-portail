@@ -26,7 +26,7 @@ describe('La ressource d’abonnement à l’infolettre', () => {
 
   describe('sur demande POST', () => {
     it('retourne un 201', async () => {
-      const reponse = await request(serveur).post('/api/abonnement-infolettre').send();
+      const reponse = await request(serveur).post('/api/abonnement-infolettre').send({ email: 'emile@beta.gouv.fr' });
 
       assert.equal(reponse.status, 201);
     });
@@ -40,6 +40,18 @@ describe('La ressource d’abonnement à l’infolettre', () => {
       await request(serveur).post('/api/abonnement-infolettre').send({ email: 'emile@beta.gouv.fr' });
 
       assert.equal(emailInscrit, 'emile@beta.gouv.fr');
+    });
+
+    it("renvoie une erreur si l'email est manquant", async () => {
+      const reponse = await request(serveur).post('/api/abonnement-infolettre').send({});
+
+      assert.equal(reponse.status, 400);
+    });
+
+    it("renvoie une erreur si l'email est malformé", async () => {
+      const reponse = await request(serveur).post('/api/abonnement-infolettre').send({ email: 'pas un email' });
+
+      assert.equal(reponse.status, 400);
     });
   });
 });
