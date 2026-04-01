@@ -7,7 +7,10 @@ export class EntrepotGuideTravailMemoire extends EntrepotMemoire<Guide> implemen
     return this.entites.find((guide) => guide.id === id);
   }
 
-  async ajouteDocument(_idGuide: string, _nomDocument: string, _libelleDuLien: string): Promise<void> {
-    return;
+  async ajouteDocument(idGuide: string, nomDocument: string, libelleDuLien: string): Promise<void> {
+    const guide = await this.parId(idGuide);
+    if (guide) {
+      guide.listeDocuments.push({ libelle: libelleDuLien, nomFichier: nomDocument });
+    }
   }
 }
