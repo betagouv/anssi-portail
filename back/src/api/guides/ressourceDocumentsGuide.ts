@@ -30,6 +30,7 @@ const ressourceDocumentsGuide = ({
   entrepotUtilisateur,
   middleware,
   cellar,
+  generateurImage,
 }: ConfigurationServeur) => {
   const routeur = Router();
 
@@ -55,15 +56,24 @@ const ressourceDocumentsGuide = ({
           });
         }
 
-        const fichier = requete.file!; // Le fichier est forcément présent àa ce stade, car validé par "valideLesDocuments()"
+        const fichier = requete.file!; // Le fichier est forcément présent à ce stade, car validé par "valideLesDocuments()"
         await cellar.depose(
-          {
-            contenu: fichier.buffer,
-            nom: fichier.originalname,
-            typeDeContenu: fichier.mimetype,
-          },
+          { contenu: fichier.buffer, nom: fichier.originalname, typeDeContenu: fichier.mimetype },
           'GESTION_GUIDES'
         );
+
+        if (requete.body.genereVisuel === 'true') {
+          const imageOrigine = await generateurImage.depuisPdf(fichier.buffer);
+          const image588 = await generateurImage.depuisPdf(fichier.buffer);
+          await cellar.depose(
+            { contenu: imageOrigine, nom: `${identifiantGuide}/origine.avif`, typeDeContenu: 'image/avif' },
+            'GESTION_GUIDES'
+          );
+          await cellar.depose(
+            { contenu: image588, nom: `${identifiantGuide}/588.avif`, typeDeContenu: 'image/avif' },
+            'GESTION_GUIDES'
+          );
+        }
 
         await entrepotGuideTravail.ajouteDocument(identifiantGuide, fichier.originalname, requete.body.libelleDuLien);
 

@@ -22,6 +22,7 @@ import { AdaptateurJWT } from './adaptateurJWT';
 import { FournisseurChemin } from './fournisseurChemin';
 import { Middleware } from './middleware';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
+import { GenerateurImage } from '../infra/generateurImage';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -53,4 +54,5 @@ export type ConfigurationServeur = {
   };
   cellar: AdaptateurCellar;
   serviceSanteGuides: ServiceSanteGuides;
+  generateurImage: GenerateurImage;
 };

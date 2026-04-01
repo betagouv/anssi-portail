@@ -1,3 +1,6 @@
 import * as z from 'zod';
 
-export const schemaAjoutDocumentGuide = z.strictObject({ libelleDuLien: z.string() });
+export const schemaAjoutDocumentGuide = z.strictObject({
+  libelleDuLien: z.string(),
+  genereVisuel: z.enum(['true', 'false']).optional(),
+});
