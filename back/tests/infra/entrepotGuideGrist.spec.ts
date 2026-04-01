@@ -75,7 +75,6 @@ describe("L'entrepot de guide Grist", () => {
         .avecLIdentifiant('guide1')
         .avecLeTitre('Premier guide')
         .avecLaDescription('<p>Description du premier guide</p>')
-        .avecLImage('vignette-1')
         .avecLaLangue('FR')
         .avecLesCollections(['Les essentiels'])
         .construis(),
@@ -84,7 +83,6 @@ describe("L'entrepot de guide Grist", () => {
         .avecLIdentifiant('guide2')
         .avecLeTitre('Deuxième guide')
         .avecLaDescription('<p>Description du deuxième guide</p>')
-        .avecLImage('vignette-2')
         .avecLaLangue('FR')
         .avecLesCollections(['Les essentiels'])
         .construis(),
@@ -98,7 +96,6 @@ describe("L'entrepot de guide Grist", () => {
     assert.equal(premierGuide.id, 'guide1');
     assert.equal(premierGuide.nom, 'Premier guide');
     assert.equal(premierGuide.description, '<p>Description du premier guide</p>');
-    assert.equal(premierGuide.nomImage, 'vignette-1');
     assert.equal(premierGuide.langue, 'FR');
     assert.deepEqual(premierGuide.collections, ['Les essentiels']);
     assert.deepEqual(premierGuide.documents, []);
@@ -107,20 +104,9 @@ describe("L'entrepot de guide Grist", () => {
     assert.equal(deuxiemeGuide.id, 'guide2');
     assert.equal(deuxiemeGuide.nom, 'Deuxième guide');
     assert.equal(deuxiemeGuide.description, '<p>Description du deuxième guide</p>');
-    assert.equal(deuxiemeGuide.nomImage, 'vignette-2');
     assert.equal(deuxiemeGuide.langue, 'FR');
     assert.deepEqual(deuxiemeGuide.collections, ['Les essentiels']);
     assert.deepEqual(deuxiemeGuide.documents, []);
-  });
-
-  it("sait gérer l'absence d'image dans un guide", async () => {
-    const entrepotGuideGrist = prepareEntrepotGristAvecEnregistrements([
-      new ConstructeurGuideGrist().avecLImage(null).construis(),
-    ]);
-
-    const guides = await entrepotGuideGrist.tous();
-
-    assert.equal(guides[0].nomImage, null);
   });
 
   it('sait récupérer un guide avec son id', async () => {

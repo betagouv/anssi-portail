@@ -76,10 +76,8 @@ describe('Le service de calcul de la santé des guildes', () => {
 
   it("inspecte l'etat des images", async () => {
     mockAdaptateurCellar.existe = async (nomFichier: string, cleDuBucket: CleDuBucket) =>
-      [
-        'zero-trust/anssi-fondamentaux-zero-trust-v1_publication-origine.avif',
-        'anssi-fondamentaux-zero-trust-v1.0.pdf',
-      ].includes(nomFichier) && cleDuBucket === 'GUIDES';
+      ['zero-trust/origine.avif', 'anssi-fondamentaux-zero-trust-v1.0.pdf'].includes(nomFichier) &&
+      cleDuBucket === 'GUIDES';
 
     const sante = await serviceSanteGuides.calculeSante([guideZeroTrust()]);
 

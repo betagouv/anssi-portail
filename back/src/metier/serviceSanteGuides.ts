@@ -38,7 +38,7 @@ export const fabriqueServiceSanteGuides = (adaptateurCellar: AdaptateurCellar): 
     );
 
   const etatImage = async (guide: Guide, format: string) =>
-    booleanVersEtat(await adaptateurCellar.existe(`${guide.id}/${guide.nomImage}-${format}.avif`, 'GUIDES'));
+    booleanVersEtat(await adaptateurCellar.existe(`${guide.id}/${format}.avif`, 'GUIDES'));
 
   const tousOk = (objet: { [p: string]: Etat } | ArrayLike<Etat>) => Object.values(objet).every((v) => v === 'ok');
 
