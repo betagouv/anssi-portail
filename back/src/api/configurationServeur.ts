@@ -7,6 +7,8 @@ import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber';
 import { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
+import { GenerateurImage } from '../infra/generateurImage';
+import { AdaptateurEmail } from '../metier/adaptateurEmail';
 import { EntrepotFavori } from '../metier/entrepotFavori';
 import { EntrepotFinancement } from '../metier/entrepotFinancement';
 import { EntrepotGuide } from '../metier/entrepotGuide';
@@ -22,7 +24,6 @@ import { AdaptateurJWT } from './adaptateurJWT';
 import { FournisseurChemin } from './fournisseurChemin';
 import { Middleware } from './middleware';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
-import { GenerateurImage } from '../infra/generateurImage';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -54,5 +55,6 @@ export type ConfigurationServeur = {
   };
   cellar: AdaptateurCellar;
   serviceSanteGuides: ServiceSanteGuides;
+  adaptateurEmail: AdaptateurEmail;
   generateurImage: GenerateurImage;
 };

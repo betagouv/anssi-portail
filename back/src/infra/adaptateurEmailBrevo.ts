@@ -62,6 +62,7 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
         return Promise.reject(e);
       });
   },
+  inscrisAInfolettre: async () => {},
 });
 
 export const fabriqueAdaptateurEmail = () =>

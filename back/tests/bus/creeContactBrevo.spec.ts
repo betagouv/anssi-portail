@@ -18,6 +18,7 @@ describe("L'abonnement qui crée un contact Brevo", () => {
       }) => {
         contactCree = { ...donneesRecues };
       },
+      inscrisAInfolettre: async () => {},
     };
 
     creeContactBrevo({ adaptateurEmail })(
