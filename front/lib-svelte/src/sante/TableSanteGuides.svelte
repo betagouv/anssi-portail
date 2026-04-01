@@ -10,7 +10,6 @@
     <tr>
       <th>Identifiant</th>
       <th>Documents</th>
-      <th>Image 234px</th>
       <th>Image 588px</th>
       <th>Image origine</th>
     </tr>
@@ -25,7 +24,6 @@
             {document.nom}<br />
           {/each}
         </td>
-        <td class="image">{iconeEtat(guide.images['234'])}</td>
         <td class="image">{iconeEtat(guide.images['588'])}</td>
         <td class="image">{iconeEtat(guide.images['origine'])}</td>
       </tr>

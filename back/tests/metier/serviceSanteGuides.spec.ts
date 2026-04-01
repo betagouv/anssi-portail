@@ -25,7 +25,6 @@ describe('Le service de calcul de la santé des guildes', () => {
     assert.equal(guidesEnBonneSante[0].id, 'zero-trust');
     assert.deepEqual(guidesEnBonneSante[0].documents, [{ nom: 'anssi-fondamentaux-zero-trust-v1.0.pdf', etat: 'ok' }]);
     assert.deepEqual(guidesEnBonneSante[0].images, {
-      '234': 'ok',
       '588': 'ok',
       origine: 'ok',
     });
@@ -85,7 +84,6 @@ describe('Le service de calcul de la santé des guildes', () => {
     assert.equal(sante.guidesAvecProbleme.length, 1);
     const santeImages = sante.guidesAvecProbleme[0].images;
     assert.equal(santeImages.origine, 'ok');
-    assert.equal(santeImages['234'], 'ko');
     assert.equal(santeImages['588'], 'ko');
   });
 });

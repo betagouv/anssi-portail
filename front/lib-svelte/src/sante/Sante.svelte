@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
   export type Etat = 'ok' | 'ko';
-  type TailleImage = '234' | '588' | 'origine';
+  type TailleImage = '588' | 'origine';
   export type SanteGuide = {
     id: string;
     documents: { nom: string; etat: Etat }[];
