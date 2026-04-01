@@ -3,16 +3,16 @@ import assert from 'node:assert';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail';
 import { envoieEmailCreationCompte } from '../../src/bus/envoieEmailCreationCompte';
 import { CompteCree } from '../../src/bus/evenements/compteCree';
+import { fauxAdaptateurEmail } from '../api/fauxObjets';
 
 describe("L'abonnement qui envoie un email de création de compte", () => {
   it('envoie un email de bienvenue', () => {
     let donneesRecues;
     const adaptateurEmail: AdaptateurEmail = {
+      ...fauxAdaptateurEmail,
       envoieEmailBienvenue: async ({ email, prenom }) => {
         donneesRecues = { email, prenom };
       },
-      creeContactBrevo: async () => {},
-      inscrisAInfolettre: async () => {},
     };
 
     envoieEmailCreationCompte({ adaptateurEmail })(

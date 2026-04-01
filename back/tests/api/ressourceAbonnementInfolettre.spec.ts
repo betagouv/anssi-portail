@@ -5,7 +5,7 @@ import request from 'supertest';
 import { creeServeur } from '../../src/api/msc';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail';
 import { MockBusEvenement } from '../bus/busPourLesTests';
-import { configurationDeTestDuServeur } from './fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurEmail } from './fauxObjets';
 
 describe('La ressource d’abonnement à l’infolettre', () => {
   let serveur: Express;
@@ -14,9 +14,7 @@ describe('La ressource d’abonnement à l’infolettre', () => {
 
   beforeEach(() => {
     adaptateurEmail = {
-      creeContactBrevo: async () => {},
-      envoieEmailBienvenue: async () => {},
-      inscrisAInfolettre: async () => {},
+      ...fauxAdaptateurEmail,
     };
     busEvenements = new MockBusEvenement();
     serveur = creeServeur({

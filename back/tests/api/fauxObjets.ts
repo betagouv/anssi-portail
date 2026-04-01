@@ -221,7 +221,7 @@ export const fauxAdaptateurCellar: AdaptateurCellar = {
   depose: async () => undefined,
 };
 
-const fauxAdaptateurEmail: AdaptateurEmail = {
+export const fauxAdaptateurEmail: AdaptateurEmail = {
   envoieEmailBienvenue: async () => { },
   inscrisAInfolettre: async () => { },
   creeContactBrevo: async () => { },
