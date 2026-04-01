@@ -2,6 +2,7 @@ import { ConfigurationServeur } from '../configurationServeur';
 import { Request, Response, Router } from 'express';
 import { check } from 'express-validator';
 import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur';
+import { filetRouteAsynchrone } from '../middleware';
 
 const ressourceFavoris = ({
   busEvenements,
@@ -19,7 +20,7 @@ const ressourceFavoris = ({
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     [check('idItemCyber').not().isEmpty().withMessage("L'idItemCyber est invalide")],
     middleware.valide(),
-    async (requete: Request, reponse: Response) => {
+    filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       let idItemCyber = requete.body.idItemCyber;
       idItemCyber = idItemCyber.replaceAll('&#x2F;', '/');
       const utilisateur = requete.utilisateur;
@@ -34,18 +35,18 @@ const ressourceFavoris = ({
         })
       );
       reponse.sendStatus(201);
-    }
+    })
   );
 
   routeur.get(
     '/',
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
-    async (requete: Request, reponse: Response) => {
+    filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const utilisateur = requete.utilisateur;
       const favoris = await entrepotFavori.tousCeuxDeUtilisateur(utilisateur);
       reponse.status(200).send(favoris.map((favori) => favori.idItemCyber));
-    }
+    })
   );
 
   return routeur;

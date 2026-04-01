@@ -3,6 +3,7 @@ import { ConfigurationServeur } from './configurationServeur';
 import { check } from 'express-validator';
 import { CompteCree } from '../bus/evenements/compteCree';
 import { Utilisateur } from '../metier/utilisateur';
+import { filetRouteAsynchrone } from './middleware';
 
 const ressourceUtilisateurs = ({
   busEvenements,
@@ -29,7 +30,7 @@ const ressourceUtilisateurs = ({
       check('infolettreAcceptee').isBoolean().withMessage("L'acceptation de l'infolettre est invalide"),
     ],
     middleware.valide(),
-    async (requete: Request, reponse: Response) => {
+    filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const { telephone, domainesSpecialite, siretEntite, cguAcceptees, infolettreAcceptee, token } = requete.body;
 
       try {
@@ -57,7 +58,7 @@ const ressourceUtilisateurs = ({
       } catch {
         reponse.status(400).send({ erreur: 'Le token est invalide' });
       }
-    }
+    })
   );
   return routeur;
 };

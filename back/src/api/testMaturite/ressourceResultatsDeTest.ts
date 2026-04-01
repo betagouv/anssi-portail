@@ -7,6 +7,7 @@ import { codesSecteur } from '../../metier/referentielSecteurs';
 import { codesTranchesEffectif } from '../../metier/referentielTranchesEffectifEtablissement';
 import { ResultatTestMaturite } from '../../metier/resultatTestMaturite';
 import { ConfigurationServeur } from '../configurationServeur';
+import { filetRouteAsynchrone } from '../middleware';
 
 const clesReponsesValides = [
   'prise-en-compte-risque',
@@ -57,7 +58,7 @@ const ressourceResultatsDeTest = ({
     middleware.valide(),
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     middleware.aseptise('codeSessionGroupe'),
-    async (requete: Request, reponse: Response) => {
+    filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const { tailleOrganisation, region, secteur, reponses, codeSessionGroupe } = requete.body;
 
       const utilisateur = requete.utilisateur;
@@ -94,13 +95,13 @@ const ressourceResultatsDeTest = ({
       }
 
       reponse.status(201).send({ id: resultatTest.id });
-    }
+    })
   );
   routeur.get(
     '/',
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
-    async (requete: Request, reponse: Response) => {
+    filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const resultatsDeTest = await entrepotResultatTest.pourUtilisateur(requete.utilisateur);
 
       reponse.send(
@@ -111,7 +112,7 @@ const ressourceResultatsDeTest = ({
           reponses: resultat.reponses,
         }))
       );
-    }
+    })
   );
   return routeur;
 };

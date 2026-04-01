@@ -3,6 +3,7 @@ import { estCodeRegion, regionParCode } from '../../metier/referentielRegions';
 import { secteurParCode } from '../../metier/referentielSecteurs';
 import { trancheEffectifParCode } from '../../metier/referentielTranchesEffectifEtablissement';
 import { ConfigurationServeur } from '../configurationServeur';
+import { filetRouteAsynchrone } from '../middleware';
 
 const ressourceDernierResultatDeTest = ({
   entrepotResultatTest,
@@ -16,7 +17,7 @@ const ressourceDernierResultatDeTest = ({
     '/',
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
-    async (requete, reponse) => {
+    filetRouteAsynchrone(async (requete, reponse) => {
       const resultatTest = await entrepotResultatTest.dernierPourUtilisateur(requete.utilisateur);
       if (!resultatTest) {
         reponse.sendStatus(404);
@@ -54,7 +55,7 @@ const ressourceDernierResultatDeTest = ({
           region,
         },
       });
-    }
+    })
   );
   return routeur;
 };

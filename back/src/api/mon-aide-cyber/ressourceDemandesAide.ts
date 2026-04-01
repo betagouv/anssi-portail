@@ -4,6 +4,7 @@ import { body, check } from 'express-validator';
 import { codeDepartement } from '../../metier/referentielDepartements';
 import { ConfigurationServeur } from '../configurationServeur';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
+import { filetRouteAsynchrone } from '../middleware';
 
 export type CorpsDemandeAide = {
   origine?: string;
@@ -63,7 +64,7 @@ const ressourceDemandesAide = ({ adaptateurMonAideCyber, middleware }: Configura
       .custom((validationCGU) => !!validationCGU)
       .withMessage('Veuillez valider les CGU.'),
     middleware.valide(),
-    async (requete: CorpsDeRequeteTypee<CorpsDemandeAide>, reponse) => {
+    filetRouteAsynchrone(async (requete: CorpsDeRequeteTypee<CorpsDemandeAide>, reponse) => {
       try {
         const { emailAidant, identifiantAidant, siretAidant, entiteAidee, origine } = requete.body;
         const { email, departement, raisonSociale, siret } = entiteAidee;
@@ -85,7 +86,7 @@ const ressourceDemandesAide = ({ adaptateurMonAideCyber, middleware }: Configura
       } catch (e: unknown | Error) {
         reponse.status(400).send({ erreur: (e as Error).message });
       }
-    }
+    })
   );
   return routeur;
 };

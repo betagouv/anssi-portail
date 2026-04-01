@@ -3,6 +3,7 @@ import { Router } from 'express';
 import { Referentiel, versReferentiel } from '../../metier/nis2/exigence';
 import { ConfigurationServeur } from '../configurationServeur';
 import { StrategieExportCsvUneLigneParExigence } from './strategieExportCsvUneLigneParExigence';
+import { filetRouteAsynchrone } from '../middleware';
 
 export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationServeur) => {
   const routeur = Router();
@@ -25,32 +26,35 @@ export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationSer
     }
   }
 
-  routeur.get('/', async (requete, reponse) => {
-    const { source, cible } = requete.query;
-    if ((source && typeof source !== 'string') || (cible && typeof cible !== 'string')) {
-      return reponse.status(400).send('Les paramètres doivent être des chaînes de caractères');
-    }
+  routeur.get(
+    '/',
+    filetRouteAsynchrone(async (requete, reponse) => {
+      const { source, cible } = requete.query;
+      if ((source && typeof source !== 'string') || (cible && typeof cible !== 'string')) {
+        return reponse.status(400).send('Les paramètres doivent être des chaînes de caractères');
+      }
 
-    const referentielSource = versReferentiel(source);
-    const referentielCible = versReferentiel(cible);
-    if (referentielCible !== 'NIS2' && referentielSource !== 'NIS2') {
-      return reponse.sendStatus(404);
-    }
+      const referentielSource = versReferentiel(source);
+      const referentielCible = versReferentiel(cible);
+      if (referentielCible !== 'NIS2' && referentielSource !== 'NIS2') {
+        return reponse.sendStatus(404);
+      }
 
-    const exigences = await entrepotExigence.parReferentiel(referentielSource, referentielCible);
+      const exigences = await entrepotExigence.parReferentiel(referentielSource, referentielCible);
 
-    const strategieExportCsv = new StrategieExportCsvUneLigneParExigence();
+      const strategieExportCsv = new StrategieExportCsvUneLigneParExigence();
 
-    const stringifier = createObjectCsvStringifier({
-      header: strategieExportCsv.entetes(exigences),
-      alwaysQuote: true,
-      fieldDelimiter: ';',
-    });
+      const stringifier = createObjectCsvStringifier({
+        header: strategieExportCsv.entetes(exigences),
+        alwaysQuote: true,
+        fieldDelimiter: ';',
+      });
 
-    const csv = `\uFEFF${stringifier.getHeaderString()}${stringifier.stringifyRecords(strategieExportCsv.lignes(exigences))}`;
+      const csv = `\uFEFF${stringifier.getHeaderString()}${stringifier.stringifyRecords(strategieExportCsv.lignes(exigences))}`;
 
-    reponse.attachment(nomFichierCsv(referentielSource, referentielCible) + '.csv').send(csv);
-  });
+      reponse.attachment(nomFichierCsv(referentielSource, referentielCible) + '.csv').send(csv);
+    })
+  );
 
   return routeur;
 };

@@ -4,6 +4,7 @@ import { estCodeSecteur } from '../../metier/referentielSecteurs';
 import { trancheEffectifParCode } from '../../metier/referentielTranchesEffectifEtablissement';
 import { RepartitionResultatsTest } from '../../metier/repartitionResultatsTest';
 import { ConfigurationServeur } from '../configurationServeur';
+import { filetRouteAsynchrone } from '../middleware';
 
 export const ressourceRepartitionDesResultatsDeTest = ({
   entrepotResultatTest,
@@ -14,26 +15,28 @@ export const ressourceRepartitionDesResultatsDeTest = ({
   routeur.get(
     '/',
     middleware.aseptise('secteur', 'tailleOrganisation', 'region'),
-    async (
-      requete: Request<unknown, unknown, unknown, { secteur?: string; tailleOrganisation?: string; region?: string }>,
-      reponse: Response
-    ) => {
-      const codeSecteur = estCodeSecteur(requete.query.secteur) ? requete.query.secteur : undefined;
-      const codeRegion = estCodeRegion(requete.query.region) ? requete.query.region : undefined;
-      const tailleOrganisation = trancheEffectifParCode(requete.query.tailleOrganisation);
-      const codeTrancheEffectif = tailleOrganisation.code !== 'NN' ? tailleOrganisation.code : undefined;
-      const tousLesResultats = await entrepotResultatTest.parFiltresEnOmettantUtilisateur({
-        codeSecteur,
-        codeRegion,
-        codeTrancheEffectif,
-      });
-      if (tousLesResultats.length < adaptateurEnvironnement.repartition().nombreMinimumDeResultats()) {
-        reponse.sendStatus(204);
-        return;
+    filetRouteAsynchrone(
+      async (
+        requete: Request<unknown, unknown, unknown, { secteur?: string; tailleOrganisation?: string; region?: string }>,
+        reponse: Response
+      ) => {
+        const codeSecteur = estCodeSecteur(requete.query.secteur) ? requete.query.secteur : undefined;
+        const codeRegion = estCodeRegion(requete.query.region) ? requete.query.region : undefined;
+        const tailleOrganisation = trancheEffectifParCode(requete.query.tailleOrganisation);
+        const codeTrancheEffectif = tailleOrganisation.code !== 'NN' ? tailleOrganisation.code : undefined;
+        const tousLesResultats = await entrepotResultatTest.parFiltresEnOmettantUtilisateur({
+          codeSecteur,
+          codeRegion,
+          codeTrancheEffectif,
+        });
+        if (tousLesResultats.length < adaptateurEnvironnement.repartition().nombreMinimumDeResultats()) {
+          reponse.sendStatus(204);
+          return;
+        }
+        const repartitions = new RepartitionResultatsTest(tousLesResultats).calculeRepartitionParNiveau();
+        reponse.send(repartitions);
       }
-      const repartitions = new RepartitionResultatsTest(tousLesResultats).calculeRepartitionParNiveau();
-      reponse.send(repartitions);
-    }
+    )
   );
 
   return routeur;
