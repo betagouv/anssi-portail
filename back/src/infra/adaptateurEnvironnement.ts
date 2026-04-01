@@ -189,8 +189,8 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       cleApi: () => process.env.FINANCEMENTS_GRIST_API_KEY || '',
     }),
     gestionGuides: () => ({
-      urlTable: () => process.env.GESTION_GUIDES_GRIST_URL || '',
-      cleApi: () => process.env.GESTION_GUIDES_GRIST_API_KEY || '',
+      urlTable: () => process.env.GUIDES_TRAVAIL_GRIST_URL || '',
+      cleApi: () => process.env.GUIDES_TRAVAIL_GRIST_API_KEY || '',
     }),
     guides: () => ({
       urlTable: () => process.env.GUIDES_GRIST_URL || '',

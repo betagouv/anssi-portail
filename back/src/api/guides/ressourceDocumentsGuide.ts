@@ -26,7 +26,7 @@ const valideLesDocuments = (): RequestHandler => {
 
 const ressourceDocumentsGuide = ({
   adaptateurHachage,
-  entrepotGestionGuide,
+  entrepotGuideTravail,
   entrepotUtilisateur,
   middleware,
   cellar,
@@ -48,7 +48,7 @@ const ressourceDocumentsGuide = ({
         }
 
         const identifiantGuide = requete.params.slug as string;
-        const guide = await entrepotGestionGuide.parId(identifiantGuide);
+        const guide = await entrepotGuideTravail.parId(identifiantGuide);
         if (!guide) {
           return reponse.status(404).json({
             erreur: `Le guide "${identifiantGuide}" est introuvable`,
@@ -65,7 +65,7 @@ const ressourceDocumentsGuide = ({
           'GESTION_GUIDES'
         );
 
-        await entrepotGestionGuide.ajouteDocument(identifiantGuide, fichier.originalname, requete.body.libelleDuLien);
+        await entrepotGuideTravail.ajouteDocument(identifiantGuide, fichier.originalname, requete.body.libelleDuLien);
 
         reponse.status(201).send();
       } catch (err) {

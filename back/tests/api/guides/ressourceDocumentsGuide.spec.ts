@@ -5,7 +5,7 @@ import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { AdaptateurCellar, CleDuBucket, DocumentCellar } from '../../../src/infra/adaptateurCellar';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
-import { EntrepotGestionGuideMemoire } from '../../persistance/entrepotGestionGuideMemoire';
+import { EntrepotGuideTravailMemoire } from '../../persistance/entrepotGuideTravailMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur, fauxAdaptateurCellar } from '../fauxObjets';
@@ -13,13 +13,13 @@ import { guideZeroTrust, hectorDurant, jeanneDupont } from '../objetsPretsALEmpl
 
 describe('La ressource de gestion des documents des guides', () => {
   let serveur: Express;
-  let entrepotGestionGuide: EntrepotGestionGuideMemoire;
+  let entrepotGuideTravail: EntrepotGuideTravailMemoire;
   let entrepotUtilisateur: EntrepotUtilisateur;
   let adaptateurCellar: AdaptateurCellar;
   let cookieJeanneDupont: string;
 
   beforeEach(async () => {
-    entrepotGestionGuide = new EntrepotGestionGuideMemoire();
+    entrepotGuideTravail = new EntrepotGuideTravailMemoire();
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     adaptateurCellar = {
       ...fauxAdaptateurCellar,
@@ -31,12 +31,12 @@ describe('La ressource de gestion des documents des guides', () => {
     });
     await entrepotUtilisateur.ajoute(jeanneDupont);
     await entrepotUtilisateur.ajoute(hectorDurant);
-    await entrepotGestionGuide.ajoute(guideZeroTrust());
-    await entrepotGestionGuide.ajoute(guideZeroTrust());
+    await entrepotGuideTravail.ajoute(guideZeroTrust());
+    await entrepotGuideTravail.ajoute(guideZeroTrust());
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       cellar: adaptateurCellar,
-      entrepotGestionGuide,
+      entrepotGuideTravail: entrepotGuideTravail,
       entrepotUtilisateur,
     });
   });
@@ -80,7 +80,7 @@ describe('La ressource de gestion des documents des guides', () => {
       let idGuidePourLequelLeDocumentEstAjoute = '';
       let nomDocumentAjoute = '';
       let libelleDuLienAjoute = '';
-      entrepotGestionGuide.ajouteDocument = async (idGuide: string, nomDocument: string, libelleDuLien: string) => {
+      entrepotGuideTravail.ajouteDocument = async (idGuide: string, nomDocument: string, libelleDuLien: string) => {
         idGuidePourLequelLeDocumentEstAjoute = idGuide;
         nomDocumentAjoute = nomDocument;
         libelleDuLienAjoute = libelleDuLien;

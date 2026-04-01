@@ -9,8 +9,8 @@ import { AdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { EntrepotFavori } from '../metier/entrepotFavori';
 import { EntrepotFinancement } from '../metier/entrepotFinancement';
-import { EntrepotGestionGuide } from '../metier/entrepotGestionGuide';
 import { EntrepotGuide } from '../metier/entrepotGuide';
+import { EntrepotGuideTravail } from '../metier/entrepotGuideTravail';
 import { EntrepotResultatTest } from '../metier/entrepotResultatTest';
 import { EntrepotSessionDeGroupe } from '../metier/entrepotSessionDeGroupe';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
@@ -37,7 +37,7 @@ export type ConfigurationServeur = {
   entrepotFavori: EntrepotFavori;
   entrepotFinancement: EntrepotFinancement;
   entrepotGuide: EntrepotGuide;
-  entrepotGestionGuide: EntrepotGestionGuide;
+  entrepotGuideTravail: EntrepotGuideTravail;
   entrepotResultatTest: EntrepotResultatTest;
   entrepotSessionDeGroupe: EntrepotSessionDeGroupe;
   entrepotUtilisateur: EntrepotUtilisateur;
