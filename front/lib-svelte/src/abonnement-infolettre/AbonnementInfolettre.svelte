@@ -16,6 +16,21 @@
     console.log('envoi du formulaire');
     formulaireEnvoye = true;
   };
+
+  const adresseRetour = new URLSearchParams(window.location.search).get(
+    'adresseRetour'
+  );
+
+  let adresseRetourNettoyee: string | null;
+  if (adresseRetour) {
+    let adresseParsee =
+      URL.parse(adresseRetour) ||
+      URL.parse(adresseRetour, window.location.origin);
+
+    adresseRetourNettoyee = adresseParsee
+      ? adresseParsee.pathname + adresseParsee.search + adresseParsee.hash
+      : null;
+  }
 </script>
 
 <dsfr-container>
@@ -53,7 +68,7 @@
             hasIcon
             iconPlace="left"
             icon="arrow-go-back-line"
-            href="#"
+            href={adresseRetourNettoyee}
           ></dsfr-button>
         </div>
       {:else}
