@@ -104,7 +104,7 @@ export class Utilisateur {
     return (await this.organisation()).estAnssi();
   };
 
-  peutAjouterUnDocumentAUnGuide = () => {
+  peutManipulerLesDocumentsDUnGuide = () => {
     return this.roles.includes('GESTION_GUIDES');
   };
 }
