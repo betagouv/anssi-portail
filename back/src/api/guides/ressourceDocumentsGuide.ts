@@ -64,7 +64,7 @@ const ressourceDocumentsGuide = ({
 
         if (requete.body.genereVisuel === 'true') {
           const imageOrigine = await generateurImage.depuisPdf(fichier.buffer);
-          const image588 = await generateurImage.depuisPdf(fichier.buffer);
+          const image588 = await generateurImage.depuisPdf(fichier.buffer, { largeur: 588 });
           await cellar.depose(
             { contenu: imageOrigine, nom: `${identifiantGuide}/origine.avif`, typeDeContenu: 'image/avif' },
             'GESTION_GUIDES'
