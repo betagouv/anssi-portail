@@ -139,6 +139,6 @@ describe("L'utilisateur", () => {
       fauxAdaptateurRechercheEntreprise
     );
 
-    assert.equal(utilisateur.peutAjouterUnDocumentAUnGuide(), true);
+    assert.equal(utilisateur.peutManipulerLesDocumentsDUnGuide(), true);
   });
 });

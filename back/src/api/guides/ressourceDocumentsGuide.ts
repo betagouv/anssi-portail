@@ -42,7 +42,7 @@ const ressourceDocumentsGuide = ({
     valideLesDocuments(),
     valideRequete(schemaAjoutDocumentGuide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
-      if (!requete.utilisateur || !requete.utilisateur.peutAjouterUnDocumentAUnGuide()) {
+      if (!requete.utilisateur || !requete.utilisateur.peutManipulerLesDocumentsDUnGuide()) {
         return reponse.status(403).json({
           erreur: "Vous n'êtes pas autorisé à ajouter un document",
         });
