@@ -6,6 +6,7 @@
   let mail: string | null = null;
   let infolettreAcceptee = false;
   let erreurValidation = false;
+  let formulaireEnvoye = false;
 
   const soumetsFormulaire = () => {
     if (!infolettreAcceptee || !mail) {
@@ -13,6 +14,7 @@
       return;
     }
     console.log('envoi du formulaire');
+    formulaireEnvoye = true;
   };
 </script>
 
@@ -32,36 +34,60 @@
         </p>
       </hgroup>
 
-      <dsfr-input
-        id="email-infolettre"
-        label="Adresse email"
-        errorMessage="Cette information est obligatoire."
-        hint="Exemple : nom@exemple.fr"
-        value={mail}
-        onvaluechanged={(e: CustomEvent) => (mail = e.detail)}
-        status={mail || !erreurValidation ? 'default' : 'error'}
-        required
-      ></dsfr-input>
+      {#if formulaireEnvoye}
+        <div class="confirmation">
+          <dsfr-alert type="info" size="sm" title="Une dernière étape">
+            <p slot="description">
+              Un e-mail de confirmation vous a été envoyé. Consultez votre boîte
+              de réception pour confirmer votre abonnement à la newsletter.
+            </p>
+          </dsfr-alert>
+          <img
+            src="/assets/images/dragon-coeur-entier.svg"
+            alt="Le dragon vous remercie"
+          />
+          <dsfr-button
+            markup="a"
+            label="Revenir à l’étape précédente"
+            kind="secondary"
+            hasIcon
+            iconPlace="left"
+            icon="arrow-go-back-line"
+            href="#"
+          ></dsfr-button>
+        </div>
+      {:else}
+        <dsfr-input
+          id="email-infolettre"
+          label="Adresse email"
+          errorMessage="Cette information est obligatoire."
+          hint="Exemple : nom@exemple.fr"
+          value={mail}
+          onvaluechanged={(e: CustomEvent) => (mail = e.detail)}
+          status={mail || !erreurValidation ? 'default' : 'error'}
+          required
+        ></dsfr-input>
 
-      <dsfr-checkbox
-        id="acceptation-infolettre"
-        name="acceptation-infolettre"
-        errorMessage="Cette information est obligatoire."
-        hint="La politique de confidentialité est disponible ici."
-        value={infolettreAcceptee}
-        onvaluechanged={(e: CustomEvent) => (infolettreAcceptee = e.detail)}
-        status={infolettreAcceptee || !erreurValidation ? 'default' : 'error'}
-        required
-      >
-        <span>J'accepte de recevoir la newsletter de MesServicesCyber.</span>
-      </dsfr-checkbox>
+        <dsfr-checkbox
+          id="acceptation-infolettre"
+          name="acceptation-infolettre"
+          errorMessage="Cette information est obligatoire."
+          hint="La politique de confidentialité est disponible ici."
+          value={infolettreAcceptee}
+          onvaluechanged={(e: CustomEvent) => (infolettreAcceptee = e.detail)}
+          status={infolettreAcceptee || !erreurValidation ? 'default' : 'error'}
+          required
+        >
+          <span>J'accepte de recevoir la newsletter de MesServicesCyber.</span>
+        </dsfr-checkbox>
 
-      <dsfr-button
-        label="S'abonner à la newsletter"
-        kind="primary"
-        type="submit"
-        use:clic={soumetsFormulaire}
-      ></dsfr-button>
+        <dsfr-button
+          label="S'abonner à la newsletter"
+          kind="primary"
+          type="submit"
+          use:clic={soumetsFormulaire}
+        ></dsfr-button>
+      {/if}
     </div>
   </Formulaire>
 </dsfr-container>
@@ -105,6 +131,17 @@
 
     @include a-partir-de(md) {
       flex-direction: row;
+    }
+  }
+
+  .confirmation {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    img {
+      max-width: 340px;
+      align-self: center;
     }
   }
 </style>
