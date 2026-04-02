@@ -163,6 +163,17 @@ describe('La ressource de gestion des documents des guides', () => {
 
         assert.equal(reponse.status, 400);
       });
+
+      it('rejette les requêtes demandant de générer un visuel sans fournir de PDF', async () => {
+        const reponse = await request(serveur)
+          .post('/api/guides/zero-trust/documents')
+          .set('Cookie', [cookieJeanneDupont])
+          .field('libelleDuLien', 'Cliquez pour télécharger le document')
+          .field('genereVisuel', true)
+          .attach('document-guide', Buffer.from('un-texte'), 'document.txt');
+
+        assert.equal(reponse.status, 400);
+      });
     });
 
     describe("avec un identifiant de guide qui n'existe pas", () => {
