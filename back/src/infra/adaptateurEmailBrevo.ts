@@ -1,8 +1,8 @@
-import { adaptateurEmailConsole } from './adaptateurEmailConsole';
-import { AdaptateurEmail } from '../metier/adaptateurEmail';
 import axios from 'axios';
 import { decode } from 'html-entities';
+import { AdaptateurEmail } from '../metier/adaptateurEmail';
 import { Telephone } from '../metier/telephone';
+import { adaptateurEmailConsole } from './adaptateurEmailConsole';
 
 const enteteJSON = {
   headers: {
@@ -62,7 +62,27 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
         return Promise.reject(e);
       });
   },
-  inscrisAInfolettre: async () => {},
+  inscrisAInfolettre: async (email: string) => {
+    try {
+      await axios.post(
+        `${urlBase}/contacts`,
+        {
+          updateEnabled: true,
+          email,
+          emailBlacklisted: false,
+        },
+        enteteJSON
+      );
+    } catch (erreur: Error | unknown) {
+      if (axios.isAxiosError(erreur)) {
+        if (erreur.response?.data.message === 'Contact already exist') {
+          return undefined;
+        }
+        console.error(erreur, { 'Erreur renvoyée par API Brevo': erreur.response?.data });
+        throw erreur;
+      }
+    }
+  },
 });
 
 export const fabriqueAdaptateurEmail = () =>
