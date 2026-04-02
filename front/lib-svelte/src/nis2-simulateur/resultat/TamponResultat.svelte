@@ -52,33 +52,32 @@
   }
 
   .eligible {
-    background-color: #dffdf7ff;
+    background-color: var(--background-contrast-success);
 
     & h4,
     p,
     lab-anssi-icone {
-      color: #37635fff;
+      color: var(--text-default-success);
     }
   }
 
   .non-eligible {
-    background-color: #fef6e3ff;
+    background-color: var(--background-contrast-info);
 
-    & h4 {
-      color: #a88e26;
-    }
-
-    & p {
-      color: #7d6a20;
+    & h4,
+    p,
+    lab-anssi-icone {
+      color: var(--text-default-info);
     }
   }
 
   .incertain-UE {
-    background-color: #f6f6f6;
+    background-color: var(--background-contrast-grey);
 
     & h4,
-    p {
-      color: #666;
+    p,
+    lab-anssi-icone {
+      color: var(--text-default-grey);
     }
   }
 </style>
