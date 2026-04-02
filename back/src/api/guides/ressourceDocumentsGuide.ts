@@ -1,7 +1,7 @@
 import { NextFunction, Request, RequestHandler, Response, Router } from 'express';
 import multer from 'multer';
 import { ConfigurationServeur } from '../configurationServeur';
-import { valideCorpsRequete } from '../zod';
+import { valideRequete } from '../zod';
 import { schemaAjoutDocumentGuide } from './ressourceDocumentsGuide.schema';
 
 const valideLesDocuments = (): RequestHandler => {
@@ -39,7 +39,7 @@ const ressourceDocumentsGuide = ({
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideLesDocuments(),
-    valideCorpsRequete(schemaAjoutDocumentGuide),
+    valideRequete(schemaAjoutDocumentGuide),
     async (requete: Request, reponse: Response, suite: NextFunction) => {
       try {
         if (!requete.utilisateur || !requete.utilisateur.peutAjouterUnDocumentAUnGuide()) {

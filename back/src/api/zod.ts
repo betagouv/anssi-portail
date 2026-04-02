@@ -1,5 +1,5 @@
+import { NextFunction, Request, Response } from 'express';
 import * as z from 'zod';
-import { Request, Response, NextFunction } from 'express';
 
 export const valideCorpsRequete =
   <TZod extends z.ZodType, TBody extends z.infer<TZod>>(objet: TZod) =>
@@ -12,5 +12,13 @@ export const valideCorpsRequete =
     // On réassigne pour que les suivants récupèrent le contenu assaini par Zod.
     requete.body = resultat.data as TBody;
 
+    return suite();
+  };
+
+export const valideRequete =
+  <TZod extends z.ZodType, TReq extends z.infer<TZod>>(objet: TZod) =>
+  async (requete: Request<unknown, unknown, TReq, unknown, never>, reponse: Response, suite: NextFunction) => {
+    const resultat = objet.safeParse(requete) as z.ZodSafeParseResult<z.core.output<TZod>>;
+    if (!resultat.success) return reponse.sendStatus(400);
     return suite();
   };
