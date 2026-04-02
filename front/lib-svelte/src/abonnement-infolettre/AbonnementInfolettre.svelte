@@ -40,6 +40,9 @@
 </dsfr-container>
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
+  @use '../../../assets/styles/grille' as *;
+
   dsfr-button {
     align-self: center;
   }
@@ -56,6 +59,12 @@
     margin-top: 1.5rem;
     padding: 3.5rem 1rem;
 
+    @include a-partir-de(lg) {
+      max-width: taille-pour-colonnes(8);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     .texte-standard-md {
       margin-bottom: 0;
     }
@@ -66,5 +75,9 @@
     flex-direction: column;
     gap: 0.5rem;
     margin-bottom: 1.5rem;
+
+    @include a-partir-de(md) {
+      flex-direction: row;
+    }
   }
 </style>
