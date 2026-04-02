@@ -161,6 +161,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'associations',
     'entreprises',
     'sante',
+    'abonnement-infolettre',
   ]
     .concat(
       configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()
