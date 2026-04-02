@@ -8,14 +8,19 @@
   let infolettreAcceptee = false;
   let erreurValidation = false;
   let formulaireEnvoye = false;
+  let erreur: string | null = null;
 
   const soumetsFormulaire = async () => {
     if (!infolettreAcceptee || !mail) {
       erreurValidation = true;
       return;
     }
-    await axios.post('/api/abonnement-infolettre', { email: mail });
-    formulaireEnvoye = true;
+    try {
+      await axios.post('/api/abonnement-infolettre', { email: mail });
+      formulaireEnvoye = true;
+    } catch {
+      erreur = 'Une erreur s’est produite. Vérifiez votre adresse email.';
+    }
   };
 
   const adresseRetour = new URLSearchParams(window.location.search).get(
@@ -103,6 +108,16 @@
           type="submit"
           use:clic={soumetsFormulaire}
         ></dsfr-button>
+        {#if erreur}
+          <dsfr-alert
+            type="error"
+            size="sm"
+            title="Erreur lors de la demande d’abonnement"
+            dismissible
+          >
+            <p slot="description">{erreur}</p>
+          </dsfr-alert>
+        {/if}
       {/if}
     </div>
   </Formulaire>
