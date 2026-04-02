@@ -9,6 +9,7 @@
   let succes: boolean = $state(false);
   let erreur = $state('');
   let fichier = $state<HTMLInputElement | undefined>();
+  let genereVisuel: boolean = $state(false);
 
   const surAjoutDocument = async (event: Event): Promise<void> => {
     const target = event.target as HTMLInputElement;
@@ -19,6 +20,7 @@
     const formulaire = new FormData();
     if (nouveauDocument) {
       formulaire.append('libelleDuLien', libelleDuLien);
+      formulaire.append('genereVisuel', genereVisuel ? 'true' : 'false');
       formulaire.append('document-guide', nouveauDocument);
       try {
         await axios.post(
@@ -28,6 +30,7 @@
         identifiantGuide = '';
         libelleDuLien = '';
         nouveauDocument = undefined;
+        genereVisuel = false;
         succes = true;
         erreur = '';
         if (fichier) {
@@ -38,7 +41,13 @@
         const erreurAxios = error as AxiosError;
         if (erreurAxios.response) {
           const data = erreurAxios.response.data as { erreur: string };
-          erreur = data.erreur;
+          if (Array.isArray(data)) {
+            erreur =
+              data[0]?.message ||
+              "Une erreur est survenue lors de l'ajout du document";
+          } else {
+            erreur = data.erreur;
+          }
         } else {
           erreur = erreurAxios.message;
         }
@@ -86,6 +95,12 @@
       onvaluechanged={(e: CustomEvent) => (libelleDuLien = e.detail)}
       value={libelleDuLien}
     ></dsfr-input>
+    <dsfr-checkbox
+      id="genereVisuel"
+      label="Générer un visuel à partir du PDF (uniquement si le document est un PDF)"
+      value={genereVisuel}
+      onvaluechanged={(e: CustomEvent) => (genereVisuel = e.detail)}
+    ></dsfr-checkbox>
     <dsfr-button
       label="Ajouter"
       use:clic={ajoute}
