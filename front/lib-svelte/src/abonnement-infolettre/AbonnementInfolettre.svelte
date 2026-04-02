@@ -76,7 +76,7 @@
           id="email-infolettre"
           label="Adresse email"
           errorMessage="Cette information est obligatoire."
-          hint="Exemple : nom@exemple.fr"
+          hint="Exemple&nbsp;: nom@exemple.fr"
           value={mail}
           onvaluechanged={(e: CustomEvent) => (mail = e.detail)}
           status={mail || !erreurValidation ? 'default' : 'error'}
