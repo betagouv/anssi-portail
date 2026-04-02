@@ -23,6 +23,7 @@ import { ressourceApresAuthentificationOIDC } from './oidc/ressourceApresAuthent
 import { ressourceApresDeconnexionOIDC } from './oidc/ressourceApresDeconnexionOIDC';
 import { ressourceConnexionOIDC } from './oidc/ressourceConnexionOIDC';
 import { ressourceDeconnexionOIDC } from './oidc/ressourceDeconnexionOIDC';
+import { ressourceAbonnementInfolettre } from './ressourceAbonnementInfolettre';
 import { ressourceAnnuaireDepartements } from './ressourceAnnuaireDepartements';
 import { ressourceAnnuaireOrganisations } from './ressourceAnnuaireOrganisations';
 import { ressourceAnnuaireRegions } from './ressourceAnnuaireRegions';
@@ -53,7 +54,6 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
-import { ressourceAbonnementInfolettre } from './ressourceAbonnementInfolettre';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -162,6 +162,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'entreprises',
     'sante',
     'abonnement-infolettre',
+    'confirmation-abonnement-infolettre',
   ]
     .concat(
       configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()
