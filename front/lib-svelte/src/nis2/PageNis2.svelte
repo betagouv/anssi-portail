@@ -65,6 +65,17 @@
   {/snippet}
 </Heros>
 
+<dsfr-notice
+  title="Newsletter MesServicesCyber :"
+  hasDescription
+  desc="Restez informé des dernières actualités de la directive NIS 2 et autres actualités."
+  dismissible
+  hasLink
+  linkLabel="S’abonner"
+  linkTitle="S’abonner à la newsletter"
+  linkHref="/abonnement-infolettre?adresseRetour=/nis2"
+></dsfr-notice>
+
 <NavigationTertiaire {liens} bind:lienActif />
 
 <div class="contenu">
