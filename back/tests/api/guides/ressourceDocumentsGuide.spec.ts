@@ -4,13 +4,13 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { AdaptateurCellar, CleDuBucket, DocumentCellar } from '../../../src/infra/adaptateurCellar';
+import { GenerateurImage } from '../../../src/infra/generateurImage';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
 import { EntrepotGuideTravailMemoire } from '../../persistance/entrepotGuideTravailMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur, fauxAdaptateurCellar } from '../fauxObjets';
-import { guideZeroTrust, hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
-import { GenerateurImage } from '../../../src/infra/generateurImage';
+import { guideDevsecops, guideZeroTrust, hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
 
 describe('La ressource de gestion des documents des guides', () => {
   let serveur: Express;
@@ -38,7 +38,6 @@ describe('La ressource de gestion des documents des guides', () => {
     });
     await entrepotUtilisateur.ajoute(jeanneDupont);
     await entrepotUtilisateur.ajoute(hectorDurant);
-    await entrepotGuideTravail.ajoute(guideZeroTrust());
     await entrepotGuideTravail.ajoute(guideZeroTrust());
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
@@ -186,6 +185,62 @@ describe('La ressource de gestion des documents des guides', () => {
 
         assert.equal(reponse.status, 404);
         assert.equal(reponse.body.erreur, 'Le guide "guide-inexistant" est introuvable');
+      });
+    });
+  });
+
+  describe('sur un GET', async () => {
+    it('répond 200', async () => {
+      const reponse = await request(serveur)
+        .get('/api/guides/zero-trust/documents')
+        .set('Cookie', [cookieJeanneDupont]);
+
+      assert.equal(reponse.status, 200);
+    });
+
+    it('répond 401 si l’utilisateur n’est pas authentifié', async () => {
+      const reponse = await request(serveur).get('/api/guides/zero-trust/documents');
+
+      assert.equal(reponse.status, 401);
+    });
+
+    it("répond 403 si l’utilisateur n'a pas l'autorisation de gérer les guides", async () => {
+      const cookieHectorDurant = encodeSession({
+        email: hectorDurant.email,
+        token: 'token',
+      });
+
+      const reponse = await request(serveur)
+        .get('/api/guides/zero-trust/documents')
+        .set('Cookie', [cookieHectorDurant]);
+
+      assert.equal(reponse.status, 403);
+    });
+
+    it("répond 404 si le guide n'existe pas", async () => {
+      const reponse = await request(serveur)
+        .get('/api/guides/guide-inexistant/documents')
+        .set('Cookie', [cookieJeanneDupont]);
+
+      assert.equal(reponse.status, 404);
+    });
+
+    it('renvoie la liste des documents du guide', async () => {
+      const guide = guideDevsecops();
+      guide.listeDocuments = [
+        {
+          libelle: 'Les Essentiels de l&#039;ANSSI - DevSecOps - v1.0',
+          nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
+        },
+      ];
+      await entrepotGuideTravail.ajoute(guide);
+
+      const reponse = await request(serveur).get('/api/guides/devsecops/documents').set('Cookie', [cookieJeanneDupont]);
+
+      assert.equal(reponse.body.length, 1);
+      assert.deepEqual(reponse.body[0], {
+        libelle: 'Les Essentiels de l&#039;ANSSI - DevSecOps - v1.0',
+        nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
       });
     });
   });

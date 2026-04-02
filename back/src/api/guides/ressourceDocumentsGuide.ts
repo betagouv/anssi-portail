@@ -35,6 +35,29 @@ const ressourceDocumentsGuide = ({
 }: ConfigurationServeur) => {
   const routeur = Router();
 
+  routeur.get(
+    '/:slug/documents',
+    middleware.verifieJWT,
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
+    filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
+      if (!requete.utilisateur || !requete.utilisateur.peutManipulerLesDocumentsDUnGuide()) {
+        return reponse.status(403).json({
+          erreur: "Vous n'êtes pas autorisé à ajouter un document",
+        });
+      }
+
+      const identifiantGuide = requete.params.slug as string;
+      const guide = await entrepotGuideTravail.parId(identifiantGuide);
+      if (!guide) {
+        return reponse.status(404).json({
+          erreur: `Le guide "${identifiantGuide}" est introuvable`,
+        });
+      }
+
+      reponse.status(200).send(guide.listeDocuments ?? []);
+    })
+  );
+
   routeur.post(
     '/:slug/documents',
     middleware.verifieJWT,
