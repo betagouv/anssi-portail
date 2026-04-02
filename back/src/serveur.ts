@@ -34,6 +34,7 @@ import { EntrepotGuideTravail } from './metier/entrepotGuideTravail';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides';
+import { GenerateurImageAvif } from './infra/generateurImage';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
@@ -148,11 +149,7 @@ serviceCoherenceSecretsHachage
       entrepotExigence,
       cellar,
       serviceSanteGuides,
-      generateurImage: {
-        depuisPdf: () => {
-          throw new Error('A remplacer par une vraie implémentation');
-        },
-      },
+      generateurImage: new GenerateurImageAvif(),
     }).listen(port, () => {
       console.log(`Le serveur écoute sur le port ${port}`);
     });
