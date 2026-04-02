@@ -1,4 +1,5 @@
 <script lang="ts">
+  import axios from 'axios';
   import { clic } from '../directives/actions.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
@@ -8,12 +9,12 @@
   let erreurValidation = false;
   let formulaireEnvoye = false;
 
-  const soumetsFormulaire = () => {
+  const soumetsFormulaire = async () => {
     if (!infolettreAcceptee || !mail) {
       erreurValidation = true;
       return;
     }
-    console.log('envoi du formulaire');
+    await axios.post('/api/abonnement-infolettre', { email: mail });
     formulaireEnvoye = true;
   };
 
