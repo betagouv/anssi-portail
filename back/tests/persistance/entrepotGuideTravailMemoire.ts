@@ -1,5 +1,5 @@
 import { EntrepotGuideTravail } from '../../src/metier/entrepotGuideTravail';
-import { Guide } from '../../src/metier/guide';
+import { DocumentGuide, Guide } from '../../src/metier/guide';
 import { EntrepotMemoire } from './entrepotMemoire';
 
 export class EntrepotGuideTravailMemoire extends EntrepotMemoire<Guide> implements EntrepotGuideTravail {
@@ -7,10 +7,10 @@ export class EntrepotGuideTravailMemoire extends EntrepotMemoire<Guide> implemen
     return this.entites.find((guide) => guide.id === id);
   }
 
-  async ajouteDocument(idGuide: string, nomDocument: string, libelleDuLien: string): Promise<void> {
+  async sauvegardeDocuments(idGuide: string, documents: DocumentGuide[]): Promise<void> {
     const guide = await this.parId(idGuide);
     if (guide) {
-      guide.listeDocuments.push({ libelle: libelleDuLien, nomFichier: nomDocument });
+      guide.listeDocuments = documents;
     }
   }
 }

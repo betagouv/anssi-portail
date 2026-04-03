@@ -1,6 +1,6 @@
-import { Guide } from './guide';
+import { DocumentGuide, Guide } from './guide';
 
 export interface EntrepotGuideTravail {
   parId(id: string): Promise<Guide | undefined>;
-  ajouteDocument(idGuide: string, nomDocument: string, libelleDuLien: string): Promise<void>;
+  sauvegardeDocuments(idGuide: string, documents: DocumentGuide[]): Promise<void>;
 }
