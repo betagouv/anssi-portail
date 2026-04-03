@@ -2,23 +2,34 @@
   import axios from 'axios';
   import { clic } from '../directives/actions.svelte';
 
-  type Document = { libelle: string; nomFichier: string; chemin: string };
+  export type Document = {
+    libelle: string;
+    nomFichier: string;
+    chemin?: string;
+  };
 
   type Props = {
     identifiantGuide: string;
+    nouveauxDocuments: Document[];
   };
 
-  let { identifiantGuide = $bindable() }: Props = $props();
+  let {
+    identifiantGuide = $bindable(),
+    nouveauxDocuments = $bindable(),
+  }: Props = $props();
 
-  let documents = $state<Document[]>([]);
+  let documentsDeLApi = $state<Document[]>([]);
   let succes: boolean = $state(false);
   let erreur = $state('');
 
   const chargeLesDocumentsDepuisGrist = async () => {
+    documentsDeLApi = [];
+    if (identifiantGuide === '') return;
     const reponse = await axios.get(
       `/api/guides/${identifiantGuide}/documents`
     );
-    documents = reponse.data;
+    documentsDeLApi = reponse.data;
+    nouveauxDocuments = [];
   };
 
   const supprimeLeDocument = async (nomFichier: string) => {
@@ -40,7 +51,7 @@
     if (identifiantGuide) {
       chargeLesDocumentsDepuisGrist();
     } else {
-      documents = [];
+      documentsDeLApi = [];
     }
   });
 
@@ -63,7 +74,7 @@
     <dsfr-alert
       type="success"
       size="sm"
-      title="Document supprimé avec succès"
+      title="Document en cours de suppression"
       dismissible
     >
       <p slot="description">
@@ -82,7 +93,7 @@
     </dsfr-alert>
   {/if}
   {#if identifiantGuide}
-    {#each documents as { libelle, nomFichier, chemin } (nomFichier)}
+    {#each documentsDeLApi as { libelle, nomFichier, chemin }, id (id)}
       <div class="document">
         <p>
           <dsfr-link href={chemin} blank label={nomFichier}></dsfr-link>
@@ -95,6 +106,22 @@
           kind="tertiary"
           label="Supprimer ce document"
           use:clic={() => supprimeLeDocument(nomFichier)}
+        ></dsfr-button>
+      </div>
+    {/each}
+    {#each nouveauxDocuments as { libelle, nomFichier }, id (id)}
+      <div class="document">
+        <p>
+          <dsfr-link href="#" blank label={nomFichier}></dsfr-link>
+        </p>
+        <p>{libelle}</p>
+        <dsfr-button
+          disabled
+          class="supprimer"
+          type="button"
+          size="md"
+          kind="tertiary"
+          label="Ajout en cours"
         ></dsfr-button>
       </div>
     {/each}

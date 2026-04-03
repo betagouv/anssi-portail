@@ -1,9 +1,14 @@
 <script lang="ts">
   import AjoutDocument from './AjoutDocument.svelte';
-  import ListeDesDocuments from './ListeDesDocuments.svelte';
+  import ListeDesDocuments, { type Document } from './ListeDesDocuments.svelte';
   import SelectionIdentifiantGuide from './SelectionIdentifiantGuide.svelte';
 
   let identifiantGuide: string = $state('');
+  let nouveauxDocuments = $state<Document[]>([]);
+
+  const surAjout = async (libelle: string, nomFichier: string) => {
+    nouveauxDocuments.push({ libelle, nomFichier });
+  };
 </script>
 
 <dsfr-container>
@@ -11,8 +16,8 @@
     <h2>Guide</h2>
     <SelectionIdentifiantGuide bind:valeur={identifiantGuide} />
   </div>
-  <ListeDesDocuments {identifiantGuide} />
-  <AjoutDocument {identifiantGuide} />
+  <ListeDesDocuments {identifiantGuide} bind:nouveauxDocuments />
+  <AjoutDocument {identifiantGuide} {surAjout} />
 </dsfr-container>
 
 <style lang="scss">
