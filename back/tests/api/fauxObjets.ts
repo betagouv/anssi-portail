@@ -222,6 +222,7 @@ export const fauxAdaptateurCellar: AdaptateurCellar = {
   get: async () => undefined,
   getStream: async () => undefined,
   depose: async () => undefined,
+  supprime: async () => undefined,
 };
 
 export const fauxAdaptateurEmail: AdaptateurEmail = {

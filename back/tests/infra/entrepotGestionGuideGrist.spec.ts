@@ -54,5 +54,16 @@ describe("L'entrepot de gestion de guide Grist", () => {
         assert.deepEqual(guide1!.listeDocuments, [{ libelle: 'Le guide', nomFichier: 'guide.pdf' }]);
       });
     });
+
+    it('sait supprimer un document à un guide', async () => {
+      const entrepotGuideTravailGrist = prepareEntrepotGristAvecEnregistrements([
+        new ConstructeurGuideGrist().avecLIdentifiant('guide1').avecLeDocument('Le guide', 'guide.pdf').construis(),
+      ]);
+
+      await entrepotGuideTravailGrist.sauvegardeDocuments('guide1', []);
+
+      const guide1 = await entrepotGuideTravailGrist.parId('guide1');
+      assert.deepEqual(guide1!.listeDocuments, []);
+    });
   });
 });

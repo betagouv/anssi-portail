@@ -6,11 +6,13 @@ import { creeServeur } from '../../../src/api/msc';
 import { AdaptateurCellar, CleDuBucket, DocumentCellar } from '../../../src/infra/adaptateurCellar';
 import { GenerateurImage } from '../../../src/infra/generateurImage';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
+import { Guide } from '../../../src/metier/guide';
 import { EntrepotGuideTravailMemoire } from '../../persistance/entrepotGuideTravailMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur, fauxAdaptateurCellar } from '../fauxObjets';
-import { guideDevsecops, guideZeroTrust, hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
+import * as fabrique from '../objetsPretsALEmploi';
+import { guideDevsecops, hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
 
 describe('La ressource de gestion des documents des guides', () => {
   let serveur: Express;
@@ -19,6 +21,7 @@ describe('La ressource de gestion des documents des guides', () => {
   let adaptateurCellar: AdaptateurCellar;
   let generateurImage: GenerateurImage;
   let cookieJeanneDupont: string;
+  let guideZeroTrust: Guide;
 
   beforeEach(async () => {
     entrepotGuideTravail = new EntrepotGuideTravailMemoire();
@@ -31,6 +34,7 @@ describe('La ressource de gestion des documents des guides', () => {
     adaptateurCellar = {
       ...fauxAdaptateurCellar,
       depose: async () => undefined,
+      supprime: async () => undefined,
     };
     cookieJeanneDupont = encodeSession({
       email: jeanneDupont.email,
@@ -38,7 +42,8 @@ describe('La ressource de gestion des documents des guides', () => {
     });
     await entrepotUtilisateur.ajoute(jeanneDupont);
     await entrepotUtilisateur.ajoute(hectorDurant);
-    await entrepotGuideTravail.ajoute(guideZeroTrust());
+    guideZeroTrust = fabrique.guideZeroTrust();
+    await entrepotGuideTravail.ajoute(guideZeroTrust);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       cellar: adaptateurCellar,
@@ -242,6 +247,100 @@ describe('La ressource de gestion des documents des guides', () => {
         libelle: 'Les Essentiels de l&#039;ANSSI - DevSecOps - v1.0',
         nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
       });
+    });
+  });
+
+  describe('sur un DELETE', () => {
+    it('répond 204', async () => {
+      guideZeroTrust.listeDocuments = [
+        {
+          libelle: 'Mon fichier',
+          nomFichier: 'mon-fichier.pdf',
+        },
+      ];
+      await entrepotGuideTravail.ajoute(guideZeroTrust);
+      const reponse = await request(serveur)
+        .delete('/api/guides/zero-trust/documents/mon-fichier.pdf')
+        .set('Cookie', [cookieJeanneDupont]);
+
+      assert.equal(reponse.status, 204);
+    });
+
+    it('répond 401 si l’utilisateur n’est pas authentifié', async () => {
+      const reponse = await request(serveur).delete('/api/guides/zero-trust/documents/mon-fichier.pdf');
+
+      assert.equal(reponse.status, 401);
+    });
+
+    it("répond 403 si l’utilisateur n'a pas l'autorisation de gérer les guides", async () => {
+      const cookieHectorDurant = encodeSession({
+        email: hectorDurant.email,
+        token: 'token',
+      });
+
+      const reponse = await request(serveur)
+        .delete('/api/guides/zero-trust/documents/mon-fichier.pdf')
+        .set('Cookie', [cookieHectorDurant]);
+
+      assert.equal(reponse.status, 403);
+    });
+
+    it("répond 404 si le guide n'existe pas", async () => {
+      const reponse = await request(serveur)
+        .delete('/api/guides/guide-inexistant/documents/mon-fichier.pdf')
+        .set('Cookie', [cookieJeanneDupont]);
+
+      assert.equal(reponse.status, 404);
+    });
+
+    it("répond 404 si le document n'existe pas", async () => {
+      const reponse = await request(serveur)
+        .delete('/api/guides/zero-trust/documents/fichier-inexistant.pdf')
+        .set('Cookie', [cookieJeanneDupont]);
+
+      assert.equal(reponse.status, 404);
+    });
+
+    it('supprime le document spécifié de la liste des documents du guide dans Grist', async () => {
+      const guide = guideDevsecops();
+      guide.listeDocuments = [
+        {
+          libelle: 'Les Essentiels de l&#039;ANSSI - DevSecOps - v1.0',
+          nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
+        },
+      ];
+      await entrepotGuideTravail.ajoute(guide);
+
+      await request(serveur)
+        .delete('/api/guides/devsecops/documents/anssi_essentiels_devsecops_v1.0.pdf')
+        .set('Cookie', [cookieJeanneDupont]);
+
+      const guideMisAJour = await entrepotGuideTravail.parId('devsecops');
+      assert.equal(guideMisAJour?.listeDocuments.length, 0);
+    });
+
+    it('supprime le document spécifié dans le cellar', async () => {
+      let nomDuFichierSupprime = '';
+      let cleDuBucketFournie = '';
+      adaptateurCellar.supprime = async (nomDuFichier: string, cleDuBucket: CleDuBucket) => {
+        nomDuFichierSupprime = nomDuFichier;
+        cleDuBucketFournie = cleDuBucket;
+      };
+      const guide = guideDevsecops();
+      guide.listeDocuments = [
+        {
+          libelle: 'Les Essentiels de l&#039;ANSSI - DevSecOps - v1.0',
+          nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
+        },
+      ];
+      await entrepotGuideTravail.ajoute(guide);
+
+      await request(serveur)
+        .delete('/api/guides/devsecops/documents/anssi_essentiels_devsecops_v1.0.pdf')
+        .set('Cookie', [cookieJeanneDupont]);
+
+      assert.equal(cleDuBucketFournie, 'GESTION_GUIDES');
+      assert.equal(nomDuFichierSupprime, 'anssi_essentiels_devsecops_v1.0.pdf');
     });
   });
 });
