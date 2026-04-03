@@ -93,13 +93,19 @@
           id="acceptation-infolettre"
           name="acceptation-infolettre"
           errorMessage="Cette information est obligatoire."
-          hint="La politique de confidentialité est disponible ici."
           value={infolettreAcceptee}
           onvaluechanged={(e: CustomEvent) => (infolettreAcceptee = e.detail)}
           status={infolettreAcceptee || !erreurValidation ? 'default' : 'error'}
           required
         >
           <span>J'accepte de recevoir la newsletter de MesServicesCyber.</span>
+          <span slot="hint">
+            La politique de confidentialité est disponible <dsfr-link
+              href="/confidentialite"
+              label="ici"
+              neutral
+            ></dsfr-link>.
+          </span>
         </dsfr-checkbox>
 
         <dsfr-button
