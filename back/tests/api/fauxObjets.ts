@@ -22,11 +22,14 @@ import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravail
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
+import { FournisseurChemin } from '../../src/api/fournisseurChemin';
 
-export const fauxFournisseurDeChemin = {
+export const fauxFournisseurDeChemin: FournisseurChemin = {
   cheminPageJekyll: (_: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
   cheminProduitJekyll: (_a: string, _b: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
   ressourceDeBase: (_: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
+  cheminCsvNis2Simulateur: () =>
+    join(process.cwd(), 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
 };
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
