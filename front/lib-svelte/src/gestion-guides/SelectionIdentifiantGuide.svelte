@@ -39,7 +39,6 @@
   };
 
   const rechercheSuggestions = async () => {
-    console.log('Recherche de suggestions pour :', saisieEnCours);
     if (saisieEnCours.length < 2) {
       suggestionsVisibles = false;
       suggestions = [];
@@ -53,8 +52,7 @@
   };
 
   const choisisIdentifiant = (identifiantGuide: string) => {
-    valeur = identifiantGuide;
-    console.log('Identifiant choisi :', identifiantGuide);
+    valeur = saisieEnCours = identifiantGuide;
     suggestionsVisibles = false;
   };
 
@@ -66,10 +64,11 @@
   });
 </script>
 
-<div class="conteneur-selection-organisation">
+<div class="conteneur-selection-guide">
+  <label for="selection-id-guide">Identifiant du guide</label>
   <ChampTexte
     id="selection-id-guide"
-    nom="organisation"
+    nom="guide"
     bind:valeur={saisieEnCours}
     on:input={() => avecTemporisation(rechercheSuggestions)}
     aideSaisie="ex : guide-pour-une-formation-sur-la-cybersecurite-des-systemes-industriels"
@@ -92,7 +91,7 @@
 </div>
 
 <style lang="scss">
-  .conteneur-selection-organisation {
+  .conteneur-selection-guide {
     position: relative;
   }
 
@@ -116,5 +115,9 @@
   .option {
     padding: 4px 0;
     cursor: pointer;
+  }
+
+  label {
+    margin-bottom: 8px;
   }
 </style>

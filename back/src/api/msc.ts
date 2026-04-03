@@ -184,7 +184,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/guides/:slug', ressourcePagesJekyll(configurationServeur, 'guides'));
 
-  ['ma-maturite', 'favoris', 'services-anssi', 'gestion-guides/ajout-document'].forEach((page) =>
+  ['ma-maturite', 'favoris', 'services-anssi', 'gestion-guides'].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyllConnectees(configurationServeur, page))
   );
 

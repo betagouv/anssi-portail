@@ -54,8 +54,7 @@ export default defineConfig({
           'src/main-carrousel-des-interlocuteurs.ts',
         'equipe-biz-dev': 'src/main-equipe-biz-dev.ts',
         sante: 'src/main-sante.ts',
-        'gestion-guides-ajout-document':
-          'src/main-gestion-guides-ajout-document.ts',
+        'gestion-guides': 'src/main-gestion-guides.ts',
         sentry: 'src/main-sentry.ts',
         'confirmation-abonnement-infolettre':
           'src/main-confirmation-abonnement-infolettre.ts',
