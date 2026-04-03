@@ -1,0 +1,138 @@
+<script lang="ts">
+  import axios from 'axios';
+  import { clic } from '../directives/actions.svelte';
+
+  type Document = { libelle: string; nomFichier: string };
+
+  type Props = {
+    identifiantGuide: string;
+  };
+
+  let { identifiantGuide = $bindable() }: Props = $props();
+
+  let documents = $state<Document[]>([]);
+  let succes: boolean = $state(false);
+  let erreur = $state('');
+
+  const chargeLesDocumentsDepuisGrist = async () => {
+    const reponse = await axios.get(
+      `/api/guides/${identifiantGuide}/documents`
+    );
+    documents = reponse.data;
+  };
+
+  const supprimeLeDocument = async (nomFichier: string) => {
+    try {
+      await axios.delete(
+        `/api/guides/${identifiantGuide}/documents/${nomFichier}`
+      );
+      await chargeLesDocumentsDepuisGrist();
+      succes = true;
+      erreur = '';
+    } catch (error) {
+      console.error('Erreur lors de la suppression du document :', error);
+      succes = false;
+      erreur = 'Erreur lors de la suppression du document';
+    }
+  };
+
+  $effect(() => {
+    if (identifiantGuide) {
+      chargeLesDocumentsDepuisGrist();
+    } else {
+      documents = [];
+    }
+  });
+
+  $effect(() => {
+    const resetAlerte = () =>
+      setTimeout(() => {
+        succes = false;
+        erreur = '';
+      }, 5000);
+    if (succes || erreur) {
+      const timer = resetAlerte();
+      return () => clearTimeout(timer);
+    }
+  });
+</script>
+
+<div class="documents">
+  <h3>Documents associés</h3>
+  {#if succes}
+    <dsfr-alert
+      type="success"
+      size="sm"
+      title="Document supprimé avec succès"
+      dismissible
+    >
+      <p slot="description">
+        Vous pouvez ajouter un autre document ou continuer votre navigation sur
+        le site.
+      </p>
+    </dsfr-alert>
+  {:else if erreur}
+    <dsfr-alert
+      type="error"
+      size="sm"
+      title="Erreur lors de la suppression du document"
+      dismissible
+    >
+      <p slot="description">{erreur}</p>
+    </dsfr-alert>
+  {/if}
+  {#if identifiantGuide}
+    {#each documents as document (document.nomFichier)}
+      <div class="document">
+        <h6>{document.nomFichier}</h6>
+        <p>{document.libelle}</p>
+        <dsfr-button
+          class="supprimer"
+          type="button"
+          size="md"
+          kind="tertiary"
+          label="Supprimer ce document"
+          use:clic={() => supprimeLeDocument(document.nomFichier)}
+        ></dsfr-button>
+      </div>
+    {/each}
+  {:else}
+    <p>Sélectionnez un guide pour voir les documents associés</p>
+  {/if}
+</div>
+
+<style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
+  @use '../../../assets/styles/grille' as *;
+
+  .documents {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 16px 0;
+    max-width: taille-pour-colonnes(8);
+    margin: auto;
+  }
+
+  h3,
+  h6,
+  p {
+    margin: 0;
+  }
+
+  .document {
+    display: grid;
+
+    @include a-partir-de(lg) {
+      align-items: start;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: 1fr fr;
+      gap: 16px;
+
+      dsfr-button {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+      }
+    }
+  }
+</style>
