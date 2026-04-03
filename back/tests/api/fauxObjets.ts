@@ -145,9 +145,9 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   }),
   cellar: () => ({
     region: () => '',
-    url: () => '',
+    url: () => 'https://notre-cellar/',
     gestionGuides: () => ({
-      nomDuBucket: () => '',
+      nomDuBucket: () => 'gestion-guides',
     }),
   }),
   matomo: () => ({

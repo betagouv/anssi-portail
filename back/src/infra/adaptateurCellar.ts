@@ -134,7 +134,7 @@ const selectionneURLCellarLecturePourUnBucket = (
   }
 };
 
-const selectionneConfigCellarDeposePourUnBucket = (
+export const selectionneConfigCellarDeposePourUnBucket = (
   adaptateurEnvironnement: AdaptateurEnvironnement,
   cleDeBucket: CleDuBucket
 ): ConfigDeposeCellar => {
