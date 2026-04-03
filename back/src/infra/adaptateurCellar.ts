@@ -1,8 +1,8 @@
+import { DeleteObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { fromEnv } from '@aws-sdk/credential-providers';
 import axios, { AxiosResponse } from 'axios';
 import { Readable } from 'node:stream';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
-import { fromEnv } from '@aws-sdk/credential-providers';
 
 export type DocumentCellar = {
   contenu: Buffer;
@@ -30,6 +30,7 @@ export interface AdaptateurCellar {
   get(nomDuFichier: string, cleDuBucket: CleDuBucket): Promise<DocumentCellar | undefined>;
   getStream(nomDuFichier: string, cleDuBucket: CleDuBucket): Promise<FluxCellar | undefined>;
   existe(nomDuFichier: string, cleDuBucket: CleDuBucket): Promise<boolean>;
+  supprime(nomDuFichier: string, cleDuBucket: CleDuBucket): Promise<void>;
 }
 
 export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnement): AdaptateurCellar => ({
@@ -97,6 +98,21 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
         Bucket: config.nomDuBucket,
         Body: document.contenu,
         Key: document.nom,
+      })
+    );
+  },
+
+  async supprime(nomDuFichier: string, cleDuBucket: CleDuBucket): Promise<void> {
+    const config = selectionneConfigCellarDeposePourUnBucket(adaptateurEnvironnement, cleDuBucket);
+    const s3Client = new S3Client({
+      endpoint: config.url,
+      region: config.region,
+      credentials: config.credentials,
+    });
+    await s3Client.send(
+      new DeleteObjectCommand({
+        Bucket: config.nomDuBucket,
+        Key: nomDuFichier,
       })
     );
   },

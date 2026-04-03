@@ -112,6 +112,31 @@ const ressourceDocumentsGuide = ({
     })
   );
 
+  routeur.delete(
+    '/:slug/documents/:nomFichier',
+    middleware.verifieJWT,
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
+    valideAutorisation(),
+    recupereLeGuide(entrepotGuideTravail),
+    filetRouteAsynchrone(async (requete, reponse) => {
+      const guide = reponse.locals.guide as Guide;
+
+      const document = guide.listeDocuments.find((doc) => doc.nomFichier === requete.params.nomFichier);
+      if (!document) {
+        return reponse.status(404).json({
+          erreur: `Le document "${requete.params.nomFichier}" n'existe pas"`,
+        });
+      }
+
+      const listeDocuments = guide.listeDocuments.filter((doc) => doc.nomFichier !== requete.params.nomFichier);
+      await entrepotGuideTravail.sauvegardeDocuments(guide.id, listeDocuments);
+
+      await cellar.supprime(document.nomFichier, 'GESTION_GUIDES');
+
+      reponse.status(204).send();
+    })
+  );
+
   return routeur;
 };
 
