@@ -47,6 +47,7 @@ export class ConstructeurGuideGrist {
 
   avecLeDocument(libelle: string, nomFichier: string) {
     this.documents.push({ libelle, nomFichier });
+    this.listeDocuments.push({ libelle, nomFichier });
     return this;
   }
 

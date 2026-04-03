@@ -103,7 +103,10 @@ const ressourceDocumentsGuide = ({
         );
       }
 
-      await entrepotGuideTravail.ajouteDocument(identifiantGuide, fichier.originalname, requete.body.libelleDuLien);
+      const guide = reponse.locals.guide as Guide;
+      const nouvelleListe = [...guide.listeDocuments];
+      nouvelleListe.push({ libelle: requete.body.libelleDuLien, nomFichier: fichier.originalname });
+      await entrepotGuideTravail.sauvegardeDocuments(identifiantGuide, nouvelleListe);
 
       reponse.status(201).send();
     })

@@ -46,7 +46,9 @@ describe("L'entrepot de gestion de guide Grist", () => {
           new ConstructeurGuideGrist().avecLIdentifiant('guide1').construis(),
         ]);
 
-        await entrepotGuideTravailGrist.ajouteDocument('guide1', 'guide.pdf', 'Le guide');
+        await entrepotGuideTravailGrist.sauvegardeDocuments('guide1', [
+          { nomFichier: 'guide.pdf', libelle: 'Le guide' },
+        ]);
 
         const guide1 = await entrepotGuideTravailGrist.parId('guide1');
         assert.deepEqual(guide1!.listeDocuments, [{ libelle: 'Le guide', nomFichier: 'guide.pdf' }]);

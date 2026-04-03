@@ -72,18 +72,8 @@ export class EntrepotGuideTravailGrist extends EntrepotGrist<GuideGrist> impleme
     return guidesGrist.records.map(this.convertisGuideGrist)[0];
   }
 
-  async ajouteDocument(idGuide: string, nomFichier: string, libelleDuLien: string): Promise<void> {
-    const guide = await this.parId(idGuide, { sansCache: true });
-    const listeDocuments = guide?.listeDocuments ?? [];
-    listeDocuments.push({
-      libelle: libelleDuLien,
-      nomFichier: nomFichier,
-    });
-    await this.sauvegardeDocuments(idGuide, listeDocuments);
-  }
-
-  private async sauvegardeDocuments(idGuide: string, documents: { libelle: string; nomFichier: string }[]) {
-    this.modifieEnregistrementGrist('Identifiant', idGuide, {
+  async sauvegardeDocuments(idGuide: string, documents: { libelle: string; nomFichier: string }[]) {
+    await this.modifieEnregistrementGrist('Identifiant', idGuide, {
       Liste_documents: JSON.stringify(documents),
     });
   }

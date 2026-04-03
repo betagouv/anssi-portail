@@ -82,6 +82,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
       return false;
     }
   },
+
   async depose(document: DocumentCellar, cleDuBucket: CleDuBucket): Promise<void> {
     const config = selectionneConfigCellarDeposePourUnBucket(adaptateurEnvironnement, cleDuBucket);
     const s3Client = new S3Client({
