@@ -3,6 +3,8 @@
   import { clic } from '../directives/actions.svelte';
   import SelectionIdentifiantGuide from './SelectionIdentifiantGuide.svelte';
 
+  type Document = { libelle: string; nomFichier: string };
+
   let nouveauDocument: File | undefined = $state(undefined);
   let libelleDuLien: string = $state('');
   let identifiantGuide: string = $state('');
@@ -10,6 +12,7 @@
   let erreur = $state('');
   let fichier = $state<HTMLInputElement | undefined>();
   let genereVisuel: boolean = $state(false);
+  let documents = $state<Document[]>([]);
 
   const surAjoutDocument = async (event: Event): Promise<void> => {
     const target = event.target as HTMLInputElement;
@@ -54,11 +57,45 @@
       }
     }
   };
+
+  const chargeLesDocumentsDepuisGrist = async () => {
+    const reponse = await axios.get(
+      `/api/guides/${identifiantGuide}/documents`
+    );
+    documents = reponse.data;
+  };
+
+  $effect(() => {
+    if (identifiantGuide) {
+      chargeLesDocumentsDepuisGrist();
+    } else {
+      documents = [];
+    }
+  });
 </script>
 
 <dsfr-container>
+  <div class="guide">
+    <h2>Guide</h2>
+    <SelectionIdentifiantGuide bind:valeur={identifiantGuide} />
+  </div>
+  <div class="documents">
+    <h3>Documents associés</h3>
+    {#if identifiantGuide}
+      <ul>
+        {#each documents as document (document.nomFichier)}
+          <li>
+            <h6 class="fichier">{document.nomFichier}</h6>
+            <span class="libelle">{document.libelle}</span>
+          </li>
+        {/each}
+      </ul>
+    {:else}
+      <p>Sélectionnez un guide pour voir les documents associés</p>
+    {/if}
+  </div>
   <div class="formulaire-ajout">
-    <h2>Ajout d'un document de guide</h2>
+    <h3>Ajout d'un nouveau document</h3>
     {#if succes}
       <dsfr-alert
         type="success"
@@ -81,7 +118,6 @@
         <p slot="description">{erreur}</p>
       </dsfr-alert>
     {/if}
-    <SelectionIdentifiantGuide bind:valeur={identifiantGuide} />
     <input
       bind:this={fichier}
       type="file"
@@ -112,12 +148,32 @@
 <style lang="scss">
   @use '../../../assets/styles/grille' as *;
 
+  .guide,
+  .documents,
   .formulaire-ajout {
     display: flex;
     flex-direction: column;
     gap: 32px;
-    padding: 72px 0;
+    padding: 16px 0;
     max-width: taille-pour-colonnes(8);
     margin: auto;
+  }
+
+  .guide {
+    padding: 72px 0 16px;
+  }
+
+  .formulaire-ajout {
+    padding: 16px 0 72px;
+  }
+
+  h2,
+  h3,
+  p {
+    margin: 0;
+  }
+
+  .fichier {
+    margin: 0;
   }
 </style>

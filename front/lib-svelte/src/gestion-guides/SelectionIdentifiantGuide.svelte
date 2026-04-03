@@ -13,6 +13,8 @@
 
   let { valeur = $bindable() }: Props = $props();
 
+  let saisieEnCours = $state('');
+
   let listeIdentifiants: string[] = $state([]);
   let minuteur: ReturnType<typeof setTimeout>;
   let suggestions: string[] = $state([]);
@@ -37,18 +39,22 @@
   };
 
   const rechercheSuggestions = async () => {
-    if (valeur.length < 2) {
+    console.log('Recherche de suggestions pour :', saisieEnCours);
+    if (saisieEnCours.length < 2) {
       suggestionsVisibles = false;
       suggestions = [];
       return;
     }
 
-    suggestions = listeIdentifiants.filter((id) => rechercheVague(id, valeur));
+    suggestions = listeIdentifiants.filter((id) =>
+      rechercheVague(id, saisieEnCours)
+    );
     suggestionsVisibles = suggestions.length > 0;
   };
 
   const choisisIdentifiant = (identifiantGuide: string) => {
     valeur = identifiantGuide;
+    console.log('Identifiant choisi :', identifiantGuide);
     suggestionsVisibles = false;
   };
 
@@ -64,7 +70,7 @@
   <ChampTexte
     id="selection-id-guide"
     nom="organisation"
-    bind:valeur
+    bind:valeur={saisieEnCours}
     on:input={() => avecTemporisation(rechercheSuggestions)}
     aideSaisie="ex : guide-pour-une-formation-sur-la-cybersecurite-des-systemes-industriels"
     autocomplete="off"
