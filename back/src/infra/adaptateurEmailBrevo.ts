@@ -70,6 +70,7 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
           updateEnabled: true,
           email,
           emailBlacklisted: false,
+          listIds: [process.env.BREVO_ID_LISTE_ATTENTE_INFOLETTRE],
         },
         enteteJSON
       );
