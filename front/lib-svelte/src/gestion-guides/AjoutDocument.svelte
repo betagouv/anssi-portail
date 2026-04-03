@@ -4,9 +4,10 @@
 
   type Props = {
     identifiantGuide: string;
+    surAjout: (libelle: string, nomFichier: string) => Promise<void>;
   };
 
-  let { identifiantGuide = $bindable() }: Props = $props();
+  const { identifiantGuide, surAjout }: Props = $props();
 
   let nouveauDocument: File | undefined = $state(undefined);
   let libelleDuLien: string = $state('');
@@ -31,7 +32,7 @@
           `/api/guides/${identifiantGuide}/documents`,
           formulaire
         );
-        identifiantGuide = '';
+        await surAjout(libelleDuLien, nouveauDocument.name);
         libelleDuLien = '';
         nouveauDocument = undefined;
         genereVisuel = false;
@@ -78,7 +79,7 @@
     <dsfr-alert
       type="success"
       size="sm"
-      title="Document ajouté avec succès"
+      title="Document en cours d'ajout"
       dismissible
     >
       <p slot="description">
