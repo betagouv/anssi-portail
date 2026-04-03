@@ -1,5 +1,7 @@
 import { NextFunction, Request, RequestHandler, Response, Router } from 'express';
 import multer from 'multer';
+import { join } from 'path';
+import { selectionneConfigCellarDeposePourUnBucket } from '../../infra/adaptateurCellar';
 import { EntrepotGuideTravail } from '../../metier/entrepotGuideTravail';
 import { Guide } from '../../metier/guide';
 import { ConfigurationServeur } from '../configurationServeur';
@@ -53,6 +55,7 @@ const recupereLeGuide = (entrepotGuideTravail: EntrepotGuideTravail) => {
 };
 
 const ressourceDocumentsGuide = ({
+  adaptateurEnvironnement,
   adaptateurHachage,
   entrepotGuideTravail,
   entrepotUtilisateur,
@@ -70,7 +73,14 @@ const ressourceDocumentsGuide = ({
     recupereLeGuide(entrepotGuideTravail),
     filetRouteAsynchrone(async (_requete, reponse) => {
       const guide = reponse.locals.guide as Guide;
-      reponse.status(200).send(guide.listeDocuments ?? []);
+      const configurationCellar = selectionneConfigCellarDeposePourUnBucket(adaptateurEnvironnement, 'GESTION_GUIDES');
+      const urlBase = configurationCellar.url;
+      const documents = guide.listeDocuments.map((doc) => ({
+        libelle: doc.libelle,
+        nomFichier: doc.nomFichier,
+        chemin: new URL(join(configurationCellar.nomDuBucket, doc.nomFichier), urlBase),
+      }));
+      reponse.status(200).send(documents ?? []);
     })
   );
 

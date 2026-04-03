@@ -2,7 +2,7 @@
   import axios from 'axios';
   import { clic } from '../directives/actions.svelte';
 
-  type Document = { libelle: string; nomFichier: string };
+  type Document = { libelle: string; nomFichier: string; chemin: string };
 
   type Props = {
     identifiantGuide: string;
@@ -82,17 +82,19 @@
     </dsfr-alert>
   {/if}
   {#if identifiantGuide}
-    {#each documents as document (document.nomFichier)}
+    {#each documents as { libelle, nomFichier, chemin } (nomFichier)}
       <div class="document">
-        <h6>{document.nomFichier}</h6>
-        <p>{document.libelle}</p>
+        <p>
+          <dsfr-link href={chemin} blank label={nomFichier}></dsfr-link>
+        </p>
+        <p>{libelle}</p>
         <dsfr-button
           class="supprimer"
           type="button"
           size="md"
           kind="tertiary"
           label="Supprimer ce document"
-          use:clic={() => supprimeLeDocument(document.nomFichier)}
+          use:clic={() => supprimeLeDocument(nomFichier)}
         ></dsfr-button>
       </div>
     {/each}
@@ -115,13 +117,16 @@
   }
 
   h3,
-  h6,
   p {
     margin: 0;
   }
 
   .document {
     display: grid;
+
+    p:first-of-type {
+      font-weight: bold;
+    }
 
     @include a-partir-de(lg) {
       align-items: start;

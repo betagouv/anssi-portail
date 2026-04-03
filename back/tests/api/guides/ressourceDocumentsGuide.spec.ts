@@ -246,6 +246,7 @@ describe('La ressource de gestion des documents des guides', () => {
       assert.deepEqual(reponse.body[0], {
         libelle: 'Les Essentiels de l&#039;ANSSI - DevSecOps - v1.0',
         nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
+        chemin: 'https://notre-cellar/gestion-guides/anssi_essentiels_devsecops_v1.0.pdf',
       });
     });
   });
