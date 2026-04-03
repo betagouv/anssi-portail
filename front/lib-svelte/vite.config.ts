@@ -57,6 +57,9 @@ export default defineConfig({
         'gestion-guides-ajout-document':
           'src/main-gestion-guides-ajout-document.ts',
         sentry: 'src/main-sentry.ts',
+        'confirmation-abonnement-infolettre':
+          'src/main-confirmation-abonnement-infolettre.ts',
+        'abonnement-infolettre': 'src/main-abonnement-infolettre.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
