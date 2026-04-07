@@ -10,8 +10,6 @@ export class ConstructeurGuideGrist {
   private langue: 'FR' | 'EN' | null = null;
   private collections: string[] = [];
   private readonly documents: DocumentGuide[] = [];
-  private documentsBruts: string | null = null;
-  private datePublication: number | null = null;
   private dateMiseAJour: number | null = null;
   private thematique: string | null = null;
   private readonly besoins: string[] = [];
@@ -56,15 +54,6 @@ export class ConstructeurGuideGrist {
     return this;
   }
 
-  avecLaChaineDeDocument(chaineDocument: string) {
-    this.documentsBruts = chaineDocument;
-    return this;
-  }
-
-  avecLaDateDePublication(datePublication: number) {
-    this.datePublication = datePublication;
-    return this;
-  }
   avecLaDateDeMiseAJour(dateMiseAJour: number) {
     this.dateMiseAJour = dateMiseAJour;
     return this;
@@ -90,12 +79,10 @@ export class ConstructeurGuideGrist {
         Image: this.image,
         Langue: this.langue,
         Collections: this.collections,
-        Documents: this.documentsBruts
-          ? this.documentsBruts
-          : this.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n'),
         Date_de_mise_a_jour_s_: this.dateMiseAJour ? this.dateMiseAJour : null,
         Thematique: this.thematique,
         Besoins_cyber: this.besoins.length ? ['L', ...this.besoins] : [],
+        Liste_documents: JSON.stringify(this.documents),
       },
     } satisfies GuideGrist;
   }
