@@ -128,6 +128,25 @@ describe('La ressource de gestion des documents des guides', () => {
       assert.equal(fichiersFournis[1].length, 8);
     });
 
+    it('répond 400 si un fichier de même nom existe déjà pour ce guide', async () => {
+      const guide = guideDevsecops();
+      guide.listeDocuments = [
+        {
+          libelle: 'Les Essentiels de l&#039;ANSSI - DevSecOps - v1.0',
+          nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
+        },
+      ];
+      await entrepotGuideTravail.ajoute(guide);
+
+      const reponse = await request(serveur)
+        .post('/api/guides/devsecops/documents')
+        .set('Cookie', [cookieJeanneDupont])
+        .field('libelleDuLien', 'Cliquez pour télécharger le document')
+        .attach('document-guide', Buffer.from('un-texte'), 'anssi_essentiels_devsecops_v1.0.pdf');
+
+      assert.equal(reponse.status, 400);
+    });
+
     it('répond 401 si l’utilisateur n’est pas authentifié', async () => {
       const reponse = await request(serveur).post('/api/guides/zero-trust/documents');
 

@@ -42,6 +42,10 @@ export class Guide {
   }
 
   estPublie = (): boolean => this.dateMiseAJour <= new Date();
+
+  possedeLeDocument = (nomFichier: string): boolean => {
+    return this.listeDocuments.some((document) => document.nomFichier === nomFichier);
+  };
 }
 
 export type DocumentGuide = {

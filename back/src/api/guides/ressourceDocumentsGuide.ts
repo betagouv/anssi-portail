@@ -99,6 +99,13 @@ const ressourceDocumentsGuide = ({
         'GESTION_GUIDES'
       );
 
+      const guide = reponse.locals.guide as Guide;
+      if (guide.possedeLeDocument(fichier.originalname)) {
+        return reponse.status(400).json({
+          erreur: `Le document "${fichier.originalname}" existe déjà pour ce guide`,
+        });
+      }
+
       const identifiantGuide = reponse.locals.guide.id as string;
       if (requete.body.genereVisuel === 'true') {
         const imageOrigine = await generateurImage.depuisPdf(fichier.buffer);
@@ -113,7 +120,6 @@ const ressourceDocumentsGuide = ({
         );
       }
 
-      const guide = reponse.locals.guide as Guide;
       const nouvelleListe = [...guide.listeDocuments];
       nouvelleListe.push({ libelle: requete.body.libelleDuLien, nomFichier: fichier.originalname });
       await entrepotGuideTravail.sauvegardeDocuments(identifiantGuide, nouvelleListe);
