@@ -15,7 +15,6 @@ export type GuideGrist = {
     Description: string | null;
     Langue: 'FR' | 'EN' | null;
     Collections: string[];
-    Documents: string;
     Liste_documents: string | null;
     Anciens_documents: string | null;
     Date_de_mise_a_jour_s_: number | null;
@@ -61,18 +60,6 @@ export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements Ent
       description: guideGrist.fields.Description ?? '',
       langue: guideGrist.fields.Langue ?? 'FR',
       collections: aseptiseListeGrist(guideGrist.fields.Collections),
-      documents: guideGrist.fields.Documents
-        ? guideGrist.fields.Documents.split('\n')
-            .filter((l) => !!l)
-            .map((ligne) => {
-              const indexDernierDeuxPoints = ligne.lastIndexOf(':');
-
-              return {
-                libelle: ligne.substring(0, indexDernierDeuxPoints).trim(),
-                nomFichier: ligne.substring(indexDernierDeuxPoints + 1).trim(),
-              };
-            })
-        : [],
       listeDocuments: JSON.parse(guideGrist.fields.Liste_documents || '[]'),
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour_s_
         ? new Date(guideGrist.fields.Date_de_mise_a_jour_s_ * 1000)

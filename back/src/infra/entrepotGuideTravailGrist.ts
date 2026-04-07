@@ -41,18 +41,6 @@ export class EntrepotGuideTravailGrist extends EntrepotGrist<GuideGrist> impleme
       description: guideGrist.fields.Description ?? '',
       langue: guideGrist.fields.Langue ?? 'FR',
       collections: aseptiseListeGrist(guideGrist.fields.Collections),
-      documents: guideGrist.fields.Documents
-        ? guideGrist.fields.Documents.split('\n')
-            .filter((l) => !!l)
-            .map((ligne) => {
-              const indexDernierDeuxPoints = ligne.lastIndexOf(':');
-
-              return {
-                libelle: ligne.substring(0, indexDernierDeuxPoints).trim(),
-                nomFichier: ligne.substring(indexDernierDeuxPoints + 1).trim(),
-              };
-            })
-        : [],
       listeDocuments: JSON.parse(guideGrist.fields.Liste_documents || '[]'),
       nomsAnciensDocuments: JSON.parse(guideGrist.fields.Anciens_documents || '[]'),
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour_s_

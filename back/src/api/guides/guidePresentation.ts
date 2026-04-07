@@ -8,7 +8,7 @@ export const guidePresentation = (adaptateurEnvironnement: AdaptateurEnvironneme
     petite: `${adaptateurEnvironnement.urlCellar().guides()}${guide.id}/588.avif`,
     grande: `${adaptateurEnvironnement.urlCellar().guides()}${guide.id}/origine.avif`,
   },
-  documents: guide.documents.map((document) => ({
+  documents: guide.listeDocuments.map((document) => ({
     libelle: document.libelle,
     url: `${adaptateurEnvironnement.urlBaseMSC()}/documents-guides/${document.nomFichier}`,
   })),

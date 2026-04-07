@@ -40,7 +40,7 @@ describe('Le service de calcul de la santé des guildes', () => {
 
   it('retourne la santé de tous les documents', async () => {
     const guideAvecPlusieursDocuments = guideZeroTrust();
-    guideAvecPlusieursDocuments.documents = [
+    guideAvecPlusieursDocuments.listeDocuments = [
       { libelle: '', nomFichier: 'doc1.pdf' },
       { libelle: '', nomFichier: 'doc2.pdf' },
     ];
@@ -59,7 +59,7 @@ describe('Le service de calcul de la santé des guildes', () => {
     };
 
     const guideAvecPlusieursDocuments = guideZeroTrust();
-    guideAvecPlusieursDocuments.documents = [
+    guideAvecPlusieursDocuments.listeDocuments = [
       { libelle: '', nomFichier: 'doc1.pdf' },
       { libelle: '', nomFichier: 'doc2.pdf' },
     ];

@@ -31,7 +31,7 @@ export const fabriqueServiceSanteGuides = (adaptateurCellar: AdaptateurCellar): 
 
   const santeDocuments = async (guide: Guide): Promise<SanteDocumentGuide[]> =>
     await Promise.all(
-      guide.documents.map(async (document) => ({
+      guide.listeDocuments.map(async (document) => ({
         nom: document.nomFichier,
         etat: booleanVersEtat(await adaptateurCellar.existe(document.nomFichier, 'GUIDES')),
       }))

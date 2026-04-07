@@ -96,9 +96,9 @@ describe('La ressource de gestion des documents des guides', () => {
         .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
       const monGuide = await entrepotGuideTravail.parId('zero-trust');
-      assert.equal(monGuide?.listeDocuments.length, 1);
-      assert.equal(monGuide?.listeDocuments[0].libelle, 'Cliquez pour télécharger le document');
-      assert.equal(monGuide?.listeDocuments[0].nomFichier, 'document.pdf');
+      assert.equal(monGuide?.listeDocuments.length, 2);
+      assert.equal(monGuide?.listeDocuments[1].libelle, 'Cliquez pour télécharger le document');
+      assert.equal(monGuide?.listeDocuments[1].nomFichier, 'document.pdf');
     });
 
     it('génère les illustrations et les dépose', async () => {
