@@ -8,9 +8,7 @@ export class ConstructeurGuideGrist {
   private description: string | null = null;
   private langue: 'FR' | 'EN' | null = null;
   private collections: string[] = [];
-  private readonly documents: DocumentGuide[] = [];
   private readonly listeDocuments: DocumentGuide[] = [];
-  private documentsBruts: string | null = null;
   private dateMiseAJour: number | null = null;
   private thematique: string | null = null;
   private readonly besoins: string[] = [];
@@ -46,13 +44,7 @@ export class ConstructeurGuideGrist {
   }
 
   avecLeDocument(libelle: string, nomFichier: string) {
-    this.documents.push({ libelle, nomFichier });
     this.listeDocuments.push({ libelle, nomFichier });
-    return this;
-  }
-
-  avecLaChaineDeDocument(chaineDocument: string) {
-    this.documentsBruts = chaineDocument;
     return this;
   }
 
@@ -80,9 +72,6 @@ export class ConstructeurGuideGrist {
         Description: this.description,
         Langue: this.langue,
         Collections: this.collections,
-        Documents: this.documentsBruts
-          ? this.documentsBruts
-          : this.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n'),
         Liste_documents: JSON.stringify(this.listeDocuments),
         Anciens_documents: null,
         Date_de_mise_a_jour_s_: this.dateMiseAJour,

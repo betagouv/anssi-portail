@@ -98,7 +98,7 @@ describe("L'entrepot de guide Grist", () => {
     assert.equal(premierGuide.description, '<p>Description du premier guide</p>');
     assert.equal(premierGuide.langue, 'FR');
     assert.deepEqual(premierGuide.collections, ['Les essentiels']);
-    assert.deepEqual(premierGuide.documents, []);
+    assert.deepEqual(premierGuide.listeDocuments, []);
 
     const deuxiemeGuide = guides[1];
     assert.equal(deuxiemeGuide.id, 'guide2');
@@ -106,7 +106,7 @@ describe("L'entrepot de guide Grist", () => {
     assert.equal(deuxiemeGuide.description, '<p>Description du deuxième guide</p>');
     assert.equal(deuxiemeGuide.langue, 'FR');
     assert.deepEqual(deuxiemeGuide.collections, ['Les essentiels']);
-    assert.deepEqual(deuxiemeGuide.documents, []);
+    assert.deepEqual(deuxiemeGuide.listeDocuments, []);
   });
 
   it('sait récupérer un guide avec son id', async () => {
@@ -131,40 +131,9 @@ describe("L'entrepot de guide Grist", () => {
 
       const guide1 = await entrepotGuideGrist.parId('guide1');
 
-      assert.deepEqual(guide1!.documents, [
+      assert.deepEqual(guide1!.listeDocuments, [
         { libelle: 'Le guide', nomFichier: 'guide.pdf' },
         { libelle: 'Le guide obsolète', nomFichier: 'guide-obsolete.pdf' },
-      ]);
-    });
-
-    it('ignore les lignes vides', async () => {
-      const entrepotGuideGrist = prepareEntrepotGristAvecEnregistrements([
-        new ConstructeurGuideGrist()
-          .avecLIdentifiant('guide1')
-          .avecLaChaineDeDocument('Le guide : guide.pdf\n')
-          .construis(),
-      ]);
-
-      const guide1 = await entrepotGuideGrist.parId('guide1');
-
-      assert.deepEqual(guide1!.documents, [{ libelle: 'Le guide', nomFichier: 'guide.pdf' }]);
-    });
-
-    it('gère les libellés avec un caractère deux-points', async () => {
-      const entrepotGuideGrist = prepareEntrepotGristAvecEnregistrements([
-        new ConstructeurGuideGrist()
-          .avecLIdentifiant('guide1')
-          .avecLaChaineDeDocument('Le guide : la base de la cybersécurité : guide_base_cybersecu.pdf\n')
-          .construis(),
-      ]);
-
-      const guide1 = await entrepotGuideGrist.parId('guide1');
-
-      assert.deepEqual(guide1!.documents, [
-        {
-          libelle: 'Le guide : la base de la cybersécurité',
-          nomFichier: 'guide_base_cybersecu.pdf',
-        },
       ]);
     });
   });
