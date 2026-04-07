@@ -7,9 +7,8 @@
       description:
         'Réalisez un test en ligne pour déterminer si votre entité est régulée par la directive NIS 2 et à quelle catégorie elle appartient.',
       lien: {
-        href: 'https://monespacenis2.cyber.gouv.fr/simulateur',
+        href: '/simulateur-nis2',
         texte: 'Débuter le test',
-        target: '_blank',
       },
       illustration: {
         lien: '/assets/images/personne-reflechissant-devant-un-ecran.svg',
