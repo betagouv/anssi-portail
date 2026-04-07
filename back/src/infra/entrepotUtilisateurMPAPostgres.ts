@@ -2,7 +2,7 @@ import Knex from 'knex';
 import pThrottle from 'p-throttle';
 import config from '../../knexfile';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { Organisation, Utilisateur } from '../metier/utilisateur';
+import { Organisation, Role, Utilisateur } from '../metier/utilisateur';
 import { AdaptateurChiffrement } from './adaptateurChiffrement';
 import { AdaptateurHachage } from './adaptateurHachage';
 import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi';
@@ -51,7 +51,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
       donnees: donneesChiffrees,
       id_liste_favoris: utilisateur.idListeFavoris,
       email_hache: this.adaptateurHachage.hache(utilisateur.email),
-      roles: utilisateur.roles,
+      roles: this.knex.raw('?::jsonb', JSON.stringify(utilisateur.roles)),
     };
   }
 
@@ -106,7 +106,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         siretEntite: organisation.siret,
         idListeFavoris: utilisateur.id_liste_favoris,
         organisation: new Organisation({ ...organisation, codeActivite }),
-        roles: utilisateur.roles,
+        roles: utilisateur.roles as unknown as Role[],
       },
       this.adaptateurRechercheEntreprise
     );
