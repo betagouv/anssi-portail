@@ -72,7 +72,7 @@ export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements Ent
               };
             })
         : [],
-      listeDocuments: JSON.parse(guideGrist.fields.Liste_documents ?? '[]'),
+      listeDocuments: JSON.parse(guideGrist.fields.Liste_documents || '[]'),
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour_s_
         ? new Date(guideGrist.fields.Date_de_mise_a_jour_s_ * 1000)
         : new Date(),
