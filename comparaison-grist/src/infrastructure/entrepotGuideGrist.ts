@@ -17,10 +17,10 @@ export type GuideGrist = {
     Image: string | null;
     Langue: 'FR' | 'EN' | null;
     Collections: string[];
-    Documents: string;
     Date_de_mise_a_jour_s_: number | null;
     Thematique: string | null;
     Besoins_cyber: string[];
+    Liste_documents: string;
   };
 };
 
@@ -79,18 +79,7 @@ export class EntrepotGuideGrist implements EntrepotGuide {
       nomImage: guideGrist.fields.Image ?? null,
       langue: guideGrist.fields.Langue ?? 'FR',
       collections: this.aseptiseListe(guideGrist.fields.Collections),
-      documents: guideGrist.fields.Documents
-        ? guideGrist.fields.Documents.split('\n')
-            .filter((l) => !!l)
-            .map((ligne) => {
-              const indexDernierDeuxPoints = ligne.lastIndexOf(':');
-
-              return {
-                libelle: ligne.substring(0, indexDernierDeuxPoints).trim(),
-                nomFichier: ligne.substring(indexDernierDeuxPoints + 1).trim(),
-              };
-            })
-        : [],
+      documents: guideGrist.fields.Liste_documents ? JSON.parse(guideGrist.fields.Liste_documents) : [],
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour_s_
         ? new Date(guideGrist.fields.Date_de_mise_a_jour_s_ * 1000)
         : new Date(),
