@@ -5,13 +5,10 @@
   export let exigence: ExigenceNis2;
 </script>
 
-<dsfr-badges-group badges={badgesExigence(exigence)} size="sm"
-></dsfr-badges-group>
+<dsfr-badges-group badges={badgesExigence(exigence)} size="sm"></dsfr-badges-group>
 <dsfr-tags-group
   tags={[
-    ...(exigence.objectifSecurite
-      ? [{ label: exigence.objectifSecurite }]
-      : []),
+    ...(exigence.objectifSecurite ? [{ label: exigence.objectifSecurite }] : []),
     { label: exigence.thematique },
     { label: exigence.reference },
   ]}

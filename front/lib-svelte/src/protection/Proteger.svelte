@@ -10,9 +10,7 @@
 
 <dsfr-container class="proteger">
   <div class="introduction">
-    <h2>
-      Découvrez les risques pour votre organisation en cas de cyberattaque
-    </h2>
+    <h2>Découvrez les risques pour votre organisation en cas de cyberattaque</h2>
     <!-- Les sous-titres sont intégrés dans la vidéo -->
     <video
       id="video-risques"

@@ -2,17 +2,9 @@ export const DATE_DERNIERE_FERMETURE_CLE = 'dateDerniereFermeture';
 export const DATE_DERNIER_AVIS_DONNE = 'dateDernierAvis';
 export const DATE_DEBUT_SESSION = 'datePremiereVisite';
 
-export const extraitDateDepuisNavigateur = ({
-  cle,
-  storage,
-}: {
-  cle: string;
-  storage: Storage;
-}): Date | undefined => {
+export const extraitDateDepuisNavigateur = ({ cle, storage }: { cle: string; storage: Storage }): Date | undefined => {
   const datePremiereVisiteEnregistree = new Date(storage.getItem(cle) ?? '');
-  return isNaN(datePremiereVisiteEnregistree.getTime())
-    ? undefined
-    : datePremiereVisiteEnregistree;
+  return isNaN(datePremiereVisiteEnregistree.getTime()) ? undefined : datePremiereVisiteEnregistree;
 };
 
 export interface EntrepotAvisUtilisateur {
@@ -22,9 +14,7 @@ export interface EntrepotAvisUtilisateur {
   modifieDateDebutSession: (date: Date) => void;
 }
 
-export class EntrepotNavigateurAvisUtilisateur
-  implements EntrepotAvisUtilisateur
-{
+export class EntrepotNavigateurAvisUtilisateur implements EntrepotAvisUtilisateur {
   dateDernierAvis = () =>
     extraitDateDepuisNavigateur({
       storage: localStorage,
@@ -54,8 +44,7 @@ export class EntrepotNavigateurAvisUtilisateur
   }
 }
 
-export const entrepotNavigateurAvisUtilisateur =
-  new EntrepotNavigateurAvisUtilisateur();
+export const entrepotNavigateurAvisUtilisateur = new EntrepotNavigateurAvisUtilisateur();
 
 export class ControleAvisUtilisateur {
   private readonly UNE_JOURNEE_EN_MILLISECONDE = 1000 * 60 * 60 * 24;
@@ -69,23 +58,19 @@ export class ControleAvisUtilisateur {
     dureeMinimumEnSecondes?: string;
     entrepotAvisUtilisateur: EntrepotAvisUtilisateur;
   }) {
-    this.dureeMinimumEnSecondes = dureeMinimumEnSecondes
-      ? Number(dureeMinimumEnSecondes)
-      : 20;
+    this.dureeMinimumEnSecondes = dureeMinimumEnSecondes ? Number(dureeMinimumEnSecondes) : 20;
     this.entrepotAvisUtilisateur = entrepotAvisUtilisateur;
   }
 
   proposeAvisUtilisteur = (): boolean => {
     const dateDernierAvis = this.entrepotAvisUtilisateur.dateDernierAvis();
-    const dateDerniereFermeture =
-      this.entrepotAvisUtilisateur.dateDerniereFermetureAvis();
+    const dateDerniereFermeture = this.entrepotAvisUtilisateur.dateDerniereFermetureAvis();
     if (dateDernierAvis) {
       return false;
     }
     if (
       dateDerniereFermeture &&
-      dateDerniereFermeture.getTime() >=
-        new Date().getTime() - this.UNE_JOURNEE_EN_MILLISECONDE
+      dateDerniereFermeture.getTime() >= new Date().getTime() - this.UNE_JOURNEE_EN_MILLISECONDE
     ) {
       return false;
     }
@@ -100,9 +85,6 @@ export class ControleAvisUtilisateur {
       this.entrepotAvisUtilisateur.modifieDateDebutSession(maintenant);
       return this.dureeMinimumEnSecondes;
     }
-    return (
-      this.dureeMinimumEnSecondes -
-      (maintenant.getTime() - datePremiereVisite.getTime()) / 1000
-    );
+    return this.dureeMinimumEnSecondes - (maintenant.getTime() - datePremiereVisite.getTime()) / 1000;
   };
 }

@@ -12,11 +12,7 @@
 <section class="chapeau fond-sombre">
   <div class="contenu-section">
     {#if ariane}
-      <FilAriane
-        feuille={ariane}
-        branche={arianeBranche}
-        brancheConnectee={arianeBrancheConnectee}
-      />
+      <FilAriane feuille={ariane} branche={arianeBranche} brancheConnectee={arianeBrancheConnectee} />
     {/if}
     <h1 class="alternatif-xs-ns">{titre}</h1>
     <p class="texte-chapo-xl-ns">{description}</p>

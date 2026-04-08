@@ -1,8 +1,8 @@
 import js from '@eslint/js';
 import svelte from 'eslint-plugin-svelte';
 import { defineConfig } from 'eslint/config';
-import ts from 'typescript-eslint';
 import globals from 'globals';
+import ts from 'typescript-eslint';
 import svelteConfig from './svelte.config.js';
 
 export default defineConfig(
@@ -18,6 +18,9 @@ export default defineConfig(
         ...globals.browser,
         ...globals.node,
       },
+      parserOptions: {
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
   },
   {
@@ -30,6 +33,12 @@ export default defineConfig(
         tsconfigRootDir: import.meta.dirname,
         svelteConfig,
       },
+    },
+  },
+  {
+    files: ['**/*.cjs'],
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
     },
   }
 );

@@ -6,13 +6,7 @@ import { rechercheParLangue } from './rechercheParLangue.store';
 import { rechercheParBesoin } from '../rechercheParBesoin.store';
 
 export const guidesFiltres = derived(
-  [
-    guidesStore,
-    rechercheTextuelle,
-    rechercheParLangue,
-    rechercheParCollection,
-    rechercheParBesoin,
-  ],
+  [guidesStore, rechercheTextuelle, rechercheParLangue, rechercheParCollection, rechercheParBesoin],
   ([guidesStore]) => {
     const resultats = guidesStore
       .filter(rechercheTextuelle.ok)

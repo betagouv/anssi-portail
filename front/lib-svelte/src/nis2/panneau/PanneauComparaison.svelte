@@ -18,18 +18,13 @@
   }: Props = $props();
 
   const inverseComparaison = () => {
-    sensComparaison =
-      sensComparaison === 'NIS2_VERS_CIBLE'
-        ? 'SOURCE_VERS_NIS2'
-        : 'NIS2_VERS_CIBLE';
+    sensComparaison = sensComparaison === 'NIS2_VERS_CIBLE' ? 'SOURCE_VERS_NIS2' : 'NIS2_VERS_CIBLE';
   };
 
   const optionsReferentiels = $derived([
     { label: 'ISO 2700x', value: 'ISO' },
     { label: 'Annexe au Règlement d’exécution 2024/2690', value: 'AE' },
-    ...(featureFlagNis2CyFun23
-      ? [{ label: 'CyFun 2023', value: 'CyFun23' }]
-      : []),
+    ...(featureFlagNis2CyFun23 ? [{ label: 'CyFun 2023', value: 'CyFun23' }] : []),
   ]);
 
   const selectionneLeReferentiel = (referentiel: ReferentielSelectionne) => {
@@ -42,14 +37,11 @@
     <div class="comparaison-libelle">
       <p class="texte-standard-md">Comparaison entre référentiels d'exigence</p>
       <p class="texte-mention-xs">
-        Comparez les exigences issues du référentiel cyber français (ReCyF)
-        applicables à NIS&nbsp;2 à celles d'autres référentiels.
+        Comparez les exigences issues du référentiel cyber français (ReCyF) applicables à NIS&nbsp;2 à celles d'autres
+        référentiels.
       </p>
     </div>
-    <div
-      class="selecteurs"
-      class:inverse={sensComparaison === 'SOURCE_VERS_NIS2'}
-    >
+    <div class="selecteurs" class:inverse={sensComparaison === 'SOURCE_VERS_NIS2'}>
       <dsfr-select
         id="referentielNIS2"
         label=""
@@ -80,10 +72,7 @@
   </div>
   {#if estBureau}
     <div class="actions">
-      <BoutonReinitialisation
-        bind:referentielSelectionne
-        bind:sensComparaison
-      />
+      <BoutonReinitialisation bind:referentielSelectionne bind:sensComparaison />
     </div>
   {/if}
 </div>

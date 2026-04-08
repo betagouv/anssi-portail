@@ -11,8 +11,4 @@
   }));
 </script>
 
-<SelecteurSimple
-  {options}
-  bind:valeurSeclectionne={secteur}
-  optionDefautSelectionnable
-/>
+<SelecteurSimple {options} bind:valeurSeclectionne={secteur} optionDefautSelectionnable />

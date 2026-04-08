@@ -38,17 +38,10 @@
 </script>
 
 <Etape>
-  <dsfr-stepper
-    title={TitresEtapes['typeStructure']}
-    current-step="3"
-    step-count="6"
-    hide-details="true"
+  <dsfr-stepper title={TitresEtapes['typeStructure']} current-step="3" step-count="6" hide-details="true"
   ></dsfr-stepper>
 
-  <dsfr-radios-group
-    legend="Quel type de structure qualifie votre entité ?"
-    radios={options}
-    onvaluechanged={choisis}
+  <dsfr-radios-group legend="Quel type de structure qualifie votre entité ?" radios={options} onvaluechanged={choisis}
   ></dsfr-radios-group>
 
   <dsfr-highlight
@@ -57,9 +50,5 @@
             administrations publiques."
   ></dsfr-highlight>
 
-  <PrecedentSuivant
-    message="Sélectionnez une réponse"
-    onsuivant={valide}
-    suivantdisabled={reponse === undefined}
-  />
+  <PrecedentSuivant message="Sélectionnez une réponse" onsuivant={valide} suivantdisabled={reponse === undefined} />
 </Etape>

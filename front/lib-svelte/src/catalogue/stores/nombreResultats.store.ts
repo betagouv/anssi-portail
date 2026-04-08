@@ -8,43 +8,39 @@ type NombreResultats = {
   parSource: Partial<Record<Source, number>>;
 };
 
-export const nombreResultats = derived<
-  [typeof catalogueStore],
-  NombreResultats
->([catalogueStore], ([$catalogueStore]) => {
-  const creeObjetDepuisEnum = <T>(
-    type: { [s: string]: T },
-    calculNombre: (valeur: T) => number
-  ) => Object.fromEntries(Object.values(type).map((f) => [f, calculNombre(f)]));
+export const nombreResultats = derived<[typeof catalogueStore], NombreResultats>(
+  [catalogueStore],
+  ([$catalogueStore]) => {
+    const creeObjetDepuisEnum = <T>(type: { [s: string]: T }, calculNombre: (valeur: T) => number) =>
+      Object.fromEntries(Object.values(type).map((f) => [f, calculNombre(f)]));
 
-  const nombreParDroitAcces = (droitAcces: DroitAcces) =>
-    $catalogueStore.items.filter(
-      (item) => item.droitsAcces && item.droitsAcces.includes(droitAcces)
-    ).length;
+    const nombreParDroitAcces = (droitAcces: DroitAcces) =>
+      $catalogueStore.items.filter((item) => item.droitsAcces && item.droitsAcces.includes(droitAcces)).length;
 
-  const nombreParTypologie = (typologie: Typologie) =>
-    $catalogueStore.items.filter((item) => item.typologie === typologie).length;
+    const nombreParTypologie = (typologie: Typologie) =>
+      $catalogueStore.items.filter((item) => item.typologie === typologie).length;
 
-  const nombreParSource = (source: Source) =>
-    $catalogueStore.items.filter((item) => {
-      if (!item.sources) return false;
-      switch (source) {
-        case Source.PARTENAIRES:
-          return !item.sources.includes(Source.ANSSI);
-        case Source.ANSSI_TOUTES:
-          return item.sources.includes(Source.ANSSI);
-        case Source.ANSSI: {
-          const secondaire = item.sources.find((s) => s !== Source.ANSSI);
-          return !secondaire;
+    const nombreParSource = (source: Source) =>
+      $catalogueStore.items.filter((item) => {
+        if (!item.sources) return false;
+        switch (source) {
+          case Source.PARTENAIRES:
+            return !item.sources.includes(Source.ANSSI);
+          case Source.ANSSI_TOUTES:
+            return item.sources.includes(Source.ANSSI);
+          case Source.ANSSI: {
+            const secondaire = item.sources.find((s) => s !== Source.ANSSI);
+            return !secondaire;
+          }
+          default:
+            return item.sources.includes(source);
         }
-        default:
-          return item.sources.includes(source);
-      }
-    }).length;
+      }).length;
 
-  return {
-    parDroitAcces: creeObjetDepuisEnum(DroitAcces, nombreParDroitAcces),
-    parTypologie: creeObjetDepuisEnum(Typologie, nombreParTypologie),
-    parSource: creeObjetDepuisEnum(Source, nombreParSource),
-  };
-});
+    return {
+      parDroitAcces: creeObjetDepuisEnum(DroitAcces, nombreParDroitAcces),
+      parTypologie: creeObjetDepuisEnum(Typologie, nombreParTypologie),
+      parSource: creeObjetDepuisEnum(Source, nombreParSource),
+    };
+  }
+);

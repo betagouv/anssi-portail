@@ -12,9 +12,7 @@ export const rechercheParSource = {
        ce qui provoque une erreur `effect_update_depth_exceeded` lorsque le composant FiltreSource est utilisé
        plusieurs fois.  */
     if (!get(selectionDeSources).includes(source)) {
-      selectionDeSources.update((etatActuel) => [
-        ...new Set([...etatActuel, source]),
-      ]);
+      selectionDeSources.update((etatActuel) => [...new Set([...etatActuel, source])]);
     }
   },
   retire: (source: Source) => {

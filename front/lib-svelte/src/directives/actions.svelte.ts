@@ -1,9 +1,6 @@
 import type { Action } from 'svelte/action';
 
-export const clic: Action<
-  HTMLElement,
-  (e: MouseEvent | KeyboardEvent) => void
-> = (
+export const clic: Action<HTMLElement, (e: MouseEvent | KeyboardEvent) => void> = (
   element: HTMLElement,
   clicOuTouchePressee: (e: MouseEvent | KeyboardEvent) => void
 ) => {

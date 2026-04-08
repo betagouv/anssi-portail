@@ -71,12 +71,8 @@
   onMount(async () => {
     const reponse = await axios.get<Statistiques>('/api/statistiques');
     mesures = reponse.data;
-    for (const [idNiveau, valeur] of Object.entries(
-      mesures.testsMaturite.parNiveau
-    )) {
-      const libelle = niveauxMaturite.find(
-        (niveau) => niveau.id === idNiveau
-      )!.label;
+    for (const [idNiveau, valeur] of Object.entries(mesures.testsMaturite.parNiveau)) {
+      const libelle = niveauxMaturite.find((niveau) => niveau.id === idNiveau)!.label;
       serieNonFiltree.push({ libelle, valeur });
     }
   });
@@ -89,16 +85,8 @@
       image="stat-utilisateurs-inscrits"
       mesure={mesures.utilisateursInscrits}
     />
-    <Tuile
-      description="Tests de maturité cyber"
-      image="stat-test-maturite"
-      mesure={mesures.testsMaturite.total}
-    />
-    <Tuile
-      description="Diagnostics cyber"
-      image="stat-diagnostics-cyber"
-      mesure={mesures.diagnosticsCyber}
-    />
+    <Tuile description="Tests de maturité cyber" image="stat-test-maturite" mesure={mesures.testsMaturite.total} />
+    <Tuile description="Diagnostics cyber" image="stat-diagnostics-cyber" mesure={mesures.diagnosticsCyber} />
     <Tuile
       description="Services et ressources consultés"
       image="stat-services-et-ressources-consultes"
@@ -109,33 +97,21 @@
     <div>
       <h2>Baromètre de la maturité cyber</h2>
       <span class="description"
-        >Répartition de la maturité cyber des organisations sur l’ensemble des
-        tests réalisés.</span
+        >Répartition de la maturité cyber des organisations sur l’ensemble des tests réalisés.</span
       >
     </div>
     <div class="filtres">
-      <p>
-        Affinez les résultats en appliquant des filtres par secteur, région ou
-        taille d’organisation.
-      </p>
+      <p>Affinez les résultats en appliquant des filtres par secteur, région ou taille d’organisation.</p>
 
       <div class="champs">
         <label class="champ-filtre">
           <span>Secteur d'activité</span>
-          <SelectSecteurActivite
-            bind:secteur
-            optionDefautIntitule="Tous les secteurs"
-            optionDefautSelectionnable
-          />
+          <SelectSecteurActivite bind:secteur optionDefautIntitule="Tous les secteurs" optionDefautSelectionnable />
         </label>
 
         <label class="champ-filtre">
           <span>Région</span>
-          <SelectRegion
-            bind:region
-            optionDefautIntitule="Toutes les régions"
-            optionDefautSelectionnable
-          />
+          <SelectRegion bind:region optionDefautIntitule="Toutes les régions" optionDefautSelectionnable />
         </label>
 
         <label class="champ-filtre">
@@ -156,14 +132,10 @@
     {:else}
       <section class="pas-assez-de-resultats">
         <div class="contenu-section">
-          <img
-            src="/assets/images/illustration-dragon-aucun-resultat.svg"
-            alt="Pas assez de résultats"
-          />
+          <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Pas assez de résultats" />
           <h4>Pas de résultat 😔</h4>
           <p>
-            Nous n’avons pas encore assez de données pour afficher une
-            comparaison fiable avec les filtres sélectionnés.
+            Nous n’avons pas encore assez de données pour afficher une comparaison fiable avec les filtres sélectionnés.
           </p>
           <lab-anssi-bouton
             on:click={reinitialiseLesFiltres}

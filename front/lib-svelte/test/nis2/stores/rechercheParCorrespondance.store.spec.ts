@@ -24,9 +24,7 @@ describe('La recherche par correspondance', () => {
     it('en rejetant une exigence comparée dont le niveau de correspondance ne correspond pas', () => {
       rechercheParCorrespondance.set('élevé');
 
-      const resultat = rechercheParCorrespondance.ok(
-        exigenceNIS2DeNiveauFaible()
-      );
+      const resultat = rechercheParCorrespondance.ok(exigenceNIS2DeNiveauFaible());
 
       expect(resultat).toBe(false);
     });
@@ -34,17 +32,13 @@ describe('La recherche par correspondance', () => {
     it('en incluant une exigence comparée dont le niveau de correspondance correspond', () => {
       rechercheParCorrespondance.set('élevé');
 
-      const resultat = rechercheParCorrespondance.ok(
-        exigenceNIS2DeNiveauEleve()
-      );
+      const resultat = rechercheParCorrespondance.ok(exigenceNIS2DeNiveauEleve());
 
       expect(resultat).toBe(true);
     });
 
     it("en incluant une exigence comparée si il n'y pas de filtre actif", () => {
-      const resultat = rechercheParCorrespondance.ok(
-        exigenceNIS2DeNiveauEleve()
-      );
+      const resultat = rechercheParCorrespondance.ok(exigenceNIS2DeNiveauEleve());
 
       expect(resultat).toBe(true);
     });
@@ -54,17 +48,13 @@ describe('La recherche par correspondance', () => {
     it('en incluant une exigence comparée dont le niveau de correspondance correspond', () => {
       rechercheParCorrespondance.set('élevé');
 
-      const resultat = rechercheParCorrespondance.ok(
-        exigenceISODeNiveauEleve()
-      );
+      const resultat = rechercheParCorrespondance.ok(exigenceISODeNiveauEleve());
 
       expect(resultat).toBe(true);
     });
 
     it("en incluant une exigence comparée si il n'y pas de filtre actif", () => {
-      const resultat = rechercheParCorrespondance.ok(
-        exigenceISODeNiveauEleve()
-      );
+      const resultat = rechercheParCorrespondance.ok(exigenceISODeNiveauEleve());
 
       expect(resultat).toBe(true);
     });

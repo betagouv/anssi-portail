@@ -12,9 +12,7 @@
   onMount(async () => {
     try {
       chargement = true;
-      const reponse = await axios.get<Guide[]>(
-        `/api${guide.id}/memes-collections`
-      );
+      const reponse = await axios.get<Guide[]>(`/api${guide.id}/memes-collections`);
       guideDeMemesCollections = reponse.data.map(guidePourCarteItem);
     } finally {
       chargement = false;

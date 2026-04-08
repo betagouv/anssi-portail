@@ -130,8 +130,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
     campus: {
       nom: 'Campus Régional de Cybersécurité et de Confiance Numérique de Nouvelle Aquitaine',
       siteWeb: 'https://www.campuscyber-na.fr/',
-      adresse:
-        'Parc Ampéris - Batiment Colibri - 3eme étage - 4 Rue Adrienne Bolland, 33600 Pessac',
+      adresse: 'Parc Ampéris - Batiment Colibri - 3eme étage - 4 Rue Adrienne Bolland, 33600 Pessac',
       email: 'contact@campuscyber-na.fr',
     },
     designation: 'région',
@@ -158,8 +157,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
   'FR-PDL': {
     CSIRT: {
       nom: 'Pays de la Loire Cyber Assistance',
-      siteWeb:
-        'https://www.paysdelaloire.fr/economie-et-innovation/entreprise/mon-organisation-subit-une-cyberattaque',
+      siteWeb: 'https://www.paysdelaloire.fr/economie-et-innovation/entreprise/mon-organisation-subit-une-cyberattaque',
       adresse: '1000 L’Occitane\n31670 Labège',
       telephone: '0 800 100 200',
     },
@@ -170,8 +168,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
     CSIRT: {
       nom: 'Urgence Cyber région Sud',
       siteWeb: 'https://urgencecyber-regionsud.fr/',
-      adresse:
-        "Maison du numérique et de l'innovation, Pl. Georges Pompidou, 83000 Toulon",
+      adresse: "Maison du numérique et de l'innovation, Pl. Georges Pompidou, 83000 Toulon",
       telephone: '0 805 036 083',
     },
     COT: { nom: 'Kevin HEYDON /Célia NOWAK', email: 'paca@ssi.gouv.fr' },
@@ -291,29 +288,26 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
   },
 };
 
-export const contactsParSecteur: Record<CodeSecteurContact, ContactSectoriel> =
-  {
-    aviation: {
-      nom: 'CERT Aviation',
-      siteWeb: 'https://www.cert-aviation.fr/',
-    },
-    'enseignement-recherche': {
-      nom: 'CERT Renater',
-      siteWeb: 'https://www.renater.fr/securite/le-cert-renater/',
-    },
-    defense: {
-      nom: 'CERT Entreprise Défense (CERT ED)',
-      siteWeb:
-        'https://www.defense.gouv.fr/drsd/ressources-entreprises/cert-entreprises-defense',
-    },
-    maritime: { nom: 'CERT Maritime', siteWeb: 'https://www.m-cert.fr/' },
-    sante: {
-      nom: 'CERT Santé',
-      siteWeb: 'https://cyberveille.esante.gouv.fr/',
-    },
-    social: {
-      nom: 'CERT Social',
-      siteWeb:
-        'https://www.assurance-maladie.ameli.fr/pages-d-informations-legales/cert-social',
-    },
-  };
+export const contactsParSecteur: Record<CodeSecteurContact, ContactSectoriel> = {
+  aviation: {
+    nom: 'CERT Aviation',
+    siteWeb: 'https://www.cert-aviation.fr/',
+  },
+  'enseignement-recherche': {
+    nom: 'CERT Renater',
+    siteWeb: 'https://www.renater.fr/securite/le-cert-renater/',
+  },
+  defense: {
+    nom: 'CERT Entreprise Défense (CERT ED)',
+    siteWeb: 'https://www.defense.gouv.fr/drsd/ressources-entreprises/cert-entreprises-defense',
+  },
+  maritime: { nom: 'CERT Maritime', siteWeb: 'https://www.m-cert.fr/' },
+  sante: {
+    nom: 'CERT Santé',
+    siteWeb: 'https://cyberveille.esante.gouv.fr/',
+  },
+  social: {
+    nom: 'CERT Social',
+    siteWeb: 'https://www.assurance-maladie.ameli.fr/pages-d-informations-legales/cert-social',
+  },
+};

@@ -4,10 +4,7 @@
   import Icone from '../ui/Icone.svelte';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import DialogueSortieDiagnostic from './DialogueSortieDiagnostic.svelte';
-  import type {
-    CorpsAPIDemandeAide,
-    DonneesFormulaireDemandeAide,
-  } from './DonneesFormulaireDemandeAide';
+  import type { CorpsAPIDemandeAide, DonneesFormulaireDemandeAide } from './DonneesFormulaireDemandeAide';
   import FoireAuxQuestions from './FoireAuxQuestions.svelte';
   import FormulaireDemandeAide from './FormulaireDemandeAide.svelte';
   import IllustrationCyberDepart from './IllustrationCyberDepart.svelte';
@@ -37,29 +34,18 @@
     };
 
     if (localStorage.getItem('sortieDiagnosticAffichee') === null) {
-      setTimeout(
-        () => body.addEventListener('mousemove', ecouteSortieSouris),
-        7000
-      );
+      setTimeout(() => body.addEventListener('mousemove', ecouteSortieSouris), 7000);
     }
   });
 
-  const soumetsFormulaire = async (
-    e: CustomEvent<DonneesFormulaireDemandeAide>
-  ) => {
+  const soumetsFormulaire = async (e: CustomEvent<DonneesFormulaireDemandeAide>) => {
     formulaireSoumis = true;
     if (!formulaireDemandeAide.estValide()) return;
 
     try {
       enCoursEnvoi = true;
 
-      const {
-        email,
-        cguSontValidees,
-        emailUtilisateurMAC,
-        entite,
-        identifiantAidant,
-      } = e.detail;
+      const { email, cguSontValidees, emailUtilisateurMAC, entite, identifiantAidant } = e.detail;
       const corps: CorpsAPIDemandeAide = {
         ...(origine && { origine }),
         entiteAidee: {
@@ -72,10 +58,7 @@
         ...(emailUtilisateurMAC && { emailAidant: emailUtilisateurMAC }),
         ...(identifiantAidant && { identifiantAidant }),
       };
-      const reponse = await axios.post(
-        '/api/mon-aide-cyber/demandes-aide',
-        corps
-      );
+      const reponse = await axios.post('/api/mon-aide-cyber/demandes-aide', corps);
       if (reponse.status === 201) {
         enSucces = true;
       }
@@ -97,35 +80,23 @@
       <IllustrationCyberDepart />
     </div>
     <div class="contenu-section">
-      <lab-anssi-lien
-        class="lien"
-        href="/"
-        titre="Retour"
-        icone="arrow-go-back-line"
-        positionIcone="gauche"
+      <lab-anssi-lien class="lien" href="/" titre="Retour" icone="arrow-go-back-line" positionIcone="gauche"
       ></lab-anssi-lien>
     </div>
     <div class="contenu-section">
       <div class="colonne-explicative">
-        <h2>
-          Vous souhaitez vous protéger contre les cyberattaques mais ne savez
-          pas comment vous y prendre ?
-        </h2>
+        <h2>Vous souhaitez vous protéger contre les cyberattaques mais ne savez pas comment vous y prendre ?</h2>
         <p>
           <b>Prenez votre cyberdépart !</b> Bénéficiez d’un
           <b>premier diagnostic gratuit accompagné d’un Aidant cyber</b>
-          et recevez <b>6 recommandations prioritaires</b> à mettre en place pour
-          améliorer la cybersécurité de votre organisation.
+          et recevez <b>6 recommandations prioritaires</b> à mettre en place pour améliorer la cybersécurité de votre organisation.
         </p>
         <div class="zone-tags">
-          <span class="tag"
-            ><Icone type="check" /> Dans vos locaux ou en visio
-          </span>
+          <span class="tag"><Icone type="check" /> Dans vos locaux ou en visio </span>
           <span class="tag"><Icone type="check" /> Rapide (1h30)</span>
         </div>
         <p class="cible-du-diagnostic">
-          Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et
-          aux entreprises mono-salariées.
+          Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et aux entreprises mono-salariées.
         </p>
       </div>
     </div>

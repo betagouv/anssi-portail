@@ -81,9 +81,8 @@ const repond = (reponse: ActionQuestionnaire) => {
     case 'VALIDE_ETAPE_SOUS_SECTEURS_ACTIVITE':
       update((etat) => {
         const prochaineEtape =
-          etat.secteurActivite.every(
-            ou(estSecteurAutre, estUnSecteurAvecDesSousSecteurs)
-          ) && reponse.sousSecteurs.every(estSousSecteurAutre)
+          etat.secteurActivite.every(ou(estSecteurAutre, estUnSecteurAvecDesSousSecteurs)) &&
+          reponse.sousSecteurs.every(estSousSecteurAutre)
             ? 'resultat'
             : 'activites';
 
@@ -97,16 +96,12 @@ const repond = (reponse: ActionQuestionnaire) => {
 
     case 'VALIDE_ETAPE_ACTIVITES':
       update((etat) => {
-        const versEtablissement =
-          doitPasserParLocalisationEtablissementPrincipal(
-            etat.secteurActivite,
-            reponse.activites
-          );
+        const versEtablissement = doitPasserParLocalisationEtablissementPrincipal(
+          etat.secteurActivite,
+          reponse.activites
+        );
 
-        const versServicesNumeriques =
-          doitPasserParLocalisationFournitureServicesNumeriques(
-            reponse.activites
-          );
+        const versServicesNumeriques = doitPasserParLocalisationFournitureServicesNumeriques(reponse.activites);
 
         const prochaineEtape = versEtablissement
           ? 'localisationEtablissementPrincipal'
@@ -124,10 +119,9 @@ const repond = (reponse: ActionQuestionnaire) => {
 
     case 'VALIDE_ETAPE_LOCALISATION_ETABLISSEMENT_PRINCIPAL':
       update((etat) => {
-        const prochaineEtape =
-          doitPasserParLocalisationFournitureServicesNumeriques(etat.activites)
-            ? 'localisationFournitureServicesNumeriques'
-            : 'resultat';
+        const prochaineEtape = doitPasserParLocalisationFournitureServicesNumeriques(etat.activites)
+          ? 'localisationFournitureServicesNumeriques'
+          : 'resultat';
 
         return {
           ...etat,

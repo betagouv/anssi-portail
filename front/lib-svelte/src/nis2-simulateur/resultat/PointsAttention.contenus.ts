@@ -23,10 +23,7 @@ export const TextesDesResumes: Record<ResumesPointsAttention, string> = {
   `,
 };
 
-export const Precisions: Record<
-  PointsAttentionPrecis,
-  { titre: string; texte: string }
-> = {
+export const Precisions: Record<PointsAttentionPrecis, { titre: string; texte: string }> = {
   MecanismeExemptionSecuriteNationale: {
     titre: 'Sécurité nationale',
     texte: `
@@ -138,8 +135,7 @@ export const Precisions: Record<
     `,
   },
   CriteresDePossibleInclusion: {
-    titre:
-      'Critères de désignation unitaire « Entité Essentielle » ou « Entité Importante »',
+    titre: 'Critères de désignation unitaire « Entité Essentielle » ou « Entité Importante »',
     texte: `
       Sur la base de critères exposés ci-après, des désignations unitaires
       peuvent être décidées par le gouvernement français, au cas par cas :

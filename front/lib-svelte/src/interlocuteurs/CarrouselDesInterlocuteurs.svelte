@@ -1,8 +1,6 @@
 <script lang="ts"></script>
 
-<h2>
-  Trouvez les interlocuteurs et dispositifs pour vous soutenir dans vos efforts.
-</h2>
+<h2>Trouvez les interlocuteurs et dispositifs pour vous soutenir dans vos efforts.</h2>
 <lab-anssi-carrousel-tuiles>
   <dsfr-tile
     title="Contacts cyber"
@@ -11,11 +9,7 @@
     href="/contacts"
     enlarge="true"
   >
-    <img
-      slot="pictogram"
-      src="/assets/images/trois-mains-croisees.svg"
-      alt="Contacts cyber"
-    />
+    <img slot="pictogram" src="/assets/images/trois-mains-croisees.svg" alt="Contacts cyber" />
   </dsfr-tile>
   <dsfr-tile
     title="Prestataires qualifiés et labellisés"
@@ -37,11 +31,7 @@
     href="/financements"
     enlarge="true"
   >
-    <img
-      slot="pictogram"
-      src="/assets/images/pile-de-pieces.svg"
-      alt="Financements cyber"
-    />
+    <img slot="pictogram" src="/assets/images/pile-de-pieces.svg" alt="Financements cyber" />
   </dsfr-tile>
 </lab-anssi-carrousel-tuiles>
 

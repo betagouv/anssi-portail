@@ -16,9 +16,7 @@
   let options: Option[];
 
   onMount(async () => {
-    const reponse = await axios.get<SecteurActivite[]>(
-      '/api/annuaire/secteurs-activite'
-    );
+    const reponse = await axios.get<SecteurActivite[]>('/api/annuaire/secteurs-activite');
     options = reponse.data.map((secteur) => ({
       valeur: secteur.code,
       libelle: secteur.libelle,
@@ -26,9 +24,4 @@
   });
 </script>
 
-<SelecteurSimple
-  {options}
-  bind:valeurSeclectionne={secteur}
-  {optionDefautIntitule}
-  {optionDefautSelectionnable}
-/>
+<SelecteurSimple {options} bind:valeurSeclectionne={secteur} {optionDefautIntitule} {optionDefautSelectionnable} />

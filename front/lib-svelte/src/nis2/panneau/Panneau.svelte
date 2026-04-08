@@ -26,17 +26,11 @@
 
 <div class="panneau" class:bureau={estBureau}>
   {#if estBureau}
-    <PanneauComparaison
-      bind:sensComparaison
-      bind:referentielSelectionne
-      estBureau={true}
-      {featureFlagNis2CyFun23}
-    />
+    <PanneauComparaison bind:sensComparaison bind:referentielSelectionne estBureau={true} {featureFlagNis2CyFun23} />
     {#if referentielSelectionne === 'ISO'}
       <p class="texte-detail-sm">
-        Les normes ISO étant protégées par le droit d’auteur, pour accéder au
-        contenu complet de ces normes, il convient de se référer aux
-        publications officielles de l'ISO et de l'IEC.
+        Les normes ISO étant protégées par le droit d’auteur, pour accéder au contenu complet de ces normes, il convient
+        de se référer aux publications officielles de l'ISO et de l'IEC.
       </p>
     {/if}
     <PanneauFiltres {source} cible={referentielSelectionne} {estBureau} />
@@ -51,22 +45,14 @@
     ></dsfr-button>
     <Modale bind:estOuverte={$etatPanneau.menuComparaisonAffiche}>
       <h4>Comparer</h4>
-      <PanneauComparaison
-        bind:sensComparaison
-        bind:referentielSelectionne
-        estBureau={false}
-        {featureFlagNis2CyFun23}
-      />
+      <PanneauComparaison bind:sensComparaison bind:referentielSelectionne estBureau={false} {featureFlagNis2CyFun23} />
       {#snippet actions()}
         <dsfr-button
           label="Afficher le tableau"
           kind="primary"
           use:clic={() => ($etatPanneau.menuComparaisonAffiche = false)}
         ></dsfr-button>
-        <BoutonReinitialisation
-          bind:referentielSelectionne
-          bind:sensComparaison
-        />
+        <BoutonReinitialisation bind:referentielSelectionne bind:sensComparaison />
       {/snippet}
     </Modale>
 
@@ -87,10 +73,7 @@
           kind="primary"
           use:clic={() => ($etatPanneau.menuFiltresAffiche = false)}
         ></dsfr-button>
-        <BoutonReinitialisation
-          bind:referentielSelectionne
-          bind:sensComparaison
-        />
+        <BoutonReinitialisation bind:referentielSelectionne bind:sensComparaison />
       {/snippet}
     </Modale>
   {/if}

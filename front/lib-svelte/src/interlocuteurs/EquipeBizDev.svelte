@@ -6,9 +6,8 @@
   </div>
   <h2>Notre équipe est à votre écoute</h2>
   <p class="texte-standard-md">
-    Participer à un webinaire collectif de 45 minutes pour en savoir plus sur
-    MesServicesCyber, le test de maturité et le diagnostic cyber afin de mieux
-    protéger votre entité des cyberattaques.
+    Participer à un webinaire collectif de 45 minutes pour en savoir plus sur MesServicesCyber, le test de maturité et
+    le diagnostic cyber afin de mieux protéger votre entité des cyberattaques.
   </p>
   <lab-anssi-lien
     href="https://app.livestorm.co/lab-anssi/webinaire-cyberdepart"

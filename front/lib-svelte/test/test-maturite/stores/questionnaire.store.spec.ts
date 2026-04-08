@@ -1,9 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { get } from 'svelte/store';
-import {
-  questionnaireStore,
-  resultatsQuestionnaire,
-} from '../../../src/test-maturite/stores/questionnaire.store';
+import { questionnaireStore, resultatsQuestionnaire } from '../../../src/test-maturite/stores/questionnaire.store';
 
 describe('Le store du questionnaire', () => {
   beforeEach(() => {

@@ -8,10 +8,7 @@
   } from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
   import PrecedentSuivant from './PrecedentSuivant.svelte';
 
-  function doitDemanderBilanFinancier(
-    nombre: TrancheNombreEmployes,
-    ca: TrancheChiffreAffaire
-  ): boolean {
+  function doitDemanderBilanFinancier(nombre: TrancheNombreEmployes, ca: TrancheChiffreAffaire): boolean {
     if (nombre === 'petit' && (ca === 'moyen' || ca === 'grand')) return true;
     if (nombre === 'moyen' && ca === 'grand') return true;
 
@@ -54,11 +51,7 @@
 </script>
 
 <Etape>
-  <dsfr-stepper
-    title={TitresEtapes['tailleEntitePrivee']}
-    current-step="4"
-    step-count="6"
-    hide-details="true"
+  <dsfr-stepper title={TitresEtapes['tailleEntitePrivee']} current-step="4" step-count="6" hide-details="true"
   ></dsfr-stepper>
 
   <p>Quelles sont les caractéristiques clés de votre entité</p>
@@ -132,7 +125,6 @@
     onsuivant={valide}
     suivantdisabled={nombre === undefined ||
       chiffreAffaire === undefined ||
-      (doitDemanderBilanFinancier(nombre, chiffreAffaire) &&
-        bilanFinancier === undefined)}
+      (doitDemanderBilanFinancier(nombre, chiffreAffaire) && bilanFinancier === undefined)}
   />
 </Etape>

@@ -7,9 +7,7 @@
 </script>
 
 {#if guide.documents.length === 1}
-  <a href={guide.documents[0].url} target="_blank" class="bouton primaire">
-    Télécharger le guide
-  </a>
+  <a href={guide.documents[0].url} target="_blank" class="bouton primaire"> Télécharger le guide </a>
 {:else if guide.documents.length > 1 && autoriseMultiple}
   <div class="documents">
     {#each guide.documents as document (document.url)}

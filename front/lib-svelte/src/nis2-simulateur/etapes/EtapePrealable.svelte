@@ -14,15 +14,13 @@
   <div class="description">
     <div>
       <p>
-        Ce test permet de cerner si votre entité sera concernée par la directive
-        NIS 2, et ce dès 2024. Nous le tiendrons à jour au fil des précisions
-        apportées par la transposition en droit français.
+        Ce test permet de cerner si votre entité sera concernée par la directive NIS 2, et ce dès 2024. Nous le
+        tiendrons à jour au fil des précisions apportées par la transposition en droit français.
       </p>
       <p>
         <b>
-          Si votre entité appartient à un groupe d'entreprises aux activités
-          variées, ce test peut être réalisé pour chaque entreprise filiale, ou
-          pour le groupe si celui-ci mène une activité économique.
+          Si votre entité appartient à un groupe d'entreprises aux activités variées, ce test peut être réalisé pour
+          chaque entreprise filiale, ou pour le groupe si celui-ci mène une activité économique.
         </b>
       </p>
     </div>

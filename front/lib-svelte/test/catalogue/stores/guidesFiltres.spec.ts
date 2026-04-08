@@ -8,11 +8,7 @@ import { rechercheParCollection } from '../../../src/catalogue/stores/guides/rec
 import { rechercheParLangue } from '../../../src/catalogue/stores/guides/rechercheParLangue.store';
 import { rechercheParBesoin } from '../../../src/catalogue/stores/rechercheParBesoin.store';
 import { rechercheTextuelle } from '../../../src/catalogue/stores/rechercheTextuelle.store';
-import {
-  guideDevsecops,
-  guideDevsecopsEN,
-  guideZeroTrust,
-} from './objetsExemples';
+import { guideDevsecops, guideDevsecopsEN, guideZeroTrust } from './objetsExemples';
 
 describe('Le store des guides filtrés', () => {
   beforeEach(() => {

@@ -6,10 +6,7 @@ import { mss } from './objetsExemples';
 
 describe("La recherche par droit d'accès", () => {
   it('est vide quand on la réinitialise', () => {
-    rechercheParDroitAcces.set([
-      DroitAcces.ACCES_LIBRE,
-      DroitAcces.REGULES_NIS2,
-    ]);
+    rechercheParDroitAcces.set([DroitAcces.ACCES_LIBRE, DroitAcces.REGULES_NIS2]);
 
     rechercheParDroitAcces.reinitialise();
 

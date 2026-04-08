@@ -13,11 +13,7 @@
   export const affiche = () => {
     afficheDialogue = true;
   };
-  type RaisonDisponible =
-    | 'pas-clair'
-    | 'pas-le-temps'
-    | 'pas-decisionnaire'
-    | 'autre';
+  type RaisonDisponible = 'pas-clair' | 'pas-le-temps' | 'pas-decisionnaire' | 'autre';
   let raison: RaisonDisponible | undefined;
   let erreurRaison = false;
   let precisionPasClair = '';
@@ -73,19 +69,13 @@
 {#if afficheDialogue}
   <dialog onclose={() => (afficheDialogue = false)} bind:this={dialogue}>
     {#if etape === 'formulaire'}
-      <Formulaire
-        classe="dialogue-sortie-diag"
-        on:formulaireValide={soumetsLeFormulaire}
-      >
+      <Formulaire classe="dialogue-sortie-diag" on:formulaireValide={soumetsLeFormulaire}>
         <div class="contenu">
           <BoutonFermerModale on:click={() => (afficheDialogue = false)} />
           <h4>Aidez-nous à améliorer votre expérience️ 🙏&nbsp;!</h4>
           <h5>🤔 Pourquoi n’avez-vous pas finalisé votre demande&nbsp;?</h5>
           {#if erreurRaison}
-            <lab-anssi-alerte
-              type="erreur"
-              description="Veuillez sélectionner une réponse."
-              fermable={false}
+            <lab-anssi-alerte type="erreur" description="Veuillez sélectionner une réponse." fermable={false}
             ></lab-anssi-alerte>
           {/if}
           <div class="propositions">
@@ -94,21 +84,14 @@
               <span>Ce n’est pas assez clair / J’aimerais en savoir plus</span>
             </label>
             {#if raison === 'pas-clair'}
-              <ZoneTexte
-                aideSaisie="Précisez votre réponse (facultatif)"
-                bind:valeur={precisionPasClair}
-              />
+              <ZoneTexte aideSaisie="Précisez votre réponse (facultatif)" bind:valeur={precisionPasClair} />
             {/if}
             <label>
               <input type="radio" value="pas-le-temps" bind:group={raison} />
               <span> Je n’ai pas le temps maintenant </span>
             </label>
             <label>
-              <input
-                type="radio"
-                value="pas-decisionnaire"
-                bind:group={raison}
-              />
+              <input type="radio" value="pas-decisionnaire" bind:group={raison} />
               <span>Je ne suis pas décisionnaire</span>
             </label>
             <label>
@@ -116,16 +99,11 @@
               <span>Autre</span>
             </label>
             {#if raison === 'autre'}
-              <ZoneTexte
-                aideSaisie="Précisez votre réponse (facultatif)"
-                bind:valeur={precisionAutre}
-              />
+              <ZoneTexte aideSaisie="Précisez votre réponse (facultatif)" bind:valeur={precisionAutre} />
             {/if}
           </div>
           <div class="contact">
-            <h5>
-              📧 Une question ? Nos équipes se tiennent à votre disposition.
-            </h5>
+            <h5>📧 Une question ? Nos équipes se tiennent à votre disposition.</h5>
             <label for="email">Email de contact </label>
             <ChampTexte
               aideSaisie="Ex : jean.dupont@mail.com"
@@ -136,18 +114,12 @@
               bind:valeur={emailDeContact}
             />
             <p class="texte-mention-xs">
-              Votre email ne sera utilisé que pour vous recontacter à propos du
-              diagnostic cyber.
+              Votre email ne sera utilisé que pour vous recontacter à propos du diagnostic cyber.
             </p>
           </div>
         </div>
         <div class="actions">
-          <Bouton
-            titre="Envoyer"
-            type="primaire"
-            taille="md"
-            boutonSoumission={true}
-          />
+          <Bouton titre="Envoyer" type="primaire" taille="md" boutonSoumission={true} />
           <a href="/" class="bouton secondaire">Revenir à la page d’accueil</a>
         </div>
       </Formulaire>
@@ -155,13 +127,10 @@
       <div class="dialogue-sortie-diag">
         <div class="contenu">
           <BoutonFermerModale on:click={() => dialogue.close()} />
-          <h4>
-            Merci pour votre retour&nbsp;🤩&nbsp;! Vos remarques sont précieuses
-            pour faire évoluer le service.
-          </h4>
+          <h4>Merci pour votre retour&nbsp;🤩&nbsp;! Vos remarques sont précieuses pour faire évoluer le service.</h4>
           <p>
-            Vous avez demandé à être recontacté(e) ? Notre équipe prendra
-            contact avec vous prochainement à l’adresse fournie.
+            Vous avez demandé à être recontacté(e) ? Notre équipe prendra contact avec vous prochainement à l’adresse
+            fournie.
           </p>
         </div>
         <div class="actions">

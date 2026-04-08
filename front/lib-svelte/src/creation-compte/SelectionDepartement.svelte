@@ -21,9 +21,7 @@
 
   const rechercheSuggestions = async () => {
     suggestions = departements.filter(
-      (d) =>
-        d.code.includes(saisie) ||
-        d.nom.toLowerCase().includes(saisie.toLowerCase())
+      (d) => d.code.includes(saisie) || d.nom.toLowerCase().includes(saisie.toLowerCase())
     );
     suggestionsVisibles = suggestions.length > 0;
   };
@@ -50,11 +48,7 @@
     on:focus={() => avecTemporisation(rechercheSuggestions)}
     autocomplete="off"
   />
-  <div
-    class="liste-suggestions"
-    class:visible={suggestionsVisibles}
-    bind:this={suggestionsEl}
-  >
+  <div class="liste-suggestions" class:visible={suggestionsVisibles} bind:this={suggestionsEl}>
     {#each suggestions as suggestion (suggestion.code)}
       <div
         class="option"
@@ -76,10 +70,7 @@
   </div>
 </div>
 
-<FermetureSurClicEnDehors
-  bind:doitEtreOuvert={suggestionsVisibles}
-  elements={[suggestionsEl]}
-/>
+<FermetureSurClicEnDehors bind:doitEtreOuvert={suggestionsVisibles} elements={[suggestionsEl]} />
 
 <style lang="scss">
   .conteneur {

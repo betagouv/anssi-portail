@@ -1,7 +1,5 @@
 <script lang="ts">
-  import CarteTestMaturite, {
-    type ResultatTest,
-  } from './CarteTestMaturite.svelte';
+  import CarteTestMaturite, { type ResultatTest } from './CarteTestMaturite.svelte';
   import { onMount } from 'svelte';
   import axios from 'axios';
   import { questionnaireStore } from './stores/questionnaire.store';
@@ -18,11 +16,7 @@
     const reponse = await axios.get<ResultatTest[]>('/api/resultats-test');
     resultatsTest = reponse.data;
     resultatsTestParAnnee = resultatsTest
-      .sort(
-        (a, b) =>
-          new Date(b.dateRealisation).getTime() -
-          new Date(a.dateRealisation).getTime()
-      )
+      .sort((a, b) => new Date(b.dateRealisation).getTime() - new Date(a.dateRealisation).getTime())
       .reduce((accumulateur: ResultatsParAnnee, element: ResultatTest) => {
         const annee = new Date(element.dateRealisation).getFullYear();
         if (!(annee in accumulateur)) accumulateur[annee] = [];
@@ -40,19 +34,14 @@
     : undefined;
 
   $: {
-    if (resultatTestSelectionne)
-      questionnaireStore.chargeReponses(resultatTestSelectionne.reponses);
+    if (resultatTestSelectionne) questionnaireStore.chargeReponses(resultatTestSelectionne.reponses);
   }
 </script>
 
 {#if resultatTestSelectionne}
   <section class="section-retour-historique">
     <div class="contenu-section">
-      <lab-anssi-lien
-        href="/ma-maturite#historique"
-        titre="Retour"
-        icone="arrow-go-back-line"
-        positionIcone="gauche"
+      <lab-anssi-lien href="/ma-maturite#historique" titre="Retour" icone="arrow-go-back-line" positionIcone="gauche"
       ></lab-anssi-lien>
     </div>
   </section>

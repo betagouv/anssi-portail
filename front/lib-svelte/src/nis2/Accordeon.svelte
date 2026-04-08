@@ -6,8 +6,7 @@
     { label: 'Énergies', icon: 'flashlight-line' },
     { label: 'Espace', icon: 'contrast-line' },
     {
-      label:
-        "Gestion des services Technologies de l'information et de la Communication (interentreprises)",
+      label: "Gestion des services Technologies de l'information et de la Communication (interentreprises)",
       icon: 'chat-settings-line',
     },
     {
@@ -28,8 +27,7 @@
     { label: 'Gestion des déchets', icon: 'recycle-line' },
     { label: 'Industries manufacturières', icon: 'settings-5-line' },
     {
-      label:
-        'Production, transformation et distribution de denrées alimentaires',
+      label: 'Production, transformation et distribution de denrées alimentaires',
       icon: 'restaurant-line',
     },
     {
@@ -41,59 +39,39 @@
 </script>
 
 <div class="accordeons">
-  <dsfr-accordion
-    title-markup-level={3}
-    label="18 secteurs d'activités concernés"
-  >
+  <dsfr-accordion title-markup-level={3} label="18 secteurs d'activités concernés">
     <p>
-      Plusieurs milliers d'entités réparties sur 18 secteurs d'activité seront
-      concernés. Pour l'essentiel, ces entités seront des moyennes et grandes
-      entreprises ainsi que des collectivités territoriales et des
-      administrations.
+      Plusieurs milliers d'entités réparties sur 18 secteurs d'activité seront concernés. Pour l'essentiel, ces entités
+      seront des moyennes et grandes entreprises ainsi que des collectivités territoriales et des administrations.
     </p>
 
     <h4>Secteurs hautement critiques</h4>
-    <dsfr-tags-group size="md" group-markup="ul" has-icon="true" {tags}
-    ></dsfr-tags-group>
+    <dsfr-tags-group size="md" group-markup="ul" has-icon="true" {tags}></dsfr-tags-group>
 
     <h4>Autres secteurs critiques</h4>
-    <dsfr-tags-group
-      size="md"
-      group-markup="ul"
-      has-icon="true"
-      tags={autreTags}
-    ></dsfr-tags-group>
+    <dsfr-tags-group size="md" group-markup="ul" has-icon="true" tags={autreTags}></dsfr-tags-group>
   </dsfr-accordion>
 
-  <dsfr-accordion
-    title-markup-level={3}
-    label="2 typologies d’entités : Essentielles (EE) et Importantes (EI)"
-  >
+  <dsfr-accordion title-markup-level={3} label="2 typologies d’entités : Essentielles (EE) et Importantes (EI)">
     <p>
-      Deux types d’entités relevant des secteurs précités sont concernées par la
-      directive NIS2, définies, selon leur degré de criticité, leur taille et
-      leur chiffre d'affaires (pour les entreprises)&nbsp;:
+      Deux types d’entités relevant des secteurs précités sont concernées par la directive NIS2, définies, selon leur
+      degré de criticité, leur taille et leur chiffre d'affaires (pour les entreprises)&nbsp;:
     </p>
     <ul>
       <li>
-        <strong>Les entités essentielles</strong>, si elles emploient au moins
-        250 personnes ou ont un chiffre d'affaires annuel supérieur à 50
-        millions d'euros et un bilan annuel supérieur à 43 millions
-        d'euros&nbsp;;
+        <strong>Les entités essentielles</strong>, si elles emploient au moins 250 personnes ou ont un chiffre
+        d'affaires annuel supérieur à 50 millions d'euros et un bilan annuel supérieur à 43 millions d'euros&nbsp;;
       </li>
       <li>
-        <strong>Les entités importantes</strong>, si elles ne sont pas entités
-        essentielles et emploient au moins 50 personnes ou ont un chiffre
-        d’affaires et un bilan annuel supérieur à 10 millions d'euros.
+        <strong>Les entités importantes</strong>, si elles ne sont pas entités essentielles et emploient au moins 50
+        personnes ou ont un chiffre d’affaires et un bilan annuel supérieur à 10 millions d'euros.
       </li>
     </ul>
     <p>
-      La directive NIS2 prévoit des exceptions pour plusieurs types d'entité,
-      dont les prestataires de services de confiance, les fournisseurs de
-      services DNS, les registres de noms de domaine de premier niveau, les
-      fournisseurs de réseaux de communications électroniques publiques, les
-      fournisseurs de services de communications électroniques accessibles au
-      public et l'administration publique. <dsfr-link
+      La directive NIS2 prévoit des exceptions pour plusieurs types d'entité, dont les prestataires de services de
+      confiance, les fournisseurs de services DNS, les registres de noms de domaine de premier niveau, les fournisseurs
+      de réseaux de communications électroniques publiques, les fournisseurs de services de communications électroniques
+      accessibles au public et l'administration publique. <dsfr-link
         label="En savoir plus"
         href="https://aide.monespacenis2.cyber.gouv.fr/fr/"
         blank
@@ -104,9 +82,8 @@
   <dsfr-accordion title-markup-level={3} label="3 obligations majeures">
     <h6>L'enregistrement auprès de l'autorité nationale compétente</h6>
     <p>
-      Une fois qu’une entité a évalué qu’elle entrait dans le périmètre de la
-      directive NIS&nbsp;2, celle-ci doit s'enregistrer en France auprès de
-      l’Agence nationale de la sécurité des systèmes d’information (ANSSI).
+      Une fois qu’une entité a évalué qu’elle entrait dans le périmètre de la directive NIS&nbsp;2, celle-ci doit
+      s'enregistrer en France auprès de l’Agence nationale de la sécurité des systèmes d’information (ANSSI).
     </p>
     <dsfr-button
       label="Pré-enregistrer mon entité"
@@ -119,32 +96,21 @@
     ></dsfr-button>
     <h6>La gestion des risques cyber</h6>
     <p>
-      Les entités concernées par la directive NIS2 sont tenues de mettre en
-      place des mesures juridiques, techniques et organisationnelles visant à
-      gérer les risques qui menacent la sécurité de leurs réseaux et de leurs
-      systèmes d'information. <dsfr-link
-        label="En savoir plus"
-        href="https://aide.monespacenis2.cyber.gouv.fr/fr/"
-        blank
+      Les entités concernées par la directive NIS2 sont tenues de mettre en place des mesures juridiques, techniques et
+      organisationnelles visant à gérer les risques qui menacent la sécurité de leurs réseaux et de leurs systèmes
+      d'information. <dsfr-link label="En savoir plus" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank
       ></dsfr-link>
     </p>
     <p>
-      En raison de la nature transfrontalière de leurs services, certaines
-      entités du secteur des infrastructures numériques, de gestion des services
-      des technologies de l'information et de la communication (TIC) et des
-      fournisseurs numériques font l'objet d'un règlement d'exécution spécifique
-      de la Commission européenne (<dsfr-link
+      En raison de la nature transfrontalière de leurs services, certaines entités du secteur des infrastructures
+      numériques, de gestion des services des technologies de l'information et de la communication (TIC) et des
+      fournisseurs numériques font l'objet d'un règlement d'exécution spécifique de la Commission européenne (<dsfr-link
         label="accessible en français ici"
         href="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=OJ:L_202402690"
         blank
-      ></dsfr-link>). Par conséquent, elles ne sont pas soumises au socle de
-      mesures de sécurité NIS&nbsp;2 définies pour les entités établies en
-      France.
-      <dsfr-link
-        label="En savoir plus"
-        href="https://aide.monespacenis2.cyber.gouv.fr/fr/"
-        blank
-      ></dsfr-link>
+      ></dsfr-link>). Par conséquent, elles ne sont pas soumises au socle de mesures de sécurité NIS&nbsp;2 définies
+      pour les entités établies en France.
+      <dsfr-link label="En savoir plus" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank></dsfr-link>
     </p>
     <dsfr-button
       label="Découvrir les solutions pour m'aider"
@@ -154,9 +120,8 @@
     ></dsfr-button>
     <h6>La déclaration d’incidents</h6>
     <p>
-      Les entités concernées par NIS2 devront, par ailleurs, signaler à l’ANSSI
-      leurs incidents de sécurité ayant un impact important et fournir des
-      rapports concernant l'évolution de la situation.
+      Les entités concernées par NIS2 devront, par ailleurs, signaler à l’ANSSI leurs incidents de sécurité ayant un
+      impact important et fournir des rapports concernant l'évolution de la situation.
     </p>
     <dsfr-button
       label="Déclarer un incident"
@@ -169,14 +134,11 @@
       icon="external-link-line"
     ></dsfr-button>
     <p>
-      Conformément à la directive NIS&nbsp;2, des actions de supervision seront
-      assurées pour vérifier le respect par les entités de leurs obligations. En
-      cas de non-respect de ces dernières, les entités s'exposeront à des
-      sanctions. La directive prévoit la capacité d'imposer, entre autres, des
-      sanctions financières aux entités régulées. Ces sanctions, qui doivent
-      être proportionnées au(x) manquement(s), pourront aller jusqu'à un
-      pourcentage du chiffre d'affaires mondial des entités (2&nbsp;% pour les
-      EE et 1,4&nbsp;% pour les EI).
+      Conformément à la directive NIS&nbsp;2, des actions de supervision seront assurées pour vérifier le respect par
+      les entités de leurs obligations. En cas de non-respect de ces dernières, les entités s'exposeront à des
+      sanctions. La directive prévoit la capacité d'imposer, entre autres, des sanctions financières aux entités
+      régulées. Ces sanctions, qui doivent être proportionnées au(x) manquement(s), pourront aller jusqu'à un
+      pourcentage du chiffre d'affaires mondial des entités (2&nbsp;% pour les EE et 1,4&nbsp;% pour les EI).
     </p>
   </dsfr-accordion>
 </div>

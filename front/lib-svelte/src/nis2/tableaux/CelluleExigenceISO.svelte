@@ -4,8 +4,7 @@
 
   export let exigence: ExigenceISO;
 
-  $: accent =
-    exigence.norme === 'ISO 27001' ? 'purple-glycine' : 'blue-cumulus';
+  $: accent = exigence.norme === 'ISO 27001' ? 'purple-glycine' : 'blue-cumulus';
 </script>
 
 <dsfr-badge label={exigence.norme} type="accent" {accent}></dsfr-badge>

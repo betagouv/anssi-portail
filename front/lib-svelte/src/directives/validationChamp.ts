@@ -1,9 +1,6 @@
 type TypeNoeud = HTMLTextAreaElement | HTMLSelectElement | HTMLInputElement;
 
-export const validationChamp = (
-  noeud: TypeNoeud,
-  messageSiInvalide: string
-) => {
+export const validationChamp = (noeud: TypeNoeud, messageSiInvalide: string) => {
   if (!messageSiInvalide) return;
 
   const messageErreur = document.createElement('span');

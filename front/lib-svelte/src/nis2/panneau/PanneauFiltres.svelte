@@ -61,16 +61,14 @@
       placeholder="Sélectionner une option"
       options={$exigencesFiltrees.objectifs}
       value={$rechercheParObjectifNis2 ?? ''}
-      onvaluechanged={(e: CustomEvent) =>
-        ($rechercheParObjectifNis2 = e.detail)}
+      onvaluechanged={(e: CustomEvent) => ($rechercheParObjectifNis2 = e.detail)}
     ></dsfr-select>
     <dsfr-select
       label="Thématique"
       placeholder="Sélectionner une option"
       options={$exigencesFiltrees.thematiques}
       value={$rechercheParThematiqueNis2 ?? ''}
-      onvaluechanged={(e: CustomEvent) =>
-        ($rechercheParThematiqueNis2 = e.detail)}
+      onvaluechanged={(e: CustomEvent) => ($rechercheParThematiqueNis2 = e.detail)}
     ></dsfr-select>
   {:else if source === 'ISO'}
     <dsfr-select
@@ -86,16 +84,14 @@
       placeholder="Sélectionner une option"
       options={optionsFonctionsCyFun23}
       value={$rechercheParFonctionCyFun23 ?? ''}
-      onvaluechanged={(e: CustomEvent) =>
-        ($rechercheParFonctionCyFun23 = e.detail)}
+      onvaluechanged={(e: CustomEvent) => ($rechercheParFonctionCyFun23 = e.detail)}
     ></dsfr-select>
     <dsfr-select
       label="Niveau d'assurance"
       placeholder="Sélectionner une option"
       options={optionsNiveauxAssuranceCyFun23}
       value={$rechercheParNiveauAssuranceCyFun23 ?? ''}
-      onvaluechanged={(e: CustomEvent) =>
-        ($rechercheParNiveauAssuranceCyFun23 = e.detail)}
+      onvaluechanged={(e: CustomEvent) => ($rechercheParNiveauAssuranceCyFun23 = e.detail)}
     ></dsfr-select>
   {/if}
   {#if cible}
@@ -104,8 +100,7 @@
       placeholder="Sélectionner une option"
       options={optionsCorrespondances}
       value={$rechercheParCorrespondance ?? ''}
-      onvaluechanged={(e: CustomEvent) =>
-        ($rechercheParCorrespondance = e.detail)}
+      onvaluechanged={(e: CustomEvent) => ($rechercheParCorrespondance = e.detail)}
     ></dsfr-select>
   {/if}
 </div>

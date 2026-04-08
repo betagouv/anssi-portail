@@ -9,16 +9,8 @@
 </script>
 
 {#if item.type === 'Guide'}
-  <a
-    class="carte guide {modeLargeur}"
-    href={item.id}
-    data-source="Guide"
-    data-cible={item.nom}
-  >
-    <ContenuCarteItem
-      item={{ ...item, description: item.nom }}
-      {avecBoutonFavori}
-    />
+  <a class="carte guide {modeLargeur}" href={item.id} data-source="Guide" data-cible={item.nom}>
+    <ContenuCarteItem item={{ ...item, description: item.nom }} {avecBoutonFavori} />
   </a>
 {:else if item.lienInterne || item.lienExterne}
   <a

@@ -1,10 +1,7 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { rechercheParNiveauAssuranceCyFun23 } from '../../../src/nis2/stores/rechercheParNiveauAssuranceCyFun23';
-import {
-  exigenceCyFun23,
-  exigenceISODeNiveauEleve,
-} from '../objetsPretsALEmploi';
+import { exigenceCyFun23, exigenceISODeNiveauEleve } from '../objetsPretsALEmploi';
 
 describe("La recherche par niveau d'assurance", () => {
   beforeEach(() => {
@@ -23,9 +20,7 @@ describe("La recherche par niveau d'assurance", () => {
     it("en rejetant une exigence comparée dont le niveau d'assurance ne correspond pas", () => {
       rechercheParNiveauAssuranceCyFun23.set('Essentiel');
 
-      const resultat = rechercheParNiveauAssuranceCyFun23.ok(
-        exigenceCyFun23({ niveauAssurance: 'Basique' })
-      );
+      const resultat = rechercheParNiveauAssuranceCyFun23.ok(exigenceCyFun23({ niveauAssurance: 'Basique' }));
 
       expect(resultat).toBe(false);
     });
@@ -33,9 +28,7 @@ describe("La recherche par niveau d'assurance", () => {
     it("en incluant une exigence comparée dont le niveau d'assurance correspond", () => {
       rechercheParNiveauAssuranceCyFun23.set('Basique');
 
-      const resultat = rechercheParNiveauAssuranceCyFun23.ok(
-        exigenceCyFun23({ niveauAssurance: 'Basique' })
-      );
+      const resultat = rechercheParNiveauAssuranceCyFun23.ok(exigenceCyFun23({ niveauAssurance: 'Basique' }));
 
       expect(resultat).toBe(true);
     });
@@ -49,9 +42,7 @@ describe("La recherche par niveau d'assurance", () => {
     it("en incluant une exigence comparée si l'exigence source n'est pas une exigence CyFun23", () => {
       rechercheParNiveauAssuranceCyFun23.set('Basique');
 
-      const resultat = rechercheParNiveauAssuranceCyFun23.ok(
-        exigenceISODeNiveauEleve()
-      );
+      const resultat = rechercheParNiveauAssuranceCyFun23.ok(exigenceISODeNiveauEleve());
 
       expect(resultat).toBe(true);
     });

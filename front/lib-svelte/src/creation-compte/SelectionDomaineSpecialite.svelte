@@ -33,9 +33,7 @@
     autreDomaine = autreValeur;
   }
 
-  $: label = selection
-    .map((id) => domaines.find((f) => f.id === id)?.libelle)
-    .join(', ');
+  $: label = selection.map((id) => domaines.find((f) => f.id === id)?.libelle).join(', ');
 
   $: {
     if (label) {
@@ -43,24 +41,16 @@
     }
   }
 
-  $: labelRappelDeclencheur =
-    selection.length === 0 ? 'Sélectionner un domaine de spécialité' : label;
+  $: labelRappelDeclencheur = selection.length === 0 ? 'Sélectionner un domaine de spécialité' : label;
 
   $: afficheAutre = selection.includes('autre');
-  $: valeurs = [
-    ...selection.filter((f) => f !== 'autre'),
-    ...(afficheAutre ? [autreDomaine] : ''),
-  ];
+  $: valeurs = [...selection.filter((f) => f !== 'autre'), ...(afficheAutre ? [autreDomaine] : '')];
 
   const refermeMenu = () => menu.fermeLeMenu();
 </script>
 
 <div class="conteneur-selection-domaine-specialite">
-  <MenuFlottant
-    bind:this={menu}
-    parDessusDeclencheur={true}
-    classePersonnalisee="selection-domaine"
-  >
+  <MenuFlottant bind:this={menu} parDessusDeclencheur={true} classePersonnalisee="selection-domaine">
     <div slot="declencheur" class="avec-fleche">
       <input
         {id}
@@ -71,9 +61,7 @@
         class:complete={selection.length > 0}
         value={label}
         required
-        use:validationChamp={requis
-          ? 'Le domaine est obligatoire. Veuillez le renseigner.'
-          : ''}
+        use:validationChamp={requis ? 'Le domaine est obligatoire. Veuillez le renseigner.' : ''}
         bind:this={champDeclencheur}
       />
     </div>
@@ -90,13 +78,7 @@
       <div class="options">
         {#each domaines as domaine (domaine.id)}
           <div class="case-et-label">
-            <input
-              type="checkbox"
-              bind:group={selection}
-              id={domaine.id}
-              name={domaine.id}
-              value={domaine.id}
-            />
+            <input type="checkbox" bind:group={selection} id={domaine.id} name={domaine.id} value={domaine.id} />
             <label for={domaine.id}>{domaine.libelle}</label>
           </div>
         {/each}
@@ -104,10 +86,7 @@
     </div>
   </MenuFlottant>
   {#if afficheAutre}
-    <ControleFormulaire
-      {requis}
-      libelle="Merci de préciser votre domaine de spécialité"
-    >
+    <ControleFormulaire {requis} libelle="Merci de préciser votre domaine de spécialité">
       <ChampTexte
         id="autreDomaine"
         nom="autreDomaine"

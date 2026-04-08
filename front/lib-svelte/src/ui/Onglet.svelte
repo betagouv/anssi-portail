@@ -16,13 +16,7 @@
   };
 </script>
 
-<button
-  type="button"
-  class="onglet"
-  class:active={ongletActif === cetOnglet}
-  class:sansBordureEnBas
-  on:click={clic}
->
+<button type="button" class="onglet" class:active={ongletActif === cetOnglet} class:sansBordureEnBas on:click={clic}>
   <span class="label">{labelOnglet}</span>
 </button>
 

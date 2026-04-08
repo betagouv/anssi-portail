@@ -4,8 +4,7 @@ export const questions: Question[] = [
   {
     titre: 'Prise en compte du risque',
     id: 'prise-en-compte-risque',
-    question:
-      'Quelle est la prise de conscience des risques cyber au sein de votre organisation&nbsp;?',
+    question: 'Quelle est la prise de conscience des risques cyber au sein de votre organisation&nbsp;?',
     propositions: [
       'Les responsables sous-estiment le risque de cyberattaques pour leur organisation.',
       'Les responsables ont conscience de l’existence de risques cyber mais n’en mesurent pas l’ampleur.',
@@ -17,8 +16,7 @@ export const questions: Question[] = [
   {
     titre: 'Posture à l’égard de la cyber',
     id: 'posture',
-    question:
-      'Quel est le niveau de priorité accordé à la cybersécurité&nbsp;?',
+    question: 'Quel est le niveau de priorité accordé à la cybersécurité&nbsp;?',
     propositions: [
       "Le renforcement de la cybersécurité de l'organisation n'est pas une priorité.",
       'Les responsables comprennent qu’il y a un enjeu mais le perçoivent comme avant tout technique.',
@@ -54,8 +52,7 @@ export const questions: Question[] = [
   {
     titre: 'Budget',
     id: 'budget',
-    question:
-      'Quels sont les moyens budgétaires alloués à la cybersécurité&nbsp;?',
+    question: 'Quels sont les moyens budgétaires alloués à la cybersécurité&nbsp;?',
     propositions: [
       'Aucun.',
       'Des dépenses occasionnelles sur la cybersécurité sont autorisées.',
@@ -67,8 +64,7 @@ export const questions: Question[] = [
   {
     titre: 'Adoption de solutions cyber',
     id: 'adoption-solutions',
-    question:
-      "Quels produits ou services cyber sont utilisés au sein de l'organisation&nbsp;?",
+    question: "Quels produits ou services cyber sont utilisés au sein de l'organisation&nbsp;?",
     propositions: [
       'Aucun.',
       'Un antivirus est a minima installé sur les postes informatiques.',

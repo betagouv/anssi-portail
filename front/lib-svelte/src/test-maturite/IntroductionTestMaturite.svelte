@@ -24,60 +24,38 @@
 </script>
 
 {#if $aDejaUnTest}
-  <lab-anssi-lien
-    href="/ma-maturite"
-    titre="Retour"
-    icone="arrow-go-back-line"
-    positionIcone="gauche"
-  ></lab-anssi-lien>
+  <lab-anssi-lien href="/ma-maturite" titre="Retour" icone="arrow-go-back-line" positionIcone="gauche"></lab-anssi-lien>
 {/if}
 <div class="contenu-test">
   <div class="introduction">
     <h2>Quelle est la maturité cyber de votre organisation&nbsp;?</h2>
     <p>
-      La maturité cyber reflète le niveau global de <b
-        >prise en compte des enjeux de cybersécurité</b
-      >
-      par une organisation. Répondez à <b>6 questions</b> pour obtenir votre
-      évaluation <b>indicative</b>.
+      La maturité cyber reflète le niveau global de <b>prise en compte des enjeux de cybersécurité</b>
+      par une organisation. Répondez à <b>6 questions</b> pour obtenir votre évaluation <b>indicative</b>.
     </p>
-    <input
-      type="button"
-      class="bouton primaire taille-moyenne"
-      value="Débuter le test"
-      on:click={debuteTeste}
-    />
+    <input type="button" class="bouton primaire taille-moyenne" value="Débuter le test" on:click={debuteTeste} />
     <hr />
     <div class="acces-session-groupe">
       <hgroup>
         <h6>
-          <lab-anssi-icone taille="md" nom="team-fill"></lab-anssi-icone> Session
-          de groupe
+          <lab-anssi-icone taille="md" nom="team-fill"></lab-anssi-icone> Session de groupe
         </h6>
         <p class="texte-standard-md">
-          Évaluez de façon indicative la maturité cyber du groupe en comparant
-          anonymement les résultats des participants.
+          Évaluez de façon indicative la maturité cyber du groupe en comparant anonymement les résultats des
+          participants.
         </p>
       </hgroup>
-      <dsfr-button
-        label="Créer ou rejoindre une session"
-        markup="a"
-        href="/session-groupe"
-        kind="secondary"
+      <dsfr-button label="Créer ou rejoindre une session" markup="a" href="/session-groupe" kind="secondary"
       ></dsfr-button>
     </div>
   </div>
   <div class="illustration">
-    <img
-      src="/assets/images/test-maturite/illustration-prise-en-compte-risque.svg"
-      alt=""
-    />
+    <img src="/assets/images/test-maturite/illustration-prise-en-compte-risque.svg" alt="" />
   </div>
 </div>
 <div class="note">
-  Le résultat obtenu est une évaluation indicative basée sur un modèle élaboré
-  par l’ANSSI. La maturité cyber n’est pas une évaluation du niveau de sécurité
-  des systèmes d’information d’une organisation mais de sa posture à l’égard des
+  Le résultat obtenu est une évaluation indicative basée sur un modèle élaboré par l’ANSSI. La maturité cyber n’est pas
+  une évaluation du niveau de sécurité des systèmes d’information d’une organisation mais de sa posture à l’égard des
   enjeux cyber.
 </div>
 

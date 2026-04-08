@@ -24,9 +24,4 @@
   });
 </script>
 
-<SelecteurSimple
-  {options}
-  bind:valeurSeclectionne={region}
-  {optionDefautIntitule}
-  {optionDefautSelectionnable}
-/>
+<SelecteurSimple {options} bind:valeurSeclectionne={region} {optionDefautIntitule} {optionDefautSelectionnable} />

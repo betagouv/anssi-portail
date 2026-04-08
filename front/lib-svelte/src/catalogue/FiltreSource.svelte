@@ -44,46 +44,27 @@
       on:click={gereCocheANSSI}
     />
     <span class="libelle">Toutes les sources ANSSI</span>
-    <span class="compte">{$nombreResultats.parSource[Source.ANSSI_TOUTES]}</span
-    >
+    <span class="compte">{$nombreResultats.parSource[Source.ANSSI_TOUTES]}</span>
   </label>
   <fieldset>
     <label>
-      <input
-        type="checkbox"
-        value={Source.CERTFR}
-        bind:group={$rechercheParSource}
-      />
+      <input type="checkbox" value={Source.CERTFR} bind:group={$rechercheParSource} />
       <span class="libelle">CERT-FR</span>
       <span class="compte">{$nombreResultats.parSource[Source.CERTFR]}</span>
     </label>
     <label>
-      <input
-        type="checkbox"
-        value={Source.INNOVATION_ANSSI}
-        bind:group={$rechercheParSource}
-      />
+      <input type="checkbox" value={Source.INNOVATION_ANSSI} bind:group={$rechercheParSource} />
       <span class="libelle">Innovation ANSSI</span>
-      <span class="compte"
-        >{$nombreResultats.parSource[Source.INNOVATION_ANSSI]}</span
-      >
+      <span class="compte">{$nombreResultats.parSource[Source.INNOVATION_ANSSI]}</span>
     </label>
     <label>
-      <input
-        type="checkbox"
-        value={Source.ANSSI}
-        bind:group={$rechercheParSource}
-      />
+      <input type="checkbox" value={Source.ANSSI} bind:group={$rechercheParSource} />
       <span class="libelle">ANSSI</span>
       <span class="compte">{$nombreResultats.parSource[Source.ANSSI]}</span>
     </label>
   </fieldset>
   <label>
-    <input
-      type="checkbox"
-      value={Source.PARTENAIRES}
-      bind:group={$rechercheParSource}
-    />
+    <input type="checkbox" value={Source.PARTENAIRES} bind:group={$rechercheParSource} />
     <span class="libelle">Partenaires</span>
     <span class="compte">{$nombreResultats.parSource[Source.PARTENAIRES]}</span>
   </label>

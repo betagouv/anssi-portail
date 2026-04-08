@@ -3,11 +3,7 @@
   import { onMount } from 'svelte';
   import ConteneurLarge from '../ui/ConteneurLarge.svelte';
   import Avertissements from './Avertissements.svelte';
-  import {
-    type Exigence,
-    fabriqueDExigence,
-    type ReferentielSelectionne,
-  } from './exigence.type';
+  import { type Exigence, fabriqueDExigence, type ReferentielSelectionne } from './exigence.type';
   import Panneau from './panneau/Panneau.svelte';
   import { exigencesStore } from './stores/exigences.store';
   import { exigencesFiltrees } from './stores/exigencesFiltrees.store';
@@ -16,32 +12,22 @@
   import TableauExigencesSimple from './tableaux/TableauExigencesSimple.svelte';
   import { clic } from '../directives/actions.svelte';
 
-  const { featureFlagNis2CyFun23 }: { featureFlagNis2CyFun23: boolean } =
-    $props();
+  const { featureFlagNis2CyFun23 }: { featureFlagNis2CyFun23: boolean } = $props();
 
   let exigences = $state<Exigence[]>([]);
-  let sensComparaison = $state<'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2'>(
-    'NIS2_VERS_CIBLE'
-  );
+  let sensComparaison = $state<'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2'>('NIS2_VERS_CIBLE');
 
   let mode = $state<'LISTE' | Comparaison>('LISTE');
 
-  let referentielSelectionne = $state<ReferentielSelectionne | undefined>(
-    undefined
-  );
+  let referentielSelectionne = $state<ReferentielSelectionne | undefined>(undefined);
   let estBureau = $state(false);
   let chargement = $state(false);
 
   const recupereLesExigences = async () => {
-    const axiosResponse = await axios.get<Record<string, unknown>[]>(
-      '/api/exigences-nis2',
-      {
-        params: { source, cible },
-      }
-    );
-    exigences = axiosResponse.data.map((e) =>
-      fabriqueDExigence(source ?? 'NIS2', cible, e)
-    );
+    const axiosResponse = await axios.get<Record<string, unknown>[]>('/api/exigences-nis2', {
+      params: { source, cible },
+    });
+    exigences = axiosResponse.data.map((e) => fabriqueDExigence(source ?? 'NIS2', cible, e));
     $exigencesStore = exigences;
   };
 
@@ -53,13 +39,9 @@
     estBureau = mql.matches;
   });
 
-  const source = $derived(
-    sensComparaison === 'NIS2_VERS_CIBLE' ? 'NIS2' : referentielSelectionne
-  );
+  const source = $derived(sensComparaison === 'NIS2_VERS_CIBLE' ? 'NIS2' : referentielSelectionne);
 
-  const cible = $derived(
-    sensComparaison === 'SOURCE_VERS_NIS2' ? 'NIS2' : referentielSelectionne
-  );
+  const cible = $derived(sensComparaison === 'SOURCE_VERS_NIS2' ? 'NIS2' : referentielSelectionne);
 
   const lienExportTableau = $derived(
     `/api/exigences-nis2.csv?${new URLSearchParams({
@@ -87,11 +69,7 @@
   });
 
   const traceTelechargement = (url: string) => {
-    window._paq?.push([
-      'trackLink',
-      `https://${window.location.host}${url}`,
-      'download',
-    ]);
+    window._paq?.push(['trackLink', `https://${window.location.host}${url}`, 'download']);
   };
 </script>
 
@@ -106,10 +84,7 @@
           label="Télécharger les exigences"
           download=""
           detail="PDF - 965,8 ko"
-          use:clic={() =>
-            traceTelechargement(
-              '/documents-ressources/20260317_NIS_V2_ReCyF_v2.5.pdf'
-            )}
+          use:clic={() => traceTelechargement('/documents-ressources/20260317_NIS_V2_ReCyF_v2.5.pdf')}
         ></dsfr-link>
         <dsfr-link
           href="/documents-ressources/20260317_NIS_V2_Suivi des modifications ReCyF v2.4 vers v2.5-vfinale.pdf"
@@ -134,9 +109,7 @@
     </div>
 
     <Panneau
-      source={sensComparaison === 'NIS2_VERS_CIBLE'
-        ? 'NIS2'
-        : (referentielSelectionne ?? 'NIS2')}
+      source={sensComparaison === 'NIS2_VERS_CIBLE' ? 'NIS2' : (referentielSelectionne ?? 'NIS2')}
       bind:referentielSelectionne
       bind:sensComparaison
       {estBureau}
@@ -144,24 +117,11 @@
     />
   </div>
   {#if mode === 'LISTE'}
-    <TableauExigencesSimple
-      exigences={$exigencesFiltrees.exigences}
-      {chargement}
-    />
+    <TableauExigencesSimple exigences={$exigencesFiltrees.exigences} {chargement} />
   {:else}
-    <TableauCorrespondancesExigences
-      {chargement}
-      exigences={$exigencesFiltrees.exigences}
-      comparaison={mode}
-    />
+    <TableauCorrespondancesExigences {chargement} exigences={$exigencesFiltrees.exigences} comparaison={mode} />
   {/if}
-  <dsfr-link
-    label="Haut de page"
-    href="#"
-    size="md"
-    has-icon
-    icon="arrow-up-fill"
-  ></dsfr-link>
+  <dsfr-link label="Haut de page" href="#" size="md" has-icon icon="arrow-up-fill"></dsfr-link>
 </ConteneurLarge>
 
 <style lang="scss">

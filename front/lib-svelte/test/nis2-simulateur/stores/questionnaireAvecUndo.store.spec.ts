@@ -13,9 +13,7 @@ describe("Le store du questionnaire qui permet de faire de l'UNDO", () => {
     const store = questionnaireAvecUndo;
 
     store.repond({ type: 'VALIDE_ETAPE_PREALABLE' });
-    expect(get(store).etapeCourante).toBe(
-      'designationOperateurServicesEssentiels'
-    );
+    expect(get(store).etapeCourante).toBe('designationOperateurServicesEssentiels');
 
     store.undo();
 

@@ -7,10 +7,9 @@
     <hgroup class="preambule">
       <h1>Passez à l'étape suivante</h1>
       <p>
-        Votre résultat montre que votre organisation n’est pas suffisamment
-        protégée face aux cyber menaces. L’ANSSI vous recommande de réaliser un
-        diagnostic cyber (gratuit) afin de définir rapidement les actions
-        prioritaires à mettre en place et renforcer votre cybersécurité.
+        Votre résultat montre que votre organisation n’est pas suffisamment protégée face aux cyber menaces. L’ANSSI
+        vous recommande de réaliser un diagnostic cyber (gratuit) afin de définir rapidement les actions prioritaires à
+        mettre en place et renforcer votre cybersécurité.
       </p>
     </hgroup>
     <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>

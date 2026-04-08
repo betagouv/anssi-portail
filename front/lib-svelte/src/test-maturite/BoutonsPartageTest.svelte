@@ -43,10 +43,7 @@
   </a>
 
   <button class="bouton secondaire" on:click={partageLien}>
-    <img
-      src="/assets/images/icone-copie-lien.svg"
-      alt="Copier dans le presse-papier"
-    />
+    <img src="/assets/images/icone-copie-lien.svg" alt="Copier dans le presse-papier" />
   </button>
 </div>
 
@@ -73,8 +70,7 @@
         border-color: #353535;
 
         img {
-          filter: invert(99%) sepia(1%) saturate(260%) hue-rotate(290deg)
-            brightness(119%) contrast(100%);
+          filter: invert(99%) sepia(1%) saturate(260%) hue-rotate(290deg) brightness(119%) contrast(100%);
         }
 
         &:hover {

@@ -98,9 +98,7 @@ export const valideEtapeAppartenanceUE = (
   appartenances,
 });
 
-export const valideTypeStructure = (
-  types: TypeStructure[]
-): ActionValideTypeStructure => ({
+export const valideTypeStructure = (types: TypeStructure[]): ActionValideTypeStructure => ({
   type: 'VALIDE_ETAPE_TYPE_STRUCTURE',
   types,
 });
@@ -116,23 +114,17 @@ export const valideTailleEntitePrivee = (
   bilanFinancier,
 });
 
-export const valideSecteursActivite = (
-  secteurs: SecteurActivite[]
-): ActionValideSecteursActivite => ({
+export const valideSecteursActivite = (secteurs: SecteurActivite[]): ActionValideSecteursActivite => ({
   type: 'VALIDE_ETAPE_SECTEURS_ACTIVITE',
   secteurs,
 });
 
-export const valideSousSecteursActivite = (
-  sousSecteurs: SousSecteurActivite[]
-): ActionValideSousSecteursActivite => ({
+export const valideSousSecteursActivite = (sousSecteurs: SousSecteurActivite[]): ActionValideSousSecteursActivite => ({
   type: 'VALIDE_ETAPE_SOUS_SECTEURS_ACTIVITE',
   sousSecteurs,
 });
 
-export const valideActivites = (
-  activites: Activite[]
-): ActionValideActivites => ({
+export const valideActivites = (activites: Activite[]): ActionValideActivites => ({
   type: 'VALIDE_ETAPE_ACTIVITES',
   activites,
 });

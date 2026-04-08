@@ -22,21 +22,10 @@
 </script>
 
 <div class="menu-flottant conteneur {classePersonnalisee}">
-  <button
-    type="button"
-    class="declencheur"
-    on:click={ouvreLeMenu}
-    bind:this={declencheurEl}
-    disabled={estLectureSeule}
-  >
+  <button type="button" class="declencheur" on:click={ouvreLeMenu} bind:this={declencheurEl} disabled={estLectureSeule}>
     <slot name="declencheur" />
   </button>
-  <div
-    class="svelte-menu-flottant"
-    bind:this={contenuEl}
-    class:invisible={!menuOuvert}
-    class:parDessusDeclencheur
-  >
+  <div class="svelte-menu-flottant" bind:this={contenuEl} class:invisible={!menuOuvert} class:parDessusDeclencheur>
     <slot />
   </div>
 </div>

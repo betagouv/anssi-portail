@@ -35,10 +35,7 @@ describe('La recherche par type de financement', () => {
     });
 
     it('en incluant un financement dont le type de financement correspond', () => {
-      rechercheParTypeFinancement.set([
-        'Formation',
-        "Aide à l'innovation cyber",
-      ]);
+      rechercheParTypeFinancement.set(['Formation', "Aide à l'innovation cyber"]);
 
       const resultat = rechercheParTypeFinancement.ok(resumeFinancement);
 

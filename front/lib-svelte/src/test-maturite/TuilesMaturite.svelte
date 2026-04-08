@@ -10,9 +10,7 @@
   $: indexNiveauCourant = niveauxMaturite.indexOf(niveauCourant);
 
   const scrolleVersTuileCourante = () => {
-    let elementCourant: HTMLDivElement | null = document.querySelector(
-      '.tuile-niveau.courant'
-    );
+    let elementCourant: HTMLDivElement | null = document.querySelector('.tuile-niveau.courant');
     elementCourant!.scrollIntoView({ block: 'center' });
   };
 
@@ -32,17 +30,11 @@
       class:courant={index === indexNiveauCourant}
       class:inactif={index > indexNiveauCourant}
     >
-      <img
-        class="plante"
-        src="/assets/images/test-maturite/niveaux/{niveau.id}.svg"
-        alt="Niveau de maturité"
-      />
+      <img class="plante" src="/assets/images/test-maturite/niveaux/{niveau.id}.svg" alt="Niveau de maturité" />
       <img
         class="coche"
         alt=""
-        src="/assets/images/coche-ronde{index > indexNiveauCourant
-          ? '-inactive'
-          : '-active'}.svg"
+        src="/assets/images/coche-ronde{index > indexNiveauCourant ? '-inactive' : '-active'}.svg"
       />
       <span>{niveau.label}</span>
     </div>

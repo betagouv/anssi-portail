@@ -24,9 +24,7 @@ describe('La recherche par thématique', () => {
     it('en rejetant une exigence comparée dont la thématique ne correspond pas', () => {
       rechercheParThematiqueNis2.set('Recensement');
 
-      const resultat = rechercheParThematiqueNis2.ok(
-        exigenceNIS2AvecThematiqueGouvernance()
-      );
+      const resultat = rechercheParThematiqueNis2.ok(exigenceNIS2AvecThematiqueGouvernance());
 
       expect(resultat).toBe(false);
     });
@@ -34,25 +32,19 @@ describe('La recherche par thématique', () => {
     it('en incluant une exigence comparée dont la thématique correspond', () => {
       rechercheParThematiqueNis2.set('Recensement');
 
-      const resultat = rechercheParThematiqueNis2.ok(
-        exigenceNIS2AvecThematiqueRecensement()
-      );
+      const resultat = rechercheParThematiqueNis2.ok(exigenceNIS2AvecThematiqueRecensement());
 
       expect(resultat).toBe(true);
     });
 
     it("en incluant une exigence comparée si il n'y pas de filtre actif", () => {
-      const resultat = rechercheParThematiqueNis2.ok(
-        exigenceNIS2AvecThematiqueRecensement()
-      );
+      const resultat = rechercheParThematiqueNis2.ok(exigenceNIS2AvecThematiqueRecensement());
 
       expect(resultat).toBe(true);
     });
 
     it("en incluant une exigence comparée si l'exigence source n'est pas une exigence NIS 2", () => {
-      const resultat = rechercheParThematiqueNis2.ok(
-        exigenceISODeNiveauEleve()
-      );
+      const resultat = rechercheParThematiqueNis2.ok(exigenceISODeNiveauEleve());
 
       expect(resultat).toBe(true);
     });

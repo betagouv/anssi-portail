@@ -5,30 +5,18 @@ import { rechercheParTypeFinancement } from './rechercheParTypeFinancement.store
 import { rechercheParTypeOrganisation } from './rechercheParTypeOrganisation.store';
 
 export const financementsFiltre = derived(
-  [
-    financementsStore,
-    rechercheParRegion,
-    rechercheParTypeFinancement,
-    rechercheParTypeOrganisation,
-  ],
+  [financementsStore, rechercheParRegion, rechercheParTypeFinancement, rechercheParTypeOrganisation],
   ([$financementsStore]) => {
     const resultat = $financementsStore.filter(
-      (f) =>
-        rechercheParRegion.ok(f) &&
-        rechercheParTypeFinancement.ok(f) &&
-        rechercheParTypeOrganisation.ok(f)
+      (f) => rechercheParRegion.ok(f) && rechercheParTypeFinancement.ok(f) && rechercheParTypeOrganisation.ok(f)
     );
 
-    const typesFinancement = [
-      ...new Set($financementsStore.map((t) => t.typesDeFinancement).flat()),
-    ].sort((a, b) => {
+    const typesFinancement = [...new Set($financementsStore.map((t) => t.typesDeFinancement).flat())].sort((a, b) => {
       if (a === "Aide à l'innovation cyber") return 1;
       return a.localeCompare(b);
     });
 
-    const typesOrganisation = [
-      ...new Set($financementsStore.map((t) => t.entitesElligibles).flat()),
-    ].sort((a, b) => {
+    const typesOrganisation = [...new Set($financementsStore.map((t) => t.entitesElligibles).flat())].sort((a, b) => {
       if (a === 'Toutes entités publiques') return 1;
       return b.localeCompare(a);
     });

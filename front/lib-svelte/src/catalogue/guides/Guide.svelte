@@ -4,10 +4,7 @@
   import FilAriane from '../../ui/FilAriane.svelte';
   import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
   import { CollectionGuide, type Guide } from '../Guide.types';
-  import {
-    chargeGuidesDansLeStore,
-    guidesStore,
-  } from '../stores/guides/guides.store';
+  import { chargeGuidesDansLeStore, guidesStore } from '../stores/guides/guides.store';
   import BadgesDeCollections from './BadgesDeCollections.svelte';
   import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
   import { decodeEntitesHtml } from './guide';
@@ -24,19 +21,14 @@
       document.title = decodeEntitesHtml(guide.nom) + ' | MesServicesCyber';
     }
   });
-  $: aDesCollections =
-    guide &&
-    guide.collections.filter((c) => c !== CollectionGuide.AUTRE).length > 0;
+  $: aDesCollections = guide && guide.collections.filter((c) => c !== CollectionGuide.AUTRE).length > 0;
   $: descriptionAspetisee = aseptiseHtml(guide?.description ?? '');
 </script>
 
 {#if guide}
   <section class="chapeau">
     <div class="contenu-section">
-      <FilAriane
-        branche={{ nom: 'Catalogue cyber', lien: '/catalogue#guides' }}
-        feuille={guide.nom}
-      />
+      <FilAriane branche={{ nom: 'Catalogue cyber', lien: '/catalogue#guides' }} feuille={guide.nom} />
       <div class="badges-collections">
         <BadgesDeCollections {guide} />
       </div>
@@ -56,17 +48,9 @@
     <details>
       <summary>
         <div class="entete-filtres">
-          <img
-            class="menu"
-            src="/assets/images/icone-menu-lateral.svg"
-            alt=""
-          />
+          <img class="menu" src="/assets/images/icone-menu-lateral.svg" alt="" />
           <span id="section-active" class="titre-menu">Présentation</span>
-          <img
-            class="chevron"
-            src="/assets/images/icone-chevron-bas.svg"
-            alt=""
-          />
+          <img class="chevron" src="/assets/images/icone-chevron-bas.svg" alt="" />
         </div>
       </summary>
 

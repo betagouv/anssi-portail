@@ -25,9 +25,7 @@ describe('le store du questionnaire NIS2', () => {
     questionnaireStore.repond({
       type: 'VALIDE_ETAPE_PREALABLE',
     });
-    expect(get(questionnaireStore).etapeCourante).toBe(
-      'designationOperateurServicesEssentiels'
-    );
+    expect(get(questionnaireStore).etapeCourante).toBe('designationOperateurServicesEssentiels');
   });
 
   describe("à la validation de l'étape « Désignation »", () => {
@@ -37,15 +35,11 @@ describe('le store du questionnaire NIS2', () => {
     });
 
     it("sauvegarde les informations de l'étape", () => {
-      expect(
-        get(questionnaireStore).designationOperateurServicesEssentiels
-      ).toEqual(['oui']);
+      expect(get(questionnaireStore).designationOperateurServicesEssentiels).toEqual(['oui']);
     });
 
     it("passe à l'étape « Appartenance UE »", () => {
-      expect(get(questionnaireStore).etapeCourante).toBe(
-        'appartenanceUnionEuropeenne'
-      );
+      expect(get(questionnaireStore).etapeCourante).toBe('appartenanceUnionEuropeenne');
     });
   });
 
@@ -56,9 +50,7 @@ describe('le store du questionnaire NIS2', () => {
     });
 
     it("sauvegarde les informations de l'étape", () => {
-      expect(get(questionnaireStore).appartenancePaysUnionEuropeenne).toEqual([
-        'france',
-      ]);
+      expect(get(questionnaireStore).appartenancePaysUnionEuropeenne).toEqual(['france']);
     });
 
     it("passe à l'étape « Type de structure »", () => {
@@ -85,9 +77,7 @@ describe('le store du questionnaire NIS2', () => {
     beforeEach(() => {
       questionnaireStore.reset();
 
-      questionnaireStore.repond(
-        valideTailleEntitePrivee(['petit'], ['moyen'], ['grand'])
-      );
+      questionnaireStore.repond(valideTailleEntitePrivee(['petit'], ['moyen'], ['grand']));
     });
 
     it("sauvegarde les informations de l'étape", () => {
@@ -116,9 +106,7 @@ describe('le store du questionnaire NIS2', () => {
     });
 
     it("passe à l'étape « Résultat » s'il n'y a que des secteurs classés « Autre »", () => {
-      questionnaireStore.repond(
-        valideSecteursActivite(['autreSecteurActivite'])
-      );
+      questionnaireStore.repond(valideSecteursActivite(['autreSecteurActivite']));
 
       const etat = get(questionnaireStore);
       expect(etat.etapeCourante).toBe('resultat');
@@ -127,18 +115,14 @@ describe('le store du questionnaire NIS2', () => {
     it("passe à l'étape « Sous secteurs d'activité » si certains secteurs ont des sous-secteurs", () => {
       const secteurSansSousSecteur = 'sante';
       const secteurAvecSousSecteur = 'energie';
-      questionnaireStore.repond(
-        valideSecteursActivite([secteurSansSousSecteur, secteurAvecSousSecteur])
-      );
+      questionnaireStore.repond(valideSecteursActivite([secteurSansSousSecteur, secteurAvecSousSecteur]));
 
       const etat = get(questionnaireStore);
       expect(etat.etapeCourante).toBe('sousSecteursActivite');
     });
 
     it("passe à l'étape « Activités » dans les autres cas", () => {
-      questionnaireStore.repond(
-        valideSecteursActivite(['banqueSecteurBancaire'])
-      );
+      questionnaireStore.repond(valideSecteursActivite(['banqueSecteurBancaire']));
 
       const etat = get(questionnaireStore);
       expect(etat.etapeCourante).toBe('activites');
@@ -159,12 +143,8 @@ describe('le store du questionnaire NIS2', () => {
 
     it("passe à l'etape « Résultat » si tous les secteurs & sous-secteurs sont du « Autre » (donc aucun intérêt à aller vers « Activités »)", () => {
       const secteurAvecSousSecteur = 'fabrication';
-      questionnaireStore.repond(
-        valideSecteursActivite(['autreSecteurActivite', secteurAvecSousSecteur])
-      );
-      questionnaireStore.repond(
-        valideSousSecteursActivite(['autreSousSecteurFabrication'])
-      );
+      questionnaireStore.repond(valideSecteursActivite(['autreSecteurActivite', secteurAvecSousSecteur]));
+      questionnaireStore.repond(valideSousSecteursActivite(['autreSousSecteurFabrication']));
 
       const etat = get(questionnaireStore);
       expect(etat.etapeCourante).toBe('resultat');
@@ -173,12 +153,8 @@ describe('le store du questionnaire NIS2', () => {
     it("passe à l'étape « Activités » s'il y a un secteur qui n'est pas du « Autre » (même si tous les sous-secteurs sont « Autres ») car on va vouloir ses activités", () => {
       const necessiteEtapeActivite = 'eauxUsees';
 
-      questionnaireStore.repond(
-        valideSecteursActivite(['transports', necessiteEtapeActivite])
-      );
-      questionnaireStore.repond(
-        valideSousSecteursActivite(['autreSousSecteurTransports'])
-      );
+      questionnaireStore.repond(valideSecteursActivite(['transports', necessiteEtapeActivite]));
+      questionnaireStore.repond(valideSousSecteursActivite(['autreSousSecteurTransports']));
 
       const avecUnSecteurATraiter = get(questionnaireStore);
       expect(avecUnSecteurATraiter.etapeCourante).toBe('activites');
@@ -205,23 +181,15 @@ describe('le store du questionnaire NIS2', () => {
     });
 
     describe("navigue vers l'étape « Localisation de l'établissement principal » ...", () => {
-      const secteurs: SecteurActivite[] = [
-        'gestionServicesTic',
-        'fournisseursNumeriques',
-      ];
+      const secteurs: SecteurActivite[] = ['gestionServicesTic', 'fournisseursNumeriques'];
 
-      it.each(secteurs)(
-        "... si le secteur d'activité « %s » est présent",
-        (secteur) => {
-          questionnaireStore.repond(valideSecteursActivite([secteur]));
-          questionnaireStore.repond(
-            valideActivites(['autreActiviteHydrogene'])
-          );
+      it.each(secteurs)("... si le secteur d'activité « %s » est présent", (secteur) => {
+        questionnaireStore.repond(valideSecteursActivite([secteur]));
+        questionnaireStore.repond(valideActivites(['autreActiviteHydrogene']));
 
-          const etat = get(questionnaireStore);
-          expect(etat.etapeCourante).toBe('localisationEtablissementPrincipal');
-        }
-      );
+        const etat = get(questionnaireStore);
+        expect(etat.etapeCourante).toBe('localisationEtablissementPrincipal');
+      });
 
       const activites: Activite[] = [
         'registresNomsDomainesPremierNiveau',
@@ -232,15 +200,12 @@ describe('le store du questionnaire NIS2', () => {
         'fournisseurServicesEnregristrementNomDomaine',
       ];
 
-      it.each(activites)(
-        "... si l'activité « %s » est présente",
-        (activite) => {
-          questionnaireStore.repond(valideActivites([activite]));
+      it.each(activites)("... si l'activité « %s » est présente", (activite) => {
+        questionnaireStore.repond(valideActivites([activite]));
 
-          const etat = get(questionnaireStore);
-          expect(etat.etapeCourante).toBe('localisationEtablissementPrincipal');
-        }
-      );
+        const etat = get(questionnaireStore);
+        expect(etat.etapeCourante).toBe('localisationEtablissementPrincipal');
+      });
     });
 
     describe("navigue vers l'étape « Localisation de la fourniture des services numériques »", () => {
@@ -249,25 +214,17 @@ describe('le store du questionnaire NIS2', () => {
         'fournisseurServiceCommunicationElectroniquesPublics',
       ];
 
-      it.each(activites)(
-        "... si l'activité « %s » est présente",
-        (activite) => {
-          questionnaireStore.repond(valideActivites([activite]));
+      it.each(activites)("... si l'activité « %s » est présente", (activite) => {
+        questionnaireStore.repond(valideActivites([activite]));
 
-          const etat = get(questionnaireStore);
-          expect(etat.etapeCourante).toBe(
-            'localisationFournitureServicesNumeriques'
-          );
-        }
-      );
+        const etat = get(questionnaireStore);
+        expect(etat.etapeCourante).toBe('localisationFournitureServicesNumeriques');
+      });
     });
 
     it("navigue en priorité vers l'étape « Localisation de l'établissement principal » si les 2 sont possibles", () => {
       questionnaireStore.repond(
-        valideActivites([
-          'fournisseurReseauxCommunicationElectroniquesPublics',
-          'registresNomsDomainesPremierNiveau',
-        ])
+        valideActivites(['fournisseurReseauxCommunicationElectroniquesPublics', 'registresNomsDomainesPremierNiveau'])
       );
 
       const etat = get(questionnaireStore);
@@ -288,13 +245,7 @@ describe('le store du questionnaire NIS2', () => {
     });
 
     it("sauvegarde les informations de l'étape", () => {
-      questionnaireStore.repond(
-        valideLocalisationEtablissementPrincipal(
-          ['horsue'],
-          ['autre'],
-          ['france']
-        )
-      );
+      questionnaireStore.repond(valideLocalisationEtablissementPrincipal(['horsue'], ['autre'], ['france']));
 
       const etat = get(questionnaireStore);
       expect(etat.paysDecisionsCyber).toEqual(['horsue']);
@@ -308,29 +259,18 @@ describe('le store du questionnaire NIS2', () => {
         'fournisseurServiceCommunicationElectroniquesPublics',
       ];
 
-      it.each(activites)(
-        "... si l'activité « %s » est présente",
-        (activite) => {
-          questionnaireStore.repond(
-            valideActivites(['fournisseurServicesDNS', activite])
-          );
+      it.each(activites)("... si l'activité « %s » est présente", (activite) => {
+        questionnaireStore.repond(valideActivites(['fournisseurServicesDNS', activite]));
 
-          questionnaireStore.repond(
-            valideLocalisationEtablissementPrincipal(['france'], [], [])
-          );
+        questionnaireStore.repond(valideLocalisationEtablissementPrincipal(['france'], [], []));
 
-          const etat = get(questionnaireStore);
-          expect(etat.etapeCourante).toBe(
-            'localisationFournitureServicesNumeriques'
-          );
-        }
-      );
+        const etat = get(questionnaireStore);
+        expect(etat.etapeCourante).toBe('localisationFournitureServicesNumeriques');
+      });
     });
 
     it('sinon navigue vers « Résultat »', () => {
-      questionnaireStore.repond(
-        valideLocalisationEtablissementPrincipal(['france'], [], [])
-      );
+      questionnaireStore.repond(valideLocalisationEtablissementPrincipal(['france'], [], []));
 
       const etat = get(questionnaireStore);
       expect(etat.etapeCourante).toBe('resultat');
@@ -343,18 +283,14 @@ describe('le store du questionnaire NIS2', () => {
     });
 
     it("sauvegarde les informations de l'étape", () => {
-      questionnaireStore.repond(
-        valideLocalisationServicesNumeriques(['france'])
-      );
+      questionnaireStore.repond(valideLocalisationServicesNumeriques(['france']));
 
       const etat = get(questionnaireStore);
       expect(etat.localisationFournitureServicesNumeriques).toEqual(['france']);
     });
 
     it("navigue vers l'étape « Résultat »", () => {
-      questionnaireStore.repond(
-        valideLocalisationServicesNumeriques(['france'])
-      );
+      questionnaireStore.repond(valideLocalisationServicesNumeriques(['france']));
 
       const etat = get(questionnaireStore);
       expect(etat.etapeCourante).toBe('resultat');

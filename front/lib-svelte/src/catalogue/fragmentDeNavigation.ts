@@ -13,9 +13,7 @@ export type FragmentDeNavigation = {
   serialise(): string;
 };
 
-export const creeLeFragmentDeNavigation = (
-  hash: string
-): FragmentDeNavigation => {
+export const creeLeFragmentDeNavigation = (hash: string): FragmentDeNavigation => {
   const [section, reste] = hash.slice(1).split('?');
   const filtres: Record<string, string[]> = {};
   const parametres = new URLSearchParams(reste);
@@ -32,12 +30,8 @@ export const creeLeFragmentDeNavigation = (
     changeSection: (section: string) => {
       sectionEffective = section;
     },
-    extraisTableau: <T>(cle: string): T[] =>
-      filtres[cle]?.map((valeur: string) => valeur as unknown as T) ?? [],
-    extraisValeur: <T, U = T | null>(
-      cle: string,
-      defaut?: U
-    ): T | U | undefined | null =>
+    extraisTableau: <T>(cle: string): T[] => filtres[cle]?.map((valeur: string) => valeur as unknown as T) ?? [],
+    extraisValeur: <T, U = T | null>(cle: string, defaut?: U): T | U | undefined | null =>
       (filtres[cle]?.[0] as unknown as T) ?? defaut,
     serialise: (): string => {
       const chaineFiltres = Object.entries(filtres)
@@ -48,11 +42,7 @@ export const creeLeFragmentDeNavigation = (
         })
         .filter((v) => !!v)
         .join('&');
-      return (
-        '#' +
-        (sectionEffective ?? '') +
-        (chaineFiltres.length ? `?${chaineFiltres}` : '')
-      );
+      return '#' + (sectionEffective ?? '') + (chaineFiltres.length ? `?${chaineFiltres}` : '');
     },
   };
 };

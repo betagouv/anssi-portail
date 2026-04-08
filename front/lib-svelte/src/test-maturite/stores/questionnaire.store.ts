@@ -10,8 +10,7 @@ const { set, subscribe, update } = writable<Questionnaire>();
 
 export const questionnaireStore = {
   subscribe,
-  initialise: () =>
-    set({ questionCourante: 0, toutesLesReponses: new Array(6).fill(null) }),
+  initialise: () => set({ questionCourante: 0, toutesLesReponses: new Array(6).fill(null) }),
 
   reponds(reponseQuestionCourante: number) {
     update((state) => {
@@ -42,21 +41,18 @@ export const questionnaireStore = {
   },
 };
 
-export const resultatsQuestionnaire = derived(
-  questionnaireStore,
-  ($questionnaireStore) => {
-    function reponse(question: number) {
-      const resultat = $questionnaireStore.toutesLesReponses[question];
-      return resultat === null ? null : resultat + 1;
-    }
-
-    return {
-      'prise-en-compte-risque': reponse(0),
-      pilotage: reponse(2),
-      budget: reponse(4),
-      'ressources-humaines': reponse(3),
-      'adoption-solutions': reponse(5),
-      posture: reponse(1),
-    };
+export const resultatsQuestionnaire = derived(questionnaireStore, ($questionnaireStore) => {
+  function reponse(question: number) {
+    const resultat = $questionnaireStore.toutesLesReponses[question];
+    return resultat === null ? null : resultat + 1;
   }
-);
+
+  return {
+    'prise-en-compte-risque': reponse(0),
+    pilotage: reponse(2),
+    budget: reponse(4),
+    'ressources-humaines': reponse(3),
+    'adoption-solutions': reponse(5),
+    posture: reponse(1),
+  };
+});

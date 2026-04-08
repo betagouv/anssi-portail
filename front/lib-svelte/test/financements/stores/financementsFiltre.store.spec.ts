@@ -20,14 +20,7 @@ describe('Le store qui contient la liste des financements', () => {
         nom: 'Cyber PME 2',
         financeur: 'BPI France',
         typesDeFinancement: ['Formation', "Aide à l'innovation cyber"],
-        entitesElligibles: [
-          'PME',
-          'TPE',
-          'Associations',
-          'Collectivités',
-          'ETI',
-          'Entreprises',
-        ],
+        entitesElligibles: ['PME', 'TPE', 'Associations', 'Collectivités', 'ETI', 'Entreprises'],
         perimetresGeographiques: ['France'],
         regions: ['FRANCE'],
       },
@@ -35,11 +28,7 @@ describe('Le store qui contient la liste des financements', () => {
   });
 
   it('retourne la liste dédupliquée des types de financements existants', () => {
-    const typesFinancementAttendus = [
-      'Audits',
-      'Formation',
-      "Aide à l'innovation cyber",
-    ];
+    const typesFinancementAttendus = ['Audits', 'Formation', "Aide à l'innovation cyber"];
 
     const resultat = get(financementsFiltre).typesFinancement;
 
@@ -47,14 +36,7 @@ describe('Le store qui contient la liste des financements', () => {
   });
 
   it("retourne la liste dédupliquée des types d'organisations existants", () => {
-    const typesOrganisationsAttendus = [
-      'TPE',
-      'PME',
-      'ETI',
-      'Entreprises',
-      'Collectivités',
-      'Associations',
-    ];
+    const typesOrganisationsAttendus = ['TPE', 'PME', 'ETI', 'Entreprises', 'Collectivités', 'Associations'];
 
     const resultat = get(financementsFiltre).typesOrganisation;
 

@@ -4,10 +4,7 @@
   import type { ItemCyber } from '../catalogue/Catalogue.types';
   import type { Guide } from '../catalogue/Guide.types';
   import { catalogueStore } from '../catalogue/stores/catalogue.store';
-  import {
-    chargeGuidesDansLeStore,
-    guidesStore,
-  } from '../catalogue/stores/guides/guides.store';
+  import { chargeGuidesDansLeStore, guidesStore } from '../catalogue/stores/guides/guides.store';
   import { listeItemsFavoris } from '../catalogue/stores/itemsCatalogueEnFavori';
   import { profilStore } from '../stores/profil.store';
   import Hero from '../ui/Hero.svelte';
@@ -30,11 +27,7 @@
       const reponse = await axios.get<FavorisPartagesAPI>(`/api${urlDemandee}`);
       prenom = reponse.data.prenom;
       await chargeGuidesDansLeStore();
-      itemsCyberPartages = listeItemsFavoris(
-        reponse.data.favorisPartages,
-        $catalogueStore.items,
-        $guidesStore
-      );
+      itemsCyberPartages = listeItemsFavoris(reponse.data.favorisPartages, $catalogueStore.items, $guidesStore);
     } catch {
       prenom = '?';
       itemsCyberPartages = [];
@@ -53,17 +46,11 @@
     <div class="favoris">
       {#if itemsCyberPartages.length === 0}
         <div class="contenu-sans-favoris">
-          <img
-            src="/assets/images/illustration-dragon-aucun-resultat.svg"
-            alt="Aucun favori sauvegardé"
-          />
+          <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Aucun favori sauvegardé" />
           <h2>La liste de services et ressources est vide.</h2>
         </div>
       {:else}
-        <ContenuFavoris
-          avecBoutonFavori={estConnecte}
-          itemsEnFavori={itemsCyberPartages}
-        />
+        <ContenuFavoris avecBoutonFavori={estConnecte} itemsEnFavori={itemsCyberPartages} />
       {/if}
     </div>
   </div>
@@ -80,22 +67,15 @@
         />
         {#if estConnecte}
           <h2>Découvrez plus de services et ressources cyber</h2>
-          <p>
-            Accédez aux services et ressources cyber proposés par l’ANSSI et ses
-            partenaires.
-          </p>
-          <a href="/catalogue/" class="bouton primaire">Explorer le catalogue</a
-          >
+          <p>Accédez aux services et ressources cyber proposés par l’ANSSI et ses partenaires.</p>
+          <a href="/catalogue/" class="bouton primaire">Explorer le catalogue</a>
         {:else}
           <h2>Créez votre propre liste de favoris !</h2>
           <p>
-            Créez-vous un compte MesServicesCyber, explorez le catalogue et
-            sauvegardez facilement les services et ressources utiles pour votre
-            organisation.
+            Créez-vous un compte MesServicesCyber, explorez le catalogue et sauvegardez facilement les services et
+            ressources utiles pour votre organisation.
           </p>
-          <a href="/connexion/" class="bouton primaire">
-            Connectez-vous sur MesServicesCyber
-          </a>
+          <a href="/connexion/" class="bouton primaire"> Connectez-vous sur MesServicesCyber </a>
         {/if}
       </div>
     </div>

@@ -43,30 +43,12 @@
         href={estConnecte ? '/ma-maturite' : '/test-maturite/'}
         label={estConnecte ? 'Maturité cyber' : 'Test de maturité cyber'}
       />
-      <details
-        class:actif={[
-          '/catalogue/',
-          '/parcours-debuter/',
-          '/parcours-approfondir/',
-        ].includes(cheminRelatif)}
-      >
+      <details class:actif={['/catalogue/', '/parcours-debuter/', '/parcours-approfondir/'].includes(cheminRelatif)}>
         <summary>Catalogue et sélections</summary>
         <div class="choix">
-          <LienNavigationMobile
-            href="/catalogue/"
-            label="Le catalogue cyber complet"
-            dansMenuDeroulant
-          />
-          <LienNavigationMobile
-            href="/parcours-debuter/"
-            label="Les services pour se lancer"
-            dansMenuDeroulant
-          />
-          <LienNavigationMobile
-            href="/parcours-approfondir/"
-            label="Les services pour approfondir"
-            dansMenuDeroulant
-          />
+          <LienNavigationMobile href="/catalogue/" label="Le catalogue cyber complet" dansMenuDeroulant />
+          <LienNavigationMobile href="/parcours-debuter/" label="Les services pour se lancer" dansMenuDeroulant />
+          <LienNavigationMobile href="/parcours-approfondir/" label="Les services pour approfondir" dansMenuDeroulant />
         </div>
       </details>
       <LienNavigationMobile label="Directive NIS 2" href="/nis2" />
@@ -74,10 +56,7 @@
         <LienNavigationMobile href="/favoris/" label="Favoris" />
       {/if}
 
-      <details
-        class:actif={cheminRelatif.startsWith('/contacts/') ||
-          cheminRelatif === '/prestataires-labellises/'}
-      >
+      <details class:actif={cheminRelatif.startsWith('/contacts/') || cheminRelatif === '/prestataires-labellises/'}>
         <summary>Contacts utiles</summary>
         <div class="choix">
           <LienNavigationMobile
@@ -113,10 +92,7 @@
         </div>
       </details>
       {#if estConnecte}
-        <LienNavigationMobile
-          href="/services-anssi/"
-          label="Services ANSSI utilisés"
-        />
+        <LienNavigationMobile href="/services-anssi/" label="Services ANSSI utilisés" />
       {/if}
     </div>
   </nav>

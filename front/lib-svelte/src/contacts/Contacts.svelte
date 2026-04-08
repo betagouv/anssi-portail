@@ -15,21 +15,15 @@
   let secteurSelectionne: string = $state('');
 
   const contactsRegionaux = $derived(
-    estCodeRegion(regionSelectionnee)
-      ? contactsParRegion[regionSelectionnee]
-      : undefined
+    estCodeRegion(regionSelectionnee) ? contactsParRegion[regionSelectionnee] : undefined
   );
 
   const contactSectoriel = $derived(
-    estCodeSecteurContact(secteurSelectionne)
-      ? contactsParSecteur[secteurSelectionne]
-      : undefined
+    estCodeSecteurContact(secteurSelectionne) ? contactsParSecteur[secteurSelectionne] : undefined
   );
 
   // Gestion du fragment
-  let fragmentDeNavigation = $state(
-    creeLeFragmentDeNavigation(window.location.hash)
-  );
+  let fragmentDeNavigation = $state(creeLeFragmentDeNavigation(window.location.hash));
   const changeLeFragmentDeNavigation = () => {
     fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
     appliqueLesFiltres();
@@ -46,9 +40,7 @@
     const parametreRegion = fragmentDeNavigation.extraisValeur('region', '');
     regionSelectionnee = estCodeRegion(parametreRegion) ? parametreRegion : '';
     const parametreSecteur = fragmentDeNavigation.extraisValeur('secteur', '');
-    secteurSelectionne = estCodeSecteurContact(parametreSecteur)
-      ? parametreSecteur
-      : '';
+    secteurSelectionne = estCodeSecteurContact(parametreSecteur) ? parametreSecteur : '';
   };
   appliqueLesFiltres();
   $effect(() => {
@@ -110,8 +102,7 @@
           {/if}
 
           {#if contactsRegionaux.CSIRT}
-            {@const { nom, telephone, siteWeb, adresse } =
-              contactsRegionaux.CSIRT}
+            {@const { nom, telephone, siteWeb, adresse } = contactsRegionaux.CSIRT}
             <div class="carte-contact">
               <h3>{nom}</h3>
               {#if telephone}
@@ -150,9 +141,7 @@
           <div class="carte-contact">
             <h3>{contactSectoriel.nom}</h3>
             <p class="site-web">
-              <a href={contactSectoriel.siteWeb} target="_blank" class="lien"
-                >{contactSectoriel.siteWeb}</a
-              >
+              <a href={contactSectoriel.siteWeb} target="_blank" class="lien">{contactSectoriel.siteWeb}</a>
             </p>
           </div>
         {/if}
@@ -163,33 +152,24 @@
           <h3>CERT-FR</h3>
           <div>
             <p>
-              Le CERT-FR est l'interlocuteur de référence des entités publiques
-              et régulées (opérateurs d'importance vitale, opérateurs de
-              services essentiels).
+              Le CERT-FR est l'interlocuteur de référence des entités publiques et régulées (opérateurs d'importance
+              vitale, opérateurs de services essentiels).
             </p>
             <br />
             <p>Contactez le CERT-FR pour :</p>
             <ul>
               <li>
-                <a
-                  href="https://club.ssi.gouv.fr/#/declaration-incident"
-                  target="_blank"
-                  class="lien"
+                <a href="https://club.ssi.gouv.fr/#/declaration-incident" target="_blank" class="lien"
                   >Déclarer un incident et/ou demander une assistance</a
                 >
               </li>
               <li>
-                <a
-                  href="https://club.ssi.gouv.fr/#/declaration-art-2321-4-1"
-                  class="lien"
-                  target="_blank">Signaler une vulnérabilité produit</a
+                <a href="https://club.ssi.gouv.fr/#/declaration-art-2321-4-1" class="lien" target="_blank"
+                  >Signaler une vulnérabilité produit</a
                 >
               </li>
             </ul>
-            <a
-              href="https://www.cert.ssi.gouv.fr/contact/"
-              target="_blank"
-              class="lien"
+            <a href="https://www.cert.ssi.gouv.fr/contact/" target="_blank" class="lien"
               >Toutes les coordonnées du CERT-FR
             </a>
           </div>
@@ -199,16 +179,12 @@
           <h3>17 Cyber</h3>
           <div>
             <p>
-              Le 17cyber propose aux particuliers et aux autres entités, un
-              diagnostic permettant d'obtenir des recommandations en cas
-              d'incident et d'être mis en relation avec un policier, un
-              gendarme, un prestataire ou un CSIRT territorial .
+              Le 17cyber propose aux particuliers et aux autres entités, un diagnostic permettant d'obtenir des
+              recommandations en cas d'incident et d'être mis en relation avec un policier, un gendarme, un prestataire
+              ou un CSIRT territorial .
             </p>
             <br />
-            <a
-              href="https://www.cybermalveillance.gouv.fr/diagnostic"
-              target="_blank"
-              class="lien"
+            <a href="https://www.cybermalveillance.gouv.fr/diagnostic" target="_blank" class="lien"
               >Aller sur le 17Cyber
             </a>
           </div>
@@ -217,14 +193,8 @@
     {:else}
       <div class="aucun-resultat">
         <NoteInformation />
-        <img
-          src="/assets/images/contacts-resultat-vide.svg"
-          alt="Aucun résultat"
-        />
-        <h5>
-          Sélectionnez une région ou un secteur d’activité depuis le menu de
-          filtres.
-        </h5>
+        <img src="/assets/images/contacts-resultat-vide.svg" alt="Aucun résultat" />
+        <h5>Sélectionnez une région ou un secteur d’activité depuis le menu de filtres.</h5>
       </div>
     {/if}
   </div>

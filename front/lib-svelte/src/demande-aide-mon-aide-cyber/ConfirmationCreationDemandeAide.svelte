@@ -7,10 +7,7 @@
 
 <div class={['confirmation', mode]}>
   <h3>Votre demande a bien été envoyée&nbsp;!</h3>
-  <p>
-    Un Aidant cyber prendra bientôt contact avec vous pour vous accompagner dans
-    les prochaines étapes.
-  </p>
+  <p>Un Aidant cyber prendra bientôt contact avec vous pour vous accompagner dans les prochaines étapes.</p>
   {#if !cacheLesLiens}
     <Bouton
       type="primaire"

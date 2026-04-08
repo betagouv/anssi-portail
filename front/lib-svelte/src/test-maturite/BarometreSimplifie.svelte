@@ -14,9 +14,7 @@
     const testParNiveau = reponse.data.testsMaturite.parNiveau;
     const serieConstruite: Serie = [];
     for (const [idNiveau, valeur] of Object.entries(testParNiveau)) {
-      const libelle = niveauxMaturite.find(
-        (niveau) => niveau.id === idNiveau
-      )!.label;
+      const libelle = niveauxMaturite.find((niveau) => niveau.id === idNiveau)!.label;
       serieConstruite.push({ libelle, valeur });
     }
     serie = serieConstruite;

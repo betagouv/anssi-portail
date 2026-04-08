@@ -5,11 +5,7 @@
 <div class="tuiles-niveau">
   {#each niveauxMaturite as niveau, index (index)}
     <div class="tuile-niveau">
-      <img
-        class="plante"
-        src="/assets/images/test-maturite/niveaux/{niveau.id}.svg"
-        alt="Niveau de maturité"
-      />
+      <img class="plante" src="/assets/images/test-maturite/niveaux/{niveau.id}.svg" alt="Niveau de maturité" />
       <span>{niveau.label}</span>
     </div>
   {/each}

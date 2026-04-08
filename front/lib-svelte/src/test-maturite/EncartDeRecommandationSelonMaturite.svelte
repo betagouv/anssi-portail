@@ -9,10 +9,7 @@
 
   export let niveau: NiveauMaturite;
 
-  $: niveauFaible =
-    niveau.id === 'insuffisant' ||
-    niveau.id === 'emergent' ||
-    niveau.id === 'intermediaire';
+  $: niveauFaible = niveau.id === 'insuffisant' || niveau.id === 'emergent' || niveau.id === 'intermediaire';
 </script>
 
 {#if niveauFaible}

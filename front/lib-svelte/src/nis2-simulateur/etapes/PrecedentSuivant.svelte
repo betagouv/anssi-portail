@@ -15,17 +15,11 @@
 <div class="actions">
   <p>{props.message}</p>
 
-  <dsfr-button
-    use:clic={questionnaireAvecUndo.undo}
-    kind="secondary"
-    disabled={props.precedentdisabled}
-  >
+  <dsfr-button use:clic={questionnaireAvecUndo.undo} kind="secondary" disabled={props.precedentdisabled}>
     Précédent
   </dsfr-button>
 
-  <dsfr-button disabled={props.suivantdisabled} use:clic={props.onsuivant}>
-    Suivant
-  </dsfr-button>
+  <dsfr-button disabled={props.suivantdisabled} use:clic={props.onsuivant}> Suivant </dsfr-button>
 </div>
 
 <style lang="scss">

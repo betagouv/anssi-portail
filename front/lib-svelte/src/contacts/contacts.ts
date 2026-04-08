@@ -1,15 +1,11 @@
 import type { Profil } from '../stores/profil.store';
 import { type CodeSecteurContact, codesSecteurContact } from './contacts.type';
 
-export const estCodeSecteurContact = (
-  codeSecteur: string
-): codeSecteur is CodeSecteurContact => {
+export const estCodeSecteurContact = (codeSecteur: string): codeSecteur is CodeSecteurContact => {
   return (codesSecteurContact as readonly string[]).includes(codeSecteur);
 };
 
-export const calculeCodeSecteurContact = (
-  codeActivite: string
-): CodeSecteurContact | undefined => {
+export const calculeCodeSecteurContact = (codeActivite: string): CodeSecteurContact | undefined => {
   if (codeActivite === '25.40Z' || codeActivite === '84.22Z') {
     return 'defense';
   }

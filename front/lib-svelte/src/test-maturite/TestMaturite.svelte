@@ -12,10 +12,7 @@
   import SelectRegion from './SelectRegion.svelte';
   import SelectSecteurActivite from './SelectSecteurActivite.svelte';
   import SelectTailleOrganisation from './SelectTailleOrganisation.svelte';
-  import {
-    questionnaireStore,
-    resultatsQuestionnaire,
-  } from './stores/questionnaire.store';
+  import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
   import { etapesTestMaturite } from './TestMaturite.donnees';
 
   let afficheResultats = false;
@@ -36,10 +33,7 @@
   actualiseReponseCourante();
 
   function actualiseReponseCourante() {
-    reponseCourante =
-      $questionnaireStore.toutesLesReponses[
-        $questionnaireStore.questionCourante
-      ];
+    reponseCourante = $questionnaireStore.toutesLesReponses[$questionnaireStore.questionCourante];
     if (contenuTest) contenuTest.scrollIntoView({ behavior: 'smooth' });
   }
 
@@ -55,9 +49,7 @@
 
   const lisIdQuestionCourante = (q: number) => etapesTestMaturite[q].id;
 
-  $: idQuestionCourante = lisIdQuestionCourante(
-    $questionnaireStore.questionCourante
-  );
+  $: idQuestionCourante = lisIdQuestionCourante($questionnaireStore.questionCourante);
 
   type CreationTest = {
     id: string;
@@ -89,11 +81,8 @@
 
   let montreProposition = false;
   $: {
-    const avecPropositions = etapesTestMaturite.filter(
-      (q) => q.propositions.length > 0
-    );
-    montreProposition =
-      $questionnaireStore.questionCourante < avecPropositions.length;
+    const avecPropositions = etapesTestMaturite.filter((q) => q.propositions.length > 0);
+    montreProposition = $questionnaireStore.questionCourante < avecPropositions.length;
   }
 
   let ongletActif: 'votre-organisation' | 'comparaison' = 'votre-organisation';
@@ -124,12 +113,8 @@
     titre="Test de maturité cyber"
     description="Obtenez en 5 minutes une évaluation indicative de la maturité cyber de votre organisation."
     ariane={enSessionGroupe ? 'Session de groupe' : 'Test de maturité cyber'}
-    arianeBranche={enSessionGroupe
-      ? { nom: 'Test de maturité cyber', lien: '/test-maturite' }
-      : undefined}
-    arianeBrancheConnectee={enSessionGroupe
-      ? { nom: 'Maturité cyber', lien: '/ma-maturite' }
-      : undefined}
+    arianeBranche={enSessionGroupe ? { nom: 'Test de maturité cyber', lien: '/test-maturite' } : undefined}
+    arianeBrancheConnectee={enSessionGroupe ? { nom: 'Maturité cyber', lien: '/ma-maturite' } : undefined}
   />
 
   {#if ongletActif === 'votre-organisation'}
@@ -149,25 +134,17 @@
               <h5>
                 {etapesTestMaturite[$questionnaireStore.questionCourante].titre}
               </h5>
-              <Etapier
-                etapeCourante={$questionnaireStore.questionCourante}
-                nombreEtapes={7}
-              />
+              <Etapier etapeCourante={$questionnaireStore.questionCourante} nombreEtapes={7} />
               <h2>
                 <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-                {@html etapesTestMaturite[$questionnaireStore.questionCourante]
-                  .question}
+                {@html etapesTestMaturite[$questionnaireStore.questionCourante].question}
               </h2>
 
               {#if montreProposition}
                 <div class="propositions">
                   {#each etapesTestMaturite[$questionnaireStore.questionCourante].propositions as proposition, index (proposition)}
                     <label>
-                      <input
-                        type="radio"
-                        bind:group={reponseCourante}
-                        value={index}
-                      />
+                      <input type="radio" bind:group={reponseCourante} value={index} />
                       <span>{index + 1}.&nbsp;{proposition}</span>
                     </label>
                   {/each}
@@ -198,8 +175,7 @@
                   </label>
 
                   <label>
-                    Dans quelle région / territoire se trouve votre
-                    organisation&nbsp;?
+                    Dans quelle région / territoire se trouve votre organisation&nbsp;?
                     <SelectRegion bind:region />
                   </label>
 
@@ -236,10 +212,7 @@
               {/if}
             </div>
             <div class="illustration">
-              <img
-                src="/assets/images/test-maturite/illustration-{idQuestionCourante}.svg"
-                alt=""
-              />
+              <img src="/assets/images/test-maturite/illustration-{idQuestionCourante}.svg" alt="" />
             </div>
           </div>
         {:else}

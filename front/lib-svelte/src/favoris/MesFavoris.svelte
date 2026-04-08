@@ -21,14 +21,10 @@
   <div class="contenu-section">
     <FilAriane feuille="Favoris" />
     <h1 class="alternatif-xs-ns">Services et ressources favoris</h1>
-    <p class="texte-chapo-xl-ns">
-      Retrouvez tous vos contenus cyber à partager.
-    </p>
+    <p class="texte-chapo-xl-ns">Retrouvez tous vos contenus cyber à partager.</p>
     {#if $itemsCatalogueEnFavori.length > 0}
       <div class="cta">
-        <p class="texte-chapo-xl-ns">
-          Parcourez le catalogue pour ajouter plus de services et ressources.
-        </p>
+        <p class="texte-chapo-xl-ns">Parcourez le catalogue pour ajouter plus de services et ressources.</p>
         <a href="/catalogue/" class="bouton primaire">Explorer le catalogue</a>
       </div>
     {/if}
@@ -40,33 +36,18 @@
     <div class="favoris">
       {#if $itemsCatalogueEnFavori.length === 0}
         <div class="contenu-sans-favoris">
-          <img
-            src="/assets/images/illustration-dragon-aucun-resultat.svg"
-            alt="Aucun favori sauvegardé"
-          />
-          <h2>
-            Ajoutez vos services et ressources favoris et partagez-les
-            facilement au sein de votre organisation.
-          </h2>
+          <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Aucun favori sauvegardé" />
+          <h2>Ajoutez vos services et ressources favoris et partagez-les facilement au sein de votre organisation.</h2>
           <a href="/catalogue" class="bouton primaire">Explorer le catalogue</a>
         </div>
       {:else}
         <div class="banniere-partage-favoris">
           <p>
-            Une liste de favoris bien pensée est la clé pour sensibiliser
-            efficacement vos équipes à la cybersécurité.
+            Une liste de favoris bien pensée est la clé pour sensibiliser efficacement vos équipes à la cybersécurité.
           </p>
-          <Bouton
-            type="primaire"
-            titre="Partager mes favoris"
-            icone="partager"
-            on:click={partageLien}
-          />
+          <Bouton type="primaire" titre="Partager mes favoris" icone="partager" on:click={partageLien} />
         </div>
-        <ContenuFavoris
-          avecBoutonFavori
-          itemsEnFavori={$itemsCatalogueEnFavori}
-        />
+        <ContenuFavoris avecBoutonFavori itemsEnFavori={$itemsCatalogueEnFavori} />
       {/if}
     </div>
   </div>

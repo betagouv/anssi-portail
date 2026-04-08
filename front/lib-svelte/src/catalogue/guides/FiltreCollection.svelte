@@ -13,8 +13,7 @@
     $rechercheParCollection.includes(CollectionGuide.LES_FONDAMENTAUX) ||
     $rechercheParCollection.includes(CollectionGuide.AUTRE);
 
-  $: unePartieSeulementDesExpertisesTechniques =
-    !toutesLesExpertisesTechniques && quelquesExpertisesTechniques;
+  $: unePartieSeulementDesExpertisesTechniques = !toutesLesExpertisesTechniques && quelquesExpertisesTechniques;
 
   const gereCocheExpertiseTechnique = () => {
     if (toutesLesExpertisesTechniques) {
@@ -51,33 +50,21 @@
   </label>
   <fieldset>
     <label>
-      <input
-        type="checkbox"
-        value={CollectionGuide.LES_ESSENTIELS}
-        bind:group={$rechercheParCollection}
-      />
+      <input type="checkbox" value={CollectionGuide.LES_ESSENTIELS} bind:group={$rechercheParCollection} />
       <span class="libelle">{CollectionGuide.LES_ESSENTIELS}</span>
       <span class="compte">
         {$nombreGuides.parCollection[CollectionGuide.LES_ESSENTIELS]}
       </span>
     </label>
     <label>
-      <input
-        type="checkbox"
-        value={CollectionGuide.LES_FONDAMENTAUX}
-        bind:group={$rechercheParCollection}
-      />
+      <input type="checkbox" value={CollectionGuide.LES_FONDAMENTAUX} bind:group={$rechercheParCollection} />
       <span class="libelle">{CollectionGuide.LES_FONDAMENTAUX}</span>
       <span class="compte">
         {$nombreGuides.parCollection[CollectionGuide.LES_FONDAMENTAUX]}
       </span>
     </label>
     <label>
-      <input
-        type="checkbox"
-        value={CollectionGuide.AUTRE}
-        bind:group={$rechercheParCollection}
-      />
+      <input type="checkbox" value={CollectionGuide.AUTRE} bind:group={$rechercheParCollection} />
       <span class="libelle">{CollectionGuide.AUTRE}</span>
       <span class="compte">
         {$nombreGuides.parCollection[CollectionGuide.AUTRE]}
@@ -86,11 +73,7 @@
   </fieldset>
 
   <label>
-    <input
-      type="checkbox"
-      value={CollectionGuide.CRISE_CYBER}
-      bind:group={$rechercheParCollection}
-    />
+    <input type="checkbox" value={CollectionGuide.CRISE_CYBER} bind:group={$rechercheParCollection} />
     <span class="libelle">{CollectionGuide.CRISE_CYBER}</span>
     <span class="compte">
       {$nombreGuides.parCollection[CollectionGuide.CRISE_CYBER]}
@@ -98,11 +81,7 @@
   </label>
 
   <label>
-    <input
-      type="checkbox"
-      value={CollectionGuide.GESTION_DES_RISQUES_CYBER}
-      bind:group={$rechercheParCollection}
-    />
+    <input type="checkbox" value={CollectionGuide.GESTION_DES_RISQUES_CYBER} bind:group={$rechercheParCollection} />
     <span class="libelle">{CollectionGuide.GESTION_DES_RISQUES_CYBER}</span>
     <span class="compte">
       {$nombreGuides.parCollection[CollectionGuide.GESTION_DES_RISQUES_CYBER]}
@@ -110,11 +89,7 @@
   </label>
 
   <label>
-    <input
-      type="checkbox"
-      value={CollectionGuide.SUPERVISION_DE_SECURITE}
-      bind:group={$rechercheParCollection}
-    />
+    <input type="checkbox" value={CollectionGuide.SUPERVISION_DE_SECURITE} bind:group={$rechercheParCollection} />
     <span class="libelle">{CollectionGuide.SUPERVISION_DE_SECURITE}</span>
     <span class="compte">
       {$nombreGuides.parCollection[CollectionGuide.SUPERVISION_DE_SECURITE]}
@@ -122,11 +97,7 @@
   </label>
 
   <label>
-    <input
-      type="checkbox"
-      value={CollectionGuide.REMEDIATION}
-      bind:group={$rechercheParCollection}
-    />
+    <input type="checkbox" value={CollectionGuide.REMEDIATION} bind:group={$rechercheParCollection} />
     <span class="libelle">{CollectionGuide.REMEDIATION}</span>
     <span class="compte">
       {$nombreGuides.parCollection[CollectionGuide.REMEDIATION]}

@@ -17,14 +17,10 @@ export const titres: Record<RegulationEntite, Record<TypeEntite, string>> = {
     AutreEtatMembreUE: 'Votre entité ne sera pas régulée par NIS 2',
   },
   Incertain: {
-    EntiteEssentielle:
-      "Votre entité relève de la compétence<br/>d'un autre État membre vis-à-vis de NIS 2",
-    EntiteImportante:
-      "Votre entité relève de la compétence<br/>d'un autre État membre vis-à-vis de NIS 2",
-    EnregistrementUniquement:
-      "Votre entité relève de la compétence<br/>d'un autre État membre vis-à-vis de NIS 2",
-    AutreEtatMembreUE:
-      "Votre entité relève de la compétence<br/>d'un autre État membre vis-à-vis de NIS 2",
+    EntiteEssentielle: "Votre entité relève de la compétence<br/>d'un autre État membre vis-à-vis de NIS 2",
+    EntiteImportante: "Votre entité relève de la compétence<br/>d'un autre État membre vis-à-vis de NIS 2",
+    EnregistrementUniquement: "Votre entité relève de la compétence<br/>d'un autre État membre vis-à-vis de NIS 2",
+    AutreEtatMembreUE: "Votre entité relève de la compétence<br/>d'un autre État membre vis-à-vis de NIS 2",
   },
 };
 

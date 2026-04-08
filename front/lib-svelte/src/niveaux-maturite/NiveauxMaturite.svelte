@@ -22,9 +22,7 @@
     </div>
     <div class="grille-haute">
       {#each { length: COLONNES } as _, i (i)}
-        <IllustrationNiveauMaturite
-          niveauSelectionne={niveauxSelectionnes[i]}
-        />
+        <IllustrationNiveauMaturite niveauSelectionne={niveauxSelectionnes[i]} />
       {/each}
 
       {#each { length: COLONNES } as _, i (i)}

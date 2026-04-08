@@ -16,20 +16,14 @@
   titre=""
 >
   {#snippet preambule()}
-    <h1 class="alternatif-xs">
-      Protéger mon entreprise contre les cyberattaques
-    </h1>
+    <h1 class="alternatif-xs">Protéger mon entreprise contre les cyberattaques</h1>
     <p class="texte-chapo-xl">
-      Toutes les entreprises sont exposées au risque de cyberattaques. En 2025,
-      les TPE/PME et ETI ont notamment représenté 48&nbsp;% des victimes de
-      rançongiciels ou ransowmare représentant les premières entités visées.
+      Toutes les entreprises sont exposées au risque de cyberattaques. En 2025, les TPE/PME et ETI ont notamment
+      représenté 48&nbsp;% des victimes de rançongiciels ou ransowmare représentant les premières entités visées.
     </p>
   {/snippet}
   {#snippet filAriane()}
-    <FilAriane
-      fondSombre={true}
-      feuille="Protéger mon entreprise contre les cyberattaques"
-    />
+    <FilAriane fondSombre={true} feuille="Protéger mon entreprise contre les cyberattaques" />
   {/snippet}
 </Heros>
 

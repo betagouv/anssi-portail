@@ -1,8 +1,5 @@
 <script lang="ts">
-  import {
-    formateContenuExigence,
-    type ExigenceComparee,
-  } from '../exigence.type';
+  import { formateContenuExigence, type ExigenceComparee } from '../exigence.type';
 
   export let exigences: ExigenceComparee[];
 </script>

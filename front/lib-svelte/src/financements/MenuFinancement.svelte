@@ -20,17 +20,9 @@
     <details bind:this={detailsElement}>
       <summary>
         <div class="entete-filtres">
-          <img
-            class="menu"
-            src="/assets/images/icone-menu-lateral.svg"
-            alt=""
-          />
+          <img class="menu" src="/assets/images/icone-menu-lateral.svg" alt="" />
           <span id="section-active" class="titre-menu">Objectifs</span>
-          <img
-            class="chevron"
-            src="/assets/images/icone-chevron-bas.svg"
-            alt=""
-          />
+          <img class="chevron" src="/assets/images/icone-chevron-bas.svg" alt="" />
         </div>
       </summary>
       <ul>

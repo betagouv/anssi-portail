@@ -21,13 +21,10 @@
 
   const tronque = (texte: string) => {
     const LONGUEUR_MAX = 54;
-    return texte?.length > LONGUEUR_MAX
-      ? texte.slice(0, LONGUEUR_MAX) + '&hellip;'
-      : texte;
+    return texte?.length > LONGUEUR_MAX ? texte.slice(0, LONGUEUR_MAX) + '&hellip;' : texte;
   };
 
-  const estUnGuide = (item: ItemCyber | Guide): item is Guide =>
-    item.type === 'Guide';
+  const estUnGuide = (item: ItemCyber | Guide): item is Guide => item.type === 'Guide';
 </script>
 
 <figure>
@@ -35,10 +32,7 @@
     <img src={item.illustration.petite} alt="Illustration du guide" />
     <div class="badges-collection"><BadgesDeCollections guide={item} /></div>
   {:else}
-    <img
-      src="/assets/images/illustrations-services/{item.illustration}"
-      alt="Illustration du service"
-    />
+    <img src="/assets/images/illustrations-services/{item.illustration}" alt="Illustration du service" />
     <figcaption>{libelleBadge(item)}</figcaption>
   {/if}
 </figure>
@@ -74,17 +68,9 @@
       {/if}
       {#if item.lienInterne || (item.type !== 'Guide' && item.lienExterne)}
         <img
-          src={`/assets/images/${
-            item.lienInterne
-              ? 'icone-fleche-droite.svg'
-              : 'icone-lien-externe.svg'
-          }`}
-          alt={item.lienInterne
-            ? 'Voir le détail'
-            : 'Ouvrir dans un nouvel onglet'}
-          title={item.lienInterne
-            ? 'Voir le détail'
-            : 'Ouvrir dans un nouvel onglet'}
+          src={`/assets/images/${item.lienInterne ? 'icone-fleche-droite.svg' : 'icone-lien-externe.svg'}`}
+          alt={item.lienInterne ? 'Voir le détail' : 'Ouvrir dans un nouvel onglet'}
+          title={item.lienInterne ? 'Voir le détail' : 'Ouvrir dans un nouvel onglet'}
         />
       {/if}
     </div>

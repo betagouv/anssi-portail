@@ -31,9 +31,7 @@
 
   const surFermetureCTA = () => {
     encartOuvert = false;
-    entrepotNavigateurAvisUtilisateur.modifieDateDerniereFermetureAvis(
-      new Date()
-    );
+    entrepotNavigateurAvisUtilisateur.modifieDateDerniereFermetureAvis(new Date());
   };
 
   const soumetsLeFormulaire = async () => {
@@ -56,18 +54,14 @@
   };
 
   onMount(() => {
-    encartOuvert = !RegExp(/(\/?)(cyberdepart|test-maturite)(\/?)$/).exec(
-      window.location.pathname
-    );
+    encartOuvert = !RegExp(/(\/?)(cyberdepart|test-maturite)(\/?)$/).exec(window.location.pathname);
   });
   $: {
     if (dialogue) {
       if (afficheDialogue) {
         dialogue.showModal();
       } else {
-        entrepotNavigateurAvisUtilisateur.modifieDateDerniereFermetureAvis(
-          new Date()
-        );
+        entrepotNavigateurAvisUtilisateur.modifieDateDerniereFermetureAvis(new Date());
         dialogue.close();
       }
     }
@@ -75,28 +69,14 @@
 </script>
 
 {#if encartOuvert}
-  <div
-    class="avis-utilisateur-cta"
-    transition:fly={{ duration: 1000, x: 140, opacity: 1 }}
-  >
-    <button
-      class="zone-cliquable"
-      on:click={surCliqueCTA}
-      on:keypress
-      tabindex={null}
-    >
+  <div class="avis-utilisateur-cta" transition:fly={{ duration: 1000, x: 140, opacity: 1 }}>
+    <button class="zone-cliquable" on:click={surCliqueCTA} on:keypress tabindex={null}>
       <div class="illustration">
         <img src="/assets/images/dragon-coeur.svg" alt="Dragon coeur" />
       </div>
       <p class="texte">Votre avis nous intéresse&nbsp;!</p>
     </button>
-    <button
-      on:keypress
-      on:click={surFermetureCTA}
-      tabindex={null}
-      aria-label="Fermer"
-      class="fermer"
-    >
+    <button on:keypress on:click={surFermetureCTA} tabindex={null} aria-label="Fermer" class="fermer">
       <lab-anssi-icone nom="close-line" taille="sm"></lab-anssi-icone>
     </button>
   </div>
@@ -120,58 +100,26 @@
           ></lab-anssi-alerte>
         {/if}
         <div class="question">
-          <p class:erreur={erreurSatisfaction}>
-            Le service MesServicesCyber répond-il à vos attentes&nbsp;?
-          </p>
+          <p class:erreur={erreurSatisfaction}>Le service MesServicesCyber répond-il à vos attentes&nbsp;?</p>
           <div class="satisfaction">
             <div class="niveaux-satisfaction">
-              <input
-                id="pas-du-tout"
-                type="radio"
-                name="note"
-                value="1"
-                bind:group={satisfaction}
-              />
+              <input id="pas-du-tout" type="radio" name="note" value="1" bind:group={satisfaction} />
               <label class="niveau-satisfaction" for="pas-du-tout">
                 <span aria-label="Pas du tout" role="img">😠</span>
               </label>
-              <input
-                id="pas-satisfait"
-                type="radio"
-                name="note"
-                value="2"
-                bind:group={satisfaction}
-              />
+              <input id="pas-satisfait" type="radio" name="note" value="2" bind:group={satisfaction} />
               <label class="niveau-satisfaction" for="pas-satisfait">
                 <span aria-label="Pas satisfait" role="img">☹️</span>
               </label>
-              <input
-                id="moyennement-satisfait"
-                type="radio"
-                name="note"
-                value="3"
-                bind:group={satisfaction}
-              />
+              <input id="moyennement-satisfait" type="radio" name="note" value="3" bind:group={satisfaction} />
               <label class="niveau-satisfaction" for="moyennement-satisfait">
                 <span aria-label="Moyennement satisfait" role="img">😕</span>
               </label>
-              <input
-                id="satisfait"
-                type="radio"
-                name="note"
-                value="4"
-                bind:group={satisfaction}
-              />
+              <input id="satisfait" type="radio" name="note" value="4" bind:group={satisfaction} />
               <label class="niveau-satisfaction" for="satisfait">
                 <span aria-label="Satisfait" role="img">😊</span>
               </label>
-              <input
-                id="tout-a-fait"
-                type="radio"
-                name="note"
-                value="5"
-                bind:group={satisfaction}
-              />
+              <input id="tout-a-fait" type="radio" name="note" value="5" bind:group={satisfaction} />
               <label class="niveau-satisfaction" for="tout-a-fait">
                 <span aria-label="Tout à fait" role="img">🤩</span>
               </label>
@@ -187,8 +135,7 @@
           <ZoneTexte bind:valeur={commentaire} enErreur={erreurCommentaire} />
         </div>
         <p class="mis-en-avant">
-          Échangez avec nous sur votre expérience et participez aux futures
-          évolutions de la plateforme&nbsp;!
+          Échangez avec nous sur votre expérience et participez aux futures évolutions de la plateforme&nbsp;!
         </p>
         <div class="question">
           <p>Email de contact (facultatif)</p>
@@ -201,8 +148,7 @@
             bind:valeur={emailDeContact}
           />
           <p class="information">
-            Votre email ne sera utilisé que pour échanger sur la plateforme et
-            ses futures évolutions.
+            Votre email ne sera utilisé que pour échanger sur la plateforme et ses futures évolutions.
           </p>
         </div>
       </div>
@@ -232,14 +178,10 @@
     {:else}
       <div class="contenu">
         <BoutonFermerModale on:click={() => dialogue.close()} />
-        <h4>
-          Merci 🤩&nbsp;! Vos remarques sont précieuses pour faire évoluer le
-          service.
-        </h4>
+        <h4>Merci 🤩&nbsp;! Vos remarques sont précieuses pour faire évoluer le service.</h4>
         <p>
-          Si vous avez renseigné votre adresse email, nous vous recontacterons
-          très prochainement pour échanger sur la plateforme et ses futures
-          évolutions.
+          Si vous avez renseigné votre adresse email, nous vous recontacterons très prochainement pour échanger sur la
+          plateforme et ses futures évolutions.
         </p>
       </div>
       <footer class="actions">

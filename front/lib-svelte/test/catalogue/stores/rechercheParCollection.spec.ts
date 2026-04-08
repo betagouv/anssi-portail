@@ -31,10 +31,7 @@ describe('La recherche par collection', () => {
   });
 
   it("retourne vrai lorsque plusieurs collections sont sélectionnées et qu'une correspond", () => {
-    rechercheParCollection.set([
-      CollectionGuide.CRISE_CYBER,
-      CollectionGuide.LES_ESSENTIELS,
-    ]);
+    rechercheParCollection.set([CollectionGuide.CRISE_CYBER, CollectionGuide.LES_ESSENTIELS]);
 
     const resultat = rechercheParCollection.ok(guideZeroTrust);
 
@@ -42,15 +39,9 @@ describe('La recherche par collection', () => {
   });
 
   it('ajoute une liste de collection à la liste existante sans doublon', () => {
-    rechercheParCollection.set([
-      CollectionGuide.CRISE_CYBER,
-      CollectionGuide.LES_ESSENTIELS,
-    ]);
+    rechercheParCollection.set([CollectionGuide.CRISE_CYBER, CollectionGuide.LES_ESSENTIELS]);
 
-    rechercheParCollection.ajoute([
-      CollectionGuide.CRISE_CYBER,
-      CollectionGuide.LES_FONDAMENTAUX,
-    ]);
+    rechercheParCollection.ajoute([CollectionGuide.CRISE_CYBER, CollectionGuide.LES_FONDAMENTAUX]);
 
     expect(get(rechercheParCollection)).toEqual([
       CollectionGuide.CRISE_CYBER,
@@ -60,18 +51,10 @@ describe('La recherche par collection', () => {
   });
 
   it('retire une liste de collection à la liste existante si les items existent', () => {
-    rechercheParCollection.set([
-      CollectionGuide.CRISE_CYBER,
-      CollectionGuide.LES_ESSENTIELS,
-    ]);
+    rechercheParCollection.set([CollectionGuide.CRISE_CYBER, CollectionGuide.LES_ESSENTIELS]);
 
-    rechercheParCollection.retire([
-      CollectionGuide.CRISE_CYBER,
-      CollectionGuide.LES_FONDAMENTAUX,
-    ]);
+    rechercheParCollection.retire([CollectionGuide.CRISE_CYBER, CollectionGuide.LES_FONDAMENTAUX]);
 
-    expect(get(rechercheParCollection)).toEqual([
-      CollectionGuide.LES_ESSENTIELS,
-    ]);
+    expect(get(rechercheParCollection)).toEqual([CollectionGuide.LES_ESSENTIELS]);
   });
 });

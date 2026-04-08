@@ -4,10 +4,7 @@
 </script>
 
 <div class="aucun-resultat">
-  <img
-    src="/assets/images/homme-cherchant-avec-loupe.svg"
-    alt="Aucun résultat"
-  />
+  <img src="/assets/images/homme-cherchant-avec-loupe.svg" alt="Aucun résultat" />
   <h3>Désolé, aucun résultat trouvé</h3>
   <dsfr-button
     label="Réinitialiser les filtres"

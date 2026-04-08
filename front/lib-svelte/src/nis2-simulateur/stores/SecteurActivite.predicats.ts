@@ -6,30 +6,19 @@ import { ValeursSecteursComposites } from '../../../../../back/src/metier/nis2-s
 import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions';
 import { contientUnParmi } from '../../../../../back/src/metier/nis2-simulateur/commun.predicats';
 
-export const estUnSecteurAvecDesSousSecteurs = (
-  secteur: string
-): secteur is SecteurComposite =>
+export const estUnSecteurAvecDesSousSecteurs = (secteur: string): secteur is SecteurComposite =>
   ValeursSecteursComposites.includes(secteur as SecteurComposite);
 
-export const estSecteurAutre = (secteur: SecteurActivite) =>
-  secteur.startsWith('autre');
+export const estSecteurAutre = (secteur: SecteurActivite) => secteur.startsWith('autre');
 
-export const doitPasserParLocalisationFournitureServicesNumeriques = (
-  activites: Activite[]
-) =>
+export const doitPasserParLocalisationFournitureServicesNumeriques = (activites: Activite[]) =>
   contientUnParmi(
     'fournisseurReseauxCommunicationElectroniquesPublics',
     'fournisseurServiceCommunicationElectroniquesPublics'
   )(activites);
 
-export const doitPasserParLocalisationEtablissementPrincipal = (
-  secteurs: SecteurActivite[],
-  activites: Activite[]
-) => {
-  const ticOuFournisseurNumerique = contientUnParmi(
-    'gestionServicesTic',
-    'fournisseursNumeriques'
-  )(secteurs);
+export const doitPasserParLocalisationEtablissementPrincipal = (secteurs: SecteurActivite[], activites: Activite[]) => {
+  const ticOuFournisseurNumerique = contientUnParmi('gestionServicesTic', 'fournisseursNumeriques')(secteurs);
 
   const activiteFournisseurServiceNumerique = contientUnParmi(
     'registresNomsDomainesPremierNiveau',

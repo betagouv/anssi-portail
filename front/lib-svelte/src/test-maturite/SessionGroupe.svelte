@@ -24,9 +24,7 @@
   const nouvelleSession = async () => {
     try {
       creationNouvelleSession = true;
-      const reponse = await axios.post<ReponseCreationSessionGroupe>(
-        '/api/sessions-groupe'
-      );
+      const reponse = await axios.post<ReponseCreationSessionGroupe>('/api/sessions-groupe');
       modaleNouvelleSession.ouvre(reponse.data);
     } finally {
       creationNouvelleSession = false;
@@ -52,12 +50,9 @@
       <div class="role">Organisateur</div>
       <h3>Lancer une session de groupe</h3>
       <p>
-        <b>
-          Vous organisez un atelier ou un événement autour de la cybersécurité ?
-        </b>
+        <b> Vous organisez un atelier ou un événement autour de la cybersécurité ? </b>
         <br /><br />
-        Générez un code de session à partager avec les participants. Vous pourrez
-        ensuite comparer les résultats obtenus.
+        Générez un code de session à partager avec les participants. Vous pourrez ensuite comparer les résultats obtenus.
       </p>
       <Bouton
         titre="Nouvelle session"
@@ -76,8 +71,8 @@
       <p>
         <b>Vous participez à une session de groupe ?</b>
         <br /><br />
-        Saisissez le code de session partagé par votre organisateur pour accéder
-        au test de maturité cyber. Votre résultat est anonyme.
+        Saisissez le code de session partagé par votre organisateur pour accéder au test de maturité cyber. Votre résultat
+        est anonyme.
       </p>
       <Formulaire bind:this={formulaire}>
         <ControleFormulaire

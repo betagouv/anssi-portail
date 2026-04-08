@@ -10,8 +10,7 @@ export const exigenceNIS2DeNiveauFaible = (): ExigenceNis2 => ({
   reference: 'EX-01',
   contenu: "Contenu de l'exigence 1",
   thematique: 'Gouvernance',
-  objectifSecurite:
-    "Objectif de sécurité 5: Maitrise des systèmes d'information",
+  objectifSecurite: "Objectif de sécurité 5: Maitrise des systèmes d'information",
   entitesCible: ['EntiteEssentielle'],
   correspondance: {
     niveau: 'faible',
