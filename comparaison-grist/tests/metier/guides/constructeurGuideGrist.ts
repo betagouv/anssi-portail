@@ -6,7 +6,6 @@ export class ConstructeurGuideGrist {
   private identifiant: string | null = null;
   private titre: string | null = null;
   private description: string | null = null;
-  private image: string | null = null;
   private langue: 'FR' | 'EN' | null = null;
   private collections: string[] = [];
   private readonly documents: DocumentGuide[] = [];
@@ -31,11 +30,6 @@ export class ConstructeurGuideGrist {
 
   avecLaDescription(description: string) {
     this.description = description;
-    return this;
-  }
-
-  avecLImage(image: string | null) {
-    this.image = image;
     return this;
   }
 
@@ -76,7 +70,6 @@ export class ConstructeurGuideGrist {
         Identifiant: this.identifiant,
         Titre: this.titre,
         Description: this.description,
-        Image: this.image,
         Langue: this.langue,
         Collections: this.collections,
         Date_de_mise_a_jour_s_: this.dateMiseAJour ? this.dateMiseAJour : null,

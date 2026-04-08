@@ -6,7 +6,6 @@ export const guideZeroTrust: Guide = {
   id: 'zero-trust',
   nom: 'Zero Trust',
   description: '<p>Avec l’accroissement des usages liés au télétravail, ...</p>',
-  nomImage: 'anssi-fondamentaux-zero-trust-v1_publication',
   langue: 'FR',
   collections: ['Les essentiels'],
   documents: [
@@ -24,7 +23,6 @@ export const guideDevsecops: Guide = {
   id: 'devsecops',
   nom: 'DevSecOps',
   description: '<p>Les Essentiels de l’ANSSI visent à éclairer l’ensemble de nos lecteurs, ...</p>',
-  nomImage: 'anssi_essentiels_devsecops_v1',
   langue: 'FR',
   collections: ['Les essentiels'],
   documents: [
@@ -47,7 +45,6 @@ describe('Le consignateur de comparaison de guides', () => {
 <th>Thématique</th>
 <th>Date de mise à jour</th>
 <th>Description</th>
-<th>Image</th>
 <th>Documents</th>
 <th>Langue</th>
 <th>Collections</th>
@@ -89,8 +86,6 @@ describe('Le consignateur de comparaison de guides', () => {
       '<td>\n\n' +
       '```diff\n+ <p>Avec l’accroissement des usages liés au télétravail, ...</p>\n```\n</td>\n' +
       '<td>\n\n' +
-      '```diff\n+ anssi-fondamentaux-zero-trust-v1_publication\n```\n</td>\n' +
-      '<td>\n\n' +
       '```diff\n+ Les Fondamentaux de l&#039;ANSSI - Zero Trust - v1.0 : anssi-fondamentaux-zero-trust-v1.0.pdf\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n+ FR\n```\n</td>\n' +
@@ -126,8 +121,6 @@ describe('Le consignateur de comparaison de guides', () => {
       '\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n- <p>Avec l’accroissement des usages liés au télétravail, ...</p>\n```\n</td>\n' +
-      '<td>\n\n' +
-      '```diff\n- anssi-fondamentaux-zero-trust-v1_publication\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n- Les Fondamentaux de l&#039;ANSSI - Zero Trust - v1.0 : anssi-fondamentaux-zero-trust-v1.0.pdf\n```\n</td>\n' +
       '<td>\n\n' +
@@ -165,8 +158,6 @@ describe('Le consignateur de comparaison de guides', () => {
       '\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n- <p>Les Essentiels de l’ANSSI visent à éclairer l’ensemble de nos lecteurs, ...</p>\n+ <p>Avec l’accroissement des usages liés au télétravail, ...</p>\n```\n</td>\n' +
-      '<td>\n\n' +
-      '```diff\n- anssi_essentiels_devsecops_v1\n+ anssi-fondamentaux-zero-trust-v1_publication\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n- Les Essentiels de l&#039;ANSSI - DevSecOps - v1.0 : anssi_essentiels_devsecops_v1.0.pdf\n+ Les Fondamentaux de l&#039;ANSSI - Zero Trust - v1.0 : anssi-fondamentaux-zero-trust-v1.0.pdf\n```\n</td>\n' +
       '<td>\n\n' +
@@ -207,8 +198,6 @@ describe('Le consignateur de comparaison de guides', () => {
       '\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n<p>Avec l’accroissement des usages liés au télétravail, ...</p>\n```\n</td>\n' +
-      '<td>\n\n' +
-      '```diff\nanssi-fondamentaux-zero-trust-v1_publication\n```\n</td>\n' +
       '<td>\n\n' +
       '```diff\n' +
       'Document 1 : document-1.pdf\n' +

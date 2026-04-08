@@ -16,7 +16,6 @@ export class ConsignateurDeComparaisonDeGuides {
 <th>Thématique</th>
 <th>Date de mise à jour</th>
 <th>Description</th>
-<th>Image</th>
 <th>Documents</th>
 <th>Langue</th>
 <th>Collections</th>
@@ -35,7 +34,6 @@ ${this.construisUneCelluleAvecLeContenu(`+ ${guide.nom}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.thematique}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.dateMiseAJour.toLocaleDateString()}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.description}`)}
-${this.construisUneCelluleAvecLeContenu(`+ ${guide.nomImage ?? ''}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n')}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.langue}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${guide.collections.join(', ')}`)}
@@ -51,7 +49,6 @@ ${this.construisUneCelluleAvecLeContenu(`- ${guide.nom}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.thematique}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.dateMiseAJour.toLocaleDateString()}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.description}`)}
-${this.construisUneCelluleAvecLeContenu(`- ${guide.nomImage ?? ''}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n')}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.langue}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${guide.collections.join(', ')}`)}
@@ -67,7 +64,6 @@ ${this.construisUneCelluleDeDiff(source.nom, cible.nom)}
 ${this.construisUneCelluleDeDiff(source.thematique, cible.thematique)}
 ${this.construisUneCelluleDeDiff(source.dateMiseAJour.toLocaleDateString(), cible.dateMiseAJour.toLocaleDateString())}
 ${this.construisUneCelluleDeDiff(source.description, cible.description)}
-${this.construisUneCelluleDeDiff(source.nomImage ?? '', cible.nomImage ?? '')}
 ${this.construisUneCelluleDeDiffPourTableaux(
   source.documents.map((document) => `${document.libelle} : ${document.nomFichier}`),
   cible.documents.map((document) => `${document.libelle} : ${document.nomFichier}`)
