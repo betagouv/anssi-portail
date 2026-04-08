@@ -1,15 +1,15 @@
 import type { TypeEtape } from '../../../../../back/src/metier/nis2-simulateur/InformationsEtape';
 
 export const TitresEtapes: Partial<Record<TypeEtape, string>> = {
-  activites: "Activités pratiquées",
+  activites: 'Activités pratiquées',
   appartenanceUnionEuropeenne: "Localisation de l'activité",
-  designationOperateurServicesEssentiels: "Désignation éventuelle",
-  localisationEtablissementPrincipal: "Localisation de votre activité",
-  localisationFournitureServicesNumeriques: "Localisation de votre activité",
-  prealable: "Pour bien débuter",
+  designationOperateurServicesEssentiels: 'Désignation éventuelle',
+  localisationEtablissementPrincipal: 'Localisation de votre activité',
+  localisationFournitureServicesNumeriques: 'Localisation de votre activité',
+  prealable: 'Pour bien débuter',
   secteursActivite: "Secteurs d'activité",
   sousSecteursActivite: "Sous-secteurs d'activité",
-  resultat: "Résultat",
+  resultat: 'Résultat',
   tailleEntitePrivee: "Taille de l'organisation",
-  typeStructure: "Type de structure",
+  typeStructure: 'Type de structure',
 };

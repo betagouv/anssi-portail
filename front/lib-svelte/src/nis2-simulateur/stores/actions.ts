@@ -1,4 +1,4 @@
-import type { Activite } from "../../../../../back/src/metier/nis2-simulateur/Activite.definitions.ts";
+import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions.ts';
 import type {
   AppartenancePaysUnionEuropeenne,
   DesignationOperateurServicesEssentiels,
@@ -6,9 +6,9 @@ import type {
   TrancheChiffreAffaire,
   TrancheNombreEmployes,
   TypeStructure,
-} from "../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions.ts";
-import type { SecteurActivite } from "../../../../../back/src/metier/nis2-simulateur/SecteurActivite.definitions.ts";
-import type { SousSecteurActivite } from "../../../../../back/src/metier/nis2-simulateur/SousSecteurActivite.definitions.ts";
+} from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions.ts';
+import type { SecteurActivite } from '../../../../../back/src/metier/nis2-simulateur/SecteurActivite.definitions.ts';
+import type { SousSecteurActivite } from '../../../../../back/src/metier/nis2-simulateur/SousSecteurActivite.definitions.ts';
 
 export type ActionQuestionnaire =
   | ActionVide
@@ -24,133 +24,133 @@ export type ActionQuestionnaire =
   | ActionValideLocalisationServicesNumeriques;
 
 interface ActionVide {
-  type: "VIDE";
+  type: 'VIDE';
 }
 
 interface ActionSuivantEtapePrealable {
-  type: "VALIDE_ETAPE_PREALABLE";
+  type: 'VALIDE_ETAPE_PREALABLE';
 }
 
 interface ActionValideEtapeDesignation {
-  type: "VALIDE_ETAPE_DESIGNATION";
+  type: 'VALIDE_ETAPE_DESIGNATION';
   designations: DesignationOperateurServicesEssentiels[];
 }
 
 interface ActionValideEtapeAppartenanceUE {
-  type: "VALIDE_ETAPE_APPARTENANCE_UE";
+  type: 'VALIDE_ETAPE_APPARTENANCE_UE';
   appartenances: AppartenancePaysUnionEuropeenne[];
 }
 
 interface ActionValideTypeStructure {
-  type: "VALIDE_ETAPE_TYPE_STRUCTURE";
+  type: 'VALIDE_ETAPE_TYPE_STRUCTURE';
   types: TypeStructure[];
 }
 
 interface ActionValideTailleEntitePrivee {
-  type: "VALIDE_ETAPE_TAILLE_ENTITE_PRIVEE";
+  type: 'VALIDE_ETAPE_TAILLE_ENTITE_PRIVEE';
   nombreEmployes: TrancheNombreEmployes[];
   chiffreAffaire: TrancheChiffreAffaire[];
   bilanFinancier: TrancheBilanFinancier[];
 }
 
 interface ActionValideSecteursActivite {
-  type: "VALIDE_ETAPE_SECTEURS_ACTIVITE";
+  type: 'VALIDE_ETAPE_SECTEURS_ACTIVITE';
   secteurs: SecteurActivite[];
 }
 
 interface ActionValideSousSecteursActivite {
-  type: "VALIDE_ETAPE_SOUS_SECTEURS_ACTIVITE";
+  type: 'VALIDE_ETAPE_SOUS_SECTEURS_ACTIVITE';
   sousSecteurs: SousSecteurActivite[];
 }
 
 interface ActionValideActivites {
-  type: "VALIDE_ETAPE_ACTIVITES";
+  type: 'VALIDE_ETAPE_ACTIVITES';
   activites: Activite[];
 }
 
 interface ActionValideLocalisationEtablissementPrincipal {
-  type: "VALIDE_ETAPE_LOCALISATION_ETABLISSEMENT_PRINCIPAL";
+  type: 'VALIDE_ETAPE_LOCALISATION_ETABLISSEMENT_PRINCIPAL';
   paysDecision: AppartenancePaysUnionEuropeenne[];
   paysOperation: AppartenancePaysUnionEuropeenne[];
   paysSalaries: AppartenancePaysUnionEuropeenne[];
 }
 
 interface ActionValideLocalisationServicesNumeriques {
-  type: "VALIDE_ETAPE_LOCALISATION_SERVICES_NUMERIQUES";
+  type: 'VALIDE_ETAPE_LOCALISATION_SERVICES_NUMERIQUES';
   pays: AppartenancePaysUnionEuropeenne[];
 }
 
 export const valideEtapePrealable = (): ActionSuivantEtapePrealable => ({
-  type: "VALIDE_ETAPE_PREALABLE",
+  type: 'VALIDE_ETAPE_PREALABLE',
 });
 
 export const valideEtapeDesignation = (
-  designations: DesignationOperateurServicesEssentiels[],
+  designations: DesignationOperateurServicesEssentiels[]
 ): ActionValideEtapeDesignation => ({
-  type: "VALIDE_ETAPE_DESIGNATION",
+  type: 'VALIDE_ETAPE_DESIGNATION',
   designations,
 });
 
 export const valideEtapeAppartenanceUE = (
-  appartenances: AppartenancePaysUnionEuropeenne[],
+  appartenances: AppartenancePaysUnionEuropeenne[]
 ): ActionValideEtapeAppartenanceUE => ({
-  type: "VALIDE_ETAPE_APPARTENANCE_UE",
+  type: 'VALIDE_ETAPE_APPARTENANCE_UE',
   appartenances,
 });
 
 export const valideTypeStructure = (
-  types: TypeStructure[],
+  types: TypeStructure[]
 ): ActionValideTypeStructure => ({
-  type: "VALIDE_ETAPE_TYPE_STRUCTURE",
+  type: 'VALIDE_ETAPE_TYPE_STRUCTURE',
   types,
 });
 
 export const valideTailleEntitePrivee = (
   nombreEmployes: TrancheNombreEmployes[],
   chiffreAffaire: TrancheChiffreAffaire[],
-  bilanFinancier: TrancheBilanFinancier[],
+  bilanFinancier: TrancheBilanFinancier[]
 ): ActionValideTailleEntitePrivee => ({
-  type: "VALIDE_ETAPE_TAILLE_ENTITE_PRIVEE",
+  type: 'VALIDE_ETAPE_TAILLE_ENTITE_PRIVEE',
   nombreEmployes,
   chiffreAffaire,
   bilanFinancier,
 });
 
 export const valideSecteursActivite = (
-  secteurs: SecteurActivite[],
+  secteurs: SecteurActivite[]
 ): ActionValideSecteursActivite => ({
-  type: "VALIDE_ETAPE_SECTEURS_ACTIVITE",
+  type: 'VALIDE_ETAPE_SECTEURS_ACTIVITE',
   secteurs,
 });
 
 export const valideSousSecteursActivite = (
-  sousSecteurs: SousSecteurActivite[],
+  sousSecteurs: SousSecteurActivite[]
 ): ActionValideSousSecteursActivite => ({
-  type: "VALIDE_ETAPE_SOUS_SECTEURS_ACTIVITE",
+  type: 'VALIDE_ETAPE_SOUS_SECTEURS_ACTIVITE',
   sousSecteurs,
 });
 
 export const valideActivites = (
-  activites: Activite[],
+  activites: Activite[]
 ): ActionValideActivites => ({
-  type: "VALIDE_ETAPE_ACTIVITES",
+  type: 'VALIDE_ETAPE_ACTIVITES',
   activites,
 });
 
 export const valideLocalisationEtablissementPrincipal = (
   paysDecision: AppartenancePaysUnionEuropeenne[],
   paysOperation: AppartenancePaysUnionEuropeenne[],
-  paysSalaries: AppartenancePaysUnionEuropeenne[],
+  paysSalaries: AppartenancePaysUnionEuropeenne[]
 ): ActionValideLocalisationEtablissementPrincipal => ({
-  type: "VALIDE_ETAPE_LOCALISATION_ETABLISSEMENT_PRINCIPAL",
+  type: 'VALIDE_ETAPE_LOCALISATION_ETABLISSEMENT_PRINCIPAL',
   paysDecision,
   paysOperation,
   paysSalaries,
 });
 
 export const valideLocalisationServicesNumeriques = (
-  pays: AppartenancePaysUnionEuropeenne[],
+  pays: AppartenancePaysUnionEuropeenne[]
 ): ActionValideLocalisationServicesNumeriques => ({
-  type: "VALIDE_ETAPE_LOCALISATION_SERVICES_NUMERIQUES",
+  type: 'VALIDE_ETAPE_LOCALISATION_SERVICES_NUMERIQUES',
   pays,
 });

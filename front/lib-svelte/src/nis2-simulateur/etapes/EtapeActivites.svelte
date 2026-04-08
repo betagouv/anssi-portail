@@ -148,7 +148,7 @@
     .etage-checkbox {
       display: flex;
       flex-direction: row;
-      gap:12px;
+      gap: 12px;
       justify-content: space-between;
       align-items: start;
 

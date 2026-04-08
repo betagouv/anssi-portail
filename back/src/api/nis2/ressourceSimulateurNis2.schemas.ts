@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { ToutesLesActivites } from '../../metier/nis2-simulateur/Activite.operations';
 import {
   ValeursappartenancePaysUnionEuropeenne,
   ValeursDesignationOperateurServicesEssentiels,
@@ -8,7 +9,6 @@ import {
 } from '../../metier/nis2-simulateur/ChampsSimulateur.valeurs';
 import { ValeursSecteursActivites } from '../../metier/nis2-simulateur/SecteurActivite.valeurs';
 import { TousLesSousSecteurs } from '../../metier/nis2-simulateur/SousSecteurActivite.valeurs';
-import { ToutesLesActivites } from '../../metier/nis2-simulateur/Activite.operations';
 
 export const schemaPostSimulateurNis2 = () =>
   z.strictObject({

@@ -13,17 +13,16 @@
   let props: Props = $props();
 
   const descriptions = $derived(listeDescriptionsActivites[props.activite]);
-
 </script>
 
 {#each descriptions as { titre, description }, i (i)}
   <dsfr-highlight text="abc" size="sm">
     <b slot="title">{titre}</b>
     <div class="description-msc" slot="text">
-      {@html description}</div>
+      {@html description}
+    </div>
   </dsfr-highlight>
 {/each}
-
 
 <style lang="scss">
   .description-msc {

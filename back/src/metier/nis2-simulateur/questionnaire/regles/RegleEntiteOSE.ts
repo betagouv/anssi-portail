@@ -1,7 +1,7 @@
 import type { Regle } from '../Specifications';
 import { ErreurLectureDeRegle } from './ErreurLectureDeRegle';
 import type { EtatQuestionnaire } from '../../EtatQuestionnaire';
-import type  { SpecificationTexte } from '../FormatDesSpecificationsCSV';
+import type { SpecificationTexte } from '../FormatDesSpecificationsCSV';
 import type { DesignationOperateurServicesEssentiels } from '../../ChampsSimulateur.definitions';
 import { contientUnParmi } from '../../commun.predicats';
 

@@ -73,7 +73,6 @@
   />
 </Etape>
 
-
 <style lang="scss">
   dsfr-checkbox {
     margin-bottom: 8px;

@@ -1,16 +1,16 @@
 export enum ClesDuCSV {
-  "Designation OSE",
-  "Localisation",
-  "Type de structure",
-  "Taille",
-  "Secteurs",
-  "Sous-secteurs",
-  "Activités",
-  "Extra - Fourniture de service",
-  "Extra - Établissement principal",
-  "Resultat",
+  'Designation OSE',
+  'Localisation',
+  'Type de structure',
+  'Taille',
+  'Secteurs',
+  'Sous-secteurs',
+  'Activités',
+  'Extra - Fourniture de service',
+  'Extra - Établissement principal',
+  'Resultat',
   "Points d'attention",
-  "Code",
+  'Code',
 }
 
 // Type créé à partir des clés du CSV.
@@ -23,8 +23,5 @@ export function valideColonnesDuCSV(colonnes: string[]) {
 
   const manquantes = attendues.filter((a) => !colonnes.includes(a));
 
-  if (manquantes.length > 0)
-    throw new Error(
-      `Il manque des colonnes dans le CSV : ${manquantes.join(",")}`,
-    );
+  if (manquantes.length > 0) throw new Error(`Il manque des colonnes dans le CSV : ${manquantes.join(',')}`);
 }
