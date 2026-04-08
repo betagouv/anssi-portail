@@ -24,8 +24,7 @@ export default defineConfig({
         'creation-compte': 'src/main-creation-compte.ts',
         'niveaux-maturite': 'src/main-niveaux-maturite.ts',
         'test-maturite': 'src/main-test-maturite.ts',
-        'demande-aide-mon-aide-cyber':
-          'src/main-demande-aide-mon-aide-cyber.ts',
+        'demande-aide-mon-aide-cyber': 'src/main-demande-aide-mon-aide-cyber.ts',
         catalogue: 'src/main-catalogue.ts',
         contacts: 'src/main-contacts.ts',
         favoris: 'src/main-favoris.ts',
@@ -50,14 +49,12 @@ export default defineConfig({
         collectivites: 'src/main-collectivites.ts',
         associations: 'src/main-associations.ts',
         entreprises: 'src/main-entreprises.ts',
-        'carrousel-des-interlocuteurs':
-          'src/main-carrousel-des-interlocuteurs.ts',
+        'carrousel-des-interlocuteurs': 'src/main-carrousel-des-interlocuteurs.ts',
         'equipe-biz-dev': 'src/main-equipe-biz-dev.ts',
         sante: 'src/main-sante.ts',
         'gestion-guides': 'src/main-gestion-guides.ts',
         sentry: 'src/main-sentry.ts',
-        'confirmation-abonnement-infolettre':
-          'src/main-confirmation-abonnement-infolettre.ts',
+        'confirmation-abonnement-infolettre': 'src/main-confirmation-abonnement-infolettre.ts',
         'abonnement-infolettre': 'src/main-abonnement-infolettre.ts',
       },
       output: {

@@ -14,9 +14,7 @@
     const hash = new URLSearchParams(window.location.hash?.substring(1));
     const lienDansLUrl = Array.from(hash)[0];
     if (lienDansLUrl) {
-      lienActif =
-        liens.find((o) => o.fragment === `#${lienDansLUrl[0]}`)?.fragment ??
-        liens[0].fragment;
+      lienActif = liens.find((o) => o.fragment === `#${lienDansLUrl[0]}`)?.fragment ?? liens[0].fragment;
     }
   };
 

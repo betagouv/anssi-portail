@@ -1,10 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import {
-    couleursDeNiveau,
-    niveauxMaturite,
-  } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import { couleursDeNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeAnneau from './LegendeAnneau.svelte';
@@ -32,9 +29,7 @@
   let seriesRadar: SerieRadar[] = [];
 
   async function chargeDernierResultat() {
-    const reponse = await axios.get<DernierResultatTest>(
-      '/api/resultats-test/dernier'
-    );
+    const reponse = await axios.get<DernierResultatTest>('/api/resultats-test/dernier');
     niveauCourant = reponse.data.idNiveau;
     libelleNiveauCourant = libelleDeNiveau(niveauCourant);
     infosOrganisation = reponse.data.organisation;
@@ -43,9 +38,7 @@
   async function chargeRepartitionsDesResultats() {
     const parametres = new URLSearchParams({
       secteur: filtre.secteur ? infosOrganisation.secteur?.code || '' : '',
-      tailleOrganisation: filtre.taille
-        ? infosOrganisation.trancheEffectif?.code || ''
-        : '',
+      tailleOrganisation: filtre.taille ? infosOrganisation.trancheEffectif?.code || '' : '',
       region: filtre.region ? infosOrganisation.region?.code || '' : '',
     });
     const reponse = await axios.get<RepartitionResultatsTestPourUnNiveau[]>(
@@ -104,13 +97,11 @@
         <div class="description">
           <p>
             <strong>
-              Affinez votre comparaison en filtrant les résultats par secteur
-              d’activité, taille d’organisation et région.
+              Affinez votre comparaison en filtrant les résultats par secteur d’activité, taille d’organisation et
+              région.
             </strong>
           </p>
-          <p>
-            Ces filtres peuvent être combinés pour une analyse plus précise.
-          </p>
+          <p>Ces filtres peuvent être combinés pour une analyse plus précise.</p>
         </div>
         <div class="tags">
           {#if infosOrganisation.secteur}
@@ -154,8 +145,8 @@
           {/if}
         </div>
         <p class="note texte-mention-xs">
-          Certains filtres peuvent ne pas donner de résultat. Nos données
-          s’enrichissent régulièrement grâce aux tests réalisés.
+          Certains filtres peuvent ne pas donner de résultat. Nos données s’enrichissent régulièrement grâce aux tests
+          réalisés.
         </p>
       </div>
     </section>
@@ -181,24 +172,19 @@
         <RadarSessionGroupe series={seriesRadar} affichageReduit />
         <ResumeRadarComparaison series={seriesRadar} actif={niveauCourant} />
         <div class="message-information texte-mention-xs">
-          Le résultat obtenu est une évaluation indicative basée sur un modèle
-          élaboré par l’ANSSI. La maturité cyber n’est pas une évaluation du
-          niveau de sécurité des systèmes d’information d’une organisation mais
-          de sa posture à l’égard des enjeux cyber.
+          Le résultat obtenu est une évaluation indicative basée sur un modèle élaboré par l’ANSSI. La maturité cyber
+          n’est pas une évaluation du niveau de sécurité des systèmes d’information d’une organisation mais de sa
+          posture à l’égard des enjeux cyber.
         </div>
       </div>
     </section>
   {:else}
     <section class="pas-assez-de-resultats">
       <div class="contenu-section">
-        <img
-          src="/assets/images/illustration-dragon-aucun-resultat.svg"
-          alt="Pas assez de résultats"
-        />
+        <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Pas assez de résultats" />
         <h4>Pas de résultat 😔</h4>
         <p>
-          Nous n’avons pas encore assez de données pour afficher une comparaison
-          fiable avec les filtres sélectionnés.
+          Nous n’avons pas encore assez de données pour afficher une comparaison fiable avec les filtres sélectionnés.
         </p>
         <lab-anssi-bouton
           on:click={reinitialiseLesFiltres}
@@ -215,10 +201,7 @@
 {:else}
   <section class="pas-de-test">
     <div class="contenu-section">
-      <img
-        src="/assets/images/illustration-dragon-aucun-resultat.svg"
-        alt="Bientôt disponible"
-      />
+      <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Bientôt disponible" />
       <h4>Vous souhaitez comparer la maturité cyber de votre organisation ?</h4>
       <p>Pour cela vous devez d’abord réaliser le test de maturité cyber.</p>
       <a href="/test-maturite" class="bouton primaire"> Débuter le test </a>

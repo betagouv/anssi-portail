@@ -27,8 +27,7 @@
     });
   };
 
-  const libelleSerie = (serie: SerieRadar) =>
-    niveauxMaturite.find((niveau) => niveau.id === serie.id)?.label;
+  const libelleSerie = (serie: SerieRadar) => niveauxMaturite.find((niveau) => niveau.id === serie.id)?.label;
 
   let coefDistanceLibelle: number = 1.1;
   let viewBox: string;
@@ -47,9 +46,7 @@
   }
   modifieViewBox();
 
-  window
-    .matchMedia('(max-width: 576px)')
-    .addEventListener('change', modifieViewBox);
+  window.matchMedia('(max-width: 576px)').addEventListener('change', modifieViewBox);
 </script>
 
 <div class="radar">
@@ -63,10 +60,7 @@
         {@const thetaSuivant = ((index + 1) * 2 * Math.PI) / 6}
         {@const decalage = (tailleRadar / 5) * index2}
         {@const coordonneesActuelles = polaireVersCartesien(decalage, theta)}
-        {@const coordonneesSuivantes = polaireVersCartesien(
-          decalage,
-          thetaSuivant
-        )}
+        {@const coordonneesSuivantes = polaireVersCartesien(decalage, thetaSuivant)}
         <line
           x1={coordonneesActuelles.x}
           y1={coordonneesActuelles.y}
@@ -90,15 +84,7 @@
         <title>{libelleSerie(serie)}</title>
       </path>
       {#each pointsDuPolygone as point, index (index)}
-        <circle
-          class="sommet"
-          r="8"
-          cx={point.x}
-          cy={point.y}
-          fill={serie.couleur}
-          stroke="white"
-          stroke-width="3px"
-        >
+        <circle class="sommet" r="8" cx={point.x} cy={point.y} fill={serie.couleur} stroke="white" stroke-width="3px">
           <title
             >{`${libelleSerie(serie)} / ${rubriques[index].label} : ${arrondisAuCentieme(serie.valeurs[rubriques[index].id])}`}</title
           >
@@ -127,10 +113,7 @@
     {/each}
 
     {#each rubriques as rubrique, index (rubrique.id)}
-      {@const coordonnees = polaireVersCartesien(
-        tailleRadar * coefDistanceLibelle,
-        (index * 2 * Math.PI) / 6
-      )}
+      {@const coordonnees = polaireVersCartesien(tailleRadar * coefDistanceLibelle, (index * 2 * Math.PI) / 6)}
       {#if affichageReduit && estPetitEcran}
         <text
           x={coordonnees.x}

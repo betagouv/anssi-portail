@@ -28,8 +28,7 @@
   class:non-eligible={resultat.regulation === Regulation.NonRegule}
   class:incertain-UE={resultat.regulation === Regulation.Incertain}
 >
-  <lab-anssi-icone nom={icones[resultat.regulation]} taille="lg"
-  ></lab-anssi-icone>
+  <lab-anssi-icone nom={icones[resultat.regulation]} taille="lg"></lab-anssi-icone>
 
   <h4 class="resume">
     {@html titres[resultat.regulation][resultat.typeEntite]}

@@ -15,9 +15,7 @@
   let options: Option[];
 
   onMount(async () => {
-    const reponse = await axios.get<TrancheEffectif[]>(
-      '/api/annuaire/tranches-effectif'
-    );
+    const reponse = await axios.get<TrancheEffectif[]>('/api/annuaire/tranches-effectif');
     options = reponse.data
       .filter((trancheEffectif) => trancheEffectif.code !== 'NN')
       .map((trancheEffectif) => ({

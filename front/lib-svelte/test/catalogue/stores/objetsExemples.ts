@@ -1,14 +1,5 @@
-import {
-  BesoinCyber,
-  DroitAcces,
-  type ItemCyber,
-  Source,
-  Typologie,
-} from '../../../src/catalogue/Catalogue.types';
-import {
-  CollectionGuide,
-  type Guide,
-} from '../../../src/catalogue/Guide.types';
+import { BesoinCyber, DroitAcces, type ItemCyber, Source, Typologie } from '../../../src/catalogue/Catalogue.types';
+import { CollectionGuide, type Guide } from '../../../src/catalogue/Guide.types';
 
 export const mss = (): ItemCyber => ({
   type: 'ItemCyber',
@@ -41,8 +32,7 @@ export const monEspaceNIS2 = (): ItemCyber => ({
   id: '/services/mon-espace-nis2',
   typologie: Typologie.SERVICE,
   nom: 'MonEspaceNIS2',
-  description:
-    'Se notifier et être guidé dans sa mise en conformité avec la directive NIS 2',
+  description: 'Se notifier et être guidé dans sa mise en conformité avec la directive NIS 2',
   illustration: 'nis2.avif',
   lienInterne: 'https://nis2',
   lienExterne: 'https://...',
@@ -93,8 +83,7 @@ export const guideZeroTrust: Guide = {
   type: 'Guide',
   id: 'zero-trust',
   nom: 'Zero Trust',
-  description:
-    "Les fondamentaux du modèle Zero Trust pour sécuriser les systèmes d'information",
+  description: "Les fondamentaux du modèle Zero Trust pour sécuriser les systèmes d'information",
   illustration: {
     petite: 'http://localhost/anssi-fondamentaux-zero-trust-v1_publication.jpg',
     grande: 'http://localhost/anssi-fondamentaux-zero-trust-v1_publication.jpg',
@@ -118,8 +107,7 @@ export const guideDevsecops: Guide = {
   type: 'Guide',
   id: 'devsecops',
   nom: 'DevSecOps',
-  description:
-    'Intégrer la sécurité dans les pratiques DevOps pour renforcer la sécurité du développement logiciel',
+  description: 'Intégrer la sécurité dans les pratiques DevOps pour renforcer la sécurité du développement logiciel',
   illustration: {
     petite: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
     grande: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
@@ -143,8 +131,7 @@ export const guideDevsecopsEN: Guide = {
   type: 'Guide',
   id: 'devsecops',
   nom: 'DevSecOps',
-  description:
-    'Integrating security into DevOps practices to enhance software development security',
+  description: 'Integrating security into DevOps practices to enhance software development security',
   illustration: {
     petite: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',
     grande: 'http://localhost/anssi_essentiels_devsecops_v1.jpg',

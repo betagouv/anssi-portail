@@ -1,10 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import {
-    couleursDeNiveau,
-    niveauxMaturite,
-  } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import { couleursDeNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeAnneau from './LegendeAnneau.svelte';
@@ -29,12 +26,8 @@
   let seriesRadar: SerieRadar[];
 
   async function rechargeResultatsGroupe() {
-    let codeSessionGroupe = new URLSearchParams(window.location.search).get(
-      'code'
-    );
-    const reponse = await axios.get<ResultatsSessionGroupe>(
-      `/api/sessions-groupe/${codeSessionGroupe}/resultats`
-    );
+    let codeSessionGroupe = new URLSearchParams(window.location.search).get('code');
+    const reponse = await axios.get<ResultatsSessionGroupe>(`/api/sessions-groupe/${codeSessionGroupe}/resultats`);
     resultatsSessionGroupe = reponse.data;
     serie = niveauxMaturite.map((niveau) => ({
       libelle: niveau.label,
@@ -58,9 +51,7 @@
     <div class="contenu-section">
       <h2>Les 5 niveaux de maturité cyber</h2>
       <TuilesMaturiteSessionGroupe />
-      <a href="/niveaux-maturite" class="lien" target="_blank">
-        Les niveaux de maturité cyber
-      </a>
+      <a href="/niveaux-maturite" class="lien" target="_blank"> Les niveaux de maturité cyber </a>
     </div>
   </section>
 
@@ -84,10 +75,9 @@
       <RadarSessionGroupe series={seriesRadar} />
       <LegendeRadarSessionGroupe />
       <div class="message-information texte-mention-xs">
-        Le résultat obtenu est une évaluation indicative basée sur un modèle
-        élaboré par l’ANSSI. La maturité cyber n’est pas une évaluation du
-        niveau de sécurité des systèmes d’information d’une organisation mais de
-        sa posture à l’égard des enjeux cyber.
+        Le résultat obtenu est une évaluation indicative basée sur un modèle élaboré par l’ANSSI. La maturité cyber
+        n’est pas une évaluation du niveau de sécurité des systèmes d’information d’une organisation mais de sa posture
+        à l’égard des enjeux cyber.
       </div>
     </div>
   </section>
@@ -100,8 +90,7 @@
       />
       <h4>Encouragez vos participants à finaliser le test</h4>
       <p>
-        Les résultats seront disponibles dès que les participants auront
-        complété le test.<br /> Invitez-les à le finaliser.
+        Les résultats seront disponibles dès que les participants auront complété le test.<br /> Invitez-les à le finaliser.
       </p>
     </div>
   </section>

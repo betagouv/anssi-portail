@@ -1,10 +1,7 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { rechercheParFonctionCyFun23 } from '../../../src/nis2/stores/rechercheParFonctionCyFun23';
-import {
-  exigenceCyFun23,
-  exigenceISODeNiveauEleve,
-} from '../objetsPretsALEmploi';
+import { exigenceCyFun23, exigenceISODeNiveauEleve } from '../objetsPretsALEmploi';
 
 describe('La recherche par fonction', () => {
   beforeEach(() => {
@@ -23,9 +20,7 @@ describe('La recherche par fonction', () => {
     it('en rejetant une exigence comparée dont la fonction ne correspond pas', () => {
       rechercheParFonctionCyFun23.set('Protéger');
 
-      const resultat = rechercheParFonctionCyFun23.ok(
-        exigenceCyFun23({ fonction: 'Identifier' })
-      );
+      const resultat = rechercheParFonctionCyFun23.ok(exigenceCyFun23({ fonction: 'Identifier' }));
 
       expect(resultat).toBe(false);
     });
@@ -33,9 +28,7 @@ describe('La recherche par fonction', () => {
     it('en incluant une exigence comparée dont la fonction correspond', () => {
       rechercheParFonctionCyFun23.set('Identifier');
 
-      const resultat = rechercheParFonctionCyFun23.ok(
-        exigenceCyFun23({ fonction: 'Identifier' })
-      );
+      const resultat = rechercheParFonctionCyFun23.ok(exigenceCyFun23({ fonction: 'Identifier' }));
 
       expect(resultat).toBe(true);
     });
@@ -49,9 +42,7 @@ describe('La recherche par fonction', () => {
     it("en incluant une exigence comparée si l'exigence source n'est pas une exigence CyFun23", () => {
       rechercheParFonctionCyFun23.set('Identifier');
 
-      const resultat = rechercheParFonctionCyFun23.ok(
-        exigenceISODeNiveauEleve()
-      );
+      const resultat = rechercheParFonctionCyFun23.ok(exigenceISODeNiveauEleve());
 
       expect(resultat).toBe(true);
     });

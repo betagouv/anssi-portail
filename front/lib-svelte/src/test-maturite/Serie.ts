@@ -13,8 +13,6 @@ export type SerieRadar = {
   couleur: string;
 };
 
-export const totalSerie = (serie: Serie) =>
-  serie.reduce((valeurCumulee, element) => valeurCumulee + element.valeur, 0);
+export const totalSerie = (serie: Serie) => serie.reduce((valeurCumulee, element) => valeurCumulee + element.valeur, 0);
 
-export const pourcentagesSerie = (serie: Serie) =>
-  serie.map((d) => (d.valeur / totalSerie(serie)) * 100);
+export const pourcentagesSerie = (serie: Serie) => serie.map((d) => (d.valeur / totalSerie(serie)) * 100);

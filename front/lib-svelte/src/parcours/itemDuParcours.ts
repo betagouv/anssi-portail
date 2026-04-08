@@ -7,12 +7,8 @@ export const versItemsCyberOuGuide =
     referencesItem.reduce(
       (accumulateur, reference) => {
         const { id, tagsSpecifiques } =
-          typeof reference === 'string'
-            ? { id: reference, tagsSpecifiques: [] }
-            : reference;
-        const item =
-          itemsCyber.find((itemCyber) => itemCyber.id === id) ??
-          guides.find((guide) => guide.id === id);
+          typeof reference === 'string' ? { id: reference, tagsSpecifiques: [] } : reference;
+        const item = itemsCyber.find((itemCyber) => itemCyber.id === id) ?? guides.find((guide) => guide.id === id);
         if (item) {
           accumulateur.push({ ...item, tagsSpecifiques });
         }

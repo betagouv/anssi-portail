@@ -11,9 +11,7 @@
 
   onMount(async () => {
     try {
-      const reponseHttp = await axios.get<DernierResultatTest>(
-        '/api/resultats-test/dernier'
-      );
+      const reponseHttp = await axios.get<DernierResultatTest>('/api/resultats-test/dernier');
       const reponses = reponseHttp.data.reponses;
       dateRealisationDernierTest = new Date(reponseHttp.data.dateRealisation);
       questionnaireStore.chargeReponses(reponses);
@@ -27,8 +25,4 @@
   });
 </script>
 
-<ResultatsTestMaturite
-  animeTuiles={false}
-  {dateRealisationDernierTest}
-  defilementAutomatique={false}
-/>
+<ResultatsTestMaturite animeTuiles={false} {dateRealisationDernierTest} defilementAutomatique={false} />

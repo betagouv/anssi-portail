@@ -11,19 +11,16 @@
     <hgroup class="preambule">
       <h1>Passez à l'étape suivante</h1>
       <p>
-        Comparez la maturité de votre organisation à celle d’entités similaires
-        et suivez votre évolution dans le temps.
+        Comparez la maturité de votre organisation à celle d’entités similaires et suivez votre évolution dans le temps.
       </p>
     </hgroup>
     <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
     <div class="apercu-comparaison">
       <div class="connexion">
         <p>
-          Connectez-vous ou inscrivez-vous sur MesServicesCyber pour accéder à
-          la comparaison de votre maturité cyber.
+          Connectez-vous ou inscrivez-vous sur MesServicesCyber pour accéder à la comparaison de votre maturité cyber.
         </p>
-        <dsfr-connect use:clic={connexion} href="/oidc/connexion"
-        ></dsfr-connect>
+        <dsfr-connect use:clic={connexion} href="/oidc/connexion"></dsfr-connect>
       </div>
     </div>
   </div>

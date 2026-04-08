@@ -27,22 +27,16 @@
   let financement: Financement | undefined = $state();
   let entreesMenuFinancement: Record<string, string> | undefined = $state();
 
-  const idFinancement = Number(
-    new URLSearchParams(window.location.search).get('idFinancement')
-  );
+  const idFinancement = Number(new URLSearchParams(window.location.search).get('idFinancement'));
 
   onMount(async () => {
     try {
-      const reponse = await axios.get<ReponseAxios>(
-        `/api/financements/${idFinancement}`
-      );
+      const reponse = await axios.get<ReponseAxios>(`/api/financements/${idFinancement}`);
       financement = reponse.data;
       const entrees: [string, string][] = [];
       if (financement.objectifs) entrees.push(['objectifs', 'Objectifs']);
-      if (financement.operationsEligibles)
-        entrees.push(['operations-eligibles', 'Opérations éligibles']);
-      if (financement.benificiaires)
-        entrees.push(['beneficiaires', 'Bénéficiaires']);
+      if (financement.operationsEligibles) entrees.push(['operations-eligibles', 'Opérations éligibles']);
+      if (financement.benificiaires) entrees.push(['beneficiaires', 'Bénéficiaires']);
       if (financement.montant) entrees.push(['montant', 'Montant']);
       if (financement.condition) entrees.push(['conditions', 'Conditions']);
       entreesMenuFinancement = Object.fromEntries(entrees);
@@ -69,19 +63,14 @@
             .map((entree) => entree.target.querySelector('h2'))
             .filter((titre) => !!titre)[0] ?? titreActif;
 
-        liensActifs.forEach((lien) =>
-          lien.parentElement!.classList.remove('actif')
-        );
+        liensActifs.forEach((lien) => lien.parentElement!.classList.remove('actif'));
 
         if (titreAActiver) {
-          const liens = contenu.querySelectorAll<HTMLElement>(
-            `.sommaire ul li a[href='#${titreAActiver.id}']`
-          );
+          const liens = contenu.querySelectorAll<HTMLElement>(`.sommaire ul li a[href='#${titreAActiver.id}']`);
           liens.forEach((lien) => lien.parentElement!.classList.add('actif'));
 
           const menuMobileVisible = contenu.querySelector('#section-active');
-          if (menuMobileVisible)
-            menuMobileVisible.textContent = titreAActiver.textContent;
+          if (menuMobileVisible) menuMobileVisible.textContent = titreAActiver.textContent;
 
           titreActif = titreAActiver;
         }
@@ -189,34 +178,18 @@
           <div class="financePar">
             <p>Financé par : <strong>{financement.financeur}</strong></p>
           </div>
-          <SectionDetailsFinancement
-            ancre="objectifs"
-            titre="Objectifs"
-            detail={financement.objectifs}
-          />
+          <SectionDetailsFinancement ancre="objectifs" titre="Objectifs" detail={financement.objectifs} />
           <SectionDetailsFinancement
             ancre="operations-eligibles"
             titre="Opérations éligibles"
             detail={financement.operationsEligibles}
           />
 
-          <SectionDetailsFinancement
-            ancre="beneficiaires"
-            titre="Bénéficiaires"
-            detail={financement.benificiaires}
-          />
+          <SectionDetailsFinancement ancre="beneficiaires" titre="Bénéficiaires" detail={financement.benificiaires} />
 
-          <SectionDetailsFinancement
-            ancre="montant"
-            titre="Montant"
-            detail={financement.montant}
-          />
+          <SectionDetailsFinancement ancre="montant" titre="Montant" detail={financement.montant} />
 
-          <SectionDetailsFinancement
-            ancre="conditions"
-            titre="Conditions"
-            detail={financement.condition}
-          />
+          <SectionDetailsFinancement ancre="conditions" titre="Conditions" detail={financement.condition} />
           {#if financement?.sources?.[0]}
             <lab-anssi-lien
               href={financement.sources[0]}
@@ -227,18 +200,11 @@
               titre="Bénéficier de cette aide"
             ></lab-anssi-lien>
           {/if}
-          <lab-anssi-lien
-            href="#"
-            titre="Haut de page"
-            icone="arrow-up-fill"
-            positionIcone="gauche"
-          ></lab-anssi-lien>
+          <lab-anssi-lien href="#" titre="Haut de page" icone="arrow-up-fill" positionIcone="gauche"></lab-anssi-lien>
           <p class="note-information texte-mention-xs">
-            Nous vous recommandons de vous adresser directement aux organismes
-            gestionnaires mentionnés dans la fiche pour déterminer si votre
-            projet est éligible à une aide. Enfin, si vous notez des omissions
-            ou des erreurs dans cette fiche, merci de nous adresser vos
-            remarques en nous contactant sur le <a
+            Nous vous recommandons de vous adresser directement aux organismes gestionnaires mentionnés dans la fiche
+            pour déterminer si votre projet est éligible à une aide. Enfin, si vous notez des omissions ou des erreurs
+            dans cette fiche, merci de nous adresser vos remarques en nous contactant sur le <a
               href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert"
             >
               chat</a

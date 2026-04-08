@@ -7,13 +7,7 @@ import { catalogueParBesoin } from './catalogueParBesoin';
 import { rechercheTextuelle } from './rechercheTextuelle.store';
 
 export const catalogueFiltre = derived(
-  [
-    catalogueParBesoin,
-    rechercheParDroitAcces,
-    rechercheParTypologie,
-    rechercheParSource,
-    rechercheTextuelle,
-  ],
+  [catalogueParBesoin, rechercheParDroitAcces, rechercheParTypologie, rechercheParSource, rechercheTextuelle],
   ([$catalogueParBesoin]) => {
     let resultats = $catalogueParBesoin
       .filter(rechercheParDroitAcces.ok)

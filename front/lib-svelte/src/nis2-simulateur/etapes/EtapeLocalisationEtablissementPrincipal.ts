@@ -28,23 +28,13 @@ export function reponseEstComplete(reponse: {
 }) {
   const { paysDecision, paysOperation, paysSalaries } = reponse;
 
-  const decisionEnFranceOuUE = contientUnParmi(paysDecision)([
-    'france',
-    'autre',
-  ]);
+  const decisionEnFranceOuUE = contientUnParmi(paysDecision)(['france', 'autre']);
 
   const decisionHorsUE = paysDecision === 'horsue';
-  const operationEnFranceOuUE = contientUnParmi(paysOperation)([
-    'france',
-    'autre',
-  ]);
+  const operationEnFranceOuUE = contientUnParmi(paysOperation)(['france', 'autre']);
 
   const operationHorsUE = paysOperation === 'horsue';
   const paysSalariesRepondu = paysSalaries !== undefined;
 
-  return (
-    decisionEnFranceOuUE ||
-    (decisionHorsUE && operationEnFranceOuUE) ||
-    (operationHorsUE && paysSalariesRepondu)
-  );
+  return decisionEnFranceOuUE || (decisionHorsUE && operationEnFranceOuUE) || (operationHorsUE && paysSalariesRepondu);
 }

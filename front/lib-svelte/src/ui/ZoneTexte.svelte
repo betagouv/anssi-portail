@@ -4,11 +4,7 @@
   export let enErreur: boolean = false;
 </script>
 
-<textarea
-  bind:value={valeur}
-  placeholder={aideSaisie}
-  class:en-erreur={enErreur}
-></textarea>
+<textarea bind:value={valeur} placeholder={aideSaisie} class:en-erreur={enErreur}></textarea>
 
 <style lang="scss">
   textarea {

@@ -19,10 +19,8 @@
   };
 
   $: moyenne =
-    $questionnaireStore.toutesLesReponses.reduce(
-      (acc, valeur) => acc + valeur,
-      0
-    ) / $questionnaireStore.toutesLesReponses.length;
+    $questionnaireStore.toutesLesReponses.reduce((acc, valeur) => acc + valeur, 0) /
+    $questionnaireStore.toutesLesReponses.length;
 
   $: idNiveau = calculeIdNiveau(moyenne);
 
@@ -44,19 +42,13 @@
       <div class="date-realisation">Test réalisé le {dateFormatee}</div>
     {/if}
     <h2>Niveau de maturité le plus proche : {niveau.label}</h2>
-    <TuilesMaturite
-      niveauCourant={niveau}
-      {animeTuiles}
-      {defilementAutomatique}
-    />
+    <TuilesMaturite niveauCourant={niveau} {animeTuiles} {defilementAutomatique} />
     <div class="description-niveau">
       <h5>{niveau.label}</h5>
       <p>{niveau.description}</p>
     </div>
 
-    <a href="/niveaux-maturite" class="lien" target="_blank"
-      >Les niveaux de maturité cyber</a
-    >
+    <a href="/niveaux-maturite" class="lien" target="_blank">Les niveaux de maturité cyber</a>
   </div>
 </section>
 

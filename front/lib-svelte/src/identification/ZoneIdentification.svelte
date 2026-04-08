@@ -19,11 +19,7 @@
         {$profilStore.nom}
       </summary>
       <div class="contenu" transition:slide>
-        <LienNavigation
-          href="/services-anssi/"
-          label="Services ANSSI utilisés"
-          dansMenuDeroulant
-        />
+        <LienNavigation href="/services-anssi/" label="Services ANSSI utilisés" dansMenuDeroulant />
       </div>
     </details>
     <a class="deconnexion" href="/oidc/deconnexion">Se déconnecter</a>

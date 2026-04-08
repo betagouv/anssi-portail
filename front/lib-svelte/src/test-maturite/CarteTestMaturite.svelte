@@ -14,9 +14,7 @@
 
   export let resultatTest: ResultatTest;
 
-  $: niveau = niveauxMaturite.find(
-    (niveau) => niveau.id === resultatTest.niveau
-  );
+  $: niveau = niveauxMaturite.find((niveau) => niveau.id === resultatTest.niveau);
 
   $: description = niveau?.description;
   $: libelleNiveau = niveau?.label;
@@ -27,11 +25,7 @@
 
 <a href="#historique/{resultatTest.id}" class="carte">
   <div class="illustration-niveau">
-    <img
-      class="plante"
-      src="/assets/images/test-maturite/niveaux/{resultatTest.niveau}.svg"
-      alt="Niveau de maturité"
-    />
+    <img class="plante" src="/assets/images/test-maturite/niveaux/{resultatTest.niveau}.svg" alt="Niveau de maturité" />
   </div>
   <span class="date">{dateFormatee}</span>
   <h3>{libelleNiveau}</h3>

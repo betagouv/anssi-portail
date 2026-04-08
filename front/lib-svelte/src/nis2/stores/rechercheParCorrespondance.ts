@@ -1,9 +1,7 @@
 import { get, writable } from 'svelte/store';
 import type { Correspondance, Exigence } from '../exigence.type';
 
-const selectionCorrespondance = writable<
-  Correspondance['niveau'] | undefined
->();
+const selectionCorrespondance = writable<Correspondance['niveau'] | undefined>();
 
 export const rechercheParCorrespondance = {
   subscribe: selectionCorrespondance.subscribe,

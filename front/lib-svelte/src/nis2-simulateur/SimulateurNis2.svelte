@@ -38,24 +38,13 @@
 
 <dsfr-container>
   {#if $questionnaireAvecUndo.etapeCourante === 'prealable'}
-    <EtapePrealable
-      onsuivant={() => questionnaireAvecUndo.repond(valideEtapePrealable())}
-    />
+    <EtapePrealable onsuivant={() => questionnaireAvecUndo.repond(valideEtapePrealable())} />
   {:else if $questionnaireAvecUndo.etapeCourante === 'designationOperateurServicesEssentiels'}
-    <EtapeDesignation
-      onsuivant={(reponse) =>
-        questionnaireAvecUndo.repond(valideEtapeDesignation([reponse]))}
-    />
+    <EtapeDesignation onsuivant={(reponse) => questionnaireAvecUndo.repond(valideEtapeDesignation([reponse]))} />
   {:else if $questionnaireAvecUndo.etapeCourante === 'appartenanceUnionEuropeenne'}
-    <EtapeAppartenanceUE
-      onsuivant={(reponse) =>
-        questionnaireAvecUndo.repond(valideEtapeAppartenanceUE([reponse]))}
-    />
+    <EtapeAppartenanceUE onsuivant={(reponse) => questionnaireAvecUndo.repond(valideEtapeAppartenanceUE([reponse]))} />
   {:else if $questionnaireAvecUndo.etapeCourante === 'typeStructure'}
-    <EtapeTypeStructure
-      onsuivant={(reponse) =>
-        questionnaireAvecUndo.repond(valideTypeStructure([reponse]))}
-    />
+    <EtapeTypeStructure onsuivant={(reponse) => questionnaireAvecUndo.repond(valideTypeStructure([reponse]))} />
   {:else if $questionnaireAvecUndo.etapeCourante === 'tailleEntitePrivee'}
     <EtapeTailleEntitePrivee
       onsuivant={(reponse) =>
@@ -68,25 +57,16 @@
         )}
     />
   {:else if $questionnaireAvecUndo.etapeCourante === 'secteursActivite'}
-    <EtapeSecteursActivite
-      onsuivant={(reponse) =>
-        questionnaireAvecUndo.repond(valideSecteursActivite(reponse))}
-    />
+    <EtapeSecteursActivite onsuivant={(reponse) => questionnaireAvecUndo.repond(valideSecteursActivite(reponse))} />
   {:else if $questionnaireAvecUndo.etapeCourante === 'sousSecteursActivite'}
     <EtapeSousSecteursActivite
-      secteursChoisis={$questionnaireAvecUndo.secteurActivite.filter((s) =>
-        estUnSecteurAvecDesSousSecteurs(s)
-      )}
-      onsuivant={(reponse) =>
-        questionnaireAvecUndo.repond(valideSousSecteursActivite(reponse))}
+      secteursChoisis={$questionnaireAvecUndo.secteurActivite.filter((s) => estUnSecteurAvecDesSousSecteurs(s))}
+      onsuivant={(reponse) => questionnaireAvecUndo.repond(valideSousSecteursActivite(reponse))}
     />
   {:else if $questionnaireAvecUndo.etapeCourante === 'activites'}
     <EtapeActivites
-      secteursChoisis={selectSecteursPourSaisieActivites(
-        $questionnaireAvecUndo
-      )}
-      onsuivant={(reponse) =>
-        questionnaireAvecUndo.repond(valideActivites(reponse))}
+      secteursChoisis={selectSecteursPourSaisieActivites($questionnaireAvecUndo)}
+      onsuivant={(reponse) => questionnaireAvecUndo.repond(valideActivites(reponse))}
     />
   {:else if $questionnaireAvecUndo.etapeCourante === 'localisationEtablissementPrincipal'}
     <EtapeLocalisationEtablissementPrincipal
@@ -101,10 +81,7 @@
     />
   {:else if $questionnaireAvecUndo.etapeCourante === 'localisationFournitureServicesNumeriques'}
     <EtapeLocalisationServicesNumeriques
-      onsuivant={(reponse) =>
-        questionnaireAvecUndo.repond(
-          valideLocalisationServicesNumeriques(reponse)
-        )}
+      onsuivant={(reponse) => questionnaireAvecUndo.repond(valideLocalisationServicesNumeriques(reponse))}
     />
   {:else if $questionnaireAvecUndo.etapeCourante === 'resultat'}
     <EtapeResultat reponses={$questionnaireStore} />

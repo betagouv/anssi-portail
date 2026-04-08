@@ -28,15 +28,11 @@
 
   onMount(() => {
     let urlSearchParams = new URLSearchParams(window.location.search);
-    let parametreEmailUtilisateurMAC = urlSearchParams.get(
-      'email-utilisateur-mac'
-    );
+    let parametreEmailUtilisateurMAC = urlSearchParams.get('email-utilisateur-mac');
     if (parametreEmailUtilisateurMAC) {
       utilisateurMACPrerempli = true;
       estEnRelationAvecUnUtilisateur = true;
-      emailUtilisateurMAC = atob(
-        decodeURIComponent(parametreEmailUtilisateurMAC)
-      );
+      emailUtilisateurMAC = atob(decodeURIComponent(parametreEmailUtilisateurMAC));
       return;
     }
     let nomUsage = urlSearchParams.get('nom-usage');
@@ -46,9 +42,7 @@
       utilisateurMACPrerempli = true;
       estEnRelationAvecUnUtilisateur = true;
       emailUtilisateurMAC = new TextDecoder().decode(
-        Uint8Array.from(atob(decodeURIComponent(nomUsage)), (car) =>
-          car.charCodeAt(0)
-        )
+        Uint8Array.from(atob(decodeURIComponent(nomUsage)), (car) => car.charCodeAt(0))
       );
       return;
     }
@@ -63,8 +57,7 @@
     emets('formulaireSoumis', {
       entite,
       email,
-      ...(estEnRelationAvecUnUtilisateur &&
-        !identifiantAidant && { emailUtilisateurMAC }),
+      ...(estEnRelationAvecUnUtilisateur && !identifiantAidant && { emailUtilisateurMAC }),
       ...(identifiantAidant && { identifiantAidant }),
       cguSontValidees,
     });
@@ -74,11 +67,7 @@
 <Formulaire classe="carte-formulaire" bind:this={formulaire} {id}>
   <div class="champ recherche-organisation">
     <label class="libelle" for="entite">Recherchez votre organisation</label>
-    <SelectionOrganisation
-      id="entite"
-      bind:valeur={entite}
-      filtreDepartement={undefined}
-    />
+    <SelectionOrganisation id="entite" bind:valeur={entite} filtreDepartement={undefined} />
     {#if entite}
       <div>Votre entreprise : {entite.nom} ({entite.departement})</div>
     {/if}
@@ -130,9 +119,7 @@
           </label>
         </div>
         {#if estEnRelationAvecUnUtilisateur === undefined && formulaireSoumis}
-          <span class="erreur-champ-saisie"
-            >Ce champ est obligatoire. Veuillez le cocher.</span
-          >
+          <span class="erreur-champ-saisie">Ce champ est obligatoire. Veuillez le cocher.</span>
         {/if}
       </ControleFormulaire>
     </div>
@@ -175,22 +162,14 @@
         use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
       />
       <label for="cguAcceptees" class="requis">
-        J'accepte les <a
-          class="lien"
-          href="https://monaide.cyber.gouv.fr/cgu"
-          target="_blank">conditions générales d'utilisation</a
+        J'accepte les <a class="lien" href="https://monaide.cyber.gouv.fr/cgu" target="_blank"
+          >conditions générales d'utilisation</a
         > de MonAideCyber au nom de l’entité que je représente.
       </label>
     </div>
 
     <div>
-      <Bouton
-        type="primaire"
-        taille="md"
-        titre="Envoyer ma demande"
-        on:click={soumetsFormulaire}
-        {enCoursEnvoi}
-      />
+      <Bouton type="primaire" taille="md" titre="Envoyer ma demande" on:click={soumetsFormulaire} {enCoursEnvoi} />
     </div>
 
     {#if erreurs}

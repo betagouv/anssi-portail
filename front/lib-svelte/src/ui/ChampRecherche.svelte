@@ -14,16 +14,8 @@
 
 <form on:submit|preventDefault|stopPropagation={valide}>
   <input type="text" bind:value={requete} placeholder="Rechercher" />
-  <button
-    class:visible={requete}
-    class="suppression-recherche"
-    on:click={efface}
-    type="button"
-  >
-    <img
-      src="/assets/images/icone-croix-blanche.svg"
-      alt="Suppression de la recherche"
-    />
+  <button class:visible={requete} class="suppression-recherche" on:click={efface} type="button">
+    <img src="/assets/images/icone-croix-blanche.svg" alt="Suppression de la recherche" />
   </button>
   <button class="bouton-recherche" type="submit">
     <img src="/assets/images/icone_loupe.svg" alt="Icône de recherche" />

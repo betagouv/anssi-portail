@@ -36,12 +36,7 @@ export interface ExigenceAE extends ExigenceBase {
   correspondance: Correspondance;
 }
 
-export type CyFun23Fonction =
-  | 'Identifier'
-  | 'Protéger'
-  | 'Détecter'
-  | 'Répondre'
-  | 'Rétablir';
+export type CyFun23Fonction = 'Identifier' | 'Protéger' | 'Détecter' | 'Répondre' | 'Rétablir';
 
 export type CyFun23NiveauAssurance = 'Basique' | 'Important' | 'Essentiel';
 
@@ -52,11 +47,7 @@ export interface ExigenceCyFun23 extends ExigenceBase {
   correspondance: Correspondance;
 }
 
-export type Exigence =
-  | ExigenceNis2
-  | ExigenceISO
-  | ExigenceAE
-  | ExigenceCyFun23;
+export type Exigence = ExigenceNis2 | ExigenceISO | ExigenceAE | ExigenceCyFun23;
 
 export const badgesExigence = (exigence: ExigenceNis2 | ExigenceCyFun23) => {
   if ('entitesCible' in exigence) {
@@ -103,9 +94,7 @@ export const badgesExigence = (exigence: ExigenceNis2 | ExigenceCyFun23) => {
   ];
 };
 
-export const formateContenuExigence = ({
-  contenu,
-}: ExigenceBase | ExigenceComparee): string => {
+export const formateContenuExigence = ({ contenu }: ExigenceBase | ExigenceComparee): string => {
   const lignes = contenu.split('\n');
   const htmlParts: string[] = [];
 
@@ -151,10 +140,7 @@ export const fabriqueDExigence = (
   cible: Referentiel | undefined,
   exigence: Record<string, unknown>
 ): Exigence => {
-  const correspondances = exigence.correspondances as Record<
-    string,
-    Correspondance
-  >;
+  const correspondances = exigence.correspondances as Record<string, Correspondance>;
   if (source === 'NIS2') {
     return {
       reference: (exigence.reference as string) ?? '',

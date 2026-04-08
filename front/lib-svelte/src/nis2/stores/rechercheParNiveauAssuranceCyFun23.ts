@@ -10,9 +10,6 @@ export const rechercheParNiveauAssuranceCyFun23 = {
   ok: (exigence: Exigence) => {
     if (!('niveauAssurance' in exigence)) return true;
     const niveauAssuranceCourant = get(selectionNiveauAssurance);
-    return (
-      !niveauAssuranceCourant ||
-      exigence.niveauAssurance === niveauAssuranceCourant
-    );
+    return !niveauAssuranceCourant || exigence.niveauAssurance === niveauAssuranceCourant;
   },
 };

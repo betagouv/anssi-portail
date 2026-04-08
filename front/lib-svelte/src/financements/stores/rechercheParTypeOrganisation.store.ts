@@ -9,7 +9,5 @@ export const rechercheParTypeOrganisation = {
   reinitialise: () => selectionTypeOrganisation.set([]),
   ok: (resumeFinancement: ResumeFinancement): boolean =>
     !get(selectionTypeOrganisation).length ||
-    resumeFinancement.entitesElligibles.some((entite) =>
-      get(selectionTypeOrganisation).includes(entite)
-    ),
+    resumeFinancement.entitesElligibles.some((entite) => get(selectionTypeOrganisation).includes(entite)),
 };

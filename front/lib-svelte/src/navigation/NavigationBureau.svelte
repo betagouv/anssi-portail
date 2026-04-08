@@ -14,40 +14,19 @@
       href={estConnecte ? '/ma-maturite' : '/test-maturite/'}
       label={estConnecte ? 'Maturité cyber' : 'Test de maturité cyber'}
     />
-    <details
-      class:actif={[
-        '/catalogue/',
-        '/parcours-debuter/',
-        '/parcours-approfondir/',
-      ].includes(cheminRelatif)}
-    >
+    <details class:actif={['/catalogue/', '/parcours-debuter/', '/parcours-approfondir/'].includes(cheminRelatif)}>
       <summary>Catalogue et sélections</summary>
       <div class="choix">
-        <LienNavigation
-          href="/catalogue/"
-          label="Le catalogue cyber complet"
-          dansMenuDeroulant
-        />
-        <LienNavigation
-          href="/parcours-debuter/"
-          label="Les services pour se lancer"
-          dansMenuDeroulant
-        />
-        <LienNavigation
-          href="/parcours-approfondir/"
-          label="Les services pour approfondir"
-          dansMenuDeroulant
-        />
+        <LienNavigation href="/catalogue/" label="Le catalogue cyber complet" dansMenuDeroulant />
+        <LienNavigation href="/parcours-debuter/" label="Les services pour se lancer" dansMenuDeroulant />
+        <LienNavigation href="/parcours-approfondir/" label="Les services pour approfondir" dansMenuDeroulant />
       </div>
     </details>
     <LienNavigation label="Directive NIS 2" href="/nis2" />
     {#if estConnecte}
       <LienNavigation href="/favoris/" label="Favoris" />
     {/if}
-    <details
-      class:actif={cheminRelatif.startsWith('/contacts/') ||
-        cheminRelatif === '/prestataires-labellises/'}
-    >
+    <details class:actif={cheminRelatif.startsWith('/contacts/') || cheminRelatif === '/prestataires-labellises/'}>
       <summary>Contacts utiles</summary>
       <div class="choix">
         <LienNavigation
@@ -70,16 +49,8 @@
     >
       <summary> Promouvoir</summary>
       <div class="choix">
-        <LienNavigation
-          href="/promouvoir-messervicescyber/"
-          label="Promouvoir MesServicesCyber"
-          dansMenuDeroulant
-        />
-        <LienNavigation
-          href="/promouvoir-diagnostic-cyber/"
-          label="Promouvoir le diagnostic cyber"
-          dansMenuDeroulant
-        />
+        <LienNavigation href="/promouvoir-messervicescyber/" label="Promouvoir MesServicesCyber" dansMenuDeroulant />
+        <LienNavigation href="/promouvoir-diagnostic-cyber/" label="Promouvoir le diagnostic cyber" dansMenuDeroulant />
       </div>
     </details>
     <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart"

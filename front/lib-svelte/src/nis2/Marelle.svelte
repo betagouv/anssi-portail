@@ -17,8 +17,7 @@
     },
     {
       titre: "Enregistrer votre entité auprès de l'ANSSI",
-      description:
-        'Accédez dès à présent au service de pré-enregistrement en ligne.',
+      description: 'Accédez dès à présent au service de pré-enregistrement en ligne.',
       lien: {
         href: 'https://club.ssi.gouv.fr/#/nis2/introduction',
         texte: 'Se déclarer',
@@ -48,22 +47,13 @@
   };
 </script>
 
-<lab-anssi-marelle
-  titre="NIS&nbsp;2&nbsp;: Comment se lancer&nbsp;?"
-  etapesmarelle={etapesMarelle}
->
-  <lab-anssi-marelle-etape etapeMarelle={etapesMarelle[0]} index={0}
-  ></lab-anssi-marelle-etape>
-  <lab-anssi-marelle-etape etapeMarelle={etapesMarelle[1]} index={1}
-  ></lab-anssi-marelle-etape>
+<lab-anssi-marelle titre="NIS&nbsp;2&nbsp;: Comment se lancer&nbsp;?" etapesmarelle={etapesMarelle}>
+  <lab-anssi-marelle-etape etapeMarelle={etapesMarelle[0]} index={0}></lab-anssi-marelle-etape>
+  <lab-anssi-marelle-etape etapeMarelle={etapesMarelle[1]} index={1}></lab-anssi-marelle-etape>
   <lab-anssi-marelle-etape etapeMarelle={etapesMarelle[2]} index={2}>
     <p slot="etape-description">
-      Mettez en oeuvre <dsfr-link
-        label="les exigences de sécurité"
-        href="/nis2#exigences"
-        use:clic={retourEnHautDePage}
-      ></dsfr-link> issues de la directive pour réduire vos risques cyber et signalez
-      à l’ANSSI vos incidents de sécurité.
+      Mettez en oeuvre <dsfr-link label="les exigences de sécurité" href="/nis2#exigences" use:clic={retourEnHautDePage}
+      ></dsfr-link> issues de la directive pour réduire vos risques cyber et signalez à l’ANSSI vos incidents de sécurité.
     </p>
   </lab-anssi-marelle-etape>
 </lab-anssi-marelle>

@@ -8,26 +8,14 @@
   <div class="formulaire">
     <hgroup>
       <h2>
-        <lab-anssi-icone nom="mail-line" taille="lg"
-        ></lab-anssi-icone>Abonnement à la newsletter
+        <lab-anssi-icone nom="mail-line" taille="lg"></lab-anssi-icone>Abonnement à la newsletter
       </h2>
     </hgroup>
     <dsfr-alert type="success" size="sm" title="Merci&nbsp;!">
-      <p slot="description">
-        Votre inscription à la newsletter MesServicesCyber a bien été prise en
-        compte.
-      </p>
+      <p slot="description">Votre inscription à la newsletter MesServicesCyber a bien été prise en compte.</p>
     </dsfr-alert>
-    <img
-      src="/assets/images/dragon-coeur-entier.svg"
-      alt="Le dragon vous remercie"
-    />
-    <dsfr-button
-      markup="a"
-      label="Accéder à la page d’accueil"
-      kind="secondary"
-      href="/"
-    ></dsfr-button>
+    <img src="/assets/images/dragon-coeur-entier.svg" alt="Le dragon vous remercie" />
+    <dsfr-button markup="a" label="Accéder à la page d’accueil" kind="secondary" href="/"></dsfr-button>
   </div>
 </dsfr-container>
 

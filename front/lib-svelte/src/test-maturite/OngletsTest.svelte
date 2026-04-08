@@ -24,22 +24,10 @@
   <section class="section-onglets">
     <div class="contenu-section">
       <ConteneurOnglets>
-        <Onglet
-          bind:ongletActif
-          cetOnglet="votre-organisation"
-          labelOnglet="Maturité cyber de votre organisation"
+        <Onglet bind:ongletActif cetOnglet="votre-organisation" labelOnglet="Maturité cyber de votre organisation"
         ></Onglet>
-        <Onglet
-          bind:ongletActif
-          cetOnglet="historique"
-          labelOnglet="Historique"
-          on:click={reclicHistorique}
-        ></Onglet>
-        <Onglet
-          bind:ongletActif
-          cetOnglet="comparaison"
-          labelOnglet="Comparaison avec d’autres entités"
-        ></Onglet>
+        <Onglet bind:ongletActif cetOnglet="historique" labelOnglet="Historique" on:click={reclicHistorique}></Onglet>
+        <Onglet bind:ongletActif cetOnglet="comparaison" labelOnglet="Comparaison avec d’autres entités"></Onglet>
       </ConteneurOnglets>
     </div>
   </section>

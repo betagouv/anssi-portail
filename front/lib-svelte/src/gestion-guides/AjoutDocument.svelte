@@ -28,10 +28,7 @@
       formulaire.append('genereVisuel', genereVisuel ? 'true' : 'false');
       formulaire.append('document-guide', nouveauDocument);
       try {
-        await axios.post(
-          `/api/guides/${identifiantGuide}/documents`,
-          formulaire
-        );
+        await axios.post(`/api/guides/${identifiantGuide}/documents`, formulaire);
         await surAjout(libelleDuLien, nouveauDocument.name);
         libelleDuLien = '';
         nouveauDocument = undefined;
@@ -47,9 +44,7 @@
         if (erreurAxios.response) {
           const data = erreurAxios.response.data as { erreur: string };
           if (Array.isArray(data)) {
-            erreur =
-              data[0]?.message ||
-              "Une erreur est survenue lors de l'ajout du document";
+            erreur = data[0]?.message || "Une erreur est survenue lors de l'ajout du document";
           } else {
             erreur = data.erreur;
           }
@@ -76,34 +71,15 @@
 <div class="formulaire-ajout">
   <h3>Ajout d'un nouveau document</h3>
   {#if succes}
-    <dsfr-alert
-      type="success"
-      size="sm"
-      title="Document en cours d'ajout"
-      dismissible
-    >
-      <p slot="description">
-        Vous pouvez ajouter un autre document ou continuer votre navigation sur
-        le site.
-      </p>
+    <dsfr-alert type="success" size="sm" title="Document en cours d'ajout" dismissible>
+      <p slot="description">Vous pouvez ajouter un autre document ou continuer votre navigation sur le site.</p>
     </dsfr-alert>
   {:else if erreur}
-    <dsfr-alert
-      type="error"
-      size="sm"
-      title="Erreur lors de l'ajout du document"
-      dismissible
-    >
+    <dsfr-alert type="error" size="sm" title="Erreur lors de l'ajout du document" dismissible>
       <p slot="description">{erreur}</p>
     </dsfr-alert>
   {/if}
-  <input
-    bind:this={fichier}
-    type="file"
-    id="document-guide"
-    name="document-guide"
-    oninput={surAjoutDocument}
-  />
+  <input bind:this={fichier} type="file" id="document-guide" name="document-guide" oninput={surAjoutDocument} />
   <dsfr-input
     id="libelleDuLien"
     label="Libellé du lien"
@@ -116,10 +92,7 @@
     value={genereVisuel}
     onvaluechanged={(e: CustomEvent) => (genereVisuel = e.detail)}
   ></dsfr-checkbox>
-  <dsfr-button
-    label="Ajouter"
-    use:clic={ajoute}
-    disabled={!nouveauDocument || !libelleDuLien || !identifiantGuide}
+  <dsfr-button label="Ajouter" use:clic={ajoute} disabled={!nouveauDocument || !libelleDuLien || !identifiantGuide}
   ></dsfr-button>
 </div>
 

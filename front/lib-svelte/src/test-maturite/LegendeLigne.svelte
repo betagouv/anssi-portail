@@ -13,16 +13,8 @@
   }
 </script>
 
-<div
-  class="ligne-legende ligne-legende-{index}"
-  class:actif
-  class:avec-valeur={valeur || pourcentage}
->
-  <span
-    role="listitem"
-    class="libelle"
-    aria-label={`${libelle} ${pourcentageLisible}`}
-  >
+<div class="ligne-legende ligne-legende-{index}" class:actif class:avec-valeur={valeur || pourcentage}>
+  <span role="listitem" class="libelle" aria-label={`${libelle} ${pourcentageLisible}`}>
     {libelle}
   </span>
   {#if valeur || (pourcentage && affichePourcentages)}

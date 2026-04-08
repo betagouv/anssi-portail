@@ -64,10 +64,7 @@
         siretAidant,
         validationCGU: cguSontValidees,
       };
-      const reponse = await axios.post(
-        `${urlBase}/api/mon-aide-cyber/demandes-aide`,
-        corps
-      );
+      const reponse = await axios.post(`${urlBase}/api/mon-aide-cyber/demandes-aide`, corps);
       if (reponse.status === 201) {
         enSucces = true;
       }
@@ -89,14 +86,8 @@
         <h5>Demande de diagnostic cyber</h5>
       {/if}
       <div class="champ recherche-organisation">
-        <label class="libelle" for="entite">Recherchez votre organisation</label
-        >
-        <SelectionOrganisation
-          id="entite"
-          bind:valeur={entite}
-          filtreDepartement={undefined}
-          {urlBase}
-        />
+        <label class="libelle" for="entite">Recherchez votre organisation</label>
+        <SelectionOrganisation id="entite" bind:valeur={entite} filtreDepartement={undefined} {urlBase} />
         {#if entite}
           <div>Votre entreprise : {entite.nom} ({entite.departement})</div>
         {/if}
@@ -146,11 +137,7 @@
         ></dsfr-button>
       </div>
       {#if erreur}
-        <Alerte
-          type="ERREUR"
-          titre="Une erreur est survenue"
-          message={erreur}
-        />
+        <Alerte type="ERREUR" titre="Une erreur est survenue" message={erreur} />
       {/if}
       {#if mode === 'autonome'}
         <div class="entete-principale">
@@ -170,11 +157,7 @@
               crossorigin="anonymous"
             />
           </a>
-          <a
-            href={urlBase}
-            class="titre-msc"
-            aria-label="Site MesServicesCyber"
-          >
+          <a href={urlBase} class="titre-msc" aria-label="Site MesServicesCyber">
             <div class="titre-site-msc">
               <p class="site-msc">MesServicesCyber</p>
               <p class="organisation-anssi">Innovation ANSSI</p>
@@ -186,10 +169,7 @@
   </Formulaire>
 {:else}
   <div class="confirmation">
-    <ConfirmationCreationDemandeAide
-      mode="embarque"
-      cacheLesLiens={cacheLesLiensDeRetour}
-    />
+    <ConfirmationCreationDemandeAide mode="embarque" cacheLesLiens={cacheLesLiensDeRetour} />
   </div>
 {/if}
 

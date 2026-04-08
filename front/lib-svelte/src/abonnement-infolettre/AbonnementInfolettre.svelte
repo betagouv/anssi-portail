@@ -23,19 +23,13 @@
     }
   };
 
-  const adresseRetour = new URLSearchParams(window.location.search).get(
-    'adresseRetour'
-  );
+  const adresseRetour = new URLSearchParams(window.location.search).get('adresseRetour');
 
   let adresseRetourNettoyee: string | null;
   if (adresseRetour) {
-    let adresseParsee =
-      URL.parse(adresseRetour) ||
-      URL.parse(adresseRetour, window.location.origin);
+    let adresseParsee = URL.parse(adresseRetour) || URL.parse(adresseRetour, window.location.origin);
 
-    adresseRetourNettoyee = adresseParsee
-      ? adresseParsee.pathname + adresseParsee.search + adresseParsee.hash
-      : null;
+    adresseRetourNettoyee = adresseParsee ? adresseParsee.pathname + adresseParsee.search + adresseParsee.hash : null;
   }
 </script>
 
@@ -46,12 +40,10 @@
     <div class="formulaire">
       <hgroup>
         <h2>
-          <lab-anssi-icone nom="mail-line" taille="lg"
-          ></lab-anssi-icone>Abonnement à la newsletter
+          <lab-anssi-icone nom="mail-line" taille="lg"></lab-anssi-icone>Abonnement à la newsletter
         </h2>
         <p class="texte-standard-md">
-          Directive NIS 2, guides de l’ANSSI : recevez gratuitement toute
-          l’actualité de MesServicesCyber.
+          Directive NIS 2, guides de l’ANSSI : recevez gratuitement toute l’actualité de MesServicesCyber.
         </p>
       </hgroup>
 
@@ -59,14 +51,11 @@
         <div class="confirmation">
           <dsfr-alert type="info" size="sm" title="Une dernière étape">
             <p slot="description">
-              Un e-mail de confirmation vous a été envoyé. Consultez votre boîte
-              de réception pour confirmer votre abonnement à la newsletter.
+              Un e-mail de confirmation vous a été envoyé. Consultez votre boîte de réception pour confirmer votre
+              abonnement à la newsletter.
             </p>
           </dsfr-alert>
-          <img
-            src="/assets/images/dragon-coeur-entier.svg"
-            alt="Le dragon vous remercie"
-          />
+          <img src="/assets/images/dragon-coeur-entier.svg" alt="Le dragon vous remercie" />
           <dsfr-button
             markup="a"
             label="Revenir à l’étape précédente"
@@ -100,27 +89,15 @@
         >
           <span>J'accepte de recevoir la newsletter de MesServicesCyber.</span>
           <span slot="hint">
-            La politique de confidentialité est disponible <dsfr-link
-              href="/confidentialite"
-              label="ici"
-              neutral
+            La politique de confidentialité est disponible <dsfr-link href="/confidentialite" label="ici" neutral
             ></dsfr-link>.
           </span>
         </dsfr-checkbox>
 
-        <dsfr-button
-          label="S'abonner à la newsletter"
-          kind="primary"
-          type="submit"
-          use:clic={soumetsFormulaire}
+        <dsfr-button label="S'abonner à la newsletter" kind="primary" type="submit" use:clic={soumetsFormulaire}
         ></dsfr-button>
         {#if erreur}
-          <dsfr-alert
-            type="error"
-            size="sm"
-            title="Erreur lors de la demande d’abonnement"
-            dismissible
-          >
+          <dsfr-alert type="error" size="sm" title="Erreur lors de la demande d’abonnement" dismissible>
             <p slot="description">{erreur}</p>
           </dsfr-alert>
         {/if}

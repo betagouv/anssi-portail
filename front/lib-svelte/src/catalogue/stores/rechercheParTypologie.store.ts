@@ -8,6 +8,5 @@ export const rechercheParTypologie = {
   set: selectionDeTypologies.set,
   reinitialise: () => selectionDeTypologies.set([]),
   ok: (item: ItemCyber) =>
-    get(rechercheParTypologie).length === 0 ||
-    get(rechercheParTypologie).includes(item.typologie),
+    get(rechercheParTypologie).length === 0 || get(rechercheParTypologie).includes(item.typologie),
 };

@@ -7,10 +7,7 @@
 {#if type === 'ERREUR'}
   <div class="alerte">
     <div class="icone">
-      <img
-        src="../../../assets/images/icone-erreur-blanche.svg"
-        alt="Icone d'erreur"
-      />
+      <img src="../../../assets/images/icone-erreur-blanche.svg" alt="Icone d'erreur" />
     </div>
     <div class="contenu">
       <b>{titre}</b>

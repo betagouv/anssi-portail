@@ -1,9 +1,4 @@
-export type IdNiveau =
-  | 'insuffisant'
-  | 'emergent'
-  | 'intermediaire'
-  | 'confirme'
-  | 'optimal';
+export type IdNiveau = 'insuffisant' | 'emergent' | 'intermediaire' | 'confirme' | 'optimal';
 
 export type NiveauMaturite = {
   id: IdNiveau;

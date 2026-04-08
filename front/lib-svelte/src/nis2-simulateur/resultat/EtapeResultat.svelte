@@ -19,18 +19,13 @@
     api.envoyerReponses(props.reponses);
   });
 
-  let { resultat } = $derived.by(() =>
-    evalueEligibilite(props.reponses, SpecificationsCompletes)
-  );
+  let { resultat } = $derived.by(() => evalueEligibilite(props.reponses, SpecificationsCompletes));
 </script>
 
 <div class="resultat" {@attach quiScroll}>
   <TamponResultat {resultat} />
 
-  <PointsAttention
-    resumes={resultat.pointsAttention.resumes}
-    precisions={resultat.pointsAttention.precisions}
-  />
+  <PointsAttention resumes={resultat.pointsAttention.resumes} precisions={resultat.pointsAttention.precisions} />
 
   {#if resultat.regulation === Regulation.Regule}
     <LigneEtMaintenant />

@@ -8,8 +8,7 @@
   let observateurDIntersection: IntersectionObserver;
   let composant: HTMLDivElement;
 
-  const sectionsDuComposant = () =>
-    composant.querySelectorAll(selecteurSections);
+  const sectionsDuComposant = () => composant.querySelectorAll(selecteurSections);
 
   const observeLesSections = () => {
     observateurDIntersection = new IntersectionObserver(
@@ -33,19 +32,15 @@
     observeLesSections();
   });
 
-  onDestroy(() =>
-    sectionsDuComposant().forEach((s) => observateurDIntersection.unobserve(s))
-  );
+  onDestroy(() => sectionsDuComposant().forEach((s) => observateurDIntersection.unobserve(s)));
 </script>
 
 <div bind:this={composant}>
   <dsfr-container class="conteneur">
     <div class="controle-segmente">
       {#each elements as element, index (element.id)}
-        <a
-          href="#{element.ancre ?? element.id}"
-          class="bouton-segmente"
-          class:actif={index === indexActif}>{element.titre}</a
+        <a href="#{element.ancre ?? element.id}" class="bouton-segmente" class:actif={index === indexActif}
+          >{element.titre}</a
         >
       {/each}
     </div>

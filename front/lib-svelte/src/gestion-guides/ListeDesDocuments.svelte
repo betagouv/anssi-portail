@@ -13,10 +13,7 @@
     nouveauxDocuments: Document[];
   };
 
-  let {
-    identifiantGuide = $bindable(),
-    nouveauxDocuments = $bindable(),
-  }: Props = $props();
+  let { identifiantGuide = $bindable(), nouveauxDocuments = $bindable() }: Props = $props();
 
   let documentsDeLApi = $state<Document[]>([]);
   let succes: boolean = $state(false);
@@ -25,18 +22,14 @@
   const chargeLesDocumentsDepuisGrist = async () => {
     documentsDeLApi = [];
     if (identifiantGuide === '') return;
-    const reponse = await axios.get(
-      `/api/guides/${identifiantGuide}/documents`
-    );
+    const reponse = await axios.get(`/api/guides/${identifiantGuide}/documents`);
     documentsDeLApi = reponse.data;
     nouveauxDocuments = [];
   };
 
   const supprimeLeDocument = async (nomFichier: string) => {
     try {
-      await axios.delete(
-        `/api/guides/${identifiantGuide}/documents/${nomFichier}`
-      );
+      await axios.delete(`/api/guides/${identifiantGuide}/documents/${nomFichier}`);
       await chargeLesDocumentsDepuisGrist();
       succes = true;
       erreur = '';
@@ -71,24 +64,11 @@
 <div class="documents">
   <h3>Documents associés</h3>
   {#if succes}
-    <dsfr-alert
-      type="success"
-      size="sm"
-      title="Document en cours de suppression"
-      dismissible
-    >
-      <p slot="description">
-        Vous pouvez ajouter un autre document ou continuer votre navigation sur
-        le site.
-      </p>
+    <dsfr-alert type="success" size="sm" title="Document en cours de suppression" dismissible>
+      <p slot="description">Vous pouvez ajouter un autre document ou continuer votre navigation sur le site.</p>
     </dsfr-alert>
   {:else if erreur}
-    <dsfr-alert
-      type="error"
-      size="sm"
-      title="Erreur lors de la suppression du document"
-      dismissible
-    >
+    <dsfr-alert type="error" size="sm" title="Erreur lors de la suppression du document" dismissible>
       <p slot="description">{erreur}</p>
     </dsfr-alert>
   {/if}
@@ -115,13 +95,7 @@
           <dsfr-link href="#" blank label={nomFichier}></dsfr-link>
         </p>
         <p>{libelle}</p>
-        <dsfr-button
-          disabled
-          class="supprimer"
-          type="button"
-          size="md"
-          kind="tertiary"
-          label="Ajout en cours"
+        <dsfr-button disabled class="supprimer" type="button" size="md" kind="tertiary" label="Ajout en cours"
         ></dsfr-button>
       </div>
     {/each}

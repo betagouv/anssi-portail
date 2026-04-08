@@ -2,9 +2,8 @@
 </script>
 
 <p class="note-information texte-mention-xs">
-  Ces contacts sont fournis à titre indicatif et leur pertinence peut varier
-  selon les spécificités de votre organisation. Contactez toujours en priorité
-  les personnes responsables au sein de votre organisation.
+  Ces contacts sont fournis à titre indicatif et leur pertinence peut varier selon les spécificités de votre
+  organisation. Contactez toujours en priorité les personnes responsables au sein de votre organisation.
 </p>
 
 <style lang="scss">

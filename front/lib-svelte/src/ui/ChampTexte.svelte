@@ -34,9 +34,7 @@
   bind:value={valeur}
   required={requis}
   placeholder={aideSaisie}
-  use:validationChamp={requis || modele || type === 'email'
-    ? messageErreur
-    : ''}
+  use:validationChamp={requis || modele || type === 'email' ? messageErreur : ''}
   pattern={modele}
   on:input
   on:focus

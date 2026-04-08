@@ -30,11 +30,7 @@
   };
 </script>
 
-<button
-  on:click|preventDefault={actionSurClick}
-  title={titre}
-  class:actif={$profilStore}
->
+<button on:click|preventDefault={actionSurClick} title={titre} class:actif={$profilStore}>
   <img src={cheminIcone} alt="Favori" />
 </button>
 

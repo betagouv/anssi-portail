@@ -4,12 +4,7 @@
   import ChampRecherche from '../ui/ChampRecherche.svelte';
   import Hero from '../ui/Hero.svelte';
   import CarteItem from './CarteItem.svelte';
-  import {
-    type BesoinCyber,
-    DroitAcces,
-    Source,
-    Typologie,
-  } from './Catalogue.types';
+  import { type BesoinCyber, DroitAcces, Source, Typologie } from './Catalogue.types';
   import FiltreAccessibilite from './FiltreAccessibilite.svelte';
   import FiltreBesoin from './FiltreBesoin.svelte';
   import FiltreSource from './FiltreSource.svelte';
@@ -43,10 +38,7 @@
     [CollectionGuide.AUTRE]: 'autre',
   };
   const nomsCollectionsGuide = Object.fromEntries(
-    Object.entries(idsCollectionsGuide).map(([cle, valeur]) => [
-      valeur,
-      cle as CollectionGuide,
-    ])
+    Object.entries(idsCollectionsGuide).map(([cle, valeur]) => [valeur, cle as CollectionGuide])
   );
   const versIdsCollection = (collections: CollectionGuide[]): string[] =>
     collections.map((c) => idsCollectionsGuide[c]);
@@ -55,9 +47,7 @@
     idsCollection.map((i) => nomsCollectionsGuide[i]);
 
   // Gestion du fragment
-  let fragmentDeNavigation = $state(
-    creeLeFragmentDeNavigation(window.location.hash)
-  );
+  let fragmentDeNavigation = $state(creeLeFragmentDeNavigation(window.location.hash));
   const changeLeFragmentDeNavigation = () => {
     fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
     appliqueLesFiltres();
@@ -71,11 +61,7 @@
 
   // Gestion de la section
   type Section = 'guides' | 'ressourcesEtServices';
-  let sectionActive = $derived<Section>(
-    fragmentDeNavigation.section === 'guides'
-      ? 'guides'
-      : 'ressourcesEtServices'
-  );
+  let sectionActive = $derived<Section>(fragmentDeNavigation.section === 'guides' ? 'guides' : 'ressourcesEtServices');
   const changeDeSection = (section: Section) => {
     sectionActive = section;
     fragmentDeNavigation.changeSection(section);
@@ -85,31 +71,19 @@
   // Gestion des filtres
   const reinitialiseFiltres = () => recherches.reinitialise();
   const appliqueLesFiltres = () => {
-    $rechercheParBesoin = fragmentDeNavigation.extraisValeur<BesoinCyber>(
-      'besoin',
-      null
-    );
-    $rechercheParLangue =
-      fragmentDeNavigation.extraisTableau<Langue>('langues');
-    $rechercheParCollection = depuisIdsCollection(
-      fragmentDeNavigation.extraisTableau<CollectionGuide>('collections')
-    );
+    $rechercheParBesoin = fragmentDeNavigation.extraisValeur<BesoinCyber>('besoin', null);
+    $rechercheParLangue = fragmentDeNavigation.extraisTableau<Langue>('langues');
+    $rechercheParCollection = depuisIdsCollection(fragmentDeNavigation.extraisTableau<CollectionGuide>('collections'));
     $rechercheTextuelle = fragmentDeNavigation.extraisValeur('q', '');
-    $rechercheParDroitAcces =
-      fragmentDeNavigation.extraisTableau<DroitAcces>('accessibilite');
-    $rechercheParTypologie =
-      fragmentDeNavigation.extraisTableau<Typologie>('types');
-    $rechercheParSource =
-      fragmentDeNavigation.extraisTableau<Source>('sources');
+    $rechercheParDroitAcces = fragmentDeNavigation.extraisTableau<DroitAcces>('accessibilite');
+    $rechercheParTypologie = fragmentDeNavigation.extraisTableau<Typologie>('types');
+    $rechercheParSource = fragmentDeNavigation.extraisTableau<Source>('sources');
   };
   appliqueLesFiltres();
   $effect(() => {
     fragmentDeNavigation.change('besoin', $rechercheParBesoin);
     fragmentDeNavigation.change('langues', $rechercheParLangue);
-    fragmentDeNavigation.change(
-      'collections',
-      versIdsCollection($rechercheParCollection)
-    );
+    fragmentDeNavigation.change('collections', versIdsCollection($rechercheParCollection));
     fragmentDeNavigation.change('q', $rechercheTextuelle);
     fragmentDeNavigation.change('accessibilite', $rechercheParDroitAcces);
     fragmentDeNavigation.change('types', $rechercheParTypologie);
@@ -152,12 +126,7 @@
     <FiltreSource />
   {/if}
 
-  <input
-    type="button"
-    class="bouton primaire"
-    value="Réinitialiser les filtres"
-    onclick={reinitialiseFiltres}
-  />
+  <input type="button" class="bouton primaire" value="Réinitialiser les filtres" onclick={reinitialiseFiltres} />
 </FiltresMobile>
 
 <section class="barre-recherche-mobile">
@@ -175,11 +144,7 @@
     <lab-anssi-icone nom="list-check"></lab-anssi-icone>
     <span>Services et outils</span>
   </button>
-  <button
-    class="bouton-segmente"
-    class:actif={sectionActive === 'guides'}
-    onclick={() => changeDeSection('guides')}
-  >
+  <button class="bouton-segmente" class:actif={sectionActive === 'guides'} onclick={() => changeDeSection('guides')}>
     <lab-anssi-icone nom="book-2-line"></lab-anssi-icone>
     <span>Guides de l'ANSSI</span>
   </button>
@@ -195,10 +160,7 @@
 
     <div class="grille">
       <FiltresBureau filtreActif={$recherches.filtreActif}>
-        <ChampRecherche
-          slot="avant-entete"
-          bind:recherche={$rechercheTextuelle}
-        />
+        <ChampRecherche slot="avant-entete" bind:recherche={$rechercheTextuelle} />
         {#if sectionActive === 'guides'}
           <FiltreLangue />
           <FiltreCollection />
@@ -207,12 +169,7 @@
           <FiltreTypologie />
           <FiltreSource />
         {/if}
-        <input
-          type="button"
-          class="bouton primaire"
-          value="Réinitialiser les filtres"
-          onclick={reinitialiseFiltres}
-        />
+        <input type="button" class="bouton primaire" value="Réinitialiser les filtres" onclick={reinitialiseFiltres} />
       </FiltresBureau>
 
       {#if sectionActive === 'guides'}
@@ -220,10 +177,7 @@
           <CarteItem item={guide} avecBoutonFavori />
         {:else}
           <div class="aucun-resultat">
-            <img
-              src="/assets/images/homme-cherchant-avec-loupe.svg"
-              alt="Aucun résultat"
-            />
+            <img src="/assets/images/homme-cherchant-avec-loupe.svg" alt="Aucun résultat" />
             {#if chargement}
               <h1>Chargement...</h1>
             {:else}
@@ -242,10 +196,7 @@
           <CarteItem item={itemCyber} avecBoutonFavori />
         {:else}
           <div class="aucun-resultat">
-            <img
-              src="/assets/images/homme-cherchant-avec-loupe.svg"
-              alt="Aucun résultat"
-            />
+            <img src="/assets/images/homme-cherchant-avec-loupe.svg" alt="Aucun résultat" />
             <h1>Désolé, aucun résultat trouvé</h1>
             <input
               type="button"

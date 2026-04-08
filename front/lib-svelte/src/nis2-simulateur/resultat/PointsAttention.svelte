@@ -17,11 +17,7 @@
 </script>
 
 <div class="points-attention">
-  <dsfr-accordion
-    id="points-attention-details"
-    label="Points d'attention"
-    is-expanded="true"
-  >
+  <dsfr-accordion id="points-attention-details" label="Points d'attention" is-expanded="true">
     {#each props.resumes as resume, i (i)}
       <p>{TextesDesResumes[resume]}</p>
     {/each}

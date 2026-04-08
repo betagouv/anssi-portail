@@ -82,18 +82,12 @@ describe("Le secteur de contact est retrouvé pour un code d'activité", () => {
 
   describe('concernant le secteur Enseignement et recherche', () => {
     it('pour la division Enseignement', () => {
-      expect(calculeCodeSecteurContact('85.10Z')).toBe(
-        'enseignement-recherche'
-      );
+      expect(calculeCodeSecteurContact('85.10Z')).toBe('enseignement-recherche');
     });
 
     it('pour la division Recherche-développement scientifique', () => {
-      expect(calculeCodeSecteurContact('72.11Z')).toBe(
-        'enseignement-recherche'
-      );
-      expect(calculeCodeSecteurContact('72.19Z')).toBe(
-        'enseignement-recherche'
-      );
+      expect(calculeCodeSecteurContact('72.11Z')).toBe('enseignement-recherche');
+      expect(calculeCodeSecteurContact('72.19Z')).toBe('enseignement-recherche');
       expect(calculeCodeSecteurContact('72.20Z')).toBe(undefined);
     });
   });

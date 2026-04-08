@@ -4,10 +4,7 @@
   import Hero from '../ui/Hero.svelte';
   import ComparaisonTest from './ComparaisonTest.svelte';
   import HistoriqueTests from './HistoriqueTests.svelte';
-  import OngletsTest, {
-    type CleOnglet,
-    clesOnglet,
-  } from './OngletsTest.svelte';
+  import OngletsTest, { type CleOnglet, clesOnglet } from './OngletsTest.svelte';
   import PropositionRefaireTest from './PropositionRefaireTest.svelte';
   import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
 
@@ -58,11 +55,7 @@
 <OngletsTest bind:ongletActif on:reclicHistorique={afficheHistorique} />
 
 {#if ongletActif === 'votre-organisation'}
-  <ResultatsMonOrganisation
-    {animeTuiles}
-    dateRealisation={dateRealisationDernierTest}
-    {defilementAutomatique}
-  />
+  <ResultatsMonOrganisation {animeTuiles} dateRealisation={dateRealisationDernierTest} {defilementAutomatique} />
 {:else if ongletActif === 'historique' && $profilStore}
   <HistoriqueTests {idResultatTest} />
 {:else if $profilStore}

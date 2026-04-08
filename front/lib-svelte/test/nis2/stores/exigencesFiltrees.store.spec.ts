@@ -90,10 +90,7 @@ describe('Le store des exigences filtrées', () => {
     });
 
     it("est appliqué, conserve uniquement les exigences avec le même type d'entité", () => {
-      const exigencesDansLeStore: Exigence[] = [
-        exigenceNIS2DeNiveauFaible(),
-        exigenceNIS2DeNiveauEleve(),
-      ];
+      const exigencesDansLeStore: Exigence[] = [exigenceNIS2DeNiveauFaible(), exigenceNIS2DeNiveauEleve()];
 
       exigencesStore.initialise(exigencesDansLeStore);
       rechercheParEntiteNis2.set('EntiteImportante');
@@ -107,9 +104,7 @@ describe('Le store des exigences filtrées', () => {
 
   describe('lorsque le filtre des objectifs de sécurité NIS 2', () => {
     it("est valorisé, detecte qu'un filtre est actif", () => {
-      rechercheParObjectifNis2.set(
-        "Objectif de sécurité 3: Maîtrise de l'écosystème"
-      );
+      rechercheParObjectifNis2.set("Objectif de sécurité 3: Maîtrise de l'écosystème");
 
       const filtresActifs = get(exigencesFiltrees).filtresActifs;
 
@@ -117,15 +112,10 @@ describe('Le store des exigences filtrées', () => {
     });
 
     it('est appliqué, conserve uniquement les exigences avec le même objectif de sécurité', () => {
-      const exigencesDansLeStore: Exigence[] = [
-        exigenceNIS2DeNiveauFaible(),
-        exigenceNIS2DeNiveauEleve(),
-      ];
+      const exigencesDansLeStore: Exigence[] = [exigenceNIS2DeNiveauFaible(), exigenceNIS2DeNiveauEleve()];
 
       exigencesStore.initialise(exigencesDansLeStore);
-      rechercheParObjectifNis2.set(
-        "Objectif de sécurité 3: Maîtrise de l'écosystème"
-      );
+      rechercheParObjectifNis2.set("Objectif de sécurité 3: Maîtrise de l'écosystème");
 
       const { exigences } = get(exigencesFiltrees);
 
@@ -144,10 +134,7 @@ describe('Le store des exigences filtrées', () => {
     });
 
     it('est appliqué, conserve uniquement les exigences avec la même thématique', () => {
-      const exigencesDansLeStore: Exigence[] = [
-        exigenceNIS2DeNiveauFaible(),
-        exigenceNIS2DeNiveauEleve(),
-      ];
+      const exigencesDansLeStore: Exigence[] = [exigenceNIS2DeNiveauFaible(), exigenceNIS2DeNiveauEleve()];
 
       exigencesStore.initialise(exigencesDansLeStore);
       rechercheParThematiqueNis2.set('Recensement');

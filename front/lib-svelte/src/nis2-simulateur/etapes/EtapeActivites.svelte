@@ -18,9 +18,7 @@
   type SecteurAvecActivite = SecteurSimple | SousSecteurActivite;
 
   function libelleSecteurOuSousSecteur(s: SecteurAvecActivite) {
-    const estSousSecteur = Object.keys(libellesSousSecteursActivite).includes(
-      s
-    );
+    const estSousSecteur = Object.keys(libellesSousSecteursActivite).includes(s);
 
     if (!estSousSecteur) return libellesSecteursActivite[s as SecteurSimple];
 
@@ -46,28 +44,24 @@
 
   let props: Props = $props();
 
-  let reponse: SvelteMap<SecteurAvecActivite, Activite[]> = new SvelteMap<
-    SecteurAvecActivite,
-    Activite[]
-  >();
+  let reponse: SvelteMap<SecteurAvecActivite, Activite[]> = new SvelteMap<SecteurAvecActivite, Activite[]>();
   let descriptionsVisibles: SvelteSet<Activite> = new SvelteSet<Activite>();
 
-  const choisis =
-    (_secteur: string, _activite: string) => (e: { detail: boolean }) => {
-      const checked = e.detail;
-      const secteur = _secteur as SecteurAvecActivite;
-      const activite = _activite as Activite;
+  const choisis = (_secteur: string, _activite: string) => (e: { detail: boolean }) => {
+    const checked = e.detail;
+    const secteur = _secteur as SecteurAvecActivite;
+    const activite = _activite as Activite;
 
-      if (checked) {
-        if (!reponse.has(secteur)) reponse.set(secteur, [activite]);
-        else reponse.set(secteur, [...reponse.get(secteur)!, activite]);
-      } else {
-        reponse.set(
-          secteur,
-          reponse.get(secteur)!.filter((i) => i !== activite)
-        );
-      }
-    };
+    if (checked) {
+      if (!reponse.has(secteur)) reponse.set(secteur, [activite]);
+      else reponse.set(secteur, [...reponse.get(secteur)!, activite]);
+    } else {
+      reponse.set(
+        secteur,
+        reponse.get(secteur)!.filter((i) => i !== activite)
+      );
+    }
+  };
 
   const valide = () => {
     const toutesLesActivites = [...reponse.values()].flat();
@@ -76,16 +70,9 @@
 </script>
 
 <Etape>
-  <dsfr-stepper
-    title={TitresEtapes['activites']}
-    current-step="6"
-    step-count="6"
-    hide-details="true"
-  ></dsfr-stepper>
+  <dsfr-stepper title={TitresEtapes['activites']} current-step="6" step-count="6" hide-details="true"></dsfr-stepper>
 
-  <p>
-    Quelles sont les activités pratiquées dans les secteurs sélectionnés&nbsp;?
-  </p>
+  <p>Quelles sont les activités pratiquées dans les secteurs sélectionnés&nbsp;?</p>
 
   <dsfr-highlight
     size="sm"
@@ -96,8 +83,7 @@
     <div>
       <p><b>{libelleSecteurOuSousSecteur(s)}</b></p>
       {#each activitesParSecteurEtSousSecteur[s] as activite (activite)}
-        {@const avecDescription =
-          listeDescriptionsActivites[activite].length > 0}
+        {@const avecDescription = listeDescriptionsActivites[activite].length > 0}
 
         <div class="ligne-activite">
           <div class="etage-checkbox">
@@ -112,8 +98,7 @@
                 nom="information-line"
                 taille="sm"
                 use:clic={() => {
-                  if (descriptionsVisibles.has(activite))
-                    descriptionsVisibles.delete(activite);
+                  if (descriptionsVisibles.has(activite)) descriptionsVisibles.delete(activite);
                   else descriptionsVisibles.add(activite);
                 }}
               ></lab-anssi-icone>

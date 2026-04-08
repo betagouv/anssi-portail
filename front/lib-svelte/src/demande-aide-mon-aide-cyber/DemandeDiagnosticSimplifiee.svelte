@@ -2,8 +2,7 @@
   import FoireAuxQuestions from './FoireAuxQuestions.svelte';
   import FormulaireDemandeSimplifiee from './FormulaireDemandeSimplifiee.svelte';
 
-  export let titre: string =
-    'Protégez rapidement votre organisation des cyberattaques';
+  export let titre: string = 'Protégez rapidement votre organisation des cyberattaques';
   export let description: string =
     'Profitez d’un premier diagnostic cyber gratuit accompagné par un Aidant cyber et recevez 6 recommandations prioritaires à mettre en place pour améliorer la cybersécurité de votre organisation.';
   export let mode: 'autonome' | undefined = undefined;
@@ -25,19 +24,11 @@
       <li>Réalisez votre diagnostic (en visio ou sur site – 1h).</li>
       <li>Recevez 6 recommandations prioritaires pour commencer à agir.</li>
     </ol>
-    <p class="texte-mention-xs">
-      Ce diagnostic n'est pas adapté aux particuliers et micro-entreprises.
-    </p>
+    <p class="texte-mention-xs">Ce diagnostic n'est pas adapté aux particuliers et micro-entreprises.</p>
   </div>
 
   <div class="formulaire">
-    <FormulaireDemandeSimplifiee
-      {mode}
-      {origine}
-      {urlBase}
-      {cacheLesLiensDeRetour}
-      {siretAidant}
-    />
+    <FormulaireDemandeSimplifiee {mode} {origine} {urlBase} {cacheLesLiensDeRetour} {siretAidant} />
   </div>
   <details>
     <summary>
@@ -141,16 +132,12 @@
         gap: 4px;
 
         &:hover {
-          background-color: rgb(
-            from var(--artwork-major-blue-france) r g b / 4%
-          );
+          background-color: rgb(from var(--artwork-major-blue-france) r g b / 4%);
           cursor: pointer;
         }
 
         &:active {
-          background-color: rgb(
-            from var(--artwork-major-blue-france) r g b / 8%
-          );
+          background-color: rgb(from var(--artwork-major-blue-france) r g b / 8%);
           cursor: pointer;
         }
 

@@ -21,10 +21,7 @@
     <legend>Région et territoire</legend>
     <label class="colonne">
       <span class="libelle">Sélectionner une région / un territoire</span>
-      <SelectRegion
-        bind:region={$rechercheParRegion}
-        optionDefautSelectionnable
-      />
+      <SelectRegion bind:region={$rechercheParRegion} optionDefautSelectionnable />
     </label>
   </fieldset>
 {/if}
@@ -67,12 +64,7 @@
       {#each $financementsFiltre.typesFinancement as type (type)}
         <li>
           <label>
-            <input
-              type="checkbox"
-              value={type}
-              name="filtreFinancement"
-              bind:group={$rechercheParTypeFinancement}
-            />
+            <input type="checkbox" value={type} name="filtreFinancement" bind:group={$rechercheParTypeFinancement} />
             <span class="libelle">{type}</span>
           </label>
         </li>

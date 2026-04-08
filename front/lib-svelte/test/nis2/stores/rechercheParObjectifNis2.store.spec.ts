@@ -13,9 +13,7 @@ describe('La recherche par objectif de sécurité', () => {
   });
 
   it('est vide quand on la réinitialise', () => {
-    rechercheParObjectifNis2.set(
-      "Objectif de sécurité 3: Maîtrise de l'écosystème"
-    );
+    rechercheParObjectifNis2.set("Objectif de sécurité 3: Maîtrise de l'écosystème");
 
     rechercheParObjectifNis2.reinitialise();
 
@@ -24,21 +22,15 @@ describe('La recherche par objectif de sécurité', () => {
 
   describe('permet de filtrer les exigences NIS2 comparées', () => {
     it("en rejetant une exigence comparée dont l'objectif de sécurité ne correspond pas", () => {
-      rechercheParObjectifNis2.set(
-        "Objectif de sécurité 3: Maîtrise de l'écosystème"
-      );
+      rechercheParObjectifNis2.set("Objectif de sécurité 3: Maîtrise de l'écosystème");
 
-      const resultat = rechercheParObjectifNis2.ok(
-        exigenceNIS2DeNiveauFaible()
-      );
+      const resultat = rechercheParObjectifNis2.ok(exigenceNIS2DeNiveauFaible());
 
       expect(resultat).toBe(false);
     });
 
     it("en incluant une exigence comparée dont l'objectif de sécurité correspond", () => {
-      rechercheParObjectifNis2.set(
-        "Objectif de sécurité 3: Maîtrise de l'écosystème"
-      );
+      rechercheParObjectifNis2.set("Objectif de sécurité 3: Maîtrise de l'écosystème");
 
       const resultat = rechercheParObjectifNis2.ok(exigenceNIS2DeNiveauEleve());
 

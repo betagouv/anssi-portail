@@ -1,9 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import {
-    chargeGuidesDansLeStore,
-    guidesStore,
-  } from '../catalogue/stores/guides/guides.store';
+  import { chargeGuidesDansLeStore, guidesStore } from '../catalogue/stores/guides/guides.store';
   import { clic } from '../directives/actions.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
 
@@ -45,9 +42,7 @@
       return;
     }
 
-    suggestions = listeIdentifiants.filter((id) =>
-      rechercheVague(id, saisieEnCours)
-    );
+    suggestions = listeIdentifiants.filter((id) => rechercheVague(id, saisieEnCours));
     suggestionsVisibles = suggestions.length > 0;
   };
 
@@ -58,9 +53,7 @@
 
   onMount(async () => {
     await chargeGuidesDansLeStore();
-    listeIdentifiants = $guidesStore
-      .map((guide) => guide.id.replace('/guides/', ''))
-      .sort();
+    listeIdentifiants = $guidesStore.map((guide) => guide.id.replace('/guides/', '')).sort();
   });
 </script>
 

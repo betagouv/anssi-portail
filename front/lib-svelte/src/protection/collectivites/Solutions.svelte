@@ -1,10 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { ItemCyber } from '../../catalogue/Catalogue.types';
-  import {
-    chargeGuidesDansLeStore,
-    guidesStore,
-  } from '../../catalogue/stores/guides/guides.store';
+  import { chargeGuidesDansLeStore, guidesStore } from '../../catalogue/stores/guides/guides.store';
   import ControleSegmente from '../../navigation/ControleSegmente.svelte';
   import ActionParcoursAvecItems from '../../parcours/ActionParcoursAvecItems.svelte';
   import { versItemsCyberOuGuide } from '../../parcours/itemDuParcours';
@@ -18,8 +15,7 @@
     {
       id: 'comprendre',
       titre: 'Comprendre',
-      explication:
-        'Découvrez les enjeux de sécurité et les obligations pesant sur les collectivités',
+      explication: 'Découvrez les enjeux de sécurité et les obligations pesant sur les collectivités',
       items: versMesItems([
         '/guides/securite-numerique-des-collectivites-territoriales-lessentiel-de-la-reglementation',
         '/guides/recommandations-pour-le-reconditionnement-des-ordinateurs-de-bureau-ou-portables',
@@ -30,8 +26,7 @@
     {
       id: 'sensibiliser',
       titre: 'Sensibiliser',
-      explication:
-        'Sensibilisez les dirigeants et les salariés aux risques cyber et aux bonnes pratiques.',
+      explication: 'Sensibilisez les dirigeants et les salariés aux risques cyber et aux bonnes pratiques.',
       items: versMesItems([
         '/ressources/risques-cyber',
         '/ressources/malette-cyber',
@@ -44,18 +39,13 @@
       id: 'se-former',
       titre: 'Se former',
       explication: 'Développez les compétences cyber de vos équipes.',
-      items: versMesItems([
-        '/services/mooc-ebios-rm',
-        '/services/secnum-academie',
-        '/services/sens-cyber',
-      ]),
+      items: versMesItems(['/services/mooc-ebios-rm', '/services/secnum-academie', '/services/sens-cyber']),
       ancre: 'solutions&se-former',
     },
     {
       id: 'securiser',
       titre: 'Sécuriser',
-      explication:
-        "Agissez pour renforcer le niveau de protection de vos systèmes d'information.",
+      explication: "Agissez pour renforcer le niveau de protection de vos systèmes d'information.",
       items: versMesItems([
         '/services/mon-aide-cyber',
         '/services/mon-service-securise',
@@ -67,11 +57,8 @@
     {
       id: 'se-preparer',
       titre: 'Se préparer',
-      explication:
-        "Organisez et exercez votre organisation à faire face à une crise d'origine cyber.",
-      items: versMesItems([
-        '/guides/organiser-un-exercice-de-gestion-de-crise-cyber',
-      ]),
+      explication: "Organisez et exercez votre organisation à faire face à une crise d'origine cyber.",
+      items: versMesItems(['/guides/organiser-un-exercice-de-gestion-de-crise-cyber']),
       ancre: 'solutions&se-preparer',
     },
     {

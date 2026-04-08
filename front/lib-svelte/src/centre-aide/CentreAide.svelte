@@ -5,15 +5,8 @@
 </script>
 
 {#if !ouvert}
-  <button
-    class="declencheur-centre-aide"
-    on:click={() => (ouvert = true)}
-    transition:fly={{ y: 300 }}
-  >
-    <img
-      src="/assets/images/icone-centre-aide.svg"
-      alt="Icône du centre d'aide"
-    />
+  <button class="declencheur-centre-aide" on:click={() => (ouvert = true)} transition:fly={{ y: 300 }}>
+    <img src="/assets/images/icone-centre-aide.svg" alt="Icône du centre d'aide" />
     Centre d'aide
   </button>
 {/if}
@@ -22,35 +15,22 @@
   <div class="centre-aide" transition:fly={{ y: 300 }}>
     <div class="entete">
       <div>
-        <img
-          src="/assets/images/icone-centre-aide.svg"
-          alt="Icône du centre d'aide"
-        />
+        <img src="/assets/images/icone-centre-aide.svg" alt="Icône du centre d'aide" />
         <h4>Centre d'aide</h4>
       </div>
       <button on:click={() => (ouvert = false)}>
-        <img
-          src="/assets/images/icone-croix-blanche.svg"
-          alt="Icône de fermeture du centre d'aider"
-        />
+        <img src="/assets/images/icone-croix-blanche.svg" alt="Icône de fermeture du centre d'aider" />
       </button>
     </div>
     <div class="contenu">
       <div class="message">
-        <span
-          >Bonjour et bienvenue sur MesServicesCyber. Comment pouvons-nous vous
-          aider ?</span
-        >
+        <span>Bonjour et bienvenue sur MesServicesCyber. Comment pouvons-nous vous aider ?</span>
       </div>
-      <a
-        class="bouton primaire"
-        href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert"
-        target="_blank">💬 Nous contacter par chat</a
+      <a class="bouton primaire" href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert" target="_blank"
+        >💬 Nous contacter par chat</a
       >
-      <a
-        class="bouton primaire"
-        href="https://aide.messervices.cyber.gouv.fr/fr/"
-        target="_blank">🙌 Consulter la F.A.Q.</a
+      <a class="bouton primaire" href="https://aide.messervices.cyber.gouv.fr/fr/" target="_blank"
+        >🙌 Consulter la F.A.Q.</a
       >
       <div class="message marge-haute">
         <span>Vous souhaitez faire une autre demande à l'ANSSI ?</span>
@@ -78,8 +58,7 @@
     right: 24px;
     border-radius: 100px;
     border: 1px solid #fff;
-    background: var(--background-flat-blue-france-lab)
-      url('/assets/images/motif-fond-service-opacite-16.avif');
+    background: var(--background-flat-blue-france-lab) url('/assets/images/motif-fond-service-opacite-16.avif');
     box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
     color: #f5f5fe;
     text-align: center;
@@ -125,8 +104,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--background-flat-blue-france-lab)
-        url('/assets/images/motif-fond-service-opacite-16.avif');
+      background: var(--background-flat-blue-france-lab) url('/assets/images/motif-fond-service-opacite-16.avif');
 
       @include a-partir-de(sm) {
         border-top-left-radius: 8px;

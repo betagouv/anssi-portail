@@ -7,10 +7,7 @@
     sensComparaison: 'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2';
     referentielSelectionne: ReferentielSelectionne | undefined;
   };
-  let {
-    sensComparaison = $bindable(),
-    referentielSelectionne = $bindable(),
-  }: Props = $props();
+  let { sensComparaison = $bindable(), referentielSelectionne = $bindable() }: Props = $props();
 
   const reinitialise = async () => {
     referentielSelectionne = undefined;

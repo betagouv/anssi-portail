@@ -1,10 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { ItemCyber } from '../catalogue/Catalogue.types';
-  import {
-    chargeGuidesDansLeStore,
-    guidesStore,
-  } from '../catalogue/stores/guides/guides.store';
+  import { chargeGuidesDansLeStore, guidesStore } from '../catalogue/stores/guides/guides.store';
   import ControleSegmente from '../navigation/ControleSegmente.svelte';
   import ActionParcoursAvecItems from '../parcours/ActionParcoursAvecItems.svelte';
   import { versItemsCyberOuGuide } from '../parcours/itemDuParcours';
@@ -30,8 +27,7 @@
     {
       id: 'se-declarer',
       titre: 'Se déclarer',
-      explication:
-        "Vérifiez si votre entité est concernée et procédez à son enregistrement auprès de l'ANSSI.",
+      explication: "Vérifiez si votre entité est concernée et procédez à son enregistrement auprès de l'ANSSI.",
       items: versMesItems(['/services/NIS2', '/services/mon-espace-nis2']),
       ancre: 'solutions&se-declarer',
     },
@@ -53,8 +49,7 @@
     {
       id: 'se-preparer',
       titre: 'Se préparer',
-      explication:
-        'Supervisez et préparez votre organisation à l’éventualité d’une attaque.',
+      explication: 'Supervisez et préparez votre organisation à l’éventualité d’une attaque.',
       items: versMesItems([
         '/guides/organiser-un-exercice-de-gestion-de-crise-cyber',
         '/guides/la-supervision-de-securite-les-cles-de-decision',
@@ -64,8 +59,7 @@
     {
       id: 'reagir-incident',
       titre: 'Réagir à un incident',
-      explication:
-        'Agissez et signalez à l’ANSSI vos incidents de sécurité et sollicitez une assistance.',
+      explication: 'Agissez et signalez à l’ANSSI vos incidents de sécurité et sollicitez une assistance.',
       items: versMesItems([
         '/services/assistance-reponse-incidents',
         '/guides/cyberattaques-et-remediation-les-cles-de-decision',

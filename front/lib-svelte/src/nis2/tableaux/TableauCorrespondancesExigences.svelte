@@ -16,10 +16,7 @@
   import CelluleExigencesISOCibles from './CelluleExigencesISOCibles.svelte';
   import CelluleNiveauCorrespondance from './CelluleNiveauCorrespondance.svelte';
   import CelluleSimpleExigencesCibles from './CelluleSimpleExigencesCibles.svelte';
-  import type {
-    Comparaison,
-    ConfigurationTableauComparaison,
-  } from './configuration.type';
+  import type { Comparaison, ConfigurationTableauComparaison } from './configuration.type';
 
   type Props = {
     comparaison: Comparaison;
@@ -137,14 +134,10 @@
         {@render configurationCourante.colonneSource(exigence)}
       </div>
       <div slot={`cell:niveauCorrespondance:${i}`}>
-        <CelluleNiveauCorrespondance
-          niveau={exigence.correspondance?.niveau ?? 'NA'}
-        />
+        <CelluleNiveauCorrespondance niveau={exigence.correspondance?.niveau ?? 'NA'} />
       </div>
       <div slot={`cell:cible:${i}`}>
-        {@render configurationCourante.colonneCible(
-          exigence.correspondance?.exigences ?? []
-        )}
+        {@render configurationCourante.colonneCible(exigence.correspondance?.exigences ?? [])}
       </div>
       <div slot={`cell:observations:${i}`}>
         <p class="texte-detail-sm">

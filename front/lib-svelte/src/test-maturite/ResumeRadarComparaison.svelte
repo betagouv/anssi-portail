@@ -10,9 +10,7 @@
   export let series: SerieRadar[];
   export let actif: IdNiveau | undefined = undefined;
 
-  const rubriquesTrieesParLettre = rubriques.toSorted((a, b) =>
-    a.lettre > b.lettre ? 1 : -1
-  );
+  const rubriquesTrieesParLettre = rubriques.toSorted((a, b) => (a.lettre > b.lettre ? 1 : -1));
 
   const valeur = (idNiveau: string, idRubrique: IdRubrique) => {
     const serie = series.find((serie) => serie.id === idNiveau);
@@ -23,10 +21,7 @@
 
 <div class="legende">
   {#each niveauxMaturite as niveau (niveau.id)}
-    <div
-      class="ligne-legende ligne-legende-{niveau.id}"
-      class:actif={actif === niveau.id}
-    >
+    <div class="ligne-legende ligne-legende-{niveau.id}" class:actif={actif === niveau.id}>
       <span class="libelle">{niveau.label}</span>
     </div>
   {/each}
@@ -42,10 +37,7 @@
       <ol slot="corps">
         {#each rubriquesTrieesParLettre as rubrique (rubrique.id)}
           <li>
-            <span class="lettre">{rubrique.lettre}</span> - {rubrique.label} - {valeur(
-              niveau.id,
-              rubrique.id
-            )}/5
+            <span class="lettre">{rubrique.lettre}</span> - {rubrique.label} - {valeur(niveau.id, rubrique.id)}/5
           </li>
         {/each}
       </ol>

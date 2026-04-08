@@ -15,9 +15,7 @@
 
   export const estValide = () => {
     const valide = formulaire.checkValidity();
-    const champAvecErreur = formulaire.querySelectorAll(
-      'input:invalid, select:invalid'
-    );
+    const champAvecErreur = formulaire.querySelectorAll('input:invalid, select:invalid');
     if (champAvecErreur.length) {
       let element = champAvecErreur[0];
       const libelle = trouveLibellePour(element);
@@ -33,9 +31,7 @@
   }>();
 
   const verifieValidite = () => {
-    dispatch(
-      formulaire.checkValidity() ? 'formulaireValide' : 'formulaireInvalide'
-    );
+    dispatch(formulaire.checkValidity() ? 'formulaireValide' : 'formulaireInvalide');
   };
 </script>
 

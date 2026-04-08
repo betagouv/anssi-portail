@@ -60,11 +60,7 @@
   <dsfr-radios-group
     value={paysDecision}
     legend="Dans quel pays sont principalement prises les décisions relatives aux mesures de gestion des risques en matière de cybersécurité ?"
-    radios={[
-      optionFrance('pays-decision'),
-      optionAutre('pays-decision'),
-      optionHorsUe('pays-decision'),
-    ]}
+    radios={[optionFrance('pays-decision'), optionAutre('pays-decision'), optionHorsUe('pays-decision')]}
     onvaluechanged={choisisDecision}
   ></dsfr-radios-group>
 
@@ -72,11 +68,7 @@
     <dsfr-radios-group
       value={paysOperation}
       legend="Dans quel pays les opérations de cybersécurité sont-elles effectuées ?"
-      radios={[
-        optionFrance('pays-operation'),
-        optionAutre('pays-operation'),
-        optionHorsUe('pays-operation'),
-      ]}
+      radios={[optionFrance('pays-operation'), optionAutre('pays-operation'), optionHorsUe('pays-operation')]}
       onvaluechanged={choisisOperation}
     ></dsfr-radios-group>
   {/if}

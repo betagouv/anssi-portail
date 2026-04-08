@@ -26,26 +26,18 @@
   };
 
   onMount(async () => {
-    const reponse = await axios.get<PageHtmlCrisp>(
-      '/api/pages-crisp/' + clePageCrisp
-    );
+    const reponse = await axios.get<PageHtmlCrisp>('/api/pages-crisp/' + clePageCrisp);
     pageCrisp = reponse.data;
   });
 
-  $: tableDesMatieres = pageCrisp.tableDesMatieres.filter(
-    (e) => e.profondeur === 2
-  );
+  $: tableDesMatieres = pageCrisp.tableDesMatieres.filter((e) => e.profondeur === 2);
 
   $: filAriane = $profilStore
     ? [{ label: 'Catalogue', href: '/catalogue' }, { label: pageCrisp.titre }]
     : [{ label: 'Accueil', href: '/' }, { label: pageCrisp.titre }];
 </script>
 
-<lab-anssi-bandeau-titre
-  titre={pageCrisp.titre}
-  description={pageCrisp.description}
-  {filAriane}
+<lab-anssi-bandeau-titre titre={pageCrisp.titre} description={pageCrisp.description} {filAriane}
 ></lab-anssi-bandeau-titre>
 
-<lab-anssi-page-crisp {tableDesMatieres} contenu={pageCrisp.contenu}
-></lab-anssi-page-crisp>
+<lab-anssi-page-crisp {tableDesMatieres} contenu={pageCrisp.contenu}></lab-anssi-page-crisp>

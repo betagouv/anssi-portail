@@ -2,10 +2,7 @@
   import Etapier from '../ui/Etapier.svelte';
   import SelectionDomaineSpecialite from './SelectionDomaineSpecialite.svelte';
   import { validationChamp } from '../directives/validationChamp';
-  import type {
-    FormulaireInscription,
-    InformationsProfessionnelles,
-  } from './creationCompte';
+  import type { FormulaireInscription, InformationsProfessionnelles } from './creationCompte';
   import Formulaire from '../ui/Formulaire.svelte';
   import SelectionDepartement from './SelectionDepartement.svelte';
   import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
@@ -14,10 +11,7 @@
   import Bouton from '../ui/Bouton.svelte';
   import { onMount } from 'svelte';
   import axios from 'axios';
-  import type {
-    Departement,
-    Organisation,
-  } from '../ui/formulaire/SelectionOrganisation.types.js';
+  import type { Departement, Organisation } from '../ui/formulaire/SelectionOrganisation.types.js';
 
   let informationsProfessionnelles: InformationsProfessionnelles = {
     prenom: '',
@@ -33,30 +27,23 @@
   let token: string | undefined;
 
   onMount(async () => {
-    token =
-      new URLSearchParams(window.location.search).get('token') ?? undefined;
+    token = new URLSearchParams(window.location.search).get('token') ?? undefined;
     try {
       informationsProfessionnelles = (
-        await axios.get<InformationsProfessionnelles>(
-          `/api/informations-creation-compte?token=${token}`
-        )
+        await axios.get<InformationsProfessionnelles>(`/api/informations-creation-compte?token=${token}`)
       ).data;
     } catch {
       window.location.pathname = '/erreur';
     }
-    const reponseDepartements = await axios.get<Departement[]>(
-      '/api/annuaire/departements'
-    );
+    const reponseDepartements = await axios.get<Departement[]>('/api/annuaire/departements');
     departements = reponseDepartements.data;
   });
 
   let etapeCourante = 1;
 
-  $: titreEtape = [
-    'Vos informations professionnelles',
-    'Vos informations complémentaires',
-    'Vos consentements',
-  ][etapeCourante - 1];
+  $: titreEtape = ['Vos informations professionnelles', 'Vos informations complémentaires', 'Vos consentements'][
+    etapeCourante - 1
+  ];
 
   let formulaireEtape1: Formulaire;
   let formulaireEtape2: Formulaire;
@@ -103,14 +90,11 @@
   let departement: Departement;
   let organisation: Organisation;
   $: {
-    formulaireInscription.siretEntite =
-      informationsProfessionnelles.organisation?.siret || organisation?.siret;
+    formulaireInscription.siretEntite = informationsProfessionnelles.organisation?.siret || organisation?.siret;
   }
 
   let elementSelectionDepartement: SelectionDepartement;
-  const modifieDepartementApresChoixOrganisation = (
-    e: CustomEvent<Organisation>
-  ) => {
+  const modifieDepartementApresChoixOrganisation = (e: CustomEvent<Organisation>) => {
     const d = departements.find((d) => d.code === e.detail.departement);
     if (d) {
       elementSelectionDepartement.choisisDepartement(d);
@@ -134,20 +118,15 @@
             <h1>Votre identité</h1>
             <div>
               <span class="info-label">Nom :</span>
-              <span class="info-valeur">{informationsProfessionnelles.nom}</span
-              >
+              <span class="info-valeur">{informationsProfessionnelles.nom}</span>
             </div>
             <div>
               <span class="info-label">Prénom :</span>
-              <span class="info-valeur"
-                >{informationsProfessionnelles.prenom}</span
-              >
+              <span class="info-valeur">{informationsProfessionnelles.prenom}</span>
             </div>
             <div>
               <span class="info-label">Mail professionnel :</span>
-              <span class="info-valeur"
-                >{informationsProfessionnelles.email}</span
-              >
+              <span class="info-valeur">{informationsProfessionnelles.email}</span>
             </div>
           </div>
           {#if informationsProfessionnelles.organisation}
@@ -155,23 +134,15 @@
               <h1>Votre organisation</h1>
               <div>
                 <span class="info-label">Dénomination légale :</span>
-                <span class="info-valeur"
-                  >{informationsProfessionnelles.organisation.nom}</span
-                >
+                <span class="info-valeur">{informationsProfessionnelles.organisation.nom}</span>
               </div>
               <div>
                 <span class="info-label">SIRET :</span>
-                <span class="info-valeur"
-                  >{informationsProfessionnelles.organisation.siret}</span
-                >
+                <span class="info-valeur">{informationsProfessionnelles.organisation.siret}</span>
               </div>
               <div>
-                <span class="info-label"
-                  >Département de votre organisation :</span
-                >
-                <span class="info-valeur"
-                  >{informationsProfessionnelles.organisation.departement}</span
-                >
+                <span class="info-label">Département de votre organisation :</span>
+                <span class="info-valeur">{informationsProfessionnelles.organisation.departement}</span>
               </div>
             </div>
           {/if}
@@ -185,20 +156,14 @@
           {#if !informationsProfessionnelles.organisation}
             <div class="bloc bloc-avec-separateur champs-saisie">
               <h1>Votre organisation</h1>
-              <ControleFormulaire
-                requis={true}
-                libelle="Département de votre organisation"
-              >
+              <ControleFormulaire requis={true} libelle="Département de votre organisation">
                 <SelectionDepartement
                   bind:valeur={departement}
                   {departements}
                   bind:this={elementSelectionDepartement}
                 />
               </ControleFormulaire>
-              <ControleFormulaire
-                requis={true}
-                libelle="Nom ou SIRET de votre organisation"
-              >
+              <ControleFormulaire requis={true} libelle="Nom ou SIRET de votre organisation">
                 <SelectionOrganisation
                   bind:valeur={organisation}
                   filtreDepartement={departement}
@@ -210,10 +175,7 @@
 
           <div class="bloc bloc-avec-separateur champs-saisie">
             <h1>Votre identité</h1>
-            <ControleFormulaire
-              libelle="Téléphone"
-              sousTitre="Pour bénéficier d'un accompagement personnalisé"
-            >
+            <ControleFormulaire libelle="Téléphone" sousTitre="Pour bénéficier d'un accompagement personnalisé">
               <ChampTexte
                 id="telephone"
                 nom="telephone"
@@ -246,9 +208,7 @@
                 bind:checked={formulaireInscription.infolettreAcceptee}
                 name="infolettreAcceptee"
               />
-              <label for="infolettreAcceptee">
-                J'accepte de recevoir la lettre d'information MesServicesCyber.
-              </label>
+              <label for="infolettreAcceptee"> J'accepte de recevoir la lettre d'information MesServicesCyber. </label>
             </div>
             <div class="case-a-cocher cgu">
               <input
@@ -260,9 +220,7 @@
                 use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
               />
               <label for="cguAcceptees" class="requis">
-                J'accepte les <a class="lien" href="/cgu">
-                  conditions générales d'utilisation
-                </a> de MesServicesCyber
+                J'accepte les <a class="lien" href="/cgu"> conditions générales d'utilisation </a> de MesServicesCyber
               </label>
             </div>
           </div>
@@ -271,19 +229,9 @@
     {/if}
 
     <div class="actions">
-      <Bouton
-        type="secondaire"
-        titre="Précédent"
-        on:click={etapePrecedente}
-        actif={etapeCourante > 1}
-      />
+      <Bouton type="secondaire" titre="Précédent" on:click={etapePrecedente} actif={etapeCourante > 1} />
       {#if etapeCourante === 3}
-        <Bouton
-          type="primaire"
-          titre="Valider"
-          on:click={valide}
-          {enCoursEnvoi}
-        />
+        <Bouton type="primaire" titre="Valider" on:click={valide} {enCoursEnvoi} />
       {:else}
         <Bouton type="primaire" titre="Suivant" on:click={etapeSuivante} />
       {/if}

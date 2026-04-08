@@ -3,10 +3,7 @@
   import { createEventDispatcher, tick } from 'svelte';
   import { validationChamp } from '../../directives/validationChamp';
   import axios from 'axios';
-  import type {
-    Organisation,
-    Departement,
-  } from './SelectionOrganisation.types.ts';
+  import type { Organisation, Departement } from './SelectionOrganisation.types.ts';
 
   type ReponseApiAnnuaireOrganisations = {
     suggestions: Organisation[];
@@ -38,11 +35,7 @@
     const siret = organisation.siret;
 
     const siretFormatte =
-      siret &&
-      `${siret.substring(0, 3)} ${siret.substring(3, 6)} ${siret.substring(
-        6,
-        9
-      )} ${siret.substring(9, 14)}`;
+      siret && `${siret.substring(0, 3)} ${siret.substring(3, 6)} ${siret.substring(6, 9)} ${siret.substring(9, 14)}`;
     return `(${organisation.departement}) ${organisation.nom} - ${siretFormatte}`;
   };
 
@@ -59,15 +52,12 @@
       suggestions = [];
       return;
     }
-    const reponse = await axios.get<ReponseApiAnnuaireOrganisations>(
-      `${urlBase}/api/annuaire/organisations`,
-      {
-        params: {
-          recherche: saisie,
-          departement: filtreDepartement?.code,
-        },
-      }
-    );
+    const reponse = await axios.get<ReponseApiAnnuaireOrganisations>(`${urlBase}/api/annuaire/organisations`, {
+      params: {
+        recherche: saisie,
+        departement: filtreDepartement?.code,
+      },
+    });
 
     suggestions = reponse?.data?.suggestions?.map(uneSuggestion) ?? [];
     suggestionsVisibles = suggestions.length > 0;

@@ -9,7 +9,5 @@ export const rechercheParTypeFinancement = {
   reinitialise: () => selectionTypeFinancement.set([]),
   ok: (resumeFinancement: ResumeFinancement): boolean =>
     !get(selectionTypeFinancement).length ||
-    resumeFinancement.typesDeFinancement.some((type) =>
-      get(selectionTypeFinancement).includes(type)
-    ),
+    resumeFinancement.typesDeFinancement.some((type) => get(selectionTypeFinancement).includes(type)),
 };

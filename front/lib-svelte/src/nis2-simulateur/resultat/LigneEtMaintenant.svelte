@@ -5,10 +5,7 @@
   <dsfr-container>
     <div class="et-maintenant">
       <h4>Et maintenant ?</h4>
-      <p>
-        La prochaine étape est de vous déclarer auprès de l&apos;ANSSI en
-        pré-enregistrant votre organisation
-      </p>
+      <p>La prochaine étape est de vous déclarer auprès de l&apos;ANSSI en pré-enregistrant votre organisation</p>
 
       <dsfr-button
         label="Se pré-enregistrer"

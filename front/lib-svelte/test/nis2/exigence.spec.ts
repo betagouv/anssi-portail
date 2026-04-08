@@ -72,14 +72,11 @@ describe('Le formatteur de contenu', () => {
       contenu: contenuDeBase,
     });
 
-    expect(contenuFormate).equal(
-      '<p>ligne1</p><ul><li>puce1</li><li>puce2</li></ul><p>ligne de fin</p>'
-    );
+    expect(contenuFormate).equal('<p>ligne1</p><ul><li>puce1</li><li>puce2</li></ul><p>ligne de fin</p>');
   });
 
   it('sait transformer les puces à plusieurs niveau dans un texte en', () => {
-    const contenuDeBase =
-      'ligne1\n•puce1\no\tpuce1.1\no\tpuce1.2\n•puce2\nligne de fin';
+    const contenuDeBase = 'ligne1\n•puce1\no\tpuce1.1\no\tpuce1.2\n•puce2\nligne de fin';
 
     const contenuFormate = formateContenuExigence({
       ...exigenceNIS2DeNiveauFaible(),

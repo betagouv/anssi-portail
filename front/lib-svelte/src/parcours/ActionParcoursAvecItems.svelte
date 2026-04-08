@@ -11,21 +11,13 @@
   export let sourceIllustration: string | undefined = undefined;
 </script>
 
-<dsfr-container
-  id={ancre}
-  class="action"
-  class:fond-alternatif={fondAlternatif}
->
+<dsfr-container id={ancre} class="action" class:fond-alternatif={fondAlternatif}>
   <div class="contenu-action">
     <div class="description">
       <h2>{titre}</h2>
       <p class="explication">{explication}</p>
       {#if sourceIllustration}
-        <img
-          class="illustration"
-          src={sourceIllustration}
-          alt="Illustration {titre}"
-        />
+        <img class="illustration" src={sourceIllustration} alt="Illustration {titre}" />
       {/if}
     </div>
     <h4>Ressources</h4>

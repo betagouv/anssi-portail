@@ -11,10 +11,7 @@
 
   let modaleEstOuverte = $state(false);
 
-  export const ouvre = async ({
-    code,
-    lienParticipant,
-  }: ReponseCreationSessionGroupe) => {
+  export const ouvre = async ({ code, lienParticipant }: ReponseCreationSessionGroupe) => {
     codeSession = code;
     lienPourParticipants = lienParticipant;
     modaleEstOuverte = true;
@@ -26,9 +23,7 @@
     modaleEstOuverte = false;
   };
 
-  let codeSessionFormate = $derived(
-    codeSession && codeSession.slice(0, 3) + '-' + codeSession.slice(3)
-  );
+  let codeSessionFormate = $derived(codeSession && codeSession.slice(0, 3) + '-' + codeSession.slice(3));
 
   const copieLienParticipant = () => {
     navigator.clipboard.writeText(lienPourParticipants).then(function () {
@@ -54,9 +49,8 @@
   </h4>
   <div class="information">
     <p>
-      Partagez ce code ou le QR code aux participants pour leur permettre
-      d’accéder à la session de test de maturité cyber. Ce code est unique et
-      valable pour cette session uniquement.
+      Partagez ce code ou le QR code aux participants pour leur permettre d’accéder à la session de test de maturité
+      cyber. Ce code est unique et valable pour cette session uniquement.
     </p>
   </div>
   <div class="qrcode">
@@ -79,8 +73,7 @@
   </div>
   <div class="organisateur texte-detail-sm">
     <p>
-      Copiez ce lien si vous souhaitez accéder à votre session organisateur
-      ultérieurement&nbsp;:<br />
+      Copiez ce lien si vous souhaitez accéder à votre session organisateur ultérieurement&nbsp;:<br />
       <u>session-groupe={codeSession}&organisateur</u>
       <dsfr-button
         title="Copier dans le presse-papier le lien organisateur de la session de groupe"
@@ -104,14 +97,7 @@
       href={`/test-maturite?session-groupe=${codeSession}&organisateur`}
       centered
     ></dsfr-button>
-    <dsfr-button
-      label="Annuler"
-      title="Annuler"
-      kind="secondary"
-      size="md"
-      use:clic={ferme}
-      centered
-    ></dsfr-button>
+    <dsfr-button label="Annuler" title="Annuler" kind="secondary" size="md" use:clic={ferme} centered></dsfr-button>
   {/snippet}
 </Modale>
 

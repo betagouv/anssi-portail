@@ -25,9 +25,7 @@ export function construisSerie({
   mode?: 'absolu' | 'ratio';
 }): Serie {
   return niveauxMaturite.map((niveau) => {
-    const repartition = repartitions.find(
-      (repartition) => repartition.id === niveau.id
-    );
+    const repartition = repartitions.find((repartition) => repartition.id === niveau.id);
 
     const valeur = {
       absolu: repartition?.totalNombreTests ?? 0,

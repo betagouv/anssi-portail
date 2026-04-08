@@ -9,9 +9,7 @@
 
 <a
   {href}
-  class:actif={prefixCheminActif
-    ? cheminRelatif.startsWith(prefixCheminActif)
-    : cheminRelatif === href}
+  class:actif={prefixCheminActif ? cheminRelatif.startsWith(prefixCheminActif) : cheminRelatif === href}
   class:dans-menu-deroulant={dansMenuDeroulant}>{label}</a
 >
 

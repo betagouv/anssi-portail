@@ -52,8 +52,7 @@ describe('Le fragment de navigation', () => {
     it('retourne la valeur par défaut', () => {
       const fragmentDeNavigation = creeLeFragmentDeNavigation('#');
 
-      const besoin: BesoinCyber | null =
-        fragmentDeNavigation.extraisValeur<BesoinCyber>('besoin', null);
+      const besoin: BesoinCyber | null = fragmentDeNavigation.extraisValeur<BesoinCyber>('besoin', null);
 
       expect(besoin).toEqual(null);
     });
@@ -61,17 +60,14 @@ describe('Le fragment de navigation', () => {
     it('retourne la valeur par défaut de type string', () => {
       const fragmentDeNavigation = creeLeFragmentDeNavigation('#');
 
-      const rechercheTextuel: string =
-        fragmentDeNavigation.extraisValeur<string>('q', '');
+      const rechercheTextuel: string = fragmentDeNavigation.extraisValeur<string>('q', '');
 
       expect(rechercheTextuel).toEqual('');
     });
   });
 
   it('sérialise le fragment de navigation', () => {
-    const fragmentDeNavigation = creeLeFragmentDeNavigation(
-      '#section?besoin=REAGIR&langues=EN,FR'
-    );
+    const fragmentDeNavigation = creeLeFragmentDeNavigation('#section?besoin=REAGIR&langues=EN,FR');
 
     const versionSerialisee = fragmentDeNavigation.serialise();
 
@@ -83,9 +79,7 @@ describe('Le fragment de navigation', () => {
 
     fragmentDeNavigation.change('besoin', BesoinCyber.SECURISER);
 
-    expect(fragmentDeNavigation.extraisValeur<BesoinCyber>('besoin')).toBe(
-      BesoinCyber.SECURISER
-    );
+    expect(fragmentDeNavigation.extraisValeur<BesoinCyber>('besoin')).toBe(BesoinCyber.SECURISER);
   });
 
   it('modifie le filtre avec plusieurs valeurs', () => {
@@ -93,10 +87,7 @@ describe('Le fragment de navigation', () => {
 
     fragmentDeNavigation.change('langues', [Langue.EN, Langue.FR]);
 
-    expect(fragmentDeNavigation.extraisTableau<Langue>('langues')).toEqual([
-      Langue.EN,
-      Langue.FR,
-    ]);
+    expect(fragmentDeNavigation.extraisTableau<Langue>('langues')).toEqual([Langue.EN, Langue.FR]);
   });
 
   describe("lorsqu'on affecte une valeur vide", () => {
@@ -109,8 +100,7 @@ describe('Le fragment de navigation', () => {
     });
 
     it('supprime le filtre de type chaine', () => {
-      const fragmentDeNavigation =
-        creeLeFragmentDeNavigation('#?besoin=REAGIR');
+      const fragmentDeNavigation = creeLeFragmentDeNavigation('#?besoin=REAGIR');
 
       fragmentDeNavigation.change('besoin', null);
 

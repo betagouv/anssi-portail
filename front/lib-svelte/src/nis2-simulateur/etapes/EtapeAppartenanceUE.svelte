@@ -22,11 +22,7 @@
 </script>
 
 <Etape>
-  <dsfr-stepper
-    title={TitresEtapes['appartenanceUnionEuropeenne']}
-    current-step="2"
-    step-count="6"
-    hide-details="true"
+  <dsfr-stepper title={TitresEtapes['appartenanceUnionEuropeenne']} current-step="2" step-count="6" hide-details="true"
   ></dsfr-stepper>
 
   <dsfr-radios-group
@@ -58,9 +54,5 @@
     text="Le test est dans un premier temps focalisé sur les entités établies en France, il sera par la suite disponible pour les entités établies dans les autres États de l'Union Européenne et dans les États hors Union Européenne."
   ></dsfr-highlight>
 
-  <PrecedentSuivant
-    message="Sélectionnez une réponse"
-    onsuivant={valide}
-    suivantdisabled={reponse === undefined}
-  />
+  <PrecedentSuivant message="Sélectionnez une réponse" onsuivant={valide} suivantdisabled={reponse === undefined} />
 </Etape>

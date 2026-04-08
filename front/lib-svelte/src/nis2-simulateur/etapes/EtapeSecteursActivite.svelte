@@ -25,17 +25,10 @@
 </script>
 
 <Etape>
-  <dsfr-stepper
-    title={TitresEtapes['secteursActivite']}
-    current-step="5"
-    step-count="6"
-    hide-details="true"
+  <dsfr-stepper title={TitresEtapes['secteursActivite']} current-step="5" step-count="6" hide-details="true"
   ></dsfr-stepper>
 
-  <p>
-    Dans quels secteurs d'activités votre organisation produit-elle des biens
-    et/ou des services ?
-  </p>
+  <p>Dans quels secteurs d'activités votre organisation produit-elle des biens et/ou des services ?</p>
 
   <dsfr-highlight
     size="sm"
@@ -58,12 +51,7 @@
   ></dsfr-highlight>
 
   {#each Object.entries(libellesSecteursActivite) as [id, label] (id)}
-    <dsfr-checkbox
-      id={`checkbox-${id}`}
-      size="sm"
-      {label}
-      onvaluechanged={choisis(id)}
-    ></dsfr-checkbox>
+    <dsfr-checkbox id={`checkbox-${id}`} size="sm" {label} onvaluechanged={choisis(id)}></dsfr-checkbox>
   {/each}
 
   <PrecedentSuivant
