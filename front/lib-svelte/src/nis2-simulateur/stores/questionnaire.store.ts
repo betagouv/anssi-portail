@@ -1,7 +1,8 @@
 import { writable } from 'svelte/store';
-import type { ActionQuestionnaire } from './actions';
+import { ou } from '../../../../../back/src/metier/nis2-simulateur/commun.predicats';
 import type { EtatQuestionnaire } from '../../../../../back/src/metier/nis2-simulateur/EtatQuestionnaire';
 import { EtatQuestionnaireVide } from '../../../../../back/src/metier/nis2-simulateur/EtatQuestionnaire';
+import type { ActionQuestionnaire } from './actions';
 import { certains, tous } from './arrays.predicats';
 import {
   doitPasserParLocalisationEtablissementPrincipal,
@@ -10,7 +11,6 @@ import {
   estUnSecteurAvecDesSousSecteurs,
 } from './SecteurActivite.predicats';
 import { estSousSecteurAutre } from './SousSecteurActivite.predicats';
-import { ou } from '../../../../../back/src/metier/nis2-simulateur/commun.predicats';
 
 const etatInitial = () => EtatQuestionnaireVide;
 

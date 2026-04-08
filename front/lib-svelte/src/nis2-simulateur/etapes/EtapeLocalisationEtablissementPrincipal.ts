@@ -1,6 +1,4 @@
-import type {
-  AppartenancePaysUnionEuropeenne
-} from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
+import type { AppartenancePaysUnionEuropeenne } from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
 import { contientUnParmi } from '../../../../../back/src/metier/nis2-simulateur/commun.predicats';
 
 export const optionFrance = (contexte: string) => ({
@@ -11,7 +9,7 @@ export const optionFrance = (contexte: string) => ({
 });
 
 export const optionAutre = (contexte: string) => ({
-  label: 'Autres états membres de l\'Union Européenne',
+  label: "Autres états membres de l'Union Européenne",
   name: `radios-${contexte}`,
   id: `radio-${contexte}-autre`,
   value: 'autre',

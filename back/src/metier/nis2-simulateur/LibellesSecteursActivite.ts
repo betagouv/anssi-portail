@@ -1,24 +1,23 @@
-import type { SecteurActivite } from "./SecteurActivite.definitions";
+import type { SecteurActivite } from './SecteurActivite.definitions';
 
 export const libellesSecteursActivite: Record<SecteurActivite, string> = {
-  banqueSecteurBancaire: "Banques (secteur bancaire)",
-  eauPotable: "Eau potable",
-  eauxUsees: "Eaux usées",
-  energie: "Énergie",
-  espace: "Espace",
-  fabrication: "Fabrication",
-  fabricationProductionDistributionProduitsChimiques:
-    "Fabrication, production et distribution de produits chimiques",
-  fournisseursNumeriques: "Fournisseurs numériques",
-  gestionDechets: "Gestion des déchets",
-  gestionServicesTic: "Gestion des services TIC",
-  infrastructureMarchesFinanciers: "Infrastructure des marchés financiers",
-  infrastructureNumerique: "Infrastructure numérique",
+  banqueSecteurBancaire: 'Banques (secteur bancaire)',
+  eauPotable: 'Eau potable',
+  eauxUsees: 'Eaux usées',
+  energie: 'Énergie',
+  espace: 'Espace',
+  fabrication: 'Fabrication',
+  fabricationProductionDistributionProduitsChimiques: 'Fabrication, production et distribution de produits chimiques',
+  fournisseursNumeriques: 'Fournisseurs numériques',
+  gestionDechets: 'Gestion des déchets',
+  gestionServicesTic: 'Gestion des services TIC',
+  infrastructureMarchesFinanciers: 'Infrastructure des marchés financiers',
+  infrastructureNumerique: 'Infrastructure numérique',
   productionTransformationDistributionDenreesAlimentaires:
-    "Production transformation et distribution de denrées alimentaires",
-  recherche: "Recherche",
-  sante: "Santé",
+    'Production transformation et distribution de denrées alimentaires',
+  recherche: 'Recherche',
+  sante: 'Santé',
   servicesPostauxExpedition: "Services postaux et d'expédition",
-  transports: "Transports",
+  transports: 'Transports',
   autreSecteurActivite: "Autre secteur d'activité",
 };

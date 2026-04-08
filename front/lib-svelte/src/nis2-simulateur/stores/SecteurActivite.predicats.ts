@@ -15,29 +15,29 @@ export const estSecteurAutre = (secteur: SecteurActivite) =>
   secteur.startsWith('autre');
 
 export const doitPasserParLocalisationFournitureServicesNumeriques = (
-  activites: Activite[],
+  activites: Activite[]
 ) =>
   contientUnParmi(
-    "fournisseurReseauxCommunicationElectroniquesPublics",
-    "fournisseurServiceCommunicationElectroniquesPublics",
+    'fournisseurReseauxCommunicationElectroniquesPublics',
+    'fournisseurServiceCommunicationElectroniquesPublics'
   )(activites);
 
 export const doitPasserParLocalisationEtablissementPrincipal = (
   secteurs: SecteurActivite[],
-  activites: Activite[],
+  activites: Activite[]
 ) => {
   const ticOuFournisseurNumerique = contientUnParmi(
-    "gestionServicesTic",
-    "fournisseursNumeriques",
+    'gestionServicesTic',
+    'fournisseursNumeriques'
   )(secteurs);
 
   const activiteFournisseurServiceNumerique = contientUnParmi(
-    "registresNomsDomainesPremierNiveau",
-    "fournisseurServicesDNS",
-    "fournisseurServicesInformatiqueNuage",
-    "fournisseurServiceCentresDonnees",
-    "fournisseurReseauxDiffusionContenu",
-    "fournisseurServicesEnregristrementNomDomaine",
+    'registresNomsDomainesPremierNiveau',
+    'fournisseurServicesDNS',
+    'fournisseurServicesInformatiqueNuage',
+    'fournisseurServiceCentresDonnees',
+    'fournisseurReseauxDiffusionContenu',
+    'fournisseurServicesEnregristrementNomDomaine'
   )(activites);
 
   return ticOuFournisseurNumerique || activiteFournisseurServiceNumerique;

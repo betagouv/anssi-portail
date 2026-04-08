@@ -2,10 +2,10 @@
 
 function ajouter_assets_demande_diag() {
     wp_enqueue_style(
-        'lab-anssi-ui-kit-styles', 
-        'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com/<VERSION_UI_KIT>/dsfr-variables.css', 
-        '', 
-        '1.0', 
+        'lab-anssi-ui-kit-styles',
+        'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com/<VERSION_UI_KIT>/dsfr-variables.css',
+        '',
+        '1.0',
         'screen'
     );
     wp_enqueue_script(
@@ -16,10 +16,10 @@ function ajouter_assets_demande_diag() {
         true
     );
     wp_enqueue_style(
-        'lab-anssi-demande-diag-styles', 
+        'lab-anssi-demande-diag-styles',
         'https://messervicescyber-web-components.cellar-c2.services.clever-cloud.com/<VERSION>/<ENV>/demande-diag.css',
-        '', 
-        '1.0', 
+        '',
+        '1.0',
         'screen'
     );
     wp_enqueue_script(

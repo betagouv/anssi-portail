@@ -1,5 +1,5 @@
-import type { UnionDe } from "./UnionDe";
-import { ValeursSecteursActivites, ValeursSecteursComposites } from "./SecteurActivite.valeurs";
+import type { UnionDe } from './UnionDe';
+import { ValeursSecteursActivites, ValeursSecteursComposites } from './SecteurActivite.valeurs';
 
 export type SecteurActivite = UnionDe<typeof ValeursSecteursActivites>;
 
