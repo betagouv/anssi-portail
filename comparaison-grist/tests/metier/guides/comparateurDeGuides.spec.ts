@@ -104,12 +104,10 @@ describe('Le comparateur de guides', () => {
           .avecLIdentifiant('guide1')
           .avecLeTitre('Titre')
           .avecLaDescription('Description')
-          .avecLImage('Image 1')
           .avecLaLangue('FR')
           .avecLesCollections(['REAGIR', 'SENSIBILISER'])
           .avecLeDocument('document 1', 'nom_du_document_1.pdf')
           .avecLaDateDeMiseAJour(new Date(2025, 2, 13).getTime() / 1000)
-          .avecLaDateDePublication(new Date(2025, 2, 13).getTime() / 1000)
           .avecThematique('Thématique')
           .avecBesoin('ancien besoin');
         guideOriginal = coquilleDeGuide.construis();
@@ -144,15 +142,6 @@ describe('Le comparateur de guides', () => {
 
       it('lorsque la description a changé', async () => {
         const guideCible = coquilleDeGuide.avecLaDescription('Nouvelle description').construis();
-        await prepareLesDonnees(guideOriginal, guideCible);
-
-        const comparaison = comparateurDeGuides.compare();
-
-        expect(comparaison.modifications).toHaveLength(1);
-      });
-
-      it("lorsque le nom de l'image a changé", async () => {
-        const guideCible = coquilleDeGuide.avecLImage('Image 2').construis();
         await prepareLesDonnees(guideOriginal, guideCible);
 
         const comparaison = comparateurDeGuides.compare();

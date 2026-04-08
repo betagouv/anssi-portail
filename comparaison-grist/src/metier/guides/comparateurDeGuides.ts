@@ -49,7 +49,6 @@ export class ComparateurDeGuides {
         const methodesExtractionValeursAComparer: Array<(guide: Guide) => string> = [
           (guide) => guide.nom,
           (guide) => guide.description,
-          (guide) => guide.nomImage ?? '',
           (guide) => guide.langue,
           (guide) => guide.collections.toString(),
           (guide) => JSON.stringify(guide.documents),

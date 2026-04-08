@@ -2,7 +2,6 @@ export type Guide = {
   id: string;
   nom: string;
   description: string;
-  nomImage: string | null;
   langue: string;
   collections: string[];
   documents: DocumentGuide[];
