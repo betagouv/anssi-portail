@@ -5,40 +5,40 @@
 #<url>: <description>
 #      ^ cette espace est indispensable
 
-/accessibilite/:
-/apres-authentification/:
-/aPropos/:
-/catalogue/:
-/cgu/:
-/confidentialite/:
-/connexion/:
-/contacts/:
-/creation-compte/:
-/cyberdepart/:
-/favoris/:
-/favoris-partages/:
-/inscription/:
-/ma-maturite/:
-/mentionsLegales/:
-/nis2/:
-/niveaux-maturite/:
-/parcours-approfondir/:
-/parcours-debuter/:
-/promouvoir-messervicescyber/:
-/resultats-session-groupe/:
-/securite/:
-/services-anssi/:
-/session-groupe/:
-/statistiques/:
-/test-maturite/:
-/services/conseil-technique.html:
-/services/demainspecialistecyber.html:
-/services/mon-aide-cyber-aidants.html:
-/services/mon-aide-cyber.html:
-/services/mon-espace-nis2.html:
-/services/mon-service-securise.html:
-/services/secnum-academie.html:
-/ressources/cyber-enjeux.html:
-/ressources/cyber-enjeux-pro.html:
-/ressources/secnumedu.html:
-/financements/:
+/accessibilite/: "Consultez la déclaration d'accessibilité de MesServicesCyber et notre engagement pour rendre la plateforme accessible à toutes et tous."
+/apres-authentification/: "Vous êtes connecté à MesServicesCyber. Vous allez être redirigé vers votre espace personnel."
+/aPropos/: "Découvrez MesServicesCyber, la plateforme de l'ANSSI qui centralise services, guides et outils gratuits pour renforcer la cybersécurité des organisations."
+/catalogue/: "Explorez le catalogue complet des services et ressources de cybersécurité proposés par l'ANSSI et ses partenaires, adaptés à tous les niveaux de maturité."
+/cgu/: "Consultez les conditions générales d'utilisation de MesServicesCyber : droits, responsabilités et règles d'usage de la plateforme."
+/confidentialite/: "Découvrez comment l'ANSSI collecte et protège vos données personnelles sur MesServicesCyber, conformément au RGPD et à la loi Informatique et Libertés."
+/connexion/: "Connectez-vous à MesServicesCyber via ProConnect pour accéder à vos services personnalisés, vos résultats de test et vos ressources favorites."
+/contacts/: "Contactez l'équipe MesServicesCyber pour toute question sur la plateforme ou les services de cybersécurité proposés par l'ANSSI et ses partenaires."
+/creation-compte/: "Créez votre compte MesServicesCyber via ProConnect pour sauvegarder vos résultats de test de maturité et accéder à des recommandations personnalisées."
+/cyberdepart/: "Lancez-vous dans la cybersécurité avec CyberDépart : un diagnostic gratuit de 1h30 réalisé par des aidants MonAideCyber pour sécuriser votre organisation."
+/favoris/: "Retrouvez les services et ressources de cybersécurité que vous avez sauvegardés dans vos favoris sur MesServicesCyber."
+/favoris-partages/: "Consultez une sélection de services et ressources de cybersécurité partagée avec vous via MesServicesCyber."
+/inscription/: "Inscrivez-vous sur MesServicesCyber via ProConnect pour accéder gratuitement à l'ensemble des services, guides et outils de cybersécurité de l'ANSSI."
+/ma-maturite/: "Consultez vos résultats de test de maturité cyber et suivez la progression de votre organisation grâce aux recommandations personnalisées de l'ANSSI."
+/mentionsLegales/: "Consultez les mentions légales de MesServicesCyber : éditeur, hébergeur, propriété intellectuelle et informations légales obligatoires."
+/nis2/: "Découvrez les services et ressources pour vous conformer à la directive NIS2. MesServicesCyber vous accompagne dans votre mise en conformité réglementaire."
+/niveaux-maturite/: "Comprenez les 5 niveaux de maturité cyber et identifiez où se situe votre organisation pour progresser vers une sécurité numérique renforcée."
+/parcours-approfondir/: "Accédez aux services et ressources avancés pour approfondir la cybersécurité de votre organisation et renforcer vos pratiques de sécurité numérique."
+/parcours-debuter/: "Débutez en cybersécurité avec un parcours guidé : découvrez les premiers services et ressources essentiels pour sécuriser votre organisation dès maintenant."
+/promouvoir-messervicescyber/: "Aidez à diffuser MesServicesCyber autour de vous : ressources de communication et supports pour promouvoir la cybersécurité dans votre réseau."
+/resultats-session-groupe/: "Analysez les résultats de votre session de test de maturité cyber en groupe pour définir ensemble votre stratégie de cybersécurité."
+/securite/: "Consultez les informations d'homologation et les certifications de sécurité de MesServicesCyber, conformes aux référentiels de l'ANSSI."
+/services-anssi/: "Découvrez l'ensemble des services proposés par l'ANSSI sur MesServicesCyber : diagnostic, formation, mise en conformité et outils de sécurisation."
+/session-groupe/: "Évaluez la maturité cyber de votre organisation en groupe : réalisez un test collectif de 5 minutes et obtenez des recommandations adaptées à votre équipe."
+/statistiques/: "Découvrez les statistiques d'utilisation de MesServicesCyber et mesurez l'impact de la plateforme sur le renforcement de la cybersécurité en France."
+/test-maturite/: "Évaluez la maturité cyber de votre organisation en 5 minutes avec le test ANSSI. Obtenez des recommandations personnalisées pour améliorer votre sécurité."
+/services/conseil-technique.html: "Posez vos questions techniques sur les guides de l'ANSSI et obtenez des conseils d'experts pour mettre en œuvre les bonnes pratiques de cybersécurité."
+/services/demainspecialistecyber.html: "Découvrez les métiers de la cybersécurité avec DemainSpécialisteCyber : ressources pédagogiques pour élèves, enseignants et parents sur les carrières cyber."
+/services/mon-aide-cyber-aidants.html: "Devenez aidant MonAideCyber et aidez gratuitement des organisations à renforcer leur cybersécurité. Rejoignez une communauté de bénévoles formés par l'ANSSI."
+/services/mon-aide-cyber.html: "Bénéficiez d'un diagnostic cyber gratuit et personnalisé de 1h30 avec MonAideCyber. Des aidants formés par l'ANSSI vous accompagnent sans engagement."
+/services/mon-espace-nis2.html: "Pré-inscrivez-vous auprès de l'ANSSI si votre organisation est soumise à la directive NIS2 et accédez à un accompagnement dédié à votre mise en conformité."
+/services/mon-service-securise.html: "Sécurisez et homologuez vos services numériques publics avec MonServiceSécurisé : identifiez vos besoins, construisez un plan d'action et gérez la conformité."
+/services/secnum-academie.html: "Formez-vous à la cybersécurité gratuitement avec SecNumAcadémie, le MOOC de l'ANSSI : SSI, authentification, sécurité du poste de travail et internet."
+/ressources/cyber-enjeux.html: "Enseignez la cybersécurité de façon ludique avec CyberEnJeux : un outil pédagogique innovant pour collégiens et lycéens basé sur la création de jeux vidéo."
+/ressources/cyber-enjeux-pro.html: "Sensibilisez vos équipes à la cybersécurité avec CyberEnJeux Pro : formation et cohésion par le jeu sérieux, pour entreprises et établissements d'enseignement."
+/ressources/secnumedu.html: "Trouvez des formations initiales labellisées SecNumEdu par l'ANSSI pour débuter ou approfondir une carrière dans la cybersécurité."
+/financements/: "Découvrez les aides et dispositifs de financement disponibles pour aider votre organisation à mettre en place des solutions de cybersécurité."
