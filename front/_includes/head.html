@@ -20,6 +20,7 @@
     }
   </script>
   <meta name="description" content="{{ site.data.meta-description[page.url] | escape }}">
+  {% if page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
 
   {% if site.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD == 'true' %}
   <meta property="csp-nonce" nonce="%%NONCE%%">
