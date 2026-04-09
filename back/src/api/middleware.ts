@@ -104,7 +104,8 @@ export const fabriqueMiddleware = ({
       try {
         const fichier = fs.readFileSync(chemin, 'utf-8');
         const avecNonce = fichier.replaceAll('%%NONCE%%', nonceAleatoire);
-        reponse.send(avecNonce);
+        const avecNonceEtVersion = avecNonce.replaceAll('%%VERSION%%', adaptateurEnvironnement.versionDeConstruction());
+        reponse.send(avecNonceEtVersion);
       } catch {
         reponse
           .status(404)

@@ -237,6 +237,26 @@ describe('Le middleware', () => {
       assert.equal(true, aAppeleSend);
     });
 
+    it('permet de substituer la variable de version par la version de construction', async () => {
+      adaptateurEnvironnement.versionDeConstruction = () => '12345';
+      const leVraiSend = reponse.send;
+      let aAppeleSend = false;
+      let contenuEnvoye: string = '';
+      reponse.send = (contenu: string) => {
+        aAppeleSend = true;
+        contenuEnvoye = contenu;
+        return leVraiSend(contenu);
+      };
+
+      await middleware.ajouteMethodeEnrichissement(requete, reponse, () => {
+        assert.notEqual(reponse.envoieFichierEnrichi, undefined);
+        reponse.envoieFichierEnrichi(join(process.cwd(), 'tests', 'ressources', 'factice.html'));
+      });
+
+      assert.equal(true, aAppeleSend);
+      assert.match(contenuEnvoye, /<script src="\/un-script\.js\?version=12345"><\/script>/);
+    });
+
     it("renvoi un 404 si la fichier n'existe pas", async () => {
       let pagesDemandee: string = '';
       fournisseurChemin.ressourceDeBase = (nomPage) => {
