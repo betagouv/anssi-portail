@@ -9,6 +9,6 @@ declare namespace Express {
   }
 
   export interface Response {
-    sendFileAvecNonce: (chemin: string) => void;
+    envoieFichierEnrichi: (chemin: string) => void;
   }
 }

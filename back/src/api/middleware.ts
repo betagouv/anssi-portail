@@ -19,7 +19,7 @@ export type Middleware = {
   interdisLaMiseEnCache: FonctionMiddleware;
   verifieJWT: FonctionMiddleware;
   verifieJWTNavigation: FonctionMiddleware;
-  ajouteMethodeNonce: FonctionMiddleware;
+  ajouteMethodeEnrichissement: FonctionMiddleware;
   positionneLesCsp: () => FonctionMiddleware;
   ajouteUtilisateurARequete: (
     entrepotUtilisateur: EntrepotUtilisateur,
@@ -97,10 +97,10 @@ export const fabriqueMiddleware = ({
     }
   };
 
-  const ajouteMethodeNonce = async (_: Request, reponse: Response, suite: NextFunction) => {
+  const ajouteMethodeEnrichissement = async (_: Request, reponse: Response, suite: NextFunction) => {
     const nonceAleatoire = randomBytes(16).toString('base64');
     reponse.locals.nonce = nonceAleatoire;
-    reponse.sendFileAvecNonce = (chemin: string) => {
+    reponse.envoieFichierEnrichi = (chemin: string) => {
       try {
         const fichier = fs.readFileSync(chemin, 'utf-8');
         const avecNonce = fichier.replaceAll('%%NONCE%%', nonceAleatoire);
@@ -109,7 +109,7 @@ export const fabriqueMiddleware = ({
         reponse
           .status(404)
           .set('Content-Type', 'text/html')
-          .sendFileAvecNonce(fournisseurChemin.ressourceDeBase('404.html'));
+          .envoieFichierEnrichi(fournisseurChemin.ressourceDeBase('404.html'));
       }
     };
     suite();
@@ -173,7 +173,7 @@ export const fabriqueMiddleware = ({
       reponse
         .status(HttpStatusCode.ServiceUnavailable)
         .set('Content-Type', 'text/html')
-        .sendFileAvecNonce(fournisseurChemin.ressourceDeBase('maintenance.html'));
+        .envoieFichierEnrichi(fournisseurChemin.ressourceDeBase('maintenance.html'));
     } else {
       suite();
     }
@@ -185,7 +185,7 @@ export const fabriqueMiddleware = ({
     verifieJWT,
     verifieJWTNavigation,
     interdisLaMiseEnCache,
-    ajouteMethodeNonce,
+    ajouteMethodeEnrichissement,
     positionneLesCsp,
     ajouteUtilisateurARequete,
     verifieModeMaintenance,

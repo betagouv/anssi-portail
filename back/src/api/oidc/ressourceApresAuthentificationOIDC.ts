@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { ConfigurationServeur } from '../configurationServeur';
 import { UtilisateurConnecte } from '../../bus/evenements/utilisateurConnecte';
+import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
 
 const ressourceApresAuthentificationOIDC = ({
@@ -36,7 +36,7 @@ const ressourceApresAuthentificationOIDC = ({
         requete.session = { ...requete.session, ...informationsUtilisateur };
         requete.session.token = adaptateurJWT.genereToken({ email });
         requete.session.AgentConnectIdToken = idToken;
-        reponse.sendFileAvecNonce(fournisseurChemin.cheminPageJekyll('apres-authentification'));
+        reponse.envoieFichierEnrichi(fournisseurChemin.cheminPageJekyll('apres-authentification'));
 
         await busEvenements.publie(new UtilisateurConnecte(emailHache, connexionAvecMFA));
       } catch {

@@ -1,5 +1,5 @@
-import { ConfigurationServeur } from './configurationServeur';
 import { Request, Response, Router } from 'express';
+import { ConfigurationServeur } from './configurationServeur';
 
 const ressourcePageConnexion = ({ fournisseurChemin }: ConfigurationServeur): Router => {
   const routeur = Router();
@@ -7,7 +7,7 @@ const ressourcePageConnexion = ({ fournisseurChemin }: ConfigurationServeur): Ro
   routeur.get('/', (_requete: Request, reponse: Response) => {
     reponse.clearCookie('session');
 
-    reponse.contentType('text/html').status(200).sendFileAvecNonce(fournisseurChemin.cheminPageJekyll('connexion'));
+    reponse.contentType('text/html').status(200).envoieFichierEnrichi(fournisseurChemin.cheminPageJekyll('connexion'));
   });
 
   return routeur;

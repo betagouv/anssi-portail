@@ -1,6 +1,6 @@
 import { HttpStatusCode } from 'axios';
-import { ConfigurationServeur } from './configurationServeur';
 import { Request, Response, Router } from 'express';
+import { ConfigurationServeur } from './configurationServeur';
 
 const ressourcePageProduit = (
   { fournisseurChemin, middleware }: ConfigurationServeur,
@@ -15,7 +15,7 @@ const ressourcePageProduit = (
     reponse
       .contentType('text/html')
       .status(200)
-      .sendFileAvecNonce(fournisseurChemin.cheminProduitJekyll(repertoireProduits, requete.params.id as string));
+      .envoieFichierEnrichi(fournisseurChemin.cheminProduitJekyll(repertoireProduits, requete.params.id as string));
   });
 
   return routeur;
