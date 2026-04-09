@@ -84,6 +84,7 @@ const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
 const CINQ_MINUTES = 300;
 
 export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
+  versionDeConstruction: () => '',
   chiffrement: () => ({
     cleChaCha20Hex: () => 'uneCléCha20Hex',
   }),
