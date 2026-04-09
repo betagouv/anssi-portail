@@ -1,6 +1,7 @@
 import { join } from 'path';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { ConfigurationServeur } from '../../src/api/configurationServeur';
+import { FournisseurChemin } from '../../src/api/fournisseurChemin';
 import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC';
 import { AdaptateurCellar } from '../../src/infra/adaptateurCellar';
@@ -22,7 +23,6 @@ import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravail
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
-import { FournisseurChemin } from '../../src/api/fournisseurChemin';
 
 export const fauxFournisseurDeChemin: FournisseurChemin = {
   cheminPageJekyll: (_: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
@@ -176,7 +176,7 @@ const vraiMiddleware = fabriqueMiddleware({
 });
 
 export const fauxMiddleware: Middleware = {
-  ajouteMethodeNonce: vraiMiddleware.ajouteMethodeNonce,
+  ajouteMethodeEnrichissement: vraiMiddleware.ajouteMethodeEnrichissement,
   positionneLesCsp: () => async (_, __, suite) => {
     suite();
   },

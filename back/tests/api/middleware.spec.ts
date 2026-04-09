@@ -1,25 +1,25 @@
-import { beforeEach, describe, it } from 'node:test';
-import { Request, Response } from 'express';
-import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
 import assert from 'assert';
+import { Request, Response } from 'express';
+import { Context } from 'express-validator/lib/context';
+import { JsonWebTokenError } from 'jsonwebtoken';
 import { createRequest, createResponse } from 'node-mocks-http';
 import { OutgoingHttpHeaders } from 'node:http';
-import { Context } from 'express-validator/lib/context';
+import { beforeEach, describe, it } from 'node:test';
+import { join } from 'path';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
+import { FournisseurChemin } from '../../src/api/fournisseurChemin';
+import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
+import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import { Utilisateur } from '../../src/metier/utilisateur';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import {
   fauxAdaptateurEnvironnement,
   fauxAdaptateurHachage,
   fauxAdaptateurJWT,
   fauxFournisseurDeChemin,
 } from './fauxObjets';
-import { JsonWebTokenError } from 'jsonwebtoken';
-import { join } from 'path';
-import { FournisseurChemin } from '../../src/api/fournisseurChemin';
 import { jeanneDupont } from './objetsPretsALEmploi';
-import { Utilisateur } from '../../src/metier/utilisateur';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
-import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 
 describe('Le middleware', () => {
   let requete: Request & {
@@ -37,7 +37,7 @@ describe('Le middleware', () => {
     adaptateurJWT = fauxAdaptateurJWT;
     requete = createRequest();
     reponse = createResponse();
-    reponse.sendFileAvecNonce = () => reponse;
+    reponse.envoieFichierEnrichi = () => reponse;
     fournisseurChemin = { ...fauxFournisseurDeChemin };
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     adaptateurEnvironnement = { ...fauxAdaptateurEnvironnement };
@@ -219,7 +219,7 @@ describe('Le middleware', () => {
     });
   });
 
-  describe("sur demande d'ajout de la méthode sendFileAvecNonce", () => {
+  describe("sur demande d'ajout de la méthode envoieFichierEnrichi", () => {
     it('permet de substituer la variable du nonce par une valeur aléatoire', async () => {
       const leVraiSend = reponse.send;
       let aAppeleSend = false;
@@ -229,9 +229,9 @@ describe('Le middleware', () => {
         return leVraiSend(contenu);
       };
 
-      await middleware.ajouteMethodeNonce(requete, reponse, () => {
-        assert.notEqual(reponse.sendFileAvecNonce, undefined);
-        reponse.sendFileAvecNonce(join(process.cwd(), 'tests', 'ressources', 'factice.html'));
+      await middleware.ajouteMethodeEnrichissement(requete, reponse, () => {
+        assert.notEqual(reponse.envoieFichierEnrichi, undefined);
+        reponse.envoieFichierEnrichi(join(process.cwd(), 'tests', 'ressources', 'factice.html'));
       });
 
       assert.equal(true, aAppeleSend);
@@ -244,9 +244,9 @@ describe('Le middleware', () => {
         return join(process.cwd(), 'tests', 'ressources', 'factice.html');
       };
 
-      await middleware.ajouteMethodeNonce(requete, reponse, () => {
-        assert.notEqual(reponse.sendFileAvecNonce, undefined);
-        reponse.sendFileAvecNonce('/services/inexistant.html');
+      await middleware.ajouteMethodeEnrichissement(requete, reponse, () => {
+        assert.notEqual(reponse.envoieFichierEnrichi, undefined);
+        reponse.envoieFichierEnrichi('/services/inexistant.html');
       });
 
       assert.deepEqual(pagesDemandee, '404.html');

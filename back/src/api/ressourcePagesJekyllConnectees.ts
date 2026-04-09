@@ -1,5 +1,5 @@
-import { ConfigurationServeur } from './configurationServeur';
 import { Request, Response, Router } from 'express';
+import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 
 const ressourcePagesJekyllConnectees = (
@@ -12,7 +12,7 @@ const ressourcePagesJekyllConnectees = (
     '/',
     middleware.verifieJWTNavigation,
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
-      reponse.contentType('text/html').status(200).sendFileAvecNonce(fournisseurChemin.cheminPageJekyll(nomPage));
+      reponse.contentType('text/html').status(200).envoieFichierEnrichi(fournisseurChemin.cheminPageJekyll(nomPage));
     })
   );
 

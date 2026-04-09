@@ -62,7 +62,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(compression());
 
-  app.use(configurationServeur.middleware.ajouteMethodeNonce);
+  app.use(configurationServeur.middleware.ajouteMethodeEnrichissement);
 
   app.use(configurationServeur.middleware.positionneLesCsp());
 
@@ -175,7 +175,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     reponse
       .contentType('text/html')
       .status(200)
-      .sendFileAvecNonce(fournisseurChemin.cheminPageJekyll('formulaire-matomo'));
+      .envoieFichierEnrichi(fournisseurChemin.cheminPageJekyll('formulaire-matomo'));
   });
 
   app.use('/favoris-partages/:id', ressourcePagesJekyll(configurationServeur, 'favoris-partages'));
@@ -287,7 +287,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     reponse
       .status(404)
       .set('Content-Type', 'text/html')
-      .sendFileAvecNonce(fournisseurChemin.ressourceDeBase('404.html'));
+      .envoieFichierEnrichi(fournisseurChemin.ressourceDeBase('404.html'));
   });
 
   return app;
