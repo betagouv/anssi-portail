@@ -1,5 +1,6 @@
 import { BesoinCyber } from './besoinCyber';
 import { EntrepotGuide } from './entrepotGuide';
+import { EntrepotGuideTravail } from './entrepotGuideTravail';
 
 export class Guide {
   id: string;
@@ -54,6 +55,10 @@ export class Guide {
     if (!this.possedeLeDocument(nomFichier)) return;
     this.listeDocuments = this.listeDocuments.filter((document) => document.nomFichier !== nomFichier);
     this.nomsAnciensDocuments.push(nomFichier);
+  };
+
+  sauvegarde = async (entrepotGuideTravail: EntrepotGuideTravail): Promise<void> => {
+    await entrepotGuideTravail.sauvegardeDocuments(this.id, this.listeDocuments, this.nomsAnciensDocuments);
   };
 }
 
