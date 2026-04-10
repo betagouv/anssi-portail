@@ -29,6 +29,19 @@
 
   {#if resultat.regulation === Regulation.Regule}
     <LigneEtMaintenant />
+
+    <div class="cartes">
+      <dsfr-card
+        title="Accéder à la liste d'exigences applicables à ReCyF (NIS&nbsp;2)"
+        description="Découvrez la liste d'exigences applicables à ReCyF (NIS&nbsp;2) pour atteindre les objectifs de sécurité fixés par NIS&nbsp;2 ainsi que l'outil de comparaison de référentiels."
+        href="/nis2#exigences"
+      ></dsfr-card>
+      <dsfr-card
+        title="S'abonner à la Newsletter MesServicesCyber"
+        description="Restez informé des dernières actualités de la directive NIS&nbsp;2 et autres actualités."
+        href="/abonnement-infolettre?adresseRetour=/nis2"
+      ></dsfr-card>
+    </div>
   {/if}
 </div>
 
@@ -46,6 +59,29 @@
 
     @include a-partir-de(lg) {
       max-width: taille-pour-colonnes(8);
+    }
+
+    .cartes {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 36px;
+
+      @include a-partir-de(lg) {
+        flex-direction: row;
+        justify-content: center;
+        gap: 24px;
+        padding: 0 16px;
+
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+
+        dsfr-card {
+          width: taille-pour-colonnes(4);
+          max-width: 486px;
+        }
+      }
     }
   }
 </style>
