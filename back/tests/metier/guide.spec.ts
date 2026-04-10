@@ -1,8 +1,30 @@
 import assert from 'node:assert';
-import { describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'node:test';
 import { guideZeroTrust } from '../api/objetsPretsALEmploi';
+import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravailMemoire';
 
 describe('Le guide', () => {
+  describe("lorsqu'on sauvegarde", () => {
+    const guideOriginal = guideZeroTrust();
+    let fauxEntrepot = new EntrepotGuideTravailMemoire();
+
+    beforeEach(async () => {
+      fauxEntrepot = new EntrepotGuideTravailMemoire();
+      await fauxEntrepot.ajoute(guideOriginal);
+    });
+    it("délègue la persistance à l'entrepôt avec les bonnes données", async () => {
+      const nouveuGuide = guideZeroTrust();
+      nouveuGuide.listeDocuments = [{ libelle: 'Mon document', nomFichier: 'mon-document.pdf' }];
+      nouveuGuide.nomsAnciensDocuments = ['ancien.pdf'];
+
+      await nouveuGuide.sauvegarde(fauxEntrepot);
+      const guidePersiste = await fauxEntrepot.parId(nouveuGuide.id);
+
+      assert.deepEqual(guidePersiste?.listeDocuments, [{ libelle: 'Mon document', nomFichier: 'mon-document.pdf' }]);
+      assert.deepEqual(guidePersiste?.nomsAnciensDocuments, ['ancien.pdf']);
+    });
+  });
+
   describe("lorsqu'on supprime un document", () => {
     it('retire le document de listeDocuments', () => {
       const guide = guideZeroTrust();
