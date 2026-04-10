@@ -9,6 +9,7 @@ export class Guide {
   collections: string[];
   documents: DocumentGuide[];
   listeDocuments: DocumentGuide[];
+  nomsAnciensDocuments: string[];
   dateMiseAJour: Date;
   thematique: string;
   besoins: BesoinCyber[];
@@ -21,6 +22,7 @@ export class Guide {
     collections: string[];
     documents: DocumentGuide[];
     listeDocuments: DocumentGuide[];
+    nomsAnciensDocuments?: string[];
     dateMiseAJour: Date;
     thematique: string;
     besoins: BesoinCyber[];
@@ -32,6 +34,7 @@ export class Guide {
     this.collections = parametres.collections;
     this.documents = parametres.documents;
     this.listeDocuments = parametres.listeDocuments ?? [];
+    this.nomsAnciensDocuments = parametres.nomsAnciensDocuments ?? [];
     this.dateMiseAJour = parametres.dateMiseAJour;
     this.thematique = parametres.thematique;
     this.besoins = parametres.besoins;
@@ -45,6 +48,12 @@ export class Guide {
 
   possedeLeDocument = (nomFichier: string): boolean => {
     return this.listeDocuments.some((document) => document.nomFichier === nomFichier);
+  };
+
+  supprimeLeDocument = (nomFichier: string): void => {
+    if (!this.possedeLeDocument(nomFichier)) return;
+    this.listeDocuments = this.listeDocuments.filter((document) => document.nomFichier !== nomFichier);
+    this.nomsAnciensDocuments.push(nomFichier);
   };
 }
 

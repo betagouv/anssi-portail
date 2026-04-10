@@ -122,7 +122,7 @@ const ressourceDocumentsGuide = ({
 
       const nouvelleListe = [...guide.listeDocuments];
       nouvelleListe.push({ libelle: requete.body.libelleDuLien, nomFichier: fichier.originalname });
-      await entrepotGuideTravail.sauvegardeDocuments(identifiantGuide, nouvelleListe);
+      await entrepotGuideTravail.sauvegardeDocuments(identifiantGuide, nouvelleListe, guide.nomsAnciensDocuments);
 
       reponse.status(201).send();
     })
@@ -144,8 +144,8 @@ const ressourceDocumentsGuide = ({
         });
       }
 
-      const listeDocuments = guide.listeDocuments.filter((doc) => doc.nomFichier !== requete.params.nomFichier);
-      await entrepotGuideTravail.sauvegardeDocuments(guide.id, listeDocuments);
+      guide.supprimeLeDocument(requete.params.nomFichier as string);
+      await entrepotGuideTravail.sauvegardeDocuments(guide.id, guide.listeDocuments, guide.nomsAnciensDocuments);
 
       await cellar.supprime(document.nomFichier, 'GESTION_GUIDES');
 

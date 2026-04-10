@@ -84,6 +84,7 @@ export class ConstructeurGuideGrist {
           ? this.documentsBruts
           : this.documents.map((document) => `${document.libelle} : ${document.nomFichier}`).join('\n'),
         Liste_documents: JSON.stringify(this.listeDocuments),
+        Anciens_documents: null,
         Date_de_mise_a_jour_s_: this.dateMiseAJour,
         Thematique: this.thematique,
         Besoins_cyber: this.besoins.length ? ['L', ...this.besoins] : [],
