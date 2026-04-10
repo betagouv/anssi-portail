@@ -54,6 +54,7 @@ export class EntrepotGuideTravailGrist extends EntrepotGrist<GuideGrist> impleme
             })
         : [],
       listeDocuments: JSON.parse(guideGrist.fields.Liste_documents || '[]'),
+      nomsAnciensDocuments: JSON.parse(guideGrist.fields.Anciens_documents || '[]'),
       dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour_s_
         ? new Date(guideGrist.fields.Date_de_mise_a_jour_s_ * 1000)
         : new Date(),
@@ -72,9 +73,14 @@ export class EntrepotGuideTravailGrist extends EntrepotGrist<GuideGrist> impleme
     return guidesGrist.records.map(this.convertisGuideGrist)[0];
   }
 
-  async sauvegardeDocuments(idGuide: string, documents: { libelle: string; nomFichier: string }[]) {
+  async sauvegardeDocuments(
+    idGuide: string,
+    documents: { libelle: string; nomFichier: string }[],
+    nomsAnciensDocuments: string[]
+  ) {
     await this.modifieEnregistrementGrist('Identifiant', idGuide, {
       Liste_documents: JSON.stringify(documents),
+      Anciens_documents: JSON.stringify(nomsAnciensDocuments),
     });
   }
 }

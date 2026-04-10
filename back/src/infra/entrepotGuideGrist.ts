@@ -17,6 +17,7 @@ export type GuideGrist = {
     Collections: string[];
     Documents: string;
     Liste_documents: string | null;
+    Anciens_documents: string | null;
     Date_de_mise_a_jour_s_: number | null;
     Thematique: string | null;
     Besoins_cyber: string[];
