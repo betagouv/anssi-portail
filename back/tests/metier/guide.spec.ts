@@ -75,4 +75,15 @@ describe('Le guide', () => {
       assert.equal(guide.listeDocuments[0].nomFichier, 'document-b.pdf');
     });
   });
+
+  describe('lorsqu’on ajoute un document', () => {
+    it('le supprime de la liste des anciens documents', () => {
+      const guide = guideZeroTrust();
+      guide.nomsAnciensDocuments = ['mon-document.pdf'];
+
+      guide.ajouteLeDocument({ libelle: 'Mon document', nomFichier: 'mon-document.pdf' });
+
+      assert.deepEqual(guide.nomsAnciensDocuments, []);
+    });
+  });
 });

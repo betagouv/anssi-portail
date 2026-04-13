@@ -53,6 +53,7 @@ export class Guide {
 
   ajouteLeDocument = (document: DocumentGuide) => {
     this.listeDocuments.push(document);
+    this.nomsAnciensDocuments = this.nomsAnciensDocuments.filter((d) => d !== document.nomFichier);
   };
 
   supprimeLeDocument = (nomFichier: string): void => {
