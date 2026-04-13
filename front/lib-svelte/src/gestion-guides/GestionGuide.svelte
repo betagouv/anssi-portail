@@ -13,7 +13,7 @@
 
 <dsfr-container>
   <div class="guide">
-    <h2>Guide</h2>
+    <h2>Rechercher un guide</h2>
     <SelectionIdentifiantGuide bind:valeur={identifiantGuide} />
   </div>
   <ListeDesDocuments {identifiantGuide} bind:nouveauxDocuments />
