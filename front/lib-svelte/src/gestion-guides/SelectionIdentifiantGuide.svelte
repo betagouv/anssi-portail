@@ -111,6 +111,7 @@
   }
 
   label {
+    display: block;
     margin-bottom: 8px;
   }
 </style>
