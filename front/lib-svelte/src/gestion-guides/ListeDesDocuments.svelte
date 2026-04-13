@@ -84,7 +84,9 @@
           type="button"
           size="md"
           kind="tertiary"
-          label="Supprimer ce document"
+          label="Supprimer"
+          has-icon="true"
+          icon="delete-bin-line"
           use:clic={() => supprimeLeDocument(nomFichier)}
         ></dsfr-button>
       </div>
