@@ -6,6 +6,20 @@
   let identifiantGuide: string = $state('');
   let nouveauxDocuments = $state<Document[]>([]);
 
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    identifiantGuide = params.get('idGuide') ?? '';
+  }
+
+  $effect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const guideActuel = params.get('idGuide') ?? '';
+    if (identifiantGuide !== guideActuel) {
+      const nouvelleUrl = identifiantGuide ? `?idGuide=${identifiantGuide}` : window.location.pathname;
+      window.history.replaceState(null, '', nouvelleUrl);
+    }
+  });
+
   const surAjout = async (libelle: string, nomFichier: string) => {
     nouveauxDocuments.push({ libelle, nomFichier });
   };

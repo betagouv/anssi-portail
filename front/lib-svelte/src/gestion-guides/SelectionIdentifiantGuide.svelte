@@ -10,7 +10,7 @@
 
   let { valeur = $bindable() }: Props = $props();
 
-  let saisieEnCours = $state('');
+  let saisieEnCours = $state(valeur);
 
   let listeIdentifiants: string[] = $state([]);
   let minuteur: ReturnType<typeof setTimeout>;
