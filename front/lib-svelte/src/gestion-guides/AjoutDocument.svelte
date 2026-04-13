@@ -72,7 +72,10 @@
   <h3>Ajout d'un nouveau document</h3>
   {#if succes}
     <dsfr-alert type="success" size="sm" title="Document en cours d'ajout" dismissible>
-      <p slot="description">Vous pouvez ajouter un autre document ou continuer votre navigation sur le site.</p>
+      <p slot="description">
+        L'opération peut prendre quelques secondes, vous pouvez rafraichir la page pour vous assurer que le document ait
+        bien été ajouté.
+      </p>
     </dsfr-alert>
   {:else if erreur}
     <dsfr-alert type="error" size="sm" title="Erreur lors de l'ajout du document" dismissible>
