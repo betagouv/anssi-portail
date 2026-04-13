@@ -120,7 +120,7 @@ const ressourceDocumentsGuide = ({
         );
       }
 
-      guide.listeDocuments.push({ libelle: requete.body.libelleDuLien, nomFichier: fichier.originalname });
+      guide.ajouteLeDocument({ libelle: requete.body.libelleDuLien, nomFichier: fichier.originalname });
       await guide.sauvegarde(entrepotGuideTravail);
 
       reponse.status(201).send();

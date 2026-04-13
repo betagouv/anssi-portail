@@ -51,6 +51,10 @@ export class Guide {
     return this.listeDocuments.some((document) => document.nomFichier === nomFichier);
   };
 
+  ajouteLeDocument = (document: DocumentGuide) => {
+    this.listeDocuments.push(document);
+  };
+
   supprimeLeDocument = (nomFichier: string): void => {
     if (!this.possedeLeDocument(nomFichier)) return;
     this.listeDocuments = this.listeDocuments.filter((document) => document.nomFichier !== nomFichier);
