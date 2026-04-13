@@ -82,9 +82,10 @@
   <input bind:this={fichier} type="file" id="document-guide" name="document-guide" oninput={surAjoutDocument} />
   <dsfr-input
     id="libelleDuLien"
-    label="Libellé du lien"
+    label="Nom du lien de téléchargement"
     onvaluechanged={(e: CustomEvent) => (libelleDuLien = e.detail)}
     value={libelleDuLien}
+    hint="Intitulé du bouton servant à télécharger le document sur la page d'un guide"
   ></dsfr-input>
   <dsfr-checkbox
     id="genereVisuel"
