@@ -60,7 +60,7 @@
       setTimeout(() => {
         succes = false;
         erreur = '';
-      }, 5000);
+      }, 15000);
     if (succes || erreur) {
       const timer = resetAlerte();
       return () => clearTimeout(timer);
