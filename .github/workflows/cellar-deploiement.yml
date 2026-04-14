@@ -1,0 +1,101 @@
+name: Déploie des buckets Cellar
+run-name: Compare et recopie des buckets
+permissions: {}
+
+on:
+  workflow_call:
+    inputs:
+      bucket-source:
+        description: 'Bucket source'
+        type: string
+        required: true
+      bucket-cible:
+        description: 'Bucket cible'
+        type: string
+        required: true
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prépare rclone
+        uses: AnimMouse/setup-rclone@v1
+
+      - name: Configure rclone
+        run: |
+          mkdir -p ~/.config/rclone
+          cat <<EOF > ~/.config/rclone/rclone.conf
+          [cellar]
+          type = s3
+          provider = Other
+          access_key_id = ${{ secrets.CELLAR_ACCESS_KEY_ID }}
+          secret_access_key = ${{ secrets.CELLAR_SECRET_ACCESS_KEY }}
+          endpoint = cellar-c2.services.clever-cloud.com
+          acl = public-read
+          EOF
+
+      - name: Compare les buckets
+        id: check
+        run: |
+          mkdir -p resultats
+
+          rclone check \
+            cellar:${{ inputs.bucket-source }} \
+            cellar:${{ inputs.bucket-cible }} \
+            --one-way \
+            --differ resultats/modifications.txt \
+            --missing-on-dst resultats/ajouts.txt \
+            --missing-on-src resultats/suppressions.txt \
+            --log-file resultats/rclone.log \
+            || RC=$?
+
+          echo "rc=${RC:-0}"
+          cat resultats/rclone.log
+          echo "rc=${RC:-0}" >> $GITHUB_OUTPUT
+
+      - name: Generate GitHub Summary
+        run: |
+          echo "## 🔍 Prévisualisation des différences S3" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          DIFF=$(wc -l < resultats/modifications.txt 2>/dev/null || echo 0)
+          MISS=$(wc -l < resultats/ajouts.txt 2>/dev/null || echo 0)
+          EXTRA=$(wc -l < resultats/suppressions.txt 2>/dev/null || echo 0)
+
+          echo "### 📊 Résumé" >> $GITHUB_STEP_SUMMARY
+          echo "- ❌ Fichiers modifiés : $DIFF" >> $GITHUB_STEP_SUMMARY
+          echo "- ➕ Fichiers ajoutés : $MISS" >> $GITHUB_STEP_SUMMARY
+          echo "- ➖ Fichiers supprimés : $EXTRA" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          print_section () {
+            TITLE=$1
+            FILE=$2
+
+            echo "### $TITLE" >> $GITHUB_STEP_SUMMARY
+
+            if [ -s "$FILE" ]; then
+              echo '```' >> $GITHUB_STEP_SUMMARY
+              head -n 100 "$FILE" >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+
+              TOTAL=$(wc -l < "$FILE")
+              if [ "$TOTAL" -gt 100 ]; then
+                echo "_... $TOTAL fichiers au total (affichage limité à 100)_" >> $GITHUB_STEP_SUMMARY
+              fi
+            else
+              echo "✅ Aucun" >> $GITHUB_STEP_SUMMARY
+            fi
+
+            echo "" >> $GITHUB_STEP_SUMMARY
+          }
+
+          print_section "❌ Fichiers modifiés" resultats/modifications.txt
+          print_section "➕ Fichiers ajoutés" resultats/ajouts.txt
+          print_section "➖ Fichiers supprimés" resultats/suppressions.txt
+
+      - name: Fail only on real error
+        if: steps.check.outputs.rc != '0' && steps.check.outputs.rc != '1'
+        run: |
+          echo "❌ Erreur technique rclone"
+          exit 1

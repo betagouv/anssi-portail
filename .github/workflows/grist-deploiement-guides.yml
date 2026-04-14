@@ -12,3 +12,10 @@ jobs:
     with:
       cible: guides
     secrets: inherit
+  compare-et-deploie-cellar:
+    name: 'Documents'
+    uses: ./.github/workflows/cellar-deploiement.yml
+    with:
+      bucket-source: messervicescyber-guides-demo
+      bucket-cible: msc-guides-demo-test-sync
+    secrets: inherit
