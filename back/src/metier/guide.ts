@@ -13,6 +13,7 @@ export class Guide {
   dateMiseAJour: Date;
   thematique: string;
   besoins: BesoinCyber[];
+  lienCourt?: string;
 
   constructor(parametres: {
     id: string;
@@ -25,6 +26,7 @@ export class Guide {
     dateMiseAJour: Date;
     thematique: string;
     besoins: BesoinCyber[];
+    lienCourt?: string;
   }) {
     this.id = parametres.id;
     this.nom = parametres.nom;
@@ -36,6 +38,7 @@ export class Guide {
     this.dateMiseAJour = parametres.dateMiseAJour;
     this.thematique = parametres.thematique;
     this.besoins = parametres.besoins;
+    this.lienCourt = parametres.lienCourt;
   }
 
   async deMemesCollections(entrepotGuide: EntrepotGuide) {

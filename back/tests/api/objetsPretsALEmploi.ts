@@ -66,6 +66,7 @@ export const guideZeroTrust = () =>
     dateMiseAJour: new Date(2025, 5, 20),
     thematique: 'Les essentiels',
     besoins: ['REAGIR', 'SE_FORMER'],
+    lienCourt: 'https://cyber.gouv.fr/fondamentaux-zero-trust',
   });
 
 export const guideDevsecops = () =>
