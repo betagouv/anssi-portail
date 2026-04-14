@@ -28,4 +28,5 @@ export interface Guide extends Item {
   thematique: string;
   besoins: BesoinCyber[];
   dateMiseAJourFormatee: string;
+  lienCourt?: string;
 }
