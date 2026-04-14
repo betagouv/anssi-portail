@@ -155,4 +155,6 @@ jobs:
       - name: Recopie le bucket source vers le bucket de destination
         if: steps.compare-empreintes-cellar.outputs.resultat == 'ok'
         run: |
-          echo "Faire la recopie..."
+          rclone sync \
+            cellar:${{ inputs.bucket-source }} \
+            cellar:${{ inputs.bucket-cible }} \
