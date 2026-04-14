@@ -12,6 +12,7 @@ export class ConstructeurGuideGrist {
   private dateMiseAJour: number | null = null;
   private thematique: string | null = null;
   private readonly besoins: string[] = [];
+  private lienCourt?: string;
 
   avecLeNumeroDeLigne(numerodeLigne: number) {
     this.numeroDeLigne = numerodeLigne;
@@ -63,6 +64,11 @@ export class ConstructeurGuideGrist {
     return this;
   }
 
+  avecLeLienCourt(lienCourt: string) {
+    this.lienCourt = lienCourt;
+    return this;
+  }
+
   construis() {
     return {
       id: this.numeroDeLigne,
@@ -77,6 +83,7 @@ export class ConstructeurGuideGrist {
         Date_de_mise_a_jour_s_: this.dateMiseAJour,
         Thematique: this.thematique,
         Besoins_cyber: this.besoins.length ? ['L', ...this.besoins] : [],
+        Lien_court: this.lienCourt ?? null,
       },
     } satisfies GuideGrist;
   }
