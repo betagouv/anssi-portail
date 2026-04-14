@@ -47,6 +47,7 @@ describe('La ressource guide', () => {
       assert.equal(guide.langue, 'FR');
       assert.equal(guide.thematique, 'Les essentiels');
       assert.deepEqual(guide.collections, ['Les essentiels']);
+      assert.equal(guide.lienCourt, 'https://cyber.gouv.fr/fondamentaux-zero-trust');
     });
 
     it("répond 404 si le guide n'existe pas", async () => {
