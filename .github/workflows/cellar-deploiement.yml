@@ -15,7 +15,7 @@ on:
         required: true
 
 jobs:
-  compare:
+  compare-les-buckets:
     runs-on: ubuntu-latest
     steps:
       - name: Prépare rclone
@@ -94,8 +94,65 @@ jobs:
           print_section "➕ Fichiers ajoutés" resultats/ajouts.txt
           print_section "➖ Fichiers supprimés" resultats/suppressions.txt
 
+      - name: Génère les empreintes des fichiers
+        run: |
+          rclone md5sum cellar:${{ inputs.bucket-source }} | sort > empreintes-cellar.txt
+
+      - name: Sauvegarde les empreintes des fichiers sources
+        uses: actions/upload-artifact@v4
+        with:
+          name: empreintes-cellar
+          path: empreintes-cellar.txt
+
       - name: Fail only on real error
         if: steps.check.outputs.rc != '0' && steps.check.outputs.rc != '1'
         run: |
           echo "❌ Erreur technique rclone"
           exit 1
+
+  recopie-source-vers-destination:
+    runs-on: ubuntu-latest
+    needs: compare-les-buckets
+    #   environment: PROD_NODE
+    steps:
+      - name: Prépare rclone
+        uses: AnimMouse/setup-rclone@v1
+
+      - name: Configure rclone
+        run: |
+          mkdir -p ~/.config/rclone
+          cat <<EOF > ~/.config/rclone/rclone.conf
+          [cellar]
+          type = s3
+          provider = Other
+          access_key_id = ${{ secrets.CELLAR_ACCESS_KEY_ID }}
+          secret_access_key = ${{ secrets.CELLAR_SECRET_ACCESS_KEY }}
+          endpoint = cellar-c2.services.clever-cloud.com
+          acl = public-read
+          EOF
+
+      - name: Récupère les empreintes sources
+        uses: actions/download-artifact@v4
+        with:
+          name: empreintes-cellar
+
+      - name: Regénère les empreintes des fichiers
+        run: |
+          rclone md5sum cellar:${{ inputs.bucket-source }} | sort > nouvelles-empreintes-cellar.txt
+
+      - name: Compare les empreintes
+        id: compare-empreintes-cellar
+        run: |
+          if diff empreintes-cellar.txt nouvelles-empreintes-cellar.txt; then
+            echo "✅ Source stable — sync allowed"
+            echo "resultat=ok" >> $GITHUB_OUTPUT
+          else
+            echo "❌ La source a changé depuis la comparaison"
+            echo "resultat=erreur" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+
+      - name: Recopie le bucket source vers le bucket de destination
+        if: steps.compare-empreintes-cellar.outputs.resultat == 'ok'
+        run: |
+          echo "Faire la recopie..."
