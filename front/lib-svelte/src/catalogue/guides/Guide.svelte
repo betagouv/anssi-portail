@@ -11,8 +11,16 @@
   import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
   import { profilStore } from '../../stores/profil.store';
   import InciteCreerUnCompte from './InciteCreerUnCompte.svelte';
+  import { clic } from '../../directives/actions.svelte';
 
   let guide: Guide | undefined;
+
+  async function copierLeLienCourt() {
+    if (guide?.lienCourt) {
+      await navigator.clipboard.writeText(guide?.lienCourt);
+    }
+  }
+
   onMount(async () => {
     const idGuideACharger = new URL(window.location.href).pathname;
     await chargeGuidesDansLeStore();
@@ -85,6 +93,15 @@
       <div class="contenu">
         <div class="entete">
           <BoutonFavori idItem={guide.id} />
+          {#if guide.lienCourt}
+            <dsfr-button
+              has-icon="true"
+              icon="links-line"
+              kind="tertiary"
+              label="Copier le lien"
+              use:clic={copierLeLienCourt}
+            ></dsfr-button>
+          {/if}
           {#if !$profilStore}
             <InciteCreerUnCompte />
           {/if}
