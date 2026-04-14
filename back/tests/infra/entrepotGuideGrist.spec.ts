@@ -77,6 +77,7 @@ describe("L'entrepot de guide Grist", () => {
         .avecLaDescription('<p>Description du premier guide</p>')
         .avecLaLangue('FR')
         .avecLesCollections(['Les essentiels'])
+        .avecLeLienCourt('https://lien-court/guide')
         .construis(),
       new ConstructeurGuideGrist()
         .avecLeNumeroDeLigne(2)
@@ -99,6 +100,7 @@ describe("L'entrepot de guide Grist", () => {
     assert.equal(premierGuide.langue, 'FR');
     assert.deepEqual(premierGuide.collections, ['Les essentiels']);
     assert.deepEqual(premierGuide.listeDocuments, []);
+    assert.equal(premierGuide.lienCourt, 'https://lien-court/guide');
 
     const deuxiemeGuide = guides[1];
     assert.equal(deuxiemeGuide.id, 'guide2');

@@ -20,6 +20,7 @@ export type GuideGrist = {
     Date_de_mise_a_jour_s_: number | null;
     Thematique: string | null;
     Besoins_cyber: string[];
+    Lien_court: string | null;
   };
 };
 
@@ -68,6 +69,7 @@ export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements Ent
       besoins: aseptiseListeGrist(guideGrist.fields.Besoins_cyber)
         .map(this.convertiBesoin)
         .filter((b) => !!b),
+      lienCourt: guideGrist.fields.Lien_court || undefined,
     });
   };
 
