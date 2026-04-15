@@ -12,6 +12,7 @@
   import { profilStore } from '../../stores/profil.store';
   import InciteCreerUnCompte from './InciteCreerUnCompte.svelte';
   import { clic } from '../../directives/actions.svelte';
+  import Separateur from '../../ui/Separateur.svelte';
 
   let guide: Guide | undefined;
 
@@ -92,19 +93,24 @@
 
       <div class="contenu">
         <div class="entete">
-          <BoutonFavori idItem={guide.id} />
-          {#if guide.lienCourt}
-            <dsfr-button
-              has-icon="true"
-              icon="links-line"
-              kind="tertiary"
-              label="Copier le lien"
-              use:clic={copierLeLienCourt}
-            ></dsfr-button>
-          {/if}
           {#if !$profilStore}
-            <InciteCreerUnCompte />
+            <div class="bandeau-infolettre">
+              <InciteCreerUnCompte />
+              <Separateur />
+            </div>
           {/if}
+          <div class="actions">
+            {#if guide.lienCourt}
+              <dsfr-button
+                has-icon="true"
+                icon="links-line"
+                kind="tertiary"
+                label="Copier le lien"
+                use:clic={copierLeLienCourt}
+              ></dsfr-button>
+            {/if}
+            <BoutonFavori idItem={guide.id} />
+          </div>
         </div>
         <p class="dates texte-mention-xs">
           Publié le {guide.dateMiseAJourFormatee}
@@ -217,8 +223,16 @@
       .contenu {
         .entete {
           display: flex;
-          flex-direction: row-reverse;
-          gap: 1rem;
+          flex-direction: column;
+
+          .bandeau-infolettre {
+            margin-bottom: 24px;
+          }
+
+          .actions {
+            display: flex;
+            justify-content: flex-end;
+          }
         }
 
         .dates {
