@@ -111,7 +111,7 @@
                   use:clic={copierLeLienCourt}
                 ></dsfr-button>
               {/if}
-              <BoutonFavori idItem={guide.id} />
+              <BoutonFavori idItem={guide.id} avecBordure />
             </div>
             <p class="dates texte-mention-xs">
               Publié le {guide.dateMiseAJourFormatee}
