@@ -15,7 +15,7 @@
 
   const partageLien = () => {
     navigator.clipboard.writeText(lienTest).then(function () {
-      alert('Adresse copiée dans le presse papier.');
+      alert('Adresse copiée dans le presse-papier.');
     });
   };
 </script>

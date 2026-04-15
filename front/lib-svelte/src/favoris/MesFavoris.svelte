@@ -11,7 +11,7 @@
     const hote = new URL(window.location.href).origin;
     const urlPartagee = `${hote}/favoris-partages/${$profilStore?.idListeFavoris}`;
     navigator.clipboard.writeText(urlPartagee).then(() => {
-      alert('Adresse copiée dans le presse papier.');
+      alert('Adresse copiée dans le presse-papier.');
     });
   };
   onMount(chargeGuidesDansLeStore);
