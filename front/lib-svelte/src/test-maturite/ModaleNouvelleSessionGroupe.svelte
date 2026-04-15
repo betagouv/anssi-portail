@@ -27,7 +27,7 @@
 
   const copieLienParticipant = () => {
     navigator.clipboard.writeText(lienPourParticipants).then(function () {
-      alert('Lien participant copié dans le presse papier.');
+      alert('Lien participant copié dans le presse-papier.');
     });
   };
 
@@ -37,7 +37,7 @@
 
   const copieLienOrganisateur = () => {
     navigator.clipboard.writeText(lienPourOrganisateur).then(function () {
-      alert('Lien organisateur copié dans le presse papier.');
+      alert('Lien organisateur copié dans le presse-papier.');
     });
   };
 </script>
