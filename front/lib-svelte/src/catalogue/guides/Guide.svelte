@@ -10,7 +10,7 @@
   import { decodeEntitesHtml } from './guide';
   import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
   import { profilStore } from '../../stores/profil.store';
-  import InciteCreerUnCompte from './InciteCreerUnCompte.svelte';
+  import InciteASAbonner from './InciteASAbonner.svelte';
   import { clic } from '../../directives/actions.svelte';
   import Separateur from '../../ui/Separateur.svelte';
 
@@ -95,7 +95,7 @@
         <div class="entete">
           {#if !$profilStore}
             <div class="bandeau-infolettre">
-              <InciteCreerUnCompte />
+              <InciteASAbonner />
               <Separateur />
             </div>
           {/if}
