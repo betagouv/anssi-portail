@@ -54,7 +54,8 @@ export class EntrepotGuideTravailGrist extends EntrepotGrist<GuideGrist> impleme
   };
 
   async tous(): Promise<Guide[]> {
-    return [];
+    const guidesGrist = await this.appelleGrist({ sansCache: true });
+    return guidesGrist.records.map(this.convertisGuideGrist);
   }
 
   async parId(id: string): Promise<Guide | undefined> {
