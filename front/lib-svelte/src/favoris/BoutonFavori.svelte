@@ -5,6 +5,7 @@
   import { profilStore } from '../stores/profil.store';
 
   export let idItem: IdItem;
+  export let avecBordure: boolean = false;
 
   $: estFavori = $favorisStore.includes(idItem);
 
@@ -30,7 +31,7 @@
   };
 </script>
 
-<button on:click|preventDefault={actionSurClick} title={titre} class:actif={$profilStore}>
+<button on:click|preventDefault={actionSurClick} title={titre} class:actif={$profilStore} class:bordure={avecBordure}>
   <img src={cheminIcone} alt="Favori" />
 </button>
 
@@ -50,7 +51,16 @@
     transition: transform 0.2s ease-in-out;
     pointer-events: initial;
 
-    &.actif:hover {
+    &.bordure {
+      border: 1px solid var(--border-default-grey);
+      border-radius: 8px;
+
+      &:hover {
+        background-color: var(--background-default-grey-hover);
+      }
+    }
+
+    &.actif:hover:not(.bordure) {
       transform: scale(1.3);
     }
 
