@@ -26,7 +26,7 @@
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
-  import InciteCreerUnCompte from './guides/InciteCreerUnCompte.svelte';
+  import InciteASAbonner from './guides/InciteASAbonner.svelte';
 
   const idsCollectionsGuide: Record<CollectionGuide, string> = {
     [CollectionGuide.LES_ESSENTIELS]: 'essentiels',
@@ -154,7 +154,7 @@
   <div class="contenu-section">
     {#if !$profilStore && sectionActive === 'guides'}
       <div class="entete">
-        <InciteCreerUnCompte />
+        <InciteASAbonner />
       </div>
     {/if}
 
