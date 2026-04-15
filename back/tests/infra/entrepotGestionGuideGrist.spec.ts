@@ -39,6 +39,19 @@ describe("L'entrepot de gestion de guide Grist", () => {
     assert.equal(guide1!.nom, 'Le guide 1');
   });
 
+  it("sait transformer le retour de l'API Grist en guides", async () => {
+    const entrepotGuideTravailGrist = prepareEntrepotGristAvecEnregistrements([
+      new ConstructeurGuideGrist().avecLeNumeroDeLigne(1).avecLIdentifiant('guide1').construis(),
+      new ConstructeurGuideGrist().avecLeNumeroDeLigne(2).avecLIdentifiant('guide2').construis(),
+    ]);
+
+    const guides = await entrepotGuideTravailGrist.tous();
+
+    assert.equal(guides.length, 2);
+    assert.equal(guides[0].id, 'guide1');
+    assert.equal(guides[1].id, 'guide2');
+  });
+
   describe('concernant les documents', () => {
     describe('sait ajouter un document à un guide', () => {
       it("lorsqu'il n'y a pas de documents existants", async () => {
