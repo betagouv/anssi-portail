@@ -1,6 +1,7 @@
 <script lang="ts">
+  import axios from 'axios';
   import { onMount } from 'svelte';
-  import { chargeGuidesDansLeStore, guidesStore } from '../catalogue/stores/guides/guides.store';
+  import type { Guide } from '../catalogue/Guide.types';
   import { clic } from '../directives/actions.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
 
@@ -52,8 +53,8 @@
   };
 
   onMount(async () => {
-    await chargeGuidesDansLeStore();
-    listeIdentifiants = $guidesStore.map((guide) => guide.id.replace('/guides/', '')).sort();
+    const reponseGuides = await axios.get<Guide[]>('/api/guides?mode=travail');
+    listeIdentifiants = reponseGuides.data.map((guide) => guide.id).sort();
   });
 </script>
 
