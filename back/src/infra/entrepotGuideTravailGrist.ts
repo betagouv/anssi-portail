@@ -53,6 +53,10 @@ export class EntrepotGuideTravailGrist extends EntrepotGrist<GuideGrist> impleme
     });
   };
 
+  async tous(): Promise<Guide[]> {
+    return [];
+  }
+
   async parId(id: string): Promise<Guide | undefined> {
     const guidesGrist = await this.appelleGrist({
       filtre: { Identifiant: [id] },

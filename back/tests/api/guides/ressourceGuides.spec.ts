@@ -4,16 +4,19 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire';
+import { EntrepotGuideTravailMemoire } from '../../persistance/entrepotGuideTravailMemoire';
 import { configurationDeTestDuServeur } from '../fauxObjets';
 import { guideDevsecops, guidePublieDemain, guideZeroTrust } from '../objetsPretsALEmploi';
 
 describe('La ressource qui gère les guides', () => {
   let serveur: Express;
   let entrepotGuide: EntrepotGuideMemoire;
+  let entrepotGuideTravail: EntrepotGuideTravailMemoire;
 
   beforeEach(async () => {
     entrepotGuide = new EntrepotGuideMemoire();
-    serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotGuide });
+    entrepotGuideTravail = new EntrepotGuideTravailMemoire();
+    serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotGuide, entrepotGuideTravail });
   });
 
   describe('sur requête GET', () => {
@@ -88,6 +91,17 @@ describe('La ressource qui gère les guides', () => {
         const reponse = await request(serveur).get('/api/guides');
 
         assert.equal(reponse.body.length, 0);
+      });
+    });
+
+    describe('lorsqu’on demande des guides en mode travail', () => {
+      it('récupère les guides depuis l’entrepôt de travail', async () => {
+        await entrepotGuideTravail.ajoute(guideZeroTrust());
+
+        const reponse = await request(serveur).get('/api/guides?mode=travail');
+
+        assert.equal(reponse.body.length, 1);
+        assert.equal(reponse.body[0].id, 'zero-trust');
       });
     });
   });

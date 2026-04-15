@@ -1,16 +1,17 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
-import { guidePresentation } from './guidePresentation';
 import { filetRouteAsynchrone } from '../middleware';
+import { guidePresentation } from './guidePresentation';
 
-const ressourceGuides = ({ adaptateurEnvironnement, entrepotGuide }: ConfigurationServeur) => {
+const ressourceGuides = ({ adaptateurEnvironnement, entrepotGuide, entrepotGuideTravail }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get(
     '/',
-    filetRouteAsynchrone(async (_requete: Request, reponse: Response, suivante: NextFunction) => {
+    filetRouteAsynchrone(async (requete: Request, reponse: Response, suivante: NextFunction) => {
       try {
-        const guides = await entrepotGuide.tous();
+        const entrepot = requete.query.mode === 'travail' ? entrepotGuideTravail : entrepotGuide;
+        const guides = await entrepot.tous();
         const guidesPublies = guides
           .filter((guide) => guide.estPublie())
           .map(guidePresentation(adaptateurEnvironnement));
