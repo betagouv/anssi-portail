@@ -12,9 +12,10 @@
     padding-block: 0;
 
     hr {
+      margin: 0;
       height: 1px;
       border: 0;
-      background-color: var(--background-default-grey);
+      background-color: var(--border-default-grey);
     }
   }
 </style>
