@@ -17,6 +17,7 @@ on:
 jobs:
   compare-les-buckets:
     runs-on: ubuntu-latest
+    environment: DEPLOIEMENT_GUIDES
     steps:
       - name: Prépare rclone
         uses: AnimMouse/setup-rclone@v1
@@ -110,10 +111,19 @@ jobs:
           echo "❌ Erreur technique rclone"
           exit 1
 
-  recopie-source-vers-destination:
+  approbation:
     runs-on: ubuntu-latest
     needs: compare-les-buckets
     environment: PROD_NODE
+    steps:
+      - name: Approbation reçue
+        run: |
+          echo "GO !"
+
+  recopie-source-vers-destination:
+    runs-on: ubuntu-latest
+    needs: approbation
+    environment: DEPLOIEMENT_GUIDES
     steps:
       - name: Prépare rclone
         uses: AnimMouse/setup-rclone@v1
