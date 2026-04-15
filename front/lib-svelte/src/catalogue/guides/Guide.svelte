@@ -100,22 +100,24 @@
               <Separateur />
             </div>
           {/if}
-          <div class="actions">
-            {#if guide.lienCourt}
-              <dsfr-button
-                has-icon="true"
-                icon="links-line"
-                kind="tertiary"
-                label="Copier le lien"
-                use:clic={copierLeLienCourt}
-              ></dsfr-button>
-            {/if}
-            <BoutonFavori idItem={guide.id} />
+          <div class="zone-action">
+            <div class="actions">
+              {#if guide.lienCourt}
+                <dsfr-button
+                  has-icon="true"
+                  icon="links-line"
+                  kind="tertiary"
+                  label="Copier le lien"
+                  use:clic={copierLeLienCourt}
+                ></dsfr-button>
+              {/if}
+              <BoutonFavori idItem={guide.id} />
+            </div>
+            <p class="dates texte-mention-xs">
+              Publié le {guide.dateMiseAJourFormatee}
+            </p>
           </div>
         </div>
-        <p class="dates texte-mention-xs">
-          Publié le {guide.dateMiseAJourFormatee}
-        </p>
         <section class="presentation" id="presentation">
           <h2>Présentation</h2>
           <!-- On affiche des données provenant d'une source interne -->
@@ -230,9 +232,28 @@
             margin-bottom: 24px;
           }
 
-          .actions {
+          .zone-action {
             display: flex;
-            justify-content: flex-end;
+            flex-direction: column;
+            gap: 24px;
+
+            @include a-partir-de(md) {
+              flex-direction: row-reverse;
+              justify-content: space-between;
+            }
+            p {
+              align-self: flex-start;
+              @include a-partir-de(md) {
+                align-self: center;
+              }
+              margin: 0;
+            }
+
+            .actions {
+              display: flex;
+              justify-content: flex-end;
+              gap: 8px;
+            }
           }
         }
 
