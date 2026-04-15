@@ -19,6 +19,7 @@
   async function copierLeLienCourt() {
     if (guide?.lienCourt) {
       await navigator.clipboard.writeText(guide?.lienCourt);
+      alert('Lien copié dans le presse-papier');
     }
   }
 
