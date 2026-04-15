@@ -888,3 +888,7 @@ section.statistiques {
 address {
   font-style: normal;
 }
+
+img[src$='.svg'] {
+  align-self: center;
+}

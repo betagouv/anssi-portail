@@ -71,7 +71,6 @@ section {
       flex: 0 0;
       img {
         width: 261px;
-        align-self: center;
 
         @include a-partir-de(xl) {
           width: 432px;
@@ -255,7 +254,6 @@ section {
       height: 210px;
       margin-bottom: 24px;
       @include a-partir-de(lg) {
-        align-self: center;
         margin: 0 auto;
       }
     }
