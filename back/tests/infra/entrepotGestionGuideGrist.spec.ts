@@ -64,7 +64,7 @@ describe("L'entrepot de gestion de guide Grist", () => {
 
       await entrepotGuideTravailGrist.sauvegardeDocuments('guide1', [], ['ancien.pdf']);
 
-      const guide1 = await entrepotGuideTravailGrist.parId('guide1', { sansCache: true });
+      const guide1 = await entrepotGuideTravailGrist.parId('guide1');
       assert.deepEqual(guide1!.nomsAnciensDocuments, ['ancien.pdf']);
     });
 

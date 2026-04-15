@@ -53,10 +53,10 @@ export class EntrepotGuideTravailGrist extends EntrepotGrist<GuideGrist> impleme
     });
   };
 
-  async parId(id: string, options: { sansCache?: boolean } = {}): Promise<Guide | undefined> {
+  async parId(id: string): Promise<Guide | undefined> {
     const guidesGrist = await this.appelleGrist({
       filtre: { Identifiant: [id] },
-      sansCache: options.sansCache,
+      sansCache: true,
     });
     return guidesGrist.records.map(this.convertisGuideGrist)[0];
   }
