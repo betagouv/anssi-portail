@@ -7,13 +7,16 @@ import { ConfigurationServeur } from '../../../src/api/configurationServeur';
 import { creeServeur } from '../../../src/api/msc';
 import { AdaptateurCellar, CleDuBucket } from '../../../src/infra/adaptateurCellar';
 import { MockBusEvenement } from '../../bus/busPourLesTests';
+import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire';
 import { configurationDeTestDuServeur, fauxAdaptateurCellar } from '../fauxObjets';
+import { guideZeroTrust } from '../objetsPretsALEmploi';
 
 describe("La ressource de document d'un guide", () => {
   let serveur: Express;
   let configurationDuServeur: ConfigurationServeur;
   let busEvenements: MockBusEvenement;
   let adaptateurCellar: AdaptateurCellar;
+  let entrepotGuide: EntrepotGuideMemoire;
 
   const construitUnFluxCellar = (contenu: string = '0123456789') => ({
     flux: Readable.from([contenu]),
@@ -23,6 +26,7 @@ describe("La ressource de document d'un guide", () => {
 
   beforeEach(() => {
     busEvenements = new MockBusEvenement();
+    entrepotGuide = new EntrepotGuideMemoire();
     adaptateurCellar = {
       ...fauxAdaptateurCellar,
       getStream: async () => construitUnFluxCellar(),
@@ -31,6 +35,7 @@ describe("La ressource de document d'un guide", () => {
       ...configurationDeTestDuServeur,
       busEvenements,
       cellar: adaptateurCellar,
+      entrepotGuide,
     };
     serveur = creeServeur(configurationDuServeur);
   });
@@ -64,6 +69,18 @@ describe("La ressource de document d'un guide", () => {
         const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
         assert.equal(reponse.status, 404);
+      });
+
+      it("répond 301 et pointe vers le guide qui contenait ce document, s'il s'agit d'un ancien document", async () => {
+        configurationDuServeur.cellar.getStream = async () => undefined;
+        const guide = guideZeroTrust();
+        guide.nomsAnciensDocuments = ['ancien_anssi_back to basics_pki_1.0.pdf'];
+        await entrepotGuide.ajoute(guide);
+
+        const reponse = await request(serveur).get('/documents-guides/ancien_anssi_back to basics_pki_1.0.pdf');
+
+        assert.equal(reponse.status, 301);
+        assert.equal(reponse.headers['location'], '/guides/zero-trust');
       });
     });
 

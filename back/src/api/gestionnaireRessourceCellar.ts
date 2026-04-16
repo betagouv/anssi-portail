@@ -2,12 +2,22 @@ import { NextFunction, Request, Response } from 'express';
 import { AdaptateurCellar, CleDuBucket } from '../infra/adaptateurCellar';
 import { filetRouteAsynchrone } from './middleware';
 
-export const fabriqueGestionnaireRessourceCellar = (cellar: AdaptateurCellar, cleDuBucket: CleDuBucket) =>
+export type FonctionDocumentManquant = (reponse: Response, nomDuDocument: string) => Promise<void>;
+export const gereDocumentManquantSimplement = async (reponse: Response) => {
+  reponse.sendStatus(404);
+};
+
+export const fabriqueGestionnaireRessourceCellar = (
+  cellar: AdaptateurCellar,
+  cleDuBucket: CleDuBucket,
+  fnDocumentManquant: FonctionDocumentManquant = gereDocumentManquantSimplement
+) =>
   filetRouteAsynchrone(async (requete: Request, reponse: Response, suite: NextFunction) => {
     try {
-      const fluxCellar = await cellar.getStream(requete.params.slug as string, cleDuBucket);
+      const nomDuDocument = requete.params.slug as string;
+      const fluxCellar = await cellar.getStream(nomDuDocument, cleDuBucket);
       if (!fluxCellar) {
-        reponse.sendStatus(404);
+        await fnDocumentManquant(reponse, nomDuDocument);
         return;
       }
 
