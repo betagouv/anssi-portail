@@ -13,6 +13,7 @@ export class ConstructeurGuideGrist {
   private thematique: string | null = null;
   private readonly besoins: string[] = [];
   private lienCourt?: string;
+  private readonly nomsAnciensDocuments: string[] = [];
 
   avecLeNumeroDeLigne(numerodeLigne: number) {
     this.numeroDeLigne = numerodeLigne;
@@ -69,6 +70,11 @@ export class ConstructeurGuideGrist {
     return this;
   }
 
+  avecLancienDocument(nomAncienDocument: string) {
+    this.nomsAnciensDocuments.push(nomAncienDocument);
+    return this;
+  }
+
   construis() {
     return {
       id: this.numeroDeLigne,
@@ -79,7 +85,7 @@ export class ConstructeurGuideGrist {
         Langue: this.langue,
         Collections: this.collections,
         Liste_documents: JSON.stringify(this.listeDocuments),
-        Anciens_documents: null,
+        Anciens_documents: JSON.stringify(this.nomsAnciensDocuments),
         Date_de_mise_a_jour_s_: this.dateMiseAJour,
         Thematique: this.thematique,
         Besoins_cyber: this.besoins.length ? ['L', ...this.besoins] : [],
