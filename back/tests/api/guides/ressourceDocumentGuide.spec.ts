@@ -58,11 +58,13 @@ describe("La ressource de document d'un guide", () => {
       assert.equal(reponse.body, 'ABCD');
     });
 
-    it("répond 404 lorsque le fichier de qualification n'existe pas", async () => {
-      configurationDuServeur.cellar.getStream = async () => undefined;
-      const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
+    describe("lorsque le document de guide n'existe pas", () => {
+      it('répond 404', async () => {
+        configurationDuServeur.cellar.getStream = async () => undefined;
+        const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
-      assert.equal(reponse.status, 404);
+        assert.equal(reponse.status, 404);
+      });
     });
 
     it("répond 500 lorsque qu'une erreur technique survient", async () => {
