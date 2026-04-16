@@ -17,7 +17,6 @@ import { adaptateurHorloge } from './infra/adaptateurHorloge';
 import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
-import { adaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist';
 import { EntrepotGuideGrist } from './infra/entrepotGuideGrist';
@@ -35,6 +34,7 @@ import { EntrepotGuideTravail } from './metier/entrepotGuideTravail';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides';
+import { fabriqueAdaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
@@ -52,6 +52,7 @@ const entrepotFinancement = new EntrepotFinancementGrist({
 });
 const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
+const adaptateurRechercheEntreprise = fabriqueAdaptateurRechercheEntreprise();
 const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
   adaptateurProfilAnssi,
   adaptateurRechercheEntreprise,

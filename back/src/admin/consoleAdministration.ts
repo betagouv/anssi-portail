@@ -11,7 +11,10 @@ import { AdaptateurHachage, fabriqueAdaptateurHachage } from '../infra/adaptateu
 import { adaptateurJournalMemoire } from '../infra/adaptateurJournal';
 import { adaptateurJournalPostgres } from '../infra/adaptateurJournalPostgres';
 import { AdaptateurProfilAnssi, fabriqueAdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
-import { adaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
+import {
+  AdaptateurRechercheEntreprise,
+  fabriqueAdaptateurRechercheEntreprise,
+} from '../infra/adaptateurRechercheEntreprise';
 import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres';
 import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres';
 import { UtilisateurBDD } from '../infra/utilisateurBDD';
@@ -33,6 +36,7 @@ export class ConsoleAdministration {
   private readonly adaptateurHachage: AdaptateurHachage;
   private entrepotFavori: EntrepotFavori;
   private adaptateurProfilAnssi: AdaptateurProfilAnssi;
+  private adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   private knexJournal: Knex.Knex;
   private knexMSC: Knex.Knex;
 
@@ -42,9 +46,10 @@ export class ConsoleAdministration {
     this.adaptateurHachage = fabriqueAdaptateurHachage({
       adaptateurEnvironnement,
     });
+    this.adaptateurRechercheEntreprise = fabriqueAdaptateurRechercheEntreprise();
     this.entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
       adaptateurProfilAnssi,
-      adaptateurRechercheEntreprise,
+      adaptateurRechercheEntreprise: this.adaptateurRechercheEntreprise,
       adaptateurChiffrement: this.adaptateurChiffrement,
       adaptateurHachage: this.adaptateurHachage,
     });
@@ -369,7 +374,7 @@ export class ConsoleAdministration {
             return Promise.resolve();
           }
           const { codeRegion, codeSecteur, codeTrancheEffectif } =
-            (await adaptateurRechercheEntreprise.rechercheOrganisations(utilisateur.siretEntite, null))[0] ?? {};
+            (await this.adaptateurRechercheEntreprise.rechercheOrganisations(utilisateur.siretEntite, null))[0] ?? {};
           return trx('resultats_test')
             .where({ id })
             .update({
