@@ -46,7 +46,7 @@ export class ConsoleAdministration {
     this.adaptateurHachage = fabriqueAdaptateurHachage({
       adaptateurEnvironnement,
     });
-    this.adaptateurRechercheEntreprise = fabriqueAdaptateurRechercheEntreprise();
+    this.adaptateurRechercheEntreprise = fabriqueAdaptateurRechercheEntreprise(adaptateurEnvironnement);
     this.entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
       adaptateurProfilAnssi,
       adaptateurRechercheEntreprise: this.adaptateurRechercheEntreprise,

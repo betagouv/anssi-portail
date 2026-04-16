@@ -81,6 +81,9 @@ type AdaptateurEnvironnement = {
       afficheSimulateur: () => boolean;
     };
   };
+  rechercheEntreprise: () => {
+    apiUrl: () => string;
+  };
   nodeEnv: () => string | undefined;
   versionDeConstruction: () => string;
 };
@@ -248,6 +251,9 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       afficheCyFun23: () => process.env.FEATURE_FLAG_NIS2_CYFUN23 === 'true',
       afficheSimulateur: () => process.env.FEATURE_FLAG_NIS2_SIMULATEUR === 'true',
     }),
+  }),
+  rechercheEntreprise: () => ({
+    apiUrl: () => process.env.RECHERCHE_ENTREPRISE_API_URL || '',
   }),
   nodeEnv: () => process.env.NODE_ENV,
   versionDeConstruction: () => (process.env.CC_COMMIT_ID || '1').substring(0, 8),
