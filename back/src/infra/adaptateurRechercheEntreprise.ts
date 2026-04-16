@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { regions } from '../metier/referentielRegions';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { RechercheEntrepriseAvecCache } from './RechercheEntrepriseAvecCache';
 
 export interface AdaptateurRechercheEntreprise {
@@ -86,9 +87,7 @@ type ResultatSirene = {
   activite_principale: string;
 };
 
-const API_URL = process.env.RECHERCHE_ENTREPRISE_API_URL || 'https://recherche-entreprises.api.gouv.fr/search';
-
-const rechercheSansCache = {
+const creerRechercheSansCache = (apiUrl: string): AdaptateurRechercheEntreprise => ({
   async rechercheOrganisations(terme: string, departement: string | null): Promise<ResultatRechercheEntreprise[]> {
     const etablissementEnFrance = (resultat: ResultatSirene) => {
       const aUnEtablissement = resultat.matching_etablissements && resultat.matching_etablissements.length > 0;
@@ -99,7 +98,7 @@ const rechercheSansCache = {
     const siegeEnFrance = (resultat: ResultatSirene) => resultat.siege.departement !== null;
 
     try {
-      const reponse = await axios.get<{ results: ResultatSirene[] }>(API_URL, {
+      const reponse = await axios.get<{ results: ResultatSirene[] }>(apiUrl, {
         params: {
           q: terme,
           ...(departement && { departement }),
@@ -129,7 +128,7 @@ const rechercheSansCache = {
       return [];
     }
   },
-};
+});
 
 const rechercheFactice: AdaptateurRechercheEntreprise = {
   async rechercheOrganisations(terme: string, departement: string | null): Promise<ResultatRechercheEntreprise[]> {
@@ -160,7 +159,8 @@ const rechercheFactice: AdaptateurRechercheEntreprise = {
   },
 };
 
-export const fabriqueAdaptateurRechercheEntreprise = () => {
-  const adaptateur = process.env.RECHERCHE_ENTREPRISES_API_URL ? rechercheSansCache : rechercheFactice;
+export const fabriqueAdaptateurRechercheEntreprise = (adaptateurEnvironnement: AdaptateurEnvironnement) => {
+  const apiUrl = adaptateurEnvironnement.rechercheEntreprise().apiUrl();
+  const adaptateur = apiUrl ? creerRechercheSansCache(apiUrl) : rechercheFactice;
   return new RechercheEntrepriseAvecCache(adaptateur);
 };

@@ -52,7 +52,7 @@ const entrepotFinancement = new EntrepotFinancementGrist({
 });
 const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
-const adaptateurRechercheEntreprise = fabriqueAdaptateurRechercheEntreprise();
+const adaptateurRechercheEntreprise = fabriqueAdaptateurRechercheEntreprise(adaptateurEnvironnement);
 const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
   adaptateurProfilAnssi,
   adaptateurRechercheEntreprise,

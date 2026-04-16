@@ -168,6 +168,9 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     }),
   }),
   nodeEnv: () => 'developpement',
+  rechercheEntreprise: () => ({
+    apiUrl: () => 'http://recherche-entreprise',
+  }),
 };
 
 const vraiMiddleware = fabriqueMiddleware({
