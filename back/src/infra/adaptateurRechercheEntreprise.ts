@@ -86,6 +86,8 @@ type ResultatSirene = {
   activite_principale: string;
 };
 
+const API_URL = process.env.RECHERCHE_ENTREPRISE_API_URL || 'https://recherche-entreprises.api.gouv.fr/search';
+
 const rechercheSansCache = {
   async rechercheOrganisations(terme: string, departement: string | null): Promise<ResultatRechercheEntreprise[]> {
     const etablissementEnFrance = (resultat: ResultatSirene) => {
@@ -97,20 +99,17 @@ const rechercheSansCache = {
     const siegeEnFrance = (resultat: ResultatSirene) => resultat.siege.departement !== null;
 
     try {
-      const reponse = await axios.get<{ results: ResultatSirene[] }>(
-        'https://recherche-entreprises.api.gouv.fr/search',
-        {
-          params: {
-            q: terme,
-            ...(departement && { departement }),
-            per_page: 25,
-            page: 1,
-            limite_matching_etablissements: 1,
-            est_entrepreneur_individuel: false,
-            mtm_campaign: 'mes-services-cyber',
-          },
-        }
-      );
+      const reponse = await axios.get<{ results: ResultatSirene[] }>(API_URL, {
+        params: {
+          q: terme,
+          ...(departement && { departement }),
+          per_page: 25,
+          page: 1,
+          limite_matching_etablissements: 1,
+          est_entrepreneur_individuel: false,
+          mtm_campaign: 'mes-services-cyber',
+        },
+      });
 
       const estUneRechercheParSiret = terme.match('^[0-9 ]+$');
 
@@ -132,4 +131,36 @@ const rechercheSansCache = {
   },
 };
 
-export const fabriqueAdaptateurRechercheEntreprise = () => new RechercheEntrepriseAvecCache(rechercheSansCache);
+const rechercheFactice: AdaptateurRechercheEntreprise = {
+  async rechercheOrganisations(terme: string, departement: string | null): Promise<ResultatRechercheEntreprise[]> {
+    return [
+      {
+        nom: `Entreprise Factice - ${terme}`,
+        departement: departement || '75',
+        siret: '12345678901234',
+        codeTrancheEffectif: '12',
+        codeSecteur: '6201Z',
+        codeRegion: '11',
+        estCollectivite: false,
+        estAssociation: false,
+        codeActivite: '6202A',
+      },
+      {
+        nom: `Autre Entreprise Factice - ${terme}`,
+        departement: departement || '69',
+        siret: '98765432109876',
+        codeTrancheEffectif: '22',
+        codeSecteur: '6202A',
+        codeRegion: '84',
+        estCollectivite: false,
+        estAssociation: false,
+        codeActivite: '6202A',
+      },
+    ];
+  },
+};
+
+export const fabriqueAdaptateurRechercheEntreprise = () => {
+  const adaptateur = process.env.RECHERCHE_ENTREPRISES_API_URL ? rechercheSansCache : rechercheFactice;
+  return new RechercheEntrepriseAvecCache(adaptateur);
+};
