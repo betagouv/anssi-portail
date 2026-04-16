@@ -132,4 +132,4 @@ const rechercheSansCache = {
   },
 };
 
-export const adaptateurRechercheEntreprise = new RechercheEntrepriseAvecCache(rechercheSansCache);
+export const fabriqueAdaptateurRechercheEntreprise = () => new RechercheEntrepriseAvecCache(rechercheSansCache);
