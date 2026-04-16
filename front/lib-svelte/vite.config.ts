@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { createLogger, defineConfig } from 'vite';
 
@@ -14,7 +15,15 @@ loggerPersonnalise.warnOnce = (msg, options) => {
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [svelte()],
+  plugins: [
+    svelte(),
+    sentryVitePlugin({
+      disable: !process.env.SENTRY_AUTH_TOKEN || process.env.NODE_ENV !== 'production',
+      project: process.env.SENTRY_PROJET,
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      url: process.env.SENTRY_URL,
+    }),
+  ],
   build: {
     cssCodeSplit: false,
     rollupOptions: {
@@ -62,6 +71,8 @@ export default defineConfig({
         assetFileNames: `assets/[name].[ext]`,
       },
     },
+
+    sourcemap: true,
   },
   css: {
     preprocessorOptions: {
