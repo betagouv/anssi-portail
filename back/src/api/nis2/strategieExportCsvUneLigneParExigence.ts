@@ -5,10 +5,12 @@ import {
   ExigenceCyFun23,
   ExigenceISO,
   ExigenceNIS2,
+  Langue,
   Referentiel,
 } from '../../metier/nis2/exigence';
 
 class ConvertisseurCsvExigence<T extends Exigence> {
+  langue: Langue = 'FR';
   entetes(_exigences: T[]): { id: string; title: string }[] {
     return [
       { id: 'reference', title: 'Référence' },
@@ -19,7 +21,7 @@ class ConvertisseurCsvExigence<T extends Exigence> {
   enLigne(exigence: T): Record<string, string> {
     return {
       reference: exigence.reference,
-      contenu: exigence.contenu,
+      contenu: this.langue === 'EN' ? exigence.contenuEnAnglais : exigence.contenu,
     };
   }
 
@@ -28,7 +30,8 @@ class ConvertisseurCsvExigence<T extends Exigence> {
       return {
         ...valeurPrecedente,
         [`reference_${referentiel.toLowerCase()}_${index + 1}`]: valeurActuelle.reference,
-        [`contenu_${referentiel.toLowerCase()}_${index + 1}`]: valeurActuelle.contenu,
+        [`contenu_${referentiel.toLowerCase()}_${index + 1}`]:
+          this.langue === 'EN' ? valeurActuelle.contenuEnAnglais : valeurActuelle.contenu,
       };
     }, {});
   }
@@ -237,9 +240,10 @@ export class StrategieExportCsvUneLigneParExigence {
     return convertisseurCsv.entetes(exigences);
   };
 
-  lignes = (exigences: Exigence[]) =>
+  lignes = (exigences: Exigence[], langue: Langue = 'FR') =>
     exigences.map((exigence) => {
       const convertisseurCsv = this.convertisseurCsv(exigence);
+      convertisseurCsv.langue = langue;
       return convertisseurCsv.enLigne(exigence);
     });
 
