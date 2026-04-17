@@ -87,6 +87,7 @@ describe('La ressource des Exigences NIS 2', () => {
           objectifSecurite: 'Obj 1 : recensement',
           thematique: 'Recensement des SI',
           contenu: 'L’entité liste l’ensemble…',
+          contenuEnAnglais: "Requirement's content",
         })
       );
 
@@ -113,11 +114,13 @@ describe('La ressource des Exigences NIS 2', () => {
             objectifSecurite: '',
             thematique: '',
             contenu: '',
+            contenuEnAnglais: "Requirement's content",
             referentielCompare: 'ISO',
             correspondance: new Correspondance('faible', 'Des observations', [
               {
                 reference: 'reference_1',
                 contenu: 'contenu 1',
+                contenuEnAnglais: "Requirement's content",
               },
             ]),
           })
@@ -145,11 +148,13 @@ describe('La ressource des Exigences NIS 2', () => {
             objectifSecurite: '',
             thematique: '',
             contenu: '',
+            contenuEnAnglais: "Requirement's content",
             referentielCompare: 'AE',
             correspondance: new Correspondance('faible', 'Des observations', [
               {
                 reference: 'reference_1',
                 contenu: 'contenu 1',
+                contenuEnAnglais: "Requirement's content",
               },
             ]),
           })
@@ -177,11 +182,13 @@ describe('La ressource des Exigences NIS 2', () => {
             objectifSecurite: '',
             thematique: '',
             contenu: '',
+            contenuEnAnglais: "Requirement's content",
             referentielCompare: 'CyFun23',
             correspondance: new Correspondance('faible', 'Des observations', [
               {
                 reference: 'reference_1',
                 contenu: 'contenu 1',
+                contenuEnAnglais: "Requirement's content",
               },
             ]),
           })
@@ -210,6 +217,7 @@ describe('La ressource des Exigences NIS 2', () => {
           chapitre: '5.1 Leadership et engagement',
           reference: '27001:2022-5.1 Titre de l’exigence',
           contenu: '5.1 Titre de l’exigence',
+          contenuEnAnglais: "Requirement's content",
           correspondance: new Correspondance('faible', 'Des observations', []),
         })
       );
@@ -239,6 +247,7 @@ describe('La ressource des Exigences NIS 2', () => {
         new ExigenceAE({
           reference: '1.2.3',
           contenu: 'Contenu de l’exigence AE',
+          contenuEnAnglais: "Requirement's content",
           correspondance: new Correspondance('faible', 'Des observations', []),
         })
       );
@@ -266,6 +275,7 @@ describe('La ressource des Exigences NIS 2', () => {
         new ExigenceCyFun23({
           reference: 'ID.AM-1.3',
           contenu: 'Lorsque du matériel non autorisé est détecté, ...',
+          contenuEnAnglais: 'When unauthorized hardware is detected...',
           fonction: 'Identifier',
           estMesureCle: true,
           niveauAssurance: 'Important',
@@ -291,6 +301,33 @@ describe('La ressource des Exigences NIS 2', () => {
           },
         },
       ]);
+    });
+
+    describe('lorsque la langue est précisée', () => {
+      it('renvoie le contenu en anglais', async () => {
+        await entrepotExigence.ajoute(
+          new ExigenceNIS2({
+            reference: '',
+            entitesCible: [],
+            objectifSecurite: '',
+            thematique: '',
+            contenu: '',
+            contenuEnAnglais: 'This is awesome',
+            referentielCompare: 'CyFun23',
+            correspondance: new Correspondance('faible', 'Des observations', [
+              {
+                reference: 'reference_1',
+                contenu: 'contenu 1',
+                contenuEnAnglais: 'new content',
+              },
+            ]),
+          })
+        );
+        const { body } = await request(serveur).get('/api/exigences-nis2').query({ langue: 'EN' });
+
+        assert.equal(body[0].contenu, 'This is awesome');
+        assert.equal(body[0].correspondances['CyFun23'].exigences[0].contenu, 'new content');
+      });
     });
   });
 });

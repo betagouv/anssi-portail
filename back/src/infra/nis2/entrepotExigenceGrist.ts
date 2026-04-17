@@ -164,6 +164,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         return new ExigenceNIS2({
           reference: exigenceGrist.fields.Reference,
           contenu: exigenceGrist.fields.Contenu,
+          contenuEnAnglais: '',
           thematique: exigenceGrist.fields.Thematique ?? '',
           entitesCible: exigenceGrist.fields.EIEE
             ? (JSON.parse(exigenceGrist.fields.EIEE) as string[])
@@ -184,6 +185,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
           norme: exigenceGrist.fields.Norme ?? '',
           chapitre: exigenceGrist.fields.Chapitre ?? '',
           contenu: exigenceGrist.fields.Contenu,
+          contenuEnAnglais: '',
           correspondance: fabriqueCorrespondance(exigenceGrist),
         });
       });
@@ -194,6 +196,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         return new ExigenceAE({
           reference: exigenceGrist.fields.Reference,
           contenu: exigenceGrist.fields.Contenu,
+          contenuEnAnglais: '',
           correspondance: fabriqueCorrespondance(exigenceGrist),
         });
       });
@@ -204,6 +207,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         return new ExigenceCyFun23({
           reference: exigenceGrist.fields.Reference,
           contenu: exigenceGrist.fields.Contenu,
+          contenuEnAnglais: '',
           fonction: this.traduitFonction(exigenceGrist.fields.Fonction),
           niveauAssurance: this.traduitNiveauAssurance(exigenceGrist.fields.NiveauAssurance),
           estMesureCle: Boolean(exigenceGrist.fields.EstMesureCle),
