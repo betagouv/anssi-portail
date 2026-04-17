@@ -105,6 +105,49 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
       assert.equal('', lignes[2]);
     });
 
+    it('en prenant en compte la langue fournie', async () => {
+      await entrepotExigence.ajoute(
+        new ExigenceNIS2({
+          reference: '1.1-EI/EE',
+          entitesCible: ['EntiteEssentielle', 'EntiteImportante'],
+          objectifSecurite: 'Obj 1 : recensement',
+          thematique: 'Recensement des SI',
+          contenu: 'L’entité liste l’ensemble…',
+          contenuEnAnglais: 'The entity lists...',
+          referentielCompare: 'ISO',
+          correspondance: new Correspondance('faible', 'Des observations', [
+            {
+              reference: 'reference_1',
+              contenu: 'contenu 1',
+              contenuEnAnglais: 'first',
+            },
+            {
+              reference: 'reference_2',
+              contenu: 'contenu 2',
+              contenuEnAnglais: 'second',
+            },
+          ]),
+        })
+      );
+
+      const { text } = await request(serveur).get('/api/exigences-nis2.csv').query({ cible: 'ISO', langue: 'EN' });
+
+      assert.equal('string', typeof text);
+      const lignes = text.split('\n');
+      assert.equal(lignes.length, 3);
+      assert.equal(
+        lignes[0].slice(1),
+        '"Référence";"Contenu";"Objectif";"Thématique";' +
+          '"Cibles";"Correspondance";"Observations";"Référence ISO (1)";"Contenu ISO (1)";"Référence ISO (2)";"Contenu ISO (2)"'
+      );
+      assert.equal(
+        lignes[1],
+        '"1.1-EI/EE";"The entity lists...";"Obj 1 : recensement";"Recensement des SI";' +
+          '"EntiteEssentielle, EntiteImportante";"faible";"Des observations";"reference_1";"first";"reference_2";"second"'
+      );
+      assert.equal('', lignes[2]);
+    });
+
     describe('renvoie le bon nom de fichier', () => {
       it('pour les exigences NIS2 uniquement', async () => {
         const { headers } = await request(serveur).get('/api/exigences-nis2.csv');
@@ -153,6 +196,24 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
 
       it('pour les exigences CyFun23 comparées à NIS2', async () => {
         const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=CyFun23&cible=NIS2');
+
+        assert.equal(headers['content-disposition'], 'attachment; filename="Comparaison_CyFun23_ReCyf-NIS2.csv"');
+      });
+
+      it('inclue la langue lorsqu’elle est fournie', async () => {
+        const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=CyFun23&cible=NIS2&langue=EN');
+
+        assert.equal(headers['content-disposition'], 'attachment; filename="Comparaison_CyFun23_ReCyf-NIS2-EN.csv"');
+      });
+
+      it("sans préciser la langue lorsqu'on demande le fichier en français", async () => {
+        const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=CyFun23&cible=NIS2&langue=FR');
+
+        assert.equal(headers['content-disposition'], 'attachment; filename="Comparaison_CyFun23_ReCyf-NIS2.csv"');
+      });
+
+      it('ignore les langue inconnues', async () => {
+        const { headers } = await request(serveur).get('/api/exigences-nis2.csv?source=CyFun23&cible=NIS2&langue=ES');
 
         assert.equal(headers['content-disposition'], 'attachment; filename="Comparaison_CyFun23_ReCyf-NIS2.csv"');
       });

@@ -1,35 +1,40 @@
 import { createObjectCsvStringifier } from 'csv-writer';
 import { Router } from 'express';
-import { Referentiel, versReferentiel } from '../../metier/nis2/exigence';
+import { Referentiel, versLangueConnue, versReferentiel } from '../../metier/nis2/exigence';
 import { ConfigurationServeur } from '../configurationServeur';
-import { StrategieExportCsvUneLigneParExigence } from './strategieExportCsvUneLigneParExigence';
 import { filetRouteAsynchrone } from '../middleware';
+import { StrategieExportCsvUneLigneParExigence } from './strategieExportCsvUneLigneParExigence';
 
 export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationServeur) => {
   const routeur = Router();
 
-  function nomFichierCsv(referentielSource: Referentiel, referentielCible: Referentiel) {
+  function nomFichierCsv(referentielSource: Referentiel, referentielCible: Referentiel, langue?: string) {
+    const avecLangue = (nom: string) => {
+      const langueConnue = versLangueConnue(langue);
+      return `${nom}${langueConnue === 'FR' ? '' : '-' + langueConnue}`;
+    };
+
     if (referentielCible === 'ISO') {
-      return 'Comparaison_ReCyf-NIS2_ISO';
+      return avecLangue('Comparaison_ReCyf-NIS2_ISO');
     } else if (referentielCible === 'AE') {
-      return 'Comparaison_ReCyf-NIS2_Annexe_Reglement_execution_2024_2690';
+      return avecLangue('Comparaison_ReCyf-NIS2_Annexe_Reglement_execution_2024_2690');
     } else if (referentielCible === 'CyFun23') {
-      return 'Comparaison_ReCyf-NIS2_CyFun23';
+      return avecLangue('Comparaison_ReCyf-NIS2_CyFun23');
     } else if (referentielSource === 'ISO') {
-      return 'Comparaison_ISO_ReCyf-NIS2';
+      return avecLangue('Comparaison_ISO_ReCyf-NIS2');
     } else if (referentielSource === 'AE') {
-      return 'Comparaison_Annexe_Reglement_execution_2024_2690_ReCyf-NIS2';
+      return avecLangue('Comparaison_Annexe_Reglement_execution_2024_2690_ReCyf-NIS2');
     } else if (referentielSource === 'CyFun23') {
-      return 'Comparaison_CyFun23_ReCyf-NIS2';
+      return avecLangue('Comparaison_CyFun23_ReCyf-NIS2');
     } else {
-      return 'Liste_des_exigences_applicables_a_NIS2';
+      return avecLangue('Liste_des_exigences_applicables_a_NIS2');
     }
   }
 
   routeur.get(
     '/',
     filetRouteAsynchrone(async (requete, reponse) => {
-      const { source, cible } = requete.query;
+      const { source, cible, langue } = requete.query;
       if ((source && typeof source !== 'string') || (cible && typeof cible !== 'string')) {
         return reponse.status(400).send('Les paramètres doivent être des chaînes de caractères');
       }
@@ -52,7 +57,7 @@ export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationSer
 
       const csv = `\uFEFF${stringifier.getHeaderString()}${stringifier.stringifyRecords(strategieExportCsv.lignes(exigences))}`;
 
-      reponse.attachment(nomFichierCsv(referentielSource, referentielCible) + '.csv').send(csv);
+      reponse.attachment(nomFichierCsv(referentielSource, referentielCible, langue as string) + '.csv').send(csv);
     })
   );
 
