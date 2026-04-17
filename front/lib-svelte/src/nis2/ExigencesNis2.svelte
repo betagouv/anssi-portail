@@ -20,12 +20,13 @@
   let mode = $state<'LISTE' | Comparaison>('LISTE');
 
   let referentielSelectionne = $state<ReferentielSelectionne | undefined>(undefined);
+  let langueSelectionnee = $state<'FR' | 'EN'>('FR');
   let estBureau = $state(false);
   let chargement = $state(false);
 
   const recupereLesExigences = async () => {
     const axiosResponse = await axios.get<Record<string, unknown>[]>('/api/exigences-nis2', {
-      params: { source, cible },
+      params: { source, cible, langue: langueSelectionnee },
     });
     exigences = axiosResponse.data.map((e) => fabriqueDExigence(source ?? 'NIS2', cible, e));
     $exigencesStore = exigences;
@@ -111,6 +112,7 @@
     <Panneau
       source={sensComparaison === 'NIS2_VERS_CIBLE' ? 'NIS2' : (referentielSelectionne ?? 'NIS2')}
       bind:referentielSelectionne
+      bind:langueSelectionnee
       bind:sensComparaison
       {estBureau}
       {featureFlagNis2CyFun23}
