@@ -70,15 +70,18 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
           objectifSecurite: 'Obj 1 : recensement',
           thematique: 'Recensement des SI',
           contenu: 'L’entité liste l’ensemble…',
+          contenuEnAnglais: '',
           referentielCompare: 'ISO',
           correspondance: new Correspondance('faible', 'Des observations', [
             {
               reference: 'reference_1',
               contenu: 'contenu 1',
+              contenuEnAnglais: '',
             },
             {
               reference: 'reference_2',
               contenu: 'contenu 2',
+              contenuEnAnglais: '',
             },
           ]),
         })

@@ -2,19 +2,28 @@ export type CategorieEntite = 'EntiteEssentielle' | 'EntiteImportante';
 
 const referentiels = ['NIS2', 'ISO', 'AE', 'CyFun23'] as const;
 export type Referentiel = (typeof referentiels)[number];
+const langues = ['EN', 'FR'] as const;
+export type Langue = (typeof langues)[number];
 
 export const versReferentiel = (valeur?: string): Referentiel => {
   if (!valeur) return 'NIS2';
   return referentiels.find((r) => r.toUpperCase() === valeur.toUpperCase()) ?? 'NIS2';
 };
 
+export const versLangueConnue = (valeur?: string): Langue => {
+  if (!valeur) return 'FR';
+  return langues.find((l) => l.toUpperCase() === valeur.toUpperCase()) ?? 'FR';
+};
+
 export class Exigence {
   reference: string;
   contenu: string;
+  contenuEnAnglais: string;
 
-  constructor(parametres: { reference: string; contenu: string }) {
+  constructor(parametres: { reference: string; contenu: string; contenuEnAnglais: string }) {
     this.reference = parametres.reference;
     this.contenu = parametres.contenu;
+    this.contenuEnAnglais = parametres.contenuEnAnglais;
   }
 }
 
@@ -48,6 +57,7 @@ export class ExigenceNIS2 extends Exigence implements ExigenceAvecCorrespondance
     objectifSecurite: string;
     thematique: string;
     contenu: string;
+    contenuEnAnglais: string;
     referentielCompare?: Referentiel;
     correspondance?: Correspondance;
   }) {
@@ -76,6 +86,7 @@ export class ExigenceISO extends Exigence implements ExigenceAvecCorrespondances
     norme: string;
     chapitre: string;
     contenu: string;
+    contenuEnAnglais: string;
     correspondance: Correspondance;
   }) {
     super(parametres);
@@ -92,7 +103,12 @@ export class ExigenceAE extends Exigence implements ExigenceAvecCorrespondances 
     NIS2: Correspondance;
   };
 
-  constructor(parametres: { reference: string; contenu: string; correspondance: Correspondance }) {
+  constructor(parametres: {
+    reference: string;
+    contenu: string;
+    contenuEnAnglais: string;
+    correspondance: Correspondance;
+  }) {
     super(parametres);
     this.correspondances = {
       NIS2: parametres.correspondance,
@@ -115,6 +131,7 @@ export class ExigenceCyFun23 extends Exigence implements ExigenceAvecCorresponda
   constructor(parametres: {
     reference: string;
     contenu: string;
+    contenuEnAnglais: string;
     fonction?: CyFun23Fonction;
     estMesureCle: boolean;
     niveauAssurance?: CyFun23NiveauAssurance;

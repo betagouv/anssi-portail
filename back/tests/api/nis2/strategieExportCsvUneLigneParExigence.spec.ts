@@ -28,6 +28,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         new ExigenceNIS2({
           reference: '',
           contenu: '',
+          contenuEnAnglais: '',
           entitesCible: [],
           thematique: '',
           objectifSecurite: '',
@@ -48,6 +49,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         new ExigenceNIS2({
           reference: 'ref',
           contenu: 'contenu',
+          contenuEnAnglais: '',
           entitesCible: ['EntiteEssentielle'],
           thematique: 'thème',
           objectifSecurite: 'objectif',
@@ -103,6 +105,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         new ExigenceNIS2({
           reference: '',
           contenu: '',
+          contenuEnAnglais: '',
           entitesCible: [],
           thematique: '',
           objectifSecurite: '',
@@ -190,6 +193,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         new ExigenceNIS2({
           reference: '',
           contenu: '',
+          contenuEnAnglais: '',
           entitesCible: [],
           thematique: '',
           objectifSecurite: '',
@@ -269,6 +273,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         new ExigenceNIS2({
           reference: '',
           contenu: '',
+          contenuEnAnglais: '',
           entitesCible: [],
           thematique: '',
           objectifSecurite: '',
@@ -356,6 +361,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         new ExigenceAE({
           reference: '',
           contenu: '',
+          contenuEnAnglais: '',
           correspondance: {
             exigences: [
               exigenceNIS2SansCorrespondance('refnis2-1', 'contenunis2-1'),
@@ -438,6 +444,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         new ExigenceISO({
           reference: '',
           contenu: '',
+          contenuEnAnglais: '',
           norme: '271',
           chapitre: '9',
           correspondance: {
@@ -517,6 +524,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         new ExigenceCyFun23({
           reference: '',
           contenu: '',
+          contenuEnAnglais: '',
           fonction: 'Détecter',
           estMesureCle: true,
           niveauAssurance: 'Basique',
@@ -555,6 +563,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         new ExigenceCyFun23({
           reference: '',
           contenu: '',
+          contenuEnAnglais: '',
           fonction: 'Détecter',
           estMesureCle: false,
           niveauAssurance: 'Basique',
@@ -576,6 +585,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         new ExigenceCyFun23({
           reference: '',
           contenu: '',
+          contenuEnAnglais: '',
           fonction: undefined,
           estMesureCle: false,
           niveauAssurance: undefined,
@@ -599,6 +609,7 @@ const exigenceAEAvecCorrespondancesNIS2 = (nombreCorrespondances: number) =>
   new ExigenceAE({
     reference: '',
     contenu: '',
+    contenuEnAnglais: '',
     correspondance: {
       exigences: new Array(nombreCorrespondances).map((_) => exigenceNIS2SansCorrespondance()),
       niveau: 'faible',
@@ -610,6 +621,7 @@ const exigenceISOAvecCorrespondancesNIS2 = (nombreCorrespondances: number) =>
   new ExigenceISO({
     reference: '',
     contenu: '',
+    contenuEnAnglais: '',
     norme: '2701',
     chapitre: 'chapitre 6',
     correspondance: {
@@ -624,6 +636,7 @@ const exigenceCyFun23AvecCorrespondancesNIS2 = (nombreCorrespondances: number) =
   new ExigenceCyFun23({
     reference: '',
     contenu: '',
+    contenuEnAnglais: '',
     fonction: 'Détecter',
     estMesureCle: true,
     niveauAssurance: 'Basique',
@@ -638,6 +651,7 @@ const exigenceNIS2SansCorrespondance = (reference: string = '', contenu: string 
   new ExigenceNIS2({
     reference,
     contenu,
+    contenuEnAnglais: '',
     entitesCible: [],
     thematique: '',
     objectifSecurite: '',
@@ -660,6 +674,7 @@ const exigenceNIS2AvecCorrespondances = (
   new ExigenceNIS2({
     reference: '',
     contenu: '',
+    contenuEnAnglais: '',
     entitesCible: [],
     thematique: '',
     objectifSecurite: '',
@@ -675,6 +690,7 @@ const exigenceISO = (reference: string = '', contenu: string = '') =>
   new ExigenceISO({
     reference,
     contenu,
+    contenuEnAnglais: '',
     chapitre: '',
     norme: '',
     correspondance: { exigences: [], niveau: 'NA', observations: '' },
@@ -684,6 +700,7 @@ const exigenceAE = (reference: string = '', contenu: string = '') =>
   new ExigenceAE({
     reference,
     contenu,
+    contenuEnAnglais: '',
     correspondance: { exigences: [], niveau: 'NA', observations: '' },
   });
 
@@ -691,6 +708,7 @@ const exigenceCyFun23 = (reference: string = '', contenu: string = '') =>
   new ExigenceCyFun23({
     reference,
     contenu,
+    contenuEnAnglais: '',
     fonction: 'Détecter',
     niveauAssurance: 'Basique',
     estMesureCle: true,
