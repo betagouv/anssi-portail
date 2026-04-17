@@ -89,6 +89,7 @@ describe("L'entrepot d'exigence Grist", () => {
                   Objectif_de_securite: "Objectif de sécurité 1: Recensement des systèmes d'information",
                   Thematique: 'Recensement des SI',
                   Contenu: 'L’entité liste l’ensemble de ses activités',
+                  Content: 'The entity lists all its activities',
                   EIEE: '["EI","EE"]',
                 },
               },
@@ -99,6 +100,7 @@ describe("L'entrepot d'exigence Grist", () => {
                     "Objectif de sécurité 2: Mise en œuvre d'un cadre de gouvernance de la sécurité numérique",
                   Thematique: 'Rôles et responsabilités',
                   Contenu: 'L’entité définit et met en œuvre une organisation',
+                  Content: 'The entity defines and implements an organization',
                   EIEE: '["EE"]',
                 },
               },
@@ -111,6 +113,7 @@ describe("L'entrepot d'exigence Grist", () => {
 
       assert.equal(exigences[0].reference, '1.1-EI/EE');
       assert.equal(exigences[0].contenu, 'L’entité liste l’ensemble de ses activités');
+      assert.equal(exigences[0].contenuEnAnglais, 'The entity lists all its activities');
       assert.equal(exigences[0].thematique, 'Recensement des SI');
       assert.equal(exigences[0].objectifSecurite, "Objectif de sécurité 1: Recensement des systèmes d'information");
       assert.deepEqual(exigences[0].entitesCible, ['EntiteImportante', 'EntiteEssentielle']);
@@ -128,11 +131,12 @@ describe("L'entrepot d'exigence Grist", () => {
                   Objectif_de_securite: "Objectif de sécurité 1: Recensement des systèmes d'information",
                   Thematique: 'Recensement des SI',
                   Contenu: 'L’entité liste l’ensemble de ses activités',
+                  Content: 'The entity lists all its activities',
                   EIEE: '["EI","EE"]',
                   Niveau: 'O',
                   Observations: 'Des observations',
                   ExigencesCible:
-                    '[{"reference":"","contenu":"27001:2022-5.1 Leadership et engagement"},{"reference":"","contenu":"27002:2022-5.4 Responsabilités de la direction"}]',
+                    '[{"reference":"","contenu":"27001:2022-5.1 Leadership et engagement","contenuEnAnglais": "5.1 Leadership et commitment"},{"reference":"","contenu":"5.3 Rôles, responsabilités et autorités au sein de l\'organisation", "contenuEnAnglais": "5.3 Organizational roles, responsibilities and authorities"}]',
                 },
               },
               {
@@ -141,11 +145,12 @@ describe("L'entrepot d'exigence Grist", () => {
                   Objectif_de_securite: "Objectif de sécurité 1: Recensement des systèmes d'information",
                   Thematique: 'Recensement des SI',
                   Contenu: 'L’entité liste l’ensemble de ses activités',
+                  Content: 'The entity defines and implements an organization',
                   EIEE: '["EI","EE"]',
                   Niveau: 'V',
                   Observations: 'Des observations',
                   ExigencesCible:
-                    '[{"reference":"","contenu":"27001:2022-5.1 Leadership et engagement"},{"reference":"","contenu":"27002:2022-5.4 Responsabilités de la direction"}]',
+                    '[{"reference":"","contenu":"27001:2022-5.1 Leadership et engagement","contenuEnAnglais": "5.1 Leadership et commitment"},{"reference":"","contenu":"5.3 Rôles, responsabilités et autorités au sein de l\'organisation", "contenuEnAnglais": "5.3 Organizational roles, responsibilities and authorities"}]',
                 },
               },
               {
@@ -154,11 +159,12 @@ describe("L'entrepot d'exigence Grist", () => {
                   Objectif_de_securite: "Objectif de sécurité 1: Recensement des systèmes d'information",
                   Thematique: 'Recensement des SI',
                   Contenu: 'L’entité liste l’ensemble de ses activités',
+                  Content: 'The entity lists all its activities',
                   EIEE: '["EI","EE"]',
                   Niveau: 'R',
                   Observations: 'Des observations',
                   ExigencesCible:
-                    '[{"reference":"","contenu":"27001:2022-5.1 Leadership et engagement"},{"reference":"","contenu":"27002:2022-5.4 Responsabilités de la direction"}]',
+                    '[{"reference":"","contenu":"27001:2022-5.1 Leadership et engagement","contenuEnAnglais": "5.1 Leadership et commitment"},{"reference":"","contenu":"5.3 Rôles, responsabilités et autorités au sein de l\'organisation", "contenuEnAnglais": "5.3 Organizational roles, responsibilities and authorities"}]',
                 },
               },
             ] satisfies ExigenceGrist[],
@@ -174,10 +180,12 @@ describe("L'entrepot d'exigence Grist", () => {
         {
           reference: '',
           contenu: '27001:2022-5.1 Leadership et engagement',
+          contenuEnAnglais: '5.1 Leadership et commitment',
         },
         {
           reference: '',
-          contenu: '27002:2022-5.4 Responsabilités de la direction',
+          contenu: "5.3 Rôles, responsabilités et autorités au sein de l'organisation",
+          contenuEnAnglais: '5.3 Organizational roles, responsibilities and authorities',
         },
       ]);
       assert.equal(exigences[1].correspondances['ISO']?.niveau, 'élevé');
@@ -197,10 +205,11 @@ describe("L'entrepot d'exigence Grist", () => {
                   Norme: 'ISO 27001',
                   Chapitre: '5 Leadership',
                   Contenu: '5.1 Leadership et engagement',
+                  Content: '5.1 Leadership et commitment',
                   Niveau: 'O',
                   Observations: 'Des observations',
                   ExigencesCible:
-                    '[{"reference":"2.A.1-EI/EE","contenu":"Le dirigeant exécutif de l’entité..."},{"reference":"2.A.3-EI/EE","contenu":"L’entité définit et met en œuvre..."}]',
+                    '[{"reference":"2.A.1-EI/EE","contenu":"Le dirigeant exécutif de l’entité...", "contenuEnAnglais": "The entity’s executive officer..."},{"reference":"2.A.3-EI/EE","contenu":"L’entité définit et met en œuvre...", "contenuEnAnglais": "The entity defines and implements..."}]',
                 },
               },
             ] satisfies ExigenceGrist[],
@@ -216,10 +225,12 @@ describe("L'entrepot d'exigence Grist", () => {
         {
           reference: '2.A.1-EI/EE',
           contenu: 'Le dirigeant exécutif de l’entité...',
+          contenuEnAnglais: 'The entity’s executive officer...',
         },
         {
           reference: '2.A.3-EI/EE',
           contenu: 'L’entité définit et met en œuvre...',
+          contenuEnAnglais: 'The entity defines and implements...',
         },
       ]);
     });
@@ -235,10 +246,11 @@ describe("L'entrepot d'exigence Grist", () => {
                 fields: {
                   Reference: '1.2.3',
                   Contenu: 'Le contenu de 1.2.3',
+                  Content: 'Content of 1.2.3',
                   Niveau: 'O',
                   Observations: 'Des observations',
                   ExigencesCible:
-                    '[{"reference":"2.A.1-EI/EE","contenu":"Le dirigeant exécutif de l’entité..."},{"reference":"2.A.3-EI/EE","contenu":"L’entité définit et met en œuvre..."}]',
+                    '[{"reference":"2.A.1-EI/EE","contenu":"Le dirigeant exécutif de l’entité...", "contenuEnAnglais": "The entity’s executive officer..."},{"reference":"2.A.3-EI/EE","contenu":"L’entité définit et met en œuvre...", "contenuEnAnglais": "The entity defines and implements..."}]',
                 },
               },
             ] satisfies ExigenceGrist[],
@@ -254,10 +266,12 @@ describe("L'entrepot d'exigence Grist", () => {
         {
           reference: '2.A.1-EI/EE',
           contenu: 'Le dirigeant exécutif de l’entité...',
+          contenuEnAnglais: 'The entity’s executive officer...',
         },
         {
           reference: '2.A.3-EI/EE',
           contenu: 'L’entité définit et met en œuvre...',
+          contenuEnAnglais: 'The entity defines and implements...',
         },
       ]);
     });
@@ -273,6 +287,7 @@ describe("L'entrepot d'exigence Grist", () => {
                 fields: {
                   Reference: 'ID.AM-1.3',
                   Contenu: 'Lorsque du matériel non autorisé est détecté, ...',
+                  Content: 'When unauthorized hardware is detected, ...',
                   Fonction: 'Identify',
                   NiveauAssurance: 'Essential',
                   EstMesureCle: 1,
@@ -290,6 +305,7 @@ describe("L'entrepot d'exigence Grist", () => {
 
       assert.equal(exigences[0].reference, 'ID.AM-1.3');
       assert.equal(exigences[0].contenu, 'Lorsque du matériel non autorisé est détecté, ...');
+      assert.equal(exigences[0].contenuEnAnglais, 'When unauthorized hardware is detected, ...');
       assert.equal(exigences[0].fonction, 'Identifier');
       assert.equal(exigences[0].niveauAssurance, 'Essentiel');
       assert.equal(exigences[0].estMesureCle, true);
@@ -304,10 +320,11 @@ describe("L'entrepot d'exigence Grist", () => {
                 fields: {
                   Reference: 'ID.AM-1.3',
                   Contenu: 'Lorsque du matériel non autorisé est détecté, ...',
+                  Content: 'When unauthorized hardware is detected, ...',
                   Niveau: 'O',
                   Observations: 'Des observations',
                   ExigencesCible:
-                    '[{"reference":"2.A.1-EI/EE","contenu":"Le dirigeant exécutif de l’entité..."},{"reference":"2.A.3-EI/EE","contenu":"L’entité définit et met en œuvre..."}]',
+                    '[{"reference":"2.A.1-EI/EE","contenu":"Le dirigeant exécutif de l’entité...", "contenuEnAnglais": "The entity’s executive officer..."},{"reference":"2.A.3-EI/EE","contenu":"L’entité définit et met en œuvre...", "contenuEnAnglais": "The entity defines and implements..."}]',
                 },
               },
             ] satisfies ExigenceGrist[],
@@ -323,10 +340,12 @@ describe("L'entrepot d'exigence Grist", () => {
         {
           reference: '2.A.1-EI/EE',
           contenu: 'Le dirigeant exécutif de l’entité...',
+          contenuEnAnglais: 'The entity’s executive officer...',
         },
         {
           reference: '2.A.3-EI/EE',
           contenu: 'L’entité définit et met en œuvre...',
+          contenuEnAnglais: 'The entity defines and implements...',
         },
       ]);
     });
