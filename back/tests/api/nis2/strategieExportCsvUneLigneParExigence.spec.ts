@@ -136,6 +136,29 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         },
       ]);
     });
+
+    it('retourne les lignes des exigences des correspondances dans la langue demandée', () => {
+      const exigences = [
+        new ExigenceNIS2({
+          reference: '',
+          contenu: '',
+          contenuEnAnglais: '',
+          entitesCible: [],
+          thematique: '',
+          objectifSecurite: '',
+          referentielCompare: 'ISO',
+          correspondance: {
+            exigences: [exigenceISO('refiso1', 'contenuiso1', 'in english please')],
+            niveau: 'faible',
+            observations: 'bla bla',
+          },
+        }),
+      ];
+
+      const lignes = strategieExport.lignes(exigences, 'EN');
+
+      assert.deepEqual(lignes[0].contenu_iso_1, 'in english please');
+    });
   });
 
   describe('lorsque NIS2 est comparé à AE', () => {
@@ -686,11 +709,11 @@ const exigenceNIS2AvecCorrespondances = (
     },
   });
 
-const exigenceISO = (reference: string = '', contenu: string = '') =>
+const exigenceISO = (reference: string = '', contenu: string = '', contenuEnAnglais: string = '') =>
   new ExigenceISO({
     reference,
     contenu,
-    contenuEnAnglais: '',
+    contenuEnAnglais,
     chapitre: '',
     norme: '',
     correspondance: { exigences: [], niveau: 'NA', observations: '' },

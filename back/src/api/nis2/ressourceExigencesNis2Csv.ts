@@ -55,7 +55,8 @@ export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationSer
         fieldDelimiter: ';',
       });
 
-      const csv = `\uFEFF${stringifier.getHeaderString()}${stringifier.stringifyRecords(strategieExportCsv.lignes(exigences))}`;
+      const langueConnue = versLangueConnue(langue as string);
+      const csv = `\uFEFF${stringifier.getHeaderString()}${stringifier.stringifyRecords(strategieExportCsv.lignes(exigences, langueConnue))}`;
 
       reponse.attachment(nomFichierCsv(referentielSource, referentielCible, langue as string) + '.csv').send(csv);
     })
