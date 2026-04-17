@@ -32,7 +32,11 @@ export class Correspondance {
   }
 }
 
-export class ExigenceNIS2 extends Exigence {
+export type ExigenceAvecCorrespondances = {
+  correspondances: Partial<Record<Referentiel, Correspondance>>;
+};
+
+export class ExigenceNIS2 extends Exigence implements ExigenceAvecCorrespondances {
   entitesCible: CategorieEntite[];
   objectifSecurite: string;
   thematique: string;
@@ -60,7 +64,7 @@ export class ExigenceNIS2 extends Exigence {
   }
 }
 
-export class ExigenceISO extends Exigence {
+export class ExigenceISO extends Exigence implements ExigenceAvecCorrespondances {
   norme: string;
   chapitre: string;
   correspondances: {
@@ -83,7 +87,7 @@ export class ExigenceISO extends Exigence {
   }
 }
 
-export class ExigenceAE extends Exigence {
+export class ExigenceAE extends Exigence implements ExigenceAvecCorrespondances {
   correspondances: {
     NIS2: Correspondance;
   };
@@ -100,7 +104,7 @@ export type CyFun23Fonction = 'Identifier' | 'Protéger' | 'Détecter' | 'Répon
 
 export type CyFun23NiveauAssurance = 'Basique' | 'Important' | 'Essentiel';
 
-export class ExigenceCyFun23 extends Exigence {
+export class ExigenceCyFun23 extends Exigence implements ExigenceAvecCorrespondances {
   fonction?: CyFun23Fonction;
   estMesureCle: boolean;
   niveauAssurance?: CyFun23NiveauAssurance;
