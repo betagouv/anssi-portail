@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import { clic } from '../directives/actions.svelte';
   import ConteneurLarge from '../ui/ConteneurLarge.svelte';
   import Avertissements from './Avertissements.svelte';
   import { type Exigence, fabriqueDExigence, type ReferentielSelectionne } from './exigence.type';
@@ -10,7 +11,6 @@
   import type { Comparaison } from './tableaux/configuration.type';
   import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
   import TableauExigencesSimple from './tableaux/TableauExigencesSimple.svelte';
-  import { clic } from '../directives/actions.svelte';
 
   const { featureFlagNis2CyFun23 }: { featureFlagNis2CyFun23: boolean } = $props();
 
@@ -48,6 +48,7 @@
     `/api/exigences-nis2.csv?${new URLSearchParams({
       ...(source && { source }),
       ...(cible && { cible }),
+      langue: langueSelectionnee,
     }).toString()}`
   );
 
