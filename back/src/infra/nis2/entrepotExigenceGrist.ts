@@ -21,6 +21,7 @@ export type ExigenceGrist = {
   fields: {
     Reference: string;
     Contenu: string;
+    Content: string;
     // NIS2
     Objectif_de_securite?: string;
     Thematique?: string;
@@ -66,7 +67,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
     this.croisements = {
       AE: {
         table: 'AE_2690',
-        champs: ['source.Contenu', 'source.ID2 as Reference'],
+        champs: ['source.Contenu', 'source.Content', 'source.ID2 as Reference'],
         AE: undefined,
         CyFun23: undefined,
         NIS2: {
@@ -80,6 +81,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         table: 'CyFun23',
         champs: [
           'source.Contenu',
+          'source.Content',
           'source.ID2 as Reference',
           'source.Pillar as Fonction',
           'source.Level as NiveauAssurance',
@@ -96,7 +98,13 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
       },
       ISO: {
         table: 'ISO_27001_27002_2022',
-        champs: ['source.Contenu', 'source.Ref_ISO_27001_27002 as Reference', 'source.Norme', 'source.Chapitre'],
+        champs: [
+          'source.Contenu',
+          'source.Content',
+          'source.Ref_ISO_27001_27002 as Reference',
+          'source.Norme',
+          'source.Chapitre',
+        ],
         AE: undefined,
         CyFun23: undefined,
         ISO: undefined,
@@ -110,6 +118,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         table: 'Exigences_NIS2_2_5',
         champs: [
           'source.Contenu',
+          'source.Content',
           'source.References_New_ as Reference',
           'source.Objectif_de_securite',
           'source.Thematique',
@@ -164,7 +173,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         return new ExigenceNIS2({
           reference: exigenceGrist.fields.Reference,
           contenu: exigenceGrist.fields.Contenu,
-          contenuEnAnglais: '',
+          contenuEnAnglais: exigenceGrist.fields.Content,
           thematique: exigenceGrist.fields.Thematique ?? '',
           entitesCible: exigenceGrist.fields.EIEE
             ? (JSON.parse(exigenceGrist.fields.EIEE) as string[])
@@ -185,7 +194,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
           norme: exigenceGrist.fields.Norme ?? '',
           chapitre: exigenceGrist.fields.Chapitre ?? '',
           contenu: exigenceGrist.fields.Contenu,
-          contenuEnAnglais: '',
+          contenuEnAnglais: exigenceGrist.fields.Content,
           correspondance: fabriqueCorrespondance(exigenceGrist),
         });
       });
@@ -196,7 +205,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         return new ExigenceAE({
           reference: exigenceGrist.fields.Reference,
           contenu: exigenceGrist.fields.Contenu,
-          contenuEnAnglais: '',
+          contenuEnAnglais: exigenceGrist.fields.Content,
           correspondance: fabriqueCorrespondance(exigenceGrist),
         });
       });
@@ -207,7 +216,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         return new ExigenceCyFun23({
           reference: exigenceGrist.fields.Reference,
           contenu: exigenceGrist.fields.Contenu,
-          contenuEnAnglais: '',
+          contenuEnAnglais: exigenceGrist.fields.Content,
           fonction: this.traduitFonction(exigenceGrist.fields.Fonction),
           niveauAssurance: this.traduitNiveauAssurance(exigenceGrist.fields.NiveauAssurance),
           estMesureCle: Boolean(exigenceGrist.fields.EstMesureCle),
@@ -281,7 +290,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
           .where('cible.id', 'IN', k.from(k.raw(`json_each (cr.References_cibles)`)).select('value'))
           .select(
             k.raw(
-              `json_group_array (json_object ('reference', cible.${croisement.nomColonneReferenceCible}, 'contenu', cible.Contenu))`
+              `json_group_array (json_object ('reference', cible.${croisement.nomColonneReferenceCible}, 'contenu', cible.Contenu, 'contenuEnAnglais', cible.Content))`
             )
           )
           .as('ExigencesCible')
