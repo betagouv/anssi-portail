@@ -7,6 +7,7 @@
     estBureau: boolean;
     sensComparaison: 'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2';
     referentielSelectionne: ReferentielSelectionne | undefined;
+    langueSelectionnee: 'FR' | 'EN';
     featureFlagNis2CyFun23: boolean;
   };
 
@@ -14,6 +15,7 @@
     estBureau,
     sensComparaison = $bindable(),
     referentielSelectionne = $bindable(),
+    langueSelectionnee = $bindable('FR'),
     featureFlagNis2CyFun23,
   }: Props = $props();
 
@@ -27,8 +29,17 @@
     ...(featureFlagNis2CyFun23 ? [{ label: 'CyFun 2023', value: 'CyFun23' }] : []),
   ]);
 
+  const optionsLangues = [
+    { label: 'FR - Français', value: 'FR' },
+    { label: 'EN - English', value: 'EN' },
+  ];
+
   const selectionneLeReferentiel = (referentiel: ReferentielSelectionne) => {
     referentielSelectionne = referentiel;
+  };
+
+  const selectionneLaLangue = (langue: 'FR' | 'EN') => {
+    langueSelectionnee = langue;
   };
 </script>
 
@@ -70,8 +81,19 @@
       ></dsfr-select>
     </div>
   </div>
+
   {#if estBureau}
     <div class="actions">
+      <dsfr-select
+        id="langue"
+        label=""
+        value={langueSelectionnee}
+        onvaluechanged={(e: CustomEvent) => {
+          selectionneLaLangue(e.detail);
+        }}
+        placeholderDisabled={false}
+        options={optionsLangues}
+      ></dsfr-select>
       <BoutonReinitialisation bind:referentielSelectionne bind:sensComparaison />
     </div>
   {/if}
@@ -137,6 +159,12 @@
           margin: 0;
         }
       }
+    }
+
+    .actions {
+      display: flex;
+      gap: 1.5rem;
+      align-items: self-end;
     }
   }
 </style>

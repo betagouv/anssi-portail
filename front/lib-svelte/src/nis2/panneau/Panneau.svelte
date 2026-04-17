@@ -12,6 +12,7 @@
     sensComparaison: 'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2';
     source: Referentiel;
     referentielSelectionne: ReferentielSelectionne | undefined;
+    langueSelectionnee: 'FR' | 'EN';
     featureFlagNis2CyFun23: boolean;
   };
 
@@ -20,13 +21,20 @@
     source,
     sensComparaison = $bindable(),
     referentielSelectionne = $bindable(),
+    langueSelectionnee = $bindable('FR'),
     featureFlagNis2CyFun23,
   }: Props = $props();
 </script>
 
 <div class="panneau" class:bureau={estBureau}>
   {#if estBureau}
-    <PanneauComparaison bind:sensComparaison bind:referentielSelectionne estBureau={true} {featureFlagNis2CyFun23} />
+    <PanneauComparaison
+      bind:sensComparaison
+      bind:referentielSelectionne
+      estBureau={true}
+      {featureFlagNis2CyFun23}
+      bind:langueSelectionnee
+    />
     {#if referentielSelectionne === 'ISO'}
       <p class="texte-detail-sm">
         Les normes ISO étant protégées par le droit d’auteur, pour accéder au contenu complet de ces normes, il convient
@@ -45,7 +53,13 @@
     ></dsfr-button>
     <Modale bind:estOuverte={$etatPanneau.menuComparaisonAffiche}>
       <h4>Comparer</h4>
-      <PanneauComparaison bind:sensComparaison bind:referentielSelectionne estBureau={false} {featureFlagNis2CyFun23} />
+      <PanneauComparaison
+        bind:sensComparaison
+        bind:referentielSelectionne
+        bind:langueSelectionnee
+        estBureau={false}
+        {featureFlagNis2CyFun23}
+      />
       {#snippet actions()}
         <dsfr-button
           label="Afficher le tableau"
@@ -76,6 +90,18 @@
         <BoutonReinitialisation bind:referentielSelectionne bind:sensComparaison />
       {/snippet}
     </Modale>
+
+    <dsfr-segmented
+      noLegend
+      value={langueSelectionnee}
+      onvaluechanged={(e: CustomEvent) => {
+        langueSelectionnee = e.detail;
+      }}
+      elements={[
+        { id: 'fr', value: 'FR', label: 'FR - Français' },
+        { id: 'en', value: 'EN', label: 'EN - English' },
+      ]}
+    ></dsfr-segmented>
   {/if}
 </div>
 
