@@ -1,7 +1,7 @@
 import {
-  Correspondance,
   Exigence,
   ExigenceAE,
+  ExigenceAvecCorrespondances,
   ExigenceCyFun23,
   ExigenceISO,
   ExigenceNIS2,
@@ -53,10 +53,6 @@ class ConvertisseurCsvExigenceNIS2 extends ConvertisseurCsvExigence<ExigenceNIS2
     };
   }
 }
-
-type ExigenceAvecCorrespondances = {
-  correspondances: Partial<Record<Referentiel, Correspondance>>;
-};
 
 function colonnesEntetesCorrespondances(
   exigences: ExigenceAvecCorrespondances[],
