@@ -96,7 +96,7 @@
 
   {#if estBureau}
     <div class="actions">
-      <BoutonReinitialisation bind:referentielSelectionne bind:sensComparaison />
+      <BoutonReinitialisation bind:langueSelectionnee bind:referentielSelectionne bind:sensComparaison />
     </div>
   {/if}
 </div>

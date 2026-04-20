@@ -4,19 +4,25 @@
   import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
 
   type Props = {
+    langueSelectionnee: 'FR' | 'EN';
     sensComparaison: 'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2';
     referentielSelectionne: ReferentielSelectionne | undefined;
   };
-  let { sensComparaison = $bindable(), referentielSelectionne = $bindable() }: Props = $props();
+  let {
+    langueSelectionnee = $bindable('FR'),
+    sensComparaison = $bindable(),
+    referentielSelectionne = $bindable(),
+  }: Props = $props();
 
   const reinitialise = async () => {
     referentielSelectionne = undefined;
     sensComparaison = 'NIS2_VERS_CIBLE';
+    langueSelectionnee = 'FR';
     $exigencesFiltrees.reinitialise();
   };
 </script>
 
-{#if referentielSelectionne || sensComparaison !== 'NIS2_VERS_CIBLE' || $exigencesFiltrees.filtresActifs}
+{#if langueSelectionnee !== 'FR' || referentielSelectionne || sensComparaison !== 'NIS2_VERS_CIBLE' || $exigencesFiltrees.filtresActifs}
   <dsfr-button
     label="Réinitialiser"
     has-icon="true"

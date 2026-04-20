@@ -66,7 +66,7 @@
           kind="primary"
           use:clic={() => ($etatPanneau.menuComparaisonAffiche = false)}
         ></dsfr-button>
-        <BoutonReinitialisation bind:referentielSelectionne bind:sensComparaison />
+        <BoutonReinitialisation bind:langueSelectionnee bind:referentielSelectionne bind:sensComparaison />
       {/snippet}
     </Modale>
 
@@ -87,7 +87,7 @@
           kind="primary"
           use:clic={() => ($etatPanneau.menuFiltresAffiche = false)}
         ></dsfr-button>
-        <BoutonReinitialisation bind:referentielSelectionne bind:sensComparaison />
+        <BoutonReinitialisation bind:langueSelectionnee bind:referentielSelectionne bind:sensComparaison />
       {/snippet}
     </Modale>
   {/if}
