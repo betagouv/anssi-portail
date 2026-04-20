@@ -13,7 +13,6 @@
   import CelluleExigenceCyFun23 from './CelluleExigenceCyFun23.svelte';
   import CelluleExigenceISO from './CelluleExigenceISO.svelte';
   import CelluleExigenceNis2 from './CelluleExigenceNis2.svelte';
-  import CelluleExigencesISOCibles from './CelluleExigencesISOCibles.svelte';
   import CelluleNiveauCorrespondance from './CelluleNiveauCorrespondance.svelte';
   import CelluleSimpleExigencesCibles from './CelluleSimpleExigencesCibles.svelte';
   import type { Comparaison, ConfigurationTableauComparaison } from './configuration.type';
@@ -32,7 +31,7 @@
       titreColonneSource: titreColonneNIS2,
       titreColonneCible: 'Référence ISO 2700x',
       colonneSource: colonneSourceNIS2,
-      colonneCible: colonneCibleISO,
+      colonneCible: colonneCibleSimple,
     },
     COMPARAISON_NIS2_AE: {
       titreColonneSource: titreColonneNIS2,
@@ -91,10 +90,6 @@
 
 {#snippet colonneCibleSimple(exigences: ExigenceComparee[])}
   <CelluleSimpleExigencesCibles {exigences} />
-{/snippet}
-
-{#snippet colonneCibleISO(exigences: ExigenceComparee[])}
-  <CelluleExigencesISOCibles {exigences} />
 {/snippet}
 
 {#if exigences.length > 0 || chargement}
