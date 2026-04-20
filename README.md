@@ -97,18 +97,14 @@ prek install
 
 ## Le build et la PROD
 
-On utilise un unique `Dockerfile` pour le build via CI/CD et l'hébergement sur notre PaaS.
-Le `Dockerfile` unique est la solution qui semble la plus simple.
-Certaines variables d'environnement sont nécessaires au moment de la construction du site statique (avec Jekyll).
-Pour ce faire, ces variables sont passées via les `--build-arg` par CleverCloud. On peut donc les utiliser dans notre Dockerfile.
-Exemple :
+Le build de l'application se fait avec la commande `pnpm build`, tant en local que sur la CI/CD.
 
-```Dockerfile
-ARG MA_VARIABLE
-RUN echo "MA_VARIABLE=${MA_VARIABLE}" >> .env
+```shell
+$ pnpm build
 ```
 
-Ces variables sont passées à Jekyll via le plugin [jekyll-dotenv](https://www.rubydoc.info/gems/jekyll-dotenv/0.2.0)
+Les variables d'environnement nécessaires au moment du build doivent être disponibles lors de l'exécution de cette commande.
+Elles sont passées à Jekyll via le plugin [jekyll-dotenv](https://www.rubydoc.info/gems/jekyll-dotenv/0.2.0).
 
 ## Exploitation
 
