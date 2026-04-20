@@ -47,6 +47,7 @@ type Croisements = {
           nomTableAssociation: string;
           nomTableCible: string;
           nomColonneReferenceCible: string;
+          nomColonneContenuCible: string;
         }
       | undefined;
   };
@@ -73,6 +74,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         NIS2: {
           nomTableAssociation: 'Croisement_AE_NIS2',
           nomColonneReferenceCible: 'References_New_',
+          nomColonneContenuCible: 'Contenu',
           nomTableCible: 'Exigences_NIS2_2_5',
         },
         ISO: undefined,
@@ -93,15 +95,16 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         NIS2: {
           nomTableAssociation: 'Croisement_CyFun23_NIS2',
           nomColonneReferenceCible: 'References_New_',
+          nomColonneContenuCible: 'Contenu',
           nomTableCible: 'Exigences_NIS2_2_5',
         },
       },
       ISO: {
         table: 'ISO_27001_27002_2022',
         champs: [
-          'source.Contenu',
-          'source.Content',
-          'source.Ref_ISO_27001_27002 as Reference',
+          'source.Nouveau_contenu as Contenu',
+         'source.Content',
+          'source.Nouvelle_ref as Reference',
           'source.Norme',
           'source.Chapitre',
         ],
@@ -111,6 +114,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         NIS2: {
           nomTableAssociation: 'Croisement_ISO_NIS2',
           nomColonneReferenceCible: 'References_New_',
+          nomColonneContenuCible: 'Contenu',
           nomTableCible: 'Exigences_NIS2_2_5',
         },
       },
@@ -127,17 +131,20 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         AE: {
           nomTableAssociation: 'Croisement_NIS2_AE',
           nomColonneReferenceCible: 'ID2',
+          nomColonneContenuCible: 'Contenu',
           nomTableCible: 'AE_2690',
         },
         CyFun23: {
           nomTableAssociation: 'Croisement_NIS2_CyFun23',
           nomColonneReferenceCible: 'ID2',
+          nomColonneContenuCible: 'Contenu',
           nomTableCible: 'CyFun23',
         },
         NIS2: undefined,
         ISO: {
           nomTableAssociation: 'Croisement_NIS2_ISO',
-          nomColonneReferenceCible: 'Ref_ISO_27001_27002',
+          nomColonneReferenceCible: 'Nouvelle_ref',
+          nomColonneContenuCible: 'Nouveau_contenu',
           nomTableCible: 'ISO_27001_27002_2022',
         },
       },
@@ -290,7 +297,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
           .where('cible.id', 'IN', k.from(k.raw(`json_each (cr.References_cibles)`)).select('value'))
           .select(
             k.raw(
-              `json_group_array (json_object ('reference', cible.${croisement.nomColonneReferenceCible}, 'contenu', cible.Contenu, 'contenuEnAnglais', cible.Content))`
+              `json_group_array (json_object ('reference', cible.${croisement.nomColonneReferenceCible}, 'contenu', cible.${croisement.nomColonneContenuCible}, 'contenuEnAnglais', cible.Content))`
             )
           )
           .as('ExigencesCible')
