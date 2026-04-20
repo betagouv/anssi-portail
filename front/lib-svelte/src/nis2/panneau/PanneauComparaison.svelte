@@ -44,56 +44,58 @@
 </script>
 
 <div class="panneau-comparaison" class:bureau={estBureau}>
-  <div class="conteneur">
-    <div class="comparaison-libelle">
-      <p class="texte-standard-md">Comparaison entre référentiels d'exigence</p>
-      <p class="texte-mention-xs">
-        Comparez les exigences issues du référentiel cyber français (ReCyF) applicables à NIS&nbsp;2 à celles d'autres
-        référentiels.
-      </p>
+  <div class="controles">
+    <div class="conteneur">
+      <div class="comparaison-libelle">
+        <p class="texte-standard-md">Comparaison entre référentiels d'exigence</p>
+        <p class="texte-mention-xs">
+          Comparez les exigences issues du référentiel cyber français (ReCyF) applicables à NIS&nbsp;2 à celles d'autres
+          référentiels.
+        </p>
+      </div>
+      <div class="selecteurs" class:inverse={sensComparaison === 'SOURCE_VERS_NIS2'}>
+        <dsfr-select
+          id="referentielNIS2"
+          label=""
+          options={[{ label: 'ReCyF (NIS 2)', value: 'NIS2' }]}
+          value="NIS2"
+          disabled
+        ></dsfr-select>
+        <dsfr-button
+          label=""
+          has-icon="true"
+          icon-place="only"
+          icon={estBureau ? 'arrow-left-right-line' : 'arrow-up-down-line'}
+          kind="tertiary"
+          use:clic={inverseComparaison}
+        ></dsfr-button>
+        <dsfr-select
+          id="referentielAutre"
+          label=""
+          value={referentielSelectionne}
+          onvaluechanged={(e: CustomEvent) => {
+            selectionneLeReferentiel(e.detail);
+          }}
+          placeholder="Sélectionner"
+          placeholderDisabled={false}
+          options={optionsReferentiels}
+        ></dsfr-select>
+      </div>
     </div>
-    <div class="selecteurs" class:inverse={sensComparaison === 'SOURCE_VERS_NIS2'}>
-      <dsfr-select
-        id="referentielNIS2"
-        label=""
-        options={[{ label: 'ReCyF (NIS 2)', value: 'NIS2' }]}
-        value="NIS2"
-        disabled
-      ></dsfr-select>
-      <dsfr-button
-        label=""
-        has-icon="true"
-        icon-place="only"
-        icon={estBureau ? 'arrow-left-right-line' : 'arrow-up-down-line'}
-        kind="tertiary"
-        use:clic={inverseComparaison}
-      ></dsfr-button>
-      <dsfr-select
-        id="referentielAutre"
-        label=""
-        value={referentielSelectionne}
-        onvaluechanged={(e: CustomEvent) => {
-          selectionneLeReferentiel(e.detail);
-        }}
-        placeholder="Sélectionner"
-        placeholderDisabled={false}
-        options={optionsReferentiels}
-      ></dsfr-select>
-    </div>
+    <dsfr-select
+      id="langue"
+      label={estBureau ? '' : 'Sélectionner la langue'}
+      value={langueSelectionnee}
+      onvaluechanged={(e: CustomEvent) => {
+        selectionneLaLangue(e.detail);
+      }}
+      placeholderDisabled={false}
+      options={optionsLangues}
+    ></dsfr-select>
   </div>
 
   {#if estBureau}
     <div class="actions">
-      <dsfr-select
-        id="langue"
-        label=""
-        value={langueSelectionnee}
-        onvaluechanged={(e: CustomEvent) => {
-          selectionneLaLangue(e.detail);
-        }}
-        placeholderDisabled={false}
-        options={optionsLangues}
-      ></dsfr-select>
       <BoutonReinitialisation bind:referentielSelectionne bind:sensComparaison />
     </div>
   {/if}
@@ -115,11 +117,25 @@
       }
     }
 
+    .controles {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
     &.bureau {
       display: grid;
       gap: 24px;
       grid-template-rows: repeat(1, fit-content(100%));
       grid-template-columns: repeat(4, minmax(0, 1fr));
+
+      .controles {
+        display: grid;
+        grid-column: 1 / span 3;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        align-items: end;
+      }
 
       .selecteurs {
         display: grid;
@@ -134,11 +150,6 @@
             direction: ltr;
           }
         }
-      }
-
-      .conteneur + .actions {
-        align-self: self-end;
-        grid-column: 3 / span 2;
       }
     }
 

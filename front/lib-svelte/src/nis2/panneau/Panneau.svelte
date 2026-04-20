@@ -90,18 +90,6 @@
         <BoutonReinitialisation bind:referentielSelectionne bind:sensComparaison />
       {/snippet}
     </Modale>
-
-    <dsfr-segmented
-      noLegend
-      value={langueSelectionnee}
-      onvaluechanged={(e: CustomEvent) => {
-        langueSelectionnee = e.detail;
-      }}
-      elements={[
-        { id: 'fr', value: 'FR', label: 'FR - Français' },
-        { id: 'en', value: 'EN', label: 'EN - English' },
-      ]}
-    ></dsfr-segmented>
   {/if}
 </div>
 
