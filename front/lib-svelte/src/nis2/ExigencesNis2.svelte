@@ -73,6 +73,15 @@
   const traceTelechargement = (url: string) => {
     window._paq?.push(['trackLink', `https://${window.location.host}${url}`, 'download']);
   };
+
+  const libelleFichierTelechargement = $derived(
+    langueSelectionnee === 'FR' ? 'Télécharger les exigences' : 'Télécharger les exigences (en)'
+  );
+  const lienFichierTelechargement = $derived(
+    langueSelectionnee === 'FR'
+      ? '/documents-ressources/20260317_NIS_V2_ReCyF_v2.5.pdf'
+      : '/documents-ressources/20260401_NIS_V2_ReCyF_v2.5_EN.pdf'
+  );
 </script>
 
 <ConteneurLarge mode={mode === 'LISTE' ? 'STANDARD' : 'LARGE'}>
@@ -82,11 +91,11 @@
       <h2>Exigences applicables à NIS&nbsp;2</h2>
       <div class="telechargements">
         <dsfr-link
-          href="/documents-ressources/20260317_NIS_V2_ReCyF_v2.5.pdf"
-          label="Télécharger les exigences"
+          href={lienFichierTelechargement}
+          label={libelleFichierTelechargement}
           download=""
           detail="PDF - 965,8 ko"
-          use:clic={() => traceTelechargement('/documents-ressources/20260317_NIS_V2_ReCyF_v2.5.pdf')}
+          use:clic={() => traceTelechargement(lienFichierTelechargement)}
         ></dsfr-link>
         <dsfr-link
           href="/documents-ressources/20260317_NIS_V2_Suivi des modifications ReCyF v2.4 vers v2.5-vfinale.pdf"
