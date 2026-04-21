@@ -7,7 +7,7 @@
   $: accent = exigence.norme === 'ISO 27001' ? 'purple-glycine' : 'blue-cumulus';
 </script>
 
-<dsfr-badge label={exigence.norme} type="accent" {accent}></dsfr-badge>
+<dsfr-badge label={`ISO ${exigence.reference}`} type="accent" {accent}></dsfr-badge>
 {#if exigence.chapitre}
   <p class="texte-detail-sm gras">{exigence.chapitre}</p>
 {/if}
