@@ -1,6 +1,4 @@
 <script lang="ts">
-  import Bouton from '../ui/Bouton.svelte';
-
   export let mode: 'carte' | 'embarque' = 'carte';
   export let cacheLesLiens: boolean = false;
 </script>
@@ -9,12 +7,8 @@
   <h3>Votre demande a bien été envoyée&nbsp;!</h3>
   <p>Un Aidant cyber prendra bientôt contact avec vous pour vous accompagner dans les prochaines étapes.</p>
   {#if !cacheLesLiens}
-    <Bouton
-      type="primaire"
-      taille="md"
-      titre="Explorer les services pour se lancer"
-      on:click={() => (window.location.pathname = '/')}
-    />
+    <dsfr-button label="Explorer les services pour se lancer" href="/" kind="primary" markup="a"></dsfr-button>
+
     <a href="/" class="lien">Revenir à la page d'accueil</a>
   {/if}
 </div>
