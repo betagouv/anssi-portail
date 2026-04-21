@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Bouton from '../ui/Bouton.svelte';
+
   export let couleurFond: 'clair' | 'fonce' = 'clair';
 
   const { protocol, host } = window.location;
@@ -42,9 +44,12 @@
     <img src="/assets/images/icone-email.svg" alt="Partager par email" />
   </a>
 
-  <button class="bouton secondaire" on:click={partageLien}>
-    <img src="/assets/images/icone-copie-lien.svg" alt="Copier dans le presse-papier" />
-  </button>
+  <Bouton
+    type={couleurFond === 'clair' ? 'secondaire' : 'secondaire-inverse'}
+    icone="links-line"
+    iconeSeule
+    surClic={partageLien}
+  />
 </div>
 
 <style lang="scss">
