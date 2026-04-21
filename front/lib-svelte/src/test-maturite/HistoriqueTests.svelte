@@ -4,6 +4,7 @@
   import axios from 'axios';
   import { questionnaireStore } from './stores/questionnaire.store';
   import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
+  import Lien from '../ui/Lien.svelte';
 
   export let idResultatTest: string | undefined;
 
@@ -41,8 +42,7 @@
 {#if resultatTestSelectionne}
   <section class="section-retour-historique">
     <div class="contenu-section">
-      <lab-anssi-lien href="/ma-maturite#historique" titre="Retour" icone="arrow-go-back-line" positionIcone="gauche"
-      ></lab-anssi-lien>
+      <Lien href="/ma-maturite#historique" libelle="Retour" icone="arrow-go-back-line" />
     </div>
   </section>
   <ResultatsMonOrganisation
