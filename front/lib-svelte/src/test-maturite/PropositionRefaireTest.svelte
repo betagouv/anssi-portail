@@ -1,5 +1,6 @@
 <script lang="ts">
   import { profilStore } from '../stores/profil.store.js';
+  import Lien from '../ui/Lien.svelte';
 </script>
 
 {#if $profilStore}
@@ -7,7 +8,7 @@
     <div class="contenu-section">
       <p>
         Vous avez mené un plan d'action cyber et souhaitez mesurer vos progrès ?
-        <lab-anssi-lien href="/test-maturite" apparence="lien" titre="Refaire le test" taille="md"></lab-anssi-lien>
+        <Lien href="/test-maturite" libelle="Refaire le test" />
       </p>
     </div>
   </section>

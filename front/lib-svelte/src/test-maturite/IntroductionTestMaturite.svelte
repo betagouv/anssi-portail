@@ -2,6 +2,7 @@
   import axios from 'axios';
   import { derived } from 'svelte/store';
   import { profilStore } from '../stores/profil.store';
+  import Lien from '../ui/Lien.svelte';
 
   export let introFaite = false;
 
@@ -24,7 +25,7 @@
 </script>
 
 {#if $aDejaUnTest}
-  <lab-anssi-lien href="/ma-maturite" titre="Retour" icone="arrow-go-back-line" positionIcone="gauche"></lab-anssi-lien>
+  <Lien href="/ma-maturite" libelle="Retour" icone="arrow-go-back-line" />
 {/if}
 <div class="contenu-test">
   <div class="introduction">
