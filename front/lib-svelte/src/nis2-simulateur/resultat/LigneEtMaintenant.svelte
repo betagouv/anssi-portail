@@ -15,7 +15,7 @@
         markup="a"
         type="button"
         href="https://club.ssi.gouv.fr/#/nis2/introduction"
-        target="blank"
+        target="_blank"
         kind="primary"
       ></dsfr-button>
     </div>
