@@ -1,4 +1,6 @@
-<script lang="ts"></script>
+<script lang="ts">
+  import Lien from '../ui/Lien.svelte';
+</script>
 
 <div class="contenu">
   <div class="photos">
@@ -9,14 +11,15 @@
     Participer à un webinaire collectif de 45 minutes pour en savoir plus sur MesServicesCyber, le test de maturité et
     le diagnostic cyber afin de mieux protéger votre entité des cyberattaques.
   </p>
-  <lab-anssi-lien
-    href="https://app.livestorm.co/lab-anssi/webinaire-cyberdepart"
-    variante="primaire"
-    apparence="bouton"
-    taille="md"
-    cible="_blank"
-    titre="Assister au webinaire"
-  ></lab-anssi-lien>
+  <div class="boutons">
+    <Lien
+      apparence="bouton"
+      blank
+      href="https://app.livestorm.co/lab-anssi/webinaire-cyberdepart"
+      libelle="assister au webinaire"
+      type="primaire"
+    />
+  </div>
 </div>
 
 <style lang="scss">
@@ -63,10 +66,10 @@
       margin: 0 0 32px;
     }
 
-    lab-anssi-lien {
+    .boutons {
       grid-area: bouton;
       justify-self: flex-start;
-      margin: 0 0 32px;
+      margin-bottom: 32px;
     }
   }
 </style>
