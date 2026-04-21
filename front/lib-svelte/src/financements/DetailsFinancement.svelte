@@ -6,6 +6,7 @@
   import type { Financement } from './financement';
   import MenuFinancement from './MenuFinancement.svelte';
   import SectionDetailsFinancement from './SectionDetailsFinancement.svelte';
+  import Lien from '../ui/Lien.svelte';
 
   type ReponseAxios = {
     id: number;
@@ -142,14 +143,14 @@
     </p>
     {#if financement?.sources?.[0]}
       <div class="source">
-        <lab-anssi-lien
+        <Lien
           href={financement.sources[0]}
-          cible="_blank"
+          blank
           apparence="bouton"
-          variante="primaire"
+          type="primaire"
           taille="lg"
-          titre="Bénéficier de cette aide"
-        ></lab-anssi-lien>
+          libelle="Bénéficier de cette aide"
+        />
       </div>
     {/if}
   </div>
@@ -191,16 +192,15 @@
 
           <SectionDetailsFinancement ancre="conditions" titre="Conditions" detail={financement.condition} />
           {#if financement?.sources?.[0]}
-            <lab-anssi-lien
+            <Lien
               href={financement.sources[0]}
-              cible="_blank"
+              blank
               apparence="bouton"
-              variante="primaire"
-              taille="md"
-              titre="Bénéficier de cette aide"
-            ></lab-anssi-lien>
+              type="primaire"
+              libelle="Bénéficier de cette aide"
+            />
           {/if}
-          <lab-anssi-lien href="#" titre="Haut de page" icone="arrow-up-fill" positionIcone="gauche"></lab-anssi-lien>
+          <Lien href="#" libelle="Haut de page" icone="arrow-up-fill" />
           <p class="note-information texte-mention-xs">
             Nous vous recommandons de vous adresser directement aux organismes gestionnaires mentionnés dans la fiche
             pour déterminer si votre projet est éligible à une aide. Enfin, si vous notez des omissions ou des erreurs

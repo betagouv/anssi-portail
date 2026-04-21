@@ -14,6 +14,7 @@
   import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
+  import Lien from '../ui/Lien.svelte';
 
   type ReponseAxios = {
     id: number;
@@ -62,11 +63,7 @@
 <section class="financements">
   <div class="contenu-section">
     <div class="entete">
-      <lab-anssi-lien
-        href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert"
-        cible="_blank"
-        titre="Proposer un financement"
-      ></lab-anssi-lien>
+      <Lien href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert" blank libelle="Proposer un financement" />
     </div>
     <div class="contenu">
       <FiltresBureau filtreActif={false}>
