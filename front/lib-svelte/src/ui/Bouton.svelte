@@ -2,13 +2,14 @@
   import { clic } from '../directives/actions.svelte';
 
   interface Props {
-    titre: string;
+    titre?: string;
     type: 'primaire' | 'secondaire';
     taille?: 'md';
     actif?: boolean;
     enCoursEnvoi?: boolean;
     boutonSoumission?: boolean;
-    icone?: '' | 'partager';
+    icone?: string;
+    iconeSeule?: boolean;
     surClic?: (e: MouseEvent | KeyboardEvent) => void;
   }
 
@@ -20,13 +21,14 @@
     enCoursEnvoi = false,
     boutonSoumission = true,
     icone = '',
+    iconeSeule = false,
     surClic,
   }: Props = $props();
 
   const kind = $derived(type === 'primaire' ? 'primary' : 'secondary');
   const boutonType = $derived(boutonSoumission ? 'submit' : 'button');
   const hasIcon = $derived(!!icone);
-  const icon = $derived(icone === 'partager' ? 'share-line' : '');
+  const icon = $derived(icone === 'partager' ? 'share-line' : icone);
 
   const gereClick = (e: MouseEvent | KeyboardEvent) => {
     surClic?.(e);
@@ -41,6 +43,6 @@
   disabled={!actif || enCoursEnvoi}
   {hasIcon}
   {icon}
-  iconPlace="left"
+  iconPlace={iconeSeule ? 'only' : 'left'}
   use:clic={gereClick}
 ></dsfr-button>
