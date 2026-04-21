@@ -1,16 +1,28 @@
 <script lang="ts">
-  export let titre: string;
-  export let type: 'primaire' | 'secondaire';
-  export let taille: 'md' | undefined = undefined;
-  export let actif: boolean = true;
-  export let enCoursEnvoi: boolean = false;
-  export let boutonSoumission: boolean = true;
-  export let icone: '' | 'partager' = '';
+  interface Props {
+    titre: string;
+    type: 'primaire' | 'secondaire';
+    taille?: 'md';
+    actif?: boolean;
+    enCoursEnvoi?: boolean;
+    boutonSoumission?: boolean;
+    icone?: '' | 'partager';
+  }
 
-  const kind = type === 'primaire' ? 'primary' : 'secondary';
-  const boutonType = boutonSoumission ? 'submit' : 'button';
-  const hasIcon = !!icone;
-  const iconName = icone === 'partager' ? 'share-line' : '';
+  const {
+    titre,
+    type,
+    taille = undefined,
+    actif = true,
+    enCoursEnvoi = false,
+    boutonSoumission = true,
+    icone = '',
+  }: Props = $props();
+
+  const kind = $derived(type === 'primaire' ? 'primary' : 'secondary');
+  const boutonType = $derived(boutonSoumission ? 'submit' : 'button');
+  const hasIcon = $derived(!!icone);
+  const icon = $derived(icone === 'partager' ? 'share-line' : '');
 </script>
 
 <dsfr-button
@@ -20,7 +32,7 @@
   type={boutonType}
   disabled={!actif || enCoursEnvoi}
   {hasIcon}
-  icon={iconName}
+  {icon}
   iconPlace="left"
   on:click
 ></dsfr-button>
