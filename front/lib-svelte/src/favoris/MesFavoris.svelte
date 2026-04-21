@@ -45,7 +45,7 @@
           <p>
             Une liste de favoris bien pensée est la clé pour sensibiliser efficacement vos équipes à la cybersécurité.
           </p>
-          <Bouton type="primaire" titre="Partager mes favoris" icone="partager" surClic={partageLien} />
+          <Bouton type="primaire" titre="Partager mes favoris" icone="share-line" surClic={partageLien} />
         </div>
         <ContenuFavoris avecBoutonFavori itemsEnFavori={$itemsCatalogueEnFavori} />
       {/if}

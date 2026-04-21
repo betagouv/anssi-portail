@@ -32,7 +32,6 @@
   );
   const boutonType = $derived(boutonSoumission ? 'submit' : 'button');
   const hasIcon = $derived(!!icone);
-  const icon = $derived(icone === 'partager' ? 'share-line' : icone);
 
   const gereClick = (e: MouseEvent | KeyboardEvent) => {
     surClic?.(e);
@@ -46,7 +45,7 @@
   type={boutonType}
   disabled={desactive}
   {hasIcon}
-  {icon}
+  icon={icone}
   iconPlace={iconeSeule ? 'only' : 'left'}
   use:clic={gereClick}
 ></dsfr-button>
