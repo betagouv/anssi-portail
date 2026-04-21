@@ -103,7 +103,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
         table: 'ISO_27001_27002_2022',
         champs: [
           'source.Nouveau_contenu as Contenu',
-         'source.Content',
+          'source.Content',
           'source.Nouvelle_ref as Reference',
           'source.Norme',
           'source.Chapitre',
