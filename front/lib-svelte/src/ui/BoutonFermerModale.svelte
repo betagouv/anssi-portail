@@ -1,21 +1,10 @@
 <script lang="ts">
 </script>
 
-<lab-anssi-bouton
-  icone="close-line"
-  on:click
-  on:keypress
-  positionIcone="droite"
-  role="button"
-  taille="sm"
-  tabindex={0}
-  titre="Fermer"
-  variante="tertiaire-sans-bordure"
->
-</lab-anssi-bouton>
+<dsfr-button label="Fermer" preset="close" role="button" tabindex="0" on:click on:keypress></dsfr-button>
 
 <style lang="scss">
-  lab-anssi-bouton {
+  dsfr-button {
     align-self: flex-end;
     margin-right: -12px;
   }

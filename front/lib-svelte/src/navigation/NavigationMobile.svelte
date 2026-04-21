@@ -4,6 +4,7 @@
   import { creeLienContactsUtiles } from '../contacts/contacts';
   import ZoneIdentification from '../identification/ZoneIdentification.svelte';
   import { profilStore } from '../stores/profil.store';
+  import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
   import LienNavigationMobile from './LienNavigationMobile.svelte';
   import MenuBurger from './MenuBurger.svelte';
 
@@ -31,7 +32,7 @@
 
 {#if ouvert}
   <nav class="menu-mobile" transition:fly={{ x: 300 }}>
-    <button class="fermer" on:click={() => (ouvert = false)}>Fermer</button>
+    <BoutonFermerModale on:click={() => (ouvert = false)} on:keypress={() => (ouvert = false)} />
     <ZoneIdentification estMobile />
     <div class="choix">
       <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart"
@@ -110,25 +111,6 @@
     height: 100vh;
     top: 0;
     left: 0;
-
-    button.fermer {
-      align-self: flex-end;
-      color: #000091;
-      border: none;
-      background: none;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      padding: 0;
-      line-height: 24px;
-
-      &:after {
-        content: url('/assets/images/icone-croix.svg');
-        display: block;
-        width: 16px;
-        height: 16px;
-      }
-    }
 
     .choix {
       display: flex;
