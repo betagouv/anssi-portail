@@ -26,25 +26,26 @@
       <div class="message">
         <span>Bonjour et bienvenue sur MesServicesCyber. Comment pouvons-nous vous aider ?</span>
       </div>
-      <a class="bouton primaire" href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert" target="_blank"
-        >💬 Nous contacter par chat</a
+      <dsfr-button
+        markup="a"
+        kind="primary"
+        href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert"
+        target="_blank"
       >
-      <a class="bouton primaire" href="https://aide.messervices.cyber.gouv.fr/fr/" target="_blank"
-        >🙌 Consulter la F.A.Q.</a
-      >
+        💬 Nous contacter par chat
+      </dsfr-button>
+      <dsfr-button markup="a" kind="primary" href="https://aide.messervices.cyber.gouv.fr/fr/" target="_blank">
+        🙌 Consulter la F.A.Q.
+      </dsfr-button>
       <div class="message marge-haute">
         <span>Vous souhaitez faire une autre demande à l'ANSSI ?</span>
       </div>
-      <a
-        class="bouton secondaire centre-aide-signaler-incident"
-        href="https://club.ssi.gouv.fr/#/declarations"
-        target="_blank">️⚠️ Signaler un incident ou une vulnérabilité</a
-      >
-      <a
-        class="bouton secondaire centre-aide-contacter-anssi"
-        href="https://cyber.gouv.fr/contact-acces/"
-        target="_blank">️📩 Contacter d’autres services de l’ANSSI</a
-      >
+      <dsfr-button markup="a" kind="secondary" href="https://club.ssi.gouv.fr/#/declarations" target="_blank">
+        ⚠️ Signaler un incident ou une vulnérabilité
+      </dsfr-button>
+      <dsfr-button markup="a" kind="secondary" href="https://cyber.gouv.fr/contact-acces/" target="_blank">
+        📩 Contacter d’autres services de l’ANSSI
+      </dsfr-button>
     </div>
   </div>
 {/if}
