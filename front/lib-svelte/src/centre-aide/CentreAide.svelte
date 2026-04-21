@@ -163,22 +163,6 @@
           margin-top: 16px;
         }
       }
-
-      a {
-        padding: 8px 12px;
-        font-size: 1rem;
-        line-height: 1.5rem;
-        width: 100%;
-        box-sizing: border-box;
-
-        @include a-partir-de(sm) {
-          width: fit-content;
-        }
-
-        &.secondaire {
-          border-color: var(--noir);
-        }
-      }
     }
   }
 </style>
