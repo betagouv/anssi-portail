@@ -169,7 +169,7 @@
     </div>
 
     <div>
-      <Bouton type="primaire" taille="md" titre="Envoyer ma demande" on:click={soumetsFormulaire} {enCoursEnvoi} />
+      <Bouton type="primaire" taille="md" titre="Envoyer ma demande" surClic={soumetsFormulaire} {enCoursEnvoi} />
     </div>
 
     {#if erreurs}

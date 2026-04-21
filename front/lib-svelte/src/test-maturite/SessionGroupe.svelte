@@ -59,7 +59,7 @@
         type="secondaire"
         taille="md"
         enCoursEnvoi={creationNouvelleSession}
-        on:click={nouvelleSession}
+        surClic={nouvelleSession}
       />
       <ModaleNouvelleSessionGroupe bind:this={modaleNouvelleSession} />
     </div>
@@ -93,7 +93,7 @@
             maxlength="7"
           />
         </ControleFormulaire>
-        <Bouton titre="Débuter le test" type="primaire" taille="md" on:click={rejoindreSession} />
+        <Bouton titre="Débuter le test" type="primaire" taille="md" surClic={rejoindreSession} />
       </Formulaire>
     </div>
   </div>
