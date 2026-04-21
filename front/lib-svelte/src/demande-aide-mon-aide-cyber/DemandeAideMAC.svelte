@@ -8,6 +8,7 @@
   import FoireAuxQuestions from './FoireAuxQuestions.svelte';
   import FormulaireDemandeAide from './FormulaireDemandeAide.svelte';
   import IllustrationCyberDepart from './IllustrationCyberDepart.svelte';
+  import Lien from '../ui/Lien.svelte';
 
   let formulaireDemandeAide: FormulaireDemandeAide;
   let enSucces: boolean = false;
@@ -80,10 +81,7 @@
       <IllustrationCyberDepart />
     </div>
     <div class="contenu-section">
-      <lab-anssi-lien class="lien" href="/" titre="Retour" icone="arrow-go-back-line" positionIcone="gauche"
-      ></lab-anssi-lien>
-    </div>
-    <div class="contenu-section">
+      <Lien href="/" libelle="Retour" icone="arrow-go-back-line" />
       <div class="colonne-explicative">
         <h2>Vous souhaitez vous protéger contre les cyberattaques mais ne savez pas comment vous y prendre ?</h2>
         <p>
@@ -146,17 +144,14 @@
     line-height: 1.75rem;
   }
 
-  .lien {
-    display: flex;
-    margin-bottom: 24px;
-  }
-
   .encart-presentation {
     position: relative;
     padding: var(--gouttiere) var(--gouttiere) 24px var(--gouttiere);
     background: var(--controle-segmente-courant-fond);
 
     .colonne-explicative {
+      margin-top: 24px;
+
       @include a-partir-de(md) {
         width: 50%;
         align-self: flex-start;
