@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import Lien from '../../ui/Lien.svelte';
 
   let cibleAbonnementInfolettre = $state('');
 
@@ -22,7 +23,7 @@
 <p class="note-information">
   <strong>Newsletter MesServicesCyber.</strong>
   Restez informé des nouveaux guides de l’ANSSI et autres actualités MesServicesCyber.
-  <lab-anssi-lien href={cibleAbonnementInfolettre} titre="S’abonner"></lab-anssi-lien>
+  <Lien href={cibleAbonnementInfolettre} libelle="S’abonner" />
 </p>
 
 <style lang="scss">
