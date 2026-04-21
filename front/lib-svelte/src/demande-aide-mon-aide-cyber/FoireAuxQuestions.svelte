@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Lien from '../ui/Lien.svelte';
   import SectionAccordeon from '../ui/SectionAccordeon.svelte';
   export let urlBase: string = '';
 
@@ -87,12 +88,7 @@
         👤 Un Aidant cyber est un tiers de confiance, issu d’un organisme public ou adhérent d’une association à but non
         lucratif en lien avec le numérique, spécialement formé sur le diagnostic cyber par l’ANSSI (l’Agence nationale
         de la sécurité des systèmes d’information). Pour en savoir plus, n’hésitez pas à consulter la
-        <lab-anssi-lien
-          href="https://monaide.cyber.gouv.fr/charte-aidant"
-          titre="charte de l’Aidant cyber"
-          apparence="lien-texte"
-          cible="_blank"
-        ></lab-anssi-lien>.<br />
+        <Lien href="https://monaide.cyber.gouv.fr/charte-aidant" libelle="charte de l’Aidant cyber" blank />.<br />
         <br />
         🤝 Son rôle ? <strong>Vous accompagner bénévolement,</strong> de façon neutre, confidentielle et bienveillante,
         pour
@@ -134,8 +130,7 @@
         <strong>réalisé en toute confidentialité,</strong>
         et <strong>aucune donnée sensible n’est collectée.</strong>
         Pour en savoir plus, n’hésitez pas à consulter notre
-        <lab-anssi-lien href={`${urlBase}/securite`} titre="page sécurité" apparence="lien-texte" cible="_blank"
-        ></lab-anssi-lien>.<br />
+        <Lien href={`${urlBase}/securite`} libelle="page sécurité" blank />.<br />
         <br />
         🛡️ Les données sont chiffrées en interne par l’ANSSI, et
         <strong>aucune information nominative</strong>
@@ -150,12 +145,7 @@
 <div class="besoin-aide">
   <p>
     Participez à un webinaire pour en savoir plus sur le diagnostic cyber.
-    <lab-anssi-lien
-      href="https://app.livestorm.co/lab-anssi/webinaire-cyberdepart"
-      titre="Je m’inscris"
-      apparence="lien-texte"
-      cible="_blank"
-    ></lab-anssi-lien>
+    <Lien href="https://app.livestorm.co/lab-anssi/webinaire-cyberdepart" libelle="Je m’inscris" blank />
   </p>
 </div>
 
