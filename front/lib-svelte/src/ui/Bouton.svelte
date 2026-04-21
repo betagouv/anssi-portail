@@ -3,7 +3,7 @@
 
   interface Props {
     titre?: string;
-    type: 'primaire' | 'secondaire';
+    type: 'primaire' | 'secondaire' | 'secondaire-inverse';
     taille?: 'md';
     desactive?: boolean;
     boutonSoumission?: boolean;
@@ -23,7 +23,13 @@
     surClic,
   }: Props = $props();
 
-  const kind = $derived(type === 'primaire' ? 'primary' : 'secondary');
+  const kind = $derived(
+    {
+      primaire: 'primary',
+      secondaire: 'secondary',
+      'secondaire-inverse': 'inverted-secondary',
+    }[type]
+  );
   const boutonType = $derived(boutonSoumission ? 'submit' : 'button');
   const hasIcon = $derived(!!icone);
   const icon = $derived(icone === 'partager' ? 'share-line' : icone);
