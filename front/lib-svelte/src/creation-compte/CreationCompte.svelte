@@ -229,9 +229,9 @@
     {/if}
 
     <div class="actions">
-      <Bouton type="secondaire" titre="Précédent" surClic={etapePrecedente} actif={etapeCourante > 1} />
+      <Bouton type="secondaire" titre="Précédent" surClic={etapePrecedente} desactive={etapeCourante <= 1} />
       {#if etapeCourante === 3}
-        <Bouton type="primaire" titre="Valider" surClic={valide} {enCoursEnvoi} />
+        <Bouton type="primaire" titre="Valider" surClic={valide} desactive={enCoursEnvoi} />
       {:else}
         <Bouton type="primaire" titre="Suivant" surClic={etapeSuivante} />
       {/if}

@@ -5,8 +5,7 @@
     titre?: string;
     type: 'primaire' | 'secondaire';
     taille?: 'md';
-    actif?: boolean;
-    enCoursEnvoi?: boolean;
+    desactive?: boolean;
     boutonSoumission?: boolean;
     icone?: string;
     iconeSeule?: boolean;
@@ -17,9 +16,8 @@
     titre,
     type,
     taille = undefined,
-    actif = true,
-    enCoursEnvoi = false,
-    boutonSoumission = true,
+    desactive = false,
+    boutonSoumission = false,
     icone = '',
     iconeSeule = false,
     surClic,
@@ -40,7 +38,7 @@
   {kind}
   size={taille}
   type={boutonType}
-  disabled={!actif || enCoursEnvoi}
+  disabled={desactive}
   {hasIcon}
   {icon}
   iconPlace={iconeSeule ? 'only' : 'left'}

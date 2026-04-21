@@ -8,7 +8,7 @@
   import type { ReponseCreationSessionGroupe } from './SessionGroupe';
 
   let codeSession = '';
-  let creationNouvelleSession = false;
+  let creationNouvelleSessionEnCours = false;
   let modaleNouvelleSession: ModaleNouvelleSessionGroupe;
   let champCodeSession: ChampTexte;
   let formulaire: Formulaire;
@@ -23,11 +23,11 @@
 
   const nouvelleSession = async () => {
     try {
-      creationNouvelleSession = true;
+      creationNouvelleSessionEnCours = true;
       const reponse = await axios.post<ReponseCreationSessionGroupe>('/api/sessions-groupe');
       modaleNouvelleSession.ouvre(reponse.data);
     } finally {
-      creationNouvelleSession = false;
+      creationNouvelleSessionEnCours = false;
     }
   };
 
@@ -58,7 +58,7 @@
         titre="Nouvelle session"
         type="secondaire"
         taille="md"
-        enCoursEnvoi={creationNouvelleSession}
+        desactive={creationNouvelleSessionEnCours}
         surClic={nouvelleSession}
       />
       <ModaleNouvelleSessionGroupe bind:this={modaleNouvelleSession} />
