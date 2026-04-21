@@ -58,7 +58,6 @@
         titre="Nouvelle session"
         type="secondaire"
         taille="md"
-        classe="bouton-session-groupe"
         enCoursEnvoi={creationNouvelleSession}
         on:click={nouvelleSession}
       />
@@ -94,13 +93,7 @@
             maxlength="7"
           />
         </ControleFormulaire>
-        <Bouton
-          titre="Débuter le test"
-          type="primaire"
-          taille="md"
-          classe="bouton-session-groupe"
-          on:click={rejoindreSession}
-        />
+        <Bouton titre="Débuter le test" type="primaire" taille="md" on:click={rejoindreSession} />
       </Formulaire>
     </div>
   </div>
@@ -147,14 +140,6 @@
 
     :global(.champ-session-groupe) {
       width: 100%;
-      @include a-partir-de(sm) {
-        width: auto;
-      }
-    }
-
-    :global(.bouton-session-groupe) {
-      width: 100%;
-
       @include a-partir-de(sm) {
         width: auto;
       }
