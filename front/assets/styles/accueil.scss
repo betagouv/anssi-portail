@@ -108,7 +108,7 @@
           max-width: taille-pour-colonnes(10);
         }
       }
-      lab-anssi-lien {
+      msc-lien {
         margin-bottom: 0;
       }
     }
@@ -162,7 +162,7 @@
         }
       }
 
-      lab-anssi-lien {
+      msc-lien {
         align-self: center;
         margin-block: 24px;
       }
@@ -194,7 +194,7 @@
         width: 50%;
       }
 
-      lab-anssi-lien {
+      msc-lien {
         margin-bottom: 24px;
         align-self: start;
       }
@@ -285,7 +285,7 @@
       }
     }
 
-    lab-anssi-lien {
+    msc-lien {
       grid-area: bouton;
       justify-self: start;
     }
