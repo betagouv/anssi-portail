@@ -13,16 +13,18 @@ permalink: /
       <p class="texte-chapo-xl">Agissez pour votre cybersécurité&nbsp;!</p>
     </hgroup>
     <div class="actions">
-      <lab-anssi-lien
-        href="/cyberdepart/"
+      <msc-lien
         apparence="bouton"
-        variante="primaire"
-        taille="md"
-        titre="Demander un diagnostic gratuit"
-      ></lab-anssi-lien>
-      <a href="/catalogue#guides" class="bouton secondaire taille-moyenne">
-        Accéder aux guides de l’ANSSI
-      </a>
+        href="/cyberdepart/"
+        libelle="Demander un diagnostic gratuit"
+        type="primaire"
+      ></msc-lien>
+      <msc-lien
+        apparence="bouton"
+        href="/catalogue#guides"
+        libelle="Accéder aux guides de l’ANSSI"
+        type="secondaire-inverse"
+      ></msc-lien>
     </div>
     <img src="/assets/images/ecrans-virtuels-avec-femme-au-centre.svg" alt="" />
     <p class="texte-detail-sm">
@@ -55,15 +57,13 @@ permalink: /
         src="/assets/images/illustration-organisations-concernees.svg"
         alt="Organisation concernées"
       />
-      <lab-anssi-lien
-        class="texte-mention-xs"
+      <msc-lien
+        blank
         href="https://cyber.gouv.fr/nous-connaitre/publications/panoramas-de-la-cybermenace/panorama-de-la-cybermenace-2025/"
-        target="_blank"
-        apparence="lien-texte"
-        variante="primaire"
+        libelle="Panorama de la menace 2025, ANSSI"
         taille="sm"
-        titre="Panorama de la menace 2025, ANSSI"
-      ></lab-anssi-lien>
+        type="primaire"
+      ></msc-lien>
     </div>
     {% include composant-svelte.html id="demande-diagnostic" %}
     <div class="acces-catalogue">
@@ -101,13 +101,12 @@ permalink: /
         <strong>les services et guides de l’ANSSI adaptés</strong> aux besoins
         de votre organisation.
       </p>
-      <lab-anssi-lien
-        href="/catalogue#guides"
+      <msc-lien
         apparence="bouton"
-        variante="secondaire"
-        taille="md"
-        titre="Accéder aux guides de l’ANSSI"
-      ></lab-anssi-lien>
+        href="/catalogue#guides"
+        libelle="Accéder aux guides de l’ANSSI"
+        type="secondaire"
+      ></msc-lien>
     </div>
   </div>
 </section>
@@ -130,21 +129,19 @@ permalink: /
           déjà réalisé le test de maturité cyber.
         </p>
       </hgroup>
-      <lab-anssi-lien
-        href="/test-maturite"
+      <msc-lien
         apparence="bouton"
-        variante="primaire"
-        taille="md"
-        titre="Débuter le test"
-        position-icone="droite"
+        href="/test-maturite"
+        type="primaire"
+        libelle="Débuter le test"
         icone="arrow-right-line"
-      ></lab-anssi-lien>
-      <lab-anssi-lien
+        icone-a-droite
+      ></msc-lien>
+      <msc-lien
         id="lien-session-groupe"
         href="/session-groupe"
-        apparence="lien"
-        titre="Disponible aussi pour les sessions en groupe"
-      ></lab-anssi-lien>
+        libelle="Disponible aussi pour les sessions en groupe"
+      ></msc-lien>
       <p class="texte-mention-xs">
         La maturité cyber n’est pas une évaluation du niveau de sécurité des
         systèmes d’information d’une organisation mais de sa posture à l’égard
@@ -200,14 +197,13 @@ permalink: /
         </li>
       </ul>
     </div>
-    <lab-anssi-lien
-      href="https://tally.so/r/wa6o22"
-      cible="_blank"
-      variante="secondaire"
+    <msc-lien
       apparence="bouton"
-      taille="md"
-      titre="Rejoindre la communauté"
-    ></lab-anssi-lien>
+      blank
+      href="https://tally.so/r/wa6o22"
+      libelle="Rejoindre la communauté"
+      type="secondaire"
+    ></msc-lien>
     <img
       src="assets/images/illustration-s-informer.svg"
       alt="Dialoguer avec la communauté"
@@ -297,13 +293,13 @@ permalink: /
           accompagner, réguler.
         </strong>
       </p>
-      <a
+      <msc-lien
+        apparence="bouton"
+        blank
         href="https://cyber.gouv.fr/"
-        target="_blank"
-        class="bouton secondaire"
-      >
-        Se rendre sur le site de l'ANSSI
-      </a>
+        libelle="Se rendre sur le site de l'ANSSI"
+        type="secondaire"
+      ></msc-lien>
     </div>
   </div>
 </section>
