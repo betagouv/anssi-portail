@@ -1,3 +1,5 @@
+<svelte:options customElement={{ tag: 'msc-lien', shadow: 'none' }} />
+
 <script lang="ts">
   type Props = {
     apparence?: 'lien' | 'bouton';

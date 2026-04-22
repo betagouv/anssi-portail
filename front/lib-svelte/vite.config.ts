@@ -1,6 +1,7 @@
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { createLogger, defineConfig } from 'vite';
+import * as Vite from 'vite';
 
 const loggerPersonnalise = createLogger();
 const loggerWarnOnce = loggerPersonnalise.warnOnce;
@@ -23,6 +24,7 @@ export default defineConfig({
       authToken: process.env.SENTRY_AUTH_TOKEN,
       url: process.env.SENTRY_URL,
     }),
+    injecteNonce(),
   ],
   build: {
     cssCodeSplit: false,
@@ -65,6 +67,7 @@ export default defineConfig({
         sentry: 'src/main-sentry.ts',
         'confirmation-abonnement-infolettre': 'src/main-confirmation-abonnement-infolettre.ts',
         'abonnement-infolettre': 'src/main-abonnement-infolettre.ts',
+        'composants-ui': 'src/main-composants-ui.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
@@ -86,3 +89,38 @@ export default defineConfig({
     port: 3001,
   },
 });
+
+const injecteNonceWebcomponents = (code: string) => {
+  let codeAvecNonce = `const nonce =
+  typeof document !== 'undefined'
+    ? document.querySelector('meta[property="csp-nonce"]')?.getAttribute('content')
+    : null;\n${code}`;
+
+  codeAvecNonce = codeAvecNonce
+    .replace(/const (\w+)\s*=\s*\w+\(["']style["']\);/gm, (match, nomVariable) => `${match}${nomVariable}.nonce=nonce;`)
+    .replace(
+      /const (\w+)\s*=\s*document\.createElement\(["']style["']\);/gm,
+      (match, nomVariable) => `${match}${nomVariable}.nonce=nonce;`
+    );
+
+  return codeAvecNonce;
+};
+
+function injecteNonce(): Vite.Plugin {
+  return {
+    name: 'injecte-nonce',
+    enforce: 'post',
+    generateBundle(_options, bundle) {
+      console.log('📝 Ajout de la gestion du Nonce');
+
+      for (const file of Object.values(bundle)) {
+        if (file.type === 'chunk' && file.code) {
+          // Remplace `const a = u("style");`
+          // par `const a = u("style");a.nonce=nonce;`
+          file.code = injecteNonceWebcomponents(file.code);
+        }
+      }
+      console.log('✅');
+    },
+  };
+}
