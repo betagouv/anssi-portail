@@ -22,9 +22,7 @@
   <meta name="description" content="{{ site.data.meta-description[page.url] | escape }}">
   {% if page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
 
-  {% if site.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD == 'true' %}
-  <meta property="csp-nonce" nonce="%%NONCE%%">
-  {% endif %}
+  <meta property="csp-nonce" content="%%NONCE%%">
 
   <link rel="stylesheet" href="{{ "/assets/styles/dsfr.css" | relative_url }}">
   <link rel="stylesheet" href="{{ "/assets/styles/site.css" | relative_url }}">
@@ -52,4 +50,5 @@
   {% if include.extra-js %}
     <script src="{{ include.extra-js | relative_url }}" type="module"></script>
   {% endif %}
+  {% include composant-svelte.html id="composants-ui" %}
 </head>
