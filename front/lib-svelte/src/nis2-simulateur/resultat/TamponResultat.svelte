@@ -1,13 +1,13 @@
 <script lang="ts">
+  /* eslint-disable svelte/no-at-html-tags */
+
   import {
     Regulation,
     type RegulationEntite,
     type ResultatEligibilite,
   } from '../../../../../back/src/metier/nis2-simulateur/Regulation.definitions';
+  import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
   import { sousTitre, titres } from './TamponResultat.textes';
-
-  /* eslint-disable svelte/no-at-html-tags */
-  // Le @html pour le HTML du fichier cousin `.textes`.
 
   interface Props {
     resultat: ResultatEligibilite;
@@ -31,9 +31,9 @@
   <lab-anssi-icone nom={icones[resultat.regulation]} taille="lg"></lab-anssi-icone>
 
   <h4 class="resume">
-    {@html titres[resultat.regulation][resultat.typeEntite]}
+    {@html aseptiseHtml(titres[resultat.regulation][resultat.typeEntite])}
   </h4>
-  <p>{@html sousTitre[resultat.regulation]}</p>
+  <p>{@html aseptiseHtml(sousTitre[resultat.regulation])}</p>
 </div>
 
 <style lang="scss">

@@ -4,6 +4,7 @@
   import { profilStore } from '../stores/profil.store';
   import Etapier from '../ui/Etapier.svelte';
   import Hero from '../ui/Hero.svelte';
+  import { aseptiseHtml } from '../utils/aseptisationDuHtml';
   import ComparaisonTest from './ComparaisonTest.svelte';
   import IntroductionTestMaturite from './IntroductionTestMaturite.svelte';
   import PartageTest from './PartageTest.svelte';
@@ -137,7 +138,7 @@
               <Etapier etapeCourante={$questionnaireStore.questionCourante} nombreEtapes={7} />
               <h2>
                 <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-                {@html etapesTestMaturite[$questionnaireStore.questionCourante].question}
+                {@html aseptiseHtml(etapesTestMaturite[$questionnaireStore.questionCourante].question)}
               </h2>
 
               {#if montreProposition}

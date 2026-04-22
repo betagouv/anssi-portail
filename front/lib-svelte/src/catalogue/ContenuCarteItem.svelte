@@ -1,5 +1,6 @@
 <script lang="ts">
   import BoutonFavori from '../favoris/BoutonFavori.svelte';
+  import { aseptiseHtml } from '../utils/aseptisationDuHtml';
   import { type ItemCyber, Typologie } from './Catalogue.types';
   import type { Guide } from './Guide.types';
   import BadgesDeCollections from './guides/BadgesDeCollections.svelte';
@@ -42,14 +43,14 @@
       <div class="nom-item">{item.thematique}</div>
     {:else}
       <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-      <div class="nom-item">{@html item.nom}</div>
+      <div class="nom-item">{@html aseptiseHtml(item.nom)}</div>
     {/if}
     {#if avecBoutonFavori}
       <BoutonFavori idItem={item.id} />
     {/if}
   </div>
   <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-  <span class="description">{@html tronque(item.description)}</span>
+  <span class="description">{@html tronque(aseptiseHtml(item.description))}</span>
 
   <div class="pied-carte">
     {#if estUnGuide(item)}
