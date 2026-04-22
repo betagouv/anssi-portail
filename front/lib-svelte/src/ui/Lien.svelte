@@ -1,4 +1,14 @@
-<svelte:options customElement={{ tag: 'msc-lien', shadow: 'none' }} />
+<svelte:options
+  customElement={{
+    props: {
+      blank: { type: 'Boolean', attribute: 'blank' },
+      iconeSeule: { type: 'Boolean', attribute: 'icone-seule' },
+      iconeADroite: { type: 'Boolean', attribute: 'icone-a-droite' },
+      neutre: { type: 'Boolean', attribute: 'neutre' },
+    },
+    shadow: 'none',
+  }}
+/>
 
 <script lang="ts">
   type Props = {
@@ -7,6 +17,7 @@
     href: string;
     icone?: string;
     iconeSeule?: boolean;
+    iconeADroite?: boolean;
     id?: string;
     libelle: string;
     neutre?: boolean;
@@ -20,7 +31,8 @@
     blank,
     href,
     icone = '',
-    iconeSeule = false,
+    iconeSeule,
+    iconeADroite,
     id,
     libelle,
     neutre,
@@ -31,6 +43,7 @@
   }: Props = $props();
 
   const hasIcon = $derived(!!icone);
+  const iconPlace = $derived(iconeADroite ? 'right' : 'left');
 
   const kind = $derived(
     type
@@ -48,10 +61,10 @@
     {blank}
     detail={telechargementDetails}
     download={telechargement}
-    {hasIcon}
+    has-icon={hasIcon}
     {href}
     icon={icone}
-    iconPlace="left"
+    icon-place={iconPlace}
     {id}
     label={libelle}
     neutral={neutre}
@@ -61,9 +74,9 @@
   <dsfr-button
     label={libelle}
     size={taille}
-    {hasIcon}
+    has-icon={hasIcon}
     icon={icone}
-    iconPlace={iconeSeule ? 'only' : 'left'}
+    icon-place={iconeSeule ? 'only' : iconPlace}
     {id}
     markup="a"
     {href}
@@ -71,3 +84,9 @@
     {kind}
   ></dsfr-button>
 {/if}
+
+<style lang="scss">
+  dsfr-link {
+    color: inherit;
+  }
+</style>
