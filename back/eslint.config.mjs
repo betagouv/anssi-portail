@@ -2,7 +2,8 @@
 
 import eslint from '@eslint/js';
 import { defineConfig } from 'eslint/config';
-import tseslilnt from 'typescript-eslint';
+import reglesEslint from 'regles-eslint';
+import tseslint from 'typescript-eslint';
 
 export default defineConfig(
   {
@@ -10,7 +11,7 @@ export default defineConfig(
   },
   {
     files: ['**/*.ts'],
-    extends: [eslint.configs.recommended, tseslilnt.configs.recommended],
+    extends: [eslint.configs.recommended, tseslint.configs.recommended],
     rules: {
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -30,5 +31,9 @@ export default defineConfig(
         tsconfigRootDir: import.meta.dirname,
       },
     },
+  },
+  {
+    files: ['src/api/**/*.ts'],
+    extends: [eslint.configs.recommended, tseslint.configs.recommended, reglesEslint.configs.all],
   }
 );

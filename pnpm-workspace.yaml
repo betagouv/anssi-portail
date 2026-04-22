@@ -8,6 +8,7 @@ packages:
   - 'mise-a-jour-financements'
   - 'demande-diag'
   - 'comparaison-grist'
+  - 'regles-eslint'
 
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 preferFrozenLockfile: true
