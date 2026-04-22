@@ -3,10 +3,8 @@
     PointsAttentionPrecis,
     ResumesPointsAttention,
   } from '../../../../../back/src/metier/nis2-simulateur/Regulation.definitions';
+  import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
   import { Precisions, TextesDesResumes } from './PointsAttention.contenus';
-
-  /* eslint-disable svelte/no-at-html-tags */
-  // Les @html sont pour les contenus venant de `.contenus.ts`.
 
   interface Props {
     resumes: ResumesPointsAttention[];
@@ -24,7 +22,8 @@
 
     {#each props.precisions as p, i (i)}
       <h6>{Precisions[p].titre}</h6>
-      <p>{@html Precisions[p].texte}</p>
+      <!-- eslint-disable svelte/no-at-html-tags -->
+      <p>{@html aseptiseHtml(Precisions[p].texte)}</p>
     {/each}
   </dsfr-accordion>
 </div>

@@ -1,10 +1,7 @@
 <script lang="ts">
   import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions';
   import { listeDescriptionsActivites } from '../../../../../back/src/metier/nis2-simulateur/ListeDescriptionsActivites';
-
-  /* eslint-disable svelte/no-at-html-tags */
-  // Le @html est utilisé sur des valeurs venant de `listeDescriptionsActivites`.
-  // Pas sur des entrées d'utilisateurs.
+  import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
 
   interface Props {
     activite: Activite;
@@ -19,7 +16,8 @@
   <dsfr-highlight text="abc" size="sm">
     <b slot="title">{titre}</b>
     <div class="description-msc" slot="text">
-      {@html description}
+      <!-- eslint-disable next-line svelte/no-at-html-tags -->
+      {@html aseptiseHtml(description)}
     </div>
   </dsfr-highlight>
 {/each}
