@@ -144,6 +144,14 @@
       </div>
     </div>
   </div>
+{:else}
+  <dsfr-container>
+    <div class="non-trouve">
+      <h1>Guide introuvable</h1>
+      <p>Le guide demandé n’a pas pu être trouvé.</p>
+      <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Guide introuvable" />
+    </div>
+  </dsfr-container>
 {/if}
 
 <style lang="scss">
@@ -414,5 +422,11 @@
         margin-left: auto;
       }
     }
+  }
+
+  .non-trouve {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 </style>
