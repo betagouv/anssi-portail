@@ -4,15 +4,11 @@ import { CodeDepartement, estCodeDepartement } from '../metier/referentielDepart
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 
-const ressourceAnnuaireOrganisations = ({
-  middleware,
-  adaptateurRechercheEntreprise,
-}: ConfigurationServeur): Router => {
+const ressourceAnnuaireOrganisations = ({ adaptateurRechercheEntreprise }: ConfigurationServeur): Router => {
   const routeur = Router();
   routeur.get(
     '/',
     cors(),
-    middleware.aseptise('recherche', 'departement'),
     filetRouteAsynchrone(async (requete, reponse) => {
       const recherche = requete.query.recherche ? requete.query.recherche.toString() : '';
       const departement = requete.query.departement ? requete.query.departement.toString() : null;

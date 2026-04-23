@@ -1,6 +1,6 @@
 import { HttpStatusCode } from 'axios';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
-import { check, validationResult } from 'express-validator';
+import { validationResult } from 'express-validator';
 import helmet from 'helmet';
 import { randomBytes } from 'node:crypto';
 import fs from 'node:fs';
@@ -14,7 +14,6 @@ import { FournisseurChemin } from './fournisseurChemin';
 type FonctionMiddleware = (requete: Request, reponse: Response, suite: NextFunction) => Promise<void>;
 
 export type Middleware = {
-  aseptise: (...nomsParametres: string[]) => FonctionMiddleware;
   valide: () => FonctionMiddleware;
   interdisLaMiseEnCache: FonctionMiddleware;
   verifieJWT: FonctionMiddleware;
@@ -37,14 +36,6 @@ export const fabriqueMiddleware = ({
   fournisseurChemin: FournisseurChemin;
   adaptateurEnvironnement: AdaptateurEnvironnement;
 }): Middleware => {
-  const aseptise =
-    (...nomsParametres: string[]) =>
-    async (requete: Request, _reponse: Response, suite: NextFunction) => {
-      const aseptisations = nomsParametres.map((p) => check(p).trim().escape().run(requete));
-      await Promise.all(aseptisations);
-      suite();
-    };
-
   const valide = () => async (requete: Request, reponse: Response, suite: NextFunction) => {
     const erreurs = validationResult(requete);
     if (!erreurs.isEmpty()) {
@@ -183,7 +174,6 @@ export const fabriqueMiddleware = ({
   };
 
   return {
-    aseptise,
     valide,
     verifieJWT,
     verifieJWTNavigation,

@@ -16,27 +16,6 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
     serveur = creeServeur(configurationDeTestDuServeur);
   });
 
-  it('aseptise les paramètres de la requête', async () => {
-    let termeCherche;
-    let departementCherche;
-    const unAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
-      rechercheOrganisations: async (terme: string, departement: string | null) => {
-        termeCherche = terme;
-        departementCherche = departement;
-        return [];
-      },
-    };
-    serveur = creeServeur({
-      ...configurationDeTestDuServeur,
-      adaptateurRechercheEntreprise: unAdaptateurRechercheEntreprise,
-    });
-
-    await request(serveur).get('/api/annuaire/organisations?recherche=ma>recherche&departement=33      ');
-
-    assert.equal(termeCherche, 'ma&gt;recherche');
-    assert.equal(departementCherche, '33');
-  });
-
   it('retourne une erreur HTTP 400 si le terme de recherche est vide', async () => {
     const reponse = await request(serveur).get('/api/annuaire/organisations?recherche=&departement=mon>departement');
     assert.equal(reponse.status, 400);

@@ -1,10 +1,11 @@
 import cors from 'cors';
 import { Router } from 'express';
 import { body, check } from 'express-validator';
+import { encode } from 'html-entities';
 import { codeDepartement } from '../../metier/referentielDepartements';
 import { ConfigurationServeur } from '../configurationServeur';
-import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 import { filetRouteAsynchrone } from '../middleware';
+import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 export type CorpsDemandeAide = {
   origine?: string;
@@ -27,13 +28,6 @@ const ressourceDemandesAide = ({ adaptateurMonAideCyber, middleware }: Configura
   routeur.post(
     '/',
     cors(),
-    middleware.aseptise(
-      'entiteAidee.email',
-      'entiteAidee.departement',
-      'entiteAidee.raisonSociale',
-      'emailAidant',
-      'identifiantAidant'
-    ),
     check('entiteAidee.departement')
       .isString()
       .isIn(codeDepartement)
@@ -68,17 +62,18 @@ const ressourceDemandesAide = ({ adaptateurMonAideCyber, middleware }: Configura
       try {
         const { emailAidant, identifiantAidant, siretAidant, entiteAidee, origine } = requete.body;
         const { email, departement, raisonSociale, siret } = entiteAidee;
+        // suite à la suppression de l'aseptisation, on force un encodage pour garder des données consistantes envoyées à Mon Aide Cyber
         await adaptateurMonAideCyber.creeDemandeAide({
           ...(origine && { origine }),
           aidant: {
-            ...(emailAidant && { email: emailAidant }),
+            ...(emailAidant && { email: encode(emailAidant) }),
             ...(identifiantAidant && { identifiant: identifiantAidant }),
             ...(siretAidant && { siret: siretAidant }),
           },
           entiteAidee: {
-            email,
+            email: encode(email),
             departement,
-            raisonSociale,
+            raisonSociale: encode(raisonSociale),
             siret,
           },
         });

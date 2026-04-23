@@ -9,12 +9,10 @@ import { filetRouteAsynchrone } from '../middleware';
 export const ressourceRepartitionDesResultatsDeTest = ({
   entrepotResultatTest,
   adaptateurEnvironnement,
-  middleware,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
     '/',
-    middleware.aseptise('secteur', 'tailleOrganisation', 'region'),
     filetRouteAsynchrone(
       async (
         requete: Request<unknown, unknown, unknown, { secteur?: string; tailleOrganisation?: string; region?: string }>,

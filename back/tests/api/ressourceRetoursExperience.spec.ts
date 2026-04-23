@@ -87,20 +87,6 @@ describe("La ressource des retours d'expérience", () => {
       assert.equal(reponse.status, 201);
     });
 
-    it('aseptise les paramètres', async () => {
-      let retourExperienceEnvoye: RetourExperience | null = null;
-      messagerieInstantanee.notifieUnRetourExperience = async (retourExperience: RetourExperience) => {
-        retourExperienceEnvoye = retourExperience;
-      };
-
-      await request(serveur).post('/api/retours-experience').send({
-        raison: 'pas-clair',
-        precision: '  <>',
-      });
-
-      assert.equal(retourExperienceEnvoye!.precision, '&lt;&gt;');
-    });
-
     it('accepte la raison pas-decisionnaire', async () => {
       const reponse = await request(serveur).post('/api/retours-experience').send({
         raison: 'pas-decisionnaire',

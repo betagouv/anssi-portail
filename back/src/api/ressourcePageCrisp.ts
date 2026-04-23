@@ -1,12 +1,11 @@
-import { ConfigurationServeur } from './configurationServeur';
 import { Request, Response, Router } from 'express';
+import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 
-const ressourcePageCrisp = ({ cmsCrisp, adaptateurEnvironnement, middleware }: ConfigurationServeur) => {
+const ressourcePageCrisp = ({ cmsCrisp, adaptateurEnvironnement }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
     '/:id',
-    middleware.aseptise('id'),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const idArticle = adaptateurEnvironnement.crisp().idArticle((requete.params.id as string).toUpperCase());
       if (!idArticle) {

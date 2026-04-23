@@ -4,13 +4,11 @@ import { filetRouteAsynchrone } from '../middleware';
 
 export const ressourceResultatsSessionDeGroupe = ({
   entrepotSessionDeGroupe,
-  middleware,
   entrepotResultatTest,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
     '/:code/resultats',
-    middleware.aseptise('code'),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const session = await entrepotSessionDeGroupe.parCode(requete.params.code as string);
       if (!session) {
