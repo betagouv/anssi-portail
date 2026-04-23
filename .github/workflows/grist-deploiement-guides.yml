@@ -11,11 +11,6 @@ jobs:
     uses: ./.github/workflows/grist-deploiement.yml
     with:
       cible: guides
-    secrets: inherit
   compare-et-deploie-cellar:
     name: 'Documents'
     uses: ./.github/workflows/cellar-deploiement.yml
-    with:
-      bucket-source: ${{ secrets.GUIDES_BUCKET_SOURCE }}
-      bucket-cible: ${{ secrets.GUIDES_BUCKET_CIBLE }}
-    secrets: inherit

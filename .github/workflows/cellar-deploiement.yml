@@ -4,15 +4,6 @@ permissions: {}
 
 on:
   workflow_call:
-    inputs:
-      bucket-source:
-        description: 'Bucket source'
-        type: string
-        required: true
-      bucket-cible:
-        description: 'Bucket cible'
-        type: string
-        required: true
 
 jobs:
   compare-les-buckets:
@@ -39,10 +30,10 @@ jobs:
         id: check
         run: |
           mkdir -p resultats
-
+          
           rclone check \
-            cellar:${{ inputs.bucket-source }} \
-            cellar:${{ inputs.bucket-cible }} \
+            cellar:${{ secrets.GUIDES_BUCKET_SOURCE }} \
+            cellar:${{ secrets.GUIDES_BUCKET_CIBLE }} \
             --one-way \
             --differ resultats/modifications.txt \
             --missing-on-dst resultats/ajouts.txt \
@@ -97,7 +88,7 @@ jobs:
 
       - name: Génère les empreintes des fichiers
         run: |
-          rclone md5sum cellar:${{ inputs.bucket-source }} | sort > empreintes-cellar.txt
+          rclone md5sum cellar:${{ secrets.GUIDES_BUCKET_SOURCE }} | sort > empreintes-cellar.txt
 
       - name: Sauvegarde les empreintes des fichiers sources
         uses: actions/upload-artifact@v4
@@ -148,7 +139,7 @@ jobs:
 
       - name: Regénère les empreintes des fichiers
         run: |
-          rclone md5sum cellar:${{ inputs.bucket-source }} | sort > nouvelles-empreintes-cellar.txt
+          rclone md5sum cellar:${{ secrets.GUIDES_BUCKET_SOURCE }} | sort > nouvelles-empreintes-cellar.txt
 
       - name: Compare les empreintes
         id: compare-empreintes-cellar
@@ -166,5 +157,5 @@ jobs:
         if: steps.compare-empreintes-cellar.outputs.resultat == 'ok'
         run: |
           rclone sync \
-            cellar:${{ inputs.bucket-source }} \
-            cellar:${{ inputs.bucket-cible }} \
+            cellar:${{ secrets.GUIDES_BUCKET_SOURCE }} \
+            cellar:${{ secrets.GUIDES_BUCKET_CIBLE }} \
