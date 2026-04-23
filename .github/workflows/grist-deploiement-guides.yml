@@ -16,6 +16,6 @@ jobs:
     name: 'Documents'
     uses: ./.github/workflows/cellar-deploiement.yml
     with:
-      bucket-source: ${{ env.GUIDES_BUCKET_SOURCE }}
-      bucket-cible: ${{ env.GUIDES_BUCKET_CIBLE }}
+      bucket-source: ${{ secrets.GUIDES_BUCKET_SOURCE }}
+      bucket-cible: ${{ secrets.GUIDES_BUCKET_CIBLE }}
     secrets: inherit
