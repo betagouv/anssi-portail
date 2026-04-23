@@ -16,6 +16,6 @@ jobs:
     name: 'Documents'
     uses: ./.github/workflows/cellar-deploiement.yml
     with:
-      bucket-source: messervicescyber-guides-demo
-      bucket-cible: msc-guides-demo-test-sync
+      bucket-source: ${{ env.GUIDES_BUCKET_SOURCE }}
+      bucket-cible: ${{ env.GUIDES_BUCKET_CIBLE }}
     secrets: inherit
