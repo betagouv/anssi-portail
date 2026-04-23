@@ -1,9 +1,9 @@
 <script lang="ts">
-  import ChampTexte from '../ChampTexte.svelte';
+  import axios from 'axios';
   import { createEventDispatcher, tick } from 'svelte';
   import { validationChamp } from '../../directives/validationChamp';
-  import axios from 'axios';
-  import type { Organisation, Departement } from './SelectionOrganisation.types.ts';
+  import ChampTexte from '../ChampTexte.svelte';
+  import type { Departement, Organisation } from './SelectionOrganisation.types.ts';
 
   type ReponseApiAnnuaireOrganisations = {
     suggestions: Organisation[];
@@ -107,8 +107,7 @@
           }
         }}
       >
-        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-        <div>{@html suggestion.label}</div>
+        <div>{suggestion.label}</div>
       </div>
     {/each}
   </div>
