@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { decode } from 'html-entities';
 import { adaptateurProfilAnssiVide } from './adaptateurProfilAnssiVide';
 
 const CONFIGURATION_AUTHENTIFICATION = {
@@ -48,7 +49,9 @@ const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
     const urlProfil = `${process.env.PROFIL_ANSSI_URL_BASE}/profil/${email}`;
     try {
       const reponse = await axios.get(urlProfil, CONFIGURATION_AUTHENTIFICATION);
-      return reponse.data;
+      return JSON.parse(
+        JSON.stringify(reponse.data, (_cle, valeur) => (typeof valeur === 'string' ? decode(valeur) : valeur))
+      );
     } catch (e) {
       if (axios.isAxiosError(e) && e.response?.status !== 404) {
         console.error({

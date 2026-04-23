@@ -1,7 +1,8 @@
 import { Request, Response, Router } from 'express';
+import { decode } from 'html-entities';
+import { estCodeDepartement, regionDuDepartement } from '../metier/referentielDepartements';
 import { Organisation } from '../metier/utilisateur';
 import { ConfigurationServeur } from './configurationServeur';
-import { estCodeDepartement, regionDuDepartement } from '../metier/referentielDepartements';
 import { filetRouteAsynchrone } from './middleware';
 
 const ressourceProfil = ({
@@ -31,7 +32,7 @@ const ressourceProfil = ({
           email: utilisateurConnecte?.email,
           nom: utilisateurConnecte?.nom,
           prenom: utilisateurConnecte?.prenom,
-          siret: organisation?.siret,
+          siret: decode(organisation?.siret),
           estAgentAnssi: await utilisateurConnecte?.estAgentAnssi(),
           idListeFavoris: utilisateurConnecte?.idListeFavoris,
           codeDepartement,
