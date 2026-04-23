@@ -59,5 +59,5 @@
 {:else if ongletActif === 'historique' && $profilStore}
   <HistoriqueTests {idResultatTest} />
 {:else if $profilStore}
-  <ComparaisonTest testRealise={true} />
+  <ComparaisonTest />
 {/if}

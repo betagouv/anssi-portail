@@ -12,11 +12,9 @@
     InfosOrganisation,
     RepartitionResultatsTestPourUnNiveau,
   } from './ResultatsTest.type';
+  import { construisSerie } from './resultatTest';
   import ResumeRadarComparaison from './ResumeRadarComparaison.svelte';
   import type { Serie, SerieRadar } from './Serie';
-  import { construisSerie } from './resultatTest';
-
-  export let testRealise = false;
 
   const libelleDeNiveau = (idNiveau: IdNiveau) => {
     return niveauxMaturite.find((niveau) => niveau.id === idNiveau)!.label;
@@ -90,124 +88,113 @@
   };
 </script>
 
-{#if testRealise}
-  {#if infosOrganisation}
-    <section class="filtres">
-      <div class="contenu-section">
-        <div class="description">
-          <p>
-            <strong>
-              Affinez votre comparaison en filtrant les résultats par secteur d’activité, taille d’organisation et
-              région.
-            </strong>
-          </p>
-          <p>Ces filtres peuvent être combinés pour une analyse plus précise.</p>
-        </div>
-        <div class="tags">
-          {#if infosOrganisation.secteur}
-            <lab-anssi-tag
-              role="button"
-              tabindex="0"
-              label={infosOrganisation.secteur.libelle}
-              taille="md"
-              type="selectionnable"
-              presse={filtre.secteur}
-              on:click={() => basculeLeFiltre('secteur')}
-              on:keypress
-            >
-            </lab-anssi-tag>
-          {/if}
-          {#if infosOrganisation.trancheEffectif}
-            <lab-anssi-tag
-              role="button"
-              tabindex="0"
-              label={infosOrganisation.trancheEffectif.libelle}
-              taille="md"
-              type="selectionnable"
-              presse={filtre.taille}
-              on:click={() => basculeLeFiltre('taille')}
-              on:keypress
-            >
-            </lab-anssi-tag>
-          {/if}
-          {#if infosOrganisation.region}
-            <lab-anssi-tag
-              role="button"
-              tabindex="0"
-              label={infosOrganisation.region.libelle}
-              taille="md"
-              type="selectionnable"
-              presse={filtre.region}
-              on:click={() => basculeLeFiltre('region')}
-              on:keypress
-            >
-            </lab-anssi-tag>
-          {/if}
-        </div>
-        <p class="note texte-mention-xs">
-          Certains filtres peuvent ne pas donner de résultat. Nos données s’enrichissent régulièrement grâce aux tests
-          réalisés.
-        </p>
-      </div>
-    </section>
-  {/if}
-  {#if serie.length > 0}
-    <section class="repartition-organisations">
-      <div class="contenu-section">
-        <h2>Répartition des organisations</h2>
-        <div class="repartition-niveaux-maturite">
-          <GraphiqueAnneau {serie} nomDeLaDonnee="organisations" />
-          <LegendeAnneau {serie} actif={libelleNiveauCourant} />
-        </div>
-      </div>
-    </section>
-    <section class="separator">
-      <div class="contenu-section">
-        <hr />
-      </div>
-    </section>
-    <section class="repartition-reponses">
-      <div class="contenu-section">
-        <h2>Répartition des réponses</h2>
-        <RadarSessionGroupe series={seriesRadar} affichageReduit />
-        <ResumeRadarComparaison series={seriesRadar} actif={niveauCourant} />
-        <div class="message-information texte-mention-xs">
-          Le résultat obtenu est une évaluation indicative basée sur un modèle élaboré par l’ANSSI. La maturité cyber
-          n’est pas une évaluation du niveau de sécurité des systèmes d’information d’une organisation mais de sa
-          posture à l’égard des enjeux cyber.
-        </div>
-      </div>
-    </section>
-  {:else}
-    <section class="pas-assez-de-resultats">
-      <div class="contenu-section">
-        <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Pas assez de résultats" />
-        <h4>Pas de résultat 😔</h4>
-        <p>
-          Nous n’avons pas encore assez de données pour afficher une comparaison fiable avec les filtres sélectionnés.
-        </p>
-        <lab-anssi-bouton
-          on:click={reinitialiseLesFiltres}
-          on:keypress
-          role="button"
-          taille="md"
-          tabindex={0}
-          titre="Réinitialiser les filtres"
-          variante="tertiaire"
-        ></lab-anssi-bouton>
-      </div>
-    </section>
-  {/if}
-{:else}
-  <section class="pas-de-test">
+{#if infosOrganisation}
+  <section class="filtres">
     <div class="contenu-section">
-      <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Bientôt disponible" />
-      <h4>Vous souhaitez comparer la maturité cyber de votre organisation ?</h4>
-      <p>Pour cela vous devez d’abord réaliser le test de maturité cyber.</p>
-      <a href="/test-maturite" class="bouton primaire"> Débuter le test </a>
+      <div class="description">
+        <p>
+          <strong>
+            Affinez votre comparaison en filtrant les résultats par secteur d’activité, taille d’organisation et région.
+          </strong>
+        </p>
+        <p>Ces filtres peuvent être combinés pour une analyse plus précise.</p>
+      </div>
+      <div class="tags">
+        {#if infosOrganisation.secteur}
+          <lab-anssi-tag
+            role="button"
+            tabindex="0"
+            label={infosOrganisation.secteur.libelle}
+            taille="md"
+            type="selectionnable"
+            presse={filtre.secteur}
+            on:click={() => basculeLeFiltre('secteur')}
+            on:keypress
+          >
+          </lab-anssi-tag>
+        {/if}
+        {#if infosOrganisation.trancheEffectif}
+          <lab-anssi-tag
+            role="button"
+            tabindex="0"
+            label={infosOrganisation.trancheEffectif.libelle}
+            taille="md"
+            type="selectionnable"
+            presse={filtre.taille}
+            on:click={() => basculeLeFiltre('taille')}
+            on:keypress
+          >
+          </lab-anssi-tag>
+        {/if}
+        {#if infosOrganisation.region}
+          <lab-anssi-tag
+            role="button"
+            tabindex="0"
+            label={infosOrganisation.region.libelle}
+            taille="md"
+            type="selectionnable"
+            presse={filtre.region}
+            on:click={() => basculeLeFiltre('region')}
+            on:keypress
+          >
+          </lab-anssi-tag>
+        {/if}
+      </div>
+      <p class="note texte-mention-xs">
+        Certains filtres peuvent ne pas donner de résultat. Nos données s’enrichissent régulièrement grâce aux tests
+        réalisés.
+      </p>
     </div>
   </section>
 {/if}
+{#if serie.length > 0}
+  <section class="repartition-organisations">
+    <div class="contenu-section">
+      <h2>Répartition des organisations</h2>
+      <div class="repartition-niveaux-maturite">
+        <GraphiqueAnneau {serie} nomDeLaDonnee="organisations" />
+        <LegendeAnneau {serie} actif={libelleNiveauCourant} />
+      </div>
+    </div>
+  </section>
+  <section class="separator">
+    <div class="contenu-section">
+      <hr />
+    </div>
+  </section>
+  <section class="repartition-reponses">
+    <div class="contenu-section">
+      <h2>Répartition des réponses</h2>
+      <RadarSessionGroupe series={seriesRadar} affichageReduit />
+      <ResumeRadarComparaison series={seriesRadar} actif={niveauCourant} />
+      <div class="message-information texte-mention-xs">
+        Le résultat obtenu est une évaluation indicative basée sur un modèle élaboré par l’ANSSI. La maturité cyber
+        n’est pas une évaluation du niveau de sécurité des systèmes d’information d’une organisation mais de sa posture
+        à l’égard des enjeux cyber.
+      </div>
+    </div>
+  </section>
+{:else}
+  <section class="pas-assez-de-resultats">
+    <div class="contenu-section">
+      <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Pas assez de résultats" />
+      <h4>Pas de résultat 😔</h4>
+      <p>
+        Nous n’avons pas encore assez de données pour afficher une comparaison fiable avec les filtres sélectionnés.
+      </p>
+      <lab-anssi-bouton
+        on:click={reinitialiseLesFiltres}
+        on:keypress
+        role="button"
+        taille="md"
+        tabindex={0}
+        titre="Réinitialiser les filtres"
+        variante="tertiaire"
+      ></lab-anssi-bouton>
+    </div>
+  </section>
+{/if}
+
 <PartageTest />
 
 <style lang="scss">
@@ -294,7 +281,6 @@
     }
   }
 
-  .pas-de-test,
   .pas-assez-de-resultats {
     .contenu-section {
       display: flex;
