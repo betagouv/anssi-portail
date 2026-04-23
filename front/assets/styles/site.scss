@@ -695,7 +695,11 @@ footer {
         }
       }
 
+      msc-lien {
+        align-self: flex-end;
+      }
       a {
+        // AFAC quand tous les liens seront des msc-lien
         display: inline-flex;
         align-items: center;
         gap: 8px;
