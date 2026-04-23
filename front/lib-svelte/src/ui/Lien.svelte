@@ -11,6 +11,8 @@
 />
 
 <script lang="ts">
+  import { clic } from '../directives/actions.svelte';
+
   type Props = {
     apparence?: 'lien' | 'bouton';
     blank?: boolean;
@@ -25,6 +27,8 @@
     telechargement?: string;
     telechargementDetails?: string;
     type?: 'primaire' | 'secondaire' | 'secondaire-inverse';
+    'data-source'?: string;
+    'data-cible'?: string;
   };
   const {
     apparence = 'lien',
@@ -40,6 +44,7 @@
     telechargement,
     telechargementDetails,
     type,
+    ...reste
   }: Props = $props();
 
   const hasIcon = $derived(!!icone);
@@ -54,6 +59,10 @@
         }[type]
       : 'primary'
   );
+  const traceClic = () => {
+    const cible = href.startsWith('/') ? `${window.location.protocol}//${window.location.host}${href}` : href;
+    window._paq?.push(['trackLink', cible, telechargement ? 'download' : 'link']);
+  };
 </script>
 
 {#if apparence == 'lien'}
@@ -69,6 +78,8 @@
     label={libelle}
     neutral={neutre}
     size={taille}
+    use:clic={traceClic}
+    {...reste}
   ></dsfr-link>
 {:else}
   <dsfr-button
@@ -82,6 +93,8 @@
     {href}
     target={blank ? '_blank' : '_self'}
     {kind}
+    use:clic={traceClic}
+    {...reste}
   ></dsfr-button>
 {/if}
 
