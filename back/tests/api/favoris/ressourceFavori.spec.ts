@@ -1,7 +1,14 @@
+import { Express } from 'express';
+import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { Express } from 'express';
+import { fabriqueMiddleware } from '../../../src/api/middleware';
 import { creeServeur } from '../../../src/api/msc';
+import { MiseAJourFavorisUtilisateur } from '../../../src/bus/miseAJourFavorisUtilisateur';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
+import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
+import { encodeSession } from '../cookie';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurEnvironnement,
@@ -9,13 +16,6 @@ import {
   fauxFournisseurDeChemin,
   fauxMiddleware,
 } from '../fauxObjets';
-import assert from 'node:assert';
-import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire';
-import { encodeSession } from '../cookie';
-import { fabriqueMiddleware } from '../../../src/api/middleware';
-import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
-import { MiseAJourFavorisUtilisateur } from '../../../src/bus/miseAJourFavorisUtilisateur';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { jeanneDupont } from '../objetsPretsALEmploi';
 
 describe('La ressource des services et ressources favoris', () => {
@@ -79,18 +79,6 @@ describe('La ressource des services et ressources favoris', () => {
         .set('Cookie', [cookieJeanneDupont]);
 
       assert.equal(reponse.statusCode, 200);
-      const favoris = await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
-      assert.equal(favoris.length, 0);
-    });
-
-    it('aseptise le paramètre id', async () => {
-      await entrepotFavori.ajoute({
-        idItemCyber: 'unId&lt;truc',
-        utilisateur: jeanneDupont,
-      });
-
-      await request(serveur).delete(`/api/favoris/unId<truc`).set('Cookie', [cookieJeanneDupont]);
-
       const favoris = await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
       assert.equal(favoris.length, 0);
     });

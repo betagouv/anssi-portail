@@ -343,15 +343,6 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           assert.equal(reponse.status, 400);
           assert.equal(reponse.body.erreur, 'Les valeurs de réponses doivent être comprises entre 1 et 5');
         });
-
-        it('aseptise le code de session de groupe', async () => {
-          await requeteAvecDonneeIncorrecte({
-            codeSessionGroupe: ' ABC2ED ',
-          });
-
-          const evenement = busEvenements.recupereEvenement(TestRealise);
-          assert.equal(evenement!.codeSessionGroupe, 'ABC2ED');
-        });
       });
     });
 

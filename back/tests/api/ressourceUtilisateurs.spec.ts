@@ -131,42 +131,6 @@ describe('La ressource utilisateur', () => {
       assert.equal(evenement!.telephone, '0123456789');
     });
 
-    it('aseptise les paramètres', async () => {
-      adaptateurRechercheEntreprise.rechercheOrganisations = async () => [
-        {
-          nom: '',
-          departement: '',
-          siret: '13000766900018',
-          codeTrancheEffectif: '01',
-          codeRegion: 'FR-ARA',
-          codeSecteur: 'D',
-          estAssociation: false,
-          estCollectivite: false,
-          codeActivite: '62.01Z',
-        },
-      ];
-
-      await request(serveur)
-        .post('/api/utilisateurs')
-        .send({
-          email: '  jeanne.dupont@user.com',
-          prenom: '<Jeanne',
-          nom: '<Dupont',
-          telephone: ' 0123456789',
-          domainesSpecialite: [' RSSI'],
-          siretEntite: ' 13000766900018',
-          cguAcceptees: true,
-          infolettreAcceptee: true,
-          token: donneesUtilisateur.token,
-        });
-
-      const jeanne = await entrepotUtilisateur.parEmailHache('jeanne.dupont@user.com-hache');
-      assert.notEqual(jeanne, undefined);
-      assert.equal(jeanne?.telephone, '0123456789');
-      assert.deepEqual(jeanne?.domainesSpecialite, ['RSSI']);
-      assert.equal((await jeanne?.organisation())?.siret, '13000766900018');
-    });
-
     describe('concernant la validation des données', () => {
       it('valide le téléphone', async () => {
         const reponse = await request(serveur)

@@ -57,7 +57,6 @@ const ressourceResultatsDeTest = ({
     ],
     middleware.valide(),
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
-    middleware.aseptise('codeSessionGroupe'),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const { tailleOrganisation, region, secteur, reponses, codeSessionGroupe } = requete.body;
 

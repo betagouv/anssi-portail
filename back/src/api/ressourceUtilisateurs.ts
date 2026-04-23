@@ -1,8 +1,9 @@
 import { Request, Response, Router } from 'express';
-import { ConfigurationServeur } from './configurationServeur';
 import { check } from 'express-validator';
+import { encode } from 'html-entities';
 import { CompteCree } from '../bus/evenements/compteCree';
 import { Utilisateur } from '../metier/utilisateur';
+import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 
 const ressourceUtilisateurs = ({
@@ -15,7 +16,6 @@ const ressourceUtilisateurs = ({
   const routeur = Router();
   routeur.post(
     '/',
-    middleware.aseptise('telephone', 'domainesSpecialite.*', 'siretEntite'),
     [
       check('token').not().isEmpty().withMessage('Le token est invalide'),
       check('telephone')
@@ -52,7 +52,11 @@ const ressourceUtilisateurs = ({
 
         await entrepotUtilisateur.ajoute(utilisateur);
 
-        await busEvenements.publie(new CompteCree({ email, prenom, nom, infoLettre: infolettreAcceptee, telephone }));
+        // suite à la suppression de l'aseptisation, on force un encodage pour garder des données consistantes dans la base de données Journal
+        const telephoneEncode = encode(telephone);
+        await busEvenements.publie(
+          new CompteCree({ email, prenom, nom, infoLettre: infolettreAcceptee, telephone: telephoneEncode })
+        );
 
         reponse.sendStatus(201);
       } catch {

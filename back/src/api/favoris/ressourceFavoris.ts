@@ -1,6 +1,5 @@
 import { Request, Response, Router } from 'express';
 import { check } from 'express-validator';
-import { decode } from 'html-entities';
 import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
@@ -17,12 +16,11 @@ const ressourceFavoris = ({
   routeur.post(
     '/',
     middleware.verifieJWT,
-    middleware.aseptise('idItemCyber'),
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     [check('idItemCyber').not().isEmpty().withMessage("L'idItemCyber est invalide")],
     middleware.valide(),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
-      const idItemCyber = decode(requete.body.idItemCyber);
+      const idItemCyber = requete.body.idItemCyber as string;
       const utilisateur = requete.utilisateur;
       await entrepotFavori.ajoute({
         idItemCyber,

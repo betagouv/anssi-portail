@@ -1,7 +1,14 @@
+import { Express } from 'express';
+import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { Express } from 'express';
+import { fabriqueMiddleware } from '../../../src/api/middleware';
 import { creeServeur } from '../../../src/api/msc';
+import { MiseAJourFavorisUtilisateur } from '../../../src/bus/miseAJourFavorisUtilisateur';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
+import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
+import { encodeSession } from '../cookie';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurEnvironnement,
@@ -9,14 +16,7 @@ import {
   fauxFournisseurDeChemin,
   fauxMiddleware,
 } from '../fauxObjets';
-import assert from 'node:assert';
-import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire';
-import { encodeSession } from '../cookie';
-import { fabriqueMiddleware } from '../../../src/api/middleware';
-import { MiseAJourFavorisUtilisateur } from '../../../src/bus/miseAJourFavorisUtilisateur';
-import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
 import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource des services et ressources favoris', () => {
   let serveur: Express;
@@ -86,17 +86,6 @@ describe('La ressource des services et ressources favoris', () => {
       assert.equal(ceuxDeUtilisateur.length, 1);
       assert.equal(ceuxDeUtilisateur[0].idItemCyber, 'unId');
       assert.deepEqual(ceuxDeUtilisateur[0].utilisateur, jeanneDupont);
-    });
-
-    it('aseptise le contenu du body et remet les slash en place', async () => {
-      await request(serveur)
-        .post('/api/favoris')
-        .set('Cookie', [cookieJeanneDupont])
-        .send({ idItemCyber: '/services/mon-service-cyber  ' });
-
-      const ceuxDeUtilisateur = await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
-
-      assert.equal(ceuxDeUtilisateur[0].idItemCyber, '/services/mon-service-cyber');
     });
   });
 

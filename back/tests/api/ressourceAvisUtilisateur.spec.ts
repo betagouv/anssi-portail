@@ -87,22 +87,5 @@ describe('La ressource avis utilisateur', () => {
       assert.equal(reponse.status, 400);
       assert.equal(reponse.body.erreur, "L'email est invalide");
     });
-
-    it('asseptise le champ commentaire', async () => {
-      let avisUtilisateurEnvoye: AvisUtilisateur | undefined;
-      messagerieInstantanee.notifieUnAvisUtilisateur = async (avisUtilisateur: AvisUtilisateur) => {
-        avisUtilisateurEnvoye = avisUtilisateur;
-      };
-
-      await request(serveur)
-        .post('/api/avis-utilisateur')
-        .send({ ...avisUtilisateur, commentaire: '<span>Bonjour !</span>' });
-
-      assert.deepEqual(avisUtilisateurEnvoye, {
-        niveauDeSatisfaction: 2,
-        commentaire: '&lt;span&gt;Bonjour !&lt;&#x2F;span&gt;',
-        emailDeContact: 'mon.mail@mail.com',
-      });
-    });
   });
 });

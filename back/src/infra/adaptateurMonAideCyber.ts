@@ -1,7 +1,7 @@
 import axios from 'axios';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { adaptateurMonAideCyberVide } from './adaptateurMonAideCyberVide';
 import { Cache } from './cache';
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 
 export type DemandeAide = {
   origine?: string;

@@ -19,7 +19,6 @@ export const ressourceAvisUtilisateur = ({
       check('emailDeContact').optional({ values: 'falsy' }).isEmail().withMessage("L'email est invalide"),
     ],
     middleware.valide(),
-    middleware.aseptise('commentaire'),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const { niveauDeSatisfaction, commentaire, emailDeContact } = requete.body as AvisUtilisateur;
       await messagerieInstantanee.notifieUnAvisUtilisateur({

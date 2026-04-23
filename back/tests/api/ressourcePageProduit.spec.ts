@@ -1,10 +1,10 @@
-import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
-import { FournisseurChemin } from '../../src/api/fournisseurChemin';
-import { join } from 'path';
-import { creeServeur } from '../../src/api/msc';
-import request from 'supertest';
 import assert from 'node:assert';
+import { beforeEach, describe, it } from 'node:test';
+import { join } from 'path';
+import request from 'supertest';
+import { FournisseurChemin } from '../../src/api/fournisseurChemin';
+import { creeServeur } from '../../src/api/msc';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets';
 
 describe('La ressource page produit', () => {
@@ -46,18 +46,6 @@ describe('La ressource page produit', () => {
 
       assert.equal(repertoireProduitsDemande!, 'services');
       assert.equal(idProduitDemande!, 'mon-service-securise');
-    });
-
-    it("aseptise l'id du produit", async () => {
-      let idProduitDemande: string;
-      fournisseurChemin.cheminProduitJekyll = (_: string, idProduit: string) => {
-        idProduitDemande = idProduit;
-        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
-      };
-
-      await request(serveur).get('/services/mon>service');
-
-      assert.equal(idProduitDemande!, 'mon&gt;service');
     });
   });
 

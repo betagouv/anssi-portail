@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
-import { ConfigurationServeur } from './configurationServeur';
 import { check } from 'express-validator';
 import { RetourExperienceDonne } from '../bus/evenements/retourExperienceDonne';
+import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 
 export const ressourceRetoursExperience = ({
@@ -19,7 +19,6 @@ export const ressourceRetoursExperience = ({
       check('emailDeContact').optional({ values: 'falsy' }).isEmail().withMessage("L'email est invalide"),
     ],
     middleware.valide(),
-    middleware.aseptise('precision'),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const { raison, emailDeContact, precision } = requete.body;
       await messagerieInstantanee.notifieUnRetourExperience({

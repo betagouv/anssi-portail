@@ -1,11 +1,11 @@
+import { Express } from 'express';
+import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { Express } from 'express';
 import { creeServeur } from '../../src/api/msc';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from './fauxObjets';
-import assert from 'node:assert';
-import { MockCmsCrisp } from '../mockCmsCrisp';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
+import { MockCmsCrisp } from '../mockCmsCrisp';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from './fauxObjets';
 
 describe('quand requête GET sur `/api/pages-crisp/un-id-d-article`', () => {
   let serveur: Express;
@@ -70,18 +70,5 @@ describe('quand requête GET sur `/api/pages-crisp/un-id-d-article`', () => {
     const reponse = await request(serveur).get('/api/pages-crisp/id_inconnu');
 
     assert.equal(reponse.status, 404);
-  });
-
-  it('aseptise les paramètres de la requête', async () => {
-    cmsCrisp.ajouteArticle('ID_&GT;ID', {
-      titre: 'AseptisationOk',
-      description: '',
-      contenu: '',
-      tableDesMatieres: [],
-    });
-    const reponse = await request(serveur).get('/api/pages-crisp/>id');
-
-    const page = reponse.body;
-    assert.equal(page.titre, 'AseptisationOk');
   });
 });
