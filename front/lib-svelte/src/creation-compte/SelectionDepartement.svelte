@@ -63,8 +63,7 @@
           }
         }}
       >
-        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-        <div>{@html suggestion.nom} ({suggestion.code})</div>
+        <div>{suggestion.nom} ({suggestion.code})</div>
       </div>
     {/each}
   </div>
