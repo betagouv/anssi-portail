@@ -1,17 +1,18 @@
 <script lang="ts">
-  import Etapier from '../ui/Etapier.svelte';
-  import SelectionDomaineSpecialite from './SelectionDomaineSpecialite.svelte';
+  import axios from 'axios';
+  import { onMount } from 'svelte';
   import { validationChamp } from '../directives/validationChamp';
-  import type { FormulaireInscription, InformationsProfessionnelles } from './creationCompte';
-  import Formulaire from '../ui/Formulaire.svelte';
-  import SelectionDepartement from './SelectionDepartement.svelte';
-  import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
+  import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
-  import Bouton from '../ui/Bouton.svelte';
-  import { onMount } from 'svelte';
-  import axios from 'axios';
+  import Etapier from '../ui/Etapier.svelte';
+  import Formulaire from '../ui/Formulaire.svelte';
+  import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
   import type { Departement, Organisation } from '../ui/formulaire/SelectionOrganisation.types.js';
+  import Lien from '../ui/Lien.svelte';
+  import type { FormulaireInscription, InformationsProfessionnelles } from './creationCompte';
+  import SelectionDepartement from './SelectionDepartement.svelte';
+  import SelectionDomaineSpecialite from './SelectionDomaineSpecialite.svelte';
 
   let informationsProfessionnelles: InformationsProfessionnelles = {
     prenom: '',
@@ -220,7 +221,9 @@
                 use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
               />
               <label for="cguAcceptees" class="requis">
-                J'accepte les <a class="lien" href="/cgu"> conditions générales d'utilisation </a> de MesServicesCyber
+                J'accepte les
+                <Lien href="/cgu" libelle="conditions générales d'utilisation" neutre></Lien>
+                de MesServicesCyber
               </label>
             </div>
           </div>

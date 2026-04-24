@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import { couleursDeNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
+  import Lien from '../ui/Lien.svelte';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeAnneau from './LegendeAnneau.svelte';
   import LegendeRadarSessionGroupe from './LegendeRadarSessionGroupe.svelte';
@@ -51,7 +52,7 @@
     <div class="contenu-section">
       <h2>Les 5 niveaux de maturité cyber</h2>
       <TuilesMaturiteSessionGroupe />
-      <a href="/niveaux-maturite" class="lien" target="_blank"> Les niveaux de maturité cyber </a>
+      <Lien href="/niveaux-maturite" blank libelle="Les niveaux de maturité cyber"></Lien>
     </div>
   </section>
 

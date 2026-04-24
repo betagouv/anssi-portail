@@ -4,6 +4,7 @@
   import { profilStore } from '../stores/profil.store';
   import Etapier from '../ui/Etapier.svelte';
   import Hero from '../ui/Hero.svelte';
+  import Lien from '../ui/Lien.svelte';
   import { aseptiseHtml } from '../utils/aseptisationDuHtml';
   import IntroductionTestMaturite from './IntroductionTestMaturite.svelte';
   import PartageTest from './PartageTest.svelte';
@@ -148,7 +149,8 @@
               </div>
 
               <div class="commandes">
-                <a href="/" class="lien">Retour à l'accueil</a>
+                <Lien href="/" libelle="Retour à l'accueil"></Lien>
+
                 <input
                   type="button"
                   class="bouton secondaire taille-moyenne"
@@ -182,7 +184,7 @@
                 </label>
 
                 <div class="commandes">
-                  <a href="/" class="lien">Retour à l'accueil</a>
+                  <Lien href="/" libelle="Retour à l'accueil"></Lien>
                   <input
                     type="button"
                     class="bouton secondaire taille-moyenne"

@@ -2,11 +2,11 @@
   import axios from 'axios';
   import { onDestroy, onMount, tick } from 'svelte';
   import FilAriane from '../ui/FilAriane.svelte';
+  import Lien from '../ui/Lien.svelte';
   import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
   import type { Financement } from './financement';
   import MenuFinancement from './MenuFinancement.svelte';
   import SectionDetailsFinancement from './SectionDetailsFinancement.svelte';
-  import Lien from '../ui/Lien.svelte';
 
   type ReponseAxios = {
     id: number;
@@ -204,11 +204,11 @@
           <p class="note-information texte-mention-xs">
             Nous vous recommandons de vous adresser directement aux organismes gestionnaires mentionnés dans la fiche
             pour déterminer si votre projet est éligible à une aide. Enfin, si vous notez des omissions ou des erreurs
-            dans cette fiche, merci de nous adresser vos remarques en nous contactant sur le <a
+            dans cette fiche, merci de nous adresser vos remarques en nous contactant sur le <Lien
               href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert"
-            >
-              chat</a
-            >.
+              libelle="chat"
+              neutre
+            ></Lien>
           </p>
         </div>
       </div>

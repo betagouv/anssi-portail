@@ -8,6 +8,7 @@
   import { listeItemsFavoris } from '../catalogue/stores/itemsCatalogueEnFavori';
   import { profilStore } from '../stores/profil.store';
   import Hero from '../ui/Hero.svelte';
+  import Lien from '../ui/Lien.svelte';
   import ContenuFavoris from './ContenuFavoris.svelte';
 
   let prenom: string = '';
@@ -68,14 +69,14 @@
         {#if estConnecte}
           <h2>Découvrez plus de services et ressources cyber</h2>
           <p>Accédez aux services et ressources cyber proposés par l’ANSSI et ses partenaires.</p>
-          <a href="/catalogue/" class="bouton primaire">Explorer le catalogue</a>
+          <Lien href="/catalogue" apparence="bouton" taille="lg" libelle="Explorer le catalogue"></Lien>
         {:else}
           <h2>Créez votre propre liste de favoris !</h2>
           <p>
             Créez-vous un compte MesServicesCyber, explorez le catalogue et sauvegardez facilement les services et
             ressources utiles pour votre organisation.
           </p>
-          <a href="/connexion/" class="bouton primaire"> Connectez-vous sur MesServicesCyber </a>
+          <Lien href="/connexion/" apparence="bouton" taille="lg" libelle="Connectez-vous sur MesServicesCyber"></Lien>
         {/if}
       </div>
     </div>

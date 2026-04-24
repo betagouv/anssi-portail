@@ -2,13 +2,13 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import Icone from '../ui/Icone.svelte';
+  import Lien from '../ui/Lien.svelte';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import DialogueSortieDiagnostic from './DialogueSortieDiagnostic.svelte';
   import type { CorpsAPIDemandeAide, DonneesFormulaireDemandeAide } from './DonneesFormulaireDemandeAide';
   import FoireAuxQuestions from './FoireAuxQuestions.svelte';
   import FormulaireDemandeAide from './FormulaireDemandeAide.svelte';
   import IllustrationCyberDepart from './IllustrationCyberDepart.svelte';
-  import Lien from '../ui/Lien.svelte';
 
   let formulaireDemandeAide: FormulaireDemandeAide;
   let enSucces: boolean = false;

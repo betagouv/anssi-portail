@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Lien from '../../ui/Lien.svelte';
   import type { Guide } from '../Guide.types';
   import { decodeEntitesHtml } from './guide';
 
@@ -7,19 +8,31 @@
 </script>
 
 {#if guide.documents.length === 1}
-  <a href={guide.documents[0].url} target="_blank" class="bouton primaire"> Télécharger le guide </a>
+  <div class="zone-action">
+    <Lien
+      href={guide.documents[0].url}
+      blank
+      libelle="Télécharger le guide"
+      apparence="bouton"
+      taille="lg"
+      data-source="Page guide"
+      data-cible={guide.nom}
+      class="lien-externe-produit "
+    ></Lien>
+  </div>
 {:else if guide.documents.length > 1 && autoriseMultiple}
   <div class="documents">
     {#each guide.documents as document (document.url)}
-      <a
+      <Lien
         href={document.url}
-        target="_blank"
-        class="bouton primaire lien-externe-produit"
+        blank
+        libelle={decodeEntitesHtml(document.libelle)}
+        apparence="bouton"
+        taille="lg"
         data-source="Page guide"
         data-cible={guide.nom}
-      >
-        {decodeEntitesHtml(document.libelle)}
-      </a>
+        class="lien-externe-produit"
+      ></Lien>
     {/each}
   </div>
 {/if}
@@ -34,13 +47,8 @@
     gap: 24px;
   }
 
-  .bouton {
-    margin-top: 24px;
-    margin-bottom: 40px;
-    padding: 10px 28px;
-
-    @include a-partir-de(md) {
-      width: fit-content;
-    }
+  .zone-action {
+    padding-top: 24px;
+    padding-bottom: 40px;
   }
 </style>

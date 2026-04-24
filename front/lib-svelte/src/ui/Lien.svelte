@@ -29,6 +29,7 @@
     type?: 'primaire' | 'secondaire' | 'secondaire-inverse';
     'data-source'?: string;
     'data-cible'?: string;
+    class?: string;
   };
   const {
     apparence = 'lien',

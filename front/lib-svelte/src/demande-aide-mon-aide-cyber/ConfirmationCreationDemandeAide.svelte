@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Lien from '../ui/Lien.svelte';
+
   export let mode: 'carte' | 'embarque' = 'carte';
   export let cacheLesLiens: boolean = false;
 </script>
@@ -9,7 +11,7 @@
   {#if !cacheLesLiens}
     <dsfr-button label="Explorer les services pour se lancer" href="/" kind="primary" markup="a"></dsfr-button>
 
-    <a href="/" class="lien">Revenir à la page d'accueil</a>
+    <Lien href="/" libelle="Revenir à la page d'accueil"></Lien>
   {/if}
 </div>
 
@@ -42,8 +44,8 @@
     p {
       margin: 0 0 40px;
     }
-    a {
-      margin-top: 16px;
+    dsfr-button {
+      margin-bottom: 16px;
     }
   }
 </style>

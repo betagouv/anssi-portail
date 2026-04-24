@@ -1,6 +1,7 @@
 <script lang="ts">
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
+  import Lien from '../ui/Lien.svelte';
   import EncartDeRecommandationSelonMaturite from './EncartDeRecommandationSelonMaturite.svelte';
   import PartageTest from './PartageTest.svelte';
   import { questionnaireStore } from './stores/questionnaire.store';
@@ -48,7 +49,7 @@
       <p>{niveau.description}</p>
     </div>
 
-    <a href="/niveaux-maturite" class="lien" target="_blank">Les niveaux de maturité cyber</a>
+    <Lien href="/niveaux-maturite" blank libelle="Les niveaux de maturité cyber"></Lien>
   </div>
 </section>
 
