@@ -112,6 +112,7 @@ a {
   }
 
   &.lien {
+    // AFAC une fois que tout les liens sont des dsfr-link
     text-decoration: underline solid var(--noir) 1px;
     -webkit-text-decoration: underline;
     text-underline-offset: 4px;
