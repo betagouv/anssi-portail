@@ -26,8 +26,18 @@ script: /scripts/service.js
         <h1>{{page.nom}}</h1>
         <p>{{page.description}}</p>
         {% if page.lien %}
-        <a href="{{page.lien}}" target="_blank" class="bouton primaire lien-externe-produit" data-source="Page produit"
-           data-cible="{{page.nom}}">Accéder au service</a>
+        <div class="zone-actions">
+          <msc-lien
+            apparence="bouton"
+            blank
+            class="lien-externe-produit"
+            data-source="Page produit"
+            data-cible="{{page.nom}}"
+            href="{{page.lien}}"
+            libelle="Accéder au service"
+            taille="lg"
+          ></msc-lien>
+        </div>
         {%endif%}
       </div>
       <div class="conteneur-illustration">
@@ -88,8 +98,7 @@ script: /scripts/service.js
         <h2>De quoi s'agit-il&nbsp;?</h2>
         <div>{{ page.content }}</div>
         {% if page.lien %}
-        <a href="{{page.lien}}" target="_blank" class="bouton primaire lien-externe-produit" data-source="Page produit"
-           data-cible="{{page.nom}}">Accéder au service</a>
+        <msc-lien class="lien-externe-produit" href="{{page.lien}}" blank apparence="bouton" data-source="Page produit" data-cible="{{page.nom}}" libelle="Accéder au service" taille="lg"></msc-lien>
         {% endif %}
       </section>
 
@@ -164,7 +173,7 @@ script: /scripts/service.js
       {% endif %}
 
       <div class="haut-de-page">
-        <a href="#haut-de-page" class="lien">Haut de page</a>
+        <msc-lien href="#haut-de-page" libelle="Haut de page"></msc-lien>
       </div>
     </div>
   </div>
