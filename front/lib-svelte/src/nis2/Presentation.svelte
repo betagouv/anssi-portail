@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Accordeon from './Accordeon.svelte';
+  import AccordeonNis2 from './AccordeonNis2.svelte';
   import Marelle from './Marelle.svelte';
   import DemandeDiagnosticSimplifiee from '../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
   import { clic } from '../directives/actions.svelte';
@@ -24,7 +24,7 @@
         sécurité.
       </p>
 
-      <Accordeon />
+      <AccordeonNis2 />
 
       <div class="lien-nis2">
         <dsfr-link
