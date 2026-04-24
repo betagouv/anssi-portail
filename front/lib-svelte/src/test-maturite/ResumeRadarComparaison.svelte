@@ -1,7 +1,7 @@
 <script lang="ts">
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
-  import SectionAccordeon from '../ui/SectionAccordeon.svelte';
+  import Accordeon from '../ui/Accordeon.svelte';
   import { arrondisAuCentieme } from '../utils/arrondis';
   import type { SerieRadar } from './Serie';
   import { rubriques } from './TestMaturite.donnees';
@@ -29,19 +29,15 @@
 
 <div class="accordeon">
   {#each niveauxMaturite as niveau (niveau.id)}
-    <SectionAccordeon>
-      <span slot="titre" class:actif={actif === niveau.id}>
-        <span class="pastille ligne-legende-{niveau.id}"></span>
-        {niveau.label}
-      </span>
-      <ol slot="corps">
+    <Accordeon libelle={niveau.label}>
+      <ol>
         {#each rubriquesTrieesParLettre as rubrique (rubrique.id)}
           <li>
             <span class="lettre">{rubrique.lettre}</span> - {rubrique.label} - {valeur(niveau.id, rubrique.id)}/5
           </li>
         {/each}
       </ol>
-    </SectionAccordeon>
+    </Accordeon>
   {/each}
 </div>
 
@@ -103,12 +99,6 @@
   .accordeon {
     @include a-partir-de(md) {
       display: none;
-    }
-
-    .actif {
-      outline: 2px solid #fed980;
-      outline-offset: 6px;
-      border-radius: 2px;
     }
 
     ol {

@@ -1,6 +1,7 @@
 <script lang="ts">
   import Lien from '../ui/Lien.svelte';
-  import SectionAccordeon from '../ui/SectionAccordeon.svelte';
+  import Accordeon from '../ui/Accordeon.svelte';
+
   export let urlBase: string = '';
 
   let videoRisques: HTMLVideoElement;
@@ -18,9 +19,8 @@
 </script>
 
 <div class="accordeon">
-  <SectionAccordeon>
-    <span slot="titre">Mon organisation est-elle concernée&nbsp;?</span>
-    <div class="corps" slot="corps">
+  <Accordeon libelle="Mon organisation est-elle concernée&nbsp;?">
+    <div class="corps">
       <p>
         ✅ <strong
           >Oui, si vous êtes une TPE/PME, une collectivité, ou une association avec au moins deux salariés.</strong
@@ -31,13 +31,12 @@
       <p>
         🚫 <strong>Non, si vous êtes un particulier ou mono-salarié.</strong><br />
         Le diagnostic n’est pas adapté à ce profil : trop de questions ne s’appliquent pas, et les aidants cyber ne sont
-        pas formés pour ce type d'accompagnement.
+        pas formés pour ce type d’accompagnement.
       </p>
     </div>
-  </SectionAccordeon>
-  <SectionAccordeon on:toggle={afficheLaVideo}>
-    <span slot="titre">Que risque mon organisation en cas de cyberattaques&nbsp;?</span>
-    <div class="corps" slot="corps">
+  </Accordeon>
+  <Accordeon libelle="Que risque mon organisation en cas de cyberattaques&nbsp;?" on:toggle={afficheLaVideo}>
+    <div class="corps">
       <p>
         🛡️ Les cyberattaques se sont massivement multipliées ces dernières années, et <strong
           >aucune organisation n’est à l’abri</strong
@@ -77,13 +76,12 @@
         🔐 Pour agir sans attendre, l’ANSSI (l’Agence nationale de la sécurité des systèmes d’information) a créé un
         diagnostic cyber gratuit, réalisé par des Aidants cyber. En 1h30, vous
         <strong>identifiez 6 premières mesures prioritaires,</strong>
-        simples et concrètes, pour réduire vos risques et prendre votre “Cyberdépart” en toute confiance.
+        simples et concrètes, pour réduire vos risques et prendre votre “Cyberdépart" en toute confiance.
       </p>
     </div>
-  </SectionAccordeon>
-  <SectionAccordeon>
-    <span slot="titre">Qu’est-ce qu’un Aidant cyber&nbsp;?</span>
-    <div class="corps" slot="corps">
+  </Accordeon>
+  <Accordeon libelle="Qu’est-ce qu’un Aidant cyber&nbsp;?">
+    <div class="corps">
       <p>
         👤 Un Aidant cyber est un tiers de confiance, issu d’un organisme public ou adhérent d’une association à but non
         lucratif en lien avec le numérique, spécialement formé sur le diagnostic cyber par l’ANSSI (l’Agence nationale
@@ -100,10 +98,9 @@
         <strong> l’Aidant cyber s’adapte à votre niveau et à vos contraintes. </strong>
       </p>
     </div>
-  </SectionAccordeon>
-  <SectionAccordeon>
-    <span slot="titre">Que se passe-t-il après la demande de diagnostic&nbsp;?</span>
-    <div class="corps" slot="corps">
+  </Accordeon>
+  <Accordeon libelle="Que se passe-t-il après la demande de diagnostic&nbsp;?">
+    <div class="corps">
       <p>📩 Une fois votre demande envoyée :</p>
       <ol>
         <li>Un aidant cyber local vous contacte (par email) sous quelques jours</li>
@@ -121,10 +118,9 @@
         <strong>renforcer concrètement votre cybersécurité.</strong>
       </p>
     </div>
-  </SectionAccordeon>
-  <SectionAccordeon>
-    <span slot="titre">Le diagnostic est-il confidentiel et anonyme&nbsp;?</span>
-    <div class="corps" slot="corps">
+  </Accordeon>
+  <Accordeon libelle="Le diagnostic est-il confidentiel et anonyme&nbsp;?">
+    <div class="corps">
       <p>
         🔒 Oui, le diagnostic est
         <strong>réalisé en toute confidentialité,</strong>
@@ -140,7 +136,7 @@
         <strong>contrôle total sur les échanges,</strong> et bénéficiez d’un accompagnement en toute confiance.
       </p>
     </div>
-  </SectionAccordeon>
+  </Accordeon>
 </div>
 <div class="besoin-aide">
   <p>
