@@ -27,7 +27,7 @@
     <SqueletteCarteGuide />
   {:else}
     {#each guideDeMemesCollections as guide (guide.id)}
-      <CarteItem item={guide} modeLargeur="automatique" />
+      <CarteItem item={guide} />
     {/each}
   {/if}
 </div>
