@@ -5,6 +5,7 @@
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Hero from '../ui/Hero.svelte';
+  import Lien from '../ui/Lien.svelte';
   import { estCodeSecteurContact } from './contacts';
   import { contactsParRegion, contactsParSecteur } from './contacts.donnees';
   import { estCodeRegion } from './contacts.type';
@@ -96,7 +97,7 @@
               </h3>
               <p class="nom">{nom}</p>
               <p class="email">
-                <a href="mailto:{email}" class="lien">{email}</a>
+                <Lien href="mailto:{email}" libelle={email}></Lien>
               </p>
             </div>
           {/if}
@@ -107,11 +108,11 @@
               <h3>{nom}</h3>
               {#if telephone}
                 <p class="telephone">
-                  <a href="tel:{telephone}" class="lien">{telephone}</a>
+                  <Lien href="tel:{telephone}" libelle={telephone}></Lien>
                 </p>
               {/if}
               <p class="site-web">
-                <a href={siteWeb} target="_blank" class="lien">{siteWeb}</a>
+                <Lien href={siteWeb} libelle={siteWeb} blank></Lien>
               </p>
               {#if adresse}
                 <p class="adresse">{adresse}</p>
@@ -125,11 +126,11 @@
               <h3>{nom}</h3>
               {#if email}
                 <p class="email">
-                  <a href="mailto:{email}" class="lien">{email}</a>
+                  <Lien href="mailto:{email}" libelle={email}></Lien>
                 </p>
               {/if}
               <p class="site-web">
-                <a href={siteWeb} target="_blank" class="lien">{siteWeb}</a>
+                <Lien href={siteWeb} libelle={siteWeb} blank></Lien>
               </p>
               <p class="adresse">{adresse}</p>
             </div>
@@ -141,7 +142,7 @@
           <div class="carte-contact">
             <h3>{contactSectoriel.nom}</h3>
             <p class="site-web">
-              <a href={contactSectoriel.siteWeb} target="_blank" class="lien">{contactSectoriel.siteWeb}</a>
+              <Lien href={contactSectoriel.siteWeb} libelle={contactSectoriel.siteWeb} blank></Lien>
             </p>
           </div>
         {/if}
@@ -159,19 +160,21 @@
             <p>Contactez le CERT-FR pour :</p>
             <ul>
               <li>
-                <a href="https://club.ssi.gouv.fr/#/declaration-incident" target="_blank" class="lien"
-                  >Déclarer un incident et/ou demander une assistance</a
-                >
+                <Lien
+                  href="https://club.ssi.gouv.fr/#/declaration-incident"
+                  libelle="Déclarer un incident et/ou demander une assistance"
+                  blank
+                ></Lien>
               </li>
               <li>
-                <a href="https://club.ssi.gouv.fr/#/declaration-art-2321-4-1" class="lien" target="_blank"
-                  >Signaler une vulnérabilité produit</a
-                >
+                <Lien
+                  href="https://club.ssi.gouv.fr/#/declaration-art-2321-4-1"
+                  blank
+                  libelle="Signaler une vulnérabilité produit"
+                ></Lien>
               </li>
             </ul>
-            <a href="https://www.cert.ssi.gouv.fr/contact/" target="_blank" class="lien"
-              >Toutes les coordonnées du CERT-FR
-            </a>
+            <Lien href="https://www.cert.ssi.gouv.fr/contact/" blank libelle="Toutes les coordonnées du CERT-FR"></Lien>
           </div>
         </div>
 
@@ -184,9 +187,7 @@
               ou un CSIRT territorial .
             </p>
             <br />
-            <a href="https://www.cybermalveillance.gouv.fr/diagnostic" target="_blank" class="lien"
-              >Aller sur le 17Cyber
-            </a>
+            <Lien href="https://www.cybermalveillance.gouv.fr/diagnostic" blank libelle="Aller sur le 17Cyber"></Lien>
           </div>
         </div>
       </div>

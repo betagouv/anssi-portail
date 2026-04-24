@@ -1,5 +1,6 @@
 <script lang="ts">
   import Bouton from '../ui/Bouton.svelte';
+  import Lien from '../ui/Lien.svelte';
 
   export let couleurFond: 'clair' | 'fonce' = 'clair';
 
@@ -33,16 +34,14 @@
   >
     <img src="/assets/images/icone-linkedin.svg" alt="Partager sur LinkedIn" />
   </a>
-
-  <a
-    class="bouton secondaire"
-    target="_blank"
-    rel="noopener external"
-    title="Partager par email"
+  <Lien
     href="mailto:?subject=Test de maturité Cyber&body=Lien vers le test : {lienTest}"
-  >
-    <img src="/assets/images/icone-email.svg" alt="Partager par email" />
-  </a>
+    libelle="Partager par email"
+    apparence="bouton"
+    type="secondaire"
+    icone="mail-fill"
+    iconeSeule
+  />
 
   <Bouton
     type={couleurFond === 'clair' ? 'secondaire' : 'secondaire-inverse'}

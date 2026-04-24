@@ -4,6 +4,7 @@
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
+  import Lien from '../ui/Lien.svelte';
   import ZoneTexte from '../ui/ZoneTexte.svelte';
 
   let dialogue: HTMLDialogElement;
@@ -120,7 +121,7 @@
         </div>
         <div class="actions">
           <Bouton titre="Envoyer" type="primaire" taille="md" boutonSoumission={true} />
-          <a href="/" class="bouton secondaire">Revenir à la page d’accueil</a>
+          <Lien href="/" apparence="bouton" type="secondaire" libelle="Revenir à la page d’accueil"></Lien>
         </div>
       </Formulaire>
     {:else}
@@ -134,7 +135,7 @@
           </p>
         </div>
         <div class="actions">
-          <a href="/" class="bouton primaire">Revenir à la page d’accueil</a>
+          <Lien href="/" apparence="bouton" libelle="Revenir à la page d’accueil"></Lien>
         </div>
       </div>
     {/if}
@@ -247,16 +248,6 @@
     flex-direction: column;
     gap: 16px;
     padding: 16px;
-
-    a {
-      width: auto;
-
-      &.bouton.secondaire {
-        box-sizing: border-box;
-        padding: 8px 16px;
-        height: 40px;
-      }
-    }
 
     @include a-partir-de(md) {
       flex-direction: row-reverse;

@@ -1,14 +1,15 @@
 <script lang="ts">
-  import Bouton from '../ui/Bouton.svelte';
-  import ChampTexte from '../ui/ChampTexte.svelte';
-  import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
-  import ControleFormulaire from '../ui/ControleFormulaire.svelte';
-  import Formulaire from '../ui/Formulaire.svelte';
-  import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
   import { createEventDispatcher, onMount } from 'svelte';
-  import type { DonneesFormulaireDemandeAide } from './DonneesFormulaireDemandeAide';
   import { validationChamp } from '../directives/validationChamp';
   import Alerte from '../ui/Alerte.svelte';
+  import Bouton from '../ui/Bouton.svelte';
+  import ChampTexte from '../ui/ChampTexte.svelte';
+  import ControleFormulaire from '../ui/ControleFormulaire.svelte';
+  import Formulaire from '../ui/Formulaire.svelte';
+  import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
+  import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
+  import Lien from '../ui/Lien.svelte';
+  import type { DonneesFormulaireDemandeAide } from './DonneesFormulaireDemandeAide';
 
   let formulaire: Formulaire;
   export let id: string = '';
@@ -162,9 +163,12 @@
         use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
       />
       <label for="cguAcceptees" class="requis">
-        J'accepte les <a class="lien" href="https://monaide.cyber.gouv.fr/cgu" target="_blank"
-          >conditions générales d'utilisation</a
-        > de MonAideCyber au nom de l’entité que je représente.
+        J'accepte les <Lien
+          href="https://monaide.cyber.gouv.fr/cgu"
+          blank
+          libelle="conditions générales d'utilisation"
+          neutre
+        ></Lien> de MonAideCyber au nom de l’entité que je représente.
       </label>
     </div>
 

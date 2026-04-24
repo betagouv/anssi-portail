@@ -1,18 +1,19 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { clic } from '../../directives/actions.svelte';
   import BoutonFavori from '../../favoris/BoutonFavori.svelte';
+  import { profilStore } from '../../stores/profil.store';
   import FilAriane from '../../ui/FilAriane.svelte';
+  import Lien from '../../ui/Lien.svelte';
+  import Separateur from '../../ui/Separateur.svelte';
   import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
   import { CollectionGuide, type Guide } from '../Guide.types';
   import { chargeGuidesDansLeStore, guidesStore } from '../stores/guides/guides.store';
   import BadgesDeCollections from './BadgesDeCollections.svelte';
   import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
   import { decodeEntitesHtml } from './guide';
-  import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
-  import { profilStore } from '../../stores/profil.store';
   import InciteASAbonner from './InciteASAbonner.svelte';
-  import { clic } from '../../directives/actions.svelte';
-  import Separateur from '../../ui/Separateur.svelte';
+  import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
 
   let guide: Guide | undefined;
 
@@ -139,7 +140,7 @@
         {/if}
 
         <div class="haut-de-page">
-          <a href="#haut-de-page" class="lien">Haut de page</a>
+          <Lien href="#haut-de-page" libelle="Haut de page" icone="arrow-up-fill"></Lien>
         </div>
       </div>
     </div>
@@ -411,16 +412,6 @@
 
     @include a-partir-de(md) {
       text-align: left;
-    }
-
-    a {
-      &:before {
-        content: '';
-        background: url('/assets/images/icone-fleche-pleine.svg');
-        width: 16px;
-        height: 16px;
-        margin-left: auto;
-      }
     }
   }
 

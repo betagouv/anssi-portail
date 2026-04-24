@@ -5,6 +5,7 @@
   import { profilStore } from '../stores/profil.store';
   import Bouton from '../ui/Bouton.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
+  import Lien from '../ui/Lien.svelte';
   import ContenuFavoris from './ContenuFavoris.svelte';
 
   const partageLien = () => {
@@ -25,7 +26,7 @@
     {#if $itemsCatalogueEnFavori.length > 0}
       <div class="cta">
         <p class="texte-chapo-xl-ns">Parcourez le catalogue pour ajouter plus de services et ressources.</p>
-        <a href="/catalogue/" class="bouton primaire">Explorer le catalogue</a>
+        <Lien href="/catalogue/" libelle="Explorer le catalogue" apparence="bouton" taille="lg"></Lien>
       </div>
     {/if}
   </div>
@@ -38,7 +39,7 @@
         <div class="contenu-sans-favoris">
           <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Aucun favori sauvegardé" />
           <h2>Ajoutez vos services et ressources favoris et partagez-les facilement au sein de votre organisation.</h2>
-          <a href="/catalogue" class="bouton primaire">Explorer le catalogue</a>
+          <Lien href="/catalogue" apparence="bouton" taille="lg" libelle="Explorer le catalogue"></Lien>
         </div>
       {:else}
         <div class="banniere-partage-favoris">
