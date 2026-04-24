@@ -3,6 +3,7 @@
     PointsAttentionPrecis,
     ResumesPointsAttention,
   } from '../../../../../back/src/metier/nis2-simulateur/Regulation.definitions';
+  import Accordeon from '../../ui/Accordeon.svelte';
   import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
   import { Precisions, TextesDesResumes } from './PointsAttention.contenus';
 
@@ -11,21 +12,21 @@
     precisions: PointsAttentionPrecis[];
   }
 
-  let props: Props = $props();
+  let { resumes, precisions }: Props = $props();
 </script>
 
 <div class="points-attention">
-  <dsfr-accordion id="points-attention-details" label="Points d'attention" is-expanded="true">
-    {#each props.resumes as resume, i (i)}
+  <Accordeon id="points-attention-details" libelle="Points d'attention" estOuvert={true}>
+    {#each resumes as resume, i (i)}
       <p>{TextesDesResumes[resume]}</p>
     {/each}
 
-    {#each props.precisions as p, i (i)}
+    {#each precisions as p, i (i)}
       <h6>{Precisions[p].titre}</h6>
       <!-- eslint-disable svelte/no-at-html-tags -->
       <p>{@html aseptiseHtml(Precisions[p].texte)}</p>
     {/each}
-  </dsfr-accordion>
+  </Accordeon>
 </div>
 
 <style lang="scss">
