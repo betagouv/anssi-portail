@@ -48,14 +48,16 @@
   };
 </script>
 
-<div>
+<div class="carte-item">
   <dsfr-card
     title={titreCoupe}
+    hasDescription={false}
     hasDetailStart={!!detailHaut}
     detailStart={detailHaut}
     hasDetailEnd={!!detailBas || item.sources || item.tagsSpecifiques}
     detailEnd={detailBas}
     src={image}
+    imageRatio="4x3"
     alt={altImage}
     href={lien}
     blank={nouvelOnglet}
@@ -94,3 +96,13 @@
     </div>
   {/if}
 </div>
+
+<style lang="scss">
+  .carte-item {
+    display: flex;
+    flex-direction: column;
+    dsfr-card {
+      flex: 1;
+    }
+  }
+</style>
