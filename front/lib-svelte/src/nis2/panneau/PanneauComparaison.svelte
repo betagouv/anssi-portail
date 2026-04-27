@@ -39,6 +39,9 @@
   };
 
   const selectionneLaLangue = (langue: 'FR' | 'EN') => {
+    if (langue === 'EN') {
+      window._paq?.push(['trackEvent', 'NIS2', 'Selection Langue', 'EN']);
+    }
     langueSelectionnee = langue;
   };
 </script>
