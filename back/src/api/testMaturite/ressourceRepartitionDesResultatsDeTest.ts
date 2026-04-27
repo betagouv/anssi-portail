@@ -5,6 +5,7 @@ import { trancheEffectifParCode } from '../../metier/referentielTranchesEffectif
 import { RepartitionResultatsTest } from '../../metier/repartitionResultatsTest';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
+import { corpsVide, valideCorpsRequete } from '../zod';
 
 export const ressourceRepartitionDesResultatsDeTest = ({
   entrepotResultatTest,
@@ -13,6 +14,7 @@ export const ressourceRepartitionDesResultatsDeTest = ({
   const routeur = Router();
   routeur.get(
     '/',
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(
       async (
         requete: Request<unknown, unknown, unknown, { secteur?: string; tailleOrganisation?: string; region?: string }>,

@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
+import { corpsVide, valideCorpsRequete } from './zod';
 
 const ressourcePagesJekyllConnectees = (
   { fournisseurChemin, middleware }: ConfigurationServeur,
@@ -11,6 +12,7 @@ const ressourcePagesJekyllConnectees = (
   routeur.get(
     '/',
     middleware.verifieJWTNavigation,
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
       reponse.contentType('text/html').status(200).envoieFichierEnrichi(fournisseurChemin.cheminPageJekyll(nomPage));
     })

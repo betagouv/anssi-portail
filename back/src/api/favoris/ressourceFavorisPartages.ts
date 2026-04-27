@@ -1,15 +1,15 @@
-import { ConfigurationServeur } from '../configurationServeur';
 import { Request, Response, Router } from 'express';
-import { check } from 'express-validator';
+import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
+import { valideRequete } from '../zod';
+import { schemaRessourceFavorisPartages } from './ressourceFavorisPartages.schema';
 
-const ressourceFavorisPartages = ({ middleware, entrepotFavori, entrepotUtilisateur }: ConfigurationServeur) => {
+const ressourceFavorisPartages = ({ entrepotFavori, entrepotUtilisateur }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get(
     '/:id',
-    [check('id').isUUID().withMessage("L'id est invalide")],
-    middleware.valide(),
+    valideRequete(schemaRessourceFavorisPartages),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const utilisateurPartageur = await entrepotUtilisateur.parIdListeFavoris(requete.params.id as string);
 

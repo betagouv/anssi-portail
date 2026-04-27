@@ -1,8 +1,8 @@
 import { Request, Response, Router } from 'express';
-import { check } from 'express-validator';
 import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
+import { corpsVide, valideCorpsRequete } from '../zod';
 
 const ressourceFavoris = ({
   busEvenements,
@@ -40,6 +40,7 @@ const ressourceFavoris = ({
     '/',
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const utilisateur = requete.utilisateur;
       const favoris = await entrepotFavori.tousCeuxDeUtilisateur(utilisateur);

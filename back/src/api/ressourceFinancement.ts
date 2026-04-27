@@ -1,17 +1,15 @@
+import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
-import { Router, Request, Response } from 'express';
-import { check } from 'express-validator';
 import { filetRouteAsynchrone } from './middleware';
+import { corpsVide, valideCorpsRequete } from './zod';
 
-export const ressourceFinancement = ({ middleware, entrepotFinancement }: ConfigurationServeur) => {
+export const ressourceFinancement = ({ entrepotFinancement }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
     '/:id',
-    [check('id').isNumeric().withMessage("L'id est invalide")],
-    middleware.valide(),
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const financement = await entrepotFinancement.parId(Number(requete.params.id));
-
       if (!financement) {
         reponse.sendStatus(404);
         return;

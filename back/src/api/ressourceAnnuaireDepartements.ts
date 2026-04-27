@@ -1,10 +1,11 @@
-import { ConfigurationServeur } from './configurationServeur';
-import { Response, Request, Router } from 'express';
+import { Request, Response, Router } from 'express';
 import { departements } from '../metier/referentielDepartements';
+import { ConfigurationServeur } from './configurationServeur';
+import { corpsVide, valideCorpsRequete } from './zod';
 
 const ressourceAnnuaireDepartements = (_: ConfigurationServeur) => {
   const routeur = Router();
-  routeur.get('/', (_: Request, reponse: Response) => {
+  routeur.get('/', valideCorpsRequete(corpsVide), (_: Request, reponse: Response) => {
     reponse.send(departements);
   });
   return routeur;

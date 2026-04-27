@@ -1,11 +1,13 @@
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
+import { corpsVide, valideCorpsRequete } from './zod';
 
 const ressourcePageCrisp = ({ cmsCrisp, adaptateurEnvironnement }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
     '/:id',
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const idArticle = adaptateurEnvironnement.crisp().idArticle((requete.params.id as string).toUpperCase());
       if (!idArticle) {

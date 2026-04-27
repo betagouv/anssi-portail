@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
+import { corpsVide, valideCorpsRequete } from '../zod';
 
 export const ressourceResultatsSessionDeGroupe = ({
   entrepotSessionDeGroupe,
@@ -9,6 +10,7 @@ export const ressourceResultatsSessionDeGroupe = ({
   const routeur = Router();
   routeur.get(
     '/:code/resultats',
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const session = await entrepotSessionDeGroupe.parCode(requete.params.code as string);
       if (!session) {

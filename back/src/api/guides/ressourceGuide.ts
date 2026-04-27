@@ -1,13 +1,15 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
-import { guidePresentation } from './guidePresentation';
 import { filetRouteAsynchrone } from '../middleware';
+import { corpsVide, valideCorpsRequete } from '../zod';
+import { guidePresentation } from './guidePresentation';
 
 const ressourceGuide = ({ adaptateurEnvironnement, entrepotGuide }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get(
     '/:slug',
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response, suivante: NextFunction) => {
       try {
         const guide = await entrepotGuide.parId(requete.params.slug as string);

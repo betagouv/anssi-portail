@@ -2,6 +2,7 @@ import { Request, Response, Router } from 'express';
 import { ResultatRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
+import { corpsVide, valideCorpsRequete } from './zod';
 
 const ressourceInformationsCreationCompte = ({
   adaptateurJWT,
@@ -12,6 +13,7 @@ const ressourceInformationsCreationCompte = ({
 
   routeur.get(
     '/',
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const { token } = requete.query;
       if (!token) reponse.sendStatus(401);

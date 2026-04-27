@@ -1,11 +1,12 @@
 import { HttpStatusCode } from 'axios';
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
+import { corpsVide, valideCorpsRequete } from './zod';
 
 const ressourcePageProduit = ({ fournisseurChemin }: ConfigurationServeur, repertoireProduits: string): Router => {
   const routeur = Router();
 
-  routeur.get('/:id', (requete: Request, reponse: Response) => {
+  routeur.get('/:id', valideCorpsRequete(corpsVide), (requete: Request, reponse: Response) => {
     if (requete.params.id === 'mon-espace-nis2.html') {
       return reponse.redirect(HttpStatusCode.MovedPermanently, '/nis2');
     }

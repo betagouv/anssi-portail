@@ -4,6 +4,7 @@ import { estCodeRegion } from '../metier/referentielRegions';
 import { trancheEffectifParCode } from '../metier/referentielTranchesEffectifEtablissement';
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
+import { corpsVide, valideCorpsRequete } from './zod';
 
 const construitFiltreFinancementParRegion = (codeRegion?: string) => {
   if (!estCodeRegion(codeRegion)) {
@@ -56,6 +57,7 @@ export const ressourceFinancements = ({
   routeur.get(
     '/',
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       try {
         let financements = await entrepotFinancement.tous();
