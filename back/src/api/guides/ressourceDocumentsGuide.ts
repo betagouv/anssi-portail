@@ -133,6 +133,7 @@ const ressourceDocumentsGuide = ({
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideAutorisation(),
+    valideCorpsRequete(corpsVide),
     recupereLeGuide(entrepotGuideTravail),
     filetRouteAsynchrone(async (requete, reponse) => {
       const guide = reponse.locals.guide as Guide;

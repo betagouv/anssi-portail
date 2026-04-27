@@ -2,6 +2,8 @@ import { Router } from 'express';
 import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
+import { valideRequete } from '../zod';
+import { schemaRessourceFavori } from './ressourceFavori.schema';
 
 const ressourceFavori = ({
   middleware,
@@ -16,6 +18,7 @@ const ressourceFavori = ({
     '/:id',
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
+    valideRequete(schemaRessourceFavori),
     filetRouteAsynchrone(async (requete, reponse) => {
       const id = requete.params.id as string;
       const utilisateur = requete.utilisateur;

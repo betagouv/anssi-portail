@@ -3,6 +3,7 @@ import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisate
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
 import { corpsVide, valideCorpsRequete } from '../zod';
+import { schemaRessourceFavoris } from './ressourceFavoris.schema';
 
 const ressourceFavoris = ({
   busEvenements,
@@ -17,8 +18,7 @@ const ressourceFavoris = ({
     '/',
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
-    [check('idItemCyber').not().isEmpty().withMessage("L'idItemCyber est invalide")],
-    middleware.valide(),
+    valideCorpsRequete(schemaRessourceFavoris),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const idItemCyber = requete.body.idItemCyber as string;
       const utilisateur = requete.utilisateur;

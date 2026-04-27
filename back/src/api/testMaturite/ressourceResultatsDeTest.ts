@@ -1,14 +1,11 @@
 import { Request, Response, Router } from 'express';
-import { body, check } from 'express-validator';
 import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee';
 import { TestRealise } from '../../bus/evenements/testRealise';
-import { codesRegion } from '../../metier/referentielRegions';
-import { codesSecteur } from '../../metier/referentielSecteurs';
-import { codesTranchesEffectif } from '../../metier/referentielTranchesEffectifEtablissement';
 import { ResultatTestMaturite } from '../../metier/resultatTestMaturite';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
 import { corpsVide, valideCorpsRequete } from '../zod';
+import { schemaRessourceResultatsDeTest } from './ressourceResultatsDeTest.schema';
 
 const ressourceResultatsDeTest = ({
   busEvenements,
@@ -21,34 +18,8 @@ const ressourceResultatsDeTest = ({
   const routeur = Router();
   routeur.post(
     '/',
-    [
-      check('region').isString().optional({ values: 'null' }).isIn(codesRegion).withMessage('Région invalide'),
-      check('secteur').isString().optional({ values: 'null' }).isIn(codesSecteur).withMessage('Secteur invalide'),
-      check('tailleOrganisation')
-        .isString()
-        .optional({ values: 'null' })
-        .isIn(codesTranchesEffectif)
-        .withMessage("Taille d'organisation invalide"),
-      body('reponses')
-        .custom((reponses) => typeof reponses === 'object' && !Array.isArray(reponses))
-        .withMessage('Les réponses doivent être dans un objet'),
-      body('reponses')
-        .custom((reponses) => Object.keys(reponses).every((cle) => clesReponsesValides.includes(cle)))
-        .withMessage('Les clés de réponse sont invalides'),
-      body('reponses')
-        .custom((reponses) =>
-          Object.keys(reponses).every((cle) => {
-            if (!Number.isInteger(reponses[cle])) {
-              return false;
-            }
-            const valeur = Number(reponses[cle]);
-            return valeur >= 1 && valeur <= 5;
-          })
-        )
-        .withMessage('Les valeurs de réponses doivent être comprises entre 1 et 5'),
-    ],
-    middleware.valide(),
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
+    valideCorpsRequete(schemaRessourceResultatsDeTest),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const { tailleOrganisation, region, secteur, reponses, codeSessionGroupe } = requete.body;
 

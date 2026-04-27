@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
+import { corpsVide, valideCorpsRequete } from '../zod';
 
 const ressourceResultatDeTest = ({
   entrepotResultatTest,
@@ -16,6 +17,7 @@ const ressourceResultatDeTest = ({
     '/:id',
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete, reponse) => {
       const resultatTest = await entrepotResultatTest.parId(requete.params.id as string);
       if (!resultatTest) {

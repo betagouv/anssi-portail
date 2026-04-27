@@ -1,35 +1,22 @@
 import { Request, Response, Router } from 'express';
-import { check } from 'express-validator';
 import { encode } from 'html-entities';
 import { CompteCree } from '../bus/evenements/compteCree';
 import { Utilisateur } from '../metier/utilisateur';
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
+import { schemaRessourceUtilisateurs } from './ressourceUtilisateurs.schema';
+import { valideCorpsRequete } from './zod';
 
 const ressourceUtilisateurs = ({
   busEvenements,
   entrepotUtilisateur,
-  middleware,
   adaptateurRechercheEntreprise,
   adaptateurJWT,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post(
     '/',
-    [
-      check('token').not().isEmpty().withMessage('Le token est invalide'),
-      check('telephone')
-        .optional({ values: 'falsy' })
-        .matches(/^0\d{9}$/)
-        .withMessage('Le téléphone est invalide'),
-      check('domainesSpecialite').isArray({ min: 1 }).withMessage('Les domaines de spécialité sont invalides'),
-      check('siretEntite')
-        .matches(/^\d{14}$/)
-        .withMessage('Le siret est invalide'),
-      check('cguAcceptees').isBoolean().withMessage("L'acceptation des CGU est invalide"),
-      check('infolettreAcceptee').isBoolean().withMessage("L'acceptation de l'infolettre est invalide"),
-    ],
-    middleware.valide(),
+    valideCorpsRequete(schemaRessourceUtilisateurs),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const { telephone, domainesSpecialite, siretEntite, cguAcceptees, infolettreAcceptee, token } = requete.body;
 
