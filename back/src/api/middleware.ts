@@ -1,6 +1,5 @@
 import { HttpStatusCode } from 'axios';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
-import { validationResult } from 'express-validator';
 import helmet from 'helmet';
 import { randomBytes } from 'node:crypto';
 import fs from 'node:fs';
@@ -14,7 +13,6 @@ import { FournisseurChemin } from './fournisseurChemin';
 type FonctionMiddleware = (requete: Request, reponse: Response, suite: NextFunction) => Promise<void>;
 
 export type Middleware = {
-  valide: () => FonctionMiddleware;
   interdisLaMiseEnCache: FonctionMiddleware;
   verifieJWT: FonctionMiddleware;
   verifieJWTNavigation: FonctionMiddleware;
@@ -36,15 +34,6 @@ export const fabriqueMiddleware = ({
   fournisseurChemin: FournisseurChemin;
   adaptateurEnvironnement: AdaptateurEnvironnement;
 }): Middleware => {
-  const valide = () => async (requete: Request, reponse: Response, suite: NextFunction) => {
-    const erreurs = validationResult(requete);
-    if (!erreurs.isEmpty()) {
-      reponse.status(400).json({ erreur: erreurs.array()[0].msg });
-      return;
-    }
-    suite();
-  };
-
   const interdisLaMiseEnCache = async (_requete: Request, reponse: Response, suite: NextFunction) => {
     reponse.set({
       'cache-control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
@@ -174,7 +163,6 @@ export const fabriqueMiddleware = ({
   };
 
   return {
-    valide,
     verifieJWT,
     verifieJWTNavigation,
     interdisLaMiseEnCache,

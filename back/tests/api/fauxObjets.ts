@@ -184,9 +184,6 @@ export const fauxMiddleware: Middleware = {
   positionneLesCsp: () => async (_, __, suite) => {
     suite();
   },
-  valide: () => async (_, __, suite) => {
-    suite();
-  },
   interdisLaMiseEnCache: async (_, __, suite) => {
     suite();
   },
