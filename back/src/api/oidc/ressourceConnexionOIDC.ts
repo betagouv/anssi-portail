@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
+import { corpsVide, valideCorpsRequete } from '../zod';
 
 const ressourceConnexionOIDC = (configurationServeur: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
     '/',
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete, reponse) => {
       const demandeAutorisation = await configurationServeur.adaptateurOIDC.genereDemandeAutorisation();
 

@@ -6,7 +6,7 @@ import { EntrepotGuideTravail } from '../../metier/entrepotGuideTravail';
 import { Guide } from '../../metier/guide';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
-import { valideRequete } from '../zod';
+import { corpsVide, valideCorpsRequete, valideRequete } from '../zod';
 import { schemaAjoutDocumentGuide } from './ressourceDocumentsGuide.schema';
 
 const valideAutorisation = (): RequestHandler => {
@@ -70,6 +70,7 @@ const ressourceDocumentsGuide = ({
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideAutorisation(),
+    valideCorpsRequete(corpsVide),
     recupereLeGuide(entrepotGuideTravail),
     filetRouteAsynchrone(async (_requete, reponse) => {
       const guide = reponse.locals.guide as Guide;

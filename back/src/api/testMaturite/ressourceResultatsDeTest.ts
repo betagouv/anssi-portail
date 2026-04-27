@@ -8,15 +8,7 @@ import { codesTranchesEffectif } from '../../metier/referentielTranchesEffectifE
 import { ResultatTestMaturite } from '../../metier/resultatTestMaturite';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
-
-const clesReponsesValides = [
-  'prise-en-compte-risque',
-  'pilotage',
-  'budget',
-  'ressources-humaines',
-  'adoption-solutions',
-  'posture',
-];
+import { corpsVide, valideCorpsRequete } from '../zod';
 
 const ressourceResultatsDeTest = ({
   busEvenements,
@@ -100,6 +92,7 @@ const ressourceResultatsDeTest = ({
     '/',
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const resultatsDeTest = await entrepotResultatTest.pourUtilisateur(requete.utilisateur);
 

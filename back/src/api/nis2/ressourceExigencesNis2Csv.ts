@@ -3,6 +3,8 @@ import { Router } from 'express';
 import { Referentiel, versLangueConnue, versReferentiel } from '../../metier/nis2/exigence';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
+import { valideRequete } from '../zod';
+import { schemaRessourceExigencesNis2, schemaRessourceExigencesNis2Query } from './ressourceExigencesNis2.schema';
 import { StrategieExportCsvUneLigneParExigence } from './strategieExportCsvUneLigneParExigence';
 
 export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationServeur) => {
@@ -33,11 +35,9 @@ export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationSer
 
   routeur.get(
     '/',
+    valideRequete(schemaRessourceExigencesNis2),
     filetRouteAsynchrone(async (requete, reponse) => {
-      const { source, cible, langue } = requete.query;
-      if ((source && typeof source !== 'string') || (cible && typeof cible !== 'string')) {
-        return reponse.status(400).send('Les paramètres doivent être des chaînes de caractères');
-      }
+      const { source, cible, langue } = schemaRessourceExigencesNis2Query.safeParse(requete.query).data ?? {};
 
       const referentielSource = versReferentiel(source);
       const referentielCible = versReferentiel(cible);

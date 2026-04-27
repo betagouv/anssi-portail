@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
+import { corpsVide, valideCorpsRequete } from '../zod';
 
 export const ressourceDeconnexionOIDC = (configurationServeur: ConfigurationServeur) => {
   const routes = Router();
 
-  routes.get('/', async (requete, reponse) => {
+  routes.get('/', valideCorpsRequete(corpsVide), async (requete, reponse) => {
     const { url, state } = await configurationServeur.adaptateurOIDC.genereDemandeDeconnexion(
       requete.session!.AgentConnectIdToken
     );

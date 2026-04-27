@@ -1,9 +1,10 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
+import { corpsVide, valideCorpsRequete } from '../zod';
 
 export const ressourceApresDeconnexionOIDC = () => {
   const routes = Router();
 
-  routes.get('/', async (requete, reponse) => {
+  routes.get('/', valideCorpsRequete(corpsVide), async (requete: Request, reponse: Response) => {
     const { state } = requete.cookies.AgentConnectInfo;
     if (state !== requete.query.state) {
       reponse.sendStatus(401);

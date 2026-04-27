@@ -4,6 +4,7 @@ import { estCodeDepartement, regionDuDepartement } from '../metier/referentielDe
 import { Organisation } from '../metier/utilisateur';
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
+import { corpsVide, valideCorpsRequete } from './zod';
 
 const ressourceProfil = ({
   adaptateurJWT,
@@ -15,6 +16,7 @@ const ressourceProfil = ({
   routeur.get(
     '/',
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       try {
         adaptateurJWT.decode(requete.session?.token);

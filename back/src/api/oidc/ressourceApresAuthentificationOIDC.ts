@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { UtilisateurConnecte } from '../../bus/evenements/utilisateurConnecte';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
+import { corpsVide, valideCorpsRequete } from '../zod';
 
 const ressourceApresAuthentificationOIDC = ({
   adaptateurOIDC,
@@ -14,6 +15,7 @@ const ressourceApresAuthentificationOIDC = ({
   const routeur = Router();
   routeur.get(
     '/',
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete, reponse) => {
       if (!requete.cookies.AgentConnectInfo) {
         reponse.sendStatus(401);

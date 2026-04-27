@@ -1,6 +1,7 @@
 import { Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
 import { fabriqueGestionnaireRessourceCellar, gereDocumentManquantSimplement } from '../gestionnaireRessourceCellar';
+import { corpsVide, valideCorpsRequete } from '../zod';
 
 export const ressourceDocumentGuide = ({ cellar, entrepotGuide }: ConfigurationServeur) => {
   const routeur = Router();
@@ -15,7 +16,11 @@ export const ressourceDocumentGuide = ({ cellar, entrepotGuide }: ConfigurationS
     }
   };
 
-  routeur.get('/:slug', fabriqueGestionnaireRessourceCellar(cellar, 'GUIDES', documentGuideManquant));
+  routeur.get(
+    '/:slug',
+    valideCorpsRequete(corpsVide),
+    fabriqueGestionnaireRessourceCellar(cellar, 'GUIDES', documentGuideManquant)
+  );
 
   return routeur;
 };

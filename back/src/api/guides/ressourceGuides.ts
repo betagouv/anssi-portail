@@ -1,13 +1,16 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
+import { valideRequete } from '../zod';
 import { guidePresentation } from './guidePresentation';
+import { schemaRessourceGuides } from './ressourceGuides.schema';
 
 const ressourceGuides = ({ adaptateurEnvironnement, entrepotGuide, entrepotGuideTravail }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get(
     '/',
+    valideRequete(schemaRessourceGuides),
     filetRouteAsynchrone(async (requete: Request, reponse: Response, suivante: NextFunction) => {
       try {
         const entrepot = requete.query.mode === 'travail' ? entrepotGuideTravail : entrepotGuide;

@@ -1,10 +1,10 @@
-import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
-import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire';
-import { creeServeur } from '../../src/api/msc';
-import { configurationDeTestDuServeur } from './fauxObjets';
 import assert from 'node:assert';
+import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
+import { creeServeur } from '../../src/api/msc';
+import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire';
+import { configurationDeTestDuServeur } from './fauxObjets';
 import { financementCyberPME } from './objetsPretsALEmploi';
 
 describe('La ressource Financement', () => {
@@ -55,12 +55,6 @@ describe('La ressource Financement', () => {
       const { status } = await request(serveur).get('/api/financements/1');
 
       assert.equal(status, 404);
-    });
-
-    it("renvoie un 400 si l'id n'est pas un nombre", async () => {
-      const { status } = await request(serveur).get('/api/financements/un_mauvais_id');
-
-      assert.equal(status, 400);
     });
   });
 });

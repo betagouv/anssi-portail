@@ -4,6 +4,7 @@ import { secteurParCode } from '../../metier/referentielSecteurs';
 import { trancheEffectifParCode } from '../../metier/referentielTranchesEffectifEtablissement';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
+import { corpsVide, valideCorpsRequete } from '../zod';
 
 const ressourceDernierResultatDeTest = ({
   entrepotResultatTest,
@@ -17,6 +18,7 @@ const ressourceDernierResultatDeTest = ({
     '/',
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete, reponse) => {
       const resultatTest = await entrepotResultatTest.dernierPourUtilisateur(requete.utilisateur);
       if (!resultatTest) {

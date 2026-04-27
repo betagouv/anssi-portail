@@ -1,13 +1,16 @@
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
-import { guidePresentation } from './guidePresentation';
 import { filetRouteAsynchrone } from '../middleware';
+import { valideRequete } from '../zod';
+import { guidePresentation } from './guidePresentation';
+import { schemaRessourceGuidesMemesCollections } from './ressourceGuidesMemesCollections.schema';
 
 export const ressourceGuidesMemesCollections = ({ adaptateurEnvironnement, entrepotGuide }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get(
     '/:slug/memes-collections',
+    valideRequete(schemaRessourceGuidesMemesCollections),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const guideCible = await entrepotGuide.parId(requete.params.slug as string);
       if (!guideCible) {
