@@ -16,6 +16,7 @@
   import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
 
   let guide: Guide | undefined;
+  let chargementEnCours = false;
 
   async function copierLeLienCourt() {
     if (guide?.lienCourt) {
@@ -25,11 +26,16 @@
   }
 
   onMount(async () => {
-    const idGuideACharger = new URL(window.location.href).pathname;
-    await chargeGuidesDansLeStore();
-    guide = $guidesStore.find((g) => g.id === idGuideACharger);
-    if (guide) {
-      document.title = decodeEntitesHtml(guide.nom) + ' | MesServicesCyber';
+    try {
+      chargementEnCours = true;
+      const idGuideACharger = new URL(window.location.href).pathname;
+      await chargeGuidesDansLeStore();
+      guide = $guidesStore.find((g) => g.id === idGuideACharger);
+      if (guide) {
+        document.title = decodeEntitesHtml(guide.nom) + ' | MesServicesCyber';
+      }
+    } finally {
+      chargementEnCours = false;
     }
   });
   $: aDesCollections = guide && guide.collections.filter((c) => c !== CollectionGuide.AUTRE).length > 0;
@@ -145,7 +151,7 @@
       </div>
     </div>
   </div>
-{:else}
+{:else if !chargementEnCours}
   <dsfr-container>
     <div class="non-trouve">
       <h1>Guide introuvable</h1>
