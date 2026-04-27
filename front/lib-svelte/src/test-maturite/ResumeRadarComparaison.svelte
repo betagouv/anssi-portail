@@ -29,7 +29,8 @@
 
 <div class="accordeon">
   {#each niveauxMaturite as niveau (niveau.id)}
-    <Accordeon libelle={niveau.label}>
+    {@const libelle = `${niveau.label}${actif === niveau.id ? ' (votre niveau)' : ''}`}
+    <Accordeon {libelle}>
       <ol>
         {#each rubriquesTrieesParLettre as rubrique (rubrique.id)}
           <li>
