@@ -1,7 +1,8 @@
 import { Request, Response, Router } from 'express';
-import { ConfigurationServeur } from '../configurationServeur';
 import { SessionDeGroupe } from '../../metier/sessionDeGroupe';
+import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
+import { corpsVide, valideCorpsRequete } from '../zod';
 
 export const ressourceSessionsDeGroupe = ({
   entrepotSessionDeGroupe,
@@ -11,6 +12,7 @@ export const ressourceSessionsDeGroupe = ({
   const routeur = Router();
   routeur.post(
     '/',
+    valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_: Request, reponse: Response) => {
       const sessionDeGroupe = await SessionDeGroupe.cree(generateurCodeSessionDeGroupe);
       await entrepotSessionDeGroupe.ajoute(sessionDeGroupe);

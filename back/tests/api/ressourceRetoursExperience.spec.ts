@@ -64,7 +64,7 @@ describe("La ressource des retours d'expérience", () => {
       });
 
       assert.equal(reponse.status, 400);
-      assert.equal(reponse.body.erreur, 'La raison est invalide');
+      assert.equal(reponse.body.properties.raison.errors[0], 'La raison est invalide');
       assert.equal(retourExperienceEnvoye, null);
     });
 
@@ -75,7 +75,7 @@ describe("La ressource des retours d'expérience", () => {
       });
 
       assert.equal(reponse.status, 400);
-      assert.equal(reponse.body.erreur, "L'email est invalide");
+      assert.equal(reponse.body.properties.emailDeContact.errors[0], "L'email est invalide");
     });
 
     it("ignore l'email s'il est vide", async () => {

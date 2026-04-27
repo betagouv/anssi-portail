@@ -54,6 +54,7 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
+import { corpsVide, valideCorpsRequete } from './zod';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -171,7 +172,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     )
     .forEach((page) => app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
 
-  app.post('/formulaire-matomo', (_requete: Request, reponse: Response) => {
+  app.post('/formulaire-matomo', valideCorpsRequete(corpsVide), (_requete: Request, reponse: Response) => {
     reponse
       .contentType('text/html')
       .status(200)
