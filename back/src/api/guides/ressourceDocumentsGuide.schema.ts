@@ -6,7 +6,7 @@ import * as z from 'zod';
 export const schemaAjoutDocumentGuide = z
   .object({
     body: z.strictObject({
-      libelleDuLien: z.string(),
+      libelleDuLien: z.string().max(1024),
       genereVisuel: z.enum(['true', 'false']).optional(),
     }),
     file: z.custom<Express.Multer.File>(),
