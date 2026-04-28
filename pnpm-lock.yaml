@@ -27,6 +27,7 @@ overrides:
   dompurify@<3.4.0: '>=3.4.0'
   follow-redirects@<=1.15.11: '>=1.16.0'
   fast-xml-parser@<5.7.0: '>=5.7.0'
+  uuid@<14.0.0: '>=14.0.0'
 
 importers:
 
@@ -138,8 +139,8 @@ importers:
         specifier: ^0.34.5
         version: 0.34.5
       uuid:
-        specifier: ^11.1.0
-        version: 11.1.0
+        specifier: '>=14.0.0'
+        version: 14.0.0
       zod:
         specifier: ^4.3.6
         version: 4.3.6
@@ -4057,8 +4058,8 @@ packages:
     resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
 
-  uuid@11.1.0:
-    resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
+  uuid@14.0.0:
+    resolution: {integrity: sha512-Qo+uWgilfSmAhXCMav1uYFynlQO7fMFiMVZsQqZRMIXp0O7rR7qjkj+cPvBHLgBqi960QCoo/PH2/6ZtVqKvrg==}
     hasBin: true
 
   validator@13.15.26:
@@ -8250,7 +8251,7 @@ snapshots:
 
   utils-merge@1.0.1: {}
 
-  uuid@11.1.0: {}
+  uuid@14.0.0: {}
 
   validator@13.15.26: {}
 
