@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import Icone from '../ui/Icone.svelte';
   import Lien from '../ui/Lien.svelte';
+  import { collecteLesErreurs } from '../utils/erreurApi';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import DialogueSortieDiagnostic from './DialogueSortieDiagnostic.svelte';
   import type { CorpsAPIDemandeAide, DonneesFormulaireDemandeAide } from './DonneesFormulaireDemandeAide';
@@ -65,7 +66,7 @@
       }
     } catch (e) {
       if (axios.isAxiosError(e)) {
-        erreurs = e.response?.data?.erreur;
+        erreurs = collecteLesErreurs(e.response?.data).join('\n');
       }
     } finally {
       enCoursEnvoi = false;
