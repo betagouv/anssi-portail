@@ -1,9 +1,11 @@
 import { Request, Response, Router } from 'express';
+import z from 'zod';
 import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
 import { corpsVide, valideCorpsRequete } from '../zod';
 import { schemaRessourceFavoris } from './ressourceFavoris.schema';
+import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 const ressourceFavoris = ({
   busEvenements,
@@ -19,21 +21,23 @@ const ressourceFavoris = ({
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(schemaRessourceFavoris),
-    filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
-      const idItemCyber = requete.body.idItemCyber as string;
-      const utilisateur = requete.utilisateur;
-      await entrepotFavori.ajoute({
-        idItemCyber,
-        utilisateur,
-      });
-
-      await busEvenements.publie(
-        new MiseAJourFavorisUtilisateur({
+    filetRouteAsynchrone(
+      async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceFavoris>>, reponse: Response) => {
+        const idItemCyber = requete.body.idItemCyber;
+        const utilisateur = requete.utilisateur;
+        await entrepotFavori.ajoute({
+          idItemCyber,
           utilisateur,
-        })
-      );
-      reponse.sendStatus(201);
-    })
+        });
+
+        await busEvenements.publie(
+          new MiseAJourFavorisUtilisateur({
+            utilisateur,
+          })
+        );
+        reponse.sendStatus(201);
+      }
+    )
   );
 
   routeur.get(
