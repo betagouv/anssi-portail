@@ -67,6 +67,7 @@
     markup="h3"
     data-source={dataSource}
     data-cible={dataCible}
+    size="sm"
   >
     <div slot="headerbadges">
       <HeaderBadge {item} libelleBadge={libelleBadge()} />
@@ -90,9 +91,8 @@
     {/if}
   </dsfr-card>
   {#if avecBoutonFavori}
-    <div>
-      <BoutonFavori idItem={item.id} />
-      Ajouter aux Favoris
+    <div class="encart-actions">
+      <BoutonFavori idItem={item.id} avecTexte taille="sm" />
     </div>
   {/if}
 </div>
@@ -103,6 +103,12 @@
     flex-direction: column;
     dsfr-card {
       flex: 1;
+    }
+
+    .encart-actions {
+      display: flex;
+      border: 1px solid var(--border-default-grey);
+      border-top-width: 0;
     }
   }
 </style>
