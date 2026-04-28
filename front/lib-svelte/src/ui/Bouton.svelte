@@ -2,9 +2,10 @@
   import { clic } from '../directives/actions.svelte';
 
   interface Props {
+    libelle?: string;
     titre?: string;
-    type: 'primaire' | 'secondaire' | 'secondaire-inverse';
-    taille?: 'md';
+    type: 'primaire' | 'secondaire' | 'secondaire-inverse' | 'tertiaire' | 'tertiaire-sans-bordure';
+    taille?: 'sm' | 'md';
     desactive?: boolean;
     boutonSoumission?: boolean;
     icone?: string;
@@ -13,6 +14,7 @@
   }
 
   const {
+    libelle,
     titre,
     type,
     taille = undefined,
@@ -28,6 +30,8 @@
       primaire: 'primary',
       secondaire: 'secondary',
       'secondaire-inverse': 'inverted-secondary',
+      'tertiaire-sans-bordure': 'tertiary-no-outline',
+      tertiaire: 'tertiary',
     }[type]
   );
   const boutonType = $derived(boutonSoumission ? 'submit' : 'button');
@@ -39,13 +43,14 @@
 </script>
 
 <dsfr-button
-  label={titre}
+  label={libelle}
+  title={titre}
   {kind}
   size={taille}
   type={boutonType}
-  disabled={desactive}
-  {hasIcon}
+  disabled={desactive || undefined}
+  has-icon={hasIcon}
   icon={icone}
-  iconPlace={iconeSeule ? 'only' : 'left'}
+  icon-place={iconeSeule ? 'only' : 'left'}
   use:clic={gereClick}
 ></dsfr-button>

@@ -120,7 +120,7 @@
           </div>
         </div>
         <div class="actions">
-          <Bouton titre="Envoyer" type="primaire" taille="md" boutonSoumission={true} />
+          <Bouton libelle="Envoyer" type="primaire" taille="md" boutonSoumission={true} />
           <Lien href="/" apparence="bouton" type="secondaire" libelle="Revenir à la page d’accueil"></Lien>
         </div>
       </Formulaire>
