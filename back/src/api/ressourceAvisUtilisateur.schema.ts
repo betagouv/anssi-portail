@@ -1,9 +1,12 @@
 import z from 'zod';
+import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction';
 
 export const schemaRessourceAvisUtilisateur = z.strictObject({
   niveauDeSatisfaction: z
     .int()
     .min(1, 'Le niveau de satisfaction est invalide')
+    .max(5, 'Le niveau de satisfaction est invalide')
+    .pipe(z.custom<NiveauDeSatisfaction>()),
   commentaire: z
     .string()
     .min(1, 'Le commentaire est requis')

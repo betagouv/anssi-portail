@@ -1,10 +1,11 @@
 import cors from 'cors';
 import { Router } from 'express';
 import { encode } from 'html-entities';
+import z from 'zod';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
 import { valideCorpsRequete } from '../zod';
-import { CorpsDemandeAide, schemaRessourceDemandesAide } from './ressourceDemandesAide.schema';
+import { schemaRessourceDemandesAide } from './ressourceDemandesAide.schema';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 const ressourceDemandesAide = ({ adaptateurMonAideCyber }: ConfigurationServeur): Router => {
@@ -15,7 +16,7 @@ const ressourceDemandesAide = ({ adaptateurMonAideCyber }: ConfigurationServeur)
     '/',
     cors(),
     valideCorpsRequete(schemaRessourceDemandesAide),
-    filetRouteAsynchrone(async (requete: CorpsDeRequeteTypee<CorpsDemandeAide>, reponse) => {
+    filetRouteAsynchrone(async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceDemandesAide>>, reponse) => {
       try {
         const { emailAidant, identifiantAidant, siretAidant, entiteAidee, origine } = requete.body;
         const { email, departement, raisonSociale, siret } = entiteAidee;

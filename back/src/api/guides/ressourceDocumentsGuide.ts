@@ -1,6 +1,7 @@
 import { NextFunction, Request, RequestHandler, Response, Router } from 'express';
 import multer from 'multer';
 import { join } from 'path';
+import z from 'zod';
 import { selectionneConfigCellarDeposePourUnBucket } from '../../infra/adaptateurCellar';
 import { EntrepotGuideTravail } from '../../metier/entrepotGuideTravail';
 import { Guide } from '../../metier/guide';
@@ -8,6 +9,7 @@ import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
 import { corpsVide, valideCorpsRequete, valideRequete } from '../zod';
 import { schemaAjoutDocumentGuide } from './ressourceDocumentsGuide.schema';
+import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 const valideAutorisation = (): RequestHandler => {
   return async (requete: Request, reponse: Response, suite: NextFunction) => {
@@ -93,39 +95,41 @@ const ressourceDocumentsGuide = ({
     valideLesDocuments(),
     valideRequete(schemaAjoutDocumentGuide),
     recupereLeGuide(entrepotGuideTravail),
-    filetRouteAsynchrone(async (requete, reponse) => {
-      const fichier = requete.file!; // Le fichier est forcément présent à ce stade, car validé par "valideLesDocuments()"
-      await cellar.depose(
-        { contenu: fichier.buffer, nom: fichier.originalname, typeDeContenu: fichier.mimetype },
-        'GESTION_GUIDES'
-      );
-
-      const guide = reponse.locals.guide as Guide;
-      if (guide.possedeLeDocument(fichier.originalname)) {
-        return reponse.status(400).json({
-          erreur: `Le document "${fichier.originalname}" existe déjà pour ce guide`,
-        });
-      }
-
-      const identifiantGuide = reponse.locals.guide.id as string;
-      if (requete.body.genereVisuel === 'true') {
-        const imageOrigine = await generateurImage.depuisPdf(fichier.buffer);
-        const image588 = await generateurImage.depuisPdf(fichier.buffer, { largeur: 588 });
+    filetRouteAsynchrone(
+      async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaAjoutDocumentGuide>['body']>, reponse) => {
+        const fichier = requete.file!; // Le fichier est forcément présent à ce stade, car validé par "valideLesDocuments()"
         await cellar.depose(
-          { contenu: imageOrigine, nom: `${identifiantGuide}/origine.avif`, typeDeContenu: 'image/avif' },
+          { contenu: fichier.buffer, nom: fichier.originalname, typeDeContenu: fichier.mimetype },
           'GESTION_GUIDES'
         );
-        await cellar.depose(
-          { contenu: image588, nom: `${identifiantGuide}/588.avif`, typeDeContenu: 'image/avif' },
-          'GESTION_GUIDES'
-        );
+
+        const guide = reponse.locals.guide as Guide;
+        if (guide.possedeLeDocument(fichier.originalname)) {
+          return reponse.status(400).json({
+            erreur: `Le document "${fichier.originalname}" existe déjà pour ce guide`,
+          });
+        }
+
+        const identifiantGuide = reponse.locals.guide.id as string;
+        if (requete.body.genereVisuel === 'true') {
+          const imageOrigine = await generateurImage.depuisPdf(fichier.buffer);
+          const image588 = await generateurImage.depuisPdf(fichier.buffer, { largeur: 588 });
+          await cellar.depose(
+            { contenu: imageOrigine, nom: `${identifiantGuide}/origine.avif`, typeDeContenu: 'image/avif' },
+            'GESTION_GUIDES'
+          );
+          await cellar.depose(
+            { contenu: image588, nom: `${identifiantGuide}/588.avif`, typeDeContenu: 'image/avif' },
+            'GESTION_GUIDES'
+          );
+        }
+
+        guide.ajouteLeDocument({ libelle: requete.body.libelleDuLien, nomFichier: fichier.originalname });
+        await guide.sauvegarde(entrepotGuideTravail);
+
+        reponse.status(201).send();
       }
-
-      guide.ajouteLeDocument({ libelle: requete.body.libelleDuLien, nomFichier: fichier.originalname });
-      await guide.sauvegarde(entrepotGuideTravail);
-
-      reponse.status(201).send();
-    })
+    )
   );
 
   routeur.delete(

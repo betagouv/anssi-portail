@@ -17,5 +17,3 @@ export const schemaRessourceDemandesAide = z.strictObject({
   origine: z.string().trim().min(1, 'Veuillez saisir une origine valide.').max(128).optional(),
   validationCGU: z.boolean().refine((validationCGU) => !!validationCGU, 'Veuillez valider les CGU.'),
 });
-
-export type CorpsDemandeAide = z.infer<typeof schemaRessourceDemandesAide>;

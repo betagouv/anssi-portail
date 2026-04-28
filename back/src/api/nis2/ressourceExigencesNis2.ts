@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import z from 'zod';
 import {
   Correspondance,
   Exigence,
@@ -19,7 +20,7 @@ export const ressourceExigencesNis2 = ({ adaptateurEnvironnement, entrepotExigen
     '/',
     valideRequete(schemaRessourceExigencesNis2),
     filetRouteAsynchrone(async (requete, reponse) => {
-      const { source, cible, langue } = schemaRessourceExigencesNis2Query.safeParse(requete.query).data ?? {};
+      const { source, cible, langue } = requete.query.data as z.infer<typeof schemaRessourceExigencesNis2Query>;
 
       const referentielSource = versReferentiel(source);
       const referentielCible = versReferentiel(cible);
