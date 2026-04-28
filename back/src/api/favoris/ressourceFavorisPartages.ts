@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
-import { valideRequete } from '../zod';
+import { valideParametresRequete } from '../zod';
 import { schemaRessourceFavorisPartages } from './ressourceFavorisPartages.schema';
 
 const ressourceFavorisPartages = ({ entrepotFavori, entrepotUtilisateur }: ConfigurationServeur) => {
@@ -9,7 +9,7 @@ const ressourceFavorisPartages = ({ entrepotFavori, entrepotUtilisateur }: Confi
 
   routeur.get(
     '/:id',
-    valideRequete(schemaRessourceFavorisPartages),
+    valideParametresRequete(schemaRessourceFavorisPartages),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const utilisateurPartageur = await entrepotUtilisateur.parIdListeFavoris(requete.params.id as string);
 

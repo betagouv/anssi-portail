@@ -1,7 +1,8 @@
 import z from 'zod';
 
-export const schemaRessourceGuidesMemesCollections = z.object({
-  params: z.object({
-    slug: z.string(),
-  }),
+export const schemaParametersRessourceGuidesMemesCollections = z.strictObject({
+  slug: z
+    .string()
+    .regex(/^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/)
+    .max(256),
 });

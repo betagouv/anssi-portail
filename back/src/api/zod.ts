@@ -1,6 +1,26 @@
 import { NextFunction, Request, Response } from 'express';
 import * as z from 'zod';
 
+export const valideRequete =
+  <TZod extends z.ZodType, TReq extends z.infer<TZod>>(objet: TZod) =>
+  async (requete: Request<unknown, unknown, TReq, unknown, never>, reponse: Response, suite: NextFunction) => {
+    const resultat = objet.safeParse(requete) as z.ZodSafeParseResult<z.core.output<TZod>>;
+    if (!resultat.success) return reponse.sendStatus(400);
+    return suite();
+  };
+
+export const valideParametresRequete =
+  <TZod extends z.ZodType, TParams extends z.infer<TZod>>(objet: TZod) =>
+  async (requete: Request<TParams, unknown, unknown, unknown, never>, reponse: Response, suite: NextFunction) => {
+    const resultat = objet.safeParse(requete.params);
+
+    if (!resultat.success) {
+      return reponse.sendStatus(404);
+    }
+
+    return suite();
+  };
+
 export const valideCorpsRequete =
   <TZod extends z.ZodType, TBody extends z.infer<TZod>>(objet: TZod) =>
   async (requete: Request<unknown, unknown, TBody, unknown, never>, reponse: Response, suite: NextFunction) => {
@@ -12,14 +32,6 @@ export const valideCorpsRequete =
     // On réassigne pour que les suivants récupèrent le contenu assaini par Zod.
     requete.body = resultat.data as TBody;
 
-    return suite();
-  };
-
-export const valideRequete =
-  <TZod extends z.ZodType, TReq extends z.infer<TZod>>(objet: TZod) =>
-  async (requete: Request<unknown, unknown, TReq, unknown, never>, reponse: Response, suite: NextFunction) => {
-    const resultat = objet.safeParse(requete) as z.ZodSafeParseResult<z.core.output<TZod>>;
-    if (!resultat.success) return reponse.sendStatus(400);
     return suite();
   };
 

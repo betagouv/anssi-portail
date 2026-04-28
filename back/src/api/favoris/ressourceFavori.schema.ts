@@ -1,7 +1,5 @@
 import z from 'zod';
 
-export const schemaRessourceFavori = z.object({
-  params: z.strictObject({
-    id: z.string(),
-  }),
+export const schemaParametersRessourceFavori = z.strictObject({
+  id: z.string().regex(/^[a-zA-Z0-9_-]+$/),
 });
