@@ -1,5 +1,6 @@
 <script lang="ts">
   import BoutonFavori from '../favoris/BoutonFavori.svelte';
+  import { decodeEntiteHtml } from '../utils/aseptisationDuHtml';
   import type { ItemCyber } from './Catalogue.types';
   import type { Guide } from './Guide.types';
   import HeaderBadge from './HeaderBadge.svelte';
@@ -25,7 +26,7 @@
     : `/assets/images/illustrations-services/${(item as ItemCyber).illustration}`;
 
   const altImage = estGuide ? 'Illustration du guide' : 'Illustration du service';
-  const detailHaut = estGuide ? (item as Guide).thematique : item.nom;
+  const detailHaut = estGuide ? (item as Guide).thematique : decodeEntiteHtml(item.nom);
   const detailBas = estGuide ? (item as Guide).dateMiseAJourFormatee : undefined;
 
   // Props analytics

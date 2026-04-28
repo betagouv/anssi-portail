@@ -1,5 +1,6 @@
 <script lang="ts">
   import { profilStore } from '../stores/profil.store.js';
+  import { decodeEntiteHtml } from '../utils/aseptisationDuHtml.js';
   import type { Branche } from './filAriane';
 
   export let feuille: string;
@@ -33,7 +34,7 @@
     {/if}
     <span><img src="/assets/images/icone-chevron-droite.svg" alt="" /></span>
   {/if}
-  <span>{feuille}</span>
+  <span>{decodeEntiteHtml(feuille)}</span>
 </div>
 
 <style>
