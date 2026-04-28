@@ -9,6 +9,7 @@
   import Formulaire from '../ui/Formulaire.svelte';
   import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
   import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
+  import { collecteLesErreurs } from '../utils/erreurApi';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import type { CorpsAPIDemandeAide } from './DonneesFormulaireDemandeAide';
 
@@ -24,7 +25,7 @@
   let cguSontValidees: boolean;
   let enSucces: boolean = false;
   let enCoursEnvoi: boolean = false;
-  let erreur: string;
+  let erreurs: string;
   let erreurValidation = false;
   let badges: { label: string; accent: CouleurDeBadge }[] = [];
 
@@ -70,7 +71,7 @@
       }
     } catch (e) {
       if (axios.isAxiosError(e)) {
-        erreur = e.response?.data?.erreur;
+        erreurs = collecteLesErreurs(e.response?.data).join('\n');
       }
     } finally {
       enCoursEnvoi = false;
@@ -136,8 +137,8 @@
           disabled={enCoursEnvoi}
         ></dsfr-button>
       </div>
-      {#if erreur}
-        <Alerte type="ERREUR" titre="Une erreur est survenue" message={erreur} />
+      {#if erreurs}
+        <Alerte type="ERREUR" titre="Une erreur est survenue" message={erreurs} />
       {/if}
       {#if mode === 'autonome'}
         <div class="entete-principale">
