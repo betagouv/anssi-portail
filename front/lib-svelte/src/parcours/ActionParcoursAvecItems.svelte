@@ -20,10 +20,14 @@
         <img class="illustration" src={sourceIllustration} alt="Illustration {titre}" />
       {/if}
     </div>
-    <h4>Ressources</h4>
-    {#each items as item (item.id)}
-      <CarteItem {item} />
-    {/each}
+    <div class="contenu-droite">
+      <h4>Ressources</h4>
+      <div class="cartes">
+        {#each items as item (item.id)}
+          <CarteItem {item} />
+        {/each}
+      </div>
+    </div>
   </div>
 </dsfr-container>
 
@@ -47,17 +51,24 @@
     }
 
     .contenu-action {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
-      column-gap: 24px;
-    }
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
 
-    .description {
-      grid-column: 1 / -1;
       @include a-partir-de(lg) {
-        grid-column: 1;
-        grid-row: 1 / 100;
-        margin-right: 24px;
+        display: grid;
+        grid-template-columns: 282px 1fr;
+      }
+
+      .contenu-droite {
+        display: flex;
+        flex-direction: column;
+
+        .cartes {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+          gap: 24px;
+        }
       }
     }
 
