@@ -176,7 +176,7 @@
       <Bouton
         type="primaire"
         taille="md"
-        titre="Envoyer ma demande"
+        libelle="Envoyer ma demande"
         surClic={soumetsFormulaire}
         desactive={enCoursEnvoi}
       />

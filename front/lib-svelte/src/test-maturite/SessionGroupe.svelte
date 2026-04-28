@@ -55,7 +55,7 @@
         Générez un code de session à partager avec les participants. Vous pourrez ensuite comparer les résultats obtenus.
       </p>
       <Bouton
-        titre="Nouvelle session"
+        libelle="Nouvelle session"
         type="secondaire"
         taille="md"
         desactive={creationNouvelleSessionEnCours}
@@ -93,7 +93,7 @@
             maxlength="7"
           />
         </ControleFormulaire>
-        <Bouton titre="Débuter le test" type="primaire" taille="md" surClic={rejoindreSession} />
+        <Bouton libelle="Débuter le test" type="primaire" taille="md" surClic={rejoindreSession} />
       </Formulaire>
     </div>
   </div>
