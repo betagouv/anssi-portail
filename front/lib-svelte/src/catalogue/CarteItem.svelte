@@ -51,24 +51,25 @@
 
 <div class="carte-item">
   <dsfr-card
-    title={titreCoupe}
-    hasDescription={false}
-    hasDetailStart={!!detailHaut}
-    detailStart={detailHaut}
-    hasDetailEnd={!!detailBas || item.sources || item.tagsSpecifiques}
-    detailEnd={detailBas}
-    src={image}
-    imageRatio="4x3"
-    alt={altImage}
-    href={lien}
-    blank={nouvelOnglet}
-    noLink={sansLien}
-    hasHeaderBadge
     actionMarkup="a"
-    markup="h3"
-    data-source={dataSource}
+    alt={altImage}
+    blank={nouvelOnglet}
     data-cible={dataCible}
+    data-source={dataSource}
+    detailEnd={detailBas}
+    detailStart={detailHaut}
+    enlarge
+    hasDescription={false}
+    hasDetailEnd={!!detailBas || item.sources || item.tagsSpecifiques}
+    hasDetailStart={!!detailHaut}
+    hasHeaderBadge
+    href={lien}
+    imageRatio="4x3"
+    markup="h3"
+    noLink={sansLien}
     size="sm"
+    src={image}
+    title={titreCoupe}
   >
     <div slot="headerbadges">
       <HeaderBadge {item} libelleBadge={libelleBadge()} />
