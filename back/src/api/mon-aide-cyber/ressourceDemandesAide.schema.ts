@@ -5,7 +5,10 @@ export const schemaRessourceDemandesAide = z.strictObject({
   entiteAidee: z.strictObject({
     departement: z.enum(codeDepartement, 'Veuillez saisir un département valide.'),
     siret: z.string('Veuillez saisir un SIRET valide.').regex(/^\d{14}$/),
-    raisonSociale: z.string().max(1024).nonempty('Veuillez saisir une raison sociale valide.'),
+    raisonSociale: z
+      .string()
+      .max(1024, 'La raison sociale ne peut pas dépasser 1024 caractères')
+      .nonempty('Veuillez saisir une raison sociale valide.'),
     email: z.email('Veuillez saisir un email valide.').nonempty(),
   }),
   emailAidant: z.email('Veuillez saisir un email valide pour l’Aidant cyber.').optional(),
@@ -14,6 +17,11 @@ export const schemaRessourceDemandesAide = z.strictObject({
     .string()
     .regex(/^\d{14}$/, 'Veuillez saisir un SIRET Aidant cyber valide.')
     .optional(),
-  origine: z.string().trim().min(1, 'Veuillez saisir une origine valide.').max(128).optional(),
+  origine: z
+    .string()
+    .trim()
+    .min(1, 'Veuillez saisir une origine valide.')
+    .max(128, "L'origine ne peut pas dépasser 128 caractères")
+    .optional(),
   validationCGU: z.boolean().refine((validationCGU) => !!validationCGU, 'Veuillez valider les CGU.'),
 });

@@ -1,14 +1,14 @@
-import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
-import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire';
-import { creeServeur } from '../../../src/api/msc';
-import { configurationDeTestDuServeur } from '../fauxObjets';
-import request from 'supertest';
 import assert from 'node:assert';
-import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
-import { jeanneDupont } from '../objetsPretsALEmploi';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { randomUUID } from 'node:crypto';
+import { beforeEach, describe, it } from 'node:test';
+import request from 'supertest';
+import { creeServeur } from '../../../src/api/msc';
+import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
+import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
+import { configurationDeTestDuServeur } from '../fauxObjets';
+import { jeanneDupont } from '../objetsPretsALEmploi';
 
 describe('La ressource des favoris partagés', () => {
   let serveur: Express;
@@ -59,10 +59,10 @@ describe('La ressource des favoris partagés', () => {
       assert.equal(reponse.statusCode, 404);
     });
 
-    it("retourne 400 si l'id de la liste de favoris n'est pas un uuid", async () => {
+    it("retourne 404 si l'id de la liste de favoris n'est pas un uuid", async () => {
       const reponse = await request(serveur).get(`/api/favoris-partages/pasunuuid`);
 
-      assert.equal(reponse.statusCode, 400);
+      assert.equal(reponse.statusCode, 404);
     });
   });
 });

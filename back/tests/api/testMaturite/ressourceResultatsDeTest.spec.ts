@@ -250,7 +250,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           });
       };
 
-      it('accepte une région non renseignée', async () => {
+      it('accepte une région avec une valeur "nulle"', async () => {
         const reponse = await requeteAvecDonneeIncorrecte({
           region: null,
         });
@@ -260,7 +260,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         assert.equal(evenement!.region, null);
       });
 
-      it('accepte un secteur non renseigné', async () => {
+      it('accepte un secteur avec une valeur "nulle"', async () => {
         const reponse = await requeteAvecDonneeIncorrecte({
           secteur: null,
         });
@@ -270,7 +270,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         assert.equal(evenement!.secteur, null);
       });
 
-      it("accepte une taille d'organisation non renseignée", async () => {
+      it("accepte une taille d'organisation avec une valeur 'nulle'", async () => {
         const reponse = await requeteAvecDonneeIncorrecte({
           tailleOrganisation: null,
         });
@@ -286,7 +286,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         });
 
         assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.properties.region.errors[0], 'Région invalide');
+        assert.equal(reponse.body.fieldErrors.region[0], 'Région invalide');
       });
 
       it('valide le secteur', async () => {
@@ -295,7 +295,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         });
 
         assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.properties.secteur.errors[0], 'Secteur invalide');
+        assert.equal(reponse.body.fieldErrors.secteur[0], 'Secteur invalide');
       });
 
       it("valide la taille d'organisation", async () => {
@@ -304,7 +304,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         });
 
         assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.properties.tailleOrganisation.errors[0], "Taille d'organisation invalide");
+        assert.equal(reponse.body.fieldErrors.tailleOrganisation[0], "Taille d'organisation invalide");
       });
 
       describe('concernant les réponses', () => {
@@ -314,7 +314,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           });
 
           assert.equal(reponse.status, 400);
-          assert.equal(reponse.body.properties.reponses.errors[0], 'Les réponses doivent être dans un objet');
+          assert.equal(reponse.body.fieldErrors.reponses[0], 'Les réponses doivent être dans un objet');
         });
 
         it('valide les clés de réponses', async () => {
@@ -323,7 +323,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           });
 
           assert.equal(reponse.status, 400);
-          assert.equal(reponse.body.properties.reponses.errors[0], 'Les clés de réponse sont invalides');
+          assert.equal(reponse.body.fieldErrors.reponses[0], 'Les clés de réponse sont invalides');
         });
 
         it('valide les valeurs de reponses', async () => {
@@ -333,7 +333,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
           assert.equal(reponse.status, 400);
           assert.equal(
-            reponse.body.properties.reponses.properties.pilotage.errors[0],
+            reponse.body.fieldErrors.reponses[0],
             'Les valeurs de réponses doivent être comprises entre 1 et 5'
           );
         });
@@ -345,7 +345,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
           assert.equal(reponse.status, 400);
           assert.equal(
-            reponse.body.properties.reponses.properties.pilotage.errors[0],
+            reponse.body.fieldErrors.reponses[0],
             'Les valeurs de réponses doivent être comprises entre 1 et 5'
           );
         });

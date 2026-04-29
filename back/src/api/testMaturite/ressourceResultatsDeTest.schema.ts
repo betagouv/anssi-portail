@@ -16,9 +16,9 @@ const erreurSurLesNombres = 'Les valeurs de réponses doivent être comprises en
 const schemaNombreEntre1Et5 = z.int(erreurSurLesNombres).min(1, erreurSurLesNombres).max(5, erreurSurLesNombres);
 
 export const schemaRessourceResultatsDeTest = z.strictObject({
-  region: z.enum(codesRegion, 'Région invalide').optional(),
-  secteur: z.enum(codesSecteur, 'Secteur invalide').optional(),
-  tailleOrganisation: z.enum(codesTranchesEffectif, "Taille d'organisation invalide").optional(),
+  region: z.enum(codesRegion, 'Région invalide').optional().nullable(),
+  secteur: z.enum(codesSecteur, 'Secteur invalide').optional().nullable(),
+  tailleOrganisation: z.enum(codesTranchesEffectif, "Taille d'organisation invalide").optional().nullable(),
   reponses: z
     .any()
     .superRefine((val, ctx) => {
