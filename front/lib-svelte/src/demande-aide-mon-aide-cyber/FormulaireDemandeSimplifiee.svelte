@@ -134,7 +134,7 @@
           variantkind="primary"
           type="submit"
           centered
-          disabled={enCoursEnvoi}
+          disabled={enCoursEnvoi || undefined}
         ></dsfr-button>
       </div>
       {#if erreurs}
