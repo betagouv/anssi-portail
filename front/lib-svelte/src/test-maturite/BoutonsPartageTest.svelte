@@ -24,16 +24,13 @@
 </script>
 
 <div class="boutons-partage fond-{couleurFond}">
-  <a
-    class="bouton secondaire"
-    target="_blank"
-    rel="noopener"
-    title="Partager sur LinkedIn"
-    on:click|preventDefault={partageLinkedIn}
-    href={urlLinkedIn}
-  >
-    <img src="/assets/images/icone-linkedin.svg" alt="Partager sur LinkedIn" />
-  </a>
+  <Bouton
+    titre="Partager sur LinkedIn"
+    surClic={partageLinkedIn}
+    type={couleurFond === 'clair' ? 'secondaire' : 'secondaire-inverse'}
+    iconeSeule
+    icone="linkedin-box-fill"
+  />
   <Lien
     href="mailto:?subject=Test de maturité Cyber&body=Lien vers le test : {lienTest}"
     libelle="Partager par email"
