@@ -5,7 +5,7 @@ import { Referentiel, versLangueConnue, versReferentiel } from '../../metier/nis
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
 import { valideRequete } from '../zod';
-import { schemaRessourceExigencesNis2, schemaRessourceExigencesNis2Query } from './ressourceExigencesNis2.schema';
+import { schemaRessourceExigencesNis2 } from './ressourceExigencesNis2.schema';
 import { StrategieExportCsvUneLigneParExigence } from './strategieExportCsvUneLigneParExigence';
 
 export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationServeur) => {
@@ -38,7 +38,7 @@ export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationSer
     '/',
     valideRequete(schemaRessourceExigencesNis2),
     filetRouteAsynchrone(async (requete, reponse) => {
-      const { source, cible, langue } = requete.query.data as z.infer<typeof schemaRessourceExigencesNis2Query>;
+      const { source, cible, langue } = (requete as z.infer<typeof schemaRessourceExigencesNis2>).query;
 
       const referentielSource = versReferentiel(source);
       const referentielCible = versReferentiel(cible);

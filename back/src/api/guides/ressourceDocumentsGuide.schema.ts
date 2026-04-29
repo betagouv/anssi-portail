@@ -6,7 +6,7 @@ import * as z from 'zod';
 export const schemaAjoutDocumentGuide = z
   .object({
     body: z.strictObject({
-      libelleDuLien: z.string().max(1024),
+      libelleDuLien: z.string().max(1024, 'Le libellé du lien ne peut pas dépasser 1024 caractères'),
       genereVisuel: z.enum(['true', 'false']).optional(),
     }),
     file: z.custom<Express.Multer.File>(),

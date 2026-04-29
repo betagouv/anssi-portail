@@ -26,7 +26,7 @@ export const valideCorpsRequete =
   async (requete: Request<unknown, unknown, TBody, unknown, never>, reponse: Response, suite: NextFunction) => {
     const resultat = objet.safeParse(requete.body);
 
-    if (!resultat.success) return reponse.status(400).send(z.treeifyError(resultat.error));
+    if (!resultat.success) return reponse.status(400).send(z.flattenError(resultat.error));
 
     // Ici, on veut bel et bien réécrire la requête, car c'est comme ça qu'expressjs est conçu.
     // On réassigne pour que les suivants récupèrent le contenu assaini par Zod.

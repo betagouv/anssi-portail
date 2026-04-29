@@ -140,7 +140,7 @@ describe('La ressource utilisateur', () => {
             telephone: 'ABCD',
           });
         assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.properties.telephone.errors[0], 'Le téléphone est invalide');
+        assert.equal(reponse.body.fieldErrors.telephone[0], 'Le téléphone est invalide');
       });
 
       it('valide les domaines de spécialité', async () => {
@@ -151,7 +151,7 @@ describe('La ressource utilisateur', () => {
             domainesSpecialite: [],
           });
         assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.properties.domainesSpecialite.errors[0], 'Les domaines de spécialité sont invalides');
+        assert.equal(reponse.body.fieldErrors.domainesSpecialite[0], 'Les domaines de spécialité sont invalides');
       });
 
       it('valide le siret', async () => {
@@ -162,7 +162,7 @@ describe('La ressource utilisateur', () => {
             siretEntite: 'unMauvaisSiret',
           });
         assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.properties.siretEntite.errors[0], 'Le siret est invalide');
+        assert.equal(reponse.body.fieldErrors.siretEntite[0], 'Le siret est invalide');
       });
 
       it("valide l'acceptation des CGU", async () => {
@@ -173,7 +173,7 @@ describe('La ressource utilisateur', () => {
             cguAcceptees: 12,
           });
         assert.equal(reponse.status, 400);
-        assert.equal(reponse.body.properties.cguAcceptees.errors[0], "L'acceptation des CGU est invalide");
+        assert.equal(reponse.body.fieldErrors.cguAcceptees[0], "L'acceptation des CGU est invalide");
       });
 
       it("valide l'acceptation de l'infolettre", async () => {
@@ -184,10 +184,7 @@ describe('La ressource utilisateur', () => {
             infolettreAcceptee: 12,
           });
         assert.equal(reponse.status, 400);
-        assert.equal(
-          reponse.body.properties.infolettreAcceptee.errors[0],
-          "L'acceptation de l'infolettre est invalide"
-        );
+        assert.equal(reponse.body.fieldErrors.infolettreAcceptee[0], "L'acceptation de l'infolettre est invalide");
       });
 
       describe('valide le token', () => {
@@ -199,7 +196,7 @@ describe('La ressource utilisateur', () => {
               token: '',
             });
           assert.equal(reponse.status, 400);
-          assert.equal(reponse.body.properties.token.errors[0], 'Le token est invalide');
+          assert.equal(reponse.body.fieldErrors.token[0], 'Le token est invalide');
         });
 
         it("lorsqu'il est mal signé", async () => {

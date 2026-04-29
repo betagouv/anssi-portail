@@ -67,7 +67,7 @@ describe('La ressource avis utilisateur', () => {
       const reponse = await request(serveur).post('/api/avis-utilisateur').send({ niveauDeSatisfaction: 0 });
 
       assert.equal(reponse.status, 400);
-      assert.equal(reponse.body.properties.niveauDeSatisfaction.errors[0], 'Le niveau de satisfaction est invalide');
+      assert.equal(reponse.body.fieldErrors.niveauDeSatisfaction[0], 'Le niveau de satisfaction est invalide');
     });
 
     it('renvoie une erreur si le commentaire est vide', async () => {
@@ -76,7 +76,7 @@ describe('La ressource avis utilisateur', () => {
         .send({ ...avisUtilisateur, commentaire: '' });
 
       assert.equal(reponse.status, 400);
-      assert.equal(reponse.body.properties.commentaire.errors[0], 'Le commentaire est requis');
+      assert.equal(reponse.body.fieldErrors.commentaire[0], 'Le commentaire est requis');
     });
 
     it("renvoie une erreur si l'email est malformé", async () => {
@@ -85,7 +85,7 @@ describe('La ressource avis utilisateur', () => {
         .send({ ...avisUtilisateur, emailDeContact: 'pas un email' });
 
       assert.equal(reponse.status, 400);
-      assert.equal(reponse.body.properties.emailDeContact.errors[0], "L'email est invalide");
+      assert.equal(reponse.body.fieldErrors.emailDeContact[0], "L'email est invalide");
     });
   });
 });

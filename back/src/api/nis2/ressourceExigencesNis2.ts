@@ -11,7 +11,7 @@ import {
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
 import { valideRequete } from '../zod';
-import { schemaRessourceExigencesNis2, schemaRessourceExigencesNis2Query } from './ressourceExigencesNis2.schema';
+import { schemaRessourceExigencesNis2 } from './ressourceExigencesNis2.schema';
 
 export const ressourceExigencesNis2 = ({ adaptateurEnvironnement, entrepotExigence }: ConfigurationServeur) => {
   const routeur = Router();
@@ -20,7 +20,7 @@ export const ressourceExigencesNis2 = ({ adaptateurEnvironnement, entrepotExigen
     '/',
     valideRequete(schemaRessourceExigencesNis2),
     filetRouteAsynchrone(async (requete, reponse) => {
-      const { source, cible, langue } = requete.query.data as z.infer<typeof schemaRessourceExigencesNis2Query>;
+      const { source, cible, langue } = (requete as z.infer<typeof schemaRessourceExigencesNis2>).query;
 
       const referentielSource = versReferentiel(source);
       const referentielCible = versReferentiel(cible);

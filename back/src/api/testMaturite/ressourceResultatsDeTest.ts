@@ -28,9 +28,9 @@ const ressourceResultatsDeTest = ({
 
         const utilisateur = requete.utilisateur;
         const resultatTest = new ResultatTestMaturite({
-          tailleOrganisation,
-          region,
-          secteur,
+          tailleOrganisation: tailleOrganisation ?? undefined,
+          region: region ?? undefined,
+          secteur: secteur ?? undefined,
           reponses,
           codeSessionGroupe,
         });
