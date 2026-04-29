@@ -2,7 +2,6 @@
 layout: defaut
 styles:
   - /assets/styles/service.css
-  - /assets/styles/carte-item.css
 script: /scripts/service.js
 ---
 
@@ -133,44 +132,6 @@ script: /scripts/service.js
           </form>
         </dialog>
       </section>
-
-      {% if page.ressources.size > 0 %}
-      <section class="ressources" id="ressources">
-        <h2>Les ressources associées</h2>
-        {% for idRessource in page.ressources %}
-        {% assign ressource = site.ressources | where: "id", idRessource | first %}
-
-        {% if ressource.avecFicheDetaillee %}
-        <a class="carte ressource" href="{{ressource.url}}">
-          {% else %}
-          <a class="carte ressource" href="{{ressource.lien}}">
-            {% endif %}
-            <figure>
-              <img src="/assets/images/illustrations-services/{{ressource.illustration}}">
-              <figcaption>{{ressource.format}}</figcaption>
-            </figure>
-            <div class="contenu">
-              <h3>{{ressource.titre}}</h3>
-              <span>{{ressource.description}}</span>
-              <div class="labels">
-                {% for source in ressource.sources %}
-                <span>{{source}}</span>
-                {% endfor %}
-                {% if ressource.avecFicheDetaillee %}
-                <img src="/assets/images/icone-fleche-droite.svg"
-                     alt="Voir le détail"
-                     title="Voir le détail">
-                {% else %}
-                <img src="/assets/images/icone-lien-externe.svg"
-                     alt="Ouvrir dans un nouvel onglet"
-                     title="Ouvrir dans un nouvel onglet">
-                {% endif %}
-              </div>
-            </div>
-          </a>
-          {% endfor %}
-      </section>
-      {% endif %}
 
       <div class="haut-de-page">
         <msc-lien href="#haut-de-page" libelle="Haut de page"></msc-lien>
