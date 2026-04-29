@@ -1,43 +1,93 @@
-{% assign item = include.item %} {% if item.avecFicheDetaillee %}
-<a class="carte {{ item.typologie }}" href="{{item.url}}">
+{% assign item = include.item %}
+
+{% if item.avecFicheDetaillee %}
+  {% assign card_href = item.url %}
+  {% assign card_blank = false %}
+{% else %}
+  {% assign card_href = item.lien %}
+  {% assign card_blank = true %}
+{% endif %}
+
+{% if include.nomPerso %}
+  {% assign card_detail_start = include.nomPerso %}
+{% else %}
+  {% assign card_detail_start = item.nom %}
+{% endif %}
+
+{% if include.descriptionPerso %}
+  {% assign card_title = include.descriptionPerso %}
+{% else %}
+  {% assign card_title = item.description %}
+{% endif %}
+
+{% if item.typologie == 'outil' %}
+  {% assign badge_accent = "pink-tuile" %}
+{% elsif item.typologie == 'contenu' %}
+  {% assign badge_accent = "yellow-tournesol" %}
+{% else %}
+  {% assign badge_accent = "blue-ecume" %}
+{% endif %}
+
+
+{% assign tagsSpecifiques = "" %}
+{% for tag in include.tagsSpecifiques %}
+  {% capture tag_obj %}{"label":"{{ tag }}","has-icon":true,"icon":"government-line"}{% endcapture %}
+  {% if forloop.last %}
+    {% assign tagsSpecifiques = tagsSpecifiques | append: tag_obj %}
   {% else %}
-  <a class="carte {{ item.typologie }}" href="{{item.lien}}" target="_blank">
+    {% assign tagsSpecifiques = tagsSpecifiques | append: tag_obj | append: "," %}
+  {% endif %}
+{% endfor %}
+{% assign tagsSpecifiques = tagsSpecifiques | prepend: "[" | append: "]" %}
+
+{% assign sources = "" %}
+{% for tag in item.sources %}
+  {% capture tag_obj %}{"label":"{{ tag }}"}{% endcapture %}
+  {% if forloop.last %}
+    {% assign sources = sources | append: tag_obj %}
+  {% else %}
+    {% assign sources = sources | append: tag_obj | append: "," %}
+  {% endif %}
+{% endfor %}
+{% assign sources = sources | prepend: "[" | append: "]" %}
+
+<dsfr-card
+  src="/assets/images/illustrations-services/{{item.illustration}}"
+  alt="Capture d'écran de {{item.nom}}"
+  has-detail-start="true"
+  has-detail-end="true"
+  has-header-badge="true"
+  actionMarkup="a"
+  markup="h3"
+  size="sm"
+  href="{{card_href}}"
+  {% if card_blank %}blank{% endif %}
+  detail-start="{{card_detail_start}}"
+  title="{{card_title}}"
+>
+  <div slot="headerbadges">
+    <dsfr-badge
+      label="{{ item.typologie }}"
+      size="sm"
+      type="accent"
+      accent="{{badge_accent}}"
+    ></dsfr-badge>
+  </div>
+  <div slot="contentend">
+    {% if include.tagsSpecifiques and include.tagsSpecifiques.size > 0 %}
+      <dsfr-tags-group
+        tags='{{ tagsSpecifiques }}'
+        size="sm"
+        group-markup="span"
+        has-icon
+      ></dsfr-tags-group>
     {% endif %}
-    <figure>
-      <img
-        src="/assets/images/illustrations-services/{{item.illustration}}"
-        alt="Capture d’écran de {{item.nom}}"
-      />
-      <figcaption>{{ item.typologie | capitalize }}</figcaption>
-    </figure>
-    <div class="contenu">
-      <div class="nom-item">
-        {% if include.nomPerso %}{{include.nomPerso}}{% else %}{{item.nom}}{%
-        endif %}
-      </div>
-      <span class="description"
-        >{% if include.descriptionPerso %}{{include.descriptionPerso}}{% else
-        %}{{item.description}}{% endif %}</span
-      >
-      <div class="labels">
-        {% for tag in include.tagsSpecifiques %}
-        <span class="tag-specifique">{{tag}}</span>
-        {% endfor %} {% for source in item.sources %}
-        <span>{{source}}</span>
-        {% endfor %} {% if item.avecFicheDetaillee %}
-        <img
-          src="/assets/images/icone-fleche-droite.svg"
-          alt="Voir le détail"
-          title="Voir le détail"
-        />
-        {% else %}
-        <img
-          src="/assets/images/icone-lien-externe.svg"
-          alt="Ouvrir dans un nouvel onglet"
-          title="Ouvrir dans un nouvel onglet"
-        />
-        {% endif %}
-      </div>
-    </div>
-  </a>
-</a>
+    {% if item.sources and item.sources.size > 0 %}
+      <dsfr-tags-group
+        tags='{{ sources }}'
+        size="sm"
+        group-markup="span"
+      ></dsfr-tags-group>
+    {% endif %}
+  </div>
+</dsfr-card>
