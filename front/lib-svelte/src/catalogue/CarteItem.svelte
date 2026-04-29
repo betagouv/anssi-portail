@@ -52,7 +52,6 @@
 <div class="carte-item">
   <dsfr-card
     actionMarkup="a"
-    alt={altImage}
     blank={nouvelOnglet}
     data-cible={dataCible}
     data-source={dataSource}
@@ -64,16 +63,18 @@
     hasDetailStart={!!detailHaut}
     hasHeaderBadge
     href={lien}
-    imageRatio="4x3"
     markup="h3"
     noLink={sansLien}
     size="sm"
-    src={image}
     title={titreCoupe}
   >
     <div slot="headerbadges">
       <HeaderBadge {item} libelleBadge={libelleBadge()} />
     </div>
+
+    {#if image}
+      <img src={image} alt={altImage} slot="image" class="illustration" />
+    {/if}
 
     {#if item.sources || item.tagsSpecifiques}
       <div slot="contentend">
@@ -105,6 +106,13 @@
     flex-direction: column;
     dsfr-card {
       flex: 1;
+    }
+
+    .illustration {
+      width: 100%;
+      object-fit: cover;
+      object-position: top;
+      max-height: 150px;
     }
 
     .encart-actions {
