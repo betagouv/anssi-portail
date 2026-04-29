@@ -65,6 +65,10 @@ section.action {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
     column-gap: 24px;
+
+    dsfr-card {
+      margin-bottom: 24px;
+    }
   }
 
   .description {
