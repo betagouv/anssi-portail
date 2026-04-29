@@ -55,7 +55,7 @@
 
 <EncartDeRecommandationSelonMaturite {niveau} />
 
-<PartageTest couleurFond="clair" />
+<PartageTest />
 
 <style lang="scss">
   .date-realisation {

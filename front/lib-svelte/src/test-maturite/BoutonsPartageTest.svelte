@@ -2,8 +2,6 @@
   import Bouton from '../ui/Bouton.svelte';
   import Lien from '../ui/Lien.svelte';
 
-  export let couleurFond: 'clair' | 'fonce' = 'clair';
-
   const { protocol, host } = window.location;
   const lienTest = `${protocol}://${host}/test-maturite`;
   const urlLinkedIn = `https://www.linkedin.com/shareArticle?url=${lienTest}&title=Test de maturité Cyber`;
@@ -23,11 +21,11 @@
   };
 </script>
 
-<div class="boutons-partage fond-{couleurFond}">
+<div class="boutons-partage">
   <Bouton
     titre="Partager sur LinkedIn"
     surClic={partageLinkedIn}
-    type={couleurFond === 'clair' ? 'secondaire' : 'secondaire-inverse'}
+    type="secondaire"
     iconeSeule
     icone="linkedin-box-fill"
   />
@@ -40,12 +38,7 @@
     iconeSeule
   />
 
-  <Bouton
-    type={couleurFond === 'clair' ? 'secondaire' : 'secondaire-inverse'}
-    icone="links-line"
-    iconeSeule
-    surClic={partageLien}
-  />
+  <Bouton type="secondaire" icone="links-line" iconeSeule surClic={partageLien} />
 </div>
 
 <style lang="scss">
@@ -53,35 +46,5 @@
     padding: 0;
     display: flex;
     gap: 16px;
-
-    a {
-      &:after {
-        display: none;
-      }
-    }
-
-    .bouton {
-      padding: 8px;
-    }
-
-    &.fond-fonce {
-      .bouton.secondaire {
-        background-color: rgba(255, 255, 255, 0);
-        color: var(--text-inverted-grey);
-        border-color: #353535;
-
-        img {
-          filter: invert(99%) sepia(1%) saturate(260%) hue-rotate(290deg) brightness(119%) contrast(100%);
-        }
-
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.08);
-        }
-
-        &:active {
-          background-color: rgba(255, 255, 255, 0.16);
-        }
-      }
-    }
   }
 </style>

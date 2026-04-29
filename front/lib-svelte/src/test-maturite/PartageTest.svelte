@@ -1,10 +1,8 @@
 <script lang="ts">
   import BoutonsPartageTest from './BoutonsPartageTest.svelte';
-
-  export let couleurFond: 'clair' | 'fonce' = 'clair';
 </script>
 
-<section class="partage-test fond-{couleurFond}">
+<section class="partage-test">
   <div class="contenu-section">
     <div class="description">
       <h2>Encouragez d’autres organisations à agir</h2>
@@ -12,7 +10,7 @@
     </div>
     <div class="partage">
       <h3>Partager le test</h3>
-      <BoutonsPartageTest {couleurFond} />
+      <BoutonsPartageTest />
     </div>
   </div>
 </section>
@@ -22,15 +20,7 @@
 
   .partage-test {
     padding: 32px var(--gouttiere);
-
-    &.fond-clair {
-      background-color: #f6f6f6;
-    }
-
-    &.fond-fonce {
-      background-color: var(--background-flat-blue-france-lab);
-      color: var(--text-inverted-grey);
-    }
+    background-color: #f6f6f6;
 
     .contenu-section {
       display: flex;
