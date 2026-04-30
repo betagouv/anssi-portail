@@ -6,7 +6,7 @@ import { rechercheParTypeOrganisation } from './rechercheParTypeOrganisation.sto
 
 export const financementsFiltre = derived(
   [financementsStore, rechercheParRegion, rechercheParTypeFinancement, rechercheParTypeOrganisation],
-  ([$financementsStore]) => {
+  ([$financementsStore, $rechercheParRegion, $rechercheParTypeFinancement, $rechercheParTypeOrganisation]) => {
     const resultat = $financementsStore.filter(
       (f) => rechercheParRegion.ok(f) && rechercheParTypeFinancement.ok(f) && rechercheParTypeOrganisation.ok(f)
     );
@@ -21,6 +21,11 @@ export const financementsFiltre = derived(
       return b.localeCompare(a);
     });
 
-    return { resultat, typesFinancement, typesOrganisation };
+    const filtreActif =
+      $rechercheParRegion.length !== 0 ||
+      $rechercheParTypeFinancement.length !== 0 ||
+      $rechercheParTypeOrganisation.length !== 0;
+
+    return { resultat, typesFinancement, typesOrganisation, filtreActif };
   }
 );

@@ -2,7 +2,10 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { profilStore } from '../stores/profil.store';
+  import FiltresBureau from '../ui/FiltresBureau.svelte';
+  import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Hero from '../ui/Hero.svelte';
+  import Lien from '../ui/Lien.svelte';
   import CarteFinancement from './CarteFinancement.svelte';
   import FiltresFinancements from './FiltresFinancements.svelte';
   import type { ResumeFinancement } from './financement';
@@ -12,9 +15,6 @@
   import { rechercheParRegion } from './stores/rechercheParRegion.store';
   import { rechercheParTypeFinancement } from './stores/rechercheParTypeFinancement.store';
   import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
-  import FiltresMobile from '../ui/FiltresMobile.svelte';
-  import FiltresBureau from '../ui/FiltresBureau.svelte';
-  import Lien from '../ui/Lien.svelte';
 
   type ReponseAxios = {
     id: number;
@@ -56,7 +56,7 @@
   ariane="Financements cyber"
 />
 
-<FiltresMobile filtreActif={false}>
+<FiltresMobile filtreActif={$financementsFiltre.filtreActif}>
   <FiltresFinancements {chargement} {estConnecte} />
 </FiltresMobile>
 
@@ -66,7 +66,7 @@
       <Lien href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert" blank libelle="Proposer un financement" />
     </div>
     <div class="contenu">
-      <FiltresBureau filtreActif={false}>
+      <FiltresBureau filtreActif={$financementsFiltre.filtreActif}>
         <FiltresFinancements {chargement} {estConnecte} />
       </FiltresBureau>
       <div class="grille-cartes">
