@@ -1,69 +1,32 @@
-<footer>
-  <div class="contenu-section">
-    <div class="officiel">
-      <div class="bloc-france">
-        <img
-          class="marianne"
-          src="/assets/images/marianne-dark.svg"
-          alt="Logo République Française"
-        />
-      </div>
-      <div class="info-msc">
-        <p>
-          MesServicesCyber est la plateforme pour faciliter l'accès de tous aux
-          services et ressources de l'ANSSI et de ses partenaires.
-        </p>
-        <p>
-          Il est développé par l'<a
-            href="https://cyber.gouv.fr/"
-            class="lien"
-            target="_blank"
-            >Agence nationale de la sécurité des systèmes d'information</a
-          >, en lien avec
-          <a href="https://beta.gouv.fr/" class="lien" target="_blank"
-            >BetaGouv</a
-          >
-          et la
-          <a href="https://www.numerique.gouv.fr/dinum/" class="lien"
-            >Direction interministérielle du numérique</a
-          >.
-        </p>
-        <div class="liens-externes">
-          <a href="https://info.gouv.fr" target="_blank" class="lien"
-            >info.gouv.fr</a
-          >
-          <a href="https://service-public.fr" target="_blank" class="lien">
-            service-public.fr</a
-          >
-          <a href="https://legifrance.gouv.fr" target="_blank" class="lien"
-            >legifrance.gouv.fr</a
-          >
-          <a href="https://data.gouv.fr" target="_blank" class="lien"
-            >data.gouv.fr</a
-          >
-        </div>
-      </div>
-    </div>
-    <div class="liens-internes">
-      <a href="/aPropos" class="lien">À propos</a>
-      <hr />
-      <a href="/mentionsLegales" class="lien">Mentions légales</a>
-      <hr />
-      <a href="/confidentialite" class="lien">Politique de confidentialité</a>
-      <hr />
-      <a href="/cgu" class="lien">Conditions générales</a>
-      <hr />
-      <a href="/statistiques" class="lien">Statistiques d'utilisation</a>
-      <hr />
-      <a href="/securite" class="lien">Sécurité</a>
-      <hr />
-      <a href="/accessibilite" class="lien">Accessibilité : non conforme</a>
-      <hr />
-      <a href="/collectivites" class="lien">Protéger ma collectivité</a>
-      <hr />
-      <a href="/entreprises" class="lien">Protéger mon entreprise</a>
-      <hr />
-      <a href="/associations" class="lien">Protéger mon association</a>
-    </div>
-  </div>
-</footer>
+{% assign liensBas = '[
+  {"label":"À propos","href":"/aPropos"},
+  {"label":"Mentions légales","href":"/mentionsLegales"},
+  {"label":"Politique de confidentialité","href":"/confidentialite"},
+  {"label":"Conditions générales","href":"/cgu"},
+  {"label":"Statistiques d’utilisation","href":"/statistiques"},
+  {"label":"Sécurité","href":"/securite"},
+  {"label":"Accessibilité : non conforme","href":"/accessibilite"},
+  {"label":"Protéger ma collectivité","href":"/collectivites"},
+  {"label":"Protéger mon entreprise","href":"/entreprises"},
+  {"label":"Protéger mon association","href":"/associations"}
+]' | escape %}
+<dsfr-footer
+  id="pied"
+  brand-link-href="/"
+  brand-link-title="Retour à l'accueil du site - Mes&ZeroWidthSpaceServices&ZeroWidthSpaceCyber - République Française"
+  has-description
+  content-description="slot"
+  bottom-links="{{ liensBas }}">
+  <p slot="description">
+    MesServicesCyber est la plateforme pour faciliter l'accès de tous aux
+    services et ressources de l'ANSSI et de ses partenaires.
+  </p>
+  <p slot="description">
+    Il est développé par l'
+    <dsfr-link href="https://cyber.gouv.fr/" size="sm" blank label="Agence nationale de la sécurité des systèmes d'information"></dsfr-link>,
+    en lien avec
+    <dsfr-link href="https://beta.gouv.fr/" size="sm" blank label="BetaGouv"></dsfr-link>
+    et la
+    <dsfr-link href="https://www.numerique.gouv.fr/dinum/" size="sm" blank label="Direction interministérielle du numérique"></dsfr-link>.
+  </p>
+</dsfr-footer>

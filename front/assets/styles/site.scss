@@ -298,79 +298,12 @@ header {
   }
 }
 
-footer {
-  border-top: 2px solid var(--noir);
-  padding: 16px var(--gouttiere) 24px;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-
-  .officiel {
-    padding: 0 0 16px;
-    border-bottom: 1px solid var(--border-default-grey);
-    display: flex;
-    flex-direction: column;
-
-    @include a-partir-de(md) {
-      flex-direction: row;
-      .bloc-france {
-        flex: 1;
-      }
-      .info-msc {
-        flex: 2;
-      }
-    }
-
-    img {
-      margin-bottom: 8px;
-    }
-
-    p {
-      margin-bottom: 16px;
-
-      a {
-        display: inline;
-
-        &::after {
-          display: none;
-        }
-      }
-    }
-
-    .liens-externes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px 20px;
-
-      a {
-        color: #3a3a3a;
-        font-weight: bold;
-        border: none;
-      }
-    }
+dsfr-footer {
+  p {
+    margin: 0;
   }
-
-  .liens-internes {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding: 16px 0 0;
-
-    a {
-      text-decoration: none;
-      color: var(--noir);
-
-      &:hover {
-        text-decoration: underline solid var(--noir) 1px;
-        -webkit-text-decoration: underline;
-      }
-    }
-
-    hr {
-      border: none;
-      border-left: 1px solid var(--border-default-grey);
-      margin: 2px 0;
-    }
+  p + p {
+    margin-top: 1rem;
   }
 }
 
