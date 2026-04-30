@@ -1,9 +1,8 @@
 <script lang="ts">
-  import MenuFlottant from '../ui/MenuFlottant.svelte';
-  import ChampTexte from '../ui/ChampTexte.svelte';
-  import ControleFormulaire from '../ui/ControleFormulaire.svelte';
-  import { validationChamp } from '../directives/validationChamp';
   import { tick } from 'svelte';
+  import { validationChamp } from '../directives/validationChamp';
+  import ChampTexte2 from '../ui/ChampTexte2.svelte';
+  import MenuFlottant from '../ui/MenuFlottant.svelte';
 
   export let valeurs: string[];
   export let requis: boolean = false;
@@ -86,15 +85,14 @@
     </div>
   </MenuFlottant>
   {#if afficheAutre}
-    <ControleFormulaire {requis} libelle="Merci de préciser votre domaine de spécialité">
-      <ChampTexte
-        id="autreDomaine"
-        nom="autreDomaine"
-        bind:valeur={autreDomaine}
-        {requis}
-        messageErreur="La précision du domaine de spécialité est obligatoire. Veuillez la renseigner."
-      />
-    </ControleFormulaire>
+    <ChampTexte2
+      id="autreDomaine"
+      libelle="Merci de préciser votre domaine de spécialité"
+      messageErreur="La précision du domaine de spécialité est obligatoire. Veuillez la renseigner."
+      nom="autreDomaine"
+      {requis}
+      bind:valeur={autreDomaine}
+    />
   {/if}
 </div>
 

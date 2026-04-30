@@ -3,7 +3,7 @@
   import { onMount } from 'svelte';
   import { validationChamp } from '../directives/validationChamp';
   import Bouton from '../ui/Bouton.svelte';
-  import ChampTexte from '../ui/ChampTexte.svelte';
+  import ChampTexte2 from '../ui/ChampTexte2.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
   import Etapier from '../ui/Etapier.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
@@ -176,16 +176,18 @@
 
           <div class="bloc bloc-avec-separateur champs-saisie">
             <h1>Votre identité</h1>
-            <ControleFormulaire libelle="Téléphone" sousTitre="Pour bénéficier d'un accompagement personnalisé">
-              <ChampTexte
-                id="telephone"
-                nom="telephone"
+            <div class="telephone">
+              <ChampTexte2
                 aideSaisie="Ex : 0XXXXXXXXX"
-                modele={modeleTelephone}
-                bind:valeur={formulaireInscription.telephone}
+                id="telephone"
+                libelle="Téléphone"
                 messageErreur="Le numéro de téléphone doit respecter le format 0000000000."
+                modele={modeleTelephone}
+                nom="telephone"
+                sousTitre="Pour bénéficier d'un accompagement personnalisé"
+                bind:valeur={formulaireInscription.telephone}
               />
-            </ControleFormulaire>
+            </div>
             <ControleFormulaire requis={true} libelle="Domaine de spécialité">
               <SelectionDomaineSpecialite
                 id="domaine-specialite"
@@ -307,6 +309,10 @@
 
   .bloc div {
     margin-bottom: 8px;
+  }
+
+  .bloc .telephone {
+    margin-bottom: 2rem;
   }
 
   .etape {
