@@ -35,7 +35,7 @@ const ressourceApresAuthentificationOIDC = ({
           return;
         }
 
-        requete.session = { ...requete.session, ...informationsUtilisateur };
+        requete.session = { ...requete.session, ...informationsUtilisateur, connexionAvecMFA };
         requete.session.token = adaptateurJWT.genereToken({ email });
         requete.session.AgentConnectIdToken = idToken;
         reponse.envoieFichierEnrichi(fournisseurChemin.cheminPageJekyll('apres-authentification'));

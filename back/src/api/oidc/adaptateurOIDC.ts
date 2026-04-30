@@ -93,7 +93,11 @@ const recupereJeton = async (requete: Request) => {
   return {
     idToken: token.id_token,
     accessToken: token.access_token,
-    connexionAvecMFA: token.claims().amr?.includes('mfa') ?? false,
+    connexionAvecMFA:
+      token
+        .claims()
+        .amr?.map((methodeAuthent) => methodeAuthent.trim())
+        .includes('mfa') ?? false,
   };
 };
 
