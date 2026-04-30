@@ -4,8 +4,7 @@
   import { clic } from '../directives/actions.svelte';
   import Alerte from '../ui/Alerte.svelte';
   import type { CouleurDeBadge } from '../ui/badge.type';
-  import ChampTexte from '../ui/ChampTexte.svelte';
-  import ControleFormulaire from '../ui/ControleFormulaire.svelte';
+  import ChampTexte2 from '../ui/ChampTexte2.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
   import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
   import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
@@ -94,18 +93,17 @@
         {/if}
       </div>
 
-      <div class="champ">
-        <ControleFormulaire requis={true} libelle="Email de contact">
-          <ChampTexte
-            id="email"
-            nom="email"
-            type="email"
-            aideSaisie="Ex : jean.dupont@mail.com"
-            requis={true}
-            bind:valeur={email}
-            messageErreur="Le format du mail est invalide"
-          />
-        </ControleFormulaire>
+      <div class="champ email">
+        <ChampTexte2
+          aideSaisie="Ex : jean.dupont@mail.com"
+          id="email"
+          libelle="Email de contact"
+          messageErreur="Le format du mail est invalide"
+          nom="email"
+          requis={true}
+          type="email"
+          bind:valeur={email}
+        />
       </div>
 
       <dsfr-checkbox
@@ -202,6 +200,10 @@
 
       &.recherche-organisation {
         margin-bottom: 1rem;
+      }
+
+      &.email {
+        margin-bottom: 2rem;
       }
     }
 

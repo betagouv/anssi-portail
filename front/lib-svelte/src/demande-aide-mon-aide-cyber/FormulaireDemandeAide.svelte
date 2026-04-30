@@ -3,7 +3,7 @@
   import { validationChamp } from '../directives/validationChamp';
   import Alerte from '../ui/Alerte.svelte';
   import Bouton from '../ui/Bouton.svelte';
-  import ChampTexte from '../ui/ChampTexte.svelte';
+  import ChampTexte2 from '../ui/ChampTexte2.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
   import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
@@ -79,17 +79,16 @@
       <span class="requis">Champ obligatoire</span>
     </div>
     <div class="champ">
-      <ControleFormulaire requis={true} libelle="Email de contact">
-        <ChampTexte
-          id="email"
-          nom="email"
-          type="email"
-          aideSaisie="Ex : jean.dupont@mail.com"
-          requis={true}
-          bind:valeur={email}
-          messageErreur="Le format du mail est invalide"
-        />
-      </ControleFormulaire>
+      <ChampTexte2
+        aideSaisie="Ex : jean.dupont@mail.com"
+        id="email"
+        libelle="Email de contact"
+        messageErreur="Le format du mail est invalide"
+        nom="email"
+        requis={true}
+        type="email"
+        bind:valeur={email}
+      />
     </div>
 
     <div class="champ champ-radios">
@@ -127,30 +126,30 @@
 
     {#if estEnRelationAvecUnUtilisateur}
       <div class="champ champ-aidant">
-        <ControleFormulaire requis={true} libelle={libelleChampUtilisateurMAC}>
-          {#if identifiantAidant}
-            <ChampTexte
-              bind:valeur={emailUtilisateurMAC}
-              nom="identifiantAidant"
-              id="identifiantAidant"
-              requis={true}
-              type="text"
-              aideSaisie="Ex: Roger D."
-              disabled={true}
-            />
-          {:else}
-            <ChampTexte
-              bind:valeur={emailUtilisateurMAC}
-              nom="emailAidant"
-              id="emailAidant"
-              requis={true}
-              type="email"
-              aideSaisie="Ex: roger.dupont@email.fr"
-              messageErreur="Le format du mail est invalide"
-              disabled={utilisateurMACPrerempli}
-            />
-          {/if}
-        </ControleFormulaire>
+        {#if identifiantAidant}
+          <ChampTexte2
+            aideSaisie="Ex: Roger D."
+            desactive={true}
+            id="identifiantAidant"
+            libelle={libelleChampUtilisateurMAC}
+            nom="identifiantAidant"
+            requis={true}
+            type="text"
+            bind:valeur={emailUtilisateurMAC}
+          />
+        {:else}
+          <ChampTexte2
+            aideSaisie="Ex: roger.dupont@email.fr"
+            desactive={utilisateurMACPrerempli}
+            id="emailAidant"
+            libelle={libelleChampUtilisateurMAC}
+            messageErreur="Le format du mail est invalide"
+            nom="emailAidant"
+            requis={true}
+            type="email"
+            bind:valeur={emailUtilisateurMAC}
+          />
+        {/if}
       </div>
     {/if}
 
