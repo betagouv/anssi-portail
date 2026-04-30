@@ -155,6 +155,44 @@ describe('La ressource apres authentification OIDC', () => {
         assert.equal(evenement?.emailHache, 'jeanne.dupont-hache');
         assert.equal(evenement?.connexionAvecMFA, true);
       });
+
+      describe('et possède le role de gestion des guides', () => {
+        beforeEach(() => {
+          const jeanMarcEditeur = new Utilisateur(
+            {
+              email: 'jeanmarc.editeur',
+              cguAcceptees: true,
+              infolettreAcceptee: true,
+              prenom: '',
+              nom: '',
+              siretEntite: '',
+              domainesSpecialite: [],
+              roles: ['GESTION_GUIDES'],
+            },
+            fauxAdaptateurRechercheEntreprise
+          );
+          entrepotUtilisateur.ajoute(jeanMarcEditeur);
+
+          adaptateurOIDC.recupereInformationsUtilisateur = async (_) => ({
+            prenom: 'Jean Marc',
+            nom: 'Editeur',
+            email: 'jeanmarc.editeur',
+            siret: '1234',
+          });
+        });
+
+        it("jette une 403 si il n'a activé le MFA", async () => {
+          adaptateurOIDC.recupereJeton = async () => ({
+            idToken: 'tokenAgentConnect',
+            accessToken: 'y',
+            connexionAvecMFA: false,
+          });
+
+          const reponse = await requeteGet();
+
+          assert.equal(reponse.status, 403);
+        });
+      });
     });
 
     it("jette une erreur 401 si le cookie AgentConnectInfo n'est pas défini", async () => {
