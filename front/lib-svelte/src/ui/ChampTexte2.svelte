@@ -9,8 +9,10 @@
     nom: string;
     requis?: boolean;
     sousTitre?: string;
-    valeur?: string;
+    tailleMaximale?: number;
     type?: 'text' | 'email';
+    valeur?: string;
+    statut?: 'default' | 'valid' | 'error' | 'info';
   };
   let {
     aideSaisie,
@@ -22,8 +24,10 @@
     nom,
     requis,
     sousTitre,
+    tailleMaximale,
     type = 'text',
     valeur = $bindable(),
+    statut = $bindable(),
   }: Props = $props();
 </script>
 
@@ -33,6 +37,7 @@
   errorMessage={messageErreur}
   hint={sousTitre}
   label={libelle}
+  maxlength={tailleMaximale}
   name={nom}
   onvaluechanged={(e: CustomEvent) => (valeur = e.detail)}
   pattern={modele}
@@ -40,4 +45,5 @@
   required={requis}
   {type}
   value={valeur}
+  status={statut}
 ></dsfr-input>
