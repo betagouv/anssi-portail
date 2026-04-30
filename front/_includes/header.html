@@ -1,3 +1,8 @@
+{% assign liensEvitement = '[
+  {"label":"Contenu","href":"#contenu"},
+  {"label":"Pied de page","href":"#pied"}
+]' | escape %}
+<dsfr-skiplink items="{{ liensEvitement }}"></dsfr-skiplink>
 <header id="haut-de-page" class="fr-header__brand">
   <div class="contenu-section">
     {% include composant-svelte.html id="badge-agent-anssi" genere-div=false %}
