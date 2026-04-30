@@ -116,6 +116,19 @@ describe('La ressource apres authentification OIDC', () => {
         assert.equal(session.siret, '1234');
       });
 
+      it("indique si l'utilisateur utilise le MFA", async () => {
+        adaptateurOIDC.recupereJeton = async () => ({
+          idToken: 'tokenAgentConnect',
+          accessToken: 'y',
+          connexionAvecMFA: true,
+        });
+
+        const reponse = await requeteGet();
+
+        const session = decodeSessionDuCookie(reponse, 0);
+        assert.equal(session.connexionAvecMFA, true);
+      });
+
       it('ajoute un token JWT à la session', async () => {
         adaptateurJWT.genereToken = (donnees: Record<string, unknown>) => `tokenJWT-${donnees.email}`;
 
