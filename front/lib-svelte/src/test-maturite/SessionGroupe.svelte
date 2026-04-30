@@ -1,8 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import Bouton from '../ui/Bouton.svelte';
-  import ChampTexte from '../ui/ChampTexte.svelte';
-  import ControleFormulaire from '../ui/ControleFormulaire.svelte';
+  import ChampTexte2 from '../ui/ChampTexte2.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
   import ModaleNouvelleSessionGroupe from './ModaleNouvelleSessionGroupe.svelte';
   import type { ReponseCreationSessionGroupe } from './SessionGroupe';
@@ -10,16 +9,8 @@
   let codeSession = '';
   let creationNouvelleSessionEnCours = false;
   let modaleNouvelleSession: ModaleNouvelleSessionGroupe;
-  let champCodeSession: ChampTexte;
   let formulaire: Formulaire;
-
-  const saisieCodeSession = () => {
-    if (codeSession.length === 3) {
-      codeSession += '-';
-    }
-    codeSession = codeSession.toUpperCase();
-    champCodeSession.setValiditePersonnalisee('');
-  };
+  let statut: 'default' | 'valid' | 'error' | 'info';
 
   const nouvelleSession = async () => {
     try {
@@ -38,10 +29,17 @@
         await axios.get(`/api/sessions-groupe/${codeSansTiret}`);
         window.location.href = `/test-maturite?session-groupe=${codeSansTiret}`;
       } catch {
-        champCodeSession.setValiditePersonnalisee('Code non trouvé');
+        statut = 'error';
       }
     }
   };
+
+  $: {
+    if (codeSession.length === 3 && !codeSession.endsWith('-')) {
+      codeSession += '-';
+    }
+    codeSession = codeSession.toUpperCase();
+  }
 </script>
 
 <section>
@@ -74,25 +72,20 @@
         est anonyme.
       </p>
       <Formulaire bind:this={formulaire}>
-        <ControleFormulaire
-          libelle="Code de session"
-          sousTitre="Saisissez le code fourni par votre organisateur"
-          requis
-        >
-          <ChampTexte
-            bind:this={champCodeSession}
+        <div class="code-session">
+          <ChampTexte2
             id="codeSession"
+            libelle="Code de session"
+            messageErreur="Renseigner un code de session en cours valide."
+            modele={'[A-Z1-9]{3}-?[A-Z1-9]{3}'}
             nom="codeSession"
             requis={true}
-            modele={'[A-Z1-9]{3}-?[A-Z1-9]{3}'}
+            sousTitre="Saisissez le code fourni par votre organisateur"
+            tailleMaximale={7}
             bind:valeur={codeSession}
-            messageErreur="Renseigner un code de session en cours valide."
-            class="champ-session-groupe"
-            autocomplete="off"
-            on:input={saisieCodeSession}
-            maxlength="7"
+            bind:statut
           />
-        </ControleFormulaire>
+        </div>
         <Bouton libelle="Débuter le test" type="primaire" taille="md" surClic={rejoindreSession} />
       </Formulaire>
     </div>
@@ -121,6 +114,12 @@
     &.organisateur {
       background-color: #f6f6f6;
       border-color: #f6f6f6;
+    }
+
+    &.participant {
+      .code-session {
+        margin-bottom: 24px;
+      }
     }
 
     h3 {
