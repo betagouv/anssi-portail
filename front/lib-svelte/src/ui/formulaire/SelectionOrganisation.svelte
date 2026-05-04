@@ -2,7 +2,7 @@
   import axios from 'axios';
   import { createEventDispatcher, tick } from 'svelte';
   import { validationChamp } from '../../directives/validationChamp';
-  import ChampTexte from '../ChampTexte.svelte';
+  import ChampTexte2 from '../ChampTexte2.svelte';
   import type { Departement, Organisation } from './SelectionOrganisation.types.ts';
 
   type ReponseApiAnnuaireOrganisations = {
@@ -84,11 +84,12 @@
 </script>
 
 <div class="conteneur-selection-organisation">
-  <ChampTexte
-    {id}
+  <ChampTexte2
+    id="selection-id-guide"
+    libelle=""
     nom="organisation"
     bind:valeur={saisie}
-    on:input={() => avecTemporisation(rechercheSuggestions)}
+    oninput={() => avecTemporisation(rechercheSuggestions)}
     aideSaisie="ex : 13261762000010, Agglomération de Mansart, Société Y"
     autocomplete="off"
   />
