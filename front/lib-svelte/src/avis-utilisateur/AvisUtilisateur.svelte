@@ -2,8 +2,10 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { fade, fly } from 'svelte/transition';
+  import Bouton from '../ui/Bouton.svelte';
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
-  import ChampTexte from '../ui/ChampTexte.svelte';
+  import ChampTexte2 from '../ui/ChampTexte2.svelte';
+  import Formulaire from '../ui/Formulaire.svelte';
   import ZoneTexte from '../ui/ZoneTexte.svelte';
   import { entrepotNavigateurAvisUtilisateur } from './ControleAvisUtilisateur';
 
@@ -89,92 +91,84 @@
     transition:fade={{ duration: 500 }}
   >
     {#if etape === 'formulaire'}
-      <div class="contenu">
-        <BoutonFermerModale on:click={() => dialogue.close()} />
-        <h4>Votre avis nous intéresse&nbsp;!</h4>
-        {#if erreurSatisfaction || erreurCommentaire}
-          <lab-anssi-alerte
-            type="erreur"
-            description="Merci de compléter les champs avant d’envoyer votre avis."
-            fermable={false}
-          ></lab-anssi-alerte>
-        {/if}
-        <div class="question">
-          <p class:erreur={erreurSatisfaction}>Le service MesServicesCyber répond-il à vos attentes&nbsp;?</p>
-          <div class="satisfaction">
-            <div class="niveaux-satisfaction">
-              <input id="pas-du-tout" type="radio" name="note" value="1" bind:group={satisfaction} />
-              <label class="niveau-satisfaction" for="pas-du-tout">
-                <span aria-label="Pas du tout" role="img">😠</span>
-              </label>
-              <input id="pas-satisfait" type="radio" name="note" value="2" bind:group={satisfaction} />
-              <label class="niveau-satisfaction" for="pas-satisfait">
-                <span aria-label="Pas satisfait" role="img">☹️</span>
-              </label>
-              <input id="moyennement-satisfait" type="radio" name="note" value="3" bind:group={satisfaction} />
-              <label class="niveau-satisfaction" for="moyennement-satisfait">
-                <span aria-label="Moyennement satisfait" role="img">😕</span>
-              </label>
-              <input id="satisfait" type="radio" name="note" value="4" bind:group={satisfaction} />
-              <label class="niveau-satisfaction" for="satisfait">
-                <span aria-label="Satisfait" role="img">😊</span>
-              </label>
-              <input id="tout-a-fait" type="radio" name="note" value="5" bind:group={satisfaction} />
-              <label class="niveau-satisfaction" for="tout-a-fait">
-                <span aria-label="Tout à fait" role="img">🤩</span>
-              </label>
-            </div>
-            <div class="descriptions">
-              <span class="premier">Pas du tout</span>
-              <span class="dernier">Tout à fait</span>
+      <Formulaire on:formulaireValide={soumetsLeFormulaire}>
+        <div class="contenu">
+          <BoutonFermerModale on:click={() => dialogue.close()} />
+          <h4>Votre avis nous intéresse&nbsp;!</h4>
+          {#if erreurSatisfaction || erreurCommentaire}
+            <lab-anssi-alerte
+              type="erreur"
+              description="Merci de compléter les champs avant d’envoyer votre avis."
+              fermable={false}
+            ></lab-anssi-alerte>
+          {/if}
+          <div class="question">
+            <p class:erreur={erreurSatisfaction}>Le service MesServicesCyber répond-il à vos attentes&nbsp;?</p>
+            <div class="satisfaction">
+              <div class="niveaux-satisfaction">
+                <input id="pas-du-tout" type="radio" name="note" value="1" bind:group={satisfaction} />
+                <label class="niveau-satisfaction" for="pas-du-tout">
+                  <span aria-label="Pas du tout" role="img">😠</span>
+                </label>
+                <input id="pas-satisfait" type="radio" name="note" value="2" bind:group={satisfaction} />
+                <label class="niveau-satisfaction" for="pas-satisfait">
+                  <span aria-label="Pas satisfait" role="img">☹️</span>
+                </label>
+                <input id="moyennement-satisfait" type="radio" name="note" value="3" bind:group={satisfaction} />
+                <label class="niveau-satisfaction" for="moyennement-satisfait">
+                  <span aria-label="Moyennement satisfait" role="img">😕</span>
+                </label>
+                <input id="satisfait" type="radio" name="note" value="4" bind:group={satisfaction} />
+                <label class="niveau-satisfaction" for="satisfait">
+                  <span aria-label="Satisfait" role="img">😊</span>
+                </label>
+                <input id="tout-a-fait" type="radio" name="note" value="5" bind:group={satisfaction} />
+                <label class="niveau-satisfaction" for="tout-a-fait">
+                  <span aria-label="Tout à fait" role="img">🤩</span>
+                </label>
+              </div>
+              <div class="descriptions">
+                <span class="premier">Pas du tout</span>
+                <span class="dernier">Tout à fait</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="question">
-          <p class:erreur={erreurCommentaire}>Que pouvons-nous améliorer ?</p>
-          <ZoneTexte bind:valeur={commentaire} enErreur={erreurCommentaire} />
-        </div>
-        <p class="mis-en-avant">
-          Échangez avec nous sur votre expérience et participez aux futures évolutions de la plateforme&nbsp;!
-        </p>
-        <div class="question">
-          <p>Email de contact (facultatif)</p>
-          <ChampTexte
-            aideSaisie="Ex : jean.dupont@mail.com"
-            id="email-contact"
-            nom="email"
-            type="email"
-            messageErreur="L'email est invalide"
-            bind:valeur={emailDeContact}
-          />
-          <p class="information">
-            Votre email ne sera utilisé que pour échanger sur la plateforme et ses futures évolutions.
+          <div class="question">
+            <p class:erreur={erreurCommentaire}>Que pouvons-nous améliorer ?</p>
+            <ZoneTexte bind:valeur={commentaire} enErreur={erreurCommentaire} />
+          </div>
+          <p class="mis-en-avant">
+            Échangez avec nous sur votre expérience et participez aux futures évolutions de la plateforme&nbsp;!
           </p>
+          <div class="question">
+            <ChampTexte2
+              aideSaisie="Ex : jean.dupont@mail.com"
+              id="email-contact"
+              libelle="Email de contact (facultatif)"
+              messageErreur="L'email est invalide"
+              nom="email"
+              type="email"
+              bind:valeur={emailDeContact}
+            />
+            <p class="information">
+              Votre email ne sera utilisé que pour échanger sur la plateforme et ses futures évolutions.
+            </p>
+          </div>
         </div>
-      </div>
-      <footer class="actions">
-        <lab-anssi-bouton
-          on:click={soumetsLeFormulaire}
-          on:keypress
-          role="button"
-          taille="md"
-          tabindex="0"
-          titre="Envoyer"
-          variante="primaire"
-          type="submit"
-          largeur-maximale
-        ></lab-anssi-bouton>
-        <lab-anssi-bouton
-          on:click={() => dialogue.close()}
-          on:keypress
-          role="button"
-          taille="md"
-          tabindex={1}
-          titre="Fermer sans répondre"
-          variante="secondaire"
-          largeur-maximale
-        ></lab-anssi-bouton>
-      </footer>
+        <footer class="actions">
+          <Bouton libelle="Envoyer" type="primaire" taille="md" boutonSoumission={true} />
+          <lab-anssi-bouton
+            on:click={() => dialogue.close()}
+            on:keypress
+            role="button"
+            taille="md"
+            tabindex={1}
+            titre="Fermer sans répondre"
+            variante="secondaire"
+            largeur-maximale
+          ></lab-anssi-bouton>
+        </footer>
+      </Formulaire>
     {:else}
       <div class="contenu">
         <BoutonFermerModale on:click={() => dialogue.close()} />
