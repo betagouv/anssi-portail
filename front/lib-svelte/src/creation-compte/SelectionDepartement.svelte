@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ChampTexte2 from '../ui/ChampTexte2.svelte';
+  import ChampTexte from '../ui/ChampTexte.svelte';
   import FermetureSurClicEnDehors from '../ui/FermetureSurClicEnDehors.svelte';
   import type { Departement } from '../ui/formulaire/SelectionOrganisation.types';
 
@@ -39,7 +39,7 @@
 </script>
 
 <div class="selection-departement conteneur">
-  <ChampTexte2
+  <ChampTexte
     id="departement"
     libelle=""
     nom="departement"

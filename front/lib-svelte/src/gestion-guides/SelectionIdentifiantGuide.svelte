@@ -3,7 +3,7 @@
   import { onMount } from 'svelte';
   import type { Guide } from '../catalogue/Guide.types';
   import { clic } from '../directives/actions.svelte';
-  import ChampTexte2 from '../ui/ChampTexte2.svelte';
+  import ChampTexte from '../ui/ChampTexte.svelte';
 
   type Props = {
     valeur: string;
@@ -59,7 +59,7 @@
 </script>
 
 <div class="conteneur-selection-guide">
-  <ChampTexte2
+  <ChampTexte
     id="selection-id-guide"
     libelle="Identifiant du guide"
     nom="guide"

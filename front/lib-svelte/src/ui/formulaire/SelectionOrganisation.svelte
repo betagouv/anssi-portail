@@ -2,7 +2,7 @@
   import axios from 'axios';
   import { createEventDispatcher, tick } from 'svelte';
   import { validationChamp } from '../../directives/validationChamp';
-  import ChampTexte2 from '../ChampTexte2.svelte';
+  import ChampTexte from '../ChampTexte.svelte';
   import type { Departement, Organisation } from './SelectionOrganisation.types.ts';
 
   type ReponseApiAnnuaireOrganisations = {
@@ -84,7 +84,7 @@
 </script>
 
 <div class="conteneur-selection-organisation">
-  <ChampTexte2
+  <ChampTexte
     id="selection-id-guide"
     libelle=""
     nom="organisation"

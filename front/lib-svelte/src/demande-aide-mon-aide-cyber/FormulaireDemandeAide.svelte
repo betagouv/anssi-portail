@@ -3,7 +3,7 @@
   import { validationChamp } from '../directives/validationChamp';
   import Alerte from '../ui/Alerte.svelte';
   import Bouton from '../ui/Bouton.svelte';
-  import ChampTexte2 from '../ui/ChampTexte2.svelte';
+  import ChampTexte from '../ui/ChampTexte.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
   import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
@@ -79,7 +79,7 @@
       <span class="requis">Champ obligatoire</span>
     </div>
     <div class="champ">
-      <ChampTexte2
+      <ChampTexte
         aideSaisie="Ex : jean.dupont@mail.com"
         id="email"
         libelle="Email de contact"
@@ -127,7 +127,7 @@
     {#if estEnRelationAvecUnUtilisateur}
       <div class="champ champ-aidant">
         {#if identifiantAidant}
-          <ChampTexte2
+          <ChampTexte
             aideSaisie="Ex: Roger D."
             desactive={true}
             id="identifiantAidant"
@@ -138,7 +138,7 @@
             bind:valeur={emailUtilisateurMAC}
           />
         {:else}
-          <ChampTexte2
+          <ChampTexte
             aideSaisie="Ex: roger.dupont@email.fr"
             desactive={utilisateurMACPrerempli}
             id="emailAidant"

@@ -1,7 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import Bouton from '../ui/Bouton.svelte';
-  import ChampTexte2 from '../ui/ChampTexte2.svelte';
+  import ChampTexte from '../ui/ChampTexte.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
   import ModaleNouvelleSessionGroupe from './ModaleNouvelleSessionGroupe.svelte';
   import type { ReponseCreationSessionGroupe } from './SessionGroupe';
@@ -73,7 +73,7 @@
       </p>
       <Formulaire bind:this={formulaire}>
         <div class="code-session">
-          <ChampTexte2
+          <ChampTexte
             id="codeSession"
             libelle="Code de session"
             messageErreur="Renseigner un code de session en cours valide."

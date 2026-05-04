@@ -1,62 +1,61 @@
 <script lang="ts">
-  import { validationChamp } from '../directives/validationChamp';
-
-  export let nom: string;
-  export let id: string;
-  export let valeur: string = '';
-  export let requis: boolean = false;
-  export let aideSaisie: string = '';
-  export let messageErreur: string = '';
-  export let modele: string | undefined = undefined;
-  export let type: string = 'text';
-  export let autocomplete: 'on' | 'off' | '' = '';
-  export let disabled: boolean = false;
-
-  let element: HTMLInputElement;
-
-  export const setValiditePersonnalisee = (messageErreur: string) => {
-    element.setCustomValidity(messageErreur);
-    if (messageErreur) {
-      element.checkValidity();
-    }
+  type Props = {
+    aideSaisie?: string;
+    desactive?: boolean;
+    id: string;
+    libelle: string;
+    messageErreur?: string;
+    modele?: string;
+    nom: string;
+    requis?: boolean;
+    sousTitre?: string;
+    tailleMaximale?: number;
+    type?: 'text' | 'email';
+    valeur?: string;
+    statut?: 'default' | 'valid' | 'error' | 'info';
+    oninput?: () => void;
+    autocomplete?: string;
   };
+  let {
+    aideSaisie,
+    autocomplete,
+    desactive,
+    id,
+    libelle,
+    messageErreur,
+    modele,
+    nom,
+    requis,
+    sousTitre,
+    tailleMaximale,
+    type = 'text',
+    valeur = $bindable(),
+    statut = $bindable(),
+    oninput,
+  }: Props = $props();
 
-  const typeChamp = (node: HTMLInputElement) => {
-    node.type = type;
+  const onvaluechanged = (e: CustomEvent) => {
+    valeur = e.detail;
+    if (oninput) {
+      oninput();
+    }
   };
 </script>
 
-<input
-  bind:this={element}
-  use:typeChamp
+<dsfr-input
   {id}
+  disabled={desactive}
+  errorMessage={messageErreur}
+  hint={sousTitre}
+  label={libelle}
+  maxlength={tailleMaximale}
   name={nom}
-  bind:value={valeur}
-  required={requis}
-  placeholder={aideSaisie}
-  use:validationChamp={requis || modele || type === 'email' ? messageErreur : ''}
+  {onvaluechanged}
   pattern={modele}
-  on:input
-  on:focus
+  placeholder={aideSaisie}
+  required={requis}
+  {type}
+  value={valeur}
+  status={statut}
   {autocomplete}
-  {disabled}
-  maxlength={$$restProps.maxlength}
-  class={'champTexte ' + ($$restProps.class ?? '')}
-/>
-
-<style lang="scss">
-  input.champTexte {
-    width: 100%;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    border: none;
-    border-bottom: 2px solid var(--border-plain-grey);
-    font-size: 1rem;
-    padding: 8px;
-    line-height: 1.5rem;
-    background: #eee;
-    margin-bottom: 0;
-    box-sizing: border-box;
-    font-family: var(--fonts);
-  }
-</style>
+></dsfr-input>

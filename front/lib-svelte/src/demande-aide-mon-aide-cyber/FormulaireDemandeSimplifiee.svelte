@@ -4,7 +4,7 @@
   import { clic } from '../directives/actions.svelte';
   import Alerte from '../ui/Alerte.svelte';
   import type { CouleurDeBadge } from '../ui/badge.type';
-  import ChampTexte2 from '../ui/ChampTexte2.svelte';
+  import ChampTexte from '../ui/ChampTexte.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
   import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
   import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
@@ -94,7 +94,7 @@
       </div>
 
       <div class="champ email">
-        <ChampTexte2
+        <ChampTexte
           aideSaisie="Ex : jean.dupont@mail.com"
           id="email"
           libelle="Email de contact"

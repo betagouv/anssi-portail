@@ -4,7 +4,7 @@
   import { fade, fly } from 'svelte/transition';
   import Bouton from '../ui/Bouton.svelte';
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
-  import ChampTexte2 from '../ui/ChampTexte2.svelte';
+  import ChampTexte from '../ui/ChampTexte.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
   import ZoneTexte from '../ui/ZoneTexte.svelte';
   import { entrepotNavigateurAvisUtilisateur } from './ControleAvisUtilisateur';
@@ -141,7 +141,7 @@
             Échangez avec nous sur votre expérience et participez aux futures évolutions de la plateforme&nbsp;!
           </p>
           <div class="question">
-            <ChampTexte2
+            <ChampTexte
               aideSaisie="Ex : jean.dupont@mail.com"
               id="email-contact"
               libelle="Email de contact (facultatif)"
