@@ -3,56 +3,37 @@
   {"label":"Pied de page","href":"#pied"}
 ]' | escape %}
 <dsfr-skiplink items="{{ liensEvitement }}"></dsfr-skiplink>
-<header id="haut-de-page" class="fr-header__brand">
-  <div class="contenu-section">
-    {% include composant-svelte.html id="badge-agent-anssi" genere-div=false %}
 
-    <div class="entete-principale">
-      <a href="/">
-        <img
-          src="/assets/images/marianne-dark.svg"
-          class="marianne"
-          alt="Marianne"
-        />
-      </a>
-
-      <a href="https://cyber.gouv.fr" aria-label="Site de l’ANSSI">
-        <img
-          class="logo-anssi"
-          src="/assets/images/logo-anssi.svg"
-          alt="Logo ANSSI"
-        />
-      </a>
-
-      <a href="/" class="titre-msc" aria-label="Retour à l’accueil">
-        <div class="titre-site">
-          <div class="titre-principal">
-            <h1>MesServicesCyber</h1>
-            <div class="badge-agent-anssi"></div>
-          </div>
-          <h2>Innovation ANSSI</h2>
-        </div>
-      </a>
-
-      <lab-anssi-bouton-suite-cyber-navigation></lab-anssi-bouton-suite-cyber-navigation>
-
-      {% include composant-svelte.html id="identification" %}
-
-      <div id="menu-burger-mobile"></div>
-    </div>
-    <div class="entete-secondaire">
-      <a href="/" class="titre-msc" aria-label="Retour à l’accueil">
-
-        <div class="titre-site">
-          <div class="titre-principal">
-            <h1>MesServicesCyber</h1>
-            <div class="badge-agent-anssi"></div>
-          </div>
-          <h2>Innovation ANSSI</h2>
-        </div>
-      </a>
-    </div>
+{% include composant-svelte.html id="badge-agent-anssi" genere-div=false %}
+{% include composant-svelte.html id="identification" genere-div=false %}
+{% include composant-svelte.html id="navigation" genere-div=false %}
+<dsfr-header
+  id="haut-de-page"
+  class="fr-header__brand"
+  data-themeable="false"
+  brand-link-href="/"
+  brand-link-title="Retour à l'accueil du site MesServicesCyber - République Française"
+  has-brand-operator
+  brand-operator-src="/assets/images/logo-anssi.svg"
+  brand-operator-alt="MesServicesCyber"
+  brand-operator-style="height:4rem"
+  brand-service="MesServicesCyber"
+  has-brand-tagline
+  brand-tagline="Innovation ANSSI"
+  has-tool-links
+  menu-id="menu-burger-mobile"
+  has-navigation
+  navigation-id="menu-principal"
+>
+  <div slot="headerbadge" class="badge-agent-anssi"></div>
+  <div slot="toolLinks" class="identification"></div>
+  <div slot="modalToolLinks" class="identification"></div>
+  <div slot="beforetoolslinks">
+    <lab-anssi-bouton-suite-cyber-navigation sourceutm="MesServicesCyber"></lab-anssi-bouton-suite-cyber-navigation>
   </div>
-</header>
-
-{% include composant-svelte.html id="navigation" %}
+  <div slot="beforenavbarbuttons">
+    <lab-anssi-bouton-suite-cyber-navigation sourceutm="MesServicesCyber"></lab-anssi-bouton-suite-cyber-navigation>
+  </div>
+  <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart" slot="aftermodaltoollinks"></lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
+  <div slot="navigation" id="navigation"></div>
+</dsfr-header>
