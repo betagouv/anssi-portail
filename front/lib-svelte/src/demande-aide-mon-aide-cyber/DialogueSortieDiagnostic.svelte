@@ -2,7 +2,7 @@
   import axios from 'axios';
   import Bouton from '../ui/Bouton.svelte';
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
-  import ChampTexte2 from '../ui/ChampTexte2.svelte';
+  import ChampTexte from '../ui/ChampTexte.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
   import Lien from '../ui/Lien.svelte';
   import ZoneTexte from '../ui/ZoneTexte.svelte';
@@ -105,7 +105,7 @@
           </div>
           <div class="contact">
             <h5>📧 Une question ? Nos équipes se tiennent à votre disposition.</h5>
-            <ChampTexte2
+            <ChampTexte
               aideSaisie="Ex : jean.dupont@mail.com"
               id="email-contact"
               libelle="Email de contact"

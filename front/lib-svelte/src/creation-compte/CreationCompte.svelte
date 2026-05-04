@@ -3,7 +3,7 @@
   import { onMount } from 'svelte';
   import { validationChamp } from '../directives/validationChamp';
   import Bouton from '../ui/Bouton.svelte';
-  import ChampTexte2 from '../ui/ChampTexte2.svelte';
+  import ChampTexte from '../ui/ChampTexte.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
   import Etapier from '../ui/Etapier.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
@@ -177,7 +177,7 @@
           <div class="bloc bloc-avec-separateur champs-saisie">
             <h1>Votre identité</h1>
             <div class="telephone">
-              <ChampTexte2
+              <ChampTexte
                 aideSaisie="Ex : 0XXXXXXXXX"
                 id="telephone"
                 libelle="Téléphone"

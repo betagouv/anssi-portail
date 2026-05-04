@@ -1,7 +1,7 @@
 <script lang="ts">
   import { tick } from 'svelte';
   import { validationChamp } from '../directives/validationChamp';
-  import ChampTexte2 from '../ui/ChampTexte2.svelte';
+  import ChampTexte from '../ui/ChampTexte.svelte';
   import MenuFlottant from '../ui/MenuFlottant.svelte';
 
   export let valeurs: string[];
@@ -85,7 +85,7 @@
     </div>
   </MenuFlottant>
   {#if afficheAutre}
-    <ChampTexte2
+    <ChampTexte
       id="autreDomaine"
       libelle="Merci de préciser votre domaine de spécialité"
       messageErreur="La précision du domaine de spécialité est obligatoire. Veuillez la renseigner."
