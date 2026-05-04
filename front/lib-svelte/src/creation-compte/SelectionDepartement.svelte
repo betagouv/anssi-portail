@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ChampTexte from '../ui/ChampTexte.svelte';
+  import ChampTexte2 from '../ui/ChampTexte2.svelte';
   import FermetureSurClicEnDehors from '../ui/FermetureSurClicEnDehors.svelte';
   import type { Departement } from '../ui/formulaire/SelectionOrganisation.types';
 
@@ -39,13 +39,13 @@
 </script>
 
 <div class="selection-departement conteneur">
-  <ChampTexte
+  <ChampTexte2
     id="departement"
+    libelle=""
     nom="departement"
     bind:valeur={saisie}
-    on:input={() => avecTemporisation(rechercheSuggestions)}
+    oninput={() => avecTemporisation(rechercheSuggestions)}
     aideSaisie="ex : 33, Morbihan"
-    on:focus={() => avecTemporisation(rechercheSuggestions)}
     autocomplete="off"
   />
   <div class="liste-suggestions" class:visible={suggestionsVisibles} bind:this={suggestionsEl}>
