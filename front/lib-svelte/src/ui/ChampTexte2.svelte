@@ -13,9 +13,12 @@
     type?: 'text' | 'email';
     valeur?: string;
     statut?: 'default' | 'valid' | 'error' | 'info';
+    oninput?: () => void;
+    autocomplete?: string;
   };
   let {
     aideSaisie,
+    autocomplete,
     desactive,
     id,
     libelle,
@@ -28,7 +31,15 @@
     type = 'text',
     valeur = $bindable(),
     statut = $bindable(),
+    oninput,
   }: Props = $props();
+
+  const onvaluechanged = (e: CustomEvent) => {
+    valeur = e.detail;
+    if (oninput) {
+      oninput();
+    }
+  };
 </script>
 
 <dsfr-input
@@ -39,11 +50,12 @@
   label={libelle}
   maxlength={tailleMaximale}
   name={nom}
-  onvaluechanged={(e: CustomEvent) => (valeur = e.detail)}
+  {onvaluechanged}
   pattern={modele}
   placeholder={aideSaisie}
   required={requis}
   {type}
   value={valeur}
   status={statut}
+  {autocomplete}
 ></dsfr-input>

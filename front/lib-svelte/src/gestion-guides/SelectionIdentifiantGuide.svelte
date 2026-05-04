@@ -3,7 +3,7 @@
   import { onMount } from 'svelte';
   import type { Guide } from '../catalogue/Guide.types';
   import { clic } from '../directives/actions.svelte';
-  import ChampTexte from '../ui/ChampTexte.svelte';
+  import ChampTexte2 from '../ui/ChampTexte2.svelte';
 
   type Props = {
     valeur: string;
@@ -59,12 +59,12 @@
 </script>
 
 <div class="conteneur-selection-guide">
-  <label for="selection-id-guide">Identifiant du guide</label>
-  <ChampTexte
+  <ChampTexte2
     id="selection-id-guide"
+    libelle="Identifiant du guide"
     nom="guide"
     bind:valeur={saisieEnCours}
-    on:input={() => avecTemporisation(rechercheSuggestions)}
+    oninput={() => avecTemporisation(rechercheSuggestions)}
     aideSaisie="ex : guide-pour-une-formation-sur-la-cybersecurite-des-systemes-industriels"
     autocomplete="off"
   />
