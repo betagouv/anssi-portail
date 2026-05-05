@@ -1,7 +1,5 @@
 import z from 'zod';
-import { codesRegion } from '../../metier/referentielRegions';
-import { codesSecteur } from '../../metier/referentielSecteurs';
-import { codesTranchesEffectif } from '../../metier/referentielTranchesEffectifEtablissement';
+import { schemas } from '../schemas';
 
 const clesReponsesValides = [
   'prise-en-compte-risque',
@@ -16,9 +14,9 @@ const erreurSurLesNombres = 'Les valeurs de réponses doivent être comprises en
 const schemaNombreEntre1Et5 = z.int(erreurSurLesNombres).min(1, erreurSurLesNombres).max(5, erreurSurLesNombres);
 
 export const schemaRessourceResultatsDeTest = z.strictObject({
-  region: z.enum(codesRegion, 'Région invalide').optional().nullable(),
-  secteur: z.enum(codesSecteur, 'Secteur invalide').optional().nullable(),
-  tailleOrganisation: z.enum(codesTranchesEffectif, "Taille d'organisation invalide").optional().nullable(),
+  region: schemas.geographie.region('Région invalide').optional().nullable(),
+  secteur: schemas.organisation.secteur('Secteur invalide').optional().nullable(),
+  tailleOrganisation: schemas.organisation.taille("Taille d'organisation invalide").optional().nullable(),
   reponses: z
     .any()
     .superRefine((val, ctx) => {

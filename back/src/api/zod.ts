@@ -3,7 +3,11 @@ import * as z from 'zod';
 
 export const valideRequete =
   <TZod extends z.ZodType, TReq extends z.infer<TZod>>(objet: TZod) =>
-  async (requete: Request<unknown, unknown, TReq, unknown, never>, reponse: Response, suite: NextFunction) => {
+  async (
+    requete: Request<unknown, unknown, unknown, unknown, never> | TReq,
+    reponse: Response,
+    suite: NextFunction
+  ) => {
     const resultat = objet.safeParse(requete) as z.ZodSafeParseResult<z.core.output<TZod>>;
     if (!resultat.success) return reponse.sendStatus(400);
     return suite();
