@@ -1,5 +1,6 @@
 import z from 'zod';
 import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction';
+import { schemas } from './schemas';
 
 export const schemaRessourceAvisUtilisateur = z.strictObject({
   niveauDeSatisfaction: z
@@ -11,5 +12,5 @@ export const schemaRessourceAvisUtilisateur = z.strictObject({
     .string()
     .min(1, 'Le commentaire est requis')
     .max(8 * 1024, 'Le commentaire ne peut pas dépasser 8192 caractères'),
-  emailDeContact: z.email("L'email est invalide").optional(),
+  emailDeContact: schemas.internet.adresseEmail("L'email est invalide").optional(),
 });

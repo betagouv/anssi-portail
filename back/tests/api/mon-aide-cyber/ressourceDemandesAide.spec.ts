@@ -34,7 +34,7 @@ const uneDemandeAide = (parametres?: {
     email: parametres?.email || 'durant@mail.fr',
     departement: (parametres?.departement || '12') as CodeDepartement,
     raisonSociale: parametres?.raisonSociale || 'Une raison sociale',
-    siret: parametres?.siret || '01234567891234',
+    siret: parametres?.siret || '12345678901237',
   },
   validationCGU: true,
 });
@@ -65,14 +65,14 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
 
       await request(serveur)
         .post('/api/mon-aide-cyber/demandes-aide')
-        .send(uneDemandeAide({ email: 'durant@mail.fr', siret: '09876543214321' }));
+        .send(uneDemandeAide({ email: 'durant@mail.fr', siret: '12345678901237' }));
 
       assert.deepEqual(demandeAideEnvoyee, {
         entiteAidee: {
           email: 'durant@mail.fr',
           departement: '12',
           raisonSociale: 'Une raison sociale',
-          siret: '09876543214321',
+          siret: '12345678901237',
         },
         aidant: {},
       });
@@ -89,8 +89,8 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
         .send(
           uneDemandeAide({
             email: 'durant@mail.fr',
-            siret: '09876543214321',
-            siretAidant: '12345678910234',
+            siret: '12345678901237',
+            siretAidant: '12345678901237',
           })
         );
 
@@ -99,9 +99,9 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
           email: 'durant@mail.fr',
           departement: '12',
           raisonSociale: 'Une raison sociale',
-          siret: '09876543214321',
+          siret: '12345678901237',
         },
-        aidant: { siret: '12345678910234' },
+        aidant: { siret: '12345678901237' },
       });
     });
   });
@@ -149,7 +149,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
             email: 'ceci-n-est-pas-un-mail.fr',
             departement: '12',
             raisonSociale: 'Une raison sociale',
-            siret: '12345678901234',
+            siret: '12345678901237',
           },
         });
 
@@ -182,7 +182,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
             email: 'jean.dupont@mail.fr',
             departement: '12',
             raisonSociale: 'Une raison sociale',
-            siret: '12345678901234',
+            siret: '12345678901237',
           },
         });
 
@@ -199,7 +199,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
             email: 'jean.dupont@mail.fr',
             departement: '12',
             raisonSociale: 'Une raison sociale',
-            siret: '12345678901234',
+            siret: '12345678901237',
           },
         });
 
@@ -229,7 +229,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
           entiteAidee: {
             departement: '01',
             raisonSociale: '',
-            siret: '12345678901234',
+            siret: '12345678901237',
           },
         });
 
@@ -246,7 +246,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
             departement: '33',
             raisonSociale: 'beta-gouv',
             email: 'jean.dupont@mail.fr',
-            siret: '12345678901234',
+            siret: '12345678901237',
           },
           identifiantAidant: '  a ',
         });
@@ -267,7 +267,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
             departement: '33',
             raisonSociale: 'beta-gouv',
             email: 'jean.dupont@mail.fr',
-            siret: '12345678901234',
+            siret: '12345678901237',
           },
           siretAidant: '01234',
         });
@@ -286,7 +286,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
             departement: '33',
             raisonSociale: 'beta-gouv',
             email: 'jean.dupont@mail.fr',
-            siret: '12345678901234',
+            siret: '12345678901237',
           },
         });
 

@@ -1,22 +1,16 @@
 import z from 'zod';
-import { codeDepartement } from '../../metier/referentielDepartements';
+import { schemas } from '../schemas';
 
 export const schemaRessourceDemandesAide = z.strictObject({
   entiteAidee: z.strictObject({
-    departement: z.enum(codeDepartement, 'Veuillez saisir un département valide.'),
-    siret: z.string('Veuillez saisir un SIRET valide.').regex(/^\d{14}$/),
-    raisonSociale: z
-      .string()
-      .max(1024, 'La raison sociale ne peut pas dépasser 1024 caractères')
-      .nonempty('Veuillez saisir une raison sociale valide.'),
-    email: z.email('Veuillez saisir un email valide.').nonempty(),
+    departement: schemas.geographie.departement(),
+    siret: schemas.organisation.siret(),
+    raisonSociale: schemas.organisation.raisonSociale(),
+    email: schemas.internet.adresseEmail(),
   }),
-  emailAidant: z.email('Veuillez saisir un email valide pour l’Aidant cyber.').optional(),
+  emailAidant: schemas.internet.adresseEmail('Veuillez saisir un email valide pour l’Aidant cyber.').optional(),
   identifiantAidant: z.uuid('Veuillez saisir un identifiant Aidant cyber valide.').optional(),
-  siretAidant: z
-    .string()
-    .regex(/^\d{14}$/, 'Veuillez saisir un SIRET Aidant cyber valide.')
-    .optional(),
+  siretAidant: schemas.organisation.siret('Veuillez saisir un SIRET Aidant cyber valide.').optional(),
   origine: z
     .string()
     .trim()
