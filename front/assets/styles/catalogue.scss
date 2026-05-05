@@ -177,7 +177,7 @@
   grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
   width: 100%;
   box-sizing: border-box;
-  gap: 24px;
+  column-gap: 24px;
   align-content: flex-start;
 
   .sommaire-deplie {
