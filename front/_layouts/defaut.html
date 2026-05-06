@@ -33,10 +33,13 @@
       nonce="%%NONCE%%"
       defer
     ></script>
-    <main>
-      {% include header.html %} {% include bandeau-maintenance.html %} {%
-      include avis-utilisateur.html %} {% include centre-aide.html %} {{ content
-      }} {% include footer.html %}
+    {% include header.html %}
+    <main id="contenu">
+      {% include bandeau-maintenance.html %}
+      {% include avis-utilisateur.html %}
+      {% include centre-aide.html %}
+      {{ content }}
     </main>
+    {% include footer.html %}
   </body>
 </html>
