@@ -5,8 +5,8 @@ export const guidePresentation = (adaptateurEnvironnement: AdaptateurEnvironneme
   ...guide,
   nomImage: undefined,
   image: {
-    petite: `${adaptateurEnvironnement.urlCellar().guides()}${guide.id}/588.avif`,
-    grande: `${adaptateurEnvironnement.urlCellar().guides()}${guide.id}/origine.avif`,
+    petite: `/documents-guides/${guide.id}/588.avif`,
+    grande: `/documents-guides/${guide.id}/origine.avif`,
   },
   documents: guide.listeDocuments.map((document) => ({
     libelle: document.libelle,

@@ -112,7 +112,6 @@ export const fabriqueMiddleware = ({
             'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
             'https://storage.crisp.chat',
             adaptateurEnvironnement.urlCellar().ressourcesCyber(),
-            adaptateurEnvironnement.urlCellar().guides(),
             'data:',
           ],
           connectSrc: [
