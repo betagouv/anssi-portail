@@ -726,3 +726,67 @@ address {
 img[src$='.svg'] {
   align-self: center;
 }
+
+// On règle les CLS (Content Layout Shift) liés à l'utilisation des composants du DSFR.
+
+dsfr-header {
+  display: block;
+  min-height: 168px;
+}
+
+dsfr-footer {
+  display: block;
+  min-height: 338px;
+}
+
+dsfr-card {
+  min-height: 380px;
+
+  .prestataires-labellises & {
+    min-height: 226px;
+  }
+}
+
+dsfr-button {
+  min-height: 40px;
+
+  &[size='sm'] {
+    min-height: 32px;
+  }
+
+  &[size='lg'] {
+    min-height: 48px;
+  }
+}
+
+msc-lien[apparence='bouton'] {
+  min-height: 40px;
+
+  &[taille='sm'] {
+    min-height: 32px;
+  }
+
+  &[taille='lg'] {
+    min-height: 48px;
+  }
+}
+
+main > #test-maturite,
+main > #maturite-utilisateur,
+main > #catalogue,
+main > #page-directive-nis2,
+main > #prestataires-labellises,
+main > #financements,
+main > #page-crisp,
+main > #demande-aide-mon-aide-cyber,
+main > #simulateur-nis2 {
+  min-height: 1080px;
+}
+
+#favoris {
+  min-height: 820px;
+}
+
+#contacts {
+  min-height: 770px;
+}
