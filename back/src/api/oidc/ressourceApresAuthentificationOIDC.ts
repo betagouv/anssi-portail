@@ -28,11 +28,16 @@ const ressourceApresAuthentificationOIDC = ({
         const { email } = informationsUtilisateur;
 
         const emailHache = adaptateurHachage.hache(email);
-        const utilisateurExiste = await entrepotUtilisateur.existe(emailHache);
-        if (!utilisateurExiste) {
+        const utilisateur = await entrepotUtilisateur.parEmailHache(emailHache);
+
+        if (!utilisateur) {
           const token = adaptateurJWT.genereToken(informationsUtilisateur);
           reponse.redirect(`/creation-compte?token=${token}`);
           return;
+        }
+
+        if (!connexionAvecMFA && utilisateur.peutManipulerLesDocumentsDUnGuide()) {
+          return reponse.sendStatus(403);
         }
 
         requete.session = { ...requete.session, ...informationsUtilisateur };
