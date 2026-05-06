@@ -25,7 +25,7 @@
       collapseId: 'nav-catalogue',
       items: [
         { label: 'Le catalogue cyber complet', id: 'nav-catalogue-1', type: 'link', href: '/catalogue' },
-        { label: 'Les services pour se lancer', id: 'nav-catalogue-2', type: 'link', href: '/parcours-debutter' },
+        { label: 'Les services pour se lancer', id: 'nav-catalogue-2', type: 'link', href: '/parcours-debuter' },
         { label: 'Les services pour approfondir', id: 'nav-catalogue-3', type: 'link', href: '/parcours-approfondir' },
       ],
     },
