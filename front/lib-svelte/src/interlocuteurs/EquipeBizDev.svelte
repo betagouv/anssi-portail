@@ -16,7 +16,7 @@
       apparence="bouton"
       blank
       href="https://app.livestorm.co/lab-anssi/webinaire-cyberdepart"
-      libelle="assister au webinaire"
+      libelle="Assister au webinaire"
       type="primaire"
     />
   </div>
