@@ -6,8 +6,18 @@
 
 <div class="conteneur-zone-indentification">
   {#if $profilStore === undefined}
-    <dsfr-button kind="tertiary-no-outline" markup="a" href="/inscription" size="sm">S’inscrire</dsfr-button>
-    <dsfr-button kind="tertiary-no-outline" markup="a" href="/connexion" size="sm" has-icon icon="user-line">
+    <dsfr-button kind="tertiary-no-outline" markup="a" href="/inscription" size="sm" data-themeable="false"
+      >S’inscrire</dsfr-button
+    >
+    <dsfr-button
+      kind="tertiary-no-outline"
+      markup="a"
+      href="/connexion"
+      size="sm"
+      has-icon
+      icon="user-line"
+      data-themeable="false"
+    >
       Se connecter
     </dsfr-button>
   {:else}

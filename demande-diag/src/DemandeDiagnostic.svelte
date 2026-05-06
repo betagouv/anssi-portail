@@ -9,12 +9,13 @@
 />
 
 <script lang="ts">
-  import DemandeDiagnosticSimplifiee from '@anssi-portail/svelte/src/demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
+  import DemandeDiagnosticSimplifiee
+    from '@anssi-portail/svelte/src/demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
 
   const { siretAidant }: { siretAidant?: string } = $props();
 </script>
 
-<div class="lab-anssi-demande-diagnostic-simplifiee" data-themeable>
+<div class="lab-anssi-demande-diagnostic-simplifiee" data-themeable="true">
   <DemandeDiagnosticSimplifiee
     titre="Bénéficiez d'un premier accompagnement cyber gratuit"
     description="Grâce au diagnostic cyberdépart, commencez à protéger votre organisation contre le risque de cyberattaques."
