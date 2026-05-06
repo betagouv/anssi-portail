@@ -17,7 +17,7 @@ export const ressourceDocumentGuide = ({ cellar, entrepotGuide }: ConfigurationS
   };
 
   routeur.get(
-    '/:slug',
+    '/:slug(*)',
     valideCorpsRequete(corpsVide),
     fabriqueGestionnaireRessourceCellar(cellar, 'GUIDES', documentGuideManquant)
   );
