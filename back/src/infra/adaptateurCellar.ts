@@ -40,7 +40,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
         `${selectionneURLCellarLecturePourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
         { responseType: 'arraybuffer' }
       );
-      const typeDeContenu = reponse.headers['content-type'] ?? 'application/octet-stream';
+      const typeDeContenu = (reponse.headers['content-type'] as string) ?? 'application/octet-stream';
       return {
         contenu: Buffer.from(reponse.data),
         typeDeContenu,
@@ -62,7 +62,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
       );
       return {
         flux: reponse.data,
-        typeDeContenu: reponse.headers['content-type'] ?? 'application/octet-stream',
+        typeDeContenu: (reponse.headers['content-type'] as string) ?? 'application/octet-stream',
         tailleDuContenu: Number(reponse.headers['content-length']),
       };
     } catch (erreur: Error | unknown) {
