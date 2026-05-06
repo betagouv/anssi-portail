@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import EncartLienVersDemandeDiagnostic from '../../demande-aide-mon-aide-cyber/EncartLienVersDemandeDiagnostic.svelte';
   import { clic } from '../../directives/actions.svelte';
   import BoutonFavori from '../../favoris/BoutonFavori.svelte';
   import { profilStore } from '../../stores/profil.store';
@@ -151,6 +152,9 @@
       </div>
     </div>
   </div>
+  {#if guide.id === '/guides/guide-dhygiene-informatique'}
+    <EncartLienVersDemandeDiagnostic />
+  {/if}
 {:else if !chargementEnCours}
   <dsfr-container>
     <div class="non-trouve">
