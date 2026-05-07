@@ -171,6 +171,9 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   rechercheEntreprise: () => ({
     apiUrl: () => 'http://recherche-entreprise',
   }),
+  siret: () => ({
+    desactiveValidationStricte: () => false,
+  }),
 };
 
 const vraiMiddleware = fabriqueMiddleware({

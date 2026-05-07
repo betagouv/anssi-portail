@@ -1,29 +1,19 @@
 import z from 'zod';
+import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import { codeDepartement } from '../metier/referentielDepartements';
 import { codesRegion } from '../metier/referentielRegions';
 import { codesSecteur } from '../metier/referentielSecteurs';
 import { codesTranchesEffectif } from '../metier/referentielTranchesEffectifEtablissement';
-
-const verifieLuhn = (numero: string) => {
-  let somme = 0;
-  let double = false;
-  for (let i = numero.length - 1; i >= 0; i--) {
-    let chiffre = parseInt(numero[i], 10);
-    if (double) {
-      chiffre *= 2;
-      if (chiffre > 9) chiffre -= 9;
-    }
-    somme += chiffre;
-    double = !double;
-  }
-  return somme % 10 === 0;
-};
+import { valideSiret } from '../metier/valideSiret';
 
 export const schemas = {
   organisation: {
     siret: (erreur: string | (() => string) | undefined = undefined) => {
       const e = typeof erreur === 'function' ? erreur() : (erreur ?? 'Veuillez saisir un SIRET valide.');
-      return z.string(e).length(14, e).refine(verifieLuhn, e);
+      return z
+        .string(e)
+        .length(14, e)
+        .refine((v) => valideSiret(adaptateurEnvironnement, v), e);
     },
     raisonSociale: (erreur: string | (() => string) | undefined = undefined) => {
       const e = typeof erreur === 'function' ? erreur() : (erreur ?? 'Veuillez saisir une raison sociale valide.');
