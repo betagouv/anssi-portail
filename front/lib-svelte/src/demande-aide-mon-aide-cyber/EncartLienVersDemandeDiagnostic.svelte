@@ -29,10 +29,11 @@
     </div>
     <div class="contenu">
       <dsfr-badge type="accent" accent="yellow-tournesol" label="Diagnostic cyber gratuit" size="sm"></dsfr-badge>
-      <h5>Obtenez vos 6 actions prioritaires pour sécuriser votre organisation</h5>
+      <h5>Obtenez 6 recommandations pour protéger votre organisation</h5>
       <p class="texte-standard-md">
-        Bénéficier <strong>gratuitement</strong> de l'accompagnement d'un Aidant cyber pour faire le point sur votre
-        situation et identifier les <strong>6 actions à mettre en place en priorité</strong>.
+        Bénéficiez d’un <strong>premier diagnostic gratuit</strong> accompagné d’un Aidant cyber et recevez
+        <strong>6 recommandations prioritaires</strong>
+        à mettre en place pour améliorer la cybersécurité de votre organisation.
       </p>
       <div class="conteneur-bouton">
         <Lien
