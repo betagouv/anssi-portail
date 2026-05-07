@@ -315,7 +315,8 @@ dsfr-footer {
       gap: 1rem;
     }
 
-    label {
+    label,
+    .choix {
       display: flex;
       gap: 0.5rem;
       align-items: center;

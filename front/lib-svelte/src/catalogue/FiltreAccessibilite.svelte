@@ -1,24 +1,11 @@
 <script lang="ts">
-  import { rechercheParDroitAcces } from './stores/rechercheParDroitAcces.store';
   import { DroitAcces } from './Catalogue.types';
-  import { nombreResultats } from './stores/nombreResultats.store';
+  import ChoixFiltreAccessibilite from './ChoixFiltreAccessibilite.svelte';
 </script>
 
 <fieldset>
   <legend>Accessibles pour</legend>
-  <label>
-    <input type="checkbox" value={DroitAcces.ACCES_LIBRE} bind:group={$rechercheParDroitAcces} />
-    <span class="libelle">Accès libre</span>
-    <span class="compte">{$nombreResultats.parDroitAcces[DroitAcces.ACCES_LIBRE]}</span>
-  </label>
-  <label>
-    <input type="checkbox" value={DroitAcces.ENTITES_PUBLIQUES} bind:group={$rechercheParDroitAcces} />
-    <span class="libelle">Entités publiques</span>
-    <span class="compte">{$nombreResultats.parDroitAcces[DroitAcces.ENTITES_PUBLIQUES]}</span>
-  </label>
-  <label>
-    <input type="checkbox" value={DroitAcces.REGULES_NIS2} bind:group={$rechercheParDroitAcces} />
-    <span class="libelle">Entités régulées / NIS2</span>
-    <span class="compte">{$nombreResultats.parDroitAcces[DroitAcces.REGULES_NIS2]}</span>
-  </label>
+  <ChoixFiltreAccessibilite valeur={DroitAcces.ACCES_LIBRE} libelle="Accès libre" />
+  <ChoixFiltreAccessibilite valeur={DroitAcces.ENTITES_PUBLIQUES} libelle="Entités publiques" />
+  <ChoixFiltreAccessibilite valeur={DroitAcces.REGULES_NIS2} libelle="Entités régulées / NIS2" />
 </fieldset>
