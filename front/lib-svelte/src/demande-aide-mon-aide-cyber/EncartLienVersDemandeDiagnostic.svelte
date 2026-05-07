@@ -28,14 +28,19 @@
       ></dsfr-button>
     </div>
     <div class="contenu">
-      <dsfr-badge type="accent" accent="yellow-tournesol" label="Diagnotic cyber gratuit" size="sm"></dsfr-badge>
+      <dsfr-badge type="accent" accent="yellow-tournesol" label="Diagnostic cyber gratuit" size="sm"></dsfr-badge>
       <h5>Obtenez vos 6 actions prioritaires pour sécuriser votre organisation</h5>
       <p class="texte-standard-md">
         Bénéficier <strong>gratuitement</strong> de l'accompagnement d'un Aidant cyber pour faire le point sur votre
         situation et identifier les <strong>6 actions à mettre en place en priorité</strong>.
       </p>
       <div class="conteneur-bouton">
-        <Lien apparence="bouton" type="primaire" libelle="Demander un diagnostic gratuit" href="/cyberdepart"></Lien>
+        <Lien
+          apparence="bouton"
+          type="primaire"
+          libelle="Demander un diagnostic gratuit"
+          href="/cyberdepart?origine=guide-dhygiene-informatique"
+        ></Lien>
       </div>
       <p class="texte-mention-xs">
         Ce diagnostic gratuit proposé par l'État n'est pas adapté aux particuliers ni aux entreprises mono-salariées.
