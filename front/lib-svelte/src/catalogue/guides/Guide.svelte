@@ -300,6 +300,8 @@
   }
 
   .sommaire-replie {
+    z-index: calc(var(--ground) + 751);
+
     details {
       ul {
         list-style-type: none;
