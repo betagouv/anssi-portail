@@ -43,20 +43,20 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
+  @use '../../../assets/styles/grille.scss' as *;
 
   .encart-audessus {
     border: 0;
     box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
     gap: 0;
     margin: 1rem;
-    max-width: 486px;
     padding: 0;
     left: anchor(right);
     top: anchor(bottom);
     z-index: 9;
 
     .conteneur {
-      width: min(486px, 100%);
+      width: 100%;
 
       .entete {
         display: flex;
@@ -75,6 +75,14 @@
           margin-top: 0.5rem;
         }
       }
+    }
+
+    @include a-partir-de(md) {
+      max-width: taille-pour-colonnes(8);
+    }
+
+    @include a-partir-de(lg) {
+      max-width: taille-pour-colonnes(4);
     }
   }
 </style>
