@@ -86,6 +86,9 @@ type AdaptateurEnvironnement = {
   };
   nodeEnv: () => string | undefined;
   versionDeConstruction: () => string;
+  siret: () => {
+    desactiveValidationStricte: () => boolean;
+  };
 };
 
 const ajouteBarreObliqueFinale = (url: string): string => {
@@ -257,6 +260,9 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
   }),
   nodeEnv: () => process.env.NODE_ENV,
   versionDeConstruction: () => (process.env.CC_COMMIT_ID || '1').substring(0, 8),
+  siret: () => ({
+    desactiveValidationStricte: () => process.env.SIRET_DESACTIVE_VALIDATION_STRICTE === 'true',
+  }),
 };
 
 export { AdaptateurEnvironnement, adaptateurEnvironnement };
