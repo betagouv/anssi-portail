@@ -4,9 +4,10 @@
   import Lien from '../ui/Lien.svelte';
 
   let encart = $state<HTMLDivElement | undefined>();
-
   onMount(() => {
-    encart?.showPopover();
+    setTimeout(() => {
+      encart?.showPopover();
+    }, 500);
   });
 
   const fermeDialogue = () => {
@@ -54,6 +55,24 @@
     left: anchor(right);
     top: anchor(bottom);
     z-index: 9;
+
+    &[popover] {
+      transition:
+        display 0.5s allow-discrete,
+        transform 0.5s ease;
+
+      transform: translateX(100%);
+    }
+
+    &[popover]:popover-open {
+      transform: translateY(0);
+    }
+
+    @starting-style {
+      &[popover]:popover-open {
+        transform: translateX(100%);
+      }
+    }
 
     .conteneur {
       width: 100%;
