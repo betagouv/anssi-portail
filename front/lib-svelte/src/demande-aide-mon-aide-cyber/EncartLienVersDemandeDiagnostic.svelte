@@ -28,13 +28,15 @@
       ></dsfr-button>
     </div>
     <div class="contenu">
-      <dsfr-badge type="accent" accent="yellow-tournesol" label="Diagnotic cyber gratuit"></dsfr-badge>
+      <dsfr-badge type="accent" accent="yellow-tournesol" label="Diagnotic cyber gratuit" size="sm"></dsfr-badge>
       <h5>Obtenez vos 6 actions prioritaires pour sécuriser votre organisation</h5>
       <p class="texte-standard-md">
         Bénéficier <strong>gratuitement</strong> de l'accompagnement d'un Aidant cyber pour faire le point sur votre
         situation et identifier les <strong>6 actions à mettre en place en priorité</strong>.
       </p>
-      <Lien apparence="bouton" type="primaire" libelle="Demander un diagnostic gratuit" href="/cyberdepart"></Lien>
+      <div class="conteneur-bouton">
+        <Lien apparence="bouton" type="primaire" libelle="Demander un diagnostic gratuit" href="/cyberdepart"></Lien>
+      </div>
       <p class="texte-mention-xs">
         Ce diagnostic gratuit proposé par l'État n'est pas adapté aux particuliers ni aux entreprises mono-salariées.
       </p>
@@ -81,10 +83,20 @@
         display: flex;
         flex-direction: row-reverse;
         padding: 1rem 1rem 0.5rem;
+
+        @include a-partir-de(lg) {
+          padding: 1rem 2rem 1rem;
+        }
       }
 
       .contenu {
         margin: 0 1rem 1rem;
+        display: flex;
+        flex-direction: column;
+
+        @include a-partir-de(lg) {
+          margin: 0 2rem 2rem 2rem;
+        }
 
         h5 {
           margin: 0.5rem 0 1rem;
@@ -92,6 +104,10 @@
 
         .texte-mention-xs {
           margin-top: 0.5rem;
+        }
+
+        .conteneur-bouton {
+          align-self: center;
         }
       }
     }
@@ -101,6 +117,11 @@
     }
 
     @include a-partir-de(lg) {
+      max-width: taille-pour-colonnes(6);
+      margin: 2rem;
+    }
+
+    @include a-partir-de(xl) {
       max-width: taille-pour-colonnes(4);
     }
   }
