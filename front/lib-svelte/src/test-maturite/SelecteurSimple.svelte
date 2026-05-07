@@ -1,26 +1,29 @@
 <script lang="ts">
   import type { Option } from './SelecteurSimple';
 
-  export let options: Option[];
-  export let valeurSeclectionne: string;
-  export let optionDefautIntitule: string | undefined = 'Sélectionner une option';
-  export let optionDefautSelectionnable: boolean = false;
+  type Props = {
+    libelle: string;
+    options: Option[];
+    valeurSelectionnee: string | object;
+    optionDefautIntitule?: string;
+    optionDefautSelectionnable?: boolean;
+  };
+
+  let {
+    libelle,
+    options,
+    valeurSelectionnee = $bindable(),
+    optionDefautIntitule = 'Sélectionner une option',
+    optionDefautSelectionnable = false,
+  }: Props = $props();
 </script>
 
-<select bind:value={valeurSeclectionne} class:defaut={valeurSeclectionne === ''}>
-  <option disabled={!optionDefautSelectionnable} class="defaut" selected value="">{optionDefautIntitule}</option>
-  {#each options as option (option.valeur)}
-    <option value={option.valeur}>{option.libelle}</option>
-  {/each}
-</select>
-
-<style lang="scss">
-  select {
-    option {
-      color: var(--noir);
-    }
-  }
-  .defaut {
-    color: var(--gris-aide-saisie);
-  }
-</style>
+<dsfr-select
+  label={libelle}
+  placeholder={optionDefautIntitule}
+  placeholderDisabled={!optionDefautSelectionnable}
+  options={options.map((o) => ({ label: o.libelle, value: o.valeur }))}
+  value={valeurSelectionnee}
+  onvaluechanged={(e: CustomEvent<string | object>) => (valeurSelectionnee = e.detail)}
+>
+</dsfr-select>

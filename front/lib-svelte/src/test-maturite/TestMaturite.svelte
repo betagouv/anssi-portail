@@ -168,20 +168,15 @@
               </div>
             {:else}
               <div class="informations-complementaires">
-                <label>
-                  Quel est le secteur d’activité de votre organisation&nbsp;?
-                  <SelectSecteurActivite bind:secteur />
-                </label>
-
-                <label>
-                  Dans quelle région / territoire se trouve votre organisation&nbsp;?
-                  <SelectRegion bind:region />
-                </label>
-
-                <label>
-                  Quelle est la taille de votre organisation&nbsp;?
-                  <SelectTailleOrganisation bind:tailleOrganisation />
-                </label>
+                <SelectSecteurActivite
+                  libelle="Quel est le secteur d’activité de votre organisation&nbsp;?"
+                  bind:secteur
+                />
+                <SelectRegion libelle="Dans quelle région / territoire se trouve votre organisation ?" bind:region />
+                <SelectTailleOrganisation
+                  libelle="Quelle est la taille de votre organisation ?"
+                  bind:tailleOrganisation
+                />
 
                 <div class="commandes">
                   <Lien href="/" libelle="Retour à l'accueil"></Lien>

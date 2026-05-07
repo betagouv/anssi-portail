@@ -65,7 +65,7 @@ p {
     grid-template-columns: repeat(5, minmax(50px, 1fr));
   }
 
-  select {
+  dsfr-select {
     &:nth-of-type(2) {
       display: none;
 

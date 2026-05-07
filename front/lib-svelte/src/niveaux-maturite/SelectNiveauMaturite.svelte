@@ -1,12 +1,20 @@
 <script lang="ts">
+  import SelecteurSimple from '../test-maturite/SelecteurSimple.svelte';
   import { niveauxMaturite } from './NiveauxMaturite.donnees';
-  import type { NiveauMaturite } from './NiveauxMaturite.type';
+  import type { IdNiveau } from './NiveauxMaturite.type';
 
-  export let niveauSelectionne: NiveauMaturite;
+  type Props = {
+    libelle: string;
+    idNiveauSelectionne: IdNiveau;
+  };
+  let { libelle = 'Sélectionner un niveau de maturité', idNiveauSelectionne = $bindable() }: Props = $props();
 </script>
 
-<select bind:value={niveauSelectionne}>
-  {#each niveauxMaturite as niveau (niveau.id)}
-    <option value={niveau}>{niveau.label}</option>
-  {/each}
-</select>
+<SelecteurSimple
+  {libelle}
+  options={niveauxMaturite.map((niveau) => ({
+    valeur: niveau.id,
+    libelle: niveau.label,
+  }))}
+  bind:valeurSelectionnee={idNiveauSelectionne}
+/>

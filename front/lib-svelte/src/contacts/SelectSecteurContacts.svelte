@@ -3,7 +3,12 @@
   import SelecteurSimple from '../test-maturite/SelecteurSimple.svelte';
   import { secteursContacts } from './contacts.type';
 
-  export let secteur: string;
+  type Props = {
+    libelle: string;
+    secteur: string;
+  };
+
+  let { libelle, secteur = $bindable() }: Props = $props();
 
   const options: Option[] = secteursContacts.map((s) => ({
     valeur: s.valeur,
@@ -11,4 +16,4 @@
   }));
 </script>
 
-<SelecteurSimple {options} bind:valeurSeclectionne={secteur} optionDefautSelectionnable />
+<SelecteurSimple {libelle} {options} bind:valeurSelectionnee={secteur} optionDefautSelectionnable />

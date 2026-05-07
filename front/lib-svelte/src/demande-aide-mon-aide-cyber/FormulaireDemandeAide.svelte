@@ -68,7 +68,7 @@
 <Formulaire classe="carte-formulaire" bind:this={formulaire} {id}>
   <div class="champ recherche-organisation">
     <label class="libelle" for="entite">Recherchez votre organisation</label>
-    <SelectionOrganisation id="entite" bind:valeur={entite} filtreDepartement={undefined} />
+    <SelectionOrganisation bind:valeur={entite} filtreDepartement={undefined} />
     {#if entite}
       <div>Votre entreprise : {entite.nom} ({entite.departement})</div>
     {/if}

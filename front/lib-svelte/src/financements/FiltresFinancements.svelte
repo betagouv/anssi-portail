@@ -19,10 +19,11 @@
 {#if !estConnecte}
   <fieldset class="filtres regions">
     <legend>Région et territoire</legend>
-    <label class="colonne">
-      <span class="libelle">Sélectionner une région / un territoire</span>
-      <SelectRegion bind:region={$rechercheParRegion} optionDefautSelectionnable />
-    </label>
+    <SelectRegion
+      libelle="Sélectionner une région / un territoire"
+      bind:region={$rechercheParRegion}
+      optionDefautSelectionnable
+    />
   </fieldset>
 {/if}
 {#if !estConnecte}

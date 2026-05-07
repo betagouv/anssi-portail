@@ -104,24 +104,32 @@
       <p>Affinez les résultats en appliquant des filtres par secteur, région ou taille d’organisation.</p>
 
       <div class="champs">
-        <label class="champ-filtre">
-          <span>Secteur d'activité</span>
-          <SelectSecteurActivite bind:secteur optionDefautIntitule="Tous les secteurs" optionDefautSelectionnable />
-        </label>
+        <div class="champ-filtre">
+          <SelectSecteurActivite
+            bind:secteur
+            libelle="Secteur d'activité"
+            optionDefautIntitule="Tous les secteurs"
+            optionDefautSelectionnable
+          />
+        </div>
 
-        <label class="champ-filtre">
-          <span>Région</span>
-          <SelectRegion bind:region optionDefautIntitule="Toutes les régions" optionDefautSelectionnable />
-        </label>
+        <div class="champ-filtre">
+          <SelectRegion
+            bind:region
+            libelle="Région"
+            optionDefautIntitule="Toutes les régions"
+            optionDefautSelectionnable
+          />
+        </div>
 
-        <label class="champ-filtre">
-          <span>Taille de l'organisation</span>
+        <div class="champ-filtre">
           <SelectTailleOrganisation
+            libelle="Taille de l'organisation"
             bind:tailleOrganisation
             optionDefautIntitule="Toutes les tailles d'organisation"
             optionDefautSelectionnable
           />
-        </label>
+        </div>
       </div>
     </div>
     {#if serie.length > 0}

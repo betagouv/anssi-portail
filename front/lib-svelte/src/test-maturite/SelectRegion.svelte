@@ -4,16 +4,26 @@
   import type { Option } from './SelecteurSimple';
   import SelecteurSimple from './SelecteurSimple.svelte';
 
-  export let region: string;
-  export let optionDefautIntitule: string | undefined = undefined;
-  export let optionDefautSelectionnable: boolean = false;
+  type Props = {
+    libelle: string;
+    region: string;
+    optionDefautIntitule?: string;
+    optionDefautSelectionnable?: boolean;
+  };
+
+  let {
+    libelle,
+    region = $bindable(),
+    optionDefautIntitule = 'Sélectionner une région / un territoire',
+    optionDefautSelectionnable = false,
+  }: Props = $props();
 
   type Region = {
     codeIso: string;
     nom: string;
   };
 
-  let options: Option[];
+  let options = $state<Option[]>([]);
 
   onMount(async () => {
     const reponse = await axios.get<Region[]>('/api/annuaire/regions');
@@ -24,4 +34,10 @@
   });
 </script>
 
-<SelecteurSimple {options} bind:valeurSeclectionne={region} {optionDefautIntitule} {optionDefautSelectionnable} />
+<SelecteurSimple
+  {libelle}
+  {options}
+  bind:valeurSelectionnee={region}
+  {optionDefautIntitule}
+  {optionDefautSelectionnable}
+/>

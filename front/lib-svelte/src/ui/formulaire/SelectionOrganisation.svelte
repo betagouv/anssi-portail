@@ -14,7 +14,6 @@
 
   export let filtreDepartement: Departement | undefined;
   export let valeur: Organisation | undefined;
-  export let id: string = '';
   export let urlBase: string = '';
 
   let saisie: string;
