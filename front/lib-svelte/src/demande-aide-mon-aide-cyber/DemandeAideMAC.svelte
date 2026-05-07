@@ -23,6 +23,9 @@
   onMount(() => {
     const parametres = new URLSearchParams(window.location.search);
     origine = parametres.get('mtm_campaign');
+    if (!origine) {
+      origine = parametres.get('origine');
+    }
 
     const body = document.querySelector('body')!;
 
