@@ -13,17 +13,15 @@
 
 <fieldset class="filtres regions">
   <legend>Région et territoire</legend>
-  <label class="colonne">
-    <span class="libelle">Sélectionner une région / un territoire</span>
-    <SelectRegion bind:region={regionSelectionnee} optionDefautSelectionnable />
-  </label>
+  <SelectRegion
+    libelle="Sélectionner une région / un territoire"
+    bind:region={regionSelectionnee}
+    optionDefautSelectionnable
+  />
 </fieldset>
 <fieldset class="filtres secteurs">
   <legend>Secteur d’activité</legend>
-  <label class="colonne">
-    <span class="libelle">Sélectionner un secteur d’activité</span>
-    <SelectSecteurContacts bind:secteur={secteurSelectionne} />
-  </label>
+  <SelectSecteurContacts libelle="Sélectionner un secteur d’activité" bind:secteur={secteurSelectionne} />
 </fieldset>
 <lab-anssi-bouton
   on:click={reinitialiseFiltres}
@@ -40,12 +38,6 @@
   .filtres {
     display: flex;
     flex-direction: column;
-  }
-
-  label.colonne {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
   }
 
   lab-anssi-bouton {

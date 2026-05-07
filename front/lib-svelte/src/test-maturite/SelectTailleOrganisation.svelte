@@ -4,15 +4,25 @@
   import type { Option } from './SelecteurSimple';
   import SelecteurSimple from './SelecteurSimple.svelte';
 
-  export let tailleOrganisation: string;
-  export let optionDefautIntitule: string | undefined = undefined;
-  export let optionDefautSelectionnable: boolean = false;
-
   type TrancheEffectif = {
     code: string;
     libelle: string;
   };
-  let options: Option[];
+
+  type Props = {
+    libelle: string;
+    tailleOrganisation: string;
+    optionDefautIntitule?: string;
+    optionDefautSelectionnable?: boolean;
+  };
+  let {
+    libelle = "Sélectionner une taille d'organisation",
+    tailleOrganisation = $bindable(),
+    optionDefautIntitule = "Sélectionner une taille d'organisation",
+    optionDefautSelectionnable = false,
+  }: Props = $props();
+
+  let options = $state<Option[]>([]);
 
   onMount(async () => {
     const reponse = await axios.get<TrancheEffectif[]>('/api/annuaire/tranches-effectif');
@@ -26,8 +36,9 @@
 </script>
 
 <SelecteurSimple
+  {libelle}
   {options}
-  bind:valeurSeclectionne={tailleOrganisation}
+  bind:valeurSelectionnee={tailleOrganisation}
   {optionDefautIntitule}
   {optionDefautSelectionnable}
 />

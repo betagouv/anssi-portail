@@ -87,7 +87,7 @@
       {/if}
       <div class="champ recherche-organisation">
         <label class="libelle" for="entite">Recherchez votre organisation</label>
-        <SelectionOrganisation id="entite" bind:valeur={entite} filtreDepartement={undefined} {urlBase} />
+        <SelectionOrganisation bind:valeur={entite} filtreDepartement={undefined} {urlBase} />
         {#if entite}
           <div>Votre entreprise : {entite.nom} ({entite.departement})</div>
         {/if}

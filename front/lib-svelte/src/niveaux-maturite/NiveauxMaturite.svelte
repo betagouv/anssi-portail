@@ -1,15 +1,19 @@
 <script lang="ts">
   import IllustrationNiveauMaturite from './IllustrationNiveauMaturite.svelte';
   import { niveauxMaturite } from './NiveauxMaturite.donnees';
-  import type { NiveauMaturite } from './NiveauxMaturite.type';
+  import type { IdNiveau } from './NiveauxMaturite.type';
   import SelectNiveauMaturite from './SelectNiveauMaturite.svelte';
 
   const COLONNES = 5;
 
-  let niveauxSelectionnes: NiveauMaturite[] = [];
+  let idNiveauxSelectionnes: IdNiveau[] = $state([]);
   for (let i = 0; i < COLONNES; i++) {
-    niveauxSelectionnes.push(niveauxMaturite[i]);
+    idNiveauxSelectionnes.push(niveauxMaturite[i].id);
   }
+
+  let niveauxSelectionnes = $derived(
+    idNiveauxSelectionnes.map((id) => niveauxMaturite.find((niveau) => niveau.id === id)!)
+  );
 </script>
 
 <!-- eslint-disable @typescript-eslint/no-unused-vars -->
@@ -17,7 +21,7 @@
   <div class="contenu-section">
     <div class="selecteurs">
       {#each { length: COLONNES } as _, i (i)}
-        <SelectNiveauMaturite bind:niveauSelectionne={niveauxSelectionnes[i]} />
+        <SelectNiveauMaturite libelle="" bind:idNiveauSelectionne={idNiveauxSelectionnes[i]} />
       {/each}
     </div>
     <div class="grille-haute">

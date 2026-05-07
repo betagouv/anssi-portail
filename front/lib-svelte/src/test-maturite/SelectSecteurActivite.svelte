@@ -4,16 +4,26 @@
   import type { Option } from './SelecteurSimple';
   import SelecteurSimple from './SelecteurSimple.svelte';
 
-  export let secteur: string;
-  export let optionDefautIntitule: string | undefined = undefined;
-  export let optionDefautSelectionnable: boolean = false;
-
   type SecteurActivite = {
     code: string;
     libelle: string;
   };
 
-  let options: Option[];
+  type Props = {
+    libelle: string;
+    secteur: string;
+    optionDefautIntitule?: string;
+    optionDefautSelectionnable?: boolean;
+  };
+
+  let {
+    libelle = 'Sélectionner un secteur d’activité',
+    secteur = $bindable(),
+    optionDefautIntitule = "Sélectionner un secteur d'activité",
+    optionDefautSelectionnable = false,
+  }: Props = $props();
+
+  let options = $state<Option[]>([]);
 
   onMount(async () => {
     const reponse = await axios.get<SecteurActivite[]>('/api/annuaire/secteurs-activite');
@@ -24,4 +34,10 @@
   });
 </script>
 
-<SelecteurSimple {options} bind:valeurSeclectionne={secteur} {optionDefautIntitule} {optionDefautSelectionnable} />
+<SelecteurSimple
+  {libelle}
+  {options}
+  bind:valeurSelectionnee={secteur}
+  {optionDefautIntitule}
+  {optionDefautSelectionnable}
+/>
