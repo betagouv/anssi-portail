@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { clic } from '../directives/actions.svelte';
+  import Lien from '../ui/Lien.svelte';
 
   let encart = $state<HTMLDivElement | undefined>();
 
@@ -43,11 +44,37 @@
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
-  .encart {
-    left: anchor(right);
+  .encart-audessus {
+    border: 0;
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
+    gap: 0;
     margin: 1rem;
-    width: min(422px, calc(100% - 2rem));
-    padding: 1rem;
+    max-width: 486px;
+    padding: 0;
+    left: anchor(right);
     top: anchor(bottom);
+    z-index: 9;
+
+    .conteneur {
+      width: min(486px, 100%);
+
+      .entete {
+        display: flex;
+        flex-direction: row-reverse;
+        padding: 1rem 1rem 0.5rem;
+      }
+
+      .contenu {
+        margin: 0 1rem 1rem;
+
+        h5 {
+          margin: 0.5rem 0 1rem;
+        }
+
+        .texte-mention-xs {
+          margin-top: 0.5rem;
+        }
+      }
+    }
   }
 </style>
