@@ -43,7 +43,7 @@
     }
 
     &.sommaire-replie {
-      z-index: 9;
+      z-index: calc(var(--ground) + 751);
 
       &:has(details[open]) {
         padding: 0;
