@@ -9,12 +9,10 @@
   export let arianeBrancheConnectee: Branche | undefined = undefined;
 </script>
 
-<section class="chapeau fond-sombre">
-  <div class="contenu-section">
-    {#if ariane}
-      <FilAriane feuille={ariane} branche={arianeBranche} brancheConnectee={arianeBrancheConnectee} />
-    {/if}
-    <h1 class="alternatif-xs-ns">{titre}</h1>
-    <p class="texte-chapo-xl-ns">{description}</p>
-  </div>
-</section>
+<dsfr-container class="chapeau fond-sombre">
+  {#if ariane}
+    <FilAriane feuille={ariane} branche={arianeBranche} brancheConnectee={arianeBrancheConnectee} />
+  {/if}
+  <h1 class="alternatif-xs-ns">{titre}</h1>
+  <p class="texte-chapo-xl-ns">{description}</p>
+</dsfr-container>
