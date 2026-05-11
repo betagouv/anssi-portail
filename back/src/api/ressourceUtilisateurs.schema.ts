@@ -3,7 +3,7 @@ import { schemas } from './schemas';
 
 export const schemaRessourceUtilisateurs = z.strictObject({
   token: z.string().nonempty('Le token est invalide'),
-  telephone: schemas.communication.numeroTelephone('Le téléphone est invalide').optional(),
+  telephone: schemas.communication.numeroTelephone('Le téléphone est invalide').or(z.literal('')).optional(),
   domainesSpecialite: z
     .array(z.string().max(256, 'Le domaine de spécialité ne peut pas dépasser 256 caractères'))
     .min(1, 'Les domaines de spécialité sont invalides'),
