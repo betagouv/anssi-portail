@@ -4,7 +4,7 @@ titreHtml: 'Accueil | MesServicesCyber'
 permalink: /
 ---
 
-<section class="chapeau fond-sombre">
+<dsfr-container class="chapeau fond-sombre">
   <div class="contenu-section">
     <hgroup>
       <h1 class="alternatif-xs">
@@ -32,7 +32,7 @@ permalink: /
       nationale de la sécurité des systèmes d'information et ses partenaires.
     </p>
   </div>
-</section>
+</dsfr-container>
 
 <script type="application/json" id="accueil-donnees-demande-diagnostic">
   {
@@ -40,7 +40,7 @@ permalink: /
   }
 </script>
 
-<section class="organisations-concernees">
+<dsfr-container class="organisations-concernees">
   <div class="contenu-section">
     <div class="toutes-organisations">
       <hgroup>
@@ -115,9 +115,9 @@ permalink: /
       ></msc-lien>
     </div>
   </div>
-</section>
+</dsfr-container>
 
-<section class="test-maturite">
+<dsfr-container class="test-maturite">
   <div class="contenu-section">
     <div class="recapitulatif">
       <hgroup>
@@ -165,23 +165,21 @@ permalink: /
       {% include composant-svelte.html id="barometre-simplifie" %}
     </div>
   </div>
-</section>
+</dsfr-container>
 
-<section class="interlocuteurs">
-  <div class="contenu-section">
-    <div class="contenu-interlocuteurs" >
-      {% include composant-svelte.html id="carrousel-des-interlocuteurs" %}
-    </div>
+<dsfr-container class="interlocuteurs">
+  <div class="contenu-interlocuteurs" >
+    {% include composant-svelte.html id="carrousel-des-interlocuteurs" %}
   </div>
-</section>
+</dsfr-container>
 
-<section class="equipe-bizdev">
+<dsfr-container class="equipe-bizdev">
   <div class="contenu-section" id="" >
     {% include composant-svelte.html id="equipe-biz-dev" %}
   </div>
-</section>
+</dsfr-container>
 
-<section class="communaute-msc">
+<dsfr-container class="communaute-msc">
   <div class="contenu-section">
     <h2>Rejoignez la communauté&nbsp;!</h2>
     <div class="contenu">
@@ -215,74 +213,72 @@ permalink: /
       alt="Dialoguer avec la communauté"
     />
   </div>
-</section>
+</dsfr-container>
 
-<section class="partenaires">
-  <div class="contenu-section">
-    <h2>
-      Ils s'engagent pour Mes&ZeroWidthSpace;Services&ZeroWidthSpace;Cyber
-    </h2>
-    <div class="logos">
-      <img
-        src="/assets/images/logo-afcdp.avif"
-        alt="Association Française des Correspondants à la protection des Données à caractère Personnel (AFCDP)"
-        width="146"
-      />
-      <img
-        src="/assets/images/logo-amrf.avif"
-        alt="Association des Maires Ruraux de France (AMRF)"
-        width="136"
-      />
-      <img
-        src="/assets/images/logo-anct.svg"
-        alt="Agence Nationale de la Cohésion des Territoires (ANCT)"
-        width="198"
-      />
-      <img
-        src="/assets/images/logo-cyber-reunion.avif"
-        alt="Cyber Réunion - Experts en Cybersécurité à La Réunion"
-        width="210"
-      />
-      <img
-        src="/assets/images/logo-elipso.avif"
-        alt="ELIPSO - Association des fabricants d’emballages plastiques et souples"
-        width="154"
-      />
-      <img
-        src="/assets/images/logo-ficam.avif"
-        alt="Fédération des industries du cinéma, de l’audiovisuel et du multimédia (FICAM)"
-        width="129"
-      />
-      <img
-        src="/assets/images/logo-gifen.avif"
-        alt="Groupement des Industriels Français de l’Energie Nucléaire (GIFEN)"
-        width="121"
-      />
-      <img
-        src="/assets/images/logo-suite-territoriale.svg"
-        alt="La Suite territoriale"
-        width="152"
-      />
-      <img
-        src="/assets/images/logo-club-dpo.avif"
-        alt="Le Club DPO - Communauté d'experts en protection des données"
-        width="140"
-      />
-      <img
-        src="/assets/images/logo-spiil.avif"
-        alt="Syndicat de la Presse Indépendante en Ligne (SPIIL)"
-        width="146"
-      />
-      <img
-        src="/assets/images/logo-umih.svg"
-        alt="Union des Métiers et des Industries de l'Hôtellerie (UMIH)"
-        width="110"
-      />
-    </div>
+<dsfr-container class="partenaires">
+  <h2>
+    Ils s'engagent pour Mes&ZeroWidthSpace;Services&ZeroWidthSpace;Cyber
+  </h2>
+  <div class="logos">
+    <img
+      src="/assets/images/logo-afcdp.avif"
+      alt="Association Française des Correspondants à la protection des Données à caractère Personnel (AFCDP)"
+      width="146"
+    />
+    <img
+      src="/assets/images/logo-amrf.avif"
+      alt="Association des Maires Ruraux de France (AMRF)"
+      width="136"
+    />
+    <img
+      src="/assets/images/logo-anct.svg"
+      alt="Agence Nationale de la Cohésion des Territoires (ANCT)"
+      width="198"
+    />
+    <img
+      src="/assets/images/logo-cyber-reunion.avif"
+      alt="Cyber Réunion - Experts en Cybersécurité à La Réunion"
+      width="210"
+    />
+    <img
+      src="/assets/images/logo-elipso.avif"
+      alt="ELIPSO - Association des fabricants d’emballages plastiques et souples"
+      width="154"
+    />
+    <img
+      src="/assets/images/logo-ficam.avif"
+      alt="Fédération des industries du cinéma, de l’audiovisuel et du multimédia (FICAM)"
+      width="129"
+    />
+    <img
+      src="/assets/images/logo-gifen.avif"
+      alt="Groupement des Industriels Français de l’Energie Nucléaire (GIFEN)"
+      width="121"
+    />
+    <img
+      src="/assets/images/logo-suite-territoriale.svg"
+      alt="La Suite territoriale"
+      width="152"
+    />
+    <img
+      src="/assets/images/logo-club-dpo.avif"
+      alt="Le Club DPO - Communauté d'experts en protection des données"
+      width="140"
+    />
+    <img
+      src="/assets/images/logo-spiil.avif"
+      alt="Syndicat de la Presse Indépendante en Ligne (SPIIL)"
+      width="146"
+    />
+    <img
+      src="/assets/images/logo-umih.svg"
+      alt="Union des Métiers et des Industries de l'Hôtellerie (UMIH)"
+      width="110"
+    />
   </div>
-</section>
+</dsfr-container>
 
-<section class="anssi">
+<dsfr-container class="anssi">
   <div class="contenu-section">
     <div class="contenu-anssi">
       <img src="assets/images/logo-anssi.svg" class="logo" alt="ANSSI" />
@@ -308,4 +304,4 @@ permalink: /
       ></msc-lien>
     </div>
   </div>
-</section>
+</dsfr-container>
