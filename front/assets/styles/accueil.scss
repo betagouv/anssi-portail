@@ -5,7 +5,7 @@
 @use '../../assets/styles/grille' as *;
 
 .chapeau.fond-sombre {
-  padding: 48px var(--gouttiere);
+  padding: 48px 0;
   .contenu-section {
     display: grid;
     grid-template-areas:
@@ -76,7 +76,8 @@
 }
 
 .organisations-concernees {
-  padding: 56px var(--gouttiere);
+  padding: 56px 0;
+
   .contenu-section {
     display: flex;
     flex-direction: column;
@@ -223,7 +224,7 @@
 }
 
 .interlocuteurs {
-  padding: 56px var(--gouttiere);
+  padding: 56px 0;
 
   .contenu-interlocuteurs {
     @include a-partir-de(lg) {
@@ -235,11 +236,11 @@
 
 .equipe-bizdev {
   background-color: var(--jaune-clair-msc);
-  padding: 56px var(--gouttiere);
+  padding: 56px 0;
 }
 
 .communaute-msc {
-  padding: 56px var(--gouttiere);
+  padding: 56px 0;
   .contenu-section {
     display: grid;
     grid-template-areas:
@@ -294,7 +295,7 @@
 
 .partenaires {
   background-color: #f6f6f6;
-  padding: 56px var(--gouttiere);
+  padding: 56px 0;
 
   .logos {
     display: flex;
@@ -311,7 +312,7 @@
 }
 
 .anssi {
-  padding: 72px var(--gouttiere);
+  padding: 72px 0;
   .contenu-section {
     display: flex;
     align-items: center;
