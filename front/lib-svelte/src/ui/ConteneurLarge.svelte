@@ -9,22 +9,18 @@
   const { mode = 'STANDARD', children }: Props = $props();
 </script>
 
-{#if mode === 'STANDARD'}
-  <dsfr-container>
-    {@render children()}
-  </dsfr-container>
-{:else}
-  <div class="conteneur-large">
+<dsfr-container fluid={mode === 'LARGE'}>
+  <div class="marges" class:large={mode === 'LARGE'}>
     {@render children()}
   </div>
-{/if}
+</dsfr-container>
 
 <style lang="scss">
   dsfr-container {
     padding-bottom: 72px;
   }
 
-  .conteneur-large {
+  .large {
     padding: 24px 24px 72px;
   }
 </style>
