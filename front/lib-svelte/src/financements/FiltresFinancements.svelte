@@ -80,10 +80,4 @@
     display: flex;
     flex-direction: column;
   }
-
-  label.colonne {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
 </style>
