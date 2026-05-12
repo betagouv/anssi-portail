@@ -74,7 +74,7 @@
   </FiltresMobile>
 {/if}
 
-<section>
+<dsfr-container>
   <div class="contenu-section">
     {#if !$profilStore}
       <FiltresBureau filtreActif={false}>
@@ -199,7 +199,7 @@
       </div>
     {/if}
   </div>
-</section>
+</dsfr-container>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
@@ -208,8 +208,8 @@
     box-sizing: border-box;
   }
 
-  section {
-    padding: 48px var(--gouttiere) 72px;
+  dsfr-container {
+    padding: 48px 0 72px;
 
     .contenu-section {
       @include a-partir-de(md) {
