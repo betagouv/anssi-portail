@@ -12,10 +12,10 @@ h5 {
   margin: 0;
 }
 
-section {
-  padding: 48px var(--gouttiere);
+dsfr-container {
+  padding: 48px 0;
   @include a-partir-de(lg) {
-    padding: 72px var(--gouttiere);
+    padding: 72px 0;
   }
 }
 
@@ -27,11 +27,11 @@ section {
 
 .test-maturite {
   @include a-partir-de(lg) {
-    padding: 24px var(--gouttiere);
+    padding: 24px 0;
   }
 
   @include a-partir-de(xl) {
-    padding: 48px var(--gouttiere);
+    padding: 48px 0;
   }
 
   .contenu-section {
@@ -44,6 +44,7 @@ section {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    margin-bottom: 48px;
 
     @include a-partir-de(lg) {
       flex-direction: row;

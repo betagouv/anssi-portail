@@ -2,7 +2,7 @@
   import BoutonsPartageTest from './BoutonsPartageTest.svelte';
 </script>
 
-<section class="partage-test">
+<dsfr-container class="partage-test">
   <div class="contenu-section">
     <div class="description">
       <h2>Encouragez d’autres organisations à agir</h2>
@@ -13,13 +13,13 @@
       <BoutonsPartageTest />
     </div>
   </div>
-</section>
+</dsfr-container>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
   .partage-test {
-    padding: 32px var(--gouttiere);
+    padding: 32px 0;
     background-color: #f6f6f6;
 
     .contenu-section {
