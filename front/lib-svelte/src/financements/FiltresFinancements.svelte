@@ -1,5 +1,6 @@
 <script lang="ts">
   import SelectRegion from '../test-maturite/SelectRegion.svelte';
+  import ChoixFiltreTypeOrganisation from './ChoixFiltreTypeOrganisation.svelte';
   import SqueletteCheckbox from './SqueletteCheckbox.svelte';
   import { financementsFiltre } from './stores/financementsFiltre.store';
   import { rechercheParRegion } from './stores/rechercheParRegion.store';
@@ -38,15 +39,7 @@
       {:else}
         {#each $financementsFiltre.typesOrganisation as type (type)}
           <li>
-            <label>
-              <input
-                type="checkbox"
-                value={type}
-                name="filtreOrganisation"
-                bind:group={$rechercheParTypeOrganisation}
-              />
-              <span class="libelle">{type}</span>
-            </label>
+            <ChoixFiltreTypeOrganisation valeur={type} libelle={type} />
           </li>
         {/each}
       {/if}
