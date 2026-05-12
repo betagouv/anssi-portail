@@ -78,20 +78,22 @@
 
 <NavigationTertiaire {liens} bind:lienActif />
 
-<div class="contenu">
-  {#if lienActif === '#presentation'}
-    <Presentation />
-  {:else if lienActif === '#exigences'}
-    <ExigencesNis2 {featureFlagNis2CyFun23} />
-  {:else if lienActif === '#solutions'}
-    <Solutions {itemsCyber} />
-  {:else if lienActif === '#documentation'}
-    <DocumentationNis2 />
-  {/if}
-</div>
+<hr />
+
+{#if lienActif === '#presentation'}
+  <Presentation />
+{:else if lienActif === '#exigences'}
+  <ExigencesNis2 {featureFlagNis2CyFun23} />
+{:else if lienActif === '#solutions'}
+  <Solutions {itemsCyber} />
+{:else if lienActif === '#documentation'}
+  <DocumentationNis2 />
+{/if}
 
 <style lang="scss">
-  .contenu {
-    margin-top: 48px;
+  hr {
+    border: 0;
+    height: 24px;
+    margin: 0;
   }
 </style>

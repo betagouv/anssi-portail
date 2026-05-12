@@ -1,7 +1,7 @@
 <script lang="ts"></script>
 
 <dsfr-container id="documentation">
-  <div class="contenu">
+  <div class="contenu-section">
     <div class="presentation">
       <h2>Présentation de la directive NIS 2</h2>
       <ul>
@@ -49,7 +49,7 @@
   @use '../../../assets/styles/responsive' as *;
 
   dsfr-container {
-    .contenu {
+    .contenu-section {
       display: flex;
       flex-direction: column;
       margin: 24px auto 72px;
