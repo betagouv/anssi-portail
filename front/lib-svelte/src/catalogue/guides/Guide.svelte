@@ -44,7 +44,7 @@
 </script>
 
 {#if guide}
-  <section class="chapeau">
+  <dsfr-container class="chapeau">
     <div class="contenu-section">
       <FilAriane branche={{ nom: 'Catalogue cyber', lien: '/catalogue#guides' }} feuille={guide.nom} />
       <div class="badges-collections">
@@ -60,7 +60,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </dsfr-container>
 
   <div class="sommaire sommaire-replie">
     <details>
@@ -83,7 +83,7 @@
     </details>
   </div>
 
-  <div class="article">
+  <dsfr-container class="article">
     <div class="contenu-section">
       <div class="sommaire sommaire-deplie">
         <ul>
@@ -100,7 +100,7 @@
         </div>
       </div>
 
-      <div class="contenu">
+      <div class="contenu-article">
         <div class="entete">
           {#if !$profilStore}
             <div class="bandeau-infolettre">
@@ -151,7 +151,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </dsfr-container>
   {#if guide.id === '/guides/guide-dhygiene-informatique'}
     <EncartLienVersDemandeDiagnostic />
   {/if}
@@ -170,7 +170,7 @@
 
   .chapeau {
     background: #f4f4f4 url('/assets/images/motif-fond-service.avif');
-    padding: 24px var(--gouttiere);
+    padding: 24px 0;
 
     .contenu-section {
       display: flex;
@@ -227,7 +227,7 @@
   }
 
   .article {
-    padding: 24px var(--gouttiere) 0;
+    padding: 24px 0 0;
 
     @include a-partir-de(lg) {
       padding-top: 32px;
@@ -242,7 +242,7 @@
         gap: 32px;
       }
 
-      .contenu {
+      .contenu-article {
         .entete {
           display: flex;
           flex-direction: column;
