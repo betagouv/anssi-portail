@@ -1,7 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { validationChamp } from '../directives/validationChamp';
   import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
@@ -204,30 +203,27 @@
       <Formulaire classe="formulaire-inscription" bind:this={formulaireEtape3}>
         <div class="contenu-etape">
           <div class="bloc">
-            <div class="case-a-cocher">
-              <input
-                id="infolettreAcceptee"
-                type="checkbox"
-                bind:checked={formulaireInscription.infolettreAcceptee}
-                name="infolettreAcceptee"
-              />
-              <label for="infolettreAcceptee"> J'accepte de recevoir la lettre d'information MesServicesCyber. </label>
-            </div>
-            <div class="case-a-cocher cgu">
-              <input
-                id="cguAcceptees"
-                type="checkbox"
-                bind:checked={formulaireInscription.cguAcceptees}
-                name="cguAcceptees"
-                required
-                use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
-              />
-              <label for="cguAcceptees" class="requis">
-                J'accepte les
-                <Lien href="/cgu" libelle="conditions générales d'utilisation" neutre></Lien>
-                de MesServicesCyber
-              </label>
-            </div>
+            <dsfr-checkbox
+              id="infolettreAcceptee"
+              name="infolettreAcceptee"
+              value={formulaireInscription.infolettreAcceptee}
+              onvaluechanged={(e: CustomEvent) => (formulaireInscription.infolettreAcceptee = e.detail)}
+              errorMessage="Ce champ est obligatoire. Veuillez le cocher."
+              label="J'accepte de recevoir la lettre d'information MesServicesCyber."
+            ></dsfr-checkbox>
+
+            <dsfr-checkbox
+              id="cguAcceptees"
+              name="cguAcceptees"
+              value={formulaireInscription.cguAcceptees}
+              onvaluechanged={(e: CustomEvent) => (formulaireInscription.cguAcceptees = e.detail)}
+              errorMessage="Ce champ est obligatoire. Veuillez le cocher."
+              required
+              ><span class="requis">
+                J'accepte les&nbsp;<Lien href="/cgu" libelle=" conditions générales d'utilisation" neutre></Lien>
+                de MesServicesCyber</span
+              >
+            </dsfr-checkbox>
           </div>
         </div>
       </Formulaire>
@@ -252,10 +248,6 @@
     font-size: 1rem;
     line-height: 1.5rem;
     font-weight: 500;
-  }
-
-  input {
-    box-sizing: border-box;
   }
 
   .creation-compte {
@@ -345,63 +337,13 @@
     font-size: 1rem;
   }
 
-  label {
-    font-weight: normal;
-    margin: 0;
-  }
-
-  .case-a-cocher {
+  dsfr-checkbox {
     background-color: #f6f6f6;
     border-radius: 6px;
     padding: 16px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-  }
-
-  input[type='checkbox'] {
-    transform: none;
-  }
-
-  .cgu #cguAcceptees {
-    order: -1;
-  }
-
-  .cgu label {
-    order: -1;
-    a {
-      display: inline-block;
-    }
-  }
-
-  :global(.creation-compte .case-et-label),
-  .case-a-cocher {
-    display: flex;
-    gap: 8px;
-  }
-
-  :global(.creation-compte input[type='checkbox']) {
-    appearance: none;
-    border: 1px solid var(--border-action-high-blue-france);
-    border-radius: 4px;
-    width: 24px;
-    height: 24px;
-    margin: 0;
-    cursor: pointer;
-
-    &:checked {
-      background-color: var(--background-active-blue-france);
-
-      &::before {
-        content: '';
-        display: block;
-        margin: auto;
-        width: 6px;
-        height: 12px;
-        border-right: 2px var(--border-active-blue-france) solid;
-        border-bottom: 2px var(--border-active-blue-france) solid;
-        transform: translateY(2px) rotate(0.12turn);
-      }
-    }
+    margin-bottom: 0.5rem;
   }
 </style>
