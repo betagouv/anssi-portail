@@ -1,7 +1,8 @@
 <script lang="ts">
   import { Source } from './Catalogue.types';
-  import { rechercheParSource } from './stores/rechercheParSource.store';
+  import ChoixFiltreSource from './ChoixFiltreSource.svelte';
   import { nombreResultats } from './stores/nombreResultats.store';
+  import { rechercheParSource } from './stores/rechercheParSource.store';
 
   let anssiPartielles = false;
   $: if (
@@ -31,6 +32,8 @@
       rechercheParSource.retire(Source.ANSSI);
     }
   };
+
+  $: cocheToutesLesSources = $rechercheParSource.includes(Source.ANSSI_TOUTES);
 </script>
 
 <fieldset>
@@ -40,32 +43,16 @@
       type="checkbox"
       value={Source.ANSSI_TOUTES}
       bind:indeterminate={anssiPartielles}
-      bind:group={$rechercheParSource}
+      checked={cocheToutesLesSources}
       on:click={gereCocheANSSI}
     />
     <span class="libelle">Toutes les sources ANSSI</span>
     <span class="compte">{$nombreResultats.parSource[Source.ANSSI_TOUTES]}</span>
   </label>
   <fieldset>
-    <label>
-      <input type="checkbox" value={Source.CERTFR} bind:group={$rechercheParSource} />
-      <span class="libelle">CERT-FR</span>
-      <span class="compte">{$nombreResultats.parSource[Source.CERTFR]}</span>
-    </label>
-    <label>
-      <input type="checkbox" value={Source.INNOVATION_ANSSI} bind:group={$rechercheParSource} />
-      <span class="libelle">Innovation ANSSI</span>
-      <span class="compte">{$nombreResultats.parSource[Source.INNOVATION_ANSSI]}</span>
-    </label>
-    <label>
-      <input type="checkbox" value={Source.ANSSI} bind:group={$rechercheParSource} />
-      <span class="libelle">ANSSI</span>
-      <span class="compte">{$nombreResultats.parSource[Source.ANSSI]}</span>
-    </label>
+    <ChoixFiltreSource valeur={Source.CERTFR} libelle="CERT-FR" />
+    <ChoixFiltreSource valeur={Source.INNOVATION_ANSSI} libelle="Innovation ANSSI" />
+    <ChoixFiltreSource valeur={Source.ANSSI} libelle="ANSSI" />
   </fieldset>
-  <label>
-    <input type="checkbox" value={Source.PARTENAIRES} bind:group={$rechercheParSource} />
-    <span class="libelle">Partenaires</span>
-    <span class="compte">{$nombreResultats.parSource[Source.PARTENAIRES]}</span>
-  </label>
+  <ChoixFiltreSource valeur={Source.PARTENAIRES} libelle="Partenaires" />
 </fieldset>
