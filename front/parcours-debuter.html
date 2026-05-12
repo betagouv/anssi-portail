@@ -16,7 +16,7 @@ titreHtml: 'Cybersécurité : se lancer ! | MesServicesCyber'
   }
 </script>
 
-<section class="chapeau fond-sombre">
+<dsfr-container class="chapeau fond-sombre">
   <div class="contenu-section">
     {% include composant-svelte.html id="fil-ariane" %}
     <h1 class="alternatif-xs-ns">Les services pour se lancer</h1>
@@ -36,10 +36,9 @@ titreHtml: 'Cybersécurité : se lancer ! | MesServicesCyber'
       ></msc-lien>
     </div>
   </div>
-</section>
+</dsfr-container>
 
-<section class="sommaire">
-  <div class="contenu-section">
+<dsfr-container class="sommaire">
     <div class="controle-segmente">
       {% for action in site.data.parcours-debuter %}
       <a
@@ -49,8 +48,7 @@ titreHtml: 'Cybersécurité : se lancer ! | MesServicesCyber'
       >
       {% endfor %}
     </div>
-  </div>
-</section>
+</dsfr-container>
 
 {% for action in site.data.parcours-debuter %}
   {%assign indexModulo2 = forloop.index0 | modulo: 2 %}

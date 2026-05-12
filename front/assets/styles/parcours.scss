@@ -3,8 +3,8 @@
 
 @use '../../assets/styles/responsive' as *;
 
-section {
-  padding: 24px var(--gouttiere);
+dsfr-container {
+  padding: 24px 0;
 }
 
 .sommaire {
@@ -14,14 +14,14 @@ section {
   }
 
   margin-top: 16px;
-  padding: 16px var(--gouttiere) 0;
+  padding: 16px 0 0;
   background: white;
   position: sticky;
   top: 0;
   z-index: 2;
 }
 
-section.action {
+dsfr-container.action {
   padding-top: 48px;
   padding-bottom: 48px;
   scroll-margin-top: 90px; /* Hauteur de la barre de navigation */
