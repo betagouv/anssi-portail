@@ -1,6 +1,5 @@
 <script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte';
-  import { validationChamp } from '../directives/validationChamp';
   import Alerte from '../ui/Alerte.svelte';
   import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
@@ -153,24 +152,23 @@
       </div>
     {/if}
 
-    <div class="case-a-cocher cgu">
-      <input
-        id="cguAcceptees"
-        type="checkbox"
-        required
-        bind:checked={cguSontValidees}
-        use:validationChamp={'Ce champ est obligatoire. Veuillez le cocher.'}
-      />
-      <label for="cguAcceptees" class="requis">
+    <dsfr-checkbox
+      id="cgu"
+      name="cgu"
+      value={cguSontValidees}
+      onvaluechanged={(e: CustomEvent) => (cguSontValidees = e.detail)}
+      errorMessage="Ce champ est obligatoire. Veuillez le cocher."
+      required
+    >
+      <span>
         J'accepte les <Lien
           href="https://monaide.cyber.gouv.fr/cgu"
           blank
           libelle="conditions générales d'utilisation"
           neutre
         ></Lien> de MonAideCyber au nom de l’entité que je représente.
-      </label>
-    </div>
-
+      </span>
+    </dsfr-checkbox>
     <div>
       <Bouton
         type="primaire"
@@ -239,66 +237,6 @@
     }
   }
 
-  input[type='checkbox'] {
-    appearance: none;
-    border: 1px solid var(--border-action-high-blue-france);
-    border-radius: 4px;
-    min-width: 24px;
-    height: 24px;
-    margin: 0;
-    cursor: pointer;
-
-    &:checked {
-      background-color: var(--background-active-blue-france);
-
-      &::before {
-        content: '';
-        display: block;
-        margin: auto;
-        width: 6px;
-        height: 12px;
-        border-right: 2px var(--border-active-blue-france) solid;
-        border-bottom: 2px var(--border-active-blue-france) solid;
-        transform: translateY(2px) rotate(0.12turn);
-      }
-    }
-
-    &:indeterminate {
-      &::before {
-        width: 9px;
-        height: 10px;
-        border-right: none;
-        transform: none;
-      }
-    }
-  }
-
-  .case-a-cocher {
-    display: grid;
-    grid-template-areas:
-      'input label'
-      'erreur erreur';
-    gap: 8px;
-    margin-bottom: 32px;
-
-    input {
-      grid-area: input;
-    }
-
-    label {
-      grid-area: label;
-    }
-
-    :global(.erreur-champ-saisie) {
-      grid-area: erreur;
-      margin-top: 0;
-    }
-  }
-
-  input[type='checkbox'] {
-    transform: none;
-  }
-
   .lien {
     display: inline-flex;
   }
@@ -316,5 +254,9 @@
     font-size: 14px;
     margin-top: 16px;
     margin-bottom: 16px;
+  }
+
+  dsfr-checkbox {
+    margin-bottom: 32px;
   }
 </style>
