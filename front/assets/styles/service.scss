@@ -5,7 +5,7 @@
 
 .chapeau {
   background: #f4f4f4 url('/assets/images/motif-fond-service.avif');
-  padding: 24px var(--gouttiere);
+  padding: 24px 0;
 
   .contenu-section {
     display: flex;
@@ -76,7 +76,7 @@
 }
 
 .article {
-  padding: 40px var(--gouttiere) 0;
+  padding: 40px 0 0;
 
   @include a-partir-de(lg) {
     padding-top: 48px;
@@ -92,9 +92,7 @@
     }
   }
 
-  & > .contenu {
-    padding-top: 40px;
-
+  & > .contenu-article {
     @include a-partir-de(lg) {
       padding-top: 48px;
       padding-left: 0;

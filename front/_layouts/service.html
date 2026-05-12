@@ -16,35 +16,33 @@ script: /scripts/service.js
 </script>
 
 
-<section class="chapeau">
-  <div class="contenu-section">
-    {% include composant-svelte.html id="fil-ariane" %}
-    <div class="resume">
-      <div>
-        <span class="badge {{ page.typologie }}">{{ page.typologie | capitalize }}</span>
-        <h1>{{page.nom}}</h1>
-        <p>{{page.description}}</p>
-        {% if page.lien %}
-        <div class="zone-actions">
-          <msc-lien
-            apparence="bouton"
-            blank
-            class="lien-externe-produit"
-            data-source="Page produit"
-            data-cible="{{page.nom}}"
-            href="{{page.lien}}"
-            libelle="Accéder au service"
-            taille="lg"
-          ></msc-lien>
-        </div>
-        {%endif%}
+<dsfr-container class="chapeau">
+  {% include composant-svelte.html id="fil-ariane" %}
+  <div class="resume">
+    <div>
+      <span class="badge {{ page.typologie }}">{{ page.typologie | capitalize }}</span>
+      <h1>{{page.nom}}</h1>
+      <p>{{page.description}}</p>
+      {% if page.lien %}
+      <div class="zone-actions">
+        <msc-lien
+          apparence="bouton"
+          blank
+          class="lien-externe-produit"
+          data-source="Page produit"
+          data-cible="{{page.nom}}"
+          href="{{page.lien}}"
+          libelle="Accéder au service"
+          taille="lg"
+        ></msc-lien>
       </div>
-      <div class="conteneur-illustration">
-        <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran" />
-      </div>
+      {%endif%}
+    </div>
+    <div class="conteneur-illustration">
+      <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran" />
     </div>
   </div>
-</section>
+</dsfr-container>
 
 <div class="sommaire sommaire-replie">
   <details>
@@ -66,9 +64,8 @@ script: /scripts/service.js
   </details>
 </div>
 
-<div class="article">
+<dsfr-container class="article">
   <div class="contenu-section">
-
     <div class="sommaire sommaire-deplie">
       <ul>
         <li class="actif"><a href="#explication">De quoi s'agit-il&nbsp;?</a></li>
@@ -84,8 +81,7 @@ script: /scripts/service.js
         {% endfor %}
       </div>
     </div>
-
-    <div class="contenu">
+    <div class="contenu-article">
       <section class="explication" id="explication">
         <img src="/assets/images/illustrations-services/{{ page.illustration }}" alt="Capture d’écran" />
         <div class="actions">
@@ -138,4 +134,4 @@ script: /scripts/service.js
       </div>
     </div>
   </div>
-</div>
+</dsfr-container>
