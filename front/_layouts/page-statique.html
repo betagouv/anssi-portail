@@ -3,8 +3,7 @@ layout: defaut
 styles: /assets/styles/page-statique.css
 ---
 
-<section class="chapeau fond-sombre chapeau-page-statique">
-  <div class="contenu-section">
+<dsfr-container class="chapeau fond-sombre chapeau-page-statique">
     {% if page.filAriane %}
     <script type="application/json" id="donnees">
       {
@@ -18,9 +17,8 @@ styles: /assets/styles/page-statique.css
     {% if page.sousTitrePageStatique %}
     <p class="texte-chapo-xl-ns">{{page.sousTitrePageStatique}}</p>
     {% endif %}
-  </div>
-</section>
+</dsfr-container>
 
-<section class="contenu-page-statique">
+<dsfr-container class="contenu-page-statique">
   <div class="contenu-section">{{content}}</div>
-</section>
+</dsfr-container>
