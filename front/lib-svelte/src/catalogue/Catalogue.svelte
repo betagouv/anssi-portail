@@ -2,6 +2,8 @@
   import { onMount } from 'svelte';
   import { profilStore } from '../stores/profil.store';
   import ChampRecherche from '../ui/ChampRecherche.svelte';
+  import FiltresBureau from '../ui/FiltresBureau.svelte';
+  import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Hero from '../ui/Hero.svelte';
   import CarteItem from './CarteItem.svelte';
   import { type BesoinCyber, DroitAcces, Source, Typologie } from './Catalogue.types';
@@ -13,6 +15,7 @@
   import { CollectionGuide, Langue } from './Guide.types';
   import FiltreCollection from './guides/FiltreCollection.svelte';
   import FiltreLangue from './guides/FiltreLangue.svelte';
+  import InciteASAbonner from './guides/InciteASAbonner.svelte';
   import { catalogueFiltre } from './stores/catalogueFiltre.store';
   import { chargeGuidesDansLeStore } from './stores/guides/guides.store';
   import { guidesFiltres } from './stores/guides/guidesFiltres.store';
@@ -24,9 +27,6 @@
   import { rechercheParTypologie } from './stores/rechercheParTypologie.store';
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
-  import FiltresMobile from '../ui/FiltresMobile.svelte';
-  import FiltresBureau from '../ui/FiltresBureau.svelte';
-  import InciteASAbonner from './guides/InciteASAbonner.svelte';
 
   const idsCollectionsGuide: Record<CollectionGuide, string> = {
     [CollectionGuide.LES_ESSENTIELS]: 'essentiels',
@@ -129,11 +129,9 @@
   <input type="button" class="bouton primaire" value="Réinitialiser les filtres" onclick={reinitialiseFiltres} />
 </FiltresMobile>
 
-<section class="barre-recherche-mobile">
-  <div class="contenu-section">
-    <ChampRecherche bind:recherche={$rechercheTextuelle} />
-  </div>
-</section>
+<dsfr-container class="barre-recherche-mobile">
+  <ChampRecherche bind:recherche={$rechercheTextuelle} />
+</dsfr-container>
 
 <div class="controle-segmente">
   <button
@@ -150,53 +148,36 @@
   </button>
 </div>
 
-<div class="contenu-catalogue">
-  <div class="contenu-section">
-    {#if !$profilStore && sectionActive === 'guides'}
-      <div class="entete">
-        <InciteASAbonner />
-      </div>
-    {/if}
+<dsfr-container class="contenu-catalogue">
+  {#if !$profilStore && sectionActive === 'guides'}
+    <div class="entete">
+      <InciteASAbonner />
+    </div>
+  {/if}
 
-    <div class="grille">
-      <FiltresBureau filtreActif={$recherches.filtreActif}>
-        <ChampRecherche slot="avant-entete" bind:recherche={$rechercheTextuelle} />
-        {#if sectionActive === 'guides'}
-          <FiltreLangue />
-          <FiltreCollection />
-        {:else}
-          <FiltreAccessibilite />
-          <FiltreTypologie />
-          <FiltreSource />
-        {/if}
-        <input type="button" class="bouton primaire" value="Réinitialiser les filtres" onclick={reinitialiseFiltres} />
-      </FiltresBureau>
-
+  <div class="grille">
+    <FiltresBureau filtreActif={$recherches.filtreActif}>
+      <ChampRecherche slot="avant-entete" bind:recherche={$rechercheTextuelle} />
       {#if sectionActive === 'guides'}
-        {#each $guidesFiltres.resultats as guide (guide.id)}
-          <CarteItem item={guide} avecBoutonFavori />
-        {:else}
-          <div class="aucun-resultat">
-            <img src="/assets/images/homme-cherchant-avec-loupe.svg" alt="Aucun résultat" />
-            {#if chargement}
-              <h1>Chargement...</h1>
-            {:else}
-              <h1>Désolé, aucun résultat trouvé</h1>
-              <input
-                type="button"
-                class="bouton primaire"
-                value="Réinitialiser les filtres"
-                onclick={reinitialiseFiltres}
-              />
-            {/if}
-          </div>
-        {/each}
+        <FiltreLangue />
+        <FiltreCollection />
       {:else}
-        {#each $catalogueFiltre.resultats as itemCyber (itemCyber.id)}
-          <CarteItem item={itemCyber} avecBoutonFavori />
-        {:else}
-          <div class="aucun-resultat">
-            <img src="/assets/images/homme-cherchant-avec-loupe.svg" alt="Aucun résultat" />
+        <FiltreAccessibilite />
+        <FiltreTypologie />
+        <FiltreSource />
+      {/if}
+      <input type="button" class="bouton primaire" value="Réinitialiser les filtres" onclick={reinitialiseFiltres} />
+    </FiltresBureau>
+
+    {#if sectionActive === 'guides'}
+      {#each $guidesFiltres.resultats as guide (guide.id)}
+        <CarteItem item={guide} avecBoutonFavori />
+      {:else}
+        <div class="aucun-resultat">
+          <img src="/assets/images/homme-cherchant-avec-loupe.svg" alt="Aucun résultat" />
+          {#if chargement}
+            <h1>Chargement...</h1>
+          {:else}
             <h1>Désolé, aucun résultat trouvé</h1>
             <input
               type="button"
@@ -204,12 +185,27 @@
               value="Réinitialiser les filtres"
               onclick={reinitialiseFiltres}
             />
-          </div>
-        {/each}
-      {/if}
-    </div>
+          {/if}
+        </div>
+      {/each}
+    {:else}
+      {#each $catalogueFiltre.resultats as itemCyber (itemCyber.id)}
+        <CarteItem item={itemCyber} avecBoutonFavori />
+      {:else}
+        <div class="aucun-resultat">
+          <img src="/assets/images/homme-cherchant-avec-loupe.svg" alt="Aucun résultat" />
+          <h1>Désolé, aucun résultat trouvé</h1>
+          <input
+            type="button"
+            class="bouton primaire"
+            value="Réinitialiser les filtres"
+            onclick={reinitialiseFiltres}
+          />
+        </div>
+      {/each}
+    {/if}
   </div>
-</div>
+</dsfr-container>
 
 <style lang="scss">
   .controle-segmente {
@@ -227,9 +223,9 @@
 
   .contenu-section {
     flex-direction: column;
+  }
 
-    .entete {
-      padding-bottom: 0.5rem;
-    }
+  .entete {
+    padding-bottom: 0.5rem;
   }
 </style>

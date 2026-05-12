@@ -10,34 +10,32 @@ styles:
 {% include script-donnees-json.html repartition=site.data.catalogue %}
 {% include encart-nis2.html fond='sombre' %}
 
-<div class="encart fond-clair">
-  <div class="contenu-section">
-    <h1>Découvrir notre sélection de services et ressources</h1>
-    <div class="liste-parcours">
-      <div class="carte parcours">
-        <img
-          src="/assets/images/debuter-cyber.avif"
-          alt="Illustration débutant cyber"
-        />
-        <h2>Les services pour se lancer en cybersécurité</h2>
-        <p>
-          Découvrez les services et les ressources pour aider votre organisation
-          à se lancer dans une démarche de renforcement de la cybersécurité.
-        </p>
-        <msc-lien href="/parcours-debuter" libelle="Découvrir" icone="arrow-right-line" icone-a-droite></msc-lien>
-      </div>
-      <div class="carte parcours">
-        <img
-          src="/assets/images/approfondir-cyber.avif"
-          alt="Illustration approfondir cyber"
-        />
-        <h2>Les services pour approfondir la cybersécurité</h2>
-        <p>
-          Découvrez les services et les ressources pour aider votre organisation
-          à approfondir la démarche de renforcement de la cybersécurité.
-        </p>
-        <msc-lien href="/parcours-approfondir" libelle="Découvrir" icone="arrow-right-line" icone-a-droite></msc-lien>
-      </div>
+<dsfr-container class="encart fond-clair">
+  <h1>Découvrir notre sélection de services et ressources</h1>
+  <div class="liste-parcours">
+    <div class="carte parcours">
+      <img
+        src="/assets/images/debuter-cyber.avif"
+        alt="Illustration débutant cyber"
+      />
+      <h2>Les services pour se lancer en cybersécurité</h2>
+      <p>
+        Découvrez les services et les ressources pour aider votre organisation
+        à se lancer dans une démarche de renforcement de la cybersécurité.
+      </p>
+      <msc-lien href="/parcours-debuter" libelle="Découvrir" icone="arrow-right-line" icone-a-droite></msc-lien>
+    </div>
+    <div class="carte parcours">
+      <img
+        src="/assets/images/approfondir-cyber.avif"
+        alt="Illustration approfondir cyber"
+      />
+      <h2>Les services pour approfondir la cybersécurité</h2>
+      <p>
+        Découvrez les services et les ressources pour aider votre organisation
+        à approfondir la démarche de renforcement de la cybersécurité.
+      </p>
+      <msc-lien href="/parcours-approfondir" libelle="Découvrir" icone="arrow-right-line" icone-a-droite></msc-lien>
     </div>
   </div>
-</div>
+</dsfr-container>

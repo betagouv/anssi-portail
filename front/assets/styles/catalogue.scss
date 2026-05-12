@@ -159,15 +159,13 @@
 
 .contenu-catalogue {
   & {
-    padding: 32px var(--gouttiere) 80px;
+    padding: 32px 0 80px;
   }
 }
 
 .barre-recherche-mobile {
-  .contenu-section {
-    padding: 32px var(--gouttiere) 0;
-    box-sizing: border-box;
-  }
+  padding: 32px 0 0;
+  box-sizing: border-box;
   @include a-partir-de(lg) {
     display: none;
   }
@@ -275,7 +273,7 @@
   }
 
   @include a-partir-de(lg) {
-    padding: 72px var(--gouttiere);
+    padding: 72px 0;
   }
 
   .carte.parcours {
