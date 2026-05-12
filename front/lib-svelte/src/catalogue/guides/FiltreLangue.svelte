@@ -1,19 +1,10 @@
 <script lang="ts">
   import { Langue } from '../Guide.types';
-  import { nombreGuides } from '../stores/guides/nombreGuides.store';
-  import { rechercheParLangue } from '../stores/guides/rechercheParLangue.store';
+  import ChoixFiltreLangue from './ChoixFiltreLangue.svelte';
 </script>
 
 <fieldset>
   <legend>Langue</legend>
-  <label>
-    <input type="checkbox" value={Langue.FR} bind:group={$rechercheParLangue} />
-    <span class="libelle">Français</span>
-    <span class="compte">{$nombreGuides.parLangue[Langue.FR]}</span>
-  </label>
-  <label>
-    <input type="checkbox" value={Langue.EN} bind:group={$rechercheParLangue} />
-    <span class="libelle">Anglais</span>
-    <span class="compte">{$nombreGuides.parLangue[Langue.EN]}</span>
-  </label>
+  <ChoixFiltreLangue valeur={Langue.FR} libelle="Français" />
+  <ChoixFiltreLangue valeur={Langue.EN} libelle="Anglais " />
 </fieldset>
