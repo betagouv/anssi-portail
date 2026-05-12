@@ -2,6 +2,7 @@
   import { CollectionGuide } from '../Guide.types';
   import { nombreGuides } from '../stores/guides/nombreGuides.store';
   import { rechercheParCollection } from '../stores/guides/rechercheParCollection.store';
+  import ChoixFiltreCollection from './ChoixFiltreCollection.svelte';
 
   $: toutesLesExpertisesTechniques =
     $rechercheParCollection.includes(CollectionGuide.LES_ESSENTIELS) &&
@@ -49,58 +50,12 @@
     </span>
   </label>
   <fieldset>
-    <label>
-      <input type="checkbox" value={CollectionGuide.LES_ESSENTIELS} bind:group={$rechercheParCollection} />
-      <span class="libelle">{CollectionGuide.LES_ESSENTIELS}</span>
-      <span class="compte">
-        {$nombreGuides.parCollection[CollectionGuide.LES_ESSENTIELS]}
-      </span>
-    </label>
-    <label>
-      <input type="checkbox" value={CollectionGuide.LES_FONDAMENTAUX} bind:group={$rechercheParCollection} />
-      <span class="libelle">{CollectionGuide.LES_FONDAMENTAUX}</span>
-      <span class="compte">
-        {$nombreGuides.parCollection[CollectionGuide.LES_FONDAMENTAUX]}
-      </span>
-    </label>
-    <label>
-      <input type="checkbox" value={CollectionGuide.AUTRE} bind:group={$rechercheParCollection} />
-      <span class="libelle">{CollectionGuide.AUTRE}</span>
-      <span class="compte">
-        {$nombreGuides.parCollection[CollectionGuide.AUTRE]}
-      </span>
-    </label>
+    <ChoixFiltreCollection valeur={CollectionGuide.LES_ESSENTIELS} />
+    <ChoixFiltreCollection valeur={CollectionGuide.LES_FONDAMENTAUX} />
+    <ChoixFiltreCollection valeur={CollectionGuide.AUTRE} />
   </fieldset>
-
-  <label>
-    <input type="checkbox" value={CollectionGuide.CRISE_CYBER} bind:group={$rechercheParCollection} />
-    <span class="libelle">{CollectionGuide.CRISE_CYBER}</span>
-    <span class="compte">
-      {$nombreGuides.parCollection[CollectionGuide.CRISE_CYBER]}
-    </span>
-  </label>
-
-  <label>
-    <input type="checkbox" value={CollectionGuide.GESTION_DES_RISQUES_CYBER} bind:group={$rechercheParCollection} />
-    <span class="libelle">{CollectionGuide.GESTION_DES_RISQUES_CYBER}</span>
-    <span class="compte">
-      {$nombreGuides.parCollection[CollectionGuide.GESTION_DES_RISQUES_CYBER]}
-    </span>
-  </label>
-
-  <label>
-    <input type="checkbox" value={CollectionGuide.SUPERVISION_DE_SECURITE} bind:group={$rechercheParCollection} />
-    <span class="libelle">{CollectionGuide.SUPERVISION_DE_SECURITE}</span>
-    <span class="compte">
-      {$nombreGuides.parCollection[CollectionGuide.SUPERVISION_DE_SECURITE]}
-    </span>
-  </label>
-
-  <label>
-    <input type="checkbox" value={CollectionGuide.REMEDIATION} bind:group={$rechercheParCollection} />
-    <span class="libelle">{CollectionGuide.REMEDIATION}</span>
-    <span class="compte">
-      {$nombreGuides.parCollection[CollectionGuide.REMEDIATION]}
-    </span>
-  </label>
+  <ChoixFiltreCollection valeur={CollectionGuide.CRISE_CYBER} />
+  <ChoixFiltreCollection valeur={CollectionGuide.GESTION_DES_RISQUES_CYBER} />
+  <ChoixFiltreCollection valeur={CollectionGuide.SUPERVISION_DE_SECURITE} />
+  <ChoixFiltreCollection valeur={CollectionGuide.REMEDIATION} />
 </fieldset>
