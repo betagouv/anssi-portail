@@ -116,104 +116,102 @@
     arianeBrancheConnectee={enSessionGroupe ? { nom: 'Maturité cyber', lien: '/ma-maturite' } : undefined}
   />
 
-  <section class="test-maturite">
-    <div class="contenu-section">
-      {#if introFaite}
-        {#if organisateurSessionGroupe}
-          <lab-anssi-alerte
-            description="En tant qu’organisateur, vos réponses ne seront pas enregistrées ni prises en compte dans les résultats du groupe."
-          ></lab-anssi-alerte>
-        {/if}
-        <div class="contenu-test" bind:this={contenuTest}>
-          <div class="formulaire">
-            <p class="etape">
-              Étape {$questionnaireStore.questionCourante + 1} sur 7
-            </p>
-            <h5>
-              {etapesTestMaturite[$questionnaireStore.questionCourante].titre}
-            </h5>
-            <Etapier etapeCourante={$questionnaireStore.questionCourante} nombreEtapes={7} />
-            <h2>
-              <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-              {@html aseptiseHtml(etapesTestMaturite[$questionnaireStore.questionCourante].question)}
-            </h2>
+  <dsfr-container class="test-maturite">
+    {#if introFaite}
+      {#if organisateurSessionGroupe}
+        <lab-anssi-alerte
+          description="En tant qu’organisateur, vos réponses ne seront pas enregistrées ni prises en compte dans les résultats du groupe."
+        ></lab-anssi-alerte>
+      {/if}
+      <div class="contenu-test" bind:this={contenuTest}>
+        <div class="formulaire">
+          <p class="etape">
+            Étape {$questionnaireStore.questionCourante + 1} sur 7
+          </p>
+          <h5>
+            {etapesTestMaturite[$questionnaireStore.questionCourante].titre}
+          </h5>
+          <Etapier etapeCourante={$questionnaireStore.questionCourante} nombreEtapes={7} />
+          <h2>
+            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+            {@html aseptiseHtml(etapesTestMaturite[$questionnaireStore.questionCourante].question)}
+          </h2>
 
-            {#if montreProposition}
-              <div class="propositions">
-                {#each etapesTestMaturite[$questionnaireStore.questionCourante].propositions as proposition, index (proposition)}
-                  <label>
-                    <input type="radio" bind:group={reponseCourante} value={index} />
-                    <span>{index + 1}.&nbsp;{proposition}</span>
-                  </label>
-                {/each}
-              </div>
+          {#if montreProposition}
+            <div class="propositions">
+              {#each etapesTestMaturite[$questionnaireStore.questionCourante].propositions as proposition, index (proposition)}
+                <label>
+                  <input type="radio" bind:group={reponseCourante} value={index} />
+                  <span>{index + 1}.&nbsp;{proposition}</span>
+                </label>
+              {/each}
+            </div>
+
+            <div class="commandes">
+              <Lien href="/" libelle="Retour à l'accueil"></Lien>
+
+              <input
+                type="button"
+                class="bouton secondaire taille-moyenne"
+                value="Précédent"
+                disabled={$questionnaireStore.questionCourante === 0}
+                on:click={reviensEnArriere}
+              />
+              <input
+                type="button"
+                class="bouton primaire taille-moyenne"
+                value="Question suivante"
+                disabled={reponseCourante === null}
+                on:click={valideReponse}
+              />
+            </div>
+          {:else}
+            <div class="informations-complementaires">
+              <SelectSecteurActivite
+                libelle="Quel est le secteur d’activité de votre organisation&nbsp;?"
+                bind:secteur
+              />
+              <SelectRegion libelle="Dans quelle région / territoire se trouve votre organisation ?" bind:region />
+              <SelectTailleOrganisation
+                libelle="Quelle est la taille de votre organisation ?"
+                bind:tailleOrganisation
+              />
 
               <div class="commandes">
                 <Lien href="/" libelle="Retour à l'accueil"></Lien>
-
                 <input
                   type="button"
                   class="bouton secondaire taille-moyenne"
                   value="Précédent"
-                  disabled={$questionnaireStore.questionCourante === 0}
-                  on:click={reviensEnArriere}
+                  on:click={questionnaireStore.reviensEnArriere}
                 />
-                <input
-                  type="button"
-                  class="bouton primaire taille-moyenne"
-                  value="Question suivante"
-                  disabled={reponseCourante === null}
-                  on:click={valideReponse}
-                />
-              </div>
-            {:else}
-              <div class="informations-complementaires">
-                <SelectSecteurActivite
-                  libelle="Quel est le secteur d’activité de votre organisation&nbsp;?"
-                  bind:secteur
-                />
-                <SelectRegion libelle="Dans quelle région / territoire se trouve votre organisation ?" bind:region />
-                <SelectTailleOrganisation
-                  libelle="Quelle est la taille de votre organisation ?"
-                  bind:tailleOrganisation
-                />
-
-                <div class="commandes">
-                  <Lien href="/" libelle="Retour à l'accueil"></Lien>
+                {#if organisateurSession}
                   <input
                     type="button"
-                    class="bouton secondaire taille-moyenne"
-                    value="Précédent"
-                    on:click={questionnaireStore.reviensEnArriere}
+                    class="bouton primaire taille-moyenne"
+                    value="Afficher les résultats"
+                    on:click={afficheResultatSessionGroupe}
                   />
-                  {#if organisateurSession}
-                    <input
-                      type="button"
-                      class="bouton primaire taille-moyenne"
-                      value="Afficher les résultats"
-                      on:click={afficheResultatSessionGroupe}
-                    />
-                  {:else}
-                    <input
-                      type="button"
-                      class="bouton primaire taille-moyenne"
-                      value="Obtenir mon résultat"
-                      on:click={obtiensResultat}
-                    />
-                  {/if}
-                </div>
+                {:else}
+                  <input
+                    type="button"
+                    class="bouton primaire taille-moyenne"
+                    value="Obtenir mon résultat"
+                    on:click={obtiensResultat}
+                  />
+                {/if}
               </div>
-            {/if}
-          </div>
-          <div class="illustration">
-            <img src="/assets/images/test-maturite/illustration-{idQuestionCourante}.svg" alt="" />
-          </div>
+            </div>
+          {/if}
         </div>
-      {:else}
-        <IntroductionTestMaturite bind:introFaite />
-      {/if}
-    </div>
-  </section>
+        <div class="illustration">
+          <img src="/assets/images/test-maturite/illustration-{idQuestionCourante}.svg" alt="" />
+        </div>
+      </div>
+    {:else}
+      <IntroductionTestMaturite bind:introFaite />
+    {/if}
+  </dsfr-container>
 
   {#if !introFaite}
     <PartageTest />
