@@ -60,7 +60,7 @@
   <FiltresFinancements {chargement} {estConnecte} />
 </FiltresMobile>
 
-<section class="financements">
+<dsfr-container class="financements">
   <div class="contenu-section">
     <div class="entete">
       <Lien href="https://aide.messervices.cyber.gouv.fr/fr/?chat=ouvert" blank libelle="Proposer un financement" />
@@ -99,13 +99,13 @@
       </div>
     </div>
   </div>
-</section>
+</dsfr-container>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
-  section {
-    padding: 0 var(--gouttiere) 40px;
+  dsfr-container {
+    padding: 0 0 40px;
     .contenu-section {
       padding-top: 2rem;
       padding-bottom: 3rem;
