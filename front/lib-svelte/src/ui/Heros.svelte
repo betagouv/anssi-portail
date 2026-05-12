@@ -54,7 +54,7 @@
   }
 </script>
 
-<section class={[format, 'fond-' + theme]}>
+<dsfr-container class={[format, 'fond-' + theme]}>
   <div class="contenu-section">
     {#if !cacheFilAriane && filAriane}
       <div class={['fil-ariane']}>
@@ -103,7 +103,7 @@
       </picture>
     {/if}
   </div>
-</section>
+</dsfr-container>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
@@ -129,7 +129,7 @@
   .heros-centre,
   .details {
     .contenu-section {
-      padding: 16px var(--gouttiere);
+      padding: 16px 0;
 
       // 320px et plus (Mobile first)
       display: grid;
@@ -138,7 +138,7 @@
         'haut'
         'texte'
         'illustration';
-      width: clamp(288px, calc(100% - var(--gouttiere) * 2), 75rem);
+      width: clamp(288px, 100%, 75rem);
 
       .fil-ariane,
       .lien-retour {
@@ -213,11 +213,11 @@
 
   .banniere {
     .contenu-section {
-      padding: 24px var(--gouttiere);
+      padding: 24px 0;
 
       &:has(.fil-ariane),
       &:has(.lien-retour) {
-        padding: 16px var(--gouttiere) 24px;
+        padding: 16px 0 24px;
 
         hgroup {
           margin: 1rem 0 0;
@@ -229,7 +229,7 @@
   .heros,
   .heros-centre {
     .contenu-section {
-      padding: 48px var(--gouttiere);
+      padding: 48px 0;
 
       hgroup {
         margin: 0;
@@ -251,7 +251,7 @@
 
       &:has(.fil-ariane),
       &:has(.lien-retour) {
-        padding: 16px var(--gouttiere) 48px;
+        padding: 16px 0 48px;
 
         hgroup {
           margin: 1.5rem 0 0.5rem;
@@ -268,7 +268,7 @@
 
   .details {
     .contenu-section {
-      padding: 16px var(--gouttiere) 0;
+      padding: 16px 0 0;
 
       .actions {
         flex-direction: row;
