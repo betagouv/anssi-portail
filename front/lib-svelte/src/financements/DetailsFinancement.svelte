@@ -123,7 +123,7 @@
   });
 </script>
 
-<section class="chapeau">
+<dsfr-container class="chapeau">
   <div class="contenu-section">
     <FilAriane
       feuille={financement?.nom ?? '...'}
@@ -154,7 +154,7 @@
       </div>
     {/if}
   </div>
-</section>
+</dsfr-container>
 
 <div bind:this={contenu}>
   {#if financement}
@@ -166,7 +166,7 @@
       />
     {/if}
 
-    <section class="corps">
+    <dsfr-container class="corps">
       <div class="contenu-section">
         {#if entreesMenuFinancement}
           <MenuFinancement
@@ -212,15 +212,15 @@
           </p>
         </div>
       </div>
-    </section>
+    </dsfr-container>
   {/if}
 </div>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
-  section {
-    padding: 0 var(--gouttiere) 40px;
+  dsfr-container {
+    padding: 0 0 40px;
   }
 
   .chapeau {
