@@ -79,56 +79,54 @@
 
 <DialogueSortieDiagnostic bind:this={dialogueSortie} />
 
-<article class="page-demande-aide-mon-aide-cyber">
-  <section class="encart-presentation">
-    <div class="illustration">
-      <IllustrationCyberDepart />
-    </div>
-    <div class="contenu-section">
-      <Lien href="/" libelle="Retour" icone="arrow-go-back-line" />
-      <div class="colonne-explicative">
-        <h2>Vous souhaitez vous protéger contre les cyberattaques mais ne savez pas comment vous y prendre ?</h2>
-        <p>
-          <b>Prenez votre cyberdépart !</b> Bénéficiez d’un
-          <b>premier diagnostic gratuit accompagné d’un Aidant cyber</b>
-          et recevez <b>6 recommandations prioritaires</b> à mettre en place pour améliorer la cybersécurité de votre organisation.
-        </p>
-        <div class="zone-tags">
-          <span class="tag"><Icone type="check" /> Dans vos locaux ou en visio </span>
-          <span class="tag"><Icone type="check" /> Rapide (1h30)</span>
-        </div>
-        <p class="cible-du-diagnostic">
-          Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et aux entreprises mono-salariées.
-        </p>
+<dsfr-container class="encart-presentation">
+  <div class="illustration">
+    <IllustrationCyberDepart />
+  </div>
+  <div class="contenu-section">
+    <Lien href="/" libelle="Retour" icone="arrow-go-back-line" />
+    <div class="colonne-explicative">
+      <h2>Vous souhaitez vous protéger contre les cyberattaques mais ne savez pas comment vous y prendre ?</h2>
+      <p>
+        <b>Prenez votre cyberdépart !</b> Bénéficiez d’un
+        <b>premier diagnostic gratuit accompagné d’un Aidant cyber</b>
+        et recevez <b>6 recommandations prioritaires</b> à mettre en place pour améliorer la cybersécurité de votre organisation.
+      </p>
+      <div class="zone-tags">
+        <span class="tag"><Icone type="check" /> Dans vos locaux ou en visio </span>
+        <span class="tag"><Icone type="check" /> Rapide (1h30)</span>
       </div>
+      <p class="cible-du-diagnostic">
+        Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et aux entreprises mono-salariées.
+      </p>
     </div>
-  </section>
-  <section class="zone-formulaire">
-    <div class="contenu-section">
-      {#if !enSucces}
-        <FormulaireDemandeAide
-          bind:this={formulaireDemandeAide}
-          on:formulaireSoumis={soumetsFormulaire}
-          {formulaireSoumis}
-          {enCoursEnvoi}
-          {erreurs}
-          id="demande-diagnostic"
-        />
-      {:else}
-        <ConfirmationCreationDemandeAide />
-      {/if}
-    </div>
-  </section>
-  <section class="zone-faq">
-    <div class="contenu-section">
-      <h6>Questions les plus fréquentes</h6>
-      <FoireAuxQuestions />
-    </div>
-  </section>
-  <section class="zone-aide">
-    <div class="contenu-section"></div>
-  </section>
-</article>
+  </div>
+</dsfr-container>
+<dsfr-container class="zone-formulaire">
+  <div class="contenu-section">
+    {#if !enSucces}
+      <FormulaireDemandeAide
+        bind:this={formulaireDemandeAide}
+        on:formulaireSoumis={soumetsFormulaire}
+        {formulaireSoumis}
+        {enCoursEnvoi}
+        {erreurs}
+        id="demande-diagnostic"
+      />
+    {:else}
+      <ConfirmationCreationDemandeAide />
+    {/if}
+  </div>
+</dsfr-container>
+<dsfr-container class="zone-faq">
+  <div class="contenu-section">
+    <h6>Questions les plus fréquentes</h6>
+    <FoireAuxQuestions />
+  </div>
+</dsfr-container>
+<dsfr-container class="zone-aide">
+  <div class="contenu-section"></div>
+</dsfr-container>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
@@ -150,7 +148,7 @@
 
   .encart-presentation {
     position: relative;
-    padding: var(--gouttiere) var(--gouttiere) 24px var(--gouttiere);
+    padding: var(--gouttiere) 0 24px 0;
     background: var(--controle-segmente-courant-fond);
 
     .colonne-explicative {
@@ -186,7 +184,7 @@
   }
 
   .zone-formulaire {
-    padding: 0 var(--gouttiere) 48px var(--gouttiere);
+    padding: 0 0 48px 0;
 
     background: linear-gradient(
       to bottom,
@@ -220,7 +218,7 @@
   }
 
   .zone-faq {
-    padding: 0 var(--gouttiere) 96px var(--gouttiere);
+    padding: 0 0 96px 0;
 
     .contenu-section {
       max-width: 792px;
