@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import axios from 'axios';
+  import { onMount } from 'svelte';
 
   let maintenanceEnPreparation: { jour: string; heure: string } | undefined = undefined;
   onMount(async () => {
@@ -10,7 +10,7 @@
 </script>
 
 {#if maintenanceEnPreparation}
-  <section id="maintenance">
+  <dsfr-container id="maintenance">
     <div class="contenu-section">
       <p>
         <span class="prevision"
@@ -20,12 +20,12 @@
         <span>La plateforme sera inaccessible. Nous nous excusons pour la gêne occasionnée.</span>
       </p>
     </div>
-  </section>
+  </dsfr-container>
 {/if}
 
 <style lang="scss">
-  section#maintenance {
-    padding: 12px var(--gouttiere) !important;
+  #maintenance {
+    padding: 12px 0 !important;
     background-color: #ffe9e6;
     color: #b34000;
   }
