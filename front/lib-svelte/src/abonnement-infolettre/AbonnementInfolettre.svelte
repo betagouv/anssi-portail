@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { clic } from '../directives/actions.svelte';
+  import CaseACocher from '../ui/CaseACocher.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
 
@@ -77,23 +78,13 @@
           status={mail || !erreurValidation ? 'default' : 'error'}
           required
         ></dsfr-input>
-
-        <dsfr-checkbox
-          id="acceptation-infolettre"
-          name="acceptation-infolettre"
-          errorMessage="Cette information est obligatoire."
-          value={infolettreAcceptee}
-          onvaluechanged={(e: CustomEvent) => (infolettreAcceptee = e.detail)}
-          status={infolettreAcceptee || !erreurValidation ? 'default' : 'error'}
-          required
-        >
+        <CaseACocher bind:coche={infolettreAcceptee} id="acceptation-infolettre" nom="acceptation-infolettre" requis>
           <span>J'accepte de recevoir la newsletter de MesServicesCyber.</span>
-          <span slot="hint">
+          {#snippet astuce()}
             La politique de confidentialité est disponible <dsfr-link href="/confidentialite" label="ici" neutral
             ></dsfr-link>.
-          </span>
-        </dsfr-checkbox>
-
+          {/snippet}
+        </CaseACocher>
         <dsfr-button label="S'abonner à la newsletter" kind="primary" type="submit" use:clic={soumetsFormulaire}
         ></dsfr-button>
         {#if erreur}

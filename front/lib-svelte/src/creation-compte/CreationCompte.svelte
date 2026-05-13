@@ -2,6 +2,7 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import Bouton from '../ui/Bouton.svelte';
+  import CaseACocher from '../ui/CaseACocher.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import ControleFormulaire from '../ui/ControleFormulaire.svelte';
   import Etapier from '../ui/Etapier.svelte';
@@ -203,27 +204,22 @@
       <Formulaire classe="formulaire-inscription" bind:this={formulaireEtape3}>
         <div class="contenu-etape">
           <div class="bloc">
-            <dsfr-checkbox
-              id="infolettreAcceptee"
-              name="infolettreAcceptee"
-              value={formulaireInscription.infolettreAcceptee}
-              onvaluechanged={(e: CustomEvent) => (formulaireInscription.infolettreAcceptee = e.detail)}
-              errorMessage="Ce champ est obligatoire. Veuillez le cocher."
-              label="J'accepte de recevoir la lettre d'information MesServicesCyber."
-            ></dsfr-checkbox>
-
-            <dsfr-checkbox
-              id="cguAcceptees"
-              name="cguAcceptees"
-              value={formulaireInscription.cguAcceptees}
-              onvaluechanged={(e: CustomEvent) => (formulaireInscription.cguAcceptees = e.detail)}
-              errorMessage="Ce champ est obligatoire. Veuillez le cocher."
-              required
-              ><span class="requis">
-                J'accepte les&nbsp;<Lien href="/cgu" libelle=" conditions générales d'utilisation" neutre></Lien>
-                de MesServicesCyber</span
-              >
-            </dsfr-checkbox>
+            <div class="case-a-cocher">
+              <CaseACocher
+                id="infolettreAcceptee"
+                nom="infolettreAcceptee"
+                libelle="J'accepte de recevoir la lettre d'information MesServicesCyber."
+                bind:coche={formulaireInscription.infolettreAcceptee}
+              ></CaseACocher>
+            </div>
+            <div class="case-a-cocher">
+              <CaseACocher id="cguAcceptees" nom="cguAcceptees" bind:coche={formulaireInscription.cguAcceptees} requis>
+                <span class="requis">
+                  J'accepte les&nbsp;<Lien href="/cgu" libelle=" conditions générales d'utilisation" neutre></Lien>
+                  de MesServicesCyber</span
+                >
+              </CaseACocher>
+            </div>
           </div>
         </div>
       </Formulaire>
@@ -337,7 +333,7 @@
     font-size: 1rem;
   }
 
-  dsfr-checkbox {
+  .case-a-cocher {
     background-color: #f6f6f6;
     border-radius: 6px;
     padding: 16px;
