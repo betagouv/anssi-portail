@@ -110,9 +110,4 @@
     padding: 4px 0;
     cursor: pointer;
   }
-
-  label {
-    display: block;
-    margin-bottom: 8px;
-  }
 </style>
