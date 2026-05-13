@@ -237,10 +237,6 @@
     }
   }
 
-  .lien {
-    display: inline-flex;
-  }
-
   .requis:before {
     content: '*';
     color: var(--text-default-error);

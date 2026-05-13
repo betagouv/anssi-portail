@@ -296,11 +296,5 @@
         gap: 32px;
       }
     }
-
-    a {
-      display: inline-flex;
-      color: inherit;
-      text-decoration: underline;
-    }
   }
 </style>
