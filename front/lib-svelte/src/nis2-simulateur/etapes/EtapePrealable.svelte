@@ -6,7 +6,7 @@
     onsuivant: () => void;
   }
 
-  let props: Props = $props();
+  let { onsuivant }: Props = $props();
 </script>
 
 <Etape>
@@ -46,7 +46,7 @@
   ></dsfr-highlight>
 
   <div class="actions">
-    <dsfr-button use:clic={props.onsuivant}>Débuter le test</dsfr-button>
+    <dsfr-button use:clic={onsuivant}>Débuter le test</dsfr-button>
   </div>
 </Etape>
 

@@ -1,14 +1,14 @@
 <script lang="ts">
-  import Etape from './Etape.svelte';
   import type { DesignationOperateurServicesEssentiels } from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
-  import { TitresEtapes } from './TitresEtapes';
+  import Etape from './Etape.svelte';
   import PrecedentSuivant from './PrecedentSuivant.svelte';
+  import { TitresEtapes } from './TitresEtapes';
 
   interface Props {
     onsuivant: (reponse: DesignationOperateurServicesEssentiels) => void;
   }
 
-  let props: Props = $props();
+  let { onsuivant }: Props = $props();
 
   export const options = [
     { label: 'Oui', name: 'radios', id: 'radio-oui', value: 'oui' },
@@ -23,7 +23,7 @@
   };
 
   const valide = () => {
-    props.onsuivant(reponse!);
+    onsuivant(reponse!);
   };
 </script>
 

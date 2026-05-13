@@ -1,16 +1,16 @@
 <script lang="ts">
-  import Etape from './Etape.svelte';
-  import { TitresEtapes } from './TitresEtapes';
-  import PrecedentSuivant from './PrecedentSuivant.svelte';
+  import { SvelteMap } from 'svelte/reactivity';
+  import { libellesSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSecteursActivite';
+  import { libellesSousSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSousSecteursActivite';
   import type {
     SecteurActivite,
     SecteurComposite,
   } from '../../../../../back/src/metier/nis2-simulateur/SecteurActivite.definitions';
   import type { SousSecteurActivite } from '../../../../../back/src/metier/nis2-simulateur/SousSecteurActivite.definitions';
-  import { libellesSousSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSousSecteursActivite';
   import { sousSecteursParSecteur } from '../../../../../back/src/metier/nis2-simulateur/SousSecteurActivite.valeurs';
-  import { SvelteMap } from 'svelte/reactivity';
-  import { libellesSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSecteursActivite';
+  import Etape from './Etape.svelte';
+  import PrecedentSuivant from './PrecedentSuivant.svelte';
+  import { TitresEtapes } from './TitresEtapes';
 
   function recupereSousSecteursDe(secteur: SecteurComposite): SousSecteurActivite[] {
     return [secteur, sousSecteursParSecteur[secteur]][1] as SousSecteurActivite[];
@@ -30,7 +30,7 @@
     onsuivant: (reponse: SousSecteurActivite[]) => void;
   }
 
-  let props: Props = $props();
+  let { secteursChoisis, onsuivant }: Props = $props();
 
   let reponse: SvelteMap<SecteurActivite, SousSecteurActivite[]> = new SvelteMap<
     SecteurActivite,
@@ -55,7 +55,7 @@
 
   const valide = () => {
     const tousLesSousSecteurs = [...reponse.values()].flat();
-    props.onsuivant(tousLesSousSecteurs);
+    onsuivant(tousLesSousSecteurs);
   };
 </script>
 
@@ -65,7 +65,7 @@
 
   <p>Précisez les sous-secteurs concernés :</p>
 
-  {#each props.secteursChoisis as s (s)}
+  {#each secteursChoisis as s (s)}
     <div>
       <p><b>{libellesSecteursActivite[s]}</b></p>
       {#each recupereSousSecteursDe(s) as sousSecteur (sousSecteur)}
@@ -82,7 +82,7 @@
   <PrecedentSuivant
     message="Sélectionnez au moins une réponse par secteur"
     onsuivant={valide}
-    suivantdisabled={unSecteurEstSansReponse(reponse, props.secteursChoisis)}
+    suivantdisabled={unSecteurEstSansReponse(reponse, secteursChoisis)}
   />
 </Etape>
 

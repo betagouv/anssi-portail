@@ -1,16 +1,16 @@
 <script lang="ts">
-  import Etape from './Etape.svelte';
-  import { TitresEtapes } from './TitresEtapes';
-  import PrecedentSuivant from './PrecedentSuivant.svelte';
-  import type { SecteurActivite } from '../../../../../back/src/metier/nis2-simulateur/SecteurActivite.definitions';
-  import { libellesSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSecteursActivite';
   import { SvelteSet } from 'svelte/reactivity';
+  import { libellesSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSecteursActivite';
+  import type { SecteurActivite } from '../../../../../back/src/metier/nis2-simulateur/SecteurActivite.definitions';
+  import Etape from './Etape.svelte';
+  import PrecedentSuivant from './PrecedentSuivant.svelte';
+  import { TitresEtapes } from './TitresEtapes';
 
   interface Props {
     onsuivant: (reponse: SecteurActivite[]) => void;
   }
 
-  let props: Props = $props();
+  let { onsuivant }: Props = $props();
   let reponse: SvelteSet<SecteurActivite> = new SvelteSet<SecteurActivite>();
 
   const choisis = (secteur: string) => (e: { detail: boolean }) => {
@@ -20,7 +20,7 @@
   };
 
   const valide = () => {
-    props.onsuivant([...reponse]);
+    onsuivant([...reponse]);
   };
 </script>
 

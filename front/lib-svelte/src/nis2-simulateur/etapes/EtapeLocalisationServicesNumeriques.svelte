@@ -1,14 +1,14 @@
 <script lang="ts">
-  import Etape from './Etape.svelte';
-  import { TitresEtapes } from './TitresEtapes';
   import type { AppartenancePaysUnionEuropeenne } from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
+  import Etape from './Etape.svelte';
   import PrecedentSuivant from './PrecedentSuivant.svelte';
+  import { TitresEtapes } from './TitresEtapes';
 
   interface Props {
     onsuivant: (reponse: AppartenancePaysUnionEuropeenne[]) => void;
   }
 
-  let props: Props = $props();
+  let { onsuivant }: Props = $props();
   let reponse: AppartenancePaysUnionEuropeenne[] = $state([]);
 
   const choisis = (e: { detail: AppartenancePaysUnionEuropeenne[] }) => {
@@ -16,7 +16,7 @@
   };
 
   const valide = () => {
-    props.onsuivant([...reponse.values()]);
+    onsuivant([...reponse.values()]);
   };
 </script>
 
