@@ -42,7 +42,7 @@
   ariane="Services et ressources partagés"
 />
 
-<section>
+<dsfr-container>
   <div class="contenu-section">
     <div class="favoris">
       {#if itemsCyberPartages.length === 0}
@@ -55,9 +55,9 @@
       {/if}
     </div>
   </div>
-</section>
+</dsfr-container>
 
-<section class="encart fond-sombre">
+<dsfr-container class="encart fond-sombre">
   <div class="contenu-section">
     <div class="liste-parcours">
       <div class="carte parcours">
@@ -81,7 +81,7 @@
       </div>
     </div>
   </div>
-</section>
+</dsfr-container>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
@@ -103,8 +103,8 @@
     text-align: center;
   }
 
-  section {
-    padding: 72px var(--gouttiere);
+  dsfr-container {
+    padding: 72px 0;
   }
 
   .encart {
@@ -148,29 +148,6 @@
         grid-area: contenu;
         font-size: 1.25rem;
         line-height: 2rem;
-      }
-
-      .bouton.primaire {
-        text-align: center;
-        border-bottom: none;
-        margin-top: 32px;
-        padding: 10px 24px;
-        grid-area: bouton;
-        place-self: center;
-
-        &:after {
-          content: none;
-        }
-
-        @include a-partir-de(sm) {
-          width: auto;
-        }
-
-        @include a-partir-de(lg) {
-          width: fit-content;
-          justify-self: flex-start;
-          margin-top: 16px;
-        }
       }
     }
   }
