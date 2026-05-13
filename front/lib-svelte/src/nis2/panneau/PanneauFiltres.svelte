@@ -18,7 +18,7 @@
   type Props = {
     estBureau: boolean;
     source: Referentiel;
-    cible: ReferentielSelectionne | undefined;
+    cible: ReferentielSelectionne | '';
   };
 
   const { source, cible, estBureau }: Props = $props();

@@ -6,7 +6,7 @@
   type Props = {
     langueSelectionnee: 'FR' | 'EN';
     sensComparaison: 'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2';
-    referentielSelectionne: ReferentielSelectionne | undefined;
+    referentielSelectionne: ReferentielSelectionne | '';
   };
   let {
     langueSelectionnee = $bindable('FR'),
@@ -15,7 +15,7 @@
   }: Props = $props();
 
   const reinitialise = async () => {
-    referentielSelectionne = undefined;
+    referentielSelectionne = '';
     sensComparaison = 'NIS2_VERS_CIBLE';
     langueSelectionnee = 'FR';
     $exigencesFiltrees.reinitialise();

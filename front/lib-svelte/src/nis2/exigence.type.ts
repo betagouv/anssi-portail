@@ -137,7 +137,7 @@ export const formateContenuExigence = ({ contenu }: ExigenceBase | ExigenceCompa
 
 export const fabriqueDExigence = (
   source: Referentiel,
-  cible: Referentiel | undefined,
+  cible: Referentiel | '',
   exigence: Record<string, unknown>
 ): Exigence => {
   const correspondances = exigence.correspondances as Record<string, Correspondance>;
@@ -150,7 +150,7 @@ export const fabriqueDExigence = (
       thematique: (exigence.thematique as string) ?? '',
       entitesCible: (exigence.entitesCible as CategorieEntite[]) ?? [],
 
-      correspondance: cible && correspondances[cible],
+      correspondance: cible ? correspondances[cible] : undefined,
     } satisfies ExigenceNis2;
   } else if (source === 'ISO') {
     return {

@@ -19,7 +19,7 @@
 
   let mode = $state<'LISTE' | Comparaison>('LISTE');
 
-  let referentielSelectionne = $state<ReferentielSelectionne | undefined>(undefined);
+  let referentielSelectionne = $state<ReferentielSelectionne | ''>('');
   let langueSelectionnee = $state<'FR' | 'EN'>('FR');
   let estBureau = $state(false);
   let chargement = $state(false);
@@ -28,7 +28,7 @@
     const axiosResponse = await axios.get<Record<string, unknown>[]>('/api/exigences-nis2', {
       params: { source, cible, langue: langueSelectionnee },
     });
-    exigences = axiosResponse.data.map((e) => fabriqueDExigence(source ?? 'NIS2', cible, e));
+    exigences = axiosResponse.data.map((e) => fabriqueDExigence(source.length === 0 ? 'NIS2' : source, cible, e));
     $exigencesStore = exigences;
   };
 
@@ -40,7 +40,11 @@
     estBureau = mql.matches;
   });
 
-  const source = $derived(sensComparaison === 'NIS2_VERS_CIBLE' ? 'NIS2' : referentielSelectionne);
+  const source = $derived(
+    sensComparaison === 'NIS2_VERS_CIBLE'
+      ? 'NIS2'
+      : ((referentielSelectionne.length > 0 ? referentielSelectionne : 'NIS2') as Exclude<ReferentielSelectionne, ''>)
+  );
 
   const cible = $derived(sensComparaison === 'SOURCE_VERS_NIS2' ? 'NIS2' : referentielSelectionne);
 
@@ -120,7 +124,9 @@
     </div>
 
     <Panneau
-      source={sensComparaison === 'NIS2_VERS_CIBLE' ? 'NIS2' : (referentielSelectionne ?? 'NIS2')}
+      source={sensComparaison === 'NIS2_VERS_CIBLE'
+        ? 'NIS2'
+        : ((referentielSelectionne ?? 'NIS2') as Exclude<ReferentielSelectionne, ''>)}
       bind:referentielSelectionne
       bind:langueSelectionnee
       bind:sensComparaison

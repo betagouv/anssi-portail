@@ -6,7 +6,7 @@
   type Props = {
     estBureau: boolean;
     sensComparaison: 'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2';
-    referentielSelectionne: ReferentielSelectionne | undefined;
+    referentielSelectionne: ReferentielSelectionne | '';
     langueSelectionnee: 'FR' | 'EN';
     featureFlagNis2CyFun23: boolean;
   };
