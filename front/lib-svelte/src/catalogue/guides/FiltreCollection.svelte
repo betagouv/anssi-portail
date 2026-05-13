@@ -1,4 +1,5 @@
 <script lang="ts">
+  import CaseACocher from '../../ui/CaseACocher.svelte';
   import { CollectionGuide } from '../Guide.types';
   import { nombreGuides } from '../stores/guides/nombreGuides.store';
   import { rechercheParCollection } from '../stores/guides/rechercheParCollection.store';
@@ -35,20 +36,20 @@
 
 <fieldset>
   <legend>Collection</legend>
-  <label>
-    <input
-      checked={quelquesExpertisesTechniques}
-      indeterminate={unePartieSeulementDesExpertisesTechniques}
-      on:click={gereCocheExpertiseTechnique}
-      type="checkbox"
+  <div class="choix">
+    <CaseACocher
+      id="expertise-technique"
+      libelle="Expertise technique"
+      coche={quelquesExpertisesTechniques}
+      indetermine={unePartieSeulementDesExpertisesTechniques}
+      change={gereCocheExpertiseTechnique}
     />
-    <span class="libelle">Expertise technique</span>
     <span class="compte">
       {($nombreGuides.parCollection[CollectionGuide.LES_ESSENTIELS] ?? 0) +
         ($nombreGuides.parCollection[CollectionGuide.LES_FONDAMENTAUX] ?? 0) +
         ($nombreGuides.parCollection[CollectionGuide.AUTRE] ?? 0)}
     </span>
-  </label>
+  </div>
   <fieldset>
     <ChoixFiltreCollection valeur={CollectionGuide.LES_ESSENTIELS} />
     <ChoixFiltreCollection valeur={CollectionGuide.LES_FONDAMENTAUX} />

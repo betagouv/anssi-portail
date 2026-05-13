@@ -3,9 +3,11 @@
 
   type Props = {
     astuce?: Snippet;
+    change?: () => void;
     children?: Snippet;
     coche: boolean;
     id: string;
+    indetermine?: boolean;
     libelle?: string;
     messageErreur?: string;
     nom?: string;
@@ -14,9 +16,11 @@
 
   let {
     astuce,
+    change,
     children,
     coche = $bindable(false),
     id,
+    indetermine = $bindable(false),
     libelle,
     messageErreur = 'Cette information est obligatoire.',
     nom,
@@ -30,8 +34,12 @@
   label={libelle}
   error-message={messageErreur}
   checked={coche}
-  onvaluechanged={(e: CustomEvent) => (coche = e.detail)}
+  onvaluechanged={(e: CustomEvent) => {
+    coche = e.detail;
+    change?.();
+  }}
   required={requis}
+  indeterminate={indetermine}
 >
   {@render children?.()}
   {#if astuce}
