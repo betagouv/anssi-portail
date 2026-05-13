@@ -3,8 +3,8 @@
 
 @use '../../assets/styles/responsive' as *;
 
-section {
-  padding: 96px var(--gouttiere);
+dsfr-container {
+  padding: 96px 0;
 
   .maintenance {
     display: grid;
@@ -44,16 +44,4 @@ section {
       justify-self: center;
     }
   }
-}
-
-#navigation nav .contenu-section {
-  display: none;
-}
-
-#menu-burger-mobile {
-  display: none;
-}
-
-#zone-identification {
-  display: none;
 }
