@@ -351,16 +351,6 @@ dsfr-footer {
             transform: translateY(2px) rotate(0.12turn);
           }
         }
-
-        &:indeterminate {
-          /* Ce style est prévu pour être cumulatif avec l'état coché */
-          &::before {
-            width: 9px;
-            height: 10px;
-            border-right: none;
-            transform: none;
-          }
-        }
       }
     }
   }

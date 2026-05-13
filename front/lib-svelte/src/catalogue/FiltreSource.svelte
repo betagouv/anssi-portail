@@ -1,4 +1,5 @@
 <script lang="ts">
+  import CaseACocher from '../ui/CaseACocher.svelte';
   import { Source } from './Catalogue.types';
   import ChoixFiltreSource from './ChoixFiltreSource.svelte';
   import { nombreResultats } from './stores/nombreResultats.store';
@@ -38,17 +39,16 @@
 
 <fieldset>
   <legend>Source</legend>
-  <label>
-    <input
-      type="checkbox"
-      value={Source.ANSSI_TOUTES}
-      bind:indeterminate={anssiPartielles}
-      checked={cocheToutesLesSources}
-      on:click={gereCocheANSSI}
+  <div class="choix">
+    <CaseACocher
+      id="toutes-les-sources"
+      libelle="Toutes les sources ANSSI"
+      coche={cocheToutesLesSources}
+      bind:indetermine={anssiPartielles}
+      change={gereCocheANSSI}
     />
-    <span class="libelle">Toutes les sources ANSSI</span>
     <span class="compte">{$nombreResultats.parSource[Source.ANSSI_TOUTES]}</span>
-  </label>
+  </div>
   <fieldset>
     <ChoixFiltreSource valeur={Source.CERTFR} libelle="CERT-FR" />
     <ChoixFiltreSource valeur={Source.INNOVATION_ANSSI} libelle="Innovation ANSSI" />
