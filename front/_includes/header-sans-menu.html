@@ -1,0 +1,23 @@
+{% assign liensEvitement = '[
+  {"label":"Contenu","href":"#contenu"},
+  {"label":"Pied de page","href":"#pied"}
+]' | escape %}
+<dsfr-skiplink items="{{ liensEvitement }}"></dsfr-skiplink>
+
+{% include composant-svelte.html id="badge-agent-anssi" genere-div=false %}
+{% include composant-svelte.html id="identification" genere-div=false %}
+{% include composant-svelte.html id="navigation" genere-div=false %}
+<dsfr-header
+  id="haut-de-page"
+  class="fr-header__brand"
+  brand-link-href="/"
+  brand-link-title="Retour à l'accueil du site MesServicesCyber - République Française"
+  has-brand-operator
+  brand-operator-src="/assets/images/logo-anssi.svg"
+  brand-operator-alt="MesServicesCyber"
+  brand-operator-style="height:4rem"
+  brand-service="MesServicesCyber"
+  has-brand-tagline
+  brand-tagline="Innovation ANSSI"
+>
+</dsfr-header>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'fr' }}">
+  {% include head.html extra-js=layout.script %}
+  <body data-themeable="true">
+    {% if site.env.MATOMO_ID != '' and site.env.MATOMO_ID != undefined %}
+    <script
+      type="module"
+      src="/scripts/matomo.js"
+      data-id-site-matomo="{{ site.env.MATOMO_ID }}"
+      id="script-matomo"
+    ></script>
+    {% endif %} {% if site.env.MATOMO_URL_TAG_MANAGER != '' and
+    site.env.MATOMO_URL_TAG_MANAGER != undefined %}
+    <script
+      type="module"
+      src="/scripts/matomoTagManager.js"
+      data-url-tag-manager-matomo="{{ site.env.MATOMO_URL_TAG_MANAGER }}"
+      id="script-matomo-tag-manager"
+    ></script>
+    {% endif %} {% if site.env.SENTRY_DSN != '' and site.env.SENTRY_DSN !=
+    undefined %}
+    <script
+      type="module"
+      src="/lib-svelte/dist/assets/sentry.js"
+      data-environnement="{{ site.env.SENTRY_ENVIRONNEMENT }}"
+      data-dsn="{{ site.env.SENTRY_DSN }}"
+      id="script-sentry"
+    ></script>
+    {% endif %}
+
+    <script
+      src="https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com/{{ site.version_lab_ui_kit }}/lab-anssi-ui-kit.iife.js"
+      nonce="%%NONCE%%"
+      defer
+    ></script>
+    {% include header-sans-menu.html %}
+    <main id="contenu">
+      {{ content }}
+    </main>
+    {% include footer.html %}
+  </body>
+</html>
