@@ -18,7 +18,7 @@
   onMount(chargeGuidesDansLeStore);
 </script>
 
-<section class="chapeau fond-sombre">
+<dsfr-container class="chapeau fond-sombre">
   <div class="contenu-section">
     <FilAriane feuille="Favoris" />
     <h1 class="alternatif-xs-ns">Services et ressources favoris</h1>
@@ -30,29 +30,27 @@
       </div>
     {/if}
   </div>
-</section>
+</dsfr-container>
 
-<section>
-  <div class="contenu-section">
-    <div class="favoris">
-      {#if $itemsCatalogueEnFavori.length === 0}
-        <div class="contenu-sans-favoris">
-          <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Aucun favori sauvegardé" />
-          <h2>Ajoutez vos services et ressources favoris et partagez-les facilement au sein de votre organisation.</h2>
-          <Lien href="/catalogue" apparence="bouton" taille="lg" libelle="Explorer le catalogue"></Lien>
-        </div>
-      {:else}
-        <div class="banniere-partage-favoris">
-          <p>
-            Une liste de favoris bien pensée est la clé pour sensibiliser efficacement vos équipes à la cybersécurité.
-          </p>
-          <Bouton type="primaire" libelle="Partager mes favoris" icone="share-line" surClic={partageLien} />
-        </div>
-        <ContenuFavoris avecBoutonFavori itemsEnFavori={$itemsCatalogueEnFavori} />
-      {/if}
-    </div>
+<dsfr-container>
+  <div class="favoris">
+    {#if $itemsCatalogueEnFavori.length === 0}
+      <div class="contenu-sans-favoris">
+        <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Aucun favori sauvegardé" />
+        <h2>Ajoutez vos services et ressources favoris et partagez-les facilement au sein de votre organisation.</h2>
+        <Lien href="/catalogue" apparence="bouton" taille="lg" libelle="Explorer le catalogue"></Lien>
+      </div>
+    {:else}
+      <div class="banniere-partage-favoris">
+        <p>
+          Une liste de favoris bien pensée est la clé pour sensibiliser efficacement vos équipes à la cybersécurité.
+        </p>
+        <Bouton type="primaire" libelle="Partager mes favoris" icone="share-line" surClic={partageLien} />
+      </div>
+      <ContenuFavoris avecBoutonFavori itemsEnFavori={$itemsCatalogueEnFavori} />
+    {/if}
   </div>
-</section>
+</dsfr-container>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
@@ -72,12 +70,12 @@
     }
   }
 
-  section {
-    padding: 16px var(--gouttiere);
+  dsfr-container {
+    padding: 16px 0;
   }
 
   .chapeau.fond-sombre {
-    padding: 32px var(--gouttiere) 48px;
+    padding: 32px 0 48px;
     .contenu-section {
       display: grid;
       column-gap: 24px;
