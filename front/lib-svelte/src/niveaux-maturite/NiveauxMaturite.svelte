@@ -17,7 +17,7 @@
 </script>
 
 <!-- eslint-disable @typescript-eslint/no-unused-vars -->
-<section class="niveaux">
+<dsfr-container class="niveaux">
   <div class="contenu-section">
     <div class="selecteurs">
       {#each { length: COLONNES } as _, i (i)}
@@ -87,4 +87,4 @@
       </div>
     </div>
   </div>
-</section>
+</dsfr-container>
