@@ -1,10 +1,10 @@
 <script lang="ts">
-  import CarteTestMaturite, { type ResultatTest } from './CarteTestMaturite.svelte';
-  import { onMount } from 'svelte';
   import axios from 'axios';
-  import { questionnaireStore } from './stores/questionnaire.store';
-  import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
+  import { onMount } from 'svelte';
   import Lien from '../ui/Lien.svelte';
+  import CarteTestMaturite, { type ResultatTest } from './CarteTestMaturite.svelte';
+  import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
+  import { questionnaireStore } from './stores/questionnaire.store';
 
   export let idResultatTest: string | undefined;
 
@@ -40,44 +40,40 @@
 </script>
 
 {#if resultatTestSelectionne}
-  <section class="section-retour-historique">
-    <div class="contenu-section">
-      <Lien href="/ma-maturite#historique" libelle="Retour" icone="arrow-go-back-line" />
-    </div>
-  </section>
+  <dsfr-container class="section-retour-historique">
+    <Lien href="/ma-maturite#historique" libelle="Retour" icone="arrow-go-back-line" />
+  </dsfr-container>
   <ResultatsMonOrganisation
     animeTuiles={false}
     dateRealisation={new Date(resultatTestSelectionne.dateRealisation)}
     defilementAutomatique={false}
   />
 {:else}
-  <section>
-    <div class="contenu-section">
-      <h2>Historique de votre maturité cyber</h2>
-      {#each annees as annee (annee)}
-        <div class="annee">
-          <h3>{annee}</h3>
-          <div class="cartes">
-            {#each resultatsTestParAnnee[Number(annee)] as resultatTest (resultatTest.id)}
-              <CarteTestMaturite {resultatTest} />
-            {/each}
-          </div>
+  <dsfr-container>
+    <h2>Historique de votre maturité cyber</h2>
+    {#each annees as annee (annee)}
+      <div class="annee">
+        <h3>{annee}</h3>
+        <div class="cartes">
+          {#each resultatsTestParAnnee[Number(annee)] as resultatTest (resultatTest.id)}
+            <CarteTestMaturite {resultatTest} />
+          {/each}
         </div>
-      {/each}
-    </div>
-  </section>
+      </div>
+    {/each}
+  </dsfr-container>
 {/if}
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
-  section {
+  dsfr-container {
     padding-top: 32px;
     padding-bottom: 72px;
   }
 
   .section-retour-historique {
-    padding: 32px var(--gouttiere) 8px;
+    padding: 32px 0 8px;
   }
 
   h2 {

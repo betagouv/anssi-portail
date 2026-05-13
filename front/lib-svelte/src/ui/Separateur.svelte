@@ -1,14 +1,12 @@
 <script lang="ts">
 </script>
 
-<section class="separation">
-  <div class="contenu-section">
-    <hr />
-  </div>
-</section>
+<dsfr-container class="separation">
+  <hr />
+</dsfr-container>
 
 <style lang="scss">
-  section.separation {
+  .separation {
     padding-block: 0;
 
     hr {

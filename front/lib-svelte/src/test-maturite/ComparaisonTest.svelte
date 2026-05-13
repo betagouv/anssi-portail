@@ -89,7 +89,7 @@
 </script>
 
 {#if infosOrganisation}
-  <section class="filtres">
+  <dsfr-container class="filtres">
     <div class="contenu-section">
       <div class="description">
         <p>
@@ -145,10 +145,10 @@
         réalisés.
       </p>
     </div>
-  </section>
+  </dsfr-container>
 {/if}
 {#if serie.length > 0}
-  <section class="repartition-organisations">
+  <dsfr-container class="repartition-organisations">
     <div class="contenu-section">
       <h2>Répartition des organisations</h2>
       <div class="repartition-niveaux-maturite">
@@ -156,13 +156,11 @@
         <LegendeAnneau {serie} actif={libelleNiveauCourant} />
       </div>
     </div>
-  </section>
-  <section class="separator">
-    <div class="contenu-section">
-      <hr />
-    </div>
-  </section>
-  <section class="repartition-reponses">
+  </dsfr-container>
+  <dsfr-container class="separator">
+    <hr />
+  </dsfr-container>
+  <dsfr-container class="repartition-reponses">
     <div class="contenu-section">
       <h2>Répartition des réponses</h2>
       <RadarSessionGroupe series={seriesRadar} affichageReduit />
@@ -173,9 +171,9 @@
         à l’égard des enjeux cyber.
       </div>
     </div>
-  </section>
+  </dsfr-container>
 {:else}
-  <section class="pas-assez-de-resultats">
+  <dsfr-container class="pas-assez-de-resultats">
     <div class="contenu-section">
       <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Pas assez de résultats" />
       <h4>Pas de résultat 😔</h4>
@@ -192,7 +190,7 @@
         variante="tertiaire"
       ></lab-anssi-bouton>
     </div>
-  </section>
+  </dsfr-container>
 {/if}
 
 <PartageTest />
@@ -213,7 +211,7 @@
   }
 
   .filtres {
-    padding: 32px var(--gouttiere) 0;
+    padding: 32px 0 0;
 
     .contenu-section {
       display: flex;
@@ -235,7 +233,7 @@
   }
 
   .repartition-organisations {
-    padding: 32px var(--gouttiere) 48px;
+    padding: 32px 0 48px;
 
     .contenu-section {
       display: flex;
@@ -256,7 +254,7 @@
   }
 
   .repartition-reponses {
-    padding: 48px var(--gouttiere);
+    padding: 48px 0;
 
     .contenu-section {
       display: flex;

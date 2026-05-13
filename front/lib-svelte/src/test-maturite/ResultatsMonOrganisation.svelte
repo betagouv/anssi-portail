@@ -37,7 +37,7 @@
     : undefined;
 </script>
 
-<section class="resultats-test">
+<dsfr-container class="resultats-test">
   <div class="contenu-section">
     {#if dateFormatee}
       <div class="date-realisation">Test réalisé le {dateFormatee}</div>
@@ -51,7 +51,7 @@
 
     <Lien href="/niveaux-maturite" blank libelle="Les niveaux de maturité cyber"></Lien>
   </div>
-</section>
+</dsfr-container>
 
 <EncartDeRecommandationSelonMaturite {niveau} />
 

@@ -42,7 +42,7 @@
   }
 </script>
 
-<section>
+<dsfr-container>
   <div class="contenu-section">
     <div class="bloc-role organisateur">
       <div class="role">Organisateur</div>
@@ -90,13 +90,13 @@
       </Formulaire>
     </div>
   </div>
-</section>
+</dsfr-container>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
   .contenu-section {
-    padding: 56px var(--gouttiere) 56px;
+    padding: 56px 0 56px;
     display: flex;
     flex-direction: column;
     gap: 24px;
