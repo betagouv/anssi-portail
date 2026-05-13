@@ -48,15 +48,15 @@
 </script>
 
 {#if resultatsSessionGroupe && resultatsSessionGroupe.nombreParticipants > 0}
-  <section>
+  <dsfr-container>
     <div class="contenu-section">
       <h2>Les 5 niveaux de maturité cyber</h2>
       <TuilesMaturiteSessionGroupe />
       <Lien href="/niveaux-maturite" blank libelle="Les niveaux de maturité cyber"></Lien>
     </div>
-  </section>
+  </dsfr-container>
 
-  <section>
+  <dsfr-container>
     <div class="contenu-section">
       <h2>Répartition des niveaux de maturité cyber de cette session</h2>
       <div class="repartition-niveaux-maturite">
@@ -68,9 +68,9 @@
         {/if}
       </div>
     </div>
-  </section>
+  </dsfr-container>
 
-  <section>
+  <dsfr-container>
     <div class="contenu-section repartition-reponses">
       <h2>Répartition des réponses</h2>
       <RadarSessionGroupe series={seriesRadar} />
@@ -81,9 +81,9 @@
         à l’égard des enjeux cyber.
       </div>
     </div>
-  </section>
+  </dsfr-container>
 {:else}
-  <section>
+  <dsfr-container>
     <div class="contenu-section contenu-sans-resultat">
       <img
         src="/assets/images/illustration-dragon-aucun-resultat.svg"
@@ -94,14 +94,14 @@
         Les résultats seront disponibles dès que les participants auront complété le test.<br /> Invitez-les à le finaliser.
       </p>
     </div>
-  </section>
+  </dsfr-container>
 {/if}
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
-  section {
-    padding: 48px var(--gouttiere) 0;
+  dsfr-container {
+    padding: 48px 0 0;
 
     .contenu-section {
       display: flex;

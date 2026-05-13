@@ -6,7 +6,7 @@
   };
 </script>
 
-<section>
+<dsfr-container>
   <div class="contenu-section">
     <hgroup class="preambule">
       <h1>Passez à l'étape suivante</h1>
@@ -24,7 +24,7 @@
       </div>
     </div>
   </div>
-</section>
+</dsfr-container>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;

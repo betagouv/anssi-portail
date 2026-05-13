@@ -5,9 +5,9 @@
 
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import Onglet from '../ui/Onglet.svelte';
-  import ConteneurOnglets from '../ui/ConteneurOnglets.svelte';
   import { profilStore } from '../stores/profil.store';
+  import ConteneurOnglets from '../ui/ConteneurOnglets.svelte';
+  import Onglet from '../ui/Onglet.svelte';
 
   export let ongletActif: CleOnglet | undefined;
 
@@ -21,7 +21,7 @@
 </script>
 
 {#if $profilStore && ongletActif}
-  <section class="section-onglets">
+  <dsfr-container class="section-onglets">
     <div class="contenu-section">
       <ConteneurOnglets>
         <Onglet bind:ongletActif cetOnglet="votre-organisation" labelOnglet="Maturité cyber de votre organisation"
@@ -30,11 +30,11 @@
         <Onglet bind:ongletActif cetOnglet="comparaison" labelOnglet="Comparaison avec d’autres entités"></Onglet>
       </ConteneurOnglets>
     </div>
-  </section>
+  </dsfr-container>
 {/if}
 
 <style lang="scss">
   .section-onglets {
-    padding: 32px var(--gouttiere) 0;
+    padding: 32px 0 0;
   }
 </style>
