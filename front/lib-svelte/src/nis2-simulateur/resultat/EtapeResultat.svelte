@@ -1,25 +1,25 @@
 <script lang="ts">
   import type { EtatQuestionnaire } from '../../../../../back/src/metier/nis2-simulateur/EtatQuestionnaire';
-  import * as api from '../simulateurNi2.api';
-  import TamponResultat from './TamponResultat.svelte';
   import { evalueEligibilite } from '../../../../../back/src/metier/nis2-simulateur/questionnaire/evalueEligibilite';
   import SpecificationsCompletes from '../../../../../back/src/metier/nis2-simulateur/questionnaire/specifications-completes.csv?raw';
-  import PointsAttention from './PointsAttention.svelte';
   import { Regulation } from '../../../../../back/src/metier/nis2-simulateur/Regulation.definitions';
-  import LigneEtMaintenant from './LigneEtMaintenant.svelte';
   import { quiScroll } from '../../ui/quiScroll.attachment';
+  import * as api from '../simulateurNi2.api';
+  import LigneEtMaintenant from './LigneEtMaintenant.svelte';
+  import PointsAttention from './PointsAttention.svelte';
+  import TamponResultat from './TamponResultat.svelte';
 
   interface Props {
     reponses: EtatQuestionnaire;
   }
 
-  let props: Props = $props();
+  let { reponses }: Props = $props();
 
   $effect(() => {
-    api.envoyerReponses(props.reponses);
+    api.envoyerReponses(reponses);
   });
 
-  let { resultat } = $derived.by(() => evalueEligibilite(props.reponses, SpecificationsCompletes));
+  let { resultat } = $derived.by(() => evalueEligibilite(reponses, SpecificationsCompletes));
 </script>
 
 <div class="resultat" {@attach quiScroll}>

@@ -9,17 +9,17 @@
     precedentdisabled?: boolean;
   }
 
-  let props: Props = $props();
+  let { message, onsuivant, suivantdisabled, precedentdisabled }: Props = $props();
 </script>
 
 <div class="actions">
-  <p>{props.message}</p>
+  <p>{message}</p>
 
-  <dsfr-button use:clic={questionnaireAvecUndo.undo} kind="secondary" disabled={props.precedentdisabled}>
+  <dsfr-button use:clic={questionnaireAvecUndo.undo} kind="secondary" disabled={precedentdisabled}>
     Précédent
   </dsfr-button>
 
-  <dsfr-button disabled={props.suivantdisabled} use:clic={props.onsuivant}> Suivant </dsfr-button>
+  <dsfr-button disabled={suivantdisabled} use:clic={onsuivant}> Suivant </dsfr-button>
 </div>
 
 <style lang="scss">

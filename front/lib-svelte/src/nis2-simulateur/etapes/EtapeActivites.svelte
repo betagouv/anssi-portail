@@ -1,19 +1,19 @@
 <script lang="ts">
-  import Etape from './Etape.svelte';
-  import { TitresEtapes } from './TitresEtapes';
-  import PrecedentSuivant from './PrecedentSuivant.svelte';
-  import type { SecteurSimple } from '../../../../../back/src/metier/nis2-simulateur/SecteurActivite.definitions';
-  import { libellesSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSecteursActivite';
-  import { secteurDe } from '../../../../../back/src/metier/nis2-simulateur/SousSecteurActivite.operations';
   import { SvelteMap, SvelteSet } from 'svelte/reactivity';
-  import type { SousSecteurActivite } from '../../../../../back/src/metier/nis2-simulateur/SousSecteurActivite.definitions';
   import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions';
-  import { libellesSousSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSousSecteursActivite';
   import { activitesParSecteurEtSousSecteur } from '../../../../../back/src/metier/nis2-simulateur/Activite.operations';
   import { libellesActivites } from '../../../../../back/src/metier/nis2-simulateur/LibellesActivites';
-  import DescriptionActivite from './DescriptionActivite.svelte';
+  import { libellesSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSecteursActivite';
+  import { libellesSousSecteursActivite } from '../../../../../back/src/metier/nis2-simulateur/LibellesSousSecteursActivite';
   import { listeDescriptionsActivites } from '../../../../../back/src/metier/nis2-simulateur/ListeDescriptionsActivites';
+  import type { SecteurSimple } from '../../../../../back/src/metier/nis2-simulateur/SecteurActivite.definitions';
+  import type { SousSecteurActivite } from '../../../../../back/src/metier/nis2-simulateur/SousSecteurActivite.definitions';
+  import { secteurDe } from '../../../../../back/src/metier/nis2-simulateur/SousSecteurActivite.operations';
   import { clic } from '../../directives/actions.svelte';
+  import DescriptionActivite from './DescriptionActivite.svelte';
+  import Etape from './Etape.svelte';
+  import PrecedentSuivant from './PrecedentSuivant.svelte';
+  import { TitresEtapes } from './TitresEtapes';
 
   type SecteurAvecActivite = SecteurSimple | SousSecteurActivite;
 
@@ -42,7 +42,7 @@
     onsuivant: (reponse: Activite[]) => void;
   }
 
-  let props: Props = $props();
+  let { secteursChoisis, onsuivant }: Props = $props();
 
   let reponse: SvelteMap<SecteurAvecActivite, Activite[]> = new SvelteMap<SecteurAvecActivite, Activite[]>();
   let descriptionsVisibles: SvelteSet<Activite> = new SvelteSet<Activite>();
@@ -65,7 +65,7 @@
 
   const valide = () => {
     const toutesLesActivites = [...reponse.values()].flat();
-    props.onsuivant(toutesLesActivites);
+    onsuivant(toutesLesActivites);
   };
 </script>
 
@@ -79,7 +79,7 @@
     text="Cliquez sur les info-bulles pour obtenir plus d’informations sur les définitions des activités."
   ></dsfr-highlight>
 
-  {#each props.secteursChoisis as s (s)}
+  {#each secteursChoisis as s (s)}
     <div>
       <p><b>{libelleSecteurOuSousSecteur(s)}</b></p>
       {#each activitesParSecteurEtSousSecteur[s] as activite (activite)}
@@ -118,7 +118,7 @@
   <PrecedentSuivant
     message="Sélectionnez au moins une réponse par secteur"
     onsuivant={valide}
-    suivantdisabled={unSecteurEstSansReponse(reponse, props.secteursChoisis)}
+    suivantdisabled={unSecteurEstSansReponse(reponse, secteursChoisis)}
   />
 </Etape>
 

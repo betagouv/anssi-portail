@@ -7,9 +7,9 @@
     activite: Activite;
   }
 
-  let props: Props = $props();
+  let { activite }: Props = $props();
 
-  const descriptions = $derived(listeDescriptionsActivites[props.activite]);
+  const descriptions = $derived(listeDescriptionsActivites[activite]);
 </script>
 
 {#each descriptions as { titre, description }, i (i)}

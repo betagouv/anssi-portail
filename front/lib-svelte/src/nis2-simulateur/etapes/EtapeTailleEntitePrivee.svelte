@@ -1,12 +1,12 @@
 <script lang="ts">
-  import Etape from './Etape.svelte';
-  import { TitresEtapes } from './TitresEtapes';
   import type {
     TrancheBilanFinancier,
     TrancheChiffreAffaire,
     TrancheNombreEmployes,
   } from '../../../../../back/src/metier/nis2-simulateur/ChampsSimulateur.definitions';
+  import Etape from './Etape.svelte';
   import PrecedentSuivant from './PrecedentSuivant.svelte';
+  import { TitresEtapes } from './TitresEtapes';
 
   function doitDemanderBilanFinancier(nombre: TrancheNombreEmployes, ca: TrancheChiffreAffaire): boolean {
     if (nombre === 'petit' && (ca === 'moyen' || ca === 'grand')) return true;
@@ -23,7 +23,7 @@
     }) => void;
   }
 
-  let props: Props = $props();
+  let { onsuivant }: Props = $props();
 
   let nombre: TrancheNombreEmployes | undefined = $state();
   let chiffreAffaire: TrancheChiffreAffaire | undefined = $state();
@@ -42,7 +42,7 @@
   };
 
   const valide = () => {
-    props.onsuivant({
+    onsuivant({
       nombre: nombre!,
       chiffreAffaire: chiffreAffaire!,
       bilanFinancier,
