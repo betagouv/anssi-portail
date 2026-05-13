@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios, { AxiosError } from 'axios';
   import { clic } from '../directives/actions.svelte';
+  import CaseACocher from '../ui/CaseACocher.svelte';
 
   type Props = {
     identifiantGuide: string;
@@ -90,12 +91,11 @@
     value={libelleDuLien}
     hint="Intitulé du bouton servant à télécharger le document sur la page d'un guide"
   ></dsfr-input>
-  <dsfr-checkbox
+  <CaseACocher
     id="genereVisuel"
-    label="Générer un visuel à partir du PDF (uniquement si le document est un PDF)"
-    value={genereVisuel}
-    onvaluechanged={(e: CustomEvent) => (genereVisuel = e.detail)}
-  ></dsfr-checkbox>
+    libelle="Générer un visuel à partir du PDF (uniquement si le document est un PDF)"
+    bind:coche={genereVisuel}
+  ></CaseACocher>
   <dsfr-button label="Ajouter" use:clic={ajoute} disabled={!nouveauDocument || !libelleDuLien || !identifiantGuide}
   ></dsfr-button>
 </div>
