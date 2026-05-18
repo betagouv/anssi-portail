@@ -33,7 +33,7 @@ describe('Le middleware', () => {
   let adaptateurEnvironnement: AdaptateurEnvironnement;
 
   beforeEach(() => {
-    adaptateurJWT = fauxAdaptateurJWT;
+    adaptateurJWT = { ...fauxAdaptateurJWT };
     requete = createRequest();
     reponse = createResponse();
     reponse.envoieFichierEnrichi = () => reponse;
@@ -212,16 +212,23 @@ describe('Le middleware', () => {
   describe("sur demande d'ajout de l'utilisateur courant", () => {
     let adaptateurHachage: AdaptateurHachage;
     beforeEach(() => {
-      adaptateurHachage = fauxAdaptateurHachage;
+      adaptateurHachage = { ...fauxAdaptateurHachage };
+      adaptateurJWT.decode = (token: string) => {
+        if (token === 'token-invalide' || !token) {
+          throw new JsonWebTokenError('erreur de token');
+        }
+        return {};
+      };
     });
 
     it("ajoute l'utilisateur dont l'email est dans la session à la requête", async () => {
-      requete.session = { email: jeanneDupont.email };
+      requete.session = { email: jeanneDupont.email, token: 'valide' };
       await entrepotUtilisateur.ajoute(jeanneDupont);
 
       await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {});
 
       assert.deepEqual(requete.utilisateur, jeanneDupont);
+      assert.equal(reponse.statusCode, 200);
     });
 
     it('est indéfini si non défini dans la session', async () => {
@@ -258,7 +265,7 @@ describe('Le middleware', () => {
     });
 
     it("renvoie une erreur 500 lorque l'entrepôt ne fonctionne pas", async () => {
-      requete.session = { email: jeanneDupont.email };
+      requete.session = { email: jeanneDupont.email, token: 'valide' };
       entrepotUtilisateur.echoueSurRechercheParMail();
       let suiteAppelee = false;
 
@@ -268,6 +275,34 @@ describe('Le middleware', () => {
 
       assert.equal(reponse.statusCode, 500);
       assert.equal(suiteAppelee, false);
+    });
+
+    it('renvoie une erreur 401 lorsque le jeton est invalide', async () => {
+      requete.session = { email: jeanneDupont.email, token: 'token-invalide' };
+      await entrepotUtilisateur.ajoute(jeanneDupont);
+      let suiteAppelee = false;
+
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {
+        suiteAppelee = true;
+      });
+
+      assert.equal(reponse.statusCode, 401);
+      assert.equal(requete.utilisateur, undefined);
+      assert.equal(suiteAppelee, false);
+    });
+
+    it('n’ajoute pas d’utilisateur (mais n’échoue pas) s’il n’y a pas de token', async () => {
+      requete.session = {};
+      await entrepotUtilisateur.ajoute(jeanneDupont);
+      let suiteAppelee = 0;
+
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {
+        suiteAppelee++;
+      });
+
+      assert.equal(requete.utilisateur, undefined);
+      assert.equal(reponse.statusCode, 200);
+      assert.equal(suiteAppelee, 1);
     });
   });
 

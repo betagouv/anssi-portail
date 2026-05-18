@@ -140,6 +140,16 @@ export const fabriqueMiddleware = ({
   const ajouteUtilisateurARequete =
     (entrepotUtilisateur: EntrepotUtilisateur, adaptateurHachage: AdaptateurHachage) =>
     async (requete: Request & { utilisateur?: Utilisateur | undefined }, reponse: Response, suite: NextFunction) => {
+      if (!requete.session?.token) {
+        suite();
+        return;
+      }
+      try {
+        adaptateurJWT.decode(requete.session?.token);
+      } catch {
+        reponse.sendStatus(401);
+        return;
+      }
       try {
         requete.utilisateur = requete.session?.email
           ? await entrepotUtilisateur.parEmailHache(adaptateurHachage.hache(requete.session?.email))
