@@ -118,7 +118,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       let cookie: string;
 
       beforeEach(() => {
-        cookie = encodeSession({ email: jeanneDupont.email, token: '' });
+        cookie = encodeSession({ email: jeanneDupont.email, token: 'valide' });
       });
 
       it("sauvegarde le résultat de test avec l'email de l'utilisateur", async () => {
