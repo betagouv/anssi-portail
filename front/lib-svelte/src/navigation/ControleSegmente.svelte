@@ -9,7 +9,6 @@
   let composant: HTMLDivElement;
 
   const sectionsDuComposant = () => composant.querySelectorAll(selecteurSections);
-
   const observeLesSections = () => {
     observateurDIntersection = new IntersectionObserver(
       (sections) => {
@@ -35,16 +34,18 @@
   onDestroy(() => sectionsDuComposant().forEach((s) => observateurDIntersection.unobserve(s)));
 </script>
 
+<dsfr-segmented
+  class="conteneur"
+  noLegend
+  elements={elements.map((e, idx) => ({ id: e.id, label: e.titre, name: e.ancre, value: idx }))}
+  value={indexActif}
+  onvaluechanged={(e: CustomEvent<number>) => {
+    indexActif = e.detail;
+    const fragment = elements[indexActif].ancre;
+    window.location.hash = fragment ? `#${fragment}` : '';
+  }}
+></dsfr-segmented>
 <div bind:this={composant}>
-  <dsfr-container class="conteneur">
-    <div class="controle-segmente">
-      {#each elements as element, index (element.id)}
-        <a href="#{element.ancre ?? element.id}" class="bouton-segmente" class:actif={index === indexActif}
-          >{element.titre}</a
-        >
-      {/each}
-    </div>
-  </dsfr-container>
   <slot></slot>
 </div>
 
@@ -54,9 +55,9 @@
     background: var(--background-default-grey);
     position: sticky;
     top: 0;
-    z-index: 2;
-    .controle-segmente {
-      overflow: auto;
-    }
+    z-index: calc(var(--ground) + 751);
+
+    display: grid;
+    place-items: center;
   }
 </style>
