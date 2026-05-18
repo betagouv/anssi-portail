@@ -20,19 +20,10 @@
   });
 
   const liens = $derived([
-    {
-      label: 'Présentation NIS 2',
-      fragment: '#presentation',
-    },
+    { label: 'Présentation NIS 2', fragment: '#presentation' },
     { label: 'Exigences et comparaison', fragment: '#exigences' },
-    {
-      label: 'Solutions pour vous accompagner',
-      fragment: '#solutions',
-    },
-    {
-      label: 'Documentation et FAQ',
-      fragment: '#documentation',
-    },
+    { label: 'Solutions pour vous accompagner', fragment: '#solutions' },
+    { label: 'Documentation et FAQ', fragment: '#documentation' },
   ]);
   let lienActif = $state('#presentation');
 </script>
