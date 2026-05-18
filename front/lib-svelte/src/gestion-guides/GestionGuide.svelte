@@ -1,10 +1,12 @@
 <script lang="ts">
+  import { profilStore } from '../stores/profil.store';
   import AjoutDocument from './AjoutDocument.svelte';
   import ListeDesDocuments, { type Document } from './ListeDesDocuments.svelte';
   import SelectionIdentifiantGuide from './SelectionIdentifiantGuide.svelte';
 
   let identifiantGuide: string = $state('');
   let nouveauxDocuments = $state<Document[]>([]);
+  const peutGererLesGuides = $derived($profilStore?.peutGererLesGuides ?? false);
 
   if (typeof window !== 'undefined') {
     const params = new URLSearchParams(window.location.search);
@@ -12,11 +14,13 @@
   }
 
   $effect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const guideActuel = params.get('idGuide') ?? '';
-    if (identifiantGuide !== guideActuel) {
-      const nouvelleUrl = identifiantGuide ? `?idGuide=${identifiantGuide}` : window.location.pathname;
-      window.history.replaceState(null, '', nouvelleUrl);
+    if (peutGererLesGuides) {
+      const params = new URLSearchParams(window.location.search);
+      const guideActuel = params.get('idGuide') ?? '';
+      if (identifiantGuide !== guideActuel) {
+        const nouvelleUrl = identifiantGuide ? `?idGuide=${identifiantGuide}` : window.location.pathname;
+        window.history.replaceState(null, '', nouvelleUrl);
+      }
     }
   });
 
@@ -26,12 +30,16 @@
 </script>
 
 <dsfr-container>
-  <div class="guide">
-    <h2>Rechercher un guide</h2>
-    <SelectionIdentifiantGuide bind:valeur={identifiantGuide} />
-  </div>
-  <ListeDesDocuments {identifiantGuide} bind:nouveauxDocuments />
-  <AjoutDocument {identifiantGuide} {surAjout} />
+  {#if peutGererLesGuides}
+    <div class="guide">
+      <h2>Rechercher un guide</h2>
+      <SelectionIdentifiantGuide bind:valeur={identifiantGuide} />
+    </div>
+    <ListeDesDocuments {identifiantGuide} bind:nouveauxDocuments />
+    <AjoutDocument {identifiantGuide} {surAjout} />
+  {:else}
+    <p>Vous n'avez pas les droits nécessaires à cette opération</p>
+  {/if}
 </dsfr-container>
 
 <style lang="scss">

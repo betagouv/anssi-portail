@@ -3,6 +3,7 @@ interface Session {
   email?: string;
   token?: string;
   AgentConnectIdToken?: string;
+  connexionAvecMFA?: boolean;
 }
 
 export type AgentConnectInfo = {

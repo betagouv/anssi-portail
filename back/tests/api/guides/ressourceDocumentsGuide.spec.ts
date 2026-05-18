@@ -39,6 +39,7 @@ describe('La ressource de gestion des documents des guides', () => {
     cookieJeanneDupont = encodeSession({
       email: jeanneDupont.email,
       token: 'token',
+      connexionAvecMFA: true,
     });
     await entrepotUtilisateur.ajoute(jeanneDupont);
     await entrepotUtilisateur.ajoute(hectorDurant);
@@ -153,9 +154,24 @@ describe('La ressource de gestion des documents des guides', () => {
       assert.equal(reponse.status, 401);
     });
 
-    it("répond 403 si l’utilisateur n'a pas l'autorisation de gérer les guides", async () => {
+    it("répond 403 si l’utilisateur n'a pas le droit de gérer les guides", async () => {
       const cookieHectorDurant = encodeSession({
         email: hectorDurant.email,
+        token: 'token',
+      });
+
+      const reponse = await request(serveur)
+        .post('/api/guides/zero-trust/documents')
+        .set('Cookie', [cookieHectorDurant])
+        .field('libelleDuLien', 'Cliquez pour télécharger le document')
+        .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
+
+      assert.equal(reponse.status, 403);
+    });
+
+    it("répond 403 si l’utilisateur n'a pas activé le MFA", async () => {
+      const cookieHectorDurant = encodeSession({
+        email: jeanneDupont.email,
         token: 'token',
       });
 

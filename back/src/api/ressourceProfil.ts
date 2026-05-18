@@ -40,6 +40,8 @@ const ressourceProfil = ({
           codeDepartement,
           codeRegion,
           codeActivite: organisation?.codeActivite,
+          peutGererLesGuides:
+            !!requete.session?.connexionAvecMFA && utilisateurConnecte.peutManipulerLesDocumentsDUnGuide(),
         });
       }
     })

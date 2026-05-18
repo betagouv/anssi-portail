@@ -12,6 +12,7 @@ export type Profil = {
   codeDepartement: string | undefined;
   codeRegion: string | undefined;
   codeActivite: string;
+  peutGererLesGuides: boolean;
 };
 
 const { subscribe, set } = writable<Profil | undefined>(undefined);

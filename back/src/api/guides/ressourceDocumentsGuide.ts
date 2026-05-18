@@ -13,7 +13,11 @@ import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 const valideAutorisation = (): RequestHandler => {
   return async (requete: Request, reponse: Response, suite: NextFunction) => {
-    if (!requete.utilisateur || !requete.utilisateur.peutManipulerLesDocumentsDUnGuide()) {
+    if (
+      !requete.session?.connexionAvecMFA ||
+      !requete.utilisateur ||
+      !requete.utilisateur.peutManipulerLesDocumentsDUnGuide()
+    ) {
       return reponse.status(403).json({
         erreur: "Vous n'êtes pas autorisé à ajouter un document",
       });
