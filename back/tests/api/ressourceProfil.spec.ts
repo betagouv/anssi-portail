@@ -10,15 +10,16 @@ import { Utilisateur } from '../../src/metier/utilisateur';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { encodeSession, enObjet } from './cookie';
 import { configurationDeTestDuServeur, fauxAdaptateurJWT } from './fauxObjets';
-import { jeanneDupont } from './objetsPretsALEmploi';
+import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi';
 
 describe('La ressource Profil', () => {
   let serveur: Express;
   let entrepotUtilisateur: EntrepotUtilisateur;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
-    entrepotUtilisateur.ajoute(jeanneDupont);
+    await entrepotUtilisateur.ajoute(jeanneDupont);
+    await entrepotUtilisateur.ajoute(hectorDurant);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       entrepotUtilisateur,
@@ -124,6 +125,41 @@ describe('La ressource Profil', () => {
       const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 
       assert.equal(reponse.body.codeActivite, '84.11Z');
+    });
+
+    describe("concernant la capacité de l'utilisateur à éditer les guides", () => {
+      it('est vraie si il a le MFA et le rôle correspondant', async () => {
+        const cookie = encodeSession({
+          email: 'jeanne.dupont@user.com',
+          connexionAvecMFA: true,
+        });
+
+        const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
+
+        assert.equal(reponse.body.peutGererLesGuides, true);
+      });
+
+      it("est fausse si il n'a pas le MFA", async () => {
+        const cookie = encodeSession({
+          email: 'jeanne.dupont@user.com',
+          connexionAvecMFA: false,
+        });
+
+        const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
+
+        assert.equal(reponse.body.peutGererLesGuides, false);
+      });
+
+      it("est fausse si il n'a pas le rôle nécessaire", async () => {
+        const cookie = encodeSession({
+          email: hectorDurant.email,
+          connexionAvecMFA: true,
+        });
+
+        const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
+
+        assert.equal(reponse.body.peutGererLesGuides, false);
+      });
     });
   });
 });
