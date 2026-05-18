@@ -61,7 +61,9 @@
 
   // Gestion de la section
   type Section = 'guides' | 'ressourcesEtServices';
-  let sectionActive = $derived<Section>(fragmentDeNavigation.section === 'guides' ? 'guides' : 'ressourcesEtServices');
+  let sectionActive = $derived<Section>(
+    fragmentDeNavigation.section === 'ressourcesEtServices' ? 'ressourcesEtServices' : 'guides'
+  );
   const changeDeSection = (section: Section) => {
     sectionActive = section;
     fragmentDeNavigation.changeSection(section);
@@ -134,6 +136,10 @@
 </dsfr-container>
 
 <div class="controle-segmente">
+  <button class="bouton-segmente" class:actif={sectionActive === 'guides'} onclick={() => changeDeSection('guides')}>
+    <lab-anssi-icone nom="book-2-line"></lab-anssi-icone>
+    <span>Guides de l'ANSSI</span>
+  </button>
   <button
     class="bouton-segmente"
     class:actif={sectionActive === 'ressourcesEtServices'}
@@ -141,10 +147,6 @@
   >
     <lab-anssi-icone nom="list-check"></lab-anssi-icone>
     <span>Services et outils</span>
-  </button>
-  <button class="bouton-segmente" class:actif={sectionActive === 'guides'} onclick={() => changeDeSection('guides')}>
-    <lab-anssi-icone nom="book-2-line"></lab-anssi-icone>
-    <span>Guides de l'ANSSI</span>
   </button>
 </div>
 
