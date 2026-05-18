@@ -1,25 +1,28 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import { profilStore } from '../stores/profil.store';
   import Hero from '../ui/Hero.svelte';
   import ComparaisonTest from './ComparaisonTest.svelte';
   import HistoriqueTests from './HistoriqueTests.svelte';
-  import OngletsTest, { type CleOnglet, clesOnglet } from './OngletsTest.svelte';
   import PropositionRefaireTest from './PropositionRefaireTest.svelte';
   import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
+
+  const clesOnglet = ['votre-organisation', 'comparaison', 'historique'];
+  type CleOnglet = (typeof clesOnglet)[number];
 
   export let animeTuiles = true;
   export let dateRealisationDernierTest: Date | undefined = undefined;
   export let defilementAutomatique = true;
 
-  let ongletActif: CleOnglet | undefined;
+  let lienActif: CleOnglet | undefined;
   let idResultatTest: string | undefined;
 
   const changeOngletActif = () => {
     const ongletRiche = window.location.hash.slice(1).split('/');
     const onglet = ongletRiche[0];
     idResultatTest = ongletRiche?.[1];
-    ongletActif = clesOnglet.includes(onglet) ? onglet : 'votre-organisation';
+    lienActif = clesOnglet.includes(onglet) ? onglet : 'votre-organisation';
   };
 
   onMount(() => {
@@ -27,21 +30,11 @@
     changeOngletActif();
   });
 
-  $: {
-    if (ongletActif) {
-      if (ongletActif !== 'historique') idResultatTest = undefined;
-      history.pushState(
-        null,
-        '',
-        `${window.location.pathname}#${ongletActif}${idResultatTest ? '/' + idResultatTest : ''}`
-      );
-    }
-  }
-
-  const afficheHistorique = () => {
-    idResultatTest = undefined;
-    history.pushState(null, '', `${window.location.pathname}#historique`);
-  };
+  const liens = [
+    { label: 'Maturité cyber de votre organisation', fragment: '#votre-organisation' },
+    { label: 'Historique', fragment: '#historique' },
+    { label: 'Comparaison avec d’autres entités', fragment: '#comparaison' },
+  ];
 </script>
 
 <Hero
@@ -52,11 +45,13 @@
 
 <PropositionRefaireTest />
 
-<OngletsTest bind:ongletActif on:reclicHistorique={afficheHistorique} />
+{#if $profilStore && lienActif}
+  <NavigationTertiaire {liens} bind:lienActif />
+{/if}
 
-{#if ongletActif === 'votre-organisation'}
+{#if lienActif === '#votre-organisation'}
   <ResultatsMonOrganisation {animeTuiles} dateRealisation={dateRealisationDernierTest} {defilementAutomatique} />
-{:else if ongletActif === 'historique' && $profilStore}
+{:else if lienActif === '#historique' && $profilStore}
   <HistoriqueTests {idResultatTest} />
 {:else if $profilStore}
   <ComparaisonTest />
