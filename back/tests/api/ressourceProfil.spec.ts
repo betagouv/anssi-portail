@@ -36,6 +36,7 @@ describe('La ressource Profil', () => {
     it("renvoie les informations de l'utilisateur", async () => {
       const cookie = encodeSession({
         email: 'jeanne.dupont@user.com',
+        token: 'valide',
       });
 
       const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
@@ -83,6 +84,7 @@ describe('La ressource Profil', () => {
 
       const cookie = encodeSession({
         email: 'jean.martin@user.com',
+        token: 'valide',
       });
 
       const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
@@ -120,6 +122,7 @@ describe('La ressource Profil', () => {
     it("renvoie le code d'activité de l'organisation", async () => {
       const cookie = encodeSession({
         email: 'jeanne.dupont@user.com',
+        token: 'valide',
       });
 
       const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
@@ -131,6 +134,7 @@ describe('La ressource Profil', () => {
       it('est vraie si il a le MFA et le rôle correspondant', async () => {
         const cookie = encodeSession({
           email: 'jeanne.dupont@user.com',
+          token: 'valide',
           connexionAvecMFA: true,
         });
 
@@ -153,6 +157,7 @@ describe('La ressource Profil', () => {
       it("est fausse si il n'a pas le rôle nécessaire", async () => {
         const cookie = encodeSession({
           email: hectorDurant.email,
+          token: 'valide',
           connexionAvecMFA: true,
         });
 
