@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { creeLeFragmentDeNavigation } from '../navigation/fragmentDeNavigation';
+  import ControleSegmente from '../navigation/ControleSegmente.svelte';
+  import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '../navigation/fragmentDeNavigation';
   import { profilStore } from '../stores/profil.store';
   import ChampRecherche from '../ui/ChampRecherche.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
@@ -51,31 +52,18 @@
 
   // Gestion du fragment
   let fragmentDeNavigation = $state(creeLeFragmentDeNavigation(window.location.hash));
-  const changeLeFragmentDeNavigation = () => {
-    fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
-    appliqueLesFiltres();
-  };
-  $effect(() => {
-    window.addEventListener('hashchange', changeLeFragmentDeNavigation);
-    return () => {
-      window.removeEventListener('hashchange', changeLeFragmentDeNavigation);
-    };
-  });
 
   // Gestion de la section
   type Section = 'guides' | 'ressourcesEtServices';
-  let sectionActive = $derived<Section>(
-    fragmentDeNavigation.section === 'ressourcesEtServices' ? 'ressourcesEtServices' : 'guides'
-  );
-  const changeDeSection = (section: Section) => {
-    sectionActive = section;
-    fragmentDeNavigation.changeSection(section);
-    window.location.hash = fragmentDeNavigation.serialise();
-  };
+  let sectionActive = $derived<Section>('guides');
+  let indexActif = $derived(sectionActive === 'guides' ? 0 : 1);
+  $effect(() => {
+    sectionActive = indexActif === 0 ? 'guides' : 'ressourcesEtServices';
+  });
 
   // Gestion des filtres
   const reinitialiseFiltres = () => recherches.reinitialise();
-  const appliqueLesFiltres = () => {
+  const appliqueLesFiltres = (fragmentDeNavigation: FragmentDeNavigation) => {
     $rechercheParBesoin = fragmentDeNavigation.extraisValeur<BesoinCyber>('besoin', null);
     $rechercheParLangue = fragmentDeNavigation.extraisTableau<Langue>('langues');
     $rechercheParCollection = depuisIdsCollection(fragmentDeNavigation.extraisTableau<CollectionGuide>('collections'));
@@ -84,7 +72,7 @@
     $rechercheParTypologie = fragmentDeNavigation.extraisTableau<Typologie>('types');
     $rechercheParSource = fragmentDeNavigation.extraisTableau<Source>('sources');
   };
-  appliqueLesFiltres();
+  appliqueLesFiltres(fragmentDeNavigation);
   $effect(() => {
     fragmentDeNavigation.change('besoin', $rechercheParBesoin);
     fragmentDeNavigation.change('langues', $rechercheParLangue);
@@ -138,20 +126,15 @@
   <ChampRecherche bind:recherche={$rechercheTextuelle} />
 </dsfr-container>
 
-<div class="controle-segmente">
-  <button class="bouton-segmente" class:actif={sectionActive === 'guides'} onclick={() => changeDeSection('guides')}>
-    <lab-anssi-icone nom="book-2-line"></lab-anssi-icone>
-    <span>Guides de l'ANSSI</span>
-  </button>
-  <button
-    class="bouton-segmente"
-    class:actif={sectionActive === 'ressourcesEtServices'}
-    onclick={() => changeDeSection('ressourcesEtServices')}
-  >
-    <lab-anssi-icone nom="list-check"></lab-anssi-icone>
-    <span>Services et outils</span>
-  </button>
-</div>
+<ControleSegmente
+  elements={[
+    { id: 'guides', titre: 'Guides de l’ANSSI', icone: 'book-2-line', ancre: 'guides' },
+    { id: 'ressources-et-services', titre: 'Services et outils', icone: 'list-check', ancre: 'ressourcesEtServices' },
+  ]}
+  bind:indexActif
+  {fragmentDeNavigation}
+  lorsDuChangement={appliqueLesFiltres}
+></ControleSegmente>
 
 <dsfr-container class="contenu-catalogue">
   {#if !$profilStore && sectionActive === 'guides'}
@@ -213,19 +196,6 @@
 </dsfr-container>
 
 <style lang="scss">
-  .controle-segmente {
-    margin: 3rem auto 0;
-    width: min-content;
-
-    .bouton-segmente {
-      padding: 0.5rem 1rem 0.5rem 0.75rem;
-
-      lab-anssi-icone {
-        margin-right: 0.5rem;
-      }
-    }
-  }
-
   .contenu-section {
     flex-direction: column;
   }
