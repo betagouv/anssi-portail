@@ -94,7 +94,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: empreintes-cellar
-          path: empreintes-cellar.txt
+          path: |
+            empreintes-cellar.txt
+            resultats/*.txt
 
       - name: Fail only on real error
         if: steps.check.outputs.rc != '0' && steps.check.outputs.rc != '1'
