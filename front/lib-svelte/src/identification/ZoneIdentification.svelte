@@ -50,16 +50,12 @@
 </div>
 
 <style lang="scss">
-  @use '../../../assets/styles/responsive' as *;
-
   * {
     box-sizing: border-box;
   }
 
   .conteneur-zone-indentification {
-    @include a-partir-de(lg) {
-      display: flex;
-      align-items: center;
-    }
+    display: flex;
+    align-items: center;
   }
 </style>
