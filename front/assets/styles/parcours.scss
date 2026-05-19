@@ -9,8 +9,8 @@ dsfr-container {
 
 .sommaire {
   .contenu-section {
-    padding-bottom: 16px;
-    overflow: auto;
+    display: grid;
+    place-items: center;
   }
 
   margin-top: 16px;
