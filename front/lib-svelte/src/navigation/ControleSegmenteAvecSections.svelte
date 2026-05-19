@@ -1,19 +1,23 @@
 <script lang="ts">
   import { onDestroy, onMount, tick } from 'svelte';
 
-  export let elements: { id: string; titre: string; ancre?: string }[];
-  export let selecteurSections: string;
-  let indexActif: number = 0;
+  type Props = {
+    elements: { id: string; titre: string; ancre?: string }[];
+    selecteurSections: string;
+  };
+  let { elements, selecteurSections }: Props = $props();
+
+  let indexActif = $state(0);
 
   let observateurDIntersection: IntersectionObserver;
-  let composant: HTMLDivElement;
+  let composant = $state<HTMLDivElement | undefined>(undefined);
 
-  const sectionsDuComposant = () => composant.querySelectorAll(selecteurSections);
+  const sectionsDuComposant = () => composant?.querySelectorAll(selecteurSections);
   const observeLesSections = () => {
     observateurDIntersection = new IntersectionObserver(
       (sections) => {
         sections.forEach((section) => {
-          const sections = composant.querySelectorAll(selecteurSections);
+          const sections = composant?.querySelectorAll(selecteurSections) ?? [];
 
           if (section.isIntersecting) {
             const sectionVisible = section.target as HTMLElement;
@@ -23,7 +27,7 @@
       },
       { rootMargin: '-30% 0% -62% 0%' }
     );
-    sectionsDuComposant().forEach((s) => observateurDIntersection.observe(s));
+    sectionsDuComposant()?.forEach((s) => observateurDIntersection.observe(s));
   };
 
   onMount(async () => {
@@ -31,7 +35,7 @@
     observeLesSections();
   });
 
-  onDestroy(() => sectionsDuComposant().forEach((s) => observateurDIntersection.unobserve(s)));
+  onDestroy(() => sectionsDuComposant()?.forEach((s) => observateurDIntersection.unobserve(s)));
 </script>
 
 <dsfr-segmented
