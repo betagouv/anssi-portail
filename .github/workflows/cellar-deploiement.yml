@@ -30,7 +30,7 @@ jobs:
         id: check
         run: |
           mkdir -p resultats
-          
+
           rclone check \
             cellar:${{ secrets.GUIDES_BUCKET_SOURCE }} \
             cellar:${{ secrets.GUIDES_BUCKET_CIBLE }} \
@@ -161,3 +161,23 @@ jobs:
           rclone sync --exclude .backup_proof \
             cellar:${{ secrets.GUIDES_BUCKET_SOURCE }} \
             cellar:${{ secrets.GUIDES_BUCKET_CIBLE }} \
+
+  notifie-changement:
+    runs-on: ubuntu-latest
+    needs: recopie-source-vers-destination
+    environment: DEPLOIEMENT_GUIDES
+    steps:
+      - name: Récupère les résultats
+        uses: actions/download-artifact@v4
+        with:
+          name: empreintes-cellar
+
+      - name: Identifie les fichiers modifiés
+        run: |
+          grep -hv '\.avif$' resultats/modifications.txt resultats/suppressions.txt resultats/ajouts.txt > fichiers.txt || true
+          NB_FICHIERS=$(wc -l < fichiers.txt 2>/dev/null || echo 0)
+          if [ "$NB_FICHIERS" -gt 0 ]; then
+            echo "Appel MQC nécessaire..." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Pas besoin d'appeler MQC..." >> $GITHUB_STEP_SUMMARY
+          fi
