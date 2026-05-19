@@ -86,47 +86,26 @@
       href: '/financements',
       active: cheminRelatif === '/financements',
     },
-    {
-      label: 'Promouvoir',
-      id: 'nav-promouvoir',
-      type: 'menu',
-      collapsable: true,
-      collapseId: 'nav-promouvoir',
-      active: ['/promouvoir-messervicescyber', '/promouvoir-diagnostic-cyber'].includes(cheminRelatif),
-      items: [
-        {
-          label: 'Promouvoir MesServicesCyber',
-          id: 'nav-promouvoir-1',
-          type: 'link',
-          href: '/promouvoir-messervicescyber',
-          active: cheminRelatif === '/promouvoir-messervicescyber',
-        },
-        {
-          label: 'Promouvoir le diagnostic cyber',
-          id: 'nav-promouvoir-2',
-          type: 'link',
-          href: '/promouvoir-diagnostic-cyber',
-          active: cheminRelatif === '/promouvoir-diagnostic-cyber',
-        },
-      ],
-    },
   ]);
 </script>
 
-<dsfr-navigation items={menu}>
+<div class="nav">
+  <dsfr-navigation items={menu}></dsfr-navigation>
   {#if estBureau}
-    <div slot="afternavigation" class="centre">
+    <div>
       <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart">
       </lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
     </div>
   {/if}
-</dsfr-navigation>
+</div>
 
 <style lang="scss">
-  .centre {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 100%;
+  @use '../../../assets/styles/responsive' as *;
+  .nav {
+    @include a-partir-de(lg) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 </style>
