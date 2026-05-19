@@ -31,6 +31,9 @@
   const idsCollectionsGuide: Record<CollectionGuide, string> = {
     [CollectionGuide.LES_ESSENTIELS]: 'essentiels',
     [CollectionGuide.LES_FONDAMENTAUX]: 'fondamentaux',
+    [CollectionGuide.IA]: 'ia',
+    [CollectionGuide.CRYPTOGRAPHIE]: 'cryptographie',
+    [CollectionGuide.SYSTEMES_INDUSTRIELS]: 'systemes-industriels',
     [CollectionGuide.CRISE_CYBER]: 'crise-cyber',
     [CollectionGuide.GESTION_DES_RISQUES_CYBER]: 'gestion-risques-cyber',
     [CollectionGuide.SUPERVISION_DE_SECURITE]: 'supervision-securite',

@@ -13,6 +13,9 @@ export const laCouleurDuBadgeSelonLaCollection = (collection: CollectionGuide): 
     'Les fondamentaux': 'purple-glycine',
     Remédiation: 'pink-tuile',
     'Supervision de sécurité': 'beige-gris-galet',
+    'Intelligence artificielle': 'green-tilleul-verveine',
+    'Systèmes industriels': 'green-bourgeon',
+    Cryptographie: 'green-emeraude',
     Autre: 'brown-opera',
   };
 
