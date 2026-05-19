@@ -8,11 +8,17 @@
   $: toutesLesExpertisesTechniques =
     $rechercheParCollection.includes(CollectionGuide.LES_ESSENTIELS) &&
     $rechercheParCollection.includes(CollectionGuide.LES_FONDAMENTAUX) &&
+    $rechercheParCollection.includes(CollectionGuide.IA) &&
+    $rechercheParCollection.includes(CollectionGuide.SYSTEMES_INDUSTRIELS) &&
+    $rechercheParCollection.includes(CollectionGuide.CRYPTOGRAPHIE) &&
     $rechercheParCollection.includes(CollectionGuide.AUTRE);
 
   $: quelquesExpertisesTechniques =
     $rechercheParCollection.includes(CollectionGuide.LES_ESSENTIELS) ||
     $rechercheParCollection.includes(CollectionGuide.LES_FONDAMENTAUX) ||
+    $rechercheParCollection.includes(CollectionGuide.IA) ||
+    $rechercheParCollection.includes(CollectionGuide.SYSTEMES_INDUSTRIELS) ||
+    $rechercheParCollection.includes(CollectionGuide.CRYPTOGRAPHIE) ||
     $rechercheParCollection.includes(CollectionGuide.AUTRE);
 
   $: unePartieSeulementDesExpertisesTechniques = !toutesLesExpertisesTechniques && quelquesExpertisesTechniques;
@@ -22,12 +28,18 @@
       rechercheParCollection.retire([
         CollectionGuide.LES_ESSENTIELS,
         CollectionGuide.LES_FONDAMENTAUX,
+        CollectionGuide.IA,
+        CollectionGuide.CRYPTOGRAPHIE,
+        CollectionGuide.SYSTEMES_INDUSTRIELS,
         CollectionGuide.AUTRE,
       ]);
     } else {
       rechercheParCollection.ajoute([
         CollectionGuide.LES_ESSENTIELS,
         CollectionGuide.LES_FONDAMENTAUX,
+        CollectionGuide.IA,
+        CollectionGuide.CRYPTOGRAPHIE,
+        CollectionGuide.SYSTEMES_INDUSTRIELS,
         CollectionGuide.AUTRE,
       ]);
     }
@@ -47,12 +59,18 @@
     <span class="compte">
       {($nombreGuides.parCollection[CollectionGuide.LES_ESSENTIELS] ?? 0) +
         ($nombreGuides.parCollection[CollectionGuide.LES_FONDAMENTAUX] ?? 0) +
+        ($nombreGuides.parCollection[CollectionGuide.SYSTEMES_INDUSTRIELS] ?? 0) +
+        ($nombreGuides.parCollection[CollectionGuide.IA] ?? 0) +
+        ($nombreGuides.parCollection[CollectionGuide.CRYPTOGRAPHIE] ?? 0) +
         ($nombreGuides.parCollection[CollectionGuide.AUTRE] ?? 0)}
     </span>
   </div>
   <fieldset>
     <ChoixFiltreCollection valeur={CollectionGuide.LES_ESSENTIELS} />
     <ChoixFiltreCollection valeur={CollectionGuide.LES_FONDAMENTAUX} />
+    <ChoixFiltreCollection valeur={CollectionGuide.CRYPTOGRAPHIE} />
+    <ChoixFiltreCollection valeur={CollectionGuide.IA} />
+    <ChoixFiltreCollection valeur={CollectionGuide.SYSTEMES_INDUSTRIELS} />
     <ChoixFiltreCollection valeur={CollectionGuide.AUTRE} />
   </fieldset>
   <ChoixFiltreCollection valeur={CollectionGuide.CRISE_CYBER} />

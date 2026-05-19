@@ -1,7 +1,6 @@
 import { get } from 'svelte/store';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { Langue } from '../../../src/catalogue/Guide.types';
-import { CollectionGuide } from '../../../src/catalogue/Guide.types';
+import { CollectionGuide, Langue } from '../../../src/catalogue/Guide.types';
 import { guidesStore } from '../../../src/catalogue/stores/guides/guides.store';
 import { nombreGuides } from '../../../src/catalogue/stores/guides/nombreGuides.store';
 import { guideDevsecops, guideDevsecopsEN, guideZeroTrust } from './objetsExemples';
@@ -28,7 +27,7 @@ describe('Le store du nombre de guides', () => {
     it("pour retourner autant d'entrée que de collection", () => {
       const parCollection = get(nombreGuides).parCollection;
 
-      expect(Object.keys(parCollection)).toHaveLength(7);
+      expect(Object.keys(parCollection)).toHaveLength(10);
     });
     it('pour retourner le nombre de guide pour chaque collection', () => {
       const parCollection = get(nombreGuides).parCollection;
@@ -39,6 +38,10 @@ describe('Le store du nombre de guides', () => {
       expect(parCollection[CollectionGuide.LES_FONDAMENTAUX]).toBe(1);
       expect(parCollection[CollectionGuide.REMEDIATION]).toBe(0);
       expect(parCollection[CollectionGuide.SUPERVISION_DE_SECURITE]).toBe(0);
+      expect(parCollection[CollectionGuide.IA]).toBe(0);
+      expect(parCollection[CollectionGuide.SYSTEMES_INDUSTRIELS]).toBe(0);
+      expect(parCollection[CollectionGuide.CRYPTOGRAPHIE]).toBe(0);
+      expect(parCollection[CollectionGuide.AUTRE]).toBe(0);
     });
   });
 });
