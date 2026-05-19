@@ -14,7 +14,7 @@
   <dsfr-tile
     title="Prestataires qualifiés et labellisés"
     has-description="true"
-    description="Tous les prestataires de confiance et produits/services qualifiés et labellisés afin de vous accompagner sur vos différents enjeux cyber&nbsp;: audits, homologations, réponses à incidents..."
+    description="Tous les prestataires de confiance et produits/services qualifiés et labellisés afin de vous accompagner sur vos différents enjeux cyber."
     href="/prestataires-labellises"
     enlarge="true"
   >
