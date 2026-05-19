@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import type { ItemCyber } from '../../catalogue/Catalogue.types';
   import { chargeGuidesDansLeStore, guidesStore } from '../../catalogue/stores/guides/guides.store';
-  import ControleSegmente from '../../navigation/ControleSegmente.svelte';
+  import ControleSegmenteAvecSections from '../../navigation/ControleSegmenteAvecSections.svelte';
   import ActionParcoursAvecItems from '../../parcours/ActionParcoursAvecItems.svelte';
   import { versItemsCyberOuGuide } from '../../parcours/itemDuParcours';
 
@@ -76,7 +76,7 @@
 </script>
 
 <div id="solutions">
-  <ControleSegmente elements={actions} selecteurSections=".action">
+  <ControleSegmenteAvecSections elements={actions} selecteurSections=".action">
     {#each actions as action, index (action.id)}
       <ActionParcoursAvecItems
         titre={action.titre}
@@ -86,7 +86,7 @@
         ancre={action.ancre}
       ></ActionParcoursAvecItems>
     {/each}
-  </ControleSegmente>
+  </ControleSegmenteAvecSections>
 </div>
 
 <style lang="scss">
