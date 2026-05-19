@@ -1,22 +1,26 @@
-sensibiliser:
-  titre: Sensibiliser
-  explication: Commencez à sensibiliser les dirigeants et salariés aux risques cyber et aux bonnes pratiques.
-  items:
-    - /ressources/risques-cyber
-    - /ressources/cybermalveillance
+actions:
+  - id: sensibiliser
+    label: Sensibiliser
+    value: 0
+    explication: Commencez à sensibiliser les dirigeants et salariés aux risques cyber et aux bonnes pratiques.
+    items:
+      - /ressources/risques-cyber
+      - /ressources/cybermalveillance
 
-securiser:
-  titre: Sécuriser
-  explication: Mettez en œuvre rapidement des premières mesures de sécurité et réduisez les vulnérabilités de vos systèmes.
-  items:
-    - /services/mon-aide-cyber
-    - /ressources/label-expert-cyber
-    - /ressources/visa-secu
+  - id: securiser
+    label: Sécuriser
+    value: 1
+    explication: Mettez en œuvre rapidement des premières mesures de sécurité et réduisez les vulnérabilités de vos systèmes.
+    items:
+      - /services/mon-aide-cyber
+      - /ressources/label-expert-cyber
+      - /ressources/visa-secu
 
-reagir:
-  titre: Réagir
-  explication: Faites-vous accompagner en cas de problème.
-  items:
-    - /services/assistance-reponse-incidents
-    - /services/diagnostic-17cyber
-    - /services/cot
+  - id: reagir
+    label: Réagir
+    value: 2
+    explication: Faites-vous accompagner en cas de problème.
+    items:
+      - /services/assistance-reponse-incidents
+      - /services/diagnostic-17cyber
+      - /services/cot

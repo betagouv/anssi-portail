@@ -1,40 +1,45 @@
-sensibiliser:
-  titre: Sensibiliser
-  explication: Continuez à sensibiliser les dirigeants et salariés aux risques cyber et aux bonnes pratiques
-  items:
-    - /ressources/risques-cyber
-    - /ressources/panorama
-    - /services/cot
-    - /ressources/malette-cyber
+actions:
+  - id: sensibiliser
+    label: Sensibiliser
+    value: 0
+    explication: Continuez à sensibiliser les dirigeants et salariés aux risques cyber et aux bonnes pratiques
+    items:
+      - /ressources/risques-cyber
+      - /ressources/panorama
+      - /services/cot
+      - /ressources/malette-cyber
 
-se-former:
-  titre: Se former
-  explication: Développez les compétences cyber de vos équipes.
-  items:
-    - /ressources/cyber-enjeux-pro
-    - /services/secnum-academie
-    - /services/sens-cyber
-    - /ressources/secnumedufc
-    - /services/pix
+  - id: se-former
+    label: Se former
+    value: 1
+    explication: Développez les compétences cyber de vos équipes.
+    items:
+      - /ressources/cyber-enjeux-pro
+      - /services/secnum-academie
+      - /services/sens-cyber
+      - /ressources/secnumedufc
+      - /services/pix
 
-securiser:
-  titre: Sécuriser
-  explication: Mettez en place ou améliorez le pilotage de votre plan d’action cyber.
-  items:
-    - /services/mon-aide-cyber
-    - /services/mon-service-securise:
-        tags:
-          - Entités publiques
-    - /ressources/prestas-ebios
-    - /ressources/visa-secu
-    - /ressources/visa-secu-produit
-    - /ressources/cnil-reco
-    - /services/ads
-    - /services/silene
+  - id: securiser
+    label: Sécuriser
+    value: 2
+    explication: Mettez en place ou améliorez le pilotage de votre plan d’action cyber.
+    items:
+      - /services/mon-aide-cyber
+      - /services/mon-service-securise:
+          tags:
+            - Entités publiques
+      - /ressources/prestas-ebios
+      - /ressources/visa-secu
+      - /ressources/visa-secu-produit
+      - /ressources/cnil-reco
+      - /services/ads
+      - /services/silene
 
-reagir:
-  titre: Réagir
-  explication: Préparez-vous à un incident ou une crise d’origine cyber afin de mieux y répondre.
-  items:
-    - /services/assistance-reponse-incidents
-    - /services/diagnostic-17cyber
+  - id: reagir
+    label: Réagir
+    value: 3
+    explication: Préparez-vous à un incident ou une crise d’origine cyber afin de mieux y répondre.
+    items:
+      - /services/assistance-reponse-incidents
+      - /services/diagnostic-17cyber

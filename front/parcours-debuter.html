@@ -38,33 +38,31 @@ titreHtml: 'Cybersécurité : se lancer ! | MesServicesCyber'
   </div>
 </dsfr-container>
 
+{%assign actions = site.data.parcours-debuter.actions %}
 <dsfr-container class="sommaire">
-    <div class="controle-segmente">
-      {% for action in site.data.parcours-debuter %}
-      <a
-        href="#{{action[0]}}"
-        class="{%if forloop.first%}actif{% endif %} bouton-segmente"
-      >{{action[1].titre}}</a
-      >
-      {% endfor %}
-    </div>
+  <div class="contenu-section">
+    <dsfr-segmented
+      no-legend
+      elements="{{actions | jsonify | escape }}"
+      value="0">
+    </dsfr-segmented>
+  </div>
 </dsfr-container>
 
-{% for action in site.data.parcours-debuter %}
+{% for action in actions %}
   {%assign indexModulo2 = forloop.index0 | modulo: 2 %}
   {%if indexModulo2 == 1 %}
     {%assign fondAlternatif=true%}
   {%else%}
     {%assign fondAlternatif=false%}
   {%endif%}
-  {% assign idAction=action[0] %}
-  {% assign infosAction=action[1] %}
+  {% assign idAction=action.id %}
   {% include action-parcours-avec-items.html
     id=idAction
-    titre=infosAction.titre
-    explication=infosAction.explication
-    parcours=infosAction.parcours
-    items=infosAction.items
+    titre=action.label
+    explication=action.explication
+    parcours=action.parcours
+    items=action.items
     fondAlternatif=fondAlternatif
   %}
 {% endfor %}
