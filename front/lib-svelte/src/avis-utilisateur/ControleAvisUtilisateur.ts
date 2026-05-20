@@ -3,8 +3,12 @@ export const DATE_DERNIER_AVIS_DONNE = 'dateDernierAvis';
 export const DATE_DEBUT_SESSION = 'datePremiereVisite';
 
 export const extraitDateDepuisNavigateur = ({ cle, storage }: { cle: string; storage: Storage }): Date | undefined => {
-  const datePremiereVisiteEnregistree = new Date(storage.getItem(cle) ?? '');
-  return isNaN(datePremiereVisiteEnregistree.getTime()) ? undefined : datePremiereVisiteEnregistree;
+  const dateLue = new Date(storage.getItem(cle) ?? '');
+  return isNaN(dateLue.getTime()) ? undefined : dateLue;
+};
+
+const enregistreDateDansNavigateur = ({ cle, storage, date }: { cle: string; storage: Storage; date: Date }): void => {
+  storage.setItem(cle, date.toUTCString());
 };
 
 export interface EntrepotAvisUtilisateur {
@@ -32,16 +36,28 @@ export class EntrepotNavigateurAvisUtilisateur implements EntrepotAvisUtilisateu
       cle: DATE_DEBUT_SESSION,
     });
   modifieDateDebutSession = (date: Date) => {
-    sessionStorage.setItem(DATE_DEBUT_SESSION, date.toUTCString());
+    enregistreDateDansNavigateur({
+      storage: sessionStorage,
+      cle: DATE_DEBUT_SESSION,
+      date,
+    });
   };
 
-  modifieDateDerniereFermetureAvis(date: Date) {
-    localStorage.setItem(DATE_DERNIERE_FERMETURE_CLE, date.toUTCString());
-  }
+  modifieDateDerniereFermetureAvis = (date: Date) => {
+    enregistreDateDansNavigateur({
+      storage: localStorage,
+      cle: DATE_DERNIERE_FERMETURE_CLE,
+      date,
+    });
+  };
 
-  modifieDateDernierAvisDonne(date: Date) {
-    localStorage.setItem(DATE_DERNIER_AVIS_DONNE, date.toUTCString());
-  }
+  modifieDateDernierAvisDonne = (date: Date) => {
+    enregistreDateDansNavigateur({
+      storage: localStorage,
+      cle: DATE_DERNIER_AVIS_DONNE,
+      date,
+    });
+  };
 }
 
 export const entrepotNavigateurAvisUtilisateur = new EntrepotNavigateurAvisUtilisateur();
