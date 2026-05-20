@@ -34,7 +34,7 @@ jobs:
           rclone check \
             cellar:${{ secrets.GUIDES_BUCKET_SOURCE }} \
             cellar:${{ secrets.GUIDES_BUCKET_CIBLE }} \
-            --one-way \
+            --exclude .backup_proof \
             --differ resultats/modifications.txt \
             --missing-on-dst resultats/ajouts.txt \
             --missing-on-src resultats/suppressions.txt \
