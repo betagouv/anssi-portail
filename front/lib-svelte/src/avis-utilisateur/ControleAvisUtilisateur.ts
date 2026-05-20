@@ -3,12 +3,20 @@ const DATE_DERNIER_AVIS_DONNE = 'dateDernierAvis';
 const DATE_DEBUT_SESSION = 'datePremiereVisite';
 
 const extraitDateDepuisNavigateur = ({ cle, storage }: { cle: string; storage: Storage }): Date | undefined => {
-  const dateLue = new Date(storage.getItem(cle) ?? '');
-  return isNaN(dateLue.getTime()) ? undefined : dateLue;
+  try {
+    const dateLue = new Date(storage.getItem(cle) ?? '');
+    return isNaN(dateLue.getTime()) ? undefined : dateLue;
+  } catch {
+    return undefined;
+  }
 };
 
 const enregistreDateDansNavigateur = ({ cle, storage, date }: { cle: string; storage: Storage; date: Date }): void => {
-  storage.setItem(cle, date.toUTCString());
+  try {
+    storage.setItem(cle, date.toUTCString());
+  } catch {
+    // Silencieusement ignoré
+  }
 };
 
 export interface EntrepotAvisUtilisateur {
