@@ -22,7 +22,7 @@
     const ongletRiche = window.location.hash.slice(1).split('/');
     const onglet = ongletRiche[0];
     idResultatTest = ongletRiche?.[1];
-    lienActif = clesOnglet.includes(onglet) ? onglet : 'votre-organisation';
+    lienActif = clesOnglet.includes(onglet) ? onglet : '#votre-organisation';
   };
 
   onMount(() => {
