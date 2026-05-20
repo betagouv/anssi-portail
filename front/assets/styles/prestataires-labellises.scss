@@ -3,6 +3,13 @@
 
 @use '../../assets/styles/responsive' as *;
 
+#fil-ariane {
+  margin-top: -16px;
+  dsfr-breadcrumb {
+    transform: translateY(0);
+  }
+}
+
 .prestataires-labellises {
   padding: 48px 0 72px;
 

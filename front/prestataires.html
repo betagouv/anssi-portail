@@ -6,22 +6,21 @@ styles:
   - /assets/styles/prestataires-labellises.css
 ---
 
+<script type="application/json" id="donnees">
+  {
+    "feuille": "Prestataires qualifiés et labellisés",
+    "fondSombre": true
+  }
+</script>
+
 <dsfr-container class="chapeau fond-sombre">
-    <div class="fil-ariane">
-      <msc-lien
-        href="/"
-        libelle="Accueil"
-        neutre
-      ></msc-lien>
-      <span><img src="/assets/images/icone-chevron-droite.svg" alt="" /></span>
-      <span>Prestataires qualifiés et labellisés</span>
-    </div>
-    <h1 class="alternatif-xs-ns">Prestataires qualifiés et labellisés</h1>
-    <p class="texte-chapo-xl-ns">
-      Tous les prestataires de confiance et produits/services labellisés afin de
-      vous accompagner sur vos différents enjeux cyber : audits, homologations,
-      réponses à incidents...
-    </p>
+  {% include composant-svelte.html id="fil-ariane" %}
+  <h1 class="alternatif-xs-ns">Prestataires qualifiés et labellisés</h1>
+  <p class="texte-chapo-xl-ns">
+    Tous les prestataires de confiance et produits/services labellisés afin de
+    vous accompagner sur vos différents enjeux cyber : audits, homologations,
+    réponses à incidents...
+  </p>
 </dsfr-container>
 <dsfr-container class="prestataires-labellises">
   <div class="contenu-section">
