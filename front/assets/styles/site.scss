@@ -144,19 +144,6 @@ a {
   max-width: var(--largeur-max-contenu);
 }
 
-.fil-ariane {
-  font-size: 0.75rem;
-  line-height: 1.25rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  align-items: baseline;
-
-  a {
-    color: var(--noir);
-  }
-}
-
 .badge {
   justify-content: center;
   border-radius: 8px;
@@ -370,23 +357,10 @@ dsfr-footer {
     gap: 16px;
   }
 
-  .fil-ariane {
-    background: none;
-
-    img {
-      filter: invert(100%);
-    }
-
-    a {
-      color: var(--text-inverted-grey);
-      text-decoration-color: white;
-    }
-  }
-
   h1.alternatif-xs-ns {
     font-size: 2.5rem;
     line-height: 2.875rem;
-    margin: 16px 0 16px;
+    margin: 16px 0;
 
     @include a-partir-de(md) {
       font-size: 3.5rem;
