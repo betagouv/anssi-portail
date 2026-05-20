@@ -189,13 +189,13 @@ jobs:
                       | split("\n")
                       | map(select(length > 0 and endswith(".pdf")))
                       ),
-                      
+
                       fichiers_supprimes:
                           ($suppressions
                             | split("\n")
                             | map(select(length > 0 and endswith(".pdf")))
                             ),
-                      
+
                       fichiers_ajoutes:
                           ($ajouts
                             | split("\n")
@@ -203,10 +203,13 @@ jobs:
                             )
               }'
             )
-            curl -X POST https://mqc-test.free.beeceptor.com \
+            TOKEN=${{ secrets.MQC_API_DOCUMENTS_TOKEN }}
+            URL=${{ secrets.MQC_API_DOCUMENTS_URL }}
+            curl -X POST "$URL" \
               -H "Content-Type: application/json" \
+              -H "Authorization: Bearer $TOKEN" \
               -d "$JSON" --fail || exit 1
-          
+
           else
             echo "Pas besoin d'appeler MQC..." >> $GITHUB_STEP_SUMMARY
           fi
