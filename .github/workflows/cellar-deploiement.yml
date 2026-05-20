@@ -156,6 +156,6 @@ jobs:
       - name: Recopie le bucket source vers le bucket de destination
         if: steps.compare-empreintes-cellar.outputs.resultat == 'ok'
         run: |
-          rclone sync \
+          rclone sync --exclude .backup_proof \
             cellar:${{ secrets.GUIDES_BUCKET_SOURCE }} \
             cellar:${{ secrets.GUIDES_BUCKET_CIBLE }} \
