@@ -3,53 +3,36 @@
   import { decodeEntiteHtml } from '../utils/aseptisationDuHtml.js';
   import type { Branche } from './filAriane';
 
-  export let feuille: string;
-  export let branche: undefined | Branche = undefined;
-  export let brancheConnectee: undefined | Branche = undefined;
-  export let fondSombre = false;
+  type Props = {
+    feuille: string;
+    branche?: Branche;
+    brancheConnectee?: Branche;
+    fondSombre?: boolean;
+  };
+  const { feuille, branche = undefined, brancheConnectee = undefined, fondSombre = false }: Props = $props();
+
+  type Segment = {
+    id: string;
+    label: string;
+    href: string;
+  };
+  const segments: Segment[] = $derived([
+    ...($profilStore
+      ? [{ id: 'noeud-catalogue', label: 'Guides et ressources', href: '/catalogue' }]
+      : [{ id: 'noeud-accueil', label: 'Accueil', href: '/' }]),
+    ...(branche ? [{ id: `noeud-${branche.nom}`, label: branche.nom, href: branche.lien ?? '' }] : []),
+    ...(brancheConnectee
+      ? [{ id: `noeud-${brancheConnectee.nom}`, label: brancheConnectee.nom, href: brancheConnectee.lien ?? '' }]
+      : []),
+    { id: `noeud-${decodeEntiteHtml(feuille)}`, label: decodeEntiteHtml(feuille), href: '' },
+  ]);
 </script>
 
-<div class="fil-ariane {fondSombre ? 'fond-sombre' : ''}">
-  {#if $profilStore}
-    <a href="/catalogue" class="lien">Catalogue des services</a>
-  {:else}
-    <a href="/" class="lien">Accueil</a>
-  {/if}
-  <span><img src="/assets/images/icone-chevron-droite.svg" alt="" /> </span>
+<dsfr-breadcrumb inverse={fondSombre} buttonLabel="Voir le fil d'Ariane" {segments}></dsfr-breadcrumb>
 
-  {#if branche && !$profilStore}
-    {#if branche.lien}
-      <a href={branche.lien} class="lien">{branche.nom}</a>
-    {:else}
-      {branche.nom}
-    {/if}
-    <span><img src="/assets/images/icone-chevron-droite.svg" alt="" /></span>
-  {/if}
-
-  {#if brancheConnectee && $profilStore}
-    {#if brancheConnectee.lien}
-      <a href={brancheConnectee.lien} class="lien">{brancheConnectee.nom}</a>
-    {:else}
-      {brancheConnectee.nom}
-    {/if}
-    <span><img src="/assets/images/icone-chevron-droite.svg" alt="" /></span>
-  {/if}
-  <span>{decodeEntiteHtml(feuille)}</span>
-</div>
-
-<style>
-  .fil-ariane {
-    grid-area: ariane;
-
-    &.fond-sombre {
-      a {
-        color: #ffffff;
-        text-decoration-color: #ffffff;
-      }
-
-      img {
-        filter: invert(1);
-      }
-    }
+<style lang="scss">
+  dsfr-breadcrumb {
+    max-height: 20px;
+    transform: translateY(-16px);
   }
 </style>
