@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { pipeline } from 'node:stream/promises';
 import { AdaptateurCellar, CleDuBucket } from '../infra/adaptateurCellar';
 import { filetRouteAsynchrone } from './middleware';
 
@@ -29,11 +30,7 @@ export const fabriqueGestionnaireRessourceCellar = (
         expires: '3600',
         'surrogate-control': 'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate',
       });
-      fluxCellar.flux.pipe(reponse);
-
-      fluxCellar.flux.on('error', (err) => {
-        suite(err);
-      });
+      await pipeline(fluxCellar.flux, reponse);
     } catch (erreur: Error | unknown) {
       suite(erreur);
     }

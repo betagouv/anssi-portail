@@ -38,7 +38,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
     try {
       const reponse = await axios.get(
         `${selectionneURLCellarLecturePourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
-        { responseType: 'arraybuffer' }
+        { responseType: 'arraybuffer', timeout: 30_000 }
       );
       const typeDeContenu = (reponse.headers['content-type'] as string) ?? 'application/octet-stream';
       return {
@@ -58,7 +58,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
     try {
       const reponse: AxiosResponse<Readable> = await axios.get(
         `${selectionneURLCellarLecturePourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
-        { responseType: 'stream' }
+        { responseType: 'stream', timeout: 30_000 }
       );
       return {
         flux: reponse.data,
@@ -66,8 +66,9 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
         tailleDuContenu: Number(reponse.headers['content-length']),
       };
     } catch (erreur: Error | unknown) {
-      if (axios.isAxiosError(erreur) && erreur.response?.status === 403) {
-        return undefined;
+      if (axios.isAxiosError(erreur)) {
+        erreur.response?.data?.destroy?.();
+        if (erreur.response?.status === 403) return undefined;
       }
       throw erreur;
     }
