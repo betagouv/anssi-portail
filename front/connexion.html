@@ -16,18 +16,7 @@ styles: /assets/styles/connexion.css
           Connectez-vous pour profiter d’une expérience personnalisée et accéder
           à tous nos services.
         </p>
-        <div class="conteneur-proconnect">
-          <a class="proconnect-button" href="/oidc/connexion">
-            <span class="proconnect-sr-only">S'identifier avec ProConnect</span>
-          </a>
-          <p>
-            <msc-lien
-              blank
-              href="https://www.proconnect.gouv.fr/"
-              libelle="Qu’est-ce que ProConnect ?"
-            ></msc-lien>
-          </p>
-        </div>
+        <dsfr-connect data-themeable="false" href="/oidc/connexion"></dsfr-connect>
         <div class="pas-de-compte">
           <p>Vous n’avez pas encore de compte ?</p>
           <msc-lien href="/inscription" libelle="S’inscrire"></msc-lien>

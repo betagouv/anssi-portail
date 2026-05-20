@@ -35,14 +35,6 @@
         line-height: 28px;
       }
 
-      .conteneur-proconnect {
-        padding: 16px 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
-
       @include a-partir-de(md) {
         max-width: 544px;
 
@@ -88,32 +80,6 @@
       }
     }
   }
-}
-
-.proconnect-sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-.proconnect-button {
-  background-color: transparent !important;
-  background-image: url('/assets/images/pro_connect.svg');
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  width: 214px;
-  height: 56px;
-  border: none;
-}
-
-.proconnect-button:hover {
-  background-image: url('/assets/images/pro_connect_hover.svg');
 }
 
 .deja-un-compte,
