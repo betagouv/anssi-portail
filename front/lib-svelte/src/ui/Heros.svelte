@@ -138,6 +138,7 @@
         'haut'
         'texte'
         'illustration';
+      grid-template-rows: 20px 1fr;
       width: clamp(288px, 100%, 75rem);
 
       .fil-ariane,
@@ -206,7 +207,7 @@
           'haut haut'
           'texte illustration';
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto 1fr;
+        grid-template-rows: 32px 1fr;
       }
     }
   }
@@ -247,6 +248,11 @@
         @include a-partir-de(lg) {
           margin-bottom: 0.75rem;
         }
+      }
+
+      .fil-ariane {
+        padding: 0 0 48px;
+        max-height: 20px;
       }
 
       &:has(.fil-ariane),
