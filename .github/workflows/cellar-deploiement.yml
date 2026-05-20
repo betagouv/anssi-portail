@@ -205,7 +205,8 @@ jobs:
             )
             curl -X POST https://mqc-test.free.beeceptor.com \
               -H "Content-Type: application/json" \
-              -d "$JSON"
+              -d "$JSON" --fail || exit 1
+          
           else
             echo "Pas besoin d'appeler MQC..." >> $GITHUB_STEP_SUMMARY
           fi
