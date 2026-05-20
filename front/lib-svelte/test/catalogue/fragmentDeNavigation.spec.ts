@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { creeLeFragmentDeNavigation } from '../../src/catalogue/fragmentDeNavigation';
-import { Langue } from '../../src/catalogue/Guide.types';
 import { BesoinCyber } from '../../src/catalogue/Catalogue.types';
+import { Langue } from '../../src/catalogue/Guide.types';
+import { creeLeFragmentDeNavigation } from '../../src/navigation/fragmentDeNavigation';
 
 describe('Le fragment de navigation', () => {
   it('permet de récupérer la section', () => {
