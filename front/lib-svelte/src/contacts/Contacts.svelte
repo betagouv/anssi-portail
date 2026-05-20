@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { creeLeFragmentDeNavigation } from '../catalogue/fragmentDeNavigation';
+  import { creeLeFragmentDeNavigation } from '../navigation/fragmentDeNavigation';
   import { profilStore } from '../stores/profil.store';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';

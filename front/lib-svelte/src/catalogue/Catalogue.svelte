@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { creeLeFragmentDeNavigation } from '../navigation/fragmentDeNavigation';
   import { profilStore } from '../stores/profil.store';
   import ChampRecherche from '../ui/ChampRecherche.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
@@ -11,7 +12,6 @@
   import FiltreBesoin from './FiltreBesoin.svelte';
   import FiltreSource from './FiltreSource.svelte';
   import FiltreTypologie from './FiltreTypologie.svelte';
-  import { creeLeFragmentDeNavigation } from './fragmentDeNavigation';
   import { CollectionGuide, Langue } from './Guide.types';
   import FiltreCollection from './guides/FiltreCollection.svelte';
   import FiltreLangue from './guides/FiltreLangue.svelte';
