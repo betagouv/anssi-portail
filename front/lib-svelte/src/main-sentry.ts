@@ -5,8 +5,12 @@ const environment = document?.getElementById('script-sentry')?.dataset.environne
 
 // Voir l'issue https://github.com/axios/axios/issues/6209#issuecomment-2299747509
 const avantEnvoiSentry = (evenement: Sentry.ErrorEvent, detail: Sentry.EventHint) => {
-  const originalException = detail?.originalException as { code: string } | undefined;
+  const originalException = detail?.originalException as { code: string; message: string } | undefined;
   if (originalException?.code === 'ECONNABORTED') {
+    return null;
+  }
+  // Erreur réseau Axios sans réponse (status 0) : déconnexion client, CORS, serveur injoignable
+  if (originalException?.message === 'Network Error') {
     return null;
   }
   return evenement;
