@@ -16,6 +16,12 @@ Sentry.init({
   dsn,
   environment,
   beforeSend: avantEnvoiSentry,
+  integrations: [
+    Sentry.thirdPartyErrorFilterIntegration({
+      filterKeys: ['mes-services-cyber'],
+      behaviour: 'drop-error-if-contains-third-party-frames',
+    }),
+  ],
 });
 
 Sentry.setTag('msc-source', 'frontend');

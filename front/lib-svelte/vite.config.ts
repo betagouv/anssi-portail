@@ -1,7 +1,7 @@
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { createLogger, defineConfig } from 'vite';
 import * as Vite from 'vite';
+import { createLogger, defineConfig } from 'vite';
 
 const loggerPersonnalise = createLogger();
 const loggerWarnOnce = loggerPersonnalise.warnOnce;
@@ -23,6 +23,7 @@ export default defineConfig({
       project: process.env.SENTRY_PROJET,
       authToken: process.env.SENTRY_AUTH_TOKEN,
       url: process.env.SENTRY_URL,
+      applicationKey: 'mes-services-cyber',
     }),
     injecteNonce(),
   ],
