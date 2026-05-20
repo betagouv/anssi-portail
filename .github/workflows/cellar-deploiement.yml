@@ -178,6 +178,34 @@ jobs:
           NB_FICHIERS=$(wc -l < fichiers.txt 2>/dev/null || echo 0)
           if [ "$NB_FICHIERS" -gt 0 ]; then
             echo "Appel MQC nécessaire..." >> $GITHUB_STEP_SUMMARY
+            JSON=$(
+              jq -n \
+              --rawfile modifications resultats/modifications.txt \
+              --rawfile suppressions resultats/suppressions.txt \
+              --rawfile ajouts resultats/ajouts.txt '
+              {
+                fichiers_modifies:
+                    ($modifications
+                      | split("\n")
+                      | map(select(length > 0 and endswith(".pdf")))
+                      ),
+                      
+                      fichiers_supprimes:
+                          ($suppressions
+                            | split("\n")
+                            | map(select(length > 0 and endswith(".pdf")))
+                            ),
+                      
+                      fichiers_ajoutes:
+                          ($ajouts
+                            | split("\n")
+                            | map(select(length > 0 and endswith(".pdf")))
+                            )
+              }'
+            )
+            curl -X POST https://mqc-test.free.beeceptor.com \
+              -H "Content-Type: application/json" \
+              -d "$JSON"
           else
             echo "Pas besoin d'appeler MQC..." >> $GITHUB_STEP_SUMMARY
           fi
