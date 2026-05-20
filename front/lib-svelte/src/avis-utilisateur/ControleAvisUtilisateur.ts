@@ -1,8 +1,8 @@
-export const DATE_DERNIERE_FERMETURE_CLE = 'dateDerniereFermeture';
-export const DATE_DERNIER_AVIS_DONNE = 'dateDernierAvis';
-export const DATE_DEBUT_SESSION = 'datePremiereVisite';
+const DATE_DERNIERE_FERMETURE_CLE = 'dateDerniereFermeture';
+const DATE_DERNIER_AVIS_DONNE = 'dateDernierAvis';
+const DATE_DEBUT_SESSION = 'datePremiereVisite';
 
-export const extraitDateDepuisNavigateur = ({ cle, storage }: { cle: string; storage: Storage }): Date | undefined => {
+const extraitDateDepuisNavigateur = ({ cle, storage }: { cle: string; storage: Storage }): Date | undefined => {
   const dateLue = new Date(storage.getItem(cle) ?? '');
   return isNaN(dateLue.getTime()) ? undefined : dateLue;
 };
