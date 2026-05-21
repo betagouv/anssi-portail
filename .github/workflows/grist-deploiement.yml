@@ -48,19 +48,10 @@ jobs:
           name: empreinte-data-${{ inputs.cible }}
           path: comparaison-grist/empreinte.txt
 
-  approbation:
-    runs-on: ubuntu-latest
-    needs: genere-tableau-comparatif
-    environment: PROD_NODE
-    steps:
-      - name: Approbation reçue
-        run: |
-          echo "GO !"
-
   deploie-ressources-grist:
     name: Déploiement
     runs-on: ubuntu-latest
-    needs: approbation
+    needs: genere-tableau-comparatif
     environment: DEPLOIEMENT_GUIDES
     steps:
       - name: Télécharger les empreintes sources
