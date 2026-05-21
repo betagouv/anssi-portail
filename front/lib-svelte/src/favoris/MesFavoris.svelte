@@ -20,7 +20,7 @@
 
 <dsfr-container class="chapeau fond-sombre">
   <div class="contenu-section">
-    <FilAriane feuille="Favoris" />
+    <FilAriane feuille="Favoris" fondSombre={true} />
     <h1 class="alternatif-xs-ns">Services et ressources favoris</h1>
     <p class="texte-chapo-xl-ns">Retrouvez tous vos contenus cyber à partager.</p>
     {#if $itemsCatalogueEnFavori.length > 0}
