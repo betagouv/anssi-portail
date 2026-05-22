@@ -37,7 +37,7 @@
           },
         ]),
     {
-      label: 'Catalogue',
+      label: 'Guides et ressources',
       id: 'nav-catalogue',
       type: 'link',
       href: '/catalogue',
