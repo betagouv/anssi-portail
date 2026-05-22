@@ -207,7 +207,7 @@
     right: 0;
     top: 208px;
     width: 124px;
-    z-index: 11;
+    z-index: calc(var(--ground) + 760);
 
     .fermer {
       cursor: pointer;
