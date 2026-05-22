@@ -13,6 +13,10 @@ const avantEnvoiSentry = (evenement: Sentry.ErrorEvent, detail: Sentry.EventHint
   if (originalException?.message === 'Network Error') {
     return null;
   }
+  if (evenement.exception?.values?.[0]?.value?.includes('Object Not Found Matching Id')) {
+    return null;
+  }
+
   return evenement;
 };
 
