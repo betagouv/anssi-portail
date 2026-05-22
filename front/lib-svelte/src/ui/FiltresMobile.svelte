@@ -47,6 +47,7 @@
 
       &:has(details[open]) {
         padding: 0;
+        z-index: calc(var(--ground) + 761);
 
         summary {
           background-color: var(--jaune-clair-msc);
