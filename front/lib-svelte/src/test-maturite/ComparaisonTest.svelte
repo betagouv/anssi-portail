@@ -101,43 +101,31 @@
       </div>
       <div class="tags">
         {#if infosOrganisation.secteur}
-          <lab-anssi-tag
-            role="button"
-            tabindex="0"
+          <dsfr-tag
             label={infosOrganisation.secteur.libelle}
-            taille="md"
-            type="selectionnable"
-            presse={filtre.secteur}
-            on:click={() => basculeLeFiltre('secteur')}
-            on:keypress
-          >
-          </lab-anssi-tag>
+            type="pressable"
+            pressed={filtre.secteur}
+            on:selected={() => basculeLeFiltre('secteur')}
+            on:unselected={() => basculeLeFiltre('secteur')}
+          ></dsfr-tag>
         {/if}
         {#if infosOrganisation.trancheEffectif}
-          <lab-anssi-tag
-            role="button"
-            tabindex="0"
+          <dsfr-tag
             label={infosOrganisation.trancheEffectif.libelle}
-            taille="md"
-            type="selectionnable"
-            presse={filtre.taille}
-            on:click={() => basculeLeFiltre('taille')}
-            on:keypress
-          >
-          </lab-anssi-tag>
+            type="pressable"
+            pressed={filtre.taille}
+            on:selected={() => basculeLeFiltre('taille')}
+            on:unselected={() => basculeLeFiltre('taille')}
+          ></dsfr-tag>
         {/if}
         {#if infosOrganisation.region}
-          <lab-anssi-tag
-            role="button"
-            tabindex="0"
+          <dsfr-tag
             label={infosOrganisation.region.libelle}
-            taille="md"
-            type="selectionnable"
-            presse={filtre.region}
-            on:click={() => basculeLeFiltre('region')}
-            on:keypress
-          >
-          </lab-anssi-tag>
+            type="pressable"
+            pressed={filtre.region}
+            on:selected={() => basculeLeFiltre('region')}
+            on:unselected={() => basculeLeFiltre('region')}
+          ></dsfr-tag>
         {/if}
       </div>
       <p class="note texte-mention-xs">
