@@ -55,10 +55,8 @@ jobs:
           CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
         run: |
-          NODE_VERSION="$(./scripts/get-node-version.sh)"
           clever link "$ID_APP"
           clever env | grep -v "^#" | tr -d '"' >> "$GITHUB_ENV"
-          clever env set CC_NODE_VERSION "$NODE_VERSION"
 
       - name: Construis avec Jekyll
         run: |
@@ -77,4 +75,6 @@ jobs:
           git config --global user.name "MesServicesCyber"
           git add --force front/_site
           git commit -m "Ajoute le site généré"
+          NODE_VERSION="$(./scripts/get-node-version.sh)"
+          clever env set CC_NODE_VERSION "$NODE_VERSION"
           clever deploy --force --same-commit-policy=rebuild
