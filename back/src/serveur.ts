@@ -35,6 +35,8 @@ import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeS
 import { EntrepotExigence } from './metier/nis2/entrepotExigence';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides';
 import { fabriqueAdaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
+import { EntrepotMesure } from './metier/entrepotMesure';
+import { EntrepotMesurePostgres } from './infra/entrepotMesurePostgres';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
@@ -75,6 +77,8 @@ const entrepotGuideTravail: EntrepotGuideTravail = new EntrepotGuideTravailGrist
 const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
   adaptateurEnvironnement,
 });
+
+const entrepotMesure: EntrepotMesure = new EntrepotMesurePostgres();
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
@@ -148,6 +152,7 @@ serviceCoherenceSecretsHachage
       entrepotGuide,
       entrepotGuideTravail: entrepotGuideTravail,
       entrepotExigence,
+      entrepotMesure,
       cellar,
       serviceSanteGuides,
       adaptateurEmail,

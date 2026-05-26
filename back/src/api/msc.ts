@@ -276,7 +276,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/api/abonnement-infolettre', ressourceAbonnementInfolettre(configurationServeur));
 
-  app.use('/api/mesures', ressourceMesure());
+  app.use('/api/mesures', ressourceMesure(configurationServeur));
 
   app.use((_requete: Request, reponse: Response) => {
     reponse
