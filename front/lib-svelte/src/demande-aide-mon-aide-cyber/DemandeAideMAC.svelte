@@ -1,7 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import Icone from '../ui/Icone.svelte';
   import Lien from '../ui/Lien.svelte';
   import { collecteLesErreurs } from '../utils/erreurApi';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
@@ -93,8 +92,9 @@
         et recevez <b>6 recommandations prioritaires</b> à mettre en place pour améliorer la cybersécurité de votre organisation.
       </p>
       <div class="zone-tags">
-        <span class="tag"><Icone type="check" /> Dans vos locaux ou en visio </span>
-        <span class="tag"><Icone type="check" /> Rapide (1h30)</span>
+        <dsfr-badge hasIcon icon="check-line" type="accent" accent="blue-ecume" label="Dans vos locaux ou en visio"
+        ></dsfr-badge>
+        <dsfr-badge hasIcon icon="check-line" type="accent" accent="blue-ecume" label="Rapide (1h30)"></dsfr-badge>
       </div>
       <p class="cible-du-diagnostic">
         Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et aux entreprises mono-salariées.
