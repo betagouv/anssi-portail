@@ -15,6 +15,7 @@ import { ressourceDocumentsGuide } from './guides/ressourceDocumentsGuide';
 import { ressourceGuide } from './guides/ressourceGuide';
 import { ressourceGuides } from './guides/ressourceGuides';
 import { ressourceGuidesMemesCollections } from './guides/ressourceGuidesMemesCollections';
+import { ressourceMesure } from './mesures/ressourceMesure';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide';
 import { ressourceExigencesNis2 } from './nis2/ressourceExigencesNis2';
 import { ressourceExigencesNis2Csv } from './nis2/ressourceExigencesNis2Csv';
@@ -274,6 +275,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/api/sante-guides', ressourceSanteGuides(configurationServeur));
 
   app.use('/api/abonnement-infolettre', ressourceAbonnementInfolettre(configurationServeur));
+
+  app.use('/api/mesures', ressourceMesure());
 
   app.use((_requete: Request, reponse: Response) => {
     reponse
