@@ -15,7 +15,7 @@
     <h6>{financement.nom}</h6>
     <div class="tags">
       {#each financement.entitesElligibles as entite (entite)}
-        <lab-anssi-tag label={entite} taille="sm" type="defaut"></lab-anssi-tag>
+        <dsfr-tag type="accent" accent="yellow-tournesol" size="sm" label={entite}></dsfr-tag>
       {/each}
     </div>
     <div class="actions">

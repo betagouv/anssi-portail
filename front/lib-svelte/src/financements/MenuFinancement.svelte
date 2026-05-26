@@ -46,7 +46,7 @@
     <p class="titreTags">tags</p>
     <div class="tags">
       {#each tags as tag (tag)}
-        <lab-anssi-tag label={tag} taille="sm" type="defaut"></lab-anssi-tag>
+        <dsfr-tag type="accent" accent="yellow-tournesol" size="sm" label={tag}></dsfr-tag>
       {/each}
     </div>
   </div>
