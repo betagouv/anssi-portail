@@ -24,6 +24,7 @@ import { AdaptateurJWT } from './adaptateurJWT';
 import { FournisseurChemin } from './fournisseurChemin';
 import { Middleware } from './middleware';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
+import { EntrepotMesure } from '../metier/entrepotMesure';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -44,6 +45,7 @@ export type ConfigurationServeur = {
   entrepotSessionDeGroupe: EntrepotSessionDeGroupe;
   entrepotUtilisateur: EntrepotUtilisateur;
   entrepotExigence: EntrepotExigence;
+  entrepotMesure: EntrepotMesure;
   fournisseurChemin: FournisseurChemin;
   generateurCodeSessionDeGroupe: GenerateurCodeSessionDeGroupe;
   messagerieInstantanee: MessagerieInstantanee;
