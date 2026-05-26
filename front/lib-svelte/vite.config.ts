@@ -69,6 +69,7 @@ export default defineConfig({
         'confirmation-abonnement-infolettre': 'src/main-confirmation-abonnement-infolettre.ts',
         'abonnement-infolettre': 'src/main-abonnement-infolettre.ts',
         'composants-ui': 'src/main-composants-ui.ts',
+        mesure: 'src/main-mesure.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
