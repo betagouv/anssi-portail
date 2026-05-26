@@ -9,7 +9,7 @@
   <div class="contenu">
     <div class="type-financement">
       {#each financement.typesDeFinancement as type (type)}
-        <BadgeTypeFinancement>{type}</BadgeTypeFinancement>
+        <BadgeTypeFinancement {type}></BadgeTypeFinancement>
       {/each}
     </div>
     <h6>{financement.nom}</h6>
