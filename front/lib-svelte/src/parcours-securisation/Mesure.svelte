@@ -1,14 +1,16 @@
 <script lang="ts">
+  import axios from 'axios';
   import { onMount } from 'svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
-  import axios from 'axios';
   import type { Mesure } from './mesure';
 
   let mesure: Mesure | undefined = undefined;
 
   onMount(async () => {
-    const reponse = await axios.get<Mesure>('/api/mesures/AUTH.5');
+    const chemin = new URL(window.location.href).pathname;
+    const idMesureACharger = chemin.split('/').reverse()[0];
+    const reponse = await axios.get<Mesure>(`/api/mesures/${idMesureACharger}`);
     mesure = reponse.data;
   });
 </script>
