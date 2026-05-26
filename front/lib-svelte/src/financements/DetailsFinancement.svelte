@@ -133,7 +133,7 @@
     <div class="badges">
       {#if financement}
         {#each financement.typesDeFinancement as type (type)}
-          <BadgeTypeFinancement>{type}</BadgeTypeFinancement>
+          <BadgeTypeFinancement {type}></BadgeTypeFinancement>
         {/each}
       {/if}
     </div>
