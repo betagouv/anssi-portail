@@ -49,7 +49,7 @@
     cacheIllustration = true;
     cacheMentions = true;
   }
-  if ((() => format === 'heros')()) {
+  if ((() => ['heros', 'details'].includes(format))()) {
     styleTitreH1 = 'alternatif-xs';
   }
 </script>
@@ -120,6 +120,7 @@
       color: var(--couleur-texte-sombre, #fff);
     }
     &.fond-clair {
+      background-image: url('/assets/images/motif-fond-service.avif');
       background-color: var(--couleur-fond, #eee);
     }
   }
