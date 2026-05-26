@@ -21,7 +21,11 @@ script: /scripts/service.js
   {% include composant-svelte.html id="fil-ariane" %}
   <div class="resume">
     <div>
-      <span class="badge {{ page.typologie }}">{{ page.typologie | capitalize }}</span>
+      {% if page.typologie == "service" %}
+      <dsfr-badge has-icon icon="shake-hands-fill" type="accent" accent="yellow-tournesol" size="sm" label="Service"></dsfr-badge>
+      {% elsif page.typologie == "outil" %}
+      <dsfr-badge has-icon icon="mac-fill" type="accent" accent="pink-tuile" size="sm" label="Outil"></dsfr-badge>
+      {% endif %}
       <h1>{{page.nom}}</h1>
       <p>{{page.description}}</p>
       {% if page.lien %}
