@@ -1,11 +1,29 @@
 <script lang="ts">
-  export let etapeCourante: number;
-  export let nombreEtapes: number;
+  type Props = {
+    etapeCourante: number;
+    nombreEtapes: number;
+    titreEtapeCourante: string;
+    titreEtapeSuivante?: string;
+    niveauTitre?: number;
+    cacheTitreEtapeSuivante?: boolean;
+  };
+
+  const {
+    etapeCourante,
+    nombreEtapes,
+    titreEtapeCourante,
+    titreEtapeSuivante = '',
+    niveauTitre = 2,
+    cacheTitreEtapeSuivante = false,
+  }: Props = $props();
 </script>
 
-<div class="etapier">
-  <!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
-  {#each new Array(nombreEtapes).fill(0) as _, i (i)}
-    <span class:accessible={i <= etapeCourante}></span>
-  {/each}
-</div>
+<dsfr-stepper
+  currentStep={etapeCourante}
+  stepCount={nombreEtapes}
+  level={niveauTitre}
+  title={titreEtapeCourante}
+  nextStep={titreEtapeSuivante}
+  hideDetails={cacheTitreEtapeSuivante}
+>
+</dsfr-stepper>

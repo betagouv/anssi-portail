@@ -126,13 +126,12 @@
       {/if}
       <div class="contenu-test" bind:this={contenuTest}>
         <div class="formulaire">
-          <p class="etape">
-            Étape {$questionnaireStore.questionCourante + 1} sur 7
-          </p>
-          <h5>
-            {etapesTestMaturite[$questionnaireStore.questionCourante].titre}
-          </h5>
-          <Etapier etapeCourante={$questionnaireStore.questionCourante} nombreEtapes={7} />
+          <Etapier
+            etapeCourante={$questionnaireStore.questionCourante + 1}
+            nombreEtapes={7}
+            titreEtapeCourante={etapesTestMaturite[$questionnaireStore.questionCourante].titre}
+            titreEtapeSuivante={etapesTestMaturite[$questionnaireStore.questionCourante + 1]?.titre}
+          />
           <h2>
             <!-- eslint-disable-next-line svelte/no-at-html-tags -->
             {@html aseptiseHtml(etapesTestMaturite[$questionnaireStore.questionCourante].question)}

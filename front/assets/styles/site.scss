@@ -588,21 +588,6 @@ dsfr-footer {
   }
 }
 
-.etapier {
-  display: flex;
-  gap: 8px;
-
-  span {
-    flex-grow: 1;
-    height: 8px;
-    background-color: #eee;
-  }
-
-  .accessible {
-    background-color: var(--background-flat-blue-france-lab);
-  }
-}
-
 select {
   padding: 8px 16px;
   border: none;
