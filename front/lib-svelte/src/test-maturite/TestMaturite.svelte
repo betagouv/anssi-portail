@@ -2,6 +2,7 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { profilStore } from '../stores/profil.store';
+  import Bouton from '../ui/Bouton.svelte';
   import Etapier from '../ui/Etapier.svelte';
   import Hero from '../ui/Hero.svelte';
   import Lien from '../ui/Lien.svelte';
@@ -149,20 +150,17 @@
 
             <div class="commandes">
               <Lien href="/" libelle="Retour à l'accueil"></Lien>
-
-              <input
-                type="button"
-                class="bouton secondaire taille-moyenne"
-                value="Précédent"
-                disabled={$questionnaireStore.questionCourante === 0}
-                on:click={reviensEnArriere}
+              <Bouton
+                desactive={$questionnaireStore.questionCourante === 0}
+                libelle="Précédent"
+                surClic={reviensEnArriere}
+                type="secondaire"
               />
-              <input
-                type="button"
-                class="bouton primaire taille-moyenne"
-                value="Question suivante"
-                disabled={reponseCourante === null}
-                on:click={valideReponse}
+              <Bouton
+                desactive={reponseCourante === null}
+                libelle="Question suivante"
+                surClic={valideReponse}
+                type="primaire"
               />
             </div>
           {:else}
@@ -179,26 +177,11 @@
 
               <div class="commandes">
                 <Lien href="/" libelle="Retour à l'accueil"></Lien>
-                <input
-                  type="button"
-                  class="bouton secondaire taille-moyenne"
-                  value="Précédent"
-                  on:click={questionnaireStore.reviensEnArriere}
-                />
+                <Bouton type="secondaire" libelle="Précédent" surClic={questionnaireStore.reviensEnArriere} />
                 {#if organisateurSession}
-                  <input
-                    type="button"
-                    class="bouton primaire taille-moyenne"
-                    value="Afficher les résultats"
-                    on:click={afficheResultatSessionGroupe}
-                  />
+                  <Bouton type="primaire" libelle="Afficher les résultats" surClic={afficheResultatSessionGroupe} />
                 {:else}
-                  <input
-                    type="button"
-                    class="bouton primaire taille-moyenne"
-                    value="Obtenir mon résultat"
-                    on:click={obtiensResultat}
-                  />
+                  <Bouton type="primaire" libelle="Obtenir mon résultat" surClic={obtiensResultat} />
                 {/if}
               </div>
             </div>

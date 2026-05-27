@@ -134,7 +134,7 @@ dsfr-container {
     @include a-partir-de(sm) {
       flex-direction: row;
       align-items: center;
-      .bouton.secondaire {
+      dsfr-button:first-of-type {
         margin-left: auto;
       }
     }
