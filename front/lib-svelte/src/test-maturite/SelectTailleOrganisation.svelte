@@ -10,12 +10,14 @@
   };
 
   type Props = {
+    id?: string;
     libelle: string;
     tailleOrganisation: string;
     optionDefautIntitule?: string;
     optionDefautSelectionnable?: boolean;
   };
   let {
+    id = undefined,
     libelle = "Sélectionner une taille d'organisation",
     tailleOrganisation = $bindable(),
     optionDefautIntitule = "Sélectionner une taille d'organisation",
@@ -36,6 +38,7 @@
 </script>
 
 <SelecteurSimple
+  {id}
   {libelle}
   {options}
   bind:valeurSelectionnee={tailleOrganisation}

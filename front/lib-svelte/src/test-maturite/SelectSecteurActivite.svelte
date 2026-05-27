@@ -10,6 +10,7 @@
   };
 
   type Props = {
+    id?: string;
     libelle: string;
     secteur: string;
     optionDefautIntitule?: string;
@@ -17,6 +18,7 @@
   };
 
   let {
+    id = undefined,
     libelle = 'Sélectionner un secteur d’activité',
     secteur = $bindable(),
     optionDefautIntitule = "Sélectionner un secteur d'activité",
@@ -35,6 +37,7 @@
 </script>
 
 <SelecteurSimple
+  {id}
   {libelle}
   {options}
   bind:valeurSelectionnee={secteur}

@@ -4,13 +4,19 @@
   import type { IdNiveau } from './NiveauxMaturite.type';
 
   type Props = {
+    id?: string;
     libelle: string;
     idNiveauSelectionne: IdNiveau;
   };
-  let { libelle = 'Sélectionner un niveau de maturité', idNiveauSelectionne = $bindable() }: Props = $props();
+  let {
+    id = undefined,
+    libelle = 'Sélectionner un niveau de maturité',
+    idNiveauSelectionne = $bindable(),
+  }: Props = $props();
 </script>
 
 <SelecteurSimple
+  {id}
   {libelle}
   options={niveauxMaturite.map((niveau) => ({
     valeur: niveau.id,
