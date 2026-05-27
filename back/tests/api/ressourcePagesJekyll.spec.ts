@@ -13,6 +13,7 @@ describe('La ressource pages jekyll', () => {
 
   beforeEach(() => {
     fournisseurChemin = fauxFournisseurDeChemin;
+
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       fournisseurChemin,
