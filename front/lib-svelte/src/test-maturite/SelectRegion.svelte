@@ -5,6 +5,7 @@
   import SelecteurSimple from './SelecteurSimple.svelte';
 
   type Props = {
+    id?: string;
     libelle: string;
     region: string;
     optionDefautIntitule?: string;
@@ -12,6 +13,7 @@
   };
 
   let {
+    id = undefined,
     libelle,
     region = $bindable(),
     optionDefautIntitule = 'Sélectionner une région / un territoire',
@@ -35,6 +37,7 @@
 </script>
 
 <SelecteurSimple
+  {id}
   {libelle}
   {options}
   bind:valeurSelectionnee={region}

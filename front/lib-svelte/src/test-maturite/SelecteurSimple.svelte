@@ -2,6 +2,7 @@
   import type { Option } from './SelecteurSimple';
 
   type Props = {
+    id?: string;
     libelle: string;
     options: Option[];
     valeurSelectionnee: string | object;
@@ -10,6 +11,7 @@
   };
 
   let {
+    id = `select-${Math.random().toString(36).substring(2, 15)}`,
     libelle,
     options,
     valeurSelectionnee = $bindable(),
@@ -19,6 +21,7 @@
 </script>
 
 <dsfr-select
+  {id}
   label={libelle}
   placeholder={optionDefautIntitule}
   placeholderDisabled={!optionDefautSelectionnable}

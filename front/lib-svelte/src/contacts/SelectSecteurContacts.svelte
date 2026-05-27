@@ -4,11 +4,12 @@
   import { secteursContacts } from './contacts.type';
 
   type Props = {
+    id?: string;
     libelle: string;
     secteur: string;
   };
 
-  let { libelle, secteur = $bindable() }: Props = $props();
+  let { id = undefined, libelle, secteur = $bindable() }: Props = $props();
 
   const options: Option[] = secteursContacts.map((s) => ({
     valeur: s.valeur,
@@ -16,4 +17,4 @@
   }));
 </script>
 
-<SelecteurSimple {libelle} {options} bind:valeurSelectionnee={secteur} optionDefautSelectionnable />
+<SelecteurSimple {id} {libelle} {options} bind:valeurSelectionnee={secteur} optionDefautSelectionnable />
