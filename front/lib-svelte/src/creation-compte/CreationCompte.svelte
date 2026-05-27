@@ -105,11 +105,7 @@
 
 <div class="creation-compte">
   <div class="contenu-inscription">
-    <div class="titre-contenu">
-      <div class="etape">Étape {etapeCourante} sur 3</div>
-      <h1>{titreEtape}</h1>
-      <Etapier etapeCourante={etapeCourante - 1} nombreEtapes={3} />
-    </div>
+    <Etapier {etapeCourante} nombreEtapes={3} titreEtapeCourante={titreEtape} cacheTitreEtapeSuivante />
     <div class="info-champ-obligatoire requis">Champ obligatoire</div>
 
     {#if etapeCourante === 1}
@@ -239,6 +235,10 @@
 <style lang="scss">
   @use '../../../assets/styles/responsive.scss' as *;
 
+  :global(.creation-compte .actions) {
+    margin-top: 32px;
+  }
+
   :global(.creation-compte .actions button) {
     padding: 8px 16px;
     font-size: 1rem;
@@ -253,15 +253,10 @@
     }
   }
 
-  .titre-contenu {
-    border-bottom: solid 1px var(--liseres-fonce);
-  }
-
   .contenu-inscription {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 32px;
     padding: 32px 16px;
     background-color: var(--background-default-grey);
     text-align: left;
@@ -303,11 +298,6 @@
     margin-bottom: 2rem;
   }
 
-  .etape {
-    color: var(--texte-clair);
-    font-size: 0.875rem;
-  }
-
   .actions {
     display: flex;
     justify-content: flex-end;
@@ -323,7 +313,7 @@
   .info-champ-obligatoire {
     text-align: right;
     font-size: 0.75rem;
-    padding-bottom: 32px;
+    padding-bottom: 64px;
   }
 
   .requis:before {
