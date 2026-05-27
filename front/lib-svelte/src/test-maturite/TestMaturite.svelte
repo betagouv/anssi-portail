@@ -217,3 +217,11 @@
     <PartageTest />
   {/if}
 {/if}
+
+<style lang="scss">
+  .informations-complementaires {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+</style>
