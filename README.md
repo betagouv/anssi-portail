@@ -12,7 +12,24 @@ Ce site est construit avec Jekyll.
 > Nous ne sommes pas développeurs Ruby et nous découvrons son écosystème.
 > Il se peut que les instructions ci-dessous semblent mauvaises à une personne connaissant bien Ruby 🙏
 
-- Installer les [pré-requis Jekyll](https://jekyllrb.com/docs/#prerequisites) (suivre les pages détaillées de prérequis pour chaque OS)
+#### Ruby
+
+Ruby est installé avec `rbenv`, ce qui permet de sélectionner la version indépendamment de celui proposé par le système d’exploitation, qui peut parfois avoir du retard sur les dernières versions stables.
+
+```shell
+sudo apt install -y build-essential libssl-dev libreadline-dev zlib1g-dev libsqlite3-dev libyaml-dev libffi-dev libgdbm-dev libncurses-dev curl git
+
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init - bash)"' >> ~/.bashrc
+source ~/.bashrc
+
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+rbenv install 4.0.5
+```
+
+#### Bundler
 
 - Installer `bundler`
 
@@ -22,6 +39,8 @@ $ export GEM_HOME="$HOME/gems/" # Pointer vers un dossier sur lequel vous avez d
 # Ne pas installer avec `sudo`
 $ gem install bundler -V
 ```
+
+#### Dépendances
 
 - Installer les dépendances Jekyll de ce projet
 
