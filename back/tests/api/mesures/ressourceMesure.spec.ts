@@ -1,12 +1,12 @@
+import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
-import { Mesure } from '../../../src/metier/mesure';
+import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
-import { Express } from 'express';
-import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
+import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
 
 describe('La ressource mesure de sécurité', () => {
   describe('sur requête GET', () => {
@@ -23,7 +23,7 @@ describe('La ressource mesure de sécurité', () => {
     });
 
     it('réponds 200', async () => {
-      await entrepotMesure.ajoute(new Mesure('AUTH.5'));
+      await entrepotMesure.ajoute(mesureAuthentA2Etapes());
 
       const reponse = await request(serveur).get('/api/mesures/AUTH.5');
 
@@ -31,11 +31,35 @@ describe('La ressource mesure de sécurité', () => {
     });
 
     it('renvoie les détail de la mesure', async () => {
-      await entrepotMesure.ajoute(new Mesure('AUTH.5'));
+      await entrepotMesure.ajoute(mesureAuthentA2Etapes());
 
       const { body } = await request(serveur).get('/api/mesures/AUTH.5');
 
       assert.equal(body.id, 'AUTH.5');
+      assert.equal(
+        body.titre,
+        "Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l'accès aux comptes"
+      );
+      assert.equal(body.phraseAccroche, 'Empêchez qu’un compte soit utilisé, même si le mot de passe a fuité 💨');
+      assert.equal(
+        body.explications,
+        `Un mot de passe seul ne suffit pas toujours à protéger un compte. En activant une deuxième vérification, vous ajoutez une sécurité supplémentaire au moment de la connexion : un code reçu sur une application, une clé physique, une empreinte digitale ou, à défaut, un code par SMS.
+
+Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste beaucoup plus difficile pour une personne malveillante.`
+      );
+      assert.equal(
+        body.actionPrioritaire,
+        `Mettre en oeuvre la vérification en deux étapes sur les services importants, a minima :
+* l'accès aux mails,
+* les services en ligne,
+* tous les accès distants (ex. télétravail),
+* les comptes d’administration.`
+      );
+      assert.equal(
+        body.actionFacileAFaire,
+        `**Bonne nouvelle :** dans les principales suites collaboratives (La Suite Numérique, Microsoft 365, Google Workspace, etc.), la vérification en deux étapes est incluse — il suffit de l'activer dans les paramètres de sécurité, sans surcoût ni outil supplémentaire.`
+      );
+      assert.equal(body.ordre, 10);
     });
 
     it('réponds 404 si la mesure demandée est inconnue', async () => {
@@ -55,7 +79,7 @@ describe('La ressource mesure de sécurité', () => {
         }),
       };
 
-      await entrepotMesure.ajoute(new Mesure('AUTH.5'));
+      await entrepotMesure.ajoute(mesureAuthentA2Etapes());
 
       const serveurSansLaRessource = creeServeur({
         ...configurationDeTestDuServeur,
