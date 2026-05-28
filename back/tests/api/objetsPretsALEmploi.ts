@@ -1,5 +1,6 @@
 import { Financement } from '../../src/metier/financement';
 import { Guide } from '../../src/metier/guide';
+import { Mesure } from '../../src/metier/mesure';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { fauxAdaptateurRechercheEntreprise } from './fauxObjets';
 
@@ -108,3 +109,20 @@ export const guidePublieDemain = () =>
     thematique: 'Les essentiels',
     besoins: ['SECURISER'],
   });
+
+export const mesureAuthentA2Etapes = () =>
+  new Mesure(
+    'AUTH.5',
+    "Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l'accès aux comptes",
+    'Empêchez qu’un compte soit utilisé, même si le mot de passe a fuité 💨',
+    `Un mot de passe seul ne suffit pas toujours à protéger un compte. En activant une deuxième vérification, vous ajoutez une sécurité supplémentaire au moment de la connexion : un code reçu sur une application, une clé physique, une empreinte digitale ou, à défaut, un code par SMS.
+
+Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste beaucoup plus difficile pour une personne malveillante.`,
+    `Mettre en oeuvre la vérification en deux étapes sur les services importants, a minima :
+* l'accès aux mails,
+* les services en ligne,
+* tous les accès distants (ex. télétravail),
+* les comptes d’administration.`,
+    `**Bonne nouvelle :** dans les principales suites collaboratives (La Suite Numérique, Microsoft 365, Google Workspace, etc.), la vérification en deux étapes est incluse — il suffit de l'activer dans les paramètres de sécurité, sans surcoût ni outil supplémentaire.`,
+    10
+  );
