@@ -1,0 +1,65 @@
+---
+---
+
+@use '../../assets/styles/responsive' as *;
+
+dsfr-container {
+  .contenu-section {
+    margin: 6rem 0;
+
+    h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    dsfr-button {
+      margin-bottom: 1.5rem;
+    }
+
+    picture,
+    picture img {
+      display: block;
+      height: auto;
+      margin: 0 auto;
+      width: clamp(288px, 100%, 588px);
+    }
+  }
+}
+
+@include a-partir-de(lg) {
+  dsfr-container {
+    .contenu-section {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: 1fr repeat(3, auto) 1fr;
+      grid-template-areas:
+        'avant illustration'
+        'titre illustration'
+        'texte illustration'
+        'actions illustration'
+        'apres illustration';
+      gap: 0 1.5rem;
+
+      h2 {
+        grid-area: titre;
+      }
+
+      p {
+        grid-area: texte;
+      }
+
+      dsfr-button {
+        grid-area: actions;
+        margin-bottom: 0;
+      }
+
+      picture {
+        grid-area: illustration;
+        align-self: center;
+      }
+    }
+  }
+}
