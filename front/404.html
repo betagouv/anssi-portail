@@ -2,23 +2,18 @@
 permalink: /404.html
 layout: defaut
 noindex: true
+styles:
+  - /assets/styles/404.css
 ---
 
-<style type="text/css" media="screen">
-  dsfr-container {
-    margin-top: 10px;
-  }
-
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
-
 <dsfr-container>
-  <h1>404</h1>
-  <p><strong>Page introuvable</strong></p>
-  <p>La page demandée n’a pas pu être trouvée.</p>
+  <div class="contenu-section">
+    <h2>Oups&nbsp;! Cette page est introuvable.</h2>
+    <p class="texte-chapo-xl">Nous sommes désolés, la page que vous recherchez n'existe pas.</p>
+    <dsfr-button markup="a" href="/" label="Revenir à la page d’accueil"></dsfr-button>
+    <picture>
+      <source srcset="/assets/images/erreur-404.avif" type="image/avif">
+      <img src="/assets/images/erreur-404.webp" alt="" loading="lazy">
+    </picture>
+  </div>
 </dsfr-container>
