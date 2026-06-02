@@ -443,6 +443,7 @@ export class ConsoleAdministration {
 
   async remplaceLaCleDeChiffrement(ancienneCle: string, nouvelleCle: string) {
     await new MigrationChiffrement(adaptateurEnvironnement).remplaceLaCleDeChiffrement(ancienneCle, nouvelleCle);
+    console.log('Remplacement terminé');
   }
 
   async ajouteRoleDeGestionGuide(email: string) {
