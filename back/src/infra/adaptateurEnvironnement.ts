@@ -92,6 +92,10 @@ type AdaptateurEnvironnement = {
   siret: () => {
     desactiveValidationStricte: () => boolean;
   };
+  secrets: () => {
+    jwt: () => string;
+    cookie: () => string;
+  };
 };
 
 const ajouteBarreObliqueFinale = (url: string): string => {
@@ -268,6 +272,22 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
   versionDeConstruction: () => (process.env.CC_COMMIT_ID || '1').substring(0, 8),
   siret: () => ({
     desactiveValidationStricte: () => process.env.SIRET_DESACTIVE_VALIDATION_STRICTE === 'true',
+  }),
+  secrets: () => ({
+    jwt: () => {
+      const valeur = process.env.SECRET_JWT;
+      if (valeur === '' || !valeur) {
+        throw new Error(`💥 Veuillez renseigner le secret JWT`);
+      }
+      return valeur;
+    },
+    cookie: () => {
+      const valeur = process.env.SECRET_COOKIE;
+      if (valeur === '' || !valeur) {
+        throw new Error(`💥 Veuillez renseigner le secret COOKIE`);
+      }
+      return valeur;
+    },
   }),
 };
 

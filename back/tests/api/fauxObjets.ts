@@ -178,6 +178,10 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   siret: () => ({
     desactiveValidationStricte: () => false,
   }),
+  secrets: () => ({
+    jwt: () => 'FAUX_SECRET_JWT',
+    cookie: () => 'FAUX_SECRET_COOKIE',
+  }),
 };
 
 const vraiMiddleware = fabriqueMiddleware({

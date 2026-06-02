@@ -1,9 +1,9 @@
-import { describe, it } from 'node:test';
-import { fauxAdaptateurEnvironnement, fauxAdaptateurHachage } from '../api/fauxObjets';
-import { fabriqueServiceVerificationCoherenceSecretsHachage } from '../../src/infra/serviceVerificationCoherenceSecretsHachage';
-import { EntrepotSecretHachage } from '../../src/infra/entrepotSecretHachagePostgres';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import assert from 'assert';
+import { describe, it } from 'node:test';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
+import { EntrepotSecretHachage } from '../../src/infra/entrepotSecretHachagePostgres';
+import { fabriqueServiceVerificationCoherenceSecretsHachage } from '../../src/infra/serviceVerificationCoherenceSecretsHachage';
+import { fauxAdaptateurEnvironnement, fauxAdaptateurHachage } from '../api/fauxObjets';
 
 describe('Le service de vérification de la cohérence des secrets de hachage', () => {
   it('jette une erreur si un secret est invalide', async () => {
@@ -29,8 +29,13 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
 
     await assert.rejects(
       () => service.verifieCoherenceSecrets(),
-      {
-        message: '💥 La version 1 du secret de la config a une valeur différente de celle déjà appliquée.',
+      (err: unknown) => {
+        assert(err instanceof AggregateError);
+        assert.strictEqual(
+          err.errors[0].message,
+          '💥 La version 1 du secret de la config a une valeur différente de celle déjà appliquée.'
+        );
+        return true;
       },
       'La méthode aurait dû lever une erreur'
     );
@@ -65,8 +70,13 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
 
     await assert.rejects(
       () => service.verifieCoherenceSecrets(),
-      {
-        message: '💥 La version 2 du secret de la config a une valeur différente de celle déjà appliquée.',
+      (err: unknown) => {
+        assert(err instanceof AggregateError);
+        assert.strictEqual(
+          err.errors[0].message,
+          '💥 La version 2 du secret de la config a une valeur différente de celle déjà appliquée.'
+        );
+        return true;
       },
       'La méthode aurait dû lever une erreur'
     );
@@ -128,8 +138,13 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
 
     await assert.rejects(
       () => service.verifieCoherenceSecrets(),
-      {
-        message: '💥 La version 1 du secret noté dans la config est manquante dans la persistance.',
+      (err: unknown) => {
+        assert(err instanceof AggregateError);
+        assert.strictEqual(
+          err.errors[0].message,
+          '💥 La version 1 du secret noté dans la config est manquante dans la persistance.'
+        );
+        return true;
       },
       'La méthode aurait dû lever une erreur'
     );
@@ -161,8 +176,13 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
 
     await assert.rejects(
       () => service.verifieCoherenceSecrets(),
-      {
-        message: '💥 La version 1 du secret déjà appliquée est manquante dans la config.',
+      (err: unknown) => {
+        assert(err instanceof AggregateError);
+        assert.strictEqual(
+          err.errors[0].message,
+          '💥 La version 1 du secret déjà appliquée est manquante dans la config.'
+        );
+        return true;
       },
       'La méthode aurait dû lever une erreur'
     );
@@ -188,8 +208,10 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
 
     await assert.rejects(
       () => service.verifieCoherenceSecrets(),
-      {
-        message: '💥 Aucun secret de hachage dans la config.',
+      (err: unknown) => {
+        assert(err instanceof AggregateError);
+        assert.strictEqual(err.errors[0].message, '💥 Aucun secret de hachage dans la config.');
+        return true;
       },
       'La méthode aurait dû lever une erreur'
     );
