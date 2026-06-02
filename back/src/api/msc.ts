@@ -104,7 +104,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     cookieSession({
       name: 'session',
       sameSite: true,
-      secret: process.env.SECRET_COOKIE,
+      secret: configurationServeur.adaptateurEnvironnement.secrets().cookie(),
       secure: configurationServeur.adaptateurEnvironnement.nodeEnv() !== 'developpement',
       signed: configurationServeur.adaptateurEnvironnement.nodeEnv() !== 'developpement',
     })

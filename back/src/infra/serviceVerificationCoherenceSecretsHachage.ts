@@ -60,17 +60,38 @@ export const fabriqueServiceVerificationCoherenceSecretsHachage = ({
       console.log('🏗 Pas de vérification des sels en mode maintenance');
       return;
     }
+
     const empreintesDesSecretsAppliques = await entrepotSecretHachage.tous();
     const tousLesSecretsDeHachageDeLaConfig = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
-    if (tousLesSecretsDeHachageDeLaConfig.length === 0) {
-      throw new Error('💥 Aucun secret de hachage dans la config.');
+    const verifications: (() => Promise<void> | void)[] = [
+      () => {
+        if (tousLesSecretsDeHachageDeLaConfig.length === 0) {
+          throw new Error('💥 Aucun secret de hachage dans la config.');
+        }
+      },
+      adaptateurEnvironnement.secrets().jwt,
+      adaptateurEnvironnement.secrets().cookie,
+      async () => {
+        await verifieQueChaqueSecretEstCoherent(
+          tousLesSecretsDeHachageDeLaConfig,
+          empreintesDesSecretsAppliques,
+          adaptateurHachage
+        );
+      },
+    ];
+
+    const erreurs = [];
+    for (const verification of verifications) {
+      try {
+        await verification();
+      } catch (error) {
+        erreurs.push(error);
+      }
     }
 
-    await verifieQueChaqueSecretEstCoherent(
-      tousLesSecretsDeHachageDeLaConfig,
-      empreintesDesSecretsAppliques,
-      adaptateurHachage
-    );
+    if (erreurs.length > 0) {
+      throw new AggregateError(erreurs, 'Erreurs de configuration');
+    }
   },
 });

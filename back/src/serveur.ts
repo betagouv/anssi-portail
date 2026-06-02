@@ -17,10 +17,12 @@ import { adaptateurHorloge } from './infra/adaptateurHorloge';
 import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
+import { fabriqueAdaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist';
 import { EntrepotGuideGrist } from './infra/entrepotGuideGrist';
 import { EntrepotGuideTravailGrist } from './infra/entrepotGuideTravailGrist';
+import { EntrepotMesurePostgres } from './infra/entrepotMesurePostgres';
 import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
 import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres';
@@ -31,12 +33,10 @@ import { EntrepotExigenceGrist } from './infra/nis2/entrepotExigenceGrist';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
 import { EntrepotGuide } from './metier/entrepotGuide';
 import { EntrepotGuideTravail } from './metier/entrepotGuideTravail';
+import { EntrepotMesure } from './metier/entrepotMesure';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides';
-import { fabriqueAdaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
-import { EntrepotMesure } from './metier/entrepotMesure';
-import { EntrepotMesurePostgres } from './infra/entrepotMesurePostgres';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
@@ -123,12 +123,12 @@ serviceCoherenceSecretsHachage
     return creeServeur({
       fournisseurChemin,
       middleware: fabriqueMiddleware({
-        adaptateurJWT,
+        adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
         fournisseurChemin,
         adaptateurEnvironnement,
       }),
       adaptateurOIDC,
-      adaptateurJWT,
+      adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
       adaptateurGestionErreur: adaptateurGestionErreurSentry,
       busEvenements,
       entrepotUtilisateur,

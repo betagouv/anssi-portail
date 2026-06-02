@@ -1,6 +1,6 @@
+import assert from 'node:assert';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 import { adaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
-import assert from 'node:assert';
 
 describe("L'adaptateur environnement", () => {
   let envActuel: NodeJS.ProcessEnv;
@@ -90,5 +90,65 @@ describe("L'adaptateur environnement", () => {
     const secrets = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
     assert.equal(secrets.length, 1);
+  });
+
+  it('lance une exception si SECRET_JWT est vide', () => {
+    process.env = {
+      SECRET_JWT: '',
+    };
+
+    assert.throws(
+      () => {
+        adaptateurEnvironnement.secrets().jwt();
+      },
+      {
+        message: '💥 Veuillez renseigner le secret JWT',
+      }
+    );
+  });
+
+  it('lance une exception si SECRET_JWT est non défini', () => {
+    process.env = {
+      SECRET_JWT: undefined,
+    };
+
+    assert.throws(
+      () => {
+        adaptateurEnvironnement.secrets().jwt();
+      },
+      {
+        message: '💥 Veuillez renseigner le secret JWT',
+      }
+    );
+  });
+
+  it('lance une exception si SECRET_COOKIE est vide', () => {
+    process.env = {
+      SECRET_COOKIE: '',
+    };
+
+    assert.throws(
+      () => {
+        adaptateurEnvironnement.secrets().cookie();
+      },
+      {
+        message: '💥 Veuillez renseigner le secret COOKIE',
+      }
+    );
+  });
+
+  it('lance une exception si SECRET_COOKIE est non défini', () => {
+    process.env = {
+      SECRET_COOKIE: undefined,
+    };
+
+    assert.throws(
+      () => {
+        adaptateurEnvironnement.secrets().cookie();
+      },
+      {
+        message: '💥 Veuillez renseigner le secret COOKIE',
+      }
+    );
   });
 });
