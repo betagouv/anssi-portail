@@ -38,9 +38,9 @@ jobs:
         run: pnpm --filter @anssi-portail/svelte build
 
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1.276.0
+        uses: ruby/setup-ruby@v1.310.0
         with:
-          ruby-version: '3.2'
+          ruby-version: '4.0.5'
           bundler-cache: true
           cache-version: 0
           working-directory: ./front
