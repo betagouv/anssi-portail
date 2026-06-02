@@ -262,8 +262,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/api/diagnostic/statistiques', ressourceStatistiquesDiagnostic());
 
-  app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
-
   app.use('/directive-nis2', (_requete: Request, reponse: Response) => {
     reponse.redirect(301, '/nis2');
   });
@@ -286,6 +284,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     app.use('/api/mesures', ressourceMesure(configurationServeur));
   }
 
+  // A laisser à la fin de la fonction
+  app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
+
+  // A laisser à la fin de la fonction
   app.use((_requete: Request, reponse: Response) => {
     reponse
       .status(404)
