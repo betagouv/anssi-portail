@@ -213,6 +213,16 @@ describe('La ressource de gestion des documents des guides', () => {
 
         assert.equal(reponse.status, 400);
       });
+
+      it('rejette un nom de fichier dépassant 256 caractères', async () => {
+        const reponse = await request(serveur)
+          .post('/api/guides/zero-trust/documents')
+          .set('Cookie', [cookieJeanneDupont])
+          .field('libelleDuLien', 'Cliquez pour télécharger le document')
+          .attach('document-guide', Buffer.from('un-texte'), 'a'.repeat(257));
+
+        assert.equal(reponse.status, 400);
+      });
     });
 
     describe("avec un identifiant de guide qui n'existe pas", () => {
