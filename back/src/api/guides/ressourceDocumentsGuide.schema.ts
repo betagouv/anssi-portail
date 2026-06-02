@@ -12,6 +12,14 @@ export const schemaAjoutDocumentGuide = z
     file: z.custom<Express.Multer.File>(),
   })
   .superRefine(({ body: { genereVisuel }, file: fichier }, ctx) => {
+    if (fichier?.originalname && fichier.originalname.length > 256) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['file', 'originalname'],
+        message: "Le nom de fichier n'est pas valide.",
+      });
+    }
+
     if (genereVisuel === 'true' && fichier?.mimetype !== 'application/pdf') {
       ctx.addIssue({
         code: 'invalid_value',
