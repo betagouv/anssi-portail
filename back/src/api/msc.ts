@@ -31,6 +31,7 @@ import { ressourceAnnuaireRegions } from './ressourceAnnuaireRegions';
 import { ressourceAnnuaireSecteursActivite } from './ressourceAnnuaireSecteursActivite';
 import { ressourceAnnuaireTranchesEffectif } from './ressourceAnnuaireTranchesEffectif';
 import { ressourceAvisUtilisateur } from './ressourceAvisUtilisateur';
+import { ressourceControleContenuListeConfiance } from './ressourceControleContenuListeConfiance';
 import { ressourceDocumentRessource } from './ressourceDocumentRessource';
 import { ressourceFinancement } from './ressourceFinancement';
 import { ressourceFinancements } from './ressourceFinancements';
@@ -258,6 +259,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/documents-guides', ressourceDocumentGuide(configurationServeur));
   app.use('/documents-ressources', ressourceDocumentRessource(configurationServeur));
 
+  app.use('/visas/tl-fr.sha2', ressourceControleContenuListeConfiance());
   app.use('/visas', ressourceVisa(configurationServeur));
 
   app.use('/api/diagnostic/statistiques', ressourceStatistiquesDiagnostic());

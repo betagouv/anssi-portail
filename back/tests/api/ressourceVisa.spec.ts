@@ -97,5 +97,34 @@ describe('La ressource de visa', () => {
         assert.equal(reponse.status, 404);
       });
     });
+
+    describe('concernant le fichier de contrôle', () => {
+      it('n’appelle pas l’adaptateur cellar', async () => {
+        let estAppelle: boolean = false;
+        adaptateurCellar.getStream = async () => {
+          estAppelle = true;
+          return undefined;
+        };
+
+        await request(serveur).get('/visas/tl-fr.sha2');
+
+        assert.equal(estAppelle, false);
+      });
+
+      it('retourne un statut OK', async () => {
+        const reponse = await request(serveur).get('/visas/tl-fr.sha2');
+
+        assert.equal(reponse.status, 200);
+      });
+
+      it('retourne le haché de la liste de confiance', async () => {
+        const reponse = await request(serveur).get('/visas/tl-fr.sha2');
+
+        assert.equal(
+          (reponse.body as Buffer).toString(),
+          '49daa29a23ab75a58009dce5e2cda4bdd1912e47b07015b2980023f26d581e8b'
+        );
+      });
+    });
   });
 });
