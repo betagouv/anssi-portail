@@ -16,6 +16,7 @@
   });
 
   let explications = $derived(mesure ? aseptiseHtml(mesure.explications) : '');
+  let actionPrioritaire = $derived(mesure ? aseptiseHtml(mesure.actionPrioritaire) : '');
 </script>
 
 {#if mesure}
@@ -58,6 +59,14 @@
         {/each}
       </ul>
     </div>
+
+    <div class="contenu-section priorites">
+      <h2><lab-anssi-icone nom="arrow-right-line"></lab-anssi-icone>À faire en priorité</h2>
+      <div>
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+        <p>{@html actionPrioritaire}</p>
+      </div>
+    </div>
   </dsfr-container>
 {:else}
   <dsfr-container>Chargement... </dsfr-container>
@@ -66,5 +75,14 @@
 <style lang="scss">
   .contenu-section {
     margin-bottom: 2rem;
+
+    &.priorites {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 2rem;
+      background-color: var(--background-alt-blue-cumulus);
+      border-radius: 6px;
+    }
   }
 </style>
