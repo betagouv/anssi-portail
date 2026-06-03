@@ -70,6 +70,7 @@ export default defineConfig({
         'abonnement-infolettre': 'src/main-abonnement-infolettre.ts',
         'composants-ui': 'src/main-composants-ui.ts',
         mesure: 'src/main-mesure.ts',
+        'module-cyberdepart': 'src/main-module-cyberdepart.ts',
       },
       output: {
         entryFileNames: `assets/[name].js`,
