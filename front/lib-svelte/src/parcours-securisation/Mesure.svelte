@@ -50,11 +50,12 @@
     </div>
 
     <div class="contenu-section">
-      <h2>Risques evites</h2>
+      <h2>Les risques évités</h2>
       <ul class="risques-list">
         {#each mesure.risques as risque (risque.libelle)}
           <li>
-            <p><strong>{risque.libelle}&nbsp;:</strong> {risque.description}</p>
+            <strong>{risque.libelle}&nbsp;:</strong>
+            {risque.description}
           </li>
         {/each}
       </ul>
@@ -66,6 +67,12 @@
         <!-- eslint-disable-next-line svelte/no-at-html-tags -->
         <p>{@html actionPrioritaire}</p>
       </div>
+      {#if mesure.actionFacileAFaire}
+        <dsfr-highlight size="md" text="slot">
+          <h3 slot="title">Bonne nouvelle&nbsp;!</h3>
+          <p slot="text">{mesure.actionFacileAFaire}</p>
+        </dsfr-highlight>
+      {/if}
     </div>
   </dsfr-container>
 {:else}
@@ -73,8 +80,16 @@
 {/if}
 
 <style lang="scss">
+  * {
+    box-sizing: border-box;
+  }
+
   .contenu-section {
     margin-bottom: 2rem;
+
+    ul {
+      padding-left: 1.75rem;
+    }
 
     &.priorites {
       display: flex;
@@ -83,6 +98,54 @@
       padding: 2rem;
       background-color: var(--background-alt-blue-cumulus);
       border-radius: 6px;
+
+      h2 {
+        margin: 0;
+
+        lab-anssi-icone {
+          margin-right: 0.5rem;
+        }
+      }
+
+      h3 {
+        margin: 0 0 0.5rem;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
+    dsfr-card {
+      min-height: 0;
+      margin-bottom: 1.5rem;
+
+      dsfr-badge {
+        margin-bottom: 0.75rem;
+      }
+    }
+
+    .section-aide {
+      margin-bottom: 3rem;
+
+      .texte-article-lg {
+        font-weight: bold;
+        color: var(--text-title-grey);
+      }
+
+      hr {
+        margin-block: 1rem;
+        height: 1px;
+        border: 0;
+        background-color: var(--border-default-grey);
+        &:last-of-type {
+          display: none;
+        }
+      }
+    }
+
+    .recyf > p {
+      margin-bottom: 1.5rem;
     }
   }
 </style>
