@@ -1,5 +1,8 @@
-export type Erreurs = { fieldErrors: Record<string, string[]> };
+export type CorpsDeLaReponse = { fieldErrors: Record<string, string[]> } | { erreur: string };
 
-export const collecteLesErreurs = (erreur: Erreurs): string[] => {
-  return Object.values(erreur.fieldErrors).flat();
+export const collecteLesErreurs = (corpsDeLaReponse: CorpsDeLaReponse): string[] => {
+  if ('fieldErrors' in corpsDeLaReponse) {
+    return Object.values(corpsDeLaReponse.fieldErrors).flat();
+  }
+  return [corpsDeLaReponse.erreur];
 };
