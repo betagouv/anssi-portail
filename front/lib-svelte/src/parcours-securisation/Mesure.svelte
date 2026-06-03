@@ -6,7 +6,7 @@
   import { aseptiseHtml } from '../utils/aseptisationDuHtml';
   import type { Mesure } from './mesure';
 
-  let mesure: Mesure | undefined = undefined;
+  let mesure: Mesure | undefined = $state();
 
   onMount(async () => {
     const chemin = new URL(window.location.href).pathname;
@@ -14,6 +14,8 @@
     const reponse = await axios.get<Mesure>(`/api/mesures/${idMesureACharger}`);
     mesure = reponse.data;
   });
+
+  let explications = $derived(mesure ? aseptiseHtml(mesure.explications) : '');
 </script>
 
 {#if mesure}
@@ -40,27 +42,29 @@
   </Heros>
 
   <dsfr-container>
-    <section class="presentation">
+    <div class="contenu-section">
       <h2>Présentation</h2>
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
       {@html explications}
-    </section>
-  </dsfr-container>
+    </div>
 
-  {#if mesure.risques.length > 0}
-    <dsfr-container>
-      <section class="risques">
-        <h2>Risques evites</h2>
-        <ul class="risques-list">
-          {#each mesure.risques as risque}
-            <li>
-              <strong>{risque.libelle}</strong>
-              <p>{risque.description}</p>
-            </li>
-          {/each}
-        </ul>
-      </section>
-    </dsfr-container>
-  {/if}
+    <div class="contenu-section">
+      <h2>Risques evites</h2>
+      <ul class="risques-list">
+        {#each mesure.risques as risque (risque.libelle)}
+          <li>
+            <p><strong>{risque.libelle}&nbsp;:</strong> {risque.description}</p>
+          </li>
+        {/each}
+      </ul>
+    </div>
+  </dsfr-container>
 {:else}
   <dsfr-container>Chargement... </dsfr-container>
 {/if}
+
+<style lang="scss">
+  .contenu-section {
+    margin-bottom: 2rem;
+  }
+</style>

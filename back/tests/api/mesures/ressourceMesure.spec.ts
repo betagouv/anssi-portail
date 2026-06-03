@@ -60,6 +60,10 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
         `**Bonne nouvelle :** dans les principales suites collaboratives (La Suite Numérique, Microsoft 365, Google Workspace, etc.), la vérification en deux étapes est incluse — il suffit de l'activer dans les paramètres de sécurité, sans surcoût ni outil supplémentaire.`
       );
       assert.equal(body.ordre, 10);
+      assert.equal(body.risques.length, 3);
+      assert.equal(body.risques[0].libelle, 'Un compte utilise a votre place');
+      assert.equal(body.risques[1].libelle, 'Un acces non autorise a un outil en ligne');
+      assert.equal(body.risques[2].libelle, 'Connexion frauduleuse sans alerte');
     });
 
     it('réponds 404 si la mesure demandée est inconnue', async () => {

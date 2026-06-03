@@ -124,5 +124,22 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
 * tous les accès distants (ex. télétravail),
 * les comptes d’administration.`,
     `**Bonne nouvelle :** dans les principales suites collaboratives (La Suite Numérique, Microsoft 365, Google Workspace, etc.), la vérification en deux étapes est incluse — il suffit de l'activer dans les paramètres de sécurité, sans surcoût ni outil supplémentaire.`,
-    10
+    10,
+    [
+      {
+        libelle: 'Un compte utilise a votre place',
+        description:
+          'par exemple si le mot de passe a ete vole apres un faux email, une fuite de donnees ou un virus sur un ordinateur.',
+      },
+      {
+        libelle: 'Un acces non autorise a un outil en ligne',
+        description:
+          "cela peut concerner une messagerie, un logiciel de gestion, un espace client, un compte bancaire, un reseau social ou un outil d'administration accessible depuis internet.",
+      },
+      {
+        libelle: 'Connexion frauduleuse sans alerte',
+        description:
+          'sans verification en deux etapes, une connexion reussie avec votre mot de passe ne declenche aucun signal — un attaquant peut consulter vos mails ou agir en votre nom pendant des jours sans que vous le remarquiez.',
+      },
+    ]
   );
