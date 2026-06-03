@@ -16,6 +16,7 @@
   type Props = {
     apparence?: 'lien' | 'bouton';
     blank?: boolean;
+    etire?: boolean;
     href: string;
     icone?: string;
     iconeSeule?: boolean;
@@ -34,6 +35,7 @@
   const {
     apparence = 'lien',
     blank,
+    etire,
     href,
     icone = '',
     iconeSeule,
@@ -95,6 +97,7 @@
     target={blank ? '_blank' : '_self'}
     {kind}
     use:clic={traceClic}
+    centered={etire}
     {...reste}
   ></dsfr-button>
 {/if}
