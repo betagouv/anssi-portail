@@ -1,3 +1,8 @@
+export type Risque = {
+  libelle: string;
+  description: string;
+};
+
 export type Mesure = {
   id: string;
   titre: string;
@@ -6,4 +11,5 @@ export type Mesure = {
   actionPrioritaire: string;
   actionFacileAFaire: string;
   ordre: number;
+  risques: Risque[];
 };
