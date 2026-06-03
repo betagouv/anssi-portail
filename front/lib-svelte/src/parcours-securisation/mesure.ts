@@ -12,4 +12,5 @@ export type Mesure = {
   actionFacileAFaire: string;
   ordre: number;
   risques: Risque[];
+  tutoriel?: { titre: string; image?: string };
 };

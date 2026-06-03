@@ -74,6 +74,22 @@
         </dsfr-highlight>
       {/if}
     </div>
+
+    <div class="contenu-section comment-faire">
+      <h2>Comment faire concrètement</h2>
+      <dsfr-card
+        hasBadge
+        title={mesure.tutoriel?.titre ?? 'Titre'}
+        horizontal
+        actionMarkup="button"
+        src={mesure.tutoriel?.image ?? '/assets/images/image-generique.avif'}
+        imageRatio="1x1"
+        horizontalProportion="tier"
+        size="lg"
+      >
+        <dsfr-badge slot="badgesgroup" label="Tutoriel" type="accent" accent="purple-glycine"></dsfr-badge>
+      </dsfr-card>
+    </div>
   </dsfr-container>
 {:else}
   <dsfr-container>Chargement... </dsfr-container>
