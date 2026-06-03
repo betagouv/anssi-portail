@@ -164,6 +164,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'sante',
     'abonnement-infolettre',
     'confirmation-abonnement-infolettre',
+    'module-cyberdepart',
   ]
     .concat(
       configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()
