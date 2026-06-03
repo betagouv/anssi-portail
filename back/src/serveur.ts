@@ -93,7 +93,8 @@ cableTousLesAbonnes({
 const crispIdSite = process.env.CRISP_ID_SITE;
 const crispCleApi = process.env.CRISP_CLE_API;
 if (!crispIdSite || !crispCleApi) {
-  throw new Error('Variables CRISP_ID_SITE et/ou CRISP_CLE_API manquantes');
+  console.error('💥 Variables CRISP_ID_SITE et/ou CRISP_CLE_API manquantes');
+  process.exit(1);
 }
 
 const cmsCrisp = new CmsCrisp(crispIdSite, crispCleApi);
@@ -114,8 +115,9 @@ const port = process.env.PORT || 3000;
 
 serviceCoherenceSecretsHachage
   .verifieCoherenceSecrets()
-  .catch((reason) => {
-    console.error(reason.message);
+  .catch((raison) => {
+    console.error(raison.message);
+    console.error(raison.errors.map((e: Error) => e.message).join('\n'));
     process.exit(1);
   })
   .then(() => console.log('✅ Vérification des secrets réussie'))
