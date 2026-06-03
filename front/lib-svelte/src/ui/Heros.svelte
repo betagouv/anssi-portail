@@ -274,6 +274,7 @@
   }
 
   .details {
+    overflow-y: hidden;
     .contenu-section {
       padding: 16px 0 0;
 
@@ -286,6 +287,10 @@
         .actions {
           margin-bottom: 4.5rem;
         }
+      }
+
+      .illustration {
+        box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
       }
     }
   }
