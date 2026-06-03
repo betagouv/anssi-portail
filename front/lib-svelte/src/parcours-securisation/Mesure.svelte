@@ -24,7 +24,7 @@
     illustrationSource="/assets/images/parcours-securisation/mesure-{mesure.id}.svg"
     illustrationAlt=""
     format="details"
-    titre={mesure.phrase_accroche}
+    titre={mesure.phraseAccroche}
     theme="clair"
   >
     {#snippet filAriane()}
