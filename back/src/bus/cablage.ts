@@ -22,6 +22,8 @@ import { UtilisateurConnecte } from './evenements/utilisateurConnecte';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
 import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee';
 import { consigneEvenementSimulationNis2TermineeDansJournal } from './consigneEvenementSimulationNis2TermineeDansJournal';
+import { MesureConsultee } from './evenements/mesureConsultee';
+import { consigneEvenementMesureConsulteeDansJournal } from './consigneEvenementMesureConsulteeDansJournal';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
@@ -106,5 +108,10 @@ export const cableTousLesAbonnes = ({
       adaptateurJournal,
       adaptateurHorloge,
     })
+  );
+
+  busEvenements.abonne(
+    MesureConsultee,
+    consigneEvenementMesureConsulteeDansJournal({ adaptateurJournal, adaptateurHorloge })
   );
 };
