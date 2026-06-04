@@ -16,6 +16,7 @@ import { ressourceGuide } from './guides/ressourceGuide';
 import { ressourceGuides } from './guides/ressourceGuides';
 import { ressourceGuidesMemesCollections } from './guides/ressourceGuidesMemesCollections';
 import { ressourceMesure } from './mesures/ressourceMesure';
+import { ressourceMesuresDeModule } from './mesures/ressourceMesuresDeModule';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide';
 import { ressourceExigencesNis2 } from './nis2/ressourceExigencesNis2';
 import { ressourceExigencesNis2Csv } from './nis2/ressourceExigencesNis2Csv';
@@ -285,6 +286,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     .estActif();
   if (parcoursActive) {
     app.use('/api/mesures', ressourceMesure(configurationServeur));
+    app.use('/api/modules/cyberdepart/mesures', ressourceMesuresDeModule(configurationServeur));
   }
 
   // A laisser à la fin de la fonction
