@@ -23,6 +23,11 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
     this.knex = Knex(config);
   }
 
+  async tous(): Promise<Mesure[]> {
+    const mesuresLues = await this.knex<MesurePersistee>('mesures');
+    return mesuresLues.map((mesure) => this.convertisEnMesure(mesure));
+  }
+
   async parId(id: string): Promise<Mesure | undefined> {
     const mesurePersistee = await this.knex<MesurePersistee>('mesures').where({ id }).first();
     return mesurePersistee ? this.convertisEnMesure(mesurePersistee) : undefined;
