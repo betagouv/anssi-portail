@@ -178,6 +178,12 @@
 }
 
 @mixin textes-dsfr {
+  a {
+    .fond-sombre & {
+      color: var(--text-inverted-grey);
+    }
+  }
+
   .texte-chapo-xl {
     font-size: 1.25rem;
     line-height: 2rem;
