@@ -83,7 +83,7 @@
         horizontal
         actionMarkup="button"
         src={mesure.tutoriel?.image ?? '/assets/images/image-generique.avif'}
-        imageRatio="1x1"
+        imageRatio="16x9"
         horizontalProportion="tier"
         size="lg"
       >
