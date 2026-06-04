@@ -13,4 +13,8 @@ export type Mesure = {
   ordre: number;
   risques: Risque[];
   tutoriel?: { titre: string; image?: string };
+  liensPourAllerPlusLoin: {
+    libelle: string;
+    url: string;
+  }[];
 };
