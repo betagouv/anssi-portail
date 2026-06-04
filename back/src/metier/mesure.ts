@@ -3,6 +3,11 @@ export type Risque = {
   description: string;
 };
 
+export type LienPourAllerPlusLoin = {
+  libelle: string;
+  url: string;
+};
+
 export class Mesure {
   constructor(
     readonly id: string,
@@ -12,6 +17,7 @@ export class Mesure {
     readonly actionPrioritaire: string,
     readonly actionFacileAFaire: string,
     readonly ordre: number,
-    readonly risques: Risque[]
+    readonly risques: Risque[],
+    readonly liens: LienPourAllerPlusLoin[]
   ) {}
 }

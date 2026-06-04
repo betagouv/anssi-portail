@@ -89,10 +89,10 @@
       >
         <dsfr-badge slot="badgesgroup" label="Tutoriel" type="accent" accent="purple-glycine"></dsfr-badge>
       </dsfr-card>
-      {#if mesure.liensPourAllerPlusLoin?.length > 0}
+      {#if mesure.liens?.length > 0}
         <div class="section-aide">
           <p class="texte-article-lg">Pour aller plus loin</p>
-          {#each mesure.liensPourAllerPlusLoin as lien (lien.libelle)}
+          {#each mesure.liens as lien (lien.libelle)}
             <msc-lien href={lien.url} libelle={lien.libelle}></msc-lien>
           {/each}
         </div>

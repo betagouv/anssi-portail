@@ -30,7 +30,7 @@ describe('La ressource mesure de sécurité', () => {
       assert.equal(reponse.status, 200);
     });
 
-    it('renvoie les détail de la mesure', async () => {
+    it('renvoie les détails de la mesure', async () => {
       await entrepotMesure.ajoute(mesureAuthentA2Etapes());
 
       const { body } = await request(serveur).get('/api/mesures/AUTH.5');
@@ -64,6 +64,11 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
       assert.equal(body.risques[0].libelle, 'Un compte utilise a votre place');
       assert.equal(body.risques[1].libelle, 'Un acces non autorise a un outil en ligne');
       assert.equal(body.risques[2].libelle, 'Connexion frauduleuse sans alerte');
+      assert.equal(body.liens.length, 1);
+      assert.equal(
+        body.liens[0].libelle,
+        "Guide ANSSI — Recommandations relatives à l'authentification multifacteur et aux mots de passe"
+      );
     });
 
     it('réponds 404 si la mesure demandée est inconnue', async () => {

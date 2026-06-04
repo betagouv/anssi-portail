@@ -1,7 +1,7 @@
 import Knex from 'knex';
 import config from '../../knexfile';
 import { EntrepotMesure } from '../metier/entrepotMesure';
-import { Mesure, type Risque } from '../metier/mesure';
+import { LienPourAllerPlusLoin, Mesure, type Risque } from '../metier/mesure';
 
 export type MesurePersistee = {
   id: string;
@@ -14,6 +14,7 @@ export type MesurePersistee = {
   action_facile_a_faire: string;
   references_nis2: string[];
   risques: Risque[];
+  liens: LienPourAllerPlusLoin[];
 };
 export class EntrepotMesurePostgres implements EntrepotMesure {
   knex: Knex.Knex;
@@ -36,7 +37,8 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
       mesurePersistee.action_prioritaire,
       mesurePersistee.action_facile_a_faire,
       mesurePersistee.ordre,
-      mesurePersistee.risques
+      mesurePersistee.risques,
+      mesurePersistee.liens
     );
   }
 }
