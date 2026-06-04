@@ -38,7 +38,8 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
       mesurePersistee.action_facile_a_faire,
       mesurePersistee.ordre,
       mesurePersistee.risques,
-      mesurePersistee.liens
+      mesurePersistee.liens,
+      mesurePersistee.references_nis2
     );
   }
 }
