@@ -141,5 +141,11 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
         description:
           'sans verification en deux etapes, une connexion reussie avec votre mot de passe ne declenche aucun signal — un attaquant peut consulter vos mails ou agir en votre nom pendant des jours sans que vous le remarquiez.',
       },
+    ],
+    [
+      {
+        libelle: "Guide ANSSI — Recommandations relatives à l'authentification multifacteur et aux mots de passe",
+        url: 'https://cyber.gouv.fr/publications/recommandations-relatives-lauthentification-multifacteur-et-aux-mots-de-passe',
+      },
     ]
   );
