@@ -1,21 +1,17 @@
 <script lang="ts">
+  import axios from 'axios';
+  import { onMount } from 'svelte';
   import Heros from '../ui/Heros.svelte';
   import GrilleCartesMesures from './GrilleCartesMesures.svelte';
+  import type { Mesure } from './mesure';
   import Progression from './Progression.svelte';
 
-  const mesure = {
-    id: 'CONTINU.1',
-    phrase_accroche: 'Évitez de tout perdre en cas de cyberattaque 😩',
-    titre: 'Sauvegarder régulièrement les données, vérifier et protéger ces sauvegardes.',
-  };
-  const mesure2 = {
-    id: 'AUTH.5',
-    phrase_accroche: 'Empêchez qu’un compte soit utilisé, même si le mot de passe a fuité 💨',
-    titre:
-      "Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l'accès aux comptes ",
-  };
+  let mesures: Mesure[] = $state([]);
 
-  const mesures = [mesure, mesure2];
+  onMount(async () => {
+    const reponse = await axios.get<Mesure[]>(`/api/modules/cyberdepart/mesures`);
+    mesures = reponse.data;
+  });
   const idMesuresMisesEnAvant = ['CONTINU.1'];
   const mesuresMisesEnAvant = $derived(mesures.filter((m) => idMesuresMisesEnAvant.includes(m.id)));
   const autresMesures = $derived(mesures.filter((m) => !idMesuresMisesEnAvant.includes(m.id)));
