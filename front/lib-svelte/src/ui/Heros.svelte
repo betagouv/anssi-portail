@@ -117,7 +117,6 @@
     &.fond-sombre {
       background-color: var(--background-flat-blue-france-lab);
       background-image: url(/assets/images/motif-fond-service-opacite-16.avif);
-      color: var(--couleur-texte-sombre, #fff);
     }
     &.fond-clair {
       background-image: url('/assets/images/motif-fond-service.avif');
