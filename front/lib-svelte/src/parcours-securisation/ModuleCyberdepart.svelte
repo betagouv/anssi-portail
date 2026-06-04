@@ -12,9 +12,8 @@
     const reponse = await axios.get<Mesure[]>(`/api/modules/cyberdepart/mesures`);
     mesures = reponse.data;
   });
-  const idMesuresMisesEnAvant = ['CONTINU.1', 'AUTH.5', 'AUTH.1', 'CRISE.8'];
-  const mesuresMisesEnAvant = $derived(mesures.filter((m) => idMesuresMisesEnAvant.includes(m.id)));
-  const autresMesures = $derived(mesures.filter((m) => !idMesuresMisesEnAvant.includes(m.id)));
+  const mesuresMisesEnAvant = $derived(mesures.filter((_, index) => index < 4));
+  const autresMesures = $derived(mesures.filter((_, index) => index >= 4));
 </script>
 
 <Heros

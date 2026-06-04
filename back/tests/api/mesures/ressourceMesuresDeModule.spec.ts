@@ -4,6 +4,7 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
+import { Mesure } from '../../../src/metier/mesure';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
 import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
@@ -35,6 +36,20 @@ describe('La ressource des mesures de sécurité d’un module', () => {
 
       assert.equal(body.length, 1);
       assert.equal(body[0].id, 'AUTH.5');
+    });
+
+    function mesureAvecOrdre(id: string, ordre: number) {
+      return new Mesure(id, '', '', '', '', '', ordre, [], [], []);
+    }
+
+    it('trie les mesures par ordre', async () => {
+      await entrepotMesure.ajoute(mesureAvecOrdre('MES1', 30));
+      await entrepotMesure.ajoute(mesureAvecOrdre('MES2', 10));
+
+      const { body } = await request(serveur).get('/api/modules/cyberdepart/mesures');
+
+      assert.equal(body[0].id, 'MES2');
+      assert.equal(body[1].id, 'MES1');
     });
 
     it('réponds 404 si la fonctionnalité est désactivée', async () => {
