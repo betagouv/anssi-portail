@@ -11,7 +11,7 @@ const ressourceMesuresDeModule = ({ entrepotMesure }: ConfigurationServeur) => {
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
       const mesures = await entrepotMesure.tous();
-      reponse.status(200).send(mesures);
+      reponse.status(200).send(mesures.toSorted((a, b) => a.ordre - b.ordre));
     })
   );
 
