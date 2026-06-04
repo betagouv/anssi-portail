@@ -21,7 +21,7 @@
   cacheIllustration={true}
   cacheTags={true}
   description="Avancez à votre rythme dans une première démarche de sécurisation et appliquez les recommandations essentielles pour réduire les risques cyber du quotidien."
-  format="details"
+  format="banniere"
   illustrationAlt=""
   illustrationSource=""
   titre="Cyberdépart : agir pour votre cybersécurité"
