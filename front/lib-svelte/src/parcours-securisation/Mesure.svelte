@@ -5,6 +5,8 @@
   import Heros from '../ui/Heros.svelte';
   import { aseptiseHtml } from '../utils/aseptisationDuHtml';
   import type { Mesure } from './mesure';
+  import Accordeon from '../ui/Accordeon.svelte';
+  import CelluleExigenceNis2 from '../nis2/tableaux/CelluleExigenceNis2.svelte';
 
   let mesure: Mesure | undefined = $state();
 
@@ -17,6 +19,16 @@
 
   let explications = $derived(mesure ? aseptiseHtml(mesure.explications) : '');
   let actionPrioritaire = $derived(mesure ? aseptiseHtml(mesure.actionPrioritaire) : '');
+  let exigencesTrieesParObjectif = $derived(
+    mesure
+      ? mesure.exigences.toSorted((a, b) =>
+          a.objectifSecurite.localeCompare(b.objectifSecurite, 'fr', { sensitivity: 'base' })
+        )
+      : []
+  );
+  let exigencesRegroupeesParObjectif = $derived(
+    mesure ? Object.groupBy(exigencesTrieesParObjectif, ({ objectifSecurite }) => objectifSecurite) : {}
+  );
 </script>
 
 {#if mesure}
@@ -97,6 +109,20 @@
           {/each}
         </div>
       {/if}
+      <div class="section-aide recyf">
+        <p>
+          Pour approfondir, vous pouvez consulter les exigences ReCyF (moyen de conformité NIS 2), dont cette
+          recommandation est issue.
+        </p>
+        {#each Object.entries(exigencesRegroupeesParObjectif) as [objectif, exigences], index (index)}
+          <Accordeon libelle={objectif}>
+            {#each exigences as exigence (exigence.reference)}
+              <CelluleExigenceNis2 {exigence} />
+              <hr />
+            {/each}
+          </Accordeon>
+        {/each}
+      </div>
     </div>
   </dsfr-container>
 {:else}

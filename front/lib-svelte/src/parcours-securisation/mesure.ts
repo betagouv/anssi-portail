@@ -1,3 +1,5 @@
+import type { ExigenceNis2 } from '../nis2/exigence.type';
+
 export type Risque = {
   libelle: string;
   description: string;
@@ -17,4 +19,5 @@ export type Mesure = {
     libelle: string;
     url: string;
   }[];
+  exigences: ExigenceNis2[];
 };
