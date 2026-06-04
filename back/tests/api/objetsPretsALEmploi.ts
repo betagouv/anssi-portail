@@ -147,5 +147,6 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
         libelle: "Guide ANSSI — Recommandations relatives à l'authentification multifacteur et aux mots de passe",
         url: 'https://cyber.gouv.fr/publications/recommandations-relatives-lauthentification-multifacteur-et-aux-mots-de-passe',
       },
-    ]
+    ],
+    ['10.B.5-EI/EE']
   );

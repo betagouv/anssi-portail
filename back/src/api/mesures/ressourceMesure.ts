@@ -2,8 +2,9 @@ import { Request, Response, Router } from 'express';
 import { filetRouteAsynchrone } from '../middleware';
 import { corpsVide, valideCorpsRequete } from '../zod';
 import { ConfigurationServeur } from '../configurationServeur';
+import { mesurePresentation } from './mesurePresentation';
 
-const ressourceMesure = ({ entrepotMesure }: ConfigurationServeur) => {
+const ressourceMesure = ({ entrepotMesure, entrepotExigence }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get(
@@ -14,7 +15,8 @@ const ressourceMesure = ({ entrepotMesure }: ConfigurationServeur) => {
       if (!mesureTrouvee) {
         return reponse.sendStatus(404);
       }
-      reponse.status(200).send(mesureTrouvee);
+      const mesurePresentee = await mesurePresentation(mesureTrouvee, entrepotExigence);
+      reponse.status(200).send(mesurePresentee);
     })
   );
 

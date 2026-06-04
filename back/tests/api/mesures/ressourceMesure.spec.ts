@@ -7,11 +7,14 @@ import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnem
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
 import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
+import { ExigenceNIS2 } from '../../../src/metier/nis2/exigence';
+import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire';
 
 describe('La ressource mesure de sécurité', () => {
   describe('sur requête GET', () => {
     let serveur: Express;
     let entrepotMesure: EntrepotMesureMemoire;
+    let entrepotExigence: EntrepotExigenceMemoire;
     let adaptateurEnvironnement: AdaptateurEnvironnement;
 
     beforeEach(() => {
@@ -19,7 +22,13 @@ describe('La ressource mesure de sécurité', () => {
         ...fauxAdaptateurEnvironnement,
       };
       entrepotMesure = new EntrepotMesureMemoire();
-      serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotMesure, adaptateurEnvironnement });
+      entrepotExigence = new EntrepotExigenceMemoire();
+      serveur = creeServeur({
+        ...configurationDeTestDuServeur,
+        entrepotMesure,
+        entrepotExigence,
+        adaptateurEnvironnement,
+      });
     });
 
     it('réponds 200', async () => {
@@ -69,6 +78,35 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
         body.liens[0].libelle,
         "Guide ANSSI — Recommandations relatives à l'authentification multifacteur et aux mots de passe"
       );
+    });
+
+    it('renvoie les informations ReCyF de la mesure', async () => {
+      await entrepotExigence.ajoute(
+        new ExigenceNIS2({
+          reference: '10.B.5-EI/EE',
+          entitesCible: ['EntiteEssentielle', 'EntiteImportante'],
+          objectifSecurite:
+            "Objectif de sécurité 10: Gestion des identités et des accès des utilisateurs aux systèmes d'information",
+          thematique: 'Authentification',
+          contenu: 'Les facteurs d’authentification...',
+          contenuEnAnglais: 'The authentication factors...',
+        })
+      );
+      await entrepotMesure.ajoute(mesureAuthentA2Etapes());
+
+      const { body } = await request(serveur).get('/api/mesures/AUTH.5');
+
+      assert.equal(body.exigences.length, 1);
+      const exigence = body.exigences[0] as ExigenceNIS2;
+      assert.equal(exigence.reference, '10.B.5-EI/EE');
+      assert.deepEqual(exigence.entitesCible, ['EntiteEssentielle', 'EntiteImportante']);
+      assert.equal(
+        exigence.objectifSecurite,
+        "Objectif de sécurité 10: Gestion des identités et des accès des utilisateurs aux systèmes d'information"
+      );
+      assert.equal(exigence.thematique, 'Authentification');
+      assert.equal(exigence.contenu, 'Les facteurs d’authentification...');
+      assert.equal(exigence.contenuEnAnglais, 'The authentication factors...');
     });
 
     it('réponds 404 si la mesure demandée est inconnue', async () => {
