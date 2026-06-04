@@ -4,6 +4,7 @@ import { CodeSecteur } from '../metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
 import { ReponsesTestMaturite } from '../metier/resultatTestMaturite';
 import { ReponsesEtResultatAvecAnalyse } from '../metier/nis2-simulateur/questionnaire/calculEligibilite';
+import { MesureConsultee } from '../bus/evenements/mesureConsultee';
 
 export type DonneesEvenement =
   | DonneesEvenementNouvelUtilisateur
@@ -13,7 +14,8 @@ export type DonneesEvenement =
   | DonneesEvenementRetourExperienceDonne
   | DonneesEvenementAvisUtilisateurDonne
   | DonneesEvenementUtilisateurConnecte
-  | DonneesSimulationNis2Terminee;
+  | DonneesSimulationNis2Terminee
+  | DonneesMesureConsultee;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -73,3 +75,8 @@ export type DonneesEvenementUtilisateurConnecte = Evenement<
 >;
 
 export type DonneesSimulationNis2Terminee = Evenement<'SIMULATION_NIS2_TERMINEE', ReponsesEtResultatAvecAnalyse>;
+
+type DonneesMesureConsultee = Evenement<
+  'MESURE_CONSULTEE',
+  Omit<MesureConsultee, 'emailHache'> & { idUtilisateur: string }
+>;
