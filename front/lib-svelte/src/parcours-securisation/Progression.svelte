@@ -18,6 +18,7 @@
     .libelle {
       display: flex;
       gap: 1rem;
+      align-items: center;
 
       h6,
       span {
