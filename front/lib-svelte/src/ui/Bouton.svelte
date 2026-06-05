@@ -3,6 +3,7 @@
 
   interface Props {
     actif?: boolean;
+    etire?: boolean;
     libelle?: string;
     titre?: string;
     type: 'primaire' | 'secondaire' | 'secondaire-inverse' | 'tertiaire' | 'tertiaire-sans-bordure';
@@ -16,6 +17,7 @@
 
   const {
     actif = false,
+    etire,
     libelle,
     titre,
     type,
@@ -46,6 +48,7 @@
 
 <dsfr-button
   class:actif
+  centered={etire}
   label={libelle}
   title={titre}
   {kind}

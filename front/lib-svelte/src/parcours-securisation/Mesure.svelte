@@ -9,6 +9,7 @@
   import { aseptiseHtml } from '../utils/aseptisationDuHtml';
   import { storeAvisUtilisateur, type AvisUtilisateur } from './avisUtilisateur.store';
   import type { Mesure } from './mesure';
+  import PriseEnCompteMesure from './PriseEnCompteMesure.svelte';
 
   let mesure: Mesure | undefined = $state();
 
@@ -104,120 +105,130 @@
   </Heros>
 
   <dsfr-container>
-    <div class="contenu-section">
-      <h2>Présentation</h2>
-      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-      {@html explications}
-    </div>
-
-    <div class="contenu-section">
-      <h2>Les risques évités</h2>
-      <ul class="risques-list">
-        {#each mesure.risques as risque (risque.libelle)}
-          <li>
-            <strong>{risque.libelle}&nbsp;:</strong>
-            {risque.description}
-          </li>
-        {/each}
-      </ul>
-    </div>
-
-    <div class="contenu-section priorites">
-      <h2><lab-anssi-icone nom="arrow-right-line"></lab-anssi-icone>À faire en priorité</h2>
-      <div>
-        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-        <p>{@html actionPrioritaire}</p>
-      </div>
-      {#if mesure.actionFacileAFaire}
-        <dsfr-highlight size="md" text="slot">
-          <h3 slot="title">Bonne nouvelle&nbsp;!</h3>
-          <p slot="text">{mesure.actionFacileAFaire}</p>
-        </dsfr-highlight>
-      {/if}
-    </div>
-
-    <div class="contenu-section comment-faire">
-      <h2>Comment faire concrètement</h2>
-      <dsfr-card
-        hasBadge
-        title={mesure.tutoriel?.titre ?? 'Titre'}
-        horizontal
-        actionMarkup="button"
-        src={mesure.tutoriel?.image ?? '/assets/images/image-generique.avif'}
-        imageRatio="16x9"
-        horizontalProportion="tier"
-        size="lg"
-      >
-        <dsfr-badge slot="badgesgroup" label="Tutoriel" type="accent" accent="purple-glycine"></dsfr-badge>
-      </dsfr-card>
-      {#if mesure.liens?.length > 0}
-        <div class="section-aide">
-          <p class="texte-article-lg">Pour aller plus loin</p>
-          {#each mesure.liens as lien (lien.libelle)}
-            <msc-lien href={lien.url} libelle={lien.libelle}></msc-lien>
-          {/each}
+    <div class="article">
+      <div class="contenu-principal">
+        <div class="contenu-section">
+          <h2>Présentation</h2>
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+          {@html explications}
         </div>
-      {/if}
-      <div class="section-aide retour">
-        <div class="texte-information-avis-utilisateur">
-          <span class="titre-avis"><b>Ce contenu vous a-t-il aidé ?</b></span>
+
+        <div class="contenu-section">
+          <h2>Les risques évités</h2>
+          <ul class="risques-list">
+            {#each mesure.risques as risque (risque.libelle)}
+              <li>
+                <strong>{risque.libelle}&nbsp;:</strong>
+                {risque.description}
+              </li>
+            {/each}
+          </ul>
         </div>
-        <div class="conteneur-emoji-avis">
-          <Bouton
-            type="tertiaire"
-            iconeSeule
-            icone="thumb-up-line"
-            titre="Réponse positive"
-            actif={avisUtilisateur?.positif}
-            surClic={() => soumetsAvisPositif()}
-          ></Bouton>
-          <Bouton
-            type="tertiaire"
-            iconeSeule
-            icone="thumb-down-line"
-            titre="Réponse négative"
-            actif={avisUtilisateur && !avisUtilisateur.positif}
-            surClic={() => afficheCommentaire()}
-          ></Bouton>
+
+        <div class="contenu-section priorites">
+          <h2><lab-anssi-icone nom="arrow-right-line"></lab-anssi-icone>À faire en priorité</h2>
+          <div>
+            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+            <p>{@html actionPrioritaire}</p>
+          </div>
+          {#if mesure.actionFacileAFaire}
+            <dsfr-highlight size="md" text="slot">
+              <h3 slot="title">Bonne nouvelle&nbsp;!</h3>
+              <p slot="text">{mesure.actionFacileAFaire}</p>
+            </dsfr-highlight>
+          {/if}
         </div>
-        {#if etat === 'AfficheCommentaire'}
-          <div class="encart-commentaire-avis">
-            <dsfr-textarea
-              label="Aidez-nous à améliorer le contenu de cette page"
-              placeholder="Indiquez ce qu'il vous a manqué, ce qui n'était pas clair ou ce qui pourrait être amélioré."
-              type="text"
-              nom="avis"
-              rows="1"
-              maxlength="1000"
-              onvaluechanged={(e: CustomEvent<string>) => {
-                commentaire = e.detail;
-              }}
-            ></dsfr-textarea>
-            <div class="conteneur-bouton">
-              <Bouton type="primaire" libelle="Envoyer vos commentaires" surClic={() => soumetsAvisNegatif(commentaire)}
+
+        <div class="contenu-section comment-faire">
+          <h2>Comment faire concrètement</h2>
+          <dsfr-card
+            hasBadge
+            title={mesure.tutoriel?.titre ?? 'Titre'}
+            horizontal
+            actionMarkup="button"
+            src={mesure.tutoriel?.image ?? '/assets/images/image-generique.avif'}
+            imageRatio="16x9"
+            horizontalProportion="tier"
+            size="lg"
+          >
+            <dsfr-badge slot="badgesgroup" label="Tutoriel" type="accent" accent="purple-glycine"></dsfr-badge>
+          </dsfr-card>
+          {#if mesure.liens?.length > 0}
+            <div class="section-aide">
+              <p class="texte-article-lg">Pour aller plus loin</p>
+              {#each mesure.liens as lien (lien.libelle)}
+                <msc-lien href={lien.url} libelle={lien.libelle}></msc-lien>
+              {/each}
+            </div>
+          {/if}
+          <div class="section-aide retour">
+            <div class="texte-information-avis-utilisateur">
+              <span class="titre-avis"><b>Ce contenu vous a-t-il aidé ?</b></span>
+            </div>
+            <div class="conteneur-emoji-avis">
+              <Bouton
+                type="tertiaire"
+                iconeSeule
+                icone="thumb-up-line"
+                titre="Réponse positive"
+                actif={avisUtilisateur?.positif}
+                surClic={() => soumetsAvisPositif()}
+              ></Bouton>
+              <Bouton
+                type="tertiaire"
+                iconeSeule
+                icone="thumb-down-line"
+                titre="Réponse négative"
+                actif={avisUtilisateur && !avisUtilisateur.positif}
+                surClic={() => afficheCommentaire()}
               ></Bouton>
             </div>
+            {#if etat === 'AfficheCommentaire'}
+              <div class="encart-commentaire-avis">
+                <dsfr-textarea
+                  label="Aidez-nous à améliorer le contenu de cette page"
+                  placeholder="Indiquez ce qu'il vous a manqué, ce qui n'était pas clair ou ce qui pourrait être amélioré."
+                  type="text"
+                  nom="avis"
+                  rows="1"
+                  maxlength="1000"
+                  onvaluechanged={(e: CustomEvent<string>) => {
+                    commentaire = e.detail;
+                  }}
+                ></dsfr-textarea>
+                <div class="conteneur-bouton">
+                  <Bouton
+                    type="primaire"
+                    libelle="Envoyer vos commentaires"
+                    surClic={() => soumetsAvisNegatif(commentaire)}
+                  ></Bouton>
+                </div>
+              </div>
+            {/if}
+            {#if etat === 'Soumis'}
+              <dsfr-alert type="success" size="sm">
+                <span slot="description">Merci&nbsp;! Vos retours sont précieux. ✨</span>
+              </dsfr-alert>
+            {/if}
           </div>
-        {/if}
-        {#if etat === 'Soumis'}
-          <dsfr-alert type="success" size="sm">
-            <span slot="description">Merci&nbsp;! Vos retours sont précieux. ✨</span>
-          </dsfr-alert>
-        {/if}
-      </div>
-      <div class="section-aide recyf">
-        <p>
-          Pour approfondir, vous pouvez consulter les exigences ReCyF (moyen de conformité NIS 2), dont cette
-          recommandation est issue.
-        </p>
-        {#each Object.entries(exigencesRegroupeesParObjectif) as [objectif, exigences], index (index)}
-          <Accordeon libelle={objectif}>
-            {#each exigences as exigence (exigence.reference)}
-              <CelluleExigenceNis2 {exigence} />
-              <hr />
+          <div class="section-aide recyf">
+            <p>
+              Pour approfondir, vous pouvez consulter les exigences ReCyF (moyen de conformité NIS 2), dont cette
+              recommandation est issue.
+            </p>
+            {#each Object.entries(exigencesRegroupeesParObjectif) as [objectif, exigences], index (index)}
+              <Accordeon libelle={objectif}>
+                {#each exigences as exigence (exigence.reference)}
+                  <CelluleExigenceNis2 {exigence} />
+                  <hr />
+                {/each}
+              </Accordeon>
             {/each}
-          </Accordeon>
-        {/each}
+          </div>
+        </div>
+      </div>
+      <div class="prise-en-compte">
+        <PriseEnCompteMesure></PriseEnCompteMesure>
       </div>
     </div>
   </dsfr-container>
@@ -226,8 +237,25 @@
 {/if}
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
+  @use '../../../assets/styles/grille' as *;
+
   * {
     box-sizing: border-box;
+  }
+
+  dsfr-container {
+    padding-block: 1rem 3.5rem;
+  }
+
+  .article {
+    @include a-partir-de(md) {
+      display: grid;
+      grid-template-columns: auto taille-pour-colonnes(4);
+    }
+    @include a-partir-de(lg) {
+      grid-template-columns: auto taille-pour-colonnes(3);
+    }
   }
 
   .contenu-section {
