@@ -1,6 +1,7 @@
 import { HttpStatusCode } from 'axios';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import helmet from 'helmet';
+import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 import { randomBytes } from 'node:crypto';
 import fs from 'node:fs';
 import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
@@ -150,9 +151,16 @@ export const fabriqueMiddleware = ({
       }
       try {
         adaptateurJWT.decode(requete.session?.token);
-      } catch {
-        reponse.sendStatus(401);
-        return;
+      } catch (e) {
+        if (e instanceof TokenExpiredError) {
+          reponse.clearCookie('session');
+          suite();
+          return;
+        }
+        if (e instanceof JsonWebTokenError) {
+          reponse.sendStatus(401);
+          return;
+        }
       }
       try {
         if (requete.session?.email) {

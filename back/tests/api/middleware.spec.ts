@@ -1,6 +1,6 @@
 import assert from 'assert';
 import { Request, Response } from 'express';
-import { JsonWebTokenError } from 'jsonwebtoken';
+import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 import { createRequest, createResponse } from 'node-mocks-http';
 import { OutgoingHttpHeaders } from 'node:http';
 import { beforeEach, describe, it } from 'node:test';
@@ -217,6 +217,9 @@ describe('Le middleware', () => {
         if (token === 'token-invalide' || !token) {
           throw new JsonWebTokenError('erreur de token');
         }
+        if (token === 'token-expire') {
+          throw new TokenExpiredError('token expiré', new Date());
+        }
         return {};
       };
     });
@@ -279,7 +282,6 @@ describe('Le middleware', () => {
 
     it('renvoie une erreur 401 lorsque le jeton est invalide', async () => {
       requete.session = { email: jeanneDupont.email, token: 'token-invalide' };
-      await entrepotUtilisateur.ajoute(jeanneDupont);
       let suiteAppelee = false;
 
       await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {
@@ -289,6 +291,24 @@ describe('Le middleware', () => {
       assert.equal(reponse.statusCode, 401);
       assert.equal(requete.utilisateur, undefined);
       assert.equal(suiteAppelee, false);
+    });
+
+    it('nettoie silencieusement la session si le token est expiré', async () => {
+      requete.session = { email: jeanneDupont.email, token: 'token-expire' };
+      let suiteAppelee = false;
+      let cookieNettoye = '';
+      reponse.clearCookie = (nomCookieNettoye) => {
+        cookieNettoye = nomCookieNettoye;
+        return reponse;
+      };
+
+      await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {
+        suiteAppelee = true;
+      });
+
+      assert.equal(requete.utilisateur, undefined);
+      assert.equal(suiteAppelee, true);
+      assert.equal(cookieNettoye, 'session');
     });
 
     it('n’ajoute pas d’utilisateur (mais n’échoue pas) s’il n’y a pas de token', async () => {
