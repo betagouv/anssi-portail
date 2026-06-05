@@ -29,7 +29,7 @@
 ></Heros>
 
 <dsfr-container class="progression">
-  <Progression></Progression>
+  <Progression actuel={0} max={13} cible={10}></Progression>
 </dsfr-container>
 
 <dsfr-container class="actions-en-avant">
