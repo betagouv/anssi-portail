@@ -15,10 +15,8 @@
 </script>
 
 <div class="progression">
-  <div class="libelle">
-    <h6>Progression</h6>
-    <span class="texte-standard-md">{actuel}&nbsp;/&nbsp;{max}</span>
-  </div>
+  <h6>Progression</h6>
+  <span class="texte-standard-md libelle">{actuel}&nbsp;/&nbsp;{max}</span>
   <div class="barre" bind:this={barre}>
     <div class="barre-actuelle"></div>
     <div
@@ -30,27 +28,40 @@
 </div>
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
   .progression {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     gap: 1rem;
+    grid-template-areas:
+      'titre libelle'
+      'barre barre';
+    grid-template-columns: min-content auto;
+    align-items: center;
 
+    @include a-partir-de(md) {
+      grid-template-areas: 'titre barre libelle';
+      grid-template-columns: min-content 384px auto;
+    }
+
+    h6 {
+      grid-area: titre;
+    }
     .libelle {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
+      grid-area: libelle;
+    }
 
-      h6,
-      span {
-        margin: 0;
-      }
+    h6,
+    span {
+      margin: 0;
     }
 
     .barre {
+      grid-area: barre;
       height: 12px;
       background-color: var(--background-contrast-grey);
       border-radius: 999px;
       position: relative;
+      max-width: 384px;
 
       .barre-actuelle {
         height: 100%;
