@@ -21,6 +21,7 @@ import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMe
 import { EntrepotGuideMemoire } from '../persistance/entrepotGuideMemoire';
 import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravailMemoire';
 import { EntrepotMesureMemoire } from '../persistance/entrepotMesureMemoire';
+import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
@@ -260,6 +261,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   entrepotSessionDeGroupe: new EntrepotSessionDeGroupeMemoire(),
   entrepotExigence: new EntrepotExigenceMemoire(),
   entrepotMesure: new EntrepotMesureMemoire(),
+  entrepotPriseEnCompte: new EntrepotPriseEnCompteMemoire(),
   entrepotUtilisateur,
   fournisseurChemin: fauxFournisseurDeChemin,
   generateurCodeSessionDeGroupe: fauxGenerateurCodeSessionDeGroupe,
