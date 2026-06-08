@@ -4,17 +4,15 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
+import { ExigenceNIS2 } from '../../../src/metier/nis2/exigence';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
 import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
-import { ExigenceNIS2 } from '../../../src/metier/nis2/exigence';
-import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire';
 
 describe('La ressource mesure de sécurité', () => {
   describe('sur requête GET', () => {
     let serveur: Express;
     let entrepotMesure: EntrepotMesureMemoire;
-    let entrepotExigence: EntrepotExigenceMemoire;
     let adaptateurEnvironnement: AdaptateurEnvironnement;
 
     beforeEach(() => {
@@ -22,11 +20,9 @@ describe('La ressource mesure de sécurité', () => {
         ...fauxAdaptateurEnvironnement,
       };
       entrepotMesure = new EntrepotMesureMemoire();
-      entrepotExigence = new EntrepotExigenceMemoire();
       serveur = creeServeur({
         ...configurationDeTestDuServeur,
         entrepotMesure,
-        entrepotExigence,
         adaptateurEnvironnement,
       });
     });
@@ -81,17 +77,6 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
     });
 
     it('renvoie les informations ReCyF de la mesure', async () => {
-      await entrepotExigence.ajoute(
-        new ExigenceNIS2({
-          reference: '10.B.5-EI/EE',
-          entitesCible: ['EntiteEssentielle', 'EntiteImportante'],
-          objectifSecurite:
-            "Objectif de sécurité 10: Gestion des identités et des accès des utilisateurs aux systèmes d'information",
-          thematique: 'Authentification',
-          contenu: 'Les facteurs d’authentification...',
-          contenuEnAnglais: 'The authentication factors...',
-        })
-      );
       await entrepotMesure.ajoute(mesureAuthentA2Etapes());
 
       const { body } = await request(serveur).get('/api/mesures/AUTH.5');
