@@ -245,7 +245,11 @@
   }
 
   dsfr-container {
-    padding-block: 1rem 3.5rem;
+    padding-block: 2rem 3.5rem;
+
+    @include a-partir-de(md) {
+      padding-top: 2.5rem;
+    }
   }
 
   .article {
