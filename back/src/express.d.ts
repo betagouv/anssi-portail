@@ -6,6 +6,7 @@ declare namespace Express {
 
   export interface CorpsDeRequeteTypee<T> extends Request {
     body: T;
+    params: Record<string, unknown>;
   }
 
   export interface Response {
