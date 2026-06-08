@@ -313,64 +313,9 @@
 
 .anssi {
   padding: 72px 0;
-  .contenu-section {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
 
-    .contenu-anssi {
-      display: grid;
-      grid-template-areas:
-        'illustration'
-        'titre'
-        'description'
-        'lien';
-      place-items: center;
-      text-align: center;
-
-      @include a-partir-de(md) {
-        max-width: taille-pour-colonnes(10);
-      }
-      @include a-partir-de(lg) {
-        grid-template-areas:
-          'titre illustration'
-          'description illustration'
-          'lien illustration';
-        grid-template-columns: auto 40%;
-        place-items: flex-start;
-        text-align: left;
-      }
-      h2 {
-        grid-area: titre;
-        margin-bottom: 16px;
-      }
-
-      .texte-standard-md {
-        grid-area: description;
-      }
-
-      .logo {
-        grid-area: illustration;
-        margin-bottom: 24px;
-        width: 140px;
-        height: 140px;
-
-        @include a-partir-de(lg) {
-          place-self: center;
-          margin-bottom: 0;
-        }
-      }
-
-      .bouton.secondaire {
-        grid-area: lien;
-        display: flex;
-        padding: 8px 12px 8px 16px;
-        font-size: 1rem;
-        line-height: 1.5rem;
-        border-color: var(--noir);
-        gap: 8px;
-        margin: 0 0 16px;
-      }
-    }
+  lab-anssi-presentation-anssi {
+    margin: 0 auto;
+    max-width: taille-pour-colonnes(8);
   }
 }
