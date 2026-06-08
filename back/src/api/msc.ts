@@ -58,6 +58,7 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
+import { ressourcePriseEnCompte } from './mesures/ressourcePriseEnCompte';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -286,8 +287,12 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     .parcoursDeSecurisation()
     .estActif();
   if (parcoursActive) {
-    app.use('/api/mesures', ressourceMesure(configurationServeur));
-    app.use('/api/mesures', ressourceAvisMesure(configurationServeur));
+    app.use(
+      '/api/mesures',
+      ressourceMesure(configurationServeur),
+      ressourceAvisMesure(configurationServeur),
+      ressourcePriseEnCompte(configurationServeur)
+    );
     app.use('/api/modules/cyberdepart/mesures', ressourceMesuresDeModule(configurationServeur));
   }
 
