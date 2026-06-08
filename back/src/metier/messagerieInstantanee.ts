@@ -12,7 +12,13 @@ export type AvisUtilisateur = {
   emailDeContact?: string;
 };
 
+export type AvisNegatifSurUneMesure = {
+  idMesure: string;
+  commentaire?: string;
+};
+
 export interface MessagerieInstantanee {
   notifieUnAvisUtilisateur(avisUtilisateur: AvisUtilisateur): Promise<void>;
   notifieUnRetourExperience(retourExperience: RetourExperience): Promise<void>;
+  notifieUnAvisNegatifSurUneMesure(avis: AvisNegatifSurUneMesure): Promise<void>;
 }

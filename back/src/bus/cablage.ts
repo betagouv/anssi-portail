@@ -3,27 +3,33 @@ import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
 import { AdaptateurJournal } from '../infra/adaptateurJournal';
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
 import { EntrepotFavori } from '../metier/entrepotFavori';
+import { MessagerieInstantanee } from '../metier/messagerieInstantanee';
 import { BusEvenements } from './busEvenements';
+import {
+  consigneCommentaireAvisMesureDonneDansMessagerie,
+  consigneRetourAvisMesureDonneDansJournal,
+} from './consigneAvisMesureDonneDansJournal';
 import { consigneEvenementAvisUtilisateurDonneDansJournal } from './consigneEvenementAvisUtilisateurDonneDansJournal';
 import { consigneEvenementCompteCreeDansJournal } from './consigneEvenementCompteCreeDansJournal';
 import { consigneEvenementMAJFavorisUtilisateurDansJournal } from './consigneEvenementMAJFavorisUtilisateurDansJournal';
+import { consigneEvenementMesureConsulteeDansJournal } from './consigneEvenementMesureConsulteeDansJournal';
 import { consigneEvenementProprieteTestRevendiqueeDansJournal } from './consigneEvenementProprieteTestRevendiqueeDansJournal';
 import { consigneEvenementRetourExperienceDonneDansJournal } from './consigneEvenementRetourExperienceDonneDansJournal';
+import { consigneEvenementSimulationNis2TermineeDansJournal } from './consigneEvenementSimulationNis2TermineeDansJournal';
 import { consigneEvenementTestRealiseDansJournal } from './consigneEvenementTestRealiseDansJournal';
 import { consigneEvenementUtilisateurConnecteDansJournal } from './consigneEvenementUtilisateurConnecteDansJournal';
 import { creeContactBrevo } from './creeContactBrevo';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte';
+import { AvisMesureDonne } from './evenements/avisMesureDonne';
 import { AvisUtilisateurDonne } from './evenements/avisUtilisateurDonne';
 import { CompteCree } from './evenements/compteCree';
+import { MesureConsultee } from './evenements/mesureConsultee';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
+import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee';
 import { TestRealise } from './evenements/testRealise';
 import { UtilisateurConnecte } from './evenements/utilisateurConnecte';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
-import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee';
-import { consigneEvenementSimulationNis2TermineeDansJournal } from './consigneEvenementSimulationNis2TermineeDansJournal';
-import { MesureConsultee } from './evenements/mesureConsultee';
-import { consigneEvenementMesureConsulteeDansJournal } from './consigneEvenementMesureConsulteeDansJournal';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
@@ -32,6 +38,7 @@ export const cableTousLesAbonnes = ({
   adaptateurHorloge,
   adaptateurHachage,
   entrepotFavori,
+  messagerieInstantanee,
 }: {
   busEvenements: BusEvenements;
   adaptateurEmail: AdaptateurEmail;
@@ -39,6 +46,7 @@ export const cableTousLesAbonnes = ({
   adaptateurHorloge: AdaptateurHorloge;
   adaptateurHachage: AdaptateurHachage;
   entrepotFavori: EntrepotFavori;
+  messagerieInstantanee: MessagerieInstantanee;
 }) => {
   busEvenements.abonne(
     TestRealise,
@@ -114,4 +122,11 @@ export const cableTousLesAbonnes = ({
     MesureConsultee,
     consigneEvenementMesureConsulteeDansJournal({ adaptateurJournal, adaptateurHorloge })
   );
+
+  busEvenements.abonne(
+    AvisMesureDonne,
+    consigneRetourAvisMesureDonneDansJournal({ adaptateurJournal, adaptateurHorloge })
+  );
+
+  busEvenements.abonne(AvisMesureDonne, consigneCommentaireAvisMesureDonneDansMessagerie({ messagerieInstantanee }));
 };

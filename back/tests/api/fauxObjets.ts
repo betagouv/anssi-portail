@@ -20,10 +20,10 @@ import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
 import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire';
 import { EntrepotGuideMemoire } from '../persistance/entrepotGuideMemoire';
 import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravailMemoire';
+import { EntrepotMesureMemoire } from '../persistance/entrepotMesureMemoire';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
-import { EntrepotMesureMemoire } from '../persistance/entrepotMesureMemoire';
 
 export const fauxFournisseurDeChemin: FournisseurChemin = {
   cheminPageJekyll: (_: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
@@ -122,6 +122,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   mattermost: () => ({
     webhookAvisUtilisateur: () => '',
     webhookRetourExperience: () => '',
+    webhookAvisMesure: () => '',
   }),
   grist: () => ({
     baseURL: () => 'http://grist',
@@ -217,6 +218,7 @@ const fauxGenerateurCodeSessionDeGroupe = {
 export const fausseMessagerieInstantanee: MessagerieInstantanee = {
   notifieUnRetourExperience: async () => {},
   notifieUnAvisUtilisateur: async () => {},
+  notifieUnAvisNegatifSurUneMesure: async () => {},
 };
 
 export const fauxAdaptateurHachage: AdaptateurHachage = {
