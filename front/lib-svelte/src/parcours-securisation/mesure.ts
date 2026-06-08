@@ -20,4 +20,5 @@ export type Mesure = {
     url: string;
   }[];
   exigences: ExigenceNis2[];
+  estPriseEnCompte: boolean;
 };
