@@ -4,7 +4,7 @@ import { corpsVide, valideCorpsRequete } from '../zod';
 import { ConfigurationServeur } from '../configurationServeur';
 import { mesurePresentation } from './mesurePresentation';
 
-const ressourceMesure = ({ entrepotMesure, entrepotExigence }: ConfigurationServeur) => {
+const ressourceMesure = ({ entrepotMesure }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get(
@@ -15,7 +15,7 @@ const ressourceMesure = ({ entrepotMesure, entrepotExigence }: ConfigurationServ
       if (!mesureTrouvee) {
         return reponse.sendStatus(404);
       }
-      const mesurePresentee = await mesurePresentation(mesureTrouvee, entrepotExigence);
+      const mesurePresentee = await mesurePresentation(mesureTrouvee);
       reponse.status(200).send(mesurePresentee);
     })
   );

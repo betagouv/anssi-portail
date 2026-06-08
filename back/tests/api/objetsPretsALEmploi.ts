@@ -1,6 +1,7 @@
 import { Financement } from '../../src/metier/financement';
 import { Guide } from '../../src/metier/guide';
 import { Mesure } from '../../src/metier/mesure';
+import { ExigenceNIS2 } from '../../src/metier/nis2/exigence';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { fauxAdaptateurRechercheEntreprise } from './fauxObjets';
 
@@ -148,5 +149,15 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
         url: 'https://cyber.gouv.fr/publications/recommandations-relatives-lauthentification-multifacteur-et-aux-mots-de-passe',
       },
     ],
-    ['10.B.5-EI/EE']
+    [
+      new ExigenceNIS2({
+        reference: '10.B.5-EI/EE',
+        entitesCible: ['EntiteEssentielle', 'EntiteImportante'],
+        objectifSecurite:
+          "Objectif de sécurité 10: Gestion des identités et des accès des utilisateurs aux systèmes d'information",
+        thematique: 'Authentification',
+        contenu: 'Les facteurs d’authentification...',
+        contenuEnAnglais: 'The authentication factors...',
+      }),
+    ]
   );

@@ -78,7 +78,7 @@ const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
   adaptateurEnvironnement,
 });
 
-const entrepotMesure: EntrepotMesure = new EntrepotMesurePostgres();
+const entrepotMesure: EntrepotMesure = new EntrepotMesurePostgres(entrepotExigence);
 
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
