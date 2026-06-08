@@ -52,11 +52,11 @@
     background: var(--background-alt-blue-france);
     z-index: 10;
     padding: 8px 8px 32px;
+
     @include a-partir-de(md) {
       position: sticky;
       width: auto;
-      top: 24px;
-      margin-top: 24px;
+      top: 0;
       margin-left: 16px;
     }
     .aide {
@@ -84,10 +84,10 @@
     align-items: center;
     background-color: var(--background-contrast-success);
     padding: 1.5rem;
+    margin-bottom: 32px;
 
     @include a-partir-de(md) {
       flex-direction: column;
-      margin-top: 24px;
       margin-left: 16px;
 
       .texte-article-lg {
