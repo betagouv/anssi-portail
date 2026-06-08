@@ -23,7 +23,7 @@ import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist';
 import { EntrepotGuideGrist } from './infra/entrepotGuideGrist';
 import { EntrepotGuideTravailGrist } from './infra/entrepotGuideTravailGrist';
 import { EntrepotMesurePostgres } from './infra/entrepotMesurePostgres';
-import { EntrepotPriseEnComptePostgres } from './infra/EntrepotPriseEnComptePostgres';
+import { EntrepotPriseEnComptePostgres } from './infra/entrepotPriseEnComptePostgres';
 import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
 import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres';
@@ -80,7 +80,7 @@ const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
 });
 
 const entrepotMesure: EntrepotMesure = new EntrepotMesurePostgres(entrepotExigence);
-const entrepotPriseEnCompte = new EntrepotPriseEnComptePostgres();
+const entrepotPriseEnCompte = new EntrepotPriseEnComptePostgres(adaptateurHachage);
 
 const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
 

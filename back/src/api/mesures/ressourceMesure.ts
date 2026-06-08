@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { Utilisateur } from '../../metier/utilisateur';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
 import { corpsVide, valideCorpsRequete } from '../zod';
@@ -23,8 +24,8 @@ const ressourceMesure = ({
         return reponse.sendStatus(404);
       }
 
-      const utilisateur = requete.utilisateur;
-      const priseEnCompte = await entrepotPriseEnCompte.pour(utilisateur, mesureTrouvee);
+      const utilisateur = requete.utilisateur as Utilisateur | undefined;
+      const priseEnCompte = utilisateur ? await entrepotPriseEnCompte.pour(utilisateur, mesureTrouvee) : undefined;
 
       const mesurePresentee = await mesurePresentation(mesureTrouvee, priseEnCompte);
       reponse.status(200).send(mesurePresentee);
