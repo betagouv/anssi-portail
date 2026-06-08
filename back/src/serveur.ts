@@ -80,6 +80,8 @@ const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
 
 const entrepotMesure: EntrepotMesure = new EntrepotMesurePostgres(entrepotExigence);
 
+const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
+
 const busEvenements = new BusEvenements();
 cableTousLesAbonnes({
   busEvenements,
@@ -88,6 +90,7 @@ cableTousLesAbonnes({
   adaptateurHorloge,
   adaptateurHachage,
   entrepotFavori,
+  messagerieInstantanee,
 });
 
 const crispIdSite = process.env.CRISP_ID_SITE;
@@ -104,8 +107,6 @@ const serviceCoherenceSecretsHachage = fabriqueServiceVerificationCoherenceSecre
   entrepotSecretHachage,
   adaptateurHachage,
 });
-
-const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
 
 const cellar = adaptateurCellar(adaptateurEnvironnement);
 

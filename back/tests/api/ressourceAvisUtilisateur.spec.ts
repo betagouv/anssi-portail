@@ -6,7 +6,7 @@ import { creeServeur } from '../../src/api/msc';
 import { AvisUtilisateurDonne } from '../../src/bus/evenements/avisUtilisateurDonne';
 import { AvisUtilisateur, MessagerieInstantanee } from '../../src/metier/messagerieInstantanee';
 import { MockBusEvenement } from '../bus/busPourLesTests';
-import { configurationDeTestDuServeur } from './fauxObjets';
+import { configurationDeTestDuServeur, fausseMessagerieInstantanee } from './fauxObjets';
 
 describe('La ressource avis utilisateur', () => {
   let serveur: Express;
@@ -19,8 +19,7 @@ describe('La ressource avis utilisateur', () => {
   };
   beforeEach(() => {
     messagerieInstantanee = {
-      notifieUnRetourExperience: async () => {},
-      notifieUnAvisUtilisateur: async () => {},
+      ...fausseMessagerieInstantanee,
     };
     busEvenements = new MockBusEvenement();
     serveur = creeServeur({
