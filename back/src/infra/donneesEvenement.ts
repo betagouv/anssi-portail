@@ -1,10 +1,11 @@
+import { AvisMesureDonne } from '../bus/evenements/avisMesureDonne';
+import { MesureConsultee } from '../bus/evenements/mesureConsultee';
+import { ReponsesEtResultatAvecAnalyse } from '../metier/nis2-simulateur/questionnaire/calculEligibilite';
 import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction';
 import { CodeRegion } from '../metier/referentielRegions';
 import { CodeSecteur } from '../metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
 import { ReponsesTestMaturite } from '../metier/resultatTestMaturite';
-import { ReponsesEtResultatAvecAnalyse } from '../metier/nis2-simulateur/questionnaire/calculEligibilite';
-import { MesureConsultee } from '../bus/evenements/mesureConsultee';
 
 export type DonneesEvenement =
   | DonneesEvenementNouvelUtilisateur
@@ -15,7 +16,8 @@ export type DonneesEvenement =
   | DonneesEvenementAvisUtilisateurDonne
   | DonneesEvenementUtilisateurConnecte
   | DonneesSimulationNis2Terminee
-  | DonneesMesureConsultee;
+  | DonneesMesureConsultee
+  | DonneesAvisMesureDonne;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -80,3 +82,5 @@ type DonneesMesureConsultee = Evenement<
   'MESURE_CONSULTEE',
   Omit<MesureConsultee, 'emailHache'> & { idUtilisateur: string }
 >;
+
+type DonneesAvisMesureDonne = Evenement<'AVIS_MESURE_DONNE', Omit<AvisMesureDonne, 'commentaire'>>;

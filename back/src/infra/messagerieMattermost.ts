@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { AvisUtilisateur, MessagerieInstantanee, RetourExperience } from '../metier/messagerieInstantanee';
+import {
+  AvisNegatifSurUneMesure,
+  AvisUtilisateur,
+  MessagerieInstantanee,
+  RetourExperience,
+} from '../metier/messagerieInstantanee';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { aseptiseMarkdown } from './markdown';
 
@@ -30,6 +35,17 @@ Un utilisateur a laissé un avis
 Niveau de satisfaction : ${avisUtilisateur.niveauDeSatisfaction}
 Commentaire : ${aseptiseMarkdown(avisUtilisateur.commentaire ?? '')}
 Email de contact : ${avisUtilisateur.emailDeContact}`;
+      await axios.post(urlWebhook, { text: message });
+    }
+  },
+
+  notifieUnAvisNegatifSurUneMesure: async (avis: AvisNegatifSurUneMesure) => {
+    const urlWebhook = adaptateurEnvironnement.mattermost().webhookAvisMesure();
+
+    if (urlWebhook) {
+      const message = `### :alert: Avis négatif sur la mesure ${avis.idMesure}
+Un utilisateur a laissé un avis négatif :
+${aseptiseMarkdown(avis.commentaire ?? '')}`;
       await axios.post(urlWebhook, { text: message });
     }
   },
