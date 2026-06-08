@@ -106,6 +106,9 @@
 
   <dsfr-container>
     <div class="article">
+      <div class="prise-en-compte">
+        <PriseEnCompteMesure {mesure} />
+      </div>
       <div class="contenu-principal">
         <div class="contenu-section">
           <h2>Présentation</h2>
@@ -227,9 +230,6 @@
           </div>
         </div>
       </div>
-      <div class="prise-en-compte">
-        <PriseEnCompteMesure></PriseEnCompteMesure>
-      </div>
     </div>
   </dsfr-container>
 {:else}
@@ -255,6 +255,10 @@
     }
     @include a-partir-de(lg) {
       grid-template-columns: auto taille-pour-colonnes(3);
+    }
+
+    .prise-en-compte {
+      order: 2;
     }
   }
 
