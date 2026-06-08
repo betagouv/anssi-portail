@@ -3,7 +3,9 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
+import { AvisMesureDonne } from '../../../src/bus/evenements/avisMesureDonne';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
 import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
@@ -13,6 +15,7 @@ describe('La ressource mesure de sécurité', () => {
     let serveur: Express;
     let entrepotMesure: EntrepotMesureMemoire;
     let adaptateurEnvironnement: AdaptateurEnvironnement;
+    let busEvenements: MockBusEvenement;
 
     const retourPositif = {
       retour: 'POSITIF',
@@ -24,10 +27,12 @@ describe('La ressource mesure de sécurité', () => {
       };
       entrepotMesure = new EntrepotMesureMemoire();
       await entrepotMesure.ajoute(mesureAuthentA2Etapes());
+      busEvenements = fabriqueBusPourLesTests();
       serveur = creeServeur({
         ...configurationDeTestDuServeur,
         entrepotMesure,
         adaptateurEnvironnement,
+        busEvenements,
       });
     });
 
@@ -55,6 +60,43 @@ describe('La ressource mesure de sécurité', () => {
 
       assert.equal(reponse.status, 400);
       assert.equal(reponse.body.fieldErrors.retour[0], 'Le retour doit être "POSITIF" ou "NEGATIF"');
+    });
+
+    describe('concernant les avis positifs', () => {
+      it('publie un événement', async () => {
+        await request(serveur).post('/api/mesures/AUTH.5/avis').send(retourPositif);
+
+        busEvenements.aRecuUnEvenement(AvisMesureDonne);
+        const evenement = busEvenements.recupereEvenement(AvisMesureDonne);
+        assert.equal(evenement!.idMesure, 'AUTH.5');
+        assert.equal(evenement!.retour, 'POSITIF');
+      });
+
+      it('publie un événement sans commentaire', async () => {
+        await request(serveur)
+          .post('/api/mesures/AUTH.5/avis')
+          .send({ retour: 'POSITIF', commentaire: 'Cette mesure est sympa !' });
+
+        busEvenements.aRecuUnEvenement(AvisMesureDonne);
+        const evenement = busEvenements.recupereEvenement(AvisMesureDonne);
+        assert.equal(evenement!.idMesure, 'AUTH.5');
+        assert.equal(evenement!.retour, 'POSITIF');
+        assert.equal(evenement!.commentaire, undefined);
+      });
+    });
+
+    describe('concernant les avis négatifs', () => {
+      it('publie un événement avec commentaire', async () => {
+        await request(serveur)
+          .post('/api/mesures/AUTH.5/avis')
+          .send({ retour: 'NEGATIF', commentaire: 'Cette mesure est incorrecte !' });
+
+        busEvenements.aRecuUnEvenement(AvisMesureDonne);
+        const evenement = busEvenements.recupereEvenement(AvisMesureDonne);
+        assert.equal(evenement!.idMesure, 'AUTH.5');
+        assert.equal(evenement!.retour, 'NEGATIF');
+        assert.equal(evenement!.commentaire, 'Cette mesure est incorrecte !');
+      });
     });
   });
 });
