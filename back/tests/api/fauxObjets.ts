@@ -214,7 +214,7 @@ const fauxGenerateurCodeSessionDeGroupe = {
   genere: async () => 'hello',
 };
 
-const fausseMessagerieInstantanee: MessagerieInstantanee = {
+export const fausseMessagerieInstantanee: MessagerieInstantanee = {
   notifieUnRetourExperience: async () => {},
   notifieUnAvisUtilisateur: async () => {},
 };

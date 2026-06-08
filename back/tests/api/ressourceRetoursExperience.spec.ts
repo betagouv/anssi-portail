@@ -6,7 +6,7 @@ import { creeServeur } from '../../src/api/msc';
 import { RetourExperienceDonne } from '../../src/bus/evenements/retourExperienceDonne';
 import { MessagerieInstantanee, RetourExperience } from '../../src/metier/messagerieInstantanee';
 import { MockBusEvenement } from '../bus/busPourLesTests';
-import { configurationDeTestDuServeur } from './fauxObjets';
+import { configurationDeTestDuServeur, fausseMessagerieInstantanee } from './fauxObjets';
 
 describe("La ressource des retours d'expérience", () => {
   let serveur: Express;
@@ -15,8 +15,7 @@ describe("La ressource des retours d'expérience", () => {
 
   beforeEach(() => {
     messagerieInstantanee = {
-      notifieUnRetourExperience: async () => {},
-      notifieUnAvisUtilisateur: async () => {},
+      ...fausseMessagerieInstantanee,
     };
     busEvenements = new MockBusEvenement();
     serveur = creeServeur({
