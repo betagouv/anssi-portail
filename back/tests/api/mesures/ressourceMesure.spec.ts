@@ -4,40 +4,51 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
+import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
+import { Mesure } from '../../../src/metier/mesure';
 import { ExigenceNIS2 } from '../../../src/metier/nis2/exigence';
+import { PriseEnCompte } from '../../../src/metier/PriseEnCompte';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
+import { EntrepotPriseEnCompteMemoire } from '../../persistance/EntrepotPriseEnCompteMemoire';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
+import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
-import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
+import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
 
 describe('La ressource mesure de sécurité', () => {
   describe('sur requête GET', () => {
     let serveur: Express;
     let entrepotMesure: EntrepotMesureMemoire;
     let adaptateurEnvironnement: AdaptateurEnvironnement;
+    let entrepotUtilisateur: EntrepotUtilisateur;
+    let entrepotPriseEnCompte: EntrepotPriseEnCompteMemoire;
+    let authentA2Etapes: Mesure;
 
-    beforeEach(() => {
+    beforeEach(async () => {
       adaptateurEnvironnement = {
         ...fauxAdaptateurEnvironnement,
       };
       entrepotMesure = new EntrepotMesureMemoire();
+      authentA2Etapes = mesureAuthentA2Etapes();
+      await entrepotMesure.ajoute(authentA2Etapes);
+      entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+      entrepotPriseEnCompte = new EntrepotPriseEnCompteMemoire();
       serveur = creeServeur({
         ...configurationDeTestDuServeur,
         entrepotMesure,
+        entrepotUtilisateur,
+        entrepotPriseEnCompte,
         adaptateurEnvironnement,
       });
     });
 
     it('réponds 200', async () => {
-      await entrepotMesure.ajoute(mesureAuthentA2Etapes());
-
       const reponse = await request(serveur).get('/api/mesures/AUTH.5');
 
       assert.equal(reponse.status, 200);
     });
 
     it('renvoie les détails de la mesure', async () => {
-      await entrepotMesure.ajoute(mesureAuthentA2Etapes());
-
       const { body } = await request(serveur).get('/api/mesures/AUTH.5');
 
       assert.equal(body.id, 'AUTH.5');
@@ -77,8 +88,6 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
     });
 
     it('renvoie les informations ReCyF de la mesure', async () => {
-      await entrepotMesure.ajoute(mesureAuthentA2Etapes());
-
       const { body } = await request(serveur).get('/api/mesures/AUTH.5');
 
       assert.equal(body.exigences.length, 1);
@@ -111,8 +120,6 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
         }),
       };
 
-      await entrepotMesure.ajoute(mesureAuthentA2Etapes());
-
       const serveurSansLaRessource = creeServeur({
         ...configurationDeTestDuServeur,
         entrepotMesure,
@@ -121,6 +128,29 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
       const reponse = await request(serveurSansLaRessource).get('/api/mesures/AUTH.5');
 
       assert.equal(reponse.status, 404);
+    });
+
+    describe('lorsque l’utilisateur est connecté', async () => {
+      let cookieJeanneDupont: string;
+
+      beforeEach(async () => {
+        await entrepotUtilisateur.ajoute(jeanneDupont);
+        cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
+      });
+
+      it('indique que la mesure a été prise en compte', async () => {
+        await entrepotPriseEnCompte.ajoute(new PriseEnCompte(jeanneDupont, authentA2Etapes));
+
+        const { body } = await request(serveur).get('/api/mesures/AUTH.5').set('Cookie', cookieJeanneDupont);
+
+        assert.equal(body.estPriseEnCompte, true);
+      });
+
+      it('indique qu’une mesure n’a pas été prise en compte', async () => {
+        const { body } = await request(serveur).get('/api/mesures/AUTH.5').set('Cookie', cookieJeanneDupont);
+
+        assert.equal(body.estPriseEnCompte, false);
+      });
     });
   });
 });

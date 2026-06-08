@@ -13,6 +13,8 @@ import { EntrepotFavori } from '../metier/entrepotFavori';
 import { EntrepotFinancement } from '../metier/entrepotFinancement';
 import { EntrepotGuide } from '../metier/entrepotGuide';
 import { EntrepotGuideTravail } from '../metier/entrepotGuideTravail';
+import { EntrepotMesure } from '../metier/entrepotMesure';
+import { EntrepotPriseEnCompte } from '../metier/entrepotPriseEnCompte';
 import { EntrepotResultatTest } from '../metier/entrepotResultatTest';
 import { EntrepotSessionDeGroupe } from '../metier/entrepotSessionDeGroupe';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
@@ -24,7 +26,6 @@ import { AdaptateurJWT } from './adaptateurJWT';
 import { FournisseurChemin } from './fournisseurChemin';
 import { Middleware } from './middleware';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
-import { EntrepotMesure } from '../metier/entrepotMesure';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -46,6 +47,7 @@ export type ConfigurationServeur = {
   entrepotUtilisateur: EntrepotUtilisateur;
   entrepotExigence: EntrepotExigence;
   entrepotMesure: EntrepotMesure;
+  entrepotPriseEnCompte: EntrepotPriseEnCompte;
   fournisseurChemin: FournisseurChemin;
   generateurCodeSessionDeGroupe: GenerateurCodeSessionDeGroupe;
   messagerieInstantanee: MessagerieInstantanee;
