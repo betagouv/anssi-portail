@@ -75,12 +75,17 @@ describe("La ressource de prise en compte d'une mesure", () => {
       });
 
       it('publie un événement de prise en compte', async () => {
+        await entrepotMesure.ajoute({ ...mesureAuthentA2Etapes(), id: 'AUTH.1', ordre: 1 });
+        await entrepotMesure.ajoute({ ...mesureAuthentA2Etapes(), id: 'AUTH.20', ordre: 20 });
+
         await request(serveur).put('/api/mesures/AUTH.5/prise-en-compte').set('Cookie', cookieJeanneDupont);
 
         busEvenements.aRecuUnEvenement(MesurePriseEnCompte);
         const evenement = busEvenements.recupereEvenement(MesurePriseEnCompte);
         assert.equal(evenement!.idMesure, 'AUTH.5');
         assert.equal(evenement!.emailHache, 'jeanne.dupont@user.com-hache');
+        assert.equal(evenement!.nombreDeMesures, 3);
+        assert.equal(evenement!.position, 2);
       });
     });
   });

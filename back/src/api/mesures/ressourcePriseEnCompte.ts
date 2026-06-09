@@ -22,13 +22,19 @@ export const ressourcePriseEnCompte = ({
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const utilisateur = requete.utilisateur;
-      const mesure = await entrepotMesure.parId(requete.params.idMesure as string);
-      if (!mesure) {
+      const idMesure = requete.params.idMesure as string;
+
+      const toutesLesMesures = await entrepotMesure.tous();
+      const rang = toutesLesMesures.sort((a, b) => a.ordre - b.ordre).findIndex((m) => m.id === idMesure);
+      if (rang < 0) {
         return reponse.sendStatus(404);
       }
-      await entrepotPriseEnCompte.ajoute(new PriseEnCompte(utilisateur, mesure));
+      const mesure = toutesLesMesures[rang];
 
-      await busEvenements.publie(new MesurePriseEnCompte(utilisateur.emailHache, mesure.id));
+      await entrepotPriseEnCompte.ajoute(new PriseEnCompte(utilisateur, mesure));
+      await busEvenements.publie(
+        new MesurePriseEnCompte(utilisateur.emailHache, mesure.id, toutesLesMesures.length, rang + 1)
+      );
 
       return reponse.sendStatus(201);
     })
