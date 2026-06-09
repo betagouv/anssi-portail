@@ -33,10 +33,10 @@ describe("La ressource de prise en compte d'une mesure", () => {
     });
   });
 
-  describe('sur une requête POST', () => {
+  describe('sur une requête PUT', () => {
     describe("d'un utilisateur anonyme", () => {
       it('réponds 401', async () => {
-        const reponse = await request(serveur).post('/api/mesures/AUTH.5/prise-en-compte');
+        const reponse = await request(serveur).put('/api/mesures/AUTH.5/prise-en-compte');
 
         assert.equal(reponse.status, 401);
       });
@@ -53,14 +53,14 @@ describe("La ressource de prise en compte d'une mesure", () => {
 
       it('réponds 201', async () => {
         const reponse = await request(serveur)
-          .post('/api/mesures/AUTH.5/prise-en-compte')
+          .put('/api/mesures/AUTH.5/prise-en-compte')
           .set('Cookie', cookieJeanneDupont);
 
         assert.equal(reponse.status, 201);
       });
 
       it('ajoute une prise en compte', async () => {
-        await request(serveur).post('/api/mesures/AUTH.5/prise-en-compte').set('Cookie', cookieJeanneDupont);
+        await request(serveur).put('/api/mesures/AUTH.5/prise-en-compte').set('Cookie', cookieJeanneDupont);
 
         const priseEnComptePersistee = await entrepotPriseEnCompte.pour(jeanneDupont, mesure);
         assert.notEqual(priseEnComptePersistee, undefined);
@@ -68,14 +68,14 @@ describe("La ressource de prise en compte d'une mesure", () => {
 
       it("réponds 404 si la mesure n'existe pas", async () => {
         const reponse = await request(serveur)
-          .post('/api/mesures/mesureinconnue/prise-en-compte')
+          .put('/api/mesures/mesureinconnue/prise-en-compte')
           .set('Cookie', cookieJeanneDupont);
 
         assert.equal(reponse.status, 404);
       });
 
       it('publie un événement de prise en compte', async () => {
-        await request(serveur).post('/api/mesures/AUTH.5/prise-en-compte').set('Cookie', cookieJeanneDupont);
+        await request(serveur).put('/api/mesures/AUTH.5/prise-en-compte').set('Cookie', cookieJeanneDupont);
 
         busEvenements.aRecuUnEvenement(MesurePriseEnCompte);
         const evenement = busEvenements.recupereEvenement(MesurePriseEnCompte);

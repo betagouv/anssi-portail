@@ -14,7 +14,7 @@
   const prendEnCompte = async () => {
     try {
       priseEnCompteEnCours = true;
-      await axios.post(`/api/mesures/${mesure.id}/prise-en-compte`);
+      await axios.put(`/api/mesures/${mesure.id}/prise-en-compte`);
       mesurePriseEnCompte = true;
     } finally {
       priseEnCompteEnCours = false;
