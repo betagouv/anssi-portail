@@ -15,7 +15,7 @@ export const ressourcePriseEnCompte = ({
 }: ConfigurationServeur) => {
   const routeur = Router();
 
-  routeur.post(
+  routeur.put(
     '/:idMesure/prise-en-compte',
     middleware.verifieJWT,
     valideCorpsRequete(corpsVide),
