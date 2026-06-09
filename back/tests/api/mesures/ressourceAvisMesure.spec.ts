@@ -10,7 +10,7 @@ import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
 import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
 
-describe('La ressource mesure de sécurité', () => {
+describe('La ressource avis sur une mesure de sécurité', () => {
   describe('sur requête POST', () => {
     let serveur: Express;
     let entrepotMesure: EntrepotMesureMemoire;
@@ -60,6 +60,15 @@ describe('La ressource mesure de sécurité', () => {
 
       assert.equal(reponse.status, 400);
       assert.equal(reponse.body.fieldErrors.retour[0], 'Le retour doit être "POSITIF" ou "NEGATIF"');
+    });
+
+    it('doit répondre 400 si le commentaire est trop long', async () => {
+      const reponse = await request(serveur)
+        .post('/api/mesures/AUTH.5/avis')
+        .send({ retour: 'NEGATIF', commentaire: 'x'.repeat(1001) });
+
+      assert.equal(reponse.status, 400);
+      assert.equal(reponse.body.fieldErrors.commentaire[0], 'Le commentaire doit contenir au plus 1000 caractères');
     });
 
     describe('concernant les avis positifs', () => {
