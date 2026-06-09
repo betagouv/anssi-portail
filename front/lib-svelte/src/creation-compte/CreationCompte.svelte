@@ -79,11 +79,12 @@
     }
   };
 
+  let domainesSpecialite = informationsProfessionnelles.domainesSpecialite || [];
   let formulaireInscription: FormulaireInscription;
   $: formulaireInscription = {
     siretEntite: informationsProfessionnelles.organisation?.siret,
     telephone: informationsProfessionnelles.telephone,
-    domainesSpecialite: informationsProfessionnelles.domainesSpecialite || [],
+    domainesSpecialite,
     cguAcceptees: false,
     infolettreAcceptee: false,
   };
@@ -185,11 +186,7 @@
               />
             </div>
             <ControleFormulaire requis={true} libelle="Domaine de spécialité">
-              <SelectionDomaineSpecialite
-                id="domaine-specialite"
-                requis
-                bind:valeurs={formulaireInscription.domainesSpecialite}
-              />
+              <SelectionDomaineSpecialite id="domaine-specialite" requis bind:valeurs={domainesSpecialite} />
             </ControleFormulaire>
           </div>
         </div>
