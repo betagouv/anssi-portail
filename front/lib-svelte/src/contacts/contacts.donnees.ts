@@ -8,7 +8,7 @@ import {
 export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
   'FR-ARA': {
     COT: {
-      nom: 'Mathieu DELAPLACE',
+      nom: 'Mathieu DELAPLACE / Alix DURAND',
       email: 'auvergne-rhone-alpes@ssi.gouv.fr',
     },
     designation: 'région',
@@ -143,7 +143,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       telephone: '0 800 71 13 13',
     },
     COT: {
-      nom: 'Rémy DAUDIGNY',
+      nom: 'Rémy DAUDIGNY / Ludovic HENRY',
       email: 'occitanie@ssi.gouv.fr',
     },
     campus: {
@@ -171,6 +171,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       adresse: "Maison du numérique et de l'innovation, Pl. Georges Pompidou, 83000 Toulon",
       telephone: '0 805 036 083',
     },
+    COT: { nom: 'Lionel PÉRÈS', email: 'paca@ssi.gouv.fr' },
     campus: {
       nom: 'Campus Cyber Région Sud Euromed',
       siteWeb: 'https://ares.campuscyber-regionsud.fr/',
