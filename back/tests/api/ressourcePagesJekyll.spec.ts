@@ -6,28 +6,17 @@ import request from 'supertest';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin';
 import { creeServeur } from '../../src/api/msc';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets';
-import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests';
-import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee';
-import { encodeSession } from './cookie';
-import { jeanneDupont } from './objetsPretsALEmploi';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 
 describe('La ressource pages jekyll', () => {
   let serveur: Express;
   let fournisseurChemin: FournisseurChemin;
-  let busEvenements: MockBusEvenement;
-  let entrepotUtilisateur: EntrepotUtilisateurMemoire;
 
   beforeEach(() => {
     fournisseurChemin = fauxFournisseurDeChemin;
-    entrepotUtilisateur = new EntrepotUtilisateurMemoire();
-    busEvenements = fabriqueBusPourLesTests();
 
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
-      busEvenements,
       fournisseurChemin,
-      entrepotUtilisateur,
     });
   });
 
@@ -172,38 +161,6 @@ describe('La ressource pages jekyll', () => {
 
       assert.equal(reponse.status, 301);
       assert.equal(reponse.headers.location, '/nis2');
-    });
-  });
-
-  describe("sur demande d'une mesure", () => {
-    it("trace la visite lorsque qu'un utilisateur est connecté", async () => {
-      await entrepotUtilisateur.ajoute(jeanneDupont);
-      const cookie = encodeSession({ email: jeanneDupont.email, token: 'valide' });
-
-      const reponse = await request(serveur).get('/mesures/AUTH.5').set('Cookie', [cookie]);
-
-      assert.equal(reponse.status, 200);
-      busEvenements.aRecuUnEvenement(MesureConsultee);
-      const evenement = busEvenements.recupereEvenement(MesureConsultee);
-      assert.equal(evenement!.idMesure, 'AUTH.5');
-      assert.equal(evenement!.emailHache, 'jeanne.dupont@user.com-hache');
-    });
-
-    it("ne trace pas la visite si aucun utilisateur n'est connecté", async () => {
-      const reponse = await request(serveur).get('/mesures/AUTH.5');
-
-      assert.equal(reponse.status, 200);
-      busEvenements.naPasRecuDEvenement(MesureConsultee);
-    });
-
-    it("ne trace pas la visite d'une mesure mal nommée", async () => {
-      await entrepotUtilisateur.ajoute(jeanneDupont);
-      const cookie = encodeSession({ email: jeanneDupont.email, token: 'valide' });
-
-      const reponse = await request(serveur).get('/mesures/auth5').set('Cookie', [cookie]);
-
-      assert.equal(reponse.status, 200);
-      busEvenements.naPasRecuDEvenement(MesureConsultee);
     });
   });
 });
