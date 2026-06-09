@@ -176,7 +176,7 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
       adresse: "Maison du numérique et de l'innovation, Pl. Georges Pompidou, 83000 Toulon",
       telephone: '0 805 036 083',
     },
-    COT: { nom: 'Lionel PÉRÈS', email: 'paca@ssi.gouv.fr' },
+    COT: { nom: 'Kevin HEYDON', email: 'paca@ssi.gouv.fr' },
     campus: {
       nom: 'Campus Cyber Région Sud Euromed',
       siteWeb: 'https://ares.campuscyber-regionsud.fr/',
