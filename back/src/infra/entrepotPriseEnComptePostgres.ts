@@ -29,4 +29,8 @@ export class EntrepotPriseEnComptePostgres implements EntrepotPriseEnCompte {
       return new PriseEnCompte(utilisateur, mesure);
     }
   }
+
+  async ajoute(_priseEnCompte: PriseEnCompte): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
 }
