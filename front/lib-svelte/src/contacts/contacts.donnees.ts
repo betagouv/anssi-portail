@@ -104,14 +104,14 @@ export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
     CSIRT: {
       nom: 'Normandie Cyber',
       siteWeb: 'https://adnormandie.fr/besoin/normandie-cyber/',
-      adresse: 'Campus Effiscience 2 Espace Anton Philips14460 Colombelles',
+      adresse: 'Campus Effiscience 2 Espace Anton Philips 14460 Colombelles',
       telephone: '0 808 800 001',
     },
     COT: { nom: 'Eric HAZANE', email: 'normandie@ssi.gouv.fr' },
     campus: {
-      nom: 'Campus Normandie Cyber',
-      siteWeb: 'https://adnormandie.fr/campus-normandie-cyber/',
-      adresse: 'Campus Effiscience 2 Espace Anton Philips14460 Colombelles',
+      nom: 'Normandie Numérique',
+      siteWeb: 'https://normandie-numerique.fr/',
+      adresse: `72 rue de la République Le Petit Quevilly – Seine Innopolis Rouen`,
       email: 'contact@campus-normandie-cyber.fr',
     },
     designation: 'région',
