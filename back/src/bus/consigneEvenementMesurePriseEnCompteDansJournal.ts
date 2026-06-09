@@ -14,6 +14,8 @@ export const consigneEvenementMesurePriseEnCompteDansJournal = ({
       donnees: {
         idMesure: evenement.idMesure,
         idUtilisateur: evenement.emailHache,
+        nombreDeMesures: evenement.nombreDeMesures,
+        position: evenement.position,
       },
       type: 'MESURE_PRISE_EN_COMPTE',
       date: adaptateurHorloge.maintenant(),
