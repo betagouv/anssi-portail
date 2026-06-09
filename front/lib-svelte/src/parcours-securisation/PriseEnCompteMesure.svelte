@@ -1,15 +1,28 @@
 <script lang="ts">
+  import axios from 'axios';
   import Bouton from '../ui/Bouton.svelte';
   import type { Mesure } from './mesure';
+  import { untrack } from 'svelte';
 
   type Props = {
     mesure: Mesure;
   };
 
   const { mesure }: Props = $props();
+  let priseEnCompteEnCours = $state(false);
+  let mesurePriseEnCompte = $state(untrack(() => mesure.estPriseEnCompte));
+  const prendEnCompte = async () => {
+    try {
+      priseEnCompteEnCours = true;
+      await axios.post(`/api/mesures/${mesure.id}/prise-en-compte`);
+      mesurePriseEnCompte = true;
+    } finally {
+      priseEnCompteEnCours = false;
+    }
+  };
 </script>
 
-{#if mesure.estPriseEnCompte}
+{#if mesurePriseEnCompte}
   <div class="conteneur-pris-en-compte">
     <lab-anssi-icone nom="checkbox-circle-fill" taille="lg"></lab-anssi-icone>
     <p class="texte-article-lg">Mesure prise en compte</p>
@@ -25,7 +38,13 @@
     </div>
     <p class="texte-article-lg">Cette mesure est-elle prise en compte ?</p>
     <div class="action">
-      <Bouton type="primaire" libelle="Prendre en compte" etire={true} />
+      <Bouton
+        desactive={priseEnCompteEnCours}
+        etire={true}
+        libelle="Prendre en compte"
+        surClic={prendEnCompte}
+        type="primaire"
+      />
     </div>
   </div>
 {/if}
