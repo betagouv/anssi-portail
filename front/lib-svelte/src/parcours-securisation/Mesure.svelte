@@ -1,12 +1,14 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import CelluleExigenceNis2 from '../nis2/tableaux/CelluleExigenceNis2.svelte';
+  import Accordeon from '../ui/Accordeon.svelte';
+  import Bouton from '../ui/Bouton.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import { aseptiseHtml } from '../utils/aseptisationDuHtml';
+  import { storeAvisUtilisateur, type AvisUtilisateur } from './avisUtilisateur.store';
   import type { Mesure } from './mesure';
-  import Accordeon from '../ui/Accordeon.svelte';
-  import CelluleExigenceNis2 from '../nis2/tableaux/CelluleExigenceNis2.svelte';
 
   let mesure: Mesure | undefined = $state();
 
@@ -29,6 +31,40 @@
   let exigencesRegroupeesParObjectif = $derived(
     mesure ? Object.groupBy(exigencesTrieesParObjectif, ({ objectifSecurite }) => objectifSecurite) : {}
   );
+
+  const idMesure = $derived(mesure?.id);
+  const avisUtilisateur: AvisUtilisateur | undefined = $derived(idMesure ? $storeAvisUtilisateur[idMesure] : undefined);
+
+  type Etat = 'Soumis' | 'AfficheCommentaire' | undefined;
+  let etat = $state<Etat>(undefined);
+  let commentaire: string = $state('');
+
+  const soumetsAvisPositif = async () => {
+    await soumetsAvisUtilisateur(true);
+  };
+
+  const soumetsAvisNegatif = async (commentaire: string) => {
+    await soumetsAvisUtilisateur(false, commentaire);
+  };
+
+  const soumetsAvisUtilisateur = async (retour: boolean, commentaire?: string) => {
+    if (!idMesure) return;
+    storeAvisUtilisateur.ajouteAvis(idMesure, { positif: retour });
+    await axios.post(`/api/mesures/${idMesure}/avis`, {
+      retour: retour ? 'POSITIF' : 'NEGATIF',
+      ...(!retour && { commentaire }),
+    });
+    etat = 'Soumis';
+    setTimeout(() => (etat = undefined), 5000);
+  };
+
+  const afficheCommentaire = () => {
+    if (idMesure) {
+      storeAvisUtilisateur.supprimeAvis(idMesure);
+      storeAvisUtilisateur.ajouteAvis(idMesure, { positif: false });
+    }
+    etat = 'AfficheCommentaire';
+  };
 </script>
 
 {#if mesure}
@@ -109,6 +145,53 @@
           {/each}
         </div>
       {/if}
+      <div class="section-aide retour">
+        <div class="texte-information-avis-utilisateur">
+          <span class="titre-avis"><b>Ce contenu vous a-t-il aidé ?</b></span>
+        </div>
+        <div class="conteneur-emoji-avis">
+          <Bouton
+            type="tertiaire"
+            iconeSeule
+            icone="thumb-up-line"
+            titre="Réponse positive"
+            actif={avisUtilisateur?.positif}
+            surClic={() => soumetsAvisPositif()}
+          ></Bouton>
+          <Bouton
+            type="tertiaire"
+            iconeSeule
+            icone="thumb-down-line"
+            titre="Réponse négative"
+            actif={avisUtilisateur && !avisUtilisateur.positif}
+            surClic={() => afficheCommentaire()}
+          ></Bouton>
+        </div>
+        {#if etat === 'AfficheCommentaire'}
+          <div class="encart-commentaire-avis">
+            <dsfr-textarea
+              label="Aidez-nous à améliorer le contenu de cette page"
+              placeholder="Indiquez ce qu'il vous a manqué, ce qui n'était pas clair ou ce qui pourrait être amélioré."
+              type="text"
+              nom="avis"
+              rows="1"
+              maxlength="1000"
+              onvaluechanged={(e: CustomEvent<string>) => {
+                commentaire = e.detail;
+              }}
+            ></dsfr-textarea>
+            <div class="conteneur-bouton">
+              <Bouton type="primaire" libelle="Envoyer vos commentaires" surClic={() => soumetsAvisNegatif(commentaire)}
+              ></Bouton>
+            </div>
+          </div>
+        {/if}
+        {#if etat === 'Soumis'}
+          <dsfr-alert type="success" size="sm">
+            <span slot="description">Merci&nbsp;! Vos retours sont précieux. ✨</span>
+          </dsfr-alert>
+        {/if}
+      </div>
       <div class="section-aide recyf">
         <p>
           Pour approfondir, vous pouvez consulter les exigences ReCyF (moyen de conformité NIS 2), dont cette
@@ -190,6 +273,27 @@
         background-color: var(--border-default-grey);
         &:last-of-type {
           display: none;
+        }
+      }
+
+      &.retour .texte-information-avis-utilisateur {
+        margin-bottom: 1rem;
+      }
+
+      dsfr-alert,
+      .encart-commentaire-avis {
+        margin-top: 1.5rem;
+      }
+
+      .encart-commentaire-avis {
+        background-color: var(--background-contrast-beige-gris-galet);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1.5rem;
+
+        .conteneur-bouton {
+          margin-top: 1rem;
         }
       }
     }
