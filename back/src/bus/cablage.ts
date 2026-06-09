@@ -13,6 +13,7 @@ import { consigneEvenementAvisUtilisateurDonneDansJournal } from './consigneEven
 import { consigneEvenementCompteCreeDansJournal } from './consigneEvenementCompteCreeDansJournal';
 import { consigneEvenementMAJFavorisUtilisateurDansJournal } from './consigneEvenementMAJFavorisUtilisateurDansJournal';
 import { consigneEvenementMesureConsulteeDansJournal } from './consigneEvenementMesureConsulteeDansJournal';
+import { consigneEvenementMesurePriseEnCompteDansJournal } from './consigneEvenementMesurePriseEnCompteDansJournal';
 import { consigneEvenementProprieteTestRevendiqueeDansJournal } from './consigneEvenementProprieteTestRevendiqueeDansJournal';
 import { consigneEvenementRetourExperienceDonneDansJournal } from './consigneEvenementRetourExperienceDonneDansJournal';
 import { consigneEvenementSimulationNis2TermineeDansJournal } from './consigneEvenementSimulationNis2TermineeDansJournal';
@@ -24,6 +25,7 @@ import { AvisMesureDonne } from './evenements/avisMesureDonne';
 import { AvisUtilisateurDonne } from './evenements/avisUtilisateurDonne';
 import { CompteCree } from './evenements/compteCree';
 import { MesureConsultee } from './evenements/mesureConsultee';
+import { MesurePriseEnCompte } from './evenements/mesurePriseEnCompte';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
 import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee';
@@ -123,10 +125,13 @@ export const cableTousLesAbonnes = ({
     consigneEvenementMesureConsulteeDansJournal({ adaptateurJournal, adaptateurHorloge })
   );
 
-  busEvenements.abonne(
-    AvisMesureDonne,
-    consigneRetourAvisMesureDonneDansJournal({ adaptateurJournal, adaptateurHorloge })
-  );
+  busEvenements.abonnePlusieurs(AvisMesureDonne, [
+    consigneRetourAvisMesureDonneDansJournal({ adaptateurJournal, adaptateurHorloge }),
+    consigneCommentaireAvisMesureDonneDansMessagerie({ messagerieInstantanee }),
+  ]);
 
-  busEvenements.abonne(AvisMesureDonne, consigneCommentaireAvisMesureDonneDansMessagerie({ messagerieInstantanee }));
+  busEvenements.abonne(
+    MesurePriseEnCompte,
+    consigneEvenementMesurePriseEnCompteDansJournal({ adaptateurJournal, adaptateurHorloge })
+  );
 };
