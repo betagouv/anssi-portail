@@ -2,6 +2,7 @@
   import { clic } from '../directives/actions.svelte';
 
   interface Props {
+    actif?: boolean;
     libelle?: string;
     titre?: string;
     type: 'primaire' | 'secondaire' | 'secondaire-inverse' | 'tertiaire' | 'tertiaire-sans-bordure';
@@ -14,6 +15,7 @@
   }
 
   const {
+    actif = false,
     libelle,
     titre,
     type,
@@ -43,6 +45,7 @@
 </script>
 
 <dsfr-button
+  class:actif
   label={libelle}
   title={titre}
   {kind}
@@ -54,3 +57,14 @@
   icon-place={iconeSeule ? 'only' : 'left'}
   use:clic={gereClick}
 ></dsfr-button>
+
+<style lang="scss">
+  .actif {
+    background: var(--background-action-high-blue-france);
+    border-radius: 8px;
+
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
+</style>
