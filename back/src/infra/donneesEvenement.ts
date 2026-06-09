@@ -1,5 +1,6 @@
 import { AvisMesureDonne } from '../bus/evenements/avisMesureDonne';
 import { MesureConsultee } from '../bus/evenements/mesureConsultee';
+import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte';
 import { ReponsesEtResultatAvecAnalyse } from '../metier/nis2-simulateur/questionnaire/calculEligibilite';
 import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction';
 import { CodeRegion } from '../metier/referentielRegions';
@@ -17,7 +18,8 @@ export type DonneesEvenement =
   | DonneesEvenementUtilisateurConnecte
   | DonneesSimulationNis2Terminee
   | DonneesMesureConsultee
-  | DonneesAvisMesureDonne;
+  | DonneesAvisMesureDonne
+  | DonneesMesurePriseEnCompte;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -84,3 +86,8 @@ type DonneesMesureConsultee = Evenement<
 >;
 
 type DonneesAvisMesureDonne = Evenement<'AVIS_MESURE_DONNE', Omit<AvisMesureDonne, 'commentaire'>>;
+
+type DonneesMesurePriseEnCompte = Evenement<
+  'MESURE_PRISE_EN_COMPTE',
+  Omit<MesurePriseEnCompte, 'emailHache'> & { idUtilisateur: string }
+>;
