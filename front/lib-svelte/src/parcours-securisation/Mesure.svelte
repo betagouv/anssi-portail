@@ -40,13 +40,19 @@
   let commentaire: string = $state('');
 
   const soumetsAvisPositif = async () => {
-    await soumetsAvisUtilisateur(true);
+    if (!idMesure) return;
+    if ($storeAvisUtilisateur[idMesure]?.positif === true) {
+      storeAvisUtilisateur.supprimeAvis(idMesure);
+    } else {
+      await soumetsAvisUtilisateur(true);
+    }
   };
 
   const soumetsAvisNegatif = async (commentaire: string) => {
     await soumetsAvisUtilisateur(false, commentaire);
   };
 
+  let time: number;
   const soumetsAvisUtilisateur = async (retour: boolean, commentaire?: string) => {
     if (!idMesure) return;
     storeAvisUtilisateur.ajouteAvis(idMesure, { positif: retour });
@@ -55,15 +61,22 @@
       ...(!retour && { commentaire }),
     });
     etat = 'Soumis';
-    setTimeout(() => (etat = undefined), 5000);
+    time = window.setTimeout(() => {
+      etat = undefined;
+    }, 5000);
   };
 
   const afficheCommentaire = () => {
-    if (idMesure) {
+    if (!idMesure) return;
+    clearTimeout(time);
+
+    if (idMesure in $storeAvisUtilisateur && !$storeAvisUtilisateur[idMesure]) {
       storeAvisUtilisateur.supprimeAvis(idMesure);
+      etat = undefined;
+    } else {
       storeAvisUtilisateur.ajouteAvis(idMesure, { positif: false });
+      etat = 'AfficheCommentaire';
     }
-    etat = 'AfficheCommentaire';
   };
 </script>
 
