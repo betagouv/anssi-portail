@@ -31,9 +31,12 @@ export class EntrepotPriseEnComptePostgres implements EntrepotPriseEnCompte {
   }
 
   async ajoute(priseEnCompte: PriseEnCompte): Promise<void> {
-    await this.knex<PriseEnComptePersistee>('prises_en_compte').insert({
-      email_utilisateur_hache: this.adaptateurHachage.hache(priseEnCompte.utilisateur.email),
-      id_mesure: priseEnCompte.mesure.id,
-    });
+    await this.knex<PriseEnComptePersistee>('prises_en_compte')
+      .insert({
+        email_utilisateur_hache: this.adaptateurHachage.hache(priseEnCompte.utilisateur.email),
+        id_mesure: priseEnCompte.mesure.id,
+      })
+      .onConflict()
+      .ignore();
   }
 }

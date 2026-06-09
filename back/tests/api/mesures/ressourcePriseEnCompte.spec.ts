@@ -3,6 +3,7 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
+import { MesurePriseEnCompte } from '../../../src/bus/evenements/mesurePriseEnCompte';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
@@ -11,7 +12,6 @@ import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateu
 import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur } from '../fauxObjets';
 import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
-import { MesurePriseEnCompte } from '../../../src/bus/evenements/mesurePriseEnCompte';
 
 describe("La ressource de prise en compte d'une mesure", () => {
   let serveur: Express;
@@ -19,6 +19,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
   let entrepotMesure: EntrepotMesureMemoire;
   let entrepotUtilisateur: EntrepotUtilisateur;
   let busEvenements: MockBusEvenement;
+
   beforeEach(() => {
     entrepotPriseEnCompte = new EntrepotPriseEnCompteMemoire();
     entrepotMesure = new EntrepotMesureMemoire();
