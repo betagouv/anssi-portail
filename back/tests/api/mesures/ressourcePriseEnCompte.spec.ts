@@ -36,6 +36,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
         assert.equal(reponse.status, 401);
       });
     });
+
     describe("d'un utilisateur connecté", () => {
       const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
       const mesure = mesureAuthentA2Etapes();
