@@ -7,6 +7,11 @@ import {
 
 export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
   'FR-ARA': {
+    CSIRT: {
+      nom: 'Cyber Assistance Auvergne Rhône Alpes',
+      siteWeb: 'https://www.cyber-assistance-aura.fr/',
+      telephone: '04 72 40 56 56',
+    },
     COT: {
       nom: 'Mathieu DELAPLACE / Marianne DELARUE',
       email: 'auvergne-rhone-alpes@ssi.gouv.fr',
