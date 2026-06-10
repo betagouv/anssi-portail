@@ -23,6 +23,11 @@ describe('La ressource mesure de sécurité', () => {
     let entrepotUtilisateur: EntrepotUtilisateur;
     let entrepotPriseEnCompte: EntrepotPriseEnCompteMemoire;
     let authentA2Etapes: Mesure;
+    const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
+
+    async function getConnecte(serveur: Express, cookieJeanneDupont: string) {
+      return await request(serveur).get('/api/mesures/AUTH.5').set('Cookie', cookieJeanneDupont);
+    }
 
     beforeEach(async () => {
       adaptateurEnvironnement = {
@@ -30,7 +35,6 @@ describe('La ressource mesure de sécurité', () => {
       };
       entrepotMesure = new EntrepotMesureMemoire();
       authentA2Etapes = mesureAuthentA2Etapes();
-      await entrepotMesure.ajoute(authentA2Etapes);
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
       entrepotPriseEnCompte = new EntrepotPriseEnCompteMemoire();
       serveur = creeServeur({
@@ -40,16 +44,19 @@ describe('La ressource mesure de sécurité', () => {
         entrepotPriseEnCompte,
         adaptateurEnvironnement,
       });
+
+      await entrepotUtilisateur.ajoute(jeanneDupont);
+      await entrepotMesure.ajoute(authentA2Etapes);
     });
 
     it('réponds 200', async () => {
-      const reponse = await request(serveur).get('/api/mesures/AUTH.5');
+      const reponse = await getConnecte(serveur, cookieJeanneDupont);
 
       assert.equal(reponse.status, 200);
     });
 
     it('renvoie les détails de la mesure', async () => {
-      const { body } = await request(serveur).get('/api/mesures/AUTH.5');
+      const { body } = await getConnecte(serveur, cookieJeanneDupont);
 
       assert.equal(body.id, 'AUTH.5');
       assert.equal(
@@ -88,7 +95,7 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
     });
 
     it('renvoie les informations ReCyF de la mesure', async () => {
-      const { body } = await request(serveur).get('/api/mesures/AUTH.5');
+      const { body } = await getConnecte(serveur, cookieJeanneDupont);
 
       assert.equal(body.exigences.length, 1);
       const exigence = body.exigences[0] as ExigenceNIS2;
@@ -104,7 +111,7 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
     });
 
     it('réponds 404 si la mesure demandée est inconnue', async () => {
-      const reponse = await request(serveur).get('/api/mesures/INCONNU.0');
+      const reponse = await request(serveur).get('/api/mesures/INCONNU.0').set('Cookie', cookieJeanneDupont);
 
       assert.equal(reponse.status, 404);
     });
@@ -130,26 +137,25 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
       assert.equal(reponse.status, 404);
     });
 
-    describe('lorsque l’utilisateur est connecté', async () => {
-      let cookieJeanneDupont: string;
+    it('indique que la mesure a été prise en compte', async () => {
+      await entrepotPriseEnCompte.ajoute(new PriseEnCompte(jeanneDupont, authentA2Etapes));
 
-      beforeEach(async () => {
-        await entrepotUtilisateur.ajoute(jeanneDupont);
-        cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
-      });
+      const { body } = await getConnecte(serveur, cookieJeanneDupont);
 
-      it('indique que la mesure a été prise en compte', async () => {
-        await entrepotPriseEnCompte.ajoute(new PriseEnCompte(jeanneDupont, authentA2Etapes));
+      assert.equal(body.estPriseEnCompte, true);
+    });
 
-        const { body } = await request(serveur).get('/api/mesures/AUTH.5').set('Cookie', cookieJeanneDupont);
+    it('indique qu’une mesure n’a pas été prise en compte', async () => {
+      const { body } = await getConnecte(serveur, cookieJeanneDupont);
 
-        assert.equal(body.estPriseEnCompte, true);
-      });
+      assert.equal(body.estPriseEnCompte, false);
+    });
 
-      it('indique qu’une mesure n’a pas été prise en compte', async () => {
-        const { body } = await request(serveur).get('/api/mesures/AUTH.5').set('Cookie', cookieJeanneDupont);
+    describe("lorsque qu'aucun utilisateur n'est connecté", async () => {
+      it('réponds 401', async () => {
+        const reponse = await request(serveur).get('/api/mesures/AUTH.5');
 
-        assert.equal(body.estPriseEnCompte, false);
+        assert.equal(reponse.status, 401);
       });
     });
   });
