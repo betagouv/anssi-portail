@@ -1,9 +1,9 @@
 import { Financement } from '../../src/metier/financement';
 import { Guide } from '../../src/metier/guide';
-import { Mesure } from '../../src/metier/mesure';
 import { ExigenceNIS2 } from '../../src/metier/nis2/exigence';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { fauxAdaptateurRechercheEntreprise } from './fauxObjets';
+import { mesureDeTest } from './mesures/constructeurDeMesure';
 
 export const jeanneDupont: Utilisateur = new Utilisateur(
   {
@@ -111,53 +111,55 @@ export const guidePublieDemain = () =>
     besoins: ['SECURISER'],
   });
 
-export const mesureAuthentA2Etapes = () =>
-  new Mesure(
-    'AUTH.5',
-    "Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l'accès aux comptes",
-    'Empêchez qu’un compte soit utilisé, même si le mot de passe a fuité 💨',
-    `Un mot de passe seul ne suffit pas toujours à protéger un compte. En activant une deuxième vérification, vous ajoutez une sécurité supplémentaire au moment de la connexion : un code reçu sur une application, une clé physique, une empreinte digitale ou, à défaut, un code par SMS.
+export const mesureAuthentA2Etapes = () => {
+  const exigence = new ExigenceNIS2({
+    reference: '10.B.5-EI/EE',
+    entitesCible: ['EntiteEssentielle', 'EntiteImportante'],
+    objectifSecurite:
+      'Objectif de sécurité 10: Gestion des identités et des accès des utilisateurs aux systèmes d’information',
+    thematique: 'Authentification',
+    contenu: 'Les facteurs d’authentification...',
+    contenuEnAnglais: 'The authentication factors...',
+  });
 
-Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste beaucoup plus difficile pour une personne malveillante.`,
-    `Mettre en oeuvre la vérification en deux étapes sur les services importants, a minima :
-* l'accès aux mails,
+  return mesureDeTest()
+    .avecLId('AUTH.5')
+    .avecLeTitre(
+      'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes'
+    )
+    .avecLaPhraseAccroche('Empêchez qu’un compte soit utilisé, même si le mot de passe a fuité 💨')
+    .avecLesExplications(
+      `Un mot de passe seul ne suffit pas toujours à protéger un compte. En activant une deuxième vérification, vous ajoutez une sécurité supplémentaire au moment de la connexion : un code reçu sur une application, une clé physique, une empreinte digitale ou, à défaut, un code par SMS.
+
+Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste beaucoup plus difficile pour une personne malveillante.`
+    )
+    .avecLActionPrioritaire(
+      `Mettre en oeuvre la vérification en deux étapes sur les services importants, a minima :
+* l’accès aux mails,
 * les services en ligne,
 * tous les accès distants (ex. télétravail),
-* les comptes d’administration.`,
-    `**Bonne nouvelle :** dans les principales suites collaboratives (La Suite Numérique, Microsoft 365, Google Workspace, etc.), la vérification en deux étapes est incluse — il suffit de l'activer dans les paramètres de sécurité, sans surcoût ni outil supplémentaire.`,
-    10,
-    [
-      {
-        libelle: 'Un compte utilise a votre place',
-        description:
-          'par exemple si le mot de passe a ete vole apres un faux email, une fuite de donnees ou un virus sur un ordinateur.',
-      },
-      {
-        libelle: 'Un acces non autorise a un outil en ligne',
-        description:
-          "cela peut concerner une messagerie, un logiciel de gestion, un espace client, un compte bancaire, un reseau social ou un outil d'administration accessible depuis internet.",
-      },
-      {
-        libelle: 'Connexion frauduleuse sans alerte',
-        description:
-          'sans verification en deux etapes, une connexion reussie avec votre mot de passe ne declenche aucun signal — un attaquant peut consulter vos mails ou agir en votre nom pendant des jours sans que vous le remarquiez.',
-      },
-    ],
-    [
-      {
-        libelle: "Guide ANSSI — Recommandations relatives à l'authentification multifacteur et aux mots de passe",
-        url: 'https://cyber.gouv.fr/publications/recommandations-relatives-lauthentification-multifacteur-et-aux-mots-de-passe',
-      },
-    ],
-    [
-      new ExigenceNIS2({
-        reference: '10.B.5-EI/EE',
-        entitesCible: ['EntiteEssentielle', 'EntiteImportante'],
-        objectifSecurite:
-          "Objectif de sécurité 10: Gestion des identités et des accès des utilisateurs aux systèmes d'information",
-        thematique: 'Authentification',
-        contenu: 'Les facteurs d’authentification...',
-        contenuEnAnglais: 'The authentication factors...',
-      }),
-    ]
-  );
+* les comptes d’administration.`
+    )
+    .avecLActionFacileAFaire(
+      `Dans les principales suites collaboratives (La Suite Numérique, Microsoft 365, Google Workspace, etc.), la vérification en deux étapes est incluse — il suffit de l’activer dans les paramètres de sécurité, sans surcoût ni outil supplémentaire.`
+    )
+    .avecLOrdre(10)
+    .avecUnRisque(
+      'Un compte utilise a votre place',
+      'par exemple si le mot de passe a ete vole apres un faux email, une fuite de donnees ou un virus sur un ordinateur.'
+    )
+    .avecUnRisque(
+      'Un acces non autorise a un outil en ligne',
+      'cela peut concerner une messagerie, un logiciel de gestion, un espace client, un compte bancaire, un reseau social ou un outil d’administration accessible depuis internet.'
+    )
+    .avecUnRisque(
+      'Connexion frauduleuse sans alerte',
+      'sans verification en deux etapes, une connexion reussie avec votre mot de passe ne declenche aucun signal — un attaquant peut consulter vos mails ou agir en votre nom pendant des jours sans que vous le remarquiez.'
+    )
+    .avecUnLien(
+      'Guide ANSSI — Recommandations relatives à l’authentification multifacteur et aux mots de passe',
+      'https://cyber.gouv.fr/publications/recommandations-relatives-lauthentification-multifacteur-et-aux-mots-de-passe'
+    )
+    .avecUneExigence(exigence)
+    .construis();
+};

@@ -61,7 +61,7 @@ describe('La ressource mesure de sécurité', () => {
       assert.equal(body.id, 'AUTH.5');
       assert.equal(
         body.titre,
-        "Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l'accès aux comptes"
+        'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes'
       );
       assert.equal(body.phraseAccroche, 'Empêchez qu’un compte soit utilisé, même si le mot de passe a fuité 💨');
       assert.equal(
@@ -73,14 +73,14 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
       assert.equal(
         body.actionPrioritaire,
         `Mettre en oeuvre la vérification en deux étapes sur les services importants, a minima :
-* l'accès aux mails,
+* l’accès aux mails,
 * les services en ligne,
 * tous les accès distants (ex. télétravail),
 * les comptes d’administration.`
       );
       assert.equal(
         body.actionFacileAFaire,
-        `**Bonne nouvelle :** dans les principales suites collaboratives (La Suite Numérique, Microsoft 365, Google Workspace, etc.), la vérification en deux étapes est incluse — il suffit de l'activer dans les paramètres de sécurité, sans surcoût ni outil supplémentaire.`
+        `Dans les principales suites collaboratives (La Suite Numérique, Microsoft 365, Google Workspace, etc.), la vérification en deux étapes est incluse — il suffit de l’activer dans les paramètres de sécurité, sans surcoût ni outil supplémentaire.`
       );
       assert.equal(body.ordre, 10);
       assert.equal(body.risques.length, 3);
@@ -90,7 +90,7 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
       assert.equal(body.liens.length, 1);
       assert.equal(
         body.liens[0].libelle,
-        "Guide ANSSI — Recommandations relatives à l'authentification multifacteur et aux mots de passe"
+        'Guide ANSSI — Recommandations relatives à l’authentification multifacteur et aux mots de passe'
       );
     });
 
@@ -103,7 +103,7 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
       assert.deepEqual(exigence.entitesCible, ['EntiteEssentielle', 'EntiteImportante']);
       assert.equal(
         exigence.objectifSecurite,
-        "Objectif de sécurité 10: Gestion des identités et des accès des utilisateurs aux systèmes d'information"
+        'Objectif de sécurité 10: Gestion des identités et des accès des utilisateurs aux systèmes d’information'
       );
       assert.equal(exigence.thematique, 'Authentification');
       assert.equal(exigence.contenu, 'Les facteurs d’authentification...');
