@@ -26,6 +26,7 @@ describe("L'abonnement qui consigne un avis sur une mesure dans le journal", () 
       adaptateurHorloge,
     })(
       new AvisMesureDonne({
+        idUtilisateur: 'jeanne.dupont@user.com-hache',
         idMesure: 'AUTH.5',
         retour: 'POSITIF',
       })
@@ -34,6 +35,7 @@ describe("L'abonnement qui consigne un avis sur une mesure dans le journal", () 
     assert.deepEqual(evenementRecu, {
       type: 'AVIS_MESURE_DONNE',
       donnees: {
+        idUtilisateur: 'jeanne.dupont@user.com-hache',
         idMesure: 'AUTH.5',
         retour: 'POSITIF',
       },
@@ -53,6 +55,7 @@ describe("L'abonnement qui consigne un avis négatif sur une mesure dans la mess
     };
     await consigneCommentaireAvisMesureDonneDansMessagerie({ messagerieInstantanee })(
       new AvisMesureDonne({
+        idUtilisateur: 'jeanne.dupont@user.com-hache',
         idMesure: 'AUTH.5',
         retour: 'NEGATIF',
         commentaire: 'Pas satisfait de cette mesure',

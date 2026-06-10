@@ -7,11 +7,19 @@ import { valideCorpsRequete } from '../zod';
 import { schemaRessourceAvisMesure } from './ressourceAvisMesure.schema';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
-const ressourceAvisMesure = ({ entrepotMesure, busEvenements }: ConfigurationServeur) => {
+const ressourceAvisMesure = ({
+  entrepotMesure,
+  busEvenements,
+  middleware,
+  entrepotUtilisateur,
+  adaptateurHachage,
+}: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.post(
     '/:idMesure/avis',
+    middleware.verifieJWT,
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(schemaRessourceAvisMesure),
     filetRouteAsynchrone(
       async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceAvisMesure>>, reponse: Response) => {
@@ -24,6 +32,7 @@ const ressourceAvisMesure = ({ entrepotMesure, busEvenements }: ConfigurationSer
 
         await busEvenements.publie(
           new AvisMesureDonne({
+            idUtilisateur: requete.utilisateur.emailHache,
             idMesure,
             retour,
             ...(retour === 'NEGATIF' && { commentaire: requete.body.commentaire }),
