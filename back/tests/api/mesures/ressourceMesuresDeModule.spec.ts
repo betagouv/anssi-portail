@@ -5,7 +5,9 @@ import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
+import { PriseEnCompte } from '../../../src/metier/PriseEnCompte';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
+import { EntrepotPriseEnCompteMemoire } from '../../persistance/EntrepotPriseEnCompteMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
@@ -16,6 +18,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
   describe('sur requête GET', () => {
     let serveur: Express;
     let entrepotMesure: EntrepotMesureMemoire;
+    let entrepotPriseEnCompte: EntrepotPriseEnCompteMemoire;
     let adaptateurEnvironnement: AdaptateurEnvironnement;
     let entrepotUtilisateur: EntrepotUtilisateur;
     const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
@@ -26,7 +29,14 @@ describe('La ressource des mesures de sécurité d’un module', () => {
       };
       entrepotMesure = new EntrepotMesureMemoire();
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
-      serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotMesure, adaptateurEnvironnement });
+      entrepotPriseEnCompte = new EntrepotPriseEnCompteMemoire();
+      serveur = creeServeur({
+        ...configurationDeTestDuServeur,
+        entrepotMesure,
+        entrepotPriseEnCompte,
+        entrepotUtilisateur,
+        adaptateurEnvironnement,
+      });
       await entrepotUtilisateur.ajoute(jeanneDupont);
     });
 
@@ -85,6 +95,18 @@ describe('La ressource des mesures de sécurité d’un module', () => {
       const reponse = await request(serveurSansLaRessource).get('/api/modules/cyberdepart/mesures');
 
       assert.equal(reponse.status, 404);
+    });
+
+    it('indique si les mesures ont été prises en compte', async () => {
+      const mesureAuth5 = mesureAuthentA2Etapes();
+      await entrepotMesure.ajoute(mesureAuth5);
+      await entrepotMesure.ajoute(mesureDeTest().avecLId('MES1').avecLOrdre(15).construis());
+      await entrepotPriseEnCompte.ajoute(new PriseEnCompte(jeanneDupont, mesureAuth5));
+
+      const { body } = await getMesuresConnecte();
+
+      assert.equal(body[0].estPriseEnCompte, true);
+      assert.equal(body[1].estPriseEnCompte, false);
     });
   });
 });
