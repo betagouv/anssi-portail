@@ -18,6 +18,7 @@ import { ressourceGuidesMemesCollections } from './guides/ressourceGuidesMemesCo
 import { ressourceAvisMesure } from './mesures/ressourceAvisMesure';
 import { ressourceMesure } from './mesures/ressourceMesure';
 import { ressourceMesuresDeModule } from './mesures/ressourceMesuresDeModule';
+import { ressourcePriseEnCompte } from './mesures/ressourcePriseEnCompte';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide';
 import { ressourceExigencesNis2 } from './nis2/ressourceExigencesNis2';
 import { ressourceExigencesNis2Csv } from './nis2/ressourceExigencesNis2Csv';
@@ -58,7 +59,6 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe';
-import { ressourcePriseEnCompte } from './mesures/ressourcePriseEnCompte';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -167,7 +167,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'sante',
     'abonnement-infolettre',
     'confirmation-abonnement-infolettre',
-    'module-cyberdepart',
   ]
     .concat(
       configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()
@@ -182,7 +181,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/guides/:slug', ressourcePagesJekyll(configurationServeur, 'guides'));
 
-  ['ma-maturite', 'favoris', 'services-anssi', 'gestion-guides'].forEach((page) =>
+  ['ma-maturite', 'favoris', 'services-anssi', 'gestion-guides', 'module-cyberdepart'].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyllConnectees(configurationServeur, page))
   );
 
