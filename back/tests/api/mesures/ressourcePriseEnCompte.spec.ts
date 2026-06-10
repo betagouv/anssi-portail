@@ -12,6 +12,7 @@ import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateu
 import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur } from '../fauxObjets';
 import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
+import { mesureDeTest } from './constructeurDeMesure';
 
 describe("La ressource de prise en compte d'une mesure", () => {
   let serveur: Express;
@@ -77,8 +78,8 @@ describe("La ressource de prise en compte d'une mesure", () => {
       });
 
       it('publie un événement de prise en compte', async () => {
-        await entrepotMesure.ajoute({ ...mesureAuthentA2Etapes(), id: 'AUTH.1', ordre: 1 });
-        await entrepotMesure.ajoute({ ...mesureAuthentA2Etapes(), id: 'AUTH.20', ordre: 20 });
+        await entrepotMesure.ajoute(mesureDeTest().avecLId('AUTH.1').avecLOrdre(1).construis());
+        await entrepotMesure.ajoute(mesureDeTest().avecLId('AUTH.20').avecLOrdre(20).construis());
 
         await putPriseEnCompteConnecte();
 

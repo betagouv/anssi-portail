@@ -4,10 +4,10 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
-import { Mesure } from '../../../src/metier/mesure';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
 import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
+import { mesureDeTest } from './constructeurDeMesure';
 
 describe('La ressource des mesures de sécurité d’un module', () => {
   describe('sur requête GET', () => {
@@ -38,13 +38,9 @@ describe('La ressource des mesures de sécurité d’un module', () => {
       assert.equal(body[0].id, 'AUTH.5');
     });
 
-    function mesureAvecOrdre(id: string, ordre: number) {
-      return new Mesure(id, '', '', '', '', '', ordre, [], [], []);
-    }
-
     it('trie les mesures par ordre', async () => {
-      await entrepotMesure.ajoute(mesureAvecOrdre('MES1', 30));
-      await entrepotMesure.ajoute(mesureAvecOrdre('MES2', 10));
+      await entrepotMesure.ajoute(mesureDeTest().avecLId('MES1').avecLOrdre(30).construis());
+      await entrepotMesure.ajoute(mesureDeTest().avecLId('MES2').avecLOrdre(10).construis());
 
       const { body } = await request(serveur).get('/api/modules/cyberdepart/mesures');
 
