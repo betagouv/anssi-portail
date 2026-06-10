@@ -19,19 +19,41 @@ export type MesurePersistee = {
 };
 export class EntrepotMesurePostgres implements EntrepotMesure {
   knex: Knex.Knex;
+  /**
+   * Cache en mémoire sans invalidation : les mesures sont un référentiel.
+   * Une modification passera par une migration knex, et donc un redémarrage
+   */
+  private readonly cache: Map<Mesure['id'], Mesure> = new Map();
+  private chargementEnCours: Promise<void> | null = null;
 
   constructor(private readonly entrepotExigence: EntrepotExigence) {
     this.knex = Knex(config);
   }
 
   async tous(): Promise<Mesure[]> {
-    const mesuresLues = await this.knex<MesurePersistee>('mesures');
-    return Promise.all(mesuresLues.map((mesure) => this.convertisEnMesure(mesure)));
+    if (this.cache.size > 0) {
+      return [...this.cache.values()];
+    }
+    if (!this.chargementEnCours) {
+      this.chargementEnCours = this.chargerCache().finally(() => {
+        this.chargementEnCours = null;
+      });
+    }
+    await this.chargementEnCours;
+    return [...this.cache.values()];
   }
 
   async parId(id: string): Promise<Mesure | undefined> {
-    const mesurePersistee = await this.knex<MesurePersistee>('mesures').where({ id }).first();
-    return mesurePersistee ? this.convertisEnMesure(mesurePersistee) : undefined;
+    if (this.cache.size === 0) {
+      await this.tous();
+    }
+    return this.cache.get(id);
+  }
+
+  private async chargerCache(): Promise<void> {
+    const mesuresLues = await this.knex<MesurePersistee>('mesures');
+    const mesures = await Promise.all(mesuresLues.map((m) => this.convertisEnMesure(m)));
+    mesures.forEach((m) => this.cache.set(m.id, m));
   }
 
   private async convertisEnMesure(mesurePersistee: MesurePersistee): Promise<Mesure> {

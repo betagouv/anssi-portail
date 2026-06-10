@@ -1,5 +1,6 @@
 import Knex from 'knex';
 import config from '../../knexfile';
+import { EntrepotMesure } from '../metier/entrepotMesure';
 import { EntrepotPriseEnCompte } from '../metier/entrepotPriseEnCompte';
 import { Mesure } from '../metier/mesure';
 import { PriseEnCompte } from '../metier/PriseEnCompte';
@@ -14,19 +15,37 @@ type PriseEnComptePersistee = {
 export class EntrepotPriseEnComptePostgres implements EntrepotPriseEnCompte {
   knex: Knex.Knex;
 
-  constructor(readonly adaptateurHachage: AdaptateurHachage) {
+  constructor(
+    private readonly adaptateurHachage: AdaptateurHachage,
+    private readonly entrepotMesure: EntrepotMesure
+  ) {
     this.knex = Knex(config);
   }
 
-  async pour(utilisateur: Utilisateur, mesure: Mesure): Promise<PriseEnCompte | undefined> {
-    const resultat = await this.knex<PriseEnComptePersistee>('prises_en_compte')
-      .where({
+  pour(utilisateur: Utilisateur): Promise<PriseEnCompte[]>;
+  pour(utilisateur: Utilisateur, mesure: Mesure): Promise<PriseEnCompte | undefined>;
+  async pour(utilisateur: Utilisateur, mesure?: Mesure) {
+    if (mesure) {
+      const resultat = await this.knex<PriseEnComptePersistee>('prises_en_compte')
+        .where({
+          email_utilisateur_hache: this.adaptateurHachage.hache(utilisateur.email),
+          id_mesure: mesure.id,
+        })
+        .first();
+      if (resultat) {
+        return new PriseEnCompte(utilisateur, mesure);
+      }
+    } else {
+      const resultat = await this.knex<PriseEnComptePersistee>('prises_en_compte').where({
         email_utilisateur_hache: this.adaptateurHachage.hache(utilisateur.email),
-        id_mesure: mesure.id,
-      })
-      .first();
-    if (resultat) {
-      return new PriseEnCompte(utilisateur, mesure);
+      });
+      const mesuresCorrespondantes = await Promise.all(resultat.map((r) => this.entrepotMesure.parId(r.id_mesure)));
+      return mesuresCorrespondantes.reduce((prisesEnCompte, mesure) => {
+        if (mesure) {
+          prisesEnCompte.push(new PriseEnCompte(utilisateur, mesure));
+        }
+        return prisesEnCompte;
+      }, [] as PriseEnCompte[]);
     }
   }
 

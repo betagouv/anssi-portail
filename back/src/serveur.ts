@@ -80,7 +80,7 @@ const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
 });
 
 const entrepotMesure: EntrepotMesure = new EntrepotMesurePostgres(entrepotExigence);
-const entrepotPriseEnCompte = new EntrepotPriseEnComptePostgres(adaptateurHachage);
+const entrepotPriseEnCompte = new EntrepotPriseEnComptePostgres(adaptateurHachage, entrepotMesure);
 
 const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
 
