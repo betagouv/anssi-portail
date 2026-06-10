@@ -1,3 +1,10 @@
+---
+name: nouvelle-migration
+description: |
+  Crée une migration Knex PostgreSQL avec la bonne commande de génération, le nommage camelCase, et la structure
+  up/down respectant les conventions du projet (emails hachés, snake_case français).
+---
+
 # Nouvelle Migration Knex
 
 Crée une nouvelle migration Knex pour ce projet.
@@ -11,6 +18,7 @@ node --env-file=.env --import tsx ./back/node_modules/knex/bin/cli.js migrate:ma
 Remplace `<nom>` par le nom de la migration en **camelCase** (verbe + complément).
 
 Exemples :
+
 - `nettoyePrefixeBonneNouvelleMesures`
 - `ajouteTableUtilisateurs`
 - `supprimeForeignKeyObsolete`
@@ -20,7 +28,7 @@ Exemples :
 Génère un fichier `back/migrations/<timestamp>_<nom>.ts` avec la structure standard :
 
 ```typescript
-import { Knex } from 'knex'
+import { Knex } from 'knex';
 
 export async function up(knex: Knex): Promise<void> {
   // modifications de schéma ou données
@@ -33,6 +41,7 @@ export async function down(knex: Knex): Promise<void> {
 
 ## Exécution
 
+Important : ne pas créer le fichier manuellement, mais passer par l'execution de la commande.
 Applique la migration au développement (automatique lors de `pnpm dev`), ou manuellement :
 
 ```bash
