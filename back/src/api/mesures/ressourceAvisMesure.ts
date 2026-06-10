@@ -34,6 +34,7 @@ const ressourceAvisMesure = ({
           new AvisMesureDonne({
             idUtilisateur: requete.utilisateur.emailHache,
             idMesure,
+            titreMesure: mesureTrouvee.titre,
             retour,
             ...(retour === 'NEGATIF' && { commentaire: requete.body.commentaire }),
           })

@@ -28,6 +28,8 @@ describe("L'abonnement qui consigne un avis sur une mesure dans le journal", () 
       new AvisMesureDonne({
         idUtilisateur: 'jeanne.dupont@user.com-hache',
         idMesure: 'AUTH.5',
+        titreMesure:
+          'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes',
         retour: 'POSITIF',
       })
     );
@@ -37,6 +39,8 @@ describe("L'abonnement qui consigne un avis sur une mesure dans le journal", () 
       donnees: {
         idUtilisateur: 'jeanne.dupont@user.com-hache',
         idMesure: 'AUTH.5',
+        titreMesure:
+          'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes',
         retour: 'POSITIF',
       },
       date: new Date('2025-03-10'),
@@ -57,6 +61,8 @@ describe("L'abonnement qui consigne un avis négatif sur une mesure dans la mess
       new AvisMesureDonne({
         idUtilisateur: 'jeanne.dupont@user.com-hache',
         idMesure: 'AUTH.5',
+        titreMesure:
+          'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes',
         retour: 'NEGATIF',
         commentaire: 'Pas satisfait de cette mesure',
       })
@@ -64,6 +70,8 @@ describe("L'abonnement qui consigne un avis négatif sur une mesure dans la mess
 
     assert.deepEqual(evenementRecu, {
       idMesure: 'AUTH.5',
+      titreMesure:
+        'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes',
       commentaire: 'Pas satisfait de cette mesure',
     });
   });

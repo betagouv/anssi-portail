@@ -14,6 +14,7 @@ export type AvisUtilisateur = {
 
 export type AvisNegatifSurUneMesure = {
   idMesure: string;
+  titreMesure: string;
   commentaire?: string;
 };
 
