@@ -19,13 +19,18 @@ const ressourceMesuresDeModule = ({
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(corpsVide),
-    filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
+    filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const mesures = await entrepotMesure.tous();
-      const utilisateur = _requete.utilisateur as Utilisateur;
+      const utilisateur = requete.utilisateur as Utilisateur;
+
+      const prisesEnCompteDeLUtilisateur = await entrepotPriseEnCompte.pour(utilisateur);
+
       const mesuresPresentation = await Promise.all(
         mesures.map(async (mesure) => {
-          const priseEnCompte = await entrepotPriseEnCompte.pour(utilisateur, mesure);
-          return mesurePresentation(mesure, priseEnCompte);
+          return mesurePresentation(
+            mesure,
+            prisesEnCompteDeLUtilisateur.find((pec) => pec.mesure.id === mesure.id)
+          );
         })
       );
       const mesuresTries = mesuresPresentation.toSorted((a, b) => a.ordre - b.ordre);
