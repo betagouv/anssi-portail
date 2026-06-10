@@ -4,9 +4,12 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
+import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
+import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
-import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
+import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
 import { mesureDeTest } from './constructeurDeMesure';
 
 describe('La ressource des mesures de sécurité d’un module', () => {
@@ -14,25 +17,38 @@ describe('La ressource des mesures de sécurité d’un module', () => {
     let serveur: Express;
     let entrepotMesure: EntrepotMesureMemoire;
     let adaptateurEnvironnement: AdaptateurEnvironnement;
+    let entrepotUtilisateur: EntrepotUtilisateur;
+    const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
 
-    beforeEach(() => {
+    beforeEach(async () => {
       adaptateurEnvironnement = {
         ...fauxAdaptateurEnvironnement,
       };
       entrepotMesure = new EntrepotMesureMemoire();
+      entrepotUtilisateur = new EntrepotUtilisateurMemoire();
       serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotMesure, adaptateurEnvironnement });
+      await entrepotUtilisateur.ajoute(jeanneDupont);
     });
 
+    const getMesuresConnecte = async () =>
+      request(serveur).get('/api/modules/cyberdepart/mesures').set('Cookie', cookieJeanneDupont);
+
     it('réponds 200', async () => {
-      const reponse = await request(serveur).get('/api/modules/cyberdepart/mesures');
+      const reponse = await getMesuresConnecte();
 
       assert.equal(reponse.status, 200);
+    });
+
+    it('réponds 401 si l’utilisateur n’est pas connecté', async () => {
+      const reponse = await request(serveur).get('/api/modules/cyberdepart/mesures');
+
+      assert.equal(reponse.status, 401);
     });
 
     it('renvoie la liste des mesures', async () => {
       await entrepotMesure.ajoute(mesureAuthentA2Etapes());
 
-      const { body } = await request(serveur).get('/api/modules/cyberdepart/mesures');
+      const { body } = await getMesuresConnecte();
 
       assert.equal(body.length, 1);
       assert.equal(body[0].id, 'AUTH.5');
@@ -42,7 +58,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
       await entrepotMesure.ajoute(mesureDeTest().avecLId('MES1').avecLOrdre(30).construis());
       await entrepotMesure.ajoute(mesureDeTest().avecLId('MES2').avecLOrdre(10).construis());
 
-      const { body } = await request(serveur).get('/api/modules/cyberdepart/mesures');
+      const { body } = await getMesuresConnecte();
 
       assert.equal(body[0].id, 'MES2');
       assert.equal(body[1].id, 'MES1');
