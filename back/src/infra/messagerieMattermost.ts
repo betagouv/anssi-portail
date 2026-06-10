@@ -44,6 +44,7 @@ Email de contact : ${avisUtilisateur.emailDeContact}`;
 
     if (urlWebhook) {
       const message = `### :alert: Avis négatif sur la mesure ${avis.idMesure}
+**Titre :** ${avis.titreMesure}
 Un utilisateur a laissé un avis négatif :
 ${aseptiseMarkdown(avis.commentaire ?? '')}`;
       await axios.post(urlWebhook, { text: message });

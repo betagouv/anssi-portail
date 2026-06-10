@@ -15,6 +15,7 @@ export const consigneRetourAvisMesureDonneDansJournal = ({
       donnees: {
         idUtilisateur: evenement.idUtilisateur,
         idMesure: evenement.idMesure,
+        titreMesure: evenement.titreMesure,
         retour: evenement.retour,
       },
       type: 'AVIS_MESURE_DONNE',
@@ -32,6 +33,7 @@ export const consigneCommentaireAvisMesureDonneDansMessagerie = ({
     if (evenement.retour !== 'NEGATIF') return;
     await messagerieInstantanee.notifieUnAvisNegatifSurUneMesure({
       idMesure: evenement.idMesure,
+      titreMesure: evenement.titreMesure,
       commentaire: evenement.commentaire,
     });
   };

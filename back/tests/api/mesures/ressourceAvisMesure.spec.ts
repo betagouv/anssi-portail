@@ -114,6 +114,10 @@ describe('La ressource avis sur une mesure de sécurité', () => {
           const evenement = busEvenements.recupereEvenement(AvisMesureDonne);
           assert.equal(evenement!.idUtilisateur, 'jeanne.dupont@user.com-hache');
           assert.equal(evenement!.idMesure, 'AUTH.5');
+          assert.equal(
+            evenement!.titreMesure,
+            'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes'
+          );
           assert.equal(evenement!.retour, 'POSITIF');
         });
 
@@ -127,6 +131,10 @@ describe('La ressource avis sur une mesure de sécurité', () => {
           const evenement = busEvenements.recupereEvenement(AvisMesureDonne);
           assert.equal(evenement!.idUtilisateur, 'jeanne.dupont@user.com-hache');
           assert.equal(evenement!.idMesure, 'AUTH.5');
+          assert.equal(
+            evenement!.titreMesure,
+            'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes'
+          );
           assert.equal(evenement!.retour, 'POSITIF');
           assert.equal(evenement!.commentaire, undefined);
         });
@@ -143,6 +151,10 @@ describe('La ressource avis sur une mesure de sécurité', () => {
           const evenement = busEvenements.recupereEvenement(AvisMesureDonne);
           assert.equal(evenement!.idUtilisateur, 'jeanne.dupont@user.com-hache');
           assert.equal(evenement!.idMesure, 'AUTH.5');
+          assert.equal(
+            evenement!.titreMesure,
+            'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes'
+          );
           assert.equal(evenement!.retour, 'NEGATIF');
           assert.equal(evenement!.commentaire, 'Cette mesure est incorrecte !');
         });
