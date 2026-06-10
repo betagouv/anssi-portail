@@ -16,6 +16,7 @@ const ressourceMesure = ({
 
   routeur.get(
     '/:idMesure',
+    middleware.verifieJWT,
     valideCorpsRequete(corpsVide),
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
