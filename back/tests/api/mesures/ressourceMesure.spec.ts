@@ -26,7 +26,7 @@ describe('La ressource mesure de sécurité', () => {
     const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
 
     async function getConnecte(serveur: Express, cookieJeanneDupont: string) {
-      return await request(serveur).get('/api/mesures/AUTH.5').set('Cookie', cookieJeanneDupont);
+      return request(serveur).get('/api/mesures/AUTH.5').set('Cookie', cookieJeanneDupont);
     }
 
     beforeEach(async () => {
