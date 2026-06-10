@@ -13,6 +13,7 @@ export const consigneRetourAvisMesureDonneDansJournal = ({
   return async (evenement: AvisMesureDonne) => {
     await adaptateurJournal.consigneEvenement({
       donnees: {
+        idUtilisateur: evenement.idUtilisateur,
         idMesure: evenement.idMesure,
         retour: evenement.retour,
       },
