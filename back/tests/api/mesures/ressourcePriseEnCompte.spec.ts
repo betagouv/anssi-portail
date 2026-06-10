@@ -47,21 +47,22 @@ describe("La ressource de prise en compte d'une mesure", () => {
       const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
       const mesure = mesureAuthentA2Etapes();
 
+      const putPriseEnCompteConnecte = () =>
+        request(serveur).put('/api/mesures/AUTH.5/prise-en-compte').set('Cookie', cookieJeanneDupont);
+
       beforeEach(async () => {
         await entrepotMesure.ajoute(mesure);
         await entrepotUtilisateur.ajoute(jeanneDupont);
       });
 
       it('réponds 201', async () => {
-        const reponse = await request(serveur)
-          .put('/api/mesures/AUTH.5/prise-en-compte')
-          .set('Cookie', cookieJeanneDupont);
+        const reponse = await putPriseEnCompteConnecte();
 
         assert.equal(reponse.status, 201);
       });
 
       it('ajoute une prise en compte', async () => {
-        await request(serveur).put('/api/mesures/AUTH.5/prise-en-compte').set('Cookie', cookieJeanneDupont);
+        await putPriseEnCompteConnecte();
 
         const priseEnComptePersistee = await entrepotPriseEnCompte.pour(jeanneDupont, mesure);
         assert.notEqual(priseEnComptePersistee, undefined);
@@ -79,7 +80,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
         await entrepotMesure.ajoute({ ...mesureAuthentA2Etapes(), id: 'AUTH.1', ordre: 1 });
         await entrepotMesure.ajoute({ ...mesureAuthentA2Etapes(), id: 'AUTH.20', ordre: 20 });
 
-        await request(serveur).put('/api/mesures/AUTH.5/prise-en-compte').set('Cookie', cookieJeanneDupont);
+        await putPriseEnCompteConnecte();
 
         busEvenements.aRecuUnEvenement(MesurePriseEnCompte);
         const evenement = busEvenements.recupereEvenement(MesurePriseEnCompte);
