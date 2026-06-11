@@ -18,11 +18,13 @@ type Secondes = number;
 
 export class Cache<T> {
   private readonly cache: Map<string, EntreeDeCache<T>> = new Map();
+  private readonly requetesEnVol: Map<string, Promise<T>> = new Map();
 
   constructor(private readonly configuration?: { ttl: Secondes }) {}
 
   supprimeTout() {
     this.cache.clear();
+    this.requetesEnVol.clear();
   }
 
   async get(clefCache: string, fonction: () => Promise<T>): Promise<T> {
@@ -33,26 +35,38 @@ export class Cache<T> {
       }
       return valeur;
     }
+
+    if (this.requetesEnVol.has(clefCache)) {
+      return this.requetesEnVol.get(clefCache)!;
+    }
+
     return await this.metsEnCache(fonction, clefCache);
   }
 
-  private async metsEnCache(fonction: () => Promise<T>, clefCache: string): Promise<T> {
-    try {
-      const resultat = await fonction();
-      this.cache.set(clefCache, {
-        valeur: resultat,
-        ...(this.configuration && {
-          dateExpiration: add(FournisseurHorloge.maintenant(), {
-            seconds: this.configuration.ttl,
+  private metsEnCache(fonction: () => Promise<T>, clefCache: string): Promise<T> {
+    const promesse = (async () => {
+      try {
+        const resultat = await fonction();
+        this.cache.set(clefCache, {
+          valeur: resultat,
+          ...(this.configuration && {
+            dateExpiration: add(FournisseurHorloge.maintenant(), {
+              seconds: this.configuration.ttl,
+            }),
           }),
-        }),
-      });
-      return resultat;
-    } catch (erreur: unknown | Error) {
-      if (this.cache.has(clefCache)) {
-        return this.cache.get(clefCache)!.valeur;
+        });
+        return resultat;
+      } catch (erreur: unknown | Error) {
+        if (this.cache.has(clefCache)) {
+          return this.cache.get(clefCache)!.valeur;
+        }
+        throw erreur;
       }
-      throw erreur;
-    }
+    })().finally(() => {
+      this.requetesEnVol.delete(clefCache);
+    });
+
+    this.requetesEnVol.set(clefCache, promesse);
+    return promesse;
   }
 }
