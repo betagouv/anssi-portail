@@ -2,6 +2,7 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import Heros from '../ui/Heros.svelte';
+  import BadgeCyberdepart from './BadgeCyberdepart.svelte';
   import GrilleCartesMesures from './GrilleCartesMesures.svelte';
   import type { Mesure } from './mesure';
   import Progression from './Progression.svelte';
@@ -42,6 +43,9 @@
       ></dsfr-alert>
     {/if}
     <Progression actuel={progressionActuelle} max={13} cible={CIBLE}></Progression>
+    {#if cibleAtteinte}
+      <BadgeCyberdepart />
+    {/if}
   </div>
 </dsfr-container>
 
