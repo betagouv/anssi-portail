@@ -95,7 +95,7 @@
   >
     {#snippet filAriane()}
       <FilAriane
-        feuille="placeholder"
+        feuille={mesure?.phraseAccroche ?? ''}
         branche={{
           nom: 'Protéger mon organisation',
           lien: '/',
