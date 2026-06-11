@@ -7,19 +7,32 @@
   }
 
   const { mesure }: Props = $props();
+  const typeDeLien = $derived(mesure.estPriseEnCompte ? 'secondaire' : 'primaire');
+  const libelleDeLien = $derived(mesure.estPriseEnCompte ? 'Accéder au détail' : 'Prendre en compte');
 </script>
 
 <dsfr-card
-  title={mesure.phraseAccroche}
   description={mesure.titre}
   enlarge={false}
-  no-link={true}
-  has-description="true"
   has-buttons={true}
+  has-description="true"
+  has-header-badge={mesure.estPriseEnCompte || undefined}
+  no-link={true}
   src={`/assets/images/parcours-securisation/mesure-${mesure.id}.svg`}
+  title={mesure.phraseAccroche}
 >
+  <div slot="headerbadges">
+    <dsfr-badge
+      accent="green-emeraude"
+      has-icon
+      icon="checkbox-circle-fill"
+      label="Prise en compte"
+      size="sm"
+      type="accent"
+    ></dsfr-badge>
+  </div>
   <div slot="buttonsgroup" class="actions-carte">
-    <Lien apparence="bouton" href={`/mesures/${mesure.id}`} type="primaire" libelle="Prendre en compte" etire={true}
+    <Lien apparence="bouton" href={`/mesures/${mesure.id}`} type={typeDeLien} libelle={libelleDeLien} etire={true}
     ></Lien>
   </div>
 </dsfr-card>
