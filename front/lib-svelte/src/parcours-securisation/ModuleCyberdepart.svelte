@@ -14,6 +14,7 @@
   });
   const mesuresMisesEnAvant = $derived(mesures.filter((_, index) => index < 4));
   const autresMesures = $derived(mesures.filter((_, index) => index >= 4));
+  const progressionActuelle = $derived(mesures.filter((m) => m.estPriseEnCompte).length);
 </script>
 
 <Heros
@@ -29,7 +30,7 @@
 ></Heros>
 
 <dsfr-container class="progression">
-  <Progression actuel={0} max={13} cible={10}></Progression>
+  <Progression actuel={progressionActuelle} max={13} cible={10}></Progression>
 </dsfr-container>
 
 <dsfr-container class="actions-en-avant">
