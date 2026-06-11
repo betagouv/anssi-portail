@@ -65,9 +65,5 @@
   .actif {
     background: var(--background-action-high-blue-france);
     border-radius: 8px;
-
-    img {
-      filter: brightness(0) invert(1);
-    }
   }
 </style>
