@@ -8,6 +8,8 @@
 
   let mesures: Mesure[] = $state([]);
 
+  const CIBLE = 10;
+
   onMount(async () => {
     const reponse = await axios.get<Mesure[]>(`/api/modules/cyberdepart/mesures`);
     mesures = reponse.data;
@@ -15,6 +17,7 @@
   const mesuresMisesEnAvant = $derived(mesures.filter((_, index) => index < 4));
   const autresMesures = $derived(mesures.filter((_, index) => index >= 4));
   const progressionActuelle = $derived(mesures.filter((m) => m.estPriseEnCompte).length);
+  const cibleAtteinte = $derived(progressionActuelle >= CIBLE);
 </script>
 
 <Heros
@@ -29,8 +32,17 @@
   theme="sombre"
 ></Heros>
 
-<dsfr-container class="progression">
-  <Progression actuel={progressionActuelle} max={13} cible={10}></Progression>
+<dsfr-container>
+  <div class="progression">
+    {#if cibleAtteinte}
+      <dsfr-alert
+        type="info"
+        has-description={true}
+        text="Complétez votre progression et accéder à des mesures plus avancées pour renforcer vos pratiques, mieux structurer vos actions et améliorer votre protection dans la durée."
+      ></dsfr-alert>
+    {/if}
+    <Progression actuel={progressionActuelle} max={13} cible={CIBLE}></Progression>
+  </div>
 </dsfr-container>
 
 <dsfr-container class="actions-en-avant">
@@ -43,8 +55,11 @@
 </dsfr-container>
 
 <style lang="scss">
-  dsfr-container.progression {
+  .progression {
     padding-block: 2rem;
+    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
   }
 
   dsfr-container.actions-en-avant {
