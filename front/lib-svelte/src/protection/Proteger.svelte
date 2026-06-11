@@ -8,7 +8,7 @@
   const codecVideoWebM = 'video/webm; codecs="vp9,opus"';
 </script>
 
-<dsfr-container class="proteger">
+<dsfr-container id="proteger" class="proteger">
   {#if origine !== 'landing-collectivites'}
     <div class="introduction">
       <h2>Découvrez les risques pour votre organisation en cas de cyberattaque</h2>
