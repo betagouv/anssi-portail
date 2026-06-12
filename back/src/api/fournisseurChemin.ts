@@ -1,3 +1,4 @@
+import { readdir } from 'node:fs/promises';
 import { join } from 'path';
 import { PathTraversalError } from './erreurs';
 
@@ -14,6 +15,15 @@ export interface FournisseurChemin {
   ressourceDeBase: (ressource: string) => string;
   cheminCsvNis2Simulateur: () => string;
 }
+
+export const construisListeFichiersDuSite = async (racine: string) => {
+  const repertoireAbsolu = join(process.cwd(), racine);
+  return (
+    await readdir(repertoireAbsolu, {
+      recursive: true,
+    })
+  ).map((fichier) => join(repertoireAbsolu, fichier));
+};
 
 const construisChemin = (...morceauxChemin: string[]): string => {
   for (const morceau of morceauxChemin) {
