@@ -1,7 +1,7 @@
-import { describe, it } from 'node:test';
 import assert from 'node:assert';
-import { fournisseurChemin } from '../../src/api/fournisseurChemin';
+import { describe, it } from 'node:test';
 import { PathTraversalError } from '../../src/api/erreurs';
+import { construisListeFichiersDuSite, fournisseurChemin } from '../../src/api/fournisseurChemin';
 
 describe('le fournisseurChemin', () => {
   describe("lorsqu'on récupère un fichier", () => {
@@ -54,6 +54,15 @@ describe('le fournisseurChemin', () => {
 
     it('accepte css/style.css', () => {
       assert.doesNotThrow(() => fournisseurChemin.ressourceDeBase('css/style.css'));
+    });
+  });
+
+  describe('sur construction de la liste des fichiers autorisés', () => {
+    it('retourne la liste des fichiers', async () => {
+      const fichiers = await construisListeFichiersDuSite('tests/ressources/_site');
+
+      assert.equal(fichiers[0], `${process.cwd()}/tests/ressources/_site/contacts`);
+      assert.equal(fichiers[1], `${process.cwd()}/tests/ressources/_site/contacts/index.html`);
     });
   });
 });
