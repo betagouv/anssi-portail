@@ -1,4 +1,4 @@
-import { readdir } from 'node:fs/promises';
+import { readdirSync } from 'node:fs';
 import { join } from 'path';
 import { PathTraversalError } from './erreurs';
 
@@ -16,20 +16,22 @@ export interface FournisseurChemin {
   cheminCsvNis2Simulateur: () => string;
 }
 
-export const construisListeFichiersDuSite = async (racine: string) => {
+export const construisListeFichiersDuSite = (racine: string) => {
   const repertoireAbsolu = join(process.cwd(), racine);
-  return (
-    await readdir(repertoireAbsolu, {
-      recursive: true,
-    })
-  ).map((fichier) => join(repertoireAbsolu, fichier));
+  return readdirSync(repertoireAbsolu, {
+    recursive: true,
+  }).map((fichier) => join(repertoireAbsolu, fichier as string));
 };
 
 const construisChemin = (...morceauxChemin: string[]): string => {
   for (const morceau of morceauxChemin) {
     valideChemin(morceau);
   }
-  return join(process.cwd(), 'front', '_site', ...morceauxChemin);
+  const chemin = join(process.cwd(), 'front', '_site', ...morceauxChemin);
+  if (!siteFront.fichiers().includes(chemin)) {
+    throw new Error(`Fichier inconnu ${chemin}`);
+  }
+  return chemin;
 };
 
 export const fournisseurChemin: FournisseurChemin = {
@@ -39,4 +41,15 @@ export const fournisseurChemin: FournisseurChemin = {
   ressourceDeBase: (ressource) => construisChemin(ressource),
   cheminCsvNis2Simulateur: () =>
     join(process.cwd(), 'back', 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
+};
+
+const cacheFichiers: string[] = [];
+
+export const siteFront = {
+  fichiers: () => {
+    if (cacheFichiers.length === 0) {
+      cacheFichiers.push(...construisListeFichiersDuSite('front'));
+    }
+    return cacheFichiers;
+  },
 };
