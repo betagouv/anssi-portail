@@ -38,8 +38,8 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
     infoLettre: boolean;
     telephone?: string;
   }) => {
-    axios
-      .post(
+    try {
+      await axios.post(
         `${urlBase}/contacts`,
         {
           updateEnabled: true,
@@ -52,15 +52,17 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
           },
         },
         enteteJSON
-      )
-      .catch((e) => {
-        if (e.response.data.message === 'Contact already exist') return Promise.resolve();
+      );
+    } catch (erreur: Error | unknown) {
+      if (axios.isAxiosError(erreur)) {
+        if (erreur.response?.data.message === 'Contact already exist') return Promise.resolve();
 
-        console.error(e, {
-          'Erreur renvoyée par API Brevo': e.response.data,
+        console.error(erreur, {
+          'Erreur renvoyée par API Brevo': erreur.response?.data,
         });
-        return Promise.reject(e);
-      });
+        return Promise.reject(erreur);
+      }
+    }
   },
   inscrisAInfolettre: async (email: string) => {
     try {
