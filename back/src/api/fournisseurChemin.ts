@@ -15,19 +15,18 @@ export interface FournisseurChemin {
   cheminCsvNis2Simulateur: () => string;
 }
 
+const construisChemin = (...morceauxChemin: string[]): string => {
+  for (const morceau of morceauxChemin) {
+    valideChemin(morceau);
+  }
+  return join(process.cwd(), 'front', '_site', ...morceauxChemin);
+};
+
 export const fournisseurChemin: FournisseurChemin = {
-  cheminPageJekyll: (nomPage: string) => {
-    valideChemin(nomPage);
-    return join(process.cwd(), 'front', '_site', nomPage, 'index.html');
-  },
-  cheminProduitJekyll: (repertoireProduits: string, idProduit: string) => {
-    valideChemin(idProduit);
-    return join(process.cwd(), 'front', '_site', repertoireProduits, idProduit);
-  },
-  ressourceDeBase: (ressource) => {
-    valideChemin(ressource);
-    return join(process.cwd(), 'front', '_site', ressource);
-  },
+  cheminPageJekyll: (nomPage: string) => construisChemin(nomPage, 'index.html'),
+  cheminProduitJekyll: (repertoireProduits: string, idProduit: string) =>
+    construisChemin(repertoireProduits, idProduit),
+  ressourceDeBase: (ressource) => construisChemin(ressource),
   cheminCsvNis2Simulateur: () =>
     join(process.cwd(), 'back', 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
 };
