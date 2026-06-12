@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { decode } from 'html-entities';
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
 import { Telephone } from '../metier/telephone';
@@ -13,9 +13,15 @@ const enteteJSON = {
 };
 const urlBase = process.env.BREVO_API_URL_BASE;
 
-export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
+type FonctionPostAxios = (url: string, data: unknown, config: AxiosRequestConfig<unknown> | undefined) => Promise<void>;
+
+const posteSurBrevo = async (url: string, data: unknown, config: AxiosRequestConfig<unknown> | undefined) => {
+  await axios.post(url, data, config);
+};
+
+export const adaptateurEmailBrevo = (fnAppelleAxios: FonctionPostAxios): AdaptateurEmail => ({
   envoieEmailBienvenue: async ({ email, prenom }: { email: string; prenom: string }) => {
-    await axios.post(
+    await fnAppelleAxios(
       `${urlBase}/smtp/email`,
       {
         to: [{ email }],
@@ -39,7 +45,7 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
     telephone?: string;
   }) => {
     try {
-      await axios.post(
+      await fnAppelleAxios(
         `${urlBase}/contacts`,
         {
           updateEnabled: true,
@@ -57,7 +63,7 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
       if (axios.isAxiosError(erreur)) {
         if (erreur.response?.data.message === 'Contact already exist') return Promise.resolve();
 
-        console.error(erreur, {
+        console.error(erreur.message, {
           'Erreur renvoyée par API Brevo': erreur.response?.data,
         });
         return Promise.reject(erreur);
@@ -89,4 +95,4 @@ export const adaptateurEmailBrevo = (): AdaptateurEmail => ({
 });
 
 export const fabriqueAdaptateurEmail = () =>
-  process.env.BREVO_CLE_API ? adaptateurEmailBrevo() : adaptateurEmailConsole();
+  process.env.BREVO_CLE_API ? adaptateurEmailBrevo(posteSurBrevo) : adaptateurEmailConsole();
