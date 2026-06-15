@@ -15,7 +15,7 @@ Cette analyse de conformité, c'est tout simplement un état des lieux : pour ch
 
 Si vous avez choisi une mesure alternative à celle attendue, notez-le explicitement avec sa justification : c'est ce qui vous permettra de défendre votre choix en cas de contrôle.`,
       action_prioritaire: `Établir un tableau d'analyse de conformité par système d'information : pour chaque exigence, indiquer si elle est mise en œuvre, partiellement appliquée ou non appliquée, et justifier les écarts.`,
-      action_facile_a_faire: `Bonne nouvelle : Si NIS2 ne s'applique pas à votre entité, cette mesure n'est pas à mettre en oeuvre.`,
+      action_facile_a_faire: `Si NIS2 ne s'applique pas à votre entité, cette mesure n'est pas à mettre en oeuvre.`,
       references_nis2: knex.raw('?::jsonb', [JSON.stringify(['2.C.1-EI/EE', '2.C.2-EI/EE'])]),
       risques: knex.raw('?::jsonb', [
         JSON.stringify([
