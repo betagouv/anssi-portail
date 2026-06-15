@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import Heros from '../ui/Heros.svelte';
   import BadgeCyberdepart from './BadgeCyberdepart.svelte';
+  import BasculeParcoursAvance from './BasculeParcoursAvance.svelte';
   import GrilleCartesMesures from './GrilleCartesMesures.svelte';
   import type { Mesure } from './mesure';
   import Progression from './Progression.svelte';
@@ -19,6 +20,7 @@
   const autresMesures = $derived(mesures.filter((_, index) => index >= 4));
   const progressionActuelle = $derived(mesures.filter((m) => m.estPriseEnCompte).length);
   const badgeDebloque = $derived(progressionActuelle >= cibleBadge);
+  const parcoursTermine = $derived(progressionActuelle === totalMesures);
 </script>
 
 <Heros
@@ -35,7 +37,9 @@
 
 <dsfr-container>
   <div class="progression">
-    {#if badgeDebloque}
+    {#if parcoursTermine}
+      <BasculeParcoursAvance />
+    {:else if badgeDebloque}
       <dsfr-alert
         type="info"
         has-description={true}
