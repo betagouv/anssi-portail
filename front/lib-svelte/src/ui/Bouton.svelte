@@ -6,7 +6,7 @@
     etire?: boolean;
     libelle?: string;
     titre?: string;
-    type: 'primaire' | 'secondaire' | 'secondaire-inverse' | 'tertiaire' | 'tertiaire-sans-bordure';
+    type?: 'primaire' | 'secondaire' | 'secondaire-inverse' | 'tertiaire' | 'tertiaire-sans-bordure';
     taille?: 'sm' | 'md';
     desactive?: boolean;
     boutonSoumission?: boolean;
@@ -20,7 +20,7 @@
     etire,
     libelle,
     titre,
-    type,
+    type = 'primaire',
     taille = undefined,
     desactive = false,
     boutonSoumission = false,
