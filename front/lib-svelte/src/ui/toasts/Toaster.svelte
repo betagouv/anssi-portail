@@ -1,0 +1,34 @@
+<script lang="ts">
+  import Toast from './Toast.svelte';
+  import { toasterStore } from './toaster.store';
+</script>
+
+{#if $toasterStore.queue.length}
+  <aside>
+    {#each $toasterStore.queue as { niveau, contenu, titre, id, boutonAction } (id)}
+      <Toast
+        {niveau}
+        {titre}
+        {contenu}
+        avecBoutonAction={boutonAction}
+        avecFermeture
+        onClose={() => toasterStore.fermeToast(id)}
+      />
+    {/each}
+  </aside>
+{/if}
+
+<style>
+  aside {
+    position: fixed;
+    right: 36px;
+    top: 0;
+    width: 540px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1em;
+    padding-top: 2em;
+    z-index: 1002;
+  }
+</style>
