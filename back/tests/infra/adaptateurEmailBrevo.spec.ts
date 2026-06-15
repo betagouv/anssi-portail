@@ -80,5 +80,31 @@ describe('L’adaptateur email Brevo', () => {
         }
       });
     });
+
+    describe('pour l’inscription à l’infolettre', () => {
+      it('ne loggue pas l’erreur levée, loggue le message', async () => {
+        let messageLog;
+        console.error = (message) => (messageLog = message);
+        try {
+          await brevo.inscrisAInfolettre('email');
+          assert.fail();
+        } catch {
+          assert.equal('Une erreur s’est produite', messageLog);
+        }
+      });
+
+      it('ne loggue pas trop d’informations', async () => {
+        let messagesLog: string[] = [];
+        console.error = (...messages: unknown[]) => (messagesLog = messages.map((m) => JSON.stringify(m)));
+        try {
+          await brevo.inscrisAInfolettre('email');
+          assert.fail();
+        } catch {
+          for (const message of messagesLog) {
+            assert.ok(message.length < 100);
+          }
+        }
+      });
+    });
   });
 });
