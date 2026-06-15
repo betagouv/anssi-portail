@@ -5,10 +5,43 @@ import { adaptateurEmailBrevo } from '../../src/infra/adaptateurEmailBrevo';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail';
 
 describe('L’adaptateur email Brevo', () => {
+  let fnPostAxios: (_url: string) => Promise<void>;
+  let brevo: AdaptateurEmail;
+  let postAxiosAppele: boolean = false;
+
+  const fauxContact = () => ({
+    email: 'mail@example.com',
+    prenom: 'Jeanne',
+    nom: 'Dupont',
+    infoLettre: true,
+  });
+
+  beforeEach(() => {
+    postAxiosAppele = false;
+    fnPostAxios = async (_url: string) => {
+      postAxiosAppele = true;
+    };
+    brevo = adaptateurEmailBrevo(fnPostAxios);
+  });
+
+  describe('pour la création de contact', () => {
+    it('poste un message à axios', async () => {
+      await brevo.creeContactBrevo(fauxContact());
+
+      assert.equal(true, postAxiosAppele);
+    });
+  });
+
+  describe('pour l’inscription à l’infolettre', () => {
+    it('poste un message à axios', async () => {
+      await brevo.inscrisAInfolettre('email');
+
+      assert.equal(true, postAxiosAppele);
+    });
+  });
+
   describe('lorsqu’une erreur se produit', () => {
     let fnConsoleError: typeof console.error;
-    let fnPostAxios: (_url: string) => Promise<never>;
-    let brevo: AdaptateurEmail;
 
     beforeEach(() => {
       fnConsoleError = console.error;
@@ -23,18 +56,12 @@ describe('L’adaptateur email Brevo', () => {
     });
 
     describe('pour la création de contact', () => {
-      const fauxContact = () => ({
-        email: 'mail@example.com',
-        prenom: 'Jeanne',
-        nom: 'Dupont',
-        infoLettre: true,
-      });
-
       it('ne loggue pas l’erreur levée, loggue le message', async () => {
         let messageLog;
         console.error = (message) => (messageLog = message);
         try {
           await brevo.creeContactBrevo(fauxContact());
+          assert.fail();
         } catch {
           assert.equal('Une erreur s’est produite', messageLog);
         }
@@ -45,6 +72,7 @@ describe('L’adaptateur email Brevo', () => {
         console.error = (...messages: unknown[]) => (messagesLog = messages.map((m) => JSON.stringify(m)));
         try {
           await brevo.creeContactBrevo(fauxContact());
+          assert.fail();
         } catch {
           for (const message of messagesLog) {
             assert.ok(message.length < 100);

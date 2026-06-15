@@ -72,7 +72,7 @@ export const adaptateurEmailBrevo = (fnAppelleAxios: FonctionPostAxios): Adaptat
   },
   inscrisAInfolettre: async (email: string) => {
     try {
-      await axios.post(
+      await fnAppelleAxios(
         `${urlBase}/contacts`,
         {
           updateEnabled: true,
