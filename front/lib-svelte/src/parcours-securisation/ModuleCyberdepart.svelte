@@ -8,8 +8,8 @@
   import Progression from './Progression.svelte';
 
   let mesures: Mesure[] = $state([]);
-
-  const CIBLE = 10;
+  const totalMesures = $derived(mesures.length);
+  const cibleBadge = $derived(Math.floor(mesures.length * 0.8));
 
   onMount(async () => {
     const reponse = await axios.get<Mesure[]>(`/api/modules/cyberdepart/mesures`);
@@ -18,7 +18,7 @@
   const mesuresMisesEnAvant = $derived(mesures.filter((_, index) => index < 4));
   const autresMesures = $derived(mesures.filter((_, index) => index >= 4));
   const progressionActuelle = $derived(mesures.filter((m) => m.estPriseEnCompte).length);
-  const cibleAtteinte = $derived(progressionActuelle >= CIBLE);
+  const badgeDebloque = $derived(progressionActuelle >= cibleBadge);
 </script>
 
 <Heros
@@ -35,15 +35,15 @@
 
 <dsfr-container>
   <div class="progression">
-    {#if cibleAtteinte}
+    {#if badgeDebloque}
       <dsfr-alert
         type="info"
         has-description={true}
         text="Complétez votre progression et accéder à des mesures plus avancées pour renforcer vos pratiques, mieux structurer vos actions et améliorer votre protection dans la durée."
       ></dsfr-alert>
     {/if}
-    <Progression actuel={progressionActuelle} max={13} cible={CIBLE}></Progression>
-    {#if cibleAtteinte}
+    <Progression actuel={progressionActuelle} max={totalMesures} cible={cibleBadge}></Progression>
+    {#if badgeDebloque}
       <BadgeCyberdepart />
     {/if}
   </div>
