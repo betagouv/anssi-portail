@@ -87,7 +87,7 @@ export const adaptateurEmailBrevo = (fnAppelleAxios: FonctionPostAxios): Adaptat
         if (erreur.response?.data.message === 'Contact already exist') {
           return undefined;
         }
-        console.error(erreur, { 'Erreur renvoyée par API Brevo': erreur.response?.data });
+        console.error(erreur.message, { 'Erreur renvoyée par API Brevo': erreur.response?.data });
         throw erreur;
       }
     }
