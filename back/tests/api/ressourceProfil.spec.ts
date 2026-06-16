@@ -165,6 +165,18 @@ describe('La ressource Profil', () => {
 
         assert.equal(reponse.body.peutGererLesGuides, false);
       });
+
+      it("est fausse si il n'y a pas d'utilisateur connecté", async () => {
+        const cookie = encodeSession({
+          email: 'email inconnu',
+          token: 'valide',
+          connexionAvecMFA: true,
+        });
+
+        const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
+
+        assert.equal(reponse.body.peutGererLesGuides, false);
+      });
     });
   });
 });

@@ -166,7 +166,9 @@ export const fabriqueMiddleware = ({
         if (requete.session?.email) {
           const emailHache = adaptateurHachage.hache(requete.session.email);
           requete.utilisateur = await entrepotUtilisateur.parEmailHache(emailHache);
-          requete.utilisateur.emailHache = emailHache;
+          if (requete.utilisateur) {
+            requete.utilisateur.emailHache = emailHache;
+          }
         }
         suite();
       } catch {
