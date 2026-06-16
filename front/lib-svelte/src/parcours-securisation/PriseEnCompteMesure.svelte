@@ -1,8 +1,8 @@
 <script lang="ts">
   import axios from 'axios';
+  import { untrack } from 'svelte';
   import Bouton from '../ui/Bouton.svelte';
   import type { Mesure } from './mesure';
-  import { untrack } from 'svelte';
 
   type Props = {
     mesure: Mesure;
@@ -15,6 +15,7 @@
     try {
       priseEnCompteEnCours = true;
       await axios.put(`/api/mesures/${mesure.id}/prise-en-compte`);
+      window.location.href = '/module-cyberdepart';
       mesurePriseEnCompte = true;
     } finally {
       priseEnCompteEnCours = false;
