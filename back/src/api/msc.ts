@@ -9,7 +9,6 @@ import { ConfigurationServeur } from './configurationServeur';
 import { ressourceFavori } from './favoris/ressourceFavori';
 import { ressourceFavoris } from './favoris/ressourceFavoris';
 import { ressourceFavorisPartages } from './favoris/ressourceFavorisPartages';
-import { fournisseurChemin } from './fournisseurChemin';
 import { ressourceDocumentGuide } from './guides/ressourceDocumentGuide';
 import { ressourceDocumentsGuide } from './guides/ressourceDocumentsGuide';
 import { ressourceGuide } from './guides/ressourceGuide';
@@ -303,7 +302,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     reponse
       .status(404)
       .set('Content-Type', 'text/html')
-      .envoieFichierEnrichi(fournisseurChemin.ressourceDeBase('404.html'));
+      .envoieFichierEnrichi(configurationServeur.fournisseurChemin.ressourceDeBase('404.html'));
   });
 
   return app;
