@@ -8,7 +8,6 @@ import { mesurePresentation } from './mesurePresentation';
 const ressourceMesuresDeModule = ({
   entrepotMesure,
   entrepotUtilisateur,
-  entrepotPriseEnCompte,
   adaptateurHachage,
   middleware,
 }: ConfigurationServeur) => {
@@ -23,14 +22,9 @@ const ressourceMesuresDeModule = ({
       const mesures = await entrepotMesure.tous();
       const utilisateur = requete.utilisateur as Utilisateur;
 
-      const prisesEnCompteDeLUtilisateur = await entrepotPriseEnCompte.pour(utilisateur);
-
       const mesuresPresentation = await Promise.all(
         mesures.map(async (mesure) => {
-          return mesurePresentation(
-            mesure,
-            prisesEnCompteDeLUtilisateur.find((pec) => pec.mesure.id === mesure.id)
-          );
+          return mesurePresentation(mesure, utilisateur.estPriseEnCompte(mesure));
         })
       );
       const mesuresTries = mesuresPresentation.toSorted((a, b) => a.ordre - b.ordre);

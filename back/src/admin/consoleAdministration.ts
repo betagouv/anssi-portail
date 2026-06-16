@@ -16,8 +16,11 @@ import {
   fabriqueAdaptateurRechercheEntreprise,
 } from '../infra/adaptateurRechercheEntreprise';
 import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres';
+import { EntrepotMesurePostgres } from '../infra/entrepotMesurePostgres';
 import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres';
+import { EntrepotExigenceGrist } from '../infra/nis2/entrepotExigenceGrist';
 import { UtilisateurBDD } from '../infra/utilisateurBDD';
+import { EntrepotExigence } from '../metier/nis2/entrepotExigence';
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
 import { EntrepotFavori } from '../metier/entrepotFavori';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
@@ -47,11 +50,18 @@ export class ConsoleAdministration {
       adaptateurEnvironnement,
     });
     this.adaptateurRechercheEntreprise = fabriqueAdaptateurRechercheEntreprise(adaptateurEnvironnement);
+
+    const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
+      adaptateurEnvironnement,
+    });
+    const entrepotMesure = new EntrepotMesurePostgres(entrepotExigence);
+
     this.entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
       adaptateurProfilAnssi,
       adaptateurRechercheEntreprise: this.adaptateurRechercheEntreprise,
       adaptateurChiffrement: this.adaptateurChiffrement,
       adaptateurHachage: this.adaptateurHachage,
+      entrepotMesure,
     });
     this.adaptateurEmail = fabriqueAdaptateurEmail();
     this.entrepotFavori = new EntrepotFavoriPostgres({

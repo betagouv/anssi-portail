@@ -5,12 +5,15 @@ import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
-import { PriseEnCompte } from '../../../src/metier/PriseEnCompte';
+import { Utilisateur } from '../../../src/metier/utilisateur';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
-import { EntrepotPriseEnCompteMemoire } from '../../persistance/EntrepotPriseEnCompteMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
+import {
+  configurationDeTestDuServeur,
+  fauxAdaptateurEnvironnement,
+  fauxAdaptateurRechercheEntreprise,
+} from '../fauxObjets';
 import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
 import { mesureDeTest } from './constructeurDeMesure';
 
@@ -18,7 +21,6 @@ describe('La ressource des mesures de sécurité d’un module', () => {
   describe('sur requête GET', () => {
     let serveur: Express;
     let entrepotMesure: EntrepotMesureMemoire;
-    let entrepotPriseEnCompte: EntrepotPriseEnCompteMemoire;
     let adaptateurEnvironnement: AdaptateurEnvironnement;
     let entrepotUtilisateur: EntrepotUtilisateur;
     const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
@@ -29,11 +31,9 @@ describe('La ressource des mesures de sécurité d’un module', () => {
       };
       entrepotMesure = new EntrepotMesureMemoire();
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
-      entrepotPriseEnCompte = new EntrepotPriseEnCompteMemoire();
       serveur = creeServeur({
         ...configurationDeTestDuServeur,
         entrepotMesure,
-        entrepotPriseEnCompte,
         entrepotUtilisateur,
         adaptateurEnvironnement,
       });
@@ -99,11 +99,26 @@ describe('La ressource des mesures de sécurité d’un module', () => {
 
     it('indique si les mesures ont été prises en compte', async () => {
       const mesureAuth5 = mesureAuthentA2Etapes();
+      const jeanDupont: Utilisateur = new Utilisateur(
+        {
+          email: 'hector.durant@mail.com',
+          prenom: 'Hector',
+          nom: 'Durant',
+          telephone: '0123456789',
+          domainesSpecialite: ['RSSI'],
+          siretEntite: '13000766900018',
+          cguAcceptees: true,
+          infolettreAcceptee: true,
+          mesuresPrisesEnCompte: [mesureAuth5],
+        },
+        fauxAdaptateurRechercheEntreprise
+      );
+      const cookieJeanDupont = encodeSession({ email: jeanDupont.email, token: 'valide' });
       await entrepotMesure.ajoute(mesureAuth5);
+      await entrepotUtilisateur.ajoute(jeanDupont);
       await entrepotMesure.ajoute(mesureDeTest().avecLId('MES1').avecLOrdre(15).construis());
-      await entrepotPriseEnCompte.ajoute(new PriseEnCompte(jeanneDupont, mesureAuth5));
 
-      const { body } = await getMesuresConnecte();
+      const { body } = await request(serveur).get('/api/modules/cyberdepart/mesures').set('Cookie', cookieJeanDupont);
 
       assert.equal(body[0].estPriseEnCompte, true);
       assert.equal(body[1].estPriseEnCompte, false);

@@ -7,12 +7,15 @@ import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnem
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
 import { Mesure } from '../../../src/metier/mesure';
 import { ExigenceNIS2 } from '../../../src/metier/nis2/exigence';
-import { PriseEnCompte } from '../../../src/metier/PriseEnCompte';
+import { Utilisateur } from '../../../src/metier/utilisateur';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
-import { EntrepotPriseEnCompteMemoire } from '../../persistance/EntrepotPriseEnCompteMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
+import {
+  configurationDeTestDuServeur,
+  fauxAdaptateurEnvironnement,
+  fauxAdaptateurRechercheEntreprise,
+} from '../fauxObjets';
 import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
 
 describe('La ressource mesure de sécurité', () => {
@@ -21,7 +24,6 @@ describe('La ressource mesure de sécurité', () => {
     let entrepotMesure: EntrepotMesureMemoire;
     let adaptateurEnvironnement: AdaptateurEnvironnement;
     let entrepotUtilisateur: EntrepotUtilisateur;
-    let entrepotPriseEnCompte: EntrepotPriseEnCompteMemoire;
     let authentA2Etapes: Mesure;
     const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
 
@@ -36,12 +38,10 @@ describe('La ressource mesure de sécurité', () => {
       entrepotMesure = new EntrepotMesureMemoire();
       authentA2Etapes = mesureAuthentA2Etapes();
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
-      entrepotPriseEnCompte = new EntrepotPriseEnCompteMemoire();
       serveur = creeServeur({
         ...configurationDeTestDuServeur,
         entrepotMesure,
         entrepotUtilisateur,
-        entrepotPriseEnCompte,
         adaptateurEnvironnement,
       });
 
@@ -138,9 +138,24 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
     });
 
     it('indique que la mesure a été prise en compte', async () => {
-      await entrepotPriseEnCompte.ajoute(new PriseEnCompte(jeanneDupont, authentA2Etapes));
+      const jeanDupont: Utilisateur = new Utilisateur(
+        {
+          email: 'hector.durant@mail.com',
+          prenom: 'Hector',
+          nom: 'Durant',
+          telephone: '0123456789',
+          domainesSpecialite: ['RSSI'],
+          siretEntite: '13000766900018',
+          cguAcceptees: true,
+          infolettreAcceptee: true,
+          mesuresPrisesEnCompte: [authentA2Etapes],
+        },
+        fauxAdaptateurRechercheEntreprise
+      );
+      const cookieJeanDupont = encodeSession({ email: jeanDupont.email, token: 'valide' });
+      await entrepotUtilisateur.ajoute(jeanDupont);
 
-      const { body } = await getConnecte(serveur, cookieJeanneDupont);
+      const { body } = await getConnecte(serveur, cookieJeanDupont);
 
       assert.equal(body.estPriseEnCompte, true);
     });
