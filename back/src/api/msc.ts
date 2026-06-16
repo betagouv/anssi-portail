@@ -181,11 +181,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/guides/:slug', ressourcePagesJekyll(configurationServeur, 'guides'));
 
-  ['ma-maturite', 'favoris', 'services-anssi', 'gestion-guides', 'module-cyberdepart'].forEach((page) =>
+  ['ma-maturite', 'favoris', 'services-anssi', 'gestion-guides'].forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyllConnectees(configurationServeur, page))
   );
-
-  app.use('/mesures/:id', ressourcePagesJekyllConnectees(configurationServeur, 'mesures'));
 
   app.use('/connexion', ressourcePageConnexion(configurationServeur));
 
@@ -293,6 +291,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ressourcePriseEnCompte(configurationServeur)
     );
     app.use('/api/modules/cyberdepart/mesures', ressourceMesuresDeModule(configurationServeur));
+    app.use('/module-cyberdepart', ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart'));
+    app.use('/mesures/:id', ressourcePagesJekyllConnectees(configurationServeur, 'mesures'));
   }
 
   // A laisser à la fin de la fonction
