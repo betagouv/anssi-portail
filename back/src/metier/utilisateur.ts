@@ -1,4 +1,5 @@
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
+import { Mesure } from './mesure';
 
 export type Role = 'GESTION_GUIDES';
 
@@ -46,6 +47,7 @@ interface InformationsCreationUtilisateur {
   idListeFavoris?: string;
   organisation?: Organisation;
   roles?: Role[];
+  mesuresPrisesEnCompte?: Mesure[];
 }
 
 export class Utilisateur {
@@ -61,6 +63,7 @@ export class Utilisateur {
   private adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   private _organisation: Organisation | undefined;
   roles: Role[];
+  mesuresPrisesEnCompte: Mesure[];
 
   constructor(
     {
@@ -75,6 +78,7 @@ export class Utilisateur {
       idListeFavoris,
       organisation,
       roles = [],
+      mesuresPrisesEnCompte = [],
     }: InformationsCreationUtilisateur,
     adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise
   ) {
@@ -90,6 +94,7 @@ export class Utilisateur {
     this.idListeFavoris = idListeFavoris ?? undefined;
     this._organisation = organisation;
     this.roles = roles;
+    this.mesuresPrisesEnCompte = mesuresPrisesEnCompte;
   }
 
   async organisation(): Promise<Organisation> {
@@ -107,4 +112,8 @@ export class Utilisateur {
   peutManipulerLesDocumentsDUnGuide = () => {
     return this.roles.includes('GESTION_GUIDES');
   };
+
+  estPriseEnCompte(mesure: Mesure): boolean {
+    return this.mesuresPrisesEnCompte.some((m) => m.id === mesure.id);
+  }
 }

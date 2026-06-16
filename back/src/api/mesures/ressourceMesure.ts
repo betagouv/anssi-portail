@@ -8,7 +8,6 @@ import { mesurePresentation } from './mesurePresentation';
 const ressourceMesure = ({
   entrepotMesure,
   entrepotUtilisateur,
-  entrepotPriseEnCompte,
   adaptateurHachage,
   middleware,
 }: ConfigurationServeur) => {
@@ -26,9 +25,9 @@ const ressourceMesure = ({
       }
 
       const utilisateur = requete.utilisateur as Utilisateur | undefined;
-      const priseEnCompte = utilisateur ? await entrepotPriseEnCompte.pour(utilisateur, mesureTrouvee) : undefined;
+      const estPriseEnCompte = utilisateur?.estPriseEnCompte(mesureTrouvee) ?? false;
 
-      const mesurePresentee = await mesurePresentation(mesureTrouvee, priseEnCompte);
+      const mesurePresentee = await mesurePresentation(mesureTrouvee, estPriseEnCompte);
       reponse.status(200).send(mesurePresentee);
     })
   );

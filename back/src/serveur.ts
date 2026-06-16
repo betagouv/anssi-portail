@@ -56,16 +56,6 @@ const entrepotFinancement = new EntrepotFinancementGrist({
 const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
 const entrepotSecretHachage = new EntrepotSecretHachagePostgres();
 const adaptateurRechercheEntreprise = fabriqueAdaptateurRechercheEntreprise(adaptateurEnvironnement);
-const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
-  adaptateurProfilAnssi,
-  adaptateurRechercheEntreprise,
-  adaptateurChiffrement,
-  adaptateurHachage,
-});
-const entrepotResultatTest = new EntrepotResultatTestPostgres({
-  adaptateurHachage,
-  entrepotUtilisateur,
-});
 
 const entrepotGuide: EntrepotGuide = new EntrepotGuideGrist({
   adaptateurEnvironnement,
@@ -80,6 +70,19 @@ const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
 });
 
 const entrepotMesure: EntrepotMesure = new EntrepotMesurePostgres(entrepotExigence);
+
+const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
+  adaptateurProfilAnssi,
+  adaptateurRechercheEntreprise,
+  adaptateurChiffrement,
+  adaptateurHachage,
+  entrepotMesure,
+});
+const entrepotResultatTest = new EntrepotResultatTestPostgres({
+  adaptateurHachage,
+  entrepotUtilisateur,
+});
+
 const entrepotPriseEnCompte = new EntrepotPriseEnComptePostgres(adaptateurHachage, entrepotMesure);
 
 const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });

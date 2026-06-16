@@ -1,9 +1,8 @@
 import { Mesure } from '../../metier/mesure';
-import { PriseEnCompte } from '../../metier/PriseEnCompte';
 
-export const mesurePresentation = async (mesure: Mesure, priseEnCompte: PriseEnCompte | undefined) => {
+export const mesurePresentation = async (mesure: Mesure, estPriseEnCompte: boolean) => {
   return {
     ...mesure,
-    estPriseEnCompte: !!priseEnCompte,
+    estPriseEnCompte,
   };
 };

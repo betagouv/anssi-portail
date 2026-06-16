@@ -1,6 +1,7 @@
 import Knex from 'knex';
 import pThrottle from 'p-throttle';
 import config from '../../knexfile';
+import { EntrepotMesure } from '../metier/entrepotMesure';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { Organisation, Role, Utilisateur } from '../metier/utilisateur';
 import { AdaptateurChiffrement } from './adaptateurChiffrement';
@@ -21,23 +22,27 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
   adaptateurChiffrement: AdaptateurChiffrement;
   adaptateurHachage: AdaptateurHachage;
+  entrepotMesure: EntrepotMesure;
 
   constructor({
     adaptateurProfilAnssi,
     adaptateurRechercheEntreprise,
     adaptateurHachage,
     adaptateurChiffrement,
+    entrepotMesure,
   }: {
     adaptateurProfilAnssi: AdaptateurProfilAnssi;
     adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
     adaptateurHachage: AdaptateurHachage;
     adaptateurChiffrement: AdaptateurChiffrement;
+    entrepotMesure: EntrepotMesure;
   }) {
     this.knex = Knex(config);
     this.adaptateurProfilAnssi = adaptateurProfilAnssi;
     this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
     this.adaptateurChiffrement = adaptateurChiffrement;
     this.adaptateurHachage = adaptateurHachage;
+    this.entrepotMesure = entrepotMesure;
   }
 
   private chiffreDonneesUtilisateur(utilisateur: Utilisateur): UtilisateurBDD {
@@ -77,6 +82,21 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     });
   }
 
+  private async recupereMesuresPrisesEnCompte(utilisateur: UtilisateurBDD) {
+    const priseEnComptePersistees = await this.knex<{
+      id_mesure: string;
+    }>('prises_en_compte')
+      .where('email_utilisateur_hache', utilisateur.email_hache)
+      .select(['id_mesure']);
+
+    const toutesLesMesures = await this.entrepotMesure.tous();
+
+    const mesuresPrisesEnCompte = toutesLesMesures.filter((mesure) =>
+      priseEnComptePersistees.some((pec) => pec.id_mesure === mesure.id)
+    );
+    return mesuresPrisesEnCompte;
+  }
+
   private async hydrateUtilisateur(utilisateur: UtilisateurBDD) {
     const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
     const profilAnssi = await this.adaptateurProfilAnssi.recupere(donnees.email);
@@ -94,6 +114,8 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
     const codeActivite = organisationRelue[0].codeActivite;
 
+    const mesuresPrisesEnCompte = await this.recupereMesuresPrisesEnCompte(utilisateur);
+
     return new Utilisateur(
       {
         email: donnees.email,
@@ -107,6 +129,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         idListeFavoris: utilisateur.id_liste_favoris,
         organisation: new Organisation({ ...organisation, codeActivite }),
         roles: utilisateur.roles as unknown as Role[],
+        mesuresPrisesEnCompte,
       },
       this.adaptateurRechercheEntreprise
     );
