@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from '../axiosInstance';
 import knex, { QueryBuilder } from 'knex';
 import { EntrepotExigence } from '../../metier/nis2/entrepotExigence';
 import {
@@ -57,7 +57,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
   private readonly urlDocument: string;
   private readonly croisements: Croisements;
   constructor({
-    clientHttp = axios,
+    clientHttp = axiosInstance,
     adaptateurEnvironnement,
   }: {
     clientHttp?: ClientHttp;

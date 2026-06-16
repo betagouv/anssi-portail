@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from './axiosInstance';
 import {
   AvisNegatifSurUneMesure,
   AvisUtilisateur,
@@ -22,7 +22,7 @@ Raison : ${retourExperience.raison}
 Précision : ${aseptiseMarkdown(retourExperience.precision ?? '')}
 Email de contact : ${retourExperience.emailDeContact}`;
 
-      await axios.post(urlWebhook, { text: message });
+      await axiosInstance.post(urlWebhook, { text: message });
     }
   },
 
@@ -35,7 +35,7 @@ Un utilisateur a laissé un avis
 Niveau de satisfaction : ${avisUtilisateur.niveauDeSatisfaction}
 Commentaire : ${aseptiseMarkdown(avisUtilisateur.commentaire ?? '')}
 Email de contact : ${avisUtilisateur.emailDeContact}`;
-      await axios.post(urlWebhook, { text: message });
+      await axiosInstance.post(urlWebhook, { text: message });
     }
   },
 
@@ -47,7 +47,7 @@ Email de contact : ${avisUtilisateur.emailDeContact}`;
 **Titre :** ${avis.titreMesure}
 Un utilisateur a laissé un avis négatif :
 ${aseptiseMarkdown(avis.commentaire ?? '')}`;
-      await axios.post(urlWebhook, { text: message });
+      await axiosInstance.post(urlWebhook, { text: message });
     }
   },
 });

@@ -1,4 +1,5 @@
-import axios from 'axios';
+import { isAxiosError } from 'axios';
+import axiosInstance from './axiosInstance';
 import { decode } from 'html-entities';
 import { adaptateurProfilAnssiVide } from './adaptateurProfilAnssiVide';
 
@@ -32,7 +33,7 @@ export interface AdaptateurProfilAnssi {
 const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
   const metsAJour = async ({ nom, prenom, email, organisation, telephone, domainesSpecialite }: ProfilAnssi) => {
     const urlProfil = `${process.env.PROFIL_ANSSI_URL_BASE}/profil/${email}`;
-    await axios.put(
+    await axiosInstance.put(
       urlProfil,
       {
         nom,
@@ -48,12 +49,12 @@ const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
   const recupere = async (email: string) => {
     const urlProfil = `${process.env.PROFIL_ANSSI_URL_BASE}/profil/${email}`;
     try {
-      const reponse = await axios.get(urlProfil, CONFIGURATION_AUTHENTIFICATION);
+      const reponse = await axiosInstance.get(urlProfil, CONFIGURATION_AUTHENTIFICATION);
       return JSON.parse(
         JSON.stringify(reponse.data, (_cle, valeur) => (typeof valeur === 'string' ? decode(valeur) : valeur))
       );
     } catch (e) {
-      if (axios.isAxiosError(e) && e.response?.status !== 404) {
+      if (isAxiosError(e) && e.response?.status !== 404) {
         console.error({
           'Erreur renvoyée par API MonProfilAnssi': e.response?.data,
           'Statut renvoyé par API MonProfilAnssi': e.response?.status,
@@ -66,10 +67,10 @@ const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
   const recherche = async ({ emails }: { emails: string[] }): Promise<ProfilAnssi[]> => {
     const urlProfil = `${process.env.PROFIL_ANSSI_URL_BASE}/profils/recherche`;
     try {
-      const reponse = await axios.post<ProfilAnssi[]>(urlProfil, { emails }, CONFIGURATION_AUTHENTIFICATION);
+      const reponse = await axiosInstance.post<ProfilAnssi[]>(urlProfil, { emails }, CONFIGURATION_AUTHENTIFICATION);
       return reponse.data;
     } catch (e) {
-      if (axios.isAxiosError(e) && e.response?.status !== 404) {
+      if (isAxiosError(e) && e.response?.status !== 404) {
         console.error({
           'Erreur renvoyée par API MonProfilAnssi': e.response?.data,
           'Statut renvoyé par API MonProfilAnssi': e.response?.status,
