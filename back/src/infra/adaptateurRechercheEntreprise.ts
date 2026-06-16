@@ -1,4 +1,5 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
+import axiosInstance from './axiosInstance';
 import { regions } from '../metier/referentielRegions';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 import { RechercheEntrepriseAvecCache } from './RechercheEntrepriseAvecCache';
@@ -98,7 +99,7 @@ const creerRechercheSansCache = (apiUrl: string): AdaptateurRechercheEntreprise 
     const siegeEnFrance = (resultat: ResultatSirene) => resultat.siege.departement !== null;
 
     try {
-      const reponse = await axios.get<{ results: ResultatSirene[] }>(apiUrl, {
+      const reponse = await axiosInstance.get<{ results: ResultatSirene[] }>(apiUrl, {
         params: {
           q: terme,
           ...(departement && { departement }),

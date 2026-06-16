@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from './axiosInstance';
 import { EntrepotFinancement } from '../metier/entrepotFinancement';
 import { Financement } from '../metier/financement';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
@@ -27,7 +27,7 @@ export type FinancementGrist = {
 
 export class EntrepotFinancementGrist extends EntrepotGrist<FinancementGrist> implements EntrepotFinancement {
   constructor({
-    clientHttp = axios,
+    clientHttp = axiosInstance,
     adaptateurEnvironnement,
   }: {
     clientHttp: ClientHttp;

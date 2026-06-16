@@ -1,6 +1,7 @@
 import { DeleteObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { fromEnv } from '@aws-sdk/credential-providers';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse, isAxiosError } from 'axios';
+import axiosInstance from './axiosInstance';
 import { Readable } from 'node:stream';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
 
@@ -36,7 +37,7 @@ export interface AdaptateurCellar {
 export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnement): AdaptateurCellar => ({
   async get(nomDuFichier: string, cleDuBucket: CleDuBucket) {
     try {
-      const reponse = await axios.get(
+      const reponse = await axiosInstance.get(
         `${selectionneURLCellarLecturePourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
         { responseType: 'arraybuffer', timeout: 30_000 }
       );
@@ -47,7 +48,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
         nom: nomDuFichier,
       };
     } catch (erreur: Error | unknown) {
-      if (axios.isAxiosError(erreur) && erreur.response?.status === 403) {
+      if (isAxiosError(erreur) && erreur.response?.status === 403) {
         return undefined;
       }
       throw erreur;
@@ -56,7 +57,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
 
   async getStream(nomDuFichier, cleDuBucket): Promise<FluxCellar | undefined> {
     try {
-      const reponse: AxiosResponse<Readable> = await axios.get(
+      const reponse: AxiosResponse<Readable> = await axiosInstance.get(
         `${selectionneURLCellarLecturePourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
         { responseType: 'stream', timeout: 30_000 }
       );
@@ -66,7 +67,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
         tailleDuContenu: Number(reponse.headers['content-length']),
       };
     } catch (erreur: Error | unknown) {
-      if (axios.isAxiosError(erreur)) {
+      if (isAxiosError(erreur)) {
         erreur.response?.data?.destroy?.();
         if (erreur.response?.status === 403) return undefined;
       }
@@ -76,7 +77,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
 
   async existe(nomDuFichier, cleDuBucket): Promise<boolean> {
     try {
-      await axios.head(
+      await axiosInstance.head(
         `${selectionneURLCellarLecturePourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`
       );
       return true;

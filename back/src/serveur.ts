@@ -1,5 +1,5 @@
 import { CmsCrisp } from '@lab-anssi/lib';
-import axios from 'axios';
+import axiosInstance from './infra/axiosInstance';
 import { adaptateurJWT } from './api/adaptateurJWT';
 import { fournisseurChemin } from './api/fournisseurChemin';
 import { fabriqueMiddleware } from './api/middleware';
@@ -50,7 +50,7 @@ const adaptateurHachage = fabriqueAdaptateurHachage({
 
 const entrepotFavori = new EntrepotFavoriPostgres({ adaptateurHachage });
 const entrepotFinancement = new EntrepotFinancementGrist({
-  clientHttp: axios,
+  clientHttp: axiosInstance,
   adaptateurEnvironnement,
 });
 const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();
