@@ -15,6 +15,7 @@
     try {
       priseEnCompteEnCours = true;
       await axios.put(`/api/mesures/${mesure.id}/prise-en-compte`);
+      sessionStorage.setItem('mesure-prise-en-compte', 'true');
       window.location.href = '/module-cyberdepart';
       mesurePriseEnCompte = true;
     } finally {

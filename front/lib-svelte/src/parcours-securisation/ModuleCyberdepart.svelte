@@ -2,6 +2,8 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import Heros from '../ui/Heros.svelte';
+  import { toasterStore } from '../ui/toasts/toaster.store';
+  import Toaster from '../ui/toasts/Toaster.svelte';
   import BadgeCyberdepart from './BadgeCyberdepart.svelte';
   import BasculeParcoursAvance from './BasculeParcoursAvance.svelte';
   import GrilleCartesMesures from './GrilleCartesMesures.svelte';
@@ -15,6 +17,10 @@
   onMount(async () => {
     const reponse = await axios.get<Mesure[]>(`/api/modules/cyberdepart/mesures`);
     mesures = reponse.data;
+    if (sessionStorage.getItem('mesure-prise-en-compte') === 'true') {
+      toasterStore.succes('Mesure déclarée prise en compte', 'Mesure déclarée prise en compte');
+      sessionStorage.removeItem('mesure-prise-en-compte');
+    }
   });
   const mesuresMisesEnAvant = $derived(mesures.filter((_, index) => index < 4));
   const autresMesures = $derived(mesures.filter((_, index) => index >= 4));
@@ -23,6 +29,7 @@
   const parcoursTermine = $derived(progressionActuelle === totalMesures);
 </script>
 
+<Toaster />
 <Heros
   cacheActions={true}
   cacheIllustration={true}
