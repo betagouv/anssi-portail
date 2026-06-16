@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { decode } from 'html-entities';
 import { estCodeDepartement, regionDuDepartement } from '../metier/referentielDepartements';
-import { Organisation } from '../metier/utilisateur';
+import { Organisation, Utilisateur } from '../metier/utilisateur';
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 import { corpsVide, valideCorpsRequete } from './zod';
@@ -23,8 +23,8 @@ const ressourceProfil = ({
       } catch {
         reponse.clearCookie('session');
       } finally {
-        const utilisateurConnecte = requete.utilisateur;
-        const organisation: Organisation = await utilisateurConnecte?.organisation();
+        const utilisateurConnecte = requete.utilisateur as Utilisateur | undefined;
+        const organisation: Organisation | undefined = await utilisateurConnecte?.organisation();
 
         const codeDepartement = estCodeDepartement(organisation?.departement) ? organisation.departement : undefined;
 
@@ -41,7 +41,7 @@ const ressourceProfil = ({
           codeRegion,
           codeActivite: organisation?.codeActivite,
           peutGererLesGuides:
-            !!requete.session?.connexionAvecMFA && utilisateurConnecte.peutManipulerLesDocumentsDUnGuide(),
+            (requete.session?.connexionAvecMFA && utilisateurConnecte?.peutManipulerLesDocumentsDUnGuide()) ?? false,
         });
       }
     })
