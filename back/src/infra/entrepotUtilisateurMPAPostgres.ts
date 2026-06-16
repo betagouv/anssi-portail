@@ -82,11 +82,11 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     });
   }
 
-  private async recupereMesuresPrisesEnCompte(utilisateur: UtilisateurBDD) {
+  private async recupereMesuresPrisesEnCompte(utilisateurBDD: UtilisateurBDD) {
     const priseEnComptePersistees = await this.knex<{
       id_mesure: string;
     }>('prises_en_compte')
-      .where('email_utilisateur_hache', utilisateur.email_hache)
+      .where('email_utilisateur_hache', utilisateurBDD.email_hache)
       .select(['id_mesure']);
 
     const toutesLesMesures = await this.entrepotMesure.tous();
@@ -97,11 +97,11 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     return mesuresPrisesEnCompte;
   }
 
-  private async hydrateUtilisateur(utilisateur: UtilisateurBDD) {
-    const donnees = this.dechiffreDonneesUtilisateur(utilisateur);
+  private async hydrateUtilisateur(utilisateurBDD: UtilisateurBDD) {
+    const donnees = this.dechiffreDonneesUtilisateur(utilisateurBDD);
     const profilAnssi = await this.adaptateurProfilAnssi.recupere(donnees.email);
     if (!profilAnssi) {
-      console.warn('Utilisateur trouvé en base de données sans profil ANSSI ', utilisateur.email_hache);
+      console.warn('Utilisateur trouvé en base de données sans profil ANSSI ', utilisateurBDD.email_hache);
       return undefined;
     }
 
@@ -114,7 +114,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
     const codeActivite = organisationRelue[0].codeActivite;
 
-    const mesuresPrisesEnCompte = await this.recupereMesuresPrisesEnCompte(utilisateur);
+    const mesuresPrisesEnCompte = await this.recupereMesuresPrisesEnCompte(utilisateurBDD);
 
     return new Utilisateur(
       {
@@ -126,9 +126,9 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         cguAcceptees: donnees.cguAcceptees,
         infolettreAcceptee: donnees.infolettreAcceptee,
         siretEntite: organisation.siret,
-        idListeFavoris: utilisateur.id_liste_favoris,
+        idListeFavoris: utilisateurBDD.id_liste_favoris,
         organisation: new Organisation({ ...organisation, codeActivite }),
-        roles: utilisateur.roles as unknown as Role[],
+        roles: utilisateurBDD.roles as unknown as Role[],
         mesuresPrisesEnCompte,
       },
       this.adaptateurRechercheEntreprise
@@ -137,25 +137,27 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
 
   async parEmailHache(emailHache: string): Promise<Utilisateur | undefined> {
     if (!emailHache) return undefined;
-    const utilisateur = await this.knex('utilisateurs').where({ email_hache: emailHache }).first();
-    if (!utilisateur) return undefined;
-    return this.hydrateUtilisateur(utilisateur);
+    const utilisateurBDD = await this.knex<UtilisateurBDD>('utilisateurs').where({ email_hache: emailHache }).first();
+    if (!utilisateurBDD) return undefined;
+    return this.hydrateUtilisateur(utilisateurBDD);
   }
 
   async parIdListeFavoris(idListeFavoris: string): Promise<Utilisateur | undefined> {
-    const utilisateur = await this.knex('utilisateurs').where({ id_liste_favoris: idListeFavoris }).first();
-    if (!utilisateur) return undefined;
+    const utilisateurBDD = await this.knex<UtilisateurBDD>('utilisateurs')
+      .where({ id_liste_favoris: idListeFavoris })
+      .first();
+    if (!utilisateurBDD) return undefined;
 
-    return this.hydrateUtilisateur(utilisateur);
+    return this.hydrateUtilisateur(utilisateurBDD);
   }
 
   async existe(emailHache: string) {
-    const utilisateur = await this.knex('utilisateurs').where({ email_hache: emailHache }).first();
-    return !!utilisateur;
+    const utilisateurBDD = await this.knex<UtilisateurBDD>('utilisateurs').where({ email_hache: emailHache }).first();
+    return !!utilisateurBDD;
   }
 
   async tous() {
-    const utilisateursBDD = await this.knex('utilisateurs');
+    const utilisateursBDD = await this.knex<UtilisateurBDD>('utilisateurs');
     const result: Utilisateur[] = [];
     const enCadence = pThrottle({ limit: 1, interval: 700 });
 
