@@ -10,6 +10,7 @@ import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
 import { Utilisateur } from '../metier/utilisateur';
 import { AdaptateurJWT } from './adaptateurJWT';
 import { FournisseurChemin } from './fournisseurChemin';
+import { detruisSession } from './session';
 
 type FonctionMiddleware = (requete: Request, reponse: Response, suite: NextFunction) => Promise<void>;
 
@@ -153,8 +154,7 @@ export const fabriqueMiddleware = ({
         adaptateurJWT.decode(requete.session?.token);
       } catch (e) {
         if (e instanceof TokenExpiredError) {
-          reponse.clearCookie('session');
-          requete.session = null;
+          detruisSession(requete, reponse);
           suite();
           return;
         }
