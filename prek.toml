@@ -11,5 +11,5 @@ hooks = [
 [[repos]]
 repo = "local"
 hooks = [
-    { id = "format", name = "format", entry = "pnpm format", language = "system", types = [ "file" ], pass_filenames = false },
+    { id = "format", name = "format", entry = "pnpm exec prettier --write", language = "system", files = "\\.(js|ts|jsx|tsx|json|svelte|css|scss|md|html|cjs|mjs|yaml)$", pass_filenames = true, stages = [ "commit" ] },
 ]
