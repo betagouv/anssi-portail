@@ -47,6 +47,7 @@ import { ressourcePagesJekyll } from './ressourcePagesJekyll';
 import { ressourcePagesJekyllConnectees } from './ressourcePagesJekyllConnectees';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceRetoursExperience } from './ressourceRetoursExperience';
+import { ressourceRobotsTxt } from './ressourceRobotsTxt';
 import { ressourceSanteGuides } from './ressourceSanteGuides';
 import { ressourceStatistiques } from './ressourceStatistiques';
 import { ressourceStatistiquesDiagnostic } from './ressourceStatistiquesDiagnostic';
@@ -294,6 +295,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     app.use('/module-cyberdepart', ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart'));
     app.use('/mesures/:id', ressourcePagesJekyllConnectees(configurationServeur, 'mesures'));
   }
+
+  // A laisser à la fin de la fonction
+  app.use('/robots.txt', ressourceRobotsTxt(configurationServeur));
 
   // A laisser à la fin de la fonction
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
