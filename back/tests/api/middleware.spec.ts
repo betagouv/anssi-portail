@@ -309,6 +309,7 @@ describe('Le middleware', () => {
       assert.equal(requete.utilisateur, undefined);
       assert.equal(suiteAppelee, true);
       assert.equal(cookieNettoye, 'session');
+      assert.equal(requete.session, null);
     });
 
     it('n’ajoute pas d’utilisateur (mais n’échoue pas) s’il n’y a pas de token', async () => {
