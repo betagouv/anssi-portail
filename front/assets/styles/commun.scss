@@ -95,6 +95,10 @@
     .fond-sombre & {
       color: var(--text-inverted-grey);
     }
+
+    .fond-clair & {
+      color: var(--text-title-grey);
+    }
   }
 
   h1,
@@ -216,7 +220,11 @@
     color: var(--text-mention-grey);
   }
 
-  .texte-chapo-xl, .texte-article-lg, .texte-standard-md, .texte-detail-sm, .texte-mention-xs{
+  .texte-chapo-xl,
+  .texte-article-lg,
+  .texte-standard-md,
+  .texte-detail-sm,
+  .texte-mention-xs {
     .fond-sombre & {
       color: var(--text-inverted-grey);
     }

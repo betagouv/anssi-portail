@@ -164,9 +164,9 @@
         <div class="aucun-resultat">
           <img src="/assets/images/homme-cherchant-avec-loupe.svg" alt="Aucun résultat" />
           {#if chargement}
-            <h1>Chargement...</h1>
+            <h3>Chargement...</h3>
           {:else}
-            <h1>Désolé, aucun résultat trouvé</h1>
+            <h3>Désolé, aucun résultat trouvé</h3>
             <input
               type="button"
               class="bouton primaire"
@@ -182,7 +182,7 @@
       {:else}
         <div class="aucun-resultat">
           <img src="/assets/images/homme-cherchant-avec-loupe.svg" alt="Aucun résultat" />
-          <h1>Désolé, aucun résultat trouvé</h1>
+          <h3>Désolé, aucun résultat trouvé</h3>
           <input
             type="button"
             class="bouton primaire"
