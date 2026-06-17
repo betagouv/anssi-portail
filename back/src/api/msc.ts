@@ -66,6 +66,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   configurationServeur.adaptateurGestionErreur.initialise(app);
 
+  const { fournisseurChemin } = configurationServeur;
+
   app.use(compression());
 
   app.use(configurationServeur.middleware.ajouteMethodeEnrichissement);
@@ -119,7 +121,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(json());
 
   const brancheLesRessourcesStatiques = (avecCors: boolean) => (ressource: string) => {
-    const sertLesFichiersStatiques = express.static(configurationServeur.fournisseurChemin.ressourceDeBase(ressource), {
+    const sertLesFichiersStatiques = express.static(fournisseurChemin.ressourceDeBase(ressource), {
       setHeaders: (reponse: Response) =>
         reponse.setHeader('cache-control', process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'),
     });
