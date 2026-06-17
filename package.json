@@ -10,7 +10,7 @@
     "build": "pnpm -r build",
     "dev": "concurrently -n \"SERVEUR,SVELTE,JEKYLL,BDD,MIGRE\" --prefix-colors \"cyan,green,magenta,blue,yellow\" \"SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD=true node --watch --import tsx --env-file .env ./back/src/serveur.ts\" \"pnpm --filter @anssi-portail/svelte watch\" \"sleep 5 && SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD=true ${GEM_HOME}/bin/jekyll build -s ./front -d ./front/_site -w\" \"docker compose up db\" \"sleep 3 && pnpm migre-bdd\"",
     "lint": "pnpm -r lint",
-    "format": "pnpm -r format",
+    "format": "pnpm --reporter=append-only -r format",
     "test": "pnpm --reporter=append-only -r test",
     "migre-bdd": "pnpm --filter @anssi-portail/back migre-bdd",
     "preinstall": "npx only-allow@1.2.2 pnpm",
@@ -25,6 +25,7 @@
   "devDependencies": {
     "concurrently": "^9.2.1",
     "prettier": "3.3.3",
+    "prettier-plugin-svelte": "^3.5.1",
     "tsx": "^4.21.0",
     "vitest": "^3.2.4"
   },

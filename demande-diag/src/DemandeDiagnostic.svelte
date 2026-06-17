@@ -9,8 +9,7 @@
 />
 
 <script lang="ts">
-  import DemandeDiagnosticSimplifiee
-    from '@anssi-portail/svelte/src/demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
+  import DemandeDiagnosticSimplifiee from '@anssi-portail/svelte/src/demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
 
   const { siretAidant }: { siretAidant?: string } = $props();
 </script>

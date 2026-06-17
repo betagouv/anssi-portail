@@ -33,21 +33,25 @@ pnpm build:prod
 ## Build & Deployment
 
 **Build process:**
+
 1. Vite compiles Svelte components with environment-specific config
 2. Outputs JavaScript bundle to `dist-demo/` or `dist-prod/`
 3. Bundle is uploaded to Cellar (S3-compatible storage)
 
 **Environment variables (passed at build time):**
+
 - `VITE_API_URL` - API endpoint (different per environment)
 - `ENV` - Environment name (demo vs prod)
 
 **API URLs:**
+
 - Demo: `https://demo.messervicescyber.beta.gouv.fr`
 - Prod: `https://messervices.cyber.gouv.fr`
 
 ## Deployment Process
 
 See `README.md` in this directory. Summary:
+
 1. Update `version` in `package.json`
 2. Push to GitHub
 3. Manually trigger "Déploiement WebComponent demande de diag" workflow
@@ -56,12 +60,14 @@ See `README.md` in this directory. Summary:
 ## Web Component Usage
 
 Embedded in external sites as:
+
 ```html
 <script src="https://cdn.url/demande-diag.js"></script>
 <demande-diag></demande-diag>
 ```
 
 **Constraints:**
+
 - Must be self-contained (no external dependencies expected in consumer HTML)
 - API calls to configured `VITE_API_URL`
 - Styling isolated to component
@@ -76,12 +82,14 @@ Embedded in external sites as:
 ## Dependencies
 
 Key dev dependencies:
+
 - `svelte` - Component framework
 - `vite` - Build tool
 - `@sveltejs/vite-plugin-svelte` - Svelte compiler for Vite
 - `typescript`, `eslint`, `prettier` - Quality tools
 
 Runtime:
+
 - `@anssi-portail/svelte` - Shared Svelte components from main portal
 - `axios` - HTTP requests
 
