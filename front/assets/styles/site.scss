@@ -384,7 +384,7 @@ dsfr-footer {
     background: var(--background-flat-blue-france-lab) url('/assets/images/motif-fond-service-opacite-16.avif');
   }
 
-  h1 {
+  h2 {
     font-size: 2rem;
     line-height: 2.375rem;
     margin: 0 0 16px;
@@ -395,7 +395,7 @@ dsfr-footer {
     }
   }
 
-  h2 {
+  h3 {
     font-size: 1.25rem;
     line-height: 1.75rem;
     margin: 16px 0;
@@ -428,7 +428,7 @@ dsfr-footer {
         align-self: flex-start;
       }
 
-      h2 {
+      h3 {
         margin: 0;
         padding: 0;
 
@@ -481,7 +481,7 @@ dsfr-footer {
         gap: 16px 64px;
       }
 
-      h1 {
+      h2 {
         grid-area: titre;
         margin: 0;
         color: var(--noir);
