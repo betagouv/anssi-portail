@@ -16,3 +16,4 @@ preferFrozenLockfile: true
 minimumReleaseAgeExclude:
   - devalue@5.8.1
   - "@lab-anssi/ui-kit"
+  - form-data@4.0.6
