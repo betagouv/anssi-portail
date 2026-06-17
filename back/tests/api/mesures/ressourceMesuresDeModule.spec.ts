@@ -5,17 +5,13 @@ import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
-import { Utilisateur } from '../../../src/metier/utilisateur';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurEnvironnement,
-  fauxAdaptateurRechercheEntreprise,
-} from '../fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
 import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
 import { mesureDeTest } from './constructeurDeMesure';
+import { utilisateurDeTest } from './constructeurDUtilisateur';
 
 describe('La ressource des mesures de sécurité d’un module', () => {
   describe('sur requête GET', () => {
@@ -99,26 +95,14 @@ describe('La ressource des mesures de sécurité d’un module', () => {
 
     it('indique si les mesures ont été prises en compte', async () => {
       const mesureAuth5 = mesureAuthentA2Etapes();
-      const jeanDupont: Utilisateur = new Utilisateur(
-        {
-          email: 'hector.durant@mail.com',
-          prenom: 'Hector',
-          nom: 'Durant',
-          telephone: '0123456789',
-          domainesSpecialite: ['RSSI'],
-          siretEntite: '13000766900018',
-          cguAcceptees: true,
-          infolettreAcceptee: true,
-          mesuresPrisesEnCompte: [mesureAuth5],
-        },
-        fauxAdaptateurRechercheEntreprise
-      );
-      const cookieJeanDupont = encodeSession({ email: jeanDupont.email, token: 'valide' });
+      const unUtilisateurAvecUnePriseEnCompte = utilisateurDeTest().avecUneMesurePriseEnCompte(mesureAuth5).construis();
+
+      const cookie = encodeSession({ email: unUtilisateurAvecUnePriseEnCompte.email, token: 'valide' });
+      await entrepotUtilisateur.ajoute(unUtilisateurAvecUnePriseEnCompte);
       await entrepotMesure.ajoute(mesureAuth5);
-      await entrepotUtilisateur.ajoute(jeanDupont);
       await entrepotMesure.ajoute(mesureDeTest().avecLId('MES1').avecLOrdre(15).construis());
 
-      const { body } = await request(serveur).get('/api/modules/cyberdepart/mesures').set('Cookie', cookieJeanDupont);
+      const { body } = await request(serveur).get('/api/modules/cyberdepart/mesures').set('Cookie', cookie);
 
       assert.equal(body[0].estPriseEnCompte, true);
       assert.equal(body[1].estPriseEnCompte, false);
