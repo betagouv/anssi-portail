@@ -9,7 +9,6 @@ import { ConfigurationServeur } from './configurationServeur';
 import { ressourceFavori } from './favoris/ressourceFavori';
 import { ressourceFavoris } from './favoris/ressourceFavoris';
 import { ressourceFavorisPartages } from './favoris/ressourceFavorisPartages';
-import { fournisseurChemin } from './fournisseurChemin';
 import { ressourceDocumentGuide } from './guides/ressourceDocumentGuide';
 import { ressourceDocumentsGuide } from './guides/ressourceDocumentsGuide';
 import { ressourceGuide } from './guides/ressourceGuide';
@@ -67,6 +66,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   configurationServeur.adaptateurGestionErreur.initialise(app);
 
+  const { fournisseurChemin } = configurationServeur;
+
   app.use(compression());
 
   app.use(configurationServeur.middleware.ajouteMethodeEnrichissement);
@@ -120,7 +121,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(json());
 
   const brancheLesRessourcesStatiques = (avecCors: boolean) => (ressource: string) => {
-    const sertLesFichiersStatiques = express.static(configurationServeur.fournisseurChemin.ressourceDeBase(ressource), {
+    const sertLesFichiersStatiques = express.static(fournisseurChemin.ressourceDeBase(ressource), {
       setHeaders: (reponse: Response) =>
         reponse.setHeader('cache-control', process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'),
     });
