@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /connexion
 Disallow: /oidc/
+Sitemap: https://messervices.cyber.gouv.fr/sitemap.xml

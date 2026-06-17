@@ -49,6 +49,7 @@ import { ressourceProfil } from './ressourceProfil';
 import { ressourceRetoursExperience } from './ressourceRetoursExperience';
 import { ressourceRobotsTxt } from './ressourceRobotsTxt';
 import { ressourceSanteGuides } from './ressourceSanteGuides';
+import { ressourceSitemapXml } from './ressourceSitemapXml';
 import { ressourceStatistiques } from './ressourceStatistiques';
 import { ressourceStatistiquesDiagnostic } from './ressourceStatistiquesDiagnostic';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
@@ -136,7 +137,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(configurationServeur.middleware.verifieModeMaintenance);
 
-  [
+  const routesSimples = [
     '',
     'catalogue',
     'parcours-debuter',
@@ -168,7 +169,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'sante',
     'abonnement-infolettre',
     'confirmation-abonnement-infolettre',
-  ]
+  ];
+
+  routesSimples
     .concat(
       configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()
         ? ['simulateur-nis2']
@@ -298,6 +301,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   // A laisser à la fin de la fonction
   app.use('/robots.txt', ressourceRobotsTxt(configurationServeur));
+  app.use('/sitemap.xml', ressourceSitemapXml(routesSimples, configurationServeur));
 
   // A laisser à la fin de la fonction
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);

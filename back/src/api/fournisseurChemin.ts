@@ -14,6 +14,7 @@ export interface FournisseurChemin {
   cheminProduitJekyll: (typologie: string, idProduit: string) => string;
   ressourceDeBase: (ressource: string) => string;
   cheminCsvNis2Simulateur: () => string;
+  sitemapXml: () => string;
 }
 
 export const construisListeFichiersDuSite = (racine: string) => {
@@ -39,6 +40,7 @@ export const fournisseurChemin: FournisseurChemin = {
   cheminProduitJekyll: (repertoireProduits: string, idProduit: string) =>
     construisChemin(repertoireProduits, idProduit),
   ressourceDeBase: (ressource) => construisChemin(ressource),
+  sitemapXml: () => join(process.cwd(), 'front', 'assets', 'sitemap.xml'),
   cheminCsvNis2Simulateur: () =>
     join(process.cwd(), 'back', 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
 };
