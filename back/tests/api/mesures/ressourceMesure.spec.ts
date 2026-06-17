@@ -7,16 +7,12 @@ import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnem
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
 import { Mesure } from '../../../src/metier/mesure';
 import { ExigenceNIS2 } from '../../../src/metier/nis2/exigence';
-import { Utilisateur } from '../../../src/metier/utilisateur';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
-import {
-  configurationDeTestDuServeur,
-  fauxAdaptateurEnvironnement,
-  fauxAdaptateurRechercheEntreprise,
-} from '../fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
 import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
+import { utilisateurDeTest } from './constructeurDUtilisateur';
 
 describe('La ressource mesure de sécurité', () => {
   describe('sur requête GET', () => {
@@ -138,24 +134,14 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
     });
 
     it('indique que la mesure a été prise en compte', async () => {
-      const jeanDupont: Utilisateur = new Utilisateur(
-        {
-          email: 'hector.durant@mail.com',
-          prenom: 'Hector',
-          nom: 'Durant',
-          telephone: '0123456789',
-          domainesSpecialite: ['RSSI'],
-          siretEntite: '13000766900018',
-          cguAcceptees: true,
-          infolettreAcceptee: true,
-          mesuresPrisesEnCompte: [authentA2Etapes],
-        },
-        fauxAdaptateurRechercheEntreprise
-      );
-      const cookieJeanDupont = encodeSession({ email: jeanDupont.email, token: 'valide' });
-      await entrepotUtilisateur.ajoute(jeanDupont);
+      const unUtilisateurAvecUnePriseEnCompte = utilisateurDeTest()
+        .avecUneMesurePriseEnCompte(authentA2Etapes)
+        .construis();
 
-      const { body } = await getConnecte(serveur, cookieJeanDupont);
+      const cookie = encodeSession({ email: unUtilisateurAvecUnePriseEnCompte.email, token: 'valide' });
+      await entrepotUtilisateur.ajoute(unUtilisateurAvecUnePriseEnCompte);
+
+      const { body } = await getConnecte(serveur, cookie);
 
       assert.equal(body.estPriseEnCompte, true);
     });

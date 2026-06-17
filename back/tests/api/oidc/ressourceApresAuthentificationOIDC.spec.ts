@@ -1,24 +1,23 @@
-import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
-import request from 'supertest';
 import assert from 'node:assert';
+import { join } from 'node:path';
+import { beforeEach, describe, it } from 'node:test';
+import request from 'supertest';
+import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
 import { ConfigurationServeur } from '../../../src/api/configurationServeur';
 import { creeServeur } from '../../../src/api/msc';
+import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC';
+import { UtilisateurConnecte } from '../../../src/bus/evenements/utilisateurConnecte';
+import { MockBusEvenement } from '../../bus/busPourLesTests';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
+import { decodeSessionDuCookie } from '../cookie';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
-  fauxAdaptateurRechercheEntreprise,
   fauxFournisseurDeChemin,
 } from '../fauxObjets';
-import { join } from 'node:path';
-import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC';
-import { decodeSessionDuCookie } from '../cookie';
-import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
-import { Utilisateur } from '../../../src/metier/utilisateur';
-import { MockBusEvenement } from '../../bus/busPourLesTests';
-import { UtilisateurConnecte } from '../../../src/bus/evenements/utilisateurConnecte';
+import { utilisateurDeTest } from '../mesures/constructeurDUtilisateur';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {
@@ -49,19 +48,14 @@ describe('La ressource apres authentification OIDC', () => {
       request(serveur).get('/oidc/apres-authentification').set('Cookie', ['AgentConnectInfo={}']);
 
     describe("si l'utilisateur est connu", () => {
+      const jeanneDupont = utilisateurDeTest()
+        .avecLEmail('jeanne.dupont')
+        .avecLeNom('Dupont')
+        .avecLePrenom('Jeanne')
+        .avecLeSiretEntite('1234')
+        .construis();
+
       beforeEach(() => {
-        const jeanneDupont = new Utilisateur(
-          {
-            email: 'jeanne.dupont',
-            cguAcceptees: true,
-            infolettreAcceptee: true,
-            prenom: '',
-            nom: '',
-            siretEntite: '',
-            domainesSpecialite: [],
-          },
-          fauxAdaptateurRechercheEntreprise
-        );
         entrepotUtilisateur.ajoute(jeanneDupont);
 
         adaptateurOIDC.recupereInformationsUtilisateur = async (_) => ({
