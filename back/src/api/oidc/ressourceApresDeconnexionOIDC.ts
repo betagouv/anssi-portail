@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { detruisSession } from '../session';
 import { corpsVide, valideCorpsRequete } from '../zod';
 
 export const ressourceApresDeconnexionOIDC = () => {
@@ -11,7 +12,7 @@ export const ressourceApresDeconnexionOIDC = () => {
       return;
     }
     reponse.clearCookie('AgentConnectInfo');
-    reponse.clearCookie('session');
+    detruisSession(requete, reponse);
     reponse.redirect('/');
   });
   return routes;
