@@ -154,6 +154,7 @@ export const fabriqueMiddleware = ({
       } catch (e) {
         if (e instanceof TokenExpiredError) {
           reponse.clearCookie('session');
+          requete.session = null;
           suite();
           return;
         }
