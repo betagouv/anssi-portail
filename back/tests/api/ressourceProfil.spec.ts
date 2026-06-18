@@ -9,7 +9,7 @@ import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { encodeSession, enObjet } from './cookie';
-import { configurationDeTestDuServeur, fauxAdaptateurJWT } from './fauxObjets';
+import { configurationDeTestDuServeur, fauxAdaptateurHachage, fauxAdaptateurJWT } from './fauxObjets';
 import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi';
 
 describe('La ressource Profil', () => {
@@ -78,7 +78,8 @@ describe('La ressource Profil', () => {
           cguAcceptees: true,
           infolettreAcceptee: true,
         },
-        adaptateurRechercheEntreprise
+        adaptateurRechercheEntreprise,
+        fauxAdaptateurHachage
       );
       entrepotUtilisateur.ajoute(jeanMartin);
 

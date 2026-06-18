@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 import { Organisation, Utilisateur } from '../../src/metier/utilisateur';
-import { fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets';
+import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets';
 
 describe("L'utilisateur", () => {
   const infosUtilisateur = {
@@ -26,7 +26,8 @@ describe("L'utilisateur", () => {
           codeActivite: '62.01Z',
         }),
       },
-      fauxAdaptateurRechercheEntreprise
+      fauxAdaptateurRechercheEntreprise,
+      fauxAdaptateurHachage
     );
 
     const organisation = await utilisateur.organisation();
@@ -61,7 +62,8 @@ describe("L'utilisateur", () => {
         ...infosUtilisateur,
         organisation: undefined,
       },
-      rechercheEntreprise
+      rechercheEntreprise,
+      fauxAdaptateurHachage
     );
 
     const organisation = await utilisateur.organisation();
@@ -84,7 +86,8 @@ describe("L'utilisateur", () => {
           codeActivite: '62.01Z',
         }),
       },
-      fauxAdaptateurRechercheEntreprise
+      fauxAdaptateurRechercheEntreprise,
+      fauxAdaptateurHachage
     );
 
     const estAgentAnssi = await utilisateur.estAgentAnssi();
@@ -103,7 +106,8 @@ describe("L'utilisateur", () => {
           codeActivite: '62.01Z',
         }),
       },
-      fauxAdaptateurRechercheEntreprise
+      fauxAdaptateurRechercheEntreprise,
+      fauxAdaptateurHachage
     );
 
     const estAgentAnssi = await utilisateur.estAgentAnssi();
@@ -122,7 +126,8 @@ describe("L'utilisateur", () => {
           codeActivite: '62.01Z',
         }),
       },
-      fauxAdaptateurRechercheEntreprise
+      fauxAdaptateurRechercheEntreprise,
+      fauxAdaptateurHachage
     );
 
     const estAgentAnssi = await utilisateur.estAgentAnssi();
@@ -136,7 +141,8 @@ describe("L'utilisateur", () => {
         ...infosUtilisateur,
         roles: ['GESTION_GUIDES'],
       },
-      fauxAdaptateurRechercheEntreprise
+      fauxAdaptateurRechercheEntreprise,
+      fauxAdaptateurHachage
     );
 
     assert.equal(utilisateur.peutManipulerLesDocumentsDUnGuide(), true);
