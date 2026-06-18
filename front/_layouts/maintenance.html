@@ -28,6 +28,9 @@
     ></script>
     {% endif %}
 
+    <link rel="dns-prefetch" href="https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com">
+    <link rel="preconnect" href="https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com" crossorigin>
+    <link rel="preload" href="https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com/{{ site.version_lab_ui_kit }}/lab-anssi-ui-kit.iife.js" as="script">
     <script
       src="https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com/{{ site.version_lab_ui_kit }}/lab-anssi-ui-kit.iife.js"
       nonce="%%NONCE%%"
