@@ -150,7 +150,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'test-maturite',
     'niveaux-maturite',
     'apres-authentification',
-    'aPropos',
+    'a-propos',
     'mentionsLegales',
     'confidentialite',
     'cgu',
@@ -302,7 +302,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     app.use('/mesures/:id', ressourcePagesJekyllConnectees(configurationServeur, 'mesures'));
   }
 
-  [['/directive-nis2', '/nis2']].forEach(([precedent, nouveau]: string[]) => {
+  [
+    ['/directive-nis2', '/nis2'],
+    ['/aPropos', '/a-propos'],
+  ].forEach(([precedent, nouveau]: string[]) => {
     app.use(precedent, (_requete: Request, reponse: Response) => {
       reponse.redirect(301, nouveau);
     });
