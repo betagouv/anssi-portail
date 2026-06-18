@@ -276,10 +276,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/api/diagnostic/statistiques', ressourceStatistiquesDiagnostic());
 
-  app.use('/directive-nis2', (_requete: Request, reponse: Response) => {
-    reponse.redirect(301, '/nis2');
-  });
-
   app.use('/api/exigences-nis2', ressourceExigencesNis2(configurationServeur));
   app.use('/api/exigences-nis2.csv', ressourceExigencesNis2Csv(configurationServeur));
 
@@ -305,6 +301,12 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     app.use('/module-cyberdepart', ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart'));
     app.use('/mesures/:id', ressourcePagesJekyllConnectees(configurationServeur, 'mesures'));
   }
+
+  [['/directive-nis2', '/nis2']].forEach(([precedent, nouveau]: string[]) => {
+    app.use(precedent, (_requete: Request, reponse: Response) => {
+      reponse.redirect(301, nouveau);
+    });
+  });
 
   // A laisser à la fin de la fonction
   app.use('/robots.txt', ressourceRobotsTxt(configurationServeur));
