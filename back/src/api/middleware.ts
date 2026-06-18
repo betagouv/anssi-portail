@@ -141,11 +141,7 @@ export const fabriqueMiddleware = ({
 
   const ajouteUtilisateurARequete =
     (entrepotUtilisateur: EntrepotUtilisateur, adaptateurHachage: AdaptateurHachage) =>
-    async (
-      requete: Request & { utilisateur?: (Utilisateur & { emailHache: string }) | undefined },
-      reponse: Response,
-      suite: NextFunction
-    ) => {
+    async (requete: Request & { utilisateur?: Utilisateur | undefined }, reponse: Response, suite: NextFunction) => {
       if (!requete.session?.token) {
         suite();
         return;
@@ -167,9 +163,6 @@ export const fabriqueMiddleware = ({
         if (requete.session?.email) {
           const emailHache = adaptateurHachage.hache(requete.session.email);
           requete.utilisateur = await entrepotUtilisateur.parEmailHache(emailHache);
-          if (requete.utilisateur) {
-            requete.utilisateur.emailHache = emailHache;
-          }
         }
         suite();
       } catch {

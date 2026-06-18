@@ -9,9 +9,9 @@ function publieMesureConsultee(nomPage: string, requete: Request, busEvenements:
   if (
     'mesures' === nomPage &&
     /[A-Z_]{1,20}\.[0-9]{1,2}/.test(requete.params.id as string) &&
-    requete.utilisateur?.emailHache
+    requete.utilisateur?.emailHache()
   ) {
-    const evt = new MesureConsultee(requete.params.id as string, requete.utilisateur?.emailHache);
+    const evt = new MesureConsultee(requete.params.id as string, requete.utilisateur?.emailHache());
     busEvenements.publie(evt);
   }
 }
