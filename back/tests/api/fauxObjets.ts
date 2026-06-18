@@ -32,7 +32,7 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
   ressourceDeBase: (_: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
   cheminCsvNis2Simulateur: () =>
     join(process.cwd(), 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
-  sitemapXml: () => 'sitemap.xml',
+  sitemapXml: () => '',
 };
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
