@@ -131,14 +131,12 @@ export class Utilisateur {
 
   async prendEnCompte(
     mesure: Mesure,
-    toutesLesMesures: Mesure[],
+    taille: number,
     rang: number,
     entrepotPriseEnCompte: EntrepotPriseEnCompte,
     busEvenements: BusEvenements
   ) {
     await entrepotPriseEnCompte.ajoute(new PriseEnCompte(this, mesure));
-    await busEvenements.publie(
-      new MesurePriseEnCompte(this.emailHache(), mesure.id, toutesLesMesures.length, rang + 1)
-    );
+    await busEvenements.publie(new MesurePriseEnCompte(this.emailHache(), mesure.id, taille, rang + 1));
   }
 }
