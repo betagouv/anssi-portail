@@ -1,6 +1,6 @@
 import { Mesure } from '../../../src/metier/mesure';
 import { Utilisateur } from '../../../src/metier/utilisateur';
-import { fauxAdaptateurRechercheEntreprise } from '../fauxObjets';
+import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../fauxObjets';
 
 export class ConstructeurDUtilisateur {
   private email: string = 'utilisateur@mail.com';
@@ -78,7 +78,8 @@ export class ConstructeurDUtilisateur {
         idListeFavoris: this.idListeFavoris,
         mesuresPrisesEnCompte: this.mesuresPrisesEnCompte,
       },
-      fauxAdaptateurRechercheEntreprise
+      fauxAdaptateurRechercheEntreprise,
+      fauxAdaptateurHachage
     );
   }
 }

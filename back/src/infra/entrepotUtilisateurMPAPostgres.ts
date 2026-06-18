@@ -131,7 +131,8 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         roles: utilisateurBDD.roles as unknown as Role[],
         mesuresPrisesEnCompte,
       },
-      this.adaptateurRechercheEntreprise
+      this.adaptateurRechercheEntreprise,
+      this.adaptateurHachage
     );
   }
 

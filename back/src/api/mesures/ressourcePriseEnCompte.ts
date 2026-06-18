@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { MesurePriseEnCompte } from '../../bus/evenements/mesurePriseEnCompte';
 import { PriseEnCompte } from '../../metier/PriseEnCompte';
+import { Utilisateur } from '../../metier/utilisateur';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
 import { corpsVide, valideCorpsRequete } from '../zod';
@@ -21,7 +22,7 @@ export const ressourcePriseEnCompte = ({
     valideCorpsRequete(corpsVide),
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
-      const utilisateur = requete.utilisateur;
+      const utilisateur = requete.utilisateur as Utilisateur;
       const idMesure = requete.params.idMesure as string;
 
       const toutesLesMesures = await entrepotMesure.tous();
@@ -33,7 +34,7 @@ export const ressourcePriseEnCompte = ({
 
       await entrepotPriseEnCompte.ajoute(new PriseEnCompte(utilisateur, mesure));
       await busEvenements.publie(
-        new MesurePriseEnCompte(utilisateur.emailHache, mesure.id, toutesLesMesures.length, rang + 1)
+        new MesurePriseEnCompte(utilisateur.emailHache(), mesure.id, toutesLesMesures.length, rang + 1)
       );
 
       return reponse.sendStatus(201);

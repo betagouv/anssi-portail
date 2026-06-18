@@ -14,6 +14,7 @@ const ressourceUtilisateurs = ({
   entrepotUtilisateur,
   adaptateurRechercheEntreprise,
   adaptateurJWT,
+  adaptateurHachage,
 }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post(
@@ -37,7 +38,8 @@ const ressourceUtilisateurs = ({
               cguAcceptees,
               infolettreAcceptee,
             },
-            adaptateurRechercheEntreprise
+            adaptateurRechercheEntreprise,
+            adaptateurHachage
           );
 
           await entrepotUtilisateur.ajoute(utilisateur);

@@ -2,7 +2,7 @@ import { Financement } from '../../src/metier/financement';
 import { Guide } from '../../src/metier/guide';
 import { ExigenceNIS2 } from '../../src/metier/nis2/exigence';
 import { Utilisateur } from '../../src/metier/utilisateur';
-import { fauxAdaptateurRechercheEntreprise } from './fauxObjets';
+import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from './fauxObjets';
 import { mesureDeTest } from './mesures/constructeurDeMesure';
 
 export const jeanneDupont: Utilisateur = new Utilisateur(
@@ -17,7 +17,8 @@ export const jeanneDupont: Utilisateur = new Utilisateur(
     infolettreAcceptee: true,
     roles: ['GESTION_GUIDES'],
   },
-  fauxAdaptateurRechercheEntreprise
+  fauxAdaptateurRechercheEntreprise,
+  fauxAdaptateurHachage
 );
 
 export const hectorDurant: Utilisateur = new Utilisateur(
@@ -31,7 +32,8 @@ export const hectorDurant: Utilisateur = new Utilisateur(
     cguAcceptees: true,
     infolettreAcceptee: true,
   },
-  fauxAdaptateurRechercheEntreprise
+  fauxAdaptateurRechercheEntreprise,
+  fauxAdaptateurHachage
 );
 
 export const financementCyberPME: Financement = new Financement({

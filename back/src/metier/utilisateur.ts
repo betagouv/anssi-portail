@@ -1,3 +1,4 @@
+import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { Mesure } from './mesure';
 
@@ -64,6 +65,7 @@ export class Utilisateur {
   private _organisation: Organisation | undefined;
   roles: Role[];
   mesuresPrisesEnCompte: Mesure[];
+  private adaptateurHachage: AdaptateurHachage;
 
   constructor(
     {
@@ -80,7 +82,8 @@ export class Utilisateur {
       roles = [],
       mesuresPrisesEnCompte = [],
     }: InformationsCreationUtilisateur,
-    adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise
+    adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise,
+    adaptateurHachage: AdaptateurHachage
   ) {
     this.email = email;
     this.prenom = prenom;
@@ -95,6 +98,7 @@ export class Utilisateur {
     this._organisation = organisation;
     this.roles = roles;
     this.mesuresPrisesEnCompte = mesuresPrisesEnCompte;
+    this.adaptateurHachage = adaptateurHachage;
   }
 
   async organisation(): Promise<Organisation> {
@@ -115,5 +119,9 @@ export class Utilisateur {
 
   estPriseEnCompte(mesure: Mesure): boolean {
     return this.mesuresPrisesEnCompte.some((m) => m.id === mesure.id);
+  }
+
+  emailHache() {
+    return this.adaptateurHachage.hache(this.email);
   }
 }
