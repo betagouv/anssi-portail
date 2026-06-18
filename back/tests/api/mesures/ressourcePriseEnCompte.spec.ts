@@ -11,8 +11,10 @@ import { EntrepotPriseEnCompteMemoire } from '../../persistance/EntrepotPriseEnC
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur } from '../fauxObjets';
-import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
+import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
 import { mesureDeTest } from './constructeurDeMesure';
+import { Utilisateur } from '../../../src/metier/utilisateur';
+import { utilisateurDeTest } from './constructeurDUtilisateur';
 
 describe("La ressource de prise en compte d'une mesure", () => {
   let serveur: Express;
@@ -20,6 +22,8 @@ describe("La ressource de prise en compte d'une mesure", () => {
   let entrepotMesure: EntrepotMesureMemoire;
   let entrepotUtilisateur: EntrepotUtilisateur;
   let busEvenements: MockBusEvenement;
+  let utilisateurParcours: Utilisateur;
+  let cookie: string;
 
   beforeEach(() => {
     entrepotPriseEnCompte = new EntrepotPriseEnCompteMemoire();
@@ -33,6 +37,8 @@ describe("La ressource de prise en compte d'une mesure", () => {
       entrepotUtilisateur,
       busEvenements,
     });
+    utilisateurParcours = utilisateurDeTest().avecLEmail('utilisateur@mail.com').construis();
+    cookie = encodeSession({ email: utilisateurParcours.email, token: 'valide' });
   });
 
   describe('sur une requête PUT', () => {
@@ -45,15 +51,14 @@ describe("La ressource de prise en compte d'une mesure", () => {
     });
 
     describe("d'un utilisateur connecté", () => {
-      const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
       const mesure = mesureAuthentA2Etapes();
 
       const putPriseEnCompteConnecte = () =>
-        request(serveur).put('/api/mesures/AUTH.5/prise-en-compte').set('Cookie', cookieJeanneDupont);
+        request(serveur).put('/api/mesures/AUTH.5/prise-en-compte').set('Cookie', cookie);
 
       beforeEach(async () => {
         await entrepotMesure.ajoute(mesure);
-        await entrepotUtilisateur.ajoute(jeanneDupont);
+        await entrepotUtilisateur.ajoute(utilisateurParcours);
       });
 
       it('réponds 201', async () => {
@@ -65,14 +70,12 @@ describe("La ressource de prise en compte d'une mesure", () => {
       it('ajoute une prise en compte', async () => {
         await putPriseEnCompteConnecte();
 
-        const priseEnComptePersistee = await entrepotPriseEnCompte.pour(jeanneDupont, mesure);
+        const priseEnComptePersistee = await entrepotPriseEnCompte.pour(utilisateurParcours, mesure);
         assert.notEqual(priseEnComptePersistee, undefined);
       });
 
       it("réponds 404 si la mesure n'existe pas", async () => {
-        const reponse = await request(serveur)
-          .put('/api/mesures/mesureinconnue/prise-en-compte')
-          .set('Cookie', cookieJeanneDupont);
+        const reponse = await request(serveur).put('/api/mesures/mesureinconnue/prise-en-compte').set('Cookie', cookie);
 
         assert.equal(reponse.status, 404);
       });
@@ -86,7 +89,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
         busEvenements.aRecuUnEvenement(MesurePriseEnCompte);
         const evenement = busEvenements.recupereEvenement(MesurePriseEnCompte);
         assert.equal(evenement!.idMesure, 'AUTH.5');
-        assert.equal(evenement!.emailHache, 'jeanne.dupont@user.com-hache');
+        assert.equal(evenement!.emailHache, 'utilisateur@mail.com-hache');
         assert.equal(evenement!.nombreDeMesures, 3);
         assert.equal(evenement!.position, 2);
       });

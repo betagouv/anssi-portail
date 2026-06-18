@@ -1,5 +1,6 @@
 import { BusEvenements } from '../bus/busEvenements';
 import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte';
+import { ModuleTermine } from '../bus/evenements/moduleTermine';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { EntrepotPriseEnCompte } from './entrepotPriseEnCompte';
@@ -136,7 +137,14 @@ export class Utilisateur {
     entrepotPriseEnCompte: EntrepotPriseEnCompte,
     busEvenements: BusEvenements
   ) {
+    if (this.estPriseEnCompte(mesure)) {
+      return;
+    }
     await entrepotPriseEnCompte.ajoute(new PriseEnCompte(this, mesure));
     await busEvenements.publie(new MesurePriseEnCompte(this.emailHache(), mesure.id, taille, rang + 1));
+    this.mesuresPrisesEnCompte.push(mesure);
+    if (this.mesuresPrisesEnCompte.length === taille) {
+      await busEvenements.publie(new ModuleTermine(this.emailHache(), 1, 'Cyberdépart'));
+    }
   }
 }

@@ -1,8 +1,15 @@
 import assert from 'node:assert';
-import { describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'node:test';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
 import { Organisation, Utilisateur } from '../../src/metier/utilisateur';
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets';
+import { utilisateurDeTest } from '../api/mesures/constructeurDUtilisateur';
+import { mesureAuthentA2Etapes } from '../api/objetsPretsALEmploi';
+import { EntrepotPriseEnCompte } from '../../src/metier/entrepotPriseEnCompte';
+import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests';
+import { ModuleTermine } from '../../src/bus/evenements/moduleTermine';
+import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompte';
 
 describe("L'utilisateur", () => {
   const infosUtilisateur = {
@@ -146,5 +153,44 @@ describe("L'utilisateur", () => {
     );
 
     assert.equal(utilisateur.peutManipulerLesDocumentsDUnGuide(), true);
+  });
+
+  describe('concernant la prise en compte des mesures', () => {
+    const mesure = mesureAuthentA2Etapes();
+    let utilisateurDeParcours: Utilisateur;
+    let entrepotPriseEnCompte: EntrepotPriseEnCompte;
+    let busEvenements: MockBusEvenement;
+
+    beforeEach(() => {
+      utilisateurDeParcours = utilisateurDeTest().avecLEmail('utilisateur@mail.com').construis();
+      entrepotPriseEnCompte = new EntrepotPriseEnCompteMemoire();
+      busEvenements = fabriqueBusPourLesTests();
+    });
+
+    it('publie un événement de completion quand toutes les mesures du module sont prises en compte', async () => {
+      await utilisateurDeParcours.prendEnCompte(mesure, 1, 1, entrepotPriseEnCompte, busEvenements);
+
+      busEvenements.aRecuUnEvenement(ModuleTermine);
+      const evenement = busEvenements.recupereEvenement(ModuleTermine);
+
+      assert.equal(evenement!.emailHache, 'utilisateur@mail.com-hache');
+      assert.equal(evenement!.idModule, 1);
+      assert.equal(evenement!.nomModule, 'Cyberdépart');
+    });
+
+    it("ne publie pas d'événement de completion si toutes les mesures du module ne sont pas prises en compte", async () => {
+      await utilisateurDeParcours.prendEnCompte(mesure, 2, 1, entrepotPriseEnCompte, busEvenements);
+
+      busEvenements.naPasRecuDEvenement(ModuleTermine);
+    });
+
+    it("ignore la prise en compte d'une mesure déjà prise en compte", async () => {
+      await utilisateurDeParcours.prendEnCompte(mesure, 2, 1, entrepotPriseEnCompte, fabriqueBusPourLesTests());
+      await utilisateurDeParcours.prendEnCompte(mesure, 2, 1, entrepotPriseEnCompte, busEvenements);
+
+      assert.equal(utilisateurDeParcours.mesuresPrisesEnCompte.length, 1);
+      busEvenements.naPasRecuDEvenement(ModuleTermine);
+      busEvenements.naPasRecuDEvenement(MesurePriseEnCompte);
+    });
   });
 });
