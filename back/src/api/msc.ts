@@ -151,7 +151,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'niveaux-maturite',
     'apres-authentification',
     'a-propos',
-    'mentionsLegales',
+    'mentions-legales',
     'confidentialite',
     'cgu',
     'accessibilite',
@@ -305,6 +305,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   [
     ['/directive-nis2', '/nis2'],
     ['/aPropos', '/a-propos'],
+    ['/mentionsLegales', '/mentions-legales'],
   ].forEach(([precedent, nouveau]: string[]) => {
     app.use(precedent, (_requete: Request, reponse: Response) => {
       reponse.redirect(301, nouveau);
