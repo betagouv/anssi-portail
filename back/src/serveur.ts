@@ -143,6 +143,7 @@ serviceCoherenceSecretsHachage
       reseau: {
         trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
         maxRequetesParMinutes: adaptateurEnvironnement.serveur().maxRequetesParMinute(),
+        maxRequetesParMinuteAPI: adaptateurEnvironnement.serveur().maxRequetesParMinuteAPI(),
         ipAutorisees: adaptateurEnvironnement.serveur().ipAutorisees(),
       },
       adaptateurRechercheEntreprise,

@@ -72,12 +72,16 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(configurationServeur.middleware.interdisLaMiseEnCache);
 
-  const limiteRequetesParMinute = rateLimit({
+  const limiteRequetesParMinuteGlobal = rateLimit({
     windowMs: 60 * 1000,
     limit: configurationServeur.reseau.maxRequetesParMinutes,
   });
+  const limiteRequetesParMinuteAPI = rateLimit({
+    windowMs: 60 * 1000,
+    limit: configurationServeur.reseau.maxRequetesParMinuteAPI,
+  });
   app.set('trust proxy', configurationServeur.reseau.trustProxy);
-  app.use(limiteRequetesParMinute);
+  app.use(limiteRequetesParMinuteGlobal);
 
   if (configurationServeur.reseau.ipAutorisees) {
     app.use(
@@ -197,6 +201,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
 
   app.use('/oidc/apres-deconnexion', ressourceApresDeconnexionOIDC());
+
+  app.use('/api', limiteRequetesParMinuteAPI);
 
   app.use('/api/profil', ressourceProfil(configurationServeur));
 

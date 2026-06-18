@@ -104,6 +104,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   serveur: () => ({
     trustProxy: () => '',
     maxRequetesParMinute: () => 0,
+    maxRequetesParMinuteAPI: () => 200,
     ipAutorisees: () => false,
   }),
   sentry: () => ({
@@ -269,7 +270,8 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   middleware: vraiMiddleware,
   reseau: {
     trustProxy: '0',
-    maxRequetesParMinutes: 3,
+    maxRequetesParMinutes: 10,
+    maxRequetesParMinuteAPI: 10,
     ipAutorisees: false,
   },
   cellar: fauxAdaptateurCellar,
