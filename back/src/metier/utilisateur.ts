@@ -1,4 +1,5 @@
 import { BusEvenements } from '../bus/busEvenements';
+import { BadgeCyberdépartDébloqué } from '../bus/evenements/badgeCyberdepartDebloque';
 import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte';
 import { ModuleTermine } from '../bus/evenements/moduleTermine';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
@@ -145,6 +146,10 @@ export class Utilisateur {
     this.mesuresPrisesEnCompte.push(mesure);
     if (this.mesuresPrisesEnCompte.length === taille) {
       await busEvenements.publie(new ModuleTermine(this.emailHache(), 1, 'Cyberdépart'));
+    }
+    const cibleBadgeCyberdépart = Math.floor(taille * 0.8);
+    if (this.mesuresPrisesEnCompte.length === cibleBadgeCyberdépart) {
+      await busEvenements.publie(new BadgeCyberdépartDébloqué(this.emailHache()));
     }
   }
 }
