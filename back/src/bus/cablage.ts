@@ -10,6 +10,7 @@ import {
   consigneRetourAvisMesureDonneDansJournal,
 } from './consigneAvisMesureDonneDansJournal';
 import { consigneEvenementAvisUtilisateurDonneDansJournal } from './consigneEvenementAvisUtilisateurDonneDansJournal';
+import { consigneBadgeCyberdépartDébloquéDansJournal } from './consigneBadgeCyberdepartDebloqueDansJournal';
 import { consigneEvenementCompteCreeDansJournal } from './consigneEvenementCompteCreeDansJournal';
 import { consigneEvenementMAJFavorisUtilisateurDansJournal } from './consigneEvenementMAJFavorisUtilisateurDansJournal';
 import { consigneEvenementMesureConsulteeDansJournal } from './consigneEvenementMesureConsulteeDansJournal';
@@ -24,6 +25,7 @@ import { creeContactBrevo } from './creeContactBrevo';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte';
 import { AvisMesureDonne } from './evenements/avisMesureDonne';
 import { AvisUtilisateurDonne } from './evenements/avisUtilisateurDonne';
+import { BadgeCyberdépartDébloqué } from './evenements/badgeCyberdepartDebloque';
 import { CompteCree } from './evenements/compteCree';
 import { MesureConsultee } from './evenements/mesureConsultee';
 import { MesurePriseEnCompte } from './evenements/mesurePriseEnCompte';
@@ -140,5 +142,10 @@ export const cableTousLesAbonnes = ({
   busEvenements.abonne(
     ModuleTermine,
     consigneEvenementModuleTerminéDansJournal({ adaptateurJournal, adaptateurHorloge })
+  );
+
+  busEvenements.abonne(
+    BadgeCyberdépartDébloqué,
+    consigneBadgeCyberdépartDébloquéDansJournal({ adaptateurJournal, adaptateurHorloge })
   );
 };

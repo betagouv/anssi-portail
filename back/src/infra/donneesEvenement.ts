@@ -21,7 +21,8 @@ export type DonneesEvenement =
   | DonneesMesureConsultee
   | DonneesAvisMesureDonne
   | DonneesMesurePriseEnCompte
-  | DonneesModuleTerminé;
+  | DonneesModuleTerminé
+  | DonnéesBadgeCyberdépartDébloqué;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -95,3 +96,5 @@ type DonneesMesurePriseEnCompte = Evenement<
 >;
 
 type DonneesModuleTerminé = Evenement<'MODULE_TERMINE', Omit<ModuleTermine, 'emailHache'> & { idUtilisateur: string }>;
+
+type DonnéesBadgeCyberdépartDébloqué = Evenement<'BADGE_CYBERDEPART_DEBLOQUE', { idUtilisateur: string }>;
