@@ -51,7 +51,7 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
   }
 
   private async chargerCache(): Promise<void> {
-    const mesuresLues = await this.knex<MesurePersistee>('mesures');
+    const mesuresLues = await this.knex<MesurePersistee>('mesures').where({ id_module: 1 });
     const mesures = await Promise.all(mesuresLues.map((m) => this.convertisEnMesure(m)));
     mesures.forEach((m) => this.cache.set(m.id, m));
   }
