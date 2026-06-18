@@ -14,6 +14,7 @@ import { consigneEvenementCompteCreeDansJournal } from './consigneEvenementCompt
 import { consigneEvenementMAJFavorisUtilisateurDansJournal } from './consigneEvenementMAJFavorisUtilisateurDansJournal';
 import { consigneEvenementMesureConsulteeDansJournal } from './consigneEvenementMesureConsulteeDansJournal';
 import { consigneEvenementMesurePriseEnCompteDansJournal } from './consigneEvenementMesurePriseEnCompteDansJournal';
+import { consigneEvenementModuleTerminéDansJournal } from './consigneEvenementModuleTerminéDansJournal';
 import { consigneEvenementProprieteTestRevendiqueeDansJournal } from './consigneEvenementProprieteTestRevendiqueeDansJournal';
 import { consigneEvenementRetourExperienceDonneDansJournal } from './consigneEvenementRetourExperienceDonneDansJournal';
 import { consigneEvenementSimulationNis2TermineeDansJournal } from './consigneEvenementSimulationNis2TermineeDansJournal';
@@ -26,6 +27,7 @@ import { AvisUtilisateurDonne } from './evenements/avisUtilisateurDonne';
 import { CompteCree } from './evenements/compteCree';
 import { MesureConsultee } from './evenements/mesureConsultee';
 import { MesurePriseEnCompte } from './evenements/mesurePriseEnCompte';
+import { ModuleTermine } from './evenements/moduleTermine';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
 import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee';
@@ -133,5 +135,10 @@ export const cableTousLesAbonnes = ({
   busEvenements.abonne(
     MesurePriseEnCompte,
     consigneEvenementMesurePriseEnCompteDansJournal({ adaptateurJournal, adaptateurHorloge })
+  );
+
+  busEvenements.abonne(
+    ModuleTermine,
+    consigneEvenementModuleTerminéDansJournal({ adaptateurJournal, adaptateurHorloge })
   );
 };
