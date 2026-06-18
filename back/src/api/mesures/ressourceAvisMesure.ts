@@ -32,7 +32,7 @@ const ressourceAvisMesure = ({
 
         await busEvenements.publie(
           new AvisMesureDonne({
-            idUtilisateur: requete.utilisateur.emailHache,
+            idUtilisateur: requete.utilisateur.emailHache(),
             idMesure,
             titreMesure: mesureTrouvee.titre,
             retour,
