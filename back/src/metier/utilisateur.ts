@@ -1,6 +1,10 @@
+import { BusEvenements } from '../bus/busEvenements';
+import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
+import { EntrepotPriseEnCompte } from './entrepotPriseEnCompte';
 import { Mesure } from './mesure';
+import { PriseEnCompte } from './PriseEnCompte';
 
 export type Role = 'GESTION_GUIDES';
 
@@ -123,5 +127,18 @@ export class Utilisateur {
 
   emailHache() {
     return this.adaptateurHachage.hache(this.email);
+  }
+
+  async prendEnCompte(
+    mesure: Mesure,
+    toutesLesMesures: Mesure[],
+    rang: number,
+    entrepotPriseEnCompte: EntrepotPriseEnCompte,
+    busEvenements: BusEvenements
+  ) {
+    await entrepotPriseEnCompte.ajoute(new PriseEnCompte(this, mesure));
+    await busEvenements.publie(
+      new MesurePriseEnCompte(this.emailHache(), mesure.id, toutesLesMesures.length, rang + 1)
+    );
   }
 }
