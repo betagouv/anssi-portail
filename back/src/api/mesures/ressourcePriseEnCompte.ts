@@ -1,6 +1,4 @@
 import { Request, Response, Router } from 'express';
-import { MesurePriseEnCompte } from '../../bus/evenements/mesurePriseEnCompte';
-import { PriseEnCompte } from '../../metier/PriseEnCompte';
 import { Utilisateur } from '../../metier/utilisateur';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
@@ -32,10 +30,7 @@ export const ressourcePriseEnCompte = ({
       }
       const mesure = toutesLesMesures[rang];
 
-      await entrepotPriseEnCompte.ajoute(new PriseEnCompte(utilisateur, mesure));
-      await busEvenements.publie(
-        new MesurePriseEnCompte(utilisateur.emailHache(), mesure.id, toutesLesMesures.length, rang + 1)
-      );
+      await utilisateur.prendEnCompte(mesure, toutesLesMesures, rang, entrepotPriseEnCompte, busEvenements);
 
       return reponse.sendStatus(201);
     })
