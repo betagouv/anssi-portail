@@ -211,9 +211,9 @@
       grid-column-start: 2;
     }
 
-    h3 {
-      font-size: 1.8rem;
-      line-height: 2rem;
+    .fr-h3 {
+      color: var(--text-title-grey);
+      margin-block: 0 24px;
     }
 
     img {
