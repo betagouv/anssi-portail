@@ -1,5 +1,4 @@
 import { CmsCrisp } from '@lab-anssi/lib';
-import axiosInstance from './infra/axiosInstance';
 import { adaptateurJWT } from './api/adaptateurJWT';
 import { fournisseurChemin } from './api/fournisseurChemin';
 import { fabriqueMiddleware } from './api/middleware';
@@ -7,6 +6,7 @@ import { creeServeur } from './api/msc';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
 import { BusEvenements } from './bus/busEvenements';
 import { cableTousLesAbonnes } from './bus/cablage';
+import { EntrepôtModulePostgres } from './entrepotModulePostgres';
 import { adaptateurCellar } from './infra/adaptateurCellar';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo';
@@ -18,6 +18,7 @@ import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
 import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
 import { fabriqueAdaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
+import axiosInstance from './infra/axiosInstance';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist';
 import { EntrepotGuideGrist } from './infra/entrepotGuideGrist';
@@ -84,6 +85,8 @@ const entrepotResultatTest = new EntrepotResultatTestPostgres({
 });
 
 const entrepotPriseEnCompte = new EntrepotPriseEnComptePostgres(adaptateurHachage, entrepotMesure);
+
+const entrepôtModule = new EntrepôtModulePostgres();
 
 const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
 
@@ -163,6 +166,7 @@ serviceCoherenceSecretsHachage
       entrepotExigence,
       entrepotMesure,
       entrepotPriseEnCompte,
+      entrepôtModule,
       cellar,
       serviceSanteGuides,
       adaptateurEmail,

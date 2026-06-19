@@ -8,18 +8,20 @@ import { mesurePresentation } from './mesurePresentation';
 const ressourceMesuresDeModule = ({
   entrepotMesure,
   entrepotUtilisateur,
+  entrepôtModule,
   adaptateurHachage,
   middleware,
 }: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get(
-    '/',
+    '/:idModule/mesures',
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
-      const mesures = await entrepotMesure.tous();
+      const module = await entrepôtModule.parId(Number.parseInt(requete.params.idModule as string));
+      const mesures = await entrepotMesure.duModule(module!);
       const utilisateur = requete.utilisateur as Utilisateur;
 
       const mesuresPresentation = await Promise.all(
