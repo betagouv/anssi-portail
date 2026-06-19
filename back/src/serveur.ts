@@ -70,7 +70,9 @@ const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
   adaptateurEnvironnement,
 });
 
-const entrepotMesure: EntrepotMesure = new EntrepotMesurePostgres(entrepotExigence);
+const entrepôtModule = new EntrepôtModulePostgres();
+
+const entrepotMesure: EntrepotMesure = new EntrepotMesurePostgres(entrepotExigence, entrepôtModule);
 
 const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
   adaptateurProfilAnssi,
@@ -79,14 +81,13 @@ const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
   adaptateurHachage,
   entrepotMesure,
 });
+
 const entrepotResultatTest = new EntrepotResultatTestPostgres({
   adaptateurHachage,
   entrepotUtilisateur,
 });
 
 const entrepotPriseEnCompte = new EntrepotPriseEnComptePostgres(adaptateurHachage, entrepotMesure);
-
-const entrepôtModule = new EntrepôtModulePostgres();
 
 const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
 

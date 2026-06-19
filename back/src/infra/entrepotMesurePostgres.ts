@@ -1,6 +1,7 @@
 import Knex from 'knex';
 import config from '../../knexfile';
 import { EntrepotMesure } from '../metier/entrepotMesure';
+import { EntrepôtModule } from '../metier/EntrepotModule';
 import { LienPourAllerPlusLoin, Mesure, type Risque } from '../metier/mesure';
 import { Module } from '../metier/module';
 import { EntrepotExigence } from '../metier/nis2/entrepotExigence';
@@ -28,7 +29,10 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
   private readonly cache: Map<Mesure['id'], Mesure> = new Map();
   private chargementEnCours: Promise<void> | null = null;
 
-  constructor(private readonly entrepotExigence: EntrepotExigence) {
+  constructor(
+    private readonly entrepotExigence: EntrepotExigence,
+    private readonly entrepôtModule: EntrepôtModule
+  ) {
     this.knex = Knex(config);
   }
 
@@ -45,8 +49,11 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
     return [...this.cache.values()];
   }
 
-  duModule(_module: Module): Promise<Mesure[]> {
-    throw new Error('Method not implemented.');
+  async duModule(module: Module): Promise<Mesure[]> {
+    if (this.cache.size === 0) {
+      await this.tous();
+    }
+    return [...this.cache.values().filter((mesure) => mesure.module!.id === module.id)];
   }
 
   async parId(id: string): Promise<Mesure | undefined> {
@@ -57,7 +64,7 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
   }
 
   private async chargerCache(): Promise<void> {
-    const mesuresLues = await this.knex<MesurePersistee>('mesures').where({ id_module: 1 });
+    const mesuresLues = await this.knex<MesurePersistee>('mesures');
     const mesures = await Promise.all(mesuresLues.map((m) => this.convertisEnMesure(m)));
     mesures.forEach((m) => this.cache.set(m.id, m));
   }
@@ -83,6 +90,8 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
       })
       .filter((e) => !!e);
 
+    const module = await this.entrepôtModule.parId(mesurePersistee.id_module);
+
     return new Mesure(
       mesurePersistee.id,
       mesurePersistee.titre,
@@ -93,7 +102,8 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
       mesurePersistee.ordre,
       mesurePersistee.risques,
       mesurePersistee.liens,
-      exigences
+      exigences,
+      module!
     );
   }
 }
