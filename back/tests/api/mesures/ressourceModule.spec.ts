@@ -15,7 +15,7 @@ import { jeanneDupont, mesureAuthentA2Etapes, moduleCyberdépart } from '../obje
 import { mesureDeTest } from './constructeurDeMesure';
 import { utilisateurDeTest } from './constructeurDUtilisateur';
 
-describe('La ressource des mesures de sécurité d’un module', () => {
+describe('La ressource d’un module', () => {
   describe('sur requête GET', () => {
     let serveur: Express;
     let entrepotMesure: EntrepotMesureMemoire;
@@ -42,11 +42,11 @@ describe('La ressource des mesures de sécurité d’un module', () => {
       await entrepotUtilisateur.ajoute(jeanneDupont);
     });
 
-    const getMesuresCyberdépartConnecté = async () =>
+    const getModuleCyberdépartConnecté = async () =>
       request(serveur).get('/api/modules/1').set('Cookie', cookieJeanneDupont);
 
     it('réponds 200', async () => {
-      const reponse = await getMesuresCyberdépartConnecté();
+      const reponse = await getModuleCyberdépartConnecté();
 
       assert.equal(reponse.status, 200);
     });
@@ -60,7 +60,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
     it('renvoie la liste des mesures', async () => {
       await entrepotMesure.ajoute(mesureAuthentA2Etapes());
 
-      const { body } = await getMesuresCyberdépartConnecté();
+      const { body } = await getModuleCyberdépartConnecté();
 
       assert.equal(body.mesures.length, 1);
       assert.equal(body.mesures[0].id, 'AUTH.5');
@@ -74,7 +74,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
         mesureDeTest().avecLId('MES2').duModule(moduleCyberdépart).avecLOrdre(10).construis()
       );
 
-      const { body } = await getMesuresCyberdépartConnecté();
+      const { body } = await getModuleCyberdépartConnecté();
 
       assert.equal(body.mesures[0].id, 'MES2');
       assert.equal(body.mesures[1].id, 'MES1');
@@ -125,7 +125,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
       await entrepôtModule.ajoute(module);
       await entrepotMesure.ajoute(mesureDeTest().duModule(module).construis());
 
-      const { body } = await getMesuresCyberdépartConnecté();
+      const { body } = await getModuleCyberdépartConnecté();
 
       assert.equal(body.mesures.length, 0);
     });
