@@ -297,7 +297,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ressourceAvisMesure(configurationServeur),
       ressourcePriseEnCompte(configurationServeur)
     );
-    app.use('/api/modules/cyberdepart/mesures', ressourceMesuresDeModule(configurationServeur));
+    app.use('/api/modules/1/mesures', ressourceMesuresDeModule(configurationServeur));
     app.use('/module-cyberdepart', ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart'));
     app.use('/mesures/:id', ressourcePagesJekyllConnectees(configurationServeur, 'mesures'));
   }
