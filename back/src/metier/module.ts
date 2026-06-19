@@ -8,7 +8,7 @@ export class Module {
     readonly nom: string
   ) {}
 
-  cibleDéblocageBadgeCyberdépart() {
-    return Math.floor(this.mesures.length * 0.8);
-  }
+  cibleDéblocageBadgeCyberdépart = () => Math.floor(this.mesures.length * 0.8);
+
+  nombreDeMesures = () => this.mesures.length;
 }
