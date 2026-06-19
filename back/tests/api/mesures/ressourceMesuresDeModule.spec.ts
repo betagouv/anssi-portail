@@ -62,8 +62,8 @@ describe('La ressource des mesures de sécurité d’un module', () => {
 
       const { body } = await getMesuresCyberdépartConnecté();
 
-      assert.equal(body.length, 1);
-      assert.equal(body[0].id, 'AUTH.5');
+      assert.equal(body.mesures.length, 1);
+      assert.equal(body.mesures[0].id, 'AUTH.5');
     });
 
     it('trie les mesures par ordre', async () => {
@@ -76,8 +76,8 @@ describe('La ressource des mesures de sécurité d’un module', () => {
 
       const { body } = await getMesuresCyberdépartConnecté();
 
-      assert.equal(body[0].id, 'MES2');
-      assert.equal(body[1].id, 'MES1');
+      assert.equal(body.mesures[0].id, 'MES2');
+      assert.equal(body.mesures[1].id, 'MES1');
     });
 
     it('réponds 404 si la fonctionnalité est désactivée', async () => {
@@ -116,8 +116,8 @@ describe('La ressource des mesures de sécurité d’un module', () => {
 
       const { body } = await request(serveur).get('/api/modules/1/mesures').set('Cookie', cookie);
 
-      assert.equal(body[0].estPriseEnCompte, true);
-      assert.equal(body[1].estPriseEnCompte, false);
+      assert.equal(body.mesures[0].estPriseEnCompte, true);
+      assert.equal(body.mesures[1].estPriseEnCompte, false);
     });
 
     it('ne renvoie que les mesures du module demandé', async () => {
@@ -127,7 +127,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
 
       const { body } = await getMesuresCyberdépartConnecté();
 
-      assert.equal(body.length, 0);
+      assert.equal(body.mesures.length, 0);
     });
 
     it('réponds 404 si le module est inconnu', async () => {
