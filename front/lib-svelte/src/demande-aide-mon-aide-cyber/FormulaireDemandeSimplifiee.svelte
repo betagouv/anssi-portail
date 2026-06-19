@@ -83,7 +83,7 @@
     <div class="formulaire">
       <dsfr-badges-group {badges} size="sm"></dsfr-badges-group>
       {#if mode !== 'autonome'}
-        <h5>Demande de diagnostic cyber</h5>
+        <h3 class="fr-h5">Demande de diagnostic cyber</h3>
       {/if}
       <div class="champ recherche-organisation">
         <label class="libelle" for="entite">Recherchez votre organisation</label>
@@ -181,16 +181,6 @@
 
     dsfr-badges-group {
       align-self: flex-start;
-    }
-
-    h5 {
-      font-size: 1.25rem;
-      line-height: 1.75rem;
-      margin: 0 0 24px;
-      @include a-partir-de(md) {
-        font-size: 1.375rem;
-        line-height: 1.75rem;
-      }
     }
 
     .champ {

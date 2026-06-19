@@ -19,7 +19,7 @@
 </script>
 
 <div class="accordeon">
-  <Accordeon libelle="Mon organisation est-elle concernée&nbsp;?">
+  <Accordeon libelle="Mon organisation est-elle concernée&nbsp;?" niveauTitre={4}>
     <div class="corps">
       <p>
         ✅ <strong
@@ -35,7 +35,11 @@
       </p>
     </div>
   </Accordeon>
-  <Accordeon libelle="Que risque mon organisation en cas de cyberattaques&nbsp;?" on:toggle={afficheLaVideo}>
+  <Accordeon
+    libelle="Que risque mon organisation en cas de cyberattaques&nbsp;?"
+    on:toggle={afficheLaVideo}
+    niveauTitre={4}
+  >
     <div class="corps">
       <p>
         🛡️ Les cyberattaques se sont massivement multipliées ces dernières années, et <strong
@@ -80,7 +84,7 @@
       </p>
     </div>
   </Accordeon>
-  <Accordeon libelle="Qu’est-ce qu’un Aidant cyber&nbsp;?">
+  <Accordeon libelle="Qu’est-ce qu’un Aidant cyber&nbsp;?" niveauTitre={4}>
     <div class="corps">
       <p>
         👤 Un Aidant cyber est un tiers de confiance, issu d’un organisme public ou adhérent d’une association à but non
@@ -99,7 +103,7 @@
       </p>
     </div>
   </Accordeon>
-  <Accordeon libelle="Que se passe-t-il après la demande de diagnostic&nbsp;?">
+  <Accordeon libelle="Que se passe-t-il après la demande de diagnostic&nbsp;?" niveauTitre={4}>
     <div class="corps">
       <p>📩 Une fois votre demande envoyée :</p>
       <ol>
@@ -119,7 +123,7 @@
       </p>
     </div>
   </Accordeon>
-  <Accordeon libelle="Le diagnostic est-il confidentiel et anonyme&nbsp;?">
+  <Accordeon libelle="Le diagnostic est-il confidentiel et anonyme&nbsp;?" niveauTitre={4}>
     <div class="corps">
       <p>
         🔒 Oui, le diagnostic est
