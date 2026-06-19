@@ -25,4 +25,13 @@ export class Mesure {
     readonly exigences: ExigenceNIS2[],
     readonly module: Module | null = null
   ) {}
+
+  rangDansSonModule = () => {
+    if (this.module === null) {
+      return -1;
+    }
+    return this.module.mesures.sort((a, b) => a.ordre - b.ordre).findIndex((m) => m.id === this.id);
+  };
+
+  positionDansSonModule = () => this.rangDansSonModule() + 1;
 }

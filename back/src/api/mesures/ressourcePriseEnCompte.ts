@@ -6,26 +6,24 @@ import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
 import { corpsVide, valideCorpsRequete } from '../zod';
 
-const mesureDeModule = async (
-  idMesure: string,
-  entrepotMesure: EntrepotMesure
-): Promise<[Mesure | undefined, number]> => {
+const mesureDeModule = async (idMesure: string, entrepotMesure: EntrepotMesure): Promise<Mesure | undefined> => {
   const mesure = await entrepotMesure.parId(idMesure);
   if (!mesure) {
-    return [undefined, -1];
+    return undefined;
   }
   const mesuresDuModule = await entrepotMesure.duModule(mesure.module!);
-  const rang = mesuresDuModule.sort((a, b) => a.ordre - b.ordre).findIndex((m) => m.id === idMesure);
-
-  if (rang === -1) {
-    return [undefined, rang];
-  }
-
   if (mesure.module) {
     //TODO : supprimer cette condition et cette façon de faire
     mesure.module.mesures = mesuresDuModule;
+    const rang = mesure.rangDansSonModule();
+
+    if (rang === -1) {
+      return undefined;
+    }
+
+    return mesure;
   }
-  return [mesure, rang];
+  return undefined;
 };
 
 export const ressourcePriseEnCompte = ({
@@ -47,13 +45,13 @@ export const ressourcePriseEnCompte = ({
       const utilisateur = requete.utilisateur as Utilisateur;
       const idMesure = requete.params.idMesure as string;
 
-      const [mesure, rang] = await mesureDeModule(idMesure, entrepotMesure);
+      const mesure = await mesureDeModule(idMesure, entrepotMesure);
 
       if (!mesure) {
         return reponse.sendStatus(404);
       }
 
-      await utilisateur.prendEnCompte(mesure, rang, entrepotPriseEnCompte, busEvenements, mesure.module!);
+      await utilisateur.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, mesure.module!);
 
       return reponse.sendStatus(201);
     })
