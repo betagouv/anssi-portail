@@ -9,16 +9,20 @@ import { corpsVide, valideCorpsRequete } from '../zod';
 const mesureDeModule = async (
   idMesure: string,
   entrepotMesure: EntrepotMesure
-): Promise<[Mesure | undefined, number, number]> => {
+): Promise<[Mesure | undefined, number]> => {
   const toutesLesMesures = await entrepotMesure.tous();
   const rang = toutesLesMesures.sort((a, b) => a.ordre - b.ordre).findIndex((m) => m.id === idMesure);
 
   if (rang === -1) {
-    return [undefined, rang, toutesLesMesures.length];
+    return [undefined, rang];
   }
 
   const mesure = toutesLesMesures[rang];
-  return [mesure, rang, toutesLesMesures.length];
+  if (mesure.module) {
+    //TODO : supprimer cette condition et cette façon de faire
+    mesure.module.mesures = toutesLesMesures;
+  }
+  return [mesure, rang];
 };
 
 export const ressourcePriseEnCompte = ({
@@ -40,13 +44,13 @@ export const ressourcePriseEnCompte = ({
       const utilisateur = requete.utilisateur as Utilisateur;
       const idMesure = requete.params.idMesure as string;
 
-      const [mesure, rang, taille] = await mesureDeModule(idMesure, entrepotMesure);
+      const [mesure, rang] = await mesureDeModule(idMesure, entrepotMesure);
 
       if (!mesure) {
         return reponse.sendStatus(404);
       }
 
-      await utilisateur.prendEnCompte(mesure, taille, rang, entrepotPriseEnCompte, busEvenements);
+      await utilisateur.prendEnCompte(mesure, rang, entrepotPriseEnCompte, busEvenements, mesure.module!);
 
       return reponse.sendStatus(201);
     })

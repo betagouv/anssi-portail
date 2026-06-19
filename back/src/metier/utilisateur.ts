@@ -6,6 +6,7 @@ import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
 import { EntrepotPriseEnCompte } from './entrepotPriseEnCompte';
 import { Mesure } from './mesure';
+import { Module } from './module';
 import { PriseEnCompte } from './PriseEnCompte';
 
 export type Role = 'GESTION_GUIDES';
@@ -133,21 +134,21 @@ export class Utilisateur {
 
   async prendEnCompte(
     mesure: Mesure,
-    taille: number,
     rang: number,
     entrepotPriseEnCompte: EntrepotPriseEnCompte,
-    busEvenements: BusEvenements
+    busEvenements: BusEvenements,
+    module: Module
   ) {
     if (this.estPriseEnCompte(mesure)) {
       return;
     }
     await entrepotPriseEnCompte.ajoute(new PriseEnCompte(this, mesure));
-    await busEvenements.publie(new MesurePriseEnCompte(this.emailHache(), mesure.id, taille, rang + 1));
+    await busEvenements.publie(new MesurePriseEnCompte(this.emailHache(), mesure.id, module.mesures.length, rang + 1));
     this.mesuresPrisesEnCompte.push(mesure);
-    if (this.mesuresPrisesEnCompte.length === taille) {
+    if (this.mesuresPrisesEnCompte.length === module.mesures.length) {
       await busEvenements.publie(new ModuleTermine(this.emailHache(), 1, 'Cyberdépart'));
     }
-    const cibleBadgeCyberdépart = Math.floor(taille * 0.8);
+    const cibleBadgeCyberdépart = module.cibleDéblocageBadgeCyberdépart();
     if (this.mesuresPrisesEnCompte.length === cibleBadgeCyberdépart) {
       await busEvenements.publie(new BadgeCyberdépartDébloqué(this.emailHache()));
     }
