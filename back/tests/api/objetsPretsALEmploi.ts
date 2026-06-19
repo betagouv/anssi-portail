@@ -1,5 +1,6 @@
 import { Financement } from '../../src/metier/financement';
 import { Guide } from '../../src/metier/guide';
+import { Module } from '../../src/metier/module';
 import { ExigenceNIS2 } from '../../src/metier/nis2/exigence';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from './fauxObjets';
@@ -113,6 +114,8 @@ export const guidePublieDemain = () =>
     besoins: ['SECURISER'],
   });
 
+export const moduleCyberdépart = new Module(1, 'Cyberdépart');
+
 export const mesureAuthentA2Etapes = () => {
   const exigence = new ExigenceNIS2({
     reference: '10.B.5-EI/EE',
@@ -163,5 +166,6 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
       'https://cyber.gouv.fr/publications/recommandations-relatives-lauthentification-multifacteur-et-aux-mots-de-passe'
     )
     .avecUneExigence(exigence)
+    .duModule(moduleCyberdépart)
     .construis();
 };

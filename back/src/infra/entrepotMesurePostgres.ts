@@ -2,6 +2,7 @@ import Knex from 'knex';
 import config from '../../knexfile';
 import { EntrepotMesure } from '../metier/entrepotMesure';
 import { LienPourAllerPlusLoin, Mesure, type Risque } from '../metier/mesure';
+import { Module } from '../metier/module';
 import { EntrepotExigence } from '../metier/nis2/entrepotExigence';
 
 export type MesurePersistee = {
@@ -17,6 +18,7 @@ export type MesurePersistee = {
   risques: Risque[];
   liens: LienPourAllerPlusLoin[];
 };
+
 export class EntrepotMesurePostgres implements EntrepotMesure {
   knex: Knex.Knex;
   /**
@@ -41,6 +43,10 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
     }
     await this.chargementEnCours;
     return [...this.cache.values()];
+  }
+
+  duModule(_module: Module): Promise<Mesure[]> {
+    throw new Error('Method not implemented.');
   }
 
   async parId(id: string): Promise<Mesure | undefined> {

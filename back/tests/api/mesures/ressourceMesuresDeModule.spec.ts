@@ -5,11 +5,13 @@ import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
+import { Module } from '../../../src/metier/module';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
+import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire';
 import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
-import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
+import { jeanneDupont, mesureAuthentA2Etapes, moduleCyberdépart } from '../objetsPretsALEmploi';
 import { mesureDeTest } from './constructeurDeMesure';
 import { utilisateurDeTest } from './constructeurDUtilisateur';
 
@@ -19,6 +21,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
     let entrepotMesure: EntrepotMesureMemoire;
     let adaptateurEnvironnement: AdaptateurEnvironnement;
     let entrepotUtilisateur: EntrepotUtilisateur;
+    let entrepôtModule: EntrepôtModuleMémoire;
     const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
 
     beforeEach(async () => {
@@ -27,10 +30,13 @@ describe('La ressource des mesures de sécurité d’un module', () => {
       };
       entrepotMesure = new EntrepotMesureMemoire();
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+      entrepôtModule = new EntrepôtModuleMémoire();
+      await entrepôtModule.ajoute(moduleCyberdépart);
       serveur = creeServeur({
         ...configurationDeTestDuServeur,
         entrepotMesure,
         entrepotUtilisateur,
+        entrepôtModule,
         adaptateurEnvironnement,
       });
       await entrepotUtilisateur.ajoute(jeanneDupont);
@@ -61,8 +67,12 @@ describe('La ressource des mesures de sécurité d’un module', () => {
     });
 
     it('trie les mesures par ordre', async () => {
-      await entrepotMesure.ajoute(mesureDeTest().avecLId('MES1').avecLOrdre(30).construis());
-      await entrepotMesure.ajoute(mesureDeTest().avecLId('MES2').avecLOrdre(10).construis());
+      await entrepotMesure.ajoute(
+        mesureDeTest().avecLId('MES1').duModule(moduleCyberdépart).avecLOrdre(30).construis()
+      );
+      await entrepotMesure.ajoute(
+        mesureDeTest().avecLId('MES2').duModule(moduleCyberdépart).avecLOrdre(10).construis()
+      );
 
       const { body } = await getMesuresConnecte();
 
@@ -100,12 +110,24 @@ describe('La ressource des mesures de sécurité d’un module', () => {
       const cookie = encodeSession({ email: unUtilisateurAvecUnePriseEnCompte.email, token: 'valide' });
       await entrepotUtilisateur.ajoute(unUtilisateurAvecUnePriseEnCompte);
       await entrepotMesure.ajoute(mesureAuth5);
-      await entrepotMesure.ajoute(mesureDeTest().avecLId('MES1').avecLOrdre(15).construis());
+      await entrepotMesure.ajoute(
+        mesureDeTest().avecLId('MES1').avecLOrdre(15).duModule(moduleCyberdépart).construis()
+      );
 
       const { body } = await request(serveur).get('/api/modules/1/mesures').set('Cookie', cookie);
 
       assert.equal(body[0].estPriseEnCompte, true);
       assert.equal(body[1].estPriseEnCompte, false);
+    });
+
+    it('ne renvoie que les mesures du module demandé', async () => {
+      const module = new Module(4, 'Perte de maîtrise de son entité');
+      await entrepôtModule.ajoute(module);
+      await entrepotMesure.ajoute(mesureDeTest().duModule(module).construis());
+
+      const { body } = await getMesuresConnecte();
+
+      assert.equal(body.length, 0);
     });
   });
 });

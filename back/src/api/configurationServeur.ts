@@ -14,6 +14,7 @@ import { EntrepotFinancement } from '../metier/entrepotFinancement';
 import { EntrepotGuide } from '../metier/entrepotGuide';
 import { EntrepotGuideTravail } from '../metier/entrepotGuideTravail';
 import { EntrepotMesure } from '../metier/entrepotMesure';
+import { EntrepôtModule } from '../metier/EntrepotModule';
 import { EntrepotPriseEnCompte } from '../metier/entrepotPriseEnCompte';
 import { EntrepotResultatTest } from '../metier/entrepotResultatTest';
 import { EntrepotSessionDeGroupe } from '../metier/entrepotSessionDeGroupe';
@@ -48,6 +49,7 @@ export type ConfigurationServeur = {
   entrepotExigence: EntrepotExigence;
   entrepotMesure: EntrepotMesure;
   entrepotPriseEnCompte: EntrepotPriseEnCompte;
+  entrepôtModule: EntrepôtModule;
   fournisseurChemin: FournisseurChemin;
   generateurCodeSessionDeGroupe: GenerateurCodeSessionDeGroupe;
   messagerieInstantanee: MessagerieInstantanee;
