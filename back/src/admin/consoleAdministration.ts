@@ -4,6 +4,7 @@ import pThrottle from 'p-throttle';
 import config from '../../knexfile';
 import { CompteCree } from '../bus/evenements/compteCree';
 import { MiseAJourFavorisUtilisateur } from '../bus/miseAJourFavorisUtilisateur';
+import { EntrepôtModulePostgres } from '../entrepotModulePostgres';
 import { AdaptateurChiffrement, fabriqueAdaptateurChiffrement } from '../infra/adaptateurChiffrement';
 import { fabriqueAdaptateurEmail } from '../infra/adaptateurEmailBrevo';
 import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
@@ -20,10 +21,10 @@ import { EntrepotMesurePostgres } from '../infra/entrepotMesurePostgres';
 import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres';
 import { EntrepotExigenceGrist } from '../infra/nis2/entrepotExigenceGrist';
 import { UtilisateurBDD } from '../infra/utilisateurBDD';
-import { EntrepotExigence } from '../metier/nis2/entrepotExigence';
 import { AdaptateurEmail } from '../metier/adaptateurEmail';
 import { EntrepotFavori } from '../metier/entrepotFavori';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
+import { EntrepotExigence } from '../metier/nis2/entrepotExigence';
 import { CodeRegion } from '../metier/referentielRegions';
 import { CodeSecteur } from '../metier/referentielSecteurs';
 import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
@@ -54,7 +55,8 @@ export class ConsoleAdministration {
     const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
       adaptateurEnvironnement,
     });
-    const entrepotMesure = new EntrepotMesurePostgres(entrepotExigence);
+    const entrepôtModule = new EntrepôtModulePostgres();
+    const entrepotMesure = new EntrepotMesurePostgres(entrepotExigence, entrepôtModule);
 
     this.entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
       adaptateurProfilAnssi,
