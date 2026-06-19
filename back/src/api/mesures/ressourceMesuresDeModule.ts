@@ -33,7 +33,7 @@ const ressourceMesuresDeModule = ({
         })
       );
       const mesuresTries = mesuresPresentation.toSorted((a, b) => a.ordre - b.ordre);
-      reponse.status(200).send(mesuresTries);
+      reponse.status(200).send({ mesures: mesuresTries });
     })
   );
 
