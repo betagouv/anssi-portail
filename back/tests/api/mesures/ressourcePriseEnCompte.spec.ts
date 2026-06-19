@@ -5,15 +5,16 @@ import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc';
 import { MesurePriseEnCompte } from '../../../src/bus/evenements/mesurePriseEnCompte';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
+import { Module } from '../../../src/metier/module';
+import { Utilisateur } from '../../../src/metier/utilisateur';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
 import { EntrepotPriseEnCompteMemoire } from '../../persistance/EntrepotPriseEnCompteMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
 import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur } from '../fauxObjets';
-import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
+import { mesureAuthentA2Etapes, moduleCyberdépart } from '../objetsPretsALEmploi';
 import { mesureDeTest } from './constructeurDeMesure';
-import { Utilisateur } from '../../../src/metier/utilisateur';
 import { utilisateurDeTest } from './constructeurDUtilisateur';
 
 describe("La ressource de prise en compte d'une mesure", () => {
@@ -81,8 +82,12 @@ describe("La ressource de prise en compte d'une mesure", () => {
       });
 
       it('publie un événement de prise en compte', async () => {
-        await entrepotMesure.ajoute(mesureDeTest().avecLId('AUTH.1').avecLOrdre(1).construis());
-        await entrepotMesure.ajoute(mesureDeTest().avecLId('AUTH.20').avecLOrdre(20).construis());
+        await entrepotMesure.ajoute(
+          mesureDeTest().avecLId('AUTH.1').avecLOrdre(1).duModule(moduleCyberdépart).construis()
+        );
+        await entrepotMesure.ajoute(
+          mesureDeTest().avecLId('AUTH.20').avecLOrdre(20).duModule(moduleCyberdépart).construis()
+        );
 
         await putPriseEnCompteConnecte();
 
@@ -92,6 +97,15 @@ describe("La ressource de prise en compte d'une mesure", () => {
         assert.equal(evenement!.emailHache, 'utilisateur@mail.com-hache');
         assert.equal(evenement!.nombreDeMesures, 3);
         assert.equal(evenement!.position, 2);
+      });
+
+      it('ne compte pas les mesures des autres modules dans l’événement', async () => {
+        await entrepotMesure.ajoute(mesureDeTest().duModule(new Module(2, 'test')).construis());
+
+        await putPriseEnCompteConnecte();
+
+        const evenement = busEvenements.recupereEvenement(MesurePriseEnCompte);
+        assert.equal(evenement!.nombreDeMesures, 1);
       });
     });
   });

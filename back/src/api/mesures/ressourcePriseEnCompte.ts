@@ -10,17 +10,20 @@ const mesureDeModule = async (
   idMesure: string,
   entrepotMesure: EntrepotMesure
 ): Promise<[Mesure | undefined, number]> => {
-  const toutesLesMesures = await entrepotMesure.tous();
-  const rang = toutesLesMesures.sort((a, b) => a.ordre - b.ordre).findIndex((m) => m.id === idMesure);
+  const mesure = await entrepotMesure.parId(idMesure);
+  if (!mesure) {
+    return [undefined, -1];
+  }
+  const mesuresDuModule = await entrepotMesure.duModule(mesure.module!);
+  const rang = mesuresDuModule.sort((a, b) => a.ordre - b.ordre).findIndex((m) => m.id === idMesure);
 
   if (rang === -1) {
     return [undefined, rang];
   }
 
-  const mesure = toutesLesMesures[rang];
   if (mesure.module) {
     //TODO : supprimer cette condition et cette façon de faire
-    mesure.module.mesures = toutesLesMesures;
+    mesure.module.mesures = mesuresDuModule;
   }
   return [mesure, rang];
 };
