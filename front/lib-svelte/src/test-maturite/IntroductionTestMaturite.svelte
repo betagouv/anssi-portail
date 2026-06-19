@@ -38,9 +38,9 @@
     <hr />
     <div class="acces-session-groupe">
       <hgroup>
-        <h6>
+        <h3 class="fr-h6">
           <lab-anssi-icone taille="md" nom="team-fill"></lab-anssi-icone> Session de groupe
-        </h6>
+        </h3>
         <p class="texte-standard-md">
           Évaluez de façon indicative la maturité cyber du groupe en comparant anonymement les résultats des
           participants.
@@ -98,8 +98,9 @@
 
   .acces-session-groupe {
     hgroup {
-      h6 {
+      .fr-h6 {
         margin-bottom: 8px;
+
         lab-anssi-icone {
           margin-right: 8px;
         }
