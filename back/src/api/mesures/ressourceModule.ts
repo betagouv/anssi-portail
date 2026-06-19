@@ -24,7 +24,8 @@ const ressourceModule = ({
       if (!module) {
         return reponse.sendStatus(404);
       }
-      const mesures = await entrepotMesure.duModule(module!);
+      const mesures = await entrepotMesure.duModule(module);
+      module.mesures = mesures;
       const utilisateur = requete.utilisateur as Utilisateur;
 
       const mesuresPresentation = await Promise.all(
@@ -33,7 +34,7 @@ const ressourceModule = ({
         })
       );
       const mesuresTries = mesuresPresentation.toSorted((a, b) => a.ordre - b.ordre);
-      reponse.status(200).send({ mesures: mesuresTries });
+      reponse.status(200).send({ cibleBadge: module.cibleDéblocageBadgeCyberdépart(), mesures: mesuresTries });
     })
   );
 

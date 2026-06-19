@@ -135,5 +135,15 @@ describe('La ressource d’un module', () => {
 
       assert.equal(reponse.status, 404);
     });
+
+    it('fournis la cible de déblocage du bagde cyberdépart', async () => {
+      for (let i = 0; i < 5; i++) {
+        await entrepotMesure.ajoute(mesureDeTest().duModule(moduleCyberdépart).construis());
+      }
+
+      const { body } = await getModuleCyberdépartConnecté();
+
+      assert.equal(body.cibleBadge, 4);
+    });
   });
 });

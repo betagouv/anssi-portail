@@ -12,11 +12,12 @@
 
   let mesures: Mesure[] = $state([]);
   const totalMesures = $derived(mesures.length);
-  const cibleBadge = $derived(Math.floor(mesures.length * 0.8));
+  let cibleBadge = $state(0);
 
   onMount(async () => {
-    const reponse = await axios.get<{ mesures: Mesure[] }>(`/api/modules/1`);
+    const reponse = await axios.get<{ cibleBadge: number; mesures: Mesure[] }>(`/api/modules/1`);
     mesures = reponse.data.mesures;
+    cibleBadge = reponse.data.cibleBadge;
     if (sessionStorage.getItem('mesure-prise-en-compte') === 'true') {
       toasterStore.succes('Mesure déclarée prise en compte', 'Mesure déclarée prise en compte');
       sessionStorage.removeItem('mesure-prise-en-compte');
