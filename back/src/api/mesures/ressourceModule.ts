@@ -5,7 +5,7 @@ import { filetRouteAsynchrone } from '../middleware';
 import { corpsVide, valideCorpsRequete } from '../zod';
 import { mesurePresentation } from './mesurePresentation';
 
-const ressourceMesuresDeModule = ({
+const ressourceModule = ({
   entrepotMesure,
   entrepotUtilisateur,
   entrepôtModule,
@@ -40,4 +40,4 @@ const ressourceMesuresDeModule = ({
   return routeur;
 };
 
-export { ressourceMesuresDeModule };
+export { ressourceModule };

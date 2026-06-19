@@ -16,7 +16,7 @@ import { ressourceGuides } from './guides/ressourceGuides';
 import { ressourceGuidesMemesCollections } from './guides/ressourceGuidesMemesCollections';
 import { ressourceAvisMesure } from './mesures/ressourceAvisMesure';
 import { ressourceMesure } from './mesures/ressourceMesure';
-import { ressourceMesuresDeModule } from './mesures/ressourceMesuresDeModule';
+import { ressourceModule } from './mesures/ressourceModule';
 import { ressourcePriseEnCompte } from './mesures/ressourcePriseEnCompte';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide';
 import { ressourceExigencesNis2 } from './nis2/ressourceExigencesNis2';
@@ -297,7 +297,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ressourceAvisMesure(configurationServeur),
       ressourcePriseEnCompte(configurationServeur)
     );
-    app.use('/api/modules', ressourceMesuresDeModule(configurationServeur));
+    app.use('/api/modules', ressourceModule(configurationServeur));
     app.use('/module-cyberdepart', ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart'));
     app.use('/mesures/:id', ressourcePagesJekyllConnectees(configurationServeur, 'mesures'));
   }
