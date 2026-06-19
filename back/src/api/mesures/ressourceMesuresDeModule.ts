@@ -21,6 +21,9 @@ const ressourceMesuresDeModule = ({
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const module = await entrepôtModule.parId(Number.parseInt(requete.params.idModule as string));
+      if (!module) {
+        return reponse.sendStatus(404);
+      }
       const mesures = await entrepotMesure.duModule(module!);
       const utilisateur = requete.utilisateur as Utilisateur;
 
