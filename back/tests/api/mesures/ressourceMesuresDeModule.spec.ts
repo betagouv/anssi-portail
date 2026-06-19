@@ -43,7 +43,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
     });
 
     const getMesuresCyberdépartConnecté = async () =>
-      request(serveur).get('/api/modules/1/mesures').set('Cookie', cookieJeanneDupont);
+      request(serveur).get('/api/modules/1').set('Cookie', cookieJeanneDupont);
 
     it('réponds 200', async () => {
       const reponse = await getMesuresCyberdépartConnecté();
@@ -52,7 +52,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
     });
 
     it('réponds 401 si l’utilisateur n’est pas connecté', async () => {
-      const reponse = await request(serveur).get('/api/modules/1/mesures');
+      const reponse = await request(serveur).get('/api/modules/1');
 
       assert.equal(reponse.status, 401);
     });
@@ -98,7 +98,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
         entrepotMesure,
         adaptateurEnvironnement,
       });
-      const reponse = await request(serveurSansLaRessource).get('/api/modules/1/mesures');
+      const reponse = await request(serveurSansLaRessource).get('/api/modules/1');
 
       assert.equal(reponse.status, 404);
     });
@@ -114,7 +114,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
         mesureDeTest().avecLId('MES1').avecLOrdre(15).duModule(moduleCyberdépart).construis()
       );
 
-      const { body } = await request(serveur).get('/api/modules/1/mesures').set('Cookie', cookie);
+      const { body } = await request(serveur).get('/api/modules/1').set('Cookie', cookie);
 
       assert.equal(body.mesures[0].estPriseEnCompte, true);
       assert.equal(body.mesures[1].estPriseEnCompte, false);
@@ -131,7 +131,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
     });
 
     it('réponds 404 si le module est inconnu', async () => {
-      const reponse = await request(serveur).get('/api/modules/199/mesures').set('Cookie', cookieJeanneDupont);
+      const reponse = await request(serveur).get('/api/modules/199').set('Cookie', cookieJeanneDupont);
 
       assert.equal(reponse.status, 404);
     });
