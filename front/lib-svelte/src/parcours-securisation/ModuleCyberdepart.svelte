@@ -15,7 +15,7 @@
   const cibleBadge = $derived(Math.floor(mesures.length * 0.8));
 
   onMount(async () => {
-    const reponse = await axios.get<{ mesures: Mesure[] }>(`/api/modules/1/mesures`);
+    const reponse = await axios.get<{ mesures: Mesure[] }>(`/api/modules/1`);
     mesures = reponse.data.mesures;
     if (sessionStorage.getItem('mesure-prise-en-compte') === 'true') {
       toasterStore.succes('Mesure déclarée prise en compte', 'Mesure déclarée prise en compte');

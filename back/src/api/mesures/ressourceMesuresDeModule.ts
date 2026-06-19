@@ -15,7 +15,7 @@ const ressourceMesuresDeModule = ({
   const routeur = Router();
 
   routeur.get(
-    '/:idModule/mesures',
+    '/:idModule',
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(corpsVide),
