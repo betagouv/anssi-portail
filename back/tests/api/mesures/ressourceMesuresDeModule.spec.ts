@@ -42,11 +42,11 @@ describe('La ressource des mesures de sécurité d’un module', () => {
       await entrepotUtilisateur.ajoute(jeanneDupont);
     });
 
-    const getMesuresConnecte = async () =>
+    const getMesuresCyberdépartConnecté = async () =>
       request(serveur).get('/api/modules/1/mesures').set('Cookie', cookieJeanneDupont);
 
     it('réponds 200', async () => {
-      const reponse = await getMesuresConnecte();
+      const reponse = await getMesuresCyberdépartConnecté();
 
       assert.equal(reponse.status, 200);
     });
@@ -60,7 +60,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
     it('renvoie la liste des mesures', async () => {
       await entrepotMesure.ajoute(mesureAuthentA2Etapes());
 
-      const { body } = await getMesuresConnecte();
+      const { body } = await getMesuresCyberdépartConnecté();
 
       assert.equal(body.length, 1);
       assert.equal(body[0].id, 'AUTH.5');
@@ -74,7 +74,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
         mesureDeTest().avecLId('MES2').duModule(moduleCyberdépart).avecLOrdre(10).construis()
       );
 
-      const { body } = await getMesuresConnecte();
+      const { body } = await getMesuresCyberdépartConnecté();
 
       assert.equal(body[0].id, 'MES2');
       assert.equal(body[1].id, 'MES1');
@@ -125,9 +125,15 @@ describe('La ressource des mesures de sécurité d’un module', () => {
       await entrepôtModule.ajoute(module);
       await entrepotMesure.ajoute(mesureDeTest().duModule(module).construis());
 
-      const { body } = await getMesuresConnecte();
+      const { body } = await getMesuresCyberdépartConnecté();
 
       assert.equal(body.length, 0);
+    });
+
+    it('réponds 404 si le module est inconnu', async () => {
+      const reponse = await request(serveur).get('/api/modules/199/mesures').set('Cookie', cookieJeanneDupont);
+
+      assert.equal(reponse.status, 404);
     });
   });
 });

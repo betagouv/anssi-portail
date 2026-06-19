@@ -9,6 +9,6 @@ export class EntrepotMesureMemoire extends EntrepotMemoire<Mesure> implements En
   }
 
   async duModule(module: Module): Promise<Mesure[]> {
-    return this.entites.filter((mesure) => mesure.module === module);
+    return this.entites.filter((mesure) => mesure.module!.id === module.id);
   }
 }
