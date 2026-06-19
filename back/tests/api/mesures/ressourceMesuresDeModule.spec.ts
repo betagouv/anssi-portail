@@ -37,7 +37,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
     });
 
     const getMesuresConnecte = async () =>
-      request(serveur).get('/api/modules/cyberdepart/mesures').set('Cookie', cookieJeanneDupont);
+      request(serveur).get('/api/modules/1/mesures').set('Cookie', cookieJeanneDupont);
 
     it('réponds 200', async () => {
       const reponse = await getMesuresConnecte();
@@ -46,7 +46,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
     });
 
     it('réponds 401 si l’utilisateur n’est pas connecté', async () => {
-      const reponse = await request(serveur).get('/api/modules/cyberdepart/mesures');
+      const reponse = await request(serveur).get('/api/modules/1/mesures');
 
       assert.equal(reponse.status, 401);
     });
@@ -88,7 +88,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
         entrepotMesure,
         adaptateurEnvironnement,
       });
-      const reponse = await request(serveurSansLaRessource).get('/api/modules/cyberdepart/mesures');
+      const reponse = await request(serveurSansLaRessource).get('/api/modules/1/mesures');
 
       assert.equal(reponse.status, 404);
     });
@@ -102,7 +102,7 @@ describe('La ressource des mesures de sécurité d’un module', () => {
       await entrepotMesure.ajoute(mesureAuth5);
       await entrepotMesure.ajoute(mesureDeTest().avecLId('MES1').avecLOrdre(15).construis());
 
-      const { body } = await request(serveur).get('/api/modules/cyberdepart/mesures').set('Cookie', cookie);
+      const { body } = await request(serveur).get('/api/modules/1/mesures').set('Cookie', cookie);
 
       assert.equal(body[0].estPriseEnCompte, true);
       assert.equal(body[1].estPriseEnCompte, false);
