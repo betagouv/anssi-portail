@@ -1,17 +1,17 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
+import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque';
+import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompte';
+import { ModuleTermine } from '../../src/bus/evenements/moduleTermine';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
+import { EntrepotPriseEnCompte } from '../../src/metier/entrepotPriseEnCompte';
 import { Organisation, Utilisateur } from '../../src/metier/utilisateur';
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets';
-import { utilisateurDeTest } from '../api/mesures/constructeurDUtilisateur';
-import { mesureAuthentA2Etapes } from '../api/objetsPretsALEmploi';
-import { EntrepotPriseEnCompte } from '../../src/metier/entrepotPriseEnCompte';
-import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire';
-import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests';
-import { ModuleTermine } from '../../src/bus/evenements/moduleTermine';
-import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompte';
 import { mesureDeTest } from '../api/mesures/constructeurDeMesure';
-import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque';
+import { utilisateurDeTest } from '../api/mesures/constructeurDUtilisateur';
+import { mesureAuthentA2Etapes, moduleCyberdépart } from '../api/objetsPretsALEmploi';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests';
+import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire';
 
 describe("L'utilisateur", () => {
   const infosUtilisateur = {
@@ -170,7 +170,8 @@ describe("L'utilisateur", () => {
     });
 
     it('publie un événement de completion quand toutes les mesures du module sont prises en compte', async () => {
-      await utilisateurDeParcours.prendEnCompte(mesure, 1, 1, entrepotPriseEnCompte, busEvenements);
+      moduleCyberdépart.mesures = [mesureDeTest().construis()];
+      await utilisateurDeParcours.prendEnCompte(mesure, 1, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
 
       busEvenements.aRecuUnEvenement(ModuleTermine);
       const evenement = busEvenements.recupereEvenement(ModuleTermine);
@@ -181,14 +182,22 @@ describe("L'utilisateur", () => {
     });
 
     it("ne publie pas d'événement de completion si toutes les mesures du module ne sont pas prises en compte", async () => {
-      await utilisateurDeParcours.prendEnCompte(mesure, 2, 1, entrepotPriseEnCompte, busEvenements);
+      moduleCyberdépart.mesures = [mesureDeTest().construis(), mesureDeTest().construis()];
+
+      await utilisateurDeParcours.prendEnCompte(mesure, 2, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
 
       busEvenements.naPasRecuDEvenement(ModuleTermine);
     });
 
     it("ignore la prise en compte d'une mesure déjà prise en compte", async () => {
-      await utilisateurDeParcours.prendEnCompte(mesure, 2, 1, entrepotPriseEnCompte, fabriqueBusPourLesTests());
-      await utilisateurDeParcours.prendEnCompte(mesure, 2, 1, entrepotPriseEnCompte, busEvenements);
+      await utilisateurDeParcours.prendEnCompte(
+        mesure,
+        2,
+        entrepotPriseEnCompte,
+        fabriqueBusPourLesTests(),
+        moduleCyberdépart
+      );
+      await utilisateurDeParcours.prendEnCompte(mesure, 2, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
 
       assert.equal(utilisateurDeParcours.mesuresPrisesEnCompte.length, 1);
       busEvenements.naPasRecuDEvenement(ModuleTermine);
@@ -202,7 +211,14 @@ describe("L'utilisateur", () => {
           mesureDeTest().avecLId('mes2').construis(),
           mesureDeTest().avecLId('mes3').construis(),
         ];
-        await utilisateurDeParcours.prendEnCompte(mesure, 5, 1, entrepotPriseEnCompte, busEvenements);
+        moduleCyberdépart.mesures = [
+          mesureDeTest().construis(),
+          mesureDeTest().construis(),
+          mesureDeTest().construis(),
+          mesureDeTest().construis(),
+          mesureDeTest().construis(),
+        ];
+        await utilisateurDeParcours.prendEnCompte(mesure, 5, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
 
         busEvenements.aRecuUnEvenement(BadgeCyberdépartDébloqué);
       });
@@ -215,7 +231,7 @@ describe("L'utilisateur", () => {
           mesureDeTest().avecLId('mes4').construis(),
         ];
 
-        await utilisateurDeParcours.prendEnCompte(mesure, 5, 1, entrepotPriseEnCompte, busEvenements);
+        await utilisateurDeParcours.prendEnCompte(mesure, 5, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
 
         busEvenements.naPasRecuDEvenement(BadgeCyberdépartDébloqué);
       });
@@ -226,7 +242,7 @@ describe("L'utilisateur", () => {
           mesureDeTest().avecLId('mes2').construis(),
         ];
 
-        await utilisateurDeParcours.prendEnCompte(mesure, 5, 1, entrepotPriseEnCompte, busEvenements);
+        await utilisateurDeParcours.prendEnCompte(mesure, 5, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
 
         busEvenements.naPasRecuDEvenement(BadgeCyberdépartDébloqué);
       });
