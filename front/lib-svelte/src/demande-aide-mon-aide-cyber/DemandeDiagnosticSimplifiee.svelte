@@ -36,7 +36,7 @@
       Questions fréquentes
     </summary>
     <div class="faq">
-      <h6>Questions les plus fréquentes</h6>
+      <h3 class="fr-h6">Questions les plus fréquentes</h3>
       <FoireAuxQuestions {urlBase} />
     </div>
   </details>
@@ -154,13 +154,6 @@
         background-color: var(--background-default-grey);
         padding: 48px 16px;
         margin-top: 32px;
-
-        h6 {
-          font-weight: bold;
-          font-size: 1.125rem;
-          line-height: 1.5rem;
-          margin-block: 0 24px;
-        }
       }
     }
   }
