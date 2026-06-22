@@ -92,6 +92,11 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
 
     const module = await this.entrepôtModule.parId(mesurePersistee.id_module);
 
+    if (!module) {
+      console.warn('Module de la mesure non trouvé !', mesurePersistee.id, mesurePersistee.id_module);
+      throw new Error('Module de la mesure non trouvé');
+    }
+
     return new Mesure(
       mesurePersistee.id,
       mesurePersistee.titre,
@@ -103,7 +108,7 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
       mesurePersistee.risques,
       mesurePersistee.liens,
       exigences,
-      module!
+      module
     );
   }
 }

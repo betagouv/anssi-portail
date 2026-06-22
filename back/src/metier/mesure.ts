@@ -23,15 +23,10 @@ export class Mesure {
     readonly risques: Risque[],
     readonly liens: LienPourAllerPlusLoin[],
     readonly exigences: ExigenceNIS2[],
-    readonly module: Module | null = null
+    readonly module: Module
   ) {}
 
-  rangDansSonModule = () => {
-    if (this.module === null) {
-      return -1;
-    }
-    return this.module.mesures.sort((a, b) => a.ordre - b.ordre).findIndex((m) => m.id === this.id);
-  };
+  rangDansSonModule = () => this.module.mesures.sort((a, b) => a.ordre - b.ordre).findIndex((m) => m.id === this.id);
 
   positionDansSonModule = () => this.rangDansSonModule() + 1;
 }
