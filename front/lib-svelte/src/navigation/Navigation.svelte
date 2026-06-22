@@ -84,7 +84,7 @@
       id: 'nav-financements',
       type: 'link',
       href: '/financements',
-      active: cheminRelatif === '/financements',
+      active: cheminRelatif === '/financements' || cheminRelatif.startsWith('/financements/'),
     },
   ]);
 </script>
