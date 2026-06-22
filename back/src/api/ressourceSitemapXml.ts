@@ -7,7 +7,7 @@ import { corpsVide, valideCorpsRequete } from './zod';
 
 interface LienSitemap {
   url: string;
-  modifieLe: Date;
+  modifieLe?: Date | undefined;
 }
 
 const recupereLiens = (pages: string[], { fournisseurChemin }: ConfigurationServeur): LienSitemap[] => {
@@ -22,29 +22,39 @@ const recupereLiens = (pages: string[], { fournisseurChemin }: ConfigurationServ
   });
 };
 
-export const ressourceSitemapXml = (pages: string[], configurationServeur: ConfigurationServeur) => {
+export const ressourceSitemapXml = (pagesStatiques: string[], configurationServeur: ConfigurationServeur) => {
   const cheminVersSitemapXml = configurationServeur.fournisseurChemin.sitemapXml();
   if (cheminVersSitemapXml.length === 0) return () => {};
   try {
     const sitemapStream = new SitemapStream({ hostname: 'https://messervices.cyber.gouv.fr' });
 
-    const liens = recupereLiens(pages, configurationServeur);
-    liens.forEach((lien) => {
+    const liensStatiques = recupereLiens(pagesStatiques, configurationServeur);
+    liensStatiques.forEach((lien) => {
       sitemapStream.write({
         url: lien.url,
-        lastmod: lien.modifieLe.toISOString(),
+        lastmod: lien.modifieLe?.toISOString(),
       });
     });
-    sitemapStream.end();
 
-    streamToPromise(sitemapStream)
-      .then((data) => {
-        writeFileSync(cheminVersSitemapXml, data.toString());
-        console.log(`Sitemap généré : ${cheminVersSitemapXml}`);
-      })
-      .catch((err) => {
-        console.error('Erreur lors de la génération :', err);
+    construitRoutesDynamiques(configurationServeur).then((liensDynamiques) => {
+      liensDynamiques.forEach((lien: LienSitemap) => {
+        sitemapStream.write({
+          url: lien.url,
+          lastmod: lien.modifieLe?.toISOString(),
+        });
       });
+
+      sitemapStream.end();
+
+      streamToPromise(sitemapStream)
+        .then((data) => {
+          writeFileSync(cheminVersSitemapXml, data.toString());
+          console.log(`Sitemap généré : ${cheminVersSitemapXml}`);
+        })
+        .catch((err) => {
+          console.error('Erreur lors de la génération :', err);
+        });
+    });
   } catch (error) {
     console.error('Erreur lors de la génération du sitemap :', error);
   }
@@ -55,4 +65,14 @@ export const ressourceSitemapXml = (pages: string[], configurationServeur: Confi
     reponse.sendFile(cheminVersSitemapXml);
   });
   return routeur;
+};
+
+const construitRoutesDynamiques = async ({ entrepotFinancement }: ConfigurationServeur): Promise<LienSitemap[]> => {
+  const liensFinancement = (await entrepotFinancement.tous()).map((financement) => {
+    return {
+      url: `/financement/${financement.id}`,
+    };
+  });
+
+  return [...liensFinancement];
 };
