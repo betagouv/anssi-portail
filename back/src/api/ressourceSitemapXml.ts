@@ -3,6 +3,7 @@ import fs, { writeFileSync } from 'fs';
 import * as path from 'path';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import { ConfigurationServeur } from './configurationServeur';
+import { siteFront } from './fournisseurChemin';
 import { corpsVide, valideCorpsRequete } from './zod';
 
 interface LienSitemap {
@@ -80,5 +81,18 @@ const construitRoutesDynamiques = async ({
     modifieLe: guide.dateMiseAJour,
   }));
 
-  return [...liensFinancement, ...liensGuides];
+  const liensRessources = siteFront
+    .fichiers()
+    .filter((f) => f.indexOf('front/_site/ressources') >= 0)
+    .filter((f) => f.indexOf('.html') >= 0)
+    .map((f) => ({ url: `/ressources/${f.split('/').pop()}`, modifieLe: fs.statSync(f).mtime }));
+
+  const liensServices = siteFront
+    .fichiers()
+    .filter((f) => f.indexOf('front/_site/services') >= 0)
+    .filter((f) => f.indexOf('.html') >= 0)
+    .filter((f) => f.indexOf('index.html') < 0)
+    .map((f) => ({ url: `/services/${f.split('/').pop()}`, modifieLe: fs.statSync(f).mtime }));
+
+  return [...liensFinancement, ...liensGuides, ...liensRessources, ...liensServices];
 };
