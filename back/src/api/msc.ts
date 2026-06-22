@@ -156,7 +156,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       .envoieFichierEnrichi(fournisseurChemin.cheminPageJekyll('financements'));
   });
 
-  const routesSimples = [
+  const routesStatiques = [
     '',
     'catalogue',
     'parcours-debuter',
@@ -189,7 +189,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'confirmation-abonnement-infolettre',
   ];
 
-  routesSimples
+  routesStatiques
     .concat(
       configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()
         ? ['simulateur-nis2']
@@ -367,7 +367,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   // A laisser à la fin de la fonction
   app.use('/robots.txt', ressourceRobotsTxt(configurationServeur));
-  app.use('/sitemap.xml', ressourceSitemapXml(routesSimples, configurationServeur));
+  app.use('/sitemap.xml', ressourceSitemapXml(routesStatiques, configurationServeur));
 
   // A laisser à la fin de la fonction
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
