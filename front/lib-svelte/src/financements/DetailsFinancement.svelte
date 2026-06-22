@@ -28,7 +28,7 @@
   let financement: Financement | undefined = $state();
   let entreesMenuFinancement: Record<string, string> | undefined = $state();
 
-  const idFinancement = Number(new URLSearchParams(window.location.search).get('idFinancement'));
+  const idFinancement = Number(new URL(window.location.href).pathname.split('/').pop());
 
   onMount(async () => {
     try {

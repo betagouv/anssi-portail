@@ -142,6 +142,18 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(configurationServeur.middleware.verifieModeMaintenance);
 
+  app.use('/financements', (requete, reponse) => {
+    const id = requete.query.idFinancement;
+    if (Object.keys(requete.query).length > 0 && id) {
+      // on garde la redirection pour ne pas casser les liens existants
+      return reponse.redirect(301, `/financements/${id}`);
+    }
+    reponse
+      .contentType('text/html')
+      .status(200)
+      .envoieFichierEnrichi(fournisseurChemin.cheminPageJekyll('financements'));
+  });
+
   const routesSimples = [
     '',
     'catalogue',
@@ -164,7 +176,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'promouvoir-diagnostic-cyber',
     'session-groupe',
     'resultats-session-groupe',
-    'financements',
     'prestataires-labellises',
     'contacts',
     'nis2',
@@ -183,6 +194,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
         : []
     )
     .forEach((page) => app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
+
+  app.use('/financements/:id', ressourcePagesJekyll(configurationServeur, 'financements'));
 
   app.use('/favoris-partages/:id', ressourcePagesJekyll(configurationServeur, 'favoris-partages'));
 
