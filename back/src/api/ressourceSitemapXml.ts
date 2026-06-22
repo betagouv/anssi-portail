@@ -67,12 +67,18 @@ export const ressourceSitemapXml = (pagesStatiques: string[], configurationServe
   return routeur;
 };
 
-const construitRoutesDynamiques = async ({ entrepotFinancement }: ConfigurationServeur): Promise<LienSitemap[]> => {
-  const liensFinancement = (await entrepotFinancement.tous()).map((financement) => {
-    return {
-      url: `/financement/${financement.id}`,
-    };
-  });
+const construitRoutesDynamiques = async ({
+  entrepotFinancement,
+  entrepotGuide,
+}: ConfigurationServeur): Promise<LienSitemap[]> => {
+  const liensFinancement = (await entrepotFinancement.tous()).map((financement) => ({
+    url: `/financement/${financement.id}`,
+  }));
 
-  return [...liensFinancement];
+  const liensGuides = (await entrepotGuide.tous()).map((guide) => ({
+    url: `/guides/${guide.id}`,
+    modifieLe: guide.dateMiseAJour,
+  }));
+
+  return [...liensFinancement, ...liensGuides];
 };
