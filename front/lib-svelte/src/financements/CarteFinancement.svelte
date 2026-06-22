@@ -5,7 +5,7 @@
   export let financement: ResumeFinancement;
 </script>
 
-<a class="lien-carte" href={`/financements?idFinancement=${financement.id}`}>
+<a class="lien-carte" href={`/financements/${financement.id}`}>
   <div class="contenu">
     <div class="type-financement">
       {#each financement.typesDeFinancement as type (type)}
