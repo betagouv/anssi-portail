@@ -5,21 +5,22 @@ import { Utilisateur } from '../../metier/utilisateur';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
 import { corpsVide, valideCorpsRequete } from '../zod';
+import { Module } from '../../metier/module';
+import { EntrepôtModule } from '../../metier/EntrepotModule';
 
-const mesureDeModule = async (idMesure: string, entrepotMesure: EntrepotMesure): Promise<Mesure | undefined> => {
+const mesureDeModule = async (
+  idMesure: string,
+  entrepotMesure: EntrepotMesure,
+  entrepôtModule: EntrepôtModule
+): Promise<{ mesure: Mesure; module: Module } | undefined> => {
   const mesure = await entrepotMesure.parId(idMesure);
   if (!mesure) {
     return undefined;
   }
-  //TODO : supprimer cette façon de faire
-  mesure.module.mesures = await entrepotMesure.duModule(mesure.module);
-  const rang = mesure.module.rangDeLaMesure(mesure);
 
-  if (rang === -1) {
-    return undefined;
-  }
+  const module = await entrepôtModule.pourLaMesure(mesure);
 
-  return mesure;
+  return { mesure, module };
 };
 
 export const ressourcePriseEnCompte = ({
@@ -27,6 +28,7 @@ export const ressourcePriseEnCompte = ({
   entrepotUtilisateur,
   adaptateurHachage,
   entrepotMesure,
+  entrepôtModule,
   entrepotPriseEnCompte,
   busEvenements,
 }: ConfigurationServeur) => {
@@ -41,13 +43,14 @@ export const ressourcePriseEnCompte = ({
       const utilisateur = requete.utilisateur as Utilisateur;
       const idMesure = requete.params.idMesure as string;
 
-      const mesure = await mesureDeModule(idMesure, entrepotMesure);
+      const mesureEtModule = await mesureDeModule(idMesure, entrepotMesure, entrepôtModule);
 
-      if (!mesure) {
+      if (!mesureEtModule) {
         return reponse.sendStatus(404);
       }
 
-      await utilisateur.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, mesure.module);
+      const { mesure, module } = mesureEtModule;
+      await utilisateur.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, module);
 
       return reponse.sendStatus(201);
     })

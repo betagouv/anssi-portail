@@ -2,6 +2,7 @@ import Knex from 'knex';
 import config from '../knexfile';
 import { EntrepôtModule } from './metier/EntrepotModule';
 import { Module } from './metier/module';
+import { Mesure } from './metier/mesure';
 
 type ModulePersisté = { id: number; nom: string };
 
@@ -18,5 +19,9 @@ export class EntrepôtModulePostgres implements EntrepôtModule {
       return undefined;
     }
     return new Module(moduleLu.id, moduleLu.nom);
+  }
+
+  pourLaMesure(_mesure: Mesure): Promise<Module> {
+    throw new Error('Method not implemented.');
   }
 }

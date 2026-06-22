@@ -11,9 +11,10 @@ import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesT
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
 import { EntrepotPriseEnCompteMemoire } from '../../persistance/EntrepotPriseEnCompteMemoire';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
+import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire';
 import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur } from '../fauxObjets';
-import { mesureAuthentA2Etapes, moduleCyberdépart } from '../objetsPretsALEmploi';
+import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
 import { mesureDeTest } from './constructeurDeMesure';
 import { utilisateurDeTest } from './constructeurDUtilisateur';
 
@@ -21,6 +22,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
   let serveur: Express;
   let entrepotPriseEnCompte: EntrepotPriseEnCompteMemoire;
   let entrepotMesure: EntrepotMesureMemoire;
+  let entrepôtModule: EntrepôtModuleMémoire;
   let entrepotUtilisateur: EntrepotUtilisateur;
   let busEvenements: MockBusEvenement;
   let utilisateurParcours: Utilisateur;
@@ -30,11 +32,13 @@ describe("La ressource de prise en compte d'une mesure", () => {
     entrepotPriseEnCompte = new EntrepotPriseEnCompteMemoire();
     entrepotMesure = new EntrepotMesureMemoire();
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+    entrepôtModule = new EntrepôtModuleMémoire();
     busEvenements = fabriqueBusPourLesTests();
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       entrepotPriseEnCompte,
       entrepotMesure,
+      entrepôtModule,
       entrepotUtilisateur,
       busEvenements,
     });
@@ -53,12 +57,16 @@ describe("La ressource de prise en compte d'une mesure", () => {
 
     describe("d'un utilisateur connecté", () => {
       const mesure = mesureAuthentA2Etapes();
+      let module: Module;
 
       const putPriseEnCompteConnecte = () =>
         request(serveur).put('/api/mesures/AUTH.5/prise-en-compte').set('Cookie', cookie);
 
       beforeEach(async () => {
+        module = new Module(1, 'Cyberdépart');
+        module.mesures = [mesure];
         await entrepotMesure.ajoute(mesure);
+        await entrepôtModule.ajoute(module);
         await entrepotUtilisateur.ajoute(utilisateurParcours);
       });
 
@@ -82,12 +90,11 @@ describe("La ressource de prise en compte d'une mesure", () => {
       });
 
       it('publie un événement de prise en compte', async () => {
-        await entrepotMesure.ajoute(
-          mesureDeTest().avecLId('AUTH.1').avecLOrdre(1).duModule(moduleCyberdépart).construis()
-        );
-        await entrepotMesure.ajoute(
-          mesureDeTest().avecLId('AUTH.20').avecLOrdre(20).duModule(moduleCyberdépart).construis()
-        );
+        const mesureAuth1 = mesureDeTest().avecLId('AUTH.1').avecLOrdre(1).construis();
+        const mesureAuth20 = mesureDeTest().avecLId('AUTH.20').avecLOrdre(20).construis();
+        await entrepotMesure.ajoute(mesureAuth1);
+        await entrepotMesure.ajoute(mesureAuth20);
+        module.mesures.push(mesureAuth1, mesureAuth20);
 
         await putPriseEnCompteConnecte();
 
@@ -100,7 +107,10 @@ describe("La ressource de prise en compte d'une mesure", () => {
       });
 
       it('ne compte pas les mesures des autres modules dans l’événement', async () => {
-        await entrepotMesure.ajoute(mesureDeTest().duModule(new Module(2, 'test')).construis());
+        const nouveuModule = new Module(2, 'Nouveau module');
+        const nouvelleMesure = mesureDeTest().construis();
+        await entrepôtModule.ajoute(nouveuModule);
+        await entrepotMesure.ajoute(nouvelleMesure);
 
         await putPriseEnCompteConnecte();
 
