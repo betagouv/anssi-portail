@@ -11,7 +11,7 @@ import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateu
 import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire';
 import { encodeSession } from '../cookie';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
-import { jeanneDupont, mesureAuthentA2Etapes, moduleCyberdépart } from '../objetsPretsALEmploi';
+import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
 import { mesureDeTest } from './constructeurDeMesure';
 import { utilisateurDeTest } from './constructeurDUtilisateur';
 
@@ -22,6 +22,7 @@ describe('La ressource d’un module', () => {
     let adaptateurEnvironnement: AdaptateurEnvironnement;
     let entrepotUtilisateur: EntrepotUtilisateur;
     let entrepôtModule: EntrepôtModuleMémoire;
+    let module: Module;
     const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'valide' });
 
     beforeEach(async () => {
@@ -31,7 +32,6 @@ describe('La ressource d’un module', () => {
       entrepotMesure = new EntrepotMesureMemoire();
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
       entrepôtModule = new EntrepôtModuleMémoire();
-      await entrepôtModule.ajoute(moduleCyberdépart);
       serveur = creeServeur({
         ...configurationDeTestDuServeur,
         entrepotMesure,
@@ -39,6 +39,8 @@ describe('La ressource d’un module', () => {
         entrepôtModule,
         adaptateurEnvironnement,
       });
+      module = new Module(1, 'Cyberdépart');
+      await entrepôtModule.ajoute(module);
       await entrepotUtilisateur.ajoute(jeanneDupont);
     });
 
@@ -58,7 +60,9 @@ describe('La ressource d’un module', () => {
     });
 
     it('renvoie la liste des mesures', async () => {
-      await entrepotMesure.ajoute(mesureAuthentA2Etapes());
+      const mesure = mesureAuthentA2Etapes();
+      module.mesures.push(mesure);
+      await entrepotMesure.ajoute(mesure);
 
       const { body } = await getModuleCyberdépartConnecté();
 
@@ -67,12 +71,13 @@ describe('La ressource d’un module', () => {
     });
 
     it('trie les mesures par ordre', async () => {
-      await entrepotMesure.ajoute(
-        mesureDeTest().avecLId('MES1').duModule(moduleCyberdépart).avecLOrdre(30).construis()
-      );
-      await entrepotMesure.ajoute(
-        mesureDeTest().avecLId('MES2').duModule(moduleCyberdépart).avecLOrdre(10).construis()
-      );
+      const mesureMes1 = mesureDeTest().avecLId('MES1').avecLOrdre(30).construis();
+      module.mesures.push(mesureMes1);
+      await entrepotMesure.ajoute(mesureMes1);
+
+      const mesureMes2 = mesureDeTest().avecLId('MES2').avecLOrdre(10).construis();
+      module.mesures.push(mesureMes2);
+      await entrepotMesure.ajoute(mesureMes2);
 
       const { body } = await getModuleCyberdépartConnecté();
 
@@ -105,14 +110,16 @@ describe('La ressource d’un module', () => {
 
     it('indique si les mesures ont été prises en compte', async () => {
       const mesureAuth5 = mesureAuthentA2Etapes();
-      const unUtilisateurAvecUnePriseEnCompte = utilisateurDeTest().avecUneMesurePriseEnCompte(mesureAuth5).construis();
+      module.mesures.push(mesureAuth5);
+      await entrepotMesure.ajoute(mesureAuth5);
 
+      const mesureMes1 = mesureDeTest().avecLId('MES1').avecLOrdre(15).construis();
+      module.mesures.push(mesureMes1);
+      await entrepotMesure.ajoute(mesureMes1);
+
+      const unUtilisateurAvecUnePriseEnCompte = utilisateurDeTest().avecUneMesurePriseEnCompte(mesureAuth5).construis();
       const cookie = encodeSession({ email: unUtilisateurAvecUnePriseEnCompte.email, token: 'valide' });
       await entrepotUtilisateur.ajoute(unUtilisateurAvecUnePriseEnCompte);
-      await entrepotMesure.ajoute(mesureAuth5);
-      await entrepotMesure.ajoute(
-        mesureDeTest().avecLId('MES1').avecLOrdre(15).duModule(moduleCyberdépart).construis()
-      );
 
       const { body } = await request(serveur).get('/api/modules/1').set('Cookie', cookie);
 
@@ -121,9 +128,11 @@ describe('La ressource d’un module', () => {
     });
 
     it('ne renvoie que les mesures du module demandé', async () => {
-      const module = new Module(4, 'Perte de maîtrise de son entité');
-      await entrepôtModule.ajoute(module);
-      await entrepotMesure.ajoute(mesureDeTest().duModule(module).construis());
+      const module4 = new Module(4, 'Perte de maîtrise de son entité');
+      const mesure = mesureDeTest().construis();
+      module4.mesures.push(mesure);
+      await entrepôtModule.ajoute(module4);
+      await entrepotMesure.ajoute(mesure);
 
       const { body } = await getModuleCyberdépartConnecté();
 
@@ -138,7 +147,9 @@ describe('La ressource d’un module', () => {
 
     it('fournis la cible de déblocage du bagde cyberdépart', async () => {
       for (let i = 0; i < 5; i++) {
-        await entrepotMesure.ajoute(mesureDeTest().duModule(moduleCyberdépart).construis());
+        const mesure = mesureDeTest().construis();
+        await entrepotMesure.ajoute(mesure);
+        module.mesures.push(mesure);
       }
 
       const { body } = await getModuleCyberdépartConnecté();

@@ -1,9 +1,7 @@
 import Knex from 'knex';
 import config from '../../knexfile';
 import { EntrepotMesure } from '../metier/entrepotMesure';
-import { EntrepôtModule } from '../metier/EntrepotModule';
 import { LienPourAllerPlusLoin, Mesure, type Risque } from '../metier/mesure';
-import { Module } from '../metier/module';
 import { EntrepotExigence } from '../metier/nis2/entrepotExigence';
 
 export type MesurePersistee = {
@@ -29,10 +27,7 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
   private readonly cache: Map<Mesure['id'], Mesure> = new Map();
   private chargementEnCours: Promise<void> | null = null;
 
-  constructor(
-    private readonly entrepotExigence: EntrepotExigence,
-    private readonly entrepôtModule: EntrepôtModule
-  ) {
+  constructor(private readonly entrepotExigence: EntrepotExigence) {
     this.knex = Knex(config);
   }
 
@@ -47,13 +42,6 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
     }
     await this.chargementEnCours;
     return [...this.cache.values()];
-  }
-
-  async duModule(module: Module): Promise<Mesure[]> {
-    if (this.cache.size === 0) {
-      await this.tous();
-    }
-    return [...this.cache.values().filter((mesure) => mesure.module!.id === module.id)];
   }
 
   async parId(id: string): Promise<Mesure | undefined> {
@@ -90,13 +78,6 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
       })
       .filter((e) => !!e);
 
-    const module = await this.entrepôtModule.parId(mesurePersistee.id_module);
-
-    if (!module) {
-      console.warn('Module de la mesure non trouvé !', mesurePersistee.id, mesurePersistee.id_module);
-      throw new Error('Module de la mesure non trouvé');
-    }
-
     return new Mesure(
       mesurePersistee.id,
       mesurePersistee.titre,
@@ -107,8 +88,7 @@ export class EntrepotMesurePostgres implements EntrepotMesure {
       mesurePersistee.ordre,
       mesurePersistee.risques,
       mesurePersistee.liens,
-      exigences,
-      module
+      exigences
     );
   }
 }

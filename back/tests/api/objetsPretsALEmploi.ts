@@ -166,6 +166,5 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
       'https://cyber.gouv.fr/publications/recommandations-relatives-lauthentification-multifacteur-et-aux-mots-de-passe'
     )
     .avecUneExigence(exigence)
-    .duModule(moduleCyberdépart)
     .construis();
 };

@@ -1,4 +1,3 @@
-import { Module } from './module';
 import { ExigenceNIS2 } from './nis2/exigence';
 
 export type Risque = {
@@ -22,7 +21,6 @@ export class Mesure {
     readonly ordre: number,
     readonly risques: Risque[],
     readonly liens: LienPourAllerPlusLoin[],
-    readonly exigences: ExigenceNIS2[],
-    readonly module: Module
+    readonly exigences: ExigenceNIS2[]
   ) {}
 }

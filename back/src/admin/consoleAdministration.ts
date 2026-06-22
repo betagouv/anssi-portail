@@ -4,7 +4,6 @@ import pThrottle from 'p-throttle';
 import config from '../../knexfile';
 import { CompteCree } from '../bus/evenements/compteCree';
 import { MiseAJourFavorisUtilisateur } from '../bus/miseAJourFavorisUtilisateur';
-import { EntrepôtModulePostgres } from '../entrepotModulePostgres';
 import { AdaptateurChiffrement, fabriqueAdaptateurChiffrement } from '../infra/adaptateurChiffrement';
 import { fabriqueAdaptateurEmail } from '../infra/adaptateurEmailBrevo';
 import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
@@ -55,8 +54,7 @@ export class ConsoleAdministration {
     const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
       adaptateurEnvironnement,
     });
-    const entrepôtModule = new EntrepôtModulePostgres();
-    const entrepotMesure = new EntrepotMesurePostgres(entrepotExigence, entrepôtModule);
+    const entrepotMesure = new EntrepotMesurePostgres(entrepotExigence);
 
     this.entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
       adaptateurProfilAnssi,
