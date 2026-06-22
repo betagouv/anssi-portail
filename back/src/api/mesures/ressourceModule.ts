@@ -2,8 +2,9 @@ import { Request, Response, Router } from 'express';
 import { Utilisateur } from '../../metier/utilisateur';
 import { ConfigurationServeur } from '../configurationServeur';
 import { filetRouteAsynchrone } from '../middleware';
-import { corpsVide, valideCorpsRequete } from '../zod';
+import { valideParametresRequete } from '../zod';
 import { mesurePresentation } from './mesurePresentation';
+import { schemaRessourceModule } from './schemaRessourceModule.schema';
 
 const ressourceModule = ({
   entrepotMesure,
@@ -18,7 +19,7 @@ const ressourceModule = ({
     '/:idModule',
     middleware.verifieJWT,
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
-    valideCorpsRequete(corpsVide),
+    valideParametresRequete(schemaRessourceModule),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const module = await entrepôtModule.parId(Number.parseInt(requete.params.idModule as string));
       if (!module) {

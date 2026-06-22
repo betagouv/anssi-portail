@@ -145,5 +145,11 @@ describe('La ressource d’un module', () => {
 
       assert.equal(body.cibleBadge, 4);
     });
+
+    it('valide le type du paramètre de la requête', async () => {
+      const reponse = await request(serveur).get('/api/modules/pas-un-nombre').set('Cookie', cookieJeanneDupont);
+
+      assert.equal(reponse.status, 404);
+    });
   });
 });
