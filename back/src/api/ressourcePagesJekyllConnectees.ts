@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { BusEvenements } from '../bus/busEvenements';
 import { MesureConsultee } from '../bus/evenements/mesureConsultee';
+import { IdMesure } from '../metier/mesure';
 import { ConfigurationServeur } from './configurationServeur';
 import { filetRouteAsynchrone } from './middleware';
 import { corpsVide, valideCorpsRequete } from './zod';
@@ -8,7 +9,7 @@ import { corpsVide, valideCorpsRequete } from './zod';
 function publieMesureConsultee(nomPage: string, requete: Request, busEvenements: BusEvenements) {
   if (
     'mesures' === nomPage &&
-    /[A-Z_]{1,20}\.[0-9]{1,2}/.test(requete.params.id as string) &&
+    new IdMesure(requete.params.id as string).estValide() &&
     requete.utilisateur?.emailHache()
   ) {
     const evt = new MesureConsultee(requete.params.id as string, requete.utilisateur?.emailHache());

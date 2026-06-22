@@ -1,5 +1,13 @@
 import { ExigenceNIS2 } from './nis2/exigence';
 
+export class IdMesure {
+  constructor(private readonly id: string) {}
+
+  estValide(): boolean {
+    return /[A-Z_]{1,20}\.[0-9]{1,2}/.test(this.id);
+  }
+}
+
 export type Risque = {
   libelle: string;
   description: string;
