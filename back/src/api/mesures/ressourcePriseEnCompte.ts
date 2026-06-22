@@ -13,7 +13,7 @@ const mesureDeModule = async (idMesure: string, entrepotMesure: EntrepotMesure):
   }
   //TODO : supprimer cette façon de faire
   mesure.module.mesures = await entrepotMesure.duModule(mesure.module);
-  const rang = mesure.rangDansSonModule();
+  const rang = mesure.module.rangDeLaMesure(mesure);
 
   if (rang === -1) {
     return undefined;

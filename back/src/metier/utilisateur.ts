@@ -143,7 +143,7 @@ export class Utilisateur {
     }
     await entrepotPriseEnCompte.ajoute(new PriseEnCompte(this, mesure));
     await busEvenements.publie(
-      new MesurePriseEnCompte(this.emailHache(), mesure.id, module.nombreDeMesures(), mesure.positionDansSonModule())
+      new MesurePriseEnCompte(this.emailHache(), mesure.id, module.nombreDeMesures(), module.positionDeLaMesure(mesure))
     );
     this.mesuresPrisesEnCompte.push(mesure);
     if (this.mesuresPrisesEnCompte.length === module.nombreDeMesures()) {
