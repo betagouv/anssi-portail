@@ -7,7 +7,6 @@ import { mesurePresentation } from './mesurePresentation';
 import { schemaRessourceModule } from './schemaRessourceModule.schema';
 
 const ressourceModule = ({
-  entrepotMesure,
   entrepotUtilisateur,
   entrepôtModule,
   adaptateurHachage,
@@ -25,12 +24,10 @@ const ressourceModule = ({
       if (!module) {
         return reponse.sendStatus(404);
       }
-      const mesures = await entrepotMesure.duModule(module);
-      module.mesures = mesures;
       const utilisateur = requete.utilisateur as Utilisateur;
 
       const mesuresPresentation = await Promise.all(
-        mesures.map(async (mesure) => {
+        module.mesures.map(async (mesure) => {
           return mesurePresentation(mesure, utilisateur.estPriseEnCompte(mesure));
         })
       );

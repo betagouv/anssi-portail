@@ -72,7 +72,7 @@ const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
 
 const entrepôtModule = new EntrepôtModulePostgres();
 
-const entrepotMesure: EntrepotMesure = new EntrepotMesurePostgres(entrepotExigence, entrepôtModule);
+const entrepotMesure: EntrepotMesure = new EntrepotMesurePostgres(entrepotExigence);
 
 const entrepotUtilisateur = new EntrepotUtilisateurMPAPostgres({
   adaptateurProfilAnssi,

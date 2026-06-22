@@ -1,7 +1,5 @@
 import { LienPourAllerPlusLoin, Mesure, Risque } from '../../../src/metier/mesure';
-import { Module } from '../../../src/metier/module';
 import { ExigenceNIS2 } from '../../../src/metier/nis2/exigence';
-import { moduleCyberdépart } from '../objetsPretsALEmploi';
 
 export class ConstructeurDeMesure {
   private id: string = '';
@@ -14,7 +12,6 @@ export class ConstructeurDeMesure {
   private readonly risques: Risque[] = [];
   private readonly liens: LienPourAllerPlusLoin[] = [];
   private readonly exigences: ExigenceNIS2[] = [];
-  private module: Module = moduleCyberdépart;
 
   avecLId(id: string) {
     this.id = id;
@@ -66,11 +63,6 @@ export class ConstructeurDeMesure {
     return this;
   }
 
-  duModule(module: Module) {
-    this.module = module;
-    return this;
-  }
-
   construis() {
     return new Mesure(
       this.id,
@@ -82,8 +74,7 @@ export class ConstructeurDeMesure {
       this.ordre,
       this.risques,
       this.liens,
-      this.exigences,
-      this.module
+      this.exigences
     );
   }
 }
