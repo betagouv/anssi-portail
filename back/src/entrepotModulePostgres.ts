@@ -3,6 +3,8 @@ import config from '../knexfile';
 import { EntrepôtModule } from './metier/EntrepotModule';
 import { Module } from './metier/module';
 
+type ModulePersisté = { id: number; nom: string };
+
 export class EntrepôtModulePostgres implements EntrepôtModule {
   knex: Knex.Knex;
 
@@ -11,7 +13,7 @@ export class EntrepôtModulePostgres implements EntrepôtModule {
   }
 
   async parId(id: number): Promise<Module | undefined> {
-    const moduleLu = await this.knex<{ id: number; nom: string }>('modules').where({ id }).first();
+    const moduleLu = await this.knex<ModulePersisté>('modules').where({ id }).first();
     if (!moduleLu) {
       return undefined;
     }
