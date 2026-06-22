@@ -11,19 +11,15 @@ const mesureDeModule = async (idMesure: string, entrepotMesure: EntrepotMesure):
   if (!mesure) {
     return undefined;
   }
-  const mesuresDuModule = await entrepotMesure.duModule(mesure.module!);
-  if (mesure.module) {
-    //TODO : supprimer cette condition et cette façon de faire
-    mesure.module.mesures = mesuresDuModule;
-    const rang = mesure.rangDansSonModule();
+  //TODO : supprimer cette façon de faire
+  mesure.module.mesures = await entrepotMesure.duModule(mesure.module);
+  const rang = mesure.rangDansSonModule();
 
-    if (rang === -1) {
-      return undefined;
-    }
-
-    return mesure;
+  if (rang === -1) {
+    return undefined;
   }
-  return undefined;
+
+  return mesure;
 };
 
 export const ressourcePriseEnCompte = ({
@@ -51,7 +47,7 @@ export const ressourcePriseEnCompte = ({
         return reponse.sendStatus(404);
       }
 
-      await utilisateur.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, mesure.module!);
+      await utilisateur.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, mesure.module);
 
       return reponse.sendStatus(201);
     })
