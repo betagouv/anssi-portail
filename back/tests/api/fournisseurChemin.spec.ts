@@ -1,7 +1,12 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { PathTraversalError } from '../../src/api/erreurs';
-import { construisListeFichiersDuSite, fournisseurChemin, siteFront } from '../../src/api/fournisseurChemin';
+import {
+  construisListeFichiersDuSite,
+  FichierInconnu,
+  fournisseurChemin,
+  siteFront,
+} from '../../src/api/fournisseurChemin';
 
 describe('le fournisseurChemin', () => {
   describe("lorsqu'on récupère un fichier", () => {
@@ -69,7 +74,7 @@ describe('le fournisseurChemin', () => {
 
       assert.throws(
         () => fournisseurChemin.cheminPageJekyll('inconnue'),
-        (err) => err instanceof Error && /Fichier inconnu/.test(err.message)
+        (err) => err instanceof FichierInconnu && /Fichier inconnu .*_site\/inconnue\/index\.html/.test(err.message)
       );
     });
   });

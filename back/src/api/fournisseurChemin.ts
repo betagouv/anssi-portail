@@ -2,6 +2,12 @@ import { readdirSync } from 'node:fs';
 import { join } from 'path';
 import { PathTraversalError } from './erreurs';
 
+export class FichierInconnu extends Error {
+  constructor(chemin: string) {
+    super(`Fichier inconnu ${chemin}`);
+  }
+}
+
 const valideChemin = (nomFichier: string): void => {
   const decodedPath = decodeURIComponent(nomFichier);
   if (decodedPath.includes('..') || decodedPath.startsWith('/') || decodedPath.startsWith('\\')) {
@@ -30,7 +36,7 @@ const construisChemin = (...morceauxChemin: string[]): string => {
   }
   const chemin = join(process.cwd(), 'front', '_site', ...morceauxChemin);
   if (!siteFront.fichiers().includes(chemin)) {
-    throw new Error(`Fichier inconnu ${chemin}`);
+    throw new FichierInconnu(chemin);
   }
   return chemin;
 };

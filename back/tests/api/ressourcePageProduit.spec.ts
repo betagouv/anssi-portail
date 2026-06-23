@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import { join } from 'path';
 import request from 'supertest';
-import { FournisseurChemin } from '../../src/api/fournisseurChemin';
+import { FichierInconnu, FournisseurChemin } from '../../src/api/fournisseurChemin';
 import { creeServeur } from '../../src/api/msc';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets';
 
@@ -72,5 +72,22 @@ describe('La ressource page produit', () => {
 
     assert.equal(reponse.status, 301);
     assert.equal(reponse.headers.location, '/nis2');
+  });
+
+  it('retourne une erreur 404 si la page n’est pas trouvée', async () => {
+    fournisseurChemin.cheminProduitJekyll = (_repertoireProduits: string, _idProduit: string) => {
+      throw new FichierInconnu('');
+    };
+    let nomFichierAppele = '';
+    fournisseurChemin.ressourceDeBase = (nomFichier: string) => {
+      nomFichierAppele = nomFichier;
+      return 'ok';
+    };
+
+    const reponse = await request(serveur).get('/services/inconnu').accept('text/html');
+
+    assert.equal(reponse.status, 404);
+    assert.equal(reponse.headers['content-type'], 'text/html; charset=utf-8');
+    assert.equal(nomFichierAppele, '404.html');
   });
 });
