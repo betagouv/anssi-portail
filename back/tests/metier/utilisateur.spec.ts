@@ -203,6 +203,19 @@ describe("L'utilisateur", () => {
       busEvenements.naPasRecuDEvenement(MesurePriseEnCompte);
     });
 
+    it('signale que la prise en compte termine le module', async () => {
+      moduleCyberdépart.mesures = [mesureDeTest().construis()];
+
+      const nouvelÉtatDuModule = await utilisateurDeParcours.prendEnCompte(
+        mesure,
+        entrepotPriseEnCompte,
+        busEvenements,
+        moduleCyberdépart
+      );
+
+      assert.equal(nouvelÉtatDuModule.moduleTerminé, true);
+    });
+
     describe('du module Cyberdépart', () => {
       it('publie un événement de déblocage de badge', async () => {
         utilisateurDeParcours.mesuresPrisesEnCompte = [
@@ -220,6 +233,29 @@ describe("L'utilisateur", () => {
         await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
 
         busEvenements.aRecuUnEvenement(BadgeCyberdépartDébloqué);
+      });
+
+      it('signale que la prise en compte debloque le badge Cyberdépart', async () => {
+        utilisateurDeParcours.mesuresPrisesEnCompte = [
+          mesureDeTest().avecLId('mes1').construis(),
+          mesureDeTest().avecLId('mes2').construis(),
+          mesureDeTest().avecLId('mes3').construis(),
+        ];
+        moduleCyberdépart.mesures = [
+          mesureDeTest().construis(),
+          mesureDeTest().construis(),
+          mesureDeTest().construis(),
+          mesureDeTest().construis(),
+          mesureDeTest().construis(),
+        ];
+        const nouvelÉtatDuModule = await utilisateurDeParcours.prendEnCompte(
+          mesure,
+          entrepotPriseEnCompte,
+          busEvenements,
+          moduleCyberdépart
+        );
+
+        assert.equal(nouvelÉtatDuModule.badgeCyberdépartDebloqué, true);
       });
 
       it("ne publie pas un événement de déblocage de badge s'il a déjà été débloqué", async () => {
