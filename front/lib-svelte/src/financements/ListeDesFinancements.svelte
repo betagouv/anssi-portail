@@ -82,7 +82,7 @@
           {:else}
             <div class="aucun-resultat">
               <img src="/assets/images/homme-cherchant-avec-loupe.svg" alt="Aucun résultat" />
-              <h1>Désolé, aucun résultat trouvé</h1>
+              <p class="fr-h2">Désolé, aucun résultat trouvé</p>
               <lab-anssi-bouton
                 on:click={reinitialiseFiltres}
                 on:keypress
@@ -141,13 +141,9 @@
           grid-column: 1 / -1;
           text-align: center;
 
-          h1 {
-            font-size: 1.75rem;
-            line-height: 2.25rem;
-            @include a-partir-de(sm) {
-              font-size: 2rem;
-              line-height: 2.5rem;
-            }
+          .fr-h2 {
+            color: var(--text-title-grey);
+            margin-block: 0 24px;
           }
 
           img {
