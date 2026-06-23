@@ -137,9 +137,16 @@ export class Utilisateur {
     entrepotPriseEnCompte: EntrepotPriseEnCompte,
     busEvenements: BusEvenements,
     module: Module
-  ) {
+  ): Promise<{
+    badgeCyberdépartDebloqué: boolean;
+    moduleTerminé: boolean;
+  }> {
+    const nouvelEtatModule = {
+      badgeCyberdépartDebloqué: false,
+      moduleTerminé: false,
+    };
     if (this.estPriseEnCompte(mesure)) {
-      return;
+      return nouvelEtatModule;
     }
     await entrepotPriseEnCompte.ajoute(new PriseEnCompte(this, mesure));
     await busEvenements.publie(
@@ -148,10 +155,13 @@ export class Utilisateur {
     this.mesuresPrisesEnCompte.push(mesure);
     if (this.mesuresPrisesEnCompte.length === module.nombreDeMesures()) {
       await busEvenements.publie(new ModuleTermine(this.emailHache(), 1, 'Cyberdépart'));
+      nouvelEtatModule.moduleTerminé = true;
     }
     const cibleBadgeCyberdépart = module.cibleDéblocageBadgeCyberdépart();
     if (this.mesuresPrisesEnCompte.length === cibleBadgeCyberdépart) {
       await busEvenements.publie(new BadgeCyberdépartDébloqué(this.emailHache()));
+      nouvelEtatModule.badgeCyberdépartDebloqué = true;
     }
+    return nouvelEtatModule;
   }
 }
