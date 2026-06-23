@@ -25,8 +25,23 @@
     {% assign urlSansSlashFinal = urlSansSlashFinal | slice: 0, new_length %}
   {% endif %}
   <link rel="canonical" href="{{ urlSansSlashFinal }}" />
-  <meta name="description" content="{{ site.data.meta-description[page.url] | escape }}">
+  {% assign metaDescription = site.data.meta-description[page.url] | escape %}
+  <meta name="description" content="{{ metaDescription }}">
   {% if page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
+
+  {% assign ogImage = page.og_image | default: '/assets/images/image-generique.avif' %}
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="MesServicesCyber">
+  <meta property="og:title" content="{{ page.titreHtml }}">
+  <meta property="og:description" content="{{ metaDescription }}">
+  <meta property="og:url" content="{{ site.url }}{{ urlSansSlashFinal }}">
+  <meta property="og:image" content="{{ site.url }}{{ ogImage }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page.titreHtml }}">
+  <meta name="twitter:description" content="{{ metaDescription }}">
+  <meta name="twitter:image" content="{{ site.url }}{{ ogImage }}">
 
   <meta property="csp-nonce" content="%%NONCE%%">
 
