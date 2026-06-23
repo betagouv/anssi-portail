@@ -94,5 +94,12 @@ const construitRoutesDynamiques = async ({
     .filter((f) => f.indexOf('index.html') < 0)
     .map((f) => ({ url: `/services/${f.split('/').pop()}`, modifieLe: fs.statSync(f).mtime }));
 
-  return [...liensFinancement, ...liensGuides, ...liensRessources, ...liensServices];
+  const liensContactsRégionaux = siteFront
+    .fichiers()
+    .filter((f) => f.indexOf('front/_site/contacts') >= 0)
+    .filter((f) => f.indexOf('.html') >= 0)
+    .filter((f) => f.indexOf('index.html') < 0)
+    .map((f) => ({ url: `/contacts/${f.split('/').pop()}`, modifieLe: fs.statSync(f).mtime }));
+
+  return [...liensFinancement, ...liensGuides, ...liensRessources, ...liensServices, ...liensContactsRégionaux];
 };
