@@ -1,0 +1,56 @@
+{%- assign src = include.src | default: page -%}
+
+<dsfr-container>
+  <div class="contacts">
+    <h2>Contacts {{ src.region.label }}</h2>
+
+    {%- if src.cot %}
+    <div class="carte-contact">
+      <h3>Délégué(e)s ANSSI de votre région</h3>
+      <p class="nom">
+        {%- for d in src.cot.delegues -%}
+          {{ d }}{%- if forloop.last == false -%} / {%- endif -%}
+        {%- endfor -%}
+      </p>
+
+      {%- if src.cot.emails %}
+      <p class="email">
+        {%- for e in src.cot.emails -%}
+          <dsfr-link label="{{ e.label }}" href="{{ e.href }}">{{ e.label }}</dsfr-link>
+        {%- endfor -%}
+      </p>
+      {%- elsif src.cot.email %}
+      <p class="email">
+        <dsfr-link label="{{ src.cot.email }}" href="mailto:{{ src.cot.email }}">{{ src.cot.email }}</dsfr-link>
+      </p>
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+
+    {%- if src.services %}
+      {%- for s in src.services -%}
+      <div class="carte-contact">
+        <h3>{{ s.titre }}</h3>
+
+        {%- if s.telephone %}
+        <p class="telephone">
+          <dsfr-link label="{{ s.telephone }}" href="tel:{{ s.telephone | replace: ' ', '' }}">{{ s.telephone }}</dsfr-link>
+        </p>
+        {%- endif -%}
+
+        {%- if s.site %}
+        <p class="site-web">
+          <dsfr-link label="{{ s.site }}" href="{{ s.site }}">{{ s.site }}</dsfr-link>
+        </p>
+        {%- endif -%}
+
+        {%- if s.adresse %}
+        <p class="adresse">
+          {{ s.adresse }}
+        </p>
+        {%- endif -%}
+      </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</dsfr-container>

@@ -5,6 +5,8 @@ import {
   type ContactsRegionaux,
 } from './contacts.type';
 
+// Ces données sont aussi dans les fichiers `front/_contacts/*.md` et `front/_data/contacts.yml`
+// NE PAS oublier de les mettre à jour si on les modifie ici !
 export const contactsParRegion: Record<CodeRegion, ContactsRegionaux> = {
   'FR-ARA': {
     CSIRT: {

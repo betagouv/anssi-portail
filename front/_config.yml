@@ -7,6 +7,8 @@ collections:
     output: true
   ressources:
     output: true
+  contacts:
+    output: true
 exclude:
   - README.md
   - lib-svelte/.vscode/

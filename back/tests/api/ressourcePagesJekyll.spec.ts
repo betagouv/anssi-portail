@@ -103,13 +103,13 @@ describe('La ressource pages jekyll', () => {
 
   describe('sur demande de la page contacts', () => {
     it('répond 200', async () => {
-      const reponse = await request(serveur).get('/contacts/FR-IDF');
+      const reponse = await request(serveur).get('/contacts/fr-idf.html');
 
       assert.equal(reponse.status, 200);
     });
 
     it('renvoie un contenu html', async () => {
-      const reponse = await request(serveur).get('/contacts/FR-IDF');
+      const reponse = await request(serveur).get('/contacts/fr-idf.html');
 
       assert.notEqual(reponse.headers['content-type'], undefined);
       assert.match(reponse.headers['content-type'], /html/);
@@ -117,12 +117,12 @@ describe('La ressource pages jekyll', () => {
 
     it('sers le fichier html de jekyll', async () => {
       let nomPageDemande: string;
-      fournisseurChemin.cheminPageJekyll = (nomPage: string) => {
+      fournisseurChemin.cheminProduitJekyll = (nomPage: string) => {
         nomPageDemande = nomPage;
         return join(process.cwd(), 'tests', 'ressources', 'factice.html');
       };
 
-      await request(serveur).get('/contacts/FR-IDF');
+      await request(serveur).get('/contacts/fr-idf.html');
 
       assert.equal(nomPageDemande!, 'contacts');
     });

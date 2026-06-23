@@ -201,8 +201,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/favoris-partages/:id', ressourcePagesJekyll(configurationServeur, 'favoris-partages'));
 
-  app.use('/contacts/:code', ressourcePagesJekyll(configurationServeur, 'contacts'));
-
   app.use('/guides/:slug', ressourcePagesJekyll(configurationServeur, 'guides'));
 
   ['ma-maturite', 'favoris', 'services-anssi', 'gestion-guides'].forEach((page) =>
@@ -211,7 +209,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/connexion', ressourcePageConnexion(configurationServeur));
 
-  ['services', 'ressources'].forEach((repertoireProduits) =>
+  ['services', 'ressources', 'contacts'].forEach((repertoireProduits) =>
     app.use(`/${repertoireProduits}`, ressourcePageProduit(configurationServeur, repertoireProduits))
   );
 

@@ -1,0 +1,348 @@
+fr-ara:
+  region:
+    label: d'Auvergne-Rhône-Alpes
+  cot:
+    delegues:
+      - Mathieu DELAPLACE
+      - Alix DURAND
+    email: auvergne-rhone-alpes@ssi.gouv.fr
+  services:
+    - titre: Cyber Assistance Auvergne Rhône Alpes
+      telephone: 04 72 40 56 56
+      site: https://www.cyber-assistance-aura.fr/
+
+fr-bfc:
+  region:
+    label: de Bourgogne-Franche-Comté
+  cot:
+    delegues:
+      - Véronique BRUNET
+      - Françoise MARMOT
+    email: bourgogne-franche-comte@ssi.gouv.fr
+  services:
+    - titre: CSIRT Bourgogne-Franche-Comté
+      telephone: 0 970 609 909
+      site: https://www.csirt-bfc.fr/
+      adresse: 3 Bis Rue de Suzon – 21000 DIJON
+
+fr-bre:
+  region:
+    label: de Bretagne
+  cot:
+    delegues:
+      - Jérôme LAINE
+    email: bretagne@ssi.gouv.fr
+  services:
+    - titre: Breizh Cyber
+      telephone: 0 800 200 008
+      site: https://breizhcyber.bzh/
+      adresse: "5 rue de la Chataigneraie\n35511\nCesson-Sévigné"
+    - titre: Bretagne Cyber Alliance
+      site: https://www.cyberalliance.bzh/
+      adresse: 1c-1d avenue de Belle Fontaine, 35510 Cesson-Sévigné
+      email: contact@cyberalliance.bzh
+
+fr-cvl:
+  region:
+    label: de Centre-Val de Loire
+  cot:
+    delegues:
+      - Mélodie FOUREZ
+    email: centre-val-de-loire@ssi.gouv.fr
+  services:
+    - titre: CybeRéponse
+      telephone: 0 805 69 15 05
+      site: https://www.cybereponse.fr/
+      adresse: "3 avenue Claude Guillemin\n45100 Orléans"
+
+fr-20r:
+  region:
+    label: de Corse
+  cot:
+    delegues:
+      - Moïse MOYAL
+    email: corse@ssi.gouv.fr
+  services:
+    - titre: CSIRT CyberCorsica | Centre de cybersécurité de Corse
+      site: https://cyber.corsica/
+      adresse: 10 Rue Général Fiorella 20000 Ajaccio
+
+fr-ges:
+  region:
+    label: du Grand Est
+  cot:
+    delegues:
+      - Vincent RHIN
+    email: grand-est@ssi.gouv.fr
+  services:
+    - titre: Grand Est Cybersécurité
+      telephone: 0 970 512 525
+      site: https://www.cybersecurite.grandest.fr/
+
+fr-hdf:
+  region:
+    label: des Hauts-de-France
+  cot:
+    delegues:
+      - Hugo LONGUESPE
+    email: hauts-de-france@ssi.gouv.fr
+  services:
+    - titre: CSIRT Hauts-de-France
+      telephone: 0 806 700 111
+      site: https://csirt-hdf.fr/
+      adresse: Campus Wenov 149 Avenue de Bretagne 59000 Lille
+    - titre: Campus Cyber Hauts de France - Lille Métropole
+      site: https://hdf.campuscyber.fr/
+      adresse: 177 All. Clémentine Deman, 59000 Lille
+
+fr-idf:
+  region:
+    label: d'Île-de-France
+  cot:
+    delegues:
+      - Guillaume CRÉPIN
+    email: ile-de-france@ssi.gouv.fr
+  services:
+    - titre: Urgence Cyber Île-de-France
+      telephone: 0 800 730 647
+      site: https://urgencecyber.iledefrance.fr/
+      adresse: 2, rue Simone Veil 93400 Saint-Ouen-sur-Seine
+    - titre: Le Campus Cyber
+      site: https://campuscyber.fr/
+      adresse: 5-7 rue Bellini 92800 La Défense
+
+fr-nor:
+  region:
+    label: de Normandie
+  cot:
+    delegues:
+      - Eric HAZANE
+    email: normandie@ssi.gouv.fr
+  services:
+    - titre: Normandie Cyber
+      telephone: 0 808 800 001
+      site: https://adnormandie.fr/besoin/normandie-cyber/
+      adresse: Campus Effiscience 2 Espace Anton Philips 14460 Colombelles
+    - titre: Normandie Numérique
+      site: https://normandie-numerique.fr/
+      adresse: 72 rue de la République Le Petit Quevilly – Seine Innopolis Rouen
+      email: contact@campus-normandie-cyber.fr
+
+fr-naq:
+  region:
+    label: de Nouvelle-Aquitaine
+  cot:
+    delegues:
+      - Martin VERON
+      - Jean-Denis LAVAL
+    email: nouvelle-aquitaine@ssi.gouv.fr
+  services:
+    - titre: Campus régional de Cybersécurité et de Confiance numérique
+      telephone: 0 805 29 29 40
+      site: https://www.campuscyber-na.fr/
+      adresse: 4 rue Adrienne Bolland 33600 Pessac
+    - titre: Campus Régional de Cybersécurité et de Confiance Numérique de Nouvelle Aquitaine
+      site: https://www.campuscyber-na.fr/
+      adresse: Parc Ampéris - Batiment Colibri - 3eme étage - 4 Rue Adrienne Bolland, 33600 Pessac
+      email: contact@campuscyber-na.fr
+
+fr-occ:
+  region:
+    label: d'Occitanie
+  cot:
+    delegues:
+      - Rémy DAUDIGNY
+      - Ludovic HENRY
+    email: occitanie@ssi.gouv.fr
+  services:
+    - titre: Cyber’Occ
+      telephone: 0 800 71 13 13
+      site: https://www.cyberocc.com/nos-services/urgence-cyber/
+      adresse: 'Data Valley 1000 lOccitanie 31670 Labège'
+    - titre: Le Centre Régional Cybersécurité Cyber’Occ
+      site: https://www.cyberocc.com/
+      adresse: 'Data Valley 1000 lOccitanie 31670 Labège'
+      email: contact@cyberocc.fr
+
+fr-pdl:
+  region:
+    label: des Pays de la Loire
+  cot:
+    delegues:
+      - Régis DUBRULLE
+    email: pays-de-la-loire@ssi.gouv.fr
+  services:
+    - titre: Pays de la Loire Cyber Assistance
+      telephone: 0 800 100 200
+      site: https://www.paysdelaloire.fr/economie-et-innovation/entreprise/mon-organisation-subit-une-cyberattaque
+      adresse: "1000 L’Occitane\n31670 Labège"
+
+fr-pac:
+  region:
+    label: de Provence-Alpes-Côte d’Azur
+  cot:
+    delegues:
+      - Kevin HEYDON
+    email: paca@ssi.gouv.fr
+  services:
+    - titre: Urgence Cyber région Sud
+      telephone: 0 805 036 083
+      site: https://urgencecyber-regionsud.fr/
+      adresse: 'Maison du numérique et de linnovation, Pl. Georges Pompidou, 83000 Toulon'
+    - titre: Campus Cyber Région Sud Euromed
+      site: https://ares.campuscyber-regionsud.fr/
+      adresse: Tour Mirabeau 1 Boulevard Saade - Quai Arenc 13002 Marseille
+      email: contact@campuscyber-regionsud.fr
+
+fr-971:
+  region:
+    label: de Guadeloupe
+  cot:
+    delegues:
+      - Moïse MOYAL
+    email: outre-mer@ssi.gouv.fr
+  services:
+    - titre: CSIRT-ATLANTIC
+      telephone: 0 970 260 801
+      site: https://www.accyb.org/fr/FindOutAtlantic
+      adresse: "60 Chemin de Reynald\n97170, PETIT-BOURG"
+
+fr-972:
+  region:
+    label: de Martinique
+  cot:
+    delegues:
+      - Moïse MOYAL
+    email: outre-mer@ssi.gouv.fr
+  services:
+    - titre: CSIRT-ATLANTIC
+      telephone: 0 970 260 801
+      site: https://www.accyb.org/fr/FindOutAtlantic
+      adresse: "60 Chemin de Reynald\n97170, PETIT-BOURG"
+
+fr-973:
+  region:
+    label: de Guyane
+  cot:
+    delegues:
+      - Moïse MOYAL
+    email: outre-mer@ssi.gouv.fr
+  services:
+    - titre: CSIRT-ATLANTIC
+      telephone: 0 970 260 801
+      site: https://www.accyb.org/fr/FindOutAtlantic
+      adresse: "60 Chemin de Reynald\n97170, PETIT-BOURG"
+
+fr-bl:
+  region:
+    label: de Saint-Barthélemy
+  cot:
+    delegues:
+      - Moïse MOYAL
+    email: outre-mer@ssi.gouv.fr
+  services:
+    - titre: CSIRT-ATLANTIC
+      telephone: 0 970 260 801
+      site: https://www.accyb.org/fr/FindOutAtlantic
+      adresse: "60 Chemin de Reynald\n97170, PETIT-BOURG"
+
+fr-mf:
+  region:
+    label: de Saint-Martin
+  cot:
+    delegues:
+      - Moïse MOYAL
+    email: outre-mer@ssi.gouv.fr
+  services:
+    - titre: CSIRT-ATLANTIC
+      telephone: 0 970 260 801
+      site: https://www.accyb.org/fr/FindOutAtlantic
+      adresse: "60 Chemin de Reynald\n97170, PETIT-BOURG"
+
+fr-pm:
+  region:
+    label: de Saint-Pierre-et-Miquelon
+  cot:
+    delegues:
+      - Moïse MOYAL
+    email: outre-mer@ssi.gouv.fr
+  services:
+    - titre: CSIRT-ATLANTIC
+      telephone: 0 970 260 801
+      site: https://www.accyb.org/fr/FindOutAtlantic
+      adresse: "60 Chemin de Reynald\n97170, PETIT-BOURG"
+
+fr-974:
+  region:
+    label: de La Réunion
+  cot:
+    delegues:
+      - Moïse MOYAL
+    email: outre-mer@ssi.gouv.fr
+  services:
+    - titre: Cyber Réunion
+      telephone: 0 262 974 999
+      site: https://www.cyber-reunion.fr/
+      adresse: 1 Rue Emile Hugot 97490 Sainte Clotilde
+
+fr-976:
+  region:
+    label: de Mayotte
+  cot:
+    delegues:
+      - Moïse MOYAL
+    email: outre-mer@ssi.gouv.fr
+  services: []
+
+fr-wf:
+  region:
+    label: de Wallis-et-Futuna
+  cot:
+    delegues:
+      - Moïse MOYAL
+    email: outre-mer@ssi.gouv.fr
+  services:
+    - titre: Centre Cyber du Pacifique
+      telephone: '505.300'
+      site: https://centrecyberpacifique.nc/
+      adresse: 0 rue Anatole France, Galerie Nouméa Centre, 98800 Nouméa
+
+fr-nc:
+  region:
+    label: de Nouvelle-Calédonie
+  cot:
+    delegues:
+      - Moïse MOYAL
+    email: outre-mer@ssi.gouv.fr
+  services:
+    - titre: Centre Cyber du Pacifique
+      telephone: '505.300'
+      site: https://centrecyberpacifique.nc/
+      adresse: 0 rue Anatole France, Galerie Nouméa Centre, 98800 Nouméa
+
+fr-pf:
+  region:
+    label: de Polynésie française
+  cot:
+    delegues:
+      - Moïse MOYAL
+    email: outre-mer@ssi.gouv.fr
+  services: []
+
+fr-cp:
+  region:
+    label: de Clipperton
+  cot:
+    delegues:
+      - Moïse MOYAL
+    email: outre-mer@ssi.gouv.fr
+  services: []
+
+fr-tf:
+  region:
+    label: des Terres australes et antarctiques françaises
+  cot:
+    delegues:
+      - Moïse MOYAL
+    email: outre-mer@ssi.gouv.fr
+  services: []
