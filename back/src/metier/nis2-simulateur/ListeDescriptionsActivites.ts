@@ -251,7 +251,7 @@ export const listeDescriptionsActivites: Record<Activite, DescriptionActivite[]>
         'Les produits ci-après sont également réputés être des dispositifs médicaux :' +
         '<ul>' +
         "<li>les dispositifs destinés à la maîtrise de la conception ou à l'assistance à celle-ci,</li>" +
-        "<li>Les produits spécifiquement destinés au nettoyage, à la désinfection ou à la stérilisation des dispositifs visés à l'article 1er, paragraphe 4, et de ceux visés au premier alinéa du présent point.</li>" +
+        '<li>Les produits spécifiquement destinés au nettoyage, à la désinfection ou à la stérilisation des dispositifs visés à <msc-lien blank href="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32017R0745" neutre libelle="l\'article 1er, paragraphe 4"></msc-lien>, et de ceux visés au premier alinéa du présent point.</li>' +
         '</ul>',
     },
     {
