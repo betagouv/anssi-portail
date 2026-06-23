@@ -1,8 +1,8 @@
 import { HttpStatusCode } from 'axios';
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur';
-import { corpsVide, valideCorpsRequete } from './zod';
 import { PathTraversalError } from './erreurs';
+import { corpsVide, valideCorpsRequete } from './zod';
 
 const ressourcePageProduit = ({ fournisseurChemin }: ConfigurationServeur, repertoireProduits: string): Router => {
   const routeur = Router();

@@ -2,13 +2,15 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import cors from 'cors';
-import express, { json, Request, Response } from 'express';
+import express, { json, NextFunction, Request, Response } from 'express';
 import { IpFilter } from 'express-ipfilter';
 import rateLimit from 'express-rate-limit';
 import { ConfigurationServeur } from './configurationServeur';
+import { erreurPageNonTrouvée } from './erreurs';
 import { ressourceFavori } from './favoris/ressourceFavori';
 import { ressourceFavoris } from './favoris/ressourceFavoris';
 import { ressourceFavorisPartages } from './favoris/ressourceFavorisPartages';
+import { FichierInconnu } from './fournisseurChemin';
 import { ressourceDocumentGuide } from './guides/ressourceDocumentGuide';
 import { ressourceDocumentsGuide } from './guides/ressourceDocumentsGuide';
 import { ressourceGuide } from './guides/ressourceGuide';
@@ -370,12 +372,16 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   // A laisser à la fin de la fonction
   app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 
+  app.use((erreur: unknown, _requete: Request, reponse: Response, suite: NextFunction) => {
+    if (erreur instanceof FichierInconnu) {
+      return erreurPageNonTrouvée(reponse, fournisseurChemin);
+    }
+    suite(erreur);
+  });
+
   // A laisser à la fin de la fonction
   app.use((_requete: Request, reponse: Response) => {
-    reponse
-      .status(404)
-      .set('Content-Type', 'text/html')
-      .envoieFichierEnrichi(configurationServeur.fournisseurChemin.ressourceDeBase('404.html'));
+    return erreurPageNonTrouvée(reponse, fournisseurChemin);
   });
 
   return app;
