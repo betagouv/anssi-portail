@@ -76,6 +76,13 @@ describe("La ressource de prise en compte d'une mesure", () => {
         assert.equal(reponse.status, 201);
       });
 
+      it('renvoie le nouvel état du module', async () => {
+        const { body } = await putPriseEnCompteConnecte();
+
+        assert.equal(body.badgeCyberdépartDebloqué, false);
+        assert.equal(body.moduleTerminé, true);
+      });
+
       it('ajoute une prise en compte', async () => {
         await putPriseEnCompteConnecte();
 
