@@ -14,8 +14,14 @@
   const prendEnCompte = async () => {
     try {
       priseEnCompteEnCours = true;
-      await axios.put(`/api/mesures/${mesure.id}/prise-en-compte`);
+      const reponse = await axios.put(`/api/mesures/${mesure.id}/prise-en-compte`);
       sessionStorage.setItem('mesure-prise-en-compte', 'true');
+      if (reponse.data.badgeCyberdépartDebloqué) {
+        sessionStorage.setItem('badge-cyberdepart-debloque', 'true');
+      }
+      if (reponse.data.moduleTerminé) {
+        sessionStorage.setItem('module-termine', 'true');
+      }
       window.location.href = '/module-cyberdepart';
       mesurePriseEnCompte = true;
     } finally {

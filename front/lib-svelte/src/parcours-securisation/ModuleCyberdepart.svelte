@@ -8,11 +8,15 @@
   import BasculeParcoursAvance from './BasculeParcoursAvance.svelte';
   import GrilleCartesMesures from './GrilleCartesMesures.svelte';
   import type { Mesure } from './mesure';
+  import ModaleBadgeCyberdepartDebloque from './modales/ModaleBadgeCyberdepartDebloque.svelte';
+  import ModaleModuleTermine from './modales/ModaleModuleTermine.svelte';
   import Progression from './Progression.svelte';
 
   let mesures: Mesure[] = $state([]);
   const totalMesures = $derived(mesures.length);
   let cibleBadge = $state(0);
+  let badgeCyberdépartDebloqué = $state(false);
+  let moduleTerminé = $state(false);
 
   onMount(async () => {
     const reponse = await axios.get<{ cibleBadge: number; mesures: Mesure[] }>(`/api/modules/1`);
@@ -21,6 +25,14 @@
     if (sessionStorage.getItem('mesure-prise-en-compte') === 'true') {
       toasterStore.succes('Mesure déclarée prise en compte', 'Mesure déclarée prise en compte');
       sessionStorage.removeItem('mesure-prise-en-compte');
+    }
+    if (sessionStorage.getItem('badge-cyberdepart-debloque') === 'true') {
+      badgeCyberdépartDebloqué = true;
+      sessionStorage.removeItem('badge-cyberdepart-debloque');
+    }
+    if (sessionStorage.getItem('module-termine') === 'true') {
+      moduleTerminé = true;
+      sessionStorage.removeItem('module-termine');
     }
   });
   const mesuresMisesEnAvant = $derived(mesures.filter((_, index) => index < 4));
@@ -42,6 +54,10 @@
   titre="Cyberdépart : agir pour votre cybersécurité"
   theme="sombre"
 ></Heros>
+
+<ModaleBadgeCyberdepartDebloque bind:estOuverte={badgeCyberdépartDebloqué} />
+
+<ModaleModuleTermine bind:estOuverte={moduleTerminé} />
 
 <dsfr-container>
   <div class="progression">
