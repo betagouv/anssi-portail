@@ -239,10 +239,8 @@ export const listeDescriptionsActivites: Record<Activite, DescriptionActivite[]>
     {
       titre: 'Dispositif médical',
       description:
-        "Tout dispositif médical qui consiste en un réactif, un produit réactif, un matériau d'étalonnage, un matériau de contrôle, " +
-        'une trousse, un instrument, un appareil, un équipement, un logiciel ou un système, utilisé seul ou en association, destiné ' +
-        "par le fabricant à être utilisé in vitro dans l'examen d'échantillons provenant du corps humain, y compris les dons de sang " +
-        'et de tissus, uniquement ou principalement dans le but de fournir des informations sur un ou plusieurs des éléments suivants :' +
+        'Tout instrument, appareil, équipement, logiciel, implant, réactif, matière ou autre article, destiné par le fabricant à être utilisé, ' +
+        'seul ou en association, chez l’homme pour l’une ou plusieurs des fins médicales précises suivantes :' +
         '<ul>' +
         "<li>diagnostic, prévention, contrôle, prédiction, pronostic, traitement ou atténuation d'une maladie,</li>" +
         "<li>diagnostic, contrôle, traitement, atténuation d'une blessure ou d'un handicap ou compensation de ceux-ci,</li>" +
@@ -259,10 +257,8 @@ export const listeDescriptionsActivites: Record<Activite, DescriptionActivite[]>
     {
       titre: 'Dispositif médical de diagnostic in vitro',
       description:
-        "Tout dispositif médical qui consiste en un réactif, un produit réactif, un matériau d'étalonnage, un matériau de contrôle, " +
-        'une trousse, un instrument, un appareil, un équipement, un logiciel ou un système, utilisé seul ou en association, destiné ' +
-        "par le fabricant à être utilisé in vitro dans l'examen d'échantillons provenant du corps humain, y compris les dons de sang " +
-        'et de tissus, uniquement ou principalement dans le but de fournir des informations sur un ou plusieurs des éléments suivants :' +
+        'Tout instrument, appareil, équipement, logiciel, implant, réactif, matière ou autre article, destiné par le fabricant à être utilisé, ' +
+        'seul ou en association, chez l’homme pour l’une ou plusieurs des fins médicales précises suivantes :' +
         '<ul>' +
         '<li>a) concernant un processus ou état physiologique ou pathologique</li>' +
         '<li>b) concernant des déficiences congénitales physiques ou mentales</li>' +
