@@ -6,7 +6,7 @@ import express, { json, NextFunction, Request, Response } from 'express';
 import { IpFilter } from 'express-ipfilter';
 import rateLimit from 'express-rate-limit';
 import { ConfigurationServeur } from './configurationServeur';
-import { erreurPageNonTrouvée } from './erreurs';
+import { erreurPageInterdite, erreurPageNonTrouvée, ErreurTraverséeDeChemin } from './erreurs';
 import { ressourceFavori } from './favoris/ressourceFavori';
 import { ressourceFavoris } from './favoris/ressourceFavoris';
 import { ressourceFavorisPartages } from './favoris/ressourceFavorisPartages';
@@ -375,6 +375,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use((erreur: unknown, _requete: Request, reponse: Response, suite: NextFunction) => {
     if (erreur instanceof FichierInconnu) {
       return erreurPageNonTrouvée(reponse, fournisseurChemin);
+    }
+    if (erreur instanceof ErreurTraverséeDeChemin) {
+      return erreurPageInterdite(reponse);
     }
     suite(erreur);
   });
