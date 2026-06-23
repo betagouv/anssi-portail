@@ -141,11 +141,6 @@
           grid-column: 1 / -1;
           text-align: center;
 
-          .fr-h2 {
-            color: var(--text-title-grey);
-            margin-block: 0 24px;
-          }
-
           img {
             height: 250px;
           }
