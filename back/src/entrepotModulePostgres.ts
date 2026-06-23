@@ -1,15 +1,17 @@
 import Knex from 'knex';
 import config from '../knexfile';
+import { MesurePersistee } from './infra/entrepotMesurePostgres';
+import { EntrepotMesure } from './metier/entrepotMesure';
 import { EntrepôtModule } from './metier/EntrepotModule';
-import { Module } from './metier/module';
 import { Mesure } from './metier/mesure';
+import { Module } from './metier/module';
 
 type ModulePersisté = { id: number; nom: string };
 
 export class EntrepôtModulePostgres implements EntrepôtModule {
   knex: Knex.Knex;
 
-  constructor() {
+  constructor(private entrepôtMesure: EntrepotMesure) {
     this.knex = Knex(config);
   }
 
@@ -18,7 +20,13 @@ export class EntrepôtModulePostgres implements EntrepôtModule {
     if (!moduleLu) {
       return undefined;
     }
-    return new Module(moduleLu.id, moduleLu.nom);
+
+    const mesuresDuModuleLues = await this.knex<MesurePersistee>('mesures').where({ id_module: id });
+
+    const mesuresDuModule = await Promise.all(mesuresDuModuleLues.map((m) => this.entrepôtMesure.parId(m.id)));
+    const module = new Module(moduleLu.id, moduleLu.nom);
+    module.mesures = mesuresDuModule.filter((m) => !!m);
+    return module;
   }
 
   pourLaMesure(_mesure: Mesure): Promise<Module> {
