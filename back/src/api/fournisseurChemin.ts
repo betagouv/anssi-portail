@@ -1,6 +1,6 @@
 import { readdirSync } from 'node:fs';
 import { join } from 'path';
-import { PathTraversalError } from './erreurs';
+import { ErreurTraverséeDeChemin } from './erreurs';
 
 export class FichierInconnu extends Error {
   constructor(chemin: string) {
@@ -11,7 +11,7 @@ export class FichierInconnu extends Error {
 const valideChemin = (nomFichier: string): void => {
   const decodedPath = decodeURIComponent(nomFichier);
   if (decodedPath.includes('..') || decodedPath.startsWith('/') || decodedPath.startsWith('\\')) {
-    throw new PathTraversalError(`Tentative de path traversal détectée: ${nomFichier}`);
+    throw new ErreurTraverséeDeChemin(`Tentative de path traversal détectée: ${nomFichier}`);
   }
 };
 

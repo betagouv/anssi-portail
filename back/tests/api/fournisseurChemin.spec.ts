@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { PathTraversalError } from '../../src/api/erreurs';
+import { ErreurTraverséeDeChemin } from '../../src/api/erreurs';
 import {
   construisListeFichiersDuSite,
   FichierInconnu,
@@ -13,35 +13,35 @@ describe('le fournisseurChemin', () => {
     it('rejette ../etc/passwd', () => {
       assert.throws(
         () => fournisseurChemin.cheminProduitJekyll('produits', '../etc/passwd'),
-        (err) => err instanceof PathTraversalError && /Tentative de path traversal/.test(err.message)
+        (err) => err instanceof ErreurTraverséeDeChemin && /Tentative de path traversal/.test(err.message)
       );
     });
 
     it('rejette ..%2fetc%2fpasswd (URL-encoded)', () => {
       assert.throws(
         () => fournisseurChemin.cheminProduitJekyll('produits', '..%2fetc%2fpasswd'),
-        (err) => err instanceof PathTraversalError && /Tentative de path traversal/.test(err.message)
+        (err) => err instanceof ErreurTraverséeDeChemin && /Tentative de path traversal/.test(err.message)
       );
     });
 
     it('rejette ../../etc/passwd', () => {
       assert.throws(
         () => fournisseurChemin.cheminProduitJekyll('produits', '../../etc/passwd'),
-        (err) => err instanceof PathTraversalError && /Tentative de path traversal/.test(err.message)
+        (err) => err instanceof ErreurTraverséeDeChemin && /Tentative de path traversal/.test(err.message)
       );
     });
 
     it('rejette /etc/passwd (chemin absolu)', () => {
       assert.throws(
         () => fournisseurChemin.ressourceDeBase('/etc/passwd'),
-        (err) => err instanceof PathTraversalError && /Tentative de path traversal/.test(err.message)
+        (err) => err instanceof ErreurTraverséeDeChemin && /Tentative de path traversal/.test(err.message)
       );
     });
 
     it('rejette \\etc\\passwd (chemin absolu Windows)', () => {
       assert.throws(
         () => fournisseurChemin.cheminPageJekyll('\\etc\\passwd'),
-        (err) => err instanceof PathTraversalError && /Tentative de path traversal/.test(err.message)
+        (err) => err instanceof ErreurTraverséeDeChemin && /Tentative de path traversal/.test(err.message)
       );
     });
 
