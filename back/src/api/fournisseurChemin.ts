@@ -50,7 +50,7 @@ const cacheFichiers: string[] = [];
 export const siteFront = {
   fichiers: () => {
     if (cacheFichiers.length === 0) {
-      cacheFichiers.push(...construisListeFichiersDuSite('front'));
+      cacheFichiers.push(...construisListeFichiersDuSite('front/_site'));
     }
     return cacheFichiers;
   },
