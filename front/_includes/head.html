@@ -19,10 +19,13 @@
       "url" : "https://messervices.cyber.gouv.fr/"
     }
   </script>
-  {% assign urlSansSlashFinal = page.url | default: '' %}
-  {% if urlSansSlashFinal != '' and urlSansSlashFinal != '/' and urlSansSlashFinal | slice: -1 == '/' %}
-    {% assign new_length = urlSansSlashFinal.size | minus: 1 %}
-    {% assign urlSansSlashFinal = urlSansSlashFinal | slice: 0, new_length %}
+  {% assign urlSansSlashFinal = page.url | default: '' | strip %}
+  {% if urlSansSlashFinal != '' and urlSansSlashFinal != '/' %}
+    {% assign last_char = urlSansSlashFinal | slice: -1 %}
+    {% if last_char == '/' %}
+      {% assign new_length = urlSansSlashFinal | size | minus: 1 %}
+      {% assign urlSansSlashFinal = urlSansSlashFinal | slice: 0, new_length %}
+    {% endif %}
   {% endif %}
   <link rel="canonical" href="{{ urlSansSlashFinal }}" />
   <meta name="description" content="{{ site.data.meta-description[page.url] | escape }}">
