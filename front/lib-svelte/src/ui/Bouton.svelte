@@ -1,7 +1,7 @@
 <script lang="ts">
   import { clic } from '../directives/actions.svelte';
 
-  interface Props {
+  export interface Props {
     actif?: boolean;
     etire?: boolean;
     libelle?: string;
