@@ -324,8 +324,8 @@ importers:
         specifier: ^9.39.4
         version: 9.39.4
       '@lab-anssi/ui-kit':
-        specifier: 1.53.2
-        version: 1.53.2(svelte@5.55.9(@typescript-eslint/types@8.59.0))
+        specifier: 1.53.4
+        version: 1.53.4(svelte@5.55.9(@typescript-eslint/types@8.59.0))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.1.1
         version: 5.1.1(svelte@5.55.9(@typescript-eslint/types@8.59.0))(vite@6.4.3(@types/node@25.5.0)(sass@1.98.0)(tsx@4.21.0))
@@ -1282,10 +1282,10 @@ packages:
     peerDependencies:
       express: ~5.2.1
 
-  '@lab-anssi/ui-kit@1.53.2':
-    resolution: {integrity: sha512-Ac4rJ2KyqxSKNNq3jBu8fs++WcCdfxlgGqzY7tcNtIDmnOfy20krTvRmw0Q6yvP+xu+52lhg7EREWokRMWviWQ==}
+  '@lab-anssi/ui-kit@1.53.4':
+    resolution: {integrity: sha512-Fke4LQJGPi+huXIpbHlThnkz/dQT9OOa3ZISsWJz1ev/pwoSJzTt/BhRo7GoEMHJT33HPdQ6/iSZbwpFwPtFBw==}
     peerDependencies:
-      svelte: '>=5.55.9'
+      svelte: ~5.55.10
 
   '@napi-rs/canvas-android-arm64@0.1.97':
     resolution: {integrity: sha512-V1c/WVw+NzH8vk7ZK/O8/nyBSCQimU8sfMsB/9qeSvdkGKNU7+mxy/bIF0gTgeBFmHpj30S4E9WHMSrxXGQuVQ==}
@@ -5445,7 +5445,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@lab-anssi/ui-kit@1.53.2(svelte@5.55.9(@typescript-eslint/types@8.59.0))':
+  '@lab-anssi/ui-kit@1.53.4(svelte@5.55.9(@typescript-eslint/types@8.59.0))':
     dependencies:
       svelte: 5.55.9(@typescript-eslint/types@8.59.0)
 

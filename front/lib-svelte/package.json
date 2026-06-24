@@ -35,7 +35,7 @@
     "vite": "^6.4.1",
     "vitest": "^3.2.4",
     "vitest-localstorage-mock": "^0.1.2",
-    "@lab-anssi/ui-kit": "1.53.2"
+    "@lab-anssi/ui-kit": "1.53.4"
   },
   "dependencies": {
     "@sentry/browser": "^10.48.0",
