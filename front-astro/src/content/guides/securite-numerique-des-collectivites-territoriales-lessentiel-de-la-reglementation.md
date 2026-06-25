@@ -1,0 +1,17 @@
+---
+id: 'securite-numerique-des-collectivites-territoriales-lessentiel-de-la-reglementation'
+nom: 'Sécurité numérique des collectivités territoriales : l’essentiel de la réglementation'
+langue: 'FR'
+collections:
+  - 'Gestion des risques cyber'
+listeDocuments:
+  - '[object Object]'
+dateMiseAJour: '2020-01-28T00:00:00.000Z'
+thematique: 'Réglementation'
+besoins:
+  - 'SECURISER'
+  - 'ETRE_SENSIBILISE'
+lienCourt: 'https://cyber.gouv.fr/guide-ssi-collectivites-territoriales'
+---
+
+<p>Les collectivités territoriales (CT) sont engagées dans une transformation numérique profonde, autant pour répondre à des obligations réglementaires qu’à un souci de rendre un meilleur service aux citoyens. Cette dépendance de plus en plus forte aux systèmes d’information (SI), couplée à l’hétérogénéité de la taille des communes crée une fragilité, soulignée dans la Revue stratégique de cyberdéfense (RSC) de 2018. Au même titre que les SI de l’Etat, des opérateurs d’importance vitale (OIV) ou des opérateurs de services essentiels (OSE), la protection des SI des collectivités territoriales fait partie des champs prioritaires définis par la RSC pour consolider le modèle national de cyberdéfense.<br> </p> <p> Au-delà de l’application de mesures, qu’elles soient d’hygiène ou techniques, de gouvernance, organisationnelles et humaines, la dimension réglementaire et juridique est essentielle pour assurer une meilleure prise en compte des risques numériques.<br> </p> <p>Pour répondre au défi de la sécurité du numérique des collectivités territoriales, la France, soit directement par son droit national soit via les règlements et directives pris au niveau de l’Union Européenne, s’est dotée d’un cadre règlementaire participant à la protection de ces systèmes d’information et dont les objectifs sont :</p><ul><li>le renforcement de la confiance des usagers dans l’utilisation des services numériques ;</li><li>le renforcement de la sécurité des données à caractère personnel ;</li><li>la transformation numérique des administrations l’État ;</li><li>le renforcement de la sécurité des acteurs critiques pour l’État.</li></ul><p>Ces réglementations s’architecturent autour de trois principes fondamentaux :</p><ul><li>la gouvernance qui vise à impliquer l’ensemble des acteurs (décideurs, agents, etc.) des collectivités territoriales à la sécurité par la définition et le suivi de politique de sécurité des systèmes d’information (PSSI) ;</li><li>la gestion des risques qui doit amener les collectivités territoriales à se poser la question sur les menaces auxquelles elle est soumise et quelles sont les mesures pour s’en protéger tout en tenant compte des contraintes auxquelles elle fait face (financière, humaine, sociale, etc.) ;</li><li>l’amélioration continue qui permet à l’organisation de régulièrement évaluer son niveau de sécurité afin d’identifier les domaines dans lesquels il est nécessaire monter en maturité.</li></ul><p>Ce cadre juridique de cybersécurité à destination des collectivités territoriales est également <a href="https://cyber.gouv.fr/actualites/collectivites-territoriales-face-la-menace-saisissez-vous-des-enjeux-cyber/">illustré par une infographie</a> conçue par deux doctorants en droit, Camille Dubedout et Valentin Schabelman.</p><p>Il s’agit de synthétiser le contenu de ces réglementations, mais aussi leurs objectifs et leur portée. Car la cybersécurité est l’affaire de tous et les collectivités en sont des acteurs de premier plan.</p>

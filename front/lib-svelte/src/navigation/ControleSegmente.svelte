@@ -16,16 +16,22 @@
   let {
     elements,
     indexActif = $bindable(0),
-    fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash),
+    fragmentDeNavigation = undefined,
     lorsDuChangement,
     lorsDuClic,
   }: Props = $props();
   const hasIcon = $derived(elements.some((e) => !!e.icone));
 
+  $effect(() => {
+    fragmentDeNavigation ??= creeLeFragmentDeNavigation(window.location.hash);
+  });
+
   // Gestion du fragment
   const changeLeFragmentDeNavigation = () => {
-    fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
-    lorsDuChangement?.(fragmentDeNavigation);
+    if (window) {
+      fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
+      lorsDuChangement?.(fragmentDeNavigation);
+    }
   };
   $effect(() => {
     window.addEventListener('hashchange', changeLeFragmentDeNavigation);
@@ -40,7 +46,7 @@
       return;
     }
     const ancre = elements[indexActif].ancre;
-    if (ancre) {
+    if (ancre && fragmentDeNavigation) {
       fragmentDeNavigation.changeSection(ancre);
       window.location.hash = fragmentDeNavigation.serialise();
     }

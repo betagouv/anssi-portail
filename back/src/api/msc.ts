@@ -70,7 +70,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   const { fournisseurChemin } = configurationServeur;
 
-  const routesStatiquesAstro = ['catalogue'];
+  const routesStatiquesAstro = ['a-propos', 'catalogue', 'collectivites'];
   const isDev = process.env.NODE_ENV !== 'production';
   if (isDev) {
     const { astroProxy } = configurationServeur;
@@ -81,7 +81,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
           astroProxy(req, res, next);
         })
       );
-      ['_astro', '@vite', '@fs', '@id', 'node_modules'].forEach((prefixe) => {
+      ['_astro', '@vite', '@fs', '@id', 'node_modules', 'src'].forEach((prefixe) => {
         app.use(`/${prefixe}`, (req, res, next) => {
           req.url = `/${prefixe}${req.url === '/' ? '' : req.url}`;
           astroProxy(req, res, next);
@@ -186,7 +186,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'test-maturite',
     'niveaux-maturite',
     'apres-authentification',
-    'a-propos',
     'mentions-legales',
     'confidentialite',
     'cgu',
@@ -203,7 +202,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'prestataires-labellises',
     'contacts',
     'nis2',
-    'collectivites',
     'associations',
     'entreprises',
     'sante',

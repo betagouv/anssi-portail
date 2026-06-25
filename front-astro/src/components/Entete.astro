@@ -1,5 +1,6 @@
 ---
 import BadgeAgentAnssi from '@anssi-portail/svelte/src/badge-agent-anssi/BadgeAgentAnssi.svelte';
+import ZoneIdentification from '@anssi-portail/svelte/src/identification/ZoneIdentification.svelte';
 ---
 
 <dsfr-header
@@ -20,10 +21,14 @@ import BadgeAgentAnssi from '@anssi-portail/svelte/src/badge-agent-anssi/BadgeAg
   navigation-id="menu-principal"
 >
   <div slot="headerbadge" class="badge-agent-anssi">
-    <BadgeAgentAnssi />
+    <BadgeAgentAnssi client:only />
   </div>
-  <div slot="toolLinks" class="identification"></div>
-  <div slot="modalToolLinks" class="identification"></div>
+  <div slot="toolLinks" class="identification">
+    <ZoneIdentification client:only />
+  </div>
+  <div slot="modalToolLinks" class="identification">
+    <ZoneIdentification client:only />
+  </div>
   <div slot="beforetoolslinks">
     <lab-anssi-bouton-suite-cyber-navigation sourceutm="MesServicesCyber"></lab-anssi-bouton-suite-cyber-navigation>
   </div>
@@ -33,4 +38,6 @@ import BadgeAgentAnssi from '@anssi-portail/svelte/src/badge-agent-anssi/BadgeAg
   <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart" slot="aftermodaltoollinks"
   ></lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
   <div slot="navigation" id="navigation"></div>
+  <p>MesServicesCyber</p>
+  <p>Innovation ANSSI</p>
 </dsfr-header>

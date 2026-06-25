@@ -101,7 +101,7 @@ a {
   }
 
   &.lien {
-    // AFAC une fois que tout les liens sont des dsfr-link
+    /* AFAC une fois que tout les liens sont des dsfr-link */
     text-decoration: underline solid var(--noir) 1px;
     -webkit-text-decoration: underline;
     text-underline-offset: 4px;
@@ -442,7 +442,7 @@ dsfr-footer {
         align-self: flex-end;
       }
       a {
-        // AFAC quand tous les liens seront des msc-lien
+        /* AFAC quand tous les liens seront des msc-lien */
         display: inline-flex;
         align-items: center;
         gap: 8px;
@@ -619,7 +619,7 @@ img[src$='.svg'] {
   align-self: center;
 }
 
-// On règle les CLS (Content Layout Shift) liés à l'utilisation des composants du DSFR.
+/* On règle les CLS (Content Layout Shift) liés à l'utilisation des composants du DSFR. */
 
 dsfr-header {
   display: block;

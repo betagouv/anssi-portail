@@ -1,10 +1,15 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import FilAriane from './FilAriane.svelte';
+  import type { Branche } from './filAriane';
 
   type Props = {
     format: 'banniere' | 'heros' | 'heros-centre' | 'details';
     theme: 'sombre' | 'clair'; // inversé / clair
     filAriane?: Snippet;
+    filArianeBranche?: Branche | string;
+    filArianeBrancheConnectee?: Branche | string;
+    filArianeFeuille?: string;
     cacheFilAriane?: boolean;
     lienRetour?: Snippet;
     tags?: Snippet;
@@ -25,6 +30,9 @@
     format,
     theme = 'sombre',
     filAriane,
+    filArianeBranche,
+    filArianeBrancheConnectee,
+    filArianeFeuille,
     cacheFilAriane = false,
     lienRetour,
     tags,
@@ -59,6 +67,20 @@
     {#if !cacheFilAriane && filAriane}
       <div class={['fil-ariane']}>
         {@render filAriane()}
+      </div>
+    {:else if !cacheFilAriane && filArianeFeuille}
+      <div class={['fil-ariane']}>
+        <FilAriane
+          fondSombre={theme === 'sombre'}
+          branche={filArianeBranche}
+          brancheConnectee={filArianeBrancheConnectee}
+          feuille={filArianeFeuille}
+        />
+      </div>
+    {/if}
+    {#if !cacheMentions && lienRetour}
+      <div class={['lien-retour']}>
+        {@render lienRetour()}
       </div>
     {:else if lienRetour}
       <div class={['lien-retour']}>
@@ -108,6 +130,44 @@
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
+  @use 'sass:map';
+  @use 'sass:meta';
+
+  $points-de-rupture-a-partir-de: (
+    xs: (
+      min-width: 320px,
+    ),
+    sm: (
+      min-width: 576px,
+    ),
+    md: (
+      min-width: 767px,
+    ),
+    lg: (
+      min-width: 992px,
+    ),
+    xl: (
+      min-width: 1280px,
+    ),
+    xxl: (
+      min-width: 1440px,
+    ),
+    xs2: (
+      min-width: 440px,
+    ),
+  ) !default;
+
+  @mixin a-partir-de($point-de-rupture) {
+    @if map.has-key($points-de-rupture-a-partir-de, $point-de-rupture) {
+      @media #{meta.inspect(map.get($points-de-rupture-a-partir-de, $point-de-rupture))} {
+        @content;
+      }
+    } @else {
+      @warn "Un point de rupture inconnu (`#{$point-de-rupture}`) a été utilisé. "
+        + "Les points de rupture disponibles sont: #{map.keys($points-de-rupture-a-partir-de)}.";
+    }
+  }
+
   .banniere,
   .heros,
   .heros-centre,
@@ -131,7 +191,7 @@
     .contenu-section {
       padding: 16px 0;
 
-      // 320px et plus (Mobile first)
+      /* 320px et plus (Mobile first) */
       display: grid;
       gap: 0 1.5rem;
       grid-template-areas:
@@ -197,11 +257,11 @@
         margin: 0;
       }
 
-      // 768px et plus
+      /* 768px et plus */
       @include a-partir-de(md) {
       }
 
-      // 1248px et plus
+      /* 1248px et plus */
       @include a-partir-de(lg) {
         grid-template-areas:
           'haut haut'

@@ -1,5 +1,15 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*", "../../../front/lib-svelte/src/**/*"],
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "allowJs": true
+  },
+  "include": [
+    ".astro/types.d.ts",
+    "**/*",
+    "../../../front/lib-svelte/src/**/*",
+    "scripts/**/*",
+    "../../../back/src/**/*"
+  ],
   "exclude": ["dist"]
 }

@@ -5,7 +5,8 @@
   let cibleAbonnementInfolettre = $state('');
 
   const changeLAdresseDeRetour = () => {
-    const url = new URL(window.location.href);
+    const url = window ? new URL(window.location.href) : undefined;
+    if (!url) return;
     const adresseRetour = encodeURIComponent(url.pathname + url.search + url.hash);
     cibleAbonnementInfolettre = `/abonnement-infolettre?adresseRetour=${adresseRetour}`;
   };

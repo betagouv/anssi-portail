@@ -1,12 +1,13 @@
 ---
 type Props = {
   titre: string;
+  description?: string;
   lienCanonique: string;
   noindex?: boolean;
   styles?: string[];
   extraJS?: string;
 };
-const { titre, lienCanonique, noindex, styles, extraJS }: Props = Astro.props;
+const { titre, description, lienCanonique, noindex, styles, extraJS }: Props = Astro.props;
 ---
 
 <head>
@@ -22,7 +23,7 @@ const { titre, lienCanonique, noindex, styles, extraJS }: Props = Astro.props;
       <meta name="google-site-verification" content="{import.meta.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION}" />
     )
   }
-  <title>{titre}</title>
+  <title>{(titre && `${titre} | MesServicesCyber`) || 'MesServicesCyber'}</title>
   <script is:inline type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -32,7 +33,8 @@ const { titre, lienCanonique, noindex, styles, extraJS }: Props = Astro.props;
     }
   </script>
   <link rel="canonical" href={lienCanonique} />
-  <meta name="description" content="{{ site.data.meta-description[page.url] | escape }}" />
+  <!-- Jekyll: site.data.meta-description[page.url] | escape -->
+  <meta name="description" content={description} />
   {noindex && <meta name="robots" content="noindex, nofollow" />}
   <meta property="csp-nonce" content="%%NONCE%%" />
   <link rel="stylesheet" href="/assets/styles/dsfr.css" />
@@ -50,7 +52,7 @@ const { titre, lienCanonique, noindex, styles, extraJS }: Props = Astro.props;
     rel="stylesheet"
     nonce="%%NONCE%%"
   />
-  {extraJS && <script src={extraJS} type="module" />}
+  {extraJS && <script is:inline src={extraJS} type="module" />}
   <!-- {% include composant-svelte.html id="composants-ui" %} -->
   {
     import.meta.env.MATOMO_ID && (
@@ -98,6 +100,7 @@ const { titre, lienCanonique, noindex, styles, extraJS }: Props = Astro.props;
     as="script"
   />
   <script
+    is:inline
     src={`https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com/${import.meta.env.PUBLIC_UI_KIT_VERSION}/lab-anssi-ui-kit.iife.js`}
     nonce="%%NONCE%%"
     defer></script>

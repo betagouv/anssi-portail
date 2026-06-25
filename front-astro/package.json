@@ -9,14 +9,22 @@
     "astro": "astro",
     "build": "astro build",
     "dev": "astro dev",
+    "importe:guides": "node --import=tsx --env-file=../.env  scripts/generate-guides.ts",
     "preview": "astro preview"
   },
   "dependencies": {
-    "@anssi-portail/svelte": "workspace:*",
+    "@anssi-portail/svelte": "workspace:*"
+  },
+  "devDependencies": {
+    "@astrojs/check": "~0.9.9",
     "@astrojs/svelte": "~8.1.2",
     "astro": "~6.2.1",
-    "express": "^4.22.2",
-    "svelte": "^5.55.9",
-    "typescript": "^6.0.3"
+    "axios": "^1.16.1",
+    "sass": "^1.98.0",
+    "svelte": "~5.55.9",
+    "svelte-check": "^4.4.5",
+    "ts-node": "~10.9.2",
+    "typescript": "~6.0.3",
+    "vite-plugin-svelte": "~3.0.1"
   }
 }

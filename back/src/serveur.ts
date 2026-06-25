@@ -1,5 +1,10 @@
 import { CmsCrisp } from '@lab-anssi/lib';
-import { createProxyMiddleware, type RequestHandler as ProxyRequestHandler } from 'http-proxy-middleware';
+import {
+  createProxyMiddleware,
+  responseInterceptor,
+  type RequestHandler as ProxyRequestHandler,
+} from 'http-proxy-middleware';
+import { randomBytes } from 'node:crypto';
 import { adaptateurJWT } from './api/adaptateurJWT';
 import { fournisseurChemin } from './api/fournisseurChemin';
 import { fabriqueMiddleware } from './api/middleware';
@@ -130,6 +135,20 @@ if (isDev) {
     target: 'http://localhost:4321',
     changeOrigin: true,
     ws: true, // important pour le HMR websocket
+    selfHandleResponse: true,
+    on: {
+      proxyRes: responseInterceptor(async (responseBuffer, proxyRes) => {
+        const contentType = proxyRes.headers['content-type'] ?? '';
+
+        // N'intercepter que les réponses HTML
+        if (!contentType.includes('text/html')) {
+          return responseBuffer;
+        }
+        const nonce = randomBytes(16).toString('base64');
+        const html = responseBuffer.toString('utf-8');
+        return html.replaceAll('%%NONCE%%', nonce);
+      }),
+    },
   });
 }
 

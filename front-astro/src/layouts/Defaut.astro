@@ -1,52 +1,70 @@
 ---
+import Heros from '../../../front/lib-svelte/src/ui/Heros.svelte';
 import Entete from '../components/Entete.astro';
 import Head from '../components/Head.astro';
 import LiensEvitement from '../components/LiensEvitement.astro';
+import PiedDePage from '../components/PiedDePage.astro';
+
+export type Héros = {
+  format: 'banniere' | 'heros' | 'heros-centre' | 'details';
+  titre: string;
+  description?: string;
+  cacheFilAriane?: boolean;
+  cacheTags?: boolean;
+  cacheActions?: boolean;
+  illustration?: {
+    source: string;
+    alt: string;
+  };
+  cacheIllustration?: boolean;
+};
+
+type FilArianeBranche = {
+  titre: string;
+  url: string;
+};
+
+type FilAriane = {
+  branche?: FilArianeBranche;
+  brancheConnectee?: FilArianeBranche;
+  feuille: string;
+};
 
 type Props = {
   titre: string;
+  description?: string;
   lienCanonique: string;
+  héros?: Héros;
+  filAriane?: FilAriane;
   noindex?: boolean;
   styles?: string[];
 };
-const { titre, lienCanonique, noindex, styles }: Props = Astro.props;
+const { titre, description, lienCanonique, héros, filAriane, noindex, styles }: Props = Astro.props;
 ---
 
 <html lang="fr">
-  <Head titre={titre} lienCanonique={lienCanonique} noindex={noindex} styles={styles} extraJS="" />
+  <Head {titre} {description} lienCanonique={lienCanonique} noindex={noindex} styles={styles} extraJS="" />
   <body data-themeable="true">
     <LiensEvitement />
     <Entete />
     <main>
+      <Heros
+        format={héros?.format ?? 'banniere'}
+        theme="sombre"
+        {titre}
+        {description}
+        cacheFilAriane={héros?.cacheFilAriane ?? false}
+        cacheTags={héros?.cacheTags ?? false}
+        cacheActions={héros?.cacheActions ?? false}
+        illustrationSource={héros?.illustration?.source}
+        illustrationAlt={héros?.illustration?.alt}
+        cacheIllustration={héros?.cacheIllustration ?? false}
+        filArianeFeuille={filAriane?.feuille}
+        filArianeBranche={filAriane?.branche}
+        filArianeBrancheConnectee={filAriane?.brancheConnectee}
+      />
       <slot />
     </main>
-    <dsfr-footer
-      id="pied"
-      brand-link-href="/"
-      brand-link-title="Retour à l'accueil du site - Mes&ZeroWidthSpaceServices&ZeroWidthSpaceCyber - République Française"
-      has-description
-      content-description="slot"
-      bottom-links="{{ liensBas }}"
-    >
-      <p slot="description">
-        MesServicesCyber est la plateforme pour faciliter l'accès de tous aux services et ressources de l'ANSSI et de
-        ses partenaires.
-      </p>
-      <p slot="description">
-        Il est développé par l'
-        <dsfr-link
-          href="https://cyber.gouv.fr/"
-          size="sm"
-          blank
-          label="Agence nationale de la sécurité des systèmes d'information"></dsfr-link>, en lien avec
-        <dsfr-link href="https://beta.gouv.fr/" size="sm" blank label="BetaGouv"></dsfr-link>
-        et la
-        <dsfr-link
-          href="https://www.numerique.gouv.fr/dinum/"
-          size="sm"
-          blank
-          label="Direction interministérielle du numérique"></dsfr-link>.
-      </p>
-    </dsfr-footer>
+    <PiedDePage />
   </body>
 </html>

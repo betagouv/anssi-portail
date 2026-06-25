@@ -1,0 +1,23 @@
+---
+import PresentationCollectivites from '../../../front/lib-svelte/src/protection/collectivites/PresentationCollectivites.svelte';
+import LayoutParDefaut, { type Héros } from '../layouts/Defaut.astro';
+
+const titre = 'Protéger ma collectivité contre les cyberattaques';
+const description = `Toutes les collectivités sont exposées au risque de cyberattaques. En 2025, elles ont notamment représenté 11 % des victimes de rançongiciels ou ransowmare.`;
+const héros: Héros = {
+  format: 'heros',
+  titre,
+  description,
+  illustration: {
+    source: '/assets/images/personne-qui-cogite.svg',
+    alt: '',
+  },
+};
+const filAriane = {
+  feuille: 'Protéger ma collectivité',
+};
+---
+
+<LayoutParDefaut {titre} {description} {héros} {filAriane} lienCanonique="/collectivites">
+  <PresentationCollectivites client:load />
+</LayoutParDefaut>

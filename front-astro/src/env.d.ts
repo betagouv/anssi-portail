@@ -1,3 +1,11 @@
+/// <reference types="astro/client" />
+
+declare namespace astroHTML.JSX {
+  interface LinkHTMLAttributes {
+    nonce?: string;
+  }
+}
+
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
