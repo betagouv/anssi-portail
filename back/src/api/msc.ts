@@ -87,12 +87,14 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     // console.log('result', result);
     // console.log('html', result.html);
     // console.log('body', result.body);
-    console.log('head', result.head);
+    // console.log('head', result.head);
     const fichier = fs.readFileSync(pageJekyll, 'utf-8');
-    const s = fichier.replaceAll(
-      '<div id="entreprises"></div>',
-      `<div id="entreprises"><div style="display:block">${html}</div></div>`
-    );
+    const s = fichier
+      .replaceAll('<head>', `<head>${result.head}`)
+      .replaceAll(
+        '<div id="entreprises"></div>',
+        `<div id="entreprises"><div style="display:block">${html}</div></div>`
+      );
     reponse.send(s);
     // reponse.contentType('text/html').status(200).envoieFichierEnrichi(s);
   });
