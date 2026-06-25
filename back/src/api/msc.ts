@@ -363,12 +363,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     });
   });
 
-  // A laisser à la fin de la fonction
   app.use('/robots.txt', ressourceRobotsTxt(configurationServeur));
   app.use('/sitemap.xml', ressourceSitemapXml(routesStatiques, configurationServeur));
-
-  // A laisser à la fin de la fonction
-  app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 
   app.use((erreur: unknown, _requete: Request, reponse: Response, suite: NextFunction) => {
     if (erreur instanceof FichierInconnu) {
@@ -379,6 +375,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     }
     suite(erreur);
   });
+
+  // A laisser à la fin de la fonction
+  app.use(configurationServeur.adaptateurGestionErreur.controleurErreurs);
 
   // A laisser à la fin de la fonction
   app.use((_requete: Request, reponse: Response) => {
