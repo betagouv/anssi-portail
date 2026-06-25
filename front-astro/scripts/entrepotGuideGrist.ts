@@ -1,0 +1,95 @@
+import { type AdaptateurEnvironnement } from './adaptateurEnvironnement';
+import axiosInstance from './axiosInstance';
+import { type ClientHttp } from './clientHttp';
+import { EntrepotGrist } from './entrepotGrist';
+import { type BesoinCyber, type EntrepotGuide, Guide } from './entrepotGuide';
+import { aseptiseListeGrist } from './grist';
+
+export type GuideGrist = {
+  id: number;
+  fields: {
+    Identifiant: string | null;
+    Titre: string | null;
+    Description: string | null;
+    Langue: 'FR' | 'EN' | null;
+    Collections: string[];
+    Liste_documents: string | null;
+    Anciens_documents: string | null;
+    Date_de_mise_a_jour_s_: number | null;
+    Thematique: string | null;
+    Besoins_cyber: string[];
+    Lien_court: string | null;
+  };
+};
+
+export type RetourGuideGrist = {
+  records: GuideGrist[];
+};
+
+export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements EntrepotGuide {
+  constructor({
+    clientHttp = axiosInstance,
+    adaptateurEnvironnement,
+  }: {
+    clientHttp?: ClientHttp;
+    adaptateurEnvironnement: AdaptateurEnvironnement;
+  }) {
+    const grist = adaptateurEnvironnement.grist();
+    super(clientHttp, grist.guides().urlTable(), grist.guides().cleApi(), grist.dureeCacheEnSecondes());
+  }
+
+  private readonly convertiBesoin = (besoin: string): BesoinCyber | undefined => {
+    switch (besoin) {
+      case 'Réagir':
+        return 'REAGIR';
+      case 'Sensibiliser':
+        return 'ETRE_SENSIBILISE';
+      case 'Former':
+        return 'SE_FORMER';
+      case 'Sécuriser':
+        return 'SECURISER';
+    }
+    return undefined;
+  };
+
+  private readonly convertisGuideGrist = (guideGrist: GuideGrist): Guide => {
+    return new Guide({
+      id: guideGrist.fields.Identifiant ?? '',
+      nom: guideGrist.fields.Titre ?? '',
+      description: guideGrist.fields.Description ?? '',
+      langue: guideGrist.fields.Langue ?? 'FR',
+      collections: aseptiseListeGrist(guideGrist.fields.Collections),
+      listeDocuments: JSON.parse(guideGrist.fields.Liste_documents || '[]'),
+      nomsAnciensDocuments: JSON.parse(guideGrist.fields.Anciens_documents || '[]'),
+      dateMiseAJour: guideGrist.fields.Date_de_mise_a_jour_s_
+        ? new Date(guideGrist.fields.Date_de_mise_a_jour_s_ * 1000)
+        : new Date(),
+      thematique: guideGrist.fields.Thematique ?? '',
+      besoins: aseptiseListeGrist(guideGrist.fields.Besoins_cyber)
+        .map(this.convertiBesoin)
+        .filter((b) => !!b),
+      lienCourt: guideGrist.fields.Lien_court || undefined,
+    });
+  };
+
+  async parId(id: string): Promise<Guide | undefined> {
+    return (await this.tous()).find((guide) => guide.id === id);
+  }
+
+  async tous(): Promise<Guide[]> {
+    const guidesGrist = await this.appelleGrist({
+      tri: { cle: 'Date_de_mise_a_jour_s_', ordre: 'DESC' },
+    });
+    return guidesGrist.records.map(this.convertisGuideGrist);
+  }
+
+  async parCollections(collections: string[]): Promise<Guide[]> {
+    if (!collections.length) {
+      return [];
+    }
+    const tousLesGuides = await this.tous();
+    return tousLesGuides.filter((guide) =>
+      guide.collections.some((uneCollectionDuGuide) => collections.includes(uneCollectionDuGuide))
+    );
+  }
+}

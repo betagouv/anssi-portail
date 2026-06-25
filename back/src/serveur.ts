@@ -1,4 +1,10 @@
 import { CmsCrisp } from '@lab-anssi/lib';
+import {
+  createProxyMiddleware,
+  responseInterceptor,
+  type RequestHandler as ProxyRequestHandler,
+} from 'http-proxy-middleware';
+import { randomBytes } from 'node:crypto';
 import { adaptateurJWT } from './api/adaptateurJWT';
 import { fournisseurChemin } from './api/fournisseurChemin';
 import { fabriqueMiddleware } from './api/middleware';
@@ -122,6 +128,30 @@ const serviceSanteGuides = fabriqueServiceSanteGuides(cellar);
 
 const port = process.env.PORT || 3000;
 
+let astroProxy: ProxyRequestHandler | undefined;
+const isDev = process.env.NODE_ENV !== 'production';
+if (isDev) {
+  astroProxy = createProxyMiddleware({
+    target: 'http://localhost:4321',
+    changeOrigin: true,
+    ws: true, // important pour le HMR websocket
+    selfHandleResponse: true,
+    on: {
+      proxyRes: responseInterceptor(async (responseBuffer, proxyRes) => {
+        const contentType = proxyRes.headers['content-type'] ?? '';
+
+        // N'intercepter que les réponses HTML
+        if (!contentType.includes('text/html')) {
+          return responseBuffer;
+        }
+        const nonce = randomBytes(16).toString('base64');
+        const html = responseBuffer.toString('utf-8');
+        return html.replaceAll('%%NONCE%%', nonce);
+      }),
+    },
+  });
+}
+
 serviceCoherenceSecretsHachage
   .verifieCoherenceSecrets()
   .catch((raison) => {
@@ -131,7 +161,8 @@ serviceCoherenceSecretsHachage
   })
   .then(() => console.log('✅ Vérification des secrets réussie'))
   .then(() => {
-    return creeServeur({
+    const serveur = creeServeur({
+      astroProxy,
       fournisseurChemin,
       middleware: fabriqueMiddleware({
         adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
@@ -174,4 +205,6 @@ serviceCoherenceSecretsHachage
     }).listen(port, () => {
       console.log(`Le serveur écoute sur le port ${port}`);
     });
+    if (astroProxy) serveur.on('upgrade', astroProxy.upgrade);
+    return serveur;
   });

@@ -1,0 +1,16 @@
+---
+id: 'recommandations-de-securite-concernant-lanalyse-des-flux-https'
+nom: 'Recommandations de sécurité concernant l’analyse des flux HTTPS'
+langue: 'FR'
+collections:
+  - 'Autre'
+listeDocuments:
+  - '[object Object]'
+dateMiseAJour: '2014-10-02T00:00:00.000Z'
+thematique: 'Flux HTTPS'
+besoins:
+  - 'SECURISER'
+lienCourt: 'https://cyber.gouv.fr/guide-analyse-https'
+---
+
+<p>Le protocole HTTPS correspond à la déclinaison sécurisée de HTTP encapsulé à l’aide d’un protocole de niveau inférieur nommé TLS <em>(Transport Layer Security)</em> - anciennement SSL <em>(Secure Socket Layer)</em>. Ce protocole est conçu pour protéger en confidentialité et en intégrité des communications de bout en bout (entre un client et un serveur). Il apporte également des fonctions d’authentification du serveur, mais aussi optionnellement du client.</p><p>La protection de bout en bout qu’apporte TLS est a priori incompatible avec d’autres exigences de sécurité complémentaires visant à inspecter le contenu des échanges. L’analyse d’un contenu (web par exemple) sécurisé à l’aide de TLS, peut toutefois se justifier afin de s’assurer que les données provenant d’un réseau non maîtrisé (Internet par exemple) ne représentent pas une menace pour le système d’information interne. Les architectures visant à déchiffrer les flux TLS, pour permettre leur analyse, « tordent » donc le modèle pour lequel ce protocole est conçu.</p><p>Pour pouvoir mettre en œuvre le déchiffrement de flux TLS de façon maîtrisée, il est nécessaire de disposer, entre autres, d’un niveau de connaissance suffisant dans les deux domaines spécifiques et évolutifs que sont les IGC <em>([Infrastructure de Gestion de Clés)</em>] et la cryptographie. Quel que soit le contexte, la mise en place de mécanismes de déchiffrement HTTPS présente des risques dans la mesure où cette opération entraîne la rupture d’un canal sécurisé et expose des données en clair au niveau de l’équipement en charge de l’opération. Lorsqu’un tel déchiffrement est nécessaire, sa mise en œuvre doit s’accompagner de beaucoup de précautions et se faire uniquement après validation de la direction des systèmes d’information voire d’une autorité de niveau supérieur.</p><p>Cette note présente donc les recommandations d’ordre technique à suivre lorsque l’analyse des flux HTTPS échangés entre un système d’information maîtrisé et des réseaux externes est indispensable. Deux scénarios sont présentés. Le premier, en théorie plus rare, détaille le cas où les flux HTTPS sont déchiffrés après avoir été initiés par des clients présents sur le système d’information en direction des sites web externes. Le second, plus fréquent, présente le cas où des clients externes souhaitent se connecter à l’aide du protocole HTTPS à des sites web hébergés au sein d’un système d’information maîtrisé. Ce document n’a pas pour objectif de décrire à nouveau en détail le fonctionnement du protocole TLS. Le guide de l’ANSSI « <a href="https://cyber.gouv.fr/publications/recommandations-de-securite-relatives-tls"><em>Recommandations de sécurité relatives à TLS</em></a> » présente ce protocole et les problématiques associées. Par contre, certains aspects juridiques relatifs au déchiffrement de flux HTTPS sont abordés à la fin de ce document.</p><p></p>

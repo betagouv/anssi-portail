@@ -44,7 +44,7 @@ import { ressourceInfosSite } from './ressourceInfosSite';
 import { ressourcePageConnexion } from './ressourcePageConnexion';
 import { ressourcePageCrisp } from './ressourcePageCrisp';
 import { ressourcePageProduit } from './ressourcePageProduit';
-import { ressourcePagesJekyll } from './ressourcePagesJekyll';
+import { ressourcePagesAstro, ressourcePagesJekyll } from './ressourcePagesJekyll';
 import { ressourcePagesJekyllConnectees } from './ressourcePagesJekyllConnectees';
 import { ressourceProfil } from './ressourceProfil';
 import { ressourceRetoursExperience } from './ressourceRetoursExperience';
@@ -69,6 +69,29 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   configurationServeur.adaptateurGestionErreur.initialise(app);
 
   const { fournisseurChemin } = configurationServeur;
+
+  const routesStatiquesAstro = ['a-propos', 'catalogue', 'collectivites'];
+  const isDev = process.env.NODE_ENV !== 'production';
+  if (isDev) {
+    const { astroProxy } = configurationServeur;
+    if (astroProxy) {
+      routesStatiquesAstro.forEach((page) =>
+        app.use(`/${page}`, (req, res, next) => {
+          req.url = `/${page}${req.url === '/' ? '' : req.url}`;
+          astroProxy(req, res, next);
+        })
+      );
+      ['_astro', '@vite', '@fs', '@id', 'node_modules', 'src'].forEach((prefixe) => {
+        app.use(`/${prefixe}`, (req, res, next) => {
+          req.url = `/${prefixe}${req.url === '/' ? '' : req.url}`;
+          astroProxy(req, res, next);
+        });
+      });
+    }
+  } else {
+    // production
+    routesStatiquesAstro.forEach((page) => app.use(`/${page}`, ressourcePagesAstro(configurationServeur, page)));
+  }
 
   app.use(compression());
 
@@ -156,15 +179,13 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       .envoieFichierEnrichi(fournisseurChemin.cheminPageJekyll('financements'));
   });
 
-  const routesStatiques = [
+  const routesStatiquesJekyll = [
     '',
-    'catalogue',
     'parcours-debuter',
     'parcours-approfondir',
     'test-maturite',
     'niveaux-maturite',
     'apres-authentification',
-    'a-propos',
     'mentions-legales',
     'confidentialite',
     'cgu',
@@ -181,7 +202,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'prestataires-labellises',
     'contacts',
     'nis2',
-    'collectivites',
     'associations',
     'entreprises',
     'sante',
@@ -189,7 +209,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'confirmation-abonnement-infolettre',
   ];
 
-  routesStatiques
+  routesStatiquesJekyll
     .concat(
       configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()
         ? ['simulateur-nis2']
@@ -324,7 +344,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ['/accessibilite/', '/accessibilite'],
     ['/apres-authentification/', '/apres-authentification'],
     ['/associations/', '/associations'],
-    ['/catalogue/', '/catalogue'],
     ['/cgu/', '/cgu'],
     ['/collectivites/', '/collectivites'],
     ['/confidentialite/', '/confidentialite'],
@@ -364,7 +383,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   });
 
   app.use('/robots.txt', ressourceRobotsTxt(configurationServeur));
-  app.use('/sitemap.xml', ressourceSitemapXml(routesStatiques, configurationServeur));
+  app.use(
+    '/sitemap.xml',
+    ressourceSitemapXml([...routesStatiquesJekyll, ...routesStatiquesAstro], configurationServeur)
+  );
 
   app.use((erreur: unknown, _requete: Request, reponse: Response, suite: NextFunction) => {
     if (erreur instanceof FichierInconnu) {

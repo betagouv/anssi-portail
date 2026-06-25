@@ -5,6 +5,7 @@ packages:
   - 'back'
   - 'front'
   - 'front/lib-svelte'
+  - 'front-astro'
   - 'mise-a-jour-financements'
   - 'demande-diag'
   - 'comparaison-grist'

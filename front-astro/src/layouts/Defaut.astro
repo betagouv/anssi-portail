@@ -1,0 +1,70 @@
+---
+import Heros from '../../../front/lib-svelte/src/ui/Heros.svelte';
+import Entete from '../components/Entete.astro';
+import Head from '../components/Head.astro';
+import LiensEvitement from '../components/LiensEvitement.astro';
+import PiedDePage from '../components/PiedDePage.astro';
+
+export type Héros = {
+  format: 'banniere' | 'heros' | 'heros-centre' | 'details';
+  titre: string;
+  description?: string;
+  cacheFilAriane?: boolean;
+  cacheTags?: boolean;
+  cacheActions?: boolean;
+  illustration?: {
+    source: string;
+    alt: string;
+  };
+  cacheIllustration?: boolean;
+};
+
+type FilArianeBranche = {
+  titre: string;
+  url: string;
+};
+
+type FilAriane = {
+  branche?: FilArianeBranche;
+  brancheConnectee?: FilArianeBranche;
+  feuille: string;
+};
+
+type Props = {
+  titre: string;
+  description?: string;
+  lienCanonique: string;
+  héros?: Héros;
+  filAriane?: FilAriane;
+  noindex?: boolean;
+  styles?: string[];
+};
+const { titre, description, lienCanonique, héros, filAriane, noindex, styles }: Props = Astro.props;
+---
+
+<html lang="fr">
+  <Head {titre} {description} lienCanonique={lienCanonique} noindex={noindex} styles={styles} extraJS="" />
+  <body data-themeable="true">
+    <LiensEvitement />
+    <Entete />
+    <main>
+      <Heros
+        format={héros?.format ?? 'banniere'}
+        theme="sombre"
+        {titre}
+        {description}
+        cacheFilAriane={héros?.cacheFilAriane ?? false}
+        cacheTags={héros?.cacheTags ?? false}
+        cacheActions={héros?.cacheActions ?? false}
+        illustrationSource={héros?.illustration?.source}
+        illustrationAlt={héros?.illustration?.alt}
+        cacheIllustration={héros?.cacheIllustration ?? false}
+        filArianeFeuille={filAriane?.feuille}
+        filArianeBranche={filAriane?.branche}
+        filArianeBrancheConnectee={filAriane?.brancheConnectee}
+      />
+      <slot />
+    </main>
+    <PiedDePage />
+  </body>
+</html>

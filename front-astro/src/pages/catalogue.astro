@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import CatalogueInteractif from '../components/CatalogueInteractif.svelte';
+import LayoutParDefaut from '../layouts/Defaut.astro';
+
+const guidesBruts = await getCollection('guides');
+const guides = guidesBruts.map((g) => ({
+  ...g.data,
+  illustration: {
+    petite: `/documents-guides/${g.id}/588.avif`,
+    grande: `/documents-guides/${g.id}/origine.avif`,
+  },
+  documents: [],
+  lienInterne: `/guides/${g.id}`,
+  type: 'Guide',
+}));
+---
+
+<LayoutParDefaut titre="Catalogue" lienCanonique="" styles={['/assets/styles/catalogue.css']}>
+  <!-- <Hero
+    titre="Les services et ressources cyber"
+    description="Trouvez les services et les ressources adaptés à vos besoins."
+    ariane="Explorer le catalogue"
+  /> -->
+
+  <CatalogueInteractif client:load guides={JSON.stringify(guides)} />
+</LayoutParDefaut>

@@ -1,0 +1,43 @@
+---
+import BadgeAgentAnssi from '@anssi-portail/svelte/src/badge-agent-anssi/BadgeAgentAnssi.svelte';
+import ZoneIdentification from '@anssi-portail/svelte/src/identification/ZoneIdentification.svelte';
+---
+
+<dsfr-header
+  id="haut-de-page"
+  class="fr-header__brand"
+  brand-link-href="/"
+  brand-link-title="Retour à l'accueil du site MesServicesCyber - République Française"
+  has-brand-operator
+  brand-operator-src="/assets/images/logo-anssi.svg"
+  brand-operator-alt="MesServicesCyber"
+  brand-operator-style="height:4rem"
+  brand-service="MesServicesCyber"
+  has-brand-tagline
+  brand-tagline="Innovation ANSSI"
+  has-tool-links
+  menu-id="menu-burger-mobile"
+  has-navigation
+  navigation-id="menu-principal"
+>
+  <div slot="headerbadge" class="badge-agent-anssi">
+    <BadgeAgentAnssi client:only />
+  </div>
+  <div slot="toolLinks" class="identification">
+    <ZoneIdentification client:only />
+  </div>
+  <div slot="modalToolLinks" class="identification">
+    <ZoneIdentification client:only />
+  </div>
+  <div slot="beforetoolslinks">
+    <lab-anssi-bouton-suite-cyber-navigation sourceutm="MesServicesCyber"></lab-anssi-bouton-suite-cyber-navigation>
+  </div>
+  <div slot="beforenavbarbuttons">
+    <lab-anssi-bouton-suite-cyber-navigation sourceutm="MesServicesCyber"></lab-anssi-bouton-suite-cyber-navigation>
+  </div>
+  <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart" slot="aftermodaltoollinks"
+  ></lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
+  <div slot="navigation" id="navigation"></div>
+  <p>MesServicesCyber</p>
+  <p>Innovation ANSSI</p>
+</dsfr-header>

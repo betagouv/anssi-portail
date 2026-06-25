@@ -17,6 +17,7 @@ const valideChemin = (nomFichier: string): void => {
 
 export interface FournisseurChemin {
   cheminPageJekyll: (nomPage: string) => string;
+  cheminPageAstro: (nomPage: string) => string;
   cheminProduitJekyll: (typologie: string, idProduit: string) => string;
   ressourceDeBase: (ressource: string) => string;
   cheminCsvNis2Simulateur: () => string;
@@ -43,6 +44,7 @@ const construisChemin = (...morceauxChemin: string[]): string => {
 
 export const fournisseurChemin: FournisseurChemin = {
   cheminPageJekyll: (nomPage: string) => construisChemin(nomPage, 'index.html'),
+  cheminPageAstro: (nomPage: string) => construisChemin('..', '..', 'front-astro', 'dist', nomPage + '.html'),
   cheminProduitJekyll: (repertoireProduits: string, idProduit: string) =>
     construisChemin(repertoireProduits, idProduit),
   ressourceDeBase: (ressource) => construisChemin(ressource),

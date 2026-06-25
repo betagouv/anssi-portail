@@ -25,11 +25,21 @@
     window.addEventListener('hashchange', changeLeLienCourant);
     return () => window.removeEventListener('hashchange', changeLeLienCourant);
   });
+
+  let links: unknown = $derived.by(() => {
+    if (typeof window === 'undefined') {
+      return JSON.stringify(
+        liens.map((lien) => ({
+          label: `${lien.emoji ? lien.emoji + ' ' : ''}${lien.label}`,
+          href: lien.fragment,
+        }))
+      );
+    }
+    return liens.map((lien) => ({
+      label: `${lien.emoji ? lien.emoji + ' ' : ''}${lien.label}`,
+      href: lien.fragment,
+    }));
+  });
 </script>
 
-<dsfr-tabnav
-  centered
-  links={liens.map((lien) => ({ label: `${lien.emoji ? lien.emoji + ' ' : ''}${lien.label}`, href: lien.fragment }))}
-  activeIndex={liens.findIndex((lien) => lien.fragment === lienActif)}
->
-</dsfr-tabnav>
+<dsfr-tabnav centered {links} activeIndex={liens.findIndex((lien) => lien.fragment === lienActif)}> </dsfr-tabnav>

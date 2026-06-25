@@ -85,6 +85,7 @@ export const fabriqueMiddleware = ({
     reponse.envoieFichierEnrichi = (chemin: string) => {
       try {
         const fichier = fs.readFileSync(chemin, 'utf-8');
+        console.log(`Envoi du fichier enrichi ${chemin} avec nonce ${nonceAleatoire}`, fichier.indexOf('%%NONCE%%'));
         const avecNonce = fichier.replaceAll('%%NONCE%%', nonceAleatoire);
         const avecNonceEtVersion = avecNonce.replaceAll('%%VERSION%%', adaptateurEnvironnement.versionDeConstruction());
         reponse.send(avecNonceEtVersion);
