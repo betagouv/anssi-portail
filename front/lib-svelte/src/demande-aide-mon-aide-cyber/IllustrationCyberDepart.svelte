@@ -770,7 +770,7 @@
     d="M394.325 156.15L394.415 153.55L393.225 153.51L393.275 152.07L394.465 152.11L394.515 150.52L396.135 150.58L396.085 152.17L398.035 152.24L397.985 153.68L396.035 153.61L395.945 156.21C395.925 156.92 396.285 157.21 396.925 157.23C397.365 157.25 397.655 157.21 397.875 157.12L397.825 158.52C397.505 158.65 397.125 158.7 396.595 158.68C395.005 158.62 394.275 157.7 394.335 156.15H394.325Z"
     fill="#0D0C21"
   />
-  <foreignObject width="100%" height="100%" x="310" y="81">
+  <foreignObject width="100%" height="100%" x="310" y="81" transform="rotate(2)" transform-origin="center center">
     <div>
       <h1>+{nombreOrganisations}</h1>
     </div>
@@ -787,8 +787,6 @@
   h1 {
     color: var(--noir);
     font-size: 24px;
-    transform: rotate(2deg);
-    transform-origin: center center;
     width: fit-content;
   }
   .satisfaction {
