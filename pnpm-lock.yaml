@@ -221,7 +221,7 @@ importers:
         version: 1.16.1
       diff:
         specifier: ^8.0.3
-        version: 8.0.3
+        version: 8.0.4
       isomorphic-dompurify:
         specifier: ^2.36.0
         version: 2.36.0(@noble/hashes@1.8.0)
@@ -385,7 +385,7 @@ importers:
         version: 1.16.1
       diff:
         specifier: ^8.0.3
-        version: 8.0.3
+        version: 8.0.4
       isomorphic-dompurify:
         specifier: ^2.36.0
         version: 2.36.0(@noble/hashes@1.8.0)
@@ -2655,8 +2655,8 @@ packages:
   dezalgo@1.0.4:
     resolution: {integrity: sha512-rXSP0bf+5n0Qonsb+SVVfNfIsimO4HEtmnIpPHY8Q1UCzKlQrDMfdobr8nJOOsRgWCyMRqeSBQzmWUMq7zvVig==}
 
-  diff@8.0.3:
-    resolution: {integrity: sha512-qejHi7bcSD4hQAZE0tNAawRK1ZtafHDmMTMkrrIGgSLl7hTnQHmKCeB45xAcbfTqK2zowkM3j3bHt/4b/ARbYQ==}
+  diff@8.0.4:
+    resolution: {integrity: sha512-DPi0FmjiSU5EvQV0++GFDOJ9ASQUVFh5kD+OzOnYdi7n3Wpm9hWWGfB/O2blfHcMVTL5WkQXSnRiK9makhrcnw==}
     engines: {node: '>=0.3.1'}
 
   dijkstrajs@1.0.3:
@@ -6980,7 +6980,7 @@ snapshots:
       asap: 2.0.6
       wrappy: 1.0.2
 
-  diff@8.0.3: {}
+  diff@8.0.4: {}
 
   dijkstrajs@1.0.3: {}
 
