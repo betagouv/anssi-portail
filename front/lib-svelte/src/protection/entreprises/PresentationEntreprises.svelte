@@ -1,9 +1,10 @@
 <script lang="ts">
-  import FilAriane from '../../ui/FilAriane.svelte';
+  // import FilAriane from '../../ui/FilAriane.svelte';
   import Heros from '../../ui/Heros.svelte';
   import Proteger from '../Proteger.svelte';
 </script>
 
+<div class="toto">coucou</div>
 <Heros
   cacheActions
   cacheIllustration={false}
@@ -22,9 +23,15 @@
       représenté 48&nbsp;% des victimes de rançongiciels ou ransowmare représentant les premières entités visées.
     </p>
   {/snippet}
-  {#snippet filAriane()}
-    <FilAriane fondSombre={true} feuille="Protéger mon entreprise contre les cyberattaques" />
-  {/snippet}
+  <!--{#snippet filAriane()}-->
+  <!--  <FilAriane fondSombre={true} feuille="Protéger mon entreprise contre les cyberattaques" />-->
+  <!--{/snippet}-->
 </Heros>
 
 <Proteger origine="landing-entreprises" />
+
+<style>
+  .toto {
+    background: red;
+  }
+</style>

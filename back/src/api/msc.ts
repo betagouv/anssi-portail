@@ -5,6 +5,7 @@ import cors from 'cors';
 import express, { json, NextFunction, Request, Response } from 'express';
 import { IpFilter } from 'express-ipfilter';
 import rateLimit from 'express-rate-limit';
+import fs from 'node:fs';
 // @ts-ignore
 import * as toto from '../../../front/lib-svelte/dist/assets/app.js';
 import { ConfigurationServeur } from './configurationServeur';
@@ -68,25 +69,33 @@ import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGro
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
 
-  app.get('/toto', (req, res) => {
-    const result = toto.renderApp();
-    console.log('result', result);
-    console.log('html', result.html);
-    console.log('body', result.body);
-    console.log('head', result.head);
-    res.sendStatus(200);
-  });
-
   // const vite = await createViteServer({ server: { middlewareMode: true }, appType: 'custom' });
   // app.use(vite.middlewares);
 
   configurationServeur.adaptateurGestionErreur.initialise(app);
-
   const { fournisseurChemin } = configurationServeur;
 
   app.use(compression());
 
   app.use(configurationServeur.middleware.ajouteMethodeEnrichissement);
+
+  app.get('/toto', (req, reponse) => {
+    const pageJekyll = fournisseurChemin.cheminPageJekyll('entreprises');
+
+    const result = toto.renderApp();
+    const html = result.html;
+    // console.log('result', result);
+    // console.log('html', result.html);
+    // console.log('body', result.body);
+    console.log('head', result.head);
+    const fichier = fs.readFileSync(pageJekyll, 'utf-8');
+    const s = fichier.replaceAll(
+      '<div id="entreprises"></div>',
+      `<div id="entreprises"><div style="display:block">${html}</div></div>`
+    );
+    reponse.send(s);
+    // reponse.contentType('text/html').status(200).envoieFichierEnrichi(s);
+  });
 
   app.use(configurationServeur.middleware.positionneLesCsp());
 

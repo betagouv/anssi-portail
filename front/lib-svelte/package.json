@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "build:ssr": "vite build --config vite.config.ssr.ts",
+    "build:ssr": "vite build --ssr --config vite.config.ssr.ts",
     "dev": "vite build --watch --mode=development",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

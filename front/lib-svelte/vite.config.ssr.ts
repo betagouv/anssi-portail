@@ -14,15 +14,10 @@ export default defineConfig({
         entryFileNames: `assets/[name].js`,
         assetFileNames: `assets/[name].[ext]`,
       },
+      external: ['dompurify'],
     },
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: 'modern-compiler',
-      },
-    },
-  },
+
   server: {
     port: 3001,
   },
