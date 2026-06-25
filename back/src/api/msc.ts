@@ -70,7 +70,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   const { fournisseurChemin } = configurationServeur;
 
-  const routesStatiquesAstro = [''];
+  const routesStatiquesAstro = ['catalogue'];
   const isDev = process.env.NODE_ENV !== 'production';
   if (isDev) {
     const { astroProxy } = configurationServeur;
@@ -181,7 +181,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   const routesStatiquesJekyll = [
     '',
-    'catalogue',
     'parcours-debuter',
     'parcours-approfondir',
     'test-maturite',
@@ -347,7 +346,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ['/accessibilite/', '/accessibilite'],
     ['/apres-authentification/', '/apres-authentification'],
     ['/associations/', '/associations'],
-    ['/catalogue/', '/catalogue'],
     ['/cgu/', '/cgu'],
     ['/collectivites/', '/collectivites'],
     ['/confidentialite/', '/confidentialite'],

@@ -1,0 +1,52 @@
+---
+import Entete from '../components/Entete.astro';
+import Head from '../components/Head.astro';
+import LiensEvitement from '../components/LiensEvitement.astro';
+
+type Props = {
+  titre: string;
+  lienCanonique: string;
+  noindex?: boolean;
+  styles?: string[];
+};
+const { titre, lienCanonique, noindex, styles }: Props = Astro.props;
+---
+
+<html lang="fr">
+  <Head titre={titre} lienCanonique={lienCanonique} noindex={noindex} styles={styles} extraJS="" />
+  <body data-themeable="true">
+    <LiensEvitement />
+    <Entete />
+    <main>
+      <slot />
+    </main>
+    <dsfr-footer
+      id="pied"
+      brand-link-href="/"
+      brand-link-title="Retour à l'accueil du site - Mes&ZeroWidthSpaceServices&ZeroWidthSpaceCyber - République Française"
+      has-description
+      content-description="slot"
+      bottom-links="{{ liensBas }}"
+    >
+      <p slot="description">
+        MesServicesCyber est la plateforme pour faciliter l'accès de tous aux services et ressources de l'ANSSI et de
+        ses partenaires.
+      </p>
+      <p slot="description">
+        Il est développé par l'
+        <dsfr-link
+          href="https://cyber.gouv.fr/"
+          size="sm"
+          blank
+          label="Agence nationale de la sécurité des systèmes d'information"></dsfr-link>, en lien avec
+        <dsfr-link href="https://beta.gouv.fr/" size="sm" blank label="BetaGouv"></dsfr-link>
+        et la
+        <dsfr-link
+          href="https://www.numerique.gouv.fr/dinum/"
+          size="sm"
+          blank
+          label="Direction interministérielle du numérique"></dsfr-link>.
+      </p>
+    </dsfr-footer>
+  </body>
+</html>
