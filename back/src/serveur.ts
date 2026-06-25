@@ -1,4 +1,5 @@
 import { CmsCrisp } from '@lab-anssi/lib';
+import { createProxyMiddleware, type RequestHandler as ProxyRequestHandler } from 'http-proxy-middleware';
 import { adaptateurJWT } from './api/adaptateurJWT';
 import { fournisseurChemin } from './api/fournisseurChemin';
 import { fabriqueMiddleware } from './api/middleware';
@@ -122,6 +123,16 @@ const serviceSanteGuides = fabriqueServiceSanteGuides(cellar);
 
 const port = process.env.PORT || 3000;
 
+let astroProxy: ProxyRequestHandler | undefined;
+const isDev = process.env.NODE_ENV !== 'production';
+if (isDev) {
+  astroProxy = createProxyMiddleware({
+    target: 'http://localhost:4321',
+    changeOrigin: true,
+    ws: true, // important pour le HMR websocket
+  });
+}
+
 serviceCoherenceSecretsHachage
   .verifieCoherenceSecrets()
   .catch((raison) => {
@@ -131,7 +142,8 @@ serviceCoherenceSecretsHachage
   })
   .then(() => console.log('✅ Vérification des secrets réussie'))
   .then(() => {
-    return creeServeur({
+    const serveur = creeServeur({
+      astroProxy,
       fournisseurChemin,
       middleware: fabriqueMiddleware({
         adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
@@ -174,4 +186,6 @@ serviceCoherenceSecretsHachage
     }).listen(port, () => {
       console.log(`Le serveur écoute sur le port ${port}`);
     });
+    if (astroProxy) serveur.on('upgrade', astroProxy.upgrade);
+    return serveur;
   });

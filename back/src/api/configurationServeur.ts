@@ -1,4 +1,5 @@
 import { CmsCrisp } from '@lab-anssi/lib';
+import { type RequestHandler as ProxyRequestHandler } from 'http-proxy-middleware';
 import { BusEvenements } from '../bus/busEvenements';
 import { AdaptateurCellar } from '../infra/adaptateurCellar';
 import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
@@ -29,6 +30,7 @@ import { Middleware } from './middleware';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC';
 
 export type ConfigurationServeur = {
+  astroProxy: ProxyRequestHandler | undefined;
   adaptateurEnvironnement: AdaptateurEnvironnement;
   adaptateurGestionErreur: AdaptateurGestionErreur;
   adaptateurHachage: AdaptateurHachage;
