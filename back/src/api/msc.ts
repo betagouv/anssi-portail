@@ -5,6 +5,8 @@ import cors from 'cors';
 import express, { json, NextFunction, Request, Response } from 'express';
 import { IpFilter } from 'express-ipfilter';
 import rateLimit from 'express-rate-limit';
+// @ts-ignore
+import * as toto from '../../../front/lib-svelte/dist/assets/app.js';
 import { ConfigurationServeur } from './configurationServeur';
 import { erreurPageInterdite, erreurPageNonTrouvée, ErreurTraverséeDeChemin } from './erreurs';
 import { ressourceFavori } from './favoris/ressourceFavori';
@@ -65,6 +67,18 @@ import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGro
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
+
+  app.get('/toto', (req, res) => {
+    const result = toto.renderApp();
+    console.log('result', result);
+    console.log('html', result.html);
+    console.log('body', result.body);
+    console.log('head', result.head);
+    res.sendStatus(200);
+  });
+
+  // const vite = await createViteServer({ server: { middlewareMode: true }, appType: 'custom' });
+  // app.use(vite.middlewares);
 
   configurationServeur.adaptateurGestionErreur.initialise(app);
 

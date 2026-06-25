@@ -1,0 +1,11 @@
+// import { render } from 'svelte/server';
+// import App from './App.svelte';
+//
+// export const rendu = () => render(App);
+
+import { render } from 'svelte/server';
+import App from './App.svelte';
+
+export function renderApp() {
+  return render(App);
+}
