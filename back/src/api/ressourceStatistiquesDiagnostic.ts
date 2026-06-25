@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { corpsVide, valideCorpsRequete } from './zod';
 
 export const STATS_DIAGNOSTIC = {
-  organisationsAccompagnees: 5000,
+  organisationsAccompagnees: 6000,
   satisfaction: 92,
 };
 
