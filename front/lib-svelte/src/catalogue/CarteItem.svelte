@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { decodeEntiteHtml } from '$plateforme/aseptisationDuHtml';
   import BoutonFavori from '../favoris/BoutonFavori.svelte';
-  import { decodeEntiteHtml } from '../utils/aseptisationDuHtml';
   import type { ItemCyber } from './Catalogue.types';
   import type { Guide } from './Guide.types';
   import HeaderBadge from './HeaderBadge.svelte';

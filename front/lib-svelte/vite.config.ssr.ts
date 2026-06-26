@@ -1,5 +1,6 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig } from 'vite';
+import { plateformePlugin } from './src/plateforme/plateforme.plugin';
 
 export default defineConfig({
   plugins: [
@@ -9,6 +10,7 @@ export default defineConfig({
         customElement: false,
       },
     }),
+    plateformePlugin(),
   ],
   build: {
     ssr: true,

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { onMount } from 'svelte';
   import EncartLienVersDemandeDiagnostic from '../../demande-aide-mon-aide-cyber/EncartLienVersDemandeDiagnostic.svelte';
   import { clic } from '../../directives/actions.svelte';
@@ -7,7 +8,6 @@
   import FilAriane from '../../ui/FilAriane.svelte';
   import Lien from '../../ui/Lien.svelte';
   import Separateur from '../../ui/Separateur.svelte';
-  import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
   import { CollectionGuide, type Guide } from '../Guide.types';
   import { chargeGuidesDansLeStore, guidesStore } from '../stores/guides/guides.store';
   import BadgesDeCollections from './BadgesDeCollections.svelte';

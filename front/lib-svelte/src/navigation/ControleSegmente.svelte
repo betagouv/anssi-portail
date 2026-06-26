@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from './fragmentDeNavigation';
 
   type Props = {
@@ -16,11 +17,17 @@
   let {
     elements,
     indexActif = $bindable(0),
-    fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash),
+    fragmentDeNavigation = undefined,
     lorsDuChangement,
     lorsDuClic,
   }: Props = $props();
   const hasIcon = $derived(elements.some((e) => !!e.icone));
+
+  onMount(() => {
+    if (!fragmentDeNavigation) {
+      fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
+    }
+  });
 
   // Gestion du fragment
   const changeLeFragmentDeNavigation = () => {
@@ -40,7 +47,7 @@
       return;
     }
     const ancre = elements[indexActif].ancre;
-    if (ancre) {
+    if (ancre && fragmentDeNavigation) {
       fragmentDeNavigation.changeSection(ancre);
       window.location.hash = fragmentDeNavigation.serialise();
     }

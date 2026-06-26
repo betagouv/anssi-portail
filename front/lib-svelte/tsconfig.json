@@ -9,7 +9,10 @@
     "checkJs": false,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "allowArbitraryExtensions": true
+    "allowArbitraryExtensions": true,
+    "paths": {
+      "$plateforme/*": ["./src/plateforme/*"]
+    }
   },
   "include": ["src/**/*.ts", "test/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
   "references": [{ "path": "./tsconfig.node.json" }]
