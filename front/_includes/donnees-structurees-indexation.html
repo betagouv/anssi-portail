@@ -1,0 +1,194 @@
+{% assign siteUrl = site.url | default: 'https://messervices.cyber.gouv.fr' %}
+{% assign descriptionPage = site.data.meta-description[page.url] %}
+{% assign urlPage = page.url | default: '/' %}
+{% if urlPage != '/' and urlPage | slice: -1 == '/' %}
+  {% assign longueurSansSlash = urlPage.size | minus: 1 %}
+  {% assign urlPage = urlPage | slice: 0, longueurSansSlash %}
+{% endif %}
+{% assign urlComplete = siteUrl | append: urlPage %}
+{% assign nomPage = page.titreHtml | split: ' | ' | first %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GovernmentOrganization",
+  "@id": "{{ siteUrl }}/#organization",
+  "name": "ANSSI",
+  "alternateName": "Agence nationale de la sécurité des systèmes d'information",
+  "url": "https://cyber.gouv.fr/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "{{ siteUrl }}/assets/images/logo-anssi.svg"
+  },
+  "description": "Créée en 2009, l'ANSSI est l'autorité nationale en matière de cybersécurité et de cyberdéfense. Son action pour la protection de la Nation se traduit en cinq missions : défendre, connaître, partager, accompagner et réguler.",
+  "sameAs": [
+    "https://fr.wikipedia.org/wiki/Agence_nationale_de_la_s%C3%A9curit%C3%A9_des_syst%C3%A8mes_d%27information"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "{{ siteUrl }}/#website",
+  "name": "MesServicesCyber",
+  "url": "{{ siteUrl }}/",
+  "inLanguage": "fr",
+  "publisher": {
+    "@id": "{{ siteUrl }}/#organization"
+  },
+  "description": "La plateforme de l'ANSSI pour faciliter l'accès de tous aux services et ressources de cybersécurité."
+}
+</script>
+
+{% if page.layout == 'service' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GovernmentService",
+    "name": {{ page.nom | jsonify }},
+    "description": {{ page.description | jsonify }},
+    "url": "{{ urlComplete }}",
+    "provider": {
+      "@id": "{{ siteUrl }}/#organization"
+    },
+    "serviceType": "Cybersécurité",
+    "areaServed": {
+      "@type": "Country",
+      "name": "France"
+    }{% if page.lien %},
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": {{ page.lien | jsonify }}
+    }{% endif %}
+  }
+  </script>
+{% elsif page.url == '/a-propos/' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": {{ nomPage | jsonify }},
+    {% if descriptionPage %}"description": {{ descriptionPage | jsonify }},{% endif %}
+    "url": "{{ urlComplete }}",
+    "isPartOf": {
+      "@id": "{{ siteUrl }}/#website"
+    },
+    "inLanguage": "fr"
+  }
+  </script>
+{% elsif page.url == '/contacts/' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": {{ nomPage | jsonify }},
+    {% if descriptionPage %}"description": {{ descriptionPage | jsonify }},{% endif %}
+    "url": "{{ urlComplete }}",
+    "isPartOf": {
+      "@id": "{{ siteUrl }}/#website"
+    },
+    "inLanguage": "fr"
+  }
+  </script>
+{% elsif page.url == '/catalogue/' or page.layout == 'parcours' or page.layout == 'guide' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": {{ nomPage | jsonify }},
+    {% if descriptionPage %}"description": {{ descriptionPage | jsonify }},{% endif %}
+    "url": "{{ urlComplete }}",
+    "isPartOf": {
+      "@id": "{{ siteUrl }}/#website"
+    },
+    "inLanguage": "fr"
+  }
+  </script>
+{% elsif page.url != '/' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": {{ nomPage | jsonify }},
+    {% if descriptionPage %}"description": {{ descriptionPage | jsonify }},{% endif %}
+    "url": "{{ urlComplete }}",
+    "isPartOf": {
+      "@id": "{{ siteUrl }}/#website"
+    },
+    "inLanguage": "fr"
+  }
+  </script>
+{% endif %}
+
+{% if page.layout == 'service' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Accueil",
+        "item": "{{ siteUrl }}/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Les services et ressources cyber",
+        "item": "{{ siteUrl }}/catalogue"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": {{ page.nom | jsonify }}
+      }
+    ]
+  }
+  </script>
+{% elsif page.url == '/catalogue/' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Accueil",
+        "item": "{{ siteUrl }}/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Les services et ressources cyber"
+      }
+    ]
+  }
+  </script>
+{% elsif page.layout == 'page-statique' %}
+  {% assign nomFilAriane = page.filAriane | default: page.titrePageStatique %}
+  {% if nomFilAriane %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "{{ siteUrl }}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": {{ nomFilAriane | jsonify }}
+        }
+      ]
+    }
+    </script>
+  {% endif %}
+{% endif %}

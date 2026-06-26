@@ -11,14 +11,7 @@
   {% endif %}
 
   <title>{{page.titreHtml}}</title>
-  <script type="application/ld+json">
-    {
-      "@context" : "https://schema.org",
-      "@type" : "WebSite",
-      "name" : "messervices.cyber.gouv.fr",
-      "url" : "https://messervices.cyber.gouv.fr/"
-    }
-  </script>
+  {% include donnees-structurees-indexation.html %}
   {% assign urlSansSlashFinal = page.url | default: '' | strip %}
   {% if urlSansSlashFinal != '' and urlSansSlashFinal != '/' %}
     {% assign last_char = urlSansSlashFinal | slice: -1 %}
