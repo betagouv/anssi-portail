@@ -31,6 +31,7 @@ export default defineConfig({
   ],
   build: {
     cssCodeSplit: false,
+    outDir: 'dist/client',
     rollupOptions: {
       input: {
         'avis-utilisateur': 'src/main-avis-utilisateur.ts',
@@ -79,7 +80,6 @@ export default defineConfig({
         assetFileNames: `assets/[name].[ext]`,
       },
     },
-
     sourcemap: true,
   },
   css: {
