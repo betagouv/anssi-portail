@@ -15,6 +15,7 @@ export default defineConfig({
   build: {
     ssr: true,
     cssCodeSplit: false,
+    outDir: 'dist/dist-serveur',
     rollupOptions: {
       input: {
         'barometre-simplifie': 'src/test-maturite/BarometreSimplifie.svelte',

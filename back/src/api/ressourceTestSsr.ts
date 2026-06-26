@@ -23,7 +23,7 @@ export const ressourceTestSsr = ({ fournisseurChemin, adaptateurEnvironnement }:
 
     for (const nomComposant of composants) {
       try {
-        const composant = await import('../../../front/lib-svelte/dist/assets/' + nomComposant + '.js');
+        const composant = await import('../../../front/lib-svelte/dist-serveur/assets/' + nomComposant + '.js');
         const { body, head } = render(composant.default);
         console.log('injection ' + nomComposant);
         résultat = résultat.replaceAll(`<div id="${nomComposant}"></div>`, `<div id="${nomComposant}">${body}</div>`);
