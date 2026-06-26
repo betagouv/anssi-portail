@@ -16,6 +16,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         app: 'src/main-app.ts',
+        entreprises: 'src/protection/entreprises/PresentationEntreprises.svelte',
+        'centre-aide': 'src/centre-aide/CentreAide.svelte',
       },
       output: {
         entryFileNames: `assets/[name].js`,

@@ -5,9 +5,7 @@ import cors from 'cors';
 import express, { json, NextFunction, Request, Response } from 'express';
 import { IpFilter } from 'express-ipfilter';
 import rateLimit from 'express-rate-limit';
-import fs from 'node:fs';
-// @ts-ignore
-import * as toto from '../../../front/lib-svelte/dist/assets/app.js';
+
 import { ConfigurationServeur } from './configurationServeur';
 import { erreurPageInterdite, erreurPageNonTrouvée, ErreurTraverséeDeChemin } from './erreurs';
 import { ressourceFavori } from './favoris/ressourceFavori';
@@ -56,6 +54,7 @@ import { ressourceSanteGuides } from './ressourceSanteGuides';
 import { ressourceSitemapXml } from './ressourceSitemapXml';
 import { ressourceStatistiques } from './ressourceStatistiques';
 import { ressourceStatistiquesDiagnostic } from './ressourceStatistiquesDiagnostic';
+import { ressourceTestSsr } from './ressourceTestSsr';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs';
 import { ressourceVisa } from './ressourceVisa';
 import { ressourceDernierResultatDeTest } from './testMaturite/ressourceDernierResultatDeTest';
@@ -78,26 +77,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(compression());
 
   app.use(configurationServeur.middleware.ajouteMethodeEnrichissement);
-
-  app.get('/toto', (req, reponse) => {
-    const pageJekyll = fournisseurChemin.cheminPageJekyll('entreprises');
-
-    const result = toto.renderApp();
-    const html = result.html;
-    // console.log('result', result);
-    // console.log('html', result.html);
-    // console.log('body', result.body);
-    // console.log('head', result.head);
-    const fichier = fs.readFileSync(pageJekyll, 'utf-8');
-    const s = fichier
-      .replaceAll('<head>', `<head>${result.head}`)
-      .replaceAll(
-        '<div id="entreprises"></div>',
-        `<div id="entreprises"><div style="display:block">${html}</div></div>`
-      );
-    reponse.send(s);
-    // reponse.contentType('text/html').status(200).envoieFichierEnrichi(s);
-  });
 
   app.use(configurationServeur.middleware.positionneLesCsp());
 
@@ -150,6 +129,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(cookieParser());
   app.use(json());
+
+  app.use('/toto', ressourceTestSsr(configurationServeur));
 
   const brancheLesRessourcesStatiques = (avecCors: boolean) => (ressource: string) => {
     const sertLesFichiersStatiques = express.static(fournisseurChemin.ressourceDeBase(ressource), {
