@@ -1,19 +1,25 @@
 import { Router } from 'express';
+import { randomBytes } from 'node:crypto';
 import fs from 'node:fs';
 import { render } from 'svelte/server';
 import { ConfigurationServeur } from './configurationServeur';
 import { corpsVide, valideCorpsRequete } from './zod';
 
-export const ressourceTestSsr = ({ fournisseurChemin }: ConfigurationServeur) => {
+export const ressourceTestSsr = ({ fournisseurChemin, adaptateurEnvironnement }: ConfigurationServeur) => {
   const router = Router();
   router.get('/', valideCorpsRequete(corpsVide), async (_req, reponse) => {
-    const pageJekyll = fournisseurChemin.cheminPageJekyll('entreprises');
+    const pageJekyll = fournisseurChemin.cheminPageJekyll('catalogue');
     const fichier = fs.readFileSync(pageJekyll, 'utf-8');
 
     const composants = [...fichier.matchAll(/<div id="(.*)"><\/div>/g)].map((e) => e[1]);
 
     let résultat = fichier;
     let tousLesHead = '';
+
+    const nonceAleatoire = randomBytes(16).toString('base64');
+    reponse.locals.nonce = nonceAleatoire;
+    résultat = résultat.replaceAll('%%NONCE%%', nonceAleatoire);
+    résultat = résultat.replaceAll('%%VERSION%%', adaptateurEnvironnement.versionDeConstruction());
 
     for (const nomComposant of composants) {
       try {

@@ -15,9 +15,13 @@ export default defineConfig({
     cssCodeSplit: false,
     rollupOptions: {
       input: {
-        app: 'src/main-app.ts',
-        entreprises: 'src/protection/entreprises/PresentationEntreprises.svelte',
+        'barometre-simplifie': 'src/test-maturite/BarometreSimplifie.svelte',
+        'carrousel-des-interlocuteurs': 'src/interlocuteurs/CarrouselDesInterlocuteurs.svelte',
         'centre-aide': 'src/centre-aide/CentreAide.svelte',
+        'demande-diagnostic': 'src/demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte',
+        'equipe-biz-dev': 'src/interlocuteurs/EquipeBizDev.svelte',
+        catalogue: 'src/catalogue/Catalogue.svelte',
+        entreprises: 'src/protection/entreprises/PresentationEntreprises.svelte',
       },
       output: {
         entryFileNames: `assets/[name].js`,

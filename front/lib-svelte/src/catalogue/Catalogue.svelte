@@ -51,7 +51,7 @@
     idsCollection.map((i) => nomsCollectionsGuide[i]);
 
   // Gestion du fragment
-  let fragmentDeNavigation = $state(creeLeFragmentDeNavigation(window.location.hash));
+  let fragmentDeNavigation: FragmentDeNavigation | undefined = $state();
 
   // Gestion de la section
   type Section = 'guides' | 'ressourcesEtServices';
@@ -63,7 +63,10 @@
 
   // Gestion des filtres
   const reinitialiseFiltres = () => recherches.reinitialise();
-  const appliqueLesFiltres = (fragmentDeNavigation: FragmentDeNavigation) => {
+  const appliqueLesFiltres = (fragmentDeNavigation: FragmentDeNavigation | undefined) => {
+    if (!fragmentDeNavigation) {
+      return;
+    }
     $rechercheParBesoin = fragmentDeNavigation.extraisValeur<BesoinCyber>('besoin', null);
     $rechercheParLangue = fragmentDeNavigation.extraisTableau<Langue>('langues');
     $rechercheParCollection = depuisIdsCollection(fragmentDeNavigation.extraisTableau<CollectionGuide>('collections'));
@@ -72,8 +75,11 @@
     $rechercheParTypologie = fragmentDeNavigation.extraisTableau<Typologie>('types');
     $rechercheParSource = fragmentDeNavigation.extraisTableau<Source>('sources');
   };
-  appliqueLesFiltres(fragmentDeNavigation);
+
   $effect(() => {
+    if (!fragmentDeNavigation) {
+      return;
+    }
     fragmentDeNavigation.change('besoin', $rechercheParBesoin);
     fragmentDeNavigation.change('langues', $rechercheParLangue);
     fragmentDeNavigation.change('collections', versIdsCollection($rechercheParCollection));
@@ -87,6 +93,8 @@
   // Gestion du chargement
   let chargement = $state(false);
   onMount(async () => {
+    fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
+    appliqueLesFiltres(fragmentDeNavigation);
     try {
       chargement = true;
       await chargeGuidesDansLeStore();
