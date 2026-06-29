@@ -20,7 +20,7 @@
       {% assign urlSansSlashFinal = urlSansSlashFinal | slice: 0, new_length %}
     {% endif %}
   {% endif %}
-  <link rel="canonical" href="{{ urlSansSlashFinal }}" />
+  <link rel="canonical" href="{{ site.url }}{{ urlSansSlashFinal }}" />
   <meta name="description" content="{{ site.data.meta-description[page.url] | escape }}">
   {% if page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
 
