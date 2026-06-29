@@ -23,7 +23,7 @@ export default defineConfig({
         'centre-aide': 'src/centre-aide/CentreAide.svelte',
         'demande-diagnostic': 'src/demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte',
         'equipe-biz-dev': 'src/interlocuteurs/EquipeBizDev.svelte',
-        catalogue: 'src/catalogue/Catalogue.svelte',
+        catalogue: 'src/catalogue/CatalogueServeur.svelte',
         entreprises: 'src/protection/entreprises/PresentationEntreprises.svelte',
       },
       output: {
