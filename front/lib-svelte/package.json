@@ -5,7 +5,9 @@
   "description": "Partie svelte pour le catalogue du portail de l’ANSSI",
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "npm-run-all --parallel build:client build:serveur",
+    "build:client": "vite build",
+    "build:serveur": "vite build --ssr --config vite.config.ssr.ts",
     "dev": "vite build --watch --mode=development",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

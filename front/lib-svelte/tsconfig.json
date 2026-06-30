@@ -15,5 +15,6 @@
     }
   },
   "include": ["src/**/*.ts", "test/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
+  "exclude": ["src/plateforme/plateforme.plugin.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
