@@ -11,6 +11,7 @@ import { Utilisateur } from '../metier/utilisateur';
 import { AdaptateurJWT } from './adaptateurJWT';
 import { FournisseurChemin } from './fournisseurChemin';
 import { detruisSession } from './session';
+import { enrichisAvecComposantsSvelte } from './enrichisseurSvelte';
 
 type FonctionMiddleware = (requete: Request, reponse: Response, suite: NextFunction) => Promise<void>;
 
@@ -87,7 +88,9 @@ export const fabriqueMiddleware = ({
         const fichier = fs.readFileSync(chemin, 'utf-8');
         const avecNonce = fichier.replaceAll('%%NONCE%%', nonceAleatoire);
         const avecNonceEtVersion = avecNonce.replaceAll('%%VERSION%%', adaptateurEnvironnement.versionDeConstruction());
-        reponse.send(avecNonceEtVersion);
+        const contenuPage = enrichisAvecComposantsSvelte(chemin, avecNonceEtVersion);
+
+        reponse.send(contenuPage);
       } catch {
         reponse
           .status(404)
