@@ -1,3 +1,5 @@
+/// <reference types="vitest/config" />
+
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import * as Vite from 'vite';
