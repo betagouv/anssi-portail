@@ -36,7 +36,7 @@ describe('Le middleware', () => {
     adaptateurJWT = { ...fauxAdaptateurJWT };
     requete = createRequest();
     reponse = createResponse();
-    reponse.envoieFichierEnrichi = () => reponse;
+    reponse.envoieFichierEnrichi = async () => {};
     fournisseurChemin = { ...fauxFournisseurDeChemin };
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     adaptateurEnvironnement = { ...fauxAdaptateurEnvironnement };

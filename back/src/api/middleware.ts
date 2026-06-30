@@ -83,12 +83,12 @@ export const fabriqueMiddleware = ({
   const ajouteMethodeEnrichissement = async (_: Request, reponse: Response, suite: NextFunction) => {
     const nonceAleatoire = randomBytes(16).toString('base64');
     reponse.locals.nonce = nonceAleatoire;
-    reponse.envoieFichierEnrichi = (chemin: string) => {
+    reponse.envoieFichierEnrichi = async (chemin: string) => {
       try {
         const fichier = fs.readFileSync(chemin, 'utf-8');
         const avecNonce = fichier.replaceAll('%%NONCE%%', nonceAleatoire);
         const avecNonceEtVersion = avecNonce.replaceAll('%%VERSION%%', adaptateurEnvironnement.versionDeConstruction());
-        const contenuPage = enrichisAvecComposantsSvelte(chemin, avecNonceEtVersion);
+        const contenuPage = await enrichisAvecComposantsSvelte(chemin, avecNonceEtVersion);
 
         reponse.send(contenuPage);
       } catch {
