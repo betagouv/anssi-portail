@@ -3,7 +3,7 @@ import { render } from 'svelte/server';
 //@ts-expect-error fichier compilé
 import entreprises from '../../../front/lib-svelte/dist/serveur/assets/entreprises.js';
 
-export function enrichisAvecComposantsSvelte(chemin: string, avecNonceEtVersion: string) {
+export async function enrichisAvecComposantsSvelte(chemin: string, avecNonceEtVersion: string) {
   if (chemin.endsWith('entreprises/index.html')) {
     const { head, body } = render(entreprises);
     const dom = new JSDOM(avecNonceEtVersion);

@@ -10,6 +10,6 @@ declare namespace Express {
   }
 
   export interface Response {
-    envoieFichierEnrichi: (chemin: string) => void;
+    envoieFichierEnrichi: (chemin: string) => Promise<void>;
   }
 }
