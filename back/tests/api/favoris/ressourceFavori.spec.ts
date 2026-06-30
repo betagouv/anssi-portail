@@ -11,6 +11,7 @@ import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateu
 import { encodeSession } from '../cookie';
 import {
   configurationDeTestDuServeur,
+  fauxAdaptateurEnrichissement,
   fauxAdaptateurEnvironnement,
   fauxAdaptateurJWT,
   fauxFournisseurDeChemin,
@@ -41,6 +42,7 @@ describe('La ressource des services et ressources favoris', () => {
         adaptateurJWT: fauxAdaptateurJWT,
         fournisseurChemin: fauxFournisseurDeChemin,
         adaptateurEnvironnement: fauxAdaptateurEnvironnement,
+        adaptateurEnrichissement: { ...fauxAdaptateurEnrichissement },
       }),
       busEvenements,
       entrepotFavori,

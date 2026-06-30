@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 import { randomBytes } from 'node:crypto';
 import fs from 'node:fs';
+import { AdaptateurEnrichissement } from '../infra/adaptateurEnrichissement';
 import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
@@ -11,7 +12,6 @@ import { Utilisateur } from '../metier/utilisateur';
 import { AdaptateurJWT } from './adaptateurJWT';
 import { FournisseurChemin } from './fournisseurChemin';
 import { detruisSession } from './session';
-import { enrichisAvecComposantsSvelte } from './enrichisseurSvelte';
 
 type FonctionMiddleware = (requete: Request, reponse: Response, suite: NextFunction) => Promise<void>;
 
@@ -32,10 +32,12 @@ export const fabriqueMiddleware = ({
   adaptateurJWT,
   fournisseurChemin,
   adaptateurEnvironnement,
+  adaptateurEnrichissement,
 }: {
   adaptateurJWT: AdaptateurJWT;
   fournisseurChemin: FournisseurChemin;
   adaptateurEnvironnement: AdaptateurEnvironnement;
+  adaptateurEnrichissement: AdaptateurEnrichissement;
 }): Middleware => {
   const interdisLaMiseEnCache = async (_requete: Request, reponse: Response, suite: NextFunction) => {
     reponse.set({
@@ -88,10 +90,11 @@ export const fabriqueMiddleware = ({
         const fichier = fs.readFileSync(chemin, 'utf-8');
         const avecNonce = fichier.replaceAll('%%NONCE%%', nonceAleatoire);
         const avecNonceEtVersion = avecNonce.replaceAll('%%VERSION%%', adaptateurEnvironnement.versionDeConstruction());
-        const contenuPage = await enrichisAvecComposantsSvelte(chemin, avecNonceEtVersion);
+        const contenuPage = await adaptateurEnrichissement.enrichisAvecComposants(chemin, avecNonceEtVersion);
 
         reponse.send(contenuPage);
-      } catch {
+      } catch (e) {
+        console.log('erreur:', e);
         reponse
           .status(404)
           .set('Content-Type', 'text/html')

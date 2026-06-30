@@ -81,7 +81,7 @@ describe('La ressource page produit', () => {
     let nomFichierAppele = '';
     fournisseurChemin.ressourceDeBase = (nomFichier: string) => {
       nomFichierAppele = nomFichier;
-      return 'ok';
+      return join(process.cwd(), 'tests', 'ressources', 'factice.html');
     };
 
     const reponse = await request(serveur).get('/services/inconnu').accept('text/html');

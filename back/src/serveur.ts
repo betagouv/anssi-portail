@@ -39,6 +39,7 @@ import { EntrepotMesure } from './metier/entrepotMesure';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides';
+import { AdaptateurEnrichissementSvelte } from './infra/adaptateurEnrichissement';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
@@ -137,6 +138,7 @@ serviceCoherenceSecretsHachage
         adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
         fournisseurChemin,
         adaptateurEnvironnement,
+        adaptateurEnrichissement: new AdaptateurEnrichissementSvelte(),
       }),
       adaptateurOIDC,
       adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
