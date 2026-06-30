@@ -6,7 +6,7 @@
     type RegulationEntite,
     type ResultatEligibilite,
   } from '../../../../../back/src/metier/nis2-simulateur/Regulation.definitions';
-  import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
+  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { sousTitre, titres } from './TamponResultat.textes';
 
   interface Props {

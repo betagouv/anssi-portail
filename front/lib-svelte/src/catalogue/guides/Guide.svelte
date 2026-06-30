@@ -7,7 +7,7 @@
   import FilAriane from '../../ui/FilAriane.svelte';
   import Lien from '../../ui/Lien.svelte';
   import Separateur from '../../ui/Separateur.svelte';
-  import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
+  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { CollectionGuide, type Guide } from '../Guide.types';
   import { chargeGuidesDansLeStore, guidesStore } from '../stores/guides/guides.store';
   import BadgesDeCollections from './BadgesDeCollections.svelte';

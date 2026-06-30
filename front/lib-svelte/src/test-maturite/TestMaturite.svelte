@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { profilStore } from '../stores/profil.store';
@@ -6,7 +7,6 @@
   import Etapier from '../ui/Etapier.svelte';
   import Hero from '../ui/Hero.svelte';
   import Lien from '../ui/Lien.svelte';
-  import { aseptiseHtml } from '../utils/aseptisationDuHtml';
   import IntroductionTestMaturite from './IntroductionTestMaturite.svelte';
   import PartageTest from './PartageTest.svelte';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';

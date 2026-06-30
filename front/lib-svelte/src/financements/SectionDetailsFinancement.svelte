@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { aseptiseHtml } from '../utils/aseptisationDuHtml';
+  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
 
   export let ancre: string;
   export let titre: string;

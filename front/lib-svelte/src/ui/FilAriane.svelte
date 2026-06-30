@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { decodeEntiteHtml } from '$plateforme/aseptisationDuHtml';
   import { profilStore } from '../stores/profil.store.js';
-  import { decodeEntiteHtml } from '../utils/aseptisationDuHtml.js';
   import type { Branche } from './filAriane';
 
   type Props = {
