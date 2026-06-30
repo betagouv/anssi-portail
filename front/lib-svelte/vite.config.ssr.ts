@@ -18,6 +18,7 @@ export default defineConfig({
   build: {
     ssr: true,
     cssCodeSplit: false,
+    outDir: 'dist/serveur',
     rollupOptions: {
       input: {
         entreprises: 'src/protection/entreprises/PresentationEntreprises.svelte',
