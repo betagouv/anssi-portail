@@ -4,7 +4,7 @@
     ResumesPointsAttention,
   } from '../../../../../back/src/metier/nis2-simulateur/Regulation.definitions';
   import Accordeon from '../../ui/Accordeon.svelte';
-  import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
+  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { Precisions, TextesDesResumes } from './PointsAttention.contenus';
 
   interface Props {

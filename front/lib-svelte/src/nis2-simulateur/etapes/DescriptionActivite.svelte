@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Activite } from '../../../../../back/src/metier/nis2-simulateur/Activite.definitions';
   import { listeDescriptionsActivites } from '../../../../../back/src/metier/nis2-simulateur/ListeDescriptionsActivites';
-  import { aseptiseHtml } from '../../utils/aseptisationDuHtml';
+  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
 
   interface Props {
     activite: Activite;

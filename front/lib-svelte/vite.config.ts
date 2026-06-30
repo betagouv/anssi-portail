@@ -2,6 +2,7 @@ import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import * as Vite from 'vite';
 import { createLogger, defineConfig } from 'vite';
+import { plateformePlugin } from './src/plateforme/plateforme.plugin';
 
 const loggerPersonnalise = createLogger();
 const loggerWarnOnce = loggerPersonnalise.warnOnce;
@@ -26,6 +27,7 @@ export default defineConfig({
       applicationKey: 'mes-services-cyber',
     }),
     injecteNonce(),
+    plateformePlugin(),
   ],
   build: {
     cssCodeSplit: false,

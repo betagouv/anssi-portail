@@ -6,7 +6,7 @@
   import Bouton from '../ui/Bouton.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
-  import { aseptiseHtml } from '../utils/aseptisationDuHtml';
+  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { storeAvisUtilisateur, type AvisUtilisateur } from './avisUtilisateur.store';
   import type { Mesure } from './mesure';
   import PriseEnCompteMesure from './PriseEnCompteMesure.svelte';
