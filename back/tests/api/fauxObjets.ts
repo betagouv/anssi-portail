@@ -26,6 +26,7 @@ import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTest
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire';
+import { AdaptateurEnrichissement } from '../../src/infra/adaptateurEnrichissement';
 
 export const fauxFournisseurDeChemin: FournisseurChemin = {
   cheminPageJekyll: (_: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
@@ -59,6 +60,10 @@ export const fauxAdaptateurOIDC: AdaptateurOIDC = {
 export const fauxAdaptateurJWT: AdaptateurJWT = {
   genereToken: (_: Record<string, unknown>) => '',
   decode: (_: string) => ({}),
+};
+
+export const fauxAdaptateurEnrichissement: AdaptateurEnrichissement = {
+  enrichisAvecComposants: async (_chemin, avecNonceEtVersion) => avecNonceEtVersion,
 };
 
 export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
@@ -193,6 +198,7 @@ const vraiMiddleware = fabriqueMiddleware({
   adaptateurJWT: fauxAdaptateurJWT,
   fournisseurChemin: fauxFournisseurDeChemin,
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
+  adaptateurEnrichissement: fauxAdaptateurEnrichissement,
 });
 
 export const fauxMiddleware: Middleware = {

@@ -8,11 +8,13 @@ import { join } from 'path';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin';
 import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
+import { AdaptateurEnrichissement } from '../../src/infra/adaptateurEnrichissement';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
 import { Utilisateur } from '../../src/metier/utilisateur';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
 import {
+  fauxAdaptateurEnrichissement,
   fauxAdaptateurEnvironnement,
   fauxAdaptateurHachage,
   fauxAdaptateurJWT,
@@ -31,6 +33,7 @@ describe('Le middleware', () => {
   let fournisseurChemin: FournisseurChemin;
   let entrepotUtilisateur: EntrepotUtilisateurMemoire;
   let adaptateurEnvironnement: AdaptateurEnvironnement;
+  let adaptateurEnrichissement: AdaptateurEnrichissement;
 
   beforeEach(() => {
     adaptateurJWT = { ...fauxAdaptateurJWT };
@@ -40,10 +43,12 @@ describe('Le middleware', () => {
     fournisseurChemin = { ...fauxFournisseurDeChemin };
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     adaptateurEnvironnement = { ...fauxAdaptateurEnvironnement };
+    adaptateurEnrichissement = { ...fauxAdaptateurEnrichissement };
     middleware = fabriqueMiddleware({
       adaptateurJWT,
       fournisseurChemin,
       adaptateurEnvironnement,
+      adaptateurEnrichissement,
     });
   });
 
