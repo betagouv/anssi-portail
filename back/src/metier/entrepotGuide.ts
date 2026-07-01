@@ -1,4 +1,4 @@
-import { Guide } from './guide';
+import { Guide } from './guide.js';
 
 export interface EntrepotGuide {
   parCollections(collections: string[]): Promise<Guide[]>;

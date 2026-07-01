@@ -1,10 +1,10 @@
-import { Financement } from '../../src/metier/financement';
-import { Guide } from '../../src/metier/guide';
-import { Module } from '../../src/metier/module';
-import { ExigenceNIS2 } from '../../src/metier/nis2/exigence';
-import { Utilisateur } from '../../src/metier/utilisateur';
-import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from './fauxObjets';
-import { mesureDeTest } from './mesures/constructeurDeMesure';
+import { Financement } from '../../src/metier/financement.js';
+import { Guide } from '../../src/metier/guide.js';
+import { Module } from '../../src/metier/module.js';
+import { ExigenceNIS2 } from '../../src/metier/nis2/exigence.js';
+import { Utilisateur } from '../../src/metier/utilisateur.js';
+import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from './fauxObjets.js';
+import { mesureDeTest } from './mesures/constructeurDeMesure.js';
 
 export const jeanneDupont: Utilisateur = new Utilisateur(
   {

@@ -1,10 +1,10 @@
 import { Request, Response, Router } from 'express';
 import z from 'zod';
-import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { corpsVide, valideCorpsRequete } from '../zod';
-import { schemaRessourceFavoris } from './ressourceFavoris.schema';
+import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur.js';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { corpsVide, valideCorpsRequete } from '../zod.js';
+import { schemaRessourceFavoris } from './ressourceFavoris.schema.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 const ressourceFavoris = ({

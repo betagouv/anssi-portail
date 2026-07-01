@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
-import { RechercheEntrepriseAvecCache } from '../../src/infra/RechercheEntrepriseAvecCache';
+import { RechercheEntrepriseAvecCache } from '../../src/infra/RechercheEntrepriseAvecCache.js';
 
 describe('La recherche entreprise avec cache', () => {
   const resultatRecherchePour = (terme: string, departement: string | null) => [

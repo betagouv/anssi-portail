@@ -1,5 +1,5 @@
-import { Mesure } from './mesure';
-import { Module } from './module';
+import { Mesure } from './mesure.js';
+import { Module } from './module.js';
 
 export interface EntrepôtModule {
   pourLaMesure(mesure: Mesure): Promise<Module>;

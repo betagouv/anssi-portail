@@ -1,8 +1,8 @@
 import Knex from 'knex';
-import config from '../../knexfile';
-import { EntrepotMesure } from '../metier/entrepotMesure';
-import { LienPourAllerPlusLoin, Mesure, type Risque } from '../metier/mesure';
-import { EntrepotExigence } from '../metier/nis2/entrepotExigence';
+import config from '../../knexfile.js';
+import { EntrepotMesure } from '../metier/entrepotMesure.js';
+import { LienPourAllerPlusLoin, Mesure, type Risque } from '../metier/mesure.js';
+import { EntrepotExigence } from '../metier/nis2/entrepotExigence.js';
 
 export type MesurePersistee = {
   id: string;

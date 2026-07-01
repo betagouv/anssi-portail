@@ -1,5 +1,5 @@
 import Knex from 'knex';
-import config from '../../knexfile';
+import config from '../../knexfile.js';
 
 export interface EntrepotSecretHachage {
   tous: () => Promise<{ version: number; empreinte: string }[]>;

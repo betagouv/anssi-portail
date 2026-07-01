@@ -1,8 +1,8 @@
-import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
-import { AdaptateurJournal } from '../infra/adaptateurJournal';
-import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
-import { EntrepotFavori } from '../metier/entrepotFavori';
-import { AdaptateurHachage } from '../infra/adaptateurHachage';
+import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
+import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur.js';
+import { EntrepotFavori } from '../metier/entrepotFavori.js';
+import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 
 export const consigneEvenementMAJFavorisUtilisateurDansJournal = ({
   adaptateurJournal,

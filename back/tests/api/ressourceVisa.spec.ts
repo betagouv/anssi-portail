@@ -3,11 +3,11 @@ import assert from 'node:assert';
 import { Readable } from 'node:stream';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { ConfigurationServeur } from '../../src/api/configurationServeur';
-import { creeServeur } from '../../src/api/msc';
-import { AdaptateurCellar, CleDuBucket } from '../../src/infra/adaptateurCellar';
-import { MockBusEvenement } from '../bus/busPourLesTests';
-import { configurationDeTestDuServeur, fauxAdaptateurCellar } from './fauxObjets';
+import { ConfigurationServeur } from '../../src/api/configurationServeur.js';
+import { creeServeur } from '../../src/api/msc.js';
+import { AdaptateurCellar, CleDuBucket } from '../../src/infra/adaptateurCellar.js';
+import { MockBusEvenement } from '../bus/busPourLesTests.js';
+import { configurationDeTestDuServeur, fauxAdaptateurCellar } from './fauxObjets.js';
 
 describe('La ressource de visa', () => {
   let serveur: Express;

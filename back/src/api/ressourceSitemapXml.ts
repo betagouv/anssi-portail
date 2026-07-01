@@ -2,9 +2,9 @@ import { Request, Response, Router } from 'express';
 import fs, { writeFileSync } from 'fs';
 import * as path from 'path';
 import { SitemapStream, streamToPromise } from 'sitemap';
-import { ConfigurationServeur } from './configurationServeur';
-import { siteFront } from './fournisseurChemin';
-import { corpsVide, valideCorpsRequete } from './zod';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { siteFront } from './fournisseurChemin.js';
+import { corpsVide, valideCorpsRequete } from './zod.js';
 
 interface LienSitemap {
   url: string;

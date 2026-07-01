@@ -2,11 +2,11 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/msc';
-import { RetourExperienceDonne } from '../../src/bus/evenements/retourExperienceDonne';
-import { MessagerieInstantanee, RetourExperience } from '../../src/metier/messagerieInstantanee';
-import { MockBusEvenement } from '../bus/busPourLesTests';
-import { configurationDeTestDuServeur, fausseMessagerieInstantanee } from './fauxObjets';
+import { creeServeur } from '../../src/api/msc.js';
+import { RetourExperienceDonne } from '../../src/bus/evenements/retourExperienceDonne.js';
+import { MessagerieInstantanee, RetourExperience } from '../../src/metier/messagerieInstantanee.js';
+import { MockBusEvenement } from '../bus/busPourLesTests.js';
+import { configurationDeTestDuServeur, fausseMessagerieInstantanee } from './fauxObjets.js';
 
 describe("La ressource des retours d'expérience", () => {
   let serveur: Express;

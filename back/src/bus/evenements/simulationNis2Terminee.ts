@@ -1,4 +1,4 @@
-import { ReponsesEtResultatAvecAnalyse } from '../../metier/nis2-simulateur/questionnaire/calculEligibilite';
+import { ReponsesEtResultatAvecAnalyse } from '../../metier/nis2-simulateur/questionnaire/calculEligibilite.js';
 
 export class SimulationNis2Terminee {
   readonly reponses: ReponsesEtResultatAvecAnalyse;

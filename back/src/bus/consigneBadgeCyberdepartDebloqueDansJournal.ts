@@ -1,6 +1,6 @@
-import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
-import { AdaptateurJournal } from '../infra/adaptateurJournal';
-import { BadgeCyberdépartDébloqué } from './evenements/badgeCyberdepartDebloque';
+import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
+import { BadgeCyberdépartDébloqué } from './evenements/badgeCyberdepartDebloque.js';
 
 export const consigneBadgeCyberdépartDébloquéDansJournal = ({
   adaptateurJournal,

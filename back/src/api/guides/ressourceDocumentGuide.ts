@@ -1,7 +1,7 @@
 import { Response, Router } from 'express';
-import { ConfigurationServeur } from '../configurationServeur';
-import { fabriqueGestionnaireRessourceCellar, gereDocumentManquantSimplement } from '../gestionnaireRessourceCellar';
-import { corpsVide, valideCorpsRequete } from '../zod';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { fabriqueGestionnaireRessourceCellar, gereDocumentManquantSimplement } from '../gestionnaireRessourceCellar.js';
+import { corpsVide, valideCorpsRequete } from '../zod.js';
 
 export const ressourceDocumentGuide = ({ cellar, entrepotGuide }: ConfigurationServeur) => {
   const routeur = Router();

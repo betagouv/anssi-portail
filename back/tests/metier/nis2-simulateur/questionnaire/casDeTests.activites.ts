@@ -1,6 +1,6 @@
-import { Activite } from '../../../../src/metier/nis2-simulateur/Activite.definitions';
-import { SecteurActivite } from '../../../../src/metier/nis2-simulateur/SecteurActivite.definitions';
-import { SousSecteurActivite } from '../../../../src/metier/nis2-simulateur/SousSecteurActivite.definitions';
+import { Activite } from '../../../../src/metier/nis2-simulateur/Activite.definitions.js';
+import { SecteurActivite } from '../../../../src/metier/nis2-simulateur/SecteurActivite.definitions.js';
+import { SousSecteurActivite } from '../../../../src/metier/nis2-simulateur/SousSecteurActivite.definitions.js';
 
 export type CasDeTest = {
   libelleActivite: string;

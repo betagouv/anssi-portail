@@ -1,36 +1,36 @@
 import { AxiosError } from 'axios';
 import Knex from 'knex';
 import pThrottle from 'p-throttle';
-import config from '../../knexfile';
-import { CompteCree } from '../bus/evenements/compteCree';
-import { MiseAJourFavorisUtilisateur } from '../bus/miseAJourFavorisUtilisateur';
-import { AdaptateurChiffrement, fabriqueAdaptateurChiffrement } from '../infra/adaptateurChiffrement';
-import { fabriqueAdaptateurEmail } from '../infra/adaptateurEmailBrevo';
-import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
-import { AdaptateurHachage, fabriqueAdaptateurHachage } from '../infra/adaptateurHachage';
-import { adaptateurJournalMemoire } from '../infra/adaptateurJournal';
-import { adaptateurJournalPostgres } from '../infra/adaptateurJournalPostgres';
-import { AdaptateurProfilAnssi, fabriqueAdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi';
+import config from '../../knexfile.js';
+import { CompteCree } from '../bus/evenements/compteCree.js';
+import { MiseAJourFavorisUtilisateur } from '../bus/miseAJourFavorisUtilisateur.js';
+import { AdaptateurChiffrement, fabriqueAdaptateurChiffrement } from '../infra/adaptateurChiffrement.js';
+import { fabriqueAdaptateurEmail } from '../infra/adaptateurEmailBrevo.js';
+import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
+import { AdaptateurHachage, fabriqueAdaptateurHachage } from '../infra/adaptateurHachage.js';
+import { adaptateurJournalMemoire } from '../infra/adaptateurJournal.js';
+import { adaptateurJournalPostgres } from '../infra/adaptateurJournalPostgres.js';
+import { AdaptateurProfilAnssi, fabriqueAdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi.js';
 import {
   AdaptateurRechercheEntreprise,
   fabriqueAdaptateurRechercheEntreprise,
-} from '../infra/adaptateurRechercheEntreprise';
-import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres';
-import { EntrepotMesurePostgres } from '../infra/entrepotMesurePostgres';
-import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres';
-import { EntrepotExigenceGrist } from '../infra/nis2/entrepotExigenceGrist';
-import { UtilisateurBDD } from '../infra/utilisateurBDD';
-import { AdaptateurEmail } from '../metier/adaptateurEmail';
-import { EntrepotFavori } from '../metier/entrepotFavori';
-import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { EntrepotExigence } from '../metier/nis2/entrepotExigence';
-import { CodeRegion } from '../metier/referentielRegions';
-import { CodeSecteur } from '../metier/referentielSecteurs';
-import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
-import { ReponsesTestMaturite } from '../metier/resultatTestMaturite';
-import { Utilisateur } from '../metier/utilisateur';
-import { MigrationChiffrement } from './migrationChiffrement';
-import { MigrationHash } from './migrationHash';
+} from '../infra/adaptateurRechercheEntreprise.js';
+import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres.js';
+import { EntrepotMesurePostgres } from '../infra/entrepotMesurePostgres.js';
+import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres.js';
+import { EntrepotExigenceGrist } from '../infra/nis2/entrepotExigenceGrist.js';
+import { UtilisateurBDD } from '../infra/utilisateurBDD.js';
+import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
+import { EntrepotFavori } from '../metier/entrepotFavori.js';
+import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur.js';
+import { EntrepotExigence } from '../metier/nis2/entrepotExigence.js';
+import { CodeRegion } from '../metier/referentielRegions.js';
+import { CodeSecteur } from '../metier/referentielSecteurs.js';
+import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement.js';
+import { ReponsesTestMaturite } from '../metier/resultatTestMaturite.js';
+import { Utilisateur } from '../metier/utilisateur.js';
+import { MigrationChiffrement } from './migrationChiffrement.js';
+import { MigrationHash } from './migrationHash.js';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;

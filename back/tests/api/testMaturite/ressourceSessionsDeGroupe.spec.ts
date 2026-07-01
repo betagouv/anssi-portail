@@ -1,13 +1,13 @@
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import assert from 'node:assert';
-import { creeServeur } from '../../../src/api/msc';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
+import { creeServeur } from '../../../src/api/msc.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
 import { Express } from 'express';
-import { EntrepotSessionDeGroupe } from '../../../src/metier/entrepotSessionDeGroupe';
-import { EntrepotSessionDeGroupeMemoire } from '../../persistance/EntrepotSessionDeGroupeMemoire';
-import { GenerateurCodeSessionDeGroupe } from '../../../src/metier/generateurCodeSessionDeGroupe';
-import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
+import { EntrepotSessionDeGroupe } from '../../../src/metier/entrepotSessionDeGroupe.js';
+import { EntrepotSessionDeGroupeMemoire } from '../../persistance/EntrepotSessionDeGroupeMemoire.js';
+import { GenerateurCodeSessionDeGroupe } from '../../../src/metier/generateurCodeSessionDeGroupe.js';
+import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 
 describe('La ressource qui gère les sessions de groupe', () => {
   let serveur: Express;

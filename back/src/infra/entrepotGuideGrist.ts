@@ -1,11 +1,11 @@
-import axiosInstance from './axiosInstance';
-import { BesoinCyber } from '../metier/besoinCyber';
-import { EntrepotGuide } from '../metier/entrepotGuide';
-import { Guide } from '../metier/guide';
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
-import { ClientHttp } from './clientHttp';
-import { EntrepotGrist } from './entrepotGrist';
-import { aseptiseListeGrist } from './grist';
+import axiosInstance from './axiosInstance.js';
+import { BesoinCyber } from '../metier/besoinCyber.js';
+import { EntrepotGuide } from '../metier/entrepotGuide.js';
+import { Guide } from '../metier/guide.js';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
+import { ClientHttp } from './clientHttp.js';
+import { EntrepotGrist } from './entrepotGrist.js';
+import { aseptiseListeGrist } from './grist.js';
 
 export type GuideGrist = {
   id: number;

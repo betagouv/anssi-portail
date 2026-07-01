@@ -2,12 +2,12 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/msc';
+import { creeServeur } from '../../src/api/msc.js';
 import {
   AdaptateurRechercheEntreprise,
   ResultatRechercheEntreprise,
-} from '../../src/infra/adaptateurRechercheEntreprise';
-import { configurationDeTestDuServeur } from './fauxObjets';
+} from '../../src/infra/adaptateurRechercheEntreprise.js';
+import { configurationDeTestDuServeur } from './fauxObjets.js';
 
 describe('quand requête GET sur `/api/annuaire/organisations`', () => {
   let serveur: Express;

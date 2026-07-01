@@ -1,5 +1,5 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
+import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
 
 export interface AdaptateurJWT {
   genereToken(donnees: Record<string, unknown>): string;

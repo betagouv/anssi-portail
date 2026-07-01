@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { pipeline } from 'node:stream/promises';
-import { AdaptateurCellar, CleDuBucket } from '../infra/adaptateurCellar';
-import { filetRouteAsynchrone } from './middleware';
+import { AdaptateurCellar, CleDuBucket } from '../infra/adaptateurCellar.js';
+import { filetRouteAsynchrone } from './middleware.js';
 
 export type FonctionDocumentManquant = (reponse: Response, nomDuDocument: string) => Promise<void>;
 export const gereDocumentManquantSimplement = async (reponse: Response) => {

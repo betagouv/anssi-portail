@@ -1,5 +1,5 @@
-import { AdaptateurRechercheEntreprise, ResultatRechercheEntreprise } from './adaptateurRechercheEntreprise';
-import { Cache } from './cache';
+import { AdaptateurRechercheEntreprise, ResultatRechercheEntreprise } from './adaptateurRechercheEntreprise.js';
+import { Cache } from './cache.js';
 
 const TRENTE_MINUTES = 60 * 30;
 

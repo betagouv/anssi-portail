@@ -1,16 +1,18 @@
 import { Express } from 'express';
-import { JsonWebTokenError } from 'jsonwebtoken';
+import jsonwebtoken from 'jsonwebtoken';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/msc';
-import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
-import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { Utilisateur } from '../../src/metier/utilisateur';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
-import { encodeSession, enObjet } from './cookie';
-import { configurationDeTestDuServeur, fauxAdaptateurHachage, fauxAdaptateurJWT } from './fauxObjets';
-import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi';
+import { creeServeur } from '../../src/api/msc.js';
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
+import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur.js';
+import { Utilisateur } from '../../src/metier/utilisateur.js';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
+import { encodeSession, enObjet } from './cookie.js';
+import { configurationDeTestDuServeur, fauxAdaptateurHachage, fauxAdaptateurJWT } from './fauxObjets.js';
+import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi.js';
+
+const { JsonWebTokenError } = jsonwebtoken;
 
 describe('La ressource Profil', () => {
   let serveur: Express;

@@ -1,8 +1,8 @@
 import { Request, Response, Router } from 'express';
-import { calculeStatistiques } from '../metier/statistiques';
-import { ConfigurationServeur } from './configurationServeur';
-import { filetRouteAsynchrone } from './middleware';
-import { corpsVide, valideCorpsRequete } from './zod';
+import { calculeStatistiques } from '../metier/statistiques.js';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { filetRouteAsynchrone } from './middleware.js';
+import { corpsVide, valideCorpsRequete } from './zod.js';
 
 export const ressourceStatistiques = ({
   entrepotUtilisateur,

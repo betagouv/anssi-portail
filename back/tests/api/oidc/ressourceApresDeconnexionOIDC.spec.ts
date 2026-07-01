@@ -2,9 +2,9 @@ import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import request from 'supertest';
 import assert from 'node:assert';
-import { creeServeur } from '../../../src/api/msc';
-import { configurationDeTestDuServeur } from '../fauxObjets';
-import { encodeSession, enObjet } from '../cookie';
+import { creeServeur } from '../../../src/api/msc.js';
+import { configurationDeTestDuServeur } from '../fauxObjets.js';
+import { encodeSession, enObjet } from '../cookie.js';
 
 describe('La ressource apres deconnexion OIDC', () => {
   describe('quand on requete GET sur /oidc/apres-deconnexion', () => {

@@ -1,4 +1,4 @@
-import { NiveauDeSatisfaction } from './niveauDeSatisfaction';
+import { NiveauDeSatisfaction } from './niveauDeSatisfaction.js';
 
 export type RetourExperience = {
   raison: string;

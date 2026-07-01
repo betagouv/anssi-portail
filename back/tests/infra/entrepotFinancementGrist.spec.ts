@@ -1,10 +1,10 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
-import { ClientHttp } from '../../src/infra/clientHttp';
-import { EntrepotFinancementGrist, FinancementGrist } from '../../src/infra/entrepotFinancementGrist';
-import { Financement } from '../../src/metier/financement';
-import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
-import { fabriqueClientGet, fabriqueFauxClientHttp } from './fournisseurClientHttp';
+import { ClientHttp } from '../../src/infra/clientHttp.js';
+import { EntrepotFinancementGrist, FinancementGrist } from '../../src/infra/entrepotFinancementGrist.js';
+import { Financement } from '../../src/metier/financement.js';
+import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
+import { fabriqueClientGet, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
 
 describe("L'entrepot de financement Grist", () => {
   let clientHttp: ClientHttp;

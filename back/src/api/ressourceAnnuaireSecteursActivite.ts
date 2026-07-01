@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
-import { secteurs } from '../metier/referentielSecteurs';
-import { ConfigurationServeur } from './configurationServeur';
-import { corpsVide, valideCorpsRequete } from './zod';
+import { secteurs } from '../metier/referentielSecteurs.js';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { corpsVide, valideCorpsRequete } from './zod.js';
 
 const ressourceAnnuaireSecteursActivite = (_: ConfigurationServeur) => {
   const routeur = Router();

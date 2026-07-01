@@ -1,6 +1,6 @@
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
-import { AdaptateurHachage } from './adaptateurHachage';
-import { EntrepotSecretHachage } from './entrepotSecretHachagePostgres';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
+import { AdaptateurHachage } from './adaptateurHachage.js';
+import { EntrepotSecretHachage } from './entrepotSecretHachagePostgres.js';
 
 export type ServiceCoherenceSecretsDeHachage = {
   verifieCoherenceSecrets: () => Promise<void>;

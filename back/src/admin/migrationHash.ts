@@ -1,12 +1,12 @@
 import knex from 'knex';
-import config from '../../knexfile';
-import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
-import { AdaptateurHachage, fabriqueAdaptateurHachage } from '../infra/adaptateurHachage';
+import config from '../../knexfile.js';
+import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
+import { AdaptateurHachage, fabriqueAdaptateurHachage } from '../infra/adaptateurHachage.js';
 import {
   fabriqueServiceVerificationCoherenceSecretsHachage,
   ServiceCoherenceSecretsDeHachage,
-} from '../infra/serviceVerificationCoherenceSecretsHachage';
-import { EntrepotSecretHachagePostgres } from '../infra/entrepotSecretHachagePostgres';
+} from '../infra/serviceVerificationCoherenceSecretsHachage.js';
+import { EntrepotSecretHachagePostgres } from '../infra/entrepotSecretHachagePostgres.js';
 
 type FonctionDeMigration = (chaine: string) => string | undefined;
 

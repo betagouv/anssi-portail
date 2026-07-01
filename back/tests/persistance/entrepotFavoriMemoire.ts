@@ -1,7 +1,7 @@
-import { EntrepotFavori } from '../../src/metier/entrepotFavori';
-import { Favori } from '../../src/metier/favori';
-import { EntrepotMemoire } from './entrepotMemoire';
-import { Utilisateur } from '../../src/metier/utilisateur';
+import { EntrepotFavori } from '../../src/metier/entrepotFavori.js';
+import { Favori } from '../../src/metier/favori.js';
+import { EntrepotMemoire } from './entrepotMemoire.js';
+import { Utilisateur } from '../../src/metier/utilisateur.js';
 
 export class EntrepotFavoriMemoire extends EntrepotMemoire<Favori> implements EntrepotFavori {
   async retire(favori: Favori): Promise<void> {

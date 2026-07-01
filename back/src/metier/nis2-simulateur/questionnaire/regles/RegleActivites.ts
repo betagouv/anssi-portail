@@ -1,10 +1,10 @@
-import { estValeurVide, type Regle } from '../Specifications';
-import { ErreurLectureDeRegle } from './ErreurLectureDeRegle';
-import type { SpecificationTexte } from '../FormatDesSpecificationsCSV';
-import type { Activite } from '../../Activite.definitions';
-import { contientUnParmi } from '../../commun.predicats';
-import { libellesActivites } from '../../LibellesActivites';
-import type { EtatQuestionnaire } from '../../EtatQuestionnaire';
+import { estValeurVide, type Regle } from '../Specifications.js';
+import { ErreurLectureDeRegle } from './ErreurLectureDeRegle.js';
+import type { SpecificationTexte } from '../FormatDesSpecificationsCSV.js';
+import type { Activite } from '../../Activite.definitions.js';
+import { contientUnParmi } from '../../commun.predicats.js';
+import { libellesActivites } from '../../LibellesActivites.js';
+import type { EtatQuestionnaire } from '../../EtatQuestionnaire.js';
 
 export class RegleActivites implements Regle {
   constructor(private readonly activite: Activite) {}

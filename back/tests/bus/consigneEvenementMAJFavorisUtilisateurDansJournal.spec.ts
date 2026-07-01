@@ -1,13 +1,13 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
-import { consigneEvenementMAJFavorisUtilisateurDansJournal } from '../../src/bus/consigneEvenementMAJFavorisUtilisateurDansJournal';
-import { MiseAJourFavorisUtilisateur } from '../../src/bus/miseAJourFavorisUtilisateur';
-import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
-import { fauxAdaptateurHachage } from '../api/fauxObjets';
-import { jeanneDupont } from '../api/objetsPretsALEmploi';
+import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { consigneEvenementMAJFavorisUtilisateurDansJournal } from '../../src/bus/consigneEvenementMAJFavorisUtilisateurDansJournal.js';
+import { MiseAJourFavorisUtilisateur } from '../../src/bus/miseAJourFavorisUtilisateur.js';
+import { EntrepotFavoriMemoire } from '../persistance/entrepotFavoriMemoire.js';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
+import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
+import { jeanneDupont } from '../api/objetsPretsALEmploi.js';
 
 describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur dans le journal", () => {
   it('consigne un évènement de MAJFavorisUtilisateur', async () => {

@@ -1,9 +1,9 @@
 import { randomUUID } from 'node:crypto';
-import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
-import { CodeRegion, estCodeRegion } from './referentielRegions';
-import { CodeSecteur, estCodeSecteur } from './referentielSecteurs';
-import { CodeTrancheEffectif, trancheEffectifParCode } from './referentielTranchesEffectifEtablissement';
-import { Utilisateur } from './utilisateur';
+import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
+import { CodeRegion, estCodeRegion } from './referentielRegions.js';
+import { CodeSecteur, estCodeSecteur } from './referentielSecteurs.js';
+import { CodeTrancheEffectif, trancheEffectifParCode } from './referentielTranchesEffectifEtablissement.js';
+import { Utilisateur } from './utilisateur.js';
 
 export type ReponsesTestMaturite = Record<string, number>;
 

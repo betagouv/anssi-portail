@@ -3,9 +3,9 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import { join } from 'path';
 import request from 'supertest';
-import { FournisseurChemin } from '../../src/api/fournisseurChemin';
-import { creeServeur } from '../../src/api/msc';
-import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets';
+import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
+import { creeServeur } from '../../src/api/msc.js';
+import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets.js';
 
 describe('La ressource pages jekyll', () => {
   let serveur: Express;

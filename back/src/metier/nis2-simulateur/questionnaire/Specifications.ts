@@ -1,5 +1,5 @@
-import type { EtatQuestionnaire } from '../EtatQuestionnaire';
-import type { ResultatEligibilite } from '../Regulation.definitions';
+import type { EtatQuestionnaire } from '../EtatQuestionnaire.js';
+import type { ResultatEligibilite } from '../Regulation.definitions.js';
 
 export interface Regle {
   evalue(reponses: EtatQuestionnaire): boolean;

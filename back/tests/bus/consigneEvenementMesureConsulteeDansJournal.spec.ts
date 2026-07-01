@@ -1,9 +1,9 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { consigneEvenementMesureConsulteeDansJournal } from '../../src/bus/consigneEvenementMesureConsulteeDansJournal';
-import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
+import { consigneEvenementMesureConsulteeDansJournal } from '../../src/bus/consigneEvenementMesureConsulteeDansJournal.js';
+import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
+import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 
 describe("L'abonnement qui consigne la consultation d'une mesure par un utilisateur dans le journal", () => {
   it('consigne un évènement MesureConsultee', async () => {

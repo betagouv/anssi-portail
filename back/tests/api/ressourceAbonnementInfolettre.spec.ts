@@ -2,10 +2,10 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/msc';
-import { AdaptateurEmail } from '../../src/metier/adaptateurEmail';
-import { MockBusEvenement } from '../bus/busPourLesTests';
-import { configurationDeTestDuServeur, fauxAdaptateurEmail } from './fauxObjets';
+import { creeServeur } from '../../src/api/msc.js';
+import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
+import { MockBusEvenement } from '../bus/busPourLesTests.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEmail } from './fauxObjets.js';
 
 describe('La ressource d’abonnement à l’infolettre', () => {
   let serveur: Express;

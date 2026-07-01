@@ -1,14 +1,14 @@
 import Knex from 'knex';
 import pThrottle from 'p-throttle';
-import config from '../../knexfile';
-import { EntrepotMesure } from '../metier/entrepotMesure';
-import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { Organisation, Role, Utilisateur } from '../metier/utilisateur';
-import { AdaptateurChiffrement } from './adaptateurChiffrement';
-import { AdaptateurHachage } from './adaptateurHachage';
-import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi';
-import { AdaptateurRechercheEntreprise } from './adaptateurRechercheEntreprise';
-import { UtilisateurBDD } from './utilisateurBDD';
+import config from '../../knexfile.js';
+import { EntrepotMesure } from '../metier/entrepotMesure.js';
+import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur.js';
+import { Organisation, Role, Utilisateur } from '../metier/utilisateur.js';
+import { AdaptateurChiffrement } from './adaptateurChiffrement.js';
+import { AdaptateurHachage } from './adaptateurHachage.js';
+import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi.js';
+import { AdaptateurRechercheEntreprise } from './adaptateurRechercheEntreprise.js';
+import { UtilisateurBDD } from './utilisateurBDD.js';
 
 type DonneesUtilisateurEnClair = {
   email: string;

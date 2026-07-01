@@ -1,8 +1,8 @@
 import { Request, Response, Router } from 'express';
-import { ResultatRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
-import { ConfigurationServeur } from './configurationServeur';
-import { filetRouteAsynchrone } from './middleware';
-import { corpsVide, valideCorpsRequete } from './zod';
+import { ResultatRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { filetRouteAsynchrone } from './middleware.js';
+import { corpsVide, valideCorpsRequete } from './zod.js';
 
 const ressourceInformationsCreationCompte = ({
   adaptateurJWT,

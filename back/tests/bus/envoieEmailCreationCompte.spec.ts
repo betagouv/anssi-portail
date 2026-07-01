@@ -1,9 +1,9 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
-import { AdaptateurEmail } from '../../src/metier/adaptateurEmail';
-import { envoieEmailCreationCompte } from '../../src/bus/envoieEmailCreationCompte';
-import { CompteCree } from '../../src/bus/evenements/compteCree';
-import { fauxAdaptateurEmail } from '../api/fauxObjets';
+import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
+import { envoieEmailCreationCompte } from '../../src/bus/envoieEmailCreationCompte.js';
+import { CompteCree } from '../../src/bus/evenements/compteCree.js';
+import { fauxAdaptateurEmail } from '../api/fauxObjets.js';
 
 describe("L'abonnement qui envoie un email de création de compte", () => {
   it('envoie un email de bienvenue', () => {

@@ -1,10 +1,10 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { ClientHttp } from '../../src/infra/clientHttp';
-import { FournisseurHorloge } from '../../src/infra/fournisseurHorloge';
-import { EntrepotGristGenerique } from './EntrepotGristGenerique';
-import { fabriqueClientGet, fabriqueFauxClientHttp } from './fournisseurClientHttp';
-import { FournisseurHorlogeDeTest } from './fournisseurHorlogeDeTest';
+import { ClientHttp } from '../../src/infra/clientHttp.js';
+import { FournisseurHorloge } from '../../src/infra/fournisseurHorloge.js';
+import { EntrepotGristGenerique } from './EntrepotGristGenerique.js';
+import { fabriqueClientGet, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
+import { FournisseurHorlogeDeTest } from './fournisseurHorlogeDeTest.js';
 
 describe("L'entrepôt Grist générique", () => {
   it('mets en cache le résultat de l’appel à Grist', async () => {

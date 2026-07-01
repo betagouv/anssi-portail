@@ -1,4 +1,4 @@
-import { AdaptateurGestionErreur } from './adaptateurGestionErreurSentry';
+import { AdaptateurGestionErreur } from './adaptateurGestionErreurSentry.js';
 
 export const adaptateurGestionVide: AdaptateurGestionErreur = {
   initialise: () => {},

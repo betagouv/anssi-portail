@@ -1,8 +1,8 @@
 import { AxiosError } from 'axios';
-import axiosInstance from './axiosInstance';
-import { regions } from '../metier/referentielRegions';
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
-import { RechercheEntrepriseAvecCache } from './RechercheEntrepriseAvecCache';
+import axiosInstance from './axiosInstance.js';
+import { regions } from '../metier/referentielRegions.js';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
+import { RechercheEntrepriseAvecCache } from './RechercheEntrepriseAvecCache.js';
 
 export interface AdaptateurRechercheEntreprise {
   rechercheOrganisations(terme: string, departement: string | null): Promise<ResultatRechercheEntreprise[]>;

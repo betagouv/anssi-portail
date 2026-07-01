@@ -1,8 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { decode } from 'html-entities';
-import { AdaptateurEmail } from '../metier/adaptateurEmail';
-import { Telephone } from '../metier/telephone';
-import { adaptateurEmailConsole } from './adaptateurEmailConsole';
+import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
+import { Telephone } from '../metier/telephone.js';
+import { adaptateurEmailConsole } from './adaptateurEmailConsole.js';
 
 const enteteJSON = {
   headers: {

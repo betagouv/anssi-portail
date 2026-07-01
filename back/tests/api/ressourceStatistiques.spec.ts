@@ -2,15 +2,15 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/msc';
-import { AdaptateurMonAideCyber } from '../../src/infra/adaptateurMonAideCyber';
-import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest';
-import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur';
-import { ResultatTestMaturiteCreateur } from '../metier/ResultatTestMaturiteCreateur';
-import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
-import { configurationDeTestDuServeur } from './fauxObjets';
-import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi';
+import { creeServeur } from '../../src/api/msc.js';
+import { AdaptateurMonAideCyber } from '../../src/infra/adaptateurMonAideCyber.js';
+import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest.js';
+import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur.js';
+import { ResultatTestMaturiteCreateur } from '../metier/ResultatTestMaturiteCreateur.js';
+import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire.js';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
+import { configurationDeTestDuServeur } from './fauxObjets.js';
+import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi.js';
 
 describe('La ressource Statistiques', () => {
   describe('sur demande GET', () => {

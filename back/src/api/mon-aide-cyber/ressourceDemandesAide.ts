@@ -2,10 +2,10 @@ import cors from 'cors';
 import { Router } from 'express';
 import { encode } from 'html-entities';
 import z from 'zod';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { valideCorpsRequete } from '../zod';
-import { schemaRessourceDemandesAide } from './ressourceDemandesAide.schema';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { valideCorpsRequete } from '../zod.js';
+import { schemaRessourceDemandesAide } from './ressourceDemandesAide.schema.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 const ressourceDemandesAide = ({ adaptateurMonAideCyber }: ConfigurationServeur): Router => {

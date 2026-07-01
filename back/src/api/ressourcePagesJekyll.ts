@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
-import { ConfigurationServeur } from './configurationServeur';
-import { corpsVide, valideCorpsRequete } from './zod';
-import { filetRouteAsynchrone } from './middleware';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { corpsVide, valideCorpsRequete } from './zod.js';
+import { filetRouteAsynchrone } from './middleware.js';
 
 const ressourcePagesJekyll = ({ fournisseurChemin }: ConfigurationServeur, nomPage: string): Router => {
   const routeur = Router();

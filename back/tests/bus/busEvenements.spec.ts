@@ -1,5 +1,5 @@
 import { describe, it } from 'node:test';
-import { BusEvenements, EvenementDuBus } from '../../src/bus/busEvenements';
+import { BusEvenements, EvenementDuBus } from '../../src/bus/busEvenements.js';
 import assert from 'node:assert';
 
 class EvenementTestA implements EvenementDuBus {

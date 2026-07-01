@@ -1,5 +1,5 @@
 import z from 'zod';
-import { schemas } from './schemas';
+import { schemas } from './schemas.js';
 
 export const schemaRessourceRetoursExperience = z.strictObject({
   raison: z.enum(['pas-clair', 'pas-le-temps', 'pas-decisionnaire', 'autre'], 'La raison est invalide'),

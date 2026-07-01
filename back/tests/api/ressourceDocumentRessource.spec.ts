@@ -3,10 +3,10 @@ import assert from 'node:assert';
 import { Readable } from 'node:stream';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { ConfigurationServeur } from '../../src/api/configurationServeur';
-import { creeServeur } from '../../src/api/msc';
-import { AdaptateurCellar, CleDuBucket } from '../../src/infra/adaptateurCellar';
-import { configurationDeTestDuServeur, fauxAdaptateurCellar } from './fauxObjets';
+import { ConfigurationServeur } from '../../src/api/configurationServeur.js';
+import { creeServeur } from '../../src/api/msc.js';
+import { AdaptateurCellar, CleDuBucket } from '../../src/infra/adaptateurCellar.js';
+import { configurationDeTestDuServeur, fauxAdaptateurCellar } from './fauxObjets.js';
 
 describe('La ressource des documents de ressource', () => {
   let serveur: Express;

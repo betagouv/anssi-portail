@@ -3,9 +3,9 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import { join } from 'path';
 import request from 'supertest';
-import { FichierInconnu, FournisseurChemin } from '../../src/api/fournisseurChemin';
-import { creeServeur } from '../../src/api/msc';
-import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets';
+import { FichierInconnu, FournisseurChemin } from '../../src/api/fournisseurChemin.js';
+import { creeServeur } from '../../src/api/msc.js';
+import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets.js';
 
 describe('La ressource page produit', () => {
   let serveur: Express;
