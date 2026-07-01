@@ -15,7 +15,7 @@ const ressourcePageProduit = ({ fournisseurChemin }: ConfigurationServeur, reper
         return reponse.redirect(HttpStatusCode.MovedPermanently, '/nis2');
       }
 
-      reponse
+      await reponse
         .contentType('text/html')
         .status(200)
         .envoieFichierEnrichi(fournisseurChemin.cheminProduitJekyll(repertoireProduits, requete.params.id as string));

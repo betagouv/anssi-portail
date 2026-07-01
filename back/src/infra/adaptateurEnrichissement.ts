@@ -7,7 +7,6 @@ export interface AdaptateurEnrichissement {
 
 export class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
   async enrichisAvecComposants(chemin: string, avecNonceEtVersion: string) {
-    console.log('VRAIE IMPLEM');
     try {
       //@ts-expect-error fichier compilé
       const entreprises = await import('../../../front/lib-svelte/dist/serveur/assets/entreprises.js');
@@ -27,7 +26,7 @@ export class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement 
         return dom.serialize();
       }
     } catch {
-      /* empty */
+      /* vide */
     }
     return avecNonceEtVersion;
   }
