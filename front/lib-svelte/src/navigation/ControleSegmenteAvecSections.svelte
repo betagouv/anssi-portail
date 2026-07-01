@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
+  import { onDestroy, onMount, untrack } from 'svelte';
   import ControleSegmente from './ControleSegmente.svelte';
-  import { creeLeFragmentDeNavigation } from './fragmentDeNavigation';
+  import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from './fragmentDeNavigation.svelte';
 
   type Props = {
     elements: {
@@ -11,26 +11,29 @@
       icone?: string;
     }[];
     selecteurSections: string;
+    fragmentDeNavigation?: FragmentDeNavigation;
   };
-  let { elements, selecteurSections }: Props = $props();
+  let { elements, selecteurSections, fragmentDeNavigation = creeLeFragmentDeNavigation() }: Props = $props();
 
-  let indexActif = $state(0);
   // Non-reactive flag : supprime l'observateur pendant les scrolls programmatiques
   let scrollProgrammatique = false;
   let composant = $state<HTMLDivElement | undefined>(undefined);
   let observateurDIntersection: IntersectionObserver;
+
+  const idInitial = () => {
+    const ancreCourante = fragmentDeNavigation.section;
+    const élémentCorrespondant = elements.find((e) => (e.ancre ?? e.id) === ancreCourante);
+    return (élémentCorrespondant ?? elements[0])?.id;
+  };
+  let idÉlémentSélectionné = $state(untrack(idInitial));
+  const indexActif = $derived(elements.findIndex((e) => e.id === idÉlémentSélectionné));
 
   const sectionsDuComposant = () => composant?.querySelectorAll(selecteurSections);
   const ancreDeSection = (index: number) => elements[index].ancre ?? elements[index].id;
 
   // Met à jour le hash sans déclencher de scroll navigateur
   const miseAJourHash = (index: number) => {
-    const fragment = creeLeFragmentDeNavigation(window.location.hash);
-    fragment.changeSection(ancreDeSection(index));
-    const nouveauHash = fragment.serialise();
-    if (window.location.hash !== nouveauHash) {
-      window.location.hash = nouveauHash;
-    }
+    fragmentDeNavigation.changeSection(ancreDeSection(index), true);
   };
 
   // Scroll programmatique vers une section, avec suppression temporaire de l'observateur
@@ -60,8 +63,8 @@
             const sections = Array.from(sectionsDuComposant() ?? []);
             const idx = sections.indexOf(entry.target as HTMLElement);
             if (idx >= 0) {
-              indexActif = idx;
               miseAJourHash(idx);
+              idÉlémentSélectionné = elements[idx].id;
             }
           }
         }
@@ -78,19 +81,12 @@
     const scrollRestorationPrecedente = history.scrollRestoration;
     history.scrollRestoration = 'manual';
 
-    // Détermine la section initiale depuis le hash
-    const fragment = creeLeFragmentDeNavigation(window.location.hash);
-    if (fragment.section) {
-      const idx = elements.findIndex((e) => (e.ancre ?? e.id) === fragment.section);
-      if (idx >= 0) indexActif = idx;
-    }
-
     const initApresChargement = () => {
       // Scroll instantané vers la section cible une fois la page entièrement chargée
       // (évite les décalages de layout dus aux images/fonts en cours de chargement)
       scrollProgrammatique = true;
       const sections = sectionsDuComposant();
-      if (sections && indexActif > 0) {
+      if (sections) {
         (sections[indexActif] as HTMLElement).scrollIntoView({ behavior: 'instant', block: 'start' });
       }
       // Démarre l'observateur ; le flag supprime les faux déclenchements initiaux
@@ -115,7 +111,7 @@
   onDestroy(() => sectionsDuComposant()?.forEach((s) => observateurDIntersection?.unobserve(s)));
 </script>
 
-<ControleSegmente {elements} bind:indexActif {lorsDuClic}></ControleSegmente>
+<ControleSegmente {elements} bind:idÉlémentSélectionné {fragmentDeNavigation} {lorsDuClic}></ControleSegmente>
 <div bind:this={composant}>
   <slot></slot>
 </div>
