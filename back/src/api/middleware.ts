@@ -93,9 +93,8 @@ export const fabriqueMiddleware = ({
         const contenuPage = await adaptateurEnrichissement.enrichisAvecComposants(chemin, avecNonceEtVersion);
 
         reponse.send(contenuPage);
-      } catch (e) {
-        console.log('erreur:', e);
-        reponse
+      } catch {
+        await reponse
           .status(404)
           .set('Content-Type', 'text/html')
           .envoieFichierEnrichi(fournisseurChemin.ressourceDeBase('404.html'));
@@ -178,7 +177,7 @@ export const fabriqueMiddleware = ({
 
   const verifieModeMaintenance = async (_requete: Request, reponse: Response, suite: NextFunction) => {
     if (adaptateurEnvironnement.maintenance().actif()) {
-      reponse
+      await reponse
         .status(HttpStatusCode.ServiceUnavailable)
         .set('Content-Type', 'text/html')
         .envoieFichierEnrichi(fournisseurChemin.ressourceDeBase('maintenance.html'));
