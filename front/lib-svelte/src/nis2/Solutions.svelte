@@ -6,13 +6,15 @@
   import ActionParcoursAvecItems from '../parcours/ActionParcoursAvecItems.svelte';
   import { versItemsCyberOuGuide } from '../parcours/itemDuParcours';
 
-  export let itemsCyber: ItemCyber[];
+  type Props = {
+    itemsCyber: ItemCyber[];
+  };
+  let { itemsCyber }: Props = $props();
 
   onMount(chargeGuidesDansLeStore);
 
-  $: versMesItems = versItemsCyberOuGuide(itemsCyber, $guidesStore);
-
-  $: actions = [
+  const versMesItems = $derived(versItemsCyberOuGuide(itemsCyber, $guidesStore));
+  const actions = $derived([
     {
       id: 'comprendre',
       titre: 'Comprendre',
@@ -49,7 +51,7 @@
     {
       id: 'se-preparer',
       titre: 'Se préparer',
-      explication: 'Supervisez et préparez votre organisation à l’éventualité d’une attaque.',
+      explication: "Supervisez et préparez votre organisation à l'éventualité d'une attaque.",
       items: versMesItems([
         '/guides/organiser-un-exercice-de-gestion-de-crise-cyber',
         '/guides/la-supervision-de-securite-les-cles-de-decision',
@@ -59,7 +61,7 @@
     {
       id: 'reagir-incident',
       titre: 'Réagir à un incident',
-      explication: 'Agissez et signalez à l’ANSSI vos incidents de sécurité et sollicitez une assistance.',
+      explication: "Agissez et signalez à l'ANSSI vos incidents de sécurité et sollicitez une assistance.",
       items: versMesItems([
         '/services/assistance-reponse-incidents',
         '/guides/cyberattaques-et-remediation-les-cles-de-decision',
@@ -67,7 +69,7 @@
       ]),
       ancre: 'solutions&reagir-incident',
     },
-  ];
+  ]);
 </script>
 
 <div id="solutions">
