@@ -6,12 +6,15 @@
   import ActionParcoursAvecItems from '../../parcours/ActionParcoursAvecItems.svelte';
   import { versItemsCyberOuGuide } from '../../parcours/itemDuParcours';
 
-  export let itemsCyber: ItemCyber[];
+  type Props = {
+    itemsCyber: ItemCyber[];
+  };
+  let { itemsCyber }: Props = $props();
 
   onMount(chargeGuidesDansLeStore);
 
-  $: versMesItems = versItemsCyberOuGuide(itemsCyber, $guidesStore);
-  $: actions = [
+  const versMesItems = $derived(versItemsCyberOuGuide(itemsCyber, $guidesStore));
+  const actions = $derived([
     {
       id: 'comprendre',
       titre: 'Comprendre',
@@ -72,7 +75,7 @@
       ]),
       ancre: 'solutions&reagir',
     },
-  ];
+  ]);
 </script>
 
 <div id="solutions">
