@@ -1,8 +1,8 @@
 import { Request, Response, Router } from 'express';
-import { ConfigurationServeur } from './configurationServeur';
-import { detruisSession } from './session';
-import { corpsVide, valideCorpsRequete } from './zod';
-import { filetRouteAsynchrone } from './middleware';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { detruisSession } from './session.js';
+import { corpsVide, valideCorpsRequete } from './zod.js';
+import { filetRouteAsynchrone } from './middleware.js';
 
 const ressourcePageConnexion = ({ fournisseurChemin }: ConfigurationServeur): Router => {
   const routeur = Router();

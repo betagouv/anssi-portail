@@ -1,8 +1,8 @@
-import { estValeurVide, type Regle } from '../Specifications';
-import { ErreurLectureDeRegle } from './ErreurLectureDeRegle';
-import type { EtatQuestionnaire } from '../../EtatQuestionnaire';
-import type { SpecificationTexte } from '../FormatDesSpecificationsCSV';
-import type { AppartenancePaysUnionEuropeenne } from '../../ChampsSimulateur.definitions';
+import { estValeurVide, type Regle } from '../Specifications.js';
+import { ErreurLectureDeRegle } from './ErreurLectureDeRegle.js';
+import type { EtatQuestionnaire } from '../../EtatQuestionnaire.js';
+import type { SpecificationTexte } from '../FormatDesSpecificationsCSV.js';
+import type { AppartenancePaysUnionEuropeenne } from '../../ChampsSimulateur.definitions.js';
 
 export class RegleFournitureDeServicesNumerique implements Regle {
   constructor(private readonly localisationsAcceptees: AppartenancePaysUnionEuropeenne[]) {}

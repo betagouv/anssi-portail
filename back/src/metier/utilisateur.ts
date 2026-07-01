@@ -1,13 +1,13 @@
-import { BusEvenements } from '../bus/busEvenements';
-import { BadgeCyberdépartDébloqué } from '../bus/evenements/badgeCyberdepartDebloque';
-import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte';
-import { ModuleTermine } from '../bus/evenements/moduleTermine';
-import { AdaptateurHachage } from '../infra/adaptateurHachage';
-import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise';
-import { EntrepotPriseEnCompte } from './entrepotPriseEnCompte';
-import { Mesure } from './mesure';
-import { Module } from './module';
-import { PriseEnCompte } from './PriseEnCompte';
+import { BusEvenements } from '../bus/busEvenements.js';
+import { BadgeCyberdépartDébloqué } from '../bus/evenements/badgeCyberdepartDebloque.js';
+import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
+import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
+import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
+import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
+import { EntrepotPriseEnCompte } from './entrepotPriseEnCompte.js';
+import { Mesure } from './mesure.js';
+import { Module } from './module.js';
+import { PriseEnCompte } from './PriseEnCompte.js';
 
 export type Role = 'GESTION_GUIDES';
 

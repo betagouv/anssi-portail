@@ -1,6 +1,6 @@
 import { readdirSync } from 'node:fs';
 import { join } from 'path';
-import { ErreurTraverséeDeChemin } from './erreurs';
+import { ErreurTraverséeDeChemin } from './erreurs.js';
 
 export class FichierInconnu extends Error {
   constructor(chemin: string) {

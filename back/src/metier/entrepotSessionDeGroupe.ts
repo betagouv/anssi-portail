@@ -1,4 +1,4 @@
-import { SessionDeGroupe } from './sessionDeGroupe';
+import { SessionDeGroupe } from './sessionDeGroupe.js';
 
 export interface EntrepotSessionDeGroupe {
   tous: () => Promise<SessionDeGroupe[]>;

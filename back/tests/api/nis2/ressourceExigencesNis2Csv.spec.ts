@@ -2,10 +2,10 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../../src/api/msc';
-import { Correspondance, ExigenceNIS2 } from '../../../src/metier/nis2/exigence';
-import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire';
-import { configurationDeTestDuServeur } from '../fauxObjets';
+import { creeServeur } from '../../../src/api/msc.js';
+import { Correspondance, ExigenceNIS2 } from '../../../src/metier/nis2/exigence.js';
+import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire.js';
+import { configurationDeTestDuServeur } from '../fauxObjets.js';
 
 describe('La ressource des Exigences NIS 2 en CSV', () => {
   let serveur: Express;

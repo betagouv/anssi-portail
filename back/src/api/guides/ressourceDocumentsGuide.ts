@@ -2,13 +2,13 @@ import { NextFunction, Request, RequestHandler, Response, Router } from 'express
 import multer from 'multer';
 import { join } from 'path';
 import z from 'zod';
-import { selectionneConfigCellarDeposePourUnBucket } from '../../infra/adaptateurCellar';
-import { EntrepotGuideTravail } from '../../metier/entrepotGuideTravail';
-import { Guide } from '../../metier/guide';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { corpsVide, valideCorpsRequete, valideRequete } from '../zod';
-import { schemaAjoutDocumentGuide } from './ressourceDocumentsGuide.schema';
+import { selectionneConfigCellarDeposePourUnBucket } from '../../infra/adaptateurCellar.js';
+import { EntrepotGuideTravail } from '../../metier/entrepotGuideTravail.js';
+import { Guide } from '../../metier/guide.js';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { corpsVide, valideCorpsRequete, valideRequete } from '../zod.js';
+import { schemaAjoutDocumentGuide } from './ressourceDocumentsGuide.schema.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 const valideAutorisation = (): RequestHandler => {

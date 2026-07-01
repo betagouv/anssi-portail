@@ -1,14 +1,14 @@
 import * as z from 'zod';
-import { ToutesLesActivites } from '../../metier/nis2-simulateur/Activite.operations';
+import { ToutesLesActivites } from '../../metier/nis2-simulateur/Activite.operations.js';
 import {
   ValeursappartenancePaysUnionEuropeenne,
   ValeursDesignationOperateurServicesEssentiels,
   ValeursPetitMoyenGrand,
   ValeursTypeEntitePublique,
   ValeursTypeStructure,
-} from '../../metier/nis2-simulateur/ChampsSimulateur.valeurs';
-import { ValeursSecteursActivites } from '../../metier/nis2-simulateur/SecteurActivite.valeurs';
-import { TousLesSousSecteurs } from '../../metier/nis2-simulateur/SousSecteurActivite.valeurs';
+} from '../../metier/nis2-simulateur/ChampsSimulateur.valeurs.js';
+import { ValeursSecteursActivites } from '../../metier/nis2-simulateur/SecteurActivite.valeurs.js';
+import { TousLesSousSecteurs } from '../../metier/nis2-simulateur/SousSecteurActivite.valeurs.js';
 
 export const schemaPostSimulateurNis2 = () =>
   z.strictObject({

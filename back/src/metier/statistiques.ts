@@ -1,7 +1,7 @@
-import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber';
-import { EntrepotResultatTest } from './entrepotResultatTest';
-import { EntrepotUtilisateur } from './entrepotUtilisateur';
-import { IdNiveauMaturite } from './resultatTestMaturite';
+import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber.js';
+import { EntrepotResultatTest } from './entrepotResultatTest.js';
+import { EntrepotUtilisateur } from './entrepotUtilisateur.js';
+import { IdNiveauMaturite } from './resultatTestMaturite.js';
 
 export type Statistiques = {
   utilisateursInscrits: number;

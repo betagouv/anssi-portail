@@ -1,8 +1,8 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire';
-import { leCSV } from './aidesAuxTests';
-import { evalueEligibilite } from '../../../../src/metier/nis2-simulateur/questionnaire/evalueEligibilite';
+import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
+import { leCSV } from './aidesAuxTests.js';
+import { evalueEligibilite } from '../../../../src/metier/nis2-simulateur/questionnaire/evalueEligibilite.js';
 
 describe("L'évaluation complète de l'égibilité", () => {
   it('soumet un questionnaire à la spécification CSV, et retourne le résultat obtenu', () => {

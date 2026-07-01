@@ -1,4 +1,4 @@
-import { Utilisateur } from './utilisateur';
+import { Utilisateur } from './utilisateur.js';
 
 export interface EntrepotUtilisateur {
   ajoute: (utilisateur: Utilisateur) => Promise<void>;

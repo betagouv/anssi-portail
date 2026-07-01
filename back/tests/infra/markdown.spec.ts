@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { aseptiseMarkdown } from '../../src/infra/markdown';
+import { aseptiseMarkdown } from '../../src/infra/markdown.js';
 
 describe('Le markdown', () => {
   it("retourne la chaîne intacte lorsqu'elle ne contient aucun caractère spécial", () => {

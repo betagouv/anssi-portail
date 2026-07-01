@@ -1,8 +1,8 @@
 import { isAxiosError } from 'axios';
-import axiosInstance from './axiosInstance';
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
-import { adaptateurMonAideCyberVide } from './adaptateurMonAideCyberVide';
-import { Cache } from './cache';
+import axiosInstance from './axiosInstance.js';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
+import { adaptateurMonAideCyberVide } from './adaptateurMonAideCyberVide.js';
+import { Cache } from './cache.js';
 
 export type DemandeAide = {
   origine?: string;

@@ -1,5 +1,5 @@
-import { Favori } from './favori';
-import { Utilisateur } from './utilisateur';
+import { Favori } from './favori.js';
+import { Utilisateur } from './utilisateur.js';
 
 export interface EntrepotFavori {
   ajoute(favori: Favori): Promise<void>;

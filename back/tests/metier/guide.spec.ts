@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
-import { guideZeroTrust } from '../api/objetsPretsALEmploi';
-import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravailMemoire';
+import { guideZeroTrust } from '../api/objetsPretsALEmploi.js';
+import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravailMemoire.js';
 
 describe('Le guide', () => {
   describe("lorsqu'on sauvegarde", () => {

@@ -3,12 +3,12 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import z from 'zod';
-import { schemaRessourceDemandesAide } from '../../../src/api/mon-aide-cyber/ressourceDemandesAide.schema';
-import { creeServeur } from '../../../src/api/msc';
-import { DemandeAide } from '../../../src/infra/adaptateurMonAideCyber';
-import { adaptateurMonAideCyberVide } from '../../../src/infra/adaptateurMonAideCyberVide';
-import { CodeDepartement } from '../../../src/metier/referentielDepartements';
-import { configurationDeTestDuServeur } from '../fauxObjets';
+import { schemaRessourceDemandesAide } from '../../../src/api/mon-aide-cyber/ressourceDemandesAide.schema.js';
+import { creeServeur } from '../../../src/api/msc.js';
+import { DemandeAide } from '../../../src/infra/adaptateurMonAideCyber.js';
+import { adaptateurMonAideCyberVide } from '../../../src/infra/adaptateurMonAideCyberVide.js';
+import { CodeDepartement } from '../../../src/metier/referentielDepartements.js';
+import { configurationDeTestDuServeur } from '../fauxObjets.js';
 
 type CorpsDemandeAide = z.infer<typeof schemaRessourceDemandesAide>;
 

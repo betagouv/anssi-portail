@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { corpsVide, valideCorpsRequete } from '../zod';
+import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee.js';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { corpsVide, valideCorpsRequete } from '../zod.js';
 
 const ressourceResultatDeTest = ({
   entrepotResultatTest,

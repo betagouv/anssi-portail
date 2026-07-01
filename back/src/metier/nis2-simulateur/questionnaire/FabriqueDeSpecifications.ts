@@ -1,22 +1,22 @@
-import { RegleEntiteOSE } from './regles/RegleEntiteOSE';
-import { estValeurVide, type Regle, Specifications } from './Specifications';
-import { RegleLocalisation } from './regles/RegleLocalisation';
-import type { SpecificationTexte } from './FormatDesSpecificationsCSV';
-import { RegleTypeDeStructure } from './regles/RegleTypeDeStructure';
-import { RegleTaille } from './regles/RegleTaille';
-import { ErreurLectureDeRegle } from './regles/ErreurLectureDeRegle';
-import { RegleSecteurs } from './regles/RegleSecteurs';
-import { RegleSousSecteurs } from './regles/RegleSousSecteurs';
-import { RegleActivites } from './regles/RegleActivites';
-import { RegleFournitureDeServicesNumerique } from './regles/RegleFournitureDeServicesNumerique';
-import { RegleEtablissementPrincipal } from './regles/RegleEtablissementPrincipal';
+import { RegleEntiteOSE } from './regles/RegleEntiteOSE.js';
+import { estValeurVide, type Regle, Specifications } from './Specifications.js';
+import { RegleLocalisation } from './regles/RegleLocalisation.js';
+import type { SpecificationTexte } from './FormatDesSpecificationsCSV.js';
+import { RegleTypeDeStructure } from './regles/RegleTypeDeStructure.js';
+import { RegleTaille } from './regles/RegleTaille.js';
+import { ErreurLectureDeRegle } from './regles/ErreurLectureDeRegle.js';
+import { RegleSecteurs } from './regles/RegleSecteurs.js';
+import { RegleSousSecteurs } from './regles/RegleSousSecteurs.js';
+import { RegleActivites } from './regles/RegleActivites.js';
+import { RegleFournitureDeServicesNumerique } from './regles/RegleFournitureDeServicesNumerique.js';
+import { RegleEtablissementPrincipal } from './regles/RegleEtablissementPrincipal.js';
 import {
   CodesPrecisionsPointsAttention,
   CodesResumesPointsAttention,
   type PointsAttentionPrecis,
   type ResultatEligibilite,
   type ResumesPointsAttention,
-} from '../Regulation.definitions';
+} from '../Regulation.definitions.js';
 
 export class FabriqueDeSpecifications {
   transforme(texte: SpecificationTexte): Specifications {

@@ -3,21 +3,21 @@ import assert from 'node:assert';
 import { join } from 'node:path';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { AdaptateurJWT } from '../../../src/api/adaptateurJWT';
-import { ConfigurationServeur } from '../../../src/api/configurationServeur';
-import { creeServeur } from '../../../src/api/msc';
-import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC';
-import { UtilisateurConnecte } from '../../../src/bus/evenements/utilisateurConnecte';
-import { MockBusEvenement } from '../../bus/busPourLesTests';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
-import { decodeSessionDuCookie } from '../cookie';
+import { AdaptateurJWT } from '../../../src/api/adaptateurJWT.js';
+import { ConfigurationServeur } from '../../../src/api/configurationServeur.js';
+import { creeServeur } from '../../../src/api/msc.js';
+import { AdaptateurOIDC } from '../../../src/api/oidc/adaptateurOIDC.js';
+import { UtilisateurConnecte } from '../../../src/bus/evenements/utilisateurConnecte.js';
+import { MockBusEvenement } from '../../bus/busPourLesTests.js';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
+import { decodeSessionDuCookie } from '../cookie.js';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
   fauxFournisseurDeChemin,
-} from '../fauxObjets';
-import { utilisateurDeTest } from '../mesures/constructeurDUtilisateur';
+} from '../fauxObjets.js';
+import { utilisateurDeTest } from '../mesures/constructeurDUtilisateur.js';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {

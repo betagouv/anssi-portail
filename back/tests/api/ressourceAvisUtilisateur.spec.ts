@@ -2,11 +2,11 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/msc';
-import { AvisUtilisateurDonne } from '../../src/bus/evenements/avisUtilisateurDonne';
-import { AvisUtilisateur, MessagerieInstantanee } from '../../src/metier/messagerieInstantanee';
-import { MockBusEvenement } from '../bus/busPourLesTests';
-import { configurationDeTestDuServeur, fausseMessagerieInstantanee } from './fauxObjets';
+import { creeServeur } from '../../src/api/msc.js';
+import { AvisUtilisateurDonne } from '../../src/bus/evenements/avisUtilisateurDonne.js';
+import { AvisUtilisateur, MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js';
+import { MockBusEvenement } from '../bus/busPourLesTests.js';
+import { configurationDeTestDuServeur, fausseMessagerieInstantanee } from './fauxObjets.js';
 
 describe('La ressource avis utilisateur', () => {
   let serveur: Express;

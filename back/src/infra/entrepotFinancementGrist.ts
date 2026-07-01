@@ -1,10 +1,10 @@
-import axiosInstance from './axiosInstance';
-import { EntrepotFinancement } from '../metier/entrepotFinancement';
-import { Financement } from '../metier/financement';
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
-import { ClientHttp } from './clientHttp';
-import { EntrepotGrist } from './entrepotGrist';
-import { aseptiseListeGrist } from './grist';
+import axiosInstance from './axiosInstance.js';
+import { EntrepotFinancement } from '../metier/entrepotFinancement.js';
+import { Financement } from '../metier/financement.js';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
+import { ClientHttp } from './clientHttp.js';
+import { EntrepotGrist } from './entrepotGrist.js';
+import { aseptiseListeGrist } from './grist.js';
 
 export type FinancementGrist = {
   id: number;

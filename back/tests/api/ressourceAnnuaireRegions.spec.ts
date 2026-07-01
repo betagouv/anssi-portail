@@ -1,8 +1,8 @@
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import assert from 'node:assert';
-import { configurationDeTestDuServeur } from './fauxObjets';
-import { creeServeur } from '../../src/api/msc';
+import { configurationDeTestDuServeur } from './fauxObjets.js';
+import { creeServeur } from '../../src/api/msc.js';
 import request from 'supertest';
 
 describe('La ressource Annuaire Régions', () => {

@@ -1,7 +1,7 @@
-import { EntrepotSessionDeGroupe } from '../metier/entrepotSessionDeGroupe';
-import { SessionDeGroupe } from '../metier/sessionDeGroupe';
+import { EntrepotSessionDeGroupe } from '../metier/entrepotSessionDeGroupe.js';
+import { SessionDeGroupe } from '../metier/sessionDeGroupe.js';
 import Knex from 'knex';
-import config from '../../knexfile';
+import config from '../../knexfile.js';
 
 export class EntrepotSessionDeGroupePostgres implements EntrepotSessionDeGroupe {
   knex: Knex.Knex;

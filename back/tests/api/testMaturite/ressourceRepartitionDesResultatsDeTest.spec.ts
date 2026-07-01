@@ -2,11 +2,11 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../../src/api/msc';
-import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
-import { ResultatTestMaturiteCreateur } from '../../metier/ResultatTestMaturiteCreateur';
-import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
-import { configurationDeTestDuServeur } from '../fauxObjets';
+import { creeServeur } from '../../../src/api/msc.js';
+import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite.js';
+import { ResultatTestMaturiteCreateur } from '../../metier/ResultatTestMaturiteCreateur.js';
+import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire.js';
+import { configurationDeTestDuServeur } from '../fauxObjets.js';
 
 describe('La ressource qui gère les series de résultats de test de maturité', () => {
   let serveur: Express;

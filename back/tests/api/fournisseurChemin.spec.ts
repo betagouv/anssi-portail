@@ -1,12 +1,12 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { ErreurTraverséeDeChemin } from '../../src/api/erreurs';
+import { ErreurTraverséeDeChemin } from '../../src/api/erreurs.js';
 import {
   construisListeFichiersDuSite,
   FichierInconnu,
   fournisseurChemin,
   siteFront,
-} from '../../src/api/fournisseurChemin';
+} from '../../src/api/fournisseurChemin.js';
 
 describe('le fournisseurChemin', () => {
   describe("lorsqu'on récupère un fichier", () => {

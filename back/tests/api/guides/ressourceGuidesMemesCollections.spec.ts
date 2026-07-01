@@ -2,11 +2,11 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../../src/api/msc';
-import { Guide } from '../../../src/metier/guide';
-import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire';
-import { configurationDeTestDuServeur } from '../fauxObjets';
-import { guideDevsecops, guideZeroTrust } from '../objetsPretsALEmploi';
+import { creeServeur } from '../../../src/api/msc.js';
+import { Guide } from '../../../src/metier/guide.js';
+import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js';
+import { configurationDeTestDuServeur } from '../fauxObjets.js';
+import { guideDevsecops, guideZeroTrust } from '../objetsPretsALEmploi.js';
 
 describe('La ressource des guides de mêmes collections', () => {
   describe("sur demande d'un GET", () => {

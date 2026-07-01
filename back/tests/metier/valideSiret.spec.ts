@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { valideSiret } from '../../src/metier/valideSiret';
-import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
+import { valideSiret } from '../../src/metier/valideSiret.js';
+import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 
 describe('Valide les numéros SIRET', () => {
   it('retourne vrai pour un numéro SIRET valide', () => {

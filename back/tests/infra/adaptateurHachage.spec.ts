@@ -1,8 +1,8 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
-import { fabriqueAdaptateurHachage } from '../../src/infra/adaptateurHachage';
-import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
-import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
+import { fabriqueAdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
+import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
+import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 
 describe("L'adaptateur de hachage", () => {
   describe('sur demande de hachage HMAC', () => {

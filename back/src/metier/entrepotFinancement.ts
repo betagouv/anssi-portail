@@ -1,4 +1,4 @@
-import { Financement } from './financement';
+import { Financement } from './financement.js';
 
 export interface EntrepotFinancement {
   tous: () => Promise<Financement[]>;

@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { FournisseurChemin } from './fournisseurChemin';
+import { FournisseurChemin } from './fournisseurChemin.js';
 
 export class ErreurTraverséeDeChemin extends Error {
   constructor(message: string) {

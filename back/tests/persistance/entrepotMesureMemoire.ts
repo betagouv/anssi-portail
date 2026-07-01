@@ -1,6 +1,6 @@
-import { EntrepotMesure } from '../../src/metier/entrepotMesure';
-import { Mesure } from '../../src/metier/mesure';
-import { EntrepotMemoire } from './entrepotMemoire';
+import { EntrepotMesure } from '../../src/metier/entrepotMesure.js';
+import { Mesure } from '../../src/metier/mesure.js';
+import { EntrepotMemoire } from './entrepotMemoire.js';
 
 export class EntrepotMesureMemoire extends EntrepotMemoire<Mesure> implements EntrepotMesure {
   async parId(id: string): Promise<Mesure | undefined> {

@@ -1,13 +1,13 @@
-import { AvisMesureDonne } from '../bus/evenements/avisMesureDonne';
-import { MesureConsultee } from '../bus/evenements/mesureConsultee';
-import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte';
-import { ModuleTermine } from '../bus/evenements/moduleTermine';
-import { ReponsesEtResultatAvecAnalyse } from '../metier/nis2-simulateur/questionnaire/calculEligibilite';
-import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction';
-import { CodeRegion } from '../metier/referentielRegions';
-import { CodeSecteur } from '../metier/referentielSecteurs';
-import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement';
-import { ReponsesTestMaturite } from '../metier/resultatTestMaturite';
+import { AvisMesureDonne } from '../bus/evenements/avisMesureDonne.js';
+import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
+import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
+import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
+import { ReponsesEtResultatAvecAnalyse } from '../metier/nis2-simulateur/questionnaire/calculEligibilite.js';
+import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction.js';
+import { CodeRegion } from '../metier/referentielRegions.js';
+import { CodeSecteur } from '../metier/referentielSecteurs.js';
+import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement.js';
+import { ReponsesTestMaturite } from '../metier/resultatTestMaturite.js';
 
 export type DonneesEvenement =
   | DonneesEvenementNouvelUtilisateur

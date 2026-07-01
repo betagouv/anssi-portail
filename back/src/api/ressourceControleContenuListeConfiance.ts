@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { corpsVide, valideCorpsRequete } from './zod';
+import { corpsVide, valideCorpsRequete } from './zod.js';
 
 export const ressourceControleContenuListeConfiance = () => {
   const routeur = Router();

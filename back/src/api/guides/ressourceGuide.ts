@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { corpsVide, valideCorpsRequete } from '../zod';
-import { guidePresentation } from './guidePresentation';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { corpsVide, valideCorpsRequete } from '../zod.js';
+import { guidePresentation } from './guidePresentation.js';
 
 const ressourceGuide = ({ adaptateurEnvironnement, entrepotGuide }: ConfigurationServeur) => {
   const routeur = Router();

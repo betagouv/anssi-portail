@@ -2,13 +2,13 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { fabriqueMiddleware } from '../../../src/api/middleware';
-import { creeServeur } from '../../../src/api/msc';
-import { MiseAJourFavorisUtilisateur } from '../../../src/bus/miseAJourFavorisUtilisateur';
-import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
-import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
-import { encodeSession } from '../cookie';
+import { fabriqueMiddleware } from '../../../src/api/middleware.js';
+import { creeServeur } from '../../../src/api/msc.js';
+import { MiseAJourFavorisUtilisateur } from '../../../src/bus/miseAJourFavorisUtilisateur.js';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
+import { EntrepotFavoriMemoire } from '../../persistance/entrepotFavoriMemoire.js';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
+import { encodeSession } from '../cookie.js';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurEnrichissement,
@@ -16,8 +16,8 @@ import {
   fauxAdaptateurJWT,
   fauxFournisseurDeChemin,
   fauxMiddleware,
-} from '../fauxObjets';
-import { jeanneDupont } from '../objetsPretsALEmploi';
+} from '../fauxObjets.js';
+import { jeanneDupont } from '../objetsPretsALEmploi.js';
 
 describe('La ressource des services et ressources favoris', () => {
   let serveur: Express;

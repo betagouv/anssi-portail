@@ -2,12 +2,12 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/msc';
-import { Guide } from '../../src/metier/guide';
-import { ServiceSanteGuides } from '../../src/metier/serviceSanteGuides';
-import { EntrepotGuideMemoire } from '../persistance/entrepotGuideMemoire';
-import { configurationDeTestDuServeur } from './fauxObjets';
-import { guideZeroTrust } from './objetsPretsALEmploi';
+import { creeServeur } from '../../src/api/msc.js';
+import { Guide } from '../../src/metier/guide.js';
+import { ServiceSanteGuides } from '../../src/metier/serviceSanteGuides.js';
+import { EntrepotGuideMemoire } from '../persistance/entrepotGuideMemoire.js';
+import { configurationDeTestDuServeur } from './fauxObjets.js';
+import { guideZeroTrust } from './objetsPretsALEmploi.js';
 
 describe('La ressource Sante des guides', () => {
   describe('sur demande GET', () => {

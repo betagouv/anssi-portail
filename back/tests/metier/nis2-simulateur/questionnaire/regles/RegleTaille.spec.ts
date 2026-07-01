@@ -1,8 +1,11 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { UnionPetitMoyenGrand } from '../../../../../src/metier/nis2-simulateur/ChampsSimulateur.definitions';
-import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../../src/metier/nis2-simulateur/EtatQuestionnaire';
-import { RegleTaille } from '../../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleTaille';
+import { UnionPetitMoyenGrand } from '../../../../../src/metier/nis2-simulateur/ChampsSimulateur.definitions.js';
+import {
+  EtatQuestionnaire,
+  EtatQuestionnaireVide,
+} from '../../../../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
+import { RegleTaille } from '../../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleTaille.js';
 
 describe('La règle de « Taille »', () => {
   const tailles: Record<string, UnionPetitMoyenGrand> = {

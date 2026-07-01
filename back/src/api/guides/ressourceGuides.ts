@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { valideRequete } from '../zod';
-import { guidePresentation } from './guidePresentation';
-import { schemaRessourceGuides } from './ressourceGuides.schema';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { valideRequete } from '../zod.js';
+import { guidePresentation } from './guidePresentation.js';
+import { schemaRessourceGuides } from './ressourceGuides.schema.js';
 
 const ressourceGuides = ({ adaptateurEnvironnement, entrepotGuide, entrepotGuideTravail }: ConfigurationServeur) => {
   const routeur = Router();

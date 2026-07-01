@@ -1,5 +1,5 @@
-import { Cache } from './cache';
-import { ClientHttp } from './clientHttp';
+import { Cache } from './cache.js';
+import { ClientHttp } from './clientHttp.js';
 
 export type ReponseGrist<TYPE_DOCUMENT> = {
   records: TYPE_DOCUMENT[];

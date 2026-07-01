@@ -1,6 +1,6 @@
-import type { SousSecteurActivite } from './SousSecteurActivite.definitions';
-import type { SecteurActivite } from './SecteurActivite.definitions';
-import { sousSecteursParSecteur } from './SousSecteurActivite.valeurs';
+import type { SousSecteurActivite } from './SousSecteurActivite.definitions.js';
+import type { SecteurActivite } from './SecteurActivite.definitions.js';
+import { sousSecteursParSecteur } from './SousSecteurActivite.valeurs.js';
 
 export const secteurDe = (recherche: SousSecteurActivite): SecteurActivite => {
   const tupleDuSecteur = Object.entries(sousSecteursParSecteur).find(([, sousSecteurs]) =>

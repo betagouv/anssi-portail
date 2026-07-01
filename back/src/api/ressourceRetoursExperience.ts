@@ -1,10 +1,10 @@
 import { Response, Router } from 'express';
 import z from 'zod';
-import { RetourExperienceDonne } from '../bus/evenements/retourExperienceDonne';
-import { ConfigurationServeur } from './configurationServeur';
-import { filetRouteAsynchrone } from './middleware';
-import { schemaRessourceRetoursExperience } from './ressourceRetoursExperience.schema';
-import { valideCorpsRequete } from './zod';
+import { RetourExperienceDonne } from '../bus/evenements/retourExperienceDonne.js';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { filetRouteAsynchrone } from './middleware.js';
+import { schemaRessourceRetoursExperience } from './ressourceRetoursExperience.schema.js';
+import { valideCorpsRequete } from './zod.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 export const ressourceRetoursExperience = ({ messagerieInstantanee, busEvenements }: ConfigurationServeur): Router => {

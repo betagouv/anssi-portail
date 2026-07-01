@@ -2,17 +2,17 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../../src/api/msc';
-import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
-import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
-import { Mesure } from '../../../src/metier/mesure';
-import { ExigenceNIS2 } from '../../../src/metier/nis2/exigence';
-import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
-import { encodeSession } from '../cookie';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
-import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
-import { utilisateurDeTest } from './constructeurDUtilisateur';
+import { creeServeur } from '../../../src/api/msc.js';
+import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
+import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
+import { Mesure } from '../../../src/metier/mesure.js';
+import { ExigenceNIS2 } from '../../../src/metier/nis2/exigence.js';
+import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
+import { encodeSession } from '../cookie.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
+import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi.js';
+import { utilisateurDeTest } from './constructeurDUtilisateur.js';
 
 describe('La ressource mesure de sécurité', () => {
   describe('sur requête GET', () => {

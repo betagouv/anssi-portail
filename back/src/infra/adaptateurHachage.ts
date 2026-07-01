@@ -1,4 +1,4 @@
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { createHmac } from 'node:crypto';
 import { hash as hashBCrypt, compare as compareBCrypt } from 'bcrypt';
 

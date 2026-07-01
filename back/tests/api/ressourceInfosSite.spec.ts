@@ -1,10 +1,10 @@
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import assert from 'node:assert';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from './fauxObjets';
-import { creeServeur } from '../../src/api/msc';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from './fauxObjets.js';
+import { creeServeur } from '../../src/api/msc.js';
 import request from 'supertest';
-import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
+import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 
 describe('La ressource Informations du site', () => {
   let serveur: Express;

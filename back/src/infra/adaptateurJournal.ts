@@ -1,5 +1,5 @@
-import { adaptateurJournalPostgres } from './adaptateurJournalPostgres';
-import { DonneesEvenement } from './donneesEvenement';
+import { adaptateurJournalPostgres } from './adaptateurJournalPostgres.js';
+import { DonneesEvenement } from './donneesEvenement.js';
 
 export type AdaptateurJournal = {
   consigneEvenement: (donneesEvenement: DonneesEvenement) => Promise<void>;

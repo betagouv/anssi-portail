@@ -1,10 +1,10 @@
-import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest';
-import { CodeRegion } from '../../src/metier/referentielRegions';
-import { CodeSecteur } from '../../src/metier/referentielSecteurs';
-import { CodeTrancheEffectif } from '../../src/metier/referentielTranchesEffectifEtablissement';
-import { IdNiveauMaturite, ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite';
-import { Utilisateur } from '../../src/metier/utilisateur';
-import { fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets';
+import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest.js';
+import { CodeRegion } from '../../src/metier/referentielRegions.js';
+import { CodeSecteur } from '../../src/metier/referentielSecteurs.js';
+import { CodeTrancheEffectif } from '../../src/metier/referentielTranchesEffectifEtablissement.js';
+import { IdNiveauMaturite, ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
+import { Utilisateur } from '../../src/metier/utilisateur.js';
+import { fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets.js';
 
 export class ResultatTestMaturiteCreateur {
   private reponses: ReponsesTestMaturite = {

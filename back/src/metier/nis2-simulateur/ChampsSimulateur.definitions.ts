@@ -1,5 +1,5 @@
-import type { UnionDe } from './UnionDe';
-import type { Activite } from './Activite.definitions';
+import type { UnionDe } from './UnionDe.js';
+import type { Activite } from './Activite.definitions.js';
 import {
   ValeursappartenancePaysUnionEuropeenne,
   ValeursDesignationOperateurServicesEssentiels,
@@ -7,9 +7,9 @@ import {
   ValeursPetitMoyenGrand,
   ValeursTypeEntitePublique,
   ValeursTypeStructure,
-} from './ChampsSimulateur.valeurs';
-import type { SecteurActivite } from './SecteurActivite.definitions';
-import type { SousSecteurActivite } from './SousSecteurActivite.definitions';
+} from './ChampsSimulateur.valeurs.js';
+import type { SecteurActivite } from './SecteurActivite.definitions.js';
+import type { SousSecteurActivite } from './SousSecteurActivite.definitions.js';
 
 export type DesignationOperateurServicesEssentiels = UnionDe<typeof ValeursDesignationOperateurServicesEssentiels>;
 export type AppartenancePaysUnionEuropeenne = UnionDe<typeof ValeursappartenancePaysUnionEuropeenne>;

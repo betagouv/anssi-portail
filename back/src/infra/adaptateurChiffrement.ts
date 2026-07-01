@@ -1,5 +1,5 @@
 import { createCipheriv, createDecipheriv, randomBytes } from 'crypto';
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 
 export type ObjetChiffre = {
   iv: string;

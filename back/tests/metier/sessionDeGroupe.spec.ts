@@ -1,8 +1,8 @@
 import { describe, it } from 'node:test';
-import { SessionDeGroupe } from '../../src/metier/sessionDeGroupe';
-import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire';
+import { SessionDeGroupe } from '../../src/metier/sessionDeGroupe.js';
+import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire.js';
 import assert from 'assert';
-import { ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite';
+import { ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
 
 const resultatAvecReponses = (reponses: ReponsesTestMaturite, codeSession: string) =>
   new ResultatTestMaturite({

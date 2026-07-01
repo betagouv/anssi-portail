@@ -1,5 +1,5 @@
 import z from 'zod';
-import { schemas } from './schemas';
+import { schemas } from './schemas.js';
 
 export const schemaRessourceAnnuaireOrganisations = z.object({
   query: z.object({

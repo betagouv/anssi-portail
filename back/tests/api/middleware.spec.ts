@@ -1,26 +1,28 @@
 import assert from 'assert';
 import { Request, Response } from 'express';
-import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
+import jsonwebtoken from 'jsonwebtoken';
 import { createRequest, createResponse } from 'node-mocks-http';
 import { OutgoingHttpHeaders } from 'node:http';
 import { beforeEach, describe, it } from 'node:test';
 import { join } from 'path';
-import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import { FournisseurChemin } from '../../src/api/fournisseurChemin';
-import { fabriqueMiddleware, Middleware } from '../../src/api/middleware';
-import { AdaptateurEnrichissement } from '../../src/infra/adaptateurEnrichissement';
-import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
-import { Utilisateur } from '../../src/metier/utilisateur';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
+import { AdaptateurJWT } from '../../src/api/adaptateurJWT.js';
+import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
+import { fabriqueMiddleware, Middleware } from '../../src/api/middleware.js';
+import { AdaptateurEnrichissement } from '../../src/infra/adaptateurEnrichissement.js';
+import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
+import { Utilisateur } from '../../src/metier/utilisateur.js';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import {
   fauxAdaptateurEnrichissement,
   fauxAdaptateurEnvironnement,
   fauxAdaptateurHachage,
   fauxAdaptateurJWT,
   fauxFournisseurDeChemin,
-} from './fauxObjets';
-import { jeanneDupont } from './objetsPretsALEmploi';
+} from './fauxObjets.js';
+import { jeanneDupont } from './objetsPretsALEmploi.js';
+
+const { JsonWebTokenError, TokenExpiredError } = jsonwebtoken;
 
 describe('Le middleware', () => {
   let requete: Request & {

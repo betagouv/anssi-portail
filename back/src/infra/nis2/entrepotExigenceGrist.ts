@@ -1,6 +1,6 @@
-import axiosInstance from '../axiosInstance';
+import axiosInstance from '../axiosInstance.js';
 import knex, { QueryBuilder } from 'knex';
-import { EntrepotExigence } from '../../metier/nis2/entrepotExigence';
+import { EntrepotExigence } from '../../metier/nis2/entrepotExigence.js';
 import {
   CategorieEntite,
   Correspondance,
@@ -12,10 +12,10 @@ import {
   ExigenceISO,
   ExigenceNIS2,
   Referentiel,
-} from '../../metier/nis2/exigence';
-import { AdaptateurEnvironnement } from '../adaptateurEnvironnement';
-import { ClientHttp } from '../clientHttp';
-import { EntrepotGrist } from '../entrepotGrist';
+} from '../../metier/nis2/exigence.js';
+import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
+import { ClientHttp } from '../clientHttp.js';
+import { EntrepotGrist } from '../entrepotGrist.js';
 
 export type ExigenceGrist = {
   fields: {

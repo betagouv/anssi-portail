@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { ConfigurationServeur } from './configurationServeur';
-import { corpsVide, valideCorpsRequete } from './zod';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { corpsVide, valideCorpsRequete } from './zod.js';
 
 export const ressourceInfosSite = ({ adaptateurEnvironnement }: ConfigurationServeur) => {
   const routeur = Router();

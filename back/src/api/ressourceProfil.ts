@@ -1,10 +1,10 @@
 import { Request, Response, Router } from 'express';
 import { decode } from 'html-entities';
-import { estCodeDepartement, regionDuDepartement } from '../metier/referentielDepartements';
-import { Organisation, Utilisateur } from '../metier/utilisateur';
-import { ConfigurationServeur } from './configurationServeur';
-import { filetRouteAsynchrone } from './middleware';
-import { corpsVide, valideCorpsRequete } from './zod';
+import { estCodeDepartement, regionDuDepartement } from '../metier/referentielDepartements.js';
+import { Organisation, Utilisateur } from '../metier/utilisateur.js';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { filetRouteAsynchrone } from './middleware.js';
+import { corpsVide, valideCorpsRequete } from './zod.js';
 
 const ressourceProfil = ({
   adaptateurJWT,

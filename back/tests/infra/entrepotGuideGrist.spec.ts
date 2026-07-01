@@ -1,10 +1,10 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
-import { ClientHttp } from '../../src/infra/clientHttp';
-import { EntrepotGuideGrist, GuideGrist } from '../../src/infra/entrepotGuideGrist';
-import { fauxAdaptateurEnvironnement } from '../api/fauxObjets';
-import { ConstructeurGuideGrist } from '../api/guides/constructeurGuideGrist';
-import { fabriqueClientGet, fabriqueFauxClientHttp } from './fournisseurClientHttp';
+import { ClientHttp } from '../../src/infra/clientHttp.js';
+import { EntrepotGuideGrist, GuideGrist } from '../../src/infra/entrepotGuideGrist.js';
+import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
+import { ConstructeurGuideGrist } from '../api/guides/constructeurGuideGrist.js';
+import { fabriqueClientGet, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
 
 describe("L'entrepot de guide Grist", () => {
   function prepareEntrepotGristAvecEnregistrements(records: GuideGrist[]) {
