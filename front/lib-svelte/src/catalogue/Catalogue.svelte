@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import ControleSegmente from '../navigation/ControleSegmente.svelte';
-  import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '../navigation/fragmentDeNavigation';
+  import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '../stores/profil.store';
   import ChampRecherche from '../ui/ChampRecherche.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
@@ -51,15 +51,12 @@
     idsCollection.map((i) => nomsCollectionsGuide[i]);
 
   // Gestion du fragment
-  let fragmentDeNavigation = $state(creeLeFragmentDeNavigation(window.location.hash));
+  let fragmentDeNavigation = creeLeFragmentDeNavigation();
 
   // Gestion de la section
-  type Section = 'guides' | 'ressourcesEtServices';
-  let sectionActive = $derived<Section>('guides');
-  let indexActif = $derived(sectionActive === 'guides' ? 0 : 1);
-  $effect(() => {
-    sectionActive = indexActif === 0 ? 'guides' : 'ressourcesEtServices';
-  });
+  let idÉlémentSélectionné = $derived(
+    fragmentDeNavigation.section === 'ressourcesEtServices' ? 'ressources-et-services' : 'guides'
+  );
 
   // Gestion des filtres
   const reinitialiseFiltres = () => recherches.reinitialise();
@@ -81,7 +78,7 @@
     fragmentDeNavigation.change('accessibilite', $rechercheParDroitAcces);
     fragmentDeNavigation.change('types', $rechercheParTypologie);
     fragmentDeNavigation.change('sources', $rechercheParSource);
-    window.location.hash = fragmentDeNavigation.serialise();
+    fragmentDeNavigation.actualise();
   });
 
   // Gestion du chargement
@@ -110,7 +107,7 @@
 
 <FiltresMobile filtreActif={$recherches.filtreActif}>
   <FiltreBesoin />
-  {#if sectionActive === 'guides'}
+  {#if idÉlémentSélectionné === 'guides'}
     <FiltreLangue />
     <FiltreCollection />
   {:else}
@@ -131,13 +128,12 @@
     { id: 'guides', titre: 'Guides de l’ANSSI', icone: 'book-2-line', ancre: 'guides' },
     { id: 'ressources-et-services', titre: 'Services et outils', icone: 'list-check', ancre: 'ressourcesEtServices' },
   ]}
-  bind:indexActif
+  bind:idÉlémentSélectionné
   {fragmentDeNavigation}
-  lorsDuChangement={appliqueLesFiltres}
 ></ControleSegmente>
 
 <dsfr-container class="contenu-catalogue">
-  {#if !$profilStore && sectionActive === 'guides'}
+  {#if !$profilStore && idÉlémentSélectionné === 'guides'}
     <div class="entete">
       <InciteASAbonner />
     </div>
@@ -146,7 +142,7 @@
   <div class="grille">
     <FiltresBureau filtreActif={$recherches.filtreActif}>
       <ChampRecherche slot="avant-entete" bind:recherche={$rechercheTextuelle} />
-      {#if sectionActive === 'guides'}
+      {#if idÉlémentSélectionné === 'guides'}
         <FiltreLangue />
         <FiltreCollection />
       {:else}
@@ -157,7 +153,7 @@
       <input type="button" class="bouton primaire" value="Réinitialiser les filtres" onclick={reinitialiseFiltres} />
     </FiltresBureau>
 
-    {#if sectionActive === 'guides'}
+    {#if idÉlémentSélectionné === 'guides'}
       {#each $guidesFiltres.resultats as guide (guide.id)}
         <CarteItem item={guide} avecBoutonFavori />
       {:else}
