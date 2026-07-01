@@ -26,5 +26,6 @@ export const aseptiseHtml = (html: string) =>
   });
 
 export function decodeEntiteHtml(_inputStr: string) {
-  throw Error('Implementation serveur à venir');
+  // throw Error('Implementation serveur à venir');
+  return _inputStr;
 }

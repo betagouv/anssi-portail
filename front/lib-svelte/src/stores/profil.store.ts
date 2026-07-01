@@ -17,14 +17,21 @@ export type Profil = {
 
 const { subscribe, set } = writable<Profil | undefined>(undefined);
 
-axios.get<Profil>('/api/profil').then(async ({ data: profil }) => {
-  if (profil.email) {
-    set(profil);
-    await verifieResultatTestARevendiquer();
-    return;
-  }
-  set(undefined);
-});
+if (typeof window !== 'undefined') {
+  axios
+    .get<Profil>('/api/profil')
+    .then(async ({ data: profil }) => {
+      if (profil.email) {
+        set(profil);
+        await verifieResultatTestARevendiquer();
+        return;
+      }
+      set(undefined);
+    })
+    .catch(() => {
+      set(undefined);
+    });
+}
 
 export const profilStore = {
   subscribe,

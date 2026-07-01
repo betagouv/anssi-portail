@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 import { randomBytes } from 'node:crypto';
 import fs from 'node:fs';
+import { AdaptateurEnrichissement } from '../infra/adaptateurEnrichissement';
 import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
 import { AdaptateurHachage } from '../infra/adaptateurHachage';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
@@ -31,10 +32,12 @@ export const fabriqueMiddleware = ({
   adaptateurJWT,
   fournisseurChemin,
   adaptateurEnvironnement,
+  adaptateurEnrichissement,
 }: {
   adaptateurJWT: AdaptateurJWT;
   fournisseurChemin: FournisseurChemin;
   adaptateurEnvironnement: AdaptateurEnvironnement;
+  adaptateurEnrichissement: AdaptateurEnrichissement;
 }): Middleware => {
   const interdisLaMiseEnCache = async (_requete: Request, reponse: Response, suite: NextFunction) => {
     reponse.set({
@@ -82,14 +85,16 @@ export const fabriqueMiddleware = ({
   const ajouteMethodeEnrichissement = async (_: Request, reponse: Response, suite: NextFunction) => {
     const nonceAleatoire = randomBytes(16).toString('base64');
     reponse.locals.nonce = nonceAleatoire;
-    reponse.envoieFichierEnrichi = (chemin: string) => {
+    reponse.envoieFichierEnrichi = async (chemin: string) => {
       try {
         const fichier = fs.readFileSync(chemin, 'utf-8');
         const avecNonce = fichier.replaceAll('%%NONCE%%', nonceAleatoire);
         const avecNonceEtVersion = avecNonce.replaceAll('%%VERSION%%', adaptateurEnvironnement.versionDeConstruction());
-        reponse.send(avecNonceEtVersion);
+        const contenuPage = await adaptateurEnrichissement.enrichisAvecComposants(chemin, avecNonceEtVersion);
+
+        reponse.send(contenuPage);
       } catch {
-        reponse
+        await reponse
           .status(404)
           .set('Content-Type', 'text/html')
           .envoieFichierEnrichi(fournisseurChemin.ressourceDeBase('404.html'));
@@ -172,7 +177,7 @@ export const fabriqueMiddleware = ({
 
   const verifieModeMaintenance = async (_requete: Request, reponse: Response, suite: NextFunction) => {
     if (adaptateurEnvironnement.maintenance().actif()) {
-      reponse
+      await reponse
         .status(HttpStatusCode.ServiceUnavailable)
         .set('Content-Type', 'text/html')
         .envoieFichierEnrichi(fournisseurChemin.ressourceDeBase('maintenance.html'));

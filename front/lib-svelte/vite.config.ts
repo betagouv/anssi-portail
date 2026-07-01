@@ -1,3 +1,5 @@
+/// <reference types="vitest/config" />
+
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import * as Vite from 'vite';
@@ -31,6 +33,7 @@ export default defineConfig({
   ],
   build: {
     cssCodeSplit: false,
+    outDir: 'dist/client',
     rollupOptions: {
       input: {
         'avis-utilisateur': 'src/main-avis-utilisateur.ts',
