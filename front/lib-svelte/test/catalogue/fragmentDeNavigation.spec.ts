@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { BesoinCyber } from '../../src/catalogue/Catalogue.types';
 import { Langue } from '../../src/catalogue/Guide.types';
-import { creeLeFragmentDeNavigation } from '../../src/navigation/fragmentDeNavigation';
+import { creeLeFragmentDeNavigation } from '../../src/navigation/fragmentDeNavigation.svelte';
 
 describe('Le fragment de navigation', () => {
   it('permet de récupérer la section', () => {
@@ -69,7 +69,7 @@ describe('Le fragment de navigation', () => {
   it('sérialise le fragment de navigation', () => {
     const fragmentDeNavigation = creeLeFragmentDeNavigation('#section?besoin=REAGIR&langues=EN,FR');
 
-    const versionSerialisee = fragmentDeNavigation.serialise();
+    const versionSerialisee = fragmentDeNavigation.actualise();
 
     expect(versionSerialisee).toBe('#section?besoin=REAGIR&langues=EN,FR');
   });
@@ -96,7 +96,7 @@ describe('Le fragment de navigation', () => {
 
       fragmentDeNavigation.change('langues', []);
 
-      expect(fragmentDeNavigation.serialise()).toEqual('#');
+      expect(fragmentDeNavigation.actualise()).toEqual('#');
     });
 
     it('supprime le filtre de type chaine', () => {
@@ -104,15 +104,15 @@ describe('Le fragment de navigation', () => {
 
       fragmentDeNavigation.change('besoin', null);
 
-      expect(fragmentDeNavigation.serialise()).toEqual('#');
+      expect(fragmentDeNavigation.actualise()).toEqual('#');
     });
   });
 
   it('permet de modifier la section', () => {
     const fragmentDeNavigation = creeLeFragmentDeNavigation('#section');
 
-    fragmentDeNavigation.changeSection('autre-section');
+    fragmentDeNavigation.changeSection('autre-section', false);
 
-    expect(fragmentDeNavigation.serialise()).toBe('#autre-section');
+    expect(fragmentDeNavigation.actualise()).toBe('#autre-section');
   });
 });

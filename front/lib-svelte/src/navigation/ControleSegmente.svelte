@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from './fragmentDeNavigation';
+  import { type FragmentDeNavigation, creeLeFragmentDeNavigation } from './fragmentDeNavigation.svelte';
 
   type Props = {
     elements: {
@@ -8,41 +8,31 @@
       ancre?: string;
       icone?: string;
     }[];
-    indexActif: number;
+    idÉlémentSélectionné?: string;
     fragmentDeNavigation?: FragmentDeNavigation;
-    lorsDuChangement?: (fragmentDeNavigation: FragmentDeNavigation) => void;
     lorsDuClic?: (index: number) => void;
   };
   let {
     elements,
-    indexActif = $bindable(0),
-    fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash),
-    lorsDuChangement,
+    idÉlémentSélectionné = $bindable(),
+    fragmentDeNavigation = creeLeFragmentDeNavigation(),
     lorsDuClic,
   }: Props = $props();
-  const hasIcon = $derived(elements.some((e) => !!e.icone));
 
-  // Gestion du fragment
-  const changeLeFragmentDeNavigation = () => {
-    fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
-    lorsDuChangement?.(fragmentDeNavigation);
-  };
-  $effect(() => {
-    window.addEventListener('hashchange', changeLeFragmentDeNavigation);
-    return () => {
-      window.removeEventListener('hashchange', changeLeFragmentDeNavigation);
-    };
+  const hasIcon = $derived(elements.some((e) => !!e.icone));
+  const indexÉlémentSélectionné = $derived.by(() => {
+    const idx = elements.findIndex((e) => e.id === idÉlémentSélectionné);
+    return idx >= 0 ? idx : 0;
   });
+
   const changeDeSection = (index: number) => {
-    indexActif = index;
+    idÉlémentSélectionné = elements[index]?.id;
     if (lorsDuClic) {
       lorsDuClic(index);
-      return;
     }
-    const ancre = elements[indexActif].ancre;
+    const ancre = elements[index].ancre;
     if (ancre) {
-      fragmentDeNavigation.changeSection(ancre);
-      window.location.hash = fragmentDeNavigation.serialise();
+      fragmentDeNavigation.changeSection(ancre, true);
     }
   };
 </script>
@@ -51,8 +41,8 @@
   <dsfr-segmented
     noLegend
     {hasIcon}
-    elements={elements.map((e, idx) => ({ id: e.id, name: e.id, label: e.titre, icon: e.icone, value: idx }))}
-    value={indexActif}
+    elements={elements?.map((e, idx) => ({ id: e.id, name: e.id, label: e.titre, icon: e.icone, value: idx }))}
+    value={indexÉlémentSélectionné}
     onvaluechanged={(e: CustomEvent<number>) => changeDeSection(e.detail)}
   ></dsfr-segmented>
 </div>
