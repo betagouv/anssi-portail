@@ -1,12 +1,12 @@
 import { Request, Response, Router } from 'express';
-import { EntrepotMesure } from '../../metier/entrepotMesure';
-import { Mesure } from '../../metier/mesure';
-import { Utilisateur } from '../../metier/utilisateur';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { corpsVide, valideCorpsRequete } from '../zod';
-import { Module } from '../../metier/module';
-import { EntrepôtModule } from '../../metier/EntrepotModule';
+import { EntrepotMesure } from '../../metier/entrepotMesure.js';
+import { Mesure } from '../../metier/mesure.js';
+import { Utilisateur } from '../../metier/utilisateur.js';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { corpsVide, valideCorpsRequete } from '../zod.js';
+import { Module } from '../../metier/module.js';
+import { EntrepôtModule } from '../../metier/EntrepotModule.js';
 
 const mesureDeModule = async (
   idMesure: string,

@@ -1,6 +1,6 @@
-import { Mesure } from './mesure';
-import { PriseEnCompte } from './PriseEnCompte';
-import { Utilisateur } from './utilisateur';
+import { Mesure } from './mesure.js';
+import { PriseEnCompte } from './PriseEnCompte.js';
+import { Utilisateur } from './utilisateur.js';
 
 export interface EntrepotPriseEnCompte {
   ajoute(priseEnCompte: PriseEnCompte): Promise<void>;

@@ -1,7 +1,7 @@
 import { isAxiosError } from 'axios';
-import axiosInstance from './axiosInstance';
+import axiosInstance from './axiosInstance.js';
 import { decode } from 'html-entities';
-import { adaptateurProfilAnssiVide } from './adaptateurProfilAnssiVide';
+import { adaptateurProfilAnssiVide } from './adaptateurProfilAnssiVide.js';
 
 const CONFIGURATION_AUTHENTIFICATION = {
   headers: {

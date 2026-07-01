@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { ConfigurationServeur } from './configurationServeur';
-import { fabriqueGestionnaireRessourceCellar } from './gestionnaireRessourceCellar';
-import { corpsVide, valideCorpsRequete } from './zod';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { fabriqueGestionnaireRessourceCellar } from './gestionnaireRessourceCellar.js';
+import { corpsVide, valideCorpsRequete } from './zod.js';
 
 export const ressourceVisa = ({ cellar }: ConfigurationServeur): Router => {
   const routeur = Router();

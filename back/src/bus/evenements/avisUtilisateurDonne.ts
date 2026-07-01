@@ -1,4 +1,4 @@
-import { NiveauDeSatisfaction } from '../../metier/niveauDeSatisfaction';
+import { NiveauDeSatisfaction } from '../../metier/niveauDeSatisfaction.js';
 
 export class AvisUtilisateurDonne {
   niveauDeSatisfaction: NiveauDeSatisfaction;

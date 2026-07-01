@@ -2,17 +2,17 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../../src/api/msc';
-import { ProprieteTestRevendiquee } from '../../../src/bus/evenements/proprieteTestRevendiquee';
-import { TestRealise } from '../../../src/bus/evenements/testRealise';
-import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
-import { Utilisateur } from '../../../src/metier/utilisateur';
-import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
-import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
-import { encodeSession } from '../cookie';
-import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise } from '../fauxObjets';
-import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
+import { creeServeur } from '../../../src/api/msc.js';
+import { ProprieteTestRevendiquee } from '../../../src/bus/evenements/proprieteTestRevendiquee.js';
+import { TestRealise } from '../../../src/bus/evenements/testRealise.js';
+import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite.js';
+import { Utilisateur } from '../../../src/metier/utilisateur.js';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
+import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire.js';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
+import { encodeSession } from '../cookie.js';
+import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise } from '../fauxObjets.js';
+import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi.js';
 
 const REGEX_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 

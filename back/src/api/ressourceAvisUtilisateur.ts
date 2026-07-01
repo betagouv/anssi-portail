@@ -1,10 +1,10 @@
 import { Response, Router } from 'express';
 import z from 'zod';
-import { AvisUtilisateurDonne } from '../bus/evenements/avisUtilisateurDonne';
-import { ConfigurationServeur } from './configurationServeur';
-import { filetRouteAsynchrone } from './middleware';
-import { schemaRessourceAvisUtilisateur } from './ressourceAvisUtilisateur.schema';
-import { valideCorpsRequete } from './zod';
+import { AvisUtilisateurDonne } from '../bus/evenements/avisUtilisateurDonne.js';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { filetRouteAsynchrone } from './middleware.js';
+import { schemaRessourceAvisUtilisateur } from './ressourceAvisUtilisateur.schema.js';
+import { valideCorpsRequete } from './zod.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 export const ressourceAvisUtilisateur = ({ busEvenements, messagerieInstantanee }: ConfigurationServeur): Router => {

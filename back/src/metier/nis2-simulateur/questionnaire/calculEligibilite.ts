@@ -1,7 +1,7 @@
 import * as fs from 'node:fs';
-import type { EtatQuestionnaire } from '../EtatQuestionnaire';
-import type { ResultatAvecAnalyse } from './ResultatAvecAnalyse';
-import { evalueEligibilite } from './evalueEligibilite';
+import type { EtatQuestionnaire } from '../EtatQuestionnaire.js';
+import type { ResultatAvecAnalyse } from './ResultatAvecAnalyse.js';
+import { evalueEligibilite } from './evalueEligibilite.js';
 
 export type ReponsesEtResultatAvecAnalyse = {
   reponses: EtatQuestionnaire;

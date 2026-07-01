@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "serveur.ts",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "dev": "npm-run-all --parallel --race dev:bdd dev:server",

@@ -1,4 +1,4 @@
-import { Mesure } from './mesure';
+import { Mesure } from './mesure.js';
 
 export class Module {
   mesures: Mesure[] = [];

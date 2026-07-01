@@ -2,7 +2,7 @@ import {
   ValeursSousSecteurEnergie,
   ValeursSousSecteurFabrication,
   ValeursSousSecteurTransport,
-} from './SousSecteurActivite.valeurs';
+} from './SousSecteurActivite.valeurs.js';
 
 export type SousSecteurEnergie = (typeof ValeursSousSecteurEnergie)[number];
 export type SousSecteurTransport = (typeof ValeursSousSecteurTransport)[number];

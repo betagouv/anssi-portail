@@ -4,7 +4,7 @@ import type {
   SousSecteurEnergie,
   SousSecteurFabrication,
   SousSecteurTransport,
-} from './SousSecteurActivite.definitions';
+} from './SousSecteurActivite.definitions.js';
 
 export const libellesSousSecteursEnergie: DetailsSousSecteurUnique<SousSecteurEnergie> = {
   electricite: 'Électricité',

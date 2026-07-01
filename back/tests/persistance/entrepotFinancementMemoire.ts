@@ -1,6 +1,6 @@
-import { EntrepotFinancement } from '../../src/metier/entrepotFinancement';
-import { Financement } from '../../src/metier/financement';
-import { EntrepotMemoire } from './entrepotMemoire';
+import { EntrepotFinancement } from '../../src/metier/entrepotFinancement.js';
+import { Financement } from '../../src/metier/financement.js';
+import { EntrepotMemoire } from './entrepotMemoire.js';
 
 export class EntrepotFinancementMemoire extends EntrepotMemoire<Financement> implements EntrepotFinancement {
   parId: (id: number) => Promise<Financement | undefined> = async (id: number) => {

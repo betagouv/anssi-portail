@@ -1,6 +1,6 @@
-import { EntrepotSessionDeGroupe } from '../../src/metier/entrepotSessionDeGroupe';
-import { EntrepotMemoire } from './entrepotMemoire';
-import { SessionDeGroupe } from '../../src/metier/sessionDeGroupe';
+import { EntrepotSessionDeGroupe } from '../../src/metier/entrepotSessionDeGroupe.js';
+import { EntrepotMemoire } from './entrepotMemoire.js';
+import { SessionDeGroupe } from '../../src/metier/sessionDeGroupe.js';
 
 export class EntrepotSessionDeGroupeMemoire
   extends EntrepotMemoire<SessionDeGroupe>

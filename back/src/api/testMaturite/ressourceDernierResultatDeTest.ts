@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { estCodeRegion, regionParCode } from '../../metier/referentielRegions';
-import { secteurParCode } from '../../metier/referentielSecteurs';
-import { trancheEffectifParCode } from '../../metier/referentielTranchesEffectifEtablissement';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { corpsVide, valideCorpsRequete } from '../zod';
+import { estCodeRegion, regionParCode } from '../../metier/referentielRegions.js';
+import { secteurParCode } from '../../metier/referentielSecteurs.js';
+import { trancheEffectifParCode } from '../../metier/referentielTranchesEffectifEtablissement.js';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { corpsVide, valideCorpsRequete } from '../zod.js';
 
 const ressourceDernierResultatDeTest = ({
   entrepotResultatTest,

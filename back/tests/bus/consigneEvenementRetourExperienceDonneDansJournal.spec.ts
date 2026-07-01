@@ -1,11 +1,11 @@
 import { beforeEach, describe, it } from 'node:test';
 import assert from 'node:assert';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage';
-import { fauxAdaptateurHachage } from '../api/fauxObjets';
-import { consigneEvenementRetourExperienceDonneDansJournal } from '../../src/bus/consigneEvenementRetourExperienceDonneDansJournal';
-import { RetourExperienceDonne } from '../../src/bus/evenements/retourExperienceDonne';
+import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
+import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
+import { consigneEvenementRetourExperienceDonneDansJournal } from '../../src/bus/consigneEvenementRetourExperienceDonneDansJournal.js';
+import { RetourExperienceDonne } from '../../src/bus/evenements/retourExperienceDonne.js';
 
 describe("L'abonnement qui consigne le don d'un retour d’expérience dans le journal", () => {
   let adaptateurHorloge: AdaptateurHorloge;

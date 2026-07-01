@@ -1,45 +1,45 @@
 import { CmsCrisp } from '@lab-anssi/lib';
-import { adaptateurJWT } from './api/adaptateurJWT';
-import { fournisseurChemin } from './api/fournisseurChemin';
-import { fabriqueMiddleware } from './api/middleware';
-import { creeServeur } from './api/msc';
-import { adaptateurOIDC } from './api/oidc/adaptateurOIDC';
-import { BusEvenements } from './bus/busEvenements';
-import { cableTousLesAbonnes } from './bus/cablage';
-import { EntrepôtModulePostgres } from './entrepotModulePostgres';
-import { adaptateurCellar } from './infra/adaptateurCellar';
-import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
-import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo';
-import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
-import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSentry';
-import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
-import { adaptateurHorloge } from './infra/adaptateurHorloge';
-import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal';
-import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber';
-import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi';
-import { fabriqueAdaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise';
-import axiosInstance from './infra/axiosInstance';
-import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres';
-import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist';
-import { EntrepotGuideGrist } from './infra/entrepotGuideGrist';
-import { EntrepotGuideTravailGrist } from './infra/entrepotGuideTravailGrist';
-import { EntrepotMesurePostgres } from './infra/entrepotMesurePostgres';
-import { EntrepotPriseEnComptePostgres } from './infra/entrepotPriseEnComptePostgres';
-import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres';
-import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres';
-import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres';
-import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPostgres';
-import { GenerateurImageAvif } from './infra/generateurImage';
-import { messagerieMattermost } from './infra/messagerieMattermost';
-import { EntrepotExigenceGrist } from './infra/nis2/entrepotExigenceGrist';
-import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage';
-import { EntrepotGuide } from './metier/entrepotGuide';
-import { EntrepotGuideTravail } from './metier/entrepotGuideTravail';
-import { EntrepotMesure } from './metier/entrepotMesure';
-import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
-import { EntrepotExigence } from './metier/nis2/entrepotExigence';
-import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides';
-import { AdaptateurEnrichissementSvelte } from './infra/adaptateurEnrichissement';
+import { adaptateurJWT } from './api/adaptateurJWT.js';
+import { fournisseurChemin } from './api/fournisseurChemin.js';
+import { fabriqueMiddleware } from './api/middleware.js';
+import { creeServeur } from './api/msc.js';
+import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
+import { BusEvenements } from './bus/busEvenements.js';
+import { cableTousLesAbonnes } from './bus/cablage.js';
+import { EntrepôtModulePostgres } from './entrepotModulePostgres.js';
+import { adaptateurCellar } from './infra/adaptateurCellar.js';
+import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement.js';
+import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo.js';
+import { AdaptateurEnrichissementSvelte } from './infra/adaptateurEnrichissement.js';
+import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement.js';
+import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSentry.js';
+import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage.js';
+import { adaptateurHorloge } from './infra/adaptateurHorloge.js';
+import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal.js';
+import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber.js';
+import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi.js';
+import { fabriqueAdaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise.js';
+import axiosInstance from './infra/axiosInstance.js';
+import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres.js';
+import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist.js';
+import { EntrepotGuideGrist } from './infra/entrepotGuideGrist.js';
+import { EntrepotGuideTravailGrist } from './infra/entrepotGuideTravailGrist.js';
+import { EntrepotMesurePostgres } from './infra/entrepotMesurePostgres.js';
+import { EntrepotPriseEnComptePostgres } from './infra/entrepotPriseEnComptePostgres.js';
+import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres.js';
+import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres.js';
+import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres.js';
+import { EntrepotUtilisateurMPAPostgres } from './infra/entrepotUtilisateurMPAPostgres.js';
+import { GenerateurImageAvif } from './infra/generateurImage.js';
+import { messagerieMattermost } from './infra/messagerieMattermost.js';
+import { EntrepotExigenceGrist } from './infra/nis2/entrepotExigenceGrist.js';
+import { fabriqueServiceVerificationCoherenceSecretsHachage } from './infra/serviceVerificationCoherenceSecretsHachage.js';
+import { EntrepotGuide } from './metier/entrepotGuide.js';
+import { EntrepotGuideTravail } from './metier/entrepotGuideTravail.js';
+import { EntrepotMesure } from './metier/entrepotMesure.js';
+import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe.js';
+import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
+import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
@@ -123,57 +123,60 @@ const serviceSanteGuides = fabriqueServiceSanteGuides(cellar);
 
 const port = process.env.PORT || 3000;
 
-serviceCoherenceSecretsHachage
-  .verifieCoherenceSecrets()
-  .catch((raison) => {
-    console.error(raison.message);
+(async () => {
+  try {
+    await serviceCoherenceSecretsHachage.verifieCoherenceSecrets();
+  } catch (raison: unknown) {
+    console.error((raison as Error).message);
+    // @ts-expect-error L’erreur peut contenir plusieurs erreurs
     console.error(raison.errors.map((e: Error) => e.message).join('\n'));
     process.exit(1);
-  })
-  .then(() => console.log('✅ Vérification des secrets réussie'))
-  .then(() => {
-    return creeServeur({
-      fournisseurChemin,
-      middleware: fabriqueMiddleware({
-        adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
-        fournisseurChemin,
-        adaptateurEnvironnement,
-        adaptateurEnrichissement: new AdaptateurEnrichissementSvelte(),
-      }),
-      adaptateurOIDC,
+  }
+
+  console.log('✅ Vérification des secrets réussie');
+
+  creeServeur({
+    fournisseurChemin,
+    middleware: fabriqueMiddleware({
       adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
-      adaptateurGestionErreur: adaptateurGestionErreurSentry,
-      busEvenements,
-      entrepotUtilisateur,
-      reseau: {
-        trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
-        maxRequetesParMinutes: adaptateurEnvironnement.serveur().maxRequetesParMinute(),
-        maxRequetesParMinuteAPI: adaptateurEnvironnement.serveur().maxRequetesParMinuteAPI(),
-        ipAutorisees: adaptateurEnvironnement.serveur().ipAutorisees(),
-      },
-      adaptateurRechercheEntreprise,
-      adaptateurProfilAnssi,
-      entrepotResultatTest,
-      entrepotFavori,
-      entrepotSessionDeGroupe,
-      adaptateurMonAideCyber,
+      fournisseurChemin,
       adaptateurEnvironnement,
-      cmsCrisp,
-      generateurCodeSessionDeGroupe: new GenerateurAleatoireCodeSessionDeGroupe(entrepotSessionDeGroupe),
-      adaptateurHachage,
-      messagerieInstantanee,
-      entrepotFinancement,
-      entrepotGuide,
-      entrepotGuideTravail: entrepotGuideTravail,
-      entrepotExigence,
-      entrepotMesure,
-      entrepotPriseEnCompte,
-      entrepôtModule,
-      cellar,
-      serviceSanteGuides,
-      adaptateurEmail,
-      generateurImage: new GenerateurImageAvif(),
-    }).listen(port, () => {
-      console.log(`Le serveur écoute sur le port ${port}`);
-    });
+      adaptateurEnrichissement: new AdaptateurEnrichissementSvelte(),
+    }),
+    adaptateurOIDC,
+    adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
+    adaptateurGestionErreur: adaptateurGestionErreurSentry,
+    busEvenements,
+    entrepotUtilisateur,
+    reseau: {
+      trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
+      maxRequetesParMinutes: adaptateurEnvironnement.serveur().maxRequetesParMinute(),
+      maxRequetesParMinuteAPI: adaptateurEnvironnement.serveur().maxRequetesParMinuteAPI(),
+      ipAutorisees: adaptateurEnvironnement.serveur().ipAutorisees(),
+    },
+    adaptateurRechercheEntreprise,
+    adaptateurProfilAnssi,
+    entrepotResultatTest,
+    entrepotFavori,
+    entrepotSessionDeGroupe,
+    adaptateurMonAideCyber,
+    adaptateurEnvironnement,
+    cmsCrisp,
+    generateurCodeSessionDeGroupe: new GenerateurAleatoireCodeSessionDeGroupe(entrepotSessionDeGroupe),
+    adaptateurHachage,
+    messagerieInstantanee,
+    entrepotFinancement,
+    entrepotGuide,
+    entrepotGuideTravail: entrepotGuideTravail,
+    entrepotExigence,
+    entrepotMesure,
+    entrepotPriseEnCompte,
+    entrepôtModule,
+    cellar,
+    serviceSanteGuides,
+    adaptateurEmail,
+    generateurImage: new GenerateurImageAvif(),
+  }).listen(port, () => {
+    console.log(`Le serveur écoute sur le port ${port}`);
   });
+})();

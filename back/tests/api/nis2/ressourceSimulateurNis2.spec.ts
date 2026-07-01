@@ -2,11 +2,11 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import assert from 'node:assert';
 import { Express } from 'express';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
-import { creeServeur } from '../../../src/api/msc';
-import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
-import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
-import { SimulationNis2Terminee } from '../../../src/bus/evenements/simulationNis2Terminee';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
+import { creeServeur } from '../../../src/api/msc.js';
+import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
+import { SimulationNis2Terminee } from '../../../src/bus/evenements/simulationNis2Terminee.js';
 
 describe('La ressource qui gère le simulateur NIS2', () => {
   let serveur: Express;

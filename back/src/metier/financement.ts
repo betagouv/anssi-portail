@@ -1,4 +1,4 @@
-import { CodeRegion, regionParNom } from './referentielRegions';
+import { CodeRegion, regionParNom } from './referentielRegions.js';
 
 export class Financement {
   id: number;

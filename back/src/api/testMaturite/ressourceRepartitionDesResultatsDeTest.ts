@@ -1,11 +1,11 @@
 import { Request, Response, Router } from 'express';
-import { estCodeRegion } from '../../metier/referentielRegions';
-import { estCodeSecteur } from '../../metier/referentielSecteurs';
-import { trancheEffectifParCode } from '../../metier/referentielTranchesEffectifEtablissement';
-import { RepartitionResultatsTest } from '../../metier/repartitionResultatsTest';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { corpsVide, valideCorpsRequete } from '../zod';
+import { estCodeRegion } from '../../metier/referentielRegions.js';
+import { estCodeSecteur } from '../../metier/referentielSecteurs.js';
+import { trancheEffectifParCode } from '../../metier/referentielTranchesEffectifEtablissement.js';
+import { RepartitionResultatsTest } from '../../metier/repartitionResultatsTest.js';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { corpsVide, valideCorpsRequete } from '../zod.js';
 
 export const ressourceRepartitionDesResultatsDeTest = ({
   entrepotResultatTest,

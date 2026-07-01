@@ -2,17 +2,17 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../../src/api/msc';
+import { creeServeur } from '../../../src/api/msc.js';
 import {
   Correspondance,
   ExigenceAE,
   ExigenceCyFun23,
   ExigenceISO,
   ExigenceNIS2,
-} from '../../../src/metier/nis2/exigence';
-import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
-import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
+} from '../../../src/metier/nis2/exigence.js';
+import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
+import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 
 describe('La ressource des Exigences NIS 2', () => {
   let serveur: Express;

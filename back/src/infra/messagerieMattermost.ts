@@ -1,12 +1,12 @@
-import axiosInstance from './axiosInstance';
+import axiosInstance from './axiosInstance.js';
 import {
   AvisNegatifSurUneMesure,
   AvisUtilisateur,
   MessagerieInstantanee,
   RetourExperience,
-} from '../metier/messagerieInstantanee';
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
-import { aseptiseMarkdown } from './markdown';
+} from '../metier/messagerieInstantanee.js';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
+import { aseptiseMarkdown } from './markdown.js';
 
 export const messagerieMattermost = ({
   adaptateurEnvironnement,

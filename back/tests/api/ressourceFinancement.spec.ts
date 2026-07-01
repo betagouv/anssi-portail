@@ -2,10 +2,10 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/msc';
-import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire';
-import { configurationDeTestDuServeur } from './fauxObjets';
-import { financementCyberPME } from './objetsPretsALEmploi';
+import { creeServeur } from '../../src/api/msc.js';
+import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire.js';
+import { configurationDeTestDuServeur } from './fauxObjets.js';
+import { financementCyberPME } from './objetsPretsALEmploi.js';
 
 describe('La ressource Financement', () => {
   let serveur: Express;

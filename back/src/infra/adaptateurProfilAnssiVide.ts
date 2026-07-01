@@ -1,4 +1,4 @@
-import { AdaptateurProfilAnssi, ProfilAnssi } from './adaptateurProfilAnssi';
+import { AdaptateurProfilAnssi, ProfilAnssi } from './adaptateurProfilAnssi.js';
 
 export const adaptateurProfilAnssiVide = (): AdaptateurProfilAnssi => ({
   recupere: async (email: string) => ({

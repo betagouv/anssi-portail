@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
-import { detruisSession } from '../session';
-import { corpsVide, valideCorpsRequete } from '../zod';
+import { detruisSession } from '../session.js';
+import { corpsVide, valideCorpsRequete } from '../zod.js';
 
 export const ressourceApresDeconnexionOIDC = () => {
   const routes = Router();

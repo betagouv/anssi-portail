@@ -1,8 +1,8 @@
 import { Request, Response, Router } from 'express';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { valideParametresRequete } from '../zod';
-import { schemaRessourceFavorisPartages } from './ressourceFavorisPartages.schema';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { valideParametresRequete } from '../zod.js';
+import { schemaRessourceFavorisPartages } from './ressourceFavorisPartages.schema.js';
 
 const ressourceFavorisPartages = ({ entrepotFavori, entrepotUtilisateur }: ConfigurationServeur) => {
   const routeur = Router();

@@ -2,19 +2,19 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../../src/api/msc';
-import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
-import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
-import { Mesure } from '../../../src/metier/mesure';
-import { Module } from '../../../src/metier/module';
-import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
-import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire';
-import { encodeSession } from '../cookie';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
-import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
-import { mesureDeTest } from './constructeurDeMesure';
-import { utilisateurDeTest } from './constructeurDUtilisateur';
+import { creeServeur } from '../../../src/api/msc.js';
+import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
+import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
+import { Mesure } from '../../../src/metier/mesure.js';
+import { Module } from '../../../src/metier/module.js';
+import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
+import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire.js';
+import { encodeSession } from '../cookie.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
+import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi.js';
+import { mesureDeTest } from './constructeurDeMesure.js';
+import { utilisateurDeTest } from './constructeurDUtilisateur.js';
 
 describe('La ressource d’un module', () => {
   describe('sur requête GET', () => {

@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { Telephone } from '../../src/metier/telephone';
+import { Telephone } from '../../src/metier/telephone.js';
 
 describe('Les numéros de télephone', () => {
   it('se déclinent en format international', () => {

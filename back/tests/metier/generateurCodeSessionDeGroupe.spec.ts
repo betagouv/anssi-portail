@@ -1,8 +1,8 @@
 import { beforeEach, describe, it } from 'node:test';
-import { GenerateurAleatoireCodeSessionDeGroupe } from '../../src/metier/generateurCodeSessionDeGroupe';
+import { GenerateurAleatoireCodeSessionDeGroupe } from '../../src/metier/generateurCodeSessionDeGroupe.js';
 import assert from 'node:assert';
-import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire';
-import { SessionDeGroupe } from '../../src/metier/sessionDeGroupe';
+import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire.js';
+import { SessionDeGroupe } from '../../src/metier/sessionDeGroupe.js';
 
 describe('Le générateur aléatoire de code de session de groupe', () => {
   let generateur: GenerateurAleatoireCodeSessionDeGroupe;

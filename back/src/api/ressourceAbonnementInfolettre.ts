@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import z from 'zod';
-import { ConfigurationServeur } from './configurationServeur';
-import { filetRouteAsynchrone } from './middleware';
-import { schemaAbonnementInfolettre } from './ressourceAbonnementInfolettre.schema';
-import { valideCorpsRequete } from './zod';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { filetRouteAsynchrone } from './middleware.js';
+import { schemaAbonnementInfolettre } from './ressourceAbonnementInfolettre.schema.js';
+import { valideCorpsRequete } from './zod.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 export const ressourceAbonnementInfolettre = ({ adaptateurEmail }: ConfigurationServeur) => {

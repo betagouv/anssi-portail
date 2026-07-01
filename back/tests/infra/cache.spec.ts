@@ -1,10 +1,10 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { Cache } from '../../src/infra/cache';
+import { Cache } from '../../src/infra/cache.js';
 // import { add } from 'date-fns';
-import { FournisseurHorloge } from '../../src/infra/fournisseurHorloge';
+import { FournisseurHorloge } from '../../src/infra/fournisseurHorloge.js';
 
-import { FournisseurHorlogeDeTest } from './fournisseurHorlogeDeTest';
+import { FournisseurHorlogeDeTest } from './fournisseurHorlogeDeTest.js';
 
 const _24_HEURES = 1440;
 

@@ -1,5 +1,5 @@
 import z from 'zod';
-import { schemas } from './schemas';
+import { schemas } from './schemas.js';
 
 export const schemaRessourceUtilisateurs = z.strictObject({
   token: z.string().nonempty('Le token est invalide'),

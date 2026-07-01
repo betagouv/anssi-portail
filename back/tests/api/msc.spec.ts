@@ -1,8 +1,8 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/msc';
-import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets';
+import { creeServeur } from '../../src/api/msc.js';
+import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets.js';
 import { join } from 'node:path';
 
 describe('La configuration de notre serveur', () => {

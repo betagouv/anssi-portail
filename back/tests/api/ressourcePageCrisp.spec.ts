@@ -2,10 +2,10 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/msc';
-import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
-import { MockCmsCrisp } from '../mockCmsCrisp';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from './fauxObjets';
+import { creeServeur } from '../../src/api/msc.js';
+import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
+import { MockCmsCrisp } from '../mockCmsCrisp.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from './fauxObjets.js';
 
 describe('quand requête GET sur `/api/pages-crisp/un-id-d-article`', () => {
   let serveur: Express;

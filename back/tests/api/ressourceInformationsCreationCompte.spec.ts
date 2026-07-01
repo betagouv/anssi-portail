@@ -1,18 +1,20 @@
 import { Express } from 'express';
-import { JsonWebTokenError } from 'jsonwebtoken';
+import jsonwebtoken from 'jsonwebtoken';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import { creeServeur } from '../../src/api/msc';
-import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi';
-import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
+import { AdaptateurJWT } from '../../src/api/adaptateurJWT.js';
+import { creeServeur } from '../../src/api/msc.js';
+import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi.js';
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
 import {
   configurationDeTestDuServeur,
   fauxAdaptateurJWT,
   fauxAdaptateurProfilAnssi,
   fauxAdaptateurRechercheEntreprise,
-} from './fauxObjets';
+} from './fauxObjets.js';
+
+const { JsonWebTokenError } = jsonwebtoken;
 
 describe("La ressource d'informations de création de compte", () => {
   let serveur: Express;

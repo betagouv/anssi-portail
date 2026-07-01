@@ -1,10 +1,10 @@
 import { Request, Response, Router } from 'express';
-import { Financement } from '../metier/financement';
-import { estCodeRegion } from '../metier/referentielRegions';
-import { trancheEffectifParCode } from '../metier/referentielTranchesEffectifEtablissement';
-import { ConfigurationServeur } from './configurationServeur';
-import { filetRouteAsynchrone } from './middleware';
-import { corpsVide, valideCorpsRequete } from './zod';
+import { Financement } from '../metier/financement.js';
+import { estCodeRegion } from '../metier/referentielRegions.js';
+import { trancheEffectifParCode } from '../metier/referentielTranchesEffectifEtablissement.js';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { filetRouteAsynchrone } from './middleware.js';
+import { corpsVide, valideCorpsRequete } from './zod.js';
 
 const construitFiltreFinancementParRegion = (codeRegion?: string) => {
   if (!estCodeRegion(codeRegion)) {

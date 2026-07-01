@@ -1,4 +1,4 @@
-import type { TypeEtape } from './InformationsEtape';
+import type { TypeEtape } from './InformationsEtape.js';
 import type {
   AppartenancePaysUnionEuropeenne,
   DesignationOperateurServicesEssentiels,
@@ -7,10 +7,10 @@ import type {
   TrancheNombreEmployes,
   TypeEntitePublique,
   TypeStructure,
-} from './ChampsSimulateur.definitions';
-import type { SecteurActivite } from './SecteurActivite.definitions';
-import type { SousSecteurActivite } from './SousSecteurActivite.definitions';
-import type { Activite } from './Activite.definitions';
+} from './ChampsSimulateur.definitions.js';
+import type { SecteurActivite } from './SecteurActivite.definitions.js';
+import type { SousSecteurActivite } from './SousSecteurActivite.definitions.js';
+import type { Activite } from './Activite.definitions.js';
 
 export type EtatQuestionnaire = {
   etapeCourante: TypeEtape;

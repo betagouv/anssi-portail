@@ -1,4 +1,4 @@
-import { AdaptateurEmail } from '../metier/adaptateurEmail';
+import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 
 export const adaptateurEmailConsole = (): AdaptateurEmail => ({
   envoieEmailBienvenue: async ({ email, prenom }: { email: string; prenom: string }) => {

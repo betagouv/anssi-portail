@@ -1,8 +1,8 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications';
-import { RegleEntiteOSE } from '../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleEntiteOSE';
-import { RegleSecteurs } from '../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleSecteurs';
+import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications.js';
+import { RegleEntiteOSE } from '../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleEntiteOSE.js';
+import { RegleSecteurs } from '../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleSecteurs.js';
 import {
   neSaitPas,
   nonRegulee,
@@ -10,9 +10,9 @@ import {
   reguleEI,
   reguleEnregistrementSeul,
   reguleSansPrecision,
-} from './aidesAuxTests';
-import { EnsembleDeSpecifications } from '../../../../src/metier/nis2-simulateur/questionnaire/EnsembleDeSpecifications';
-import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire';
+} from './aidesAuxTests.js';
+import { EnsembleDeSpecifications } from '../../../../src/metier/nis2-simulateur/questionnaire/EnsembleDeSpecifications.js';
+import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
 
 describe('Un ensemble de spécifications', () => {
   const oseEstReguleeEE = new Specifications([new RegleEntiteOSE(['oui'])], reguleEE(), 'R1000');

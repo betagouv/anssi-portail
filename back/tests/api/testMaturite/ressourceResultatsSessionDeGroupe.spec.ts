@@ -2,14 +2,14 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../../src/api/msc';
-import { EntrepotResultatTest } from '../../../src/metier/entrepotResultatTest';
-import { EntrepotSessionDeGroupe } from '../../../src/metier/entrepotSessionDeGroupe';
-import { DonneesCreationResultatTestMaturite, ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite';
-import { SessionDeGroupe } from '../../../src/metier/sessionDeGroupe';
-import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire';
-import { EntrepotSessionDeGroupeMemoire } from '../../persistance/EntrepotSessionDeGroupeMemoire';
-import { configurationDeTestDuServeur } from '../fauxObjets';
+import { creeServeur } from '../../../src/api/msc.js';
+import { EntrepotResultatTest } from '../../../src/metier/entrepotResultatTest.js';
+import { EntrepotSessionDeGroupe } from '../../../src/metier/entrepotSessionDeGroupe.js';
+import { DonneesCreationResultatTestMaturite, ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite.js';
+import { SessionDeGroupe } from '../../../src/metier/sessionDeGroupe.js';
+import { EntrepotResultatTestMemoire } from '../../persistance/entrepotResultatTestMemoire.js';
+import { EntrepotSessionDeGroupeMemoire } from '../../persistance/EntrepotSessionDeGroupeMemoire.js';
+import { configurationDeTestDuServeur } from '../fauxObjets.js';
 
 describe("La ressource qui gère les résultats d'une session de groupe", () => {
   let serveur: Express;

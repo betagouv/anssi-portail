@@ -1,4 +1,4 @@
-import { Exigence, ExigenceNIS2, Referentiel } from './exigence';
+import { Exigence, ExigenceNIS2, Referentiel } from './exigence.js';
 
 export interface EntrepotExigence {
   parReferentiel(referentiel: 'NIS2'): Promise<ExigenceNIS2[]>;

@@ -1,4 +1,4 @@
-import { Utilisateur } from '../../metier/utilisateur';
+import { Utilisateur } from '../../metier/utilisateur.js';
 
 export class ProprieteTestRevendiquee {
   idResultatTest!: string;

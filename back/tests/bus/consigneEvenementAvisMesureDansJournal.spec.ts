@@ -3,11 +3,11 @@ import { describe, it } from 'node:test';
 import {
   consigneCommentaireAvisMesureDonneDansMessagerie,
   consigneRetourAvisMesureDonneDansJournal,
-} from '../../src/bus/consigneAvisMesureDonneDansJournal';
-import { AvisMesureDonne } from '../../src/bus/evenements/avisMesureDonne';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
-import { fausseMessagerieInstantanee } from '../api/fauxObjets';
+} from '../../src/bus/consigneAvisMesureDonneDansJournal.js';
+import { AvisMesureDonne } from '../../src/bus/evenements/avisMesureDonne.js';
+import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { fausseMessagerieInstantanee } from '../api/fauxObjets.js';
 
 describe("L'abonnement qui consigne un avis sur une mesure dans le journal", () => {
   it('consigne un évènement AvisMesureDonne', async () => {

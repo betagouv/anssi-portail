@@ -2,13 +2,13 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/msc';
-import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
-import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
-import { encodeSession } from './cookie';
-import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise } from './fauxObjets';
-import { financementCyberPME, jeanneDupont } from './objetsPretsALEmploi';
+import { creeServeur } from '../../src/api/msc.js';
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
+import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire.js';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
+import { encodeSession } from './cookie.js';
+import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise } from './fauxObjets.js';
+import { financementCyberPME, jeanneDupont } from './objetsPretsALEmploi.js';
 
 describe('La ressource Financements', () => {
   let serveur: Express;

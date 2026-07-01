@@ -1,10 +1,10 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
-import { SimulationNis2Terminee } from '../../src/bus/evenements/simulationNis2Terminee';
-import { consigneEvenementSimulationNis2TermineeDansJournal } from '../../src/bus/consigneEvenementSimulationNis2TermineeDansJournal';
-import { EtatQuestionnaire } from '../../src/metier/nis2-simulateur/EtatQuestionnaire';
+import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { SimulationNis2Terminee } from '../../src/bus/evenements/simulationNis2Terminee.js';
+import { consigneEvenementSimulationNis2TermineeDansJournal } from '../../src/bus/consigneEvenementSimulationNis2TermineeDansJournal.js';
+import { EtatQuestionnaire } from '../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
 
 describe("L'abonnement qui consigne une simulation NIS2 terminée dans le journal", () => {
   const reponseComplete = (): EtatQuestionnaire => ({

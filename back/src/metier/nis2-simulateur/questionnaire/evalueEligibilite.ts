@@ -1,6 +1,6 @@
-import { LecteurDeSpecifications } from './LecteurDeSpecifications';
-import type { EtatQuestionnaire } from '../EtatQuestionnaire';
-import type { ResultatAvecAnalyse } from './ResultatAvecAnalyse';
+import { LecteurDeSpecifications } from './LecteurDeSpecifications.js';
+import type { EtatQuestionnaire } from '../EtatQuestionnaire.js';
+import type { ResultatAvecAnalyse } from './ResultatAvecAnalyse.js';
 
 export function evalueEligibilite(reponses: EtatQuestionnaire, contenuDuCsv: string): ResultatAvecAnalyse {
   const lecteur = new LecteurDeSpecifications();

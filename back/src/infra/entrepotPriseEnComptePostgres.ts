@@ -1,11 +1,11 @@
 import Knex from 'knex';
-import config from '../../knexfile';
-import { EntrepotMesure } from '../metier/entrepotMesure';
-import { EntrepotPriseEnCompte } from '../metier/entrepotPriseEnCompte';
-import { Mesure } from '../metier/mesure';
-import { PriseEnCompte } from '../metier/PriseEnCompte';
-import { Utilisateur } from '../metier/utilisateur';
-import { AdaptateurHachage } from './adaptateurHachage';
+import config from '../../knexfile.js';
+import { EntrepotMesure } from '../metier/entrepotMesure.js';
+import { EntrepotPriseEnCompte } from '../metier/entrepotPriseEnCompte.js';
+import { Mesure } from '../metier/mesure.js';
+import { PriseEnCompte } from '../metier/PriseEnCompte.js';
+import { Utilisateur } from '../metier/utilisateur.js';
+import { AdaptateurHachage } from './adaptateurHachage.js';
 
 type PriseEnComptePersistee = {
   email_utilisateur_hache: string;

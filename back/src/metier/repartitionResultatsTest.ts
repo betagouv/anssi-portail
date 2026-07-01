@@ -1,4 +1,4 @@
-import { IdNiveauMaturite, IdRubrique, ResultatTestMaturite, tousLesIdRubrique } from './resultatTestMaturite';
+import { IdNiveauMaturite, IdRubrique, ResultatTestMaturite, tousLesIdRubrique } from './resultatTestMaturite.js';
 
 type ScoresPourUnNiveau = {
   id: IdNiveauMaturite;

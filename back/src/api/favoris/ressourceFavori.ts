@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { valideParametresRequete } from '../zod';
-import { schemaParametersRessourceFavori } from './ressourceFavori.schema';
+import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur.js';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { valideParametresRequete } from '../zod.js';
+import { schemaParametersRessourceFavori } from './ressourceFavori.schema.js';
 
 const ressourceFavori = ({
   middleware,

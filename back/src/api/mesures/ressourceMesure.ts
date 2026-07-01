@@ -1,9 +1,9 @@
 import { Request, Response, Router } from 'express';
-import { Utilisateur } from '../../metier/utilisateur';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { corpsVide, valideCorpsRequete } from '../zod';
-import { mesurePresentation } from './mesurePresentation';
+import { Utilisateur } from '../../metier/utilisateur.js';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { corpsVide, valideCorpsRequete } from '../zod.js';
+import { mesurePresentation } from './mesurePresentation.js';
 
 const ressourceMesure = ({
   entrepotMesure,

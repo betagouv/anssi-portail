@@ -1,9 +1,9 @@
 import { Request, Response, Router } from 'express';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { valideParametresRequete } from '../zod';
-import { guidePresentation } from './guidePresentation';
-import { schemaParametersRessourceGuidesMemesCollections } from './ressourceGuidesMemesCollections.schema';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { valideParametresRequete } from '../zod.js';
+import { guidePresentation } from './guidePresentation.js';
+import { schemaParametersRessourceGuidesMemesCollections } from './ressourceGuidesMemesCollections.schema.js';
 
 export const ressourceGuidesMemesCollections = ({ adaptateurEnvironnement, entrepotGuide }: ConfigurationServeur) => {
   const routeur = Router();

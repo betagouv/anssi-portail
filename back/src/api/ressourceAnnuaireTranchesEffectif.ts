@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
-import { tranchesEffectifEtablissement } from '../metier/referentielTranchesEffectifEtablissement';
-import { ConfigurationServeur } from './configurationServeur';
-import { corpsVide, valideCorpsRequete } from './zod';
+import { tranchesEffectifEtablissement } from '../metier/referentielTranchesEffectifEtablissement.js';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { corpsVide, valideCorpsRequete } from './zod.js';
 
 const ressourceAnnuaireTranchesEffectif = (_: ConfigurationServeur) => {
   const routeur = Router();

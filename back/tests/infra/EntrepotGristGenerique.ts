@@ -1,4 +1,4 @@
-import { EntrepotGrist } from '../../src/infra/entrepotGrist';
+import { EntrepotGrist } from '../../src/infra/entrepotGrist.js';
 
 export class EntrepotGristGenerique extends EntrepotGrist<{ test: string }> {
   async tous(): Promise<{ test: string }[]> {

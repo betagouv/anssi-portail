@@ -1,5 +1,5 @@
-import { AdaptateurCellar } from '../infra/adaptateurCellar';
-import { Guide } from './guide';
+import { AdaptateurCellar } from '../infra/adaptateurCellar.js';
+import { Guide } from './guide.js';
 
 export type Etat = 'ok' | 'ko';
 

@@ -1,5 +1,5 @@
-import { AdaptateurEmail } from '../metier/adaptateurEmail';
-import { CompteCree } from './evenements/compteCree';
+import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
+import { CompteCree } from './evenements/compteCree.js';
 
 export const creeContactBrevo = ({ adaptateurEmail }: { adaptateurEmail: AdaptateurEmail }) => {
   return async function ({ email, nom, prenom, infoLettre, telephone }: CompteCree) {

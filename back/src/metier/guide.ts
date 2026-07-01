@@ -1,6 +1,6 @@
-import { BesoinCyber } from './besoinCyber';
-import { EntrepotGuide } from './entrepotGuide';
-import { EntrepotGuideTravail } from './entrepotGuideTravail';
+import { BesoinCyber } from './besoinCyber.js';
+import { EntrepotGuide } from './entrepotGuide.js';
+import { EntrepotGuideTravail } from './entrepotGuideTravail.js';
 
 export class Guide {
   id: string;

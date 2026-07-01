@@ -1,9 +1,9 @@
 import assert from 'node:assert';
 import { describe, it, beforeEach } from 'node:test';
-import { ResultatEligibilite } from '../../../../src/metier/nis2-simulateur/Regulation.definitions';
-import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications';
-import { RegleEntiteOSE } from '../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleEntiteOSE';
-import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire';
+import { ResultatEligibilite } from '../../../../src/metier/nis2-simulateur/Regulation.definitions.js';
+import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications.js';
+import { RegleEntiteOSE } from '../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleEntiteOSE.js';
+import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
 
 describe('Les spécifications', () => {
   const resultatDeLaSpec: ResultatEligibilite = {

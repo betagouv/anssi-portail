@@ -1,12 +1,12 @@
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import request from 'supertest';
-import { creeServeur } from '../../src/api/msc';
+import { creeServeur } from '../../src/api/msc.js';
 import assert from 'node:assert';
 import { join } from 'path';
-import { FournisseurChemin } from '../../src/api/fournisseurChemin';
-import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets';
-import { encodeSession, enObjet } from './cookie';
+import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
+import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets.js';
+import { encodeSession, enObjet } from './cookie.js';
 
 describe('La ressource de la page connexion', () => {
   let serveur: Express;

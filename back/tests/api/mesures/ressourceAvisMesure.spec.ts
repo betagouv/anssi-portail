@@ -2,16 +2,16 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../../src/api/msc';
-import { AvisMesureDonne } from '../../../src/bus/evenements/avisMesureDonne';
-import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement';
-import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
-import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests';
-import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
-import { encodeSession } from '../cookie';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets';
-import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi';
+import { creeServeur } from '../../../src/api/msc.js';
+import { AvisMesureDonne } from '../../../src/bus/evenements/avisMesureDonne.js';
+import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
+import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
+import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
+import { encodeSession } from '../cookie.js';
+import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
+import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi.js';
 
 describe('La ressource avis sur une mesure de sécurité', () => {
   describe('sur requête POST', () => {

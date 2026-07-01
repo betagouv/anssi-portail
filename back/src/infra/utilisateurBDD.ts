@@ -1,5 +1,5 @@
 import Knex from 'knex';
-import { ObjetChiffre } from './adaptateurChiffrement';
+import { ObjetChiffre } from './adaptateurChiffrement.js';
 
 export interface UtilisateurBDD {
   email_hache: string;
