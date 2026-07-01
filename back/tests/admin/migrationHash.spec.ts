@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { tenteDeHacherAvecUnNouveauSel } from '../../src/admin/migrationHash';
+import { tenteDeHacherAvecUnNouveauSel } from '../../src/admin/migrationHash.js';
 
 describe("L'outil de migration de sels de hachage", () => {
   it('hache avec un nouveau sel et augmente la version', () => {

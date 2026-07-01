@@ -1,7 +1,7 @@
-import { EntrepôtModule } from '../../src/metier/EntrepotModule';
-import { Mesure } from '../../src/metier/mesure';
-import { Module } from '../../src/metier/module';
-import { EntrepotMemoire } from './entrepotMemoire';
+import { EntrepôtModule } from '../../src/metier/EntrepotModule.js';
+import { Mesure } from '../../src/metier/mesure.js';
+import { Module } from '../../src/metier/module.js';
+import { EntrepotMemoire } from './entrepotMemoire.js';
 
 export class EntrepôtModuleMémoire extends EntrepotMemoire<Module> implements EntrepôtModule {
   async parId(id: number): Promise<Module | undefined> {

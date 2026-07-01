@@ -1,9 +1,9 @@
 import { describe, it } from 'node:test';
-import { consigneEvenementTestRealiseDansJournal } from '../../src/bus/consigneEvenementTestRealiseDansJournal';
-import { TestRealise } from '../../src/bus/evenements/testRealise';
+import { consigneEvenementTestRealiseDansJournal } from '../../src/bus/consigneEvenementTestRealiseDansJournal.js';
+import { TestRealise } from '../../src/bus/evenements/testRealise.js';
 import assert from 'node:assert';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
+import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 
 describe("L'abonnement qui consigne la réalisation d'un test dans le journal", () => {
   it('consigne un évènement de NouveauTestRealise', () => {

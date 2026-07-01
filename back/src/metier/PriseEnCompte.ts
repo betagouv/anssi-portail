@@ -1,5 +1,5 @@
-import { Mesure } from './mesure';
-import { Utilisateur } from './utilisateur';
+import { Mesure } from './mesure.js';
+import { Utilisateur } from './utilisateur.js';
 
 export class PriseEnCompte {
   constructor(

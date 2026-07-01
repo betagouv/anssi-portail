@@ -1,8 +1,8 @@
 import { AxiosError } from 'axios';
 import assert from 'node:assert';
 import { afterEach, beforeEach, describe, it } from 'node:test';
-import { adaptateurEmailBrevo } from '../../src/infra/adaptateurEmailBrevo';
-import { AdaptateurEmail } from '../../src/metier/adaptateurEmail';
+import { adaptateurEmailBrevo } from '../../src/infra/adaptateurEmailBrevo.js';
+import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 
 describe('L’adaptateur email Brevo', () => {
   let fnPostAxios: (_url: string) => Promise<void>;

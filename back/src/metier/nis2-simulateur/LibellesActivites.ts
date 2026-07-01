@@ -1,4 +1,4 @@
-import type { Activite } from './Activite.definitions';
+import type { Activite } from './Activite.definitions.js';
 
 export const libellesActivites: Record<Activite, string> = {
   acteurDuMarche:

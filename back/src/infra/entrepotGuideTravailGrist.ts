@@ -1,12 +1,12 @@
-import axiosInstance from './axiosInstance';
-import { BesoinCyber } from '../metier/besoinCyber';
-import { EntrepotGuideTravail } from '../metier/entrepotGuideTravail';
-import { Guide } from '../metier/guide';
-import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
-import { ClientHttp } from './clientHttp';
-import { EntrepotGrist } from './entrepotGrist';
-import { GuideGrist } from './entrepotGuideGrist';
-import { aseptiseListeGrist } from './grist';
+import axiosInstance from './axiosInstance.js';
+import { BesoinCyber } from '../metier/besoinCyber.js';
+import { EntrepotGuideTravail } from '../metier/entrepotGuideTravail.js';
+import { Guide } from '../metier/guide.js';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
+import { ClientHttp } from './clientHttp.js';
+import { EntrepotGrist } from './entrepotGrist.js';
+import { GuideGrist } from './entrepotGuideGrist.js';
+import { aseptiseListeGrist } from './grist.js';
 
 export class EntrepotGuideTravailGrist extends EntrepotGrist<GuideGrist> implements EntrepotGuideTravail {
   constructor({

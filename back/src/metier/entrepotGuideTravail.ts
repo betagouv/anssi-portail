@@ -1,4 +1,4 @@
-import { DocumentGuide, Guide } from './guide';
+import { DocumentGuide, Guide } from './guide.js';
 
 export interface EntrepotGuideTravail {
   parId(id: string): Promise<Guide | undefined>;

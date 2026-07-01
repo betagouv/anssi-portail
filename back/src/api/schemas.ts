@@ -1,10 +1,10 @@
 import z from 'zod';
-import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
-import { codeDepartement } from '../metier/referentielDepartements';
-import { codesRegion } from '../metier/referentielRegions';
-import { codesSecteur } from '../metier/referentielSecteurs';
-import { codesTranchesEffectif } from '../metier/referentielTranchesEffectifEtablissement';
-import { valideSiret } from '../metier/valideSiret';
+import { adaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
+import { codeDepartement } from '../metier/referentielDepartements.js';
+import { codesRegion } from '../metier/referentielRegions.js';
+import { codesSecteur } from '../metier/referentielSecteurs.js';
+import { codesTranchesEffectif } from '../metier/referentielTranchesEffectifEtablissement.js';
+import { valideSiret } from '../metier/valideSiret.js';
 
 export const schemas = {
   organisation: {

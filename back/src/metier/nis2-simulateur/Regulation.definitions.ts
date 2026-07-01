@@ -1,4 +1,4 @@
-import type { ValeursRegulationEntite } from './RegulationEntite.valeurs';
+import type { ValeursRegulationEntite } from './RegulationEntite.valeurs.js';
 
 export type RegulationEntite = (typeof ValeursRegulationEntite)[number];
 

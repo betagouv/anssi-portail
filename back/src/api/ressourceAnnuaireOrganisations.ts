@@ -1,9 +1,9 @@
 import cors from 'cors';
 import { Router } from 'express';
-import { ConfigurationServeur } from './configurationServeur';
-import { filetRouteAsynchrone } from './middleware';
-import { schemaRessourceAnnuaireOrganisations } from './ressourceAnnuaireOrganisations.schema';
-import { valideRequete } from './zod';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { filetRouteAsynchrone } from './middleware.js';
+import { schemaRessourceAnnuaireOrganisations } from './ressourceAnnuaireOrganisations.schema.js';
+import { valideRequete } from './zod.js';
 
 const ressourceAnnuaireOrganisations = ({ adaptateurRechercheEntreprise }: ConfigurationServeur): Router => {
   const routeur = Router();

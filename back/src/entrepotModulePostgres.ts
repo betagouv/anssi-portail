@@ -1,10 +1,10 @@
 import Knex from 'knex';
-import config from '../knexfile';
-import { MesurePersistee } from './infra/entrepotMesurePostgres';
-import { EntrepotMesure } from './metier/entrepotMesure';
-import { EntrepôtModule } from './metier/EntrepotModule';
-import { Mesure } from './metier/mesure';
-import { Module } from './metier/module';
+import config from '../knexfile.js';
+import { MesurePersistee } from './infra/entrepotMesurePostgres.js';
+import { EntrepotMesure } from './metier/entrepotMesure.js';
+import { EntrepôtModule } from './metier/EntrepotModule.js';
+import { Mesure } from './metier/mesure.js';
+import { Module } from './metier/module.js';
 
 type ModulePersisté = { id: number; nom: string };
 

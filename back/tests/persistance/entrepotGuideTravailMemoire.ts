@@ -1,6 +1,6 @@
-import { EntrepotGuideTravail } from '../../src/metier/entrepotGuideTravail';
-import { DocumentGuide, Guide } from '../../src/metier/guide';
-import { EntrepotMemoire } from './entrepotMemoire';
+import { EntrepotGuideTravail } from '../../src/metier/entrepotGuideTravail.js';
+import { DocumentGuide, Guide } from '../../src/metier/guide.js';
+import { EntrepotMemoire } from './entrepotMemoire.js';
 
 export class EntrepotGuideTravailMemoire extends EntrepotMemoire<Guide> implements EntrepotGuideTravail {
   async parId(id: string): Promise<Guide | undefined> {

@@ -1,4 +1,4 @@
-import { ExigenceNIS2 } from './nis2/exigence';
+import { ExigenceNIS2 } from './nis2/exigence.js';
 
 export class IdMesure {
   constructor(private readonly id: string) {}

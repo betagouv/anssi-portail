@@ -1,7 +1,7 @@
-import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
-import { AdaptateurJournal } from '../infra/adaptateurJournal';
-import { CompteCree } from './evenements/compteCree';
-import { AdaptateurHachage } from '../infra/adaptateurHachage';
+import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
+import { CompteCree } from './evenements/compteCree.js';
+import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 
 export const consigneEvenementCompteCreeDansJournal = ({
   adaptateurJournal,

@@ -1,10 +1,10 @@
 import Knex from 'knex';
-import config from '../../knexfile';
-import { EntrepotResultatTest, FiltreResultatsTest } from '../metier/entrepotResultatTest';
-import { ResultatTestMaturite } from '../metier/resultatTestMaturite';
-import { Utilisateur } from '../metier/utilisateur';
-import { AdaptateurHachage } from './adaptateurHachage';
-import { EntrepotUtilisateurMPAPostgres } from './entrepotUtilisateurMPAPostgres';
+import config from '../../knexfile.js';
+import { EntrepotResultatTest, FiltreResultatsTest } from '../metier/entrepotResultatTest.js';
+import { ResultatTestMaturite } from '../metier/resultatTestMaturite.js';
+import { Utilisateur } from '../metier/utilisateur.js';
+import { AdaptateurHachage } from './adaptateurHachage.js';
+import { EntrepotUtilisateurMPAPostgres } from './entrepotUtilisateurMPAPostgres.js';
 
 export class EntrepotResultatTestPostgres implements EntrepotResultatTest {
   knex: Knex.Knex;

@@ -2,17 +2,17 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../../src/api/msc';
-import { AdaptateurCellar, CleDuBucket, DocumentCellar } from '../../../src/infra/adaptateurCellar';
-import { GenerateurImage } from '../../../src/infra/generateurImage';
-import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur';
-import { Guide } from '../../../src/metier/guide';
-import { EntrepotGuideTravailMemoire } from '../../persistance/entrepotGuideTravailMemoire';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire';
-import { encodeSession } from '../cookie';
-import { configurationDeTestDuServeur, fauxAdaptateurCellar } from '../fauxObjets';
-import * as fabrique from '../objetsPretsALEmploi';
-import { guideDevsecops, hectorDurant, jeanneDupont } from '../objetsPretsALEmploi';
+import { creeServeur } from '../../../src/api/msc.js';
+import { AdaptateurCellar, CleDuBucket, DocumentCellar } from '../../../src/infra/adaptateurCellar.js';
+import { GenerateurImage } from '../../../src/infra/generateurImage.js';
+import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
+import { Guide } from '../../../src/metier/guide.js';
+import { EntrepotGuideTravailMemoire } from '../../persistance/entrepotGuideTravailMemoire.js';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
+import { encodeSession } from '../cookie.js';
+import { configurationDeTestDuServeur, fauxAdaptateurCellar } from '../fauxObjets.js';
+import * as fabrique from '../objetsPretsALEmploi.js';
+import { guideDevsecops, hectorDurant, jeanneDupont } from '../objetsPretsALEmploi.js';
 
 describe('La ressource de gestion des documents des guides', () => {
   let serveur: Express;

@@ -1,12 +1,12 @@
 import { Request, Response, Router } from 'express';
 import z from 'zod';
-import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee';
-import { TestRealise } from '../../bus/evenements/testRealise';
-import { ResultatTestMaturite } from '../../metier/resultatTestMaturite';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { corpsVide, valideCorpsRequete } from '../zod';
-import { schemaRessourceResultatsDeTest } from './ressourceResultatsDeTest.schema';
+import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee.js';
+import { TestRealise } from '../../bus/evenements/testRealise.js';
+import { ResultatTestMaturite } from '../../metier/resultatTestMaturite.js';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { corpsVide, valideCorpsRequete } from '../zod.js';
+import { schemaRessourceResultatsDeTest } from './ressourceResultatsDeTest.schema.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 const ressourceResultatsDeTest = ({

@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { ConfigurationServeur } from '../../src/api/configurationServeur';
-import { filetRouteAsynchrone } from './middleware';
-import { corpsVide, valideCorpsRequete } from './zod';
+import { ConfigurationServeur } from '../../src/api/configurationServeur.js';
+import { filetRouteAsynchrone } from './middleware.js';
+import { corpsVide, valideCorpsRequete } from './zod.js';
 
 export const ressourceSanteGuides = ({ serviceSanteGuides, entrepotGuide }: ConfigurationServeur) => {
   const routeur = Router();

@@ -1,4 +1,4 @@
-import type { SecteurActivite } from './SecteurActivite.definitions';
+import type { SecteurActivite } from './SecteurActivite.definitions.js';
 
 export const libellesSecteursActivite: Record<SecteurActivite, string> = {
   banqueSecteurBancaire: 'Banques (secteur bancaire)',

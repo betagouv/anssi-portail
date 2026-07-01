@@ -1,12 +1,12 @@
-import { GenerateurCodeSessionDeGroupe } from './generateurCodeSessionDeGroupe';
-import { EntrepotResultatTest } from './entrepotResultatTest';
+import { GenerateurCodeSessionDeGroupe } from './generateurCodeSessionDeGroupe.js';
+import { EntrepotResultatTest } from './entrepotResultatTest.js';
 import {
   IdNiveauMaturite,
   IdRubrique,
   ResultatTestMaturite,
   tousLesIdNiveauMaturite,
   tousLesIdRubrique,
-} from './resultatTestMaturite';
+} from './resultatTestMaturite.js';
 
 export type ResumeNiveauMaturite = {
   total: number;

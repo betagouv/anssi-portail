@@ -2,11 +2,11 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../../src/api/msc';
-import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire';
-import { EntrepotGuideTravailMemoire } from '../../persistance/entrepotGuideTravailMemoire';
-import { configurationDeTestDuServeur } from '../fauxObjets';
-import { guideDevsecops, guidePublieDemain, guideZeroTrust } from '../objetsPretsALEmploi';
+import { creeServeur } from '../../../src/api/msc.js';
+import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js';
+import { EntrepotGuideTravailMemoire } from '../../persistance/entrepotGuideTravailMemoire.js';
+import { configurationDeTestDuServeur } from '../fauxObjets.js';
+import { guideDevsecops, guidePublieDemain, guideZeroTrust } from '../objetsPretsALEmploi.js';
 
 describe('La ressource qui gère les guides', () => {
   let serveur: Express;

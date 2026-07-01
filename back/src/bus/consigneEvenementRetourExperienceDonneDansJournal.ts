@@ -1,7 +1,7 @@
-import { AdaptateurJournal } from '../infra/adaptateurJournal';
-import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
-import { AdaptateurHachage } from '../infra/adaptateurHachage';
-import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
+import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
+import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
+import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
+import { RetourExperienceDonne } from './evenements/retourExperienceDonne.js';
 
 export const consigneEvenementRetourExperienceDonneDansJournal = ({
   adaptateurJournal,

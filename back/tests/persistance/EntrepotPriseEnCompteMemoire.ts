@@ -1,8 +1,8 @@
-import { EntrepotPriseEnCompte } from '../../src/metier/entrepotPriseEnCompte';
-import { Mesure } from '../../src/metier/mesure';
-import { PriseEnCompte } from '../../src/metier/PriseEnCompte';
-import { Utilisateur } from '../../src/metier/utilisateur';
-import { EntrepotMemoire } from './entrepotMemoire';
+import { EntrepotPriseEnCompte } from '../../src/metier/entrepotPriseEnCompte.js';
+import { Mesure } from '../../src/metier/mesure.js';
+import { PriseEnCompte } from '../../src/metier/PriseEnCompte.js';
+import { Utilisateur } from '../../src/metier/utilisateur.js';
+import { EntrepotMemoire } from './entrepotMemoire.js';
 
 export class EntrepotPriseEnCompteMemoire extends EntrepotMemoire<PriseEnCompte> implements EntrepotPriseEnCompte {
   pour(utilisateur: Utilisateur): Promise<PriseEnCompte[]>;

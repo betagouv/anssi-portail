@@ -1,5 +1,5 @@
-import { AdaptateurJournal } from './adaptateurJournal';
-import { DonneesEvenement } from './donneesEvenement';
+import { AdaptateurJournal } from './adaptateurJournal.js';
+import { DonneesEvenement } from './donneesEvenement.js';
 import Knex from 'knex';
 import { v4 as uuidv4 } from 'uuid';
 

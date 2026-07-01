@@ -2,11 +2,11 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../../src/api/msc';
-import { EntrepotSessionDeGroupe } from '../../../src/metier/entrepotSessionDeGroupe';
-import { SessionDeGroupe } from '../../../src/metier/sessionDeGroupe';
-import { EntrepotSessionDeGroupeMemoire } from '../../persistance/EntrepotSessionDeGroupeMemoire';
-import { configurationDeTestDuServeur } from '../fauxObjets';
+import { creeServeur } from '../../../src/api/msc.js';
+import { EntrepotSessionDeGroupe } from '../../../src/metier/entrepotSessionDeGroupe.js';
+import { SessionDeGroupe } from '../../../src/metier/sessionDeGroupe.js';
+import { EntrepotSessionDeGroupeMemoire } from '../../persistance/EntrepotSessionDeGroupeMemoire.js';
+import { configurationDeTestDuServeur } from '../fauxObjets.js';
 
 describe('La ressource qui gère une session de groupe', () => {
   let serveur: Express;

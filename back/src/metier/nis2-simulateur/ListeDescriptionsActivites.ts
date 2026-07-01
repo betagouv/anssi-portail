@@ -1,4 +1,4 @@
-import type { Activite, DescriptionActivite } from './Activite.definitions';
+import type { Activite, DescriptionActivite } from './Activite.definitions.js';
 
 export const listeDescriptionsActivites: Record<Activite, DescriptionActivite[]> = {
   autreActiviteConstructionVehiculesAutomobilesRemorquesSemi: [],

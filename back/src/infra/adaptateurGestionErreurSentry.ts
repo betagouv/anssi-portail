@@ -1,7 +1,9 @@
-import { Express, Request, Response, NextFunction } from 'express';
 import * as Sentry from '@sentry/node';
-import { adaptateurEnvironnement } from './adaptateurEnvironnement';
-import { IpDeniedError } from 'express-ipfilter';
+import { Express, NextFunction, Request, Response } from 'express';
+import expressIpFilter from 'express-ipfilter';
+import { adaptateurEnvironnement } from './adaptateurEnvironnement.js';
+
+const { IpDeniedError } = expressIpFilter;
 
 export interface AdaptateurGestionErreur {
   initialise(applicationExpress: Express): void;

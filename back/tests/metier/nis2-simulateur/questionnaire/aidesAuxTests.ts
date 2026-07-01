@@ -1,9 +1,14 @@
 import { readFileSync } from 'node:fs';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   PointsAttentionPrecis,
   ResultatEligibilite,
   ResumesPointsAttention,
-} from '../../../../src/metier/nis2-simulateur/Regulation.definitions';
+} from '../../../../src/metier/nis2-simulateur/Regulation.definitions.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export const leCSV = (nom: string) => {
   const chemin = __dirname + '/csv/' + nom;

@@ -1,7 +1,7 @@
-import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
-import { AdaptateurJournal } from '../infra/adaptateurJournal';
-import { MessagerieInstantanee } from '../metier/messagerieInstantanee';
-import { AvisMesureDonne } from './evenements/avisMesureDonne';
+import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
+import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
+import { AvisMesureDonne } from './evenements/avisMesureDonne.js';
 
 export const consigneRetourAvisMesureDonneDansJournal = ({
   adaptateurJournal,

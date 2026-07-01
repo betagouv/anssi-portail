@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { leCSV } from './aidesAuxTests';
-import { LecteurDeSpecifications } from '../../../../src/metier/nis2-simulateur/questionnaire/LecteurDeSpecifications';
+import { leCSV } from './aidesAuxTests.js';
+import { LecteurDeSpecifications } from '../../../../src/metier/nis2-simulateur/questionnaire/LecteurDeSpecifications.js';
 
 describe('Le lecteur de spécifications', () => {
   it('utilise un fichier CSV pour produire un tableau de toutes les spécifications', () => {

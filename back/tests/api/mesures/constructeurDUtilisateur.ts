@@ -1,6 +1,6 @@
-import { Mesure } from '../../../src/metier/mesure';
-import { Utilisateur } from '../../../src/metier/utilisateur';
-import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../fauxObjets';
+import { Mesure } from '../../../src/metier/mesure.js';
+import { Utilisateur } from '../../../src/metier/utilisateur.js';
+import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../fauxObjets.js';
 
 export class ConstructeurDUtilisateur {
   private email: string = 'utilisateur@mail.com';

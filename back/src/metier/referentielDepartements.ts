@@ -1,4 +1,4 @@
-import { CodeRegion } from './referentielRegions';
+import { CodeRegion } from './referentielRegions.js';
 
 export const departements = [
   { nom: 'Ain', code: '01', codeRegion: 'FR-ARA' },

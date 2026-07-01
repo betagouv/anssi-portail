@@ -7,11 +7,11 @@ import {
   Langue,
   versLangueConnue,
   versReferentiel,
-} from '../../metier/nis2/exigence';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { valideRequete } from '../zod';
-import { schemaRessourceExigencesNis2 } from './ressourceExigencesNis2.schema';
+} from '../../metier/nis2/exigence.js';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { valideRequete } from '../zod.js';
+import { schemaRessourceExigencesNis2 } from './ressourceExigencesNis2.schema.js';
 
 export const ressourceExigencesNis2 = ({ adaptateurEnvironnement, entrepotExigence }: ConfigurationServeur) => {
   const routeur = Router();

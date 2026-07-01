@@ -1,12 +1,12 @@
 import { Response, Router } from 'express';
 import { encode } from 'html-entities';
 import z from 'zod';
-import { CompteCree } from '../bus/evenements/compteCree';
-import { Utilisateur } from '../metier/utilisateur';
-import { ConfigurationServeur } from './configurationServeur';
-import { filetRouteAsynchrone } from './middleware';
-import { schemaRessourceUtilisateurs } from './ressourceUtilisateurs.schema';
-import { valideCorpsRequete } from './zod';
+import { CompteCree } from '../bus/evenements/compteCree.js';
+import { Utilisateur } from '../metier/utilisateur.js';
+import { ConfigurationServeur } from './configurationServeur.js';
+import { filetRouteAsynchrone } from './middleware.js';
+import { schemaRessourceUtilisateurs } from './ressourceUtilisateurs.schema.js';
+import { valideCorpsRequete } from './zod.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 const ressourceUtilisateurs = ({

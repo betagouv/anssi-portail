@@ -1,8 +1,8 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { RepartitionResultatsTest } from '../../src/metier/repartitionResultatsTest';
-import { ResultatTestMaturite } from '../../src/metier/resultatTestMaturite';
-import { ResultatTestMaturiteCreateur } from './ResultatTestMaturiteCreateur';
+import { RepartitionResultatsTest } from '../../src/metier/repartitionResultatsTest.js';
+import { ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
+import { ResultatTestMaturiteCreateur } from './ResultatTestMaturiteCreateur.js';
 
 describe('Les répartitions des résultats de test', () => {
   describe('Lorsque le filtre est actif', () => {

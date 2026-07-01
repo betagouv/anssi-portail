@@ -2,13 +2,13 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { AdaptateurJWT } from '../../src/api/adaptateurJWT';
-import { creeServeur } from '../../src/api/msc';
-import { CompteCree } from '../../src/bus/evenements/compteCree';
-import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
-import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire';
-import { configurationDeTestDuServeur } from './fauxObjets';
+import { AdaptateurJWT } from '../../src/api/adaptateurJWT.js';
+import { creeServeur } from '../../src/api/msc.js';
+import { CompteCree } from '../../src/bus/evenements/compteCree.js';
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
+import { configurationDeTestDuServeur } from './fauxObjets.js';
 
 describe('La ressource utilisateur', () => {
   let serveur: Express;

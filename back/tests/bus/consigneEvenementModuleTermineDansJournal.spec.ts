@@ -1,9 +1,9 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { consigneEvenementModuleTerminéDansJournal } from '../../src/bus/consigneEvenementModuleTerminéDansJournal';
-import { ModuleTermine } from '../../src/bus/evenements/moduleTermine';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal';
+import { consigneEvenementModuleTerminéDansJournal } from '../../src/bus/consigneEvenementModuleTerminéDansJournal.js';
+import { ModuleTermine } from '../../src/bus/evenements/moduleTermine.js';
+import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 
 describe("L'abonnement qui consigne la complétion d'un module par un utilisateur dans le journal", () => {
   it('consigne un évènement ModuleTermine', async () => {

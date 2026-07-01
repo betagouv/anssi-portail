@@ -1,10 +1,10 @@
 import { Request, Response, Router } from 'express';
-import { Utilisateur } from '../../metier/utilisateur';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { valideParametresRequete } from '../zod';
-import { mesurePresentation } from './mesurePresentation';
-import { schemaRessourceModule } from './schemaRessourceModule.schema';
+import { Utilisateur } from '../../metier/utilisateur.js';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { valideParametresRequete } from '../zod.js';
+import { mesurePresentation } from './mesurePresentation.js';
+import { schemaRessourceModule } from './schemaRessourceModule.schema.js';
 
 const ressourceModule = ({
   entrepotUtilisateur,

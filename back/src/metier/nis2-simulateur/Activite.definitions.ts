@@ -28,7 +28,7 @@ import {
   ValeursActivitesTransportsFerroviaires,
   ValeursActivitesTransportsParEau,
   ValeursActivitesTransportsRoutiers,
-} from './Activite.valeurs';
+} from './Activite.valeurs.js';
 
 export type ActivitesElectricite = (typeof ValeursActivitesElectricite)[number];
 export type ActivitesReseauxChaleurFroid = (typeof ValeursActivitesReseauxChaleurFroid)[number];

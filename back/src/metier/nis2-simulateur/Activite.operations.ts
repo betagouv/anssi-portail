@@ -1,4 +1,4 @@
-import type { Activite } from './Activite.definitions';
+import type { Activite } from './Activite.definitions.js';
 import {
   ValeursActivitesConstructionVehiculesAutomobiles,
   ValeursActivitesEauPotable,
@@ -29,9 +29,9 @@ import {
   ValeursActivitesTransportsFerroviaires,
   ValeursActivitesTransportsParEau,
   ValeursActivitesTransportsRoutiers,
-} from './Activite.valeurs';
-import type { SecteurSimple } from './SecteurActivite.definitions';
-import type { SousSecteurActivite } from './SousSecteurActivite.definitions';
+} from './Activite.valeurs.js';
+import type { SecteurSimple } from './SecteurActivite.definitions.js';
+import type { SousSecteurActivite } from './SousSecteurActivite.definitions.js';
 
 export const activitesParSecteurEtSousSecteur: Record<SecteurSimple | SousSecteurActivite, readonly Activite[]> = {
   autreSecteurActivite: [],

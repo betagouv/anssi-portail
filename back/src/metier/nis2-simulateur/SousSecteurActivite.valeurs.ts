@@ -1,5 +1,5 @@
-import type { SecteurActivite, SecteurComposite } from './SecteurActivite.definitions';
-import type { DescriptionSecteur, SousSecteurActivite } from './SousSecteurActivite.definitions';
+import type { SecteurActivite, SecteurComposite } from './SecteurActivite.definitions.js';
+import type { DescriptionSecteur, SousSecteurActivite } from './SousSecteurActivite.definitions.js';
 
 export const ValeursSousSecteurEnergie = [
   'electricite',

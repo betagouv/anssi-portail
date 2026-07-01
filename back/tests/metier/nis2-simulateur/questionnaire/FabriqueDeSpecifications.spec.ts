@@ -1,16 +1,16 @@
 import assert from 'node:assert';
 import { describe, it, beforeEach } from 'node:test';
-import { FabriqueDeSpecifications } from '../../../../src/metier/nis2-simulateur/questionnaire/FabriqueDeSpecifications';
-import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire';
-import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications';
+import { FabriqueDeSpecifications } from '../../../../src/metier/nis2-simulateur/questionnaire/FabriqueDeSpecifications.js';
+import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
+import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications.js';
 import {
   AppartenancePaysUnionEuropeenne,
   UnionPetitMoyenGrand,
-} from '../../../../src/metier/nis2-simulateur/ChampsSimulateur.definitions';
-import { SecteurActivite } from '../../../../src/metier/nis2-simulateur/SecteurActivite.definitions';
-import { libellesSecteursActivite } from '../../../../src/metier/nis2-simulateur/LibellesSecteursActivite';
-import { SousSecteurActivite } from '../../../../src/metier/nis2-simulateur/SousSecteurActivite.definitions';
-import { libellesSousSecteursActivite } from '../../../../src/metier/nis2-simulateur/LibellesSousSecteursActivite';
+} from '../../../../src/metier/nis2-simulateur/ChampsSimulateur.definitions.js';
+import { SecteurActivite } from '../../../../src/metier/nis2-simulateur/SecteurActivite.definitions.js';
+import { libellesSecteursActivite } from '../../../../src/metier/nis2-simulateur/LibellesSecteursActivite.js';
+import { SousSecteurActivite } from '../../../../src/metier/nis2-simulateur/SousSecteurActivite.definitions.js';
+import { libellesSousSecteursActivite } from '../../../../src/metier/nis2-simulateur/LibellesSousSecteursActivite.js';
 import {
   autresActivites,
   CasDeTest,
@@ -19,13 +19,13 @@ import {
   fournisseursNumeriques,
   gestionDesServicesTIC,
   infrastructureNumerique,
-} from './casDeTests.activites';
+} from './casDeTests.activites.js';
 import {
   PointsAttentionPrecis,
   ResultatEligibilite,
   ResumesPointsAttention,
-} from '../../../../src/metier/nis2-simulateur/Regulation.definitions';
-import { SpecificationTexte } from '../../../../src/metier/nis2-simulateur/questionnaire/FormatDesSpecificationsCSV';
+} from '../../../../src/metier/nis2-simulateur/Regulation.definitions.js';
+import { SpecificationTexte } from '../../../../src/metier/nis2-simulateur/questionnaire/FormatDesSpecificationsCSV.js';
 
 describe('La fabrique de spécifications', () => {
   let fabrique: FabriqueDeSpecifications;

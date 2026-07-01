@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { SimulationNis2Terminee } from '../../bus/evenements/simulationNis2Terminee';
-import { CalculEligibilite } from '../../metier/nis2-simulateur/questionnaire/calculEligibilite';
-import { ConfigurationServeur } from '../configurationServeur';
-import { filetRouteAsynchrone } from '../middleware';
-import { valideCorpsRequete } from '../zod';
-import { schemaPostSimulateurNis2 } from './ressourceSimulateurNis2.schemas';
+import { SimulationNis2Terminee } from '../../bus/evenements/simulationNis2Terminee.js';
+import { CalculEligibilite } from '../../metier/nis2-simulateur/questionnaire/calculEligibilite.js';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { filetRouteAsynchrone } from '../middleware.js';
+import { valideCorpsRequete } from '../zod.js';
+import { schemaPostSimulateurNis2 } from './ressourceSimulateurNis2.schemas.js';
 
 export const ressourceSimulateurNis2 = ({ busEvenements, fournisseurChemin }: ConfigurationServeur) => {
   const routeur = Router();

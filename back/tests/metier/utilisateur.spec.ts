@@ -1,17 +1,17 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
-import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque';
-import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompte';
-import { ModuleTermine } from '../../src/bus/evenements/moduleTermine';
-import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise';
-import { EntrepotPriseEnCompte } from '../../src/metier/entrepotPriseEnCompte';
-import { Organisation, Utilisateur } from '../../src/metier/utilisateur';
-import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets';
-import { mesureDeTest } from '../api/mesures/constructeurDeMesure';
-import { utilisateurDeTest } from '../api/mesures/constructeurDUtilisateur';
-import { mesureAuthentA2Etapes, moduleCyberdépart } from '../api/objetsPretsALEmploi';
-import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests';
-import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire';
+import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque.js';
+import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompte.js';
+import { ModuleTermine } from '../../src/bus/evenements/moduleTermine.js';
+import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
+import { EntrepotPriseEnCompte } from '../../src/metier/entrepotPriseEnCompte.js';
+import { Organisation, Utilisateur } from '../../src/metier/utilisateur.js';
+import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets.js';
+import { mesureDeTest } from '../api/mesures/constructeurDeMesure.js';
+import { utilisateurDeTest } from '../api/mesures/constructeurDUtilisateur.js';
+import { mesureAuthentA2Etapes, moduleCyberdépart } from '../api/objetsPretsALEmploi.js';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
+import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire.js';
 
 describe("L'utilisateur", () => {
   const infosUtilisateur = {

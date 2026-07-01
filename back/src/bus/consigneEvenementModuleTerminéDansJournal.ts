@@ -1,6 +1,6 @@
-import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
-import { AdaptateurJournal } from '../infra/adaptateurJournal';
-import { ModuleTermine } from './evenements/moduleTermine';
+import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
+import { ModuleTermine } from './evenements/moduleTermine.js';
 
 export const consigneEvenementModuleTerminéDansJournal = ({
   adaptateurJournal,

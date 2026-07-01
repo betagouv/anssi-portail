@@ -1,4 +1,4 @@
-import { EntrepotSessionDeGroupe } from './entrepotSessionDeGroupe';
+import { EntrepotSessionDeGroupe } from './entrepotSessionDeGroupe.js';
 
 export interface GenerateurCodeSessionDeGroupe {
   genere: () => Promise<string>;

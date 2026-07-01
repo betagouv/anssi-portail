@@ -2,11 +2,11 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { creeServeur } from '../../../src/api/msc';
-import { MockBusEvenement } from '../../bus/busPourLesTests';
-import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire';
-import { configurationDeTestDuServeur } from '../fauxObjets';
-import { guideZeroTrust } from '../objetsPretsALEmploi';
+import { creeServeur } from '../../../src/api/msc.js';
+import { MockBusEvenement } from '../../bus/busPourLesTests.js';
+import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js';
+import { configurationDeTestDuServeur } from '../fauxObjets.js';
+import { guideZeroTrust } from '../objetsPretsALEmploi.js';
 
 describe('La ressource guide', () => {
   let serveur: Express;

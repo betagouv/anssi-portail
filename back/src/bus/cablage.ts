@@ -1,41 +1,41 @@
-import { AdaptateurHachage } from '../infra/adaptateurHachage';
-import { AdaptateurHorloge } from '../infra/adaptateurHorloge';
-import { AdaptateurJournal } from '../infra/adaptateurJournal';
-import { AdaptateurEmail } from '../metier/adaptateurEmail';
-import { EntrepotFavori } from '../metier/entrepotFavori';
-import { MessagerieInstantanee } from '../metier/messagerieInstantanee';
-import { BusEvenements } from './busEvenements';
+import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
+import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
+import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
+import { EntrepotFavori } from '../metier/entrepotFavori.js';
+import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
+import { BusEvenements } from './busEvenements.js';
 import {
   consigneCommentaireAvisMesureDonneDansMessagerie,
   consigneRetourAvisMesureDonneDansJournal,
-} from './consigneAvisMesureDonneDansJournal';
-import { consigneEvenementAvisUtilisateurDonneDansJournal } from './consigneEvenementAvisUtilisateurDonneDansJournal';
-import { consigneBadgeCyberdépartDébloquéDansJournal } from './consigneBadgeCyberdepartDebloqueDansJournal';
-import { consigneEvenementCompteCreeDansJournal } from './consigneEvenementCompteCreeDansJournal';
-import { consigneEvenementMAJFavorisUtilisateurDansJournal } from './consigneEvenementMAJFavorisUtilisateurDansJournal';
-import { consigneEvenementMesureConsulteeDansJournal } from './consigneEvenementMesureConsulteeDansJournal';
-import { consigneEvenementMesurePriseEnCompteDansJournal } from './consigneEvenementMesurePriseEnCompteDansJournal';
-import { consigneEvenementModuleTerminéDansJournal } from './consigneEvenementModuleTerminéDansJournal';
-import { consigneEvenementProprieteTestRevendiqueeDansJournal } from './consigneEvenementProprieteTestRevendiqueeDansJournal';
-import { consigneEvenementRetourExperienceDonneDansJournal } from './consigneEvenementRetourExperienceDonneDansJournal';
-import { consigneEvenementSimulationNis2TermineeDansJournal } from './consigneEvenementSimulationNis2TermineeDansJournal';
-import { consigneEvenementTestRealiseDansJournal } from './consigneEvenementTestRealiseDansJournal';
-import { consigneEvenementUtilisateurConnecteDansJournal } from './consigneEvenementUtilisateurConnecteDansJournal';
-import { creeContactBrevo } from './creeContactBrevo';
-import { envoieEmailCreationCompte } from './envoieEmailCreationCompte';
-import { AvisMesureDonne } from './evenements/avisMesureDonne';
-import { AvisUtilisateurDonne } from './evenements/avisUtilisateurDonne';
-import { BadgeCyberdépartDébloqué } from './evenements/badgeCyberdepartDebloque';
-import { CompteCree } from './evenements/compteCree';
-import { MesureConsultee } from './evenements/mesureConsultee';
-import { MesurePriseEnCompte } from './evenements/mesurePriseEnCompte';
-import { ModuleTermine } from './evenements/moduleTermine';
-import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee';
-import { RetourExperienceDonne } from './evenements/retourExperienceDonne';
-import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee';
-import { TestRealise } from './evenements/testRealise';
-import { UtilisateurConnecte } from './evenements/utilisateurConnecte';
-import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur';
+} from './consigneAvisMesureDonneDansJournal.js';
+import { consigneEvenementAvisUtilisateurDonneDansJournal } from './consigneEvenementAvisUtilisateurDonneDansJournal.js';
+import { consigneBadgeCyberdépartDébloquéDansJournal } from './consigneBadgeCyberdepartDebloqueDansJournal.js';
+import { consigneEvenementCompteCreeDansJournal } from './consigneEvenementCompteCreeDansJournal.js';
+import { consigneEvenementMAJFavorisUtilisateurDansJournal } from './consigneEvenementMAJFavorisUtilisateurDansJournal.js';
+import { consigneEvenementMesureConsulteeDansJournal } from './consigneEvenementMesureConsulteeDansJournal.js';
+import { consigneEvenementMesurePriseEnCompteDansJournal } from './consigneEvenementMesurePriseEnCompteDansJournal.js';
+import { consigneEvenementModuleTerminéDansJournal } from './consigneEvenementModuleTerminéDansJournal.js';
+import { consigneEvenementProprieteTestRevendiqueeDansJournal } from './consigneEvenementProprieteTestRevendiqueeDansJournal.js';
+import { consigneEvenementRetourExperienceDonneDansJournal } from './consigneEvenementRetourExperienceDonneDansJournal.js';
+import { consigneEvenementSimulationNis2TermineeDansJournal } from './consigneEvenementSimulationNis2TermineeDansJournal.js';
+import { consigneEvenementTestRealiseDansJournal } from './consigneEvenementTestRealiseDansJournal.js';
+import { consigneEvenementUtilisateurConnecteDansJournal } from './consigneEvenementUtilisateurConnecteDansJournal.js';
+import { creeContactBrevo } from './creeContactBrevo.js';
+import { envoieEmailCreationCompte } from './envoieEmailCreationCompte.js';
+import { AvisMesureDonne } from './evenements/avisMesureDonne.js';
+import { AvisUtilisateurDonne } from './evenements/avisUtilisateurDonne.js';
+import { BadgeCyberdépartDébloqué } from './evenements/badgeCyberdepartDebloque.js';
+import { CompteCree } from './evenements/compteCree.js';
+import { MesureConsultee } from './evenements/mesureConsultee.js';
+import { MesurePriseEnCompte } from './evenements/mesurePriseEnCompte.js';
+import { ModuleTermine } from './evenements/moduleTermine.js';
+import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee.js';
+import { RetourExperienceDonne } from './evenements/retourExperienceDonne.js';
+import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee.js';
+import { TestRealise } from './evenements/testRealise.js';
+import { UtilisateurConnecte } from './evenements/utilisateurConnecte.js';
+import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur.js';
 
 export const cableTousLesAbonnes = ({
   busEvenements,

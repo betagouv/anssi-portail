@@ -1,17 +1,19 @@
 import { HttpStatusCode } from 'axios';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import helmet from 'helmet';
-import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
+import jsonwebtoken from 'jsonwebtoken';
 import { randomBytes } from 'node:crypto';
 import fs from 'node:fs';
-import { AdaptateurEnrichissement } from '../infra/adaptateurEnrichissement';
-import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement';
-import { AdaptateurHachage } from '../infra/adaptateurHachage';
-import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur';
-import { Utilisateur } from '../metier/utilisateur';
-import { AdaptateurJWT } from './adaptateurJWT';
-import { FournisseurChemin } from './fournisseurChemin';
-import { detruisSession } from './session';
+import { AdaptateurEnrichissement } from '../infra/adaptateurEnrichissement.js';
+import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
+import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
+import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur.js';
+import { Utilisateur } from '../metier/utilisateur.js';
+import { AdaptateurJWT } from './adaptateurJWT.js';
+import { FournisseurChemin } from './fournisseurChemin.js';
+import { detruisSession } from './session.js';
+
+const { JsonWebTokenError, TokenExpiredError } = jsonwebtoken;
 
 type FonctionMiddleware = (requete: Request, reponse: Response, suite: NextFunction) => Promise<void>;
 

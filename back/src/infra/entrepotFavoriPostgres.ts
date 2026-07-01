@@ -1,9 +1,9 @@
 import Knex from 'knex';
-import config from '../../knexfile';
-import { EntrepotFavori } from '../metier/entrepotFavori';
-import { Favori } from '../metier/favori';
-import { Utilisateur } from '../metier/utilisateur';
-import { AdaptateurHachage } from './adaptateurHachage';
+import config from '../../knexfile.js';
+import { EntrepotFavori } from '../metier/entrepotFavori.js';
+import { Favori } from '../metier/favori.js';
+import { Utilisateur } from '../metier/utilisateur.js';
+import { AdaptateurHachage } from './adaptateurHachage.js';
 
 export class EntrepotFavoriPostgres implements EntrepotFavori {
   knex: Knex.Knex;
