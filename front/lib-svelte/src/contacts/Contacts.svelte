@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { creeLeFragmentDeNavigation } from '../navigation/fragmentDeNavigation';
+  import { creeLeFragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '../stores/profil.store';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
@@ -24,17 +24,7 @@
   );
 
   // Gestion du fragment
-  let fragmentDeNavigation = $state(creeLeFragmentDeNavigation(window.location.hash));
-  const changeLeFragmentDeNavigation = () => {
-    fragmentDeNavigation = creeLeFragmentDeNavigation(window.location.hash);
-    appliqueLesFiltres();
-  };
-  $effect(() => {
-    window.addEventListener('hashchange', changeLeFragmentDeNavigation);
-    return () => {
-      window.removeEventListener('hashchange', changeLeFragmentDeNavigation);
-    };
-  });
+  let fragmentDeNavigation = $state(creeLeFragmentDeNavigation());
 
   // Gestion des filtres
   const appliqueLesFiltres = () => {
@@ -47,7 +37,7 @@
   $effect(() => {
     fragmentDeNavigation.change('region', regionSelectionnee);
     fragmentDeNavigation.change('secteur', secteurSelectionne);
-    window.location.hash = fragmentDeNavigation.serialise();
+    fragmentDeNavigation.actualise();
   });
 
   onMount(() => {
