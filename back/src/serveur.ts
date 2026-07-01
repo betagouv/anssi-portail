@@ -10,6 +10,7 @@ import { EntrepôtModulePostgres } from './entrepotModulePostgres';
 import { adaptateurCellar } from './infra/adaptateurCellar';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement';
 import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo';
+import { AdaptateurEnrichissementSvelte } from './infra/adaptateurEnrichissement';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement';
 import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSentry';
 import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage';
@@ -39,7 +40,6 @@ import { EntrepotMesure } from './metier/entrepotMesure';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides';
-import { AdaptateurEnrichissementSvelte } from './infra/adaptateurEnrichissement';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
@@ -123,57 +123,60 @@ const serviceSanteGuides = fabriqueServiceSanteGuides(cellar);
 
 const port = process.env.PORT || 3000;
 
-serviceCoherenceSecretsHachage
-  .verifieCoherenceSecrets()
-  .catch((raison) => {
-    console.error(raison.message);
+(async () => {
+  try {
+    await serviceCoherenceSecretsHachage.verifieCoherenceSecrets();
+  } catch (raison: unknown) {
+    console.error((raison as Error).message);
+    // @ts-expect-error L’erreur peut contenir plusieurs erreurs
     console.error(raison.errors.map((e: Error) => e.message).join('\n'));
     process.exit(1);
-  })
-  .then(() => console.log('✅ Vérification des secrets réussie'))
-  .then(() => {
-    return creeServeur({
-      fournisseurChemin,
-      middleware: fabriqueMiddleware({
-        adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
-        fournisseurChemin,
-        adaptateurEnvironnement,
-        adaptateurEnrichissement: new AdaptateurEnrichissementSvelte(),
-      }),
-      adaptateurOIDC,
+  }
+
+  console.log('✅ Vérification des secrets réussie');
+
+  creeServeur({
+    fournisseurChemin,
+    middleware: fabriqueMiddleware({
       adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
-      adaptateurGestionErreur: adaptateurGestionErreurSentry,
-      busEvenements,
-      entrepotUtilisateur,
-      reseau: {
-        trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
-        maxRequetesParMinutes: adaptateurEnvironnement.serveur().maxRequetesParMinute(),
-        maxRequetesParMinuteAPI: adaptateurEnvironnement.serveur().maxRequetesParMinuteAPI(),
-        ipAutorisees: adaptateurEnvironnement.serveur().ipAutorisees(),
-      },
-      adaptateurRechercheEntreprise,
-      adaptateurProfilAnssi,
-      entrepotResultatTest,
-      entrepotFavori,
-      entrepotSessionDeGroupe,
-      adaptateurMonAideCyber,
+      fournisseurChemin,
       adaptateurEnvironnement,
-      cmsCrisp,
-      generateurCodeSessionDeGroupe: new GenerateurAleatoireCodeSessionDeGroupe(entrepotSessionDeGroupe),
-      adaptateurHachage,
-      messagerieInstantanee,
-      entrepotFinancement,
-      entrepotGuide,
-      entrepotGuideTravail: entrepotGuideTravail,
-      entrepotExigence,
-      entrepotMesure,
-      entrepotPriseEnCompte,
-      entrepôtModule,
-      cellar,
-      serviceSanteGuides,
-      adaptateurEmail,
-      generateurImage: new GenerateurImageAvif(),
-    }).listen(port, () => {
-      console.log(`Le serveur écoute sur le port ${port}`);
-    });
+      adaptateurEnrichissement: new AdaptateurEnrichissementSvelte(),
+    }),
+    adaptateurOIDC,
+    adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
+    adaptateurGestionErreur: adaptateurGestionErreurSentry,
+    busEvenements,
+    entrepotUtilisateur,
+    reseau: {
+      trustProxy: adaptateurEnvironnement.serveur().trustProxy(),
+      maxRequetesParMinutes: adaptateurEnvironnement.serveur().maxRequetesParMinute(),
+      maxRequetesParMinuteAPI: adaptateurEnvironnement.serveur().maxRequetesParMinuteAPI(),
+      ipAutorisees: adaptateurEnvironnement.serveur().ipAutorisees(),
+    },
+    adaptateurRechercheEntreprise,
+    adaptateurProfilAnssi,
+    entrepotResultatTest,
+    entrepotFavori,
+    entrepotSessionDeGroupe,
+    adaptateurMonAideCyber,
+    adaptateurEnvironnement,
+    cmsCrisp,
+    generateurCodeSessionDeGroupe: new GenerateurAleatoireCodeSessionDeGroupe(entrepotSessionDeGroupe),
+    adaptateurHachage,
+    messagerieInstantanee,
+    entrepotFinancement,
+    entrepotGuide,
+    entrepotGuideTravail: entrepotGuideTravail,
+    entrepotExigence,
+    entrepotMesure,
+    entrepotPriseEnCompte,
+    entrepôtModule,
+    cellar,
+    serviceSanteGuides,
+    adaptateurEmail,
+    generateurImage: new GenerateurImageAvif(),
+  }).listen(port, () => {
+    console.log(`Le serveur écoute sur le port ${port}`);
   });
+})();
