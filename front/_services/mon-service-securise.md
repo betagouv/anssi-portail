@@ -22,13 +22,11 @@ liens:
     titre: Bénéficier d’un accompagnement
     lien: https://calendly.com/fabien-giraud/presentation-de-monservicesecurise-1
     illustration: mss/mss-accompagnement.avif
-    couleurFond: '#0079D0'
   - commencer:
     titre: Commencer à sécuriser
     lien: https://monservicesecurise-ressources.cellar-c2.services.clever-cloud.com/MonServiceSecurise%20video.mp4
     video: true
     illustration: mss/mss-securiser.webp
-    couleurFond: '#0079D0'
 ---
 
 MonServiceSécurisé est un service numérique proposé par le laboratoire d'innovation de l’ANSSI pour aider les entités publiques à piloter en équipe la sécurité de tous leurs services numériques et à les homologuer rapidement.
