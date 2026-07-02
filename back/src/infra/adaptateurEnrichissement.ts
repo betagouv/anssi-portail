@@ -5,21 +5,25 @@ export interface AdaptateurEnrichissement {
   enrichisAvecComposants: (chemin: string, avecNonceEtVersion: string) => Promise<string>;
 }
 
+const composantsSsr = ['entreprises'];
+
 export class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
   async enrichisAvecComposants(chemin: string, avecNonceEtVersion: string) {
     try {
-      //@ts-expect-error fichier compilé
-      const entreprises = await import('../../../front/lib-svelte/dist/serveur/assets/entreprises.js');
       if (chemin.endsWith('entreprises/index.html')) {
-        const { head, body } = render(entreprises.default);
         const dom = new JSDOM(avecNonceEtVersion);
         const divDInjectionCSS = dom.window.document.getElementsByTagName('head');
-        if (divDInjectionCSS.length) {
-          divDInjectionCSS[0].insertAdjacentHTML('beforeend', head);
-        }
-        const divDInjection = dom.window.document.getElementById('entreprises');
+        for (const nomComposant of composantsSsr) {
+          const divDInjection = dom.window.document.getElementById(nomComposant);
+          if (!divDInjection) {
+            continue;
+          }
+          const composantSvelte = await import(`../../../front/lib-svelte/dist/serveur/assets/${nomComposant}.js`);
+          const { head, body } = render(composantSvelte.default);
+          if (divDInjectionCSS.length) {
+            divDInjectionCSS[0].insertAdjacentHTML('beforeend', head);
+          }
 
-        if (divDInjection) {
           divDInjection.innerHTML = body;
         }
 
