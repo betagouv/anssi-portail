@@ -9,5 +9,10 @@
     "noEmit": false,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["vite.config.ts", "vite.config.ssr.ts", "./src/plateforme/plateforme.plugin.ts"]
+  "include": [
+    "vite.config.ts",
+    "vite.config.ssr.ts",
+    "./src/plateforme/plateforme.plugin.ts",
+    "./src/utils/injecteNonce.plugin.ts"
+  ]
 }
