@@ -5,6 +5,7 @@ import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
 import { fabriqueMiddleware, Middleware } from '../../src/api/middleware.js';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC.js';
 import { AdaptateurCellar } from '../../src/infra/adaptateurCellar.js';
+import { AdaptateurEnrichissement } from '../../src/infra/adaptateurEnrichissement.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 import { adaptateurGestionVide } from '../../src/infra/adaptateurGestionErreurVide.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
@@ -26,7 +27,6 @@ import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTest
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire.js';
-import { AdaptateurEnrichissement } from '../../src/infra/adaptateurEnrichissement.js';
 
 export const fauxFournisseurDeChemin: FournisseurChemin = {
   cheminPageJekyll: (_: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
@@ -63,7 +63,7 @@ export const fauxAdaptateurJWT: AdaptateurJWT = {
 };
 
 export const fauxAdaptateurEnrichissement: AdaptateurEnrichissement = {
-  enrichisAvecComposants: async (_chemin, avecNonceEtVersion) => avecNonceEtVersion,
+  enrichisAvecComposants: async (contenuPage) => contenuPage,
 };
 
 export const fauxAdaptateurRechercheEntreprise: AdaptateurRechercheEntreprise = {
