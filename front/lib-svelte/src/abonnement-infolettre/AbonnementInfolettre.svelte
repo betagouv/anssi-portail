@@ -56,7 +56,7 @@
               abonnement à la newsletter.
             </p>
           </dsfr-alert>
-          <img src="/assets/images/dragon-coeur-entier.svg" alt="Le dragon vous remercie" />
+          <img src="/assets/images/dragon-coeur-entier.svg" width="340" height="255" alt="Le dragon vous remercie" />
           <dsfr-button
             markup="a"
             label="Revenir à l’étape précédente"
@@ -145,7 +145,7 @@
     gap: 2rem;
 
     img {
-      max-width: 340px;
+      max-width: min(340px, 100%);
       align-self: center;
     }
   }

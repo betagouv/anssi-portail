@@ -1,6 +1,6 @@
 <script lang="ts">
-  import BoutonFavori from '../favoris/BoutonFavori.svelte';
   import { decodeEntiteHtml } from '$plateforme/aseptisationDuHtml';
+  import BoutonFavori from '../favoris/BoutonFavori.svelte';
   import type { ItemCyber } from './Catalogue.types';
   import type { Guide } from './Guide.types';
   import HeaderBadge from './HeaderBadge.svelte';
@@ -73,7 +73,7 @@
     </div>
 
     {#if image}
-      <img src={image} alt={altImage} slot="image" class="illustration" />
+      <img src={image} alt={altImage} slot="image" class="illustration" width="311" height="150" />
     {/if}
 
     {#if item.sources || item.tagsSpecifiques}

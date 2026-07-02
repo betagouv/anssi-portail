@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { onMount } from 'svelte';
   import EncartLienVersDemandeDiagnostic from '../../demande-aide-mon-aide-cyber/EncartLienVersDemandeDiagnostic.svelte';
   import { clic } from '../../directives/actions.svelte';
@@ -7,7 +8,6 @@
   import FilAriane from '../../ui/FilAriane.svelte';
   import Lien from '../../ui/Lien.svelte';
   import Separateur from '../../ui/Separateur.svelte';
-  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { CollectionGuide, type Guide } from '../Guide.types';
   import { chargeGuidesDansLeStore, guidesStore } from '../stores/guides/guides.store';
   import BadgesDeCollections from './BadgesDeCollections.svelte';
@@ -56,7 +56,7 @@
           <BoutonsDocumentsGuide {guide} />
         </div>
         <div class="conteneur-illustration">
-          <img src={guide.illustration.grande} alt="Capture d’écran" />
+          <img src={guide.illustration.grande} width="588" height="330" alt="Capture d’écran" />
         </div>
       </div>
     </div>
@@ -66,9 +66,9 @@
     <details>
       <summary>
         <div class="entete-filtres">
-          <img class="menu" src="/assets/images/icone-menu-lateral.svg" alt="" />
+          <img class="menu" src="/assets/images/icone-menu-lateral.svg" width="16" height="16" alt="" />
           <span id="section-active" class="titre-menu">Présentation</span>
-          <img class="chevron" src="/assets/images/icone-chevron-bas.svg" alt="" />
+          <img class="chevron" src="/assets/images/icone-chevron-bas.svg" width="16" height="16" alt="" />
         </div>
       </summary>
 
@@ -133,7 +133,7 @@
           {@html descriptionAspetisee}
 
           <div class="grille-cartes">
-            <img src={guide.illustration.grande} alt="Capture d’écran" />
+            <img src={guide.illustration.grande} width="354" height="250" alt="Capture d’écran" />
           </div>
 
           <BoutonsDocumentsGuide {guide} autoriseMultiple />
@@ -160,7 +160,12 @@
     <div class="non-trouve">
       <h1>Guide introuvable</h1>
       <p>Le guide demandé n’a pas pu être trouvé.</p>
-      <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Guide introuvable" />
+      <img
+        src="/assets/images/illustration-dragon-aucun-resultat.svg"
+        width="282"
+        height="211"
+        alt="Guide introuvable"
+      />
     </div>
   </dsfr-container>
 {/if}
@@ -400,6 +405,7 @@
 
       img {
         width: 100%;
+        height: auto;
         margin-top: 32px;
         margin-bottom: 8px;
       }

@@ -5,7 +5,7 @@
 </script>
 
 <div class="tuile">
-  <img src={`/assets/images/${image}.svg`} alt={description} />
+  <img src={`/assets/images/${image}.svg`} width="96" height="96" alt={description} />
   <span class="mesure">{mesure}</span>
   <span class="description">{description}</span>
 </div>

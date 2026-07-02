@@ -17,7 +17,7 @@
       <h2>{titre}</h2>
       <p class="explication">{explication}</p>
       {#if sourceIllustration}
-        <img class="illustration" src={sourceIllustration} alt="Illustration {titre}" />
+        <img class="illustration" src={sourceIllustration} width="282" height="211" alt="Illustration {titre}" />
       {/if}
     </div>
     <div class="contenu-droite">

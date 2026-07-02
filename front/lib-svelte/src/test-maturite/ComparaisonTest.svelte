@@ -163,7 +163,12 @@
 {:else}
   <dsfr-container class="pas-assez-de-resultats">
     <div class="contenu-section">
-      <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Pas assez de résultats" />
+      <img
+        src="/assets/images/illustration-dragon-aucun-resultat.svg"
+        width="282"
+        height="211"
+        alt="Pas assez de résultats"
+      />
       <h4>Pas de résultat 😔</h4>
       <p>
         Nous n’avons pas encore assez de données pour afficher une comparaison fiable avec les filtres sélectionnés.

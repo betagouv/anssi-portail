@@ -6,7 +6,7 @@
 
 {#if !ouvert}
   <button class="declencheur-centre-aide" on:click={() => (ouvert = true)} transition:fly={{ y: 300 }}>
-    <img src="/assets/images/icone-centre-aide.svg" alt="Icône du centre d'aide" />
+    <img src="/assets/images/icone-centre-aide.svg" width="30" height="30" alt="Icône du centre d'aide" />
     Centre d'aide
   </button>
 {/if}
@@ -15,11 +15,16 @@
   <div class="centre-aide" transition:fly={{ y: 300 }}>
     <div class="entete">
       <div>
-        <img src="/assets/images/icone-centre-aide.svg" alt="Icône du centre d'aide" />
+        <img src="/assets/images/icone-centre-aide.svg" width="30" height="30" alt="Icône du centre d'aide" />
         <h4>Centre d'aide</h4>
       </div>
       <button on:click={() => (ouvert = false)}>
-        <img src="/assets/images/icone-croix-blanche.svg" alt="Icône de fermeture du centre d'aider" />
+        <img
+          src="/assets/images/icone-croix-blanche.svg"
+          width="16"
+          height="16"
+          alt="Icône de fermeture du centre d'aider"
+        />
       </button>
     </div>
     <div class="contenu">

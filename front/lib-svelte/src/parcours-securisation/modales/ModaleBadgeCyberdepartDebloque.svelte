@@ -13,7 +13,12 @@
 <Modale bind:estOuverte>
   <h2 class="fr-h4">🎉 Bravo, vous avez pris votre Cyberdépart</h2>
   <div class="corps">
-    <img src="/assets/images/parcours-securisation/badge-cyberdepart.svg" alt="Badge Cyberdépart" />
+    <img
+      src="/assets/images/parcours-securisation/badge-cyberdepart.svg"
+      width="157"
+      height="157"
+      alt="Badge Cyberdépart"
+    />
     <p class="texte-standard-md">
       Ce badge témoigne de l’engagement de votre organisation dans une première démarche de sécurisation. Il valorise
       les actions mises en place pour réduire les risques cyber les plus fréquents.

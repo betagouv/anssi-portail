@@ -187,7 +187,12 @@
           {/if}
         </div>
         <div class="illustration">
-          <img src="/assets/images/test-maturite/illustration-{idQuestionCourante}.svg" alt="" />
+          <img
+            src="/assets/images/test-maturite/illustration-{idQuestionCourante}.svg"
+            width="432"
+            height="324"
+            alt=""
+          />
         </div>
       </div>
     {:else}

@@ -3,7 +3,7 @@
 </script>
 
 <button on:click={surClic}>
-  <img src="/assets/images/icone-menu.svg" alt="Menu burger" />
+  <img src="/assets/images/icone-menu.svg" width="24" height="24" alt="Menu burger" />
 </button>
 
 <style lang="scss">

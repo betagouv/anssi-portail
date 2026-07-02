@@ -14,7 +14,7 @@
     <dsfr-alert type="success" size="sm" title="Merci&nbsp;!">
       <p slot="description">Votre inscription à la newsletter MesServicesCyber a bien été prise en compte.</p>
     </dsfr-alert>
-    <img src="/assets/images/dragon-coeur-entier.svg" alt="Le dragon vous remercie" />
+    <img src="/assets/images/dragon-coeur-entier.svg" width="340" height="255" alt="Le dragon vous remercie" />
     <dsfr-button markup="a" label="Accéder à la page d’accueil" kind="secondary" href="/"></dsfr-button>
   </div>
 </dsfr-container>
@@ -40,7 +40,7 @@
     gap: 2rem;
 
     img {
-      max-width: 340px;
+      max-width: min(340px, 100%);
       align-self: center;
     }
 

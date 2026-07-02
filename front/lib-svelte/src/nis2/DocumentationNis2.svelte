@@ -39,7 +39,12 @@
         </p>
       </hgroup>
       <dsfr-link label="Consulter la FAQ" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank></dsfr-link>
-      <img src="/assets/images/apercu-faq-nis2-dans-laptop.avif" alt="Foire aux questions de mon espace NIS 2" />
+      <img
+        src="/assets/images/apercu-faq-nis2-dans-laptop.avif"
+        width="1574"
+        height="890"
+        alt="Foire aux questions de mon espace NIS 2"
+      />
     </div>
   </div>
 </dsfr-container>

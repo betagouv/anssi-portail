@@ -87,6 +87,8 @@
     <div class="contenu-section contenu-sans-resultat">
       <img
         src="/assets/images/illustration-dragon-aucun-resultat.svg"
+        width="282"
+        height="211"
         alt="Pas encore de résultat soumis par les participants"
       />
       <h4>Encouragez vos participants à finaliser le test</h4>

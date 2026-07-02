@@ -36,7 +36,12 @@
   <div class="favoris">
     {#if $itemsCatalogueEnFavori.length === 0}
       <div class="contenu-sans-favoris">
-        <img src="/assets/images/illustration-dragon-aucun-resultat.svg" alt="Aucun favori sauvegardé" />
+        <img
+          src="/assets/images/illustration-dragon-aucun-resultat.svg"
+          width="282"
+          height="211"
+          alt="Aucun favori sauvegardé"
+        />
         <h2>Ajoutez vos services et ressources favoris et partagez-les facilement au sein de votre organisation.</h2>
         <Lien href="/catalogue" apparence="bouton" taille="lg" libelle="Explorer le catalogue"></Lien>
       </div>
