@@ -1,3 +1,4 @@
+import * as entities from 'entities';
 import DOMPurify from 'isomorphic-dompurify';
 
 export const aseptiseHtml = (html: string) =>
@@ -25,7 +26,6 @@ export const aseptiseHtml = (html: string) =>
       nomElement === 'msc-lien' && ['blank', 'libelle', 'neutre'].includes(nomAttribut),
   });
 
-export function decodeEntiteHtml(_inputStr: string) {
-  // throw Error('Implementation serveur à venir');
-  return _inputStr;
+export function decodeEntiteHtml(entrée: string) {
+  return entities.decodeHTML(entrée);
 }
