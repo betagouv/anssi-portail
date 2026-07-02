@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import axios from 'axios';
   import { onMount } from 'svelte';
   import CelluleExigenceNis2 from '../nis2/tableaux/CelluleExigenceNis2.svelte';
@@ -6,7 +7,6 @@
   import Bouton from '../ui/Bouton.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
-  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import { storeAvisUtilisateur, type AvisUtilisateur } from './avisUtilisateur.store';
   import type { Mesure } from './mesure';
   import PriseEnCompteMesure from './PriseEnCompteMesure.svelte';
@@ -216,9 +216,11 @@
           </div>
           <div class="section-aide recyf">
             <p>
-              Pour approfondir, vous pouvez consulter les exigences ReCyF (moyen de conformité NIS 2), dont cette
-              recommandation est issue.
+              Les mesures proposées sur MesServicesCyber sont inspirées du Référentiel Cyber France (ReCyF). Simplifiées
+              et accompagnées d’explications pédagogiques, elles contribuent à faciliter les efforts de sécurisation de
+              toutes les organisations, notamment celles concernées par la directive NIS2.
             </p>
+            <p>Pour approfondir, consultez la ou les exigences ReCyF/NIS2 dont est inspirée cette mesure.</p>
             {#each Object.entries(exigencesRegroupeesParObjectif) as [objectif, exigences], index (index)}
               <Accordeon libelle={objectif}>
                 {#each exigences as exigence (exigence.reference)}
