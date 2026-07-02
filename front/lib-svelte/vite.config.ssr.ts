@@ -1,10 +1,11 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { defineConfig } from 'vite';
+import { defineConfig, UserConfig } from 'vite';
+import { rollupOptions } from './rollupOptions';
 import { plateformePlugin } from './src/plateforme/plateforme.plugin';
 import { injecteNonce } from './src/utils/injecteNonce.plugin';
 
 // https://vite.dev/config/
-export default defineConfig({
+export const configSsr: UserConfig = {
   plugins: [
     svelte({
       compilerOptions: {
@@ -19,16 +20,7 @@ export default defineConfig({
     ssr: true,
     cssCodeSplit: false,
     outDir: 'dist/serveur',
-    rollupOptions: {
-      input: {
-        entreprises: 'src/protection/entreprises/PresentationEntreprises.svelte',
-        associations: 'src/protection/associations/PresentationAssociations.svelte',
-      },
-      output: {
-        entryFileNames: `assets/[name].js`,
-        assetFileNames: `assets/[name].[ext]`,
-      },
-    },
+    rollupOptions,
   },
   css: {
     preprocessorOptions: {
@@ -37,4 +29,6 @@ export default defineConfig({
       },
     },
   },
-});
+} as const;
+
+export default defineConfig(configSsr);

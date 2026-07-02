@@ -5,14 +5,13 @@ export interface AdaptateurEnrichissement {
   enrichisAvecComposants: (contenuPage: string) => Promise<string>;
 }
 
-const composantsSsr = ['entreprises', 'associations'];
-
-export class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
+class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
+  constructor(private composantsAutorisés: string[]) {}
   async enrichisAvecComposants(contenuPage: string) {
     try {
       const dom = new JSDOM(contenuPage);
       const divDInjectionCSS = dom.window.document.getElementsByTagName('head');
-      for (const nomComposant of composantsSsr) {
+      for (const nomComposant of this.composantsAutorisés) {
         const divDInjection = dom.window.document.getElementById(nomComposant);
         if (!divDInjection) {
           continue;
@@ -33,3 +32,9 @@ export class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement 
     return contenuPage;
   }
 }
+
+export const fabriqueAdaptateurEnrichissement = async (): Promise<AdaptateurEnrichissement> => {
+  const { rollupOptions } = await import('../../../front/lib-svelte/rollupOptions.js');
+  const composantsAutorisés = Object.keys(rollupOptions?.input ?? {});
+  return new AdaptateurEnrichissementSvelte(composantsAutorisés);
+};
