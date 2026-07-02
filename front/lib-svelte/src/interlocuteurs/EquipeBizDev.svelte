@@ -4,7 +4,7 @@
 
 <div class="contenu">
   <div class="photos">
-    <img src="/assets/images/floriane-bizdev.avif" alt="Floriane Gallego" />
+    <img src="/assets/images/floriane-bizdev.avif" width="500" height="500" alt="Floriane Gallego" />
   </div>
   <h2>Notre équipe est à votre écoute</h2>
   <p class="texte-standard-md">

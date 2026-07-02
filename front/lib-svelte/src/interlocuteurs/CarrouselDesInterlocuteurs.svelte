@@ -9,7 +9,7 @@
     href="/contacts"
     enlarge="true"
   >
-    <img slot="pictogram" src="/assets/images/trois-mains-croisees.svg" alt="Contacts cyber" />
+    <img slot="pictogram" src="/assets/images/trois-mains-croisees.svg" width="80" height="80" alt="Contacts cyber" />
   </dsfr-tile>
   <dsfr-tile
     title="Prestataires qualifiés et labellisés"
@@ -31,7 +31,7 @@
     href="/financements"
     enlarge="true"
   >
-    <img slot="pictogram" src="/assets/images/pile-de-pieces.svg" alt="Financements cyber" />
+    <img slot="pictogram" src="/assets/images/pile-de-pieces.svg" width="80" height="80" alt="Financements cyber" />
   </dsfr-tile>
 </lab-anssi-carrousel-tuiles>
 

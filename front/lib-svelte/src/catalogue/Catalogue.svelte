@@ -158,7 +158,7 @@
         <CarteItem item={guide} avecBoutonFavori />
       {:else}
         <div class="aucun-resultat">
-          <img src="/assets/images/homme-cherchant-avec-loupe.svg" alt="Aucun résultat" />
+          <img src="/assets/images/homme-cherchant-avec-loupe.svg" width="175" height="317" alt="Aucun résultat" />
           {#if chargement}
             <p class="fr-h3">Chargement...</p>
           {:else}
@@ -177,7 +177,7 @@
         <CarteItem item={itemCyber} avecBoutonFavori />
       {:else}
         <div class="aucun-resultat">
-          <img src="/assets/images/homme-cherchant-avec-loupe.svg" alt="Aucun résultat" />
+          <img src="/assets/images/homme-cherchant-avec-loupe.svg" width="175" height="317" alt="Aucun résultat" />
           <p class="fr-h3">Désolé, aucun résultat trouvé</p>
           <input
             type="button"

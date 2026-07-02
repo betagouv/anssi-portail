@@ -81,7 +81,7 @@
             <CarteFinancement {financement} />
           {:else}
             <div class="aucun-resultat">
-              <img src="/assets/images/homme-cherchant-avec-loupe.svg" alt="Aucun résultat" />
+              <img src="/assets/images/homme-cherchant-avec-loupe.svg" width="175" height="317" alt="Aucun résultat" />
               <p class="fr-h2">Désolé, aucun résultat trouvé</p>
               <lab-anssi-bouton
                 on:click={reinitialiseFiltres}

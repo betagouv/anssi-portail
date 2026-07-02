@@ -51,7 +51,7 @@
     </div>
   </div>
   <div class="illustration">
-    <img src="/assets/images/test-maturite/illustration-prise-en-compte-risque.svg" alt="" />
+    <img src="/assets/images/test-maturite/illustration-prise-en-compte-risque.svg" width="432" height="324" alt="" />
   </div>
 </div>
 <div class="note">

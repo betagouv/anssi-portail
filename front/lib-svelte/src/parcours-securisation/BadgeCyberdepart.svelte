@@ -3,7 +3,12 @@
 </script>
 
 <div class="badge">
-  <img src="/assets/images/parcours-securisation/badge-cyberdepart.svg" alt="Badge Cyberdépart " />
+  <img
+    src="/assets/images/parcours-securisation/badge-cyberdepart.svg"
+    width="157"
+    height="157"
+    alt="Badge Cyberdépart "
+  />
   <h6>Badge Cyberdépart</h6>
   <p class="texte-standard-md">
     Ce badge témoigne de l’engagement de votre organisation dans une première démarche de sécurisation. Il valorise les

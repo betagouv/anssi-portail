@@ -25,7 +25,7 @@
       </p>
     </div>
     <div>
-      <img src="/assets/images/localisation-france.svg" alt="" />
+      <img src="/assets/images/localisation-france.svg" width="160" height="160" alt="" />
     </div>
   </div>
   <dsfr-highlight

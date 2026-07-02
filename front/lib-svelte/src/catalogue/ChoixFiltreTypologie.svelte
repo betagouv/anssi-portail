@@ -18,7 +18,7 @@
       } else {
         $rechercheParTypologie = $rechercheParTypologie.filter((v) => v !== valeur);
       }
-    }}><img src={`/assets/images/${icone}.svg`} alt="" />{libelle}</dsfr-checkbox
+    }}><img src={`/assets/images/${icone}.svg`} width="24" height="24" alt="" />{libelle}</dsfr-checkbox
   >
   <span class="compte">{$nombreResultats.parTypologie[valeur]}</span>
 </div>

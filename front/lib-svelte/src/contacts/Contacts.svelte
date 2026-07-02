@@ -184,7 +184,7 @@
     {:else}
       <div class="aucun-resultat">
         <NoteInformation />
-        <img src="/assets/images/contacts-resultat-vide.svg" alt="Aucun résultat" />
+        <img src="/assets/images/contacts-resultat-vide.svg" width="188" height="171" alt="Aucun résultat" />
         <h5>Sélectionnez une région ou un secteur d’activité depuis le menu de filtres.</h5>
       </div>
     {/if}
