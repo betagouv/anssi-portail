@@ -21,7 +21,6 @@ liens:
     titre: CyberEnJeux
     lien: /ressources/cyber-enjeux.html
     illustration: demainspecialistecyber/demainspecialistecyber-cyberenjeux.avif
-    couleurFond: '#4cbab6'
 ---
 
 DemainSpécialisteCyber est un dispositif créé par le laboratoire d’innovation de l’ANSSI et le bureau de l’innovation pédagogique du ministère de l’Éducation nationale et de la jeunesse en partenariat avec le studio des communs du Campus Cyber.

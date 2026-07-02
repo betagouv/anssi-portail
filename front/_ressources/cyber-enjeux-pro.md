@@ -31,7 +31,6 @@ liens:
     titre: Téléchargez les différents supports !
     lien: https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/CyberEnJeux-Pro.zip
     illustration: cyber-enjeux-pro/cyber-enjeux-pro.avif
-    couleurFond: '#0079D0'
 ---
 
 Dispositif innovant créé par le laboratoire d’innovation de l’Agence nationale de la sécurité des systèmes d’information (ANSSI), CyberEnJeux Pro permet de sensibiliser vos agents ou salariés aux risques de cyberattaques et aux bonnes pratiques à l’occasion de sessions de création de jeux sérieux sur la cybersécurité !

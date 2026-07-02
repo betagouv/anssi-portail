@@ -19,12 +19,10 @@ liens:
     titre: Découvrez DemainSpécialisteCyber
     lien: /services/demainspecialistecyber.html
     illustration: cyber-enjeux/cyber-enjeux-demainspe.avif
-    couleurFond: '#0079D0'
   - commencer:
     titre: Téléchargez les différents supports !
     lien: https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/CyberEnJeux.zip
     illustration: cyber-enjeux/cyber-enjeux.avif
-    couleurFond: '#0079D0'
 ---
 
 Imaginé par le laboratoire d’innovation de L’ANSSI et co-construit avec le ministère de l’Education nationale et l’association Open Serious Game, CyberEnJeux est un dispositif pédagogique innovant permettant de former des élèves à la cybersécurité dans le cadre de leurs enseignements… par la création de jeux par les élèves eux-mêmes.

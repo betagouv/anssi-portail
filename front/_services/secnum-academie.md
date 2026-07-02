@@ -20,7 +20,6 @@ liens:
     titre: Découvrir le service
     lien: https://www.dailymotion.com/video/x8ad119
     illustration: secnumacademie/secnumacademie-video.avif
-    couleurFond: '#FFFFFF'
 ---
 
 Dans le cadre de sa mission de sensibilisation, l’ANSSI propose SecNumacadémie pour former le plus grand nombre de citoyens à la sécurité du numérique.

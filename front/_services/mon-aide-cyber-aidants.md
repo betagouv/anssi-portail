@@ -24,13 +24,11 @@ liens:
     titre: Devenir Aidant cyber !
     lien: https://www.monaide.cyber.gouv.fr/
     illustration: mac/mac-accompagnement.avif
-    couleurFond: '#5d2b9d'
   - commencer:
     titre: Découvrez notre vidéo&nbsp;!
     video: true
     lien: https://ressources-mac.cellar-c2.services.clever-cloud.com/Video_MAC.mp4
     illustration: mac/mac.avif
-    couleurFond: '#6f479f'
 ---
 
 MonAideCyber est un service numérique proposé par le laboratoire d’innovation de l’ANSSI pour aider l’ensemble des entités publiques et privées peu matures sur les enjeux de cybersécurité mais souhaitant passer à l’action !

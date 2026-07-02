@@ -22,7 +22,6 @@ liens:
     titre: Bénéficiez d’un accompagnement
     lien: https://messervices.cyber.gouv.fr/cyberdepart
     illustration: mac/mac-diag.avif
-    couleurFond: '#5d2b9d'
 ---
 
 Vous souhaitez protéger votre organisation contre les cyberattaques mais ne savez pas par quoi commencer ?

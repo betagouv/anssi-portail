@@ -40,17 +40,14 @@ liens:
     titre: RÉFLEXES CYBER & RÉFLEXES CYBER +
     lien: /documents-ressources/ReflexesCyber%20-%20Pack%20Collectivite.zip
     illustration: reflexes-cyber/RC-Coll.png
-    couleurFond: '#0079D0'
   - commencer:
     titre: RÉFLEXES CYBER & RÉFLEXES CYBER +
     lien: /documents-ressources/ReflexesCyber%20-%20Pack%20Entreprise.zip
     illustration: reflexes-cyber/RC-Ent.png
-    couleurFond: '#0079D0'
   - commencer:
     titre: FICHES RÉFLEXES CYBER
     lien: /documents-ressources/ReflexesCyber%20-%20Fiches%20Reflexes.pdf
     illustration: reflexes-cyber/RC-FR.png
-    couleurFond: '#0079D0'
 ---
 
 <p>
