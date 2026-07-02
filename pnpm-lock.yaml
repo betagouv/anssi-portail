@@ -322,6 +322,9 @@ importers:
       dompurify:
         specifier: ^3.4.11
         version: 3.4.11
+      entities:
+        specifier: ^8.0.0
+        version: 8.0.0
       isomorphic-dompurify:
         specifier: ^3.18.0
         version: 3.18.0(@noble/hashes@1.8.0)
