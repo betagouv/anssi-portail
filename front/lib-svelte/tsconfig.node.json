@@ -14,6 +14,6 @@
     "vite.config.ssr.ts",
     "./src/plateforme/plateforme.plugin.ts",
     "./src/utils/injecteNonce.plugin.ts",
-    "rollupOptions.ts"
+    "./src/utils/composantsAutorises.plugin.ts"
   ]
 }

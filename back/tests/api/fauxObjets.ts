@@ -5,7 +5,7 @@ import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
 import { fabriqueMiddleware, Middleware } from '../../src/api/middleware.js';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC.js';
 import { AdaptateurCellar } from '../../src/infra/adaptateurCellar.js';
-import { AdaptateurEnrichissement } from '../../src/infra/adaptateurEnrichissement.js';
+import { AdaptateurEnrichissement } from '../../src/infra/enrichissement/adaptateurEnrichissement.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 import { adaptateurGestionVide } from '../../src/infra/adaptateurGestionErreurVide.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';

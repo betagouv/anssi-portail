@@ -1,5 +1,6 @@
 import { JSDOM } from 'jsdom';
 import { render } from 'svelte/server';
+import { composantsAutorisés } from './composantsAutorises.genere.js';
 
 export interface AdaptateurEnrichissement {
   enrichisAvecComposants: (contenuPage: string) => Promise<string>;
@@ -16,7 +17,9 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
         if (!divDInjection) {
           continue;
         }
-        const composantSvelte = await import(`../../../front/_site/lib-svelte/dist/serveur/assets/${nomComposant}.js`);
+        const composantSvelte = await import(
+          `../../../../front/_site/lib-svelte/dist/serveur/assets/${nomComposant}.js`
+        );
         const { head, body } = render(composantSvelte.default);
         if (divDInjectionCSS.length) {
           divDInjectionCSS[0].insertAdjacentHTML('beforeend', head);
@@ -34,7 +37,5 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
 }
 
 export const fabriqueAdaptateurEnrichissement = async (): Promise<AdaptateurEnrichissement> => {
-  const { rollupOptions } = await import('../../../front/lib-svelte/rollupOptions.js');
-  const composantsAutorisés = Object.keys(rollupOptions?.input ?? {});
   return new AdaptateurEnrichissementSvelte(composantsAutorisés);
 };

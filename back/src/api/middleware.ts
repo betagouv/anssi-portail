@@ -4,7 +4,7 @@ import helmet from 'helmet';
 import jsonwebtoken from 'jsonwebtoken';
 import { randomBytes } from 'node:crypto';
 import fs from 'node:fs';
-import { AdaptateurEnrichissement } from '../infra/adaptateurEnrichissement.js';
+import { AdaptateurEnrichissement } from '../infra/enrichissement/adaptateurEnrichissement.js';
 import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
 import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur.js';
