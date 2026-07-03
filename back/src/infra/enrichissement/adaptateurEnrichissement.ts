@@ -1,13 +1,17 @@
 import { JSDOM } from 'jsdom';
 import { render } from 'svelte/server';
 import { composantsAutorisés } from './composantsAutorises.genere.js';
+import { FournisseurChemin } from '../../api/fournisseurChemin.js';
 
 export interface AdaptateurEnrichissement {
   enrichisAvecComposants: (contenuPage: string) => Promise<string>;
 }
 
 class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
-  constructor(private composantsAutorisés: string[]) {}
+  constructor(
+    private composantsAutorisés: string[],
+    private fournisseurDeChemin: FournisseurChemin
+  ) {}
   async enrichisAvecComposants(contenuPage: string) {
     try {
       const dom = new JSDOM(contenuPage);
@@ -17,9 +21,10 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
         if (!divDInjection) {
           continue;
         }
-        const composantSvelte = await import(
-          `../../../../front/_site/lib-svelte/dist/serveur/assets/${nomComposant}.js`
+        const cheminDuComposant = this.fournisseurDeChemin.ressourceDeBase(
+          `lib-svelte/dist/serveur/assets/${nomComposant}.js`
         );
+        const composantSvelte = await import(cheminDuComposant);
         const { head, body } = render(composantSvelte.default);
         if (divDInjectionCSS.length) {
           divDInjectionCSS[0].insertAdjacentHTML('beforeend', head);
@@ -36,6 +41,8 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
   }
 }
 
-export const fabriqueAdaptateurEnrichissement = async (): Promise<AdaptateurEnrichissement> => {
-  return new AdaptateurEnrichissementSvelte(composantsAutorisés);
+export const fabriqueAdaptateurEnrichissement = async (
+  fournisseurDeChemin: FournisseurChemin
+): Promise<AdaptateurEnrichissement> => {
+  return new AdaptateurEnrichissementSvelte(composantsAutorisés, fournisseurDeChemin);
 };
