@@ -42,10 +42,10 @@
   "dependencies": {
     "@sentry/browser": "^10.48.0",
     "@sentry/vite-plugin": "^5.2.0",
-    "axios": "^1.15.0",
+    "axios": "catalog:",
     "dompurify": "^3.4.11",
-    "entities": "^8.0.0",
-    "isomorphic-dompurify": "^3.18.0",
+    "entities": "catalog:",
+    "isomorphic-dompurify": "catalog:",
     "npm-run-all2": "^8.0.4",
     "qrcode": "^1.5.4"
   },

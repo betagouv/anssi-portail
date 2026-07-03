@@ -13,6 +13,14 @@ packages:
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 preferFrozenLockfile: true
 
+# Versions partagées entre lib-svelte (compilation) et front (résolution runtime des
+# bundles SSR servis depuis front/_site). Référencées par « catalog: » dans les deux
+# package.json pour éviter toute dérive de version.
+catalog:
+  axios: ^1.15.0
+  entities: ^8.0.0
+  isomorphic-dompurify: ^3.18.0
+
 minimumReleaseAgeExclude:
   - devalue@5.8.1
   - '@lab-anssi/ui-kit'

@@ -4,6 +4,18 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    axios:
+      specifier: ^1.15.0
+      version: 1.16.1
+    entities:
+      specifier: ^8.0.0
+      version: 8.0.0
+    isomorphic-dompurify:
+      specifier: ^3.18.0
+      version: 3.18.0
+
 overrides:
   '@babel/core@<=7.29.0': '>=7.29.6'
   ajv@<6.14.0: 6.14.0
@@ -309,13 +321,13 @@ importers:
   front:
     dependencies:
       axios:
-        specifier: '>=1.16.0'
+        specifier: 'catalog:'
         version: 1.16.1
       entities:
-        specifier: ^8.0.0
+        specifier: 'catalog:'
         version: 8.0.0
       isomorphic-dompurify:
-        specifier: ^3.18.0
+        specifier: 'catalog:'
         version: 3.18.0(@noble/hashes@1.8.0)
 
   front/lib-svelte:
@@ -327,16 +339,16 @@ importers:
         specifier: ^5.2.0
         version: 5.2.0(rollup@4.59.0)
       axios:
-        specifier: '>=1.16.0'
+        specifier: 'catalog:'
         version: 1.16.1
       dompurify:
         specifier: ^3.4.11
         version: 3.4.11
       entities:
-        specifier: ^8.0.0
+        specifier: 'catalog:'
         version: 8.0.0
       isomorphic-dompurify:
-        specifier: ^3.18.0
+        specifier: 'catalog:'
         version: 3.18.0(@noble/hashes@1.8.0)
       npm-run-all2:
         specifier: ^8.0.4
@@ -3572,11 +3584,6 @@ packages:
   has-tostringtag@1.0.2:
     resolution:
       { integrity: sha512-NqADB8VjPFLM2V0VvHUewwwsw0ZWBaIdgo+ieHtK3hasLz4qeCRjYcqfB6AQrBggRKppKF8L52/VqdVsO47Dlw== }
-    engines: { node: '>= 0.4' }
-
-  hasown@2.0.2:
-    resolution:
-      { integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ== }
     engines: { node: '>= 0.4' }
 
   hasown@2.0.4:
@@ -8259,7 +8266,7 @@ snapshots:
       get-proto: 1.0.1
       gopd: 1.2.0
       has-symbols: 1.1.0
-      hasown: 2.0.2
+      hasown: 2.0.4
       math-intrinsics: 1.1.0
 
   get-package-type@0.1.0: {}
@@ -8298,10 +8305,6 @@ snapshots:
   has-tostringtag@1.0.2:
     dependencies:
       has-symbols: 1.1.0
-
-  hasown@2.0.2:
-    dependencies:
-      function-bind: 1.1.2
 
   hasown@2.0.4:
     dependencies:
@@ -8361,7 +8364,7 @@ snapshots:
 
   is-core-module@2.16.1:
     dependencies:
-      hasown: 2.0.2
+      hasown: 2.0.4
 
   is-extglob@2.1.1: {}
 
