@@ -1,6 +1,6 @@
-import { mount } from 'svelte';
+import { hydrate } from 'svelte';
 import Navigation from './navigation/Navigation.svelte';
 
-mount(Navigation, {
+hydrate(Navigation, {
   target: document.getElementById('navigation')!,
 });
