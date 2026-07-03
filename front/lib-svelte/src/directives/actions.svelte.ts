@@ -23,16 +23,3 @@ export const clic: Action<HTMLElement, (e: MouseEvent | KeyboardEvent) => void> 
     },
   };
 };
-
-export const proprietes: Action<HTMLElement, Record<string, unknown>> = (
-  element: HTMLElement,
-  valeurs: Record<string, unknown>
-) => {
-  const applique = (aAppliquer: Record<string, unknown>) => {
-    for (const [nom, valeur] of Object.entries(aAppliquer)) {
-      (element as unknown as Record<string, unknown>)[nom] = valeur;
-    }
-  };
-  applique(valeurs);
-  return { update: applique };
-};
