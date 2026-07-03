@@ -4,9 +4,9 @@ import helmet from 'helmet';
 import jsonwebtoken from 'jsonwebtoken';
 import { randomBytes } from 'node:crypto';
 import fs from 'node:fs';
-import { AdaptateurEnrichissement } from '../infra/enrichissement/adaptateurEnrichissement.js';
 import { AdaptateurEnvironnement } from '../infra/adaptateurEnvironnement.js';
 import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
+import { AdaptateurEnrichissement } from '../infra/enrichissement/adaptateurEnrichissement.js';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur.js';
 import { Utilisateur } from '../metier/utilisateur.js';
 import { AdaptateurJWT } from './adaptateurJWT.js';
@@ -90,11 +90,11 @@ export const fabriqueMiddleware = ({
     reponse.envoieFichierEnrichi = async (chemin: string) => {
       try {
         const fichier = fs.readFileSync(chemin, 'utf-8');
-        const avecNonce = fichier.replaceAll('%%NONCE%%', nonceAleatoire);
+        const contenuPage = await adaptateurEnrichissement.enrichisAvecComposants(fichier);
+        const avecNonce = contenuPage.replaceAll('%%NONCE%%', nonceAleatoire);
         const avecNonceEtVersion = avecNonce.replaceAll('%%VERSION%%', adaptateurEnvironnement.versionDeConstruction());
-        const contenuPage = await adaptateurEnrichissement.enrichisAvecComposants(avecNonceEtVersion);
 
-        reponse.send(contenuPage);
+        reponse.send(avecNonceEtVersion);
       } catch {
         await reponse
           .status(404)
