@@ -27,7 +27,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
         const composantSvelte = await import(cheminDuComposant);
         const { head, body } = render(composantSvelte.default);
         if (divDInjectionCSS.length) {
-          divDInjectionCSS[0].insertAdjacentHTML('beforeend', head);
+          divDInjectionCSS[0].insertAdjacentHTML('beforeend', head.replaceAll('<style ', '<style nonce="%%NONCE%%" '));
         }
 
         divDInjection.innerHTML = body;

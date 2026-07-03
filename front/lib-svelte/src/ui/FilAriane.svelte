@@ -1,6 +1,7 @@
 <script lang="ts">
   import { decodeEntiteHtml } from '$plateforme/aseptisationDuHtml';
   import { profilStore } from '../stores/profil.store.js';
+  import { proprietes } from '../directives/actions.svelte';
   import type { Branche } from './filAriane';
 
   type Props = {
@@ -28,7 +29,8 @@
   ]);
 </script>
 
-<dsfr-breadcrumb inverse={fondSombre} buttonLabel="Voir le fil d'Ariane" {segments}></dsfr-breadcrumb>
+<dsfr-breadcrumb inverse={fondSombre} buttonLabel="Voir le fil d'Ariane" use:proprietes={{ segments }}
+></dsfr-breadcrumb>
 
 <style lang="scss">
   dsfr-breadcrumb {
