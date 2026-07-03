@@ -34,8 +34,8 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
       }
 
       return dom.serialize();
-    } catch {
-      /* vide */
+    } catch (e) {
+      console.error("Erreur lors de l'injection svelte : ", e);
     }
     return contenuPage;
   }
