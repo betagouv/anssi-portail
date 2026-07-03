@@ -1,8 +1,19 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig, UserConfig } from 'vite';
-import { rollupOptions } from './rollupOptions';
 import { plateformePlugin } from './src/plateforme/plateforme.plugin';
+import { emetComposantsAutorisés } from './src/utils/composantsAutorises.plugin';
 import { injecteNonce } from './src/utils/injecteNonce.plugin';
+
+const rollupOptions: NonNullable<UserConfig['build']>['rollupOptions'] = {
+  input: {
+    entreprises: 'src/protection/entreprises/PresentationEntreprises.svelte',
+    associations: 'src/protection/associations/PresentationAssociations.svelte',
+  },
+  output: {
+    entryFileNames: `assets/[name].js`,
+    assetFileNames: `assets/[name].[ext]`,
+  },
+};
 
 // https://vite.dev/config/
 export const configSsr: UserConfig = {
@@ -15,6 +26,10 @@ export const configSsr: UserConfig = {
     }),
     injecteNonce(),
     plateformePlugin(),
+    emetComposantsAutorisés(
+      Object.keys(rollupOptions?.input ?? {}),
+      '../../back/src/infra/enrichissement/composantsAutorises.genere.ts'
+    ),
   ],
   build: {
     ssr: true,

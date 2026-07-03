@@ -10,7 +10,7 @@ import { EntrepôtModulePostgres } from './entrepotModulePostgres.js';
 import { adaptateurCellar } from './infra/adaptateurCellar.js';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement.js';
 import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo.js';
-import { fabriqueAdaptateurEnrichissement } from './infra/adaptateurEnrichissement.js';
+import { fabriqueAdaptateurEnrichissement } from './infra/enrichissement/adaptateurEnrichissement.js';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement.js';
 import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSentry.js';
 import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage.js';
