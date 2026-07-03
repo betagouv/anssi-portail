@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import { onMount } from 'svelte';
   import { creeLienContactsUtiles } from '../contacts/contacts';
   import { profilStore } from '../stores/profil.store';
@@ -13,9 +14,7 @@
   });
 
   let estConnecte = () => !!$profilStore;
-
-  const cheminRelatif = window.location.pathname;
-
+  const cheminRelatif: string = typeof window !== 'undefined' ? window.location.pathname : '/';
   const menu = $derived([
     ...(estConnecte()
       ? [
@@ -90,7 +89,7 @@
 </script>
 
 <div class="nav">
-  <dsfr-navigation items={menu}></dsfr-navigation>
+  <dsfr-navigation items={enPropriétéWebC(menu)}></dsfr-navigation>
   {#if estBureau}
     <div>
       <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart">
