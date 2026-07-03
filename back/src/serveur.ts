@@ -141,7 +141,7 @@ const port = process.env.PORT || 3000;
       adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
       fournisseurChemin,
       adaptateurEnvironnement,
-      adaptateurEnrichissement: await fabriqueAdaptateurEnrichissement(),
+      adaptateurEnrichissement: await fabriqueAdaptateurEnrichissement(fournisseurChemin),
     }),
     adaptateurOIDC,
     adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
