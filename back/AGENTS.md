@@ -1,4 +1,4 @@
-# CLAUDE.md - Backend (`back/`)
+# AGENTS.md - Backend (`back/`)
 
 Node.js/TypeScript Express API server with PostgreSQL and Knex migrations.
 

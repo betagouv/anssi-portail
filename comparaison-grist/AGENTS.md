@@ -1,4 +1,4 @@
-# CLAUDE.md - Comparaison Grist
+# AGENTS.md - Comparaison Grist
 
 Utility for comparing and synchronizing data with Grist spreadsheets.
 

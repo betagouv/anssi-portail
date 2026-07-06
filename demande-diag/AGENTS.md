@@ -1,4 +1,4 @@
-# CLAUDE.md - Demande Diag Web Component
+# AGENTS.md - Demande Diag Web Component
 
 Svelte-based Web Component that runs independently. Deployed as a CDN-hosted JavaScript file for embedding in external portals.
 
