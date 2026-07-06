@@ -6,6 +6,27 @@ Ce site est construit avec Jekyll.
 
 ## Développement
 
+### Développement avec Nix
+
+Ce dépôt fournit un shell Nix, local pour éviter l'installation système de toutes les dépendances (Node, pnpm, Ruby, Bundler, Docker Compose, Prek, etc).
+
+Avec [`direnv`](https://direnv.net/) et [`nix-direnv`](https://github.com/nix-community/nix-direnv) :
+
+```shell
+$ direnv allow
+```
+
+Sans `direnv`, lancez le shell Nix explicitement :
+
+```shell
+$ nix develop
+```
+
+Au premier chargement, Corepack installe localement la version `pnpm@10.24.0` déclarée dans `package.json`.
+Les fichiers générés restent dans le dépôt local et sont ignorés par Git : `.direnv/`, `.nix-bin/`, `.corepack/` et `.gems/`.
+
+Les commandes de développement restent les mêmes.
+
 ### Installation de Jekyll
 
 > N.B. : Jekyll est construit en Ruby.

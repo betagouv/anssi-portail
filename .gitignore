@@ -10,3 +10,9 @@ dist/
 .env
 .idea
 mise-a-jour-financements/rapports
+
+# Nix/local development state
+.direnv
+.nix-bin
+.corepack
+.gems
