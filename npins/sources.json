@@ -5,6 +5,19 @@
       "name": "nixpkgs-unstable",
       "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1028110.f205b5574fd0/nixexprs.tar.xz",
       "hash": "sha256-2l8yOB5aYd+05Q9V9Y1YhgbSa1j1o5QX+nvYs5FL80A="
+    },
+    "playwright-cli": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "microsoft",
+        "repo": "playwright-cli"
+      },
+      "branch": "main",
+      "submodules": false,
+      "revision": "74d9bf144a96770b6295ceedecb07a2fd7e86775",
+      "url": "https://github.com/microsoft/playwright-cli/archive/74d9bf144a96770b6295ceedecb07a2fd7e86775.tar.gz",
+      "hash": "sha256-M0NZ7h1kSIsxktMWe5n75LDc+MHZvSq6b+iRx6opakU="
     }
   },
   "version": 7

@@ -77,6 +77,15 @@ OU
 npm install -g @j178/prek
 ```
 
+#### Playwright CLI
+
+Le skill d'agent Playwright utilise le CLI Playwright pour piloter un navigateur, lancer des scénarios et inspecter les pages pendant les sessions d'agent.
+Installez-le globalement avec npm avant d'utiliser ce skill :
+
+```shell
+npm install -g @playwright/cli@latest
+```
+
 ## Bootstrap de l'application
 
 ### Initialisation du fichier de variables d'environnement
