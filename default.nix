@@ -11,6 +11,15 @@ let
       or (throw "Unsupported Node.js version in .nvmrc: ${nodeVersion}");
   corepack = pkgs.corepack.override { inherit nodejs-slim; };
   bundler = pkgs.bundler.override { ruby = pkgs.ruby_4_0; };
+  playwrightCli = pkgs.buildNpmPackage {
+    pname = "playwright-cli";
+    version = "0.1.15";
+
+    src = sources."playwright-cli";
+
+    npmDepsHash = "sha256-ZrO8yIqMYMQUlsQraejVgKRZ7klC5/8UsV3/H1EqYtA=";
+    dontNpmBuild = true;
+  };
 in
 {
   shell = pkgs.mkShell {
@@ -20,6 +29,7 @@ in
       ruby_4_0
       bundler
       docker-compose
+      playwrightCli
       prek
       npins
     ];
