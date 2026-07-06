@@ -159,7 +159,13 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
   async parReferentiel(referentiel: Referentiel, cible?: Referentiel): Promise<Exigence[]> {
     const requete = this.construitRequeteSQL(referentiel, cible);
 
-    const exigences = await this.appelleGrist({}, `${this.urlDocument}/sql?q=${requete}`);
+    let exigences;
+    try {
+      exigences = await this.appelleGrist({}, `${this.urlDocument}/sql?q=${requete}`);
+    } catch {
+      console.error("Une erreur s'est produite lors de l'appel au Grist des exigences");
+      return [];
+    }
 
     const fabriqueCorrespondance = (exigenceGrist: ExigenceGrist): Correspondance =>
       new Correspondance(
