@@ -1,4 +1,4 @@
-# CLAUDE.md - Frontend (`front/`)
+# AGENTS.md - Frontend (`front/`)
 
 Jekyll static site generator with Svelte components. Builds at deployment time.
 
@@ -13,7 +13,7 @@ front/
 ├── _services/       Business logic, helper modules
 ├── _ressources/     Reference docs and static assets
 ├── gestion-guides/  Guide management
-├── lib-svelte/      Reusable Svelte components (see lib-svelte/CLAUDE.md)
+├── lib-svelte/      Reusable Svelte components (see lib-svelte/AGENTS.md)
 ├── assets/          Static assets (CSS, JS, images)
 ├── test/            Test files (Vitest)
 ├── Gemfile          Ruby dependencies
@@ -59,7 +59,7 @@ Svelte components (`lib-svelte/`) build to `lib-svelte/dist/` and are included i
 - Build: `pnpm --filter @anssi-portail/svelte build`
 - Output: JavaScript bundles in `lib-svelte/dist/`
 
-See [lib-svelte/CLAUDE.md](lib-svelte/CLAUDE.md) for component details.
+See [lib-svelte/AGENTS.md](lib-svelte/AGENTS.md) for component details.
 
 ## Testing
 
@@ -119,5 +119,5 @@ Static assets (CSS, images, fonts) in `assets/`. Reference them in HTML/Jekyll l
 
 - HTML: Valid semantic HTML
 - Ruby: Follow Jekyll conventions
-- JavaScript/Svelte: See lib-svelte/CLAUDE.md
+- JavaScript/Svelte: See lib-svelte/AGENTS.md
 - Prettier applies to all `.js` and `.ts` files

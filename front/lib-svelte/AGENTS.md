@@ -1,4 +1,4 @@
-# CLAUDE.md - Svelte Components (`front/lib-svelte/`)
+# AGENTS.md - Svelte Components (`front/lib-svelte/`)
 
 Reusable Svelte component library built with Vite. Components are compiled to JavaScript and embedded in Jekyll pages.
 

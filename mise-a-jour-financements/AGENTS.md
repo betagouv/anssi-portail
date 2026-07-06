@@ -1,4 +1,4 @@
-# CLAUDE.md - Mise à jour Financements
+# AGENTS.md - Mise à jour Financements
 
 Utility script to sync and update financing data. Runs independently from the main portal.
 
