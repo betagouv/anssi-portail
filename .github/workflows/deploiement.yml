@@ -14,7 +14,10 @@ jobs:
     with:
       nom: Démo
       environnement: DEMO_NODE
-    secrets: inherit
+    secrets:
+      CLEVER_CLOUD_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
+      CLEVER_CLOUD_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
+      CLEVER_CLOUD_ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
 
   deploiement-prod-node:
     name: 'Déploiement'
@@ -23,4 +26,7 @@ jobs:
     with:
       nom: Production
       environnement: PROD_NODE
-    secrets: inherit
+    secrets:
+      CLEVER_CLOUD_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
+      CLEVER_CLOUD_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
+      CLEVER_CLOUD_ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
