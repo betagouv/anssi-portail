@@ -4,11 +4,12 @@
 
 Ce site est construit avec Jekyll.
 
-## Développement
+## Dépendances de développement
 
-### Développement avec Nix
+### Shell Nix
 
 Ce dépôt fournit un shell Nix, local pour éviter l'installation système de toutes les dépendances (Node, pnpm, Ruby, Bundler, Docker Compose, Prek, etc).
+Les dépendances Nix sont épinglées avec [`npins`](https://github.com/andir/npins).
 
 Avec [`direnv`](https://direnv.net/) et [`nix-direnv`](https://github.com/nix-community/nix-direnv) :
 
@@ -19,21 +20,26 @@ $ direnv allow
 Sans `direnv`, lancez le shell Nix explicitement :
 
 ```shell
-$ nix develop
+$ nix-shell
 ```
 
-Au premier chargement, Corepack installe localement la version `pnpm@10.24.0` déclarée dans `package.json`.
-Les fichiers générés restent dans le dépôt local et sont ignorés par Git : `.direnv/`, `.nix-bin/`, `.corepack/` et `.gems/`.
+Toutes les dépendances de la section sous-jacente [Installations manuelles](#installations-manuelles) sont maintenant installées et disponibles. Rendez-vous directement à la section [Bootstrap de l'application](#bootstrap-de-lapplication).
 
-Les commandes de développement restent les mêmes.
+Pour mettre à jour les dépendances Nix épinglées :
 
-### Installation de Jekyll
+```shell
+$ npins update
+```
+
+### Installations manuelles
+
+#### Jekyll
 
 > N.B. : Jekyll est construit en Ruby.
 > Nous ne sommes pas développeurs Ruby et nous découvrons son écosystème.
 > Il se peut que les instructions ci-dessous semblent mauvaises à une personne connaissant bien Ruby 🙏
 
-#### Ruby
+##### Ruby
 
 Ruby est installé avec `rbenv`, ce qui permet de sélectionner la version indépendamment de celui proposé par le système d’exploitation, qui peut parfois avoir du retard sur les dernières versions stables.
 
@@ -50,7 +56,7 @@ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 rbenv install 4.0.5
 ```
 
-#### Bundler
+##### Bundler
 
 - Installer `bundler`
 
@@ -61,14 +67,17 @@ $ export GEM_HOME="$HOME/gems/" # Pointer vers un dossier sur lequel vous avez d
 $ gem install bundler -V
 ```
 
-#### Dépendances
+#### Prek
 
-- Installer les dépendances Jekyll de ce projet
+Prek sert à exécuter des commandes au moment du commit. Ça nous sert en l'occurrence à formater nos fichiers avant de les pousser sur Git.
 
-```shell
-$ cd front
-$ bundler install
 ```
+pnpm add -g @j178/prek
+OU
+npm install -g @j178/prek
+```
+
+## Bootstrap de l'application
 
 ### Initialisation du fichier de variables d'environnement
 
@@ -88,15 +97,26 @@ $ docker compose up db
 $ docker compose exec db createdb -U postgres msc
 ```
 
+- Éteindre la stack Docker Compose, puis lancer `pnpm dev` par la suite.
+
 ### Installation des dépendances du projet
 
-- Revenir à la racine, installer les dépendances Node et lancer le projet en mode "dev"
+- Installer les dépendances Jekyll et Node du projet.
 
 ```shell
-$ cd ..
+$ bundler install --gemfile=front/Gemfile
 $ pnpm install --frozen-lockfile
-$ pnpm dev
 ```
+
+### Installation de Prek
+
+- Installer le hook de pre-commit du dépôt :
+
+```shell
+prek install
+```
+
+> [!TIP] > `prek install` crée un hook de pre-commit dans le répertoire `$HOME/.git-template`
 
 ### Initialisation des clés de hachage
 
@@ -108,32 +128,13 @@ pnpm admin:dev
 > await admin.sauvegardeLesEmpreintesDesSecretsDeHachage()
 ```
 
-### Démarrer l'application en local
+## Démarrer l'application en local
 
 ```shell
 $ pnpm dev
 ```
 
-- Arrivé ici, le site doit être consultable sur http://127.0.0.1:3000
-
-### Installation de prek
-
-Prek sert à executer des commandes au moment du commit. Ça nous sert en l'occurence à formatter nos fichiers avant de les pousser sur Git.
-
-```
-pnpm add -g @j178/prek
-OU
-npm install -g @j178/prek
-```
-
-suivi de
-
-```
-prek install
-```
-
-> [!TIP]
-> prek install crée un hook de pre-commit dans le répertoire `$HOME/.git-template`
+- À partir d'ici, le site doit être consultable sur http://127.0.0.1:3000
 
 ## Le build et la PROD
 
@@ -151,25 +152,25 @@ Elles sont passées à Jekyll via le plugin [jekyll-dotenv](https://www.rubydoc.
 ### Re-hachage avec un nouveau sel
 
 Il est possible de hacher avec un nouveau sel nos données hachées en base de données.
-Pour celà, on procède en plusieurs étapes :
+Pour cela, on procède en plusieurs étapes :
 
 1. Faire un dump de la base au cas où
-2. Redémarre le portail en mode maintenance (variable d'environnement MODE_MAINTENANCE=true)
-3. Assurez vous que les bases msc et msc-journal soient démarrées
-4. lancer la console d'administration (`pnpm admin`)
-5. exécuter la commande de migration de hache (`> await admin.migreTousLesHaches(2, 'leNouveauSel')`)
+2. Redémarrer le portail en mode maintenance (variable d'environnement MODE_MAINTENANCE=true)
+3. Assurez-vous que les bases msc et msc-journal soient démarrées
+4. Lancer la console d'administration (`pnpm admin`)
+5. Exécuter la commande de migration de hache (`> await admin.migreTousLesHaches(2, 'leNouveauSel')`)
    > Où le premier paramètre est la nouvelle version du hache, et le deuxième paramètre est le nouveau sel
-6. Rajouter la nouvelle variable d'environnement contenant le nouveau sel (ici, puisque la nouvelle version est la 2, on aura la variable d'env `HACHAGE_SECRET_DE_HACHAGE_2=leNouveauSel`)
-7. Redémarre le portail en désactivant le mode maintenance
+6. Ajouter la nouvelle variable d'environnement contenant le nouveau sel (ici, puisque la nouvelle version est la 2, on aura la variable d'env `HACHAGE_SECRET_DE_HACHAGE_2=leNouveauSel`)
+7. Redémarrer le portail en désactivant le mode maintenance
 
 ### Rotation de clé de chiffrement
 
 Certaines de nos données sont chiffrées, on peut remplacer la clé de chiffrement.
-Pour celà, on procède en plusieurs étapes :
+Pour cela, on procède en plusieurs étapes :
 
 1. Faire un dump de la base au cas où
-2. Redémarre le portail en mode maintenance (variable d'environnement MODE_MAINTENANCE=true)
-3. lancer la console d'administration (`pnpm admin`)
-4. exécuter la commande de rotation (`> await admin.remplaceLaCleDeChiffrement('ancienneCle', 'nouvelleCle')`)
+2. Redémarrer le portail en mode maintenance (variable d'environnement MODE_MAINTENANCE=true)
+3. Lancer la console d'administration (`pnpm admin`)
+4. Exécuter la commande de rotation (`> await admin.remplaceLaCleDeChiffrement('ancienneCle', 'nouvelleCle')`)
 5. Modifier la variable d'environnement CHIFFREMENT_CHACHA20_CLE_HEX (`CHIFFREMENT_CHACHA20_CLE_HEX=nouvelleCle`)
-6. Redémarre le portail en désactivant le mode maintenance
+6. Redémarrer le portail en désactivant le mode maintenance
