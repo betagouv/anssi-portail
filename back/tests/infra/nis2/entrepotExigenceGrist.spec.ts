@@ -44,6 +44,16 @@ describe("L'entrepot d'exigence Grist", () => {
     assert.ok(urlAppelee.startsWith('http://grist/api/docs/idDeDocumentSocle/sql?q='));
   });
 
+  it("renvoie une liste vide si l'appel à grist échoue", async () => {
+    clientHttp.get = fabriqueClientGet(async () => {
+      throw new Error("Erreur de test lros de l'appel au Grist");
+    });
+
+    const exigences = await entrepotExigenceGrist.parReferentiel('NIS2');
+
+    assert.equal(exigences.length, 0);
+  });
+
   it("ne renvoie rien si l'url source n'est pas définie", async () => {
     const entrepotExigenceGristHorsLigne = new EntrepotExigenceGrist({
       clientHttp,
