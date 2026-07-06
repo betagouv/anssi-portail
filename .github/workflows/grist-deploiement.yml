@@ -35,7 +35,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Lance le script de comparaison
-        run: pnpm -F comparaison-grist start:${{ inputs.cible }}:compare
+        run: pnpm -F comparaison-grist "start:${INPUTS_CIBLE}:compare"
         env:
           GUIDES_SOURCE_GRIST_URL: ${{ secrets.GUIDES_SOURCE_GRIST_URL }}
           GUIDES_SOURCE_GRIST_ID_TABLE: ${{ secrets.GUIDES_SOURCE_GRIST_ID_TABLE }}
@@ -43,6 +43,7 @@ jobs:
           GUIDES_CIBLE_GRIST_URL: ${{ secrets.GUIDES_CIBLE_GRIST_URL }}
           GUIDES_CIBLE_GRIST_ID_TABLE: ${{ secrets.GUIDES_CIBLE_GRIST_ID_TABLE }}
           GUIDES_CIBLE_GRIST_API_KEY: ${{ secrets.GUIDES_CIBLE_GRIST_API_KEY }}
+          INPUTS_CIBLE: ${{ inputs.cible }}
 
       - name: Sauvegarde l'empreinte source
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -71,5 +72,5 @@ jobs:
             --header 'authorization: Bearer ${{ secrets.GUIDES_CIBLE_GRIST_API_KEY }}' \
             --header 'content-type: application/json' \
             --data '{
-              "sourceDocId": "${{ env.EMPREINTE }}"
+              "sourceDocId": "${EMPREINTE}"
             }'
