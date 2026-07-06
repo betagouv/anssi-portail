@@ -9,6 +9,8 @@ collections:
     output: true
   contacts:
     output: true
+include:
+  - '_commonjsHelpers-*.js'
 exclude:
   - README.md
   - lib-svelte/.vscode/
