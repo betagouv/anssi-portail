@@ -4,20 +4,19 @@ permissions: {}
 
 on:
   workflow_call:
-    inputs:
-      secrets:
-        CELLAR_ACCESS_KEY_ID:
-          required: true
-        CELLAR_SECRET_ACCESS_KEY:
-          required: true
-        GUIDES_BUCKET_SOURCE:
-          required: true
-        GUIDES_BUCKET_CIBLE:
-          required: true
-        MQC_API_DOCUMENTS_TOKEN:
-          required: true
-        MQC_API_DOCUMENTS_URL:
-          required: true
+    secrets:
+      CELLAR_ACCESS_KEY_ID:
+        required: true
+      CELLAR_SECRET_ACCESS_KEY:
+        required: true
+      GUIDES_BUCKET_SOURCE:
+        required: true
+      GUIDES_BUCKET_CIBLE:
+        required: true
+      MQC_API_DOCUMENTS_TOKEN:
+        required: true
+      MQC_API_DOCUMENTS_URL:
+        required: true
 
 jobs:
   compare-les-buckets:

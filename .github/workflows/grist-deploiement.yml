@@ -9,21 +9,21 @@ on:
         description: 'Cible'
         type: string
         required: true
-      secrets:
-        GUIDES_SOURCE_GRIST_URL:
-          required: true
-        GUIDES_SOURCE_GRIST_ID_TABLE:
-          required: true
-        GUIDES_SOURCE_GRIST_API_KEY:
-          required: true
-        GUIDES_CIBLE_GRIST_URL:
-          required: true
-        GUIDES_CIBLE_GRIST_ID_TABLE:
-          required: true
-        GUIDES_CIBLE_GRIST_API_KEY:
-          required: true
-        INPUTS_CIBLE:
-          required: true
+    secrets:
+      GUIDES_SOURCE_GRIST_URL:
+        required: true
+      GUIDES_SOURCE_GRIST_ID_TABLE:
+        required: true
+      GUIDES_SOURCE_GRIST_API_KEY:
+        required: true
+      GUIDES_CIBLE_GRIST_URL:
+        required: true
+      GUIDES_CIBLE_GRIST_ID_TABLE:
+        required: true
+      GUIDES_CIBLE_GRIST_API_KEY:
+        required: true
+      INPUTS_CIBLE:
+        required: true
 
 jobs:
   genere-tableau-comparatif:
