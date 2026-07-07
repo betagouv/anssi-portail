@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import FoireAuxQuestions from './FoireAuxQuestions.svelte';
   import FormulaireDemandeSimplifiee from './FormulaireDemandeSimplifiee.svelte';
 
@@ -10,6 +11,14 @@
   export let urlBase: string = '';
   export let cacheLesLiensDeRetour = false;
   export let siretAidant: string | undefined = undefined;
+
+  let campagne: string;
+  onMount(() => {
+    const parametres = new URLSearchParams(window.location.search);
+    campagne = parametres.get('mtm_campaign') ?? '';
+  });
+
+  $: origineComplète = campagne ? `${origine};${campagne}` : origine;
 </script>
 
 <div class="demande-diagnostic" class:autonome={mode === 'autonome'}>
@@ -28,7 +37,7 @@
   </div>
 
   <div class="formulaire">
-    <FormulaireDemandeSimplifiee {mode} {origine} {urlBase} {cacheLesLiensDeRetour} {siretAidant} />
+    <FormulaireDemandeSimplifiee {mode} origine={origineComplète} {urlBase} {cacheLesLiensDeRetour} {siretAidant} />
   </div>
   <details>
     <summary>
