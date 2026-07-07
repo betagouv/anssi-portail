@@ -10,6 +10,13 @@ on:
       environnement:
         required: true
         type: string
+      secrets:
+        CLEVER_CLOUD_SECRET:
+          required: true
+        CLEVER_CLOUD_TOKEN:
+          required: true
+        CLEVER_CLOUD_ID_APP:
+          required: true
 
 jobs:
   deploiement-node:
