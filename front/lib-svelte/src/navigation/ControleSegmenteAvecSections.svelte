@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onDestroy, onMount, untrack } from 'svelte';
+  import { onMount, untrack } from 'svelte';
   import ControleSegmente from './ControleSegmente.svelte';
   import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from './fragmentDeNavigation.svelte';
 
@@ -105,10 +105,9 @@
     return () => {
       window.removeEventListener('load', initApresChargement);
       history.scrollRestoration = scrollRestorationPrecedente;
+      sectionsDuComposant()?.forEach((s) => observateurDIntersection?.unobserve(s));
     };
   });
-
-  onDestroy(() => sectionsDuComposant()?.forEach((s) => observateurDIntersection?.unobserve(s)));
 </script>
 
 <ControleSegmente {elements} bind:idÉlémentSélectionné {fragmentDeNavigation} {lorsDuClic}></ControleSegmente>

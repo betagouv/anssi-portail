@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { estServeur } from '$plateforme/environnement';
   import NavigationTertiaire from '../../navigation/NavigationTertiaire.svelte';
   import FilAriane from '../../ui/FilAriane.svelte';
   import Heros from '../../ui/Heros.svelte';
@@ -38,7 +39,10 @@
 
 <NavigationTertiaire {liens} bind:lienActif />
 
-{#if lienActif === '#proteger'}
+{#if estServeur}
+  <Proteger origine="landing-collectivites" />
+  <Solutions {itemsCyber} />
+{:else if lienActif === '#proteger'}
   <Proteger origine="landing-collectivites" />
 {:else}
   <Solutions {itemsCyber} />

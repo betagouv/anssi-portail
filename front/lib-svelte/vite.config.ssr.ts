@@ -9,6 +9,7 @@ const rollupOptions: NonNullable<UserConfig['build']>['rollupOptions'] = {
     entreprises: 'src/protection/entreprises/PresentationEntreprises.svelte',
     associations: 'src/protection/associations/PresentationAssociations.svelte',
     navigation: 'src/navigation/Navigation.svelte',
+    collectivites: 'src/protection/collectivites/PresentationCollectivites.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,
