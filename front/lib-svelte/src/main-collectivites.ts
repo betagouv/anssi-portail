@@ -2,7 +2,7 @@ import { hydrate } from 'svelte';
 import type { ItemCyber } from './catalogue/Catalogue.types';
 import Page from './protection/collectivites/PresentationCollectivites.svelte';
 
-const donnees = document.getElementById('donnees')!.textContent;
+const donnees = document.getElementById('donnees-items-cyber')!.textContent;
 if (!donnees) throw new Error('Impossible de trouver les données du catalogue');
 
 const { itemsCyber } = JSON.parse(donnees) as {

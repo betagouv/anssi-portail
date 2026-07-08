@@ -1,7 +1,7 @@
 import { mount } from 'svelte';
 import FilAriane from './ui/FilAriane.svelte';
 
-const donnees = document.getElementById('donnees')!.textContent;
+const donnees = document.getElementById('donnees-fil-ariane')!.textContent;
 if (!donnees) throw new Error('Impossible de trouver les données');
 
 const props = JSON.parse(donnees);
