@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import { type FragmentDeNavigation, creeLeFragmentDeNavigation } from './fragmentDeNavigation.svelte';
 
   type Props = {
@@ -41,7 +42,9 @@
   <dsfr-segmented
     noLegend
     {hasIcon}
-    elements={elements?.map((e, idx) => ({ id: e.id, name: e.id, label: e.titre, icon: e.icone, value: idx }))}
+    elements={enPropriétéWebC(
+      elements?.map((e, idx) => ({ id: e.id, name: e.id, label: e.titre, icon: e.icone, value: idx }))
+    )}
     value={indexÉlémentSélectionné}
     onvaluechanged={(e: CustomEvent<number>) => changeDeSection(e.detail)}
   ></dsfr-segmented>
