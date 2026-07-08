@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import { onMount } from 'svelte';
 
   type Lien = { emoji?: string; label: string; fragment: string };
@@ -29,7 +30,9 @@
 
 <dsfr-tabnav
   centered
-  links={liens.map((lien) => ({ label: `${lien.emoji ? lien.emoji + ' ' : ''}${lien.label}`, href: lien.fragment }))}
+  links={enPropriétéWebC(
+    liens.map((lien) => ({ label: `${lien.emoji ? lien.emoji + ' ' : ''}${lien.label}`, href: lien.fragment }))
+  )}
   activeIndex={liens.findIndex((lien) => lien.fragment === lienActif)}
 >
 </dsfr-tabnav>

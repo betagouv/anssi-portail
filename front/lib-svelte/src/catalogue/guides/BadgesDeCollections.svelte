@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import { CollectionGuide, type Guide } from '../Guide.types';
   import { laCouleurDuBadgeSelonLaCollection } from './guide';
 
@@ -11,4 +12,4 @@
     }));
 </script>
 
-<dsfr-badges-group {badges} size="sm"></dsfr-badges-group>
+<dsfr-badges-group badges={enPropriétéWebC(badges)} size="sm"></dsfr-badges-group>

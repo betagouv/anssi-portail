@@ -1,5 +1,6 @@
 <script lang="ts">
   import { decodeEntiteHtml } from '$plateforme/aseptisationDuHtml';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import BoutonFavori from '../favoris/BoutonFavori.svelte';
   import type { ItemCyber } from './Catalogue.types';
   import type { Guide } from './Guide.types';
@@ -80,14 +81,19 @@
       <div slot="contentend">
         {#if item.tagsSpecifiques}
           <dsfr-tags-group
-            tags={item.tagsSpecifiques.map((tag) => ({ label: tag, 'has-icon': true, icon: 'government-line' }))}
+            tags={enPropriétéWebC(
+              item.tagsSpecifiques.map((tag) => ({ label: tag, 'has-icon': true, icon: 'government-line' }))
+            )}
             size="sm"
             groupMarkup="span"
             hasIcon
           ></dsfr-tags-group>
         {/if}
         {#if item.sources}
-          <dsfr-tags-group tags={item.sources.map((source) => ({ label: source }))} size="sm" groupMarkup="span"
+          <dsfr-tags-group
+            tags={enPropriétéWebC(item.sources.map((source) => ({ label: source })))}
+            size="sm"
+            groupMarkup="span"
           ></dsfr-tags-group>
         {/if}
       </div>
