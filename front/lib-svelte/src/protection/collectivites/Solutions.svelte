@@ -1,15 +1,20 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, untrack } from 'svelte';
   import type { ItemCyber } from '../../catalogue/Catalogue.types';
   import { chargeGuidesDansLeStore, guidesStore } from '../../catalogue/stores/guides/guides.store';
   import ControleSegmenteAvecSections from '../../navigation/ControleSegmenteAvecSections.svelte';
   import ActionParcoursAvecItems from '../../parcours/ActionParcoursAvecItems.svelte';
   import { versItemsCyberOuGuide } from '../../parcours/itemDuParcours';
+  import type { Guide } from '../../catalogue/Guide.types';
+  import { guidePourCarteItem } from '../../catalogue/guides/guide';
 
   type Props = {
     itemsCyber: ItemCyber[];
+    guides?: Guide[];
   };
-  let { itemsCyber }: Props = $props();
+  let { itemsCyber, guides = [] }: Props = $props();
+
+  guidesStore.initialise(untrack(() => guides.map(guidePourCarteItem)));
 
   onMount(chargeGuidesDansLeStore);
 

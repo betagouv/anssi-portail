@@ -2,6 +2,7 @@ import { JSDOM } from 'jsdom';
 import { render } from 'svelte/server';
 import { composantsAutorisés } from './composantsAutorises.genere.js';
 import { FournisseurChemin } from '../../api/fournisseurChemin.js';
+import { EntrepotGuide } from '../../metier/entrepotGuide.js';
 
 export interface AdaptateurEnrichissement {
   enrichisAvecComposants: (contenuPage: string) => Promise<string>;
@@ -9,15 +10,16 @@ export interface AdaptateurEnrichissement {
 
 class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
   constructor(
-    private composantsAutorisés: string[],
-    private fournisseurDeChemin: FournisseurChemin
+    private readonly composantsAutorisés: string[],
+    private readonly fournisseurDeChemin: FournisseurChemin,
+    private readonly entrepotGuide: EntrepotGuide
   ) {}
   async enrichisAvecComposants(contenuPage: string) {
     try {
       const dom = new JSDOM(contenuPage);
       const divDInjectionCSS = dom.window.document.getElementsByTagName('head');
       for (const nomComposant of this.composantsAutorisés) {
-        const props = this.récupèreItemsCyber(dom);
+        const props = await this.récupèreItemsCyber(dom);
         const divDInjection = dom.window.document.getElementById(nomComposant);
         if (!divDInjection) {
           continue;
@@ -41,12 +43,13 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     return contenuPage;
   }
 
-  private récupèreItemsCyber(dom: JSDOM) {
+  private async récupèreItemsCyber(dom: JSDOM) {
     const donnees = dom.window.document.getElementById('donnees-items-cyber')?.textContent;
 
     if (donnees) {
       const { itemsCyber } = JSON.parse(donnees);
-      return { itemsCyber };
+      const guides = await this.entrepotGuide.tous();
+      return { itemsCyber, guides };
     }
 
     return {};
@@ -54,7 +57,8 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
 }
 
 export const fabriqueAdaptateurEnrichissement = async (
-  fournisseurDeChemin: FournisseurChemin
+  fournisseurDeChemin: FournisseurChemin,
+  entrepotGuide: EntrepotGuide
 ): Promise<AdaptateurEnrichissement> => {
-  return new AdaptateurEnrichissementSvelte(composantsAutorisés, fournisseurDeChemin);
+  return new AdaptateurEnrichissementSvelte(composantsAutorisés, fournisseurDeChemin, entrepotGuide);
 };

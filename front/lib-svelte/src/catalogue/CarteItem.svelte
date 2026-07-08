@@ -69,6 +69,9 @@
     size="sm"
     title={titreCoupe}
   >
+    <div slot="seo">
+      <a href={lien}>{titre}</a>
+    </div>
     <div slot="headerbadges">
       <HeaderBadge {item} libelleBadge={libelleBadge()} />
     </div>
