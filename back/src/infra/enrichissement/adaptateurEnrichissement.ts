@@ -17,6 +17,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
       const dom = new JSDOM(contenuPage);
       const divDInjectionCSS = dom.window.document.getElementsByTagName('head');
       for (const nomComposant of this.composantsAutorisés) {
+        const props = this.récupèreItemsCyber(dom);
         const divDInjection = dom.window.document.getElementById(nomComposant);
         if (!divDInjection) {
           continue;
@@ -25,7 +26,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
           `lib-svelte/dist/serveur/assets/${nomComposant}.js`
         );
         const composantSvelte = await import(cheminDuComposant);
-        const { head, body } = render(composantSvelte.default);
+        const { head, body } = render(composantSvelte.default, { props });
         if (divDInjectionCSS.length) {
           divDInjectionCSS[0].insertAdjacentHTML('beforeend', head.replaceAll('<style ', '<style nonce="%%NONCE%%" '));
         }
@@ -38,6 +39,17 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
       console.error("Erreur lors de l'injection svelte : ", e);
     }
     return contenuPage;
+  }
+
+  private récupèreItemsCyber(dom: JSDOM) {
+    const donnees = dom.window.document.getElementById('donnees-items-cyber')?.textContent;
+
+    if (donnees) {
+      const { itemsCyber } = JSON.parse(donnees);
+      return { itemsCyber };
+    }
+
+    return {};
   }
 }
 
