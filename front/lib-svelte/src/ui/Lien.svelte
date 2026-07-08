@@ -1,15 +1,3 @@
-<svelte:options
-  customElement={{
-    props: {
-      blank: { type: 'Boolean', attribute: 'blank' },
-      iconeSeule: { type: 'Boolean', attribute: 'icone-seule' },
-      iconeADroite: { type: 'Boolean', attribute: 'icone-a-droite' },
-      neutre: { type: 'Boolean', attribute: 'neutre' },
-    },
-    shadow: 'none',
-  }}
-/>
-
 <script lang="ts">
   import { clic } from '../directives/actions.svelte';
 
