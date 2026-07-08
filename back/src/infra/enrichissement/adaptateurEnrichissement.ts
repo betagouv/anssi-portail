@@ -36,11 +36,22 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
         divDInjection.innerHTML = body;
       }
 
+      this.afficheLesLiens(dom);
+
       return dom.serialize();
     } catch (e) {
       console.error("Erreur lors de l'injection svelte : ", e);
     }
     return contenuPage;
+  }
+
+  private afficheLesLiens(dom: JSDOM) {
+    const liens = dom.window.document.getElementsByTagName('msc-lien');
+    for (const lien of liens) {
+      const url = lien.getAttribute('href');
+      const libelle = lien.getAttribute('libelle');
+      lien.insertAdjacentHTML('afterbegin', `<a slot="seo" href="${url}">${libelle}</a>`);
+    }
   }
 
   private async récupèreItemsCyber(dom: JSDOM) {
