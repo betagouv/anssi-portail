@@ -6,7 +6,7 @@
   import Proteger from '../Proteger.svelte';
   import Solutions from './Solutions.svelte';
 
-  let { itemsCyber } = $props();
+  let { itemsCyber, guides = [] } = $props();
 
   const liens = [
     {
@@ -41,7 +41,7 @@
 
 {#if estServeur}
   <Proteger origine="landing-collectivites" />
-  <Solutions {itemsCyber} />
+  <Solutions {itemsCyber} {guides} />
 {:else if lienActif === '#proteger'}
   <Proteger origine="landing-collectivites" />
 {:else}
