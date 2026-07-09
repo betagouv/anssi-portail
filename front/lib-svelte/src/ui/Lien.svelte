@@ -35,7 +35,9 @@
     telechargement,
     telechargementDetails,
     type,
-    ...reste
+    'data-source': dataSource,
+    'data-cible': dataCible,
+    class: classe,
   }: Props = $props();
 
   const hasIcon = $derived(!!icone);
@@ -70,7 +72,9 @@
     neutral={neutre}
     size={taille}
     use:clic={traceClic}
-    {...reste}
+    data-source={dataSource}
+    data-cible={dataCible}
+    class={classe}
   ></dsfr-link>
 {:else}
   <dsfr-button
@@ -86,7 +90,9 @@
     {kind}
     use:clic={traceClic}
     centered={etire}
-    {...reste}
+    data-source={dataSource}
+    data-cible={dataCible}
+    class={classe}
   ></dsfr-button>
 {/if}
 
