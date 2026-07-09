@@ -16,9 +16,9 @@
     telechargement?: string;
     telechargementDetails?: string;
     type?: 'primaire' | 'secondaire' | 'secondaire-inverse';
-    'data-source'?: string;
-    'data-cible'?: string;
-    class?: string;
+    source?: string;
+    cible?: string;
+    classe?: string;
   };
   const {
     apparence = 'lien',
@@ -35,9 +35,9 @@
     telechargement,
     telechargementDetails,
     type,
-    'data-source': dataSource,
-    'data-cible': dataCible,
-    class: classe,
+    source,
+    cible,
+    classe,
   }: Props = $props();
 
   const hasIcon = $derived(!!icone);
@@ -72,8 +72,8 @@
     neutral={neutre}
     size={taille}
     use:clic={traceClic}
-    data-source={dataSource}
-    data-cible={dataCible}
+    data-source={source}
+    data-cible={cible}
     class={classe}
   ></dsfr-link>
 {:else}
@@ -90,8 +90,8 @@
     {kind}
     use:clic={traceClic}
     centered={etire}
-    data-source={dataSource}
-    data-cible={dataCible}
+    data-source={source}
+    data-cible={cible}
     class={classe}
   ></dsfr-button>
 {/if}
