@@ -13,6 +13,8 @@ export const consigneBadgeCyberdépartDébloquéDansJournal = ({
     await adaptateurJournal.consigneEvenement({
       donnees: {
         idUtilisateur: evenement.emailHache,
+        nombreMesuresActuel: evenement.nombreMesuresActuel,
+        nombreMesuresTotal: evenement.nombreMesuresTotal,
       },
       type: 'BADGE_CYBERDEPART_DEBLOQUE',
       date: adaptateurHorloge.maintenant(),

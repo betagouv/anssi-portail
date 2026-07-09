@@ -97,4 +97,7 @@ type DonneesMesurePriseEnCompte = Evenement<
 
 type DonneesModuleTerminé = Evenement<'MODULE_TERMINE', Omit<ModuleTermine, 'emailHache'> & { idUtilisateur: string }>;
 
-type DonnéesBadgeCyberdépartDébloqué = Evenement<'BADGE_CYBERDEPART_DEBLOQUE', { idUtilisateur: string }>;
+type DonnéesBadgeCyberdépartDébloqué = Evenement<
+  'BADGE_CYBERDEPART_DEBLOQUE',
+  { idUtilisateur: string; nombreMesuresActuel: number; nombreMesuresTotal: number }
+>;
