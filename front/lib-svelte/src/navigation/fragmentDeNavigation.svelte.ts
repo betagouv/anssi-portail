@@ -10,7 +10,7 @@ type ExtraisValeur = {
 export type FragmentDeNavigation = {
   section?: string | undefined;
   change: <T>(cle: string, valeur: T | T[]) => void;
-  changeSection: (section: string, actualise: boolean) => void;
+  changeSection: (section: string | undefined, actualise: boolean) => void;
   extraisTableau: <T>(cle: string) => T[];
   extraisValeur: ExtraisValeur;
   actualise: () => string;
@@ -64,7 +64,9 @@ export const creeLeFragmentDeNavigation = (hash?: string): FragmentDeNavigation 
     });
   };
   return {
-    section,
+    get section() {
+      return section;
+    },
     change: <T>(cle: string, valeur: T | T[]) => {
       filtres[cle] = (Array.isArray(valeur) ? valeur : valeur ? [valeur] : []).map(String);
     },
