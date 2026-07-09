@@ -6,9 +6,8 @@
 
   let videoRisques: HTMLVideoElement;
   let videoRisquesMetadataLoaded = false;
-  const afficheLaVideo = (e: Event) => {
-    const details = e.target as HTMLDetailsElement;
-    if (details.open && videoRisques && !videoRisquesMetadataLoaded) {
+  const afficheLaVideo = () => {
+    if (videoRisques && !videoRisquesMetadataLoaded) {
       // Permet d'afficher la durée de la vidéo avant que l'utilisateur clique sur play.
       videoRisques.preload = 'metadata';
       videoRisques.load();
@@ -37,7 +36,7 @@
   </Accordeon>
   <Accordeon
     libelle="Que risque mon organisation en cas de cyberattaques&nbsp;?"
-    on:toggle={afficheLaVideo}
+    onclick={afficheLaVideo}
     niveauTitre={4}
   >
     <div class="corps">

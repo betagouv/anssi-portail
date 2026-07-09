@@ -58,9 +58,9 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     const donnees = dom.window.document.getElementById('donnees-items-cyber')?.textContent;
 
     if (donnees) {
-      const { itemsCyber } = JSON.parse(donnees);
+      const { itemsCyber, repartition } = JSON.parse(donnees);
       const guides = await this.entrepotGuide.tous();
-      return { itemsCyber, guides };
+      return { itemsCyber, guides, repartition };
     }
 
     return {};
