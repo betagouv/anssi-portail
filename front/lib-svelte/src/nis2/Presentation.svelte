@@ -25,11 +25,11 @@
     <AccordeonNis2 />
 
     <div class="lien-nis2">
-      <dsfr-link
+      <msc-lien
         href="/nis2#exigences"
-        label="Consulter les exigences applicables à NIS 2"
+        libelle="Consulter les exigences applicables à NIS 2"
         use:clic={retourEnHautDePage}
-      ></dsfr-link>
+      ></msc-lien>
     </div>
   </div>
 </dsfr-container>

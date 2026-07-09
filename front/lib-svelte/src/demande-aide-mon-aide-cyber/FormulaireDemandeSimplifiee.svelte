@@ -11,6 +11,7 @@
   import { collecteLesErreurs } from '../utils/erreurApi';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import type { CorpsAPIDemandeAide } from './DonneesFormulaireDemandeAide';
+  import Lien from '../ui/Lien.svelte';
 
   export let mode: 'autonome' | undefined = undefined;
   export let origine: string;
@@ -116,11 +117,11 @@
         required
       >
         <span
-          >J’accepte les <dsfr-link
+          >J’accepte les <Lien
             href="https://monaide.cyber.gouv.fr/cgu"
-            label="conditions générales d’utilisation"
+            libelle="conditions générales d’utilisation"
             blank
-          ></dsfr-link>.
+          />.
         </span>
       </dsfr-checkbox>
 

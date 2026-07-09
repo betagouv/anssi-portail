@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { clic } from '../directives/actions.svelte';
+  import Lien from '../ui/Lien.svelte';
 
   export type Document = {
     libelle: string;
@@ -76,7 +77,7 @@
     {#each documentsDeLApi as { libelle, nomFichier, chemin }, id (id)}
       <div class="document">
         <p>
-          <dsfr-link href={chemin} blank label={nomFichier}></dsfr-link>
+          <Lien href={chemin ?? '#'} blank libelle={nomFichier} />
         </p>
         <p>{libelle}</p>
         <dsfr-button
@@ -94,7 +95,7 @@
     {#each nouveauxDocuments as { libelle, nomFichier }, id (id)}
       <div class="document">
         <p>
-          <dsfr-link href="#" blank label={nomFichier}></dsfr-link>
+          <msc-lien href="#" blank libelle={nomFichier}></msc-lien>
         </p>
         <p>{libelle}</p>
         <dsfr-button disabled class="supprimer" type="button" size="md" kind="tertiary" label="Ajout en cours"

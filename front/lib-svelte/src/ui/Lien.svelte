@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { estServeur } from '$plateforme/environnement';
   import { clic } from '../directives/actions.svelte';
 
   type Props = {
@@ -58,7 +59,9 @@
   };
 </script>
 
-{#if apparence == 'lien'}
+{#if estServeur}
+  <a {href}>{libelle}</a>
+{:else if apparence == 'lien'}
   <dsfr-link
     {blank}
     detail={telechargementDetails}

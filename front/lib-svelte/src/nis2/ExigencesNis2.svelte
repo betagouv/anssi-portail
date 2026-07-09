@@ -11,6 +11,7 @@
   import type { Comparaison } from './tableaux/configuration.type';
   import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
   import TableauExigencesSimple from './tableaux/TableauExigencesSimple.svelte';
+  import Lien from '../ui/Lien.svelte';
 
   const { featureFlagNis2CyFun23 }: { featureFlagNis2CyFun23: boolean } = $props();
 
@@ -94,23 +95,23 @@
     <div class="titre">
       <h2>Exigences applicables à NIS&nbsp;2</h2>
       <div class="telechargements">
-        <dsfr-link
+        <msc-lien
           href={lienFichierTelechargement}
-          label={libelleFichierTelechargement}
-          download=""
-          detail="PDF - 965,8 ko"
+          libelle={libelleFichierTelechargement}
+          telechargement=""
+          telechargementDetails="PDF - 965,8 ko"
           use:clic={() => traceTelechargement(lienFichierTelechargement)}
-        ></dsfr-link>
-        <dsfr-link
+        ></msc-lien>
+        <msc-lien
           href="/documents-ressources/20260317_NIS_V2_Suivi des modifications ReCyF v2.4 vers v2.5-vfinale.pdf"
-          label="Télécharger le suivi des modifications"
-          download=""
-          detail="PDF - 1 383,4 ko"
+          libelle="Télécharger le suivi des modifications"
+          telechargement=""
+          telechargementDetails="PDF - 1 383,4 ko"
           use:clic={() =>
             traceTelechargement(
               '/documents-ressources/20260317_NIS_V2_Suivi des modifications ReCyF v2.4 vers v2.5-vfinale.pdf'
             )}
-        ></dsfr-link>
+        ></msc-lien>
       </div>
       <dsfr-button
         label="Exporter le tableau"
@@ -139,7 +140,7 @@
   {:else}
     <TableauCorrespondancesExigences {chargement} exigences={$exigencesFiltrees.exigences} comparaison={mode} />
   {/if}
-  <dsfr-link label="Haut de page" href="#" size="md" has-icon icon="arrow-up-fill"></dsfr-link>
+  <Lien libelle="Haut de page" href="#" taille="md" icone="arrow-up-fill"></Lien>
 </ConteneurLarge>
 
 <style lang="scss">
