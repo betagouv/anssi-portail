@@ -66,6 +66,15 @@
   detail-start="{{card_detail_start}}"
   title="{{card_title}}"
 >
+  <div slot="seo">
+    <img src="/assets/images/illustrations-services/{{item.illustration}}"
+      width="1584"
+      height="880"
+      alt="Capture d'écran de {{item.nom}}">
+    <h3>
+      <a href={{card_href}}>{{card_title}}</a>
+    </h3>
+  </div>
   <div slot="headerbadges">
     <dsfr-badge
       label="{{ item.typologie }}"

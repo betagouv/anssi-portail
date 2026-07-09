@@ -30,6 +30,11 @@ dsfr-container.action {
     margin: 0 0 16px;
   }
 
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
   p.fr-h3 {
     grid-column: 1 / -1;
     margin: 0 0 32px;
