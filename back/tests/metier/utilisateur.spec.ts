@@ -281,6 +281,26 @@ describe("L'utilisateur", () => {
 
         busEvenements.naPasRecuDEvenement(BadgeCyberdépartDébloqué);
       });
+
+      it('publie les totaux lors du déblocage du badge', async () => {
+        utilisateurDeParcours.mesuresPrisesEnCompte = [
+          mesureDeTest().avecLId('mes1').construis(),
+          mesureDeTest().avecLId('mes2').construis(),
+          mesureDeTest().avecLId('mes3').construis(),
+        ];
+        moduleCyberdépart.mesures = [
+          mesureDeTest().construis(),
+          mesureDeTest().construis(),
+          mesureDeTest().construis(),
+          mesureDeTest().construis(),
+          mesureDeTest().construis(),
+        ];
+        await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
+
+        const evenement = busEvenements.recupereEvenement(BadgeCyberdépartDébloqué);
+        assert.equal(4, evenement!.nombreMesuresActuel);
+        assert.equal(5, evenement!.nombreMesuresTotal);
+      });
     });
   });
 });

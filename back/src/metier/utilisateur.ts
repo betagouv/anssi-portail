@@ -159,7 +159,9 @@ export class Utilisateur {
     }
     const cibleBadgeCyberdépart = module.cibleDéblocageBadgeCyberdépart();
     if (this.mesuresPrisesEnCompte.length === cibleBadgeCyberdépart) {
-      await busEvenements.publie(new BadgeCyberdépartDébloqué(this.emailHache()));
+      await busEvenements.publie(
+        new BadgeCyberdépartDébloqué(this.emailHache(), this.mesuresPrisesEnCompte.length, module.nombreDeMesures())
+      );
       nouvelEtatModule.badgeCyberdépartDebloqué = true;
     }
     return nouvelEtatModule;
