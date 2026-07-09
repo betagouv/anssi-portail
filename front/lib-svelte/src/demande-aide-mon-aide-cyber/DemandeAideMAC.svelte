@@ -204,17 +204,6 @@
     flex-wrap: wrap;
     gap: 8px;
     margin: 24px 0;
-
-    .tag {
-      background: var(--jaune-jaune-primaire, #fed980);
-      color: var(--noir);
-      font-weight: 700;
-      border-radius: 999px;
-      padding: 4px 12px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
   }
 
   .zone-faq {
