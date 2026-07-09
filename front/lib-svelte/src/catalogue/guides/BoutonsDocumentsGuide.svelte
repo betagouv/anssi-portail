@@ -15,9 +15,9 @@
       libelle="Télécharger le guide"
       apparence="bouton"
       taille="lg"
-      data-source="Page guide"
-      data-cible={guide.nom}
-      class="lien-externe-produit "
+      source="Page guide"
+      cible={guide.nom}
+      classe="lien-externe-produit "
     ></Lien>
   </div>
 {:else if guide.documents.length > 1 && autoriseMultiple}
@@ -29,9 +29,9 @@
         libelle={decodeEntitesHtml(document.libelle)}
         apparence="bouton"
         taille="lg"
-        data-source="Page guide"
-        data-cible={guide.nom}
-        class="lien-externe-produit"
+        source="Page guide"
+        cible={guide.nom}
+        classe="lien-externe-produit"
       ></Lien>
     {/each}
   </div>

@@ -33,9 +33,9 @@ script: /scripts/service.js
         <msc-lien
           apparence="bouton"
           blank
-          class="lien-externe-produit"
-          data-source="Page produit"
-          data-cible="{{page.nom}}"
+          classe="lien-externe-produit"
+          source="Page produit"
+          cible="{{page.nom}}"
           href="{{page.lien}}"
           libelle="Accéder au service"
           taille="lg"
@@ -98,7 +98,7 @@ script: /scripts/service.js
         <h2>De quoi s'agit-il&nbsp;?</h2>
         <div>{{ page.content }}</div>
         {% if page.lien %}
-        <msc-lien class="lien-externe-produit" href="{{page.lien}}" blank apparence="bouton" data-source="Page produit" data-cible="{{page.nom}}" libelle="Accéder au service" taille="lg"></msc-lien>
+        <msc-lien classe="lien-externe-produit" href="{{page.lien}}" blank apparence="bouton" source="Page produit" cible="{{page.nom}}" libelle="Accéder au service" taille="lg"></msc-lien>
         {% endif %}
       </section>
 
