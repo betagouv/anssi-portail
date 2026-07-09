@@ -40,40 +40,6 @@ h3 {
   line-height: 1.75rem;
 }
 
-p {
-  line-height: 24px;
-  display: flex;
-  gap: 8px;
-  align-items: start;
-
-  &:before {
-    width: 16px;
-    height: 16px;
-    display: block;
-    padding: 4px 0 3px 0;
-  }
-
-  &.telephone:before {
-    content: url('/assets/images/icone-contact-telephone.svg');
-  }
-
-  &.email:before {
-    content: url('/assets/images/icone-contact-email.svg');
-  }
-
-  &.nom:before {
-    content: url('/assets/images/icone-contact-nom.svg');
-  }
-
-  &.site-web:before {
-    content: url('/assets/images/icone-contact-site-web.svg');
-  }
-
-  &.adresse:before {
-    content: url('/assets/images/icone-contact-adresse.svg');
-  }
-}
-
 .contacts {
   display: flex;
   flex: 1;
@@ -87,6 +53,40 @@ p {
 
     > * {
       width: min(100%, 792px);
+    }
+  }
+
+  p {
+    line-height: 24px;
+    display: flex;
+    gap: 8px;
+    align-items: start;
+
+    &:before {
+      width: 16px;
+      height: 16px;
+      display: block;
+      padding: 4px 0 3px 0;
+    }
+
+    &.telephone:before {
+      content: url('/assets/images/icone-contact-telephone.svg');
+    }
+
+    &.email:before {
+      content: url('/assets/images/icone-contact-email.svg');
+    }
+
+    &.nom:before {
+      content: url('/assets/images/icone-contact-nom.svg');
+    }
+
+    &.site-web:before {
+      content: url('/assets/images/icone-contact-site-web.svg');
+    }
+
+    &.adresse:before {
+      content: url('/assets/images/icone-contact-adresse.svg');
     }
   }
 }
