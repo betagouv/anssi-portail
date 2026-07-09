@@ -20,12 +20,14 @@ describe("L'abonnement qui consigne le déblocage du badge cyberdépart par un u
     await consigneBadgeCyberdépartDébloquéDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
-    })(new BadgeCyberdépartDébloqué('u1@example.com-hache'));
+    })(new BadgeCyberdépartDébloqué('u1@example.com-hache', 8, 10));
 
     assert.deepEqual(evenementRecu, {
       type: 'BADGE_CYBERDEPART_DEBLOQUE',
       donnees: {
         idUtilisateur: 'u1@example.com-hache',
+        nombreMesuresActuel: 8,
+        nombreMesuresTotal: 10,
       },
       date: new Date('2025-03-10'),
     });
