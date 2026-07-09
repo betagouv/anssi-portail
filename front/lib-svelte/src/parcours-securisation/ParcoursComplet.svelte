@@ -75,5 +75,8 @@
     @include a-partir-de(md) {
       --colonnes: 2;
     }
+    @include a-partir-de(lg) {
+      --colonnes: 3;
+    }
   }
 </style>
