@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, untrack } from 'svelte';
+  import { onMount, type Snippet, untrack } from 'svelte';
   import ControleSegmente from './ControleSegmente.svelte';
   import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from './fragmentDeNavigation.svelte';
 
@@ -12,8 +12,9 @@
     }[];
     selecteurSections: string;
     fragmentDeNavigation?: FragmentDeNavigation;
+    children?: Snippet;
   };
-  let { elements, selecteurSections, fragmentDeNavigation = creeLeFragmentDeNavigation() }: Props = $props();
+  let { elements, selecteurSections, fragmentDeNavigation = creeLeFragmentDeNavigation(), children }: Props = $props();
 
   // Non-reactive flag : supprime l'observateur pendant les scrolls programmatiques
   let scrollProgrammatique = false;
@@ -112,5 +113,5 @@
 
 <ControleSegmente {elements} bind:idÉlémentSélectionné {fragmentDeNavigation} {lorsDuClic}></ControleSegmente>
 <div bind:this={composant}>
-  <slot></slot>
+  {@render children?.()}
 </div>
