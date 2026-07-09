@@ -1,4 +1,6 @@
-<script lang="ts"></script>
+<script lang="ts">
+  import Lien from '../ui/Lien.svelte';
+</script>
 
 <dsfr-container id="documentation">
   <div class="contenu-section">
@@ -6,22 +8,22 @@
       <h2>Présentation de la directive NIS 2</h2>
       <ul>
         <li>
-          <dsfr-link
+          <Lien
             href="/documents-ressources/2026-03-27-NIS2.pdf"
-            label="Télécharger la présentation NIS 2 (PDF)"
-            download=""
+            libelle="Télécharger la présentation NIS 2 (PDF)"
+            telechargement=""
             blank
-            detail="PDF - 12,0 Mo"
-          ></dsfr-link>
+            telechargementDetails="PDF - 12,0 Mo"
+          />
         </li>
         <li>
-          <dsfr-link
+          <Lien
             href="/documents-ressources/2026-03-27-NIS2.pptx"
-            label="Télécharger la présentation NIS 2 (PPTX)"
-            download=""
+            libelle="Télécharger la présentation NIS 2 (PPTX)"
+            telechargement=""
             blank
-            detail="PPTX - 11,2 Mo"
-          ></dsfr-link>
+            telechargementDetails="PPTX - 11,2 Mo"
+          />
         </li>
       </ul>
       <img
@@ -38,7 +40,7 @@
           à jour en conséquence.
         </p>
       </hgroup>
-      <dsfr-link label="Consulter la FAQ" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank></dsfr-link>
+      <Lien libelle="Consulter la FAQ" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank />
       <img
         src="/assets/images/apercu-faq-nis2-dans-laptop.avif"
         width="1574"

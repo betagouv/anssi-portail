@@ -52,8 +52,11 @@
   <lab-anssi-marelle-etape etapeMarelle={etapesMarelle[1]} index={1}></lab-anssi-marelle-etape>
   <lab-anssi-marelle-etape etapeMarelle={etapesMarelle[2]} index={2}>
     <p slot="etape-description">
-      Mettez en oeuvre <dsfr-link label="les exigences de sécurité" href="/nis2#exigences" use:clic={retourEnHautDePage}
-      ></dsfr-link> issues de la directive pour réduire vos risques cyber et signalez à l’ANSSI vos incidents de sécurité.
+      Mettez en oeuvre <msc-lien
+        libelle="les exigences de sécurité"
+        href="/nis2#exigences"
+        use:clic={retourEnHautDePage}
+      ></msc-lien> issues de la directive pour réduire vos risques cyber et signalez à l’ANSSI vos incidents de sécurité.
     </p>
   </lab-anssi-marelle-etape>
 </lab-anssi-marelle>

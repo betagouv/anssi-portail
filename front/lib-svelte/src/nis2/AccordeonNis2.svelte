@@ -1,5 +1,6 @@
 <script lang="ts">
   import Accordeon from '../ui/Accordeon.svelte';
+  import Lien from '../ui/Lien.svelte';
 
   const tags = [
     { label: 'Administrations publiques', icon: 'bank-line' },
@@ -73,11 +74,11 @@
       La directive NIS2 prévoit des exceptions pour plusieurs types d’entité, dont les prestataires de services de
       confiance, les fournisseurs de services DNS, les registres de noms de domaine de premier niveau, les fournisseurs
       de réseaux de communications électroniques publiques, les fournisseurs de services de communications électroniques
-      accessibles au public et l’administration publique. <dsfr-link
-        label="En savoir plus"
+      accessibles au public et l’administration publique. <Lien
+        libelle="En savoir plus"
         href="https://aide.monespacenis2.cyber.gouv.fr/fr/"
         blank
-      ></dsfr-link>
+      />
     </p>
   </Accordeon>
 
@@ -100,19 +101,18 @@
     <p>
       Les entités concernées par la directive NIS2 sont tenues de mettre en place des mesures juridiques, techniques et
       organisationnelles visant à gérer les risques qui menacent la sécurité de leurs réseaux et de leurs systèmes
-      d’information. <dsfr-link label="En savoir plus" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank
-      ></dsfr-link>
+      d’information. <Lien libelle="En savoir plus" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank />
     </p>
     <p>
       En raison de la nature transfrontalière de leurs services, certaines entités du secteur des infrastructures
       numériques, de gestion des services des technologies de l’information et de la communication (TIC) et des
-      fournisseurs numériques font l’objet d’un règlement d’exécution spécifique de la Commission européenne (<dsfr-link
-        label="accessible en français ici"
+      fournisseurs numériques font l’objet d’un règlement d’exécution spécifique de la Commission européenne (<Lien
+        libelle="accessible en français ici"
         href="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=OJ:L_202402690"
         blank
-      ></dsfr-link>). Par conséquent, elles ne sont pas soumises au socle de mesures de sécurité NIS&nbsp;2 définies
-      pour les entités établies en France.
-      <dsfr-link label="En savoir plus" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank></dsfr-link>
+      />). Par conséquent, elles ne sont pas soumises au socle de mesures de sécurité NIS&nbsp;2 définies pour les
+      entités établies en France.
+      <Lien libelle="En savoir plus" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank />
     </p>
     <dsfr-button
       label="Découvrir les solutions pour m’aider"

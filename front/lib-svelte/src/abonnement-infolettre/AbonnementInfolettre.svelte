@@ -4,6 +4,7 @@
   import CaseACocher from '../ui/CaseACocher.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
+  import Lien from '../ui/Lien.svelte';
 
   let mail: string | null = null;
   let infolettreAcceptee = false;
@@ -81,8 +82,7 @@
         <CaseACocher bind:coche={infolettreAcceptee} id="acceptation-infolettre" nom="acceptation-infolettre" requis>
           <span>J'accepte de recevoir la newsletter de MesServicesCyber.</span>
           {#snippet astuce()}
-            La politique de confidentialité est disponible <dsfr-link href="/confidentialite" label="ici" neutral
-            ></dsfr-link>.
+            La politique de confidentialité est disponible <Lien href="/confidentialite" libelle="ici" neutre />.
           {/snippet}
         </CaseACocher>
         <dsfr-button label="S'abonner à la newsletter" kind="primary" type="submit" use:clic={soumetsFormulaire}

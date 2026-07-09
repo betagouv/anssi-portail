@@ -16,12 +16,12 @@
       {%- if src.cot.emails %}
       <p class="email">
         {%- for e in src.cot.emails -%}
-          <dsfr-link label="{{ e.label }}" href="{{ e.href }}">{{ e.label }}</dsfr-link>
+          <msc-lien libelle="{{ e.label }}" href="{{ e.href }}"></msc-lien>
         {%- endfor -%}
       </p>
       {%- elsif src.cot.email %}
       <p class="email">
-        <dsfr-link label="{{ src.cot.email }}" href="mailto:{{ src.cot.email }}">{{ src.cot.email }}</dsfr-link>
+        <msc-lien libelle="{{ src.cot.email }}" href="mailto:{{ src.cot.email }}"></msc-lien>
       </p>
       {%- endif -%}
     </div>
@@ -34,13 +34,13 @@
 
         {%- if s.telephone %}
         <p class="telephone">
-          <dsfr-link label="{{ s.telephone }}" href="tel:{{ s.telephone | replace: ' ', '' }}">{{ s.telephone }}</dsfr-link>
+          <msc-lien libelle="{{ s.telephone }}" href="tel:{{ s.telephone | replace: ' ', '' }}"></msc-lien>
         </p>
         {%- endif -%}
 
         {%- if s.site %}
         <p class="site-web">
-          <dsfr-link label="{{ s.site }}" href="{{ s.site }}">{{ s.site }}</dsfr-link>
+          <msc-lien libelle="{{ s.site }}" href="{{ s.site }}"></msc-lien>
         </p>
         {%- endif -%}
 
