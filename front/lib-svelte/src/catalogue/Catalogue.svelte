@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, untrack } from 'svelte';
   import ControleSegmente from '../navigation/ControleSegmente.svelte';
   import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '../stores/profil.store';
@@ -8,17 +8,24 @@
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Hero from '../ui/Hero.svelte';
   import CarteItem from './CarteItem.svelte';
-  import { type BesoinCyber, DroitAcces, Source, Typologie } from './Catalogue.types';
+  import {
+    type BesoinCyber,
+    DroitAcces,
+    type ItemCyber,
+    type RepartitionParBesoin,
+    Source,
+    Typologie,
+  } from './Catalogue.types';
   import FiltreAccessibilite from './FiltreAccessibilite.svelte';
   import FiltreBesoin from './FiltreBesoin.svelte';
   import FiltreSource from './FiltreSource.svelte';
   import FiltreTypologie from './FiltreTypologie.svelte';
-  import { CollectionGuide, Langue } from './Guide.types';
+  import { CollectionGuide, Langue, type Guide } from './Guide.types';
   import FiltreCollection from './guides/FiltreCollection.svelte';
   import FiltreLangue from './guides/FiltreLangue.svelte';
   import InciteASAbonner from './guides/InciteASAbonner.svelte';
   import { catalogueFiltre } from './stores/catalogueFiltre.store';
-  import { chargeGuidesDansLeStore } from './stores/guides/guides.store';
+  import { chargeGuidesDansLeStore, guidesStore } from './stores/guides/guides.store';
   import { guidesFiltres } from './stores/guides/guidesFiltres.store';
   import { rechercheParCollection } from './stores/guides/rechercheParCollection.store';
   import { rechercheParLangue } from './stores/guides/rechercheParLangue.store';
@@ -28,6 +35,22 @@
   import { rechercheParTypologie } from './stores/rechercheParTypologie.store';
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
+  import { guidePourCarteItem } from './guides/guide';
+  import { catalogueStore } from './stores/catalogue.store';
+
+  type Props = {
+    itemsCyber?: ItemCyber[];
+    repartition?: RepartitionParBesoin;
+    guides?: Guide[];
+  };
+
+  let { itemsCyber = [], repartition, guides = [] }: Props = $props();
+
+  catalogueStore.initialise(
+    untrack(() => itemsCyber),
+    untrack(() => repartition)
+  );
+  guidesStore.initialise(untrack(() => guides.map(guidePourCarteItem)));
 
   const idsCollectionsGuide: Record<CollectionGuide, string> = {
     [CollectionGuide.LES_ESSENTIELS]: 'essentiels',
@@ -64,7 +87,7 @@
     $rechercheParBesoin = fragmentDeNavigation.extraisValeur<BesoinCyber>('besoin', null);
     $rechercheParLangue = fragmentDeNavigation.extraisTableau<Langue>('langues');
     $rechercheParCollection = depuisIdsCollection(fragmentDeNavigation.extraisTableau<CollectionGuide>('collections'));
-    $rechercheTextuelle = fragmentDeNavigation.extraisValeur('q', '');
+    $rechercheTextuelle = fragmentDeNavigation.extraisValeur('q', '') ?? '';
     $rechercheParDroitAcces = fragmentDeNavigation.extraisTableau<DroitAcces>('accessibilite');
     $rechercheParTypologie = fragmentDeNavigation.extraisTableau<Typologie>('types');
     $rechercheParSource = fragmentDeNavigation.extraisTableau<Source>('sources');

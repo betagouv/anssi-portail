@@ -1,4 +1,4 @@
-import { mount } from 'svelte';
+import { hydrate } from 'svelte';
 import Catalogue from './catalogue/Catalogue.svelte';
 import { type ItemCyber, type RepartitionParBesoin } from './catalogue/Catalogue.types';
 import { catalogueStore } from './catalogue/stores/catalogue.store';
@@ -13,6 +13,6 @@ const { itemsCyber, repartition } = JSON.parse(donnees) as {
 
 catalogueStore.initialise(itemsCyber, repartition);
 
-mount(Catalogue, {
+hydrate(Catalogue, {
   target: document.getElementById('catalogue')!,
 });
