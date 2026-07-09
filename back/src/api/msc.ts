@@ -19,6 +19,7 @@ import { ressourceGuidesMemesCollections } from './guides/ressourceGuidesMemesCo
 import { ressourceAvisMesure } from './mesures/ressourceAvisMesure.js';
 import { ressourceMesure } from './mesures/ressourceMesure.js';
 import { ressourceModule } from './mesures/ressourceModule.js';
+import { ressourceParcoursComplet } from './mesures/ressourceParcoursComplet.js';
 import { ressourcePriseEnCompte } from './mesures/ressourcePriseEnCompte.js';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide.js';
 import { ressourceExigencesNis2 } from './nis2/ressourceExigencesNis2.js';
@@ -315,6 +316,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     app.use('/parcours-complet', ressourcePagesJekyllConnectees(configurationServeur, 'parcours-complet'));
     app.use('/mesures/:id', ressourcePagesJekyllConnectees(configurationServeur, 'mesures'));
   }
+
+  app.use('/api/parcours/complet', ressourceParcoursComplet());
 
   [
     ['/directive-nis2', '/nis2'],
