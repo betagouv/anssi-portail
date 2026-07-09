@@ -70,7 +70,9 @@
     title={titreCoupe}
   >
     <div slot="seo">
-      <a href={lien}>{titre}</a>
+      <h3>
+        <a href={lien}>{titre}</a>
+      </h3>
     </div>
     <div slot="headerbadges">
       <HeaderBadge {item} libelleBadge={libelleBadge()} />
