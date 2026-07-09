@@ -28,6 +28,8 @@
       </ul>
       <img
         src="/assets/images/photo-livret-nis2.avif"
+        width="1584"
+        height="924"
         alt="Illustration du livret de présentation de la directive NIS 2"
       />
     </div>
@@ -43,7 +45,7 @@
       <Lien libelle="Consulter la FAQ" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank />
       <img
         src="/assets/images/apercu-faq-nis2-dans-laptop.avif"
-        width="1574"
+        width="1584"
         height="890"
         alt="Foire aux questions de mon espace NIS 2"
       />
@@ -67,6 +69,8 @@
 
       img {
         margin-bottom: 48px;
+        max-width: 100%;
+        height: auto;
       }
 
       @include a-partir-de(lg) {
