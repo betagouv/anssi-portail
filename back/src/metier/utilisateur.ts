@@ -166,4 +166,11 @@ export class Utilisateur {
     }
     return nouvelEtatModule;
   }
+
+  async nombreDeMesuresPrisesEnCompte(module: Module) {
+    const mesuresDuModulePriseEnCompte = this.mesuresPrisesEnCompte.filter((mesurePriseEnCompte) =>
+      module.mesures.includes(mesurePriseEnCompte)
+    );
+    return mesuresDuModulePriseEnCompte.length;
+  }
 }
