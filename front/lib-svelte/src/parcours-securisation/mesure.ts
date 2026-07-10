@@ -26,4 +26,5 @@ export type Mesure = {
 export type Module = {
   id: number;
   nom: string;
+  nombreMesuresTotal: number;
 };

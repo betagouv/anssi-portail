@@ -6,11 +6,18 @@
   import type { Module } from './mesure';
   import Progression from './Progression.svelte';
 
-  let modules: { titre: string; description: string; libelleLien: string; moduleCyberdepart: boolean }[] = $state([]);
+  let modules: {
+    titre: string;
+    description: string;
+    libelleLien: string;
+    moduleCyberdepart: boolean;
+    nombreMesuresTotal: number;
+  }[] = $state([]);
 
   onMount(async () => {
     const réponse = await axios.get<{ modules: Module[] }>('/api/parcours/complet');
     modules = réponse.data.modules.map((module) => ({
+      ...module,
       titre: module.nom,
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tellus nibh, faucibus sed elit quis, aliquet malesuada augue.',
@@ -49,7 +56,7 @@
           <div class="progression" slot="contentend">
             <Progression
               actuel={0}
-              max={10}
+              max={module.nombreMesuresTotal}
               cible={module.moduleCyberdepart ? 5 : undefined}
               mode="compact"
               libelle="Mesures prises en compte"
