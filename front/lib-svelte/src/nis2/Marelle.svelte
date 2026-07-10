@@ -47,18 +47,30 @@
   };
 </script>
 
-<lab-anssi-marelle titre="NIS&nbsp;2&nbsp;: Comment se lancer&nbsp;?" etapesmarelle={etapesMarelle}>
-  <lab-anssi-marelle-etape etapeMarelle={etapesMarelle[0]} index={0}></lab-anssi-marelle-etape>
-  <lab-anssi-marelle-etape etapeMarelle={etapesMarelle[1]} index={1}></lab-anssi-marelle-etape>
-  <lab-anssi-marelle-etape etapeMarelle={etapesMarelle[2]} index={2}>
-    <p slot="etape-description">
-      Mettez en oeuvre <msc-lien
-        libelle="les exigences de sécurité"
-        href="/nis2#exigences"
-        use:clic={retourEnHautDePage}
-      ></msc-lien> issues de la directive pour réduire vos risques cyber et signalez à l’ANSSI vos incidents de sécurité.
-    </p>
-  </lab-anssi-marelle-etape>
+<lab-anssi-marelle titre="NIS&nbsp;2&nbsp;: Comment se lancer&nbsp;?">
+  {#each etapesMarelle as etape, index (index)}
+    <lab-anssi-marelle-etape {index}>
+      <img slot="etape-illustration" src={etape.illustration.lien} alt={etape.illustration.alt} />
+      <h4 slot="etape-titre">{etape.titre}</h4>
+      {#if index === 2}
+        <p slot="etape-description">
+          Mettez en oeuvre <msc-lien
+            libelle="les exigences de sécurité"
+            href="/nis2#exigences"
+            use:clic={retourEnHautDePage}
+          ></msc-lien> issues de la directive pour réduire vos risques cyber et signalez à l’ANSSI vos incidents de sécurité.
+        </p>
+      {:else}
+        <p slot="etape-description">{etape.description}</p>
+      {/if}
+      <msc-lien
+        slot="etape-lien"
+        libelle={etape.lien.texte}
+        href={etape.lien.href}
+        blank={etape.lien.target === '_blank'}
+      ></msc-lien>
+    </lab-anssi-marelle-etape>
+  {/each}
 </lab-anssi-marelle>
 
 <style lang="scss">
