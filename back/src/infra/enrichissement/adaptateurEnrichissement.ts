@@ -60,7 +60,14 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     if (donnees) {
       const { itemsCyber, repartition } = JSON.parse(donnees);
       const guides = await this.entrepotGuide.tous();
-      return { itemsCyber, guides, repartition };
+      const guidesAvecImages = guides.map((guide) => ({
+        ...guide,
+        image: {
+          petite: `/documents-guides/${guide.id}/588.avif`,
+          grande: `/documents-guides/${guide.id}/origine.avif`,
+        },
+      }));
+      return { itemsCyber, guides: guidesAvecImages, repartition };
     }
 
     return {};
