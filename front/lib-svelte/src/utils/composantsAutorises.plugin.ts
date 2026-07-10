@@ -10,9 +10,9 @@ export const emetComposantsAutorisés = (composantsAutorisés: string[], cheminD
   name: 'emet-composants-autorisés',
   async writeBundle() {
     console.log('📝 Génération du manifeste des composants autorisés');
-    const liste = composantsAutorisés.map((nom) => `'${nom}'`).join(', ');
+    const liste = composantsAutorisés.map((nom) => `\n  '${nom}'`).join(',');
     const contenu = `// Fichier généré automatiquement au build Svelte (emetComposantsAutorisés). Ne pas modifier à la main.
-export const composantsAutorisés: string[] = [${liste}];
+export const composantsAutorisés: string[] = [${liste},\n];
 `;
     await writeFile(cheminDeSortie, contenu, 'utf-8');
     console.log('✅');
