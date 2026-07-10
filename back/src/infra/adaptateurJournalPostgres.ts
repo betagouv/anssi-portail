@@ -1,7 +1,7 @@
 import { AdaptateurJournal } from './adaptateurJournal.js';
 import { DonneesEvenement } from './donneesEvenement.js';
 import Knex from 'knex';
-import { v4 as uuidv4 } from 'uuid';
+import { v7 as uuidv7 } from 'uuid';
 
 export const adaptateurJournalPostgres = (): AdaptateurJournal => {
   const config = {
@@ -19,7 +19,7 @@ export const adaptateurJournalPostgres = (): AdaptateurJournal => {
       const { type, donnees, date } = donneesEvenement;
 
       return knex('journal_msc.evenements').insert({
-        id: uuidv4(),
+        id: uuidv7(),
         type,
         donnees,
         date: new Date(date).toISOString(),
