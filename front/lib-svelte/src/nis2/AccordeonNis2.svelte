@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import Accordeon from '../ui/Accordeon.svelte';
   import Lien from '../ui/Lien.svelte';
 
@@ -49,10 +50,10 @@
     </p>
 
     <h4>Secteurs hautement critiques</h4>
-    <dsfr-tags-group size="md" group-markup="ul" has-icon="true" {tags}></dsfr-tags-group>
+    <dsfr-tags-group size="md" group-markup="ul" has-icon="true" tags={enPropriétéWebC(tags)}></dsfr-tags-group>
 
     <h4>Autres secteurs critiques</h4>
-    <dsfr-tags-group size="md" group-markup="ul" has-icon="true" tags={autreTags}></dsfr-tags-group>
+    <dsfr-tags-group size="md" group-markup="ul" has-icon="true" tags={enPropriétéWebC(autreTags)}></dsfr-tags-group>
   </Accordeon>
 
   <Accordeon niveauTitre={3} libelle="2 typologies d’entités : Essentielles (EE) et Importantes (EI)">
