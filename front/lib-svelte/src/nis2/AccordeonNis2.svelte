@@ -50,10 +50,22 @@
     </p>
 
     <h4>Secteurs hautement critiques</h4>
-    <dsfr-tags-group size="md" group-markup="ul" has-icon="true" tags={enPropriétéWebC(tags)}></dsfr-tags-group>
+    <dsfr-tags-group size="md" group-markup="ul" has-icon="true" tags={enPropriétéWebC(tags)}>
+      <ul slot="seo">
+        {#each tags as tag (tag)}
+          <li>{tag.label}</li>
+        {/each}
+      </ul>
+    </dsfr-tags-group>
 
     <h4>Autres secteurs critiques</h4>
-    <dsfr-tags-group size="md" group-markup="ul" has-icon="true" tags={enPropriétéWebC(autreTags)}></dsfr-tags-group>
+    <dsfr-tags-group size="md" group-markup="ul" has-icon="true" tags={enPropriétéWebC(autreTags)}>
+      <ul slot="seo">
+        {#each autreTags as tag (tag)}
+          <li>{tag.label}</li>
+        {/each}
+      </ul>
+    </dsfr-tags-group>
   </Accordeon>
 
   <Accordeon niveauTitre={3} libelle="2 typologies d’entités : Essentielles (EE) et Importantes (EI)">
