@@ -300,11 +300,11 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/api/abonnement-infolettre', ressourceAbonnementInfolettre(configurationServeur));
 
-  const parcoursActive = configurationServeur.adaptateurEnvironnement
+  const parcoursActivé = configurationServeur.adaptateurEnvironnement
     .fonctionnalites()
     .parcoursDeSecurisation()
     .estActif();
-  if (parcoursActive) {
+  if (parcoursActivé) {
     app.use(
       '/api/mesures',
       ressourceMesure(configurationServeur),
@@ -314,10 +314,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     app.use('/api/modules', ressourceModule(configurationServeur));
     app.use('/module-cyberdepart', ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart'));
     app.use('/parcours-complet', ressourcePagesJekyllConnectees(configurationServeur, 'parcours-complet'));
+    app.use('/api/parcours/complet', ressourceParcoursComplet());
     app.use('/mesures/:id', ressourcePagesJekyllConnectees(configurationServeur, 'mesures'));
   }
-
-  app.use('/api/parcours/complet', ressourceParcoursComplet());
 
   [
     ['/directive-nis2', '/nis2'],
