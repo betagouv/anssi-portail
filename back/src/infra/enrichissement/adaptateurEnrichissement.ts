@@ -1,8 +1,10 @@
 import { JSDOM } from 'jsdom';
 import { render } from 'svelte/server';
-import { composantsAutorisés } from './composantsAutorises.genere.js';
 import { FournisseurChemin } from '../../api/fournisseurChemin.js';
 import { EntrepotGuide } from '../../metier/entrepotGuide.js';
+import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
+import { composantsAutorisés } from './composantsAutorises.genere.js';
+import { guidePresentation } from '../../presentation/guides/guidePresentation.js';
 
 export interface AdaptateurEnrichissement {
   enrichisAvecComposants: (contenuPage: string) => Promise<string>;
@@ -12,7 +14,8 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
   constructor(
     private readonly composantsAutorisés: string[],
     private readonly fournisseurDeChemin: FournisseurChemin,
-    private readonly entrepotGuide: EntrepotGuide
+    private readonly entrepotGuide: EntrepotGuide,
+    private readonly adaptateurEnvironnement: AdaptateurEnvironnement
   ) {}
   async enrichisAvecComposants(contenuPage: string) {
     try {
@@ -60,13 +63,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     if (donnees) {
       const { itemsCyber, repartition } = JSON.parse(donnees);
       const guides = await this.entrepotGuide.tous();
-      const guidesAvecImages = guides.map((guide) => ({
-        ...guide,
-        image: {
-          petite: `/documents-guides/${guide.id}/588.avif`,
-          grande: `/documents-guides/${guide.id}/origine.avif`,
-        },
-      }));
+      const guidesAvecImages = guides.map(guidePresentation(this.adaptateurEnvironnement));
       return { itemsCyber, guides: guidesAvecImages, repartition };
     }
 
@@ -75,8 +72,14 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
 }
 
 export const fabriqueAdaptateurEnrichissement = async (
+  adaptateurEnvironnement: AdaptateurEnvironnement,
   fournisseurDeChemin: FournisseurChemin,
   entrepotGuide: EntrepotGuide
 ): Promise<AdaptateurEnrichissement> => {
-  return new AdaptateurEnrichissementSvelte(composantsAutorisés, fournisseurDeChemin, entrepotGuide);
+  return new AdaptateurEnrichissementSvelte(
+    composantsAutorisés,
+    fournisseurDeChemin,
+    entrepotGuide,
+    adaptateurEnvironnement
+  );
 };
