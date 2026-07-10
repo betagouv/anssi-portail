@@ -69,11 +69,6 @@
     size="sm"
     title={titreCoupe}
   >
-    <div slot="seo">
-      <h3>
-        <a href={lien}>{titre}</a>
-      </h3>
-    </div>
     <div slot="headerbadges">
       <HeaderBadge {item} libelleBadge={libelleBadge()} />
     </div>
@@ -81,6 +76,12 @@
     {#if image}
       <img src={image} alt={altImage} slot="image" class="illustration" width="311" height="150" />
     {/if}
+
+    <div slot="seo">
+      <h3>
+        <a href={lien}>{titre}</a>
+      </h3>
+    </div>
 
     {#if item.sources || item.tagsSpecifiques}
       <div slot="contentend">
