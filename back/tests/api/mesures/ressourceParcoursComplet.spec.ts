@@ -84,5 +84,21 @@ describe('La ressource du parcours complet', () => {
 
       assert.equal(reponse.body.modules[0].nombreMesuresTotal, 2);
     });
+
+    it('retourne la cible de déblocage du badge Cyberdépart', async () => {
+      const module = new Module(1, 'Cyberdépart');
+      module.mesures = [
+        mesureDeTest().construis(),
+        mesureDeTest().construis(),
+        mesureDeTest().construis(),
+        mesureDeTest().construis(),
+        mesureDeTest().construis(),
+      ];
+      await entrepôtModule.ajoute(module);
+
+      const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
+
+      assert.equal(reponse.body.modules[0].cibleBadge, 4);
+    });
   });
 });

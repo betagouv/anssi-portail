@@ -10,7 +10,7 @@
     titre: string;
     description: string;
     libelleLien: string;
-    moduleCyberdepart: boolean;
+    cibleBadge?: number;
     nombreMesuresTotal: number;
   }[] = $state([]);
 
@@ -22,7 +22,6 @@
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tellus nibh, faucibus sed elit quis, aliquet malesuada augue.',
       libelleLien: module.id === 1 ? 'Prendre mon Cyberdépart' : 'Accéder aux mesures',
-      moduleCyberdepart: module.id === 1,
     }));
   });
 </script>
@@ -57,7 +56,7 @@
             <Progression
               actuel={0}
               max={module.nombreMesuresTotal}
-              cible={module.moduleCyberdepart ? 5 : undefined}
+              cible={module.cibleBadge}
               mode="compact"
               libelle="Mesures prises en compte"
             />

@@ -10,6 +10,7 @@ export const ressourceParcoursComplet = ({ middleware, entrepôtModule }: Config
       modules: modules.map((module) => ({
         ...module,
         nombreMesuresTotal: module.nombreDeMesures(),
+        cibleBadge: module.cibleDéblocageBadgeCyberdépart(),
       })),
     });
   });
