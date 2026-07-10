@@ -22,3 +22,8 @@ export type Mesure = {
   exigences: ExigenceNis2[];
   estPriseEnCompte: boolean;
 };
+
+export type Module = {
+  id: number;
+  nom: string;
+};

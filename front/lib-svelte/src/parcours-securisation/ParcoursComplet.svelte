@@ -1,31 +1,21 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
-  const modules = [
-    {
-      description: 'Prenez votre cyber départ..',
-      titre: 'Cyberdépart: 13 actions pour se lancer',
-      libelleLien: 'Prendre mon Cyberdépart',
-    },
-    {
+  import axios from 'axios';
+  import type { Module } from './mesure';
+
+  let modules: { titre: string; description: string; libelleLien: string }[] = $state([]);
+
+  onMount(async () => {
+    const réponse = await axios.get<{ modules: Module[] }>('/api/parcours/complet');
+    modules = réponse.data.modules.map((module) => ({
+      titre: module.nom,
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tellus nibh, faucibus sed elit quis, aliquet malesuada augue.',
-      titre: "Aggravation des conséquences d'un incident",
-      libelleLien: 'Accéder aux mesures',
-    },
-    {
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tellus nibh, faucibus sed elit quis, aliquet malesuada augue.',
-      titre: 'Exploitation de faille dans la défense',
-      libelleLien: 'Accéder aux mesures',
-    },
-    {
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tellus nibh, faucibus sed elit quis, aliquet malesuada augue.',
-      titre: 'Incapacité de réagir',
-      libelleLien: 'Accéder aux mesures',
-    },
-  ];
+      libelleLien: module.id === 1 ? 'Prendre mon Cyberdépart' : 'Accéder aux mesures',
+    }));
+  });
 </script>
 
 <Heros
