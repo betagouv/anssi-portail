@@ -11,8 +11,12 @@ type ModulePersisté = { id: number; nom: string };
 export class EntrepôtModulePostgres implements EntrepôtModule {
   knex: Knex.Knex;
 
-  constructor(private entrepôtMesure: EntrepotMesure) {
+  constructor(private readonly entrepôtMesure: EntrepotMesure) {
     this.knex = Knex(config);
+  }
+  async tous(): Promise<Module[]> {
+    const modulesLus = await this.knex<ModulePersisté>('modules');
+    return await Promise.all(modulesLus.map((moduleLu) => this.réhydrate(moduleLu)));
   }
 
   async parId(id: number): Promise<Module | undefined> {
