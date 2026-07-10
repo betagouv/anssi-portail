@@ -314,7 +314,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     app.use('/api/modules', ressourceModule(configurationServeur));
     app.use('/module-cyberdepart', ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart'));
     app.use('/parcours-complet', ressourcePagesJekyllConnectees(configurationServeur, 'parcours-complet'));
-    app.use('/api/parcours/complet', ressourceParcoursComplet());
+    app.use('/api/parcours/complet', ressourceParcoursComplet(configurationServeur));
     app.use('/mesures/:id', ressourcePagesJekyllConnectees(configurationServeur, 'mesures'));
   }
 
