@@ -24,6 +24,8 @@
       libelleLien: module.id === 1 ? 'Prendre mon Cyberdépart' : 'Accéder aux mesures',
     }));
   });
+
+  const totalMesures = $derived(modules.reduce((total, { nombreMesuresTotal }) => (total += nombreMesuresTotal), 0));
 </script>
 
 <Heros
@@ -38,6 +40,9 @@
   theme="sombre"
 ></Heros>
 <dsfr-container>
+  <div class="progression-totale">
+    <Progression actuel={0} max={totalMesures} />
+  </div>
   <div class="grille">
     {#each modules as module, index (module.titre)}
       <div class="carte" class:mise-en-avant={index === 0}>
@@ -152,5 +157,8 @@
         }
       }
     }
+  }
+  .progression-totale {
+    padding-block: 2rem;
   }
 </style>
