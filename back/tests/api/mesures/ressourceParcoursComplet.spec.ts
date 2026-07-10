@@ -9,6 +9,7 @@ import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoi
 import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
 import { jeanneDupont } from '../objetsPretsALEmploi.js';
+import { mesureDeTest } from './constructeurDeMesure.js';
 
 describe('La ressource du parcours complet', () => {
   describe('sur requête GET', () => {
@@ -72,6 +73,16 @@ describe('La ressource du parcours complet', () => {
       assert.equal(reponse.body.modules[0].id, 1);
       assert.equal(reponse.body.modules[1].nom, 'Aggravation des conséquences');
       assert.equal(reponse.body.modules[1].id, 2);
+    });
+
+    it('retourne le nombre de mesures de chaque module', async () => {
+      const module = new Module(1, 'Cyberdépart');
+      module.mesures = [mesureDeTest().construis(), mesureDeTest().construis()];
+      await entrepôtModule.ajoute(module);
+
+      const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
+
+      assert.equal(reponse.body.modules[0].nombreMesuresTotal, 2);
     });
   });
 });
