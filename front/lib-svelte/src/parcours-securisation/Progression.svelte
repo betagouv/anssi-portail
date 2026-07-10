@@ -49,7 +49,7 @@
     &.reactif {
       @include a-partir-de(md) {
         grid-template-areas: 'titre barre libelle';
-        grid-template-columns: min-content auto auto;
+        grid-template-columns: min-content 384px auto;
       }
     }
 
