@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto';
+import { v7 as uuidv7 } from 'uuid';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
 import { CodeRegion, estCodeRegion } from './referentielRegions.js';
 import { CodeSecteur, estCodeSecteur } from './referentielSecteurs.js';
@@ -56,7 +56,7 @@ export class ResultatTestMaturite {
     this.tailleOrganisation = tailleOrganisation;
     this.reponses = reponses;
     this.codeSessionGroupe = codeSessionGroupe;
-    this.id = id || randomUUID();
+    this.id = id ?? uuidv7();
     this.dateRealisation = dateRealisation;
   }
 
