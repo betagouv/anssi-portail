@@ -44,13 +44,17 @@
     guides?: Guide[];
   };
 
-  let { itemsCyber = [], repartition, guides = [] }: Props = $props();
+  let { itemsCyber, repartition, guides }: Props = $props();
+  const itemsCyberInitiaux = untrack(() => itemsCyber);
+  const guidesInitiaux = untrack(() => guides);
+  const repartitionInitiale = untrack(() => repartition);
 
-  catalogueStore.initialise(
-    untrack(() => itemsCyber),
-    untrack(() => repartition)
-  );
-  guidesStore.initialise(untrack(() => guides.map(guidePourCarteItem)));
+  if (itemsCyberInitiaux) {
+    catalogueStore.initialise(itemsCyberInitiaux, repartitionInitiale);
+  }
+  if (guidesInitiaux) {
+    guidesStore.initialise(guidesInitiaux.map(guidePourCarteItem));
+  }
 
   const idsCollectionsGuide: Record<CollectionGuide, string> = {
     [CollectionGuide.LES_ESSENTIELS]: 'essentiels',
