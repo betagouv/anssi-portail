@@ -4,8 +4,9 @@
   import Lien from '../ui/Lien.svelte';
   import axios from 'axios';
   import type { Module } from './mesure';
+  import Progression from './Progression.svelte';
 
-  let modules: { titre: string; description: string; libelleLien: string }[] = $state([]);
+  let modules: { titre: string; description: string; libelleLien: string; moduleCyberdepart: boolean }[] = $state([]);
 
   onMount(async () => {
     const réponse = await axios.get<{ modules: Module[] }>('/api/parcours/complet');
@@ -14,6 +15,7 @@
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tellus nibh, faucibus sed elit quis, aliquet malesuada augue.',
       libelleLien: module.id === 1 ? 'Prendre mon Cyberdépart' : 'Accéder aux mesures',
+      moduleCyberdepart: module.id === 1,
     }));
   });
 </script>
@@ -42,7 +44,18 @@
           no-link={true}
           src="/assets/images/image-generique.avif"
           title={module.titre}
+          has-detail-end={true}
         >
+          <div class="progression" slot="contentend">
+            <Progression
+              actuel={0}
+              max={10}
+              cible={module.moduleCyberdepart ? 5 : undefined}
+              mode="compact"
+              libelle="Mesures prises en compte"
+            />
+          </div>
+
           <div slot="buttonsgroup" class="actions-carte">
             <Lien apparence="bouton" href="#" type="primaire" libelle={module.libelleLien} etire={true} />
           </div>
@@ -74,6 +87,13 @@
       --colonnes: 3;
       padding-bottom: 4.5rem;
     }
+  }
+
+  .progression {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex: 1;
   }
 
   .carte {

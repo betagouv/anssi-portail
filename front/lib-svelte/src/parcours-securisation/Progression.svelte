@@ -2,28 +2,34 @@
   interface Props {
     actuel: number;
     max: number;
-    cible: number;
+    cible?: number;
+    mode?: 'compact' | 'reactif';
+    libelle?: string;
   }
 
-  const { actuel, max, cible }: Props = $props();
+  const { actuel, max, cible, mode = 'reactif', libelle = 'Progression' }: Props = $props();
 
   let barre: HTMLElement;
   $effect(() => {
     barre.style.setProperty('--largeur-actuelle', `${Math.min((actuel / max) * 100, 100)}%`);
-    barre.style.setProperty('--position-cible', `${Math.min((cible / max) * 100, 100)}%`);
+    if (cible) {
+      barre.style.setProperty('--position-cible', `${Math.min((cible / max) * 100, 100)}%`);
+    }
   });
 </script>
 
-<div class="progression">
-  <h6>Progression</h6>
+<div class={`${mode} progression`}>
+  <h6>{libelle}</h6>
   <span class="texte-standard-md libelle">{actuel}&nbsp;/&nbsp;{max}</span>
   <div class="barre" bind:this={barre}>
     <div class="barre-actuelle"></div>
-    <div
-      class="badge-recompense"
-      class:actif={actuel >= cible}
-      title={actuel < cible ? 'Validez des actions pour accéder à votre Cyberdépart' : ''}
-    ></div>
+    {#if cible}
+      <div
+        class="badge-recompense"
+        class:actif={actuel >= cible}
+        title={actuel < cible ? 'Validez des actions pour accéder à votre Cyberdépart' : ''}
+      ></div>
+    {/if}
   </div>
 </div>
 
@@ -37,10 +43,14 @@
       'barre barre';
     grid-template-columns: min-content auto;
     align-items: center;
-
-    @include a-partir-de(md) {
-      grid-template-areas: 'titre barre libelle';
-      grid-template-columns: min-content 384px auto;
+    &.compact {
+      grid-template-columns: auto min-content;
+    }
+    &.reactif {
+      @include a-partir-de(md) {
+        grid-template-areas: 'titre barre libelle';
+        grid-template-columns: min-content auto auto;
+      }
     }
 
     h6 {
