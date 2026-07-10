@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import EnteteFiltres from '../catalogue/EnteteFiltres.svelte';
+  import { estServeur } from '$plateforme/environnement';
 
   export let filtreActif: boolean;
 
@@ -15,7 +16,7 @@
   });
 </script>
 
-{#if estBureau}
+{#if estBureau || estServeur}
   <div class="sommaire sommaire-deplie">
     <div class="barre-filtres">
       <slot name="avant-entete" />
