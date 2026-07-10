@@ -37,6 +37,7 @@
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
   import { guidePourCarteItem } from './guides/guide';
   import { catalogueStore } from './stores/catalogue.store';
+  import { estServeur } from '$plateforme/environnement';
 
   type Props = {
     itemsCyber?: ItemCyber[];
@@ -119,9 +120,12 @@
     }
   });
 
-  const élémentsDuCatalogue = $derived(
-    idÉlémentSélectionné === 'guides' ? $guidesFiltres.resultats : $catalogueFiltre.resultats
-  );
+  const élémentsDuCatalogue = $derived.by(() => {
+    if (estServeur) {
+      return [...$guidesFiltres.resultats, ...$catalogueFiltre.resultats];
+    }
+    return idÉlémentSélectionné === 'guides' ? $guidesFiltres.resultats : $catalogueFiltre.resultats;
+  });
 </script>
 
 <Hero
