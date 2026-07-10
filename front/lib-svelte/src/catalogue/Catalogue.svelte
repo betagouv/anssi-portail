@@ -114,6 +114,10 @@
       chargement = false;
     }
   });
+
+  const élémentsDuCatalogue = $derived(
+    idÉlémentSélectionné === 'guides' ? $guidesFiltres.resultats : $catalogueFiltre.resultats
+  );
 </script>
 
 <Hero
@@ -176,31 +180,14 @@
       <input type="button" class="bouton primaire" value="Réinitialiser les filtres" onclick={reinitialiseFiltres} />
     </FiltresBureau>
 
-    {#if idÉlémentSélectionné === 'guides'}
-      {#each $guidesFiltres.resultats as guide (guide.id)}
-        <CarteItem item={guide} avecBoutonFavori />
-      {:else}
-        <div class="aucun-resultat">
-          <img src="/assets/images/homme-cherchant-avec-loupe.svg" width="175" height="317" alt="Aucun résultat" />
-          {#if chargement}
-            <p class="fr-h3">Chargement...</p>
-          {:else}
-            <p class="fr-h3">Désolé, aucun résultat trouvé</p>
-            <input
-              type="button"
-              class="bouton primaire"
-              value="Réinitialiser les filtres"
-              onclick={reinitialiseFiltres}
-            />
-          {/if}
-        </div>
-      {/each}
+    {#each élémentsDuCatalogue as élément (élément.id)}
+      <CarteItem item={élément} avecBoutonFavori />
     {:else}
-      {#each $catalogueFiltre.resultats as itemCyber (itemCyber.id)}
-        <CarteItem item={itemCyber} avecBoutonFavori />
-      {:else}
-        <div class="aucun-resultat">
-          <img src="/assets/images/homme-cherchant-avec-loupe.svg" width="175" height="317" alt="Aucun résultat" />
+      <div class="aucun-resultat">
+        <img src="/assets/images/homme-cherchant-avec-loupe.svg" width="175" height="317" alt="Aucun résultat" />
+        {#if chargement}
+          <p class="fr-h3">Chargement...</p>
+        {:else}
           <p class="fr-h3">Désolé, aucun résultat trouvé</p>
           <input
             type="button"
@@ -208,9 +195,9 @@
             value="Réinitialiser les filtres"
             onclick={reinitialiseFiltres}
           />
-        </div>
-      {/each}
-    {/if}
+        {/if}
+      </div>
+    {/each}
   </div>
 </dsfr-container>
 
