@@ -14,7 +14,7 @@ import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurRechercheEntreprise } from '../fauxObjets.js';
 import { hectorDurant, jeanneDupont } from '../objetsPretsALEmploi.js';
 
-const REGEX_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+const REGEX_UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 
 describe('La ressource qui gère les résultats de test de maturité', () => {
   let serveur: Express;
