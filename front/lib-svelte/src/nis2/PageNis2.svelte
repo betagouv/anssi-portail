@@ -11,7 +11,7 @@
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
 
-  const { itemsCyber, featureFlagNis2CyFun23 = false, exigences = undefined } = $props();
+  const { itemsCyber, featureFlagNis2CyFun23 = false, exigences = undefined, guides = undefined } = $props();
 
   let estBureau = $state(false);
   onMount(() => {
@@ -79,8 +79,8 @@
 {#if estServeur || lienActif === '#exigences'}
   <ExigencesNis2 {featureFlagNis2CyFun23} {exigences} />
 {/if}
-{#if lienActif === '#solutions'}
-  <Solutions {itemsCyber} />
+{#if estServeur || lienActif === '#solutions'}
+  <Solutions {itemsCyber} {guides} />
 {/if}
 {#if lienActif === '#documentation'}
   <DocumentationNis2 />
