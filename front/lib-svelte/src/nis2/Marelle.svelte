@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { clic } from '../directives/actions.svelte';
+  import Lien from '../ui/Lien.svelte';
 
   const etapesMarelle = [
     {
@@ -54,21 +54,18 @@
       <h4 slot="etape-titre">{etape.titre}</h4>
       {#if index === 2}
         <p slot="etape-description">
-          Mettez en oeuvre <msc-lien
+          Mettez en oeuvre <Lien
             libelle="les exigences de sécurité"
             href="/nis2#exigences"
-            use:clic={retourEnHautDePage}
-          ></msc-lien> issues de la directive pour réduire vos risques cyber et signalez à l’ANSSI vos incidents de sécurité.
+            surClic={retourEnHautDePage}
+          /> issues de la directive pour réduire vos risques cyber et signalez à l’ANSSI vos incidents de sécurité.
         </p>
       {:else}
         <p slot="etape-description">{etape.description}</p>
       {/if}
-      <msc-lien
-        slot="etape-lien"
-        libelle={etape.lien.texte}
-        href={etape.lien.href}
-        blank={etape.lien.target === '_blank'}
-      ></msc-lien>
+      <div slot="etape-lien">
+        <Lien libelle={etape.lien.texte} href={etape.lien.href} blank={etape.lien.target === '_blank'} />
+      </div>
     </lab-anssi-marelle-etape>
   {/each}
 </lab-anssi-marelle>

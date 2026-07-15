@@ -3,6 +3,8 @@
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
+  import Lien from '../ui/Lien.svelte';
+  import Notice from '../ui/Notice.svelte';
   import DocumentationNis2 from './DocumentationNis2.svelte';
   import ExigencesNis2 from './ExigencesNis2.svelte';
   import Presentation from './Presentation.svelte';
@@ -43,29 +45,28 @@
     <FilAriane fondSombre={true} feuille="Directive NIS 2" />
   {/snippet}
   {#snippet actions()}
-    <dsfr-button
-      label="Pré-enregistrer mon entité"
-      markup="a"
+    <Lien
+      apparence="bouton"
+      blank
+      etire
       href="https://club.ssi.gouv.fr/#/nis2/introduction"
-      target="_blank"
-      has-icon
-      icon-place="right"
-      icon="external-link-line"
-      centered
-    ></dsfr-button>
+      icone="external-link-line"
+      iconeADroite
+      libelle="Pré-enregistrer mon entité"
+    />
   {/snippet}
 </Heros>
 
-<dsfr-notice
-  title="Newsletter MesServicesCyber :"
-  hasDescription
-  desc="Restez informé des dernières actualités de la directive NIS 2 et autres actualités."
-  dismissible
-  hasLink
-  linkLabel="S’abonner"
-  linkTitle="S’abonner à la newsletter"
-  linkHref="/abonnement-infolettre?adresseRetour=/nis2"
-></dsfr-notice>
+<Notice
+  description="Restez informé des dernières actualités de la directive NIS 2 et autres actualités."
+  estRejetable
+  titre="Newsletter MesServicesCyber :"
+  lien={{
+    libelle: 'S’abonner',
+    titre: 'S’abonner à la newsletter',
+    url: '/abonnement-infolettre?adresseRetour=/nis2',
+  }}
+/>
 
 <NavigationTertiaire {liens} bind:lienActif />
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import DemandeDiagnosticSimplifiee from '../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
-  import { clic } from '../directives/actions.svelte';
+  import Lien from '../ui/Lien.svelte';
   import AccordeonNis2 from './AccordeonNis2.svelte';
   import Marelle from './Marelle.svelte';
 
@@ -25,11 +25,7 @@
     <AccordeonNis2 />
 
     <div class="lien-nis2">
-      <msc-lien
-        href="/nis2#exigences"
-        libelle="Consulter les exigences applicables à NIS 2"
-        use:clic={retourEnHautDePage}
-      ></msc-lien>
+      <Lien href="/nis2#exigences" libelle="Consulter les exigences applicables à NIS 2" surClic={retourEnHautDePage} />
     </div>
   </div>
 </dsfr-container>
@@ -41,7 +37,7 @@
 <dsfr-container class="diagnostic">
   <DemandeDiagnosticSimplifiee
     origine="nis2"
-    titre="Commencez à agir pour protéger  votre organisation des cyberattaques"
+    titre="Commencez à agir pour protéger votre organisation des cyberattaques"
   />
 </dsfr-container>
 

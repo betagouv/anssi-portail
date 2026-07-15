@@ -20,6 +20,7 @@
     source?: string;
     cible?: string;
     classe?: string;
+    surClic?: (e: MouseEvent | KeyboardEvent) => void;
   };
   const {
     apparence = 'lien',
@@ -39,6 +40,7 @@
     source,
     cible,
     classe,
+    surClic,
   }: Props = $props();
 
   const hasIcon = $derived(!!icone);
@@ -58,6 +60,10 @@
     const cible = href.startsWith('/') ? `${window.location.protocol}//${window.location.host}${href}` : href;
     window._paq?.push(['trackLink', cible, telechargement ? 'download' : 'link']);
   };
+  const auClic = (e: MouseEvent | KeyboardEvent) => {
+    traceClic();
+    surClic?.(e);
+  };
 </script>
 
 {#if estServeur}
@@ -75,7 +81,7 @@
     label={libelle}
     neutral={neutre}
     size={taille}
-    use:clic={traceClic}
+    use:clic={auClic}
     data-source={source}
     data-cible={cible}
     class={classe}
@@ -92,7 +98,7 @@
     {href}
     target={blank ? '_blank' : '_self'}
     {kind}
-    use:clic={traceClic}
+    use:clic={auClic}
     centered={etire}
     data-source={source}
     data-cible={cible}

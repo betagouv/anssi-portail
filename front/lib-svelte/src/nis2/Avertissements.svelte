@@ -1,5 +1,6 @@
 <script lang="ts">
   import { clic } from '../directives/actions.svelte';
+  import Lien from '../ui/Lien.svelte';
   import Modale from '../ui/Modale.svelte';
 
   type Props = {
@@ -19,13 +20,13 @@
   <p slot="description" class="contenu">
     Le présent outil de comparaison de référentiels est mis à disposition par l’Agence nationale de la sécurité des
     systèmes d'information (ci-après, l’Agence) à titre purement informatif et indicatif, afin de faciliter la
-    compréhension par l’écosystème du référentiel NIS 2 qu’elle a élaboré. <msc-lien
+    compréhension par l’écosystème du référentiel NIS 2 qu’elle a élaboré. <Lien
       libelle="Afficher la suite"
       href="#exigences"
-      use:clic={() => {
+      surClic={() => {
         detailsReCyFOuvert = true;
       }}
-    ></msc-lien>
+    />
   </p>
 </dsfr-alert>
 {#if detailsReCyFOuvert}
