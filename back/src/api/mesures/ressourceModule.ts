@@ -32,7 +32,9 @@ const ressourceModule = ({
         })
       );
       const mesuresTries = mesuresPresentation.toSorted((a, b) => a.ordre - b.ordre);
-      reponse.status(200).send({ cibleBadge: module.cibleDéblocageBadgeCyberdépart(), mesures: mesuresTries });
+      reponse
+        .status(200)
+        .send({ nom: module.nom, cibleBadge: module.cibleDéblocageBadgeCyberdépart(), mesures: mesuresTries });
     })
   );
 
