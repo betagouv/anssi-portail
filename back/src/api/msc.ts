@@ -312,7 +312,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ressourcePriseEnCompte(configurationServeur)
     );
     app.use('/api/modules', ressourceModule(configurationServeur));
-    app.use('/module-cyberdepart', ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart'));
+    app.use('/module-cyberdepart', (_, reponse) => reponse.redirect(303, '/modules/1'));
+    app.use('/modules/1', ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart'));
     app.use('/modules/:id', ressourcePagesJekyllConnectees(configurationServeur, 'modules'));
     app.use('/parcours-complet', ressourcePagesJekyllConnectees(configurationServeur, 'parcours-complet'));
     app.use('/api/parcours/complet', ressourceParcoursComplet(configurationServeur));
@@ -345,7 +346,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ['/ma-maturite/', '/ma-maturite'],
     ['/maintenance/', '/maintenance'],
     ['/mentions-legales/', '/mentions-legales'],
-    ['/module-cyberdepart/', '/module-cyberdepart'],
     ['/nis2/', '/nis2'],
     ['/niveaux-maturite/', '/niveaux-maturite'],
     ['/parcours-approfondir/', '/parcours-approfondir'],

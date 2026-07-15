@@ -107,7 +107,7 @@
           <div slot="buttonsgroup" class="actions-carte">
             <Lien
               apparence="bouton"
-              href="#"
+              href={`/modules/${module.id}`}
               type={typeLienCarte(module)}
               libelle={libelléLienCarte(module)}
               etire={true}
