@@ -12,6 +12,7 @@
     libelleLien: string;
     cibleBadge?: number;
     nombreMesuresTotal: number;
+    nombreMesuresPrisesEnCompte: number;
   }[] = $state([]);
 
   onMount(async () => {
@@ -26,6 +27,9 @@
   });
 
   const totalMesures = $derived(modules.reduce((total, { nombreMesuresTotal }) => (total += nombreMesuresTotal), 0));
+  const totalMesuresPrisesEnCompte = $derived(
+    modules.reduce((total, { nombreMesuresPrisesEnCompte }) => (total += nombreMesuresPrisesEnCompte), 0)
+  );
 </script>
 
 <Heros
@@ -41,7 +45,7 @@
 ></Heros>
 <dsfr-container>
   <div class="progression-totale">
-    <Progression actuel={0} max={totalMesures} />
+    <Progression actuel={totalMesuresPrisesEnCompte} max={totalMesures} />
   </div>
   <div class="grille">
     {#each modules as module, index (module.titre)}
@@ -59,7 +63,7 @@
         >
           <div class="progression" slot="contentend">
             <Progression
-              actuel={0}
+              actuel={module.nombreMesuresPrisesEnCompte}
               max={module.nombreMesuresTotal}
               cible={module.cibleBadge}
               mode="compact"

@@ -7,22 +7,40 @@ import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnem
 import { Module } from '../../../src/metier/module.js';
 import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire.js';
 import { encodeSession } from '../cookie.js';
-import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
+import {
+  configurationDeTestDuServeur,
+  fauxAdaptateurEnvironnement,
+  fauxAdaptateurHachage,
+  fauxAdaptateurRechercheEntreprise,
+} from '../fauxObjets.js';
 import { jeanneDupont } from '../objetsPretsALEmploi.js';
 import { mesureDeTest } from './constructeurDeMesure.js';
+import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
+import { Utilisateur } from '../../../src/metier/utilisateur.js';
 
 describe('La ressource du parcours complet', () => {
   describe('sur requête GET', () => {
     let serveur: Express;
     let cookieDeJeanneDupont: string;
     let entrepôtModule: EntrepôtModuleMémoire;
+    let entrepotUtilisateur: EntrepotUtilisateur;
+    let jeannetteDupont: Utilisateur;
 
-    beforeEach(() => {
+    beforeEach(async () => {
+      entrepotUtilisateur = new EntrepotUtilisateurMemoire();
       entrepôtModule = new EntrepôtModuleMémoire();
-      serveur = creeServeur({ ...configurationDeTestDuServeur, entrepôtModule });
-
+      serveur = creeServeur({ ...configurationDeTestDuServeur, entrepôtModule, entrepotUtilisateur });
+      jeannetteDupont = new Utilisateur(
+        {
+          ...jeanneDupont,
+        },
+        fauxAdaptateurRechercheEntreprise,
+        fauxAdaptateurHachage
+      );
+      await entrepotUtilisateur.ajoute(jeannetteDupont);
       cookieDeJeanneDupont = encodeSession({
-        email: jeanneDupont.email,
+        email: jeannetteDupont.email,
         token: 'valide',
       });
     });
@@ -99,6 +117,17 @@ describe('La ressource du parcours complet', () => {
       const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
 
       assert.equal(reponse.body.modules[0].cibleBadge, 4);
+    });
+
+    it("retourne le nombre de mesures prises en compte par l'utilisateur pour chaque module", async () => {
+      await entrepôtModule.ajoute(new Module(1, 'Cyberdépart'));
+      await entrepôtModule.ajoute(new Module(2, 'Aggravation des conséquences'));
+      jeannetteDupont.nombreDeMesuresPrisesEnCompte = async (module: Module) => (module.id === 1 ? 98 : 20);
+
+      const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
+
+      assert.equal(reponse.body.modules[0].nombreMesuresPrisesEnCompte, 98);
+      assert.equal(reponse.body.modules[1].nombreMesuresPrisesEnCompte, 20);
     });
   });
 });
