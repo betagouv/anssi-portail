@@ -9,7 +9,7 @@
   import GrilleCartesMesures from './GrilleCartesMesures.svelte';
   import type { Mesure } from './mesure';
   import ModaleBadgeCyberdepartDebloque from './modales/ModaleBadgeCyberdepartDebloque.svelte';
-  import ModaleModuleTermine from './modales/ModaleModuleTermine.svelte';
+  import ModaleModuleCyberdepartTermine from './modales/ModaleModuleCyberdepartTermine.svelte';
   import Progression from './Progression.svelte';
 
   let mesures: Mesure[] = $state([]);
@@ -57,7 +57,7 @@
 
 <ModaleBadgeCyberdepartDebloque bind:estOuverte={badgeCyberdépartDebloqué} />
 
-<ModaleModuleTermine bind:estOuverte={moduleTerminé} />
+<ModaleModuleCyberdepartTermine bind:estOuverte={moduleTerminé} />
 
 <dsfr-container>
   <div class="progression">
