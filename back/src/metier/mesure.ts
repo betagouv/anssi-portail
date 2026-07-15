@@ -29,6 +29,7 @@ export class Mesure {
     readonly ordre: number,
     readonly risques: Risque[],
     readonly liens: LienPourAllerPlusLoin[],
-    readonly exigences: ExigenceNIS2[]
+    readonly exigences: ExigenceNIS2[],
+    readonly idModule: number
   ) {}
 }

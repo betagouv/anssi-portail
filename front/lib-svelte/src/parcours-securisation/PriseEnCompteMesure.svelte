@@ -22,7 +22,7 @@
       if (reponse.data.moduleTerminé) {
         sessionStorage.setItem('module-termine', 'true');
       }
-      window.location.href = '/module-cyberdepart';
+      window.location.href = `/modules/${mesure.idModule}`;
       mesurePriseEnCompte = true;
     } finally {
       priseEnCompteEnCours = false;
