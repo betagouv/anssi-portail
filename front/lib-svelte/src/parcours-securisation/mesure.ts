@@ -27,5 +27,6 @@ export type Module = {
   id: number;
   nom: string;
   nombreMesuresTotal: number;
+  nombreMesuresPrisesEnCompte: number;
   cibleBadge?: number;
 };
