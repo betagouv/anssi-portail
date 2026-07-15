@@ -13,7 +13,8 @@
   let cibleBadge = $state(0);
 
   onMount(async () => {
-    const reponse = await axios.get<{ cibleBadge: number; mesures: Mesure[] }>(`/api/modules/2`);
+    const idDuModule = new URL(window.location.href).pathname.split('/').pop();
+    const reponse = await axios.get<{ cibleBadge: number; mesures: Mesure[] }>(`/api/modules/${idDuModule}`);
     mesures = reponse.data.mesures;
     cibleBadge = reponse.data.cibleBadge;
     if (sessionStorage.getItem('mesure-prise-en-compte') === 'true') {
