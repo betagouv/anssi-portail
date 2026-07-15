@@ -20,9 +20,6 @@
 
   onMount(() => {
     changeLeLienCourant();
-  });
-
-  $effect(() => {
     window.addEventListener('hashchange', changeLeLienCourant);
     return () => window.removeEventListener('hashchange', changeLeLienCourant);
   });
