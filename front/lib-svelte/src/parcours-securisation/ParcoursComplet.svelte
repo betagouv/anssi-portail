@@ -6,14 +6,16 @@
   import type { Module } from './mesure';
   import Progression from './Progression.svelte';
 
-  let modules: {
+  type ModulePrésentation = {
+    id: number;
     titre: string;
     description: string;
-    libelleLien: string;
     cibleBadge?: number;
     nombreMesuresTotal: number;
     nombreMesuresPrisesEnCompte: number;
-  }[] = $state([]);
+  };
+
+  let modules: ModulePrésentation[] = $state([]);
 
   onMount(async () => {
     const réponse = await axios.get<{ modules: Module[] }>('/api/parcours/complet');
@@ -22,7 +24,6 @@
       titre: module.nom,
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tellus nibh, faucibus sed elit quis, aliquet malesuada augue.',
-      libelleLien: module.id === 1 ? 'Prendre mon Cyberdépart' : 'Accéder aux mesures',
     }));
   });
 
@@ -30,6 +31,27 @@
   const totalMesuresPrisesEnCompte = $derived(
     modules.reduce((total, { nombreMesuresPrisesEnCompte }) => (total += nombreMesuresPrisesEnCompte), 0)
   );
+
+  const estEnCours = (module: ModulePrésentation): boolean =>
+    module.nombreMesuresPrisesEnCompte !== module.nombreMesuresTotal && module.nombreMesuresPrisesEnCompte > 0;
+
+  const estTerminé = (module: ModulePrésentation): boolean =>
+    module.nombreMesuresPrisesEnCompte === module.nombreMesuresTotal;
+
+  const moduleCyberdépartNonCommencé = (module: ModulePrésentation): boolean =>
+    module.nombreMesuresPrisesEnCompte === 0 && module.id === 1;
+
+  const typeLienCarte = (module: ModulePrésentation) => {
+    if (estTerminé(module)) return 'tertiaire';
+    if (estEnCours(module)) return 'secondaire';
+    return 'primaire';
+  };
+
+  const libelléLienCarte = (module: ModulePrésentation) => {
+    if (moduleCyberdépartNonCommencé(module)) return 'Prendre mon Cyberdépart';
+    if (estEnCours(module)) return 'Continuer ma progression';
+    return 'Accéder aux mesures';
+  };
 </script>
 
 <Heros
@@ -72,7 +94,13 @@
           </div>
 
           <div slot="buttonsgroup" class="actions-carte">
-            <Lien apparence="bouton" href="#" type="primaire" libelle={module.libelleLien} etire={true} />
+            <Lien
+              apparence="bouton"
+              href="#"
+              type={typeLienCarte(module)}
+              libelle={libelléLienCarte(module)}
+              etire={true}
+            />
           </div>
         </dsfr-card>
       </div>
