@@ -76,6 +76,7 @@ export default defineConfig({
         'composants-ui': 'src/main-composants-ui.ts',
         mesure: 'src/main-mesure.ts',
         'module-cyberdepart': 'src/main-module-cyberdepart.ts',
+        module: 'src/main-module.ts',
         'parcours-complet': 'src/main-parcours-complet.ts',
       },
       output: {
