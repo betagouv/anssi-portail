@@ -78,11 +78,22 @@
           enlarge={false}
           has-buttons={true}
           has-description="true"
+          has-header-badge={estTerminé(module) || undefined}
           no-link={true}
           src="/assets/images/image-generique.avif"
           title={module.titre}
           has-detail-end={true}
         >
+          <div slot="headerbadges">
+            <dsfr-badge
+              accent="green-emeraude"
+              has-icon
+              icon="checkbox-circle-fill"
+              label="Terminé"
+              size="md"
+              type="accent"
+            ></dsfr-badge>
+          </div>
           <div class="progression" slot="contentend">
             <Progression
               actuel={module.nombreMesuresPrisesEnCompte}
