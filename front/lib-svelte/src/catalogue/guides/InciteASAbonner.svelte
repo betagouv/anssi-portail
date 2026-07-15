@@ -12,9 +12,6 @@
 
   onMount(() => {
     changeLAdresseDeRetour();
-  });
-
-  $effect(() => {
     window.addEventListener('hashchange', changeLAdresseDeRetour);
     return () => window.removeEventListener('hashchange', changeLAdresseDeRetour);
   });
