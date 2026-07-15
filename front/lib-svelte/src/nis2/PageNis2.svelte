@@ -82,7 +82,7 @@
 {#if estServeur || lienActif === '#solutions'}
   <Solutions {itemsCyber} {guides} />
 {/if}
-{#if lienActif === '#documentation'}
+{#if estServeur || lienActif === '#documentation'}
   <DocumentationNis2 />
 {/if}
 
