@@ -1,8 +1,8 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { clic } from '../directives/actions.svelte';
   import ConteneurLarge from '../ui/ConteneurLarge.svelte';
+  import Lien from '../ui/Lien.svelte';
   import Avertissements from './Avertissements.svelte';
   import { type Exigence, fabriqueDExigence, type ReferentielSelectionne } from './exigence.type';
   import Panneau from './panneau/Panneau.svelte';
@@ -11,7 +11,6 @@
   import type { Comparaison } from './tableaux/configuration.type';
   import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
   import TableauExigencesSimple from './tableaux/TableauExigencesSimple.svelte';
-  import Lien from '../ui/Lien.svelte';
 
   const { featureFlagNis2CyFun23 }: { featureFlagNis2CyFun23: boolean } = $props();
 
@@ -95,23 +94,23 @@
     <div class="titre">
       <h2>Exigences applicables à NIS&nbsp;2</h2>
       <div class="telechargements">
-        <msc-lien
+        <Lien
           href={lienFichierTelechargement}
           libelle={libelleFichierTelechargement}
           telechargement=""
           telechargementDetails="PDF - 965,8 ko"
-          use:clic={() => traceTelechargement(lienFichierTelechargement)}
-        ></msc-lien>
-        <msc-lien
+          surClic={() => traceTelechargement(lienFichierTelechargement)}
+        />
+        <Lien
           href="/documents-ressources/20260317_NIS_V2_Suivi des modifications ReCyF v2.4 vers v2.5-vfinale.pdf"
           libelle="Télécharger le suivi des modifications"
           telechargement=""
           telechargementDetails="PDF - 1 383,4 ko"
-          use:clic={() =>
+          surClic={() =>
             traceTelechargement(
               '/documents-ressources/20260317_NIS_V2_Suivi des modifications ReCyF v2.4 vers v2.5-vfinale.pdf'
             )}
-        ></msc-lien>
+        />
       </div>
       <dsfr-button
         label="Exporter le tableau"
@@ -140,7 +139,7 @@
   {:else}
     <TableauCorrespondancesExigences {chargement} exigences={$exigencesFiltrees.exigences} comparaison={mode} />
   {/if}
-  <Lien libelle="Haut de page" href="#" taille="md" icone="arrow-up-fill"></Lien>
+  <Lien libelle="Haut de page" href="#" taille="md" icone="arrow-up-fill" />
 </ConteneurLarge>
 
 <style lang="scss">
