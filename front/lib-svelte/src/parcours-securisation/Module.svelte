@@ -4,8 +4,8 @@
   import Heros from '../ui/Heros.svelte';
   import { toasterStore } from '../ui/toasts/toaster.store';
   import Toaster from '../ui/toasts/Toaster.svelte';
-  import GrilleCartesMesures from './GrilleCartesMesures.svelte';
   import type { Mesure } from './mesure';
+  import MesuresDeModule from './MesuresDeModule.svelte';
   import Progression from './Progression.svelte';
 
   let mesures: Mesure[] = $state([]);
@@ -22,8 +22,7 @@
       sessionStorage.removeItem('mesure-prise-en-compte');
     }
   });
-  const mesuresMisesEnAvant = $derived(mesures.filter((_, index) => index < 4));
-  const autresMesures = $derived(mesures.filter((_, index) => index >= 4));
+
   const progressionActuelle = $derived(mesures.filter((m) => m.estPriseEnCompte).length);
 </script>
 
@@ -46,14 +45,7 @@
   </div>
 </dsfr-container>
 
-<dsfr-container class="actions-en-avant">
-  <h4>🚀 Lancez-vous avec ces premières actions</h4>
-  <GrilleCartesMesures mesures={mesuresMisesEnAvant}></GrilleCartesMesures>
-</dsfr-container>
-
-<dsfr-container class="autres-actions">
-  <GrilleCartesMesures mesures={autresMesures}></GrilleCartesMesures>
-</dsfr-container>
+<MesuresDeModule {mesures} />
 
 <style lang="scss">
   .progression {
@@ -61,18 +53,5 @@
     gap: 1.5rem;
     display: flex;
     flex-direction: column;
-  }
-
-  dsfr-container.actions-en-avant {
-    background-color: var(--background-alt-blue-france);
-    padding-block: 3rem;
-
-    h4 {
-      margin-bottom: 2rem;
-    }
-  }
-
-  .autres-actions {
-    padding-block: 3rem;
   }
 </style>
