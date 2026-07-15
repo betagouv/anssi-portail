@@ -1,4 +1,4 @@
-import { mount } from 'svelte';
+import { hydrate } from 'svelte';
 import type { ItemCyber } from './catalogue/Catalogue.types';
 import Page from './nis2/PageNis2.svelte';
 
@@ -15,7 +15,7 @@ const { featureFlagNis2CyFun23 } = JSON.parse(donneesNis2) as {
   featureFlagNis2CyFun23: boolean;
 };
 
-mount(Page, {
+hydrate(Page, {
   target: document.getElementById('page-directive-nis2')!,
   props: {
     itemsCyber,
