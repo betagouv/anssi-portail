@@ -12,16 +12,24 @@
   import ModaleModuleCyberdepartTermine from './modales/ModaleModuleCyberdepartTermine.svelte';
   import Progression from './Progression.svelte';
 
-  let mesures: Mesure[] = $state([]);
-  const totalMesures = $derived(mesures.length);
-  let cibleBadge = $state(0);
+  type ModuleRéponseApi = {
+    nom: string;
+    cibleBadge: number;
+    mesures: Mesure[];
+  };
+
+  let module = $state<ModuleRéponseApi>({
+    nom: '',
+    mesures: [],
+    cibleBadge: 0,
+  });
+  const totalMesures = $derived(module.mesures.length);
   let badgeCyberdépartDebloqué = $state(false);
   let moduleTerminé = $state(false);
 
   onMount(async () => {
-    const reponse = await axios.get<{ cibleBadge: number; mesures: Mesure[] }>(`/api/modules/1`);
-    mesures = reponse.data.mesures;
-    cibleBadge = reponse.data.cibleBadge;
+    const reponse = await axios.get<ModuleRéponseApi>(`/api/modules/1`);
+    module = reponse.data;
     if (sessionStorage.getItem('mesure-prise-en-compte') === 'true') {
       toasterStore.succes('Mesure déclarée prise en compte', 'Mesure déclarée prise en compte');
       sessionStorage.removeItem('mesure-prise-en-compte');
@@ -36,8 +44,8 @@
     }
   });
 
-  const progressionActuelle = $derived(mesures.filter((m) => m.estPriseEnCompte).length);
-  const badgeDebloque = $derived(progressionActuelle >= cibleBadge);
+  const progressionActuelle = $derived(module.mesures.filter((module) => module.estPriseEnCompte).length);
+  const badgeDebloque = $derived(progressionActuelle >= module.cibleBadge);
   const parcoursTermine = $derived(progressionActuelle === totalMesures);
 </script>
 
@@ -69,14 +77,14 @@
         text="Complétez votre progression et accéder à des mesures plus avancées pour renforcer vos pratiques, mieux structurer vos actions et améliorer votre protection dans la durée."
       ></dsfr-alert>
     {/if}
-    <Progression actuel={progressionActuelle} max={totalMesures} cible={cibleBadge}></Progression>
+    <Progression actuel={progressionActuelle} max={totalMesures} cible={module.cibleBadge}></Progression>
     {#if badgeDebloque}
       <BadgeCyberdepart />
     {/if}
   </div>
 </dsfr-container>
 
-<MesuresDeModule {mesures} />
+<MesuresDeModule mesures={module.mesures} />
 
 <style lang="scss">
   .progression {
