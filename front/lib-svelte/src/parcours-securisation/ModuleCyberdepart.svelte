@@ -58,7 +58,7 @@
   format="banniere"
   illustrationAlt=""
   illustrationSource=""
-  titre="Cyberdépart : agir pour votre cybersécurité"
+  titre={module.nom}
   theme="sombre"
 ></Heros>
 
