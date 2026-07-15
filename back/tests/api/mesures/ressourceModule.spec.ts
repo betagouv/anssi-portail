@@ -151,5 +151,13 @@ describe('La ressource d’un module', () => {
 
       assert.equal(reponse.status, 404);
     });
+
+    it('renvoie le nom du module', async () => {
+      await entrepôtModule.ajoute(new Module(2, 'Module 2'));
+
+      const reponse = await request(serveur).get('/api/modules/2').set('Cookie', cookieJeanneDupont);
+
+      assert.equal(reponse.body.nom, 'Module 2');
+    });
   });
 });

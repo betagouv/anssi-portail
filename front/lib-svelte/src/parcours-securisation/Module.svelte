@@ -8,22 +8,29 @@
   import MesuresDeModule from './MesuresDeModule.svelte';
   import Progression from './Progression.svelte';
 
-  let mesures: Mesure[] = $state([]);
-  const totalMesures = $derived(mesures.length);
-  let cibleBadge = $state(0);
+  type ModuleRéponseApi = {
+    nom: string;
+    cibleBadge?: number;
+    mesures: Mesure[];
+  };
+
+  let module = $state<ModuleRéponseApi>({
+    nom: '',
+    mesures: [],
+  });
+  const totalMesures = $derived(module.mesures.length);
 
   onMount(async () => {
     const idDuModule = new URL(window.location.href).pathname.split('/').pop();
-    const reponse = await axios.get<{ cibleBadge: number; mesures: Mesure[] }>(`/api/modules/${idDuModule}`);
-    mesures = reponse.data.mesures;
-    cibleBadge = reponse.data.cibleBadge;
+    const reponse = await axios.get<ModuleRéponseApi>(`/api/modules/${idDuModule}`);
+    module = reponse.data;
     if (sessionStorage.getItem('mesure-prise-en-compte') === 'true') {
       toasterStore.succes('Mesure déclarée prise en compte', 'Mesure déclarée prise en compte');
       sessionStorage.removeItem('mesure-prise-en-compte');
     }
   });
 
-  const progressionActuelle = $derived(mesures.filter((m) => m.estPriseEnCompte).length);
+  const progressionActuelle = $derived(module.mesures.filter((m) => m.estPriseEnCompte).length);
 </script>
 
 <Toaster />
@@ -35,17 +42,17 @@
   format="banniere"
   illustrationAlt=""
   illustrationSource=""
-  titre="nom du module"
+  titre={module.nom}
   theme="sombre"
 ></Heros>
 
 <dsfr-container>
   <div class="progression">
-    <Progression actuel={progressionActuelle} max={totalMesures} cible={cibleBadge}></Progression>
+    <Progression actuel={progressionActuelle} max={totalMesures} cible={module.cibleBadge}></Progression>
   </div>
 </dsfr-container>
 
-<MesuresDeModule {mesures} />
+<MesuresDeModule mesures={module.mesures} />
 
 <style lang="scss">
   .progression {
