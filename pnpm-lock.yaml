@@ -62,7 +62,7 @@ importers:
         specifier: ^4.21.0
         version: 4.21.0
       vitest:
-        specifier: '>=4.1.0'
+        specifier: ^4.1.7
         version: 4.1.7(@types/node@25.9.3)(jsdom@29.1.1(@noble/hashes@1.8.0))(vite@6.4.3(@types/node@25.9.3)(sass@1.98.0)(tsx@4.21.0))
 
   back:
@@ -231,7 +231,7 @@ importers:
         specifier: ^8.57.1
         version: 8.57.1(eslint@9.39.4)(typescript@5.9.3)
       vitest:
-        specifier: '>=4.1.0'
+        specifier: ^4.1.7
         version: 4.1.7(@types/node@22.19.21)(jsdom@29.1.1(@noble/hashes@1.8.0))(vite@6.4.3(@types/node@22.19.21)(sass@1.98.0)(tsx@4.21.0))
 
   comparaison-grist:
@@ -408,7 +408,7 @@ importers:
         specifier: 6.4.3
         version: 6.4.3(@types/node@25.9.3)(sass@1.98.0)(tsx@4.21.0)
       vitest:
-        specifier: '>=4.1.0'
+        specifier: ^4.1.7
         version: 4.1.7(@types/node@25.9.3)(jsdom@29.1.1(@noble/hashes@1.8.0))(vite@6.4.3(@types/node@25.9.3)(sass@1.98.0)(tsx@4.21.0))
       vitest-localstorage-mock:
         specifier: ^0.1.2
