@@ -10,7 +10,6 @@ import { EntrepôtModulePostgres } from './entrepotModulePostgres.js';
 import { adaptateurCellar } from './infra/adaptateurCellar.js';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement.js';
 import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo.js';
-import { fabriqueAdaptateurEnrichissement } from './infra/enrichissement/adaptateurEnrichissement.js';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement.js';
 import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSentry.js';
 import { fabriqueAdaptateurHachage } from './infra/adaptateurHachage.js';
@@ -20,6 +19,7 @@ import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber.j
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi.js';
 import { fabriqueAdaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise.js';
 import axiosInstance from './infra/axiosInstance.js';
+import { fabriqueAdaptateurEnrichissement } from './infra/enrichissement/adaptateurEnrichissement.js';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres.js';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist.js';
 import { EntrepotGuideGrist } from './infra/entrepotGuideGrist.js';
@@ -144,7 +144,8 @@ const port = process.env.PORT || 3000;
       adaptateurEnrichissement: await fabriqueAdaptateurEnrichissement(
         adaptateurEnvironnement,
         fournisseurChemin,
-        entrepotGuide
+        entrepotGuide,
+        entrepotExigence
       ),
     }),
     adaptateurOIDC,

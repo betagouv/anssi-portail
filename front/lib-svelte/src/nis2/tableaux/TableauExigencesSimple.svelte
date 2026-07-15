@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import { type Exigence, type ExigenceNis2 } from '../exigence.type';
   import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
   import AucunResultat from './AucunResultat.svelte';
@@ -19,14 +20,14 @@
     noCaption
     multiline
     rich
-    columns={[
+    columns={enPropriétéWebC([
       {
         key: 'exigence',
         label: 'Exigence applicable à NIS 2',
         multiline: true,
       },
-    ]}
-    rows={exigences}
+    ])}
+    rows={enPropriétéWebC(exigences)}
   >
     {#each exigences as exigence, i (exigence.reference)}
       <div slot={`cell:exigence:${i}`}>

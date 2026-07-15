@@ -1,6 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
-  import { onMount } from 'svelte';
+  import { onMount, untrack } from 'svelte';
   import ConteneurLarge from '../ui/ConteneurLarge.svelte';
   import Lien from '../ui/Lien.svelte';
   import Avertissements from './Avertissements.svelte';
@@ -12,7 +12,15 @@
   import TableauCorrespondancesExigences from './tableaux/TableauCorrespondancesExigences.svelte';
   import TableauExigencesSimple from './tableaux/TableauExigencesSimple.svelte';
 
-  const { featureFlagNis2CyFun23 }: { featureFlagNis2CyFun23: boolean } = $props();
+  type Props = {
+    featureFlagNis2CyFun23: boolean;
+    exigences?: Exigence[];
+  };
+  const { featureFlagNis2CyFun23, exigences: exigencesExternes }: Props = $props();
+  const exigencesInitiales = untrack(() => exigencesExternes);
+  if (exigencesInitiales) {
+    exigencesStore.initialise(exigencesInitiales);
+  }
 
   let exigences = $state<Exigence[]>([]);
   let sensComparaison = $state<'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2'>('NIS2_VERS_CIBLE');

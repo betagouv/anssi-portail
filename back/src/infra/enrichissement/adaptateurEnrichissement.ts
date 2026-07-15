@@ -2,9 +2,10 @@ import { JSDOM } from 'jsdom';
 import { render } from 'svelte/server';
 import { FournisseurChemin } from '../../api/fournisseurChemin.js';
 import { EntrepotGuide } from '../../metier/entrepotGuide.js';
+import { EntrepotExigence } from '../../metier/nis2/entrepotExigence.js';
+import { guidePresentation } from '../../presentation/guides/guidePresentation.js';
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
 import { composantsAutorisés } from './composantsAutorises.genere.js';
-import { guidePresentation } from '../../presentation/guides/guidePresentation.js';
 
 export interface AdaptateurEnrichissement {
   enrichisAvecComposants: (contenuPage: string) => Promise<string>;
@@ -15,14 +16,16 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     private readonly composantsAutorisés: string[],
     private readonly fournisseurDeChemin: FournisseurChemin,
     private readonly entrepotGuide: EntrepotGuide,
-    private readonly adaptateurEnvironnement: AdaptateurEnvironnement
+    private readonly adaptateurEnvironnement: AdaptateurEnvironnement,
+    private readonly entrepôtExigence: EntrepotExigence
   ) {}
   async enrichisAvecComposants(contenuPage: string) {
     try {
       const dom = new JSDOM(contenuPage);
       const divDInjectionCSS = dom.window.document.getElementsByTagName('head');
       for (const nomComposant of this.composantsAutorisés) {
-        const props = await this.récupèreItemsCyber(dom);
+        let props = await this.récupèreItemsCyber(dom);
+        props = await this.récupèreExigences(dom, props);
         const divDInjection = dom.window.document.getElementById(nomComposant);
         if (!divDInjection) {
           continue;
@@ -69,17 +72,28 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
 
     return {};
   }
+
+  private async récupèreExigences(dom: JSDOM, props: Record<string, unknown>) {
+    const pageNis2 = dom.window.document.getElementById('page-directive-nis2');
+    if (pageNis2) {
+      const exigences = await this.entrepôtExigence.parReferentiel('NIS2');
+      return { ...props, exigences };
+    }
+    return props;
+  }
 }
 
 export const fabriqueAdaptateurEnrichissement = async (
   adaptateurEnvironnement: AdaptateurEnvironnement,
   fournisseurDeChemin: FournisseurChemin,
-  entrepotGuide: EntrepotGuide
+  entrepotGuide: EntrepotGuide,
+  entrepôtExigence: EntrepotExigence
 ): Promise<AdaptateurEnrichissement> => {
   return new AdaptateurEnrichissementSvelte(
     composantsAutorisés,
     fournisseurDeChemin,
     entrepotGuide,
-    adaptateurEnvironnement
+    adaptateurEnvironnement,
+    entrepôtExigence
   );
 };
