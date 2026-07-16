@@ -65,7 +65,10 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     const lienCanonique = dom.window.document.querySelector('link[rel="canonical"]');
     if (lienCanonique) {
       const href = lienCanonique.getAttribute('href') ?? '';
-      lienCanonique.setAttribute('href', href.replace('/financements', routeDemandée));
+      lienCanonique.setAttribute(
+        'href',
+        href.replace('/financements', routeDemandée).replace('/guides', routeDemandée)
+      );
     }
   }
 
