@@ -40,6 +40,11 @@ const ressourceProfil = ({
           codeDepartement,
           codeRegion,
           codeActivite: organisation?.codeActivite,
+          parcoursSecurisation: utilisateurConnecte
+            ? {
+                parcoursActuel: utilisateurConnecte.parcoursActuel(),
+              }
+            : undefined,
           peutGererLesGuides:
             (requete.session?.connexionAvecMFA && utilisateurConnecte?.peutManipulerLesDocumentsDUnGuide()) ?? false,
         });

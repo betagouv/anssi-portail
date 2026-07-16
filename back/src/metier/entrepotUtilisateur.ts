@@ -7,4 +7,5 @@ export interface EntrepotUtilisateur {
   parIdListeFavoris: (idListeFavoris: string) => Promise<Utilisateur | undefined>;
   tous: () => Promise<Utilisateur[]>;
   taille: () => Promise<number>;
+  metsAJour: (utilisateur: Utilisateur) => Promise<void>;
 }

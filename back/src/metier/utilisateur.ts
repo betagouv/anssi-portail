@@ -73,6 +73,7 @@ export class Utilisateur {
   roles: Role[];
   mesuresPrisesEnCompte: Mesure[];
   private adaptateurHachage: AdaptateurHachage;
+  private parcours?: 'complet' | 'allégé';
 
   constructor(
     {
@@ -172,5 +173,13 @@ export class Utilisateur {
       module.mesures.includes(mesurePriseEnCompte)
     );
     return mesuresDuModulePriseEnCompte.length;
+  }
+
+  rejoinsProgrammeAccompagnement(programmeAccompagnement: 'complet' | 'allégé') {
+    this.parcours = programmeAccompagnement;
+  }
+
+  parcoursActuel() {
+    return this.parcours;
   }
 }

@@ -181,5 +181,26 @@ describe('La ressource Profil', () => {
         assert.equal(reponse.body.peutGererLesGuides, false);
       });
     });
+    describe('concernant le parcours de sécurisation', () => {
+      it("ne renvoie pas de parcours si l'utilisateur n'est pas connecté", async () => {
+        const reponse = await request(serveur).get('/api/profil');
+
+        assert.equal(reponse.statusCode, 200);
+        assert.equal(reponse.body.parcoursSecurisation, undefined);
+      });
+
+      it('renvoie le parcours actuel', async () => {
+        const cookie = encodeSession({
+          email: 'jeanne.dupont@user.com',
+          token: 'valide',
+        });
+
+        jeanneDupont.rejoinsProgrammeAccompagnement('complet');
+
+        const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
+
+        assert.deepEqual(reponse.body.parcoursSecurisation, { parcoursActuel: 'complet' });
+      });
+    });
   });
 });
