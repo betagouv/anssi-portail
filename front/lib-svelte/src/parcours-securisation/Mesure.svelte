@@ -10,6 +10,7 @@
   import { storeAvisUtilisateur, type AvisUtilisateur } from './avisUtilisateur.store';
   import type { Mesure } from './mesure';
   import PriseEnCompteMesure from './PriseEnCompteMesure.svelte';
+  import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
 
   let mesure: Mesure | undefined = $state();
 
@@ -234,6 +235,7 @@
       </div>
     </div>
   </dsfr-container>
+  <InterlocuteursParcoursSecurisation />
 {:else}
   <dsfr-container>Chargement... </dsfr-container>
 {/if}
