@@ -77,9 +77,11 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
 
   private async adapteTitre(dom: JSDOM, routeDemandée: string) {
     const guideTrouvé = await this.récupèreGuide(routeDemandée);
+    const financementTrouvé = await this.récupèreFinancement(routeDemandée);
+    const nouveauTitre = guideTrouvé?.nom ?? financementTrouvé?.nom;
     const titre = dom.window.document.getElementsByTagName('title').item(0);
-    if (titre && guideTrouvé) {
-      titre.innerHTML = `${guideTrouvé.nom} | MesServicesCyber`;
+    if (titre && nouveauTitre) {
+      titre.innerHTML = `${nouveauTitre} | MesServicesCyber`;
     }
   }
 
@@ -119,9 +121,9 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
       const financementsInitiaux = await this.entrepôtFinancement.tous();
       return { ...props, financementsInitiaux };
     }
-    const idFinancement = routeDemandée.match(/\/financements\/(.*)/)?.[1];
-    if (idFinancement) {
-      const financementInitial = await this.entrepôtFinancement.parId(Number(idFinancement));
+
+    const financementInitial = await this.récupèreFinancement(routeDemandée);
+    if (financementInitial) {
       return { ...props, financementInitial };
     }
     return props;
@@ -134,6 +136,13 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     }
     const guideTrouvé = (await this.entrepotGuide.tous()).find((g) => g.id === idGuide);
     return guideTrouvé;
+  }
+
+  private async récupèreFinancement(routeDemandée: string) {
+    const idFinancement = routeDemandée.match(/\/financements\/(.*)/)?.[1];
+    if (idFinancement) {
+      return this.entrepôtFinancement.parId(Number(idFinancement));
+    }
   }
 }
 
