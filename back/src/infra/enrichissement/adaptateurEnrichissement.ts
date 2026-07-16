@@ -44,7 +44,8 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
       }
 
       this.afficheLesLiens(dom);
-      this.adaptateLienCanonique(dom, routeDemandée);
+      this.adapteLienCanonique(dom, routeDemandée);
+      await this.adapteTitre(dom, routeDemandée);
 
       return dom.serialize();
     } catch (e) {
@@ -62,13 +63,22 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     }
   }
 
-  private adaptateLienCanonique(dom: JSDOM, routeDemandée: string): void {
+  private adapteLienCanonique(dom: JSDOM, routeDemandée: string): void {
     const lienCanonique = dom.window.document.querySelector('link[rel="canonical"]');
     if (!lienCanonique) return;
 
     const href = lienCanonique.getAttribute('href') ?? '';
     const nouveauHref = href.replace(/\/(financements|guides)$/, routeDemandée);
     lienCanonique.setAttribute('href', nouveauHref);
+  }
+
+  private async adapteTitre(dom: JSDOM, routeDemandée: string) {
+    const idGuide = routeDemandée.match(/\/guides\/(.*)/)?.[1];
+    const guideTrouvé = (await this.entrepotGuide.tous()).find((g) => g.id === idGuide);
+    const titre = dom.window.document.getElementsByTagName('title').item(0);
+    if (titre && guideTrouvé) {
+      titre.innerHTML = `${guideTrouvé.nom} | MesServicesCyber`;
+    }
   }
 
   private async récupèreItemsCyber(dom: JSDOM) {
@@ -86,12 +96,15 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
 
   private async récupèreGuide(props: Record<string, unknown>, routeDemandée: string) {
     const idGuide = routeDemandée.match(/\/guides\/(.*)/)?.[1];
-    if (idGuide) {
-      const guideTrouvé = (await this.entrepotGuide.tous()).find((g) => g.id === idGuide);
-      const guideInitial = guideTrouvé ? guidePresentation(this.adaptateurEnvironnement)(guideTrouvé) : undefined;
-      return { ...props, guideInitial };
+    if (!idGuide) {
+      return props;
     }
-    return props;
+    const guideTrouvé = (await this.entrepotGuide.tous()).find((g) => g.id === idGuide);
+    if (!guideTrouvé) {
+      return props;
+    }
+    const guideInitial = guidePresentation(this.adaptateurEnvironnement)(guideTrouvé);
+    return { ...props, guideInitial };
   }
 
   private async récupèreExigences(dom: JSDOM, props: Record<string, unknown>) {
