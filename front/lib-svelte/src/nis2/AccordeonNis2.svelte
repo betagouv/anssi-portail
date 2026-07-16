@@ -145,6 +145,7 @@
       iconeADroite
       icone="external-link-line"
       apparence="bouton"
+      classe="action-declaration-incident"
     ></Lien>
     <p>
       Conformément à la directive NIS&nbsp;2, des actions de supervision seront assurées pour vérifier le respect par
@@ -163,7 +164,7 @@
     margin: 2rem 0;
   }
 
-  :global(dsfr-button) {
+  :global(dsfr-button.action-declaration-incident) {
     margin-bottom: 2rem;
 
     + p {
