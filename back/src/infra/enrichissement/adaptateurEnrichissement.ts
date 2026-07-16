@@ -61,15 +61,13 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     }
   }
 
-  private adaptateLienCanonique(dom: JSDOM, routeDemandée: string) {
+  private adaptateLienCanonique(dom: JSDOM, routeDemandée: string): void {
     const lienCanonique = dom.window.document.querySelector('link[rel="canonical"]');
-    if (lienCanonique) {
-      const href = lienCanonique.getAttribute('href') ?? '';
-      lienCanonique.setAttribute(
-        'href',
-        href.replace('/financements', routeDemandée).replace('/guides', routeDemandée)
-      );
-    }
+    if (!lienCanonique) return;
+
+    const href = lienCanonique.getAttribute('href') ?? '';
+    const nouveauHref = href.replace(/\/(financements|guides)$/, routeDemandée);
+    lienCanonique.setAttribute('href', nouveauHref);
   }
 
   private async récupèreItemsCyber(dom: JSDOM) {
