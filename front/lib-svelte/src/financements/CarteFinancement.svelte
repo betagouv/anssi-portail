@@ -15,7 +15,9 @@
     <h6>{financement.nom}</h6>
     <div class="tags">
       {#each financement.entitesElligibles as entite (entite)}
-        <dsfr-tag type="accent" accent="yellow-tournesol" size="sm" label={entite}></dsfr-tag>
+        <dsfr-tag type="accent" accent="yellow-tournesol" size="sm" label={entite}>
+          <span slot="seo">{entite}</span>
+        </dsfr-tag>
       {/each}
     </div>
     <div class="actions">

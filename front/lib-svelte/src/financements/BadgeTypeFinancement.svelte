@@ -5,4 +5,6 @@
   const { type }: Props = $props();
 </script>
 
-<dsfr-badge type="accent" accent="yellow-tournesol" size="sm" label={type}></dsfr-badge>
+<dsfr-badge type="accent" accent="yellow-tournesol" size="sm" label={type}>
+  <span slot="seo">{type}</span>
+</dsfr-badge>

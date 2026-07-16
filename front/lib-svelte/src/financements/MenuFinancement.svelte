@@ -46,7 +46,9 @@
     <p class="titreTags">tags</p>
     <div class="tags">
       {#each tags as tag (tag)}
-        <dsfr-tag type="accent" accent="yellow-tournesol" size="sm" label={tag}></dsfr-tag>
+        <dsfr-tag type="accent" accent="yellow-tournesol" size="sm" label={tag}>
+          <span slot="seo">{tag}</span>
+        </dsfr-tag>
       {/each}
     </div>
   </div>
