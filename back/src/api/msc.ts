@@ -63,6 +63,7 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe.js';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
+import { ressourceParcours } from './mesures/ressourceParcours.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -319,6 +320,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     app.use('/api/parcours/complet', ressourceParcoursComplet(configurationServeur));
     app.use('/mesures/:id', ressourcePagesJekyllConnectees(configurationServeur, 'mesures'));
   }
+
+  app.use('/parcours', ressourceParcours(configurationServeur));
 
   [
     ['/a-propos/', '/a-propos'],

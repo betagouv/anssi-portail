@@ -6,6 +6,7 @@ import { EntrepotMemoire } from './entrepotMemoire.js';
 export class EntrepotUtilisateurMemoire extends EntrepotMemoire<Utilisateur> implements EntrepotUtilisateur {
   utilisateurs: Map<string, Utilisateur> = new Map<string, Utilisateur>();
   _echoueSurRechercheParMail = false;
+  dernierUtilisateurMisAJour?: Utilisateur;
 
   ajoute = async (utilisateur: Utilisateur) => {
     utilisateur.idListeFavoris = randomUUID();
@@ -31,4 +32,8 @@ export class EntrepotUtilisateurMemoire extends EntrepotMemoire<Utilisateur> imp
   };
 
   existe = async (emailHache: string) => !!(await this.parEmailHache(emailHache));
+
+  metsAJour = async (utilisateur: Utilisateur) => {
+    this.dernierUtilisateurMisAJour = utilisateur;
+  };
 }
