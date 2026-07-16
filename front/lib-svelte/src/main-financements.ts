@@ -1,6 +1,6 @@
-import { mount } from 'svelte';
+import { hydrate } from 'svelte';
 import Financements from './financements/Financements.svelte';
 
-mount(Financements, {
+hydrate(Financements, {
   target: document.getElementById('financements')!,
 });
