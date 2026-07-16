@@ -24,9 +24,9 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
       const dom = new JSDOM(contenuPage);
       const divDInjectionCSS = dom.window.document.getElementsByTagName('head');
       for (const nomComposant of this.composantsAutorisés) {
-        let props = await this.récupèreItemsCyber(dom);
-        props = await this.récupèreGuide(props, routeDemandée);
-        props = await this.récupèreExigences(dom, props);
+        let props = await this.chargeRessourcesCyber(dom);
+        props = await this.chargeGuide(props, routeDemandée);
+        props = await this.chargeExigences(dom, props);
         const divDInjection = dom.window.document.getElementById(nomComposant);
         if (!divDInjection) {
           continue;
@@ -81,7 +81,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     }
   }
 
-  private async récupèreItemsCyber(dom: JSDOM) {
+  private async chargeRessourcesCyber(dom: JSDOM) {
     const donnees = dom.window.document.getElementById('donnees-items-cyber')?.textContent;
 
     if (donnees) {
@@ -94,7 +94,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     return {};
   }
 
-  private async récupèreGuide(props: Record<string, unknown>, routeDemandée: string) {
+  private async chargeGuide(props: Record<string, unknown>, routeDemandée: string) {
     const idGuide = routeDemandée.match(/\/guides\/(.*)/)?.[1];
     if (!idGuide) {
       return props;
@@ -107,7 +107,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     return { ...props, guideInitial };
   }
 
-  private async récupèreExigences(dom: JSDOM, props: Record<string, unknown>) {
+  private async chargeExigences(dom: JSDOM, props: Record<string, unknown>) {
     const pageNis2 = dom.window.document.getElementById('page-directive-nis2');
     if (pageNis2) {
       const exigences = await this.entrepôtExigence.parReferentiel('NIS2');
