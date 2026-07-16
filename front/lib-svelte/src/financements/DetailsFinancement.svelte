@@ -29,12 +29,6 @@
   let entreesMenuFinancement: Record<string, string> | undefined = $state();
 
   const idFinancement = Number(new URL(window.location.href).pathname.split('/').pop());
-  const canonical = Array.from(document.getElementsByTagName('link')).find(
-    (link) => link.getAttribute('rel') === 'canonical'
-  );
-  if (canonical) {
-    canonical.setAttribute('href', `/financements/${idFinancement}`);
-  }
 
   onMount(async () => {
     try {
