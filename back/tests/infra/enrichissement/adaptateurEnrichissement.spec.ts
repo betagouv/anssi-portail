@@ -8,6 +8,7 @@ import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js'
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire.js';
 import assert from 'node:assert';
 import { guideDevsecops } from '../../api/objetsPretsALEmploi.js';
+import { EntrepotFinancementMemoire } from '../../persistance/entrepotFinancementMemoire.js';
 
 describe("L'adaptateur qui enrichie le html servi", () => {
   let adaptateurEnrichissement: AdaptateurEnrichissement;
@@ -19,7 +20,8 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       fauxAdaptateurEnvironnement,
       fauxFournisseurDeChemin,
       entrepôtGuide,
-      new EntrepotExigenceMemoire()
+      new EntrepotExigenceMemoire(),
+      new EntrepotFinancementMemoire()
     );
   });
 

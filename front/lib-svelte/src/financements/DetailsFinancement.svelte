@@ -1,12 +1,19 @@
 <script lang="ts">
   import axios from 'axios';
-  import { onDestroy, onMount, tick } from 'svelte';
+  import { onMount, tick, untrack } from 'svelte';
   import FilAriane from '../ui/FilAriane.svelte';
   import Lien from '../ui/Lien.svelte';
   import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
   import type { Financement } from './financement';
   import MenuFinancement from './MenuFinancement.svelte';
   import SectionDetailsFinancement from './SectionDetailsFinancement.svelte';
+
+  type Props = {
+    financementInitial?: Financement;
+    idFinancement?: number;
+  };
+
+  const { financementInitial, idFinancement }: Props = $props();
 
   type ReponseAxios = {
     id: number;
@@ -25,25 +32,32 @@
     contact: string;
   };
 
-  let financement: Financement | undefined = $state();
+  let financement: Financement | undefined = $state(untrack(() => financementInitial));
   let entreesMenuFinancement: Record<string, string> | undefined = $state();
 
-  const idFinancement = Number(new URL(window.location.href).pathname.split('/').pop());
+  onMount(() => {
+    (async () => {
+      try {
+        const reponse = await axios.get<ReponseAxios>(`/api/financements/${idFinancement}`);
+        financement = reponse.data;
+        const entrees: [string, string][] = [];
+        if (financement.objectifs) entrees.push(['objectifs', 'Objectifs']);
+        if (financement.operationsEligibles) entrees.push(['operations-eligibles', 'Opérations éligibles']);
+        if (financement.benificiaires) entrees.push(['beneficiaires', 'Bénéficiaires']);
+        if (financement.montant) entrees.push(['montant', 'Montant']);
+        if (financement.condition) entrees.push(['conditions', 'Conditions']);
+        entreesMenuFinancement = Object.fromEntries(entrees);
+      } catch {
+        financement = undefined;
+      }
+    })();
 
-  onMount(async () => {
-    try {
-      const reponse = await axios.get<ReponseAxios>(`/api/financements/${idFinancement}`);
-      financement = reponse.data;
-      const entrees: [string, string][] = [];
-      if (financement.objectifs) entrees.push(['objectifs', 'Objectifs']);
-      if (financement.operationsEligibles) entrees.push(['operations-eligibles', 'Opérations éligibles']);
-      if (financement.benificiaires) entrees.push(['beneficiaires', 'Bénéficiaires']);
-      if (financement.montant) entrees.push(['montant', 'Montant']);
-      if (financement.condition) entrees.push(['conditions', 'Conditions']);
-      entreesMenuFinancement = Object.fromEntries(entrees);
-    } catch {
-      financement = undefined;
-    }
+    return () => {
+      const lesSections = contenu!.querySelectorAll('section');
+      lesSections.forEach((s) => {
+        if (observateurDIntersection) observateurDIntersection.unobserve(s);
+      });
+    };
   });
 
   let contenu: HTMLDivElement;
@@ -114,22 +128,11 @@
       tick().then(observeLesSections);
     }
   });
-
-  onDestroy(() => {
-    const lesSections = contenu!.querySelectorAll('section');
-    lesSections.forEach((s) => {
-      if (observateurDIntersection) observateurDIntersection.unobserve(s);
-    });
-  });
 </script>
 
 <dsfr-container class="chapeau">
   <div class="contenu-section">
-    <FilAriane
-      feuille={financement?.nom ?? '...'}
-      branche={{ nom: 'Financements cyber', lien: '/financements' }}
-      brancheConnectee={{ nom: 'Financements cyber', lien: '/financements' }}
-    />
+    <FilAriane feuille={financement?.nom ?? '...'} branche={{ nom: 'Financements cyber', lien: '/financements' }} />
     <div class="badges">
       {#if financement}
         {#each financement.typesDeFinancement as type (type)}
