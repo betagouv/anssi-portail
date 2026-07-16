@@ -16,8 +16,8 @@
   import InciteASAbonner from './InciteASAbonner.svelte';
   import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
 
-  let guide: Guide | undefined;
-  let chargementEnCours = false;
+  let guide = $state<Guide | undefined>(undefined);
+  let chargementEnCours = $state(false);
 
   async function copierLeLienCourt() {
     if (guide?.lienCourt) {
@@ -39,8 +39,8 @@
       chargementEnCours = false;
     }
   });
-  $: aDesCollections = guide && guide.collections.filter((c) => c !== CollectionGuide.AUTRE).length > 0;
-  $: descriptionAspetisee = aseptiseHtml(guide?.description ?? '');
+  const aDesCollections = $derived(guide && guide.collections.filter((c) => c !== CollectionGuide.AUTRE).length > 0);
+  const descriptionAspetisee = $derived(aseptiseHtml(guide?.description ?? ''));
 </script>
 
 {#if guide}
