@@ -11,6 +11,7 @@
   import ModaleBadgeCyberdepartDebloque from './modales/ModaleBadgeCyberdepartDebloque.svelte';
   import ModaleModuleCyberdepartTermine from './modales/ModaleModuleCyberdepartTermine.svelte';
   import Progression from './Progression.svelte';
+  import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
 
   type ModuleRéponseApi = {
     nom: string;
@@ -85,6 +86,7 @@
 </dsfr-container>
 
 <MesuresDeModule mesures={module.mesures} />
+<InterlocuteursParcoursSecurisation />
 
 <style lang="scss">
   .progression {
