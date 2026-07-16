@@ -42,9 +42,6 @@
       const idGuideACharger = new URL(window.location.href).pathname;
       await chargeGuidesDansLeStore();
       guide = $guidesStore.find((g) => g.id === idGuideACharger);
-      if (guide) {
-        document.title = decodeEntitesHtml(guide.nom) + ' | MesServicesCyber';
-      }
     } finally {
       chargementEnCours = false;
     }

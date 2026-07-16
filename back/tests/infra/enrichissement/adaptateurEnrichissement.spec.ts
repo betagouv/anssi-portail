@@ -7,15 +7,18 @@ import { fauxAdaptateurEnvironnement, fauxFournisseurDeChemin } from '../../api/
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js';
 import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire.js';
 import assert from 'node:assert';
+import { guideDevsecops } from '../../api/objetsPretsALEmploi.js';
 
 describe("L'adaptateur qui enrichie le html servi", () => {
   let adaptateurEnrichissement: AdaptateurEnrichissement;
+  let entrepôtGuide: EntrepotGuideMemoire;
 
   beforeEach(async () => {
+    entrepôtGuide = new EntrepotGuideMemoire();
     adaptateurEnrichissement = await fabriqueAdaptateurEnrichissement(
       fauxAdaptateurEnvironnement,
       fauxFournisseurDeChemin,
-      new EntrepotGuideMemoire(),
+      entrepôtGuide,
       new EntrepotExigenceMemoire()
     );
   });
@@ -53,6 +56,17 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/guides/identifiant-dun-guide');
 
       assert.match(rendu, /<link rel="canonical" href="http:\/\/localhost:3000\/guides\/identifiant-dun-guide">/);
+    });
+  });
+
+  describe('sait modifier le titre', () => {
+    it("lorsqu'on sert une page de guide", async () => {
+      await entrepôtGuide.ajoute(guideDevsecops());
+      const htmlFactice = fabriqueHtmlFactice('http://localhost:3000/guides');
+
+      const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/guides/devsecops');
+
+      assert.match(rendu, /<title>DevSecOps | MesServicesCyber<\/title>/);
     });
   });
 });
