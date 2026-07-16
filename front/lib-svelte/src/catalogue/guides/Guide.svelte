@@ -1,6 +1,6 @@
 <script lang="ts">
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
-  import { onMount } from 'svelte';
+  import { onMount, untrack } from 'svelte';
   import EncartLienVersDemandeDiagnostic from '../../demande-aide-mon-aide-cyber/EncartLienVersDemandeDiagnostic.svelte';
   import { clic } from '../../directives/actions.svelte';
   import BoutonFavori from '../../favoris/BoutonFavori.svelte';
@@ -12,11 +12,21 @@
   import { chargeGuidesDansLeStore, guidesStore } from '../stores/guides/guides.store';
   import BadgesDeCollections from './BadgesDeCollections.svelte';
   import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
-  import { decodeEntitesHtml } from './guide';
+  import { decodeEntitesHtml, guidePourCarteItem } from './guide';
   import InciteASAbonner from './InciteASAbonner.svelte';
   import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
 
-  let guide = $state<Guide | undefined>(undefined);
+  type Props = {
+    guideInitial?: Guide;
+  };
+
+  const { guideInitial }: Props = $props();
+
+  let guide = $state<Guide | undefined>(
+    untrack(() => {
+      if (guideInitial) return guidePourCarteItem(guideInitial);
+    })
+  );
   let chargementEnCours = $state(false);
 
   async function copierLeLienCourt() {

@@ -25,6 +25,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
       const divDInjectionCSS = dom.window.document.getElementsByTagName('head');
       for (const nomComposant of this.composantsAutorisés) {
         let props = await this.récupèreItemsCyber(dom);
+        props = await this.récupèreGuide(props, routeDemandée);
         props = await this.récupèreExigences(dom, props);
         const divDInjection = dom.window.document.getElementById(nomComposant);
         if (!divDInjection) {
@@ -81,6 +82,16 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     }
 
     return {};
+  }
+
+  private async récupèreGuide(props: Record<string, unknown>, routeDemandée: string) {
+    const idGuide = routeDemandée.match(/\/guides\/(.*)/)?.[1];
+    if (idGuide) {
+      const guideTrouvé = (await this.entrepotGuide.tous()).find((g) => g.id === idGuide);
+      const guideInitial = guideTrouvé ? guidePresentation(this.adaptateurEnvironnement)(guideTrouvé) : undefined;
+      return { ...props, guideInitial };
+    }
+    return props;
   }
 
   private async récupèreExigences(dom: JSDOM, props: Record<string, unknown>) {
