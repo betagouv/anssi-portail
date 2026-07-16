@@ -56,6 +56,7 @@ interface InformationsCreationUtilisateur {
   organisation?: Organisation;
   roles?: Role[];
   mesuresPrisesEnCompte?: Mesure[];
+  parcours?: 'complet' | 'allégé' | null;
 }
 
 export class Utilisateur {
@@ -73,7 +74,7 @@ export class Utilisateur {
   roles: Role[];
   mesuresPrisesEnCompte: Mesure[];
   private adaptateurHachage: AdaptateurHachage;
-  private parcours?: 'complet' | 'allégé';
+  private parcours?: 'complet' | 'allégé' | null;
 
   constructor(
     {
@@ -89,6 +90,7 @@ export class Utilisateur {
       organisation,
       roles = [],
       mesuresPrisesEnCompte = [],
+      parcours = null,
     }: InformationsCreationUtilisateur,
     adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise,
     adaptateurHachage: AdaptateurHachage
@@ -107,6 +109,7 @@ export class Utilisateur {
     this.roles = roles;
     this.mesuresPrisesEnCompte = mesuresPrisesEnCompte;
     this.adaptateurHachage = adaptateurHachage;
+    this.parcours = parcours;
   }
 
   async organisation(): Promise<Organisation> {

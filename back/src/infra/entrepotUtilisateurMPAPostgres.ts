@@ -57,6 +57,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
       id_liste_favoris: utilisateur.idListeFavoris,
       email_hache: this.adaptateurHachage.hache(utilisateur.email),
       roles: this.knex.raw('?::jsonb', JSON.stringify(utilisateur.roles)),
+      parcours: utilisateur.parcoursActuel() ?? null,
     };
   }
 
@@ -130,6 +131,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         organisation: new Organisation({ ...organisation, codeActivite }),
         roles: utilisateurBDD.roles as unknown as Role[],
         mesuresPrisesEnCompte,
+        parcours: utilisateurBDD.parcours as 'complet' | 'allégé' | null,
       },
       this.adaptateurRechercheEntreprise,
       this.adaptateurHachage
@@ -174,5 +176,9 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     return Number(resultat[0].count);
   }
 
-  async metsAJour(_utilisateur: Utilisateur): Promise<void> {}
+  async metsAJour(utilisateur: Utilisateur): Promise<void> {
+    await this.knex('utilisateurs').where({ email_hache: utilisateur.emailHache() }).update({
+      parcours: utilisateur.parcoursActuel(),
+    });
+  }
 }

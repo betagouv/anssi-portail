@@ -6,4 +6,5 @@ export interface UtilisateurBDD {
   donnees: ObjetChiffre;
   id_liste_favoris: string | undefined;
   roles: Knex.Knex.Raw;
+  parcours: string | null;
 }
