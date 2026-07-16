@@ -8,7 +8,7 @@ import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
 import { composantsAutorisés } from './composantsAutorises.genere.js';
 
 export interface AdaptateurEnrichissement {
-  enrichisAvecComposants: (contenuPage: string) => Promise<string>;
+  enrichisAvecComposants: (contenuPage: string, routeDemandée: string) => Promise<string>;
 }
 
 class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
@@ -19,7 +19,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     private readonly adaptateurEnvironnement: AdaptateurEnvironnement,
     private readonly entrepôtExigence: EntrepotExigence
   ) {}
-  async enrichisAvecComposants(contenuPage: string) {
+  async enrichisAvecComposants(contenuPage: string, routeDemandée: string) {
     try {
       const dom = new JSDOM(contenuPage);
       const divDInjectionCSS = dom.window.document.getElementsByTagName('head');
@@ -43,6 +43,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
       }
 
       this.afficheLesLiens(dom);
+      this.adaptateLienCanonique(dom, routeDemandée);
 
       return dom.serialize();
     } catch (e) {
@@ -57,6 +58,14 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
       const url = lien.getAttribute('href');
       const libelle = lien.getAttribute('libelle');
       lien.insertAdjacentHTML('afterbegin', `<a slot="seo" href="${url}">${libelle}</a>`);
+    }
+  }
+
+  private adaptateLienCanonique(dom: JSDOM, routeDemandée: string) {
+    const lienCanonique = dom.window.document.querySelector('link[rel="canonical"]');
+    if (lienCanonique) {
+      const href = lienCanonique.getAttribute('href') ?? '';
+      lienCanonique.setAttribute('href', href.replace('/financements', routeDemandée));
     }
   }
 
