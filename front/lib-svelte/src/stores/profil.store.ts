@@ -13,6 +13,9 @@ export type Profil = {
   codeRegion: string | undefined;
   codeActivite: string;
   peutGererLesGuides: boolean;
+  parcoursSecurisation: {
+    parcoursActuel: 'complet' | 'allégé' | null;
+  };
 };
 
 const { subscribe, set } = writable<Profil | undefined>(undefined);
