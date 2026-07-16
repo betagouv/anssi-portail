@@ -145,7 +145,8 @@ const port = process.env.PORT || 3000;
         adaptateurEnvironnement,
         fournisseurChemin,
         entrepotGuide,
-        entrepotExigence
+        entrepotExigence,
+        entrepotFinancement
       ),
     }),
     adaptateurOIDC,

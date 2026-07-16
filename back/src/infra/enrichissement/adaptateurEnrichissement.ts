@@ -6,6 +6,7 @@ import { EntrepotExigence } from '../../metier/nis2/entrepotExigence.js';
 import { guidePresentation } from '../../presentation/guides/guidePresentation.js';
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
 import { composantsAutorisés } from './composantsAutorises.genere.js';
+import { EntrepotFinancement } from '../../metier/entrepotFinancement.js';
 
 export interface AdaptateurEnrichissement {
   enrichisAvecComposants: (contenuPage: string, routeDemandée: string) => Promise<string>;
@@ -17,7 +18,8 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     private readonly fournisseurDeChemin: FournisseurChemin,
     private readonly entrepotGuide: EntrepotGuide,
     private readonly adaptateurEnvironnement: AdaptateurEnvironnement,
-    private readonly entrepôtExigence: EntrepotExigence
+    private readonly entrepôtExigence: EntrepotExigence,
+    private readonly entrepôtFinancement: EntrepotFinancement
   ) {}
   async enrichisAvecComposants(contenuPage: string, routeDemandée: string) {
     try {
@@ -27,6 +29,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
         let props = await this.chargeRessourcesCyber(dom);
         props = await this.chargeGuide(props, routeDemandée);
         props = await this.chargeExigences(dom, props);
+        props = await this.chargeFinancements(props, routeDemandée);
         const divDInjection = dom.window.document.getElementById(nomComposant);
         if (!divDInjection) {
           continue;
@@ -111,6 +114,19 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     return props;
   }
 
+  private async chargeFinancements(props: Record<string, unknown>, routeDemandée: string) {
+    if (routeDemandée.match(/financements$/)) {
+      const financementsInitiaux = await this.entrepôtFinancement.tous();
+      return { ...props, financementsInitiaux };
+    }
+    const idFinancement = routeDemandée.match(/\/financements\/(.*)/)?.[1];
+    if (idFinancement) {
+      const financementInitial = await this.entrepôtFinancement.parId(Number(idFinancement));
+      return { ...props, financementInitial };
+    }
+    return props;
+  }
+
   private async récupèreGuide(routeDemandée: string) {
     const idGuide = routeDemandée.match(/\/guides\/(.*)/)?.[1];
     if (!idGuide) {
@@ -125,13 +141,15 @@ export const fabriqueAdaptateurEnrichissement = async (
   adaptateurEnvironnement: AdaptateurEnvironnement,
   fournisseurDeChemin: FournisseurChemin,
   entrepotGuide: EntrepotGuide,
-  entrepôtExigence: EntrepotExigence
+  entrepôtExigence: EntrepotExigence,
+  entrepôtFinancement: EntrepotFinancement
 ): Promise<AdaptateurEnrichissement> => {
   return new AdaptateurEnrichissementSvelte(
     composantsAutorisés,
     fournisseurDeChemin,
     entrepotGuide,
     adaptateurEnvironnement,
-    entrepôtExigence
+    entrepôtExigence,
+    entrepôtFinancement
   );
 };

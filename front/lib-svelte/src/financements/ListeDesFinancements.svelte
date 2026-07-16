@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
-  import { onMount } from 'svelte';
+  import { onMount, untrack } from 'svelte';
+  import { clic } from '../directives/actions.svelte';
   import { profilStore } from '../stores/profil.store';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
@@ -16,6 +17,10 @@
   import { rechercheParTypeFinancement } from './stores/rechercheParTypeFinancement.store';
   import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
 
+  type Props = {
+    financementsInitiaux?: ResumeFinancement[];
+  };
+
   type ReponseAxios = {
     id: number;
     nom: string;
@@ -26,9 +31,13 @@
     regions: string[];
   }[];
 
+  const { financementsInitiaux = [] }: Props = $props();
+  financementsStore.initialise(untrack(() => financementsInitiaux));
+
+  let financements = $state<ResumeFinancement[]>([]);
+  let chargement = $state(false);
+
   const estConnecte = profilStore.utilisateurEstConnecte();
-  let financements: ResumeFinancement[] = [];
-  let chargement: boolean = true;
 
   const reinitialiseFiltres = () => {
     rechercheParRegion.reinitialise();
@@ -84,8 +93,7 @@
               <img src="/assets/images/homme-cherchant-avec-loupe.svg" width="175" height="317" alt="Aucun résultat" />
               <p class="fr-h2">Désolé, aucun résultat trouvé</p>
               <lab-anssi-bouton
-                on:click={reinitialiseFiltres}
-                on:keypress
+                use:clic={reinitialiseFiltres}
                 role="button"
                 taille="md"
                 tabindex={0}
