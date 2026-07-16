@@ -6,4 +6,5 @@ export const composantsAutorisés: string[] = [
   'collectivites',
   'catalogue',
   'page-directive-nis2',
+  'guide',
 ];

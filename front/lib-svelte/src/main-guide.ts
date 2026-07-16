@@ -1,6 +1,6 @@
-import { mount } from 'svelte';
+import { hydrate } from 'svelte';
 import Guide from './catalogue/guides/Guide.svelte';
 
-mount(Guide, {
+hydrate(Guide, {
   target: document.getElementById('guide')!,
 });
