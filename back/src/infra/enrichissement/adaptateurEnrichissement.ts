@@ -73,8 +73,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
   }
 
   private async adapteTitre(dom: JSDOM, routeDemandée: string) {
-    const idGuide = routeDemandée.match(/\/guides\/(.*)/)?.[1];
-    const guideTrouvé = (await this.entrepotGuide.tous()).find((g) => g.id === idGuide);
+    const guideTrouvé = await this.récupèreGuide(routeDemandée);
     const titre = dom.window.document.getElementsByTagName('title').item(0);
     if (titre && guideTrouvé) {
       titre.innerHTML = `${guideTrouvé.nom} | MesServicesCyber`;
@@ -95,11 +94,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
   }
 
   private async chargeGuide(props: Record<string, unknown>, routeDemandée: string) {
-    const idGuide = routeDemandée.match(/\/guides\/(.*)/)?.[1];
-    if (!idGuide) {
-      return props;
-    }
-    const guideTrouvé = (await this.entrepotGuide.tous()).find((g) => g.id === idGuide);
+    const guideTrouvé = await this.récupèreGuide(routeDemandée);
     if (!guideTrouvé) {
       return props;
     }
@@ -114,6 +109,15 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
       return { ...props, exigences };
     }
     return props;
+  }
+
+  private async récupèreGuide(routeDemandée: string) {
+    const idGuide = routeDemandée.match(/\/guides\/(.*)/)?.[1];
+    if (!idGuide) {
+      return;
+    }
+    const guideTrouvé = (await this.entrepotGuide.tous()).find((g) => g.id === idGuide);
+    return guideTrouvé;
   }
 }
 
