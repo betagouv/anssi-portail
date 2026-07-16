@@ -17,16 +17,23 @@
     label: string;
     href: string;
   };
-  const segments: Segment[] = $derived([
-    ...($profilStore
+  const utilisateurEstConnecté = $derived(!!$profilStore);
+  const convertiBrancheEnSegment = (branche?: Branche): Segment[] | undefined =>
+    branche ? [{ id: `noeud-${branche.nom}`, label: branche.nom, href: branche.lien ?? '' }] : undefined;
+  const segmentAccueil = $derived(
+    utilisateurEstConnecté
       ? [{ id: 'noeud-catalogue', label: 'Guides et ressources', href: '/catalogue' }]
-      : [{ id: 'noeud-accueil', label: 'Accueil', href: '/' }]),
-    ...(branche ? [{ id: `noeud-${branche.nom}`, label: branche.nom, href: branche.lien ?? '' }] : []),
-    ...(brancheConnectee
-      ? [{ id: `noeud-${brancheConnectee.nom}`, label: brancheConnectee.nom, href: brancheConnectee.lien ?? '' }]
-      : []),
-    { id: `noeud-${decodeEntiteHtml(feuille)}`, label: decodeEntiteHtml(feuille), href: '' },
-  ]);
+      : [{ id: 'noeud-accueil', label: 'Accueil', href: '/' }]
+  );
+  const segmentBranche = $derived(
+    convertiBrancheEnSegment(utilisateurEstConnecté ? (brancheConnectee ?? branche) : branche) ?? []
+  );
+  const segmentFeuille = $derived({
+    id: `noeud-${decodeEntiteHtml(feuille)}`,
+    label: decodeEntiteHtml(feuille),
+    href: '',
+  });
+  const segments: Segment[] = $derived([...segmentAccueil, ...segmentBranche, segmentFeuille]);
 </script>
 
 <dsfr-breadcrumb inverse={fondSombre} buttonLabel="Voir le fil d'Ariane" segments={enPropriétéWebC(segments)}
