@@ -4,6 +4,7 @@
   import Heros from '../ui/Heros.svelte';
   import { toasterStore } from '../ui/toasts/toaster.store';
   import Toaster from '../ui/toasts/Toaster.svelte';
+  import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
   import type { Mesure } from './mesure';
   import MesuresDeModule from './MesuresDeModule.svelte';
   import Progression from './Progression.svelte';
@@ -53,6 +54,7 @@
 </dsfr-container>
 
 <MesuresDeModule mesures={module.mesures} />
+<InterlocuteursParcoursSecurisation />
 
 <style lang="scss">
   .progression {
