@@ -7,4 +7,5 @@ export const composantsAutorisés: string[] = [
   'catalogue',
   'page-directive-nis2',
   'guide',
+  'financements',
 ];
