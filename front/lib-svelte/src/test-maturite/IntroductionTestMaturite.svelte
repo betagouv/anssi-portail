@@ -46,8 +46,7 @@
           participants.
         </p>
       </hgroup>
-      <dsfr-button label="Créer ou rejoindre une session" markup="a" href="/session-groupe" kind="secondary"
-      ></dsfr-button>
+      <Lien apparence="bouton" libelle="Créer ou rejoindre une session" href="/session-groupe" type="secondaire" />
     </div>
   </div>
   <div class="illustration">
@@ -97,6 +96,7 @@
   }
 
   .acces-session-groupe {
+    padding-bottom: 24px;
     hgroup {
       .fr-h6 {
         margin-bottom: 8px;
@@ -109,10 +109,6 @@
       p {
         color: var(--text-default-grey);
       }
-    }
-
-    dsfr-button {
-      margin-bottom: 24px;
     }
   }
 </style>
