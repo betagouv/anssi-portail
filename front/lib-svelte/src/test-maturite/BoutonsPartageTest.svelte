@@ -1,9 +1,12 @@
 <script lang="ts">
+  import { getContext } from 'svelte';
   import Bouton from '../ui/Bouton.svelte';
   import Lien from '../ui/Lien.svelte';
 
-  const { protocol, host } = window.location;
-  const lienTest = `${protocol}://${host}/test-maturite`;
+  const location = getContext<Window['location'] | undefined>('location');
+
+  const { protocol, host } = location ?? window.location;
+  const lienTest = `${protocol}//${host}/test-maturite`;
   const urlLinkedIn = `https://www.linkedin.com/shareArticle?url=${lienTest}&title=Test de maturité Cyber`;
 
   const partageLinkedIn = () => {

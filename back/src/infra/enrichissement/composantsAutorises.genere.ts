@@ -10,4 +10,5 @@ export const composantsAutorisés: string[] = [
   'financements',
   'page-crisp',
   'fil-ariane',
+  'test-maturite',
 ];
