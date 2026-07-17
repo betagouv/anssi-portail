@@ -14,7 +14,8 @@
   "dependencies": {
     "axios": "catalog:",
     "entities": "catalog:",
-    "isomorphic-dompurify": "catalog:"
+    "isomorphic-dompurify": "catalog:",
+    "svelte": "catalog:"
   },
   "devDependencies": {}
 }
