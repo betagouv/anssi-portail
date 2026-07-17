@@ -1,6 +1,6 @@
-import { mount } from 'svelte';
+import { hydrate } from 'svelte';
 import SessionGroupe from './test-maturite/SessionGroupe.svelte';
 
-mount(SessionGroupe, {
+hydrate(SessionGroupe, {
   target: document.getElementById('session-groupe')!,
 });

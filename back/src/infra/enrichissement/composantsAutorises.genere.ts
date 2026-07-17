@@ -11,4 +11,5 @@ export const composantsAutorisés: string[] = [
   'page-crisp',
   'fil-ariane',
   'test-maturite',
+  'session-groupe',
 ];
