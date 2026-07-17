@@ -26,6 +26,7 @@ export interface AdaptateurEnrichissement {
 
 class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
   constructor(
+    private readonly adaptateurEnvironnement: AdaptateurEnvironnement,
     private readonly composantsAutorisés: string[],
     private readonly fournisseurDeChemin: FournisseurChemin,
     private readonly chargeursDeProps: ChargeurDeProps[],
@@ -38,7 +39,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
       const props = await this.chargeProps(dom, routeDemandée);
 
       for (const nomComposant of this.composantsAutorisés) {
-        await this.injecteComposant(dom, nomComposant, props);
+        await this.injecteComposant(dom, routeDemandée, nomComposant, props);
       }
 
       for (const adaptateur of this.adaptateursDom) {
@@ -61,14 +62,22 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     return props;
   }
 
-  private async injecteComposant(dom: JSDOM, nomComposant: string, props: Record<string, unknown>) {
+  private async injecteComposant(
+    dom: JSDOM,
+    routeDemandée: string,
+    nomComposant: string,
+    props: Record<string, unknown>
+  ) {
     const divDInjection = dom.window.document.getElementById(nomComposant);
     if (!divDInjection) return;
     const cheminDuComposant = this.fournisseurDeChemin.ressourceDeBase(
       `lib-svelte/dist/serveur/assets/${nomComposant}.js`
     );
     const composantSvelte = await import(cheminDuComposant);
-    const { head, body } = render(composantSvelte.default, { props });
+    const { head, body } = render(composantSvelte.default, {
+      props,
+      context: new Map([['location', new URL(`${this.adaptateurEnvironnement.urlBaseMSC()}${routeDemandée}`)]]),
+    });
     const [headDom] = dom.window.document.getElementsByTagName('head');
     if (headDom) {
       headDom.insertAdjacentHTML('beforeend', head.replaceAll('<style ', '<style nonce="%%NONCE%%" '));
@@ -102,5 +111,11 @@ export const fabriqueAdaptateurEnrichissement = async (
     new AdaptateurTitre(résolveurDePage),
   ];
 
-  return new AdaptateurEnrichissementSvelte(composantsAutorisés, fournisseurDeChemin, chargeursDeProps, adaptateursDom);
+  return new AdaptateurEnrichissementSvelte(
+    adaptateurEnvironnement,
+    composantsAutorisés,
+    fournisseurDeChemin,
+    chargeursDeProps,
+    adaptateursDom
+  );
 };
