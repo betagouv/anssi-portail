@@ -96,7 +96,7 @@ export const fabriqueAdaptateurEnrichissement = async (
 
   const adaptateursDom: AdaptateurDom[] = [
     new AdaptateurLiensSeo(),
-    new AdaptateurLienCanonique(),
+    new AdaptateurLienCanonique(['/financements', '/guides']),
     new AdaptateurTitre(résolveurDePage),
   ];
 
