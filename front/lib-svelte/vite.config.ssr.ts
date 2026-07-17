@@ -21,6 +21,10 @@ const rollupOptions: NonNullable<UserConfig['build']>['rollupOptions'] = {
     entryFileNames: `assets/[name].js`,
     assetFileNames: `assets/[name].[ext]`,
   },
+  external: [
+    'svelte',
+    /^svelte\//, // couvre svelte/internal/server, svelte/store, etc.
+  ],
 };
 
 // https://vite.dev/config/

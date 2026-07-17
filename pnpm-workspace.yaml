@@ -20,6 +20,7 @@ catalog:
   axios: ^1.15.0
   entities: ^8.0.0
   isomorphic-dompurify: ^3.18.0
+  svelte: ^5.55.9
 
 minimumReleaseAgeExclude:
   - devalue@5.8.1
