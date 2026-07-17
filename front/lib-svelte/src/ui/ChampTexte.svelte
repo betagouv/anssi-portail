@@ -58,4 +58,17 @@
   value={valeur}
   status={statut}
   {autocomplete}
-></dsfr-input>
+>
+  <label slot="seo">
+    {libelle}
+    <input
+      disabled={desactive}
+      maxlength={tailleMaximale}
+      name={nom}
+      pattern={modele}
+      placeholder={aideSaisie}
+      required={requis}
+      {type}
+    />
+  </label>
+</dsfr-input>
