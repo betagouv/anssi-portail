@@ -7,6 +7,7 @@ import { guidePresentation } from '../../presentation/guides/guidePresentation.j
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
 import { composantsAutorisés } from './composantsAutorises.genere.js';
 import { EntrepotFinancement } from '../../metier/entrepotFinancement.js';
+import { CmsCrisp } from '@lab-anssi/lib';
 
 export interface AdaptateurEnrichissement {
   enrichisAvecComposants: (contenuPage: string, routeDemandée: string) => Promise<string>;
@@ -19,7 +20,8 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     private readonly entrepotGuide: EntrepotGuide,
     private readonly adaptateurEnvironnement: AdaptateurEnvironnement,
     private readonly entrepôtExigence: EntrepotExigence,
-    private readonly entrepôtFinancement: EntrepotFinancement
+    private readonly entrepôtFinancement: EntrepotFinancement,
+    private readonly cmsCrisp: CmsCrisp
   ) {}
   async enrichisAvecComposants(contenuPage: string, routeDemandée: string) {
     try {
@@ -30,6 +32,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
         props = await this.chargeGuide(props, routeDemandée);
         props = await this.chargeExigences(dom, props);
         props = await this.chargeFinancements(props, routeDemandée);
+        props = await this.chargeCrisp(dom, props);
         const divDInjection = dom.window.document.getElementById(nomComposant);
         if (!divDInjection) {
           continue;
@@ -129,6 +132,19 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
     return props;
   }
 
+  private async chargeCrisp(dom: JSDOM, props: Record<string, unknown>) {
+    const données = dom.window.document.getElementById('donnees-page-crisp')?.textContent;
+    if (!données) {
+      return props;
+    }
+    const { clePageCrisp } = JSON.parse(données);
+    if (clePageCrisp) {
+      const pageCrispInitiale = await this.cmsCrisp.recupereArticle(clePageCrisp);
+      return { ...props, pageCrispInitiale };
+    }
+    return props;
+  }
+
   private async récupèreGuide(routeDemandée: string) {
     const idGuide = routeDemandée.match(/\/guides\/(.*)/)?.[1];
     if (!idGuide) {
@@ -151,7 +167,8 @@ export const fabriqueAdaptateurEnrichissement = async (
   fournisseurDeChemin: FournisseurChemin,
   entrepotGuide: EntrepotGuide,
   entrepôtExigence: EntrepotExigence,
-  entrepôtFinancement: EntrepotFinancement
+  entrepôtFinancement: EntrepotFinancement,
+  cmsCrisp: CmsCrisp
 ): Promise<AdaptateurEnrichissement> => {
   return new AdaptateurEnrichissementSvelte(
     composantsAutorisés,
@@ -159,6 +176,7 @@ export const fabriqueAdaptateurEnrichissement = async (
     entrepotGuide,
     adaptateurEnvironnement,
     entrepôtExigence,
-    entrepôtFinancement
+    entrepôtFinancement,
+    cmsCrisp
   );
 };

@@ -1,14 +1,15 @@
+import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import {
   AdaptateurEnrichissement,
   fabriqueAdaptateurEnrichissement,
 } from '../../../src/infra/enrichissement/adaptateurEnrichissement.js';
 import { fauxAdaptateurEnvironnement, fauxFournisseurDeChemin } from '../../api/fauxObjets.js';
-import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js';
-import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire.js';
-import assert from 'node:assert';
 import { financementCyberPME, guideDevsecops } from '../../api/objetsPretsALEmploi.js';
+import { MockCmsCrisp } from '../../mockCmsCrisp.js';
+import { EntrepotExigenceMemoire } from '../../persistance/entrepotExigenceMemoire.js';
 import { EntrepotFinancementMemoire } from '../../persistance/entrepotFinancementMemoire.js';
+import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js';
 
 describe("L'adaptateur qui enrichie le html servi", () => {
   let adaptateurEnrichissement: AdaptateurEnrichissement;
@@ -23,7 +24,8 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       fauxFournisseurDeChemin,
       entrepôtGuide,
       new EntrepotExigenceMemoire(),
-      entrepôtFinancement
+      entrepôtFinancement,
+      new MockCmsCrisp()
     );
   });
 
