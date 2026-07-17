@@ -5,7 +5,7 @@
   import { toasterStore } from '../ui/toasts/toaster.store';
   import Toaster from '../ui/toasts/Toaster.svelte';
   import BadgeCyberdepart from './BadgeCyberdepart.svelte';
-  import BasculeParcoursAvance from './BasculeParcoursAvance.svelte';
+  import BasculeParcoursComplet from './BasculeParcoursComplet.svelte';
   import type { Mesure } from './mesure';
   import MesuresDeModule from './MesuresDeModule.svelte';
   import ModaleBadgeCyberdepartDebloque from './modales/ModaleBadgeCyberdepartDebloque.svelte';
@@ -72,7 +72,7 @@
 <dsfr-container>
   <div class="progression">
     {#if parcoursTermine && !parcoursComplet}
-      <BasculeParcoursAvance />
+      <BasculeParcoursComplet />
     {:else if badgeDebloque && !parcoursTermine}
       <dsfr-alert
         type="info"
