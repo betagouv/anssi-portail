@@ -1,41 +1,23 @@
 <script lang="ts">
-  export let image: string;
-  export let mesure: number;
-  export let description: string;
+  import Tuile from '../ui/Tuile.svelte';
+
+  type Props = {
+    image: string;
+    mesure: number;
+    description: string;
+  };
+
+  const { image, mesure, description: titre }: Props = $props();
 </script>
 
-<div class="tuile">
-  <img src={`/assets/images/${image}.svg`} width="96" height="96" alt={description} />
-  <span class="mesure">{mesure}</span>
-  <span class="description">{description}</span>
-</div>
+<Tuile {titre}>
+  <img slot="pictogram" src={`/assets/images/${image}.svg`} width="96" height="96" alt={titre} />
+  <span slot="description" class="mesure fr-h2">{mesure}</span>
+</Tuile>
 
 <style lang="scss">
-  .tuile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 24px 32px 32px;
-
-    border: 1px var(--border-default-grey) solid;
-    border-radius: 8px;
-
-    img {
-      margin-bottom: 16px;
-    }
-
-    .mesure {
-      font-size: 1.75rem;
-      line-height: 2.25rem;
-      font-weight: bold;
-      color: #161616;
-      margin-bottom: 8px;
-    }
-    .description {
-      font-size: 1.125rem;
-      line-height: 1.75rem;
-      color: #3a3a3a;
-      text-align: center;
-    }
+  .mesure {
+    color: #161616;
+    margin-bottom: 8px;
   }
 </style>
