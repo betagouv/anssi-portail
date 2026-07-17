@@ -18,16 +18,14 @@ export const ressourceParcoursComplet = ({
     async (requete, reponse) => {
       const utilisateur = requete.utilisateur as Utilisateur;
       const modules = await entrepôtModule.tous();
-      const modulesParcoursComplet = await Promise.all(
-        modules
-          .toSorted((a, b) => a.id - b.id)
-          .map(async (module) => ({
-            ...module,
-            nombreMesuresTotal: module.nombreDeMesures(),
-            cibleBadge: module.cibleDéblocageBadgeCyberdépart(),
-            nombreMesuresPrisesEnCompte: await utilisateur.nombreDeMesuresPrisesEnCompte(module),
-          }))
-      );
+      const modulesParcoursComplet = modules
+        .toSorted((a, b) => a.id - b.id)
+        .map((module) => ({
+          ...module,
+          nombreMesuresTotal: module.nombreDeMesures(),
+          cibleBadge: module.cibleDéblocageBadgeCyberdépart(),
+          nombreMesuresPrisesEnCompte: utilisateur.nombreDeMesuresPrisesEnCompte(module),
+        }));
       reponse.send({
         modules: modulesParcoursComplet,
       });

@@ -157,7 +157,7 @@ export class Utilisateur {
       new MesurePriseEnCompte(this.emailHache(), mesure.id, module.nombreDeMesures(), module.positionDeLaMesure(mesure))
     );
     this.mesuresPrisesEnCompte.push(mesure);
-    if (this.mesuresPrisesEnCompte.length === module.nombreDeMesures()) {
+    if (this.nombreDeMesuresPrisesEnCompte(module) === module.nombreDeMesures()) {
       await busEvenements.publie(new ModuleTermine(this.emailHache(), 1, 'Cyberdépart'));
       nouvelEtatModule.moduleTerminé = true;
     }
@@ -171,9 +171,9 @@ export class Utilisateur {
     return nouvelEtatModule;
   }
 
-  async nombreDeMesuresPrisesEnCompte(module: Module) {
+  nombreDeMesuresPrisesEnCompte(module: Module) {
     const mesuresDuModulePriseEnCompte = this.mesuresPrisesEnCompte.filter((mesurePriseEnCompte) =>
-      module.mesures.includes(mesurePriseEnCompte)
+      module.mesures.map((mesure) => mesure.id).includes(mesurePriseEnCompte.id)
     );
     return mesuresDuModulePriseEnCompte.length;
   }
