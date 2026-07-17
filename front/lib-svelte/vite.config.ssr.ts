@@ -14,6 +14,7 @@ const rollupOptions: NonNullable<UserConfig['build']>['rollupOptions'] = {
     'page-directive-nis2': '/src/nis2/PageNis2.svelte',
     guide: 'src/catalogue/guides/Guide.svelte',
     financements: 'src/financements/Financements.svelte',
+    'page-crisp': 'src/page-crisp/PageCrisp.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,
