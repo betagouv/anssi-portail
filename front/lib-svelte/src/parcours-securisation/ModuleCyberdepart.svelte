@@ -47,8 +47,8 @@
   });
 
   const progressionActuelle = $derived(module.mesures.filter((module) => module.estPriseEnCompte).length);
-  const badgeDebloque = $derived(progressionActuelle >= module.cibleBadge);
-  const parcoursTermine = $derived(progressionActuelle === totalMesures);
+  const badgeDebloque = $derived(totalMesures > 0 && progressionActuelle >= module.cibleBadge);
+  const parcoursTermine = $derived(totalMesures > 0 && progressionActuelle === totalMesures);
   const parcoursComplet = $derived($profilStore?.parcoursSecurisation.parcoursActuel === 'complet');
 </script>
 
