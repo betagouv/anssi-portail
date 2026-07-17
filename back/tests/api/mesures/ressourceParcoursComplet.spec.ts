@@ -129,5 +129,17 @@ describe('La ressource du parcours complet', () => {
       assert.equal(reponse.body.modules[0].nombreMesuresPrisesEnCompte, 98);
       assert.equal(reponse.body.modules[1].nombreMesuresPrisesEnCompte, 20);
     });
+
+    it('renvoie les modules du parcours triés par id', async () => {
+      await entrepôtModule.ajoute(new Module(5, 'Module 5'));
+      await entrepôtModule.ajoute(new Module(3, 'Module 3'));
+      await entrepôtModule.ajoute(new Module(1, 'Module 1'));
+
+      const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
+
+      assert.equal(reponse.body.modules[0].id, 1);
+      assert.equal(reponse.body.modules[1].id, 3);
+      assert.equal(reponse.body.modules[2].id, 5);
+    });
   });
 });
