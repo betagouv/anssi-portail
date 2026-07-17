@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import axios from 'axios';
   import { profilStore } from '../stores/profil.store';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
 
   export let clePageCrisp: string;
 
@@ -37,7 +38,11 @@
     : [{ label: 'Accueil', href: '/' }, { label: pageCrisp.titre }];
 </script>
 
-<lab-anssi-bandeau-titre titre={pageCrisp.titre} description={pageCrisp.description} {filAriane}
+<lab-anssi-bandeau-titre
+  titre={pageCrisp.titre}
+  description={pageCrisp.description}
+  filAriane={enPropriétéWebC(filAriane)}
 ></lab-anssi-bandeau-titre>
 
-<lab-anssi-page-crisp {tableDesMatieres} contenu={pageCrisp.contenu}></lab-anssi-page-crisp>
+<lab-anssi-page-crisp tableDesMatieres={enPropriétéWebC(tableDesMatieres)} contenu={pageCrisp.contenu}>
+</lab-anssi-page-crisp>
