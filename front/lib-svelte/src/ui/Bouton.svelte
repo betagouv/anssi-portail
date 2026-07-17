@@ -59,7 +59,9 @@
   icon={icone}
   icon-place={iconeSeule ? 'only' : 'left'}
   use:clic={gereClick}
-></dsfr-button>
+>
+  <button slot="seo" title={titre} disabled={desactive || undefined} type={boutonType}>{libelle}</button>
+</dsfr-button>
 
 <style lang="scss">
   .actif {
