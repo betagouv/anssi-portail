@@ -122,7 +122,7 @@ describe('La ressource du parcours complet', () => {
     it("retourne le nombre de mesures prises en compte par l'utilisateur pour chaque module", async () => {
       await entrepôtModule.ajoute(new Module(1, 'Cyberdépart'));
       await entrepôtModule.ajoute(new Module(2, 'Aggravation des conséquences'));
-      jeannetteDupont.nombreDeMesuresPrisesEnCompte = async (module: Module) => (module.id === 1 ? 98 : 20);
+      jeannetteDupont.nombreDeMesuresPrisesEnCompte = (module: Module) => (module.id === 1 ? 98 : 20);
 
       const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
 

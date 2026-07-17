@@ -175,26 +175,6 @@ describe("L'utilisateur", () => {
         busEvenements = fabriqueBusPourLesTests();
       });
 
-      it('publie un événement de completion quand toutes les mesures du module sont prises en compte', async () => {
-        moduleCyberdépart.mesures = [mesureDeTest().construis()];
-        await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
-
-        busEvenements.aRecuUnEvenement(ModuleTermine);
-        const evenement = busEvenements.recupereEvenement(ModuleTermine);
-
-        assert.equal(evenement!.emailHache, 'utilisateur@mail.com-hache');
-        assert.equal(evenement!.idModule, 1);
-        assert.equal(evenement!.nomModule, 'Cyberdépart');
-      });
-
-      it("ne publie pas d'événement de completion si toutes les mesures du module ne sont pas prises en compte", async () => {
-        moduleCyberdépart.mesures = [mesureDeTest().construis(), mesureDeTest().construis()];
-
-        await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
-
-        busEvenements.naPasRecuDEvenement(ModuleTermine);
-      });
-
       it("ignore la prise en compte d'une mesure déjà prise en compte", async () => {
         await utilisateurDeParcours.prendEnCompte(
           mesure,
@@ -209,17 +189,55 @@ describe("L'utilisateur", () => {
         busEvenements.naPasRecuDEvenement(MesurePriseEnCompte);
       });
 
-      it('signale que la prise en compte termine le module', async () => {
-        moduleCyberdépart.mesures = [mesureDeTest().construis()];
+      describe('concernant la complétion du module', () => {
+        it('signale que la prise en compte termine le module', async () => {
+          moduleCyberdépart.mesures = [mesure];
 
-        const nouvelÉtatDuModule = await utilisateurDeParcours.prendEnCompte(
-          mesure,
-          entrepotPriseEnCompte,
-          busEvenements,
-          moduleCyberdépart
-        );
+          const nouvelÉtatDuModule = await utilisateurDeParcours.prendEnCompte(
+            mesure,
+            entrepotPriseEnCompte,
+            busEvenements,
+            moduleCyberdépart
+          );
 
-        assert.equal(nouvelÉtatDuModule.moduleTerminé, true);
+          assert.equal(nouvelÉtatDuModule.moduleTerminé, true);
+        });
+
+        it('publie un événement de completion quand toutes les mesures du module sont prises en compte', async () => {
+          moduleCyberdépart.mesures = [mesure];
+          await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
+
+          busEvenements.aRecuUnEvenement(ModuleTermine);
+          const evenement = busEvenements.recupereEvenement(ModuleTermine);
+
+          assert.equal(evenement!.emailHache, 'utilisateur@mail.com-hache');
+          assert.equal(evenement!.idModule, 1);
+          assert.equal(evenement!.nomModule, 'Cyberdépart');
+        });
+
+        it("ne publie pas d'événement de completion si toutes les mesures du module ne sont pas prises en compte", async () => {
+          moduleCyberdépart.mesures = [mesureDeTest().construis(), mesureDeTest().construis()];
+
+          await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
+
+          busEvenements.naPasRecuDEvenement(ModuleTermine);
+        });
+
+        it('ne compte que les prises en compte du module', async () => {
+          const module = new Module(2, 'test');
+          const derniereMesureDuModule2 = mesureDeTest().avecLId('MESURE2').construis();
+          module.mesures = [derniereMesureDuModule2];
+          utilisateurDeParcours.mesuresPrisesEnCompte = [mesureDeTest().avecLId('MESURE3').construis()];
+
+          await utilisateurDeParcours.prendEnCompte(
+            derniereMesureDuModule2,
+            entrepotPriseEnCompte,
+            busEvenements,
+            module
+          );
+
+          assert.equal(busEvenements.aRecuUnEvenement(ModuleTermine), true);
+        });
       });
 
       describe('du module Cyberdépart', () => {
@@ -310,34 +328,44 @@ describe("L'utilisateur", () => {
       });
     });
 
-    it('indique le nombre des mesures prises en compte dans un module', async () => {
+    it('indique le nombre des mesures prises en compte dans un module', () => {
       const module = new Module(1, 'Cyberdépart');
       const mesures = [mesureDeTest().construis(), mesureDeTest().construis()];
       module.mesures = mesures;
       utilisateurDeParcours.mesuresPrisesEnCompte = mesures;
 
-      const nombreDeMesuresPrisesEnCompte = await utilisateurDeParcours.nombreDeMesuresPrisesEnCompte(module);
+      const nombreDeMesuresPrisesEnCompte = utilisateurDeParcours.nombreDeMesuresPrisesEnCompte(module);
 
       assert.equal(nombreDeMesuresPrisesEnCompte, 2);
     });
 
-    it("indique le nombre des mesures prises en compte dans un module lorsqu'il n'y en a pas", async () => {
+    it("indique le nombre des mesures prises en compte dans un module lorsqu'il n'y en a pas", () => {
       const module = new Module(1, 'Cyberdépart');
       module.mesures = [mesureDeTest().construis(), mesureDeTest().construis()];
 
-      const nombreDeMesuresPrisesEnCompte = await utilisateurDeParcours.nombreDeMesuresPrisesEnCompte(module);
+      const nombreDeMesuresPrisesEnCompte = utilisateurDeParcours.nombreDeMesuresPrisesEnCompte(module);
 
       assert.equal(nombreDeMesuresPrisesEnCompte, 0);
     });
 
-    it('indique le nombre des mesures prises en compte dans un module sans tenir compte des mesures des autres modules', async () => {
+    it('indique le nombre des mesures prises en compte dans un module sans tenir compte des mesures des autres modules', () => {
       const module = new Module(1, 'Cyberdépart');
       module.mesures = [];
       utilisateurDeParcours.mesuresPrisesEnCompte = [mesureDeTest().construis()];
 
-      const nombreDeMesuresPrisesEnCompte = await utilisateurDeParcours.nombreDeMesuresPrisesEnCompte(module);
+      const nombreDeMesuresPrisesEnCompte = utilisateurDeParcours.nombreDeMesuresPrisesEnCompte(module);
 
       assert.equal(nombreDeMesuresPrisesEnCompte, 0);
+    });
+
+    it('compare les ids des mesures prises en compte', () => {
+      const module = new Module(1, 'Cyberdépart');
+      module.mesures = [mesureDeTest().avecLId('TEST').construis()];
+      utilisateurDeParcours.mesuresPrisesEnCompte = [mesureDeTest().avecLId('TEST').construis()];
+
+      const nombreDeMesuresPrisesEnCompte = utilisateurDeParcours.nombreDeMesuresPrisesEnCompte(module);
+
+      assert.equal(nombreDeMesuresPrisesEnCompte, 1);
     });
   });
 });
