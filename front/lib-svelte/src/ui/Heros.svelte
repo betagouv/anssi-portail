@@ -8,16 +8,16 @@
     cacheFilAriane?: boolean;
     lienRetour?: Snippet;
     tags?: Snippet;
-    cacheTags: boolean;
+    cacheTags?: boolean;
     preambule?: Snippet<[{ titre: string; description: string }]>;
     titre: string;
     description: string;
     actions?: Snippet;
-    cacheActions: boolean;
+    cacheActions?: boolean;
     illustration?: Snippet<[{ source: string; alt: string }]>;
-    illustrationSource: string;
-    illustrationAlt: string;
-    cacheIllustration: boolean;
+    illustrationSource?: string;
+    illustrationAlt?: string;
+    cacheIllustration?: boolean;
     children?: Snippet;
   };
 
@@ -35,8 +35,8 @@
     actions,
     cacheActions = false,
     illustration,
-    illustrationSource,
-    illustrationAlt,
+    illustrationSource = '',
+    illustrationAlt = '',
     cacheIllustration = false,
     children,
   }: Props = $props();
