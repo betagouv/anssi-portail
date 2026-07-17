@@ -158,13 +158,17 @@ export class Utilisateur {
     );
     this.mesuresPrisesEnCompte.push(mesure);
     if (this.nombreDeMesuresPrisesEnCompte(module) === module.nombreDeMesures()) {
-      await busEvenements.publie(new ModuleTermine(this.emailHache(), 1, 'Cyberdépart'));
+      await busEvenements.publie(new ModuleTermine(this.emailHache(), module.id, module.nom));
       nouvelEtatModule.moduleTerminé = true;
     }
     const cibleBadgeCyberdépart = module.cibleDéblocageBadgeCyberdépart();
-    if (this.mesuresPrisesEnCompte.length === cibleBadgeCyberdépart) {
+    if (this.nombreDeMesuresPrisesEnCompte(module) === cibleBadgeCyberdépart) {
       await busEvenements.publie(
-        new BadgeCyberdépartDébloqué(this.emailHache(), this.mesuresPrisesEnCompte.length, module.nombreDeMesures())
+        new BadgeCyberdépartDébloqué(
+          this.emailHache(),
+          this.nombreDeMesuresPrisesEnCompte(module),
+          module.nombreDeMesures()
+        )
       );
       nouvelEtatModule.badgeCyberdépartDebloqué = true;
     }

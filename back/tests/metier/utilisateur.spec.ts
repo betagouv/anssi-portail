@@ -215,6 +215,18 @@ describe("L'utilisateur", () => {
           assert.equal(evenement!.nomModule, 'Cyberdépart');
         });
 
+        it("adapte l'événement de complétion au module", async () => {
+          const moduleGénérique = new Module(3, 'ModuleGénérique');
+          const mesure = mesureDeTest().avecLId('MESURE').construis();
+          moduleGénérique.mesures = [mesure];
+
+          await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleGénérique);
+
+          const evenement = busEvenements.recupereEvenement(ModuleTermine);
+          assert.equal(evenement!.idModule, 3);
+          assert.equal(evenement!.nomModule, 'ModuleGénérique');
+        });
+
         it("ne publie pas d'événement de completion si toutes les mesures du module ne sont pas prises en compte", async () => {
           moduleCyberdépart.mesures = [mesureDeTest().construis(), mesureDeTest().construis()];
 
@@ -248,10 +260,10 @@ describe("L'utilisateur", () => {
             mesureDeTest().avecLId('mes3').construis(),
           ];
           moduleCyberdépart.mesures = [
-            mesureDeTest().construis(),
-            mesureDeTest().construis(),
-            mesureDeTest().construis(),
-            mesureDeTest().construis(),
+            mesure,
+            mesureDeTest().avecLId('mes1').construis(),
+            mesureDeTest().avecLId('mes2').construis(),
+            mesureDeTest().avecLId('mes3').construis(),
             mesureDeTest().construis(),
           ];
           await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
@@ -266,10 +278,10 @@ describe("L'utilisateur", () => {
             mesureDeTest().avecLId('mes3').construis(),
           ];
           moduleCyberdépart.mesures = [
-            mesureDeTest().construis(),
-            mesureDeTest().construis(),
-            mesureDeTest().construis(),
-            mesureDeTest().construis(),
+            mesure,
+            mesureDeTest().avecLId('mes1').construis(),
+            mesureDeTest().avecLId('mes2').construis(),
+            mesureDeTest().avecLId('mes3').construis(),
             mesureDeTest().construis(),
           ];
           const nouvelÉtatDuModule = await utilisateurDeParcours.prendEnCompte(
@@ -284,6 +296,14 @@ describe("L'utilisateur", () => {
 
         it("ne publie pas un événement de déblocage de badge s'il a déjà été débloqué", async () => {
           utilisateurDeParcours.mesuresPrisesEnCompte = [
+            mesureDeTest().avecLId('mes1').construis(),
+            mesureDeTest().avecLId('mes2').construis(),
+            mesureDeTest().avecLId('mes3').construis(),
+            mesureDeTest().avecLId('mes4').construis(),
+          ];
+
+          moduleCyberdépart.mesures = [
+            mesure,
             mesureDeTest().avecLId('mes1').construis(),
             mesureDeTest().avecLId('mes2').construis(),
             mesureDeTest().avecLId('mes3').construis(),
@@ -313,10 +333,10 @@ describe("L'utilisateur", () => {
             mesureDeTest().avecLId('mes3').construis(),
           ];
           moduleCyberdépart.mesures = [
-            mesureDeTest().construis(),
-            mesureDeTest().construis(),
-            mesureDeTest().construis(),
-            mesureDeTest().construis(),
+            mesure,
+            mesureDeTest().avecLId('mes1').construis(),
+            mesureDeTest().avecLId('mes2').construis(),
+            mesureDeTest().avecLId('mes3').construis(),
             mesureDeTest().construis(),
           ];
           await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
@@ -324,6 +344,24 @@ describe("L'utilisateur", () => {
           const evenement = busEvenements.recupereEvenement(BadgeCyberdépartDébloqué);
           assert.equal(4, evenement!.nombreMesuresActuel);
           assert.equal(5, evenement!.nombreMesuresTotal);
+        });
+
+        it('ne prends en compte que les mesures du module Cyberdépart pour le déblocage du badge', async () => {
+          utilisateurDeParcours.mesuresPrisesEnCompte = [
+            mesureDeTest().avecLId('MESURE1').construis(),
+            mesureDeTest().avecLId('MESURE2').construis(),
+            mesureDeTest().avecLId('MESURE3').construis(),
+          ];
+          moduleCyberdépart.mesures = [
+            mesureDeTest().avecLId('AUTH.1').construis(),
+            mesureDeTest().avecLId('AUTH.2').construis(),
+            mesureDeTest().avecLId('AUTH.3').construis(),
+            mesureDeTest().avecLId('AUTH.4').construis(),
+            mesureDeTest().avecLId('AUTH.5').construis(),
+          ];
+          await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
+
+          assert.equal(busEvenements.naPasRecuDEvenement(BadgeCyberdépartDébloqué), true);
         });
       });
     });
