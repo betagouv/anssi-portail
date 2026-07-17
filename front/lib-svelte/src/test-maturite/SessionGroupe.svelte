@@ -5,6 +5,8 @@
   import Formulaire from '../ui/Formulaire.svelte';
   import ModaleNouvelleSessionGroupe from './ModaleNouvelleSessionGroupe.svelte';
   import type { ReponseCreationSessionGroupe } from './SessionGroupe';
+  import Heros from '../ui/Heros.svelte';
+  import FilAriane from '../ui/FilAriane.svelte';
 
   let codeSession = '';
   let creationNouvelleSessionEnCours = false;
@@ -41,6 +43,24 @@
     codeSession = codeSession.toUpperCase();
   }
 </script>
+
+<Heros
+  titre="Session de groupe"
+  description="Déterminez la maturité cyber de votre organisation en 5 minutes."
+  format="banniere"
+  theme="sombre"
+>
+  {#snippet filAriane()}
+    <FilAriane
+      fondSombre={true}
+      feuille="Session de groupe"
+      branche={{
+        nom: 'Test de maturité cyber',
+        lien: '/test-maturite/',
+      }}
+    />
+  {/snippet}
+</Heros>
 
 <dsfr-container>
   <div class="contenu-section">
