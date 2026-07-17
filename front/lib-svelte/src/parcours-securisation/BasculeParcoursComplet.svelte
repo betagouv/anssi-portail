@@ -15,7 +15,7 @@
       etire
       icone="arrow-right-line"
       iconeADroite
-      href="/module-avance"
+      href="/parcours-complet"
     />
   </div>
 </div>
