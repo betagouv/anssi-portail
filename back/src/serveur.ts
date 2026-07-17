@@ -121,6 +121,15 @@ const cellar = adaptateurCellar(adaptateurEnvironnement);
 
 const serviceSanteGuides = fabriqueServiceSanteGuides(cellar);
 
+const adaptateurEnrichissement = await fabriqueAdaptateurEnrichissement(
+  adaptateurEnvironnement,
+  fournisseurChemin,
+  entrepotGuide,
+  entrepotExigence,
+  entrepotFinancement,
+  cmsCrisp
+);
+
 const port = process.env.PORT || 3000;
 
 (async () => {
@@ -141,14 +150,7 @@ const port = process.env.PORT || 3000;
       adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
       fournisseurChemin,
       adaptateurEnvironnement,
-      adaptateurEnrichissement: await fabriqueAdaptateurEnrichissement(
-        adaptateurEnvironnement,
-        fournisseurChemin,
-        entrepotGuide,
-        entrepotExigence,
-        entrepotFinancement,
-        cmsCrisp
-      ),
+      adaptateurEnrichissement,
     }),
     adaptateurOIDC,
     adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
