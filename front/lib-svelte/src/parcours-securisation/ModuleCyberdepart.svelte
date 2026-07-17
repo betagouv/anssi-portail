@@ -12,6 +12,7 @@
   import ModaleModuleCyberdepartTermine from './modales/ModaleModuleCyberdepartTermine.svelte';
   import Progression from './Progression.svelte';
   import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
+  import { profilStore } from '../stores/profil.store';
 
   type ModuleRéponseApi = {
     nom: string;
@@ -48,6 +49,7 @@
   const progressionActuelle = $derived(module.mesures.filter((module) => module.estPriseEnCompte).length);
   const badgeDebloque = $derived(progressionActuelle >= module.cibleBadge);
   const parcoursTermine = $derived(progressionActuelle === totalMesures);
+  const parcoursComplet = $derived($profilStore?.parcoursSecurisation.parcoursActuel === 'complet');
 </script>
 
 <Toaster />
@@ -69,9 +71,9 @@
 
 <dsfr-container>
   <div class="progression">
-    {#if parcoursTermine}
+    {#if parcoursTermine && !parcoursComplet}
       <BasculeParcoursAvance />
-    {:else if badgeDebloque}
+    {:else if badgeDebloque && !parcoursTermine}
       <dsfr-alert
         type="info"
         has-description={true}
