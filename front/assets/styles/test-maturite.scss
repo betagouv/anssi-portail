@@ -12,20 +12,6 @@ h5 {
   margin: 0;
 }
 
-dsfr-container {
-  padding: 48px 0;
-
-  @include a-partir-de(lg) {
-    padding: 72px 0;
-  }
-}
-
-.chapeau.fond-sombre {
-  @include a-partir-de(lg) {
-    padding-bottom: 40px;
-  }
-}
-
 .test-maturite {
   @include a-partir-de(lg) {
     padding: 24px 0;

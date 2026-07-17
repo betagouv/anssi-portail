@@ -5,7 +5,8 @@
   import { profilStore } from '../stores/profil.store';
   import Bouton from '../ui/Bouton.svelte';
   import Etapier from '../ui/Etapier.svelte';
-  import Hero from '../ui/Hero.svelte';
+  import FilAriane from '../ui/FilAriane.svelte';
+  import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
   import IntroductionTestMaturite from './IntroductionTestMaturite.svelte';
   import PartageTest from './PartageTest.svelte';
@@ -109,13 +110,21 @@
 {#if afficheResultats}
   <ResultatsTestMaturite />
 {:else}
-  <Hero
+  <Heros
     titre="Test de maturité cyber"
     description="Obtenez en 5 minutes une évaluation indicative de la maturité cyber de votre organisation."
-    ariane={enSessionGroupe ? 'Session de groupe' : 'Test de maturité cyber'}
-    arianeBranche={enSessionGroupe ? { nom: 'Test de maturité cyber', lien: '/test-maturite' } : undefined}
-    arianeBrancheConnectee={enSessionGroupe ? { nom: 'Maturité cyber', lien: '/ma-maturite' } : undefined}
-  />
+    format="banniere"
+    theme="sombre"
+  >
+    {#snippet filAriane()}
+      <FilAriane
+        fondSombre={true}
+        feuille={enSessionGroupe ? 'Session de groupe' : 'Test de maturité cyber'}
+        branche={enSessionGroupe ? { nom: 'Test de maturité cyber', lien: '/test-maturite' } : undefined}
+        brancheConnectee={enSessionGroupe ? { nom: 'Maturité cyber', lien: '/ma-maturite' } : undefined}
+      />
+    {/snippet}
+  </Heros>
 
   <dsfr-container class="test-maturite">
     {#if introFaite}
