@@ -18,6 +18,7 @@ import { ChargeurGuide } from './chargementProprietes/chargeurGuides.js';
 import { ChargeurRessourcesCyber } from './chargementProprietes/chargeurRessourcesCyber.js';
 import { composantsAutorisés } from './composantsAutorises.genere.js';
 import { RésolveurDePage } from './résolveurDePage.js';
+import { ChargeurFilAriane } from './chargementProprietes/chargeurFilAriane.js';
 
 export interface AdaptateurEnrichissement {
   enrichisAvecComposants: (contenuPage: string, routeDemandée: string) => Promise<string>;
@@ -92,6 +93,7 @@ export const fabriqueAdaptateurEnrichissement = async (
     new ChargeurExigences(entrepôtExigence),
     new ChargeurFinancements(résolveurDePage, entrepôtFinancement),
     new ChargeurCrisp(cmsCrisp),
+    new ChargeurFilAriane(),
   ];
 
   const adaptateursDom: AdaptateurDom[] = [
