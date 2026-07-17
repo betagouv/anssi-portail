@@ -15,6 +15,7 @@ const rollupOptions: NonNullable<UserConfig['build']>['rollupOptions'] = {
     guide: 'src/catalogue/guides/Guide.svelte',
     financements: 'src/financements/Financements.svelte',
     'page-crisp': 'src/page-crisp/PageCrisp.svelte',
+    'fil-ariane': 'src/ui/FilAriane.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,

@@ -9,4 +9,5 @@ export const composantsAutorisés: string[] = [
   'guide',
   'financements',
   'page-crisp',
+  'fil-ariane',
 ];
