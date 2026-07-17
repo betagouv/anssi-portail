@@ -1,5 +1,5 @@
 <script lang="ts">
-  import qrcode from 'qrcode';
+  import { peintUnQRCode } from '$plateforme/qrcode';
   import { tick } from 'svelte';
   import { clic } from '../directives/actions.svelte';
   import Modale from '../ui/Modale.svelte';
@@ -16,7 +16,7 @@
     lienPourParticipants = lienParticipant;
     modaleEstOuverte = true;
     await tick();
-    await qrcode.toCanvas(canvas, lienParticipant, { width: 148, margin: 0 });
+    await peintUnQRCode(canvas, lienParticipant, { width: 148, margin: 0 });
   };
 
   const ferme = () => {
