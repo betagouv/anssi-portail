@@ -1,13 +1,23 @@
+import { CmsCrisp } from '@lab-anssi/lib';
 import { JSDOM } from 'jsdom';
 import { render } from 'svelte/server';
 import { FournisseurChemin } from '../../api/fournisseurChemin.js';
+import { EntrepotFinancement } from '../../metier/entrepotFinancement.js';
 import { EntrepotGuide } from '../../metier/entrepotGuide.js';
 import { EntrepotExigence } from '../../metier/nis2/entrepotExigence.js';
-import { guidePresentation } from '../../presentation/guides/guidePresentation.js';
 import { AdaptateurEnvironnement } from '../adaptateurEnvironnement.js';
+import { AdaptateurDom } from './adaptateurDom/adaptateurDom.js';
+import { AdaptateurLienCanonique } from './adaptateurDom/adaptateurLienCanonique.js';
+import { AdaptateurLiensSeo } from './adaptateurDom/adaptateurLiensSeo.js';
+import { AdaptateurTitre } from './adaptateurDom/adaptateurTitre.js';
+import { ChargeurCrisp } from './chargementProprietes/chargeurCrisp.js';
+import { ChargeurDeProps } from './chargementProprietes/chargeurDeProps.js';
+import { ChargeurExigences } from './chargementProprietes/chargeurExigences.js';
+import { ChargeurFinancements } from './chargementProprietes/chargeurFinancements.js';
+import { ChargeurGuide } from './chargementProprietes/chargeurGuides.js';
+import { ChargeurRessourcesCyber } from './chargementProprietes/chargeurRessourcesCyber.js';
 import { composantsAutorisés } from './composantsAutorises.genere.js';
-import { EntrepotFinancement } from '../../metier/entrepotFinancement.js';
-import { CmsCrisp } from '@lab-anssi/lib';
+import { RésolveurDePage } from './résolveurDePage.js';
 
 export interface AdaptateurEnrichissement {
   enrichisAvecComposants: (contenuPage: string, routeDemandée: string) => Promise<string>;
@@ -17,148 +27,52 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
   constructor(
     private readonly composantsAutorisés: string[],
     private readonly fournisseurDeChemin: FournisseurChemin,
-    private readonly entrepotGuide: EntrepotGuide,
-    private readonly adaptateurEnvironnement: AdaptateurEnvironnement,
-    private readonly entrepôtExigence: EntrepotExigence,
-    private readonly entrepôtFinancement: EntrepotFinancement,
-    private readonly cmsCrisp: CmsCrisp
+    private readonly chargeursDeProps: ChargeurDeProps[],
+    private readonly adaptateursDom: AdaptateurDom[]
   ) {}
+
   async enrichisAvecComposants(contenuPage: string, routeDemandée: string) {
     try {
       const dom = new JSDOM(contenuPage);
-      const divDInjectionCSS = dom.window.document.getElementsByTagName('head');
-      for (const nomComposant of this.composantsAutorisés) {
-        let props = await this.chargeRessourcesCyber(dom);
-        props = await this.chargeGuide(props, routeDemandée);
-        props = await this.chargeExigences(dom, props);
-        props = await this.chargeFinancements(props, routeDemandée);
-        props = await this.chargeCrisp(dom, props);
-        const divDInjection = dom.window.document.getElementById(nomComposant);
-        if (!divDInjection) {
-          continue;
-        }
-        const cheminDuComposant = this.fournisseurDeChemin.ressourceDeBase(
-          `lib-svelte/dist/serveur/assets/${nomComposant}.js`
-        );
-        const composantSvelte = await import(cheminDuComposant);
-        const { head, body } = render(composantSvelte.default, { props });
-        if (divDInjectionCSS.length) {
-          divDInjectionCSS[0].insertAdjacentHTML('beforeend', head.replaceAll('<style ', '<style nonce="%%NONCE%%" '));
-        }
+      const props = await this.chargeProps(dom, routeDemandée);
 
-        divDInjection.innerHTML = body;
+      for (const nomComposant of this.composantsAutorisés) {
+        await this.injecteComposant(dom, nomComposant, props);
       }
 
-      this.afficheLesLiens(dom);
-      this.adapteLienCanonique(dom, routeDemandée);
-      await this.adapteTitre(dom, routeDemandée);
+      for (const adaptateur of this.adaptateursDom) {
+        await adaptateur.adapte(dom, routeDemandée);
+      }
 
       return dom.serialize();
     } catch (e) {
       console.error("Erreur lors de l'injection svelte : ", e);
-    }
-    return contenuPage;
-  }
-
-  private afficheLesLiens(dom: JSDOM) {
-    const liens = dom.window.document.getElementsByTagName('msc-lien');
-    for (const lien of liens) {
-      const url = lien.getAttribute('href');
-      const libelle = lien.getAttribute('libelle');
-      lien.insertAdjacentHTML('afterbegin', `<a slot="seo" href="${url}">${libelle}</a>`);
+      return contenuPage;
     }
   }
 
-  private adapteLienCanonique(dom: JSDOM, routeDemandée: string): void {
-    const lienCanonique = dom.window.document.querySelector('link[rel="canonical"]');
-    if (!lienCanonique) return;
-
-    const href = lienCanonique.getAttribute('href') ?? '';
-    const nouveauHref = href.replace(/\/(financements|guides)$/, routeDemandée);
-    lienCanonique.setAttribute('href', nouveauHref);
-  }
-
-  private async adapteTitre(dom: JSDOM, routeDemandée: string) {
-    const guideTrouvé = await this.récupèreGuide(routeDemandée);
-    const financementTrouvé = await this.récupèreFinancement(routeDemandée);
-    const nouveauTitre = guideTrouvé?.nom ?? financementTrouvé?.nom;
-    const titre = dom.window.document.getElementsByTagName('title').item(0);
-    if (titre && nouveauTitre) {
-      titre.innerHTML = `${nouveauTitre} | MesServicesCyber`;
-    }
-  }
-
-  private async chargeRessourcesCyber(dom: JSDOM) {
-    const donnees = dom.window.document.getElementById('donnees-items-cyber')?.textContent;
-
-    if (donnees) {
-      const { itemsCyber, repartition } = JSON.parse(donnees);
-      const guides = await this.entrepotGuide.tous();
-      const guidesAvecImages = guides.map(guidePresentation(this.adaptateurEnvironnement));
-      return { itemsCyber, guides: guidesAvecImages, repartition };
-    }
-
-    return {};
-  }
-
-  private async chargeGuide(props: Record<string, unknown>, routeDemandée: string) {
-    const guideTrouvé = await this.récupèreGuide(routeDemandée);
-    if (!guideTrouvé) {
-      return props;
-    }
-    const guideInitial = guidePresentation(this.adaptateurEnvironnement)(guideTrouvé);
-    return { ...props, guideInitial };
-  }
-
-  private async chargeExigences(dom: JSDOM, props: Record<string, unknown>) {
-    const pageNis2 = dom.window.document.getElementById('page-directive-nis2');
-    if (pageNis2) {
-      const exigences = await this.entrepôtExigence.parReferentiel('NIS2');
-      return { ...props, exigences };
+  private async chargeProps(dom: JSDOM, routeDemandée: string) {
+    let props: Record<string, unknown> = {};
+    for (const chargeur of this.chargeursDeProps) {
+      const partiel = await chargeur.charge(dom, routeDemandée);
+      if (partiel) props = { ...props, ...partiel };
     }
     return props;
   }
 
-  private async chargeFinancements(props: Record<string, unknown>, routeDemandée: string) {
-    if (routeDemandée.match(/financements$/)) {
-      const financementsInitiaux = await this.entrepôtFinancement.tous();
-      return { ...props, financementsInitiaux };
+  private async injecteComposant(dom: JSDOM, nomComposant: string, props: Record<string, unknown>) {
+    const divDInjection = dom.window.document.getElementById(nomComposant);
+    if (!divDInjection) return;
+    const cheminDuComposant = this.fournisseurDeChemin.ressourceDeBase(
+      `lib-svelte/dist/serveur/assets/${nomComposant}.js`
+    );
+    const composantSvelte = await import(cheminDuComposant);
+    const { head, body } = render(composantSvelte.default, { props });
+    const [headDom] = dom.window.document.getElementsByTagName('head');
+    if (headDom) {
+      headDom.insertAdjacentHTML('beforeend', head.replaceAll('<style ', '<style nonce="%%NONCE%%" '));
     }
-
-    const financementInitial = await this.récupèreFinancement(routeDemandée);
-    if (financementInitial) {
-      return { ...props, financementInitial };
-    }
-    return props;
-  }
-
-  private async chargeCrisp(dom: JSDOM, props: Record<string, unknown>) {
-    const données = dom.window.document.getElementById('donnees-page-crisp')?.textContent;
-    if (!données) {
-      return props;
-    }
-    const { clePageCrisp } = JSON.parse(données);
-    if (clePageCrisp) {
-      const pageCrispInitiale = await this.cmsCrisp.recupereArticle(clePageCrisp);
-      return { ...props, pageCrispInitiale };
-    }
-    return props;
-  }
-
-  private async récupèreGuide(routeDemandée: string) {
-    const idGuide = routeDemandée.match(/\/guides\/(.*)/)?.[1];
-    if (!idGuide) {
-      return;
-    }
-    const guideTrouvé = (await this.entrepotGuide.tous()).find((g) => g.id === idGuide);
-    return guideTrouvé;
-  }
-
-  private async récupèreFinancement(routeDemandée: string) {
-    const idFinancement = routeDemandée.match(/\/financements\/(.*)/)?.[1];
-    if (idFinancement) {
-      return this.entrepôtFinancement.parId(Number(idFinancement));
-    }
+    divDInjection.innerHTML = body;
   }
 }
 
@@ -170,13 +84,21 @@ export const fabriqueAdaptateurEnrichissement = async (
   entrepôtFinancement: EntrepotFinancement,
   cmsCrisp: CmsCrisp
 ): Promise<AdaptateurEnrichissement> => {
-  return new AdaptateurEnrichissementSvelte(
-    composantsAutorisés,
-    fournisseurDeChemin,
-    entrepotGuide,
-    adaptateurEnvironnement,
-    entrepôtExigence,
-    entrepôtFinancement,
-    cmsCrisp
-  );
+  const résolveurDePage = new RésolveurDePage(entrepotGuide, entrepôtFinancement);
+
+  const chargeursDeProps: ChargeurDeProps[] = [
+    new ChargeurRessourcesCyber(entrepotGuide, adaptateurEnvironnement),
+    new ChargeurGuide(résolveurDePage, adaptateurEnvironnement),
+    new ChargeurExigences(entrepôtExigence),
+    new ChargeurFinancements(résolveurDePage, entrepôtFinancement),
+    new ChargeurCrisp(cmsCrisp),
+  ];
+
+  const adaptateursDom: AdaptateurDom[] = [
+    new AdaptateurLiensSeo(),
+    new AdaptateurLienCanonique(),
+    new AdaptateurTitre(résolveurDePage),
+  ];
+
+  return new AdaptateurEnrichissementSvelte(composantsAutorisés, fournisseurDeChemin, chargeursDeProps, adaptateursDom);
 };
