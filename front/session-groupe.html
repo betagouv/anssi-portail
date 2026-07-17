@@ -4,23 +4,4 @@ layout: defaut
 titreHtml: 'Session de groupe | MesServicesCyber'
 ---
 
-<script type="application/json" id="donnees-fil-ariane">
-  {
-    "branche": {
-      "nom": "Test de maturité cyber",
-      "lien": "/test-maturite/"
-    },
-    "feuille": "Session de groupe",
-    "fondSombre": true
-  }
-</script>
-
-<dsfr-container class="chapeau fond-sombre">
-  <div class="contenu-section">
-    {% include composant-svelte.html id="fil-ariane" %}
-    <h1 class="alternatif-xs-ns">Session de groupe</h1>
-    <p class="texte-chapo-xl-ns">Déterminez la maturité cyber de votre organisation en 5 minutes.</p>
-  </div>
-</dsfr-container>
-
 {% include composant-svelte.html id="session-groupe" %}
