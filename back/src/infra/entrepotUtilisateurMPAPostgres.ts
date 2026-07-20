@@ -126,6 +126,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         domainesSpecialite,
         cguAcceptees: donnees.cguAcceptees,
         infolettreAcceptee: donnees.infolettreAcceptee,
+        pixelDeSuiviAccepté: false,
         siretEntite: organisation.siret,
         idListeFavoris: utilisateurBDD.id_liste_favoris,
         organisation: new Organisation({ ...organisation, codeActivite }),

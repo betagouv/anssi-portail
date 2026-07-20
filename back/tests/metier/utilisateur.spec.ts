@@ -23,6 +23,7 @@ describe("L'utilisateur", () => {
     cguAcceptees: true,
     domainesSpecialite: ['a'],
     infolettreAcceptee: false,
+    pixelDeSuiviAccepté: false,
   };
 
   it("utilise l'organisation fournie en priorite", async () => {

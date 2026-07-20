@@ -85,6 +85,7 @@ describe('La ressource utilisateur', () => {
       assert.equal((await jeanne?.organisation())?.siret, '13000766900018');
       assert.equal(jeanne?.cguAcceptees, true);
       assert.equal(jeanne?.infolettreAcceptee, true);
+      assert.equal(jeanne?.pixelDeSuiviAccepté, true);
     });
 
     it('utilise le SIRET du token en priorité', async () => {
