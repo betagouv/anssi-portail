@@ -13,12 +13,12 @@ import { AdaptateurTitre } from './adaptateurDom/adaptateurTitre.js';
 import { ChargeurCrisp } from './chargementProprietes/chargeurCrisp.js';
 import { ChargeurDeProps } from './chargementProprietes/chargeurDeProps.js';
 import { ChargeurExigences } from './chargementProprietes/chargeurExigences.js';
+import { ChargeurFilAriane } from './chargementProprietes/chargeurFilAriane.js';
 import { ChargeurFinancements } from './chargementProprietes/chargeurFinancements.js';
 import { ChargeurGuide } from './chargementProprietes/chargeurGuides.js';
 import { ChargeurRessourcesCyber } from './chargementProprietes/chargeurRessourcesCyber.js';
 import { composantsAutorisés } from './composantsAutorises.genere.js';
 import { RésolveurDePage } from './résolveurDePage.js';
-import { ChargeurFilAriane } from './chargementProprietes/chargeurFilAriane.js';
 
 export interface AdaptateurEnrichissement {
   enrichisAvecComposants: (contenuPage: string, routeDemandée: string) => Promise<string>;
@@ -101,7 +101,7 @@ export const fabriqueAdaptateurEnrichissement = async (
     new ChargeurGuide(résolveurDePage, adaptateurEnvironnement),
     new ChargeurExigences(entrepôtExigence),
     new ChargeurFinancements(résolveurDePage, entrepôtFinancement),
-    new ChargeurCrisp(cmsCrisp),
+    new ChargeurCrisp(cmsCrisp, adaptateurEnvironnement),
     new ChargeurFilAriane(),
   ];
 
