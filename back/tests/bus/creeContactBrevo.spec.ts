@@ -15,6 +15,7 @@ describe("L'abonnement qui crée un contact Brevo", () => {
         nom: string;
         prenom: string;
         infoLettre: boolean;
+        pixelDeSuiviAccepté: boolean;
         telephone?: string;
       }) => {
         contactCree = { ...donneesRecues };
@@ -38,6 +39,7 @@ describe("L'abonnement qui crée un contact Brevo", () => {
       prenom: 'Jeanne',
       nom: 'Dupont',
       infoLettre: true,
+      pixelDeSuiviAccepté: true,
       telephone: '0123456789',
     });
   });

@@ -116,12 +116,13 @@ export class ConsoleAdministration {
     const afficheErreur = (utilisateur: Utilisateur) => `Erreur pour ${utilisateur.email}`;
 
     const rattrapeUtilisateur = async (utilisateur: Utilisateur) => {
-      const { prenom, nom, email, infolettreAcceptee, telephone } = utilisateur;
+      const { prenom, nom, email, infolettreAcceptee, pixelDeSuiviAccepté, telephone } = utilisateur;
       await this.adaptateurEmail.creeContactBrevo({
         prenom,
         nom,
         email,
         infoLettre: infolettreAcceptee,
+        pixelDeSuiviAccepté,
         telephone,
       });
     };
@@ -144,6 +145,7 @@ export class ConsoleAdministration {
             return this.adaptateurChiffrement.dechiffre(u.donnees) as {
               email: string;
               infolettreAcceptee: boolean;
+              pixelDeSuiviAccepte?: boolean;
             };
           } catch {
             console.error('Erreur déchiffrement : ', u.email_hache);
@@ -155,6 +157,14 @@ export class ConsoleAdministration {
       const correspondanceEmailsInfolettre = donneesDechiffrees.reduce(
         (map, donnee) => {
           map.set(donnee.email, donnee.infolettreAcceptee);
+          return map;
+        },
+        new Map() as Map<string, boolean>
+      );
+
+      const correspondanceEmailsPixelDeSuivi = donneesDechiffrees.reduce(
+        (map, donnee) => {
+          map.set(donnee.email, donnee.pixelDeSuiviAccepte ?? true);
           return map;
         },
         new Map() as Map<string, boolean>
@@ -173,6 +183,7 @@ export class ConsoleAdministration {
               nom,
               email,
               infoLettre: correspondanceEmailsInfolettre.get(email) ?? false,
+              pixelDeSuiviAccepté: correspondanceEmailsPixelDeSuivi.get(email) ?? true,
               telephone,
             })
           )();

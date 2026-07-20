@@ -36,12 +36,14 @@ export const adaptateurEmailBrevo = (fnAppelleAxios: FonctionPostAxios): Adaptat
     prenom,
     nom,
     infoLettre,
+    pixelDeSuiviAccepté,
     telephone,
   }: {
     email: string;
     prenom: string;
     nom: string;
     infoLettre: boolean;
+    pixelDeSuiviAccepté: boolean;
     telephone?: string;
   }) => {
     try {
@@ -55,6 +57,7 @@ export const adaptateurEmailBrevo = (fnAppelleAxios: FonctionPostAxios): Adaptat
             PRENOM: decode(prenom),
             NOM: decode(nom),
             SMS: new Telephone(telephone).auFormatInternational(),
+            _PIXEL_TRACKING_CONSENT: pixelDeSuiviAccepté,
           },
         },
         enteteJSON

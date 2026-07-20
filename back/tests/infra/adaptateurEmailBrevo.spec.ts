@@ -14,6 +14,7 @@ describe('L’adaptateur email Brevo', () => {
     prenom: 'Jeanne',
     nom: 'Dupont',
     infoLettre: true,
+    pixelDeSuiviAccepté: true,
   });
 
   beforeEach(() => {
