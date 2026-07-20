@@ -17,6 +17,16 @@ on:
         required: true
       MQC_API_DOCUMENTS_URL:
         required: true
+      ANTIVIRUS_DOMAINE:
+        required: true
+      ANTIVIRUS_PORT:
+        required: true
+      ANTIVIRUS_CLIENT_CERTIFICAT:
+        required: true
+      ANTIVIRUS_CLIENT_CLE:
+        required: true
+      ANTIVIRUS_SERVEUR_CERTIFICAT:
+        required: true
 
 jobs:
   compare-les-buckets:
@@ -57,6 +67,40 @@ jobs:
           echo "rc=${RC:-0}"
           cat resultats/rclone.log
           echo "rc=${RC:-0}" >> $GITHUB_OUTPUT
+      - name: Installer et configurer la CLI de S3cmd
+        uses: s3-actions/s3cmd@91996c659532eb71d2503212d0630587b347d50e # v1.10.1
+        with:
+          provider: clevercloud
+          access_key: ${{ secrets.CELLAR_ACCESS_KEY_ID }}
+          secret_key: ${{ secrets.CELLAR_SECRET_ACCESS_KEY }}
+      - name: Scan antivirus
+        run: |
+          sudo apt install -y socat clamav-daemon
+          local_port=4242
+          echo "${{ secrets.ANTIVIRUS_CLIENT_CERTIFICAT }}" > client.crt
+          echo "${{ secrets.ANTIVIRUS_CLIENT_CLE }}" > client.key
+          echo "${{ secrets.ANTIVIRUS_SERVEUR_CERTIFICAT }}" > s.crt
+          socat \
+            "TCP-LISTEN:$local_port",reuseaddr,fork \
+            "OPENSSL:${{ secrets.ANTIVIRUS_DOMAINE }}:${{ secrets.ANTIVIRUS_PORT }},cert=$(pwd)/client.crt,key=$(pwd)/client.key,cafile=$(pwd)/s.crt,verify=1" &
+
+          cat <<_EOF_ >clamav.conf
+          TCPAddr 127.0.0.1
+          TCPSocket $local_port
+          _EOF_
+          echo "Ajouts"
+          cat resultats/ajouts.txt
+          echo "Modifications"
+          cat resultats/modifications.txt
+          while IFS= read -r line
+            do
+              [ -z "$line" ] && continue
+              echo "Vérification du fichier $line"
+              s3cmd get "s3://messervicescyber-guides-travail/$line" - | clamdscan --config=clamav.conf - > clamdscan.result
+              cat clamdscan.result
+              grep -E "Infected files: [^0]" clamdscan.result && echo "$line" >> fichiersMalveillants.txt
+            done < <(cat resultats/ajouts.txt <(echo "") resultats/modifications.txt)
+          [ -s fichiersMalveillants.txt ] && cat fichiersMalveillants.txt
 
       - name: Generate GitHub Summary
         run: |
