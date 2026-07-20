@@ -56,7 +56,14 @@ const ressourceUtilisateurs = ({
           // suite à la suppression de l'aseptisation, on force un encodage pour garder des données consistantes dans la base de données Journal
           const telephoneEncode = encode(telephone);
           await busEvenements.publie(
-            new CompteCree({ email, prenom, nom, infoLettre: infolettreAcceptee, telephone: telephoneEncode })
+            new CompteCree({
+              email,
+              prenom,
+              nom,
+              infoLettre: infolettreAcceptee,
+              telephone: telephoneEncode,
+              pixelDeSuiviAccepté,
+            })
           );
 
           reponse.sendStatus(201);
