@@ -14,6 +14,7 @@ type DonneesUtilisateurEnClair = {
   email: string;
   cguAcceptees: boolean;
   infolettreAcceptee: boolean;
+  pixelDeSuiviAccepte?: boolean;
 };
 
 export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
@@ -46,10 +47,11 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
   }
 
   private chiffreDonneesUtilisateur(utilisateur: Utilisateur): UtilisateurBDD {
-    const donneesEnClair = {
+    const donneesEnClair: DonneesUtilisateurEnClair = {
       email: utilisateur.email,
       cguAcceptees: utilisateur.cguAcceptees,
       infolettreAcceptee: utilisateur.infolettreAcceptee,
+      pixelDeSuiviAccepte: utilisateur.pixelDeSuiviAccepté,
     };
     const donneesChiffrees = this.adaptateurChiffrement.chiffre(donneesEnClair);
     return {
@@ -126,7 +128,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         domainesSpecialite,
         cguAcceptees: donnees.cguAcceptees,
         infolettreAcceptee: donnees.infolettreAcceptee,
-        pixelDeSuiviAccepté: false,
+        pixelDeSuiviAccepté: donnees.pixelDeSuiviAccepte ?? true,
         siretEntite: organisation.siret,
         idListeFavoris: utilisateurBDD.id_liste_favoris,
         organisation: new Organisation({ ...organisation, codeActivite }),
