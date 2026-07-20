@@ -10,4 +10,5 @@ export const schemaRessourceUtilisateurs = z.strictObject({
   siretEntite: schemas.organisation.siret('Le siret est invalide'),
   cguAcceptees: z.boolean("L'acceptation des CGU est invalide"),
   infolettreAcceptee: z.boolean("L'acceptation de l'infolettre est invalide"),
+  pixelDeSuiviAccepté: z.boolean("L'acceptation du pixel de suivi"),
 });

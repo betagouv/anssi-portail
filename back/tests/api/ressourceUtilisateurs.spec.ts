@@ -21,6 +21,7 @@ describe('La ressource utilisateur', () => {
     siretEntite: '13000766900018',
     cguAcceptees: true,
     infolettreAcceptee: true,
+    pixelDeSuiviAccepté: true,
     token:
       JSON.stringify({
         email: 'jeanne.dupont@user.com',
