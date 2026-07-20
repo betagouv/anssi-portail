@@ -22,8 +22,6 @@ on:
         required: true
       GUIDES_CIBLE_GRIST_API_KEY:
         required: true
-      INPUTS_CIBLE:
-        required: true
 
 jobs:
   genere-tableau-comparatif:
