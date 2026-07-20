@@ -5,6 +5,7 @@ permissions: {}
 on:
   workflow_dispatch: # Pour activer le déclenchement manuel
 
+
 jobs:
   compare-et-deploie-guides:
     name: 'Guides'
@@ -23,9 +24,9 @@ jobs:
     name: 'Documents'
     uses: ./.github/workflows/cellar-deploiement.yml
     secrets:
-      GUIDES_SOURCE_GRIST_URL: ${{ secrets.GUIDES_SOURCE_GRIST_URL }}
-      GUIDES_SOURCE_GRIST_ID_TABLE: ${{ secrets.GUIDES_SOURCE_GRIST_ID_TABLE }}
-      GUIDES_SOURCE_GRIST_API_KEY: ${{ secrets.GUIDES_SOURCE_GRIST_API_KEY }}
-      GUIDES_CIBLE_GRIST_URL: ${{ secrets.GUIDES_CIBLE_GRIST_URL }}
-      GUIDES_CIBLE_GRIST_ID_TABLE: ${{ secrets.GUIDES_CIBLE_GRIST_ID_TABLE }}
-      GUIDES_CIBLE_GRIST_API_KEY: ${{ secrets.GUIDES_CIBLE_GRIST_API_KEY }}
+      CELLAR_ACCESS_KEY_ID: ${{ secrets.CELLAR_ACCESS_KEY_ID }}
+      CELLAR_SECRET_ACCESS_KEY: ${{ secrets.CELLAR_SECRET_ACCESS_KEY }}
+      GUIDES_BUCKET_SOURCE: ${{ secrets.GUIDES_BUCKET_SOURCE }}
+      GUIDES_BUCKET_CIBLE: ${{ secrets.GUIDES_BUCKET_CIBLE }}
+      MQC_API_DOCUMENTS_TOKEN: ${{ secrets.MQC_API_DOCUMENTS_TOKEN }}
+      MQC_API_DOCUMENTS_URL: ${{ secrets.MQC_API_DOCUMENTS_URL }}
