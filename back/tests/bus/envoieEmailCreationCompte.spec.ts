@@ -21,6 +21,7 @@ describe("L'abonnement qui envoie un email de création de compte", () => {
         prenom: 'Jeanne',
         nom: 'Dupont',
         infoLettre: true,
+        pixelDeSuiviAccepté: true,
       })
     );
 

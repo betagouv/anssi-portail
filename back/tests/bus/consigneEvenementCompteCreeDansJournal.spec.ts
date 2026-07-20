@@ -34,6 +34,7 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
         nom: 'dupont',
         prenom: 'jean',
         infoLettre: false,
+        pixelDeSuiviAccepté: true,
       })
     );
 

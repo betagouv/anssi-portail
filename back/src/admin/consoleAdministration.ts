@@ -217,12 +217,13 @@ export class ConsoleAdministration {
 
     const tousUtilisateurs = await this.entrepotUtilisateur.tous();
     const tousEvenementsUtilisateurs: CompteCree[] = tousUtilisateurs.map(
-      ({ email, prenom, nom, infolettreAcceptee }) =>
+      ({ email, prenom, nom, infolettreAcceptee, pixelDeSuiviAccepté }) =>
         new CompteCree({
           email,
           prenom,
           nom,
           infoLettre: infolettreAcceptee,
+          pixelDeSuiviAccepté,
         })
     );
     const rattrapeEvenement = (evenement: CompteCree) =>
