@@ -52,6 +52,7 @@ interface InformationsCreationUtilisateur {
   siretEntite: string;
   cguAcceptees: boolean;
   infolettreAcceptee: boolean;
+  pixelDeSuiviAccepté: boolean;
   idListeFavoris?: string;
   organisation?: Organisation;
   roles?: Role[];
@@ -67,6 +68,7 @@ export class Utilisateur {
   domainesSpecialite: string[];
   cguAcceptees: boolean;
   infolettreAcceptee: boolean;
+  pixelDeSuiviAccepté: boolean;
   siretEntite: string;
   idListeFavoris: string | undefined;
   private adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
@@ -85,6 +87,7 @@ export class Utilisateur {
       domainesSpecialite,
       cguAcceptees,
       infolettreAcceptee,
+      pixelDeSuiviAccepté,
       siretEntite,
       idListeFavoris,
       organisation,
@@ -102,6 +105,7 @@ export class Utilisateur {
     this.domainesSpecialite = domainesSpecialite;
     this.cguAcceptees = cguAcceptees;
     this.infolettreAcceptee = infolettreAcceptee;
+    this.pixelDeSuiviAccepté = pixelDeSuiviAccepté;
     this.siretEntite = siretEntite;
     this.adaptateurRechercheEntreprise = adaptateurRechercheEntreprise;
     this.idListeFavoris = idListeFavoris ?? undefined;

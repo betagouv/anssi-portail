@@ -79,6 +79,7 @@ describe('La ressource Profil', () => {
           siretEntite: '13000766900018',
           cguAcceptees: true,
           infolettreAcceptee: true,
+          pixelDeSuiviAccepté: true,
         },
         adaptateurRechercheEntreprise,
         fauxAdaptateurHachage

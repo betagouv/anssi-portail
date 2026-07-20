@@ -11,6 +11,7 @@ export class ConstructeurDUtilisateur {
   private siretEntite: string = '13000766900018';
   private cguAcceptees: boolean = true;
   private infolettreAcceptee: boolean = true;
+  private pixelDeSuiviAccepté: boolean = true;
   private idListeFavoris?: string;
   private readonly mesuresPrisesEnCompte: Mesure[] = [];
 
@@ -54,6 +55,11 @@ export class ConstructeurDUtilisateur {
     return this;
   }
 
+  avecPixelDeSuiviAccepté(pixelDeSuiviAccepté: boolean) {
+    this.pixelDeSuiviAccepté = pixelDeSuiviAccepté;
+    return this;
+  }
+
   avecLIdListeFavoris(idListeFavoris: string) {
     this.idListeFavoris = idListeFavoris;
     return this;
@@ -75,6 +81,7 @@ export class ConstructeurDUtilisateur {
         siretEntite: this.siretEntite,
         cguAcceptees: this.cguAcceptees,
         infolettreAcceptee: this.infolettreAcceptee,
+        pixelDeSuiviAccepté: this.pixelDeSuiviAccepté,
         idListeFavoris: this.idListeFavoris,
         mesuresPrisesEnCompte: this.mesuresPrisesEnCompte,
       },

@@ -16,6 +16,7 @@ export const jeanneDupont: Utilisateur = new Utilisateur(
     siretEntite: '13000766900018',
     cguAcceptees: true,
     infolettreAcceptee: true,
+    pixelDeSuiviAccepté: true,
     roles: ['GESTION_GUIDES'],
   },
   fauxAdaptateurRechercheEntreprise,
@@ -32,6 +33,7 @@ export const hectorDurant: Utilisateur = new Utilisateur(
     siretEntite: '13000766900018',
     cguAcceptees: true,
     infolettreAcceptee: true,
+    pixelDeSuiviAccepté: true,
   },
   fauxAdaptateurRechercheEntreprise,
   fauxAdaptateurHachage

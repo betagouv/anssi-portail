@@ -22,7 +22,15 @@ const ressourceUtilisateurs = ({
     valideCorpsRequete(schemaRessourceUtilisateurs),
     filetRouteAsynchrone(
       async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceUtilisateurs>>, reponse: Response) => {
-        const { telephone, domainesSpecialite, siretEntite, cguAcceptees, infolettreAcceptee, token } = requete.body;
+        const {
+          telephone,
+          domainesSpecialite,
+          siretEntite,
+          cguAcceptees,
+          infolettreAcceptee,
+          pixelDeSuiviAccepté,
+          token,
+        } = requete.body;
 
         try {
           const { email, nom, prenom, siret } = adaptateurJWT.decode(token);
@@ -37,6 +45,7 @@ const ressourceUtilisateurs = ({
               siretEntite: siret ?? siretEntite,
               cguAcceptees,
               infolettreAcceptee,
+              pixelDeSuiviAccepté,
             },
             adaptateurRechercheEntreprise,
             adaptateurHachage
