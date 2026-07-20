@@ -15,4 +15,5 @@ export type FormulaireInscription = {
   domainesSpecialite: string[];
   cguAcceptees: boolean;
   infolettreAcceptee: boolean;
+  pixelDeSuiviAccepté: boolean;
 };

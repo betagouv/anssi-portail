@@ -87,6 +87,7 @@
     domainesSpecialite,
     cguAcceptees: false,
     infolettreAcceptee: false,
+    pixelDeSuiviAccepté: false,
   };
 
   let departement: Departement;
@@ -212,6 +213,14 @@
                   de MesServicesCyber</span
                 >
               </CaseACocher>
+            </div>
+            <div class="case-a-cocher">
+              <CaseACocher
+                id="pixelDeSuiviAccepte"
+                nom="pixelDeSuiviAccepte"
+                libelle="J'accepte que l'ouverture des emails qui me sont adressés puisse être mesurée afin d'en améliorer la pertinence."
+                bind:coche={formulaireInscription.pixelDeSuiviAccepté}
+              ></CaseACocher>
             </div>
           </div>
         </div>
