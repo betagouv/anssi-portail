@@ -67,8 +67,9 @@
       name={nom}
       pattern={modele}
       placeholder={aideSaisie}
-      required={requis}
+      required={false}
       {type}
+      value={valeur}
     />
   </label>
 </dsfr-input>
