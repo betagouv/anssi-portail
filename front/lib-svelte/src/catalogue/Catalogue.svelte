@@ -97,7 +97,7 @@
     $rechercheParTypologie = fragmentDeNavigation.extraisTableau<Typologie>('types');
     $rechercheParSource = fragmentDeNavigation.extraisTableau<Source>('sources');
   };
-  appliqueLesFiltres(fragmentDeNavigation);
+  $effect(() => appliqueLesFiltres(fragmentDeNavigation));
   $effect(() => {
     fragmentDeNavigation.change('besoin', $rechercheParBesoin);
     fragmentDeNavigation.change('langues', $rechercheParLangue);
