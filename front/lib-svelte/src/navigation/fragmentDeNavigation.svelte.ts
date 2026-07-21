@@ -68,7 +68,14 @@ export const creeLeFragmentDeNavigation = (hash?: string): FragmentDeNavigation 
       return section;
     },
     change: <T>(cle: string, valeur: T | T[]) => {
-      filtres[cle] = (Array.isArray(valeur) ? valeur : valeur ? [valeur] : []).map(String);
+      const nouvellesValeurs = (Array.isArray(valeur) ? valeur : valeur ? [valeur] : []).map(String);
+      const valeursActuelles = filtres[cle] ?? [];
+      const valeursIdentiques =
+        nouvellesValeurs.length === valeursActuelles.length &&
+        nouvellesValeurs.every((nouvelleValeur, index) => nouvelleValeur === valeursActuelles[index]);
+      if (!valeursIdentiques) {
+        filtres[cle] = nouvellesValeurs;
+      }
     },
     changeSection: (nouvelleSection: string | undefined, actualise: boolean) => {
       section = nouvelleSection;

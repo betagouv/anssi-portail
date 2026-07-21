@@ -33,7 +33,7 @@
     const parametreSecteur = fragmentDeNavigation.extraisValeur('secteur', '');
     secteurSelectionne = estCodeSecteurContact(parametreSecteur) ? parametreSecteur : '';
   };
-  appliqueLesFiltres();
+  $effect(() => appliqueLesFiltres());
   $effect(() => {
     fragmentDeNavigation.change('region', regionSelectionnee);
     fragmentDeNavigation.change('secteur', secteurSelectionne);
