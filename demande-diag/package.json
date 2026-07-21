@@ -28,6 +28,6 @@
   },
   "dependencies": {
     "@anssi-portail/svelte": "workspace:*",
-    "axios": "^1.15.0"
+    "axios": "catalog:"
   }
 }

@@ -17,7 +17,7 @@ preferFrozenLockfile: true
 # bundles SSR servis depuis front/_site). Référencées par « catalog: » dans les deux
 # package.json pour éviter toute dérive de version.
 catalog:
-  axios: ^1.15.0
+  axios: ^1.18.0
   entities: ^8.0.0
   isomorphic-dompurify: ^3.18.0
   svelte: ^5.55.9
