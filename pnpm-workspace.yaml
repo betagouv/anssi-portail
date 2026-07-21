@@ -27,3 +27,5 @@ minimumReleaseAgeExclude:
   - '@lab-anssi/ui-kit'
   - form-data@4.0.6
   - dompurify@3.4.11
+  # Renovate security update: axios@1.18.0
+  - axios@1.18.0
