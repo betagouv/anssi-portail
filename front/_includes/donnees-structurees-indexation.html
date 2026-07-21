@@ -1,9 +1,12 @@
 {% assign siteUrl = site.url | default: 'https://messervices.cyber.gouv.fr' %}
 {% assign descriptionPage = site.data.meta-description[page.url] %}
-{% assign urlPage = page.url | default: '/' %}
-{% if urlPage != '/' and urlPage | slice: -1 == '/' %}
-  {% assign longueurSansSlash = urlPage.size | minus: 1 %}
-  {% assign urlPage = urlPage | slice: 0, longueurSansSlash %}
+{% assign urlPage = page.url | default: '' | strip %}
+{% if urlPage != '' and urlPage != '/' %}
+  {% assign last_char = urlPage | slice: -1 %}
+  {% if last_char == '/' %}
+    {% assign longueurSansSlash = urlPage | size | minus: 1 %}
+    {% assign urlPage = urlPage | slice: 0, longueurSansSlash %}
+  {% endif %}
 {% endif %}
 {% assign urlComplete = siteUrl | append: urlPage %}
 {% assign nomPage = page.titreHtml | split: ' | ' | first %}
