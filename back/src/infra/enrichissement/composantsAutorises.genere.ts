@@ -12,4 +12,5 @@ export const composantsAutorisés: string[] = [
   'fil-ariane',
   'test-maturite',
   'session-groupe',
+  'demande-diagnostic',
 ];
