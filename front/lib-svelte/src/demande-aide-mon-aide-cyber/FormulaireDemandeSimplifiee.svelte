@@ -1,17 +1,17 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { clic } from '../directives/actions.svelte';
   import Alerte from '../ui/Alerte.svelte';
   import type { CouleurDeBadge } from '../ui/badge.type';
+  import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
   import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
   import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
+  import Lien from '../ui/Lien.svelte';
   import { collecteLesErreurs } from '../utils/erreurApi';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import type { CorpsAPIDemandeAide } from './DonneesFormulaireDemandeAide';
-  import Lien from '../ui/Lien.svelte';
 
   export let mode: 'autonome' | undefined = undefined;
   export let origine: string;
@@ -126,15 +126,15 @@
       </dsfr-checkbox>
 
       <div class="envoi-demande">
-        <dsfr-button
-          use:clic={soumetsFormulaire}
-          size="md"
-          label="Envoyer ma demande"
-          variantkind="primary"
-          type="submit"
-          centered
-          disabled={enCoursEnvoi || undefined}
-        ></dsfr-button>
+        <Bouton
+          surClic={soumetsFormulaire}
+          taille="md"
+          libelle="Envoyer ma demande"
+          type="primaire"
+          etire
+          boutonSoumission
+          desactive={enCoursEnvoi || undefined}
+        />
       </div>
       {#if erreurs}
         <Alerte type="ERREUR" titre="Une erreur est survenue" message={erreurs} />

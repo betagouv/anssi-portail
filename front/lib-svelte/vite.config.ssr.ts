@@ -18,6 +18,7 @@ const rollupOptions: NonNullable<UserConfig['build']>['rollupOptions'] = {
     'fil-ariane': 'src/ui/FilAriane.svelte',
     'test-maturite': 'src/test-maturite/TestMaturite.svelte',
     'session-groupe': 'src/test-maturite/SessionGroupe.svelte',
+    'demande-diagnostic': 'src/demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,
