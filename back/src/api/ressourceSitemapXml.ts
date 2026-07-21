@@ -81,10 +81,17 @@ const construitRoutesDynamiques = async ({
     modifieLe: guide.dateMiseAJour,
   }));
 
+  const contientFicheDétaillée = (chemin: string) => {
+    chemin = chemin.replace('site/', '').replace('.html', '.md');
+    const contenuDuFichier = fs.readFileSync(chemin, 'utf-8');
+    return contenuDuFichier.includes('avecFicheDetaillee: true');
+  };
+
   const liensRessources = siteFront
     .fichiers()
     .filter((f) => f.indexOf('front/_site/ressources') >= 0)
     .filter((f) => f.indexOf('.html') >= 0)
+    .filter(contientFicheDétaillée)
     .map((f) => ({ url: `/ressources/${f.split('/').pop()}`, modifieLe: fs.statSync(f).mtime }));
 
   const liensServices = siteFront
@@ -92,6 +99,7 @@ const construitRoutesDynamiques = async ({
     .filter((f) => f.indexOf('front/_site/services') >= 0)
     .filter((f) => f.indexOf('.html') >= 0)
     .filter((f) => f.indexOf('index.html') < 0)
+    .filter(contientFicheDétaillée)
     .map((f) => ({ url: `/services/${f.split('/').pop()}`, modifieLe: fs.statSync(f).mtime }));
 
   const liensContactsRégionaux = siteFront
