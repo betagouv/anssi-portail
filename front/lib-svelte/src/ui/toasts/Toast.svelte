@@ -31,11 +31,7 @@
     alerte: 'icone_alerte',
   };
 
-  const transitionConditionnelle = (
-    noeud: HTMLElement,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    options: Record<string, any>
-  ) => {
+  const transitionConditionnelle = (noeud: HTMLElement, options: Record<string, any>) => {
     if (avecAnimation) return options.fonction(noeud, options);
   };
 </script>
