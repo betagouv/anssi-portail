@@ -1,23 +1,39 @@
 <script lang="ts">
+  import Modale from '../ui/Modale.svelte';
   import type { Mesure } from './mesure';
 
   const { mesure }: { mesure: Mesure } = $props();
+  // svelte-ignore state_referenced_locally
+  let étatDesModales: boolean[] = $state(Array(mesure.tutoriels.length).fill(false));
+
+  const selectionneLeTutoriel = (index: number) => {
+    étatDesModales[index] = true;
+  };
 </script>
 
 <div class="contenu-section">
   <h2>Comment faire concrètement</h2>
-  <dsfr-card
-    hasBadge
-    title={mesure.tutoriel?.titre ?? 'Titre'}
-    horizontal
-    actionMarkup="button"
-    src={mesure.tutoriel?.image ?? '/assets/images/image-generique.avif'}
-    imageRatio="16x9"
-    horizontalProportion="tier"
-    size="lg"
-  >
-    <dsfr-badge slot="badgesgroup" label="Tutoriel" type="accent" accent="purple-glycine"></dsfr-badge>
-  </dsfr-card>
+  {#each mesure.tutoriels as tutoriel, index (index)}
+    <dsfr-card
+      hasBadge
+      title={tutoriel.titre}
+      horizontal
+      horizontalProportion="tier"
+      size="lg"
+      actionMarkup="button"
+      role="button"
+      tabindex={null}
+      onkeypress={(event: KeyboardEvent) => {
+        if (event.code === 'Enter' || event.code === 'Space') selectionneLeTutoriel(index);
+      }}
+      onclick={() => selectionneLeTutoriel(index)}
+    >
+      <dsfr-badge slot="badgesgroup" label="Tutoriel" type="accent" accent="purple-glycine"></dsfr-badge>
+    </dsfr-card>
+    <Modale bind:estOuverte={étatDesModales[index]}>
+      {tutoriel.titre}</Modale
+    >
+  {/each}
   {#if mesure.liens?.length > 0}
     <div class="section-aide">
       <p class="texte-article-lg">Pour aller plus loin</p>
