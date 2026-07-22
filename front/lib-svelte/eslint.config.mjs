@@ -1,17 +1,20 @@
-import js from '@eslint/js';
+// @ts-check
 import svelte from 'eslint-plugin-svelte';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
-import ts from 'typescript-eslint';
+import tseslint from 'typescript-eslint';
+import { createConfig } from '../../eslint.config.base.mjs';
 import svelteConfig from './svelte.config.js';
 
 export default defineConfig(
-  {
-    ignores: ['dist/**'],
-  },
-  js.configs.recommended,
-  ...ts.configs.recommended,
+  createConfig(import.meta.dirname),
   ...svelte.configs.recommended,
+  {
+    files: ['**/*.svelte.ts'],
+    languageOptions: {
+      parser: tseslint.parser,
+    },
+  },
   {
     languageOptions: {
       globals: {
@@ -24,12 +27,15 @@ export default defineConfig(
     },
   },
   {
-    files: ['**/*.svelte', '**/*.ts'],
+    files: ['**/*.svelte'],
+    plugins: {
+      '@typescript-eslint': tseslint.plugin,
+    },
     languageOptions: {
       parserOptions: {
         projectService: true,
         extraFileExtensions: ['.svelte'],
-        parser: ts.parser,
+        parser: tseslint.parser,
         tsconfigRootDir: import.meta.dirname,
         svelteConfig,
       },
