@@ -5,6 +5,17 @@ export type Risque = {
   description: string;
 };
 
+export type Tutoriel = {
+  titre: string;
+  description?: string;
+  étapes: string[];
+  note?: string;
+  lienPourAllerPlusLoin?: {
+    libelle: string;
+    url: string;
+  };
+};
+
 export type Mesure = {
   id: string;
   titre: string;
@@ -14,7 +25,7 @@ export type Mesure = {
   actionFacileAFaire: string;
   ordre: number;
   risques: Risque[];
-  tutoriel?: { titre: string; image?: string };
+  tutoriels: Tutoriel[];
   liens: {
     libelle: string;
     url: string;
