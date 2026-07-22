@@ -79,6 +79,7 @@ jobs:
         run: echo EMPREINTE=$(cat empreinte.txt) >> "$GITHUB_ENV"
 
       - name: Recopie le contenu
+        id: copie
         run: |
           curl --request POST \
             --url ${{ secrets.GUIDES_CIBLE_GRIST_URL }}/replace \
@@ -86,4 +87,13 @@ jobs:
             --header 'content-type: application/json' \
             --data "{
               \"sourceDocId\": \"${EMPREINTE}\"
-            }"
+            }" \
+            || RC=$?
+          echo "résultat : ${RC}"
+          echo "rc=${RC:-0}" >> $GITHUB_OUTPUT
+
+      - name: Échoue cas d'erreur
+        if: steps.copie.outputs.rc != '0'
+        run: |
+          echo "❌ Erreur technique copie"
+          exit 1
