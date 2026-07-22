@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { EntrepotGuideGrist, GuideGrist } from '../../../src/infrastructure/entrepotGuideGrist';
+import { EntrepotGuideGrist, GuideGrist } from '../../../src/infrastructure/guides/entrepotGuideGrist';
 import { ClientHttp } from '../../../src/metier/clientHttp';
 import { ComparateurDeGuides } from '../../../src/metier/guides/comparateurDeGuides';
 import { ConstructeurGuideGrist } from './constructeurGuideGrist';

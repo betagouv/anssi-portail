@@ -1,7 +1,7 @@
 import fs from 'node:fs';
-import { ConsignateurDeComparaisonDeGuides } from './infrastructure/consignateurDeComparaisonDeGuides';
+import { ConsignateurDeComparaisonDeGuides } from './infrastructure/guides/consignateurDeComparaisonDeGuides';
 import { ComparateurDeGuides } from './metier/guides/comparateurDeGuides';
-import { EntrepotGuideGrist } from './infrastructure/entrepotGuideGrist';
+import { EntrepotGuideGrist } from './infrastructure/guides/entrepotGuideGrist';
 import { adaptateurEnvironnement } from './infrastructure/adaptateurEnvironnement';
 import axios from 'axios';
 

@@ -1,6 +1,6 @@
-import { ClientHttp } from '../metier/clientHttp';
-import { EntrepotGuide } from '../metier/guides/entrepotGuide';
-import { Guide } from '../metier/guides/guide.type';
+import { ClientHttp } from '../../metier/clientHttp';
+import { EntrepotGuide } from '../../metier/guides/entrepotGuide';
+import { Guide } from '../../metier/guides/guide.type';
 
 export type SnapshotGrist = {
   snapshots: {

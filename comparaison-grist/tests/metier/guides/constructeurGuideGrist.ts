@@ -1,4 +1,4 @@
-import { GuideGrist } from '../../../src/infrastructure/entrepotGuideGrist';
+import { GuideGrist } from '../../../src/infrastructure/guides/entrepotGuideGrist';
 import { DocumentGuide } from '../../../src/metier/guides/guide.type';
 
 export class ConstructeurGuideGrist {
