@@ -20,6 +20,7 @@ const rollupOptions: NonNullable<UserConfig['build']>['rollupOptions'] = {
     'session-groupe': 'src/test-maturite/SessionGroupe.svelte',
     'demande-diagnostic': 'src/demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte',
     'carrousel-des-interlocuteurs': 'src/interlocuteurs/CarrouselDesInterlocuteurs.svelte',
+    'equipe-biz-dev': 'src/interlocuteurs/EquipeBizDev.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,

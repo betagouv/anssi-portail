@@ -1,6 +1,6 @@
-import { mount } from 'svelte';
+import { hydrate } from 'svelte';
 import EquipeBizDev from './interlocuteurs/EquipeBizDev.svelte';
 
-mount(EquipeBizDev, {
+hydrate(EquipeBizDev, {
   target: document.getElementById('equipe-biz-dev')!,
 });
