@@ -13,4 +13,5 @@ export const composantsAutorisés: string[] = [
   'test-maturite',
   'session-groupe',
   'demande-diagnostic',
+  'carrousel-des-interlocuteurs',
 ];
