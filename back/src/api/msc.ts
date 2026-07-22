@@ -19,6 +19,7 @@ import { ressourceGuidesMemesCollections } from './guides/ressourceGuidesMemesCo
 import { ressourceAvisMesure } from './mesures/ressourceAvisMesure.js';
 import { ressourceMesure } from './mesures/ressourceMesure.js';
 import { ressourceModule } from './mesures/ressourceModule.js';
+import { ressourceParcours } from './mesures/ressourceParcours.js';
 import { ressourceParcoursComplet } from './mesures/ressourceParcoursComplet.js';
 import { ressourcePriseEnCompte } from './mesures/ressourcePriseEnCompte.js';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide.js';
@@ -63,7 +64,6 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe.js';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
-import { ressourceParcours } from './mesures/ressourceParcours.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -365,6 +365,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ['/simulateur-nis2/', '/simulateur-nis2'],
     ['/statistiques/', '/statistiques'],
     ['/test-maturite/', '/test-maturite'],
+    ['/guides/la-defense-en-profondeur-appliquee-aux-systemes-dinformation', '/guides/essentiels-defense-profondeur'],
   ].forEach(([precedent, nouveau]: string[]) => {
     app.use(precedent, (_requete: Request, reponse: Response) => {
       reponse.redirect(301, nouveau);
