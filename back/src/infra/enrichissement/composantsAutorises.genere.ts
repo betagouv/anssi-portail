@@ -15,4 +15,5 @@ export const composantsAutorisés: string[] = [
   'demande-diagnostic',
   'carrousel-des-interlocuteurs',
   'equipe-biz-dev',
+  'demande-aide-mon-aide-cyber',
 ];
