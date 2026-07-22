@@ -54,4 +54,8 @@
 >
   <slot name="pictogram" slot="pictogram"></slot>
   <slot name="description" slot="description"></slot>
+  <hgroup slot="seo">
+    <h3><a {href}>{title}</a></h3>
+    <p>{descriptionTexte}</p>
+  </hgroup>
 </dsfr-tile>
