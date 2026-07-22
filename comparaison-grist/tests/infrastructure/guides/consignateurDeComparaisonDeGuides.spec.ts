@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { ConsignateurDeComparaisonDeGuides } from '../../src/infrastructure/consignateurDeComparaisonDeGuides';
-import { ComparaisonDeGuides, Guide } from '../../src/metier/guides/guide.type';
+import { ConsignateurDeComparaisonDeGuides } from '../../../src/infrastructure/guides/consignateurDeComparaisonDeGuides';
+import { ComparaisonDeGuides, Guide } from '../../../src/metier/guides/guide.type';
 
 export const guideZeroTrust: Guide = {
   id: 'zero-trust',
