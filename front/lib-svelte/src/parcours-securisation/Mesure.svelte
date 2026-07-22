@@ -11,6 +11,7 @@
   import type { Mesure } from './mesure';
   import PriseEnCompteMesure from './PriseEnCompteMesure.svelte';
   import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
+  import TutorielMesure from './TutorielMesure.svelte';
 
   let mesure: Mesure | undefined = $state();
 
@@ -143,28 +144,8 @@
           {/if}
         </div>
 
-        <div class="contenu-section comment-faire">
-          <h2>Comment faire concrètement</h2>
-          <dsfr-card
-            hasBadge
-            title={mesure.tutoriel?.titre ?? 'Titre'}
-            horizontal
-            actionMarkup="button"
-            src={mesure.tutoriel?.image ?? '/assets/images/image-generique.avif'}
-            imageRatio="16x9"
-            horizontalProportion="tier"
-            size="lg"
-          >
-            <dsfr-badge slot="badgesgroup" label="Tutoriel" type="accent" accent="purple-glycine"></dsfr-badge>
-          </dsfr-card>
-          {#if mesure.liens?.length > 0}
-            <div class="section-aide">
-              <p class="texte-article-lg">Pour aller plus loin</p>
-              {#each mesure.liens as lien (lien.libelle)}
-                <msc-lien href={lien.url} libelle={lien.libelle}></msc-lien>
-              {/each}
-            </div>
-          {/if}
+        <TutorielMesure {mesure} />
+        <div class="contenu-section avis-utilisateur">
           <div class="section-aide retour">
             <div class="texte-information-avis-utilisateur">
               <span class="titre-avis"><b>Ce contenu vous a-t-il aidé ?</b></span>
@@ -302,22 +283,8 @@
       }
     }
 
-    dsfr-card {
-      min-height: 0;
-      margin-bottom: 1.5rem;
-
-      dsfr-badge {
-        margin-bottom: 0.75rem;
-      }
-    }
-
     .section-aide {
       margin-bottom: 3rem;
-
-      .texte-article-lg {
-        font-weight: bold;
-        color: var(--text-title-grey);
-      }
 
       hr {
         margin-block: 1rem;
