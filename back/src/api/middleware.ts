@@ -71,8 +71,11 @@ export const fabriqueMiddleware = ({
   };
 
   const verifieJWTNavigation = async (requete: Request, reponse: Response, suite: NextFunction) => {
+    const redirigeVersConnexion = () =>
+      reponse.redirect(`/connexion?urlRedirection=${encodeURIComponent(requete.originalUrl)}`);
+
     if (!requete.session?.token) {
-      reponse.redirect('/connexion');
+      redirigeVersConnexion();
       return;
     }
 
@@ -80,7 +83,7 @@ export const fabriqueMiddleware = ({
       adaptateurJWT.decode(requete.session.token);
       suite();
     } catch {
-      reponse.redirect('/connexion');
+      redirigeVersConnexion();
     }
   };
 
