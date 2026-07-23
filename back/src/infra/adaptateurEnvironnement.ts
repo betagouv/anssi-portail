@@ -85,6 +85,9 @@ type AdaptateurEnvironnement = {
     parcoursDeSecurisation: () => {
       estActif: () => boolean;
     };
+    nouvelleDA: () => {
+      estActive: () => boolean;
+    };
   };
   rechercheEntreprise: () => {
     apiUrl: () => string;
@@ -275,6 +278,9 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     }),
     parcoursDeSecurisation: () => ({
       estActif: () => process.env.FEATURE_FLAG_PARCOURS_SECURISATION === 'true',
+    }),
+    nouvelleDA: () => ({
+      estActive: () => process.env.FEATURE_FLAG_NOUVELLE_DA === 'true',
     }),
   }),
   rechercheEntreprise: () => ({
