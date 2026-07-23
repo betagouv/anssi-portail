@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Lien from '../ui/Lien.svelte';
-  import Modale from '../ui/Modale.svelte';
-  import type { Tutoriel } from './mesure';
+  import Lien from '../../ui/Lien.svelte';
+  import Modale from '../../ui/Modale.svelte';
+  import type { Tutoriel } from './../mesure';
 
   let { tutoriel, estOuverte = $bindable() }: { tutoriel: Tutoriel; estOuverte: boolean } = $props();
 </script>

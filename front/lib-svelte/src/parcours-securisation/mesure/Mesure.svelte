@@ -2,15 +2,15 @@
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import CelluleExigenceNis2 from '../nis2/tableaux/CelluleExigenceNis2.svelte';
-  import Accordeon from '../ui/Accordeon.svelte';
-  import Bouton from '../ui/Bouton.svelte';
-  import FilAriane from '../ui/FilAriane.svelte';
-  import Heros from '../ui/Heros.svelte';
-  import { storeAvisUtilisateur, type AvisUtilisateur } from './avisUtilisateur.store';
-  import type { Mesure } from './mesure';
-  import PriseEnCompteMesure from './PriseEnCompteMesure.svelte';
-  import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
+  import CelluleExigenceNis2 from '../../nis2/tableaux/CelluleExigenceNis2.svelte';
+  import Accordeon from '../../ui/Accordeon.svelte';
+  import Bouton from '../../ui/Bouton.svelte';
+  import FilAriane from '../../ui/FilAriane.svelte';
+  import Heros from '../../ui/Heros.svelte';
+  import { storeAvisUtilisateur, type AvisUtilisateur } from './../avisUtilisateur.store';
+  import type { Mesure } from './../mesure';
+  import PriseEnCompteMesure from './../PriseEnCompteMesure.svelte';
+  import InterlocuteursParcoursSecurisation from './../InterlocuteursParcoursSecurisation.svelte';
   import TutorielMesure from './TutorielMesure.svelte';
 
   let mesure: Mesure | undefined = $state();
@@ -222,8 +222,8 @@
 {/if}
 
 <style lang="scss">
-  @use '../../../assets/styles/responsive' as *;
-  @use '../../../assets/styles/grille' as *;
+  @use '../../../../assets/styles/responsive' as *;
+  @use '../../../../assets/styles/grille' as *;
 
   * {
     box-sizing: border-box;
