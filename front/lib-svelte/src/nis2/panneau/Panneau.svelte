@@ -51,8 +51,7 @@
       kind="secondary"
       use:clic={() => ($etatPanneau.menuComparaisonAffiche = true)}
     ></dsfr-button>
-    <Modale bind:estOuverte={$etatPanneau.menuComparaisonAffiche}>
-      <h4>Comparer</h4>
+    <Modale bind:estOuverte={$etatPanneau.menuComparaisonAffiche} titre="Comparer">
       <PanneauComparaison
         bind:sensComparaison
         bind:referentielSelectionne
@@ -78,8 +77,7 @@
       kind="secondary"
       use:clic={() => ($etatPanneau.menuFiltresAffiche = true)}
     ></dsfr-button>
-    <Modale bind:estOuverte={$etatPanneau.menuFiltresAffiche}>
-      <h4>Filtrer le tableau</h4>
+    <Modale bind:estOuverte={$etatPanneau.menuFiltresAffiche} titre="Filtrer le tableau">
       <PanneauFiltres {source} cible={referentielSelectionne} {estBureau} />
       {#snippet actions()}
         <dsfr-button
