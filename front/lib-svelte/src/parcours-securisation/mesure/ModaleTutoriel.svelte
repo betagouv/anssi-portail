@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Bouton from '../../ui/Bouton.svelte';
   import Lien from '../../ui/Lien.svelte';
   import Modale from '../../ui/Modale.svelte';
   import type { Tutoriel } from './../mesure';
@@ -6,11 +7,7 @@
   let { tutoriel, estOuverte = $bindable() }: { tutoriel: Tutoriel; estOuverte: boolean } = $props();
 </script>
 
-<Modale bind:estOuverte>
-  <h4>
-    {tutoriel.titre}
-  </h4>
-
+<Modale bind:estOuverte titre={tutoriel.titre} icone="arrow-right-line">
   {#if tutoriel.description}
     <p class="texte-standard-md">{tutoriel.description}</p>
   {/if}
@@ -37,13 +34,13 @@
       <Lien href={tutoriel.lienPourAllerPlusLoin.url} libelle={tutoriel.lienPourAllerPlusLoin.libelle}></Lien>
     </div>
   {/if}
+
+  {#snippet actions()}
+    <Bouton etire libelle="Terminer" surClic={() => (estOuverte = false)} />
+  {/snippet}
 </Modale>
 
 <style lang="scss">
-  h4 {
-    margin-bottom: 1rem;
-  }
-
   .bloc-note {
     margin-bottom: 1.5rem;
   }

@@ -10,8 +10,7 @@
   let { estOuverte = $bindable() }: Props = $props();
 </script>
 
-<Modale bind:estOuverte>
-  <h2 class="fr-h4">🎉 Bravo, vous avez pris votre Cyberdépart</h2>
+<Modale bind:estOuverte titre="🎉 Bravo, vous avez pris votre Cyberdépart">
   <div class="corps">
     <img
       src="/assets/images/parcours-securisation/badge-cyberdepart.svg"
@@ -31,9 +30,6 @@
 </Modale>
 
 <style lang="scss">
-  .fr-h4 {
-    margin-bottom: 1rem;
-  }
   .corps {
     display: flex;
     flex-direction: column;
