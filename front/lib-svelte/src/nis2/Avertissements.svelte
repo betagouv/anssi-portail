@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { clic } from '../directives/actions.svelte';
+  import Bouton from '../ui/Bouton.svelte';
   import Lien from '../ui/Lien.svelte';
   import Modale from '../ui/Modale.svelte';
 
@@ -49,12 +49,7 @@
       ses missions auprès des entités, notamment dans le cadre de son activité de supervision et de contrôle.
     </p>
     {#snippet actions()}
-      <dsfr-button
-        label="J'ai compris"
-        use:clic={() => {
-          detailsReCyFOuvert = false;
-        }}
-      ></dsfr-button>
+      <Bouton etire libelle="J'ai compris" surClic={() => (detailsReCyFOuvert = false)} />
     {/snippet}
   </Modale>
 {/if}
@@ -66,9 +61,5 @@
 
   .contenu {
     margin: 0px 0 4px;
-  }
-
-  dsfr-button {
-    align-self: flex-end;
   }
 </style>
