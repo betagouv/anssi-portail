@@ -18,6 +18,14 @@ export type LienPourAllerPlusLoin = {
   url: string;
 };
 
+export type Tutoriel = {
+  titre: string;
+  description?: string;
+  étapes: string[];
+  note?: string;
+  lienPourAllerPlusLoin?: LienPourAllerPlusLoin;
+};
+
 export class Mesure {
   constructor(
     readonly id: string,
@@ -30,6 +38,7 @@ export class Mesure {
     readonly risques: Risque[],
     readonly liens: LienPourAllerPlusLoin[],
     readonly exigences: ExigenceNIS2[],
-    readonly idModule: number
+    readonly idModule: number,
+    readonly tutoriels: Tutoriel[]
   ) {}
 }
