@@ -8,7 +8,7 @@
 
   const { mesure }: Props = $props();
   const typeDeLien = $derived(mesure.estPriseEnCompte ? 'secondaire' : 'primaire');
-  const libelleDeLien = $derived(mesure.estPriseEnCompte ? 'Accéder au détail' : 'Prendre en compte');
+  const libelleDeLien = $derived(mesure.estPriseEnCompte ? 'Accéder au détail' : "Passer à l'action");
 </script>
 
 <dsfr-card
