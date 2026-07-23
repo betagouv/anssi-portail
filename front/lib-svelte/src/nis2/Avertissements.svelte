@@ -30,8 +30,7 @@
   </p>
 </dsfr-alert>
 {#if detailsReCyFOuvert}
-  <Modale bind:estOuverte={detailsReCyFOuvert}>
-    <h4>Exigences applicables à NIS&nbsp;2</h4>
+  <Modale bind:estOuverte={detailsReCyFOuvert} titre="Exigences applicables à NIS&nbsp;2">
     <p>
       Le présent outil de comparaison de référentiels est mis à disposition par l’Agence nationale de la sécurité des
       systèmes d'information (ci-après, l’Agence) à titre purement informatif et indicatif, afin de faciliter la
