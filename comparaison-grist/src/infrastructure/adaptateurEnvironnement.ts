@@ -16,14 +16,14 @@ export type AdaptateurEnvironnement = {
 export const adaptateurEnvironnement: AdaptateurEnvironnement = {
   grist: () => ({
     source: () => ({
-      urlDoc: () => process.env.GUIDES_SOURCE_GRIST_URL || '',
-      idTable: () => process.env.GUIDES_SOURCE_GRIST_ID_TABLE || '',
-      cleApi: () => process.env.GUIDES_SOURCE_GRIST_API_KEY || '',
+      urlDoc: () => process.env.SOURCE_GRIST_URL || '',
+      idTable: () => process.env.SOURCE_GRIST_ID_TABLE || '',
+      cleApi: () => process.env.SOURCE_GRIST_API_KEY || '',
     }),
     cible: () => ({
-      urlDoc: () => process.env.GUIDES_CIBLE_GRIST_URL || '',
-      idTable: () => process.env.GUIDES_CIBLE_GRIST_ID_TABLE || '',
-      cleApi: () => process.env.GUIDES_CIBLE_GRIST_API_KEY || '',
+      urlDoc: () => process.env.CIBLE_GRIST_URL || '',
+      idTable: () => process.env.CIBLE_GRIST_ID_TABLE || '',
+      cleApi: () => process.env.CIBLE_GRIST_API_KEY || '',
     }),
   }),
 };

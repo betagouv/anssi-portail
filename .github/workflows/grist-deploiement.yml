@@ -10,17 +10,17 @@ on:
         type: string
         required: true
     secrets:
-      GUIDES_SOURCE_GRIST_URL:
+      SOURCE_GRIST_URL:
         required: true
-      GUIDES_SOURCE_GRIST_ID_TABLE:
+      SOURCE_GRIST_ID_TABLE:
         required: true
-      GUIDES_SOURCE_GRIST_API_KEY:
+      SOURCE_GRIST_API_KEY:
         required: true
-      GUIDES_CIBLE_GRIST_URL:
+      CIBLE_GRIST_URL:
         required: true
-      GUIDES_CIBLE_GRIST_ID_TABLE:
+      CIBLE_GRIST_ID_TABLE:
         required: true
-      GUIDES_CIBLE_GRIST_API_KEY:
+      CIBLE_GRIST_API_KEY:
         required: true
 
 jobs:
@@ -50,12 +50,12 @@ jobs:
       - name: Lance le script de comparaison
         run: pnpm -F comparaison-grist "start:${INPUTS_CIBLE}:compare"
         env:
-          GUIDES_SOURCE_GRIST_URL: ${{ secrets.GUIDES_SOURCE_GRIST_URL }}
-          GUIDES_SOURCE_GRIST_ID_TABLE: ${{ secrets.GUIDES_SOURCE_GRIST_ID_TABLE }}
-          GUIDES_SOURCE_GRIST_API_KEY: ${{ secrets.GUIDES_SOURCE_GRIST_API_KEY }}
-          GUIDES_CIBLE_GRIST_URL: ${{ secrets.GUIDES_CIBLE_GRIST_URL }}
-          GUIDES_CIBLE_GRIST_ID_TABLE: ${{ secrets.GUIDES_CIBLE_GRIST_ID_TABLE }}
-          GUIDES_CIBLE_GRIST_API_KEY: ${{ secrets.GUIDES_CIBLE_GRIST_API_KEY }}
+          SOURCE_GRIST_URL: ${{ secrets.SOURCE_GRIST_URL }}
+          SOURCE_GRIST_ID_TABLE: ${{ secrets.SOURCE_GRIST_ID_TABLE }}
+          SOURCE_GRIST_API_KEY: ${{ secrets.SOURCE_GRIST_API_KEY }}
+          CIBLE_GRIST_URL: ${{ secrets.CIBLE_GRIST_URL }}
+          CIBLE_GRIST_ID_TABLE: ${{ secrets.CIBLE_GRIST_ID_TABLE }}
+          CIBLE_GRIST_API_KEY: ${{ secrets.CIBLE_GRIST_API_KEY }}
           INPUTS_CIBLE: ${{ inputs.cible }}
 
       - name: Sauvegarde l'empreinte source
@@ -82,8 +82,8 @@ jobs:
         id: copie
         run: |
           curl --request POST \
-            --url ${{ secrets.GUIDES_CIBLE_GRIST_URL }}/replace \
-            --header 'authorization: Bearer ${{ secrets.GUIDES_CIBLE_GRIST_API_KEY }}' \
+            --url ${{ secrets.CIBLE_GRIST_URL }}/replace \
+            --header 'authorization: Bearer ${{ secrets.CIBLE_GRIST_API_KEY }}' \
             --header 'content-type: application/json' \
             --data "{
               \"sourceDocId\": \"${EMPREINTE}\"
