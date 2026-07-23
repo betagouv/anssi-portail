@@ -49,7 +49,7 @@
       <Bouton
         desactive={priseEnCompteEnCours}
         etire={true}
-        libelle="Prendre en compte"
+        libelle="Passer à l'action"
         surClic={prendEnCompte}
         type="primaire"
       />
