@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@sentry/browser": "^10.48.0",
-    "@sentry/vite-plugin": "^5.2.0",
+    "@sentry/vite-plugin": "^5.4.0",
     "axios": "catalog:",
     "dompurify": "^3.4.11",
     "entities": "catalog:",
