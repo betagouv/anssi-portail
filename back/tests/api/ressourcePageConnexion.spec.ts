@@ -46,6 +46,19 @@ describe('La ressource de la page connexion', () => {
       assert.equal(nomPageDemande!, 'connexion');
     });
 
+    it('accepte une URL de redirection vers une page connectée', async () => {
+      const reponse = await request(serveur).get('/connexion').query({ urlRedirection: '/favoris?tri=recent' });
+
+      assert.equal(reponse.status, 200);
+    });
+
+    it('refuse une URL de redirection non autorisée', async () => {
+      const reponse = await request(serveur).get('/connexion').query({ urlRedirection: 'https://example.com/favoris' });
+
+      assert.equal(reponse.status, 302);
+      assert.equal(reponse.headers.location, '/connexion');
+    });
+
     it("supprime la session de l'utilisateur", async () => {
       const cookieSession = encodeSession({ token: 'token-session' });
 
