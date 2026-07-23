@@ -11,6 +11,7 @@ jobs:
     uses: ./.github/workflows/grist-deploiement.yml
     with:
       cible: guides
+      environnement: DEPLOIEMENT_GUIDES
     secrets:
       SOURCE_GRIST_URL: ${{ secrets.GUIDES_SOURCE_GRIST_URL }}
       SOURCE_GRIST_ID_TABLE: ${{ secrets.GUIDES_SOURCE_GRIST_ID_TABLE }}
