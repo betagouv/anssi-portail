@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Mesure } from './mesure';
+  import type { Mesure } from './../mesure';
   import ModaleTutoriel from './ModaleTutoriel.svelte';
 
   const { mesure }: { mesure: Mesure } = $props();
