@@ -2,7 +2,7 @@
   import { clic } from '../directives/actions.svelte';
 
   const connexion = () => {
-    sessionStorage.setItem('pagePostConnexion', 'comparaison-maturite');
+    sessionStorage.setItem('pagePostConnexion', '/ma-maturite#comparaison');
   };
 </script>
 
