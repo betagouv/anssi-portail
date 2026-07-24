@@ -41,4 +41,5 @@ export type Module = {
   nombreMesuresTotal: number;
   nombreMesuresPrisesEnCompte: number;
   cibleBadge?: number;
+  mesures: Mesure[];
 };

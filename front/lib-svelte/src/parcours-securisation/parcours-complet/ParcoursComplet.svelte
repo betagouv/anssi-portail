@@ -1,13 +1,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Heros from '../../ui/Heros.svelte';
-  import Lien from '../../ui/Lien.svelte';
   import axios from 'axios';
-  import type { Module } from '../mesure';
+  import type { Mesure, Module } from '../mesure';
   import Progression from '../Progression.svelte';
   import ControleSegmente from '../../navigation/ControleSegmente.svelte';
-  import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '../../navigation/fragmentDeNavigation.svelte';
+  import { creeLeFragmentDeNavigation } from '../../navigation/fragmentDeNavigation.svelte';
   import VueModule from './VueModule.svelte';
+  import VueListeMesures from './VueListeMesures.svelte';
 
   type ModulePrésentation = {
     id: number;
@@ -16,6 +16,7 @@
     cibleBadge?: number;
     nombreMesuresTotal: number;
     nombreMesuresPrisesEnCompte: number;
+    mesures: Mesure[];
   };
 
   let modules: ModulePrésentation[] = $state([]);
@@ -34,27 +35,6 @@
   const totalMesuresPrisesEnCompte = $derived(
     modules.reduce((total, { nombreMesuresPrisesEnCompte }) => (total += nombreMesuresPrisesEnCompte), 0)
   );
-
-  const estEnCours = (module: ModulePrésentation): boolean =>
-    module.nombreMesuresPrisesEnCompte !== module.nombreMesuresTotal && module.nombreMesuresPrisesEnCompte > 0;
-
-  const estTerminé = (module: ModulePrésentation): boolean =>
-    module.nombreMesuresPrisesEnCompte === module.nombreMesuresTotal;
-
-  const moduleCyberdépartNonCommencé = (module: ModulePrésentation): boolean =>
-    module.nombreMesuresPrisesEnCompte === 0 && module.id === 1;
-
-  const typeLienCarte = (module: ModulePrésentation) => {
-    if (estTerminé(module)) return 'tertiaire';
-    if (estEnCours(module)) return 'secondaire';
-    return 'primaire';
-  };
-
-  const libelléLienCarte = (module: ModulePrésentation) => {
-    if (moduleCyberdépartNonCommencé(module)) return 'Prendre mon Cyberdépart';
-    if (estEnCours(module)) return 'Continuer ma progression';
-    return 'Accéder aux mesures';
-  };
 
   let fragmentDeNavigation = creeLeFragmentDeNavigation();
 
@@ -90,7 +70,11 @@
   </div>
 </dsfr-container>
 <dsfr-container>
-  <VueModule {modules} />
+  {#if vueCourante === 'mesures'}
+    <VueListeMesures {modules} />
+  {:else}
+    <VueModule {modules} />
+  {/if}
 </dsfr-container>
 
 <style lang="scss">
