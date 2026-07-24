@@ -111,7 +111,22 @@
   });
 </script>
 
-<ControleSegmente {elements} bind:idÉlémentSélectionné {fragmentDeNavigation} {lorsDuClic}></ControleSegmente>
+<div class="conteneur">
+  <ControleSegmente {elements} bind:idÉlémentSélectionné {fragmentDeNavigation} {lorsDuClic}></ControleSegmente>
+</div>
 <div bind:this={composant}>
   {@render children?.()}
 </div>
+
+<style>
+  .conteneur {
+    padding-block: 1rem;
+    background: var(--background-default-grey);
+    position: sticky;
+    top: 0;
+    z-index: calc(var(--ground) + 751);
+
+    display: grid;
+    place-items: center;
+  }
+</style>
