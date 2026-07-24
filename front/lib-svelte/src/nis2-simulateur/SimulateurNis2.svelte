@@ -1,5 +1,20 @@
 <script lang="ts">
-  import { questionnaireStore } from './stores/questionnaire.store';
+  import { profilStore } from '../stores/profil.store';
+  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import Heros from '../ui/Heros.svelte';
+  import { fabriqueFilAriane } from '../ui/filAriane';
+  import EtapeActivites from './etapes/EtapeActivites.svelte';
+  import EtapeAppartenanceUE from './etapes/EtapeAppartenanceUE.svelte';
+  import EtapeDesignation from './etapes/EtapeDesignation.svelte';
+  import EtapeLocalisationEtablissementPrincipal from './etapes/EtapeLocalisationEtablissementPrincipal.svelte';
+  import EtapeLocalisationServicesNumeriques from './etapes/EtapeLocalisationServicesNumeriques.svelte';
+  import EtapePrealable from './etapes/EtapePrealable.svelte';
+  import EtapeSecteursActivite from './etapes/EtapeSecteursActivite.svelte';
+  import EtapeSousSecteursActivite from './etapes/EtapeSousSecteursActivite.svelte';
+  import EtapeTailleEntitePrivee from './etapes/EtapeTailleEntitePrivee.svelte';
+  import EtapeTypeStructure from './etapes/EtapeTypeStructure.svelte';
+  import EtapeResultat from './resultat/EtapeResultat.svelte';
+  import { estUnSecteurAvecDesSousSecteurs } from './stores/SecteurActivite.predicats';
   import {
     valideActivites,
     valideEtapeAppartenanceUE,
@@ -12,29 +27,28 @@
     valideTailleEntitePrivee,
     valideTypeStructure,
   } from './stores/actions';
-  import EtapePrealable from './etapes/EtapePrealable.svelte';
-  import Hero from '../ui/Hero.svelte';
-  import EtapeDesignation from './etapes/EtapeDesignation.svelte';
-  import EtapeAppartenanceUE from './etapes/EtapeAppartenanceUE.svelte';
-  import EtapeTypeStructure from './etapes/EtapeTypeStructure.svelte';
-  import EtapeTailleEntitePrivee from './etapes/EtapeTailleEntitePrivee.svelte';
-  import EtapeSecteursActivite from './etapes/EtapeSecteursActivite.svelte';
-  import EtapeSousSecteursActivite from './etapes/EtapeSousSecteursActivite.svelte';
-  import { estUnSecteurAvecDesSousSecteurs } from './stores/SecteurActivite.predicats';
-  import EtapeActivites from './etapes/EtapeActivites.svelte';
   import { selectSecteursPourSaisieActivites } from './stores/questionnaire.selecteurs.ts';
-  import EtapeLocalisationEtablissementPrincipal from './etapes/EtapeLocalisationEtablissementPrincipal.svelte';
-  import EtapeLocalisationServicesNumeriques from './etapes/EtapeLocalisationServicesNumeriques.svelte';
-  import EtapeResultat from './resultat/EtapeResultat.svelte';
+  import { questionnaireStore } from './stores/questionnaire.store';
   import { questionnaireAvecUndo } from './stores/questionnaireAvecUndo.store';
+
+  const propriétésFilAriane: PropriétésFilAriane = {
+    feuille: 'Simulateur',
+    branche: { nom: 'Directive NIS 2', lien: '/nis2' },
+    fondSombre: true,
+  };
 </script>
 
-<Hero
-  titre="Mon entité est-elle concernée&nbsp;?"
+<Heros
   description="Déterminez si votre entité est régulée par la directive NIS&nbsp;2."
-  arianeBranche={{ nom: 'Directive NIS 2', lien: '/nis2' }}
-  ariane="Simulateur"
-/>
+  format="banniere"
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  theme="sombre"
+  titre="Mon entité est-elle concernée&nbsp;?"
+>
+  {#snippet filAriane()}
+    <FilAriane {...propriétésFilAriane} />
+  {/snippet}
+</Heros>
 
 <dsfr-container>
   {#if $questionnaireAvecUndo.etapeCourante === 'prealable'}
