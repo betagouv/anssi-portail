@@ -16,7 +16,7 @@
     taille?: 'sm' | 'md' | 'lg';
     telechargement?: string;
     telechargementDetails?: string;
-    type?: 'primaire' | 'secondaire' | 'secondaire-inverse' | 'tertiaire';
+    type?: 'primaire' | 'primaire-inverse' | 'secondaire' | 'secondaire-inverse' | 'tertiaire';
     source?: string;
     cible?: string;
     classe?: string;
@@ -50,6 +50,7 @@
     type
       ? {
           primaire: 'primary',
+          'primaire-inverse': 'inverted-primary',
           secondaire: 'secondary',
           'secondaire-inverse': 'inverted-secondary',
           tertiaire: 'tertiary',
