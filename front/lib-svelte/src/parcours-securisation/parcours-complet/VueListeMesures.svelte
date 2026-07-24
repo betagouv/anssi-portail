@@ -32,7 +32,13 @@
         {mesure.titre}
       </div>
       <div class="lien">
-        <Lien taille="sm" apparence="bouton" href={`/mesures/${mesure.id}`} libelle={"Passer à l'action"} />
+        <Lien
+          taille="sm"
+          apparence="bouton"
+          type={mesure.estPriseEnCompte ? 'tertiaire' : 'primaire'}
+          href={`/mesures/${mesure.id}`}
+          libelle={mesure.estPriseEnCompte ? 'Accédez aux détails' : "Passer à l'action"}
+        />
       </div>
     </li>
   {/each}
@@ -50,9 +56,9 @@
     gap: 1rem;
     padding-block: 1rem;
     border-bottom: 1px solid var(--border-default-grey);
-    align-items: center;
 
     @include a-partir-de(md) {
+      align-items: center;
       flex-direction: row;
       justify-content: space-between;
       gap: 0.5rem;
@@ -60,7 +66,7 @@
   }
 
   .lien {
-    min-width: 144px;
+    min-width: 10rem;
   }
 
   .titre-badge {
