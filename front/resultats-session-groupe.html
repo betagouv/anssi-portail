@@ -4,26 +4,4 @@ layout: defaut
 titreHtml: 'Résultats de session de groupe | MesServicesCyber'
 ---
 
-<script type="application/json" id="donnees-fil-ariane">
-  {
-    "branche": {
-      "nom": "Test de maturité cyber",
-      "lien": "/test-maturite/"
-    },
-    "feuille": "Session de groupe",
-    "fondSombre": true
-  }
-</script>
-
-<dsfr-container class="chapeau fond-sombre">
-  <div class="contenu-section">
-    {% include composant-svelte.html id="fil-ariane" %}
-    <h1 class="alternatif-xs-ns">Résultat de maturité cyber</h1>
-    <p class="texte-chapo-xl-ns">
-      Ce résultat nous permet de vous guider et de vous fournir les informations
-      et les outils essentiels pour agir sur votre maturité cyber.
-    </p>
-  </div>
-</dsfr-container>
-
 {% include composant-svelte.html id="resultats-session-groupe" %}
