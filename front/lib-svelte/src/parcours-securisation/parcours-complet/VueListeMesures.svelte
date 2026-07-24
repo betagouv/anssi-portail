@@ -19,12 +19,15 @@
   {#each mesures as mesure (mesure.id)}
     <li>
       <div>{mesure.titre}</div>
-      <Lien apparence="bouton" href={`/mesures/${mesure.id}`} libelle={"Passer à l'action"} />
+      <div class="lien">
+        <Lien taille="sm" apparence="bouton" href={`/mesures/${mesure.id}`} libelle={"Passer à l'action"} />
+      </div>
     </li>
   {/each}
 </ul>
 
 <style lang="scss">
+  @use '../../../../assets/styles/responsive' as *;
   ul {
     padding: 0;
     margin: 0;
@@ -35,5 +38,16 @@
     gap: 1rem;
     padding-block: 1rem;
     border-bottom: 1px solid var(--border-default-grey);
+    align-items: center;
+
+    @include a-partir-de(md) {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+  }
+
+  .lien {
+    min-width: 144px;
   }
 </style>
