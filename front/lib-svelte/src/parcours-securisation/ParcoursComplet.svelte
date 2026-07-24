@@ -5,6 +5,8 @@
   import axios from 'axios';
   import type { Module } from './mesure';
   import Progression from './Progression.svelte';
+  import ControleSegmente from '../navigation/ControleSegmente.svelte';
+  import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
 
   type ModulePrésentation = {
     id: number;
@@ -52,6 +54,10 @@
     if (estEnCours(module)) return 'Continuer ma progression';
     return 'Accéder aux mesures';
   };
+
+  let fragmentDeNavigation = creeLeFragmentDeNavigation();
+
+  let vueCourante = $derived(fragmentDeNavigation.section);
 </script>
 
 <Heros
@@ -69,6 +75,20 @@
   <div class="progression-totale">
     <Progression actuel={totalMesuresPrisesEnCompte} max={totalMesures} />
   </div>
+</dsfr-container>
+<dsfr-container>
+  <div class="conteneur-controle-segmente">
+    <ControleSegmente
+      elements={[
+        { id: 'modules', titre: 'Modules', icone: 'layout-grid-line', ancre: 'modules' },
+        { id: 'mesures', titre: 'Liste', icone: 'list-check', ancre: 'mesures' },
+      ]}
+      bind:idÉlémentSélectionné={vueCourante}
+      {fragmentDeNavigation}
+    ></ControleSegmente>
+  </div>
+</dsfr-container>
+<dsfr-container>
   <div class="grille">
     {#each modules as module, index (module.titre)}
       <div class="carte" class:mise-en-avant={index === 0}>
@@ -203,5 +223,12 @@
   }
   .progression-totale {
     padding-block: 2rem;
+  }
+
+  .conteneur-controle-segmente {
+    background: var(--background-default-grey);
+    margin-bottom: 2rem;
+    display: flex;
+    place-items: 'flex-start';
   }
 </style>
