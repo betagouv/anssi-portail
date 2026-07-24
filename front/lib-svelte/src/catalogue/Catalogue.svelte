@@ -1,12 +1,15 @@
 <script lang="ts">
+  import { estServeur } from '$plateforme/environnement';
   import { onMount, untrack } from 'svelte';
   import ControleSegmente from '../navigation/ControleSegmente.svelte';
   import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '../stores/profil.store';
   import ChampRecherche from '../ui/ChampRecherche.svelte';
+  import { fabriqueFilAriane } from '../ui/filAriane';
+  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
-  import Hero from '../ui/Hero.svelte';
+  import Heros from '../ui/Heros.svelte';
   import CarteItem from './CarteItem.svelte';
   import {
     type BesoinCyber,
@@ -20,10 +23,12 @@
   import FiltreBesoin from './FiltreBesoin.svelte';
   import FiltreSource from './FiltreSource.svelte';
   import FiltreTypologie from './FiltreTypologie.svelte';
-  import { CollectionGuide, Langue, type Guide } from './Guide.types';
+  import { CollectionGuide, type Guide, Langue } from './Guide.types';
   import FiltreCollection from './guides/FiltreCollection.svelte';
   import FiltreLangue from './guides/FiltreLangue.svelte';
+  import { guidePourCarteItem } from './guides/guide';
   import InciteASAbonner from './guides/InciteASAbonner.svelte';
+  import { catalogueStore } from './stores/catalogue.store';
   import { catalogueFiltre } from './stores/catalogueFiltre.store';
   import { chargeGuidesDansLeStore, guidesStore } from './stores/guides/guides.store';
   import { guidesFiltres } from './stores/guides/guidesFiltres.store';
@@ -35,9 +40,6 @@
   import { rechercheParTypologie } from './stores/rechercheParTypologie.store';
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
-  import { guidePourCarteItem } from './guides/guide';
-  import { catalogueStore } from './stores/catalogue.store';
-  import { estServeur } from '$plateforme/environnement';
 
   type Props = {
     itemsCyber?: ItemCyber[];
@@ -126,13 +128,21 @@
     }
     return idÉlémentSélectionné === 'guides' ? $guidesFiltres.resultats : $catalogueFiltre.resultats;
   });
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Explorer le catalogue', fondSombre: true };
 </script>
 
-<Hero
-  titre="Les services et ressources cyber"
+<Heros
+  cacheFilAriane={!!$profilStore}
   description="Trouvez les services et les ressources adaptés à vos besoins."
-  ariane={$profilStore ? undefined : 'Explorer le catalogue'}
-/>
+  format="banniere"
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  theme="sombre"
+  titre="Les services et ressources cyber"
+>
+  {#snippet filAriane()}
+    <FilAriane {...propriétésFilAriane} />
+  {/snippet}
+</Heros>
 
 <div class="barre-filtre-besoin">
   <div class="contenu-section">

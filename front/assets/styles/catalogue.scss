@@ -9,7 +9,7 @@
   position: relative;
 }
 
-.chapeau.fond-sombre {
+.banniere.fond-sombre {
   padding-bottom: 90px;
   p {
     margin-bottom: 24px;
@@ -19,10 +19,14 @@
 .barre-filtre-besoin {
   display: none;
   position: relative;
-  top: -66px;
-  margin-bottom: -66px;
   margin-left: 24px;
   margin-right: 24px;
+
+  // [ANCIENNE-DA] À supprimer à terme
+  dsfr-container + & {
+    top: -66px;
+    margin-bottom: -66px;
+  }
 
   @include a-partir-de(lg) {
     display: block;
