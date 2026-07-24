@@ -1,7 +1,8 @@
 <script lang="ts">
   import { estServeur } from '$plateforme/environnement';
   import NavigationTertiaire from '../../navigation/NavigationTertiaire.svelte';
-  import FilAriane from '../../ui/FilAriane.svelte';
+  import { fabriqueFilAriane } from '../../ui/filAriane';
+  import FilAriane, { type Props as PropriétésFilAriane } from '../../ui/FilAriane.svelte';
   import Heros from '../../ui/Heros.svelte';
   import Proteger from '../Proteger.svelte';
   import Solutions from './Solutions.svelte';
@@ -19,6 +20,8 @@
     },
   ];
   let lienActif = $state('#proteger');
+
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Protéger ma collectivité', fondSombre: true };
 </script>
 
 <Heros
@@ -31,9 +34,10 @@
   illustrationSource="/assets/images/personne-qui-cogite.svg"
   illustrationAlt=""
   cacheIllustration={false}
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
 >
   {#snippet filAriane()}
-    <FilAriane fondSombre={true} feuille="Protéger ma collectivité" />
+    <FilAriane {...propriétésFilAriane} />
   {/snippet}
 </Heros>
 
