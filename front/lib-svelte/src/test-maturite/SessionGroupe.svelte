@@ -2,11 +2,12 @@
   import axios from 'axios';
   import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
+  import { fabriqueFilAriane } from '../ui/filAriane';
+  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
+  import Heros from '../ui/Heros.svelte';
   import ModaleNouvelleSessionGroupe from './ModaleNouvelleSessionGroupe.svelte';
   import type { ReponseCreationSessionGroupe } from './SessionGroupe';
-  import Heros from '../ui/Heros.svelte';
-  import FilAriane from '../ui/FilAriane.svelte';
 
   let codeSession = '';
   let creationNouvelleSessionEnCours = false;
@@ -42,6 +43,15 @@
     }
     codeSession = codeSession.toUpperCase();
   }
+
+  const propriétésFilAriane: PropriétésFilAriane = {
+    fondSombre: true,
+    feuille: 'Session de groupe',
+    branche: {
+      nom: 'Test de maturité cyber',
+      lien: '/test-maturite/',
+    },
+  };
 </script>
 
 <Heros
@@ -49,16 +59,10 @@
   description="Déterminez la maturité cyber de votre organisation en 5 minutes."
   format="banniere"
   theme="sombre"
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
 >
   {#snippet filAriane()}
-    <FilAriane
-      fondSombre={true}
-      feuille="Session de groupe"
-      branche={{
-        nom: 'Test de maturité cyber',
-        lien: '/test-maturite/',
-      }}
-    />
+    <FilAriane {...propriétésFilAriane} />
   {/snippet}
 </Heros>
 
