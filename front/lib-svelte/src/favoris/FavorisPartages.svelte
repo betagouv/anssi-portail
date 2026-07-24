@@ -1,5 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
+  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import { onMount } from 'svelte';
   import type { ItemCyber } from '../catalogue/Catalogue.types';
   import type { Guide } from '../catalogue/Guide.types';
@@ -7,8 +8,9 @@
   import { chargeGuidesDansLeStore, guidesStore } from '../catalogue/stores/guides/guides.store';
   import { listeItemsFavoris } from '../catalogue/stores/itemsCatalogueEnFavori';
   import { profilStore } from '../stores/profil.store';
-  import Hero from '../ui/Hero.svelte';
+  import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
+  import { fabriqueFilAriane } from '../ui/filAriane';
   import ContenuFavoris from './ContenuFavoris.svelte';
 
   let prenom: string = '';
@@ -34,13 +36,20 @@
       itemsCyberPartages = [];
     }
   });
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Services et ressources partagés', fondSombre: true };
 </script>
 
-<Hero
+<Heros
   description={`Cette liste de services et ressources est partagée par ${prenom}`}
+  format="banniere"
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  theme="sombre"
   titre="Services et ressources partagés"
-  ariane="Services et ressources partagés"
-/>
+>
+  {#snippet filAriane()}
+    <FilAriane {...propriétésFilAriane} />
+  {/snippet}
+</Heros>
 
 <dsfr-container>
   <div class="contenu-section">
