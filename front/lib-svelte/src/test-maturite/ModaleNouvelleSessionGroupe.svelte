@@ -42,11 +42,7 @@
   };
 </script>
 
-<Modale bind:estOuverte={modaleEstOuverte}>
-  <h4>
-    <lab-anssi-icone nom="team-fill" taille="lg"></lab-anssi-icone>
-    Nouvelle session de groupe
-  </h4>
+<Modale bind:estOuverte={modaleEstOuverte} titre="Nouvelle session de groupe" icone="team-fill">
   <div class="information">
     <p>
       Partagez ce code ou le QR code aux participants pour leur permettre d’accéder à la session de test de maturité
@@ -103,15 +99,6 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
-
-  h4 {
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: bold;
-    color: #161616;
-    margin: 16px 0 16px;
-    padding: 0;
-  }
 
   p {
     margin: 0 0 16px;

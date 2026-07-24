@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { clic } from '../directives/actions.svelte';
+  import Bouton from '../ui/Bouton.svelte';
   import Lien from '../ui/Lien.svelte';
   import Modale from '../ui/Modale.svelte';
 
@@ -30,8 +30,7 @@
   </p>
 </dsfr-alert>
 {#if detailsReCyFOuvert}
-  <Modale bind:estOuverte={detailsReCyFOuvert}>
-    <h4>Exigences applicables à NIS&nbsp;2</h4>
+  <Modale bind:estOuverte={detailsReCyFOuvert} titre="Exigences applicables à NIS&nbsp;2">
     <p>
       Le présent outil de comparaison de référentiels est mis à disposition par l’Agence nationale de la sécurité des
       systèmes d'information (ci-après, l’Agence) à titre purement informatif et indicatif, afin de faciliter la
@@ -50,12 +49,7 @@
       ses missions auprès des entités, notamment dans le cadre de son activité de supervision et de contrôle.
     </p>
     {#snippet actions()}
-      <dsfr-button
-        label="J'ai compris"
-        use:clic={() => {
-          detailsReCyFOuvert = false;
-        }}
-      ></dsfr-button>
+      <Bouton etire libelle="J'ai compris" surClic={() => (detailsReCyFOuvert = false)} />
     {/snippet}
   </Modale>
 {/if}
@@ -67,9 +61,5 @@
 
   .contenu {
     margin: 0px 0 4px;
-  }
-
-  dsfr-button {
-    align-self: flex-end;
   }
 </style>

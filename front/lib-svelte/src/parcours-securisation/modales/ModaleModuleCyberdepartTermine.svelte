@@ -10,8 +10,7 @@
   let { estOuverte = $bindable() }: Props = $props();
 </script>
 
-<Modale bind:estOuverte>
-  <h2 class="fr-h4">🎉 Bravo !</h2>
+<Modale bind:estOuverte titre="🎉 Bravo !">
   <div class="corps">
     <p class="texte-standard-md">
       Vous avez appliqué les 13 mesures du Cyberdépart. Vous avez posé les bases de votre cybersécurité.
@@ -34,9 +33,6 @@
 </Modale>
 
 <style lang="scss">
-  .fr-h4 {
-    margin-bottom: 1rem;
-  }
   .corps {
     gap: 1.5rem;
   }

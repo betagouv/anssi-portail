@@ -11,8 +11,12 @@
 </script>
 
 <Tuile {titre}>
-  <img slot="pictogram" src={`/assets/images/${image}.svg`} width="96" height="96" alt={titre} />
-  <span slot="description" class="mesure fr-h2">{mesure}</span>
+  {#snippet illustration()}
+    <img src={`/assets/images/${image}.svg`} width="96" height="96" alt={titre} />
+  {/snippet}
+  {#snippet description()}
+    <span class="mesure fr-h2">{mesure}</span>
+  {/snippet}
 </Tuile>
 
 <style lang="scss">

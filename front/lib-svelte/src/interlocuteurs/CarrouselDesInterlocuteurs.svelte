@@ -12,46 +12,41 @@
 <lab-anssi-carrousel-tuiles class={mode}>
   <Tuile
     titre="Contacts cyber"
-    descriptionTexte="Des contacts cyber de proximité pour vous orienter et répondre à vos questions."
+    description="Des contacts cyber de proximité pour vous orienter et répondre à vos questions."
     href="/contacts"
     {compact}
     élargi
   >
-    <img
-      slot="pictogram"
-      src="/assets/images/trois-mains-croisees.svg"
-      width={tailleImage}
-      height={tailleImage}
-      alt="Contacts cyber"
-    />
+    {#snippet illustration()}
+      <img
+        src="/assets/images/trois-mains-croisees.svg"
+        width={tailleImage}
+        height={tailleImage}
+        alt="Contacts cyber"
+      />
+    {/snippet}
   </Tuile>
   <Tuile
     titre="Prestataires qualifiés et labellisés"
-    descriptionTexte="Tous les prestataires de confiance et produits/services qualifiés et labellisés afin de vous accompagner sur vos différents enjeux cyber."
+    description="Tous les prestataires de confiance et produits/services qualifiés et labellisés afin de vous accompagner sur vos différents enjeux cyber."
     href="/prestataires-labellises"
     {compact}
     élargi
   >
-    <img
-      slot="pictogram"
-      src="/assets/images/coche-jaune-sur-rond-noir.svg"
-      alt="Prestataires qualifiés et labellisés"
-    />
+    {#snippet illustration()}
+      <img src="/assets/images/coche-jaune-sur-rond-noir.svg" alt="Prestataires qualifiés et labellisés" />
+    {/snippet}
   </Tuile>
   <Tuile
     titre="Financements cyber"
-    descriptionTexte="Bénéficiez d'accompagnements financés ou de subventions pour renforcer la maturité cyber de votre organisation."
+    description="Bénéficiez d'accompagnements financés ou de subventions pour renforcer la maturité cyber de votre organisation."
     href="/financements"
     {compact}
     élargi
   >
-    <img
-      slot="pictogram"
-      src="/assets/images/pile-de-pieces.svg"
-      width={tailleImage}
-      height={tailleImage}
-      alt="Financements cyber"
-    />
+    {#snippet illustration()}
+      <img src="/assets/images/pile-de-pieces.svg" width={tailleImage} height={tailleImage} alt="Financements cyber" />
+    {/snippet}
   </Tuile>
 </lab-anssi-carrousel-tuiles>
 
