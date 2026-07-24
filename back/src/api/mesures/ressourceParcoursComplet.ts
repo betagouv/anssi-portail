@@ -25,6 +25,10 @@ export const ressourceParcoursComplet = ({
           nombreMesuresTotal: module.nombreDeMesures(),
           cibleBadge: module.cibleDéblocageBadgeCyberdépart(),
           nombreMesuresPrisesEnCompte: utilisateur.nombreDeMesuresPrisesEnCompte(module),
+          mesures: module.mesures.map((mesure) => ({
+            ...mesure,
+            estPriseEnCompte: utilisateur.estPriseEnCompte(mesure),
+          })),
         }));
       reponse.send({
         modules: modulesParcoursComplet,
