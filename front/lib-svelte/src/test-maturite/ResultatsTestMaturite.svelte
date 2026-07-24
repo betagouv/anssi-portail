@@ -2,7 +2,9 @@
   import { onMount } from 'svelte';
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import { profilStore } from '../stores/profil.store';
-  import Hero from '../ui/Hero.svelte';
+  import { fabriqueFilAriane } from '../ui/filAriane';
+  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import Heros from '../ui/Heros.svelte';
   import ComparaisonTest from './ComparaisonTest.svelte';
   import HistoriqueTests from './HistoriqueTests.svelte';
   import PropositionRefaireTest from './PropositionRefaireTest.svelte';
@@ -17,6 +19,7 @@
 
   let lienActif: CleOnglet | undefined;
   let idResultatTest: string | undefined;
+  let propriétésFilAriane: PropriétésFilAriane;
 
   const changeOngletActif = () => {
     const ongletRiche = window.location.hash.slice(1).split('/');
@@ -35,13 +38,23 @@
     { label: 'Historique', fragment: '#historique' },
     { label: 'Comparaison avec d’autres entités', fragment: '#comparaison' },
   ];
+  $: propriétésFilAriane = {
+    feuille: $profilStore ? 'Maturité cyber' : 'Test de maturité cyber',
+    fondSombre: true,
+  };
 </script>
 
-<Hero
-  titre="Maturité cyber"
+<Heros
   description="Testez la maturité cyber de votre organisation, suivez vos progrès et comparez-vous aux autres organisations."
-  ariane={$profilStore ? 'Maturité cyber' : 'Test de maturité cyber'}
-/>
+  format="banniere"
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  theme="sombre"
+  titre="Maturité cyber"
+>
+  {#snippet filAriane()}
+    <FilAriane {...propriétésFilAriane} />
+  {/snippet}
+</Heros>
 
 <PropositionRefaireTest />
 
