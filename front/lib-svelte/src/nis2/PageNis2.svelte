@@ -2,7 +2,8 @@
   import { estServeur } from '$plateforme/environnement';
   import { onMount } from 'svelte';
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
-  import FilAriane from '../ui/FilAriane.svelte';
+  import { fabriqueFilAriane } from '../ui/filAriane';
+  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
   import Notice from '../ui/Notice.svelte';
@@ -29,6 +30,7 @@
     { label: 'Documentation et FAQ', fragment: '#documentation' },
   ];
   let lienActif = $state('#presentation');
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Directive NIS 2', fondSombre: true };
 </script>
 
 <Heros
@@ -41,9 +43,10 @@
   illustrationSource="/assets/images/nis2.svg"
   illustrationAlt="NIS2"
   cacheIllustration={!estBureau}
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
 >
   {#snippet filAriane()}
-    <FilAriane fondSombre={true} feuille="Directive NIS 2" />
+    <FilAriane {...propriétésFilAriane} />
   {/snippet}
   {#snippet actions()}
     <Lien
