@@ -4,6 +4,39 @@ permalink: /parcours-approfondir/
 titreHtml: 'Cybersécurité : approfondir ! | MesServicesCyber'
 ---
 
+{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
+{% capture segments_json %}
+[
+  {
+    "id": "noeud-accueil",
+    "label": "Accueil",
+    "href": "/"
+  },
+  {
+    "id": "noeud-parcours-approfondir",
+    "label": "Les services pour approfondir"
+  }
+]
+{% endcapture %}
+<lab-anssi-bandeau-page
+  avec-fil-ariane
+  description="Votre organisation a déjà mis en œuvre des premières actions pour renforcer sa cybersécurité et souhaite approfondir la démarche engagée ? Découvrez des services et ressources sélectionnés par l’ANSSI pour vous aider."
+  liens-fil-ariane="{{segments_json | strip | escape }}"
+  simple
+  titre="Les services pour approfondir"
+>
+  <h1 slot="seo">Les services pour approfondir</h1>
+  <p slot="seo">Votre organisation a déjà mis en œuvre des premières actions pour renforcer sa cybersécurité et souhaite approfondir la démarche engagée ? Découvrez des services et ressources sélectionnés par l’ANSSI pour vous aider.</p>
+  <ol slot="seo">
+    <li>
+      <a href="/">Accueil</a>
+    </li>
+    <li>
+      <span>Les services pour approfondir</span>
+    </li>
+  </ol>
+</lab-anssi-bandeau-page>
+{% else %}
 <script type="application/json" id="donnees-fil-ariane">
   {
     "branche": {
@@ -16,7 +49,6 @@ titreHtml: 'Cybersécurité : approfondir ! | MesServicesCyber'
     "fondSombre": true
   }
 </script>
-
 <dsfr-container class="chapeau fond-sombre">
   <div class="contenu-section">
     {% include composant-svelte.html id="fil-ariane" %}
@@ -38,6 +70,7 @@ titreHtml: 'Cybersécurité : approfondir ! | MesServicesCyber'
     </div>
   </div>
 </dsfr-container>
+{% endif %}
 
 {%assign actions = site.data.parcours-approfondir.actions %}
 <dsfr-container class="sommaire">
