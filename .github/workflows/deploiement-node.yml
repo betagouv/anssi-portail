@@ -40,11 +40,6 @@ jobs:
         with:
           version: 10.24.0
 
-      - name: Construis la lib Svelte
-        run: |
-          pnpm install --frozen-lockfile
-          pnpm --filter @anssi-portail/svelte build
-
       - name: Setup Ruby
         uses: ruby/setup-ruby@afeafc3d1ab54a631816aba4c914a0081c12ff2f # v1.310.0
         with:
@@ -65,6 +60,11 @@ jobs:
         run: |
           clever link "$ID_APP"
           clever env | grep -v "^#" | tr -d '"' >> "$GITHUB_ENV"
+
+      - name: Construis la lib Svelte
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm --filter @anssi-portail/svelte build
 
       - name: Construis avec Jekyll
         run: |
