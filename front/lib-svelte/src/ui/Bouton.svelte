@@ -6,7 +6,13 @@
     etire?: boolean;
     libelle?: string;
     titre?: string;
-    type?: 'primaire' | 'secondaire' | 'secondaire-inverse' | 'tertiaire' | 'tertiaire-sans-bordure';
+    type?:
+      | 'primaire'
+      | 'primaire-inverse'
+      | 'secondaire'
+      | 'secondaire-inverse'
+      | 'tertiaire'
+      | 'tertiaire-sans-bordure';
     taille?: 'sm' | 'md';
     desactive?: boolean;
     boutonSoumission?: boolean;
@@ -32,6 +38,7 @@
   const kind = $derived(
     {
       primaire: 'primary',
+      'primaire-inverse': 'inverted-primary',
       secondaire: 'secondary',
       'secondaire-inverse': 'inverted-secondary',
       'tertiaire-sans-bordure': 'tertiary-no-outline',

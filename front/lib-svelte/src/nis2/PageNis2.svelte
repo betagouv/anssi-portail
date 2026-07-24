@@ -57,6 +57,7 @@
       icone="external-link-line"
       iconeADroite
       libelle="Pré-enregistrer mon entité"
+      type="primaire-inverse"
     />
   {/snippet}
 </Heros>
