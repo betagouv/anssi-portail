@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Lien from '../ui/Lien.svelte';
-  import Progression from './Progression.svelte';
+  import Lien from '../../ui/Lien.svelte';
+  import Progression from '../Progression.svelte';
 
   type ModulePrésentation = {
     id: number;
@@ -82,7 +82,7 @@
 </div>
 
 <style lang="scss">
-  @use '../../../assets/styles/responsive' as *;
+  @use '../../../../assets/styles/responsive' as *;
 
   .progression {
     display: flex;
