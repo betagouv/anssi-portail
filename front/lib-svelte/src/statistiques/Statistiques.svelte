@@ -10,6 +10,7 @@
   import SelectSecteurActivite from '../test-maturite/SelectSecteurActivite.svelte';
   import SelectTailleOrganisation from '../test-maturite/SelectTailleOrganisation.svelte';
   import type { Serie } from '../test-maturite/Serie';
+  import Heros from '../ui/Heros.svelte';
   import type { Statistiques } from './statistiques.type';
   import Tuile from './Tuile.svelte';
 
@@ -78,92 +79,102 @@
   });
 </script>
 
-{#if mesures}
-  <div class="tuiles">
-    <Tuile
-      description="Utilisateurs inscrits"
-      image="stat-utilisateurs-inscrits"
-      mesure={mesures.utilisateursInscrits}
-    />
-    <Tuile description="Tests de maturité cyber" image="stat-test-maturite" mesure={mesures.testsMaturite.total} />
-    <Tuile description="Diagnostics cyber" image="stat-diagnostics-cyber" mesure={mesures.diagnosticsCyber} />
-    <Tuile
-      description="Services et ressources consultés"
-      image="stat-services-et-ressources-consultes"
-      mesure={mesures.servicesEtRessourcesConsultes}
-    />
-  </div>
-  <div class="repartition">
-    <div>
-      <h2>Baromètre de la maturité cyber</h2>
-      <span class="description"
-        >Répartition de la maturité cyber des organisations sur l’ensemble des tests réalisés.</span
-      >
+<Heros
+  description="L'impact de MesServicesCyber en quelques chiffres"
+  format="banniere"
+  theme="sombre"
+  titre="Nos statistiques"
+/>
+
+<dsfr-container class="statistiques">
+  {#if mesures}
+    <div class="tuiles">
+      <Tuile
+        description="Utilisateurs inscrits"
+        image="stat-utilisateurs-inscrits"
+        mesure={mesures.utilisateursInscrits}
+      />
+      <Tuile description="Tests de maturité cyber" image="stat-test-maturite" mesure={mesures.testsMaturite.total} />
+      <Tuile description="Diagnostics cyber" image="stat-diagnostics-cyber" mesure={mesures.diagnosticsCyber} />
+      <Tuile
+        description="Services et ressources consultés"
+        image="stat-services-et-ressources-consultes"
+        mesure={mesures.servicesEtRessourcesConsultes}
+      />
     </div>
-    <div class="filtres">
-      <p>Affinez les résultats en appliquant des filtres par secteur, région ou taille d’organisation.</p>
+    <div class="repartition">
+      <div>
+        <h2>Baromètre de la maturité cyber</h2>
+        <span class="description"
+          >Répartition de la maturité cyber des organisations sur l’ensemble des tests réalisés.</span
+        >
+      </div>
+      <div class="filtres">
+        <p>Affinez les résultats en appliquant des filtres par secteur, région ou taille d’organisation.</p>
 
-      <div class="champs">
-        <div class="champ-filtre">
-          <SelectSecteurActivite
-            bind:secteur
-            libelle="Secteur d'activité"
-            optionDefautIntitule="Tous les secteurs"
-            optionDefautSelectionnable
-          />
-        </div>
+        <div class="champs">
+          <div class="champ-filtre">
+            <SelectSecteurActivite
+              bind:secteur
+              libelle="Secteur d'activité"
+              optionDefautIntitule="Tous les secteurs"
+              optionDefautSelectionnable
+            />
+          </div>
 
-        <div class="champ-filtre">
-          <SelectRegion
-            bind:region
-            libelle="Région"
-            optionDefautIntitule="Toutes les régions"
-            optionDefautSelectionnable
-          />
-        </div>
+          <div class="champ-filtre">
+            <SelectRegion
+              bind:region
+              libelle="Région"
+              optionDefautIntitule="Toutes les régions"
+              optionDefautSelectionnable
+            />
+          </div>
 
-        <div class="champ-filtre">
-          <SelectTailleOrganisation
-            libelle="Taille de l'organisation"
-            bind:tailleOrganisation
-            optionDefautIntitule="Toutes les tailles d'organisation"
-            optionDefautSelectionnable
-          />
+          <div class="champ-filtre">
+            <SelectTailleOrganisation
+              libelle="Taille de l'organisation"
+              bind:tailleOrganisation
+              optionDefautIntitule="Toutes les tailles d'organisation"
+              optionDefautSelectionnable
+            />
+          </div>
         </div>
       </div>
-    </div>
-    {#if serie.length > 0}
-      <div class="donnees-graphiques">
-        <GraphiqueAnneau {serie} nomDeLaDonnee="tests réalisés" />
-        <LegendeAnneau {serie} />
-      </div>
-    {:else}
-      <section class="pas-assez-de-resultats">
-        <div class="contenu-section">
-          <img
-            src="/assets/images/illustration-dragon-aucun-resultat.svg"
-            width="282"
-            height="211"
-            alt="Pas assez de résultats"
-          />
-          <h4>Pas de résultat 😔</h4>
-          <p>
-            Nous n’avons pas encore assez de données pour afficher une comparaison fiable avec les filtres sélectionnés.
-          </p>
-          <lab-anssi-bouton
-            on:click={reinitialiseLesFiltres}
-            on:keypress
-            role="button"
-            taille="md"
-            tabindex={0}
-            titre="Réinitialiser les filtres"
-            variante="tertiaire"
-          ></lab-anssi-bouton>
+      {#if serie.length > 0}
+        <div class="donnees-graphiques">
+          <GraphiqueAnneau {serie} nomDeLaDonnee="tests réalisés" />
+          <LegendeAnneau {serie} />
         </div>
-      </section>
-    {/if}
-  </div>
-{/if}
+      {:else}
+        <section class="pas-assez-de-resultats">
+          <div class="contenu-section">
+            <img
+              src="/assets/images/illustration-dragon-aucun-resultat.svg"
+              width="282"
+              height="211"
+              alt="Pas assez de résultats"
+            />
+            <h4>Pas de résultat 😔</h4>
+            <p>
+              Nous n’avons pas encore assez de données pour afficher une comparaison fiable avec les filtres
+              sélectionnés.
+            </p>
+            <lab-anssi-bouton
+              on:click={reinitialiseLesFiltres}
+              on:keypress
+              role="button"
+              taille="md"
+              tabindex={0}
+              titre="Réinitialiser les filtres"
+              variante="tertiaire"
+            ></lab-anssi-bouton>
+          </div>
+        </section>
+      {/if}
+    </div>
+  {/if}
+</dsfr-container>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;

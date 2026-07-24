@@ -3,29 +3,6 @@
 
 @use '../../assets/styles/responsive' as *;
 
-.chapeau.fond-sombre.chapeau-page-statique {
-  padding: 32px 0;
-
-  h1 {
-    margin: 0 0 8px;
-  }
-
-  p {
-    font-size: 1.25rem;
-    line-height: 2rem;
-    margin-bottom: 16px;
-  }
-
-  a {
-    text-decoration: underline;
-    display: inline;
-  }
-
-  a:hover {
-    text-decoration-thickness: 2px;
-  }
-}
-
 .contenu-page-statique {
   padding: 24px 0;
 
