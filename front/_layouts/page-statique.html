@@ -3,6 +3,33 @@ layout: defaut
 styles: /assets/styles/page-statique.css
 ---
 
+{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
+{% capture segments_json %}
+[
+  {
+    "id": "{{ page.filAriane | escape }}",
+    "label": "{{ page.filAriane | escape }}"
+  }
+]
+{% endcapture %}
+<lab-anssi-bandeau-page
+  avec-fil-ariane="{{page.filAriane}}"
+  description="{{page.sousTitrePageStatique}}"
+  liens-fil-ariane="{{segments_json | strip | escape }}"
+  simple
+  titre="{{page.titrePageStatique}}"
+>
+  <h1 slot="seo">{{page.titrePageStatique}}</h1>
+  <p slot="seo">{{page.sousTitrePageStatique}}</p>
+  {% if page.filAriane %}
+  <ol slot="seo">
+    <li>
+      <span>{{page.filAriane}}</span>
+    </li>
+  </ol>
+  {% endif %}
+</lab-anssi-bandeau-page>
+{% else %}
 <dsfr-container class="chapeau fond-sombre chapeau-page-statique">
     {% if page.filAriane %}
     <script type="application/json" id="donnees-fil-ariane">
@@ -18,6 +45,7 @@ styles: /assets/styles/page-statique.css
     <p class="texte-chapo-xl-ns">{{page.sousTitrePageStatique}}</p>
     {% endif %}
 </dsfr-container>
+{% endif %}
 
 <dsfr-container class="contenu-page-statique">
   <div class="contenu-section">{{content}}</div>
