@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import Heros from '../ui/Heros.svelte';
-  import Lien from '../ui/Lien.svelte';
+  import Heros from '../../ui/Heros.svelte';
+  import Lien from '../../ui/Lien.svelte';
   import axios from 'axios';
-  import type { Module } from './mesure';
-  import Progression from './Progression.svelte';
-  import ControleSegmente from '../navigation/ControleSegmente.svelte';
-  import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
+  import type { Module } from '../mesure';
+  import Progression from '../Progression.svelte';
+  import ControleSegmente from '../../navigation/ControleSegmente.svelte';
+  import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '../../navigation/fragmentDeNavigation.svelte';
   import VueModule from './VueModule.svelte';
 
   type ModulePrésentation = {
@@ -94,7 +94,7 @@
 </dsfr-container>
 
 <style lang="scss">
-  @use '../../../assets/styles/responsive' as *;
+  @use '../../../../assets/styles/responsive' as *;
 
   .progression-totale {
     padding-block: 2rem;
