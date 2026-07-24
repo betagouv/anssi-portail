@@ -3,9 +3,11 @@
   import { onMount, untrack } from 'svelte';
   import { clic } from '../directives/actions.svelte';
   import { profilStore } from '../stores/profil.store';
+  import { fabriqueFilAriane } from '../ui/filAriane';
+  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
-  import Hero from '../ui/Hero.svelte';
+  import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
   import CarteFinancement from './CarteFinancement.svelte';
   import FiltresFinancements from './FiltresFinancements.svelte';
@@ -57,13 +59,20 @@
       financementsStore.initialise(financements ?? []);
     }
   });
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Financements cyber', fondSombre: true };
 </script>
 
-<Hero
+<Heros
   titre="Financements cyber"
   description="Bénéficiez d'accompagnements financés ou de subventions pour renforcer la maturité cyber de votre organisation."
-  ariane="Financements cyber"
-/>
+  format="banniere"
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  theme="sombre"
+>
+  {#snippet filAriane()}
+    <FilAriane {...propriétésFilAriane} />
+  {/snippet}
+</Heros>
 
 <FiltresMobile filtreActif={$financementsFiltre.filtreActif}>
   <FiltresFinancements {chargement} {estConnecte} />
