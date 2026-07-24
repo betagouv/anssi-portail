@@ -168,14 +168,21 @@
   <ChampRecherche bind:recherche={$rechercheTextuelle} />
 </dsfr-container>
 
-<ControleSegmente
-  elements={[
-    { id: 'guides', titre: 'Guides de l’ANSSI', icone: 'book-2-line', ancre: 'guides' },
-    { id: 'ressources-et-services', titre: 'Services et outils', icone: 'list-check', ancre: 'ressourcesEtServices' },
-  ]}
-  bind:idÉlémentSélectionné
-  {fragmentDeNavigation}
-></ControleSegmente>
+<div class="conteneur-controle-segmente">
+  <ControleSegmente
+    elements={[
+      { id: 'guides', titre: 'Guides de l’ANSSI', icone: 'book-2-line', ancre: 'guides' },
+      {
+        id: 'ressources-et-services',
+        titre: 'Services et outils',
+        icone: 'list-check',
+        ancre: 'ressourcesEtServices',
+      },
+    ]}
+    bind:idÉlémentSélectionné
+    {fragmentDeNavigation}
+  ></ControleSegmente>
+</div>
 
 <dsfr-container class="contenu-catalogue">
   {#if !$profilStore && idÉlémentSélectionné === 'guides'}
@@ -226,5 +233,16 @@
 
   .entete {
     padding-bottom: 0.5rem;
+  }
+
+  .conteneur-controle-segmente {
+    padding-block: 1rem;
+    background: var(--background-default-grey);
+    position: sticky;
+    top: 0;
+    z-index: calc(var(--ground) + 751);
+
+    display: grid;
+    place-items: center;
   }
 </style>
