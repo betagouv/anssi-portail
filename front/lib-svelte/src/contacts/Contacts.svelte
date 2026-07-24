@@ -2,9 +2,11 @@
   import { onMount } from 'svelte';
   import { creeLeFragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '../stores/profil.store';
+  import { fabriqueFilAriane } from '../ui/filAriane';
+  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
-  import Hero from '../ui/Hero.svelte';
+  import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
   import { estCodeSecteurContact } from './contacts';
   import { contactsParRegion, contactsParSecteur } from './contacts.donnees';
@@ -48,15 +50,20 @@
       window.location.hash = `#?region=${codeRegion}`;
     }
   });
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Contacts cyber', fondSombre: true };
 </script>
 
-<Hero
-  titre="Contacts cyber"
+<Heros
   description="Des contacts cyber de proximité pour vous orienter et répondre à vos questions."
-  ariane="Contacts cyber"
-  arianeBranche={undefined}
-  arianeBrancheConnectee={undefined}
-></Hero>
+  format="banniere"
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  theme="sombre"
+  titre="Contacts cyber"
+>
+  {#snippet filAriane()}
+    <FilAriane {...propriétésFilAriane} />
+  {/snippet}
+</Heros>
 
 {#if !$profilStore}
   <FiltresMobile filtreActif={false}>
