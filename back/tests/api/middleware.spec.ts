@@ -129,6 +129,7 @@ describe('Le middleware', () => {
 
   describe('sur demande de validation du token JWT en cas de navigation', () => {
     it("redirige vers la page de connexion si le token n'est pas présent", async () => {
+      requete.originalUrl = '/favoris?tri=recent';
       let urlRecu;
       // @ts-expect-error (on sait que redirect va être appelé avec une URL et pas un code HTTP dans ce cas)
       reponse.redirect = (url: string) => {
@@ -138,7 +139,7 @@ describe('Le middleware', () => {
 
       await middleware.verifieJWTNavigation(requete, reponse, () => {});
 
-      assert.equal(urlRecu, '/connexion');
+      assert.equal(urlRecu, '/connexion?urlRedirection=%2Ffavoris%3Ftri%3Drecent');
     });
 
     it('redirige vers la page de connexion si le token ne peut pas être décodé', async () => {
@@ -148,6 +149,7 @@ describe('Le middleware', () => {
       requete.session = {
         token: 'unToken',
       };
+      requete.originalUrl = '/ma-maturite';
 
       let urlRecu;
       // @ts-expect-error (on sait que redirect va être appelé avec une URL et pas un code HTTP dans ce cas)
@@ -158,7 +160,7 @@ describe('Le middleware', () => {
 
       await middleware.verifieJWTNavigation(requete, reponse, () => {});
 
-      assert.equal(urlRecu, '/connexion');
+      assert.equal(urlRecu, '/connexion?urlRedirection=%2Fma-maturite');
     });
   });
 

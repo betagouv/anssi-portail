@@ -57,6 +57,7 @@ import { ressourceStatistiques } from './ressourceStatistiques.js';
 import { ressourceStatistiquesDiagnostic } from './ressourceStatistiquesDiagnostic.js';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs.js';
 import { ressourceVisa } from './ressourceVisa.js';
+import { routesPagesConnecteesStatiques } from './routesPagesConnectees.js';
 import { ressourceDernierResultatDeTest } from './testMaturite/ressourceDernierResultatDeTest.js';
 import { ressourceRepartitionDesResultatsDeTest } from './testMaturite/ressourceRepartitionDesResultatsDeTest.js';
 import { ressourceResultatDeTest } from './testMaturite/ressourceResultatDeTest.js';
@@ -205,7 +206,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use('/guides/:slug', ressourcePagesJekyll(configurationServeur, 'guides'));
 
-  ['ma-maturite', 'favoris', 'services-anssi', 'gestion-guides'].forEach((page) =>
+  routesPagesConnecteesStatiques.forEach((page) =>
     app.use(`/${page}`, ressourcePagesJekyllConnectees(configurationServeur, page))
   );
 
