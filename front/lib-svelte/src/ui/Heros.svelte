@@ -131,6 +131,47 @@
           {@render actions?.()}
         </div>
       {/if}
+      <ol slot="seo">
+        {#each segmentsFilAriane as segment, index (segment.id)}
+          {@const isLast = index === segmentsFilAriane.length - 1}
+          <li>
+            {#if isLast}
+              <span>{segment.label}</span>
+            {:else}
+              <a href={segment.href}>{segment.label}</a>
+            {/if}
+          </li>
+        {/each}
+      </ol>
+      {#if tags}
+        <div slot="seo">
+          {@render tags()}
+        </div>
+      {/if}
+      <h1 slot="seo">{titre}</h1>
+      <p slot="seo">{description}</p>
+      {#if !cacheActions && actions}
+        <div slot="seo">
+          {@render actions()}
+        </div>
+      {/if}
+      {#if !cacheMentions && children}
+        <div slot="seo">
+          {@render children()}
+        </div>
+      {/if}
+      {#if !cacheIllustration}
+        <picture slot="seo">
+          {#if illustration}
+            {@render illustration({
+              source: illustrationSource,
+              alt: illustrationAlt,
+            })}
+          {:else}
+            <img src={illustrationSource} alt={illustrationAlt} />
+          {/if}
+        </picture>
+      {/if}
     </lab-anssi-bandeau-page>
   {/snippet}
 </Alternatives>
