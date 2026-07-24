@@ -1,4 +1,8 @@
 <script lang="ts">
+  import { profilStore } from '../stores/profil.store';
+  import { fabriqueFilAriane } from '../ui/filAriane';
+  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import Heros from '../ui/Heros.svelte';
   import IllustrationNiveauMaturite from './IllustrationNiveauMaturite.svelte';
   import { niveauxMaturite } from './NiveauxMaturite.donnees';
   import type { IdNiveau } from './NiveauxMaturite.type';
@@ -14,7 +18,21 @@
   let niveauxSelectionnes = $derived(
     idNiveauxSelectionnes.map((id) => niveauxMaturite.find((niveau) => niveau.id === id)!)
   );
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: '5 niveaux de maturité cyber', fondSombre: true };
 </script>
+
+<Heros
+  cacheFilAriane={false}
+  description="Découvrez les différents niveaux de maturité cyber, de l’organisation en phase de découverte à celle atteignant une posture optimale."
+  format="banniere"
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  theme="sombre"
+  titre="5 niveaux de maturité cyber"
+>
+  {#snippet filAriane()}
+    <FilAriane {...propriétésFilAriane} />
+  {/snippet}
+</Heros>
 
 <!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <dsfr-container class="niveaux">
