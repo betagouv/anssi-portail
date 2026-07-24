@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import { couleursDeNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import Lien from '../ui/Lien.svelte';
@@ -11,6 +12,9 @@
   import type { ReponsesResultatTest } from './ResultatsTest.type';
   import { type Serie, type SerieRadar } from './Serie';
   import TuilesMaturiteSessionGroupe from './TuilesMaturiteSessionGroupe.svelte';
+  import Heros from '../ui/Heros.svelte';
+  import { fabriqueFilAriane } from '../ui/filAriane';
+  import { profilStore } from '../stores/profil.store';
 
   type ResumeNiveau = {
     total: number;
@@ -45,7 +49,27 @@
     await rechargeResultatsGroupe();
     setInterval(rechargeResultatsGroupe, 5000);
   });
+  const propriétésFilAriane: PropriétésFilAriane = {
+    branche: {
+      nom: 'Test de maturité cyber',
+      lien: '/test-maturite/',
+    },
+    feuille: 'Session de groupe',
+    fondSombre: true,
+  };
 </script>
+
+<Heros
+  description="Ce résultat nous permet de vous guider et de vous fournir les informations et les outils essentiels pour agir sur votre maturité cyber."
+  format="banniere"
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+  theme="sombre"
+  titre="Résultat de maturité cyber"
+>
+  {#snippet filAriane()}
+    <FilAriane {...propriétésFilAriane} />
+  {/snippet}
+</Heros>
 
 {#if resultatsSessionGroupe && resultatsSessionGroupe.nombreParticipants > 0}
   <dsfr-container>
