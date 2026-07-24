@@ -18,7 +18,19 @@
 <ul>
   {#each mesures as mesure (mesure.id)}
     <li>
-      <div>{mesure.titre}</div>
+      <div class="titre-badge">
+        {#if mesure.estPriseEnCompte}
+          <dsfr-badge
+            accent="green-emeraude"
+            has-icon
+            icon="checkbox-circle-fill"
+            label="Prise en compte"
+            size="sm"
+            type="accent"
+          ></dsfr-badge>
+        {/if}
+        {mesure.titre}
+      </div>
       <div class="lien">
         <Lien taille="sm" apparence="bouton" href={`/mesures/${mesure.id}`} libelle={"Passer à l'action"} />
       </div>
@@ -49,5 +61,11 @@
 
   .lien {
     min-width: 144px;
+  }
+
+  .titre-badge {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 </style>
