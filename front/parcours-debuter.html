@@ -3,7 +3,39 @@ layout: parcours
 permalink: /parcours-debuter/
 titreHtml: 'Cybersécurité : se lancer ! | MesServicesCyber'
 ---
-
+{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
+{% capture segments_json %}
+[
+  {
+    "id": "noeud-accueil",
+    "label": "Accueil",
+    "href": "/"
+  },
+  {
+    "id": "noeud-parcours-debuter",
+    "label": "Les services pour se lancer"
+  }
+]
+{% endcapture %}
+<lab-anssi-bandeau-page
+  avec-fil-ariane
+  description="Votre organisation a déjà mis en œuvre des premières actions pour renforcer sa cybersécurité et souhaite approfondir la démarche engagée ? Découvrez des services et ressources sélectionnés par l’ANSSI pour vous aider."
+  liens-fil-ariane="{{segments_json | strip | escape }}"
+  simple
+  titre="Les services pour se lancer"
+>
+  <h1 slot="seo">Les services pour se lancer</h1>
+  <p slot="seo">Votre organisation souhaite mettre en œuvre des premières actions concrètes pour commencer à renforcer son niveau de cybersécurité. Découvrez des services et ressources sélectionnés par l’ANSSI pour vous aider.</p>
+  <ol slot="seo">
+    <li>
+      <a href="/">Accueil</a>
+    </li>
+    <li>
+      <span>Les services pour se lancer</span>
+    </li>
+  </ol>
+</lab-anssi-bandeau-page>
+{% else %}
 <script type="application/json" id="donnees-fil-ariane">
   {
     "branche": {
@@ -38,6 +70,7 @@ titreHtml: 'Cybersécurité : se lancer ! | MesServicesCyber'
     </div>
   </div>
 </dsfr-container>
+{% endif %}
 
 {%assign actions = site.data.parcours-debuter.actions %}
 <dsfr-container class="sommaire">
