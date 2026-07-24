@@ -1,10 +1,15 @@
 <script lang="ts">
+  import { afficheNouvelleDA } from '$plateforme/environnement';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import type { Snippet } from 'svelte';
+  import Alternatives from './Alternatives.svelte';
+  import type { Segment } from './filAriane';
 
   type Props = {
     format: 'banniere' | 'heros' | 'heros-centre' | 'details';
     theme: 'sombre' | 'clair'; // inversé / clair
     filAriane?: Snippet;
+    segmentsFilAriane?: Segment[];
     cacheFilAriane?: boolean;
     lienRetour?: Snippet;
     tags?: Snippet;
@@ -25,6 +30,7 @@
     format,
     theme = 'sombre',
     filAriane,
+    segmentsFilAriane = [],
     cacheFilAriane = false,
     lienRetour,
     tags,
@@ -54,56 +60,80 @@
   }
 </script>
 
-<dsfr-container class={[format, 'fond-' + theme]}>
-  <div class="contenu-section">
-    {#if !cacheFilAriane && filAriane}
-      <div class={['fil-ariane']}>
-        {@render filAriane()}
-      </div>
-    {:else if lienRetour}
-      <div class={['lien-retour']}>
-        {@render lienRetour()}
-      </div>
-    {/if}
-    <div class="texte">
-      {#if !cacheTags && tags}
-        <div class={['tags']}>
-          {@render tags()}
-        </div>
-      {/if}
-      <hgroup>
-        {#if preambule}
-          {@render preambule({ titre, description })}
-        {:else}
-          <h1 class={[styleTitreH1]}>{titre}</h1>
-          <p class={['texte-chapo-xl']}>{description}</p>
+<Alternatives affichageAlternatif={afficheNouvelleDA}>
+  {#snippet défaut()}
+    <dsfr-container class={[format, 'fond-' + theme]}>
+      <div class="contenu-section">
+        {#if !cacheFilAriane && filAriane}
+          <div class={['fil-ariane']}>
+            {@render filAriane()}
+          </div>
+        {:else if lienRetour}
+          <div class={['lien-retour']}>
+            {@render lienRetour()}
+          </div>
         {/if}
-      </hgroup>
-      {#if !cacheActions && actions}
-        <div class={['actions']}>
-          {@render actions()}
+        <div class="texte">
+          {#if !cacheTags && tags}
+            <div class={['tags']}>
+              {@render tags()}
+            </div>
+          {/if}
+          <hgroup>
+            {#if preambule}
+              {@render preambule({ titre, description })}
+            {:else}
+              <h1 class={[styleTitreH1]}>{titre}</h1>
+              <p class={['texte-chapo-xl']}>{description}</p>
+            {/if}
+          </hgroup>
+          {#if !cacheActions && actions}
+            <div class={['actions']}>
+              {@render actions()}
+            </div>
+          {/if}
+          {#if !cacheMentions && children}
+            <div class={['mentions']}>
+              {@render children()}
+            </div>
+          {/if}
         </div>
-      {/if}
-      {#if !cacheMentions && children}
-        <div class={['mentions']}>
-          {@render children()}
-        </div>
-      {/if}
-    </div>
-    {#if !cacheIllustration}
-      <picture class={['illustration']}>
-        {#if illustration}
-          {@render illustration({
-            source: illustrationSource,
-            alt: illustrationAlt,
-          })}
-        {:else}
-          <img src={illustrationSource} alt={illustrationAlt} />
+        {#if !cacheIllustration}
+          <picture class={['illustration']}>
+            {#if illustration}
+              {@render illustration({
+                source: illustrationSource,
+                alt: illustrationAlt,
+              })}
+            {:else}
+              <img src={illustrationSource} alt={illustrationAlt} />
+            {/if}
+          </picture>
         {/if}
-      </picture>
-    {/if}
-  </div>
-</dsfr-container>
+      </div>
+    </dsfr-container>
+  {/snippet}
+  {#snippet alternatif()}
+    <lab-anssi-bandeau-page
+      simple={format === 'banniere'}
+      ficheCatalogue={format === 'details'}
+      inverse={theme === 'clair'}
+      avecBadges={!cacheTags}
+      avecFilAriane={!cacheFilAriane}
+      liensFilAriane={enPropriétéWebC(segmentsFilAriane)}
+      {titre}
+      {description}
+      sansImage={cacheIllustration}
+      urlImage={illustrationSource}
+    >
+      {#if actions && !cacheActions}
+        <div slot="buttonsgroup">
+          {@render actions?.()}
+        </div>
+      {/if}
+    </lab-anssi-bandeau-page>
+  {/snippet}
+</Alternatives>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;

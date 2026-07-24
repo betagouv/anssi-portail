@@ -3,7 +3,7 @@
   import { profilStore } from '../stores/profil.store.js';
   import { fabriqueFilAriane, type Branche, type Segment } from './filAriane';
 
-  type Props = {
+  export type Props = {
     feuille: string;
     branche?: Branche;
     brancheConnectee?: Branche;
