@@ -27,7 +27,12 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, racineDuDepot, '');
   return {
     define: {
-      'import.meta.env.FEATURE_FLAG_NOUVELLE_DA': JSON.stringify(env.FEATURE_FLAG_NOUVELLE_DA),
+      // `loadEnv` ne lit que les fichiers `.env` présents sur le disque : sans fichier `.env`
+      // (cas de la CI, où `.env` est gitignoré), il ne reprend pas la variable déjà présente
+      // dans `process.env` (ex. injectée par `clever env`). D'où le fallback explicite.
+      'import.meta.env.FEATURE_FLAG_NOUVELLE_DA': JSON.stringify(
+        env.FEATURE_FLAG_NOUVELLE_DA ?? process.env.FEATURE_FLAG_NOUVELLE_DA ?? 'false'
+      ),
     },
     plugins: [
       svelte(),
