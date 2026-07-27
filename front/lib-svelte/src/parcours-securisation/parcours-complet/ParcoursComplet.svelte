@@ -69,14 +69,7 @@
     ></ControleSegmente>
 
     {#if vueCourante === 'mesures'}
-      <Lien
-        apparence="bouton"
-        telechargement=""
-        icone="download-line"
-        telechargementDetails="details"
-        libelle="Exporter la liste"
-        href="/"
-      />
+      <Lien apparence="bouton" icone="download-line" libelle="Exporter la liste" href="/api/mesures.csv" />
     {/if}
   </div>
 
