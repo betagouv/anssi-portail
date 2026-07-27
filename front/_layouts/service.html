@@ -15,8 +15,68 @@ script: /scripts/service.js
     "fondSombre": false
   }
 </script>
-
-
+{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
+{% capture segments_json %}
+[
+  {
+    "id": "noeud-accueil",
+    "label": "Accueil",
+    "href": "/"
+  },
+  {
+    "id": "noeud-catalogue",
+    "label": "Les services et ressources cyber",
+    "href": "/catalogue"
+  },
+  {
+    "id": "{{ page.nom | escape }}",
+    "label": "{{ page.nom | escape }}"
+  }
+]
+{% endcapture %}
+<lab-anssi-bandeau-page
+  avec-fil-ariane="{{page.filAriane}}"
+  description="{{page.description}}"
+  liens-fil-ariane="{{segments_json | strip | escape }}"
+  titre="{{page.nom}}"
+  inverse
+  url-image="/assets/images/illustrations-services/{{ page.illustration }}"
+  fiche-catalogue
+>
+  <h1 slot="seo">{{page.nom}}</h1>
+  <p slot="seo">{{page.description}}</p>
+  <ol slot="seo">
+    <li>
+      <a href="/">Accueil</a>
+    </li>
+    <li>
+      <a href="/catalogue">Les services et ressources cyber</a>
+    </li>
+    <li>
+      <span>{{ page.nom }}</span>
+    </li>
+  </ol>
+  <div slot="badgesgroup">
+    {% if page.typologie == "service" %}
+    <dsfr-badge has-icon icon="shake-hands-fill" type="accent" accent="yellow-tournesol" size="sm" label="Service"></dsfr-badge>
+    {% elsif page.typologie == "outil" %}
+    <dsfr-badge has-icon icon="mac-fill" type="accent" accent="pink-tuile" size="sm" label="Outil"></dsfr-badge>
+    {% endif %}
+  </div>
+  <div slot="buttonsgroup">
+    <msc-lien
+      apparence="bouton"
+      blank
+      classe="lien-externe-produit"
+      source="Page produit"
+      cible="{{page.nom}}"
+      href="{{page.lien}}"
+      libelle="Accéder au service"
+      taille="lg"
+    ></msc-lien>
+  </div>
+</lab-anssi-bandeau-page>
+{% else %}
 <dsfr-container class="chapeau">
   {% include composant-svelte.html id="fil-ariane" %}
   <div class="resume">
@@ -48,6 +108,7 @@ script: /scripts/service.js
     </div>
   </div>
 </dsfr-container>
+{% endif %}
 
 <div class="sommaire sommaire-replie">
   <details>
