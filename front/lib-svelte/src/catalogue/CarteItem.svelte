@@ -19,7 +19,7 @@
   const sansLien = !lien;
 
   // Contenu de la carte
-  const titre = estGuide ? item.nom : item.description;
+  const titre = (estGuide ? item.nom : item.description).replaceAll('&nbsp;', '\u00A0');
   const titreCoupe = titre.length > LONGUEUR_MAX_DESCRIPTION ? titre.slice(0, LONGUEUR_MAX_DESCRIPTION) + '…' : titre;
 
   const image = estGuide
