@@ -22,6 +22,7 @@
     illustration?: Snippet<[{ source: string; alt: string }]>;
     illustrationSource?: string;
     illustrationAlt?: string;
+    ficheCatalogue?: boolean;
     cacheIllustration?: boolean;
     children?: Snippet;
   };
@@ -43,6 +44,7 @@
     illustration,
     illustrationSource = '',
     illustrationAlt = '',
+    ficheCatalogue = false,
     cacheIllustration = false,
     children,
   }: Props = $props();
@@ -125,6 +127,7 @@
       {description}
       sansImage={cacheIllustration}
       urlImage={illustrationSource}
+      fiche-catalogue={ficheCatalogue}
     >
       {#if actions && !cacheActions}
         <div slot="buttonsgroup">
