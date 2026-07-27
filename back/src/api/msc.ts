@@ -64,6 +64,7 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe.js';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
+import { ressourceMesureCsv } from './mesures/ressourceMesureCsv.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -312,6 +313,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ressourceAvisMesure(configurationServeur),
       ressourcePriseEnCompte(configurationServeur)
     );
+    app.use('/api/mesures.csv', ressourceMesureCsv(configurationServeur));
     app.use('/api/modules', ressourceModule(configurationServeur));
     app.use('/module-cyberdepart', (_, reponse) => reponse.redirect(303, '/modules/1'));
     app.use('/modules/1', ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart'));
