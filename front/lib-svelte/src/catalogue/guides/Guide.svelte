@@ -5,12 +5,13 @@
   import { clic } from '../../directives/actions.svelte';
   import BoutonFavori from '../../favoris/BoutonFavori.svelte';
   import { profilStore } from '../../stores/profil.store';
-  import FilAriane from '../../ui/FilAriane.svelte';
+  import { fabriqueFilAriane } from '../../ui/filAriane';
+  import FilAriane, { type Props as PropriétésFilAriane } from '../../ui/FilAriane.svelte';
+  import Heros from '../../ui/Heros.svelte';
   import Lien from '../../ui/Lien.svelte';
   import Separateur from '../../ui/Separateur.svelte';
   import { CollectionGuide, type Guide } from '../Guide.types';
   import { chargeGuidesDansLeStore, guidesStore } from '../stores/guides/guides.store';
-  import BadgesDeCollections from './BadgesDeCollections.svelte';
   import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
   import { decodeEntitesHtml, guidePourCarteItem } from './guide';
   import InciteASAbonner from './InciteASAbonner.svelte';
@@ -48,26 +49,33 @@
   });
   const aDesCollections = $derived(guide && guide.collections.filter((c) => c !== CollectionGuide.AUTRE).length > 0);
   const descriptionAspetisee = $derived(aseptiseHtml(guide?.description ?? ''));
+  const propriétésFilAriane: PropriétésFilAriane = $derived({
+    feuille: guide?.nom ?? '',
+    branche: { nom: 'Catalogue cyber', lien: '/catalogue#guides' },
+    fondSombre: false,
+  });
 </script>
 
 {#if guide}
-  <dsfr-container class="chapeau">
-    <div class="contenu-section">
-      <FilAriane branche={{ nom: 'Catalogue cyber', lien: '/catalogue#guides' }} feuille={guide.nom} />
-      <div class="badges-collections">
-        <BadgesDeCollections {guide} />
-      </div>
-      <div class="resume">
-        <div>
-          <h1>{decodeEntitesHtml(guide.nom)}</h1>
-          <BoutonsDocumentsGuide {guide} />
-        </div>
-        <div class="conteneur-illustration">
-          <img src={guide.illustration.grande} width="588" height="330" alt="Capture d’écran" />
-        </div>
-      </div>
-    </div>
-  </dsfr-container>
+  <Heros
+    titre={decodeEntitesHtml(guide.nom)}
+    cacheFilAriane={!!$profilStore}
+    description=""
+    format="details"
+    segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+    theme="clair"
+    ficheCatalogue
+    illustrationSource={guide.illustration.grande}
+  >
+    {#snippet filAriane()}
+      <FilAriane {...propriétésFilAriane} />
+    {/snippet}
+    {#snippet actions()}
+      {#if guide}
+        <BoutonsDocumentsGuide {guide} />
+      {/if}
+    {/snippet}
+  </Heros>
 
   <div class="sommaire sommaire-replie">
     <details>
