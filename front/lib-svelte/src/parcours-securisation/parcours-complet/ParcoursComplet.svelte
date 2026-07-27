@@ -56,8 +56,7 @@
   <div class="progression-totale">
     <Progression actuel={totalMesuresPrisesEnCompte} max={totalMesures} />
   </div>
-</dsfr-container>
-<dsfr-container>
+
   <div class="conteneur-controle-segmente">
     <ControleSegmente
       elements={[
@@ -68,8 +67,7 @@
       {fragmentDeNavigation}
     ></ControleSegmente>
   </div>
-</dsfr-container>
-<dsfr-container>
+
   {#if vueCourante === 'mesures'}
     <VueListeMesures {modules} />
   {:else}
