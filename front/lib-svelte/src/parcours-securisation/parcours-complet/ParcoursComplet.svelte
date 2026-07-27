@@ -8,6 +8,7 @@
   import { creeLeFragmentDeNavigation } from '../../navigation/fragmentDeNavigation.svelte';
   import VueModule from './VueModule.svelte';
   import VueListeMesures from './VueListeMesures.svelte';
+  import Lien from '../../ui/Lien.svelte';
 
   type ModulePrésentation = {
     id: number;
@@ -66,6 +67,17 @@
       bind:idÉlémentSélectionné={vueCourante}
       {fragmentDeNavigation}
     ></ControleSegmente>
+
+    {#if vueCourante === 'mesures'}
+      <Lien
+        apparence="bouton"
+        telechargement=""
+        icone="download-line"
+        telechargementDetails="details"
+        libelle="Exporter la liste"
+        href="/"
+      />
+    {/if}
   </div>
 
   {#if vueCourante === 'mesures'}
@@ -86,6 +98,8 @@
     background: var(--background-default-grey);
     margin-bottom: 2rem;
     display: flex;
-    place-items: 'flex-start';
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
   }
 </style>
