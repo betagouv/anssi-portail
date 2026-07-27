@@ -14,34 +14,34 @@ const ressourceMesureCsv = ({ entrepôtModule, middleware }: ConfigurationServeu
     middleware.verifieJWT,
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
+      const FIELD_DELIMITER = ';';
       const HEADERS: ObjectHeaderItem[] = [
         { id: 'module', title: 'Titre du module' },
         { id: 'mesure', title: 'Titre de la mesure' },
         { id: 'description', title: 'Description de la mesure' },
       ];
+
       const modules: Module[] = await entrepôtModule.tous();
 
-      const mesuresMappées: Record<string, string>[] = modules.reduce(
-        (acc, actuel) => {
-          acc.push(
-            ...actuel.mesures.map((mesure) => ({
-              module: actuel.nom,
-              mesure: mesure.titre,
-              description: mesure.explications,
-            }))
-          );
-          return acc;
-        },
-        [] as Record<string, string>[]
+      const mesuresMappées: Record<ObjectHeaderItem['id'], string>[] = modules.flatMap((module) =>
+        module.mesures.map((mesure) => ({
+          [HEADERS[0].id]: module.nom,
+          [HEADERS[1].id]: mesure.titre,
+          [HEADERS[2].id]: mesure.explications,
+        }))
       );
 
       const stringifier = createObjectCsvStringifier({
-        fieldDelimiter: ';',
+        fieldDelimiter: FIELD_DELIMITER,
         alwaysQuote: true,
         header: HEADERS,
       });
 
-      const csv: string = `\uFEFF${stringifier.getHeaderString()}${stringifier.stringifyRecords(mesuresMappées)}`;
+      const BOM_CHAR = '\uFEFF';
+      const entêteCsv = stringifier.getHeaderString() ?? '';
+      const mesuresSérialisées = stringifier.stringifyRecords(mesuresMappées);
+
+      const csv = `${BOM_CHAR}${entêteCsv}${mesuresSérialisées}`;
 
       reponse.attachment('mesures.csv').send(csv);
     })
