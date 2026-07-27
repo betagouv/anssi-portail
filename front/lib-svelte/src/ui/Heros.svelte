@@ -129,11 +129,6 @@
       urlImage={illustrationSource}
       fiche-catalogue={ficheCatalogue}
     >
-      {#if actions && !cacheActions}
-        <div slot="buttonsgroup">
-          {@render actions?.()}
-        </div>
-      {/if}
       <ol slot="seo">
         {#each segmentsFilAriane as segment, index (segment.id)}
           {@const isLast = index === segmentsFilAriane.length - 1}
@@ -154,7 +149,7 @@
       <h1 slot="seo">{titre}</h1>
       <p slot="seo">{description}</p>
       {#if !cacheActions && actions}
-        <div slot="seo">
+        <div slot="buttonsgroup">
           {@render actions()}
         </div>
       {/if}
