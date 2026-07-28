@@ -2,7 +2,7 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import Alerte from '../ui/Alerte.svelte';
-  import type { CouleurDeBadge } from '../ui/badge.type';
+  import type { Badge } from '../ui/badge.type';
   import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
@@ -28,7 +28,7 @@
   let enCoursEnvoi: boolean = false;
   let erreurs: string;
   let erreurValidation = false;
-  let badges: { label: string; accent: CouleurDeBadge }[] = [];
+  let badges: Badge[] = [];
 
   onMount(async () => {
     const reponse = await axios.get<{

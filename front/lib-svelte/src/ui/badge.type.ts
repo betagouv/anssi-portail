@@ -16,3 +16,5 @@ export type CouleurDeBadge =
   | 'green-menthe'
   | 'brown-opera'
   | 'yellow-moutarde';
+
+export type Badge = { label: string; accent: CouleurDeBadge };
