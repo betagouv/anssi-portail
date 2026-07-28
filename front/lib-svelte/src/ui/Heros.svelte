@@ -147,7 +147,7 @@
         {/each}
       </ol>
       {#if tags}
-        <div slot="seo">
+        <div slot="badgesgroup">
           {@render tags()}
         </div>
       {/if}
