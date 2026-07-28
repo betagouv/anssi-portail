@@ -6,18 +6,20 @@ const cheminsPagesConnecteesStatiques = new Set([
   ...routesPagesConnecteesStatiques.map((page) => `/${page}`),
   '/parcours-complet',
 ]);
-const motifsPagesConnecteesAvecParametre = [/^\/modules\/[^/]+$/, /^\/mesures\/[^/]+$/];
+const cheminsPagesConnectéesAvecParamètres = ['/modules/', '/mesures/'];
 
 export const estUrlRedirectionApresConnexionAutorisee = (valeur: string): boolean => {
   try {
     const url = new URL(valeur, origineDeReferencePourValidation);
     const cheminSansSlashFinal = url.pathname.endsWith('/') ? url.pathname.slice(0, -1) : url.pathname;
 
-    return (
-      url.origin === origineDeReferencePourValidation &&
-      (cheminsPagesConnecteesStatiques.has(cheminSansSlashFinal) ||
-        motifsPagesConnecteesAvecParametre.some((motif) => motif.test(cheminSansSlashFinal)))
+    const aLaMêmeOrigine = url.origin === origineDeReferencePourValidation;
+    const aUnCheminStatiqueValide = cheminsPagesConnecteesStatiques.has(cheminSansSlashFinal);
+    const aUnCheminAvecParamètresValide = cheminsPagesConnectéesAvecParamètres.some((motif) =>
+      cheminSansSlashFinal.startsWith(motif)
     );
+
+    return aLaMêmeOrigine && (aUnCheminStatiqueValide || aUnCheminAvecParamètresValide);
   } catch {
     return false;
   }
