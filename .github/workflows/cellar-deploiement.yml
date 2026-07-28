@@ -39,6 +39,31 @@ jobs:
           acl = public-read
           EOF
 
+      - name: Installe et configure la CLI de S3cmd
+        uses: s3-actions/s3cmd@91996c659532eb71d2503212d0630587b347d50e # v1.10.1
+        with:
+          provider: clevercloud
+          access_key: ${{ secrets.CELLAR_ACCESS_KEY_ID }}
+          secret_key: ${{ secrets.CELLAR_SECRET_ACCESS_KEY }}
+
+      - name: Crée la configuration pour le démon et le client de `clamav`
+        run: |
+          cat <<_EOF_ >clamd.conf
+          TCPAddr 127.0.0.1
+          TCPSocket 3310
+          _EOF_
+
+      - name: Installe et démarre le démon `clamd`
+        run: |
+          sudo apt-get update
+          sudo apt-get install clamav-daemon
+          sudo systemctl stop clamav-freshclam
+          sudo freshclam -F \
+            --update-db=bytecode \
+            --update-db=daily \
+            --update-db=main
+          clamd --config-file=clamd.conf
+
       - name: Compare les buckets
         id: check
         run: |
@@ -57,6 +82,28 @@ jobs:
           echo "rc=${RC:-0}"
           cat resultats/rclone.log
           echo "rc=${RC:-0}" >> $GITHUB_OUTPUT
+
+      - name: Scanne les fichiers
+        run: |
+          set +e
+
+          while IFS= read -r line
+            do
+              [ -z "$line" ] && continue
+              s3cmd --quiet get "s3://messervicescyber-guides-travail/$line" - \
+                | clamdscan --config clamd.conf - \
+                | grep -E "Infected files: [^0]" && echo "$line" >> fichiersMalveillants.txt
+            done < <(cat resultats/ajouts.txt <(echo "") resultats/modifications.txt)
+
+          set -e
+          if [ -s fichiersMalveillants.txt ]; then
+            echo "🐞 Fichiers malveillants :"
+            cat fichiersMalveillants.txt
+            exit 1
+          else
+            echo "✅ Aucun fichier malveillant détecté"
+            exit 0
+          fi
 
       - name: Generate GitHub Summary
         run: |
