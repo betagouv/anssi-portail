@@ -200,6 +200,17 @@
       line-height: 3.5rem;
     }
   }
+
+  .alternatif-md {
+    font-size: 3.5rem;
+    line-height: 4rem;
+    margin: 0 0 32px;
+
+    @include a-partir-de(md) {
+      font-size: 4rem;
+      line-height: 4.5rem;
+    }
+  }
 }
 
 @mixin textes-dsfr {
