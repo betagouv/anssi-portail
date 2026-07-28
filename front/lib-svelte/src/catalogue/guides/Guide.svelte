@@ -12,6 +12,7 @@
   import Separateur from '../../ui/Separateur.svelte';
   import { CollectionGuide, type Guide } from '../Guide.types';
   import { chargeGuidesDansLeStore, guidesStore } from '../stores/guides/guides.store';
+  import BadgesDeCollections from './BadgesDeCollections.svelte';
   import BoutonsDocumentsGuide from './BoutonsDocumentsGuide.svelte';
   import { decodeEntitesHtml, guidePourCarteItem } from './guide';
   import InciteASAbonner from './InciteASAbonner.svelte';
@@ -69,6 +70,13 @@
   >
     {#snippet filAriane()}
       <FilAriane {...propriétésFilAriane} />
+    {/snippet}
+    {#snippet tags()}
+      {#if guide}
+        <div class="badges-collections">
+          <BadgesDeCollections {guide} />
+        </div>
+      {/if}
     {/snippet}
     {#snippet illustration()}
       {#if guide}
@@ -211,6 +219,10 @@
         display: block;
       }
     }
+  }
+
+  .badges-collections {
+    margin-top: 1.5rem;
   }
 
   .article {

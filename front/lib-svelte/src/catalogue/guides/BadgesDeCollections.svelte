@@ -12,4 +12,10 @@
     }));
 </script>
 
-<dsfr-badges-group badges={enPropriétéWebC(badges)} size="sm"></dsfr-badges-group>
+<dsfr-badges-group badges={enPropriétéWebC(badges)} size="sm">
+  <ul slot="seo">
+    {#each badges as badge (badge)}
+      <li>{badge.label}</li>
+    {/each}
+  </ul>
+</dsfr-badges-group>
