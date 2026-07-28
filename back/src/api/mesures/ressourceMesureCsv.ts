@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import DOMPurify from 'isomorphic-dompurify';
 import { filetRouteAsynchrone } from '../middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
@@ -27,7 +28,7 @@ const ressourceMesureCsv = ({ entrepôtModule, middleware }: ConfigurationServeu
         module.mesures.map((mesure) => ({
           [HEADERS[0].id]: module.nom,
           [HEADERS[1].id]: mesure.titre,
-          [HEADERS[2].id]: mesure.explications,
+          [HEADERS[2].id]: DOMPurify.sanitize(mesure.explications, { ALLOWED_TAGS: [] }),
         }))
       );
 
