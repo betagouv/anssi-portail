@@ -27,6 +27,7 @@ import { AdaptateurJWT } from './adaptateurJWT.js';
 import { FournisseurChemin } from './fournisseurChemin.js';
 import { Middleware } from './middleware.js';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
+import { ServiceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -62,6 +63,7 @@ export type ConfigurationServeur = {
   };
   cellar: AdaptateurCellar;
   serviceSanteGuides: ServiceSanteGuides;
+  serviceRécompensesCyberDépart: ServiceRécompensesCyberDépart;
   adaptateurEmail: AdaptateurEmail;
   generateurImage: GenerateurImage;
 };

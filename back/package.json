@@ -5,7 +5,7 @@
   "main": "serveur.ts",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && mkdir -p dist/src/api/mesures/ressourceRecompensesCyberDepart && cp src/api/mesures/ressourceRecompensesCyberDepart/banniere.svg src/api/mesures/ressourceRecompensesCyberDepart/Marianne-Regular.woff2 src/api/mesures/ressourceRecompensesCyberDepart/Marianne-Bold.woff2 dist/src/api/mesures/ressourceRecompensesCyberDepart/",
     "dev": "npm-run-all --parallel --race dev:bdd dev:server",
     "dev:bdd": "docker compose up db",
     "dev:server": "sleep 3 && pnpm migre-bdd && node --import tsx --env-file ../.env --watch src/serveur.ts",

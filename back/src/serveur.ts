@@ -40,6 +40,7 @@ import { EntrepotMesure } from './metier/entrepotMesure.js';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe.js';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
+import { ServiceRécompensesCyberDépart } from './api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
@@ -185,6 +186,7 @@ const port = process.env.PORT || 3000;
     serviceSanteGuides,
     adaptateurEmail,
     generateurImage: new GenerateurImageAvif(),
+    serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(),
   }).listen(port, () => {
     console.log(`Le serveur écoute sur le port ${port}`);
   });
