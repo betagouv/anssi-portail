@@ -8,6 +8,7 @@
   import Formulaire from '../ui/Formulaire.svelte';
   import SelectionOrganisation from '../ui/formulaire/SelectionOrganisation.svelte';
   import type { Organisation } from '../ui/formulaire/SelectionOrganisation.types';
+  import GroupeDeBadges from '../ui/GroupeDeBadges.svelte';
   import Lien from '../ui/Lien.svelte';
   import { collecteLesErreurs } from '../utils/erreurApi';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
@@ -82,7 +83,7 @@
 {#if !enSucces}
   <Formulaire id="demande-diagnostic-simplifiee" bind:this={formulaire}>
     <div class="formulaire">
-      <dsfr-badges-group {badges} size="sm"></dsfr-badges-group>
+      <GroupeDeBadges {badges} />
       {#if mode !== 'autonome'}
         <h3 class="fr-h5">Demande de diagnostic cyber</h3>
       {/if}
@@ -180,16 +181,13 @@
     display: flex;
     flex-direction: column;
 
-    dsfr-badges-group {
-      align-self: flex-start;
-    }
-
     .champ {
       display: flex;
       flex-direction: column;
       gap: 8px;
 
       &.recherche-organisation {
+        margin-top: 1rem;
         margin-bottom: 1rem;
       }
 
@@ -207,14 +205,14 @@
       flex-direction: column;
       gap: 8px;
     }
+
+    h3 + .champ.recherche-organisation {
+      margin-top: 0;
+    }
   }
 
   .confirmation {
     padding-bottom: 1.5rem;
-  }
-
-  dsfr-badges-group + .recherche-organisation {
-    margin-top: 1rem;
   }
 
   .entete-principale {

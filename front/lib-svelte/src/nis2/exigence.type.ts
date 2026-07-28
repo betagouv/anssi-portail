@@ -1,3 +1,5 @@
+import type { CouleurDeBadge } from '../ui/badge.type';
+
 export type CategorieEntite = 'EntiteEssentielle' | 'EntiteImportante';
 
 export type Referentiel = 'NIS2' | 'ISO' | 'AE' | 'CyFun23';
@@ -49,18 +51,23 @@ export interface ExigenceCyFun23 extends ExigenceBase {
 
 export type Exigence = ExigenceNis2 | ExigenceISO | ExigenceAE | ExigenceCyFun23;
 
-export const badgesExigence = (exigence: ExigenceNis2 | ExigenceCyFun23) => {
+export const badgesExigence = (
+  exigence: ExigenceNis2 | ExigenceCyFun23
+): { label: string; accent: CouleurDeBadge }[] => {
   if ('entitesCible' in exigence) {
-    return exigence?.entitesCible?.map((categorie) => ({
-      label: {
-        EntiteImportante: 'EI',
-        EntiteEssentielle: 'EE',
-      }[categorie],
-      accent: {
-        EntiteImportante: 'green-archipel',
-        EntiteEssentielle: 'green-bourgeon',
-      }[categorie],
-    }));
+    return exigence?.entitesCible?.map(
+      (categorie) =>
+        ({
+          label: {
+            EntiteImportante: 'EI',
+            EntiteEssentielle: 'EE',
+          }[categorie],
+          accent: {
+            EntiteImportante: 'green-archipel',
+            EntiteEssentielle: 'green-bourgeon',
+          }[categorie],
+        }) as { label: string; accent: CouleurDeBadge }
+    );
   }
   return [
     ...(exigence.estMesureCle
@@ -91,7 +98,7 @@ export const badgesExigence = (exigence: ExigenceNis2 | ExigenceCyFun23) => {
         Essentiel: 'purple-glycine',
       }[exigence.niveauAssurance],
     },
-  ];
+  ] as { label: string; accent: CouleurDeBadge }[];
 };
 
 export const formateContenuExigence = ({ contenu }: ExigenceBase | ExigenceComparee): string => {

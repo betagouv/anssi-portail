@@ -1,5 +1,6 @@
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
+  import GroupeDeBadges from '../../ui/GroupeDeBadges.svelte';
   import { badgesExigence, type ExigenceNis2 } from '../exigence.type';
   import ContenuExigenceFormate from './ContenuExigenceFormate.svelte';
 
@@ -13,13 +14,7 @@
   const badges = badgesExigence(exigence);
 </script>
 
-<dsfr-badges-group badges={enPropriétéWebC(badges)} size="sm">
-  <ul slot="seo">
-    {#each badges as badge (badge)}
-      <li>{badge.label}</li>
-    {/each}
-  </ul></dsfr-badges-group
->
+<GroupeDeBadges {badges} />
 <dsfr-tags-group tags={enPropriétéWebC(tags)} size="sm" groupMarkup="div">
   <ul slot="seo">
     {#each tags as tag (tag)}
