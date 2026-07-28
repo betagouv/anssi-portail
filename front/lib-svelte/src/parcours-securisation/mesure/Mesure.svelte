@@ -81,6 +81,9 @@
       etat = 'AfficheCommentaire';
     }
   };
+
+  const titre = $derived(mesure ? mesure.phraseAccroche || mesure.titre : '');
+  const description = $derived(mesure && mesure.phraseAccroche ? mesure.titre : '');
 </script>
 
 {#if mesure}
@@ -88,11 +91,11 @@
     cacheActions={true}
     cacheIllustration={false}
     cacheTags={true}
-    description={mesure.titre}
+    {description}
     illustrationSource="/assets/images/parcours-securisation/mesure-{mesure.id}.svg"
     illustrationAlt=""
     format="details"
-    titre={mesure.phraseAccroche}
+    {titre}
     theme="clair"
   >
     {#snippet filAriane()}
