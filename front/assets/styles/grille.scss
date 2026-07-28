@@ -1,16 +1,19 @@
 @use 'responsive' as *;
 
-$gap-dsfr-grid: 1rem;
-
-@include a-partir-de(lg) {
-  $gap-dsfr-grid: 1.5rem;
+:root {
+  --gap-dsfr-grid: 1rem;
 }
 
-$tailleDeTousLesGaps: calc(11 * $gap-dsfr-grid);
-$tailleUneColonne: calc(calc(100% - $tailleDeTousLesGaps) / 12);
+@include a-partir-de(lg) {
+  :root {
+    --gap-dsfr-grid: 1.5rem;
+  }
+}
 
 @function taille-pour-colonnes($colonne) {
-  $tailleDesGapsEntreColonnes: calc(($colonne - 1) * $gap-dsfr-grid);
-  $tailleFinale: calc(calc($tailleUneColonne * $colonne) + $tailleDesGapsEntreColonnes);
-  @return round(nearest, $tailleFinale, 1px);
+  @return round(
+    nearest,
+    calc((calc(100% - 11 * var(--gap-dsfr-grid)) / 12) * #{$colonne} + (#{$colonne} - 1) * var(--gap-dsfr-grid)),
+    1px
+  );
 }

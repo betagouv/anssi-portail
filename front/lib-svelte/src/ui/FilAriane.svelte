@@ -31,10 +31,3 @@
     {/each}
   </ol>
 </dsfr-breadcrumb>
-
-<style lang="scss">
-  dsfr-breadcrumb {
-    max-height: 20px;
-    transform: translateY(-16px);
-  }
-</style>
