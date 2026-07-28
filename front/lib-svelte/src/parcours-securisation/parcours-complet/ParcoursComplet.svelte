@@ -62,7 +62,7 @@
     <ControleSegmente
       elements={[
         { id: 'modules', titre: 'Modules', icone: 'layout-grid-line', ancre: 'modules' },
-        { id: 'mesures', titre: 'Liste', icone: 'list-check', ancre: 'mesures' },
+        { id: 'mesures', titre: 'Liste des mesures', icone: 'list-check', ancre: 'mesures' },
       ]}
       bind:idÉlémentSélectionné={vueCourante}
       {fragmentDeNavigation}
