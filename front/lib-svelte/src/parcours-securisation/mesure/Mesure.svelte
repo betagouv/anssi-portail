@@ -88,9 +88,6 @@
 
 {#if mesure}
   <Heros
-    cacheActions={true}
-    cacheIllustration={false}
-    cacheTags={true}
     {description}
     illustrationSource="/assets/images/parcours-securisation/mesure-{mesure.id}.svg"
     illustrationAlt=""
