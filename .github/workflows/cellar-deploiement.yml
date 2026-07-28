@@ -33,6 +33,16 @@ jobs:
     runs-on: ubuntu-latest
     environment: DEPLOIEMENT_GUIDES
     steps:
+      - name: Mets en place le cache pour les bases de données de signatures de virus
+        id: cache-CVDs
+        uses: actions/cache@v6
+        with:
+          path: |
+            /var/lib/clamav/*/bytecode.cvd
+            /var/lib/clamav/*/daily.cvd
+            /var/lib/clamav/*/main.cvd
+          key: ${{ runner.os }}-CVDs
+
       - name: Prépare rclone
         uses: AnimMouse/setup-rclone@26ef2133e09fd383329a1d4c1fbe6a71db1976c9 # v1.12.0
 
