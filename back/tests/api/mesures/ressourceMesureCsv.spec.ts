@@ -92,6 +92,34 @@ describe('La ressource des mesures en CSV', () => {
       assert.equal(contenu[1].slice(1, -1), mesure.titre);
       assert.equal(contenu[2].slice(1, -1), mesure.explications);
     });
+
+    it('ne contient pas de balises HTML dans les descriptions', async () => {
+      const module = new Module(1, 'Cyberdépart');
+      const mesure = mesureDeTest()
+        .avecLeTitre('Mesure 4')
+        .avecLesExplications(
+          `<p>Un mot de <em>passe</em> seul <ul><li>ne</li> <li>suffit</li></ul> pas toujours <span>à protéger</span> un compte. En activant une deuxième vérification, vous ajoutez une sécurité supplémentaire au moment de la connexion : un code reçu sur une application, une clé physique, une empreinte digitale ou, à défaut, un code par SMS.</p>`
+        )
+
+        .avecIdModule(module.id)
+        .construis();
+      module.mesures = [mesure];
+
+      await entrepôtModule.ajoute(module);
+      await entrepôtMesure.ajoute(mesure);
+
+      const { text } = await getConnecté();
+
+      const lignes = text.split('\n');
+      const contenu = lignes[1].split(';');
+
+      assert.equal(contenu[0].slice(1, -1), module.nom);
+      assert.equal(contenu[1].slice(1, -1), mesure.titre);
+      assert.equal(
+        contenu[2].slice(1, -1),
+        `Un mot de passe seul ne suffit pas toujours à protéger un compte. En activant une deuxième vérification, vous ajoutez une sécurité supplémentaire au moment de la connexion : un code reçu sur une application, une clé physique, une empreinte digitale ou, à défaut, un code par SMS.`
+      );
+    });
   });
 
   describe("lorsque qu'aucun utilisateur n'est connecté", async () => {
