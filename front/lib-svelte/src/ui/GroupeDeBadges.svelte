@@ -1,9 +1,9 @@
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
-  import type { CouleurDeBadge } from './badge.type';
+  import type { Badge } from './badge.type';
 
   type Props = {
-    badges: { label: string; accent: CouleurDeBadge }[];
+    badges: Badge[];
     taille?: 'sm' | 'md';
   };
   const { badges, taille = 'sm' }: Props = $props();

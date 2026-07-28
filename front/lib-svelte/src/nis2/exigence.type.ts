@@ -1,4 +1,4 @@
-import type { CouleurDeBadge } from '../ui/badge.type';
+import type { Badge } from '../ui/badge.type';
 
 export type CategorieEntite = 'EntiteEssentielle' | 'EntiteImportante';
 
@@ -51,9 +51,7 @@ export interface ExigenceCyFun23 extends ExigenceBase {
 
 export type Exigence = ExigenceNis2 | ExigenceISO | ExigenceAE | ExigenceCyFun23;
 
-export const badgesExigence = (
-  exigence: ExigenceNis2 | ExigenceCyFun23
-): { label: string; accent: CouleurDeBadge }[] => {
+export const badgesExigence = (exigence: ExigenceNis2 | ExigenceCyFun23): Badge[] => {
   if ('entitesCible' in exigence) {
     return exigence?.entitesCible?.map(
       (categorie) =>
@@ -66,7 +64,7 @@ export const badgesExigence = (
             EntiteImportante: 'green-archipel',
             EntiteEssentielle: 'green-bourgeon',
           }[categorie],
-        }) as { label: string; accent: CouleurDeBadge }
+        }) as Badge
     );
   }
   return [
@@ -98,7 +96,7 @@ export const badgesExigence = (
         Essentiel: 'purple-glycine',
       }[exigence.niveauAssurance],
     },
-  ] as { label: string; accent: CouleurDeBadge }[];
+  ] as Badge[];
 };
 
 export const formateContenuExigence = ({ contenu }: ExigenceBase | ExigenceComparee): string => {
