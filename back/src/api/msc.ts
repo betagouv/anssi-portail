@@ -22,6 +22,7 @@ import { ressourceModule } from './mesures/ressourceModule.js';
 import { ressourceParcours } from './mesures/ressourceParcours.js';
 import { ressourceParcoursComplet } from './mesures/ressourceParcoursComplet.js';
 import { ressourcePriseEnCompte } from './mesures/ressourcePriseEnCompte.js';
+import { ressourceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepart.js';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide.js';
 import { ressourceExigencesNis2 } from './nis2/ressourceExigencesNis2.js';
 import { ressourceExigencesNis2Csv } from './nis2/ressourceExigencesNis2Csv.js';
@@ -302,6 +303,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use('/api/sante-guides', ressourceSanteGuides(configurationServeur));
 
   app.use('/api/abonnement-infolettre', ressourceAbonnementInfolettre(configurationServeur));
+
+  app.use('/api/cyberdepart/recompenses', ressourceRécompensesCyberDépart(configurationServeur));
 
   const parcoursActivé = configurationServeur.adaptateurEnvironnement
     .fonctionnalites()

@@ -27,6 +27,7 @@ import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTest
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire.js';
+import { ServiceRécompensesCyberDépart } from '../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 
 export const fauxFournisseurDeChemin: FournisseurChemin = {
   cheminPageJekyll: (_: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
@@ -275,6 +276,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   entrepotMesure: new EntrepotMesureMemoire(),
   entrepotPriseEnCompte: new EntrepotPriseEnCompteMemoire(),
   entrepôtModule: new EntrepôtModuleMémoire(),
+  serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(),
   entrepotUtilisateur,
   fournisseurChemin: fauxFournisseurDeChemin,
   generateurCodeSessionDeGroupe: fauxGenerateurCodeSessionDeGroupe,
