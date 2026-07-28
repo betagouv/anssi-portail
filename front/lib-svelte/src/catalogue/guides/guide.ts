@@ -5,7 +5,7 @@ export const decodeEntitesHtml = (chaine: string) => {
   return chaine.replaceAll('&#039;', "'");
 };
 
-export const laCouleurDuBadgeSelonLaCollection = (collection: CollectionGuide): string => {
+export const laCouleurDuBadgeSelonLaCollection = (collection: CollectionGuide): CouleurDeBadge => {
   const couleursTypes: Record<CollectionGuide, CouleurDeBadge> = {
     'Crise cyber': 'yellow-tournesol',
     'Gestion des risques cyber': 'pink-tuile',
