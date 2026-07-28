@@ -70,6 +70,13 @@
     {#snippet filAriane()}
       <FilAriane {...propriétésFilAriane} />
     {/snippet}
+    {#snippet illustration()}
+      {#if guide}
+        <div class="conteneur-illustration">
+          <img src={guide.illustration.grande} width="588" height="330" alt="Capture d’écran" />
+        </div>
+      {/if}
+    {/snippet}
     {#snippet actions()}
       {#if guide}
         <BoutonsDocumentsGuide {guide} />
@@ -188,60 +195,20 @@
 <style lang="scss">
   @use '../../../../assets/styles/responsive.scss' as *;
 
-  .chapeau {
-    background: #f4f4f4 url('/assets/images/motif-fond-service.avif');
-    padding: 24px 0;
+  .conteneur-illustration {
+    display: flex;
+    flex-direction: column-reverse;
 
-    .contenu-section {
-      display: flex;
-      flex-direction: column;
-
-      .badges-collections {
-        margin-top: 24px;
-      }
-    }
-
-    @include a-partir-de(xxl) {
-      padding-bottom: 0;
-    }
-
-    .resume {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      gap: 24px;
+    img {
+      display: none;
+      width: 588px;
+      object-fit: cover;
+      object-position: top;
+      height: 330px;
+      background-color: var(--background-default-grey);
 
       @include a-partir-de(xxl) {
-        flex-direction: row;
-      }
-
-      .conteneur-illustration {
-        display: flex;
-        flex-direction: column-reverse;
-      }
-
-      img {
-        display: none;
-        width: 588px;
-        object-fit: cover;
-        object-position: top;
-        height: 330px;
-        background-color: var(--background-default-grey);
-
-        @include a-partir-de(xxl) {
-          display: block;
-        }
-      }
-    }
-
-    h1 {
-      margin: 0 0 16px;
-      font-size: 2.5rem;
-      line-height: 2.875rem;
-
-      @include a-partir-de(md) {
-        font-size: 3.5rem;
-        line-height: 4.125rem;
+        display: block;
       }
     }
   }

@@ -101,7 +101,7 @@
           {/if}
         </div>
         {#if !cacheIllustration}
-          <picture class={['illustration']}>
+          <picture class={['illustration']} class:ficheCatalogue>
             {#if illustration}
               {@render illustration({
                 source: illustrationSource,
@@ -230,6 +230,10 @@
         aspect-ratio: 16 / 9;
         display: grid;
         grid-area: illustration;
+
+        &.ficheCatalogue {
+          align-self: flex-end;
+        }
 
         img {
           max-width: 100%;
