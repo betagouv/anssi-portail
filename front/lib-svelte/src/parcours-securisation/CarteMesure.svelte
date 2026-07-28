@@ -9,17 +9,19 @@
   const { mesure }: Props = $props();
   const typeDeLien = $derived(mesure.estPriseEnCompte ? 'secondaire' : 'primaire');
   const libelleDeLien = $derived(mesure.estPriseEnCompte ? 'Accéder au détail' : "Passer à l'action");
+  const titre = $derived(mesure.phraseAccroche || mesure.titre);
+  const description = $derived(mesure.phraseAccroche ? mesure.titre : undefined);
 </script>
 
 <dsfr-card
-  description={mesure.titre}
+  {description}
   enlarge={false}
   has-buttons={true}
   has-description="true"
   has-header-badge={mesure.estPriseEnCompte || undefined}
   no-link={true}
   src={`/assets/images/parcours-securisation/mesure-${mesure.id}.svg`}
-  title={mesure.phraseAccroche}
+  title={titre}
 >
   <div slot="headerbadges">
     <dsfr-badge
