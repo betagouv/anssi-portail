@@ -5,8 +5,8 @@
 <div class="badge">
   <img
     src="/assets/images/parcours-securisation/badge-cyberdepart.svg"
-    width="157"
-    height="157"
+    width="391"
+    height="220"
     alt="Badge Cyberdépart "
   />
   <h6>Badge Cyberdépart</h6>
@@ -47,9 +47,9 @@
     }
 
     img {
-      margin-bottom: 1.5rem;
       grid-area: image;
       justify-self: center;
+      margin: -1.5rem 0 -1.5rem -1.5rem;
     }
     h6 {
       grid-area: titre;
