@@ -185,7 +185,7 @@ export const fabriqueMiddleware = ({
       await reponse
         .status(HttpStatusCode.ServiceUnavailable)
         .set('Content-Type', 'text/html')
-        .envoieFichierEnrichi(fournisseurChemin.versRessourceJekyll('maintenance.html'));
+        .envoieFichierEnrichi(fournisseurChemin.jekyll.pageMaintenance());
     } else {
       suite();
     }
