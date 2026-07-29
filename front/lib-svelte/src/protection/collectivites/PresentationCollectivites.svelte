@@ -50,6 +50,7 @@
       description="Toutes les collectivités sont exposées au risque de cyberattaques. En 2025, elles ont notamment représenté 11&nbsp;% des victimes de rançongiciels ou ransowmare."
       propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
       titre="Protéger ma collectivité contre les cyberattaques"
+      variante="vert-clair"
     >
       {#snippet illustration()}
         <img src="/assets/images/personne-qui-cogite.svg" alt="" />
