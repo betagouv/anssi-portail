@@ -17,15 +17,17 @@
       etire
     />
   </div>
-  <img src="/assets/images/mario-dsi-et-femme-qui-utilisent-mss.png" alt="Mario, le DSI et une femme utilisent MSS" />
+  <div class="illustration">
+    <img src="/assets/images/mario-dsi-et-femme-qui-utilisent-mss.png" alt="Mario, le DSI et une femme utilisent MSS" />
+  </div>
 </dsfr-container>
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
+  @use '../../../assets/styles/grille' as *;
   .conteneur-heros {
-    display: flex;
-    flex-direction: column;
     background-color: var(--background-flat-blue-france);
-    padding: 6rem 0;
+    padding-block: 6rem;
 
     .surtitre {
       text-transform: uppercase;
@@ -41,9 +43,20 @@
       display: flex;
       flex-direction: column;
       margin-bottom: 3rem;
+      @include a-partir-de(md) {
+        flex-direction: row;
+      }
     }
-    img {
-      width: 100%;
+
+    .illustration {
+      display: flex;
+      flex-direction: column;
+
+      img {
+        width: 100%;
+        max-width: taille-pour-colonnes(8);
+        margin-inline: auto;
+      }
     }
   }
 </style>
