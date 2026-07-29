@@ -4,7 +4,7 @@
   "useBaseBranchConfig": "merge",
   "commitMessagePrefix": "[RENOVATE]",
   "prHourlyLimit": 10,
-  "prConcurrentLimit": 2,
+  "prConcurrentLimit": 4,
   "packageRules": [
     {
       "description": "lockFileMaintenance",
