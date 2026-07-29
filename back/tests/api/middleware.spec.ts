@@ -19,6 +19,7 @@ import {
   fauxAdaptateurHachage,
   fauxAdaptateurJWT,
   fauxFournisseurDeChemin,
+  ressourceFactice,
 } from './fauxObjets.js';
 import { jeanneDupont } from './objetsPretsALEmploi.js';
 
@@ -203,10 +204,10 @@ describe('Le middleware', () => {
     });
 
     it("renvoi un 404 si la fichier n'existe pas", async () => {
-      let pagesDemandee: string = '';
-      fournisseurChemin.versRessourceJekyll = (nomPage) => {
-        pagesDemandee = nomPage;
-        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+      let estAppelé = false;
+      fournisseurChemin.jekyll.page404 = () => {
+        estAppelé = true;
+        return ressourceFactice();
       };
 
       await middleware.ajouteMethodeEnrichissement(requete, reponse, () => {
@@ -214,7 +215,7 @@ describe('Le middleware', () => {
         reponse.envoieFichierEnrichi('/services/inexistant.html');
       });
 
-      assert.deepEqual(pagesDemandee, '404.html');
+      assert.equal(estAppelé, true);
     });
   });
 

@@ -102,7 +102,7 @@ export const fabriqueMiddleware = ({
         await reponse
           .status(404)
           .set('Content-Type', 'text/html')
-          .envoieFichierEnrichi(fournisseurChemin.versRessourceJekyll('404.html'));
+          .envoieFichierEnrichi(fournisseurChemin.jekyll.page404());
       }
     };
     suite();

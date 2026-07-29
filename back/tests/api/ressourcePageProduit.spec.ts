@@ -5,7 +5,7 @@ import { join } from 'path';
 import request from 'supertest';
 import { FichierInconnu, FournisseurChemin } from '../../src/api/fournisseurChemin.js';
 import { creeServeur } from '../../src/api/msc.js';
-import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets.js';
+import { configurationDeTestDuServeur, fauxFournisseurDeChemin, ressourceFactice } from './fauxObjets.js';
 
 describe('La ressource page produit', () => {
   let serveur: Express;
@@ -75,23 +75,20 @@ describe('La ressource page produit', () => {
   });
 
   it('retourne une erreur 404 si la page n’est pas trouvée', async () => {
-    let déjàAppelé: boolean = false;
-    let nomFichierAppelé = '';
+    fournisseurChemin.versRessourceJekyll = (..._chemins: string[]) => {
+      throw new FichierInconnu('');
+    };
 
-    fournisseurChemin.versRessourceJekyll = (...chemins: string[]) => {
-      if (!déjàAppelé) {
-        déjàAppelé = true;
-        throw new FichierInconnu('');
-      } else {
-        nomFichierAppelé = chemins[0];
-        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
-      }
+    let estAppelé = false;
+    fournisseurChemin.jekyll.page404 = () => {
+      estAppelé = true;
+      return ressourceFactice();
     };
 
     const réponse = await request(serveur).get('/services/inconnu').accept('text/html');
 
     assert.equal(réponse.status, 404);
     assert.equal(réponse.headers['content-type'], 'text/html; charset=utf-8');
-    assert.equal(nomFichierAppelé, '404.html');
+    assert.equal(estAppelé, true);
   });
 });

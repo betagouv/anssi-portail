@@ -29,6 +29,8 @@ import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMe
 import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire.js';
 import { ServiceRécompensesCyberDépart } from '../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 
+export const ressourceFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.html');
+
 export const fauxFournisseurDeChemin: FournisseurChemin = {
   front: {
     sitemapXml: () => '',
@@ -37,8 +39,11 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
     csvNis2Simulateur: () =>
       join(process.cwd(), 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
   },
-  versPageJekyll: (_: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
-  versRessourceJekyll: (..._x: string[]) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
+  jekyll: {
+    page404: () => ressourceFactice(),
+  },
+  versPageJekyll: (_: string) => ressourceFactice(),
+  versRessourceJekyll: (..._x: string[]) => ressourceFactice(),
 };
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
