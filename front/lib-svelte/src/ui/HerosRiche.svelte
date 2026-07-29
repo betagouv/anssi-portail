@@ -1,23 +1,31 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import FilAriane, { type Props as PropriétésFilAriane } from './FilAriane.svelte';
+
   type Props = {
+    actions?: Snippet;
     description: string;
     illustration: Snippet;
     propriétésFilAriane?: PropriétésFilAriane;
     titre: string;
+    variante: 'bleu-clair' | 'vert-clair';
   };
 
-  const { description, illustration, propriétésFilAriane, titre }: Props = $props();
+  const { actions, description, illustration, propriétésFilAriane, titre, variante }: Props = $props();
 </script>
 
-<dsfr-container class={['conteneur']} class:avecFilAriane={!!propriétésFilAriane}>
+<dsfr-container class={['conteneur', variante]} class:avecFilAriane={!!propriétésFilAriane}>
   {#if propriétésFilAriane}
     <FilAriane {...propriétésFilAriane} />
   {/if}
   <div class="contenu-heros">
     <h1 class="titre alternatif-md">{titre}</h1>
     <p class="description texte-chapo-xl">{description}</p>
+    {#if actions}
+      <div class="actions">
+        {@render actions()}
+      </div>
+    {/if}
     <div class="illustration">
       {@render illustration()}
     </div>
@@ -31,7 +39,14 @@
   .conteneur {
     display: flex;
     padding: 1rem 1rem 6rem;
-    background-color: var(--background-contrast-green-bourgeon);
+
+    &.bleu-clair {
+      background-color: var(--blue-france-925-125);
+    }
+
+    &.vert-clair {
+      background-color: var(--background-contrast-green-bourgeon);
+    }
 
     &.avecFilAriane {
       padding-top: 0;
@@ -42,11 +57,13 @@
       grid-template-areas:
         'titre'
         'description'
+        'actions'
         'illustration';
       @include a-partir-de(lg) {
         grid-template-areas:
           'titre illustration'
-          'description illustration';
+          'description illustration'
+          'actions illustration';
         column-gap: 1.5rem;
         grid-template-columns: auto taille-pour-colonnes(5);
       }
@@ -61,6 +78,18 @@
 
       .description {
         grid-area: description;
+        margin-bottom: 2rem;
+      }
+
+      .actions {
+        display: flex;
+        flex-direction: column;
+        grid-area: actions;
+        margin-bottom: 3rem;
+        @include a-partir-de(md) {
+          flex-direction: row;
+          margin-bottom: 0;
+        }
       }
 
       .illustration {

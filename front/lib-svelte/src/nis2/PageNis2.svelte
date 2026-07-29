@@ -11,6 +11,7 @@
   import ExigencesNis2 from './ExigencesNis2.svelte';
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
+  import HerosRiche from '../ui/HerosRiche.svelte';
 
   const { itemsCyber, featureFlagNis2CyFun23 = false, exigences = undefined, guides = undefined } = $props();
 
@@ -62,6 +63,29 @@
   {/snippet}
 </Heros>
 
+<HerosRiche
+  description="Préparez-vous et renforcez dès à présent le niveau de cybersécurité de votre organisation."
+  propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
+  titre="Directive NIS 2"
+  variante="bleu-clair"
+>
+  {#snippet illustration()}
+    <img src="/assets/images/nis2-noir.svg" alt="NIS2" />
+  {/snippet}
+  {#snippet actions()}
+    <Lien
+      apparence="bouton"
+      blank
+      etire
+      href="https://club.ssi.gouv.fr/#/nis2/introduction"
+      icone="external-link-line"
+      iconeADroite
+      libelle="Pré-enregistrer mon entité"
+      type="primaire"
+    />
+  {/snippet}
+</HerosRiche>
+
 <Notice
   description="Restez informé des dernières actualités de la directive NIS 2 et autres actualités."
   estRejetable
@@ -95,5 +119,9 @@
     border: 0;
     height: 24px;
     margin: 0;
+  }
+
+  img {
+    width: 100%;
   }
 </style>

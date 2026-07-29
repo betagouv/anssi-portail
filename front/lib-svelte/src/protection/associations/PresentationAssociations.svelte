@@ -44,6 +44,7 @@
         hameçonnage / phishing ou de rançongiciels / ransomwares. Il n'est pas trop tard pour agir et des solutions existent&nbsp;!"
       propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
       titre="Protéger mon association contre les cyberattaques"
+      variante="vert-clair"
     >
       {#snippet illustration()}
         <img src="/assets/images/personne-avec-micro-consultant-sites-cyber.svg" alt="" />

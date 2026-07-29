@@ -46,6 +46,7 @@
       représenté 48&nbsp;% des victimes de rançongiciels ou ransowmare représentant les premières entités visées."
       propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
       titre="Protéger mon entreprise contre les cyberattaques"
+      variante="vert-clair"
     >
       {#snippet illustration()}
         <img src="/assets/images/personne-avec-laptop-entoure-de-diagrammes.svg" alt="" />
