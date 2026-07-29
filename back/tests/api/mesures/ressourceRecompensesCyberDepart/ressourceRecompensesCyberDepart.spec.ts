@@ -2,17 +2,17 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import sharp from 'sharp';
-import { creeServeur } from '../../../src/api/msc.js';
-import { configurationDeTestDuServeur } from '../fauxObjets.js';
-import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
-import { encodeSession } from '../cookie.js';
-import { jeanneDupont } from '../objetsPretsALEmploi.js';
+import { creeServeur } from '../../../../src/api/msc.js';
+import { configurationDeTestDuServeur } from '../../fauxObjets.js';
+import { EntrepotUtilisateur } from '../../../../src/metier/entrepotUtilisateur.js';
+import { encodeSession } from '../../cookie.js';
+import { jeanneDupont } from '../../objetsPretsALEmploi.js';
 import { Express } from 'express';
-import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
-import { ServiceRécompensesCyberDépart } from '../../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
-import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire.js';
-import { Module } from '../../../src/metier/module.js';
-import { mesureDeTest } from './constructeurDeMesure.js';
+import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
+import { ServiceRécompensesCyberDépart } from '../../../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
+import { EntrepôtModuleMémoire } from '../../../persistance/EntrepôtModuleMémoire.js';
+import { Module } from '../../../../src/metier/module.js';
+import { mesureDeTest } from '../constructeurDeMesure.js';
 
 describe('La ressource des récompenses CyberDépart', () => {
   let serveur: Express;
