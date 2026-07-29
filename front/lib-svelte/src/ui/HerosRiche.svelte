@@ -89,6 +89,8 @@
           margin-bottom: 3rem;
           @include a-partir-de(md) {
             flex-direction: row;
+          }
+          @include a-partir-de(lg) {
             margin-bottom: 0;
           }
         }
