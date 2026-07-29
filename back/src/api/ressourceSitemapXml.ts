@@ -24,7 +24,7 @@ const recupereLiens = (pages: string[], { fournisseurChemin }: ConfigurationServ
 };
 
 export const ressourceSitemapXml = (pagesStatiques: string[], configurationServeur: ConfigurationServeur) => {
-  const cheminVersSitemapXml = configurationServeur.fournisseurChemin.sitemapXml();
+  const cheminVersSitemapXml = configurationServeur.fournisseurChemin.front.sitemapXml();
   if (cheminVersSitemapXml.length === 0) return () => {};
   try {
     const sitemapStream = new SitemapStream({ hostname: 'https://messervices.cyber.gouv.fr' });
