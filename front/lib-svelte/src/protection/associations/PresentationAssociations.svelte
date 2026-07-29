@@ -53,3 +53,9 @@
 </Alternatives>
 
 <Proteger origine="landing-associations" />
+
+<style lang="scss">
+  img {
+    width: 100%;
+  }
+</style>

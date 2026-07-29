@@ -55,3 +55,9 @@
 </Alternatives>
 
 <Proteger origine="landing-entreprises" />
+
+<style lang="scss">
+  img {
+    width: 100%;
+  }
+</style>
