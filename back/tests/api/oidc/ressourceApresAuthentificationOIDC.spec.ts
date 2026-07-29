@@ -1,6 +1,5 @@
 import { Express } from 'express';
 import assert from 'node:assert';
-import { join } from 'node:path';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT.js';
@@ -16,6 +15,7 @@ import {
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
   fauxFournisseurDeChemin,
+  ressourceFactice,
 } from '../fauxObjets.js';
 import { utilisateurDeTest } from '../mesures/constructeurDUtilisateur.js';
 
@@ -76,7 +76,7 @@ describe('La ressource apres authentification OIDC', () => {
         let nomPageDemande;
         fournisseurChemin.versPageJekyll = (nomPage) => {
           nomPageDemande = nomPage;
-          return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+          return ressourceFactice();
         };
 
         await requeteGet();

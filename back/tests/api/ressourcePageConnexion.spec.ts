@@ -3,9 +3,8 @@ import { Express } from 'express';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
 import assert from 'node:assert';
-import { join } from 'path';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
-import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets.js';
+import { configurationDeTestDuServeur, fauxFournisseurDeChemin, ressourceFactice } from './fauxObjets.js';
 import { encodeSession, enObjet } from './cookie.js';
 
 describe('La ressource de la page connexion', () => {
@@ -38,7 +37,7 @@ describe('La ressource de la page connexion', () => {
       let nomPageDemande: string;
       fournisseurChemin.versPageJekyll = (nomPage: string) => {
         nomPageDemande = nomPage;
-        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+        return ressourceFactice();
       };
 
       await request(serveur).get('/connexion');

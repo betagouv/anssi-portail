@@ -4,7 +4,6 @@ import jsonwebtoken from 'jsonwebtoken';
 import { createRequest, createResponse } from 'node-mocks-http';
 import { OutgoingHttpHeaders } from 'node:http';
 import { beforeEach, describe, it } from 'node:test';
-import { join } from 'path';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT.js';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
 import { fabriqueMiddleware, Middleware } from '../../src/api/middleware.js';
@@ -177,7 +176,7 @@ describe('Le middleware', () => {
 
       await middleware.ajouteMethodeEnrichissement(requete, reponse, () => {
         assert.notEqual(reponse.envoieFichierEnrichi, undefined);
-        reponse.envoieFichierEnrichi(join(process.cwd(), 'tests', 'ressources', 'factice.html'));
+        reponse.envoieFichierEnrichi(ressourceFactice());
       });
 
       assert.equal(true, aAppeleSend);
@@ -196,7 +195,7 @@ describe('Le middleware', () => {
 
       await middleware.ajouteMethodeEnrichissement(requete, reponse, () => {
         assert.notEqual(reponse.envoieFichierEnrichi, undefined);
-        reponse.envoieFichierEnrichi(join(process.cwd(), 'tests', 'ressources', 'factice.html'));
+        reponse.envoieFichierEnrichi(ressourceFactice());
       });
 
       assert.equal(true, aAppeleSend);

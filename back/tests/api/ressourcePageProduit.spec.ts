@@ -1,7 +1,6 @@
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
-import { join } from 'path';
 import request from 'supertest';
 import { FichierInconnu, FournisseurChemin } from '../../src/api/fournisseurChemin.js';
 import { creeServeur } from '../../src/api/msc.js';
@@ -39,7 +38,7 @@ describe('La ressource page produit', () => {
       fournisseurChemin.versRessourceJekyll = (repertoireProduits: string, idProduit: string) => {
         idProduitDemande = idProduit;
         repertoireProduitsDemande = repertoireProduits;
-        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+        return ressourceFactice();
       };
 
       await request(serveur).get('/services/mon-service-securise');
@@ -55,7 +54,7 @@ describe('La ressource page produit', () => {
     fournisseurChemin.versRessourceJekyll = (repertoireProduits: string, idProduit: string) => {
       idProduitDemande = idProduit;
       repertoireProduitsDemande = repertoireProduits;
-      return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+      return ressourceFactice();
     };
 
     const reponse = await request(serveur).get('/ressources/cot');
