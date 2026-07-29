@@ -118,7 +118,7 @@
   {#snippet alternatif()}
     <lab-anssi-bandeau-page
       simple={format === 'banniere'}
-      ficheCatalogue={format === 'details'}
+      {ficheCatalogue}
       inverse={theme === 'clair'}
       avecBadges={!cacheTags}
       avecFilAriane={!cacheFilAriane}
@@ -127,7 +127,6 @@
       {description}
       sansImage={cacheIllustration}
       urlImage={illustrationSource}
-      fiche-catalogue={ficheCatalogue}
     >
       <ol slot="seo">
         {#each segmentsFilAriane as segment, index (segment.id)}

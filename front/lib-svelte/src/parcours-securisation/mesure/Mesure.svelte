@@ -94,6 +94,7 @@
     format="details"
     {titre}
     theme="clair"
+    ficheCatalogue
   >
     {#snippet filAriane()}
       <FilAriane
