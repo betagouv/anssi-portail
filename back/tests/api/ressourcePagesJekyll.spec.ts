@@ -35,7 +35,7 @@ describe('La ressource pages jekyll', () => {
 
     it('sers le fichier html de jekyll', async () => {
       let nomPageDemande: string;
-      fournisseurChemin.versPageJekyll = (nomPage: string) => {
+      fournisseurChemin.jekyll.page = (nomPage: string) => {
         nomPageDemande = nomPage;
         return ressourceFactice();
       };
@@ -62,7 +62,7 @@ describe('La ressource pages jekyll', () => {
 
     it('sers le fichier html de jekyll', async () => {
       let nomPageDemande: string;
-      fournisseurChemin.versPageJekyll = (nomPage: string) => {
+      fournisseurChemin.jekyll.page = (nomPage: string) => {
         nomPageDemande = nomPage;
         return ressourceFactice();
       };
@@ -89,7 +89,7 @@ describe('La ressource pages jekyll', () => {
 
     it('sers le fichier html de jekyll', async () => {
       let nomPageDemande: string;
-      fournisseurChemin.versPageJekyll = (nomPage: string) => {
+      fournisseurChemin.jekyll.page = (nomPage: string) => {
         nomPageDemande = nomPage;
         return ressourceFactice();
       };
@@ -143,7 +143,7 @@ describe('La ressource pages jekyll', () => {
 
     it('sers le fichier html de jekyll', async () => {
       let nomPageDemande: string;
-      fournisseurChemin.versPageJekyll = (nomPage: string) => {
+      fournisseurChemin.jekyll.page = (nomPage: string) => {
         nomPageDemande = nomPage;
         return ressourceFactice();
       };

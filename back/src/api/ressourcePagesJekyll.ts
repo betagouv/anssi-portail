@@ -10,10 +10,7 @@ const ressourcePagesJekyll = ({ fournisseurChemin }: ConfigurationServeur, nomPa
     '/',
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
-      await reponse
-        .contentType('text/html')
-        .status(200)
-        .envoieFichierEnrichi(fournisseurChemin.versPageJekyll(nomPage));
+      await reponse.contentType('text/html').status(200).envoieFichierEnrichi(fournisseurChemin.jekyll.page(nomPage));
     })
   );
 

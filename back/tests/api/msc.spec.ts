@@ -11,9 +11,12 @@ describe('La configuration de notre serveur', () => {
       ...configurationDeTestDuServeur,
       fournisseurChemin: {
         ...fauxFournisseurDeChemin,
-        versPageJekyll: () =>
-          // On a besoin d'un gros fichier pour que 'compression' décide de compresser (defaut 1024 o)
-          join(process.cwd(), 'tests', 'ressources', 'factice-gros.html'),
+        jekyll: {
+          ...fauxFournisseurDeChemin.jekyll,
+          page: () =>
+            // On a besoin d'un gros fichier pour que 'compression' décide de compresser (defaut 1024 o)
+            join(process.cwd(), 'tests', 'ressources', 'factice-gros.html'),
+        },
       },
     });
 

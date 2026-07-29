@@ -74,7 +74,7 @@ describe('La ressource apres authentification OIDC', () => {
 
       it('sert la page apres-authentification', async () => {
         let nomPageDemande;
-        fournisseurChemin.versPageJekyll = (nomPage) => {
+        fournisseurChemin.jekyll.page = (nomPage) => {
           nomPageDemande = nomPage;
           return ressourceFactice();
         };
