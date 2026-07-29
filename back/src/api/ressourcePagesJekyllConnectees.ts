@@ -30,7 +30,7 @@ const ressourcePagesJekyllConnectees = (
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       publieMesureConsultee(nomPage, requete, busEvenements);
-      reponse.contentType('text/html').status(200).envoieFichierEnrichi(fournisseurChemin.versPageJekyll(nomPage));
+      reponse.contentType('text/html').status(200).envoieFichierEnrichi(fournisseurChemin.jekyll.page(nomPage));
     })
   );
 

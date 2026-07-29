@@ -40,7 +40,7 @@ describe('le fournisseurChemin', () => {
 
     it('rejette \\etc\\passwd (chemin absolu Windows)', () => {
       assert.throws(
-        () => fournisseurChemin.versPageJekyll('\\etc\\passwd'),
+        () => fournisseurChemin.jekyll.page('\\etc\\passwd'),
         (err) => err instanceof ErreurTraverséeDeChemin && /Tentative de path traversal/.test(err.message)
       );
     });
@@ -54,7 +54,7 @@ describe('le fournisseurChemin', () => {
     it('accepte index', () => {
       siteFront.fichiers = () => [`${process.cwd()}/front/_site/index/index.html`];
 
-      assert.doesNotThrow(() => fournisseurChemin.versPageJekyll('index'));
+      assert.doesNotThrow(() => fournisseurChemin.jekyll.page('index'));
     });
 
     it('accepte mon-espace-nis2.html', () => {
@@ -73,7 +73,7 @@ describe('le fournisseurChemin', () => {
       siteFront.fichiers = () => [];
 
       assert.throws(
-        () => fournisseurChemin.versPageJekyll('inconnue'),
+        () => fournisseurChemin.jekyll.page('inconnue'),
         (err) => err instanceof FichierInconnu && /Fichier inconnu .*_site\/inconnue\/index\.html/.test(err.message)
       );
     });

@@ -35,7 +35,7 @@ describe('La ressource de la page connexion', () => {
 
     it('sers le fichier html de jekyll', async () => {
       let nomPageDemande: string;
-      fournisseurChemin.versPageJekyll = (nomPage: string) => {
+      fournisseurChemin.jekyll.page = (nomPage: string) => {
         nomPageDemande = nomPage;
         return ressourceFactice();
       };

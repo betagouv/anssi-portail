@@ -155,7 +155,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       // on garde la redirection pour ne pas casser les liens existants
       return reponse.redirect(301, `/financements/${id}`);
     }
-    reponse.contentType('text/html').status(200).envoieFichierEnrichi(fournisseurChemin.versPageJekyll('financements'));
+    reponse.contentType('text/html').status(200).envoieFichierEnrichi(fournisseurChemin.jekyll.page('financements'));
   });
 
   const routesStatiques = [

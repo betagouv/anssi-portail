@@ -26,8 +26,9 @@ export interface FournisseurChemin {
     page404: () => string;
     pageMaintenance: () => string;
     robotsTxt: () => string;
+
+    page: (nom: string) => string;
   };
-  versPageJekyll: (nomPage: string) => string;
   versRessourceJekyll: (...morceauxChemin: string[]) => string;
 }
 
@@ -61,8 +62,9 @@ export const fournisseurChemin: FournisseurChemin = {
     page404: () => construisCheminVersArtefactJekyll('404.html'),
     pageMaintenance: () => construisCheminVersArtefactJekyll('maintenance.html'),
     robotsTxt: () => construisCheminVersArtefactJekyll('robots.txt'),
+
+    page: (nom: string) => construisCheminVersArtefactJekyll(nom, 'index.html'),
   },
-  versPageJekyll: (nomPage: string) => construisCheminVersArtefactJekyll(nomPage, 'index.html'),
   versRessourceJekyll: (...morceauxChemin: string[]) => construisCheminVersArtefactJekyll(...morceauxChemin),
 };
 

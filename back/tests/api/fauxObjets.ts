@@ -43,8 +43,8 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
     page404: () => ressourceFactice(),
     pageMaintenance: () => ressourceFactice(),
     robotsTxt: () => ressourceFactice(),
+    page: (_nom: string) => ressourceFactice(),
   },
-  versPageJekyll: (_: string) => ressourceFactice(),
   versRessourceJekyll: (..._x: string[]) => ressourceFactice(),
 };
 
