@@ -22,6 +22,9 @@ export interface FournisseurChemin {
   back: {
     csvNis2Simulateur: () => string;
   };
+  jekyll: {
+    page404: () => string;
+  };
   versPageJekyll: (nomPage: string) => string;
   versRessourceJekyll: (...morceauxChemin: string[]) => string;
 }
@@ -51,6 +54,9 @@ export const fournisseurChemin: FournisseurChemin = {
   back: {
     csvNis2Simulateur: () =>
       join(process.cwd(), 'back', 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
+  },
+  jekyll: {
+    page404: () => construisCheminVersArtefactJekyll('404.html'),
   },
   versPageJekyll: (nomPage: string) => construisCheminVersArtefactJekyll(nomPage, 'index.html'),
   versRessourceJekyll: (...morceauxChemin: string[]) => construisCheminVersArtefactJekyll(...morceauxChemin),
