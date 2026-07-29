@@ -1,17 +1,18 @@
 <script lang="ts">
-  import { estServeur } from '$plateforme/environnement';
+  import { afficheNouvelleDA, estServeur } from '$plateforme/environnement';
   import { onMount } from 'svelte';
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
+  import Alternatives from '../ui/Alternatives.svelte';
   import { fabriqueFilAriane } from '../ui/filAriane';
   import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
+  import HerosRiche from '../ui/HerosRiche.svelte';
   import Lien from '../ui/Lien.svelte';
   import Notice from '../ui/Notice.svelte';
   import DocumentationNis2 from './DocumentationNis2.svelte';
   import ExigencesNis2 from './ExigencesNis2.svelte';
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
-  import HerosRiche from '../ui/HerosRiche.svelte';
 
   const { itemsCyber, featureFlagNis2CyFun23 = false, exigences = undefined, guides = undefined } = $props();
 
@@ -34,57 +35,62 @@
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Directive NIS 2', fondSombre: true };
 </script>
 
-<Heros
-  format="heros"
-  theme="sombre"
-  cacheTags={true}
-  titre="Directive NIS 2"
-  description="Préparez-vous et renforcez dès à présent le niveau de cybersécurité de votre organisation."
-  cacheActions={false}
-  illustrationSource="/assets/images/nis2.svg"
-  illustrationAlt="NIS2"
-  cacheIllustration={!estBureau}
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
->
-  {#snippet filAriane()}
-    <FilAriane {...propriétésFilAriane} />
+<Alternatives affichageAlternatif={afficheNouvelleDA}>
+  {#snippet défaut()}
+    <Heros
+      format="heros"
+      theme="sombre"
+      cacheTags={true}
+      titre="Directive NIS 2"
+      description="Préparez-vous et renforcez dès à présent le niveau de cybersécurité de votre organisation."
+      cacheActions={false}
+      illustrationSource="/assets/images/nis2.svg"
+      illustrationAlt="NIS2"
+      cacheIllustration={!estBureau}
+      segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
+    >
+      {#snippet filAriane()}
+        <FilAriane {...propriétésFilAriane} />
+      {/snippet}
+      {#snippet actions()}
+        <Lien
+          apparence="bouton"
+          blank
+          etire
+          href="https://club.ssi.gouv.fr/#/nis2/introduction"
+          icone="external-link-line"
+          iconeADroite
+          libelle="Pré-enregistrer mon entité"
+          type="primaire-inverse"
+        />
+      {/snippet}
+    </Heros>
   {/snippet}
-  {#snippet actions()}
-    <Lien
-      apparence="bouton"
-      blank
-      etire
-      href="https://club.ssi.gouv.fr/#/nis2/introduction"
-      icone="external-link-line"
-      iconeADroite
-      libelle="Pré-enregistrer mon entité"
-      type="primaire-inverse"
-    />
+  {#snippet alternatif()}
+    <HerosRiche
+      description="Préparez-vous et renforcez dès à présent le niveau de cybersécurité de votre organisation."
+      propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
+      titre="Directive NIS 2"
+      variante="bleu-clair"
+    >
+      {#snippet illustration()}
+        <img src="/assets/images/nis2-noir.svg" alt="NIS2" />
+      {/snippet}
+      {#snippet actions()}
+        <Lien
+          apparence="bouton"
+          blank
+          etire
+          href="https://club.ssi.gouv.fr/#/nis2/introduction"
+          icone="external-link-line"
+          iconeADroite
+          libelle="Pré-enregistrer mon entité"
+          type="primaire"
+        />
+      {/snippet}
+    </HerosRiche>
   {/snippet}
-</Heros>
-
-<HerosRiche
-  description="Préparez-vous et renforcez dès à présent le niveau de cybersécurité de votre organisation."
-  propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
-  titre="Directive NIS 2"
-  variante="bleu-clair"
->
-  {#snippet illustration()}
-    <img src="/assets/images/nis2-noir.svg" alt="NIS2" />
-  {/snippet}
-  {#snippet actions()}
-    <Lien
-      apparence="bouton"
-      blank
-      etire
-      href="https://club.ssi.gouv.fr/#/nis2/introduction"
-      icone="external-link-line"
-      iconeADroite
-      libelle="Pré-enregistrer mon entité"
-      type="primaire"
-    />
-  {/snippet}
-</HerosRiche>
+</Alternatives>
 
 <Notice
   description="Restez informé des dernières actualités de la directive NIS 2 et autres actualités."
