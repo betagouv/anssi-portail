@@ -2,6 +2,7 @@ import { Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { fabriqueGestionnaireRessourceCellar, gereDocumentManquantSimplement } from '../gestionnaireRessourceCellar.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
+import { HttpStatusCode } from 'axios';
 
 export const ressourceDocumentGuide = ({ cellar, entrepotGuide }: ConfigurationServeur) => {
   const routeur = Router();
@@ -10,7 +11,7 @@ export const ressourceDocumentGuide = ({ cellar, entrepotGuide }: ConfigurationS
     const guides = await entrepotGuide.tous();
     const guideTrouve = guides.find((guide) => guide.nomsAnciensDocuments.includes(nomDuDocument));
     if (guideTrouve) {
-      reponse.redirect(301, `/guides/${guideTrouve.id}`);
+      reponse.redirect(HttpStatusCode.MovedPermanently, `/guides/${guideTrouve.id}`);
     } else {
       gereDocumentManquantSimplement(reponse);
     }

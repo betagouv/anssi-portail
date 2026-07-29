@@ -11,13 +11,9 @@ const ressourcePageProduit = ({ fournisseurChemin }: ConfigurationServeur, reper
     '/:id',
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
-      if (requete.params.id === 'mon-espace-nis2.html') {
-        return reponse.redirect(HttpStatusCode.MovedPermanently, '/nis2');
-      }
-
       await reponse
         .contentType('text/html')
-        .status(200)
+        .status(HttpStatusCode.Ok)
         .envoieFichierEnrichi(fournisseurChemin.versRessourceJekyll(repertoireProduits, requete.params.id as string));
     })
   );

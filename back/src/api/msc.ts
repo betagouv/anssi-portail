@@ -67,6 +67,7 @@ import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResul
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
 import { ressourceMesureCsv } from './mesures/ressourceMesureCsv.js';
+import { HttpStatusCode } from 'axios';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -131,6 +132,35 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(cookieParser());
   app.use(json());
 
+  [
+    ['/aPropos', '/a-propos'],
+    ['/directive-nis2', '/nis2'],
+    ['/guides', '/catalogue'],
+    ['/mentionsLegales', '/mentions-legales'],
+    ['/guides/la-defense-en-profondeur-appliquee-aux-systemes-dinformation', '/guides/essentiels-defense-profondeur'],
+    ['/services/mon-espace-nis2.html', '/nis2'],
+  ].forEach(([precedent, nouveau]: string[]) => {
+    app.use(precedent, (requete: Request, reponse: Response, suite: NextFunction) => {
+      if (requete.originalUrl === precedent || requete.originalUrl === `${precedent}/`) {
+        return reponse.redirect(HttpStatusCode.MovedPermanently, nouveau);
+      }
+      suite();
+    });
+  });
+
+  app.use((requete, reponse, suite) => {
+    if (requete.path !== '/' && requete.path.endsWith('/')) {
+      const motifSlashFinalAvantParametres = /\/+(?=\?|$)/;
+
+      return reponse.redirect(
+        HttpStatusCode.PermanentRedirect,
+        requete.originalUrl.replace(motifSlashFinalAvantParametres, '')
+      );
+    }
+
+    suite();
+  });
+
   const brancheLesRessourcesStatiques = (avecCors: boolean) => (ressource: string) => {
     const sertLesFichiersStatiques = express.static(fournisseurChemin.versRessourceJekyll(ressource), {
       setHeaders: (reponse: Response) =>
@@ -153,7 +183,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     const id = requete.query.idFinancement;
     if (Object.keys(requete.query).length > 0 && id) {
       // on garde la redirection pour ne pas casser les liens existants
-      return reponse.redirect(301, `/financements/${id}`);
+      return reponse.redirect(HttpStatusCode.MovedPermanently, `/financements/${id}`);
     }
     reponse.contentType('text/html').status(200).envoieFichierEnrichi(fournisseurChemin.jekyll.page('financements'));
   });
@@ -325,55 +355,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   }
 
   app.use('/parcours', ressourceParcours(configurationServeur));
-
-  [
-    ['/a-propos/', '/a-propos'],
-    ['/abonnement-infolettre/', 'abonnement-infolettre'],
-    ['/accessibilite/', '/accessibilite'],
-    ['/apres-authentification/', '/apres-authentification'],
-    ['/aPropos', '/a-propos'],
-    ['/associations/', '/associations'],
-    ['/catalogue/', '/catalogue'],
-    ['/cgu/', '/cgu'],
-    ['/collectivites/', '/collectivites'],
-    ['/confidentialite/', '/confidentialite'],
-    ['/confirmation-abonnement-infolettre/', '/confirmation-abonnement-infolettre'],
-    ['/connexion/', '/connexion'],
-    ['/contacts/', '/contacts'],
-    ['/creation-compte/', '/creation-compte'],
-    ['/demande-aide-mon-aide-cyber/', '/demande-aide-mon-aide-cyber'],
-    ['/directive-nis2', '/nis2'],
-    ['/entreprises/', '/entreprises'],
-    ['/favoris-partages/', '/favoris-partages'],
-    ['/favoris/', '/favoris'],
-    ['/financements/', '/financements'],
-    ['/guides', '/catalogue'],
-    ['/inscription/', '/inscription'],
-    ['/ma-maturite/', '/ma-maturite'],
-    ['/maintenance/', '/maintenance'],
-    ['/mentions-legales/', '/mentions-legales'],
-    ['/mentionsLegales', '/mentions-legales'],
-    ['/nis2/', '/nis2'],
-    ['/niveaux-maturite/', '/niveaux-maturite'],
-    ['/parcours-approfondir/', '/parcours-approfondir'],
-    ['/parcours-debuter/', '/parcours-debuter'],
-    ['/prestataires/', '/prestataires'],
-    ['/promouvoir-diagnostic-cyber/', '/promouvoir-diagnostic-cyber'],
-    ['/promouvoir-msc/', '/promouvoir-msc'],
-    ['/resultats-session-groupe/', '/resultats-session-groupe'],
-    ['/sante/', '/sante'],
-    ['/securite/', '/securite'],
-    ['/services-anssi/', '/services-anssi'],
-    ['/session-groupe/', '/session-groupe'],
-    ['/simulateur-nis2/', '/simulateur-nis2'],
-    ['/statistiques/', '/statistiques'],
-    ['/test-maturite/', '/test-maturite'],
-    ['/guides/la-defense-en-profondeur-appliquee-aux-systemes-dinformation', '/guides/essentiels-defense-profondeur'],
-  ].forEach(([precedent, nouveau]: string[]) => {
-    app.use(precedent, (_requete: Request, reponse: Response) => {
-      reponse.redirect(301, nouveau);
-    });
-  });
 
   app.use('/robots.txt', ressourceRobotsTxt(configurationServeur));
   app.use('/sitemap.xml', ressourceSitemapXml(routesStatiques, configurationServeur));
