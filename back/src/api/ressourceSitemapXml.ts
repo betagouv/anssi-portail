@@ -14,7 +14,7 @@ interface LienSitemap {
 const recupereLiens = (pages: string[], { fournisseurChemin }: ConfigurationServeur): LienSitemap[] => {
   return pages.map((route): LienSitemap => {
     const nomFichier = route === '/' ? 'index.html' : path.join(`${route.replace(/^\//, '')}`, 'index.html');
-    const cheminFichier = fournisseurChemin.ressourceDeBase(nomFichier);
+    const cheminFichier = fournisseurChemin.versRessourceJekyll(nomFichier);
     const stats = fs.statSync(cheminFichier);
     return {
       url: `/${route}`,

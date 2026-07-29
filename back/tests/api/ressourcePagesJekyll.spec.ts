@@ -36,7 +36,7 @@ describe('La ressource pages jekyll', () => {
 
     it('sers le fichier html de jekyll', async () => {
       let nomPageDemande: string;
-      fournisseurChemin.cheminPageJekyll = (nomPage: string) => {
+      fournisseurChemin.versPageJekyll = (nomPage: string) => {
         nomPageDemande = nomPage;
         return join(process.cwd(), 'tests', 'ressources', 'factice.html');
       };
@@ -63,7 +63,7 @@ describe('La ressource pages jekyll', () => {
 
     it('sers le fichier html de jekyll', async () => {
       let nomPageDemande: string;
-      fournisseurChemin.cheminPageJekyll = (nomPage: string) => {
+      fournisseurChemin.versPageJekyll = (nomPage: string) => {
         nomPageDemande = nomPage;
         return join(process.cwd(), 'tests', 'ressources', 'factice.html');
       };
@@ -90,7 +90,7 @@ describe('La ressource pages jekyll', () => {
 
     it('sers le fichier html de jekyll', async () => {
       let nomPageDemande: string;
-      fournisseurChemin.cheminPageJekyll = (nomPage: string) => {
+      fournisseurChemin.versPageJekyll = (nomPage: string) => {
         nomPageDemande = nomPage;
         return join(process.cwd(), 'tests', 'ressources', 'factice.html');
       };
@@ -117,7 +117,7 @@ describe('La ressource pages jekyll', () => {
 
     it('sers le fichier html de jekyll', async () => {
       let nomPageDemande: string;
-      fournisseurChemin.cheminProduitJekyll = (nomPage: string) => {
+      fournisseurChemin.versRessourceJekyll = (nomPage: string) => {
         nomPageDemande = nomPage;
         return join(process.cwd(), 'tests', 'ressources', 'factice.html');
       };
@@ -144,7 +144,7 @@ describe('La ressource pages jekyll', () => {
 
     it('sers le fichier html de jekyll', async () => {
       let nomPageDemande: string;
-      fournisseurChemin.cheminPageJekyll = (nomPage: string) => {
+      fournisseurChemin.versPageJekyll = (nomPage: string) => {
         nomPageDemande = nomPage;
         return join(process.cwd(), 'tests', 'ressources', 'factice.html');
       };

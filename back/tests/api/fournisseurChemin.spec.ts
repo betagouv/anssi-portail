@@ -12,35 +12,35 @@ describe('le fournisseurChemin', () => {
   describe("lorsqu'on récupère un fichier", () => {
     it('rejette ../etc/passwd', () => {
       assert.throws(
-        () => fournisseurChemin.cheminProduitJekyll('produits', '../etc/passwd'),
+        () => fournisseurChemin.versRessourceJekyll('produits', '../etc/passwd'),
         (err) => err instanceof ErreurTraverséeDeChemin && /Tentative de path traversal/.test(err.message)
       );
     });
 
     it('rejette ..%2fetc%2fpasswd (URL-encoded)', () => {
       assert.throws(
-        () => fournisseurChemin.cheminProduitJekyll('produits', '..%2fetc%2fpasswd'),
+        () => fournisseurChemin.versRessourceJekyll('produits', '..%2fetc%2fpasswd'),
         (err) => err instanceof ErreurTraverséeDeChemin && /Tentative de path traversal/.test(err.message)
       );
     });
 
     it('rejette ../../etc/passwd', () => {
       assert.throws(
-        () => fournisseurChemin.cheminProduitJekyll('produits', '../../etc/passwd'),
+        () => fournisseurChemin.versRessourceJekyll('produits', '../../etc/passwd'),
         (err) => err instanceof ErreurTraverséeDeChemin && /Tentative de path traversal/.test(err.message)
       );
     });
 
     it('rejette /etc/passwd (chemin absolu)', () => {
       assert.throws(
-        () => fournisseurChemin.ressourceDeBase('/etc/passwd'),
+        () => fournisseurChemin.versRessourceJekyll('/etc/passwd'),
         (err) => err instanceof ErreurTraverséeDeChemin && /Tentative de path traversal/.test(err.message)
       );
     });
 
     it('rejette \\etc\\passwd (chemin absolu Windows)', () => {
       assert.throws(
-        () => fournisseurChemin.cheminPageJekyll('\\etc\\passwd'),
+        () => fournisseurChemin.versPageJekyll('\\etc\\passwd'),
         (err) => err instanceof ErreurTraverséeDeChemin && /Tentative de path traversal/.test(err.message)
       );
     });
@@ -48,32 +48,32 @@ describe('le fournisseurChemin', () => {
     it('accepte produit-securite', () => {
       siteFront.fichiers = () => [`${process.cwd()}/front/_site/produits/produit-securite`];
 
-      assert.doesNotThrow(() => fournisseurChemin.cheminProduitJekyll('produits', 'produit-securite'));
+      assert.doesNotThrow(() => fournisseurChemin.versRessourceJekyll('produits', 'produit-securite'));
     });
 
     it('accepte index', () => {
       siteFront.fichiers = () => [`${process.cwd()}/front/_site/index/index.html`];
 
-      assert.doesNotThrow(() => fournisseurChemin.cheminPageJekyll('index'));
+      assert.doesNotThrow(() => fournisseurChemin.versPageJekyll('index'));
     });
 
     it('accepte mon-espace-nis2.html', () => {
       siteFront.fichiers = () => [`${process.cwd()}/front/_site/mon-espace-nis2.html`];
 
-      assert.doesNotThrow(() => fournisseurChemin.ressourceDeBase('mon-espace-nis2.html'));
+      assert.doesNotThrow(() => fournisseurChemin.versRessourceJekyll('mon-espace-nis2.html'));
     });
 
     it('accepte css/style.css', () => {
       siteFront.fichiers = () => [`${process.cwd()}/front/_site/css/style.css`];
 
-      assert.doesNotThrow(() => fournisseurChemin.ressourceDeBase('css/style.css'));
+      assert.doesNotThrow(() => fournisseurChemin.versRessourceJekyll('css/style.css'));
     });
 
     it('refuse un fichier qui ne se trouve pas dans le site', () => {
       siteFront.fichiers = () => [];
 
       assert.throws(
-        () => fournisseurChemin.cheminPageJekyll('inconnue'),
+        () => fournisseurChemin.versPageJekyll('inconnue'),
         (err) => err instanceof FichierInconnu && /Fichier inconnu .*_site\/inconnue\/index\.html/.test(err.message)
       );
     });

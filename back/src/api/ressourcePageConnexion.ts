@@ -25,7 +25,7 @@ const ressourcePageConnexion = ({ fournisseurChemin }: ConfigurationServeur): Ro
       await reponse
         .contentType('text/html')
         .status(200)
-        .envoieFichierEnrichi(fournisseurChemin.cheminPageJekyll('connexion'));
+        .envoieFichierEnrichi(fournisseurChemin.versPageJekyll('connexion'));
     })
   );
 

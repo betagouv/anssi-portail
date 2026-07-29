@@ -13,7 +13,7 @@ const ressourcePagesJekyll = ({ fournisseurChemin }: ConfigurationServeur, nomPa
       await reponse
         .contentType('text/html')
         .status(200)
-        .envoieFichierEnrichi(fournisseurChemin.cheminPageJekyll(nomPage));
+        .envoieFichierEnrichi(fournisseurChemin.versPageJekyll(nomPage));
     })
   );
 

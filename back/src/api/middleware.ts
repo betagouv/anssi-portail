@@ -102,7 +102,7 @@ export const fabriqueMiddleware = ({
         await reponse
           .status(404)
           .set('Content-Type', 'text/html')
-          .envoieFichierEnrichi(fournisseurChemin.ressourceDeBase('404.html'));
+          .envoieFichierEnrichi(fournisseurChemin.versRessourceJekyll('404.html'));
       }
     };
     suite();
@@ -185,7 +185,7 @@ export const fabriqueMiddleware = ({
       await reponse
         .status(HttpStatusCode.ServiceUnavailable)
         .set('Content-Type', 'text/html')
-        .envoieFichierEnrichi(fournisseurChemin.ressourceDeBase('maintenance.html'));
+        .envoieFichierEnrichi(fournisseurChemin.versRessourceJekyll('maintenance.html'));
     } else {
       suite();
     }
