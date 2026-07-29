@@ -343,16 +343,17 @@ describe('Le middleware', () => {
         actif: () => true,
         detailsPreparation: () => undefined,
       });
-      let pageDemandee: string = '';
-      fournisseurChemin.versRessourceJekyll = (nomPage) => {
-        pageDemandee = nomPage;
-        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+
+      let estAppelé = false;
+      fournisseurChemin.jekyll.pageMaintenance = () => {
+        estAppelé = true;
+        return ressourceFactice();
       };
 
       await middleware.verifieModeMaintenance(requete, reponse, () => {});
 
       assert.equal(reponse.statusCode, 503);
-      assert.equal(pageDemandee, 'maintenance.html');
+      assert.equal(estAppelé, true);
     });
 
     it('appelle la suite lorsque le mode est inactif', async () => {
