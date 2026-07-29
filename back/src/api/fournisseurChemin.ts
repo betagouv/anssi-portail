@@ -16,10 +16,12 @@ const valideChemin = (nomFichier: string): void => {
 };
 
 export interface FournisseurChemin {
+  front: {
+    sitemapXml(): string;
+  };
   versPageJekyll: (nomPage: string) => string;
   versRessourceJekyll: (...morceauxChemin: string[]) => string;
   csvNis2Simulateur: () => string;
-  sitemapXml: () => string;
 }
 
 export const construisListeFichiersDuSite = (racine: string) => {
@@ -41,9 +43,11 @@ const construisCheminVersArtefactJekyll = (...morceauxChemin: string[]): string 
 };
 
 export const fournisseurChemin: FournisseurChemin = {
+  front: {
+    sitemapXml: () => join(process.cwd(), 'front', 'assets', 'sitemap.xml'),
+  },
   versPageJekyll: (nomPage: string) => construisCheminVersArtefactJekyll(nomPage, 'index.html'),
   versRessourceJekyll: (...morceauxChemin: string[]) => construisCheminVersArtefactJekyll(...morceauxChemin),
-  sitemapXml: () => join(process.cwd(), 'front', 'assets', 'sitemap.xml'),
   csvNis2Simulateur: () =>
     join(process.cwd(), 'back', 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
 };

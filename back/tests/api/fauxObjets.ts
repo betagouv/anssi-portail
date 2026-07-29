@@ -30,11 +30,13 @@ import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire.
 import { ServiceRécompensesCyberDépart } from '../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 
 export const fauxFournisseurDeChemin: FournisseurChemin = {
+  front: {
+    sitemapXml: () => '',
+  },
   versPageJekyll: (_: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
   versRessourceJekyll: (..._x: string[]) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
   csvNis2Simulateur: () =>
     join(process.cwd(), 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
-  sitemapXml: () => '',
 };
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {
