@@ -19,14 +19,6 @@ export type ConfigurationRécompenseCyberDépart = {
   nomOrganisation: string;
 };
 
-// TODO: remove this
-export const assainisNomEntreprise = (nomEntreprise: string): string =>
-  nomEntreprise
-    .normalize('NFC')
-    .replace(/[\p{Cc}\p{Cf}]/gu, '')
-    .replace(/\s+/gu, ' ')
-    .trim();
-
 type Mot = {
   contenu: string;
   gras: boolean;
@@ -114,13 +106,13 @@ export class ServiceRécompensesCyberDépart {
     return this.police;
   }
 
-  async genereBanniere({ nomOrganisation: nomEntreprise }: ConfigurationRécompenseCyberDépart): Promise<Buffer> {
+  async genereBanniere({ nomOrganisation }: ConfigurationRécompenseCyberDépart): Promise<Buffer> {
     await this.chargePolice();
     const calqueTexte = new Canvas(LARGEUR_BANNIERE, HAUTEUR_BANNIERE);
     const contexte = calqueTexte.getContext('2d');
     contexte.fillStyle = '#3A3A3A';
     const mots: Mot[] = [
-      ...nomEntreprise.split(' ').map((contenu) => ({ contenu, gras: true })),
+      ...nomOrganisation.split(' ').map((contenu) => ({ contenu, gras: true })),
       ...SUFFIXE.split(' ').map((contenu) => ({ contenu, gras: false })),
     ];
     let tailleTexte = TAILLE_TEXTE;
@@ -144,11 +136,12 @@ export class ServiceRécompensesCyberDépart {
       });
     });
 
-    const banniere = await sharp(await this.chargeModele())
+    const modeleSVG = await this.chargeModele();
+
+    return await sharp(modeleSVG)
       .composite([{ input: calqueTexte.toBuffer('image/png') }])
+      .resize({ width: LARGEUR_BANNIERE })
       .png()
       .toBuffer();
-
-    return sharp(banniere).resize({ width: LARGEUR_BANNIERE }).png().toBuffer();
   }
 }
