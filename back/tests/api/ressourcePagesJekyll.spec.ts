@@ -1,11 +1,10 @@
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
-import { join } from 'path';
 import request from 'supertest';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
 import { creeServeur } from '../../src/api/msc.js';
-import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets.js';
+import { configurationDeTestDuServeur, fauxFournisseurDeChemin, ressourceFactice } from './fauxObjets.js';
 
 describe('La ressource pages jekyll', () => {
   let serveur: Express;
@@ -38,7 +37,7 @@ describe('La ressource pages jekyll', () => {
       let nomPageDemande: string;
       fournisseurChemin.versPageJekyll = (nomPage: string) => {
         nomPageDemande = nomPage;
-        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+        return ressourceFactice();
       };
 
       await request(serveur).get('/catalogue');
@@ -65,7 +64,7 @@ describe('La ressource pages jekyll', () => {
       let nomPageDemande: string;
       fournisseurChemin.versPageJekyll = (nomPage: string) => {
         nomPageDemande = nomPage;
-        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+        return ressourceFactice();
       };
 
       await request(serveur).get('/favoris-partages/monSuperId');
@@ -92,7 +91,7 @@ describe('La ressource pages jekyll', () => {
       let nomPageDemande: string;
       fournisseurChemin.versPageJekyll = (nomPage: string) => {
         nomPageDemande = nomPage;
-        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+        return ressourceFactice();
       };
 
       await request(serveur).get('/contacts');
@@ -119,7 +118,7 @@ describe('La ressource pages jekyll', () => {
       let nomPageDemande: string;
       fournisseurChemin.versRessourceJekyll = (nomPage: string) => {
         nomPageDemande = nomPage;
-        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+        return ressourceFactice();
       };
 
       await request(serveur).get('/contacts/fr-idf.html');
@@ -146,7 +145,7 @@ describe('La ressource pages jekyll', () => {
       let nomPageDemande: string;
       fournisseurChemin.versPageJekyll = (nomPage: string) => {
         nomPageDemande = nomPage;
-        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+        return ressourceFactice();
       };
 
       await request(serveur).get('/guides/zero-trust');
