@@ -7,6 +7,7 @@ import { Utilisateur } from '../../../metier/utilisateur.js';
 export const ressourceRécompensesCyberDépart = ({
   serviceRécompensesCyberDépart,
   entrepotUtilisateur,
+  entrepôtModule,
   adaptateurHachage,
   middleware,
 }: ConfigurationServeur) => {
@@ -18,8 +19,19 @@ export const ressourceRécompensesCyberDépart = ({
     valideCorpsRequete(corpsVide),
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     filetRouteAsynchrone(async (requete, reponse) => {
+      const ID_MODULE_CYBERDEPART = 1;
+      const moduleCyberdépart = await entrepôtModule.parId(ID_MODULE_CYBERDEPART);
+      if (!moduleCyberdépart) {
+        return reponse.sendStatus(500);
+      }
+
+      const cibleBadgeCyberdépart = moduleCyberdépart.cibleDéblocageBadgeCyberdépart()!;
+      const utilisateur = requete.utilisateur as Utilisateur;
+      if (utilisateur.nombreDeMesuresPrisesEnCompte(moduleCyberdépart) < cibleBadgeCyberdépart) {
+        return reponse.sendStatus(403);
+      }
+
       const nomOrganisation = (await (requete.utilisateur as Utilisateur).organisation()).nom;
-      // TODO: what to do when user has no organization?
       const banniere = await serviceRécompensesCyberDépart.genereBanniere({
         nomOrganisation,
       });
