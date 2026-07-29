@@ -93,6 +93,7 @@ export default defineConfig(({ mode }) => {
           'module-cyberdepart': 'src/main-module-cyberdepart.ts',
           module: 'src/main-module.ts',
           'parcours-complet': 'src/main-parcours-complet.ts',
+          'heros-accueil': 'src/main-heros-accueil.ts',
         },
         output: {
           entryFileNames: `assets/[name].js`,
