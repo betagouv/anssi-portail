@@ -19,13 +19,15 @@
     <FilAriane {...propriétésFilAriane} />
   {/if}
   <div class="contenu-heros">
-    <h1 class="titre alternatif-md">{titre}</h1>
-    <p class="description texte-chapo-xl">{description}</p>
-    {#if actions}
-      <div class="actions">
-        {@render actions()}
-      </div>
-    {/if}
+    <div class="contenu">
+      <h1 class="titre alternatif-md">{titre}</h1>
+      <p class="description texte-chapo-xl">{description}</p>
+      {#if actions}
+        <div class="actions">
+          {@render actions()}
+        </div>
+      {/if}
+    </div>
     <div class="illustration">
       {@render illustration()}
     </div>
@@ -54,48 +56,45 @@
 
     .contenu-heros {
       display: grid;
+      align-content: center;
       grid-template-areas:
-        'titre'
-        'description'
-        'actions'
+        'contenu'
         'illustration';
       @include a-partir-de(lg) {
-        grid-template-areas:
-          'titre illustration'
-          'description illustration'
-          'actions illustration';
+        grid-template-areas: 'contenu illustration';
         column-gap: 1.5rem;
         grid-template-columns: auto taille-pour-colonnes(5);
       }
 
-      .titre {
-        grid-area: titre;
-        margin-bottom: 1rem;
-        @include a-partir-de(lg) {
-          margin-bottom: 1.5rem;
-        }
-      }
-
-      .description {
-        grid-area: description;
-        margin-bottom: 2rem;
-      }
-
-      .actions {
+      .contenu {
+        grid-area: contenu;
         display: flex;
         flex-direction: column;
-        grid-area: actions;
-        margin-bottom: 3rem;
-        @include a-partir-de(md) {
-          flex-direction: row;
-          margin-bottom: 0;
+        justify-content: center;
+
+        .titre {
+          margin-bottom: 1rem;
+          @include a-partir-de(lg) {
+            margin-bottom: 1.5rem;
+          }
+        }
+
+        .description {
+          margin-bottom: 2rem;
+        }
+
+        .actions {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 3rem;
+          @include a-partir-de(md) {
+            flex-direction: row;
+            margin-bottom: 0;
+          }
         }
       }
-
       .illustration {
-        grid-area: illustration;
         display: flex;
-        max-width: taille-pour-colonne(8);
         margin: auto;
       }
     }
