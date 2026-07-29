@@ -33,10 +33,12 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
   front: {
     sitemapXml: () => '',
   },
+  back: {
+    csvNis2Simulateur: () =>
+      join(process.cwd(), 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
+  },
   versPageJekyll: (_: string) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
   versRessourceJekyll: (..._x: string[]) => join(process.cwd(), 'tests', 'ressources', 'factice.html'),
-  csvNis2Simulateur: () =>
-    join(process.cwd(), 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
 };
 
 export const fauxAdaptateurOIDC: AdaptateurOIDC = {

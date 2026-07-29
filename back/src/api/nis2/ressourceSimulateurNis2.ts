@@ -13,7 +13,7 @@ export const ressourceSimulateurNis2 = ({ busEvenements, fournisseurChemin }: Co
     '/',
     valideCorpsRequete(schemaPostSimulateurNis2()),
     filetRouteAsynchrone(async (requete, reponse) => {
-      const cheminCsv = fournisseurChemin.csvNis2Simulateur();
+      const cheminCsv = fournisseurChemin.back.csvNis2Simulateur();
       const resultat = new CalculEligibilite(cheminCsv).evalueEligibilite(requete.body);
       await busEvenements.publie(new SimulationNis2Terminee(resultat));
 
