@@ -132,7 +132,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   app.use(json());
 
   const brancheLesRessourcesStatiques = (avecCors: boolean) => (ressource: string) => {
-    const sertLesFichiersStatiques = express.static(fournisseurChemin.ressourceDeBase(ressource), {
+    const sertLesFichiersStatiques = express.static(fournisseurChemin.versRessourceJekyll(ressource), {
       setHeaders: (reponse: Response) =>
         reponse.setHeader('cache-control', process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'),
     });
@@ -155,10 +155,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       // on garde la redirection pour ne pas casser les liens existants
       return reponse.redirect(301, `/financements/${id}`);
     }
-    reponse
-      .contentType('text/html')
-      .status(200)
-      .envoieFichierEnrichi(fournisseurChemin.cheminPageJekyll('financements'));
+    reponse.contentType('text/html').status(200).envoieFichierEnrichi(fournisseurChemin.versPageJekyll('financements'));
   });
 
   const routesStatiques = [

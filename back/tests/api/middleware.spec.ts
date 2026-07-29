@@ -204,7 +204,7 @@ describe('Le middleware', () => {
 
     it("renvoi un 404 si la fichier n'existe pas", async () => {
       let pagesDemandee: string = '';
-      fournisseurChemin.ressourceDeBase = (nomPage) => {
+      fournisseurChemin.versRessourceJekyll = (nomPage) => {
         pagesDemandee = nomPage;
         return join(process.cwd(), 'tests', 'ressources', 'factice.html');
       };
@@ -343,7 +343,7 @@ describe('Le middleware', () => {
         detailsPreparation: () => undefined,
       });
       let pageDemandee: string = '';
-      fournisseurChemin.ressourceDeBase = (nomPage) => {
+      fournisseurChemin.versRessourceJekyll = (nomPage) => {
         pageDemandee = nomPage;
         return join(process.cwd(), 'tests', 'ressources', 'factice.html');
       };

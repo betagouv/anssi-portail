@@ -16,10 +16,9 @@ const valideChemin = (nomFichier: string): void => {
 };
 
 export interface FournisseurChemin {
-  cheminPageJekyll: (nomPage: string) => string;
-  cheminProduitJekyll: (typologie: string, idProduit: string) => string;
-  ressourceDeBase: (ressource: string) => string;
-  cheminCsvNis2Simulateur: () => string;
+  versPageJekyll: (nomPage: string) => string;
+  versRessourceJekyll: (...morceauxChemin: string[]) => string;
+  csvNis2Simulateur: () => string;
   sitemapXml: () => string;
 }
 
@@ -30,7 +29,7 @@ export const construisListeFichiersDuSite = (racine: string) => {
   }).map((fichier) => join(repertoireAbsolu, fichier as string));
 };
 
-const construisChemin = (...morceauxChemin: string[]): string => {
+const construisCheminVersArtefactJekyll = (...morceauxChemin: string[]): string => {
   for (const morceau of morceauxChemin) {
     valideChemin(morceau);
   }
@@ -42,12 +41,10 @@ const construisChemin = (...morceauxChemin: string[]): string => {
 };
 
 export const fournisseurChemin: FournisseurChemin = {
-  cheminPageJekyll: (nomPage: string) => construisChemin(nomPage, 'index.html'),
-  cheminProduitJekyll: (repertoireProduits: string, idProduit: string) =>
-    construisChemin(repertoireProduits, idProduit),
-  ressourceDeBase: (ressource) => construisChemin(ressource),
+  versPageJekyll: (nomPage: string) => construisCheminVersArtefactJekyll(nomPage, 'index.html'),
+  versRessourceJekyll: (...morceauxChemin: string[]) => construisCheminVersArtefactJekyll(...morceauxChemin),
   sitemapXml: () => join(process.cwd(), 'front', 'assets', 'sitemap.xml'),
-  cheminCsvNis2Simulateur: () =>
+  csvNis2Simulateur: () =>
     join(process.cwd(), 'back', 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
 };
 

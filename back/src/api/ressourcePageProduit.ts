@@ -18,7 +18,7 @@ const ressourcePageProduit = ({ fournisseurChemin }: ConfigurationServeur, reper
       await reponse
         .contentType('text/html')
         .status(200)
-        .envoieFichierEnrichi(fournisseurChemin.cheminProduitJekyll(repertoireProduits, requete.params.id as string));
+        .envoieFichierEnrichi(fournisseurChemin.versRessourceJekyll(repertoireProduits, requete.params.id as string));
     })
   );
 

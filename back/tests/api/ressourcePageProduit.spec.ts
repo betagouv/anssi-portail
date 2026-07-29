@@ -36,7 +36,7 @@ describe('La ressource page produit', () => {
     it('sers le fichier html de jekyll', async () => {
       let idProduitDemande: string;
       let repertoireProduitsDemande: string;
-      fournisseurChemin.cheminProduitJekyll = (repertoireProduits: string, idProduit: string) => {
+      fournisseurChemin.versRessourceJekyll = (repertoireProduits: string, idProduit: string) => {
         idProduitDemande = idProduit;
         repertoireProduitsDemande = repertoireProduits;
         return join(process.cwd(), 'tests', 'ressources', 'factice.html');
@@ -52,7 +52,7 @@ describe('La ressource page produit', () => {
   it("sers un fichier sur demande d'une ressource", async () => {
     let idProduitDemande: string;
     let repertoireProduitsDemande: string;
-    fournisseurChemin.cheminProduitJekyll = (repertoireProduits: string, idProduit: string) => {
+    fournisseurChemin.versRessourceJekyll = (repertoireProduits: string, idProduit: string) => {
       idProduitDemande = idProduit;
       repertoireProduitsDemande = repertoireProduits;
       return join(process.cwd(), 'tests', 'ressources', 'factice.html');
@@ -75,19 +75,23 @@ describe('La ressource page produit', () => {
   });
 
   it('retourne une erreur 404 si la page n’est pas trouvée', async () => {
-    fournisseurChemin.cheminProduitJekyll = (_repertoireProduits: string, _idProduit: string) => {
-      throw new FichierInconnu('');
-    };
-    let nomFichierAppele = '';
-    fournisseurChemin.ressourceDeBase = (nomFichier: string) => {
-      nomFichierAppele = nomFichier;
-      return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+    let déjàAppelé: boolean = false;
+    let nomFichierAppelé = '';
+
+    fournisseurChemin.versRessourceJekyll = (...chemins: string[]) => {
+      if (!déjàAppelé) {
+        déjàAppelé = true;
+        throw new FichierInconnu('');
+      } else {
+        nomFichierAppelé = chemins[0];
+        return join(process.cwd(), 'tests', 'ressources', 'factice.html');
+      }
     };
 
-    const reponse = await request(serveur).get('/services/inconnu').accept('text/html');
+    const réponse = await request(serveur).get('/services/inconnu').accept('text/html');
 
-    assert.equal(reponse.status, 404);
-    assert.equal(reponse.headers['content-type'], 'text/html; charset=utf-8');
-    assert.equal(nomFichierAppele, '404.html');
+    assert.equal(réponse.status, 404);
+    assert.equal(réponse.headers['content-type'], 'text/html; charset=utf-8');
+    assert.equal(nomFichierAppelé, '404.html');
   });
 });

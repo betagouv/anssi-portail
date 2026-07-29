@@ -70,7 +70,7 @@ class AdaptateurEnrichissementSvelte implements AdaptateurEnrichissement {
   ) {
     const divDInjection = dom.window.document.getElementById(nomComposant);
     if (!divDInjection) return;
-    const cheminDuComposant = this.fournisseurDeChemin.ressourceDeBase(
+    const cheminDuComposant = this.fournisseurDeChemin.versRessourceJekyll(
       `lib-svelte/dist/serveur/assets/${nomComposant}.js`
     );
     const composantSvelte = await import(cheminDuComposant);

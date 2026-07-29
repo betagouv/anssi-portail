@@ -12,6 +12,6 @@ export const erreurPageNonTrouvée = (reponse: Response, fournisseurChemin: Four
   reponse
     .status(404)
     .set('Content-Type', 'text/html')
-    .envoieFichierEnrichi(fournisseurChemin.ressourceDeBase('404.html'));
+    .envoieFichierEnrichi(fournisseurChemin.versRessourceJekyll('404.html'));
 
 export const erreurPageInterdite = (reponse: Response) => reponse.status(403).json({ erreur: 'Accès refusé' });
