@@ -1,6 +1,5 @@
 import { Request, Response, Router } from 'express';
 import fs, { writeFileSync } from 'fs';
-import * as path from 'path';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { siteFront } from './fournisseurChemin.js';
@@ -8,17 +7,16 @@ import { corpsVide, valideCorpsRequete } from './zod.js';
 
 interface LienSitemap {
   url: string;
-  modifieLe?: Date | undefined;
+  modifiéLe?: Date | undefined;
 }
 
-const recupereLiens = (pages: string[], { fournisseurChemin }: ConfigurationServeur): LienSitemap[] => {
-  return pages.map((route): LienSitemap => {
-    const nomFichier = route === '/' ? 'index.html' : path.join(`${route.replace(/^\//, '')}`, 'index.html');
-    const cheminFichier = fournisseurChemin.versRessourceJekyll(nomFichier);
+const récupèreLiens = (pages: string[], { fournisseurChemin }: ConfigurationServeur): LienSitemap[] => {
+  return pages.map((page): LienSitemap => {
+    const cheminFichier = fournisseurChemin.jekyll.page(page);
     const stats = fs.statSync(cheminFichier);
     return {
-      url: `/${route}`,
-      modifieLe: stats.mtime,
+      url: page,
+      modifiéLe: stats.mtime,
     };
   });
 };
@@ -29,11 +27,11 @@ export const ressourceSitemapXml = (pagesStatiques: string[], configurationServe
   try {
     const sitemapStream = new SitemapStream({ hostname: 'https://messervices.cyber.gouv.fr' });
 
-    const liensStatiques = recupereLiens(pagesStatiques, configurationServeur);
+    const liensStatiques = récupèreLiens(pagesStatiques, configurationServeur);
     liensStatiques.forEach((lien) => {
       sitemapStream.write({
         url: lien.url,
-        lastmod: lien.modifieLe?.toISOString(),
+        lastmod: lien.modifiéLe?.toISOString(),
       });
     });
 
@@ -41,7 +39,7 @@ export const ressourceSitemapXml = (pagesStatiques: string[], configurationServe
       liensDynamiques.forEach((lien: LienSitemap) => {
         sitemapStream.write({
           url: lien.url,
-          lastmod: lien.modifieLe?.toISOString(),
+          lastmod: lien.modifiéLe?.toISOString(),
         });
       });
 
