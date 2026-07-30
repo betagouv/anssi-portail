@@ -32,6 +32,11 @@ export interface FournisseurChemin {
     ressource: (nom: string) => string;
     contact: (codeRegion: CodeRegion) => string;
     service: (nom: string) => string;
+
+    assets: () => string;
+    scripts: () => string;
+    libSvelte: () => string;
+    favicon: () => string;
   };
   versRessourceJekyll: (...morceauxChemin: string[]) => string;
 }
@@ -71,6 +76,11 @@ export const fournisseurChemin: FournisseurChemin = {
     ressource: (nom: string) => construisCheminVersArtefactJekyll('ressources', nom),
     contact: (nom: string) => construisCheminVersArtefactJekyll('contacts', nom),
     service: (nom: string) => construisCheminVersArtefactJekyll('services', nom),
+
+    assets: () => construisCheminVersArtefactJekyll('assets'),
+    scripts: () => construisCheminVersArtefactJekyll('scripts'),
+    libSvelte: () => construisCheminVersArtefactJekyll('lib-svelte'),
+    favicon: () => construisCheminVersArtefactJekyll('favicon.ico'),
   },
   versRessourceJekyll: (...morceauxChemin: string[]) => construisCheminVersArtefactJekyll(...morceauxChemin),
 };

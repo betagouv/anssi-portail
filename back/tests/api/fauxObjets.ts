@@ -47,6 +47,11 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
     ressource: (_nom: string) => ressourceFactice(),
     contact: (_nom: string) => ressourceFactice(),
     service: (_nom: string) => ressourceFactice(),
+
+    assets: () => ressourceFactice(),
+    scripts: () => ressourceFactice(),
+    libSvelte: () => ressourceFactice(),
+    favicon: () => ressourceFactice(),
   },
   versRessourceJekyll: (..._x: string[]) => ressourceFactice(),
 };
