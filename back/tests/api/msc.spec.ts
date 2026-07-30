@@ -27,6 +27,14 @@ describe('La configuration de notre serveur', () => {
     assert.equal(entetes['vary'], 'Accept-Encoding');
   });
 
+  it('sert correctement le chemin racine', async () => {
+    const serveur = creeServeur(configurationDeTestDuServeur);
+
+    const réponse = await request(serveur).get('/');
+
+    assert.equal(réponse.statusCode, HttpStatusCode.Ok);
+  });
+
   it('redirige vers une url sans slashs finaux', async () => {
     const serveur = creeServeur(configurationDeTestDuServeur);
 
@@ -39,10 +47,10 @@ describe('La configuration de notre serveur', () => {
   it('redirige vers une url avec paramètres de requête sans slashs finaux', async () => {
     const serveur = creeServeur(configurationDeTestDuServeur);
 
-    const réponse = await request(serveur).get('/test/?param=value');
+    const réponse = await request(serveur).get('/catalogue/?param=value');
 
     assert.equal(réponse.statusCode, HttpStatusCode.PermanentRedirect);
-    assert.equal(réponse.headers.location, '/test?param=value');
+    assert.equal(réponse.headers.location, '/catalogue?param=value');
   });
 
   it("redirige vers l'URL voulue sans slash final", async () => {
@@ -61,5 +69,21 @@ describe('La configuration de notre serveur', () => {
 
     assert.equal(réponse.statusCode, HttpStatusCode.MovedPermanently);
     assert.equal(réponse.headers.location, '/catalogue');
+  });
+
+  it('redirige URL inconnue sans slash final vers une 404', async () => {
+    const serveur = creeServeur(configurationDeTestDuServeur);
+
+    const réponse = await request(serveur).get('/monurlquinexistepas');
+
+    assert.equal(réponse.statusCode, HttpStatusCode.NotFound);
+  });
+
+  it('redirige URL inconnue avec slash final vers une 404', async () => {
+    const serveur = creeServeur(configurationDeTestDuServeur);
+
+    const réponse = await request(serveur).get('/monurlquinexistepas/');
+
+    assert.equal(réponse.statusCode, HttpStatusCode.NotFound);
   });
 });
