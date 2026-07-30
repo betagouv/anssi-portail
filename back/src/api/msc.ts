@@ -45,8 +45,10 @@ import { ressourceFinancements } from './ressourceFinancements.js';
 import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte.js';
 import { ressourceInfosSite } from './ressourceInfosSite.js';
 import { ressourcePageConnexion } from './ressourcePageConnexion.js';
+import { ressourcePageContact } from './ressourcePageContact.js';
 import { ressourcePageCrisp } from './ressourcePageCrisp.js';
-import { ressourcePageProduit } from './ressourcePageProduit.js';
+import { ressourcePageRessource } from './ressourcePageRessource.js';
+import { ressourcePageService } from './ressourcePageService.js';
 import { ressourcePagesJekyll } from './ressourcePagesJekyll.js';
 import { ressourcePagesJekyllConnectees } from './ressourcePagesJekyllConnectees.js';
 import { ressourceProfil } from './ressourceProfil.js';
@@ -255,9 +257,11 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute('/connexion', ressourcePageConnexion(configurationServeur));
 
-  ['services', 'ressources', 'contacts'].forEach((repertoireProduits) =>
-    enregistreRoute(`/${repertoireProduits}`, ressourcePageProduit(configurationServeur, repertoireProduits))
-  );
+  enregistreRoute(`/services`, ressourcePageService(configurationServeur));
+
+  enregistreRoute(`/ressources`, ressourcePageRessource(configurationServeur));
+
+  enregistreRoute(`/contacts`, ressourcePageContact(configurationServeur));
 
   enregistreRoute('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
 

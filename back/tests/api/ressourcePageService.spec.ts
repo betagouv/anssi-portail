@@ -6,7 +6,7 @@ import { FichierInconnu, FournisseurChemin } from '../../src/api/fournisseurChem
 import { creeServeur } from '../../src/api/msc.js';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin, ressourceFactice } from './fauxObjets.js';
 
-describe('La ressource page produit', () => {
+describe('La ressource page Service', () => {
   let serveur: Express;
   let fournisseurChemin: FournisseurChemin;
 
@@ -33,37 +33,16 @@ describe('La ressource page produit', () => {
     });
 
     it('sers le fichier html de jekyll', async () => {
-      let idProduitDemande: string;
-      let repertoireProduitsDemande: string;
-      fournisseurChemin.versRessourceJekyll = (repertoireProduits: string, idProduit: string) => {
-        idProduitDemande = idProduit;
-        repertoireProduitsDemande = repertoireProduits;
+      let idDemandé: string;
+      fournisseurChemin.jekyll.service = (id: string) => {
+        idDemandé = id;
         return ressourceFactice();
       };
 
       await request(serveur).get('/services/mon-service-securise');
 
-      assert.equal(repertoireProduitsDemande!, 'services');
-      assert.equal(idProduitDemande!, 'mon-service-securise');
+      assert.equal(idDemandé!, 'mon-service-securise');
     });
-  });
-
-  it("sers un fichier sur demande d'une ressource", async () => {
-    let idProduitDemande: string;
-    let repertoireProduitsDemande: string;
-    fournisseurChemin.versRessourceJekyll = (repertoireProduits: string, idProduit: string) => {
-      idProduitDemande = idProduit;
-      repertoireProduitsDemande = repertoireProduits;
-      return ressourceFactice();
-    };
-
-    const reponse = await request(serveur).get('/ressources/cot');
-
-    assert.equal(reponse.status, 200);
-    assert.notEqual(reponse.headers['content-type'], undefined);
-    assert.match(reponse.headers['content-type'], /html/);
-    assert.equal(repertoireProduitsDemande!, 'ressources');
-    assert.equal(idProduitDemande!, 'cot');
   });
 
   it('redirige le service `Mon Espace NIS 2` vers la page NIS2', async () => {
@@ -74,7 +53,7 @@ describe('La ressource page produit', () => {
   });
 
   it('retourne une erreur 404 si la page n’est pas trouvée', async () => {
-    fournisseurChemin.versRessourceJekyll = (..._chemins: string[]) => {
+    fournisseurChemin.jekyll.service = (_id: string) => {
       throw new FichierInconnu('');
     };
 

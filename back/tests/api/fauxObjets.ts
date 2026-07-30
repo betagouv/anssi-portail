@@ -44,6 +44,9 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
     pageMaintenance: () => ressourceFactice(),
     robotsTxt: () => ressourceFactice(),
     page: (_nom: string) => ressourceFactice(),
+    ressource: (_nom: string) => ressourceFactice(),
+    contact: (_nom: string) => ressourceFactice(),
+    service: (_nom: string) => ressourceFactice(),
   },
   versRessourceJekyll: (..._x: string[]) => ressourceFactice(),
 };
