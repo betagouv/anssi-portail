@@ -10,7 +10,7 @@ import { erreurPageInterdite, erreurPageNonTrouvée, ErreurTraverséeDeChemin } 
 import { ressourceFavori } from './favoris/ressourceFavori.js';
 import { ressourceFavoris } from './favoris/ressourceFavoris.js';
 import { ressourceFavorisPartages } from './favoris/ressourceFavorisPartages.js';
-import { FichierInconnu } from './fournisseurChemin.js';
+import { FichierInconnu, FournisseurChemin } from './fournisseurChemin.js';
 import { ressourceDocumentGuide } from './guides/ressourceDocumentGuide.js';
 import { ressourceDocumentsGuide } from './guides/ressourceDocumentsGuide.js';
 import { ressourceGuide } from './guides/ressourceGuide.js';
@@ -177,21 +177,18 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     return app.use(chemin, redirigeSansSlashFinal, ...gestionnaires);
   };
 
-  const brancheLesRessourcesStatiques = (avecCors: boolean) => (ressource: string) => {
-    const sertLesFichiersStatiques = express.static(fournisseurChemin.versRessourceJekyll(ressource), {
-      setHeaders: (reponse: Response) =>
-        reponse.setHeader('cache-control', process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'),
+  const sertLesFichiersStatiques = (
+    fournisseurChemin: FournisseurChemin['jekyll']['assets' | 'scripts' | 'libSvelte' | 'favicon']
+  ) =>
+    express.static(fournisseurChemin(), {
+      setHeaders: (réponse: Response) =>
+        réponse.setHeader('cache-control', process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'),
     });
 
-    if (avecCors) {
-      enregistreRoute(`/${ressource}`, cors(), sertLesFichiersStatiques);
-    } else {
-      enregistreRoute(`/${ressource}`, sertLesFichiersStatiques);
-    }
-  };
-
-  brancheLesRessourcesStatiques(true)('assets');
-  ['scripts', 'lib-svelte', 'favicon.ico'].forEach(brancheLesRessourcesStatiques(false));
+  enregistreRoute(`/assets`, cors(), sertLesFichiersStatiques(fournisseurChemin.jekyll.assets));
+  enregistreRoute('/scripts', sertLesFichiersStatiques(fournisseurChemin.jekyll.scripts));
+  enregistreRoute('/lib-svelte', sertLesFichiersStatiques(fournisseurChemin.jekyll.libSvelte));
+  enregistreRoute('/favicon.ico', sertLesFichiersStatiques(fournisseurChemin.jekyll.favicon));
 
   app.use(configurationServeur.middleware.verifieModeMaintenance);
 
