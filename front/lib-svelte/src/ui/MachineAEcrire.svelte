@@ -1,0 +1,64 @@
+<script lang="ts">
+  const { texte }: { texte: string } = $props();
+  const lettres = $derived(texte.split(''));
+</script>
+
+<span class="machine-a-ecrire" aria-label={texte}>
+  {#each lettres as lettre, i (i)}
+    <span aria-hidden="true" class="lettre" class:espace={lettre === ' '} style="animation-delay: {i * 0.05}s">
+      {lettre}
+    </span>
+  {/each}
+  <span aria-hidden="true" class="curseur" style="animation-delay: {lettres.length * 0.05}s">&nbsp;</span>
+</span>
+
+<style lang="scss">
+  .machine-a-ecrire {
+    display: inline;
+  }
+
+  .lettre {
+    opacity: 0;
+    animation: apparition-lettre 0.05s linear forwards;
+  }
+
+  .curseur {
+    border-right: 4px solid var(--yellow-moutarde-925-125);
+    opacity: 0;
+    animation:
+      apparition 0.01s linear forwards,
+      curseur-clignotant 0.75s step-end infinite;
+    animation-fill-mode: forwards, none;
+    vertical-align: text-bottom;
+  }
+
+  @keyframes apparition-lettre {
+    0% {
+      border-right: 4px solid var(--yellow-moutarde-925-125);
+      opacity: 1;
+    }
+    90% {
+      border-right: 4px solid var(--yellow-moutarde-925-125);
+    }
+    100% {
+      opacity: 1;
+      border-right: none;
+    }
+  }
+
+  @keyframes apparition {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes curseur-clignotant {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: var(--yellow-moutarde-925-125);
+    }
+  }
+</style>
