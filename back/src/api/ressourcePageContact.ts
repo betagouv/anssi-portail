@@ -3,8 +3,9 @@ import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middleware.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';
+import { CodeRegion } from '../metier/referentielRegions.js';
 
-const ressourcePageProduit = ({ fournisseurChemin }: ConfigurationServeur, repertoireProduits: string): Router => {
+const ressourcePageContact = ({ fournisseurChemin }: ConfigurationServeur): Router => {
   const routeur = Router();
 
   routeur.get(
@@ -14,10 +15,10 @@ const ressourcePageProduit = ({ fournisseurChemin }: ConfigurationServeur, reper
       await reponse
         .contentType('text/html')
         .status(HttpStatusCode.Ok)
-        .envoieFichierEnrichi(fournisseurChemin.versRessourceJekyll(repertoireProduits, requete.params.id as string));
+        .envoieFichierEnrichi(fournisseurChemin.jekyll.contact(requete.params.id as CodeRegion));
     })
   );
 
   return routeur;
 };
-export { ressourcePageProduit };
+export { ressourcePageContact };

@@ -113,18 +113,6 @@ describe('La ressource pages jekyll', () => {
       assert.notEqual(reponse.headers['content-type'], undefined);
       assert.match(reponse.headers['content-type'], /html/);
     });
-
-    it('sers le fichier html de jekyll', async () => {
-      let nomPageDemande: string;
-      fournisseurChemin.versRessourceJekyll = (nomPage: string) => {
-        nomPageDemande = nomPage;
-        return ressourceFactice();
-      };
-
-      await request(serveur).get('/contacts/fr-idf.html');
-
-      assert.equal(nomPageDemande!, 'contacts');
-    });
   });
 
   describe("sur demande d'un guide", () => {

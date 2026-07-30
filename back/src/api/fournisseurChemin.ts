@@ -1,6 +1,7 @@
 import { readdirSync } from 'node:fs';
 import { join } from 'path';
 import { ErreurTraverséeDeChemin } from './erreurs.js';
+import { CodeRegion } from '../metier/referentielRegions.js';
 
 export class FichierInconnu extends Error {
   constructor(chemin: string) {
@@ -28,6 +29,9 @@ export interface FournisseurChemin {
     robotsTxt: () => string;
 
     page: (nom: string) => string;
+    ressource: (nom: string) => string;
+    contact: (codeRegion: CodeRegion) => string;
+    service: (nom: string) => string;
   };
   versRessourceJekyll: (...morceauxChemin: string[]) => string;
 }
@@ -64,6 +68,9 @@ export const fournisseurChemin: FournisseurChemin = {
     robotsTxt: () => construisCheminVersArtefactJekyll('robots.txt'),
 
     page: (nom: string) => construisCheminVersArtefactJekyll(nom, 'index.html'),
+    ressource: (nom: string) => construisCheminVersArtefactJekyll('ressources', nom),
+    contact: (nom: string) => construisCheminVersArtefactJekyll('contacts', nom),
+    service: (nom: string) => construisCheminVersArtefactJekyll('services', nom),
   },
   versRessourceJekyll: (...morceauxChemin: string[]) => construisCheminVersArtefactJekyll(...morceauxChemin),
 };
