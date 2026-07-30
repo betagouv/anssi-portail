@@ -157,18 +157,17 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       const motifPlusieursSlashsdAffilé: RegExp = /^\/{2,}$/;
       const estRacineAvecPlusieursSlashs = chemin === '/' && motifPlusieursSlashsdAffilé.test(cheminRequête);
 
+      const paramètres = requête.originalUrl.slice(cheminRequête.length);
+
       if (estRacineAvecPlusieursSlashs) {
-        const paramètres = requête.originalUrl.slice(cheminRequête.length);
         return réponse.redirect(HttpStatusCode.PermanentRedirect, `/${paramètres}`);
       }
 
       if (chemin !== '/' && cheminRequête.endsWith('/')) {
-        const motifSlashFinalAvantParametres: RegExp = /\/+(?=\?|$)/;
+        const motifSlashFinal: RegExp = /\/+$/;
+        const cheminNormalisé = cheminRequête.replace(motifSlashFinal, '');
 
-        return réponse.redirect(
-          HttpStatusCode.PermanentRedirect,
-          requête.originalUrl.replace(motifSlashFinalAvantParametres, '')
-        );
+        return réponse.redirect(HttpStatusCode.PermanentRedirect, `${cheminNormalisé}${paramètres}`);
       }
 
       suite();
