@@ -149,23 +149,23 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   });
 
   const enregistreRoute = (chemin: string, ...gestionnaires: RequestHandler[]) => {
-    const redirigeSansSlashFinal: RequestHandler = (requete, reponse, suite) => {
-      const cheminRequete = requete.originalUrl.split('?', 1)[0];
+    const redirigeSansSlashFinal: RequestHandler = (requête, réponse, suite) => {
+      const cheminRequête = requête.originalUrl.split('?', 1)[0];
 
       const motifPlusieursSlashsdAffilé: RegExp = /^\/{2,}$/;
-      const estRacineAvecPlusieursSlashs = chemin === '/' && motifPlusieursSlashsdAffilé.test(cheminRequete);
+      const estRacineAvecPlusieursSlashs = chemin === '/' && motifPlusieursSlashsdAffilé.test(cheminRequête);
 
       if (estRacineAvecPlusieursSlashs) {
-        const parametres = requete.originalUrl.slice(cheminRequete.length);
-        return reponse.redirect(HttpStatusCode.PermanentRedirect, `/${parametres}`);
+        const paramètres = requête.originalUrl.slice(cheminRequête.length);
+        return réponse.redirect(HttpStatusCode.PermanentRedirect, `/${paramètres}`);
       }
 
-      if (chemin !== '/' && cheminRequete.endsWith('/')) {
+      if (chemin !== '/' && cheminRequête.endsWith('/')) {
         const motifSlashFinalAvantParametres: RegExp = /\/+(?=\?|$)/;
 
-        return reponse.redirect(
+        return réponse.redirect(
           HttpStatusCode.PermanentRedirect,
-          requete.originalUrl.replace(motifSlashFinalAvantParametres, '')
+          requête.originalUrl.replace(motifSlashFinalAvantParametres, '')
         );
       }
 
