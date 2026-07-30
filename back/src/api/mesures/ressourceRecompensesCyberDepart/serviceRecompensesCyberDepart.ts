@@ -1,7 +1,7 @@
 import { Canvas, GlobalFonts } from '@napi-rs/canvas';
-import { readFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import { FournisseurChemin } from '../../fournisseurChemin.js';
+import { readFileSync } from 'node:fs';
 
 const LARGEUR_BANNIERE = 996;
 const HAUTEUR_BANNIERE = 420;
@@ -57,7 +57,7 @@ const mesureLigne = (contexte: CanvasRenderingContext2D, ligne: Mot[], tailleTex
     return largeur + contexte.measureText(`${index ? ' ' : ''}${mot.contenu}`).width;
   }, 0);
 
-const decoupeEnLignes = (
+const découpeEnLignes = (
   contexte: CanvasRenderingContext2D,
   motsInitiaux: Mot[],
   tailleTexte: number,
@@ -87,27 +87,22 @@ const decoupeEnLignes = (
 };
 
 export class ServiceRécompensesCyberDépart {
-  private modele?: Promise<Buffer>;
-  private police?: Promise<void>;
+  private readonly modèle: Buffer;
 
-  private chargeModele(): Promise<Buffer> {
-    this.modele ??= readFile(fileURLToPath(new URL('./banniere.svg', import.meta.url)));
-    return this.modele;
-  }
+  constructor(fournisseurChemin: FournisseurChemin) {
+    const cheminBannière = fournisseurChemin.back.banniereSvgRécompenseCyberdepart();
+    const cheminPoliceMarianneRegular = fournisseurChemin.front.police('Marianne-Regular.woff2');
+    const cheminPoliceMarianneBold = fournisseurChemin.front.police('Marianne-Bold.woff2');
 
-  private chargePolice(): Promise<void> {
-    this.police ??= Promise.all([
-      readFile(fileURLToPath(new URL('./Marianne-Regular.woff2', import.meta.url))),
-      readFile(fileURLToPath(new URL('./Marianne-Bold.woff2', import.meta.url))),
-    ]).then(([policeNormale, policeGrasse]) => {
-      if (!GlobalFonts.has(NOM_POLICE)) GlobalFonts.register(policeNormale, NOM_POLICE);
-      if (!GlobalFonts.has(NOM_POLICE_GRASSE)) GlobalFonts.register(policeGrasse, NOM_POLICE_GRASSE);
-    });
-    return this.police;
+    this.modèle = readFileSync(cheminBannière);
+    const policeMarianneRegular = readFileSync(cheminPoliceMarianneRegular);
+    const policeMarianneBold = readFileSync(cheminPoliceMarianneBold);
+
+    if (!GlobalFonts.has(NOM_POLICE)) GlobalFonts.register(policeMarianneRegular, NOM_POLICE);
+    if (!GlobalFonts.has(NOM_POLICE_GRASSE)) GlobalFonts.register(policeMarianneBold, NOM_POLICE_GRASSE);
   }
 
   async genereBanniere({ nomOrganisation }: ConfigurationRécompenseCyberDépart): Promise<Buffer> {
-    await this.chargePolice();
     const calqueTexte = new Canvas(LARGEUR_BANNIERE, HAUTEUR_BANNIERE);
     const contexte = calqueTexte.getContext('2d');
     contexte.fillStyle = '#3A3A3A';
@@ -121,7 +116,7 @@ export class ServiceRécompensesCyberDépart {
 
     do {
       interligne = tailleTexte + 6;
-      lignes = decoupeEnLignes(contexte as unknown as CanvasRenderingContext2D, mots, tailleTexte, LARGEUR_TEXTE);
+      lignes = découpeEnLignes(contexte as unknown as CanvasRenderingContext2D, mots, tailleTexte, LARGEUR_TEXTE);
       if (Y_TEXTE + (lignes.length - 1) * interligne <= Y_TEXTE_MAXIMUM) break;
       tailleTexte -= 1;
     } while (tailleTexte >= TAILLE_TEXTE_MINIMALE);
@@ -136,9 +131,7 @@ export class ServiceRécompensesCyberDépart {
       });
     });
 
-    const modeleSVG = await this.chargeModele();
-
-    return await sharp(modeleSVG)
+    return await sharp(this.modèle)
       .composite([{ input: calqueTexte.toBuffer('image/png') }])
       .resize({ width: LARGEUR_BANNIERE })
       .png()

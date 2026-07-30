@@ -3,7 +3,7 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import sharp from 'sharp';
 import { creeServeur } from '../../../../src/api/msc.js';
-import { configurationDeTestDuServeur } from '../../fauxObjets.js';
+import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from '../../fauxObjets.js';
 import { EntrepotUtilisateur } from '../../../../src/metier/entrepotUtilisateur.js';
 import { encodeSession } from '../../cookie.js';
 import { jeanneDupont } from '../../objetsPretsALEmploi.js';
@@ -29,7 +29,7 @@ describe('La ressource des récompenses CyberDépart', () => {
   beforeEach(async () => {
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
     entrepôtModule = new EntrepôtModuleMémoire();
-    serviceRécompensesCyberDépart = new ServiceRécompensesCyberDépart();
+    serviceRécompensesCyberDépart = new ServiceRécompensesCyberDépart(fauxFournisseurDeChemin);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       entrepotUtilisateur,

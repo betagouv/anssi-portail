@@ -9,19 +9,15 @@ export class FichierInconnu extends Error {
   }
 }
 
-const valideChemin = (nomFichier: string): void => {
-  const decodedPath = decodeURIComponent(nomFichier);
-  if (decodedPath.includes('..') || decodedPath.startsWith('/') || decodedPath.startsWith('\\')) {
-    throw new ErreurTraverséeDeChemin(`Tentative de path traversal détectée: ${nomFichier}`);
-  }
-};
-
 export interface FournisseurChemin {
   front: {
-    sitemapXml(): string;
+    sitemapXml: () => string;
+    police: (nomDePolice: string) => string;
   };
   back: {
     csvNis2Simulateur: () => string;
+
+    banniereSvgRécompenseCyberdepart: () => string;
   };
   jekyll: {
     page404: () => string;
@@ -40,6 +36,13 @@ export interface FournisseurChemin {
   };
   versRessourceJekyll: (...morceauxChemin: string[]) => string;
 }
+
+const valideChemin = (nomFichier: string): void => {
+  const decodedPath = decodeURIComponent(nomFichier);
+  if (decodedPath.includes('..') || decodedPath.startsWith('/') || decodedPath.startsWith('\\')) {
+    throw new ErreurTraverséeDeChemin(`Tentative de path traversal détectée: ${nomFichier}`);
+  }
+};
 
 export const construisListeFichiersDuSite = (racine: string) => {
   const repertoireAbsolu = join(process.cwd(), racine);
@@ -62,10 +65,13 @@ const construisCheminVersArtefactJekyll = (...morceauxChemin: string[]): string 
 export const fournisseurChemin: FournisseurChemin = {
   front: {
     sitemapXml: () => join(process.cwd(), 'front', 'assets', 'sitemap.xml'),
+    police: (nomDePolice: string) => join(process.cwd(), 'front', 'assets', 'fonts', nomDePolice),
   },
   back: {
     csvNis2Simulateur: () =>
       join(process.cwd(), 'back', 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
+    banniereSvgRécompenseCyberdepart: () =>
+      join(process.cwd(), 'back', 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'banniere.svg'),
   },
   jekyll: {
     page404: () => construisCheminVersArtefactJekyll('404.html'),

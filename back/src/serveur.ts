@@ -186,7 +186,7 @@ const port = process.env.PORT || 3000;
     serviceSanteGuides,
     adaptateurEmail,
     generateurImage: new GenerateurImageAvif(),
-    serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(),
+    serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(fournisseurChemin),
   }).listen(port, () => {
     console.log(`Le serveur écoute sur le port ${port}`);
   });
