@@ -2,7 +2,7 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import cors from 'cors';
-import express, { json, NextFunction, Request, Response } from 'express';
+import express, { json, NextFunction, Request, RequestHandler, Response } from 'express';
 import { IpFilter } from 'express-ipfilter';
 import rateLimit from 'express-rate-limit';
 import { ConfigurationServeur } from './configurationServeur.js';
@@ -148,18 +148,27 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     });
   });
 
-  app.use((requete, reponse, suite) => {
-    if (requete.path !== '/' && requete.path.endsWith('/')) {
-      const motifSlashFinalAvantParametres = /\/+(?=\?|$)/;
-
-      return reponse.redirect(
-        HttpStatusCode.PermanentRedirect,
-        requete.originalUrl.replace(motifSlashFinalAvantParametres, '')
-      );
+  const enregistreRoute = (chemin: string, ...gestionnaires: RequestHandler[]) => {
+    if (chemin === '/') {
+      return app.use(chemin, ...gestionnaires);
     }
 
-    suite();
-  });
+    const redirigeSansSlashFinal: RequestHandler = (requete, reponse, suite) => {
+      const chemin = requete.originalUrl.split('?', 1)[0];
+      if (chemin.endsWith('/')) {
+        const motifSlashFinalAvantParametres = /\/+(?=\?|$)/;
+
+        return reponse.redirect(
+          HttpStatusCode.PermanentRedirect,
+          requete.originalUrl.replace(motifSlashFinalAvantParametres, '')
+        );
+      }
+
+      suite();
+    };
+
+    return app.use(chemin, redirigeSansSlashFinal, ...gestionnaires);
+  };
 
   const brancheLesRessourcesStatiques = (avecCors: boolean) => (ressource: string) => {
     const sertLesFichiersStatiques = express.static(fournisseurChemin.versRessourceJekyll(ressource), {
@@ -168,9 +177,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     });
 
     if (avecCors) {
-      app.use(`/${ressource}`, cors(), sertLesFichiersStatiques);
+      enregistreRoute(`/${ressource}`, cors(), sertLesFichiersStatiques);
     } else {
-      app.use(`/${ressource}`, sertLesFichiersStatiques);
+      enregistreRoute(`/${ressource}`, sertLesFichiersStatiques);
     }
   };
 
@@ -179,7 +188,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(configurationServeur.middleware.verifieModeMaintenance);
 
-  app.use('/financements', (requete, reponse) => {
+  enregistreRoute('/financements', (requete, reponse) => {
     const id = requete.query.idFinancement;
     if (Object.keys(requete.query).length > 0 && id) {
       // on garde la redirection pour ne pas casser les liens existants
@@ -227,85 +236,89 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
         ? ['simulateur-nis2']
         : []
     )
-    .forEach((page) => app.use(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
+    .forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
 
-  app.use('/financements/:id', ressourcePagesJekyll(configurationServeur, 'financements'));
+  enregistreRoute('/financements/:id', ressourcePagesJekyll(configurationServeur, 'financements'));
 
-  app.use('/favoris-partages/:id', ressourcePagesJekyll(configurationServeur, 'favoris-partages'));
+  enregistreRoute('/favoris-partages/:id', ressourcePagesJekyll(configurationServeur, 'favoris-partages'));
 
-  app.use('/guides/:slug', ressourcePagesJekyll(configurationServeur, 'guides'));
+  enregistreRoute('/guides/:slug', ressourcePagesJekyll(configurationServeur, 'guides'));
 
   routesPagesConnecteesStatiques.forEach((page) =>
-    app.use(`/${page}`, ressourcePagesJekyllConnectees(configurationServeur, page))
+    enregistreRoute(`/${page}`, ressourcePagesJekyllConnectees(configurationServeur, page))
   );
 
-  app.use('/connexion', ressourcePageConnexion(configurationServeur));
+  enregistreRoute('/connexion', ressourcePageConnexion(configurationServeur));
 
   ['services', 'ressources', 'contacts'].forEach((repertoireProduits) =>
-    app.use(`/${repertoireProduits}`, ressourcePageProduit(configurationServeur, repertoireProduits))
+    enregistreRoute(`/${repertoireProduits}`, ressourcePageProduit(configurationServeur, repertoireProduits))
   );
 
-  app.use('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
+  enregistreRoute('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
 
-  app.use('/oidc/apres-authentification', ressourceApresAuthentificationOIDC(configurationServeur));
+  enregistreRoute('/oidc/apres-authentification', ressourceApresAuthentificationOIDC(configurationServeur));
 
-  app.use('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
+  enregistreRoute('/oidc/deconnexion', ressourceDeconnexionOIDC(configurationServeur));
 
-  app.use('/oidc/apres-deconnexion', ressourceApresDeconnexionOIDC());
+  enregistreRoute('/oidc/apres-deconnexion', ressourceApresDeconnexionOIDC());
 
   app.use('/api', limiteRequetesParMinuteAPI);
 
-  app.use('/api/profil', ressourceProfil(configurationServeur));
+  enregistreRoute('/api/profil', ressourceProfil(configurationServeur));
 
-  app.use('/api/utilisateurs', ressourceUtilisateurs(configurationServeur));
+  enregistreRoute('/api/utilisateurs', ressourceUtilisateurs(configurationServeur));
 
-  app.use('/api/mon-aide-cyber/demandes-aide', ressourceDemandesAide(configurationServeur));
+  enregistreRoute('/api/mon-aide-cyber/demandes-aide', ressourceDemandesAide(configurationServeur));
 
-  app.use('/api/favoris', ressourceFavoris(configurationServeur), ressourceFavori(configurationServeur));
+  enregistreRoute('/api/favoris', ressourceFavoris(configurationServeur), ressourceFavori(configurationServeur));
 
-  app.use('/api/favoris-partages', ressourceFavorisPartages(configurationServeur));
+  enregistreRoute('/api/favoris-partages', ressourceFavorisPartages(configurationServeur));
 
-  app.use('/api/informations-creation-compte', ressourceInformationsCreationCompte(configurationServeur));
+  enregistreRoute('/api/informations-creation-compte', ressourceInformationsCreationCompte(configurationServeur));
 
-  app.use(
+  enregistreRoute(
     '/api/resultats-test',
     ressourceResultatsDeTest(configurationServeur),
     ressourceResultatDeTest(configurationServeur)
   );
-  app.use('/api/resultats-test/dernier', ressourceDernierResultatDeTest(configurationServeur));
+  enregistreRoute('/api/resultats-test/dernier', ressourceDernierResultatDeTest(configurationServeur));
 
-  app.use(
+  enregistreRoute(
     '/api/sessions-groupe',
     ressourceSessionsDeGroupe(configurationServeur),
     ressourceSessionDeGroupe(configurationServeur),
     ressourceResultatsSessionDeGroupe(configurationServeur)
   );
 
-  app.use('/api/annuaire/organisations', ressourceAnnuaireOrganisations(configurationServeur));
+  enregistreRoute('/api/annuaire/organisations', ressourceAnnuaireOrganisations(configurationServeur));
 
-  app.use('/api/annuaire/departements', ressourceAnnuaireDepartements(configurationServeur));
+  enregistreRoute('/api/annuaire/departements', ressourceAnnuaireDepartements(configurationServeur));
 
-  app.use('/api/annuaire/regions', ressourceAnnuaireRegions(configurationServeur));
+  enregistreRoute('/api/annuaire/regions', ressourceAnnuaireRegions(configurationServeur));
 
-  app.use('/api/annuaire/secteurs-activite', ressourceAnnuaireSecteursActivite(configurationServeur));
+  enregistreRoute('/api/annuaire/secteurs-activite', ressourceAnnuaireSecteursActivite(configurationServeur));
 
-  app.use('/api/annuaire/tranches-effectif', ressourceAnnuaireTranchesEffectif(configurationServeur));
+  enregistreRoute('/api/annuaire/tranches-effectif', ressourceAnnuaireTranchesEffectif(configurationServeur));
 
-  app.use('/api/pages-crisp', ressourcePageCrisp(configurationServeur));
+  enregistreRoute('/api/pages-crisp', ressourcePageCrisp(configurationServeur));
 
-  app.use('/api/infos-site', ressourceInfosSite(configurationServeur));
+  enregistreRoute('/api/infos-site', ressourceInfosSite(configurationServeur));
 
-  app.use('/api/retours-experience', ressourceRetoursExperience(configurationServeur));
+  enregistreRoute('/api/retours-experience', ressourceRetoursExperience(configurationServeur));
 
-  app.use('/api/statistiques', ressourceStatistiques(configurationServeur));
+  enregistreRoute('/api/statistiques', ressourceStatistiques(configurationServeur));
 
-  app.use('/api/repartition-resultats-test', ressourceRepartitionDesResultatsDeTest(configurationServeur));
+  enregistreRoute('/api/repartition-resultats-test', ressourceRepartitionDesResultatsDeTest(configurationServeur));
 
-  app.use('/api/avis-utilisateur', ressourceAvisUtilisateur(configurationServeur));
+  enregistreRoute('/api/avis-utilisateur', ressourceAvisUtilisateur(configurationServeur));
 
-  app.use('/api/financements', ressourceFinancements(configurationServeur), ressourceFinancement(configurationServeur));
+  enregistreRoute(
+    '/api/financements',
+    ressourceFinancements(configurationServeur),
+    ressourceFinancement(configurationServeur)
+  );
 
-  app.use(
+  enregistreRoute(
     '/api/guides',
     ressourceGuides(configurationServeur),
     ressourceGuide(configurationServeur),
@@ -313,51 +326,51 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourceDocumentsGuide(configurationServeur)
   );
 
-  app.use('/documents-guides', ressourceDocumentGuide(configurationServeur));
-  app.use('/documents-ressources', ressourceDocumentRessource(configurationServeur));
+  enregistreRoute('/documents-guides', ressourceDocumentGuide(configurationServeur));
+  enregistreRoute('/documents-ressources', ressourceDocumentRessource(configurationServeur));
 
-  app.use('/visas/tl-fr.sha2', ressourceControleContenuListeConfiance());
-  app.use('/visas', ressourceVisa(configurationServeur));
+  enregistreRoute('/visas/tl-fr.sha2', ressourceControleContenuListeConfiance());
+  enregistreRoute('/visas', ressourceVisa(configurationServeur));
 
-  app.use('/api/diagnostic/statistiques', ressourceStatistiquesDiagnostic());
+  enregistreRoute('/api/diagnostic/statistiques', ressourceStatistiquesDiagnostic());
 
-  app.use('/api/exigences-nis2', ressourceExigencesNis2(configurationServeur));
-  app.use('/api/exigences-nis2.csv', ressourceExigencesNis2Csv(configurationServeur));
+  enregistreRoute('/api/exigences-nis2', ressourceExigencesNis2(configurationServeur));
+  enregistreRoute('/api/exigences-nis2.csv', ressourceExigencesNis2Csv(configurationServeur));
 
   if (configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur())
-    app.use('/api/simulateur-nis2', ressourceSimulateurNis2(configurationServeur));
+    enregistreRoute('/api/simulateur-nis2', ressourceSimulateurNis2(configurationServeur));
 
-  app.use('/api/sante-guides', ressourceSanteGuides(configurationServeur));
+  enregistreRoute('/api/sante-guides', ressourceSanteGuides(configurationServeur));
 
-  app.use('/api/abonnement-infolettre', ressourceAbonnementInfolettre(configurationServeur));
+  enregistreRoute('/api/abonnement-infolettre', ressourceAbonnementInfolettre(configurationServeur));
 
-  app.use('/api/cyberdepart/recompenses', ressourceRécompensesCyberDépart(configurationServeur));
+  enregistreRoute('/api/cyberdepart/recompenses', ressourceRécompensesCyberDépart(configurationServeur));
 
   const parcoursActivé = configurationServeur.adaptateurEnvironnement
     .fonctionnalites()
     .parcoursDeSecurisation()
     .estActif();
   if (parcoursActivé) {
-    app.use(
+    enregistreRoute(
       '/api/mesures',
       ressourceMesure(configurationServeur),
       ressourceAvisMesure(configurationServeur),
       ressourcePriseEnCompte(configurationServeur)
     );
-    app.use('/api/mesures.csv', ressourceMesureCsv(configurationServeur));
-    app.use('/api/modules', ressourceModule(configurationServeur));
-    app.use('/module-cyberdepart', (_, reponse) => reponse.redirect(303, '/modules/1'));
-    app.use('/modules/1', ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart'));
-    app.use('/modules/:id', ressourcePagesJekyllConnectees(configurationServeur, 'modules'));
-    app.use('/parcours-complet', ressourcePagesJekyllConnectees(configurationServeur, 'parcours-complet'));
-    app.use('/api/parcours/complet', ressourceParcoursComplet(configurationServeur));
-    app.use('/mesures/:id', ressourcePagesJekyllConnectees(configurationServeur, 'mesures'));
+    enregistreRoute('/api/mesures.csv', ressourceMesureCsv(configurationServeur));
+    enregistreRoute('/api/modules', ressourceModule(configurationServeur));
+    enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(303, '/modules/1'));
+    enregistreRoute('/modules/1', ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart'));
+    enregistreRoute('/modules/:id', ressourcePagesJekyllConnectees(configurationServeur, 'modules'));
+    enregistreRoute('/parcours-complet', ressourcePagesJekyllConnectees(configurationServeur, 'parcours-complet'));
+    enregistreRoute('/api/parcours/complet', ressourceParcoursComplet(configurationServeur));
+    enregistreRoute('/mesures/:id', ressourcePagesJekyllConnectees(configurationServeur, 'mesures'));
   }
 
-  app.use('/parcours', ressourceParcours(configurationServeur));
+  enregistreRoute('/parcours', ressourceParcours(configurationServeur));
 
-  app.use('/robots.txt', ressourceRobotsTxt(configurationServeur));
-  app.use('/sitemap.xml', ressourceSitemapXml(routesStatiques, configurationServeur));
+  enregistreRoute('/robots.txt', ressourceRobotsTxt(configurationServeur));
+  enregistreRoute('/sitemap.xml', ressourceSitemapXml(routesStatiques, configurationServeur));
 
   app.use((erreur: unknown, _requete: Request, reponse: Response, suite: NextFunction) => {
     if (erreur instanceof FichierInconnu) {
