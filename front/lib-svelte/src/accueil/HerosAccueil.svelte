@@ -1,5 +1,6 @@
 <script lang="ts">
   import Lien from '../ui/Lien.svelte';
+  import Surlignage from '../ui/Surlignage.svelte';
 </script>
 
 <dsfr-container>
@@ -7,7 +8,7 @@
     <div class="contenu">
       <div class="surtitre fr-h4">Je protège mon activité</div>
       <h1 class="alternatif-md">
-        Agissez pour votre <span class="surligne-gauche-droite">cybersécurité&nbsp;!</span>
+        Agissez pour votre <Surlignage>cybersécurité&nbsp;!</Surlignage>
       </h1>
       <div class="action">
         <Lien
@@ -78,24 +79,6 @@
           }
           @include a-partir-de(lg) {
             margin-bottom: 0;
-          }
-        }
-
-        .surligne-gauche-droite {
-          position: relative;
-          z-index: 10;
-
-          @include a-partir-de(md) {
-            &:after {
-              background: url('/assets/images/surligne-gauche-droite-vert-clair.svg') no-repeat;
-              content: '';
-              width: 100%;
-              height: 100%;
-              top: 70%;
-              right: 0;
-              position: absolute;
-              z-index: -1;
-            }
           }
         }
       }
