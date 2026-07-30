@@ -28,13 +28,13 @@ export interface FournisseurChemin {
     ressource: (nom: string) => string;
     contact: (codeRegion: CodeRegion) => string;
     service: (nom: string) => string;
+    composantSvelteCompilé: (nom: string) => string;
 
     assets: () => string;
     scripts: () => string;
     libSvelte: () => string;
     favicon: () => string;
   };
-  versRessourceJekyll: (...morceauxChemin: string[]) => string;
 }
 
 const valideChemin = (nomFichier: string): void => {
@@ -82,13 +82,14 @@ export const fournisseurChemin: FournisseurChemin = {
     ressource: (nom: string) => construisCheminVersArtefactJekyll('ressources', nom),
     contact: (nom: string) => construisCheminVersArtefactJekyll('contacts', nom),
     service: (nom: string) => construisCheminVersArtefactJekyll('services', nom),
+    composantSvelteCompilé: (nom: string) =>
+      construisCheminVersArtefactJekyll('lib-svelte', 'dist', 'serveur', 'assets', `${nom}.js`),
 
     assets: () => construisCheminVersArtefactJekyll('assets'),
     scripts: () => construisCheminVersArtefactJekyll('scripts'),
     libSvelte: () => construisCheminVersArtefactJekyll('lib-svelte'),
     favicon: () => construisCheminVersArtefactJekyll('favicon.ico'),
   },
-  versRessourceJekyll: (...morceauxChemin: string[]) => construisCheminVersArtefactJekyll(...morceauxChemin),
 };
 
 const cacheFichiers: string[] = [];
