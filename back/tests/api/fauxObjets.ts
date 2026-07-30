@@ -34,10 +34,13 @@ export const ressourceFactice = (): string => join(process.cwd(), 'tests', 'ress
 export const fauxFournisseurDeChemin: FournisseurChemin = {
   front: {
     sitemapXml: () => '',
+    police: (nomDePolice: string) => join(process.cwd(), '..', 'front', 'assets', 'fonts', nomDePolice),
   },
   back: {
     csvNis2Simulateur: () =>
       join(process.cwd(), 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
+    banniereSvgRécompenseCyberdepart: () =>
+      join(process.cwd(), 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'banniere.svg'),
   },
   jekyll: {
     page404: () => ressourceFactice(),
@@ -294,7 +297,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   entrepotMesure: new EntrepotMesureMemoire(),
   entrepotPriseEnCompte: new EntrepotPriseEnCompteMemoire(),
   entrepôtModule: new EntrepôtModuleMémoire(),
-  serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(),
+  serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(fauxFournisseurDeChemin),
   entrepotUtilisateur,
   fournisseurChemin: fauxFournisseurDeChemin,
   generateurCodeSessionDeGroupe: fauxGenerateurCodeSessionDeGroupe,
