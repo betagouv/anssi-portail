@@ -149,14 +149,19 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   });
 
   const enregistreRoute = (chemin: string, ...gestionnaires: RequestHandler[]) => {
-    if (chemin === '/') {
-      return app.use(chemin, ...gestionnaires);
-    }
-
     const redirigeSansSlashFinal: RequestHandler = (requete, reponse, suite) => {
-      const chemin = requete.originalUrl.split('?', 1)[0];
-      if (chemin.endsWith('/')) {
-        const motifSlashFinalAvantParametres = /\/+(?=\?|$)/;
+      const cheminRequete = requete.originalUrl.split('?', 1)[0];
+
+      const motifPlusieursSlashsdAffilé: RegExp = /^\/{2,}$/;
+      const estRacineAvecPlusieursSlashs = chemin === '/' && motifPlusieursSlashsdAffilé.test(cheminRequete);
+
+      if (estRacineAvecPlusieursSlashs) {
+        const parametres = requete.originalUrl.slice(cheminRequete.length);
+        return reponse.redirect(HttpStatusCode.PermanentRedirect, `/${parametres}`);
+      }
+
+      if (chemin !== '/' && cheminRequete.endsWith('/')) {
+        const motifSlashFinalAvantParametres: RegExp = /\/+(?=\?|$)/;
 
         return reponse.redirect(
           HttpStatusCode.PermanentRedirect,

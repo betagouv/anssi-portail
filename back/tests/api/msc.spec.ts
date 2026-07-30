@@ -35,6 +35,15 @@ describe('La configuration de notre serveur', () => {
     assert.equal(réponse.statusCode, HttpStatusCode.Ok);
   });
 
+  it('redirige correctement le chemin racine', async () => {
+    const serveur = creeServeur(configurationDeTestDuServeur);
+
+    const réponse = await request(serveur).get('///////////');
+
+    assert.equal(réponse.statusCode, HttpStatusCode.PermanentRedirect);
+    assert.equal(réponse.headers.location, '/');
+  });
+
   it('redirige vers une url sans slashs finaux', async () => {
     const serveur = creeServeur(configurationDeTestDuServeur);
 
