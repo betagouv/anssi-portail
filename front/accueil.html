@@ -5,34 +5,6 @@ permalink: /
 ---
 
 {% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
-<lab-anssi-bandeau-page
-  titre="Mes&ZeroWidthSpace;Services&ZeroWidthSpace;Cyber"
-  description="Agissez pour votre cybersécurité&nbsp;!"
-  url-image="/assets/images/ecrans-virtuels-avec-femme-au-centre.svg"
-  mention="Découvrez les guides, services et outils gratuits proposés par l'Agence nationale de la sécurité des systèmes d'information et ses partenaires."
-  inverse
->
-  <h1 slot="seo">{titre}</h1>
-  <p slot="seo">{description}</p>
-  <div slot="buttonsgroup">
-    <msc-lien
-      apparence="bouton"
-      href="/cyberdepart/"
-      libelle="Demander un diagnostic gratuit"
-      type="primaire-inverse"
-    ></msc-lien>
-    <msc-lien
-      apparence="bouton"
-      href="/catalogue#guides"
-      libelle="Accéder aux guides de l’ANSSI"
-      type="secondaire-inverse"
-    ></msc-lien>
-  </div>
-  <p slot="seo" class="texte-detail-sm">
-    Découvrez les guides, services et outils gratuits proposés par l'Agence
-    nationale de la sécurité des systèmes d'information et ses partenaires.
-  </p>
-</lab-anssi-bandeau-page>
 {% include composant-svelte.html id="heros-accueil" %}
 {% else %}
 <dsfr-container class="chapeau fond-sombre">
