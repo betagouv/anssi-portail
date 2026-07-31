@@ -144,6 +144,11 @@
     {:else}
       <ConfirmationCreationDemandeAide />
     {/if}
+    {#if afficheNouvelleDA}
+      <p class="texte-mention-xs">
+        Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et aux entreprises mono-salariées.
+      </p>
+    {/if}
   </div>
 </dsfr-container>
 <dsfr-container class="zone-faq">
@@ -227,6 +232,10 @@
 
     .contenu-section {
       max-width: 792px;
+
+      .texte-mention-xs {
+        margin: 1rem 0 0;
+      }
     }
   }
 
