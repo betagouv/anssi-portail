@@ -3,6 +3,7 @@ import { Utilisateur } from '../../../metier/utilisateur.js';
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middleware.js';
 import { corpsVide, valideCorpsRequete } from '../../zod.js';
+import { generateurDocument } from '../../../infra/generateurDocument.js';
 
 export const ressourceRécompensesCyberDépart = ({
   serviceRécompensesCyberDépart,
@@ -10,6 +11,7 @@ export const ressourceRécompensesCyberDépart = ({
   entrepôtModule,
   adaptateurHachage,
   adaptateurCompression,
+  fournisseurChemin,
   middleware,
 }: ConfigurationServeur) => {
   const routeur = Router();
@@ -39,9 +41,18 @@ export const ressourceRécompensesCyberDépart = ({
 
       const badge = await serviceRécompensesCyberDépart.récupèreBadge();
 
+      // TODO: Ajouter les vraies données dans le generateurDocument
+      const attestation = await generateurDocument({
+        cheminFichier: fournisseurChemin.back.attestationTypCyberdepart(),
+        données: {
+          entite: 'toto',
+          organisation: 'ANSSSIIIII',
+        },
+      });
       const archive = await adaptateurCompression.génèreArchive([
         { nom: 'banniere.png', buffer: banniere },
         { nom: 'badge.png', buffer: badge },
+        { nom: 'attestation.pdf', buffer: attestation },
       ]);
 
       return reponse.contentType('application/zip').attachment('recompenses.zip').send(archive);

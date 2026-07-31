@@ -16,6 +16,7 @@ export interface FournisseurChemin {
   };
   back: {
     csvNis2Simulateur: () => string;
+    attestationTypCyberdepart: () => string;
     badgePngRécompenseCyberdepart: () => string;
     banniereSvgRécompenseCyberdepart: () => string;
   };
@@ -70,6 +71,17 @@ export const fournisseurChemin: FournisseurChemin = {
   back: {
     csvNis2Simulateur: () =>
       join(process.cwd(), 'back', 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
+    attestationTypCyberdepart: () =>
+      join(
+        process.cwd(),
+        'back',
+        'src',
+        'api',
+        'mesures',
+        'ressourceRecompensesCyberDepart',
+        'attestation',
+        'attestation.typ'
+      ),
     badgePngRécompenseCyberdepart: () =>
       join(process.cwd(), 'back', 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'badge.png'),
     banniereSvgRécompenseCyberdepart: () =>
