@@ -3,13 +3,14 @@
   import { onMount } from 'svelte';
 
   let satisfaction = $state<number>();
+  let nombreOrganisations = $state<number>();
 
   onMount(async () => {
     const reponse = await axios.get<{
       organisationsAccompagnees: number;
       satisfaction: number;
     }>(`/api/diagnostic/statistiques`);
-
+    nombreOrganisations = reponse.data.organisationsAccompagnees;
     satisfaction = reponse.data.satisfaction;
   });
 </script>
@@ -17,6 +18,10 @@
 <div class="composition">
   <img src="/assets/images/homme-regardant-webinaire.avif" alt="Homme regardant un webinaire" />
 
+  <div class="annotation">
+    <p class="fr-h5">+{nombreOrganisations}</p>
+    <p class="texte-standard-md">organisations<br />accompagnées</p>
+  </div>
   <div class="legende-illustree">
     <div class="illustration">
       <lab-anssi-icone nom="thumb-up-fill" taille="sm"></lab-anssi-icone>
@@ -44,7 +49,7 @@
       display: inline-flex;
       gap: 0.375rem;
       align-items: center;
-      bottom: 42px;
+      bottom: 6%;
       left: 0;
 
       .illustration {
@@ -62,6 +67,30 @@
 
         .texte-detail-sm {
           margin: 0;
+        }
+      }
+    }
+
+    .annotation {
+      position: absolute;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      align-items: flex-start;
+      left: 10px;
+      top: calc(50% - 52px);
+      padding: 0.75rem;
+      border-radius: 8px;
+      background-color: var(--background-default-grey);
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
+
+      p {
+        margin: 0;
+        &.fr-h5 {
+          color: var(--text-title-blue-france);
+        }
+        &.texte-standard-md {
+          font-weight: bold;
         }
       }
     }
