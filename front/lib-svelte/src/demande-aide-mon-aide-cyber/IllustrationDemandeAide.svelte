@@ -38,6 +38,10 @@
   </div>
   <div class="boucle">
     <img src="/assets/images/decorations/boucle.svg" alt="" />
+
+    <div class="ellipse">
+      <img src="/assets/images/decorations/ellipse.svg" alt="" />
+    </div>
   </div>
 </div>
 
@@ -133,6 +137,16 @@
       color: var(--text-title-blue-france);
       img {
         width: 140px;
+      }
+
+      .ellipse {
+        position: absolute;
+        right: 15%;
+        bottom: 110%;
+
+        img {
+          width: 10px;
+        }
       }
     }
   }
