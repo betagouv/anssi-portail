@@ -1,6 +1,7 @@
 import { CmsCrisp } from '@lab-anssi/lib';
 import { adaptateurJWT } from './api/adaptateurJWT.js';
 import { fournisseurChemin } from './api/fournisseurChemin.js';
+import { ServiceRécompensesCyberDépart } from './api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 import { fabriqueMiddleware } from './api/middleware.js';
 import { creeServeur } from './api/msc.js';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
@@ -9,6 +10,7 @@ import { cableTousLesAbonnes } from './bus/cablage.js';
 import { EntrepôtModulePostgres } from './entrepotModulePostgres.js';
 import { adaptateurCellar } from './infra/adaptateurCellar.js';
 import { fabriqueAdaptateurChiffrement } from './infra/adaptateurChiffrement.js';
+import { adaptateurCompression } from './infra/adaptateurCompression.js';
 import { fabriqueAdaptateurEmail } from './infra/adaptateurEmailBrevo.js';
 import { adaptateurEnvironnement } from './infra/adaptateurEnvironnement.js';
 import { adaptateurGestionErreurSentry } from './infra/adaptateurGestionErreurSentry.js';
@@ -40,7 +42,6 @@ import { EntrepotMesure } from './metier/entrepotMesure.js';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe.js';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
-import { ServiceRécompensesCyberDépart } from './api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
@@ -187,6 +188,7 @@ const port = process.env.PORT || 3000;
     adaptateurEmail,
     generateurImage: new GenerateurImageAvif(),
     serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(fournisseurChemin),
+    adaptateurCompression,
   }).listen(port, () => {
     console.log(`Le serveur écoute sur le port ${port}`);
   });
