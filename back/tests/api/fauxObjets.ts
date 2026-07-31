@@ -31,7 +31,7 @@ import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMe
 import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire.js';
 
 export const ressourceFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.html');
-
+export const typstFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.typ');
 export const fauxFournisseurDeChemin: FournisseurChemin = {
   front: {
     sitemapXml: () => '',
