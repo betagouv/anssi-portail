@@ -36,6 +36,9 @@
   <div class="fleur">
     <img src="/assets/images/decorations/fleur.svg" alt="" />
   </div>
+  <div class="boucle">
+    <img src="/assets/images/decorations/boucle.svg" alt="" />
+  </div>
 </div>
 
 <style lang="scss">
@@ -120,6 +123,16 @@
       img {
         width: 12px;
         height: 12px;
+      }
+    }
+
+    .boucle {
+      position: absolute;
+      right: 6%;
+      bottom: 12%;
+      color: var(--text-title-blue-france);
+      img {
+        width: 140px;
       }
     }
   }
