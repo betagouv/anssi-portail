@@ -1,14 +1,23 @@
 <script lang="ts">
   import Lien from '../ui/Lien.svelte';
-  import MachineAEcrire from '../ui/MachineAEcrire.svelte';
+  import MachineAEcrireRotative from '../ui/MachineAEcrireCyclique.svelte';
   import Surlignage from '../ui/Surlignage.svelte';
+
+  const phrasesAnimées = [
+    'mon activité',
+    'mes données',
+    'mes équipes',
+    'ma réputation',
+    'mon entreprise',
+    'ma collectivité',
+  ];
 </script>
 
 <dsfr-container>
   <div class="conteneur-heros">
     <div class="contenu">
       <div class="surtitre fr-h4">
-        Je protège <MachineAEcrire texte="mon activité et je sécurise mes données personnelles" />
+        <MachineAEcrireRotative {phrasesAnimées} préfixe="Je protège " />
       </div>
       <h1 class="alternatif-md">
         Agissez pour votre <Surlignage>cybersécurité&nbsp;!</Surlignage>
