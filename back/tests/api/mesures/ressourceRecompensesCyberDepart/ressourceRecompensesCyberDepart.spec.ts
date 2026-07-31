@@ -14,6 +14,7 @@ import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from '../../fauxObjets.js';
 import { jeanneDupont } from '../../objetsPretsALEmploi.js';
 import { mesureDeTest } from '../constructeurDeMesure.js';
+import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 
 describe('La ressource des récompenses CyberDépart', () => {
   let serveur: Express;
@@ -36,6 +37,7 @@ describe('La ressource des récompenses CyberDépart', () => {
       entrepotUtilisateur,
       entrepôtModule,
       serviceRécompensesCyberDépart,
+      fournisseurChemin: fauxFournisseurDeChemin,
     });
 
     await entrepotUtilisateur.ajoute(jeanneDupont);
@@ -108,6 +110,19 @@ describe('La ressource des récompenses CyberDépart', () => {
       const metadonnées = await extraisMetadonnées(badgePng!);
       assert.equal(metadonnées.format, 'png');
       assert.notEqual(metadonnées.size, 0);
+    });
+
+    it("contient l'attestation au format PDF", async () => {
+      jeanneDupont.mesuresPrisesEnCompte = mesures;
+
+      const attestationPdf = await requêteEntréeArchive('/api/cyberdepart/recompenses.zip', 'attestation.pdf');
+
+      assert.notEqual(attestationPdf, undefined);
+      assert.notEqual(attestationPdf?.getData(), undefined);
+
+      const pdf = await getDocument({ data: new Uint8Array(attestationPdf!.getData()) }).promise;
+
+      assert.equal(pdf.numPages, 1);
     });
   });
 });
