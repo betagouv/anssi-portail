@@ -30,6 +30,9 @@
       <p class="texte-detail-sm">{satisfaction}% sont satisfaites</p>
     </div>
   </div>
+  <div class="bouclier">
+    <lab-anssi-icone nom="shield-fill" taille="lg"></lab-anssi-icone>
+  </div>
 </div>
 
 <style lang="scss">
@@ -93,6 +96,17 @@
           font-weight: bold;
         }
       }
+    }
+
+    .bouclier {
+      position: absolute;
+      right: 8%;
+      top: 4%;
+      padding: 1rem;
+      border-radius: 999px;
+      background-color: var(--background-default-grey);
+      color: var(--text-title-blue-france);
+      box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
     }
   }
 </style>
