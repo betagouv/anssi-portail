@@ -2,16 +2,18 @@ import { join } from 'path';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT.js';
 import { ConfigurationServeur } from '../../src/api/configurationServeur.js';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
+import { ServiceRécompensesCyberDépart } from '../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 import { fabriqueMiddleware, Middleware } from '../../src/api/middleware.js';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC.js';
 import { AdaptateurCellar } from '../../src/infra/adaptateurCellar.js';
-import { AdaptateurEnrichissement } from '../../src/infra/enrichissement/adaptateurEnrichissement.js';
+import { adaptateurCompression } from '../../src/infra/adaptateurCompression.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 import { adaptateurGestionVide } from '../../src/infra/adaptateurGestionErreurVide.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { adaptateurMonAideCyberVide } from '../../src/infra/adaptateurMonAideCyberVide.js';
 import { AdaptateurProfilAnssi } from '../../src/infra/adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
+import { AdaptateurEnrichissement } from '../../src/infra/enrichissement/adaptateurEnrichissement.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests.js';
@@ -27,7 +29,6 @@ import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTest
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire.js';
-import { ServiceRécompensesCyberDépart } from '../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 
 export const ressourceFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.html');
 
@@ -322,4 +323,5 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
       return pdfOriginal;
     },
   },
+  adaptateurCompression,
 };
