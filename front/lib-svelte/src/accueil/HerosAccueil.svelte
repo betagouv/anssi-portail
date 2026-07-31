@@ -50,69 +50,69 @@
 
   dsfr-container {
     background-color: var(--background-flat-blue-france);
+  }
 
-    .conteneur-heros {
-      display: grid;
-      align-content: center;
-      grid-template-areas:
-        'contenu'
-        'illustration';
-      padding-block: 6rem;
+  .conteneur-heros {
+    display: grid;
+    align-content: center;
+    grid-template-areas:
+      'contenu'
+      'illustration';
+    padding-block: 6rem;
 
-      @include a-partir-de(lg) {
-        grid-template-areas: 'contenu illustration';
-        grid-template-columns: auto taille-pour-colonnes(5);
-        column-gap: 1.5rem;
+    @include a-partir-de(lg) {
+      grid-template-areas: 'contenu illustration';
+      grid-template-columns: auto taille-pour-colonnes(5);
+      column-gap: 1.5rem;
+    }
+
+    .contenu {
+      grid-area: contenu;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .surtitre {
+        text-transform: uppercase;
+        color: var(--yellow-moutarde-925-125);
+        margin-bottom: 0.75rem;
       }
 
-      .contenu {
-        grid-area: contenu;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        .surtitre {
-          text-transform: uppercase;
-          color: var(--yellow-moutarde-925-125);
-          margin-bottom: 0.75rem;
-        }
-
-        h1 {
-          margin-bottom: 3rem;
-          color: var(--text-inverted-grey);
-          word-break: break-word;
-          z-index: 10;
-        }
-        .action {
-          display: flex;
-          flex-direction: column;
-          margin-bottom: 3rem;
-          @include a-partir-de(md) {
-            flex-direction: row;
-          }
-          @include a-partir-de(lg) {
-            margin-bottom: 0;
-          }
-        }
+      h1 {
+        margin-bottom: 3rem;
+        color: var(--text-inverted-grey);
+        word-break: break-word;
+        z-index: 10;
       }
-
-      .illustration {
-        grid-area: illustration;
+      .action {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        margin-inline: auto;
-
+        margin-bottom: 3rem;
         @include a-partir-de(md) {
-          max-width: taille-pour-colonnes(8);
+          flex-direction: row;
         }
         @include a-partir-de(lg) {
-          max-width: 100%;
+          margin-bottom: 0;
         }
+      }
+    }
 
-        img {
-          width: 100%;
-        }
+    .illustration {
+      grid-area: illustration;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-inline: auto;
+
+      @include a-partir-de(md) {
+        max-width: taille-pour-colonnes(8);
+      }
+      @include a-partir-de(lg) {
+        max-width: 100%;
+      }
+
+      img {
+        width: 100%;
       }
     }
   }
