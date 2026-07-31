@@ -17,7 +17,7 @@
   <div class="actions">
     <BoutonPartageBadgeCyberdepart typeDuBouton="secondaire" />
     <dsfr-button
-      label="Télécharger mon badge"
+      label="Télécharger mon attestation"
       kind="secondary"
       size="md"
       has-icon={true}
@@ -25,8 +25,7 @@
       icon-place="left"
       markup="a"
       type="button"
-      href="/assets/images/parcours-securisation/badge-cyberdepart.png"
-      target="blank"
+      href="/api/cyberdepart/recompenses.zip"
       centered
     ></dsfr-button>
   </div>
