@@ -12,6 +12,7 @@
   import FoireAuxQuestions from './FoireAuxQuestions.svelte';
   import FormulaireDemandeAide from './FormulaireDemandeAide.svelte';
   import IllustrationCyberDepart from './IllustrationCyberDepart.svelte';
+  import IllustrationDemandeAide from './IllustrationDemandeAide.svelte';
 
   let formulaireDemandeAide: FormulaireDemandeAide;
   let enSucces: boolean = false;
@@ -120,11 +121,7 @@
       variante="cafe-creme"
     >
       {#snippet illustration()}
-        <img
-          class="image-etiree"
-          src="/assets/images/homme-regardant-webinaire-avec-annotations.avif"
-          alt="Homme regardant un webinaire"
-        />
+        <IllustrationDemandeAide />
       {/snippet}
     </HerosRiche>
   {/snippet}
@@ -214,10 +211,6 @@
         height: calc(100% - 48px);
       }
     }
-  }
-
-  img.image-etiree {
-    width: 100%;
   }
 
   .zone-formulaire {
