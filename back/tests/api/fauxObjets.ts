@@ -40,6 +40,8 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
   back: {
     csvNis2Simulateur: () =>
       join(process.cwd(), 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
+    badgePngRécompenseCyberdepart: () =>
+      join(process.cwd(), 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'badge.png'),
     banniereSvgRécompenseCyberdepart: () =>
       join(process.cwd(), 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'banniere.svg'),
   },

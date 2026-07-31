@@ -98,5 +98,16 @@ describe('La ressource des récompenses CyberDépart', () => {
       assert.equal(metadonnées.width, 996);
       assert.equal(metadonnées.height, 420);
     });
+
+    it('contient le badge au format PNG', async () => {
+      jeanneDupont.mesuresPrisesEnCompte = mesures;
+
+      const badgePng = await requêteEntréeArchive('/api/cyberdepart/recompenses.zip', 'badge.png');
+
+      assert.notEqual(badgePng, undefined);
+      const metadonnées = await extraisMetadonnées(badgePng!);
+      assert.equal(metadonnées.format, 'png');
+      assert.notEqual(metadonnées.size, 0);
+    });
   });
 });

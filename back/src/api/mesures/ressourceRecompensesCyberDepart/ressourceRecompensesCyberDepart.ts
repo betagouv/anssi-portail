@@ -37,7 +37,12 @@ export const ressourceRécompensesCyberDépart = ({
         nomOrganisation,
       });
 
-      const archive = await adaptateurCompression.génèreArchive([{ nom: 'banniere.png', buffer: banniere }]);
+      const badge = await serviceRécompensesCyberDépart.récupèreBadge();
+
+      const archive = await adaptateurCompression.génèreArchive([
+        { nom: 'banniere.png', buffer: banniere },
+        { nom: 'badge.png', buffer: badge },
+      ]);
 
       return reponse.contentType('application/zip').attachment('recompenses.zip').send(archive);
     })
