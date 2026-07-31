@@ -1,15 +1,15 @@
 <script lang="ts">
   const { texte }: { texte: string } = $props();
-  const lettres = $derived(texte.split(''));
+  const lettres = $derived(texte.split('').concat('\u00A0'));
 </script>
 
 <span class="machine-a-ecrire" aria-label={texte}>
-  {#each lettres as lettre, i (i)}
-    <span aria-hidden="true" class="lettre" class:espace={lettre === ' '} style="animation-delay: {i * 0.05}s">
+  {#each lettres as lettre, i (`${texte}-${i}`)}
+    {@const estDernièreLettre = i === lettres.length - 1}
+    <span aria-hidden="true" class="lettre" class:curseur={estDernièreLettre} style="animation-delay: {i * 0.05}s">
       {lettre}
     </span>
   {/each}
-  <span aria-hidden="true" class="curseur" style="animation-delay: {lettres.length * 0.05}s">&nbsp;</span>
 </span>
 
 <style lang="scss">
