@@ -1,6 +1,9 @@
 <script lang="ts">
+  import { afficheNouvelleDA } from '$plateforme/environnement';
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import Alternatives from '../ui/Alternatives.svelte';
+  import HerosRiche from '../ui/HerosRiche.svelte';
   import Lien from '../ui/Lien.svelte';
   import { collecteLesErreurs } from '../utils/erreurApi';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
@@ -78,31 +81,56 @@
 
 <DialogueSortieDiagnostic bind:this={dialogueSortie} />
 
-<dsfr-container class="encart-presentation">
-  <div class="illustration">
-    <IllustrationCyberDepart />
-  </div>
-  <div class="contenu-section">
-    <Lien href="/" libelle="Retour" icone="arrow-go-back-line" />
-    <div class="colonne-explicative">
-      <h2>Vous souhaitez vous protéger contre les cyberattaques mais ne savez pas comment vous y prendre ?</h2>
-      <p>
-        <b>Prenez votre cyberdépart !</b> Bénéficiez d’un
-        <b>premier diagnostic gratuit accompagné d’un Aidant cyber</b>
-        et recevez <b>6 recommandations prioritaires</b> à mettre en place pour améliorer la cybersécurité de votre organisation.
-      </p>
-      <div class="zone-tags">
-        <dsfr-badge hasIcon icon="check-line" type="accent" accent="blue-ecume" label="Dans vos locaux ou en visio"
-        ></dsfr-badge>
-        <dsfr-badge hasIcon icon="check-line" type="accent" accent="blue-ecume" label="Rapide (1h30)"></dsfr-badge>
+<Alternatives affichageAlternatif={afficheNouvelleDA}>
+  {#snippet défaut()}
+    <dsfr-container class="encart-presentation">
+      <div class="illustration">
+        <IllustrationCyberDepart />
       </div>
-      <p class="cible-du-diagnostic">
-        Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et aux entreprises mono-salariées.
-      </p>
-    </div>
-  </div>
-</dsfr-container>
-<dsfr-container class="zone-formulaire">
+      <div class="contenu-section">
+        <Lien href="/" libelle="Retour" icone="arrow-go-back-line" />
+        <div class="colonne-explicative">
+          <h2>Vous souhaitez vous protéger contre les cyberattaques mais ne savez pas comment vous y prendre ?</h2>
+          <p>
+            <b>Prenez votre cyberdépart !</b> Bénéficiez d’un
+            <b>premier diagnostic gratuit accompagné d’un Aidant cyber</b>
+            et recevez <b>6 recommandations prioritaires</b> à mettre en place pour améliorer la cybersécurité de votre organisation.
+          </p>
+          <div class="zone-tags">
+            <dsfr-badge hasIcon icon="check-line" type="accent" accent="blue-ecume" label="Dans vos locaux ou en visio"
+            ></dsfr-badge>
+            <dsfr-badge hasIcon icon="check-line" type="accent" accent="blue-ecume" label="Rapide (1h30)"></dsfr-badge>
+          </div>
+          <p class="cible-du-diagnostic">
+            Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et aux entreprises mono-salariées.
+          </p>
+        </div>
+      </div>
+    </dsfr-container>
+  {/snippet}
+  {#snippet alternatif()}
+    <HerosRiche
+      badges={[
+        { label: 'Rapide (1h)', accent: 'purple-glycine' },
+        { label: 'Dans vos locaux ou en visio', accent: 'purple-glycine' },
+      ]}
+      description="Prenez votre cyberdépart&nbsp;! Profitez d’un premier diagnostic cyber gratuit accompagné par un Aidant cyber et recevez 6 recommandations prioritaires à mettre en place pour améliorer la cybersécurité de votre organisation."
+      propriétésFilAriane={{ feuille: 'Diagnostic cyberdépart' }}
+      titre="Protégez dès maintenant votre organisation contre les cyberattaques"
+      variante="cafe-creme"
+    >
+      {#snippet illustration()}
+        <img
+          class="image-etiree"
+          src="/assets/images/homme-regardant-webinaire-avec-annotations.avif"
+          alt="Homme regardant un webinaire"
+        />
+      {/snippet}
+    </HerosRiche>
+  {/snippet}
+</Alternatives>
+
+<dsfr-container class="zone-formulaire" class:cafe-creme={afficheNouvelleDA}>
   <div class="contenu-section">
     {#if !enSucces}
       <FormulaireDemandeAide
@@ -183,16 +211,19 @@
     }
   }
 
+  img.image-etiree {
+    width: 100%;
+  }
+
   .zone-formulaire {
     padding: 0 0 48px 0;
+    --fond: var(--controle-segmente-courant-fond);
+    &.cafe-creme {
+      --fond: var(--background-alt-brown-cafe-creme);
+      margin-top: -76px;
+    }
 
-    background: linear-gradient(
-      to bottom,
-      var(--controle-segmente-courant-fond) 0px,
-      var(--controle-segmente-courant-fond) 96px,
-      white 0,
-      white 100%
-    );
+    background: linear-gradient(to bottom, var(--fond) 0px, var(--fond) 96px, white 0, white 100%);
 
     .contenu-section {
       max-width: 792px;
