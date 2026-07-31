@@ -1,17 +1,20 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import FilAriane, { type Props as PropriétésFilAriane } from './FilAriane.svelte';
+  import type { Badge } from './badge.type';
+  import GroupeDeBadges from './GroupeDeBadges.svelte';
 
   type Props = {
     actions?: Snippet;
+    badges?: Badge[];
     description: string;
     illustration: Snippet;
     propriétésFilAriane?: PropriétésFilAriane;
     titre: string;
-    variante: 'bleu-clair' | 'vert-clair';
+    variante: 'bleu-clair' | 'vert-clair' | 'cafe-creme';
   };
 
-  const { actions, description, illustration, propriétésFilAriane, titre, variante }: Props = $props();
+  const { actions, badges = [], description, illustration, propriétésFilAriane, titre, variante }: Props = $props();
 </script>
 
 <dsfr-container class={['conteneur', variante]} class:avecFilAriane={!!propriétésFilAriane}>
@@ -20,6 +23,7 @@
   {/if}
   <div class="contenu-heros">
     <div class="contenu">
+      <GroupeDeBadges {badges} />
       <h1 class="titre alternatif-md">{titre}</h1>
       <p class="description texte-chapo-xl">{description}</p>
       {#if actions}
@@ -44,6 +48,10 @@
 
     &.bleu-clair {
       background-color: var(--blue-france-925-125);
+    }
+
+    &.cafe-creme {
+      background-color: var(--background-alt-brown-cafe-creme);
     }
 
     &.vert-clair {
