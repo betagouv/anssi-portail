@@ -16,7 +16,7 @@ export interface FournisseurChemin {
   };
   back: {
     csvNis2Simulateur: () => string;
-
+    badgePngRécompenseCyberdepart: () => string;
     banniereSvgRécompenseCyberdepart: () => string;
   };
   jekyll: {
@@ -70,6 +70,8 @@ export const fournisseurChemin: FournisseurChemin = {
   back: {
     csvNis2Simulateur: () =>
       join(process.cwd(), 'back', 'src', 'metier', 'nis2-simulateur', 'questionnaire', 'specifications-completes.csv'),
+    badgePngRécompenseCyberdepart: () =>
+      join(process.cwd(), 'back', 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'badge.png'),
     banniereSvgRécompenseCyberdepart: () =>
       join(process.cwd(), 'back', 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'banniere.svg'),
   },

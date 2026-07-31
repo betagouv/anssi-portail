@@ -2,6 +2,7 @@ import { Canvas, GlobalFonts } from '@napi-rs/canvas';
 import sharp from 'sharp';
 import { FournisseurChemin } from '../../fournisseurChemin.js';
 import { readFileSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
 
 const LARGEUR_BANNIERE = 996;
 const HAUTEUR_BANNIERE = 420;
@@ -89,7 +90,7 @@ const découpeEnLignes = (
 export class ServiceRécompensesCyberDépart {
   private readonly modèle: Buffer;
 
-  constructor(fournisseurChemin: FournisseurChemin) {
+  constructor(private readonly fournisseurChemin: FournisseurChemin) {
     const cheminBannière = fournisseurChemin.back.banniereSvgRécompenseCyberdepart();
     const cheminPoliceMarianneRegular = fournisseurChemin.front.police('Marianne-Regular.woff2');
     const cheminPoliceMarianneBold = fournisseurChemin.front.police('Marianne-Bold.woff2');
@@ -136,5 +137,9 @@ export class ServiceRécompensesCyberDépart {
       .resize({ width: LARGEUR_BANNIERE })
       .png()
       .toBuffer();
+  }
+
+  async récupèreBadge(): Promise<Buffer> {
+    return readFile(this.fournisseurChemin.back.badgePngRécompenseCyberdepart());
   }
 }
