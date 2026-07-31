@@ -1,3 +1,4 @@
+import { HttpStatusCode } from 'axios';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
@@ -18,6 +19,7 @@ import { ressourceGuides } from './guides/ressourceGuides.js';
 import { ressourceGuidesMemesCollections } from './guides/ressourceGuidesMemesCollections.js';
 import { ressourceAvisMesure } from './mesures/ressourceAvisMesure.js';
 import { ressourceMesure } from './mesures/ressourceMesure.js';
+import { ressourceMesureCsv } from './mesures/ressourceMesureCsv.js';
 import { ressourceModule } from './mesures/ressourceModule.js';
 import { ressourceParcours } from './mesures/ressourceParcours.js';
 import { ressourceParcoursComplet } from './mesures/ressourceParcoursComplet.js';
@@ -68,8 +70,6 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe.js';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
-import { ressourceMesureCsv } from './mesures/ressourceMesureCsv.js';
-import { HttpStatusCode } from 'axios';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -349,7 +349,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute('/api/abonnement-infolettre', ressourceAbonnementInfolettre(configurationServeur));
 
-  enregistreRoute('/api/cyberdepart/recompenses', ressourceRécompensesCyberDépart(configurationServeur));
+  enregistreRoute('/api/cyberdepart/recompenses.zip', ressourceRécompensesCyberDépart(configurationServeur));
 
   const parcoursActivé = configurationServeur.adaptateurEnvironnement
     .fonctionnalites()

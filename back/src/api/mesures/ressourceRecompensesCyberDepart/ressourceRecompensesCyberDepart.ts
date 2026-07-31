@@ -1,14 +1,15 @@
 import { Router } from 'express';
+import { Utilisateur } from '../../../metier/utilisateur.js';
+import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middleware.js';
 import { corpsVide, valideCorpsRequete } from '../../zod.js';
-import { ConfigurationServeur } from '../../configurationServeur.js';
-import { Utilisateur } from '../../../metier/utilisateur.js';
 
 export const ressourceRécompensesCyberDépart = ({
   serviceRécompensesCyberDépart,
   entrepotUtilisateur,
   entrepôtModule,
   adaptateurHachage,
+  adaptateurCompression,
   middleware,
 }: ConfigurationServeur) => {
   const routeur = Router();
@@ -36,7 +37,9 @@ export const ressourceRécompensesCyberDépart = ({
         nomOrganisation,
       });
 
-      return reponse.type('png').send(banniere);
+      const archive = await adaptateurCompression.génèreArchive([{ nom: 'banniere.png', buffer: banniere }]);
+
+      return reponse.contentType('application/zip').attachment('recompenses.zip').send(archive);
     })
   );
 
