@@ -18,13 +18,16 @@
   paper: "a4",
   margin: (left: 36pt, right: 36pt, top: 30pt, bottom: 30pt),
   footer: [
-    #set text(size: 8pt, fill: texte-secondaire, font: "Carlito")
-    MesServicesCyber - #link("https://messervices.cyber.gouv.fr/")[https://messervices.cyber.gouv.fr/]
+    #set align(left)
+    #set text(size: 8pt, fill: texte-secondaire, font: "Marianne", weight: "bold")
+    MesServicesCyber
+    #set text(size: 8pt, fill: texte-secondaire, font: "Marianne", weight: "regular")
+    \- #link("https://messervices.cyber.gouv.fr/")[https://messervices.cyber.gouv.fr/]
   ],
   footer-descent: 12pt,
 )
 
-#set text(font: "Carlito", size: 10.5pt, fill: texte-principal, lang: "fr")
+#set text(font: "Marianne", size: 10.5pt, fill: texte-principal, lang: "fr")
 #set par(justify: false, leading: 0.8em)
 
 // ---------- En-tête : bloc Marianne + logo MesServicesCyber ----------
