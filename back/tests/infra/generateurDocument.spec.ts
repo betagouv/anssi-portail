@@ -79,7 +79,6 @@ describe('Le générateur de document', () => {
       const pdfGénéré = await generateurDocument({
         cheminFichier: fauxFournisseurDeChemin.back.attestationTypCyberdepart(),
         données: {
-          entite: "l'ANSSI",
           organisation: "l'ANSSI",
         },
       });
