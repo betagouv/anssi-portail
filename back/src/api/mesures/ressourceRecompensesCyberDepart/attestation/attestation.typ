@@ -16,18 +16,17 @@
 
 #set page(
   paper: "a4",
-  margin: (left: 36pt, right: 36pt, top: 30pt, bottom: 30pt),
+  margin: (left: 36pt, right: 36pt, top: 30pt, bottom: 60pt),
   footer: [
     #set align(left)
-    #set text(size: 8pt, fill: texte-secondaire, font: "Marianne", weight: "bold")
+    #set text(size: 10pt, fill: texte-secondaire, font: "Marianne", weight: "bold")
     MesServicesCyber
-    #set text(size: 8pt, fill: texte-secondaire, font: "Marianne", weight: "regular")
+    #set text(size: 10pt, fill: texte-secondaire, font: "Marianne", weight: "regular")
     \- #link("https://messervices.cyber.gouv.fr/")[https://messervices.cyber.gouv.fr/]
-  ],
-  footer-descent: 12pt,
+  ]
 )
 
-#set text(font: "Marianne", size: 10.5pt, fill: texte-principal, lang: "fr")
+#set text(font: "Marianne", size: 11pt, fill: texte-principal, lang: "fr")
 #set par(justify: false, leading: 0.8em)
 
 // ---------- En-tête : bloc Marianne + logo MesServicesCyber ----------
@@ -51,11 +50,11 @@
 
 #v(14pt)
 #line(length: 100%, stroke: 0.5pt + gris-ligne)
-#v(14pt)
+#v(10pt)
 
 // ---------- Titre ----------
 #align(center)[
-  #text(size: 19pt, weight: "bold", fill: texte-principal)[Attestation d'obtention]
+  #text(size: 22pt, weight: "bold", fill: texte-principal)[Attestation d'obtention]
 ]
 
 #v(22pt)
