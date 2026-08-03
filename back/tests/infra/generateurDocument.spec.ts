@@ -81,6 +81,14 @@ describe('Le générateur de document', () => {
         données: {
           organisation: "l'ANSSI",
         },
+        polices: [
+          {
+            fontPaths: [
+              fauxFournisseurDeChemin.front.police('Marianne-Regular.ttf'),
+              fauxFournisseurDeChemin.front.police('Marianne-Bold.ttf'),
+            ],
+          },
+        ],
       });
 
       const renduGénéré = await pixels(await rasterisePremierePage(pdfGénéré));

@@ -41,12 +41,19 @@ export const ressourceRécompensesCyberDépart = ({
 
       const badge = await serviceRécompensesCyberDépart.récupèreBadge();
 
-      // TODO: Ajouter les vraies données dans le generateurDocument
       const attestation = await generateurDocument({
         cheminFichier: fournisseurChemin.back.attestationTypCyberdepart(),
         données: {
           organisation: nomOrganisation,
         },
+        polices: [
+          {
+            fontPaths: [
+              fournisseurChemin.front.police('Marianne-Regular.ttf'),
+              fournisseurChemin.front.police('Marianne-Bold.ttf'),
+            ],
+          },
+        ],
       });
       const archive = await adaptateurCompression.génèreArchive([
         { nom: 'banniere.png', buffer: banniere },
