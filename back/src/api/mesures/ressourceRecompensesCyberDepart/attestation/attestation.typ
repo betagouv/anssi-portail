@@ -32,7 +32,21 @@
 
 // ---------- En-tête : bloc Marianne + logo MesServicesCyber ----------
 #align(center)[
-//  #image("assets/header.svg", height: 51pt)
+  #grid(
+    columns: 3,
+    column-gutter: 10pt,
+    align: horizon,
+    image("./republique_francaise.svg", height: 37pt),
+    image("./logo_ANSSI.png", height: 40pt),
+    align(left)[
+      #stack(
+        dir: ttb,
+        spacing: 8pt,
+        text(size: 12pt, weight: "bold", fill: texte-principal)[MesServiceCyber],
+        text(size: 10pt, weight: "regular", fill: texte-principal)[Innovation ANSSI],
+      )
+    ],
+  )
 ]
 
 #v(14pt)
