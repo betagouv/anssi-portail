@@ -7,7 +7,6 @@
 // est installée sur votre poste, remplacez la valeur de `font` ci-dessous.
 
 // ---------- Paramètres ----------
-#let entite = sys.inputs.at("entite", default: "[Nom de l'entité]")
 #let organisation = sys.inputs.at("organisation", default: "[nom de l'organisation]")
 
 #let bleu-fr = rgb("#000091")
@@ -45,7 +44,7 @@
 #v(22pt)
 
 // ---------- Corps ----------
-L'Agence nationale de la sécurité des systèmes d'information atteste que #entite a obtenu son badge CyberDépart sur la base des informations déclarées sur MesServicesCyber.
+L'Agence nationale de la sécurité des systèmes d'information atteste que #organisation a obtenu son badge CyberDépart sur la base des informations déclarées sur MesServicesCyber.
 
 #v(10pt)
 
