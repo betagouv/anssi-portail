@@ -7,8 +7,8 @@
 // est installée sur votre poste, remplacez la valeur de `font` ci-dessous.
 
 // ---------- Paramètres ----------
-#let entite = "[Nom de l'entité]"
-#let organisation = "[nom de l'organisation]"
+#let entite = sys.inputs.at("entite", default: "[Nom de l'entité]")
+#let organisation = sys.inputs.at("organisation", default: "[nom de l'organisation]")
 
 #let bleu-fr = rgb("#000091")
 #let texte-principal = rgb("#161616")

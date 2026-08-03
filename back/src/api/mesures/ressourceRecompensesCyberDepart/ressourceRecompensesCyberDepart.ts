@@ -45,8 +45,7 @@ export const ressourceRécompensesCyberDépart = ({
       const attestation = await generateurDocument({
         cheminFichier: fournisseurChemin.back.attestationTypCyberdepart(),
         données: {
-          entite: 'toto',
-          organisation: 'ANSSSIIIII',
+          organisation: nomOrganisation,
         },
       });
       const archive = await adaptateurCompression.génèreArchive([
