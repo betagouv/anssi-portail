@@ -2,16 +2,25 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
 
+  const SATISFACTION_PAR_DÉFAUT = 92;
   let satisfaction = $state<number>();
+
+  const NOMBRE_ORGANISATIONS_PAR_DÉFAUT = 6000;
   let nombreOrganisations = $state<number>();
 
   onMount(async () => {
-    const reponse = await axios.get<{
-      organisationsAccompagnees: number;
-      satisfaction: number;
-    }>(`/api/diagnostic/statistiques`);
-    nombreOrganisations = reponse.data.organisationsAccompagnees;
-    satisfaction = reponse.data.satisfaction;
+    try {
+      const reponse = await axios.get<{
+        organisationsAccompagnees: number;
+        satisfaction: number;
+      }>(`/api/diagnostic/statistiques`);
+
+      nombreOrganisations = reponse.data.organisationsAccompagnees ?? NOMBRE_ORGANISATIONS_PAR_DÉFAUT;
+      satisfaction = reponse.data.satisfaction ?? SATISFACTION_PAR_DÉFAUT;
+    } catch {
+      nombreOrganisations = NOMBRE_ORGANISATIONS_PAR_DÉFAUT;
+      satisfaction = SATISFACTION_PAR_DÉFAUT;
+    }
   });
 </script>
 
