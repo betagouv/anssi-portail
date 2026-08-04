@@ -6,7 +6,7 @@ import { EntrepôtModule } from './metier/EntrepotModule.js';
 import { Mesure } from './metier/mesure.js';
 import { Module } from './metier/module.js';
 
-type ModulePersisté = { id: number; nom: string };
+type ModulePersisté = { id: number; nom: string; description: string };
 
 export class EntrepôtModulePostgres implements EntrepôtModule {
   knex: Knex.Knex;
@@ -44,7 +44,7 @@ export class EntrepôtModulePostgres implements EntrepôtModule {
     const mesuresDuModuleLues = await this.knex<MesurePersistee>('mesures').where({ id_module: moduleLu.id });
 
     const mesuresDuModule = await Promise.all(mesuresDuModuleLues.map((m) => this.entrepôtMesure.parId(m.id)));
-    const module = new Module(moduleLu.id, moduleLu.nom);
+    const module = new Module(moduleLu.id, moduleLu.nom, moduleLu.description);
     module.mesures = mesuresDuModule.filter((m) => !!m);
     return module;
   }

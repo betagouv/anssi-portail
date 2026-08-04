@@ -1,10 +1,10 @@
 import { Financement } from '../../src/metier/financement.js';
 import { Guide } from '../../src/metier/guide.js';
-import { Module } from '../../src/metier/module.js';
 import { ExigenceNIS2 } from '../../src/metier/nis2/exigence.js';
 import { Utilisateur } from '../../src/metier/utilisateur.js';
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from './fauxObjets.js';
 import { mesureDeTest } from './mesures/constructeurDeMesure.js';
+import { ConstructeurDeModule } from './mesures/constructeurDeModule.js';
 
 export const jeanneDupont: Utilisateur = new Utilisateur(
   {
@@ -116,7 +116,14 @@ export const guidePublieDemain = () =>
     besoins: ['SECURISER'],
   });
 
-export const fabriqueModuleCyberdépart = () => new Module(1, 'Cyberdépart');
+export const fabriqueModuleCyberdépart = () =>
+  new ConstructeurDeModule()
+    .avecLId(1)
+    .avecLeNom('Cyberdépart')
+    .avecLaDescription(
+      "Le socle de départ de la sécurisation d'une organisation : les mesures les plus accessibles et les plus rentables, peu coûteuses et rapides à déployer, à mettre en place avant toute protection avancée."
+    )
+    .construis();
 
 export const mesureAuthentA2Etapes = () => {
   const exigence = new ExigenceNIS2({
