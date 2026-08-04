@@ -48,7 +48,7 @@ describe('La ressource des récompenses CyberDépart', () => {
   });
 
   it('renvoie un 401 pour une requête non-connectée', async () => {
-    const reponse = await request(serveur).get('/api/cyberdepart/recompenses.zip');
+    const reponse = await request(serveur).get('/api/cyberdepart/attestation_badge_cyberdepart.zip');
 
     assert.equal(reponse.status, 401);
   });
@@ -56,21 +56,25 @@ describe('La ressource des récompenses CyberDépart', () => {
   it("renvoie un 403 si l'utilisateur tente d'obtenir les récompenses sans avoir suffisamment complété le module", async () => {
     jeanneDupont.mesuresPrisesEnCompte = [];
 
-    const reponse = await request(serveur).get('/api/cyberdepart/recompenses.zip').set('Cookie', cookieJeanneDupont);
+    const reponse = await request(serveur)
+      .get('/api/cyberdepart/attestation_badge_cyberdepart.zip')
+      .set('Cookie', cookieJeanneDupont);
 
     assert.equal(reponse.status, 403);
   });
 
   it('renvoie un zip', async () => {
     jeanneDupont.mesuresPrisesEnCompte = mesures;
-    const reponse = await request(serveur).get('/api/cyberdepart/recompenses.zip').set('Cookie', cookieJeanneDupont);
+    const reponse = await request(serveur)
+      .get('/api/cyberdepart/attestation_badge_cyberdepart.zip')
+      .set('Cookie', cookieJeanneDupont);
 
     assert.equal(reponse.status, 200);
     assert.equal(reponse.headers['content-type'], 'application/zip');
-    assert.equal(reponse.headers['content-disposition'], 'attachment; filename="recompenses.zip"');
+    assert.equal(reponse.headers['content-disposition'], 'attachment; filename="attestation_badge_cyberdepart.zip"');
   });
 
-  describe('L\'archive "recompenses.zip"', () => {
+  describe('L\'archive "attestation_badge_cyberdepart.zip"', () => {
     const requêteEntréeArchive = async (chemin: string, nomFichier: string): Promise<AdmZip.IZipEntry | undefined> => {
       const reponse = await request(serveur).get(chemin).set('Cookie', cookieJeanneDupont).responseType('blob');
 
@@ -83,7 +87,10 @@ describe('La ressource des récompenses CyberDépart', () => {
     it('contient la bannière au format PNG', async () => {
       jeanneDupont.mesuresPrisesEnCompte = mesures;
 
-      const bannierePng = await requêteEntréeArchive('/api/cyberdepart/recompenses.zip', 'banniere.png');
+      const bannierePng = await requêteEntréeArchive(
+        '/api/cyberdepart/attestation_badge_cyberdepart.zip',
+        'banniere.png'
+      );
 
       assert.notEqual(bannierePng, undefined);
       const metadonnées = await extraisMetadonnées(bannierePng!);
@@ -93,7 +100,10 @@ describe('La ressource des récompenses CyberDépart', () => {
 
     it('la taille de la bannière est correcte', async () => {
       jeanneDupont.mesuresPrisesEnCompte = mesures;
-      const bannierePng = await requêteEntréeArchive('/api/cyberdepart/recompenses.zip', 'banniere.png');
+      const bannierePng = await requêteEntréeArchive(
+        '/api/cyberdepart/attestation_badge_cyberdepart.zip',
+        'banniere.png'
+      );
 
       assert.notEqual(bannierePng, undefined);
       const metadonnées = await extraisMetadonnées(bannierePng!);
@@ -104,7 +114,7 @@ describe('La ressource des récompenses CyberDépart', () => {
     it('contient le badge au format PNG', async () => {
       jeanneDupont.mesuresPrisesEnCompte = mesures;
 
-      const badgePng = await requêteEntréeArchive('/api/cyberdepart/recompenses.zip', 'badge.png');
+      const badgePng = await requêteEntréeArchive('/api/cyberdepart/attestation_badge_cyberdepart.zip', 'badge.png');
 
       assert.notEqual(badgePng, undefined);
       const metadonnées = await extraisMetadonnées(badgePng!);
@@ -115,7 +125,10 @@ describe('La ressource des récompenses CyberDépart', () => {
     it("contient l'attestation au format PDF", async () => {
       jeanneDupont.mesuresPrisesEnCompte = mesures;
 
-      const attestationPdf = await requêteEntréeArchive('/api/cyberdepart/recompenses.zip', 'attestation.pdf');
+      const attestationPdf = await requêteEntréeArchive(
+        '/api/cyberdepart/attestation_badge_cyberdepart.zip',
+        'attestation.pdf'
+      );
 
       assert.notEqual(attestationPdf, undefined);
       assert.notEqual(attestationPdf?.getData(), undefined);

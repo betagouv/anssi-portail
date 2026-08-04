@@ -25,7 +25,7 @@
       icon-place="left"
       markup="a"
       type="button"
-      href="/api/cyberdepart/recompenses.zip"
+      href="/api/cyberdepart/attestation_badge_cyberdepart.zip"
       centered
     ></dsfr-button>
   </div>
