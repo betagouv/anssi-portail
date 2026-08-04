@@ -5,15 +5,9 @@
   import { toasterStore } from '../ui/toasts/toaster.store';
   import Toaster from '../ui/toasts/Toaster.svelte';
   import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
-  import type { Mesure } from './mesure';
   import MesuresDeModule from './MesuresDeModule.svelte';
   import Progression from './Progression.svelte';
-
-  type ModuleRéponseApi = {
-    nom: string;
-    cibleBadge?: number;
-    mesures: Mesure[];
-  };
+  import type { ModuleRéponseApi } from './moduleReponseApi';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
