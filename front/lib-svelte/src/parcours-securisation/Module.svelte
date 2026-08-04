@@ -11,6 +11,7 @@
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
+    description: '',
     mesures: [],
   });
   const totalMesures = $derived(module.mesures.length);
@@ -33,7 +34,7 @@
   cacheActions={true}
   cacheIllustration={true}
   cacheTags={true}
-  description="Avancez à votre rythme dans une première démarche de sécurisation et appliquez les recommandations essentielles pour réduire les risques cyber du quotidien."
+  description={module.description}
   format="banniere"
   illustrationAlt=""
   illustrationSource=""

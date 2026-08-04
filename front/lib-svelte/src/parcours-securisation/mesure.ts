@@ -38,6 +38,7 @@ export type Mesure = {
 export type Module = {
   id: number;
   nom: string;
+  description: string;
   nombreMesuresTotal: number;
   nombreMesuresPrisesEnCompte: number;
   cibleBadge?: number;
