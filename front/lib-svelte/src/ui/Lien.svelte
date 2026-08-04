@@ -57,12 +57,19 @@
         }[type]
       : 'primary'
   );
-  const traceClic = () => {
+  const traceClicVersMatomo = () => {
     const cible = href.startsWith('/') ? `${window.location.protocol}//${window.location.host}${href}` : href;
-    window._paq?.push(['trackLink', cible, telechargement ? 'download' : 'link']);
+    window._paq?.push([
+      'trackLink',
+      cible,
+      telechargement ? 'download' : 'link',
+      {
+        dimension2: window.location.href,
+      },
+    ]);
   };
   const auClic = (e: MouseEvent | KeyboardEvent) => {
-    traceClic();
+    traceClicVersMatomo();
     surClic?.(e);
   };
 </script>
