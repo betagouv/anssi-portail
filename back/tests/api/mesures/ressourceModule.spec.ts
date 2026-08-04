@@ -157,11 +157,14 @@ describe('La ressource d’un module', () => {
     });
 
     it('renvoie le nom du module', async () => {
-      await entrepôtModule.ajoute(new ConstructeurDeModule().avecLId(2).avecLeNom('Module 2').construis());
+      await entrepôtModule.ajoute(
+        new ConstructeurDeModule().avecLId(2).avecLeNom('Module 2').avecLaDescription('Description 2').construis()
+      );
 
       const reponse = await request(serveur).get('/api/modules/2').set('Cookie', cookieJeanneDupont);
 
       assert.equal(reponse.body.nom, 'Module 2');
+      assert.equal(reponse.body.description, 'Description 2');
     });
   });
 });

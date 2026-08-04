@@ -5,7 +5,8 @@ export class Module {
 
   constructor(
     readonly id: number,
-    readonly nom: string
+    readonly nom: string,
+    readonly description: string
   ) {}
 
   cibleDéblocageBadgeCyberdépart = () => (this.id === 1 ? Math.floor(this.mesures.length * 0.8) : undefined);
