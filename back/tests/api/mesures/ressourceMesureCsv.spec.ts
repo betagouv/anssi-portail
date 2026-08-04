@@ -6,11 +6,10 @@ import { creeServeur } from '../../../src/api/msc.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
 import { encodeSession } from '../cookie.js';
-import { jeanneDupont } from '../objetsPretsALEmploi.js';
+import { fabriqueModuleCyberdépart, jeanneDupont } from '../objetsPretsALEmploi.js';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire.js';
-import { Module } from '../../../src/metier/module.js';
 import { mesureDeTest } from './constructeurDeMesure.js';
 
 describe('La ressource des mesures en CSV', () => {
@@ -72,7 +71,7 @@ describe('La ressource des mesures en CSV', () => {
     });
 
     it('contient les mesures sérialisées', async () => {
-      const module = new Module(1, 'Cyberdépart');
+      const module = fabriqueModuleCyberdépart();
       const mesure = mesureDeTest()
         .avecLeTitre('Mesure 4')
         .avecLesExplications('Des explications')
@@ -94,7 +93,7 @@ describe('La ressource des mesures en CSV', () => {
     });
 
     it('ne contient pas de balises HTML dans les descriptions', async () => {
-      const module = new Module(1, 'Cyberdépart');
+      const module = fabriqueModuleCyberdépart();
       const mesure = mesureDeTest()
         .avecLeTitre('Mesure 4')
         .avecLesExplications(

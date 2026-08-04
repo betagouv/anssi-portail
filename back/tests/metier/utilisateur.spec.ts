@@ -9,10 +9,10 @@ import { Organisation, Utilisateur } from '../../src/metier/utilisateur.js';
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets.js';
 import { mesureDeTest } from '../api/mesures/constructeurDeMesure.js';
 import { utilisateurDeTest } from '../api/mesures/constructeurDUtilisateur.js';
-import { mesureAuthentA2Etapes, moduleCyberdépart } from '../api/objetsPretsALEmploi.js';
+import { mesureAuthentA2Etapes, fabriqueModuleCyberdépart } from '../api/objetsPretsALEmploi.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
 import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire.js';
-import { Module } from '../../src/metier/module.js';
+import { ConstructeurDeModule } from '../api/mesures/constructeurDeModule.js';
 
 describe("L'utilisateur", () => {
   const infosUtilisateur = {
@@ -181,9 +181,14 @@ describe("L'utilisateur", () => {
           mesure,
           entrepotPriseEnCompte,
           fabriqueBusPourLesTests(),
-          moduleCyberdépart
+          fabriqueModuleCyberdépart()
         );
-        await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
+        await utilisateurDeParcours.prendEnCompte(
+          mesure,
+          entrepotPriseEnCompte,
+          busEvenements,
+          fabriqueModuleCyberdépart()
+        );
 
         assert.equal(utilisateurDeParcours.mesuresPrisesEnCompte.length, 1);
         busEvenements.naPasRecuDEvenement(ModuleTermine);
@@ -192,21 +197,23 @@ describe("L'utilisateur", () => {
 
       describe('concernant la complétion du module', () => {
         it('signale que la prise en compte termine le module', async () => {
-          moduleCyberdépart.mesures = [mesure];
+          const moduleCyberDépart = fabriqueModuleCyberdépart();
+          moduleCyberDépart.mesures = [mesure];
 
           const nouvelÉtatDuModule = await utilisateurDeParcours.prendEnCompte(
             mesure,
             entrepotPriseEnCompte,
             busEvenements,
-            moduleCyberdépart
+            moduleCyberDépart
           );
 
           assert.equal(nouvelÉtatDuModule.moduleTerminé, true);
         });
 
         it('publie un événement de completion quand toutes les mesures du module sont prises en compte', async () => {
-          moduleCyberdépart.mesures = [mesure];
-          await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
+          const moduleCyberDépart = new ConstructeurDeModule().avecLId(1).avecLeNom('Cyberdépart').construis();
+          moduleCyberDépart.mesures = [mesure];
+          await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberDépart);
 
           busEvenements.aRecuUnEvenement(ModuleTermine);
           const evenement = busEvenements.recupereEvenement(ModuleTermine);
@@ -217,7 +224,7 @@ describe("L'utilisateur", () => {
         });
 
         it("adapte l'événement de complétion au module", async () => {
-          const moduleGénérique = new Module(3, 'ModuleGénérique');
+          const moduleGénérique = new ConstructeurDeModule().avecLId(3).avecLeNom('ModuleGénérique').construis();
           const mesure = mesureDeTest().avecLId('MESURE').construis();
           moduleGénérique.mesures = [mesure];
 
@@ -229,15 +236,16 @@ describe("L'utilisateur", () => {
         });
 
         it("ne publie pas d'événement de completion si toutes les mesures du module ne sont pas prises en compte", async () => {
-          moduleCyberdépart.mesures = [mesureDeTest().construis(), mesureDeTest().construis()];
+          const moduleCyberDépart = fabriqueModuleCyberdépart();
+          moduleCyberDépart.mesures = [mesureDeTest().construis(), mesureDeTest().construis()];
 
-          await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
+          await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberDépart);
 
           busEvenements.naPasRecuDEvenement(ModuleTermine);
         });
 
         it('ne compte que les prises en compte du module', async () => {
-          const module = new Module(2, 'test');
+          const module = new ConstructeurDeModule().avecLId(2).construis();
           const derniereMesureDuModule2 = mesureDeTest().avecLId('MESURE2').construis();
           module.mesures = [derniereMesureDuModule2];
           utilisateurDeParcours.mesuresPrisesEnCompte = [mesureDeTest().avecLId('MESURE3').construis()];
@@ -260,6 +268,7 @@ describe("L'utilisateur", () => {
             mesureDeTest().avecLId('mes2').construis(),
             mesureDeTest().avecLId('mes3').construis(),
           ];
+          const moduleCyberdépart = fabriqueModuleCyberdépart();
           moduleCyberdépart.mesures = [
             mesure,
             mesureDeTest().avecLId('mes1').construis(),
@@ -278,6 +287,7 @@ describe("L'utilisateur", () => {
             mesureDeTest().avecLId('mes2').construis(),
             mesureDeTest().avecLId('mes3').construis(),
           ];
+          const moduleCyberdépart = fabriqueModuleCyberdépart();
           moduleCyberdépart.mesures = [
             mesure,
             mesureDeTest().avecLId('mes1').construis(),
@@ -303,6 +313,7 @@ describe("L'utilisateur", () => {
             mesureDeTest().avecLId('mes4').construis(),
           ];
 
+          const moduleCyberdépart = fabriqueModuleCyberdépart();
           moduleCyberdépart.mesures = [
             mesure,
             mesureDeTest().avecLId('mes1').construis(),
@@ -322,6 +333,15 @@ describe("L'utilisateur", () => {
             mesureDeTest().avecLId('mes2').construis(),
           ];
 
+          const moduleCyberdépart = fabriqueModuleCyberdépart();
+          moduleCyberdépart.mesures = [
+            mesure,
+            mesureDeTest().avecLId('mes1').construis(),
+            mesureDeTest().avecLId('mes2').construis(),
+            mesureDeTest().avecLId('mes3').construis(),
+            mesureDeTest().avecLId('mes4').construis(),
+          ];
+
           await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
 
           busEvenements.naPasRecuDEvenement(BadgeCyberdépartDébloqué);
@@ -333,6 +353,7 @@ describe("L'utilisateur", () => {
             mesureDeTest().avecLId('mes2').construis(),
             mesureDeTest().avecLId('mes3').construis(),
           ];
+          const moduleCyberdépart = fabriqueModuleCyberdépart();
           moduleCyberdépart.mesures = [
             mesure,
             mesureDeTest().avecLId('mes1').construis(),
@@ -353,6 +374,7 @@ describe("L'utilisateur", () => {
             mesureDeTest().avecLId('MESURE2').construis(),
             mesureDeTest().avecLId('MESURE3').construis(),
           ];
+          const moduleCyberdépart = fabriqueModuleCyberdépart();
           moduleCyberdépart.mesures = [
             mesureDeTest().avecLId('AUTH.1').construis(),
             mesureDeTest().avecLId('AUTH.2').construis(),
@@ -368,7 +390,7 @@ describe("L'utilisateur", () => {
     });
 
     it('indique le nombre des mesures prises en compte dans un module', () => {
-      const module = new Module(1, 'Cyberdépart');
+      const module = new ConstructeurDeModule().construis();
       const mesures = [mesureDeTest().construis(), mesureDeTest().construis()];
       module.mesures = mesures;
       utilisateurDeParcours.mesuresPrisesEnCompte = mesures;
@@ -379,7 +401,7 @@ describe("L'utilisateur", () => {
     });
 
     it("indique le nombre des mesures prises en compte dans un module lorsqu'il n'y en a pas", () => {
-      const module = new Module(1, 'Cyberdépart');
+      const module = new ConstructeurDeModule().construis();
       module.mesures = [mesureDeTest().construis(), mesureDeTest().construis()];
 
       const nombreDeMesuresPrisesEnCompte = utilisateurDeParcours.nombreDeMesuresPrisesEnCompte(module);
@@ -388,7 +410,7 @@ describe("L'utilisateur", () => {
     });
 
     it('indique le nombre des mesures prises en compte dans un module sans tenir compte des mesures des autres modules', () => {
-      const module = new Module(1, 'Cyberdépart');
+      const module = new ConstructeurDeModule().construis();
       module.mesures = [];
       utilisateurDeParcours.mesuresPrisesEnCompte = [mesureDeTest().construis()];
 
@@ -398,7 +420,7 @@ describe("L'utilisateur", () => {
     });
 
     it('compare les ids des mesures prises en compte', () => {
-      const module = new Module(1, 'Cyberdépart');
+      const module = new ConstructeurDeModule().construis();
       module.mesures = [mesureDeTest().avecLId('TEST').construis()];
       utilisateurDeParcours.mesuresPrisesEnCompte = [mesureDeTest().avecLId('TEST').construis()];
 

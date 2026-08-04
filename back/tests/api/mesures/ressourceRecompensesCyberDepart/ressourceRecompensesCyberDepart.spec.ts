@@ -7,12 +7,11 @@ import request from 'supertest';
 import { ServiceRécompensesCyberDépart } from '../../../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 import { creeServeur } from '../../../../src/api/msc.js';
 import { EntrepotUtilisateur } from '../../../../src/metier/entrepotUtilisateur.js';
-import { Module } from '../../../../src/metier/module.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { EntrepôtModuleMémoire } from '../../../persistance/EntrepôtModuleMémoire.js';
 import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from '../../fauxObjets.js';
-import { jeanneDupont } from '../../objetsPretsALEmploi.js';
+import { jeanneDupont, fabriqueModuleCyberdépart } from '../../objetsPretsALEmploi.js';
 import { mesureDeTest } from '../constructeurDeMesure.js';
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 
@@ -41,8 +40,8 @@ describe('La ressource des récompenses CyberDépart', () => {
     });
 
     await entrepotUtilisateur.ajoute(jeanneDupont);
+    const moduleCyberdépart = fabriqueModuleCyberdépart();
 
-    const moduleCyberdépart = new Module(ID_MODULE_CYBERDÉPART, 'Cyberdépart');
     moduleCyberdépart.mesures = mesures;
     await entrepôtModule.ajoute(moduleCyberdépart);
   });

@@ -13,7 +13,8 @@ import {
   fauxAdaptateurHachage,
   fauxAdaptateurRechercheEntreprise,
 } from '../fauxObjets.js';
-import { jeanneDupont } from '../objetsPretsALEmploi.js';
+import { fabriqueModuleCyberdépart, jeanneDupont } from '../objetsPretsALEmploi.js';
+import { ConstructeurDeModule } from './constructeurDeModule.js';
 import { mesureDeTest } from './constructeurDeMesure.js';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
@@ -81,8 +82,10 @@ describe('La ressource du parcours complet', () => {
     });
 
     it('retourne les modules du parcours complet', async () => {
-      await entrepôtModule.ajoute(new Module(1, 'Cyberdépart'));
-      await entrepôtModule.ajoute(new Module(2, 'Aggravation des conséquences'));
+      await entrepôtModule.ajoute(new ConstructeurDeModule().avecLId(1).avecLeNom('Cyberdépart').construis());
+      await entrepôtModule.ajoute(
+        new ConstructeurDeModule().avecLId(2).avecLeNom('Aggravation des conséquences').construis()
+      );
 
       const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
 
@@ -94,7 +97,7 @@ describe('La ressource du parcours complet', () => {
     });
 
     it('retourne le nombre de mesures de chaque module', async () => {
-      const module = new Module(1, 'Cyberdépart');
+      const module = new ConstructeurDeModule().construis();
       module.mesures = [mesureDeTest().construis(), mesureDeTest().construis()];
       await entrepôtModule.ajoute(module);
 
@@ -104,7 +107,7 @@ describe('La ressource du parcours complet', () => {
     });
 
     it('retourne la cible de déblocage du badge Cyberdépart', async () => {
-      const module = new Module(1, 'Cyberdépart');
+      const module = fabriqueModuleCyberdépart();
       module.mesures = [
         mesureDeTest().construis(),
         mesureDeTest().construis(),
@@ -120,8 +123,8 @@ describe('La ressource du parcours complet', () => {
     });
 
     it("retourne le nombre de mesures prises en compte par l'utilisateur pour chaque module", async () => {
-      await entrepôtModule.ajoute(new Module(1, 'Cyberdépart'));
-      await entrepôtModule.ajoute(new Module(2, 'Aggravation des conséquences'));
+      await entrepôtModule.ajoute(new ConstructeurDeModule().avecLId(1).construis());
+      await entrepôtModule.ajoute(new ConstructeurDeModule().avecLId(2).construis());
       jeannetteDupont.nombreDeMesuresPrisesEnCompte = (module: Module) => (module.id === 1 ? 98 : 20);
 
       const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
@@ -131,9 +134,9 @@ describe('La ressource du parcours complet', () => {
     });
 
     it('renvoie les modules du parcours triés par id', async () => {
-      await entrepôtModule.ajoute(new Module(5, 'Module 5'));
-      await entrepôtModule.ajoute(new Module(3, 'Module 3'));
-      await entrepôtModule.ajoute(new Module(1, 'Module 1'));
+      await entrepôtModule.ajoute(new ConstructeurDeModule().avecLId(5).construis());
+      await entrepôtModule.ajoute(new ConstructeurDeModule().avecLId(3).construis());
+      await entrepôtModule.ajoute(new ConstructeurDeModule().avecLId(1).construis());
 
       const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
 
@@ -145,7 +148,7 @@ describe('La ressource du parcours complet', () => {
     it('renvoie la prise en compte des mesures', async () => {
       const mesure = mesureDeTest().avecLId('MESURE').construis();
       jeannetteDupont.mesuresPrisesEnCompte = [mesureDeTest().avecLId('MESURE').construis()];
-      const module = new Module(2, 'Module');
+      const module = new ConstructeurDeModule().construis();
       module.mesures = [mesure];
       await entrepôtModule.ajoute(module);
 
