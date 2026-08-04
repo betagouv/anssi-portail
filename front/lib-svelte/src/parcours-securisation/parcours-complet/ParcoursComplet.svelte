@@ -27,8 +27,7 @@
     modules = réponse.data.modules.map((module) => ({
       ...module,
       titre: module.nom,
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tellus nibh, faucibus sed elit quis, aliquet malesuada augue.',
+      description: module.description,
     }));
   });
 
