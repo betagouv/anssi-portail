@@ -6,19 +6,13 @@
   import Toaster from '../ui/toasts/Toaster.svelte';
   import BadgeCyberdepart from './BadgeCyberdepart.svelte';
   import BasculeParcoursComplet from './BasculeParcoursComplet.svelte';
-  import type { Mesure } from './mesure';
   import MesuresDeModule from './MesuresDeModule.svelte';
   import ModaleBadgeCyberdepartDebloque from './modales/ModaleBadgeCyberdepartDebloque.svelte';
   import ModaleModuleCyberdepartTermine from './modales/ModaleModuleCyberdepartTermine.svelte';
   import Progression from './Progression.svelte';
   import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
   import { profilStore } from '../stores/profil.store';
-
-  type ModuleRéponseApi = {
-    nom: string;
-    cibleBadge: number;
-    mesures: Mesure[];
-  };
+  import type { ModuleRéponseApi } from './moduleReponseApi';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -47,7 +41,7 @@
   });
 
   const progressionActuelle = $derived(module.mesures.filter((module) => module.estPriseEnCompte).length);
-  const badgeDebloque = $derived(totalMesures > 0 && progressionActuelle >= module.cibleBadge);
+  const badgeDebloque = $derived(totalMesures > 0 && progressionActuelle >= (module.cibleBadge ?? 0));
   const parcoursTermine = $derived(totalMesures > 0 && progressionActuelle === totalMesures);
   const parcoursComplet = $derived($profilStore?.parcoursSecurisation.parcoursActuel === 'complet');
 </script>
