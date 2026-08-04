@@ -1,0 +1,8 @@
+# Permet à chacun de créer ses skills customs
+# tout en autorisant des skills versionnés et partagés
+*
+!.gitignore
+
+# Whitelist de skills
+!nouvelle-migration-knex
+!playwright-cli
