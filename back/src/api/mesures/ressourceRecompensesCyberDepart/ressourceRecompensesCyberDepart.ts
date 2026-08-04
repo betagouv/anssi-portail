@@ -61,7 +61,7 @@ export const ressourceRécompensesCyberDépart = ({
         { nom: 'attestation.pdf', buffer: attestation },
       ]);
 
-      return reponse.contentType('application/zip').attachment('recompenses.zip').send(archive);
+      return reponse.contentType('application/zip').attachment('attestation_badge_cyberdepart.zip').send(archive);
     })
   );
 

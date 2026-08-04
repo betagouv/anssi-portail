@@ -349,7 +349,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute('/api/abonnement-infolettre', ressourceAbonnementInfolettre(configurationServeur));
 
-  enregistreRoute('/api/cyberdepart/recompenses.zip', ressourceRécompensesCyberDépart(configurationServeur));
+  enregistreRoute(
+    '/api/cyberdepart/attestation_badge_cyberdepart.zip',
+    ressourceRécompensesCyberDépart(configurationServeur)
+  );
 
   const parcoursActivé = configurationServeur.adaptateurEnvironnement
     .fonctionnalites()
