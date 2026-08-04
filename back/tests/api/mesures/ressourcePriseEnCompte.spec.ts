@@ -15,6 +15,7 @@ import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoi
 import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
 import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi.js';
+import { ConstructeurDeModule } from './constructeurDeModule.js';
 import { mesureDeTest } from './constructeurDeMesure.js';
 import { utilisateurDeTest } from './constructeurDUtilisateur.js';
 
@@ -63,7 +64,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
         request(serveur).put('/api/mesures/AUTH.5/prise-en-compte').set('Cookie', cookie);
 
       beforeEach(async () => {
-        module = new Module(1, 'Cyberdépart');
+        module = new ConstructeurDeModule().construis();
         module.mesures = [mesure];
         await entrepotMesure.ajoute(mesure);
         await entrepôtModule.ajoute(module);
@@ -114,9 +115,9 @@ describe("La ressource de prise en compte d'une mesure", () => {
       });
 
       it('ne compte pas les mesures des autres modules dans l’événement', async () => {
-        const nouveuModule = new Module(2, 'Nouveau module');
+        const nouveauModule = new ConstructeurDeModule().avecLId(2).avecLeNom('Nouveau module').construis();
         const nouvelleMesure = mesureDeTest().construis();
-        await entrepôtModule.ajoute(nouveuModule);
+        await entrepôtModule.ajoute(nouveauModule);
         await entrepotMesure.ajoute(nouvelleMesure);
 
         await putPriseEnCompteConnecte();

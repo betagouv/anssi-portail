@@ -116,7 +116,7 @@ export const guidePublieDemain = () =>
     besoins: ['SECURISER'],
   });
 
-export const moduleCyberdépart = new Module(1, 'Cyberdépart');
+export const fabriqueModuleCyberdépart = () => new Module(1, 'Cyberdépart');
 
 export const mesureAuthentA2Etapes = () => {
   const exigence = new ExigenceNIS2({
