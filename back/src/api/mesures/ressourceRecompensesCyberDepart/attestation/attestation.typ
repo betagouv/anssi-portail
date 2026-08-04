@@ -1,11 +1,3 @@
-// Attestation d'obtention — badge CyberDépart (MesServicesCyber / ANSSI)
-// Reproduction Typst de la page 18.svg — compiler avec : typst compile attestation.typ
-//
-// Police : le document original utilise la police « Marianne » (DSFR).
-// Elle n'est pas librement redistribuable ; « Carlito » (métriquement proche
-// d'une sans-serif humaniste) est utilisée en repli. Si la police Marianne
-// est installée sur votre poste, remplacez la valeur de `font` ci-dessous.
-
 // ---------- Paramètres ----------
 #let organisation = sys.inputs.at("organisation", default: "[nom de l'organisation]")
 

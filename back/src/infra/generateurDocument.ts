@@ -13,7 +13,6 @@ type ParametreTypst = {
 
 type ArgumentsPourGenerateurDeDocument = { contenuFichier: string } | { cheminFichier: string };
 
-// TODO: Les images sont commentées dans le attestation.typ et les font doivent être passées au constructeur.
 export const generateurDocument = async (args: ArgumentsPourGenerateurDeDocument & ParametreTypst) => {
   const compilateur = NodeCompiler.create({
     workspace: process.cwd(),
