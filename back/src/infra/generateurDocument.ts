@@ -1,8 +1,8 @@
 import { NodeAddFontBlobs, NodeAddFontPaths, NodeCompiler } from '@myriaddreamin/typst-ts-node-compiler';
 
-export class ErreurDeSyntaxe extends Error {
-  constructor(message?: string) {
-    super(message ? `[TYPST]: ${message}` : '[TYPST]: Erreur dans le moteur de génération');
+export class ErreurTypst extends Error {
+  constructor(message: string) {
+    super(`[TYPST]: ${message}`);
   }
 }
 
@@ -28,9 +28,13 @@ export const generateurDocument = async (args: ArgumentsPourGenerateurDeDocument
   if (contenuCompilé.hasError()) {
     const diagnostiques = contenuCompilé.takeDiagnostics()?.shortDiagnostics;
 
-    throw new ErreurDeSyntaxe(
+    if (!diagnostiques) {
+      throw new ErreurTypst('Erreur dans le moteur de génération');
+    }
+
+    throw new ErreurTypst(
       diagnostiques
-        ?.map(
+        .map(
           (e) =>
             `${e.message} at ${e.path}:[l${e.range?.start?.line}:${e.range?.start?.character} -> l${e.range?.end?.line}:${e.range?.end?.character}]`
         )
@@ -38,5 +42,9 @@ export const generateurDocument = async (args: ArgumentsPourGenerateurDeDocument
     );
   }
 
-  return compilateur.pdf(contenuCompilé.result!);
+  if (!contenuCompilé.result) {
+    throw new ErreurTypst('Le contenu généré est vide');
+  }
+
+  return compilateur.pdf(contenuCompilé.result);
 };

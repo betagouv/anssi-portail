@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { describe, it } from 'node:test';
 import { getDocument, PDFDocumentProxy } from 'pdfjs-dist/legacy/build/pdf.mjs';
 import sharp from 'sharp';
-import { ErreurDeSyntaxe, generateurDocument } from '../../src/infra/generateurDocument.js';
+import { ErreurTypst, generateurDocument } from '../../src/infra/generateurDocument.js';
 import { fauxFournisseurDeChemin, typstFactice } from '../api/fauxObjets.js';
 
 const estUnPdf = (buffer: Buffer): boolean => {
@@ -63,7 +63,7 @@ describe('Le générateur de document', () => {
   it('déclenche une erreur si la syntaxe est mauvaise', async () => {
     await assert.rejects(
       async () => await generateurDocument({ contenuFichier: '##' }),
-      (erreur) => erreur instanceof ErreurDeSyntaxe
+      (erreur) => erreur instanceof ErreurTypst
     );
   });
 
