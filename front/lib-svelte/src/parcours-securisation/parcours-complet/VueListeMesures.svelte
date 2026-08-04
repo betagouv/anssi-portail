@@ -38,6 +38,7 @@
           type={mesure.estPriseEnCompte ? 'tertiaire' : 'primaire'}
           href={`/mesures/${mesure.id}`}
           libelle={mesure.estPriseEnCompte ? 'Accédez aux détails' : "Passer à l'action"}
+          source="Vues des mesures"
         />
       </div>
     </li>
