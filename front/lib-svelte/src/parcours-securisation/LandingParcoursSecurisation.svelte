@@ -1,0 +1,308 @@
+<script lang="ts">
+  import BlocDiagnostic from '../ui/BlocDiagnostic.svelte';
+  import HeroLandingPage from '../ui/HeroLandingPage.svelte';
+  import Lien from '../ui/Lien.svelte';
+
+  const tagsParcoursBasique = [
+    {
+      label: 'TPE / PME',
+      accent: 'défaut',
+      size: 'md',
+      icon: 'store-2-fill',
+    },
+    {
+      label: 'Collectivités',
+      accent: 'défaut',
+      size: 'md',
+      icon: 'bank-fill',
+    },
+    {
+      label: 'Associations',
+      accent: 'défaut',
+      size: 'md',
+      icon: 'user-heart-fill',
+    },
+  ];
+
+  const fonctionnalitesParcoursBasique = [
+    {
+      titre: 'Rapides à mettre en place',
+      description: '13 mesures accessibles, souvent réalisables en quelques minutes.',
+      illustration: '/assets/images/parcours-securisation/illustration-parcours-basique-mots-de-passe.svg',
+    },
+    {
+      titre: 'Pédagogique',
+      description: 'Pas de jargon, on vulgarise la cyber pour vous.',
+      illustration: '/assets/images/parcours-securisation/illustration-parcours-basique-pourquoi.svg',
+    },
+    {
+      titre: 'Pratico-pratique',
+      description: 'Des tutos et des outils pour vous aider à faire, concrètement.',
+      illustration: '/assets/images/parcours-securisation/illustration-parcours-basique-comment.svg',
+    },
+    {
+      titre: 'Décrochez votre badge Cyberdépart',
+      description: "Un premier marqueur d'engagement pour votre sécurité.",
+      badge: {
+        label: 'Libellé badge',
+        accent: 'green-bourgeon',
+        size: 'sm',
+        type: 'accent',
+      },
+      illustration: '/assets/images/parcours-securisation/illustration-parcours-basique-badge.svg',
+    },
+  ];
+
+  const tagsParcoursComplet = [
+    {
+      label: 'PME / ETI',
+      accent: 'défaut',
+      size: 'md',
+      icon: 'building-fill',
+    },
+    {
+      label: 'Organisations concernées NIS 2',
+      accent: 'défaut',
+      size: 'md',
+      icon: 'checkbox-circle-fill',
+    },
+  ];
+
+  const fonctionnalitesParcoursComplet = [
+    {
+      titre: 'Un programme complet',
+      description:
+        'Protégez-vous contre les 5 risques cyber les plus courants — et 6 mesures additionnelles sur la protection des données personnelles, établies avec la CNIL.',
+      illustration: '/assets/images/parcours-securisation/illustration-parcours-complet-modules.svg',
+    },
+    {
+      titre: 'Basé sur ReCyf',
+      description:
+        "Chaque mesure est issue du référentiel ReCyf, simplifiée et accompagnée d'explications pédagogiques pour faciliter votre démarche mise en conformité NIS 2.",
+      illustration: '/assets/images/parcours-securisation/illustration-parcours-complet-controler.svg',
+    },
+    {
+      titre: 'Suivez votre progression',
+      description:
+        'Avancez à votre rythme, module par module. Visualisez votre progression à tout moment et partagez vos résultats avec votre direction ou votre prestataire.',
+      illustration: '/assets/images/parcours-securisation/illustration-parcours-complet-progression.svg',
+    },
+  ];
+</script>
+
+<div class="section-hero-et-tuiles">
+  <HeroLandingPage
+    description="Rejoignez notre programme d'accompagnement gratuit."
+    propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
+    tag="+6000 organisations déjà accompagnées 🚀"
+    srcImage="/assets/images/parcours-securisation/illustration-hero-parcours-securisation.png"
+    imageDeFond="/assets/images/parcours-securisation/fond-hero-landing-parcours-securisation.svg"
+    class="hero-landing-page"
+  >
+    {#snippet titreHtml()}
+      Je <span class="decorateur-titre"><span>protège</span></span> mon organisation contre les cyberattaques
+    {/snippet}
+    {#snippet actions()}
+      <dsfr-button
+        label="Je commence à sécuriser"
+        kind="primary"
+        size="lg"
+        has-icon
+        icon="arrow-right-circle-line"
+        icon-place="right"
+        href="/inscription"
+        markup="a"
+      ></dsfr-button>
+    {/snippet}
+  </HeroLandingPage>
+
+  <div class="section-tuiles">
+    <dsfr-container class="conteneur-tuiles">
+      <lab-anssi-carrousel-tuiles>
+        <dsfr-tile title="Gratuit" action-markup="false" no-link size="sm"></dsfr-tile>
+        <dsfr-tile title="Conçu par l'agence cyber de l'État" action-markup="false" no-link size="sm"></dsfr-tile>
+        <dsfr-tile title="100% en ligne" action-markup="false" no-link size="sm"></dsfr-tile>
+      </lab-anssi-carrousel-tuiles>
+    </dsfr-container>
+  </div>
+</div>
+
+<section class="section-parcours-basique">
+  <dsfr-container>
+    <lab-anssi-fonctionnalites
+      titre="La cybersécurité est étrangère à votre organisation ?"
+      description="Accédez à 13 mesures simples pour protéger dès maintenant votre organisation contre les cyberattaques et prendre votre Cyberdépart ! 🚀"
+      fonctionnalites={fonctionnalitesParcoursBasique}
+      cliquable
+      avec-cta
+    >
+      <dsfr-tags-group tags={tagsParcoursBasique} has-icon slot="hautentete"></dsfr-tags-group>
+      <dsfr-button
+        label="Je commence à sécuriser"
+        kind="primary"
+        size="lg"
+        has-icon
+        icon="arrow-right-circle-line"
+        icon-place="right"
+        slot="cta"
+        href="/inscription"
+        markup="a"
+      ></dsfr-button>
+    </lab-anssi-fonctionnalites>
+  </dsfr-container>
+</section>
+
+<section class="section-diagnostic">
+  <dsfr-container>
+    <BlocDiagnostic
+      titre="Vous préférez échanger avec un Aidant cyber ?"
+      description="Le diagnostic cyberdépart vous permet de bénéficier d'un accompagnement gratuit d'1 heure avec un Aidant cyber
+          bénévole. Retrouvez ensuite votre plan d'action sur MesServicesCyber."
+      labelBouton="Demander un accompagnement gratuit"
+      lienBouton="/inscription"
+    >
+      {#snippet illustration()}
+        <img
+          class="illustration-diagnostic"
+          src="/assets/images/parcours-securisation/illustration-diagnostic.png"
+          alt=""
+        />
+      {/snippet}
+    </BlocDiagnostic>
+  </dsfr-container>
+</section>
+
+<section class="section-parcours-complet">
+  <dsfr-container>
+    <lab-anssi-fonctionnalites
+      titre="Votre organisation agit déjà pour sa cybersécurité ?"
+      description="Accédez à 57 mesures pour vous protéger contre les 5 risques cyber les plus courants."
+      fonctionnalites={fonctionnalitesParcoursComplet}
+      orientation-media="gauche"
+      cliquable
+      avec-cta
+    >
+      <dsfr-tags-group tags={tagsParcoursComplet} has-icon slot="hautentete"></dsfr-tags-group>
+      <dsfr-button
+        label="Je commence à sécuriser"
+        kind="primary"
+        size="lg"
+        has-icon
+        icon="arrow-right-circle-line"
+        icon-place="right"
+        slot="cta"
+        href="/inscription"
+        markup="a"
+      ></dsfr-button>
+    </lab-anssi-fonctionnalites>
+  </dsfr-container>
+</section>
+
+<section class="section-pied-de-page">
+  <dsfr-container>
+    <p class="lien-test-maturite">
+      <svg
+        class="icone-test-maturite"
+        width="24"
+        height="24"
+        viewBox="0 0 20 20"
+        fill="none"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10 9V6L14 10L10 14V11H6V9H10ZM10 0C15.52 0 20 4.48 20 10C20 15.52 15.52 20 10 20C4.48 20 0 15.52 0 10C0 4.48 4.48 0 10 0ZM10 18C14.42 18 18 14.42 18 10C18 5.58 14.42 2 10 2C5.58 2 2 5.58 2 10C2 14.42 5.58 18 10 18Z"
+          fill="var(--text-action-high-blue-france, #000091)"
+        />
+      </svg>
+      Trouvez le parcours adapté à votre organisation à l'aide de notre test de maturité cyber. <Lien
+        href="/test-maturite"
+        libelle="Débuter le test"
+        neutre
+      />
+    </p>
+
+    <hr class="separateur" />
+    <Lien href="/inscription" libelle="Haut de page" taille="md" icone="arrow-up-fill" />
+  </dsfr-container>
+</section>
+
+<style lang="scss">
+  @use '../../../assets/styles/responsive' as *;
+  @use '../../../assets/styles/grille' as *;
+
+  .section-hero-et-tuiles {
+    background-color: var(--pink-tuile-850-200);
+  }
+
+  :global(.decorateur-titre) {
+    position: relative;
+
+    :global(span) {
+      position: relative;
+      z-index: 2;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 120%;
+      height: 100%;
+      transform: translateX(-50%);
+      background: url('/assets/images/parcours-securisation/hero-decor-titre.svg') no-repeat center / contain;
+      pointer-events: none;
+    }
+  }
+
+  .section-tuiles {
+    .conteneur-tuiles {
+      padding-block: 0;
+    }
+
+    lab-anssi-carrousel-tuiles {
+      margin-block-start: -2.5rem;
+    }
+  }
+
+  .section-parcours-basique {
+    background-color: var(--pink-macaron-850-200);
+    padding-block: 6rem;
+  }
+
+  .section-diagnostic {
+    padding-block: 3.5rem;
+  }
+
+  .section-parcours-complet {
+    background-color: var(--brown-cafe-creme-975-75);
+    padding-block: 6rem;
+  }
+
+  .section-pied-de-page {
+    padding-block: 3rem;
+  }
+
+  .lien-test-maturite {
+    align-items: center;
+    color: var(--text-default-grey);
+    display: flex;
+
+    font-size: 1.125rem;
+    gap: 0.5rem;
+    line-height: 1.75rem;
+    margin: 0;
+  }
+
+  .icone-test-maturite {
+    fill: var(--text-action-high-blue-france);
+    width: 24px;
+  }
+
+  .separateur {
+    border: none;
+    border-top: 1px solid var(--border-default-grey);
+    margin-block: 3rem;
+  }
+</style>
