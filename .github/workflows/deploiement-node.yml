@@ -59,7 +59,21 @@ jobs:
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
         run: |
           clever link "$ID_APP"
-          clever env | grep -v "^#" | tr -d '"' >> "$GITHUB_ENV"
+          clever env |
+            grep -E \
+              -e '^FEATURE_FLAG_NOUVELLE_DA=' \
+              -e '^SENTRY_AUTH_TOKEN=' \
+              -e '^SENTRY_PROJET=' \
+              -e '^SENTRY_URL=' \
+              -e '^DELAI_AFFICHAGE_AVIS_UTILISATEUR=' \
+              -e '^FEATURE_FLAG_NIS2_CYFUN23=' \
+              -e '^FEATURE_FLAG_NOUVELLE_DA=' \
+              -e '^GOOGLE_SEARCH_CONSOLE_VERIFICATION=' \
+              -e '^MATOMO_ID=' \
+              -e '^MATOMO_URL_TAG_MANAGER=' \
+              -e '^SENTRY_DSN=' \
+              -e '^SENTRY_ENVIRONNEMENT=' \
+            | tr -d '"' | sed 's/=/=::add-mask::/' >> "$GITHUB_ENV"
 
       - name: Construis la lib Svelte
         run: |
