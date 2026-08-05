@@ -1,4 +1,4 @@
-import { HttpStatusCode } from 'axios';
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middleware.js';

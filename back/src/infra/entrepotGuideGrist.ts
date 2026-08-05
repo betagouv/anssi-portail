@@ -1,4 +1,4 @@
-import axiosInstance from './axiosInstance.js';
+import axios from '@anssi-portail/axios';
 import { BesoinCyber } from '../metier/besoinCyber.js';
 import { EntrepotGuide } from '../metier/entrepotGuide.js';
 import { Guide } from '../metier/guide.js';
@@ -30,7 +30,7 @@ export type RetourGuideGrist = {
 
 export class EntrepotGuideGrist extends EntrepotGrist<GuideGrist> implements EntrepotGuide {
   constructor({
-    clientHttp = axiosInstance,
+    clientHttp = axios,
     adaptateurEnvironnement,
   }: {
     clientHttp?: ClientHttp;

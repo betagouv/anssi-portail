@@ -1,4 +1,4 @@
-import { HttpStatusCode } from 'axios';
+import { HttpStatusCode } from '@anssi-portail/axios';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';

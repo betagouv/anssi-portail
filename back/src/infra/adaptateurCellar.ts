@@ -1,7 +1,6 @@
 import { DeleteObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { fromEnv } from '@aws-sdk/credential-providers';
-import { AxiosResponse, isAxiosError } from 'axios';
-import axiosInstance from './axiosInstance.js';
+import axios, { AxiosResponse, isAxiosError } from '@anssi-portail/axios';
 import { Readable } from 'node:stream';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 
@@ -37,7 +36,7 @@ export interface AdaptateurCellar {
 export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnement): AdaptateurCellar => ({
   async get(nomDuFichier: string, cleDuBucket: CleDuBucket) {
     try {
-      const reponse = await axiosInstance.get(
+      const reponse = await axios.get(
         `${selectionneURLCellarLecturePourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
         { responseType: 'arraybuffer', timeout: 30_000 }
       );
@@ -57,7 +56,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
 
   async getStream(nomDuFichier, cleDuBucket): Promise<FluxCellar | undefined> {
     try {
-      const reponse: AxiosResponse<Readable> = await axiosInstance.get(
+      const reponse: AxiosResponse<Readable> = await axios.get(
         `${selectionneURLCellarLecturePourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`,
         { responseType: 'stream', timeout: 30_000 }
       );
@@ -77,7 +76,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
 
   async existe(nomDuFichier, cleDuBucket): Promise<boolean> {
     try {
-      await axiosInstance.head(
+      await axios.head(
         `${selectionneURLCellarLecturePourUnBucket(adaptateurEnvironnement, cleDuBucket)}${nomDuFichier}`
       );
       return true;

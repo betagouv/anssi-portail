@@ -2,6 +2,7 @@
 
 color: always
 packages:
+  - 'axios'
   - 'back'
   - 'front'
   - 'front/lib-svelte'

@@ -20,7 +20,7 @@ import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal.js';
 import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber.js';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi.js';
 import { fabriqueAdaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise.js';
-import axiosInstance from './infra/axiosInstance.js';
+import axios from '@anssi-portail/axios';
 import { fabriqueAdaptateurEnrichissement } from './infra/enrichissement/adaptateurEnrichissement.js';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres.js';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist.js';
@@ -54,7 +54,7 @@ const adaptateurHachage = fabriqueAdaptateurHachage({
 
 const entrepotFavori = new EntrepotFavoriPostgres({ adaptateurHachage });
 const entrepotFinancement = new EntrepotFinancementGrist({
-  clientHttp: axiosInstance,
+  clientHttp: axios,
   adaptateurEnvironnement,
 });
 const entrepotSessionDeGroupe = new EntrepotSessionDeGroupePostgres();

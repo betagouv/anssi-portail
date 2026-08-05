@@ -3,7 +3,7 @@ import { ConsignateurDeComparaisonDeGuides } from './infrastructure/guides/consi
 import { ComparateurDeGuides } from './metier/guides/comparateurDeGuides';
 import { EntrepotGuideGrist } from './infrastructure/guides/entrepotGuideGrist';
 import { adaptateurEnvironnement } from './infrastructure/adaptateurEnvironnement';
-import axios from 'axios';
+import axios from '@anssi-portail/axios';
 
 const summaryFile = process.env.GITHUB_STEP_SUMMARY ?? 'rapport-guides.md';
 

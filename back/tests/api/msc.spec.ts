@@ -4,7 +4,7 @@ import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets.js';
 import { join } from 'node:path';
-import { HttpStatusCode } from 'axios';
+import { HttpStatusCode } from '@anssi-portail/axios';
 
 describe('La configuration de notre serveur', () => {
   it('compresse les réponses', async () => {

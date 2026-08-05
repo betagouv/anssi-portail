@@ -1,4 +1,4 @@
-import axiosInstance from './axiosInstance.js';
+import axios from '@anssi-portail/axios';
 import { EntrepotFinancement } from '../metier/entrepotFinancement.js';
 import { Financement } from '../metier/financement.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
@@ -27,7 +27,7 @@ export type FinancementGrist = {
 
 export class EntrepotFinancementGrist extends EntrepotGrist<FinancementGrist> implements EntrepotFinancement {
   constructor({
-    clientHttp = axiosInstance,
+    clientHttp = axios,
     adaptateurEnvironnement,
   }: {
     clientHttp: ClientHttp;

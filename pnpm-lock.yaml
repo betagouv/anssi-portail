@@ -80,8 +80,24 @@ importers:
         specifier: ^4.1.7
         version: 4.1.10(@types/node@26.1.1)(jsdom@29.1.1(@noble/hashes@1.8.0))(vite@6.4.3(@types/node@26.1.1)(sass@1.98.0)(tsx@4.21.0))
 
+  axios:
+    dependencies:
+      axios:
+        specifier: 'catalog:'
+        version: 1.18.1
+    devDependencies:
+      '@types/node':
+        specifier: ^24.0.0
+        version: 24.13.3
+      tsx:
+        specifier: ^4.21.0
+        version: 4.21.0
+
   back:
     dependencies:
+      '@anssi-portail/axios':
+        specifier: workspace:^
+        version: link:../axios
       '@aws-sdk/client-s3':
         specifier: ^3.1013.0
         version: 3.1094.0
@@ -109,9 +125,6 @@ importers:
       '@types/cors':
         specifier: ^2.8.19
         version: 2.8.19
-      axios:
-        specifier: 'catalog:'
-        version: 1.18.1
       bcrypt:
         specifier: ^6.0.0
         version: 6.0.0
@@ -257,9 +270,9 @@ importers:
 
   comparaison-grist:
     dependencies:
-      axios:
-        specifier: 'catalog:'
-        version: 1.18.1
+      '@anssi-portail/axios':
+        specifier: workspace:^
+        version: link:../axios
       diff:
         specifier: ^8.0.3
         version: 8.0.4
@@ -279,9 +292,6 @@ importers:
       '@anssi-portail/svelte':
         specifier: workspace:*
         version: link:../front/lib-svelte
-      axios:
-        specifier: 'catalog:'
-        version: 1.18.1
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.1.1
@@ -404,9 +414,9 @@ importers:
 
   mise-a-jour-financements:
     dependencies:
-      axios:
-        specifier: 'catalog:'
-        version: 1.18.1
+      '@anssi-portail/axios':
+        specifier: workspace:^
+        version: link:../axios
       diff:
         specifier: ^8.0.3
         version: 8.0.4
