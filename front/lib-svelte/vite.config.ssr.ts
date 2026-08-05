@@ -24,6 +24,7 @@ const rollupOptions: NonNullable<UserConfig['build']>['rollupOptions'] = {
     'demande-aide-mon-aide-cyber': 'src/demande-aide-mon-aide-cyber/DemandeAideMAC.svelte',
     'heros-accueil': 'src/accueil/HerosAccueil.svelte',
     'parcours-securisation': 'src/parcours-securisation/LandingParcoursSecurisation.svelte',
+    'parcours-cyberdepart': 'src/parcours-securisation/LandingParcoursCyberdepart.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,
