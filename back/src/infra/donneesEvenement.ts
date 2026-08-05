@@ -33,7 +33,10 @@ type Evenement<Type extends string, Donnees extends object> = {
   date: Date;
 };
 
-type DonneesEvenementNouvelUtilisateur = Evenement<'NOUVEL_UTILISATEUR_INSCRIT', { idUtilisateur: string }>;
+type DonneesEvenementNouvelUtilisateur = Evenement<
+  'NOUVEL_UTILISATEUR_INSCRIT',
+  { idUtilisateur: string; suivi?: { campagne?: string } }
+>;
 
 type DonneesEvenementMiseAJourFavorisUtilisateur = Evenement<
   'MISE_A_JOUR_FAVORIS_UTILISATEUR',
