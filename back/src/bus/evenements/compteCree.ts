@@ -5,6 +5,9 @@ export class CompteCree {
   infoLettre!: boolean;
   telephone?: string;
   pixelDeSuiviAccepté: boolean;
+  suivi?: {
+    campagne?: string;
+  };
 
   constructor({
     email,
@@ -13,6 +16,7 @@ export class CompteCree {
     infoLettre,
     telephone,
     pixelDeSuiviAccepté,
+    suivi,
   }: {
     email: string;
     prenom: string;
@@ -20,6 +24,7 @@ export class CompteCree {
     infoLettre: boolean;
     telephone?: string;
     pixelDeSuiviAccepté: boolean;
+    suivi?: { campagne?: string };
   }) {
     this.email = email;
     this.prenom = prenom;
@@ -27,5 +32,6 @@ export class CompteCree {
     this.infoLettre = infoLettre;
     this.telephone = telephone;
     this.pixelDeSuiviAccepté = pixelDeSuiviAccepté;
+    this.suivi = suivi;
   }
 }
