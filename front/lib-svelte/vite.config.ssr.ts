@@ -23,6 +23,7 @@ const rollupOptions: NonNullable<UserConfig['build']>['rollupOptions'] = {
     'equipe-biz-dev': 'src/interlocuteurs/EquipeBizDev.svelte',
     'demande-aide-mon-aide-cyber': 'src/demande-aide-mon-aide-cyber/DemandeAideMAC.svelte',
     'heros-accueil': 'src/accueil/HerosAccueil.svelte',
+    'parcours-cyberdepart': 'src/parcours-securisation/LandingParcoursCyberdepart.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,
