@@ -17,7 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "axios": "catalog:",
+    "@anssi-portail/axios": "workspace:^",
     "diff": "^8.0.3",
     "isomorphic-dompurify": "^3.18.0"
   },

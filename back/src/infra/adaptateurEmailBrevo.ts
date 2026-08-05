@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, isAxiosError } from '@anssi-portail/axios';
 import { decode } from 'html-entities';
 import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { Telephone } from '../metier/telephone.js';
@@ -63,7 +63,7 @@ export const adaptateurEmailBrevo = (fnAppelleAxios: FonctionPostAxios): Adaptat
         enteteJSON
       );
     } catch (erreur: Error | unknown) {
-      if (axios.isAxiosError(erreur)) {
+      if (isAxiosError(erreur)) {
         if (erreur.response?.data.message === 'Contact already exist') return Promise.resolve();
 
         console.error(erreur.message, {
@@ -86,7 +86,7 @@ export const adaptateurEmailBrevo = (fnAppelleAxios: FonctionPostAxios): Adaptat
         enteteJSON
       );
     } catch (erreur: Error | unknown) {
-      if (axios.isAxiosError(erreur)) {
+      if (isAxiosError(erreur)) {
         if (erreur.response?.data.message === 'Contact already exist') {
           return undefined;
         }

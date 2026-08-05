@@ -1,5 +1,4 @@
-import { isAxiosError } from 'axios';
-import axiosInstance from './axiosInstance.js';
+import axios, { isAxiosError } from '@anssi-portail/axios';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { adaptateurMonAideCyberVide } from './adaptateurMonAideCyberVide.js';
 import { Cache } from './cache.js';
@@ -49,10 +48,7 @@ class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
         ...(identifiantAidant && { identifiantAidant }),
         ...(siretAidant && { siretAidant }),
       };
-      await axiosInstance.post(
-        `${this.adaptateurEnvironnement.monAideCyber().url()}/api/demandes/etre-aide`,
-        demandeMAC
-      );
+      await axios.post(`${this.adaptateurEnvironnement.monAideCyber().url()}/api/demandes/etre-aide`, demandeMAC);
     } catch (e: unknown | Error) {
       if (isAxiosError(e) && e.response && e.response.status >= 400 && e.response.status < 500) {
         throw new Error(e.response.data.message);
@@ -64,7 +60,7 @@ class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
   async statistiques(): Promise<StatistiquesMonAideCyber> {
     const url = `${this.adaptateurEnvironnement.monAideCyber().url()}/api/statistiques`;
     return this.cacheStatistiques.get(url, async () => {
-      const reponse = await axiosInstance.get(url.toString());
+      const reponse = await axios.get(url.toString());
       return { nombreDiagnostics: reponse.data.nombreDiagnostics };
     });
   }

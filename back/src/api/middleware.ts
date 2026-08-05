@@ -1,4 +1,4 @@
-import { HttpStatusCode } from 'axios';
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import helmet from 'helmet';
 import jsonwebtoken from 'jsonwebtoken';

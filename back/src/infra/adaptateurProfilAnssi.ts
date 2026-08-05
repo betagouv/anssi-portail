@@ -1,5 +1,4 @@
-import { isAxiosError } from 'axios';
-import axiosInstance from './axiosInstance.js';
+import axios, { isAxiosError } from '@anssi-portail/axios';
 import { decode } from 'html-entities';
 import { adaptateurProfilAnssiVide } from './adaptateurProfilAnssiVide.js';
 
@@ -33,7 +32,7 @@ export interface AdaptateurProfilAnssi {
 const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
   const metsAJour = async ({ nom, prenom, email, organisation, telephone, domainesSpecialite }: ProfilAnssi) => {
     const urlProfil = `${process.env.PROFIL_ANSSI_URL_BASE}/profil/${email}`;
-    await axiosInstance.put(
+    await axios.put(
       urlProfil,
       {
         nom,
@@ -49,7 +48,7 @@ const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
   const recupere = async (email: string) => {
     const urlProfil = `${process.env.PROFIL_ANSSI_URL_BASE}/profil/${email}`;
     try {
-      const reponse = await axiosInstance.get(urlProfil, CONFIGURATION_AUTHENTIFICATION);
+      const reponse = await axios.get(urlProfil, CONFIGURATION_AUTHENTIFICATION);
       return JSON.parse(
         JSON.stringify(reponse.data, (_cle, valeur) => (typeof valeur === 'string' ? decode(valeur) : valeur))
       );
@@ -67,7 +66,7 @@ const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
   const recherche = async ({ emails }: { emails: string[] }): Promise<ProfilAnssi[]> => {
     const urlProfil = `${process.env.PROFIL_ANSSI_URL_BASE}/profils/recherche`;
     try {
-      const reponse = await axiosInstance.post<ProfilAnssi[]>(urlProfil, { emails }, CONFIGURATION_AUTHENTIFICATION);
+      const reponse = await axios.post<ProfilAnssi[]>(urlProfil, { emails }, CONFIGURATION_AUTHENTIFICATION);
       return reponse.data;
     } catch (e) {
       if (isAxiosError(e) && e.response?.status !== 404) {

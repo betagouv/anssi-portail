@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import { AxiosError } from '@anssi-portail/axios';
 import Knex from 'knex';
 import pThrottle from 'p-throttle';
 import config from '../../knexfile.js';

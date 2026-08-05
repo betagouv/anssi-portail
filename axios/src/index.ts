@@ -1,8 +1,8 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
-const axiosInstance = axios.create();
+const axiosSécurisé = axios.create();
 
-axiosInstance.interceptors.response.use(
+axiosSécurisé.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
     if (error.config) {
@@ -24,8 +24,8 @@ axiosInstance.interceptors.response.use(
 
     if (error.response?.request) {
       error.response.request = {
-        method: error.response.request?.method,
-        path: error.response.request?.path,
+        method: error.response.request.method,
+        path: error.response.request.path,
       };
     }
 
@@ -33,4 +33,5 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-export default axiosInstance;
+export * from 'axios';
+export default axiosSécurisé;

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '@anssi-portail/axios';
 import { Financement } from '../metier/financement';
 import { ClientHttp } from './clientHttp';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement';
