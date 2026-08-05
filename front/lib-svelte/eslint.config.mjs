@@ -7,7 +7,7 @@ import { createConfig } from '../../eslint.config.base.mjs';
 import svelteConfig from './svelte.config.js';
 
 export default defineConfig(
-  createConfig(import.meta.dirname),
+  createConfig(import.meta.dirname, { autoriseImportAxios: true }),
   ...svelte.configs.recommended,
   {
     files: ['**/*.svelte.ts'],

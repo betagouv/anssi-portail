@@ -1,4 +1,4 @@
 // @ts-check
 import { createConfig } from '../eslint.config.base.mjs';
 
-export default createConfig(import.meta.dirname);
+export default createConfig(import.meta.dirname, { autoriseImportAxios: true });
