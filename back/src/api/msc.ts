@@ -228,6 +228,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'collectivites',
     'associations',
     'entreprises',
+    'parcours-securisation',
     'sante',
     'abonnement-infolettre',
     'confirmation-abonnement-infolettre',
