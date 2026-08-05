@@ -18,4 +18,5 @@ export const composantsAutorisés: string[] = [
   'demande-aide-mon-aide-cyber',
   'heros-accueil',
   'parcours-cyberdepart',
+  'parcours-securisation-complet',
 ];
