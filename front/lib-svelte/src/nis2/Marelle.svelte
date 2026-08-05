@@ -75,10 +75,14 @@
   @use '../../../assets/styles/grille' as *;
 
   lab-anssi-marelle {
-    margin-inline: auto;
-    display: block;
-    @include a-partir-de(lg) {
-      max-width: taille-pour-colonnes(10);
+    &,
+    img {
+      margin-inline: auto;
+      display: block;
+    }
+
+    img {
+      max-width: 100%;
     }
   }
 </style>
