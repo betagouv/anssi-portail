@@ -12,10 +12,11 @@ export const consigneEvenementCompteCreeDansJournal = ({
   adaptateurHorloge: AdaptateurHorloge;
   adaptateurHachage: AdaptateurHachage;
 }) => {
-  return async function (evenement: CompteCree) {
+  return async function (évènement: CompteCree) {
     await adaptateurJournal.consigneEvenement({
       donnees: {
-        idUtilisateur: adaptateurHachage.hache(evenement.email),
+        idUtilisateur: adaptateurHachage.hache(évènement.email),
+        suivi: évènement.suivi,
       },
       type: 'NOUVEL_UTILISATEUR_INSCRIT',
       date: adaptateurHorloge.maintenant(),
