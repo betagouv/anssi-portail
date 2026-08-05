@@ -60,7 +60,7 @@ jobs:
         run: |
           clever link "$ID_APP"
 
-          variablesWhitlistes=$(clever env |
+          clever env |
             grep -E \
               -e '^FEATURE_FLAG_NOUVELLE_DA=' \
               -e '^SENTRY_AUTH_TOKEN=' \
@@ -73,16 +73,11 @@ jobs:
               -e '^MATOMO_ID=' \
               -e '^MATOMO_URL_TAG_MANAGER=' \
               -e '^SENTRY_DSN=' \
-              -e '^SENTRY_ENVIRONNEMENT=')
-
-          echo $variablesWhitlistes | cut -d= -f2- | tr -d '"' |
-            while IFS= read -r valeur; do
-              if [[ -n "$valeur" ]]; then
-                printf '::add-mask::%s\n' "$valeur"
-              fi
+              -e '^SENTRY_ENVIRONNEMENT=' |
+            tr -d '"' | while IFS='=' read -r key value; do
+              echo "::add-mask::$value"
+              echo "$key=$value" >> "$GITHUB_ENV"
             done
-
-          echo $variablesWhitlistes | tr -d '"' >> "$GITHUB_ENV"
 
       - name: Construis la lib Svelte
         run: |
