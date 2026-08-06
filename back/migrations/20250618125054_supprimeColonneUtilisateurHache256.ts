@@ -9,7 +9,7 @@ export async function up(knex: Knex): Promise<void> {
 
 const hacheSha256 = (valeur: string) =>
   createHash('sha256')
-    .update(valeur + process.env.CHIFFREMENT_SEL_DE_HASHAGE)
+    .update(valeur + 'ancienne_clef_de_hash_supprimée')
     .digest('hex');
 
 export async function down(knex: Knex): Promise<void> {
