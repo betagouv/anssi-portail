@@ -61,10 +61,11 @@ export class MigrationHash {
 
   async migreLesHashDeMsc(fonctionDeMigration: FonctionDeMigration) {
     await this.knexMSC.transaction(async (trx) => {
+      await trx.raw('SET CONSTRAINTS prises_en_compte_email_utilisateur_hache_foreign DEFERRED');
+
       const utilisateurs = await trx<{ email_hache: string }>('utilisateurs').distinct('email_hache');
       const majUtilisateurs = utilisateurs.map(({ email_hache: emailHacheActuel }) => {
         const emailHacheNouveau = fonctionDeMigration(emailHacheActuel);
-
         return trx('utilisateurs').where({ email_hache: emailHacheActuel }).update({ email_hache: emailHacheNouveau });
       });
 
@@ -88,7 +89,16 @@ export class MigrationHash {
         });
       });
 
-      await Promise.all([...majFavoris, ...majResultatsTests, ...majUtilisateurs]);
+      const prisesEnCompte = await trx<{ email_utilisateur_hache: string }>('prises_en_compte');
+      const majPrisesEnCompte = prisesEnCompte.map(({ email_utilisateur_hache: emailUtilisateurActuel }) => {
+        const emailUtilisateurNouveau = fonctionDeMigration(emailUtilisateurActuel);
+
+        return trx('prises_en_compte').where({ email_utilisateur_hache: emailUtilisateurActuel }).update({
+          email_utilisateur_hache: emailUtilisateurNouveau,
+        });
+      });
+
+      await Promise.all([...majFavoris, ...majResultatsTests, ...majPrisesEnCompte, ...majUtilisateurs]);
     });
   }
 
