@@ -74,9 +74,9 @@
   <div class="avis-utilisateur-cta" transition:fly={{ duration: 1000, x: 140, opacity: 1 }}>
     <button class="zone-cliquable" on:click={surCliqueCTA} on:keypress tabindex={null}>
       <div class="illustration">
-        <img src="/assets/images/dragon-coeur.svg" width="102" height="118" alt="Dragon coeur" />
+        <img src="/assets/images/dragon-coeur.svg" width="98" height="113" alt="Dragon coeur" />
       </div>
-      <p class="texte">Votre avis nous intéresse&nbsp;!</p>
+      <p class="texte">Votre avis<br /> nous intéresse&nbsp;!</p>
     </button>
     <button on:keypress on:click={surFermetureCTA} tabindex={null} aria-label="Fermer" class="fermer">
       <lab-anssi-icone nom="close-line" taille="sm"></lab-anssi-icone>
@@ -231,12 +231,14 @@
         border-color: rgba(0, 0, 0, 0.2);
       }
     }
+
     .zone-cliquable {
       cursor: pointer;
       padding: 0;
       background: transparent;
       border: none;
-      border-radius: 8px 0 0 8px;
+      border-radius: 0.5rem 0 0 0.5rem;
+      overflow: hidden;
 
       &:focus-visible {
         outline: 2px solid var(--bleu-contour-mis-en-valeur);
@@ -252,21 +254,17 @@
       }
 
       .illustration {
-        background-color: var(--jaune-clair-msc);
-        border-top-left-radius: 8px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-        height: 120px;
+        background-color: var(--green-bourgeon-975-75);
+        padding-block-start: 0.438rem;
 
         img {
-          width: 97px;
+          display: block;
+          margin-inline: auto;
         }
       }
 
       .texte {
-        color: #161616;
+        color: var(--text-label-grey);
         font-size: 14px;
         font-weight: 700;
         line-height: normal;
