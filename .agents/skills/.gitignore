@@ -6,3 +6,5 @@
 # Whitelist de skills
 !nouvelle-migration-knex
 !playwright-cli
+!integrer-landing-page
+!integrer-landing-page/**
