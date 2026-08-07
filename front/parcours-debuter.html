@@ -85,11 +85,13 @@ titreHtml: 'Cybersécurité : se lancer ! | MesServicesCyber'
 </dsfr-container>
 
 {% for action in actions %}
-  {%assign indexModulo2 = forloop.index0 | modulo: 2 %}
-  {%if indexModulo2 == 1 %}
-    {%assign fondAlternatif=true%}
+  {%assign indexModulo3 = forloop.index0 | modulo: 3 %}
+  {%if indexModulo3 == 1 %}
+    {%assign fond="moutarde"%}
+  {%elsif indexModulo3 == 2 %}
+    {%assign fond="creme"%}
   {%else%}
-    {%assign fondAlternatif=false%}
+    {%assign fond="default"%}
   {%endif%}
   {% assign idAction=action.id %}
   {% include action-parcours-avec-items.html
@@ -98,6 +100,6 @@ titreHtml: 'Cybersécurité : se lancer ! | MesServicesCyber'
     explication=action.explication
     parcours=action.parcours
     items=action.items
-    fondAlternatif=fondAlternatif
+    fond=fond
   %}
 {% endfor %}

@@ -79,8 +79,12 @@ dsfr-container.action {
     margin-bottom: 24px;
   }
 
-  &.fond-alternatif {
-    background: #fff7db;
+  &.fond-moutarde {
+    background: var(--yellow-moutarde-925-125);
+  }
+
+  &.fond-creme {
+    background: var(--brown-cafe-creme-975-75);
   }
 }
 
