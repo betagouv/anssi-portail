@@ -145,11 +145,48 @@ permalink: /
   </div>
 </dsfr-container>
 
+<dsfr-container class="nis2">
+  <div class="conteneur">
+    <div class="contenu-principale">
+      <h2 class="titre fr-h1">NIS 2 arrive. Anticipez dès maintenant.</h2>
+
+      <p class="description">La directive NIS 2 renforce les exigences de cybersécurité pour des milliers d'entreprises et de collectivités en France et en Europe.</p>
+      <p class="description">Avec MesServicesCyber, découvrez NIS 2, si votre organisation est concernée et les étapes incontournables. Explorez les exigences du Référentiel Cyber France (ReCyF), pensé pour faciliter la mise en conformité avec NIS2 et comparez-le avec d’autres standards (ISO, etc.).</p>
+
+      <msc-lien
+      apparence="bouton"
+      href="/nis2"
+      libelle="Découvrir la directive NIS2"
+      type="secondaire"
+      ></msc-lien>
+    </div>
+
+    <div class="contenu-secondaire"></div>
+  </div>
+</dsfr-container>
+
+<dsfr-container class="guides-et-ressources">
+  <div class="conteneur">
+    <div class="contenu-principale">
+      <h2 class="titre fr-h1">Les recommandations de l'ANSSI, à portée de main.</h2>
+      <p class="description">Accédez aux guides de référence de l'ANSSI et posez vos questions cyber à MesQuestionsCyber, l'assistant IA conçu pour vous répondre simplement, à tout moment.</p>
+      <msc-lien
+        apparence="bouton"
+        href="/catalogue#guides"
+        libelle="Accéder aux guides"
+        type="secondaire-inverse"
+      ></msc-lien>
+    </div>
+
+    <div class="contenu-secondaire"></div>
+  </div>
+</dsfr-container>
+
 <dsfr-container class="test-maturite">
   <div class="contenu-section">
     <div class="recapitulatif">
       <hgroup>
-        <h2>Quelle est la maturité cyber de votre organisation&nbsp;?</h2>
+        <h2 class="recapitulatif-titre fr-h1">Quelle est la maturité cyber de votre organisation&nbsp;?</h2>
         <p class="texte-standard-md">
           La maturité cyber correspond au niveau global de prise en compte des
           risques numériques dans votre organisation.
@@ -176,7 +213,7 @@ permalink: /
         href="/session-groupe"
         libelle="Disponible aussi pour les sessions en groupe"
       ></msc-lien>
-      <p class="texte-mention-xs">
+      <p class="recapitulatif-mention texte-mention-xs">
         La maturité cyber n’est pas une évaluation du niveau de sécurité des
         systèmes d’information d’une organisation mais de sa posture à l’égard
         des enjeux cyber.
@@ -196,50 +233,29 @@ permalink: /
 </dsfr-container>
 
 <dsfr-container class="interlocuteurs">
-  <div class="contenu-interlocuteurs" >
+  <div class="contenu-interlocuteurs">
     {% include composant-svelte.html id="carrousel-des-interlocuteurs" %}
   </div>
 </dsfr-container>
 
 <dsfr-container class="equipe-bizdev">
-  <div class="contenu-section" id="" >
-    {% include composant-svelte.html id="equipe-biz-dev" %}
-  </div>
+  {% include composant-svelte.html id="equipe-biz-dev" %}
 </dsfr-container>
 
 <dsfr-container class="communaute-msc">
-  <div class="contenu-section">
-    <h2>Rejoignez la communauté&nbsp;!</h2>
-    <div class="contenu">
-      <p class="texte-standard-md">
-        En tant que <b>membre de la communauté</b>, vous pourrez&nbsp;:
-      </p>
-      <ul>
-        <li>
-          <b>Échanger</b> directement avec vos pairs pour une collaboration
-          facilitée.
-        </li>
-        <li>
-          <b>Découvrir</b> en avant-première les nouvelles fonctionnalités à
-          venir.
-        </li>
-        <li>
-          <b>Participer</b> activement au développement de MesServicesCyber en
-          nous partageant vos besoins et suggestions d’amélioration.
-        </li>
-      </ul>
+  <div class="conteneur">
+    <div class="conteneur-titre-description">
+      <h2>Rejoignez la communauté&nbsp;!</h2>
+      <p class="description">Échangez avec vos pairs, découvrez les fonctionnalités en avant-première et participez activement au développement des outils.</p>
     </div>
-    <msc-lien
-      apparence="bouton"
-      blank
-      href="https://tally.so/r/wa6o22"
-      libelle="Rejoindre la communauté"
-      type="secondaire"
-    ></msc-lien>
-    <img
-      src="assets/images/illustration-s-informer.svg"
-      alt="Dialoguer avec la communauté"
-    />
+
+    <lab-anssi-carrousel-tuiles>
+      <dsfr-card title="Échanger" has-description description="Directement avec vos pairs pour une collaboration facilitée"></dsfr-card>
+      <dsfr-card title="Découvrir" has-description description="Les nouvelles fonctionnalités en avant-première"></dsfr-card>
+      <dsfr-card title="Contribuer" has-description description="Partagez vos besoins et suggestions d'amélioration"></dsfr-card>
+    </lab-anssi-carrousel-tuiles>
+
+    <dsfr-button label="Rejoindre la communauté" kind="secondary" markup="a" href="https://tally.so/r/wa6o22" target="_blank"></dsfr-button>
   </div>
 </dsfr-container>
 

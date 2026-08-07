@@ -171,17 +171,40 @@
   }
 }
 
+.nis2 {
+  background-color: var(--brown-cafe-creme-975-75);
+  padding-block: 6rem;
+}
+
+.guides-et-ressources {
+  background-color: var(--blue-france-sun-113-625);
+  padding-block: 6rem;
+
+  &,
+  .titre {
+    color: var(--text-inverted-grey);
+  }
+
+  .description {
+    margin-block: 0 1.5rem;
+  }
+}
+
 .test-maturite {
-  padding: 72px 0 72px;
-  background: #f6f6f6;
+  padding-block: 3.5rem;
+
+  @include a-partir-de(xl) {
+    padding-block: 6rem;
+  }
 
   .contenu-section {
     display: flex;
     flex-direction: column;
     align-self: stretch;
+    gap: 24px;
 
     @include a-partir-de(lg) {
-      gap: 24px;
+      gap: 32px;
       flex-direction: row;
     }
 
@@ -219,26 +242,63 @@
       }
     }
   }
+
+  .recapitulatif-titre {
+    margin-block-end: 16px;
+  }
+
+  .recapitulatif-mention {
+    margin-block-end: 0;
+  }
 }
 
 .interlocuteurs {
-  padding: 56px 0;
+  background-color: var(--blue-france-850-200);
+  padding-block: 3.5rem;
+
+  @include a-partir-de(xl) {
+    padding-block: 6rem;
+  }
 
   .contenu-interlocuteurs {
     @include a-partir-de(lg) {
       max-width: taille-pour-colonnes(10);
       margin-inline: auto;
+      padding-block-end: 1rem;
     }
   }
 }
 
 .equipe-bizdev {
-  background-color: var(--jaune-clair-msc);
-  padding: 56px 0;
+  background-color: var(--brown-cafe-creme-975-75);
+  padding-block: 6rem;
 }
 
 .communaute-msc {
-  padding: 56px 0;
+  background-color: var(--yellow-moutarde-925-125);
+  padding-block: 6rem;
+
+  .conteneur {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .conteneur-titre-description {
+    text-align: center;
+    max-width: taille-pour-colonnes(7);
+  }
+
+  .description {
+    margin-block: 0;
+  }
+
+  dsfr-card {
+    min-height: 0;
+  }
+
+  /*
   .contenu-section {
     display: grid;
     grid-template-areas:
@@ -289,18 +349,18 @@
       justify-self: start;
     }
   }
+  */
 }
 
 .partenaires {
-  background-color: #f6f6f6;
-  padding: 56px 0;
+  padding-block: 6rem;
 
   .logos {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
-    margin-block: 48px 24px;
+    margin-block-start: 48px;
     gap: 32px 72px;
 
     @include a-partir-de(lg) {
@@ -310,10 +370,7 @@
 }
 
 .anssi {
-  padding: 72px 0;
+  --padding-section: 6rem 0;
 
-  lab-anssi-presentation-anssi {
-    margin: 0 auto;
-    max-width: taille-pour-colonnes(8);
-  }
+  background-color: var(--brown-cafe-creme-975-75);
 }
