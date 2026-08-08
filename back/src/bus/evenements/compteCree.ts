@@ -1,3 +1,13 @@
+export type payloadDeCréationDeCompte = {
+  email: string;
+  prenom: string;
+  nom: string;
+  infoLettre: boolean;
+  telephone?: string;
+  pixelDeSuiviAccepté: boolean;
+  suivi?: { campagne?: string };
+};
+
 export class CompteCree {
   email!: string;
   prenom!: string;
@@ -5,27 +15,17 @@ export class CompteCree {
   infoLettre!: boolean;
   telephone?: string;
   pixelDeSuiviAccepté: boolean;
+  suivi?: {
+    campagne?: string;
+  };
 
-  constructor({
-    email,
-    prenom,
-    nom,
-    infoLettre,
-    telephone,
-    pixelDeSuiviAccepté,
-  }: {
-    email: string;
-    prenom: string;
-    nom: string;
-    infoLettre: boolean;
-    telephone?: string;
-    pixelDeSuiviAccepté: boolean;
-  }) {
+  constructor({ email, prenom, nom, infoLettre, telephone, pixelDeSuiviAccepté, suivi }: payloadDeCréationDeCompte) {
     this.email = email;
     this.prenom = prenom;
     this.nom = nom;
     this.infoLettre = infoLettre;
     this.telephone = telephone;
     this.pixelDeSuiviAccepté = pixelDeSuiviAccepté;
+    this.suivi = suivi;
   }
 }
