@@ -45,7 +45,7 @@
   cacheActions={true}
   cacheIllustration={true}
   cacheTags={true}
-  description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tellus nibh, faucibus sed elit quis, aliquet malesuada augue."
+  description="6 modules conçus pour protéger votre organisation contre les principaux risques cyber et vous accompagner dans votre mise en conformité avec NIS 2, si vous êtes concerné."
   format="banniere"
   illustrationAlt=""
   illustrationSource=""
