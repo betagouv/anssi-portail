@@ -13,6 +13,7 @@
   import Heros from '../ui/Heros.svelte';
   import type { Statistiques } from './statistiques.type';
   import Tuile from './Tuile.svelte';
+  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
 
   let mesures: Statistiques | undefined = undefined;
   let serieNonFiltree: Serie = [];
@@ -144,12 +145,7 @@
       {:else}
         <section class="pas-assez-de-resultats">
           <div class="contenu-section">
-            <img
-              src="/assets/images/illustration-dragon-aucun-resultat.svg"
-              width="282"
-              height="211"
-              alt="Pas assez de résultats"
-            />
+            <IllustrationDragonPasDeResultat texteAlternatif="Pas assez de résultats" />
             <h4>Pas de résultat 😔</h4>
             <p>
               Nous n’avons pas encore assez de données pour afficher une comparaison fiable avec les filtres

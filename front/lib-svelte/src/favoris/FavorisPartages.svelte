@@ -12,6 +12,7 @@
   import Lien from '../ui/Lien.svelte';
   import { fabriqueFilAriane } from '../ui/filAriane';
   import ContenuFavoris from './ContenuFavoris.svelte';
+  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
 
   let prenom: string = '';
   let itemsCyberPartages: (ItemCyber | Guide)[] = [];
@@ -56,12 +57,7 @@
     <div class="favoris">
       {#if itemsCyberPartages.length === 0}
         <div class="contenu-sans-favoris">
-          <img
-            src="/assets/images/illustration-dragon-aucun-resultat.svg"
-            width="282"
-            height="211"
-            alt="Aucun favori sauvegardé"
-          />
+          <IllustrationDragonPasDeResultat texteAlternatif="Aucun favori sauvegardé" />
           <h2>La liste de services et ressources est vide.</h2>
         </div>
       {:else}
