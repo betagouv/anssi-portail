@@ -19,7 +19,7 @@
 
 <style lang="scss">
   dsfr-container.actions-en-avant {
-    background-color: var(--background-alt-blue-france);
+    background-color: var(--yellow-moutarde-925-125);
     padding-block: 3rem;
 
     h4 {
