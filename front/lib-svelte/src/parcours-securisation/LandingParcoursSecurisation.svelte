@@ -78,7 +78,7 @@
     {
       titre: 'Basé sur ReCyf',
       description:
-        "Chaque mesure est issue du référentiel ReCyf, simplifiée et accompagnée d'explications pédagogiques pour faciliter votre démarche mise en conformité NIS 2.",
+        "Chaque mesure est issue du référentiel ReCyf, simplifiée et accompagnée d'explications pédagogiques pour faciliter votre démarche de mise en conformité NIS 2.",
       illustration: '/assets/images/parcours-securisation/illustration-parcours-complet-controler.svg',
     },
     {
