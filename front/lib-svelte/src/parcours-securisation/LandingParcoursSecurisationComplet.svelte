@@ -2,12 +2,20 @@
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
   import BlocContenuLanding from '../ui/BlocContenuLanding.svelte';
 
-  const contenus = [
+  type Contenu = {
+    titre: string;
+    description: string;
+    ilustration: {
+      src: string;
+      alt: string;
+    };
+  };
+
+  const contenus: Contenu[] = [
     {
       titre: 'Un programme complet',
       description:
         '6 modules pour protéger votre organisation des risques les plus courants — 6 mesures additionnelles sur la protection des données personnelles, établies avec la CNIL.',
-      ordre: 'texte-gauche',
       ilustration: {
         src: '/assets/images/parcours-securisation/illustration-parcours-complet-modules.svg',
         alt: 'Aperçu des 6 modules du parcours de sécurisation complet',
@@ -17,7 +25,6 @@
       titre: 'Basé sur ReCyF',
       description:
         "Chaque mesure est issue du référentiel cyber français (ReCyF), simplifiée et accompagnée d'explications pédagogiques pour faciliter votre démarche mise en conformité NIS 2.",
-      ordre: 'texte-droite',
       ilustration: {
         src: '/assets/images/parcours-securisation/illustration-parcours-complet-controler.svg',
         alt: 'Carte illustrant une mesure basée sur le référentiel ReCyF',
@@ -26,7 +33,6 @@
     {
       titre: 'Pédagogique',
       description: 'Pas de jargon, on vulgarise la cyber pour vous.',
-      ordre: 'texte-gauche',
       ilustration: {
         src: '/assets/images/parcours-securisation/illustration-parcours-complet-pourquoi.svg',
         alt: 'Vidéo pédagogique : pourquoi activer la vérification en deux étapes',
@@ -36,7 +42,6 @@
       titre: 'Suivez votre progression',
       description:
         'Avancez à votre rythme, module par module. Visualisez votre progression à tout moment et partagez vos résultats avec votre direction ou votre prestataire.',
-      ordre: 'texte-droite',
       ilustration: {
         src: '/assets/images/parcours-securisation/illustration-parcours-complet-progression.svg',
         alt: 'Carte de suivi de progression avec barre de complétion',
