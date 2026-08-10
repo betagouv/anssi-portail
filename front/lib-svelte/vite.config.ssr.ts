@@ -25,6 +25,7 @@ const rollupOptions: NonNullable<UserConfig['build']>['rollupOptions'] = {
     'heros-accueil': 'src/accueil/HerosAccueil.svelte',
     'parcours-securisation': 'src/parcours-securisation/LandingParcoursSecurisation.svelte',
     'parcours-cyberdepart': 'src/parcours-securisation/LandingParcoursCyberdepart.svelte',
+    'parcours-securisation-complet': 'src/parcours-securisation/LandingParcoursSecurisationComplet.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,

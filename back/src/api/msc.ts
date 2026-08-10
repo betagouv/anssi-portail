@@ -232,6 +232,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'abonnement-infolettre',
     'confirmation-abonnement-infolettre',
     'parcours-cyberdepart',
+    'parcours-securisation-complet',
   ];
 
   routesStatiques
