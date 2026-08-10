@@ -18,6 +18,7 @@
   import { rechercheParRegion } from './stores/rechercheParRegion.store';
   import { rechercheParTypeFinancement } from './stores/rechercheParTypeFinancement.store';
   import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
+  import IllustrationPasDeResultatDeRecherche from '../ui/IllustrationPasDeResultatDeRecherche.svelte';
 
   type Props = {
     financementsInitiaux?: ResumeFinancement[];
@@ -99,7 +100,7 @@
             <CarteFinancement {financement} />
           {:else}
             <div class="aucun-resultat">
-              <img src="/assets/images/homme-cherchant-avec-loupe.svg" width="175" height="317" alt="Aucun résultat" />
+              <IllustrationPasDeResultatDeRecherche />
               <p class="fr-h2">Désolé, aucun résultat trouvé</p>
               <lab-anssi-bouton
                 use:clic={reinitialiseFiltres}

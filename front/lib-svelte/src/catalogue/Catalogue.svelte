@@ -40,6 +40,7 @@
   import { rechercheParTypologie } from './stores/rechercheParTypologie.store';
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
+  import IllustrationPasDeResultatDeRecherche from '../ui/IllustrationPasDeResultatDeRecherche.svelte';
 
   type Props = {
     itemsCyber?: ItemCyber[];
@@ -209,7 +210,7 @@
       <CarteItem item={élément} avecBoutonFavori />
     {:else}
       <div class="aucun-resultat">
-        <img src="/assets/images/homme-cherchant-avec-loupe.svg" width="175" height="317" alt="Aucun résultat" />
+        <IllustrationPasDeResultatDeRecherche />
         {#if chargement}
           <p class="fr-h3">Chargement...</p>
         {:else}
