@@ -76,7 +76,7 @@
     bottom: 0;
     left: 0;
     width: 100vw;
-    background: var(--background-alt-blue-france);
+    background: var(--yellow-moutarde-925-125);
     z-index: 10;
     padding: 8px 8px 32px;
 
