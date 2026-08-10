@@ -110,7 +110,7 @@
         has-icon
         icon="arrow-right-circle-line"
         icon-place="right"
-        href="/inscription"
+        href="/modules/1"
         markup="a"
       ></dsfr-button>
     {/snippet}
@@ -145,7 +145,7 @@
         icon="arrow-right-circle-line"
         icon-place="right"
         slot="cta"
-        href="/inscription"
+        href="/modules/1"
         markup="a"
       ></dsfr-button>
     </lab-anssi-fonctionnalites>
@@ -159,7 +159,7 @@
       description="Le diagnostic cyberdépart vous permet de bénéficier d'un accompagnement gratuit d'1 heure avec un Aidant cyber
           bénévole. Retrouvez ensuite votre plan d'action sur MesServicesCyber."
       labelBouton="Demander un accompagnement gratuit"
-      lienBouton="/inscription"
+      lienBouton="/cyberdepart?origine=landing-parcours-securisation"
     >
       {#snippet illustration()}
         <img
@@ -191,7 +191,7 @@
         icon="arrow-right-circle-line"
         icon-place="right"
         slot="cta"
-        href="/inscription"
+        href="/parcours-complet"
         markup="a"
       ></dsfr-button>
     </lab-anssi-fonctionnalites>
