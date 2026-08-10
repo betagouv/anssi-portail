@@ -12,7 +12,7 @@
   <h6>Badge Cyberdépart</h6>
   <p class="texte-standard-md">
     Ce badge témoigne de l’engagement de votre organisation dans une première démarche de sécurisation. Il valorise les
-    actions mises en place pour réduire les risques cyber les plus fréquents.
+    1ères actions mises en place pour réduire les risques cyber les plus fréquents.
   </p>
   <div class="actions">
     <BoutonPartageBadgeCyberdepart typeDuBouton="secondaire" />
