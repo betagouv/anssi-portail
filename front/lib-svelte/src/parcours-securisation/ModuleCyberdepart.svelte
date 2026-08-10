@@ -13,6 +13,7 @@
   import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
   import { profilStore } from '../stores/profil.store';
   import type { ModuleRéponseApi } from './moduleReponseApi';
+  import BadgeBeta from '../ui/BadgeBeta.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -60,7 +61,7 @@
   theme="sombre"
 >
   {#snippet tags()}
-    <dsfr-badge type="accent" accent="green-emeraude" label="Bêta"></dsfr-badge>
+    <BadgeBeta />
   {/snippet}
 </Heros>
 

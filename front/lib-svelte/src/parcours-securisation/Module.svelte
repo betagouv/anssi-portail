@@ -8,6 +8,7 @@
   import MesuresDeModule from './MesuresDeModule.svelte';
   import Progression from './Progression.svelte';
   import type { ModuleRéponseApi } from './moduleReponseApi';
+  import BadgeBeta from '../ui/BadgeBeta.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -39,8 +40,12 @@
   illustrationAlt=""
   illustrationSource=""
   titre={module.nom}
-  theme="sombre"
-></Heros>
+  theme="clair"
+>
+  {#snippet tags()}
+    <BadgeBeta />
+  {/snippet}
+</Heros>
 
 <dsfr-container>
   <div class="progression">
