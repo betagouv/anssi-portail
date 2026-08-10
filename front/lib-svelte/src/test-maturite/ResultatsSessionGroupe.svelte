@@ -15,6 +15,7 @@
   import Heros from '../ui/Heros.svelte';
   import { fabriqueFilAriane } from '../ui/filAriane';
   import { profilStore } from '../stores/profil.store';
+  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
 
   type ResumeNiveau = {
     total: number;
@@ -109,12 +110,7 @@
 {:else}
   <dsfr-container>
     <div class="contenu-section contenu-sans-resultat">
-      <img
-        src="/assets/images/illustration-dragon-aucun-resultat.svg"
-        width="282"
-        height="211"
-        alt="Pas encore de résultat soumis par les participants"
-      />
+      <IllustrationDragonPasDeResultat texteAlternatif="Pas encore de résultat soumis par les participants" />
       <h4>Encouragez vos participants à finaliser le test</h4>
       <p>
         Les résultats seront disponibles dès que les participants auront complété le test.<br /> Invitez-les à le finaliser.

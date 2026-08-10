@@ -15,6 +15,7 @@
   import { construisSerie } from './resultatTest';
   import ResumeRadarComparaison from './ResumeRadarComparaison.svelte';
   import type { Serie, SerieRadar } from './Serie';
+  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
 
   const libelleDeNiveau = (idNiveau: IdNiveau) => {
     return niveauxMaturite.find((niveau) => niveau.id === idNiveau)!.label;
@@ -163,12 +164,7 @@
 {:else}
   <dsfr-container class="pas-assez-de-resultats">
     <div class="contenu-section">
-      <img
-        src="/assets/images/illustration-dragon-aucun-resultat.svg"
-        width="282"
-        height="211"
-        alt="Pas assez de résultats"
-      />
+      <IllustrationDragonPasDeResultat texteAlternatif="Pas assez de résultats" />
       <h4>Pas de résultat 😔</h4>
       <p>
         Nous n’avons pas encore assez de données pour afficher une comparaison fiable avec les filtres sélectionnés.

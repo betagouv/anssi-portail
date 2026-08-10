@@ -17,6 +17,7 @@
   import { decodeEntitesHtml, guidePourCarteItem } from './guide';
   import InciteASAbonner from './InciteASAbonner.svelte';
   import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
+  import IllustrationDragonPasDeResultat from '../../ui/IllustrationDragonPasDeResultat.svelte';
 
   type Props = {
     guideInitial?: Guide;
@@ -190,12 +191,7 @@
     <div class="non-trouve">
       <h1>Guide introuvable</h1>
       <p>Le guide demandé n’a pas pu être trouvé.</p>
-      <img
-        src="/assets/images/illustration-dragon-aucun-resultat.svg"
-        width="282"
-        height="211"
-        alt="Guide introuvable"
-      />
+      <IllustrationDragonPasDeResultat texteAlternatif="Guide introuvable" />
     </div>
   </dsfr-container>
 {/if}
