@@ -19,4 +19,5 @@ export const composantsAutorisés: string[] = [
   'heros-accueil',
   'parcours-securisation',
   'parcours-cyberdepart',
+  'parcours-securisation-complet',
 ];
