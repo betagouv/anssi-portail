@@ -68,7 +68,7 @@
         has-icon
         icon="arrow-right-circle-line"
         icon-place="right"
-        href="/inscription"
+        href="/parcours-complet"
         markup="a"
       ></dsfr-button>
     {/snippet}
@@ -109,7 +109,7 @@
         has-icon
         icon="arrow-right-circle-line"
         icon-place="right"
-        href="/inscription"
+        href="/parcours-complet"
         markup="a"
       ></dsfr-button>
     </div>
