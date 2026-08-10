@@ -43,7 +43,7 @@
         has-description="true"
         has-header-badge={estTerminé(module) || undefined}
         no-link={true}
-        src="/assets/images/image-generique.avif"
+        src={`/assets/images/parcours-securisation/module-${module.id}.svg`}
         title={module.titre}
         has-detail-end={true}
       >
