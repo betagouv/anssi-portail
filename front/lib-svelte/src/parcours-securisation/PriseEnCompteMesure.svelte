@@ -37,13 +37,14 @@
   </div>
 {:else}
   <div class="conteneur-non-pris-en-compte">
-    <div class="aide">
-      <lab-anssi-icone
-        nom="question-line"
-        taille="sm"
-        title="une recommandation prise en compte signifie que vous avez compris son intérêt, vous avez identifié si elle est pertinente pour votre organisation et si c'est le cas, vous allez désormais faire en sorte de l'appliquer."
-      ></lab-anssi-icone>
-    </div>
+    <dsfr-tooltip
+      class="aide"
+      content="une recommandation prise en compte signifie que vous avez compris son intérêt, vous avez identifié si elle est pertinente pour votre organisation et si c'est le cas, vous allez désormais faire en sorte de l'appliquer"
+      id="tooltip"
+      type="hover"
+    >
+      <dsfr-button label="infobulle" preset="tooltip"></dsfr-button>
+    </dsfr-tooltip>
     <p class="texte-article-lg">Cette mesure est-elle prise en compte ?</p>
     <div class="action">
       <Bouton
@@ -98,10 +99,6 @@
       display: flex;
       flex-direction: column;
       margin-inline: 16px;
-    }
-    lab-anssi-icone {
-      cursor: help;
-      margin-right: 8px;
     }
   }
 
