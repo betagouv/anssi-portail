@@ -365,12 +365,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ressourceAvisMesure(configurationServeur),
       ressourcePriseEnCompte(configurationServeur)
     );
-    enregistreRoute('/parcours-securisation', ressourcePagesJekyll(configurationServeur, 'parcours-securisation'));
-    enregistreRoute('/parcours-cyberdepart', ressourcePagesJekyll(configurationServeur, 'parcours-cyberdepart'));
-    enregistreRoute(
-      '/parcours-securisation-complet',
-      ressourcePagesJekyll(configurationServeur, 'parcours-securisation-complet')
-    );
+    const landingPages = ['parcours-securisation', 'parcours-cyberdepart', 'parcours-securisation-complet'];
+    landingPages.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
     enregistreRoute('/api/mesures.csv', ressourceMesureCsv(configurationServeur));
     enregistreRoute('/api/modules', ressourceModule(configurationServeur));
     enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(303, '/modules/1'));
