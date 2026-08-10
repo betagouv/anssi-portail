@@ -1,10 +1,11 @@
 <script lang="ts">
   import { clic } from '../../directives/actions.svelte';
   import { exigencesFiltrees } from '../stores/exigencesFiltrees.store';
+  import IllustrationPasDeResultatDeRecherche from '../../ui/IllustrationPasDeResultatDeRecherche.svelte';
 </script>
 
 <div class="aucun-resultat">
-  <img src="/assets/images/homme-cherchant-avec-loupe.svg" width="175" height="317" alt="Aucun résultat" />
+  <IllustrationPasDeResultatDeRecherche />
   <h3>Désolé, aucun résultat trouvé</h3>
   <dsfr-button
     label="Réinitialiser les filtres"
