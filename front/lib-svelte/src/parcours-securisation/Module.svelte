@@ -21,7 +21,7 @@
     const reponse = await axios.get<ModuleRéponseApi>(`/api/modules/${idDuModule}`);
     module = reponse.data;
     if (sessionStorage.getItem('mesure-prise-en-compte') === 'true') {
-      toasterStore.succes('Mesure déclarée prise en compte', 'Mesure déclarée prise en compte');
+      toasterStore.succes('Mesure déclarée prise en compte', 'Votre progression a été mise à jour.');
       sessionStorage.removeItem('mesure-prise-en-compte');
     }
   });
