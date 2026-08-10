@@ -228,7 +228,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'collectivites',
     'associations',
     'entreprises',
-    'parcours-securisation',
     'sante',
     'abonnement-infolettre',
     'confirmation-abonnement-infolettre',
@@ -366,6 +365,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ressourceAvisMesure(configurationServeur),
       ressourcePriseEnCompte(configurationServeur)
     );
+    enregistreRoute('/parcours-securisation', ressourcePagesJekyll(configurationServeur, 'parcours-securisation'));
     enregistreRoute('/api/mesures.csv', ressourceMesureCsv(configurationServeur));
     enregistreRoute('/api/modules', ressourceModule(configurationServeur));
     enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(303, '/modules/1'));
