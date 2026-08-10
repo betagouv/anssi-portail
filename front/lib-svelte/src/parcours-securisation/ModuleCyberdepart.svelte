@@ -58,7 +58,11 @@
   illustrationSource=""
   titre={module.nom}
   theme="sombre"
-></Heros>
+>
+  {#snippet tags()}
+    <dsfr-badge type="accent" accent="green-emeraude" label="Bêta"></dsfr-badge>
+  {/snippet}
+</Heros>
 
 <ModaleBadgeCyberdepartDebloque bind:estOuverte={badgeCyberdépartDebloqué} />
 
