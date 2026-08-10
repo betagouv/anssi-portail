@@ -128,7 +128,7 @@
       }
       &:before {
         content: '';
-        background-color: var(--background-contrast-blue-france);
+        background-color: var(--yellow-moutarde-925-125);
         position: absolute;
         top: 0rem;
         bottom: -1rem;
