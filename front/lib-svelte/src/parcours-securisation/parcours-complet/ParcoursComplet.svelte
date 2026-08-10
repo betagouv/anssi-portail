@@ -9,6 +9,7 @@
   import VueModule from './VueModule.svelte';
   import VueListeMesures from './VueListeMesures.svelte';
   import Lien from '../../ui/Lien.svelte';
+  import BadgeBeta from '../../ui/BadgeBeta.svelte';
 
   type ModulePrésentation = {
     id: number;
@@ -51,7 +52,11 @@
   illustrationSource=""
   titre="Parcours de sécurisation"
   theme="sombre"
-></Heros>
+>
+  {#snippet tags()}
+    <BadgeBeta />
+  {/snippet}
+</Heros>
 <dsfr-container>
   <div class="progression-totale">
     <Progression actuel={totalMesuresPrisesEnCompte} max={totalMesures} />
