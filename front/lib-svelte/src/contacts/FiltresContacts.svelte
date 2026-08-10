@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { clic } from '../directives/actions.svelte';
   import SelectRegion from '../test-maturite/SelectRegion.svelte';
   import SelectSecteurContacts from './SelectSecteurContacts.svelte';
 
@@ -23,16 +24,7 @@
   <legend>Secteur d’activité</legend>
   <SelectSecteurContacts libelle="Sélectionner un secteur d’activité" bind:secteur={secteurSelectionne} />
 </fieldset>
-<lab-anssi-bouton
-  on:click={reinitialiseFiltres}
-  on:keypress
-  role="button"
-  taille="md"
-  tabindex={0}
-  titre="Réinitialiser les filtres"
-  variante="primaire"
-  largeurMaximale
-></lab-anssi-bouton>
+<dsfr-button label="Réinitialiser les filtres" centered use:clic={reinitialiseFiltres}></dsfr-button>
 
 <style lang="scss">
   .filtres {
@@ -40,7 +32,7 @@
     flex-direction: column;
   }
 
-  lab-anssi-bouton {
-    margin-top: 16px;
+  dsfr-button {
+    display: flex;
   }
 </style>

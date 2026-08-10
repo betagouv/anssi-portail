@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { clic } from '../directives/actions.svelte';
   import SelectRegion from '../test-maturite/SelectRegion.svelte';
   import ChoixFiltreTypeFinancement from './ChoixFiltreTypeFinancement.svelte';
   import ChoixFiltreTypeOrganisation from './ChoixFiltreTypeOrganisation.svelte';
@@ -64,16 +65,8 @@
     {/if}
   </ul>
 </fieldset>
-<lab-anssi-bouton
-  on:click={reinitialiseFiltres}
-  on:keypress
-  role="button"
-  taille="md"
-  tabindex={0}
-  titre="Réinitialiser les filtres"
-  variante="primaire"
-  largeurMaximale
-></lab-anssi-bouton>
+
+<dsfr-button label="Réinitialiser les filtres" centered use:clic={reinitialiseFiltres}></dsfr-button>
 
 <style lang="scss">
   .filtres {

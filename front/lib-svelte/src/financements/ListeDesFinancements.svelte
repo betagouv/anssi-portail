@@ -1,7 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount, untrack } from 'svelte';
-  import { clic } from '../directives/actions.svelte';
   import { profilStore } from '../stores/profil.store';
   import { fabriqueFilAriane } from '../ui/filAriane';
   import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
@@ -19,6 +18,7 @@
   import { rechercheParTypeFinancement } from './stores/rechercheParTypeFinancement.store';
   import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
   import IllustrationPasDeResultatDeRecherche from '../ui/IllustrationPasDeResultatDeRecherche.svelte';
+  import { clic } from '../directives/actions.svelte';
 
   type Props = {
     financementsInitiaux?: ResumeFinancement[];
@@ -102,15 +102,7 @@
             <div class="aucun-resultat">
               <IllustrationPasDeResultatDeRecherche />
               <p class="fr-h2">Désolé, aucun résultat trouvé</p>
-              <lab-anssi-bouton
-                use:clic={reinitialiseFiltres}
-                role="button"
-                taille="md"
-                tabindex={0}
-                titre="Réinitialiser les filtres"
-                variante="primaire"
-                largeurMaximale
-              ></lab-anssi-bouton>
+              <dsfr-button label="Réinitialiser les filtres" use:clic={reinitialiseFiltres}></dsfr-button>
             </div>
           {/each}
         {/if}
