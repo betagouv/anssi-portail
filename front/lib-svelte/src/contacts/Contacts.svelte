@@ -13,6 +13,7 @@
   import { estCodeRegion } from './contacts.type';
   import FiltresContacts from './FiltresContacts.svelte';
   import NoteInformation from './NoteInformation.svelte';
+  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   let regionSelectionnee: string = $state('');
   let secteurSelectionne: string = $state('');
@@ -191,7 +192,16 @@
     {:else}
       <div class="aucun-resultat">
         <NoteInformation />
-        <img src="/assets/images/contacts-resultat-vide.svg" width="188" height="171" alt="Aucun résultat" />
+        {#if afficheNouvelleDA}
+          <img
+            src="/assets/images/contacts-resultat-vide-nouvelle-da.svg"
+            width="188"
+            height="171"
+            alt="Aucun résultat"
+          />
+        {:else}
+          <img src="/assets/images/contacts-resultat-vide.svg" width="188" height="171" alt="Aucun résultat" />
+        {/if}
         <h5>Sélectionnez une région ou un secteur d’activité depuis le menu de filtres.</h5>
       </div>
     {/if}
