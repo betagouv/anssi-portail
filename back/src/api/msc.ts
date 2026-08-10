@@ -231,8 +231,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'sante',
     'abonnement-infolettre',
     'confirmation-abonnement-infolettre',
-    'parcours-cyberdepart',
-    'parcours-securisation-complet',
   ];
 
   routesStatiques
@@ -368,6 +366,11 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ressourcePriseEnCompte(configurationServeur)
     );
     enregistreRoute('/parcours-securisation', ressourcePagesJekyll(configurationServeur, 'parcours-securisation'));
+    enregistreRoute('/parcours-cyberdepart', ressourcePagesJekyll(configurationServeur, 'parcours-cyberdepart'));
+    enregistreRoute(
+      '/parcours-securisation-complet',
+      ressourcePagesJekyll(configurationServeur, 'parcours-securisation-complet')
+    );
     enregistreRoute('/api/mesures.csv', ressourceMesureCsv(configurationServeur));
     enregistreRoute('/api/modules', ressourceModule(configurationServeur));
     enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(303, '/modules/1'));
