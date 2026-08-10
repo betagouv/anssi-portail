@@ -12,8 +12,12 @@ styles:
     <p class="texte-chapo-xl">Nous sommes désolés, la page que vous recherchez n'existe pas.</p>
     <dsfr-button markup="a" href="/" label="Revenir à la page d’accueil"></dsfr-button>
     <picture>
-      <source srcset="/assets/images/erreur-404.avif" type="image/avif">
-      <img src="/assets/images/erreur-404.webp" width="1176" height="783" alt="" loading="lazy">
+      {% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
+        <img src="/assets/images/erreur-404.svg" />
+      {% else %}
+        <source srcset="/assets/images/erreur-404.avif" type="image/avif">
+        <img src="/assets/images/erreur-404.webp" width="1176" height="783" alt="" loading="lazy">
+      {% endif %}
     </picture>
   </div>
 </dsfr-container>
