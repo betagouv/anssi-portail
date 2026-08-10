@@ -41,6 +41,7 @@
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
   import IllustrationPasDeResultatDeRecherche from '../ui/IllustrationPasDeResultatDeRecherche.svelte';
+  import { clic } from '../directives/actions.svelte';
 
   type Props = {
     itemsCyber?: ItemCyber[];
@@ -162,7 +163,7 @@
     <FiltreSource />
   {/if}
 
-  <input type="button" class="bouton primaire" value="Réinitialiser les filtres" onclick={reinitialiseFiltres} />
+  <dsfr-button centered label="Réinitialiser les filtres" use:clic={reinitialiseFiltres}></dsfr-button>
 </FiltresMobile>
 
 <dsfr-container class="barre-recherche-mobile">
@@ -203,7 +204,7 @@
         <FiltreTypologie />
         <FiltreSource />
       {/if}
-      <input type="button" class="bouton primaire" value="Réinitialiser les filtres" onclick={reinitialiseFiltres} />
+      <dsfr-button centered label="Réinitialiser les filtres" use:clic={reinitialiseFiltres}></dsfr-button>
     </FiltresBureau>
 
     {#each élémentsDuCatalogue as élément (élément.id)}
@@ -215,12 +216,7 @@
           <p class="fr-h3">Chargement...</p>
         {:else}
           <p class="fr-h3">Désolé, aucun résultat trouvé</p>
-          <input
-            type="button"
-            class="bouton primaire"
-            value="Réinitialiser les filtres"
-            onclick={reinitialiseFiltres}
-          />
+          <dsfr-button label="Réinitialiser les filtres" use:clic={reinitialiseFiltres}></dsfr-button>
         {/if}
       </div>
     {/each}
