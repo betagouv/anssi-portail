@@ -141,6 +141,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ['/mentionsLegales', '/mentions-legales'],
     ['/guides/la-defense-en-profondeur-appliquee-aux-systemes-dinformation', '/guides/essentiels-defense-profondeur'],
     ['/services/mon-espace-nis2.html', '/nis2'],
+    ['/promouvoir-messervicescyber', '/'],
+    ['/promouvoir-diagnostic-cyber', '/'],
   ].forEach(([precedent, nouveau]: string[]) => {
     app.use(precedent, (requete: Request, reponse: Response, suite: NextFunction) => {
       if (requete.originalUrl === precedent || requete.originalUrl === `${precedent}/`) {
@@ -218,8 +220,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'statistiques',
     'inscription',
     'cyberdepart',
-    'promouvoir-messervicescyber',
-    'promouvoir-diagnostic-cyber',
     'session-groupe',
     'resultats-session-groupe',
     'prestataires-labellises',
