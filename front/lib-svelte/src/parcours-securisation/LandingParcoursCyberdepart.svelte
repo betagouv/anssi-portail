@@ -3,7 +3,16 @@
   import BlocDiagnostic from '../ui/BlocDiagnostic.svelte';
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
 
-  const contenus = [
+  type Contenu = {
+    titre: string;
+    description: string;
+    ilustration: {
+      src: string;
+      alt: string;
+    };
+  };
+
+  const contenus: Contenu[] = [
     {
       titre: 'Rapides à mettre en place',
       description:
