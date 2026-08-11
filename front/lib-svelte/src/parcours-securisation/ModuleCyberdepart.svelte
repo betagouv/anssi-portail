@@ -58,7 +58,7 @@
   illustrationAlt=""
   illustrationSource=""
   titre={module.nom}
-  theme="sombre"
+  theme="pastel"
 >
   {#snippet tags()}
     <BadgeBeta />

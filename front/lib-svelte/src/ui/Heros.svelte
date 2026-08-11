@@ -7,7 +7,7 @@
 
   type Props = {
     format: 'banniere' | 'heros' | 'heros-centre' | 'details';
-    theme: 'sombre' | 'clair'; // inversé / clair
+    theme: 'sombre' | 'clair' | 'pastel'; // inversé / clair
     filAriane?: Snippet;
     segmentsFilAriane?: Segment[];
     cacheFilAriane?: boolean;
@@ -119,7 +119,8 @@
     <lab-anssi-bandeau-page
       simple={format === 'banniere'}
       {ficheCatalogue}
-      inverse={theme === 'clair'}
+      inverse={theme === 'clair' || theme === 'pastel'}
+      class:pastel={theme === 'pastel'}
       avecBadges={!cacheTags}
       avecFilAriane={!cacheFilAriane}
       liensFilAriane={enPropriétéWebC(segmentsFilAriane)}
@@ -190,6 +191,10 @@
       background-image: url('/assets/images/motif-fond-service.avif');
       background-color: var(--couleur-fond, #eee);
     }
+  }
+
+  lab-anssi-bandeau-page.pastel {
+    --background-color: var(--yellow-moutarde-975-75);
   }
 
   .banniere,

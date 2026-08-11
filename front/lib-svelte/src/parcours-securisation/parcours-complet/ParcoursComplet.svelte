@@ -51,7 +51,7 @@
   illustrationAlt=""
   illustrationSource=""
   titre="Parcours de sécurisation"
-  theme="sombre"
+  theme="pastel"
 >
   {#snippet tags()}
     <BadgeBeta />
