@@ -178,7 +178,7 @@
     <lab-anssi-fonctionnalites
       titre="Votre organisation agit déjà pour sa cybersécurité ?"
       description="Accédez à 57 mesures pour vous protéger contre les 5 risques cyber les plus courants."
-      fonctionnalites={fonctionnalitesParcoursComplet}
+      fonctionnalites={enPropriétéWebC(fonctionnalitesParcoursComplet)}
       orientation-media="gauche"
       cliquable
       avec-cta
