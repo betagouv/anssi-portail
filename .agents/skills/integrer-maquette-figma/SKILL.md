@@ -67,6 +67,10 @@ Règles impératives :
 
 - ne jamais inventer tag `dsfr-*` ou `lab-anssi-*` ;
 - utiliser nom exact d'attribut HTML indiqué par manifest installé ;
+- pour toute propriété objet ou tableau passée à un web component depuis
+  Svelte, importer `enPropriétéWebC` depuis `$plateforme/webComponent` et
+  envelopper valeur avec cette fonction ; les propriétés primitives ne la
+  nécessitent pas ;
 - préférer composant Svelte existant ou HTML natif si UI Kit ne couvre pas cas ;
 - préférer token CSS local à couleur codée en dur ;
 - préférer SVG pour illustrations et AVIF pour photos ;
