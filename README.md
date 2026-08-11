@@ -110,11 +110,10 @@ $ docker compose exec db createdb -U postgres msc
 
 ### Installation des dépendances du projet
 
-- Installer les dépendances Jekyll et Node du projet.
+- Installer les dépendances Jekyll et Node du projet:
 
 ```shell
-$ bundler install --gemfile=front/Gemfile
-$ pnpm install --frozen-lockfile
+$ pnpm bootstrap
 ```
 
 ### Installation de Prek
