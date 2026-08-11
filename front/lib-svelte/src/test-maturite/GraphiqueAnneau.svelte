@@ -111,22 +111,22 @@
   }
 
   .secteur-0 {
-    fill: #6369f1;
+    fill: #5c68e5;
   }
 
   .secteur-1 {
-    fill: #fec54b;
+    fill: #82b5f2;
   }
 
   .secteur-2 {
-    fill: #8248a1;
+    fill: #28598f;
   }
 
   .secteur-3 {
-    fill: #f26c85;
+    fill: #30a7ae;
   }
 
   .secteur-4 {
-    fill: #8ed4a3;
+    fill: #81eef5;
   }
 </style>
