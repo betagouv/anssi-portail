@@ -111,6 +111,9 @@
 {:else}
   <dsfr-container class="test-maturite">
     {#if introFaite}
+      <div class="lien-retour">
+        <Lien href="/" libelle="Retour à l'accueil" icone="arrow-go-back-line"></Lien>
+      </div>
       {#if organisateurSessionGroupe}
         <lab-anssi-alerte
           description="En tant qu’organisateur, vos réponses ne seront pas enregistrées ni prises en compte dans les résultats du groupe."
@@ -147,7 +150,6 @@
             </div>
 
             <div class="commandes">
-              <Lien href="/" libelle="Retour à l'accueil"></Lien>
               <Bouton
                 desactive={$questionnaireStore.questionCourante === 0}
                 libelle="Précédent"
@@ -211,5 +213,9 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+  }
+
+  .lien-retour {
+    margin-bottom: 48px;
   }
 </style>
