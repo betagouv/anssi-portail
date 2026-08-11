@@ -3,6 +3,7 @@
   sources ? import ./npins,
 }:
 let
+  # Utilise .nvmrc comme source de vérité pour la version majeure de Node.js.
   nodeVersion = pkgs.lib.strings.trim (builtins.readFile ./.nvmrc);
   nodejs =
     pkgs."nodejs_${nodeVersion}" or (throw "Unsupported Node.js version in .nvmrc: ${nodeVersion}");
@@ -10,7 +11,23 @@ let
     pkgs."nodejs-slim_${nodeVersion}"
       or (throw "Unsupported Node.js version in .nvmrc: ${nodeVersion}");
   corepack = pkgs.corepack.override { inherit nodejs-slim; };
-  bundler = pkgs.bundler.override { ruby = pkgs.ruby_4_0; };
+
+  # Utilise .ruby-version comme source de vérité pour la version majeure et mineure de Ruby.
+  rubyVersion = pkgs.lib.strings.trim (builtins.readFile ./.ruby-version);
+  rubyAttribute = "ruby_${
+    builtins.replaceStrings [ "." ] [ "_" ] (pkgs.lib.versions.majorMinor rubyVersion)
+  }";
+  ruby =
+    let
+      package =
+        pkgs.${rubyAttribute} or (throw "Unsupported Ruby version in .ruby-version: ${rubyVersion}");
+    in
+    if toString package.version == rubyVersion then
+      package
+    else
+      throw "Ruby version ${rubyVersion} in .ruby-version resolves to ${package.version} in nixpkgs";
+  bundler = pkgs.bundler.override { inherit ruby; };
+
   playwrightCli = pkgs.buildNpmPackage {
     pname = "playwright-cli";
     inherit ((builtins.fromJSON (builtins.readFile (sources."playwright-cli" + "/package.json"))))
@@ -27,7 +44,7 @@ in
       nodejs
       corepack
       uv
-      ruby_4_0
+      ruby
       bundler
       bash-language-server
       marksman
