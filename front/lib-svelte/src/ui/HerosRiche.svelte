@@ -12,12 +12,26 @@
     propriétésFilAriane?: PropriétésFilAriane;
     titre: string;
     variante: 'bleu-clair' | 'vert-clair' | 'cafe-creme';
+    mentionAdditionnelle?: string;
   };
 
-  const { actions, badges = [], description, illustration, propriétésFilAriane, titre, variante }: Props = $props();
+  const {
+    actions,
+    badges = [],
+    description,
+    illustration,
+    propriétésFilAriane,
+    titre,
+    variante,
+    mentionAdditionnelle,
+  }: Props = $props();
 </script>
 
-<dsfr-container class={['conteneur', variante]} class:avecFilAriane={!!propriétésFilAriane}>
+<dsfr-container
+  class={['conteneur', variante]}
+  class:avecMentionAdditionnelle={!!mentionAdditionnelle}
+  class:avecFilAriane={!!propriétésFilAriane}
+>
   {#if propriétésFilAriane}
     <FilAriane {...propriétésFilAriane} />
   {/if}
@@ -37,14 +51,31 @@
     </div>
   </div>
 </dsfr-container>
+{#if mentionAdditionnelle}
+  <dsfr-container class="mention-additionnelle">
+    {mentionAdditionnelle}
+  </dsfr-container>
+{/if}
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
   @use '../../../assets/styles/grille' as *;
 
+  .mention-additionnelle {
+    background-color: var(--background-alt-brown-cafe-creme);
+    color: #666666;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    padding-bottom: 2rem;
+  }
+
   .conteneur {
     display: flex;
-    padding: 1rem 1rem 6rem;
+    padding-bottom: 6rem;
+
+    &.avecMentionAdditionnelle {
+      padding-bottom: 2rem;
+    }
 
     &.bleu-clair {
       background-color: var(--blue-france-925-125);
