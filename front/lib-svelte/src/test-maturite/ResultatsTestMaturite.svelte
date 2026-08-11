@@ -68,11 +68,11 @@
   {/snippet}
 </Alternatives>
 
-<PropositionRefaireTest />
-
 {#if $profilStore && lienActif}
   <NavigationTertiaire {liens} bind:lienActif />
 {/if}
+
+<PropositionRefaireTest />
 
 {#if lienActif === '#votre-organisation'}
   <ResultatsMonOrganisation {animeTuiles} dateRealisation={dateRealisationDernierTest} {defilementAutomatique} />
