@@ -24,7 +24,6 @@ describe('La ressource Statistiques', () => {
       entrepotResultatTest = new EntrepotResultatTestMemoire();
       monAideCyber = {
         creeDemandeAide: async () => {},
-        statistiques: async () => ({ nombreDiagnostics: 0 }),
       };
       serveur = creeServeur({
         ...configurationDeTestDuServeur,
@@ -64,11 +63,9 @@ describe('La ressource Statistiques', () => {
     });
 
     it('renvoie le nombre de diagnostics cyber', async () => {
-      monAideCyber.statistiques = async () => ({ nombreDiagnostics: 10 });
-
       const reponse = await request(serveur).get('/api/statistiques');
 
-      assert.equal(reponse.body.diagnosticsCyber, 10);
+      assert.equal(reponse.body.diagnosticsCyber, 6516);
     });
 
     it('renvoie les niveaux de maturité', async () => {

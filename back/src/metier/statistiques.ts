@@ -1,4 +1,3 @@
-import { AdaptateurMonAideCyber } from '../infra/adaptateurMonAideCyber.js';
 import { EntrepotResultatTest } from './entrepotResultatTest.js';
 import { EntrepotUtilisateur } from './entrepotUtilisateur.js';
 import { IdNiveauMaturite } from './resultatTestMaturite.js';
@@ -20,17 +19,15 @@ export type Statistiques = {
 };
 
 const SERVICES_ET_RESSOURCES_CONSULTES = 127000;
+const NOMBRES_DE_DIAGNOSTIC_CYBER = 6516;
 
 export const calculeStatistiques = async ({
   entrepotUtilisateur,
   entrepotResultatTest,
-  adaptateurMonAideCyber,
 }: {
   entrepotUtilisateur: EntrepotUtilisateur;
   entrepotResultatTest: EntrepotResultatTest;
-  adaptateurMonAideCyber: AdaptateurMonAideCyber;
 }): Promise<Statistiques> => {
-  const { nombreDiagnostics } = await adaptateurMonAideCyber.statistiques();
   const tousLesTests = await entrepotResultatTest.tousEnOmettantUtilisateur();
   const listeDesNiveaux: IdNiveauMaturite[] = tousLesTests.map((test) => test.niveau());
   const parNiveau = listeDesNiveaux.reduce(
@@ -67,6 +64,6 @@ export const calculeStatistiques = async ({
       total: await entrepotResultatTest.taille(),
       parNiveau,
     },
-    diagnosticsCyber: nombreDiagnostics,
+    diagnosticsCyber: NOMBRES_DE_DIAGNOSTIC_CYBER,
   };
 };
