@@ -131,12 +131,19 @@
 
           {#if montreProposition}
             <div class="propositions">
-              {#each etapesTestMaturite[$questionnaireStore.questionCourante].propositions as proposition, index (proposition)}
-                <label>
-                  <input type="radio" bind:group={reponseCourante} value={index} />
-                  <span>{index + 1}.&nbsp;{proposition}</span>
-                </label>
-              {/each}
+              <dsfr-radios-group
+                value={reponseCourante}
+                radios={etapesTestMaturite[$questionnaireStore.questionCourante].propositions.map(
+                  (proposition, index) => ({
+                    label: `${index + 1}. ${proposition}`,
+                    id: `radio-${index}`,
+                    value: index,
+                  })
+                )}
+                onvaluechanged={(e: CustomEvent<number>) => {
+                  reponseCourante = e.detail;
+                }}
+              ></dsfr-radios-group>
             </div>
 
             <div class="commandes">
