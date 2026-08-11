@@ -1,11 +1,16 @@
 <script lang="ts">
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import { afficheNouvelleDA } from '$plateforme/environnement';
 </script>
 
 <div class="tuiles-niveau">
   {#each niveauxMaturite as niveau, index (index)}
-    <div class="tuile-niveau">
-      <img class="plante" src="/assets/images/test-maturite/niveaux/{niveau.id}.svg" alt="Niveau de maturité" />
+    <div class="tuile-niveau" class:avec-nouvelle-da={afficheNouvelleDA}>
+      <img
+        class="plante"
+        src="/assets/images/test-maturite/niveaux/{niveau.id}{afficheNouvelleDA ? '-nouvelle-da' : ''}.svg"
+        alt="Niveau de maturité"
+      />
       <span>{niveau.label}</span>
     </div>
   {/each}
@@ -65,6 +70,12 @@
         border: 2px solid #0d0c21;
         left: 0;
         right: 0;
+      }
+
+      &.avec-nouvelle-da {
+        &:before {
+          border-color: #000091;
+        }
       }
     }
   }
