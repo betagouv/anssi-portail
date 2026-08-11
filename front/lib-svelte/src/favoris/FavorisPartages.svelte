@@ -13,6 +13,7 @@
   import { fabriqueFilAriane } from '../ui/filAriane';
   import ContenuFavoris from './ContenuFavoris.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
+  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   let prenom: string = '';
   let itemsCyberPartages: (ItemCyber | Guide)[] = [];
@@ -44,7 +45,7 @@
   description={`Cette liste de services et ressources est partagée par ${prenom}`}
   format="banniere"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
-  theme="sombre"
+  theme={afficheNouvelleDA ? 'clair' : 'sombre'}
   titre="Services et ressources partagés"
 >
   {#snippet filAriane()}
