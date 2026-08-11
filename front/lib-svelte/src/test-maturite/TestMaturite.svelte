@@ -15,6 +15,7 @@
   import SelectTailleOrganisation from './SelectTailleOrganisation.svelte';
   import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
   import { etapesTestMaturite } from './TestMaturite.donnees';
+  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   let afficheResultats = false;
   let introFaite = false;
@@ -179,7 +180,9 @@
         </div>
         <div class="illustration">
           <img
-            src="/assets/images/test-maturite/illustration-{idQuestionCourante}.svg"
+            src="/assets/images/test-maturite/illustration-{idQuestionCourante}{afficheNouvelleDA
+              ? '-nouvelle-da'
+              : ''}.svg"
             width="432"
             height="324"
             alt=""
