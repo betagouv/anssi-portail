@@ -1,11 +1,12 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte';
-
   type Props = {
     titre: string;
     description: string;
     alignement: 'texte-gauche' | 'texte-droite';
-    illustration: Snippet;
+    illustration: {
+      src: string;
+      alt: string;
+    };
   };
 
   const { titre, description, alignement, illustration }: Props = $props();
@@ -18,7 +19,7 @@
   </div>
 
   <div class="illustration">
-    {@render illustration()}
+    <img src={illustration.src} alt={illustration.alt} />
   </div>
 </div>
 
