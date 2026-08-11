@@ -5,4 +5,8 @@ styles:
   - /assets/styles/encart-cyberdepart.css
 ---
 
+{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
+<link rel="stylesheet" href="{{ "/assets/styles/test-maturite-nouvelle-da.css" | relative_url }}">
+{% endif %}
+
 {{content}}

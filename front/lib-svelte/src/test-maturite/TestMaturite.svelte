@@ -7,7 +7,6 @@
   import Etapier from '../ui/Etapier.svelte';
   import Lien from '../ui/Lien.svelte';
   import IntroductionTestMaturite from './IntroductionTestMaturite.svelte';
-  import PartageTest from './PartageTest.svelte';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
   import { enregistreIdResultatTestPourRevendication } from './resultatTest';
   import SelectRegion from './SelectRegion.svelte';
@@ -108,104 +107,91 @@
 
 {#if afficheResultats}
   <ResultatsTestMaturite />
-{:else}
+{:else if introFaite}
   <dsfr-container class="test-maturite">
-    {#if introFaite}
-      <div class="lien-retour">
-        <Lien href="/" libelle="Retour à l'accueil" icone="arrow-go-back-line"></Lien>
-      </div>
-      {#if organisateurSessionGroupe}
-        <lab-anssi-alerte
-          description="En tant qu’organisateur, vos réponses ne seront pas enregistrées ni prises en compte dans les résultats du groupe."
-        ></lab-anssi-alerte>
-      {/if}
-      <div class="contenu-test" bind:this={contenuTest}>
-        <div class="formulaire">
-          <Etapier
-            etapeCourante={$questionnaireStore.questionCourante + 1}
-            nombreEtapes={7}
-            titreEtapeCourante={etapesTestMaturite[$questionnaireStore.questionCourante].titre}
-            titreEtapeSuivante={etapesTestMaturite[$questionnaireStore.questionCourante + 1]?.titre}
-          />
-          <h2>
-            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-            {@html aseptiseHtml(etapesTestMaturite[$questionnaireStore.questionCourante].question)}
-          </h2>
+    <div class="lien-retour">
+      <Lien href="/" libelle="Retour à l'accueil" icone="arrow-go-back-line"></Lien>
+    </div>
+    {#if organisateurSessionGroupe}
+      <lab-anssi-alerte
+        description="En tant qu’organisateur, vos réponses ne seront pas enregistrées ni prises en compte dans les résultats du groupe."
+      ></lab-anssi-alerte>
+    {/if}
+    <div class="contenu-test" bind:this={contenuTest}>
+      <div class="formulaire">
+        <Etapier
+          etapeCourante={$questionnaireStore.questionCourante + 1}
+          nombreEtapes={7}
+          titreEtapeCourante={etapesTestMaturite[$questionnaireStore.questionCourante].titre}
+          titreEtapeSuivante={etapesTestMaturite[$questionnaireStore.questionCourante + 1]?.titre}
+        />
+        <h2>
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+          {@html aseptiseHtml(etapesTestMaturite[$questionnaireStore.questionCourante].question)}
+        </h2>
 
-          {#if montreProposition}
-            <div class="propositions">
-              <dsfr-radios-group
-                value={reponseCourante}
-                radios={etapesTestMaturite[$questionnaireStore.questionCourante].propositions.map(
-                  (proposition, index) => ({
-                    label: `${index + 1}. ${proposition}`,
-                    id: `radio-${index}`,
-                    value: index,
-                  })
-                )}
-                onvaluechanged={(e: CustomEvent<number>) => {
-                  reponseCourante = e.detail;
-                }}
-              ></dsfr-radios-group>
-            </div>
+        {#if montreProposition}
+          <div class="propositions">
+            <dsfr-radios-group
+              value={reponseCourante}
+              radios={etapesTestMaturite[$questionnaireStore.questionCourante].propositions.map(
+                (proposition, index) => ({
+                  label: `${index + 1}. ${proposition}`,
+                  id: `radio-${index}`,
+                  value: index,
+                })
+              )}
+              onvaluechanged={(e: CustomEvent<number>) => {
+                reponseCourante = e.detail;
+              }}
+            ></dsfr-radios-group>
+          </div>
+
+          <div class="commandes">
+            <Bouton
+              desactive={$questionnaireStore.questionCourante === 0}
+              libelle="Précédent"
+              surClic={reviensEnArriere}
+              type="secondaire"
+            />
+            <Bouton
+              desactive={reponseCourante === null}
+              libelle="Question suivante"
+              surClic={valideReponse}
+              type="primaire"
+            />
+          </div>
+        {:else}
+          <div class="informations-complementaires">
+            <SelectSecteurActivite libelle="Quel est le secteur d’activité de votre organisation&nbsp;?" bind:secteur />
+            <SelectRegion libelle="Dans quelle région / territoire se trouve votre organisation ?" bind:region />
+            <SelectTailleOrganisation libelle="Quelle est la taille de votre organisation ?" bind:tailleOrganisation />
 
             <div class="commandes">
-              <Bouton
-                desactive={$questionnaireStore.questionCourante === 0}
-                libelle="Précédent"
-                surClic={reviensEnArriere}
-                type="secondaire"
-              />
-              <Bouton
-                desactive={reponseCourante === null}
-                libelle="Question suivante"
-                surClic={valideReponse}
-                type="primaire"
-              />
+              <Bouton type="secondaire" libelle="Précédent" surClic={questionnaireStore.reviensEnArriere} />
+              {#if organisateurSession}
+                <Bouton type="primaire" libelle="Afficher les résultats" surClic={afficheResultatSessionGroupe} />
+              {:else}
+                <Bouton type="primaire" libelle="Obtenir mon résultat" surClic={obtiensResultat} />
+              {/if}
             </div>
-          {:else}
-            <div class="informations-complementaires">
-              <SelectSecteurActivite
-                libelle="Quel est le secteur d’activité de votre organisation&nbsp;?"
-                bind:secteur
-              />
-              <SelectRegion libelle="Dans quelle région / territoire se trouve votre organisation ?" bind:region />
-              <SelectTailleOrganisation
-                libelle="Quelle est la taille de votre organisation ?"
-                bind:tailleOrganisation
-              />
-
-              <div class="commandes">
-                <Lien href="/" libelle="Retour à l'accueil"></Lien>
-                <Bouton type="secondaire" libelle="Précédent" surClic={questionnaireStore.reviensEnArriere} />
-                {#if organisateurSession}
-                  <Bouton type="primaire" libelle="Afficher les résultats" surClic={afficheResultatSessionGroupe} />
-                {:else}
-                  <Bouton type="primaire" libelle="Obtenir mon résultat" surClic={obtiensResultat} />
-                {/if}
-              </div>
-            </div>
-          {/if}
-        </div>
-        <div class="illustration">
-          <img
-            src="/assets/images/test-maturite/illustration-{idQuestionCourante}{afficheNouvelleDA
-              ? '-nouvelle-da'
-              : ''}.svg"
-            width="432"
-            height="324"
-            alt=""
-          />
-        </div>
+          </div>
+        {/if}
       </div>
-    {:else}
-      <IntroductionTestMaturite bind:introFaite />
-    {/if}
+      <div class="illustration">
+        <img
+          src="/assets/images/test-maturite/illustration-{idQuestionCourante}{afficheNouvelleDA
+            ? '-nouvelle-da'
+            : ''}.svg"
+          width="432"
+          height="324"
+          alt=""
+        />
+      </div>
+    </div>
   </dsfr-container>
-
-  {#if !introFaite}
-    <PartageTest />
-  {/if}
+{:else}
+  <IntroductionTestMaturite bind:introFaite />
 {/if}
 
 <style lang="scss">
