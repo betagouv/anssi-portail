@@ -27,7 +27,7 @@ minimumReleaseAgeExclude:
   - '@lab-anssi/ui-kit'
   # Renovate security update: axios@1.18.0
   - axios@1.18.0
-  # Renovate security update: dompurify@3.4.12
-  - dompurify@3.4.12
+  # Renovate security update: dompurify@3.4.12 || 3.4.13
+  - dompurify@3.4.12 || 3.4.13
   # Renovate security update: sharp@0.35.0
   - sharp@0.35.0
