@@ -29,6 +29,11 @@
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
   @use '../../../assets/styles/grille' as *;
+
+  dsfr-container {
+    padding-top: 48px;
+  }
+
   .contenu-section {
     display: flex;
     flex-direction: column;
