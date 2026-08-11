@@ -13,11 +13,11 @@ let
   bundler = pkgs.bundler.override { ruby = pkgs.ruby_4_0; };
   playwrightCli = pkgs.buildNpmPackage {
     pname = "playwright-cli";
-    version = "0.1.15";
-
+    inherit ((builtins.fromJSON (builtins.readFile (sources."playwright-cli" + "/package.json"))))
+      version
+      ;
     src = sources."playwright-cli";
-
-    npmDepsHash = "sha256-ZrO8yIqMYMQUlsQraejVgKRZ7klC5/8UsV3/H1EqYtA=";
+    npmDepsHash = "sha256-3kqiQvGtZfsmLHVWeCSM1yOYb+ws2x1vMPC1OuvrKAI=";
     dontNpmBuild = true;
   };
 in
