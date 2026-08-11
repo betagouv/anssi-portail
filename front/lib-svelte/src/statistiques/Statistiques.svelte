@@ -14,6 +14,7 @@
   import type { Statistiques } from './statistiques.type';
   import Tuile from './Tuile.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
+  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   let mesures: Statistiques | undefined = undefined;
   let serieNonFiltree: Serie = [];
@@ -83,7 +84,7 @@
 <Heros
   description="L'impact de MesServicesCyber en quelques chiffres"
   format="banniere"
-  theme="sombre"
+  theme={afficheNouvelleDA ? 'clair' : 'sombre'}
   titre="Nos statistiques"
 />
 
