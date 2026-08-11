@@ -58,7 +58,7 @@
   titre="Session de groupe"
   description="Déterminez la maturité cyber de votre organisation en 5 minutes."
   format="banniere"
-  theme="sombre"
+  theme="clair"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
 >
   {#snippet filAriane()}
