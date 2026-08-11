@@ -154,7 +154,7 @@ importers:
         version: 7.5.1(express@4.22.2)
       express-useragent:
         specifier: ^2.1.0
-        version: 2.1.0
+        version: 2.2.1
       helmet:
         specifier: ^8.1.0
         version: 8.1.0
@@ -316,7 +316,7 @@ importers:
         version: 5.55.9(@typescript-eslint/types@8.65.0)
       svelte-check:
         specifier: ^4.4.5
-        version: 4.4.5(picomatch@4.0.5)(svelte@5.55.9(@typescript-eslint/types@8.65.0))(typescript@5.9.3)
+        version: 4.4.5(picomatch@4.0.4)(svelte@5.55.9(@typescript-eslint/types@8.65.0))(typescript@5.9.3)
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -398,7 +398,7 @@ importers:
         version: 5.55.9(@typescript-eslint/types@8.65.0)
       svelte-check:
         specifier: ^4.4.5
-        version: 4.4.5(picomatch@4.0.4)(svelte@5.55.9(@typescript-eslint/types@8.65.0))(typescript@5.9.3)
+        version: 4.4.5(picomatch@4.0.5)(svelte@5.55.9(@typescript-eslint/types@8.65.0))(typescript@5.9.3)
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -2628,8 +2628,8 @@ packages:
     peerDependencies:
       express: '>= 4.11'
 
-  express-useragent@2.1.0:
-    resolution: {integrity: sha512-BHQZAS5UgX0wHYGRWrisJGuC3MRIbQjaWSagJOKKzWvvbKIkT9ORXwQP/fafTgeWm5Afcr5AGZPdYuS5u3i9rg==}
+  express-useragent@2.2.1:
+    resolution: {integrity: sha512-NZxuTG3BkT9lkE50kMPmpGnat8TJF/2XPq4lX+ty+jNvk00G8hyJYDxeddW6vHZFlpB/u7njaiSYfu4fTXE4FQ==}
     engines: {node: '>=18'}
 
   express@4.22.2:
@@ -6373,7 +6373,7 @@ snapshots:
     dependencies:
       express: 4.22.2
 
-  express-useragent@2.1.0: {}
+  express-useragent@2.2.1: {}
 
   express@4.22.2:
     dependencies:
