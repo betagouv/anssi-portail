@@ -64,7 +64,7 @@
   description="Ce résultat nous permet de vous guider et de vous fournir les informations et les outils essentiels pour agir sur votre maturité cyber."
   format="banniere"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
-  theme="sombre"
+  theme="clair"
   titre="Résultat de maturité cyber"
 >
   {#snippet filAriane()}
