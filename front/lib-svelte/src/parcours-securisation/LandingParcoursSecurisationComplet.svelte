@@ -93,11 +93,8 @@
           titre={contenu.titre}
           description={contenu.description}
           alignement={index % 2 === 0 ? 'texte-gauche' : 'texte-droite'}
-        >
-          {#snippet illustration()}
-            <img src={contenu.ilustration.src} alt={contenu.ilustration.alt} />
-          {/snippet}
-        </BlocContenuLanding>
+          illustration={contenu.ilustration}
+        />
       {/each}
     </div>
 
