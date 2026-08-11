@@ -11,6 +11,7 @@
 
 <script lang="ts">
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   export let resultatTest: ResultatTest;
 
@@ -25,7 +26,11 @@
 
 <a href="#historique/{resultatTest.id}" class="carte">
   <div class="illustration-niveau">
-    <img class="plante" src="/assets/images/test-maturite/niveaux/{resultatTest.niveau}.svg" alt="Niveau de maturité" />
+    <img
+      class="plante"
+      src="/assets/images/test-maturite/niveaux/{resultatTest.niveau}{afficheNouvelleDA ? '-nouvelle-da' : ''}.svg"
+      alt="Niveau de maturité"
+    />
   </div>
   <span class="date">{dateFormatee}</span>
   <h3>{libelleNiveau}</h3>
