@@ -2,6 +2,7 @@
   import BlocDiagnostic from '../ui/BlocDiagnostic.svelte';
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
   import Lien from '../ui/Lien.svelte';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
 
   const tagsParcoursBasique = [
     {
@@ -132,7 +133,7 @@
     <lab-anssi-fonctionnalites
       titre="La cybersécurité est étrangère à votre organisation ?"
       description="Accédez à 13 mesures simples pour protéger dès maintenant votre organisation contre les cyberattaques et prendre votre Cyberdépart ! 🚀"
-      fonctionnalites={fonctionnalitesParcoursBasique}
+      fonctionnalites={enPropriétéWebC(fonctionnalitesParcoursBasique)}
       cliquable
       avec-cta
     >
