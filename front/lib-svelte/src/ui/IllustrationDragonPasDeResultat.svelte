@@ -3,9 +3,10 @@
 
   interface Props {
     texteAlternatif: string;
+    largeurMax?: string;
   }
 
-  let { texteAlternatif }: Props = $props();
+  let { texteAlternatif, largeurMax }: Props = $props();
 </script>
 
 <img
@@ -13,4 +14,5 @@
   width="175"
   height="317"
   alt={texteAlternatif}
+  style:max-width={largeurMax}
 />
