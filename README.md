@@ -157,30 +157,7 @@ Elles sont passées à Jekyll via le plugin [jekyll-dotenv](https://www.rubydoc.
 
 ## Exploitation
 
-### Re-hachage avec un nouveau sel
+Procédures de production :
 
-Il est possible de hacher avec un nouveau sel nos données hachées en base de données.
-Pour cela, on procède en plusieurs étapes :
-
-1. Faire un dump de la base au cas où
-2. Redémarrer le portail en mode maintenance (variable d'environnement MODE_MAINTENANCE=true)
-3. Assurez-vous que les bases msc et msc-journal soient démarrées
-4. Se connecter à l'application `clever ssh --app <ID de l'application MSC de PROD>`
-5. Lancer la console d'administration (`pnpm admin`)
-6. Exécuter la commande de migration de hache (`> await admin.migreTousLesHaches(2, 'leNouveauSel')`)
-   > Où le premier paramètre est la nouvelle version du hache, et le deuxième paramètre est le nouveau sel
-7. Ajouter la nouvelle variable d'environnement contenant le nouveau sel (ici, puisque la nouvelle version est la 2, on aura la variable d'env `HACHAGE_SECRET_DE_HACHAGE_2=leNouveauSel`)
-8. Redémarrer le portail en désactivant le mode maintenance
-
-### Rotation de clé de chiffrement
-
-Certaines de nos données sont chiffrées, on peut remplacer la clé de chiffrement.
-Pour cela, on procède en plusieurs étapes :
-
-1. Faire un dump de la base au cas où
-2. Redémarrer le portail en mode maintenance (variable d'environnement MODE_MAINTENANCE=true)
-3. Se connecter à l'application `clever ssh --app <ID de l'application MSC de PROD>`
-4. Lancer la console d'administration (`pnpm admin`)
-5. Exécuter la commande de rotation (`> await admin.remplaceLaCleDeChiffrement('ancienneCle', 'nouvelleCle')`)
-6. Modifier la variable d'environnement CHIFFREMENT_CHACHA20_CLE_HEX (`CHIFFREMENT_CHACHA20_CLE_HEX=nouvelleCle`)
-7. Redémarrer le portail en désactivant le mode maintenance
+- [re-hachage des données avec un nouveau sel](docs/exploitation/re-hachage-donnees-avec-nouveau-sel.md) ;
+- [rotation de la clé de chiffrement](/docs/exploitation/rotation-cle-chiffrement.md).
