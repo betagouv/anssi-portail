@@ -6,85 +6,36 @@ Ce site est construit avec Jekyll.
 
 ## Dépendances de développement
 
-### Shell Nix
+### Prérequis
 
-Ce dépôt fournit un shell Nix, local pour éviter l'installation système de toutes les dépendances (Node, pnpm, Ruby, Bundler, Docker Compose, Prek, etc).
-Les dépendances Nix sont épinglées avec [`npins`](https://github.com/andir/npins).
+- `nix` package manager
+  - linux: [🐧 documentation NixOS](https://nixos.org/download/#nix-install-linux)
+  - MacOS: [🍎 documentation NixOS](https://nixos.org/download/#nix-install-macos)
+- `direnv` (_optionnel_): [Documentation officielle](https://direnv.net/docs/installation.html)
 
-Avec [`direnv`](https://direnv.net/) et [`nix-direnv`](https://github.com/nix-community/nix-direnv) :
+### Installation toolchain
+
+> Pour mettre à jour les dépendances, voir [Mettre à jour la toolchain](docs/developpement/mettre-a-jour-toolchain.md)
+
+#### Avec `nix`
+
+À la racine du projet, lancer:
+
+```bash
+nix-shell
+```
+
+Vous êtes maintenant dans un shell avec toutes les dépendances nécessaires au développement du projet.
+
+#### Avec `direnv`
+
+À la racine du projet:
 
 ```shell
 $ direnv allow
 ```
 
-Sans `direnv`, lancez le shell Nix explicitement :
-
-```shell
-$ nix-shell
-```
-
-Toutes les dépendances de la section sous-jacente [Installations manuelles](#installations-manuelles) sont maintenant installées et disponibles. Rendez-vous directement à la section [Bootstrap de l'application](#bootstrap-de-lapplication).
-
-Pour mettre à jour les dépendances Nix épinglées :
-
-```shell
-$ npins update
-```
-
-### Installations manuelles
-
-#### Jekyll
-
-> N.B. : Jekyll est construit en Ruby.
-> Nous ne sommes pas développeurs Ruby et nous découvrons son écosystème.
-> Il se peut que les instructions ci-dessous semblent mauvaises à une personne connaissant bien Ruby 🙏
-
-##### Ruby
-
-Ruby est installé avec `rbenv`, ce qui permet de sélectionner la version indépendamment de celui proposé par le système d’exploitation, qui peut parfois avoir du retard sur les dernières versions stables.
-
-```shell
-sudo apt install -y build-essential libssl-dev libreadline-dev zlib1g-dev libsqlite3-dev libyaml-dev libffi-dev libgdbm-dev libncurses-dev curl git
-
-git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-
-echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(rbenv init - bash)"' >> ~/.bashrc
-source ~/.bashrc
-
-git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-rbenv install 4.0.5
-```
-
-##### Bundler
-
-- Installer `bundler`
-
-```shell
-$ export GEM_HOME="$HOME/gems/" # Pointer vers un dossier sur lequel vous avez des droits en écriture
-
-# Ne pas installer avec `sudo`
-$ gem install bundler -V
-```
-
-#### Prek
-
-Prek sert à exécuter des commandes au moment du commit. Ça nous sert en l'occurrence à formater nos fichiers avant de les pousser sur Git.
-
-```
-pnpm add -g @j178/prek
-OU
-npm install -g @j178/prek
-```
-
-#### Playwright CLI
-
-Le skill d'agent Playwright utilise le CLI Playwright pour piloter un navigateur, lancer des scénarios et inspecter les pages pendant les sessions d'agent.
-Installez-le globalement avec npm avant d'utiliser ce skill :
-
-```shell
-npm install -g @playwright/cli@latest
-```
+Maintenant, vous avez les dépendances de projet **automatiquement chargées** lorsque vous allez sur le projet en question via votre terminal
 
 ## Bootstrap de l'application
 
