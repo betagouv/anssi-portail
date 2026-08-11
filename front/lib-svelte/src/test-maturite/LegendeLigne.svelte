@@ -64,22 +64,22 @@
   }
 
   .ligne-legende-0 {
-    --couleur-puce: #6369f1;
+    --couleur-puce: #5c68e5;
   }
 
   .ligne-legende-1 {
-    --couleur-puce: #fec54b;
+    --couleur-puce: #82b5f2;
   }
 
   .ligne-legende-2 {
-    --couleur-puce: #8248a1;
+    --couleur-puce: #28598f;
   }
 
   .ligne-legende-3 {
-    --couleur-puce: #f26c85;
+    --couleur-puce: #30a7ae;
   }
 
   .ligne-legende-4 {
-    --couleur-puce: #8ed4a3;
+    --couleur-puce: #81eef5;
   }
 </style>
