@@ -25,7 +25,7 @@
 </script>
 
 <a href="#historique/{resultatTest.id}" class="carte">
-  <div class="illustration-niveau">
+  <div class="illustration-niveau" class:avec-nouvelle-da={afficheNouvelleDA}>
     <img
       class="plante"
       src="/assets/images/test-maturite/niveaux/{resultatTest.niveau}{afficheNouvelleDA ? '-nouvelle-da' : ''}.svg"
@@ -102,6 +102,16 @@
         border: 1px solid #0d0c21;
         left: 0;
         right: 0;
+      }
+    }
+
+    &.avec-nouvelle-da {
+      @include a-partir-de(md) {
+        background-color: var(--brown-cafe-creme-975-75);
+      }
+
+      &:before {
+        border-color: #000091;
       }
     }
   }
