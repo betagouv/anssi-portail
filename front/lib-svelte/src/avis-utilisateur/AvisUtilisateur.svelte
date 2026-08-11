@@ -157,16 +157,7 @@
         </div>
         <footer class="actions">
           <Bouton libelle="Envoyer" type="primaire" taille="md" boutonSoumission={true} />
-          <lab-anssi-bouton
-            on:click={() => dialogue.close()}
-            on:keypress
-            role="button"
-            taille="md"
-            tabindex={1}
-            titre="Fermer sans répondre"
-            variante="secondaire"
-            largeur-maximale
-          ></lab-anssi-bouton>
+          <Bouton type="secondaire" libelle="Fermer sans répondre" surClic={() => dialogue.close()} />
         </footer>
       </Formulaire>
     {:else}
@@ -410,10 +401,10 @@
           &:checked + label > span {
             background-color: var(--background-active-blue-france);
             &:hover {
-              background-color: var(--jaune-msc-hover);
+              background-color: var(--blue-france-925-125-hover);
             }
             &:active {
-              background-color: var(--jaune-msc-clique);
+              background-color: var(--blue-france-925-125-active);
             }
           }
         }
