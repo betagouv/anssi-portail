@@ -9,6 +9,9 @@
   import HistoriqueTests from './HistoriqueTests.svelte';
   import PropositionRefaireTest from './PropositionRefaireTest.svelte';
   import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
+  import { afficheNouvelleDA } from '$plateforme/environnement';
+  import Lien from '../ui/Lien.svelte';
+  import Alternatives from '../ui/Alternatives.svelte';
 
   const clesOnglet = ['votre-organisation', 'comparaison', 'historique'];
   type CleOnglet = (typeof clesOnglet)[number];
@@ -44,17 +47,26 @@
   };
 </script>
 
-<Heros
-  description="Testez la maturité cyber de votre organisation, suivez vos progrès et comparez-vous aux autres organisations."
-  format="banniere"
-  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
-  theme="sombre"
-  titre="Maturité cyber"
->
-  {#snippet filAriane()}
-    <FilAriane {...propriétésFilAriane} />
+<Alternatives affichageAlternatif={afficheNouvelleDA}>
+  {#snippet alternatif()}
+    <dsfr-container class="lien-retour">
+      <Lien href="/" libelle="Retour à l'accueil" icone="arrow-go-back-line"></Lien>
+    </dsfr-container>
   {/snippet}
-</Heros>
+  {#snippet défaut()}
+    <Heros
+      description="Testez la maturité cyber de votre organisation, suivez vos progrès et comparez-vous aux autres organisations."
+      format="banniere"
+      segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
+      theme="sombre"
+      titre="Maturité cyber"
+    >
+      {#snippet filAriane()}
+        <FilAriane {...propriétésFilAriane} />
+      {/snippet}
+    </Heros>
+  {/snippet}
+</Alternatives>
 
 <PropositionRefaireTest />
 
@@ -69,3 +81,9 @@
 {:else if $profilStore}
   <ComparaisonTest />
 {/if}
+
+<style>
+  .lien-retour {
+    margin: 24px 0;
+  }
+</style>
