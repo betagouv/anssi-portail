@@ -50,7 +50,7 @@
         z-index: calc(var(--ground) + 761);
 
         summary {
-          background-color: var(--jaune-clair-msc);
+          background-color: var(--blue-france-925-125);
           padding: 12px 16px;
         }
 
