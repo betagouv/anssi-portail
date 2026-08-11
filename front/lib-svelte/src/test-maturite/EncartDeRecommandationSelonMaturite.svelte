@@ -4,7 +4,6 @@
   import Separateur from '../ui/Separateur.svelte';
   import EncartDeRecommandationMaturiteFaible from './EncartDeRecommandationMaturiteFaible.svelte';
   import EncartDeRecommandationMaturiteForte from './EncartDeRecommandationMaturiteForte.svelte';
-  import EncartDeRecommandationVersCatalogue from './EncartDeRecommandationVersCatalogue.svelte';
   import MessageNonResponsabilite from './MessageNonResponsabilite.svelte';
 
   export let niveau: NiveauMaturite;
@@ -18,7 +17,6 @@
   <MessageNonResponsabilite />
 {:else if $profilStore}
   <MessageNonResponsabilite />
-  <EncartDeRecommandationVersCatalogue />
 {:else}
   <Separateur />
   <EncartDeRecommandationMaturiteForte />
