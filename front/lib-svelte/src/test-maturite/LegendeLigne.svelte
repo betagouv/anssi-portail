@@ -60,6 +60,10 @@
       outline-offset: 8px;
       border-radius: 2px;
     }
+
+    &.avec-nouvelle-da.actif {
+      outline-color: var(--border-default-blue-france);
+    }
   }
 
   .ligne-legende:before {
