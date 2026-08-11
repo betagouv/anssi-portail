@@ -8,6 +8,10 @@
   import Lien from '../ui/Lien.svelte';
   import ContenuFavoris from './ContenuFavoris.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
+  import Alternatives from '../ui/Alternatives.svelte';
+  import { afficheNouvelleDA } from '$plateforme/environnement';
+  import Heros from '../ui/Heros.svelte';
+  import { fabriqueFilAriane } from '../ui/filAriane';
 
   const partageLien = () => {
     const hote = new URL(window.location.href).origin;
@@ -19,19 +23,32 @@
   onMount(chargeGuidesDansLeStore);
 </script>
 
-<dsfr-container class="chapeau fond-sombre">
-  <div class="contenu-section">
-    <FilAriane feuille="Favoris" fondSombre={true} />
-    <h1 class="alternatif-xs-ns">Services et ressources favoris</h1>
-    <p class="texte-chapo-xl-ns">Retrouvez tous vos contenus cyber à partager.</p>
-    {#if $itemsCatalogueEnFavori.length > 0}
-      <div class="cta">
-        <p class="texte-chapo-xl-ns">Parcourez le catalogue pour ajouter plus de services et ressources.</p>
-        <Lien href="/catalogue/" libelle="Explorer le catalogue" apparence="bouton" taille="lg"></Lien>
+<Alternatives affichageAlternatif={afficheNouvelleDA}>
+  {#snippet défaut()}
+    <dsfr-container class="chapeau fond-sombre">
+      <div class="contenu-section">
+        <FilAriane feuille="Favoris" fondSombre={true} />
+        <h1 class="alternatif-xs-ns">Services et ressources favoris</h1>
+        <p class="texte-chapo-xl-ns">Retrouvez tous vos contenus cyber à partager.</p>
+        {#if $itemsCatalogueEnFavori.length > 0}
+          <div class="cta">
+            <p class="texte-chapo-xl-ns">Parcourez le catalogue pour ajouter plus de services et ressources.</p>
+            <Lien href="/catalogue/" libelle="Explorer le catalogue" apparence="bouton" taille="lg"></Lien>
+          </div>
+        {/if}
       </div>
-    {/if}
-  </div>
-</dsfr-container>
+    </dsfr-container>
+  {/snippet}
+  {#snippet alternatif()}
+    <Heros
+      titre="Services et ressources favoris"
+      description="Retrouvez tous vos contenus cyber à partager."
+      format="banniere"
+      theme="clair"
+      segmentsFilAriane={fabriqueFilAriane({ feuille: 'Favoris' }, !!$profilStore)}
+    />
+  {/snippet}
+</Alternatives>
 
 <dsfr-container>
   <div class="favoris">
