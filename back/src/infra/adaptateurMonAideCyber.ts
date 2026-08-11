@@ -1,7 +1,6 @@
 import axios, { isAxiosError } from '@anssi-portail/axios';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { adaptateurMonAideCyberVide } from './adaptateurMonAideCyberVide.js';
-import { Cache } from './cache.js';
 
 export type DemandeAide = {
   origine?: string;
@@ -18,20 +17,12 @@ export type DemandeAide = {
   };
 };
 
-export type StatistiquesMonAideCyber = { nombreDiagnostics: number };
-
 export interface AdaptateurMonAideCyber {
   creeDemandeAide: (demandeAide: DemandeAide) => Promise<void>;
-  statistiques: () => Promise<StatistiquesMonAideCyber>;
 }
 
 class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
-  private cacheStatistiques: Cache<StatistiquesMonAideCyber>;
-  constructor(private readonly adaptateurEnvironnement: AdaptateurEnvironnement) {
-    this.cacheStatistiques = new Cache({
-      ttl: adaptateurEnvironnement.monAideCyber().dureeCacheStatistiquesEnSecondes(),
-    });
-  }
+  constructor(private readonly adaptateurEnvironnement: AdaptateurEnvironnement) {}
 
   async creeDemandeAide({ entiteAidee, aidant, origine }: DemandeAide) {
     try {
@@ -55,14 +46,6 @@ class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
       }
       throw e;
     }
-  }
-
-  async statistiques(): Promise<StatistiquesMonAideCyber> {
-    const url = `${this.adaptateurEnvironnement.monAideCyber().url()}/api/statistiques`;
-    return this.cacheStatistiques.get(url, async () => {
-      const reponse = await axios.get(url.toString());
-      return { nombreDiagnostics: reponse.data.nombreDiagnostics };
-    });
   }
 }
 
