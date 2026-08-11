@@ -5,9 +5,6 @@
   import { profilStore } from '../stores/profil.store';
   import Bouton from '../ui/Bouton.svelte';
   import Etapier from '../ui/Etapier.svelte';
-  import { fabriqueFilAriane } from '../ui/filAriane';
-  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
-  import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
   import IntroductionTestMaturite from './IntroductionTestMaturite.svelte';
   import PartageTest from './PartageTest.svelte';
@@ -106,32 +103,11 @@
 
   $: enSessionGroupe = !!codeSessionGroupe;
   $: organisateurSessionGroupe = enSessionGroupe && organisateurSession;
-
-  let propriétésFilAriane: PropriétésFilAriane;
-  $: utilisateurEstConnecté = !!$profilStore;
-  $: propriétésFilAriane = {
-    fondSombre: true,
-    feuille: enSessionGroupe ? 'Session de groupe' : 'Test de maturité cyber',
-    branche: enSessionGroupe ? { nom: 'Test de maturité cyber', lien: '/test-maturite' } : undefined,
-    brancheConnectee: enSessionGroupe ? { nom: 'Maturité cyber', lien: '/ma-maturite' } : undefined,
-  };
 </script>
 
 {#if afficheResultats}
   <ResultatsTestMaturite />
 {:else}
-  <Heros
-    titre="Test de maturité cyber"
-    description="Obtenez en 5 minutes une évaluation indicative de la maturité cyber de votre organisation."
-    format="banniere"
-    theme="sombre"
-    segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, utilisateurEstConnecté)}
-  >
-    {#snippet filAriane()}
-      <FilAriane {...propriétésFilAriane} />
-    {/snippet}
-  </Heros>
-
   <dsfr-container class="test-maturite">
     {#if introFaite}
       {#if organisateurSessionGroupe}
