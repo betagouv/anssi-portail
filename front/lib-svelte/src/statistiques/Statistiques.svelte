@@ -96,11 +96,6 @@
       />
       <Tuile description="Tests de maturité cyber" image="stat-test-maturite" mesure={mesures.testsMaturite.total} />
       <Tuile description="Diagnostics cyber" image="stat-diagnostics-cyber" mesure={mesures.diagnosticsCyber} />
-      <Tuile
-        description="Services et ressources consultés"
-        image="stat-services-et-ressources-consultes"
-        mesure={mesures.servicesEtRessourcesConsultes}
-      />
     </div>
     <div class="repartition">
       <div>
@@ -183,7 +178,7 @@
     display: grid;
     gap: 24px;
     @include a-partir-de(sm) {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
 
