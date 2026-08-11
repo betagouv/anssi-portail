@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { afficheNouvelleDA } from '$plateforme/environnement';
+
   export let index: number;
   export let actif = false;
   export let libelle: string;
@@ -13,7 +15,12 @@
   }
 </script>
 
-<div class="ligne-legende ligne-legende-{index}" class:actif class:avec-valeur={valeur || pourcentage}>
+<div
+  class="ligne-legende ligne-legende-{index}"
+  class:avec-nouvelle-da={afficheNouvelleDA}
+  class:actif
+  class:avec-valeur={valeur || pourcentage}
+>
   <span role="listitem" class="libelle" aria-label={`${libelle} ${pourcentageLisible}`}>
     {libelle}
   </span>
@@ -64,22 +71,44 @@
   }
 
   .ligne-legende-0 {
-    --couleur-puce: #5c68e5;
+    --couleur-puce: #6369f1;
   }
 
   .ligne-legende-1 {
-    --couleur-puce: #82b5f2;
+    --couleur-puce: #fec54b;
   }
 
   .ligne-legende-2 {
-    --couleur-puce: #28598f;
+    --couleur-puce: #8248a1;
   }
 
   .ligne-legende-3 {
-    --couleur-puce: #30a7ae;
+    --couleur-puce: #f26c85;
   }
 
   .ligne-legende-4 {
-    --couleur-puce: #81eef5;
+    --couleur-puce: #8ed4a3;
+  }
+
+  .avec-nouvelle-da {
+    .ligne-legende-0 {
+      --couleur-puce: #5c68e5;
+    }
+
+    .ligne-legende-1 {
+      --couleur-puce: #82b5f2;
+    }
+
+    .ligne-legende-2 {
+      --couleur-puce: #28598f;
+    }
+
+    .ligne-legende-3 {
+      --couleur-puce: #30a7ae;
+    }
+
+    .ligne-legende-4 {
+      --couleur-puce: #81eef5;
+    }
   }
 </style>
