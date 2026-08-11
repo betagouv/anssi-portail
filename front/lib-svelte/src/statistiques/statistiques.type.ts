@@ -11,5 +11,4 @@ export type Statistiques = {
     };
   };
   diagnosticsCyber: number;
-  servicesEtRessourcesConsultes: number;
 };
