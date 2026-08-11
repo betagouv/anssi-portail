@@ -43,10 +43,10 @@ in
 
       mkdir -p "$PWD/.nix-bin" "$GEM_HOME" "$COREPACK_HOME"
 
-      # package.json declares pnpm@10.24.0. Corepack creates the pnpm shim
-      # in .nix-bin and downloads that exact version on first shell entry.
-      corepack enable --install-directory "$PWD/.nix-bin" >/dev/null
-      corepack prepare pnpm@10.24.0 --activate >/dev/null
+      # Corepack creates the pnpm shim in .nix-bin and installs the version
+      # declared in package.json on first shell entry.
+      corepack enable --install-directory "$PWD/.nix-bin" pnpm >/dev/null
+      corepack install >/dev/null
     '';
   };
 }
