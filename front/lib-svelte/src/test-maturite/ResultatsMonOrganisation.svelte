@@ -46,10 +46,8 @@
     <TuilesMaturite niveauCourant={niveau} {animeTuiles} {defilementAutomatique} />
     <div class="description-niveau">
       <h5>{niveau.label}</h5>
-      <p>{niveau.description}</p>
+      <p>{niveau.description} <Lien href="/niveaux-maturite" blank libelle="En savoir plus sur les niveaux"></Lien></p>
     </div>
-
-    <Lien href="/niveaux-maturite" blank libelle="Les niveaux de maturité cyber"></Lien>
   </div>
 </dsfr-container>
 
