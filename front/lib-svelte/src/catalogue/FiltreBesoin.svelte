@@ -2,6 +2,7 @@
   import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
   import { BesoinCyber } from './Catalogue.types';
   import { afficheNouvelleDA } from '$plateforme/environnement';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
 
   export let filtreTousVisible: boolean = true;
 
@@ -46,7 +47,7 @@
 {#if afficheNouvelleDA}
   <div class="conteneur-filtres">
     <lab-anssi-filtres
-      {filtres}
+      filtres={enPropriétéWebC(filtres)}
       valeur={$rechercheParBesoin}
       onvaleurachangee={(e: CustomEvent<string>) => ($rechercheParBesoin = (e.detail as BesoinCyber) ?? null)}
     ></lab-anssi-filtres>
