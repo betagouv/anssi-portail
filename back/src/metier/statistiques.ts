@@ -15,10 +15,8 @@ export type Statistiques = {
     };
   };
   diagnosticsCyber: number;
-  servicesEtRessourcesConsultes: number;
 };
 
-const SERVICES_ET_RESSOURCES_CONSULTES = 127000;
 const NOMBRES_DE_DIAGNOSTIC_CYBER = 6516;
 
 export const calculeStatistiques = async ({
@@ -59,7 +57,6 @@ export const calculeStatistiques = async ({
   );
   return {
     utilisateursInscrits: await entrepotUtilisateur.taille(),
-    servicesEtRessourcesConsultes: SERVICES_ET_RESSOURCES_CONSULTES,
     testsMaturite: {
       total: await entrepotResultatTest.taille(),
       parNiveau,

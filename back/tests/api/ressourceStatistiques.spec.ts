@@ -48,12 +48,6 @@ describe('La ressource Statistiques', () => {
       assert.equal(reponse.body.utilisateursInscrits, 2);
     });
 
-    it('renvoie le nombre de services et de ressources consultés', async () => {
-      const reponse = await request(serveur).get('/api/statistiques');
-
-      assert.equal(reponse.body.servicesEtRessourcesConsultes, 127000);
-    });
-
     it('renvoie le nombre de tests de maturité', async () => {
       await new ResultatTestMaturiteCreateur().dansEntrepot(entrepotResultatTest).creePlusieurs(3);
 
