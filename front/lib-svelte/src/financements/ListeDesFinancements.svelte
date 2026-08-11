@@ -19,6 +19,7 @@
   import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
   import IllustrationPasDeResultatDeRecherche from '../ui/IllustrationPasDeResultatDeRecherche.svelte';
   import { clic } from '../directives/actions.svelte';
+  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   type Props = {
     financementsInitiaux?: ResumeFinancement[];
@@ -68,7 +69,7 @@
   description="Bénéficiez d'accompagnements financés ou de subventions pour renforcer la maturité cyber de votre organisation."
   format="banniere"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
-  theme="sombre"
+  theme={afficheNouvelleDA ? 'clair' : 'sombre'}
 >
   {#snippet filAriane()}
     <FilAriane {...propriétésFilAriane} />

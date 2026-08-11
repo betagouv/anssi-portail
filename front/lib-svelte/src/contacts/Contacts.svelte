@@ -58,7 +58,7 @@
   description="Des contacts cyber de proximité pour vous orienter et répondre à vos questions."
   format="banniere"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
-  theme="sombre"
+  theme={afficheNouvelleDA ? 'clair' : 'sombre'}
   titre="Contacts cyber"
 >
   {#snippet filAriane()}
