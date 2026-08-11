@@ -38,22 +38,24 @@ h5 {
     }
 
     @include a-partir-de(xl) {
-      gap: 126px;
+      gap: 48px;
     }
   }
 
   .formulaire {
     width: 100%;
-    @include a-partir-de(lg) {
-      padding: 24px 0;
-    }
   }
 
   .illustration {
     display: none;
-    padding: 24px;
+    padding: 0;
     background-color: var(--jaune-msc);
     border-radius: 8px;
+
+    img {
+      padding: 0 27px;
+    }
+
     @include a-partir-de(lg) {
       display: flex;
       flex: 0 0;
@@ -91,7 +93,6 @@ h5 {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-top: 24px;
   }
 
   label {
@@ -108,9 +109,7 @@ h5 {
   .commandes {
     display: flex;
     flex-direction: column-reverse;
-    margin-top: 24px;
     gap: 16px;
-    margin-bottom: 32px;
     text-align: center;
 
     @include a-partir-de(sm) {
