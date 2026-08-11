@@ -113,9 +113,11 @@
       <Lien href="/" libelle="Retour à l'accueil" icone="arrow-go-back-line"></Lien>
     </div>
     {#if organisateurSessionGroupe}
-      <lab-anssi-alerte
-        description="En tant qu’organisateur, vos réponses ne seront pas enregistrées ni prises en compte dans les résultats du groupe."
-      ></lab-anssi-alerte>
+      <dsfr-alert
+        type="info"
+        has-description
+        text="En tant qu’organisateur, vos réponses ne seront pas enregistrées ni prises en compte dans les résultats du groupe."
+      ></dsfr-alert>
     {/if}
     <div class="contenu-test" bind:this={contenuTest}>
       <div class="formulaire">
@@ -203,5 +205,9 @@
 
   .lien-retour {
     margin-bottom: 48px;
+  }
+
+  dsfr-alert {
+    margin-bottom: 2rem;
   }
 </style>
