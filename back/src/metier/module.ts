@@ -1,5 +1,7 @@
 import { Mesure } from './mesure.js';
 
+const ID_MODULE_CYBERDEPART = 1;
+
 export class Module {
   mesures: Mesure[] = [];
 
@@ -17,4 +19,6 @@ export class Module {
   positionDeLaMesure = (mesure: Mesure) => this.rangDeLaMesure(mesure) + 1;
 
   nombreDeMesures = () => this.mesures.length;
+
+  estCyberdépart = () => this.id === ID_MODULE_CYBERDEPART;
 }

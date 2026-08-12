@@ -14,6 +14,7 @@ export class ConstructeurDUtilisateur {
   private pixelDeSuiviAccepté: boolean = true;
   private idListeFavoris?: string;
   private readonly mesuresPrisesEnCompte: Mesure[] = [];
+  private parcours?: 'complet' | 'allégé' | null;
 
   avecLEmail(email: string) {
     this.email = email;
@@ -70,6 +71,11 @@ export class ConstructeurDUtilisateur {
     return this;
   }
 
+  avecLeParcours(parcours: 'complet' | 'allégé' | null) {
+    this.parcours = parcours;
+    return this;
+  }
+
   construis() {
     return new Utilisateur(
       {
@@ -84,6 +90,7 @@ export class ConstructeurDUtilisateur {
         pixelDeSuiviAccepté: this.pixelDeSuiviAccepté,
         idListeFavoris: this.idListeFavoris,
         mesuresPrisesEnCompte: this.mesuresPrisesEnCompte,
+        parcours: this.parcours,
       },
       fauxAdaptateurRechercheEntreprise,
       fauxAdaptateurHachage
