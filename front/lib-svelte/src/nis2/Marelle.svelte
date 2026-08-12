@@ -1,5 +1,6 @@
 <script lang="ts">
   import Lien from '../ui/Lien.svelte';
+  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   const etapesMarelle = [
     {
@@ -11,7 +12,7 @@
         texte: 'Débuter le test',
       },
       illustration: {
-        lien: '/assets/images/personne-reflechissant-devant-un-ecran.svg',
+        lien: `/assets/images/personne-reflechissant-devant-un-ecran${afficheNouvelleDA ? '-nouvelle-da' : ''}.svg`,
         alt: '',
       },
     },
@@ -24,7 +25,7 @@
         target: '_blank',
       },
       illustration: {
-        lien: '/assets/images/homme-remplissant-ecran-login.svg',
+        lien: `/assets/images/homme-remplissant-ecran-login${afficheNouvelleDA ? '-nouvelle-da' : ''}.svg`,
         alt: '',
       },
     },
@@ -36,7 +37,7 @@
         target: '_self',
       },
       illustration: {
-        lien: '/assets/images/index-touchant-ecran-demandant-empreinte-digitale.svg',
+        lien: `/assets/images/index-touchant-ecran-demandant-empreinte-digitale${afficheNouvelleDA ? '-nouvelle-da' : ''}.svg`,
         alt: '',
       },
     },
