@@ -70,6 +70,8 @@ permalink: /
       ></msc-lien>
     </div>
     {% include composant-svelte.html id="demande-diagnostic" %}
+
+    {% if site.env.FEATURE_FLAG_NOUVELLE_DA != 'true' %}
     <div class="acces-catalogue">
       <h2>
         Accédez à un catalogue complet de ressources cyber proposées par l'ANSSI
@@ -142,8 +144,32 @@ permalink: /
         type="secondaire"
       ></msc-lien>
     </div>
+    {% endif %}
   </div>
 </dsfr-container>
+
+{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
+<dsfr-container class="guides-et-ressources fond-bleu-france">
+  <div class="conteneur">
+    <div class="contenu-principal">
+      <h2 class="titre fr-h1">Les recommandations de l'ANSSI, à portée de main.</h2>
+      <p class="description">Accédez aux guides de référence de l'ANSSI et posez vos questions cyber à MesQuestionsCyber, l'assistant IA conçu pour vous répondre simplement, à tout moment.</p>
+      <msc-lien
+        apparence="bouton"
+        href="/catalogue#guides"
+        libelle="Accéder aux guides"
+        type="secondaire-inverse"
+      ></msc-lien>
+    </div>
+
+    <div class="contenu-secondaire">
+      <figure class="illustration">
+        <img src="/assets/images/composition-guides-et-ressources.png" alt="" />
+      </figure>
+    </div>
+  </div>
+</dsfr-container>
+{% endif %}
 
 <dsfr-container class="test-maturite">
   <div class="contenu-section">
