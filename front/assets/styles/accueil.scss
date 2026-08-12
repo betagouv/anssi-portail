@@ -378,7 +378,7 @@
 
   background: #f6f6f6;
 
-  @include a-partir-de(xl) {
+  @include a-partir-de(lg) {
     --padding-section: 6rem 0;
   }
 
@@ -405,10 +405,6 @@
       msc-lien {
         margin-bottom: 24px;
         align-self: start;
-      }
-
-      #lien-session-groupe {
-        white-space: nowrap;
       }
     }
 
