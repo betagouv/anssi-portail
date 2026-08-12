@@ -42,7 +42,7 @@
   description="Déterminez si votre entité est régulée par la directive NIS&nbsp;2."
   format="banniere"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
-  theme="sombre"
+  theme="clair"
   titre="Mon entité est-elle concernée&nbsp;?"
 >
   {#snippet filAriane()}
