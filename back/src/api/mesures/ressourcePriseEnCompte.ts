@@ -51,7 +51,7 @@ export const ressourcePriseEnCompte = ({
 
       const { mesure, module } = mesureEtModule;
       const nouvelÉtatDuModule = await utilisateur.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, module);
-
+      await entrepotUtilisateur.metsAJour(utilisateur);
       return reponse.status(201).send(nouvelÉtatDuModule);
     })
   );
