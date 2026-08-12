@@ -322,7 +322,6 @@
   padding: 72px 0;
 
   lab-anssi-presentation-anssi {
-    margin: 0 auto;
-    max-width: taille-pour-colonnes(8);
+    --padding-section: 0;
   }
 }
