@@ -29,19 +29,8 @@
       button-id="utilisateur-btn"
       collapse-id="nav-utilisateur"
       hasLogout
+      onlogout={() => (window.location.href = '/oidc/deconnexion')}
     >
-      <dsfr-button
-        slot="logout"
-        centered
-        kind="tertiary-no-outline"
-        markup="a"
-        href="/oidc/deconnexion"
-        size="sm"
-        has-icon
-        icon="logout-box-r-line"
-      >
-        Se déconnecter
-      </dsfr-button>
     </dsfr-user>
   {/if}
 </div>
