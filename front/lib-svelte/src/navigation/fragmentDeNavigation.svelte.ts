@@ -27,6 +27,9 @@ const fragmentSansComportement: FragmentDeNavigation = {
 
 const nettoie = (hash: string | undefined): string => hash?.replace(/^#/, '') ?? '';
 
+export const extraisSegmentsDuFragment = (hash: string | undefined): string[] =>
+  nettoie(hash).split('?')[0].split('/').filter(Boolean);
+
 export const creeLeFragmentDeNavigation = (hash?: string): FragmentDeNavigation => {
   if (hash === undefined && typeof window === 'undefined') {
     return fragmentSansComportement;

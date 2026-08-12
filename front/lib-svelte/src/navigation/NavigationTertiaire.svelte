@@ -1,6 +1,7 @@
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
   import { onMount } from 'svelte';
+  import { extraisSegmentsDuFragment } from './fragmentDeNavigation.svelte';
 
   type Lien = { emoji?: string; label: string; fragment: string };
   type Props = {
@@ -11,10 +12,9 @@
   let { liens, lienActif = $bindable() }: Props = $props();
 
   const changeLeLienCourant = () => {
-    const hash = new URLSearchParams(window.location.hash?.substring(1));
-    const lienDansLUrl = Array.from(hash)[0];
-    if (lienDansLUrl) {
-      lienActif = liens.find((o) => o.fragment === `#${lienDansLUrl[0]}`)?.fragment ?? liens[0].fragment;
+    const [section] = extraisSegmentsDuFragment(window.location.hash);
+    if (section) {
+      lienActif = liens.find((lien) => lien.fragment === `#${section}`)?.fragment ?? liens[0].fragment;
     }
   };
 

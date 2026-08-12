@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
+  import { extraisSegmentsDuFragment } from '../navigation/fragmentDeNavigation.svelte';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import { profilStore } from '../stores/profil.store';
   import { fabriqueFilAriane } from '../ui/filAriane';
@@ -14,7 +15,7 @@
   import Lien from '../ui/Lien.svelte';
   import Alternatives from '../ui/Alternatives.svelte';
 
-  const clesOnglet = ['votre-organisation', 'comparaison', 'historique'];
+  const clesOnglet = ['#votre-organisation', '#comparaison', '#historique'] as const;
   type CleOnglet = (typeof clesOnglet)[number];
 
   export let animeTuiles = true;
@@ -27,10 +28,12 @@
   let propriétésFilAriane: PropriétésFilAriane;
 
   const changeOngletActif = () => {
-    const ongletRiche = window.location.hash.slice(1).split('/');
-    const onglet = ongletRiche[0];
-    idRésultatTest = ongletRiche?.[1];
-    lienActif = clesOnglet.includes(onglet) ? onglet : '#votre-organisation';
+    const [onglet, id] = extraisSegmentsDuFragment(window.location.hash);
+    const fragmentOnglet = `#${onglet}`;
+    idRésultatTest = id;
+    lienActif = clesOnglet.includes(fragmentOnglet as CleOnglet)
+      ? (fragmentOnglet as CleOnglet)
+      : '#votre-organisation';
   };
 
   onMount(() => {

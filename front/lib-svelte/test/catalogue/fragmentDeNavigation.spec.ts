@@ -1,9 +1,23 @@
 import { describe, expect, it } from 'vitest';
 import { BesoinCyber } from '../../src/catalogue/Catalogue.types';
 import { Langue } from '../../src/catalogue/Guide.types';
-import { creeLeFragmentDeNavigation } from '../../src/navigation/fragmentDeNavigation.svelte';
+import {
+  creeLeFragmentDeNavigation,
+  extraisSegmentsDuFragment,
+} from '../../src/navigation/fragmentDeNavigation.svelte';
 
 describe('Le fragment de navigation', () => {
+  it.each([
+    ['#votre-organisation', ['votre-organisation']],
+    ['#historique/019ff4ff-f632-715e-926d-99777e40d237', ['historique', '019ff4ff-f632-715e-926d-99777e40d237']],
+    [
+      '#historique/019ff4ff-f632-715e-926d-99777e40d237?filtre=actif',
+      ['historique', '019ff4ff-f632-715e-926d-99777e40d237'],
+    ],
+  ])('extrait les segments du fragment %s', (fragment, segments) => {
+    expect(extraisSegmentsDuFragment(fragment)).toEqual(segments);
+  });
+
   it('permet de récupérer la section', () => {
     const fragmentDeNavigation = creeLeFragmentDeNavigation('#section');
 
