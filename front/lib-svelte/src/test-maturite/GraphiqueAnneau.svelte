@@ -133,23 +133,23 @@
   }
 
   .avec-nouvelle-da {
-    .secteur-0 {
+    &.secteur-0 {
       fill: #5c68e5;
     }
 
-    .secteur-1 {
+    &.secteur-1 {
       fill: #82b5f2;
     }
 
-    .secteur-2 {
+    &.secteur-2 {
       fill: #28598f;
     }
 
-    .secteur-3 {
+    &.secteur-3 {
       fill: #30a7ae;
     }
 
-    .secteur-4 {
+    &.secteur-4 {
       fill: #81eef5;
     }
   }
