@@ -26,6 +26,10 @@
         line-height: 40px;
         font-weight: bold;
         margin: 0;
+
+        .nowrap {
+          white-space: nowrap;
+        }
       }
 
       p {

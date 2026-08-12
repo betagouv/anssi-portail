@@ -624,6 +624,10 @@ img[src$='.svg'] {
 dsfr-header {
   display: block;
   min-height: 168px;
+
+  &.sans-navigation {
+    min-height: 116.5px;
+  }
 }
 
 dsfr-footer {
