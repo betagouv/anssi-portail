@@ -18,6 +18,7 @@
   import InciteASAbonner from './InciteASAbonner.svelte';
   import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
   import IllustrationDragonPasDeResultat from '../../ui/IllustrationDragonPasDeResultat.svelte';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
 
   type Props = {
     guideInitial?: Guide;
@@ -49,6 +50,17 @@
       chargementEnCours = false;
     }
   });
+
+  let itemMenuActif = $state(window.location.hash || '#presentation');
+
+  onMount(() => {
+    const surChangementDeHash = () => {
+      itemMenuActif = window.location.hash;
+    };
+    window.addEventListener('hashchange', surChangementDeHash);
+    return () => window.removeEventListener('hashchange', surChangementDeHash);
+  });
+
   const aDesCollections = $derived(guide && guide.collections.filter((c) => c !== CollectionGuide.AUTRE).length > 0);
   const descriptionAspetisee = $derived(aseptiseHtml(guide?.description ?? ''));
   const propriétésFilAriane: PropriétésFilAriane = $derived({
@@ -56,6 +68,21 @@
     branche: { nom: 'Catalogue cyber', lien: '/catalogue#guides' },
     fondSombre: false,
   });
+
+  let itemsMenu = $derived([
+    { id: 'presentation', label: 'Présentation', href: '#presentation', isCollapsible: 'false', type: 'link' },
+    ...(aDesCollections
+      ? [
+          {
+            id: 'collection',
+            label: 'Dans la même collection',
+            href: '#collection',
+            isCollapsible: 'false',
+            type: 'link',
+          },
+        ]
+      : []),
+  ]);
 </script>
 
 {#if guide}
@@ -94,43 +121,32 @@
   </Heros>
 
   <div class="sommaire sommaire-replie">
-    <details>
-      <summary>
-        <div class="entete-filtres">
-          <img class="menu" src="/assets/images/icone-menu-lateral.svg" width="16" height="16" alt="" />
-          <span id="section-active" class="titre-menu">Présentation</span>
-          <img class="chevron" src="/assets/images/icone-chevron-bas.svg" width="16" height="16" alt="" />
-        </div>
-      </summary>
-
-      <ul>
-        <li class="actif">
-          <a href="#presentation">Présentation</a>
-        </li>
-        {#if aDesCollections}
-          <li><a href="#collection">Dans la même collection</a></li>
-        {/if}
-      </ul>
-    </details>
+    <dsfr-side-menu
+      active-item={itemMenuActif}
+      items={enPropriétéWebC(itemsMenu)}
+      button-label={itemsMenu.find((item) => `#${item.id}` === itemMenuActif)?.label ?? ''}
+      button-id="sommaire-mobile"
+    ></dsfr-side-menu>
   </div>
 
   <dsfr-container class="article">
     <div class="contenu-section">
       <div class="sommaire sommaire-deplie">
-        <ul>
-          <li class="actif">
-            <a href="#presentation">Présentation</a>
-          </li>
-          {#if aDesCollections}
-            <li><a href="#collection">Dans la même collection</a></li>
-          {/if}
-        </ul>
-        <span>TAGS</span>
-        <div class="labels">
-          <span>ANSSI</span>
+        <dsfr-side-menu
+          active-item={itemMenuActif}
+          items={enPropriétéWebC(itemsMenu)}
+          button-label={itemsMenu.find((item) => `#${item.id}` === itemMenuActif)?.label ?? ''}
+          button-id="sommaire"
+        ></dsfr-side-menu>
+        <div class="tags">
+          <div class="contenu-tags">
+            <span>TAGS</span>
+            <div class="labels">
+              <span>ANSSI</span>
+            </div>
+          </div>
         </div>
       </div>
-
       <div class="contenu-article">
         <div class="entete">
           {#if !$profilStore}
@@ -224,7 +240,7 @@
   .article {
     padding: 24px 0 0;
 
-    @include a-partir-de(lg) {
+    @include a-partir-de(md) {
       padding-top: 32px;
     }
 
@@ -232,7 +248,7 @@
       display: flex;
       flex-direction: column;
 
-      @include a-partir-de(lg) {
+      @include a-partir-de(md) {
         flex-direction: row;
         gap: 32px;
       }
@@ -296,36 +312,11 @@
 
   .sommaire-replie {
     z-index: calc(var(--ground) + 751);
+    padding: 0;
+    border: none;
 
-    details {
-      ul {
-        list-style-type: none;
-        padding: 0;
-
-        li {
-          border-bottom: 1px solid var(--border-default-grey);
-          padding-top: 12px;
-          padding-bottom: 12px;
-
-          &.actif {
-            background: #fff7db;
-
-            a {
-              border-left: 2px solid var(--jaune-msc);
-              padding-left: 14px;
-              border-bottom: none;
-            }
-          }
-
-          a {
-            text-decoration: none;
-            color: var(--noir);
-            padding-left: 16px;
-            display: inline-block;
-            border-bottom: none;
-          }
-        }
-      }
+    @include a-partir-de(md) {
+      display: none;
     }
   }
 
@@ -336,39 +327,22 @@
     align-self: flex-start;
     padding-top: 8px;
 
-    @include a-partir-de(lg) {
+    @include a-partir-de(md) {
       display: flex;
       flex-direction: column;
       position: sticky;
       top: 0;
     }
 
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0 0 40px;
+    .tags {
+      box-shadow: inset -1px 0 0 0 var(--border-default-grey);
+      margin-right: 2rem;
+    }
 
-      li {
-        padding-top: 12px;
-        padding-bottom: 12px;
-
-        &.actif {
-          font-weight: bold;
-
-          a {
-            border-left: 2px solid var(--jaune-msc);
-            padding-left: 6px;
-          }
-        }
-
-        a {
-          border-bottom: none;
-          text-decoration: none;
-          color: var(--noir);
-          padding-left: 8px;
-          display: inline-block;
-        }
-      }
+    .contenu-tags {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2rem;
     }
 
     span {
