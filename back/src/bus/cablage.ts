@@ -36,6 +36,10 @@ import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee.js';
 import { TestRealise } from './evenements/testRealise.js';
 import { UtilisateurConnecte } from './evenements/utilisateurConnecte.js';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur.js';
+import { ParcoursRejoint } from './evenements/parcoursRejoint.js';
+import { consigneParcoursRejointDansJournal } from './consigneParcoursRejointDansJournal.js';
+import { ParcoursChangé } from './evenements/parcoursChange.js';
+import { consigneParcoursChangéDansJournal } from './consigneParcoursChangeDansJournal.js';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
@@ -148,4 +152,8 @@ export const cableTousLesAbonnes = ({
     BadgeCyberdépartDébloqué,
     consigneBadgeCyberdépartDébloquéDansJournal({ adaptateurJournal, adaptateurHorloge })
   );
+
+  busEvenements.abonne(ParcoursRejoint, consigneParcoursRejointDansJournal({ adaptateurJournal, adaptateurHorloge }));
+
+  busEvenements.abonne(ParcoursChangé, consigneParcoursChangéDansJournal({ adaptateurJournal, adaptateurHorloge }));
 };

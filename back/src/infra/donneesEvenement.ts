@@ -4,6 +4,7 @@ import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
 import { ReponsesEtResultatAvecAnalyse } from '../metier/nis2-simulateur/questionnaire/calculEligibilite.js';
 import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction.js';
+import { Parcours } from '../metier/parcours.js';
 import { CodeRegion } from '../metier/referentielRegions.js';
 import { CodeSecteur } from '../metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement.js';
@@ -22,7 +23,9 @@ export type DonneesEvenement =
   | DonneesAvisMesureDonne
   | DonneesMesurePriseEnCompte
   | DonneesModuleTerminé
-  | DonnéesBadgeCyberdépartDébloqué;
+  | DonnéesBadgeCyberdépartDébloqué
+  | DonnéesParcoursRejoint
+  | DonnéesParcoursChangé;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -100,4 +103,11 @@ type DonneesModuleTerminé = Evenement<'MODULE_TERMINE', Omit<ModuleTermine, 'em
 type DonnéesBadgeCyberdépartDébloqué = Evenement<
   'BADGE_CYBERDEPART_DEBLOQUE',
   { idUtilisateur: string; nombreMesuresActuel: number; nombreMesuresTotal: number }
+>;
+
+type DonnéesParcoursRejoint = Evenement<'PARCOURS_REJOINT', { idUtilisateur: string; parcours: Parcours }>;
+
+type DonnéesParcoursChangé = Evenement<
+  'PARCOURS_CHANGÉ',
+  { idUtilisateur: string; parcoursPrécédent: Parcours; parcours: Parcours }
 >;
