@@ -16,3 +16,6 @@ mise-a-jour-financements/rapports
 .nix-bin
 .corepack
 .gems
+
+# Playwright-cli
+.playwright-cli
