@@ -30,7 +30,12 @@
     <div class="visuel">
       <div class="illustration">
         <figure>
-          <img src="/assets/images/composition-bizdev-floriane.png" width="800" height="476" alt="Floriane Gallego" />
+          <img
+            src="/assets/images/composition-bizdev-floriane-et-pierre.png"
+            width="800"
+            height="450"
+            alt="Floriane Gallego et Pierre Vernier"
+          />
         </figure>
       </div>
     </div>
@@ -114,18 +119,23 @@
     flex-direction: column;
     gap: 1.5rem;
 
-    @include a-partir-de(md) {
+    @include a-partir-de(lg) {
       flex-direction: row;
     }
 
     .visuel {
-      @include a-partir-de(md) {
+      @include a-partir-de(lg) {
         flex: 1;
       }
     }
 
     figure {
       margin: 0;
+      max-width: 588px;
+
+      @include a-partir-de(lg) {
+        max-width: 100%;
+      }
     }
 
     img {
@@ -136,7 +146,7 @@
     dsfr-card {
       min-height: auto;
 
-      @include a-partir-de(md) {
+      @include a-partir-de(lg) {
         flex: 1;
         order: 1;
       }
