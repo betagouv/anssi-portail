@@ -176,6 +176,11 @@ export class Utilisateur {
       );
       nouvelEtatModule.badgeCyberdépartDebloqué = true;
     }
+
+    if (!this.parcours || !module.estCyberdépart()) {
+      this.rejoinsProgrammeAccompagnement(module.estCyberdépart() ? 'allégé' : 'complet');
+    }
+
     return nouvelEtatModule;
   }
 

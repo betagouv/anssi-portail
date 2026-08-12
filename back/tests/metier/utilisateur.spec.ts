@@ -8,11 +8,11 @@ import { EntrepotPriseEnCompte } from '../../src/metier/entrepotPriseEnCompte.js
 import { Organisation, Utilisateur } from '../../src/metier/utilisateur.js';
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets.js';
 import { mesureDeTest } from '../api/mesures/constructeurDeMesure.js';
+import { ConstructeurDeModule } from '../api/mesures/constructeurDeModule.js';
 import { utilisateurDeTest } from '../api/mesures/constructeurDUtilisateur.js';
-import { mesureAuthentA2Etapes, fabriqueModuleCyberdépart } from '../api/objetsPretsALEmploi.js';
+import { fabriqueModuleCyberdépart, mesureAuthentA2Etapes } from '../api/objetsPretsALEmploi.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
 import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire.js';
-import { ConstructeurDeModule } from '../api/mesures/constructeurDeModule.js';
 
 describe("L'utilisateur", () => {
   const infosUtilisateur = {
@@ -385,6 +385,63 @@ describe("L'utilisateur", () => {
           await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
 
           assert.equal(busEvenements.naPasRecuDEvenement(BadgeCyberdépartDébloqué), true);
+        });
+
+        it('rejoins le parcours basique', async () => {
+          utilisateurDeParcours.mesuresPrisesEnCompte = [];
+          const moduleCyberdépart = fabriqueModuleCyberdépart();
+          const mesureCyberdépart = mesureDeTest().avecLId('AUTH.1').construis();
+          moduleCyberdépart.mesures = [mesureCyberdépart];
+          await utilisateurDeParcours.prendEnCompte(
+            mesureCyberdépart,
+            entrepotPriseEnCompte,
+            busEvenements,
+            moduleCyberdépart
+          );
+
+          assert.equal(utilisateurDeParcours.parcoursActuel(), 'allégé');
+        });
+
+        it("ne rejoins pas le parcours basique s'il est déjà en parcours complet", async () => {
+          utilisateurDeParcours.mesuresPrisesEnCompte = [];
+          utilisateurDeParcours.rejoinsProgrammeAccompagnement('complet');
+
+          const moduleCyberdépart = fabriqueModuleCyberdépart();
+          const mesureCyberdépart = mesureDeTest().avecLId('AUTH.1').construis();
+          moduleCyberdépart.mesures = [mesureCyberdépart];
+          await utilisateurDeParcours.prendEnCompte(
+            mesureCyberdépart,
+            entrepotPriseEnCompte,
+            busEvenements,
+            moduleCyberdépart
+          );
+
+          assert.equal(utilisateurDeParcours.parcoursActuel(), 'complet');
+        });
+      });
+
+      describe("d'un module autre que Cyberdépart", () => {
+        it('rejoins le parcours complet', async () => {
+          utilisateurDeParcours.mesuresPrisesEnCompte = [];
+          const module = new ConstructeurDeModule().construis();
+          const mesure = mesureDeTest().avecLId('AUTH.1').construis();
+          module.mesures = [mesure];
+
+          await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, module);
+
+          assert.equal(utilisateurDeParcours.parcoursActuel(), 'complet');
+        });
+
+        it("rejoins le parcours complet s'il est déjà en parcours basique", async () => {
+          utilisateurDeParcours.mesuresPrisesEnCompte = [];
+          utilisateurDeParcours.rejoinsProgrammeAccompagnement('allégé');
+          const module = new ConstructeurDeModule().construis();
+          const mesure = mesureDeTest().avecLId('AUTH.1').construis();
+          module.mesures = [mesure];
+
+          await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, module);
+
+          assert.equal(utilisateurDeParcours.parcoursActuel(), 'complet');
         });
       });
     });
