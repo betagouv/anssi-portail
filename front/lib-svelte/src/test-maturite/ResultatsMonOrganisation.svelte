@@ -1,23 +1,15 @@
 <script lang="ts">
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
-  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import Lien from '../ui/Lien.svelte';
   import EncartDeRecommandationSelonMaturite from './EncartDeRecommandationSelonMaturite.svelte';
   import PartageTest from './PartageTest.svelte';
+  import { calculeIdNiveau } from './resultatTest';
   import { questionnaireStore } from './stores/questionnaire.store';
   import TuilesMaturite from './TuilesMaturite.svelte';
 
   export let animeTuiles = true;
   export let dateRealisation: Date | undefined = undefined;
   export let defilementAutomatique = true;
-
-  const calculeIdNiveau = (moyenne: number): IdNiveau => {
-    if (moyenne < 1) return 'insuffisant';
-    if (moyenne < 2) return 'emergent';
-    if (moyenne < 3) return 'intermediaire';
-    if (moyenne < 4) return 'confirme';
-    return 'optimal';
-  };
 
   $: moyenne =
     $questionnaireStore.toutesLesReponses.reduce((acc, valeur) => acc + valeur, 0) /

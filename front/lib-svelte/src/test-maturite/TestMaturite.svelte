@@ -6,6 +6,7 @@
   import Bouton from '../ui/Bouton.svelte';
   import Etapier from '../ui/Etapier.svelte';
   import Lien from '../ui/Lien.svelte';
+  import { calculeIdNiveau } from '../niveaux-maturite/calculeIdNiveau';
   import IntroductionTestMaturite from './IntroductionTestMaturite.svelte';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
   import { enregistreIdResultatTestPourRevendication } from './resultatTest';
