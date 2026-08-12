@@ -55,19 +55,22 @@
         ]
       : []),
     {
-      label: 'Contacts utiles',
+      label: 'Contacts et financements',
       id: 'nav-contacts',
       type: 'menu',
       collapsable: true,
       collapseId: 'nav-contacts',
-      active: ['/contacts/', '/prestataires-labellises'].includes(cheminRelatif),
+      active:
+        ['/contacts', '/prestataires-labellises', '/financements'].includes(cheminRelatif) ||
+        cheminRelatif.startsWith('/financements/') ||
+        cheminRelatif.startsWith('/contacts'),
       items: [
         {
           label: 'Contacts cyber',
           id: 'nav-contacts-1',
           type: 'link',
           href: creeLienContactsUtiles($profilStore),
-          active: cheminRelatif === '/contacts/',
+          active: cheminRelatif.startsWith('/contacts'),
         },
         {
           label: 'Prestataires qualifiés et labellisés',
@@ -76,14 +79,14 @@
           href: '/prestataires-labellises',
           active: cheminRelatif === '/prestataires-labellises',
         },
+        {
+          label: 'Financements',
+          id: 'nav-contacts-3',
+          type: 'link',
+          href: '/financements',
+          active: cheminRelatif === '/financements' || cheminRelatif.startsWith('/financements/'),
+        },
       ],
-    },
-    {
-      label: 'Financements',
-      id: 'nav-financements',
-      type: 'link',
-      href: '/financements',
-      active: cheminRelatif === '/financements' || cheminRelatif.startsWith('/financements/'),
     },
   ]);
 </script>
