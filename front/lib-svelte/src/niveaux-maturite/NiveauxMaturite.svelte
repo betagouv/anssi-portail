@@ -26,7 +26,7 @@
   description="Découvrez les différents niveaux de maturité cyber, de l’organisation en phase de découverte à celle atteignant une posture optimale."
   format="banniere"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
-  theme="sombre"
+  theme="clair"
   titre="5 niveaux de maturité cyber"
 >
   {#snippet filAriane()}
