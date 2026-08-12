@@ -88,6 +88,21 @@ permalink: /
           ransomwares ou rançongiciels.
         </p>
       </hgroup>
+      {% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
+      <img
+        src="/assets/images/illustration-organisations-concernees-nouvelle-da.svg"
+        alt="Organisation concernées"
+      />
+      <msc-lien
+        blank
+        href="https://cyber.gouv.fr/nous-connaitre/publications/panoramas-de-la-cybermenace/panorama-de-la-cybermenace-2025/"
+        libelle="Panorama de la menace 2025, ANSSI"
+        taille="sm"
+        type="primaire"
+        neutre
+        class="lien-panorama"
+      ></msc-lien>
+      {% else %}
       <img
         src="/assets/images/illustration-organisations-concernees.svg"
         alt="Organisation concernées"
@@ -99,6 +114,7 @@ permalink: /
         taille="sm"
         type="primaire"
       ></msc-lien>
+      {% endif %}
     </div>
     {% include composant-svelte.html id="demande-diagnostic" %}
 
