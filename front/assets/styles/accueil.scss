@@ -316,10 +316,34 @@
     }
   }
 
+  .description {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-block-end: 1.5rem;
+
+    p {
+      margin-block: 0;
+    }
+  }
+
   .contenu-secondaire {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 10.125rem;
+
+    @media (min-width: 767px) and (max-width: 992px) {
+      max-width: 18rem;
+    }
+  }
+
+  .illustration {
+    max-width: 9.875rem;
+
+    @include a-partir-de(lg) {
+      max-width: 100%;
+    }
   }
 }
 
