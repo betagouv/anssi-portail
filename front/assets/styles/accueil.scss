@@ -12,6 +12,10 @@
   background-color: var(--blue-france-850-200, #cacafb);
 }
 
+.fond-moutarde {
+  background-color: var(--yellow-moutarde-925-125, #fde2b5);
+}
+
 .chapeau.fond-sombre {
   padding: 48px 0;
   .contenu-section {
@@ -300,6 +304,53 @@
     msc-lien {
       grid-area: bouton;
       justify-self: start;
+    }
+  }
+}
+
+.communaute-msc.nouvelle-da {
+  .conteneur {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .conteneur-titre-description {
+    text-align: center;
+    max-width: 588px;
+  }
+
+  .description {
+    margin-block: 0;
+  }
+
+  dsfr-card {
+    min-height: 0;
+  }
+
+  .illustration {
+    align-items: center;
+    border-radius: 0.5rem;
+    display: flex;
+    height: 5.125rem;
+    justify-content: center;
+    width: 5.125rem;
+
+    &.bleu {
+      background-color: var(--blue-france-925-125);
+    }
+
+    &.macaron {
+      background-color: var(--pink-macaron-925-125);
+    }
+
+    &.bourgeon {
+      background-color: var(--green-bourgeon-950-100);
+    }
+
+    &-container {
+      padding: 1.625rem 1.625rem 0;
     }
   }
 }

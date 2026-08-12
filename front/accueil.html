@@ -207,6 +207,42 @@ permalink: /
   </div>
 </dsfr-container>
 
+{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
+<dsfr-container class="communaute-msc nouvelle-da fond-moutarde">
+  <div class="conteneur">
+    <div class="conteneur-titre-description">
+      <h2>Rejoignez la communauté&nbsp;!</h2>
+      <p class="description">Échangez avec vos pairs, découvrez les fonctionnalités en avant-première et participez activement au développement des outils.</p>
+    </div>
+
+    <lab-anssi-carrousel-tuiles>
+      <dsfr-card title="Échanger" has-description description="Directement avec vos pairs pour une collaboration facilitée" no-link>
+        <div class="illustration-container" slot="image">
+          <span class="illustration bleu">
+            <img src="/assets/images/emoji-bulle.svg" alt="" />
+          </span>
+        </div>
+      </dsfr-card>
+      <dsfr-card title="Découvrir" has-description description="Les nouvelles fonctionnalités en avant-première" no-link>
+        <div class="illustration-container" slot="image">
+          <span class="illustration macaron">
+            <img src="/assets/images/emoji-ordinateur.svg" alt="" />
+          </span>
+        </div>
+      </dsfr-card>
+      <dsfr-card title="Contribuer" has-description description="Partagez vos besoins et suggestions d'amélioration" no-link>
+        <div class="illustration-container" slot="image">
+          <span class="illustration bourgeon">
+            <img src="/assets/images/emoji-crayon.svg" alt="" />
+          </span>
+        </div>
+      </dsfr-card>
+    </lab-anssi-carrousel-tuiles>
+
+    <dsfr-button label="Rejoindre la communauté" kind="secondary" markup="a" href="https://tally.so/r/wa6o22" target="_blank"></dsfr-button>
+  </div>
+</dsfr-container>
+{% else %}
 <dsfr-container class="communaute-msc">
   <div class="contenu-section">
     <h2>Rejoignez la communauté&nbsp;!</h2>
@@ -242,6 +278,7 @@ permalink: /
     />
   </div>
 </dsfr-container>
+{% endif %}
 
 <dsfr-container class="partenaires{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %} nouvelle-da{% endif %}">
   <h2>
