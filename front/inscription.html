@@ -1,16 +1,20 @@
 ---
-layout: defaut
+layout: sans-menu
 permalink: /inscription/
 titreHtml: 'Créez votre compte | MesServicesCyber'
 styles: /assets/styles/connexion.css
 ---
 
-<section class="connexion">
+{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
+<link rel="stylesheet" href="{{ "/assets/styles/connexion-nouvelle-da.css" | relative_url }}">
+{% endif %}
+
+<dsfr-container class="connexion">
   <div class="contenu-section">
     <div class="contenu-principal">
       <div>
         <h1>
-          Créez votre compte Mes&ZeroWidthSpace;Services&ZeroWidthSpace;Cyber
+          Créez votre compte <span class="nowrap">MesServicesCyber</span>
         </h1>
         <dsfr-connect data-themeable="false" href="/oidc/connexion"></dsfr-connect>
         <div class="deja-un-compte">
@@ -20,7 +24,11 @@ styles: /assets/styles/connexion.css
       </div>
     </div>
     <div class="contenu-secondaire">
+      {% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
+      <img src="/assets/images/illustration-connexion-nouvelle-da.avif" width="560" height="560" alt="" />
+      {% else %}
       <img src="/assets/images/illustration-connexion.svg" width="560" height="420" alt="" />
+      {% endif %}
     </div>
   </div>
-</section>
+</dsfr-container>
