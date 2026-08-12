@@ -243,7 +243,7 @@ permalink: /
   </div>
 </dsfr-container>
 
-<dsfr-container class="partenaires">
+<dsfr-container class="partenaires{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %} nouvelle-da{% endif %}">
   <h2>
     Ils s'engagent pour Mes&ZeroWidthSpace;Services&ZeroWidthSpace;Cyber
   </h2>
