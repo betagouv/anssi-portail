@@ -3,15 +3,15 @@
   import type { ItemCyber } from '../catalogue/Catalogue.types';
   import type { Guide } from '../catalogue/Guide.types';
 
-  export let fondAlternatif: boolean;
   export let titre: string;
   export let explication: string;
   export let items: Array<ItemCyber | Guide>;
   export let ancre: string;
   export let sourceIllustration: string | undefined = undefined;
+  export let couleurDeFond: string = '';
 </script>
 
-<dsfr-container id={ancre} class="action" class:fond-alternatif={fondAlternatif}>
+<dsfr-container id={ancre} class="action" style={`--background-color:var(--${couleurDeFond})`}>
   <div class="contenu-action">
     <div class="description">
       <h2>{titre}</h2>
@@ -38,6 +38,7 @@
     padding-top: 48px;
     padding-bottom: 48px;
     scroll-margin-top: 90px; /* Hauteur de la barre de navigation */
+    background: var(--background-color);
 
     .explication {
       margin: 0;
@@ -83,10 +84,6 @@
     :global(.carte) {
       width: auto;
       margin-bottom: 24px;
-    }
-
-    &.fond-alternatif {
-      background: #fff7db;
     }
   }
 </style>
