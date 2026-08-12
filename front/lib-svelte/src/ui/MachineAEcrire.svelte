@@ -61,4 +61,12 @@
       border-color: var(--yellow-moutarde-925-125);
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lettre,
+    .curseur {
+      opacity: 1;
+      animation: none;
+    }
+  }
 </style>
