@@ -45,7 +45,7 @@
       titre: 'Décrochez votre badge Cyberdépart',
       description: "Un premier marqueur d'engagement pour votre sécurité.",
       badge: {
-        label: 'Libellé badge',
+        label: 'À la clé',
         accent: 'green-bourgeon',
         size: 'sm',
         type: 'accent',
@@ -136,6 +136,7 @@
       fonctionnalites={enPropriétéWebC(fonctionnalitesParcoursBasique)}
       cliquable
       avec-cta
+      active-defilement
     >
       <dsfr-tags-group tags={tagsParcoursBasique} has-icon slot="hautentete"></dsfr-tags-group>
       <dsfr-button
@@ -182,6 +183,7 @@
       orientation-media="gauche"
       cliquable
       avec-cta
+      active-defilement
     >
       <dsfr-tags-group tags={tagsParcoursComplet} has-icon slot="hautentete"></dsfr-tags-group>
       <dsfr-button
@@ -202,25 +204,14 @@
 <section class="section-pied-de-page">
   <dsfr-container>
     <p class="lien-test-maturite">
-      <svg
-        class="icone-test-maturite"
-        width="24"
-        height="24"
-        viewBox="0 0 20 20"
-        fill="none"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M10 9V6L14 10L10 14V11H6V9H10ZM10 0C15.52 0 20 4.48 20 10C20 15.52 15.52 20 10 20C4.48 20 0 15.52 0 10C0 4.48 4.48 0 10 0ZM10 18C14.42 18 18 14.42 18 10C18 5.58 14.42 2 10 2C5.58 2 2 5.58 2 10C2 14.42 5.58 18 10 18Z"
-          fill="var(--text-action-high-blue-france, #000091)"
+      <img class="icone-fleche" src="/assets/images/icone-fleche-droite-cercle-plein.svg" alt="" />
+      <span>
+        Trouvez le parcours adapté à votre organisation à l'aide de notre test de maturité cyber. <Lien
+          href="/test-maturite"
+          libelle="Débuter le test"
+          neutre
         />
-      </svg>
-      Trouvez le parcours adapté à votre organisation à l'aide de notre test de maturité cyber. <Lien
-        href="/test-maturite"
-        libelle="Débuter le test"
-        neutre
-      />
+      </span>
     </p>
 
     <hr class="separateur" />
@@ -286,18 +277,18 @@
   }
 
   .lien-test-maturite {
-    align-items: center;
+    align-items: flex-start;
     color: var(--text-default-grey);
     display: flex;
-
     font-size: 1.125rem;
     gap: 0.5rem;
     line-height: 1.75rem;
     margin: 0;
   }
 
-  .icone-test-maturite {
-    fill: var(--text-action-high-blue-france);
+  .icone-fleche {
+    align-self: inherit;
+    flex-shrink: 0;
     width: 24px;
   }
 
