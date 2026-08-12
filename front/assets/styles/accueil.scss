@@ -427,7 +427,7 @@
 .interlocuteurs {
   --padding-section: 3.5rem 0 0.5rem;
 
-  @include a-partir-de(xl) {
+  @include a-partir-de(lg) {
     --padding-section: 6rem 0 3rem;
   }
 

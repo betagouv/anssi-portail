@@ -83,7 +83,6 @@
   lab-anssi-carrousel-tuiles {
     padding-block-end: 48px;
     margin-top: 24px;
-    min-width: 794px;
 
     &.compact {
       img {
