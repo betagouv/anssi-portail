@@ -26,8 +26,17 @@ in
     packages = with pkgs; [
       nodejs
       corepack
+      uv
       ruby_4_0
       bundler
+      bash-language-server
+      marksman
+      nixd
+      ruby-lsp
+      svelte-language-server
+      taplo
+      vscode-langservers-extracted
+      yaml-language-server
       docker-compose
       playwrightCli
       prek
@@ -39,9 +48,12 @@ in
       export GEM_HOME="$PWD/.gems"
       export COREPACK_HOME="$PWD/.corepack"
       export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+      export UV_CACHE_DIR="$PWD/.uv-cache"
+      export UV_TOOL_DIR="$PWD/.uv-tools"
+      export UV_PYTHON_INSTALL_DIR="$PWD/.uv-python"
       export PATH="$PWD/.nix-bin:$GEM_HOME/bin:$PATH"
 
-      mkdir -p "$PWD/.nix-bin" "$GEM_HOME" "$COREPACK_HOME"
+      mkdir -p "$PWD/.nix-bin" "$GEM_HOME" "$COREPACK_HOME" "$UV_CACHE_DIR" "$UV_TOOL_DIR" "$UV_PYTHON_INSTALL_DIR"
 
       # Corepack creates the pnpm shim in .nix-bin and installs the version
       # declared in package.json on first shell entry.

@@ -1,0 +1,14 @@
+[mcp_servers.serena]
+command = "uvx"
+args = [
+  "--from",
+  "git+https://github.com/oraios/serena",
+  "serena",
+  "start-mcp-server",
+  "--project-from-cwd",
+  "--context=codex",
+  "--open-web-dashboard",
+  "false",
+]
+startup_timeout_sec = 60
+env = { GEM_HOME = ".gems", UV_CACHE_DIR = ".uv-cache", UV_TOOL_DIR = ".uv-tools", UV_PYTHON_INSTALL_DIR = ".uv-python" }
