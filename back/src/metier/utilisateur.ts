@@ -170,6 +170,7 @@ export class Utilisateur {
         this.parcours ?? undefined
       )
     );
+
     this.mesuresPrisesEnCompte.push(mesure);
     if (this.nombreDeMesuresPrisesEnCompte(module) === module.nombreDeMesures()) {
       await busEvenements.publie(
