@@ -16,6 +16,10 @@
   background-color: var(--yellow-moutarde-925-125, #fde2b5);
 }
 
+.fond-bleu-france {
+  background-color: var(--blue-france-sun-113-625, #000091);
+}
+
 .chapeau.fond-sombre {
   padding: 48px 0;
   .contenu-section {
@@ -181,6 +185,51 @@
         margin-block: 24px;
       }
     }
+  }
+}
+
+.guides-et-ressources {
+  padding-block: 6rem;
+
+  &,
+  .titre {
+    color: var(--text-inverted-grey);
+  }
+
+  .description {
+    margin-block: 0 1.5rem;
+  }
+
+  .conteneur {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include a-partir-de(lg) {
+      flex-direction: row;
+    }
+  }
+
+  .contenu-principal,
+  .contenu-secondaire {
+    @include a-partir-de(lg) {
+      flex: 1;
+    }
+  }
+
+  .contenu-principal {
+    @include a-partir-de(lg) {
+      order: 1;
+    }
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
   }
 }
 
