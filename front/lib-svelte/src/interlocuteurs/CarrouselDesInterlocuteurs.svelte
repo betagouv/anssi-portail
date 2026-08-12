@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { afficheNouvelleDA } from '$plateforme/environnement';
+
   import Tuile from '../ui/Tuile.svelte';
 
   const { mode = 'complet' }: { mode?: 'compact' | 'complet' } = $props();
@@ -19,7 +21,9 @@
   >
     {#snippet illustration()}
       <img
-        src="/assets/images/trois-mains-croisees.svg"
+        src={afficheNouvelleDA
+          ? '/assets/images/trois-mains-croisees-nouvelle-da.svg'
+          : '/assets/images/trois-mains-croisees.svg'}
         width={tailleImage}
         height={tailleImage}
         alt="Contacts cyber"
@@ -34,7 +38,12 @@
     élargi
   >
     {#snippet illustration()}
-      <img src="/assets/images/coche-jaune-sur-rond-noir.svg" alt="Prestataires qualifiés et labellisés" />
+      <img
+        src={afficheNouvelleDA
+          ? '/assets/images/coche-rouge-dans-cercle-bleu.svg'
+          : '/assets/images/coche-jaune-sur-rond-noir.svg'}
+        alt="Prestataires qualifiés et labellisés"
+      />
     {/snippet}
   </Tuile>
   <Tuile
@@ -45,7 +54,12 @@
     élargi
   >
     {#snippet illustration()}
-      <img src="/assets/images/pile-de-pieces.svg" width={tailleImage} height={tailleImage} alt="Financements cyber" />
+      <img
+        src={afficheNouvelleDA ? '/assets/images/piles-de-pieces.svg' : '/assets/images/pile-de-pieces.svg'}
+        width={tailleImage}
+        height={tailleImage}
+        alt="Financements cyber"
+      />
     {/snippet}
   </Tuile>
 </lab-anssi-carrousel-tuiles>
