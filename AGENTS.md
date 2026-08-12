@@ -7,6 +7,7 @@ This file provides guidance to AI coding agents when working with code in this r
 **anssi-portail** is a monorepo containing the ANSSI web portal: a backend API server (Node.js/Express/TypeScript) with PostgreSQL, and a frontend with Jekyll static site generator and Svelte components.
 
 **Tech stack:**
+
 - Backend: Node.js (>=24), TypeScript, Express, PostgreSQL
 - Frontend: Jekyll + Svelte
 - Package manager: pnpm (v10.24.0)
@@ -20,6 +21,10 @@ This file provides guidance to AI coding agents when working with code in this r
 - [mise-a-jour-financements/](mise-a-jour-financements/AGENTS.md) - Data sync utility for financing information
 - [demande-diag/](demande-diag/AGENTS.md) - Web Component for diagnostic questionnaire
 - [comparaison-grist/](comparaison-grist/AGENTS.md) - Utility for comparing content with Grist spreadsheets
+
+## Agent Tooling
+
+For coding tasks, use the Serena MCP server: read its initial instructions first, then prefer semantic tools when useful.
 
 ## Essential Commands
 
@@ -42,6 +47,7 @@ pnpm lint && pnpm format              # Check and fix code style
 ## Configuration
 
 Copy `.env.template` to `.env` and fill in:
+
 - Database credentials (auto-configured for Docker dev setup)
 - Authentication secrets (JWT, OIDC)
 - External service APIs (Brevo email, S3, Sentry)
@@ -57,6 +63,7 @@ Copy `.env.template` to `.env` and fill in:
 ## Docker & Deployment
 
 Multi-stage build creates static site + compiled backend. See `Dockerfile` for:
+
 1. Svelte build
 2. Jekyll build (with build-arg variables for tracking, Sentry)
 3. TypeScript compilation

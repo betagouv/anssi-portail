@@ -16,6 +16,9 @@ mise-a-jour-financements/rapports
 .nix-bin
 .corepack
 .gems
+.uv-cache
+.uv-tools
+.uv-python
 
 # Playwright-cli
 .playwright-cli
