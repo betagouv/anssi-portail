@@ -20,6 +20,10 @@
   background-color: var(--blue-france-sun-113-625, #000091);
 }
 
+.fond-macaron {
+  background-color: var(--pink-macaron-850-200, #fcc0b4);
+}
+
 .chapeau.fond-sombre {
   padding: 48px 0;
   .contenu-section {
@@ -213,6 +217,92 @@
   img {
     max-width: 100%;
     height: auto;
+  }
+}
+
+.proteger-organisation {
+  padding-block: 6rem;
+  background: {
+    image: url('/assets/images/motif-fond-macaron.svg');
+    repeat: no-repeat;
+    position: center bottom;
+  }
+
+  @include a-partir-de(lg) {
+    background-position: right bottom;
+  }
+
+  .conteneur {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+
+    @include a-partir-de(lg) {
+      max-width: taille-pour-colonnes(10);
+      margin-inline: auto;
+    }
+  }
+
+  .en-tete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .badge-accompagnement {
+    background-color: var(--green-bourgeon-950-100);
+    border-radius: 100px;
+    padding: 6px 16px 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--text-title-grey);
+  }
+
+  .titre {
+    margin-block: 0;
+  }
+
+  .mot-souligne {
+    position: relative;
+    z-index: 0;
+    white-space: nowrap;
+
+    &::after {
+      content: '';
+      background-image: url('/assets/images/motif-surlignage-cercle.svg');
+      background-repeat: no-repeat;
+      position: absolute;
+      left: -4%;
+      bottom: -5%;
+      width: 110%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+  }
+
+  .description {
+    color: var(--text-default-grey);
+    font-size: 1.25rem;
+    line-height: 2rem;
+    margin-block: 0;
+  }
+
+  .illustration {
+    margin: 0 auto;
+
+    @include a-partir-de(lg) {
+      max-width: taille-pour-colonnes(8);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
   }
 }
 
