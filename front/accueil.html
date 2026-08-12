@@ -201,7 +201,7 @@ permalink: /
   </div>
 </dsfr-container>
 
-<dsfr-container class="equipe-bizdev">
+<dsfr-container class="equipe-bizdev{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %} fond-cafe-creme{% endif %}">
   <div class="contenu-section" id="" >
     {% include composant-svelte.html id="equipe-biz-dev" %}
   </div>

@@ -4,6 +4,10 @@
 @use '../../assets/styles/responsive' as *;
 @use '../../assets/styles/grille' as *;
 
+.fond-cafe-creme {
+  background-color: var(--brown-cafe-creme-975-75, #fbf6ed);
+}
+
 .chapeau.fond-sombre {
   padding: 48px 0;
   .contenu-section {
@@ -236,6 +240,10 @@
 .equipe-bizdev {
   background-color: var(--jaune-clair-msc);
   padding: 56px 0;
+
+  &:has(.nouvelle-da) {
+    background-color: var(--brown-cafe-creme-975, #fbf6ed);
+  }
 }
 
 .communaute-msc {

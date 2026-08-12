@@ -1,26 +1,61 @@
 <script lang="ts">
+  import { afficheNouvelleDA } from '$plateforme/environnement';
   import Lien from '../ui/Lien.svelte';
 </script>
 
-<div class="contenu">
-  <div class="photos">
-    <img src="/assets/images/floriane-bizdev.avif" width="500" height="500" alt="Floriane Gallego" />
-  </div>
-  <h2>Notre équipe est à votre écoute</h2>
-  <p class="texte-standard-md">
-    Participer à un webinaire collectif de 45 minutes pour en savoir plus sur MesServicesCyber, le test de maturité et
-    le diagnostic cyber afin de mieux protéger votre entité des cyberattaques.
-  </p>
-  <div class="boutons">
-    <Lien
-      apparence="bouton"
-      blank
+{#if afficheNouvelleDA}
+  <div class="contenu-biz-dev nouvelle-da">
+    <dsfr-card
+      title="Notre équipe est à votre écoute"
+      has-description
+      description="Participez à un webinaire collectif de 45 minutes pour en savoir plus sur MesServicesCyber, le test de maturité et le diagnostic cyber afin de mieux savoir comment protéger votre entité des cyberattaques."
       href="https://app.livestorm.co/lab-anssi/webinaire-cyberdepart"
-      libelle="Assister au webinaire"
-      type="primaire"
-    />
+      enlarge
+      no-icon
+      has-buttons
+    >
+      <dsfr-button
+        label="Assister au webinaire"
+        kind="secondary"
+        size="md"
+        has-icon
+        icon="calendar-event-fill"
+        icon-place="left"
+        markup="a"
+        href="https://app.livestorm.co/lab-anssi/webinaire-cyberdepart"
+        slot="buttonsgroup"
+      ></dsfr-button>
+    </dsfr-card>
+
+    <div class="visuel">
+      <div class="illustration">
+        <figure>
+          <img src="/assets/images/composition-bizdev-floriane.png" width="800" height="476" alt="Floriane Gallego" />
+        </figure>
+      </div>
+    </div>
   </div>
-</div>
+{:else}
+  <div class="contenu">
+    <div class="photos">
+      <img src="/assets/images/floriane-bizdev.avif" width="500" height="500" alt="Floriane Gallego" />
+    </div>
+    <h2>Notre équipe est à votre écoute</h2>
+    <p class="texte-standard-md">
+      Participer à un webinaire collectif de 45 minutes pour en savoir plus sur MesServicesCyber, le test de maturité et
+      le diagnostic cyber afin de mieux protéger votre entité des cyberattaques.
+    </p>
+    <div class="boutons">
+      <Lien
+        apparence="bouton"
+        blank
+        href="https://app.livestorm.co/lab-anssi/webinaire-cyberdepart"
+        libelle="Assister au webinaire"
+        type="primaire"
+      />
+    </div>
+  </div>
+{/if}
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
@@ -70,6 +105,41 @@
       grid-area: bouton;
       justify-self: flex-start;
       margin-bottom: 32px;
+    }
+  }
+
+  .contenu-biz-dev {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include a-partir-de(md) {
+      flex-direction: row;
+    }
+
+    .visuel {
+      @include a-partir-de(md) {
+        flex: 1;
+      }
+    }
+
+    figure {
+      margin: 0;
+    }
+
+    img {
+      height: auto;
+      max-width: 100%;
+    }
+
+    dsfr-card {
+      min-height: auto;
+
+      @include a-partir-de(md) {
+        flex: 1;
+        order: 1;
+      }
     }
   }
 </style>
