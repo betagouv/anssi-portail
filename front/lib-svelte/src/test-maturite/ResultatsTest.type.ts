@@ -1,7 +1,7 @@
 import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
 import type { IdRubrique } from './TestMaturite.type';
 
-export type ReponsesResultatTest = Record<IdRubrique, number>;
+export type RéponsesResultatTest = Record<IdRubrique, number>;
 
 export type CodeLibelle = {
   code: string;
@@ -15,7 +15,7 @@ export type InfosOrganisation = {
 };
 
 export type DernierResultatTest = {
-  reponses: ReponsesResultatTest;
+  reponses: RéponsesResultatTest;
   dateRealisation: string;
   idNiveau: IdNiveau;
   organisation: InfosOrganisation;

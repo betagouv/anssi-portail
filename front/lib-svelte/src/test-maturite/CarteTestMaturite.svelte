@@ -1,11 +1,11 @@
 <script context="module" lang="ts">
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
-  import type { ReponsesResultatTest } from './ResultatsTest.type';
-  export type ResultatTest = {
+  import type { RéponsesResultatTest } from './ResultatsTest.type';
+  export type RésultatTest = {
     dateRealisation: string;
     niveau: IdNiveau;
     id: string;
-    reponses: ReponsesResultatTest;
+    reponses: RéponsesResultatTest;
   };
 </script>
 
@@ -13,22 +13,22 @@
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import { afficheNouvelleDA } from '$plateforme/environnement';
 
-  export let resultatTest: ResultatTest;
+  export let résultatTest: RésultatTest;
 
-  $: niveau = niveauxMaturite.find((niveau) => niveau.id === resultatTest.niveau);
+  $: niveau = niveauxMaturite.find((niveau) => niveau.id === résultatTest.niveau);
 
   $: description = niveau?.description;
   $: libelleNiveau = niveau?.label;
   $: dateFormatee = new Intl.DateTimeFormat('fr-FR', {
     dateStyle: 'long',
-  }).format(new Date(resultatTest.dateRealisation));
+  }).format(new Date(résultatTest.dateRealisation));
 </script>
 
-<a href="#historique/{resultatTest.id}" class="carte">
+<a href="#historique/{résultatTest.id}" class="carte">
   <div class="illustration-niveau" class:avec-nouvelle-da={afficheNouvelleDA}>
     <img
       class="plante"
-      src="/assets/images/test-maturite/niveaux/{resultatTest.niveau}{afficheNouvelleDA ? '-nouvelle-da' : ''}.svg"
+      src="/assets/images/test-maturite/niveaux/{résultatTest.niveau}{afficheNouvelleDA ? '-nouvelle-da' : ''}.svg"
       alt="Niveau de maturité"
     />
   </div>

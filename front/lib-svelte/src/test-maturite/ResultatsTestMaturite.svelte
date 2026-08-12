@@ -21,13 +21,13 @@
   export let defilementAutomatique = true;
 
   let lienActif: CleOnglet | undefined;
-  let idResultatTest: string | undefined;
+  let idRésultatTest: string | undefined;
   let propriétésFilAriane: PropriétésFilAriane;
 
   const changeOngletActif = () => {
     const ongletRiche = window.location.hash.slice(1).split('/');
     const onglet = ongletRiche[0];
-    idResultatTest = ongletRiche?.[1];
+    idRésultatTest = ongletRiche?.[1];
     lienActif = clesOnglet.includes(onglet) ? onglet : '#votre-organisation';
   };
 
@@ -77,7 +77,7 @@
 {#if lienActif === '#votre-organisation'}
   <ResultatsMonOrganisation {animeTuiles} dateRealisation={dateRealisationDernierTest} {defilementAutomatique} />
 {:else if lienActif === '#historique' && $profilStore}
-  <HistoriqueTests {idResultatTest} />
+  <HistoriqueTests {idRésultatTest} />
 {:else if $profilStore}
   <ComparaisonTest />
 {/if}

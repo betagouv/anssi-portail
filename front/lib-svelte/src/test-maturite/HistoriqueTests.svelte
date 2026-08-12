@@ -2,61 +2,61 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import Lien from '../ui/Lien.svelte';
-  import CarteTestMaturite, { type ResultatTest } from './CarteTestMaturite.svelte';
+  import CarteTestMaturite, { type RésultatTest } from './CarteTestMaturite.svelte';
   import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
   import { questionnaireStore } from './stores/questionnaire.store';
 
-  export let idResultatTest: string | undefined;
+  export let idRésultatTest: string | undefined;
 
-  let resultatsTest: ResultatTest[] = [];
-  let resultatsTestParAnnee: ResultatsParAnnee = {};
+  let résultatsTest: RésultatTest[] = [];
+  let résultatsTestParAnnée: RésultatsParAnnée = {};
 
-  type ResultatsParAnnee = Record<number, ResultatTest[]>;
+  type RésultatsParAnnée = Record<number, RésultatTest[]>;
 
   onMount(async () => {
-    const reponse = await axios.get<ResultatTest[]>('/api/resultats-test');
-    resultatsTest = reponse.data;
-    resultatsTestParAnnee = resultatsTest
+    const réponse = await axios.get<RésultatTest[]>('/api/resultats-test');
+    résultatsTest = réponse.data;
+    résultatsTestParAnnée = résultatsTest
       .sort((a, b) => new Date(b.dateRealisation).getTime() - new Date(a.dateRealisation).getTime())
-      .reduce((accumulateur: ResultatsParAnnee, element: ResultatTest) => {
-        const annee = new Date(element.dateRealisation).getFullYear();
-        if (!(annee in accumulateur)) accumulateur[annee] = [];
-        accumulateur[annee].push(element);
+      .reduce((accumulateur: RésultatsParAnnée, élément: RésultatTest) => {
+        const année = new Date(élément.dateRealisation).getFullYear();
+        if (!(année in accumulateur)) accumulateur[année] = [];
+        accumulateur[année].push(élément);
         return accumulateur;
-      }, {} as ResultatsParAnnee);
+      }, {} as RésultatsParAnnée);
   });
 
-  $: annees = Object.keys(resultatsTestParAnnee)
+  $: années = Object.keys(résultatsTestParAnnée)
     .map((a) => Number(a))
     .sort((a, b) => b - a);
-
-  $: resultatTestSelectionne = idResultatTest
-    ? resultatsTest.find((resultat) => resultat.id === idResultatTest)
+  $: résultatTestSelectionné = idRésultatTest
+    ? résultatsTest.find((résultat) => résultat.id === idRésultatTest)
     : undefined;
 
   $: {
-    if (resultatTestSelectionne) questionnaireStore.chargeReponses(resultatTestSelectionne.reponses);
+    if (résultatTestSelectionné) questionnaireStore.chargeRéponses(résultatTestSelectionné.reponses);
   }
 </script>
 
-{#if resultatTestSelectionne}
+{#if résultatTestSelectionné}
   <dsfr-container class="section-retour-historique">
     <Lien href="/ma-maturite#historique" libelle="Retour" icone="arrow-go-back-line" />
   </dsfr-container>
   <ResultatsMonOrganisation
     animeTuiles={false}
-    dateRealisation={new Date(resultatTestSelectionne.dateRealisation)}
+    dateRealisation={new Date(résultatTestSelectionné.dateRealisation)}
     defilementAutomatique={false}
   />
 {:else}
   <dsfr-container>
     <h2>Historique de votre maturité cyber</h2>
-    {#each annees as annee (annee)}
+
+    {#each années as année (année)}
       <div class="annee">
-        <h3>{annee}</h3>
+        <h3>{année}</h3>
         <div class="cartes">
-          {#each resultatsTestParAnnee[Number(annee)] as resultatTest (resultatTest.id)}
-            <CarteTestMaturite {resultatTest} />
+          {#each résultatsTestParAnnée[Number(année)] as résultatTest (résultatTest.id)}
+            <CarteTestMaturite {résultatTest} />
           {/each}
         </div>
       </div>

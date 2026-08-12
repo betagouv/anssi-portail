@@ -14,7 +14,7 @@
       const reponseHttp = await axios.get<DernierResultatTest>('/api/resultats-test/dernier');
       const reponses = reponseHttp.data.reponses;
       dateRealisationDernierTest = new Date(reponseHttp.data.dateRealisation);
-      questionnaireStore.chargeReponses(reponses);
+      questionnaireStore.chargeRéponses(reponses);
     } catch (e) {
       if (e instanceof AxiosError && e.status === 404) {
         window.location.href = '/test-maturite';
