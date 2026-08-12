@@ -4,7 +4,12 @@ import { ConfigurationServeur } from '../configurationServeur.js';
 import { valideCorpsRequete } from '../zod.js';
 import { schemaRessourceParcours } from './ressourceParcours.schema.js';
 
-export const ressourceParcours = ({ entrepotUtilisateur, adaptateurHachage, middleware }: ConfigurationServeur) => {
+export const ressourceParcours = ({
+  entrepotUtilisateur,
+  adaptateurHachage,
+  middleware,
+  busEvenements,
+}: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.put(
@@ -14,7 +19,7 @@ export const ressourceParcours = ({ entrepotUtilisateur, adaptateurHachage, midd
     valideCorpsRequete(schemaRessourceParcours),
     async (requête, réponse) => {
       const utilisateur = requête.utilisateur as Utilisateur;
-      utilisateur.rejoinsProgrammeAccompagnement(requête.body.nom);
+      await utilisateur.rejoinsParcours(requête.body.nom, busEvenements);
       await entrepotUtilisateur.metsAJour(utilisateur);
       réponse.sendStatus(204);
     }

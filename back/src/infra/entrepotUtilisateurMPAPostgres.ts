@@ -9,6 +9,7 @@ import { AdaptateurHachage } from './adaptateurHachage.js';
 import { AdaptateurProfilAnssi } from './adaptateurProfilAnssi.js';
 import { AdaptateurRechercheEntreprise } from './adaptateurRechercheEntreprise.js';
 import { UtilisateurBDD } from './utilisateurBDD.js';
+import { Parcours } from '../metier/parcours.js';
 
 type DonneesUtilisateurEnClair = {
   email: string;
@@ -134,7 +135,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         organisation: new Organisation({ ...organisation, codeActivite }),
         roles: utilisateurBDD.roles as unknown as Role[],
         mesuresPrisesEnCompte,
-        parcours: utilisateurBDD.parcours as 'complet' | 'allégé' | null,
+        parcours: utilisateurBDD.parcours as Parcours | null,
       },
       this.adaptateurRechercheEntreprise,
       this.adaptateurHachage

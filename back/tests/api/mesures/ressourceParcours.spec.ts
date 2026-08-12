@@ -3,30 +3,36 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
+import { ParcoursRejoint } from '../../../src/bus/evenements/parcoursRejoint.js';
 import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
-import { jeanneDupont } from '../objetsPretsALEmploi.js';
+import { MockBusEvenement } from '../../bus/busPourLesTests.js';
+import { ConstructeurDUtilisateur } from './constructeurDUtilisateur.js';
+import { Utilisateur } from '../../../src/metier/utilisateur.js';
 
 describe("La ressource du parcours de l'utilisateur", async () => {
   let serveur: Express;
-  let cookieDeJeanneDupont: string;
+  let cookie: string;
   let entrepotUtilisateur: EntrepotUtilisateurMemoire;
+  let busEvenements: MockBusEvenement;
+  let utilisateur: Utilisateur;
 
   beforeEach(async () => {
     entrepotUtilisateur = new EntrepotUtilisateurMemoire();
-    serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotUtilisateur });
-
-    await entrepotUtilisateur.ajoute(jeanneDupont);
-    cookieDeJeanneDupont = encodeSession({
-      email: jeanneDupont.email,
+    busEvenements = new MockBusEvenement();
+    serveur = creeServeur({ ...configurationDeTestDuServeur, entrepotUtilisateur, busEvenements });
+    utilisateur = new ConstructeurDUtilisateur().avecLEmail('check@yopmail.com').construis();
+    await entrepotUtilisateur.ajoute(utilisateur);
+    cookie = encodeSession({
+      email: utilisateur.email,
       token: 'valide',
     });
   });
 
   describe('sur requête PUT', async () => {
     it('retourne 204', async () => {
-      const reponse = await request(serveur).put('/parcours').set('Cookie', cookieDeJeanneDupont).send({
+      const reponse = await request(serveur).put('/parcours').set('Cookie', cookie).send({
         nom: 'complet',
       });
 
@@ -34,32 +40,38 @@ describe("La ressource du parcours de l'utilisateur", async () => {
     });
 
     it('retourne 400 si le corps de la requête ne respecte pas la structure attendue', async () => {
-      const reponse = await request(serveur)
-        .put('/parcours')
-        .set('Cookie', cookieDeJeanneDupont)
-        .send({ test: 'test' });
+      const reponse = await request(serveur).put('/parcours').set('Cookie', cookie).send({ test: 'test' });
 
       assert.equal(reponse.status, 400);
     });
 
     it('peut rejoindre le parcours complet', async () => {
-      await request(serveur).put('/parcours').set('Cookie', cookieDeJeanneDupont).send({ nom: 'complet' });
+      await request(serveur).put('/parcours').set('Cookie', cookie).send({ nom: 'complet' });
 
-      assert.equal(jeanneDupont.parcoursActuel(), 'complet');
-      assert.deepEqual(entrepotUtilisateur.dernierUtilisateurMisAJour, jeanneDupont);
+      assert.equal(utilisateur.parcoursActuel(), 'complet');
+      assert.deepEqual(entrepotUtilisateur.dernierUtilisateurMisAJour, utilisateur);
     });
 
     it('peut rejoindre le parcours allégé', async () => {
-      await request(serveur).put('/parcours').set('Cookie', cookieDeJeanneDupont).send({ nom: 'allégé' });
+      await request(serveur).put('/parcours').set('Cookie', cookie).send({ nom: 'allégé' });
 
-      assert.equal(jeanneDupont.parcoursActuel(), 'allégé');
-      assert.deepEqual(entrepotUtilisateur.dernierUtilisateurMisAJour, jeanneDupont);
+      assert.equal(utilisateur.parcoursActuel(), 'allégé');
+      assert.deepEqual(entrepotUtilisateur.dernierUtilisateurMisAJour, utilisateur);
     });
 
     it('refuse la modification pour un utilisateur non connecté', async () => {
       const réponse = await request(serveur).put('/parcours').send({ nom: 'allégé' });
 
       assert.equal(réponse.status, 401);
+    });
+
+    it("émet un évènement lorsqu'un parcours est rejoint", async () => {
+      await request(serveur).put('/parcours').set('Cookie', cookie).send({ nom: 'complet' });
+
+      const evenement = busEvenements.recupereEvenement(ParcoursRejoint);
+
+      assert.equal(evenement?.emailHache, utilisateur.emailHache());
+      assert.equal(evenement?.parcours, 'complet');
     });
   });
 });

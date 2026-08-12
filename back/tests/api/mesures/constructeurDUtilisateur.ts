@@ -1,4 +1,5 @@
 import { Mesure } from '../../../src/metier/mesure.js';
+import { Parcours } from '../../../src/metier/parcours.js';
 import { Utilisateur } from '../../../src/metier/utilisateur.js';
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../fauxObjets.js';
 
@@ -71,7 +72,7 @@ export class ConstructeurDUtilisateur {
     return this;
   }
 
-  avecLeParcours(parcours: 'complet' | 'allégé' | null) {
+  avecLeParcours(parcours: Parcours | null) {
     this.parcours = parcours;
     return this;
   }

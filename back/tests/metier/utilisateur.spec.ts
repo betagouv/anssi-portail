@@ -14,6 +14,7 @@ import { fabriqueModuleCyberdépart, mesureAuthentA2Etapes } from '../api/objets
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
 import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire.js';
 import { Module } from '../../src/metier/module.js';
+import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
 
 describe("L'utilisateur", () => {
   const infosUtilisateur = {
@@ -400,23 +401,26 @@ describe("L'utilisateur", () => {
             moduleCyberdépart
           );
 
+          const evenement = busEvenements.recupereEvenement(ParcoursRejoint);
+
           assert.equal(utilisateurDeParcours.parcoursActuel(), 'allégé');
+          assert.equal(evenement?.emailHache, utilisateurDeParcours.emailHache());
+          assert.equal(evenement?.parcours, 'allégé');
         });
 
         it("ne rejoins pas le parcours basique s'il est déjà en parcours complet", async () => {
-          utilisateurDeParcours.mesuresPrisesEnCompte = [];
-          utilisateurDeParcours.rejoinsProgrammeAccompagnement('complet');
+          const utilisateur = utilisateurDeTest()
+            .avecLEmail('utilisateur@mail.com')
+            .avecLeParcours('complet')
+            .construis();
+          utilisateur.mesuresPrisesEnCompte = [];
 
           const mesureCyberdépart = mesureDeTest().avecLId('AUTH.1').construis();
           moduleCyberdépart.mesures = [mesureCyberdépart];
-          await utilisateurDeParcours.prendEnCompte(
-            mesureCyberdépart,
-            entrepotPriseEnCompte,
-            busEvenements,
-            moduleCyberdépart
-          );
+          await utilisateur.prendEnCompte(mesureCyberdépart, entrepotPriseEnCompte, busEvenements, moduleCyberdépart);
 
-          assert.equal(utilisateurDeParcours.parcoursActuel(), 'complet');
+          assert.equal(utilisateur.parcoursActuel(), 'complet');
+          assert.equal(busEvenements.naPasRecuDEvenement(ParcoursRejoint), true);
         });
       });
 
@@ -434,7 +438,7 @@ describe("L'utilisateur", () => {
 
         it("rejoins le parcours complet s'il est déjà en parcours basique", async () => {
           utilisateurDeParcours.mesuresPrisesEnCompte = [];
-          utilisateurDeParcours.rejoinsProgrammeAccompagnement('allégé');
+          await utilisateurDeParcours.rejoinsParcours('allégé', busEvenements);
           const module = new ConstructeurDeModule().construis();
           const mesure = mesureDeTest().avecLId('AUTH.1').construis();
           module.mesures = [mesure];
