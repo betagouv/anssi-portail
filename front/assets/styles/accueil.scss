@@ -362,6 +362,15 @@
       order: 1;
     }
   }
+
+  .illustration {
+    margin-inline: auto;
+    max-width: 588px;
+
+    @include a-partir-de(lg) {
+      max-width: 100%;
+    }
+  }
 }
 
 .test-maturite {
