@@ -1,7 +1,5 @@
 <script lang="ts">
   import { profilStore } from '../stores/profil.store';
-
-  const menu = [{ label: 'Services ANSSI utilisés', href: '/services-anssi' }];
 </script>
 
 <div class="conteneur-zone-indentification">
@@ -31,7 +29,6 @@
       button-id="utilisateur-btn"
       collapse-id="nav-utilisateur"
       hasLogout
-      links={menu}
     >
       <dsfr-button
         slot="logout"
