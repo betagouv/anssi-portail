@@ -149,7 +149,33 @@ permalink: /
 </dsfr-container>
 
 {% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
-<dsfr-container class="guides-et-ressources fond-bleu-france">
+<dsfr-container class="nis2 section-deux-colonnes fond-cafe-creme">
+  <div class="conteneur">
+    <div class="contenu-principal">
+      <h2 class="titre fr-h1">NIS 2 arrive. Anticipez dès maintenant.</h2>
+
+      <p class="description">La directive NIS 2 renforce les exigences de cybersécurité pour des milliers d'entreprises et de collectivités en France et en Europe.</p>
+      <p class="description">Avec MesServicesCyber, découvrez NIS 2, si votre organisation est concernée et les étapes incontournables. Explorez les exigences du Référentiel Cyber France (ReCyF), pensé pour faciliter la mise en conformité avec NIS2 et comparez-le avec d’autres standards (ISO, etc.).</p>
+
+      <msc-lien
+      apparence="bouton"
+      href="/nis2"
+      libelle="Découvrir la directive NIS2"
+      type="secondaire"
+      ></msc-lien>
+    </div>
+
+    <div class="contenu-secondaire">
+      <figure class="illustration">
+        <img src="/assets/images/la-directive-NIS2.svg" alt="" />
+      </figure>
+    </div>
+  </div>
+</dsfr-container>
+{% endif %}
+
+{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
+<dsfr-container class="guides-et-ressources section-deux-colonnes fond-bleu-france">
   <div class="conteneur">
     <div class="contenu-principal">
       <h2 class="titre fr-h1">Les recommandations de l'ANSSI, à portée de main.</h2>
