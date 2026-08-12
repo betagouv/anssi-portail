@@ -301,8 +301,12 @@
 }
 
 .partenaires {
-  background-color: #f6f6f6;
+  background-color: transparent;
   padding: 56px 0;
+
+  &:not(.nouvelle-da) {
+    background-color: #f6f6f6;
+  }
 
   .logos {
     display: flex;
