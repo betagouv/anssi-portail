@@ -3,18 +3,13 @@
   import { onMount } from 'svelte';
   import type { DernierResultatTest } from './ResultatsTest.type';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
-  import { questionnaireStore } from './stores/questionnaire.store';
 
-  let dateRealisationDernierTest: Date | undefined;
-
-  questionnaireStore.initialise();
+  let dernierRésultatTest: DernierResultatTest | undefined;
 
   onMount(async () => {
     try {
       const reponseHttp = await axios.get<DernierResultatTest>('/api/resultats-test/dernier');
-      const reponses = reponseHttp.data.reponses;
-      dateRealisationDernierTest = new Date(reponseHttp.data.dateRealisation);
-      questionnaireStore.chargeRéponses(reponses);
+      dernierRésultatTest = reponseHttp.data;
     } catch (e) {
       if (e instanceof AxiosError && e.status === 404) {
         window.location.href = '/test-maturite';
@@ -25,4 +20,11 @@
   });
 </script>
 
-<ResultatsTestMaturite animeTuiles={false} {dateRealisationDernierTest} defilementAutomatique={false} />
+{#if dernierRésultatTest}
+  <ResultatsTestMaturite
+    animeTuiles={false}
+    dateRealisation={new Date(dernierRésultatTest.dateRealisation)}
+    idNiveau={dernierRésultatTest.idNiveau}
+    defilementAutomatique={false}
+  />
+{/if}

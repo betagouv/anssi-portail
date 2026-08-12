@@ -104,10 +104,14 @@
 
   $: enSessionGroupe = !!codeSessionGroupe;
   $: organisateurSessionGroupe = enSessionGroupe && organisateurSession;
+  $: moyenne =
+    $questionnaireStore.toutesLesReponses.reduce((accumulateur, réponse) => accumulateur + réponse, 0) /
+    $questionnaireStore.toutesLesReponses.length;
+  $: idNiveau = calculeIdNiveau(moyenne);
 </script>
 
 {#if afficheResultats}
-  <ResultatsTestMaturite />
+  <ResultatsTestMaturite {idNiveau} />
 {:else if introFaite}
   <dsfr-container class="test-maturite">
     <div class="lien-retour">

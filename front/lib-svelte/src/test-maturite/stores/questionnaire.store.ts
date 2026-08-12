@@ -1,5 +1,4 @@
 import { derived, writable } from 'svelte/store';
-import type { RéponsesResultatTest } from '../ResultatsTest.type';
 
 export type Questionnaire = {
   questionCourante: number;
@@ -24,18 +23,6 @@ export const questionnaireStore = {
   reviensEnArriere() {
     update((state) => {
       state.questionCourante--;
-      return state;
-    });
-  },
-
-  chargeRéponses(reponses: RéponsesResultatTest) {
-    update((state) => {
-      state.toutesLesReponses[0] = reponses['prise-en-compte-risque'] - 1;
-      state.toutesLesReponses[1] = reponses.posture - 1;
-      state.toutesLesReponses[2] = reponses.pilotage - 1;
-      state.toutesLesReponses[3] = reponses['ressources-humaines'] - 1;
-      state.toutesLesReponses[4] = reponses.budget - 1;
-      state.toutesLesReponses[5] = reponses['adoption-solutions'] - 1;
       return state;
     });
   },

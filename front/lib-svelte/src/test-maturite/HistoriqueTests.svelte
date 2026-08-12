@@ -4,7 +4,6 @@
   import Lien from '../ui/Lien.svelte';
   import CarteTestMaturite, { type RésultatTest } from './CarteTestMaturite.svelte';
   import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
-  import { questionnaireStore } from './stores/questionnaire.store';
 
   export let idRésultatTest: string | undefined;
 
@@ -32,10 +31,6 @@
   $: résultatTestSelectionné = idRésultatTest
     ? résultatsTest.find((résultat) => résultat.id === idRésultatTest)
     : undefined;
-
-  $: {
-    if (résultatTestSelectionné) questionnaireStore.chargeRéponses(résultatTestSelectionné.reponses);
-  }
 </script>
 
 {#if résultatTestSelectionné}
@@ -46,6 +41,7 @@
     animeTuiles={false}
     dateRealisation={new Date(résultatTestSelectionné.dateRealisation)}
     defilementAutomatique={false}
+    idNiveau={résultatTestSelectionné.niveau}
   />
 {:else}
   <dsfr-container>
