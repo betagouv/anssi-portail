@@ -1,5 +1,5 @@
 import { derived, writable } from 'svelte/store';
-import type { ReponsesResultatTest } from '../ResultatsTest.type';
+import type { RéponsesResultatTest } from '../ResultatsTest.type';
 
 export type Questionnaire = {
   questionCourante: number;
@@ -28,7 +28,7 @@ export const questionnaireStore = {
     });
   },
 
-  chargeReponses(reponses: ReponsesResultatTest) {
+  chargeRéponses(reponses: RéponsesResultatTest) {
     update((state) => {
       state.toutesLesReponses[0] = reponses['prise-en-compte-risque'] - 1;
       state.toutesLesReponses[1] = reponses.posture - 1;

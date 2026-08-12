@@ -9,7 +9,7 @@
   import LegendeAnneau from './LegendeAnneau.svelte';
   import LegendeRadarSessionGroupe from './LegendeRadarSessionGroupe.svelte';
   import RadarSessionGroupe from './RadarSessionGroupe.svelte';
-  import type { ReponsesResultatTest } from './ResultatsTest.type';
+  import type { RéponsesResultatTest } from './ResultatsTest.type';
   import { type Serie, type SerieRadar } from './Serie';
   import TuilesMaturiteSessionGroupe from './TuilesMaturiteSessionGroupe.svelte';
   import Heros from '../ui/Heros.svelte';
@@ -19,7 +19,7 @@
 
   type ResumeNiveau = {
     total: number;
-    moyennes: ReponsesResultatTest;
+    moyennes: RéponsesResultatTest;
   };
   type ResultatsSessionGroupe = {
     nombreParticipants: number;
