@@ -4,10 +4,7 @@ declare namespace Express {
     utilisateur: Utilisateur | undefined;
   }
 
-  export interface CorpsDeRequeteTypee<T> extends Request {
-    body: T;
-    params: Record<string, unknown>;
-  }
+  export type CorpsDeRequeteTypee<T> = import('express').Request<Record<string, unknown>, unknown, T>;
 
   export interface Response {
     envoieFichierEnrichi: (chemin: string) => Promise<void>;
