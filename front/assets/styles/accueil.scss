@@ -24,8 +24,13 @@
   background-color: var(--pink-macaron-850-200, #fcc0b4);
 }
 
+#contenu > dsfr-container {
+  padding: var(--padding-section, 6rem 0);
+}
+
 .chapeau.fond-sombre {
   padding: 48px 0;
+
   .contenu-section {
     display: grid;
     grid-template-areas:
@@ -96,7 +101,7 @@
 }
 
 .organisations-concernees {
-  padding: 56px 0;
+  --padding-section: 3.5rem 0 4.5rem;
 
   .contenu-section {
     display: flex;
@@ -221,7 +226,6 @@
 }
 
 .proteger-organisation {
-  padding-block: 6rem;
   background: {
     image: url('/assets/images/motif-fond-macaron.svg');
     repeat: no-repeat;
@@ -307,8 +311,6 @@
 }
 
 .nis2 {
-  padding-block: 6rem;
-
   .contenu-principal {
     position: relative;
 
@@ -333,8 +335,6 @@
 }
 
 .guides-et-ressources {
-  padding-block: 6rem;
-
   &,
   .titre {
     color: var(--text-inverted-grey);
@@ -352,8 +352,13 @@
 }
 
 .test-maturite {
-  padding: 72px 0 72px;
+  --padding-section: 3.5rem 0;
+
   background: #f6f6f6;
+
+  @include a-partir-de(xl) {
+    --padding-section: 6rem 0;
+  }
 
   .contenu-section {
     display: flex;
@@ -402,7 +407,11 @@
 }
 
 .interlocuteurs {
-  padding: 56px 0;
+  --padding-section: 3.5rem 0 0.5rem;
+
+  @include a-partir-de(xl) {
+    --padding-section: 6rem 0 3rem;
+  }
 
   .contenu-interlocuteurs {
     @include a-partir-de(lg) {
@@ -414,7 +423,6 @@
 
 .equipe-bizdev {
   background-color: var(--jaune-clair-msc);
-  padding: 56px 0;
 
   &:has(.nouvelle-da) {
     background-color: var(--brown-cafe-creme-975, #fbf6ed);
@@ -422,7 +430,6 @@
 }
 
 .communaute-msc {
-  padding: 56px 0;
   .contenu-section {
     display: grid;
     grid-template-areas:
@@ -524,7 +531,6 @@
 
 .partenaires {
   background-color: transparent;
-  padding: 56px 0;
 
   &:not(.nouvelle-da) {
     background-color: #f6f6f6;
@@ -545,8 +551,6 @@
 }
 
 .anssi {
-  padding: 72px 0;
-
   lab-anssi-presentation-anssi {
     --padding-section: 0;
   }
