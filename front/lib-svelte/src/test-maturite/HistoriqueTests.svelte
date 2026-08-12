@@ -52,7 +52,7 @@
     <h2>Historique de votre maturité cyber</h2>
 
     {#each années as année (année)}
-      <div class="annee">
+      <div>
         <h3>{année}</h3>
         <div class="cartes">
           {#each résultatsTestParAnnée[Number(année)] as résultatTest (résultatTest.id)}
