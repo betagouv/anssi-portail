@@ -1,21 +1,18 @@
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
-  import { onMount } from 'svelte';
   import { creeLienContactsUtiles } from '../contacts/contacts';
   import { profilStore } from '../stores/profil.store';
-
-  let estBureau = $state(false);
-  onMount(() => {
-    const mql = window.matchMedia('(min-width: 992px)');
-    mql.addEventListener('change', (e: MediaQueryListEvent) => {
-      estBureau = e.matches;
-    });
-    estBureau = mql.matches;
-  });
 
   let estConnecte = () => !!$profilStore;
   const cheminRelatif: string = typeof window !== 'undefined' ? window.location.pathname : '/';
   const menu = $derived([
+    {
+      label: 'Diagnostic cyber gratuit',
+      id: 'nav-cyberdepart',
+      type: 'link',
+      href: '/cyberdepart',
+      active: cheminRelatif === '/cyberdepart',
+    },
     ...(estConnecte()
       ? [
           {
@@ -91,23 +88,4 @@
   ]);
 </script>
 
-<div class="nav">
-  <dsfr-navigation items={enPropriétéWebC(menu)}></dsfr-navigation>
-  {#if estBureau}
-    <div>
-      <lab-anssi-mes-services-cyber-lien-diagnostic-cyber lien="/cyberdepart">
-      </lab-anssi-mes-services-cyber-lien-diagnostic-cyber>
-    </div>
-  {/if}
-</div>
-
-<style lang="scss">
-  @use '../../../assets/styles/responsive' as *;
-  .nav {
-    @include a-partir-de(lg) {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-  }
-</style>
+<dsfr-navigation items={enPropriétéWebC(menu)}></dsfr-navigation>
