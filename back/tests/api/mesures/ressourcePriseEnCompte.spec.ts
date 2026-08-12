@@ -18,6 +18,7 @@ import { mesureAuthentA2Etapes } from '../objetsPretsALEmploi.js';
 import { ConstructeurDeModule } from './constructeurDeModule.js';
 import { mesureDeTest } from './constructeurDeMesure.js';
 import { utilisateurDeTest } from './constructeurDUtilisateur.js';
+import { Parcours } from '../../../src/metier/parcours.js';
 
 describe("La ressource de prise en compte d'une mesure", () => {
   let serveur: Express;
@@ -124,6 +125,16 @@ describe("La ressource de prise en compte d'une mesure", () => {
 
         const evenement = busEvenements.recupereEvenement(MesurePriseEnCompte);
         assert.equal(evenement!.nombreDeMesures, 1);
+      });
+
+      it("mets à jour le parcours de l'utilisateur", async () => {
+        let nouveauParcours: Parcours | null | undefined = null;
+        entrepotUtilisateur.metsAJour = async (utilisateur: Utilisateur) => {
+          nouveauParcours = utilisateur.parcoursActuel();
+        };
+        await request(serveur).put('/api/mesures/AUTH.5/prise-en-compte').set('Cookie', cookie);
+
+        assert.equal(nouveauParcours, 'complet');
       });
     });
   });
