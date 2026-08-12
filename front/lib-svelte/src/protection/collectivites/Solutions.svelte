@@ -19,7 +19,16 @@
   onMount(chargeGuidesDansLeStore);
 
   const versMesItems = $derived(versItemsCyberOuGuide(itemsCyber, $guidesStore));
-  const actions = $derived([
+
+  export type Actions = {
+    id: string;
+    titre: string;
+    explication: string;
+    items: (ItemCyber | Guide)[];
+    ancre: string;
+  };
+
+  const actions: Actions[] = $derived([
     {
       id: 'comprendre',
       titre: 'Comprendre',
