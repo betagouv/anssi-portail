@@ -188,18 +188,7 @@
   }
 }
 
-.guides-et-ressources {
-  padding-block: 6rem;
-
-  &,
-  .titre {
-    color: var(--text-inverted-grey);
-  }
-
-  .description {
-    margin-block: 0 1.5rem;
-  }
-
+.section-deux-colonnes {
   .conteneur {
     display: flex;
     flex-direction: column;
@@ -217,12 +206,6 @@
     }
   }
 
-  .contenu-principal {
-    @include a-partir-de(lg) {
-      order: 1;
-    }
-  }
-
   figure {
     margin: 0;
   }
@@ -230,6 +213,51 @@
   img {
     max-width: 100%;
     height: auto;
+  }
+}
+
+.nis2 {
+  padding-block: 6rem;
+
+  .contenu-principal {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -35px;
+      width: 50px;
+      height: 42px;
+      display: block;
+      background-image: url('/assets/images/motif-titre-petales.svg');
+      background-repeat: no-repeat;
+    }
+  }
+
+  .contenu-secondaire {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.guides-et-ressources {
+  padding-block: 6rem;
+
+  &,
+  .titre {
+    color: var(--text-inverted-grey);
+  }
+
+  .description {
+    margin-block: 0 1.5rem;
+  }
+
+  .contenu-principal {
+    @include a-partir-de(lg) {
+      order: 1;
+    }
   }
 }
 
