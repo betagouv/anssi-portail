@@ -15,6 +15,7 @@ import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTest
 import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire.js';
 import { Module } from '../../src/metier/module.js';
 import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
+import { ParcoursChangé } from '../../src/bus/evenements/parcoursChange.js';
 
 describe("L'utilisateur", () => {
   const infosUtilisateur = {
@@ -421,6 +422,7 @@ describe("L'utilisateur", () => {
 
           assert.equal(utilisateur.parcoursActuel(), 'complet');
           assert.equal(busEvenements.naPasRecuDEvenement(ParcoursRejoint), true);
+          assert.equal(busEvenements.naPasRecuDEvenement(ParcoursChangé), true);
         });
       });
 

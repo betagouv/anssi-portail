@@ -2,6 +2,7 @@ import { BusEvenements } from '../bus/busEvenements.js';
 import { BadgeCyberdépartDébloqué } from '../bus/evenements/badgeCyberdepartDebloque.js';
 import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
+import { ParcoursChangé } from '../bus/evenements/parcoursChange.js';
 import { ParcoursRejoint } from '../bus/evenements/parcoursRejoint.js';
 import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
@@ -196,8 +197,12 @@ export class Utilisateur {
 
   async rejoinsParcours(parcours: Parcours, busEvenements: BusEvenements) {
     if (this.parcours === parcours || this.parcours === 'complet') return;
+    if (!this.parcours) {
+      await busEvenements.publie(new ParcoursRejoint(this.emailHache(), parcours));
+    } else {
+      await busEvenements.publie(new ParcoursChangé(this.emailHache(), this.parcours, parcours));
+    }
     this.parcours = parcours;
-    await busEvenements.publie(new ParcoursRejoint(this.emailHache(), parcours));
   }
 
   parcoursActuel() {

@@ -10,6 +10,7 @@ import { configurationDeTestDuServeur } from '../fauxObjets.js';
 import { MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { ConstructeurDUtilisateur } from './constructeurDUtilisateur.js';
 import { Utilisateur } from '../../../src/metier/utilisateur.js';
+import { ParcoursChangé } from '../../../src/bus/evenements/parcoursChange.js';
 
 describe("La ressource du parcours de l'utilisateur", async () => {
   let serveur: Express;
@@ -65,12 +66,32 @@ describe("La ressource du parcours de l'utilisateur", async () => {
       assert.equal(réponse.status, 401);
     });
 
-    it("émet un évènement lorsqu'un parcours est rejoint", async () => {
+    it("émet un évènement ParcoursRejoint lorsqu'un parcours est rejoint", async () => {
       await request(serveur).put('/parcours').set('Cookie', cookie).send({ nom: 'complet' });
 
       const evenement = busEvenements.recupereEvenement(ParcoursRejoint);
 
       assert.equal(evenement?.emailHache, utilisateur.emailHache());
+      assert.equal(evenement?.parcours, 'complet');
+    });
+
+    it("émet un évènement ParcoursChangé lorsqu'un parcours est changé", async () => {
+      const utilisateurParcoursBasique = new ConstructeurDUtilisateur()
+        .avecLEmail('basique@yopmail.com')
+        .avecLeParcours('allégé')
+        .construis();
+
+      await entrepotUtilisateur.ajoute(utilisateurParcoursBasique);
+      const cookieBasique = encodeSession({
+        email: 'basique@yopmail.com',
+        token: 'valide',
+      });
+      await request(serveur).put('/parcours').set('Cookie', cookieBasique).send({ nom: 'complet' });
+
+      const evenement = busEvenements.recupereEvenement(ParcoursChangé);
+
+      assert.equal(evenement?.emailHache, utilisateurParcoursBasique.emailHache());
+      assert.equal(evenement?.parcoursPrécédent, 'allégé');
       assert.equal(evenement?.parcours, 'complet');
     });
   });
