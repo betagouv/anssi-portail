@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
+  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import { profilStore } from '../stores/profil.store';
   import { fabriqueFilAriane } from '../ui/filAriane';
   import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
@@ -17,8 +18,9 @@
   type CleOnglet = (typeof clesOnglet)[number];
 
   export let animeTuiles = true;
-  export let dateRealisationDernierTest: Date | undefined = undefined;
+  export let dateRealisation: Date | undefined = undefined;
   export let defilementAutomatique = true;
+  export let idNiveau: IdNiveau;
 
   let lienActif: CleOnglet | undefined;
   let idRésultatTest: string | undefined;
@@ -75,7 +77,7 @@
 <PropositionRefaireTest />
 
 {#if lienActif === '#votre-organisation'}
-  <ResultatsMonOrganisation {animeTuiles} dateRealisation={dateRealisationDernierTest} {defilementAutomatique} />
+  <ResultatsMonOrganisation {animeTuiles} {dateRealisation} {defilementAutomatique} {idNiveau} />
 {:else if lienActif === '#historique' && $profilStore}
   <HistoriqueTests {idRésultatTest} />
 {:else if $profilStore}

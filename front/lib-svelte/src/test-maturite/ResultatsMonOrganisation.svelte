@@ -1,21 +1,15 @@
 <script lang="ts">
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
+  import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import Lien from '../ui/Lien.svelte';
   import EncartDeRecommandationSelonMaturite from './EncartDeRecommandationSelonMaturite.svelte';
   import PartageTest from './PartageTest.svelte';
-  import { calculeIdNiveau } from './resultatTest';
-  import { questionnaireStore } from './stores/questionnaire.store';
   import TuilesMaturite from './TuilesMaturite.svelte';
 
   export let animeTuiles = true;
   export let dateRealisation: Date | undefined = undefined;
   export let defilementAutomatique = true;
-
-  $: moyenne =
-    $questionnaireStore.toutesLesReponses.reduce((acc, valeur) => acc + valeur, 0) /
-    $questionnaireStore.toutesLesReponses.length;
-
-  $: idNiveau = calculeIdNiveau(moyenne);
+  export let idNiveau: IdNiveau;
 
   const trouveNiveauMaturiteParId = (id: string) =>
     niveauxMaturite.find((niveau) => niveau.id === id) || niveauxMaturite[0];
