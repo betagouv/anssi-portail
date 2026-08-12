@@ -160,6 +160,10 @@ export class Utilisateur {
     await busEvenements.publie(
       new MesurePriseEnCompte(this.emailHache(), mesure.id, module.nombreDeMesures(), module.positionDeLaMesure(mesure))
     );
+    // if mesure.module != module cyber départ
+    // parcours -> complet
+    // else parcours -> simple
+    //
     this.mesuresPrisesEnCompte.push(mesure);
     if (this.nombreDeMesuresPrisesEnCompte(module) === module.nombreDeMesures()) {
       await busEvenements.publie(new ModuleTermine(this.emailHache(), module.id, module.nom));

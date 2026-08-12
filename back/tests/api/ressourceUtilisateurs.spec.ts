@@ -132,6 +132,21 @@ describe('La ressource utilisateur', () => {
       assert.equal(evenement!.infoLettre, true);
       assert.equal(evenement!.pixelDeSuiviAccepté, true);
       assert.equal(evenement!.telephone, '0123456789');
+      assert.equal(evenement!.suivi, undefined);
+    });
+
+    it('publie un événement de création de compte avec une campagne', async () => {
+      await request(serveur).post('/api/utilisateurs').query({ utm_campaign: 'aout_2026' }).send(donneesUtilisateur);
+
+      busEvenements.aRecuUnEvenement(CompteCree);
+      const evenement = busEvenements.recupereEvenement(CompteCree);
+      assert.equal(evenement!.email, 'jeanne.dupont@user.com');
+      assert.equal(evenement!.prenom, 'Jeanne');
+      assert.equal(evenement!.nom, 'Dupont');
+      assert.equal(evenement!.infoLettre, true);
+      assert.equal(evenement!.pixelDeSuiviAccepté, true);
+      assert.equal(evenement!.telephone, '0123456789');
+      assert.equal(evenement!.suivi?.campagne, 'aout_2026');
     });
 
     describe('concernant la validation des données', () => {
