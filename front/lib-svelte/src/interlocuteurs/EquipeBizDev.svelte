@@ -31,7 +31,7 @@
       <div class="illustration">
         <figure>
           <img
-            src="/assets/images/composition-bizdev-floriane-et-pierre.png"
+            src="/assets/images/composition-bizdev-floriane-et-pierre.avif"
             width="800"
             height="450"
             alt="Floriane Gallego et Pierre Vernier"
