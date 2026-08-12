@@ -7,6 +7,7 @@
   import { versItemsCyberOuGuide } from '../../parcours/itemDuParcours';
   import type { Guide } from '../../catalogue/Guide.types';
   import { guidePourCarteItem } from '../../catalogue/guides/guide';
+  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   type Props = {
     itemsCyber: ItemCyber[];
@@ -26,6 +27,7 @@
     explication: string;
     items: (ItemCyber | Guide)[];
     ancre: string;
+    couleurDeFond?: string;
   };
 
   const actions: Actions[] = $derived([
@@ -51,6 +53,7 @@
         '/ressources/panorama',
       ]),
       ancre: 'solutions&sensibiliser',
+      couleurDeFond: afficheNouvelleDA ? 'brown-cafe-creme-975-75' : 'jaune-clair-msc',
     },
     {
       id: 'se-former',
@@ -70,6 +73,7 @@
         '/services/ads',
       ]),
       ancre: 'solutions&securiser',
+      couleurDeFond: afficheNouvelleDA ? 'pink-macaron-925-125' : 'jaune-clair-msc',
     },
     {
       id: 'se-preparer',
@@ -88,18 +92,19 @@
         '/guides/anticiper-et-gerer-sa-communication-de-crise-cyber',
       ]),
       ancre: 'solutions&reagir',
+      couleurDeFond: afficheNouvelleDA ? 'background-contrast-blue-france' : 'jaune-clair-msc',
     },
   ]);
 </script>
 
 <div id="solutions">
   <ControleSegmenteAvecSections elements={actions} selecteurSections=".action">
-    {#each actions as action, index (action.id)}
+    {#each actions as action (action.id)}
       <ActionParcoursAvecItems
         titre={action.titre}
         explication={action.explication}
         items={action.items}
-        couleurDeFond={index % 2 ? 'jaune-clair-msc' : ''}
+        couleurDeFond={action.couleurDeFond ?? ''}
         ancre={action.ancre}
       ></ActionParcoursAvecItems>
     {/each}
