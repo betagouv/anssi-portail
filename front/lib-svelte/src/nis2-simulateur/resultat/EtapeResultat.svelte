@@ -35,11 +35,13 @@
         title="Accéder à la liste d'exigences applicables à ReCyF (NIS&nbsp;2)"
         description="Découvrez la liste d'exigences applicables à ReCyF (NIS&nbsp;2) pour atteindre les objectifs de sécurité fixés par NIS&nbsp;2 ainsi que l'outil de comparaison de référentiels."
         href="/nis2#exigences"
+        enlarge="true"
       ></dsfr-card>
       <dsfr-card
         title="S'abonner à la Newsletter MesServicesCyber"
         description="Restez informé des dernières actualités de la directive NIS&nbsp;2 et autres actualités."
         href="/abonnement-infolettre?adresseRetour=/nis2"
+        enlarge="true"
       ></dsfr-card>
     </div>
   {/if}
