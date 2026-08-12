@@ -39,7 +39,7 @@
   <div class="conteneur-non-pris-en-compte">
     <dsfr-tooltip
       class="aide"
-      content="une recommandation prise en compte signifie que vous avez compris son intérêt, vous avez identifié si elle est pertinente pour votre organisation et si c'est le cas, vous allez désormais faire en sorte de l'appliquer"
+      content="Une recommandation prise en compte signifie que vous avez compris son intérêt, vous avez identifié si elle est pertinente pour votre organisation et si c'est le cas, vous allez désormais faire en sorte de l'appliquer."
       id="tooltip"
       type="hover"
     >
