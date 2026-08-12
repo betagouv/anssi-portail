@@ -11,6 +11,7 @@ import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMe
 import { encodeSession, enObjet } from './cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurHachage, fauxAdaptateurJWT } from './fauxObjets.js';
 import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi.js';
+import { ConstructeurDUtilisateur } from './mesures/constructeurDUtilisateur.js';
 
 const { JsonWebTokenError } = jsonwebtoken;
 
@@ -191,12 +192,16 @@ describe('La ressource Profil', () => {
       });
 
       it('renvoie le parcours actuel', async () => {
+        const utilisateur = new ConstructeurDUtilisateur()
+          .avecLEmail('chuck@user.com')
+          .avecLeParcours('complet')
+          .construis();
+
+        await entrepotUtilisateur.ajoute(utilisateur);
         const cookie = encodeSession({
-          email: 'jeanne.dupont@user.com',
+          email: 'chuck@user.com',
           token: 'valide',
         });
-
-        jeanneDupont.rejoinsProgrammeAccompagnement('complet');
 
         const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 

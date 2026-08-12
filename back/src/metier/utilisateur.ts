@@ -2,11 +2,14 @@ import { BusEvenements } from '../bus/busEvenements.js';
 import { BadgeCyberdépartDébloqué } from '../bus/evenements/badgeCyberdepartDebloque.js';
 import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
+import { ParcoursRejoint } from '../bus/evenements/parcoursRejoint.js';
 import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
 import { EntrepotPriseEnCompte } from './entrepotPriseEnCompte.js';
 import { Mesure } from './mesure.js';
 import { Module } from './module.js';
+import { Parcours } from './parcours.js';
+
 import { PriseEnCompte } from './PriseEnCompte.js';
 
 export type Role = 'GESTION_GUIDES';
@@ -57,7 +60,7 @@ interface InformationsCreationUtilisateur {
   organisation?: Organisation;
   roles?: Role[];
   mesuresPrisesEnCompte?: Mesure[];
-  parcours?: 'complet' | 'allégé' | null;
+  parcours?: Parcours | null;
 }
 
 export class Utilisateur {
@@ -76,7 +79,7 @@ export class Utilisateur {
   roles: Role[];
   mesuresPrisesEnCompte: Mesure[];
   private adaptateurHachage: AdaptateurHachage;
-  private parcours?: 'complet' | 'allégé' | null;
+  private parcours?: Parcours | null;
 
   constructor(
     {
@@ -178,7 +181,7 @@ export class Utilisateur {
     }
 
     if (!this.parcours || !module.estCyberdépart()) {
-      this.rejoinsProgrammeAccompagnement(module.estCyberdépart() ? 'allégé' : 'complet');
+      await this.rejoinsParcours(module.estCyberdépart() ? 'allégé' : 'complet', busEvenements);
     }
 
     return nouvelEtatModule;
@@ -191,8 +194,10 @@ export class Utilisateur {
     return mesuresDuModulePriseEnCompte.length;
   }
 
-  rejoinsProgrammeAccompagnement(programmeAccompagnement: 'complet' | 'allégé') {
-    this.parcours = programmeAccompagnement;
+  async rejoinsParcours(parcours: Parcours, busEvenements: BusEvenements) {
+    if (this.parcours === parcours || this.parcours === 'complet') return;
+    this.parcours = parcours;
+    await busEvenements.publie(new ParcoursRejoint(this.emailHache(), parcours));
   }
 
   parcoursActuel() {
