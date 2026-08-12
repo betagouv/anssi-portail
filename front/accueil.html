@@ -306,6 +306,6 @@ permalink: /
   </div>
 </dsfr-container>
 
-<dsfr-container class="anssi">
+<dsfr-container class="anssi{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %} fond-cafe-creme{% endif %}">
   <lab-anssi-presentation-anssi></lab-anssi-presentation-anssi>
 </dsfr-container>
