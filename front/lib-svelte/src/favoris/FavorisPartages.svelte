@@ -9,7 +9,6 @@
   import { listeItemsFavoris } from '../catalogue/stores/itemsCatalogueEnFavori';
   import { profilStore } from '../stores/profil.store';
   import Heros from '../ui/Heros.svelte';
-  import Lien from '../ui/Lien.svelte';
   import { fabriqueFilAriane } from '../ui/filAriane';
   import ContenuFavoris from './ContenuFavoris.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
@@ -64,32 +63,6 @@
       {:else}
         <ContenuFavoris avecBoutonFavori={estConnecte} itemsEnFavori={itemsCyberPartages} />
       {/if}
-    </div>
-  </div>
-</dsfr-container>
-
-<dsfr-container class="encart fond-sombre">
-  <div class="contenu-section">
-    <div class="liste-parcours">
-      <div class="carte parcours">
-        <img
-          src="/assets/images/ecrans-virtuels-avec-femme-au-centre.svg"
-          alt="Illustration découvrez plus de services et ressources cyber"
-          class="illustration"
-        />
-        {#if estConnecte}
-          <h2>Découvrez plus de services et ressources cyber</h2>
-          <p>Accédez aux services et ressources cyber proposés par l’ANSSI et ses partenaires.</p>
-          <Lien href="/catalogue" apparence="bouton" taille="lg" libelle="Explorer le catalogue"></Lien>
-        {:else}
-          <h2>Créez votre propre liste de favoris !</h2>
-          <p>
-            Créez-vous un compte MesServicesCyber, explorez le catalogue et sauvegardez facilement les services et
-            ressources utiles pour votre organisation.
-          </p>
-          <Lien href="/connexion/" apparence="bouton" taille="lg" libelle="Connectez-vous sur MesServicesCyber"></Lien>
-        {/if}
-      </div>
     </div>
   </div>
 </dsfr-container>
