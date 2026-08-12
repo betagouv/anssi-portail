@@ -2,6 +2,7 @@
   import Lien from '../ui/Lien.svelte';
   import MachineAEcrireRotative from '../ui/MachineAEcrireCyclique.svelte';
   import Surlignage from '../ui/Surlignage.svelte';
+  import IllustrationAnimee from './animation/IllustrationAnimee.svelte';
 
   const phrasesAnimées = [
     'mon activité',
@@ -36,10 +37,7 @@
       </div>
     </div>
     <div class="illustration">
-      <img
-        src="/assets/images/mario-dsi-et-femme-qui-utilisent-mss.png"
-        alt="Mario, le DSI et une femme utilisent MSS"
-      />
+      <IllustrationAnimee />
     </div>
   </div>
 </dsfr-container>
@@ -103,16 +101,13 @@
       flex-direction: column;
       justify-content: center;
       margin-inline: auto;
+      width: 100%;
 
       @include a-partir-de(md) {
         max-width: taille-pour-colonnes(8);
       }
       @include a-partir-de(lg) {
         max-width: 100%;
-      }
-
-      img {
-        width: 100%;
       }
     }
   }
