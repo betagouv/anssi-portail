@@ -292,6 +292,9 @@ export const fauxGestionnaireRequêtesComplémentaires: GestionnaireRequêtesCom
     (_configurationServeur: ConfigurationServeur) => (_parcours: Parcours) => async (_requête, _réponse, suite) => {
       suite();
     },
+  publieMesureConsultée: (_configurationServeur: ConfigurationServeur) => async (_requête, _réponse, suite) => {
+    suite();
+  },
 };
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,

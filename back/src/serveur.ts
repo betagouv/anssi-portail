@@ -43,6 +43,7 @@ import { EntrepotMesure } from './metier/entrepotMesure.js';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe.js';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
+import { publieMesureConsultée } from './api/middlewares/publieMesureConsultee.js';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
@@ -192,6 +193,7 @@ const port = process.env.PORT || 3000;
     adaptateurCompression,
     gestionnairesRequêtesComplémentaires: {
       attributionParcours,
+      publieMesureConsultée,
     },
   }).listen(port, () => {
     console.log(`Le serveur écoute sur le port ${port}`);

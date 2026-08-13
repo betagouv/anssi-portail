@@ -21,6 +21,7 @@ type FonctionMiddleware = (requete: Request, reponse: Response, suite: NextFunct
 
 export type GestionnaireRequêtesComplémentaires = {
   attributionParcours: (configurationServeur: ConfigurationServeur) => (parcours: Parcours) => FonctionMiddleware;
+  publieMesureConsultée: (configurationServeur: ConfigurationServeur) => FonctionMiddleware;
 };
 
 export type Middleware = {
