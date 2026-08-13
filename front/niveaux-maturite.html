@@ -5,9 +5,4 @@ titreHtml: '5 niveaux de maturité cyber | MesServicesCyber'
 styles: /assets/styles/niveaux-maturite.css
 ---
 
-
-{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
-<link rel="stylesheet" href="{{ "/assets/styles/niveaux-maturite-nouvelle-da.css" | relative_url }}">
-{% endif %}
-
 {% include composant-svelte.html id="niveaux-maturite" %}
