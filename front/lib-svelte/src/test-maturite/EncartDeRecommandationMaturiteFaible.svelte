@@ -3,6 +3,7 @@
   import Alternatives from '../ui/Alternatives.svelte';
   import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import EncartPromotionParcoursBasique from '../parcours-securisation/EncartPromotionParcoursBasique.svelte';
+  import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
 </script>
 
 <Alternatives affichageAlternatif={afficheParcoursSecurisation}>
@@ -42,7 +43,7 @@
         description="Un programme d'accompagnement gratuit, pensé pour les non-experts."
       >
         {#snippet tags()}
-          <span class="tag">Programme d’accompagnement gratuit</span>
+          <TagProgrammeGratuit />
         {/snippet}
       </EncartPromotionParcoursBasique>
     </div>
@@ -62,18 +63,6 @@
 
   dsfr-container {
     padding-top: 48px;
-  }
-
-  .tag {
-    background-color: var(--green-bourgeon-950-100);
-    border-radius: 100px;
-    color: var(--text-title-grey);
-    display: inline-block;
-    font-weight: 700;
-    font-size: 1rem;
-    line-height: 1.5;
-    padding: 0.375rem 1rem;
-    width: fit-content;
   }
 
   .contenu-encart-cyberdepart {

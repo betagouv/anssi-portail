@@ -3,6 +3,7 @@
   import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import Alternatives from '../ui/Alternatives.svelte';
   import EncartPromotionParcoursComplet from '../parcours-securisation/EncartPromotionParcoursComplet.svelte';
+  import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
 
   const connexion = () => {
     sessionStorage.setItem('pagePostConnexion', '/ma-maturite#comparaison');
@@ -54,7 +55,7 @@
         description="Un programme d'accompagnement gratuit, pensé pour les PME/ETI et les organisations concernées par la directive NIS 2."
       >
         {#snippet tags()}
-          <span class="tag">Programme d’accompagnement gratuit</span>
+          <TagProgrammeGratuit />
         {/snippet}
       </EncartPromotionParcoursComplet>
     </div>
@@ -67,18 +68,6 @@
 
   dsfr-container {
     padding-top: 48px;
-  }
-
-  .tag {
-    background-color: var(--green-bourgeon-950-100);
-    border-radius: 100px;
-    color: var(--text-title-grey);
-    display: inline-block;
-    font-weight: 700;
-    font-size: 1rem;
-    line-height: 1.5;
-    padding: 0.375rem 1rem;
-    width: fit-content;
   }
 
   .contenu-encart-parcours-securisation {
