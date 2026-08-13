@@ -5,7 +5,7 @@
   export let niveauSelectionne: NiveauMaturite;
 </script>
 
-<div class="illustration">
+<div class="illustration {afficheNouvelleDA ? 'nouvelle-da' : ''}">
   <img
     src="/assets/images/test-maturite/niveaux/{niveauSelectionne.id}{afficheNouvelleDA ? '-nouvelle-da' : ''}.svg"
     alt={`Illustration niveau ${niveauSelectionne.label}`}
