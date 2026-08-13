@@ -45,11 +45,11 @@ in
       corepack
       uv
       ruby
+      ruby.gems.ruby-lsp
       bundler
       bash-language-server
       marksman
       nixd
-      ruby-lsp
       svelte-language-server
       taplo
       vscode-langservers-extracted
