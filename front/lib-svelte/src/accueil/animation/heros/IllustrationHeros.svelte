@@ -12,7 +12,6 @@
 
 <IllustrationAnimee
   {scènes}
-  ratio="522 / 363"
   étiquette="Des responsables d’organisations protègent leur activité, leurs données et leurs équipes."
   {enPause}
 />

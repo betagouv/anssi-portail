@@ -5,13 +5,12 @@
   type Props = {
     scènes: Component[];
     étiquette: string;
-    ratio: string;
     décor?: Snippet<[number, number]>;
     enPause?: boolean;
     duréeScèneEnMs?: number;
   };
 
-  const { scènes, étiquette, ratio, décor, enPause = false, duréeScèneEnMs = 5500 }: Props = $props();
+  const { scènes, étiquette, décor, enPause = false, duréeScèneEnMs = 5500 }: Props = $props();
 
   const mouvement = préfèreMouvementRéduit();
   let index = $state(0);
@@ -36,12 +35,12 @@
   });
 </script>
 
-<div class="illustration-animee" class:en-pause={enPause} style="--ratio: {ratio}" role="img" aria-label={étiquette}>
+<div class="illustration-animee" class:en-pause={enPause} role="img" aria-label={étiquette}>
   {#if décor}
     <div class="decor">{@render décor(index, scènes.length)}</div>
   {/if}
   {#each scènes as Scène, i (i)}
-    <div class="scene" class:active={i === index}>
+    <div class="scene" class:active={i === index} class:gabarit={i === 0}>
       <Scène />
     </div>
   {/each}
@@ -55,7 +54,6 @@
   .illustration-animee {
     position: relative;
     width: 100%;
-    aspect-ratio: var(--ratio);
   }
 
   .decor {
@@ -90,6 +88,14 @@
     :global(.forme) {
       transform-box: fill-box;
       transform-origin: center;
+    }
+
+    &.gabarit {
+      position: relative;
+
+      :global(svg) {
+        height: auto;
+      }
     }
 
     &:not(.active) :global(*) {
