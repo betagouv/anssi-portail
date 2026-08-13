@@ -138,7 +138,7 @@
       avec-cta
       active-defilement
     >
-      <dsfr-tags-group tags={tagsParcoursBasique} has-icon slot="hautentete"></dsfr-tags-group>
+      <dsfr-tags-group tags={enPropriétéWebC(tagsParcoursBasique)} has-icon slot="hautentete"></dsfr-tags-group>
       <dsfr-button
         label="Je commence à sécuriser"
         kind="primary"
@@ -185,7 +185,7 @@
       avec-cta
       active-defilement
     >
-      <dsfr-tags-group tags={tagsParcoursComplet} has-icon slot="hautentete"></dsfr-tags-group>
+      <dsfr-tags-group tags={enPropriétéWebC(tagsParcoursComplet)} has-icon slot="hautentete"></dsfr-tags-group>
       <dsfr-button
         label="Je commence à sécuriser"
         kind="primary"
