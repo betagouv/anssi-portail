@@ -159,7 +159,7 @@
         </div>
       {/if}
       {#if !cacheIllustration}
-        <picture slot="seo">
+        <picture slot="media">
           {#if illustration}
             {@render illustration({
               source: illustrationSource,
@@ -231,7 +231,11 @@
         grid-area: illustration;
 
         &.ficheCatalogue {
-          align-self: flex-end;
+          display: none;
+          @include a-partir-de(lg) {
+            display: grid;
+            align-self: flex-end;
+          }
         }
 
         img {
@@ -239,7 +243,7 @@
           align-self: center;
           justify-self: center;
 
-          @include a-partir-de(md) {
+          @include a-partir-de(lg) {
             max-width: none;
           }
         }
@@ -272,10 +276,6 @@
     .contenu-section {
       .actions {
         margin: 0;
-      }
-
-      // 768px et plus
-      @include a-partir-de(md) {
       }
 
       // 1248px et plus
@@ -359,7 +359,7 @@
         min-height: 2.5rem;
       }
 
-      @include a-partir-de(md) {
+      @include a-partir-de(lg) {
         .actions {
           margin-bottom: 4.5rem;
         }

@@ -95,6 +95,7 @@
     theme="clair"
     ficheCatalogue
     illustrationSource={guide.illustration.grande}
+    cacheActions={guide.documents.length !== 1}
   >
     {#snippet filAriane()}
       <FilAriane {...propriétésFilAriane} />
@@ -220,16 +221,14 @@
     flex-direction: column-reverse;
 
     img {
-      display: none;
+      display: block;
       width: 588px;
       object-fit: cover;
       object-position: top;
       height: 330px;
       background-color: var(--background-default-grey);
-
-      @include a-partir-de(xxl) {
-        display: block;
-      }
+      max-width: 100%;
+      margin-inline: auto;
     }
   }
 
