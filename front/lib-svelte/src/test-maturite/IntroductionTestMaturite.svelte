@@ -8,8 +8,15 @@
   import HerosRiche from '../ui/HerosRiche.svelte';
   import { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import Bouton from '../ui/Bouton.svelte';
+  import CarrouselMaturite from './animation/CarrouselMaturite.svelte';
 
   export let introFaite = false;
+  let enPause = false;
+  $: libelléPause = enPause ? 'Lancer les animations' : 'Mettre les animations en pause';
+
+  const basculePause = () => {
+    enPause = !enPause;
+  };
 
   const aDejaUnTest = derived<typeof profilStore, boolean>(
     profilStore,
@@ -95,7 +102,19 @@
       ]}
     >
       {#snippet illustration()}
-        <img class="illustration-du-bandeau" src="/assets/images/test-maturite/illustration-introduction.svg" alt="" />
+        <div class="illustration-du-bandeau">
+          <CarrouselMaturite {enPause} />
+          <div class="controle-animation">
+            <Bouton
+              type="secondaire"
+              icone={enPause ? 'play-circle-line' : 'pause-circle-line'}
+              iconeSeule
+              libelle={libelléPause}
+              titre={libelléPause}
+              surClic={basculePause}
+            />
+          </div>
+        </div>
       {/snippet}
       {#snippet actions()}
         <div class="conteneur-actions">
@@ -112,6 +131,14 @@
 
   .illustration-du-bandeau {
     width: 100%;
+  }
+
+  .controle-animation {
+    text-align: right;
+
+    @media (prefers-reduced-motion: reduce) {
+      display: none;
+    }
   }
 
   .conteneur-actions {
