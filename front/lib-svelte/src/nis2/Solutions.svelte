@@ -86,7 +86,7 @@
         titre={action.titre}
         explication={action.explication}
         items={action.items}
-        couleurDeFond={index % 2 ? 'jaune-clair-msc' : ''}
+        classeCss={index % 2 ? 'fond-jaune-clair' : ''}
         ancre={action.ancre}
       ></ActionParcoursAvecItems>
     {/each}
