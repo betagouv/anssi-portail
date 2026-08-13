@@ -9,7 +9,6 @@
     {
       label: 'Diagnostic cyber gratuit',
       id: 'nav-cyberdepart',
-      type: 'link',
       href: '/cyberdepart',
       active: cheminRelatif === '/cyberdepart',
     },
@@ -18,7 +17,6 @@
           {
             label: 'Maturité cyber',
             id: 'nav-maturite',
-            type: 'link',
             href: '/ma-maturite',
             active: cheminRelatif === '/ma-maturite',
           },
@@ -27,7 +25,6 @@
           {
             label: 'Test de maturité cyber',
             id: 'nav-test-maturite',
-            type: 'link',
             href: '/test-maturite',
             active: cheminRelatif === '/test-maturite',
           },
@@ -35,7 +32,6 @@
     {
       label: 'Guides et ressources',
       id: 'nav-catalogue',
-      type: 'link',
       href: '/catalogue',
       active: cheminRelatif === '/catalogue',
     },
@@ -44,7 +40,6 @@
           {
             label: 'Favoris',
             id: 'nav-favoris',
-            type: 'link',
             href: '/favoris',
             active: cheminRelatif === '/favoris',
           },
@@ -64,21 +59,18 @@
         {
           label: 'Contacts cyber',
           id: 'nav-contacts-1',
-          type: 'link',
           href: creeLienContactsUtiles($profilStore),
           active: cheminRelatif.startsWith('/contacts'),
         },
         {
           label: 'Prestataires qualifiés et labellisés',
           id: 'nav-contacts-2',
-          type: 'link',
           href: '/prestataires-labellises',
           active: cheminRelatif === '/prestataires-labellises',
         },
         {
           label: 'Financements',
           id: 'nav-contacts-3',
-          type: 'link',
           href: '/financements',
           active: cheminRelatif === '/financements' || cheminRelatif.startsWith('/financements/'),
         },
