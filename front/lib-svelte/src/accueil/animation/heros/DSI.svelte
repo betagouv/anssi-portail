@@ -152,13 +152,13 @@
       id="image0_19244_36655"
       width="2528"
       height="1686"
-      href="/assets/images/accueil/animation/dsi.avif"
+      href="/assets/images/accueil/animation/heros/dsi.avif"
       preserveAspectRatio="none"
     /><image
       id="image1_19244_36655"
       width="572"
       height="1024"
-      href="/assets/images/accueil/animation/dsi-avatar.avif"
+      href="/assets/images/accueil/animation/heros/dsi-avatar.avif"
       preserveAspectRatio="none"
     /></defs
   ></svg

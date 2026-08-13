@@ -155,13 +155,13 @@
       id="image0_19244_36653"
       width="2528"
       height="1684"
-      href="/assets/images/accueil/animation/rssi.avif"
+      href="/assets/images/accueil/animation/heros/rssi.avif"
       preserveAspectRatio="none"
     /><image
       id="image1_19244_36653"
       width="1024"
       height="682"
-      href="/assets/images/accueil/animation/rssi-avatar.avif"
+      href="/assets/images/accueil/animation/heros/rssi-avatar.avif"
       preserveAspectRatio="none"
     /></defs
   ></svg
