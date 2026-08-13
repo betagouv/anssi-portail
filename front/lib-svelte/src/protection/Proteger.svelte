@@ -2,6 +2,9 @@
   import DemandeDiagnosticSimplifiee from '../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
   import CarrouselDesInterlocuteurs from '../interlocuteurs/CarrouselDesInterlocuteurs.svelte';
   import EquipeBizDev from '../interlocuteurs/EquipeBizDev.svelte';
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
+  import EncartPromotionParcoursBasique from '../parcours-securisation/EncartPromotionParcoursBasique.svelte';
+  import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
 
   export let origine: string;
 
@@ -9,7 +12,7 @@
 </script>
 
 <dsfr-container id="proteger" class="proteger">
-  {#if origine !== 'landing-collectivites'}
+  {#if origine !== 'landing-collectivites' && !afficheParcoursSecurisation}
     <div class="introduction">
       <h2>Découvrez les risques pour votre organisation en cas de cyberattaque</h2>
       <!-- Les sous-titres sont intégrés dans la vidéo -->
@@ -35,16 +38,42 @@
     </div>
   {/if}
 
-  <div class="demande">
-    <DemandeDiagnosticSimplifiee {origine} />
-  </div>
+  {#if !afficheParcoursSecurisation}
+    <div class="demande">
+      <DemandeDiagnosticSimplifiee {origine} />
+    </div>
 
-  <div class="interlocuteurs">
-    <CarrouselDesInterlocuteurs />
-  </div>
+    <div class="interlocuteurs">
+      <CarrouselDesInterlocuteurs />
+    </div>
+  {/if}
 </dsfr-container>
 
-<dsfr-container class="equipe-biz-dev">
+{#if afficheParcoursSecurisation}
+  <div class="contenu-encart-parcours-basique">
+    <EncartPromotionParcoursBasique
+      titre="13 mesures simples pour protéger votre organisation contre les cyberattaques"
+      description="Un programme d'accompagnement gratuit, pensé pour les non-experts."
+    >
+      {#snippet tags()}
+        <TagProgrammeGratuit />
+      {/snippet}
+    </EncartPromotionParcoursBasique>
+  </div>
+  <dsfr-container class="contenu-encart-cyberdepart">
+    <p>
+      <b>Vous préférez échanger avec un Aidant cyber ?</b> Le diagnostic cyberdépart vous permet de bénéficier d’un
+      accompagnement gratuit d’1 heure avec un Aidant cyber bénévole, à distance ou dans vos locaux. Retrouvez votre
+      plan d’action sur MesServicesCyber.
+      <dsfr-link label="Demander un accompagement gratuit" neutral href="/cyberdepart"></dsfr-link>
+    </p>
+  </dsfr-container>
+  <dsfr-container class="interlocuteurs-avec-parcours-securisation">
+    <CarrouselDesInterlocuteurs />
+  </dsfr-container>
+{/if}
+
+<dsfr-container class="equipe-biz-dev {afficheParcoursSecurisation ? 'avec-parcours-securisation' : ''}">
   <EquipeBizDev />
 </dsfr-container>
 
@@ -82,6 +111,20 @@
     padding-block: 40px;
   }
 
+  .contenu-encart-parcours-basique {
+    padding-top: 48px;
+  }
+
+  .contenu-encart-cyberdepart {
+    padding: 48px 0;
+    background-color: var(--background-default-grey);
+  }
+
+  .interlocuteurs-avec-parcours-securisation {
+    padding: 72px 0 24px;
+    background-color: var(--blue-france-850-200);
+  }
+
   .interlocuteurs {
     margin-inline: auto;
     @include a-partir-de(lg) {
@@ -92,5 +135,9 @@
   .equipe-biz-dev {
     padding-block: 56px;
     background-color: var(--background-alt-blue-france);
+
+    &.avec-parcours-securisation {
+      background-color: var(--brown-cafe-creme-975-75);
+    }
   }
 </style>
