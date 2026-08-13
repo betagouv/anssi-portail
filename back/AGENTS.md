@@ -26,7 +26,7 @@ pnpm --filter @anssi-portail/back dev:server    # Just the server (not DB)
 
 # Testing
 pnpm --filter @anssi-portail/back test          # Run all tests
-node --import tsx --test tests/path/to/file.spec.ts  # Single file
+node --conditions=anssi-portail:source --import tsx --test tests/path/to/file.spec.ts  # Single file
 
 # Quality
 pnpm --filter @anssi-portail/back lint          # ESLint
@@ -74,7 +74,7 @@ pnpm --filter @anssi-portail/back build         # Compile to dist/
 
 ## Admin Console
 
-Access with `pnpm admin` (production) or `pnpm admin:dev` (auto-build).
+Access with `pnpm admin` (production build) or `pnpm admin:dev` (TypeScript sources through `tsx`).
 
 **Common operations:**
 

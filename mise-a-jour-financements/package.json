@@ -5,13 +5,13 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "start": "node --import tsx src/index.ts",
-    "dev": "node --env-file ../.env --env-file .env --import tsx src/index.ts",
+    "start": "node --conditions=anssi-portail:source --import tsx src/index.ts",
+    "dev": "node --conditions=anssi-portail:source --env-file ../.env --env-file .env --import tsx src/index.ts",
     "lint:fix": "eslint . --fix",
     "lint": "eslint .",
     "pretest": "npm-run-all --parallel typecheck lint",
-    "test:ci": "node --import tsx --test './tests/**/*.spec.ts'",
-    "test": "node --import tsx --test './tests/**/*.spec.ts'",
+    "test:ci": "node --conditions=anssi-portail:source --import tsx --test './tests/**/*.spec.ts'",
+    "test": "node --conditions=anssi-portail:source --import tsx --test './tests/**/*.spec.ts'",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

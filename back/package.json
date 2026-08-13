@@ -8,7 +8,7 @@
     "build": "tsc",
     "dev": "npm-run-all --parallel --race dev:bdd dev:server",
     "dev:bdd": "docker compose up db",
-    "dev:server": "sleep 3 && pnpm migre-bdd && node --import tsx --env-file ../.env --watch src/serveur.ts",
+    "dev:server": "sleep 3 && pnpm migre-bdd && node --conditions=anssi-portail:source --import tsx --env-file ../.env --watch src/serveur.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -17,8 +17,8 @@
     "prelint": "[ -d ../regles-eslint/dist ] || pnpm -F regles-eslint build",
     "prestart": "tsc && pnpm migre-bdd:clever",
     "pretest": "npm-run-all --parallel typecheck lint",
-    "test": "node --import tsx --test './tests/**/*.spec.ts'",
-    "test:ci": "node --import tsx --test './tests/**/*.spec.ts'",
+    "test": "node --conditions=anssi-portail:source --import tsx --test './tests/**/*.spec.ts'",
+    "test:ci": "node --conditions=anssi-portail:source --import tsx --test './tests/**/*.spec.ts'",
     "typecheck": "tsc --noEmit"
   },
   "engines": {
