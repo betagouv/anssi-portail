@@ -45,35 +45,7 @@ permalink: /
 </script>
 
 {% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' and site.env.FEATURE_FLAG_PARCOURS_SECURISATION == 'true' %}
-<dsfr-container class="proteger-organisation fond-macaron">
-  <div class="conteneur">
-    <div class="en-tete">
-      <span class="badge-accompagnement">+6000 organisations déjà accompagnées 🚀</span>
-      <h2 class="titre fr-h1">Chaque organisation a son point de <span class="mot-souligne">départ.</span><br>Trouvez le vôtre.</h2>
-
-      <p class="description">Débutante ou déjà engagée, Mes&ZeroWidthSpace;Services&ZeroWidthSpace;Cyber propose à votre organisation un parcours gratuit adapté à son niveau en cybersécurité. 12&nbsp;mesures pour démarrer (ou «&nbsp;pour prendre son Cyberdépart&nbsp;») avec l'aide d'un Aidant cyber si besoin. 55&nbsp;mesures pour aller plus loin.</p>
-    </div>
-
-    <div class="tags">
-      <dsfr-tags-group tags='[{"label":"TPE"},{"label":"PME"},{"label":"ETI"},{"label":"Collectivités"}]'></dsfr-tags-group>
-    </div>
-
-    <figure class="illustration">
-      <img src="/assets/images/parcours-securisation/illustration-hero-parcours-securisation.png" alt="" width="588" height="392" />
-    </figure>
-
-    <dsfr-button
-      label="Découvrir les parcours"
-      kind="primary"
-      size="lg"
-      markup="a"
-      href="/parcours-securisation/"
-      has-icon
-      icon="arrow-right-line"
-      icon-place="right"
-    ></dsfr-button>
-  </div>
-</dsfr-container>
+{% include composant-svelte.html id="proteger-organisation" %}
 {% else %}
 <dsfr-container class="organisations-concernees">
   <div class="contenu-section">

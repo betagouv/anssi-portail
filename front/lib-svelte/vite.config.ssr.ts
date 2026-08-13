@@ -23,6 +23,7 @@ const rollupOptions: NonNullable<UserConfig['build']>['rollupOptions'] = {
     'equipe-biz-dev': 'src/interlocuteurs/EquipeBizDev.svelte',
     'demande-aide-mon-aide-cyber': 'src/demande-aide-mon-aide-cyber/DemandeAideMAC.svelte',
     'heros-accueil': 'src/accueil/HerosAccueil.svelte',
+    'proteger-organisation': 'src/accueil/ProtegerOrganisation.svelte',
     'parcours-securisation': 'src/parcours-securisation/LandingParcoursSecurisation.svelte',
     'parcours-cyberdepart': 'src/parcours-securisation/LandingParcoursCyberdepart.svelte',
     'parcours-securisation-complet': 'src/parcours-securisation/LandingParcoursSecurisationComplet.svelte',
