@@ -5,9 +5,7 @@ titreHtml: 'Créez votre compte | MesServicesCyber'
 styles: /assets/styles/connexion.css
 ---
 
-{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
-<link rel="stylesheet" href="{{ "/assets/styles/connexion-nouvelle-da.css" | relative_url }}">
-{% endif %}
+{% capture classe-nouvelle-da %}{%if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}nouvelle-da{% endif %}{% endcapture %}
 
 <dsfr-container class="connexion">
   <div class="contenu-section">
@@ -23,7 +21,7 @@ styles: /assets/styles/connexion.css
         </div>
       </div>
     </div>
-    <div class="contenu-secondaire">
+    <div class="contenu-secondaire {{classe-nouvelle-da}}">
       {% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
       <img src="/assets/images/illustration-connexion-nouvelle-da.avif" width="560" height="560" alt="" />
       {% else %}
