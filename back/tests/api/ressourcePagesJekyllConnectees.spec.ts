@@ -3,6 +3,7 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { attributionParcours } from '../../src/api/middlewares/attributionParcours.js';
+import { publieMesureConsultée } from '../../src/api/middlewares/publieMesureConsultee.js';
 import { creeServeur } from '../../src/api/msc.js';
 import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
@@ -75,7 +76,15 @@ describe("La ressource d'une page Jekyll connectée", () => {
     it("trace la visite lorsque qu'un utilisateur est connecté", async () => {
       await entrepotUtilisateur.ajoute(jeanneDupont);
       const cookie = encodeSession({ email: jeanneDupont.email, token: 'valide' });
-
+      serveur = creeServeur({
+        ...configurationDeTestDuServeur,
+        busEvenements,
+        entrepotUtilisateur,
+        gestionnairesRequêtesComplémentaires: {
+          ...fauxGestionnaireRequêtesComplémentaires,
+          publieMesureConsultée,
+        },
+      });
       const reponse = await request(serveur).get('/mesures/AUTH.5').set('Cookie', [cookie]);
 
       assert.equal(reponse.status, 200);

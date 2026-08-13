@@ -79,6 +79,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   const { fournisseurChemin, gestionnairesRequêtesComplémentaires } = configurationServeur;
   const attributionParcoursConfiguré = gestionnairesRequêtesComplémentaires.attributionParcours(configurationServeur);
+  const publieMesureConsultée = gestionnairesRequêtesComplémentaires.publieMesureConsultée(configurationServeur);
 
   app.use(compression());
 
@@ -391,7 +392,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     enregistreRoute('/api/parcours/complet', ressourceParcoursComplet(configurationServeur));
     enregistreRoute(
       '/mesures/:id',
-      ressourcePagesJekyllConnectees(configurationServeur, 'mesures', [attributionParcoursMesure(configurationServeur)])
+      ressourcePagesJekyllConnectees(configurationServeur, 'mesures', [
+        publieMesureConsultée,
+        attributionParcoursMesure(configurationServeur),
+      ])
     );
   }
 
