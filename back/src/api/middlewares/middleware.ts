@@ -17,6 +17,10 @@ const { JsonWebTokenError, TokenExpiredError } = jsonwebtoken;
 
 type FonctionMiddleware = (requete: Request, reponse: Response, suite: NextFunction) => Promise<void>;
 
+export type GestionnaireRequêtesComplémentaires = {
+  attributionParcours: FonctionMiddleware;
+};
+
 export type Middleware = {
   interdisLaMiseEnCache: FonctionMiddleware;
   verifieJWT: FonctionMiddleware;

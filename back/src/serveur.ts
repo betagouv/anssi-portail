@@ -189,6 +189,9 @@ const port = process.env.PORT || 3000;
     generateurImage: new GenerateurImageAvif(),
     serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(fournisseurChemin),
     adaptateurCompression,
+    gestionnairesRequêtesComplémentaires: {
+      attributionParcours: async () => {},
+    },
   }).listen(port, () => {
     console.log(`Le serveur écoute sur le port ${port}`);
   });

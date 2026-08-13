@@ -76,7 +76,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   configurationServeur.adaptateurGestionErreur.initialise(app);
 
-  const { fournisseurChemin } = configurationServeur;
+  const { fournisseurChemin, gestionnairesRequêtesComplémentaires } = configurationServeur;
 
   app.use(compression());
 
@@ -372,7 +372,12 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(303, '/modules/1'));
     enregistreRoute('/modules/1', ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart'));
     enregistreRoute('/modules/:id', ressourcePagesJekyllConnectees(configurationServeur, 'modules'));
-    enregistreRoute('/parcours-complet', ressourcePagesJekyllConnectees(configurationServeur, 'parcours-complet'));
+    enregistreRoute(
+      '/parcours-complet',
+      ressourcePagesJekyllConnectees(configurationServeur, 'parcours-complet', [
+        gestionnairesRequêtesComplémentaires.attributionParcours,
+      ])
+    );
     enregistreRoute('/api/parcours/complet', ressourceParcoursComplet(configurationServeur));
     enregistreRoute('/mesures/:id', ressourcePagesJekyllConnectees(configurationServeur, 'mesures'));
   }

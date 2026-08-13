@@ -27,7 +27,7 @@ import { ServiceSanteGuides } from '../metier/serviceSanteGuides.js';
 import { AdaptateurJWT } from './adaptateurJWT.js';
 import { FournisseurChemin } from './fournisseurChemin.js';
 import { ServiceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
-import { Middleware } from './middlewares/middleware.js';
+import { GestionnaireRequêtesComplémentaires, Middleware } from './middlewares/middleware.js';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
 
 export type ConfigurationServeur = {
@@ -68,4 +68,5 @@ export type ConfigurationServeur = {
   adaptateurEmail: AdaptateurEmail;
   generateurImage: GenerateurImage;
   adaptateurCompression: AdaptateurCompression;
+  gestionnairesRequêtesComplémentaires: GestionnaireRequêtesComplémentaires;
 };
