@@ -1,19 +1,17 @@
 <script lang="ts">
+  import type { Component, Snippet } from 'svelte';
   import { préfèreMouvementRéduit } from '../../utils/mouvementReduit.svelte';
-  import Association from './Association.svelte';
-  import DPO from './DPO.svelte';
-  import DSI from './DSI.svelte';
-  import RSSI from './RSSI.svelte';
-
-  const DURÉE_SCÈNE_EN_MS = 5500;
-
-  const scènes = [DSI, DPO, Association, RSSI];
 
   type Props = {
+    scènes: Component[];
+    étiquette: string;
+    ratio: string;
+    décor?: Snippet<[number, number]>;
     enPause?: boolean;
+    duréeScèneEnMs?: number;
   };
 
-  const { enPause = false }: Props = $props();
+  const { scènes, étiquette, ratio, décor, enPause = false, duréeScèneEnMs = 5500 }: Props = $props();
 
   const mouvement = préfèreMouvementRéduit();
   let index = $state(0);
@@ -30,7 +28,7 @@
 
     const intervalle = setInterval(() => {
       index = (index + 1) % scènes.length;
-    }, DURÉE_SCÈNE_EN_MS);
+    }, duréeScèneEnMs);
 
     return () => {
       clearInterval(intervalle);
@@ -38,12 +36,10 @@
   });
 </script>
 
-<div
-  class="illustration-animee"
-  class:en-pause={enPause}
-  role="img"
-  aria-label="Des responsables d’organisations protègent leur activité, leurs données et leurs équipes."
->
+<div class="illustration-animee" class:en-pause={enPause} style="--ratio: {ratio}" role="img" aria-label={étiquette}>
+  {#if décor}
+    <div class="decor">{@render décor(index, scènes.length)}</div>
+  {/if}
   {#each scènes as Scène, i (i)}
     <div class="scene" class:active={i === index}>
       <Scène />
@@ -52,10 +48,24 @@
 </div>
 
 <style lang="scss">
+  // L'animation se base sur une convention de nommage : chaque scène expose
+  // les calques qu'elle possède parmi les classes ci-dessous, et hérite de
+  // l'animation correspondante.
+
   .illustration-animee {
     position: relative;
     width: 100%;
-    aspect-ratio: 522 / 363;
+    aspect-ratio: var(--ratio);
+  }
+
+  .decor {
+    position: absolute;
+    inset: 0;
+
+    :global(svg) {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .en-pause .scene :global(*) {
@@ -76,7 +86,8 @@
       height: 100%;
     }
 
-    :global(.icone) {
+    :global(.icone),
+    :global(.forme) {
       transform-box: fill-box;
       transform-origin: center;
     }
@@ -93,7 +104,9 @@
       :global(.image),
       :global(.icone),
       :global(.bulle),
-      :global(.profil) {
+      :global(.profil),
+      :global(.carte),
+      :global(.forme) {
         will-change: transform, opacity;
       }
 
@@ -103,6 +116,9 @@
       :global(.trace) {
         animation: dessin-trace 1s ease-in-out 0.25s both;
       }
+      :global(.carte) {
+        animation: apparition-bulle 0.6s ease-out 0.55s both;
+      }
       :global(.icone) {
         animation: apparition-icone 0.5s ease-out 0.6s both;
       }
@@ -111,6 +127,9 @@
       }
       :global(.profil) {
         animation: apparition-profil 0.6s ease-out 1s both;
+      }
+      :global(.forme) {
+        animation: apparition-icone 0.5s ease-out 1.1s both;
       }
     }
   }
