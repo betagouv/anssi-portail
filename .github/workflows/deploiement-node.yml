@@ -62,13 +62,13 @@ jobs:
 
           clever env |
             grep -E \
-              -e '^FEATURE_FLAG_NOUVELLE_DA=' \
               -e '^SENTRY_AUTH_TOKEN=' \
               -e '^SENTRY_PROJET=' \
               -e '^SENTRY_URL=' \
               -e '^DELAI_AFFICHAGE_AVIS_UTILISATEUR=' \
               -e '^FEATURE_FLAG_NIS2_CYFUN23=' \
               -e '^FEATURE_FLAG_NOUVELLE_DA=' \
+              -e '^FEATURE_FLAG_PARCOURS_SECURISATION=' \
               -e '^GOOGLE_SEARCH_CONSOLE_VERIFICATION=' \
               -e '^MATOMO_ID=' \
               -e '^MATOMO_URL_TAG_MANAGER=' \
