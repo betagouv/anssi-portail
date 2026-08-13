@@ -5,20 +5,34 @@
   import EncartDeRecommandationMaturiteFaible from './EncartDeRecommandationMaturiteFaible.svelte';
   import EncartDeRecommandationMaturiteForte from './EncartDeRecommandationMaturiteForte.svelte';
   import MessageNonResponsabilite from './MessageNonResponsabilite.svelte';
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
+  import Alternatives from '../ui/Alternatives.svelte';
 
   export let niveau: NiveauMaturite;
 
   $: niveauFaible = niveau.id === 'insuffisant' || niveau.id === 'emergent' || niveau.id === 'intermediaire';
 </script>
 
-{#if niveauFaible}
-  <Separateur />
-  <EncartDeRecommandationMaturiteFaible />
-  <MessageNonResponsabilite />
-{:else if $profilStore}
-  <MessageNonResponsabilite />
-{:else}
-  <Separateur />
-  <EncartDeRecommandationMaturiteForte />
-  <MessageNonResponsabilite />
-{/if}
+<Alternatives affichageAlternatif={afficheParcoursSecurisation}>
+  {#snippet défaut()}
+    {#if niveauFaible}
+      <Separateur />
+      <EncartDeRecommandationMaturiteFaible />
+      <MessageNonResponsabilite />
+    {:else if $profilStore}
+      <MessageNonResponsabilite />
+    {:else}
+      <Separateur />
+      <EncartDeRecommandationMaturiteForte />
+      <MessageNonResponsabilite />
+    {/if}
+  {/snippet}
+  {#snippet alternatif()}
+    <Separateur />
+    {#if niveauFaible}
+      <EncartDeRecommandationMaturiteFaible />
+    {:else}
+      <EncartDeRecommandationMaturiteForte />
+    {/if}
+  {/snippet}
+</Alternatives>

@@ -1,21 +1,60 @@
 <script lang="ts">
   import DemandeDiagnosticSimplifiee from '../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
+  import Alternatives from '../ui/Alternatives.svelte';
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
+  import EncartPromotionParcoursBasique from '../parcours-securisation/EncartPromotionParcoursBasique.svelte';
 </script>
 
-<dsfr-container>
-  <div class="contenu-section">
-    <hgroup class="preambule">
-      <h1>Passez à l'étape suivante</h1>
+<Alternatives affichageAlternatif={afficheParcoursSecurisation}>
+  {#snippet défaut()}
+    <dsfr-container>
+      <div class="contenu-section">
+        <hgroup class="preambule">
+          <h1>Passez à l'étape suivante</h1>
+          <p>
+            Votre résultat montre que votre organisation n’est pas suffisamment protégée face aux cyber menaces. L’ANSSI
+            vous recommande de réaliser un diagnostic cyber (gratuit) afin de définir rapidement les actions
+            prioritaires à mettre en place et renforcer votre cybersécurité.
+          </p>
+        </hgroup>
+        <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
+        <DemandeDiagnosticSimplifiee origine="test-maturité" />
+      </div>
+    </dsfr-container>
+  {/snippet}
+
+  {#snippet alternatif()}
+    <dsfr-container>
+      <div class="contenu-section">
+        <hgroup class="preambule">
+          <h1>Renforcez votre cybersécurité dès maintenant</h1>
+          <p>
+            Votre organisation n’est pas suffisamment protégée face aux cyber menaces. L’ANSSI vous recommande de
+            <b>mettre en place des premières mesures simples</b> pour vous protéger rapidement.
+          </p>
+        </hgroup>
+        <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
+      </div>
+    </dsfr-container>
+    <div class="contenu-encart-parcours-securisation">
+      <EncartPromotionParcoursBasique
+        titre="13 mesures simples pour protéger votre organisation contre les cyberattaques"
+        description="Un programme d'accompagnement gratuit, pensé pour les non-experts."
+      >
+        {#snippet tags()}
+          <span class="tag">Programme d’accompagnement gratuit</span>
+        {/snippet}
+      </EncartPromotionParcoursBasique>
+    </div>
+    <dsfr-container class="contenu-encart-cyberdepart">
       <p>
-        Votre résultat montre que votre organisation n’est pas suffisamment protégée face aux cyber menaces. L’ANSSI
-        vous recommande de réaliser un diagnostic cyber (gratuit) afin de définir rapidement les actions prioritaires à
-        mettre en place et renforcer votre cybersécurité.
+        <b>Vous préférez échanger avec un Aidant cyber ?</b> Le diagnostic cyberdépart vous permet de bénéficier d’un accompagnement
+        gratuit d’1 heure avec un Aidant cyber bénévole, à distance ou dans vos locaux. Retrouvez votre plan d’action sur
+        MesServicesCyber. Demander un accompagement gratuit
       </p>
-    </hgroup>
-    <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
-    <DemandeDiagnosticSimplifiee origine="test-maturité" />
-  </div>
-</dsfr-container>
+    </dsfr-container>
+  {/snippet}
+</Alternatives>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
@@ -23,6 +62,29 @@
 
   dsfr-container {
     padding-top: 48px;
+  }
+
+  .tag {
+    background-color: var(--green-bourgeon-950-100);
+    border-radius: 100px;
+    color: var(--text-title-grey);
+    display: inline-block;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0.375rem 1rem;
+    width: fit-content;
+  }
+
+  .contenu-encart-cyberdepart {
+    padding: 48px 0;
+    background-color: var(--background-alt-blue-france);
+  }
+
+  .contenu-encart-parcours-securisation {
+    margin-top: 48px;
+    padding: 96px 0;
+    background-color: var(--yellow-moutarde-925-125);
   }
 
   .contenu-section {
