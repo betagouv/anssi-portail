@@ -68,7 +68,6 @@
 </dsfr-container>
 
 <style lang="scss">
-  @use '../../../assets/styles/responsive' as *;
   .favoris {
     margin-top: 48px;
     margin-bottom: 48px;
@@ -89,50 +88,5 @@
 
   dsfr-container {
     padding: 72px 0;
-  }
-
-  .encart {
-    .carte.parcours {
-      display: grid;
-      gap: 24px 16px;
-
-      grid-template-columns: auto;
-      grid-template-rows: auto;
-      grid-template-areas:
-        'illustration'
-        'titre'
-        'contenu'
-        'bouton';
-
-      @include a-partir-de(lg) {
-        grid-template-columns: auto 384px;
-        grid-template-areas:
-          'titre illustration'
-          'contenu illustration'
-          'bouton illustration';
-      }
-
-      .illustration {
-        grid-area: illustration;
-        @include a-partir-de(lg) {
-          height: 205px;
-          padding: 38px 51px;
-        }
-      }
-
-      h2 {
-        grid-area: titre;
-        @include a-partir-de(lg) {
-          font-size: 2.5rem;
-          line-height: 3rem;
-        }
-      }
-
-      p {
-        grid-area: contenu;
-        font-size: 1.25rem;
-        line-height: 2rem;
-      }
-    }
   }
 </style>
