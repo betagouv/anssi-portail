@@ -8,10 +8,10 @@
   export let items: Array<ItemCyber | Guide>;
   export let ancre: string;
   export let sourceIllustration: string | undefined = undefined;
-  export let couleurDeFond: string = '';
+  export let classeCss: string = '';
 </script>
 
-<dsfr-container id={ancre} class="action" style={`--background-color:var(--${couleurDeFond})`}>
+<dsfr-container id={ancre} class={`action ${classeCss}`}>
   <div class="contenu-action">
     <div class="description">
       <h2>{titre}</h2>
@@ -38,7 +38,6 @@
     padding-top: 48px;
     padding-bottom: 48px;
     scroll-margin-top: 90px; /* Hauteur de la barre de navigation */
-    background: var(--background-color);
 
     .explication {
       margin: 0;

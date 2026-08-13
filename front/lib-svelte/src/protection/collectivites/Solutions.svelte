@@ -27,7 +27,7 @@
     explication: string;
     items: (ItemCyber | Guide)[];
     ancre: string;
-    couleurDeFond?: string;
+    classeCss?: string;
   };
 
   const actions: Actions[] = $derived([
@@ -53,7 +53,7 @@
         '/ressources/panorama',
       ]),
       ancre: 'solutions&sensibiliser',
-      couleurDeFond: afficheNouvelleDA ? 'brown-cafe-creme-975-75' : 'jaune-clair-msc',
+      classeCss: afficheNouvelleDA ? 'fond-cafe-creme' : 'fond-jaune-clair',
     },
     {
       id: 'se-former',
@@ -73,7 +73,7 @@
         '/services/ads',
       ]),
       ancre: 'solutions&securiser',
-      couleurDeFond: afficheNouvelleDA ? 'pink-macaron-925-125' : 'jaune-clair-msc',
+      classeCss: afficheNouvelleDA ? 'fond-macaron-rose' : 'fond-jaune-clair',
     },
     {
       id: 'se-preparer',
@@ -92,7 +92,7 @@
         '/guides/anticiper-et-gerer-sa-communication-de-crise-cyber',
       ]),
       ancre: 'solutions&reagir',
-      couleurDeFond: afficheNouvelleDA ? 'background-contrast-blue-france' : 'jaune-clair-msc',
+      classeCss: afficheNouvelleDA ? 'fond-bleu-france-950' : 'fond-jaune-clair',
     },
   ]);
 </script>
@@ -104,7 +104,7 @@
         titre={action.titre}
         explication={action.explication}
         items={action.items}
-        couleurDeFond={action.couleurDeFond ?? ''}
+        classeCss={action.classeCss ?? ''}
         ancre={action.ancre}
       ></ActionParcoursAvecItems>
     {/each}

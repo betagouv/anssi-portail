@@ -376,6 +376,10 @@
   }
 }
 
+.fond-jaune-clair {
+  background-color: var(--jaune-clair-msc, #fff7db);
+}
+
 .fond-cafe-creme {
   background-color: var(--brown-cafe-creme-975-75, #fbf6ed);
 }
@@ -392,6 +396,14 @@
   background-color: var(--blue-france-850-200, #cacafb);
 }
 
+.fond-bleu-france-950 {
+  background-color: var(--blue-france-950-100, #ececfe);
+}
+
 .fond-macaron {
   background-color: var(--pink-macaron-850-200, #fcc0b4);
+}
+
+.fond-macaron-rose {
+  background-color: var(--pink-macaron-925-125, #fddfda);
 }
