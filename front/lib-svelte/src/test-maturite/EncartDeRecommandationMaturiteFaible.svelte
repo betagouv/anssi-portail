@@ -49,9 +49,10 @@
     </div>
     <dsfr-container class="contenu-encart-cyberdepart">
       <p>
-        <b>Vous préférez échanger avec un Aidant cyber ?</b> Le diagnostic cyberdépart vous permet de bénéficier d’un accompagnement
-        gratuit d’1 heure avec un Aidant cyber bénévole, à distance ou dans vos locaux. Retrouvez votre plan d’action sur
-        MesServicesCyber. Demander un accompagement gratuit
+        <b>Vous préférez échanger avec un Aidant cyber ?</b> Le diagnostic cyberdépart vous permet de bénéficier d’un
+        accompagnement gratuit d’1 heure avec un Aidant cyber bénévole, à distance ou dans vos locaux. Retrouvez votre
+        plan d’action sur MesServicesCyber.
+        <dsfr-link label="Demander un accompagement gratuit" neutral href="/cyberdepart"></dsfr-link>
       </p>
     </dsfr-container>
   {/snippet}
