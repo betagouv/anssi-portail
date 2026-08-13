@@ -1,8 +1,17 @@
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
+  import Bouton from '../ui/Bouton.svelte';
   import Lien from '../ui/Lien.svelte';
+  import IllustrationProtegerOrganisation from './animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
 
   const tags = [{ label: 'TPE' }, { label: 'PME' }, { label: 'ETI' }, { label: 'Collectivités' }];
+
+  let enPause = $state(false);
+  const libelléPause = $derived(enPause ? 'Lancer les animations' : 'Mettre les animations en pause');
+
+  const basculePause = () => {
+    enPause = !enPause;
+  };
 </script>
 
 <dsfr-container class="proteger-organisation fond-macaron">
@@ -25,13 +34,19 @@
     </div>
 
     <figure class="illustration">
-      <img
-        src="/assets/images/parcours-securisation/illustration-hero-parcours-securisation.png"
-        alt=""
-        width="588"
-        height="392"
-      />
+      <IllustrationProtegerOrganisation {enPause} />
     </figure>
+
+    <div class="controle-animation">
+      <Bouton
+        type="secondaire"
+        icone={enPause ? 'play-circle-line' : 'pause-circle-line'}
+        iconeSeule
+        libelle={libelléPause}
+        titre={libelléPause}
+        surClic={basculePause}
+      />
+    </div>
 
     <Lien
       apparence="bouton"
@@ -60,6 +75,12 @@
 
     @include a-partir-de(lg) {
       background-position: right bottom;
+    }
+
+    .controle-animation {
+      @media (prefers-reduced-motion: reduce) {
+        display: none;
+      }
     }
 
     .conteneur {
@@ -124,14 +145,10 @@
 
     .illustration {
       margin: 0 auto;
+      width: 100%;
 
       @include a-partir-de(lg) {
         max-width: taille-pour-colonnes(8);
-      }
-
-      img {
-        max-width: 100%;
-        height: auto;
       }
     }
   }
