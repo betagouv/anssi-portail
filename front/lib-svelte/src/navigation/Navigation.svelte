@@ -2,10 +2,32 @@
   import { enPropriétéWebC } from '$plateforme/webComponent';
   import { creeLienContactsUtiles } from '../contacts/contacts';
   import { profilStore } from '../stores/profil.store';
+  import { onMount } from 'svelte';
 
   let estConnecte = () => !!$profilStore;
+
+  let estMobile = $state(false);
+  onMount(() => {
+    const mql = window.matchMedia('(max-width: 992px)');
+    mql.addEventListener('change', (e: MediaQueryListEvent) => {
+      estMobile = e.matches;
+    });
+    estMobile = mql.matches;
+  });
+
   const cheminRelatif: string = typeof window !== 'undefined' ? window.location.pathname : '/';
+
   const menu = $derived([
+    ...(estMobile
+      ? [
+          {
+            label: 'Accueil',
+            id: 'nav-accueil',
+            href: '/',
+            active: cheminRelatif === '/',
+          },
+        ]
+      : []),
     {
       label: 'Diagnostic cyber gratuit',
       id: 'nav-cyberdepart',
@@ -76,13 +98,25 @@
         },
       ],
     },
+    ...(estMobile
+      ? [
+          {
+            label: 'Directive NIS 2',
+            id: 'nav-nis2',
+            href: '/nis2',
+            active: cheminRelatif === '/nis2',
+          },
+        ]
+      : []),
   ]);
 </script>
 
 <dsfr-navigation items={enPropriétéWebC(menu)}>
-  <a href="/nis2" class="bouton-nis2" slot="afternavigation">
-    <img src="/assets/images/badge-nis2.svg" alt="Directive NIS2" />
-  </a>
+  {#if !estMobile}
+    <a href="/nis2" class="bouton-nis2" slot="afternavigation">
+      <img src="/assets/images/badge-nis2.svg" alt="Directive NIS2" />
+    </a>
+  {/if}
 </dsfr-navigation>
 
 <style lang="scss">
