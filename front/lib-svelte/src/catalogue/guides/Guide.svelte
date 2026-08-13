@@ -142,7 +142,7 @@
           <div class="contenu-tags">
             <span>TAGS</span>
             <div class="labels">
-              <span>ANSSI</span>
+              <dsfr-tag label="ANSSI"></dsfr-tag>
             </div>
           </div>
         </div>
