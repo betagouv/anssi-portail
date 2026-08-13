@@ -2,6 +2,8 @@
   import BlocDiagnostic from '../ui/BlocDiagnostic.svelte';
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
   import Lien from '../ui/Lien.svelte';
+  import EncartPromotionParcoursComplet from './EncartPromotionParcoursComplet.svelte';
+  import EncartPromotionParcoursBasique from './EncartPromotionParcoursBasique.svelte';
   import { enPropriétéWebC } from '$plateforme/webComponent';
   import IllustrationProtegerOrganisation from '../accueil/animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
   import Bouton from '../ui/Bouton.svelte';
@@ -27,35 +29,6 @@
     },
   ];
 
-  const fonctionnalitesParcoursBasique = [
-    {
-      titre: 'Rapides à mettre en place',
-      description: '13 mesures accessibles, souvent réalisables en quelques minutes.',
-      illustration: '/assets/images/parcours-securisation/illustration-parcours-basique-mots-de-passe.svg',
-    },
-    {
-      titre: 'Pédagogique',
-      description: 'Pas de jargon, on vulgarise la cyber pour vous.',
-      illustration: '/assets/images/parcours-securisation/illustration-parcours-basique-pourquoi.svg',
-    },
-    {
-      titre: 'Pratico-pratique',
-      description: 'Des tutos et des outils pour vous aider à faire, concrètement.',
-      illustration: '/assets/images/parcours-securisation/illustration-parcours-basique-comment.svg',
-    },
-    {
-      titre: 'Décrochez votre badge Cyberdépart',
-      description: "Un premier marqueur d'engagement pour votre sécurité.",
-      badge: {
-        label: 'À la clé',
-        accent: 'green-bourgeon',
-        size: 'sm',
-        type: 'accent',
-      },
-      illustration: '/assets/images/parcours-securisation/illustration-parcours-basique-badge.svg',
-    },
-  ];
-
   const tagsParcoursComplet = [
     {
       label: 'PME / ETI',
@@ -68,27 +41,6 @@
       accent: 'défaut',
       size: 'md',
       icon: 'checkbox-circle-fill',
-    },
-  ];
-
-  const fonctionnalitesParcoursComplet = [
-    {
-      titre: 'Un programme complet',
-      description:
-        'Protégez-vous contre les 5 risques cyber les plus courants — et 6 mesures additionnelles sur la protection des données personnelles, établies avec la CNIL.',
-      illustration: '/assets/images/parcours-securisation/illustration-parcours-complet-modules.svg',
-    },
-    {
-      titre: 'Basé sur ReCyf',
-      description:
-        "Chaque mesure est issue du référentiel ReCyf, simplifiée et accompagnée d'explications pédagogiques pour faciliter votre démarche de mise en conformité NIS 2.",
-      illustration: '/assets/images/parcours-securisation/illustration-parcours-complet-controler.svg',
-    },
-    {
-      titre: 'Suivez votre progression',
-      description:
-        'Avancez à votre rythme, module par module. Visualisez votre progression à tout moment et partagez vos résultats avec votre direction ou votre prestataire.',
-      illustration: '/assets/images/parcours-securisation/illustration-parcours-complet-progression.svg',
     },
   ];
 
@@ -152,29 +104,14 @@
 </div>
 
 <section class="section-parcours-basique">
-  <dsfr-container>
-    <lab-anssi-fonctionnalites
-      titre="La cybersécurité est étrangère à votre organisation ?"
-      description="Accédez à 13 mesures simples pour protéger dès maintenant votre organisation contre les cyberattaques et prendre votre Cyberdépart ! 🚀"
-      fonctionnalites={enPropriétéWebC(fonctionnalitesParcoursBasique)}
-      cliquable
-      avec-cta
-      active-defilement
-    >
-      <dsfr-tags-group tags={tagsParcoursBasique} has-icon slot="hautentete"></dsfr-tags-group>
-      <dsfr-button
-        label="Je commence à sécuriser"
-        kind="primary"
-        size="lg"
-        has-icon
-        icon="arrow-right-circle-line"
-        icon-place="right"
-        slot="cta"
-        href="/modules/1"
-        markup="a"
-      ></dsfr-button>
-    </lab-anssi-fonctionnalites>
-  </dsfr-container>
+  <EncartPromotionParcoursBasique
+    titre="La cybersécurité est étrangère à votre organisation ?"
+    description="Accédez à 13 mesures simples pour protéger dès maintenant votre organisation contre les cyberattaques et prendre votre Cyberdépart ! 🚀"
+  >
+    {#snippet tags()}
+      <dsfr-tags-group tags={enPropriétéWebC(tagsParcoursBasique)}></dsfr-tags-group>
+    {/snippet}
+  </EncartPromotionParcoursBasique>
 </section>
 
 <section class="section-diagnostic">
@@ -198,30 +135,14 @@
 </section>
 
 <section class="section-parcours-complet">
-  <dsfr-container>
-    <lab-anssi-fonctionnalites
-      titre="Votre organisation agit déjà pour sa cybersécurité ?"
-      description="Accédez à 57 mesures pour vous protéger contre les 5 risques cyber les plus courants."
-      fonctionnalites={enPropriétéWebC(fonctionnalitesParcoursComplet)}
-      orientation-media="gauche"
-      cliquable
-      avec-cta
-      active-defilement
-    >
-      <dsfr-tags-group tags={tagsParcoursComplet} has-icon slot="hautentete"></dsfr-tags-group>
-      <dsfr-button
-        label="Je commence à sécuriser"
-        kind="primary"
-        size="lg"
-        has-icon
-        icon="arrow-right-circle-line"
-        icon-place="right"
-        slot="cta"
-        href="/parcours-complet"
-        markup="a"
-      ></dsfr-button>
-    </lab-anssi-fonctionnalites>
-  </dsfr-container>
+  <EncartPromotionParcoursComplet
+    titre="Votre organisation agit déjà pour sa cybersécurité ?"
+    description="Accédez à 57 mesures pour vous protéger contre les 5 risques cyber les plus courants."
+  >
+    {#snippet tags()}
+      <dsfr-tags-group tags={enPropriétéWebC(tagsParcoursComplet)}></dsfr-tags-group>
+    {/snippet}
+  </EncartPromotionParcoursComplet>
 </section>
 
 <section class="section-pied-de-page">
