@@ -1,30 +1,65 @@
 <script lang="ts">
   import { clic } from '../directives/actions.svelte';
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
+  import Alternatives from '../ui/Alternatives.svelte';
+  import EncartPromotionParcoursComplet from '../parcours-securisation/EncartPromotionParcoursComplet.svelte';
 
   const connexion = () => {
     sessionStorage.setItem('pagePostConnexion', '/ma-maturite#comparaison');
   };
 </script>
 
-<dsfr-container>
-  <div class="contenu-section">
-    <hgroup class="preambule">
-      <h1>Passez à l'étape suivante</h1>
-      <p>
-        Comparez la maturité de votre organisation à celle d’entités similaires et suivez votre évolution dans le temps.
-      </p>
-    </hgroup>
-    <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
-    <div class="apercu-comparaison">
-      <div class="connexion">
-        <p>
-          Connectez-vous ou inscrivez-vous sur MesServicesCyber pour accéder à la comparaison de votre maturité cyber.
-        </p>
-        <dsfr-connect use:clic={connexion} href="/oidc/connexion"></dsfr-connect>
+<Alternatives affichageAlternatif={afficheParcoursSecurisation}>
+  {#snippet défaut()}
+    <dsfr-container>
+      <div class="contenu-section">
+        <hgroup class="preambule">
+          <h1>Passez à l'étape suivante</h1>
+          <p>
+            Comparez la maturité de votre organisation à celle d’entités similaires et suivez votre évolution dans le
+            temps.
+          </p>
+        </hgroup>
+        <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
+        <div class="apercu-comparaison">
+          <div class="connexion">
+            <p>
+              Connectez-vous ou inscrivez-vous sur MesServicesCyber pour accéder à la comparaison de votre maturité
+              cyber.
+            </p>
+            <dsfr-connect use:clic={connexion} href="/oidc/connexion"></dsfr-connect>
+          </div>
+        </div>
       </div>
+    </dsfr-container>
+  {/snippet}
+
+  {#snippet alternatif()}
+    <dsfr-container>
+      <div class="contenu-section">
+        <hgroup class="preambule">
+          <h1>Franchissez un cap supplémentaire</h1>
+          <p>
+            Pour consolider votre niveau et aller encore plus loin, l'ANSSI vous recommande de poursuivre vos efforts
+            avec un <b>programme gratuit pour renforcer votre cybersécurité</b> contre les risques les plus courants et
+            <b>faciliter votre démarche de mise en conformité NIS 2</b>, si vous êtes concerné.
+          </p>
+        </hgroup>
+        <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
+      </div>
+    </dsfr-container>
+    <div class="contenu-encart-parcours-securisation">
+      <EncartPromotionParcoursComplet
+        titre="6 modules pour vous protéger contre les risques les plus courants"
+        description="Un programme d'accompagnement gratuit, pensé pour les PME/ETI et les organisations concernées par la directive NIS 2."
+      >
+        {#snippet tags()}
+          <span class="tag">Programme d’accompagnement gratuit</span>
+        {/snippet}
+      </EncartPromotionParcoursComplet>
     </div>
-  </div>
-</dsfr-container>
+  {/snippet}
+</Alternatives>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
@@ -32,6 +67,24 @@
 
   dsfr-container {
     padding-top: 48px;
+  }
+
+  .tag {
+    background-color: var(--green-bourgeon-950-100);
+    border-radius: 100px;
+    color: var(--text-title-grey);
+    display: inline-block;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0.375rem 1rem;
+    width: fit-content;
+  }
+
+  .contenu-encart-parcours-securisation {
+    margin-top: 48px;
+    padding: 96px 0;
+    background-color: var(--yellow-moutarde-925-125);
   }
 
   .contenu-section {
