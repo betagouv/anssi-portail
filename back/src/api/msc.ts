@@ -70,7 +70,6 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe.js';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
-import { attributionParcoursMesure } from './middlewares/attributionParcoursMesure.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -78,8 +77,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   configurationServeur.adaptateurGestionErreur.initialise(app);
 
   const { fournisseurChemin, gestionnairesRequêtesComplémentaires } = configurationServeur;
-  const attributionParcoursConfiguré = gestionnairesRequêtesComplémentaires.attributionParcours(configurationServeur);
-  const publieMesureConsultée = gestionnairesRequêtesComplémentaires.publieMesureConsultée(configurationServeur);
+  const { attributionParcours, attributionParcoursMesure, publieMesureConsultée } =
+    gestionnairesRequêtesComplémentaires;
 
   app.use(compression());
 
@@ -375,26 +374,22 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(303, '/modules/1'));
     enregistreRoute(
       '/modules/1',
-      ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart', [
-        attributionParcoursConfiguré('allégé'),
-      ])
+      ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart', [attributionParcours('allégé')])
     );
     enregistreRoute(
       '/modules/:id',
-      ressourcePagesJekyllConnectees(configurationServeur, 'modules', [attributionParcoursConfiguré('complet')])
+      ressourcePagesJekyllConnectees(configurationServeur, 'modules', [attributionParcours('complet')])
     );
     enregistreRoute(
       '/parcours-complet',
-      ressourcePagesJekyllConnectees(configurationServeur, 'parcours-complet', [
-        attributionParcoursConfiguré('complet'),
-      ])
+      ressourcePagesJekyllConnectees(configurationServeur, 'parcours-complet', [attributionParcours('complet')])
     );
     enregistreRoute('/api/parcours/complet', ressourceParcoursComplet(configurationServeur));
     enregistreRoute(
       '/mesures/:id',
       ressourcePagesJekyllConnectees(configurationServeur, 'mesures', [
         publieMesureConsultée,
-        attributionParcoursMesure(configurationServeur),
+        attributionParcoursMesure,
       ])
     );
   }
