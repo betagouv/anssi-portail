@@ -17,56 +17,26 @@
 
   const cheminRelatif: string = typeof window !== 'undefined' ? window.location.pathname : '/';
 
+  const itemDeMenu = (label: string, href: string, active: boolean) => ({
+    label,
+    id: `nav-${label.toLowerCase().replaceAll(' ', '-')}`,
+    href,
+    active,
+  });
+
   const menu = $derived([
-    ...(estMobile
-      ? [
-          {
-            label: 'Accueil',
-            id: 'nav-accueil',
-            href: '/',
-            active: cheminRelatif === '/',
-          },
-        ]
-      : []),
-    {
-      label: 'Diagnostic cyber gratuit',
-      id: 'nav-cyberdepart',
-      href: '/cyberdepart',
-      active: cheminRelatif === '/cyberdepart',
-    },
+    ...(estMobile ? [itemDeMenu('Accueil', '/', cheminRelatif === '/')] : []),
+
+    itemDeMenu('Diagnostic cyber gratuit', '/cyberdepart', cheminRelatif === '/cyberdepart'),
+
     ...(estConnecte()
-      ? [
-          {
-            label: 'Maturité cyber',
-            id: 'nav-maturite',
-            href: '/ma-maturite',
-            active: cheminRelatif === '/ma-maturite',
-          },
-        ]
-      : [
-          {
-            label: 'Test de maturité cyber',
-            id: 'nav-test-maturite',
-            href: '/test-maturite',
-            active: cheminRelatif === '/test-maturite',
-          },
-        ]),
-    {
-      label: 'Guides et ressources',
-      id: 'nav-catalogue',
-      href: '/catalogue',
-      active: cheminRelatif === '/catalogue',
-    },
-    ...(estConnecte()
-      ? [
-          {
-            label: 'Favoris',
-            id: 'nav-favoris',
-            href: '/favoris',
-            active: cheminRelatif === '/favoris',
-          },
-        ]
-      : []),
+      ? [itemDeMenu('Maturité cyber', '/ma-maturite', cheminRelatif === '/ma-maturite')]
+      : [itemDeMenu('Test de maturité cyber', '/test-maturite', cheminRelatif === '/test-maturite')]),
+
+    itemDeMenu('Guides et ressources', '/catalogue', cheminRelatif === '/catalogue'),
+
+    ...(estConnecte() ? [itemDeMenu('Favoris', '/favoris', cheminRelatif === '/favoris')] : []),
+
     {
       label: 'Contacts et financements',
       id: 'nav-contacts',
@@ -78,36 +48,21 @@
         cheminRelatif.startsWith('/financements/') ||
         cheminRelatif.startsWith('/contacts'),
       items: [
-        {
-          label: 'Contacts cyber',
-          id: 'nav-contacts-1',
-          href: creeLienContactsUtiles($profilStore),
-          active: cheminRelatif.startsWith('/contacts'),
-        },
-        {
-          label: 'Prestataires qualifiés et labellisés',
-          id: 'nav-contacts-2',
-          href: '/prestataires-labellises',
-          active: cheminRelatif === '/prestataires-labellises',
-        },
-        {
-          label: 'Financements',
-          id: 'nav-contacts-3',
-          href: '/financements',
-          active: cheminRelatif === '/financements' || cheminRelatif.startsWith('/financements/'),
-        },
+        itemDeMenu('Contacts cyber', creeLienContactsUtiles($profilStore), cheminRelatif.startsWith('/contacts')),
+        itemDeMenu(
+          'Prestataires qualifiés et labellisés',
+          '/prestataires-labellises',
+          cheminRelatif === '/prestataires-labellises'
+        ),
+        itemDeMenu(
+          'Financements',
+          '/financements',
+          cheminRelatif === '/financements' || cheminRelatif.startsWith('/financements/')
+        ),
       ],
     },
-    ...(estMobile
-      ? [
-          {
-            label: 'Directive NIS 2',
-            id: 'nav-nis2',
-            href: '/nis2',
-            active: cheminRelatif === '/nis2',
-          },
-        ]
-      : []),
+
+    ...(estMobile ? [itemDeMenu('Directive NIS 2', '/nis2', cheminRelatif === '/nis2')] : []),
   ]);
 </script>
 
