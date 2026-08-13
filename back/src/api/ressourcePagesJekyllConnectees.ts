@@ -3,7 +3,7 @@ import { BusEvenements } from '../bus/busEvenements.js';
 import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
 import { IdMesure } from '../metier/mesure.js';
 import { ConfigurationServeur } from './configurationServeur.js';
-import { filetRouteAsynchrone } from './middleware.js';
+import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';
 
 function publieMesureConsultee(nomPage: string, requete: Request, busEvenements: BusEvenements) {

@@ -6,7 +6,7 @@ import { selectionneConfigCellarDeposePourUnBucket } from '../../infra/adaptateu
 import { EntrepotGuideTravail } from '../../metier/entrepotGuideTravail.js';
 import { Guide } from '../../metier/guide.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
-import { filetRouteAsynchrone } from '../middleware.js';
+import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete, valideRequete } from '../zod.js';
 import { schemaAjoutDocumentGuide } from './ressourceDocumentsGuide.schema.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;

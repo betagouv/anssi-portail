@@ -6,7 +6,7 @@ import { OutgoingHttpHeaders } from 'node:http';
 import { beforeEach, describe, it } from 'node:test';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT.js';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
-import { fabriqueMiddleware, Middleware } from '../../src/api/middleware.js';
+import { fabriqueMiddleware, Middleware } from '../../src/api/middlewares/middleware.js';
 import { AdaptateurEnrichissement } from '../../src/infra/enrichissement/adaptateurEnrichissement.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';

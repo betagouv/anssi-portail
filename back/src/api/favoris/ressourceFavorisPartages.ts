@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur.js';
-import { filetRouteAsynchrone } from '../middleware.js';
+import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideParametresRequete } from '../zod.js';
 import { schemaRessourceFavorisPartages } from './ressourceFavorisPartages.schema.js';
 

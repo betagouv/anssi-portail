@@ -4,7 +4,7 @@ import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestReve
 import { TestRealise } from '../../bus/evenements/testRealise.js';
 import { ResultatTestMaturite } from '../../metier/resultatTestMaturite.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
-import { filetRouteAsynchrone } from '../middleware.js';
+import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
 import { schemaRessourceResultatsDeTest } from './ressourceResultatsDeTest.schema.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;

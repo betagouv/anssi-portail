@@ -2,7 +2,7 @@ import { Response, Router } from 'express';
 import z from 'zod';
 import { AvisUtilisateurDonne } from '../bus/evenements/avisUtilisateurDonne.js';
 import { ConfigurationServeur } from './configurationServeur.js';
-import { filetRouteAsynchrone } from './middleware.js';
+import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { schemaRessourceAvisUtilisateur } from './ressourceAvisUtilisateur.schema.js';
 import { valideCorpsRequete } from './zod.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;

@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { encode } from 'html-entities';
 import z from 'zod';
 import { ConfigurationServeur } from '../configurationServeur.js';
-import { filetRouteAsynchrone } from '../middleware.js';
+import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideCorpsRequete } from '../zod.js';
 import { schemaRessourceDemandesAide } from './ressourceDemandesAide.schema.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;

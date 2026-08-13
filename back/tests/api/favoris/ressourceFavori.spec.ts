@@ -2,7 +2,7 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { fabriqueMiddleware } from '../../../src/api/middleware.js';
+import { fabriqueMiddleware } from '../../../src/api/middlewares/middleware.js';
 import { creeServeur } from '../../../src/api/msc.js';
 import { MiseAJourFavorisUtilisateur } from '../../../src/bus/miseAJourFavorisUtilisateur.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
