@@ -33,7 +33,13 @@
       ? [itemDeMenu('Maturité cyber', '/ma-maturite', cheminRelatif === '/ma-maturite')]
       : [itemDeMenu('Test de maturité cyber', '/test-maturite', cheminRelatif === '/test-maturite')]),
 
-    itemDeMenu('Guides et ressources', '/catalogue', cheminRelatif === '/catalogue'),
+    itemDeMenu(
+      'Guides et ressources',
+      '/catalogue',
+      cheminRelatif === '/catalogue' ||
+        cheminRelatif.startsWith('/guides/') ||
+        cheminRelatif.startsWith('/ressources/')
+    ),
 
     ...(estConnecte() ? [itemDeMenu('Favoris', '/favoris', cheminRelatif === '/favoris')] : []),
 
