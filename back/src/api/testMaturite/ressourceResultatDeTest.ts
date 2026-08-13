@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
-import { filetRouteAsynchrone } from '../middleware.js';
+import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
 
 const ressourceResultatDeTest = ({

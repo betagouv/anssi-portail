@@ -2,7 +2,7 @@ import { CmsCrisp } from '@lab-anssi/lib';
 import { adaptateurJWT } from './api/adaptateurJWT.js';
 import { fournisseurChemin } from './api/fournisseurChemin.js';
 import { ServiceRécompensesCyberDépart } from './api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
-import { fabriqueMiddleware } from './api/middleware.js';
+import { fabriqueMiddleware } from './api/middlewares/middleware.js';
 import { creeServeur } from './api/msc.js';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
 import { BusEvenements } from './bus/busEvenements.js';

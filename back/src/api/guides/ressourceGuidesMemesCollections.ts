@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur.js';
-import { filetRouteAsynchrone } from '../middleware.js';
+import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideParametresRequete } from '../zod.js';
 import { guidePresentation } from '../../presentation/guides/guidePresentation.js';
 import { schemaParametersRessourceGuidesMemesCollections } from './ressourceGuidesMemesCollections.schema.js';

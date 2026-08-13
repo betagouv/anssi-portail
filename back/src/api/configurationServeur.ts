@@ -27,7 +27,7 @@ import { ServiceSanteGuides } from '../metier/serviceSanteGuides.js';
 import { AdaptateurJWT } from './adaptateurJWT.js';
 import { FournisseurChemin } from './fournisseurChemin.js';
 import { ServiceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
-import { Middleware } from './middleware.js';
+import { Middleware } from './middlewares/middleware.js';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
 
 export type ConfigurationServeur = {

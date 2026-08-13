@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { UtilisateurConnecte } from '../../bus/evenements/utilisateurConnecte.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
-import { filetRouteAsynchrone } from '../middleware.js';
+import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
 
 const ressourceApresAuthentificationOIDC = ({

@@ -4,7 +4,7 @@ import { estCodeSecteur } from '../../metier/referentielSecteurs.js';
 import { trancheEffectifParCode } from '../../metier/referentielTranchesEffectifEtablissement.js';
 import { RepartitionResultatsTest } from '../../metier/repartitionResultatsTest.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
-import { filetRouteAsynchrone } from '../middleware.js';
+import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
 
 export const ressourceRepartitionDesResultatsDeTest = ({

@@ -3,7 +3,7 @@ import { decode } from 'html-entities';
 import { estCodeDepartement, regionDuDepartement } from '../metier/referentielDepartements.js';
 import { Organisation, Utilisateur } from '../metier/utilisateur.js';
 import { ConfigurationServeur } from './configurationServeur.js';
-import { filetRouteAsynchrone } from './middleware.js';
+import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';
 
 const ressourceProfil = ({

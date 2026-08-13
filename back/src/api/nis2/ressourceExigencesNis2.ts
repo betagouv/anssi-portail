@@ -9,7 +9,7 @@ import {
   versReferentiel,
 } from '../../metier/nis2/exigence.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
-import { filetRouteAsynchrone } from '../middleware.js';
+import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideRequete } from '../zod.js';
 import { schemaRessourceExigencesNis2 } from './ressourceExigencesNis2.schema.js';
 

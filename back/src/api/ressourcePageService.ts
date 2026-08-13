@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur.js';
-import { filetRouteAsynchrone } from './middleware.js';
+import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';
 
 const ressourcePageService = ({ fournisseurChemin }: ConfigurationServeur): Router => {

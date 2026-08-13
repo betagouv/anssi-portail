@@ -1,7 +1,7 @@
 import cors from 'cors';
 import { Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur.js';
-import { filetRouteAsynchrone } from './middleware.js';
+import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { schemaRessourceAnnuaireOrganisations } from './ressourceAnnuaireOrganisations.schema.js';
 import { valideRequete } from './zod.js';
 

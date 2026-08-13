@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { Utilisateur } from '../../metier/utilisateur.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
-import { filetRouteAsynchrone } from '../middleware.js';
+import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideParametresRequete } from '../zod.js';
 import { mesurePresentation } from './mesurePresentation.js';
 import { schemaRessourceModule } from './schemaRessourceModule.schema.js';

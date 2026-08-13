@@ -3,7 +3,7 @@ import { estCodeRegion, regionParCode } from '../../metier/referentielRegions.js
 import { secteurParCode } from '../../metier/referentielSecteurs.js';
 import { trancheEffectifParCode } from '../../metier/referentielTranchesEffectifEtablissement.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
-import { filetRouteAsynchrone } from '../middleware.js';
+import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
 
 const ressourceDernierResultatDeTest = ({
