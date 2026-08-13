@@ -2,8 +2,9 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { attributionParcours } from '../../src/api/middlewares/attributionParcours.js';
-import { publieMesureConsultée } from '../../src/api/middlewares/publieMesureConsultee.js';
+import { fabriqueAttributionParcours } from '../../src/api/middlewares/attributionParcours.js';
+import { fabriqueAttributionParcoursMesure } from '../../src/api/middlewares/attributionParcoursMesure.js';
+import { fabriquePublieMesureConsultée } from '../../src/api/middlewares/publieMesureConsultee.js';
 import { creeServeur } from '../../src/api/msc.js';
 import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
@@ -60,7 +61,7 @@ describe("La ressource d'une page Jekyll connectée", () => {
         entrepotUtilisateur,
         gestionnairesRequêtesComplémentaires: {
           ...fauxGestionnaireRequêtesComplémentaires,
-          attributionParcours,
+          attributionParcours: fabriqueAttributionParcours({ entrepotUtilisateur, busEvenements }),
         },
       });
 
@@ -82,7 +83,7 @@ describe("La ressource d'une page Jekyll connectée", () => {
         entrepotUtilisateur,
         gestionnairesRequêtesComplémentaires: {
           ...fauxGestionnaireRequêtesComplémentaires,
-          publieMesureConsultée,
+          publieMesureConsultée: fabriquePublieMesureConsultée({ busEvenements }),
         },
       });
       const reponse = await request(serveur).get('/mesures/AUTH.5').set('Cookie', [cookie]);
@@ -123,7 +124,11 @@ describe("La ressource d'une page Jekyll connectée", () => {
         entrepotMesure,
         gestionnairesRequêtesComplémentaires: {
           ...fauxGestionnaireRequêtesComplémentaires,
-          attributionParcours,
+          attributionParcoursMesure: fabriqueAttributionParcoursMesure({
+            entrepotMesure,
+            entrepôtModule,
+            attributionParcours: fabriqueAttributionParcours({ busEvenements, entrepotUtilisateur }),
+          }),
         },
       });
 

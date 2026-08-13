@@ -3,8 +3,10 @@ import { CmsCrisp } from '@lab-anssi/lib';
 import { adaptateurJWT } from './api/adaptateurJWT.js';
 import { fournisseurChemin } from './api/fournisseurChemin.js';
 import { ServiceRécompensesCyberDépart } from './api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
-import { attributionParcours } from './api/middlewares/attributionParcours.js';
+import { fabriqueAttributionParcours } from './api/middlewares/attributionParcours.js';
+import { fabriqueAttributionParcoursMesure } from './api/middlewares/attributionParcoursMesure.js';
 import { fabriqueMiddleware } from './api/middlewares/middleware.js';
+import { fabriquePublieMesureConsultée } from './api/middlewares/publieMesureConsultee.js';
 import { creeServeur } from './api/msc.js';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
 import { BusEvenements } from './bus/busEvenements.js';
@@ -43,7 +45,6 @@ import { EntrepotMesure } from './metier/entrepotMesure.js';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe.js';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
-import { publieMesureConsultée } from './api/middlewares/publieMesureConsultee.js';
 
 const adaptateurEmail = fabriqueAdaptateurEmail();
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
@@ -134,6 +135,14 @@ const adaptateurEnrichissement = await fabriqueAdaptateurEnrichissement(
   cmsCrisp
 );
 
+const attributionParcours = fabriqueAttributionParcours({ entrepotUtilisateur, busEvenements });
+const attributionParcoursMesure = fabriqueAttributionParcoursMesure({
+  entrepotMesure,
+  attributionParcours,
+  entrepôtModule,
+});
+const publieMesureConsultée = fabriquePublieMesureConsultée({ busEvenements });
+
 const port = process.env.PORT || 3000;
 
 (async () => {
@@ -193,6 +202,7 @@ const port = process.env.PORT || 3000;
     adaptateurCompression,
     gestionnairesRequêtesComplémentaires: {
       attributionParcours,
+      attributionParcoursMesure,
       publieMesureConsultée,
     },
   }).listen(port, () => {

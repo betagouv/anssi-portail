@@ -288,11 +288,13 @@ export const fauxAdaptateurEmail: AdaptateurEmail = {
 };
 
 export const fauxGestionnaireRequêtesComplémentaires: GestionnaireRequêtesComplémentaires = {
-  attributionParcours:
-    (_configurationServeur: ConfigurationServeur) => (_parcours: Parcours) => async (_requête, _réponse, suite) => {
-      suite();
-    },
-  publieMesureConsultée: (_configurationServeur: ConfigurationServeur) => async (_requête, _réponse, suite) => {
+  attributionParcours: (_parcours: Parcours) => async (_requête, _réponse, suite) => {
+    suite();
+  },
+  attributionParcoursMesure: async (_requête, _réponse, suite) => {
+    suite();
+  },
+  publieMesureConsultée: async (_requête, _réponse, suite) => {
     suite();
   },
 };

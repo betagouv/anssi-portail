@@ -8,20 +8,20 @@ import { AdaptateurEnvironnement } from '../../infra/adaptateurEnvironnement.js'
 import { AdaptateurHachage } from '../../infra/adaptateurHachage.js';
 import { AdaptateurEnrichissement } from '../../infra/enrichissement/adaptateurEnrichissement.js';
 import { EntrepotUtilisateur } from '../../metier/entrepotUtilisateur.js';
+import { Parcours } from '../../metier/parcours.js';
 import { Utilisateur } from '../../metier/utilisateur.js';
 import { AdaptateurJWT } from '../adaptateurJWT.js';
 import { FournisseurChemin } from '../fournisseurChemin.js';
 import { detruisSession } from '../session.js';
-import { ConfigurationServeur } from '../configurationServeur.js';
-import { Parcours } from '../../metier/parcours.js';
 
 const { JsonWebTokenError, TokenExpiredError } = jsonwebtoken;
 
 type FonctionMiddleware = (requete: Request, reponse: Response, suite: NextFunction) => Promise<void>;
 
 export type GestionnaireRequêtesComplémentaires = {
-  attributionParcours: (configurationServeur: ConfigurationServeur) => (parcours: Parcours) => FonctionMiddleware;
-  publieMesureConsultée: (configurationServeur: ConfigurationServeur) => FonctionMiddleware;
+  attributionParcours: (parcours: Parcours) => FonctionMiddleware;
+  attributionParcoursMesure: FonctionMiddleware;
+  publieMesureConsultée: FonctionMiddleware;
 };
 
 export type Middleware = {
