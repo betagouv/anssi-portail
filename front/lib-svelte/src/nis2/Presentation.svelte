@@ -3,6 +3,10 @@
   import Lien from '../ui/Lien.svelte';
   import AccordeonNis2 from './AccordeonNis2.svelte';
   import Marelle from './Marelle.svelte';
+  import Alternatives from '../ui/Alternatives.svelte';
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
+  import EncartPromotionParcoursComplet from '../parcours-securisation/EncartPromotionParcoursComplet.svelte';
+  import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
 
   const retourEnHautDePage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -34,12 +38,28 @@
   <Marelle />
 </dsfr-container>
 
-<dsfr-container class="diagnostic">
-  <DemandeDiagnosticSimplifiee
-    origine="nis2"
-    titre="Commencez à agir pour protéger votre organisation des cyberattaques"
-  />
-</dsfr-container>
+<Alternatives affichageAlternatif={afficheParcoursSecurisation}>
+  {#snippet défaut()}
+    <dsfr-container class="diagnostic">
+      <DemandeDiagnosticSimplifiee
+        origine="nis2"
+        titre="Commencez à agir pour protéger votre organisation des cyberattaques"
+      />
+    </dsfr-container>
+  {/snippet}
+  {#snippet alternatif()}
+    <div class="contenu-encart-parcours-securisation">
+      <EncartPromotionParcoursComplet
+        titre="6 modules pour vous protéger contre les risques les plus courants"
+        description="Un programme d'accompagnement gratuit, pensé pour les PME/ETI et les organisations concernées par la directive NIS 2."
+      >
+        {#snippet tags()}
+          <TagProgrammeGratuit />
+        {/snippet}
+      </EncartPromotionParcoursComplet>
+    </div>
+  {/snippet}
+</Alternatives>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
@@ -54,6 +74,12 @@
 
   .marelle {
     background-color: #f6f6f6;
+  }
+
+  .contenu-encart-parcours-securisation {
+    margin-top: 48px;
+    padding: 96px 0;
+    background-color: var(--background-default-grey, white);
   }
 
   .diagnostic {
