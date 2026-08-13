@@ -148,13 +148,13 @@
       id="image0_19244_36656"
       width="1024"
       height="683"
-      href="/assets/images/accueil/animation/dpo.avif"
+      href="/assets/images/accueil/animation/heros/dpo.avif"
       preserveAspectRatio="none"
     /><image
       id="image1_19244_36656"
       width="572"
       height="1024"
-      href="/assets/images/accueil/animation/dpo-avatar.avif"
+      href="/assets/images/accueil/animation/heros/dpo-avatar.avif"
       preserveAspectRatio="none"
     /></defs
   ></svg

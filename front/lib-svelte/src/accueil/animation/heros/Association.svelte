@@ -156,13 +156,13 @@
       id="image0_19244_36654"
       width="1024"
       height="540"
-      href="/assets/images/accueil/animation/association.avif"
+      href="/assets/images/accueil/animation/heros/association.avif"
       preserveAspectRatio="none"
     /><image
       id="image1_19244_36654"
       width="1024"
       height="540"
-      href="/assets/images/accueil/animation/association-avatar.avif"
+      href="/assets/images/accueil/animation/heros/association-avatar.avif"
       preserveAspectRatio="none"
     /></defs
   ></svg
