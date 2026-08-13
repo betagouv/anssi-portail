@@ -39,7 +39,6 @@
       href: '/catalogue',
       active: cheminRelatif === '/catalogue',
     },
-    { label: 'Directive NIS 2', id: 'nav-nis2', type: 'link', href: '/nis2', active: cheminRelatif === '/nis2' },
     ...(estConnecte()
       ? [
           {
@@ -88,4 +87,28 @@
   ]);
 </script>
 
-<dsfr-navigation items={enPropriétéWebC(menu)}></dsfr-navigation>
+<dsfr-navigation items={enPropriétéWebC(menu)}>
+  <a href="/nis2" class="bouton-nis2" slot="afternavigation">
+    <img src="/assets/images/badge-nis2.svg" alt="Directive NIS2" />
+  </a>
+</dsfr-navigation>
+
+<style lang="scss">
+  .bouton-nis2 {
+    border-top: 1px solid var(--border-default-grey);
+    background-color: var(--yellow-moutarde-975, #fef5e8);
+    width: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    padding: 0;
+
+    &:hover {
+      background: var(--yellow-moutarde-975-75-hover);
+    }
+    &:active {
+      background: var(--yellow-moutarde-975-75-active);
+    }
+  }
+</style>
