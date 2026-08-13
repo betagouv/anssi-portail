@@ -3,7 +3,11 @@ import { AdaptateurJWT } from '../../src/api/adaptateurJWT.js';
 import { ConfigurationServeur } from '../../src/api/configurationServeur.js';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
 import { ServiceRécompensesCyberDépart } from '../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
-import { fabriqueMiddleware, Middleware } from '../../src/api/middlewares/middleware.js';
+import {
+  fabriqueMiddleware,
+  GestionnaireRequêtesComplémentaires,
+  Middleware,
+} from '../../src/api/middlewares/middleware.js';
 import { AdaptateurOIDC } from '../../src/api/oidc/adaptateurOIDC.js';
 import { AdaptateurCellar } from '../../src/infra/adaptateurCellar.js';
 import { adaptateurCompression } from '../../src/infra/adaptateurCompression.js';
@@ -281,6 +285,12 @@ export const fauxAdaptateurEmail: AdaptateurEmail = {
   inscrisAInfolettre: async () => {},
   creeContactBrevo: async () => {},
 };
+
+export const fauxGestionnaireRequêtesComplémentaires: GestionnaireRequêtesComplémentaires = {
+  attributionParcours: async (_requête, _réponse, suite) => {
+    suite();
+  },
+};
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
   adaptateurGestionErreur: adaptateurGestionVide,
@@ -328,4 +338,5 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
     },
   },
   adaptateurCompression,
+  gestionnairesRequêtesComplémentaires: fauxGestionnaireRequêtesComplémentaires,
 };

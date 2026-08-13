@@ -3,12 +3,12 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
-import { configurationDeTestDuServeur, fauxMiddleware } from './fauxObjets.js';
 import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
-import { encodeSession } from './cookie.js';
-import { jeanneDupont } from './objetsPretsALEmploi.js';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
+import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
+import { encodeSession } from './cookie.js';
+import { configurationDeTestDuServeur, fauxMiddleware } from './fauxObjets.js';
+import { jeanneDupont } from './objetsPretsALEmploi.js';
 
 describe("La ressource d'une page Jekyll connectée", () => {
   let serveur: Express;

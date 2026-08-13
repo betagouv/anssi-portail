@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { Request, RequestHandler, Response, Router } from 'express';
 import { BusEvenements } from '../bus/busEvenements.js';
 import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
 import { IdMesure } from '../metier/mesure.js';
@@ -19,7 +19,8 @@ function publieMesureConsultee(nomPage: string, requete: Request, busEvenements:
 
 const ressourcePagesJekyllConnectees = (
   { fournisseurChemin, middleware, busEvenements, entrepotUtilisateur, adaptateurHachage }: ConfigurationServeur,
-  nomPage: string
+  nomPage: string,
+  gestionnairesRequêtesComplémentaires: RequestHandler[] = []
 ): Router => {
   const routeur = Router({ mergeParams: true });
 
@@ -28,6 +29,7 @@ const ressourcePagesJekyllConnectees = (
     middleware.verifieJWTNavigation,
     valideCorpsRequete(corpsVide),
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
+    ...gestionnairesRequêtesComplémentaires,
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       publieMesureConsultee(nomPage, requete, busEvenements);
       reponse.contentType('text/html').status(200).envoieFichierEnrichi(fournisseurChemin.jekyll.page(nomPage));
