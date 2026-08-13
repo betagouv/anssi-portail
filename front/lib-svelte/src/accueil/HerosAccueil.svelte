@@ -3,7 +3,7 @@
   import Lien from '../ui/Lien.svelte';
   import MachineAEcrireRotative from '../ui/MachineAEcrireCyclique.svelte';
   import Surlignage from '../ui/Surlignage.svelte';
-  import IllustrationAnimee from './animation/IllustrationAnimee.svelte';
+  import IllustrationHeros from './animation/heros/IllustrationHeros.svelte';
 
   const phrasesAnimées = [
     'mon activité',
@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="illustration">
-      <IllustrationAnimee {enPause} />
+      <IllustrationHeros {enPause} />
     </div>
     <div class="controle-animation">
       <Bouton
