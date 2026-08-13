@@ -5,6 +5,7 @@
   import EncartDeRecommandationSelonMaturite from './EncartDeRecommandationSelonMaturite.svelte';
   import PartageTest from './PartageTest.svelte';
   import TuilesMaturite from './TuilesMaturite.svelte';
+  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   export let animeTuiles = true;
   export let dateRealisation: Date | undefined = undefined;
@@ -30,7 +31,7 @@
     {/if}
     <h2>Niveau de maturité le plus proche : {niveau.label}</h2>
     <TuilesMaturite niveauCourant={niveau} {animeTuiles} {defilementAutomatique} />
-    <div class="description-niveau">
+    <div class="description-niveau {afficheNouvelleDA ? 'nouvelle-da' : ''}">
       <h5>{niveau.label}</h5>
       <p>{niveau.description} <Lien href="/niveaux-maturite" blank libelle="En savoir plus sur les niveaux"></Lien></p>
     </div>

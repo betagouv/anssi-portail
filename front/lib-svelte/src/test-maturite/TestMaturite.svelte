@@ -185,7 +185,7 @@
           </div>
         {/if}
       </div>
-      <div class="illustration">
+      <div class="illustration {afficheNouvelleDA ? 'nouvelle-da' : ''}">
         <img
           src="/assets/images/test-maturite/illustration-{idQuestionCourante}{afficheNouvelleDA
             ? '-nouvelle-da'
