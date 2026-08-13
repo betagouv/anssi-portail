@@ -9,12 +9,22 @@
 
   const scènes = [DSI, DPO, Association, RSSI];
 
+  type Props = {
+    enPause?: boolean;
+  };
+
+  const { enPause = false }: Props = $props();
+
   const mouvement = préfèreMouvementRéduit();
   let index = $state(0);
 
   $effect(() => {
     if (mouvement.réduit) {
       index = 0;
+      return;
+    }
+
+    if (enPause) {
       return;
     }
 
@@ -30,6 +40,7 @@
 
 <div
   class="illustration-animee"
+  class:en-pause={enPause}
   role="img"
   aria-label="Des responsables d’organisations protègent leur activité, leurs données et leurs équipes."
 >
@@ -45,6 +56,10 @@
     position: relative;
     width: 100%;
     aspect-ratio: 522 / 363;
+  }
+
+  .en-pause .scene :global(*) {
+    animation-play-state: paused;
   }
 
   .scene {

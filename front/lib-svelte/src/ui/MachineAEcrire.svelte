@@ -1,9 +1,14 @@
 <script lang="ts">
-  const { texte }: { texte: string } = $props();
+  type Props = {
+    texte: string;
+    enPause?: boolean;
+  };
+
+  const { texte, enPause = false }: Props = $props();
   const lettres = $derived(texte.split('').concat('\u00A0'));
 </script>
 
-<span class="machine-a-ecrire" aria-label={texte}>
+<span class="machine-a-ecrire" class:en-pause={enPause} aria-label={texte}>
   {#each lettres as lettre, i (`${texte}-${i}`)}
     {@const estDernièreLettre = i === lettres.length - 1}
     <span aria-hidden="true" class="lettre" class:curseur={estDernièreLettre} style="animation-delay: {i * 0.05}s">
@@ -15,6 +20,11 @@
 <style lang="scss">
   .machine-a-ecrire {
     display: inline;
+  }
+
+  .en-pause .lettre,
+  .en-pause .curseur {
+    animation-play-state: paused;
   }
 
   .lettre {

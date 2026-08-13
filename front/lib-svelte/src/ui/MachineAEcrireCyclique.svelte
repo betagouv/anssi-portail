@@ -7,9 +7,10 @@
   type Props = {
     préfixe?: string;
     phrasesAnimées: string[];
+    enPause?: boolean;
   };
 
-  const { préfixe, phrasesAnimées }: Props = $props();
+  const { préfixe, phrasesAnimées, enPause = false }: Props = $props();
 
   const mouvement = préfèreMouvementRéduit();
   let index = $state<number>(0);
@@ -18,6 +19,10 @@
   $effect(() => {
     if (mouvement.réduit) {
       index = 0;
+      return;
+    }
+
+    if (enPause) {
       return;
     }
 
@@ -32,5 +37,5 @@
 </script>
 
 <span>
-  {préfixe}<MachineAEcrire texte={phraseCourante} />
+  {préfixe}<MachineAEcrire texte={phraseCourante} {enPause} />
 </span>
