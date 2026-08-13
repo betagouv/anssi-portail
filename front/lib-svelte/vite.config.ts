@@ -33,6 +33,9 @@ export default defineConfig(({ mode }) => {
       'import.meta.env.FEATURE_FLAG_NOUVELLE_DA': JSON.stringify(
         env.FEATURE_FLAG_NOUVELLE_DA ?? process.env.FEATURE_FLAG_NOUVELLE_DA ?? 'false'
       ),
+      'import.meta.env.FEATURE_FLAG_PARCOURS_SECURISATION': JSON.stringify(
+        env.FEATURE_FLAG_PARCOURS_SECURISATION ?? process.env.FEATURE_FLAG_PARCOURS_SECURISATION ?? 'false'
+      ),
     },
     plugins: [
       svelte(),

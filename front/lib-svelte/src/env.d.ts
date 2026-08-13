@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
   readonly FEATURE_FLAG_NOUVELLE_DA: string;
+  readonly FEATURE_FLAG_PARCOURS_SECURISATION: string;
 }
 interface ImportMeta {
   readonly env: ImportMetaEnv;
