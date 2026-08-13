@@ -14,7 +14,6 @@
 
 <IllustrationAnimee
   {scènes}
-  ratio="621 / 395"
   étiquette="Trois étapes du parcours : sécuriser les accès aux comptes, contrôler les accès aux locaux, définir les contacts et les procédures."
   {enPause}
 >
