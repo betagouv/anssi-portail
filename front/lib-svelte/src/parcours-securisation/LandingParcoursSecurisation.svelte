@@ -3,6 +3,8 @@
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
   import Lien from '../ui/Lien.svelte';
   import { enPropriétéWebC } from '$plateforme/webComponent';
+  import IllustrationProtegerOrganisation from '../accueil/animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
+  import Bouton from '../ui/Bouton.svelte';
 
   const tagsParcoursBasique = [
     {
@@ -89,6 +91,13 @@
       illustration: '/assets/images/parcours-securisation/illustration-parcours-complet-progression.svg',
     },
   ];
+
+  let enPause = $state(false);
+  const libelléPause = $derived(enPause ? 'Lancer les animations' : 'Mettre les animations en pause');
+
+  const basculePause = () => {
+    enPause = !enPause;
+  };
 </script>
 
 <div class="section-hero-et-tuiles">
@@ -96,7 +105,6 @@
     description="Rejoignez notre programme d'accompagnement gratuit."
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
     tag="+6000 organisations déjà accompagnées 🚀"
-    srcImage="/assets/images/parcours-securisation/illustration-hero-parcours-securisation.png"
     imageDeFond="/assets/images/parcours-securisation/fond-hero-landing-parcours-securisation.svg"
     class="hero-landing-page"
   >
@@ -114,6 +122,21 @@
         href="/modules/1"
         markup="a"
       ></dsfr-button>
+    {/snippet}
+    {#snippet illustration()}
+      <figure class="illustration">
+        <IllustrationProtegerOrganisation {enPause} />
+        <div class="controle-animation">
+          <Bouton
+            type="secondaire"
+            icone={enPause ? 'play-circle-line' : 'pause-circle-line'}
+            iconeSeule
+            libelle={libelléPause}
+            titre={libelléPause}
+            surClic={basculePause}
+          />
+        </div>
+      </figure>
     {/snippet}
   </HeroLandingPage>
 
@@ -296,5 +319,20 @@
     border: none;
     border-top: 1px solid var(--border-default-grey);
     margin-block: 3rem;
+  }
+
+  .illustration {
+    margin: 0 auto;
+    width: 100%;
+
+    .controle-animation {
+      text-align: right;
+    }
+  }
+
+  .controle-animation {
+    @media (prefers-reduced-motion: reduce) {
+      display: none;
+    }
   }
 </style>
