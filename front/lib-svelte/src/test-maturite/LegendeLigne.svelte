@@ -64,55 +64,53 @@
     &.avec-nouvelle-da.actif {
       outline-color: var(--border-default-blue-france);
     }
-  }
 
-  .ligne-legende:before {
-    width: 14px;
-    height: 14px;
-    border-radius: 7px;
-    content: '';
-    background-color: var(--couleur-puce);
-  }
+    &:before {
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      content: '';
+      background-color: var(--couleur-puce);
+    }
 
-  .ligne-legende-0 {
-    --couleur-puce: #6369f1;
-  }
-
-  .ligne-legende-1 {
-    --couleur-puce: #fec54b;
-  }
-
-  .ligne-legende-2 {
-    --couleur-puce: #8248a1;
-  }
-
-  .ligne-legende-3 {
-    --couleur-puce: #f26c85;
-  }
-
-  .ligne-legende-4 {
-    --couleur-puce: #8ed4a3;
-  }
-
-  .avec-nouvelle-da {
     &.ligne-legende-0 {
-      --couleur-puce: #5c68e5;
+      --couleur-puce: #6369f1;
+
+      &.avec-nouvelle-da {
+        --couleur-puce: #5c68e5;
+      }
     }
 
     &.ligne-legende-1 {
-      --couleur-puce: #82b5f2;
+      --couleur-puce: #fec54b;
+
+      &.avec-nouvelle-da {
+        --couleur-puce: #82b5f2;
+      }
     }
 
     &.ligne-legende-2 {
-      --couleur-puce: #28598f;
+      --couleur-puce: #8248a1;
+
+      &.avec-nouvelle-da {
+        --couleur-puce: #28598f;
+      }
     }
 
     &.ligne-legende-3 {
-      --couleur-puce: #30a7ae;
+      --couleur-puce: #f26c85;
+
+      &.avec-nouvelle-da {
+        --couleur-puce: #30a7ae;
+      }
     }
 
     &.ligne-legende-4 {
-      --couleur-puce: #81eef5;
+      --couleur-puce: #8ed4a3;
+
+      &.avec-nouvelle-da {
+        --couleur-puce: #81eef5;
+      }
     }
   }
 </style>
