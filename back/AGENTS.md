@@ -74,7 +74,7 @@ pnpm --filter @anssi-portail/back build         # Compile to dist/
 
 ## Admin Console
 
-Access with `pnpm admin` (production build) or `pnpm admin:dev` (TypeScript sources through `tsx`).
+Access with `pnpm admin` (builds production artifacts) or `pnpm admin:dev` (TypeScript sources through `tsx`).
 
 **Common operations:**
 

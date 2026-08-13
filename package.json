@@ -5,6 +5,7 @@
   "main": "serveur.ts",
   "packageManager": "pnpm@10.24.0",
   "scripts": {
+    "preadmin": "pnpm --filter @anssi-portail/axios build && pnpm --filter @anssi-portail/back build",
     "admin": "node -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
     "admin:dev": "node --conditions=anssi-portail:source --import tsx --env-file .env -e \"const admin = new (require('./back/src/admin/consoleAdministration.ts').ConsoleAdministration)()\" -i",
     "bootstrap": "(bundler check --gemfile=front/Gemfile || bundler install --gemfile=front/Gemfile) && pnpm install --frozen-lockfile",
@@ -17,7 +18,7 @@
     "preinstall": "npx only-allow@1.2.2 pnpm",
     "postinstall": "pnpm -F regles-eslint build",
     "start": "node back/dist/src/serveur.js",
-    "prestart": "pnpm --filter @anssi-portail/back prestart"
+    "prestart": "pnpm --filter @anssi-portail/axios build && pnpm --filter @anssi-portail/back prestart"
   },
   "repository": {
     "type": "git",
