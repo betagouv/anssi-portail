@@ -1,7 +1,9 @@
+import axios from '@anssi-portail/axios';
 import { CmsCrisp } from '@lab-anssi/lib';
 import { adaptateurJWT } from './api/adaptateurJWT.js';
 import { fournisseurChemin } from './api/fournisseurChemin.js';
 import { ServiceRécompensesCyberDépart } from './api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
+import { attributionParcours } from './api/middlewares/attributionParcours.js';
 import { fabriqueMiddleware } from './api/middlewares/middleware.js';
 import { creeServeur } from './api/msc.js';
 import { adaptateurOIDC } from './api/oidc/adaptateurOIDC.js';
@@ -20,7 +22,6 @@ import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal.js';
 import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber.js';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi.js';
 import { fabriqueAdaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise.js';
-import axios from '@anssi-portail/axios';
 import { fabriqueAdaptateurEnrichissement } from './infra/enrichissement/adaptateurEnrichissement.js';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres.js';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist.js';
@@ -190,7 +191,7 @@ const port = process.env.PORT || 3000;
     serviceRécompensesCyberDépart: new ServiceRécompensesCyberDépart(fournisseurChemin),
     adaptateurCompression,
     gestionnairesRequêtesComplémentaires: {
-      attributionParcours: async () => {},
+      attributionParcours,
     },
   }).listen(port, () => {
     console.log(`Le serveur écoute sur le port ${port}`);

@@ -12,13 +12,15 @@ import { Utilisateur } from '../../metier/utilisateur.js';
 import { AdaptateurJWT } from '../adaptateurJWT.js';
 import { FournisseurChemin } from '../fournisseurChemin.js';
 import { detruisSession } from '../session.js';
+import { ConfigurationServeur } from '../configurationServeur.js';
+import { Parcours } from '../../metier/parcours.js';
 
 const { JsonWebTokenError, TokenExpiredError } = jsonwebtoken;
 
 type FonctionMiddleware = (requete: Request, reponse: Response, suite: NextFunction) => Promise<void>;
 
 export type GestionnaireRequêtesComplémentaires = {
-  attributionParcours: FonctionMiddleware;
+  attributionParcours: (configurationServeur: ConfigurationServeur) => (parcours: Parcours) => FonctionMiddleware;
 };
 
 export type Middleware = {

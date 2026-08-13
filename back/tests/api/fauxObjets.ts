@@ -33,6 +33,7 @@ import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTest
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire.js';
+import { Parcours } from '../../src/metier/parcours.js';
 
 export const ressourceFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.html');
 export const typstFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.typ');
@@ -287,9 +288,10 @@ export const fauxAdaptateurEmail: AdaptateurEmail = {
 };
 
 export const fauxGestionnaireRequêtesComplémentaires: GestionnaireRequêtesComplémentaires = {
-  attributionParcours: async (_requête, _réponse, suite) => {
-    suite();
-  },
+  attributionParcours:
+    (_configurationServeur: ConfigurationServeur) => (_parcours: Parcours) => async (_requête, _réponse, suite) => {
+      suite();
+    },
 };
 export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurEnvironnement: fauxAdaptateurEnvironnement,
