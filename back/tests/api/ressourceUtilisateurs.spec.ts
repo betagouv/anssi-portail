@@ -178,6 +178,17 @@ describe('La ressource utilisateur', () => {
       assert.equal(evenement!.suivi?.parcoursDestination, 'allégé');
     });
 
+    it('publie un événement de création de compte avec la source', async () => {
+      await request(serveur)
+        .post('/api/utilisateurs')
+        .query({ pageSource: 'http://mondomaine/parcours-securisation' })
+        .send(donneesUtilisateur);
+
+      const evenement = busEvenements.recupereEvenement(CompteCree);
+
+      assert.equal(evenement!.suivi?.source, '/parcours-securisation');
+    });
+
     describe('concernant la validation des données', () => {
       it('valide le téléphone', async () => {
         const reponse = await request(serveur)
