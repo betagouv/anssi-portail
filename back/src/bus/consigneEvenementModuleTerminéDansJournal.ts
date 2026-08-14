@@ -15,6 +15,7 @@ export const consigneEvenementModuleTerminéDansJournal = ({
         idUtilisateur: evenement.emailHache,
         idModule: evenement.idModule,
         nomModule: evenement.nomModule,
+        parcours: evenement.parcours,
       },
       type: 'MODULE_TERMINE',
       date: adaptateurHorloge.maintenant(),

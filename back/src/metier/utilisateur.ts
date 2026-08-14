@@ -166,7 +166,9 @@ export class Utilisateur {
     );
     this.mesuresPrisesEnCompte.push(mesure);
     if (this.nombreDeMesuresPrisesEnCompte(module) === module.nombreDeMesures()) {
-      await busEvenements.publie(new ModuleTermine(this.emailHache(), module.id, module.nom));
+      await busEvenements.publie(
+        new ModuleTermine(this.emailHache(), module.id, module.nom, this.parcours ?? undefined)
+      );
       nouvelEtatModule.moduleTerminé = true;
     }
     const cibleBadgeCyberdépart = module.cibleDéblocageBadgeCyberdépart();
