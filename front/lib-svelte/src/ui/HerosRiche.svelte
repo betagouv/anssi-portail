@@ -94,7 +94,23 @@
     }
 
     &.vert-clair {
-      background-color: var(--background-contrast-green-bourgeon);
+      background: {
+        color: var(--background-contrast-green-bourgeon);
+        image: url('/assets/images/motif-fond-heros-vert-clair.avif');
+        position: calc(50% + 216px) -41px;
+        repeat: no-repeat;
+        size: 1660px 1162px;
+      }
+
+      @include a-partir-de(md) {
+        background-size: 1546px 1082px;
+        background-position-x: calc(50% + 335px);
+      }
+
+      @include a-partir-de(lg) {
+        background-size: auto;
+        background-position: right -286px top -214px;
+      }
     }
 
     &.avecFilAriane {
