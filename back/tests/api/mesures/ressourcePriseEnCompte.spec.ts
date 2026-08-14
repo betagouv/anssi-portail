@@ -44,7 +44,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
       entrepotUtilisateur,
       busEvenements,
     });
-    utilisateurParcours = utilisateurDeTest().avecLEmail('utilisateur@mail.com').construis();
+    utilisateurParcours = utilisateurDeTest().avecLEmail('utilisateur@mail.com').avecLeParcours('allégé').construis();
     cookie = encodeSession({ email: utilisateurParcours.email, token: 'valide' });
   });
 
@@ -113,6 +113,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
         assert.equal(evenement!.emailHache, 'utilisateur@mail.com-hache');
         assert.equal(evenement!.nombreDeMesures, 3);
         assert.equal(evenement!.position, 2);
+        assert.equal(evenement?.parcours, 'allégé');
       });
 
       it('ne compte pas les mesures des autres modules dans l’événement', async () => {

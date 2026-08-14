@@ -20,7 +20,7 @@ describe("L'abonnement qui consigne la prise en compte d'une mesure par un utili
     await consigneEvenementMesurePriseEnCompteDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
-    })(new MesurePriseEnCompte('u1@example.com-hache', 'AUTH.5', 10, 2));
+    })(new MesurePriseEnCompte('u1@example.com-hache', 'AUTH.5', 10, 2, 'allégé'));
 
     assert.deepEqual(evenementRecu, {
       type: 'MESURE_PRISE_EN_COMPTE',
@@ -28,6 +28,7 @@ describe("L'abonnement qui consigne la prise en compte d'une mesure par un utili
         idMesure: 'AUTH.5',
         idUtilisateur: 'u1@example.com-hache',
         nombreDeMesures: 10,
+        parcours: 'allégé',
         position: 2,
       },
       date: new Date('2025-03-10'),
