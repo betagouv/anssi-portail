@@ -52,7 +52,6 @@
 
 <div class="section-hero-et-tuiles">
   <HeroLandingPage
-    titre="Votre cybersécurité décolle en 12&nbsp;mesures"
     description="12 mesures pensées pour les non-spécialistes, applicables en quelques minutes pour commencer à renforcer votre cybersécurité et prendre votre Cyberdépart&nbsp;!"
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
     tag="+6000 organisations déjà accompagnées 🚀"
@@ -60,6 +59,9 @@
     imageDeFond="/assets/images/parcours-securisation/fond-hero-landing-parcours-securisation.svg"
     class="hero-landing-page"
   >
+    {#snippet titreHtml()}
+      Votre cybersécurité décolle en <span class="mot-souligne"><span>12&nbsp;mesures</span></span>
+    {/snippet}
     {#snippet actions()}
       <dsfr-button
         label="Je commence à sécuriser"
@@ -153,5 +155,33 @@
   .section-diagnostic {
     background-color: var(--background-alt-brown-cafe-creme);
     padding-block: 3.5rem;
+  }
+
+  .mot-souligne {
+    position: relative;
+    white-space: nowrap;
+
+    span {
+      position: relative;
+      z-index: 2;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 31px;
+      pointer-events: none;
+      background: {
+        image: url('/assets/images/motif-mot-souligne-vague-moutarde.svg');
+        repeat: no-repeat;
+        position: center;
+        size: contain;
+      }
+      filter: brightness(0) saturate(100%) invert(86%) sepia(22%) saturate(391%) hue-rotate(347deg) brightness(104%)
+        contrast(98%);
+    }
   }
 </style>
