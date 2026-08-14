@@ -43,9 +43,11 @@
       description="Les associations sont aussi concernées par le risque de cyberattaques. Elles peuvent être la cible de campagnes de
         hameçonnage / phishing ou de rançongiciels / ransomwares. Il n'est pas trop tard pour agir et des solutions existent&nbsp;!"
       propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
-      titre="Protéger mon association contre les cyberattaques"
       variante="vert-clair"
     >
+      {#snippet titreHtml()}
+        Protéger mon <span class="mot-souligne"><span>association</span></span> contre les cyberattaques
+      {/snippet}
       {#snippet illustration()}
         <img src="/assets/images/personne-avec-micro-consultant-sites-cyber.svg" alt="" />
       {/snippet}
@@ -58,5 +60,31 @@
 <style lang="scss">
   img {
     width: 100%;
+  }
+
+  .mot-souligne {
+    position: relative;
+    white-space: nowrap;
+
+    span {
+      position: relative;
+      z-index: 2;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 31px;
+      pointer-events: none;
+      background: {
+        image: url('/assets/images/motif-mot-souligne-vague-moutarde.svg');
+        repeat: no-repeat;
+        position: center;
+        size: contain;
+      }
+    }
   }
 </style>

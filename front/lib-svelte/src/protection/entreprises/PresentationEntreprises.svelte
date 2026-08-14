@@ -45,9 +45,11 @@
       description="Toutes les entreprises sont exposées au risque de cyberattaques. En 2025, les TPE/PME et ETI ont notamment
       représenté 48&nbsp;% des victimes de rançongiciels ou ransowmare représentant les premières entités visées."
       propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
-      titre="Protéger mon entreprise contre les cyberattaques"
       variante="vert-clair"
     >
+      {#snippet titreHtml()}
+        Protéger mon <span class="mot-souligne"><span>entreprise</span></span> contre les cyberattaques
+      {/snippet}
       {#snippet illustration()}
         <img src="/assets/images/personne-avec-laptop-entoure-de-diagrammes.svg" alt="" />
       {/snippet}
@@ -60,5 +62,31 @@
 <style lang="scss">
   img {
     width: 100%;
+  }
+
+  .mot-souligne {
+    position: relative;
+    white-space: nowrap;
+
+    span {
+      position: relative;
+      z-index: 2;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 31px;
+      pointer-events: none;
+      background: {
+        image: url('/assets/images/motif-mot-souligne-vague-moutarde.svg');
+        repeat: no-repeat;
+        position: center;
+        size: contain;
+      }
+    }
   }
 </style>
