@@ -26,22 +26,24 @@ describe("L'abonnement qui consigne un avis sur une mesure dans le journal", () 
       adaptateurHorloge,
     })(
       new AvisMesureDonne({
-        idUtilisateur: 'jeanne.dupont@user.com-hache',
         idMesure: 'AUTH.5',
+        idUtilisateur: 'jeanne.dupont@user.com-hache',
+        parcours: 'allégé',
+        retour: 'POSITIF',
         titreMesure:
           'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes',
-        retour: 'POSITIF',
       })
     );
 
     assert.deepEqual(evenementRecu, {
       type: 'AVIS_MESURE_DONNE',
       donnees: {
-        idUtilisateur: 'jeanne.dupont@user.com-hache',
         idMesure: 'AUTH.5',
+        idUtilisateur: 'jeanne.dupont@user.com-hache',
+        parcours: 'allégé',
+        retour: 'POSITIF',
         titreMesure:
           'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes',
-        retour: 'POSITIF',
       },
       date: new Date('2025-03-10'),
     });
@@ -59,20 +61,21 @@ describe("L'abonnement qui consigne un avis négatif sur une mesure dans la mess
     };
     await consigneCommentaireAvisMesureDonneDansMessagerie({ messagerieInstantanee })(
       new AvisMesureDonne({
-        idUtilisateur: 'jeanne.dupont@user.com-hache',
+        commentaire: 'Pas satisfait de cette mesure',
         idMesure: 'AUTH.5',
+        idUtilisateur: 'jeanne.dupont@user.com-hache',
+        parcours: 'allégé',
+        retour: 'NEGATIF',
         titreMesure:
           'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes',
-        retour: 'NEGATIF',
-        commentaire: 'Pas satisfait de cette mesure',
       })
     );
 
     assert.deepEqual(evenementRecu, {
+      commentaire: 'Pas satisfait de cette mesure',
       idMesure: 'AUTH.5',
       titreMesure:
         'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes',
-      commentaire: 'Pas satisfait de cette mesure',
     });
   });
 });

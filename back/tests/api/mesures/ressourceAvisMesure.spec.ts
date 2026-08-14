@@ -12,6 +12,7 @@ import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateu
 import { encodeSession } from '../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
 import { jeanneDupont, mesureAuthentA2Etapes } from '../objetsPretsALEmploi.js';
+import { utilisateurDeTest } from './constructeurDUtilisateur.js';
 
 describe('La ressource avis sur une mesure de sécurité', () => {
   describe('sur requête POST', () => {
@@ -108,12 +109,20 @@ describe('La ressource avis sur une mesure de sécurité', () => {
 
       describe('concernant les avis positifs', () => {
         it('publie un événement', async () => {
+          const utilisateur = utilisateurDeTest()
+            .avecLEmail('utilisateur@mail.com')
+            .avecLeParcours('complet')
+            .construis();
+          await entrepotUtilisateur.ajoute(utilisateur);
+          cookie = encodeSession({ email: utilisateur.email, token: 'valide' });
+
           await request(serveur).post('/api/mesures/AUTH.5/avis').set('Cookie', [cookie]).send(retourPositif);
 
           busEvenements.aRecuUnEvenement(AvisMesureDonne);
           const evenement = busEvenements.recupereEvenement(AvisMesureDonne);
-          assert.equal(evenement!.idUtilisateur, 'jeanne.dupont@user.com-hache');
+          assert.equal(evenement!.idUtilisateur, 'utilisateur@mail.com-hache');
           assert.equal(evenement!.idMesure, 'AUTH.5');
+          assert.equal(evenement!.parcours, 'complet');
           assert.equal(
             evenement!.titreMesure,
             'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes'
