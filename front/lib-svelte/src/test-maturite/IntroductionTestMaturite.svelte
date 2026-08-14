@@ -91,7 +91,6 @@
     <HerosRiche
       description="Obtenez en 6 questions une évaluation indicative de la maturité cyber de votre organisation."
       {propriétésFilAriane}
-      titre="Quelle est la maturité cyber de votre organisation ?"
       variante="cafe-creme"
       mentionAdditionnelle="Le résultat obtenu est une évaluation indicative basée sur un modèle élaboré par l’ANSSI. La maturité cyber n’est
       pas une évaluation du niveau de sécurité des systèmes d’information d’une organisation mais de sa posture à
@@ -101,6 +100,10 @@
         { label: '🔥 +12k organisations ont fait le test', accent: 'purple-glycine' },
       ]}
     >
+      {#snippet titreHtml()}
+        Quelle est la <span class="mot-souligne"><span>maturité</span></span>
+        <span class="mot-souligne petit"><span>cyber</span></span> de votre organisation ?
+      {/snippet}
       {#snippet illustration()}
         <div class="illustration-du-bandeau">
           <CarrouselMaturite {enPause} />
@@ -196,6 +199,38 @@
 
       p {
         color: var(--text-default-grey);
+      }
+    }
+  }
+
+  .mot-souligne {
+    position: relative;
+    white-space: nowrap;
+
+    span {
+      position: relative;
+      z-index: 2;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 31px;
+      pointer-events: none;
+      background: {
+        image: url('/assets/images/motif-mot-souligne-vague-macaron.svg');
+        repeat: no-repeat;
+        position: left center;
+        size: contain;
+      }
+    }
+
+    &.petit {
+      &::after {
+        background-image: url('/assets/images/motif-mot-souligne-petite-vague-macaron.svg');
       }
     }
   }
