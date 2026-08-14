@@ -28,6 +28,7 @@
   let token: string | undefined;
   const redirectUrl = sessionStorage.getItem('pagePostConnexion');
   const pageSource = sessionStorage.getItem('pageSource');
+  const campagne = sessionStorage.getItem('campagne');
 
   onMount(async () => {
     token = new URLSearchParams(window.location.search).get('token') ?? undefined;
@@ -76,7 +77,7 @@
             ...formulaireInscription,
             token,
           },
-          { params: { redirectUrl, pageSource } }
+          { params: { redirectUrl, pageSource, campagne } }
         );
         window.location.href = '/oidc/connexion';
       } catch {
