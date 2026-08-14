@@ -20,7 +20,7 @@ describe("L'abonnement qui consigne la complétion d'un module par un utilisateu
     await consigneEvenementModuleTerminéDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
-    })(new ModuleTermine('u1@example.com-hache', 1, 'Cyberdépart'));
+    })(new ModuleTermine('u1@example.com-hache', 1, 'Cyberdépart', 'allégé'));
 
     assert.deepEqual(evenementRecu, {
       type: 'MODULE_TERMINE',
@@ -28,6 +28,7 @@ describe("L'abonnement qui consigne la complétion d'un module par un utilisateu
         idUtilisateur: 'u1@example.com-hache',
         idModule: 1,
         nomModule: 'Cyberdépart',
+        parcours: 'allégé',
       },
       date: new Date('2025-03-10'),
     });

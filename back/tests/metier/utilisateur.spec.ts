@@ -216,6 +216,8 @@ describe("L'utilisateur", () => {
         it('publie un événement de completion quand toutes les mesures du module sont prises en compte', async () => {
           const moduleCyberDépart = fabriqueModuleCyberdépart();
           moduleCyberDépart.mesures = [mesure];
+          await utilisateurDeParcours.rejoinsParcours('allégé', busEvenements, 'prise-en-compte-mesure');
+
           await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberDépart);
 
           busEvenements.aRecuUnEvenement(ModuleTermine);
@@ -224,6 +226,7 @@ describe("L'utilisateur", () => {
           assert.equal(evenement!.emailHache, 'utilisateur@mail.com-hache');
           assert.equal(evenement!.idModule, 1);
           assert.equal(evenement!.nomModule, 'Cyberdépart');
+          assert.equal(evenement!.parcours, 'allégé');
         });
 
         it("adapte l'événement de complétion au module", async () => {
