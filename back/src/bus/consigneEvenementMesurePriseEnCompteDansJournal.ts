@@ -15,6 +15,7 @@ export const consigneEvenementMesurePriseEnCompteDansJournal = ({
         idMesure: evenement.idMesure,
         idUtilisateur: evenement.emailHache,
         nombreDeMesures: evenement.nombreDeMesures,
+        parcours: evenement.parcours,
         position: evenement.position,
       },
       type: 'MESURE_PRISE_EN_COMPTE',
