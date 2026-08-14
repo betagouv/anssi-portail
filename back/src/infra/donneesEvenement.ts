@@ -35,7 +35,7 @@ type Evenement<Type extends string, Donnees extends object> = {
 
 type DonneesEvenementNouvelUtilisateur = Evenement<
   'NOUVEL_UTILISATEUR_INSCRIT',
-  { idUtilisateur: string; suivi?: { campagne?: string } }
+  { idUtilisateur: string; suivi?: { campagne?: string; parcoursDestination?: string; source?: string } }
 >;
 
 type DonneesEvenementMiseAJourFavorisUtilisateur = Evenement<

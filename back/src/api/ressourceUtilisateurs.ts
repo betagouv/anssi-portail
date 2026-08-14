@@ -12,7 +12,7 @@ import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 const construitLeSuiviDepuisLaRequête = (
   requête: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceUtilisateurs>>
 ): CompteCree['suivi'] => {
-  const { utm_campaign, mtm_campaign, redirectUrl } = requête.query;
+  const { utm_campaign, mtm_campaign, redirectUrl, pageSource } = requête.query;
   const campagne = (mtm_campaign || utm_campaign) as string | undefined;
 
   const parcoursDestination = ((redirectUrl) => {
@@ -25,11 +25,20 @@ const construitLeSuiviDepuisLaRequête = (
     }
   })(redirectUrl);
 
-  if (!campagne && !parcoursDestination) return undefined;
+  const cheminSource = ((source: string | undefined) => {
+    try {
+      return source ? new URL(source).pathname : undefined;
+    } catch {
+      return undefined;
+    }
+  })(pageSource as string | undefined);
+
+  if (!campagne && !parcoursDestination && !cheminSource) return undefined;
 
   const suivi: CompteCree['suivi'] = {};
   suivi.campagne = campagne;
   suivi.parcoursDestination = parcoursDestination;
+  suivi.source = cheminSource;
 
   return suivi;
 };
