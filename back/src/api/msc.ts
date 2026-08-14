@@ -21,7 +21,6 @@ import { ressourceAvisMesure } from './mesures/ressourceAvisMesure.js';
 import { ressourceMesure } from './mesures/ressourceMesure.js';
 import { ressourceMesureCsv } from './mesures/ressourceMesureCsv.js';
 import { ressourceModule } from './mesures/ressourceModule.js';
-import { ressourceParcours } from './mesures/ressourceParcours.js';
 import { ressourceParcoursComplet } from './mesures/ressourceParcoursComplet.js';
 import { ressourcePriseEnCompte } from './mesures/ressourcePriseEnCompte.js';
 import { ressourceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepart.js';
@@ -393,8 +392,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ])
     );
   }
-
-  enregistreRoute('/parcours', ressourceParcours(configurationServeur));
 
   enregistreRoute('/robots.txt', ressourceRobotsTxt(configurationServeur));
   enregistreRoute('/sitemap.xml', ressourceSitemapXml(routesStatiques, configurationServeur));
