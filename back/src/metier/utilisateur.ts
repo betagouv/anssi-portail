@@ -204,7 +204,7 @@ export class Utilisateur {
     if (!this.parcours) {
       await busEvenements.publie(new ParcoursRejoint(this.emailHache(), parcours, motif));
     } else {
-      await busEvenements.publie(new ParcoursChangé(this.emailHache(), this.parcours, parcours));
+      await busEvenements.publie(new ParcoursChangé(this.emailHache(), this.parcours, parcours, motif));
     }
     this.parcours = parcours;
   }

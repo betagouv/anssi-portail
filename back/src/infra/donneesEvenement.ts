@@ -112,5 +112,5 @@ type DonnéesParcoursRejoint = Evenement<
 
 type DonnéesParcoursChangé = Evenement<
   'PARCOURS_CHANGÉ',
-  { idUtilisateur: string; parcoursPrécédent: Parcours; parcours: Parcours }
+  { idUtilisateur: string; parcoursPrécédent: Parcours; parcours: Parcours; motif: MotifChangementParcours }
 >;

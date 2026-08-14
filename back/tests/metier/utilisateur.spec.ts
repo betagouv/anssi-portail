@@ -448,7 +448,12 @@ describe("L'utilisateur", () => {
 
           await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, module);
 
+          const evenement = busEvenements.recupereEvenement(ParcoursChangé);
           assert.equal(utilisateurDeParcours.parcoursActuel(), 'complet');
+          assert.equal(evenement?.emailHache, utilisateurDeParcours.emailHache());
+          assert.equal(evenement?.parcoursPrécédent, 'allégé');
+          assert.equal(evenement?.parcours, 'complet');
+          assert.equal(evenement?.motif, 'prise-en-compte-mesure');
         });
       });
     });
