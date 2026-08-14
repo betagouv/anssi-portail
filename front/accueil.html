@@ -245,14 +245,16 @@ permalink: /
           déjà réalisé le test de maturité cyber.
         </p>
       </hgroup>
-      <msc-lien
-        apparence="bouton"
+      <dsfr-button
+        label="Débuter le test"
+        kind="primary"
+        size="{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}lg{%else%}md{%endif%}"
+        has-icon
+        icon="arrow-right-circle-fill"
+        icon-place="{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}right{%else%}left{%endif%}"
+        markup="a"
         href="/test-maturite"
-        type="primaire"
-        libelle="Débuter le test"
-        icone="arrow-right-circle-fill"
-        icone-a-droite
-      ></msc-lien>
+      ></dsfr-button>
       <msc-lien
         id="lien-session-groupe"
         href="/session-groupe"
