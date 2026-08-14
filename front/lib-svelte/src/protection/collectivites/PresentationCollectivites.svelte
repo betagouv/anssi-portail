@@ -8,6 +8,7 @@
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import Proteger from '../Proteger.svelte';
   import Solutions from './Solutions.svelte';
+  import MotEnExergue from '../../ui/MotEnExergue.svelte';
 
   let { itemsCyber, guides = [] } = $props();
 
@@ -52,7 +53,7 @@
       variante="vert-clair"
     >
       {#snippet titreHtml()}
-        Protéger ma <span class="mot-souligne"><span>collectivité</span></span> contre les cyberattaques
+        Protéger ma <MotEnExergue motif="vague">collectivité</MotEnExergue> contre les cyberattaques
       {/snippet}
       {#snippet illustration()}
         <img src="/assets/images/personne-qui-cogite.svg" alt="" />
@@ -75,31 +76,5 @@
 <style lang="scss">
   img {
     width: 100%;
-  }
-
-  .mot-souligne {
-    position: relative;
-    white-space: nowrap;
-
-    span {
-      position: relative;
-      z-index: 2;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 31px;
-      pointer-events: none;
-      background: {
-        image: url('/assets/images/motif-mot-souligne-vague-moutarde.svg');
-        repeat: no-repeat;
-        position: center;
-        size: contain;
-      }
-    }
   }
 </style>

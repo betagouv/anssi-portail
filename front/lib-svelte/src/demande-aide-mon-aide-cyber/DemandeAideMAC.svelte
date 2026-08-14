@@ -13,6 +13,7 @@
   import FormulaireDemandeAide from './FormulaireDemandeAide.svelte';
   import IllustrationCyberDepart from './IllustrationCyberDepart.svelte';
   import IllustrationDemandeAide from './IllustrationDemandeAide.svelte';
+  import MotEnExergue from '../ui/MotEnExergue.svelte';
 
   let formulaireDemandeAide: FormulaireDemandeAide;
   let enSucces: boolean = false;
@@ -120,7 +121,7 @@
       variante="cafe-creme"
     >
       {#snippet titreHtml()}
-        Protégez votre organisation contre les <span class="mot-souligne"><span>cyberattaques</span></span>
+        Protégez votre organisation contre les <MotEnExergue motif="gribouillis">cyberattaques</MotEnExergue>
       {/snippet}
       {#snippet illustration()}
         <IllustrationDemandeAide />
@@ -246,34 +247,6 @@
 
     .contenu-section {
       max-width: 792px;
-    }
-  }
-
-  .mot-souligne {
-    position: relative;
-
-    span {
-      position: relative;
-      z-index: 2;
-    }
-
-    &::after {
-      @include a-partir-de(sm) {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 42px;
-        pointer-events: none;
-        background: {
-          image: url('/assets/images/motif-mot-souligne-gribouillis-macaron.svg');
-          repeat: no-repeat;
-          position: center;
-          size: contain;
-        }
-        transform: translateY(33%);
-      }
     }
   }
 </style>

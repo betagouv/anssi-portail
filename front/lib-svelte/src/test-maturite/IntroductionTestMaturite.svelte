@@ -9,6 +9,7 @@
   import { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import Bouton from '../ui/Bouton.svelte';
   import CarrouselMaturite from './animation/CarrouselMaturite.svelte';
+  import MotEnExergue from '../ui/MotEnExergue.svelte';
 
   export let introFaite = false;
   let enPause = false;
@@ -101,8 +102,8 @@
       ]}
     >
       {#snippet titreHtml()}
-        Quelle est la <span class="mot-souligne"><span>maturité</span></span>
-        <span class="mot-souligne petit"><span>cyber</span></span> de votre organisation ?
+        Quelle est la <MotEnExergue motif="vague" couleur="macaron">maturité</MotEnExergue>
+        <MotEnExergue motif="vague" couleur="macaron" petit>cyber</MotEnExergue> de votre organisation ?
       {/snippet}
       {#snippet illustration()}
         <div class="illustration-du-bandeau">
@@ -199,38 +200,6 @@
 
       p {
         color: var(--text-default-grey);
-      }
-    }
-  }
-
-  .mot-souligne {
-    position: relative;
-    white-space: nowrap;
-
-    span {
-      position: relative;
-      z-index: 2;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 31px;
-      pointer-events: none;
-      background: {
-        image: url('/assets/images/motif-mot-souligne-vague-macaron.svg');
-        repeat: no-repeat;
-        position: left center;
-        size: contain;
-      }
-    }
-
-    &.petit {
-      &::after {
-        background-image: url('/assets/images/motif-mot-souligne-petite-vague-macaron.svg');
       }
     }
   }

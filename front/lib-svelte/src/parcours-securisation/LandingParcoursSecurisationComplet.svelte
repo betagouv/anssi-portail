@@ -1,6 +1,7 @@
 <script lang="ts">
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
   import BlocContenuLanding from '../ui/BlocContenuLanding.svelte';
+  import MotEnExergue from '../ui/MotEnExergue.svelte';
 
   type Contenu = {
     titre: string;
@@ -60,8 +61,8 @@
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
-      Engagez votre organisation dans une <span class="mot-souligne"><span>démarche</span></span>
-      <span class="mot-souligne petit"><span>cyber</span></span> complète
+      Engagez votre organisation dans une <MotEnExergue motif="vague" couleur="cafe-creme">démarche</MotEnExergue>
+      <MotEnExergue motif="vague" couleur="cafe-creme" petit>cyber</MotEnExergue> complète
     {/snippet}
     {#snippet actions()}
       <dsfr-button
@@ -135,41 +136,6 @@
 
     .cta-central {
       text-align: center;
-    }
-  }
-
-  .mot-souligne {
-    position: relative;
-    white-space: nowrap;
-
-    span {
-      position: relative;
-      z-index: 2;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 31px;
-      pointer-events: none;
-      background: {
-        image: url('/assets/images/motif-mot-souligne-vague-moutarde.svg');
-        repeat: no-repeat;
-        position: left center;
-        size: contain;
-      }
-
-      filter: brightness(0) saturate(100%) invert(86%) sepia(22%) saturate(391%) hue-rotate(347deg) brightness(104%)
-        contrast(98%);
-    }
-
-    &.petit {
-      &::after {
-        background-image: url('/assets/images/motif-mot-souligne-petite-vague-macaron.svg');
-      }
     }
   }
 </style>
