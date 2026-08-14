@@ -20,11 +20,16 @@ describe("L'abonnement qui consigne l'évènement de changement de parcours dans
     await consigneParcoursChangéDansJournal({
       adaptateurHorloge,
       adaptateurJournal,
-    })(new ParcoursChangé('test@email-hache', 'allégé', 'complet'));
+    })(new ParcoursChangé('test@email-hache', 'allégé', 'complet', 'prise-en-compte-mesure'));
 
     assert.deepEqual(evenementRecu, {
       type: 'PARCOURS_CHANGÉ',
-      donnees: { idUtilisateur: 'test@email-hache', parcoursPrécédent: 'allégé', parcours: 'complet' },
+      donnees: {
+        idUtilisateur: 'test@email-hache',
+        parcoursPrécédent: 'allégé',
+        parcours: 'complet',
+        motif: 'prise-en-compte-mesure',
+      },
       date: new Date('2025-03-10'),
     });
   });

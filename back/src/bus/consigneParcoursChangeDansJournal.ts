@@ -15,6 +15,7 @@ export const consigneParcoursChangéDansJournal = ({
         idUtilisateur: evenement.emailHache,
         parcoursPrécédent: evenement.parcoursPrécédent,
         parcours: evenement.parcours,
+        motif: evenement.motif,
       },
       type: 'PARCOURS_CHANGÉ',
       date: adaptateurHorloge.maintenant(),
