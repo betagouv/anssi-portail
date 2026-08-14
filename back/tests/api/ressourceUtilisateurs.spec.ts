@@ -136,24 +136,12 @@ describe('La ressource utilisateur', () => {
     });
 
     it('publie un événement de création de compte avec une campagne', async () => {
-      await request(serveur).post('/api/utilisateurs').query({ utm_campaign: 'aout_2026' }).send(donneesUtilisateur);
+      await request(serveur).post('/api/utilisateurs').query({ campagne: 'aout_2026' }).send(donneesUtilisateur);
 
       busEvenements.aRecuUnEvenement(CompteCree);
       const evenement = busEvenements.recupereEvenement(CompteCree);
 
       assert.equal(evenement!.suivi?.campagne, 'aout_2026');
-    });
-
-    it('publie un événement de création de compte avec une campagne matomo', async () => {
-      await request(serveur)
-        .post('/api/utilisateurs')
-        .query({ utm_campaign: 'aout_2026', mtm_campaign: 'aout_2026_cybercampus_NA' })
-        .send(donneesUtilisateur);
-
-      busEvenements.aRecuUnEvenement(CompteCree);
-      const evenement = busEvenements.recupereEvenement(CompteCree);
-
-      assert.equal(evenement!.suivi?.campagne, 'aout_2026_cybercampus_NA');
     });
 
     it('publie un événement de création de compte avec le parcours complet en destination', async () => {
