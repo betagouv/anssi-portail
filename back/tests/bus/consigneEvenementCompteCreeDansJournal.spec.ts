@@ -73,10 +73,14 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
         pixelDeSuiviAccepté: true,
         suivi: {
           campagne: 'campagne_aout_2026',
+          source: '/parcours-securisation',
+          parcoursDestination: '/parcours-complet',
         },
       })
     );
 
     assert.equal(évènementReçu!.donnees?.suivi.campagne, 'campagne_aout_2026');
+    assert.equal(évènementReçu!.donnees?.suivi.source, '/parcours-securisation');
+    assert.equal(évènementReçu!.donnees?.suivi.parcoursDestination, '/parcours-complet');
   });
 });

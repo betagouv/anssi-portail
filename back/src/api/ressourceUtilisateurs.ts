@@ -9,6 +9,31 @@ import { schemaRessourceUtilisateurs } from './ressourceUtilisateurs.schema.js';
 import { valideCorpsRequete } from './zod.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
+const construitLeSuiviDepuisLaRequête = (
+  requête: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceUtilisateurs>>
+): CompteCree['suivi'] => {
+  const { utm_campaign, mtm_campaign, redirectUrl } = requête.query;
+  const campagne = (mtm_campaign || utm_campaign) as string | undefined;
+
+  const parcoursDestination = ((redirectUrl) => {
+    try {
+      const chemin = new URL(redirectUrl as string).pathname;
+      if (chemin === '/parcours-complet') return 'complet';
+      if (chemin === '/modules/1') return 'allégé';
+    } catch {
+      return undefined;
+    }
+  })(redirectUrl);
+
+  if (!campagne && !parcoursDestination) return undefined;
+
+  const suivi: CompteCree['suivi'] = {};
+  suivi.campagne = campagne;
+  suivi.parcoursDestination = parcoursDestination;
+
+  return suivi;
+};
+
 const ressourceUtilisateurs = ({
   busEvenements,
   entrepotUtilisateur,
@@ -32,9 +57,6 @@ const ressourceUtilisateurs = ({
           token,
         } = requete.body;
 
-        const { utm_campaign, mtm_campaign } = requete.query;
-        const campagne = mtm_campaign ?? utm_campaign;
-
         try {
           const { email, nom, prenom, siret } = adaptateurJWT.decode(token);
 
@@ -56,26 +78,16 @@ const ressourceUtilisateurs = ({
 
           await entrepotUtilisateur.ajoute(utilisateur);
 
-          // suite à la suppression de l'aseptisation, on force un encodage pour garder des données consistantes dans la base de données Journal
-          const telephoneEncode = encode(telephone);
-
-          let payloadDeCréationdeCompte: payloadDeCréationDeCompte = {
+          const payloadDeCréationdeCompte: payloadDeCréationDeCompte = {
             email,
             prenom,
             nom,
             infoLettre: infolettreAcceptee,
-            telephone: telephoneEncode,
+            // suite à la suppression de l'aseptisation, on force un encodage pour garder des données consistantes dans la base de données Journal
+            telephone: encode(telephone),
             pixelDeSuiviAccepté,
+            suivi: construitLeSuiviDepuisLaRequête(requete),
           };
-
-          if (campagne) {
-            payloadDeCréationdeCompte = {
-              ...payloadDeCréationdeCompte,
-              suivi: {
-                campagne: campagne as string,
-              },
-            };
-          }
 
           await busEvenements.publie(new CompteCree(payloadDeCréationdeCompte));
 

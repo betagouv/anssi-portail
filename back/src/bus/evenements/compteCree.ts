@@ -5,7 +5,7 @@ export type payloadDeCréationDeCompte = {
   infoLettre: boolean;
   telephone?: string;
   pixelDeSuiviAccepté: boolean;
-  suivi?: { campagne?: string };
+  suivi?: { campagne?: string; source?: string; parcoursDestination?: string };
 };
 
 export class CompteCree {
@@ -17,6 +17,8 @@ export class CompteCree {
   pixelDeSuiviAccepté: boolean;
   suivi?: {
     campagne?: string;
+    source?: string;
+    parcoursDestination?: string;
   };
 
   constructor({ email, prenom, nom, infoLettre, telephone, pixelDeSuiviAccepté, suivi }: payloadDeCréationDeCompte) {
