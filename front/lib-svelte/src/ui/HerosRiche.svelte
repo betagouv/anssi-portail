@@ -10,7 +10,8 @@
     description: string;
     illustration: Snippet;
     propriétésFilAriane?: PropriétésFilAriane;
-    titre: string;
+    titre?: string;
+    titreHtml?: Snippet;
     variante: 'bleu-clair' | 'vert-clair' | 'cafe-creme';
     mentionAdditionnelle?: string;
   };
@@ -22,6 +23,7 @@
     illustration,
     propriétésFilAriane,
     titre,
+    titreHtml,
     variante,
     mentionAdditionnelle,
   }: Props = $props();
@@ -38,7 +40,13 @@
   <div class="contenu-heros">
     <div class="contenu">
       <GroupeDeBadges {badges} />
-      <h1 class="titre alternatif-md">{titre}</h1>
+      <h1 class="titre alternatif-md">
+        {#if titreHtml}
+          {@render titreHtml()}
+        {:else}
+          {titre}
+        {/if}
+      </h1>
       <p class="description texte-chapo-xl">{description}</p>
       {#if actions}
         <div class="actions">
