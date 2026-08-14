@@ -13,6 +13,7 @@
   import ExigencesNis2 from './ExigencesNis2.svelte';
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
+  import MotEnExergue from '../ui/MotEnExergue.svelte';
 
   const { itemsCyber, featureFlagNis2CyFun23 = false, exigences = undefined, guides = undefined } = $props();
 
@@ -73,7 +74,7 @@
       variante="bleu-clair"
     >
       {#snippet titreHtml()}
-        Directive <span class="mot-souligne"><span>NIS 2</span></span>
+        Directive <MotEnExergue motif="cercle">NIS 2</MotEnExergue>
       {/snippet}
       {#snippet illustration()}
         <img src="/assets/images/nis2-noir.svg" alt="NIS2" />
@@ -131,27 +132,5 @@
 
   img {
     width: 100%;
-  }
-
-  .mot-souligne {
-    position: relative;
-
-    span {
-      position: relative;
-      z-index: 2;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 120%;
-      height: 100%;
-      transform: translate(-50%, -50%);
-      background: url('/assets/images/motif-mot-souligne-cercle-moutarde.svg') no-repeat center;
-      background-size: contain;
-      pointer-events: none;
-    }
   }
 </style>

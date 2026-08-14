@@ -2,6 +2,7 @@
   import BlocContenuLanding from '../ui/BlocContenuLanding.svelte';
   import BlocDiagnostic from '../ui/BlocDiagnostic.svelte';
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
+  import MotEnExergue from '../ui/MotEnExergue.svelte';
 
   type Contenu = {
     titre: string;
@@ -60,7 +61,7 @@
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
-      Votre cybersécurité décolle en <span class="mot-souligne"><span>12&nbsp;mesures</span></span>
+      Votre cybersécurité décolle en <MotEnExergue motif="vague" couleur="cafe-creme">12&nbsp;mesures</MotEnExergue>
     {/snippet}
     {#snippet actions()}
       <dsfr-button
@@ -155,33 +156,5 @@
   .section-diagnostic {
     background-color: var(--background-alt-brown-cafe-creme);
     padding-block: 3.5rem;
-  }
-
-  .mot-souligne {
-    position: relative;
-    white-space: nowrap;
-
-    span {
-      position: relative;
-      z-index: 2;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 31px;
-      pointer-events: none;
-      background: {
-        image: url('/assets/images/motif-mot-souligne-vague-moutarde.svg');
-        repeat: no-repeat;
-        position: center;
-        size: contain;
-      }
-      filter: brightness(0) saturate(100%) invert(86%) sepia(22%) saturate(391%) hue-rotate(347deg) brightness(104%)
-        contrast(98%);
-    }
   }
 </style>

@@ -7,6 +7,7 @@
   import { enPropriétéWebC } from '$plateforme/webComponent';
   import IllustrationProtegerOrganisation from '../accueil/animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
   import Bouton from '../ui/Bouton.svelte';
+  import MotEnExergue from '../ui/MotEnExergue.svelte';
 
   const tagsParcoursBasique = [
     {
@@ -61,7 +62,7 @@
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
-      Je <span class="mot-souligne"><span>protège</span></span> mon organisation contre les cyberattaques
+      Je <MotEnExergue motif="cercle">protège</MotEnExergue> mon organisation contre les cyberattaques
     {/snippet}
     {#snippet actions()}
       <dsfr-button
@@ -169,28 +170,6 @@
 
   .section-hero-et-tuiles {
     background-color: var(--pink-tuile-850-200);
-  }
-
-  .mot-souligne {
-    position: relative;
-
-    span {
-      position: relative;
-      z-index: 2;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 120%;
-      height: 100%;
-      transform: translate(-50%, -50%);
-      background: url('/assets/images/motif-mot-souligne-cercle-moutarde.svg') no-repeat center;
-      background-size: contain;
-      pointer-events: none;
-    }
   }
 
   .section-tuiles {
