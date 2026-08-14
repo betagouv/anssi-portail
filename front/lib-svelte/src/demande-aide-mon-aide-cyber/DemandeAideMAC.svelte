@@ -117,9 +117,11 @@
       ]}
       description="Prenez votre cyberdépart&nbsp;! Profitez d’un premier diagnostic cyber gratuit accompagné par un Aidant cyber et recevez 6 recommandations prioritaires à mettre en place pour améliorer la cybersécurité de votre organisation."
       propriétésFilAriane={{ feuille: 'Diagnostic cyberdépart' }}
-      titre="Protégez dès maintenant votre organisation contre les cyberattaques"
       variante="cafe-creme"
     >
+      {#snippet titreHtml()}
+        Protégez votre organisation contre les <span class="mot-souligne"><span>cyberattaques</span></span>
+      {/snippet}
       {#snippet illustration()}
         <IllustrationDemandeAide />
       {/snippet}
@@ -244,6 +246,34 @@
 
     .contenu-section {
       max-width: 792px;
+    }
+  }
+
+  .mot-souligne {
+    position: relative;
+
+    span {
+      position: relative;
+      z-index: 2;
+    }
+
+    &::after {
+      @include a-partir-de(sm) {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 42px;
+        pointer-events: none;
+        background: {
+          image: url('/assets/images/motif-mot-souligne-gribouillis-macaron.svg');
+          repeat: no-repeat;
+          position: center;
+          size: contain;
+        }
+        transform: translateY(33%);
+      }
     }
   }
 </style>
