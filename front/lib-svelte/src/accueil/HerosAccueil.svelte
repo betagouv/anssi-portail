@@ -66,6 +66,17 @@
 
   dsfr-container {
     background-color: var(--background-flat-blue-france);
+
+    background: {
+      image: url('/assets/images/motif-fond-heros-bleu-mobile.avif');
+      repeat: no-repeat;
+      position: left -178px bottom -421px;
+    }
+
+    @include a-partir-de(lg) {
+      background-image: url('/assets/images/motif-fond-heros-bleu.avif');
+      background-position: left -29px bottom -121px;
+    }
   }
 
   .conteneur-heros {
