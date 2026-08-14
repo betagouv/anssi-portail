@@ -6,6 +6,7 @@ import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideCorpsRequete } from '../zod.js';
 import { schemaRessourceAvisMesure } from './ressourceAvisMesure.schema.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
+import { Utilisateur } from '../../metier/utilisateur.js';
 
 const ressourceAvisMesure = ({
   entrepotMesure,
@@ -29,11 +30,13 @@ const ressourceAvisMesure = ({
         if (!mesureTrouvee) {
           return reponse.sendStatus(404);
         }
+        const utilisateur = requete.utilisateur as Utilisateur;
 
         await busEvenements.publie(
           new AvisMesureDonne({
-            idUtilisateur: requete.utilisateur.emailHache(),
+            idUtilisateur: utilisateur.emailHache(),
             idMesure,
+            parcours: utilisateur.parcoursActuel() ?? undefined,
             titreMesure: mesureTrouvee.titre,
             retour,
             ...(retour === 'NEGATIF' && { commentaire: requete.body.commentaire }),

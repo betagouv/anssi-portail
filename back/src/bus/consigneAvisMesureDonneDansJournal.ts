@@ -13,10 +13,11 @@ export const consigneRetourAvisMesureDonneDansJournal = ({
   return async (evenement: AvisMesureDonne) => {
     await adaptateurJournal.consigneEvenement({
       donnees: {
-        idUtilisateur: evenement.idUtilisateur,
         idMesure: evenement.idMesure,
-        titreMesure: evenement.titreMesure,
+        idUtilisateur: evenement.idUtilisateur,
+        parcours: evenement.parcours,
         retour: evenement.retour,
+        titreMesure: evenement.titreMesure,
       },
       type: 'AVIS_MESURE_DONNE',
       date: adaptateurHorloge.maintenant(),
