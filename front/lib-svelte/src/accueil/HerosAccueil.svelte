@@ -34,7 +34,7 @@
       <div class="action">
         <Lien
           apparence="bouton"
-          href="#"
+          href="/cyberdepart"
           libelle="Protéger mon organisation"
           iconeADroite
           icone="arrow-right-circle-fill"
