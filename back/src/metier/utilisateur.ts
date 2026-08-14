@@ -9,7 +9,7 @@ import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntre
 import { EntrepotPriseEnCompte } from './entrepotPriseEnCompte.js';
 import { Mesure } from './mesure.js';
 import { Module } from './module.js';
-import { Parcours } from './parcours.js';
+import { MotifChangementParcours, Parcours } from './parcours.js';
 
 import { PriseEnCompte } from './PriseEnCompte.js';
 
@@ -182,7 +182,11 @@ export class Utilisateur {
     }
 
     if (!this.parcours || !module.estCyberdépart()) {
-      await this.rejoinsParcours(module.estCyberdépart() ? 'allégé' : 'complet', busEvenements);
+      await this.rejoinsParcours(
+        module.estCyberdépart() ? 'allégé' : 'complet',
+        busEvenements,
+        'prise-en-compte-mesure'
+      );
     }
 
     return nouvelEtatModule;
@@ -195,10 +199,10 @@ export class Utilisateur {
     return mesuresDuModulePriseEnCompte.length;
   }
 
-  async rejoinsParcours(parcours: Parcours, busEvenements: BusEvenements) {
+  async rejoinsParcours(parcours: Parcours, busEvenements: BusEvenements, motif: MotifChangementParcours) {
     if (this.parcours === parcours || this.parcours === 'complet') return;
     if (!this.parcours) {
-      await busEvenements.publie(new ParcoursRejoint(this.emailHache(), parcours));
+      await busEvenements.publie(new ParcoursRejoint(this.emailHache(), parcours, motif));
     } else {
       await busEvenements.publie(new ParcoursChangé(this.emailHache(), this.parcours, parcours));
     }
