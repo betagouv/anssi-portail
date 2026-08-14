@@ -20,11 +20,11 @@ describe("L'abonnement qui consigne l'évènement de rattachement à un parcours
     await consigneParcoursRejointDansJournal({
       adaptateurHorloge,
       adaptateurJournal,
-    })(new ParcoursRejoint('test@email-hache', 'complet'));
+    })(new ParcoursRejoint('test@email-hache', 'complet', 'prise-en-compte-mesure'));
 
     assert.deepEqual(evenementRecu, {
       type: 'PARCOURS_REJOINT',
-      donnees: { idUtilisateur: 'test@email-hache', parcours: 'complet' },
+      donnees: { idUtilisateur: 'test@email-hache', parcours: 'complet', motif: 'prise-en-compte-mesure' },
       date: new Date('2025-03-10'),
     });
   });

@@ -407,6 +407,7 @@ describe("L'utilisateur", () => {
           assert.equal(utilisateurDeParcours.parcoursActuel(), 'allégé');
           assert.equal(evenement?.emailHache, utilisateurDeParcours.emailHache());
           assert.equal(evenement?.parcours, 'allégé');
+          assert.equal(evenement?.motif, 'prise-en-compte-mesure');
         });
 
         it("ne rejoins pas le parcours basique s'il est déjà en parcours complet", async () => {
@@ -440,7 +441,7 @@ describe("L'utilisateur", () => {
 
         it("rejoins le parcours complet s'il est déjà en parcours basique", async () => {
           utilisateurDeParcours.mesuresPrisesEnCompte = [];
-          await utilisateurDeParcours.rejoinsParcours('allégé', busEvenements);
+          await utilisateurDeParcours.rejoinsParcours('allégé', busEvenements, 'prise-en-compte-mesure');
           const module = new ConstructeurDeModule().construis();
           const mesure = mesureDeTest().avecLId('AUTH.1').construis();
           module.mesures = [mesure];

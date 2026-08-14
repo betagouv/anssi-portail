@@ -14,6 +14,7 @@ export const consigneParcoursRejointDansJournal = ({
       donnees: {
         idUtilisateur: evenement.emailHache,
         parcours: evenement.parcours,
+        motif: evenement.motif,
       },
       type: 'PARCOURS_REJOINT',
       date: adaptateurHorloge.maintenant(),

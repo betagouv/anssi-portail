@@ -7,6 +7,7 @@ import { fabriqueAttributionParcoursMesure } from '../../src/api/middlewares/att
 import { fabriquePublieMesureConsultée } from '../../src/api/middlewares/publieMesureConsultee.js';
 import { creeServeur } from '../../src/api/msc.js';
 import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
+import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
 import { EntrepotMesureMemoire } from '../persistance/entrepotMesureMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
@@ -69,7 +70,11 @@ describe("La ressource d'une page Jekyll connectée", () => {
 
       const utilisateur = await entrepotUtilisateur.parEmailHache(jeanneDupont.emailHache());
 
+      const evenement = busEvenements.recupereEvenement(ParcoursRejoint);
       assert.equal(utilisateur?.parcoursActuel(), 'complet');
+      assert.equal(evenement?.emailHache, jeanneDupont.emailHache());
+      assert.equal(evenement?.parcours, 'complet');
+      assert.equal(evenement?.motif, 'visite-page-module');
     });
   });
 
@@ -136,7 +141,11 @@ describe("La ressource d'une page Jekyll connectée", () => {
 
       const utilisateurMitÀJour = await entrepotUtilisateur.parEmailHache(utilisateur.emailHache());
 
+      const evenement = busEvenements.recupereEvenement(ParcoursRejoint);
       assert.equal(utilisateurMitÀJour?.parcoursActuel(), 'allégé');
+      assert.equal(evenement?.emailHache, utilisateur.emailHache());
+      assert.equal(evenement?.parcours, 'allégé');
+      assert.equal(evenement?.motif, 'visite-page-mesure');
     });
   });
 });
