@@ -8,9 +8,10 @@
   const compact = $derived(mode === 'compact');
 </script>
 
-<svelte:element this={mode === 'compact' ? 'h4' : 'h2'}
-  >Trouvez les interlocuteurs et dispositifs pour vous soutenir dans vos efforts.</svelte:element
->
+<svelte:element this={mode === 'compact' ? 'h4' : 'h2'} class:fr-h1={afficheNouvelleDA}>
+  Trouvez les interlocuteurs et dispositifs pour vous soutenir dans vos efforts.
+</svelte:element>
+
 <lab-anssi-carrousel-tuiles class={mode}>
   <Tuile
     titre="Contacts cyber"

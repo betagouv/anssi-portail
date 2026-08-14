@@ -51,7 +51,7 @@ permalink: /
   <div class="contenu-section">
     <div class="toutes-organisations">
       <hgroup>
-        <h2>
+        <h2 class="fr-h1">
           Toutes les organisations sont concernées par le risque de
           cyberattaques
         </h2>
@@ -228,7 +228,10 @@ permalink: /
   <div class="contenu-section">
     <div class="recapitulatif">
       <hgroup>
-        <h2>Quelle est la maturité cyber de votre organisation&nbsp;?</h2>
+        <h2 class="{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}fr-h1{% endif %}">
+          Quelle est la maturité cyber de votre organisation&nbsp;?
+        </h2>
+
         <p class="texte-standard-md">
           La maturité cyber correspond au niveau global de prise en compte des
           risques numériques dans votre organisation.
@@ -290,7 +293,7 @@ permalink: /
 <dsfr-container class="communaute-msc nouvelle-da fond-moutarde">
   <div class="conteneur">
     <div class="conteneur-titre-description">
-      <h2>Rejoignez la communauté&nbsp;!</h2>
+      <h2 class="fr-h1">Rejoignez la communauté&nbsp;!</h2>
       <p class="description">Échangez avec vos pairs, découvrez les fonctionnalités en avant-première et participez activement au développement des outils.</p>
     </div>
 
@@ -360,7 +363,7 @@ permalink: /
 {% endif %}
 
 <dsfr-container class="partenaires{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %} nouvelle-da{% endif %}">
-  <h2>
+  <h2 class="{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}fr-h1{% endif %}">
     Ils s'engagent pour Mes&ZeroWidthSpace;Services&ZeroWidthSpace;Cyber
   </h2>
   <div class="logos">
