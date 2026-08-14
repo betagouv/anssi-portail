@@ -5,10 +5,8 @@ import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { EntrepotFavori } from '../metier/entrepotFavori.js';
 import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
 import { BusEvenements } from './busEvenements.js';
-import {
-  consigneCommentaireAvisMesureDonneDansMessagerie,
-  consigneRetourAvisMesureDonneDansJournal,
-} from './consigneAvisMesureDonneDansJournal.js';
+import { consigneRetourAvisMesureDonneDansJournal } from './consigneAvisMesureDonneDansJournal.js';
+import { notifieCommentaireAvisMesureDonneDansMessagerie } from './notifieCommentaireAvisMesureDonneDansMessagerie.js';
 import { consigneEvenementAvisUtilisateurDonneDansJournal } from './consigneEvenementAvisUtilisateurDonneDansJournal.js';
 import { consigneBadgeCyberdépartDébloquéDansJournal } from './consigneBadgeCyberdepartDebloqueDansJournal.js';
 import { consigneEvenementCompteCreeDansJournal } from './consigneEvenementCompteCreeDansJournal.js';
@@ -135,7 +133,7 @@ export const cableTousLesAbonnes = ({
 
   busEvenements.abonnePlusieurs(AvisMesureDonne, [
     consigneRetourAvisMesureDonneDansJournal({ adaptateurJournal, adaptateurHorloge }),
-    consigneCommentaireAvisMesureDonneDansMessagerie({ messagerieInstantanee }),
+    notifieCommentaireAvisMesureDonneDansMessagerie({ messagerieInstantanee }),
   ]);
 
   busEvenements.abonne(

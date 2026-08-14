@@ -1,13 +1,9 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import {
-  consigneCommentaireAvisMesureDonneDansMessagerie,
-  consigneRetourAvisMesureDonneDansJournal,
-} from '../../src/bus/consigneAvisMesureDonneDansJournal.js';
+import { consigneRetourAvisMesureDonneDansJournal } from '../../src/bus/consigneAvisMesureDonneDansJournal.js';
 import { AvisMesureDonne } from '../../src/bus/evenements/avisMesureDonne.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
-import { fausseMessagerieInstantanee } from '../api/fauxObjets.js';
 
 describe("L'abonnement qui consigne un avis sur une mesure dans le journal", () => {
   it('consigne un évènement AvisMesureDonne', async () => {
@@ -46,36 +42,6 @@ describe("L'abonnement qui consigne un avis sur une mesure dans le journal", () 
           'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes',
       },
       date: new Date('2025-03-10'),
-    });
-  });
-});
-
-describe("L'abonnement qui consigne un avis négatif sur une mesure dans la messagerie", () => {
-  it('consigne un évènement AvisMesureDonne', async () => {
-    let evenementRecu;
-    const messagerieInstantanee = {
-      ...fausseMessagerieInstantanee,
-      notifieUnAvisNegatifSurUneMesure: async (donneesEvenement: unknown) => {
-        evenementRecu = donneesEvenement;
-      },
-    };
-    await consigneCommentaireAvisMesureDonneDansMessagerie({ messagerieInstantanee })(
-      new AvisMesureDonne({
-        commentaire: 'Pas satisfait de cette mesure',
-        idMesure: 'AUTH.5',
-        idUtilisateur: 'jeanne.dupont@user.com-hache',
-        parcours: 'allégé',
-        retour: 'NEGATIF',
-        titreMesure:
-          'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes',
-      })
-    );
-
-    assert.deepEqual(evenementRecu, {
-      commentaire: 'Pas satisfait de cette mesure',
-      idMesure: 'AUTH.5',
-      titreMesure:
-        'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes',
     });
   });
 });
