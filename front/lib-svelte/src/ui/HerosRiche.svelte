@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import type { ClassValue } from 'svelte/elements';
   import FilAriane, { type Props as PropriétésFilAriane } from './FilAriane.svelte';
   import type { Badge } from './badge.type';
   import GroupeDeBadges from './GroupeDeBadges.svelte';
@@ -14,6 +15,7 @@
     titreHtml?: Snippet;
     variante: 'bleu-clair' | 'vert-clair' | 'cafe-creme';
     mentionAdditionnelle?: string;
+    class?: ClassValue;
   };
 
   const {
@@ -26,11 +28,12 @@
     titreHtml,
     variante,
     mentionAdditionnelle,
+    class: className,
   }: Props = $props();
 </script>
 
 <dsfr-container
-  class={['conteneur', variante]}
+  class={['conteneur', variante, className]}
   class:avecMentionAdditionnelle={!!mentionAdditionnelle}
   class:avecFilAriane={!!propriétésFilAriane}
 >
@@ -112,6 +115,18 @@
 
     &.cafe-creme {
       background-color: var(--background-alt-brown-cafe-creme);
+      &.avec-image-fond {
+        background: {
+          image: url('/assets/images/motif-fond-heros-cafe-creme-mobile.avif');
+          repeat: no-repeat;
+          position: right -236px top;
+        }
+
+        @include a-partir-de(lg) {
+          background-image: url('/assets/images/motif-fond-heros-cafe-creme.avif');
+          background-position: left -296px top -188px;
+        }
+      }
     }
 
     &.vert-clair {
