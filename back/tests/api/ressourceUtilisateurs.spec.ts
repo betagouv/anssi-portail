@@ -156,6 +156,28 @@ describe('La ressource utilisateur', () => {
       assert.equal(evenement!.suivi?.campagne, 'aout_2026_cybercampus_NA');
     });
 
+    it('publie un événement de création de compte avec le parcours complet en destination', async () => {
+      await request(serveur)
+        .post('/api/utilisateurs')
+        .query({ redirectUrl: 'http://mondomaine/parcours-complet' })
+        .send(donneesUtilisateur);
+
+      const evenement = busEvenements.recupereEvenement(CompteCree);
+
+      assert.equal(evenement!.suivi?.parcoursDestination, 'complet');
+    });
+
+    it('publie un événement de création de compte avec le parcours basique en destination', async () => {
+      await request(serveur)
+        .post('/api/utilisateurs')
+        .query({ redirectUrl: 'http://mondomaine/modules/1' })
+        .send(donneesUtilisateur);
+
+      const evenement = busEvenements.recupereEvenement(CompteCree);
+
+      assert.equal(evenement!.suivi?.parcoursDestination, 'allégé');
+    });
+
     describe('concernant la validation des données', () => {
       it('valide le téléphone', async () => {
         const reponse = await request(serveur)

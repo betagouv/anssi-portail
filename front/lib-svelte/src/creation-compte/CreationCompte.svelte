@@ -26,6 +26,8 @@
   let departements: Departement[] = [];
 
   let token: string | undefined;
+  const redirectUrl = sessionStorage.getItem('pagePostConnexion');
+  const pageSource = sessionStorage.getItem('pageSource');
 
   onMount(async () => {
     token = new URLSearchParams(window.location.search).get('token') ?? undefined;
@@ -68,10 +70,14 @@
     if (formulaireCourant.estValide()) {
       try {
         enCoursEnvoi = true;
-        await axios.post('/api/utilisateurs', {
-          ...formulaireInscription,
-          token,
-        });
+        await axios.post(
+          '/api/utilisateurs',
+          {
+            ...formulaireInscription,
+            token,
+          },
+          { params: { redirectUrl, pageSource } }
+        );
         window.location.href = '/oidc/connexion';
       } catch {
         enCoursEnvoi = false;
