@@ -54,7 +54,7 @@
       libelle="Découvrir les parcours"
       type="primaire"
       taille="lg"
-      icone="arrow-right-line"
+      icone="arrow-right-circle-fill"
       iconeADroite
     />
   </div>
