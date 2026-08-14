@@ -138,8 +138,8 @@
 
     .description {
       color: var(--text-default-grey);
-      font-size: 1.25rem;
-      line-height: 2rem;
+      font-size: 1.125rem;
+      line-height: 1.75rem;
       margin-block: 0;
     }
 
