@@ -70,9 +70,11 @@
     <HerosRiche
       description="Préparez-vous et renforcez dès à présent le niveau de cybersécurité de votre organisation."
       propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
-      titre="Directive NIS 2"
       variante="bleu-clair"
     >
+      {#snippet titreHtml()}
+        Directive <span class="mot-souligne"><span>NIS 2</span></span>
+      {/snippet}
       {#snippet illustration()}
         <img src="/assets/images/nis2-noir.svg" alt="NIS2" />
       {/snippet}
@@ -129,5 +131,27 @@
 
   img {
     width: 100%;
+  }
+
+  .mot-souligne {
+    position: relative;
+
+    span {
+      position: relative;
+      z-index: 2;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 120%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      background: url('/assets/images/motif-mot-souligne-cercle-moutarde.svg') no-repeat center;
+      background-size: contain;
+      pointer-events: none;
+    }
   }
 </style>
