@@ -52,7 +52,6 @@
 
 <div class="section-hero-et-tuiles">
   <HeroLandingPage
-    titre="Engagez votre organisation dans une démarche cyber complète"
     description="Accédez à 6 modules élaborés pour protéger votre organisation contre les risques cyber les plus courants et faciliter votre démarche de mise en conformité NIS&nbsp;2 si vous êtes concerné."
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
     tag="+6000 organisations déjà accompagnées 🚀"
@@ -60,6 +59,10 @@
     imageDeFond="/assets/images/parcours-securisation/fond-hero-landing-parcours-securisation.svg"
     class="hero-landing-page"
   >
+    {#snippet titreHtml()}
+      Engagez votre organisation dans une <span class="mot-souligne"><span>démarche</span></span>
+      <span class="mot-souligne petit"><span>cyber</span></span> complète
+    {/snippet}
     {#snippet actions()}
       <dsfr-button
         label="Je commence à sécuriser"
@@ -132,6 +135,41 @@
 
     .cta-central {
       text-align: center;
+    }
+  }
+
+  .mot-souligne {
+    position: relative;
+    white-space: nowrap;
+
+    span {
+      position: relative;
+      z-index: 2;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 31px;
+      pointer-events: none;
+      background: {
+        image: url('/assets/images/motif-mot-souligne-vague-moutarde.svg');
+        repeat: no-repeat;
+        position: left center;
+        size: contain;
+      }
+
+      filter: brightness(0) saturate(100%) invert(86%) sepia(22%) saturate(391%) hue-rotate(347deg) brightness(104%)
+        contrast(98%);
+    }
+
+    &.petit {
+      &::after {
+        background-image: url('/assets/images/motif-mot-souligne-petite-vague-macaron.svg');
+      }
     }
   }
 </style>
