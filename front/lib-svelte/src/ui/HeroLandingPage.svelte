@@ -7,7 +7,6 @@
   type Props = {
     titre?: string;
     description?: string;
-    imageDeFond?: string;
     propriétésFilAriane?: PropriétésFilAriane;
     tag?: string;
     srcImage?: string;
@@ -21,7 +20,6 @@
   const {
     titre,
     description,
-    imageDeFond,
     propriétésFilAriane,
     tag,
     srcImage,
@@ -34,10 +32,6 @@
 </script>
 
 <div class={['section-hero', className]} class:avecFilAriane={!!propriétésFilAriane}>
-  {#if imageDeFond}
-    <img class="fond-hero" src={imageDeFond} alt="" />
-  {/if}
-
   <dsfr-container>
     {#if propriétésFilAriane}
       <FilAriane {...propriétésFilAriane} />
@@ -91,14 +85,23 @@
   @use '../../../assets/styles/responsive' as *;
 
   .section-hero {
-    background-color: var(--background-color, transparent);
-    background-image: var(
-      --background-image,
-      linear-gradient(177deg, var(--blue-france-925-125) 0%, var(--blue-france-850-200) 88%)
-    );
     position: relative;
     overflow: hidden;
     padding-block: 6rem;
+    background-image: url('/assets/images/motif-fond-heros-bleu-clair-mobile.avif'),
+      linear-gradient(172deg, var(--blue-france-925-125) 0%, var(--blue-france-850-200) 87.91%);
+    background-position:
+      left -139px top -212px,
+      center;
+    background-repeat: no-repeat, no-repeat;
+
+    @include a-partir-de(lg) {
+      background-image: url('/assets/images/motif-fond-heros-bleu-clair.avif'),
+        linear-gradient(172deg, var(--blue-france-925-125) 0%, var(--blue-france-850-200) 87.91%);
+      background-position:
+        left -65px top -471px,
+        center;
+    }
 
     &.avecFilAriane {
       padding-block: 0 7.5rem;

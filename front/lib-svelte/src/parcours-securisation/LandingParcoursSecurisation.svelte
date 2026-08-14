@@ -58,7 +58,6 @@
     description="Rejoignez notre programme d'accompagnement gratuit."
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
     tag="+6000 organisations déjà accompagnées 🚀"
-    imageDeFond="/assets/images/parcours-securisation/fond-hero-landing-parcours-securisation.svg"
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
