@@ -61,7 +61,7 @@
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
-      Je <span class="decorateur-titre"><span>protège</span></span> mon organisation contre les cyberattaques
+      Je <span class="mot-souligne"><span>protège</span></span> mon organisation contre les cyberattaques
     {/snippet}
     {#snippet actions()}
       <dsfr-button
@@ -171,10 +171,10 @@
     background-color: var(--pink-tuile-850-200);
   }
 
-  :global(.decorateur-titre) {
+  .mot-souligne {
     position: relative;
 
-    :global(span) {
+    span {
       position: relative;
       z-index: 2;
     }
@@ -183,11 +183,12 @@
       content: '';
       position: absolute;
       left: 50%;
-      top: 0;
+      top: 50%;
       width: 120%;
       height: 100%;
-      transform: translateX(-50%);
-      background: url('/assets/images/parcours-securisation/hero-decor-titre.svg') no-repeat center / contain;
+      transform: translate(-50%, -50%);
+      background: url('/assets/images/motif-mot-souligne-cercle-moutarde.svg') no-repeat center;
+      background-size: contain;
       pointer-events: none;
     }
   }
