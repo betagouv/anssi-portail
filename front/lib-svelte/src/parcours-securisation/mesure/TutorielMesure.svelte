@@ -2,6 +2,7 @@
   import { untrack } from 'svelte';
   import type { Mesure } from './../mesure';
   import ModaleTutoriel from './ModaleTutoriel.svelte';
+  import { clic } from '../../directives/actions.svelte';
 
   const { mesure }: { mesure: Mesure } = $props();
   let étatDesModales: boolean[] = $state(untrack(() => Array(mesure.tutoriels.length).fill(false)));
@@ -34,11 +35,7 @@
         size="lg"
         actionMarkup="button"
         role="button"
-        tabindex={null}
-        onkeypress={(event: KeyboardEvent) => {
-          if (event.code === 'Enter' || event.code === 'Space') selectionneLeTutoriel(index);
-        }}
-        onclick={() => selectionneLeTutoriel(index)}
+        use:clic={() => selectionneLeTutoriel(index)}
       >
         <dsfr-badge slot="badgesgroup" label="Tutoriel" type="accent" accent="purple-glycine"></dsfr-badge>
       </dsfr-card>
