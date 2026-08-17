@@ -12,6 +12,7 @@ import { Module } from './module.js';
 import { MotifChangementParcours, Parcours } from './parcours.js';
 
 import { PriseEnCompte } from './PriseEnCompte.js';
+import { Suivi } from './suivi.js';
 
 export type Role = 'GESTION_GUIDES';
 
@@ -208,12 +209,18 @@ export class Utilisateur {
     return mesuresDuModulePriseEnCompte.length;
   }
 
-  async rejoinsParcours(parcours: Parcours, busEvenements: BusEvenements, motif: MotifChangementParcours) {
+  async rejoinsParcours(
+    parcours: Parcours,
+    busEvenements: BusEvenements,
+    motif: MotifChangementParcours,
+    suivi?: Suivi
+  ) {
     if (this.parcours === parcours || this.parcours === 'complet') return;
+
     if (!this.parcours) {
-      await busEvenements.publie(new ParcoursRejoint(this.emailHache(), parcours, motif));
+      await busEvenements.publie(new ParcoursRejoint(this.emailHache(), parcours, motif, suivi));
     } else {
-      await busEvenements.publie(new ParcoursChangé(this.emailHache(), this.parcours, parcours, motif));
+      await busEvenements.publie(new ParcoursChangé(this.emailHache(), this.parcours, parcours, motif, suivi));
     }
     this.parcours = parcours;
   }
