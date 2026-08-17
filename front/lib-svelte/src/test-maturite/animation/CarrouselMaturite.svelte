@@ -6,6 +6,7 @@
   import Insuffisant from './Insuffisant.svelte';
   import Intermediaire from './Intermediaire.svelte';
   import Optimal from './Optimal.svelte';
+  import { suitLaVisibilité } from '../../utils/visibilite.svelte';
 
   type Props = {
     enPause?: boolean;
@@ -27,6 +28,10 @@
   const mouvement = préfèreMouvementRéduit();
   const DURÉE_SORTIE_EN_MS = 320;
 
+  let conteneur = $state<HTMLElement>();
+  const àLÉcran = suitLaVisibilité(() => conteneur);
+  const figé = $derived(enPause || !àLÉcran.visible);
+
   let actif = $state(0);
   let sortante = $state(-1);
   let sautante = $state(-1);
@@ -34,7 +39,7 @@
   const positionDe = (i: number) => ((i - actif + CENTRE + cartes.length) % cartes.length) - CENTRE;
 
   $effect(() => {
-    if (mouvement.réduit || enPause) {
+    if (mouvement.réduit || figé) {
       return;
     }
 
@@ -65,8 +70,9 @@
 </script>
 
 <div
+  bind:this={conteneur}
   class="carrousel"
-  class:en-pause={enPause}
+  class:en-pause={figé}
   role="img"
   aria-label="Cinq niveaux de maturité cyber, de insuffisant à optimal, illustrés par une plante qui pousse."
 >

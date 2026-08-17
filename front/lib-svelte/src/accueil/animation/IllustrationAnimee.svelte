@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Component, Snippet } from 'svelte';
   import { préfèreMouvementRéduit } from '../../utils/mouvementReduit.svelte';
+  import { suitLaVisibilité } from '../../utils/visibilite.svelte';
 
   type Props = {
     scènes: Component[];
@@ -13,6 +14,10 @@
   const { scènes, étiquette, décor, enPause = false, duréeScèneEnMs = 5500 }: Props = $props();
 
   const mouvement = préfèreMouvementRéduit();
+  let conteneur = $state<HTMLElement>();
+  const àLÉcran = suitLaVisibilité(() => conteneur);
+  const figée = $derived(enPause || !àLÉcran.visible);
+
   let index = $state(0);
 
   $effect(() => {
@@ -21,7 +26,7 @@
       return;
     }
 
-    if (enPause) {
+    if (figée) {
       return;
     }
 
@@ -35,7 +40,7 @@
   });
 </script>
 
-<div class="illustration-animee" class:en-pause={enPause} role="img" aria-label={étiquette}>
+<div bind:this={conteneur} class="illustration-animee" class:en-pause={figée} role="img" aria-label={étiquette}>
   {#if décor}
     <div class="decor">{@render décor(index, scènes.length)}</div>
   {/if}
@@ -67,7 +72,7 @@
   }
 
   .en-pause .scene :global(*) {
-    animation-play-state: paused;
+    animation-play-state: paused !important;
   }
 
   .scene {
