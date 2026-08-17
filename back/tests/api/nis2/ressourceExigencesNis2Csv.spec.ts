@@ -72,7 +72,7 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
           contenu: 'L’entité liste l’ensemble…',
           contenuEnAnglais: '',
           referentielCompare: 'ISO',
-          correspondance: new Correspondance('faible', 'Des observations', [
+          correspondance: new Correspondance('faible', { contenu: 'Des observations' }, [
             {
               reference: 'reference_1',
               contenu: 'contenu 1',
@@ -115,7 +115,7 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
           contenu: 'L’entité liste l’ensemble…',
           contenuEnAnglais: 'The entity lists...',
           referentielCompare: 'ISO',
-          correspondance: new Correspondance('faible', 'Des observations', [
+          correspondance: new Correspondance('faible', { contenuEnAnglais: 'Des observations' }, [
             {
               reference: 'reference_1',
               contenu: 'contenu 1',

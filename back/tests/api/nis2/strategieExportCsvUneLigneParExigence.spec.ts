@@ -113,7 +113,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
           correspondance: {
             exigences: [exigenceISO('refiso1', 'contenuiso1'), exigenceISO('refiso2', 'contenuiso2')],
             niveau: 'faible',
-            observations: 'bla bla',
+            observations: { contenu: 'bla bla' },
           },
         }),
       ];
@@ -150,7 +150,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
           correspondance: {
             exigences: [exigenceISO('refiso1', 'contenuiso1', 'in english please')],
             niveau: 'faible',
-            observations: 'bla bla',
+            observations: { contenu: 'bla bla' },
           },
         }),
       ];
@@ -224,7 +224,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
           correspondance: {
             exigences: [exigenceAE('refae1', 'contenuae1'), exigenceAE('refae2', 'contenuae2')],
             niveau: 'faible',
-            observations: 'bla bla',
+            observations: { contenu: 'bla bla' },
           },
         }),
       ];
@@ -307,7 +307,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
               exigenceCyFun23('refcyfun23-2', 'contenucyfun23-2'),
             ],
             niveau: 'faible',
-            observations: 'bla bla',
+            observations: { contenu: 'bla bla' },
           },
         }),
       ];
@@ -391,7 +391,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
               exigenceNIS2SansCorrespondance('refnis2-2', 'contenunis2-2'),
             ],
             niveau: 'faible',
-            observations: 'bla bla',
+            observations: { contenu: 'bla bla' },
           },
         }),
       ];
@@ -476,7 +476,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
               exigenceNIS2SansCorrespondance('refnis2-2', 'contenunis2-2'),
             ],
             niveau: 'faible',
-            observations: 'bla bla',
+            observations: { contenu: 'bla bla' },
           },
         }),
       ];
@@ -557,7 +557,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
               exigenceNIS2SansCorrespondance('refnis2-2', 'contenunis2-2'),
             ],
             niveau: 'faible',
-            observations: 'bla bla',
+            observations: { contenu: 'bla bla' },
           },
         }),
       ];
@@ -593,7 +593,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
           correspondance: {
             exigences: [],
             niveau: 'faible',
-            observations: 'bla bla',
+            observations: { contenu: 'bla bla' },
           },
         }),
       ];
@@ -615,7 +615,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
           correspondance: {
             exigences: [],
             niveau: 'faible',
-            observations: 'bla bla',
+            observations: { contenu: 'bla bla' },
           },
         }),
       ];
@@ -636,7 +636,7 @@ const exigenceAEAvecCorrespondancesNIS2 = (nombreCorrespondances: number) =>
     correspondance: {
       exigences: new Array(nombreCorrespondances).map((_) => exigenceNIS2SansCorrespondance()),
       niveau: 'faible',
-      observations: '',
+      observations: { contenu: '' },
     },
   });
 
@@ -651,7 +651,7 @@ const exigenceISOAvecCorrespondancesNIS2 = (nombreCorrespondances: number) =>
       exigences: new Array(nombreCorrespondances).map((_) => exigenceNIS2SansCorrespondance()),
       niveau: 'faible',
 
-      observations: '',
+      observations: { contenu: '' },
     },
   });
 
@@ -666,7 +666,7 @@ const exigenceCyFun23AvecCorrespondancesNIS2 = (nombreCorrespondances: number) =
     correspondance: {
       exigences: new Array(nombreCorrespondances).map((_) => exigenceNIS2SansCorrespondance()),
       niveau: 'faible',
-      observations: '',
+      observations: { contenu: '' },
     },
   });
 
@@ -705,7 +705,7 @@ const exigenceNIS2AvecCorrespondances = (
     correspondance: {
       exigences: new Array(nombreCorrespondances).map((_) => fnCreeExigence()),
       niveau: 'faible',
-      observations: '',
+      observations: { contenu: '' },
     },
   });
 
@@ -716,7 +716,7 @@ const exigenceISO = (reference: string = '', contenu: string = '', contenuEnAngl
     contenuEnAnglais,
     chapitre: '',
     norme: '',
-    correspondance: { exigences: [], niveau: 'NA', observations: '' },
+    correspondance: { exigences: [], niveau: 'NA', observations: { contenu: '' } },
   });
 
 const exigenceAE = (reference: string = '', contenu: string = '') =>
@@ -724,7 +724,7 @@ const exigenceAE = (reference: string = '', contenu: string = '') =>
     reference,
     contenu,
     contenuEnAnglais: '',
-    correspondance: { exigences: [], niveau: 'NA', observations: '' },
+    correspondance: { exigences: [], niveau: 'NA', observations: { contenu: '' } },
   });
 
 const exigenceCyFun23 = (reference: string = '', contenu: string = '') =>
@@ -735,5 +735,5 @@ const exigenceCyFun23 = (reference: string = '', contenu: string = '') =>
     fonction: 'Détecter',
     niveauAssurance: 'Basique',
     estMesureCle: true,
-    correspondance: { exigences: [], niveau: 'NA', observations: '' },
+    correspondance: { exigences: [], niveau: 'NA', observations: { contenu: '' } },
   });

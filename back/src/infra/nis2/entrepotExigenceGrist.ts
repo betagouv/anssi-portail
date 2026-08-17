@@ -36,6 +36,7 @@ export type ExigenceGrist = {
     // Comparaison
     Niveau?: string;
     Observations?: string;
+    ObservationsEN?: string;
     ExigencesCible?: string;
   };
 };
@@ -170,7 +171,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
     const fabriqueCorrespondance = (exigenceGrist: ExigenceGrist): Correspondance =>
       new Correspondance(
         this.versNiveau(exigenceGrist.fields.Niveau),
-        exigenceGrist.fields.Observations,
+        { contenu: exigenceGrist.fields.Observations, contenuEnAnglais: exigenceGrist.fields.ObservationsEN },
         exigenceGrist.fields.ExigencesCible ? (JSON.parse(exigenceGrist.fields.ExigencesCible) as Exigence[]) : []
       );
 
@@ -299,6 +300,7 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
       champs.push(
         'cr.Correspondance as Niveau',
         'cr.Commentaires_externes as Observations',
+        'cr.Commentaires_en as ObservationsEN',
         k({ cible: croisement.nomTableCible })
           .where('cible.id', 'IN', k.from(k.raw(`json_each (cr.References_cibles)`)).select('value'))
           .select(
