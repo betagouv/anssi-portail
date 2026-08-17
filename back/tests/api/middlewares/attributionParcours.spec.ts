@@ -49,6 +49,25 @@ describe("Le middleware d'attribution de parcours", () => {
   });
 
   describe("Lorsque l'utilisateur à déjà un parcours", () => {
+    it("sait gérer l'absence de données de suivi", async () => {
+      const utilisateur = new ConstructeurDUtilisateur()
+        .avecLEmail('chuck@yopmail.com')
+        .avecLeParcours('allégé')
+        .construis();
+      await entrepotUtilisateur.ajoute(utilisateur);
+      const attributionParcours = fabriqueAttributionParcours({ entrepotUtilisateur, busEvenements });
+      const requête = {
+        originalUrl: '/parcours-complet',
+        utilisateur,
+        query: {},
+      } as Partial<Request>;
+
+      await attributionParcours('complet')(requête as Request, {} as Response, () => {});
+
+      const evenement = busEvenements.recupereEvenement(ParcoursChangé);
+
+      assert.equal(evenement?.suivi, undefined);
+    });
     it('le change de parcours', async () => {
       const utilisateur = new ConstructeurDUtilisateur()
         .avecLEmail('chuck@yopmail.com')
@@ -60,7 +79,10 @@ describe("Le middleware d'attribution de parcours", () => {
       const requête = {
         originalUrl: '/parcours-complet',
         utilisateur,
-        query: {},
+        query: {
+          campagne: 'campagne_2026_NA',
+          pageSource: 'landing-parcours-securisation-bandeau',
+        },
       } as Partial<Request>;
 
       await attributionParcours('complet')(requête as Request, {} as Response, () => {
@@ -74,6 +96,8 @@ describe("Le middleware d'attribution de parcours", () => {
       assert.equal(evenement?.emailHache, 'chuck@yopmail.com-hache');
       assert.equal(evenement?.parcours, 'complet');
       assert.equal(evenement?.motif, 'visite-page-module');
+      assert.equal(evenement?.suivi?.campagne, 'campagne_2026_NA');
+      assert.equal(evenement?.suivi?.source, 'landing-parcours-securisation-bandeau');
       assert.equal(suiteEstAppellé, true);
     });
   });
