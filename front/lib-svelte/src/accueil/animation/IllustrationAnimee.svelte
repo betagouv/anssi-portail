@@ -26,7 +26,7 @@
       return;
     }
 
-    if (figée) {
+    if (figée || scènes.length < 2) {
       return;
     }
 
