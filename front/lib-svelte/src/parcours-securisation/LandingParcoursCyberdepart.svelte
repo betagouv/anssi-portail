@@ -3,6 +3,7 @@
   import BlocDiagnostic from '../ui/BlocDiagnostic.svelte';
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
+  import IllustrationHerosParcoursBasique from './animation/IllustrationHerosParcoursBasique.svelte';
 
   type Contenu = {
     titre: string;
@@ -56,7 +57,7 @@
     description="12 mesures pensées pour les non-spécialistes, applicables en quelques minutes pour commencer à renforcer votre cybersécurité et prendre votre Cyberdépart&nbsp;!"
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
     tag="+6000 organisations déjà accompagnées 🚀"
-    srcImage="/assets/images/parcours-securisation/illustration-hero-parcours-cyberdepart.png"
+    imageDeFond="/assets/images/parcours-securisation/fond-hero-landing-parcours-securisation.svg"
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
@@ -73,6 +74,11 @@
         href="/modules/1"
         markup="a"
       ></dsfr-button>
+    {/snippet}
+    {#snippet illustration()}
+      <figure class="illustration">
+        <IllustrationHerosParcoursBasique />
+      </figure>
     {/snippet}
   </HeroLandingPage>
 
@@ -159,5 +165,10 @@
   .section-diagnostic {
     background-color: var(--background-alt-brown-cafe-creme);
     padding-block: 3.5rem;
+  }
+
+  .illustration {
+    margin: 0 auto;
+    width: 100%;
   }
 </style>
