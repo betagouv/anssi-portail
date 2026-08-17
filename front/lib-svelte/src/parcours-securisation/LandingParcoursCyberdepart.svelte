@@ -57,7 +57,6 @@
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
     tag="+6000 organisations déjà accompagnées 🚀"
     srcImage="/assets/images/parcours-securisation/illustration-hero-parcours-cyberdepart.png"
-    imageDeFond="/assets/images/parcours-securisation/fond-hero-landing-parcours-securisation.svg"
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
