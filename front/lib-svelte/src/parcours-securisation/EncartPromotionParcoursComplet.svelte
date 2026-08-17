@@ -39,6 +39,7 @@
     orientation-media="gauche"
     cliquable
     avec-cta
+    active-defilement
   >
     <div slot="hautentete">
       {@render tags()}
