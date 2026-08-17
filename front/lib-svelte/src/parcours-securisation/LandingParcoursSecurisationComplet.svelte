@@ -1,16 +1,18 @@
 <script lang="ts">
+  import type { Component } from 'svelte';
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
   import BlocContenuLanding from '../ui/BlocContenuLanding.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
   import IllustrationHerosParcoursComplet from './animation/IllustrationHerosParcoursComplet.svelte';
+  import IllustrationModules from './animation/IllustrationModules.svelte';
+  import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';
+  import IllustrationProgression from './animation/IllustrationProgression.svelte';
+  import IllustrationRecyf from './animation/IllustrationRecyf.svelte';
 
   type Contenu = {
     titre: string;
     description: string;
-    ilustration: {
-      src: string;
-      alt: string;
-    };
+    illustration: Component;
   };
 
   const contenus: Contenu[] = [
@@ -18,36 +20,24 @@
       titre: 'Un programme complet',
       description:
         '6 modules pour protéger votre organisation des risques les plus courants — 6 mesures additionnelles sur la protection des données personnelles, établies avec la CNIL.',
-      ilustration: {
-        src: '/assets/images/parcours-securisation/illustration-parcours-complet-modules.svg',
-        alt: 'Aperçu des 6 modules du parcours de sécurisation complet',
-      },
+      illustration: IllustrationModules,
     },
     {
       titre: 'Basé sur ReCyF',
       description:
         "Chaque mesure est issue du référentiel cyber français (ReCyF), simplifiée et accompagnée d'explications pédagogiques pour faciliter votre démarche mise en conformité NIS 2.",
-      ilustration: {
-        src: '/assets/images/parcours-securisation/illustration-parcours-complet-controler.svg',
-        alt: 'Carte illustrant une mesure basée sur le référentiel ReCyF',
-      },
+      illustration: IllustrationRecyf,
     },
     {
       titre: 'Pédagogique',
       description: 'Pas de jargon, on vulgarise la cyber pour vous.',
-      ilustration: {
-        src: '/assets/images/parcours-securisation/illustration-parcours-complet-pourquoi.svg',
-        alt: 'Vidéo pédagogique : pourquoi activer la vérification en deux étapes',
-      },
+      illustration: IllustrationPedagogique,
     },
     {
       titre: 'Suivez votre progression',
       description:
         'Avancez à votre rythme, module par module. Visualisez votre progression à tout moment et partagez vos résultats avec votre direction ou votre prestataire.',
-      ilustration: {
-        src: '/assets/images/parcours-securisation/illustration-parcours-complet-progression.svg',
-        alt: 'Carte de suivi de progression avec barre de complétion',
-      },
+      illustration: IllustrationProgression,
     },
   ];
 </script>
@@ -97,12 +87,16 @@
   <dsfr-container>
     <div class="blocs-contenu">
       {#each contenus as contenu, index (contenu.titre)}
+        {@const Illustration = contenu.illustration}
         <BlocContenuLanding
           titre={contenu.titre}
           description={contenu.description}
           alignement={index % 2 === 0 ? 'texte-gauche' : 'texte-droite'}
-          image={contenu.ilustration}
-        />
+        >
+          {#snippet illustration()}
+            <Illustration />
+          {/snippet}
+        </BlocContenuLanding>
       {/each}
     </div>
 
