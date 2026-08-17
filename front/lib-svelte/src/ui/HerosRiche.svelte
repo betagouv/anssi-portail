@@ -86,7 +86,28 @@
     }
 
     &.bleu-clair {
-      background-color: var(--blue-france-925-125);
+      background: {
+        image: url('/assets/images/motif-fond-heros-bleu-clair.avif'),
+          linear-gradient(172deg, var(--blue-france-925-125) 0%, var(--blue-france-850-200) 87.91%);
+        position:
+          -139px -212px,
+          center;
+        repeat: no-repeat, no-repeat;
+        size:
+          1207px 1145px,
+          cover;
+      }
+
+      @include a-partir-de(lg) {
+        background: {
+          position:
+            calc(50% - 55px) -471px,
+            center;
+          size:
+            1460px 1386px,
+            cover;
+        }
+      }
     }
 
     &.cafe-creme {
