@@ -46,6 +46,7 @@
     fonctionnalites={enPropriétéWebC(fonctionnalites)}
     cliquable
     avec-cta
+    active-defilement
   >
     <div slot="hautentete">
       {@render tags()}
