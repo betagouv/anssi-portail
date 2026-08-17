@@ -16,7 +16,13 @@
     taille?: 'sm' | 'md' | 'lg';
     telechargement?: string;
     telechargementDetails?: string;
-    type?: 'primaire' | 'primaire-inverse' | 'secondaire' | 'secondaire-inverse' | 'tertiaire';
+    type?:
+      | 'primaire'
+      | 'primaire-inverse'
+      | 'secondaire'
+      | 'secondaire-inverse'
+      | 'tertiaire'
+      | 'tertiaire-sans-bordure';
     source?: string;
     cible?: string;
     classe?: string;
@@ -54,6 +60,7 @@
           secondaire: 'secondary',
           'secondaire-inverse': 'inverted-secondary',
           tertiaire: 'tertiary',
+          'tertiaire-sans-bordure': 'tertiary-no-outline',
         }[type]
       : 'primary'
   );
