@@ -185,7 +185,7 @@ describe("L'entrepot d'exigence Grist", () => {
       const exigences = await entrepotExigenceGrist.parReferentiel('NIS2', 'ISO');
 
       assert.equal(exigences[0].correspondances['ISO']?.niveau, 'moyen');
-      assert.equal(exigences[0].correspondances['ISO']?.observations, 'Des observations');
+      assert.equal(exigences[0].correspondances['ISO']?.observations.contenu, 'Des observations');
       assert.deepEqual(exigences[0].correspondances['ISO']?.exigences, [
         {
           reference: '',
@@ -230,7 +230,7 @@ describe("L'entrepot d'exigence Grist", () => {
       const exigences = await entrepotExigenceGrist.parReferentiel('ISO', 'NIS2');
 
       assert.equal(exigences[0].correspondances['NIS2']?.niveau, 'moyen');
-      assert.equal(exigences[0].correspondances['NIS2']?.observations, 'Des observations');
+      assert.equal(exigences[0].correspondances['NIS2']?.observations.contenu, 'Des observations');
       assert.deepEqual(exigences[0].correspondances['NIS2']?.exigences, [
         {
           reference: '2.A.1-EI/EE',
@@ -271,7 +271,7 @@ describe("L'entrepot d'exigence Grist", () => {
       const exigences = await entrepotExigenceGrist.parReferentiel('AE', 'NIS2');
 
       assert.equal(exigences[0].correspondances['NIS2']?.niveau, 'moyen');
-      assert.equal(exigences[0].correspondances['NIS2']?.observations, 'Des observations');
+      assert.equal(exigences[0].correspondances['NIS2']?.observations.contenu, 'Des observations');
       assert.deepEqual(exigences[0].correspondances['NIS2']?.exigences, [
         {
           reference: '2.A.1-EI/EE',
@@ -345,7 +345,7 @@ describe("L'entrepot d'exigence Grist", () => {
       const exigences = await entrepotExigenceGrist.parReferentiel('CyFun23', 'NIS2');
 
       assert.equal(exigences[0].correspondances['NIS2']?.niveau, 'moyen');
-      assert.equal(exigences[0].correspondances['NIS2']?.observations, 'Des observations');
+      assert.equal(exigences[0].correspondances['NIS2']?.observations.contenu, 'Des observations');
       assert.deepEqual(exigences[0].correspondances['NIS2']?.exigences, [
         {
           reference: '2.A.1-EI/EE',

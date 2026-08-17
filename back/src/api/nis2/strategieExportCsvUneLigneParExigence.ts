@@ -6,6 +6,7 @@ import {
   ExigenceISO,
   ExigenceNIS2,
   Langue,
+  Observation,
   Referentiel,
 } from '../../metier/nis2/exigence.js';
 
@@ -93,10 +94,12 @@ abstract class ConvertisseurCsvExigenceNIS2AvecCorrespondances extends Convertis
 
   enLigne(exigenceNIS2: ExigenceNIS2) {
     const referentiel = this.referentielDeCorrespondance();
+    const observations: Observation = exigenceNIS2.correspondances[referentiel]!.observations;
+
     return {
       ...super.enLigne(exigenceNIS2),
       correspondance: exigenceNIS2.correspondances[referentiel]!.niveau,
-      observations: exigenceNIS2.correspondances[referentiel]!.observations,
+      observations: (this.langue === 'FR' ? observations.contenu : observations.contenuEnAnglais) ?? '',
       ...this.extraisCorrespondances(exigenceNIS2, referentiel),
     };
   }
@@ -164,10 +167,12 @@ class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigence<ExigenceAE> {
   }
 
   enLigne(exigence: ExigenceAE) {
+    const observations = exigence.correspondances.NIS2!.observations;
+
     return {
       ...super.enLigne(exigence),
       correspondance: exigence.correspondances.NIS2!.niveau,
-      observations: exigence.correspondances.NIS2!.observations,
+      observations: (this.langue === 'FR' ? observations.contenu : observations.contenuEnAnglais) ?? '',
       ...this.extraisCorrespondances(exigence, 'NIS2'),
     };
   }
@@ -191,12 +196,14 @@ class ConvertisseurCsvExigenceISO extends ConvertisseurCsvExigence<ExigenceISO> 
   }
 
   enLigne(exigence: ExigenceISO) {
+    const observations = exigence.correspondances.NIS2!.observations;
+
     return {
       ...super.enLigne(exigence),
       norme: exigence.norme,
       chapitre: exigence.chapitre,
       correspondance: exigence.correspondances.NIS2!.niveau,
-      observations: exigence.correspondances.NIS2!.observations,
+      observations: (this.langue === 'FR' ? observations.contenu : observations.contenuEnAnglais) ?? '',
       ...this.extraisCorrespondances(exigence, 'NIS2'),
     };
   }
@@ -221,13 +228,15 @@ class ConvertisseurCsvExigenceCyFun23 extends ConvertisseurCsvExigence<ExigenceC
   }
 
   enLigne(exigence: ExigenceCyFun23) {
+    const observations = exigence.correspondances.NIS2!.observations;
+
     return {
       ...super.enLigne(exigence),
       fonction: exigence.fonction ?? '',
       niveau_assurance: exigence.niveauAssurance ?? '',
       est_mesure_cle: exigence.estMesureCle ? 'Oui' : 'Non',
       correspondance: exigence.correspondances.NIS2!.niveau,
-      observations: exigence.correspondances.NIS2!.observations,
+      observations: (this.langue === 'FR' ? observations.contenu : observations.contenuEnAnglais) ?? '',
       ...this.extraisCorrespondances(exigence, 'NIS2'),
     };
   }

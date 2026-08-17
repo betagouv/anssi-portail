@@ -28,15 +28,19 @@ export class Exigence {
 }
 
 export type Niveau = 'NA' | 'faible' | 'moyen' | 'élevé';
+export type Observation = {
+  contenu?: string;
+  contenuEnAnglais?: string;
+};
 
 export class Correspondance {
   readonly niveau: Niveau;
-  readonly observations: string;
+  readonly observations: Observation;
   readonly exigences: Exigence[];
 
-  constructor(niveau?: Niveau, observations?: string, exigences?: Exigence[]) {
+  constructor(niveau?: Niveau, observations?: Observation, exigences?: Exigence[]) {
     this.niveau = niveau ?? 'NA';
-    this.observations = observations ?? '';
+    this.observations = observations ?? {};
     this.exigences = exigences ?? [];
   }
 }

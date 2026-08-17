@@ -116,7 +116,7 @@ describe('La ressource des Exigences NIS 2', () => {
             contenu: '',
             contenuEnAnglais: "Requirement's content",
             referentielCompare: 'ISO',
-            correspondance: new Correspondance('faible', 'Des observations', [
+            correspondance: new Correspondance('faible', { contenu: 'Des observations' }, [
               {
                 reference: 'reference_1',
                 contenu: 'contenu 1',
@@ -150,7 +150,7 @@ describe('La ressource des Exigences NIS 2', () => {
             contenu: '',
             contenuEnAnglais: "Requirement's content",
             referentielCompare: 'AE',
-            correspondance: new Correspondance('faible', 'Des observations', [
+            correspondance: new Correspondance('faible', { contenu: 'Des observations' }, [
               {
                 reference: 'reference_1',
                 contenu: 'contenu 1',
@@ -184,7 +184,7 @@ describe('La ressource des Exigences NIS 2', () => {
             contenu: '',
             contenuEnAnglais: "Requirement's content",
             referentielCompare: 'CyFun23',
-            correspondance: new Correspondance('faible', 'Des observations', [
+            correspondance: new Correspondance('faible', { contenu: 'Des observations' }, [
               {
                 reference: 'reference_1',
                 contenu: 'contenu 1',
@@ -218,7 +218,7 @@ describe('La ressource des Exigences NIS 2', () => {
           reference: '27001:2022-5.1 Titre de l’exigence',
           contenu: '5.1 Titre de l’exigence',
           contenuEnAnglais: "Requirement's content",
-          correspondance: new Correspondance('faible', 'Des observations', []),
+          correspondance: new Correspondance('faible', { contenu: 'Des observations' }, []),
         })
       );
 
@@ -248,7 +248,7 @@ describe('La ressource des Exigences NIS 2', () => {
           reference: '1.2.3',
           contenu: 'Contenu de l’exigence AE',
           contenuEnAnglais: "Requirement's content",
-          correspondance: new Correspondance('faible', 'Des observations', []),
+          correspondance: new Correspondance('faible', { contenu: 'Des observations' }, []),
         })
       );
 
@@ -279,7 +279,7 @@ describe('La ressource des Exigences NIS 2', () => {
           fonction: 'Identifier',
           estMesureCle: true,
           niveauAssurance: 'Important',
-          correspondance: new Correspondance('faible', 'Des observations', []),
+          correspondance: new Correspondance('faible', { contenu: 'Des observations' }, []),
         })
       );
 
@@ -314,7 +314,7 @@ describe('La ressource des Exigences NIS 2', () => {
             contenu: '',
             contenuEnAnglais: 'This is awesome',
             referentielCompare: 'CyFun23',
-            correspondance: new Correspondance('faible', 'Des observations', [
+            correspondance: new Correspondance('faible', { contenu: 'Des observations' }, [
               {
                 reference: 'reference_1',
                 contenu: 'contenu 1',
@@ -327,6 +327,34 @@ describe('La ressource des Exigences NIS 2', () => {
 
         assert.equal(body[0].contenu, 'This is awesome');
         assert.equal(body[0].correspondances['CyFun23'].exigences[0].contenu, 'new content');
+      });
+
+      it('renvoie les observations en anglais', async () => {
+        await entrepotExigence.ajoute(
+          new ExigenceNIS2({
+            reference: '',
+            entitesCible: [],
+            objectifSecurite: '',
+            thematique: '',
+            contenu: '',
+            contenuEnAnglais: 'This is awesome',
+            referentielCompare: 'CyFun23',
+            correspondance: new Correspondance(
+              'faible',
+              { contenu: 'Des observations', contenuEnAnglais: 'some observation' },
+              [
+                {
+                  reference: 'reference_1',
+                  contenu: 'contenu 1',
+                  contenuEnAnglais: 'new content',
+                },
+              ]
+            ),
+          })
+        );
+        const { body } = await request(serveur).get('/api/exigences-nis2').query({ langue: 'EN' });
+
+        assert.equal(body[0].correspondances['CyFun23'].observations, 'some observation');
       });
     });
   });
