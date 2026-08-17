@@ -20,7 +20,7 @@ preferFrozenLockfile: true
 catalog:
   axios: ^1.18.0
   entities: ^8.0.0
-  isomorphic-dompurify: ^3.18.0
+  isomorphic-dompurify: ^3.22.0
   svelte: ^5.55.9
 
 minimumReleaseAgeExclude:

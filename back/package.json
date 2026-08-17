@@ -68,7 +68,7 @@
     "express-useragent": "^2.1.0",
     "helmet": "^8.1.0",
     "html-entities": "^2.6.0",
-    "isomorphic-dompurify": "^3.18.0",
+    "isomorphic-dompurify": "catalog:",
     "jsdom": "^29.1.1",
     "jsonwebtoken": "^9.0.3",
     "jszip": "^3.10.1",
