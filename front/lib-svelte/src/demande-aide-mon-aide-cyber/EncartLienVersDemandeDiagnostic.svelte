@@ -5,10 +5,12 @@
   import Lien from '../ui/Lien.svelte';
 
   let encart = $state<HTMLDivElement | undefined>();
+  let pageSource = $state('');
   onMount(() => {
     setTimeout(() => {
       encart?.showPopover();
     }, 500);
+    pageSource = `${window.location.pathname}#encart-lien-vers-demande-diagnostic`;
   });
 
   const fermeDialogue = () => {
@@ -63,7 +65,7 @@
             libelle="Je commence à sécuriser"
             icone="arrow-right-circle-line"
             iconeADroite
-            href="/modules/1"
+            href={`/modules/1?pageSource=${pageSource}`}
           ></Lien>
           <Lien apparence="bouton" etire type="tertiaire-sans-bordure" libelle="En savoir plus" href="/entreprises"
           ></Lien>

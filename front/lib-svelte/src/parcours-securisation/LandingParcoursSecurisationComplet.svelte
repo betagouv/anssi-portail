@@ -8,6 +8,7 @@
   import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';
   import IllustrationProgression from './animation/IllustrationProgression.svelte';
   import IllustrationRecyf from './animation/IllustrationRecyf.svelte';
+  import { onMount } from 'svelte';
 
   type Contenu = {
     titre: string;
@@ -40,6 +41,14 @@
       illustration: IllustrationProgression,
     },
   ];
+
+  let pageSourceHero = $state('');
+  let pageSourceCTACentral = $state('');
+
+  onMount(() => {
+    pageSourceHero = `${window.location.pathname}#hero`;
+    pageSourceCTACentral = `${window.location.pathname}#cta-central`;
+  });
 </script>
 
 <div class="section-hero-et-tuiles">
@@ -61,7 +70,7 @@
         has-icon
         icon="arrow-right-circle-line"
         icon-place="right"
-        href="/parcours-complet"
+        href={`/parcours-complet?pageSource=${pageSourceHero}`}
         markup="a"
       ></dsfr-button>
     {/snippet}
@@ -108,7 +117,7 @@
         has-icon
         icon="arrow-right-circle-line"
         icon-place="right"
-        href="/parcours-complet"
+        href={`/parcours-complet?pageSource=${pageSourceCTACentral}`}
         markup="a"
       ></dsfr-button>
     </div>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
-  import type { Snippet } from 'svelte';
+  import { onMount, type Snippet } from 'svelte';
   interface Props {
     titre: string;
     description: string;
@@ -8,6 +8,12 @@
   }
 
   let { titre, description, tags }: Props = $props();
+
+  let pageSource = $state('');
+
+  onMount(() => {
+    pageSource = `${window.location.pathname}#encart-promotion-parcours-complet`;
+  });
 
   const fonctionnalites = [
     {
@@ -52,7 +58,7 @@
       icon="arrow-right-circle-line"
       icon-place="right"
       slot="cta"
-      href="/parcours-complet"
+      href={`/parcours-complet?pageSource=${pageSource}`}
       markup="a"
     ></dsfr-button>
   </lab-anssi-fonctionnalites>

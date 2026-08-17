@@ -1,13 +1,11 @@
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
-  import type { Snippet } from 'svelte';
+  import { onMount, type Snippet } from 'svelte';
   interface Props {
     titre: string;
     description: string;
     tags: Snippet;
   }
-
-  let { titre, description, tags }: Props = $props();
 
   const fonctionnalites = [
     {
@@ -37,6 +35,12 @@
       illustration: '/assets/images/parcours-securisation/illustration-parcours-basique-badge.svg',
     },
   ];
+  let { titre, description, tags }: Props = $props();
+  let pageSource = $state('');
+
+  onMount(() => {
+    pageSource = `${window.location.pathname}#encart-promotion-parcours-basique`;
+  });
 </script>
 
 <dsfr-container>
@@ -59,7 +63,7 @@
       icon="arrow-right-circle-line"
       icon-place="right"
       slot="cta"
-      href="/modules/1"
+      href={`/modules/1?pageSource=${pageSource}`}
       markup="a"
     ></dsfr-button>
   </lab-anssi-fonctionnalites>
