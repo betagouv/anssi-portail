@@ -143,6 +143,12 @@
       :global(.carte-4) {
         animation-delay: 0.91s;
       }
+      :global(.carte-5) {
+        animation-delay: 1.03s;
+      }
+      :global(.carte-6) {
+        animation-delay: 1.15s;
+      }
       :global(.icone) {
         animation: apparition-icone 0.5s ease-out 0.6s both;
       }
