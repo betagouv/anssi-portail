@@ -44,7 +44,7 @@ export type CyFun23NiveauAssurance = 'Basique' | 'Important' | 'Essentiel';
 
 export interface ExigenceCyFun23 extends ExigenceBase {
   fonction: CyFun23Fonction;
-  niveauAssurance: CyFun23NiveauAssurance;
+  niveauAssurance?: CyFun23NiveauAssurance;
   estMesureCle: boolean;
   correspondance: Correspondance;
 }
@@ -88,14 +88,18 @@ export const badgesExigence = (exigence: ExigenceNis2 | ExigenceCyFun23): Badge[
         Rétablir: 'green-emeraude',
       }[exigence.fonction],
     },
-    {
-      label: exigence.niveauAssurance,
-      accent: {
-        Basique: 'green-bourgeon',
-        Important: 'brown-cafe-creme',
-        Essentiel: 'purple-glycine',
-      }[exigence.niveauAssurance],
-    },
+    ...(exigence.niveauAssurance
+      ? [
+          {
+            label: exigence.niveauAssurance,
+            accent: {
+              Basique: 'green-bourgeon',
+              Important: 'brown-cafe-creme',
+              Essentiel: 'purple-glycine',
+            }[exigence.niveauAssurance],
+          },
+        ]
+      : []),
   ] as Badge[];
 };
 
