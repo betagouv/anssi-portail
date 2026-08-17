@@ -1,6 +1,7 @@
 <script lang="ts">
   import { afficheNouvelleDA } from '$plateforme/environnement';
   import Lien from '../ui/Lien.svelte';
+  import IllustrationCompositionBizDev from './animation/IllustrationCompositionBizDev.svelte';
 </script>
 
 {#if afficheNouvelleDA}
@@ -30,12 +31,7 @@
     <div class="visuel">
       <div class="illustration">
         <figure>
-          <img
-            src="/assets/images/composition-bizdev-floriane-et-pierre.avif"
-            width="800"
-            height="450"
-            alt="Floriane Gallego et Pierre Vernier"
-          />
+          <IllustrationCompositionBizDev />
         </figure>
       </div>
     </div>
@@ -138,7 +134,7 @@
       }
     }
 
-    img {
+    :global(.illustration-animee) {
       height: auto;
       max-width: 100%;
     }
