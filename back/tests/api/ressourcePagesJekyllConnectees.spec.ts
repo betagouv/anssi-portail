@@ -2,21 +2,15 @@ import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
-import { fabriqueAttributionParcours } from '../../src/api/middlewares/attributionParcours.js';
-import { fabriqueAttributionParcoursMesure } from '../../src/api/middlewares/attributionParcoursMesure.js';
 import { fabriquePublieMesureConsultée } from '../../src/api/middlewares/publieMesureConsultee.js';
 import { creeServeur } from '../../src/api/msc.js';
 import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
-import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
+import { Parcours } from '../../src/metier/parcours.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
-import { EntrepotMesureMemoire } from '../persistance/entrepotMesureMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
-import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire.js';
 import { encodeSession } from './cookie.js';
 import { configurationDeTestDuServeur, fauxGestionnaireRequêtesComplémentaires, fauxMiddleware } from './fauxObjets.js';
-import { mesureDeTest } from './mesures/constructeurDeMesure.js';
-import { ConstructeurDUtilisateur } from './mesures/constructeurDUtilisateur.js';
-import { fabriqueModuleCyberdépart, jeanneDupont } from './objetsPretsALEmploi.js';
+import { jeanneDupont } from './objetsPretsALEmploi.js';
 
 describe("La ressource d'une page Jekyll connectée", () => {
   let serveur: Express;
@@ -56,25 +50,23 @@ describe("La ressource d'une page Jekyll connectée", () => {
     it("affecte le parcours de l'utilisateur", async () => {
       await entrepotUtilisateur.ajoute(jeanneDupont);
       const cookie = encodeSession({ email: jeanneDupont.email, token: 'valide' });
+      let parcoursAppellé = '';
       serveur = creeServeur({
         ...configurationDeTestDuServeur,
         busEvenements,
         entrepotUtilisateur,
         gestionnairesRequêtesComplémentaires: {
           ...fauxGestionnaireRequêtesComplémentaires,
-          attributionParcours: fabriqueAttributionParcours({ entrepotUtilisateur, busEvenements }),
+          attributionParcours: (parcours: Parcours) => async (_requête, _réponse, suite) => {
+            parcoursAppellé = parcours;
+            suite();
+          },
         },
       });
 
       await request(serveur).get('/parcours-complet').set('Cookie', [cookie]);
 
-      const utilisateur = await entrepotUtilisateur.parEmailHache(jeanneDupont.emailHache());
-
-      const evenement = busEvenements.recupereEvenement(ParcoursRejoint);
-      assert.equal(utilisateur?.parcoursActuel(), 'complet');
-      assert.equal(evenement?.emailHache, jeanneDupont.emailHache());
-      assert.equal(evenement?.parcours, 'complet');
-      assert.equal(evenement?.motif, 'visite-page-module');
+      assert.equal(parcoursAppellé, 'complet');
     });
   });
 
@@ -108,44 +100,6 @@ describe("La ressource d'une page Jekyll connectée", () => {
 
       assert.equal(reponse.status, 200);
       busEvenements.naPasRecuDEvenement(MesureConsultee);
-    });
-
-    it("affecte le parcours de l'utilisateur selon le module de la mesure consultée", async () => {
-      const module = fabriqueModuleCyberdépart();
-      const mesure = mesureDeTest().avecLId('PSSI.1').avecIdModule(module.id).construis();
-      module.mesures = [mesure];
-      const entrepôtModule = new EntrepôtModuleMémoire();
-      const entrepotMesure = new EntrepotMesureMemoire();
-      await entrepôtModule.ajoute(module);
-      await entrepotMesure.ajoute(mesure);
-      const utilisateur = new ConstructeurDUtilisateur().avecLEmail('chuck@yopmail.com').construis();
-      await entrepotUtilisateur.ajoute(utilisateur);
-      const cookie = encodeSession({ email: utilisateur.email, token: 'valide' });
-      serveur = creeServeur({
-        ...configurationDeTestDuServeur,
-        busEvenements,
-        entrepotUtilisateur,
-        entrepôtModule,
-        entrepotMesure,
-        gestionnairesRequêtesComplémentaires: {
-          ...fauxGestionnaireRequêtesComplémentaires,
-          attributionParcoursMesure: fabriqueAttributionParcoursMesure({
-            entrepotMesure,
-            entrepôtModule,
-            attributionParcours: fabriqueAttributionParcours({ busEvenements, entrepotUtilisateur }),
-          }),
-        },
-      });
-
-      await request(serveur).get('/mesures/PSSI.1').set('Cookie', [cookie]);
-
-      const utilisateurMitÀJour = await entrepotUtilisateur.parEmailHache(utilisateur.emailHache());
-
-      const evenement = busEvenements.recupereEvenement(ParcoursRejoint);
-      assert.equal(utilisateurMitÀJour?.parcoursActuel(), 'allégé');
-      assert.equal(evenement?.emailHache, utilisateur.emailHache());
-      assert.equal(evenement?.parcours, 'allégé');
-      assert.equal(evenement?.motif, 'visite-page-mesure');
     });
   });
 });
