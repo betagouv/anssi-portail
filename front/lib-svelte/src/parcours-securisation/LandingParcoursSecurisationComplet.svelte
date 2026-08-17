@@ -2,6 +2,7 @@
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
   import BlocContenuLanding from '../ui/BlocContenuLanding.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
+  import IllustrationHerosParcoursComplet from './animation/IllustrationHerosParcoursComplet.svelte';
 
   type Contenu = {
     titre: string;
@@ -56,7 +57,6 @@
     description="Accédez à 6 modules élaborés pour protéger votre organisation contre les risques cyber les plus courants et faciliter votre démarche de mise en conformité NIS&nbsp;2 si vous êtes concerné."
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
     tag="+6000 organisations déjà accompagnées 🚀"
-    srcImage="/assets/images/parcours-securisation/illustration-hero-parcours-complet.png"
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
@@ -74,6 +74,11 @@
         href="/parcours-complet"
         markup="a"
       ></dsfr-button>
+    {/snippet}
+    {#snippet illustration()}
+      <figure class="illustration">
+        <IllustrationHerosParcoursComplet />
+      </figure>
     {/snippet}
   </HeroLandingPage>
 
@@ -139,5 +144,10 @@
     .cta-central {
       text-align: center;
     }
+  }
+
+  .illustration {
+    margin: 0 auto;
+    width: 100%;
   }
 </style>
