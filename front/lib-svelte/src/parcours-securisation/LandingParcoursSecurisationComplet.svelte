@@ -118,6 +118,9 @@
 </section>
 
 <style lang="scss">
+  .section-hero-et-tuiles {
+    word-break: break-word;
+  }
   .section-tuiles {
     lab-anssi-carrousel-tuiles {
       margin-block-start: -2.5rem;
