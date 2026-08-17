@@ -9,6 +9,7 @@ import { CodeRegion } from '../metier/referentielRegions.js';
 import { CodeSecteur } from '../metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../metier/referentielTranchesEffectifEtablissement.js';
 import { ReponsesTestMaturite } from '../metier/resultatTestMaturite.js';
+import { Suivi } from '../metier/suivi.js';
 
 export type DonneesEvenement =
   | DonneesEvenementNouvelUtilisateur
@@ -110,10 +111,16 @@ type DonnéesBadgeCyberdépartDébloqué = Evenement<
 
 type DonnéesParcoursRejoint = Evenement<
   'PARCOURS_REJOINT',
-  { idUtilisateur: string; parcours: Parcours; motif: MotifChangementParcours }
+  { idUtilisateur: string; parcours: Parcours; motif: MotifChangementParcours; suivi?: Suivi }
 >;
 
 type DonnéesParcoursChangé = Evenement<
   'PARCOURS_CHANGÉ',
-  { idUtilisateur: string; parcoursPrécédent: Parcours; parcours: Parcours; motif: MotifChangementParcours }
+  {
+    idUtilisateur: string;
+    parcoursPrécédent: Parcours;
+    parcours: Parcours;
+    motif: MotifChangementParcours;
+    suivi?: Suivi;
+  }
 >;

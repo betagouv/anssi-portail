@@ -17,14 +17,19 @@ describe("L'abonnement qui consigne l'évènement de rattachement à un parcours
       maintenant: () => new Date('2025-03-10'),
     };
 
+    const suivi = {
+      campagne: 'campagne_2026_NA',
+      source: 'landing-parcours-securisation',
+    };
+
     await consigneParcoursRejointDansJournal({
       adaptateurHorloge,
       adaptateurJournal,
-    })(new ParcoursRejoint('test@email-hache', 'complet', 'prise-en-compte-mesure'));
+    })(new ParcoursRejoint('test@email-hache', 'complet', 'prise-en-compte-mesure', suivi));
 
     assert.deepEqual(evenementRecu, {
       type: 'PARCOURS_REJOINT',
-      donnees: { idUtilisateur: 'test@email-hache', parcours: 'complet', motif: 'prise-en-compte-mesure' },
+      donnees: { idUtilisateur: 'test@email-hache', parcours: 'complet', motif: 'prise-en-compte-mesure', suivi },
       date: new Date('2025-03-10'),
     });
   });
