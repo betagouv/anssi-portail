@@ -9,7 +9,7 @@
       class="fond"
       clip-rule="evenodd"
     />
-    <g class="carte carte-1">
+    <g class="carte carte-6">
       <rect width="340" height="224" x="79" y="51" fill="#fff" rx="12" />
       <rect width="340" height="224" x="79" y="51" stroke="#6a6af4" stroke-width="2" rx="12" />
       <g>
@@ -54,7 +54,7 @@
         </g>
       </g>
     </g>
-    <g class="carte carte-2">
+    <g class="carte carte-5">
       <rect width="340" height="224" x="73" y="45" fill="#fff" rx="12" />
       <rect width="340" height="224" x="73" y="45" stroke="#6a6af4" stroke-width="2" rx="12" />
       <g>
@@ -101,7 +101,7 @@
         </g>
       </g>
     </g>
-    <g class="carte carte-3">
+    <g class="carte carte-1">
       <rect width="340" height="224" x="67" y="39" fill="#fff" rx="12" />
       <rect width="340" height="224" x="67" y="39" stroke="#6a6af4" stroke-width="2" rx="12" />
       <g>
@@ -179,7 +179,7 @@
       stroke-linecap="round"
       stroke-miterlimit="10"
       stroke-width="3"
-      d="M179 284.04c.62 15.25 11.87 29.35 26.6 33.6 11.2 3.24 23.81.52 33.16-6.45m0 0a36 36 0 0 0 7.76-7.88c3.17-4.52 5.4-9.9 5.32-15.35s-2.79-11.06-7.56-13.8c-8.5-4.93-20.66 1.65-22.88 11.18s3.89 19.66 12.7 24.02q2.25 1.12 4.66 1.82Zm0 0c7.74 2.29 16.37 1.54 24.12-.95 23.49-7.5 39.59-28.48 54.12-48.24"
+      d="M179 284.04c.62 15.25 11.87 29.35 26.6 33.6 11.2 3.24 23.81.52 33.16-6.45a36 36 0 0 0 7.76-7.88c3.17-4.52 5.4-9.9 5.32-15.35s-2.79-11.06-7.56-13.8c-8.5-4.93-20.66 1.65-22.88 11.18s3.89 19.66 12.7 24.02q2.25 1.12 4.66 1.82c7.74 2.29 16.37 1.54 24.12-.95 23.49-7.5 39.59-28.48 54.12-48.24"
       class="trace"
       pathLength="1"
     />
