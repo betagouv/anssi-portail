@@ -4,14 +4,14 @@ import jsonwebtoken from 'jsonwebtoken';
 import { createRequest, createResponse } from 'node-mocks-http';
 import { OutgoingHttpHeaders } from 'node:http';
 import { beforeEach, describe, it } from 'node:test';
-import { AdaptateurJWT } from '../../src/api/adaptateurJWT.js';
-import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
-import { fabriqueMiddleware, Middleware } from '../../src/api/middlewares/middleware.js';
-import { AdaptateurEnrichissement } from '../../src/infra/enrichissement/adaptateurEnrichissement.js';
-import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
-import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
-import { Utilisateur } from '../../src/metier/utilisateur.js';
-import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
+import { AdaptateurJWT } from '../../../src/api/adaptateurJWT.js';
+import { FournisseurChemin } from '../../../src/api/fournisseurChemin.js';
+import { fabriqueMiddleware, Middleware } from '../../../src/api/middlewares/middleware.js';
+import { AdaptateurEnrichissement } from '../../../src/infra/enrichissement/adaptateurEnrichissement.js';
+import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
+import { AdaptateurHachage } from '../../../src/infra/adaptateurHachage.js';
+import { Utilisateur } from '../../../src/metier/utilisateur.js';
+import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateurMemoire.js';
 import {
   fauxAdaptateurEnrichissement,
   fauxAdaptateurEnvironnement,
@@ -19,8 +19,8 @@ import {
   fauxAdaptateurJWT,
   fauxFournisseurDeChemin,
   ressourceFactice,
-} from './fauxObjets.js';
-import { jeanneDupont } from './objetsPretsALEmploi.js';
+} from '../fauxObjets.js';
+import { jeanneDupont } from '../objetsPretsALEmploi.js';
 
 const { JsonWebTokenError, TokenExpiredError } = jsonwebtoken;
 
