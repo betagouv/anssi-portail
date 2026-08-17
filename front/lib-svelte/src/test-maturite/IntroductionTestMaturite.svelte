@@ -100,6 +100,7 @@
         { label: '⏱️ 5 min.', accent: 'purple-glycine' },
         { label: '🔥 +12k organisations ont fait le test', accent: 'purple-glycine' },
       ]}
+      class="avec-image-fond"
     >
       {#snippet titreHtml()}
         Quelle est la <MotEnExergue motif="vague" couleur="macaron">maturité</MotEnExergue>
