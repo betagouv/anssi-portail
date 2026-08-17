@@ -10,6 +10,13 @@
 
   const selectionneLeTutoriel = (index: number) => {
     étatDesModales[index] = true;
+    const tutoriel = mesure.tutoriels.at(index);
+    window._paq?.push([
+      'trackEvent',
+      'Parcours sécurisation',
+      `Ouverture tutoriel ${mesure.id}`,
+      tutoriel?.titre ?? '',
+    ]);
   };
 </script>
 
