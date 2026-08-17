@@ -8,6 +8,7 @@
   import IllustrationProtegerOrganisation from '../accueil/animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
   import Bouton from '../ui/Bouton.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
+  import { onMount } from 'svelte';
 
   const tagsParcoursBasique = [
     {
@@ -51,6 +52,12 @@
   const basculePause = () => {
     enPause = !enPause;
   };
+
+  let pageSource = $state('');
+
+  onMount(() => {
+    pageSource = `${window.location.pathname}#hero`;
+  });
 </script>
 
 <div class="section-hero-et-tuiles">
@@ -71,7 +78,7 @@
         has-icon
         icon="arrow-right-circle-line"
         icon-place="right"
-        href="/modules/1"
+        href={`/modules/1?pageSource=${pageSource}`}
         markup="a"
       ></dsfr-button>
     {/snippet}

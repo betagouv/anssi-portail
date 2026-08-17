@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
+  import { onMount, type Component } from 'svelte';
   import BlocContenuLanding from '../ui/BlocContenuLanding.svelte';
   import BlocDiagnostic from '../ui/BlocDiagnostic.svelte';
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
@@ -40,6 +40,14 @@
       illustration: IllustrationBadge,
     },
   ];
+
+  let pageSourceHero = $state('');
+  let pageSourceCTACentral = $state('');
+
+  onMount(() => {
+    pageSourceHero = `${window.location.pathname}#hero`;
+    pageSourceCTACentral = `${window.location.pathname}#cta-central`;
+  });
 </script>
 
 <div class="section-hero-et-tuiles">
@@ -60,7 +68,7 @@
         has-icon
         icon="arrow-right-circle-line"
         icon-place="right"
-        href="/modules/1"
+        href={`/modules/1?pageSource=${pageSourceHero}`}
         markup="a"
       ></dsfr-button>
     {/snippet}
@@ -107,7 +115,7 @@
         has-icon
         icon="arrow-right-circle-line"
         icon-place="right"
-        href="/modules/1"
+        href={`/modules/1?pageSource=${pageSourceCTACentral}`}
         markup="a"
       ></dsfr-button>
     </div>

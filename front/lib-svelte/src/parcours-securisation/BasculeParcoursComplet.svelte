@@ -1,5 +1,12 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import Lien from '../ui/Lien.svelte';
+
+  let pageSource = $state('');
+
+  onMount(() => {
+    pageSource = `${window.location.pathname}#bascule-parcours-complet`;
+  });
 </script>
 
 <dsfr-callout
@@ -20,7 +27,7 @@
       etire
       icone="arrow-right-circle-line"
       iconeADroite
-      href="/parcours-complet"
+      href={`/parcours-complet?pageSource=${pageSource}`}
     />
   </div>
 </dsfr-callout>

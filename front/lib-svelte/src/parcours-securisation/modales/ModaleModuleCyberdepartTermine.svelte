@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import Bouton from '../../ui/Bouton.svelte';
   import Lien from '../../ui/Lien.svelte';
   import Modale from '../../ui/Modale.svelte';
@@ -8,6 +9,11 @@
   };
 
   let { estOuverte = $bindable() }: Props = $props();
+  let pageSource = $state('');
+
+  onMount(() => {
+    pageSource = `${window.location.pathname}#modale-module-cyberdepart-termine`;
+  });
 </script>
 
 <Modale bind:estOuverte titre="🎉 Bravo !">
@@ -23,7 +29,7 @@
   {#snippet actions()}
     <Lien
       apparence="bouton"
-      href="/parcours-complet"
+      href={`/parcours-complet?pageSource=${pageSource}`}
       libelle="Poursuivre le parcours"
       iconeADroite
       icone="arrow-right-circle-line"
