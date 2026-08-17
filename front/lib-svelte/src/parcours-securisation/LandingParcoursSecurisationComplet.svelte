@@ -96,7 +96,7 @@
           titre={contenu.titre}
           description={contenu.description}
           alignement={index % 2 === 0 ? 'texte-gauche' : 'texte-droite'}
-          illustration={contenu.ilustration}
+          image={contenu.ilustration}
         />
       {/each}
     </div>

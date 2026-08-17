@@ -1,15 +1,18 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+
   type Props = {
     titre: string;
     description: string;
     alignement: 'texte-gauche' | 'texte-droite';
-    illustration: {
+    image?: {
       src: string;
       alt: string;
     };
+    illustration?: Snippet;
   };
 
-  const { titre, description, alignement, illustration }: Props = $props();
+  const { titre, description, alignement, image, illustration }: Props = $props();
 </script>
 
 <div class={['bloc-contenu', alignement]}>
@@ -18,9 +21,15 @@
     <p class="description">{description}</p>
   </div>
 
-  <div class="illustration">
-    <img src={illustration.src} alt={illustration.alt} />
-  </div>
+  {#if illustration || image}
+    <div class="illustration">
+      {#if illustration}
+        {@render illustration()}
+      {:else if image}
+        <img src={image.src} alt={image.alt} />
+      {/if}
+    </div>
+  {/if}
 </div>
 
 <style lang="scss">
@@ -76,7 +85,8 @@
     display: flex;
     justify-content: center;
 
-    img {
+    img,
+    :global(.illustration-animee) {
       width: 100%;
       max-width: 486px;
       height: auto;

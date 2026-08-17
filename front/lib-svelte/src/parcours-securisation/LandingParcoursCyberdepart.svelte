@@ -1,17 +1,19 @@
 <script lang="ts">
+  import type { Component } from 'svelte';
   import BlocContenuLanding from '../ui/BlocContenuLanding.svelte';
   import BlocDiagnostic from '../ui/BlocDiagnostic.svelte';
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
+  import IllustrationBadge from './animation/IllustrationBadge.svelte';
   import IllustrationHerosParcoursBasique from './animation/IllustrationHerosParcoursBasique.svelte';
+  import IllustrationMesure from './animation/IllustrationMesure.svelte';
+  import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';
+  import IllustrationTuto from './animation/IllustrationTuto.svelte';
 
   type Contenu = {
     titre: string;
     description: string;
-    ilustration: {
-      src: string;
-      alt: string;
-    };
+    illustration: Component;
   };
 
   const contenus: Contenu[] = [
@@ -19,35 +21,23 @@
       titre: 'Rapides à mettre en place',
       description:
         '12 mesures accessibles, souvent réalisables en quelques minutes pour commencer à vous protéger des cyberattaques.',
-      ilustration: {
-        src: '/assets/images/parcours-securisation/illustration-parcours-basique-mots-de-passe.svg',
-        alt: 'Carte illustrant une mesure rapide : évitez les mots de passe faciles à deviner',
-      },
+      illustration: IllustrationMesure,
     },
     {
       titre: 'Pédagogique',
       description: 'Pas de jargon, on vulgarise la cyber pour vous.',
-      ilustration: {
-        src: '/assets/images/parcours-securisation/illustration-parcours-basique-pourquoi.svg',
-        alt: 'Vidéo pédagogique : pourquoi activer la vérification en deux étapes',
-      },
+      illustration: IllustrationPedagogique,
     },
     {
       titre: 'Pratico-pratique',
       description: 'Des tutos et des outils pour vous aider à faire, concrètement.',
-      ilustration: {
-        src: '/assets/images/parcours-securisation/illustration-parcours-basique-comment.svg',
-        alt: 'Tutoriel pas à pas : comment activer la vérification en deux étapes',
-      },
+      illustration: IllustrationTuto,
     },
     {
       titre: 'Décrochez votre badge Cyberdépart',
       description:
         "Valorisez vos efforts et l'engagement de votre organisation dans une première démarche de sécurisation.",
-      ilustration: {
-        src: '/assets/images/parcours-securisation/illustration-parcours-basique-badge.svg',
-        alt: 'Badge Cyberdépart obtenu après avoir complété les 13 mesures',
-      },
+      illustration: IllustrationBadge,
     },
   ];
 </script>
@@ -57,7 +47,6 @@
     description="12 mesures pensées pour les non-spécialistes, applicables en quelques minutes pour commencer à renforcer votre cybersécurité et prendre votre Cyberdépart&nbsp;!"
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
     tag="+6000 organisations déjà accompagnées 🚀"
-    imageDeFond="/assets/images/parcours-securisation/fond-hero-landing-parcours-securisation.svg"
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
@@ -97,12 +86,16 @@
   <dsfr-container>
     <div class="blocs-contenu">
       {#each contenus as contenu, index (contenu.titre)}
+        {@const Illustration = contenu.illustration}
         <BlocContenuLanding
           titre={contenu.titre}
           description={contenu.description}
           alignement={index % 2 === 0 ? 'texte-gauche' : 'texte-droite'}
-          illustration={contenu.ilustration}
-        />
+        >
+          {#snippet illustration()}
+            <Illustration />
+          {/snippet}
+        </BlocContenuLanding>
       {/each}
     </div>
 

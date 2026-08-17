@@ -90,7 +90,8 @@
     }
 
     :global(.icone),
-    :global(.forme) {
+    :global(.forme),
+    :global(.curseur) {
       transform-box: fill-box;
       transform-origin: center;
     }
@@ -113,15 +114,18 @@
       transition-delay: 0s;
 
       :global(.image),
+      :global(.fond),
       :global(.icone),
       :global(.bulle),
       :global(.profil),
       :global(.carte),
+      :global(.curseur),
       :global(.forme) {
         will-change: transform, opacity;
       }
 
-      :global(.image) {
+      :global(.image),
+      :global(.fond) {
         animation: apparition-photo 0.6s ease-out 0s both;
       }
       :global(.trace) {
@@ -129,6 +133,15 @@
       }
       :global(.carte) {
         animation: apparition-bulle 0.6s ease-out 0.55s both;
+      }
+      :global(.carte-2) {
+        animation-delay: 0.67s;
+      }
+      :global(.carte-3) {
+        animation-delay: 0.79s;
+      }
+      :global(.carte-4) {
+        animation-delay: 0.91s;
       }
       :global(.icone) {
         animation: apparition-icone 0.5s ease-out 0.6s both;
@@ -139,8 +152,11 @@
       :global(.profil) {
         animation: apparition-profil 0.6s ease-out 1s both;
       }
+      :global(.curseur) {
+        animation: apparition-curseur 0.5s ease-out 1.1s both;
+      }
       :global(.forme) {
-        animation: apparition-icone 0.5s ease-out 1.1s both;
+        animation: apparition-icone 0.5s ease-out 1.2s both;
       }
     }
   }
@@ -162,6 +178,13 @@
     from {
       opacity: 0;
       transform: translateX(-18px);
+    }
+  }
+
+  @keyframes apparition-curseur {
+    from {
+      opacity: 0;
+      transform: translate(-10px, 10px) scale(0.9);
     }
   }
 
