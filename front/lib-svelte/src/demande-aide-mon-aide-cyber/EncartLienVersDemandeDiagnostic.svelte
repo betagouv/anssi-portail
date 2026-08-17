@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { afficheNouvelleDA } from '$plateforme/environnement';
   import { onMount } from 'svelte';
   import { clic } from '../directives/actions.svelte';
   import Lien from '../ui/Lien.svelte';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   let encart = $state<HTMLDivElement | undefined>();
   onMount(() => {
@@ -25,6 +25,7 @@
         icon-place="right"
         icon="close-line"
         kind="tertiary-no-outline"
+        size="sm"
         use:clic={fermeDialogue}
       ></dsfr-button>
     </div>
@@ -137,23 +138,32 @@
 
           ul {
             margin-top: 0;
-            padding-left: 1.5rem;
+            padding-left: 0;
+            list-style: none;
 
             li {
+              position: relative;
+              padding-left: 1.5rem;
+
               &:not(:last-child) {
                 margin-bottom: 1rem;
               }
 
-              &:nth-child(1)::marker {
-                content: '⚡ ';
+              &::before {
+                position: absolute;
+                left: 0;
               }
 
-              &:nth-child(2)::marker {
-                content: '💡 ';
+              &:nth-child(1)::before {
+                content: '⚡';
               }
 
-              &:nth-child(3)::marker {
-                content: '✅ ';
+              &:nth-child(2)::before {
+                content: '💡';
+              }
+
+              &:nth-child(3)::before {
+                content: '✅';
               }
             }
           }
@@ -208,7 +218,7 @@
       margin: 2rem;
     }
 
-    @include a-partir-de(xl) {
+    @include a-partir-de(xxl) {
       max-width: taille-pour-colonnes(4);
     }
   }
