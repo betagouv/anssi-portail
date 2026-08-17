@@ -170,6 +170,7 @@
 
   .section-hero-et-tuiles {
     background-color: var(--pink-tuile-850-200);
+    word-break: break-word;
   }
 
   .section-tuiles {
