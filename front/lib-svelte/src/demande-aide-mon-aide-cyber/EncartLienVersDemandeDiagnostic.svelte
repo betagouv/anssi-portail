@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { clic } from '../directives/actions.svelte';
   import Lien from '../ui/Lien.svelte';
+  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   let encart = $state<HTMLDivElement | undefined>();
   onMount(() => {
@@ -27,25 +28,58 @@
         use:clic={fermeDialogue}
       ></dsfr-button>
     </div>
-    <div class="contenu">
-      <dsfr-badge type="accent" accent="yellow-tournesol" label="Diagnostic cyber gratuit" size="sm"></dsfr-badge>
-      <h5>Obtenez 6 recommandations pour protéger votre organisation</h5>
-      <p class="texte-standard-md">
-        Bénéficiez d’un <strong>premier diagnostic gratuit</strong> accompagné d’un Aidant cyber et recevez
-        <strong>6 recommandations prioritaires</strong>
-        à mettre en place pour améliorer la cybersécurité de votre organisation.
-      </p>
-      <div class="conteneur-bouton">
-        <Lien
-          apparence="bouton"
-          type="primaire"
-          libelle="Demander un diagnostic gratuit"
-          href="/cyberdepart?origine=guide-dhygiene-informatique"
-        ></Lien>
+    <div class="contenu" class:nouvelleDA={afficheNouvelleDA}>
+      {#if afficheNouvelleDA}
+        <dsfr-badge type="accent" accent="green-bourgeon" label="+6000 organisations accompagnées 🚀" size="sm"
+        ></dsfr-badge>
+
+        <h3>13 mesures simples pour protéger votre organisation contre les cyberattaques</h3>
+
+        <ul>
+          <li><strong>Rapide</strong> à mettre en place</li>
+          <li><strong>Pédagogique :</strong> on vulgarise la cyber pour vous</li>
+          <li><strong>Pratico-pratique :</strong> des outils pour vous aider</li>
+        </ul>
+
+        <div class="appât fond-bleu-france-950"><strong>🏆 Décrochez votre badge Cyberdépart</strong></div>
+      {:else}
+        <dsfr-badge type="accent" accent="yellow-tournesol" label="Diagnostic cyber gratuit" size="sm"></dsfr-badge>
+
+        <h5>Obtenez 6 recommandations pour protéger votre organisation</h5>
+
+        <p class="texte-standard-md">
+          Bénéficiez d’un <strong>premier diagnostic gratuit</strong> accompagné d’un Aidant cyber et recevez
+          <strong>6 recommandations prioritaires</strong>
+          à mettre en place pour améliorer la cybersécurité de votre organisation.
+        </p>
+      {/if}
+      <div class="conteneur-bouton" class:nouvelleDA={afficheNouvelleDA}>
+        {#if afficheNouvelleDA}
+          <Lien
+            apparence="bouton"
+            etire
+            type="primaire"
+            libelle="Je commence à sécuriser"
+            icone="arrow-right-circle-line"
+            iconeADroite
+            href="/modules/1"
+          ></Lien>
+          <Lien apparence="bouton" etire type="tertiaire-sans-bordure" libelle="En savoir plus" href="/entreprises"
+          ></Lien>
+        {:else}
+          <Lien
+            apparence="bouton"
+            type="primaire"
+            libelle="Demander un diagnostic gratuit"
+            href="/cyberdepart?origine=guide-dhygiene-informatique"
+          ></Lien>
+        {/if}
       </div>
-      <p class="texte-mention-xs">
-        Ce diagnostic gratuit proposé par l'État n'est pas adapté aux particuliers ni aux entreprises mono-salariées.
-      </p>
+      {#if !afficheNouvelleDA}
+        <p class="texte-mention-xs">
+          Ce diagnostic gratuit proposé par l'État n'est pas adapté aux particuliers ni aux entreprises mono-salariées.
+        </p>
+      {/if}
     </div>
   </div>
 </div>
@@ -96,6 +130,40 @@
       }
 
       .contenu {
+        &.nouvelleDA {
+          h3 {
+            margin: 0.5rem 0 1rem;
+          }
+
+          ul {
+            margin-top: 0;
+            padding-left: 1.5rem;
+
+            li {
+              &:not(:last-child) {
+                margin-bottom: 1rem;
+              }
+
+              &:nth-child(1)::marker {
+                content: '⚡ ';
+              }
+
+              &:nth-child(2)::marker {
+                content: '💡 ';
+              }
+
+              &:nth-child(3)::marker {
+                content: '✅ ';
+              }
+            }
+          }
+
+          .appât {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+          }
+        }
+
         margin: 0 1rem 1rem;
         display: flex;
         flex-direction: column;
@@ -113,7 +181,20 @@
         }
 
         .conteneur-bouton {
-          align-self: center;
+          &.nouvelleDA {
+            display: flex;
+            gap: 1rem;
+
+            margin-top: 1.5rem;
+
+            :global(*) {
+              flex-grow: 1;
+            }
+          }
+
+          &:not(.nouvelleDA) {
+            align-self: center;
+          }
         }
       }
     }
