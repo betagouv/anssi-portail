@@ -83,7 +83,13 @@
         }
 
         &.nouvelle-da {
-          background: var(--artwork-major-blue-france);
+          background: {
+            color: var(--artwork-major-blue-france);
+            image: url('/assets/images/motif-fond-heros-bleu-mobile.avif');
+            repeat: no-repeat;
+            position: -263px -214px;
+            size: 1383px 1761px;
+          }
 
           img {
             max-height: 560px;
