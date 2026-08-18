@@ -83,16 +83,16 @@
         }
 
         &.nouvelle-da {
+          background-color: var(--background-flat-blue-france);
+
           background: {
-            color: var(--artwork-major-blue-france);
-            image: url('/assets/images/motif-fond-heros-bleu-mobile.avif');
+            image: url('/assets/images/motif-fond-heros-bleu.avif');
             repeat: no-repeat;
-            position: -263px -214px;
-            size: 1383px 1761px;
+            position: calc(50% + 60px) -41px;
           }
 
-          img {
-            max-height: 560px;
+          .illustration-animee {
+            max-width: 490px;
             margin: auto;
           }
         }

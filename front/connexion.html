@@ -29,7 +29,7 @@ styles: /assets/styles/connexion.css
     </div>
     <div class="contenu-secondaire {{classe-nouvelle-da}}">
       {% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
-      <img src="/assets/images/illustration-connexion-nouvelle-da.avif" width="560" height="560" alt="" />
+      {% include composant-svelte.html id="illustration-connexion-inscription" %}
       {% else %}
       <img src="/assets/images/illustration-connexion.svg" width="560" height="420" alt="" />
       {% endif %}
