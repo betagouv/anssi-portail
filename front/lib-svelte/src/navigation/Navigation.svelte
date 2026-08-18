@@ -79,6 +79,10 @@
 </dsfr-navigation>
 
 <style lang="scss">
+  dsfr-navigation:not(:defined) .bouton-nis2 {
+    display: none;
+  }
+
   .bouton-nis2 {
     border-top: 1px solid var(--border-default-grey);
     background-color: var(--yellow-moutarde-975, #fef5e8);
