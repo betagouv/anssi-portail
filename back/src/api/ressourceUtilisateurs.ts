@@ -34,10 +34,11 @@ const construitLeSuiviDepuisLaRequête = (
 
   if (!campagne && !parcoursDestination && !cheminSource) return undefined;
 
-  const suivi: CompteCree['suivi'] = {};
-  suivi.campagne = campagne as string | undefined;
-  suivi.parcoursDestination = parcoursDestination;
-  suivi.source = cheminSource;
+  const suivi: CompteCree['suivi'] = {
+    ...(campagne && { campagne: campagne as string }),
+    ...(parcoursDestination && { parcoursDestination }),
+    ...(cheminSource && { source: cheminSource }),
+  };
 
   return suivi;
 };
