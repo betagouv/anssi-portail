@@ -30,7 +30,7 @@
     "concurrently": "^10.0.0",
     "prettier": "catalog:",
     "prettier-plugin-svelte": "^3.5.1",
-    "eslint": "^9.39.4",
+    "eslint": "^10.0.0",
     "tsx": "catalog:",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.67.0",
