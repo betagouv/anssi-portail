@@ -20,7 +20,7 @@
 
   .mot-en-exergue {
     position: relative;
-    white-space: nowrap;
+    white-space: break-spaces;
     z-index: 10;
 
     &::after {
