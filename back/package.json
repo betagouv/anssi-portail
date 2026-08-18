@@ -54,7 +54,7 @@
     "@napi-rs/canvas": "^1.0.5",
     "@anssi-portail/axios": "workspace:^",
     "@sentry/node": "^7.120.4",
-    "@types/bcrypt": "^5.0.2",
+    "@types/bcrypt": "^6.0.0",
     "@types/cors": "^2.8.19",
     "bcrypt": "^6.0.0",
     "compression": "^1.8.1",
