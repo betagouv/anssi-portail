@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import type { ClassValue } from 'svelte/elements';
-  import FilAriane, { type Props as PropriétésFilAriane } from './FilAriane.svelte';
   import type { Badge } from './badge.type';
+  import FilAriane, { type Props as PropriétésFilAriane } from './FilAriane.svelte';
   import GroupeDeBadges from './GroupeDeBadges.svelte';
 
   type Props = {
@@ -14,7 +14,7 @@
     titre?: string;
     titreHtml?: Snippet;
     variante: 'bleu-clair' | 'vert-clair' | 'cafe-creme';
-    mentionAdditionnelle?: string;
+    mentionAdditionnelle?: Snippet;
     class?: ClassValue;
   };
 
@@ -64,7 +64,7 @@
 </dsfr-container>
 {#if mentionAdditionnelle}
   <dsfr-container class="mention-additionnelle">
-    {mentionAdditionnelle}
+    {@render mentionAdditionnelle()}
   </dsfr-container>
 {/if}
 
@@ -73,11 +73,10 @@
   @use '../../../assets/styles/grille' as *;
 
   .mention-additionnelle {
-    background-color: var(--background-alt-brown-cafe-creme);
     color: #666666;
     font-size: 0.75rem;
     line-height: 1.25rem;
-    padding-bottom: 2rem;
+    padding: 1rem 0;
   }
 
   .conteneur {
@@ -175,6 +174,8 @@
 
         .titre {
           margin-bottom: 1rem;
+          word-break: break-word;
+
           @include a-partir-de(lg) {
             margin-bottom: 1.5rem;
           }

@@ -122,7 +122,7 @@
     .mot-souligne {
       position: relative;
       z-index: 0;
-      white-space: nowrap;
+      white-space: break-spaces;
 
       &::after {
         content: '';

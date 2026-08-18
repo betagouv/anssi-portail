@@ -1,15 +1,15 @@
 <script lang="ts">
+  import { afficheNouvelleDA } from '$plateforme/environnement';
   import axios from 'axios';
   import { derived } from 'svelte/store';
   import { profilStore } from '../stores/profil.store';
-  import Lien from '../ui/Lien.svelte';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
   import Alternatives from '../ui/Alternatives.svelte';
-  import HerosRiche from '../ui/HerosRiche.svelte';
-  import { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import Bouton from '../ui/Bouton.svelte';
-  import CarrouselMaturite from './animation/CarrouselMaturite.svelte';
+  import { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import HerosRiche from '../ui/HerosRiche.svelte';
+  import Lien from '../ui/Lien.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
+  import CarrouselMaturite from './animation/CarrouselMaturite.svelte';
 
   export let introFaite = false;
   let enPause = false;
@@ -93,9 +93,6 @@
       description="Obtenez en 6 questions une évaluation indicative de la maturité cyber de votre organisation."
       {propriétésFilAriane}
       variante="cafe-creme"
-      mentionAdditionnelle="Le résultat obtenu est une évaluation indicative basée sur un modèle élaboré par l’ANSSI. La maturité cyber n’est
-      pas une évaluation du niveau de sécurité des systèmes d’information d’une organisation mais de sa posture à
-      l’égard des enjeux cyber."
       badges={[
         { label: '⏱️ 5 min.', accent: 'purple-glycine' },
         { label: '🔥 +12k organisations ont fait le test', accent: 'purple-glycine' },
@@ -126,6 +123,11 @@
           <Bouton libelle="Débuter le test" type="primaire" surClic={debuteTeste} />
           <Lien href="/session-groupe" icone="team-fill" libelle="Accéder à l’espace session en groupe" />
         </div>
+      {/snippet}
+      {#snippet mentionAdditionnelle()}
+        Le résultat obtenu est une évaluation indicative basée sur un modèle élaboré par l’ANSSI.<br />
+        La maturité cyber n’est pas une évaluation du niveau de sécurité des systèmes d’information d’une organisation mais
+        de sa posture à l’égard des enjeux cyber.
       {/snippet}
     </HerosRiche>
   {/snippet}
