@@ -13,12 +13,7 @@ export type Question = {
 };
 
 export type IdRubrique =
-  | 'pilotage'
-  | 'budget'
-  | 'ressources-humaines'
-  | 'adoption-solutions'
-  | 'prise-en-compte-risque'
-  | 'posture';
+  'pilotage' | 'budget' | 'ressources-humaines' | 'adoption-solutions' | 'prise-en-compte-risque' | 'posture';
 
 export type Rubrique = {
   id: IdRubrique;

@@ -89,7 +89,8 @@
     overflow: hidden;
     padding-block: 6rem;
     background: {
-      image: url('/assets/images/motif-fond-heros-bleu-clair.avif'),
+      image:
+        url('/assets/images/motif-fond-heros-bleu-clair.avif'),
         linear-gradient(172deg, var(--blue-france-925-125) 0%, var(--blue-france-850-200) 87.91%);
       position:
         -259px -113px,

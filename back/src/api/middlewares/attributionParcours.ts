@@ -8,8 +8,7 @@ import { GestionnaireRequêtesComplémentaires } from './middleware.js';
 
 const construitLeSuiviDepuisLaRequête = (requête: Request): Suivi | undefined => {
   const campagne = (requête.query.campagne || requête.query.mtm_campaign || requête.query.utm_campaign) as
-    | string
-    | undefined;
+    string | undefined;
   const source = requête.query.pageSource as string | undefined;
   if (!campagne && !source) return undefined;
 

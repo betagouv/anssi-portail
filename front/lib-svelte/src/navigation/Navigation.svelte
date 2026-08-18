@@ -36,9 +36,7 @@
     itemDeMenu(
       'Guides et ressources',
       '/catalogue',
-      cheminRelatif === '/catalogue' ||
-        cheminRelatif.startsWith('/guides/') ||
-        cheminRelatif.startsWith('/ressources/')
+      cheminRelatif === '/catalogue' || cheminRelatif.startsWith('/guides/') || cheminRelatif.startsWith('/ressources/')
     ),
 
     ...(estConnecte() ? [itemDeMenu('Favoris', '/favoris', cheminRelatif === '/favoris')] : []),

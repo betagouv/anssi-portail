@@ -17,12 +17,7 @@
     telechargement?: string;
     telechargementDetails?: string;
     type?:
-      | 'primaire'
-      | 'primaire-inverse'
-      | 'secondaire'
-      | 'secondaire-inverse'
-      | 'tertiaire'
-      | 'tertiaire-sans-bordure';
+      'primaire' | 'primaire-inverse' | 'secondaire' | 'secondaire-inverse' | 'tertiaire' | 'tertiaire-sans-bordure';
     source?: string;
     cible?: string;
     classe?: string;
