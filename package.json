@@ -29,7 +29,7 @@
     "@eslint/js": "^10.0.0",
     "concurrently": "^10.0.0",
     "prettier": "catalog:",
-    "prettier-plugin-svelte": "^3.5.1",
+    "prettier-plugin-svelte": "^4.0.0",
     "eslint": "^9.39.4",
     "tsx": "catalog:",
     "typescript": "^5.9.3",
