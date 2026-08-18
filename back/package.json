@@ -74,7 +74,7 @@
     "jszip": "^3.10.1",
     "knex": "^3.3.0",
     "multer": "^2.2.0",
-    "npm-run-all2": "^8.0.4",
+    "npm-run-all2": "^9.0.0",
     "openid-client": "^5.7.1",
     "p-throttle": "^7.0.0",
     "papaparse": "^5.5.3",
