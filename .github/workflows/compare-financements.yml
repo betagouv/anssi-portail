@@ -24,7 +24,7 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Installe pnpm
-        uses: pnpm/setup@c8e77b72cd6022852162c92aa10e7e72b7209c9b # v2.0.2
+        uses: pnpm/setup@84cb39b217b10273981911c288cd62326dc7c6d2 # v2.0.2
         with:
           install: false
 
