@@ -30,6 +30,9 @@ jobs:
       - name: (TOUS) Installe les dépendances
         run: pnpm install --frozen-lockfile
 
+      - name: Vérifie le formatage
+        run: pnpm format:check
+
       - name: Exécute les tests
         run: pnpm test
 
