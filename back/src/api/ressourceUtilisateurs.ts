@@ -24,20 +24,12 @@ const construitLeSuiviDepuisLaRequête = (
     }
   })(redirectUrl);
 
-  const cheminSource = ((source: string | undefined) => {
-    try {
-      return source ? new URL(source).pathname : undefined;
-    } catch {
-      return undefined;
-    }
-  })(pageSource as string | undefined);
-
-  if (!campagne && !parcoursDestination && !cheminSource) return undefined;
+  if (!campagne && !parcoursDestination && !pageSource) return undefined;
 
   const suivi: CompteCree['suivi'] = {
     ...(campagne && { campagne: campagne as string }),
     ...(parcoursDestination && { parcoursDestination }),
-    ...(cheminSource && { source: cheminSource }),
+    ...(pageSource && { source: pageSource as string }),
   };
 
   return suivi;

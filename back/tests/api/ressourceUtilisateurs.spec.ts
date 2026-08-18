@@ -169,12 +169,12 @@ describe('La ressource utilisateur', () => {
     it('publie un événement de création de compte avec la source', async () => {
       await request(serveur)
         .post('/api/utilisateurs')
-        .query({ pageSource: 'http://mondomaine/parcours-securisation' })
+        .query({ pageSource: '/parcours-securisation-hero' })
         .send(donneesUtilisateur);
 
       const evenement = busEvenements.recupereEvenement(CompteCree);
 
-      assert.equal(evenement!.suivi?.source, '/parcours-securisation');
+      assert.equal(evenement!.suivi?.source, '/parcours-securisation-hero');
     });
 
     describe('concernant la validation des données', () => {
