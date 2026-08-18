@@ -25,7 +25,7 @@ export class GenerateurImageAvif implements GenerateurImage {
       viewport,
     }).promise;
 
-    const pngBuffer = await canvas.toBuffer('image/png');
+    const pngBuffer = canvas.toBuffer('image/png');
     const avifBuffer = await sharp(pngBuffer)
       .resize({ width: configuration?.largeur })
       .avif({ quality: 80, effort: 2 })
