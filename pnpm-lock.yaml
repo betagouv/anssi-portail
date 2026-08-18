@@ -284,8 +284,8 @@ importers:
         version: link:../front/lib-svelte
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
-        specifier: ^5.1.1
-        version: 5.1.1(supports-color@10.2.2)(svelte@5.56.8(@typescript-eslint/types@8.67.0))(vite@6.4.3(@types/node@26.2.0)(sass@1.102.0)(tsx@4.23.12))
+        specifier: ^7.0.0
+        version: 7.3.0(svelte@5.56.8(@typescript-eslint/types@8.67.0))(vite@6.4.3(@types/node@26.2.0)(sass@1.102.0)(tsx@4.23.12))
       '@tsconfig/svelte':
         specifier: ^5.0.8
         version: 5.0.8
@@ -354,8 +354,8 @@ importers:
         specifier: 1.53.2
         version: 1.53.2(svelte@5.56.8(@typescript-eslint/types@8.67.0))
       '@sveltejs/vite-plugin-svelte':
-        specifier: ^5.1.1
-        version: 5.1.1(supports-color@10.2.2)(svelte@5.56.8(@typescript-eslint/types@8.67.0))(vite@6.4.3(@types/node@26.2.0)(sass@1.102.0)(tsx@4.23.12))
+        specifier: ^7.0.0
+        version: 7.3.0(svelte@5.56.8(@typescript-eslint/types@8.67.0))(vite@6.4.3(@types/node@26.2.0)(sass@1.102.0)(tsx@4.23.12))
       '@tsconfig/svelte':
         specifier: ^5.0.8
         version: 5.0.8
@@ -1832,20 +1832,12 @@ packages:
     resolution: {integrity: sha512-K7dsJDQxBOF+f+epuhMactcjK2VP4MRkLKtwSykNtEI+cKVEyzrmmhQ1pmoxI800m4JKcyJ05L2M4yPwAGiBNw==}
     engines: {node: '>= 18.0.0'}
 
-  '@sveltejs/vite-plugin-svelte-inspector@4.0.1':
-    resolution: {integrity: sha512-J/Nmb2Q2y7mck2hyCX4ckVHcR5tu2J+MtBEQqpDrrgELZ2uvraQcK/ioCV61AqkdXFgriksOKIceDcQmqnGhVw==}
-    engines: {node: ^18.0.0 || ^20.0.0 || >=22}
-    peerDependencies:
-      '@sveltejs/vite-plugin-svelte': ^5.0.0
-      svelte: '>=5.55.9'
-      vite: 6.4.3
-
-  '@sveltejs/vite-plugin-svelte@5.1.1':
-    resolution: {integrity: sha512-Y1Cs7hhTc+a5E9Va/xwKlAJoariQyHY+5zBgCZg4PFWNYQ1nMN9sjK1zhw1gK69DuqVP++sht/1GZg1aRwmAXQ==}
-    engines: {node: ^18.0.0 || ^20.0.0 || >=22}
+  '@sveltejs/vite-plugin-svelte@7.3.0':
+    resolution: {integrity: sha512-QbRoJyD92e9R0ufeQIWRHrCC0ObcqSv/aBDdrQMoU+sypav3cDx5wytdQ6GLdXjEMO6xjrXGzfkUygng8JMv0A==}
+    engines: {node: ^20.19 || ^22.12 || >=24}
     peerDependencies:
       svelte: '>=5.55.9'
-      vite: 6.4.3
+      vite: ^8.0.0-beta.7 || ^8.0.0
 
   '@tsconfig/svelte@5.0.8':
     resolution: {integrity: sha512-UkNnw1/oFEfecR8ypyHIQuWYdkPvHiwcQ78sh+ymIiYoF+uc5H1UBetbjyqT+vgGJ3qQN6nhucJviX6HesWtKQ==}
@@ -2976,10 +2968,6 @@ packages:
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
-  kleur@4.1.5:
-    resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
-    engines: {node: '>=6'}
-
   knex@3.3.0:
     resolution: {integrity: sha512-LgWl031hNuLv9Lhxdd9093zULa2aNcoP04Bk29e5NidgRcEr/T0rAr2WYi4BhjTiCDoQiRU56meUE5rppLKZzQ==}
     engines: {node: '>=16'}
@@ -3083,6 +3071,9 @@ packages:
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
+
+  magic-string@1.1.0:
+    resolution: {integrity: sha512-kS3VHe0nEPST2saQV4Rbkchcd3UBRkVTQHo1D3h/ZTwFDhai/mfKkmtPAtD129EOI7K3HlHIsFOt0WrI2/oU9g==}
 
   marked@13.0.3:
     resolution: {integrity: sha512-rqRix3/TWzE9rIoFGIn8JmsVfhiuC8VIQ8IdX5TfzmeBucdY05/0UlzKaw0eVtpcN/OdVFpBk7CjKGo9iHJ/zA==}
@@ -5500,27 +5491,14 @@ snapshots:
 
   '@sveltejs/load-config@0.2.2': {}
 
-  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.1.1(supports-color@10.2.2)(svelte@5.56.8(@typescript-eslint/types@8.67.0))(vite@6.4.3(@types/node@26.2.0)(sass@1.102.0)(tsx@4.23.12)))(supports-color@10.2.2)(svelte@5.56.8(@typescript-eslint/types@8.67.0))(vite@6.4.3(@types/node@26.2.0)(sass@1.102.0)(tsx@4.23.12))':
+  '@sveltejs/vite-plugin-svelte@7.3.0(svelte@5.56.8(@typescript-eslint/types@8.67.0))(vite@6.4.3(@types/node@26.2.0)(sass@1.102.0)(tsx@4.23.12))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.1.1(supports-color@10.2.2)(svelte@5.56.8(@typescript-eslint/types@8.67.0))(vite@6.4.3(@types/node@26.2.0)(sass@1.102.0)(tsx@4.23.12))
-      debug: 4.4.3(supports-color@10.2.2)
-      svelte: 5.56.8(@typescript-eslint/types@8.67.0)
-      vite: 6.4.3(@types/node@26.2.0)(sass@1.102.0)(tsx@4.23.12)
-    transitivePeerDependencies:
-      - supports-color
-
-  '@sveltejs/vite-plugin-svelte@5.1.1(supports-color@10.2.2)(svelte@5.56.8(@typescript-eslint/types@8.67.0))(vite@6.4.3(@types/node@26.2.0)(sass@1.102.0)(tsx@4.23.12))':
-    dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.1.1(supports-color@10.2.2)(svelte@5.56.8(@typescript-eslint/types@8.67.0))(vite@6.4.3(@types/node@26.2.0)(sass@1.102.0)(tsx@4.23.12)))(supports-color@10.2.2)(svelte@5.56.8(@typescript-eslint/types@8.67.0))(vite@6.4.3(@types/node@26.2.0)(sass@1.102.0)(tsx@4.23.12))
-      debug: 4.4.3(supports-color@10.2.2)
       deepmerge: 4.3.1
-      kleur: 4.1.5
-      magic-string: 0.30.21
+      magic-string: 1.1.0
+      obug: 2.1.3
       svelte: 5.56.8(@typescript-eslint/types@8.67.0)
       vite: 6.4.3(@types/node@26.2.0)(sass@1.102.0)(tsx@4.23.12)
       vitefu: 1.1.2(vite@6.4.3(@types/node@26.2.0)(sass@1.102.0)(tsx@4.23.12))
-    transitivePeerDependencies:
-      - supports-color
 
   '@tsconfig/svelte@5.0.8': {}
 
@@ -6811,8 +6789,6 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  kleur@4.1.5: {}
-
   knex@3.3.0(pg@8.23.0)(supports-color@10.2.2):
     dependencies:
       colorette: 2.0.19
@@ -6888,6 +6864,10 @@ snapshots:
       yallist: 4.0.0
 
   magic-string@0.30.21:
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.5.5
+
+  magic-string@1.1.0:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
