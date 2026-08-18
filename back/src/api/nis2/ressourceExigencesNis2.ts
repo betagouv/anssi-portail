@@ -61,9 +61,8 @@ function creerRepresentationExigences(exigences: Exigence[], langue: Langue) {
             ...correspondances[referentiel],
             exigences: exigencesTraduites(correspondances, referentiel),
             observations:
-              langue === 'EN'
-                ? correspondances[referentiel].observations?.contenuEnAnglais
-                : correspondances[referentiel].observations?.contenu,
+              (langue === 'EN' ? correspondances[referentiel].observations?.contenuEnAnglais : undefined) ??
+              correspondances[referentiel].observations?.contenu,
           },
         }
       : {};
