@@ -35,18 +35,17 @@
 
     <figure class="illustration">
       <IllustrationProtegerOrganisation {enPause} />
+      <div class="controle-animation">
+        <Bouton
+          type="secondaire"
+          icone={enPause ? 'play-circle-line' : 'pause-circle-line'}
+          iconeSeule
+          libelle={libelléPause}
+          titre={libelléPause}
+          surClic={basculePause}
+        />
+      </div>
     </figure>
-
-    <div class="controle-animation">
-      <Bouton
-        type="secondaire"
-        icone={enPause ? 'play-circle-line' : 'pause-circle-line'}
-        iconeSeule
-        libelle={libelléPause}
-        titre={libelléPause}
-        surClic={basculePause}
-      />
-    </div>
 
     <Lien
       apparence="bouton"
@@ -78,6 +77,9 @@
     }
 
     .controle-animation {
+      display: flex;
+      justify-content: flex-end;
+
       @media (prefers-reduced-motion: reduce) {
         display: none;
       }
