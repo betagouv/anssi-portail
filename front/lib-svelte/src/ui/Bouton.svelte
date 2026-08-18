@@ -7,12 +7,7 @@
     libelle?: string;
     titre?: string;
     type?:
-      | 'primaire'
-      | 'primaire-inverse'
-      | 'secondaire'
-      | 'secondaire-inverse'
-      | 'tertiaire'
-      | 'tertiaire-sans-bordure';
+      'primaire' | 'primaire-inverse' | 'secondaire' | 'secondaire-inverse' | 'tertiaire' | 'tertiaire-sans-bordure';
     taille?: 'sm' | 'md';
     desactive?: boolean;
     boutonSoumission?: boolean;

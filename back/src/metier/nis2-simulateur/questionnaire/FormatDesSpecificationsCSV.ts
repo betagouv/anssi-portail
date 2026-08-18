@@ -1,16 +1,16 @@
 export enum ClesDuCSV {
   'Designation OSE',
-  'Localisation',
+  Localisation,
   'Type de structure',
-  'Taille',
-  'Secteurs',
+  Taille,
+  Secteurs,
   'Sous-secteurs',
-  'Activités',
+  Activités,
   'Extra - Fourniture de service',
   'Extra - Établissement principal',
-  'Resultat',
+  Resultat,
   "Points d'attention",
-  'Code',
+  Code,
 }
 
 // Type créé à partir des clés du CSV.

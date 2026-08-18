@@ -36,11 +36,7 @@ export type ActivitesPetrole = (typeof ValeursActivitesPetrole)[number];
 export type ActivitesGaz = (typeof ValeursActivitesGaz)[number];
 export type ActivitesHydrogene = (typeof ValeursActivitesHydrogene)[number];
 export type ActivitesEnergie =
-  | ActivitesElectricite
-  | ActivitesReseauxChaleurFroid
-  | ActivitesPetrole
-  | ActivitesGaz
-  | ActivitesHydrogene;
+  ActivitesElectricite | ActivitesReseauxChaleurFroid | ActivitesPetrole | ActivitesGaz | ActivitesHydrogene;
 export type ActivitesTransportsAeriens = (typeof ValeursActivitesTransportsAeriens)[number];
 export type ActivitesTransportsFerroviaires = (typeof ValeursActivitesTransportsFerroviaires)[number];
 export type ActivitesTransportsParEau = (typeof ValeursActivitesTransportsParEau)[number];

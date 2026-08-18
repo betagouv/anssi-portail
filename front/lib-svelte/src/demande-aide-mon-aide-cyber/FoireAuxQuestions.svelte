@@ -29,8 +29,8 @@
       </p>
       <p>
         🚫 <strong>Non, si vous êtes un particulier ou mono-salarié.</strong><br />
-        Le diagnostic n’est pas adapté à ce profil : trop de questions ne s’appliquent pas, et les aidants cyber ne sont
-        pas formés pour ce type d’accompagnement.
+        Le diagnostic n’est pas adapté à ce profil : trop de questions ne s’appliquent pas, et les aidants cyber ne sont pas
+        formés pour ce type d’accompagnement.
       </p>
     </div>
   </Accordeon>

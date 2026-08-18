@@ -138,7 +138,7 @@
   description="Trouvez les services et les ressources adaptés à vos besoins."
   format="banniere"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
-  theme={afficheNouvelleDA ? 'clair' : "sombre"}
+  theme={afficheNouvelleDA ? 'clair' : 'sombre'}
   titre="Les services et ressources cyber"
 >
   {#snippet filAriane()}
