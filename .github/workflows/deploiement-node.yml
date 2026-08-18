@@ -36,9 +36,12 @@ jobs:
           node-version-file: '.nvmrc'
 
       - name: Installe pnpm
-        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+        uses: pnpm/setup@c8e77b72cd6022852162c92aa10e7e72b7209c9b # v2.0.2
         with:
-          version: 11.21.0
+          install: false
+
+      - name: (TOUS) Installe les dépendances
+        run: pnpm install --frozen-lockfile
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
@@ -81,7 +84,6 @@ jobs:
 
       - name: Construis la lib Svelte
         run: |
-          pnpm install --frozen-lockfile
           pnpm --filter @anssi-portail/svelte build
 
       - name: Construis avec Jekyll
