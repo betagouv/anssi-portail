@@ -1,16 +1,22 @@
 <script lang="ts">
-  import { afficheNouvelleDA } from '$plateforme/environnement';
+  import { afficheNouvelleDA, afficheParcoursSecurisation } from '$plateforme/environnement';
   import { onMount } from 'svelte';
   import { clic } from '../directives/actions.svelte';
   import Lien from '../ui/Lien.svelte';
 
   let encart = $state<HTMLDivElement | undefined>();
-  let pageSource = $state('');
+  let hrefCTA = $state('/cyberdepart?origine=guide-dhygiene-informatique');
+  let libelleCTA = $state('Demander un diagnostic gratuit');
+
   onMount(() => {
     setTimeout(() => {
       encart?.showPopover();
     }, 500);
-    pageSource = `${window.location.pathname}#encart-lien-vers-demande-diagnostic`;
+    if (afficheParcoursSecurisation) {
+      const pageSource = `${window.location.pathname}#encart-lien-vers-demande-diagnostic`;
+      hrefCTA = `/modules/1?pageSource=${pageSource}`;
+      libelleCTA = 'Je commence à sécuriser';
+    }
   });
 
   const fermeDialogue = () => {
@@ -32,7 +38,7 @@
       ></dsfr-button>
     </div>
     <div class="contenu" class:nouvelleDA={afficheNouvelleDA}>
-      {#if afficheNouvelleDA}
+      {#if afficheParcoursSecurisation}
         <dsfr-badge type="accent" accent="green-bourgeon" label="+6000 organisations accompagnées 🚀" size="sm"
         ></dsfr-badge>
 
@@ -57,28 +63,21 @@
         </p>
       {/if}
       <div class="conteneur-bouton" class:nouvelleDA={afficheNouvelleDA}>
-        {#if afficheNouvelleDA}
-          <Lien
-            apparence="bouton"
-            etire
-            type="primaire"
-            libelle="Je commence à sécuriser"
-            icone="arrow-right-circle-line"
-            iconeADroite
-            href={`/modules/1?pageSource=${pageSource}`}
-          ></Lien>
+        <Lien
+          apparence="bouton"
+          etire
+          type="primaire"
+          libelle={libelleCTA}
+          icone={afficheNouvelleDA ? 'arrow-right-circle-line' : undefined}
+          iconeADroite
+          href={hrefCTA}
+        ></Lien>
+        {#if afficheParcoursSecurisation}
           <Lien apparence="bouton" etire type="tertiaire-sans-bordure" libelle="En savoir plus" href="/entreprises"
-          ></Lien>
-        {:else}
-          <Lien
-            apparence="bouton"
-            type="primaire"
-            libelle="Demander un diagnostic gratuit"
-            href="/cyberdepart?origine=guide-dhygiene-informatique"
           ></Lien>
         {/if}
       </div>
-      {#if !afficheNouvelleDA}
+      {#if !afficheParcoursSecurisation}
         <p class="texte-mention-xs">
           Ce diagnostic gratuit proposé par l'État n'est pas adapté aux particuliers ni aux entreprises mono-salariées.
         </p>
