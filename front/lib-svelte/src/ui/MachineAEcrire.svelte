@@ -11,7 +11,7 @@
 <span class="machine-a-ecrire" class:en-pause={enPause} aria-label={texte}>
   {#each lettres as lettre, i (`${texte}-${i}`)}
     {@const estDernièreLettre = i === lettres.length - 1}
-    <span aria-hidden="true" class="lettre" class:curseur={estDernièreLettre} style="animation-delay: {i * 0.05}s">
+    <span aria-hidden="true" class="lettre" class:curseur={estDernièreLettre}>
       {lettre}
     </span>
   {/each}
@@ -30,6 +30,14 @@
   .lettre {
     opacity: 0;
     animation: apparition-lettre 0.05s linear forwards;
+  }
+
+  $nb-lettres: 40;
+  $step: 0.05s;
+  @for $i from 1 through $nb-lettres {
+    .lettre:nth-child(#{$i}) {
+      animation-delay: $step * ($i - 1);
+    }
   }
 
   .curseur {
