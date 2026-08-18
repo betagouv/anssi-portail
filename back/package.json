@@ -34,7 +34,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/jszip": "^3.4.1",
     "@types/multer": "^2.1.0",
-    "@types/node": "^22.19.15",
+    "@types/node": "^26.0.0",
     "@types/papaparse": "^5.5.2",
     "@types/supertest": "^6.0.3",
     "adm-zip": "^0.6.0",
