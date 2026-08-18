@@ -46,11 +46,11 @@ importers:
         specifier: ^9.39.4
         version: 9.39.5
       prettier:
-        specifier: 3.3.3
-        version: 3.3.3
+        specifier: 3.9.6
+        version: 3.9.6
       prettier-plugin-svelte:
         specifier: ^3.5.1
-        version: 3.5.2(prettier@3.3.3)(svelte@5.55.9(@typescript-eslint/types@8.67.0))
+        version: 3.5.2(prettier@3.9.6)(svelte@5.55.9(@typescript-eslint/types@8.67.0))
       tsx:
         specifier: ^4.21.0
         version: 4.21.0
@@ -237,8 +237,8 @@ importers:
         specifier: ^1.17.2
         version: 1.18.1(@types/express@5.0.6)(@types/node@22.20.1)
       prettier:
-        specifier: 3.3.3
-        version: 3.3.3
+        specifier: 3.9.6
+        version: 3.9.6
       regles-eslint:
         specifier: workspace:^
         version: link:../regles-eslint
@@ -369,11 +369,11 @@ importers:
         specifier: ^16.5.0
         version: 16.5.0
       prettier:
-        specifier: 3.3.3
-        version: 3.3.3
+        specifier: 3.9.6
+        version: 3.9.6
       prettier-plugin-svelte:
         specifier: ^3.5.1
-        version: 3.5.2(prettier@3.3.3)(svelte@5.55.9(@typescript-eslint/types@8.67.0))
+        version: 3.5.2(prettier@3.9.6)(svelte@5.55.9(@typescript-eslint/types@8.67.0))
       sass:
         specifier: ^1.98.0
         version: 1.98.0
@@ -3636,8 +3636,8 @@ packages:
       prettier: ^3.0.0
       svelte: '>=5.55.9'
 
-  prettier@3.3.3:
-    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
+  prettier@3.9.6:
+    resolution: {integrity: sha512-OpN0zzVdiaiAhxpuuj5efpIS4sY9j7bY6uR5mnj5yPzGkdkjNKSJeUThPb60Jw29QuAZgA4o+/iB49kFiaBX6g==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -7376,12 +7376,12 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-svelte@3.5.2(prettier@3.3.3)(svelte@5.55.9(@typescript-eslint/types@8.67.0)):
+  prettier-plugin-svelte@3.5.2(prettier@3.9.6)(svelte@5.55.9(@typescript-eslint/types@8.67.0)):
     dependencies:
-      prettier: 3.3.3
+      prettier: 3.9.6
       svelte: 5.55.9(@typescript-eslint/types@8.67.0)
 
-  prettier@3.3.3: {}
+  prettier@3.9.6: {}
 
   process-nextick-args@2.0.1: {}
 
