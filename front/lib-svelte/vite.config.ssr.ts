@@ -27,6 +27,7 @@ const rollupOptions: NonNullable<UserConfig['build']>['rollupOptions'] = {
     'parcours-securisation': 'src/parcours-securisation/LandingParcoursSecurisation.svelte',
     'parcours-cyberdepart': 'src/parcours-securisation/LandingParcoursCyberdepart.svelte',
     'parcours-securisation-complet': 'src/parcours-securisation/LandingParcoursSecurisationComplet.svelte',
+    'illustration-connexion-inscription': 'src/connexion/IllustrationConnexionInscription.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,

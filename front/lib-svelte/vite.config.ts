@@ -101,6 +101,7 @@ export default defineConfig(({ mode }) => {
           'parcours-securisation': 'src/main-parcours-securisation.ts',
           'parcours-cyberdepart': 'src/main-parcours-cyberdepart.ts',
           'parcours-securisation-complet': 'src/main-parcours-securisation-complet.ts',
+          'illustration-connexion-inscription': 'src/main-illustration-connexion-inscription.ts',
         },
         output: {
           entryFileNames: `assets/[name].js`,
