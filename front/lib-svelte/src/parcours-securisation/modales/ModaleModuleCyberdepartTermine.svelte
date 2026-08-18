@@ -12,7 +12,7 @@
   let pageSource = $state('');
 
   onMount(() => {
-    pageSource = `${window.location.pathname}#modale-module-cyberdepart-termine`;
+    pageSource = `${window.location.pathname}-modale-module-cyberdepart-termine`;
   });
 </script>
 

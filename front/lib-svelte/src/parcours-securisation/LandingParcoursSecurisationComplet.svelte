@@ -46,8 +46,8 @@
   let pageSourceCTACentral = $state('');
 
   onMount(() => {
-    pageSourceHero = `${window.location.pathname}#hero`;
-    pageSourceCTACentral = `${window.location.pathname}#cta-central`;
+    pageSourceHero = `${window.location.pathname}-hero`;
+    pageSourceCTACentral = `${window.location.pathname}-cta-central`;
   });
 </script>
 
