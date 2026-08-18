@@ -20,7 +20,7 @@
     "isomorphic-dompurify": "^3.18.0"
   },
   "devDependencies": {
-    "@types/node": "^22.19.15",
+    "@types/node": "^26.0.0",
     "npm-run-all2": "^8.0.4",
     "tsx": "catalog:"
   }
