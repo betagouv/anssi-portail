@@ -99,7 +99,7 @@ abstract class ConvertisseurCsvExigenceNIS2AvecCorrespondances extends Convertis
     return {
       ...super.enLigne(exigenceNIS2),
       correspondance: exigenceNIS2.correspondances[referentiel]!.niveau,
-      observations: (this.langue === 'FR' ? observations.contenu : observations.contenuEnAnglais) ?? '',
+      observations: (this.langue === 'EN' ? observations.contenuEnAnglais : undefined) ?? observations.contenu ?? '',
       ...this.extraisCorrespondances(exigenceNIS2, referentiel),
     };
   }
@@ -172,7 +172,7 @@ class ConvertisseurCsvExigenceAE extends ConvertisseurCsvExigence<ExigenceAE> {
     return {
       ...super.enLigne(exigence),
       correspondance: exigence.correspondances.NIS2!.niveau,
-      observations: (this.langue === 'FR' ? observations.contenu : observations.contenuEnAnglais) ?? '',
+      observations: (this.langue === 'EN' ? observations.contenuEnAnglais : undefined) ?? observations.contenu ?? '',
       ...this.extraisCorrespondances(exigence, 'NIS2'),
     };
   }
@@ -203,7 +203,7 @@ class ConvertisseurCsvExigenceISO extends ConvertisseurCsvExigence<ExigenceISO> 
       norme: exigence.norme,
       chapitre: exigence.chapitre,
       correspondance: exigence.correspondances.NIS2!.niveau,
-      observations: (this.langue === 'FR' ? observations.contenu : observations.contenuEnAnglais) ?? '',
+      observations: (this.langue === 'EN' ? observations.contenuEnAnglais : undefined) ?? observations.contenu ?? '',
       ...this.extraisCorrespondances(exigence, 'NIS2'),
     };
   }
@@ -236,7 +236,7 @@ class ConvertisseurCsvExigenceCyFun23 extends ConvertisseurCsvExigence<ExigenceC
       niveau_assurance: exigence.niveauAssurance ?? '',
       est_mesure_cle: exigence.estMesureCle ? 'Oui' : 'Non',
       correspondance: exigence.correspondances.NIS2!.niveau,
-      observations: (this.langue === 'FR' ? observations.contenu : observations.contenuEnAnglais) ?? '',
+      observations: (this.langue === 'EN' ? observations.contenuEnAnglais : undefined) ?? observations.contenu ?? '',
       ...this.extraisCorrespondances(exigence, 'NIS2'),
     };
   }

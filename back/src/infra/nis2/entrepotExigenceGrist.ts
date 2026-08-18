@@ -296,11 +296,13 @@ export class EntrepotExigenceGrist extends EntrepotGrist<ExigenceGrist> implemen
     }
     const croisement = this.croisements[source][cible ?? source];
     if (croisement) {
+      const possèdeObservationEnAnglais = source === 'CyFun23' || cible === 'CyFun23';
       constructeurDeRequete.join({ cr: croisement.nomTableAssociation }, 'source.id', 'cr.Reference_source');
+      champs.push('cr.Correspondance as Niveau', 'cr.Commentaires_externes as Observations');
+      if (possèdeObservationEnAnglais) {
+        champs.push('cr.Commentaires_en as ObservationsEN');
+      }
       champs.push(
-        'cr.Correspondance as Niveau',
-        'cr.Commentaires_externes as Observations',
-        'cr.Commentaires_en as ObservationsEN',
         k({ cible: croisement.nomTableCible })
           .where('cible.id', 'IN', k.from(k.raw(`json_each (cr.References_cibles)`)).select('value'))
           .select(
