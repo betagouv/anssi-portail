@@ -31,7 +31,7 @@
     "prettier": "catalog:",
     "prettier-plugin-svelte": "^3.5.1",
     "eslint": "^9.39.4",
-    "tsx": "^4.21.0",
+    "tsx": "catalog:",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.57.1",
     "vitest": "^4.1.7"
