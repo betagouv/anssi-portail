@@ -27,14 +27,3 @@
   hideDetails={cacheTitreEtapeSuivante}
 >
 </dsfr-stepper>
-
-<hr />
-
-<style>
-  hr {
-    margin-block: 2rem;
-    height: 1px;
-    border: 0;
-    background-color: var(--border-default-grey);
-  }
-</style>

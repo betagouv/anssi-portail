@@ -1,12 +1,13 @@
 <script lang="ts">
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
+  import { afficheNouvelleDA } from '$plateforme/environnement';
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import { calculeIdNiveau } from '../niveaux-maturite/calculeIdNiveau';
   import { profilStore } from '../stores/profil.store';
   import Bouton from '../ui/Bouton.svelte';
   import Etapier from '../ui/Etapier.svelte';
   import Lien from '../ui/Lien.svelte';
-  import { calculeIdNiveau } from '../niveaux-maturite/calculeIdNiveau';
   import IntroductionTestMaturite from './IntroductionTestMaturite.svelte';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
   import { enregistreIdResultatTestPourRevendication } from './resultatTest';
@@ -15,7 +16,6 @@
   import SelectTailleOrganisation from './SelectTailleOrganisation.svelte';
   import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
   import { etapesTestMaturite } from './TestMaturite.donnees';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   let afficheResultats = false;
   let introFaite = false;
@@ -132,6 +132,7 @@
           titreEtapeCourante={etapesTestMaturite[$questionnaireStore.questionCourante].titre}
           titreEtapeSuivante={etapesTestMaturite[$questionnaireStore.questionCourante + 1]?.titre}
         />
+        <hr />
         <h2>
           <!-- eslint-disable-next-line svelte/no-at-html-tags -->
           {@html aseptiseHtml(etapesTestMaturite[$questionnaireStore.questionCourante].question)}
@@ -214,5 +215,12 @@
 
   dsfr-alert {
     margin-bottom: 2rem;
+  }
+
+  hr {
+    margin-block: 2rem;
+    height: 1px;
+    border: 0;
+    background-color: var(--border-default-grey);
   }
 </style>

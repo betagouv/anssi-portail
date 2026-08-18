@@ -326,7 +326,7 @@
   .info-champ-obligatoire {
     text-align: right;
     font-size: 0.75rem;
-    padding-bottom: 64px;
+    padding-bottom: 1.5rem;
   }
 
   .requis:before {
