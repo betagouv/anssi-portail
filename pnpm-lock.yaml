@@ -296,8 +296,8 @@ importers:
         specifier: ^3.15.2
         version: 3.22.0(eslint@9.39.5)(svelte@5.56.8(@typescript-eslint/types@8.67.0))
       globals:
-        specifier: ^16.5.0
-        version: 16.5.0
+        specifier: ^17.0.0
+        version: 17.9.0
       sass:
         specifier: ^1.98.0
         version: 1.102.0
@@ -369,8 +369,8 @@ importers:
         specifier: ^3.15.2
         version: 3.22.0(eslint@9.39.5)(svelte@5.56.8(@typescript-eslint/types@8.67.0))
       globals:
-        specifier: ^16.5.0
-        version: 16.5.0
+        specifier: ^17.0.0
+        version: 17.9.0
       prettier:
         specifier: 'catalog:'
         version: 3.9.6
@@ -2843,6 +2843,10 @@ packages:
 
   globals@16.5.0:
     resolution: {integrity: sha512-c/c15i26VrJ4IRt5Z89DnIzCGDn9EcebibhAOjw5ibqEHsE1wLUgkPn9RDmNcUKyU87GeaL633nyJ+pplFR2ZQ==}
+    engines: {node: '>=18'}
+
+  globals@17.9.0:
+    resolution: {integrity: sha512-m/MvAW61QVU5VDNF1Vj8axt016h8w7L5TU1e9zlab7XIttAT2YAlCwl75K1fOqvMM9apmD7lbCIRhpfkhmxhCg==}
     engines: {node: '>=18'}
 
   gopd@1.2.0:
@@ -6762,6 +6766,8 @@ snapshots:
   globals@14.0.0: {}
 
   globals@16.5.0: {}
+
+  globals@17.9.0: {}
 
   gopd@1.2.0: {}
 
