@@ -27,6 +27,7 @@
     "@types/qrcode": "^1.5.6",
     "eslint-plugin-svelte": "^3.15.2",
     "globals": "^17.0.0",
+    "npm-run-all2": "^9.0.0",
     "prettier": "catalog:",
     "prettier-plugin-svelte": "^3.5.1",
     "sass": "^1.102.0",
@@ -44,7 +45,6 @@
     "dompurify": "^3.4.11",
     "entities": "catalog:",
     "isomorphic-dompurify": "catalog:",
-    "npm-run-all2": "^9.0.0",
     "qrcode": "^1.5.4"
   },
   "main": "svelte.config.js",

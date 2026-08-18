@@ -169,9 +169,6 @@ importers:
       multer:
         specifier: ^2.2.0
         version: 2.2.0
-      npm-run-all2:
-        specifier: ^9.0.0
-        version: 9.0.3
       openid-client:
         specifier: ^5.7.1
         version: 5.7.1
@@ -242,6 +239,9 @@ importers:
       node-mocks-http:
         specifier: ^1.17.2
         version: 1.18.1(@types/express@5.0.6)(@types/node@26.2.0)
+      npm-run-all2:
+        specifier: ^9.0.0
+        version: 9.0.3
       prettier:
         specifier: 'catalog:'
         version: 3.9.6
@@ -346,9 +346,6 @@ importers:
       isomorphic-dompurify:
         specifier: 'catalog:'
         version: 3.22.0(@noble/hashes@1.8.0)
-      npm-run-all2:
-        specifier: ^9.0.0
-        version: 9.0.3
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
@@ -371,6 +368,9 @@ importers:
       globals:
         specifier: ^17.0.0
         version: 17.9.0
+      npm-run-all2:
+        specifier: ^9.0.0
+        version: 9.0.3
       prettier:
         specifier: 'catalog:'
         version: 3.9.6
