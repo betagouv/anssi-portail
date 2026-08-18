@@ -33,7 +33,7 @@
     "eslint": "^9.39.4",
     "tsx": "catalog:",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.1",
+    "typescript-eslint": "^8.67.0",
     "vitest": "^4.1.7"
   },
   "runtimeDependencies": {
