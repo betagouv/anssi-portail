@@ -53,7 +53,7 @@
     "@myriaddreamin/typst.ts": "^0.7.0",
     "@napi-rs/canvas": "^1.0.5",
     "@anssi-portail/axios": "workspace:^",
-    "@sentry/node": "^7.120.4",
+    "@sentry/node": "^10.0.0",
     "@types/bcrypt": "^6.0.0",
     "@types/cors": "^2.8.19",
     "bcrypt": "^6.0.0",
