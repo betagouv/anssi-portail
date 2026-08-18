@@ -15,6 +15,9 @@ catalogs:
     isomorphic-dompurify:
       specifier: ^3.22.0
       version: 3.22.0
+    prettier:
+      specifier: 3.9.6
+      version: 3.9.6
     svelte:
       specifier: ^5.55.9
       version: 5.55.9
@@ -46,7 +49,7 @@ importers:
         specifier: ^9.39.4
         version: 9.39.5
       prettier:
-        specifier: 3.9.6
+        specifier: 'catalog:'
         version: 3.9.6
       prettier-plugin-svelte:
         specifier: ^3.5.1
@@ -237,7 +240,7 @@ importers:
         specifier: ^1.17.2
         version: 1.18.1(@types/express@5.0.6)(@types/node@22.20.1)
       prettier:
-        specifier: 3.9.6
+        specifier: 'catalog:'
         version: 3.9.6
       regles-eslint:
         specifier: workspace:^
@@ -369,7 +372,7 @@ importers:
         specifier: ^16.5.0
         version: 16.5.0
       prettier:
-        specifier: 3.9.6
+        specifier: 'catalog:'
         version: 3.9.6
       prettier-plugin-svelte:
         specifier: ^3.5.1
