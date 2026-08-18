@@ -5,8 +5,8 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createLogger, defineConfig, loadEnv } from 'vite';
-import { plateformePlugin } from './src/plateforme/plateforme.plugin';
-import { injecteNonce } from './src/utils/injecteNonce.plugin';
+import { plateformePlugin } from './src/plateforme/plateforme.plugin.js';
+import { injecteNonce } from './src/utils/injecteNonce.plugin.js';
 
 // Le `.env` est à la racine du dépôt, deux dossiers au-dessus de ce fichier, indépendamment du cwd d'où `vite` est lancé.
 const racineDuDepot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -52,7 +52,7 @@ export default defineConfig(({ mode }) => {
     build: {
       cssCodeSplit: false,
       outDir: 'dist/client',
-      rollupOptions: {
+      rolldownOptions: {
         input: {
           'avis-utilisateur': 'src/main-avis-utilisateur.ts',
           'centre-aide': 'src/main-centre-aide.ts',
@@ -109,13 +109,6 @@ export default defineConfig(({ mode }) => {
         },
       },
       sourcemap: true,
-    },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: 'modern-compiler',
-        },
-      },
     },
     customLogger: loggerPersonnalise,
     server: {
