@@ -84,7 +84,7 @@
     "sitemap": "^9.0.1",
     "svelte": "catalog:",
     "uuid": "^14.0.1",
-    "zod": "^4.3.6"
+    "zod": "^4.4.3"
   },
   "directories": {
     "test": "tests"
