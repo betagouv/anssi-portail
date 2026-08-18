@@ -6,8 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!urlRedirection) return;
 
   const urlPostConnexion = new URL(urlRedirection, window.location.origin);
-  const pageSource = urlPostConnexion.searchParams.get('pageSource') || window.location.href;
-  sessionStorage.setItem('pageSource', pageSource);
+  const pageSource = urlPostConnexion.searchParams.get('pageSource');
+  if (pageSource) {
+    sessionStorage.setItem('pageSource', pageSource);
+  }
   if (urlPostConnexion.origin === window.location.origin) {
     sessionStorage.setItem('pagePostConnexion', urlPostConnexion.href);
   }
