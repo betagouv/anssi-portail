@@ -9,6 +9,7 @@
   import Proteger from '../Proteger.svelte';
   import Solutions from './Solutions.svelte';
   import MotEnExergue from '../../ui/MotEnExergue.svelte';
+  import IllustrationHerosCollectivites from '../animation/IllustrationHerosCollectivites.svelte';
 
   let { itemsCyber, guides = [] } = $props();
 
@@ -56,7 +57,7 @@
         Protéger ma <MotEnExergue motif="vague">collectivité</MotEnExergue> contre les cyberattaques
       {/snippet}
       {#snippet illustration()}
-        <img src="/assets/images/personne-qui-cogite.svg" alt="" />
+        <IllustrationHerosCollectivites />
       {/snippet}
     </HerosRiche>
   {/snippet}
@@ -72,9 +73,3 @@
 {:else}
   <Solutions {itemsCyber} />
 {/if}
-
-<style lang="scss">
-  img {
-    width: 100%;
-  }
-</style>
