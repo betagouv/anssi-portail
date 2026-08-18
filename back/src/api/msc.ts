@@ -73,7 +73,7 @@ import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGro
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
 
-  configurationServeur.adaptateurGestionErreur.initialise(app);
+  configurationServeur.adaptateurGestionErreur.initialise();
 
   const { fournisseurChemin, gestionnairesRequêtesComplémentaires } = configurationServeur;
   const { attributionParcours, attributionParcoursMesure, publieMesureConsultée } =
