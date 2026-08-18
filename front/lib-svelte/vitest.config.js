@@ -1,6 +1,6 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig } from 'vitest/config';
-import { plateformePlugin } from './src/plateforme/plateforme.plugin';
+import { plateformePlugin } from './src/plateforme/plateforme.plugin.js';
 
 export default defineConfig({
   test: {

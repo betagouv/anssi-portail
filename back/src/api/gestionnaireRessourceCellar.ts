@@ -15,7 +15,9 @@ export const fabriqueGestionnaireRessourceCellar = (
 ) =>
   filetRouteAsynchrone(async (requete: Request, reponse: Response, suite: NextFunction) => {
     try {
-      const nomDuDocument = requete.params.slug as string;
+      const nomDuDocument = Array.isArray(requete.params.slug)
+        ? requete.params.slug.join('/')
+        : (requete.params.slug as string);
       const fluxCellar = await cellar.getStream(nomDuDocument, cleDuBucket);
 
       if (!fluxCellar) {

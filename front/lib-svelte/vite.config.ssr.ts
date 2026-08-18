@@ -1,10 +1,10 @@
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig, UserConfig } from 'vite';
-import { plateformePlugin } from './src/plateforme/plateforme.plugin';
-import { emetComposantsAutorisés } from './src/utils/composantsAutorises.plugin';
-import { injecteNonce } from './src/utils/injecteNonce.plugin';
+import { plateformePlugin } from './src/plateforme/plateforme.plugin.js';
+import { emetComposantsAutorisés } from './src/utils/composantsAutorises.plugin.js';
+import { injecteNonce } from './src/utils/injecteNonce.plugin.js';
 
-const rollupOptions: NonNullable<UserConfig['build']>['rollupOptions'] = {
+const rolldownOptions: NonNullable<UserConfig['build']>['rolldownOptions'] = {
   input: {
     entreprises: 'src/protection/entreprises/PresentationEntreprises.svelte',
     associations: 'src/protection/associations/PresentationAssociations.svelte',
@@ -51,7 +51,7 @@ export const configSsr: UserConfig = {
     injecteNonce(),
     plateformePlugin(),
     emetComposantsAutorisés(
-      Object.keys(rollupOptions?.input ?? {}),
+      Object.keys(rolldownOptions?.input ?? {}),
       '../../back/src/infra/enrichissement/composantsAutorises.genere.ts'
     ),
   ],
@@ -59,14 +59,7 @@ export const configSsr: UserConfig = {
     ssr: true,
     cssCodeSplit: false,
     outDir: 'dist/serveur',
-    rollupOptions,
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: 'modern-compiler',
-      },
-    },
+    rolldownOptions,
   },
 } as const;
 

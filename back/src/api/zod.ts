@@ -28,7 +28,7 @@ export const valideParametresRequete =
 export const valideCorpsRequete =
   <TZod extends z.ZodType, TBody extends z.infer<TZod>>(objet: TZod) =>
   async (requete: Request<unknown, unknown, TBody, unknown, never>, reponse: Response, suite: NextFunction) => {
-    const resultat = objet.safeParse(requete.body);
+    const resultat = objet.safeParse(requete.body === undefined ? {} : requete.body);
 
     if (!resultat.success) return reponse.status(400).send(z.flattenError(resultat.error));
 
