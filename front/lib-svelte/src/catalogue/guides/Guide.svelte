@@ -25,6 +25,7 @@
   };
 
   const { guideInitial }: Props = $props();
+  let itemMenuActif = $state('#presentation');
 
   let guide = $state<Guide | undefined>(
     untrack(() => {
@@ -51,9 +52,8 @@
     }
   });
 
-  let itemMenuActif = $state(window.location.hash || '#presentation');
-
   onMount(() => {
+    itemMenuActif = window.location.hash || '#presentation';
     const surChangementDeHash = () => {
       itemMenuActif = window.location.hash;
     };
