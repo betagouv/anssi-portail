@@ -23,8 +23,8 @@ const ressourceApresAuthentificationOIDC = ({
       }
 
       try {
-        const { accessToken, idToken, connexionAvecMFA } = await adaptateurOIDC.recupereJeton(requete);
-        const informationsUtilisateur = await adaptateurOIDC.recupereInformationsUtilisateur(accessToken);
+        const { accessToken, idToken, sujet, connexionAvecMFA } = await adaptateurOIDC.recupereJeton(requete);
+        const informationsUtilisateur = await adaptateurOIDC.recupereInformationsUtilisateur(accessToken, sujet);
         const { email } = informationsUtilisateur;
 
         const emailHache = adaptateurHachage.hache(email);

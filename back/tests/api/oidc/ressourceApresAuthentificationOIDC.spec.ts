@@ -86,7 +86,7 @@ describe('La ressource apres authentification OIDC', () => {
 
       it("ajoute les informations de l'utilisateur à la session", async () => {
         adaptateurOIDC.recupereJeton = async () => {
-          return { idToken: 'xx', accessToken: 'y', connexionAvecMFA: false };
+          return { idToken: 'xx', accessToken: 'y', sujet: 'sujet', connexionAvecMFA: false };
         };
         adaptateurOIDC.recupereInformationsUtilisateur = async (accessToken) => {
           if (accessToken === 'y') {
@@ -114,6 +114,7 @@ describe('La ressource apres authentification OIDC', () => {
         adaptateurOIDC.recupereJeton = async () => ({
           idToken: 'tokenAgentConnect',
           accessToken: 'y',
+          sujet: 'sujet',
           connexionAvecMFA: true,
         });
 
@@ -137,6 +138,7 @@ describe('La ressource apres authentification OIDC', () => {
           return {
             idToken: 'tokenAgentConnect',
             accessToken: 'y',
+            sujet: 'sujet',
             connexionAvecMFA: false,
           };
         };
@@ -152,6 +154,7 @@ describe('La ressource apres authentification OIDC', () => {
           return {
             idToken: 'tokenAgentConnect',
             accessToken: 'y',
+            sujet: 'sujet',
             connexionAvecMFA: true,
           };
         };
