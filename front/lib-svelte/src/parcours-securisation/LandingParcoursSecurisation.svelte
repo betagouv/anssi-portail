@@ -56,7 +56,7 @@
   let pageSource = $state('');
 
   onMount(() => {
-    pageSource = `${window.location.pathname}#hero`;
+    pageSource = `${window.location.pathname}-hero`;
   });
 </script>
 

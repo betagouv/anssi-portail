@@ -13,7 +13,7 @@
       encart?.showPopover();
     }, 500);
     if (afficheParcoursSecurisation) {
-      const pageSource = `${window.location.pathname}#encart-lien-vers-demande-diagnostic`;
+      const pageSource = `${window.location.pathname}-encart-lien-vers-demande-diagnostic`;
       hrefCTA = `/modules/1?pageSource=${pageSource}`;
       libelleCTA = 'Je commence à sécuriser';
     }

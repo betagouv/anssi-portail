@@ -5,7 +5,7 @@
   let pageSource = $state('');
 
   onMount(() => {
-    pageSource = `${window.location.pathname}#bascule-parcours-complet`;
+    pageSource = `${window.location.pathname}-bascule-parcours-complet`;
   });
 </script>
 

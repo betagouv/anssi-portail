@@ -39,7 +39,7 @@
   let pageSource = $state('');
 
   onMount(() => {
-    pageSource = `${window.location.pathname}#encart-promotion-parcours-basique`;
+    pageSource = `${window.location.pathname}-encart-promotion-parcours-basique`;
   });
 </script>
 
