@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "esnext",
+    "rootDir": ".",
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -9,6 +10,7 @@
     "skipLibCheck": true,
     "noImplicitAny": true,
     "allowJs": false,
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "types": ["node"]
   }
 }
