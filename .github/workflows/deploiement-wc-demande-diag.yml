@@ -24,7 +24,7 @@ jobs:
       - name: Installe pnpm
         uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
         with:
-          version: 10.34.5
+          version: 11.21.0
 
       - name: Récupérer la version
         run: echo release_version=$(pnpm -F demande-diag exec node -p "require('./package.json').version") >> $GITHUB_ENV

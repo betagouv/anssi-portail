@@ -13,10 +13,29 @@ packages:
 
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 preferFrozenLockfile: true
+strictDepBuilds: false
 
-# Versions partagées entre lib-svelte (compilation) et front (résolution runtime des
-# bundles SSR servis depuis front/_site). Référencées par « catalog: » dans les deux
-# package.json pour éviter toute dérive de version.
+overrides:
+  '@babel/core@<=7.29.0': '>=7.29.6'
+  'brace-expansion@<1.1.13': '5.0.9'
+  'esbuild@>=0.27.3 <0.28.1': '>=0.28.1'
+  'lodash@>=4.0.0 <=4.17.22': '>=4.17.23'
+  'picomatch@>=4.0.0 <4.0.4': '>=4.0.4'
+  'postcss@<8.5.10': '>=8.5.26'
+  'shell-quote@>=1.1.0 <=1.8.3': '>=1.8.4'
+  'svelte@<=5.55.6': '>=5.55.9'
+  'vite@<=6.4.2': '6.4.3'
+  'vitest@<4.1.0': '>=4.1.0'
+  'yaml@>=2.0.0 <2.8.3': '>=2.8.3'
+
+ignoredBuiltDependencies:
+  - '@lab-anssi/lib'
+  - '@lab-anssi/ui-kit'
+  - '@parcel/watcher'
+  - '@sentry/cli'
+  - bcrypt
+  - esbuild
+
 catalog:
   axios: ^1.18.0
   entities: ^8.0.0

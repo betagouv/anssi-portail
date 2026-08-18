@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "serveur.ts",
-  "packageManager": "pnpm@10.34.5",
+  "packageManager": "pnpm@11.21.0",
   "scripts": {
     "preadmin": "pnpm --filter @anssi-portail/axios build && pnpm --filter @anssi-portail/back build",
     "admin": "node -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
@@ -16,7 +16,7 @@
     "format:check": "prettier --check .",
     "test": "pnpm --reporter=append-only -r test",
     "migre-bdd": "pnpm --filter @anssi-portail/back migre-bdd",
-    "preinstall": "npx only-allow@1.2.2 pnpm",
+    "preinstall": "pnpm dlx only-allow@1.2.2 pnpm",
     "postinstall": "pnpm -F regles-eslint build",
     "start": "node back/dist/src/serveur.js",
     "prestart": "pnpm --filter @anssi-portail/axios build && pnpm --filter @anssi-portail/back prestart"
@@ -39,20 +39,5 @@
   },
   "runtimeDependencies": {
     "@lab-anssi/ui-kit": "1.60.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@babel/core@<=7.29.0": ">=7.29.6",
-      "brace-expansion@<1.1.13": "5.0.9",
-      "esbuild@>=0.27.3 <0.28.1": ">=0.28.1",
-      "lodash@>=4.0.0 <=4.17.22": ">=4.17.23",
-      "picomatch@>=4.0.0 <4.0.4": ">=4.0.4",
-      "postcss@<8.5.10": ">=8.5.26",
-      "shell-quote@>=1.1.0 <=1.8.3": ">=1.8.4",
-      "svelte@<=5.55.6": ">=5.55.9",
-      "vite@<=6.4.2": "6.4.3",
-      "vitest@<4.1.0": ">=4.1.0",
-      "yaml@>=2.0.0 <2.8.3": ">=2.8.3"
-    }
   }
 }
