@@ -22,7 +22,7 @@ catalog:
   entities: ^8.0.0
   isomorphic-dompurify: ^3.22.0
   prettier: 3.9.6
-  svelte: ^5.55.9
+  svelte: 5.56.8
 
 minimumReleaseAgeExclude:
   - '@lab-anssi/ui-kit'
