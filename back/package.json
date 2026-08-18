@@ -76,7 +76,7 @@
     "multer": "^2.2.0",
     "npm-run-all2": "^8.0.4",
     "openid-client": "^5.7.1",
-    "p-throttle": "^7.0.0",
+    "p-throttle": "^8.0.0",
     "papaparse": "^5.5.3",
     "pdfjs-dist": "^6.2.108",
     "pg": "^8.20.0",
