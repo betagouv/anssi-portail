@@ -1,5 +1,6 @@
 (function () {
   try {
+    sessionStorage.setItem('pageSource', window.location.pathname);
     const paramètresRecherche = new URLSearchParams(window.location.search);
     const campagne = paramètresRecherche.get('mtm_campaign') || paramètresRecherche.get('utm_campaign');
     if (campagne) {

@@ -6,8 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pagePostConnexion) {
       const urlPostConnexion = new URL(pagePostConnexion, window.location.origin);
       if (urlPostConnexion.origin === window.location.origin) {
-        if (!urlPostConnexion.searchParams.get('pageSource')) {
-          urlPostConnexion.searchParams.set('pageSource', sessionStorage.getItem('pageSource'));
+        const pageSource = sessionStorage.getItem('pageSource');
+        if (!urlPostConnexion.searchParams.get('pageSource') && pageSource) {
+          urlPostConnexion.searchParams.set('pageSource', pageSource);
         }
         const campagne = sessionStorage.getItem('campagne');
         if (campagne) {
