@@ -1,2 +1,10 @@
 front/**/*.html
 !front/lib-svelte/**/*.html
+
+# Fichiers générés ou métadonnées d'outillage, hors périmètre du formatage du code.
+**/dist/**
+**/dist-*/**
+**/AGENTS.md
+.agents/**
+.serena/**
+pnpm-lock.yaml
