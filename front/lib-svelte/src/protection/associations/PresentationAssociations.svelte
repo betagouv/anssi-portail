@@ -7,6 +7,7 @@
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import Proteger from '../Proteger.svelte';
   import MotEnExergue from '../../ui/MotEnExergue.svelte';
+  import IllustrationHerosAssociations from '../animation/IllustrationHerosAssociations.svelte';
 
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Protéger mon association', fondSombre: true };
 </script>
@@ -50,16 +51,10 @@
         Protéger mon <MotEnExergue motif="vague">association</MotEnExergue> contre les cyberattaques
       {/snippet}
       {#snippet illustration()}
-        <img src="/assets/images/personne-avec-micro-consultant-sites-cyber.svg" alt="" />
+        <IllustrationHerosAssociations />
       {/snippet}
     </HerosRiche>
   {/snippet}
 </Alternatives>
 
 <Proteger origine="landing-associations" />
-
-<style lang="scss">
-  img {
-    width: 100%;
-  }
-</style>
