@@ -21,4 +21,5 @@ export const composantsAutorisés: string[] = [
   'parcours-securisation',
   'parcours-cyberdepart',
   'parcours-securisation-complet',
+  'illustration-connexion-inscription',
 ];
