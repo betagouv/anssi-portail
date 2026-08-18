@@ -7,6 +7,7 @@
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import Proteger from '../Proteger.svelte';
   import MotEnExergue from '../../ui/MotEnExergue.svelte';
+  import IllustrationHerosEntreprises from '../animation/IllustrationHerosEntreprises.svelte';
 
   const propriétésFilAriane: PropriétésFilAriane = {
     feuille: 'Protéger mon entreprise contre les cyberattaques',
@@ -52,16 +53,10 @@
         Protéger mon <MotEnExergue motif="vague">entreprise</MotEnExergue> contre les cyberattaques
       {/snippet}
       {#snippet illustration()}
-        <img src="/assets/images/personne-avec-laptop-entoure-de-diagrammes.svg" alt="" />
+        <IllustrationHerosEntreprises />
       {/snippet}
     </HerosRiche>
   {/snippet}
 </Alternatives>
 
 <Proteger origine="landing-entreprises" />
-
-<style lang="scss">
-  img {
-    width: 100%;
-  }
-</style>
