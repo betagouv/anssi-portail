@@ -29,7 +29,7 @@
     "globals": "^17.0.0",
     "npm-run-all2": "^9.0.0",
     "prettier": "catalog:",
-    "prettier-plugin-svelte": "^3.5.1",
+    "prettier-plugin-svelte": "^4.0.0",
     "sass": "^1.102.0",
     "svelte": "catalog:",
     "svelte-check": "^4.4.5",
