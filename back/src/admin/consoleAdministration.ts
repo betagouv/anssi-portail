@@ -132,7 +132,7 @@ export class ConsoleAdministration {
 
   async rattrapageDeTousLesProfilsContactBrevo(tailleLot: number = 500) {
     let lotCourant = 0;
-    let lotUtilisateurs: UtilisateurBDD[] = [];
+    let lotUtilisateurs: UtilisateurBDD[];
     do {
       lotUtilisateurs = await this.knexMSC('utilisateurs')
         .offset(lotCourant * tailleLot)
