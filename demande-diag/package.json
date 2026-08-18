@@ -9,7 +9,7 @@
     "build:prod": "VITE_API_URL=https://messervices.cyber.gouv.fr ENV=prod vite build",
     "format": "prettier --write ."
   },
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@10.34.5",
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^5.1.1",
     "@tsconfig/svelte": "^5.0.8",

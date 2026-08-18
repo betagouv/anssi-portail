@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@10.34.5",
   "devDependencies": {
     "@types/estree": "^1.0.8"
   },
