@@ -42,7 +42,7 @@ class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
       await axios.post(`${this.adaptateurEnvironnement.monAideCyber().url()}/api/demandes/etre-aide`, demandeMAC);
     } catch (e: unknown | Error) {
       if (isAxiosError(e) && e.response && e.response.status >= 400 && e.response.status < 500) {
-        throw new Error(e.response.data.message);
+        throw new Error(e.response.data.message, { cause: e });
       }
       throw e;
     }
