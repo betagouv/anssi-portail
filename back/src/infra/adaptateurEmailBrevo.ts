@@ -13,58 +13,51 @@ import { ClientHttp } from './clientHttp.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurHorloge } from './adaptateurHorloge.js';
 
-const enteteJSON = (adaptateurEnvironnement: AdaptateurEnvironnement) => ({
-  headers: {
-    'api-key': adaptateurEnvironnement.brevo().cléAPI(),
-    accept: 'application/json',
-    'content-type': 'application/json',
-  },
-});
+class AdaptateurEmailBrevo implements AdaptateurEmail {
+  private readonly enteteJSON: { headers: Record<string, string> };
 
-const metsÀJourContact = async ({
-  clientHttp,
-  adaptateurEnvironnement,
-  email,
-  attributes,
-  messageErreur,
-}: {
-  clientHttp: ClientHttp;
-  adaptateurEnvironnement: AdaptateurEnvironnement;
-  email: string;
-  attributes: Record<string, unknown>;
-  messageErreur: string;
-}) => {
-  try {
-    await clientHttp.put(`${adaptateurEnvironnement.brevo().url()}/contacts/${email}`, { attributes });
-  } catch (erreur: unknown) {
-    if (isAxiosError(erreur)) {
-      throw new Error(messageErreur, erreur.response?.data.message);
-    }
-    throw erreur;
+  constructor(
+    private readonly clientHttp: ClientHttp,
+    private readonly adaptateurEnvironnement: AdaptateurEnvironnement,
+    private readonly adaptateurHorloge: AdaptateurHorloge
+  ) {
+    this.enteteJSON = {
+      headers: {
+        'api-key': this.adaptateurEnvironnement.brevo().cléAPI(),
+        accept: 'application/json',
+        'content-type': 'application/json',
+      },
+    };
   }
-};
 
-export const adaptateurEmailBrevo = ({
-  clientHttp,
-  adaptateurEnvironnement,
-  adaptateurHorloge,
-}: {
-  clientHttp: ClientHttp;
-  adaptateurEnvironnement: AdaptateurEnvironnement;
-  adaptateurHorloge: AdaptateurHorloge;
-}): AdaptateurEmail => ({
-  envoieEmailBienvenue: async ({ email, prenom }: { email: string; prenom: string }) => {
-    await clientHttp.post(
-      `${adaptateurEnvironnement.brevo().url()}/smtp/email`,
+  private metsÀJourContact = async (email: string, attributes: Record<string, unknown>, messageErreur: string) => {
+    try {
+      await this.clientHttp.put(
+        `${this.adaptateurEnvironnement.brevo().url()}/contacts/${email}`,
+        { attributes },
+        this.enteteJSON
+      );
+    } catch (erreur: unknown) {
+      if (isAxiosError(erreur)) {
+        throw new Error(messageErreur + erreur.message, { cause: erreur });
+      }
+      throw erreur;
+    }
+  };
+
+  envoieEmailBienvenue = async ({ email, prenom }: { email: string; prenom: string }) => {
+    await this.clientHttp.post(
+      `${this.adaptateurEnvironnement.brevo().url()}/smtp/email`,
       {
         to: [{ email }],
         templateId: parseInt(process.env.BREVO_ID_TEMPLATE_BIENVENUE || '0'),
         PRENOM: decode(prenom),
       },
-      enteteJSON(adaptateurEnvironnement)
+      this.enteteJSON
     );
-  },
-  creeContactBrevo: async ({
+  };
+
+  creeContactBrevo = async ({
     email,
     prenom,
     nom,
@@ -80,8 +73,8 @@ export const adaptateurEmailBrevo = ({
     telephone?: string;
   }) => {
     try {
-      await clientHttp.post(
-        `${adaptateurEnvironnement.brevo().url()}/contacts`,
+      await this.clientHttp.post(
+        `${this.adaptateurEnvironnement.brevo().url()}/contacts`,
         {
           updateEnabled: true,
           email,
@@ -93,7 +86,7 @@ export const adaptateurEmailBrevo = ({
             _PIXEL_TRACKING_CONSENT: pixelDeSuiviAccepté,
           },
         },
-        enteteJSON(adaptateurEnvironnement)
+        this.enteteJSON
       );
     } catch (erreur: Error | unknown) {
       if (isAxiosError(erreur)) {
@@ -105,18 +98,19 @@ export const adaptateurEmailBrevo = ({
         return Promise.reject(erreur);
       }
     }
-  },
-  inscrisAInfolettre: async (email: string) => {
+  };
+
+  inscrisAInfolettre = async (email: string) => {
     try {
-      await clientHttp.post(
-        `${adaptateurEnvironnement.brevo().url()}/contacts`,
+      await this.clientHttp.post(
+        `${this.adaptateurEnvironnement.brevo().url()}/contacts`,
         {
           updateEnabled: true,
           email,
           emailBlacklisted: false,
           listIds: [Number(process.env.BREVO_ID_LISTE_ATTENTE_INFOLETTRE || '-1')].filter((i) => i != -1),
         },
-        enteteJSON(adaptateurEnvironnement)
+        this.enteteJSON
       );
     } catch (erreur: Error | unknown) {
       if (isAxiosError(erreur)) {
@@ -127,53 +121,63 @@ export const adaptateurEmailBrevo = ({
         throw erreur;
       }
     }
-  },
-  metsÀJourMesureConsultée: async (événement: MesureConsultee) =>
-    metsÀJourContact({
-      clientHttp,
-      adaptateurEnvironnement,
-      email: événement.email,
-      attributes: { DATE_DERNIERE_CONSULTATION_MESURE: adaptateurHorloge.maintenant() },
-      messageErreur: "Erreur lors de la mise à jour d'une mesure consultée sur Brévo : ",
-    }),
-  metsÀJourMesurePriseEnCompte: async (événement: MesurePriseEnCompte) =>
-    metsÀJourContact({
-      clientHttp,
-      adaptateurEnvironnement,
-      email: événement.email,
-      attributes: { DATE_DERNIERE_PRISE_EN_COMPTE_MESURE: adaptateurHorloge.maintenant() },
-      messageErreur: "Erreur lors de la mise à jour d'une mesure prise en compte sur Brévo : ",
-    }),
-  metsÀJourModuleTerminé: async (événement: ModuleTermine) =>
-    metsÀJourContact({
-      clientHttp,
-      adaptateurEnvironnement,
-      email: événement.email,
-      attributes: { DATE_DERNIERE_COMPLETION_MODULE: adaptateurHorloge.maintenant() },
-      messageErreur: "Erreur lors de la mise à jour d'une complétion de module sur Brévo : ",
-    }),
-  metsÀJourBadgeCyberdépartDébloqué: async (événement: BadgeCyberdépartDébloqué) =>
-    metsÀJourContact({
-      clientHttp,
-      adaptateurEnvironnement,
-      email: événement.email,
-      attributes: { DATE_DEBLOCAGE_BADGE_CYBERDEPART: adaptateurHorloge.maintenant() },
-      messageErreur: 'Erreur lors de la mise à jour du déblocage du badge CyberDépart sur Brévo : ',
-    }),
-  metsÀJourParcours: async (événement: ParcoursChangé | ParcoursRejoint) =>
-    metsÀJourContact({
-      clientHttp,
-      adaptateurEnvironnement,
-      email: événement.email,
-      attributes: { PARCOURS: événement.parcours },
-      messageErreur: 'Erreur lors de la mise à jour du parcours sur Brévo : ',
-    }),
-});
+  };
+
+  metsÀJourMesureConsultée = async (événement: MesureConsultee) => {
+    await this.metsÀJourContact(
+      événement.email,
+      { DATE_DERNIERE_CONSULTATION_MESURE: this.adaptateurHorloge.maintenant() },
+      "Erreur lors de la mise à jour d'une mesure consultée sur Brévo : "
+    );
+  };
+
+  metsÀJourMesurePriseEnCompte = async (événement: MesurePriseEnCompte) => {
+    await this.metsÀJourContact(
+      événement.email,
+      { DATE_DERNIERE_PRISE_EN_COMPTE_MESURE: this.adaptateurHorloge.maintenant() },
+      "Erreur lors de la mise à jour d'une mesure prise en compte sur Brévo : "
+    );
+  };
+
+  metsÀJourModuleTerminé = async (événement: ModuleTermine) => {
+    await this.metsÀJourContact(
+      événement.email,
+      { DATE_DERNIERE_COMPLETION_MODULE: this.adaptateurHorloge.maintenant() },
+      "Erreur lors de la mise à jour d'une complétion de module sur Brévo : "
+    );
+  };
+
+  metsÀJourBadgeCyberdépartDébloqué = async (événement: BadgeCyberdépartDébloqué) => {
+    await this.metsÀJourContact(
+      événement.email,
+      { DATE_DEBLOCAGE_BADGE_CYBERDEPART: this.adaptateurHorloge.maintenant() },
+      'Erreur lors de la mise à jour du déblocage du badge CyberDépart sur Brévo : '
+    );
+  };
+
+  metsÀJourParcours = async (événement: ParcoursChangé | ParcoursRejoint) => {
+    await this.metsÀJourContact(
+      événement.email,
+      { PARCOURS: événement.parcours },
+      'Erreur lors de la mise à jour du parcours sur Brévo : '
+    );
+  };
+}
+
+export const adaptateurEmailBrevo = ({
+  clientHttp,
+  adaptateurEnvironnement,
+  adaptateurHorloge,
+}: {
+  clientHttp: ClientHttp;
+  adaptateurEnvironnement: AdaptateurEnvironnement;
+  adaptateurHorloge: AdaptateurHorloge;
+}): AdaptateurEmail => new AdaptateurEmailBrevo(clientHttp, adaptateurEnvironnement, adaptateurHorloge);
 
 export const fabriqueAdaptateurEmail = (
   adaptateurEnvironnement: AdaptateurEnvironnement,
   adaptateurHorloge: AdaptateurHorloge
 ) =>
   adaptateurEnvironnement.brevo().url() && adaptateurEnvironnement.brevo().cléAPI()
-    ? adaptateurEmailBrevo({ clientHttp: axiosSécurisé, adaptateurEnvironnement, adaptateurHorloge })
+    ? new AdaptateurEmailBrevo(axiosSécurisé, adaptateurEnvironnement, adaptateurHorloge)
     : adaptateurEmailConsole();
