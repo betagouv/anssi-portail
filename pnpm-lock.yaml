@@ -297,7 +297,7 @@ importers:
         version: 3.22.0(eslint@9.39.5(supports-color@10.2.2))(svelte@5.56.8(@typescript-eslint/types@8.67.0))
       globals:
         specifier: ^17.0.0
-        version: 17.9.0
+        version: 17.10.0
       sass:
         specifier: ^1.98.0
         version: 1.102.0
@@ -367,7 +367,7 @@ importers:
         version: 3.22.0(eslint@9.39.5(supports-color@10.2.2))(svelte@5.56.8(@typescript-eslint/types@8.67.0))
       globals:
         specifier: ^17.0.0
-        version: 17.9.0
+        version: 17.10.0
       npm-run-all2:
         specifier: ^9.0.0
         version: 9.0.3
@@ -2862,8 +2862,8 @@ packages:
     resolution: {integrity: sha512-c/c15i26VrJ4IRt5Z89DnIzCGDn9EcebibhAOjw5ibqEHsE1wLUgkPn9RDmNcUKyU87GeaL633nyJ+pplFR2ZQ==}
     engines: {node: '>=18'}
 
-  globals@17.9.0:
-    resolution: {integrity: sha512-m/MvAW61QVU5VDNF1Vj8axt016h8w7L5TU1e9zlab7XIttAT2YAlCwl75K1fOqvMM9apmD7lbCIRhpfkhmxhCg==}
+  globals@17.10.0:
+    resolution: {integrity: sha512-V0kztuWST2k8A/VbxAY8+L+7+Rgo3fyA24IHRLrZp7HOzJjV0gHSaZUjK9lpP/IrBSNite2tZ1prhRkinRu1CA==}
     engines: {node: '>=18'}
 
   gopd@1.2.0:
@@ -6861,7 +6861,7 @@ snapshots:
 
   globals@16.5.0: {}
 
-  globals@17.9.0: {}
+  globals@17.10.0: {}
 
   gopd@1.2.0: {}
 
