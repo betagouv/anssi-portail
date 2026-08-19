@@ -141,7 +141,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     clientSecret: () => '',
   }),
   serveur: () => ({
-    trustProxy: () => '',
+    trustProxy: () => 0,
     maxRequetesParMinute: () => 0,
     maxRequetesParMinuteAPI: () => 200,
     ipAutorisees: () => false,
@@ -326,7 +326,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   messagerieInstantanee: fausseMessagerieInstantanee,
   middleware: vraiMiddleware,
   reseau: {
-    trustProxy: '0',
+    trustProxy: 0,
     maxRequetesParMinutes: 10,
     maxRequetesParMinuteAPI: 10,
     ipAutorisees: false,

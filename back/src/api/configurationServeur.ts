@@ -57,7 +57,7 @@ export type ConfigurationServeur = {
   messagerieInstantanee: MessagerieInstantanee;
   middleware: Middleware;
   reseau: {
-    trustProxy: number | string;
+    trustProxy: number;
     maxRequetesParMinutes: number;
     maxRequetesParMinuteAPI: number;
     ipAutorisees: string[] | false;
