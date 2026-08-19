@@ -1,10 +1,17 @@
 import axiosSécurisé, { isAxiosError } from '@anssi-portail/axios';
 import { decode } from 'html-entities';
+import { BadgeCyberdépartDébloqué } from '../bus/evenements/badgeCyberdepartDebloque.js';
+import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
+import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
+import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
+import { ParcoursChangé } from '../bus/evenements/parcoursChange.js';
+import { ParcoursRejoint } from '../bus/evenements/parcoursRejoint.js';
 import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { Telephone } from '../metier/telephone.js';
 import { adaptateurEmailConsole } from './adaptateurEmailConsole.js';
 import { ClientHttp } from './clientHttp.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
+import { AdaptateurHorloge } from './adaptateurHorloge.js';
 
 const enteteJSON = (adaptateurEnvironnement: AdaptateurEnvironnement) => ({
   headers: {
@@ -14,12 +21,37 @@ const enteteJSON = (adaptateurEnvironnement: AdaptateurEnvironnement) => ({
   },
 });
 
-export const adaptateurEmailBrevo = ({
+const metsÀJourContact = async ({
   clientHttp,
   adaptateurEnvironnement,
+  email,
+  attributes,
+  messageErreur,
 }: {
   clientHttp: ClientHttp;
   adaptateurEnvironnement: AdaptateurEnvironnement;
+  email: string;
+  attributes: Record<string, unknown>;
+  messageErreur: string;
+}) => {
+  try {
+    await clientHttp.put(`${adaptateurEnvironnement.brevo().url()}/contacts/${email}`, { attributes });
+  } catch (erreur: unknown) {
+    if (isAxiosError(erreur)) {
+      throw new Error(messageErreur, erreur.response?.data.message);
+    }
+    throw erreur;
+  }
+};
+
+export const adaptateurEmailBrevo = ({
+  clientHttp,
+  adaptateurEnvironnement,
+  adaptateurHorloge,
+}: {
+  clientHttp: ClientHttp;
+  adaptateurEnvironnement: AdaptateurEnvironnement;
+  adaptateurHorloge: AdaptateurHorloge;
 }): AdaptateurEmail => ({
   envoieEmailBienvenue: async ({ email, prenom }: { email: string; prenom: string }) => {
     await clientHttp.post(
@@ -96,9 +128,52 @@ export const adaptateurEmailBrevo = ({
       }
     }
   },
+  metsÀJourMesureConsultée: async (événement: MesureConsultee) =>
+    metsÀJourContact({
+      clientHttp,
+      adaptateurEnvironnement,
+      email: événement.email,
+      attributes: { DATE_DERNIERE_CONSULTATION_MESURE: adaptateurHorloge.maintenant() },
+      messageErreur: "Erreur lors de la mise à jour d'une mesure consultée sur Brévo : ",
+    }),
+  metsÀJourMesurePriseEnCompte: async (événement: MesurePriseEnCompte) =>
+    metsÀJourContact({
+      clientHttp,
+      adaptateurEnvironnement,
+      email: événement.email,
+      attributes: { DATE_DERNIERE_PRISE_EN_COMPTE_MESURE: adaptateurHorloge.maintenant() },
+      messageErreur: "Erreur lors de la mise à jour d'une mesure prise en compte sur Brévo : ",
+    }),
+  metsÀJourModuleTerminé: async (événement: ModuleTermine) =>
+    metsÀJourContact({
+      clientHttp,
+      adaptateurEnvironnement,
+      email: événement.email,
+      attributes: { DATE_DERNIERE_COMPLETION_MODULE: adaptateurHorloge.maintenant() },
+      messageErreur: "Erreur lors de la mise à jour d'une complétion de module sur Brévo : ",
+    }),
+  metsÀJourBadgeCyberdépartDébloqué: async (événement: BadgeCyberdépartDébloqué) =>
+    metsÀJourContact({
+      clientHttp,
+      adaptateurEnvironnement,
+      email: événement.email,
+      attributes: { DATE_DEBLOCAGE_BADGE_CYBERDEPART: adaptateurHorloge.maintenant() },
+      messageErreur: 'Erreur lors de la mise à jour du déblocage du badge CyberDépart sur Brévo : ',
+    }),
+  metsÀJourParcours: async (événement: ParcoursChangé | ParcoursRejoint) =>
+    metsÀJourContact({
+      clientHttp,
+      adaptateurEnvironnement,
+      email: événement.email,
+      attributes: { PARCOURS: événement.parcours },
+      messageErreur: 'Erreur lors de la mise à jour du parcours sur Brévo : ',
+    }),
 });
 
-export const fabriqueAdaptateurEmail = (adaptateurEnvironnement: AdaptateurEnvironnement) =>
+export const fabriqueAdaptateurEmail = (
+  adaptateurEnvironnement: AdaptateurEnvironnement,
+  adaptateurHorloge: AdaptateurHorloge
+) =>
   adaptateurEnvironnement.brevo().url() && adaptateurEnvironnement.brevo().cléAPI()
-    ? adaptateurEmailBrevo({ clientHttp: axiosSécurisé, adaptateurEnvironnement })
+    ? adaptateurEmailBrevo({ clientHttp: axiosSécurisé, adaptateurEnvironnement, adaptateurHorloge })
     : adaptateurEmailConsole();
