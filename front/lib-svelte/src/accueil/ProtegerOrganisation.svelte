@@ -3,6 +3,7 @@
   import Bouton from '../ui/Bouton.svelte';
   import Lien from '../ui/Lien.svelte';
   import IllustrationProtegerOrganisation from './animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
+  import MotEnExergue from '../ui/MotEnExergue.svelte';
 
   const tags = [{ label: 'TPE' }, { label: 'PME' }, { label: 'ETI' }, { label: 'Collectivités' }];
 
@@ -19,7 +20,8 @@
     <div class="en-tete">
       <span class="badge-accompagnement">+6000 organisations déjà accompagnées 🚀</span>
       <h2 class="titre fr-h1">
-        Chaque organisation a son point de <span class="mot-souligne">départ.</span><br />Trouvez le vôtre.
+        Chaque organisation a son point de <MotEnExergue motif="cercle">départ.</MotEnExergue>
+        <br />Trouvez le vôtre.
       </h2>
 
       <p class="description">
@@ -117,25 +119,6 @@
 
     .titre {
       margin-block: 0;
-    }
-
-    .mot-souligne {
-      position: relative;
-      z-index: 0;
-      white-space: break-spaces;
-
-      &::after {
-        content: '';
-        background-image: url('/assets/images/motif-surlignage-cercle.svg');
-        background-repeat: no-repeat;
-        position: absolute;
-        left: -4%;
-        bottom: -5%;
-        width: 110%;
-        height: 100%;
-        z-index: -1;
-        pointer-events: none;
-      }
     }
 
     .description {
