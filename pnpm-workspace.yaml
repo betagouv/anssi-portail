@@ -28,13 +28,13 @@ overrides:
   'vitest@<4.1.0': '>=4.1.0'
   'yaml@>=2.0.0 <2.8.3': '>=2.8.3'
 
-ignoredBuiltDependencies:
-  - '@lab-anssi/lib'
-  - '@lab-anssi/ui-kit'
-  - '@parcel/watcher'
-  - '@sentry/cli'
-  - bcrypt
-  - esbuild
+allowBuilds:
+  '@lab-anssi/lib': false
+  '@lab-anssi/ui-kit': false
+  '@parcel/watcher': false
+  '@sentry/cli': false
+  bcrypt: false
+  esbuild: false
 
 catalog:
   axios: ^1.18.0
