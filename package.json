@@ -16,7 +16,7 @@
     "format:check": "prettier --check .",
     "test": "pnpm --reporter=append-only -r test",
     "migre-bdd": "pnpm --filter @anssi-portail/back migre-bdd",
-    "preinstall": "npx only-allow@1.2.2 pnpm",
+    "preinstall": "pnpm dlx only-allow@1.2.2 pnpm",
     "postinstall": "pnpm -F regles-eslint build",
     "start": "node back/dist/src/serveur.js",
     "prestart": "pnpm --filter @anssi-portail/axios build && pnpm --filter @anssi-portail/back prestart"
