@@ -24,11 +24,20 @@
   <div class="barre" bind:this={barre}>
     <div class="barre-actuelle"></div>
     {#if cible}
-      <div
-        class="badge-recompense"
-        class:actif={actuel >= cible}
-        title={actuel < cible ? 'Validez des actions pour accéder à votre Cyberdépart' : ''}
-      ></div>
+      {#if actuel < cible}
+        <div class="badge-recompense">
+          <dsfr-tooltip
+            content="Validez des actions pour accéder à votre Cyberdépart"
+            id="badge-infobulle"
+            class="badge-infobulle"
+            type="hover"
+          >
+            <div class="zone-survol"></div>
+          </dsfr-tooltip>
+        </div>
+      {:else}
+        <div class="badge-recompense actif"></div>
+      {/if}
     {/if}
   </div>
 </div>
@@ -103,6 +112,21 @@
 
         &.actif::before {
           background-color: var(--background-flat-success);
+        }
+
+        .badge-infobulle {
+          display: block;
+          position: absolute;
+          top: -16px;
+          left: 16px;
+        }
+
+        .zone-survol {
+          position: absolute;
+          top: -4px;
+          left: -16px;
+          height: 32px;
+          width: 32px;
         }
       }
     }
