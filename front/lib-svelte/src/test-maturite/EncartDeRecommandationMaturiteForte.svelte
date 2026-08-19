@@ -53,6 +53,7 @@
       <EncartPromotionParcoursComplet
         titre="6 modules pour vous protéger contre les risques les plus courants"
         description="Un programme d'accompagnement gratuit, pensé pour les PME/ETI et les organisations concernées par la directive NIS 2."
+        orientation="droite"
       >
         {#snippet tags()}
           <TagProgrammeGratuit />
