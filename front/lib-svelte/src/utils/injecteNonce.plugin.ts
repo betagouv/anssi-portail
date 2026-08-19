@@ -1,36 +1,48 @@
 import * as Vite from 'vite';
 
-const injecteNonceWebcomponents = (code: string) => {
-  let codeAvecNonce = `const nonce =
+const estRuntimeCssSvelte = (id: string): boolean => {
+  const CHEMIN_RUNTIME_CSS_SVELTE = '/svelte/src/internal/client/dom/css.js';
+
+  const chemin = Vite.normalizePath(id).split('?')[0];
+  return chemin.endsWith(CHEMIN_RUNTIME_CSS_SVELTE);
+};
+
+const injecteNonceRuntimeSvelte = (code: string): string => {
+  const CREATION_STYLE_SVELTE = "const style = create_element('style');";
+
+  if (!code.includes(CREATION_STYLE_SVELTE)) {
+    throw new Error("Impossible d'ajouter le nonce : le runtime CSS de Svelte a changé");
+  }
+
+  const récupérationNonce = `const __anssiCspNonce =
   typeof document !== 'undefined'
     ? document.querySelector('meta[property="csp-nonce"]')?.getAttribute('content')
-    : null;\n${code}`;
+    : null;
+`;
 
-  codeAvecNonce = codeAvecNonce
-    .replace(
-      /\b(?:const|let|var)\s+(\w+)\s*=\s*\w+\(\s*(["'`])style\2\s*\)\s*;/gm,
-      (match, nomVariable) => `${match}${nomVariable}.nonce=nonce;`
-    )
-    .replace(
-      /\b(?:const|let|var)\s+(\w+)\s*=\s*document\.createElement\(\s*(["'`])style\2\s*\)\s*;/gm,
-      (match, nomVariable) => `${match}${nomVariable}.nonce=nonce;`
-    );
+  const codeAvecNonce = code.replace(
+    CREATION_STYLE_SVELTE,
+    `${CREATION_STYLE_SVELTE}
+    if (__anssiCspNonce) style.nonce = __anssiCspNonce;`
+  );
 
-  return codeAvecNonce;
+  return `${récupérationNonce}\n${codeAvecNonce}`;
 };
 
 export const injecteNonce = (): Vite.Plugin => ({
   name: 'injecte-nonce',
-  enforce: 'post',
-  generateBundle(_options, bundle) {
-    console.log('📝 Ajout de la gestion du Nonce');
+  enforce: 'pre',
 
-    for (const file of Object.values(bundle)) {
-      if (file.type === 'chunk' && file.code) {
-        // Ajoute le nonce aux éléments style générés par Svelte.
-        file.code = injecteNonceWebcomponents(file.code);
-      }
+  transform(code, id) {
+    if (!estRuntimeCssSvelte(id)) {
+      return;
     }
-    console.log('✅');
+
+    console.log(`📝 Ajout de la gestion du nonce dans ${id}`);
+
+    return {
+      code: injecteNonceRuntimeSvelte(code),
+      map: null,
+    };
   },
 });
