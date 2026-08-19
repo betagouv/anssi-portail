@@ -3,7 +3,7 @@ import { Suivi } from '../../metier/suivi.js';
 
 export class ParcoursRejoint {
   constructor(
-    readonly emailHache: string,
+    readonly email: string,
     readonly parcours: Parcours,
     readonly motif: MotifChangementParcours,
     readonly suivi?: Suivi

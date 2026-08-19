@@ -39,7 +39,7 @@ describe("Le middleware d'attribution de parcours", () => {
 
       const evenement = busEvenements.recupereEvenement(ParcoursRejoint);
       assert.equal(utilisateurMitÀJour?.parcoursActuel(), 'complet');
-      assert.equal(evenement?.emailHache, 'chuck@yopmail.com-hache');
+      assert.equal(evenement?.email, 'chuck@yopmail.com');
       assert.equal(evenement?.parcours, 'complet');
       assert.equal(evenement?.motif, 'visite-page-module');
       assert.equal(evenement?.suivi?.campagne, 'campagne_2026_NA');
@@ -93,7 +93,7 @@ describe("Le middleware d'attribution de parcours", () => {
 
       const evenement = busEvenements.recupereEvenement(ParcoursChangé);
       assert.equal(utilisateurMitÀJour?.parcoursActuel(), 'complet');
-      assert.equal(evenement?.emailHache, 'chuck@yopmail.com-hache');
+      assert.equal(evenement?.email, 'chuck@yopmail.com');
       assert.equal(evenement?.parcours, 'complet');
       assert.equal(evenement?.motif, 'visite-page-module');
       assert.equal(evenement?.suivi?.campagne, 'campagne_2026_NA');

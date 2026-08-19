@@ -164,7 +164,7 @@ export class Utilisateur {
     await entrepotPriseEnCompte.ajoute(new PriseEnCompte(this, mesure));
     await busEvenements.publie(
       new MesurePriseEnCompte(
-        this.emailHache(),
+        this.email,
         mesure.id,
         module.nombreDeMesures(),
         module.positionDeLaMesure(mesure),
@@ -174,19 +174,13 @@ export class Utilisateur {
 
     this.mesuresPrisesEnCompte.push(mesure);
     if (this.nombreDeMesuresPrisesEnCompte(module) === module.nombreDeMesures()) {
-      await busEvenements.publie(
-        new ModuleTermine(this.emailHache(), module.id, module.nom, this.parcours ?? undefined)
-      );
+      await busEvenements.publie(new ModuleTermine(this.email, module.id, module.nom, this.parcours ?? undefined));
       nouvelEtatModule.moduleTerminé = true;
     }
     const cibleBadgeCyberdépart = module.cibleDéblocageBadgeCyberdépart();
     if (this.nombreDeMesuresPrisesEnCompte(module) === cibleBadgeCyberdépart) {
       await busEvenements.publie(
-        new BadgeCyberdépartDébloqué(
-          this.emailHache(),
-          this.nombreDeMesuresPrisesEnCompte(module),
-          module.nombreDeMesures()
-        )
+        new BadgeCyberdépartDébloqué(this.email, this.nombreDeMesuresPrisesEnCompte(module), module.nombreDeMesures())
       );
       nouvelEtatModule.badgeCyberdépartDebloqué = true;
     }
@@ -218,9 +212,9 @@ export class Utilisateur {
     if (this.parcours === parcours || this.parcours === 'complet') return;
 
     if (!this.parcours) {
-      await busEvenements.publie(new ParcoursRejoint(this.emailHache(), parcours, motif, suivi));
+      await busEvenements.publie(new ParcoursRejoint(this.email, parcours, motif, suivi));
     } else {
-      await busEvenements.publie(new ParcoursChangé(this.emailHache(), this.parcours, parcours, motif, suivi));
+      await busEvenements.publie(new ParcoursChangé(this.email, this.parcours, parcours, motif, suivi));
     }
     this.parcours = parcours;
   }

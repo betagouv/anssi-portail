@@ -4,6 +4,8 @@ import { consigneEvenementMesureConsulteeDansJournal } from '../../src/bus/consi
 import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
+import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 
 describe("L'abonnement qui consigne la consultation d'une mesure par un utilisateur dans le journal", () => {
   it('consigne un évènement MesureConsultee', async () => {
@@ -17,16 +19,22 @@ describe("L'abonnement qui consigne la consultation d'une mesure par un utilisat
       maintenant: () => new Date('2025-03-10'),
     };
 
+    const adaptateurHachage: AdaptateurHachage = {
+      ...fauxAdaptateurHachage,
+      hache: (valeur) => `${valeur}-hacheHMAC`,
+    };
+
     await consigneEvenementMesureConsulteeDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
-    })(new MesureConsultee('AUTH.5', 'u1@example.com-hache'));
+      adaptateurHachage,
+    })(new MesureConsultee('u1@example.com', 'AUTH.5'));
 
     assert.deepEqual(evenementRecu, {
       type: 'MESURE_CONSULTEE',
       donnees: {
+        idUtilisateur: 'u1@example.com-hacheHMAC',
         idMesure: 'AUTH.5',
-        idUtilisateur: 'u1@example.com-hache',
       },
       date: new Date('2025-03-10'),
     });
