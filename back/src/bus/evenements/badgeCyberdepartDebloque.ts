@@ -1,6 +1,6 @@
 export class BadgeCyberdépartDébloqué {
   constructor(
-    readonly emailHache: string,
+    readonly email: string,
     readonly nombreMesuresActuel: number,
     readonly nombreMesuresTotal: number
   ) {}

@@ -2,8 +2,10 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { consigneParcoursChangéDansJournal } from '../../src/bus/consigneParcoursChangeDansJournal.js';
 import { ParcoursChangé } from '../../src/bus/evenements/parcoursChange.js';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 
 describe("L'abonnement qui consigne l'évènement de changement de parcours dans le journal", () => {
   it("consigne l'évènement ParcoursChangé", async () => {
@@ -21,15 +23,21 @@ describe("L'abonnement qui consigne l'évènement de changement de parcours dans
       source: 'landing-parcours-securisation',
     };
 
+    const adaptateurHachage: AdaptateurHachage = {
+      ...fauxAdaptateurHachage,
+      hache: (valeur) => `${valeur}-hacheHMAC`,
+    };
+
     await consigneParcoursChangéDansJournal({
       adaptateurHorloge,
       adaptateurJournal,
-    })(new ParcoursChangé('test@email-hache', 'allégé', 'complet', 'prise-en-compte-mesure', suivi));
+      adaptateurHachage,
+    })(new ParcoursChangé('test@email', 'allégé', 'complet', 'prise-en-compte-mesure', suivi));
 
     assert.deepEqual(evenementRecu, {
       type: 'PARCOURS_CHANGÉ',
       donnees: {
-        idUtilisateur: 'test@email-hache',
+        idUtilisateur: 'test@email-hacheHMAC',
         parcoursPrécédent: 'allégé',
         parcours: 'complet',
         motif: 'prise-en-compte-mesure',

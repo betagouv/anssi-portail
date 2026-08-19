@@ -223,7 +223,7 @@ describe("L'utilisateur", () => {
           busEvenements.aRecuUnEvenement(ModuleTermine);
           const evenement = busEvenements.recupereEvenement(ModuleTermine);
 
-          assert.equal(evenement!.emailHache, 'utilisateur@mail.com-hache');
+          assert.equal(evenement!.email, 'utilisateur@mail.com');
           assert.equal(evenement!.idModule, 1);
           assert.equal(evenement!.nomModule, 'Cyberdépart');
           assert.equal(evenement!.parcours, 'allégé');
@@ -408,7 +408,7 @@ describe("L'utilisateur", () => {
           const evenement = busEvenements.recupereEvenement(ParcoursRejoint);
 
           assert.equal(utilisateurDeParcours.parcoursActuel(), 'allégé');
-          assert.equal(evenement?.emailHache, utilisateurDeParcours.emailHache());
+          assert.equal(evenement?.email, utilisateurDeParcours.email);
           assert.equal(evenement?.parcours, 'allégé');
           assert.equal(evenement?.motif, 'prise-en-compte-mesure');
         });
@@ -453,7 +453,7 @@ describe("L'utilisateur", () => {
 
           const evenement = busEvenements.recupereEvenement(ParcoursChangé);
           assert.equal(utilisateurDeParcours.parcoursActuel(), 'complet');
-          assert.equal(evenement?.emailHache, utilisateurDeParcours.emailHache());
+          assert.equal(evenement?.email, utilisateurDeParcours.email);
           assert.equal(evenement?.parcoursPrécédent, 'allégé');
           assert.equal(evenement?.parcours, 'complet');
           assert.equal(evenement?.motif, 'prise-en-compte-mesure');

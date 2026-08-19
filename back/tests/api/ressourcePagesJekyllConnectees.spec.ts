@@ -89,7 +89,7 @@ describe("La ressource d'une page Jekyll connectée", () => {
       busEvenements.aRecuUnEvenement(MesureConsultee);
       const evenement = busEvenements.recupereEvenement(MesureConsultee);
       assert.equal(evenement!.idMesure, 'AUTH.5');
-      assert.equal(evenement!.emailHache, 'jeanne.dupont@user.com-hache');
+      assert.equal(evenement!.email, 'jeanne.dupont@user.com');
     });
 
     it("ne trace pas la visite d'une mesure mal nommée", async () => {

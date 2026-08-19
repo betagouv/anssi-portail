@@ -110,7 +110,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
         busEvenements.aRecuUnEvenement(MesurePriseEnCompte);
         const evenement = busEvenements.recupereEvenement(MesurePriseEnCompte);
         assert.equal(evenement!.idMesure, 'AUTH.5');
-        assert.equal(evenement!.emailHache, 'utilisateur@mail.com-hache');
+        assert.equal(evenement!.email, 'utilisateur@mail.com');
         assert.equal(evenement!.nombreDeMesures, 3);
         assert.equal(evenement!.position, 2);
         assert.equal(evenement?.parcours, 'allégé');

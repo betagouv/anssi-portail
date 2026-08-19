@@ -1,9 +1,11 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
-import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { consigneParcoursRejointDansJournal } from '../../src/bus/consigneParcoursRejointDansJournal.js';
 import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
+import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 
 describe("L'abonnement qui consigne l'évènement de rattachement à un parcours dans le journal", () => {
   it("consigne l'évènement ParcoursRejoint", async () => {
@@ -17,6 +19,11 @@ describe("L'abonnement qui consigne l'évènement de rattachement à un parcours
       maintenant: () => new Date('2025-03-10'),
     };
 
+    const adaptateurHachage: AdaptateurHachage = {
+      ...fauxAdaptateurHachage,
+      hache: (valeur) => `${valeur}-hacheHMAC`,
+    };
+
     const suivi = {
       campagne: 'campagne_2026_NA',
       source: 'landing-parcours-securisation',
@@ -25,11 +32,12 @@ describe("L'abonnement qui consigne l'évènement de rattachement à un parcours
     await consigneParcoursRejointDansJournal({
       adaptateurHorloge,
       adaptateurJournal,
-    })(new ParcoursRejoint('test@email-hache', 'complet', 'prise-en-compte-mesure', suivi));
+      adaptateurHachage,
+    })(new ParcoursRejoint('test@email', 'complet', 'prise-en-compte-mesure', suivi));
 
     assert.deepEqual(evenementRecu, {
       type: 'PARCOURS_REJOINT',
-      donnees: { idUtilisateur: 'test@email-hache', parcours: 'complet', motif: 'prise-en-compte-mesure', suivi },
+      donnees: { idUtilisateur: 'test@email-hacheHMAC', parcours: 'complet', motif: 'prise-en-compte-mesure', suivi },
       date: new Date('2025-03-10'),
     });
   });

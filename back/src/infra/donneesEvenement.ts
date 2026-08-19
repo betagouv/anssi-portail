@@ -90,19 +90,16 @@ export type DonneesEvenementUtilisateurConnecte = Evenement<
 
 export type DonneesSimulationNis2Terminee = Evenement<'SIMULATION_NIS2_TERMINEE', ReponsesEtResultatAvecAnalyse>;
 
-type DonneesMesureConsultee = Evenement<
-  'MESURE_CONSULTEE',
-  Omit<MesureConsultee, 'emailHache'> & { idUtilisateur: string }
->;
+type DonneesMesureConsultee = Evenement<'MESURE_CONSULTEE', Omit<MesureConsultee, 'email'> & { idUtilisateur: string }>;
 
 type DonneesAvisMesureDonne = Evenement<'AVIS_MESURE_DONNE', Omit<AvisMesureDonne, 'commentaire'>>;
 
 type DonneesMesurePriseEnCompte = Evenement<
   'MESURE_PRISE_EN_COMPTE',
-  Omit<MesurePriseEnCompte, 'emailHache'> & { idUtilisateur: string }
+  Omit<MesurePriseEnCompte, 'email'> & { idUtilisateur: string }
 >;
 
-type DonneesModuleTerminé = Evenement<'MODULE_TERMINE', Omit<ModuleTermine, 'emailHache'> & { idUtilisateur: string }>;
+type DonneesModuleTerminé = Evenement<'MODULE_TERMINE', Omit<ModuleTermine, 'email'> & { idUtilisateur: string }>;
 
 type DonnéesBadgeCyberdépartDébloqué = Evenement<
   'BADGE_CYBERDEPART_DEBLOQUE',
