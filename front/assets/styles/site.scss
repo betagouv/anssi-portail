@@ -77,6 +77,12 @@ body {
   font-family: var(--fonts);
   color: var(--noir);
   margin: 0;
+
+  &:has(lab-anssi-bouton-suite-cyber-navigation[data-open]) {
+    @media (max-width: 992px) {
+      overflow: hidden;
+    }
+  }
 }
 
 button {
@@ -627,6 +633,13 @@ dsfr-header {
 
   &.sans-navigation {
     min-height: 116.5px;
+  }
+
+  // Correction du bug d'affichage de la Suite Cyber sur mobile iOS
+  &:has(lab-anssi-bouton-suite-cyber-navigation[data-open]) {
+    @media (max-width: 992px) {
+      --brand-top-overflow: visible;
+    }
   }
 }
 
