@@ -46,7 +46,7 @@ import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeS
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
 
-const adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement);
+const adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge);
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
 const adaptateurJournal = fabriqueAdaptateurJournal();
 const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();

@@ -20,6 +20,7 @@ import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRecherc
 import { AdaptateurEnrichissement } from '../../src/infra/enrichissement/adaptateurEnrichissement.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { MessagerieInstantanee } from '../../src/metier/messagerieInstantanee.js';
+import { Parcours } from '../../src/metier/parcours.js';
 import { fabriqueBusPourLesTests } from '../bus/busPourLesTests.js';
 import { MockCmsCrisp } from '../mockCmsCrisp.js';
 import { EntrepotExigenceMemoire } from '../persistance/entrepotExigenceMemoire.js';
@@ -33,7 +34,6 @@ import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTest
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire.js';
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire.js';
-import { Parcours } from '../../src/metier/parcours.js';
 
 export const ressourceFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.html');
 export const typstFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.typ');
@@ -289,6 +289,11 @@ export const fauxAdaptateurEmail: AdaptateurEmail = {
   envoieEmailBienvenue: async () => {},
   inscrisAInfolettre: async () => {},
   creeContactBrevo: async () => {},
+  metsÀJourMesureConsultée: async () => {},
+  metsÀJourMesurePriseEnCompte: async () => {},
+  metsÀJourModuleTerminé: async () => {},
+  metsÀJourBadgeCyberdépartDébloqué: async () => {},
+  metsÀJourParcours: async () => {},
 };
 
 export const fauxGestionnaireRequêtesComplémentaires: GestionnaireRequêtesComplémentaires = {

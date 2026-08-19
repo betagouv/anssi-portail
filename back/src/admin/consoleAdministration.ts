@@ -31,6 +31,7 @@ import { ReponsesTestMaturite } from '../metier/resultatTestMaturite.js';
 import { Utilisateur } from '../metier/utilisateur.js';
 import { MigrationChiffrement } from './migrationChiffrement.js';
 import { MigrationHash } from './migrationHash.js';
+import { adaptateurHorloge } from '../infra/adaptateurHorloge.js';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
@@ -63,7 +64,7 @@ export class ConsoleAdministration {
       adaptateurHachage: this.adaptateurHachage,
       entrepotMesure,
     });
-    this.adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement);
+    this.adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge);
     this.entrepotFavori = new EntrepotFavoriPostgres({
       adaptateurHachage: this.adaptateurHachage,
     });
