@@ -126,38 +126,38 @@ export const cableTousLesAbonnes = ({
     })
   );
 
-  busEvenements.abonne(
-    MesureConsultee,
-    consigneEvenementMesureConsulteeDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage })
-  );
+  busEvenements.abonnePlusieurs(MesureConsultee, [
+    consigneEvenementMesureConsulteeDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
+    adaptateurEmail.metsÀJourMesureConsultée,
+  ]);
 
   busEvenements.abonnePlusieurs(AvisMesureDonne, [
     consigneRetourAvisMesureDonneDansJournal({ adaptateurJournal, adaptateurHorloge }),
     notifieCommentaireAvisMesureDonneDansMessagerie({ messagerieInstantanee }),
   ]);
 
-  busEvenements.abonne(
-    MesurePriseEnCompte,
-    consigneEvenementMesurePriseEnCompteDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage })
-  );
+  busEvenements.abonnePlusieurs(MesurePriseEnCompte, [
+    consigneEvenementMesurePriseEnCompteDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
+    adaptateurEmail.metsÀJourMesurePriseEnCompte,
+  ]);
 
-  busEvenements.abonne(
-    ModuleTermine,
-    consigneEvenementModuleTerminéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage })
-  );
+  busEvenements.abonnePlusieurs(ModuleTermine, [
+    consigneEvenementModuleTerminéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
+    adaptateurEmail.metsÀJourModuleTerminé,
+  ]);
 
-  busEvenements.abonne(
-    BadgeCyberdépartDébloqué,
-    consigneBadgeCyberdépartDébloquéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage })
-  );
+  busEvenements.abonnePlusieurs(BadgeCyberdépartDébloqué, [
+    consigneBadgeCyberdépartDébloquéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
+    adaptateurEmail.metsÀJourBadgeCyberdépartDébloqué,
+  ]);
 
-  busEvenements.abonne(
-    ParcoursRejoint,
-    consigneParcoursRejointDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage })
-  );
+  busEvenements.abonnePlusieurs(ParcoursRejoint, [
+    consigneParcoursRejointDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
+    adaptateurEmail.metsÀJourParcours,
+  ]);
 
-  busEvenements.abonne(
-    ParcoursChangé,
-    consigneParcoursChangéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage })
-  );
+  busEvenements.abonnePlusieurs(ParcoursChangé, [
+    consigneParcoursChangéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
+    adaptateurEmail.metsÀJourParcours,
+  ]);
 };
