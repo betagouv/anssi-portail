@@ -5,6 +5,7 @@ import { adaptateurEmailBrevo } from '../../src/infra/adaptateurEmailBrevo.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { fabriqueClientPost, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
+import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 
 describe('L’adaptateur email Brevo', () => {
   let clientHttp: ClientHttp;
@@ -27,7 +28,7 @@ describe('L’adaptateur email Brevo', () => {
         postAxiosAppele = true;
       }),
     };
-    brevo = adaptateurEmailBrevo(clientHttp);
+    brevo = adaptateurEmailBrevo({ clientHttp, adaptateurEnvironnement: fauxAdaptateurEnvironnement });
   });
 
   describe('pour la création de contact', () => {
@@ -57,7 +58,7 @@ describe('L’adaptateur email Brevo', () => {
           throw new AxiosError('Une erreur s’est produite');
         }),
       };
-      brevo = adaptateurEmailBrevo(clientHttp);
+      brevo = adaptateurEmailBrevo({ clientHttp, adaptateurEnvironnement: fauxAdaptateurEnvironnement });
     });
 
     afterEach(() => {

@@ -4,26 +4,32 @@ import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { Telephone } from '../metier/telephone.js';
 import { adaptateurEmailConsole } from './adaptateurEmailConsole.js';
 import { ClientHttp } from './clientHttp.js';
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 
-const enteteJSON = {
+const enteteJSON = (adaptateurEnvironnement: AdaptateurEnvironnement) => ({
   headers: {
-    'api-key': process.env.BREVO_CLE_API || '',
+    'api-key': adaptateurEnvironnement.brevo().cléAPI(),
     accept: 'application/json',
     'content-type': 'application/json',
   },
-};
-const urlBase = process.env.BREVO_API_URL_BASE;
+});
 
-export const adaptateurEmailBrevo = (clientHttp: ClientHttp): AdaptateurEmail => ({
+export const adaptateurEmailBrevo = ({
+  clientHttp,
+  adaptateurEnvironnement,
+}: {
+  clientHttp: ClientHttp;
+  adaptateurEnvironnement: AdaptateurEnvironnement;
+}): AdaptateurEmail => ({
   envoieEmailBienvenue: async ({ email, prenom }: { email: string; prenom: string }) => {
     await clientHttp.post(
-      `${urlBase}/smtp/email`,
+      `${adaptateurEnvironnement.brevo().url()}/smtp/email`,
       {
         to: [{ email }],
         templateId: parseInt(process.env.BREVO_ID_TEMPLATE_BIENVENUE || '0'),
         PRENOM: decode(prenom),
       },
-      enteteJSON
+      enteteJSON(adaptateurEnvironnement)
     );
   },
   creeContactBrevo: async ({
@@ -43,7 +49,7 @@ export const adaptateurEmailBrevo = (clientHttp: ClientHttp): AdaptateurEmail =>
   }) => {
     try {
       await clientHttp.post(
-        `${urlBase}/contacts`,
+        `${adaptateurEnvironnement.brevo().url()}/contacts`,
         {
           updateEnabled: true,
           email,
@@ -55,7 +61,7 @@ export const adaptateurEmailBrevo = (clientHttp: ClientHttp): AdaptateurEmail =>
             _PIXEL_TRACKING_CONSENT: pixelDeSuiviAccepté,
           },
         },
-        enteteJSON
+        enteteJSON(adaptateurEnvironnement)
       );
     } catch (erreur: Error | unknown) {
       if (isAxiosError(erreur)) {
@@ -71,14 +77,14 @@ export const adaptateurEmailBrevo = (clientHttp: ClientHttp): AdaptateurEmail =>
   inscrisAInfolettre: async (email: string) => {
     try {
       await clientHttp.post(
-        `${urlBase}/contacts`,
+        `${adaptateurEnvironnement.brevo().url()}/contacts`,
         {
           updateEnabled: true,
           email,
           emailBlacklisted: false,
           listIds: [Number(process.env.BREVO_ID_LISTE_ATTENTE_INFOLETTRE || '-1')].filter((i) => i != -1),
         },
-        enteteJSON
+        enteteJSON(adaptateurEnvironnement)
       );
     } catch (erreur: Error | unknown) {
       if (isAxiosError(erreur)) {
@@ -92,5 +98,7 @@ export const adaptateurEmailBrevo = (clientHttp: ClientHttp): AdaptateurEmail =>
   },
 });
 
-export const fabriqueAdaptateurEmail = () =>
-  process.env.BREVO_CLE_API ? adaptateurEmailBrevo(axiosSécurisé) : adaptateurEmailConsole();
+export const fabriqueAdaptateurEmail = (adaptateurEnvironnement: AdaptateurEnvironnement) =>
+  adaptateurEnvironnement.brevo().url() && adaptateurEnvironnement.brevo().cléAPI()
+    ? adaptateurEmailBrevo({ clientHttp: axiosSécurisé, adaptateurEnvironnement })
+    : adaptateurEmailConsole();

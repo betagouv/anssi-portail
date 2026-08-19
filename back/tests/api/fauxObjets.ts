@@ -227,6 +227,10 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     jwt: () => 'FAUX_SECRET_JWT',
     cookie: () => 'FAUX_SECRET_COOKIE',
   }),
+  brevo: () => ({
+    cléAPI: () => 'FAUSSE_CLE_API_BREVO',
+    url: () => 'FAUSSE_URL_BREVO',
+  }),
 };
 
 const vraiMiddleware = fabriqueMiddleware({

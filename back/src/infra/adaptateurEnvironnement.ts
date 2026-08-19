@@ -101,6 +101,10 @@ type AdaptateurEnvironnement = {
     jwt: () => string;
     cookie: () => string;
   };
+  brevo: () => {
+    cléAPI: () => string;
+    url: () => string;
+  };
 };
 
 const ajouteBarreObliqueFinale = (url: string): string => {
@@ -305,6 +309,10 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       }
       return valeur;
     },
+  }),
+  brevo: () => ({
+    cléAPI: () => process.env.BREVO_CLE_API || '',
+    url: () => process.env.BREVO_API_URL_BASE || '',
   }),
 };
 
