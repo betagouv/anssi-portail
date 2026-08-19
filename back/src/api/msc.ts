@@ -6,6 +6,7 @@ import cors from 'cors';
 import express, { json, NextFunction, Request, RequestHandler, Response } from 'express';
 import { IpFilter } from 'express-ipfilter';
 import rateLimit from 'express-rate-limit';
+import { fabriqueCleRateLimit } from './clefRateLimit.js';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { erreurPageInterdite, erreurPageNonTrouvée, ErreurTraverséeDeChemin } from './erreurs.js';
 import { ressourceFavori } from './favoris/ressourceFavori.js';
@@ -90,10 +91,12 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const limiteRequetesParMinuteGlobal = rateLimit({
     windowMs: 60 * 1000,
     limit: configurationServeur.reseau.maxRequetesParMinutes,
+    keyGenerator: fabriqueCleRateLimit(configurationServeur.reseau.trustProxy),
   });
   const limiteRequetesParMinuteAPI = rateLimit({
     windowMs: 60 * 1000,
     limit: configurationServeur.reseau.maxRequetesParMinuteAPI,
+    keyGenerator: fabriqueCleRateLimit(configurationServeur.reseau.trustProxy),
   });
   app.set('trust proxy', configurationServeur.reseau.trustProxy);
   app.use(limiteRequetesParMinuteGlobal);

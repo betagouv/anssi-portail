@@ -67,6 +67,7 @@
     "express-ipfilter": "^1.4.0",
     "express-rate-limit": "^8.0.0",
     "express-useragent": "^2.1.0",
+    "forwarded-parse": "^2.1.2",
     "helmet": "^8.1.0",
     "html-entities": "^2.6.0",
     "isomorphic-dompurify": "catalog:",
