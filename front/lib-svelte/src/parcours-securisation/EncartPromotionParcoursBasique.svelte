@@ -1,6 +1,12 @@
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
   import { onMount, type Snippet } from 'svelte';
+
+  import IllustrationMesure from './animation/IllustrationMesure.svelte';
+  import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';
+  import IllustrationTuto from './animation/IllustrationTuto.svelte';
+  import IllustrationBadge from './animation/IllustrationBadge.svelte';
+
   interface Props {
     titre: string;
     description: string;
@@ -11,17 +17,20 @@
     {
       titre: 'Rapides à mettre en place',
       description: '13 mesures accessibles, souvent réalisables en quelques minutes.',
-      illustration: '/assets/images/parcours-securisation/illustration-parcours-basique-mots-de-passe.svg',
+      id: 'mesures',
+      rich: true,
     },
     {
       titre: 'Pédagogique',
       description: 'Pas de jargon, on vulgarise la cyber pour vous.',
-      illustration: '/assets/images/parcours-securisation/illustration-parcours-basique-pourquoi.svg',
+      id: 'pedagogique',
+      rich: true,
     },
     {
       titre: 'Pratico-pratique',
       description: 'Des tutos et des outils pour vous aider à faire, concrètement.',
-      illustration: '/assets/images/parcours-securisation/illustration-parcours-basique-comment.svg',
+      id: 'pratico-pratique',
+      rich: true,
     },
     {
       titre: 'Décrochez votre badge Cyberdépart',
@@ -32,7 +41,8 @@
         size: 'sm',
         type: 'accent',
       },
-      illustration: '/assets/images/parcours-securisation/illustration-parcours-basique-badge.svg',
+      id: 'decrochez',
+      rich: true,
     },
   ];
   let { titre, description, tags }: Props = $props();
@@ -55,6 +65,41 @@
     <div slot="hautentete">
       {@render tags()}
     </div>
+
+    <div slot="media-mesures">
+      <IllustrationMesure />
+    </div>
+
+    <div slot="media-pedagogique">
+      <IllustrationPedagogique />
+    </div>
+
+    <div slot="media-pratico-pratique">
+      <IllustrationTuto />
+    </div>
+
+    <div slot="media-decrochez">
+      <IllustrationBadge />
+    </div>
+
+    <div slot="media">
+      <div class="image-animee media-mesures">
+        <IllustrationMesure />
+      </div>
+
+      <div class="image-animee media-pedagogique">
+        <IllustrationPedagogique />
+      </div>
+
+      <div class="image-animee media-pratico-pratique">
+        <IllustrationTuto />
+      </div>
+
+      <div class="image-animee media-decrochez">
+        <IllustrationBadge />
+      </div>
+    </div>
+
     <dsfr-button
       label="Je commence à sécuriser"
       kind="primary"
@@ -68,3 +113,31 @@
     ></dsfr-button>
   </lab-anssi-fonctionnalites>
 </dsfr-container>
+
+<style lang="scss">
+  [slot='media'] {
+    max-width: 486px;
+    width: 100%;
+  }
+
+  .image-animee,
+  lab-anssi-fonctionnalites:not(:defined) [slot^='media'] {
+    display: none;
+  }
+
+  :global([data-active-item='mesures']) .media-mesures {
+    display: block;
+  }
+
+  :global([data-active-item='pedagogique']) .media-pedagogique {
+    display: block;
+  }
+
+  :global([data-active-item='pratico-pratique']) .media-pratico-pratique {
+    display: block;
+  }
+
+  :global([data-active-item='decrochez']) .media-decrochez {
+    display: block;
+  }
+</style>
