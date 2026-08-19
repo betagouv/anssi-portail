@@ -172,12 +172,22 @@ describe('L’adaptateur email Brevo', () => {
     });
 
     it('mets à jour la date de dernière complétion de module', async () => {
+      clientHttp.get = async <T>() => ({
+        data: {
+          email: 'user@yopmail.com',
+          attributes: {
+            NOMBRE_MODULES_TERMINES: 2,
+          },
+        } as unknown as T,
+      });
+
       await brevo.metsÀJourModuleTerminé(new ModuleTermine('module.termine@mail.com', 1, 'CyberDépart', 'allégé'));
 
       assert.equal(urlPutAppelée, 'FAUSSE_URL_BREVO/contacts/module.termine@mail.com');
       assert.deepEqual(donnéesPutAppelées, {
         attributes: {
           DATE_DERNIERE_COMPLETION_MODULE: new Date('2025-03-10'),
+          NOMBRE_MODULES_TERMINES: 3,
         },
       });
     });
