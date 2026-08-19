@@ -7,9 +7,12 @@ const injecteNonceWebcomponents = (code: string) => {
     : null;\n${code}`;
 
   codeAvecNonce = codeAvecNonce
-    .replace(/const (\w+)\s*=\s*\w+\(["']style["']\);/gm, (match, nomVariable) => `${match}${nomVariable}.nonce=nonce;`)
     .replace(
-      /const (\w+)\s*=\s*document\.createElement\(["']style["']\);/gm,
+      /\b(?:const|let|var)\s+(\w+)\s*=\s*\w+\(\s*(["'`])style\2\s*\)\s*;/gm,
+      (match, nomVariable) => `${match}${nomVariable}.nonce=nonce;`
+    )
+    .replace(
+      /\b(?:const|let|var)\s+(\w+)\s*=\s*document\.createElement\(\s*(["'`])style\2\s*\)\s*;/gm,
       (match, nomVariable) => `${match}${nomVariable}.nonce=nonce;`
     );
 
@@ -24,8 +27,7 @@ export const injecteNonce = (): Vite.Plugin => ({
 
     for (const file of Object.values(bundle)) {
       if (file.type === 'chunk' && file.code) {
-        // Remplace `const a = u("style");`
-        // par `const a = u("style");a.nonce=nonce;`
+        // Ajoute le nonce aux éléments style générés par Svelte.
         file.code = injecteNonceWebcomponents(file.code);
       }
     }
