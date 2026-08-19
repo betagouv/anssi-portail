@@ -5,13 +5,14 @@
   import CelluleExigenceNis2 from '../../nis2/tableaux/CelluleExigenceNis2.svelte';
   import Accordeon from '../../ui/Accordeon.svelte';
   import Bouton from '../../ui/Bouton.svelte';
-  import FilAriane from '../../ui/FilAriane.svelte';
+  import FilAriane, { type Props as PropriétésFilAriane } from '../../ui/FilAriane.svelte';
   import Heros from '../../ui/Heros.svelte';
   import { storeAvisUtilisateur, type AvisUtilisateur } from './../avisUtilisateur.store';
   import type { Mesure } from './../mesure';
   import PriseEnCompteMesure from './../PriseEnCompteMesure.svelte';
   import InterlocuteursParcoursSecurisation from './../InterlocuteursParcoursSecurisation.svelte';
   import TutorielMesure from './TutorielMesure.svelte';
+  import { fabriqueFilAriane } from '../../ui/filAriane';
 
   let mesure: Mesure | undefined = $state();
 
@@ -84,6 +85,13 @@
 
   const titre = $derived(mesure ? mesure.phraseAccroche || mesure.titre : '');
   const description = $derived(mesure && mesure.phraseAccroche ? mesure.titre : '');
+  const propriétésFilAriane: PropriétésFilAriane = $derived({
+    feuille: titre,
+    branche: {
+      nom: 'Module',
+      lien: `/modules/${mesure?.idModule}`,
+    },
+  });
 </script>
 
 {#if mesure}
@@ -95,6 +103,7 @@
     {titre}
     theme="clair"
     ficheCatalogue
+    segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
   >
     {#snippet filAriane()}
       <FilAriane
