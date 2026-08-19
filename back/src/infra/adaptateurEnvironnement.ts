@@ -8,7 +8,7 @@ type AdaptateurEnvironnement = {
     clientSecret: () => string;
   };
   serveur: () => {
-    trustProxy: () => string | number;
+    trustProxy: () => number;
     maxRequetesParMinute: () => number;
     maxRequetesParMinuteAPI: () => number;
     ipAutorisees: () => false | string[];
@@ -123,8 +123,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       const trustProxyEnChaine = process.env.SERVEUR_TRUST_PROXY || '0';
       const trustProxyEnNombre = Number(trustProxyEnChaine);
       if (isNaN(trustProxyEnNombre)) {
-        console.warn(`Attention ! SERVEUR_TRUST_PROXY positionné à ${trustProxyEnChaine}`);
-        return trustProxyEnChaine;
+        throw new Error(`SERVEUR_TRUST_PROXY n'est pas un nombre : ${trustProxyEnChaine}`);
       } else {
         return trustProxyEnNombre;
       }
