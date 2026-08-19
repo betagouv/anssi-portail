@@ -1,27 +1,22 @@
-import axios, { AxiosRequestConfig, isAxiosError } from '@anssi-portail/axios';
+import axiosSécurisé, { isAxiosError } from '@anssi-portail/axios';
 import { decode } from 'html-entities';
 import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { Telephone } from '../metier/telephone.js';
 import { adaptateurEmailConsole } from './adaptateurEmailConsole.js';
+import { ClientHttp } from './clientHttp.js';
 
 const enteteJSON = {
   headers: {
-    'api-key': process.env.BREVO_CLE_API,
+    'api-key': process.env.BREVO_CLE_API || '',
     accept: 'application/json',
     'content-type': 'application/json',
   },
 };
 const urlBase = process.env.BREVO_API_URL_BASE;
 
-type FonctionPostAxios = (url: string, data: unknown, config: AxiosRequestConfig<unknown> | undefined) => Promise<void>;
-
-const posteSurBrevo = async (url: string, data: unknown, config: AxiosRequestConfig<unknown> | undefined) => {
-  await axios.post(url, data, config);
-};
-
-export const adaptateurEmailBrevo = (fnAppelleAxios: FonctionPostAxios): AdaptateurEmail => ({
+export const adaptateurEmailBrevo = (clientHttp: ClientHttp): AdaptateurEmail => ({
   envoieEmailBienvenue: async ({ email, prenom }: { email: string; prenom: string }) => {
-    await fnAppelleAxios(
+    await clientHttp.post(
       `${urlBase}/smtp/email`,
       {
         to: [{ email }],
@@ -47,7 +42,7 @@ export const adaptateurEmailBrevo = (fnAppelleAxios: FonctionPostAxios): Adaptat
     telephone?: string;
   }) => {
     try {
-      await fnAppelleAxios(
+      await clientHttp.post(
         `${urlBase}/contacts`,
         {
           updateEnabled: true,
@@ -75,7 +70,7 @@ export const adaptateurEmailBrevo = (fnAppelleAxios: FonctionPostAxios): Adaptat
   },
   inscrisAInfolettre: async (email: string) => {
     try {
-      await fnAppelleAxios(
+      await clientHttp.post(
         `${urlBase}/contacts`,
         {
           updateEnabled: true,
@@ -98,4 +93,4 @@ export const adaptateurEmailBrevo = (fnAppelleAxios: FonctionPostAxios): Adaptat
 });
 
 export const fabriqueAdaptateurEmail = () =>
-  process.env.BREVO_CLE_API ? adaptateurEmailBrevo(posteSurBrevo) : adaptateurEmailConsole();
+  process.env.BREVO_CLE_API ? adaptateurEmailBrevo(axiosSécurisé) : adaptateurEmailConsole();
