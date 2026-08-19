@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "serveur.ts",
-  "packageManager": "pnpm@11.21.0",
   "scripts": {
     "preadmin": "pnpm --filter @anssi-portail/axios build && pnpm --filter @anssi-portail/back build",
     "admin": "node -e \"const admin = new (require('./back/dist/src/admin/consoleAdministration.js').ConsoleAdministration)()\" -i",
@@ -16,7 +15,6 @@
     "format:check": "prettier --check .",
     "test": "pnpm --reporter=append-only -r test",
     "migre-bdd": "pnpm --filter @anssi-portail/back migre-bdd",
-    "preinstall": "pnpm dlx only-allow@1.2.2 pnpm",
     "postinstall": "pnpm -F regles-eslint build",
     "start": "node back/dist/src/serveur.js",
     "prestart": "pnpm --filter @anssi-portail/axios build && pnpm --filter @anssi-portail/back prestart"
@@ -39,5 +37,12 @@
   },
   "runtimeDependencies": {
     "@lab-anssi/ui-kit": "1.60.1"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.21.0",
+      "onFail": "error"
+    }
   }
 }
