@@ -3,9 +3,11 @@ import assert from 'node:assert';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 import { adaptateurEmailBrevo } from '../../src/infra/adaptateurEmailBrevo.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
+import { ClientHttp } from '../../src/infra/clientHttp.js';
+import { fabriqueClientPost, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
 
 describe('L’adaptateur email Brevo', () => {
-  let fnPostAxios: (_url: string) => Promise<void>;
+  let clientHttp: ClientHttp;
   let brevo: AdaptateurEmail;
   let postAxiosAppele: boolean = false;
 
@@ -19,10 +21,13 @@ describe('L’adaptateur email Brevo', () => {
 
   beforeEach(() => {
     postAxiosAppele = false;
-    fnPostAxios = async (_url: string) => {
-      postAxiosAppele = true;
+    clientHttp = {
+      ...fabriqueFauxClientHttp(),
+      post: fabriqueClientPost(async (_url: string) => {
+        postAxiosAppele = true;
+      }),
     };
-    brevo = adaptateurEmailBrevo(fnPostAxios);
+    brevo = adaptateurEmailBrevo(clientHttp);
   });
 
   describe('pour la création de contact', () => {
@@ -46,10 +51,13 @@ describe('L’adaptateur email Brevo', () => {
 
     beforeEach(() => {
       fnConsoleError = console.error;
-      fnPostAxios = async (_url: string) => {
-        throw new AxiosError('Une erreur s’est produite');
+      clientHttp = {
+        ...fabriqueFauxClientHttp(),
+        post: fabriqueClientPost(async (_url: string) => {
+          throw new AxiosError('Une erreur s’est produite');
+        }),
       };
-      brevo = adaptateurEmailBrevo(fnPostAxios);
+      brevo = adaptateurEmailBrevo(clientHttp);
     });
 
     afterEach(() => {
