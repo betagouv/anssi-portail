@@ -13,6 +13,13 @@ import { ClientHttp } from './clientHttp.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurHorloge } from './adaptateurHorloge.js';
 
+type DonnéesUtilisateurBrevo = {
+  email: string;
+  attributes: {
+    NOMBRE_MODULES_TERMINES?: number;
+  };
+};
+
 class AdaptateurEmailBrevo implements AdaptateurEmail {
   private readonly enteteJSON: { headers: Record<string, string> };
 
@@ -140,9 +147,17 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
   };
 
   metsÀJourModuleTerminé = async (événement: ModuleTermine) => {
+    const donnéesUtilisateur = await this.clientHttp.get<DonnéesUtilisateurBrevo>(
+      `${this.adaptateurEnvironnement.brevo().url()}/contacts/${événement.email}`,
+      this.enteteJSON
+    );
+
     await this.metsÀJourContact(
       événement.email,
-      { DATE_DERNIERE_COMPLETION_MODULE: this.adaptateurHorloge.maintenant() },
+      {
+        DATE_DERNIERE_COMPLETION_MODULE: this.adaptateurHorloge.maintenant(),
+        NOMBRE_MODULES_TERMINES: (donnéesUtilisateur.data.attributes.NOMBRE_MODULES_TERMINES ?? 0) + 1,
+      },
       "Erreur lors de la mise à jour d'une complétion de module sur Brévo : "
     );
   };
