@@ -22,6 +22,7 @@
   no-link={true}
   src={`/assets/images/parcours-securisation/mesure-${mesure.id}.svg`}
   title={titre}
+  size="sm"
 >
   <div slot="headerbadges">
     <dsfr-badge
