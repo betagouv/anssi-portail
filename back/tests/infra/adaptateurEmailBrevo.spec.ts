@@ -17,7 +17,9 @@ describe('L’adaptateur email Brevo', () => {
   let clientHttp: ClientHttp;
   let brevo: AdaptateurEmail;
   let postAxiosAppele: boolean = false;
+  let donnéesPostAppelées: unknown;
   let donnéesPutAppelées: DonnéesUtilisateurBrevo;
+  let urlPostAppelée: unknown;
   let urlPutAppelée: unknown;
 
   const fauxContact = () => ({
@@ -38,12 +40,16 @@ describe('L’adaptateur email Brevo', () => {
       email: '',
       attributes: {},
     };
+
+    urlPostAppelée = '';
     urlPutAppelée = '';
 
     clientHttp = {
       ...fabriqueFauxClientHttp(),
-      post: fabriqueClientPost(async (_url: string) => {
+      post: fabriqueClientPost(async (url: string, données: unknown) => {
         postAxiosAppele = true;
+        urlPostAppelée = url;
+        donnéesPostAppelées = données;
       }),
       put: fabriqueClientPut(async (url: string, données: unknown) => {
         donnéesPutAppelées = données as DonnéesUtilisateurBrevo;
@@ -214,12 +220,14 @@ describe('L’adaptateur email Brevo', () => {
       });
     });
 
-    it('mets à jour la date de déblocage du badge CyberDépart', async () => {
-      await brevo.metsÀJourBadgeCyberdépartDébloqué(new BadgeCyberdépartDébloqué('badge.debolque@mail.com', 10, 12));
+    it('émets un événement de déblocage de badge CyberDépart', async () => {
+      await brevo.metsÀJourBadgeCyberdépartDébloqué(new BadgeCyberdépartDébloqué('badge.debloque@mail.com', 10, 12));
 
-      assert.equal(urlPutAppelée, 'FAUSSE_URL_BREVO/contacts/badge.debolque@mail.com');
-      assert.deepEqual(donnéesPutAppelées, {
-        attributes: {
+      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
+      assert.deepEqual(donnéesPostAppelées, {
+        event_name: 'badge_cyberdepart_debloque',
+        identifiers: { email_id: 'badge.debloque@mail.com' },
+        contact_properties: {
           DATE_DEBLOCAGE_BADGE_CYBERDEPART: new Date('2025-03-10'),
         },
       });

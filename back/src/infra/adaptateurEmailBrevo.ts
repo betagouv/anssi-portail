@@ -16,10 +16,17 @@ import { AdaptateurHorloge } from './adaptateurHorloge.js';
 export type DonnéesUtilisateurBrevo = {
   email: string;
   attributes: {
-    NOMBRE_MODULES_TERMINES?: number;
+    DATE_DEBLOCAGE_BADGE_CYBERDEPART?: Date;
     DATE_DERNIERE_PRISE_EN_COMPTE_MESURE?: Date;
     NOMBRE_MESURES_PRISES_EN_COMPTE?: number;
+    NOMBRE_MODULES_TERMINES?: number;
   };
+};
+
+export type ÉvénementBrevo = {
+  email: string;
+  nomÉvénement: 'badge_cyberdepart_debloque';
+  propriétésÀMettreÀJour: Partial<DonnéesUtilisateurBrevo['attributes']>;
 };
 
 class AdaptateurEmailBrevo implements AdaptateurEmail {
@@ -68,6 +75,32 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
         this.enteteJSON
       );
     } catch (erreur: unknown) {
+      if (isAxiosError(erreur)) {
+        throw new Error(messageErreur + erreur.message, { cause: erreur });
+      }
+      throw erreur;
+    }
+  };
+
+  private readonly envoieÉvénement = async ({
+    email,
+    propriétésÀMettreÀJour,
+    nomÉvénement,
+    messageErreur,
+  }: ÉvénementBrevo & { messageErreur: string }) => {
+    try {
+      const corpsDeRequête = {
+        event_name: nomÉvénement,
+        identifiers: { email_id: email },
+        contact_properties: propriétésÀMettreÀJour,
+      };
+      await this.clientHttp.post(
+        `${this.adaptateurEnvironnement.brevo().url()}/events`,
+        corpsDeRequête,
+        this.enteteJSON
+      );
+    } catch (erreur: unknown) {
+      console.log('erreur : ', erreur);
       if (isAxiosError(erreur)) {
         throw new Error(messageErreur + erreur.message, { cause: erreur });
       }
@@ -188,11 +221,12 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
   };
 
   metsÀJourBadgeCyberdépartDébloqué = async (événement: BadgeCyberdépartDébloqué) => {
-    await this.metsÀJourContact(
-      événement.email,
-      { DATE_DEBLOCAGE_BADGE_CYBERDEPART: this.adaptateurHorloge.maintenant() },
-      'Erreur lors de la mise à jour du déblocage du badge CyberDépart sur Brévo : '
-    );
+    await this.envoieÉvénement({
+      email: événement.email,
+      nomÉvénement: 'badge_cyberdepart_debloque',
+      propriétésÀMettreÀJour: { DATE_DEBLOCAGE_BADGE_CYBERDEPART: this.adaptateurHorloge.maintenant() },
+      messageErreur: 'Erreur lors de la mise à jour du déblocage du badge CyberDépart sur Brévo : ',
+    });
   };
 
   metsÀJourParcours = async (événement: ParcoursChangé | ParcoursRejoint) => {
