@@ -17,6 +17,8 @@ import { Module } from '../../src/metier/module.js';
 import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
 import { ParcoursChangé } from '../../src/bus/evenements/parcoursChange.js';
 import { ParcoursAllégéTerminé } from '../../src/bus/evenements/parcoursAllegeTermine.js';
+import { EntrepotMesureMemoire } from '../persistance/entrepotMesureMemoire.js';
+import { ParcoursCompletTerminé } from '../../src/bus/evenements/parcoursCompletTermine.js';
 
 describe("L'utilisateur", () => {
   const infosUtilisateur = {
@@ -167,7 +169,7 @@ describe("L'utilisateur", () => {
     let utilisateurDeParcours: Utilisateur;
     const mesure = mesureAuthentA2Etapes();
     let entrepotPriseEnCompte: EntrepotPriseEnCompte;
-
+    let entrepotMesure: EntrepotMesureMemoire;
     let busEvenements: MockBusEvenement;
     let paramètresPriseEnCompteDéfaut: Parameters<Utilisateur['prendEnCompte']>[0];
     let moduleCyberdépart: Module;
@@ -175,12 +177,14 @@ describe("L'utilisateur", () => {
     beforeEach(() => {
       utilisateurDeParcours = utilisateurDeTest().avecLEmail('utilisateur@mail.com').construis();
       entrepotPriseEnCompte = new EntrepotPriseEnCompteMemoire();
+      entrepotMesure = new EntrepotMesureMemoire();
       busEvenements = fabriqueBusPourLesTests();
       moduleCyberdépart = fabriqueModuleCyberdépart();
       paramètresPriseEnCompteDéfaut = {
-        mesure,
-        entrepotPriseEnCompte,
         busEvenements,
+        entrepotMesure,
+        entrepotPriseEnCompte,
+        mesure,
         module: moduleCyberdépart,
       };
     });
@@ -430,6 +434,29 @@ describe("L'utilisateur", () => {
         await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
 
         assert.equal(busEvenements.naPasRecuDEvenement(ParcoursAllégéTerminé), true);
+      });
+
+      it('publie un événement de fin de parcours complet quand toutes les mesures sont prises en compte', async () => {
+        moduleCyberdépart.mesures = [mesure];
+        await entrepotMesure.ajoute(mesure);
+        await utilisateurDeParcours.rejoinsParcours('complet', busEvenements, 'prise-en-compte-mesure');
+
+        await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
+
+        const evenement = busEvenements.recupereEvenement(ParcoursCompletTerminé);
+
+        assert.equal(evenement?.email, 'utilisateur@mail.com');
+      });
+
+      it("ne publie pas un événement de fin de parcours complet s'il reste des mesures à prendre en compte", async () => {
+        moduleCyberdépart.mesures = [mesure];
+        await entrepotMesure.ajoute(mesure);
+        await entrepotMesure.ajoute(mesureDeTest().construis());
+        await utilisateurDeParcours.rejoinsParcours('complet', busEvenements, 'prise-en-compte-mesure');
+
+        await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
+
+        assert.equal(busEvenements.naPasRecuDEvenement(ParcoursCompletTerminé), true);
       });
 
       it("adapte l'événement de complétion au module", async () => {
