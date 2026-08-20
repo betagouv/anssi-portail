@@ -120,14 +120,16 @@ export const fabriqueMiddleware = ({
     suite();
   };
 
-  const positionneLesCsp = () => async (requete: Request, reponse: Response, suite: NextFunction) =>
-    helmet({
+  const positionneLesCsp = () => async (requete: Request, reponse: Response, suite: NextFunction) => {
+    const hotReloadActif = adaptateurEnvironnement.svelte().hotReloadActif();
+
+    return helmet({
       contentSecurityPolicy: {
         directives: {
-          'upgrade-insecure-requests': process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true' ? null : [],
+          'upgrade-insecure-requests': hotReloadActif ? null : [],
           scriptSrc: [
             "'self'",
-            ...(process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true' ? [`'nonce-${reponse.locals.nonce}'`] : []),
+            ...(hotReloadActif ? [`'nonce-${reponse.locals.nonce}'`] : []),
             'https://stats.beta.gouv.fr',
             'https://browser.sentry-cdn.com',
             'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
@@ -143,9 +145,7 @@ export const fabriqueMiddleware = ({
             "'self'",
             'https://stats.beta.gouv.fr',
             'https://sentry.incubateur.net',
-            ...(process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true'
-              ? [`ws://${requete.hostname}:${process.env.SVELTE_DEV_PORT ?? '3001'}`]
-              : []),
+            ...(hotReloadActif ? [`ws://${requete.hostname}:${process.env.SVELTE_DEV_PORT ?? '3001'}`] : []),
           ],
           mediaSrc: [
             "'self'",
@@ -155,14 +155,13 @@ export const fabriqueMiddleware = ({
           ],
           styleSrc: [
             "'self'",
-            ...(process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true'
-              ? [`'unsafe-inline'`]
-              : [`'nonce-${reponse.locals.nonce}'`]),
+            ...(hotReloadActif ? [`'unsafe-inline'`] : [`'nonce-${reponse.locals.nonce}'`]),
             'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',
           ],
         },
       },
     })(requete, reponse, suite);
+  };
 
   const ajouteUtilisateurARequete =
     (entrepotUtilisateur: EntrepotUtilisateur, adaptateurHachage: AdaptateurHachage) =>

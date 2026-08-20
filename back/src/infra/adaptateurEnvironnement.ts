@@ -92,6 +92,9 @@ type AdaptateurEnvironnement = {
   rechercheEntreprise: () => {
     apiUrl: () => string;
   };
+  svelte: () => {
+    hotReloadActif: () => boolean;
+  };
   nodeEnv: () => string | undefined;
   versionDeConstruction: () => string;
   siret: () => {
@@ -288,6 +291,9 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
   }),
   rechercheEntreprise: () => ({
     apiUrl: () => process.env.RECHERCHE_ENTREPRISE_API_URL || '',
+  }),
+  svelte: () => ({
+    hotReloadActif: () => process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true',
   }),
   nodeEnv: () => process.env.NODE_ENV,
   versionDeConstruction: () => (process.env.CC_COMMIT_ID || '1').substring(0, 8),

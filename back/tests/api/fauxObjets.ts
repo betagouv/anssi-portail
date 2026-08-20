@@ -126,6 +126,7 @@ const CINQ_MINUTES = 300;
 
 export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   versionDeConstruction: () => '',
+  svelte: () => ({ hotReloadActif: () => false }),
   chiffrement: () => ({
     cleChaCha20Hex: () => 'uneCléCha20Hex',
   }),
