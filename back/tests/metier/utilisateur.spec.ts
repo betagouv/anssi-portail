@@ -16,6 +16,7 @@ import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnComp
 import { Module } from '../../src/metier/module.js';
 import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
 import { ParcoursChangé } from '../../src/bus/evenements/parcoursChange.js';
+import { ParcoursAllégéTerminé } from '../../src/bus/evenements/parcoursAllegeTermine.js';
 
 describe("L'utilisateur", () => {
   const infosUtilisateur = {
@@ -419,6 +420,28 @@ describe("L'utilisateur", () => {
         assert.equal(evenement!.idModule, 1);
         assert.equal(evenement!.nomModule, 'Cyberdépart');
         assert.equal(evenement!.parcours, 'allégé');
+      });
+
+      it('publie un événement de fin de parcours allégé quand toutes les mesures du module Cyberdépart sont prises en compte', async () => {
+        const moduleCyberDépart = fabriqueModuleCyberdépart();
+        moduleCyberDépart.mesures = [mesure];
+        await utilisateurDeParcours.rejoinsParcours('allégé', busEvenements, 'prise-en-compte-mesure');
+
+        await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberDépart);
+
+        const evenement = busEvenements.recupereEvenement(ParcoursAllégéTerminé);
+
+        assert.equal(evenement?.email, 'utilisateur@mail.com');
+      });
+
+      it("ne publie pas un événement de fin de parcours allégé si l'utilisateur n'est pas en parcours allégé", async () => {
+        const moduleCyberDépart = fabriqueModuleCyberdépart();
+        moduleCyberDépart.mesures = [mesure];
+        await utilisateurDeParcours.rejoinsParcours('complet', busEvenements, 'prise-en-compte-mesure');
+
+        await utilisateurDeParcours.prendEnCompte(mesure, entrepotPriseEnCompte, busEvenements, moduleCyberDépart);
+
+        assert.equal(busEvenements.naPasRecuDEvenement(ParcoursAllégéTerminé), true);
       });
 
       it("adapte l'événement de complétion au module", async () => {

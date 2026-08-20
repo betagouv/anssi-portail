@@ -2,6 +2,7 @@ import { BusEvenements } from '../bus/busEvenements.js';
 import { BadgeCyberdépartDébloqué } from '../bus/evenements/badgeCyberdepartDebloque.js';
 import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
+import { ParcoursAllégéTerminé } from '../bus/evenements/parcoursAllegeTermine.js';
 import { ParcoursChangé } from '../bus/evenements/parcoursChange.js';
 import { ParcoursRejoint } from '../bus/evenements/parcoursRejoint.js';
 import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
@@ -175,6 +176,9 @@ export class Utilisateur {
     this.mesuresPrisesEnCompte.push(mesure);
     if (this.nombreDeMesuresPrisesEnCompte(module) === module.nombreDeMesures()) {
       await busEvenements.publie(new ModuleTermine(this.email, module.id, module.nom, this.parcours ?? undefined));
+      if (this.parcours === 'allégé') {
+        await busEvenements.publie(new ParcoursAllégéTerminé(this.email));
+      }
       nouvelEtatModule.moduleTerminé = true;
     }
     const cibleBadgeCyberdépart = module.cibleDéblocageBadgeCyberdépart();
