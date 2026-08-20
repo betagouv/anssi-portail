@@ -25,6 +25,7 @@ loggerPersonnalise.warnOnce = (msg, options) => {
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, racineDuDepot, '');
+  const portDev = Number(env.SVELTE_DEV_PORT ?? process.env.SVELTE_DEV_PORT ?? 3001);
   return {
     define: {
       // `loadEnv` ne lit que les fichiers `.env` présents sur le disque : sans fichier `.env`
@@ -112,7 +113,8 @@ export default defineConfig(({ mode }) => {
     },
     customLogger: loggerPersonnalise,
     server: {
-      port: 3001,
+      host: process.env.HOST === '0.0.0.0' ? '0.0.0.0' : undefined,
+      port: portDev,
     },
   };
 });

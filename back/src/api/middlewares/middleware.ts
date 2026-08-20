@@ -103,8 +103,13 @@ export const fabriqueMiddleware = ({
         const contenuPage = await adaptateurEnrichissement.enrichisAvecComposants(fichier, requête.originalUrl);
         const avecNonce = contenuPage.replaceAll('%%NONCE%%', nonceAleatoire);
         const avecNonceEtVersion = avecNonce.replaceAll('%%VERSION%%', adaptateurEnvironnement.versionDeConstruction());
+        const portSvelte = process.env.SVELTE_DEV_PORT ?? '3001';
+        const avecHoteSvelte = avecNonceEtVersion.replaceAll(
+          `http://localhost:${portSvelte}`,
+          `http://${requête.hostname}:${portSvelte}`
+        );
 
-        reponse.send(avecNonceEtVersion);
+        reponse.send(avecHoteSvelte);
       } catch {
         await reponse
           .status(404)
@@ -119,6 +124,7 @@ export const fabriqueMiddleware = ({
     helmet({
       contentSecurityPolicy: {
         directives: {
+          'upgrade-insecure-requests': process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true' ? null : [],
           scriptSrc: [
             "'self'",
             ...(process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true' ? [`'nonce-${reponse.locals.nonce}'`] : []),
@@ -137,7 +143,9 @@ export const fabriqueMiddleware = ({
             "'self'",
             'https://stats.beta.gouv.fr',
             'https://sentry.incubateur.net',
-            ...(process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true' ? ['ws://localhost:3001'] : []),
+            ...(process.env.SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD === 'true'
+              ? [`ws://${requete.hostname}:${process.env.SVELTE_DEV_PORT ?? '3001'}`]
+              : []),
           ],
           mediaSrc: [
             "'self'",

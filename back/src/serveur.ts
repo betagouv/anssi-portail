@@ -143,7 +143,8 @@ const attributionParcoursMesure = fabriqueAttributionParcoursMesure({
 });
 const publieMesureConsultée = fabriquePublieMesureConsultée({ busEvenements });
 
-const port = process.env.PORT || 3000;
+const port = Number(process.env.PORT ?? 3000);
+const host = process.env.HOST;
 
 (async () => {
   try {
@@ -157,7 +158,7 @@ const port = process.env.PORT || 3000;
 
   console.log('✅ Vérification des secrets réussie');
 
-  creeServeur({
+  const serveur = creeServeur({
     fournisseurChemin,
     middleware: fabriqueMiddleware({
       adaptateurJWT: adaptateurJWT(adaptateurEnvironnement),
@@ -205,7 +206,15 @@ const port = process.env.PORT || 3000;
       attributionParcoursMesure,
       publieMesureConsultée,
     },
-  }).listen(port, () => {
-    console.log(`Le serveur écoute sur le port ${port}`);
   });
+
+  const annonceEcoute = () => {
+    console.log(`Le serveur écoute sur le port ${port}`);
+  };
+
+  if (host) {
+    serveur.listen(port, host, annonceEcoute);
+  } else {
+    serveur.listen(port, annonceEcoute);
+  }
 })();
