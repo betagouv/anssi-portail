@@ -13,10 +13,12 @@ import { ClientHttp } from './clientHttp.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurHorloge } from './adaptateurHorloge.js';
 
-type DonnéesUtilisateurBrevo = {
+export type DonnéesUtilisateurBrevo = {
   email: string;
   attributes: {
     NOMBRE_MODULES_TERMINES?: number;
+    DATE_DERNIERE_PRISE_EN_COMPTE_MESURE?: Date;
+    NOMBRE_MESURES_PRISES_EN_COMPTE?: number;
   };
 };
 
@@ -36,8 +38,29 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
       },
     };
   }
+  private readonly récupèreContact = async (email: string): Promise<DonnéesUtilisateurBrevo> => {
+    try {
+      const { data } = await this.clientHttp.get<DonnéesUtilisateurBrevo>(
+        `${this.adaptateurEnvironnement.brevo().url()}/contacts/${email}`,
+        this.enteteJSON
+      );
 
-  private metsÀJourContact = async (email: string, attributes: Record<string, unknown>, messageErreur: string) => {
+      return data;
+    } catch (erreur: unknown) {
+      if (isAxiosError(erreur)) {
+        throw new Error(`Erreur lors de la récupération d\`un contact sur Brévo : ${erreur.message}`, {
+          cause: erreur,
+        });
+      }
+      throw erreur;
+    }
+  };
+
+  private readonly metsÀJourContact = async (
+    email: string,
+    attributes: Record<string, unknown>,
+    messageErreur: string
+  ) => {
     try {
       await this.clientHttp.put(
         `${this.adaptateurEnvironnement.brevo().url()}/contacts/${email}`,
@@ -139,24 +162,26 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
   };
 
   metsÀJourMesurePriseEnCompte = async (événement: MesurePriseEnCompte) => {
+    const donnéesUtilisateur = await this.récupèreContact(événement.email);
+
     await this.metsÀJourContact(
       événement.email,
-      { DATE_DERNIERE_PRISE_EN_COMPTE_MESURE: this.adaptateurHorloge.maintenant() },
+      {
+        DATE_DERNIERE_PRISE_EN_COMPTE_MESURE: this.adaptateurHorloge.maintenant(),
+        NOMBRE_MESURES_PRISES_EN_COMPTE: (donnéesUtilisateur.attributes.NOMBRE_MESURES_PRISES_EN_COMPTE ?? 0) + 1,
+      },
       "Erreur lors de la mise à jour d'une mesure prise en compte sur Brévo : "
     );
   };
 
   metsÀJourModuleTerminé = async (événement: ModuleTermine) => {
-    const donnéesUtilisateur = await this.clientHttp.get<DonnéesUtilisateurBrevo>(
-      `${this.adaptateurEnvironnement.brevo().url()}/contacts/${événement.email}`,
-      this.enteteJSON
-    );
+    const donnéesUtilisateur = await this.récupèreContact(événement.email);
 
     await this.metsÀJourContact(
       événement.email,
       {
         DATE_DERNIERE_COMPLETION_MODULE: this.adaptateurHorloge.maintenant(),
-        NOMBRE_MODULES_TERMINES: (donnéesUtilisateur.data.attributes.NOMBRE_MODULES_TERMINES ?? 0) + 1,
+        NOMBRE_MODULES_TERMINES: (donnéesUtilisateur.attributes.NOMBRE_MODULES_TERMINES ?? 0) + 1,
       },
       "Erreur lors de la mise à jour d'une complétion de module sur Brévo : "
     );
