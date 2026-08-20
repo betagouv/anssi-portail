@@ -170,8 +170,8 @@ export const cableTousLesAbonnes = ({
     adaptateurEmail.metsÀJourParcoursAllégéTerminé,
   ]);
 
-  busEvenements.abonne(
-    ParcoursCompletTerminé,
-    consigneParcoursCompletTerminéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage })
-  );
+  busEvenements.abonnePlusieurs(ParcoursCompletTerminé, [
+    consigneParcoursCompletTerminéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
+    adaptateurEmail.metsÀJourParcoursCompletTerminé,
+  ]);
 };

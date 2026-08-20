@@ -4,6 +4,7 @@ import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
 import { ParcoursAllégéTerminé } from '../bus/evenements/parcoursAllegeTermine.js';
 import { ParcoursChangé } from '../bus/evenements/parcoursChange.js';
+import { ParcoursCompletTerminé } from '../bus/evenements/parcoursCompletTermine.js';
 import { ParcoursRejoint } from '../bus/evenements/parcoursRejoint.js';
 import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 
@@ -34,5 +35,8 @@ export const adaptateurEmailConsole = (): AdaptateurEmail => ({
   },
   metsÀJourParcoursAllégéTerminé: async (événement: ParcoursAllégéTerminé) => {
     console.log(`On signale que ${événement.email} a terminé le parcours allégé`);
+  },
+  metsÀJourParcoursCompletTerminé: async (événement: ParcoursCompletTerminé) => {
+    console.log(`On signale que ${événement.email} a terminé le parcours complet`);
   },
 });

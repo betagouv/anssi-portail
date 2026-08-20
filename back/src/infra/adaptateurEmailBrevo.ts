@@ -13,6 +13,7 @@ import { ClientHttp } from './clientHttp.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurHorloge } from './adaptateurHorloge.js';
 import { ParcoursAllégéTerminé } from '../bus/evenements/parcoursAllegeTermine.js';
+import { ParcoursCompletTerminé } from '../bus/evenements/parcoursCompletTermine.js';
 
 export type DonnéesUtilisateurBrevo = {
   email: string;
@@ -26,7 +27,7 @@ export type DonnéesUtilisateurBrevo = {
 
 export type ÉvénementBrevo = {
   email: string;
-  nomÉvénement: 'badge_cyberdepart_debloque' | 'parcours_allege_termine';
+  nomÉvénement: 'badge_cyberdepart_debloque' | 'parcours_allege_termine' | 'parcours_complet_termine';
   propriétésÀMettreÀJour?: Partial<DonnéesUtilisateurBrevo['attributes']>;
 };
 
@@ -244,6 +245,14 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
       email: événement.email,
       nomÉvénement: 'parcours_allege_termine',
       messageErreur: 'Erreur lors de la mise à jour de la complétion du parcours allégé sur Brévo : ',
+    });
+  };
+
+  metsÀJourParcoursCompletTerminé = async (événement: ParcoursCompletTerminé) => {
+    await this.envoieÉvénement({
+      email: événement.email,
+      nomÉvénement: 'parcours_complet_termine',
+      messageErreur: 'Erreur lors de la mise à jour de la complétion du parcours complet sur Brévo : ',
     });
   };
 }

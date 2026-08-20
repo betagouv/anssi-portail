@@ -13,6 +13,7 @@ import { ModuleTermine } from '../../src/bus/evenements/moduleTermine.js';
 import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque.js';
 import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
 import { ParcoursAllégéTerminé } from '../../src/bus/evenements/parcoursAllegeTermine.js';
+import { ParcoursCompletTerminé } from '../../src/bus/evenements/parcoursCompletTermine.js';
 
 describe('L’adaptateur email Brevo', () => {
   let clientHttp: ClientHttp;
@@ -254,6 +255,16 @@ describe('L’adaptateur email Brevo', () => {
       assert.deepEqual(donnéesPostAppelées, {
         event_name: 'parcours_allege_termine',
         identifiers: { email_id: 'parcours.allege.termine@mail.com' },
+      });
+    });
+
+    it('émets un événement de complétion du parcours complet', async () => {
+      await brevo.metsÀJourParcoursCompletTerminé(new ParcoursCompletTerminé('parcours.complet.termine@mail.com'));
+
+      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
+      assert.deepEqual(donnéesPostAppelées, {
+        event_name: 'parcours_complet_termine',
+        identifiers: { email_id: 'parcours.complet.termine@mail.com' },
       });
     });
   });

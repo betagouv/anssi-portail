@@ -4,6 +4,7 @@ import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
 import { ParcoursAllégéTerminé } from '../bus/evenements/parcoursAllegeTermine.js';
 import { ParcoursChangé } from '../bus/evenements/parcoursChange.js';
+import { ParcoursCompletTerminé } from '../bus/evenements/parcoursCompletTermine.js';
 import { ParcoursRejoint } from '../bus/evenements/parcoursRejoint.js';
 
 export interface AdaptateurEmail {
@@ -30,4 +31,5 @@ export interface AdaptateurEmail {
   metsÀJourBadgeCyberdépartDébloqué: (événement: BadgeCyberdépartDébloqué) => Promise<void>;
   metsÀJourParcours: (événement: ParcoursChangé | ParcoursRejoint) => Promise<void>;
   metsÀJourParcoursAllégéTerminé: (événement: ParcoursAllégéTerminé) => Promise<void>;
+  metsÀJourParcoursCompletTerminé: (événement: ParcoursCompletTerminé) => Promise<void>;
 }
