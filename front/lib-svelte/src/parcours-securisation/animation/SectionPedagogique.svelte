@@ -1,4 +1,9 @@
-<script lang="ts"></script>
+<script lang="ts">
+  const uid = crypto.randomUUID();
+
+  const patternId = `pattern-${uid}`;
+  const imageId = `image-${uid}`;
+</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 486 324">
   <g>
@@ -10,7 +15,7 @@
       clip-rule="evenodd"
     />
     <g class="carte carte-1">
-      <rect width="160" height="259" x="68" y="32" fill="url(#pattern0_19252_42076)" rx="12" />
+      <rect width="160" height="259" x="68" y="32" fill="url(#{patternId})" rx="12" />
       <g>
         <rect width="136" height="24" x="80" y="255" fill="#fff" fill-opacity=".2" rx="12" />
         <g>
@@ -88,11 +93,11 @@
     />
   </g>
   <defs>
-    <pattern id="pattern0_19252_42076" width="1" height="1" patternContentUnits="objectBoundingBox">
-      <use href="#image0_19252_42076" transform="matrix(.002 0 0 .00123552 0 -.0535135)" />
+    <pattern id={patternId} width="1" height="1" patternContentUnits="objectBoundingBox">
+      <use href="#{imageId}" transform="matrix(.002 0 0 .00123552 0 -.0535135)" />
     </pattern>
     <image
-      id="image0_19252_42076"
+      id={imageId}
       width="500"
       height="896"
       href="/assets/images/parcours-securisation/animation/section-pedagogique.avif"
