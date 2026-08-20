@@ -163,8 +163,8 @@ export const cableTousLesAbonnes = ({
     adaptateurEmail.metsÀJourParcours,
   ]);
 
-  busEvenements.abonne(
-    ParcoursAllégéTerminé,
-    consigneParcoursAllégéTerminéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage })
-  );
+  busEvenements.abonnePlusieurs(ParcoursAllégéTerminé, [
+    consigneParcoursAllégéTerminéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
+    adaptateurEmail.metsÀJourParcoursAllégéTerminé,
+  ]);
 };
