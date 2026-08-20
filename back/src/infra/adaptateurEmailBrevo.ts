@@ -12,6 +12,7 @@ import { adaptateurEmailConsole } from './adaptateurEmailConsole.js';
 import { ClientHttp } from './clientHttp.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurHorloge } from './adaptateurHorloge.js';
+import { ParcoursAllégéTerminé } from '../bus/evenements/parcoursAllegeTermine.js';
 
 export type DonnéesUtilisateurBrevo = {
   email: string;
@@ -25,8 +26,8 @@ export type DonnéesUtilisateurBrevo = {
 
 export type ÉvénementBrevo = {
   email: string;
-  nomÉvénement: 'badge_cyberdepart_debloque';
-  propriétésÀMettreÀJour: Partial<DonnéesUtilisateurBrevo['attributes']>;
+  nomÉvénement: 'badge_cyberdepart_debloque' | 'parcours_allege_termine';
+  propriétésÀMettreÀJour?: Partial<DonnéesUtilisateurBrevo['attributes']>;
 };
 
 class AdaptateurEmailBrevo implements AdaptateurEmail {
@@ -45,6 +46,7 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
       },
     };
   }
+
   private readonly récupèreContact = async (email: string): Promise<DonnéesUtilisateurBrevo> => {
     try {
       const { data } = await this.clientHttp.get<DonnéesUtilisateurBrevo>(
@@ -92,7 +94,7 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
       const corpsDeRequête = {
         event_name: nomÉvénement,
         identifiers: { email_id: email },
-        contact_properties: propriétésÀMettreÀJour,
+        ...(propriétésÀMettreÀJour && { contact_properties: propriétésÀMettreÀJour }),
       };
       await this.clientHttp.post(
         `${this.adaptateurEnvironnement.brevo().url()}/events`,
@@ -234,6 +236,14 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
       { PARCOURS: événement.parcours },
       'Erreur lors de la mise à jour du parcours sur Brévo : '
     );
+  };
+
+  metsÀJourParcoursAllégéTerminé = async (événement: ParcoursAllégéTerminé) => {
+    await this.envoieÉvénement({
+      email: événement.email,
+      nomÉvénement: 'parcours_allege_termine',
+      messageErreur: 'Erreur lors de la mise à jour de la complétion du parcours allégé sur Brévo : ',
+    });
   };
 }
 
