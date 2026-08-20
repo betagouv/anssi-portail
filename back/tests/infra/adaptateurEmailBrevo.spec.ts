@@ -12,6 +12,7 @@ import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompt
 import { ModuleTermine } from '../../src/bus/evenements/moduleTermine.js';
 import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque.js';
 import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
+import { ParcoursAllégéTerminé } from '../../src/bus/evenements/parcoursAllegeTermine.js';
 
 describe('L’adaptateur email Brevo', () => {
   let clientHttp: ClientHttp;
@@ -243,6 +244,16 @@ describe('L’adaptateur email Brevo', () => {
         attributes: {
           PARCOURS: 'allégé',
         },
+      });
+    });
+
+    it('émets un événement de complétion du parcours allégé', async () => {
+      await brevo.metsÀJourParcoursAllégéTerminé(new ParcoursAllégéTerminé('parcours.allege.termine@mail.com'));
+
+      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
+      assert.deepEqual(donnéesPostAppelées, {
+        event_name: 'parcours_allege_termine',
+        identifiers: { email_id: 'parcours.allege.termine@mail.com' },
       });
     });
   });
