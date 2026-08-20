@@ -142,7 +142,12 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesCyFun23 extends Convertisse
   entetes(exigences: ExigenceNIS2[]) {
     return [
       ...super.entetes(exigences),
-      ...colonnesEntetesCorrespondances(exigences, 'CyFun23', 'Référence CyFun23', 'Contenu CyFun23'),
+      ...colonnesEntetesCorrespondances(
+        exigences,
+        'CyFun23',
+        'Référence CyberFundamentals Foundation 2023 (Belgique)',
+        'Contenu CyberFundamentals Foundation 2023 (Belgique)'
+      ),
     ];
   }
 

@@ -26,7 +26,7 @@
   const optionsReferentiels = $derived([
     { label: 'ISO 2700x', value: 'ISO' },
     { label: 'Annexe au Règlement d’exécution 2024/2690', value: 'AE' },
-    ...(featureFlagNis2CyFun23 ? [{ label: 'CyFun 2023', value: 'CyFun23' }] : []),
+    ...(featureFlagNis2CyFun23 ? [{ label: 'CyberFundamentals Foundation 2023 (Belgique)', value: 'CyFun23' }] : []),
   ]);
 
   const optionsLangues = [
