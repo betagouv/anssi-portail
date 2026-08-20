@@ -11,7 +11,7 @@
 {% assign urlComplete = siteUrl | append: urlPage %}
 {% assign nomPage = page.titreHtml | split: ' | ' | first %}
 
-<script type="application/ld+json">
+<script nonce="%%NONCE%%" type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "GovernmentOrganization",
@@ -30,7 +30,7 @@
 }
 </script>
 
-<script type="application/ld+json">
+<script nonce="%%NONCE%%" type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -46,7 +46,7 @@
 </script>
 
 {% if page.layout == 'service' %}
-  <script type="application/ld+json">
+  <script nonce="%%NONCE%%" type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "GovernmentService",
@@ -68,7 +68,7 @@
   }
   </script>
 {% elsif page.url == '/a-propos/' %}
-  <script type="application/ld+json">
+  <script nonce="%%NONCE%%" type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "AboutPage",
@@ -82,7 +82,7 @@
   }
   </script>
 {% elsif page.url == '/contacts/' %}
-  <script type="application/ld+json">
+  <script nonce="%%NONCE%%" type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "ContactPage",
@@ -96,7 +96,7 @@
   }
   </script>
 {% elsif page.url == '/catalogue/' or page.layout == 'parcours' or page.layout == 'guide' %}
-  <script type="application/ld+json">
+  <script nonce="%%NONCE%%" type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -110,7 +110,7 @@
   }
   </script>
 {% elsif page.url != '/' %}
-  <script type="application/ld+json">
+  <script nonce="%%NONCE%%" type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -126,7 +126,7 @@
 {% endif %}
 
 {% if page.layout == 'service' %}
-  <script type="application/ld+json">
+  <script nonce="%%NONCE%%" type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -152,7 +152,7 @@
   }
   </script>
 {% elsif page.url == '/catalogue/' %}
-  <script type="application/ld+json">
+  <script nonce="%%NONCE%%" type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -174,7 +174,7 @@
 {% elsif page.layout == 'page-statique' %}
   {% assign nomFilAriane = page.filAriane | default: page.titrePageStatique %}
   {% if nomFilAriane %}
-    <script type="application/ld+json">
+    <script nonce="%%NONCE%%" type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",

@@ -129,7 +129,7 @@ export const fabriqueMiddleware = ({
           'upgrade-insecure-requests': hotReloadActif ? null : [],
           scriptSrc: [
             "'self'",
-            ...(hotReloadActif ? [`'nonce-${reponse.locals.nonce}'`] : []),
+            `'nonce-${reponse.locals.nonce}'`,
             'https://stats.beta.gouv.fr',
             'https://browser.sentry-cdn.com',
             'https://lab-anssi-ui-kit-prod-s3-assets.cellar-c2.services.clever-cloud.com',

@@ -5,7 +5,7 @@ styles:
 script: /scripts/service.js
 ---
 
-<script type="application/json" id="donnees-fil-ariane">
+<script nonce="%%NONCE%%" type="application/json" id="donnees-fil-ariane">
   {
     "feuille": "{{page.nom}}",
     "branche": {
@@ -151,7 +151,7 @@ script: /scripts/service.js
       <section class="explication" id="explication">
         <img src="/assets/images/illustrations-services/{{ page.illustration }}" width="868" height="auto" alt="Capture d’écran" />
         <div class="actions">
-          <script type="application/json" id="donneesBoutonFavoris">
+          <script nonce="%%NONCE%%" type="application/json" id="donneesBoutonFavoris">
             { "idItem":"{{page.id}}" }
           </script>
           {% include composant-svelte.html id="bouton-favori" %}

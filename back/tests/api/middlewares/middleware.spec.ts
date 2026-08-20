@@ -69,6 +69,18 @@ describe('Le middleware', () => {
     });
   });
 
+  describe('sur demande de positionnement des CSP', () => {
+    it('autorise le nonce des scripts en production', async () => {
+      reponse.locals.nonce = 'unNonce';
+
+      await middleware.positionneLesCsp()(requete, reponse, () => {});
+
+      const csp = reponse.getHeader('content-security-policy');
+      assert.ok(typeof csp === 'string');
+      assert.match(csp, /script-src 'self' 'nonce-unNonce'/);
+    });
+  });
+
   describe('sur demande de validation du token JWT', () => {
     it("jette une erreur si le token n'est pas présent", async () => {
       const statutOriginal = reponse.status;
