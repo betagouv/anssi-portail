@@ -52,6 +52,7 @@ export const ressourcePriseEnCompte = ({
       const { mesure, module } = mesureEtModule;
       const nouvelÉtatDuModule = await utilisateur.prendEnCompte({
         mesure,
+        entrepotMesure,
         entrepotPriseEnCompte,
         busEvenements,
         module,
