@@ -22,7 +22,6 @@
     illustration?: Snippet<[{ source: string; alt: string }]>;
     illustrationSource?: string;
     illustrationAlt?: string;
-    ficheCatalogue?: boolean;
     cacheIllustration?: boolean;
     children?: Snippet;
   };
@@ -44,7 +43,6 @@
     illustration,
     illustrationSource = '',
     illustrationAlt = '',
-    ficheCatalogue = false,
     cacheIllustration = false,
     children,
   }: Props = $props();
@@ -60,6 +58,7 @@
   if ((() => ['heros', 'details'].includes(format))()) {
     styleTitreH1 = 'alternatif-xs';
   }
+  const ficheCatalogue = $derived(format === 'details');
 </script>
 
 <Alternatives affichageAlternatif={afficheNouvelleDA}>
@@ -159,15 +158,8 @@
         </div>
       {/if}
       {#if !cacheIllustration}
-        <picture slot="media">
-          {#if illustration}
-            {@render illustration({
-              source: illustrationSource,
-              alt: illustrationAlt,
-            })}
-          {:else}
-            <img src={illustrationSource} alt={illustrationAlt} />
-          {/if}
+        <picture class={['illustration', ficheCatalogue ? 'ombre' : '']} slot="media">
+          <img src={illustrationSource} width="588" height="330" alt={illustrationAlt} />
         </picture>
       {/if}
     </lab-anssi-bandeau-page>
@@ -177,6 +169,7 @@
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
+  // ancienne DA
   .banniere,
   .heros,
   .heros-centre,
@@ -191,10 +184,6 @@
       background-image: url('/assets/images/motif-fond-service.avif');
       background-color: var(--couleur-fond, #eee);
     }
-  }
-
-  lab-anssi-bandeau-page.pastel {
-    --background-color: var(--yellow-moutarde-975-75);
   }
 
   .banniere,
@@ -371,6 +360,32 @@
           width: 100%;
         }
       }
+    }
+  }
+
+  // nouvelle DA
+  lab-anssi-bandeau-page {
+    overflow: hidden;
+
+    &.pastel {
+      --background-color: var(--yellow-moutarde-975-75);
+    }
+  }
+
+  .illustration {
+    align-self: center;
+    aspect-ratio: 588 / 300;
+    display: grid;
+    max-width: 100%;
+
+    &.ombre {
+      box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
+    }
+
+    img {
+      object-fit: cover;
+      object-position: top;
+      width: 100%;
     }
   }
 </style>

@@ -102,7 +102,6 @@
     format="details"
     {titre}
     theme="clair"
-    ficheCatalogue
     segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
   >
     {#snippet filAriane()}

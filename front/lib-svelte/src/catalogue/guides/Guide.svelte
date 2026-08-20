@@ -93,7 +93,6 @@
     format="details"
     segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
     theme="clair"
-    ficheCatalogue
     illustrationSource={guide.illustration.grande}
     cacheActions={guide.documents.length !== 1}
   >
