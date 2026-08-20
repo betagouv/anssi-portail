@@ -20,6 +20,7 @@ import { consigneEvenementTestRealiseDansJournal } from './consigneEvenementTest
 import { consigneEvenementUtilisateurConnecteDansJournal } from './consigneEvenementUtilisateurConnecteDansJournal.js';
 import { consigneParcoursAllégéTerminéDansJournal } from './consigneParcoursAllegeTermineDansJournal.js';
 import { consigneParcoursChangéDansJournal } from './consigneParcoursChangeDansJournal.js';
+import { consigneParcoursCompletTerminéDansJournal } from './consigneParcoursCompletTermineDansJournal.js';
 import { consigneParcoursRejointDansJournal } from './consigneParcoursRejointDansJournal.js';
 import { creeContactBrevo } from './creeContactBrevo.js';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte.js';
@@ -32,6 +33,7 @@ import { MesurePriseEnCompte } from './evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from './evenements/moduleTermine.js';
 import { ParcoursAllégéTerminé } from './evenements/parcoursAllegeTermine.js';
 import { ParcoursChangé } from './evenements/parcoursChange.js';
+import { ParcoursCompletTerminé } from './evenements/parcoursCompletTermine.js';
 import { ParcoursRejoint } from './evenements/parcoursRejoint.js';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee.js';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne.js';
@@ -167,4 +169,9 @@ export const cableTousLesAbonnes = ({
     consigneParcoursAllégéTerminéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
     adaptateurEmail.metsÀJourParcoursAllégéTerminé,
   ]);
+
+  busEvenements.abonne(
+    ParcoursCompletTerminé,
+    consigneParcoursCompletTerminéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage })
+  );
 };
