@@ -296,6 +296,7 @@ export const fauxAdaptateurEmail: AdaptateurEmail = {
   metsÀJourBadgeCyberdépartDébloqué: async () => {},
   metsÀJourParcours: async () => {},
   metsÀJourParcoursAllégéTerminé: async () => {},
+  metsÀJourParcoursCompletTerminé: async () => {},
 };
 
 export const fauxGestionnaireRequêtesComplémentaires: GestionnaireRequêtesComplémentaires = {
