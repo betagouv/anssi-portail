@@ -10,6 +10,7 @@
     "bootstrap": "(bundler check --gemfile=front/Gemfile || bundler install --gemfile=front/Gemfile) && pnpm install --frozen-lockfile",
     "build": "pnpm --reporter=append-only -r build",
     "dev": "concurrently -n \"SERVEUR,SVELTE,JEKYLL,BDD,MIGRE\" --prefix-colors \"cyan,green,magenta,blue,yellow\" \"SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD=true node --conditions=anssi-portail:source --watch --import tsx --env-file .env ./back/src/serveur.ts\" \"pnpm --filter @anssi-portail/svelte watch\" \"sleep 5 && SVELTE_DEV_LOCAL_AVEC_HOT_RELOAD=true ${GEM_HOME}/bin/jekyll build -s ./front -d ./front/_site -w\" \"docker compose up db\" \"sleep 3 && pnpm migre-bdd\"",
+    "dev-lan": "HOST=0.0.0.0 pnpm dev",
     "lint": "pnpm -r lint",
     "format": "pnpm --reporter=append-only -r format",
     "format:check": "prettier --check .",
