@@ -2,6 +2,7 @@
 
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { networkInterfaces } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createLogger, defineConfig, loadEnv } from 'vite';
@@ -23,9 +24,18 @@ loggerPersonnalise.warnOnce = (msg, options) => {
 };
 
 // https://vite.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, racineDuDepot, '');
   const portDev = Number(env.SVELTE_DEV_PORT ?? process.env.SVELTE_DEV_PORT ?? 3001);
+  const estExposeSurLeLan = command === 'serve' && mode === 'development' && process.env.HOST === '0.0.0.0';
+  const portServeur = Number(env.PORT ?? process.env.PORT ?? 3000);
+  const originesLocales = [
+    `http://localhost:${portServeur}`,
+    ...Object.values(networkInterfaces())
+      .flatMap((interfaces) => interfaces ?? [])
+      .filter(({ family }) => family === 'IPv4')
+      .map(({ address }) => `http://${address}:${portServeur}`),
+  ];
   return {
     define: {
       // `loadEnv` ne lit que les fichiers `.env` présents sur le disque : sans fichier `.env`
@@ -113,8 +123,9 @@ export default defineConfig(({ mode }) => {
     },
     customLogger: loggerPersonnalise,
     server: {
-      host: process.env.HOST === '0.0.0.0' ? '0.0.0.0' : undefined,
+      host: estExposeSurLeLan ? '0.0.0.0' : undefined,
       port: portDev,
+      cors: estExposeSurLeLan ? { origin: originesLocales } : undefined,
     },
   };
 });
