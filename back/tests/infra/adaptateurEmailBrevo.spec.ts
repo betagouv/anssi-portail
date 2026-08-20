@@ -2,7 +2,7 @@ import { AxiosError } from '@anssi-portail/axios';
 import assert from 'node:assert';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
-import { adaptateurEmailBrevo } from '../../src/infra/adaptateurEmailBrevo.js';
+import { adaptateurEmailBrevo, DonnéesUtilisateurBrevo } from '../../src/infra/adaptateurEmailBrevo.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
@@ -17,7 +17,7 @@ describe('L’adaptateur email Brevo', () => {
   let clientHttp: ClientHttp;
   let brevo: AdaptateurEmail;
   let postAxiosAppele: boolean = false;
-  let donnéesPutAppelées: unknown;
+  let donnéesPutAppelées: DonnéesUtilisateurBrevo;
   let urlPutAppelée: unknown;
 
   const fauxContact = () => ({
@@ -34,7 +34,10 @@ describe('L’adaptateur email Brevo', () => {
 
   beforeEach(() => {
     postAxiosAppele = false;
-    donnéesPutAppelées = {};
+    donnéesPutAppelées = {
+      email: '',
+      attributes: {},
+    };
     urlPutAppelée = '';
 
     clientHttp = {
@@ -43,7 +46,7 @@ describe('L’adaptateur email Brevo', () => {
         postAxiosAppele = true;
       }),
       put: fabriqueClientPut(async (url: string, données: unknown) => {
-        donnéesPutAppelées = données;
+        donnéesPutAppelées = données as DonnéesUtilisateurBrevo;
         urlPutAppelée = url;
       }),
     };
@@ -159,16 +162,35 @@ describe('L’adaptateur email Brevo', () => {
     });
 
     it("mets à jour la date de dernière prise en compte d'une mesure", async () => {
+      clientHttp.get = async <T>() => ({
+        data: {
+          email: 'user@yopmail.com',
+          attributes: {},
+        } as unknown as T,
+      });
       await brevo.metsÀJourMesurePriseEnCompte(
         new MesurePriseEnCompte('mesure.prise.en.compte@mail.com', 'AUTH.5', 12, 6, 'allégé')
       );
 
       assert.equal(urlPutAppelée, 'FAUSSE_URL_BREVO/contacts/mesure.prise.en.compte@mail.com');
-      assert.deepEqual(donnéesPutAppelées, {
-        attributes: {
-          DATE_DERNIERE_PRISE_EN_COMPTE_MESURE: new Date('2025-03-10'),
-        },
+      assert.deepEqual(donnéesPutAppelées.attributes.DATE_DERNIERE_PRISE_EN_COMPTE_MESURE, new Date('2025-03-10'));
+    });
+
+    it('mets à jour le nombre de mesure prise en compte', async () => {
+      clientHttp.get = async <T>() => ({
+        data: {
+          email: 'user@yopmail.com',
+          attributes: {
+            NOMBRE_MESURES_PRISES_EN_COMPTE: 2,
+          },
+        } as unknown as T,
       });
+      await brevo.metsÀJourMesurePriseEnCompte(
+        new MesurePriseEnCompte('mesure.prise.en.compte@mail.com', 'AUTH.5', 12, 6, 'allégé')
+      );
+
+      assert.equal(urlPutAppelée, 'FAUSSE_URL_BREVO/contacts/mesure.prise.en.compte@mail.com');
+      assert.equal(donnéesPutAppelées.attributes.NOMBRE_MESURES_PRISES_EN_COMPTE, 3);
     });
 
     it('mets à jour la date de dernière complétion de module', async () => {
