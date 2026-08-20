@@ -53,12 +53,12 @@
     },
     COMPARAISON_NIS2_CyFun23: {
       titreColonneSource: titreColonneNIS2,
-      titreColonneCible: 'CyFun 2023',
+      titreColonneCible: 'CyberFundamentals Foundation 2023 (Belgique)',
       colonneSource: colonneSourceNIS2,
       colonneCible: colonneCibleSimple,
     },
     COMPARAISON_CyFun23_NIS2: {
-      titreColonneSource: 'CyFun 2023',
+      titreColonneSource: 'CyberFundamentals Foundation 2023 (Belgique)',
       titreColonneCible: titreColonneNIS2,
       colonneSource: colonneSourceCyFun23,
       colonneCible: colonneCibleSimple,

@@ -22,13 +22,13 @@ export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationSer
     } else if (referentielCible === 'AE') {
       return avecLangue('Comparaison_ReCyf-NIS2_Annexe_Reglement_execution_2024_2690');
     } else if (referentielCible === 'CyFun23') {
-      return avecLangue('Comparaison_ReCyf-NIS2_CyFun23');
+      return avecLangue('Comparaison_ReCyf-NIS2_CyberFundamentals_Framework_2023_Belgique');
     } else if (referentielSource === 'ISO') {
       return avecLangue('Comparaison_ISO_ReCyf-NIS2');
     } else if (referentielSource === 'AE') {
       return avecLangue('Comparaison_Annexe_Reglement_execution_2024_2690_ReCyf-NIS2');
     } else if (referentielSource === 'CyFun23') {
-      return avecLangue('Comparaison_CyFun23_ReCyf-NIS2');
+      return avecLangue('Comparaison_CyberFundamentals_Framework_2023_Belgique_ReCyf-NIS2');
     } else {
       return avecLangue('Liste_des_exigences_applicables_a_NIS2');
     }
