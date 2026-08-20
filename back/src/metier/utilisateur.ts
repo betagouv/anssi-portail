@@ -146,12 +146,17 @@ export class Utilisateur {
     return this.adaptateurHachage.hache(this.email);
   }
 
-  async prendEnCompte(
-    mesure: Mesure,
-    entrepotPriseEnCompte: EntrepotPriseEnCompte,
-    busEvenements: BusEvenements,
-    module: Module
-  ): Promise<{
+  async prendEnCompte({
+    mesure,
+    entrepotPriseEnCompte,
+    busEvenements,
+    module,
+  }: {
+    mesure: Mesure;
+    entrepotPriseEnCompte: EntrepotPriseEnCompte;
+    busEvenements: BusEvenements;
+    module: Module;
+  }): Promise<{
     badgeCyberdépartDebloqué: boolean;
     moduleTerminé: boolean;
   }> {
