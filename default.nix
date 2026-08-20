@@ -62,7 +62,8 @@ in
 
     shellHook = ''
       # Keep project-local Ruby and Corepack state out of $HOME.
-      export GEM_HOME="$PWD/.gems"
+      # Native gems are Ruby-ABI-specific; never share them across Ruby versions.
+      export GEM_HOME="$PWD/.gems/${rubyVersion}"
       export COREPACK_HOME="$PWD/.corepack"
       export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
       export UV_CACHE_DIR="$PWD/.uv-cache"

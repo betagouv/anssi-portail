@@ -11,4 +11,4 @@ args = [
   "false",
 ]
 startup_timeout_sec = 60
-env = { GEM_HOME = ".gems", UV_CACHE_DIR = ".uv-cache", UV_TOOL_DIR = ".uv-tools", UV_PYTHON_INSTALL_DIR = ".uv-python" }
+env = { SERENA_HOME = ".serena/runtime", NPM_CONFIG_CACHE = ".serena/runtime/npm-cache", UV_CACHE_DIR = ".uv-cache", UV_TOOL_DIR = ".uv-tools", UV_PYTHON_INSTALL_DIR = ".uv-python" }
