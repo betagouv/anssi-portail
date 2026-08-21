@@ -147,7 +147,7 @@
           </div>
           {#if mesure.actionFacileAFaire}
             <dsfr-highlight size="md" text="slot">
-              <h3 slot="title">Bonne nouvelle&nbsp;!</h3>
+              <h3 class="fr-h5" slot="title">Bonne nouvelle&nbsp;!</h3>
               <p slot="text">{mesure.actionFacileAFaire}</p>
             </dsfr-highlight>
           {/if}
