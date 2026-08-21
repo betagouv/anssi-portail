@@ -1,14 +1,16 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import BadgeBeta from '../ui/BadgeBeta.svelte';
+  import { fabriqueFilAriane } from '../ui/filAriane';
+  import { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import { toasterStore } from '../ui/toasts/toaster.store';
   import Toaster from '../ui/toasts/Toaster.svelte';
   import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
   import MesuresDeModule from './MesuresDeModule.svelte';
-  import Progression from './Progression.svelte';
   import type { ModuleRéponseApi } from './moduleReponseApi';
-  import BadgeBeta from '../ui/BadgeBeta.svelte';
+  import Progression from './Progression.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -28,6 +30,10 @@
   });
 
   const progressionActuelle = $derived(module.mesures.filter((m) => m.estPriseEnCompte).length);
+  const propriétésFilAriane: PropriétésFilAriane = $derived({
+    branche: { nom: 'Protéger mon organisation', lien: '/parcours-complet' },
+    feuille: module.nom,
+  });
 </script>
 
 <Toaster />
@@ -41,6 +47,7 @@
   illustrationSource=""
   titre={module.nom}
   theme="clair"
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
 >
   {#snippet tags()}
     <BadgeBeta />
