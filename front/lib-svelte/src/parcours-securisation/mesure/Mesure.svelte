@@ -157,7 +157,7 @@
         <div class="contenu-section avis-utilisateur">
           <div class="section-aide retour">
             <div class="texte-information-avis-utilisateur">
-              <span class="titre-avis"><b>Ce contenu vous a-t-il aidé ?</b></span>
+              <span class="titre-avis"><b>Ce contenu vous a-t-il aidé&nbsp;?</b></span>
             </div>
             <div class="conteneur-emoji-avis">
               <Bouton
@@ -307,6 +307,7 @@
 
       &.retour .texte-information-avis-utilisateur {
         margin-bottom: 1rem;
+        color: var(--text-title-grey);
       }
 
       dsfr-alert,
