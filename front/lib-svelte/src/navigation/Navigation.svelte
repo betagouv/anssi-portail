@@ -1,8 +1,8 @@
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
+  import { onMount } from 'svelte';
   import { creeLienContactsUtiles } from '../contacts/contacts';
   import { profilStore } from '../stores/profil.store';
-  import { onMount } from 'svelte';
 
   let estConnecte = () => !!$profilStore;
 
@@ -36,7 +36,10 @@
     itemDeMenu(
       'Guides et ressources',
       '/catalogue',
-      cheminRelatif === '/catalogue' || cheminRelatif.startsWith('/guides/') || cheminRelatif.startsWith('/ressources/')
+      cheminRelatif === '/catalogue' ||
+        cheminRelatif.startsWith('/guides/') ||
+        cheminRelatif.startsWith('/ressources/') ||
+        cheminRelatif.startsWith('/services/')
     ),
 
     ...(estConnecte() ? [itemDeMenu('Favoris', '/favoris', cheminRelatif === '/favoris')] : []),
