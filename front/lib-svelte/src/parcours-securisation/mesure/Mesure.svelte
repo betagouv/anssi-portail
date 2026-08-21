@@ -161,19 +161,17 @@
             </div>
             <div class="conteneur-emoji-avis">
               <Bouton
-                type="tertiaire"
+                type={avisUtilisateur?.positif ? 'primaire' : 'tertiaire'}
                 iconeSeule
                 icone="thumb-up-line"
                 titre="Réponse positive"
-                actif={avisUtilisateur?.positif}
                 surClic={() => soumetsAvisPositif()}
               ></Bouton>
               <Bouton
-                type="tertiaire"
+                type={avisUtilisateur && !avisUtilisateur.positif ? 'primaire' : 'tertiaire'}
                 iconeSeule
                 icone="thumb-down-line"
                 titre="Réponse négative"
-                actif={avisUtilisateur && !avisUtilisateur.positif}
                 surClic={() => afficheCommentaire()}
               ></Bouton>
             </div>
