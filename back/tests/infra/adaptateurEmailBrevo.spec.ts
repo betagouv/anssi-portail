@@ -70,7 +70,7 @@ describe('L’adaptateur email Brevo', () => {
     it('poste un message à axios', async () => {
       await brevo.creeContactBrevo(fauxContact());
 
-      assert.equal(true, postAxiosAppele);
+      assert.equal(postAxiosAppele, true);
     });
   });
 
@@ -78,7 +78,7 @@ describe('L’adaptateur email Brevo', () => {
     it('poste un message à axios', async () => {
       await brevo.inscrisAInfolettre('email');
 
-      assert.equal(true, postAxiosAppele);
+      assert.equal(postAxiosAppele, true);
     });
   });
 
@@ -112,7 +112,7 @@ describe('L’adaptateur email Brevo', () => {
           await brevo.creeContactBrevo(fauxContact());
           assert.fail();
         } catch {
-          assert.equal('Une erreur s’est produite', messageLog);
+          assert.equal(messageLog, 'Une erreur s’est produite');
         }
       });
 
@@ -138,7 +138,7 @@ describe('L’adaptateur email Brevo', () => {
           await brevo.inscrisAInfolettre('email');
           assert.fail();
         } catch {
-          assert.equal('Une erreur s’est produite', messageLog);
+          assert.equal(messageLog, 'Une erreur s’est produite');
         }
       });
 
@@ -161,30 +161,17 @@ describe('L’adaptateur email Brevo', () => {
     it("mets à jour la date de dernière consultation d'une mesure", async () => {
       await brevo.metsÀJourMesureConsultée(new MesureConsultee('mesure.consultee@mail.com', 'AUTH.5'));
 
-      assert.equal(urlPutAppelée, 'FAUSSE_URL_BREVO/contacts/mesure.consultee@mail.com');
-      assert.deepEqual(donnéesPutAppelées, {
-        attributes: {
+      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
+      assert.deepEqual(donnéesPostAppelées, {
+        event_name: 'mesure_consultee',
+        identifiers: { email_id: 'mesure.consultee@mail.com' },
+        contact_properties: {
           DATE_DERNIERE_CONSULTATION_MESURE: new Date('2025-03-10'),
         },
       });
     });
 
-    it("mets à jour la date de dernière prise en compte d'une mesure", async () => {
-      clientHttp.get = async <T>() => ({
-        data: {
-          email: 'user@yopmail.com',
-          attributes: {},
-        } as unknown as T,
-      });
-      await brevo.metsÀJourMesurePriseEnCompte(
-        new MesurePriseEnCompte('mesure.prise.en.compte@mail.com', 'AUTH.5', 12, 6, 'allégé')
-      );
-
-      assert.equal(urlPutAppelée, 'FAUSSE_URL_BREVO/contacts/mesure.prise.en.compte@mail.com');
-      assert.deepEqual(donnéesPutAppelées.attributes.DATE_DERNIERE_PRISE_EN_COMPTE_MESURE, new Date('2025-03-10'));
-    });
-
-    it('mets à jour le nombre de mesure prise en compte', async () => {
+    it('mets à jour le nombre de mesure prise en compte ainsi que la date', async () => {
       clientHttp.get = async <T>() => ({
         data: {
           email: 'user@yopmail.com',
@@ -197,8 +184,15 @@ describe('L’adaptateur email Brevo', () => {
         new MesurePriseEnCompte('mesure.prise.en.compte@mail.com', 'AUTH.5', 12, 6, 'allégé')
       );
 
-      assert.equal(urlPutAppelée, 'FAUSSE_URL_BREVO/contacts/mesure.prise.en.compte@mail.com');
-      assert.equal(donnéesPutAppelées.attributes.NOMBRE_MESURES_PRISES_EN_COMPTE, 3);
+      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
+      assert.deepEqual(donnéesPostAppelées, {
+        event_name: 'mesure_prise_en_compte',
+        identifiers: { email_id: 'mesure.prise.en.compte@mail.com' },
+        contact_properties: {
+          DATE_DERNIERE_PRISE_EN_COMPTE_MESURE: new Date('2025-03-10'),
+          NOMBRE_MESURES_PRISES_EN_COMPTE: 3,
+        },
+      });
     });
 
     it('mets à jour la date de dernière complétion de module', async () => {
@@ -213,9 +207,11 @@ describe('L’adaptateur email Brevo', () => {
 
       await brevo.metsÀJourModuleTerminé(new ModuleTermine('module.termine@mail.com', 1, 'CyberDépart', 'allégé'));
 
-      assert.equal(urlPutAppelée, 'FAUSSE_URL_BREVO/contacts/module.termine@mail.com');
-      assert.deepEqual(donnéesPutAppelées, {
-        attributes: {
+      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
+      assert.deepEqual(donnéesPostAppelées, {
+        event_name: 'module_termine',
+        identifiers: { email_id: 'module.termine@mail.com' },
+        contact_properties: {
           DATE_DERNIERE_COMPLETION_MODULE: new Date('2025-03-10'),
           NOMBRE_MODULES_TERMINES: 3,
         },
