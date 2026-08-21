@@ -2,10 +2,13 @@ import { BusEvenements } from '../bus/busEvenements.js';
 import { BadgeCyberdépartDébloqué } from '../bus/evenements/badgeCyberdepartDebloque.js';
 import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
+import { ParcoursAllégéTerminé } from '../bus/evenements/parcoursAllegeTermine.js';
 import { ParcoursChangé } from '../bus/evenements/parcoursChange.js';
+import { ParcoursCompletTerminé } from '../bus/evenements/parcoursCompletTermine.js';
 import { ParcoursRejoint } from '../bus/evenements/parcoursRejoint.js';
 import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
+import { EntrepotMesure } from './entrepotMesure.js';
 import { EntrepotPriseEnCompte } from './entrepotPriseEnCompte.js';
 import { Mesure } from './mesure.js';
 import { Module } from './module.js';
@@ -145,12 +148,19 @@ export class Utilisateur {
     return this.adaptateurHachage.hache(this.email);
   }
 
-  async prendEnCompte(
-    mesure: Mesure,
-    entrepotPriseEnCompte: EntrepotPriseEnCompte,
-    busEvenements: BusEvenements,
-    module: Module
-  ): Promise<{
+  async prendEnCompte({
+    mesure,
+    entrepotPriseEnCompte,
+    entrepotMesure,
+    busEvenements,
+    module,
+  }: {
+    busEvenements: BusEvenements;
+    entrepotMesure: EntrepotMesure;
+    entrepotPriseEnCompte: EntrepotPriseEnCompte;
+    mesure: Mesure;
+    module: Module;
+  }): Promise<{
     badgeCyberdépartDebloqué: boolean;
     moduleTerminé: boolean;
   }> {
@@ -175,6 +185,13 @@ export class Utilisateur {
     this.mesuresPrisesEnCompte.push(mesure);
     if (this.nombreDeMesuresPrisesEnCompte(module) === module.nombreDeMesures()) {
       await busEvenements.publie(new ModuleTermine(this.email, module.id, module.nom, this.parcours ?? undefined));
+      if (this.parcours === 'allégé') {
+        await busEvenements.publie(new ParcoursAllégéTerminé(this.email));
+      }
+      const nombreTotalDeMesures = (await entrepotMesure.tous()).length;
+      if (this.mesuresPrisesEnCompte.length === nombreTotalDeMesures) {
+        await busEvenements.publie(new ParcoursCompletTerminé(this.email));
+      }
       nouvelEtatModule.moduleTerminé = true;
     }
     const cibleBadgeCyberdépart = module.cibleDéblocageBadgeCyberdépart();

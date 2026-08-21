@@ -12,14 +12,33 @@ import { adaptateurEmailConsole } from './adaptateurEmailConsole.js';
 import { ClientHttp } from './clientHttp.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurHorloge } from './adaptateurHorloge.js';
+import { ParcoursAllégéTerminé } from '../bus/evenements/parcoursAllegeTermine.js';
+import { ParcoursCompletTerminé } from '../bus/evenements/parcoursCompletTermine.js';
 
 export type DonnéesUtilisateurBrevo = {
   email: string;
   attributes: {
-    NOMBRE_MODULES_TERMINES?: number;
+    DATE_DEBLOCAGE_BADGE_CYBERDEPART?: Date;
+    DATE_DERNIERE_COMPLETION_MODULE?: Date;
+    DATE_DERNIERE_CONSULTATION_MESURE?: Date;
     DATE_DERNIERE_PRISE_EN_COMPTE_MESURE?: Date;
     NOMBRE_MESURES_PRISES_EN_COMPTE?: number;
+    NOMBRE_MODULES_TERMINES?: number;
   };
+};
+
+type NomÉvénementBrévo =
+  | 'badge_cyberdepart_debloque'
+  | 'mesure_consultee'
+  | 'mesure_prise_en_compte'
+  | 'module_termine'
+  | 'parcours_allege_termine'
+  | 'parcours_complet_termine';
+
+export type ÉvénementBrevo = {
+  email: string;
+  nomÉvénement: NomÉvénementBrévo;
+  propriétésÀMettreÀJour?: Partial<DonnéesUtilisateurBrevo['attributes']>;
 };
 
 class AdaptateurEmailBrevo implements AdaptateurEmail {
@@ -38,6 +57,7 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
       },
     };
   }
+
   private readonly récupèreContact = async (email: string): Promise<DonnéesUtilisateurBrevo> => {
     try {
       const { data } = await this.clientHttp.get<DonnéesUtilisateurBrevo>(
@@ -68,6 +88,32 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
         this.enteteJSON
       );
     } catch (erreur: unknown) {
+      if (isAxiosError(erreur)) {
+        throw new Error(messageErreur + erreur.message, { cause: erreur });
+      }
+      throw erreur;
+    }
+  };
+
+  private readonly envoieÉvénement = async ({
+    email,
+    propriétésÀMettreÀJour,
+    nomÉvénement,
+    messageErreur,
+  }: ÉvénementBrevo & { messageErreur: string }) => {
+    try {
+      const corpsDeRequête = {
+        event_name: nomÉvénement,
+        identifiers: { email_id: email },
+        ...(propriétésÀMettreÀJour && { contact_properties: propriétésÀMettreÀJour }),
+      };
+      await this.clientHttp.post(
+        `${this.adaptateurEnvironnement.brevo().url()}/events`,
+        corpsDeRequête,
+        this.enteteJSON
+      );
+    } catch (erreur: unknown) {
+      console.log('erreur : ', erreur);
       if (isAxiosError(erreur)) {
         throw new Error(messageErreur + erreur.message, { cause: erreur });
       }
@@ -154,45 +200,49 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
   };
 
   metsÀJourMesureConsultée = async (événement: MesureConsultee) => {
-    await this.metsÀJourContact(
-      événement.email,
-      { DATE_DERNIERE_CONSULTATION_MESURE: this.adaptateurHorloge.maintenant() },
-      "Erreur lors de la mise à jour d'une mesure consultée sur Brévo : "
-    );
+    await this.envoieÉvénement({
+      email: événement.email,
+      nomÉvénement: 'mesure_consultee',
+      propriétésÀMettreÀJour: { DATE_DERNIERE_CONSULTATION_MESURE: this.adaptateurHorloge.maintenant() },
+      messageErreur: "Erreur lors de la mise à jour d'une mesure consultée sur Brévo : ",
+    });
   };
 
   metsÀJourMesurePriseEnCompte = async (événement: MesurePriseEnCompte) => {
     const donnéesUtilisateur = await this.récupèreContact(événement.email);
 
-    await this.metsÀJourContact(
-      événement.email,
-      {
+    await this.envoieÉvénement({
+      email: événement.email,
+      nomÉvénement: 'mesure_prise_en_compte',
+      propriétésÀMettreÀJour: {
         DATE_DERNIERE_PRISE_EN_COMPTE_MESURE: this.adaptateurHorloge.maintenant(),
         NOMBRE_MESURES_PRISES_EN_COMPTE: (donnéesUtilisateur.attributes.NOMBRE_MESURES_PRISES_EN_COMPTE ?? 0) + 1,
       },
-      "Erreur lors de la mise à jour d'une mesure prise en compte sur Brévo : "
-    );
+      messageErreur: "Erreur lors de la mise à jour d'une mesure prise en compte sur Brévo : ",
+    });
   };
 
   metsÀJourModuleTerminé = async (événement: ModuleTermine) => {
     const donnéesUtilisateur = await this.récupèreContact(événement.email);
 
-    await this.metsÀJourContact(
-      événement.email,
-      {
+    await this.envoieÉvénement({
+      email: événement.email,
+      nomÉvénement: 'module_termine',
+      propriétésÀMettreÀJour: {
         DATE_DERNIERE_COMPLETION_MODULE: this.adaptateurHorloge.maintenant(),
         NOMBRE_MODULES_TERMINES: (donnéesUtilisateur.attributes.NOMBRE_MODULES_TERMINES ?? 0) + 1,
       },
-      "Erreur lors de la mise à jour d'une complétion de module sur Brévo : "
-    );
+      messageErreur: "Erreur lo}rs de la mise à jour d'une complétion de module sur Brévo : ",
+    });
   };
 
   metsÀJourBadgeCyberdépartDébloqué = async (événement: BadgeCyberdépartDébloqué) => {
-    await this.metsÀJourContact(
-      événement.email,
-      { DATE_DEBLOCAGE_BADGE_CYBERDEPART: this.adaptateurHorloge.maintenant() },
-      'Erreur lors de la mise à jour du déblocage du badge CyberDépart sur Brévo : '
-    );
+    await this.envoieÉvénement({
+      email: événement.email,
+      nomÉvénement: 'badge_cyberdepart_debloque',
+      propriétésÀMettreÀJour: { DATE_DEBLOCAGE_BADGE_CYBERDEPART: this.adaptateurHorloge.maintenant() },
+      messageErreur: 'Erreur lors de la mise à jour du déblocage du badge CyberDépart sur Brévo : ',
+    });
   };
 
   metsÀJourParcours = async (événement: ParcoursChangé | ParcoursRejoint) => {
@@ -201,6 +251,22 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
       { PARCOURS: événement.parcours },
       'Erreur lors de la mise à jour du parcours sur Brévo : '
     );
+  };
+
+  metsÀJourParcoursAllégéTerminé = async (événement: ParcoursAllégéTerminé) => {
+    await this.envoieÉvénement({
+      email: événement.email,
+      nomÉvénement: 'parcours_allege_termine',
+      messageErreur: 'Erreur lors de la mise à jour de la complétion du parcours allégé sur Brévo : ',
+    });
+  };
+
+  metsÀJourParcoursCompletTerminé = async (événement: ParcoursCompletTerminé) => {
+    await this.envoieÉvénement({
+      email: événement.email,
+      nomÉvénement: 'parcours_complet_termine',
+      messageErreur: 'Erreur lors de la mise à jour de la complétion du parcours complet sur Brévo : ',
+    });
   };
 }
 

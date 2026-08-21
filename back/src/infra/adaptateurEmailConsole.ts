@@ -2,7 +2,9 @@ import { BadgeCyberdépartDébloqué } from '../bus/evenements/badgeCyberdepartD
 import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
 import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
+import { ParcoursAllégéTerminé } from '../bus/evenements/parcoursAllegeTermine.js';
 import { ParcoursChangé } from '../bus/evenements/parcoursChange.js';
+import { ParcoursCompletTerminé } from '../bus/evenements/parcoursCompletTermine.js';
 import { ParcoursRejoint } from '../bus/evenements/parcoursRejoint.js';
 import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 
@@ -30,5 +32,11 @@ export const adaptateurEmailConsole = (): AdaptateurEmail => ({
   },
   metsÀJourParcours: async (événement: ParcoursChangé | ParcoursRejoint) => {
     console.log(`On signale que ${événement.email} a changé/rejoint le parcours ${événement.parcours}`);
+  },
+  metsÀJourParcoursAllégéTerminé: async (événement: ParcoursAllégéTerminé) => {
+    console.log(`On signale que ${événement.email} a terminé le parcours allégé`);
+  },
+  metsÀJourParcoursCompletTerminé: async (événement: ParcoursCompletTerminé) => {
+    console.log(`On signale que ${événement.email} a terminé le parcours complet`);
   },
 });

@@ -18,7 +18,9 @@ import { consigneEvenementRetourExperienceDonneDansJournal } from './consigneEve
 import { consigneEvenementSimulationNis2TermineeDansJournal } from './consigneEvenementSimulationNis2TermineeDansJournal.js';
 import { consigneEvenementTestRealiseDansJournal } from './consigneEvenementTestRealiseDansJournal.js';
 import { consigneEvenementUtilisateurConnecteDansJournal } from './consigneEvenementUtilisateurConnecteDansJournal.js';
+import { consigneParcoursAllégéTerminéDansJournal } from './consigneParcoursAllegeTermineDansJournal.js';
 import { consigneParcoursChangéDansJournal } from './consigneParcoursChangeDansJournal.js';
+import { consigneParcoursCompletTerminéDansJournal } from './consigneParcoursCompletTermineDansJournal.js';
 import { consigneParcoursRejointDansJournal } from './consigneParcoursRejointDansJournal.js';
 import { creeContactBrevo } from './creeContactBrevo.js';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte.js';
@@ -29,7 +31,9 @@ import { CompteCree } from './evenements/compteCree.js';
 import { MesureConsultee } from './evenements/mesureConsultee.js';
 import { MesurePriseEnCompte } from './evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from './evenements/moduleTermine.js';
+import { ParcoursAllégéTerminé } from './evenements/parcoursAllegeTermine.js';
 import { ParcoursChangé } from './evenements/parcoursChange.js';
+import { ParcoursCompletTerminé } from './evenements/parcoursCompletTermine.js';
 import { ParcoursRejoint } from './evenements/parcoursRejoint.js';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee.js';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne.js';
@@ -159,5 +163,15 @@ export const cableTousLesAbonnes = ({
   busEvenements.abonnePlusieurs(ParcoursChangé, [
     consigneParcoursChangéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
     adaptateurEmail.metsÀJourParcours,
+  ]);
+
+  busEvenements.abonnePlusieurs(ParcoursAllégéTerminé, [
+    consigneParcoursAllégéTerminéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
+    adaptateurEmail.metsÀJourParcoursAllégéTerminé,
+  ]);
+
+  busEvenements.abonnePlusieurs(ParcoursCompletTerminé, [
+    consigneParcoursCompletTerminéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
+    adaptateurEmail.metsÀJourParcoursCompletTerminé,
   ]);
 };

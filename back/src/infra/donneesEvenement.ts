@@ -26,7 +26,9 @@ export type DonneesEvenement =
   | DonneesModuleTerminé
   | DonnéesBadgeCyberdépartDébloqué
   | DonnéesParcoursRejoint
-  | DonnéesParcoursChangé;
+  | DonnéesParcoursChangé
+  | DonnéesParcoursAllégéTerminé
+  | DonnéesParcoursCompletTerminé;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -121,3 +123,6 @@ type DonnéesParcoursChangé = Evenement<
     suivi?: Suivi;
   }
 >;
+
+type DonnéesParcoursAllégéTerminé = Evenement<'PARCOURS_ALLÉGÉ_TERMINÉ', { idUtilisateur: string }>;
+type DonnéesParcoursCompletTerminé = Evenement<'PARCOURS_COMPLET_TERMINÉ', { idUtilisateur: string }>;
