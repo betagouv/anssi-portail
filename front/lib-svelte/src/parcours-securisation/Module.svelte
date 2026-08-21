@@ -30,6 +30,7 @@
   });
 
   const progressionActuelle = $derived(module.mesures.filter((m) => m.estPriseEnCompte).length);
+
   const propriétésFilAriane: PropriétésFilAriane = $derived({
     branche: { nom: 'Protéger mon organisation', lien: '/parcours-complet' },
     feuille: module.nom,

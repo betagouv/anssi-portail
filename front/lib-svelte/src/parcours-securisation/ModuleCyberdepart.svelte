@@ -1,19 +1,21 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import { profilStore } from '../stores/profil.store';
+  import BadgeBeta from '../ui/BadgeBeta.svelte';
+  import { fabriqueFilAriane } from '../ui/filAriane';
+  import { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import { toasterStore } from '../ui/toasts/toaster.store';
   import Toaster from '../ui/toasts/Toaster.svelte';
   import BadgeCyberdepart from './BadgeCyberdepart.svelte';
   import BasculeParcoursComplet from './BasculeParcoursComplet.svelte';
+  import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
   import MesuresDeModule from './MesuresDeModule.svelte';
   import ModaleBadgeCyberdepartDebloque from './modales/ModaleBadgeCyberdepartDebloque.svelte';
   import ModaleModuleCyberdepartTermine from './modales/ModaleModuleCyberdepartTermine.svelte';
-  import Progression from './Progression.svelte';
-  import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
-  import { profilStore } from '../stores/profil.store';
   import type { ModuleRéponseApi } from './moduleReponseApi';
-  import BadgeBeta from '../ui/BadgeBeta.svelte';
+  import Progression from './Progression.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -46,6 +48,9 @@
   const badgeDebloque = $derived(totalMesures > 0 && progressionActuelle >= (module.cibleBadge ?? 0));
   const parcoursTermine = $derived(totalMesures > 0 && progressionActuelle === totalMesures);
   const parcoursComplet = $derived($profilStore?.parcoursSecurisation.parcoursActuel === 'complet');
+  const propriétésFilAriane: PropriétésFilAriane = $derived({
+    feuille: 'Protéger mon organisation',
+  });
 </script>
 
 <Toaster />
@@ -59,6 +64,7 @@
   illustrationSource=""
   titre={module.nom}
   theme="pastel"
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
 >
   {#snippet tags()}
     <BadgeBeta />
