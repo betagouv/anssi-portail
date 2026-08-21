@@ -103,12 +103,13 @@
   }
 
   .conteneur-pris-en-compte {
-    display: flex;
-    gap: 12px;
     align-items: center;
     background-color: var(--background-contrast-success);
-    padding: 1.5rem;
+    color: var(--text-title-grey);
+    display: flex;
+    gap: 12px;
     margin-bottom: 32px;
+    padding: 1.5rem;
 
     @include a-partir-de(md) {
       flex-direction: column;
