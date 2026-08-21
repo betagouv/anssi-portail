@@ -343,7 +343,7 @@ importers:
         version: 8.6.2(express@5.2.1(supports-color@10.2.2))(supports-color@10.2.2)
       express-useragent:
         specifier: ^2.1.0
-        version: 2.2.1
+        version: 2.2.2
       forwarded-parse:
         specifier: ^2.1.2
         version: 2.1.2
@@ -2771,8 +2771,8 @@ packages:
     peerDependencies:
       express: '>= 4.11'
 
-  express-useragent@2.2.1:
-    resolution: {integrity: sha512-NZxuTG3BkT9lkE50kMPmpGnat8TJF/2XPq4lX+ty+jNvk00G8hyJYDxeddW6vHZFlpB/u7njaiSYfu4fTXE4FQ==}
+  express-useragent@2.2.2:
+    resolution: {integrity: sha512-pCizBkIdBP91/zXpVjFv4sMr2CnIUyLetF6IFkZ9Ew46ob2aYl2SebYDVLxMw5anKkVTKYafm0Gh4Am0rutE4g==}
     engines: {node: '>=18'}
 
   express@5.2.1:
@@ -6538,7 +6538,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  express-useragent@2.2.1: {}
+  express-useragent@2.2.2: {}
 
   express@5.2.1(supports-color@10.2.2):
     dependencies:
