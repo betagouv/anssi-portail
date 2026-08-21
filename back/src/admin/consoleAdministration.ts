@@ -107,8 +107,10 @@ export class ConsoleAdministration {
     console.log(`\n${rapportExecution}`);
   }
 
-  async rattrapageProfilContactBrevo(email: string) {
-    const unUtilisateur = await this.entrepotUtilisateur.parEmailHache(this.adaptateurHachage.hache(email));
+  async rattrapageProfilContactBrevo(email: string, haché: boolean = false) {
+    const unUtilisateur = await this.entrepotUtilisateur.parEmailHache(
+      haché ? email : this.adaptateurHachage.hache(email)
+    );
     if (!unUtilisateur) {
       console.log('Utilisateur non trouvé');
       return;
