@@ -164,4 +164,8 @@
       padding-bottom: 4.5rem;
     }
   }
+
+  .texte-standard-md {
+    color: var(--text-title-grey);
+  }
 </style>
