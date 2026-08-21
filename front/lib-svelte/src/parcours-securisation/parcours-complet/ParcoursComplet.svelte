@@ -4,10 +4,12 @@
   import ControleSegmente from '../../navigation/ControleSegmente.svelte';
   import { creeLeFragmentDeNavigation } from '../../navigation/fragmentDeNavigation.svelte';
   import BadgeBeta from '../../ui/BadgeBeta.svelte';
+  import { fabriqueFilAriane } from '../../ui/filAriane';
   import Heros from '../../ui/Heros.svelte';
   import Lien from '../../ui/Lien.svelte';
   import type { Mesure, Module } from '../mesure';
   import Progression from '../Progression.svelte';
+  import { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import VueListeMesures from './VueListeMesures.svelte';
   import VueModule from './VueModule.svelte';
 
@@ -40,6 +42,8 @@
   let fragmentDeNavigation = creeLeFragmentDeNavigation();
 
   let vueCourante = $derived(fragmentDeNavigation.section);
+
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Protéger mon organisation' };
 </script>
 
 <Heros
@@ -52,6 +56,7 @@
   illustrationSource=""
   titre="Parcours de sécurisation"
   theme="pastel"
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
 >
   {#snippet tags()}
     <BadgeBeta />
