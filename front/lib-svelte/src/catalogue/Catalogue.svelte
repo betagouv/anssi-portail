@@ -1,6 +1,7 @@
 <script lang="ts">
   import { afficheNouvelleDA, estServeur } from '$plateforme/environnement';
   import { onMount, untrack } from 'svelte';
+  import { clic } from '../directives/actions.svelte';
   import ControleSegmente from '../navigation/ControleSegmente.svelte';
   import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '../stores/profil.store';
@@ -10,6 +11,7 @@
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Heros from '../ui/Heros.svelte';
+  import IllustrationPasDeResultatDeRecherche from '../ui/IllustrationPasDeResultatDeRecherche.svelte';
   import CarteItem from './CarteItem.svelte';
   import {
     type BesoinCyber,
@@ -40,8 +42,6 @@
   import { rechercheParTypologie } from './stores/rechercheParTypologie.store';
   import { recherches } from './stores/recherches.store';
   import { rechercheTextuelle } from './stores/rechercheTextuelle.store';
-  import IllustrationPasDeResultatDeRecherche from '../ui/IllustrationPasDeResultatDeRecherche.svelte';
-  import { clic } from '../directives/actions.svelte';
 
   type Props = {
     itemsCyber?: ItemCyber[];
@@ -130,7 +130,7 @@
     }
     return idÉlémentSélectionné === 'guides' ? $guidesFiltres.resultats : $catalogueFiltre.resultats;
   });
-  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Explorer le catalogue', fondSombre: true };
+  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Guides et ressources', fondSombre: true };
 </script>
 
 <Heros

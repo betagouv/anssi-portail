@@ -1,5 +1,6 @@
 <script lang="ts">
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import { onMount, untrack } from 'svelte';
   import EncartLienVersDemandeDiagnostic from '../../demande-aide-mon-aide-cyber/EncartLienVersDemandeDiagnostic.svelte';
   import { clic } from '../../directives/actions.svelte';
@@ -8,6 +9,7 @@
   import { fabriqueFilAriane } from '../../ui/filAriane';
   import FilAriane, { type Props as PropriétésFilAriane } from '../../ui/FilAriane.svelte';
   import Heros from '../../ui/Heros.svelte';
+  import IllustrationDragonPasDeResultat from '../../ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '../../ui/Lien.svelte';
   import Separateur from '../../ui/Separateur.svelte';
   import { CollectionGuide, type Guide } from '../Guide.types';
@@ -17,8 +19,6 @@
   import { decodeEntitesHtml, guidePourCarteItem } from './guide';
   import InciteASAbonner from './InciteASAbonner.svelte';
   import ListeGuideMemeCollection from './ListeGuideMemeCollection.svelte';
-  import IllustrationDragonPasDeResultat from '../../ui/IllustrationDragonPasDeResultat.svelte';
-  import { enPropriétéWebC } from '$plateforme/webComponent';
 
   type Props = {
     guideInitial?: Guide;
@@ -65,7 +65,7 @@
   const descriptionAspetisee = $derived(aseptiseHtml(guide?.description ?? ''));
   const propriétésFilAriane: PropriétésFilAriane = $derived({
     feuille: guide?.nom ?? '',
-    branche: { nom: 'Catalogue cyber', lien: '/catalogue#guides' },
+    branche: { nom: 'Guides et ressources', lien: '/catalogue#guides' },
     fondSombre: false,
   });
 
