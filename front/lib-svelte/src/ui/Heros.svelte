@@ -385,7 +385,11 @@
     img {
       object-fit: cover;
       object-position: top;
+      aspect-ratio: 588 / 300;
       width: 100%;
+      display: block;
+      max-height: 100%;
+      height: auto;
     }
   }
 </style>
