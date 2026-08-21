@@ -2,18 +2,26 @@ const DATE_DERNIERE_FERMETURE_CLE = 'dateDerniereFermeture';
 const DATE_DERNIER_AVIS_DONNE = 'dateDernierAvis';
 const DATE_DEBUT_SESSION = 'datePremiereVisite';
 
-const extraitDateDepuisNavigateur = ({ cle, storage }: { cle: string; storage: Storage }): Date | undefined => {
+const extraitDateDepuisNavigateur = ({ cle, storage }: { cle: string; storage: () => Storage }): Date | undefined => {
   try {
-    const dateLue = new Date(storage.getItem(cle) ?? '');
+    const dateLue = new Date(storage().getItem(cle) ?? '');
     return isNaN(dateLue.getTime()) ? undefined : dateLue;
   } catch {
     return undefined;
   }
 };
 
-const enregistreDateDansNavigateur = ({ cle, storage, date }: { cle: string; storage: Storage; date: Date }): void => {
+const enregistreDateDansNavigateur = ({
+  cle,
+  storage,
+  date,
+}: {
+  cle: string;
+  storage: () => Storage;
+  date: Date;
+}): void => {
   try {
-    storage.setItem(cle, date.toUTCString());
+    storage().setItem(cle, date.toUTCString());
   } catch {
     // Silencieusement ignoré
   }
@@ -29,23 +37,23 @@ export interface EntrepotAvisUtilisateur {
 export class EntrepotNavigateurAvisUtilisateur implements EntrepotAvisUtilisateur {
   dateDernierAvis = () =>
     extraitDateDepuisNavigateur({
-      storage: localStorage,
+      storage: () => localStorage,
       cle: DATE_DERNIER_AVIS_DONNE,
     });
 
   dateDerniereFermetureAvis = () =>
     extraitDateDepuisNavigateur({
-      storage: localStorage,
+      storage: () => localStorage,
       cle: DATE_DERNIERE_FERMETURE_CLE,
     });
   dateDebutSession = () =>
     extraitDateDepuisNavigateur({
-      storage: sessionStorage,
+      storage: () => sessionStorage,
       cle: DATE_DEBUT_SESSION,
     });
   modifieDateDebutSession = (date: Date) => {
     enregistreDateDansNavigateur({
-      storage: sessionStorage,
+      storage: () => sessionStorage,
       cle: DATE_DEBUT_SESSION,
       date,
     });
@@ -53,7 +61,7 @@ export class EntrepotNavigateurAvisUtilisateur implements EntrepotAvisUtilisateu
 
   modifieDateDerniereFermetureAvis = (date: Date) => {
     enregistreDateDansNavigateur({
-      storage: localStorage,
+      storage: () => localStorage,
       cle: DATE_DERNIERE_FERMETURE_CLE,
       date,
     });
@@ -61,7 +69,7 @@ export class EntrepotNavigateurAvisUtilisateur implements EntrepotAvisUtilisateu
 
   modifieDateDernierAvisDonne = (date: Date) => {
     enregistreDateDansNavigateur({
-      storage: localStorage,
+      storage: () => localStorage,
       cle: DATE_DERNIER_AVIS_DONNE,
       date,
     });
