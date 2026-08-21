@@ -18,9 +18,9 @@
   });
 </script>
 
-<div class={`${mode} progression`}>
-  <h6>{libelle}</h6>
-  <span class="texte-standard-md libelle">{actuel}&nbsp;/&nbsp;{max}</span>
+<div class={[mode, 'progression']}>
+  <p class="texte-standard-md libelle">{libelle}</p>
+  <span class="texte-standard-md avancement">{actuel}&nbsp;/&nbsp;{max}</span>
   <div class="barre" bind:this={barre}>
     <div class="barre-actuelle"></div>
     {#if cible}
@@ -52,9 +52,11 @@
       'barre barre';
     grid-template-columns: min-content auto;
     align-items: center;
+
     &.compact {
       grid-template-columns: auto min-content;
     }
+
     &.reactif {
       @include a-partir-de(md) {
         grid-template-areas: 'titre barre libelle';
@@ -62,14 +64,21 @@
       }
     }
 
-    h6 {
-      grid-area: titre;
-    }
-    .libelle {
-      grid-area: libelle;
+    .texte-standard-md {
+      color: var(--text-title-grey);
+      margin: 0;
     }
 
-    h6,
+    .libelle {
+      grid-area: titre;
+      font-weight: 700;
+    }
+
+    .avancement {
+      grid-area: libelle;
+      font-weight: normal;
+    }
+
     span {
       margin: 0;
     }
