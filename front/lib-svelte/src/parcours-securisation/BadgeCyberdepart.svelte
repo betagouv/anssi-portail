@@ -49,7 +49,10 @@
       grid-area: image;
       justify-self: center;
       margin: -1.5rem 0 -1.5rem -1.5rem;
+      height: 230px;
+      object-fit: cover;
     }
+
     h6 {
       grid-area: titre;
       margin-bottom: 1rem;
