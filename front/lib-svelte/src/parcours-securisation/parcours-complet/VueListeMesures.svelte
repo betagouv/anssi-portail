@@ -36,7 +36,7 @@
           taille="sm"
           apparence="bouton"
           type={mesure.estPriseEnCompte ? 'tertiaire' : 'primaire'}
-          href={`/mesures/${mesure.id}`}
+          href={`/mesures/${mesure.id}?source=liste`}
           libelle={mesure.estPriseEnCompte ? 'Accéder au détail' : "Passer à l'action"}
           source="Vues des mesures"
         />

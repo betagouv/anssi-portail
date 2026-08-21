@@ -22,7 +22,12 @@
       if (reponse.data.moduleTerminé) {
         sessionStorage.setItem('module-termine', 'true');
       }
-      window.location.href = `/modules/${mesure.idModule}`;
+      const requete = new URLSearchParams(window.location.search);
+      const nouvelleUrl =
+        requete.has('source') && requete.get('source') === 'liste'
+          ? '/parcours-complet#mesures'
+          : `/modules/${mesure.idModule}`;
+      window.location.href = nouvelleUrl;
       mesurePriseEnCompte = true;
     } finally {
       priseEnCompteEnCours = false;
