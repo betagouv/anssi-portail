@@ -19,15 +19,25 @@ export type DonnéesUtilisateurBrevo = {
   email: string;
   attributes: {
     DATE_DEBLOCAGE_BADGE_CYBERDEPART?: Date;
+    DATE_DERNIERE_COMPLETION_MODULE?: Date;
+    DATE_DERNIERE_CONSULTATION_MESURE?: Date;
     DATE_DERNIERE_PRISE_EN_COMPTE_MESURE?: Date;
     NOMBRE_MESURES_PRISES_EN_COMPTE?: number;
     NOMBRE_MODULES_TERMINES?: number;
   };
 };
 
+type NomÉvénementBrévo =
+  | 'badge_cyberdepart_debloque'
+  | 'mesure_consultee'
+  | 'mesure_prise_en_compte'
+  | 'module_termine'
+  | 'parcours_allege_termine'
+  | 'parcours_complet_termine';
+
 export type ÉvénementBrevo = {
   email: string;
-  nomÉvénement: 'badge_cyberdepart_debloque' | 'parcours_allege_termine' | 'parcours_complet_termine';
+  nomÉvénement: NomÉvénementBrévo;
   propriétésÀMettreÀJour?: Partial<DonnéesUtilisateurBrevo['attributes']>;
 };
 
@@ -190,37 +200,40 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
   };
 
   metsÀJourMesureConsultée = async (événement: MesureConsultee) => {
-    await this.metsÀJourContact(
-      événement.email,
-      { DATE_DERNIERE_CONSULTATION_MESURE: this.adaptateurHorloge.maintenant() },
-      "Erreur lors de la mise à jour d'une mesure consultée sur Brévo : "
-    );
+    await this.envoieÉvénement({
+      email: événement.email,
+      nomÉvénement: 'mesure_consultee',
+      propriétésÀMettreÀJour: { DATE_DERNIERE_CONSULTATION_MESURE: this.adaptateurHorloge.maintenant() },
+      messageErreur: "Erreur lors de la mise à jour d'une mesure consultée sur Brévo : ",
+    });
   };
 
   metsÀJourMesurePriseEnCompte = async (événement: MesurePriseEnCompte) => {
     const donnéesUtilisateur = await this.récupèreContact(événement.email);
 
-    await this.metsÀJourContact(
-      événement.email,
-      {
+    await this.envoieÉvénement({
+      email: événement.email,
+      nomÉvénement: 'mesure_prise_en_compte',
+      propriétésÀMettreÀJour: {
         DATE_DERNIERE_PRISE_EN_COMPTE_MESURE: this.adaptateurHorloge.maintenant(),
         NOMBRE_MESURES_PRISES_EN_COMPTE: (donnéesUtilisateur.attributes.NOMBRE_MESURES_PRISES_EN_COMPTE ?? 0) + 1,
       },
-      "Erreur lors de la mise à jour d'une mesure prise en compte sur Brévo : "
-    );
+      messageErreur: "Erreur lors de la mise à jour d'une mesure prise en compte sur Brévo : ",
+    });
   };
 
   metsÀJourModuleTerminé = async (événement: ModuleTermine) => {
     const donnéesUtilisateur = await this.récupèreContact(événement.email);
 
-    await this.metsÀJourContact(
-      événement.email,
-      {
+    await this.envoieÉvénement({
+      email: événement.email,
+      nomÉvénement: 'module_termine',
+      propriétésÀMettreÀJour: {
         DATE_DERNIERE_COMPLETION_MODULE: this.adaptateurHorloge.maintenant(),
         NOMBRE_MODULES_TERMINES: (donnéesUtilisateur.attributes.NOMBRE_MODULES_TERMINES ?? 0) + 1,
       },
-      "Erreur lors de la mise à jour d'une complétion de module sur Brévo : "
-    );
+      messageErreur: "Erreur lo}rs de la mise à jour d'une complétion de module sur Brévo : ",
+    });
   };
 
   metsÀJourBadgeCyberdépartDébloqué = async (événement: BadgeCyberdépartDébloqué) => {
