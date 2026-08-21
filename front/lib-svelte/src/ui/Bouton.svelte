@@ -2,7 +2,6 @@
   import { clic } from '../directives/actions.svelte';
 
   export interface Props {
-    actif?: boolean;
     etire?: boolean;
     libelle?: string;
     titre?: string;
@@ -17,7 +16,6 @@
   }
 
   const {
-    actif = false,
     etire,
     libelle,
     titre,
@@ -49,7 +47,6 @@
 </script>
 
 <dsfr-button
-  class:actif
   centered={etire}
   label={libelle}
   title={titre}
@@ -64,10 +61,3 @@
 >
   <button slot="seo" title={titre} disabled={desactive || undefined} type={boutonType}>{libelle}</button>
 </dsfr-button>
-
-<style lang="scss">
-  .actif {
-    background: var(--background-action-high-blue-france);
-    border-radius: 8px;
-  }
-</style>
