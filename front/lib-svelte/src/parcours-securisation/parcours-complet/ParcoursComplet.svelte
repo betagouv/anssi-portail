@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import Heros from '../../ui/Heros.svelte';
   import axios from 'axios';
-  import type { Mesure, Module } from '../mesure';
-  import Progression from '../Progression.svelte';
+  import { onMount } from 'svelte';
   import ControleSegmente from '../../navigation/ControleSegmente.svelte';
   import { creeLeFragmentDeNavigation } from '../../navigation/fragmentDeNavigation.svelte';
-  import VueModule from './VueModule.svelte';
-  import VueListeMesures from './VueListeMesures.svelte';
-  import Lien from '../../ui/Lien.svelte';
   import BadgeBeta from '../../ui/BadgeBeta.svelte';
+  import Heros from '../../ui/Heros.svelte';
+  import Lien from '../../ui/Lien.svelte';
+  import type { Mesure, Module } from '../mesure';
+  import Progression from '../Progression.svelte';
+  import VueListeMesures from './VueListeMesures.svelte';
+  import VueModule from './VueModule.svelte';
 
   type ModulePrésentation = {
     id: number;
@@ -73,7 +73,13 @@
     ></ControleSegmente>
 
     {#if vueCourante === 'mesures'}
-      <Lien apparence="bouton" icone="download-line" libelle="Exporter la liste" href="/api/mesures.csv" />
+      <Lien
+        apparence="bouton"
+        type="secondaire"
+        icone="download-line"
+        libelle="Exporter la liste"
+        href="/api/mesures.csv"
+      />
     {/if}
   </div>
 

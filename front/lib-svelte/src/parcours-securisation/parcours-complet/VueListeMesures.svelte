@@ -37,7 +37,7 @@
           apparence="bouton"
           type={mesure.estPriseEnCompte ? 'tertiaire' : 'primaire'}
           href={`/mesures/${mesure.id}`}
-          libelle={mesure.estPriseEnCompte ? 'Accédez aux détails' : "Passer à l'action"}
+          libelle={mesure.estPriseEnCompte ? 'Accéder au détail' : "Passer à l'action"}
           source="Vues des mesures"
         />
       </div>
@@ -67,6 +67,8 @@
   }
 
   .lien {
+    display: flex;
+    justify-content: flex-end;
     min-width: 10rem;
   }
 
