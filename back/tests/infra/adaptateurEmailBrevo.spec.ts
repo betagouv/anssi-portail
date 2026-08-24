@@ -1,28 +1,27 @@
 import { AxiosError } from '@anssi-portail/axios';
 import assert from 'node:assert';
 import { afterEach, beforeEach, describe, it } from 'node:test';
+import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque.js';
 import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
-import { adaptateurEmailBrevo, DonnéesUtilisateurBrevo } from '../../src/infra/adaptateurEmailBrevo.js';
+import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompte.js';
+import { ModuleTermine } from '../../src/bus/evenements/moduleTermine.js';
+import { ParcoursAllégéTerminé } from '../../src/bus/evenements/parcoursAllegeTermine.js';
+import { ParcoursCompletTerminé } from '../../src/bus/evenements/parcoursCompletTermine.js';
+import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
+import { adaptateurEmailBrevo } from '../../src/infra/adaptateurEmailBrevo.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
-import { fabriqueClientPost, fabriqueClientPut, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
-import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompte.js';
-import { ModuleTermine } from '../../src/bus/evenements/moduleTermine.js';
-import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque.js';
-import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
-import { ParcoursAllégéTerminé } from '../../src/bus/evenements/parcoursAllegeTermine.js';
-import { ParcoursCompletTerminé } from '../../src/bus/evenements/parcoursCompletTermine.js';
+import { fabriqueClientPost, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
+import { ParcoursChangé } from '../../src/bus/evenements/parcoursChange.js';
 
 describe('L’adaptateur email Brevo', () => {
   let clientHttp: ClientHttp;
   let brevo: AdaptateurEmail;
   let postAxiosAppele: boolean = false;
   let donnéesPostAppelées: unknown;
-  let donnéesPutAppelées: DonnéesUtilisateurBrevo;
   let urlPostAppelée: unknown;
-  let urlPutAppelée: unknown;
 
   const fauxContact = () => ({
     email: 'mail@example.com',
@@ -38,13 +37,8 @@ describe('L’adaptateur email Brevo', () => {
 
   beforeEach(() => {
     postAxiosAppele = false;
-    donnéesPutAppelées = {
-      email: '',
-      attributes: {},
-    };
 
     urlPostAppelée = '';
-    urlPutAppelée = '';
 
     clientHttp = {
       ...fabriqueFauxClientHttp(),
@@ -52,10 +46,6 @@ describe('L’adaptateur email Brevo', () => {
         postAxiosAppele = true;
         urlPostAppelée = url;
         donnéesPostAppelées = données;
-      }),
-      put: fabriqueClientPut(async (url: string, données: unknown) => {
-        donnéesPutAppelées = données as DonnéesUtilisateurBrevo;
-        urlPutAppelée = url;
       }),
     };
 
@@ -231,15 +221,32 @@ describe('L’adaptateur email Brevo', () => {
       });
     });
 
-    it('mets à jour le parcours', async () => {
-      await brevo.metsÀJourParcours(
+    it('émets un événement de rattachement de parcours', async () => {
+      await brevo.metsÀJourParcoursRejoint(
         new ParcoursRejoint('parcours.rejoint@mail.com', 'allégé', 'visite-page-module', { campagne: 'campagne' })
       );
 
-      assert.equal(urlPutAppelée, 'FAUSSE_URL_BREVO/contacts/parcours.rejoint@mail.com');
-      assert.deepEqual(donnéesPutAppelées, {
-        attributes: {
+      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
+      assert.deepEqual(donnéesPostAppelées, {
+        event_name: 'parcours_rejoint',
+        identifiers: { email_id: 'parcours.rejoint@mail.com' },
+        contact_properties: {
           PARCOURS: 'allégé',
+        },
+      });
+    });
+
+    it('émets un événement de changement de parcours', async () => {
+      await brevo.metsÀJourParcoursChangé(
+        new ParcoursChangé('parcours.changé@mail.com', 'allégé', 'complet', 'visite-page-module')
+      );
+
+      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
+      assert.deepEqual(donnéesPostAppelées, {
+        event_name: 'parcours_change',
+        identifiers: { email_id: 'parcours.changé@mail.com' },
+        contact_properties: {
+          PARCOURS: 'complet',
         },
       });
     });

@@ -29,7 +29,8 @@ export interface AdaptateurEmail {
   metsÀJourMesurePriseEnCompte: (événement: MesurePriseEnCompte) => Promise<void>;
   metsÀJourModuleTerminé: (événement: ModuleTermine) => Promise<void>;
   metsÀJourBadgeCyberdépartDébloqué: (événement: BadgeCyberdépartDébloqué) => Promise<void>;
-  metsÀJourParcours: (événement: ParcoursChangé | ParcoursRejoint) => Promise<void>;
+  metsÀJourParcoursChangé: (événement: ParcoursChangé) => Promise<void>;
+  metsÀJourParcoursRejoint: (événement: ParcoursRejoint) => Promise<void>;
   metsÀJourParcoursAllégéTerminé: (événement: ParcoursAllégéTerminé) => Promise<void>;
   metsÀJourParcoursCompletTerminé: (événement: ParcoursCompletTerminé) => Promise<void>;
 }
