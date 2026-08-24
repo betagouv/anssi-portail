@@ -4,7 +4,8 @@
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import { profilStore } from '../stores/profil.store';
-  import Lien from '../ui/Lien.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import Heros from '../ui/Heros.svelte';
   import ComparaisonTest from './ComparaisonTest.svelte';
   import HistoriqueTests from './HistoriqueTests.svelte';
   import PropositionRefaireTest from './PropositionRefaireTest.svelte';
@@ -40,17 +41,26 @@
     { label: 'Historique', fragment: '#historique' },
     { label: 'Comparaison avec d’autres entités', fragment: '#comparaison' },
   ];
+  const propriétésFilAriane: PropriétésFilAriane = {
+    feuille: 'Test de maturité cyber',
+  };
 </script>
 
-<dsfr-container class="lien-retour">
-  <Lien href="/" libelle="Retour à l'accueil" icone="arrow-go-back-line"></Lien>
-</dsfr-container>
-
-{#if $profilStore && lienActif}
-  <NavigationTertiaire {liens} bind:lienActif />
-{/if}
+<Heros
+  description="Votre résultat vous permet de situer votre niveau de maturité cyber actuel et de suivre son évolution au fil de vos actions."
+  format="banniere"
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
+  theme="clair"
+  titre="Maturité cyber de votre organisation"
+></Heros>
 
 <PropositionRefaireTest />
+
+{#if $profilStore && lienActif}
+  <dsfr-container>
+    <NavigationTertiaire {liens} bind:lienActif />
+  </dsfr-container>
+{/if}
 
 {#if lienActif === '#votre-organisation'}
   <ResultatsMonOrganisation {animeTuiles} {dateRealisation} {defilementAutomatique} {idNiveau} />
@@ -59,9 +69,3 @@
 {:else if $profilStore}
   <ComparaisonTest />
 {/if}
-
-<style>
-  .lien-retour {
-    margin: 24px 0;
-  }
-</style>

@@ -7,9 +7,10 @@
   type Props = {
     liens: Lien[];
     lienActif: string;
+    centré?: boolean;
   };
 
-  let { liens, lienActif = $bindable() }: Props = $props();
+  let { liens, lienActif = $bindable(), centré }: Props = $props();
 
   const changeLeLienCourant = () => {
     const [section] = extraisSegmentsDuFragment(window.location.hash);
@@ -26,7 +27,7 @@
 </script>
 
 <dsfr-tabnav
-  centered
+  centered={centré}
   links={enPropriétéWebC(
     liens.map((lien) => ({ label: `${lien.emoji ? lien.emoji + ' ' : ''}${lien.label}`, href: lien.fragment }))
   )}
