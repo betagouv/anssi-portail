@@ -7,8 +7,7 @@
   import { chargeGuidesDansLeStore, guidesStore } from '../catalogue/stores/guides/guides.store';
   import { listeItemsFavoris } from '../catalogue/stores/itemsCatalogueEnFavori';
   import { profilStore } from '../stores/profil.store';
-  import { fabriqueFilAriane } from '../ui/filAriane';
-  import { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import ContenuFavoris from './ContenuFavoris.svelte';
