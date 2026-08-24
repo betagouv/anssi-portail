@@ -2,12 +2,12 @@
   import type { Snippet } from 'svelte';
   import type { ClassValue } from 'svelte/elements';
 
-  import FilAriane, { type Props as PropriétésFilAriane } from './FilAriane.svelte';
+  import FilAriane, { type PropsFilAriane } from './FilAriane.svelte';
 
   type Props = {
     titre?: string;
     description?: string;
-    propriétésFilAriane?: PropriétésFilAriane;
+    propriétésFilAriane?: PropsFilAriane;
     tag?: string;
     srcImage?: string;
     avantLeTitre?: Snippet;

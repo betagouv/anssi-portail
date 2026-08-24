@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { afficheNouvelleDA } from '$plateforme/environnement';
   import axios from 'axios';
-  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import { onMount } from 'svelte';
   import type { ItemCyber } from '../catalogue/Catalogue.types';
   import type { Guide } from '../catalogue/Guide.types';
@@ -8,11 +8,11 @@
   import { chargeGuidesDansLeStore, guidesStore } from '../catalogue/stores/guides/guides.store';
   import { listeItemsFavoris } from '../catalogue/stores/itemsCatalogueEnFavori';
   import { profilStore } from '../stores/profil.store';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
-  import { fabriqueFilAriane } from '../ui/filAriane';
-  import ContenuFavoris from './ContenuFavoris.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
+  import ContenuFavoris from './ContenuFavoris.svelte';
 
   let prenom: string = '';
   let itemsCyberPartages: (ItemCyber | Guide)[] = [];

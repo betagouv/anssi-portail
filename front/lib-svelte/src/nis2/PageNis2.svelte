@@ -3,17 +3,17 @@
   import { onMount } from 'svelte';
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import Alternatives from '../ui/Alternatives.svelte';
-  import { fabriqueFilAriane } from '../ui/filAriane';
-  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import HerosRiche from '../ui/HerosRiche.svelte';
   import Lien from '../ui/Lien.svelte';
+  import MotEnExergue from '../ui/MotEnExergue.svelte';
   import Notice from '../ui/Notice.svelte';
   import DocumentationNis2 from './DocumentationNis2.svelte';
   import ExigencesNis2 from './ExigencesNis2.svelte';
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
-  import MotEnExergue from '../ui/MotEnExergue.svelte';
 
   const { itemsCyber, featureFlagNis2CyFun23 = false, exigences = undefined, guides = undefined } = $props();
 

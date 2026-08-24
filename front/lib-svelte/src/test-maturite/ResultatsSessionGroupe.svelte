@@ -1,9 +1,13 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import { couleursDeNiveau, niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
+  import { profilStore } from '../stores/profil.store';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import FilAriane from '../ui/FilAriane.svelte';
+  import Heros from '../ui/Heros.svelte';
+  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '../ui/Lien.svelte';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeAnneau from './LegendeAnneau.svelte';
@@ -12,10 +16,6 @@
   import type { RéponsesResultatTest } from './ResultatsTest.type';
   import { type Serie, type SerieRadar } from './Serie';
   import TuilesMaturiteSessionGroupe from './TuilesMaturiteSessionGroupe.svelte';
-  import Heros from '../ui/Heros.svelte';
-  import { fabriqueFilAriane } from '../ui/filAriane';
-  import { profilStore } from '../stores/profil.store';
-  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
 
   type ResumeNiveau = {
     total: number;

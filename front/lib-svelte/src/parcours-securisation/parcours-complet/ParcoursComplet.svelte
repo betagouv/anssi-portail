@@ -4,12 +4,11 @@
   import ControleSegmente from '../../navigation/ControleSegmente.svelte';
   import { creeLeFragmentDeNavigation } from '../../navigation/fragmentDeNavigation.svelte';
   import BadgeBeta from '../../ui/BadgeBeta.svelte';
-  import { fabriqueFilAriane } from '../../ui/filAriane';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
   import Heros from '../../ui/Heros.svelte';
   import Lien from '../../ui/Lien.svelte';
   import type { Mesure, Module } from '../mesure';
   import Progression from '../Progression.svelte';
-  import { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import VueListeMesures from './VueListeMesures.svelte';
   import VueModule from './VueModule.svelte';
 

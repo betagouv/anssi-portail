@@ -6,8 +6,8 @@
   import { clic } from '../../directives/actions.svelte';
   import BoutonFavori from '../../favoris/BoutonFavori.svelte';
   import { profilStore } from '../../stores/profil.store';
-  import { fabriqueFilAriane } from '../../ui/filAriane';
-  import FilAriane, { type Props as PropriétésFilAriane } from '../../ui/FilAriane.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
+  import FilAriane from '../../ui/FilAriane.svelte';
   import Heros from '../../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../../ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '../../ui/Lien.svelte';

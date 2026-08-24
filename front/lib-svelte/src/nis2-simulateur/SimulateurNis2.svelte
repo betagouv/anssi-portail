@@ -1,8 +1,8 @@
 <script lang="ts">
   import { profilStore } from '../stores/profil.store';
-  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
-  import { fabriqueFilAriane } from '../ui/filAriane';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
   import EtapeActivites from './etapes/EtapeActivites.svelte';
   import EtapeAppartenanceUE from './etapes/EtapeAppartenanceUE.svelte';
   import EtapeDesignation from './etapes/EtapeDesignation.svelte';

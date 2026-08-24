@@ -2,8 +2,8 @@
   import axios from 'axios';
   import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
-  import { fabriqueFilAriane } from '../ui/filAriane';
-  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import FilAriane from '../ui/FilAriane.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
   import Heros from '../ui/Heros.svelte';
   import ModaleNouvelleSessionGroupe from './ModaleNouvelleSessionGroupe.svelte';

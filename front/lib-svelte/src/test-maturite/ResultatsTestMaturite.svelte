@@ -1,19 +1,19 @@
 <script lang="ts">
+  import { afficheNouvelleDA } from '$plateforme/environnement';
   import { onMount } from 'svelte';
-  import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import { extraisSegmentsDuFragment } from '../navigation/fragmentDeNavigation.svelte';
+  import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import { profilStore } from '../stores/profil.store';
-  import { fabriqueFilAriane } from '../ui/filAriane';
-  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import Alternatives from '../ui/Alternatives.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
+  import Lien from '../ui/Lien.svelte';
   import ComparaisonTest from './ComparaisonTest.svelte';
   import HistoriqueTests from './HistoriqueTests.svelte';
   import PropositionRefaireTest from './PropositionRefaireTest.svelte';
   import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
-  import Lien from '../ui/Lien.svelte';
-  import Alternatives from '../ui/Alternatives.svelte';
 
   const clesOnglet = ['#votre-organisation', '#comparaison', '#historique'] as const;
   type CleOnglet = (typeof clesOnglet)[number];

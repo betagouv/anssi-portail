@@ -1,9 +1,13 @@
+<script module lang="ts">
+  export type PropsFilAriane = Props;
+</script>
+
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
   import { profilStore } from '../stores/profil.store.js';
   import { fabriqueFilAriane, type Branche, type Segment } from './filAriane';
 
-  export type Props = {
+  type Props = {
     feuille: string;
     branche?: Branche;
     brancheConnectee?: Branche;

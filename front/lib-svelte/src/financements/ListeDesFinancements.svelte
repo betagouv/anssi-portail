@@ -1,12 +1,15 @@
 <script lang="ts">
+  import { afficheNouvelleDA } from '$plateforme/environnement';
   import axios from 'axios';
   import { onMount, untrack } from 'svelte';
+  import { clic } from '../directives/actions.svelte';
   import { profilStore } from '../stores/profil.store';
-  import { fabriqueFilAriane } from '../ui/filAriane';
-  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import FilAriane from '../ui/FilAriane.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Heros from '../ui/Heros.svelte';
+  import IllustrationPasDeResultatDeRecherche from '../ui/IllustrationPasDeResultatDeRecherche.svelte';
   import Lien from '../ui/Lien.svelte';
   import CarteFinancement from './CarteFinancement.svelte';
   import FiltresFinancements from './FiltresFinancements.svelte';
@@ -17,9 +20,6 @@
   import { rechercheParRegion } from './stores/rechercheParRegion.store';
   import { rechercheParTypeFinancement } from './stores/rechercheParTypeFinancement.store';
   import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
-  import IllustrationPasDeResultatDeRecherche from '../ui/IllustrationPasDeResultatDeRecherche.svelte';
-  import { clic } from '../directives/actions.svelte';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   type Props = {
     financementsInitiaux?: ResumeFinancement[];
