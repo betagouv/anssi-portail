@@ -157,12 +157,12 @@ export const cableTousLesAbonnes = ({
 
   busEvenements.abonnePlusieurs(ParcoursRejoint, [
     consigneParcoursRejointDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
-    adaptateurEmail.metsÀJourParcours,
+    adaptateurEmail.metsÀJourParcoursRejoint,
   ]);
 
   busEvenements.abonnePlusieurs(ParcoursChangé, [
     consigneParcoursChangéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
-    adaptateurEmail.metsÀJourParcours,
+    adaptateurEmail.metsÀJourParcoursChangé,
   ]);
 
   busEvenements.abonnePlusieurs(ParcoursAllégéTerminé, [

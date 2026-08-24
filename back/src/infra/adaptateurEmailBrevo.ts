@@ -14,6 +14,7 @@ import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { AdaptateurHorloge } from './adaptateurHorloge.js';
 import { ParcoursAllégéTerminé } from '../bus/evenements/parcoursAllegeTermine.js';
 import { ParcoursCompletTerminé } from '../bus/evenements/parcoursCompletTermine.js';
+import { Parcours } from '../metier/parcours.js';
 
 export type DonnéesUtilisateurBrevo = {
   email: string;
@@ -24,6 +25,7 @@ export type DonnéesUtilisateurBrevo = {
     DATE_DERNIERE_PRISE_EN_COMPTE_MESURE?: Date;
     NOMBRE_MESURES_PRISES_EN_COMPTE?: number;
     NOMBRE_MODULES_TERMINES?: number;
+    PARCOURS: Parcours;
   };
 };
 
@@ -33,7 +35,9 @@ type NomÉvénementBrévo =
   | 'mesure_prise_en_compte'
   | 'module_termine'
   | 'parcours_allege_termine'
-  | 'parcours_complet_termine';
+  | 'parcours_change'
+  | 'parcours_complet_termine'
+  | 'parcours_rejoint';
 
 export type ÉvénementBrevo = {
   email: string;
@@ -71,25 +75,6 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
         throw new Error(`Erreur lors de la récupération d\`un contact sur Brévo : ${erreur.message}`, {
           cause: erreur,
         });
-      }
-      throw erreur;
-    }
-  };
-
-  private readonly metsÀJourContact = async (
-    email: string,
-    attributes: Record<string, unknown>,
-    messageErreur: string
-  ) => {
-    try {
-      await this.clientHttp.put(
-        `${this.adaptateurEnvironnement.brevo().url()}/contacts/${email}`,
-        { attributes },
-        this.enteteJSON
-      );
-    } catch (erreur: unknown) {
-      if (isAxiosError(erreur)) {
-        throw new Error(messageErreur + erreur.message, { cause: erreur });
       }
       throw erreur;
     }
@@ -244,12 +229,22 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
     });
   };
 
-  metsÀJourParcours = async (événement: ParcoursChangé | ParcoursRejoint) => {
-    await this.metsÀJourContact(
-      événement.email,
-      { PARCOURS: événement.parcours },
-      'Erreur lors de la mise à jour du parcours sur Brévo : '
-    );
+  metsÀJourParcoursChangé = async (événement: ParcoursChangé) => {
+    await this.envoieÉvénement({
+      email: événement.email,
+      nomÉvénement: 'parcours_change',
+      propriétésÀMettreÀJour: { PARCOURS: événement.parcours },
+      messageErreur: 'Erreur lors de la mise à jour du parcours sur Brévo : ',
+    });
+  };
+
+  metsÀJourParcoursRejoint = async (événement: ParcoursRejoint) => {
+    await this.envoieÉvénement({
+      email: événement.email,
+      nomÉvénement: 'parcours_rejoint',
+      propriétésÀMettreÀJour: { PARCOURS: événement.parcours },
+      messageErreur: 'Erreur lors de la mise à jour du parcours sur Brévo : ',
+    });
   };
 
   metsÀJourParcoursAllégéTerminé = async (événement: ParcoursAllégéTerminé) => {

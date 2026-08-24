@@ -30,8 +30,11 @@ export const adaptateurEmailConsole = (): AdaptateurEmail => ({
   metsÀJourBadgeCyberdépartDébloqué: async (événement: BadgeCyberdépartDébloqué) => {
     console.log(`On signale que ${événement.email} a débloqué son badge cyberdépart`);
   },
-  metsÀJourParcours: async (événement: ParcoursChangé | ParcoursRejoint) => {
-    console.log(`On signale que ${événement.email} a changé/rejoint le parcours ${événement.parcours}`);
+  metsÀJourParcoursChangé: async (événement: ParcoursChangé) => {
+    console.log(`On signale que ${événement.email} a rejoint le parcours ${événement.parcours}`);
+  },
+  metsÀJourParcoursRejoint: async (événement: ParcoursRejoint) => {
+    console.log(`On signale que ${événement.email} a rejoint le parcours ${événement.parcours}`);
   },
   metsÀJourParcoursAllégéTerminé: async (événement: ParcoursAllégéTerminé) => {
     console.log(`On signale que ${événement.email} a terminé le parcours allégé`);

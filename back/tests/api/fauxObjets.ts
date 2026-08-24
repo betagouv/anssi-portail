@@ -294,7 +294,8 @@ export const fauxAdaptateurEmail: AdaptateurEmail = {
   metsÀJourMesurePriseEnCompte: async () => {},
   metsÀJourModuleTerminé: async () => {},
   metsÀJourBadgeCyberdépartDébloqué: async () => {},
-  metsÀJourParcours: async () => {},
+  metsÀJourParcoursChangé: async () => {},
+  metsÀJourParcoursRejoint: async () => {},
   metsÀJourParcoursAllégéTerminé: async () => {},
   metsÀJourParcoursCompletTerminé: async () => {},
 };
