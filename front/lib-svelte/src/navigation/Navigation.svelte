@@ -30,7 +30,7 @@
     itemDeMenu('Diagnostic cyber gratuit', '/cyberdepart', cheminRelatif === '/cyberdepart'),
 
     ...(estConnecte()
-      ? [itemDeMenu('Maturité cyber', '/ma-maturite', cheminRelatif === '/ma-maturite')]
+      ? [itemDeMenu('Test de maturité cyber', '/ma-maturite', cheminRelatif === '/ma-maturite')]
       : [itemDeMenu('Test de maturité cyber', '/test-maturite', cheminRelatif === '/test-maturite')]),
 
     itemDeMenu(

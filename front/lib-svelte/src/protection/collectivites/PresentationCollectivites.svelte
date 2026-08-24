@@ -38,7 +38,7 @@
   {/snippet}
 </HerosRiche>
 
-<NavigationTertiaire {liens} bind:lienActif />
+<NavigationTertiaire {liens} centré bind:lienActif />
 
 {#if estServeur}
   <Proteger origine="landing-collectivites" />

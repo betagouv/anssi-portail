@@ -59,7 +59,7 @@
   }}
 />
 
-<NavigationTertiaire {liens} bind:lienActif />
+<NavigationTertiaire {liens} centré bind:lienActif />
 
 <hr />
 
