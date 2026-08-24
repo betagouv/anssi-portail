@@ -58,7 +58,7 @@
   description="Des contacts cyber de proximité pour vous orienter et répondre à vos questions."
   format="banniere"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
-  theme={afficheNouvelleDA ? 'clair' : 'sombre'}
+  theme="clair"
   titre="Contacts cyber"
 >
   {#snippet filAriane()}
@@ -192,16 +192,12 @@
     {:else}
       <div class="aucun-resultat">
         <NoteInformation />
-        {#if afficheNouvelleDA}
-          <img
-            src="/assets/images/contacts-resultat-vide-nouvelle-da.svg"
-            width="188"
-            height="171"
-            alt="Aucun résultat"
-          />
-        {:else}
-          <img src="/assets/images/contacts-resultat-vide.svg" width="188" height="171" alt="Aucun résultat" />
-        {/if}
+        <img
+          src="/assets/images/contacts-resultat-vide-nouvelle-da.svg"
+          width="188"
+          height="171"
+          alt="Aucun résultat"
+        />
         <h5>Sélectionnez une région ou un secteur d’activité depuis le menu de filtres.</h5>
       </div>
     {/if}

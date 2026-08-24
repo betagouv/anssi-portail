@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { afficheNouvelleDA } from '$plateforme/environnement';
-
   export let index: number;
   export let actif = false;
   export let libelle: string;
@@ -15,12 +13,7 @@
   }
 </script>
 
-<div
-  class="ligne-legende ligne-legende-{index}"
-  class:avec-nouvelle-da={afficheNouvelleDA}
-  class:actif
-  class:avec-valeur={valeur || pourcentage}
->
+<div class="ligne-legende ligne-legende-{index}" class:actif class:avec-valeur={valeur || pourcentage}>
   <span role="listitem" class="libelle" aria-label={`${libelle} ${pourcentageLisible}`}>
     {libelle}
   </span>
@@ -42,6 +35,7 @@
     gap: 10px;
     grid-template-columns: 24px 2fr;
     align-items: center;
+    outline-color: var(--border-default-blue-france);
 
     &.avec-valeur {
       grid-template-columns: 24px 2fr 1fr;
@@ -61,10 +55,6 @@
       border-radius: 2px;
     }
 
-    &.avec-nouvelle-da.actif {
-      outline-color: var(--border-default-blue-france);
-    }
-
     &:before {
       width: 14px;
       height: 14px;
@@ -74,43 +64,23 @@
     }
 
     &.ligne-legende-0 {
-      --couleur-puce: #6369f1;
-
-      &.avec-nouvelle-da {
-        --couleur-puce: #5c68e5;
-      }
+      --couleur-puce: #5c68e5;
     }
 
     &.ligne-legende-1 {
-      --couleur-puce: #fec54b;
-
-      &.avec-nouvelle-da {
-        --couleur-puce: #82b5f2;
-      }
+      --couleur-puce: #82b5f2;
     }
 
     &.ligne-legende-2 {
-      --couleur-puce: #8248a1;
-
-      &.avec-nouvelle-da {
-        --couleur-puce: #28598f;
-      }
+      --couleur-puce: #28598f;
     }
 
     &.ligne-legende-3 {
-      --couleur-puce: #f26c85;
-
-      &.avec-nouvelle-da {
-        --couleur-puce: #30a7ae;
-      }
+      --couleur-puce: #30a7ae;
     }
 
     &.ligne-legende-4 {
-      --couleur-puce: #8ed4a3;
-
-      &.avec-nouvelle-da {
-        --couleur-puce: #81eef5;
-      }
+      --couleur-puce: #81eef5;
     }
   }
 </style>

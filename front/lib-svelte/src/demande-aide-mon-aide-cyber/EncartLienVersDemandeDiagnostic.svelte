@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { afficheNouvelleDA, afficheParcoursSecurisation } from '$plateforme/environnement';
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import { onMount } from 'svelte';
   import { clic } from '../directives/actions.svelte';
   import Lien from '../ui/Lien.svelte';
@@ -37,7 +37,7 @@
         use:clic={fermeDialogue}
       ></dsfr-button>
     </div>
-    <div class="contenu" class:nouvelleDA={afficheNouvelleDA}>
+    <div class="contenu">
       {#if afficheParcoursSecurisation}
         <dsfr-badge type="accent" accent="green-bourgeon" label="+6000 organisations accompagnées 🚀" size="sm"
         ></dsfr-badge>
@@ -62,13 +62,13 @@
           à mettre en place pour améliorer la cybersécurité de votre organisation.
         </p>
       {/if}
-      <div class="conteneur-bouton" class:nouvelleDA={afficheNouvelleDA}>
+      <div class="conteneur-bouton">
         <Lien
           apparence="bouton"
           etire
           type="primaire"
           libelle={libelleCTA}
-          icone={afficheNouvelleDA ? 'arrow-right-circle-line' : undefined}
+          icone="arrow-right-circle-line"
           iconeADroite
           href={hrefCTA}
         ></Lien>
@@ -132,47 +132,45 @@
       }
 
       .contenu {
-        &.nouvelleDA {
-          h3 {
-            margin: 0.5rem 0 1rem;
-          }
+        h3 {
+          margin: 0.5rem 0 1rem;
+        }
 
-          ul {
-            margin-top: 0;
-            padding-left: 0;
-            list-style: none;
+        ul {
+          margin-top: 0;
+          padding-left: 0;
+          list-style: none;
 
-            li {
-              position: relative;
-              padding-left: 1.5rem;
+          li {
+            position: relative;
+            padding-left: 1.5rem;
 
-              &:not(:last-child) {
-                margin-bottom: 1rem;
-              }
+            &:not(:last-child) {
+              margin-bottom: 1rem;
+            }
 
-              &::before {
-                position: absolute;
-                left: 0;
-              }
+            &::before {
+              position: absolute;
+              left: 0;
+            }
 
-              &:nth-child(1)::before {
-                content: '⚡';
-              }
+            &:nth-child(1)::before {
+              content: '⚡';
+            }
 
-              &:nth-child(2)::before {
-                content: '💡';
-              }
+            &:nth-child(2)::before {
+              content: '💡';
+            }
 
-              &:nth-child(3)::before {
-                content: '✅';
-              }
+            &:nth-child(3)::before {
+              content: '✅';
             }
           }
+        }
 
-          .appât {
-            padding: 1rem;
-            margin-bottom: 0.5rem;
-          }
+        .appât {
+          padding: 1rem;
+          margin-bottom: 0.5rem;
         }
 
         margin: 0 1rem 1rem;
@@ -192,19 +190,13 @@
         }
 
         .conteneur-bouton {
-          &.nouvelleDA {
-            display: flex;
-            gap: 1rem;
+          display: flex;
+          gap: 1rem;
 
-            margin-top: 1.5rem;
+          margin-top: 1.5rem;
 
-            :global(*) {
-              flex-grow: 1;
-            }
-          }
-
-          &:not(.nouvelleDA) {
-            align-self: center;
+          :global(*) {
+            flex-grow: 1;
           }
         }
       }

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { calculeIdNiveau } from '../niveaux-maturite/calculeIdNiveau';
@@ -186,15 +185,8 @@
           </div>
         {/if}
       </div>
-      <div class="illustration {afficheNouvelleDA ? 'nouvelle-da' : ''}">
-        <img
-          src="/assets/images/test-maturite/illustration-{idQuestionCourante}{afficheNouvelleDA
-            ? '-nouvelle-da'
-            : ''}.svg"
-          width="432"
-          height="324"
-          alt=""
-        />
+      <div class="illustration">
+        <img src="/assets/images/test-maturite/illustration-{idQuestionCourante}.svg" width="432" height="324" alt="" />
       </div>
     </div>
   </dsfr-container>

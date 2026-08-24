@@ -1,13 +1,10 @@
 <script lang="ts">
-  import { afficheNouvelleDA } from '$plateforme/environnement';
   import { onMount } from 'svelte';
   import { chargeGuidesDansLeStore } from '../catalogue/stores/guides/guides.store';
   import { itemsCatalogueEnFavori } from '../catalogue/stores/itemsCatalogueEnFavori';
   import { profilStore } from '../stores/profil.store';
-  import Alternatives from '../ui/Alternatives.svelte';
   import Bouton from '../ui/Bouton.svelte';
   import { fabriqueFilAriane } from '../ui/filAriane';
-  import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '../ui/Lien.svelte';
@@ -23,32 +20,13 @@
   onMount(chargeGuidesDansLeStore);
 </script>
 
-<Alternatives affichageAlternatif={afficheNouvelleDA}>
-  {#snippet défaut()}
-    <dsfr-container class="chapeau fond-sombre">
-      <div class="contenu-section">
-        <FilAriane feuille="Favoris" fondSombre={true} />
-        <h1 class="alternatif-xs-ns">Services et ressources favoris</h1>
-        <p class="texte-chapo-xl-ns">Retrouvez tous vos contenus cyber à partager.</p>
-        {#if $itemsCatalogueEnFavori.length > 0}
-          <div class="cta">
-            <p class="texte-chapo-xl-ns">Parcourez le catalogue pour ajouter plus de services et ressources.</p>
-            <Lien href="/catalogue/" libelle="Explorer le catalogue" apparence="bouton" taille="lg"></Lien>
-          </div>
-        {/if}
-      </div>
-    </dsfr-container>
-  {/snippet}
-  {#snippet alternatif()}
-    <Heros
-      titre="Services et ressources favoris"
-      description="Retrouvez tous vos contenus cyber à partager."
-      format="banniere"
-      theme="clair"
-      segmentsFilAriane={fabriqueFilAriane({ feuille: 'Favoris' }, !!$profilStore)}
-    />
-  {/snippet}
-</Alternatives>
+<Heros
+  titre="Services et ressources favoris"
+  description="Retrouvez tous vos contenus cyber à partager."
+  format="banniere"
+  theme="clair"
+  segmentsFilAriane={fabriqueFilAriane({ feuille: 'Favoris' }, !!$profilStore)}
+/>
 
 <dsfr-container>
   <div class="favoris">
@@ -73,55 +51,10 @@
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
-  @media (min-width: 992px) {
-    .chapeau.fond-sombre {
-      padding-bottom: 48px;
-    }
-  }
-
-  .chapeau.fond-sombre h1 {
-    grid-area: titre;
-    margin: 16px 0;
-    @include a-partir-de(md) {
-      font-size: 48px;
-      margin: 8px 0;
-    }
-  }
-
   dsfr-container {
     padding: 16px 0;
   }
 
-  .chapeau.fond-sombre {
-    padding: 32px 0 48px;
-    .contenu-section {
-      display: grid;
-      column-gap: 24px;
-      grid-template-areas: 'ariane' 'titre' 'description' 'cta';
-    }
-  }
-
-  @include a-partir-de(lg) {
-    .chapeau.fond-sombre .contenu-section {
-      grid-template-columns: auto 384px;
-      grid-template-areas: 'ariane cta' 'titre cta' 'description cta';
-    }
-  }
-
-  .chapeau.fond-sombre p {
-    grid-area: description;
-  }
-
-  .chapeau.fond-sombre .cta {
-    align-self: center;
-    grid-area: cta;
-    p {
-      font-size: 18px;
-      @include a-partir-de(md) {
-        font-size: 20px;
-      }
-    }
-  }
   .favoris {
     margin-top: 48px;
     margin-bottom: 48px;

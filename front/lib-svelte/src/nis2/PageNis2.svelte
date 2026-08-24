@@ -1,11 +1,7 @@
 <script lang="ts">
-  import { afficheNouvelleDA, estServeur } from '$plateforme/environnement';
-  import { onMount } from 'svelte';
+  import { estServeur } from '$plateforme/environnement';
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
-  import Alternatives from '../ui/Alternatives.svelte';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
-  import FilAriane from '../ui/FilAriane.svelte';
-  import Heros from '../ui/Heros.svelte';
+  import { type PropriétésFilAriane } from '../ui/filAriane';
   import HerosRiche from '../ui/HerosRiche.svelte';
   import Lien from '../ui/Lien.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
@@ -17,15 +13,6 @@
 
   const { itemsCyber, featureFlagNis2CyFun23 = false, exigences = undefined, guides = undefined } = $props();
 
-  let estBureau = $state(false);
-  onMount(() => {
-    const mql = window.matchMedia('(min-width: 992px)');
-    mql.addEventListener('change', (e: MediaQueryListEvent) => {
-      estBureau = e.matches;
-    });
-    estBureau = mql.matches;
-  });
-
   const liens = [
     { label: 'Présentation NIS 2', fragment: '#presentation' },
     { label: 'Exigences et comparaison', fragment: '#exigences' },
@@ -36,64 +23,30 @@
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Directive NIS 2', fondSombre: true };
 </script>
 
-<Alternatives affichageAlternatif={afficheNouvelleDA}>
-  {#snippet défaut()}
-    <Heros
-      format="heros"
-      theme="sombre"
-      cacheTags={true}
-      titre="Directive NIS 2"
-      description="Préparez-vous et renforcez dès à présent le niveau de cybersécurité de votre organisation."
-      cacheActions={false}
-      illustrationSource="/assets/images/nis2.svg"
-      illustrationAlt="NIS2"
-      cacheIllustration={!estBureau}
-      segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
-    >
-      {#snippet filAriane()}
-        <FilAriane {...propriétésFilAriane} />
-      {/snippet}
-      {#snippet actions()}
-        <Lien
-          apparence="bouton"
-          blank
-          etire
-          href="https://club.ssi.gouv.fr/#/nis2/introduction"
-          icone="external-link-line"
-          iconeADroite
-          libelle="Pré-enregistrer mon entité"
-          type="primaire-inverse"
-        />
-      {/snippet}
-    </Heros>
+<HerosRiche
+  description="Préparez-vous et renforcez dès à présent le niveau de cybersécurité de votre organisation."
+  propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
+  variante="bleu-clair"
+>
+  {#snippet titreHtml()}
+    Directive <MotEnExergue motif="cercle">NIS 2</MotEnExergue>
   {/snippet}
-  {#snippet alternatif()}
-    <HerosRiche
-      description="Préparez-vous et renforcez dès à présent le niveau de cybersécurité de votre organisation."
-      propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
-      variante="bleu-clair"
-    >
-      {#snippet titreHtml()}
-        Directive <MotEnExergue motif="cercle">NIS 2</MotEnExergue>
-      {/snippet}
-      {#snippet illustration()}
-        <img src="/assets/images/nis2-noir.svg" alt="NIS2" />
-      {/snippet}
-      {#snippet actions()}
-        <Lien
-          apparence="bouton"
-          blank
-          etire
-          href="https://club.ssi.gouv.fr/#/nis2/introduction"
-          icone="external-link-line"
-          iconeADroite
-          libelle="Pré-enregistrer mon entité"
-          type="primaire"
-        />
-      {/snippet}
-    </HerosRiche>
+  {#snippet illustration()}
+    <img src="/assets/images/nis2-noir.svg" alt="NIS2" />
   {/snippet}
-</Alternatives>
+  {#snippet actions()}
+    <Lien
+      apparence="bouton"
+      blank
+      etire
+      href="https://club.ssi.gouv.fr/#/nis2/introduction"
+      icone="external-link-line"
+      iconeADroite
+      libelle="Pré-enregistrer mon entité"
+      type="primaire"
+    />
+  {/snippet}
+</HerosRiche>
 
 <Notice
   description="Restez informé des dernières actualités de la directive NIS 2 et autres actualités."

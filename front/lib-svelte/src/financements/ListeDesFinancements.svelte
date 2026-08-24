@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { afficheNouvelleDA } from '$plateforme/environnement';
   import axios from 'axios';
   import { onMount, untrack } from 'svelte';
   import { clic } from '../directives/actions.svelte';
@@ -69,7 +68,7 @@
   description="Bénéficiez d'accompagnements financés ou de subventions pour renforcer la maturité cyber de votre organisation."
   format="banniere"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
-  theme={afficheNouvelleDA ? 'clair' : 'sombre'}
+  theme="clair"
 >
   {#snippet filAriane()}
     <FilAriane {...propriétésFilAriane} />

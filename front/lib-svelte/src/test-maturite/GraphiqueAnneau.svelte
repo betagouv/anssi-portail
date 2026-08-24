@@ -1,6 +1,5 @@
 <script lang="ts">
   import { pourcentagesSerie, type Serie, totalSerie } from './Serie';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   export let serie: Serie;
   export let nomDeLaDonnee: string | undefined;
@@ -75,7 +74,6 @@
     {@const valeurSerieAffichee = `${serie[index].valeur} (${Math.round(pourcentages[index])}%)`}
     <path
       class={`secteur-${index} secteur`}
-      class:avec-nouvelle-da={afficheNouvelleDA}
       d="M {secteur.premierPointExterieur.x} {secteur.premierPointExterieur.y}
          A {rayonExterieur} {rayonExterieur} 0 {secteur.arcLarge ? 1 : 0} 1 {secteur.secondPointExterieur.x} {secteur
         .secondPointExterieur.y}
@@ -112,43 +110,23 @@
     }
 
     &.secteur-0 {
-      fill: #6369f1;
-
-      &.avec-nouvelle-da {
-        fill: #5c68e5;
-      }
+      fill: #5c68e5;
     }
 
     &.secteur-1 {
-      fill: #fec54b;
-
-      &.avec-nouvelle-da {
-        fill: #82b5f2;
-      }
+      fill: #82b5f2;
     }
 
     &.secteur-2 {
-      fill: #8248a1;
-
-      &.avec-nouvelle-da {
-        fill: #28598f;
-      }
+      fill: #28598f;
     }
 
     &.secteur-3 {
-      fill: #f26c85;
-
-      &.avec-nouvelle-da {
-        fill: #30a7ae;
-      }
+      fill: #30a7ae;
     }
 
     &.secteur-4 {
-      fill: #8ed4a3;
-
-      &.avec-nouvelle-da {
-        fill: #81eef5;
-      }
+      fill: #81eef5;
     }
   }
 </style>

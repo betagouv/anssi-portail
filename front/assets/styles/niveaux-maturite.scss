@@ -122,13 +122,9 @@ p {
       position: absolute;
       z-index: 0;
       bottom: 13px;
-      border: 1px solid #0d0c21;
       left: 0;
       right: 0;
-    }
-
-    &.nouvelle-da:after {
-      border-color: #000091;
+      border: 1px solid #000091;
     }
 
     img {

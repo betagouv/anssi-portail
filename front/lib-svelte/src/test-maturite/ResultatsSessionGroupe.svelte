@@ -5,7 +5,6 @@
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import { profilStore } from '../stores/profil.store';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
-  import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '../ui/Lien.svelte';

@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { afficheNouvelleDA } from '$plateforme/environnement';
-
   interface Props {
     texteAlternatif: string;
     largeurMax?: string;
@@ -10,7 +8,7 @@
 </script>
 
 <img
-  src="/assets/images/illustration-dragon-aucun-resultat{afficheNouvelleDA ? '-nouvelle-da' : ''}.svg"
+  src="/assets/images/illustration-dragon-aucun-resultat.svg"
   width="175"
   height="317"
   alt={texteAlternatif}

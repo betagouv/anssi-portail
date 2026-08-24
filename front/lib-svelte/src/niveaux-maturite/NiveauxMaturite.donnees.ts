@@ -1,5 +1,4 @@
 import type { IdNiveau, NiveauMaturite } from './NiveauxMaturite.type';
-import { afficheNouvelleDA } from '$plateforme/environnement';
 
 export const niveauxMaturite: NiveauMaturite[] = [
   {
@@ -101,9 +100,9 @@ export const niveauxMaturite: NiveauMaturite[] = [
 ];
 
 export const couleursDeNiveau: Record<IdNiveau, string> = {
-  insuffisant: afficheNouvelleDA ? '#5c68e5' : '#6369f1',
-  emergent: afficheNouvelleDA ? '#82b5f2' : '#fec54b',
-  intermediaire: afficheNouvelleDA ? '#28598f' : '#8248a1',
-  confirme: afficheNouvelleDA ? '#30a7ae' : '#f26c85',
-  optimal: afficheNouvelleDA ? '#81eef5' : '#8ed4a3',
+  insuffisant: '#5c68e5',
+  emergent: '#82b5f2',
+  intermediaire: '#28598f',
+  confirme: '#30a7ae',
+  optimal: '#81eef5',
 };
