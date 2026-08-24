@@ -33,6 +33,7 @@ export type Mesure = {
   exigences: ExigenceNis2[];
   estPriseEnCompte: boolean;
   idModule: number;
+  nomModule: string;
 };
 
 export type Module = {

@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import { profilStore } from '../stores/profil.store';
   import BadgeBeta from '../ui/BadgeBeta.svelte';
   import { fabriqueFilAriane } from '../ui/filAriane';
   import { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
@@ -31,10 +32,23 @@
 
   const progressionActuelle = $derived(module.mesures.filter((m) => m.estPriseEnCompte).length);
 
-  const propriétésFilAriane: PropriétésFilAriane = $derived({
-    branche: { nom: 'Protéger mon organisation', lien: '/parcours-complet' },
-    feuille: module.nom,
-  });
+  const propriétésFilAriane: PropriétésFilAriane = $derived(
+    $profilStore?.parcoursSecurisation.parcoursActuel === 'allégé'
+      ? [
+          {
+            nom: 'Protéger mon organisation',
+          },
+        ]
+      : [
+          {
+            nom: 'Protéger mon organisation',
+            lien: '/parcours-complet',
+          },
+          {
+            nom: module.nom,
+          },
+        ]
+  );
 </script>
 
 <Toaster />
