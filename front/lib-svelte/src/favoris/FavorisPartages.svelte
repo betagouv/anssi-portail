@@ -8,7 +8,7 @@
   import { listeItemsFavoris } from '../catalogue/stores/itemsCatalogueEnFavori';
   import { profilStore } from '../stores/profil.store';
   import { fabriqueFilAriane } from '../ui/filAriane';
-  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import ContenuFavoris from './ContenuFavoris.svelte';
@@ -45,11 +45,7 @@
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
   theme="clair"
   titre="Services et ressources partagés"
->
-  {#snippet filAriane()}
-    <FilAriane {...propriétésFilAriane} />
-  {/snippet}
-</Heros>
+/>
 
 <dsfr-container>
   <div class="contenu-section">

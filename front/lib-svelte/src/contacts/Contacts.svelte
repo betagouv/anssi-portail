@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { afficheNouvelleDA } from '$plateforme/environnement';
   import { onMount } from 'svelte';
   import { creeLeFragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '../stores/profil.store';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
-  import FilAriane from '../ui/FilAriane.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Heros from '../ui/Heros.svelte';
@@ -60,11 +58,7 @@
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
   theme="clair"
   titre="Contacts cyber"
->
-  {#snippet filAriane()}
-    <FilAriane {...propriétésFilAriane} />
-  {/snippet}
-</Heros>
+/>
 
 {#if !$profilStore}
   <FiltresMobile filtreActif={false}>

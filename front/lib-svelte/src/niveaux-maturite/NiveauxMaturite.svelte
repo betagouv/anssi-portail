@@ -27,11 +27,7 @@
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
   theme="clair"
   titre="5 niveaux de maturité cyber"
->
-  {#snippet filAriane()}
-    <FilAriane {...propriétésFilAriane} />
-  {/snippet}
-</Heros>
+/>
 
 <!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <dsfr-container class="niveaux">

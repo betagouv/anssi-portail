@@ -59,11 +59,7 @@
   format="banniere"
   theme="clair"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
->
-  {#snippet filAriane()}
-    <FilAriane {...propriétésFilAriane} />
-  {/snippet}
-</Heros>
+/>
 
 <dsfr-container>
   <div class="contenu-section">

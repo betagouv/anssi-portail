@@ -7,9 +7,8 @@
   import Accordeon from '../../ui/Accordeon.svelte';
   import Bouton from '../../ui/Bouton.svelte';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
-  import FilAriane from '../../ui/FilAriane.svelte';
   import Heros from '../../ui/Heros.svelte';
-  import { storeAvisUtilisateur, type AvisUtilisateur } from './../avisUtilisateur.store';
+  import { type AvisUtilisateur, storeAvisUtilisateur } from './../avisUtilisateur.store';
   import InterlocuteursParcoursSecurisation from './../InterlocuteursParcoursSecurisation.svelte';
   import type { Mesure } from './../mesure';
   import PriseEnCompteMesure from './../PriseEnCompteMesure.svelte';
@@ -121,17 +120,7 @@
     {titre}
     theme="clair"
     segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
-  >
-    {#snippet filAriane()}
-      <FilAriane
-        feuille={mesure?.phraseAccroche ?? ''}
-        branche={{
-          nom: 'Protéger mon organisation',
-          lien: '/',
-        }}
-      ></FilAriane>
-    {/snippet}
-  </Heros>
+  />
 
   <dsfr-container>
     <div class="article">

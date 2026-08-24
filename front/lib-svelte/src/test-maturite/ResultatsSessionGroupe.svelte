@@ -65,11 +65,7 @@
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
   theme="clair"
   titre="Résultat de maturité cyber"
->
-  {#snippet filAriane()}
-    <FilAriane {...propriétésFilAriane} />
-  {/snippet}
-</Heros>
+/>
 
 {#if resultatsSessionGroupe && resultatsSessionGroupe.nombreParticipants > 0}
   <dsfr-container>

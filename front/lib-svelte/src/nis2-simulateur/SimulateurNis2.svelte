@@ -13,7 +13,6 @@
   import EtapeTailleEntitePrivee from './etapes/EtapeTailleEntitePrivee.svelte';
   import EtapeTypeStructure from './etapes/EtapeTypeStructure.svelte';
   import EtapeResultat from './resultat/EtapeResultat.svelte';
-  import { estUnSecteurAvecDesSousSecteurs } from './stores/SecteurActivite.predicats';
   import {
     valideActivites,
     valideEtapeAppartenanceUE,
@@ -29,6 +28,7 @@
   import { selectSecteursPourSaisieActivites } from './stores/questionnaire.selecteurs.ts';
   import { questionnaireStore } from './stores/questionnaire.store';
   import { questionnaireAvecUndo } from './stores/questionnaireAvecUndo.store';
+  import { estUnSecteurAvecDesSousSecteurs } from './stores/SecteurActivite.predicats';
 
   const propriétésFilAriane: PropriétésFilAriane = {
     feuille: 'Simulateur',
@@ -43,11 +43,7 @@
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
   theme="clair"
   titre="Mon entité est-elle concernée&nbsp;?"
->
-  {#snippet filAriane()}
-    <FilAriane {...propriétésFilAriane} />
-  {/snippet}
-</Heros>
+/>
 
 <dsfr-container>
   {#if $questionnaireAvecUndo.etapeCourante === 'prealable'}
