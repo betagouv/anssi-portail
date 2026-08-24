@@ -1,13 +1,12 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
   import type { ItemCyber } from '../../catalogue/Catalogue.types';
+  import type { Guide } from '../../catalogue/Guide.types';
+  import { guidePourCarteItem } from '../../catalogue/guides/guide';
   import { chargeGuidesDansLeStore, guidesStore } from '../../catalogue/stores/guides/guides.store';
   import ControleSegmenteAvecSections from '../../navigation/ControleSegmenteAvecSections.svelte';
   import ActionParcoursAvecItems from '../../parcours/ActionParcoursAvecItems.svelte';
   import { versItemsCyberOuGuide } from '../../parcours/itemDuParcours';
-  import type { Guide } from '../../catalogue/Guide.types';
-  import { guidePourCarteItem } from '../../catalogue/guides/guide';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   type Props = {
     itemsCyber: ItemCyber[];
@@ -53,7 +52,7 @@
         '/ressources/panorama',
       ]),
       ancre: 'solutions&sensibiliser',
-      classeCss: afficheNouvelleDA ? 'fond-cafe-creme' : 'fond-jaune-clair',
+      classeCss: 'fond-cafe-creme',
     },
     {
       id: 'se-former',
@@ -73,7 +72,7 @@
         '/services/ads',
       ]),
       ancre: 'solutions&securiser',
-      classeCss: afficheNouvelleDA ? 'fond-macaron-rose' : 'fond-jaune-clair',
+      classeCss: 'fond-macaron-rose',
     },
     {
       id: 'se-preparer',
@@ -92,7 +91,7 @@
         '/guides/anticiper-et-gerer-sa-communication-de-crise-cyber',
       ]),
       ancre: 'solutions&reagir',
-      classeCss: afficheNouvelleDA ? 'fond-bleu-france-950' : 'fond-jaune-clair',
+      classeCss: 'fond-bleu-france-950',
     },
   ]);
 </script>

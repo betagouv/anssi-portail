@@ -1,14 +1,9 @@
 <script lang="ts">
-  import { afficheNouvelleDA } from '$plateforme/environnement';
   import { onMount } from 'svelte';
   import { extraisSegmentsDuFragment } from '../navigation/fragmentDeNavigation.svelte';
   import NavigationTertiaire from '../navigation/NavigationTertiaire.svelte';
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import { profilStore } from '../stores/profil.store';
-  import Alternatives from '../ui/Alternatives.svelte';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
-  import FilAriane from '../ui/FilAriane.svelte';
-  import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
   import ComparaisonTest from './ComparaisonTest.svelte';
   import HistoriqueTests from './HistoriqueTests.svelte';
@@ -25,7 +20,6 @@
 
   let lienActif: CleOnglet | undefined;
   let idRésultatTest: string | undefined;
-  let propriétésFilAriane: PropriétésFilAriane;
 
   const changeOngletActif = () => {
     const [onglet, id] = extraisSegmentsDuFragment(window.location.hash);
@@ -46,32 +40,11 @@
     { label: 'Historique', fragment: '#historique' },
     { label: 'Comparaison avec d’autres entités', fragment: '#comparaison' },
   ];
-  $: propriétésFilAriane = {
-    feuille: $profilStore ? 'Maturité cyber' : 'Test de maturité cyber',
-    fondSombre: true,
-  };
 </script>
 
-<Alternatives affichageAlternatif={afficheNouvelleDA}>
-  {#snippet alternatif()}
-    <dsfr-container class="lien-retour">
-      <Lien href="/" libelle="Retour à l'accueil" icone="arrow-go-back-line"></Lien>
-    </dsfr-container>
-  {/snippet}
-  {#snippet défaut()}
-    <Heros
-      description="Testez la maturité cyber de votre organisation, suivez vos progrès et comparez-vous aux autres organisations."
-      format="banniere"
-      segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
-      theme="sombre"
-      titre="Maturité cyber"
-    >
-      {#snippet filAriane()}
-        <FilAriane {...propriétésFilAriane} />
-      {/snippet}
-    </Heros>
-  {/snippet}
-</Alternatives>
+<dsfr-container class="lien-retour">
+  <Lien href="/" libelle="Retour à l'accueil" icone="arrow-go-back-line"></Lien>
+</dsfr-container>
 
 {#if $profilStore && lienActif}
   <NavigationTertiaire {liens} bind:lienActif />

@@ -6,7 +6,6 @@
   import type { SerieRadar } from './Serie';
   import { rubriques } from './TestMaturite.donnees';
   import type { IdRubrique } from './TestMaturite.type';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   export let series: SerieRadar[];
   export let actif: IdNiveau | undefined = undefined;
@@ -26,7 +25,6 @@
       class="ligne-legende ligne-legende-{niveau.id}"
       style="--couleur-puce: {couleursDeNiveau[niveau.id]}"
       class:actif={actif === niveau.id}
-      class:avec-nouvelle-da={afficheNouvelleDA}
     >
       <span class="libelle">{niveau.label}</span>
     </div>
@@ -69,13 +67,9 @@
     padding: 0 8px;
 
     &.actif {
-      outline: 2px solid #fed980;
+      outline: 2px solid var(--border-default-blue-france);
       outline-offset: 6px;
       border-radius: 2px;
-    }
-
-    &.avec-nouvelle-da.actif {
-      outline-color: var(--border-default-blue-france);
     }
   }
 

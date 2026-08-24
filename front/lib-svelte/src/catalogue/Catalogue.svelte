@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { afficheNouvelleDA, estServeur } from '$plateforme/environnement';
+  import { estServeur } from '$plateforme/environnement';
   import { onMount, untrack } from 'svelte';
   import { clic } from '../directives/actions.svelte';
   import ControleSegmente from '../navigation/ControleSegmente.svelte';
@@ -138,7 +138,7 @@
   description="Trouvez les services et les ressources adaptés à vos besoins."
   format="banniere"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
-  theme={afficheNouvelleDA ? 'clair' : 'sombre'}
+  theme="clair"
   titre="Les services et ressources cyber"
 >
   {#snippet filAriane()}

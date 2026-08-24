@@ -1,19 +1,15 @@
 <script lang="ts">
-  import { afficheNouvelleDA } from '$plateforme/environnement';
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import Alternatives from '../ui/Alternatives.svelte';
   import HerosRiche from '../ui/HerosRiche.svelte';
-  import Lien from '../ui/Lien.svelte';
+  import MotEnExergue from '../ui/MotEnExergue.svelte';
   import { collecteLesErreurs } from '../utils/erreurApi';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import DialogueSortieDiagnostic from './DialogueSortieDiagnostic.svelte';
   import type { CorpsAPIDemandeAide, DonneesFormulaireDemandeAide } from './DonneesFormulaireDemandeAide';
   import FoireAuxQuestions from './FoireAuxQuestions.svelte';
   import FormulaireDemandeAide from './FormulaireDemandeAide.svelte';
-  import IllustrationCyberDepart from './IllustrationCyberDepart.svelte';
   import IllustrationDemandeAide from './IllustrationDemandeAide.svelte';
-  import MotEnExergue from '../ui/MotEnExergue.svelte';
 
   let formulaireDemandeAide: FormulaireDemandeAide;
   let enSucces: boolean = false;
@@ -83,54 +79,24 @@
 
 <DialogueSortieDiagnostic bind:this={dialogueSortie} />
 
-<Alternatives affichageAlternatif={afficheNouvelleDA}>
-  {#snippet défaut()}
-    <dsfr-container class="encart-presentation">
-      <div class="illustration">
-        <IllustrationCyberDepart />
-      </div>
-      <div class="contenu-section">
-        <Lien href="/" libelle="Retour" icone="arrow-go-back-line" />
-        <div class="colonne-explicative">
-          <h2>Vous souhaitez vous protéger contre les cyberattaques mais ne savez pas comment vous y prendre ?</h2>
-          <p>
-            <b>Prenez votre cyberdépart !</b> Bénéficiez d’un
-            <b>premier diagnostic gratuit accompagné d’un Aidant cyber</b>
-            et recevez <b>6 recommandations prioritaires</b> à mettre en place pour améliorer la cybersécurité de votre organisation.
-          </p>
-          <div class="zone-tags">
-            <dsfr-badge hasIcon icon="check-line" type="accent" accent="blue-ecume" label="Dans vos locaux ou en visio"
-            ></dsfr-badge>
-            <dsfr-badge hasIcon icon="check-line" type="accent" accent="blue-ecume" label="Rapide (1h30)"></dsfr-badge>
-          </div>
-          <p class="cible-du-diagnostic">
-            Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et aux entreprises mono-salariées.
-          </p>
-        </div>
-      </div>
-    </dsfr-container>
+<HerosRiche
+  badges={[
+    { label: 'Rapide (1h)', accent: 'purple-glycine' },
+    { label: 'Dans vos locaux ou en visio', accent: 'purple-glycine' },
+  ]}
+  description="Prenez votre cyberdépart&nbsp;! Profitez d’un premier diagnostic cyber gratuit accompagné par un Aidant cyber et recevez 6 recommandations prioritaires à mettre en place pour améliorer la cybersécurité de votre organisation."
+  propriétésFilAriane={{ feuille: 'Diagnostic cyberdépart' }}
+  variante="cafe-creme"
+>
+  {#snippet titreHtml()}
+    Protégez votre organisation contre les <MotEnExergue motif="gribouillis">cyberattaques</MotEnExergue>
   {/snippet}
-  {#snippet alternatif()}
-    <HerosRiche
-      badges={[
-        { label: 'Rapide (1h)', accent: 'purple-glycine' },
-        { label: 'Dans vos locaux ou en visio', accent: 'purple-glycine' },
-      ]}
-      description="Prenez votre cyberdépart&nbsp;! Profitez d’un premier diagnostic cyber gratuit accompagné par un Aidant cyber et recevez 6 recommandations prioritaires à mettre en place pour améliorer la cybersécurité de votre organisation."
-      propriétésFilAriane={{ feuille: 'Diagnostic cyberdépart' }}
-      variante="cafe-creme"
-    >
-      {#snippet titreHtml()}
-        Protégez votre organisation contre les <MotEnExergue motif="gribouillis">cyberattaques</MotEnExergue>
-      {/snippet}
-      {#snippet illustration()}
-        <IllustrationDemandeAide />
-      {/snippet}
-    </HerosRiche>
+  {#snippet illustration()}
+    <IllustrationDemandeAide />
   {/snippet}
-</Alternatives>
+</HerosRiche>
 
-<dsfr-container class="zone-formulaire" class:cafe-creme={afficheNouvelleDA}>
+<dsfr-container class="zone-formulaire cafe-creme">
   <div class="contenu-section">
     {#if !enSucces}
       <FormulaireDemandeAide
@@ -144,11 +110,9 @@
     {:else}
       <ConfirmationCreationDemandeAide />
     {/if}
-    {#if afficheNouvelleDA}
-      <p class="texte-mention-xs">
-        Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et aux entreprises mono-salariées.
-      </p>
-    {/if}
+    <p class="texte-mention-xs">
+      Ce diagnostic proposé par l'État n'est pas adapté aux particuliers et aux entreprises mono-salariées.
+    </p>
   </div>
 </dsfr-container>
 <dsfr-container class="zone-faq">
@@ -164,56 +128,12 @@
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
-  h2 {
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 36px;
-  }
-
   h6 {
     margin: 0;
     margin-bottom: 24px;
     font-size: 1.25rem;
     font-weight: 700;
     line-height: 1.75rem;
-  }
-
-  .encart-presentation {
-    position: relative;
-    padding: var(--gouttiere) 0 24px 0;
-    background: var(--controle-segmente-courant-fond);
-
-    .colonne-explicative {
-      margin-top: 24px;
-
-      @include a-partir-de(md) {
-        width: 50%;
-        align-self: flex-start;
-      }
-
-      .cible-du-diagnostic {
-        font-size: 0.875rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 1.5rem;
-        margin: 0;
-      }
-    }
-
-    .illustration {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-
-      @include a-partir-de(md) {
-        display: flex;
-        left: calc(50vw + 30px);
-        top: 24px;
-        width: auto;
-        height: calc(100% - 48px);
-      }
-    }
   }
 
   .zone-formulaire {
@@ -233,13 +153,6 @@
         margin: 1rem 0 0;
       }
     }
-  }
-
-  .zone-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 24px 0;
   }
 
   .zone-faq {

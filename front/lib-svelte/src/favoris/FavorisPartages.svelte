@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { afficheNouvelleDA } from '$plateforme/environnement';
   import axios from 'axios';
   import { onMount } from 'svelte';
   import type { ItemCyber } from '../catalogue/Catalogue.types';
@@ -8,8 +7,8 @@
   import { chargeGuidesDansLeStore, guidesStore } from '../catalogue/stores/guides/guides.store';
   import { listeItemsFavoris } from '../catalogue/stores/itemsCatalogueEnFavori';
   import { profilStore } from '../stores/profil.store';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
-  import FilAriane from '../ui/FilAriane.svelte';
+  import { fabriqueFilAriane } from '../ui/filAriane';
+  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import ContenuFavoris from './ContenuFavoris.svelte';
@@ -44,7 +43,7 @@
   description={`Cette liste de services et ressources est partagée par ${prenom}`}
   format="banniere"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
-  theme={afficheNouvelleDA ? 'clair' : 'sombre'}
+  theme="clair"
   titre="Services et ressources partagés"
 >
   {#snippet filAriane()}

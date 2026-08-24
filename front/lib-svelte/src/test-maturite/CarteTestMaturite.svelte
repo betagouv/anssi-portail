@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import type { RéponsesResultatTest } from './ResultatsTest.type';
+
   export type RésultatTest = {
     dateRealisation: string;
     niveau: IdNiveau;
@@ -11,7 +12,6 @@
 
 <script lang="ts">
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   export let résultatTest: RésultatTest;
 
@@ -25,12 +25,8 @@
 </script>
 
 <a href="#historique/{résultatTest.id}" class="carte">
-  <div class="illustration-niveau" class:avec-nouvelle-da={afficheNouvelleDA}>
-    <img
-      class="plante"
-      src="/assets/images/test-maturite/niveaux/{résultatTest.niveau}{afficheNouvelleDA ? '-nouvelle-da' : ''}.svg"
-      alt="Niveau de maturité"
-    />
+  <div class="illustration-niveau">
+    <img class="plante" src="/assets/images/test-maturite/niveaux/{résultatTest.niveau}.svg" alt="Niveau de maturité" />
   </div>
   <span class="date">{dateFormatee}</span>
   <h3>{libelleNiveau}</h3>
@@ -80,7 +76,7 @@
     grid-area: illustration;
     display: none;
     @include a-partir-de(md) {
-      background-color: #fff7db;
+      background-color: var(--brown-cafe-creme-975-75);
       width: 120px;
       height: 176px;
       display: flex;
@@ -99,19 +95,9 @@
         position: absolute;
         z-index: 0;
         bottom: 26px;
-        border: 1px solid #0d0c21;
+        border: 1px solid #000091;
         left: 0;
         right: 0;
-      }
-    }
-
-    &.avec-nouvelle-da {
-      @include a-partir-de(md) {
-        background-color: var(--brown-cafe-creme-975-75);
-      }
-
-      &:before {
-        border-color: #000091;
       }
     }
   }

@@ -11,10 +11,9 @@
   import SelectTailleOrganisation from '../test-maturite/SelectTailleOrganisation.svelte';
   import type { Serie } from '../test-maturite/Serie';
   import Heros from '../ui/Heros.svelte';
+  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import type { Statistiques } from './statistiques.type';
   import Tuile from './Tuile.svelte';
-  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   let mesures: Statistiques | undefined = undefined;
   let serieNonFiltree: Serie = [];
@@ -84,7 +83,7 @@
 <Heros
   description="L'impact de MesServicesCyber en quelques chiffres"
   format="banniere"
-  theme={afficheNouvelleDA ? 'clair' : 'sombre'}
+  theme="clair"
   titre="Nos statistiques"
 />
 

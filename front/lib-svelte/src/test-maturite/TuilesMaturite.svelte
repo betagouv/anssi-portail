@@ -2,7 +2,6 @@
   import { afterUpdate } from 'svelte';
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { NiveauMaturite } from '../niveaux-maturite/NiveauxMaturite.type';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   export let niveauCourant: NiveauMaturite;
   export let animeTuiles = true;
@@ -30,19 +29,12 @@
       class:actif={index < indexNiveauCourant}
       class:courant={index === indexNiveauCourant}
       class:inactif={index > indexNiveauCourant}
-      class:avec-nouvelle-da={afficheNouvelleDA}
     >
-      <img
-        class="plante"
-        src="/assets/images/test-maturite/niveaux/{niveau.id}{afficheNouvelleDA ? '-nouvelle-da' : ''}.svg"
-        alt="Niveau de maturité"
-      />
+      <img class="plante" src="/assets/images/test-maturite/niveaux/{niveau.id}.svg" alt="Niveau de maturité" />
       <img
         class="coche"
         alt=""
-        src="/assets/images/coche-ronde{index > indexNiveauCourant
-          ? '-inactive'
-          : `-active${afficheNouvelleDA ? '-nouvelle-da' : ''}`}.svg"
+        src="/assets/images/coche-ronde{index > indexNiveauCourant ? '-inactive' : `-active`}.svg"
       />
       <span>{niveau.label}</span>
     </div>
@@ -100,6 +92,9 @@
         img {
           filter: grayscale(100%);
         }
+        &:before {
+          border-color: #3a3a3a;
+        }
       }
 
       &.actif {
@@ -109,7 +104,7 @@
       &.courant {
         border-color: transparent;
         border-radius: 0;
-        background: #fff7db;
+        background: var(--brown-cafe-creme-975-75);
 
         &:after {
           content: '';
@@ -120,15 +115,7 @@
           left: -4px;
           right: -4px;
           border-radius: 8px;
-          border: 3px solid var(--jaune-msc);
-        }
-
-        &.avec-nouvelle-da {
-          background: var(--brown-cafe-creme-975-75);
-
-          &:after {
-            border-color: var(--border-default-blue-france);
-          }
+          border: 3px solid var(--border-default-blue-france);
         }
       }
 
@@ -137,21 +124,9 @@
         position: absolute;
         z-index: 0;
         bottom: 94px;
-        border: 2px solid #0d0c21;
+        border: 2px solid #000091;
         left: 0;
         right: 0;
-      }
-
-      &.avec-nouvelle-da {
-        &:before {
-          border-color: #000091;
-        }
-
-        &.inactif {
-          &:before {
-            border-color: #3a3a3a;
-          }
-        }
       }
     }
 

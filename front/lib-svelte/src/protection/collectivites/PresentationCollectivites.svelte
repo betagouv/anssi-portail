@@ -1,10 +1,7 @@
 <script lang="ts">
-  import { afficheNouvelleDA, estServeur } from '$plateforme/environnement';
+  import { estServeur } from '$plateforme/environnement';
   import NavigationTertiaire from '../../navigation/NavigationTertiaire.svelte';
-  import Alternatives from '../../ui/Alternatives.svelte';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
-  import FilAriane from '../../ui/FilAriane.svelte';
-  import Heros from '../../ui/Heros.svelte';
+  import { type PropriétésFilAriane } from '../../ui/filAriane';
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import MotEnExergue from '../../ui/MotEnExergue.svelte';
   import IllustrationHerosCollectivites from '../animation/IllustrationHerosCollectivites.svelte';
@@ -28,40 +25,18 @@
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Protéger ma collectivité', fondSombre: true };
 </script>
 
-<Alternatives affichageAlternatif={afficheNouvelleDA}>
-  {#snippet défaut()}
-    <Heros
-      format="heros"
-      theme="sombre"
-      cacheTags
-      titre="Protéger ma collectivité contre les cyberattaques"
-      description="Toutes les collectivités sont exposées au risque de cyberattaques. En 2025, elles ont notamment représenté 11&nbsp;% des victimes de rançongiciels ou ransowmare."
-      cacheActions
-      illustrationSource="/assets/images/personne-qui-cogite.svg"
-      illustrationAlt=""
-      cacheIllustration={false}
-      segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
-    >
-      {#snippet filAriane()}
-        <FilAriane {...propriétésFilAriane} />
-      {/snippet}
-    </Heros>
+<HerosRiche
+  description="Toutes les collectivités sont exposées au risque de cyberattaques. En 2025, elles ont notamment représenté 11&nbsp;% des victimes de rançongiciels ou ransowmare."
+  propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
+  variante="vert-clair"
+>
+  {#snippet titreHtml()}
+    Protéger ma <MotEnExergue motif="vague">collectivité</MotEnExergue> contre les cyberattaques
   {/snippet}
-  {#snippet alternatif()}
-    <HerosRiche
-      description="Toutes les collectivités sont exposées au risque de cyberattaques. En 2025, elles ont notamment représenté 11&nbsp;% des victimes de rançongiciels ou ransowmare."
-      propriétésFilAriane={{ ...propriétésFilAriane, fondSombre: false }}
-      variante="vert-clair"
-    >
-      {#snippet titreHtml()}
-        Protéger ma <MotEnExergue motif="vague">collectivité</MotEnExergue> contre les cyberattaques
-      {/snippet}
-      {#snippet illustration()}
-        <IllustrationHerosCollectivites />
-      {/snippet}
-    </HerosRiche>
+  {#snippet illustration()}
+    <IllustrationHerosCollectivites />
   {/snippet}
-</Alternatives>
+</HerosRiche>
 
 <NavigationTertiaire {liens} bind:lienActif />
 
