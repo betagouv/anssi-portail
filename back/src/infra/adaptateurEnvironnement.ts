@@ -283,7 +283,7 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
       estActif: () => process.env.FEATURE_FLAG_PARCOURS_SECURISATION === 'true',
     }),
     nouvelleDA: () => ({
-      estActive: () => process.env.FEATURE_FLAG_NOUVELLE_DA === 'true',
+      estActive: () => true,
     }),
   }),
   rechercheEntreprise: () => ({
