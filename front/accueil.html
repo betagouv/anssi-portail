@@ -4,39 +4,7 @@ titreHtml: 'Accueil | MesServicesCyber'
 permalink: /
 ---
 
-{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
 {% include composant-svelte.html id="heros-accueil" %}
-{% else %}
-<dsfr-container class="chapeau fond-sombre">
-  <div class="contenu-section">
-    <hgroup>
-      <h1 class="alternatif-xs">
-        Mes&ZeroWidthSpace;Services&ZeroWidthSpace;Cyber
-      </h1>
-      <p class="texte-chapo-xl">Agissez pour votre cybersécurité&nbsp;!</p>
-    </hgroup>
-    <div class="actions">
-      <msc-lien
-        apparence="bouton"
-        href="/cyberdepart/"
-        libelle="Demander un diagnostic gratuit"
-        type="primaire"
-      ></msc-lien>
-      <msc-lien
-        apparence="bouton"
-        href="/catalogue#guides"
-        libelle="Accéder aux guides de l’ANSSI"
-        type="secondaire-inverse"
-      ></msc-lien>
-    </div>
-    <img src="/assets/images/ecrans-virtuels-avec-femme-au-centre.svg" width="282" height="211" alt="" />
-    <p class="texte-detail-sm">
-      Découvrez les guides, services et outils gratuits proposés par l'Agence
-      nationale de la sécurité des systèmes d'information et ses partenaires.
-    </p>
-  </div>
-</dsfr-container>
-{% endif %}
 
 <script type="application/json" id="accueil-donnees-demande-diagnostic">
   {
@@ -44,7 +12,7 @@ permalink: /
   }
 </script>
 
-{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' and site.env.FEATURE_FLAG_PARCOURS_SECURISATION == 'true' %}
+{% if site.env.FEATURE_FLAG_PARCOURS_SECURISATION == 'true' %}
 {% include composant-svelte.html id="proteger-organisation" %}
 {% else %}
 <dsfr-container class="organisations-concernees">
@@ -60,9 +28,8 @@ permalink: /
           ransomwares ou rançongiciels.
         </p>
       </hgroup>
-      {% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
       <img
-        src="/assets/images/illustration-organisations-concernees-nouvelle-da.svg"
+        src="/assets/images/illustration-organisations-concernees.svg"
         alt="Organisation concernées"
         width="402"
         height="293"
@@ -77,101 +44,12 @@ permalink: /
         neutre
         class="lien-panorama"
       ></msc-lien>
-      {% else %}
-      <img
-        src="/assets/images/illustration-organisations-concernees.svg"
-        alt="Organisation concernées"
-      />
-      <msc-lien
-        blank
-        href="https://cyber.gouv.fr/nous-connaitre/publications/panoramas-de-la-cybermenace/panorama-de-la-cybermenace-2025/"
-        libelle="Panorama de la menace 2025, ANSSI"
-        taille="sm"
-        type="primaire"
-      ></msc-lien>
-      {% endif %}
     </div>
     {% include composant-svelte.html id="demande-diagnostic" %}
-
-    {% if site.env.FEATURE_FLAG_NOUVELLE_DA != 'true' %}
-    <div class="acces-catalogue">
-      <h2>
-        Accédez à un catalogue complet de ressources cyber proposées par l'ANSSI
-        et ses partenaires
-      </h2>
-      <div class="selections">
-        <p class="texte-detail-sm">
-          Les sélections de l’ANSSI pour vous accompagner
-        </p>
-        <lab-anssi-carrousel-tuiles>
-          <dsfr-card
-            title="Se lancer en cyber"
-            description="Des services et ressources pour vous aider à mettre en œuvre des premières actions concrètes pour commencer à renforcer sa cybersécurité."
-            enlarge="true"
-            has-description="true"
-            href="/parcours-debuter"
-            src="/assets/images/marelle-avec-bulle-fond-gris.svg"
-          >
-            <img slot="seo" src="/assets/images/marelle-avec-bulle-fond-gris.svg" alt="">
-            <h3 slot="seo">
-              <a href="/parcours-debuter">
-                Se lancer en cyber
-              </a>
-            </h3>
-            <p slot="seo">Des services et ressources pour vous aider à mettre en œuvre des premières actions concrètes pour commencer à renforcer sa cybersécurité.</p>
-          </dsfr-card>
-          <dsfr-card
-            title="Approfondir vos efforts"
-            description="Des services et ressources pour aider votre organisation à approfondir la démarche de renforcement de la cybersécurité."
-            enlarge="true"
-            has-description="true"
-            href="/parcours-approfondir"
-            src="/assets/images/jumelles-avec-bulle-fond-gris.svg"
-          >
-            <img slot="seo" src="/assets/images/jumelles-avec-bulle-fond-gris.svg" alt="">
-            <h3 slot="seo">
-              <a href="/parcours-approfondir">
-                Approfondir vos efforts
-              </a>
-            </h3>
-            <p slot="seo">Des services et ressources pour aider votre organisation à approfondir la démarche de renforcement de la cybersécurité.</p>
-          </dsfr-card>
-          <dsfr-card
-            title="Vous accompagner avec NIS2"
-            description="Des services et ressources pouvant accompagner les entités régulées par la directive."
-            enlarge="true"
-            has-description="true"
-            href="/nis2"
-            src="/assets/images/directive-nis2-avec-bulle-fond-gris.svg"
-          >
-            <img slot="seo" src="/assets/images/directive-nis2-avec-bulle-fond-gris.svg" alt="">
-            <h3 slot="seo">
-              <a href="/nis2">
-                Vous accompagner avec NIS2
-              </a>
-            </h3>
-            <p slot="seo">Des services et ressources pouvant accompagner les entités régulées par la directive.</p>
-          </dsfr-card>
-        </lab-anssi-carrousel-tuiles>
-      </div>
-      <p class="texte-chapo-xl">
-        Explorez l’ensemble du catalogue et trouvez facilement
-        <strong>les services et guides de l’ANSSI adaptés</strong> aux besoins
-        de votre organisation.
-      </p>
-      <msc-lien
-        apparence="bouton"
-        href="/catalogue#guides"
-        libelle="Accéder aux guides de l’ANSSI"
-        type="secondaire"
-      ></msc-lien>
-    </div>
-    {% endif %}
   </div>
 </dsfr-container>
 {% endif %}
 
-{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
 <dsfr-container class="nis2 section-deux-colonnes fond-cafe-creme">
   <div class="conteneur">
     <div class="contenu-principal">
@@ -198,9 +76,7 @@ permalink: /
     </div>
   </div>
 </dsfr-container>
-{% endif %}
 
-{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
 <dsfr-container class="guides-et-ressources section-deux-colonnes fond-bleu-france">
   <div class="conteneur">
     <div class="contenu-principal">
@@ -222,13 +98,12 @@ permalink: /
     </div>
   </div>
 </dsfr-container>
-{% endif %}
 
 <dsfr-container class="test-maturite">
   <div class="contenu-section">
     <div class="recapitulatif">
       <hgroup>
-        <h2 class="{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}fr-h1{% endif %}">
+        <h2 class="fr-h1">
           Quelle est la maturité cyber de votre organisation&nbsp;?
         </h2>
 
@@ -248,10 +123,10 @@ permalink: /
       <dsfr-button
         label="Débuter le test"
         kind="primary"
-        size="{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}lg{%else%}md{%endif%}"
+        size="lg"
         has-icon
         icon="arrow-right-circle-fill"
-        icon-place="{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}right{%else%}left{%endif%}"
+        icon-place="right"
         markup="a"
         href="/test-maturite"
       ></dsfr-button>
@@ -279,20 +154,19 @@ permalink: /
   </div>
 </dsfr-container>
 
-<dsfr-container class="interlocuteurs{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %} fond-bleu-france-850{% endif %}">
+<dsfr-container class="interlocuteurs fond-bleu-france-850">
   <div class="contenu-interlocuteurs" >
     {% include composant-svelte.html id="carrousel-des-interlocuteurs" %}
   </div>
 </dsfr-container>
 
-<dsfr-container class="equipe-bizdev{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %} fond-cafe-creme{% endif %}">
+<dsfr-container class="equipe-bizdev fond-cafe-creme">
   <div class="contenu-section" id="" >
     {% include composant-svelte.html id="equipe-biz-dev" %}
   </div>
 </dsfr-container>
 
-{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
-<dsfr-container class="communaute-msc nouvelle-da fond-moutarde">
+<dsfr-container class="communaute-msc fond-moutarde">
   <div class="conteneur">
     <div class="conteneur-titre-description">
       <h2 class="fr-h1">Rejoignez la communauté&nbsp;!</h2>
@@ -326,46 +200,9 @@ permalink: /
     <dsfr-button label="Rejoindre la communauté" kind="secondary" markup="a" href="https://tally.so/r/wa6o22" target="_blank"></dsfr-button>
   </div>
 </dsfr-container>
-{% else %}
-<dsfr-container class="communaute-msc">
-  <div class="contenu-section">
-    <h2>Rejoignez la communauté&nbsp;!</h2>
-    <div class="contenu">
-      <p class="texte-standard-md">
-        En tant que <b>membre de la communauté</b>, vous pourrez&nbsp;:
-      </p>
-      <ul>
-        <li>
-          <b>Échanger</b> directement avec vos pairs pour une collaboration
-          facilitée.
-        </li>
-        <li>
-          <b>Découvrir</b> en avant-première les nouvelles fonctionnalités à
-          venir.
-        </li>
-        <li>
-          <b>Participer</b> activement au développement de MesServicesCyber en
-          nous partageant vos besoins et suggestions d’amélioration.
-        </li>
-      </ul>
-    </div>
-    <msc-lien
-      apparence="bouton"
-      blank
-      href="https://tally.so/r/wa6o22"
-      libelle="Rejoindre la communauté"
-      type="secondaire"
-    ></msc-lien>
-    <img
-      src="assets/images/illustration-s-informer.svg"
-      alt="Dialoguer avec la communauté"
-    />
-  </div>
-</dsfr-container>
-{% endif %}
 
-<dsfr-container class="partenaires{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %} nouvelle-da{% endif %}">
-  <h2 class="{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}fr-h1{% endif %}">
+<dsfr-container class="partenaires">
+  <h2 class="fr-h1">
     Ils s'engagent pour Mes&ZeroWidthSpace;Services&ZeroWidthSpace;Cyber
   </h2>
   <div class="logos">
@@ -427,6 +264,6 @@ permalink: /
   </div>
 </dsfr-container>
 
-<dsfr-container class="anssi{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %} fond-cafe-creme{% endif %}">
+<dsfr-container class="anssi fond-cafe-creme">
   <lab-anssi-presentation-anssi></lab-anssi-presentation-anssi>
 </dsfr-container>

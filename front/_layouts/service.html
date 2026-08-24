@@ -15,7 +15,6 @@ script: /scripts/service.js
     "fondSombre": false
   }
 </script>
-{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
 {% capture segments_json %}
 [
   {
@@ -76,39 +75,6 @@ script: /scripts/service.js
     ></msc-lien>
   </div>
 </lab-anssi-bandeau-page>
-{% else %}
-<dsfr-container class="chapeau">
-  {% include composant-svelte.html id="fil-ariane" %}
-  <div class="resume">
-    <div>
-      {% if page.typologie == "service" %}
-      <dsfr-badge has-icon icon="shake-hands-fill" type="accent" accent="yellow-tournesol" size="sm" label="Service"></dsfr-badge>
-      {% elsif page.typologie == "outil" %}
-      <dsfr-badge has-icon icon="mac-fill" type="accent" accent="pink-tuile" size="sm" label="Outil"></dsfr-badge>
-      {% endif %}
-      <h1>{{page.nom}}</h1>
-      <p>{{page.description}}</p>
-      {% if page.lien %}
-      <div class="zone-actions">
-        <msc-lien
-          apparence="bouton"
-          blank
-          classe="lien-externe-produit"
-          source="Page produit"
-          cible="{{page.nom}}"
-          href="{{page.lien}}"
-          libelle="Accéder au service"
-          taille="lg"
-        ></msc-lien>
-      </div>
-      {%endif%}
-    </div>
-    <div class="conteneur-illustration">
-      <img src="/assets/images/illustrations-services/{{ page.illustration }}" width="588" height="327" alt="Capture d’écran" />
-    </div>
-  </div>
-</dsfr-container>
-{% endif %}
 
 <div class="sommaire sommaire-replie">
   <details>

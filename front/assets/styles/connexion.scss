@@ -71,30 +71,25 @@
 
       .contenu-secondaire {
         flex: 1 0 0;
-        background: var(--background-flat-blue-france-lab) url('/assets/images/motif-fond-service-opacite-16.avif');
         display: flex;
         justify-content: center;
         flex-direction: column;
+        background: {
+          image: url('/assets/images/motif-fond-heros-bleu.avif');
+          repeat: no-repeat;
+          position: calc(50% + 60px) -41px;
+          color: var(--background-flat-blue-france);
+        }
+
+        .illustration-animee {
+          max-width: 490px;
+          margin: auto;
+        }
 
         img {
           max-width: 100%;
           max-height: 420px;
           margin: 24px;
-        }
-
-        &.nouvelle-da {
-          background-color: var(--background-flat-blue-france);
-
-          background: {
-            image: url('/assets/images/motif-fond-heros-bleu.avif');
-            repeat: no-repeat;
-            position: calc(50% + 60px) -41px;
-          }
-
-          .illustration-animee {
-            max-width: 490px;
-            margin: auto;
-          }
         }
       }
     }
