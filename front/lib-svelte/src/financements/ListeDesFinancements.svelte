@@ -4,7 +4,6 @@
   import { clic } from '../directives/actions.svelte';
   import { profilStore } from '../stores/profil.store';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
-  import FilAriane from '../ui/FilAriane.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Heros from '../ui/Heros.svelte';
@@ -69,11 +68,7 @@
   format="banniere"
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
   theme="clair"
->
-  {#snippet filAriane()}
-    <FilAriane {...propriétésFilAriane} />
-  {/snippet}
-</Heros>
+/>
 
 <FiltresMobile filtreActif={$financementsFiltre.filtreActif}>
   <FiltresFinancements {chargement} {estConnecte} />

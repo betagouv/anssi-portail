@@ -7,7 +7,6 @@
   import { profilStore } from '../stores/profil.store';
   import ChampRecherche from '../ui/ChampRecherche.svelte';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
-  import FilAriane from '../ui/FilAriane.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Heros from '../ui/Heros.svelte';
@@ -140,11 +139,7 @@
   segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane, !!$profilStore)}
   theme="clair"
   titre="Les services et ressources cyber"
->
-  {#snippet filAriane()}
-    <FilAriane {...propriétésFilAriane} />
-  {/snippet}
-</Heros>
+/>
 
 <div class="barre-filtre-besoin">
   <div class="contenu-section">

@@ -6,18 +6,14 @@
   type Props = {
     format: 'banniere' | 'heros' | 'heros-centre' | 'details';
     theme: 'sombre' | 'clair' | 'pastel'; // inversé / clair
-    filAriane?: Snippet;
     segmentsFilAriane?: Segment[];
     cacheFilAriane?: boolean;
-    lienRetour?: Snippet;
     tags?: Snippet;
     cacheTags?: boolean;
-    preambule?: Snippet<[{ titre: string; description: string }]>;
     titre: string;
     description: string;
     actions?: Snippet;
     cacheActions?: boolean;
-    illustration?: Snippet<[{ source: string; alt: string }]>;
     illustrationSource?: string;
     illustrationAlt?: string;
     cacheIllustration?: boolean;
@@ -27,18 +23,14 @@
   let {
     format,
     theme = 'sombre',
-    filAriane: _filAriane,
     segmentsFilAriane = [],
     cacheFilAriane = false,
-    lienRetour: _lienRetour,
     tags,
     cacheTags = false,
-    preambule: _preambule,
     titre,
     description,
     actions,
     cacheActions = false,
-    illustration: _illustration,
     illustrationSource = '',
     illustrationAlt = '',
     cacheIllustration = false,

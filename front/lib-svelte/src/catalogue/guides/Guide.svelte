@@ -7,7 +7,6 @@
   import BoutonFavori from '../../favoris/BoutonFavori.svelte';
   import { profilStore } from '../../stores/profil.store';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
-  import FilAriane from '../../ui/FilAriane.svelte';
   import Heros from '../../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../../ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '../../ui/Lien.svelte';
@@ -96,20 +95,10 @@
     illustrationSource={guide.illustration.grande}
     cacheActions={guide.documents.length !== 1}
   >
-    {#snippet filAriane()}
-      <FilAriane {...propriétésFilAriane} />
-    {/snippet}
     {#snippet tags()}
       {#if guide}
         <div class="badges-collections">
           <BadgesDeCollections {guide} />
-        </div>
-      {/if}
-    {/snippet}
-    {#snippet illustration()}
-      {#if guide}
-        <div class="conteneur-illustration">
-          <img src={guide.illustration.grande} width="588" height="330" alt="Capture d’écran" />
         </div>
       {/if}
     {/snippet}
@@ -214,22 +203,6 @@
 
 <style lang="scss">
   @use '../../../../assets/styles/responsive.scss' as *;
-
-  .conteneur-illustration {
-    display: flex;
-    flex-direction: column-reverse;
-
-    img {
-      display: block;
-      width: 588px;
-      object-fit: cover;
-      object-position: top;
-      height: 330px;
-      background-color: var(--background-default-grey);
-      max-width: 100%;
-      margin-inline: auto;
-    }
-  }
 
   .badges-collections {
     margin-top: 1.5rem;
