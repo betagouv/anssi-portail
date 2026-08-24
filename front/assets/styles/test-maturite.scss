@@ -175,17 +175,11 @@ h5 {
     &:before {
       content: '';
       display: block;
-      min-width: 6px;
       position: absolute;
-      background-color: var(--background-active-blue-france);
       top: 6px;
       left: 0;
-      border-radius: 6px;
       height: calc(100% - 6px);
-    }
-
-    &.nouvelle-da:before {
-      background-color: #6a6af4;
+      background-color: var(--artwork-minor-blue-france);
       min-width: 4px;
       border-radius: unset;
     }
