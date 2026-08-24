@@ -159,10 +159,17 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
         assert.equal(reponse.status, 401);
       });
     });
+
     it("renvoie l'id du module d'une mesure", async () => {
       const { body } = await getConnecte(serveur, cookieJeanneDupont);
 
       assert.equal(body.idModule, 3);
+    });
+
+    it("renvoie le nom du module d'une mesure", async () => {
+      const { body } = await getConnecte(serveur, cookieJeanneDupont);
+
+      assert.equal(body.nomModule, 'Module 3');
     });
   });
 });

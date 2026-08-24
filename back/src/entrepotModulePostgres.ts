@@ -6,7 +6,7 @@ import { EntrepôtModule } from './metier/EntrepotModule.js';
 import { Mesure } from './metier/mesure.js';
 import { Module } from './metier/module.js';
 
-type ModulePersisté = { id: number; nom: string; description: string };
+export type ModulePersisté = { id: number; nom: string; description: string };
 
 export class EntrepôtModulePostgres implements EntrepôtModule {
   knex: Knex.Knex;

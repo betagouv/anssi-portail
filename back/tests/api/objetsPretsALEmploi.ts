@@ -176,5 +176,6 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
     )
     .avecUneExigence(exigence)
     .avecIdModule(3)
+    .avecNomModule('Module 3')
     .construis();
 };

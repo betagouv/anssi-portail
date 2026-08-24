@@ -39,6 +39,7 @@ export class Mesure {
     readonly liens: LienPourAllerPlusLoin[],
     readonly exigences: ExigenceNIS2[],
     readonly idModule: number,
+    readonly nomModule: string,
     readonly tutoriels: Tutoriel[]
   ) {}
 }
