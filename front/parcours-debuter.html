@@ -3,7 +3,6 @@ layout: parcours
 permalink: /parcours-debuter/
 titreHtml: 'Cybersécurité : se lancer ! | MesServicesCyber'
 ---
-{% if site.env.FEATURE_FLAG_NOUVELLE_DA == 'true' %}
 {% capture segments_json %}
 [
   {
@@ -36,42 +35,6 @@ titreHtml: 'Cybersécurité : se lancer ! | MesServicesCyber'
     </li>
   </ol>
 </lab-anssi-bandeau-page>
-{% else %}
-<script type="application/json" id="donnees-fil-ariane">
-  {
-    "branche": {
-      "nom": "Découvrir nos sélections"
-    },
-    "brancheConnectee": {
-      "nom": "Nos sélections"
-    },
-    "feuille": "Les services pour se lancer",
-    "fondSombre": true
-  }
-</script>
-
-<dsfr-container class="chapeau fond-sombre">
-  <div class="contenu-section">
-    {% include composant-svelte.html id="fil-ariane" %}
-    <h1 class="alternatif-xs-ns">Les services pour se lancer</h1>
-    <p class="texte-chapo-xl-ns">
-      Votre organisation souhaite mettre en œuvre des premières actions
-      concrètes pour commencer à renforcer son niveau de cybersécurité.
-      Découvrez des services et ressources sélectionnés par l’ANSSI pour vous
-      aider.
-    </p>
-    <div class="cta">
-      <p class="texte-chapo-xl-ns">Bénéficier d’un diagnostic cyber gratuit pour renforcer rapidement la cybersécurité de votre organisation.</p>
-      <msc-lien
-        apparence="bouton"
-        href="/cyberdepart"
-        libelle="Demander mon diagnostic cyber"
-        taille="lg"
-      ></msc-lien>
-    </div>
-  </div>
-</dsfr-container>
-{% endif %}
 
 {%assign actions = site.data.parcours-debuter.actions %}
 <dsfr-container class="sommaire">

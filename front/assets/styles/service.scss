@@ -29,30 +29,6 @@
     }
   }
 
-  .resume {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    gap: 24px;
-
-    @include a-partir-de(xxl) {
-      flex-direction: row;
-    }
-
-    .conteneur-illustration {
-      display: flex;
-      flex-direction: column-reverse;
-    }
-
-    img {
-      display: none;
-      max-width: 588px;
-      @include a-partir-de(xxl) {
-        display: block;
-      }
-    }
-  }
-
   h1 {
     margin: 8px 0 16px;
     font-size: 2.5rem;
@@ -62,11 +38,6 @@
       font-size: 3.5rem;
       line-height: 4.125rem;
     }
-  }
-
-  .zone-actions {
-    padding-top: 24px;
-    padding-bottom: 40px;
   }
 }
 
