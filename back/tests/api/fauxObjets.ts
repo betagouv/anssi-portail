@@ -213,9 +213,6 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     parcoursDeSecurisation: () => ({
       estActif: () => true,
     }),
-    nouvelleDA: () => ({
-      estActive: () => true,
-    }),
   }),
   nodeEnv: () => 'developpement',
   rechercheEntreprise: () => ({
