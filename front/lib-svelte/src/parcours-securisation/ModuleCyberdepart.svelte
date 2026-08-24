@@ -3,8 +3,7 @@
   import { onMount } from 'svelte';
   import { profilStore } from '../stores/profil.store';
   import BadgeBeta from '../ui/BadgeBeta.svelte';
-  import { fabriqueFilAriane } from '../ui/filAriane';
-  import { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
   import Heros from '../ui/Heros.svelte';
   import { toasterStore } from '../ui/toasts/toaster.store';
   import Toaster from '../ui/toasts/Toaster.svelte';

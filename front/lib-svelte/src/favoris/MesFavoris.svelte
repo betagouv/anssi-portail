@@ -1,17 +1,17 @@
 <script lang="ts">
+  import { afficheNouvelleDA } from '$plateforme/environnement';
   import { onMount } from 'svelte';
   import { chargeGuidesDansLeStore } from '../catalogue/stores/guides/guides.store';
   import { itemsCatalogueEnFavori } from '../catalogue/stores/itemsCatalogueEnFavori';
   import { profilStore } from '../stores/profil.store';
+  import Alternatives from '../ui/Alternatives.svelte';
   import Bouton from '../ui/Bouton.svelte';
+  import { fabriqueFilAriane } from '../ui/filAriane';
   import FilAriane from '../ui/FilAriane.svelte';
+  import Heros from '../ui/Heros.svelte';
+  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import Lien from '../ui/Lien.svelte';
   import ContenuFavoris from './ContenuFavoris.svelte';
-  import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
-  import Alternatives from '../ui/Alternatives.svelte';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
-  import Heros from '../ui/Heros.svelte';
-  import { fabriqueFilAriane } from '../ui/filAriane';
 
   const partageLien = () => {
     const hote = new URL(window.location.href).origin;

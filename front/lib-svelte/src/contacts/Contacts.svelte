@@ -1,9 +1,10 @@
 <script lang="ts">
+  import { afficheNouvelleDA } from '$plateforme/environnement';
   import { onMount } from 'svelte';
   import { creeLeFragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '../stores/profil.store';
-  import { fabriqueFilAriane } from '../ui/filAriane';
-  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import FilAriane from '../ui/FilAriane.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Heros from '../ui/Heros.svelte';
@@ -13,7 +14,6 @@
   import { estCodeRegion } from './contacts.type';
   import FiltresContacts from './FiltresContacts.svelte';
   import NoteInformation from './NoteInformation.svelte';
-  import { afficheNouvelleDA } from '$plateforme/environnement';
 
   let regionSelectionnee: string = $state('');
   let secteurSelectionne: string = $state('');

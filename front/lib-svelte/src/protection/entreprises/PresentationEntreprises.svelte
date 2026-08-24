@@ -1,13 +1,13 @@
 <script lang="ts">
   import { afficheNouvelleDA } from '$plateforme/environnement';
   import Alternatives from '../../ui/Alternatives.svelte';
-  import { fabriqueFilAriane } from '../../ui/filAriane';
-  import FilAriane, { type Props as PropriétésFilAriane } from '../../ui/FilAriane.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
+  import FilAriane from '../../ui/FilAriane.svelte';
   import Heros from '../../ui/Heros.svelte';
   import HerosRiche from '../../ui/HerosRiche.svelte';
-  import Proteger from '../Proteger.svelte';
   import MotEnExergue from '../../ui/MotEnExergue.svelte';
   import IllustrationHerosEntreprises from '../animation/IllustrationHerosEntreprises.svelte';
+  import Proteger from '../Proteger.svelte';
 
   const propriétésFilAriane: PropriétésFilAriane = {
     feuille: 'Protéger mon entreprise contre les cyberattaques',

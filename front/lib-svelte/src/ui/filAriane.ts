@@ -36,6 +36,7 @@ export type PropriétésFilAriane =
       branche?: Branche;
       brancheConnectée?: Branche;
       feuille: string;
+      fondSombre?: boolean;
     }
   | PropriétésSegmentFilAriane[];
 

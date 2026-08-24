@@ -6,8 +6,8 @@
   import { creeLeFragmentDeNavigation, type FragmentDeNavigation } from '../navigation/fragmentDeNavigation.svelte';
   import { profilStore } from '../stores/profil.store';
   import ChampRecherche from '../ui/ChampRecherche.svelte';
-  import { fabriqueFilAriane } from '../ui/filAriane';
-  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import FilAriane from '../ui/FilAriane.svelte';
   import FiltresBureau from '../ui/FiltresBureau.svelte';
   import FiltresMobile from '../ui/FiltresMobile.svelte';
   import Heros from '../ui/Heros.svelte';

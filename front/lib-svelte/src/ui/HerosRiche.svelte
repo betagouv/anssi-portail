@@ -2,7 +2,7 @@
   import type { Snippet } from 'svelte';
   import type { ClassValue } from 'svelte/elements';
   import type { Badge } from './badge.type';
-  import FilAriane, { type Props as PropriétésFilAriane } from './FilAriane.svelte';
+  import FilAriane, { type PropsFilAriane } from './FilAriane.svelte';
   import GroupeDeBadges from './GroupeDeBadges.svelte';
 
   type Props = {
@@ -10,7 +10,7 @@
     badges?: Badge[];
     description: string;
     illustration: Snippet;
-    propriétésFilAriane?: PropriétésFilAriane;
+    propriétésFilAriane?: PropsFilAriane;
     titre?: string;
     titreHtml?: Snippet;
     variante: 'bleu-clair' | 'vert-clair' | 'cafe-creme';

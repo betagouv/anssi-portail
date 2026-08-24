@@ -5,7 +5,7 @@
   import { profilStore } from '../stores/profil.store';
   import Alternatives from '../ui/Alternatives.svelte';
   import Bouton from '../ui/Bouton.svelte';
-  import { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import type { PropriétésFilAriane } from '../ui/filAriane';
   import HerosRiche from '../ui/HerosRiche.svelte';
   import Lien from '../ui/Lien.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';

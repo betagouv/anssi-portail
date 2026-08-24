@@ -1,7 +1,7 @@
 <script lang="ts">
   import { profilStore } from '../stores/profil.store';
-  import { fabriqueFilAriane } from '../ui/filAriane';
-  import FilAriane, { type Props as PropriétésFilAriane } from '../ui/FilAriane.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import FilAriane from '../ui/FilAriane.svelte';
   import Heros from '../ui/Heros.svelte';
   import IllustrationNiveauMaturite from './IllustrationNiveauMaturite.svelte';
   import { niveauxMaturite } from './NiveauxMaturite.donnees';
