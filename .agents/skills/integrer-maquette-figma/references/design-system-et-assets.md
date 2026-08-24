@@ -58,10 +58,6 @@ Inspecter signatures actuelles avant usage :
 - `front/lib-svelte/src/ui/HerosRiche.svelte` pour variantes `bleu-clair`,
   `vert-clair`, `cafe-creme`.
 
-Quand `FEATURE_FLAG_NOUVELLE_DA` exige deux rendus, suivre pattern courant de
-`PresentationCollectivites.svelte` avec `Alternatives`. Ne pas supposer que tout
-nouveau composant doit porter les deux variantes : vérifier portée du flag.
-
 ## Assets
 
 Emplacement par défaut : `front/assets/images/`, dans sous-dossier métier si
