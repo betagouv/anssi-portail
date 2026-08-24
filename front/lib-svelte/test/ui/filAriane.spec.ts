@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
+import type { Mesure } from '../../src/parcours-securisation/mesure';
 import { fabriqueFilAriane, type PropriétésFilAriane } from '../../src/ui/filAriane';
 
 describe('La fabrique du fil d’Ariane', () => {
@@ -191,6 +192,55 @@ describe('La fabrique du fil d’Ariane', () => {
           id: 'noeud-Branche enfant',
           label: 'Branche enfant',
           href: '/branche-enfant-1',
+        });
+      });
+    });
+
+    describe('cas spécifique des mesures du parcours de sécurisation', () => {
+      const propriétésFilAriane = (mesure: Mesure) => [
+        {
+          nom: 'Protéger mon organisation',
+          lien: mesure.idModule === 1 ? `/modules/${mesure.idModule}` : '/parcours-complet',
+        },
+        ...(mesure.idModule === 1
+          ? [] // pas de sous-branche pour le module 1
+          : [
+              {
+                nom: mesure.nomModule,
+                lien: `/modules/${mesure.idModule}`,
+              },
+            ]),
+        {
+          nom: mesure.titre,
+        },
+      ];
+
+      describe('pour une mesure du module 1 "Prendre son Cyberdépart"', () => {
+        const mesure = {
+          id: 'AUTH.5',
+          titre: 'Activer la vérification en deux étapes ou un aut...',
+          phraseAccroche: 'Empêchez qu’un compte soit utilisé, même si le mot de passe a fuité 💨',
+          explications: '<p>Un mot de passe seul ne suffit pas toujours à protéger un...',
+          actionPrioritaire: '<p>Mettre en oeuvre la vérification en deux étapes sur les...',
+          actionFacileAFaire: 'Dans les principales suites collaboratives (La Suite Numérique...',
+          ordre: 10,
+          risques: [],
+          liens: [],
+          exigences: [],
+          idModule: 1,
+          nomModule: 'Prendre son cyberdépart',
+          tutoriels: [],
+          estPriseEnCompte: true,
+        };
+
+        it("le second segment est 'Protéger mon organisation' et non le nom du module", () => {
+          const filAriane = fabriqueFilAriane(propriétésFilAriane(mesure), true);
+
+          expect(filAriane[1]).toEqual({
+            id: 'noeud-Protéger mon organisation',
+            label: 'Protéger mon organisation',
+            href: '/modules/1',
+          });
         });
       });
     });
