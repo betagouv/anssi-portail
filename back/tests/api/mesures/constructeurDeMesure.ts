@@ -10,6 +10,7 @@ export class ConstructeurDeMesure {
   private actionFacileAFaire: string = '';
   private ordre: number = 0;
   private idModule = 0;
+  private nomModule = '';
   private readonly risques: Risque[] = [];
   private readonly liens: LienPourAllerPlusLoin[] = [];
   private readonly exigences: ExigenceNIS2[] = [];
@@ -70,6 +71,11 @@ export class ConstructeurDeMesure {
     return this;
   }
 
+  avecNomModule(nomModule: string) {
+    this.nomModule = nomModule;
+    return this;
+  }
+
   construis() {
     return new Mesure(
       this.id,
@@ -83,6 +89,7 @@ export class ConstructeurDeMesure {
       this.liens,
       this.exigences,
       this.idModule,
+      this.nomModule,
       this.tutoriels
     );
   }
