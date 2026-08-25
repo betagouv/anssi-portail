@@ -97,14 +97,6 @@
   .fr-h6 {
     color: var(--text-title-grey);
     margin: 0 0 24px;
-
-    .fond-sombre & {
-      color: var(--text-inverted-grey);
-    }
-
-    .fond-clair & {
-      color: var(--text-title-grey);
-    }
   }
 
   h1,
@@ -214,12 +206,6 @@
 }
 
 @mixin textes-dsfr {
-  a {
-    .fond-sombre & {
-      color: var(--text-inverted-grey);
-    }
-  }
-
   .texte-chapo-xl {
     font-size: 1.25rem;
     line-height: 2rem;
@@ -250,16 +236,6 @@
     line-height: 1.25rem;
     margin: 0 0 24px;
     color: var(--text-mention-grey);
-  }
-
-  .texte-chapo-xl,
-  .texte-article-lg,
-  .texte-standard-md,
-  .texte-detail-sm,
-  .texte-mention-xs {
-    .fond-sombre & {
-      color: var(--text-inverted-grey);
-    }
   }
 }
 
@@ -332,14 +308,6 @@
 
     &:not([disabled]):active {
       background: var(--gris-secondaire-fond-clique);
-    }
-  }
-
-  .fond-sombre {
-    .bouton.secondaire {
-      background: transparent;
-      border: 1px solid white;
-      color: var(--text-inverted-grey);
     }
   }
 

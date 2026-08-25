@@ -9,24 +9,11 @@
   position: relative;
 }
 
-.banniere.fond-sombre {
-  padding-bottom: 90px;
-  p {
-    margin-bottom: 24px;
-  }
-}
-
 .barre-filtre-besoin {
   display: none;
   position: relative;
   margin-left: 24px;
   margin-right: 24px;
-
-  // [ANCIENNE-DA] À supprimer à terme
-  dsfr-container + & {
-    top: -66px;
-    margin-bottom: -66px;
-  }
 
   @include a-partir-de(lg) {
     display: block;
@@ -262,20 +249,4 @@
 
 .carte.service.lien-externe-produit > * {
   pointer-events: none;
-}
-
-.encart.fond-clair {
-  background: white;
-
-  h2 {
-    margin-bottom: 48px;
-  }
-
-  @include a-partir-de(lg) {
-    padding: 72px 0;
-  }
-
-  .carte.parcours {
-    box-shadow: 0 6px 18px 0 rgba(0, 0, 18, 0.16);
-  }
 }
