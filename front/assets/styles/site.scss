@@ -31,7 +31,7 @@
   --couleur-lien: #0d0c21;
   --filtre-couleur-primaire: brightness(0) invert(3%) sepia(26%) saturate(6797%) hue-rotate(236deg) brightness(105%)
     contrast(97%);
-  --sommaire-actif-indicateur-couleur: #fed980;
+  --sommaire-actif-indicateur-couleur: var(--border-active-blue-france);
   --sommaire-actif-couleur: #0d0c21;
   --sommaire-mobile-fond: #fff7db;
   --bouton-arrondi: 8px;
