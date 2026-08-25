@@ -310,12 +310,6 @@
       background: var(--gris-secondaire-fond-clique);
     }
   }
-
-  .bouton.taille-moyenne {
-    font-size: 1rem;
-    line-height: 1.5rem;
-    padding: 8px 16px;
-  }
 }
 
 @mixin erreur-champ-saisie {
