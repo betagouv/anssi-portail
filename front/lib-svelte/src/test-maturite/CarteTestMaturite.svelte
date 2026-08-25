@@ -95,7 +95,7 @@
         position: absolute;
         z-index: 0;
         bottom: 26px;
-        border: 1px solid #000091;
+        border: 1px solid var(--border-plain-blue-france);
         left: 0;
         right: 0;
       }
