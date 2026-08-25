@@ -280,13 +280,13 @@
       border: 1px solid var(--border-default-grey);
       padding: 3.5rem calc(taille-pour-colonnes(1) + 1.5rem);
     }
-  }
 
-  .contenu-inscription h1 {
-    font-size: 1.375rem;
-    font-weight: bold;
-    margin: 0 0 12px;
-    padding: 0;
+    h1 {
+      font-size: 1.375rem;
+      font-weight: bold;
+      margin: 0 0 12px;
+      padding: 0;
+    }
   }
 
   .info-valeur {
