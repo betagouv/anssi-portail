@@ -263,7 +263,7 @@
         }
 
         .presentation {
-          :global(a:not(.bouton)) {
+          :global(a) {
             display: inline;
             text-decoration: underline;
             -webkit-text-decoration: underline;

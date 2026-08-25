@@ -128,16 +128,6 @@
       display: none;
     }
   }
-
-  .bouton {
-    margin-top: 32px;
-    margin-bottom: 0;
-    padding: 10px 24px;
-
-    @include a-partir-de(lg) {
-      width: fit-content;
-    }
-  }
 }
 
 .cible {
