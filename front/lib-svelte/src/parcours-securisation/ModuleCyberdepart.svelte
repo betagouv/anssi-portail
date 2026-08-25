@@ -47,9 +47,23 @@
   const badgeDebloque = $derived(totalMesures > 0 && progressionActuelle >= (module.cibleBadge ?? 0));
   const parcoursTermine = $derived(totalMesures > 0 && progressionActuelle === totalMesures);
   const parcoursComplet = $derived($profilStore?.parcoursSecurisation.parcoursActuel === 'complet');
-  const propriétésFilAriane: PropriétésFilAriane = $derived({
-    feuille: 'Protéger mon organisation',
-  });
+  const propriétésFilAriane: PropriétésFilAriane = $derived(
+    parcoursComplet
+      ? [
+          {
+            nom: 'Protéger mon organisation',
+            lien: '/parcours-complet',
+          },
+          {
+            nom: module.nom,
+          },
+        ]
+      : [
+          {
+            nom: 'Protéger mon organisation',
+          },
+        ]
+  );
 </script>
 
 <Toaster />
