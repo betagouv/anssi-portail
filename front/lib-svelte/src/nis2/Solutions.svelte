@@ -92,6 +92,3 @@
     {/each}
   </ControleSegmenteAvecSections>
 </div>
-
-<style lang="scss">
-</style>
