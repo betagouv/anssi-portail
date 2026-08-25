@@ -247,6 +247,7 @@
 
 <style lang="scss">
   @use '../../../assets/styles/responsive.scss' as *;
+  @use '../../../assets/styles/grille.scss' as *;
 
   :global(.creation-compte .actions) {
     margin-top: 32px;
@@ -260,26 +261,24 @@
   }
 
   .creation-compte {
-    @include a-partir-de(md) {
-      background-color: #eee;
-      padding: 64px;
-    }
+    margin: 3rem auto;
   }
 
   .contenu-inscription {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    padding: 32px 16px;
     background-color: var(--background-default-grey);
     text-align: left;
     color: #000;
-    @include a-partir-de(sm) {
-      padding: 32px 64px;
-    }
+
     @include a-partir-de(md) {
       margin: 0 auto;
-      max-width: 800px;
+      max-width: taille-pour-colonnes(8);
+    }
+    @include a-partir-de(lg) {
+      border: 1px solid var(--border-default-grey);
+      padding: 3.5rem calc(taille-pour-colonnes(1) + 1.5rem);
     }
   }
 
