@@ -44,27 +44,4 @@
     font-size: 1.25rem;
     line-height: 2rem;
   }
-
-  .bouton.primaire {
-    text-align: center;
-    border-bottom: none;
-    margin-top: 32px;
-    padding: 10px 24px;
-    grid-area: bouton;
-    place-self: center;
-
-    &:after {
-      content: none;
-    }
-
-    @include a-partir-de(sm) {
-      width: auto;
-    }
-
-    @include a-partir-de(lg) {
-      width: fit-content;
-      justify-self: flex-start;
-      margin-top: 16px;
-    }
-  }
 }
