@@ -33,9 +33,6 @@
     font-weight: normal;
 
     --noir: #000000;
-    --jaune-msc: #fed980;
-    --jaune-msc-hover: #ecca79;
-    --jaune-msc-clique: #ddbd70;
     --jaune-clair-msc: #fff7db;
 
     --bouton-arrondi: 8px;

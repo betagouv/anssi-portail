@@ -141,7 +141,7 @@
 
   .visible {
     display: block;
-    border: 1px solid var(--jaune-msc);
+    border: 1px solid var(--border-action-high-blue-france);
   }
 
   .option {

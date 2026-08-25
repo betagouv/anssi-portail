@@ -45,7 +45,7 @@
           background: #fff7db;
 
           a {
-            border-left: 2px solid var(--jaune-msc);
+            border-left: 2px solid var(--sommaire-actif-indicateur-couleur);
             padding-left: 14px;
             border-bottom: none;
           }
@@ -89,7 +89,7 @@
         font-weight: bold;
 
         a {
-          border-left: 2px solid var(--jaune-msc);
+          border-left: 2px solid var(--sommaire-actif-indicateur-couleur);
           padding-left: 6px;
         }
       }
