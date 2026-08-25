@@ -1,13 +1,13 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount, tick, untrack } from 'svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
+  import Heros from '../ui/Heros.svelte';
   import Lien from '../ui/Lien.svelte';
   import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
   import type { Financement } from './financement';
   import MenuFinancement from './MenuFinancement.svelte';
   import SectionDetailsFinancement from './SectionDetailsFinancement.svelte';
-  import Heros from '../ui/Heros.svelte';
-  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
 
   type Props = {
     financementInitial?: Financement;
@@ -257,16 +257,12 @@
   }
 
   .corps {
-    padding: 48px 16px 72px;
-
-    @include a-partir-de(md) {
-      padding: 48px 24px 72px;
-    }
+    padding: 3rem 0 4.5rem;
 
     .contenu-section {
       display: flex;
       align-items: flex-start;
-      gap: 24px;
+      gap: 1.5rem;
       align-self: stretch;
 
       .fiche {
@@ -274,7 +270,7 @@
         flex-direction: column;
         align-items: flex-start;
         flex: 1 0 0;
-        gap: 32px;
+        gap: 2rem;
       }
     }
   }
