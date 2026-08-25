@@ -145,8 +145,8 @@ class ConvertisseurCsvExigenceNIS2AvecCorrespondancesCyFun23 extends Convertisse
       ...colonnesEntetesCorrespondances(
         exigences,
         'CyFun23',
-        'Référence CyberFundamentals Foundation 2023 (Belgique)',
-        'Contenu CyberFundamentals Foundation 2023 (Belgique)'
+        'Référence CyberFundamentals Framework 2023 (Belgique)',
+        'Contenu CyberFundamentals Framework 2023 (Belgique)'
       ),
     ];
   }

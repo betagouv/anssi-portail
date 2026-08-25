@@ -274,19 +274,19 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
       assert.deepEqual(entetes.slice(7), [
         {
           id: 'reference_cyfun23_1',
-          title: 'Référence CyberFundamentals Foundation 2023 (Belgique) (1)',
+          title: 'Référence CyberFundamentals Framework 2023 (Belgique) (1)',
         },
         {
           id: 'contenu_cyfun23_1',
-          title: 'Contenu CyberFundamentals Foundation 2023 (Belgique) (1)',
+          title: 'Contenu CyberFundamentals Framework 2023 (Belgique) (1)',
         },
         {
           id: 'reference_cyfun23_2',
-          title: 'Référence CyberFundamentals Foundation 2023 (Belgique) (2)',
+          title: 'Référence CyberFundamentals Framework 2023 (Belgique) (2)',
         },
         {
           id: 'contenu_cyfun23_2',
-          title: 'Contenu CyberFundamentals Foundation 2023 (Belgique) (2)',
+          title: 'Contenu CyberFundamentals Framework 2023 (Belgique) (2)',
         },
       ]);
     });
