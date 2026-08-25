@@ -93,7 +93,7 @@
           filter: grayscale(100%);
         }
         &:before {
-          border-color: #3a3a3a;
+          border-color: var(--border-plain-grey);
         }
       }
 
@@ -124,7 +124,7 @@
         position: absolute;
         z-index: 0;
         bottom: 94px;
-        border: 2px solid #000091;
+        border: 2px solid var(--border-plain-blue-france);
         left: 0;
         right: 0;
       }

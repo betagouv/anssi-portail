@@ -62,7 +62,7 @@
         position: absolute;
         z-index: 0;
         bottom: 39px;
-        border: 2px solid #000091;
+        border: 2px solid var(--border-plain-blue-france);
         left: 0;
         right: 0;
       }
