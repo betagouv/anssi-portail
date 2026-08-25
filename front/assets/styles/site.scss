@@ -159,11 +159,6 @@ dsfr-footer {
     font-size: 0.85rem;
     line-height: 1.5rem;
     font-weight: normal;
-
-    &.tag-specifique {
-      background: #dae6fd;
-      color: #3558a2;
-    }
   }
 
   img {
@@ -301,16 +296,6 @@ dsfr-footer {
   @include a-partir-de(md) {
     padding-top: 80px;
     padding-bottom: 80px;
-  }
-
-  .liste-parcours {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-
-    @include a-partir-de(md) {
-      flex-direction: row;
-    }
   }
 
   h2 {
