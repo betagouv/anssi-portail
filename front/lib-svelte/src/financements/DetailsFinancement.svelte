@@ -1,12 +1,13 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount, tick, untrack } from 'svelte';
-  import FilAriane from '../ui/FilAriane.svelte';
   import Lien from '../ui/Lien.svelte';
   import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
   import type { Financement } from './financement';
   import MenuFinancement from './MenuFinancement.svelte';
   import SectionDetailsFinancement from './SectionDetailsFinancement.svelte';
+  import Heros from '../ui/Heros.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../ui/filAriane';
 
   type Props = {
     financementInitial?: Financement;
@@ -128,22 +129,41 @@
       tick().then(observeLesSections);
     }
   });
+
+  const propriétésFilAriane: PropriétésFilAriane = $derived(
+    financement
+      ? [
+          {
+            nom: 'Financements cyber',
+            lien: '/financements',
+          },
+          {
+            nom: financement.nom,
+          },
+        ]
+      : []
+  );
 </script>
 
-<dsfr-container class="chapeau">
-  <div class="contenu-section">
-    <FilAriane feuille={financement?.nom ?? '...'} branche={{ nom: 'Financements cyber', lien: '/financements' }} />
-    <div class="badges">
-      {#if financement}
+<Heros
+  format="heros"
+  cacheIllustration
+  titre={financement ? financement.nom : ''}
+  theme="clair"
+  description={`Zone géographique éligible pour cette aide\u00a0: ${financement?.perimetresGeographiques}`}
+  segmentsFilAriane={fabriqueFilAriane(propriétésFilAriane)}
+>
+  {#snippet tags()}
+    {#if financement}
+      <div class="badges">
         {#each financement.typesDeFinancement as type (type)}
           <BadgeTypeFinancement {type}></BadgeTypeFinancement>
         {/each}
-      {/if}
-    </div>
-    <h1>{financement?.nom}</h1>
-    <p>
-      Zone géographique éligible pour cette aide&nbsp;: {financement?.perimetresGeographiques}
-    </p>
+      </div>
+    {/if}
+  {/snippet}
+
+  {#snippet actions()}
     {#if financement?.sources?.[0]}
       <div class="source">
         <Lien
@@ -156,8 +176,8 @@
         />
       </div>
     {/if}
-  </div>
-</dsfr-container>
+  {/snippet}
+</Heros>
 
 <div bind:this={contenu}>
   {#if financement}
@@ -226,56 +246,14 @@
     padding: 0 0 40px;
   }
 
-  .chapeau {
-    background: #f4f4f4 url('/assets/images/motif-fond-service.avif');
-    padding-top: 24px;
-
-    .contenu-section {
-      display: flex;
-      flex-direction: column;
-
-      .source {
-        display: flex;
-        margin-top: 24px;
-      }
-    }
-
-    @include a-partir-de(md) {
-      gap: 16px;
-    }
-
-    .badges {
-      display: flex;
-      align-items: flex-start;
-      align-content: flex-start;
-      gap: 8px;
-      align-self: stretch;
-      flex-wrap: wrap;
-      margin-top: 24px;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      line-height: 2.875rem;
-      margin: 0 0 16px;
-
-      @include a-partir-de(md) {
-        font-size: 3.5rem;
-        line-height: 3.875rem;
-      }
-    }
-
-    p {
-      margin: 0;
-      font-size: 1.25rem;
-      line-height: 2rem;
-      color: #3a3a3a;
-
-      @include a-partir-de(md) {
-        font-size: 1.375rem;
-        line-height: 2rem;
-      }
-    }
+  .badges {
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 0.5rem;
+    align-self: stretch;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
   }
 
   .corps {
