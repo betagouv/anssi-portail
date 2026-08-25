@@ -40,9 +40,6 @@
 
     --bouton-arrondi: 8px;
     --bouton-primaire-couleur-texte: #0d0c21;
-    --bouton-primaire-couleur-fond: #fed980;
-    --bouton-primaire-couleur-fond-survol: #ecca79;
-    --bouton-primaire-couleur-fond-clique: #ddbd70;
 
     :global .demande-diagnostic {
       @media (min-width: 767px) {
