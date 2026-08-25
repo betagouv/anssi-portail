@@ -14,6 +14,7 @@
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import type { Statistiques } from './statistiques.type';
   import Tuile from './Tuile.svelte';
+  import Bouton from '../ui/Bouton.svelte';
 
   let mesures: Statistiques | undefined = undefined;
   let serieNonFiltree: Serie = [];
@@ -151,15 +152,7 @@
               Nous n’avons pas encore assez de données pour afficher une comparaison fiable avec les filtres
               sélectionnés.
             </p>
-            <lab-anssi-bouton
-              on:click={reinitialiseLesFiltres}
-              on:keypress
-              role="button"
-              taille="md"
-              tabindex={0}
-              titre="Réinitialiser les filtres"
-              variante="tertiaire"
-            ></lab-anssi-bouton>
+            <Bouton libelle="Réinitialiser les filtres" type="tertiaire" taille="md" surClic={reinitialiseLesFiltres} />
           </div>
         </section>
       {/if}

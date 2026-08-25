@@ -16,6 +16,7 @@
   import ResumeRadarComparaison from './ResumeRadarComparaison.svelte';
   import type { Serie, SerieRadar } from './Serie';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
+  import Bouton from '../ui/Bouton.svelte';
 
   const libelleDeNiveau = (idNiveau: IdNiveau) => {
     return niveauxMaturite.find((niveau) => niveau.id === idNiveau)!.label;
@@ -169,15 +170,7 @@
       <p>
         Nous n’avons pas encore assez de données pour afficher une comparaison fiable avec les filtres sélectionnés.
       </p>
-      <lab-anssi-bouton
-        on:click={reinitialiseLesFiltres}
-        on:keypress
-        role="button"
-        taille="md"
-        tabindex={0}
-        titre="Réinitialiser les filtres"
-        variante="tertiaire"
-      ></lab-anssi-bouton>
+      <Bouton libelle="Réinitialiser les filtres" type="tertiaire" taille="md" surClic={reinitialiseLesFiltres} />
     </div>
   </dsfr-container>
 {/if}
@@ -275,6 +268,7 @@
       gap: 16px;
       align-items: center;
       text-align: center;
+      padding-bottom: 4.5rem;
     }
 
     h4 {

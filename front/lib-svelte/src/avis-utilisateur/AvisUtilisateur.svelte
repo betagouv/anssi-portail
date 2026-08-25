@@ -170,16 +170,7 @@
         </p>
       </div>
       <footer class="actions">
-        <lab-anssi-bouton
-          on:click={() => dialogue.close()}
-          on:keypress
-          role="button"
-          taille="md"
-          tabindex={0}
-          titre="Terminer"
-          variante="primaire"
-          largeur-maximale
-        ></lab-anssi-bouton>
+        <Bouton libelle="Terminer" type="tertiaire-sans-bordure" taille="md" surClic={() => dialogue.close()} />
       </footer>
     {/if}
   </dialog>
