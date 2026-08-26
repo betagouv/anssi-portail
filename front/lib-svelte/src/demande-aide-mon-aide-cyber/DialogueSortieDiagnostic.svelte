@@ -73,7 +73,7 @@
     {#if etape === 'formulaire'}
       <Formulaire classe="dialogue-sortie-diag" on:formulaireValide={soumetsLeFormulaire}>
         <div class="contenu">
-          <BoutonFermerModale on:click={() => (afficheDialogue = false)} />
+          <BoutonFermerModale surClic={() => (afficheDialogue = false)} />
           <h4>Aidez-nous à améliorer votre expérience️ 🙏&nbsp;!</h4>
           <h5>🤔 Pourquoi n’avez-vous pas finalisé votre demande&nbsp;?</h5>
           {#if erreurRaison}
@@ -128,7 +128,7 @@
     {:else}
       <div class="dialogue-sortie-diag">
         <div class="contenu">
-          <BoutonFermerModale on:click={() => dialogue?.close()} />
+          <BoutonFermerModale surClic={() => dialogue?.close()} />
           <h4>Merci pour votre retour&nbsp;🤩&nbsp;! Vos remarques sont précieuses pour faire évoluer le service.</h4>
           <p>
             Vous avez demandé à être recontacté(e) ? Notre équipe prendra contact avec vous prochainement à l’adresse
