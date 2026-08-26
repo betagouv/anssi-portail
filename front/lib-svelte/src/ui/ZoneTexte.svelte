@@ -1,7 +1,11 @@
 <script lang="ts">
-  export let aideSaisie = '';
-  export let valeur: string = '';
-  export let enErreur: boolean = false;
+  interface Props {
+    aideSaisie?: string;
+    valeur?: string;
+    enErreur?: boolean;
+  }
+
+  let { aideSaisie = '', valeur = $bindable(''), enErreur = false }: Props = $props();
 </script>
 
 <textarea bind:value={valeur} placeholder={aideSaisie} class:en-erreur={enErreur}></textarea>
