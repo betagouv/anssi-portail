@@ -1,14 +1,21 @@
 <script lang="ts">
-  export let libelle: string;
-  export let sousTitre: string = '';
-  export let requis: boolean = false;
+  import type { Snippet } from 'svelte';
+
+  interface Props {
+    libelle: string;
+    sousTitre?: string;
+    requis?: boolean;
+    children?: Snippet;
+  }
+
+  let { libelle, sousTitre = '', requis = false, children }: Props = $props();
 </script>
 
 <label class="controle-formulaire">
   <span class:requis>{libelle}</span>
   {#if sousTitre}<span class="sousTitre">{sousTitre}</span>{/if}
   <span class="contenu">
-    <slot />
+    {@render children?.()}
   </span>
 </label>
 
