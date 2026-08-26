@@ -6,9 +6,13 @@
   import MotEnExergue from '../ui/MotEnExergue.svelte';
   import CarrouselMaturite from './animation/CarrouselMaturite.svelte';
 
-  export let introFaite = false;
-  let enPause = false;
-  $: libelléPause = enPause ? 'Lancer les animations' : 'Mettre les animations en pause';
+  interface Props {
+    introFaite?: boolean;
+  }
+
+  let { introFaite = $bindable(false) }: Props = $props();
+  let enPause = $state(false);
+  const libelléPause = $derived(enPause ? 'Lancer les animations' : 'Mettre les animations en pause');
 
   const basculePause = () => {
     enPause = !enPause;
