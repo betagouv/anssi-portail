@@ -14,13 +14,17 @@
   const clesOnglet = ['#votre-organisation', '#comparaison', '#historique'] as const;
   type CleOnglet = (typeof clesOnglet)[number];
 
-  export let animeTuiles = true;
-  export let dateRealisation: Date | undefined = undefined;
-  export let defilementAutomatique = true;
-  export let idNiveau: IdNiveau;
+  interface Props {
+    animeTuiles?: boolean;
+    dateRealisation?: Date;
+    defilementAutomatique?: boolean;
+    idNiveau: IdNiveau;
+  }
 
-  let lienActif: CleOnglet | undefined;
-  let idRésultatTest: string | undefined;
+  let { animeTuiles = true, dateRealisation, defilementAutomatique = true, idNiveau }: Props = $props();
+
+  let lienActif: CleOnglet | undefined = $state();
+  let idRésultatTest: string | undefined = $state();
 
   const changeOngletActif = () => {
     const [onglet, id] = extraisSegmentsDuFragment(window.location.hash);
@@ -34,6 +38,7 @@
   onMount(() => {
     window.addEventListener('hashchange', changeOngletActif);
     changeOngletActif();
+    return () => window.removeEventListener('hashchange', changeOngletActif);
   });
 
   const liens = [
