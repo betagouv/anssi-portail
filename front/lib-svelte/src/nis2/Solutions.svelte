@@ -31,14 +31,14 @@
         '/ressources/panorama',
         '/guides/attaques-par-rancongiciels-tous-concernes',
       ]),
-      ancre: 'solutions&comprendre',
+      ancre: 'solutions/comprendre',
     },
     {
       id: 'se-declarer',
       titre: 'Se déclarer',
       explication: "Vérifiez si votre entité est concernée et procédez à son enregistrement auprès de l'ANSSI.",
       items: versMesItems(['/services/NIS2', '/services/mon-espace-nis2']),
-      ancre: 'solutions&se-declarer',
+      ancre: 'solutions/se-declarer',
     },
     {
       id: 'reduire-risques',
@@ -53,7 +53,7 @@
         '/guides/la-cybersecurite-pour-les-tpepme-en-treize-questions',
         '/guides/la-methode-ebios-risk-manager-le-guide',
       ]),
-      ancre: 'solutions&reduire-risques',
+      ancre: 'solutions/reduire-risques',
     },
     {
       id: 'se-preparer',
@@ -63,7 +63,7 @@
         '/guides/organiser-un-exercice-de-gestion-de-crise-cyber',
         '/guides/la-supervision-de-securite-les-cles-de-decision',
       ]),
-      ancre: 'solutions&se-preparer',
+      ancre: 'solutions/se-preparer',
     },
     {
       id: 'reagir-incident',
@@ -74,7 +74,7 @@
         '/guides/cyberattaques-et-remediation-les-cles-de-decision',
         '/guides/anticiper-et-gerer-sa-communication-de-crise-cyber',
       ]),
-      ancre: 'solutions&reagir-incident',
+      ancre: 'solutions/reagir-incident',
     },
   ]);
 </script>
