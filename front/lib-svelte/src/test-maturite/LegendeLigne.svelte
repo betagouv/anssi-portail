@@ -1,16 +1,16 @@
 <script lang="ts">
-  export let index: number;
-  export let actif = false;
-  export let libelle: string;
-  export let valeur: number | undefined;
-  export let pourcentage: number | undefined;
-  export let affichePourcentages = true;
-
-  let pourcentageLisible: string;
-
-  $: {
-    pourcentageLisible = pourcentage ? `${Math.round(pourcentage)}%` : '';
+  interface Props {
+    index: number;
+    actif?: boolean;
+    libelle: string;
+    valeur?: number;
+    pourcentage?: number;
+    affichePourcentages?: boolean;
   }
+
+  let { index, actif = false, libelle, valeur, pourcentage, affichePourcentages = true }: Props = $props();
+
+  const pourcentageLisible = $derived(pourcentage ? `${Math.round(pourcentage)}%` : '');
 </script>
 
 <div class="ligne-legende ligne-legende-{index}" class:actif class:avec-valeur={valeur || pourcentage}>
