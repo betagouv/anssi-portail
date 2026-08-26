@@ -12,17 +12,17 @@
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
   import ContenuFavoris from './ContenuFavoris.svelte';
 
-  let prenom: string = '';
-  let itemsCyberPartages: (ItemCyber | Guide)[] = [];
+  let prenom = $state('');
+  let itemsCyberPartages: (ItemCyber | Guide)[] = $state([]);
 
   type FavorisPartagesAPI = {
     prenom: string;
     favorisPartages: string[];
   };
 
-  let urlDemandee = new URL(window.location.href).pathname;
+  const urlDemandee = new URL(window.location.href).pathname;
 
-  $: estConnecte = !!$profilStore;
+  let estConnecte = $derived(!!$profilStore);
 
   onMount(async () => {
     try {
