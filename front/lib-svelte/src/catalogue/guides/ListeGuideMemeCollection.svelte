@@ -6,9 +6,14 @@
   import { guidePourCarteItem } from './guide';
   import SqueletteCarteGuide from './SqueletteCarteGuide.svelte';
 
-  export let guide: Guide;
-  let chargement = false;
-  let guideDeMemesCollections: Guide[] = [];
+  interface Props {
+    guide: Guide;
+  }
+
+  let { guide }: Props = $props();
+
+  let chargement = $state(false);
+  let guideDeMemesCollections: Guide[] = $state([]);
   onMount(async () => {
     try {
       chargement = true;
