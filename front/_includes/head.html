@@ -12,32 +12,7 @@
 
   <title>{{page.titreHtml}}</title>
   {% include donnees-structurees-indexation.html %}
-  {% assign urlSansSlashFinal = page.url | default: '' | strip %}
-  {% if urlSansSlashFinal != '' and urlSansSlashFinal != '/' %}
-    {% assign last_char = urlSansSlashFinal | slice: -1 %}
-    {% if last_char == '/' %}
-      {% assign new_length = urlSansSlashFinal | size | minus: 1 %}
-      {% assign urlSansSlashFinal = urlSansSlashFinal | slice: 0, new_length %}
-    {% endif %}
-  {% endif %}
-  <link rel="canonical" href="{{ site.url }}{{ urlSansSlashFinal }}" />
-  {% assign metaDescription = site.data.meta-description[page.url] | escape %}
-  <meta name="description" content="{{ metaDescription }}">
-  {% if page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
-
-  {% assign ogImage = page.og_image | default: '/assets/images/logo-anssi.svg' %}
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="fr_FR">
-  <meta property="og:site_name" content="MesServicesCyber">
-  <meta property="og:title" content="{{ page.titreHtml }}">
-  <meta property="og:description" content="{{ metaDescription }}">
-  <meta property="og:url" content="{{ site.url }}{{ urlSansSlashFinal }}">
-  <meta property="og:image" content="{{ site.url }}{{ ogImage }}">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ page.titreHtml }}">
-  <meta name="twitter:description" content="{{ metaDescription }}">
-  <meta name="twitter:image" content="{{ site.url }}{{ ogImage }}">
+  {% include balises-meta-seo.html %}
 
   <meta property="csp-nonce" content="%%NONCE%%">
 
