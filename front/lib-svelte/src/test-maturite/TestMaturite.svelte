@@ -16,20 +16,20 @@
   import { questionnaireStore, resultatsQuestionnaire } from './stores/questionnaire.store';
   import { etapesTestMaturite } from './TestMaturite.donnees';
 
-  let afficheResultats = false;
-  let introFaite = false;
+  let afficheResultats = $state(false);
+  let introFaite = $state(false);
 
-  let secteur: string;
-  let region: string;
-  let tailleOrganisation: string;
+  let secteur = $state('');
+  let region = $state('');
+  let tailleOrganisation = $state('');
 
   questionnaireStore.initialise();
 
-  let reponseCourante: number;
-  let codeSessionGroupe: string | undefined;
-  let organisateurSession = false;
+  let reponseCourante: number | null = $state(null);
+  let codeSessionGroupe: string | undefined = $state();
+  let organisateurSession = $state(false);
 
-  let contenuTest: HTMLElement;
+  let contenuTest: HTMLElement | undefined = $state();
 
   actualiseReponseCourante();
 
@@ -39,6 +39,7 @@
   }
 
   function valideReponse() {
+    if (reponseCourante === null) return;
     questionnaireStore.reponds(reponseCourante);
     actualiseReponseCourante();
   }
@@ -50,7 +51,7 @@
 
   const lisIdQuestionCourante = (q: number) => etapesTestMaturite[q].id;
 
-  $: idQuestionCourante = lisIdQuestionCourante($questionnaireStore.questionCourante);
+  const idQuestionCourante = $derived(lisIdQuestionCourante($questionnaireStore.questionCourante));
 
   type CreationTest = {
     id: string;
@@ -80,11 +81,10 @@
     window.location.href = `/resultats-session-groupe?code=${codeSessionGroupe}`;
   }
 
-  let montreProposition = false;
-  $: {
+  const montreProposition = $derived.by(() => {
     const avecPropositions = etapesTestMaturite.filter((q) => q.propositions.length > 0);
-    montreProposition = $questionnaireStore.questionCourante < avecPropositions.length;
-  }
+    return $questionnaireStore.questionCourante < avecPropositions.length;
+  });
 
   onMount(async () => {
     const parametres = new URLSearchParams(window.location.search);
@@ -101,12 +101,13 @@
     organisateurSession = parametres.has('organisateur');
   });
 
-  $: enSessionGroupe = !!codeSessionGroupe;
-  $: organisateurSessionGroupe = enSessionGroupe && organisateurSession;
-  $: moyenne =
+  const enSessionGroupe = $derived(!!codeSessionGroupe);
+  const organisateurSessionGroupe = $derived(enSessionGroupe && organisateurSession);
+  const moyenne = $derived(
     $questionnaireStore.toutesLesReponses.reduce((accumulateur, réponse) => accumulateur + réponse, 0) /
-    $questionnaireStore.toutesLesReponses.length;
-  $: idNiveau = calculeIdNiveau(moyenne);
+      $questionnaireStore.toutesLesReponses.length
+  );
+  const idNiveau = $derived(calculeIdNiveau(moyenne));
 </script>
 
 {#if afficheResultats}
