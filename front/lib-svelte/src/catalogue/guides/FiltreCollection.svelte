@@ -5,23 +5,27 @@
   import { rechercheParCollection } from '../stores/guides/rechercheParCollection.store';
   import ChoixFiltreCollection from './ChoixFiltreCollection.svelte';
 
-  $: toutesLesExpertisesTechniques =
+  let toutesLesExpertisesTechniques = $derived(
     $rechercheParCollection.includes(CollectionGuide.LES_ESSENTIELS) &&
-    $rechercheParCollection.includes(CollectionGuide.LES_FONDAMENTAUX) &&
-    $rechercheParCollection.includes(CollectionGuide.IA) &&
-    $rechercheParCollection.includes(CollectionGuide.SYSTEMES_INDUSTRIELS) &&
-    $rechercheParCollection.includes(CollectionGuide.CRYPTOGRAPHIE) &&
-    $rechercheParCollection.includes(CollectionGuide.AUTRE);
+      $rechercheParCollection.includes(CollectionGuide.LES_FONDAMENTAUX) &&
+      $rechercheParCollection.includes(CollectionGuide.IA) &&
+      $rechercheParCollection.includes(CollectionGuide.SYSTEMES_INDUSTRIELS) &&
+      $rechercheParCollection.includes(CollectionGuide.CRYPTOGRAPHIE) &&
+      $rechercheParCollection.includes(CollectionGuide.AUTRE)
+  );
 
-  $: quelquesExpertisesTechniques =
+  let quelquesExpertisesTechniques = $derived(
     $rechercheParCollection.includes(CollectionGuide.LES_ESSENTIELS) ||
-    $rechercheParCollection.includes(CollectionGuide.LES_FONDAMENTAUX) ||
-    $rechercheParCollection.includes(CollectionGuide.IA) ||
-    $rechercheParCollection.includes(CollectionGuide.SYSTEMES_INDUSTRIELS) ||
-    $rechercheParCollection.includes(CollectionGuide.CRYPTOGRAPHIE) ||
-    $rechercheParCollection.includes(CollectionGuide.AUTRE);
+      $rechercheParCollection.includes(CollectionGuide.LES_FONDAMENTAUX) ||
+      $rechercheParCollection.includes(CollectionGuide.IA) ||
+      $rechercheParCollection.includes(CollectionGuide.SYSTEMES_INDUSTRIELS) ||
+      $rechercheParCollection.includes(CollectionGuide.CRYPTOGRAPHIE) ||
+      $rechercheParCollection.includes(CollectionGuide.AUTRE)
+  );
 
-  $: unePartieSeulementDesExpertisesTechniques = !toutesLesExpertisesTechniques && quelquesExpertisesTechniques;
+  let unePartieSeulementDesExpertisesTechniques = $derived(
+    !toutesLesExpertisesTechniques && quelquesExpertisesTechniques
+  );
 
   const gereCocheExpertiseTechnique = () => {
     if (toutesLesExpertisesTechniques) {
