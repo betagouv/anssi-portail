@@ -1,8 +1,11 @@
 <script lang="ts">
-  export let recherche: string;
-  let requete: string;
+  interface Props {
+    recherche: string;
+  }
 
-  $: requete = recherche;
+  let { recherche = $bindable() }: Props = $props();
+
+  const requete = $derived(recherche);
 
   const valide = (evenement: CustomEvent) => (recherche = evenement.detail);
 </script>
