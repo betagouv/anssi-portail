@@ -14,18 +14,18 @@
   import SelectionDepartement from './SelectionDepartement.svelte';
   import SelectionDomaineSpecialite from './SelectionDomaineSpecialite.svelte';
 
-  let informationsProfessionnelles: InformationsProfessionnelles = {
+  let informationsProfessionnelles: InformationsProfessionnelles = $state({
     prenom: '',
     nom: '',
     email: '',
     organisation: { departement: '', nom: '', siret: '' },
     telephone: '',
     domainesSpecialite: [],
-  };
+  });
   const modeleTelephone = '^0\\d{9}$';
-  let departements: Departement[] = [];
+  let departements: Departement[] = $state([]);
 
-  let token: string | undefined;
+  let token: string | undefined = $state();
   const redirectUrl = sessionStorage.getItem('pagePostConnexion');
   const pageSource = sessionStorage.getItem('pageSource');
   const campagne = sessionStorage.getItem('campagne');
@@ -43,32 +43,32 @@
     departements = reponseDepartements.data;
   });
 
-  let etapeCourante = 1;
+  let etapeCourante = $state(1);
 
-  $: titreEtape = ['Vos informations professionnelles', 'Vos informations complémentaires', 'Vos consentements'][
-    etapeCourante - 1
-  ];
+  let titreEtape = $derived(
+    ['Vos informations professionnelles', 'Vos informations complémentaires', 'Vos consentements'][etapeCourante - 1]
+  );
 
-  let formulaireEtape1: Formulaire;
-  let formulaireEtape2: Formulaire;
-  let formulaireEtape3: Formulaire;
+  let formulaireEtape1: Formulaire | undefined = $state();
+  let formulaireEtape2: Formulaire | undefined = $state();
+  let formulaireEtape3: Formulaire | undefined = $state();
 
-  $: tousFormulaires = [formulaireEtape1, formulaireEtape2, formulaireEtape3];
-  $: formulaireCourant = tousFormulaires[etapeCourante - 1];
+  let tousFormulaires = $derived([formulaireEtape1, formulaireEtape2, formulaireEtape3]);
+  let formulaireCourant = $derived(tousFormulaires[etapeCourante - 1]);
 
   const etapePrecedente = () => {
     if (etapeCourante > 1) etapeCourante--;
   };
   const etapeSuivante = () => {
-    if (formulaireCourant.estValide() && etapeCourante < 3) {
+    if (formulaireCourant?.estValide() && etapeCourante < 3) {
       etapeCourante++;
     }
   };
 
-  let enCoursEnvoi = false;
+  let enCoursEnvoi = $state(false);
 
   const valide = async () => {
-    if (formulaireCourant.estValide()) {
+    if (formulaireCourant?.estValide()) {
       try {
         enCoursEnvoi = true;
         await axios.post(
@@ -86,28 +86,28 @@
     }
   };
 
-  let domainesSpecialite = informationsProfessionnelles.domainesSpecialite || [];
-  let formulaireInscription: FormulaireInscription;
-  $: formulaireInscription = {
+  let domainesSpecialite: string[] = $state([]);
+  let formulaireInscription: FormulaireInscription = $derived({
     siretEntite: informationsProfessionnelles.organisation?.siret,
     telephone: informationsProfessionnelles.telephone,
     domainesSpecialite,
     cguAcceptees: false,
     infolettreAcceptee: false,
     pixelDeSuiviAccepté: false,
-  };
+  });
 
-  let departement: Departement;
-  let organisation: Organisation;
-  $: {
+  let departement: Departement | undefined = $state();
+  let organisation: Organisation | undefined = $state();
+
+  $effect(() => {
     formulaireInscription.siretEntite = informationsProfessionnelles.organisation?.siret || organisation?.siret;
-  }
+  });
 
-  let elementSelectionDepartement: SelectionDepartement;
+  let elementSelectionDepartement: SelectionDepartement | undefined = $state();
   const modifieDepartementApresChoixOrganisation = (e: CustomEvent<Organisation>) => {
     const d = departements.find((d) => d.code === e.detail.departement);
     if (d) {
-      elementSelectionDepartement.choisisDepartement(d);
+      elementSelectionDepartement?.choisisDepartement(d);
     }
   };
 </script>
