@@ -22,11 +22,11 @@
     return niveauxMaturite.find((niveau) => niveau.id === idNiveau)!.label;
   };
 
-  let niveauCourant: IdNiveau | undefined;
-  let infosOrganisation: InfosOrganisation;
-  let libelleNiveauCourant: string | undefined;
-  let serie: Serie = [];
-  let seriesRadar: SerieRadar[] = [];
+  let niveauCourant: IdNiveau | undefined = $state();
+  let infosOrganisation: InfosOrganisation | undefined = $state();
+  let libelleNiveauCourant: string | undefined = $state();
+  let serie: Serie = $state([]);
+  let seriesRadar: SerieRadar[] = $state([]);
 
   async function chargeDernierResultat() {
     const reponse = await axios.get<DernierResultatTest>('/api/resultats-test/dernier');
@@ -36,6 +36,8 @@
   }
 
   async function chargeRepartitionsDesResultats() {
+    if (!infosOrganisation) return;
+
     const parametres = new URLSearchParams({
       secteur: filtre.secteur ? infosOrganisation.secteur?.code || '' : '',
       tailleOrganisation: filtre.taille ? infosOrganisation.trancheEffectif?.code || '' : '',
@@ -69,11 +71,11 @@
     await chargeRepartitionsDesResultats();
   });
 
-  let filtre: Record<'secteur' | 'taille' | 'region', boolean> = {
+  let filtre: Record<'secteur' | 'taille' | 'region', boolean> = $state({
     secteur: false,
     taille: false,
     region: false,
-  };
+  });
 
   const reinitialiseLesFiltres = async () => {
     filtre = {
@@ -107,8 +109,8 @@
             label={infosOrganisation.secteur.libelle}
             type="pressable"
             pressed={filtre.secteur}
-            on:selected={() => basculeLeFiltre('secteur')}
-            on:unselected={() => basculeLeFiltre('secteur')}
+            onselected={() => basculeLeFiltre('secteur')}
+            onunselected={() => basculeLeFiltre('secteur')}
           ></dsfr-tag>
         {/if}
         {#if infosOrganisation.trancheEffectif}
@@ -116,8 +118,8 @@
             label={infosOrganisation.trancheEffectif.libelle}
             type="pressable"
             pressed={filtre.taille}
-            on:selected={() => basculeLeFiltre('taille')}
-            on:unselected={() => basculeLeFiltre('taille')}
+            onselected={() => basculeLeFiltre('taille')}
+            onunselected={() => basculeLeFiltre('taille')}
           ></dsfr-tag>
         {/if}
         {#if infosOrganisation.region}
@@ -125,8 +127,8 @@
             label={infosOrganisation.region.libelle}
             type="pressable"
             pressed={filtre.region}
-            on:selected={() => basculeLeFiltre('region')}
-            on:unselected={() => basculeLeFiltre('region')}
+            onselected={() => basculeLeFiltre('region')}
+            onunselected={() => basculeLeFiltre('region')}
           ></dsfr-tag>
         {/if}
       </div>
