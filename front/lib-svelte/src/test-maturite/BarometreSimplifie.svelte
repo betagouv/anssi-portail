@@ -6,7 +6,7 @@
   import { pourcentagesSerie, type Serie } from './Serie';
   import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
 
-  let serie: Serie = [];
+  let serie: Serie = $state([]);
 
   onMount(async () => {
     const reponse: Statistiques = await récupèreStatistiquesMSC();
@@ -18,10 +18,7 @@
     }
     serie = serieConstruite;
   });
-  let pourcentages: number[] = [];
-  $: {
-    pourcentages = pourcentagesSerie(serie);
-  }
+  const pourcentages = $derived(pourcentagesSerie(serie));
 </script>
 
 <div class="barometre-simplifie">
