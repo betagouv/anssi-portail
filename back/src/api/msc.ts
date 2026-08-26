@@ -394,6 +394,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
         attributionParcoursMesure,
       ])
     );
+    enregistreRoute(
+      `/partage-badge-cyberdepart`,
+      ressourcePagesJekyll(configurationServeur, 'partage-badge-cyberdepart')
+    );
   }
 
   enregistreRoute('/robots.txt', ressourceRobotsTxt(configurationServeur));
