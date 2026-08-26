@@ -43,14 +43,14 @@
     }
   });
 
-  const soumetsFormulaire = async (e: CustomEvent<DonneesFormulaireDemandeAide>) => {
+  const soumetsFormulaire = async (donnees: DonneesFormulaireDemandeAide) => {
     formulaireSoumis = true;
     if (!formulaireDemandeAide?.estValide()) return;
 
     try {
       enCoursEnvoi = true;
 
-      const { email, cguSontValidees, emailUtilisateurMAC, entite, identifiantAidant } = e.detail;
+      const { email, cguSontValidees, emailUtilisateurMAC, entite, identifiantAidant } = donnees;
       const corps: CorpsAPIDemandeAide = {
         ...(origine && { origine }),
         entiteAidee: {
@@ -101,7 +101,7 @@
     {#if !enSucces}
       <FormulaireDemandeAide
         bind:this={formulaireDemandeAide}
-        on:formulaireSoumis={soumetsFormulaire}
+        surFormulaireSoumis={soumetsFormulaire}
         {formulaireSoumis}
         {enCoursEnvoi}
         {erreurs}
