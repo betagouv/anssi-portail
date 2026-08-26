@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script module lang="ts">
   import type { IdNiveau } from '../niveaux-maturite/NiveauxMaturite.type';
   import type { RéponsesResultatTest } from './ResultatsTest.type';
 
@@ -13,15 +13,21 @@
 <script lang="ts">
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
 
-  export let résultatTest: RésultatTest;
+  interface Props {
+    résultatTest: Omit<RésultatTest, 'reponses'>;
+  }
 
-  $: niveau = niveauxMaturite.find((niveau) => niveau.id === résultatTest.niveau);
+  let { résultatTest }: Props = $props();
 
-  $: description = niveau?.description;
-  $: libelleNiveau = niveau?.label;
-  $: dateFormatee = new Intl.DateTimeFormat('fr-FR', {
-    dateStyle: 'long',
-  }).format(new Date(résultatTest.dateRealisation));
+  const niveau = $derived(niveauxMaturite.find((niveau) => niveau.id === résultatTest.niveau));
+
+  const description = $derived(niveau?.description);
+  const libelleNiveau = $derived(niveau?.label);
+  const dateFormatee = $derived(
+    new Intl.DateTimeFormat('fr-FR', {
+      dateStyle: 'long',
+    }).format(new Date(résultatTest.dateRealisation))
+  );
 </script>
 
 <a href="#historique/{résultatTest.id}" class="carte">
