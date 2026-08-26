@@ -2,6 +2,7 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
   import { fade, fly } from 'svelte/transition';
+  import { clic } from '../directives/actions.svelte';
   import Bouton from '../ui/Bouton.svelte';
   import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
@@ -9,22 +10,22 @@
   import ZoneTexte from '../ui/ZoneTexte.svelte';
   import { entrepotNavigateurAvisUtilisateur } from './ControleAvisUtilisateur';
 
-  let encartOuvert = false;
-  let dialogue: HTMLDialogElement;
-  let afficheDialogue: boolean = false;
-  let etape: 'formulaire' | 'merci' = 'formulaire';
+  let encartOuvert = $state(false);
+  let dialogue: HTMLDialogElement | undefined = $state();
+  let afficheDialogue: boolean = $state(false);
+  let etape: 'formulaire' | 'merci' = $state('formulaire');
 
   type SatisfactionDisponible = '1' | '2' | '3' | '4' | '5';
-  let satisfaction: SatisfactionDisponible | undefined;
-  let erreurSatisfaction = false;
-  let commentaire: string | undefined;
-  let erreurCommentaire = false;
-  let emailDeContact: string | undefined;
+  let satisfaction: SatisfactionDisponible | undefined = $state();
+  let erreurSatisfaction = $state(false);
+  let commentaire: string | undefined = $state();
+  let erreurCommentaire = $state(false);
+  let emailDeContact: string | undefined = $state();
 
-  $: {
+  $effect(() => {
     if (satisfaction) erreurSatisfaction = false;
     if (commentaire) erreurCommentaire = false;
-  }
+  });
 
   const surCliqueCTA = () => {
     encartOuvert = false;
@@ -58,7 +59,7 @@
   onMount(() => {
     encartOuvert = !RegExp(/(\/?)(cyberdepart|test-maturite)(\/?)$/).exec(window.location.pathname);
   });
-  $: {
+  $effect(() => {
     if (dialogue) {
       if (afficheDialogue) {
         dialogue.showModal();
@@ -67,18 +68,18 @@
         dialogue.close();
       }
     }
-  }
+  });
 </script>
 
 {#if encartOuvert}
   <div class="avis-utilisateur-cta" transition:fly={{ duration: 1000, x: 140, opacity: 1 }}>
-    <button class="zone-cliquable" on:click={surCliqueCTA} on:keypress tabindex={null}>
+    <button class="zone-cliquable" use:clic={surCliqueCTA} tabindex={null}>
       <div class="illustration">
         <img src="/assets/images/dragon-coeur.svg" width="98" height="113" alt="Dragon coeur" />
       </div>
       <p class="texte">Votre avis<br /> nous intéresse&nbsp;!</p>
     </button>
-    <button on:keypress on:click={surFermetureCTA} tabindex={null} aria-label="Fermer" class="fermer">
+    <button use:clic={surFermetureCTA} tabindex={null} aria-label="Fermer" class="fermer">
       <lab-anssi-icone nom="close-line" taille="sm"></lab-anssi-icone>
     </button>
   </div>
@@ -86,14 +87,14 @@
 {#if afficheDialogue}
   <dialog
     class="dialogue-avis-utilisateur"
-    on:close={() => (afficheDialogue = false)}
+    onclose={() => (afficheDialogue = false)}
     bind:this={dialogue}
     transition:fade={{ duration: 500 }}
   >
     {#if etape === 'formulaire'}
       <Formulaire on:formulaireValide={soumetsLeFormulaire}>
         <div class="contenu">
-          <BoutonFermerModale on:click={() => dialogue.close()} />
+          <BoutonFermerModale on:click={() => dialogue?.close()} />
           <h4>Votre avis nous intéresse&nbsp;!</h4>
           {#if erreurSatisfaction || erreurCommentaire}
             <lab-anssi-alerte
@@ -157,12 +158,12 @@
         </div>
         <footer class="actions">
           <Bouton libelle="Envoyer" type="primaire" taille="md" boutonSoumission={true} />
-          <Bouton type="secondaire" libelle="Fermer sans répondre" surClic={() => dialogue.close()} />
+          <Bouton type="secondaire" libelle="Fermer sans répondre" surClic={() => dialogue?.close()} />
         </footer>
       </Formulaire>
     {:else}
       <div class="contenu">
-        <BoutonFermerModale on:click={() => dialogue.close()} />
+        <BoutonFermerModale on:click={() => dialogue?.close()} />
         <h4>Merci 🤩&nbsp;! Vos remarques sont précieuses pour faire évoluer le service.</h4>
         <p>
           Si vous avez renseigné votre adresse email, nous vous recontacterons très prochainement pour échanger sur la
@@ -170,7 +171,7 @@
         </p>
       </div>
       <footer class="actions">
-        <Bouton libelle="Terminer" type="tertiaire-sans-bordure" taille="md" surClic={() => dialogue.close()} />
+        <Bouton libelle="Terminer" type="tertiaire-sans-bordure" taille="md" surClic={() => dialogue?.close()} />
       </footer>
     {/if}
   </dialog>
