@@ -1,28 +1,38 @@
 <script lang="ts">
-  import { afterUpdate } from 'svelte';
+  import { onMount } from 'svelte';
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import type { NiveauMaturite } from '../niveaux-maturite/NiveauxMaturite.type';
 
-  export let niveauCourant: NiveauMaturite;
-  export let animeTuiles = true;
-  export let defilementAutomatique = true;
-
-  $: indexNiveauCourant = niveauxMaturite.indexOf(niveauCourant);
-
-  const scrolleVersTuileCourante = () => {
-    let elementCourant: HTMLDivElement | null = document.querySelector('.tuile-niveau.courant');
-    elementCourant!.scrollIntoView({ block: 'center' });
-  };
-
-  const estPetitEcran = window.matchMedia('(max-width: 576px)').matches;
-  const animation = !estPetitEcran && animeTuiles;
-
-  if (defilementAutomatique) {
-    afterUpdate(scrolleVersTuileCourante);
+  interface Props {
+    niveauCourant: NiveauMaturite;
+    animeTuiles?: boolean;
+    defilementAutomatique?: boolean;
   }
+
+  let { niveauCourant, animeTuiles = true, defilementAutomatique = true }: Props = $props();
+  let conteneur: HTMLDivElement | undefined = $state();
+  let estPetitEcran = $state(false);
+
+  const indexNiveauCourant = $derived(niveauxMaturite.indexOf(niveauCourant));
+  const animation = $derived(!estPetitEcran && animeTuiles);
+
+  onMount(() => {
+    const mediaQuery = window.matchMedia('(max-width: 576px)');
+    const actualiseTailleEcran = () => (estPetitEcran = mediaQuery.matches);
+    actualiseTailleEcran();
+    mediaQuery.addEventListener('change', actualiseTailleEcran);
+    return () => mediaQuery.removeEventListener('change', actualiseTailleEcran);
+  });
+
+  $effect(() => {
+    if (!defilementAutomatique) return;
+    conteneur
+      ?.querySelectorAll<HTMLDivElement>('.tuile-niveau')
+      [indexNiveauCourant]?.scrollIntoView({ block: 'center' });
+  });
 </script>
 
-<div class="tuiles-niveau" class:avec-animation={animation}>
+<div class="tuiles-niveau" class:avec-animation={animation} bind:this={conteneur}>
   {#each niveauxMaturite as niveau, index (index)}
     <div
       class="tuile-niveau"
