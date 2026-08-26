@@ -94,7 +94,7 @@
     {#if etape === 'formulaire'}
       <Formulaire on:formulaireValide={soumetsLeFormulaire}>
         <div class="contenu">
-          <BoutonFermerModale on:click={() => dialogue?.close()} />
+          <BoutonFermerModale surClic={() => dialogue?.close()} />
           <h4>Votre avis nous intéresse&nbsp;!</h4>
           {#if erreurSatisfaction || erreurCommentaire}
             <lab-anssi-alerte
@@ -163,7 +163,7 @@
       </Formulaire>
     {:else}
       <div class="contenu">
-        <BoutonFermerModale on:click={() => dialogue?.close()} />
+        <BoutonFermerModale surClic={() => dialogue?.close()} />
         <h4>Merci 🤩&nbsp;! Vos remarques sont précieuses pour faire évoluer le service.</h4>
         <p>
           Si vous avez renseigné votre adresse email, nous vous recontacterons très prochainement pour échanger sur la
