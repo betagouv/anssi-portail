@@ -1,11 +1,16 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
   import { arrondisAuCentieme } from '../utils/arrondis';
   import type { SerieRadar } from './Serie';
   import { rubriques } from './TestMaturite.donnees';
 
-  export let series: SerieRadar[];
-  export let affichageReduit: boolean = false;
+  interface Props {
+    series: SerieRadar[];
+    affichageReduit?: boolean;
+  }
+
+  let { series, affichageReduit = false }: Props = $props();
 
   const tailleRadar = 200;
   const polaireVersCartesien = (r: number, theta: number) => ({
@@ -29,24 +34,28 @@
 
   const libelleSerie = (serie: SerieRadar) => niveauxMaturite.find((niveau) => niveau.id === serie.id)?.label;
 
-  let coefDistanceLibelle: number = 1.1;
-  let viewBox: string;
-  let estPetitEcran: boolean = false;
+  let coefDistanceLibelle = $state(1.1);
+  let viewBox = $state('-600 -225 1200 450');
+  let estPetitEcran = $state(false);
 
-  function modifieViewBox() {
-    estPetitEcran = window.matchMedia('(max-width: 576px)').matches;
+  onMount(() => {
+    const mediaQuery = window.matchMedia('(max-width: 576px)');
+    const modifieViewBox = () => {
+      estPetitEcran = mediaQuery.matches;
 
-    if (estPetitEcran) {
-      viewBox = '-220 -220 440 440';
-      coefDistanceLibelle = 1.03;
-    } else {
-      viewBox = '-600 -225 1200 450';
-      coefDistanceLibelle = 1.1;
-    }
-  }
-  modifieViewBox();
+      if (estPetitEcran) {
+        viewBox = '-220 -220 440 440';
+        coefDistanceLibelle = 1.03;
+      } else {
+        viewBox = '-600 -225 1200 450';
+        coefDistanceLibelle = 1.1;
+      }
+    };
 
-  window.matchMedia('(max-width: 576px)').addEventListener('change', modifieViewBox);
+    modifieViewBox();
+    mediaQuery.addEventListener('change', modifieViewBox);
+    return () => mediaQuery.removeEventListener('change', modifieViewBox);
+  });
 </script>
 
 <div class="radar">
