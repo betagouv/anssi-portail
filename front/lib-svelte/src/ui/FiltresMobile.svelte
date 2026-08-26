@@ -1,17 +1,21 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, type Snippet } from 'svelte';
   import EnteteFiltres from '../catalogue/EnteteFiltres.svelte';
 
-  export let filtreActif: boolean;
+  interface Props {
+    filtreActif: boolean;
+    children?: Snippet;
+  }
 
-  let estBureau = false;
+  let { filtreActif, children }: Props = $props();
+  let estBureau = $state(false);
 
-  onMount(async () => {
+  onMount(() => {
     const mql = window.matchMedia('(min-width: 992px)');
-    mql.addEventListener('change', (e: MediaQueryListEvent) => {
-      estBureau = e.matches;
-    });
+    const actualiseAffichage = (e: MediaQueryListEvent) => (estBureau = e.matches);
+    mql.addEventListener('change', actualiseAffichage);
     estBureau = mql.matches;
+    return () => mql.removeEventListener('change', actualiseAffichage);
   });
 </script>
 
@@ -22,7 +26,7 @@
         <EnteteFiltres {filtreActif} />
       </summary>
       <div class="barre-filtres">
-        <slot />
+        {@render children?.()}
       </div>
     </details>
   </div>
