@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script module lang="ts">
   export type Etat = 'ok' | 'ko';
   type TailleImage = '588' | 'origine';
   export type SanteGuide = {
@@ -17,9 +17,9 @@
   import { onMount } from 'svelte';
   import TableSanteGuides from './TableSanteGuides.svelte';
 
-  let guidesAvecDocumentsManquants: SanteGuide[] = [];
+  let guidesAvecDocumentsManquants: SanteGuide[] = $state([]);
 
-  let guidesOk: SanteGuide[] = [];
+  let guidesOk: SanteGuide[] = $state([]);
 
   onMount(async () => {
     const reponse = await axios.get<SanteGuides>('/api/sante-guides');
