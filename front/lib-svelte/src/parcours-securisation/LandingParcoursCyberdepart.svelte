@@ -9,6 +9,9 @@
   import IllustrationMesure from './animation/IllustrationMesure.svelte';
   import IllustrationPedagogique from './animation/IllustrationPedagogique.svelte';
   import IllustrationTuto from './animation/IllustrationTuto.svelte';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
+
+  let statistiques: Statistiques | undefined = $state();
 
   type Contenu = {
     titre: string;
@@ -44,9 +47,10 @@
   let pageSourceHero = $state('');
   let pageSourceCTACentral = $state('');
 
-  onMount(() => {
+  onMount(async () => {
     pageSourceHero = `${window.location.pathname}-hero`;
     pageSourceCTACentral = `${window.location.pathname}-cta-central`;
+    statistiques = await récupèreStatistiquesMSC();
   });
 </script>
 
@@ -54,7 +58,7 @@
   <HeroLandingPage
     description="12 mesures pensées pour les non-spécialistes, applicables en quelques minutes pour commencer à renforcer votre cybersécurité et prendre votre Cyberdépart&nbsp;!"
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
-    tag="+6000 organisations déjà accompagnées 🚀"
+    tag={`+${statistiques?.diagnosticsCyberArrondis ?? 0} organisations déjà accompagnées 🚀`}
     class="hero-landing-page"
   >
     {#snippet titreHtml()}

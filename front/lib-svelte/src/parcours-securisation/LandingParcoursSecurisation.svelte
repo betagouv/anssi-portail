@@ -9,6 +9,9 @@
   import Bouton from '../ui/Bouton.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
   import { onMount } from 'svelte';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
+
+  let statistiques: Statistiques | undefined = $state();
 
   const tagsParcoursBasique = [
     {
@@ -55,8 +58,9 @@
 
   let pageSource = $state('');
 
-  onMount(() => {
+  onMount(async () => {
     pageSource = `${window.location.pathname}-hero`;
+    statistiques = await récupèreStatistiquesMSC();
   });
 </script>
 
@@ -64,7 +68,7 @@
   <HeroLandingPage
     description="Rejoignez notre programme d'accompagnement gratuit."
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
-    tag="+6000 organisations déjà accompagnées 🚀"
+    tag={`+${statistiques?.diagnosticsCyberArrondis ?? 0} organisations déjà accompagnées 🚀`}
     class="hero-landing-page"
   >
     {#snippet titreHtml()}

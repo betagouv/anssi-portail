@@ -9,6 +9,9 @@
   import IllustrationProgression from './animation/IllustrationProgression.svelte';
   import IllustrationRecyf from './animation/IllustrationRecyf.svelte';
   import { onMount } from 'svelte';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
+
+  let statistiques: Statistiques | undefined = $state();
 
   type Contenu = {
     titre: string;
@@ -45,9 +48,10 @@
   let pageSourceHero = $state('');
   let pageSourceCTACentral = $state('');
 
-  onMount(() => {
+  onMount(async () => {
     pageSourceHero = `${window.location.pathname}-hero`;
     pageSourceCTACentral = `${window.location.pathname}-cta-central`;
+    statistiques = await récupèreStatistiquesMSC();
   });
 </script>
 
@@ -55,7 +59,7 @@
   <HeroLandingPage
     description="Accédez à 6 modules élaborés pour protéger votre organisation contre les risques cyber les plus courants et faciliter votre démarche de mise en conformité NIS&nbsp;2 si vous êtes concerné."
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
-    tag="+6000 organisations déjà accompagnées 🚀"
+    tag={`+${statistiques?.diagnosticsCyberArrondis ?? 0} organisations déjà accompagnées 🚀`}
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
