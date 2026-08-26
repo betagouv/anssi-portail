@@ -3,22 +3,33 @@
   import FoireAuxQuestions from './FoireAuxQuestions.svelte';
   import FormulaireDemandeSimplifiee from './FormulaireDemandeSimplifiee.svelte';
 
-  export let titre: string = 'Protégez rapidement votre organisation des cyberattaques';
-  export let description: string =
-    'Profitez d’un premier diagnostic cyber gratuit accompagné par un Aidant cyber et recevez 6 recommandations prioritaires à mettre en place pour améliorer la cybersécurité de votre organisation.';
-  export let mode: 'autonome' | undefined = undefined;
-  export let origine: string;
-  export let urlBase: string = '';
-  export let cacheLesLiensDeRetour = false;
-  export let siretAidant: string | undefined = undefined;
+  interface Props {
+    titre?: string;
+    description?: string;
+    mode?: 'autonome';
+    origine: string;
+    urlBase?: string;
+    cacheLesLiensDeRetour?: boolean;
+    siretAidant?: string;
+  }
 
-  let campagne: string;
+  let {
+    titre = 'Protégez rapidement votre organisation des cyberattaques',
+    description = 'Profitez d’un premier diagnostic cyber gratuit accompagné par un Aidant cyber et recevez 6 recommandations prioritaires à mettre en place pour améliorer la cybersécurité de votre organisation.',
+    mode = undefined,
+    origine,
+    urlBase = '',
+    cacheLesLiensDeRetour = false,
+    siretAidant = undefined,
+  }: Props = $props();
+
+  let campagne = $state('');
   onMount(() => {
     const parametres = new URLSearchParams(window.location.search);
     campagne = parametres.get('mtm_campaign') ?? '';
   });
 
-  $: origineComplète = campagne ? `${origine};${campagne}` : origine;
+  let origineComplète = $derived(campagne ? `${origine};${campagne}` : origine);
 </script>
 
 <div class="demande-diagnostic" class:autonome={mode === 'autonome'}>
