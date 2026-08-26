@@ -25,29 +25,38 @@
     resume: Record<IdNiveau, ResumeNiveau>;
   };
 
-  let serie: Serie;
-  let resultatsSessionGroupe: ResultatsSessionGroupe;
+  let serie: Serie = $state([]);
+  let resultatsSessionGroupe: ResultatsSessionGroupe | undefined = $state();
 
-  let seriesRadar: SerieRadar[];
+  let seriesRadar: SerieRadar[] = $state([]);
 
   async function rechargeResultatsGroupe() {
-    let codeSessionGroupe = new URLSearchParams(window.location.search).get('code');
+    const codeSessionGroupe = new URLSearchParams(window.location.search).get('code');
     const reponse = await axios.get<ResultatsSessionGroupe>(`/api/sessions-groupe/${codeSessionGroupe}/resultats`);
-    resultatsSessionGroupe = reponse.data;
+    const nouveauxResultats = reponse.data;
+    resultatsSessionGroupe = nouveauxResultats;
     serie = niveauxMaturite.map((niveau) => ({
       libelle: niveau.label,
-      valeur: resultatsSessionGroupe.resume[niveau.id].total,
+      valeur: nouveauxResultats.resume[niveau.id].total,
     }));
     seriesRadar = niveauxMaturite.map((niveau) => ({
       id: niveau.id,
-      valeurs: resultatsSessionGroupe.resume[niveau.id].moyennes,
+      valeurs: nouveauxResultats.resume[niveau.id].moyennes,
       couleur: couleursDeNiveau[niveau.id],
     }));
   }
 
-  onMount(async () => {
-    await rechargeResultatsGroupe();
-    setInterval(rechargeResultatsGroupe, 5000);
+  onMount(() => {
+    let intervalle: ReturnType<typeof setInterval> | undefined;
+    const démarreActualisation = async () => {
+      await rechargeResultatsGroupe();
+      intervalle = setInterval(rechargeResultatsGroupe, 5000);
+    };
+
+    void démarreActualisation();
+    return () => {
+      if (intervalle) clearInterval(intervalle);
+    };
   });
   const propriétésFilAriane: PropriétésFilAriane = {
     branche: {
