@@ -3,7 +3,11 @@
   import { badgesExigence, type ExigenceCyFun23 } from '../exigence.type';
   import ContenuExigenceFormate from './ContenuExigenceFormate.svelte';
 
-  export let exigence: ExigenceCyFun23;
+  interface Props {
+    exigence: ExigenceCyFun23;
+  }
+
+  let { exigence }: Props = $props();
 </script>
 
 <GroupeDeBadges badges={badgesExigence(exigence)} />
