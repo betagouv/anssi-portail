@@ -1,5 +1,6 @@
 <script lang="ts">
   import { estServeur } from '$plateforme/environnement';
+  import { onMount } from 'svelte';
   import NavigationTertiaire from '../../navigation/NavigationTertiaire.svelte';
   import { type PropriétésFilAriane } from '../../ui/filAriane';
   import HerosRiche from '../../ui/HerosRiche.svelte';
@@ -21,6 +22,18 @@
     },
   ];
   let lienActif = $state('#proteger');
+  onMount(() => {
+    const fragmentActuel = window.location.hash;
+    const fragmentsAvecEsperluette = liens.map((lien) => `${lien.fragment}&`);
+    const fragmentActuelContientEsperluette = fragmentsAvecEsperluette.some((fragment) =>
+      fragmentActuel.startsWith(fragment)
+    );
+    if (fragmentActuelContientEsperluette) {
+      // Le commit fbc0aa3f oblige à séparer les segments du fragment via un /, l'esperluette n'est plus supportée
+      // Redirection nécessaire pour la gestion de potentiels favoris sur l'ancienne structure d'URL
+      window.location.hash = fragmentActuel.replace('&', '/');
+    }
+  });
 
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Protéger ma collectivité', fondSombre: true };
 </script>
