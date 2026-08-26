@@ -1,5 +1,9 @@
 <script lang="ts">
-  export let filtreActif: boolean;
+  interface Props {
+    filtreActif: boolean;
+  }
+
+  let { filtreActif }: Props = $props();
 </script>
 
 <div class="entete-filtres">
