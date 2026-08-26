@@ -3,8 +3,12 @@
   import type { ItemCyber } from './Catalogue.types';
   import type { Guide } from './Guide.types';
 
-  export let item: ItemCyber | Guide;
-  export let libelleBadge: 'Outil' | 'Service' | 'Contenu' | undefined;
+  interface Props {
+    item: ItemCyber | Guide;
+    libelleBadge: 'Outil' | 'Service' | 'Contenu' | undefined;
+  }
+
+  let { item, libelleBadge }: Props = $props();
 
   const couleurlibelle = {
     Outil: 'pink-tuile',
@@ -12,7 +16,7 @@
     Service: 'yellow-tournesol',
   };
 
-  const couleur = libelleBadge ? couleurlibelle[libelleBadge] : '';
+  const couleur = $derived(libelleBadge ? couleurlibelle[libelleBadge] : '');
 </script>
 
 {#if item.type === 'Guide'}
