@@ -7,19 +7,19 @@
   import Lien from '../ui/Lien.svelte';
   import ZoneTexte from '../ui/ZoneTexte.svelte';
 
-  let dialogue: HTMLDialogElement;
-  let etape: 'formulaire' | 'merci' = 'formulaire';
-  let afficheDialogue = false;
+  let dialogue: HTMLDialogElement | undefined = $state();
+  let etape: 'formulaire' | 'merci' = $state('formulaire');
+  let afficheDialogue = $state(false);
 
   export const affiche = () => {
     afficheDialogue = true;
   };
   type RaisonDisponible = 'pas-clair' | 'pas-le-temps' | 'pas-decisionnaire' | 'autre';
-  let raison: RaisonDisponible | undefined;
-  let erreurRaison = false;
-  let precisionPasClair = '';
-  let precisionAutre = '';
-  let emailDeContact = '';
+  let raison: RaisonDisponible | undefined = $state();
+  let erreurRaison = $state(false);
+  let precisionPasClair = $state('');
+  let precisionAutre = $state('');
+  let emailDeContact = $state('');
 
   const recupereLaBonnePrecision = (raison?: RaisonDisponible) => {
     switch (raison) {
@@ -53,10 +53,11 @@
     }
   };
 
-  $: {
+  $effect(() => {
     if (raison) erreurRaison = false;
-  }
-  $: {
+  });
+
+  $effect(() => {
     if (dialogue) {
       if (afficheDialogue) {
         dialogue.showModal();
@@ -64,7 +65,7 @@
         dialogue.close();
       }
     }
-  }
+  });
 </script>
 
 {#if afficheDialogue}
@@ -127,7 +128,7 @@
     {:else}
       <div class="dialogue-sortie-diag">
         <div class="contenu">
-          <BoutonFermerModale on:click={() => dialogue.close()} />
+          <BoutonFermerModale on:click={() => dialogue?.close()} />
           <h4>Merci pour votre retour&nbsp;🤩&nbsp;! Vos remarques sont précieuses pour faire évoluer le service.</h4>
           <p>
             Vous avez demandé à être recontacté(e) ? Notre équipe prendra contact avec vous prochainement à l’adresse
