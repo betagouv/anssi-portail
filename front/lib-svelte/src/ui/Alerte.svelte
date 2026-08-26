@@ -1,7 +1,11 @@
 <script lang="ts">
-  export let type: 'ERREUR';
-  export let titre: string;
-  export let message: string;
+  interface Props {
+    type: 'ERREUR';
+    titre: string;
+    message: string;
+  }
+
+  let { type, titre, message }: Props = $props();
 </script>
 
 {#if type === 'ERREUR'}
