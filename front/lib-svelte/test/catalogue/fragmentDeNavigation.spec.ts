@@ -1,9 +1,10 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { BesoinCyber } from '../../src/catalogue/Catalogue.types';
 import { Langue } from '../../src/catalogue/Guide.types';
 import {
   creeLeFragmentDeNavigation,
   extraisSegmentsDuFragment,
+  réécritFragmentDepuis,
 } from '../../src/navigation/fragmentDeNavigation.svelte';
 
 describe('Le fragment de navigation', () => {
@@ -128,5 +129,15 @@ describe('Le fragment de navigation', () => {
     fragmentDeNavigation.changeSection('autre-section', false);
 
     expect(fragmentDeNavigation.actualise()).toBe('#autre-section');
+  });
+});
+
+describe('la fonction réécritFragmentDepuis', () => {
+  it('redirige pour une URL avec une esperluette', () => {
+    vi.stubGlobal('window', { location: { hash: '#section&soussecction' } });
+    réécritFragmentDepuis(['#section'], '&');
+
+    expect(window.location.hash).toEqual('#section/soussecction');
+    vi.unstubAllGlobals();
   });
 });

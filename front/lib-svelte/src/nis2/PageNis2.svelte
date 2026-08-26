@@ -11,6 +11,7 @@
   import ExigencesNis2 from './ExigencesNis2.svelte';
   import Presentation from './Presentation.svelte';
   import Solutions from './Solutions.svelte';
+  import { réécritFragmentDepuis } from '../navigation/fragmentDeNavigation.svelte';
 
   const { itemsCyber, featureFlagNis2CyFun23 = false, exigences = undefined, guides = undefined } = $props();
 
@@ -24,16 +25,8 @@
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Directive NIS 2', fondSombre: true };
 
   onMount(() => {
-    const fragmentActuel = window.location.hash;
-    const fragmentsAvecEsperluette = liens.map((lien) => `${lien.fragment}&`);
-    const fragmentActuelContientEsperluette = fragmentsAvecEsperluette.some((fragment) =>
-      fragmentActuel.startsWith(fragment)
-    );
-    if (fragmentActuelContientEsperluette) {
-      // Le commit fbc0aa3f oblige à séparer les segments du fragment via un /, l'esperluette n'est plus supportée
-      // Redirection nécessaire pour la gestion de potentiels favoris sur l'ancienne structure d'URL
-      window.location.hash = fragmentActuel.replace('&', '/');
-    }
+    const fragments = liens.map((lien) => lien.fragment);
+    réécritFragmentDepuis(fragments, '&');
   });
 </script>
 

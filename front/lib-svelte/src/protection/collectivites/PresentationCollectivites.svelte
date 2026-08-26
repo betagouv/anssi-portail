@@ -8,6 +8,7 @@
   import IllustrationHerosCollectivites from '../animation/IllustrationHerosCollectivites.svelte';
   import Proteger from '../Proteger.svelte';
   import Solutions from './Solutions.svelte';
+  import { réécritFragmentDepuis } from '../../navigation/fragmentDeNavigation.svelte';
 
   let { itemsCyber, guides = [] } = $props();
 
@@ -23,16 +24,8 @@
   ];
   let lienActif = $state('#proteger');
   onMount(() => {
-    const fragmentActuel = window.location.hash;
-    const fragmentsAvecEsperluette = liens.map((lien) => `${lien.fragment}&`);
-    const fragmentActuelContientEsperluette = fragmentsAvecEsperluette.some((fragment) =>
-      fragmentActuel.startsWith(fragment)
-    );
-    if (fragmentActuelContientEsperluette) {
-      // Le commit fbc0aa3f oblige à séparer les segments du fragment via un /, l'esperluette n'est plus supportée
-      // Redirection nécessaire pour la gestion de potentiels favoris sur l'ancienne structure d'URL
-      window.location.hash = fragmentActuel.replace('&', '/');
-    }
+    const fragments = liens.map((lien) => lien.fragment);
+    réécritFragmentDepuis(fragments, '&');
   });
 
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Protéger ma collectivité', fondSombre: true };

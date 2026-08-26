@@ -27,6 +27,21 @@ const fragmentSansComportement: FragmentDeNavigation = {
 
 const nettoie = (hash: string | undefined): string => hash?.replace(/^#/, '') ?? '';
 
+// Le commit fbc0aa3f oblige à séparer les segments du fragment via un /, tout autre séparateur
+// peut amener des comportement non voulus.
+// Redirection nécessaire pour la gestion de potentiels favoris d'utilisateurs sur l'ancienne structure d'URL
+export const réécritFragmentDepuis = (fragments: string[], ancienSéparateur: '&') => {
+  const fragmentActuel = window.location.hash;
+  const fragmentsAvecAncienSéparateur = fragments.map((fragment) => `${fragment}${ancienSéparateur}`);
+  const fragmentActuelContientAncienSéparateur = fragmentsAvecAncienSéparateur.some((fragment) =>
+    fragmentActuel.startsWith(fragment)
+  );
+
+  if (fragmentActuelContientAncienSéparateur) {
+    window.location.hash = fragmentActuel.replace(ancienSéparateur, '/');
+  }
+};
+
 export const extraisSegmentsDuFragment = (hash: string | undefined): string[] =>
   nettoie(hash).split('?')[0].split('/').filter(Boolean);
 
