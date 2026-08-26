@@ -5,22 +5,25 @@
   import { nombreResultats } from './stores/nombreResultats.store';
   import { rechercheParSource } from './stores/rechercheParSource.store';
 
-  let anssiPartielles = false;
-  $: if (
-    $rechercheParSource.includes(Source.CERTFR) ||
-    $rechercheParSource.includes(Source.INNOVATION_ANSSI) ||
-    $rechercheParSource.includes(Source.ANSSI)
-  ) {
-    anssiPartielles = !(
-      $rechercheParSource.includes(Source.CERTFR) &&
-      $rechercheParSource.includes(Source.INNOVATION_ANSSI) &&
+  let anssiPartielles = $state(false);
+
+  $effect(() => {
+    if (
+      $rechercheParSource.includes(Source.CERTFR) ||
+      $rechercheParSource.includes(Source.INNOVATION_ANSSI) ||
       $rechercheParSource.includes(Source.ANSSI)
-    );
-    rechercheParSource.ajoute(Source.ANSSI_TOUTES);
-  } else {
-    anssiPartielles = false;
-    rechercheParSource.retire(Source.ANSSI_TOUTES);
-  }
+    ) {
+      anssiPartielles = !(
+        $rechercheParSource.includes(Source.CERTFR) &&
+        $rechercheParSource.includes(Source.INNOVATION_ANSSI) &&
+        $rechercheParSource.includes(Source.ANSSI)
+      );
+      rechercheParSource.ajoute(Source.ANSSI_TOUTES);
+    } else {
+      anssiPartielles = false;
+      rechercheParSource.retire(Source.ANSSI_TOUTES);
+    }
+  });
 
   const gereCocheANSSI = () => {
     if (!$rechercheParSource.includes(Source.ANSSI_TOUTES)) {
@@ -34,7 +37,7 @@
     }
   };
 
-  $: cocheToutesLesSources = $rechercheParSource.includes(Source.ANSSI_TOUTES);
+  let cocheToutesLesSources = $derived($rechercheParSource.includes(Source.ANSSI_TOUTES));
 </script>
 
 <fieldset>
