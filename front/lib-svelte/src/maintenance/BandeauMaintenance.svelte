@@ -2,7 +2,7 @@
   import axios from 'axios';
   import { onMount } from 'svelte';
 
-  let maintenanceEnPreparation: { jour: string; heure: string } | undefined = undefined;
+  let maintenanceEnPreparation: { jour: string; heure: string } | undefined = $state();
   onMount(async () => {
     const reponse = await axios.get('/api/infos-site');
     maintenanceEnPreparation = reponse.data.maintenanceEnPreparation;
