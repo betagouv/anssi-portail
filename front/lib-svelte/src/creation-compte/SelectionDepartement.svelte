@@ -1,16 +1,21 @@
 <script lang="ts">
+  import { clic } from '../directives/actions.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import FermetureSurClicEnDehors from '../ui/FermetureSurClicEnDehors.svelte';
   import type { Departement } from '../ui/formulaire/SelectionOrganisation.types';
 
-  export let departements: Departement[];
-  export let valeur: Departement | '' = '';
+  interface Props {
+    departements: Departement[];
+    valeur?: Departement | '';
+  }
 
-  let saisie: string;
-  let minuteur: ReturnType<typeof setTimeout>;
-  let dureeDebounceEnMs = 300;
-  let suggestions: Departement[] = [];
-  let suggestionsVisibles = false;
+  let { departements, valeur = $bindable('') }: Props = $props();
+
+  let saisie = $state('');
+  let minuteur: ReturnType<typeof setTimeout> | undefined;
+  const dureeDebounceEnMs = 300;
+  let suggestions: Departement[] = $state([]);
+  let suggestionsVisibles = $state(false);
 
   const avecTemporisation = (fonction: () => Promise<void>) => {
     clearTimeout(minuteur);
@@ -32,10 +37,12 @@
     suggestionsVisibles = false;
   };
 
-  let suggestionsEl: HTMLDivElement;
-  if (valeur) {
-    saisie = `${valeur.nom} (${valeur.code})`;
-  }
+  let suggestionsEl: HTMLDivElement | undefined = $state();
+  let elementsSuggestions = $derived(suggestionsEl ? [suggestionsEl] : []);
+
+  $effect(() => {
+    if (valeur) saisie = `${valeur.nom} (${valeur.code})`;
+  });
 </script>
 
 <div class="selection-departement conteneur">
@@ -54,13 +61,8 @@
         class="option"
         role="button"
         tabindex="0"
-        on:click={() => {
+        use:clic={() => {
           choisisDepartement(suggestion);
-        }}
-        on:keypress={(e) => {
-          if (e.code === 'Enter') {
-            choisisDepartement(suggestion);
-          }
         }}
       >
         <div>{suggestion.nom} ({suggestion.code})</div>
@@ -69,7 +71,7 @@
   </div>
 </div>
 
-<FermetureSurClicEnDehors bind:doitEtreOuvert={suggestionsVisibles} elements={[suggestionsEl]} />
+<FermetureSurClicEnDehors bind:doitEtreOuvert={suggestionsVisibles} elements={elementsSuggestions} />
 
 <style lang="scss">
   .conteneur {
