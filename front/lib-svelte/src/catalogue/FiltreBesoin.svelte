@@ -3,9 +3,13 @@
   import { BesoinCyber } from './Catalogue.types';
   import { rechercheParBesoin } from './stores/rechercheParBesoin.store';
 
-  export let filtreTousVisible: boolean = true;
+  interface Props {
+    filtreTousVisible?: boolean;
+  }
 
-  const filtres = [
+  let { filtreTousVisible = true }: Props = $props();
+
+  const filtres = $derived([
     ...(filtreTousVisible
       ? [
           {
@@ -35,7 +39,7 @@
       valeur: BesoinCyber.REAGIR,
       icone: '<img src="/assets/images/illustration-filtre-besoins-reagir.svg" alt="" width="56" height="56" />',
     },
-  ];
+  ]);
 </script>
 
 <div class="conteneur-filtres">
