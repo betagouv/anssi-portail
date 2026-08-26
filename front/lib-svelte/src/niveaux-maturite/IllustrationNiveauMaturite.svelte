@@ -1,7 +1,11 @@
 <script lang="ts">
   import type { NiveauMaturite } from './NiveauxMaturite.type';
 
-  export let niveauSelectionne: NiveauMaturite;
+  interface Props {
+    niveauSelectionne: NiveauMaturite;
+  }
+
+  let { niveauSelectionne }: Props = $props();
 </script>
 
 <div class="illustration">
