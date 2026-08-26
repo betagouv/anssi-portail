@@ -21,7 +21,6 @@
     "watch:serveur": "vite build --ssr --config vite.config.ssr.ts --watch"
   },
   "devDependencies": {
-    "@lab-anssi/ui-kit": "1.53.2",
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "@tsconfig/svelte": "^5.0.8",
     "@types/qrcode": "^1.5.6",

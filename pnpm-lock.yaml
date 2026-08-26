@@ -552,9 +552,6 @@ importers:
         specifier: ^1.5.4
         version: 1.5.4
     devDependencies:
-      '@lab-anssi/ui-kit':
-        specifier: 1.53.2
-        version: 1.53.2(svelte@5.56.9(@typescript-eslint/types@8.67.0))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.0.0
         version: 7.3.0(svelte@5.56.9(@typescript-eslint/types@8.67.0))(vite@8.2.2(@types/node@26.2.0)(esbuild@0.28.2)(sass@1.103.0)(tsx@4.23.12))
@@ -1256,11 +1253,6 @@ packages:
     resolution: {integrity: sha512-EofCilxzkzCZIHhHD0d+/pcGaCD4hhS/b2+w9k4PfZSZ1pXgVd5pFIzlRN54lroe0nng/iCp56Eucqo5m9AUkQ==}
     peerDependencies:
       express: ~5.2.1
-
-  '@lab-anssi/ui-kit@1.53.2':
-    resolution: {integrity: sha512-Ac4rJ2KyqxSKNNq3jBu8fs++WcCdfxlgGqzY7tcNtIDmnOfy20krTvRmw0Q6yvP+xu+52lhg7EREWokRMWviWQ==}
-    peerDependencies:
-      svelte: '>=5.55.9'
 
   '@myriaddreamin/typst-ts-node-compiler-android-arm-eabi@0.7.0':
     resolution: {integrity: sha512-25gKyErQai/u/EWBOSSZvV0rFfSL4tqHgYEyd4rZPXSHMpkvvgPmfA/Ees8InB1nnPV9Jlu9r0sftV6oiccprg==}
@@ -5107,10 +5099,6 @@ snapshots:
     transitivePeerDependencies:
       - debug
       - supports-color
-
-  '@lab-anssi/ui-kit@1.53.2(svelte@5.56.9(@typescript-eslint/types@8.67.0))':
-    dependencies:
-      svelte: 5.56.9(@typescript-eslint/types@8.67.0)
 
   '@myriaddreamin/typst-ts-node-compiler-android-arm-eabi@0.7.0':
     optional: true
