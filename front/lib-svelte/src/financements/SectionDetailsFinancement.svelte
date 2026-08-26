@@ -1,11 +1,15 @@
 <script lang="ts">
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
 
-  export let ancre: string;
-  export let titre: string;
-  export let detail: string;
+  interface Props {
+    ancre: string;
+    titre: string;
+    detail: string;
+  }
 
-  const detailPurifie = aseptiseHtml(detail);
+  let { ancre, titre, detail }: Props = $props();
+
+  const detailPurifie = $derived(aseptiseHtml(detail));
 </script>
 
 {#if detail}
