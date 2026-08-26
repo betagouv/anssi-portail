@@ -1,5 +1,9 @@
 <script lang="ts">
-  export let niveau: string;
+  interface Props {
+    niveau: string;
+  }
+
+  let { niveau }: Props = $props();
 
   const badgeNiveauxConnus: Record<string, { label: string; accent: string }> = {
     moyen: {
@@ -16,10 +20,12 @@
     },
   };
 
-  $: proprieteBadge = badgeNiveauxConnus[niveau] ?? {
-    label: 'non applicable',
-    accent: 'beige-gris-galet',
-  };
+  const proprieteBadge = $derived(
+    badgeNiveauxConnus[niveau] ?? {
+      label: 'non applicable',
+      accent: 'beige-gris-galet',
+    }
+  );
 </script>
 
 <dsfr-badge accent={proprieteBadge.accent} label={proprieteBadge.label.toUpperCase()} size="sm" type="accent"
