@@ -4,14 +4,18 @@
   import { badgesExigence, type ExigenceNis2 } from '../exigence.type';
   import ContenuExigenceFormate from './ContenuExigenceFormate.svelte';
 
-  export let exigence: ExigenceNis2;
+  interface Props {
+    exigence: ExigenceNis2;
+  }
 
-  const tags = [
+  let { exigence }: Props = $props();
+
+  const tags = $derived([
     ...(exigence.objectifSecurite ? [{ label: exigence.objectifSecurite }] : []),
     { label: exigence.thematique },
     { label: exigence.reference },
-  ];
-  const badges = badgesExigence(exigence);
+  ]);
+  const badges = $derived(badgesExigence(exigence));
 </script>
 
 <GroupeDeBadges {badges} />
