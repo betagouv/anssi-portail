@@ -2,6 +2,9 @@ import { EntrepotResultatTest } from './entrepotResultatTest.js';
 import { EntrepotUtilisateur } from './entrepotUtilisateur.js';
 import { IdNiveauMaturite } from './resultatTestMaturite.js';
 
+const NOMBRES_DE_DIAGNOSTIC_CYBER = 6516;
+const SATISFACTION_UTILISATEUR = 92;
+
 export type Statistiques = {
   utilisateursInscrits: number;
   testsMaturite: {
@@ -15,9 +18,8 @@ export type Statistiques = {
     };
   };
   diagnosticsCyber: number;
+  satisfactionUtilisateur: number;
 };
-
-const NOMBRES_DE_DIAGNOSTIC_CYBER = 6516;
 
 export const calculeStatistiques = async ({
   entrepotUtilisateur,
@@ -62,5 +64,6 @@ export const calculeStatistiques = async ({
       parNiveau,
     },
     diagnosticsCyber: NOMBRES_DE_DIAGNOSTIC_CYBER,
+    satisfactionUtilisateur: SATISFACTION_UTILISATEUR,
   };
 };
