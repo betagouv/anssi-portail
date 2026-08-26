@@ -1,4 +1,4 @@
-{% assign siteUrl = site.url | default: 'https://messervices.cyber.gouv.fr' %}
+{% assign siteUrl = site.env.URL_BASE_MSC | default: 'https://messervices.cyber.gouv.fr' %}
 {% assign descriptionPage = site.data.meta-description[page.url] %}
 {% assign urlPage = page.url | default: '' | strip %}
 {% if urlPage != '' and urlPage != '/' %}

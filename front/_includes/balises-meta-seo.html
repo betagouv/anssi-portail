@@ -6,7 +6,7 @@
     {% assign urlSansSlashFinal = urlSansSlashFinal | slice: 0, new_length %}
   {% endif %}
 {% endif %}
-<link rel="canonical" href="{{ site.url }}{{ urlSansSlashFinal }}" />
+<link rel="canonical" href="{{ site.env.URL_BASE_MSC }}{{ urlSansSlashFinal }}" />
 {% assign metaDescription = site.data.meta-description[page.url] | escape %}
 <meta name="description" content="{{ metaDescription }}">
 {% if page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
@@ -17,9 +17,9 @@
 <meta property="og:site_name" content="MesServicesCyber">
 <meta property="og:title" content="{{ page.titreHtml }}">
 <meta property="og:description" content="{{ metaDescription }}">
-<meta property="og:url" content="{{ site.url }}{{ urlSansSlashFinal }}">
-<meta property="og:image" content="{{ site.url }}{{ ogImage }}">
+<meta property="og:url" content="{{ site.env.URL_BASE_MSC }}{{ urlSansSlashFinal }}">
+<meta property="og:image" content="{{ site.env.URL_BASE_MSC }}{{ ogImage }}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ page.titreHtml }}">
 <meta name="twitter:description" content="{{ metaDescription }}">
-<meta name="twitter:image" content="{{ site.url }}{{ ogImage }}">
+<meta name="twitter:image" content="{{ site.env.URL_BASE_MSC }}{{ ogImage }}">
