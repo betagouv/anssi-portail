@@ -2,10 +2,14 @@
   import Lien from '../ui/Lien.svelte';
   import Accordeon from '../ui/Accordeon.svelte';
 
-  export let urlBase: string = '';
+  interface Props {
+    urlBase?: string;
+  }
 
-  let videoRisques: HTMLVideoElement;
-  let videoRisquesMetadataLoaded = false;
+  let { urlBase = '' }: Props = $props();
+
+  let videoRisques: HTMLVideoElement | undefined = $state();
+  let videoRisquesMetadataLoaded = $state(false);
   const afficheLaVideo = () => {
     if (videoRisques && !videoRisquesMetadataLoaded) {
       // Permet d'afficher la durée de la vidéo avant que l'utilisateur clique sur play.
