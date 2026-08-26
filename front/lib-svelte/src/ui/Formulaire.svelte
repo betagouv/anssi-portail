@@ -1,11 +1,25 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import type { Snippet } from 'svelte';
 
-  export let id: string = '';
-  export let classe: string = '';
-  export let formulaireDuTiroir: boolean = false;
+  interface Props {
+    id?: string;
+    classe?: string;
+    formulaireDuTiroir?: boolean;
+    surFormulaireValide?: () => void;
+    surFormulaireInvalide?: () => void;
+    children?: Snippet;
+  }
 
-  let formulaire: HTMLFormElement;
+  let {
+    id = '',
+    classe = '',
+    formulaireDuTiroir = false,
+    surFormulaireValide,
+    surFormulaireInvalide,
+    children,
+  }: Props = $props();
+
+  let formulaire: HTMLFormElement | undefined = $state();
 
   const trouveLibellePour = (element: Element) => {
     for (const libelle of document.getElementsByTagName('label')) {
@@ -14,6 +28,8 @@
   };
 
   export const estValide = () => {
+    if (!formulaire) return false;
+
     const valide = formulaire.checkValidity();
     const champAvecErreur = formulaire.querySelectorAll('input:invalid, select:invalid');
     if (champAvecErreur.length) {
@@ -25,25 +41,19 @@
     return valide;
   };
 
-  const dispatch = createEventDispatcher<{
-    formulaireValide: null;
-    formulaireInvalide: null;
-  }>();
-
   const verifieValidite = () => {
-    dispatch(formulaire.checkValidity() ? 'formulaireValide' : 'formulaireInvalide');
+    if (!formulaire) return;
+    formulaire.checkValidity() ? surFormulaireValide?.() : surFormulaireInvalide?.();
+  };
+
+  const soumets = (evenement: SubmitEvent) => {
+    evenement.preventDefault();
+    verifieValidite();
   };
 </script>
 
-<form
-  bind:this={formulaire}
-  on:submit|preventDefault={verifieValidite}
-  {id}
-  novalidate
-  class={classe}
-  class:formulaireDuTiroir
->
-  <slot />
+<form bind:this={formulaire} onsubmit={soumets} {id} novalidate class={classe} class:formulaireDuTiroir>
+  {@render children?.()}
 </form>
 
 <style lang="scss">

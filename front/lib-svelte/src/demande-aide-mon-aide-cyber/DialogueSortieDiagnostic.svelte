@@ -71,7 +71,7 @@
 {#if afficheDialogue}
   <dialog onclose={() => (afficheDialogue = false)} bind:this={dialogue}>
     {#if etape === 'formulaire'}
-      <Formulaire classe="dialogue-sortie-diag" on:formulaireValide={soumetsLeFormulaire}>
+      <Formulaire classe="dialogue-sortie-diag" surFormulaireValide={soumetsLeFormulaire}>
         <div class="contenu">
           <BoutonFermerModale surClic={() => (afficheDialogue = false)} />
           <h4>Aidez-nous à améliorer votre expérience️ 🙏&nbsp;!</h4>

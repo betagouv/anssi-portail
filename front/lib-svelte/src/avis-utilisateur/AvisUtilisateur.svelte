@@ -92,7 +92,7 @@
     transition:fade={{ duration: 500 }}
   >
     {#if etape === 'formulaire'}
-      <Formulaire on:formulaireValide={soumetsLeFormulaire}>
+      <Formulaire surFormulaireValide={soumetsLeFormulaire}>
         <div class="contenu">
           <BoutonFermerModale surClic={() => dialogue?.close()} />
           <h4>Votre avis nous intéresse&nbsp;!</h4>
