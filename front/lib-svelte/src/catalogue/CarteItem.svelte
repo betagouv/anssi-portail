@@ -6,33 +6,41 @@
   import type { Guide } from './Guide.types';
   import HeaderBadge from './HeaderBadge.svelte';
 
-  export let item: ItemCyber | Guide;
-  export let avecBoutonFavori: boolean = false;
+  interface Props {
+    item: ItemCyber | Guide;
+    avecBoutonFavori?: boolean;
+  }
+
+  let { item, avecBoutonFavori = false }: Props = $props();
 
   const LONGUEUR_MAX_DESCRIPTION = 54;
 
-  const estGuide = item.type === 'Guide';
+  const estGuide = $derived(item.type === 'Guide');
 
   // Calcul du lien
-  const lien = estGuide ? item.id : (item.lienInterne ?? (item as ItemCyber).lienExterne);
-  const nouvelOnglet = !estGuide && !item.lienInterne;
-  const sansLien = !lien;
+  const lien = $derived(estGuide ? item.id : (item.lienInterne ?? (item as ItemCyber).lienExterne));
+  const nouvelOnglet = $derived(!estGuide && !item.lienInterne);
+  const sansLien = $derived(!lien);
 
   // Contenu de la carte
-  const titre = (estGuide ? item.nom : item.description).replaceAll('&nbsp;', '\u00A0');
-  const titreCoupe = titre.length > LONGUEUR_MAX_DESCRIPTION ? titre.slice(0, LONGUEUR_MAX_DESCRIPTION) + '…' : titre;
+  const titre = $derived((estGuide ? item.nom : item.description).replaceAll('&nbsp;', '\u00A0'));
+  const titreCoupe = $derived(
+    titre.length > LONGUEUR_MAX_DESCRIPTION ? titre.slice(0, LONGUEUR_MAX_DESCRIPTION) + '…' : titre
+  );
 
-  const image = estGuide
-    ? (item as Guide).illustration.petite
-    : `/assets/images/illustrations-services/${(item as ItemCyber).illustration}`;
+  const image = $derived(
+    estGuide
+      ? (item as Guide).illustration.petite
+      : `/assets/images/illustrations-services/${(item as ItemCyber).illustration}`
+  );
 
-  const altImage = estGuide ? 'Illustration du guide' : 'Illustration du service';
-  const detailHaut = estGuide ? (item as Guide).thematique : decodeEntiteHtml(item.nom);
-  const detailBas = estGuide ? (item as Guide).dateMiseAJourFormatee : undefined;
+  const altImage = $derived(estGuide ? 'Illustration du guide' : 'Illustration du service');
+  const detailHaut = $derived(estGuide ? (item as Guide).thematique : decodeEntiteHtml(item.nom));
+  const detailBas = $derived(estGuide ? (item as Guide).dateMiseAJourFormatee : undefined);
 
   // Props analytics
-  const dataSource = estGuide ? 'Guide' : 'Catalogue';
-  const dataCible = item.nom;
+  const dataSource = $derived(estGuide ? 'Guide' : 'Catalogue');
+  const dataCible = $derived(item.nom);
 
   // Badge de type pour ItemCyber
   const libelleBadge = () => {
