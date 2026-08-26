@@ -39,7 +39,7 @@
         '/guides/recommandations-pour-le-reconditionnement-des-ordinateurs-de-bureau-ou-portables',
         '/guides/cybersecurite-toutes-les-communes-et-intercommunalites-sont-concernees',
       ]),
-      ancre: 'solutions&comprendre',
+      ancre: 'solutions/comprendre',
     },
     {
       id: 'sensibiliser',
@@ -51,7 +51,7 @@
         '/guides/attaques-par-rancongiciels-tous-concernes',
         '/ressources/panorama',
       ]),
-      ancre: 'solutions&sensibiliser',
+      ancre: 'solutions/sensibiliser',
       classeCss: 'fond-cafe-creme',
     },
     {
@@ -59,7 +59,7 @@
       titre: 'Se former',
       explication: 'Développez les compétences cyber de vos équipes.',
       items: versMesItems(['/services/mooc-ebios-rm', '/services/secnum-academie', '/services/sens-cyber']),
-      ancre: 'solutions&se-former',
+      ancre: 'solutions/se-former',
     },
     {
       id: 'securiser',
@@ -71,7 +71,7 @@
         '/services/silene',
         '/services/ads',
       ]),
-      ancre: 'solutions&securiser',
+      ancre: 'solutions/securiser',
       classeCss: 'fond-macaron-rose',
     },
     {
@@ -79,7 +79,7 @@
       titre: 'Se préparer',
       explication: "Organisez et exercez votre organisation à faire face à une crise d'origine cyber.",
       items: versMesItems(['/guides/organiser-un-exercice-de-gestion-de-crise-cyber']),
-      ancre: 'solutions&se-preparer',
+      ancre: 'solutions/se-preparer',
     },
     {
       id: 'reagir',
@@ -90,7 +90,7 @@
         '/services/diagnostic-17cyber',
         '/guides/anticiper-et-gerer-sa-communication-de-crise-cyber',
       ]),
-      ancre: 'solutions&reagir',
+      ancre: 'solutions/reagir',
       classeCss: 'fond-bleu-france-950',
     },
   ]);
