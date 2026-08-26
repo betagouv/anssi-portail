@@ -15,25 +15,34 @@
   import type { CorpsAPIDemandeAide } from './DonneesFormulaireDemandeAide';
   import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
 
-  export let mode: 'autonome' | undefined = undefined;
-  export let origine: string;
-  export let urlBase: string = '';
-  export let cacheLesLiensDeRetour = false;
-  export let siretAidant: string | undefined;
+  interface Props {
+    mode?: 'autonome';
+    origine: string;
+    urlBase?: string;
+    cacheLesLiensDeRetour?: boolean;
+    siretAidant?: string;
+  }
 
-  let statistiques: Statistiques | undefined;
-  let formulaire: Formulaire;
-  let entite: Organisation;
-  let email: string;
-  let cguSontValidees: boolean;
-  let enSucces: boolean = false;
-  let enCoursEnvoi: boolean = false;
-  let erreurs: string;
-  let erreurValidation = false;
-  let badges: Badge[] = [];
+  let {
+    mode = undefined,
+    origine,
+    urlBase = '',
+    cacheLesLiensDeRetour = false,
+    siretAidant = undefined,
+  }: Props = $props();
+
+  let formulaire: Formulaire | undefined = $state();
+  let entite: Organisation | undefined = $state();
+  let email = $state('');
+  let cguSontValidees = $state(false);
+  let enSucces = $state(false);
+  let enCoursEnvoi = $state(false);
+  let erreurs = $state('');
+  let erreurValidation = $state(false);
+  let badges: Badge[] = $state([]);
 
   onMount(async () => {
-    statistiques = await récupèreStatistiquesMSC();
+    const statistiques: Statistiques = await récupèreStatistiquesMSC();
     badges = [
       {
         label: `+${statistiques.diagnosticsCyberArrondis} organisations accompagnées`,
@@ -47,7 +56,7 @@
   });
 
   const soumetsFormulaire = async () => {
-    if (!formulaire.estValide()) {
+    if (!formulaire?.estValide() || !entite) {
       erreurValidation = true;
       return;
     }
