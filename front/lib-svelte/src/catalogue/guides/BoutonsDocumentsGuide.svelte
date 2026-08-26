@@ -3,8 +3,12 @@
   import type { Guide } from '../Guide.types';
   import { decodeEntitesHtml } from './guide';
 
-  export let guide: Guide;
-  export let autoriseMultiple: boolean = false;
+  interface Props {
+    guide: Guide;
+    autoriseMultiple?: boolean;
+  }
+
+  let { guide, autoriseMultiple = false }: Props = $props();
 </script>
 
 {#if guide.documents.length === 1}
