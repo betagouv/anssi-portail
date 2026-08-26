@@ -75,6 +75,7 @@ jobs:
               -e '^MATOMO_ID=' \
               -e '^MATOMO_URL_TAG_MANAGER=' \
               -e '^SENTRY_DSN=' \
+              -e '^URL_BASE_MSC=' \
               -e '^SENTRY_ENVIRONNEMENT=' |
             tr -d '"' | while IFS='=' read -r key value; do
               echo "::add-mask::$value"
