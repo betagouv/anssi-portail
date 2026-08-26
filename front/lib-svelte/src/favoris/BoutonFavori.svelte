@@ -5,17 +5,21 @@
   import { profilStore } from '../stores/profil.store';
   import Bouton from '../ui/Bouton.svelte';
 
-  export let idItem: IdItem;
-  export let avecTexte: boolean = false;
-  export let taille: 'sm' | 'md' = 'md';
-  export let avecBordure: boolean = false;
+  interface Props {
+    idItem: IdItem;
+    avecTexte?: boolean;
+    taille?: 'sm' | 'md';
+    avecBordure?: boolean;
+  }
 
-  $: estFavori = $favorisStore.includes(idItem);
-  $: libelle = estFavori ? 'Retirer le favori' : 'Ajouter en favori';
-  $: titre = $profilStore ? '' : 'Connectez-vous pour profiter des favoris';
-  $: icone = estFavori ? 'heart-fill' : 'heart-line';
-  $: iconeSeule = !avecTexte || !$profilStore;
-  $: type = (avecBordure ? 'tertiaire' : 'tertiaire-sans-bordure') as 'tertiaire' | 'tertiaire-sans-bordure';
+  let { idItem, avecTexte = false, taille = 'md', avecBordure = false }: Props = $props();
+
+  let estFavori = $derived($favorisStore.includes(idItem));
+  let libelle = $derived(estFavori ? 'Retirer le favori' : 'Ajouter en favori');
+  let titre = $derived($profilStore ? '' : 'Connectez-vous pour profiter des favoris');
+  let icone = $derived(estFavori ? 'heart-fill' : 'heart-line');
+  let iconeSeule = $derived(!avecTexte || !$profilStore);
+  let type = $derived((avecBordure ? 'tertiaire' : 'tertiaire-sans-bordure') as 'tertiaire' | 'tertiaire-sans-bordure');
 
   const actionSurClick = async () => {
     const idFavori = idItem;
