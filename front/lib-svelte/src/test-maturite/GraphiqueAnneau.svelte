@@ -1,17 +1,23 @@
 <script lang="ts">
   import { pourcentagesSerie, type Serie, totalSerie } from './Serie';
 
-  export let serie: Serie;
-  export let nomDeLaDonnee: string | undefined;
+  interface Props {
+    serie: Serie;
+    nomDeLaDonnee?: string;
+  }
 
-  $: pourcentages = pourcentagesSerie(serie);
+  let { serie, nomDeLaDonnee }: Props = $props();
 
-  $: pourcentagesCumules = pourcentages.reduce(
-    (pourcentagesCumules, pourcentage) => [
-      ...pourcentagesCumules,
-      pourcentagesCumules[pourcentagesCumules.length - 1] + pourcentage,
-    ],
-    [0]
+  const pourcentages = $derived(pourcentagesSerie(serie));
+
+  const pourcentagesCumules = $derived(
+    pourcentages.reduce(
+      (pourcentagesCumules, pourcentage) => [
+        ...pourcentagesCumules,
+        pourcentagesCumules[pourcentagesCumules.length - 1] + pourcentage,
+      ],
+      [0]
+    )
   );
 
   const rayonInterieur = 80;
@@ -39,10 +45,8 @@
     secondPointInterieur: Point;
   };
 
-  let secteurs: Secteur[] = [];
-
-  $: {
-    secteurs = [];
+  const secteurs = $derived.by(() => {
+    const nouveauxSecteurs: Secteur[] = [];
     for (let index = 0; index < pourcentagesCumules.length - 1; index++) {
       const angleCourant = pourcentageVersRadian(pourcentagesCumules[index]);
       let nouvelAngle = pourcentageVersRadian(pourcentagesCumules[index + 1]);
@@ -52,7 +56,7 @@
         nouvelAngle = pourcentageVersRadian(99.9999);
       }
       const pourcentageSecteur = pourcentagesCumules[index + 1] - pourcentagesCumules[index];
-      secteurs.push({
+      nouveauxSecteurs.push({
         arcLarge: pourcentageSecteur > 50,
         premierPointExterieur: polaireVersCartesien(rayonExterieur, angleCourant),
         secondPointExterieur: polaireVersCartesien(rayonExterieur, nouvelAngle),
@@ -60,7 +64,8 @@
         secondPointInterieur: polaireVersCartesien(rayonInterieur, angleCourant),
       });
     }
-  }
+    return nouveauxSecteurs;
+  });
 </script>
 
 <svg id="radar" viewBox="-130 -130 260 260" xmlns="http://www.w3.org/2000/svg">
