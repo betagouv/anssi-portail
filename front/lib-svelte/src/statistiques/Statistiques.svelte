@@ -12,11 +12,11 @@
   import type { Serie } from '../test-maturite/Serie';
   import Heros from '../ui/Heros.svelte';
   import IllustrationDragonPasDeResultat from '../ui/IllustrationDragonPasDeResultat.svelte';
-  import type { Statistiques } from './statistiques.type';
   import Tuile from './Tuile.svelte';
   import Bouton from '../ui/Bouton.svelte';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
 
-  let mesures: Statistiques | undefined = undefined;
+  let statistiques: Statistiques | undefined = undefined;
   let serieNonFiltree: Serie = [];
   let serie: Serie = [];
 
@@ -72,9 +72,9 @@
   };
 
   onMount(async () => {
-    const reponse = await axios.get<Statistiques>('/api/statistiques');
-    mesures = reponse.data;
-    for (const [idNiveau, valeur] of Object.entries(mesures.testsMaturite.parNiveau)) {
+    statistiques = await récupèreStatistiquesMSC();
+
+    for (const [idNiveau, valeur] of Object.entries(statistiques.testsMaturite.parNiveau)) {
       const libelle = niveauxMaturite.find((niveau) => niveau.id === idNiveau)!.label;
       serieNonFiltree.push({ libelle, valeur });
     }
@@ -89,15 +89,19 @@
 />
 
 <dsfr-container class="statistiques">
-  {#if mesures}
+  {#if statistiques}
     <div class="tuiles">
       <Tuile
         description="Utilisateurs inscrits"
         image="stat-utilisateurs-inscrits"
-        mesure={mesures.utilisateursInscrits}
+        mesure={statistiques.utilisateursInscrits}
       />
-      <Tuile description="Tests de maturité cyber" image="stat-test-maturite" mesure={mesures.testsMaturite.total} />
-      <Tuile description="Diagnostics cyber" image="stat-diagnostics-cyber" mesure={mesures.diagnosticsCyber} />
+      <Tuile
+        description="Tests de maturité cyber"
+        image="stat-test-maturite"
+        mesure={statistiques.testsMaturite.total}
+      />
+      <Tuile description="Diagnostics cyber" image="stat-diagnostics-cyber" mesure={statistiques.diagnosticsCyber} />
     </div>
     <div class="repartition">
       <div>
