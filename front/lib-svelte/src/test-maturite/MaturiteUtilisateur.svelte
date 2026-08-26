@@ -4,7 +4,7 @@
   import type { DernierResultatTest } from './ResultatsTest.type';
   import ResultatsTestMaturite from './ResultatsTestMaturite.svelte';
 
-  let dernierRésultatTest: DernierResultatTest | undefined;
+  let dernierRésultatTest: DernierResultatTest | undefined = $state();
 
   onMount(async () => {
     try {
