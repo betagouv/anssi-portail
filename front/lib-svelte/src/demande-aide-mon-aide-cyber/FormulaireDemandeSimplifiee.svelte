@@ -13,6 +13,7 @@
   import { collecteLesErreurs } from '../utils/erreurApi';
   import ConfirmationCreationDemandeAide from './ConfirmationCreationDemandeAide.svelte';
   import type { CorpsAPIDemandeAide } from './DonneesFormulaireDemandeAide';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
 
   export let mode: 'autonome' | undefined = undefined;
   export let origine: string;
@@ -20,6 +21,7 @@
   export let cacheLesLiensDeRetour = false;
   export let siretAidant: string | undefined;
 
+  let statistiques: Statistiques | undefined;
   let formulaire: Formulaire;
   let entite: Organisation;
   let email: string;
@@ -31,17 +33,14 @@
   let badges: Badge[] = [];
 
   onMount(async () => {
-    const reponse = await axios.get<{
-      organisationsAccompagnees: number;
-      satisfaction: number;
-    }>(`${urlBase}/api/diagnostic/statistiques`);
+    statistiques = await récupèreStatistiquesMSC();
     badges = [
       {
-        label: `+${reponse.data.organisationsAccompagnees} organisations accompagnées`,
+        label: `+${statistiques.diagnosticsCyberArrondis} organisations accompagnées`,
         accent: 'yellow-tournesol',
       },
       {
-        label: `${reponse.data.satisfaction}% de satisfaction`,
+        label: `${statistiques.satisfactionUtilisateur}% de satisfaction`,
         accent: 'yellow-tournesol',
       },
     ];
