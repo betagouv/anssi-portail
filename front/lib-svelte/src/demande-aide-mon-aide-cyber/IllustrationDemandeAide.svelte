@@ -1,26 +1,11 @@
 <script lang="ts">
-  import axios from 'axios';
   import { onMount } from 'svelte';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
 
-  const SATISFACTION_PAR_DÉFAUT = 92;
-  let satisfaction = $state<number>();
-
-  const NOMBRE_ORGANISATIONS_PAR_DÉFAUT = 6000;
-  let nombreOrganisations = $state<number>();
+  let statistiques: Statistiques | undefined = $state();
 
   onMount(async () => {
-    try {
-      const reponse = await axios.get<{
-        organisationsAccompagnees: number;
-        satisfaction: number;
-      }>(`/api/diagnostic/statistiques`);
-
-      nombreOrganisations = reponse.data.organisationsAccompagnees ?? NOMBRE_ORGANISATIONS_PAR_DÉFAUT;
-      satisfaction = reponse.data.satisfaction ?? SATISFACTION_PAR_DÉFAUT;
-    } catch {
-      nombreOrganisations = NOMBRE_ORGANISATIONS_PAR_DÉFAUT;
-      satisfaction = SATISFACTION_PAR_DÉFAUT;
-    }
+    statistiques = await récupèreStatistiquesMSC();
   });
 </script>
 
@@ -28,7 +13,7 @@
   <img src="/assets/images/homme-regardant-webinaire.avif" alt="Homme regardant un webinaire" />
 
   <div class="annotation">
-    <p class="fr-h5">+{nombreOrganisations}</p>
+    <p class="fr-h5">+{statistiques?.diagnosticsCyberArrondis ?? 0}</p>
     <p class="texte-standard-md">organisations<br />accompagnées</p>
   </div>
   <div class="legende-illustree">
@@ -36,7 +21,7 @@
       <lab-anssi-icone nom="thumb-up-fill" taille="sm"></lab-anssi-icone>
     </div>
     <div class="legende">
-      <p class="texte-detail-sm">{satisfaction}% sont satisfaites</p>
+      <p class="texte-detail-sm">{statistiques?.satisfactionUtilisateur ?? 0}% sont satisfaites</p>
     </div>
   </div>
   <div class="bouclier">

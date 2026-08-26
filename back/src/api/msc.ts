@@ -59,7 +59,6 @@ import { ressourceRobotsTxt } from './ressourceRobotsTxt.js';
 import { ressourceSanteGuides } from './ressourceSanteGuides.js';
 import { ressourceSitemapXml } from './ressourceSitemapXml.js';
 import { ressourceStatistiques } from './ressourceStatistiques.js';
-import { ressourceStatistiquesDiagnostic } from './ressourceStatistiquesDiagnostic.js';
 import { ressourceUtilisateurs } from './ressourceUtilisateurs.js';
 import { ressourceVisa } from './ressourceVisa.js';
 import { routesPagesConnecteesStatiques } from './routesPagesConnectees.js';
@@ -340,8 +339,6 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute('/visas/tl-fr.sha2', ressourceControleContenuListeConfiance());
   enregistreRoute('/visas', ressourceVisa(configurationServeur));
-
-  enregistreRoute('/api/diagnostic/statistiques', ressourceStatistiquesDiagnostic());
 
   enregistreRoute('/api/exigences-nis2', ressourceExigencesNis2(configurationServeur));
   enregistreRoute('/api/exigences-nis2.csv', ressourceExigencesNis2Csv(configurationServeur));
