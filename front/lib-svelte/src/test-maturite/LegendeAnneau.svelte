@@ -2,13 +2,14 @@
   import LegendeLigne from './LegendeLigne.svelte';
   import { pourcentagesSerie, type Serie } from './Serie';
 
-  export let serie: Serie;
-  export let actif: string | undefined = undefined;
-
-  let pourcentages: number[] = [];
-  $: {
-    pourcentages = pourcentagesSerie(serie);
+  interface Props {
+    serie: Serie;
+    actif?: string;
   }
+
+  let { serie, actif }: Props = $props();
+
+  const pourcentages = $derived(pourcentagesSerie(serie));
 </script>
 
 <div class="legende">
