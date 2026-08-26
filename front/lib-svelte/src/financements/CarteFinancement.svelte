@@ -2,7 +2,11 @@
   import BadgeTypeFinancement from './BadgeTypeFinancement.svelte';
   import type { ResumeFinancement } from './financement';
 
-  export let financement: ResumeFinancement;
+  interface Props {
+    financement: ResumeFinancement;
+  }
+
+  let { financement }: Props = $props();
 </script>
 
 <a class="lien-carte" href={`/financements/${financement.id}`}>
