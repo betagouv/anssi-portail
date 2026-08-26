@@ -3,12 +3,16 @@
   import type { ItemCyber } from '../catalogue/Catalogue.types';
   import type { Guide } from '../catalogue/Guide.types';
 
-  export let titre: string;
-  export let explication: string;
-  export let items: Array<ItemCyber | Guide>;
-  export let ancre: string;
-  export let sourceIllustration: string | undefined = undefined;
-  export let classeCss: string = '';
+  interface Props {
+    titre: string;
+    explication: string;
+    items: Array<ItemCyber | Guide>;
+    ancre: string;
+    sourceIllustration?: string;
+    classeCss?: string;
+  }
+
+  let { titre, explication, items, ancre, sourceIllustration, classeCss = '' }: Props = $props();
 </script>
 
 <dsfr-container id={ancre} class={`action ${classeCss}`}>
