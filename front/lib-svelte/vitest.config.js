@@ -7,12 +7,5 @@ export default defineConfig({
     root: './test',
     setupFiles: ['vitest-localstorage-mock'],
   },
-  plugins: [
-    svelte({
-      compilerOptions: {
-        runes: true,
-      },
-    }),
-    plateformePlugin(),
-  ],
+  plugins: [svelte(), plateformePlugin()],
 });
