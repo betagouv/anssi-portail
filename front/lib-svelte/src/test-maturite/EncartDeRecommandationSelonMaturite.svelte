@@ -8,9 +8,15 @@
   import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import Alternatives from '../ui/Alternatives.svelte';
 
-  export let niveau: NiveauMaturite;
+  interface Props {
+    niveau: NiveauMaturite;
+  }
 
-  $: niveauFaible = niveau.id === 'insuffisant' || niveau.id === 'emergent' || niveau.id === 'intermediaire';
+  let { niveau }: Props = $props();
+
+  const niveauFaible = $derived(
+    niveau.id === 'insuffisant' || niveau.id === 'emergent' || niveau.id === 'intermediaire'
+  );
 </script>
 
 <Alternatives affichageAlternatif={afficheParcoursSecurisation}>
