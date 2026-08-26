@@ -3,12 +3,14 @@
   import { onMount } from 'svelte';
   import { clic } from '../directives/actions.svelte';
   import Lien from '../ui/Lien.svelte';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
 
+  let statistiques: Statistiques | undefined = $state();
   let encart = $state<HTMLDivElement | undefined>();
   let hrefCTA = $state('/cyberdepart?origine=guide-dhygiene-informatique');
   let libelleCTA = $state('Demander un diagnostic gratuit');
 
-  onMount(() => {
+  onMount(async () => {
     setTimeout(() => {
       encart?.showPopover();
     }, 500);
@@ -17,6 +19,7 @@
       hrefCTA = `/modules/1?pageSource=${pageSource}`;
       libelleCTA = 'Je commence à sécuriser';
     }
+    statistiques = await récupèreStatistiquesMSC();
   });
 
   const fermeDialogue = () => {
@@ -39,7 +42,11 @@
     </div>
     <div class="contenu">
       {#if afficheParcoursSecurisation}
-        <dsfr-badge type="accent" accent="green-bourgeon" label="+6000 organisations accompagnées 🚀" size="sm"
+        <dsfr-badge
+          type="accent"
+          accent="green-bourgeon"
+          label={`+${statistiques?.diagnosticsCyberArrondis ?? 0} organisations accompagnées 🚀`}
+          size="sm"
         ></dsfr-badge>
 
         <h3>13 mesures simples pour protéger votre organisation contre les cyberattaques</h3>

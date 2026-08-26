@@ -4,7 +4,10 @@
   import Lien from '../ui/Lien.svelte';
   import IllustrationProtegerOrganisation from './animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
+  import { onMount } from 'svelte';
 
+  let statistiques: Statistiques | undefined = $state();
   const tags = [{ label: 'TPE' }, { label: 'PME' }, { label: 'ETI' }, { label: 'Collectivités' }];
 
   let enPause = $state(false);
@@ -13,12 +16,18 @@
   const basculePause = () => {
     enPause = !enPause;
   };
+
+  onMount(async () => {
+    statistiques = await récupèreStatistiquesMSC();
+  });
 </script>
 
 <dsfr-container class="proteger-organisation fond-macaron">
   <div class="conteneur">
     <div class="en-tete">
-      <span class="badge-accompagnement">+6000 organisations déjà accompagnées 🚀</span>
+      <span class="badge-accompagnement"
+        >+{statistiques?.diagnosticsCyberArrondis ?? 0} organisations déjà accompagnées 🚀</span
+      >
       <h2 class="titre fr-h1">
         Chaque organisation a son point de <MotEnExergue motif="cercle">départ.</MotEnExergue>
         <br />Trouvez le vôtre.
