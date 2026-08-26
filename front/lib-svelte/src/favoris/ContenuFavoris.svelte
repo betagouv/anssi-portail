@@ -3,8 +3,12 @@
   import type { ItemCyber } from '../catalogue/Catalogue.types.js';
   import type { Guide } from '../catalogue/Guide.types';
 
-  export let itemsEnFavori: (ItemCyber | Guide)[] = [];
-  export let avecBoutonFavori: boolean;
+  interface Props {
+    itemsEnFavori?: (ItemCyber | Guide)[];
+    avecBoutonFavori: boolean;
+  }
+
+  let { itemsEnFavori = [], avecBoutonFavori }: Props = $props();
 </script>
 
 <div class="grille">
