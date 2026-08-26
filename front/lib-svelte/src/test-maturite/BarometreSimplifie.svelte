@@ -1,17 +1,16 @@
 <script lang="ts">
-  import axios from 'axios';
   import { onMount } from 'svelte';
   import { niveauxMaturite } from '../niveaux-maturite/NiveauxMaturite.donnees';
-  import type { Statistiques } from '../statistiques/statistiques.type';
   import GraphiqueAnneau from './GraphiqueAnneau.svelte';
   import LegendeLigne from './LegendeLigne.svelte';
   import { pourcentagesSerie, type Serie } from './Serie';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
 
   let serie: Serie = [];
 
   onMount(async () => {
-    const reponse = await axios.get<Statistiques>('/api/statistiques');
-    const testParNiveau = reponse.data.testsMaturite.parNiveau;
+    const reponse: Statistiques = await récupèreStatistiquesMSC();
+    const testParNiveau = reponse.testsMaturite.parNiveau;
     const serieConstruite: Serie = [];
     for (const [idNiveau, valeur] of Object.entries(testParNiveau)) {
       const libelle = niveauxMaturite.find((niveau) => niveau.id === idNiveau)!.label;

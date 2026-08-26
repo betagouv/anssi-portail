@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export type Statistiques = {
   utilisateursInscrits: number;
   testsMaturite: {
@@ -11,4 +13,9 @@ export type Statistiques = {
     };
   };
   diagnosticsCyber: number;
+};
+
+export const récupèreStatistiquesMSC = async (): Promise<Statistiques> => {
+  const réponse = await axios.get<Statistiques>(`/api/statistiques`);
+  return réponse.data;
 };
