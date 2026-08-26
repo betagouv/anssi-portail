@@ -104,8 +104,8 @@
   });
 
   let elementSelectionDepartement: SelectionDepartement | undefined = $state();
-  const modifieDepartementApresChoixOrganisation = (e: CustomEvent<Organisation>) => {
-    const d = departements.find((d) => d.code === e.detail.departement);
+  const modifieDepartementApresChoixOrganisation = (organisationChoisie: Organisation) => {
+    const d = departements.find((d) => d.code === organisationChoisie.departement);
     if (d) {
       elementSelectionDepartement?.choisisDepartement(d);
     }
@@ -173,7 +173,7 @@
                 <SelectionOrganisation
                   bind:valeur={organisation}
                   filtreDepartement={departement}
-                  on:organisationChoisie={modifieDepartementApresChoixOrganisation}
+                  surOrganisationChoisie={modifieDepartementApresChoixOrganisation}
                 />
               </ControleFormulaire>
             </div>
