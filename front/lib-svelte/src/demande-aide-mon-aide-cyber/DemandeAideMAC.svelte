@@ -11,14 +11,14 @@
   import FormulaireDemandeAide from './FormulaireDemandeAide.svelte';
   import IllustrationDemandeAide from './IllustrationDemandeAide.svelte';
 
-  let formulaireDemandeAide: FormulaireDemandeAide;
-  let enSucces: boolean = false;
-  let formulaireSoumis: boolean;
-  let erreurs: string;
-  let origine: string | null;
+  let formulaireDemandeAide: FormulaireDemandeAide | undefined = $state();
+  let enSucces = $state(false);
+  let formulaireSoumis = $state(false);
+  let erreurs = $state('');
+  let origine: string | null = $state(null);
 
-  let enCoursEnvoi = false;
-  let dialogueSortie: DialogueSortieDiagnostic;
+  let enCoursEnvoi = $state(false);
+  let dialogueSortie: DialogueSortieDiagnostic | undefined = $state();
 
   onMount(() => {
     const parametres = new URLSearchParams(window.location.search);
@@ -34,7 +34,7 @@
       if (positionEnHauteur < 250 && !enSucces) {
         body.removeEventListener('mousemove', ecouteSortieSouris);
         localStorage.setItem('sortieDiagnosticAffichee', 'true');
-        dialogueSortie.affiche();
+        dialogueSortie?.affiche();
       }
     };
 
@@ -45,7 +45,7 @@
 
   const soumetsFormulaire = async (e: CustomEvent<DonneesFormulaireDemandeAide>) => {
     formulaireSoumis = true;
-    if (!formulaireDemandeAide.estValide()) return;
+    if (!formulaireDemandeAide?.estValide()) return;
 
     try {
       enCoursEnvoi = true;
