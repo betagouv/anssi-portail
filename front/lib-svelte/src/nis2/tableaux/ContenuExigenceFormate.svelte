@@ -1,7 +1,11 @@
 <script lang="ts">
   import { formateContenuExigence, type Exigence } from '../exigence.type';
 
-  export let exigence: Exigence;
+  interface Props {
+    exigence: Exigence;
+  }
+
+  let { exigence }: Props = $props();
 </script>
 
 <div class="texte-detail-sm">
