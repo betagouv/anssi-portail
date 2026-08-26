@@ -1,7 +1,11 @@
 <script lang="ts">
   import type { Etat, SanteGuide } from './Sante.svelte';
 
-  export let guides: SanteGuide[];
+  interface Props {
+    guides: SanteGuide[];
+  }
+
+  let { guides }: Props = $props();
   const iconeEtat = (etat: Etat) => (etat === 'ok' ? '✅' : '❌');
 </script>
 
