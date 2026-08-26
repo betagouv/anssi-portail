@@ -6,7 +6,11 @@
   import EncartPromotionParcoursBasique from '../parcours-securisation/EncartPromotionParcoursBasique.svelte';
   import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
 
-  export let origine: string;
+  interface Props {
+    origine: string;
+  }
+
+  let { origine }: Props = $props();
 
   const codecVideoWebM = 'video/webm; codecs="vp9,opus"';
 </script>
