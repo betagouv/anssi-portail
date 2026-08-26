@@ -3,8 +3,12 @@
   import SelectRegion from '../test-maturite/SelectRegion.svelte';
   import SelectSecteurContacts from './SelectSecteurContacts.svelte';
 
-  export let regionSelectionnee: string;
-  export let secteurSelectionne: string;
+  interface Props {
+    regionSelectionnee: string;
+    secteurSelectionne: string;
+  }
+
+  let { regionSelectionnee = $bindable(), secteurSelectionne = $bindable() }: Props = $props();
 
   const reinitialiseFiltres = () => {
     regionSelectionnee = '';
