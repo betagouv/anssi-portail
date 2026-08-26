@@ -5,10 +5,14 @@
   import CarteTestMaturite, { type RésultatTest } from './CarteTestMaturite.svelte';
   import ResultatsMonOrganisation from './ResultatsMonOrganisation.svelte';
 
-  export let idRésultatTest: string | undefined;
+  interface Props {
+    idRésultatTest?: string;
+  }
 
-  let résultatsTest: RésultatTest[] = [];
-  let résultatsTestParAnnée: RésultatsParAnnée = {};
+  let { idRésultatTest }: Props = $props();
+
+  let résultatsTest: RésultatTest[] = $state([]);
+  let résultatsTestParAnnée: RésultatsParAnnée = $state({});
 
   type RésultatsParAnnée = Record<number, RésultatTest[]>;
 
@@ -25,12 +29,14 @@
       }, {} as RésultatsParAnnée);
   });
 
-  $: années = Object.keys(résultatsTestParAnnée)
-    .map((a) => Number(a))
-    .sort((a, b) => b - a);
-  $: résultatTestSelectionné = idRésultatTest
-    ? résultatsTest.find((résultat) => résultat.id === idRésultatTest)
-    : undefined;
+  const années = $derived(
+    Object.keys(résultatsTestParAnnée)
+      .map((a) => Number(a))
+      .sort((a, b) => b - a)
+  );
+  const résultatTestSelectionné = $derived(
+    idRésultatTest ? résultatsTest.find((résultat) => résultat.id === idRésultatTest) : undefined
+  );
 </script>
 
 {#if résultatTestSelectionné}
