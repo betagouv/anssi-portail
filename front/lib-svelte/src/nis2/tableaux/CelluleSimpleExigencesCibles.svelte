@@ -1,7 +1,11 @@
 <script lang="ts">
   import { formateContenuExigence, type ExigenceComparee } from '../exigence.type';
 
-  export let exigences: ExigenceComparee[];
+  interface Props {
+    exigences: ExigenceComparee[];
+  }
+
+  let { exigences }: Props = $props();
 </script>
 
 <div class="exigences">
