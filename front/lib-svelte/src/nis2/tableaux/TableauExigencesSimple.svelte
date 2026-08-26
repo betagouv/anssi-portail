@@ -5,8 +5,12 @@
   import AucunResultat from './AucunResultat.svelte';
   import CelluleExigenceNis2 from './CelluleExigenceNis2.svelte';
 
-  export let exigences: Exigence[];
-  export let chargement: boolean = false;
+  interface Props {
+    exigences: Exigence[];
+    chargement?: boolean;
+  }
+
+  let { exigences, chargement = false }: Props = $props();
 
   const estUneExigenceNis2 = (exigence: Exigence): exigence is ExigenceNis2 =>
     !!(exigence as ExigenceNis2).entitesCible;
