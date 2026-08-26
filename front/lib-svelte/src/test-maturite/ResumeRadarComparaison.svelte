@@ -7,8 +7,12 @@
   import { rubriques } from './TestMaturite.donnees';
   import type { IdRubrique } from './TestMaturite.type';
 
-  export let series: SerieRadar[];
-  export let actif: IdNiveau | undefined = undefined;
+  interface Props {
+    series: SerieRadar[];
+    actif?: IdNiveau;
+  }
+
+  let { series, actif }: Props = $props();
 
   const rubriquesTrieesParLettre = rubriques.toSorted((a, b) => (a.lettre > b.lettre ? 1 : -1));
 
