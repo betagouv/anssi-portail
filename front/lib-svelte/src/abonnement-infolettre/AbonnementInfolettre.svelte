@@ -6,11 +6,11 @@
   import Formulaire from '../ui/Formulaire.svelte';
   import Lien from '../ui/Lien.svelte';
 
-  let mail: string | null = null;
-  let infolettreAcceptee = false;
-  let erreurValidation = false;
-  let formulaireEnvoye = false;
-  let erreur: string | null = null;
+  let mail: string | null = $state(null);
+  let infolettreAcceptee = $state(false);
+  let erreurValidation = $state(false);
+  let formulaireEnvoye = $state(false);
+  let erreur: string | null = $state(null);
 
   const soumetsFormulaire = async () => {
     if (!infolettreAcceptee || !mail) {
@@ -27,7 +27,7 @@
 
   const adresseRetour = new URLSearchParams(window.location.search).get('adresseRetour');
 
-  let adresseRetourNettoyee: string | null;
+  let adresseRetourNettoyee: string | null = $state(null);
   if (adresseRetour) {
     let adresseParsee = URL.parse(adresseRetour) || URL.parse(adresseRetour, window.location.origin);
 
