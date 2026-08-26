@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, onMount } from 'svelte';
+  import { onMount } from 'svelte';
   import Alerte from '../ui/Alerte.svelte';
   import Bouton from '../ui/Bouton.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
@@ -10,21 +10,25 @@
   import Lien from '../ui/Lien.svelte';
   import type { DonneesFormulaireDemandeAide } from './DonneesFormulaireDemandeAide';
 
-  let formulaire: Formulaire;
-  export let id: string = '';
-  export let enCoursEnvoi: boolean;
-  export let formulaireSoumis: boolean;
+  interface Props {
+    id?: string;
+    enCoursEnvoi: boolean;
+    formulaireSoumis: boolean;
+    erreurs: string;
+    surFormulaireSoumis: (donnees: DonneesFormulaireDemandeAide) => void;
+  }
 
-  export let erreurs: string;
+  let { id = '', enCoursEnvoi, formulaireSoumis, erreurs, surFormulaireSoumis }: Props = $props();
 
-  let entite: Organisation;
-  let email: string;
-  let libelleChampUtilisateurMAC = "Email de l'Aidant cyber ou du prestataire";
-  let estEnRelationAvecUnUtilisateur: boolean;
-  let emailUtilisateurMAC: string;
-  let identifiantAidant: string | null;
-  let cguSontValidees: boolean;
-  let utilisateurMACPrerempli: boolean = false;
+  let formulaire: Formulaire | undefined = $state();
+  let entite: Organisation | undefined = $state();
+  let email = $state('');
+  let libelleChampUtilisateurMAC = $state("Email de l'Aidant cyber ou du prestataire");
+  let estEnRelationAvecUnUtilisateur: boolean | undefined = $state();
+  let emailUtilisateurMAC = $state('');
+  let identifiantAidant: string | null = $state(null);
+  let cguSontValidees = $state(false);
+  let utilisateurMACPrerempli = $state(false);
 
   onMount(() => {
     let urlSearchParams = new URLSearchParams(window.location.search);
@@ -48,13 +52,12 @@
     }
   });
 
-  export const estValide = () => formulaire.estValide();
+  export const estValide = () => formulaire?.estValide() ?? false;
 
-  const emets = createEventDispatcher<{
-    formulaireSoumis: DonneesFormulaireDemandeAide;
-  }>();
   const soumetsFormulaire = () => {
-    emets('formulaireSoumis', {
+    if (!entite) return;
+
+    surFormulaireSoumis({
       entite,
       email,
       ...(estEnRelationAvecUnUtilisateur && !identifiantAidant && { emailUtilisateurMAC }),
