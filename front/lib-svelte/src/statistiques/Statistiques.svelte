@@ -16,19 +16,21 @@
   import Bouton from '../ui/Bouton.svelte';
   import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
 
-  let statistiques: Statistiques | undefined = undefined;
-  let serieNonFiltree: Serie = [];
-  let serie: Serie = [];
+  let statistiques: Statistiques | undefined = $state();
+  let serieNonFiltree: Serie = $state([]);
+  let serie: Serie = $state([]);
 
-  let region: string = '';
-  let secteur: string = '';
-  let tailleOrganisation: string = '';
-  $: filtreActif = !!secteur || !!tailleOrganisation || !!region;
+  let region = $state('');
+  let secteur = $state('');
+  let tailleOrganisation = $state('');
+  const filtreActif = $derived(!!secteur || !!tailleOrganisation || !!region);
 
-  $: chargeRepartitionsDesResultats({
-    secteur,
-    region,
-    tailleOrganisation,
+  $effect(() => {
+    void chargeRepartitionsDesResultats({
+      secteur,
+      region,
+      tailleOrganisation,
+    });
   });
 
   async function chargeRepartitionsDesResultats({
