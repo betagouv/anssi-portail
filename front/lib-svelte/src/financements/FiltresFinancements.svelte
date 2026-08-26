@@ -9,8 +9,12 @@
   import { rechercheParTypeFinancement } from './stores/rechercheParTypeFinancement.store';
   import { rechercheParTypeOrganisation } from './stores/rechercheParTypeOrganisation.store';
 
-  export let chargement: boolean;
-  export let estConnecte: boolean;
+  interface Props {
+    chargement: boolean;
+    estConnecte: boolean;
+  }
+
+  let { chargement, estConnecte }: Props = $props();
 
   const reinitialiseFiltres = () => {
     rechercheParRegion.reinitialise();
