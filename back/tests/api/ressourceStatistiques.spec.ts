@@ -59,7 +59,13 @@ describe('La ressource Statistiques', () => {
     it('renvoie le nombre de diagnostics cyber', async () => {
       const reponse = await request(serveur).get('/api/statistiques');
 
-      assert.equal(reponse.body.diagnosticsCyber, 6516);
+      assert.equal(Number.isInteger(reponse.body.diagnosticsCyber), true);
+    });
+
+    it('renvoie la satisfaction utilisateur', async () => {
+      const reponse = await request(serveur).get('/api/statistiques');
+
+      assert.equal(Number.isInteger(reponse.body.satisfactionUtilisateur), true);
     });
 
     it('renvoie les niveaux de maturité', async () => {

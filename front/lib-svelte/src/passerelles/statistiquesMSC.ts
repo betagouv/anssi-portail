@@ -13,6 +13,7 @@ export type Statistiques = {
     };
   };
   diagnosticsCyber: number;
+  satisfactionUtilisateur: number;
 };
 
 export const récupèreStatistiquesMSC = async (): Promise<Statistiques> => {
