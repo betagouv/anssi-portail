@@ -2,9 +2,13 @@
   import { type ExigenceISO } from '../exigence.type';
   import ContenuExigenceFormate from './ContenuExigenceFormate.svelte';
 
-  export let exigence: ExigenceISO;
+  interface Props {
+    exigence: ExigenceISO;
+  }
 
-  $: accent = exigence.norme === 'ISO 27001' ? 'purple-glycine' : 'blue-cumulus';
+  let { exigence }: Props = $props();
+
+  const accent = $derived(exigence.norme === 'ISO 27001' ? 'purple-glycine' : 'blue-cumulus');
 </script>
 
 <dsfr-badge label={`ISO ${exigence.reference}`} type="accent" {accent}></dsfr-badge>
