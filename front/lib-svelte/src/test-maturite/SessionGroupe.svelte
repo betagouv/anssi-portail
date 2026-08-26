@@ -8,24 +8,24 @@
   import ModaleNouvelleSessionGroupe from './ModaleNouvelleSessionGroupe.svelte';
   import type { ReponseCreationSessionGroupe } from './SessionGroupe';
 
-  let codeSession = '';
-  let creationNouvelleSessionEnCours = false;
-  let modaleNouvelleSession: ModaleNouvelleSessionGroupe;
-  let formulaire: Formulaire;
-  let statut: 'default' | 'valid' | 'error' | 'info';
+  let codeSession = $state('');
+  let creationNouvelleSessionEnCours = $state(false);
+  let modaleNouvelleSession: ModaleNouvelleSessionGroupe | undefined = $state();
+  let formulaire: Formulaire | undefined = $state();
+  let statut: 'default' | 'valid' | 'error' | 'info' | undefined = $state();
 
   const nouvelleSession = async () => {
     try {
       creationNouvelleSessionEnCours = true;
       const reponse = await axios.post<ReponseCreationSessionGroupe>('/api/sessions-groupe');
-      modaleNouvelleSession.ouvre(reponse.data);
+      modaleNouvelleSession?.ouvre(reponse.data);
     } finally {
       creationNouvelleSessionEnCours = false;
     }
   };
 
   const rejoindreSession = async () => {
-    if (formulaire.estValide()) {
+    if (formulaire?.estValide()) {
       const codeSansTiret = codeSession.replaceAll('-', '');
       try {
         await axios.get(`/api/sessions-groupe/${codeSansTiret}`);
@@ -36,12 +36,11 @@
     }
   };
 
-  $: {
-    if (codeSession.length === 3 && !codeSession.endsWith('-')) {
-      codeSession += '-';
-    }
-    codeSession = codeSession.toUpperCase();
-  }
+  $effect(() => {
+    const codeAvecTiret = codeSession.length === 3 && !codeSession.endsWith('-') ? `${codeSession}-` : codeSession;
+    const codeFormate = codeAvecTiret.toUpperCase();
+    if (codeSession !== codeFormate) codeSession = codeFormate;
+  });
 
   const propriétésFilAriane: PropriétésFilAriane = {
     fondSombre: true,
