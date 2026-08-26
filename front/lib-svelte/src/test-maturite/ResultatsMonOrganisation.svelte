@@ -6,21 +6,27 @@
   import PartageTest from './PartageTest.svelte';
   import TuilesMaturite from './TuilesMaturite.svelte';
 
-  export let animeTuiles = true;
-  export let dateRealisation: Date | undefined = undefined;
-  export let defilementAutomatique = true;
-  export let idNiveau: IdNiveau;
+  interface Props {
+    animeTuiles?: boolean;
+    dateRealisation?: Date;
+    defilementAutomatique?: boolean;
+    idNiveau: IdNiveau;
+  }
+
+  let { animeTuiles = true, dateRealisation, defilementAutomatique = true, idNiveau }: Props = $props();
 
   const trouveNiveauMaturiteParId = (id: string) =>
     niveauxMaturite.find((niveau) => niveau.id === id) || niveauxMaturite[0];
 
-  $: niveau = trouveNiveauMaturiteParId(idNiveau);
+  const niveau = $derived(trouveNiveauMaturiteParId(idNiveau));
 
-  $: dateFormatee = dateRealisation
-    ? new Intl.DateTimeFormat('fr-FR', {
-        dateStyle: 'long',
-      }).format(new Date(dateRealisation))
-    : undefined;
+  const dateFormatee = $derived(
+    dateRealisation
+      ? new Intl.DateTimeFormat('fr-FR', {
+          dateStyle: 'long',
+        }).format(new Date(dateRealisation))
+      : undefined
+  );
 </script>
 
 <dsfr-container class="resultats-test">
