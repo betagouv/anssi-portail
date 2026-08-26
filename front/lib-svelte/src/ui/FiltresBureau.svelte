@@ -1,27 +1,32 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, type Snippet } from 'svelte';
   import EnteteFiltres from '../catalogue/EnteteFiltres.svelte';
   import { estServeur } from '$plateforme/environnement';
 
-  export let filtreActif: boolean;
+  interface Props {
+    filtreActif: boolean;
+    avantEntete?: Snippet;
+    children?: Snippet;
+  }
 
-  let estBureau = false;
+  let { filtreActif, avantEntete, children }: Props = $props();
+  let estBureau = $state(false);
 
-  onMount(async () => {
+  onMount(() => {
     const mql = window.matchMedia('(min-width: 992px)');
-    mql.addEventListener('change', (e: MediaQueryListEvent) => {
-      estBureau = e.matches;
-    });
+    const actualiseAffichage = (e: MediaQueryListEvent) => (estBureau = e.matches);
+    mql.addEventListener('change', actualiseAffichage);
     estBureau = mql.matches;
+    return () => mql.removeEventListener('change', actualiseAffichage);
   });
 </script>
 
 {#if estBureau || estServeur}
   <div class="sommaire sommaire-deplie">
     <div class="barre-filtres">
-      <slot name="avant-entete" />
+      {@render avantEntete?.()}
       <EnteteFiltres {filtreActif} />
-      <slot />
+      {@render children?.()}
     </div>
   </div>
 {/if}

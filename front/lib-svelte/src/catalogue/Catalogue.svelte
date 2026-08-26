@@ -190,7 +190,9 @@
 
   <div class="grille">
     <FiltresBureau filtreActif={$recherches.filtreActif}>
-      <ChampRecherche slot="avant-entete" bind:recherche={$rechercheTextuelle} />
+      {#snippet avantEntete()}
+        <ChampRecherche bind:recherche={$rechercheTextuelle} />
+      {/snippet}
       {#if idÉlémentSélectionné === 'guides'}
         <FiltreLangue />
         <FiltreCollection />
