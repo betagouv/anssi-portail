@@ -1,8 +1,12 @@
 <script lang="ts">
   import Lien from '../ui/Lien.svelte';
 
-  export let mode: 'carte' | 'embarque' = 'carte';
-  export let cacheLesLiens: boolean = false;
+  interface Props {
+    mode?: 'carte' | 'embarque';
+    cacheLesLiens?: boolean;
+  }
+
+  let { mode = 'carte', cacheLesLiens = false }: Props = $props();
 </script>
 
 <div class={['confirmation', mode]}>
