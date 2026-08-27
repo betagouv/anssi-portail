@@ -25,7 +25,7 @@
     {
       titre: 'Un programme complet',
       description:
-        'Protégez-vous contre les 5 risques cyber les plus courants — et 6 mesures additionnelles sur la protection des données personnelles, établies avec la CNIL.',
+        "Protégez-vous contre les 5 risques cyber les plus courants : perte de maîtrise, exposition, failles exploitées, usurpation d'identité, crise subie.",
       id: 'modules',
       rich: true,
     },

@@ -23,7 +23,7 @@
     {
       titre: 'Un programme complet',
       description:
-        '6 modules pour protéger votre organisation des risques les plus courants — 6 mesures additionnelles sur la protection des données personnelles, établies avec la CNIL.',
+        "6 modules pour protéger votre organisation des risques les plus courants : perte de maîtrise, exposition, failles exploitées, usurpation d'identité, crise subie.",
       illustration: IllustrationModules,
     },
     {
