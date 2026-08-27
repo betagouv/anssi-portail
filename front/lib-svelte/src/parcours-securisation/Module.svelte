@@ -11,12 +11,14 @@
   import MesuresDeModule from './MesuresDeModule.svelte';
   import type { ModuleRéponseApi } from './moduleReponseApi';
   import Progression from './Progression.svelte';
+  import ModaleModuleTermine from './modales/ModaleModuleTermine.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
     description: '',
     mesures: [],
   });
+  let moduleTerminé = $state(false);
   const totalMesures = $derived(module.mesures.length);
 
   onMount(async () => {
@@ -26,6 +28,11 @@
     if (sessionStorage.getItem('mesure-prise-en-compte') === 'true') {
       toasterStore.succes('Mesure déclarée prise en compte', 'Votre progression a été mise à jour.');
       sessionStorage.removeItem('mesure-prise-en-compte');
+    }
+
+    if (sessionStorage.getItem('module-termine') === 'true') {
+      moduleTerminé = true;
+      sessionStorage.removeItem('module-termine');
     }
   });
 
@@ -67,6 +74,8 @@
     <BadgeBeta />
   {/snippet}
 </Heros>
+
+<ModaleModuleTermine bind:estOuverte={moduleTerminé} />
 
 <dsfr-container>
   <div class="progression">
