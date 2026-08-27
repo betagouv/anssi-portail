@@ -20,7 +20,7 @@
   has-description="true"
   has-header-badge={mesure.estPriseEnCompte || undefined}
   no-link={true}
-  src={`/assets/images/parcours-securisation/mesure-${mesure.id}.svg`}
+  src={`/assets/images/parcours-securisation/mesure-${mesure.id}.avif`}
   title={titre}
   size="sm"
 >

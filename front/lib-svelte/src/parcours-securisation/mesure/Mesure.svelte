@@ -114,7 +114,7 @@
 {#if mesure}
   <Heros
     {description}
-    illustrationSource="/assets/images/parcours-securisation/mesure-{mesure.id}.svg"
+    illustrationSource="/assets/images/parcours-securisation/mesure-{mesure.id}.avif"
     illustrationAlt=""
     format="details"
     {titre}
