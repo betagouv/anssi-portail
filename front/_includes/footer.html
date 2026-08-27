@@ -1,3 +1,21 @@
+{% if site.env.FEATURE_FLAG_PARCOURS_SECURISATION == 'true' %}
+{% assign liensBas = '[
+  {"label":"À propos","href":"/a-propos"},
+  {"label":"Mentions légales","href":"/mentions-legales"},
+  {"label":"Politique de confidentialité","href":"/confidentialite"},
+  {"label":"Conditions générales","href":"/cgu"},
+  {"label":"Statistiques d’utilisation","href":"/statistiques"},
+  {"label":"Sécurité","href":"/securite"},
+  {"label":"Accessibilité : non conforme","href":"/accessibilite"},
+  {"label":"Protéger ma collectivité","href":"/collectivites"},
+  {"label":"Protéger mon entreprise","href":"/entreprises"},
+  {"label":"Protéger mon association","href":"/associations"},
+  {"label":"Les services pour se lancer","href":"/parcours-debuter"},
+  {"label":"Parcours de sécurisation cyberdépart","href":"/parcours-cyberdepart"},
+  {"label":"Parcours de sécurisation complet","href":"/parcours-complet"},
+  {"label":"Les services pour approfondir","href":"/parcours-approfondir"}
+]' | escape %}
+{% else % }
 {% assign liensBas = '[
   {"label":"À propos","href":"/a-propos"},
   {"label":"Mentions légales","href":"/mentions-legales"},
@@ -12,6 +30,7 @@
   {"label":"Les services pour se lancer","href":"/parcours-debuter"},
   {"label":"Les services pour approfondir","href":"/parcours-approfondir"}
 ]' | escape %}
+{% endif %}
 <dsfr-footer
   id="pied"
   brand-link-href="/"
