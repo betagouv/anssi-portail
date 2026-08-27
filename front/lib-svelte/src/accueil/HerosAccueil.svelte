@@ -28,7 +28,7 @@
       ? '/parcours-securisation'
       : $profilStore?.parcoursSecurisation.parcoursActuel === 'allégé'
         ? '/modules/1'
-        : 'parcours-complet'
+        : '/parcours-complet'
   );
   const lienParcoursSécurisation = $derived($profilStore ? lienParcoursUtilisateur : '/parcours-securisation');
   const lienCTAProtection = $derived(afficheParcoursSecurisation ? lienParcoursSécurisation : '/cyberdepart');

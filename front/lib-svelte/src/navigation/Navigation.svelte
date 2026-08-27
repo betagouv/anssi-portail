@@ -30,7 +30,7 @@
       ? '/parcours-securisation'
       : $profilStore?.parcoursSecurisation.parcoursActuel === 'allégé'
         ? '/modules/1'
-        : 'parcours-complet'
+        : '/parcours-complet'
   );
   const lienParcoursSécurisation = $derived(estConnecte() ? lienParcoursUtilisateur : '/parcours-securisation');
   const menu = $derived([
