@@ -236,13 +236,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'confirmation-abonnement-infolettre',
   ];
 
-  routesStatiques
-    .concat(
-      configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()
-        ? ['simulateur-nis2']
-        : []
-    )
-    .forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
+  if (configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()) {
+    routesStatiques.push('simulateur-nis2');
+  }
 
   enregistreRoute('/financements/:id', ressourcePagesJekyll(configurationServeur, 'financements'));
 
@@ -367,7 +363,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ressourcePriseEnCompte(configurationServeur)
     );
     const landingPages = ['parcours-securisation', 'parcours-cyberdepart', 'parcours-securisation-complet'];
-    landingPages.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
+    routesStatiques.push(...landingPages);
     enregistreRoute('/api/mesures.csv', ressourceMesureCsv(configurationServeur));
     enregistreRoute('/api/modules', ressourceModule(configurationServeur));
     enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(303, '/modules/1'));
@@ -396,7 +392,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ressourcePagesJekyll(configurationServeur, 'partage-badge-cyberdepart')
     );
   }
-
+  routesStatiques.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
   enregistreRoute('/robots.txt', ressourceRobotsTxt(configurationServeur));
   enregistreRoute('/sitemap.xml', ressourceSitemapXml(routesStatiques, configurationServeur));
 
