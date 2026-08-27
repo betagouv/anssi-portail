@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
@@ -11,7 +12,7 @@ const ressourcePageCrisp = ({ cmsCrisp, adaptateurEnvironnement }: Configuration
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const idArticle = adaptateurEnvironnement.crisp().idArticle((requete.params.id as string).toUpperCase());
       if (!idArticle) {
-        reponse.sendStatus(404);
+        reponse.sendStatus(HttpStatusCode.NotFound);
         return;
       }
       const pageHtmlCrisp = await cmsCrisp.recupereArticle(idArticle);

@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import assert from 'assert';
 import { Request, Response } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
@@ -88,7 +89,7 @@ describe('Le middleware', () => {
 
       await middleware.verifieJWT(requete, reponse, () => {});
 
-      assert.equal(statutRecu, 401);
+      assert.equal(statutRecu, HttpStatusCode.Unauthorized);
 
       process.env = envOriginal;
     });
@@ -111,7 +112,7 @@ describe('Le middleware', () => {
 
       await middleware.verifieJWT(requete, reponse, () => {});
 
-      assert.equal(statutRecu, 401);
+      assert.equal(statutRecu, HttpStatusCode.Unauthorized);
     });
 
     it("ajoute l'email de l'utilisateur courant dans la requête", async () => {
@@ -240,7 +241,7 @@ describe('Le middleware', () => {
       await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {});
 
       assert.deepEqual(requete.utilisateur, jeanneDupont);
-      assert.equal(reponse.statusCode, 200);
+      assert.equal(reponse.statusCode, HttpStatusCode.Ok);
     });
 
     it('est indéfini si non défini dans la session', async () => {
@@ -285,7 +286,7 @@ describe('Le middleware', () => {
         suiteAppelee = true;
       });
 
-      assert.equal(reponse.statusCode, 500);
+      assert.equal(reponse.statusCode, HttpStatusCode.InternalServerError);
       assert.equal(suiteAppelee, false);
     });
 
@@ -297,7 +298,7 @@ describe('Le middleware', () => {
         suiteAppelee = true;
       });
 
-      assert.equal(reponse.statusCode, 401);
+      assert.equal(reponse.statusCode, HttpStatusCode.Unauthorized);
       assert.equal(requete.utilisateur, undefined);
       assert.equal(suiteAppelee, false);
     });
@@ -331,7 +332,7 @@ describe('Le middleware', () => {
       });
 
       assert.equal(requete.utilisateur, undefined);
-      assert.equal(reponse.statusCode, 200);
+      assert.equal(reponse.statusCode, HttpStatusCode.Ok);
       assert.equal(suiteAppelee, 1);
     });
   });
@@ -351,7 +352,7 @@ describe('Le middleware', () => {
 
       await middleware.verifieModeMaintenance(requete, reponse, () => {});
 
-      assert.equal(reponse.statusCode, 503);
+      assert.equal(reponse.statusCode, HttpStatusCode.ServiceUnavailable);
       assert.equal(estAppelé, true);
     });
 

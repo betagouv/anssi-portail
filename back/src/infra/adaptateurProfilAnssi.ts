@@ -1,4 +1,4 @@
-import axios, { isAxiosError } from '@anssi-portail/axios';
+import axios, { HttpStatusCode, isAxiosError } from '@anssi-portail/axios';
 import { decode } from 'html-entities';
 import { adaptateurProfilAnssiVide } from './adaptateurProfilAnssiVide.js';
 
@@ -53,7 +53,7 @@ const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
         JSON.stringify(reponse.data, (_cle, valeur) => (typeof valeur === 'string' ? decode(valeur) : valeur))
       );
     } catch (e) {
-      if (isAxiosError(e) && e.response?.status !== 404) {
+      if (isAxiosError(e) && e.response?.status !== HttpStatusCode.NotFound) {
         console.error({
           'Erreur renvoyée par API MonProfilAnssi': e.response?.data,
           'Statut renvoyé par API MonProfilAnssi': e.response?.status,
@@ -69,7 +69,7 @@ const adaptateurProfilAnssi = (): AdaptateurProfilAnssi => {
       const reponse = await axios.post<ProfilAnssi[]>(urlProfil, { emails }, CONFIGURATION_AUTHENTIFICATION);
       return reponse.data;
     } catch (e) {
-      if (isAxiosError(e) && e.response?.status !== 404) {
+      if (isAxiosError(e) && e.response?.status !== HttpStatusCode.NotFound) {
         console.error({
           'Erreur renvoyée par API MonProfilAnssi': e.response?.data,
           'Statut renvoyé par API MonProfilAnssi': e.response?.status,

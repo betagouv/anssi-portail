@@ -64,7 +64,7 @@ export const fabriqueMiddleware = ({
     suite: NextFunction
   ) => {
     if (!requete.session?.token) {
-      reponse.sendStatus(401);
+      reponse.sendStatus(HttpStatusCode.Unauthorized);
       return;
     }
 
@@ -73,7 +73,7 @@ export const fabriqueMiddleware = ({
       requete.emailUtilisateurCourant = email;
       suite();
     } catch {
-      reponse.sendStatus(401);
+      reponse.sendStatus(HttpStatusCode.Unauthorized);
     }
   };
 
@@ -112,7 +112,7 @@ export const fabriqueMiddleware = ({
         reponse.send(avecHoteSvelte);
       } catch {
         await reponse
-          .status(404)
+          .status(HttpStatusCode.NotFound)
           .set('Content-Type', 'text/html')
           .envoieFichierEnrichi(fournisseurChemin.jekyll.page404());
       }
@@ -180,7 +180,7 @@ export const fabriqueMiddleware = ({
           return;
         }
         if (e instanceof JsonWebTokenError) {
-          reponse.sendStatus(401);
+          reponse.sendStatus(HttpStatusCode.Unauthorized);
           return;
         }
       }
@@ -191,7 +191,7 @@ export const fabriqueMiddleware = ({
         }
         suite();
       } catch {
-        reponse.sendStatus(500);
+        reponse.sendStatus(HttpStatusCode.InternalServerError);
       }
     };
 

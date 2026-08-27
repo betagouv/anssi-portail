@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { Readable } from 'node:stream';
@@ -35,7 +36,7 @@ describe('La ressource des documents de ressource', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/documents-ressources/fichier_ressource.pdf');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu PDF', async () => {
@@ -90,7 +91,7 @@ describe('La ressource des documents de ressource', () => {
 
       const reponse = await request(serveur).get('/documents-ressources/fichier-qui-n-existe-pas.pdf');
 
-      assert.equal(reponse.status, 404);
+      assert.equal(reponse.status, HttpStatusCode.NotFound);
     });
   });
 });

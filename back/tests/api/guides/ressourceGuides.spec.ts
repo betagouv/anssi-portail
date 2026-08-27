@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -28,7 +29,7 @@ describe('La ressource qui gère les guides', () => {
       it('répond 200', async () => {
         const reponse = await request(serveur).get('/api/guides');
 
-        assert.equal(reponse.status, 200);
+        assert.equal(reponse.status, HttpStatusCode.Ok);
       });
 
       it('renvoie la liste des guides', async () => {
@@ -80,7 +81,7 @@ describe('La ressource qui gère les guides', () => {
         };
         const reponse = await request(serveur).get('/api/guides');
 
-        assert.equal(reponse.status, 500);
+        assert.equal(reponse.status, HttpStatusCode.InternalServerError);
       });
     });
 

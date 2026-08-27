@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { Readable } from 'node:stream';
@@ -44,7 +45,7 @@ describe("La ressource de document d'un guide", () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('sers le fichier correspondant', async () => {
@@ -68,7 +69,7 @@ describe("La ressource de document d'un guide", () => {
         configurationDuServeur.cellar.getStream = async () => undefined;
         const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
-        assert.equal(reponse.status, 404);
+        assert.equal(reponse.status, HttpStatusCode.NotFound);
       });
 
       it("répond 301 et pointe vers le guide qui contenait ce document, s'il s'agit d'un ancien document", async () => {
@@ -79,7 +80,7 @@ describe("La ressource de document d'un guide", () => {
 
         const reponse = await request(serveur).get('/documents-guides/ancien_anssi_back to basics_pki_1.0.pdf');
 
-        assert.equal(reponse.status, 301);
+        assert.equal(reponse.status, HttpStatusCode.MovedPermanently);
         assert.equal(reponse.headers['location'], '/guides/zero-trust');
       });
     });
@@ -90,7 +91,7 @@ describe("La ressource de document d'un guide", () => {
       };
       const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
-      assert.equal(reponse.status, 500);
+      assert.equal(reponse.status, HttpStatusCode.InternalServerError);
     });
 
     it('indique le type de contenu', async () => {

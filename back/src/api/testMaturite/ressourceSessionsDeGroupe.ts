@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { SessionDeGroupe } from '../../metier/sessionDeGroupe.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
@@ -16,7 +17,7 @@ export const ressourceSessionsDeGroupe = ({
     filetRouteAsynchrone(async (_: Request, reponse: Response) => {
       const sessionDeGroupe = await SessionDeGroupe.cree(generateurCodeSessionDeGroupe);
       await entrepotSessionDeGroupe.ajoute(sessionDeGroupe);
-      reponse.status(201).send({
+      reponse.status(HttpStatusCode.Created).send({
         code: sessionDeGroupe.code,
         lienParticipant: `${adaptateurEnvironnement.urlBaseMSC()}/test-maturite?session-groupe=${sessionDeGroupe.code}`,
       });

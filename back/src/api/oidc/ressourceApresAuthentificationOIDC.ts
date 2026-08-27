@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
 import { UtilisateurConnecte } from '../../bus/evenements/utilisateurConnecte.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
@@ -18,7 +19,7 @@ const ressourceApresAuthentificationOIDC = ({
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete, reponse) => {
       if (!requete.cookies.AgentConnectInfo) {
-        reponse.sendStatus(401);
+        reponse.sendStatus(HttpStatusCode.Unauthorized);
         return;
       }
 
@@ -42,7 +43,7 @@ const ressourceApresAuthentificationOIDC = ({
 
         await busEvenements.publie(new UtilisateurConnecte(emailHache, connexionAvecMFA));
       } catch {
-        reponse.sendStatus(401);
+        reponse.sendStatus(HttpStatusCode.Unauthorized);
       }
     })
   );

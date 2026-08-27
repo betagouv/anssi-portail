@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import assert from 'node:assert';
@@ -31,7 +32,7 @@ describe('La ressource qui gère les sessions de groupe', () => {
     it('répond 201', async () => {
       const reponse = await request(serveur).post('/api/sessions-groupe').send({});
 
-      assert.equal(reponse.status, 201);
+      assert.equal(reponse.status, HttpStatusCode.Created);
     });
 
     it('ajoute une session à l’entrepôt', async () => {

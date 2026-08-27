@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -53,7 +54,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
       it('réponds 401', async () => {
         const reponse = await request(serveur).put('/api/mesures/AUTH.5/prise-en-compte');
 
-        assert.equal(reponse.status, 401);
+        assert.equal(reponse.status, HttpStatusCode.Unauthorized);
       });
     });
 
@@ -75,7 +76,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
       it('réponds 201', async () => {
         const reponse = await putPriseEnCompteConnecte();
 
-        assert.equal(reponse.status, 201);
+        assert.equal(reponse.status, HttpStatusCode.Created);
       });
 
       it('renvoie le nouvel état du module', async () => {
@@ -95,7 +96,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
       it("réponds 404 si la mesure n'existe pas", async () => {
         const reponse = await request(serveur).put('/api/mesures/mesureinconnue/prise-en-compte').set('Cookie', cookie);
 
-        assert.equal(reponse.status, 404);
+        assert.equal(reponse.status, HttpStatusCode.NotFound);
       });
 
       it('publie un événement de prise en compte', async () => {

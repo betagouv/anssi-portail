@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -57,13 +58,13 @@ describe('La ressource d’un module', () => {
     it('réponds 200', async () => {
       const reponse = await getModuleCyberdépartConnecté();
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('réponds 401 si l’utilisateur n’est pas connecté', async () => {
       const reponse = await request(serveur).get('/api/modules/1');
 
-      assert.equal(reponse.status, 401);
+      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
     });
 
     it('renvoie la liste des mesures', async () => {
@@ -105,7 +106,7 @@ describe('La ressource d’un module', () => {
       });
       const reponse = await request(serveurSansLaRessource).get('/api/modules/1');
 
-      assert.equal(reponse.status, 404);
+      assert.equal(reponse.status, HttpStatusCode.NotFound);
     });
 
     it('indique si les mesures ont été prises en compte', async () => {
@@ -137,7 +138,7 @@ describe('La ressource d’un module', () => {
     it('réponds 404 si le module est inconnu', async () => {
       const reponse = await request(serveur).get('/api/modules/199').set('Cookie', cookieJeanneDupont);
 
-      assert.equal(reponse.status, 404);
+      assert.equal(reponse.status, HttpStatusCode.NotFound);
     });
 
     it('fournis la cible de déblocage du bagde cyberdépart', async () => {
@@ -153,7 +154,7 @@ describe('La ressource d’un module', () => {
     it('valide le type du paramètre de la requête', async () => {
       const reponse = await request(serveur).get('/api/modules/pas-un-nombre').set('Cookie', cookieJeanneDupont);
 
-      assert.equal(reponse.status, 404);
+      assert.equal(reponse.status, HttpStatusCode.NotFound);
     });
 
     it('renvoie le nom du module', async () => {

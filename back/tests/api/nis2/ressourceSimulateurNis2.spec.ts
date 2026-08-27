@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import assert from 'node:assert';
@@ -52,7 +53,7 @@ describe('La ressource qui gère le simulateur NIS2', () => {
     it('répond 201', async () => {
       const reponse = await request(serveur).post('/api/simulateur-nis2').send(reponseComplete());
 
-      assert.equal(reponse.status, 201);
+      assert.equal(reponse.status, HttpStatusCode.Created);
     });
 
     it("publie sur le bus le résultat du test d'éligibilité", async () => {
@@ -64,7 +65,7 @@ describe('La ressource qui gère le simulateur NIS2', () => {
     it("retourne 400 si le corps de la requête n'est pas un questionnaire correctement rempli", async () => {
       const { status } = await request(serveur).post('/api/simulateur-nis2').send({ question1: 'pas-un-booleen' });
 
-      assert.equal(status, 400);
+      assert.equal(status, HttpStatusCode.BadRequest);
     });
   });
 });

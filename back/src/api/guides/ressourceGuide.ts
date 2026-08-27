@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { NextFunction, Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
@@ -14,11 +15,11 @@ const ressourceGuide = ({ adaptateurEnvironnement, entrepotGuide }: Configuratio
       try {
         const guide = await entrepotGuide.parId(requete.params.slug as string);
         if (!guide) {
-          reponse.sendStatus(404);
+          reponse.sendStatus(HttpStatusCode.NotFound);
           return;
         }
 
-        reponse.status(200).send(guidePresentation(adaptateurEnvironnement)(guide));
+        reponse.status(HttpStatusCode.Ok).send(guidePresentation(adaptateurEnvironnement)(guide));
       } catch (err) {
         suivante(err);
       }

@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { detruisSession } from './session.js';
@@ -24,7 +25,7 @@ const ressourcePageConnexion = ({ fournisseurChemin }: ConfigurationServeur): Ro
       detruisSession(requete, reponse);
       await reponse
         .contentType('text/html')
-        .status(200)
+        .status(HttpStatusCode.Ok)
         .envoieFichierEnrichi(fournisseurChemin.jekyll.page('connexion'));
     })
   );

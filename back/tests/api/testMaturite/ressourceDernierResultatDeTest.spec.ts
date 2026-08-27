@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -76,7 +77,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
         const reponse = await requeteGET();
 
-        assert.equal(reponse.status, 200);
+        assert.equal(reponse.status, HttpStatusCode.Ok);
         assert.deepEqual(reponse.body.reponses, {
           'prise-en-compte-risque': 2,
           pilotage: 3,
@@ -100,7 +101,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
       it("renvoie une erreur 404 lorsque l'utilisateur n'a pas de test", async () => {
         const reponse = await requeteGET();
 
-        assert.equal(reponse.status, 404);
+        assert.equal(reponse.status, HttpStatusCode.NotFound);
       });
 
       it('renvoie le niveau du test', async () => {
@@ -222,7 +223,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
         const reponse = await requeteGET();
 
-        assert.equal(reponse.status, 401);
+        assert.equal(reponse.status, HttpStatusCode.Unauthorized);
       });
     });
   });

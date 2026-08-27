@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -36,7 +37,7 @@ describe('La ressource Statistiques', () => {
     it('renvoie 200', async () => {
       const reponse = await request(serveur).get('/api/statistiques');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it("renvoie le nombre d'utilisateur inscrits", async () => {

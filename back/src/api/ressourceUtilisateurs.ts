@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Response, Router } from 'express';
 import { encode } from 'html-entities';
 import z from 'zod';
@@ -92,9 +93,9 @@ const ressourceUtilisateurs = ({
 
           await busEvenements.publie(new CompteCree(payloadDeCréationdeCompte));
 
-          reponse.sendStatus(201);
+          reponse.sendStatus(HttpStatusCode.Created);
         } catch {
-          reponse.status(400).send({ erreur: 'Le token est invalide' });
+          reponse.status(HttpStatusCode.BadRequest).send({ erreur: 'Le token est invalide' });
         }
       }
     )

@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { NextFunction, Request, Response } from 'express';
 import { pipeline } from 'node:stream/promises';
 import { AdaptateurCellar, CleDuBucket } from '../infra/adaptateurCellar.js';
@@ -5,7 +6,7 @@ import { filetRouteAsynchrone } from './middlewares/middleware.js';
 
 export type FonctionDocumentManquant = (reponse: Response, nomDuDocument: string) => Promise<void>;
 export const gereDocumentManquantSimplement = async (reponse: Response) => {
-  reponse.sendStatus(404);
+  reponse.sendStatus(HttpStatusCode.NotFound);
 };
 
 export const fabriqueGestionnaireRessourceCellar = (

@@ -202,7 +202,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       // on garde la redirection pour ne pas casser les liens existants
       return reponse.redirect(HttpStatusCode.MovedPermanently, `/financements/${id}`);
     }
-    reponse.contentType('text/html').status(200).envoieFichierEnrichi(fournisseurChemin.jekyll.page('financements'));
+    reponse
+      .contentType('text/html')
+      .status(HttpStatusCode.Ok)
+      .envoieFichierEnrichi(fournisseurChemin.jekyll.page('financements'));
   });
 
   const routesStatiques = [
@@ -370,7 +373,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     landingPages.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
     enregistreRoute('/api/mesures.csv', ressourceMesureCsv(configurationServeur));
     enregistreRoute('/api/modules', ressourceModule(configurationServeur));
-    enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(303, '/modules/1'));
+    enregistreRoute('/module-cyberdepart', (_, reponse) => reponse.redirect(HttpStatusCode.SeeOther, '/modules/1'));
     enregistreRoute(
       '/modules/1',
       ressourcePagesJekyllConnectees(configurationServeur, 'module-cyberdepart', [attributionParcours('allégé')])

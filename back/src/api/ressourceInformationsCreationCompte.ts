@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { ResultatRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
 import { ConfigurationServeur } from './configurationServeur.js';
@@ -16,7 +17,7 @@ const ressourceInformationsCreationCompte = ({
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const { token } = requete.query;
-      if (!token) reponse.sendStatus(401);
+      if (!token) reponse.sendStatus(HttpStatusCode.Unauthorized);
       try {
         const informationsUtilisateur = adaptateurJWT.decode(token as string);
 
@@ -45,7 +46,7 @@ const ressourceInformationsCreationCompte = ({
           domainesSpecialite: profilAnssi?.domainesSpecialite,
         });
       } catch {
-        reponse.sendStatus(401);
+        reponse.sendStatus(HttpStatusCode.Unauthorized);
       }
     })
   );

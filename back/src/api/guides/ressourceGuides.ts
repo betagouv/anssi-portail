@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { NextFunction, Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
@@ -18,7 +19,7 @@ const ressourceGuides = ({ adaptateurEnvironnement, entrepotGuide, entrepotGuide
         const guidesPublies = guides
           .filter((guide) => guide.estPublie())
           .map(guidePresentation(adaptateurEnvironnement));
-        reponse.status(200).send(guidesPublies);
+        reponse.status(HttpStatusCode.Ok).send(guidesPublies);
       } catch (e) {
         suivante(e);
       }

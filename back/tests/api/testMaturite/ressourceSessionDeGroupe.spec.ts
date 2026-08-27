@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -26,13 +27,13 @@ describe('La ressource qui gère une session de groupe', () => {
 
       const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED').send({});
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it("répond 404 lorsque la session n'existe pas", async () => {
       const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED').send({});
 
-      assert.equal(reponse.status, 404);
+      assert.equal(reponse.status, HttpStatusCode.NotFound);
     });
   });
 });

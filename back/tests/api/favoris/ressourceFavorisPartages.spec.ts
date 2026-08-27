@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { randomUUID } from 'node:crypto';
@@ -40,7 +41,7 @@ describe('La ressource des favoris partagés', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get(`/api/favoris-partages/${idListeFavoris}`);
 
-      assert.equal(reponse.statusCode, 200);
+      assert.equal(reponse.statusCode, HttpStatusCode.Ok);
     });
 
     it("retourne les favoris de l'utilisateur qui a partagé sa liste", async () => {
@@ -56,13 +57,13 @@ describe('La ressource des favoris partagés', () => {
     it('répond 404 si aucun utilisateur ne possède cet id de liste de favoris', async () => {
       const reponse = await request(serveur).get(`/api/favoris-partages/${randomUUID()}`);
 
-      assert.equal(reponse.statusCode, 404);
+      assert.equal(reponse.statusCode, HttpStatusCode.NotFound);
     });
 
     it("retourne 404 si l'id de la liste de favoris n'est pas un uuid", async () => {
       const reponse = await request(serveur).get(`/api/favoris-partages/pasunuuid`);
 
-      assert.equal(reponse.statusCode, 404);
+      assert.equal(reponse.statusCode, HttpStatusCode.NotFound);
     });
   });
 });

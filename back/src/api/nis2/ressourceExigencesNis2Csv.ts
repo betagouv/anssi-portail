@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { createObjectCsvStringifier } from 'csv-writer';
 import { Router } from 'express';
 import z from 'zod';
@@ -43,7 +44,7 @@ export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationSer
       const referentielSource = versReferentiel(source);
       const referentielCible = versReferentiel(cible);
       if (referentielCible !== 'NIS2' && referentielSource !== 'NIS2') {
-        return reponse.sendStatus(404);
+        return reponse.sendStatus(HttpStatusCode.NotFound);
       }
 
       const exigences = await entrepotExigence.parReferentiel(referentielSource, referentielCible);

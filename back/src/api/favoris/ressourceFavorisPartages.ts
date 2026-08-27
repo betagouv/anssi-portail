@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
@@ -14,7 +15,7 @@ const ressourceFavorisPartages = ({ entrepotFavori, entrepotUtilisateur }: Confi
       const utilisateurPartageur = await entrepotUtilisateur.parIdListeFavoris(requete.params.id as string);
 
       if (!utilisateurPartageur) {
-        reponse.sendStatus(404);
+        reponse.sendStatus(HttpStatusCode.NotFound);
         return;
       }
 

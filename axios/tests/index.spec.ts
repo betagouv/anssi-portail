@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosHeaders, isAxiosError } from '@anssi-portail/axios';
+import axios, { AxiosError, AxiosHeaders, HttpStatusCode, isAxiosError } from '@anssi-portail/axios';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
@@ -18,7 +18,7 @@ test('retire les données sensibles des erreurs Axios', async () => {
     data: {},
     headers: new AxiosHeaders({ 'set-cookie': 'secret' }),
     request: requete,
-    status: 500,
+    status: HttpStatusCode.InternalServerError,
     statusText: 'Internal Server Error',
   });
 

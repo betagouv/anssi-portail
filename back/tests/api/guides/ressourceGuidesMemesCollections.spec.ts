@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -34,13 +35,13 @@ describe('La ressource des guides de mêmes collections', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/api/guides/zero-trust/memes-collections');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it("répond 404 si le guide n'existe pas", async () => {
       const reponse = await request(serveur).get('/api/guides/slug-de-guide-inconnu/memes-collections');
 
-      assert.equal(reponse.status, 404);
+      assert.equal(reponse.status, HttpStatusCode.NotFound);
     });
 
     it('renvoie une liste de guides dont les collections correspondent à au moins une collection du guide ciblé', async () => {

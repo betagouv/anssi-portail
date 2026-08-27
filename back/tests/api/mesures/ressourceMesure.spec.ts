@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -48,7 +49,7 @@ describe('La ressource mesure de sécurité', () => {
     it('réponds 200', async () => {
       const reponse = await getConnecte(serveur, cookieJeanneDupont);
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('renvoie les détails de la mesure', async () => {
@@ -109,7 +110,7 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
     it('réponds 404 si la mesure demandée est inconnue', async () => {
       const reponse = await request(serveur).get('/api/mesures/INCONNU.0').set('Cookie', cookieJeanneDupont);
 
-      assert.equal(reponse.status, 404);
+      assert.equal(reponse.status, HttpStatusCode.NotFound);
     });
 
     it('réponds 404 si la fonctionnalité est désactivée', async () => {
@@ -130,7 +131,7 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
       });
       const reponse = await request(serveurSansLaRessource).get('/api/mesures/AUTH.5');
 
-      assert.equal(reponse.status, 404);
+      assert.equal(reponse.status, HttpStatusCode.NotFound);
     });
 
     it('indique que la mesure a été prise en compte', async () => {
@@ -156,7 +157,7 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
       it('réponds 401', async () => {
         const reponse = await request(serveur).get('/api/mesures/AUTH.5');
 
-        assert.equal(reponse.status, 401);
+        assert.equal(reponse.status, HttpStatusCode.Unauthorized);
       });
     });
 

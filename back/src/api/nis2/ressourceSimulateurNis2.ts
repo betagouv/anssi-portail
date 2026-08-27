@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
 import { SimulationNis2Terminee } from '../../bus/evenements/simulationNis2Terminee.js';
 import { CalculEligibilite } from '../../metier/nis2-simulateur/questionnaire/calculEligibilite.js';
@@ -17,7 +18,7 @@ export const ressourceSimulateurNis2 = ({ busEvenements, fournisseurChemin }: Co
       const resultat = new CalculEligibilite(cheminCsv).evalueEligibilite(requete.body);
       await busEvenements.publie(new SimulationNis2Terminee(resultat));
 
-      reponse.sendStatus(201);
+      reponse.sendStatus(HttpStatusCode.Created);
     })
   );
 

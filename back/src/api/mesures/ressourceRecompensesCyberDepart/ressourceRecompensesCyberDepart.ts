@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
 import { Utilisateur } from '../../../metier/utilisateur.js';
 import { ConfigurationServeur } from '../../configurationServeur.js';
@@ -25,13 +26,13 @@ export const ressourceRécompensesCyberDépart = ({
       const ID_MODULE_CYBERDEPART = 1;
       const moduleCyberdépart = await entrepôtModule.parId(ID_MODULE_CYBERDEPART);
       if (!moduleCyberdépart) {
-        return reponse.sendStatus(500);
+        return reponse.sendStatus(HttpStatusCode.InternalServerError);
       }
 
       const cibleBadgeCyberdépart = moduleCyberdépart.cibleDéblocageBadgeCyberdépart()!;
       const utilisateur = requete.utilisateur as Utilisateur;
       if (utilisateur.nombreDeMesuresPrisesEnCompte(moduleCyberdépart) < cibleBadgeCyberdépart) {
-        return reponse.sendStatus(403);
+        return reponse.sendStatus(HttpStatusCode.Forbidden);
       }
 
       const nomOrganisation = (await (requete.utilisateur as Utilisateur).organisation()).nom;

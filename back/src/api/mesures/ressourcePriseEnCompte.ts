@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { EntrepotMesure } from '../../metier/entrepotMesure.js';
 import { Mesure } from '../../metier/mesure.js';
@@ -46,7 +47,7 @@ export const ressourcePriseEnCompte = ({
       const mesureEtModule = await mesureDeModule(idMesure, entrepotMesure, entrepôtModule);
 
       if (!mesureEtModule) {
-        return reponse.sendStatus(404);
+        return reponse.sendStatus(HttpStatusCode.NotFound);
       }
 
       const { mesure, module } = mesureEtModule;
@@ -58,7 +59,7 @@ export const ressourcePriseEnCompte = ({
         module,
       });
       await entrepotUtilisateur.metsAJour(utilisateur);
-      return reponse.status(201).send(nouvelÉtatDuModule);
+      return reponse.status(HttpStatusCode.Created).send(nouvelÉtatDuModule);
     })
   );
 

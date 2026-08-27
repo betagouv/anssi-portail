@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -48,7 +49,7 @@ describe('La ressource avis sur une mesure de sécurité', () => {
       it('doit répondre 401', async () => {
         const reponse = await request(serveur).post('/api/mesures/AUTH.5/avis').send(retourPositif);
 
-        assert.equal(reponse.status, 401);
+        assert.equal(reponse.status, HttpStatusCode.Unauthorized);
       });
     });
 
@@ -65,7 +66,7 @@ describe('La ressource avis sur une mesure de sécurité', () => {
           .set('Cookie', [cookie])
           .send(retourPositif);
 
-        assert.equal(reponse.status, 201);
+        assert.equal(reponse.status, HttpStatusCode.Created);
       });
 
       it("doit répondre 404 si la mesure n'existe pas", async () => {
@@ -74,7 +75,7 @@ describe('La ressource avis sur une mesure de sécurité', () => {
           .set('Cookie', [cookie])
           .send(retourPositif);
 
-        assert.equal(reponse.status, 404);
+        assert.equal(reponse.status, HttpStatusCode.NotFound);
       });
 
       it('doit répondre 400 si le corps de la requête est vide', async () => {
@@ -83,7 +84,7 @@ describe('La ressource avis sur une mesure de sécurité', () => {
           .set('Cookie', [cookie])
           .send({});
 
-        assert.equal(reponse.status, 400);
+        assert.equal(reponse.status, HttpStatusCode.BadRequest);
         assert.equal(reponse.body.fieldErrors.retour[0], 'Le retour doit être "POSITIF" ou "NEGATIF"');
       });
 
@@ -93,7 +94,7 @@ describe('La ressource avis sur une mesure de sécurité', () => {
           .set('Cookie', [cookie])
           .send({ retour: 'INVALIDE' });
 
-        assert.equal(reponse.status, 400);
+        assert.equal(reponse.status, HttpStatusCode.BadRequest);
         assert.equal(reponse.body.fieldErrors.retour[0], 'Le retour doit être "POSITIF" ou "NEGATIF"');
       });
 
@@ -103,7 +104,7 @@ describe('La ressource avis sur une mesure de sécurité', () => {
           .set('Cookie', [cookie])
           .send({ retour: 'NEGATIF', commentaire: 'x'.repeat(1001) });
 
-        assert.equal(reponse.status, 400);
+        assert.equal(reponse.status, HttpStatusCode.BadRequest);
         assert.equal(reponse.body.fieldErrors.commentaire[0], 'Le commentaire doit contenir au plus 1000 caractères');
       });
 

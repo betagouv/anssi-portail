@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -44,7 +45,7 @@ describe("La ressource d'une page Jekyll connectée", () => {
       const reponse = await request(serveur).get('/favoris');
 
       assert.equal(middelwareAppele, true);
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it("affecte le parcours de l'utilisateur", async () => {
@@ -85,7 +86,7 @@ describe("La ressource d'une page Jekyll connectée", () => {
       });
       const reponse = await request(serveur).get('/mesures/AUTH.5').set('Cookie', [cookie]);
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
       busEvenements.aRecuUnEvenement(MesureConsultee);
       const evenement = busEvenements.recupereEvenement(MesureConsultee);
       assert.equal(evenement!.idMesure, 'AUTH.5');
@@ -98,7 +99,7 @@ describe("La ressource d'une page Jekyll connectée", () => {
 
       const reponse = await request(serveur).get('/mesures/auth5').set('Cookie', [cookie]);
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
       busEvenements.naPasRecuDEvenement(MesureConsultee);
     });
   });

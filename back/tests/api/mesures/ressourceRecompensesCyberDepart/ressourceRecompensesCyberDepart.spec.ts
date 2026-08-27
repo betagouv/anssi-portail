@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import AdmZip from 'adm-zip';
 import { Express } from 'express';
 import assert from 'node:assert';
@@ -49,7 +50,7 @@ describe('La ressource des récompenses CyberDépart', () => {
   it('renvoie un 401 pour une requête non-connectée', async () => {
     const reponse = await request(serveur).get('/api/cyberdepart/attestation_badge_cyberdepart.zip');
 
-    assert.equal(reponse.status, 401);
+    assert.equal(reponse.status, HttpStatusCode.Unauthorized);
   });
 
   it("renvoie un 403 si l'utilisateur tente d'obtenir les récompenses sans avoir suffisamment complété le module", async () => {
@@ -59,7 +60,7 @@ describe('La ressource des récompenses CyberDépart', () => {
       .get('/api/cyberdepart/attestation_badge_cyberdepart.zip')
       .set('Cookie', cookieJeanneDupont);
 
-    assert.equal(reponse.status, 403);
+    assert.equal(reponse.status, HttpStatusCode.Forbidden);
   });
 
   it('renvoie un zip', async () => {
@@ -68,7 +69,7 @@ describe('La ressource des récompenses CyberDépart', () => {
       .get('/api/cyberdepart/attestation_badge_cyberdepart.zip')
       .set('Cookie', cookieJeanneDupont);
 
-    assert.equal(reponse.status, 200);
+    assert.equal(reponse.status, HttpStatusCode.Ok);
     assert.equal(reponse.headers['content-type'], 'application/zip');
     assert.equal(reponse.headers['content-disposition'], 'attachment; filename="attestation_badge_cyberdepart.zip"');
   });

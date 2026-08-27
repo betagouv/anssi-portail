@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -53,7 +54,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
   it('retourne une 201', async () => {
     const reponse = await request(serveur).post('/api/mon-aide-cyber/demandes-aide').send(uneDemandeAide());
 
-    assert.equal(reponse.status, 201);
+    assert.equal(reponse.status, HttpStatusCode.Created);
   });
 
   describe('envoie la demande d’aide à MAC', () => {
@@ -115,7 +116,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
       .post('/api/mon-aide-cyber/demandes-aide')
       .send(uneDemandeAide({ email: 'durant@mail.fr' }));
 
-    assert.equal(reponse.status, 400);
+    assert.equal(reponse.status, HttpStatusCode.BadRequest);
     assert.equal(reponse.body.erreur, 'une erreur quelconque');
   });
 
@@ -153,7 +154,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
           },
         });
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.entiteAidee[0], 'Veuillez saisir un email valide.');
     });
 
@@ -169,7 +170,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
           },
         });
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.entiteAidee[0], 'Veuillez saisir un SIRET valide.');
     });
 
@@ -186,7 +187,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
           },
         });
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.emailAidant[0], 'Veuillez saisir un email valide pour l’Aidant cyber.');
     });
 
@@ -203,7 +204,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
           },
         });
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.validationCGU[0], 'Veuillez valider les CGU.');
     });
 
@@ -216,7 +217,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
           entiteAidee: { departement: '1000', raisonSociale: 'Une raison sociale' },
         });
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.entiteAidee[0], 'Veuillez saisir un département valide.');
     });
 
@@ -233,7 +234,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
           },
         });
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.entiteAidee[0], 'Veuillez saisir une raison sociale valide.');
     });
 
@@ -251,7 +252,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
           identifiantAidant: '  a ',
         });
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(
         reponse.body.fieldErrors.identifiantAidant[0],
         'Veuillez saisir un identifiant Aidant cyber valide.'
@@ -272,7 +273,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
           siretAidant: '01234',
         });
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.siretAidant[0], 'Veuillez saisir un SIRET Aidant cyber valide.');
     });
 
@@ -290,7 +291,7 @@ describe('Quand requête POST sur `/api/mon-aide-cyber/demandes-aide`', () => {
           },
         });
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.origine[0], 'Veuillez saisir une origine valide.');
     });
   });

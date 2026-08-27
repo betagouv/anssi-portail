@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -36,7 +37,7 @@ describe('quand requête GET sur `/api/pages-crisp/un-id-d-article`', () => {
   it('retourne un statut 200', async () => {
     const reponse = await request(serveur).get('/api/pages-crisp/promouvoir_msc');
 
-    assert.equal(reponse.status, 200);
+    assert.equal(reponse.status, HttpStatusCode.Ok);
   });
 
   it('retourne un article du CMS', async () => {
@@ -69,6 +70,6 @@ describe('quand requête GET sur `/api/pages-crisp/un-id-d-article`', () => {
 
     const reponse = await request(serveur).get('/api/pages-crisp/id_inconnu');
 
-    assert.equal(reponse.status, 404);
+    assert.equal(reponse.status, HttpStatusCode.NotFound);
   });
 });

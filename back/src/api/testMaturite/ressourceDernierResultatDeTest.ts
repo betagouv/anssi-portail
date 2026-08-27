@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
 import { estCodeRegion, regionParCode } from '../../metier/referentielRegions.js';
 import { secteurParCode } from '../../metier/referentielSecteurs.js';
@@ -22,7 +23,7 @@ const ressourceDernierResultatDeTest = ({
     filetRouteAsynchrone(async (requete, reponse) => {
       const resultatTest = await entrepotResultatTest.dernierPourUtilisateur(requete.utilisateur);
       if (!resultatTest) {
-        reponse.sendStatus(404);
+        reponse.sendStatus(HttpStatusCode.NotFound);
         return;
       }
 

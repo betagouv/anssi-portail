@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -26,7 +27,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
 
       const reponse = await request(serveur).get('/api/repartition-resultats-test');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('calcule la moyenne des scores de résultats de même niveau', async () => {
@@ -98,7 +99,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
 
       const reponse = await request(serveur).get('/api/repartition-resultats-test');
 
-      assert.equal(reponse.status, 204);
+      assert.equal(reponse.status, HttpStatusCode.NoContent);
     });
 
     describe('avec un filtre', () => {
