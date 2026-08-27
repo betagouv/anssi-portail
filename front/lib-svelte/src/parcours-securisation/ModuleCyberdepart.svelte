@@ -15,6 +15,7 @@
   import ModaleModuleCyberdepartTermine from './modales/ModaleModuleCyberdepartTermine.svelte';
   import type { ModuleRéponseApi } from './moduleReponseApi';
   import Progression from './Progression.svelte';
+  import LienRetourAuxModules from './LienRetourAuxModules.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -90,6 +91,7 @@
 
 <dsfr-container>
   <div class="progression">
+    <LienRetourAuxModules />
     {#if parcoursTermine && !parcoursComplet}
       <BasculeParcoursComplet />
     {:else if badgeDebloque && !parcoursTermine}
