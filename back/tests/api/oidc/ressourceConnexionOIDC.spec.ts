@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import request from 'supertest';
@@ -25,7 +26,7 @@ describe('La ressource connexion OIDC', () => {
     it("redirige vers l'adresse proconnect", async () => {
       const reponse = await request(serveur).get('/oidc/connexion');
 
-      assert.equal(reponse.status, 302);
+      assert.equal(reponse.status, HttpStatusCode.Found);
       assert.equal(reponse.headers.location, 'une-adresse-proconnect');
     });
 

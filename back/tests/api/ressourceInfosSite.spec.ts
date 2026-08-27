@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import assert from 'node:assert';
@@ -22,7 +23,7 @@ describe('La ressource Informations du site', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/api/infos-site');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it("retourne le jour et l'heure de la maintenance en préparation", async () => {

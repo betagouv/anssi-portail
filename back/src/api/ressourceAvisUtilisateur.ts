@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Response, Router } from 'express';
 import z from 'zod';
 import { AvisUtilisateurDonne } from '../bus/evenements/avisUtilisateurDonne.js';
@@ -21,7 +22,7 @@ export const ressourceAvisUtilisateur = ({ busEvenements, messagerieInstantanee 
           emailDeContact,
         });
         await busEvenements.publie(new AvisUtilisateurDonne({ niveauDeSatisfaction, emailDeContact }));
-        reponse.sendStatus(201);
+        reponse.sendStatus(HttpStatusCode.Created);
       }
     )
   );

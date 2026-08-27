@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { estCodeRegion } from '../../metier/referentielRegions.js';
 import { estCodeSecteur } from '../../metier/referentielSecteurs.js';
@@ -30,7 +31,7 @@ export const ressourceRepartitionDesResultatsDeTest = ({
           codeTrancheEffectif,
         });
         if (tousLesResultats.length < adaptateurEnvironnement.repartition().nombreMinimumDeResultats()) {
-          reponse.sendStatus(204);
+          reponse.sendStatus(HttpStatusCode.NoContent);
           return;
         }
         const repartitions = new RepartitionResultatsTest(tousLesResultats).calculeRepartitionParNiveau();

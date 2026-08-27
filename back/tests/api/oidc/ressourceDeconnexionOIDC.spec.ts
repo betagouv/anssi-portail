@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import request from 'supertest';
@@ -32,7 +33,7 @@ describe('La ressource deconnexion OIDC', () => {
 
       const reponse = await request(serveur).get('/oidc/deconnexion').set('Cookie', [cookie]);
 
-      assert.equal(reponse.status, 302);
+      assert.equal(reponse.status, HttpStatusCode.Found);
       assert.equal(reponse.headers.location, 'une-adresse-proconnect');
       assert.equal(idTokenRecu, 'idToken');
     });

@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
 import z from 'zod';
 import {
@@ -25,14 +26,14 @@ export const ressourceExigencesNis2 = ({ adaptateurEnvironnement, entrepotExigen
       const referentielSource = versReferentiel(source);
       const referentielCible = versReferentiel(cible);
       if (referentielCible !== 'NIS2' && referentielSource !== 'NIS2') {
-        return reponse.sendStatus(404);
+        return reponse.sendStatus(HttpStatusCode.NotFound);
       }
 
       if (
         !adaptateurEnvironnement.fonctionnalites().nis2().afficheCyFun23() &&
         (referentielCible === 'CyFun23' || referentielSource === 'CyFun23')
       ) {
-        return reponse.sendStatus(404);
+        return reponse.sendStatus(HttpStatusCode.NotFound);
       }
 
       const exigences = await entrepotExigence.parReferentiel(referentielSource, referentielCible);

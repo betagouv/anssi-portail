@@ -1,4 +1,4 @@
-import axios, { isAxiosError } from '@anssi-portail/axios';
+import axios, { HttpStatusCode, isAxiosError } from '@anssi-portail/axios';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { adaptateurMonAideCyberVide } from './adaptateurMonAideCyberVide.js';
 
@@ -41,7 +41,12 @@ class AdaptateurHttpMonAideCyber implements AdaptateurMonAideCyber {
       };
       await axios.post(`${this.adaptateurEnvironnement.monAideCyber().url()}/api/demandes/etre-aide`, demandeMAC);
     } catch (e: unknown | Error) {
-      if (isAxiosError(e) && e.response && e.response.status >= 400 && e.response.status < 500) {
+      if (
+        isAxiosError(e) &&
+        e.response &&
+        e.response.status >= HttpStatusCode.BadRequest &&
+        e.response.status < HttpStatusCode.InternalServerError
+      ) {
         throw new Error(e.response.data.message, { cause: e });
       }
       throw e;

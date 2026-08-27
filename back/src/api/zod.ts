@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { NextFunction, Request, Response } from 'express';
 import * as z from 'zod';
 
@@ -9,7 +10,7 @@ export const valideRequete =
     suite: NextFunction
   ) => {
     const resultat = objet.safeParse(requete) as z.ZodSafeParseResult<z.core.output<TZod>>;
-    if (!resultat.success) return reponse.sendStatus(400);
+    if (!resultat.success) return reponse.sendStatus(HttpStatusCode.BadRequest);
     return suite();
   };
 
@@ -19,7 +20,7 @@ export const valideParametresRequete =
     const resultat = objet.safeParse(requete.params);
 
     if (!resultat.success) {
-      return reponse.sendStatus(404);
+      return reponse.sendStatus(HttpStatusCode.NotFound);
     }
 
     return suite();
@@ -30,7 +31,7 @@ export const valideCorpsRequete =
   async (requete: Request<unknown, unknown, TBody, unknown, never>, reponse: Response, suite: NextFunction) => {
     const resultat = objet.safeParse(requete.body === undefined ? {} : requete.body);
 
-    if (!resultat.success) return reponse.status(400).send(z.flattenError(resultat.error));
+    if (!resultat.success) return reponse.status(HttpStatusCode.BadRequest).send(z.flattenError(resultat.error));
 
     // Ici, on veut bel et bien réécrire la requête, car c'est comme ça qu'expressjs est conçu.
     // On réassigne pour que les suivants récupèrent le contenu assaini par Zod.

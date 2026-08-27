@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import assert from 'node:assert';
@@ -16,7 +17,7 @@ describe('La ressource Annuaire Départements', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/api/annuaire/departements');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('renvoie les départements du référentiel', async () => {

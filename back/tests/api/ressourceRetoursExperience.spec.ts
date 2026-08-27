@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -30,7 +31,7 @@ describe("La ressource des retours d'expérience", () => {
       const reponse = await request(serveur).post('/api/retours-experience').send({
         raison: 'pas-clair',
       });
-      assert.equal(reponse.status, 201);
+      assert.equal(reponse.status, HttpStatusCode.Created);
     });
 
     it('envoie les données du questionnaire à mattermost', async () => {
@@ -62,7 +63,7 @@ describe("La ressource des retours d'expérience", () => {
         raison: 'raison-invalide',
       });
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.raison[0], 'La raison est invalide');
       assert.equal(retourExperienceEnvoye, null);
     });
@@ -73,7 +74,7 @@ describe("La ressource des retours d'expérience", () => {
         raison: 'pas-clair',
       });
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.emailDeContact[0], "L'email est invalide");
     });
 
@@ -83,7 +84,7 @@ describe("La ressource des retours d'expérience", () => {
         raison: 'pas-clair',
       });
 
-      assert.equal(reponse.status, 201);
+      assert.equal(reponse.status, HttpStatusCode.Created);
     });
 
     it('accepte la raison pas-decisionnaire', async () => {
@@ -91,7 +92,7 @@ describe("La ressource des retours d'expérience", () => {
         raison: 'pas-decisionnaire',
       });
 
-      assert.equal(reponse.status, 201);
+      assert.equal(reponse.status, HttpStatusCode.Created);
     });
 
     describe("concernant la publication de l'événement", () => {

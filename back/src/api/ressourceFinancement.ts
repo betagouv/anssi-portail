@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
@@ -11,7 +12,7 @@ export const ressourceFinancement = ({ entrepotFinancement }: ConfigurationServe
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const financement = await entrepotFinancement.parId(Number(requete.params.id));
       if (!financement) {
-        reponse.sendStatus(404);
+        reponse.sendStatus(HttpStatusCode.NotFound);
         return;
       }
 

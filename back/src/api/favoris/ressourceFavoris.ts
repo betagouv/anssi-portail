@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import z from 'zod';
 import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur.js';
@@ -35,7 +36,7 @@ const ressourceFavoris = ({
             utilisateur,
           })
         );
-        reponse.sendStatus(201);
+        reponse.sendStatus(HttpStatusCode.Created);
       }
     )
   );
@@ -48,7 +49,7 @@ const ressourceFavoris = ({
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const utilisateur = requete.utilisateur;
       const favoris = await entrepotFavori.tousCeuxDeUtilisateur(utilisateur);
-      reponse.status(200).send(favoris.map((favori) => favori.idItemCyber));
+      reponse.status(HttpStatusCode.Ok).send(favoris.map((favori) => favori.idItemCyber));
     })
   );
 

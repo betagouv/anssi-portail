@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import z from 'zod';
 import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee.js';
@@ -59,7 +60,7 @@ const ressourceResultatsDeTest = ({
           );
         }
 
-        reponse.status(201).send({ id: resultatTest.id });
+        reponse.status(HttpStatusCode.Created).send({ id: resultatTest.id });
       }
     )
   );

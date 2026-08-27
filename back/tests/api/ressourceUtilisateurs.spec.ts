@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -55,7 +56,7 @@ describe('La ressource utilisateur', () => {
     it('répond 201', async () => {
       const reponse = await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
 
-      assert.equal(reponse.status, 201);
+      assert.equal(reponse.status, HttpStatusCode.Created);
     });
 
     it("ajoute un utilisateur à l'entrepot", async () => {
@@ -185,7 +186,7 @@ describe('La ressource utilisateur', () => {
             ...donneesUtilisateur,
             telephone: 'ABCD',
           });
-        assert.equal(reponse.status, 400);
+        assert.equal(reponse.status, HttpStatusCode.BadRequest);
         assert.equal(reponse.body.fieldErrors.telephone[0], 'Le téléphone est invalide');
       });
 
@@ -196,7 +197,7 @@ describe('La ressource utilisateur', () => {
             ...donneesUtilisateur,
             domainesSpecialite: [],
           });
-        assert.equal(reponse.status, 400);
+        assert.equal(reponse.status, HttpStatusCode.BadRequest);
         assert.equal(reponse.body.fieldErrors.domainesSpecialite[0], 'Les domaines de spécialité sont invalides');
       });
 
@@ -207,7 +208,7 @@ describe('La ressource utilisateur', () => {
             ...donneesUtilisateur,
             siretEntite: 'unMauvaisSiret',
           });
-        assert.equal(reponse.status, 400);
+        assert.equal(reponse.status, HttpStatusCode.BadRequest);
         assert.equal(reponse.body.fieldErrors.siretEntite[0], 'Le siret est invalide');
       });
 
@@ -218,7 +219,7 @@ describe('La ressource utilisateur', () => {
             ...donneesUtilisateur,
             cguAcceptees: 12,
           });
-        assert.equal(reponse.status, 400);
+        assert.equal(reponse.status, HttpStatusCode.BadRequest);
         assert.equal(reponse.body.fieldErrors.cguAcceptees[0], "L'acceptation des CGU est invalide");
       });
 
@@ -229,7 +230,7 @@ describe('La ressource utilisateur', () => {
             ...donneesUtilisateur,
             infolettreAcceptee: 12,
           });
-        assert.equal(reponse.status, 400);
+        assert.equal(reponse.status, HttpStatusCode.BadRequest);
         assert.equal(reponse.body.fieldErrors.infolettreAcceptee[0], "L'acceptation de l'infolettre est invalide");
       });
 
@@ -241,7 +242,7 @@ describe('La ressource utilisateur', () => {
               ...donneesUtilisateur,
               token: '',
             });
-          assert.equal(reponse.status, 400);
+          assert.equal(reponse.status, HttpStatusCode.BadRequest);
           assert.equal(reponse.body.fieldErrors.token[0], 'Le token est invalide');
         });
 
@@ -255,7 +256,7 @@ describe('La ressource utilisateur', () => {
               ...donneesUtilisateur,
               token: 'azertyui',
             });
-          assert.equal(reponse.status, 400);
+          assert.equal(reponse.status, HttpStatusCode.BadRequest);
           assert.equal(reponse.body.erreur, 'Le token est invalide');
         });
       });

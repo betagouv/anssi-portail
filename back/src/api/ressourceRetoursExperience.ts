@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Response, Router } from 'express';
 import z from 'zod';
 import { RetourExperienceDonne } from '../bus/evenements/retourExperienceDonne.js';
@@ -21,7 +22,7 @@ export const ressourceRetoursExperience = ({ messagerieInstantanee, busEvenement
           precision,
         });
         await busEvenements.publie(new RetourExperienceDonne({ raison, emailDeContact }));
-        reponse.sendStatus(201);
+        reponse.sendStatus(HttpStatusCode.Created);
       }
     )
   );

@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { Financement } from '../metier/financement.js';
 import { estCodeRegion } from '../metier/referentielRegions.js';
@@ -91,7 +92,7 @@ export const ressourceFinancements = ({
           }))
         );
       } catch {
-        reponse.sendStatus(500);
+        reponse.sendStatus(HttpStatusCode.InternalServerError);
       }
     })
   );

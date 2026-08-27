@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
 import z from 'zod';
 import { ConfigurationServeur } from './configurationServeur.js';
@@ -13,7 +14,7 @@ export const ressourceAbonnementInfolettre = ({ adaptateurEmail }: Configuration
     valideCorpsRequete(schemaAbonnementInfolettre),
     filetRouteAsynchrone(async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaAbonnementInfolettre>>, reponse) => {
       await adaptateurEmail.inscrisAInfolettre(requete.body.email);
-      reponse.sendStatus(201);
+      reponse.sendStatus(HttpStatusCode.Created);
     })
   );
   return routeur;

@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -62,7 +63,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
         .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
-      assert.equal(reponse.status, 201);
+      assert.equal(reponse.status, HttpStatusCode.Created);
     });
 
     it('ajoute un document dans Cellar', async () => {
@@ -145,13 +146,13 @@ describe('La ressource de gestion des documents des guides', () => {
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
         .attach('document-guide', Buffer.from('un-texte'), 'anssi_essentiels_devsecops_v1.0.pdf');
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
     });
 
     it('répond 401 si l’utilisateur n’est pas authentifié', async () => {
       const reponse = await request(serveur).post('/api/guides/zero-trust/documents');
 
-      assert.equal(reponse.status, 401);
+      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
     });
 
     it("répond 403 si l’utilisateur n'a pas le droit de gérer les guides", async () => {
@@ -166,7 +167,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
         .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
-      assert.equal(reponse.status, 403);
+      assert.equal(reponse.status, HttpStatusCode.Forbidden);
     });
 
     it("répond 403 si l’utilisateur n'a pas activé le MFA", async () => {
@@ -181,7 +182,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
         .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
-      assert.equal(reponse.status, 403);
+      assert.equal(reponse.status, HttpStatusCode.Forbidden);
     });
 
     describe('avec un corps de requête', () => {
@@ -191,7 +192,7 @@ describe('La ressource de gestion des documents des guides', () => {
           .set('Cookie', [cookieJeanneDupont])
           .field('libelleDuLien', 'Cliquez pour télécharger le document');
 
-        assert.equal(reponse.status, 400);
+        assert.equal(reponse.status, HttpStatusCode.BadRequest);
       });
 
       it('rejette les requêtes sans libelle de lien', async () => {
@@ -200,7 +201,7 @@ describe('La ressource de gestion des documents des guides', () => {
           .set('Cookie', [cookieJeanneDupont])
           .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
-        assert.equal(reponse.status, 400);
+        assert.equal(reponse.status, HttpStatusCode.BadRequest);
       });
 
       it('rejette les requêtes demandant de générer un visuel sans fournir de PDF', async () => {
@@ -211,7 +212,7 @@ describe('La ressource de gestion des documents des guides', () => {
           .field('genereVisuel', true)
           .attach('document-guide', Buffer.from('un-texte'), 'document.txt');
 
-        assert.equal(reponse.status, 400);
+        assert.equal(reponse.status, HttpStatusCode.BadRequest);
       });
 
       it('rejette un nom de fichier dépassant 256 caractères', async () => {
@@ -221,7 +222,7 @@ describe('La ressource de gestion des documents des guides', () => {
           .field('libelleDuLien', 'Cliquez pour télécharger le document')
           .attach('document-guide', Buffer.from('un-texte'), 'a'.repeat(257));
 
-        assert.equal(reponse.status, 400);
+        assert.equal(reponse.status, HttpStatusCode.BadRequest);
       });
     });
 
@@ -233,7 +234,7 @@ describe('La ressource de gestion des documents des guides', () => {
           .field('libelleDuLien', 'Cliquez pour télécharger le document')
           .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
-        assert.equal(reponse.status, 404);
+        assert.equal(reponse.status, HttpStatusCode.NotFound);
         assert.equal(reponse.body.erreur, 'Le guide "guide-inexistant" est introuvable');
       });
     });
@@ -245,13 +246,13 @@ describe('La ressource de gestion des documents des guides', () => {
         .get('/api/guides/zero-trust/documents')
         .set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('répond 401 si l’utilisateur n’est pas authentifié', async () => {
       const reponse = await request(serveur).get('/api/guides/zero-trust/documents');
 
-      assert.equal(reponse.status, 401);
+      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
     });
 
     it("répond 403 si l’utilisateur n'a pas l'autorisation de gérer les guides", async () => {
@@ -264,7 +265,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .get('/api/guides/zero-trust/documents')
         .set('Cookie', [cookieHectorDurant]);
 
-      assert.equal(reponse.status, 403);
+      assert.equal(reponse.status, HttpStatusCode.Forbidden);
     });
 
     it("répond 404 si le guide n'existe pas", async () => {
@@ -272,7 +273,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .get('/api/guides/guide-inexistant/documents')
         .set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(reponse.status, 404);
+      assert.equal(reponse.status, HttpStatusCode.NotFound);
     });
 
     it('renvoie la liste des documents du guide', async () => {
@@ -309,13 +310,13 @@ describe('La ressource de gestion des documents des guides', () => {
         .delete('/api/guides/zero-trust/documents/mon-fichier.pdf')
         .set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(reponse.status, 204);
+      assert.equal(reponse.status, HttpStatusCode.NoContent);
     });
 
     it('répond 401 si l’utilisateur n’est pas authentifié', async () => {
       const reponse = await request(serveur).delete('/api/guides/zero-trust/documents/mon-fichier.pdf');
 
-      assert.equal(reponse.status, 401);
+      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
     });
 
     it("répond 403 si l’utilisateur n'a pas l'autorisation de gérer les guides", async () => {
@@ -328,7 +329,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .delete('/api/guides/zero-trust/documents/mon-fichier.pdf')
         .set('Cookie', [cookieHectorDurant]);
 
-      assert.equal(reponse.status, 403);
+      assert.equal(reponse.status, HttpStatusCode.Forbidden);
     });
 
     it("répond 404 si le guide n'existe pas", async () => {
@@ -336,7 +337,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .delete('/api/guides/guide-inexistant/documents/mon-fichier.pdf')
         .set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(reponse.status, 404);
+      assert.equal(reponse.status, HttpStatusCode.NotFound);
     });
 
     it("répond 404 si le document n'existe pas", async () => {
@@ -344,7 +345,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .delete('/api/guides/zero-trust/documents/fichier-inexistant.pdf')
         .set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(reponse.status, 404);
+      assert.equal(reponse.status, HttpStatusCode.NotFound);
     });
 
     it('supprime le document spécifié de la liste des documents du guide dans Grist', async () => {

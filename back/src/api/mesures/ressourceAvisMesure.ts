@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Response, Router } from 'express';
 import z from 'zod';
 import { AvisMesureDonne } from '../../bus/evenements/avisMesureDonne.js';
@@ -28,7 +29,7 @@ const ressourceAvisMesure = ({
         const retour = requete.body.retour;
         const mesureTrouvee = await entrepotMesure.parId(idMesure);
         if (!mesureTrouvee) {
-          return reponse.sendStatus(404);
+          return reponse.sendStatus(HttpStatusCode.NotFound);
         }
         const utilisateur = requete.utilisateur as Utilisateur;
 
@@ -43,7 +44,7 @@ const ressourceAvisMesure = ({
           })
         );
 
-        reponse.status(201).send();
+        reponse.status(HttpStatusCode.Created).send();
       }
     )
   );

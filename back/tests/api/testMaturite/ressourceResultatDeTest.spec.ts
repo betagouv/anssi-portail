@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -64,7 +65,7 @@ describe('La ressource qui gère un résultat de test', () => {
 
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
-      assert.equal(reponse.status, 403);
+      assert.equal(reponse.status, HttpStatusCode.Forbidden);
       const resultatTest = await entrepotResultatTest.parId('r1');
       assert.equal(resultatTest!.utilisateur, hectorDurant);
       busEvenements.naPasRecuDEvenement(ProprieteTestRevendiquee);
@@ -80,7 +81,7 @@ describe('La ressource qui gère un résultat de test', () => {
 
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
       busEvenements.naPasRecuDEvenement(ProprieteTestRevendiquee);
     });
 
@@ -94,7 +95,7 @@ describe('La ressource qui gère un résultat de test', () => {
 
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
       const resultatTest = await entrepotResultatTest.parId('r1');
       assert.equal(resultatTest!.utilisateur, jeanneDupont);
     });
@@ -102,7 +103,7 @@ describe('La ressource qui gère un résultat de test', () => {
     it("renvoie une erreur 404 lorsque le résultat de test n'existe pas", async () => {
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
-      assert.equal(reponse.status, 404);
+      assert.equal(reponse.status, HttpStatusCode.NotFound);
     });
 
     it('publie un événement de revendication de propriété du test', async () => {
@@ -124,7 +125,7 @@ describe('La ressource qui gère un résultat de test', () => {
     it('refuse les requêtes non connectées', async () => {
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', []).send();
 
-      assert.equal(reponse.status, 401);
+      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
     });
   });
 });

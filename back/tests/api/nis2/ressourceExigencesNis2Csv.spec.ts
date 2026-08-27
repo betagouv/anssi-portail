@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -23,7 +24,7 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
     it('renvoie en 200', async () => {
       const { status } = await request(serveur).get('/api/exigences-nis2.csv');
 
-      assert.equal(status, 200);
+      assert.equal(status, HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu CSV', async () => {
@@ -41,7 +42,7 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
     it('renvoie une 404 si NIS2 ne figure ni dans la cible, ni dans la source', async () => {
       const { status } = await request(serveur).get('/api/exigences-nis2.csv').query({ source: 'ISO', cible: 'ISO' });
 
-      assert.equal(status, 404);
+      assert.equal(status, HttpStatusCode.NotFound);
     });
 
     describe('Renvoie une 400', () => {
@@ -50,7 +51,7 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
           .get('/api/exigences-nis2.csv')
           .query({ source: [123, 456] });
 
-        assert.equal(status, 400);
+        assert.equal(status, HttpStatusCode.BadRequest);
       });
 
       it("si la cible n'est pas une chaîne de caractères", async () => {
@@ -58,7 +59,7 @@ describe('La ressource des Exigences NIS 2 en CSV', () => {
           .get('/api/exigences-nis2.csv')
           .query({ cible: [123, 456] });
 
-        assert.equal(status, 400);
+        assert.equal(status, HttpStatusCode.BadRequest);
       });
     });
 

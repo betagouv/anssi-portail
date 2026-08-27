@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -23,7 +24,7 @@ describe('La ressource pages jekyll', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/catalogue');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu html', async () => {
@@ -50,7 +51,7 @@ describe('La ressource pages jekyll', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/favoris-partages/monSuperId');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu html', async () => {
@@ -77,7 +78,7 @@ describe('La ressource pages jekyll', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/contacts');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu html', async () => {
@@ -104,7 +105,7 @@ describe('La ressource pages jekyll', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/contacts/fr-idf.html');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu html', async () => {
@@ -119,7 +120,7 @@ describe('La ressource pages jekyll', () => {
     it('répond un 200', async () => {
       const reponse = await request(serveur).get('/guides/zero-trust');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu html', async () => {
@@ -146,7 +147,7 @@ describe('La ressource pages jekyll', () => {
     it('redirige vers la sélection de la nouvelle page NIS2', async () => {
       const reponse = await request(serveur).get('/directive-nis2');
 
-      assert.equal(reponse.status, 301);
+      assert.equal(reponse.status, HttpStatusCode.MovedPermanently);
       assert.equal(reponse.headers.location, '/nis2');
     });
   });

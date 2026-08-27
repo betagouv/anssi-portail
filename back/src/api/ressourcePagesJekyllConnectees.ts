@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, RequestHandler, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
@@ -17,7 +18,10 @@ const ressourcePagesJekyllConnectees = (
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     ...gestionnairesRequêtesComplémentaires,
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
-      reponse.contentType('text/html').status(200).envoieFichierEnrichi(fournisseurChemin.jekyll.page(nomPage));
+      reponse
+        .contentType('text/html')
+        .status(HttpStatusCode.Ok)
+        .envoieFichierEnrichi(fournisseurChemin.jekyll.page(nomPage));
     })
   );
 

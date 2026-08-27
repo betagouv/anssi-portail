@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { beforeEach, describe, it } from 'node:test';
 import { Express } from 'express';
 import request from 'supertest';
@@ -23,7 +24,7 @@ describe('La ressource de la page connexion', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/connexion');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu html', async () => {
@@ -48,13 +49,13 @@ describe('La ressource de la page connexion', () => {
     it('accepte une URL de redirection vers une page connectée', async () => {
       const reponse = await request(serveur).get('/connexion').query({ urlRedirection: '/favoris?tri=recent' });
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('refuse une URL de redirection non autorisée', async () => {
       const reponse = await request(serveur).get('/connexion').query({ urlRedirection: 'https://example.com/favoris' });
 
-      assert.equal(reponse.status, 302);
+      assert.equal(reponse.status, HttpStatusCode.Found);
       assert.equal(reponse.headers.location, '/connexion');
     });
 

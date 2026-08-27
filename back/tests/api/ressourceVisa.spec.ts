@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { Readable } from 'node:stream';
@@ -39,7 +40,7 @@ describe('La ressource de visa', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/visas/123456789012');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu PDF', async () => {
@@ -94,7 +95,7 @@ describe('La ressource de visa', () => {
         configurationDuServeur.cellar.getStream = async () => undefined;
         const reponse = await request(serveur).get('/visas/fichier-qui-n-existe-pas.pdf');
 
-        assert.equal(reponse.status, 404);
+        assert.equal(reponse.status, HttpStatusCode.NotFound);
       });
     });
 
@@ -114,7 +115,7 @@ describe('La ressource de visa', () => {
       it('retourne un statut OK', async () => {
         const reponse = await request(serveur).get('/visas/tl-fr.sha2');
 
-        assert.equal(reponse.status, 200);
+        assert.equal(reponse.status, HttpStatusCode.Ok);
       });
 
       it('retourne le haché de la liste de confiance', async () => {

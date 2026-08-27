@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -25,7 +26,7 @@ describe('La ressource Financement', () => {
 
       const { status } = await request(serveur).get('/api/financements/1');
 
-      assert.equal(status, 200);
+      assert.equal(status, HttpStatusCode.Ok);
     });
 
     it("renvoie le détail d'un financement", async () => {
@@ -54,7 +55,7 @@ describe('La ressource Financement', () => {
     it("renvoie un 404 si l'id n'existe pas", async () => {
       const { status } = await request(serveur).get('/api/financements/1');
 
-      assert.equal(status, 404);
+      assert.equal(status, HttpStatusCode.NotFound);
     });
   });
 });

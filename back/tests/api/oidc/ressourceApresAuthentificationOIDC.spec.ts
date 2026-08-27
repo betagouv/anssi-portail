@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -69,7 +70,7 @@ describe('La ressource apres authentification OIDC', () => {
       it('reçoit 200', async () => {
         const reponse = await requeteGet();
 
-        assert.equal(reponse.status, 200);
+        assert.equal(reponse.status, HttpStatusCode.Ok);
       });
 
       it('sert la page apres-authentification', async () => {
@@ -170,7 +171,7 @@ describe('La ressource apres authentification OIDC', () => {
     it("jette une erreur 401 si le cookie AgentConnectInfo n'est pas défini", async () => {
       const reponse = await requeteGet().set('Cookie', []);
 
-      assert.equal(reponse.status, 401);
+      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
     });
 
     it('jette une erreur 401 si quoi que ce soit se passe mal', async () => {
@@ -180,14 +181,14 @@ describe('La ressource apres authentification OIDC', () => {
 
       const reponse = await requeteGet();
 
-      assert.equal(reponse.status, 401);
+      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
     });
 
     describe("si l'utilisateur est inconnu", () => {
       it('ajoute un token contenant les informations du nouvel utilisateur et redirige vers la page de création de compte', async () => {
         const reponse = await requeteGet();
 
-        assert.equal(reponse.status, 302);
+        assert.equal(reponse.status, HttpStatusCode.Found);
         assert.equal(reponse.headers.location, '/creation-compte?token=tokenJWT-');
       });
     });

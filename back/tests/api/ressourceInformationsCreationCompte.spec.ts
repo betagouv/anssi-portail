@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
 import assert from 'node:assert';
@@ -42,7 +43,7 @@ describe("La ressource d'informations de création de compte", () => {
       };
       const reponse = await request(serveur).get('/api/informations-creation-compte?token=unMauvaisToken');
 
-      assert.equal(reponse.status, 401);
+      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
     });
 
     it('renvoie les informations utilisateur si le token est valide', async () => {
@@ -56,7 +57,7 @@ describe("La ressource d'informations de création de compte", () => {
       };
       const reponse = await request(serveur).get('/api/informations-creation-compte?token=unBonToken');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
       assert.deepEqual(reponse.body, {
         prenom: 'Jeanne',
         nom: 'Dupont',

@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -18,12 +19,12 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
 
   it('retourne une erreur HTTP 400 si le terme de recherche est vide', async () => {
     const reponse = await request(serveur).get('/api/annuaire/organisations?recherche=&departement=mon>departement');
-    assert.equal(reponse.status, 400);
+    assert.equal(reponse.status, HttpStatusCode.BadRequest);
   });
 
   it("retourne une erreur HTTP 400 si le département n'existe pas", async () => {
     const reponse = await request(serveur).get('/api/annuaire/organisations?recherche=siret&departement=990');
-    assert.equal(reponse.status, 400);
+    assert.equal(reponse.status, HttpStatusCode.BadRequest);
   });
 
   it("recherche les organisations correspondantes grâce au service d'annuaire", async () => {

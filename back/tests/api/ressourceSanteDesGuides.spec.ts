@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -33,7 +34,7 @@ describe('La ressource Sante des guides', () => {
     it('renvoie 200', async () => {
       const reponse = await request(serveur).get('/api/sante-guides');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('retourne le résulat du calcul de santé', async () => {

@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
 import { ProprieteTestRevendiquee } from '../../bus/evenements/proprieteTestRevendiquee.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
@@ -21,18 +22,18 @@ const ressourceResultatDeTest = ({
     filetRouteAsynchrone(async (requete, reponse) => {
       const resultatTest = await entrepotResultatTest.parId(requete.params.id as string);
       if (!resultatTest) {
-        reponse.sendStatus(404);
+        reponse.sendStatus(HttpStatusCode.NotFound);
         return;
       }
 
       const utilisateur = requete.utilisateur;
 
       if (resultatTest.utilisateur?.email && resultatTest.utilisateur?.email !== utilisateur.email) {
-        reponse.sendStatus(403);
+        reponse.sendStatus(HttpStatusCode.Forbidden);
         return;
       }
       if (resultatTest.utilisateur?.email === utilisateur.email) {
-        reponse.sendStatus(200);
+        reponse.sendStatus(HttpStatusCode.Ok);
         return;
       }
 
@@ -45,7 +46,7 @@ const ressourceResultatDeTest = ({
           idResultatTest: resultatTest.id,
         })
       );
-      reponse.sendStatus(200);
+      reponse.sendStatus(HttpStatusCode.Ok);
     })
   );
   return routeur;

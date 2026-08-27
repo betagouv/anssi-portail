@@ -1,6 +1,6 @@
 import { DeleteObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { fromEnv } from '@aws-sdk/credential-providers';
-import axios, { AxiosResponse, isAxiosError } from '@anssi-portail/axios';
+import axios, { HttpStatusCode, AxiosResponse, isAxiosError } from '@anssi-portail/axios';
 import { Readable } from 'node:stream';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 
@@ -47,7 +47,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
         nom: nomDuFichier,
       };
     } catch (erreur: Error | unknown) {
-      if (isAxiosError(erreur) && erreur.response?.status === 403) {
+      if (isAxiosError(erreur) && erreur.response?.status === HttpStatusCode.Forbidden) {
         return undefined;
       }
       throw erreur;
@@ -68,7 +68,7 @@ export const adaptateurCellar = (adaptateurEnvironnement: AdaptateurEnvironnemen
     } catch (erreur: Error | unknown) {
       if (isAxiosError(erreur)) {
         erreur.response?.data?.destroy?.();
-        if (erreur.response?.status === 403) return undefined;
+        if (erreur.response?.status === HttpStatusCode.Forbidden) return undefined;
       }
       throw erreur;
     }

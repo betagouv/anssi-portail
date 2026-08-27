@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -80,7 +81,7 @@ describe('La ressource des services et ressources favoris', () => {
         .delete(`/api/favoris/${encodeURIComponent('/services/mon-super-service')}`)
         .set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(reponse.statusCode, 200);
+      assert.equal(reponse.statusCode, HttpStatusCode.Ok);
       const favoris = await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
       assert.equal(favoris.length, 0);
     });

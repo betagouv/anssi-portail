@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -49,7 +50,7 @@ describe('La ressource du parcours complet', () => {
     it('retourne 200', async () => {
       const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('retourne 404 si la fonctionnalité est désactivée', async () => {
@@ -70,7 +71,7 @@ describe('La ressource du parcours complet', () => {
 
       const reponse = await request(serveurSansLaRessource).get('/api/parcours/complet');
 
-      assert.equal(reponse.status, 404);
+      assert.equal(reponse.status, HttpStatusCode.NotFound);
     });
 
     it("retourne 401 si l'utilisateur n'est pas connecté", async () => {
@@ -78,7 +79,7 @@ describe('La ressource du parcours complet', () => {
 
       const reponse = await request(serveur).get('/api/parcours/complet');
 
-      assert.equal(reponse.status, 401);
+      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
     });
 
     it('retourne les modules du parcours complet', async () => {

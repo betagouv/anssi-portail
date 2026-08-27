@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
@@ -10,7 +11,7 @@ export const ressourceSessionDeGroupe = ({ entrepotSessionDeGroupe }: Configurat
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const session = await entrepotSessionDeGroupe.parCode(requete.params.code as string);
-      reponse.sendStatus(session ? 200 : 404);
+      reponse.sendStatus(session ? HttpStatusCode.Ok : HttpStatusCode.NotFound);
     })
   );
   return routeur;

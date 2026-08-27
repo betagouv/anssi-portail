@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { Utilisateur } from '../../metier/utilisateur.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
@@ -22,7 +23,7 @@ const ressourceModule = ({
     filetRouteAsynchrone(async (requete: Request, reponse: Response) => {
       const module = await entrepôtModule.parId(Number.parseInt(requete.params.idModule as string));
       if (!module) {
-        return reponse.sendStatus(404);
+        return reponse.sendStatus(HttpStatusCode.NotFound);
       }
       const utilisateur = requete.utilisateur as Utilisateur;
 
@@ -32,7 +33,7 @@ const ressourceModule = ({
         })
       );
       const mesuresTries = mesuresPresentation.toSorted((a, b) => a.ordre - b.ordre);
-      reponse.status(200).send({
+      reponse.status(HttpStatusCode.Ok).send({
         nom: module.nom,
         description: module.description,
         cibleBadge: module.cibleDéblocageBadgeCyberdépart(),

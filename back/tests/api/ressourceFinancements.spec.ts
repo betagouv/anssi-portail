@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -36,7 +37,7 @@ describe('La ressource Financements', () => {
     it('renvoie un 200', async () => {
       const reponse = await request(serveur).get('/api/financements');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('renvoie une liste de financements', async () => {
@@ -63,7 +64,7 @@ describe('La ressource Financements', () => {
       };
       const reponse = await request(serveur).get('/api/financements');
 
-      assert.equal(reponse.status, 500);
+      assert.equal(reponse.status, HttpStatusCode.InternalServerError);
     });
     describe('pour un utilisateur connecté', () => {
       const listeDeFinancementsAttendus = [

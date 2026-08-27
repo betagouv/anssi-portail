@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -44,13 +45,13 @@ describe('La ressource des Exigences NIS 2', () => {
     it('renvoie en 200', async () => {
       const { status } = await request(serveur).get('/api/exigences-nis2');
 
-      assert.equal(status, 200);
+      assert.equal(status, HttpStatusCode.Ok);
     });
 
     it('renvoie une 404 si NIS2 ne figure ni dans la cible, ni dans la source', async () => {
       const { status } = await request(serveur).get('/api/exigences-nis2').query({ source: 'ISO', cible: 'ISO' });
 
-      assert.equal(status, 404);
+      assert.equal(status, HttpStatusCode.NotFound);
     });
 
     it('renvoie une 404 si une comparaison avec CyFun23 est demandée, et que le FF est désactivé', async () => {
@@ -58,7 +59,7 @@ describe('La ressource des Exigences NIS 2', () => {
 
       const { status } = await request(serveur).get('/api/exigences-nis2').query({ cible: 'CyFun23' });
 
-      assert.equal(status, 404);
+      assert.equal(status, HttpStatusCode.NotFound);
     });
 
     describe('Renvoit une 400', () => {
@@ -67,7 +68,7 @@ describe('La ressource des Exigences NIS 2', () => {
           .get('/api/exigences-nis2')
           .query({ source: [123, 456] });
 
-        assert.equal(status, 400);
+        assert.equal(status, HttpStatusCode.BadRequest);
       });
 
       it("si la cible n'est pas une chaîne de caractères", async () => {
@@ -75,7 +76,7 @@ describe('La ressource des Exigences NIS 2', () => {
           .get('/api/exigences-nis2')
           .query({ cible: [123, 456] });
 
-        assert.equal(status, 400);
+        assert.equal(status, HttpStatusCode.BadRequest);
       });
     });
 

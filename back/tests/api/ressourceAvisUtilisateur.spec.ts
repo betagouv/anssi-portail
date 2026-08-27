@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -33,7 +34,7 @@ describe('La ressource avis utilisateur', () => {
     it('retourne un 201', async () => {
       const reponse = await request(serveur).post('/api/avis-utilisateur').send(avisUtilisateur);
 
-      assert.equal(reponse.status, 201);
+      assert.equal(reponse.status, HttpStatusCode.Created);
     });
 
     it('envoie les données à la messagerie instantannée', async () => {
@@ -65,7 +66,7 @@ describe('La ressource avis utilisateur', () => {
     it('renvoie une erreur si le niveau de satisfaction est invalide', async () => {
       const reponse = await request(serveur).post('/api/avis-utilisateur').send({ niveauDeSatisfaction: 0 });
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.niveauDeSatisfaction[0], 'Le niveau de satisfaction est invalide');
     });
 
@@ -74,7 +75,7 @@ describe('La ressource avis utilisateur', () => {
         .post('/api/avis-utilisateur')
         .send({ ...avisUtilisateur, commentaire: '' });
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.commentaire[0], 'Le commentaire est requis');
     });
 
@@ -83,7 +84,7 @@ describe('La ressource avis utilisateur', () => {
         .post('/api/avis-utilisateur')
         .send({ ...avisUtilisateur, emailDeContact: 'pas un email' });
 
-      assert.equal(reponse.status, 400);
+      assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.emailDeContact[0], "L'email est invalide");
     });
   });

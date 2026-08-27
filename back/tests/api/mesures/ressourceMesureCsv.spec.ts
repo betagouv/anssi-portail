@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -45,7 +46,7 @@ describe('La ressource des mesures en CSV', () => {
     it('renvoie en 200', async () => {
       const { status } = await getConnecté();
 
-      assert.equal(status, 200);
+      assert.equal(status, HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu CSV', async () => {
@@ -125,7 +126,7 @@ describe('La ressource des mesures en CSV', () => {
     it('réponds 401', async () => {
       const reponse = await get();
 
-      assert.equal(reponse.status, 401);
+      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
     });
   });
 });

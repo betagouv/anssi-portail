@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Request, Response, Router } from 'express';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';
@@ -10,7 +11,10 @@ const ressourcePagesJekyll = ({ fournisseurChemin }: ConfigurationServeur, nomPa
     '/',
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
-      await reponse.contentType('text/html').status(200).envoieFichierEnrichi(fournisseurChemin.jekyll.page(nomPage));
+      await reponse
+        .contentType('text/html')
+        .status(HttpStatusCode.Ok)
+        .envoieFichierEnrichi(fournisseurChemin.jekyll.page(nomPage));
     })
   );
 

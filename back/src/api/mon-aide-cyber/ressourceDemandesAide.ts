@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import cors from 'cors';
 import { Router } from 'express';
 import { encode } from 'html-entities';
@@ -35,9 +36,9 @@ const ressourceDemandesAide = ({ adaptateurMonAideCyber }: ConfigurationServeur)
             siret,
           },
         });
-        reponse.sendStatus(201);
+        reponse.sendStatus(HttpStatusCode.Created);
       } catch (e: unknown | Error) {
-        reponse.status(400).send({ erreur: (e as Error).message });
+        reponse.status(HttpStatusCode.BadRequest).send({ erreur: (e as Error).message });
       }
     })
   );

@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
 import assert from 'node:assert';
@@ -33,7 +34,7 @@ describe('La ressource Profil', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/api/profil');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it("renvoie les informations de l'utilisateur", async () => {
@@ -187,7 +188,7 @@ describe('La ressource Profil', () => {
       it("ne renvoie pas de parcours si l'utilisateur n'est pas connecté", async () => {
         const reponse = await request(serveur).get('/api/profil');
 
-        assert.equal(reponse.statusCode, 200);
+        assert.equal(reponse.statusCode, HttpStatusCode.Ok);
         assert.equal(reponse.body.parcoursSecurisation, undefined);
       });
 

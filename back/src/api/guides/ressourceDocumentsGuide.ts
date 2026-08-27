@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { NextFunction, Request, RequestHandler, Response, Router } from 'express';
 import multer from 'multer';
 import { join } from 'path';
@@ -18,7 +19,7 @@ const valideAutorisation = (): RequestHandler => {
       !requete.utilisateur ||
       !requete.utilisateur.peutManipulerLesDocumentsDUnGuide()
     ) {
-      return reponse.status(403).json({
+      return reponse.status(HttpStatusCode.Forbidden).json({
         erreur: "Vous n'êtes pas autorisé à ajouter un document",
       });
     }
@@ -32,12 +33,12 @@ const valideLesDocuments = (): RequestHandler => {
       storage: multer.memoryStorage(),
     }).single('document-guide')(requete, reponse, (err) => {
       if (!requete.file) {
-        return reponse.status(400).json({
+        return reponse.status(HttpStatusCode.BadRequest).json({
           erreur: 'Document obligatoire',
         });
       }
       if (err && err instanceof multer.MulterError) {
-        return reponse.status(400).json({
+        return reponse.status(HttpStatusCode.BadRequest).json({
           erreur: 'Une erreur est survenue',
         });
       }
@@ -51,7 +52,7 @@ const recupereLeGuide = (entrepotGuideTravail: EntrepotGuideTravail) => {
     const identifiantGuide = requete.params.slug as string;
     const guide = await entrepotGuideTravail.parId(identifiantGuide);
     if (!guide) {
-      return reponse.status(404).json({
+      return reponse.status(HttpStatusCode.NotFound).json({
         erreur: `Le guide "${identifiantGuide}" est introuvable`,
       });
     }
@@ -87,7 +88,7 @@ const ressourceDocumentsGuide = ({
         nomFichier: doc.nomFichier,
         chemin: new URL(join(configurationCellar.nomDuBucket, doc.nomFichier), urlBase),
       }));
-      reponse.status(200).send(documents ?? []);
+      reponse.status(HttpStatusCode.Ok).send(documents ?? []);
     })
   );
 
@@ -109,7 +110,7 @@ const ressourceDocumentsGuide = ({
 
         const guide = reponse.locals.guide as Guide;
         if (guide.possedeLeDocument(fichier.originalname)) {
-          return reponse.status(400).json({
+          return reponse.status(HttpStatusCode.BadRequest).json({
             erreur: `Le document "${fichier.originalname}" existe déjà pour ce guide`,
           });
         }
@@ -131,7 +132,7 @@ const ressourceDocumentsGuide = ({
         guide.ajouteLeDocument({ libelle: requete.body.libelleDuLien, nomFichier: fichier.originalname });
         await guide.sauvegarde(entrepotGuideTravail);
 
-        reponse.status(201).send();
+        reponse.status(HttpStatusCode.Created).send();
       }
     )
   );
@@ -148,7 +149,7 @@ const ressourceDocumentsGuide = ({
 
       const document = guide.listeDocuments.find((doc) => doc.nomFichier === requete.params.nomFichier);
       if (!document) {
-        return reponse.status(404).json({
+        return reponse.status(HttpStatusCode.NotFound).json({
           erreur: `Le document "${requete.params.nomFichier}" n'existe pas"`,
         });
       }
@@ -158,7 +159,7 @@ const ressourceDocumentsGuide = ({
 
       await cellar.supprime(document.nomFichier, 'GESTION_GUIDES');
 
-      reponse.status(204).send();
+      reponse.status(HttpStatusCode.NoContent).send();
     })
   );
 

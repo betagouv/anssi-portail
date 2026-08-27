@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
 import { MiseAJourFavorisUtilisateur } from '../../bus/miseAJourFavorisUtilisateur.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
@@ -25,7 +26,7 @@ const ressourceFavori = ({
       await entrepotFavori.retire({ idItemCyber: id, utilisateur });
 
       await busEvenements.publie(new MiseAJourFavorisUtilisateur({ utilisateur }));
-      reponse.sendStatus(200);
+      reponse.sendStatus(HttpStatusCode.Ok);
     })
   );
 

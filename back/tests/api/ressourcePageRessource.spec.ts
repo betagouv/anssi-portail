@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
@@ -22,7 +23,7 @@ describe('La ressource page Service', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/ressources/cot');
 
-      assert.equal(reponse.status, 200);
+      assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu html', async () => {
@@ -58,7 +59,7 @@ describe('La ressource page Service', () => {
 
     const réponse = await request(serveur).get('/ressources/inconnu').accept('text/html');
 
-    assert.equal(réponse.status, 404);
+    assert.equal(réponse.status, HttpStatusCode.NotFound);
     assert.equal(réponse.headers['content-type'], 'text/html; charset=utf-8');
     assert.equal(estAppelé, true);
   });
