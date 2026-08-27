@@ -84,6 +84,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
 
         assert.equal(body.badgeCyberdépartDebloqué, false);
         assert.equal(body.moduleTerminé, true);
+        assert.equal(body.parcoursCompletTerminé, true);
       });
 
       it('ajoute une prise en compte', async () => {

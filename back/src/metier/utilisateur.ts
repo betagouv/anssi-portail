@@ -163,10 +163,12 @@ export class Utilisateur {
   }): Promise<{
     badgeCyberdépartDebloqué: boolean;
     moduleTerminé: boolean;
+    parcoursCompletTerminé: boolean;
   }> {
     const nouvelEtatModule = {
       badgeCyberdépartDebloqué: false,
       moduleTerminé: false,
+      parcoursCompletTerminé: false,
     };
     if (this.estPriseEnCompte(mesure)) {
       return nouvelEtatModule;
@@ -191,6 +193,7 @@ export class Utilisateur {
       const nombreTotalDeMesures = (await entrepotMesure.tous()).length;
       if (this.mesuresPrisesEnCompte.length === nombreTotalDeMesures) {
         await busEvenements.publie(new ParcoursCompletTerminé(this.email));
+        nouvelEtatModule.parcoursCompletTerminé = true;
       }
       nouvelEtatModule.moduleTerminé = true;
     }
