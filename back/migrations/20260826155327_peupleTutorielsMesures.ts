@@ -43,9 +43,9 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Réexaminer la liste des activités et systèmes',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          "<strong>Revue annuelle.</strong><br>Choisir une date récurrente. Réunir le dirigeant (ou son délégué), le responsable IT (interne ou prestataire) et les responsables métiers concernés. Reprendre la liste ligne par ligne en se posant les 4 questions issues du guide ANSSI Cartographie :<ul><li>Faut-il étendre le périmètre (nouveaux systèmes apparus dans l'année) ?</li><li>Faut-il revoir l'exposition du système aux risques ?</li><li>Faut-il affiner certaines parties (responsables, fournisseurs, dépendances) ?</li><li>Quels sont les délais pour les prochaines évolutions identifiées ?</li></ul>",
-          "<strong>Mise à jour événementielle.</strong><br>Mettre à jour la liste sans attendre la revue dès qu'un événement survient :<ul><li>mise en service ou arrêt d'un système ;</li><li>changement de prestataire, d'hébergeur ou d'éditeur ;</li><li>évolution majeure de l'activité (nouveau site, nouvelle gamme, fusion-acquisition) ;</li><li>incident ayant révélé une lacune dans la liste.</li></ul>",
-          '<strong>Garder une trace.</strong><br>Pour chaque revue, noter la date, les participants, les modifications apportées et la prochaine échéance.',
+          "<strong><strong>Revue annuelle.</strong></strong><br>Choisir une date récurrente. Réunir le dirigeant (ou son délégué), le responsable IT (interne ou prestataire) et les responsables métiers concernés. Reprendre la liste ligne par ligne en se posant les 4 questions issues du guide ANSSI Cartographie :<ul><li>Faut-il étendre le périmètre (nouveaux systèmes apparus dans l'année) ?</li><li>Faut-il revoir l'exposition du système aux risques ?</li><li>Faut-il affiner certaines parties (responsables, fournisseurs, dépendances) ?</li><li>Quels sont les délais pour les prochaines évolutions identifiées ?</li></ul>",
+          "<strong><strong>Mise à jour événementielle.</strong></strong><br>Mettre à jour la liste sans attendre la revue dès qu'un événement survient :<ul><li>mise en service ou arrêt d'un système ;</li><li>changement de prestataire, d'hébergeur ou d'éditeur ;</li><li>évolution majeure de l'activité (nouveau site, nouvelle gamme, fusion-acquisition) ;</li><li>incident ayant révélé une lacune dans la liste.</li></ul>",
+          '<strong><strong>Garder une trace.</strong></strong><br>Pour chaque revue, noter la date, les participants, les modifications apportées et la prochaine échéance.',
         ]),
       ]),
       aller_plus_loin: knex.raw('?::jsonb', [
@@ -63,7 +63,7 @@ export async function up(knex: Knex): Promise<void> {
           "Lister les exigences réglementaires applicables à l'entité (selon le statut important ou essentiel de l'entité).",
           "<strong>Pour chaque système d'information identifié, créer un tableau :</strong><ul><li>colonne 1 : libellé de l'exigence ;</li><li>colonne 2 : statut (Appliqué / Partiel / Non appliqué) ;</li><li>colonne 3 : preuve ou référence à la mesure interne ;</li><li>colonne 4 : justification en cas d'écart ou de mesure alternative.</li></ul>",
           "Valider l'analyse en comité de direction (ou avec le référent SSI).",
-          'Conserver les preuves : politique appliquée, procédures, captures de configuration.',
+          '<strong>Conserver les preuves :</strong> politique appliquée, procédures, captures de configuration.',
         ]),
       ]),
       note: "L'analyse alimente directement le plan d'action de correction des écarts.",
@@ -74,7 +74,7 @@ export async function up(knex: Knex): Promise<void> {
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
           "<strong>Construire le tableau d'action à partir des écarts identifiés. Pour chaque ligne :</strong><ul><li>écart constaté ;</li><li>action corrective à mener ;</li><li>responsable nommé ;</li><li>échéance ;</li><li>statut (à faire / en cours / fait) ;</li><li>preuve de réalisation.</li></ul>",
-          'Prioriser : commencer par les écarts à plus fort impact ou les plus rapides à fermer.',
+          '<strong>Prioriser :</strong> commencer par les écarts à plus fort impact ou les plus rapides à fermer.',
           "Organiser un point de suivi régulier en direction (mensuel ou trimestriel), avec tableau de bord d'avancement.",
           "Mettre à jour le tableau au fil de l'eau et conserver les preuves de clôture (capture d'écran, procédure publiée, formation tenue, etc.).",
         ]),
@@ -99,9 +99,9 @@ export async function up(knex: Knex): Promise<void> {
         JSON.stringify([
           '<strong>Définir le périmètre :</strong><ul><li>quelles données chiffrer (sensibles, nomades, sauvegardes, échanges externes) en se basant notamment sur le recensement des SI pour identifier les actifs et données prioritaires;</li><li>sur quels supports (postes, smartphones, clés USB, cloud).</li></ul>',
           '<strong>Choisir les solutions :</strong><ul><li>chiffrement de disque natif (BitLocker sur Windows, FileVault sur macOS, LUKS sur Linux) ;</li><li>TLS pour les échanges (HTTPS, IMAPS, SMTPS) ;</li><li>VPN IPsec ou TLS pour les accès distants.</li></ul>',
-          'Gérer les secrets : utiliser un gestionnaire de mots de passe ou un coffre-fort numérique, et ne jamais stocker la clé sur le support chiffré.',
+          '<strong>Gérer les secrets :</strong> utiliser un gestionnaire de mots de passe ou un coffre-fort numérique, et ne jamais stocker la clé sur le support chiffré.',
           "Privilégier les produits du catalogue de produits qualifiés par l'ANSSI lorsque le contexte le justifie.",
-          'Documenter la politique : qui chiffre quoi, avec quoi, comment renouveler.',
+          '<strong>Documenter la politique :</strong> qui chiffre quoi, avec quoi, comment renouveler.',
         ]),
       ]),
       aller_plus_loin: knex.raw('?::jsonb', [
@@ -127,9 +127,9 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Politique gestion des comptes',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          'Définir les types de comptes couverts : utilisateurs nominatifs, administrateurs, comptes de service, comptes partagés (à éviter mais à encadrer si indispensables).',
+          '<strong>Définir les types de comptes couverts :</strong> utilisateurs nominatifs, administrateurs, comptes de service, comptes partagés (à éviter mais à encadrer si indispensables).',
           "<strong>Définir le cycle de vie :</strong><ul><li>création : sur demande validée, avec attribution des droits selon besoin ;</li><li>modification : revalidation des droits lors d'un changement de fonction ;</li><li>désactivation : sous délai défini après départ (ex. 7 jours, ou immédiat pour les comptes à privilèges) ;</li><li>suppression : après période de conservation conforme à la politique d'archivage.</li></ul>",
-          "Définir les règles d'authentification associées : mot de passe robuste, renouvellement, MFA quand possible.",
+          "<strong>Définir les règles d'authentification associées :</strong> mot de passe robuste, renouvellement, MFA quand possible.",
         ]),
       ]),
     },
@@ -138,9 +138,9 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Politique de revue des mesures de sécurité',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          'Identifier les mesures à revoir : politiques (ex. PSSI, charte), procédures (ex. sauvegarde, accès, incidents), contrôles techniques (ex. antivirus, journalisation, sauvegardes).',
+          '<strong>Identifier les mesures à revoir :</strong> politiques (ex. PSSI, charte), procédures (ex. sauvegarde, accès, incidents), contrôles techniques (ex. antivirus, journalisation, sauvegardes).',
           "<strong>Définir la fréquence par type :</strong><ul><li>revues annuelles : politiques, droits d'accès, comptes ;</li><li>revues trimestrielles ou semestrielles : règles de filtrage, exceptions de sécurité ;</li><li>revues ponctuelles : à l'occasion d'un incident, d'un changement majeur ou d'un audit.</li></ul>",
-          'Définir les méthodes : auto-évaluation interne, audit interne, audit externe (PASSI qualifié ANSSI pour les besoins exigeants).',
+          '<strong>Définir les méthodes :</strong> auto-évaluation interne, audit interne, audit externe (PASSI qualifié ANSSI pour les besoins exigeants).',
         ]),
       ]),
     },
@@ -149,11 +149,11 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Revue annuelle des politiques et procédures',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          "Constituer le registre des documents : PSSI, charte, politique chiffrement, politique comptes, politique sauvegarde, procédure de gestion d'incident, etc.",
-          'Pour chaque document, noter : date de création, date de dernière revue, propriétaire, prochaine échéance.',
+          "<strong>Constituer le registre des documents :</strong> PSSI, charte, politique chiffrement, politique comptes, politique sauvegarde, procédure de gestion d'incident, etc.",
+          '<strong>Pour chaque document, noter :</strong> date de création, date de dernière revue, propriétaire, prochaine échéance.',
           "<strong>Lors de la revue annuelle, pour chaque document :</strong><ul><li>vérifier que les références internes (noms, rôles, prestataires) sont toujours à jour ;</li><li>vérifier que les évolutions réglementaires de l'année sont prises en compte ;</li><li>vérifier que les évolutions du SI (nouveaux outils, nouveaux sites) sont reflétées ;</li><li>décider : reconduire en l'état, mettre à jour à la marge, ou refondre.</li></ul>",
           'Faire revalider les documents modifiés par le dirigeant et les rediffuser.',
-          'Tracer la revue : date, participants, décisions.',
+          '<strong>Tracer la revue :</strong> date, participants, décisions.',
         ]),
       ]),
     },
@@ -163,7 +163,7 @@ export async function up(knex: Knex): Promise<void> {
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
           '<strong>Désigner un référent en sécurité :</strong><ul><li>dans une PME : peut être le responsable IT ou un prestataire externe missionné ;</li><li>dans une plus grande structure : un RSSI à temps plein ou partiel.</li></ul>',
-          "Formaliser un RACI simple sur les principales activités : sauvegardes, gestion des incidents, sensibilisation, contrôle d'accès, revue de conformité.",
+          "<strong>Formaliser un RACI simple sur les principales activités :</strong> sauvegardes, gestion des incidents, sensibilisation, contrôle d'accès, revue de conformité.",
           '<strong>Mettre en place une comitologie :</strong><ul><li>un comité de pilotage sécurité régulier réunissant direction + référent + représentant métier.</li></ul>',
           'Communiquer le nom du référent à tous les collaborateurs et le canal pour le contacter.',
           'Inscrire le rôle dans la fiche de poste du référent et prévoir une formation adaptée.',
@@ -175,7 +175,7 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Responsabilité du dirigeant',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          'Faire approuver et signer la PSSI par le dirigeant exécutif : ce geste matérialise sa prise de responsabilité.',
+          '<strong>Faire approuver et signer la PSSI par le dirigeant exécutif :</strong> ce geste matérialise sa prise de responsabilité.',
           "<strong>Inscrire la sécurité numérique à l'agenda :</strong><ul><li>au moins un point annuel en comité de direction sur les risques cyber, les incidents survenus, le plan d'action ;</li><li>reporting du référent SSI au dirigeant à fréquence régulière.</li></ul>",
           "Identifier les décisions qui restent du ressort du dirigeant (ex. déclenchement d'une cellule de crise, communication externe en cas d'incident, dépôt de plainte).",
           'Prévoir une sensibilisation cyber spécifique pour le dirigeant et le comité de direction.',
@@ -187,9 +187,9 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Engagements de sécurité des prestataires',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          "Identifier les prestataires concernés : infogérant, hébergeur, éditeur SaaS, prestataire de sauvegarde, prestataire d'administration.",
-          "<strong>Pour les nouveaux contrats : intégrer une annexe sécurité (souvent appelée « Plan d'assurance sécurité » ou PAS) couvrant :</strong><ul><li>exigences de sécurité à respecter (alignées sur la PSSI de l'entité) ;</li><li>obligation de notification d'incidents sous délai (ex. 24 h) ;</li><li>réversibilité : restitution des données dans un format ouvert ;</li><li>maintien à niveau de la sécurité dans la durée ;</li><li>conformité aux obligations légales (RGPD, NIS2 le cas échéant) ;</li><li>pénalités en cas de non-respect.</li></ul>",
-          'Pour les contrats existants : tenter de renégocier ou inclure les clauses au prochain renouvellement.',
+          "<strong>Identifier les prestataires concernés :</strong> infogérant, hébergeur, éditeur SaaS, prestataire de sauvegarde, prestataire d'administration.",
+          "<strong><strong>Pour les nouveaux contrats :</strong> intégrer une annexe sécurité (souvent appelée « Plan d'assurance sécurité » ou PAS) couvrant :</strong><ul><li>exigences de sécurité à respecter (alignées sur la PSSI de l'entité) ;</li><li>obligation de notification d'incidents sous délai (ex. 24 h) ;</li><li>réversibilité : restitution des données dans un format ouvert ;</li><li>maintien à niveau de la sécurité dans la durée ;</li><li>conformité aux obligations légales (RGPD, NIS2 le cas échéant) ;</li><li>pénalités en cas de non-respect.</li></ul>",
+          '<strong>Pour les contrats existants :</strong> tenter de renégocier ou inclure les clauses au prochain renouvellement.',
           'Privilégier les prestataires qualifiés ANSSI lorsque le contexte le justifie (PASSI, PAMS, PRIS, PDIS, SecNumCloud).',
         ]),
       ]),
@@ -247,9 +247,9 @@ export async function up(knex: Knex): Promise<void> {
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
           '<msc-lien href="https://messervices.cyber.gouv.fr/documents-guides/guide-charte-utilisation-moyens-informatiques-outils-numeriques_anssi.pdf" libelle="Partir du guide ANSSI Charte d\'utilisation des moyens informatiques et des outils numériques – Guide d\'élaboration en 8 points clés pour les PME et ETI" neutre></msc-lien>',
-          'Rédiger la charte en couvrant les 8 points clés du guide : périmètre, usage professionnel, mots de passe, équipements personnels, supports amovibles, messagerie et Internet, données et confidentialité, signalement des incidents.',
-          "Prévoir une section spécifique pour les administrateurs : comptes dédiés, traçabilité, interdiction d'usage à des fins personnelles.",
-          "Rendre la charte opposable : annexer au contrat de travail (pour les nouveaux) ou faire signer aux collaborateurs, intégrer au règlement intérieur si possible, mention dans le livret d'accueil.",
+          '<strong>Rédiger la charte en couvrant les 8 points clés du guide :</strong> périmètre, usage professionnel, mots de passe, équipements personnels, supports amovibles, messagerie et Internet, données et confidentialité, signalement des incidents.',
+          "<strong>Prévoir une section spécifique pour les administrateurs :</strong> comptes dédiés, traçabilité, interdiction d'usage à des fins personnelles.",
+          "<strong>Rendre la charte opposable :</strong> annexer au contrat de travail (pour les nouveaux) ou faire signer aux collaborateurs, intégrer au règlement intérieur si possible, mention dans le livret d'accueil.",
           'Revoir la charte au moins une fois par an et après tout changement majeur (nouvel outil, nouveau site, changement réglementaire).',
         ]),
       ]),
@@ -259,9 +259,9 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Sensibiliser ses collaborateurs (TPE/PME)',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          '<strong>S\'appuyer sur les ressources publiques.</strong><br>Inutile de produire son propre contenu, vous pouvez vous appuyer sur des ressources publiques, par exemple :<ul><li><msc-lien href="https://www.cybermalveillance.gouv.fr/tous-nos-contenus/kit-de-sensibilisation" libelle="Kit de sensibilisation Cybermalveillance.gouv.fr" neutre></msc-lien></li><li><msc-lien href="https://secnumacademie.gouv.fr/" libelle="SecNumAcadémie (ANSSI), formation en ligne gratuite" neutre></msc-lien></li></ul>Ces ressources peuvent vous permettre de créer des :<ul><li>campagnes d\'affichage sur les risques et les bonnes pratiques ;</li><li>mails d\'information sur les risques et les bonnes pratiques ;</li><li>conférences de sensibilisation auprès de l\'ensemble des utilisateurs ;</li><li>sensibilisations ciblées (ex. service achat ou finance pour les risques d\'escroquerie au faux ordre de virement et fraude au président, nouveaux arrivants, CODIR) ;</li><li>tests de connaissance des bonnes pratiques de sécurité auprès des collaborateurs ;</li><li>campagnes de faux phishing, qui consistent à « tester » la capacité des utilisateurs à détecter un mail piégé.</li></ul>Pour que les utilisateurs restent vigilants dans la durée, il est nécessaire de renouveler périodiquement les actions de sensibilisation / formation, sous plusieurs formats répartis dans l\'année.',
-          '<strong>Installer un rythme léger mais régulier.</strong><br>Exemple de programme de sensibilisation allégé :<ul><li>1 mail par mois reprenant un thème du kit Cybermalveillance (mot de passe, phishing, sauvegardes…) ;</li><li>un test de phishing tous les 2 ou 3 mois, à intervalle irrégulier (un test prévisible perd toute valeur) ;</li><li>en cas de clic : pas de sanction, mais demander de suivre les modules SecNumAcadémie correspondants.</li></ul>',
-          "<strong>Industrialiser.</strong><br>Au-delà d'une dizaine de personnes, une plateforme de simulation de phishing permet de suivre la progression de chacun et de mesurer l'évolution dans le temps. Intégrez aussi la sensibilisation au parcours d'arrivée des nouveaux collaborateurs.",
+          '<strong><strong>S\'appuyer sur les ressources publiques.</strong></strong><br>Inutile de produire son propre contenu, vous pouvez vous appuyer sur des ressources publiques, par exemple :<ul><li><msc-lien href="https://www.cybermalveillance.gouv.fr/tous-nos-contenus/kit-de-sensibilisation" libelle="Kit de sensibilisation Cybermalveillance.gouv.fr" neutre></msc-lien></li><li><msc-lien href="https://secnumacademie.gouv.fr/" libelle="SecNumAcadémie (ANSSI), formation en ligne gratuite" neutre></msc-lien></li></ul>Ces ressources peuvent vous permettre de créer des :<ul><li>campagnes d\'affichage sur les risques et les bonnes pratiques ;</li><li>mails d\'information sur les risques et les bonnes pratiques ;</li><li>conférences de sensibilisation auprès de l\'ensemble des utilisateurs ;</li><li>sensibilisations ciblées (ex. service achat ou finance pour les risques d\'escroquerie au faux ordre de virement et fraude au président, nouveaux arrivants, CODIR) ;</li><li>tests de connaissance des bonnes pratiques de sécurité auprès des collaborateurs ;</li><li>campagnes de faux phishing, qui consistent à « tester » la capacité des utilisateurs à détecter un mail piégé.</li></ul>Pour que les utilisateurs restent vigilants dans la durée, il est nécessaire de renouveler périodiquement les actions de sensibilisation / formation, sous plusieurs formats répartis dans l\'année.',
+          '<strong><strong>Installer un rythme léger mais régulier.</strong></strong><br>Exemple de programme de sensibilisation allégé :<ul><li>1 mail par mois reprenant un thème du kit Cybermalveillance (mot de passe, phishing, sauvegardes…) ;</li><li>un test de phishing tous les 2 ou 3 mois, à intervalle irrégulier (un test prévisible perd toute valeur) ;</li><li>en cas de clic : pas de sanction, mais demander de suivre les modules SecNumAcadémie correspondants.</li></ul>',
+          "<strong><strong>Industrialiser.</strong></strong><br>Au-delà d'une dizaine de personnes, une plateforme de simulation de phishing permet de suivre la progression de chacun et de mesurer l'évolution dans le temps. Intégrez aussi la sensibilisation au parcours d'arrivée des nouveaux collaborateurs.",
         ]),
       ]),
     },
@@ -283,7 +283,7 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Formation des fonctions numériques',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          'Cartographier les fonctions à former : référent SSI, admins, développeurs, chefs de projet numériques, et le cas échéant infogérant.',
+          '<strong>Cartographier les fonctions à former :</strong> référent SSI, admins, développeurs, chefs de projet numériques, et le cas échéant infogérant.',
           "<strong>Définir un socle commun obligatoire :</strong><ul><li>principaux risques et menaces actuels ;</li><li>législation et obligations (RGPD, NIS2 le cas échéant) ;</li><li>bonnes pratiques d'authentification et de gestion d'accès ;</li><li>réflexes en cas d'incident.</li></ul>",
           '<strong>Ajouter des modules spécifiques selon les rôles :</strong><ul><li>admins : durcissement, cloisonnement, journalisation ;</li><li>développeurs : développement sécurisé (OWASP Top 10) ;</li><li>chefs de projet : intégration de la sécurité dès la conception.</li></ul>',
           '<strong>S\'appuyer sur des ressources publiques :</strong><ul><li><msc-lien href="https://secnumacademie.gouv.fr/" libelle="SecNumAcadémie (ANSSI, gratuit)" neutre></msc-lien></li><li>Formations CFSSI de l\'ANSSI ;</li><li>Catalogue SecNumedu-FC (formations continues labellisées).</li></ul>',
@@ -296,11 +296,11 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Cartographie des SI',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          "<strong>S'appuyer sur la méthode du guide ANSSI « Cartographie du système d'information – Guide d'élaboration en 5 étapes » :</strong><br>Initier la démarche : périmètre, parties prenantes, cible.",
+          "<strong><strong>S'appuyer sur la méthode du guide ANSSI « Cartographie du système d'information – Guide d'élaboration en 5 étapes » :</strong></strong><br>Initier la démarche : périmètre, parties prenantes, cible.",
           '<strong>Choisir un modèle simple (3 vues suffisent pour démarrer) :</strong><ul><li>vue métier : activités et applications qui les supportent ;</li><li>vue applicative : applications et flux de données ;</li><li>vue infrastructure : équipements, réseaux, hébergement.</li></ul>',
-          "Choisir un outil adapté à la taille de l'entité : tableur simple + outil de schéma pour démarrer, outil dédié pour les plus matures.",
+          "<strong>Choisir un outil adapté à la taille de l'entité :</strong> tableur simple + outil de schéma pour démarrer, outil dédié pour les plus matures.",
           "Construire pas à pas, en privilégiant d'abord les systèmes critiques.",
-          "Pérenniser : nommer un responsable de la cartographie, intégrer la mise à jour dans tous les projets d'évolution, conserver une version papier à l'abri du SI.",
+          "<strong>Pérenniser :</strong> nommer un responsable de la cartographie, intégrer la mise à jour dans tous les projets d'évolution, conserver une version papier à l'abri du SI.",
         ]),
       ]),
       aller_plus_loin: knex.raw('?::jsonb', [
@@ -317,7 +317,7 @@ export async function up(knex: Knex): Promise<void> {
         JSON.stringify([
           "<strong>Sources à suivre :</strong><ul><li>CERT-FR : avis, alertes, indicateurs de compromission, bulletins thématiques (https://cert.ssi.gouv.fr/) ;</li><li>listes de diffusion ou pages de sécurité des éditeurs utilisés (Microsoft, Apple, Linux, éditeurs métiers, équipementiers réseau) ;</li><li>CSIRT sectoriel ou régional s'il en existe un pour l'entité ;</li><li>prestataire de veille spécialisé pour les plus matures.</li></ul>",
           'Désigner une personne responsable et lui réserver des créneaux pour la veille.',
-          "À chaque alerte critique : croiser avec l'inventaire et la cartographie pour savoir si l'entité est exposée, et déclencher le traitement (correctif ou mesure d'atténuation).",
+          "<strong>À chaque alerte critique :</strong> croiser avec l'inventaire et la cartographie pour savoir si l'entité est exposée, et déclencher le traitement (correctif ou mesure d'atténuation).",
           'Tracer les alertes traitées (date, source, équipements concernés, action menée).',
           'Présenter une synthèse trimestrielle au comité de pilotage sécurité.',
         ]),
@@ -341,9 +341,9 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Activer les mises à jour automatiques (TPE/PME)',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          "<strong>Système d'exploitation.</strong><br>Dans les paramètres système, rubrique Mise à jour ou Mises à jour logicielles, activez l'installation automatique des mises à jour, y compris les correctifs de sécurité. La démarche est documentée sur le site de support officiel de votre système d'exploitation (Windows, macOS, distributions Linux). Sur les serveurs Linux, le paquet « unattended-upgrades » permet d'appliquer les correctifs sans intervention.",
-          "<strong>Applications.</strong><br>Le système à jour ne suffit pas : navigateur, suite bureautique, lecteur PDF, outils métiers sont aussi visés. Activez la mise à jour automatique dans chaque application, ou laissez le magasin d'applications du système s'en charger.",
-          "<strong>En entreprise : centraliser.</strong><br>Au-delà de quelques postes, utilisez un outil de gestion centralisée des mises à jour pour déployer les correctifs sur tout le parc, imposer un délai maximum d'installation et identifier les postes en retard. C'est aussi ce qui permet de tester un correctif sur un petit groupe avant un déploiement large.",
+          "<strong><strong>Système d'exploitation.</strong></strong><br>Dans les paramètres système, rubrique Mise à jour ou Mises à jour logicielles, activez l'installation automatique des mises à jour, y compris les correctifs de sécurité. La démarche est documentée sur le site de support officiel de votre système d'exploitation (Windows, macOS, distributions Linux). Sur les serveurs Linux, le paquet « unattended-upgrades » permet d'appliquer les correctifs sans intervention.",
+          "<strong><strong>Applications.</strong></strong><br>Le système à jour ne suffit pas : navigateur, suite bureautique, lecteur PDF, outils métiers sont aussi visés. Activez la mise à jour automatique dans chaque application, ou laissez le magasin d'applications du système s'en charger.",
+          "<strong><strong>En entreprise : centraliser.</strong></strong><br>Au-delà de quelques postes, utilisez un outil de gestion centralisée des mises à jour pour déployer les correctifs sur tout le parc, imposer un délai maximum d'installation et identifier les postes en retard. C'est aussi ce qui permet de tester un correctif sur un petit groupe avant un déploiement large.",
         ]),
       ]),
       note: "Attention :\n- Certaines mises à jour nécessitent un redémarrage des équipements pour être effectives. Il est donc nécessaire de vérifier périodiquement que les équipements ne sont pas en attente de redémarrage et de planifier les redémarrages ayant un impact sur la disponibilité des systèmes.\n- Pour certaines mises à jour importantes (systèmes d'exploitation serveurs, bases de données, etc.), un délai de qualification interne peut être nécessaire pour s'assurer que la mise à jour n'impacte pas le bon fonctionnement du système.",
@@ -356,7 +356,7 @@ export async function up(knex: Knex): Promise<void> {
           'Inventorier les composants obsolètes (versions non supportées par leur éditeur ou fabricant).',
           "<strong>Pour chaque composant, mettre en place des mesures d'atténuation :</strong><ul><li>cloisonnement réseau (VLAN dédié, pare-feu avec règles strictes) ;</li><li>filtrage strict des flux entrants et sortants (juste ce qu'il faut pour l'usage métier) ;</li><li>contrôle d'accès renforcé (comptes dédiés, authentification forte) ;</li><li>surveillance renforcée (journaux, supervision spécifique) ;</li><li>secrets d'authentification dédiés (pas partagés avec d'autres systèmes).</li></ul>",
           'Établir et suivre un plan de migration ou de remplacement avec échéance.',
-          'Tracer la décision : justification métier ou technique, mesures de compensation appliquées, responsable, date de réexamen.',
+          '<strong>Tracer la décision :</strong> justification métier ou technique, mesures de compensation appliquées, responsable, date de réexamen.',
           'Revoir au moins annuellement la pertinence du maintien.',
         ]),
       ]),
@@ -366,11 +366,11 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Téléchargements officiels',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          'Inscrire dans la charte et les procédures internes : seules les sources officielles sont autorisées pour les téléchargements de logiciels et mises à jour.',
-          "Privilégier les canaux automatiques sécurisés : magasin d'applications de l'OS, gestionnaire de paquets officiel, mise à jour automatique de l'éditeur.",
+          '<strong>Inscrire dans la charte et les procédures internes :</strong> seules les sources officielles sont autorisées pour les téléchargements de logiciels et mises à jour.',
+          "<strong>Privilégier les canaux automatiques sécurisés :</strong> magasin d'applications de l'OS, gestionnaire de paquets officiel, mise à jour automatique de l'éditeur.",
           "<strong>Pour les téléchargements manuels :</strong><ul><li>aller directement sur le site officiel de l'éditeur (URL connue, pas via un moteur de recherche pour éviter les sites publicitaires détournés) ;</li><li>vérifier la signature numérique de l'installateur lorsqu'elle existe ;</li><li>comparer l'empreinte (hash) si l'éditeur la publie.</li></ul>",
           'Interdire les sites de téléchargements génériques et les miroirs non maîtrisés.',
-          "Sensibiliser les utilisateurs : les fausses publicités d'installateurs sont un vecteur d'attaque courant.",
+          "<strong>Sensibiliser les utilisateurs :</strong> les fausses publicités d'installateurs sont un vecteur d'attaque courant.",
         ]),
       ]),
     },
@@ -379,9 +379,9 @@ export async function up(knex: Knex): Promise<void> {
       titre: "Maintenir à jour les annuaires d'entreprise",
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          "<strong>Identifier la version en place.</strong><br>Faites l'inventaire de votre ou vos annuaires : éditeur, version installée, version cible recommandée. C'est la base pour savoir quel écart de correctifs vous devez combler.",
-          "<strong>Appliquer les correctifs.</strong><br>Le processus type, à chaque cycle de mise à jour :<ul><li>consulter les bulletins de sécurité de l'éditeur et du CERT-FR pour identifier les correctifs critiques ;</li><li>tester le correctif sur un environnement de pré-production avant le déploiement ;</li><li>sauvegarder (ou prendre un instantané) avant d'appliquer ;</li><li>déployer pendant une fenêtre de maintenance planifiée ;</li><li>vérifier le bon fonctionnement après application (authentification, réplication, droits).</li></ul>",
-          "<strong>Automatiser ce qui peut l'être.</strong><br>L'application manuelle est difficile à tenir dans la durée. Mettez en place un outil de gestion des correctifs pour :<ul><li>centraliser la diffusion sur l'ensemble des serveurs d'annuaire ;</li><li>définir des groupes (test puis production) pour un déploiement en vagues ;</li><li>imposer un délai maximum entre la sortie d'un correctif critique et son application ;</li><li>conserver un historique des versions et des correctifs appliqués.</li></ul>",
+          "<strong><strong>Identifier la version en place.</strong></strong><br>Faites l'inventaire de votre ou vos annuaires : éditeur, version installée, version cible recommandée. C'est la base pour savoir quel écart de correctifs vous devez combler.",
+          "<strong><strong>Appliquer les correctifs.</strong></strong><br>Le processus type, à chaque cycle de mise à jour :<ul><li>consulter les bulletins de sécurité de l'éditeur et du CERT-FR pour identifier les correctifs critiques ;</li><li>tester le correctif sur un environnement de pré-production avant le déploiement ;</li><li>sauvegarder (ou prendre un instantané) avant d'appliquer ;</li><li>déployer pendant une fenêtre de maintenance planifiée ;</li><li>vérifier le bon fonctionnement après application (authentification, réplication, droits).</li></ul>",
+          "<strong><strong>Automatiser ce qui peut l'être.</strong></strong><br>L'application manuelle est difficile à tenir dans la durée. Mettez en place un outil de gestion des correctifs pour :<ul><li>centraliser la diffusion sur l'ensemble des serveurs d'annuaire ;</li><li>définir des groupes (test puis production) pour un déploiement en vagues ;</li><li>imposer un délai maximum entre la sortie d'un correctif critique et son application ;</li><li>conserver un historique des versions et des correctifs appliqués.</li></ul>",
         ]),
       ]),
     },
@@ -390,7 +390,7 @@ export async function up(knex: Knex): Promise<void> {
       titre: "Contrôle d'accès aux locaux",
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          "Identifier les zones sensibles : salle serveur, local technique, salle d'archivage, bureau de la direction si données très sensibles.",
+          "<strong>Identifier les zones sensibles :</strong> salle serveur, local technique, salle d'archivage, bureau de la direction si données très sensibles.",
           "<strong>Appliquer des mesures selon la sensibilité des zones, par exemple :</strong><ul><li>bureaux : porte fermée à clé en dehors des horaires, registre des visiteurs à l'accueil ;</li><li>salle serveur et local technique : serrure renforcée ou badge dédié, liste limitée des personnes autorisées, accompagnement obligatoire des prestataires ;</li><li>traçabilité des accès (cahier ou journal du contrôle d'accès électronique).</li></ul>",
           'Procéder à une revue annuelle de la liste des personnes autorisées et retirer les accès devenus inutiles.',
           "À chaque départ, retirer immédiatement badges, clés et droits d'accès.",
@@ -427,9 +427,9 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Règles de filtrage',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          'Construire la matrice de flux justifiés : source, destination, protocole/port, sens, justification métier.',
-          'Configurer le pare-feu en politique « deny by default » : tout est bloqué sauf ce qui est explicitement autorisé.',
-          "Privilégier des règles précises : une règle large (« autoriser tout TCP ») crée plus de risque qu'elle n'en réduit.",
+          '<strong>Construire la matrice de flux justifiés :</strong> source, destination, protocole/port, sens, justification métier.',
+          '<strong>Configurer le pare-feu en politique « deny by default » :</strong> tout est bloqué sauf ce qui est explicitement autorisé.',
+          "<strong>Privilégier des règles précises :</strong> une règle large (« autoriser tout TCP ») crée plus de risque qu'elle n'en réduit.",
           "Journaliser les flux bloqués pour détecter les tentatives d'intrusion ou les erreurs de configuration applicative.",
           '<strong>Revoir annuellement les règles :</strong><ul><li>confronter la matrice de flux théorique aux règles réelles ;</li><li>corriger les contradictions ;</li><li>documenter chaque règle (intitulé clair, demandeur, date).</li></ul>',
         ]),
@@ -446,8 +446,8 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Activer le pare-feu (TPE/PME)',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          '<strong>Pare-feu local sur chaque poste.</strong><br>Activé par défaut sur les systèmes récents. Dans les paramètres système, rubrique Sécurité ou Pare-feu, vérifiez :<ul><li>pare-feu activé pour tous les profils réseau (privé, public, domaine) ;</li><li>exceptions réduites au strict nécessaire ;</li><li>profil « réseau public » correctement appliqué sur les postes nomades (Wi-Fi de gare, hôtel, café).</li></ul>',
-          "<strong>Un pare-feu dédié.</strong><br>Dès qu'on monte en taille ou en exposition (serveurs internes, télétravail massif, données sensibles, plusieurs sites), un ou plusieurs pare-feux physiques dédiés deviennent nécessaires pour segmenter le réseau en zones cloisonnées, journaliser les flux et assurer la redondance.",
+          '<strong><strong>Pare-feu local sur chaque poste.</strong></strong><br>Activé par défaut sur les systèmes récents. Dans les paramètres système, rubrique Sécurité ou Pare-feu, vérifiez :<ul><li>pare-feu activé pour tous les profils réseau (privé, public, domaine) ;</li><li>exceptions réduites au strict nécessaire ;</li><li>profil « réseau public » correctement appliqué sur les postes nomades (Wi-Fi de gare, hôtel, café).</li></ul>',
+          "<strong><strong>Un pare-feu dédié.</strong></strong><br>Dès qu'on monte en taille ou en exposition (serveurs internes, télétravail massif, données sensibles, plusieurs sites), un ou plusieurs pare-feux physiques dédiés deviennent nécessaires pour segmenter le réseau en zones cloisonnées, journaliser les flux et assurer la redondance.",
         ]),
       ]),
       note: "Optionnel — Au minimum, le pare-feu de la box internet :\nSi un pare-feu physique dédié ne peut pas être mis en place et qu'une box internet est utilisée, activez a minima le pare-feu de votre box. Connectez-vous à l'interface d'administration de la box (adresse du type 192.168.1.1, indiquée sous la box) et vérifiez :\n- pare-feu activé ;\n- aucune redirection de ports sans besoin explicite ;\n- accès distant à l'administration désactivé.",
@@ -469,7 +469,7 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Maîtrise des équipements connectés',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          'Inventorier les équipements autorisés à se connecter aux SI : postes professionnels, serveurs, smartphones professionnels, imprimantes, équipements IoT.',
+          '<strong>Inventorier les équipements autorisés à se connecter aux SI :</strong> postes professionnels, serveurs, smartphones professionnels, imprimantes, équipements IoT.',
           "<strong>Définir une politique BYOD claire :</strong><ul><li>autorisé ou non selon le contexte de l'entité ;</li><li>si autorisé, conditions à respecter par l'équipement personnel (ex. logiciel de sécurité, chiffrement, MFA, mises à jour à jour).</li></ul>",
           '<strong>Mettre en œuvre des mesures techniques pour empêcher les équipements non autorisés de se connecter, par exemple :</strong><ul><li>désactivation des prises réseau dans les zones publiques (salle de réunion, accueil) ;</li><li>authentification 802.1X des équipements sur le réseau filaire et Wi-Fi pour les contextes les plus exigeants.</li></ul>',
         ]),
@@ -482,7 +482,7 @@ export async function up(knex: Knex): Promise<void> {
         JSON.stringify([
           "<strong>Choisir la solution :</strong><ul><li>petite structure, secteur peu sensible : l'antivirus intégré au système d'exploitation suffit dans la plupart des cas — inutile de payer par réflexe ;</li><li>secteur sensible ou entreprise plus exposée : privilégiez un EDR (détection comportementale, pas seulement signatures connues).</li></ul>Pour comparer : cherchez « comparatif antivirus » ou « comparatif EDR » en privilégiant les sources indépendantes.",
           '<strong>Bien le paramétrer (le plus important) :</strong><ul><li>mise à jour automatique activée ;</li><li>analyse des fichiers entrants activée : ce paramètre couvre à la fois les pièces jointes des mails et les clés USB branchées sur le poste ;</li><li>analyses complètes programmées régulièrement ;</li><li>exceptions réduites au strict nécessaire ;</li><li>configuration protégée par mot de passe.</li></ul>',
-          "<strong>Centraliser.</strong><br>Dès qu'il y a plus d'une dizaine d'équipements, gérer chaque antivirus à la main devient ingérable. Déployez une console d'administration centralisée (incluse dans la plupart des solutions professionnelles) qui permet de :<ul><li>déployer et mettre à jour l'outil sur tous les équipements en une fois ;</li><li>imposer un paramétrage uniforme (impossible pour un utilisateur de le désactiver) ;</li><li>recevoir les alertes en temps réel et garder l'historique des détections.</li></ul>En continu — Traiter les alertes :<ul><li>Pour maintenir la vigilance des utilisateurs (qui ne doivent pas banaliser les alertes de l'antivirus), il est recommandé de contacter l'utilisateur du poste sur lequel une alerte a été générée.</li><li>Très régulièrement (a minima 1 fois par semaine), surveiller et analyser la console d'administration de la solution antivirale. Elle permet aussi de s'assurer que l'antivirus est installé sur tous les postes, qu'il est actif et que sa base virale est à jour, et donc d'identifier les postes non conformes.</li></ul>",
+          "<strong><strong>Centraliser.</strong></strong><br>Dès qu'il y a plus d'une dizaine d'équipements, gérer chaque antivirus à la main devient ingérable. Déployez une console d'administration centralisée (incluse dans la plupart des solutions professionnelles) qui permet de :<ul><li>déployer et mettre à jour l'outil sur tous les équipements en une fois ;</li><li>imposer un paramétrage uniforme (impossible pour un utilisateur de le désactiver) ;</li><li>recevoir les alertes en temps réel et garder l'historique des détections.</li></ul>En continu — Traiter les alertes :<ul><li>Pour maintenir la vigilance des utilisateurs (qui ne doivent pas banaliser les alertes de l'antivirus), il est recommandé de contacter l'utilisateur du poste sur lequel une alerte a été générée.</li><li>Très régulièrement (a minima 1 fois par semaine), surveiller et analyser la console d'administration de la solution antivirale. Elle permet aussi de s'assurer que l'antivirus est installé sur tous les postes, qu'il est actif et que sa base virale est à jour, et donc d'identifier les postes non conformes.</li></ul>",
         ]),
       ]),
     },
@@ -491,9 +491,9 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Maîtrise des supports amovibles',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          'Politique : interdire les supports inconnus, encadrer les supports nécessaires.',
+          '<strong>Politique :</strong> interdire les supports inconnus, encadrer les supports nécessaires.',
           '<strong>Fournir des supports professionnels :</strong><ul><li>clés USB et disques durs chiffrés ;</li><li>identification claire (logo, numéro de série) ;</li><li>inventaire tenu à jour.</li></ul>',
-          "Sensibilisation : ne jamais brancher une clé trouvée ou reçue d'un tiers non maîtrisé.",
+          "<strong>Sensibilisation :</strong> ne jamais brancher une clé trouvée ou reçue d'un tiers non maîtrisé.",
         ]),
       ]),
     },
@@ -502,12 +502,12 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Changement des mots de passe par défaut',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          'Faire la liste des équipements et logiciels à vérifier : box internet, routeur, pare-feu, switch, imprimantes, stockage réseau (NAS), caméras, objets connectés, applications métier, etc.',
+          '<strong>Faire la liste des équipements et logiciels à vérifier :</strong> box internet, routeur, pare-feu, switch, imprimantes, stockage réseau (NAS), caméras, objets connectés, applications métier, etc.',
           "<strong>Retrouver les identifiants d'origine :</strong><ul><li>étiquette collée sous l'appareil ou au dos ;</li><li>documentation ou notice du fabricant ;</li><li>site du constructeur (attention : ces mots de passe sont souvent publiés en ligne, c'est bien là le problème).</li></ul>",
           "Se connecter à l'interface d'administration de chaque équipement (généralement via un navigateur, avec l'adresse indiquée dans la notice).",
           "<strong>Remplacer identifiant ET mot de passe :</strong><ul><li>changer aussi le nom du compte quand c'est possible (éviter « admin », « root », « user ») ;</li><li>choisir un mot de passe long, unique pour chaque équipement, jamais réutilisé ailleurs ;</li><li>ne pas se contenter d'ajouter un chiffre au mot de passe d'usine.</li></ul>",
-          "Conserver les nouveaux accès en sécurité : gestionnaire de mots de passe ou coffre-fort numérique, avec la mention de l'équipement concerné. Ne pas les laisser sur un post-it ou dans un fichier partagé.",
-          'Traiter en priorité ce qui est le plus exposé : équipements de sécurité, services accessibles depuis internet, équipements réseau.',
+          "<strong>Conserver les nouveaux accès en sécurité :</strong> gestionnaire de mots de passe ou coffre-fort numérique, avec la mention de l'équipement concerné. Ne pas les laisser sur un post-it ou dans un fichier partagé.",
+          '<strong>Traiter en priorité ce qui est le plus exposé :</strong> équipements de sécurité, services accessibles depuis internet, équipements réseau.',
           "Refaire le point à chaque nouvel achat, chaque réinstallation et après toute remise à zéro (un « reset usine » restaure les mots de passe d'origine).",
         ]),
       ]),
@@ -519,8 +519,8 @@ export async function up(knex: Knex): Promise<void> {
         "⚠️ Cette mesure s'applique à tous les mots de passe et secrets : utilisateurs, administrateurs, comptes de service, accès partagés, etc.",
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          '<strong>Construire un mot de passe robuste</strong><br>Privilégiez la longueur à la complexité : une phrase de passe (plusieurs mots assemblés) est souvent plus solide et plus facile à retenir qu\'un mot court bourré de caractères spéciaux.<br><msc-lien href="https://www.cnil.fr/fr/generer-un-mot-de-passe-solide" libelle="Générer un mot de passe solide (CNIL)" neutre></msc-lien><br><msc-lien href="https://monservicesecurise.cyber.gouv.fr/articles/fixer-des-contraintes-de-longueur-et-de-complexite-des-mots-de-passe" libelle="Contraintes de longueur et complexité (ANSSI / MonServiceSécurisé)" neutre></msc-lien>',
-          '<strong>Utiliser un gestionnaire de mots de passe</strong><br>Un humain ne peut pas retenir un mot de passe unique par service. Un gestionnaire génère, stocke et remplit automatiquement vos identifiants, protégés par un seul mot de passe maître (qui, lui, doit être très solide).<br><msc-lien href="https://messervices.cyber.gouv.fr/visas/catalogue-produits-services-profils-de-protection-sites-certifies-qualifies-agrees-anssi.pdf" libelle="Privilégiez un outil figurant au catalogue des produits qualifiés par l\'ANSSI" neutre></msc-lien>',
+          '<strong><strong>Construire un mot de passe robuste</strong></strong><br>Privilégiez la longueur à la complexité : une phrase de passe (plusieurs mots assemblés) est souvent plus solide et plus facile à retenir qu\'un mot court bourré de caractères spéciaux.<br><msc-lien href="https://www.cnil.fr/fr/generer-un-mot-de-passe-solide" libelle="Générer un mot de passe solide (CNIL)" neutre></msc-lien><br><msc-lien href="https://monservicesecurise.cyber.gouv.fr/articles/fixer-des-contraintes-de-longueur-et-de-complexite-des-mots-de-passe" libelle="Contraintes de longueur et complexité (ANSSI / MonServiceSécurisé)" neutre></msc-lien>',
+          '<strong><strong>Utiliser un gestionnaire de mots de passe</strong></strong><br>Un humain ne peut pas retenir un mot de passe unique par service. Un gestionnaire génère, stocke et remplit automatiquement vos identifiants, protégés par un seul mot de passe maître (qui, lui, doit être très solide).<br><msc-lien href="https://messervices.cyber.gouv.fr/visas/catalogue-produits-services-profils-de-protection-sites-certifies-qualifies-agrees-anssi.pdf" libelle="Privilégiez un outil figurant au catalogue des produits qualifiés par l\'ANSSI" neutre></msc-lien>',
         ]),
       ]),
       aller_plus_loin: knex.raw('?::jsonb', [
@@ -558,7 +558,7 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Comptes individuels',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          'Inventorier tous les comptes existants : utilisateurs, administrateurs, comptes de service, comptes partagés.',
+          '<strong>Inventorier tous les comptes existants :</strong> utilisateurs, administrateurs, comptes de service, comptes partagés.',
           '<strong>Pour chaque compte non individuel :</strong><ul><li>si possible, remplacer par des comptes individuels ;</li><li>sinon, justifier le maintien et appliquer les mesures de la mesure « comptes partagés ».</li></ul>',
           '<strong>Nomenclature claire :</strong><ul><li>utilisateurs : prénom.nom ;</li><li>administrateurs : adm-prénom.nom ou similaire, distinct du compte utilisateur ;</li><li>services : nom du service explicite (ex. svc-backup, svc-monitoring).</li></ul>',
           'Pour chaque compte, élément secret (mot de passe ou clé) connu uniquement de la personne ou du processus autorisé.',
@@ -570,12 +570,12 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Comptes partagés',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          'Justifier le maintien : pour chaque compte partagé, documenter la raison technique ou organisationnelle qui empêche le passage en compte individuel.',
-          'Liste limitée des utilisateurs autorisés : nominative, à jour, validée par le responsable.',
+          '<strong>Justifier le maintien :</strong> pour chaque compte partagé, documenter la raison technique ou organisationnelle qui empêche le passage en compte individuel.',
+          '<strong>Liste limitée des utilisateurs autorisés :</strong> nominative, à jour, validée par le responsable.',
           '<strong>Stockage du secret :</strong><ul><li>dans un coffre-fort numérique de mots de passe (gestionnaire partagé) ;</li><li>jamais sur un post-it, fichier texte ou email.</li></ul>',
           "<strong>Renouvellement du secret :</strong><ul><li>à chaque retrait d'un utilisateur (départ, mobilité interne) ;</li><li>à fréquence régulière si la rotation est faible.</li></ul>",
           "<strong>Traçabilité :</strong><ul><li>cahier de prise et de passation (qui utilise le compte, quand, pour quoi) ;</li><li>corrélation avec les badges d'accès physique (par exemple si le compte est lié à une salle de supervision) ;</li><li>journalisation applicative croisée.</li></ul>",
-          "Si l'élément secret ne peut pas être renouvelé (cas rare) : mettre en œuvre un contrôle d'accès renforcé sur la ressource concernée et une surveillance accrue.",
+          "<strong>Si l'élément secret ne peut pas être renouvelé (cas rare) :</strong> mettre en œuvre un contrôle d'accès renforcé sur la ressource concernée et une surveillance accrue.",
         ]),
       ]),
     },
@@ -587,7 +587,7 @@ export async function up(knex: Knex): Promise<void> {
           "<strong>Définir les règles dans la politique de gestion des comptes :</strong><ul><li>compte d'utilisateur partant : désactivation à la date du départ, suppression après période de conservation (souvent 30 à 90 jours selon politique RH) ;</li><li>compte de prestataire : désactivation à la fin du contrat ;</li><li>compte inactif depuis X mois (ex. 3 mois) : désactivation automatique avec alerte au responsable.</li></ul>",
           'Connecter la procédure RH (départ, mobilité) à la procédure IT (désactivation).',
           '<strong>Automatiser autant que possible :</strong><ul><li>script de désactivation des comptes inactifs ;</li><li>alerte automatique au-delà du délai prévu.</li></ul>',
-          'Tracer chaque désactivation : date, motif, responsable.',
+          '<strong>Tracer chaque désactivation :</strong> date, motif, responsable.',
         ]),
       ]),
     },
@@ -599,7 +599,7 @@ export async function up(knex: Knex): Promise<void> {
           "<strong>Définir les règles dans la politique de gestion des comptes :</strong><ul><li>compte à privilèges (administrateur) : désactivation immédiate à la fin de la mission ou du besoin ;</li><li>compte de service : désactivation dès l'arrêt de l'application ou du projet associé, avec un propriétaire identifié pour chaque compte ;</li><li>compte à privilèges inactif depuis X mois (ex. 3 mois) : désactivation automatique avec alerte au responsable.</li></ul>",
           'Connecter la procédure RH et la gestion des missions/prestations à la procédure IT (fin de mission = désactivation).',
           '<strong>Automatiser autant que possible :</strong><ul><li>inventaire et revue périodique des comptes à privilèges et comptes de service ;</li><li>alerte automatique au-delà du délai prévu.</li></ul>',
-          'Tracer chaque désactivation : date, motif, responsable.',
+          '<strong>Tracer chaque désactivation :</strong> date, motif, responsable.',
         ]),
       ]),
     },
@@ -608,11 +608,11 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Revue annuelle des comptes',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          "Extraire l'inventaire des comptes par périmètre : annuaire d'entreprise, applications métiers, systèmes critiques, etc.",
+          "<strong>Extraire l'inventaire des comptes par périmètre :</strong> annuaire d'entreprise, applications métiers, systèmes critiques, etc.",
           "<strong>Pour chaque compte, vérifier :</strong><ul><li>existence d'un utilisateur ou d'un processus rattaché ;</li><li>rattachement nominatif (sauf comptes de service justifiés) ;</li><li>dernière connexion (les comptes inactifs depuis longtemps doivent être désactivés) ;</li><li>statut RH (toujours en poste ou parti) ;</li><li>cohérence avec la mission actuelle.</li></ul>",
           "Faire valider l'inventaire par les responsables métiers.",
           'Désactiver / supprimer les comptes inutiles ou non justifiés.',
-          'Tracer la revue : date, périmètre, participants, anomalies relevées, actions correctives.',
+          '<strong>Tracer la revue :</strong> date, périmètre, participants, anomalies relevées, actions correctives.',
         ]),
       ]),
     },
@@ -623,9 +623,9 @@ export async function up(knex: Knex): Promise<void> {
         'La règle : un compte administrateur uniquement pour administrer, un compte utilisateur standard pour le travail quotidien.',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          "<strong>Créer un compte utilisateur séparé.</strong><br>Sur chaque poste, créez deux comptes distincts dans les paramètres système, rubrique Comptes ou Utilisateurs et groupes :<ul><li>un compte administrateur avec un mot de passe robuste uniquement connu par les personnes autorisées et utilisé uniquement pour installer un logiciel ou modifier la configuration ;</li><li>un compte utilisateur standard (sans droits d'administration) pour l'usage quotidien : navigation, mails, bureautique.</li></ul>La démarche est documentée sur les sites de support officiels de chaque système d'exploitation ; sur Linux, elle dépend de la distribution.",
-          'Travailler au quotidien avec le compte standard : pour les tâches usuelles (mails, navigation, bureautique), rutiliser le compte utilisateur standard.',
-          "Ne pas oublier les processus automatiques : les agents installés sur les postes (sauvegarde, télédistribution, supervision, antivirus) tournent souvent avec des droits élevés — vérifiez qu'ils ne disposent que des droits nécessaires à leur fonction.",
+          "<strong><strong>Créer un compte utilisateur séparé.</strong></strong><br>Sur chaque poste, créez deux comptes distincts dans les paramètres système, rubrique Comptes ou Utilisateurs et groupes :<ul><li>un compte administrateur avec un mot de passe robuste uniquement connu par les personnes autorisées et utilisé uniquement pour installer un logiciel ou modifier la configuration ;</li><li>un compte utilisateur standard (sans droits d'administration) pour l'usage quotidien : navigation, mails, bureautique.</li></ul>La démarche est documentée sur les sites de support officiels de chaque système d'exploitation ; sur Linux, elle dépend de la distribution.",
+          '<strong>Travailler au quotidien avec le compte standard :</strong> pour les tâches usuelles (mails, navigation, bureautique), rutiliser le compte utilisateur standard.',
+          "<strong>Ne pas oublier les processus automatiques :</strong> les agents installés sur les postes (sauvegarde, télédistribution, supervision, antivirus) tournent souvent avec des droits élevés — vérifiez qu'ils ne disposent que des droits nécessaires à leur fonction.",
           "Au-delà de quelques postes, si possible, gérez les droits via l'annuaire d'entreprise : aucun utilisateur n'est administrateur local de son poste par défaut, les comptes d'administration sont nominatifs et distincts des comptes utilisateurs courants, et leur usage est journalisé. C'est aussi ce qui permet de retirer rapidement les droits d'un collaborateur qui change de poste ou quitte l'entreprise.",
         ]),
       ]),
@@ -635,12 +635,12 @@ export async function up(knex: Knex): Promise<void> {
       titre: "Attribution des droits d'accès",
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          "Extraire les ressources (applicatifs et équipements) : annuaire d'entreprise, applications métiers, etc.",
+          "<strong>Extraire les ressources (applicatifs et équipements) :</strong> annuaire d'entreprise, applications métiers, etc.",
           "<strong>Pour chaque périmètre, définir une matrice de droits :</strong><ul><li>quels rôles ou groupes peuvent accéder ;</li><li>en lecture seule ou en écriture ;</li><li>règles d'exception.</li></ul>",
-          "Préférer la gestion par groupes : créer un groupe RH, un groupe Finance, etc., et attribuer les droits aux groupes plutôt qu'aux individus.",
-          'À chaque demande de droit : justification métier explicite, validation hiérarchique, attribution traçable.',
-          'Pour les comptes à privilèges : encore plus strict et journalisation systématique.',
-          'Ne pas oublier les processus automatiques : comptes de service, connecteurs applicatifs et intégrations entre outils disposent souvent de droits très larges — leur appliquer la même règle du besoin justifié.',
+          "<strong>Préférer la gestion par groupes :</strong> créer un groupe RH, un groupe Finance, etc., et attribuer les droits aux groupes plutôt qu'aux individus.",
+          '<strong>À chaque demande de droit :</strong> justification métier explicite, validation hiérarchique, attribution traçable.',
+          '<strong>Pour les comptes à privilèges :</strong> encore plus strict et journalisation systématique.',
+          '<strong>Ne pas oublier les processus automatiques :</strong> comptes de service, connecteurs applicatifs et intégrations entre outils disposent souvent de droits très larges — leur appliquer la même règle du besoin justifié.',
         ]),
       ]),
     },
@@ -652,7 +652,7 @@ export async function up(knex: Knex): Promise<void> {
           'Extraire pour chaque ressource (applicatif ou équipement) la liste des utilisateurs et leurs droits.',
           '<strong>Transmettre la liste au responsable de chaque ressource, pour validation :</strong><ul><li>cet utilisateur a-t-il toujours besoin de ce droit ?</li><li>le niveau de droit est-il adapté ?</li><li>faut-il retirer / ajouter quelque chose ?</li></ul>',
           'Appliquer les modifications validées.',
-          'Tracer la revue : date, périmètre, validateur, modifications appliquées.',
+          '<strong>Tracer la revue :</strong> date, périmètre, validateur, modifications appliquées.',
         ]),
       ]),
     },
@@ -687,7 +687,7 @@ export async function up(knex: Knex): Promise<void> {
           "<strong>Définir une grille de qualification, par exemple :</strong><ul><li>non-incident (faux positif ou comportement normal) ;</li><li>à investiguer (signal faible, à corroborer) ;</li><li>incident avéré (compromission, attaque, fuite confirmée) : déclencher la procédure de gestion d'incident.</li></ul>",
           'Centraliser la collecte dans un journal ou un outil simple ; même un tableur peut suffire au démarrage.',
           "<strong>Procéder à l'analyse :</strong><ul><li>corréler avec d'autres sources (journaux, autres alertes) ;</li><li>vérifier la cartographie : l'événement est-il cohérent avec une activité légitime ?</li><li>documenter la décision.</li></ul>",
-          'Pour les structures plus matures : prestation PDIS qualifiée ANSSI (Prestataire de détection des incidents de sécurité).',
+          '<strong>Pour les structures plus matures :</strong> prestation PDIS qualifiée ANSSI (Prestataire de détection des incidents de sécurité).',
         ]),
       ]),
     },
@@ -725,11 +725,11 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Test des sauvegardes',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          "Définir l'inventaire à tester : pour chaque système, vérifier au moins une fois par an la capacité à restaurer.",
+          "<strong>Définir l'inventaire à tester :</strong> pour chaque système, vérifier au moins une fois par an la capacité à restaurer.",
           "<strong>Combiner plusieurs types de tests :</strong><ul><li>test ponctuel : restaurer un fichier ou un dossier au hasard, à la demande ;</li><li>test partiel : restaurer une application complète sur un environnement de test ;</li><li>test général : exercice de restauration complète d'un système, dans des conditions proches du réel.</li></ul>",
           "<strong>Pour chaque test, mesurer :</strong><ul><li>le délai de restauration (temps réel) ;</li><li>l'exhaustivité (toutes les données attendues sont-elles présentes ?) ;</li><li>la cohérence applicative (le système restauré fonctionne-t-il ?).</li></ul>",
           'Conserver une trace écrite des résultats (date, périmètre, succès / échec, actions correctives).',
-          'Si des sauvegardes échouent ou sont incomplètes : corriger immédiatement et tester à nouveau.',
+          '<strong>Si des sauvegardes échouent ou sont incomplètes :</strong> corriger immédiatement et tester à nouveau.',
         ]),
       ]),
       aller_plus_loin: knex.raw('?::jsonb', [
@@ -744,14 +744,14 @@ export async function up(knex: Knex): Promise<void> {
       titre: 'Procédure de gestion de crise cyber',
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          "Critères de déclenchement : que considère-t-on comme un incident majeur ? (paralysie d'activité, fuite de données, atteinte à la sécurité d'un service critique).",
+          "<strong>Critères de déclenchement :</strong> que considère-t-on comme un incident majeur ? (paralysie d'activité, fuite de données, atteinte à la sécurité d'un service critique).",
           'Composition de la cellule de crise.',
           '<strong>Premiers réflexes techniques :</strong><ul><li>isoler les machines suspectes du réseau ;</li><li>ne pas éteindre, ne pas redémarrer (préserver les preuves) ;</li><li>prévenir le référent SSI puis le dirigeant ;</li><li>contacter un prestataire PRIS qualifié si besoin.</li></ul>',
-          "Chaîne d'alerte externe : assureur cyber, CERT-FR (cert@ssi.gouv.fr), CNIL (si données personnelles), autorités sectorielles, principaux clients et partenaires.",
-          'Annuaire des parties prenantes externes : à constituer en amont, conservé hors ligne, mis à jour annuellement.',
-          'Plan de communication interne et externe : qui parle, à qui, dans quel délai.',
-          'Suivi pendant la crise : journal de bord, rythme de réunions, décisions prises.',
-          'Sortie de crise : conditions de retour à la normale, communication de clôture, déclenchement du RETEX.',
+          "<strong>Chaîne d'alerte externe :</strong> assureur cyber, CERT-FR (cert@ssi.gouv.fr), CNIL (si données personnelles), autorités sectorielles, principaux clients et partenaires.",
+          '<strong>Annuaire des parties prenantes externes :</strong> à constituer en amont, conservé hors ligne, mis à jour annuellement.',
+          '<strong>Plan de communication interne et externe :</strong> qui parle, à qui, dans quel délai.',
+          '<strong>Suivi pendant la crise :</strong> journal de bord, rythme de réunions, décisions prises.',
+          '<strong>Sortie de crise :</strong> conditions de retour à la normale, communication de clôture, déclenchement du RETEX.',
         ]),
       ]),
       aller_plus_loin: knex.raw('?::jsonb', [
@@ -767,7 +767,7 @@ export async function up(knex: Knex): Promise<void> {
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
           "<strong>Déclencher le RETEX dès la sortie de crise, d'entraînement ou d'exercice, et au plus tard sous 30 jours :</strong><ul><li>RETEX à chaud (J+7 environ) : recueil immédiat des constats, encore frais ;</li><li>RETEX à froid (J+30 environ) : analyse plus posée, vision consolidée.</li></ul>",
-          'Réunir les participants : cellule de crise, équipes opérationnelles, prestataires impliqués.',
+          '<strong>Réunir les participants :</strong> cellule de crise, équipes opérationnelles, prestataires impliqués.',
           "<strong>Méthode :</strong><ul><li>reconstituer la chronologie de la crise ;</li><li>identifier ce qui a bien fonctionné (à pérenniser) ;</li><li>identifier ce qui n'a pas fonctionné (procédures incomplètes, annuaire obsolète, outils défaillants, manque de compétences) ;</li><li>identifier les améliorations à apporter.</li></ul>",
           'Pour chaque amélioration, désigner un responsable et fixer une échéance.',
           'Intégrer les modifications dans les procédures et les exercices à venir.',
@@ -787,12 +787,12 @@ export async function up(knex: Knex): Promise<void> {
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
           "<strong>Identifier les rôles à mobiliser en cas de cyberattaque, puis les attribuer aux personnes réellement présentes dans votre entité (une même personne peut cumuler plusieurs rôles) :</strong><ul><li>prise de décision (dirigeant) ;</li><li>gestion de l'informatique (interne ou prestataire) ;</li><li>communication (interne, clients, partenaires) ;</li><li>juridique et déclaration (CNIL si données personnelles, dépôt de plainte) ;</li><li>lien avec l'assurance cyber.</li></ul>",
-          "Ajouter les contacts externes indispensables : prestataire informatique, hébergeur, opérateur télécom, éditeur des logiciels métier, banque, assureur, forces de l'ordre, et les dispositifs d'aide publics (Cybermalveillance.gouv.fr, ANSSI/CERT selon votre statut).",
-          "Pour chaque contact, noter : nom, fonction, numéro de téléphone (idéalement un mobile joignable hors du réseau de l'entreprise), adresse mail — et si possible une adresse mail de secours, indépendante de votre messagerie professionnelle.",
-          "Ne pas oublier les références utiles : numéro de contrat d'infogérance, numéro de police d'assurance cyber, identifiant client chez l'hébergeur, numéro d'astreinte. Sans ces références, la prise en charge est beaucoup plus lente.",
+          "<strong>Ajouter les contacts externes indispensables :</strong> prestataire informatique, hébergeur, opérateur télécom, éditeur des logiciels métier, banque, assureur, forces de l'ordre, et les dispositifs d'aide publics (Cybermalveillance.gouv.fr, ANSSI/CERT selon votre statut).",
+          "<strong>Pour chaque contact, noter :</strong> nom, fonction, numéro de téléphone (idéalement un mobile joignable hors du réseau de l'entreprise), adresse mail — et si possible une adresse mail de secours, indépendante de votre messagerie professionnelle.",
+          "<strong>Ne pas oublier les références utiles :</strong> numéro de contrat d'infogérance, numéro de police d'assurance cyber, identifiant client chez l'hébergeur, numéro d'astreinte. Sans ces références, la prise en charge est beaucoup plus lente.",
           'Imprimer plusieurs exemplaires et les répartir intelligemment : classeur de crise au bureau, domicile du dirigeant, véhicule ou sac du responsable informatique. Le principe : la liste doit rester lisible sans ordinateur, sans réseau et sans internet.',
           'Dater et versionner le document (« Version du 27/07/2026 ») pour repérer immédiatement un exemplaire périmé.',
-          "Protéger le document : il contient des données personnelles et une cartographie de vos prestataires. Informer les personnes concernées, limiter la diffusion aux seules personnes utiles, et ne pas laisser d'exemplaires traîner dans des espaces communs.",
+          "<strong>Protéger le document :</strong> il contient des données personnelles et une cartographie de vos prestataires. Informer les personnes concernées, limiter la diffusion aux seules personnes utiles, et ne pas laisser d'exemplaires traîner dans des espaces communs.",
           'Maintenir à jour cette liste, notamment à chaque départ, arrivée ou changement de prestataire.',
         ]),
       ]),
@@ -803,7 +803,7 @@ export async function up(knex: Knex): Promise<void> {
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
           "<strong>Tenir deux versions synchronisées :</strong><ul><li>version numérique dans un dossier sécurisé du SI ;</li><li>version papier imprimée, conservée dans un classeur en armoire fermée à clé, chez le référent SSI à son domicile, ou dans un coffre si l'entité en dispose.</li></ul>",
-          'Synchroniser les deux versions : à chaque mise à jour numérique, réimprimer.',
+          '<strong>Synchroniser les deux versions :</strong> à chaque mise à jour numérique, réimprimer.',
           "Tester l'accessibilité au moins une fois par an (lors de l'exercice de crise) : « si la messagerie est inaccessible, qui peut donner le numéro de tel contact en 2 minutes ? ».",
           'Mettre à jour cette liste en cas de changement et a minima annuellement.',
         ]),
@@ -814,9 +814,9 @@ export async function up(knex: Knex): Promise<void> {
       titre: "S'entraîner à gérer une crise cyber (TPE/PME)",
       etapes: knex.raw('?::jsonb', [
         JSON.stringify([
-          '<strong>Utiliser les kits et guides existants.</strong><br>Inutile d\'écrire un scénario de zéro. Des kits clés en main et des guides sont disponibles :<ul><li><msc-lien href="https://messervices.cyber.gouv.fr/ressources/reflexes-cyber.html" libelle="Kit Réflexes cyber ANSSI" neutre></msc-lien></li><li>[A FILTRER AVEC LE SIRET] Kits sectoriels et collectivités ANSSI : https://cyber.gouv.fr/securisation/gestion-de-crise/entrainement-crise/kit-exercice-collectivites-territoriales/ et https://cyber.gouv.fr/securisation/gestion-de-crise/entrainement-crise/kits-dexercices-sectoriels/</li><li><msc-lien href="https://messervices.cyber.gouv.fr/guides/organiser-un-exercice-de-gestion-de-crise-cyber" libelle="Guide d\'aide à l\'organisation d\'un exercice de gestion de crise cyber" neutre></msc-lien></li><li><msc-lien href="https://www.amf.asso.fr/page-capcyberbrcrises-and-collectivites/43113" libelle="CapCyber Crise" neutre></msc-lien></li></ul>',
-          "<strong>Organiser un exercice simple.</strong><br>Un format « sur table » suffit pour commencer : réunissez les personnes-clés (direction, IT ou prestataire, communication, métier), présentez un scénario réaliste (rançongiciel, fuite de données, indisponibilité de la messagerie…) et faites-leur dérouler à voix haute les décisions, dans l'ordre. À l'issue, formalisez les enseignements : qui appeler en priorité, qui décide de couper le réseau, comment alerter les clients, où sont les contacts d'urgence (assureur, CERT-FR, prestataire de réponse à incident).",
-          '<strong>Pour les entités plus matures : Rempar.</strong><br><msc-lien href="https://cyber.gouv.fr/securisation/gestion-de-crise/entrainement-crise/rempar/rempar25/" libelle="L\'ANSSI organise chaque année un exercice national, Rempar, avec scénarios prêts à jouer et accompagnement" neutre></msc-lien><br>C\'est l\'occasion idéale de passer d\'un exercice interne à un exercice plus complet, voire intersectoriel.',
+          '<strong><strong>Utiliser les kits et guides existants.</strong></strong><br>Inutile d\'écrire un scénario de zéro. Des kits clés en main et des guides sont disponibles :<ul><li><msc-lien href="https://messervices.cyber.gouv.fr/ressources/reflexes-cyber.html" libelle="Kit Réflexes cyber ANSSI" neutre></msc-lien></li><li>[A FILTRER AVEC LE SIRET] Kits sectoriels et collectivités ANSSI : https://cyber.gouv.fr/securisation/gestion-de-crise/entrainement-crise/kit-exercice-collectivites-territoriales/ et https://cyber.gouv.fr/securisation/gestion-de-crise/entrainement-crise/kits-dexercices-sectoriels/</li><li><msc-lien href="https://messervices.cyber.gouv.fr/guides/organiser-un-exercice-de-gestion-de-crise-cyber" libelle="Guide d\'aide à l\'organisation d\'un exercice de gestion de crise cyber" neutre></msc-lien></li><li><msc-lien href="https://www.amf.asso.fr/page-capcyberbrcrises-and-collectivites/43113" libelle="CapCyber Crise" neutre></msc-lien></li></ul>',
+          "<strong><strong>Organiser un exercice simple.</strong></strong><br>Un format « sur table » suffit pour commencer : réunissez les personnes-clés (direction, IT ou prestataire, communication, métier), présentez un scénario réaliste (rançongiciel, fuite de données, indisponibilité de la messagerie…) et faites-leur dérouler à voix haute les décisions, dans l'ordre. À l'issue, formalisez les enseignements : qui appeler en priorité, qui décide de couper le réseau, comment alerter les clients, où sont les contacts d'urgence (assureur, CERT-FR, prestataire de réponse à incident).",
+          '<strong><strong>Pour les entités plus matures : Rempar.</strong></strong><br><msc-lien href="https://cyber.gouv.fr/securisation/gestion-de-crise/entrainement-crise/rempar/rempar25/" libelle="L\'ANSSI organise chaque année un exercice national, Rempar, avec scénarios prêts à jouer et accompagnement" neutre></msc-lien><br>C\'est l\'occasion idéale de passer d\'un exercice interne à un exercice plus complet, voire intersectoriel.',
         ]),
       ]),
     },
