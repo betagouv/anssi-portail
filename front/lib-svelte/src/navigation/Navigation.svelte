@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import { creeLienContactsUtiles } from '../contacts/contacts';
   import { profilStore } from '../stores/profil.store';
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
 
   let estConnecte = () => !!$profilStore;
 
@@ -24,10 +25,20 @@
     active,
   });
 
+  const lienParcoursUtilisateur = $derived(
+    $profilStore?.parcoursSecurisation.parcoursActuel === null
+      ? '/parcours-securisation'
+      : $profilStore?.parcoursSecurisation.parcoursActuel === 'allégé'
+        ? '/modules/1'
+        : 'parcours-complet'
+  );
+  const lienParcoursSécurisation = $derived(estConnecte() ? lienParcoursUtilisateur : '/parcours-securisation');
   const menu = $derived([
     ...(estMobile ? [itemDeMenu('Accueil', '/', cheminRelatif === '/')] : []),
 
-    itemDeMenu('Diagnostic cyber gratuit', '/cyberdepart', cheminRelatif === '/cyberdepart'),
+    ...(afficheParcoursSecurisation
+      ? [itemDeMenu('🚀 Protéger mon organisation', lienParcoursSécurisation, cheminRelatif === '/cyberdepart')]
+      : [itemDeMenu('Diagnostic cyber gratuit', '/cyberdepart', cheminRelatif === '/cyberdepart')]),
 
     ...(estConnecte()
       ? [itemDeMenu('Test de maturité cyber', '/ma-maturite', cheminRelatif === '/ma-maturite')]
