@@ -36,7 +36,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 16px;
+    width: 100%;
 
     @include a-partir-de(lg) {
       flex-direction: row-reverse;
