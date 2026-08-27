@@ -373,7 +373,7 @@ importers:
         version: 2.2.0
       openid-client:
         specifier: ^6.0.0
-        version: 6.8.6
+        version: 6.8.7
       p-throttle:
         specifier: ^8.0.0
         version: 8.1.0
@@ -3467,8 +3467,8 @@ packages:
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
 
-  openid-client@6.8.6:
-    resolution: {integrity: sha512-lsfMRH/GCgMiGCRnBRY3e70uogkgOessPaTOhP3rw/dxqNOZHwOazWx+m6jt5EVk3ecRFULl0TwWpk9Qnw3RKQ==}
+  openid-client@6.8.7:
+    resolution: {integrity: sha512-gtKthNu7evSBvTdrrlHb4F3Fi9dcwlb5QaITlCs+9mfpvuOi0Q3qtBf5+iY4sEP8hy1qCoAdxBNPDcmZeVSDzQ==}
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -7161,7 +7161,7 @@ snapshots:
     dependencies:
       wrappy: 1.0.2
 
-  openid-client@6.8.6:
+  openid-client@6.8.7:
     dependencies:
       jose: 6.2.9
       oauth4webapi: 3.8.7
