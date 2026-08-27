@@ -12,6 +12,7 @@
   import type { ModuleRéponseApi } from './moduleReponseApi';
   import Progression from './Progression.svelte';
   import ModaleModuleTermine from './modales/ModaleModuleTermine.svelte';
+  import ModaleParcoursTermine from './modales/ModaleParcoursTermine.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -19,6 +20,7 @@
     mesures: [],
   });
   let moduleTerminé = $state(false);
+  let parcoursTerminé = $state(false);
   const totalMesures = $derived(module.mesures.length);
 
   onMount(async () => {
@@ -30,7 +32,11 @@
       sessionStorage.removeItem('mesure-prise-en-compte');
     }
 
-    if (sessionStorage.getItem('module-termine') === 'true') {
+    if (sessionStorage.getItem('parcours-complet-termine') === 'true') {
+      parcoursTerminé = true;
+      sessionStorage.removeItem('parcours-complet-termine');
+      sessionStorage.removeItem('module-termine');
+    } else if (sessionStorage.getItem('module-termine') === 'true') {
       moduleTerminé = true;
       sessionStorage.removeItem('module-termine');
     }
@@ -76,6 +82,7 @@
 </Heros>
 
 <ModaleModuleTermine bind:estOuverte={moduleTerminé} />
+<ModaleParcoursTermine bind:estOuverte={parcoursTerminé} />
 
 <dsfr-container>
   <div class="progression">
