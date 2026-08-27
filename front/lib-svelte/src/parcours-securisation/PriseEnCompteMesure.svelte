@@ -19,6 +19,9 @@
       if (reponse.data.badgeCyberdépartDebloqué) {
         sessionStorage.setItem('badge-cyberdepart-debloque', 'true');
       }
+      if (reponse.data.parcoursCompletTerminé) {
+        sessionStorage.setItem('parcours-complet-termine', 'true');
+      }
       if (reponse.data.moduleTerminé) {
         sessionStorage.setItem('module-termine', 'true');
       }
