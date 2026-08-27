@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
+  import { profilStore } from '../stores/profil.store';
   import Bouton from '../ui/Bouton.svelte';
   import Lien from '../ui/Lien.svelte';
   import MachineAEcrireRotative from '../ui/MachineAEcrireCyclique.svelte';
@@ -20,6 +22,16 @@
   const basculePause = () => {
     enPause = !enPause;
   };
+
+  const lienParcoursUtilisateur = $derived(
+    $profilStore?.parcoursSecurisation.parcoursActuel === null
+      ? '/parcours-securisation'
+      : $profilStore?.parcoursSecurisation.parcoursActuel === 'allégé'
+        ? '/modules/1'
+        : 'parcours-complet'
+  );
+  const lienParcoursSécurisation = $derived($profilStore ? lienParcoursUtilisateur : '/parcours-securisation');
+  const lienCTAProtection = $derived(afficheParcoursSecurisation ? lienParcoursSécurisation : '/cyberdepart');
 </script>
 
 <dsfr-container>
@@ -34,7 +46,7 @@
       <div class="action">
         <Lien
           apparence="bouton"
-          href="/cyberdepart"
+          href={lienCTAProtection}
           libelle="Protéger mon organisation"
           iconeADroite
           icone="arrow-right-circle-fill"
