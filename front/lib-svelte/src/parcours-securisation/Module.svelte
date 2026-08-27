@@ -13,6 +13,7 @@
   import Progression from './Progression.svelte';
   import ModaleModuleTermine from './modales/ModaleModuleTermine.svelte';
   import ModaleParcoursTermine from './modales/ModaleParcoursTermine.svelte';
+  import Lien from '../ui/Lien.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -86,6 +87,9 @@
 
 <dsfr-container>
   <div class="progression">
+    {#if $profilStore?.parcoursSecurisation.parcoursActuel === 'complet'}
+      <Lien href="/parcours-complet" libelle="Revenir aux modules" icone="arrow-go-back-line"></Lien>
+    {/if}
     <Progression actuel={progressionActuelle} max={totalMesures} cible={module.cibleBadge}></Progression>
   </div>
 </dsfr-container>
