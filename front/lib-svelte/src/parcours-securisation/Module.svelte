@@ -8,12 +8,12 @@
   import { toasterStore } from '../ui/toasts/toaster.store';
   import Toaster from '../ui/toasts/Toaster.svelte';
   import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
+  import LienRetourAuxModules from './LienRetourAuxModules.svelte';
   import MesuresDeModule from './MesuresDeModule.svelte';
-  import type { ModuleRéponseApi } from './moduleReponseApi';
-  import Progression from './Progression.svelte';
   import ModaleModuleTermine from './modales/ModaleModuleTermine.svelte';
   import ModaleParcoursTermine from './modales/ModaleParcoursTermine.svelte';
-  import Lien from '../ui/Lien.svelte';
+  import type { ModuleRéponseApi } from './moduleReponseApi';
+  import Progression from './Progression.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -87,9 +87,7 @@
 
 <dsfr-container>
   <div class="progression">
-    {#if $profilStore?.parcoursSecurisation.parcoursActuel === 'complet'}
-      <Lien href="/parcours-complet" libelle="Revenir aux modules" icone="arrow-go-back-line"></Lien>
-    {/if}
+    <LienRetourAuxModules />
     <Progression actuel={progressionActuelle} max={totalMesures} cible={module.cibleBadge}></Progression>
   </div>
 </dsfr-container>
