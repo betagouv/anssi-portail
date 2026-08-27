@@ -448,6 +448,16 @@ describe("L'utilisateur", () => {
         assert.equal(evenement?.email, 'utilisateur@mail.com');
       });
 
+      it('indique que le parcours est terminé quand toutes les mesures sont prises en compte', async () => {
+        moduleCyberdépart.mesures = [mesure];
+        await entrepotMesure.ajoute(mesure);
+        await utilisateurDeParcours.rejoinsParcours('complet', busEvenements, 'prise-en-compte-mesure');
+
+        const nouvelEtatModule = await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
+
+        assert.equal(nouvelEtatModule.parcoursCompletTerminé, true);
+      });
+
       it("ne publie pas un événement de fin de parcours complet s'il reste des mesures à prendre en compte", async () => {
         moduleCyberdépart.mesures = [mesure];
         await entrepotMesure.ajoute(mesure);
