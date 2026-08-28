@@ -29,7 +29,7 @@
     {
       titre: 'Basé sur ReCyF',
       description:
-        "Chaque mesure est issue du référentiel cyber français (ReCyF), simplifiée et accompagnée d'explications pédagogiques pour faciliter votre démarche mise en conformité NIS 2.",
+        "Simplifiée et accompagnée d'explications pédagogiques, chaque mesure est issue du référentiel cyber français (ReCyF) pensé pour faciliter la mise en conformité avec NIS 2.",
       illustration: IllustrationRecyf,
     },
     {
