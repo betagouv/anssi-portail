@@ -1,12 +1,12 @@
 <script lang="ts">
+  import RetourUtilisateurSurContenu from '../ui/RetourUtilisateurSurContenu.svelte';
   import BoutonsPartageTest from './BoutonsPartageTest.svelte';
 </script>
 
 <dsfr-container class="partage-test">
   <div class="contenu-section">
-    <div class="description">
-      <h2>Encouragez d’autres organisations à agir</h2>
-      <p>Aidez d’autres organisations à accéder à des services et ressources adaptés à leur maturité cyber.</p>
+    <div class="retour">
+      <RetourUtilisateurSurContenu clé="resultat-test" urlDePost="/api/mesures/AUTH.1/avis" />
     </div>
     <div class="partage">
       <h3>Partager le test</h3>
@@ -29,27 +29,16 @@
       @include a-partir-de(lg) {
         flex-direction: row;
         gap: 24px;
-        justify-content: space-between;
+      }
+
+      .retour {
+        flex: 1;
       }
 
       .partage {
         @include a-partir-de(lg) {
           width: 282px;
         }
-      }
-    }
-
-    h2 {
-      margin-bottom: 8px;
-      font-size: 1.375rem;
-      line-height: 1.75rem;
-    }
-
-    p {
-      margin-bottom: 24px;
-      max-width: 272px;
-      @include a-partir-de(lg) {
-        max-width: 588px;
       }
     }
 
