@@ -117,7 +117,11 @@
         <TutorielMesure {mesure} />
         <div class="contenu-section avis-utilisateur">
           {#if idMesure}
-            <RetourUtilisateurSurContenu {idMesure} />
+            <RetourUtilisateurSurContenu
+              préfixeDeStockage="mesures:"
+              clé={idMesure}
+              urlDePost={`/api/mesures/${idMesure}/avis`}
+            />
           {/if}
           <div class="section-aide recyf">
             <p>
