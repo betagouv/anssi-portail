@@ -10,6 +10,7 @@
   import MotEnExergue from '../ui/MotEnExergue.svelte';
   import { onMount } from 'svelte';
   import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
+  import IllustrationDemandeAide from '../demande-aide-mon-aide-cyber/IllustrationDemandeAide.svelte';
 
   let statistiques: Statistiques | undefined = $state();
 
@@ -135,11 +136,7 @@
       lienBouton="/cyberdepart?origine=landing-parcours-securisation"
     >
       {#snippet illustration()}
-        <img
-          class="illustration-diagnostic"
-          src="/assets/images/parcours-securisation/illustration-diagnostic.png"
-          alt=""
-        />
+        <IllustrationDemandeAide />
       {/snippet}
     </BlocDiagnostic>
   </dsfr-container>
