@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import { onMount } from 'svelte';
+  import { profilStore } from '../stores/profil.store';
 
   onMount(() => {
     const pagePostConnexion = sessionStorage.getItem('pagePostConnexion');
@@ -25,6 +27,12 @@
       // La redirection par défaut est appliquée.
     }
 
-    window.location.href = '/catalogue';
+    const lienParcoursUtilisateur =
+      $profilStore?.parcoursSecurisation.parcoursActuel === null
+        ? '/parcours-securisation'
+        : $profilStore?.parcoursSecurisation.parcoursActuel === 'allégé'
+          ? '/modules/1'
+          : '/parcours-complet';
+    window.location.href = afficheParcoursSecurisation ? lienParcoursUtilisateur : '/catalogue';
   });
 </script>
