@@ -1,23 +1,27 @@
 <script lang="ts">
   import axios from 'axios';
-  import { type AvisUtilisateur, storeAvisUtilisateur } from '../parcours-securisation/avisUtilisateur.store';
+  import { untrack } from 'svelte';
   import Bouton from './Bouton.svelte';
+  import { type RetourUtilisateur, storeRetourUtilisateurSurContenu } from './retourUtilisateurSurContenu.store';
 
   type Props = {
-    idMesure: string;
+    préfixeDeStockage: string;
+    clé: string;
+    urlDePost: string;
   };
-  const { idMesure }: Props = $props();
+  const { préfixeDeStockage, clé, urlDePost }: Props = $props();
 
-  const avisUtilisateur: AvisUtilisateur | undefined = $derived(idMesure ? $storeAvisUtilisateur[idMesure] : undefined);
+  const store = storeRetourUtilisateurSurContenu(untrack(() => préfixeDeStockage));
+  const avisUtilisateur: RetourUtilisateur | undefined = $derived(clé ? $store[clé] : undefined);
 
   type Etat = 'Soumis' | 'AfficheCommentaire' | undefined;
   let etat = $state<Etat>(undefined);
   let commentaire: string = $state('');
 
   const soumetsAvisPositif = async () => {
-    if (!idMesure) return;
-    if ($storeAvisUtilisateur[idMesure]?.positif === true) {
-      storeAvisUtilisateur.supprimeAvis(idMesure);
+    if (!store) return;
+    if ($store[clé]?.positif === true) {
+      store.supprimeAvis(clé);
     } else {
       await soumetsAvisUtilisateur(true);
     }
@@ -29,9 +33,9 @@
 
   let time: number;
   const soumetsAvisUtilisateur = async (retour: boolean, commentaire?: string) => {
-    if (!idMesure) return;
-    storeAvisUtilisateur.ajouteAvis(idMesure, { positif: retour });
-    await axios.post(`/api/mesures/${idMesure}/avis`, {
+    storeRetourUtilisateurSurContenu;
+    store.ajouteAvis(clé, { positif: retour });
+    await axios.post(urlDePost, {
       retour: retour ? 'POSITIF' : 'NEGATIF',
       ...(!retour && { commentaire }),
     });
@@ -42,14 +46,14 @@
   };
 
   const afficheCommentaire = () => {
-    if (!idMesure) return;
+    if (!clé) return;
     clearTimeout(time);
 
-    if (idMesure in $storeAvisUtilisateur && !$storeAvisUtilisateur[idMesure]) {
-      storeAvisUtilisateur.supprimeAvis(idMesure);
+    if (clé in $store && !$store[clé]) {
+      store.supprimeAvis(clé);
       etat = undefined;
     } else {
-      storeAvisUtilisateur.ajouteAvis(idMesure, { positif: false });
+      store.ajouteAvis(clé, { positif: false });
       etat = 'AfficheCommentaire';
     }
   };
