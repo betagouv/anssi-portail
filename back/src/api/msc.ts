@@ -67,6 +67,7 @@ import { ressourceRepartitionDesResultatsDeTest } from './testMaturite/ressource
 import { ressourceResultatDeTest } from './testMaturite/ressourceResultatDeTest.js';
 import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTest.js';
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe.js';
+import { ressourceRetourTestMaturite } from './testMaturite/ressourceRetourTestMaturite.js';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
 
@@ -390,6 +391,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
         attributionParcoursMesure,
       ])
     );
+    enregistreRoute('/api/retour-test-maturite', ressourceRetourTestMaturite(configurationServeur));
     enregistreRoute(
       `/partage-badge-cyberdepart`,
       ressourcePagesJekyll(configurationServeur, 'partage-badge-cyberdepart')
