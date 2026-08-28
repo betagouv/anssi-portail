@@ -1,27 +1,31 @@
 <script lang="ts">
   import axios from 'axios';
-  import { untrack } from 'svelte';
   import Bouton from './Bouton.svelte';
-  import { type RetourUtilisateur, storeRetourUtilisateurSurContenu } from './retourUtilisateurSurContenu.store';
+  import {
+    ajouteRetour,
+    type RetourUtilisateur,
+    récupèreRetour,
+    supprimeRetour,
+  } from './retourUtilisateurSurContenu.store';
 
   type Props = {
-    préfixeDeStockage: string;
     clé: string;
     urlDePost: string;
   };
-  const { préfixeDeStockage, clé, urlDePost }: Props = $props();
+  const { clé, urlDePost }: Props = $props();
 
-  const store = storeRetourUtilisateurSurContenu(untrack(() => préfixeDeStockage));
-  const avisUtilisateur: RetourUtilisateur | undefined = $derived(clé ? $store[clé] : undefined);
+  const retourUtilisateur: RetourUtilisateur | undefined = $derived(clé ? récupèreRetour(clé) : undefined);
+  let étatBoutons = $derived(retourUtilisateur?.positif);
 
   type Etat = 'Soumis' | 'AfficheCommentaire' | undefined;
   let etat = $state<Etat>(undefined);
   let commentaire: string = $state('');
 
   const soumetsAvisPositif = async () => {
-    if (!store) return;
-    if ($store[clé]?.positif === true) {
-      store.supprimeAvis(clé);
+    const retourUtilisateur = récupèreRetour(clé);
+    if (retourUtilisateur?.positif === true) {
+      étatBoutons = undefined;
+      supprimeRetour(clé);
     } else {
       await soumetsAvisUtilisateur(true);
     }
@@ -33,8 +37,8 @@
 
   let time: number;
   const soumetsAvisUtilisateur = async (retour: boolean, commentaire?: string) => {
-    storeRetourUtilisateurSurContenu;
-    store.ajouteAvis(clé, { positif: retour });
+    ajouteRetour(clé, { positif: retour });
+    étatBoutons = retour;
     await axios.post(urlDePost, {
       retour: retour ? 'POSITIF' : 'NEGATIF',
       ...(!retour && { commentaire }),
@@ -49,11 +53,14 @@
     if (!clé) return;
     clearTimeout(time);
 
-    if (clé in $store && !$store[clé]) {
-      store.supprimeAvis(clé);
+    const retourUtilisateur = récupèreRetour(clé);
+    if (retourUtilisateur?.positif === false) {
+      étatBoutons = undefined;
+      supprimeRetour(clé);
       etat = undefined;
     } else {
-      store.ajouteAvis(clé, { positif: false });
+      étatBoutons = false;
+      ajouteRetour(clé, { positif: false });
       etat = 'AfficheCommentaire';
     }
   };
@@ -65,14 +72,14 @@
   </div>
   <div class="conteneur-emoji-avis">
     <Bouton
-      type={avisUtilisateur?.positif ? 'primaire' : 'tertiaire'}
+      type={étatBoutons === true ? 'primaire' : 'tertiaire'}
       iconeSeule
       icone="thumb-up-line"
       titre="Réponse positive"
       surClic={() => soumetsAvisPositif()}
     ></Bouton>
     <Bouton
-      type={avisUtilisateur && !avisUtilisateur.positif ? 'primaire' : 'tertiaire'}
+      type={étatBoutons === false ? 'primaire' : 'tertiaire'}
       iconeSeule
       icone="thumb-down-line"
       titre="Réponse négative"
