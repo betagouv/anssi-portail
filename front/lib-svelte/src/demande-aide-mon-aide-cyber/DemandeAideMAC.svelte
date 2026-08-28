@@ -89,7 +89,7 @@
   variante="cafe-creme"
 >
   {#snippet titreHtml()}
-    Protégez votre organisation contre les <MotEnExergue motif="gribouillis">cyberattaques</MotEnExergue>
+    Protégez votre organisa&shy;tion contre les <MotEnExergue motif="gribouillis">cyber&shy;attaques</MotEnExergue>
   {/snippet}
   {#snippet illustration()}
     <IllustrationDemandeAide />

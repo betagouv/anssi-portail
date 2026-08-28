@@ -36,8 +36,8 @@
   class="avec-image-fond"
 >
   {#snippet titreHtml()}
-    Quelle est la <MotEnExergue motif="vague" couleur="macaron">maturité</MotEnExergue>
-    <MotEnExergue motif="vague" couleur="macaron" petit>cyber</MotEnExergue> de votre organisation ?
+    Quelle est la <MotEnExergue motif="vague" couleur="macaron">matu&shy;rité</MotEnExergue>
+    <MotEnExergue motif="vague" couleur="macaron" petit>cyber</MotEnExergue> de votre organisa&shy;tion ?
   {/snippet}
   {#snippet illustration()}
     <div class="illustration-du-bandeau">

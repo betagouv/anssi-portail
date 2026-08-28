@@ -55,7 +55,7 @@
   });
 </script>
 
-<div class="section-hero-et-tuiles">
+<div>
   <HeroLandingPage
     description="Accédez à 6 modules élaborés pour protéger votre organisation contre les risques cyber les plus courants et faciliter votre démarche de mise en conformité NIS&nbsp;2 si vous êtes concerné."
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
@@ -63,7 +63,7 @@
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
-      Engagez votre organisation dans une <MotEnExergue motif="vague" couleur="cafe-creme">démarche</MotEnExergue>
+      Engagez votre organisa&shy;tion dans une <MotEnExergue motif="vague" couleur="cafe-creme">démarche</MotEnExergue>
       <MotEnExergue motif="vague" couleur="cafe-creme" petit>cyber</MotEnExergue> complète
     {/snippet}
     {#snippet actions()}
@@ -129,9 +129,6 @@
 </section>
 
 <style lang="scss">
-  .section-hero-et-tuiles {
-    word-break: break-word;
-  }
   .section-tuiles {
     lab-anssi-carrousel-tuiles {
       margin-block-start: -2.5rem;
