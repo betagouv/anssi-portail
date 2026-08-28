@@ -1,15 +1,16 @@
 <script lang="ts">
+  import { enPropriétéWebC } from '$plateforme/webComponent';
+  import { onMount } from 'svelte';
+  import IllustrationProtegerOrganisation from '../accueil/animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
+  import IllustrationDemandeAide from '../demande-aide-mon-aide-cyber/IllustrationDemandeAide.svelte';
+  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
   import BlocDiagnostic from '../ui/BlocDiagnostic.svelte';
+  import Bouton from '../ui/Bouton.svelte';
   import HeroLandingPage from '../ui/HeroLandingPage.svelte';
   import Lien from '../ui/Lien.svelte';
-  import EncartPromotionParcoursComplet from './EncartPromotionParcoursComplet.svelte';
-  import EncartPromotionParcoursBasique from './EncartPromotionParcoursBasique.svelte';
-  import { enPropriétéWebC } from '$plateforme/webComponent';
-  import IllustrationProtegerOrganisation from '../accueil/animation/proteger-organisation/IllustrationProtegerOrganisation.svelte';
-  import Bouton from '../ui/Bouton.svelte';
   import MotEnExergue from '../ui/MotEnExergue.svelte';
-  import { onMount } from 'svelte';
-  import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
+  import EncartPromotionParcoursBasique from './EncartPromotionParcoursBasique.svelte';
+  import EncartPromotionParcoursComplet from './EncartPromotionParcoursComplet.svelte';
 
   let statistiques: Statistiques | undefined = $state();
 
@@ -135,11 +136,7 @@
       lienBouton="/cyberdepart?origine=landing-parcours-securisation"
     >
       {#snippet illustration()}
-        <img
-          class="illustration-diagnostic"
-          src="/assets/images/parcours-securisation/illustration-diagnostic.png"
-          alt=""
-        />
+        <IllustrationDemandeAide large />
       {/snippet}
     </BlocDiagnostic>
   </dsfr-container>

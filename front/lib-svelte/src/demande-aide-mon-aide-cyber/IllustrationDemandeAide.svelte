@@ -2,6 +2,11 @@
   import { onMount } from 'svelte';
   import { récupèreStatistiquesMSC, type Statistiques } from '../passerelles/statistiquesMSC';
 
+  type Props = {
+    large?: boolean;
+  };
+  const { large }: Props = $props();
+
   let statistiques: Statistiques | undefined = $state();
 
   onMount(async () => {
@@ -9,9 +14,8 @@
   });
 </script>
 
-<div class="composition">
-  <img src="/assets/images/homme-regardant-webinaire.avif" alt="Homme regardant un webinaire" />
-
+<div class="composition" class:large>
+  <img class="illustration" src="/assets/images/homme-regardant-webinaire.avif" alt="Homme regardant un webinaire" />
   <div class="annotation">
     <p class="fr-h5">+{statistiques?.diagnosticsCyberArrondis ?? 0}</p>
     <p class="texte-standard-md">organisations<br />accompagnées</p>
@@ -27,28 +31,41 @@
   <div class="bouclier">
     <lab-anssi-icone nom="shield-fill" taille="lg"></lab-anssi-icone>
   </div>
-  <div class="fleur">
-    <img src="/assets/images/decorations/fleur.svg" alt="" />
-  </div>
-  <div class="boucle">
-    <img src="/assets/images/decorations/boucle.svg" alt="" />
-
-    <div class="ellipse">
-      <img src="/assets/images/decorations/ellipse.svg" alt="" />
-    </div>
-  </div>
+  <img class="fleur" src="/assets/images/decorations/fleur.svg" alt="" />
+  <img class="boucle" src="/assets/images/decorations/boucle.svg" alt="" />
+  <img class="ellipse" src="/assets/images/decorations/ellipse.svg" alt="" />
 </div>
 
 <style lang="scss">
   .composition {
     aspect-ratio: 4 / 3;
-    display: flex;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     position: relative;
 
-    img {
-      max-width: 100%;
-      max-height: 100%;
+    > .illustration {
+      border-radius: 12px;
+      height: 100%;
+      width: 70%;
+      object-fit: cover;
+    }
+
+    &.large {
+      aspect-ratio: 70 / 39;
+
+      .annotation,
+      .legende-illustree,
+      .legende,
+      .bouclier,
+      .fleur,
+      .boucle,
+      .ellipse {
+        transform: scale(90%);
+      }
+
+      .bouclier {
+        right: 50px;
+      }
     }
 
     .legende-illustree {
@@ -56,12 +73,13 @@
       display: inline-flex;
       gap: 0.375rem;
       align-items: center;
-      bottom: 6%;
+      bottom: 18px;
       left: 0;
 
       .illustration {
         color: var(--text-title-blue-france);
         background-color: var(--background-default-grey);
+        flex: 0;
         padding: 7px 0.75rem 9px;
         border-radius: 999px;
         box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
@@ -114,34 +132,27 @@
     }
 
     .fleur {
-      position: absolute;
-      left: 8%;
-      top: 4%;
       color: var(--text-title-blue-france);
-      img {
-        width: 12px;
-        height: 12px;
-      }
+      height: 12px;
+      left: 8%;
+      position: absolute;
+      top: 4%;
+      width: 12px;
     }
 
     .boucle {
-      position: absolute;
-      right: 6%;
       bottom: 12%;
       color: var(--text-title-blue-france);
-      img {
-        width: 140px;
-      }
+      position: absolute;
+      right: 6%;
+      width: 140px;
+    }
 
-      .ellipse {
-        position: absolute;
-        right: 15%;
-        bottom: 110%;
-
-        img {
-          width: 10px;
-        }
-      }
+    .ellipse {
+      bottom: calc(12% + 100px);
+      position: absolute;
+      right: 10%;
+      width: 10px;
     }
   }
 </style>
