@@ -189,7 +189,6 @@
       display: flex;
       flex-direction: column;
       align-self: stretch;
-      overflow: clip;
 
       @include a-partir-de(lg) {
         width: 50%;
