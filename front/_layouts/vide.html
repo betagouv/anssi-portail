@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'fr' }}">
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body >
+
+{% if site.env.SENTRY_DSN != '' and site.env.SENTRY_DSN != undefined %}
+<script
+  type="module"
+  src="/lib-svelte/dist/client/assets/sentry.js"
+  data-environnement="{{ site.env.SENTRY_ENVIRONNEMENT }}"
+  data-dsn="{{ site.env.SENTRY_DSN }}"
+  id="script-sentry"
+></script>
+{% endif %}
+
+  {{ content }}
+</body>
+</html>
