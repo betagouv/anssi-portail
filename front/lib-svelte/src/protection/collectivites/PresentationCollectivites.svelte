@@ -37,7 +37,7 @@
   variante="vert-clair"
 >
   {#snippet titreHtml()}
-    Protéger ma <MotEnExergue motif="vague">collectivité</MotEnExergue> contre les cyberattaques
+    Protéger ma <MotEnExergue motif="vague">collecti&shy;vité</MotEnExergue> contre les cyber&shy;attaques
   {/snippet}
   {#snippet illustration()}
     <IllustrationHerosCollectivites />

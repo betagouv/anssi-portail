@@ -175,7 +175,6 @@
 
         .titre {
           margin-bottom: 1rem;
-          word-break: break-word;
 
           @include a-partir-de(lg) {
             margin-bottom: 1.5rem;

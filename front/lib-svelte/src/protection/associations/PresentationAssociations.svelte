@@ -15,7 +15,7 @@
   variante="vert-clair"
 >
   {#snippet titreHtml()}
-    Protéger mon <MotEnExergue motif="vague">association</MotEnExergue> contre les cyberattaques
+    Protéger mon <MotEnExergue motif="vague">associa&shy;tion</MotEnExergue> contre les cyber&shy;attaques
   {/snippet}
   {#snippet illustration()}
     <IllustrationHerosAssociations />

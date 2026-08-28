@@ -72,7 +72,7 @@
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
-      Je <MotEnExergue motif="cercle">protège</MotEnExergue> mon organisation contre les cyberattaques
+      Je <MotEnExergue motif="cercle">protège</MotEnExergue> mon organisation contre les cyber&shy;attaques
     {/snippet}
     {#snippet actions()}
       <dsfr-button
@@ -180,7 +180,6 @@
 
   .section-hero-et-tuiles {
     background-color: var(--pink-tuile-850-200);
-    word-break: break-word;
   }
 
   .section-tuiles {

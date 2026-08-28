@@ -54,7 +54,7 @@
   });
 </script>
 
-<div class="section-hero-et-tuiles">
+<div>
   <HeroLandingPage
     description="12 mesures pensées pour les non-spécialistes, applicables en quelques minutes pour commencer à renforcer votre cybersécurité et prendre votre Cyberdépart&nbsp;!"
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
@@ -62,7 +62,8 @@
     class="hero-landing-page"
   >
     {#snippet titreHtml()}
-      Votre cybersécurité décolle en <MotEnExergue motif="vague" couleur="cafe-creme">12&nbsp;mesures</MotEnExergue>
+      Votre cyber&shy;sécurité décolle en <MotEnExergue motif="vague" couleur="cafe-creme">12&nbsp;mesures</MotEnExergue
+      >
     {/snippet}
     {#snippet actions()}
       <dsfr-button
@@ -142,10 +143,6 @@
 </section>
 
 <style lang="scss">
-  .section-hero-et-tuiles {
-    word-break: break-word;
-  }
-
   .section-tuiles {
     lab-anssi-carrousel-tuiles {
       margin-block-start: -2.5rem;
