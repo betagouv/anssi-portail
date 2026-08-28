@@ -6,7 +6,7 @@
 <dsfr-container class="partage-test">
   <div class="contenu-section">
     <div class="retour">
-      <RetourUtilisateurSurContenu clé="resultat-test" urlDePost="/api/mesures/AUTH.1/avis">
+      <RetourUtilisateurSurContenu clé="resultat-test" urlDePost="/api/retour-test-maturite">
         <b>Ce test vous a-t-il aidé&nbsp;?</b>
       </RetourUtilisateurSurContenu>
     </div>
