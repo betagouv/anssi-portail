@@ -1,5 +1,6 @@
 <script lang="ts">
   import axios from 'axios';
+  import type { Snippet } from 'svelte';
   import Bouton from './Bouton.svelte';
   import {
     ajouteRetour,
@@ -11,8 +12,9 @@
   type Props = {
     clé: string;
     urlDePost: string;
+    children?: Snippet;
   };
-  const { clé, urlDePost }: Props = $props();
+  const { clé, urlDePost, children }: Props = $props();
 
   const retourUtilisateur: RetourUtilisateur | undefined = $derived(clé ? récupèreRetour(clé) : undefined);
   let étatBoutons = $derived(retourUtilisateur?.positif);
@@ -68,7 +70,13 @@
 
 <div class="section-aide retour">
   <div class="texte-information-avis-utilisateur">
-    <span class="titre-avis"><b>Ce contenu vous a-t-il aidé&nbsp;?</b></span>
+    <span class="titre-avis">
+      {#if children}
+        {@render children()}
+      {:else}
+        <b>Ce contenu vous a-t-il aidé&nbsp;?</b>
+      {/if}
+    </span>
   </div>
   <div class="conteneur-emoji-avis">
     <Bouton
