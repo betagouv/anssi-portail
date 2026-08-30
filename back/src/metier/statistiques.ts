@@ -2,7 +2,7 @@ import { EntrepotResultatTest } from './entrepotResultatTest.js';
 import { EntrepotUtilisateur } from './entrepotUtilisateur.js';
 import { IdNiveauMaturite } from './resultatTestMaturite.js';
 
-const NOMBRES_DE_DIAGNOSTIC_CYBER = 6516;
+const NOMBRES_DE_DIAGNOSTIC_CYBER = 6600;
 const SATISFACTION_UTILISATEUR = 92;
 
 export type Statistiques = {
