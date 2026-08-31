@@ -305,12 +305,6 @@ importers:
       '@sentry/node':
         specifier: ^10.0.0
         version: 10.70.0(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(supports-color@10.2.2)
-      '@types/bcrypt':
-        specifier: ^6.0.0
-        version: 6.0.0
-      '@types/cors':
-        specifier: ^2.8.19
-        version: 2.8.19
       bcrypt:
         specifier: ^6.0.0
         version: 6.0.0
@@ -396,6 +390,9 @@ importers:
         specifier: ^4.4.3
         version: 4.4.3
     devDependencies:
+      '@types/bcrypt':
+        specifier: ^6.0.0
+        version: 6.0.0
       '@types/compression':
         specifier: ^1.8.1
         version: 1.8.1
@@ -405,6 +402,9 @@ importers:
       '@types/cookie-session':
         specifier: ^2.0.49
         version: 2.0.49
+      '@types/cors':
+        specifier: ^2.8.19
+        version: 2.8.19
       '@types/express':
         specifier: ^5.0.6
         version: 5.0.6
@@ -515,9 +515,6 @@ importers:
       '@sentry/browser':
         specifier: ^10.70.0
         version: 10.70.0
-      '@sentry/vite-plugin':
-        specifier: ^5.4.0
-        version: 5.4.0(rollup@4.59.0)(supports-color@10.2.2)
       axios:
         specifier: 'catalog:'
         version: 1.19.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
@@ -534,6 +531,9 @@ importers:
         specifier: ^1.5.4
         version: 1.5.4
     devDependencies:
+      '@sentry/vite-plugin':
+        specifier: ^5.4.0
+        version: 5.4.0(rollup@4.59.0)(supports-color@10.2.2)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.0.0
         version: 7.3.0(svelte@5.56.10(@typescript-eslint/types@8.67.0))(vite@8.2.2(@types/node@26.2.0)(esbuild@0.28.2)(sass@1.103.1)(tsx@4.23.12))
