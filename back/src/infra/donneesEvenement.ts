@@ -28,7 +28,8 @@ export type DonneesEvenement =
   | DonnéesParcoursRejoint
   | DonnéesParcoursChangé
   | DonnéesParcoursAllégéTerminé
-  | DonnéesParcoursCompletTerminé;
+  | DonnéesParcoursCompletTerminé
+  | DonnéesRetourTestMaturité;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -126,3 +127,4 @@ type DonnéesParcoursChangé = Evenement<
 
 type DonnéesParcoursAllégéTerminé = Evenement<'PARCOURS_ALLÉGÉ_TERMINÉ', { idUtilisateur: string }>;
 type DonnéesParcoursCompletTerminé = Evenement<'PARCOURS_COMPLET_TERMINÉ', { idUtilisateur: string }>;
+type DonnéesRetourTestMaturité = Evenement<'RETOUR_TEST_MATURITE_DONNE', { retour: string; commentaire?: string }>;

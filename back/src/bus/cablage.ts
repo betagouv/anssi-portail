@@ -5,6 +5,7 @@ import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { EntrepotFavori } from '../metier/entrepotFavori.js';
 import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
 import { BusEvenements } from './busEvenements.js';
+import { consigneRetourTestMaturitéDonné } from './consigeRetourTestMaturiteDonne.js';
 import { consigneRetourAvisMesureDonneDansJournal } from './consigneAvisMesureDonneDansJournal.js';
 import { consigneBadgeCyberdépartDébloquéDansJournal } from './consigneBadgeCyberdepartDebloqueDansJournal.js';
 import { consigneEvenementAvisUtilisateurDonneDansJournal } from './consigneEvenementAvisUtilisateurDonneDansJournal.js';
@@ -37,11 +38,13 @@ import { ParcoursCompletTerminé } from './evenements/parcoursCompletTermine.js'
 import { ParcoursRejoint } from './evenements/parcoursRejoint.js';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee.js';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne.js';
+import { RetourTestMaturitéDonné } from './evenements/retourTestMaturiteDonne.js';
 import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee.js';
 import { TestRealise } from './evenements/testRealise.js';
 import { UtilisateurConnecte } from './evenements/utilisateurConnecte.js';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur.js';
 import { notifieCommentaireAvisMesureDonneDansMessagerie } from './notifieCommentaireAvisMesureDonneDansMessagerie.js';
+import { notifieUnRetourNégatifSurTestMaturité as notifieUnRetourNégatifSurTestMaturité } from './notifieRetourNegatifSurTestMaturite.js';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
@@ -173,5 +176,10 @@ export const cableTousLesAbonnes = ({
   busEvenements.abonnePlusieurs(ParcoursCompletTerminé, [
     consigneParcoursCompletTerminéDansJournal({ adaptateurJournal, adaptateurHorloge, adaptateurHachage }),
     adaptateurEmail.metsÀJourParcoursCompletTerminé,
+  ]);
+
+  busEvenements.abonnePlusieurs(RetourTestMaturitéDonné, [
+    consigneRetourTestMaturitéDonné({ adaptateurJournal, adaptateurHorloge }),
+    notifieUnRetourNégatifSurTestMaturité({ messagerieInstantanee }),
   ]);
 };

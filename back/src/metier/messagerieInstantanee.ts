@@ -18,8 +18,13 @@ export type AvisNegatifSurUneMesure = {
   commentaire?: string;
 };
 
+export type RetourNégatifSurTestMaturité = {
+  commentaire?: string;
+};
+
 export interface MessagerieInstantanee {
   notifieUnAvisUtilisateur(avisUtilisateur: AvisUtilisateur): Promise<void>;
   notifieUnRetourExperience(retourExperience: RetourExperience): Promise<void>;
   notifieUnAvisNegatifSurUneMesure(avis: AvisNegatifSurUneMesure): Promise<void>;
+  notifieUnRetourNégatifSurTestMaturité(retour: RetourNégatifSurTestMaturité): Promise<void>;
 }

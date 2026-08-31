@@ -4,6 +4,7 @@ import {
   AvisUtilisateur,
   MessagerieInstantanee,
   RetourExperience,
+  RetourNégatifSurTestMaturité,
 } from '../metier/messagerieInstantanee.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { aseptiseMarkdown } from './markdown.js';
@@ -47,6 +48,17 @@ Email de contact : ${avisUtilisateur.emailDeContact}`;
 **Titre :** ${avis.titreMesure}
 Un utilisateur a laissé un avis négatif :
 ${aseptiseMarkdown(avis.commentaire ?? '')}`;
+      await axios.post(urlWebhook, { text: message });
+    }
+  },
+
+  notifieUnRetourNégatifSurTestMaturité: async (retour: RetourNégatifSurTestMaturité) => {
+    const urlWebhook = adaptateurEnvironnement.mattermost().webhookAvisUtilisateur();
+
+    if (urlWebhook) {
+      const message = `### Retour utilisateur Test Maturité
+Un utilisateur a laissé un retour négatif
+${aseptiseMarkdown(retour.commentaire ? `Commentaire: ${retour.commentaire}` : 'Aucun commentaire laissé')}`;
       await axios.post(urlWebhook, { text: message });
     }
   },
