@@ -24,7 +24,8 @@
   {#if tutoriel.note}
     <div class="bloc-note">
       <h5 class="fr-h6 petit-titre">Remarque</h5>
-      <p class="texte-standard-md">{tutoriel.note}</p>
+      <!-- eslint-disable-next-line svelte/no-at-html-tags-->
+      <p class="texte-standard-md">{@html tutoriel.note}</p>
     </div>
   {/if}
 
