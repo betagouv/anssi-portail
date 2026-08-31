@@ -111,6 +111,7 @@ export default defineConfig(({ command, mode }) => {
           'parcours-securisation-complet': 'src/main-parcours-securisation-complet.ts',
           'illustration-connexion-inscription': 'src/main-illustration-connexion-inscription.ts',
           'apres-authentification': 'src/main-apres-authentification.ts',
+          'landing-mini-tests': 'src/main-landing-mini-tests.ts',
         },
         output: {
           entryFileNames: `assets/[name].js`,

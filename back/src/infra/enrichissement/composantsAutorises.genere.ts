@@ -22,4 +22,5 @@ export const composantsAutorisés: string[] = [
   'parcours-cyberdepart',
   'parcours-securisation-complet',
   'illustration-connexion-inscription',
+  'landing-mini-tests',
 ];

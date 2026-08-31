@@ -28,6 +28,7 @@ const rolldownOptions: NonNullable<UserConfig['build']>['rolldownOptions'] = {
     'parcours-cyberdepart': 'src/parcours-securisation/LandingParcoursCyberdepart.svelte',
     'parcours-securisation-complet': 'src/parcours-securisation/LandingParcoursSecurisationComplet.svelte',
     'illustration-connexion-inscription': 'src/connexion/IllustrationConnexionInscription.svelte',
+    'landing-mini-tests': 'src/mini-tests/LandingMiniTests.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,
