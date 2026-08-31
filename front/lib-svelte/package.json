@@ -21,6 +21,7 @@
     "watch:serveur": "vite build --ssr --config vite.config.ssr.ts --watch"
   },
   "devDependencies": {
+    "@sentry/vite-plugin": "^5.4.0",
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "@tsconfig/svelte": "^5.0.8",
     "@types/qrcode": "^1.5.6",
@@ -38,7 +39,6 @@
   },
   "dependencies": {
     "@sentry/browser": "^10.70.0",
-    "@sentry/vite-plugin": "^5.4.0",
     "axios": "catalog:",
     "dompurify": "^3.4.11",
     "entities": "catalog:",
