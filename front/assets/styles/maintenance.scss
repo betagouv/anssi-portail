@@ -21,12 +21,6 @@ dsfr-container {
       grid-area: titre;
       align-self: end;
       margin: 0 0 8px;
-      font-size: 1.75rem;
-      line-height: 2.25rem;
-      @include a-partir-de(md) {
-        font-size: 2rem;
-        line-height: 2.5rem;
-      }
     }
 
     p {

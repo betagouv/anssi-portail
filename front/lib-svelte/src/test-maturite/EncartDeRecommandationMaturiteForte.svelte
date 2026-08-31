@@ -94,14 +94,7 @@
         max-width: taille-pour-colonnes(10);
       }
       h1 {
-        font-size: 2rem;
-        line-height: 2.5rem;
         margin: 0 0 24px;
-
-        @include a-partir-de(md) {
-          font-size: 2.5rem;
-          line-height: 3rem;
-        }
       }
     }
 

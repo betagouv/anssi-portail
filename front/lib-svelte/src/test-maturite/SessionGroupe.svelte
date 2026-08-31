@@ -141,14 +141,7 @@
     }
 
     h3 {
-      font-size: 1.5rem;
-      line-height: 2rem;
-      font-weight: bold;
       margin: 4px 0 8px;
-      @include a-partir-de(md) {
-        font-size: 1.75rem;
-        line-height: 2.25rem;
-      }
     }
 
     p {
