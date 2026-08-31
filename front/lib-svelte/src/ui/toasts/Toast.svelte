@@ -77,7 +77,7 @@
 
 <style lang="scss">
   article {
-    font-size: 0.8em;
+    font-size: 0.8rem;
     --couleur: transparent;
     border: 1px solid var(--couleur);
     display: flex;

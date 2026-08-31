@@ -211,7 +211,7 @@
   }
 
   .libelle {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: bold;
   }
 
@@ -250,7 +250,7 @@
   .champs-requis-libelle {
     display: flex;
     justify-content: end;
-    font-size: 14px;
+    font-size: 0.875rem;
     margin-top: 16px;
     margin-bottom: 16px;
   }

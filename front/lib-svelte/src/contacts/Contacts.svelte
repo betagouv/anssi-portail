@@ -234,7 +234,7 @@
   }
 
   p {
-    line-height: 24px;
+    line-height: 1.5rem;
     display: flex;
     gap: 8px;
     align-items: start;
