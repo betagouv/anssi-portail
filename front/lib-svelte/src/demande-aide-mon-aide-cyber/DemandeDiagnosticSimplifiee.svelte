@@ -120,7 +120,7 @@
           flex: 0 0 16px;
           align-self: flex-start;
           height: 16px;
-          line-height: 100%;
+          line-height: 1rem;
           text-align: center;
           font-weight: bold;
           border-radius: 4px;

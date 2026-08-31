@@ -29,7 +29,7 @@
 <style lang="scss">
   .lab-anssi-demande-diagnostic-simplifiee {
     font-family: Marianne, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: normal;
 
     --noir: #000000;

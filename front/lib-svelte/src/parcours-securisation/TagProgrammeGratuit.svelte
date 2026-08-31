@@ -11,7 +11,7 @@
     display: inline-block;
     font-weight: 700;
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.5rem;
     padding: 0.375rem 1rem;
     width: fit-content;
   }

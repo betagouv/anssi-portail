@@ -248,9 +248,9 @@
 
       .texte {
         color: var(--text-label-grey);
-        font-size: 14px;
+        font-size: 0.875rem;
         font-weight: 700;
-        line-height: normal;
+        line-height: 1.25rem;
         margin: 8px 8px 12px;
         text-align: center;
       }
