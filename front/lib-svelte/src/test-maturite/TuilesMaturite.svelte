@@ -171,7 +171,7 @@
             opacity: 0;
           }
           to {
-            opacity: 100;
+            opacity: 1;
           }
         }
       }
