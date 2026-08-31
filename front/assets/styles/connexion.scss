@@ -22,9 +22,6 @@
       gap: 24px;
 
       h1 {
-        font-size: 2rem;
-        line-height: 2.5rem;
-        font-weight: bold;
         margin: 0;
 
         .nowrap {
@@ -41,11 +38,6 @@
 
       @include a-partir-de(md) {
         max-width: 544px;
-
-        h1 {
-          font-size: 2.5rem;
-          line-height: 3rem;
-        }
       }
     }
   }
