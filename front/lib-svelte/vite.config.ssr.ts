@@ -30,6 +30,7 @@ const rolldownOptions: NonNullable<UserConfig['build']>['rolldownOptions'] = {
     'illustration-connexion-inscription': 'src/connexion/IllustrationConnexionInscription.svelte',
     'mini-tests': 'src/mini-tests/MiniTests.svelte',
     'mini-test-vrai-faux': 'src/mini-tests/LandingVraiFaux.svelte',
+    'mini-test-vrai-faux-quiz': 'src/mini-tests/QuizVraiFaux.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,
