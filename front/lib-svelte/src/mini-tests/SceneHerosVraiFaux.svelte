@@ -98,6 +98,12 @@
     top: 20.165cqi;
     width: 21.399cqi;
 
+    &.forme-vers-gauche,
+    &.forme-vers-droite {
+      animation-duration: 0.7s;
+      animation-timing-function: ease-in-out;
+    }
+
     img {
       height: 6.584cqi;
       width: 6.584cqi;
@@ -109,14 +115,16 @@
       line-height: 4.938cqi;
     }
 
-    &.faux {
+    &.faux.forme-vers-gauche {
+      animation-name: apparition-reponse-gauche;
       background-color: var(--background-contrast-error);
       border-radius: 4.938cqi;
       color: var(--text-default-error);
       left: 0;
     }
 
-    &.vrai {
+    &.vrai.forme-vers-droite {
+      animation-name: apparition-reponse-droite;
       background-color: var(--background-contrast-success);
       border-radius: 4.938cqi;
       color: var(--text-default-success);
@@ -277,6 +285,36 @@
       height: 100%;
       transform: rotate(-32deg);
       width: 100%;
+    }
+  }
+
+  @keyframes apparition-reponse-gauche {
+    0% {
+      opacity: 0;
+      transform: translateX(39.301cqi) scale(0.96);
+    }
+    70% {
+      opacity: 1;
+      transform: translateX(-0.6cqi) scale(1.015);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes apparition-reponse-droite {
+    0% {
+      opacity: 0;
+      transform: translateX(-39.301cqi) scale(0.96);
+    }
+    70% {
+      opacity: 1;
+      transform: translateX(0.6cqi) scale(1.015);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
     }
   }
 </style>
