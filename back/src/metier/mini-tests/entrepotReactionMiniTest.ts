@@ -4,4 +4,6 @@ export interface EntrepotReactionMiniTest {
   ajoute(réactionMiniTest: RéactionMiniTest): Promise<void>;
 
   tous(): Promise<RéactionMiniTest[]>;
+
+  metsÀJour(réactionMiniTest: RéactionMiniTest): Promise<void>;
 }
