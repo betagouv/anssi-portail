@@ -1,6 +1,8 @@
 <script lang="ts">
-  import type { PropriétésFilAriane } from '../ui/filAriane';
-  import HerosRiche from '../ui/HerosRiche.svelte';
+  import type { PropriétésFilAriane } from '../../ui/filAriane';
+
+  import HerosRiche from '../../ui/HerosRiche.svelte';
+
   import IllustrationHerosVraiFaux from './IllustrationHerosVraiFaux.svelte';
   const propriétésFilAriane: PropriétésFilAriane = {
     feuille: 'Cyberattaques : saurez-vous démêler le vrai du faux ?',
