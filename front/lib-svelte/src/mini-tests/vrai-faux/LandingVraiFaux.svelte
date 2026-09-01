@@ -5,7 +5,7 @@
 
   import IllustrationHerosVraiFaux from './IllustrationHerosVraiFaux.svelte';
   const propriétésFilAriane: PropriétésFilAriane = {
-    feuille: 'Cyberattaques : saurez-vous démêler le vrai du faux ?',
+    feuille: 'Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux ?',
     branche: {
       nom: 'Faire le test !',
       lien: '/mini-tests',
