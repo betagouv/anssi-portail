@@ -123,7 +123,6 @@
     grid-area: niveau;
     color: #161616;
     font-size: 1.125rem;
-    font-weight: bold;
     line-height: 1.5rem;
     margin-bottom: 4px;
   }

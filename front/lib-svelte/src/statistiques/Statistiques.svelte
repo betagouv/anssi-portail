@@ -193,7 +193,6 @@
     h2 {
       font-size: 1.5rem;
       line-height: 2rem;
-      font-weight: bold;
       margin: 0;
       @include a-partir-de(sm) {
         font-size: 1.75rem;

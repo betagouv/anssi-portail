@@ -283,7 +283,6 @@
 
     h1 {
       font-size: 1.375rem;
-      font-weight: bold;
       margin: 0 0 12px;
       padding: 0;
     }

@@ -305,15 +305,9 @@
     }
 
     h5 {
-      font-size: 1.25rem;
-      line-height: 1.75rem;
       margin: 0 0 24px;
       max-width: 588px;
       text-align: center;
-
-      @include a-partir-de(md) {
-        font-size: 1.375rem;
-      }
     }
   }
 </style>
