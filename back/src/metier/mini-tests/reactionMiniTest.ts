@@ -13,14 +13,22 @@ export class RéactionMiniTest {
   private _compteur: number;
 
   constructor(
-    readonly id: IdentifiantMiniTest,
-    readonly typeRéaction: TypeRéaction,
+    public readonly id: IdentifiantMiniTest,
+    public readonly typeRéaction: TypeRéaction,
     compteur: number
   ) {
     this._compteur = compteur;
   }
 
-  get compteur(): number {
+  public get compteur(): number {
     return this._compteur;
+  }
+
+  ajoute(): void {
+    this._compteur++;
+  }
+
+  retire(): void {
+    this._compteur = Math.max(0, this._compteur - 1);
   }
 }

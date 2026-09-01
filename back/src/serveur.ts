@@ -100,8 +100,11 @@ const entrepotPriseEnCompte = new EntrepotPriseEnComptePostgres(adaptateurHachag
 const entrepotReactionMiniTest: EntrepotReactionMiniTest = (() => {
   const réactions: RéactionMiniTest[] = [];
   return {
-    ajoute: async () => {},
+    ajoute: async (réaction) => {
+      réactions.push(réaction);
+    },
     tous: async () => réactions,
+    metsÀJour: async () => {},
   };
 })();
 
