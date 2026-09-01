@@ -18,7 +18,7 @@
   type SatisfactionDisponible = '1' | '2' | '3' | '4' | '5';
   let satisfaction: SatisfactionDisponible | undefined = $state();
   let erreurSatisfaction = $state(false);
-  let commentaire: string | undefined = $state();
+  let commentaire = $state('');
   let erreurCommentaire = $state(false);
   let emailDeContact: string | undefined = $state();
 
