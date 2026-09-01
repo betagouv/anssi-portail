@@ -1,8 +1,17 @@
 <script lang="ts">
+  const { survol }: { survol?: boolean } = $props();
 </script>
 
 <div>
-  <svg width="192" height="128" viewBox="0 0 192 128" fill="none" xmlns="http://www.w3.org/2000/svg" class="plante">
+  <svg
+    width="192"
+    height="128"
+    viewBox="0 0 192 128"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class="plante"
+    class:survol
+  >
     <circle
       class="racines"
       cx="96"
@@ -162,7 +171,8 @@
       transition: d 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    &:hover {
+    &:hover,
+    &.survol {
       .racines {
         cy: 86px;
       }
