@@ -25,6 +25,7 @@ import { ressourceModule } from './mesures/ressourceModule.js';
 import { ressourceParcoursComplet } from './mesures/ressourceParcoursComplet.js';
 import { ressourcePriseEnCompte } from './mesures/ressourcePriseEnCompte.js';
 import { ressourceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepart.js';
+import { ressourceReactionsMiniTests } from './mini-tests/ressourceReactionsMiniTests.js';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide.js';
 import { ressourceExigencesNis2 } from './nis2/ressourceExigencesNis2.js';
 import { ressourceExigencesNis2Csv } from './nis2/ressourceExigencesNis2Csv.js';
@@ -315,6 +316,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   enregistreRoute('/api/infos-site', ressourceInfosSite(configurationServeur));
 
   enregistreRoute('/api/retours-experience', ressourceRetoursExperience(configurationServeur));
+
+  enregistreRoute('/api/reactions-mini-tests', ressourceReactionsMiniTests(configurationServeur));
 
   enregistreRoute('/api/statistiques', ressourceStatistiques(configurationServeur));
 

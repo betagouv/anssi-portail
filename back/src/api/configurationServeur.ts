@@ -22,6 +22,7 @@ import { EntrepotSessionDeGroupe } from '../metier/entrepotSessionDeGroupe.js';
 import { EntrepotUtilisateur } from '../metier/entrepotUtilisateur.js';
 import { GenerateurCodeSessionDeGroupe } from '../metier/generateurCodeSessionDeGroupe.js';
 import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
+import { EntrepotReactionMiniTest } from '../metier/mini-tests/entrepotReactionMiniTest.js';
 import { EntrepotExigence } from '../metier/nis2/entrepotExigence.js';
 import { ServiceSanteGuides } from '../metier/serviceSanteGuides.js';
 import { AdaptateurJWT } from './adaptateurJWT.js';
@@ -51,6 +52,7 @@ export type ConfigurationServeur = {
   entrepotExigence: EntrepotExigence;
   entrepotMesure: EntrepotMesure;
   entrepotPriseEnCompte: EntrepotPriseEnCompte;
+  entrepotReactionMiniTest: EntrepotReactionMiniTest;
   entrepôtModule: EntrepôtModule;
   fournisseurChemin: FournisseurChemin;
   generateurCodeSessionDeGroupe: GenerateurCodeSessionDeGroupe;
