@@ -19,7 +19,7 @@
   badges={[{ label: '⏱️ 3 minutes', accent: 'green-bourgeon' }]}
 >
   {#snippet titreHtml()}
-    Cyber&shy;attaques : saurez-vous démêler le vrai du faux ?
+    Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux ?
   {/snippet}
   {#snippet illustration()}
     <figure class="illustration">
