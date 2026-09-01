@@ -31,6 +31,7 @@ import { EntrepotGuideGrist } from './infra/entrepotGuideGrist.js';
 import { EntrepotGuideTravailGrist } from './infra/entrepotGuideTravailGrist.js';
 import { EntrepotMesurePostgres } from './infra/entrepotMesurePostgres.js';
 import { EntrepotPriseEnComptePostgres } from './infra/entrepotPriseEnComptePostgres.js';
+import { EntrepotReactionMiniTestPostgres } from './infra/entrepotReactionMiniTestPostgres.js';
 import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres.js';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres.js';
 import { EntrepotSessionDeGroupePostgres } from './infra/EntrepotSessionDeGroupePostgres.js';
@@ -43,8 +44,6 @@ import { EntrepotGuide } from './metier/entrepotGuide.js';
 import { EntrepotGuideTravail } from './metier/entrepotGuideTravail.js';
 import { EntrepotMesure } from './metier/entrepotMesure.js';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe.js';
-import { EntrepotReactionMiniTest } from './metier/mini-tests/entrepotReactionMiniTest.js';
-import { RéactionMiniTest } from './metier/mini-tests/reactionMiniTest.js';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
 
@@ -96,17 +95,7 @@ const entrepotResultatTest = new EntrepotResultatTestPostgres({
 
 const entrepotPriseEnCompte = new EntrepotPriseEnComptePostgres(adaptateurHachage, entrepotMesure);
 
-// Entrepôt mémoire en attendant l’implémentation Postgres.
-const entrepotReactionMiniTest: EntrepotReactionMiniTest = (() => {
-  const réactions: RéactionMiniTest[] = [];
-  return {
-    ajoute: async (réaction) => {
-      réactions.push(réaction);
-    },
-    tous: async () => réactions,
-    metsÀJour: async () => {},
-  };
-})();
+const entrepotReactionMiniTest = new EntrepotReactionMiniTestPostgres();
 
 const messagerieInstantanee = messagerieMattermost({ adaptateurEnvironnement });
 
