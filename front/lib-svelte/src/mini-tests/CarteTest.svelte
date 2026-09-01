@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { estServeur } from '$plateforme/environnement';
   import type { Snippet } from 'svelte';
   import Reactions from '../ui/Reactions.svelte';
 
@@ -40,12 +41,14 @@
       </h3>
     </div>
   </dsfr-card>
-  <Reactions
-    bind:réactions
-    clé="réaction:mini-test:{cible}"
-    urlDePost="/api/reactions"
-    variant="tertiaire-sans-bordure"
-  />
+  {#if !estServeur}
+    <Reactions
+      bind:réactions
+      clé="réaction:mini-test:{cible}"
+      urlDePost="/api/reactions-mini-tests"
+      variant="tertiaire-sans-bordure"
+    />
+  {/if}
 </div>
 
 <style lang="scss">
