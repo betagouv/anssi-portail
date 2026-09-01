@@ -10,7 +10,7 @@ This file provides guidance to AI coding agents when working with code in this r
 
 - Backend: Node.js (>=24), TypeScript, Express, PostgreSQL
 - Frontend: Jekyll + Svelte
-- Package manager: pnpm (v10.24.0)
+- Package manager: pnpm
 - Deployment: Docker (multi-stage), CleverCloud
 
 ## Workspace Modules
