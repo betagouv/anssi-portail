@@ -11,6 +11,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@typescript-eslint/utils": "^8.58.2"
+    "@typescript-eslint/utils": "^8.68.0"
   }
 }
