@@ -1,8 +1,17 @@
 <script lang="ts">
+  const { survol = $bindable() }: { survol?: boolean } = $props();
 </script>
 
 <div>
-  <svg width="192" height="128" viewBox="0 0 192 128" fill="none" xmlns="http://www.w3.org/2000/svg" class="cartes">
+  <svg
+    width="192"
+    height="128"
+    viewBox="0 0 192 128"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class="cartes"
+    class:survol
+  >
     <rect
       class="carte-gauche"
       x="34"
@@ -173,7 +182,8 @@
       transition: d 700ms $spring;
     }
 
-    &:hover {
+    &:hover,
+    &.survol {
       .carte-gauche {
         x: 12px;
         y: 43.0173px;
