@@ -1,16 +1,23 @@
+import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
+import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../../src/api/msc.js';
+import { EntrepôtQuestionVraieFausseMémoire } from '../../../persistance/entrepotQuestionVraieFausseMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
-import assert from 'node:assert';
-import { HttpStatusCode } from '@anssi-portail/axios';
+import { questionVraieFaussePME } from '../../objetsPretsALEmploi.js';
 
 describe('La ressource du questionnaire Vrai-Faux', () => {
   let serveur: Express;
+  let entrepôtQuestionVraieFausseMémoire: EntrepôtQuestionVraieFausseMémoire;
 
   beforeEach(() => {
-    serveur = creeServeur(configurationDeTestDuServeur);
+    entrepôtQuestionVraieFausseMémoire = new EntrepôtQuestionVraieFausseMémoire();
+    serveur = creeServeur({
+      ...configurationDeTestDuServeur,
+      entrepôtQuestionVraieFausse: entrepôtQuestionVraieFausseMémoire,
+    });
   });
   describe('sur une requête GET', () => {
     it('répond un 200', async () => {
@@ -20,6 +27,8 @@ describe('La ressource du questionnaire Vrai-Faux', () => {
     });
 
     it('retourne une liste de questions', async () => {
+      await entrepôtQuestionVraieFausseMémoire.ajoute(questionVraieFaussePME);
+
       const reponse = await request(serveur).get('/api/mini-tests/vrai-faux');
 
       assert.equal(reponse.body.length, 1);

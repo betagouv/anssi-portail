@@ -367,7 +367,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ressourceRécompensesCyberDépart(configurationServeur)
   );
 
-  enregistreRoute('/api/mini-tests/vrai-faux', ressourceVraiFaux());
+  enregistreRoute('/api/mini-tests/vrai-faux', ressourceVraiFaux(configurationServeur));
 
   const parcoursActivé = configurationServeur.adaptateurEnvironnement
     .fonctionnalites()

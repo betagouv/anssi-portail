@@ -1,5 +1,6 @@
 import { Financement } from '../../src/metier/financement.js';
 import { Guide } from '../../src/metier/guide.js';
+import { QuestionVraieFausse } from '../../src/metier/mini-tests/vrai-faux/questionVraieFausse.js';
 import { ExigenceNIS2 } from '../../src/metier/nis2/exigence.js';
 import { Utilisateur } from '../../src/metier/utilisateur.js';
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from './fauxObjets.js';
@@ -178,4 +179,19 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
     .avecIdModule(3)
     .avecNomModule('Module 3')
     .construis();
+};
+
+export const questionVraieFaussePME: QuestionVraieFausse = {
+  idQuestion: 'idQuestion1',
+  libellé: {
+    emoji: '🏢',
+    texte: 'Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
+  },
+  idéeReçue: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
+  explications: `
+Les PME, TPE et ETI sont la catégorie la plus touchée.
+En 2025, parmi les victimes d'attaques par rançongiciel portées à la connaissance de l'ANSSI, les PME, TPE et ETI représentent 37 % des cas — c'est la catégorie la plus affectée. Les attaques cybercriminelles ciblent indistinctement la plupart des secteurs et zones géographiques, de façon opportuniste.
+`,
+  source: 'ANSSI, Panorama de la cybermenace 2025, section 1.A — pages 10-11.',
+  estVraie: false,
 };
