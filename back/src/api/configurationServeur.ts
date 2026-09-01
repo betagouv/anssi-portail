@@ -29,6 +29,7 @@ import { FournisseurChemin } from './fournisseurChemin.js';
 import { ServiceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 import { GestionnaireRequêtesComplémentaires, Middleware } from './middlewares/middleware.js';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
+import { EntrepôtQuestionVraieFausse } from '../metier/mini-tests/vrai-faux/entrepotQuestionVraieFausse.js';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -52,6 +53,7 @@ export type ConfigurationServeur = {
   entrepotMesure: EntrepotMesure;
   entrepotPriseEnCompte: EntrepotPriseEnCompte;
   entrepôtModule: EntrepôtModule;
+  entrepôtQuestionVraieFausse: EntrepôtQuestionVraieFausse;
   fournisseurChemin: FournisseurChemin;
   generateurCodeSessionDeGroupe: GenerateurCodeSessionDeGroupe;
   messagerieInstantanee: MessagerieInstantanee;

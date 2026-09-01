@@ -45,6 +45,7 @@ import { EntrepotMesure } from './metier/entrepotMesure.js';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe.js';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
+import { EntrepôtQuestionVraieFausseStatique } from './infra/entrepotQuestionVraieFausseStatique.js';
 
 const adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge);
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
@@ -91,6 +92,8 @@ const entrepotResultatTest = new EntrepotResultatTestPostgres({
   adaptateurHachage,
   entrepotUtilisateur,
 });
+
+const entrepôtQuestionVraieFausseStatique = new EntrepôtQuestionVraieFausseStatique();
 
 const entrepotPriseEnCompte = new EntrepotPriseEnComptePostgres(adaptateurHachage, entrepotMesure);
 
@@ -195,6 +198,7 @@ const host = process.env.HOST;
     entrepotMesure,
     entrepotPriseEnCompte,
     entrepôtModule,
+    entrepôtQuestionVraieFausse: entrepôtQuestionVraieFausseStatique,
     cellar,
     serviceSanteGuides,
     adaptateurEmail,
