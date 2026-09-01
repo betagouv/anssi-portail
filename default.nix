@@ -27,6 +27,10 @@ let
     else
       throw "Ruby version ${rubyVersion} in .ruby-version resolves to ${package.version} in nixpkgs";
   bundler = pkgs.bundler.override { inherit ruby; };
+  rubyLspSerena = pkgs.writeShellScriptBin "ruby-lsp" ''
+    export BUNDLE_GEMFILE=/dev/null
+    exec ${ruby.gems.ruby-lsp}/bin/ruby-lsp "$@"
+  '';
 
   playwrightCli = pkgs.buildNpmPackage {
     pname = "playwright-cli";
@@ -45,7 +49,7 @@ in
       corepack
       uv
       ruby
-      ruby.gems.ruby-lsp
+      rubyLspSerena
       bundler
       bash-language-server
       marksman
@@ -69,7 +73,7 @@ in
       export UV_CACHE_DIR="$PWD/.uv-cache"
       export UV_TOOL_DIR="$PWD/.uv-tools"
       export UV_PYTHON_INSTALL_DIR="$PWD/.uv-python"
-      export PATH="$PWD/.nix-bin:$GEM_HOME/bin:$PATH"
+      export PATH="$PWD/.nix-bin:${rubyLspSerena}/bin:$GEM_HOME/bin:$PATH"
 
       mkdir -p "$PWD/.nix-bin" "$GEM_HOME" "$COREPACK_HOME" "$UV_CACHE_DIR" "$UV_TOOL_DIR" "$UV_PYTHON_INSTALL_DIR"
 
