@@ -242,6 +242,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'confirmation-abonnement-infolettre',
     'mini-tests',
     'mini-tests/vrai-faux',
+    'mini-tests/vrai-faux/quiz',
   ];
 
   if (configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()) {

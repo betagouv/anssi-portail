@@ -113,6 +113,7 @@ export default defineConfig(({ command, mode }) => {
           'apres-authentification': 'src/main-apres-authentification.ts',
           'mini-tests': 'src/main-mini-tests.ts',
           'mini-test-vrai-faux': 'src/main-mini-test-vrai-faux.ts',
+          'mini-test-vrai-faux-quiz': 'src/main-mini-test-vrai-faux-quiz.ts',
         },
         output: {
           entryFileNames: `assets/[name].js`,
