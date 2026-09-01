@@ -111,6 +111,7 @@ export default defineConfig(({ command, mode }) => {
           'parcours-securisation-complet': 'src/main-parcours-securisation-complet.ts',
           'illustration-connexion-inscription': 'src/main-illustration-connexion-inscription.ts',
           'apres-authentification': 'src/main-apres-authentification.ts',
+          'mini-tests': 'src/main-mini-tests.ts',
           'mini-test-vrai-faux': 'src/main-mini-test-vrai-faux.ts',
         },
         output: {
