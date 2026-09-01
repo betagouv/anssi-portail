@@ -29,8 +29,8 @@ const rolldownOptions: NonNullable<UserConfig['build']>['rolldownOptions'] = {
     'parcours-securisation-complet': 'src/parcours-securisation/LandingParcoursSecurisationComplet.svelte',
     'illustration-connexion-inscription': 'src/connexion/IllustrationConnexionInscription.svelte',
     'mini-tests': 'src/mini-tests/MiniTests.svelte',
-    'mini-test-vrai-faux': 'src/mini-tests/LandingVraiFaux.svelte',
-    'mini-test-vrai-faux-quiz': 'src/mini-tests/QuizVraiFaux.svelte',
+    'mini-test-vrai-faux': 'src/mini-tests/vrai-faux/LandingVraiFaux.svelte',
+    'mini-test-vrai-faux-quiz': 'src/mini-tests/vrai-faux/QuizVraiFaux.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,

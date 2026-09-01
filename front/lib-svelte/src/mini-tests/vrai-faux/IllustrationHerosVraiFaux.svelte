@@ -1,5 +1,6 @@
 <script lang="ts">
-  import IllustrationAnimee from '../accueil/animation/IllustrationAnimee.svelte';
+  import IllustrationAnimee from '../../accueil/animation/IllustrationAnimee.svelte';
+
   import SceneHerosVraiFaux from './SceneHerosVraiFaux.svelte';
 
   const scènes = [SceneHerosVraiFaux];
