@@ -3,14 +3,15 @@
 
   type Props = {
     clé: string;
-    urlDePost: string;
+    cible: string;
+    urlDeBase: string;
     réactions: Record<string, number>;
     variant?: string;
   };
-  let { clé, urlDePost, réactions = $bindable(), variant = 'tertiaire' }: Props = $props();
+  let { clé, cible, urlDeBase, réactions, variant = 'tertiaire' }: Props = $props();
 
-  let reactions = $state(
-    ['❤️', '👍', '🔥'].map((typeReaction) => ({
+  let reactions = $derived(
+    ['❤️', '🔥', '👍'].map((typeReaction) => ({
       id: typeReaction,
       emoji: typeReaction,
       compteur: réactions[typeReaction] ?? 0,
@@ -36,10 +37,8 @@
     }));
     localStorage.setItem(`${clé}_${e.detail}`, 'true');
     metAJourRéactions();
-    await axios.post(urlDePost, {
-      type: e.detail,
-      action: 'ajout',
-    });
+    const url = `${urlDeBase[-1] === '/' ? urlDeBase.slice(0, -1) : urlDeBase}/${cible}/${e.detail}`;
+    await axios.post(url);
   };
 
   const supprimeReaction = async (e: CustomEvent) => {
@@ -50,10 +49,8 @@
     }));
     localStorage.removeItem(`${clé}_${e.detail}`);
     metAJourRéactions();
-    await axios.post(urlDePost, {
-      type: e.detail,
-      action: 'retrait',
-    });
+    const url = `${urlDeBase[-1] === '/' ? urlDeBase.slice(0, -1) : urlDeBase}/${cible}/${e.detail}`;
+    await axios.delete(url);
   };
 </script>
 
