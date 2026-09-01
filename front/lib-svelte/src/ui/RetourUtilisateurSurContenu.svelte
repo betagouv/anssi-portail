@@ -114,8 +114,8 @@
     </div>
   {/if}
   {#if etat === 'Soumis'}
-    <dsfr-alert type="success" size="sm">
-      <span slot="description">Merci&nbsp;! Vos retours sont précieux. ✨</span>
+    <dsfr-alert type="success" size="sm" has-title="false">
+      <p slot="description">Merci&nbsp;! Vos retours sont précieux. ✨</p>
     </dsfr-alert>
   {/if}
 </div>
@@ -129,9 +129,18 @@
       color: var(--text-title-grey);
     }
 
+    .conteneur-emoji-avis {
+      display: flex;
+      gap: 0.5rem;
+    }
+
     dsfr-alert,
     .encart-commentaire-avis {
       margin-top: 1.5rem;
+    }
+
+    dsfr-alert > p {
+      margin: var(--text-spacing);
     }
 
     .encart-commentaire-avis {
