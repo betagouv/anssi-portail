@@ -213,7 +213,7 @@ catalogs:
       version: 8.0.0
     isomorphic-dompurify:
       specifier: ^3.22.0
-      version: 3.22.0
+      version: 3.23.0
     prettier:
       specifier: 3.9.6
       version: 3.9.6
@@ -343,7 +343,7 @@ importers:
         version: 2.6.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 3.22.0(@noble/hashes@1.8.0)
+        version: 3.23.0(@noble/hashes@1.8.0)
       jsdom:
         specifier: ^30.0.0
         version: 30.0.1(@noble/hashes@1.8.0)
@@ -461,7 +461,7 @@ importers:
         version: 9.0.0
       isomorphic-dompurify:
         specifier: ^3.18.0
-        version: 3.22.0(@noble/hashes@1.8.0)
+        version: 3.23.0(@noble/hashes@1.8.0)
     devDependencies:
       '@types/node':
         specifier: ^26.0.0
@@ -505,7 +505,7 @@ importers:
         version: 8.0.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 3.22.0(@noble/hashes@1.8.0)
+        version: 3.23.0(@noble/hashes@1.8.0)
       svelte:
         specifier: 'catalog:'
         version: 5.56.10(@typescript-eslint/types@8.68.0)
@@ -526,7 +526,7 @@ importers:
         version: 8.0.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 3.22.0(@noble/hashes@1.8.0)
+        version: 3.23.0(@noble/hashes@1.8.0)
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
@@ -587,7 +587,7 @@ importers:
         version: 9.0.0
       isomorphic-dompurify:
         specifier: ^3.18.0
-        version: 3.22.0(@noble/hashes@1.8.0)
+        version: 3.23.0(@noble/hashes@1.8.0)
     devDependencies:
       '@types/node':
         specifier: ^26.0.0
@@ -2976,9 +2976,10 @@ packages:
     resolution: {integrity: sha512-FFUtZMpoZ8RqHS3XeXEmHWLA4thH+ZxCv2lOiPIn1Xc7CxrqhWzNSDzD+/chS/zbYezmiwWLdQC09JdQKmthOw==}
     engines: {node: '>=20'}
 
-  isomorphic-dompurify@3.22.0:
-    resolution: {integrity: sha512-cz/BkSODnQir4IV2quqbuEHhAGz4MAYGvhoemsxuwMpY/oZbRHlNjPLPyIQ0fdULiwDPUE+OHPwWb6XTEiNk1A==}
+  isomorphic-dompurify@3.23.0:
+    resolution: {integrity: sha512-RuYFgdNApoTlR3QxVUyWdS/1ATpLEWEVg3H2tMImbfr6HkYPnuW1sdEtW4PRGlFhp04VbQQjcjXnucHYpXT44A==}
     engines: {node: ^22.22.2 || ^24.15.0 || >=26.0.0}
+    deprecated: Raised the minimum Node.js version (breaking) without a major bump. Use 4.x for the same code with correct semver, or pin 3.19.0 for Node < 22.22.2.
 
   jose@6.2.9:
     resolution: {integrity: sha512-XrchZOFZUl/T3vTwRe8XK+cJrGtMF4th1ARnDfwbBXFKThGhlsxEE4Zu03AD/bjJSt/9jT/mxrOCkJWOg77aPA==}
@@ -6738,7 +6739,7 @@ snapshots:
 
   isexe@4.0.0: {}
 
-  isomorphic-dompurify@3.22.0(@noble/hashes@1.8.0):
+  isomorphic-dompurify@3.23.0(@noble/hashes@1.8.0):
     dependencies:
       dompurify: 3.4.14
       jsdom: 30.0.1(@noble/hashes@1.8.0)
