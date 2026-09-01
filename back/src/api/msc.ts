@@ -238,6 +238,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'sante',
     'abonnement-infolettre',
     'confirmation-abonnement-infolettre',
+    'mini-tests',
     'mini-tests/vrai-faux',
   ];
 
