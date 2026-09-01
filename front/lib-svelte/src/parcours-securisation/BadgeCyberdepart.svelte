@@ -9,60 +9,60 @@
     height="220"
     alt="Badge Cyberdépart "
   />
-  <h6>Badge Cyberdépart</h6>
-  <p class="texte-standard-md">
-    Ce badge témoigne de l’engagement de votre organisation dans une première démarche de sécurisation. Il valorise les
-    1ères actions mises en place pour réduire les risques cyber les plus fréquents.
-  </p>
-  <div class="actions">
-    <BoutonPartageBadgeCyberdepart typeDuBouton="secondaire" />
-    <dsfr-button
-      label="Télécharger mon attestation"
-      kind="secondary"
-      size="md"
-      has-icon={true}
-      icon="download-line"
-      icon-place="left"
-      markup="a"
-      type="button"
-      href="/api/cyberdepart/attestation_badge_cyberdepart.zip"
-      centered
-    ></dsfr-button>
+  <div class="explications">
+    <h6>Badge Cyberdépart</h6>
+    <p class="texte-standard-md">
+      Ce badge témoigne de l’engagement de votre organisation dans une première démarche de sécurisation. Il valorise
+      les 1ères actions mises en place pour réduire les risques cyber les plus fréquents.
+    </p>
+    <div class="actions">
+      <BoutonPartageBadgeCyberdepart typeDuBouton="secondaire" />
+      <dsfr-button
+        label="Télécharger mon attestation"
+        kind="secondary"
+        size="md"
+        has-icon={true}
+        icon="download-line"
+        icon-place="left"
+        markup="a"
+        type="button"
+        href="/api/cyberdepart/attestation_badge_cyberdepart.zip"
+        centered
+      ></dsfr-button>
+    </div>
   </div>
 </div>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
   .badge {
-    border: 1px solid var(--border-default-grey);
-    display: grid;
+    display: flex;
     flex-direction: column;
-    padding: 1.5rem;
-    grid-template-areas: 'image' 'titre' 'description' 'actions';
-
+    border: 1px solid var(--border-default-grey);
     @include a-partir-de(md) {
-      column-gap: 1.5rem;
-      grid-template-areas: 'image titre' 'image description' 'image actions';
+      flex-direction: row;
+    }
+    .explications {
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
     }
 
     img {
-      grid-area: image;
+      width: 100%;
       justify-self: center;
-      margin: -1.5rem 0 -1.5rem -1.5rem;
       height: 230px;
       object-fit: cover;
+      @include a-partir-de(md) {
+        width: auto;
+      }
     }
 
     h6 {
-      grid-area: titre;
       margin-bottom: 1rem;
-    }
-    p {
-      grid-area: description;
     }
 
     .actions {
-      grid-area: actions;
       display: flex;
       flex-direction: column;
       gap: 1rem;
