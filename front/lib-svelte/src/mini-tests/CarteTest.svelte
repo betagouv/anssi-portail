@@ -9,11 +9,11 @@
     image: Snippet<[boolean]>;
     titre: string;
     href: string;
+    réactions: Record<string, number>;
   };
-  const { couleurDeFond, cible, image, titre, href }: Props = $props();
+  let { couleurDeFond, cible, image, titre, href, réactions }: Props = $props();
 
   let survol = $state(false);
-  let réactions = $state({ '❤️': 0, '👍': 0, '🔥': 0 });
 </script>
 
 <div class="carte">
@@ -43,9 +43,10 @@
   </dsfr-card>
   {#if !estServeur}
     <Reactions
-      bind:réactions
+      {réactions}
       clé="réaction:mini-test:{cible}"
-      urlDePost="/api/reactions-mini-tests"
+      {cible}
+      urlDeBase="/api/reactions-mini-tests"
       variant="tertiaire-sans-bordure"
     />
   {/if}

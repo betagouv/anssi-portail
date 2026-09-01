@@ -1,4 +1,6 @@
 <script lang="ts">
+  import axios from 'axios';
+  import { onMount } from 'svelte';
   import type { PropriétésFilAriane } from '../ui/filAriane';
   import HerosRiche from '../ui/HerosRiche.svelte';
   import CarteTest from './CarteTest.svelte';
@@ -9,6 +11,21 @@
   const propriétésFilAriane: PropriétésFilAriane = {
     feuille: 'Faire le test !',
   };
+
+  const réactionsInitiales = { '❤️': 0, '👍': 0, '🔥': 0 };
+  const donnéesInitiales = {
+    réactions: {
+      MaturiteCyber: réactionsInitiales,
+      VraiFaux: réactionsInitiales,
+    },
+  };
+  type DonnéesPage = typeof donnéesInitiales;
+
+  let donnéesPage: DonnéesPage | undefined = $state(undefined);
+  onMount(async () => {
+    const réponse = await axios.get('/api/reactions-mini-tests');
+    donnéesPage = { ...donnéesInitiales, ...réponse.data };
+  });
 </script>
 
 <HerosRiche
@@ -32,6 +49,7 @@
       couleurDeFond="--background-alt-green-bourgeon"
       titre="Quelle est la maturité cyber de votre organisation&nbsp?"
       href="/mini-tests/maturite"
+      réactions={donnéesPage?.réactions.MaturiteCyber ?? {}}
     >
       {#snippet image(survol)}
         <PlanteAnimee {survol} />
@@ -42,6 +60,7 @@
       couleurDeFond="--background-alt-pink-macaron"
       titre="Cyberattaques&nbsp: saurez-vous démêler le vrai du faux&nbsp?"
       href="/mini-tests/vrai-faux"
+      réactions={donnéesPage?.réactions.VraiFaux ?? {}}
     >
       {#snippet image(survol)}
         <TestVraiFauxAnime {survol} />
