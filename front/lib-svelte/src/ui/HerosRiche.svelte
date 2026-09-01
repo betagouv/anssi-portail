@@ -161,6 +161,7 @@
       grid-template-areas:
         'contenu'
         'illustration';
+      grid-template-columns: minmax(0, 1fr);
       @include a-partir-de(lg) {
         grid-template-areas: 'contenu illustration';
         column-gap: 1.5rem;
@@ -200,6 +201,7 @@
       .illustration {
         display: flex;
         margin: auto;
+        width: 100%;
       }
     }
   }
