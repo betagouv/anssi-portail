@@ -18,6 +18,10 @@
         "UV_TOOL_DIR": "${CLAUDE_PROJECT_DIR}/.uv-tools",
         "UV_PYTHON_INSTALL_DIR": "${CLAUDE_PROJECT_DIR}/.uv-python"
       }
+    },
+    "figma": {
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp"
     }
   }
 }

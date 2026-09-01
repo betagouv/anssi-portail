@@ -12,3 +12,6 @@ args = [
 ]
 startup_timeout_sec = 60
 env = { SERENA_HOME = ".serena/runtime", NPM_CONFIG_CACHE = ".serena/runtime/npm-cache", UV_CACHE_DIR = ".uv-cache", UV_TOOL_DIR = ".uv-tools", UV_PYTHON_INSTALL_DIR = ".uv-python" }
+
+[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
