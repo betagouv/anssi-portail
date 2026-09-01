@@ -72,6 +72,7 @@ import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResul
 import { ressourceRetourTestMaturite } from './testMaturite/ressourceRetourTestMaturite.js';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
+import { ressourceVraiFaux } from './mini-tests/vrai-faux/ressourceVraiFaux.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -365,6 +366,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     '/api/cyberdepart/attestation_badge_cyberdepart.zip',
     ressourceRécompensesCyberDépart(configurationServeur)
   );
+
+  enregistreRoute('/api/mini-tests/vrai-faux', ressourceVraiFaux());
 
   const parcoursActivé = configurationServeur.adaptateurEnvironnement
     .fonctionnalites()
