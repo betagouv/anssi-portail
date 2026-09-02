@@ -13,8 +13,14 @@
     feuille: 'Faire le test !',
   };
 
+  const seuil = 1000;
+
   const réactionsInitiales = { '❤️': 0, '👍': 0, '🔥': 0 };
   const donnéesInitiales = {
+    compteurs: {
+      MaturiteCyber: 0,
+      VraiFaux: 0,
+    },
     réactions: {
       MaturiteCyber: réactionsInitiales,
       VraiFaux: réactionsInitiales,
@@ -50,8 +56,15 @@
         cible="MaturiteCyber"
         couleurDeFond="--background-alt-green-bourgeon"
         titre="Quelle est la maturité cyber de votre organisation&nbsp?"
-        href="/mini-tests/maturite"
+        href="/test-maturite"
         réactions={donnéesPage?.réactions.MaturiteCyber ?? {}}
+        badge={{
+          libellé:
+            (donnéesPage?.compteurs.MaturiteCyber ?? 0) > seuil
+              ? `+${donnéesPage?.compteurs.MaturiteCyber} tests réalisés`
+              : undefined,
+          accent: 'pink-macaron',
+        }}
       >
         {#snippet image(survol)}
           <PlanteAnimee {survol} />
@@ -63,6 +76,13 @@
         titre="Cyberattaques&nbsp: saurez-vous démêler le vrai du faux&nbsp?"
         href="/mini-tests/vrai-faux"
         réactions={donnéesPage?.réactions.VraiFaux ?? {}}
+        badge={{
+          libellé:
+            (donnéesPage?.compteurs.VraiFaux ?? 0) > seuil
+              ? `+${donnéesPage?.compteurs.VraiFaux} quiz réalisés`
+              : undefined,
+          accent: 'purple-glycine',
+        }}
       >
         {#snippet image(survol)}
           <TestVraiFauxAnime {survol} />
