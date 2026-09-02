@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import BoutonsPartagePage from '../test-maturite/BoutonsPartagePage.svelte';
   import type { PropriétésFilAriane } from '../ui/filAriane';
   import HerosRiche from '../ui/HerosRiche.svelte';
   import CarteTest from './CarteTest.svelte';
@@ -43,45 +44,54 @@
 </HerosRiche>
 
 <dsfr-container>
-  <div class="cartes">
-    <CarteTest
-      cible="MaturiteCyber"
-      couleurDeFond="--background-alt-green-bourgeon"
-      titre="Quelle est la maturité cyber de votre organisation&nbsp?"
-      href="/mini-tests/maturite"
-      réactions={donnéesPage?.réactions.MaturiteCyber ?? {}}
-    >
-      {#snippet image(survol)}
-        <PlanteAnimee {survol} />
-      {/snippet}
-    </CarteTest>
-    <CarteTest
-      cible="VraiFaux"
-      couleurDeFond="--background-alt-pink-macaron"
-      titre="Cyberattaques&nbsp: saurez-vous démêler le vrai du faux&nbsp?"
-      href="/mini-tests/vrai-faux"
-      réactions={donnéesPage?.réactions.VraiFaux ?? {}}
-    >
-      {#snippet image(survol)}
-        <TestVraiFauxAnime {survol} />
-      {/snippet}
-    </CarteTest>
+  <div class="contenu-section">
+    <div class="cartes">
+      <CarteTest
+        cible="MaturiteCyber"
+        couleurDeFond="--background-alt-green-bourgeon"
+        titre="Quelle est la maturité cyber de votre organisation&nbsp?"
+        href="/mini-tests/maturite"
+        réactions={donnéesPage?.réactions.MaturiteCyber ?? {}}
+      >
+        {#snippet image(survol)}
+          <PlanteAnimee {survol} />
+        {/snippet}
+      </CarteTest>
+      <CarteTest
+        cible="VraiFaux"
+        couleurDeFond="--background-alt-pink-macaron"
+        titre="Cyberattaques&nbsp: saurez-vous démêler le vrai du faux&nbsp?"
+        href="/mini-tests/vrai-faux"
+        réactions={donnéesPage?.réactions.VraiFaux ?? {}}
+      >
+        {#snippet image(survol)}
+          <TestVraiFauxAnime {survol} />
+        {/snippet}
+      </CarteTest>
+    </div>
+    <BoutonsPartagePage cheminPartagé="/mini-tests" sujetMail="Tests gratuits pour maîtriser les risques cyber" />
   </div>
 </dsfr-container>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
-  .cartes {
-    gap: 1rem;
-    display: grid;
+  .contenu-section {
     padding-block: 3rem 4.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
 
-    @include a-partir-de(md) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    @include a-partir-de(xl) {
-      gap: 1.5rem;
-      grid-template-columns: repeat(3, 1fr);
+    .cartes {
+      gap: 1rem;
+      display: grid;
+
+      @include a-partir-de(md) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @include a-partir-de(xl) {
+        gap: 1.5rem;
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
   }
 </style>
