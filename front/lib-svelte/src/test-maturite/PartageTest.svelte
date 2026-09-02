@@ -1,6 +1,6 @@
 <script lang="ts">
   import RetourUtilisateurSurContenu from '../ui/RetourUtilisateurSurContenu.svelte';
-  import BoutonsPartageTest from './BoutonsPartageTest.svelte';
+  import BoutonsPartagePage from './BoutonsPartagePage.svelte';
 </script>
 
 <dsfr-container class="partage-test">
@@ -10,10 +10,7 @@
         <p class="texte-article-lg">Ce test vous a-t-il aidé&nbsp;?</p>
       </RetourUtilisateurSurContenu>
     </div>
-    <div class="partage">
-      <p class="texte-standard-md">Partager la page</p>
-      <BoutonsPartageTest />
-    </div>
+    <BoutonsPartagePage cheminPartagé="/test-maturite" sujetMail="Test de maturité Cyber" />
   </div>
 </dsfr-container>
 
@@ -38,16 +35,6 @@
         .texte-article-lg {
           font-weight: bold;
           margin-bottom: 1rem;
-        }
-      }
-
-      .partage {
-        .texte-standard-md {
-          margin-bottom: 1rem;
-        }
-
-        @include a-partir-de(lg) {
-          width: 282px;
         }
       }
     }
