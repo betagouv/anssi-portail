@@ -73,6 +73,7 @@ import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResul
 import { ressourceRetourTestMaturite } from './testMaturite/ressourceRetourTestMaturite.js';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
+import { ressourceRéponsesVraiFaux } from './mini-tests/vrai-faux/ressourceReponsesVraiFaux.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -368,6 +369,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   );
 
   enregistreRoute('/api/mini-tests/vrai-faux', ressourceVraiFaux(configurationServeur));
+  enregistreRoute('/api/mini-tests/vrai-faux/reponses', ressourceRéponsesVraiFaux(configurationServeur));
 
   const parcoursActivé = configurationServeur.adaptateurEnvironnement
     .fonctionnalites()
