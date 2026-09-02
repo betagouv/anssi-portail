@@ -1,11 +1,11 @@
 export type QuestionVraieFausse = {
   idQuestion: string | number;
-  libellé: {
+  idéeReçue: {
     emoji: string;
     texte: string;
   };
-  idéeReçue: string;
-  explications: string;
+  réponse: string;
+  explications: string[];
   source: string;
-  estVraie: boolean;
+  idéeReçueEstVraie: boolean;
 };
