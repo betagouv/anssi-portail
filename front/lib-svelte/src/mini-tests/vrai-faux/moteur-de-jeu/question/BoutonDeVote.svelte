@@ -75,7 +75,8 @@
         background-color: var(--error-950-100-hover);
       }
 
-      &:active {
+      &:active,
+      &:global([data-actif-au-clavier]) {
         background-color: var(--error-950-100-active);
       }
     }
@@ -90,7 +91,8 @@
         background-color: var(--success-950-100-hover);
       }
 
-      &:active {
+      &:active,
+      &:global([data-actif-au-clavier]) {
         background-color: var(--success-950-100-active);
       }
     }

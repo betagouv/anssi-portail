@@ -94,14 +94,18 @@
               onvaluechanged={choisis(s, activite)}
             ></dsfr-checkbox>
             {#if avecDescription}
-              <lab-anssi-icone
-                nom="information-line"
-                taille="sm"
+              <button
+                type="button"
+                class="bouton-description"
+                aria-expanded={descriptionsVisibles.has(activite)}
+                aria-label={`${descriptionsVisibles.has(activite) ? 'Masquer' : 'Afficher'} la description de ${libellesActivites[activite]}`}
                 use:clic={() => {
                   if (descriptionsVisibles.has(activite)) descriptionsVisibles.delete(activite);
                   else descriptionsVisibles.add(activite);
                 }}
-              ></lab-anssi-icone>
+              >
+                <lab-anssi-icone nom="information-line" taille="sm"></lab-anssi-icone>
+              </button>
             {/if}
           </div>
 
@@ -137,7 +141,12 @@
       justify-content: space-between;
       align-items: start;
 
-      lab-anssi-icone {
+      .bouton-description {
+        display: flex;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: inherit;
         cursor: pointer;
       }
     }

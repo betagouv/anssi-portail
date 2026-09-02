@@ -70,16 +70,15 @@
   />
   <div class="liste-suggestions" class:visible={suggestionsVisibles}>
     {#each suggestions as suggestion (suggestion)}
-      <div
+      <button
+        type="button"
         class="option"
-        role="button"
-        tabindex="0"
         use:clic={() => {
           choisisIdentifiant(suggestion);
         }}
       >
         <div>{suggestion}</div>
-      </div>
+      </button>
     {/each}
   </div>
 </div>
@@ -107,7 +106,14 @@
   }
 
   .option {
+    display: block;
+    width: 100%;
     padding: 4px 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
     cursor: pointer;
   }
 </style>

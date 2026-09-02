@@ -57,16 +57,15 @@
   />
   <div class="liste-suggestions" class:visible={suggestionsVisibles} bind:this={suggestionsEl}>
     {#each suggestions as suggestion (suggestion.code)}
-      <div
+      <button
+        type="button"
         class="option"
-        role="button"
-        tabindex="0"
         use:clic={() => {
           choisisDepartement(suggestion);
         }}
       >
         <div>{suggestion.nom} ({suggestion.code})</div>
-      </div>
+      </button>
     {/each}
   </div>
 </div>
@@ -97,7 +96,14 @@
   }
 
   .option {
+    display: block;
+    width: 100%;
     padding: 4px 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
     cursor: pointer;
   }
 
