@@ -28,20 +28,20 @@
   <Bouton
     titre="Partager sur LinkedIn"
     surClic={partageLinkedIn}
-    type="secondaire"
+    type="tertiaire"
     iconeSeule
-    icone="linkedin-box-fill"
+    icone="linkedin-box-line"
   />
   <Lien
     href="mailto:?subject=Test de maturité Cyber&body=Lien vers le test : {lienTest}"
     libelle="Partager par email"
     apparence="bouton"
-    type="secondaire"
-    icone="mail-fill"
+    type="tertiaire"
+    icone="mail-line"
     iconeSeule
   />
 
-  <Bouton type="secondaire" icone="links-line" iconeSeule surClic={partageLien} />
+  <Bouton type="tertiaire" icone="links-line" iconeSeule surClic={partageLien} />
 </div>
 
 <style lang="scss">

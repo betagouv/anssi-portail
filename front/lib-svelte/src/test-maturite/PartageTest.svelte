@@ -7,11 +7,11 @@
   <div class="contenu-section">
     <div class="retour">
       <RetourUtilisateurSurContenu clé="resultat-test" urlDePost="/api/retour-test-maturite">
-        <b>Ce test vous a-t-il aidé&nbsp;?</b>
+        <p class="texte-article-lg">Ce test vous a-t-il aidé&nbsp;?</p>
       </RetourUtilisateurSurContenu>
     </div>
     <div class="partage">
-      <h3>Partager le test</h3>
+      <p class="texte-standard-md">Partager la page</p>
       <BoutonsPartageTest />
     </div>
   </div>
@@ -21,8 +21,7 @@
   @use '../../../assets/styles/responsive' as *;
 
   .partage-test {
-    padding: 32px 0;
-    background-color: #f6f6f6;
+    padding: 2rem 0;
 
     .contenu-section {
       display: flex;
@@ -30,25 +29,27 @@
 
       @include a-partir-de(lg) {
         flex-direction: row;
-        gap: 24px;
+        gap: 1.5rem;
       }
 
       .retour {
         flex: 1;
+
+        .texte-article-lg {
+          font-weight: bold;
+          margin-bottom: 1rem;
+        }
       }
 
       .partage {
+        .texte-standard-md {
+          margin-bottom: 1rem;
+        }
+
         @include a-partir-de(lg) {
           width: 282px;
         }
       }
-    }
-
-    h3 {
-      margin-top: 4px;
-      font-size: 1.125rem;
-      line-height: 1.75rem;
-      margin-bottom: 12px;
     }
   }
 </style>

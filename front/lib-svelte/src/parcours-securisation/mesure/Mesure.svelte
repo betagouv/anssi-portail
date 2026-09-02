@@ -117,7 +117,9 @@
         <TutorielMesure {mesure} />
         <div class="contenu-section avis-utilisateur">
           {#if idMesure}
-            <RetourUtilisateurSurContenu clé={`mesures:${idMesure}`} urlDePost={`/api/mesures/${idMesure}/avis`} />
+            <div class="retour-utilisateur">
+              <RetourUtilisateurSurContenu clé={`mesures:${idMesure}`} urlDePost={`/api/mesures/${idMesure}/avis`} />
+            </div>
           {/if}
           <div class="section-aide recyf">
             <p>
@@ -218,6 +220,10 @@
           display: none;
         }
       }
+    }
+
+    .retour-utilisateur {
+      margin-bottom: 3rem;
     }
 
     .recyf > p {
