@@ -122,8 +122,6 @@
 
 <style lang="scss">
   .section-aide {
-    margin-bottom: 3rem;
-
     &.retour .texte-information-avis-utilisateur {
       margin-bottom: 1rem;
       color: var(--text-title-grey);
