@@ -1,15 +1,18 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
-import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
-import { corpsVide, valideCorpsRequete } from '../../zod.js';
+import z from 'zod';
 import { ConfigurationServeur } from '../../configurationServeur.js';
+import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
+import { valideCorpsRequete } from '../../zod.js';
+import { schemaPostRéponsesVraiFaux } from './ressourceReponsesVraiFaux.schemas.js';
+import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 export const ressourceRéponsesVraiFaux = (_config: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post(
     '/',
-    valideCorpsRequete(corpsVide),
-    filetRouteAsynchrone(async (_requête, reponse) => {
+    valideCorpsRequete(schemaPostRéponsesVraiFaux),
+    filetRouteAsynchrone(async (_requête: CorpsDeRequeteTypee<z.infer<typeof schemaPostRéponsesVraiFaux>>, reponse) => {
       reponse.sendStatus(HttpStatusCode.Created);
     })
   );
