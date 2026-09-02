@@ -17,11 +17,20 @@
   const { libellé: libelléDuBadge, accent: accentDuBadge } = $derived(badge);
 
   let survol = $state(false);
+
+  let carte: HTMLElement | undefined = $state();
+  $effect(() => {
+    if (carte) {
+      carte.style.setProperty('--background-default-grey', `var(${couleurDeFond})`);
+      carte.style.setProperty('--background-default-grey-hover', `var(${couleurDeFond}-hover)`);
+    }
+  });
 </script>
 
 <div class="carte">
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <dsfr-card
+    bind:this={carte}
     actionMarkup="a"
     data-cible={cible}
     data-source="MiniTest"
@@ -34,7 +43,6 @@
     onmouseenter={() => (survol = true)}
     onmouseleave={() => (survol = false)}
     has-header-badge={libelléDuBadge}
-    style="--background-default-grey: var({couleurDeFond});--background-default-grey-hover: var({couleurDeFond}-hover);"
   >
     <div slot="headerbadges">
       <dsfr-badge accent={accentDuBadge} label={`🔥 ${libelléDuBadge}`} size="md" type="accent"> </dsfr-badge>
