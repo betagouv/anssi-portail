@@ -4,19 +4,26 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../../src/api/msc.js';
-import { configurationDeTestDuServeur } from '../../fauxObjets.js';
-import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
+import { QuestionnaireVraiFauxTerminé } from '../../../../src/bus/evenements/questionnaireVraiFauxTermine.js';
 import { RéponsesVraieFausseSoumise } from '../../../../src/bus/evenements/reponsesVraieFausseSoumise.js';
+import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
+import { EntrepôtQuestionVraieFausseMémoire } from '../../../persistance/entrepotQuestionVraieFausseMemoire.js';
+import { configurationDeTestDuServeur } from '../../fauxObjets.js';
+import { questionVraieFausseDeTest } from './constructeurDeQuestionVraieFausse.js';
 
 describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
   let serveur: Express;
   let busÉvénements: MockBusEvenement;
+  let entrepôtQuestionVraieFausse: EntrepôtQuestionVraieFausseMémoire;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     busÉvénements = fabriqueBusPourLesTests();
+    entrepôtQuestionVraieFausse = new EntrepôtQuestionVraieFausseMémoire();
+    await entrepôtQuestionVraieFausse.ajoute(questionVraieFausseDeTest().avecLIdQuestion('idQuestion1').construis());
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements: busÉvénements,
+      entrepôtQuestionVraieFausse,
     });
   });
 
@@ -44,6 +51,21 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
         idCorrélation: '1234567890',
         réponseCorrecte: true,
       });
+    });
+
+    it("publie un événement de questionnaire complété lorsqu'une la dernière réponse est fournie", async () => {
+      await posteUneRéponseValide();
+
+      const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxTerminé);
+      assert.equal(événement?.idCorrélation, '1234567890');
+    });
+
+    it("ne publie pas d'événement de questionnaire complété si la réponse fournie n'est pas la dernière", async () => {
+      await entrepôtQuestionVraieFausse.ajoute(questionVraieFausseDeTest().avecLIdQuestion('idQuestion2').construis());
+
+      await posteUneRéponseValide();
+
+      assert.equal(busÉvénements.naPasRecuDEvenement(QuestionnaireVraiFauxTerminé), true);
     });
 
     describe('répond un 400', () => {
