@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import { RéponsesVraieFausseSoumise } from '../../../../src/bus/evenements/reponsesVraieFausseSoumise.js';
 import { QuestionnaireVraiFaux } from '../../../../src/metier/mini-tests/vrai-faux/questionnaireVraiFaux.js';
-import { questionVraieFaussePME } from '../../../api/objetsPretsALEmploi.js';
+import { jeanneDupont, questionVraieFaussePME } from '../../../api/objetsPretsALEmploi.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { QuestionnaireVraiFauxTerminé } from '../../../../src/bus/evenements/questionnaireVraiFauxTermine.js';
 import { ConstructeurDeQuestionVraieFause } from '../../../api/mini-tests/vrai-faux/constructeurDeQuestionVraieFausse.js';
@@ -32,6 +32,10 @@ describe('Un questionnaire vrai-faux', () => {
         idCorrélation: 'idCorrélation',
         idQuestion: 'idQuestion1',
         réponseCorrecte: true,
+        email: undefined,
+        codeRegion: undefined,
+        codeSecteur: undefined,
+        codeTrancheEffectif: undefined,
       });
     });
 
@@ -48,6 +52,10 @@ describe('Un questionnaire vrai-faux', () => {
         idCorrélation: 'idCorrélation',
         idQuestion: 'idQuestion1',
         réponseCorrecte: false,
+        email: undefined,
+        codeRegion: undefined,
+        codeSecteur: undefined,
+        codeTrancheEffectif: undefined,
       });
     });
 
@@ -87,6 +95,40 @@ describe('Un questionnaire vrai-faux', () => {
       });
 
       assert(busÉvénements.naPasRecuDEvenement(QuestionnaireVraiFauxTerminé));
+    });
+
+    describe("venant d'un utilisateur connu", () => {
+      it("enrichit l'événement de réponse avec les données utilisateur", async () => {
+        await questionnaire.évalueRéponse({
+          busÉvénements,
+          idCorrélation: 'idCorrélation',
+          idQuestion: 'idQuestion1',
+          réponseUtilisateur: false,
+          utilisateur: jeanneDupont,
+        });
+
+        const événement = busÉvénements.recupereEvenement(RéponsesVraieFausseSoumise);
+        assert.equal(événement?.email, 'jeanne.dupont@user.com');
+        assert.equal(événement?.codeSecteur, 'A');
+        assert.equal(événement?.codeRegion, 'FR-971');
+        assert.equal(événement?.codeTrancheEffectif, '11');
+      });
+
+      it("enrichit l'événement de complétion du questionnaire avec les données utilisateur", async () => {
+        await questionnaire.évalueRéponse({
+          busÉvénements,
+          idCorrélation: 'idCorrélation',
+          idQuestion: 'dernièreQuestion',
+          réponseUtilisateur: true,
+          utilisateur: jeanneDupont,
+        });
+
+        const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxTerminé);
+        assert.equal(événement?.email, 'jeanne.dupont@user.com');
+        assert.equal(événement?.codeSecteur, 'A');
+        assert.equal(événement?.codeRegion, 'FR-971');
+        assert.equal(événement?.codeTrancheEffectif, '11');
+      });
     });
   });
 });

@@ -3,8 +3,13 @@ import { beforeEach, describe, it } from 'node:test';
 import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque.js';
 import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../../src/bus/evenements/moduleTermine.js';
+import { ParcoursAllégéTerminé } from '../../src/bus/evenements/parcoursAllegeTermine.js';
+import { ParcoursChangé } from '../../src/bus/evenements/parcoursChange.js';
+import { ParcoursCompletTerminé } from '../../src/bus/evenements/parcoursCompletTermine.js';
+import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
 import { EntrepotPriseEnCompte } from '../../src/metier/entrepotPriseEnCompte.js';
+import { Module } from '../../src/metier/module.js';
 import { Organisation, Utilisateur } from '../../src/metier/utilisateur.js';
 import { fauxAdaptateurHachage, fauxAdaptateurRechercheEntreprise } from '../api/fauxObjets.js';
 import { mesureDeTest } from '../api/mesures/constructeurDeMesure.js';
@@ -12,13 +17,8 @@ import { ConstructeurDeModule } from '../api/mesures/constructeurDeModule.js';
 import { utilisateurDeTest } from '../api/mesures/constructeurDUtilisateur.js';
 import { fabriqueModuleCyberdépart, mesureAuthentA2Etapes } from '../api/objetsPretsALEmploi.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../bus/busPourLesTests.js';
-import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire.js';
-import { Module } from '../../src/metier/module.js';
-import { ParcoursRejoint } from '../../src/bus/evenements/parcoursRejoint.js';
-import { ParcoursChangé } from '../../src/bus/evenements/parcoursChange.js';
-import { ParcoursAllégéTerminé } from '../../src/bus/evenements/parcoursAllegeTermine.js';
 import { EntrepotMesureMemoire } from '../persistance/entrepotMesureMemoire.js';
-import { ParcoursCompletTerminé } from '../../src/bus/evenements/parcoursCompletTermine.js';
+import { EntrepotPriseEnCompteMemoire } from '../persistance/EntrepotPriseEnCompteMemoire.js';
 
 describe("L'utilisateur", () => {
   const infosUtilisateur = {
@@ -41,6 +41,8 @@ describe("L'utilisateur", () => {
           departement: '33',
           siret: '1234',
           codeActivite: '62.01Z',
+          codeSecteur: undefined,
+          codeTrancheEffectif: undefined,
         }),
       },
       fauxAdaptateurRechercheEntreprise,
@@ -101,6 +103,8 @@ describe("L'utilisateur", () => {
           departement: '75',
           siret: '13000766900018',
           codeActivite: '62.01Z',
+          codeSecteur: undefined,
+          codeTrancheEffectif: undefined,
         }),
       },
       fauxAdaptateurRechercheEntreprise,
@@ -121,6 +125,8 @@ describe("L'utilisateur", () => {
           departement: '75',
           siret: '2424242000023',
           codeActivite: '62.01Z',
+          codeSecteur: undefined,
+          codeTrancheEffectif: undefined,
         }),
       },
       fauxAdaptateurRechercheEntreprise,
@@ -141,6 +147,8 @@ describe("L'utilisateur", () => {
           departement: '75',
           siret: '13000766912345',
           codeActivite: '62.01Z',
+          codeSecteur: undefined,
+          codeTrancheEffectif: undefined,
         }),
       },
       fauxAdaptateurRechercheEntreprise,

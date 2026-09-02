@@ -117,6 +117,8 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
     );
 
     const codeActivite = organisationRelue[0].codeActivite;
+    const codeSecteur = organisationRelue[0].codeSecteur;
+    const codeTrancheEffectif = organisationRelue[0].codeTrancheEffectif;
 
     const mesuresPrisesEnCompte = await this.recupereMesuresPrisesEnCompte(utilisateurBDD);
 
@@ -132,7 +134,7 @@ export class EntrepotUtilisateurMPAPostgres implements EntrepotUtilisateur {
         pixelDeSuiviAccepté: donnees.pixelDeSuiviAccepte ?? true,
         siretEntite: organisation.siret,
         idListeFavoris: utilisateurBDD.id_liste_favoris,
-        organisation: new Organisation({ ...organisation, codeActivite }),
+        organisation: new Organisation({ ...organisation, codeActivite, codeSecteur, codeTrancheEffectif }),
         roles: utilisateurBDD.roles as unknown as Role[],
         mesuresPrisesEnCompte,
         parcours: utilisateurBDD.parcours as Parcours | null,
