@@ -1,5 +1,5 @@
 export type QuestionVraieFausse = {
-  idQuestion: string | number;
+  idQuestion: string;
   idéeReçue: {
     emoji: string;
     texte: string;
