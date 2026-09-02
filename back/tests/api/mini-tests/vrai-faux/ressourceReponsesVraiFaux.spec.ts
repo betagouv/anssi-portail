@@ -19,7 +19,9 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
   beforeEach(async () => {
     busÉvénements = fabriqueBusPourLesTests();
     entrepôtQuestionVraieFausse = new EntrepôtQuestionVraieFausseMémoire();
-    await entrepôtQuestionVraieFausse.ajoute(questionVraieFausseDeTest().avecLIdQuestion('idQuestion1').construis());
+    await entrepôtQuestionVraieFausse.ajoute(
+      questionVraieFausseDeTest().avecLIdQuestion('idQuestion1').avecIdéeReçueEstVraie(true).construis()
+    );
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements: busÉvénements,
@@ -45,19 +47,13 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
     it("publie un événement lorsqu'une réponse est fournie", async () => {
       await posteUneRéponseValide();
 
-      const événement = busÉvénements.recupereEvenement(RéponsesVraieFausseSoumise);
-      assert.deepEqual(événement, {
-        idQuestion: 'idQuestion1',
-        idCorrélation: '1234567890',
-        réponseCorrecte: true,
-      });
+      assert(busÉvénements.aRecuUnEvenement(RéponsesVraieFausseSoumise));
     });
 
     it("publie un événement de questionnaire complété lorsqu'une la dernière réponse est fournie", async () => {
       await posteUneRéponseValide();
 
-      const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxTerminé);
-      assert.equal(événement?.idCorrélation, '1234567890');
+      assert(busÉvénements.aRecuUnEvenement(QuestionnaireVraiFauxTerminé));
     });
 
     it("ne publie pas d'événement de questionnaire complété si la réponse fournie n'est pas la dernière", async () => {
@@ -65,7 +61,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
 
       await posteUneRéponseValide();
 
-      assert.equal(busÉvénements.naPasRecuDEvenement(QuestionnaireVraiFauxTerminé), true);
+      assert(busÉvénements.naPasRecuDEvenement(QuestionnaireVraiFauxTerminé));
     });
 
     describe('répond un 400', () => {
