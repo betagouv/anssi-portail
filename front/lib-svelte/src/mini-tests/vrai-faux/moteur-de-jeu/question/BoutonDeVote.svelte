@@ -50,6 +50,16 @@
       animation: rebond-cible 240ms ease-out forwards;
     }
 
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--bleu-contour-mis-en-valeur);
+      outline-offset: 2px;
+      border-style: none;
+    }
+
     p {
       background-color: transparent;
       color: inherit;
@@ -59,8 +69,14 @@
       background-color: var(--background-contrast-error);
       color: var(--text-default-error);
 
-      &.est-cible {
-        background-color: #ffc5c5;
+      &.est-cible,
+      &:hover,
+      &:focus-visible {
+        background-color: var(--error-950-100-hover);
+      }
+
+      &:active {
+        background-color: var(--error-950-100-active);
       }
     }
 
@@ -68,8 +84,14 @@
       background-color: var(--background-contrast-success);
       color: var(--text-default-success);
 
-      &.est-cible {
-        background-color: #46fd89;
+      &.est-cible,
+      &:hover,
+      &:focus-visible {
+        background-color: var(--success-950-100-hover);
+      }
+
+      &:active {
+        background-color: var(--success-950-100-active);
       }
     }
   }
