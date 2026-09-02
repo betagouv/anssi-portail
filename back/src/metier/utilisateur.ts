@@ -15,6 +15,9 @@ import { Module } from './module.js';
 import { MotifChangementParcours, Parcours } from './parcours.js';
 
 import { PriseEnCompte } from './PriseEnCompte.js';
+import { CodeRegion, estCodeRegion } from './referentielRegions.js';
+import { CodeSecteur, estCodeSecteur } from './referentielSecteurs.js';
+import { CodeTrancheEffectif, trancheEffectifParCode } from './referentielTranchesEffectifEtablissement.js';
 import { Suivi } from './suivi.js';
 
 export type Role = 'GESTION_GUIDES';
@@ -25,6 +28,8 @@ export class Organisation {
   departement: string | null;
   region: string | undefined;
   codeActivite: string;
+  codeSecteur: string | undefined;
+  codeTrancheEffectif: string | undefined;
 
   constructor({
     nom,
@@ -32,18 +37,24 @@ export class Organisation {
     departement,
     codeRegion,
     codeActivite,
+    codeSecteur,
+    codeTrancheEffectif,
   }: {
     nom: string;
     siret: string;
     departement: string | null;
     codeRegion?: string;
     codeActivite: string;
+    codeSecteur: string | undefined;
+    codeTrancheEffectif: string | undefined;
   }) {
     this.nom = nom;
     this.siret = siret;
     this.departement = departement;
     this.region = codeRegion;
     this.codeActivite = codeActivite;
+    this.codeSecteur = codeSecteur;
+    this.codeTrancheEffectif = codeTrancheEffectif;
   }
 
   estAnssi = () => {
@@ -241,5 +252,21 @@ export class Utilisateur {
 
   parcoursActuel() {
     return this.parcours;
+  }
+
+  async codeRegion(): Promise<CodeRegion | undefined> {
+    const code = (await this.organisation()).region;
+    return estCodeRegion(code) ? code : undefined;
+  }
+
+  async codeSecteur(): Promise<CodeSecteur | undefined> {
+    const code = (await this.organisation()).codeSecteur;
+    return estCodeSecteur(code) ? code : undefined;
+  }
+
+  async codeTrancheEffectif(): Promise<CodeTrancheEffectif | undefined> {
+    const code = (await this.organisation()).codeTrancheEffectif;
+    const tranche = trancheEffectifParCode(code);
+    return tranche ? tranche.code : undefined;
   }
 }
