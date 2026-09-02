@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import Bouton from '../../ui/Bouton.svelte';
   import Lien from '../../ui/Lien.svelte';
   import Modale from '../../ui/Modale.svelte';
@@ -17,7 +18,7 @@
   <ol>
     {#each tutoriel.étapes as étape, index (index)}
       <!-- eslint-disable-next-line svelte/no-at-html-tags-->
-      <li>{@html étape}</li>
+      <li>{@html aseptiseHtml(étape)}</li>
     {/each}
   </ol>
 
@@ -25,7 +26,7 @@
     <div class="bloc-note">
       <h5 class="fr-h6 petit-titre">Remarque</h5>
       <!-- eslint-disable-next-line svelte/no-at-html-tags-->
-      <div class="texte-standard-md">{@html tutoriel.note}</div>
+      <div class="texte-standard-md">{@html aseptiseHtml(tutoriel.note)}</div>
     </div>
   {/if}
 
