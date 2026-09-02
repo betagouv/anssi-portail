@@ -1,6 +1,6 @@
 <script lang="ts">
   import { estServeur } from '$plateforme/environnement';
-  import type { Snippet } from 'svelte';
+  import { untrack, type Snippet } from 'svelte';
   import Reactions from '../ui/Reactions.svelte';
 
   type Props = {
@@ -10,8 +10,11 @@
     titre: string;
     href: string;
     réactions: Record<string, number>;
+    badge: { libellé: string | undefined; accent: string };
   };
-  let { couleurDeFond, cible, image, titre, href, réactions }: Props = $props();
+  let { couleurDeFond, cible, image, titre, href, réactions, badge }: Props = $props();
+
+  const { libellé: libelléDuBadge, accent: accentDuBadge } = untrack(() => badge);
 
   let survol = $state(false);
 </script>
@@ -30,8 +33,12 @@
     title={titre}
     onmouseenter={() => (survol = true)}
     onmouseleave={() => (survol = false)}
+    has-header-badge={libelléDuBadge}
     style="--background-default-grey: var({couleurDeFond});--background-default-grey-hover: var({couleurDeFond}-hover);"
   >
+    <div slot="headerbadges">
+      <dsfr-badge accent={accentDuBadge} label={`🔥 ${libelléDuBadge}`} size="md" type="accent"> </dsfr-badge>
+    </div>
     <div slot="image" class="image">
       {@render image(survol)}
     </div>
