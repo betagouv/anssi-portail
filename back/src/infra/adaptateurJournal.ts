@@ -1,3 +1,4 @@
+import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { adaptateurJournalPostgres } from './adaptateurJournalPostgres.js';
 import { DonneesEvenement } from './donneesEvenement.js';
 
@@ -11,8 +12,8 @@ export const adaptateurJournalMemoire: AdaptateurJournal = {
   },
 };
 
-export const fabriqueAdaptateurJournal = () => {
-  return process.env.BASE_DONNEES_JOURNAL_EN_MEMOIRE === 'true'
-    ? adaptateurJournalMemoire
-    : adaptateurJournalPostgres();
+export const fabriqueAdaptateurJournal = (adaptateurEnvironnement: AdaptateurEnvironnement) => {
+  return adaptateurEnvironnement.journal().baseDeDonnéesActive()
+    ? adaptateurJournalPostgres()
+    : adaptateurJournalMemoire;
 };

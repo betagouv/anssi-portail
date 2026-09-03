@@ -232,6 +232,9 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
     cléAPI: () => 'FAUSSE_CLE_API_BREVO',
     url: () => 'FAUSSE_URL_BREVO',
   }),
+  journal: () => ({
+    baseDeDonnéesActive: () => false,
+  }),
 };
 
 const vraiMiddleware = fabriqueMiddleware({
