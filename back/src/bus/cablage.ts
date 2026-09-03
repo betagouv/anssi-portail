@@ -23,8 +23,8 @@ import { consigneParcoursAllégéTerminéDansJournal } from './consigneParcoursA
 import { consigneParcoursChangéDansJournal } from './consigneParcoursChangeDansJournal.js';
 import { consigneParcoursCompletTerminéDansJournal } from './consigneParcoursCompletTermineDansJournal.js';
 import { consigneParcoursRejointDansJournal } from './consigneParcoursRejointDansJournal.js';
+import { consigneQuestionnaireVraiFauxReponseSoumiseDansJournal } from './consigneQuestionnaireVraiFauxReponseSoumiseDansJournal.js';
 import { consigneQuestionnaireVraiFauxTermineDansJournal } from './consigneQuestionnaireVraiFauxTermineDansJournal.js';
-import { consigneReponseVraieFausseSoumiseDansJournal } from './consigneReponseVraieFausseSoumiseDansJournal.js';
 import { creeContactBrevo } from './creeContactBrevo.js';
 import { envoieEmailCreationCompte } from './envoieEmailCreationCompte.js';
 import { AvisMesureDonne } from './evenements/avisMesureDonne.js';
@@ -39,8 +39,8 @@ import { ParcoursChangé } from './evenements/parcoursChange.js';
 import { ParcoursCompletTerminé } from './evenements/parcoursCompletTermine.js';
 import { ParcoursRejoint } from './evenements/parcoursRejoint.js';
 import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee.js';
+import { QuestionnaireVraiFauxRéponseSoumise } from './evenements/questionnaireVraiFauxReponseSoumise.js';
 import { QuestionnaireVraiFauxTerminé } from './evenements/questionnaireVraiFauxTermine.js';
-import { RéponseVraieFausseSoumise } from './evenements/reponseVraieFausseSoumise.js';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne.js';
 import { RetourTestMaturitéDonné } from './evenements/retourTestMaturiteDonne.js';
 import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee.js';
@@ -188,8 +188,8 @@ export const cableTousLesAbonnes = ({
   ]);
 
   busEvenements.abonne(
-    RéponseVraieFausseSoumise,
-    consigneReponseVraieFausseSoumiseDansJournal({
+    QuestionnaireVraiFauxRéponseSoumise,
+    consigneQuestionnaireVraiFauxReponseSoumiseDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,

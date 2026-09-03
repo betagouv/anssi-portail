@@ -30,7 +30,7 @@ export type DonneesEvenement =
   | DonnéesParcoursAllégéTerminé
   | DonnéesParcoursCompletTerminé
   | DonnéesRetourTestMaturité
-  | DonneesReponseVraieFausseSoumise
+  | DonneesQuestionnaireVraiFauxReponseSoumise
   | DonneesQuestionnaireVraiFauxTerminé;
 
 type Evenement<Type extends string, Donnees extends object> = {
@@ -131,8 +131,8 @@ type DonnéesParcoursAllégéTerminé = Evenement<'PARCOURS_ALLÉGÉ_TERMINÉ', 
 type DonnéesParcoursCompletTerminé = Evenement<'PARCOURS_COMPLET_TERMINÉ', { idUtilisateur: string }>;
 type DonnéesRetourTestMaturité = Evenement<'RETOUR_TEST_MATURITE_DONNE', { retour: string; commentaire?: string }>;
 
-type DonneesReponseVraieFausseSoumise = Evenement<
-  'REPONSE_VRAIE_FAUSSE_SOUMISE',
+type DonneesQuestionnaireVraiFauxReponseSoumise = Evenement<
+  'QUESTIONNAIRE_VRAI_FAUX_REPONSE_SOUMISE',
   {
     idCorrélation: string;
     idQuestion: string;

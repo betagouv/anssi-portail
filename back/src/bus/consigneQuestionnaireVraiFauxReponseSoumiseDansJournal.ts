@@ -1,9 +1,9 @@
 import { AdaptateurHachage } from '../infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
-import { RéponseVraieFausseSoumise } from './evenements/reponseVraieFausseSoumise.js';
+import { QuestionnaireVraiFauxRéponseSoumise } from './evenements/questionnaireVraiFauxReponseSoumise.js';
 
-export const consigneReponseVraieFausseSoumiseDansJournal = ({
+export const consigneQuestionnaireVraiFauxReponseSoumiseDansJournal = ({
   adaptateurJournal,
   adaptateurHorloge,
   adaptateurHachage,
@@ -12,7 +12,7 @@ export const consigneReponseVraieFausseSoumiseDansJournal = ({
   adaptateurHorloge: AdaptateurHorloge;
   adaptateurHachage: AdaptateurHachage;
 }) => {
-  return async (evenement: RéponseVraieFausseSoumise) => {
+  return async (evenement: QuestionnaireVraiFauxRéponseSoumise) => {
     const idUtilisateur = evenement.email ? adaptateurHachage.hache(evenement.email) : undefined;
     await adaptateurJournal.consigneEvenement({
       donnees: {
@@ -24,7 +24,7 @@ export const consigneReponseVraieFausseSoumiseDansJournal = ({
         ...(evenement.codeSecteur && { codeSecteur: evenement.codeSecteur }),
         ...(evenement.codeTrancheEffectif && { codeTrancheEffectif: evenement.codeTrancheEffectif }),
       },
-      type: 'REPONSE_VRAIE_FAUSSE_SOUMISE',
+      type: 'QUESTIONNAIRE_VRAI_FAUX_REPONSE_SOUMISE',
       date: adaptateurHorloge.maintenant(),
     });
   };

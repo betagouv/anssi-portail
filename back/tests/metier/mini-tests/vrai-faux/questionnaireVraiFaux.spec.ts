@@ -1,16 +1,16 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
-import { RéponseVraieFausseSoumise } from '../../../../src/bus/evenements/reponseVraieFausseSoumise.js';
+import { QuestionnaireVraiFauxRéponseSoumise } from '../../../../src/bus/evenements/questionnaireVraiFauxReponseSoumise.js';
+import { QuestionnaireVraiFauxTerminé } from '../../../../src/bus/evenements/questionnaireVraiFauxTermine.js';
 import { QuestionnaireVraiFaux } from '../../../../src/metier/mini-tests/vrai-faux/questionnaireVraiFaux.js';
+import { ConstructeurDeQuestionVraieFausse } from '../../../api/mini-tests/vrai-faux/constructeurDeQuestionVraieFausse.js';
 import { jeanneDupont, questionVraieFaussePME } from '../../../api/objetsPretsALEmploi.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
-import { QuestionnaireVraiFauxTerminé } from '../../../../src/bus/evenements/questionnaireVraiFauxTermine.js';
-import { ConstructeurDeQuestionVraieFause } from '../../../api/mini-tests/vrai-faux/constructeurDeQuestionVraieFausse.js';
 
 describe('Un questionnaire vrai-faux', () => {
   const questionnaire = new QuestionnaireVraiFaux([
     questionVraieFaussePME,
-    new ConstructeurDeQuestionVraieFause().avecLIdQuestion('dernièreQuestion').construis(),
+    new ConstructeurDeQuestionVraieFausse().avecLIdQuestion('dernièreQuestion').construis(),
   ]);
   let busÉvénements: MockBusEvenement;
 
@@ -27,7 +27,7 @@ describe('Un questionnaire vrai-faux', () => {
         réponseUtilisateur: false,
       });
 
-      const événement = busÉvénements.recupereEvenement(RéponseVraieFausseSoumise);
+      const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxRéponseSoumise);
       assert.deepEqual(événement, {
         idCorrélation: 'idCorrélation',
         idQuestion: 'idQuestion1',
@@ -47,7 +47,7 @@ describe('Un questionnaire vrai-faux', () => {
         réponseUtilisateur: true,
       });
 
-      const événement = busÉvénements.recupereEvenement(RéponseVraieFausseSoumise);
+      const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxRéponseSoumise);
       assert.deepEqual(événement, {
         idCorrélation: 'idCorrélation',
         idQuestion: 'idQuestion1',
@@ -71,7 +71,7 @@ describe('Un questionnaire vrai-faux', () => {
           message: 'réponse à une question inconnue : idInconnu',
         }
       );
-      assert(busÉvénements.naPasRecuDEvenement(RéponseVraieFausseSoumise));
+      assert(busÉvénements.naPasRecuDEvenement(QuestionnaireVraiFauxRéponseSoumise));
     });
 
     it('signale la complétion du questionnaire si la réponse cible la dernière question', async () => {
@@ -107,7 +107,7 @@ describe('Un questionnaire vrai-faux', () => {
           utilisateur: jeanneDupont,
         });
 
-        const événement = busÉvénements.recupereEvenement(RéponseVraieFausseSoumise);
+        const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxRéponseSoumise);
         assert.equal(événement?.email, 'jeanne.dupont@user.com');
         assert.equal(événement?.codeSecteur, 'A');
         assert.equal(événement?.codeRegion, 'FR-971');

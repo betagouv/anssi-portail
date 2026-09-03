@@ -3,7 +3,7 @@ import { CodeSecteur } from '../../metier/referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../metier/referentielTranchesEffectifEtablissement.js';
 import { EvenementDuBus } from '../busEvenements.js';
 
-export class RéponseVraieFausseSoumise implements EvenementDuBus {
+export class QuestionnaireVraiFauxRéponseSoumise implements EvenementDuBus {
   readonly idCorrélation: string;
   readonly idQuestion: string;
   readonly réponseCorrecte: boolean;
