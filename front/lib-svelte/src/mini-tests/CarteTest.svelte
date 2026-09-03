@@ -23,6 +23,7 @@
     if (carte) {
       carte.style.setProperty('--background-default-grey', `var(${couleurDeFond})`);
       carte.style.setProperty('--background-default-grey-hover', `var(${couleurDeFond}-hover)`);
+      carte.style.setProperty('--background-default-grey-active', `var(${couleurDeFond}-active)`);
     }
   });
 </script>
