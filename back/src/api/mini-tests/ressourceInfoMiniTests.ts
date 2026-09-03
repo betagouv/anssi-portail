@@ -15,7 +15,7 @@ export const ressourceInfoMiniTests = ({ entrepotReactionMiniTest, entrepotResul
       const réactions = await entrepotReactionMiniTest.tous();
       reponse.send({
         compteurs: {
-          MaturiteCyber: compteurMaturitéCyber,
+          MaturiteCyber: Math.floor(compteurMaturitéCyber / 100) * 100,
         },
         réactions: réactions.reduce(
           (acc, réaction) => {
