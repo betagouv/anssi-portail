@@ -91,7 +91,7 @@
         {/snippet}
       </CarteTest>
     </div>
-    <BoutonsPartagePage cheminPartagé="/mini-tests" sujetMail="Tests gratuits pour maîtriser les risques cyber" />
+    <BoutonsPartagePage cheminPartagé="/faire-le-test" sujetMail="Tests gratuits pour maîtriser les risques cyber" />
   </div>
 </dsfr-container>
 
