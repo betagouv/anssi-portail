@@ -31,17 +31,18 @@
 </button>
 
 <style lang="scss">
+  @use '../../../../../../assets/styles/responsive' as *;
+
   button {
     display: flex;
-    padding: 3.5rem 1rem;
-    flex-direction: column;
+    padding: 1rem;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
     flex: 1 0 0;
-    border-radius: 1.5rem;
+    border-radius: 0.75rem;
     border: 0;
-    width: 30%;
     transition:
       background-color 160ms ease,
       transform 160ms ease;
@@ -63,6 +64,8 @@
     p {
       background-color: transparent;
       color: inherit;
+      font-weight: 500;
+      margin: 0;
     }
 
     &.vote-faux {
@@ -93,6 +96,12 @@
       &:active {
         background-color: var(--success-950-100-active);
       }
+    }
+
+    @include a-partir-de(md) {
+      border-radius: 1.5rem;
+      flex-direction: column;
+      padding: 3.5rem 1rem;
     }
   }
 

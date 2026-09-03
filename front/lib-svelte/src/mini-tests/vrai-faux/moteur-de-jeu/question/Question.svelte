@@ -126,12 +126,6 @@
 </script>
 
 <div class="conteneur-de-choix">
-  <BoutonDeVote
-    bind:réfBouton={réfBoutonFaux}
-    réponse="faux"
-    estCible={réponseSurvolée === 'faux'}
-    surVote={surVoteFaux}
-  />
   <div
     use:glissementQuestion
     class:en-glissement={glissementEnCours}
@@ -146,26 +140,40 @@
     <p class="fr-h2">🏢</p>
     <h2 class="fr-h3">{question}</h2>
   </div>
-  <BoutonDeVote
-    bind:réfBouton={réfBoutonVrai}
-    réponse="vrai"
-    estCible={réponseSurvolée === 'vrai'}
-    surVote={surVoteVrai}
-  />
+  <div class="boutons-de-vote">
+    <BoutonDeVote
+      bind:réfBouton={réfBoutonFaux}
+      réponse="faux"
+      estCible={réponseSurvolée === 'faux'}
+      surVote={surVoteFaux}
+    />
+    <BoutonDeVote
+      bind:réfBouton={réfBoutonVrai}
+      réponse="vrai"
+      estCible={réponseSurvolée === 'vrai'}
+      surVote={surVoteVrai}
+    />
+  </div>
 </div>
 
 <style lang="scss">
-  @use '../../../../../../assets/styles/grille' as *;
+  @use '../../../../../../assets/styles/responsive' as *;
 
   .conteneur-de-choix {
-    --icon-size: 2.5rem;
-    width: taille-pour-colonnes(10);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    padding-bottom: 4.5rem;
-    margin-inline: auto;
+    --icon-size: 1.5rem;
+    position: relative;
+
+    &::after {
+      background-color: var(--background-contrast-blue-france);
+      border-radius: 0.5rem;
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 340px;
+    }
 
     .question {
       display: flex;
@@ -176,9 +184,13 @@
       background: var(--background-default-grey);
       box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
       box-sizing: border-box;
-      width: 40%;
       cursor: grab;
+      height: 340px;
+      width: 100%;
+      margin-bottom: 4.5rem;
       position: relative;
+      overflow: hidden;
+
       touch-action: pan-y;
       transform: translate3d(var(--deplacement-x), var(--deplacement-y), 0) rotate(var(--rotation));
       transition:
@@ -202,6 +214,54 @@
 
       .compte {
         align-self: flex-end;
+      }
+    }
+
+    .boutons-de-vote {
+      background-color: var(--background-default-grey);
+      bottom: 0;
+      box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      padding: 1rem;
+      position: sticky;
+      margin-inline: -1rem;
+      z-index: 2;
+    }
+
+    @include a-partir-de(md) {
+      --icon-size: 2.5rem;
+      display: grid;
+      gap: 1rem;
+      grid-template-areas: 'vide1 question vide2';
+      grid-template-columns: 3fr 6fr 3fr;
+      margin-bottom: 4.5rem;
+
+      .question,
+      &::after {
+        grid-area: question;
+      }
+
+      .question {
+        margin-bottom: 0;
+      }
+
+      .boutons-de-vote {
+        align-items: center;
+        background: transparent;
+        box-shadow: none;
+        display: grid;
+        gap: 1rem;
+        grid-column: 1 / -1;
+        grid-row: 1;
+        grid-template-areas: 'faux vide vrai';
+        grid-template-columns: 3fr 6fr 3fr;
+        z-index: initial;
+
+        :global(:last-child) {
+          grid-area: vrai;
+        }
       }
     }
   }
