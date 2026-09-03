@@ -1,14 +1,14 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { consigneReponseVraieFausseSoumiseDansJournal } from '../../src/bus/consigneReponseVraieFausseSoumiseDansJournal.js';
-import { RéponseVraieFausseSoumise } from '../../src/bus/evenements/reponseVraieFausseSoumise.js';
+import { consigneQuestionnaireVraiFauxReponseSoumiseDansJournal } from '../../src/bus/consigneQuestionnaireVraiFauxReponseSoumiseDansJournal.js';
+import { QuestionnaireVraiFauxRéponseSoumise } from '../../src/bus/evenements/questionnaireVraiFauxReponseSoumise.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
 
 describe('L’abonnement qui consigne une réponse à une question vraie/faux dans le journal', () => {
-  it('consigne un évènement RéponseVraieFausseSoumise pour un utilisateur identifié', async () => {
+  it('consigne un évènement QuestionnaireVraiFauxRéponseSoumise pour un utilisateur identifié', async () => {
     let evenementRecu;
     const adaptateurJournal: AdaptateurJournal = {
       consigneEvenement: async (donneesEvenement: unknown) => {
@@ -23,12 +23,12 @@ describe('L’abonnement qui consigne une réponse à une question vraie/faux da
       hache: (valeur) => `${valeur}-hacheHMAC`,
     };
 
-    await consigneReponseVraieFausseSoumiseDansJournal({
+    await consigneQuestionnaireVraiFauxReponseSoumiseDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
     })(
-      new RéponseVraieFausseSoumise({
+      new QuestionnaireVraiFauxRéponseSoumise({
         idCorrélation: 'id-correlation',
         idQuestion: 'q1',
         réponseCorrecte: true,
@@ -40,7 +40,7 @@ describe('L’abonnement qui consigne une réponse à une question vraie/faux da
     );
 
     assert.deepEqual(evenementRecu, {
-      type: 'REPONSE_VRAIE_FAUSSE_SOUMISE',
+      type: 'QUESTIONNAIRE_VRAI_FAUX_REPONSE_SOUMISE',
       donnees: {
         idCorrélation: 'id-correlation',
         idQuestion: 'q1',
@@ -54,7 +54,7 @@ describe('L’abonnement qui consigne une réponse à une question vraie/faux da
     });
   });
 
-  it('consigne un évènement RéponseVraieFausseSoumise pour un utilisateur anonyme', async () => {
+  it('consigne un évènement QuestionnaireVraiFauxRéponseSoumise pour un utilisateur anonyme', async () => {
     let evenementRecu;
     const adaptateurJournal: AdaptateurJournal = {
       consigneEvenement: async (donneesEvenement: unknown) => {
@@ -69,12 +69,12 @@ describe('L’abonnement qui consigne une réponse à une question vraie/faux da
       hache: (valeur) => `${valeur}-hacheHMAC`,
     };
 
-    await consigneReponseVraieFausseSoumiseDansJournal({
+    await consigneQuestionnaireVraiFauxReponseSoumiseDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
     })(
-      new RéponseVraieFausseSoumise({
+      new QuestionnaireVraiFauxRéponseSoumise({
         idCorrélation: 'id-correlation',
         idQuestion: 'q1',
         réponseCorrecte: false,
@@ -82,7 +82,7 @@ describe('L’abonnement qui consigne une réponse à une question vraie/faux da
     );
 
     assert.deepEqual(evenementRecu, {
-      type: 'REPONSE_VRAIE_FAUSSE_SOUMISE',
+      type: 'QUESTIONNAIRE_VRAI_FAUX_REPONSE_SOUMISE',
       donnees: {
         idCorrélation: 'id-correlation',
         idQuestion: 'q1',

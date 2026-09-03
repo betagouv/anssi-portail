@@ -1,6 +1,6 @@
 import { BusEvenements } from '../../../bus/busEvenements.js';
 import { QuestionnaireVraiFauxTerminé } from '../../../bus/evenements/questionnaireVraiFauxTermine.js';
-import { RéponseVraieFausseSoumise } from '../../../bus/evenements/reponseVraieFausseSoumise.js';
+import { QuestionnaireVraiFauxRéponseSoumise } from '../../../bus/evenements/questionnaireVraiFauxReponseSoumise.js';
 import { CodeRegion } from '../../referentielRegions.js';
 import { CodeSecteur } from '../../referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../referentielTranchesEffectifEtablissement.js';
@@ -39,7 +39,7 @@ export class QuestionnaireVraiFaux {
       codeTrancheEffectif = await utilisateur.codeTrancheEffectif();
     }
     await busÉvénements.publie(
-      new RéponseVraieFausseSoumise({
+      new QuestionnaireVraiFauxRéponseSoumise({
         idCorrélation,
         idQuestion,
         réponseCorrecte: réponseUtilisateur === question?.idéeReçueEstVraie,
