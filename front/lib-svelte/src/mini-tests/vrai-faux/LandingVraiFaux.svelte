@@ -31,8 +31,7 @@
   {/snippet}
 
   {#snippet actions()}
-    <dsfr-button label="Démarrer le quiz" kind="primary" size="lg" href="/mini-tests/vrai-faux/quiz" markup="a"
-    ></dsfr-button>
+    <dsfr-button label="Démarrer le quiz" kind="primary" size="lg" href="/vrai-faux/quiz" markup="a"></dsfr-button>
   {/snippet}
 </HerosRiche>
 

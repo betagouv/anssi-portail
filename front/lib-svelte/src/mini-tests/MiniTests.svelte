@@ -76,7 +76,7 @@
         cible="VraiFaux"
         couleurDeFond="--background-alt-pink-macaron"
         titre="Cyberattaques&nbsp: saurez-vous démêler le vrai du faux&nbsp?"
-        href="/mini-tests/vrai-faux"
+        href="/vrai-faux"
         réactions={donnéesPage?.réactions.VraiFaux ?? {}}
         badge={{
           libellé:
