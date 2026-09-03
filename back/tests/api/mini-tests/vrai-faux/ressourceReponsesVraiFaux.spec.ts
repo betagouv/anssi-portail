@@ -5,7 +5,7 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../../src/api/msc.js';
 import { QuestionnaireVraiFauxTerminé } from '../../../../src/bus/evenements/questionnaireVraiFauxTermine.js';
-import { RéponsesVraieFausseSoumise } from '../../../../src/bus/evenements/reponsesVraieFausseSoumise.js';
+import { RéponseVraieFausseSoumise } from '../../../../src/bus/evenements/reponseVraieFausseSoumise.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepôtQuestionVraieFausseMémoire } from '../../../persistance/entrepotQuestionVraieFausseMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
@@ -47,7 +47,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
     it("publie un événement lorsqu'une réponse est fournie", async () => {
       await posteUneRéponseValide();
 
-      assert(busÉvénements.aRecuUnEvenement(RéponsesVraieFausseSoumise));
+      assert(busÉvénements.aRecuUnEvenement(RéponseVraieFausseSoumise));
     });
 
     it("publie un événement de questionnaire complété lorsqu'une la dernière réponse est fournie", async () => {
