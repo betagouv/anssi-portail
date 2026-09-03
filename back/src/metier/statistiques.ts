@@ -1,3 +1,4 @@
+import { AdaptateurStatistiqueMiniTests } from './adaptateurStatistiqueMiniTests.js';
 import { EntrepotResultatTest } from './entrepotResultatTest.js';
 import { EntrepotUtilisateur } from './entrepotUtilisateur.js';
 import { IdNiveauMaturite } from './resultatTestMaturite.js';
@@ -19,14 +20,19 @@ export type Statistiques = {
   };
   diagnosticsCyber: number;
   satisfactionUtilisateur: number;
+  miniTests: {
+    vraiFaux: number;
+  };
 };
 
 export const calculeStatistiques = async ({
-  entrepotUtilisateur,
+  adaptateurStatistique,
   entrepotResultatTest,
+  entrepotUtilisateur,
 }: {
-  entrepotUtilisateur: EntrepotUtilisateur;
+  adaptateurStatistique: AdaptateurStatistiqueMiniTests;
   entrepotResultatTest: EntrepotResultatTest;
+  entrepotUtilisateur: EntrepotUtilisateur;
 }): Promise<Statistiques> => {
   const tousLesTests = await entrepotResultatTest.tousEnOmettantUtilisateur();
   const listeDesNiveaux: IdNiveauMaturite[] = tousLesTests.map((test) => test.niveau());
@@ -57,6 +63,7 @@ export const calculeStatistiques = async ({
       optimal: 0,
     } as Statistiques['testsMaturite']['parNiveau']
   );
+  const miniTests = await adaptateurStatistique.nombreDeMiniTestsRéalisés();
   return {
     utilisateursInscrits: await entrepotUtilisateur.taille(),
     testsMaturite: {
@@ -65,5 +72,6 @@ export const calculeStatistiques = async ({
     },
     diagnosticsCyber: NOMBRES_DE_DIAGNOSTIC_CYBER,
     satisfactionUtilisateur: SATISFACTION_UTILISATEUR,
+    miniTests,
   };
 };

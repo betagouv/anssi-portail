@@ -4,13 +4,22 @@ import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';
 
-export const ressourceStatistiques = ({ entrepotUtilisateur, entrepotResultatTest }: ConfigurationServeur) => {
+export const ressourceStatistiques = ({
+  adaptateurStatistiqueMiniTests: adaptateurStatistique,
+  entrepotUtilisateur,
+  entrepotResultatTest,
+}: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
     '/',
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
-      const statistiques = await calculeStatistiques({ entrepotResultatTest, entrepotUtilisateur });
+      const statistiques = await calculeStatistiques({
+        entrepotResultatTest,
+        entrepotUtilisateur,
+        adaptateurStatistique,
+      });
+
       reponse.send(statistiques);
     })
   );

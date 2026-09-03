@@ -31,6 +31,7 @@ import { ServiceRécompensesCyberDépart } from './mesures/ressourceRecompensesC
 import { GestionnaireRequêtesComplémentaires, Middleware } from './middlewares/middleware.js';
 import { AdaptateurOIDC } from './oidc/adaptateurOIDC.js';
 import { EntrepôtQuestionVraieFausse } from '../metier/mini-tests/vrai-faux/entrepotQuestionVraieFausse.js';
+import { AdaptateurStatistiqueMiniTests } from '../metier/adaptateurStatistiqueMiniTests.js';
 
 export type ConfigurationServeur = {
   adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -41,6 +42,7 @@ export type ConfigurationServeur = {
   adaptateurOIDC: AdaptateurOIDC;
   adaptateurProfilAnssi: AdaptateurProfilAnssi;
   adaptateurRechercheEntreprise: AdaptateurRechercheEntreprise;
+  adaptateurStatistiqueMiniTests: AdaptateurStatistiqueMiniTests;
   busEvenements: BusEvenements;
   cmsCrisp: CmsCrisp;
   entrepotFavori: EntrepotFavori;
