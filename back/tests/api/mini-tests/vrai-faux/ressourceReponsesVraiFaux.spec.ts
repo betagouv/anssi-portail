@@ -74,6 +74,18 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
         assert.equal(reponse.status, HttpStatusCode.BadRequest);
       });
 
+      it('si un identifiant de question est trop long', async () => {
+        const reponse = await request(serveur)
+          .post('/api/mini-tests/vrai-faux/reponses')
+          .send({
+            idQuestion: new Array(101).fill('a'),
+            réponseUtilisateur: true,
+            idCorrélation: '1234567890',
+          });
+
+        assert.equal(reponse.status, HttpStatusCode.BadRequest);
+      });
+
       it("si auncune réponse utilisateur n'est fournie", async () => {
         const reponse = await request(serveur).post('/api/mini-tests/vrai-faux/reponses').send({
           idQuestion: 'idQuestion1',
@@ -88,6 +100,18 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
           idQuestion: 'idQuestion1',
           réponseUtilisateur: true,
         });
+
+        assert.equal(reponse.status, HttpStatusCode.BadRequest);
+      });
+
+      it('si un identifiant de corrélation est trop long', async () => {
+        const reponse = await request(serveur)
+          .post('/api/mini-tests/vrai-faux/reponses')
+          .send({
+            idQuestion: 'idQuestion1',
+            réponseUtilisateur: true,
+            idCorrélation: new Array(101).fill('a'),
+          });
 
         assert.equal(reponse.status, HttpStatusCode.BadRequest);
       });
