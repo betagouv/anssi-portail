@@ -5,6 +5,8 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
 import { AdaptateurMonAideCyber } from '../../src/infra/adaptateurMonAideCyber.js';
+import { AdaptateurStatistiqueMiniTestsMémoire } from '../../src/infra/adaptateurStatistiqueMiniTestsMémoire.js';
+import { AdaptateurStatistiqueMiniTests } from '../../src/metier/adaptateurStatistiqueMiniTests.js';
 import { EntrepotResultatTest } from '../../src/metier/entrepotResultatTest.js';
 import { EntrepotUtilisateur } from '../../src/metier/entrepotUtilisateur.js';
 import { ResultatTestMaturiteCreateur } from '../metier/ResultatTestMaturiteCreateur.js';
@@ -12,8 +14,6 @@ import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTest
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { configurationDeTestDuServeur } from './fauxObjets.js';
 import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi.js';
-import { AdaptateurStatistiqueMiniTests } from '../../src/metier/adaptateurStatistiqueMiniTests.js';
-import { AdaptateurStatistiqueMiniTestsMémoire } from '../persistance/adaptateurStatistiqueMiniTestsMémoire.js';
 
 describe('La ressource Statistiques', () => {
   describe('sur demande GET', () => {
