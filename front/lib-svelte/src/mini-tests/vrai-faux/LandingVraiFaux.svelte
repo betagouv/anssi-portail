@@ -4,11 +4,12 @@
   import HerosRiche from '../../ui/HerosRiche.svelte';
 
   import IllustrationHerosVraiFaux from './IllustrationHerosVraiFaux.svelte';
+
   const propriétésFilAriane: PropriétésFilAriane = {
     feuille: 'Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux ?',
     branche: {
       nom: 'Faire le test !',
-      lien: '/mini-tests',
+      lien: '/faire-le-test',
     },
   };
 </script>

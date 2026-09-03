@@ -13,7 +13,7 @@
 <dsfr-container>
   <FilAriane
     feuille="Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux ?"
-    branche={{ nom: 'Faire le test !', lien: '/mini-tests' }}
+    branche={{ nom: 'Faire le test !', lien: '/faire-le-test' }}
   />
   <h1 class="fr-h6">Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux ?</h1>
   <Question

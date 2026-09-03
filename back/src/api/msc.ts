@@ -27,6 +27,7 @@ import { ressourcePriseEnCompte } from './mesures/ressourcePriseEnCompte.js';
 import { ressourceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepart.js';
 import { ressourceInfoMiniTests } from './mini-tests/ressourceInfoMiniTests.js';
 import { ressourceReactionMiniTest } from './mini-tests/ressourceReactionMiniTest.js';
+import { ressourceVraiFaux } from './mini-tests/vrai-faux/ressourceVraiFaux.js';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide.js';
 import { ressourceExigencesNis2 } from './nis2/ressourceExigencesNis2.js';
 import { ressourceExigencesNis2Csv } from './nis2/ressourceExigencesNis2Csv.js';
@@ -72,7 +73,6 @@ import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResul
 import { ressourceRetourTestMaturite } from './testMaturite/ressourceRetourTestMaturite.js';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
-import { ressourceVraiFaux } from './mini-tests/vrai-faux/ressourceVraiFaux.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -241,7 +241,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'sante',
     'abonnement-infolettre',
     'confirmation-abonnement-infolettre',
-    'mini-tests',
+    'faire-le-test',
     'mini-tests/vrai-faux',
     'mini-tests/vrai-faux/quiz',
   ];
