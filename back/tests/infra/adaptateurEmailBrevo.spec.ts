@@ -161,6 +161,20 @@ describe('L’adaptateur email Brevo', () => {
       });
     });
 
+    it("mets à jour le parcours en plus de la date de dernière consultation d'une mesure", async () => {
+      await brevo.metsÀJourMesureConsultée(new MesureConsultee('mesure.consultee@mail.com', 'AUTH.5', 'allégé'));
+
+      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
+      assert.deepEqual(donnéesPostAppelées, {
+        event_name: 'mesure_consultee',
+        identifiers: { email_id: 'mesure.consultee@mail.com' },
+        contact_properties: {
+          DATE_DERNIERE_CONSULTATION_MESURE: new Date('2025-03-10'),
+          PARCOURS: 'allégé',
+        },
+      });
+    });
+
     it('mets à jour le nombre de mesure prise en compte ainsi que la date', async () => {
       clientHttp.get = async <T>() => ({
         data: {

@@ -187,7 +187,10 @@ class AdaptateurEmailBrevo implements AdaptateurEmail {
     await this.envoieÉvénement({
       email: événement.email,
       nomÉvénement: 'mesure_consultee',
-      propriétésÀMettreÀJour: { DATE_DERNIERE_CONSULTATION_MESURE: this.adaptateurHorloge.maintenant() },
+      propriétésÀMettreÀJour: {
+        DATE_DERNIERE_CONSULTATION_MESURE: this.adaptateurHorloge.maintenant(),
+        ...(événement.parcours && { PARCOURS: événement.parcours }),
+      },
       messageErreur: "Erreur lors de la mise à jour d'une mesure consultée sur Brévo : ",
     });
   };
