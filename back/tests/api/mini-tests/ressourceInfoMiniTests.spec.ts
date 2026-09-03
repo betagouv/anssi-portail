@@ -57,13 +57,15 @@ describe('La ressource des informations des mini-tests', () => {
     });
 
     it('renvoie le compteur des tests maturité', async () => {
-      await entrepotResultatTest.ajoute(
-        new ResultatTestMaturite({ region: 'FR-NAQ', secteur: 'A', tailleOrganisation: '00', reponses: { a: 0 } })
-      );
+      for (let i = 0; i < 252; i++) {
+        await entrepotResultatTest.ajoute(
+          new ResultatTestMaturite({ region: 'FR-NAQ', secteur: 'A', tailleOrganisation: '00', reponses: { a: 0 } })
+        );
+      }
 
       const reponse = await request(serveur).get('/api/reactions-mini-tests');
 
-      assert.equal(reponse.body.compteurs.MaturiteCyber, 1);
+      assert.equal(reponse.body.compteurs.MaturiteCyber, 200);
     });
   });
 });
