@@ -23,10 +23,10 @@
     .contenu-section {
       display: flex;
       flex-direction: column;
+      gap: 1.5rem;
 
       @include a-partir-de(lg) {
         flex-direction: row;
-        gap: 1.5rem;
       }
 
       .retour {
