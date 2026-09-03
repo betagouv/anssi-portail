@@ -28,6 +28,8 @@
   };
   type DonnéesPage = typeof donnéesInitiales;
 
+  const formateur = Intl.NumberFormat('fr', { notation: 'compact', compactDisplay: 'short' });
+
   let donnéesPage: DonnéesPage | undefined = $state(undefined);
   onMount(async () => {
     const réponse = await axios.get('/api/reactions-mini-tests');
@@ -61,7 +63,7 @@
         badge={{
           libellé:
             (donnéesPage?.compteurs.MaturiteCyber ?? 0) > seuil
-              ? `+${donnéesPage?.compteurs.MaturiteCyber} tests réalisés`
+              ? `+${formateur.format((donnéesPage?.compteurs.MaturiteCyber ?? 0) - 500)} tests réalisés`
               : undefined,
           accent: 'pink-macaron',
         }}
@@ -79,7 +81,7 @@
         badge={{
           libellé:
             (donnéesPage?.compteurs.VraiFaux ?? 0) > seuil
-              ? `+${donnéesPage?.compteurs.VraiFaux} quiz réalisés`
+              ? `+${formateur.format((donnéesPage?.compteurs.VraiFaux ?? 0) - 500)} quiz réalisés`
               : undefined,
           accent: 'purple-glycine',
         }}
