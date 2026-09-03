@@ -1,13 +1,18 @@
 <script lang="ts">
+  import CanonAConfetti from '../../../ui/CanonAConfetti.svelte';
   import FilAriane from '../../../ui/FilAriane.svelte';
   import Question from './question/Question.svelte';
 
   const vrai = () => {
     console.log('vrai');
+    réponseCorrecte = true;
+    setTimeout(() => (réponseCorrecte = false), 2500);
   };
   const faux = () => {
     console.log('faux');
   };
+
+  let réponseCorrecte = $state(false);
 </script>
 
 <dsfr-container>
@@ -22,6 +27,10 @@
     surVoteFaux={faux}
   />
 </dsfr-container>
+
+{#if réponseCorrecte}
+  <CanonAConfetti lectureAutomatique={true} />
+{/if}
 
 <style lang="scss">
   dsfr-container {
