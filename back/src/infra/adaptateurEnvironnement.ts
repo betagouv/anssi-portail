@@ -102,6 +102,9 @@ type AdaptateurEnvironnement = {
     cléAPI: () => string;
     url: () => string;
   };
+  journal: () => {
+    baseDeDonnéesActive: () => boolean;
+  };
 };
 
 const ajouteBarreObliqueFinale = (url: string): string => {
@@ -307,6 +310,9 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
   brevo: () => ({
     cléAPI: () => process.env.BREVO_CLE_API || '',
     url: () => process.env.BREVO_API_URL_BASE || '',
+  }),
+  journal: () => ({
+    baseDeDonnéesActive: () => process.env.BASE_DONNEES_JOURNAL_EN_MEMOIRE !== 'true',
   }),
 };
 

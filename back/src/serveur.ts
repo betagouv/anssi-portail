@@ -24,6 +24,7 @@ import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal.js';
 import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber.js';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi.js';
 import { fabriqueAdaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise.js';
+import { AdaptateurStatistiqueMiniTestsMémoire } from './infra/adaptateurStatistiqueMiniTestsMémoire.js';
 import { AdaptateurStatistiqueMiniTestsPostgres } from './infra/adaptateurStatistiqueMiniTestsPostgres.js';
 import { fabriqueAdaptateurEnrichissement } from './infra/enrichissement/adaptateurEnrichissement.js';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres.js';
@@ -48,21 +49,19 @@ import { EntrepotMesure } from './metier/entrepotMesure.js';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe.js';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
-import { AdaptateurStatistiqueMiniTestsMémoire } from './infra/adaptateurStatistiqueMiniTestsMémoire.js';
 
 const adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge);
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
-const adaptateurJournal = fabriqueAdaptateurJournal();
+const adaptateurJournal = fabriqueAdaptateurJournal(adaptateurEnvironnement);
 const adaptateurProfilAnssi = fabriqueAdaptateurProfilAnssi();
 const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber(adaptateurEnvironnement);
 const adaptateurHachage = fabriqueAdaptateurHachage({
   adaptateurEnvironnement,
 });
 
-const adaptateurStatistiqueMiniTests =
-  process.env.BASE_DONNEES_JOURNAL_EN_MEMOIRE === 'true'
-    ? new AdaptateurStatistiqueMiniTestsMémoire()
-    : new AdaptateurStatistiqueMiniTestsPostgres();
+const adaptateurStatistiqueMiniTests = adaptateurEnvironnement.journal().baseDeDonnéesActive()
+  ? new AdaptateurStatistiqueMiniTestsPostgres()
+  : new AdaptateurStatistiqueMiniTestsMémoire();
 
 const entrepotFavori = new EntrepotFavoriPostgres({ adaptateurHachage });
 const entrepotFinancement = new EntrepotFinancementGrist({
