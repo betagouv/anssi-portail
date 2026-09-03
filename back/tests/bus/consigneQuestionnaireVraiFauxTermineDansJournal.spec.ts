@@ -1,0 +1,86 @@
+import assert from 'node:assert';
+import { describe, it } from 'node:test';
+import { consigneQuestionnaireVraiFauxTermineDansJournal } from '../../src/bus/consigneQuestionnaireVraiFauxTermineDansJournal.js';
+import { QuestionnaireVraiFauxTerminé } from '../../src/bus/evenements/questionnaireVraiFauxTermine.js';
+import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
+import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
+import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
+import { fauxAdaptateurHachage } from '../api/fauxObjets.js';
+
+describe('L’abonnement qui consigne la fin d’un questionnaire vrai/faux dans le journal', () => {
+  it('consigne un évènement QuestionnaireVraiFauxTerminé pour un utilisateur identifié', async () => {
+    let evenementRecu;
+    const adaptateurJournal: AdaptateurJournal = {
+      consigneEvenement: async (donneesEvenement: unknown) => {
+        evenementRecu = donneesEvenement;
+      },
+    };
+    const adaptateurHorloge: AdaptateurHorloge = {
+      maintenant: () => new Date('2025-03-10'),
+    };
+    const adaptateurHachage: AdaptateurHachage = {
+      ...fauxAdaptateurHachage,
+      hache: (valeur) => `${valeur}-hacheHMAC`,
+    };
+
+    await consigneQuestionnaireVraiFauxTermineDansJournal({
+      adaptateurJournal,
+      adaptateurHorloge,
+      adaptateurHachage,
+    })(
+      new QuestionnaireVraiFauxTerminé({
+        idCorrélation: 'id-correlation',
+        email: 'u1@example.com',
+        codeRegion: 'FR-IDF',
+        codeSecteur: 'A',
+        codeTrancheEffectif: '00',
+      })
+    );
+
+    assert.deepEqual(evenementRecu, {
+      type: 'QUESTIONNAIRE_VRAI_FAUX_TERMINE',
+      donnees: {
+        idCorrélation: 'id-correlation',
+        idUtilisateur: 'u1@example.com-hacheHMAC',
+        codeRegion: 'FR-IDF',
+        codeSecteur: 'A',
+        codeTrancheEffectif: '00',
+      },
+      date: new Date('2025-03-10'),
+    });
+  });
+
+  it('consigne un évènement QuestionnaireVraiFauxTerminé pour un utilisateur anonyme', async () => {
+    let evenementRecu;
+    const adaptateurJournal: AdaptateurJournal = {
+      consigneEvenement: async (donneesEvenement: unknown) => {
+        evenementRecu = donneesEvenement;
+      },
+    };
+    const adaptateurHorloge: AdaptateurHorloge = {
+      maintenant: () => new Date('2025-03-10'),
+    };
+    const adaptateurHachage: AdaptateurHachage = {
+      ...fauxAdaptateurHachage,
+      hache: (valeur) => `${valeur}-hacheHMAC`,
+    };
+
+    await consigneQuestionnaireVraiFauxTermineDansJournal({
+      adaptateurJournal,
+      adaptateurHorloge,
+      adaptateurHachage,
+    })(
+      new QuestionnaireVraiFauxTerminé({
+        idCorrélation: 'id-correlation',
+      })
+    );
+
+    assert.deepEqual(evenementRecu, {
+      type: 'QUESTIONNAIRE_VRAI_FAUX_TERMINE',
+      donnees: {
+        idCorrélation: 'id-correlation',
+      },
+      date: new Date('2025-03-10'),
+    });
+  });
+});

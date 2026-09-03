@@ -29,7 +29,9 @@ export type DonneesEvenement =
   | DonnéesParcoursChangé
   | DonnéesParcoursAllégéTerminé
   | DonnéesParcoursCompletTerminé
-  | DonnéesRetourTestMaturité;
+  | DonnéesRetourTestMaturité
+  | DonneesReponseVraieFausseSoumise
+  | DonneesQuestionnaireVraiFauxTerminé;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -128,3 +130,27 @@ type DonnéesParcoursChangé = Evenement<
 type DonnéesParcoursAllégéTerminé = Evenement<'PARCOURS_ALLÉGÉ_TERMINÉ', { idUtilisateur: string }>;
 type DonnéesParcoursCompletTerminé = Evenement<'PARCOURS_COMPLET_TERMINÉ', { idUtilisateur: string }>;
 type DonnéesRetourTestMaturité = Evenement<'RETOUR_TEST_MATURITE_DONNE', { retour: string; commentaire?: string }>;
+
+type DonneesReponseVraieFausseSoumise = Evenement<
+  'REPONSE_VRAIE_FAUSSE_SOUMISE',
+  {
+    idCorrélation: string;
+    idQuestion: string;
+    réponseCorrecte: boolean;
+    idUtilisateur?: string;
+    codeRegion?: CodeRegion;
+    codeSecteur?: CodeSecteur;
+    codeTrancheEffectif?: CodeTrancheEffectif;
+  }
+>;
+
+type DonneesQuestionnaireVraiFauxTerminé = Evenement<
+  'QUESTIONNAIRE_VRAI_FAUX_TERMINE',
+  {
+    idCorrélation: string;
+    idUtilisateur?: string;
+    codeRegion?: CodeRegion;
+    codeSecteur?: CodeSecteur;
+    codeTrancheEffectif?: CodeTrancheEffectif;
+  }
+>;
