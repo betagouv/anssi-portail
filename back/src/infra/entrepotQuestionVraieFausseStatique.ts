@@ -65,7 +65,7 @@ export class EntrepôtQuestionVraieFausseStatique implements EntrepôtQuestionVr
         source: 'ANSSI, Panorama de la cybermenace 2025, section 3.C — page 48',
       },
       {
-        idQuestion: 'paralysieActivitéRançogiciel',
+        idQuestion: 'paralysieActivitéRançongiciel',
         idéeReçueEstVraie: false,
         explications: [
           'Plusieurs semaines de fonctionnement dégradé sont fréquentes.',
