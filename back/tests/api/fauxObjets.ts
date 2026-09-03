@@ -36,6 +36,7 @@ import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDe
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { EntrepôtModuleMémoire } from '../persistance/EntrepôtModuleMémoire.js';
 import { EntrepôtQuestionVraieFausseMémoire } from '../persistance/entrepotQuestionVraieFausseMemoire.js';
+import { AdaptateurStatistiqueMiniTestsMémoire } from '../persistance/adaptateurStatistiqueMiniTestsMémoire.js';
 
 export const ressourceFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.html');
 export const typstFactice = (): string => join(process.cwd(), 'tests', 'ressources', 'factice.typ');
@@ -320,6 +321,7 @@ export const configurationDeTestDuServeur: ConfigurationServeur = {
   adaptateurOIDC: fauxAdaptateurOIDC,
   adaptateurProfilAnssi: fauxAdaptateurProfilAnssi,
   adaptateurRechercheEntreprise: fauxAdaptateurRechercheEntreprise,
+  adaptateurStatistiqueMiniTests: new AdaptateurStatistiqueMiniTestsMémoire(),
   busEvenements: fabriqueBusPourLesTests(),
   cmsCrisp: new MockCmsCrisp(),
   entrepotFavori: new EntrepotFavoriMemoire(),

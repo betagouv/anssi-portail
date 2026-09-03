@@ -214,6 +214,11 @@ const host = process.env.HOST;
       attributionParcoursMesure,
       publieMesureConsultée,
     },
+    adaptateurStatistiqueMiniTests: {
+      nombreDeMiniTestsRéalisés: async () => {
+        throw Error('Utiliser une la vraie implémentation');
+      },
+    },
   });
 
   const annonceEcoute = () => {

@@ -12,17 +12,21 @@ import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTest
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { configurationDeTestDuServeur } from './fauxObjets.js';
 import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi.js';
+import { AdaptateurStatistiqueMiniTests } from '../../src/metier/adaptateurStatistiqueMiniTests.js';
+import { AdaptateurStatistiqueMiniTestsMémoire } from '../persistance/adaptateurStatistiqueMiniTestsMémoire.js';
 
 describe('La ressource Statistiques', () => {
   describe('sur demande GET', () => {
     let serveur: Express;
     let entrepotUtilisateur: EntrepotUtilisateur;
     let entrepotResultatTest: EntrepotResultatTest;
+    let adaptateurStatistiqueMiniTests: AdaptateurStatistiqueMiniTests;
     let monAideCyber: AdaptateurMonAideCyber;
 
     beforeEach(() => {
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
       entrepotResultatTest = new EntrepotResultatTestMemoire();
+      adaptateurStatistiqueMiniTests = new AdaptateurStatistiqueMiniTestsMémoire();
       monAideCyber = {
         creeDemandeAide: async () => {},
       };
@@ -30,6 +34,7 @@ describe('La ressource Statistiques', () => {
         ...configurationDeTestDuServeur,
         entrepotUtilisateur,
         entrepotResultatTest,
+        adaptateurStatistiqueMiniTests,
         adaptateurMonAideCyber: monAideCyber,
       });
     });
@@ -86,6 +91,14 @@ describe('La ressource Statistiques', () => {
         confirme: 4,
         optimal: 5,
       });
+    });
+
+    it('renvoie le nombres de tests vrai-faux réalisés', async () => {
+      adaptateurStatistiqueMiniTests.nombreDeMiniTestsRéalisés = async () => ({ vraiFaux: 10 });
+
+      const reponse = await request(serveur).get('/api/statistiques');
+
+      assert.deepEqual(reponse.body.miniTests.vraiFaux, 10);
     });
   });
 });
