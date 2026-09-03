@@ -24,6 +24,7 @@ import { fabriqueAdaptateurJournal } from './infra/adaptateurJournal.js';
 import { fabriqueAdaptateurMonAideCyber } from './infra/adaptateurMonAideCyber.js';
 import { fabriqueAdaptateurProfilAnssi } from './infra/adaptateurProfilAnssi.js';
 import { fabriqueAdaptateurRechercheEntreprise } from './infra/adaptateurRechercheEntreprise.js';
+import { AdaptateurStatistiqueMiniTestsPostgres } from './infra/adaptateurStatistiqueMiniTestsPostgres.js';
 import { fabriqueAdaptateurEnrichissement } from './infra/enrichissement/adaptateurEnrichissement.js';
 import { EntrepotFavoriPostgres } from './infra/entrepotFavoriPostgres.js';
 import { EntrepotFinancementGrist } from './infra/entrepotFinancementGrist.js';
@@ -31,6 +32,7 @@ import { EntrepotGuideGrist } from './infra/entrepotGuideGrist.js';
 import { EntrepotGuideTravailGrist } from './infra/entrepotGuideTravailGrist.js';
 import { EntrepotMesurePostgres } from './infra/entrepotMesurePostgres.js';
 import { EntrepotPriseEnComptePostgres } from './infra/entrepotPriseEnComptePostgres.js';
+import { EntrepôtQuestionVraieFausseStatique } from './infra/entrepotQuestionVraieFausseStatique.js';
 import { EntrepotReactionMiniTestPostgres } from './infra/entrepotReactionMiniTestPostgres.js';
 import { EntrepotResultatTestPostgres } from './infra/entrepotResultatTestPostgres.js';
 import { EntrepotSecretHachagePostgres } from './infra/entrepotSecretHachagePostgres.js';
@@ -46,7 +48,7 @@ import { EntrepotMesure } from './metier/entrepotMesure.js';
 import { GenerateurAleatoireCodeSessionDeGroupe } from './metier/generateurCodeSessionDeGroupe.js';
 import { EntrepotExigence } from './metier/nis2/entrepotExigence.js';
 import { fabriqueServiceSanteGuides } from './metier/serviceSanteGuides.js';
-import { EntrepôtQuestionVraieFausseStatique } from './infra/entrepotQuestionVraieFausseStatique.js';
+import { AdaptateurStatistiqueMiniTestsMémoire } from './infra/adaptateurStatistiqueMiniTestsMémoire.js';
 
 const adaptateurEmail = fabriqueAdaptateurEmail(adaptateurEnvironnement, adaptateurHorloge);
 const adaptateurChiffrement = fabriqueAdaptateurChiffrement(adaptateurEnvironnement);
@@ -56,6 +58,11 @@ const adaptateurMonAideCyber = fabriqueAdaptateurMonAideCyber(adaptateurEnvironn
 const adaptateurHachage = fabriqueAdaptateurHachage({
   adaptateurEnvironnement,
 });
+
+const adaptateurStatistiqueMiniTests =
+  process.env.BASE_DONNEES_JOURNAL_EN_MEMOIRE === 'true'
+    ? new AdaptateurStatistiqueMiniTestsMémoire()
+    : new AdaptateurStatistiqueMiniTestsPostgres();
 
 const entrepotFavori = new EntrepotFavoriPostgres({ adaptateurHachage });
 const entrepotFinancement = new EntrepotFinancementGrist({
@@ -214,11 +221,7 @@ const host = process.env.HOST;
       attributionParcoursMesure,
       publieMesureConsultée,
     },
-    adaptateurStatistiqueMiniTests: {
-      nombreDeMiniTestsRéalisés: async () => {
-        throw Error('Utiliser une la vraie implémentation');
-      },
-    },
+    adaptateurStatistiqueMiniTests,
   });
 
   const annonceEcoute = () => {
