@@ -19,7 +19,10 @@ export const adaptateurEmailConsole = (): AdaptateurEmail => ({
     console.log(`On inscrit ${email} à l’infolettre`);
   },
   metsÀJourMesureConsultée: async (événement: MesureConsultee) => {
-    console.log(`On signale que ${événement.email} a consulté la mesure ${événement.idMesure}`);
+    console.log(
+      `On signale que ${événement.email} a consulté la mesure ${événement.idMesure}` +
+        (événement.parcours ? ` (parcours: ${événement.parcours})` : '')
+    );
   },
   metsÀJourMesurePriseEnCompte: async (événement: MesurePriseEnCompte) => {
     console.log(`On signale que ${événement.email} a pris en compte la mesure ${événement.idMesure}`);
