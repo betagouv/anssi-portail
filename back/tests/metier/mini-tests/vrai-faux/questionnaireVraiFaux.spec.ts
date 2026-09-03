@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
-import { RéponsesVraieFausseSoumise } from '../../../../src/bus/evenements/reponsesVraieFausseSoumise.js';
+import { RéponseVraieFausseSoumise } from '../../../../src/bus/evenements/reponseVraieFausseSoumise.js';
 import { QuestionnaireVraiFaux } from '../../../../src/metier/mini-tests/vrai-faux/questionnaireVraiFaux.js';
 import { jeanneDupont, questionVraieFaussePME } from '../../../api/objetsPretsALEmploi.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
@@ -27,7 +27,7 @@ describe('Un questionnaire vrai-faux', () => {
         réponseUtilisateur: false,
       });
 
-      const événement = busÉvénements.recupereEvenement(RéponsesVraieFausseSoumise);
+      const événement = busÉvénements.recupereEvenement(RéponseVraieFausseSoumise);
       assert.deepEqual(événement, {
         idCorrélation: 'idCorrélation',
         idQuestion: 'idQuestion1',
@@ -47,7 +47,7 @@ describe('Un questionnaire vrai-faux', () => {
         réponseUtilisateur: true,
       });
 
-      const événement = busÉvénements.recupereEvenement(RéponsesVraieFausseSoumise);
+      const événement = busÉvénements.recupereEvenement(RéponseVraieFausseSoumise);
       assert.deepEqual(événement, {
         idCorrélation: 'idCorrélation',
         idQuestion: 'idQuestion1',
@@ -71,7 +71,7 @@ describe('Un questionnaire vrai-faux', () => {
           message: 'réponse à une question inconnue : idInconnu',
         }
       );
-      assert(busÉvénements.naPasRecuDEvenement(RéponsesVraieFausseSoumise));
+      assert(busÉvénements.naPasRecuDEvenement(RéponseVraieFausseSoumise));
     });
 
     it('signale la complétion du questionnaire si la réponse cible la dernière question', async () => {
@@ -107,7 +107,7 @@ describe('Un questionnaire vrai-faux', () => {
           utilisateur: jeanneDupont,
         });
 
-        const événement = busÉvénements.recupereEvenement(RéponsesVraieFausseSoumise);
+        const événement = busÉvénements.recupereEvenement(RéponseVraieFausseSoumise);
         assert.equal(événement?.email, 'jeanne.dupont@user.com');
         assert.equal(événement?.codeSecteur, 'A');
         assert.equal(événement?.codeRegion, 'FR-971');
