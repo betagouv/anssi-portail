@@ -15,7 +15,8 @@
     "axios": "catalog:",
     "entities": "catalog:",
     "isomorphic-dompurify": "catalog:",
-    "svelte": "catalog:"
+    "svelte": "catalog:",
+    "uuid": "catalog:"
   },
   "devDependencies": {}
 }

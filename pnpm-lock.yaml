@@ -223,6 +223,9 @@ catalogs:
     tsx:
       specifier: ^4.23.12
       version: 4.23.12
+    uuid:
+      specifier: ^14.0.1
+      version: 14.0.2
 
 overrides:
   '@babel/core@<=7.29.0': '>=7.29.6'
@@ -384,7 +387,7 @@ importers:
         specifier: 'catalog:'
         version: 5.56.10(@typescript-eslint/types@8.68.0)
       uuid:
-        specifier: ^14.0.1
+        specifier: 'catalog:'
         version: 14.0.2
       zod:
         specifier: ^4.4.3
@@ -509,6 +512,9 @@ importers:
       svelte:
         specifier: 'catalog:'
         version: 5.56.10(@typescript-eslint/types@8.68.0)
+      uuid:
+        specifier: 'catalog:'
+        version: 14.0.2
 
   front/lib-svelte:
     dependencies:

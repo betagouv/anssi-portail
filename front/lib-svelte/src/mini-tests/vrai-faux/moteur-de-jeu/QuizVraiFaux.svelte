@@ -1,12 +1,15 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
+  import { v7 as uuidv7 } from 'uuid';
+  import { publieRéponseQuestionnaireVraiFaux } from '../../../passerelles/mini-tests/publicationRéponses';
   import Bouton from '../../../ui/Bouton.svelte';
   import CanonAConfetti from '../../../ui/CanonAConfetti.svelte';
   import FilAriane from '../../../ui/FilAriane.svelte';
   import ScoreFinalQuizVraiFaux from '../ScoreFinalQuizVraiFaux.svelte';
   import Question from './question/Question.svelte';
 
+  const idCorrélation = uuidv7();
   let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' | 'score-final' = $state('question');
 
   const afficheIdéeReçueSuivante = () => {
@@ -14,10 +17,15 @@
     indexIdéeReçue = indexIdéeReçue + 1;
   };
 
-  const afficheRéponse = (réponseDonnée: boolean) => {
+  const afficheRéponse = async (réponseDonnée: boolean) => {
     const réponseCorrecte = idéeReçueCourante.idéeReçueEstVraie === réponseDonnée;
     mode = réponseCorrecte ? 'bonne-réponse' : 'mauvaise-réponse';
     réponses.push(réponseCorrecte);
+    await publieRéponseQuestionnaireVraiFaux({
+      idCorrélation,
+      idQuestion: idéeReçueCourante.idQuestion,
+      réponseUtilisateur: réponseDonnée,
+    });
   };
 
   const obtenirScore = () => {

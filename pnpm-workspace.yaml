@@ -41,6 +41,7 @@ catalog:
   prettier: 3.9.6
   svelte: 5.56.10
   tsx: ^4.23.12
+  uuid: ^14.0.1
 
 minimumReleaseAgeExclude:
   - '@lab-anssi/ui-kit'
