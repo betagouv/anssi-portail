@@ -4,7 +4,7 @@
 
 <div>
   <svg
-    class="picto-quiz"
+    class="cartes"
     viewBox="0 0 192 128"
     width="192"
     height="128"
@@ -128,7 +128,7 @@
 </div>
 
 <style lang="scss">
-  .picto-quiz {
+  .cartes {
     .piece {
       transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
