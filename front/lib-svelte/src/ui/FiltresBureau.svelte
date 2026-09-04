@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { onMount, type Snippet } from 'svelte';
-  import EnteteFiltres from '../catalogue/EnteteFiltres.svelte';
   import { estServeur } from '$plateforme/environnement';
+  import type { Snippet } from 'svelte';
+  import EnteteFiltres from '../catalogue/EnteteFiltres.svelte';
+  import { détecteRendu } from '../utils/rendu.svelte';
 
   interface Props {
     filtreActif: boolean;
@@ -10,18 +11,10 @@
   }
 
   let { filtreActif, avantEntete, children }: Props = $props();
-  let estBureau = $state(false);
-
-  onMount(() => {
-    const mql = window.matchMedia('(min-width: 992px)');
-    const actualiseAffichage = (e: MediaQueryListEvent) => (estBureau = e.matches);
-    mql.addEventListener('change', actualiseAffichage);
-    estBureau = mql.matches;
-    return () => mql.removeEventListener('change', actualiseAffichage);
-  });
+  const rendu = détecteRendu();
 </script>
 
-{#if estBureau || estServeur}
+{#if rendu.estBureau || estServeur}
   <div class="sommaire sommaire-deplie">
     <div class="barre-filtres">
       {@render avantEntete?.()}
