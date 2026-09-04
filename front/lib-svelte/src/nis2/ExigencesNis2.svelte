@@ -1,8 +1,9 @@
 <script lang="ts">
   import axios from 'axios';
-  import { onMount, untrack } from 'svelte';
+  import { untrack } from 'svelte';
   import ConteneurLarge from '../ui/ConteneurLarge.svelte';
   import Lien from '../ui/Lien.svelte';
+  import { détecteRendu } from '../utils/rendu.svelte';
   import Avertissements from './Avertissements.svelte';
   import { type Exigence, fabriqueDExigence, type ReferentielSelectionne } from './exigence.type';
   import Panneau from './panneau/Panneau.svelte';
@@ -22,6 +23,8 @@
     exigencesStore.initialise(exigencesInitiales);
   }
 
+  const rendu = détecteRendu();
+
   let exigences = $state<Exigence[]>([]);
   let sensComparaison = $state<'NIS2_VERS_CIBLE' | 'SOURCE_VERS_NIS2'>('NIS2_VERS_CIBLE');
 
@@ -29,7 +32,6 @@
 
   let referentielSelectionne = $state<ReferentielSelectionne | ''>('');
   let langueSelectionnee = $state<'FR' | 'EN'>('FR');
-  let estBureau = $state(false);
   let chargement = $state(false);
 
   const recupereLesExigences = async () => {
@@ -39,14 +41,6 @@
     exigences = axiosResponse.data.map((e) => fabriqueDExigence(source.length === 0 ? 'NIS2' : source, cible, e));
     $exigencesStore = exigences;
   };
-
-  onMount(async () => {
-    const mql = window.matchMedia('(min-width: 992px)');
-    mql.addEventListener('change', (e: MediaQueryListEvent) => {
-      estBureau = e.matches;
-    });
-    estBureau = mql.matches;
-  });
 
   const source = $derived(
     sensComparaison === 'NIS2_VERS_CIBLE'
@@ -97,7 +91,7 @@
 </script>
 
 <ConteneurLarge mode={mode === 'LISTE' ? 'STANDARD' : 'LARGE'}>
-  <Avertissements {estBureau} />
+  <Avertissements estBureau={rendu.estBureau} />
   <div class="entete">
     <div class="titre">
       <h2>Exigences applicables à NIS&nbsp;2</h2>
@@ -138,7 +132,7 @@
       bind:referentielSelectionne
       bind:langueSelectionnee
       bind:sensComparaison
-      {estBureau}
+      estBureau={rendu.estBureau}
       {featureFlagNis2CyFun23}
     />
   </div>
