@@ -11,8 +11,9 @@
     href: string;
     réactions: Record<string, number>;
     badge: { libellé: string | undefined; accent: string };
+    estimationEnMinutes?: number;
   };
-  let { couleurDeFond, cible, image, titre, href, réactions, badge }: Props = $props();
+  let { couleurDeFond, cible, image, titre, href, réactions, badge, estimationEnMinutes }: Props = $props();
 
   const { libellé: libelléDuBadge, accent: accentDuBadge } = $derived(badge);
 
@@ -44,6 +45,7 @@
     onmouseenter={() => (survol = true)}
     onmouseleave={() => (survol = false)}
     has-header-badge={libelléDuBadge}
+    hasDetailEnd={estimationEnMinutes}
   >
     <div slot="headerbadges">
       <dsfr-badge accent={accentDuBadge} label={`🔥 ${libelléDuBadge}`} size="md" type="accent"> </dsfr-badge>
@@ -55,6 +57,10 @@
       <h3>
         <a {href}>{titre}</a>
       </h3>
+    </div>
+    <div slot="contentend" class="estimation texte-mention-xs">
+      <lab-anssi-icone nom="timer-line" taille="sm"></lab-anssi-icone>
+      <p>{estimationEnMinutes} minutes</p>
     </div>
   </dsfr-card>
   {#if !estServeur}
@@ -81,6 +87,16 @@
         display: grid;
         place-items: center;
         aspect-ratio: 16/9;
+      }
+
+      .estimation {
+        display: flex;
+        gap: 0.5rem;
+        margin: 0;
+
+        p {
+          margin: 0;
+        }
       }
     }
   }

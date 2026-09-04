@@ -67,6 +67,7 @@
               : undefined,
           accent: 'pink-macaron',
         }}
+        estimationEnMinutes={5}
       >
         {#snippet image(survol)}
           <PlanteAnimee {survol} />
@@ -85,6 +86,7 @@
               : undefined,
           accent: 'purple-glycine',
         }}
+        estimationEnMinutes={3}
       >
         {#snippet image(survol)}
           <TestVraiFauxAnime {survol} />
