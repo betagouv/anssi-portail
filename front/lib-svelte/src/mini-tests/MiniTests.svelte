@@ -28,7 +28,7 @@
   };
   type DonnéesPage = typeof donnéesInitiales;
 
-  const formateur = Intl.NumberFormat('fr', { notation: 'compact', compactDisplay: 'short' });
+  const formateur = Intl.NumberFormat('fr', { notation: 'compact', compactDisplay: 'short', roundingMode: 'floor' });
 
   let donnéesPage: DonnéesPage | undefined = $state(undefined);
   onMount(async () => {
@@ -63,7 +63,7 @@
         badge={{
           libellé:
             (donnéesPage?.compteurs.MaturiteCyber ?? 0) > seuil
-              ? `+${formateur.format((donnéesPage?.compteurs.MaturiteCyber ?? 0) - 500)} tests réalisés`
+              ? `+${formateur.format(donnéesPage?.compteurs.MaturiteCyber ?? 0)} tests réalisés`
               : undefined,
           accent: 'pink-macaron',
         }}
@@ -81,7 +81,7 @@
         badge={{
           libellé:
             (donnéesPage?.compteurs.VraiFaux ?? 0) > seuil
-              ? `+${formateur.format((donnéesPage?.compteurs.VraiFaux ?? 0) - 500)} quiz réalisés`
+              ? `+${formateur.format(donnéesPage?.compteurs.VraiFaux ?? 0)} quiz réalisés`
               : undefined,
           accent: 'purple-glycine',
         }}
