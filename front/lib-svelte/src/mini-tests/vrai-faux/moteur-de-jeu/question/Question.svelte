@@ -158,6 +158,7 @@
 
 <style lang="scss">
   @use '../../../../../../assets/styles/responsive' as *;
+  @use '../../../../../../assets/styles/grille.scss' as *;
 
   .conteneur-de-choix {
     --icon-size: 1.5rem;
@@ -263,6 +264,11 @@
           grid-area: vrai;
         }
       }
+    }
+
+    @include a-partir-de(lg) {
+      width: taille-pour-colonnes(10);
+      margin-inline: taille-pour-colonnes(1);
     }
   }
 
