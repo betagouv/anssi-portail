@@ -9,6 +9,10 @@
     mode = 'bonne-réponse';
   };
 
+  const afficheMauvaiseRéponse = () => {
+    mode = 'mauvaise-réponse';
+  };
+
   const afficheAffirmationSuivante = () => {
     mode = 'question';
     indexAffirmation = (indexAffirmation + 1) % affirmations.length;
@@ -21,7 +25,7 @@
     if (réponseCorrecte) {
       afficheBonneRéponse();
     } else {
-      afficheAffirmationSuivante();
+      afficheMauvaiseRéponse();
     }
   };
   const faux = () => {
@@ -31,7 +35,7 @@
     if (réponseCorrecte) {
       afficheBonneRéponse();
     } else {
-      afficheAffirmationSuivante();
+      afficheMauvaiseRéponse();
     }
   };
 
@@ -72,6 +76,16 @@
       source: 'ANSSI, Panorama de la cybermenace 2025, section 1.A — pages 10-11.',
     },
   ];
+  const badge = $derived.by(() => {
+    switch (mode) {
+      case 'bonne-réponse':
+        return { label: 'Bonne réponse', status: 'success' };
+      case 'mauvaise-réponse':
+        return { label: 'Mauvaise réponse', status: 'error' };
+      default:
+        return { label: '', status: '' };
+    }
+  });
 </script>
 
 <dsfr-container>
@@ -83,10 +97,10 @@
 
   {#if mode === 'question'}
     <Question question={affirmations[indexAffirmation].phrase} surVoteVrai={vrai} surVoteFaux={faux} />
-  {:else if mode === 'bonne-réponse'}
-    <div class="bonne-réponse">
-      <dsfr-badge label="Bonne réponse" size="md" type="status" status="success"></dsfr-badge>
-      <dsfr-tag class="compte" size="md" label="1/6"></dsfr-tag>
+  {:else}
+    <div class={['réponse', mode]}>
+      <dsfr-badge label={badge.label} size="md" type="status" status={badge.status}></dsfr-badge>
+      <dsfr-tag class="compte" size="md" label="{indexAffirmation}/6"></dsfr-tag>
       <h2 class="fr-h6">{affirmations[indexAffirmation].titre}</h2>
       {#each affirmations[indexAffirmation].explications as explication, index (index)}
         <p>{explication}</p>
@@ -95,9 +109,9 @@
       <p class="texte-mention-xs">Source : {affirmations[indexAffirmation].source}</p>
       <Bouton libelle="Suivant" surClic={afficheAffirmationSuivante} icone="arrow-right-line" iconeADroite />
     </div>
-    <CanonAConfetti lectureAutomatique={true} />
-  {:else if mode === 'mauvaise-réponse'}
-    <p>Mauvaise réponse !</p>
+    {#if mode === 'bonne-réponse'}
+      <CanonAConfetti lectureAutomatique={true} />
+    {/if}
   {/if}
 </dsfr-container>
 
@@ -119,7 +133,11 @@
       background-color: var(--success-975-75);
     }
 
-    .bonne-réponse {
+    &:has(.mauvaise-réponse) {
+      background-color: var(--error-975-75);
+    }
+
+    .réponse {
       align-items: center;
       background: var(--background-default-grey);
       border-radius: 0.5rem;
