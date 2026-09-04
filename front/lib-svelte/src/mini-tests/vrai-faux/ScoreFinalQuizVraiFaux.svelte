@@ -12,6 +12,7 @@
 
   const { réponses }: Props = $props();
 
+  const nombreDeBonnesRéponses = $derived(réponses.filter((r) => r).length);
   const sourceIllustration = (réponseCorrecte: boolean) =>
     réponseCorrecte ? '/assets/icones/coche-verte.svg' : '/assets/icones/croix-rouge.svg';
   const commentaireIllustration = (réponseCorrecte: boolean, positionQuestion: number, nombreQuestions: number) =>
@@ -21,7 +22,7 @@
 <dsfr-container>
   <div class="encart-score">
     <p class="texte-mention-xs">Score</p>
-    <p class="alternatif-xs">2/6</p>
+    <p class="alternatif-xs">{nombreDeBonnesRéponses}/{réponses.length}</p>
     <div class="coches">
       {#each réponses as réponse, index (index)}
         {@const src = sourceIllustration(réponse)}
