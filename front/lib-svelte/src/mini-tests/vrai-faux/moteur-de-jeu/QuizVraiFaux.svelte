@@ -14,7 +14,7 @@
   };
 
   const afficheRéponse = (réponseDonnée: boolean) => {
-    const réponseCorrecte = ideéReçueCourante.idéeReçueEstVraie === réponseDonnée;
+    const réponseCorrecte = idéeReçueCourante.idéeReçueEstVraie === réponseDonnée;
     mode = réponseCorrecte ? 'bonne-réponse' : 'mauvaise-réponse';
   };
 
@@ -38,7 +38,7 @@
     idéesReçues = réponse.data;
   });
 
-  const ideéReçueCourante = $derived(idéesReçues[indexIdéeReçue]);
+  const idéeReçueCourante = $derived(idéesReçues[indexIdéeReçue]);
   const badge = $derived.by(() => {
     switch (mode) {
       case 'bonne-réponse':
@@ -58,12 +58,13 @@
   />
   <h1 class="fr-h6">Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?</h1>
 
-  {#if ideéReçueCourante}
+  {#if idéeReçueCourante}
     {#if mode === 'question'}
       <Question
-        question={ideéReçueCourante.idéeReçue.texte}
+        question={idéeReçueCourante.idéeReçue.texte}
         {indexIdéeReçue}
         nombreIdéesReçues={idéesReçues.length}
+        emoji={idéeReçueCourante.idéeReçue.emoji}
         surVoteVrai={() => afficheRéponse(true)}
         surVoteFaux={() => afficheRéponse(false)}
       />
@@ -71,12 +72,12 @@
       <div class={['réponse', mode]}>
         <dsfr-badge label={badge.label} size="md" type="status" status={badge.status}></dsfr-badge>
         <dsfr-tag class="compte" size="md" label="{indexIdéeReçue + 1}/{idéesReçues.length}"></dsfr-tag>
-        <h2 class="fr-h6">{ideéReçueCourante.réponse}</h2>
-        {#each ideéReçueCourante.explications as explication, index (index)}
+        <h2 class="fr-h6">{idéeReçueCourante.réponse}</h2>
+        {#each idéeReçueCourante.explications as explication, index (index)}
           <p>{explication}</p>
         {/each}
         <hr />
-        <p class="texte-mention-xs">Source : {ideéReçueCourante.source}</p>
+        <p class="texte-mention-xs">Source : {idéeReçueCourante.source}</p>
         <Bouton libelle="Suivant" surClic={afficheIdéeReçueSuivante} icone="arrow-right-line" iconeADroite />
       </div>
       {#if mode === 'bonne-réponse'}

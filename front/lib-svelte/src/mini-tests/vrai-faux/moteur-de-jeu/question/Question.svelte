@@ -6,11 +6,12 @@
     question: string;
     indexIdéeReçue: number;
     nombreIdéesReçues: number;
+    emoji: string;
     surVoteVrai: () => void;
     surVoteFaux: () => void;
   }
 
-  let { question, indexIdéeReçue, nombreIdéesReçues, surVoteVrai, surVoteFaux }: Props = $props();
+  let { question, indexIdéeReçue, nombreIdéesReçues, emoji, surVoteVrai, surVoteFaux }: Props = $props();
 
   type Réponse = 'faux' | 'vrai';
 
@@ -139,7 +140,7 @@
     style:--rotation={`${rotation}deg`}
   >
     <dsfr-tag class="compte" size="md" label="{indexIdéeReçue + 1}/{nombreIdéesReçues}"></dsfr-tag>
-    <p class="fr-h2">🏢</p>
+    <p class="fr-h2">{emoji}</p>
     <h2 class="fr-h3">{question}</h2>
   </div>
   <div class="boutons-de-vote">
