@@ -98,11 +98,7 @@
         image="stat-utilisateurs-inscrits"
         mesure={statistiques.utilisateursInscrits}
       />
-      <Tuile
-        description="Tests de maturité cyber"
-        image="stat-test-maturite"
-        mesure={statistiques.testsMaturite.total}
-      />
+      <Tuile description="Tests cyber" image="stat-test-cyber" mesure={statistiques.testsRéalisés} />
       <Tuile description="Diagnostics cyber" image="stat-diagnostics-cyber" mesure={statistiques.diagnosticsCyber} />
     </div>
     <div class="repartition">
