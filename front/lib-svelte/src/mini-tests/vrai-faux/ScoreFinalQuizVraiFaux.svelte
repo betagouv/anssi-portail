@@ -92,7 +92,11 @@
   {/snippet}
 </Alternatives>
 <dsfr-container>
-  <PartageTest />
+  <PartageTest
+    cheminPartagé="/vrai-faux/quiz"
+    sujetMail="Cyber­attaques : saurez-vous démêler le vrai du faux ?"
+    typeDeRetour="vrai-faux"
+  />
 </dsfr-container>
 
 <style lang="scss">

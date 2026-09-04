@@ -1,3 +1,7 @@
+<script module lang="ts">
+  export type TypeDeRetour = 'test-maturité' | 'vrai-faux' | 'mesure';
+</script>
+
 <script lang="ts">
   import axios from 'axios';
   import type { Snippet } from 'svelte';
@@ -11,10 +15,20 @@
 
   type Props = {
     clé: string;
-    urlDePost: string;
+    typeDeRetour: TypeDeRetour;
+    identifiantCible?: string;
     children?: Snippet;
   };
-  const { clé, urlDePost, children }: Props = $props();
+  const { clé, typeDeRetour, children, identifiantCible }: Props = $props();
+  const urlDePost = $derived.by(() => {
+    if (typeDeRetour === 'vrai-faux') {
+      return '';
+    }
+    if (typeDeRetour === 'mesure') {
+      return `/api/mesures/${identifiantCible}/avis`;
+    }
+    return '/api/retour-test-maturite';
+  });
 
   const retourUtilisateur: RetourUtilisateur | undefined = $derived(clé ? récupèreRetour(clé) : undefined);
   let étatBoutons = $derived(retourUtilisateur?.positif);

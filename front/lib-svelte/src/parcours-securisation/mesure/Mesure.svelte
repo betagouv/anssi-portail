@@ -118,7 +118,11 @@
         <div class="contenu-section avis-utilisateur">
           {#if idMesure}
             <div class="retour-utilisateur">
-              <RetourUtilisateurSurContenu clé={`mesures:${idMesure}`} urlDePost={`/api/mesures/${idMesure}/avis`} />
+              <RetourUtilisateurSurContenu
+                clé={`mesures:${idMesure}`}
+                identifiantCible={idMesure}
+                typeDeRetour="mesure"
+              />
             </div>
           {/if}
           <div class="section-aide recyf">
