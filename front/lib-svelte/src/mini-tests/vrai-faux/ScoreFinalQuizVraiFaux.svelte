@@ -5,6 +5,17 @@
   import TagProgrammeGratuit from '../../parcours-securisation/TagProgrammeGratuit.svelte';
   import PartageTest from '../../test-maturite/PartageTest.svelte';
   import Alternatives from '../../ui/Alternatives.svelte';
+
+  type Props = {
+    réponses: boolean[];
+  };
+
+  const { réponses }: Props = $props();
+
+  const sourceIllustration = (réponseCorrecte: boolean) =>
+    réponseCorrecte ? '/assets/icones/coche-verte.svg' : '/assets/icones/croix-rouge.svg';
+  const commentaireIllustration = (réponseCorrecte: boolean, positionQuestion: number, nombreQuestions: number) =>
+    `${réponseCorrecte ? 'bonne' : 'mauvaise'} réponse donnée à la question ${positionQuestion} sur ${nombreQuestions}`;
 </script>
 
 <dsfr-container>
@@ -12,12 +23,11 @@
     <p class="texte-mention-xs">Score</p>
     <p class="alternatif-xs">2/6</p>
     <div class="coches">
-      <img src="/assets/icones/coche-verte.svg" alt="" />
-      <img src="/assets/icones/croix-rouge.svg" alt="" />
-      <img src="/assets/icones/coche-verte.svg" alt="" />
-      <img src="/assets/icones/croix-rouge.svg" alt="" />
-      <img src="/assets/icones/croix-rouge.svg" alt="" />
-      <img src="/assets/icones/croix-rouge.svg" alt="" />
+      {#each réponses as réponse, index (index)}
+        {@const src = sourceIllustration(réponse)}
+        {@const alt = commentaireIllustration(réponse, index + 1, réponses.length)}
+        <img {src} {alt} />
+      {/each}
     </div>
   </div>
 
