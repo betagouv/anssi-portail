@@ -4,9 +4,10 @@
   import Bouton from '../../../ui/Bouton.svelte';
   import CanonAConfetti from '../../../ui/CanonAConfetti.svelte';
   import FilAriane from '../../../ui/FilAriane.svelte';
+  import ScoreFinalQuizVraiFaux from '../ScoreFinalQuizVraiFaux.svelte';
   import Question from './question/Question.svelte';
 
-  let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' = $state('question');
+  let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' | 'score-final' = $state('question');
 
   const afficheIdéeReçueSuivante = () => {
     mode = 'question';
@@ -16,6 +17,10 @@
   const afficheRéponse = (réponseDonnée: boolean) => {
     const réponseCorrecte = idéeReçueCourante.idéeReçueEstVraie === réponseDonnée;
     mode = réponseCorrecte ? 'bonne-réponse' : 'mauvaise-réponse';
+  };
+
+  const obtenirScore = () => {
+    mode = 'score-final';
   };
 
   type IdéeReçue = {
@@ -51,41 +56,52 @@
   });
 </script>
 
-<dsfr-container>
+<dsfr-container class={mode}>
   <FilAriane
     feuille="Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?"
     branche={{ nom: 'Faire le test !', lien: '/faire-le-test' }}
   />
-  <h1 class="fr-h6">Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?</h1>
+</dsfr-container>
 
-  {#if idéeReçueCourante}
-    {#if mode === 'question'}
-      <Question
-        question={idéeReçueCourante.idéeReçue.texte}
-        {indexIdéeReçue}
-        nombreIdéesReçues={idéesReçues.length}
-        emoji={idéeReçueCourante.idéeReçue.emoji}
-        surVoteVrai={() => afficheRéponse(true)}
-        surVoteFaux={() => afficheRéponse(false)}
-      />
-    {:else}
-      <div class={['réponse', mode]}>
-        <dsfr-badge label={badge.label} size="md" type="status" status={badge.status}></dsfr-badge>
-        <dsfr-tag class="compte" size="md" label="{indexIdéeReçue + 1}/{idéesReçues.length}"></dsfr-tag>
-        <h2 class="fr-h6">{idéeReçueCourante.réponse}</h2>
-        {#each idéeReçueCourante.explications as explication, index (index)}
-          <p>{explication}</p>
-        {/each}
-        <hr />
-        <p class="texte-mention-xs">Source : {idéeReçueCourante.source}</p>
-        <Bouton libelle="Suivant" surClic={afficheIdéeReçueSuivante} icone="arrow-right-line" iconeADroite />
-      </div>
-      {#if mode === 'bonne-réponse'}
-        <CanonAConfetti lectureAutomatique={true} />
+{#if mode === 'score-final'}
+  <ScoreFinalQuizVraiFaux />
+{:else}
+  <dsfr-container class={mode}>
+    <h1 class="fr-h6">Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?</h1>
+
+    {#if idéeReçueCourante}
+      {#if mode === 'question'}
+        <Question
+          question={idéeReçueCourante.idéeReçue.texte}
+          {indexIdéeReçue}
+          nombreIdéesReçues={idéesReçues.length}
+          emoji={idéeReçueCourante.idéeReçue.emoji}
+          surVoteVrai={() => afficheRéponse(true)}
+          surVoteFaux={() => afficheRéponse(false)}
+        />
+      {:else}
+        <div class="réponse">
+          <dsfr-badge label={badge.label} size="md" type="status" status={badge.status}></dsfr-badge>
+          <dsfr-tag class="compte" size="md" label="{indexIdéeReçue + 1}/{idéesReçues.length}"></dsfr-tag>
+          <h2 class="fr-h6">{idéeReçueCourante.réponse}</h2>
+          {#each idéeReçueCourante.explications as explication, index (index)}
+            <p>{explication}</p>
+          {/each}
+          <hr />
+          <p class="texte-mention-xs">Source : {idéeReçueCourante.source}</p>
+          {#if indexIdéeReçue === idéesReçues.length - 1}
+            <Bouton libelle="Obtenir mon score" surClic={obtenirScore} />
+          {:else}
+            <Bouton libelle="Suivant" surClic={afficheIdéeReçueSuivante} icone="arrow-right-line" iconeADroite />
+          {/if}
+        </div>
+        {#if mode === 'bonne-réponse'}
+          <CanonAConfetti lectureAutomatique={true} />
+        {/if}
       {/if}
     {/if}
-  {/if}
-</dsfr-container>
+  </dsfr-container>
+{/if}
 
 <style lang="scss">
   @use '../../../../../assets/styles/responsive' as *;
@@ -101,12 +117,16 @@
       margin-bottom: 2rem;
     }
 
-    &:has(.bonne-réponse) {
+    &.bonne-réponse {
       background-color: var(--success-975-75);
     }
 
-    &:has(.mauvaise-réponse) {
+    &.mauvaise-réponse {
       background-color: var(--error-975-75);
+    }
+
+    &.score-final {
+      background-color: var(--background-default-grey);
     }
 
     .réponse {
