@@ -1,8 +1,17 @@
 <script lang="ts">
+  import { détecteRendu } from '../utils/rendu.svelte';
+  import { suitLaVisibilité } from '../utils/visibilite.svelte';
+
   const { survol = $bindable() }: { survol?: boolean } = $props();
+
+  const rendu = détecteRendu();
+  let conteneur = $state<HTMLElement>();
+  const àLÉcran = suitLaVisibilité(() => conteneur);
+
+  const animée = $derived(survol || (rendu.estMobile && àLÉcran.visible));
 </script>
 
-<div>
+<div bind:this={conteneur}>
   <svg
     class="cartes"
     viewBox="0 0 192 128"
@@ -10,7 +19,7 @@
     height="128"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    class:survol
+    class:animée
   >
     <g class="piece p-false">
       <g transform="translate(34,37)">
@@ -150,7 +159,7 @@
     }
 
     &:hover,
-    &.survol {
+    &.animée {
       .p-false {
         transform: translate(-21.962px, 0px) rotate(-6deg) scale(1.1208, 1.081);
       }
