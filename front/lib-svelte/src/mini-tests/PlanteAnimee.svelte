@@ -1,8 +1,17 @@
 <script lang="ts">
+  import { détecteRendu } from '../utils/rendu.svelte';
+  import { suitLaVisibilité } from '../utils/visibilite.svelte';
+
   const { survol }: { survol?: boolean } = $props();
+
+  const rendu = détecteRendu();
+  let conteneur = $state<HTMLElement>();
+  const àLÉcran = suitLaVisibilité(() => conteneur);
+
+  const animée = $derived(survol || (rendu.estMobile && àLÉcran.visible));
 </script>
 
-<div>
+<div bind:this={conteneur}>
   <svg
     id="maturite-animation"
     xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +21,7 @@
     fill="none"
     role="img"
     aria-labelledby="title description"
-    class:survol
+    class:animée
   >
     <title id="title">Illustration interactive de maturité</title>
     <desc id="description">La plante grandit avec un léger rebond lorsque le pointeur la survole.</desc>
@@ -150,7 +159,7 @@
     }
 
     &:hover,
-    &.survol {
+    &.animée {
       #terre {
         -webkit-transform: matrix(1, 0, 0, 1, 0, -4);
         transform: matrix(1, 0, 0, 1, 0, -4);
