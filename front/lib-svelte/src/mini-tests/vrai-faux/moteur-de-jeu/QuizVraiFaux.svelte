@@ -5,41 +5,16 @@
   import Question from './question/Question.svelte';
 
   let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' = $state('question');
-  const afficheBonneRéponse = () => {
-    mode = 'bonne-réponse';
-  };
-
-  const afficheMauvaiseRéponse = () => {
-    mode = 'mauvaise-réponse';
-  };
 
   const afficheAffirmationSuivante = () => {
     mode = 'question';
-    indexAffirmation = (indexAffirmation + 1) % affirmations.length;
+    indexAffirmation = indexAffirmation + 1;
   };
 
-  const vrai = () => {
-    console.log('vrai');
-    réponseCorrecte = affirmations[indexAffirmation].réponseAttendue === 'vrai';
-    setTimeout(() => (réponseCorrecte = false), 2500);
-    if (réponseCorrecte) {
-      afficheBonneRéponse();
-    } else {
-      afficheMauvaiseRéponse();
-    }
+  const afficheRéponse = (réponseDonnée: 'vrai' | 'faux') => {
+    const réponseCorrecte = affirmationCourante.réponseAttendue === réponseDonnée;
+    mode = réponseCorrecte ? 'bonne-réponse' : 'mauvaise-réponse';
   };
-  const faux = () => {
-    console.log('faux');
-    réponseCorrecte = affirmations[indexAffirmation].réponseAttendue === 'faux';
-    setTimeout(() => (réponseCorrecte = false), 2500);
-    if (réponseCorrecte) {
-      afficheBonneRéponse();
-    } else {
-      afficheMauvaiseRéponse();
-    }
-  };
-
-  let réponseCorrecte = $state(false);
 
   let indexAffirmation = $state(0);
   const affirmations = [
@@ -66,16 +41,15 @@
     {
       phrase: 'Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
       réponseAttendue: 'faux',
-      bonneRéponse: {
-        titre: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-        explications: [
-          'Les PME, TPE et ETI sont la catégorie la plus touchée.',
-          "En 2025, parmi les victimes d'attaques par rançongiciel portées à la connaissance de l'ANSSI, les PME, TPE et ETI représentent 37 % des cas — c'est la catégorie la plus affectée. Les attaques cybercriminelles ciblent indistinctement la plupart des secteurs et zones géographiques, de façon opportuniste.",
-        ],
-      },
+      titre: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
+      explications: [
+        'Les PME, TPE et ETI sont la catégorie la plus touchée.',
+        "En 2025, parmi les victimes d'attaques par rançongiciel portées à la connaissance de l'ANSSI, les PME, TPE et ETI représentent 37 % des cas — c'est la catégorie la plus affectée. Les attaques cybercriminelles ciblent indistinctement la plupart des secteurs et zones géographiques, de façon opportuniste.",
+      ],
       source: 'ANSSI, Panorama de la cybermenace 2025, section 1.A — pages 10-11.',
     },
   ];
+  const affirmationCourante = $derived(affirmations[indexAffirmation]);
   const badge = $derived.by(() => {
     switch (mode) {
       case 'bonne-réponse':
@@ -96,17 +70,22 @@
   <h1 class="fr-h6">Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux ?</h1>
 
   {#if mode === 'question'}
-    <Question question={affirmations[indexAffirmation].phrase} surVoteVrai={vrai} surVoteFaux={faux} />
+    <Question
+      question={affirmationCourante.phrase}
+      {indexAffirmation}
+      surVoteVrai={() => afficheRéponse('vrai')}
+      surVoteFaux={() => afficheRéponse('faux')}
+    />
   {:else}
     <div class={['réponse', mode]}>
       <dsfr-badge label={badge.label} size="md" type="status" status={badge.status}></dsfr-badge>
-      <dsfr-tag class="compte" size="md" label="{indexAffirmation}/6"></dsfr-tag>
-      <h2 class="fr-h6">{affirmations[indexAffirmation].titre}</h2>
-      {#each affirmations[indexAffirmation].explications as explication, index (index)}
+      <dsfr-tag class="compte" size="md" label="{indexAffirmation + 1}/6"></dsfr-tag>
+      <h2 class="fr-h6">{affirmationCourante.titre}</h2>
+      {#each affirmationCourante.explications as explication, index (index)}
         <p>{explication}</p>
       {/each}
       <hr />
-      <p class="texte-mention-xs">Source : {affirmations[indexAffirmation].source}</p>
+      <p class="texte-mention-xs">Source : {affirmationCourante.source}</p>
       <Bouton libelle="Suivant" surClic={afficheAffirmationSuivante} icone="arrow-right-line" iconeADroite />
     </div>
     {#if mode === 'bonne-réponse'}

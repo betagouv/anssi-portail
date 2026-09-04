@@ -4,11 +4,12 @@
 
   interface Props {
     question: string;
+    indexAffirmation: number;
     surVoteVrai: () => void;
     surVoteFaux: () => void;
   }
 
-  let { question, surVoteVrai, surVoteFaux }: Props = $props();
+  let { question, indexAffirmation, surVoteVrai, surVoteFaux }: Props = $props();
 
   type Réponse = 'faux' | 'vrai';
 
@@ -136,7 +137,7 @@
     style:--deplacement-y={`${déplacementY}px`}
     style:--rotation={`${rotation}deg`}
   >
-    <dsfr-tag class="compte" size="md" label="1/6"></dsfr-tag>
+    <dsfr-tag class="compte" size="md" label="{indexAffirmation + 1}/6"></dsfr-tag>
     <p class="fr-h2">🏢</p>
     <h2 class="fr-h3">{question}</h2>
   </div>
