@@ -1,4 +1,6 @@
 <script lang="ts">
+  import axios from 'axios';
+  import { onMount } from 'svelte';
   import Bouton from '../../../ui/Bouton.svelte';
   import CanonAConfetti from '../../../ui/CanonAConfetti.svelte';
   import FilAriane from '../../../ui/FilAriane.svelte';
@@ -16,48 +18,26 @@
     mode = réponseCorrecte ? 'bonne-réponse' : 'mauvaise-réponse';
   };
 
+  type IdéeReçue = {
+    idQuestion: string;
+    idéeReçue: {
+      emoji: string;
+      texte: string;
+    };
+    réponse: string;
+    explications: string[];
+    source: string;
+    idéeReçueEstVraie: boolean;
+  };
+
   let indexIdéeReçue = $state(0);
-  const idéesReçues = [
-    {
-      idéeReçue: {
-        emoji: '🏢',
-        texte: 'Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      },
-      idéeReçueEstVraie: false,
-      réponse: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      explications: [
-        'Les PME, TPE et ETI sont la catégorie la plus touchée.',
-        "En 2025, parmi les victimes d'attaques par rançongiciel portées à la connaissance de l'ANSSI, les PME, TPE et ETI représentent 37 % des cas — c'est la catégorie la plus affectée. Les attaques cybercriminelles ciblent indistinctement la plupart des secteurs et zones géographiques, de façon opportuniste.",
-      ],
-      source: 'ANSSI, Panorama de la cybermenace 2025, section 1.A — pages 10-11.',
-    },
-    {
-      idéeReçue: {
-        emoji: '🎭',
-        texte: 'Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      },
-      idéeReçueEstVraie: false,
-      réponse: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      explications: [
-        'Les PME, TPE et ETI sont la catégorie la plus touchée.',
-        "En 2025, parmi les victimes d'attaques par rançongiciel portées à la connaissance de l'ANSSI, les PME, TPE et ETI représentent 37 % des cas — c'est la catégorie la plus affectée. Les attaques cybercriminelles ciblent indistinctement la plupart des secteurs et zones géographiques, de façon opportuniste.",
-      ],
-      source: 'ANSSI, Panorama de la cybermenace 2025, section 1.A — pages 10-11.',
-    },
-    {
-      idéeReçue: {
-        emoji: '📥',
-        texte: 'Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      },
-      idéeReçueEstVraie: false,
-      réponse: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      explications: [
-        'Les PME, TPE et ETI sont la catégorie la plus touchée.',
-        "En 2025, parmi les victimes d'attaques par rançongiciel portées à la connaissance de l'ANSSI, les PME, TPE et ETI représentent 37 % des cas — c'est la catégorie la plus affectée. Les attaques cybercriminelles ciblent indistinctement la plupart des secteurs et zones géographiques, de façon opportuniste.",
-      ],
-      source: 'ANSSI, Panorama de la cybermenace 2025, section 1.A — pages 10-11.',
-    },
-  ];
+  let idéesReçues: IdéeReçue[] = $state([]);
+
+  onMount(async () => {
+    const réponse = await axios.get('/api/mini-tests/vrai-faux');
+    idéesReçues = réponse.data;
+  });
+
   const ideéReçueCourante = $derived(idéesReçues[indexIdéeReçue]);
   const badge = $derived.by(() => {
     switch (mode) {
@@ -73,32 +53,35 @@
 
 <dsfr-container>
   <FilAriane
-    feuille="Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux ?"
+    feuille="Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?"
     branche={{ nom: 'Faire le test !', lien: '/faire-le-test' }}
   />
-  <h1 class="fr-h6">Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux ?</h1>
+  <h1 class="fr-h6">Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?</h1>
 
-  {#if mode === 'question'}
-    <Question
-      question={ideéReçueCourante.idéeReçue.texte}
-      {indexIdéeReçue}
-      surVoteVrai={() => afficheRéponse(true)}
-      surVoteFaux={() => afficheRéponse(false)}
-    />
-  {:else}
-    <div class={['réponse', mode]}>
-      <dsfr-badge label={badge.label} size="md" type="status" status={badge.status}></dsfr-badge>
-      <dsfr-tag class="compte" size="md" label="{indexIdéeReçue + 1}/6"></dsfr-tag>
-      <h2 class="fr-h6">{ideéReçueCourante.réponse}</h2>
-      {#each ideéReçueCourante.explications as explication, index (index)}
-        <p>{explication}</p>
-      {/each}
-      <hr />
-      <p class="texte-mention-xs">Source : {ideéReçueCourante.source}</p>
-      <Bouton libelle="Suivant" surClic={afficheIdéeReçueSuivante} icone="arrow-right-line" iconeADroite />
-    </div>
-    {#if mode === 'bonne-réponse'}
-      <CanonAConfetti lectureAutomatique={true} />
+  {#if ideéReçueCourante}
+    {#if mode === 'question'}
+      <Question
+        question={ideéReçueCourante.idéeReçue.texte}
+        {indexIdéeReçue}
+        nombreIdéesReçues={idéesReçues.length}
+        surVoteVrai={() => afficheRéponse(true)}
+        surVoteFaux={() => afficheRéponse(false)}
+      />
+    {:else}
+      <div class={['réponse', mode]}>
+        <dsfr-badge label={badge.label} size="md" type="status" status={badge.status}></dsfr-badge>
+        <dsfr-tag class="compte" size="md" label="{indexIdéeReçue + 1}/{idéesReçues.length}"></dsfr-tag>
+        <h2 class="fr-h6">{ideéReçueCourante.réponse}</h2>
+        {#each ideéReçueCourante.explications as explication, index (index)}
+          <p>{explication}</p>
+        {/each}
+        <hr />
+        <p class="texte-mention-xs">Source : {ideéReçueCourante.source}</p>
+        <Bouton libelle="Suivant" surClic={afficheIdéeReçueSuivante} icone="arrow-right-line" iconeADroite />
+      </div>
+      {#if mode === 'bonne-réponse'}
+        <CanonAConfetti lectureAutomatique={true} />
+      {/if}
     {/if}
   {/if}
 </dsfr-container>

@@ -5,11 +5,12 @@
   interface Props {
     question: string;
     indexIdéeReçue: number;
+    nombreIdéesReçues: number;
     surVoteVrai: () => void;
     surVoteFaux: () => void;
   }
 
-  let { question, indexIdéeReçue, surVoteVrai, surVoteFaux }: Props = $props();
+  let { question, indexIdéeReçue, nombreIdéesReçues, surVoteVrai, surVoteFaux }: Props = $props();
 
   type Réponse = 'faux' | 'vrai';
 
@@ -137,7 +138,7 @@
     style:--deplacement-y={`${déplacementY}px`}
     style:--rotation={`${rotation}deg`}
   >
-    <dsfr-tag class="compte" size="md" label="{indexIdéeReçue + 1}/6"></dsfr-tag>
+    <dsfr-tag class="compte" size="md" label="{indexIdéeReçue + 1}/{nombreIdéesReçues}"></dsfr-tag>
     <p class="fr-h2">🏢</p>
     <h2 class="fr-h3">{question}</h2>
   </div>
@@ -187,7 +188,7 @@
       box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
       box-sizing: border-box;
       cursor: grab;
-      height: 340px;
+      min-height: 340px;
       width: 100%;
       margin-bottom: 4.5rem;
       position: relative;
