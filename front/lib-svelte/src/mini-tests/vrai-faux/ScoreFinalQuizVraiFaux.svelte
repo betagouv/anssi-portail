@@ -96,13 +96,16 @@
 </dsfr-container>
 
 <style lang="scss">
+  @use '../../../../assets/styles/responsive' as *;
+  @use '../../../../assets/styles/grille.scss' as *;
   .encart-score {
-    border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem 2rem 2rem;
     gap: 1.5rem;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    padding: 1rem 2rem 2rem;
     margin-bottom: 3rem;
     background-color: var(--background-alt-blue-france);
 
@@ -111,6 +114,16 @@
     }
     &.rouge {
       background-color: var(--error-975-75);
+    }
+
+    @include a-partir-de(md) {
+      margin-inline: auto;
+      width: taille-pour-colonnes(10);
+    }
+
+    @include a-partir-de(lg) {
+      margin-inline: auto;
+      width: taille-pour-colonnes(6);
     }
 
     p {
