@@ -7,7 +7,7 @@
   import ScoreFinalQuizVraiFaux from '../ScoreFinalQuizVraiFaux.svelte';
   import Question from './question/Question.svelte';
 
-  let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' | 'score-final' = $state('score-final');
+  let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' | 'score-final' = $state('question');
 
   const afficheIdéeReçueSuivante = () => {
     mode = 'question';
@@ -17,6 +17,7 @@
   const afficheRéponse = (réponseDonnée: boolean) => {
     const réponseCorrecte = idéeReçueCourante.idéeReçueEstVraie === réponseDonnée;
     mode = réponseCorrecte ? 'bonne-réponse' : 'mauvaise-réponse';
+    réponses.push(réponseCorrecte);
   };
 
   const obtenirScore = () => {
@@ -37,6 +38,7 @@
 
   let indexIdéeReçue = $state(0);
   let idéesReçues: IdéeReçue[] = $state([]);
+  let réponses: boolean[] = $state([]);
 
   onMount(async () => {
     const réponse = await axios.get('/api/mini-tests/vrai-faux');
@@ -64,7 +66,7 @@
 </dsfr-container>
 
 {#if mode === 'score-final'}
-  <ScoreFinalQuizVraiFaux réponses={[true, false, true, false, false, false]} />
+  <ScoreFinalQuizVraiFaux {réponses} />
 {:else}
   <dsfr-container class={mode}>
     <h1 class="fr-h6">Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?</h1>
