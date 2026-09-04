@@ -63,3 +63,9 @@
   onsupprimeReaction={supprimeReaction}
 >
 </lab-anssi-reactions>
+
+<style lang="scss">
+  lab-anssi-reactions {
+    padding: 6px;
+  }
+</style>
