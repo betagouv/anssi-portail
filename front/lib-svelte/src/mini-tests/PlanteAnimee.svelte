@@ -1,229 +1,210 @@
 <script lang="ts">
+  import { détecteRendu } from '../utils/rendu.svelte';
+  import { suitLaVisibilité } from '../utils/visibilite.svelte';
+
   const { survol }: { survol?: boolean } = $props();
+
+  const rendu = détecteRendu();
+  let conteneur = $state<HTMLElement>();
+  const àLÉcran = suitLaVisibilité(() => conteneur);
+
+  const animée = $derived(survol || (rendu.estMobile && àLÉcran.visible));
 </script>
 
-<div>
+<div bind:this={conteneur}>
   <svg
+    id="maturite-animation"
+    xmlns="http://www.w3.org/2000/svg"
     width="192"
     height="128"
     viewBox="0 0 192 128"
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    class="plante"
-    class:survol
+    role="img"
+    aria-labelledby="title description"
+    class:animée
   >
-    <circle
-      class="racines"
-      cx="96"
-      cy="91"
-      r="17"
-      fill="#000091"
-      stroke="#000091"
-      stroke-width="2.66667"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
+    <title id="title">Illustration interactive de maturité</title>
+    <desc id="description">La plante grandit avec un léger rebond lorsque le pointeur la survole.</desc>
 
-    <path
-      class="tige"
-      d="M96 71L96 75"
-      stroke="#000091"
-      stroke-width="2"
-      stroke-miterlimit="10"
-      stroke-linecap="round"
-    />
+    <g id="pictogramme-maturite">
+      <circle
+        id="terre"
+        cx="96"
+        cy="90"
+        r="17"
+        fill="#000091"
+        stroke="#000091"
+        stroke-width="2.66667"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
 
-    <path
-      class="feuille-droite-remplissage"
-      d="M115.167 75.1763C115.167 75.1763 114.12 80.9248 110.208 83.3395C106.296 85.7542 101 84.8237 101 84.8237C101 84.8237 102.046 79.0752 105.958 76.6605C109.87 74.2458 115.167 75.1763 115.167 75.1763Z"
-      fill="#8585F6"
-    />
+      <path
+        id="tige"
+        d="M96 60L96 74"
+        stroke="#000091"
+        stroke-width="2"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        vector-effect="non-scaling-stroke"
+      />
 
-    <path
-      class="feuille-droite-contour"
-      d="M101 84.8237C101 84.8237 106.296 85.7542 110.208 83.3395C114.12 80.9248 115.167 75.1763 115.167 75.1763C115.167 75.1763 109.87 74.2458 105.958 76.6605C102.046 79.0752 101 84.8237 101 84.8237ZM101 84.8237L110.208 78.8869"
-      stroke="#000091"
-      stroke-width="2"
-      stroke-miterlimit="10"
-      stroke-linecap="round"
-    />
+      <g id="feuille-droite">
+        <path
+          id="feuille-droite-fond"
+          d="M119 57.2116C119 57.2116 117.671 64.1098 112.7 67.0074C107.729 69.905 101 68.7885 101 68.7885C101 68.7885 102.329 61.8902 107.3 58.9926C112.271 56.095 119 57.2116 119 57.2116Z"
+          fill="#8585F6"
+        />
+        <path
+          id="feuille-droite-contour"
+          d="M101 68.7885C101 68.7885 107.729 69.905 112.7 67.0074C117.671 64.1098 119 57.2116 119 57.2116C119 57.2116 112.271 56.095 107.3 58.9926C102.329 61.8902 101 68.7885 101 68.7885ZM101 68.7885L112.7 61.6643"
+          stroke="#000091"
+          stroke-width="2"
+          stroke-miterlimit="10"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          vector-effect="non-scaling-stroke"
+        />
+      </g>
 
-    <path
-      class="feuille-gauche-remplissage"
-      d="M75.9998 75.1763C75.9998 75.1763 77.0462 80.9248 80.9582 83.3395C84.8702 85.7542 90.1665 84.8237 90.1665 84.8237C90.1665 84.8237 89.1202 79.0752 85.2082 76.6605C81.2962 74.2458 75.9998 75.1763 75.9998 75.1763Z"
-      fill="#8585F6"
-    />
+      <g id="feuille-gauche">
+        <path
+          id="feuille-gauche-fond"
+          d="M73 57.2115C73 57.2115 74.3294 64.1098 79.3 67.0074C84.2706 69.905 91 68.7885 91 68.7885C91 68.7885 89.6706 61.8902 84.7 58.9926C79.7294 56.095 73 57.2115 73 57.2115Z"
+          fill="#8585F6"
+        />
+        <path
+          id="feuille-gauche-contour"
+          d="M91 68.7885C91 68.7885 84.2706 69.905 79.3 67.0074C74.3294 64.1098 73 57.2115 73 57.2115C73 57.2115 79.7294 56.095 84.7 58.9926C89.6706 61.8902 91 68.7885 91 68.7885ZM91 68.7885L79.3 61.6642"
+          stroke="#000091"
+          stroke-width="2"
+          stroke-miterlimit="10"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          vector-effect="non-scaling-stroke"
+        />
+      </g>
 
-    <path
-      class="feuille-gauche-contour"
-      d="M90.1665 84.8237C90.1665 84.8237 84.8702 85.7542 80.9582 83.3395C77.0462 80.9248 75.9998 75.1763 75.9998 75.1763C75.9998 75.1763 81.2962 74.2458 85.2082 76.6605C89.1202 79.0752 90.1665 84.8237 90.1665 84.8237ZM90.1665 84.8237L80.9582 78.8869"
-      stroke="#000091"
-      stroke-width="2"
-      stroke-miterlimit="10"
-      stroke-linecap="round"
-    />
+      <g id="feuille-haute">
+        <path
+          id="feuille-haute-fond"
+          d="M96 45C96 45 100 48.2941 100 53C100 57.7059 96 61 96 61C96 61 92 57.7059 92 53C92 48.2941 96 45 96 45Z"
+          fill="#8585F6"
+        />
+        <path
+          id="feuille-haute-contour"
+          d="M96 51.6667L96 60.3334M96 45C96 45 100 48.2941 100 53C100 57.7059 96 61 96 61C96 61 92 57.7059 92 53C92 48.2941 96 45 96 45Z"
+          stroke="#000091"
+          stroke-width="2"
+          stroke-miterlimit="10"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          vector-effect="non-scaling-stroke"
+        />
+      </g>
 
-    <!-- POT-->
-    <path
-      d="M69.2997 79.6175C69.1369 76.5647 71.5683 74 74.6255 74H117.374C120.432 74 122.863 76.5647 122.7 79.6175L120.815 114.951C120.664 117.782 118.324 120 115.489 120H76.5109C73.6758 120 71.3362 117.782 71.1851 114.951L69.2997 79.6175Z"
-      fill="#E3E3FD"
-      stroke="#000091"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
+      <g id="pot">
+        <path
+          id="pot-corps"
+          d="M69.2997 79.6175C69.1369 76.5647 71.5683 74 74.6255 74H117.374C120.432 74 122.863 76.5647 122.7 79.6175L120.815 114.951C120.664 117.782 118.324 120 115.489 120H76.5109C73.6758 120 71.3362 117.782 71.1851 114.951L69.2997 79.6175Z"
+          fill="#E3E3FD"
+          stroke="#000091"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <rect
+          id="pot-bord"
+          x="65"
+          y="74"
+          width="62"
+          height="14"
+          rx="7"
+          fill="#E3E3FD"
+          stroke="#000091"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </g>
 
-    <rect
-      x="65"
-      y="74"
-      width="62"
-      height="14"
-      rx="7"
-      fill="#E3E3FD"
-      stroke="#000091"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-
-    <!-- FLEUR-->
-
-    <path
-      class="fleur-remplissage"
-      d="M96.0001 52C96.0001 52 101.03 55.9118 101.03 61.5C101.03 67.0882 96.0001 71 96.0001 71C96.0001 71 90.9707 67.0882 90.9707 61.5C90.9707 55.9118 96.0001 52 96.0001 52Z"
-      fill="#8585F6"
-    />
-
-    <path
-      class="fleur-contour"
-      d="M96.0001 59.9167L96.0001 70.2084M96.0001 52C96.0001 52 101.03 55.9118 101.03 61.5C101.03 67.0882 96.0001 71 96.0001 71C96.0001 71 90.9707 67.0882 90.9707 61.5C90.9707 55.9118 96.0001 52 96.0001 52Z"
-      stroke="#000091"
-      stroke-width="2"
-      stroke-miterlimit="10"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-
-    <path
-      class="fleur-surlignage"
-      d="M86 63C86 58.4408 87.5439 54.6043 89 52"
-      stroke="#6A6AF4"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
+      <path
+        id="accent"
+        d="M87 53C87 49.6842 88.5439 46.8941 90 45"
+        stroke="#6A6AF4"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        vector-effect="non-scaling-stroke"
+      />
+    </g>
   </svg>
 </div>
 
 <style lang="scss">
-  .plante {
-    /*
-     * La fonction de timing est volontairement "overshoot".
-     *
-     * Elle dépasse légèrement la valeur finale puis revient.
-     * C'est ce qui donne l'effet ressort.
-    */
+  #maturite-animation {
+    cursor: pointer;
 
-    width: 192px;
-    height: 128px;
-    overflow: visible;
-
-    .racines {
-      cx: 96px;
-      cy: 91px;
-
-      /*
-       * Le ressort est légèrement plus marqué
-       * sur le cercle pour rendre le mouvement visible.
-       */
-      transition: cy 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .tige {
-      transition: d 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .feuille-droite-remplissage {
-      transition: d 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .feuille-droite-contour {
-      transition: d 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .feuille-gauche-remplissage {
-      transition: d 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .feuille-gauche-contour {
-      transition: d 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .fleur-remplissage {
-      transition: d 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .fleur-contour {
-      transition: d 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .fleur-surlignage {
-      transition: d 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    #terre,
+    #tige,
+    #feuille-droite,
+    #feuille-gauche,
+    #feuille-haute,
+    #accent {
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+      transform-box: view-box;
+      -webkit-transition: -webkit-transform 800ms cubic-bezier(0.34, 1.3, 0.64, 1);
+      transition: transform 800ms cubic-bezier(0.34, 1.3, 0.64, 1);
     }
 
     &:hover,
-    &.survol {
-      .racines {
-        cy: 86px;
+    &.animée {
+      #terre {
+        -webkit-transform: matrix(1, 0, 0, 1, 0, -4);
+        transform: matrix(1, 0, 0, 1, 0, -4);
       }
 
-      .tige {
-        d: path('M96 39L96 70');
+      #tige {
+        -webkit-transform: matrix(1, 0, 0, 2.5, 0, -111);
+        transform: matrix(1, 0, 0, 2.5, 0, -111);
       }
 
-      .feuille-droite-remplissage {
-        d: path(
-          'M135 36.423C135 36.423 132.489 50.2196 123.1 56.0148C113.711 61.81 101 59.577 101 59.577C101 59.577 103.511 45.7804 112.9 39.9851C122.289 34.1899 135 36.423 135 36.423Z'
-        );
+      #feuille-droite {
+        -webkit-transform: matrix(2, 0, 0, 2, -101, -78);
+        transform: matrix(2, 0, 0, 2, -101, -78);
+        -webkit-transition-delay: 60ms;
+        transition-delay: 60ms;
       }
 
-      .feuille-droite-contour {
-        d: path(
-          'M101 59.577C101 59.577 113.711 61.81 123.1 56.0148C132.489 50.2196 135 36.423 135 36.423C135 36.423 122.289 34.1899 112.9 39.9851C103.511 45.7804 101 59.577 101 59.577ZM101 59.577L123.1 45.3285'
-        );
+      #feuille-gauche {
+        -webkit-transform: matrix(2, 0, 0, 2, -91, -78);
+        transform: matrix(2, 0, 0, 2, -91, -78);
+        -webkit-transition-delay: 120ms;
+        transition-delay: 120ms;
       }
 
-      .feuille-gauche-remplissage {
-        d: path(
-          'M57 36.423C57 36.423 59.5112 50.2196 68.9 56.0148C78.2888 61.81 91 59.577 91 59.577C91 59.577 88.4888 45.7804 79.1 39.9851C69.7112 34.1899 57 36.423 57 36.423Z'
-        );
+      #feuille-haute {
+        -webkit-transform: matrix(2.25, 0, 0, 2.125, -120, -88.625);
+        transform: matrix(2.25, 0, 0, 2.125, -120, -88.625);
       }
 
-      .feuille-gauche-contour {
-        d: path(
-          'M91 59.577C91 59.577 78.2888 61.81 68.9 56.0148C59.5112 50.2196 57 36.423 57 36.423C57 36.423 69.7112 34.1899 79.1 39.9851C88.4888 45.7804 91 59.577 91 59.577ZM91 59.577L68.9 45.3285'
-        );
-      }
-
-      .fleur-remplissage {
-        d: path('M95.9999 7C95.9999 7 105 14 105 24C105 34 96 41 96 41C96 41 87 34 87 24C87 14 95.9999 7 95.9999 7Z');
-      }
-
-      .fleur-contour {
-        d: path(
-          'M96 21.1667L96 39.5834M95.9999 7C95.9999 7 105 14 105 24C105 34 96 41 96 41C96 41 87 34 87 24C87 14 95.9999 7 95.9999 7Z'
-        );
-      }
-
-      .fleur-surlignage {
-        d: path('M82 23C82 16.3684 85.0879 10.7881 88 7');
+      #accent {
+        -webkit-transform: matrix(2, 0, 0, 2, -92, -83);
+        transform: matrix(2, 0, 0, 2, -92, -83);
       }
     }
-  }
 
-  @media (prefers-reduced-motion: reduce) {
-    .plante * {
-      transition: none !important;
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition-duration: 1ms !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
     }
   }
 </style>

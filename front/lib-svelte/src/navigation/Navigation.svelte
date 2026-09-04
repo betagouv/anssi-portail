@@ -1,20 +1,13 @@
 <script lang="ts">
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import { enPropriétéWebC } from '$plateforme/webComponent';
-  import { onMount } from 'svelte';
   import { creeLienContactsUtiles } from '../contacts/contacts';
   import { profilStore } from '../stores/profil.store';
-  import { afficheParcoursSecurisation } from '$plateforme/environnement';
+  import { détecteRendu } from '../utils/rendu.svelte';
 
   let estConnecte = () => !!$profilStore;
 
-  let estMobile = $state(false);
-  onMount(() => {
-    const mql = window.matchMedia('(max-width: 992px)');
-    mql.addEventListener('change', (e: MediaQueryListEvent) => {
-      estMobile = e.matches;
-    });
-    estMobile = mql.matches;
-  });
+  const rendu = détecteRendu();
 
   const cheminRelatif: string = typeof window !== 'undefined' ? window.location.pathname : '/';
 
@@ -34,7 +27,7 @@
   );
   const lienParcoursSécurisation = $derived(estConnecte() ? lienParcoursUtilisateur : '/parcours-securisation');
   const menu = $derived([
-    ...(estMobile ? [itemDeMenu('Accueil', '/', cheminRelatif === '/')] : []),
+    ...(rendu.estMobile ? [itemDeMenu('Accueil', '/', cheminRelatif === '/')] : []),
 
     ...(afficheParcoursSecurisation
       ? [itemDeMenu('🚀 Protéger mon organisation', lienParcoursSécurisation, cheminRelatif === '/cyberdepart')]
@@ -80,12 +73,12 @@
       ],
     },
 
-    ...(estMobile ? [itemDeMenu('Directive NIS 2', '/nis2', cheminRelatif === '/nis2')] : []),
+    ...(rendu.estMobile ? [itemDeMenu('Directive NIS 2', '/nis2', cheminRelatif === '/nis2')] : []),
   ]);
 </script>
 
 <dsfr-navigation items={enPropriétéWebC(menu)}>
-  {#if !estMobile}
+  {#if rendu.estBureau}
     <a href="/nis2" class="bouton-nis2" slot="afternavigation">
       <img src="/assets/images/badge-nis2.svg" alt="Directive NIS2" />
     </a>
