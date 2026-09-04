@@ -12,6 +12,7 @@
     boutonSoumission?: boolean;
     icone?: string;
     iconeSeule?: boolean;
+    iconeADroite?: boolean;
     surClic?: (e: MouseEvent | KeyboardEvent) => void;
   }
 
@@ -25,6 +26,7 @@
     boutonSoumission = false,
     icone = '',
     iconeSeule = false,
+    iconeADroite = false,
     surClic,
   }: Props = $props();
 
@@ -40,6 +42,7 @@
   );
   const boutonType = $derived(boutonSoumission ? 'submit' : 'button');
   const hasIcon = $derived(!!icone);
+  const iconPlace = $derived(iconeSeule ? 'only' : iconeADroite ? 'right' : 'left');
 
   const gereClick = (e: MouseEvent | KeyboardEvent) => {
     surClic?.(e);
@@ -56,7 +59,7 @@
   disabled={desactive || undefined}
   has-icon={hasIcon}
   icon={icone}
-  icon-place={iconeSeule ? 'only' : 'left'}
+  icon-place={iconPlace}
   use:clic={gereClick}
 >
   <button slot="seo" title={titre} disabled={desactive || undefined} type={boutonType}>{libelle}</button>
