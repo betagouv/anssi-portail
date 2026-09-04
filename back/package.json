@@ -81,7 +81,7 @@
     "sharp": "^0.35.0",
     "sitemap": "^9.0.1",
     "svelte": "catalog:",
-    "uuid": "^14.0.1",
+    "uuid": "catalog:",
     "zod": "^4.4.3"
   },
   "directories": {

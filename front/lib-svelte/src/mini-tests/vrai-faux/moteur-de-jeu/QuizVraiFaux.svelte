@@ -1,55 +1,59 @@
 <script lang="ts">
+  import axios from 'axios';
+  import { onMount } from 'svelte';
+  import { v7 as uuidv7 } from 'uuid';
+  import { publieRéponseQuestionnaireVraiFaux } from '../../../passerelles/mini-tests/publicationRéponses';
   import Bouton from '../../../ui/Bouton.svelte';
   import CanonAConfetti from '../../../ui/CanonAConfetti.svelte';
   import FilAriane from '../../../ui/FilAriane.svelte';
+  import ScoreFinalQuizVraiFaux from '../ScoreFinalQuizVraiFaux.svelte';
   import Question from './question/Question.svelte';
 
-  let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' = $state('question');
+  const idCorrélation = uuidv7();
+  let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' | 'score-final' = $state('question');
 
-  const afficheAffirmationSuivante = () => {
+  const afficheIdéeReçueSuivante = () => {
     mode = 'question';
-    indexAffirmation = indexAffirmation + 1;
+    indexIdéeReçue = indexIdéeReçue + 1;
   };
 
-  const afficheRéponse = (réponseDonnée: 'vrai' | 'faux') => {
-    const réponseCorrecte = affirmationCourante.réponseAttendue === réponseDonnée;
+  const afficheRéponse = async (réponseDonnée: boolean) => {
+    const réponseCorrecte = idéeReçueCourante.idéeReçueEstVraie === réponseDonnée;
     mode = réponseCorrecte ? 'bonne-réponse' : 'mauvaise-réponse';
+    réponses.push(réponseCorrecte);
+    await publieRéponseQuestionnaireVraiFaux({
+      idCorrélation,
+      idQuestion: idéeReçueCourante.idQuestion,
+      réponseUtilisateur: réponseDonnée,
+    });
   };
 
-  let indexAffirmation = $state(0);
-  const affirmations = [
-    {
-      phrase: 'Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      réponseAttendue: 'faux',
-      titre: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      explications: [
-        'Les PME, TPE et ETI sont la catégorie la plus touchée.',
-        "En 2025, parmi les victimes d'attaques par rançongiciel portées à la connaissance de l'ANSSI, les PME, TPE et ETI représentent 37 % des cas — c'est la catégorie la plus affectée. Les attaques cybercriminelles ciblent indistinctement la plupart des secteurs et zones géographiques, de façon opportuniste.",
-      ],
-      source: 'ANSSI, Panorama de la cybermenace 2025, section 1.A — pages 10-11.',
-    },
-    {
-      phrase: 'Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      réponseAttendue: 'faux',
-      titre: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      explications: [
-        'Les PME, TPE et ETI sont la catégorie la plus touchée.',
-        "En 2025, parmi les victimes d'attaques par rançongiciel portées à la connaissance de l'ANSSI, les PME, TPE et ETI représentent 37 % des cas — c'est la catégorie la plus affectée. Les attaques cybercriminelles ciblent indistinctement la plupart des secteurs et zones géographiques, de façon opportuniste.",
-      ],
-      source: 'ANSSI, Panorama de la cybermenace 2025, section 1.A — pages 10-11.',
-    },
-    {
-      phrase: 'Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      réponseAttendue: 'faux',
-      titre: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      explications: [
-        'Les PME, TPE et ETI sont la catégorie la plus touchée.',
-        "En 2025, parmi les victimes d'attaques par rançongiciel portées à la connaissance de l'ANSSI, les PME, TPE et ETI représentent 37 % des cas — c'est la catégorie la plus affectée. Les attaques cybercriminelles ciblent indistinctement la plupart des secteurs et zones géographiques, de façon opportuniste.",
-      ],
-      source: 'ANSSI, Panorama de la cybermenace 2025, section 1.A — pages 10-11.',
-    },
-  ];
-  const affirmationCourante = $derived(affirmations[indexAffirmation]);
+  const obtenirScore = () => {
+    mode = 'score-final';
+  };
+
+  type IdéeReçue = {
+    idQuestion: string;
+    idéeReçue: {
+      emoji: string;
+      texte: string;
+    };
+    réponse: string;
+    explications: string[];
+    source: string;
+    idéeReçueEstVraie: boolean;
+  };
+
+  let indexIdéeReçue = $state(0);
+  let idéesReçues: IdéeReçue[] = $state([]);
+  let réponses: boolean[] = $state([]);
+
+  onMount(async () => {
+    const réponse = await axios.get('/api/mini-tests/vrai-faux');
+    idéesReçues = réponse.data;
+  });
+
+  const idéeReçueCourante = $derived(idéesReçues[indexIdéeReçue]);
   const badge = $derived.by(() => {
     switch (mode) {
       case 'bonne-réponse':
@@ -62,37 +66,52 @@
   });
 </script>
 
-<dsfr-container>
+<dsfr-container class={mode}>
   <FilAriane
-    feuille="Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux ?"
+    feuille="Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?"
     branche={{ nom: 'Faire le test !', lien: '/faire-le-test' }}
   />
-  <h1 class="fr-h6">Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux ?</h1>
-
-  {#if mode === 'question'}
-    <Question
-      question={affirmationCourante.phrase}
-      {indexAffirmation}
-      surVoteVrai={() => afficheRéponse('vrai')}
-      surVoteFaux={() => afficheRéponse('faux')}
-    />
-  {:else}
-    <div class={['réponse', mode]}>
-      <dsfr-badge label={badge.label} size="md" type="status" status={badge.status}></dsfr-badge>
-      <dsfr-tag class="compte" size="md" label="{indexAffirmation + 1}/6"></dsfr-tag>
-      <h2 class="fr-h6">{affirmationCourante.titre}</h2>
-      {#each affirmationCourante.explications as explication, index (index)}
-        <p>{explication}</p>
-      {/each}
-      <hr />
-      <p class="texte-mention-xs">Source : {affirmationCourante.source}</p>
-      <Bouton libelle="Suivant" surClic={afficheAffirmationSuivante} icone="arrow-right-line" iconeADroite />
-    </div>
-    {#if mode === 'bonne-réponse'}
-      <CanonAConfetti lectureAutomatique={true} />
-    {/if}
-  {/if}
 </dsfr-container>
+
+{#if mode === 'score-final'}
+  <ScoreFinalQuizVraiFaux {réponses} />
+{:else}
+  <dsfr-container class={mode}>
+    <h1 class="fr-h6">Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?</h1>
+
+    {#if idéeReçueCourante}
+      {#if mode === 'question'}
+        <Question
+          question={idéeReçueCourante.idéeReçue.texte}
+          {indexIdéeReçue}
+          nombreIdéesReçues={idéesReçues.length}
+          emoji={idéeReçueCourante.idéeReçue.emoji}
+          surVoteVrai={() => afficheRéponse(true)}
+          surVoteFaux={() => afficheRéponse(false)}
+        />
+      {:else}
+        <div class="réponse">
+          <dsfr-badge label={badge.label} size="md" type="status" status={badge.status}></dsfr-badge>
+          <dsfr-tag class="compte" size="md" label="{indexIdéeReçue + 1}/{idéesReçues.length}"></dsfr-tag>
+          <h2 class="fr-h6">{idéeReçueCourante.réponse}</h2>
+          {#each idéeReçueCourante.explications as explication, index (index)}
+            <p>{explication}</p>
+          {/each}
+          <hr />
+          <p class="texte-mention-xs">Source : {idéeReçueCourante.source}</p>
+          {#if indexIdéeReçue === idéesReçues.length - 1}
+            <Bouton libelle="Obtenir mon score" surClic={obtenirScore} />
+          {:else}
+            <Bouton libelle="Suivant" surClic={afficheIdéeReçueSuivante} icone="arrow-right-line" iconeADroite />
+          {/if}
+        </div>
+        {#if mode === 'bonne-réponse'}
+          <CanonAConfetti lectureAutomatique={true} />
+        {/if}
+      {/if}
+    {/if}
+  </dsfr-container>
+{/if}
 
 <style lang="scss">
   @use '../../../../../assets/styles/responsive' as *;
@@ -108,12 +127,16 @@
       margin-bottom: 2rem;
     }
 
-    &:has(.bonne-réponse) {
+    &.bonne-réponse {
       background-color: var(--success-975-75);
     }
 
-    &:has(.mauvaise-réponse) {
+    &.mauvaise-réponse {
       background-color: var(--error-975-75);
+    }
+
+    &.score-final {
+      background-color: var(--background-default-grey);
     }
 
     .réponse {

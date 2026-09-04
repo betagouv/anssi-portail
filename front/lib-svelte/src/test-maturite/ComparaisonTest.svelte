@@ -177,7 +177,7 @@
   </dsfr-container>
 {/if}
 
-<PartageTest />
+<PartageTest cheminPartagé="/test-maturite" sujetMail="Test de maturité Cyber" typeDeRetour="test-maturité" />
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;

@@ -1,16 +1,22 @@
 <script lang="ts">
-  import RetourUtilisateurSurContenu from '../ui/RetourUtilisateurSurContenu.svelte';
+  import RetourUtilisateurSurContenu, { type TypeDeRetour } from '../ui/RetourUtilisateurSurContenu.svelte';
   import BoutonsPartagePage from './BoutonsPartagePage.svelte';
+
+  const {
+    cheminPartagé,
+    sujetMail,
+    typeDeRetour,
+  }: { cheminPartagé: string; sujetMail: string; typeDeRetour: TypeDeRetour } = $props();
 </script>
 
 <dsfr-container class="partage-test">
   <div class="contenu-section">
     <div class="retour">
-      <RetourUtilisateurSurContenu clé="resultat-test" urlDePost="/api/retour-test-maturite">
+      <RetourUtilisateurSurContenu clé="resultat-test" {typeDeRetour}>
         <p class="texte-article-lg">Ce test vous a-t-il aidé&nbsp;?</p>
       </RetourUtilisateurSurContenu>
     </div>
-    <BoutonsPartagePage cheminPartagé="/test-maturite" sujetMail="Test de maturité Cyber" />
+    <BoutonsPartagePage {cheminPartagé} {sujetMail} />
   </div>
 </dsfr-container>
 
