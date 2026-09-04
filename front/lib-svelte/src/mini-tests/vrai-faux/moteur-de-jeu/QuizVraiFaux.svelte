@@ -7,7 +7,7 @@
   import ScoreFinalQuizVraiFaux from '../ScoreFinalQuizVraiFaux.svelte';
   import Question from './question/Question.svelte';
 
-  let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' | 'score-final' = $state('question');
+  let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' | 'score-final' = $state('score-final');
 
   const afficheIdéeReçueSuivante = () => {
     mode = 'question';
@@ -64,7 +64,7 @@
 </dsfr-container>
 
 {#if mode === 'score-final'}
-  <ScoreFinalQuizVraiFaux />
+  <ScoreFinalQuizVraiFaux réponses={[true, false, true, false, false, false]} />
 {:else}
   <dsfr-container class={mode}>
     <h1 class="fr-h6">Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?</h1>
