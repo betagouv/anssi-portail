@@ -6,22 +6,25 @@
 
   let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' = $state('question');
 
-  const afficheAffirmationSuivante = () => {
+  const afficheIdéeReçueSuivante = () => {
     mode = 'question';
-    indexAffirmation = indexAffirmation + 1;
+    indexIdéeReçue = indexIdéeReçue + 1;
   };
 
-  const afficheRéponse = (réponseDonnée: 'vrai' | 'faux') => {
-    const réponseCorrecte = affirmationCourante.réponseAttendue === réponseDonnée;
+  const afficheRéponse = (réponseDonnée: boolean) => {
+    const réponseCorrecte = ideéReçueCourante.idéeReçueEstVraie === réponseDonnée;
     mode = réponseCorrecte ? 'bonne-réponse' : 'mauvaise-réponse';
   };
 
-  let indexAffirmation = $state(0);
-  const affirmations = [
+  let indexIdéeReçue = $state(0);
+  const idéesReçues = [
     {
-      phrase: 'Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      réponseAttendue: 'faux',
-      titre: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
+      idéeReçue: {
+        emoji: '🏢',
+        texte: 'Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
+      },
+      idéeReçueEstVraie: false,
+      réponse: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
       explications: [
         'Les PME, TPE et ETI sont la catégorie la plus touchée.',
         "En 2025, parmi les victimes d'attaques par rançongiciel portées à la connaissance de l'ANSSI, les PME, TPE et ETI représentent 37 % des cas — c'est la catégorie la plus affectée. Les attaques cybercriminelles ciblent indistinctement la plupart des secteurs et zones géographiques, de façon opportuniste.",
@@ -29,9 +32,12 @@
       source: 'ANSSI, Panorama de la cybermenace 2025, section 1.A — pages 10-11.',
     },
     {
-      phrase: 'Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      réponseAttendue: 'faux',
-      titre: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
+      idéeReçue: {
+        emoji: '🎭',
+        texte: 'Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
+      },
+      idéeReçueEstVraie: false,
+      réponse: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
       explications: [
         'Les PME, TPE et ETI sont la catégorie la plus touchée.',
         "En 2025, parmi les victimes d'attaques par rançongiciel portées à la connaissance de l'ANSSI, les PME, TPE et ETI représentent 37 % des cas — c'est la catégorie la plus affectée. Les attaques cybercriminelles ciblent indistinctement la plupart des secteurs et zones géographiques, de façon opportuniste.",
@@ -39,9 +45,12 @@
       source: 'ANSSI, Panorama de la cybermenace 2025, section 1.A — pages 10-11.',
     },
     {
-      phrase: 'Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
-      réponseAttendue: 'faux',
-      titre: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
+      idéeReçue: {
+        emoji: '📥',
+        texte: 'Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
+      },
+      idéeReçueEstVraie: false,
+      réponse: 'FAUX. Les grandes entreprises sont les principales victimes des rançongiciels, pas les PME et TPE.',
       explications: [
         'Les PME, TPE et ETI sont la catégorie la plus touchée.',
         "En 2025, parmi les victimes d'attaques par rançongiciel portées à la connaissance de l'ANSSI, les PME, TPE et ETI représentent 37 % des cas — c'est la catégorie la plus affectée. Les attaques cybercriminelles ciblent indistinctement la plupart des secteurs et zones géographiques, de façon opportuniste.",
@@ -49,7 +58,7 @@
       source: 'ANSSI, Panorama de la cybermenace 2025, section 1.A — pages 10-11.',
     },
   ];
-  const affirmationCourante = $derived(affirmations[indexAffirmation]);
+  const ideéReçueCourante = $derived(idéesReçues[indexIdéeReçue]);
   const badge = $derived.by(() => {
     switch (mode) {
       case 'bonne-réponse':
@@ -71,22 +80,22 @@
 
   {#if mode === 'question'}
     <Question
-      question={affirmationCourante.phrase}
-      {indexAffirmation}
-      surVoteVrai={() => afficheRéponse('vrai')}
-      surVoteFaux={() => afficheRéponse('faux')}
+      question={ideéReçueCourante.idéeReçue.texte}
+      {indexIdéeReçue}
+      surVoteVrai={() => afficheRéponse(true)}
+      surVoteFaux={() => afficheRéponse(false)}
     />
   {:else}
     <div class={['réponse', mode]}>
       <dsfr-badge label={badge.label} size="md" type="status" status={badge.status}></dsfr-badge>
-      <dsfr-tag class="compte" size="md" label="{indexAffirmation + 1}/6"></dsfr-tag>
-      <h2 class="fr-h6">{affirmationCourante.titre}</h2>
-      {#each affirmationCourante.explications as explication, index (index)}
+      <dsfr-tag class="compte" size="md" label="{indexIdéeReçue + 1}/6"></dsfr-tag>
+      <h2 class="fr-h6">{ideéReçueCourante.réponse}</h2>
+      {#each ideéReçueCourante.explications as explication, index (index)}
         <p>{explication}</p>
       {/each}
       <hr />
-      <p class="texte-mention-xs">Source : {affirmationCourante.source}</p>
-      <Bouton libelle="Suivant" surClic={afficheAffirmationSuivante} icone="arrow-right-line" iconeADroite />
+      <p class="texte-mention-xs">Source : {ideéReçueCourante.source}</p>
+      <Bouton libelle="Suivant" surClic={afficheIdéeReçueSuivante} icone="arrow-right-line" iconeADroite />
     </div>
     {#if mode === 'bonne-réponse'}
       <CanonAConfetti lectureAutomatique={true} />
