@@ -9,7 +9,7 @@ import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnem
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
 
-describe('La ressource retour sur les tests de maturité', () => {
+describe('La ressource retour sur les mini-tests', () => {
   describe('sur requête POST', () => {
     let serveur: Express;
     let adaptateurEnvironnement: AdaptateurEnvironnement;
@@ -31,8 +31,14 @@ describe('La ressource retour sur les tests de maturité', () => {
       });
     });
 
-    it('doit répondre 201', async () => {
+    it('doit répondre 201 pour le mini-test de maturité', async () => {
       const reponse = await request(serveur).post('/api/retour-test-maturite').send(retourPositif);
+
+      assert.equal(reponse.status, HttpStatusCode.Created);
+    });
+
+    it('doit répondre 201 pour le mini-test vrai-faux', async () => {
+      const reponse = await request(serveur).post('/api/retour-mini-tests/vrai-faux').send(retourPositif);
 
       assert.equal(reponse.status, HttpStatusCode.Created);
     });

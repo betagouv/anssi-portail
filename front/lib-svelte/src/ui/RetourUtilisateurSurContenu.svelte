@@ -22,7 +22,7 @@
   const { clé, typeDeRetour, children, identifiantCible }: Props = $props();
   const urlDePost = $derived.by(() => {
     if (typeDeRetour === 'vrai-faux') {
-      return '';
+      return '/api/retour-mini-tests/vrai-faux';
     }
     if (typeDeRetour === 'mesure') {
       return `/api/mesures/${identifiantCible}/avis`;

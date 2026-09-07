@@ -406,6 +406,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
       ])
     );
     enregistreRoute('/api/retour-test-maturite', ressourceRetourMiniTest(configurationServeur, 'test-maturité'));
+    enregistreRoute('/api/retour-mini-tests/vrai-faux', ressourceRetourMiniTest(configurationServeur, 'vrai-faux'));
     enregistreRoute(
       `/partage-badge-cyberdepart`,
       ressourcePagesJekyll(configurationServeur, 'partage-badge-cyberdepart')
