@@ -113,7 +113,19 @@
     <p>
       Les entités concernées par la directive NIS2 sont tenues de mettre en place des mesures juridiques, techniques et
       organisationnelles visant à gérer les risques qui menacent la sécurité de leurs réseaux et de leurs systèmes
-      d’information. <Lien libelle="En savoir plus" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank />
+      d’information. <Lien libelle="En savoir plus" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank neutre />
+    </p>
+    <p>
+      Afin de les aider, l'ANSSI a conçu le <Lien libelle="Référentiel Cyber France" href="/nis2#exigences" neutre /> (ReCyF)
+      qui liste les mesures recommandées par l’ANSSI pour atteindre les objectifs de sécurité fixés par NIS 2. Compte tenu
+      du niveau de la menace cybercriminelle, et pour permettre aux organisations d’initier dès à présent une démarche de
+      sécurisation cohérente avec NIS 2, l’ANSSI a décidé de rendre public <Lien
+        libelle="une version de travail du Référentiel Cyber France"
+        neutre
+        href="/documents-ressources/20260317_NIS_V2_ReCyF_v2.5.pdf"
+      />
+      (ReCyF) qui a pour vocation de devenir le socle de la réglementation cyber française. ReCyF est susceptible d’ajustements
+      pour tenir compte des discussions parlementaires et des travaux règlementaires à venir.
     </p>
     <p>
       En raison de la nature transfrontalière de leurs services, certaines entités du secteur des infrastructures
@@ -122,9 +134,14 @@
         libelle="accessible en français ici"
         href="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=OJ:L_202402690"
         blank
-      />). Par conséquent, elles ne sont pas soumises au socle de mesures de sécurité NIS&nbsp;2 définies pour les
-      entités établies en France.
-      <Lien libelle="En savoir plus" href="https://aide.monespacenis2.cyber.gouv.fr/fr/" blank />
+        neutre
+      />). Par conséquent, elles ne sont pas soumises au socle de mesures de sécurité NIS 2 définies pour les entités
+      établies en France. <Lien
+        libelle="En savoir plus"
+        href="https://aide.monespacenis2.cyber.gouv.fr/fr/"
+        blank
+        neutre
+      />
     </p>
     <Lien
       libelle="Découvrir les solutions pour m’aider"
