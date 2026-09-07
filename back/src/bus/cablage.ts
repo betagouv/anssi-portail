@@ -5,7 +5,7 @@ import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { EntrepotFavori } from '../metier/entrepotFavori.js';
 import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
 import { BusEvenements } from './busEvenements.js';
-import { consigneRetourTestMaturitéDonné } from './consigeRetourTestMaturiteDonne.js';
+import { consigneRetourMiniTestDonné } from './consigeRetourMiniTestDonne.js';
 import { consigneRetourAvisMesureDonneDansJournal } from './consigneAvisMesureDonneDansJournal.js';
 import { consigneBadgeCyberdépartDébloquéDansJournal } from './consigneBadgeCyberdepartDebloqueDansJournal.js';
 import { consigneEvenementAvisUtilisateurDonneDansJournal } from './consigneEvenementAvisUtilisateurDonneDansJournal.js';
@@ -42,13 +42,13 @@ import { ProprieteTestRevendiquee } from './evenements/proprieteTestRevendiquee.
 import { QuestionnaireVraiFauxRéponseSoumise } from './evenements/questionnaireVraiFauxReponseSoumise.js';
 import { QuestionnaireVraiFauxTerminé } from './evenements/questionnaireVraiFauxTermine.js';
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne.js';
-import { RetourTestMaturitéDonné } from './evenements/retourTestMaturiteDonne.js';
+import { RetourMiniTestDonné } from './evenements/retourMiniTestDonne.js';
 import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee.js';
 import { TestRealise } from './evenements/testRealise.js';
 import { UtilisateurConnecte } from './evenements/utilisateurConnecte.js';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur.js';
 import { notifieCommentaireAvisMesureDonneDansMessagerie } from './notifieCommentaireAvisMesureDonneDansMessagerie.js';
-import { notifieUnRetourNégatifSurTestMaturité } from './notifieRetourNegatifSurTestMaturite.js';
+import { notifieUnRetourNégatifSurMiniTest } from './notifieRetourNegatifSurMiniTest.js';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
@@ -182,9 +182,9 @@ export const cableTousLesAbonnes = ({
     adaptateurEmail.metsÀJourParcoursCompletTerminé,
   ]);
 
-  busEvenements.abonnePlusieurs(RetourTestMaturitéDonné, [
-    consigneRetourTestMaturitéDonné({ adaptateurJournal, adaptateurHorloge }),
-    notifieUnRetourNégatifSurTestMaturité({ messagerieInstantanee }),
+  busEvenements.abonnePlusieurs(RetourMiniTestDonné, [
+    consigneRetourMiniTestDonné({ adaptateurJournal, adaptateurHorloge }),
+    notifieUnRetourNégatifSurMiniTest({ messagerieInstantanee }),
   ]);
 
   busEvenements.abonne(

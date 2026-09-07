@@ -1,3 +1,4 @@
+import { MiniTest } from './mini-tests/mini-test.js';
 import { NiveauDeSatisfaction } from './niveauDeSatisfaction.js';
 
 export type RetourExperience = {
@@ -18,7 +19,8 @@ export type AvisNegatifSurUneMesure = {
   commentaire?: string;
 };
 
-export type RetourNégatifSurTestMaturité = {
+export type RetourNégatifSurMiniTest = {
+  miniTest: MiniTest;
   commentaire?: string;
 };
 
@@ -26,5 +28,5 @@ export interface MessagerieInstantanee {
   notifieUnAvisUtilisateur(avisUtilisateur: AvisUtilisateur): Promise<void>;
   notifieUnRetourExperience(retourExperience: RetourExperience): Promise<void>;
   notifieUnAvisNegatifSurUneMesure(avis: AvisNegatifSurUneMesure): Promise<void>;
-  notifieUnRetourNégatifSurTestMaturité(retour: RetourNégatifSurTestMaturité): Promise<void>;
+  notifieUnRetourNégatifSurMiniTest(retour: RetourNégatifSurMiniTest): Promise<void>;
 }

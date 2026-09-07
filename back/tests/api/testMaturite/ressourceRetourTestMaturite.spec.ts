@@ -4,7 +4,7 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
-import { RetourTestMaturitéDonné } from '../../../src/bus/evenements/retourTestMaturiteDonne.js';
+import { RetourMiniTestDonné } from '../../../src/bus/evenements/retourMiniTestDonne.js';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../bus/busPourLesTests.js';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
@@ -64,8 +64,8 @@ describe('La ressource retour sur les tests de maturité', () => {
       it('publie un événement', async () => {
         await request(serveur).post('/api/retour-test-maturite').send(retourPositif);
 
-        busEvenements.aRecuUnEvenement(RetourTestMaturitéDonné);
-        const evenement = busEvenements.recupereEvenement(RetourTestMaturitéDonné);
+        busEvenements.aRecuUnEvenement(RetourMiniTestDonné);
+        const evenement = busEvenements.recupereEvenement(RetourMiniTestDonné);
         assert.equal(evenement!.retour, 'POSITIF');
       });
 
@@ -74,8 +74,8 @@ describe('La ressource retour sur les tests de maturité', () => {
           .post('/api/retour-test-maturite')
           .send({ retour: 'POSITIF', commentaire: 'Ce test est sympa !' });
 
-        busEvenements.aRecuUnEvenement(RetourTestMaturitéDonné);
-        const evenement = busEvenements.recupereEvenement(RetourTestMaturitéDonné);
+        busEvenements.aRecuUnEvenement(RetourMiniTestDonné);
+        const evenement = busEvenements.recupereEvenement(RetourMiniTestDonné);
         assert.equal(evenement!.retour, 'POSITIF');
         assert.equal(evenement!.commentaire, undefined);
       });
@@ -87,8 +87,8 @@ describe('La ressource retour sur les tests de maturité', () => {
           .post('/api/retour-test-maturite')
           .send({ retour: 'NEGATIF', commentaire: 'Ce test est nul !' });
 
-        busEvenements.aRecuUnEvenement(RetourTestMaturitéDonné);
-        const evenement = busEvenements.recupereEvenement(RetourTestMaturitéDonné);
+        busEvenements.aRecuUnEvenement(RetourMiniTestDonné);
+        const evenement = busEvenements.recupereEvenement(RetourMiniTestDonné);
         assert.equal(evenement!.retour, 'NEGATIF');
         assert.equal(evenement!.commentaire, 'Ce test est nul !');
       });
