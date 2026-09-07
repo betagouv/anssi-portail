@@ -17,13 +17,18 @@
   <div class="introduction">
     <h2>Qu’est-ce que NIS&nbsp;2&nbsp;?</h2>
     <p>
-      Entrée en vigueur en octobre 2024, la directive NIS&nbsp;2 (sécurité des réseaux et des systèmes d'Information)
-      vise à renforcer le niveau de cybersécurité des tissus économique et administratif des pays membres de l'UE.
+      La directive NIS 2 permet d’élever le niveau global de cybersécurité par l’application de règles harmonisées et
+      simplifiées. Face à une cybermenace qui s’accroît, NIS 2 relève le défi d’une meilleure sécurisation des tissus
+      économique et administratif de la France et des pays membres de l'UE.
     </p>
     <p>
-      La transposition de la directive NIS&nbsp;2 en France est en cours. En attendant la publication de l’ensemble des
-      textes de transposition, et compte tenu de la menace actuelle, les futures entités essentielles et importantes
-      sont invitées à s’engager dès à présent dans une démarche visant à renforcer leur niveau de sécurité.
+      L’ANSSI, en tant qu’autorité nationale en matière de cybersécurité et de cyberdéfense, pilote la transposition en
+      droit national de la directive et assure sa mise en œuvre.
+    </p>
+    <p>
+      La transposition de la directive NIS 2 en France est en cours. En attendant la publication de l’ensemble des
+      textes de transposition, les futures entités essentielles et importantes sont invitées à s’engager dès à présent
+      dans une démarche visant à renforcer leur niveau de sécurité.
     </p>
 
     <AccordeonNis2 />
