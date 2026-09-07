@@ -32,7 +32,7 @@ describe('La ressource retour sur les mini-tests', () => {
     });
 
     it('doit répondre 201 pour le mini-test de maturité', async () => {
-      const reponse = await request(serveur).post('/api/retour-mini-tests/test-maturite').send(retourPositif);
+      const reponse = await request(serveur).post('/api/retour-mini-tests/test-maturité').send(retourPositif);
 
       assert.equal(reponse.status, HttpStatusCode.Created);
     });
@@ -44,14 +44,14 @@ describe('La ressource retour sur les mini-tests', () => {
     });
 
     it('doit répondre 400 si le corps de la requête est vide', async () => {
-      const reponse = await request(serveur).post('/api/retour-mini-tests/test-maturite').send({});
+      const reponse = await request(serveur).post('/api/retour-mini-tests/test-maturité').send({});
 
       assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.retour[0], 'Le retour doit être "POSITIF" ou "NEGATIF"');
     });
 
     it("doit répondre 400 si le retour n'est pas valide", async () => {
-      const reponse = await request(serveur).post('/api/retour-mini-tests/test-maturite').send({ retour: 'INVALIDE' });
+      const reponse = await request(serveur).post('/api/retour-mini-tests/test-maturité').send({ retour: 'INVALIDE' });
 
       assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.retour[0], 'Le retour doit être "POSITIF" ou "NEGATIF"');
@@ -59,16 +59,22 @@ describe('La ressource retour sur les mini-tests', () => {
 
     it('doit répondre 400 si le commentaire est trop long', async () => {
       const reponse = await request(serveur)
-        .post('/api/retour-mini-tests/test-maturite')
+        .post('/api/retour-mini-tests/test-maturité')
         .send({ retour: 'NEGATIF', commentaire: 'x'.repeat(1001) });
 
       assert.equal(reponse.status, HttpStatusCode.BadRequest);
       assert.equal(reponse.body.fieldErrors.commentaire[0], 'Le commentaire doit contenir au plus 1000 caractères');
     });
 
+    it('doit répondre 404 si le mini-test est inconnu', async () => {
+      const reponse = await request(serveur).post('/api/retour-mini-tests/inconnu').send(retourPositif);
+
+      assert.equal(reponse.status, HttpStatusCode.NotFound);
+    });
+
     describe('concernant les retours positifs', () => {
       it('publie un événement', async () => {
-        await request(serveur).post('/api/retour-mini-tests/test-maturite').send(retourPositif);
+        await request(serveur).post('/api/retour-mini-tests/test-maturité').send(retourPositif);
 
         busEvenements.aRecuUnEvenement(RetourMiniTestDonné);
         const evenement = busEvenements.recupereEvenement(RetourMiniTestDonné);
@@ -77,7 +83,7 @@ describe('La ressource retour sur les mini-tests', () => {
 
       it('publie un événement sans commentaire', async () => {
         await request(serveur)
-          .post('/api/retour-mini-tests/test-maturite')
+          .post('/api/retour-mini-tests/test-maturité')
           .send({ retour: 'POSITIF', commentaire: 'Ce test est sympa !' });
 
         busEvenements.aRecuUnEvenement(RetourMiniTestDonné);
@@ -90,7 +96,7 @@ describe('La ressource retour sur les mini-tests', () => {
     describe('concernant les retours négatifs', () => {
       it('publie un événement avec commentaire', async () => {
         await request(serveur)
-          .post('/api/retour-mini-tests/test-maturite')
+          .post('/api/retour-mini-tests/test-maturité')
           .send({ retour: 'NEGATIF', commentaire: 'Ce test est nul !' });
 
         busEvenements.aRecuUnEvenement(RetourMiniTestDonné);
