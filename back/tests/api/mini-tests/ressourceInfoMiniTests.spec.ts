@@ -27,13 +27,13 @@ describe('La ressource des informations des mini-tests', () => {
 
   describe('sur demande GET', () => {
     it('renvoie 200', async () => {
-      const reponse = await request(serveur).get('/api/reactions-mini-tests');
+      const reponse = await request(serveur).get('/api/info-mini-tests');
 
       assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('renvoie aucune réaction quand aucune n’existe', async () => {
-      const reponse = await request(serveur).get('/api/reactions-mini-tests');
+      const reponse = await request(serveur).get('/api/info-mini-tests');
 
       assert.deepEqual(reponse.body, {
         compteurs: {
@@ -48,7 +48,7 @@ describe('La ressource des informations des mini-tests', () => {
       await entrepotReactionMiniTest.ajoute(new RéactionMiniTest('VraiFaux', '🔥', 1));
       await entrepotReactionMiniTest.ajoute(new RéactionMiniTest('MaturiteCyber', '👍', 1));
 
-      const reponse = await request(serveur).get('/api/reactions-mini-tests');
+      const reponse = await request(serveur).get('/api/info-mini-tests');
 
       assert.deepEqual(reponse.body.réactions, {
         VraiFaux: { '❤️': 2, '🔥': 1 },
@@ -63,7 +63,7 @@ describe('La ressource des informations des mini-tests', () => {
         );
       }
 
-      const reponse = await request(serveur).get('/api/reactions-mini-tests');
+      const reponse = await request(serveur).get('/api/info-mini-tests');
 
       assert.equal(reponse.body.compteurs.MaturiteCyber, 200);
     });

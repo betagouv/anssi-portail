@@ -31,7 +31,7 @@
   }
 
   onMount(async () => {
-    const réponse = await axios.get<{ compteurs: { MaturiteCyber: number } }>('/api/reactions-mini-tests');
+    const réponse = await axios.get<{ compteurs: { MaturiteCyber: number } }>('/api/info-mini-tests');
     nombreOrganisation.target = réponse.data.compteurs.MaturiteCyber;
   });
 

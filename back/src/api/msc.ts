@@ -27,6 +27,7 @@ import { ressourcePriseEnCompte } from './mesures/ressourcePriseEnCompte.js';
 import { ressourceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepart.js';
 import { ressourceInfoMiniTests } from './mini-tests/ressourceInfoMiniTests.js';
 import { ressourceReactionMiniTest } from './mini-tests/ressourceReactionMiniTest.js';
+import { ressourceRéponsesVraiFaux } from './mini-tests/vrai-faux/ressourceReponsesVraiFaux.js';
 import { ressourceVraiFaux } from './mini-tests/vrai-faux/ressourceVraiFaux.js';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide.js';
 import { ressourceExigencesNis2 } from './nis2/ressourceExigencesNis2.js';
@@ -73,7 +74,6 @@ import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResul
 import { ressourceRetourTestMaturite } from './testMaturite/ressourceRetourTestMaturite.js';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
-import { ressourceRéponsesVraiFaux } from './mini-tests/vrai-faux/ressourceReponsesVraiFaux.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -321,11 +321,9 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute('/api/retours-experience', ressourceRetoursExperience(configurationServeur));
 
-  enregistreRoute(
-    '/api/reactions-mini-tests',
-    ressourceInfoMiniTests(configurationServeur),
-    ressourceReactionMiniTest(configurationServeur)
-  );
+  enregistreRoute('/api/info-mini-tests', ressourceInfoMiniTests(configurationServeur));
+
+  enregistreRoute('/api/reactions-mini-tests', ressourceReactionMiniTest(configurationServeur));
 
   enregistreRoute('/api/statistiques', ressourceStatistiques(configurationServeur));
 
