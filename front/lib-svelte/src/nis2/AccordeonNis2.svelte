@@ -179,6 +179,10 @@
     display: flex;
     flex-direction: column;
     margin: 2rem 0;
+
+    h6:not(:first-child) {
+      margin-top: 1.5rem;
+    }
   }
 
   :global(dsfr-button.action-declaration-incident) {
