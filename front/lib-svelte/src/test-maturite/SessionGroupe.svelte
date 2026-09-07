@@ -42,14 +42,19 @@
     if (codeSession !== codeFormate) codeSession = codeFormate;
   });
 
-  const propriétésFilAriane: PropriétésFilAriane = {
-    fondSombre: true,
-    feuille: 'Session de groupe',
-    branche: {
-      nom: 'Test de maturité cyber',
-      lien: '/test-maturite/',
+  const propriétésFilAriane: PropriétésFilAriane = [
+    {
+      nom: 'Faire le test !',
+      lien: '/faire-le-test',
     },
-  };
+    {
+      nom: 'Test de maturité cyber',
+      lien: '/test-maturite',
+    },
+    {
+      nom: 'Session de groupe',
+    },
+  ];
 </script>
 
 <Heros
