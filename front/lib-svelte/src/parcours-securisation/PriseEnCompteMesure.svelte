@@ -86,7 +86,7 @@
     left: 0;
     width: 100vw;
     background: var(--yellow-moutarde-925-125);
-    z-index: 10;
+    z-index: calc(var(--centre-aide-z-index) + 1);
     padding: 8px 8px 32px;
 
     @include a-partir-de(md) {
