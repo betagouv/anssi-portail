@@ -32,7 +32,7 @@
 
   let donnéesPage: DonnéesPage | undefined = $state(undefined);
   onMount(async () => {
-    const réponse = await axios.get('/api/reactions-mini-tests');
+    const réponse = await axios.get('/api/info-mini-tests');
     donnéesPage = { ...donnéesInitiales, ...réponse.data };
   });
 </script>
