@@ -27,7 +27,7 @@
     if (typeDeRetour === 'mesure') {
       return `/api/mesures/${identifiantCible}/avis`;
     }
-    return '/api/retour-mini-tests/test-maturite';
+    return '/api/retour-mini-tests/test-maturité';
   });
 
   const retourUtilisateur: RetourUtilisateur | undefined = $derived(clé ? récupèreRetour(clé) : undefined);
