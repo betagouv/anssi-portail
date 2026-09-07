@@ -9,6 +9,7 @@ import { valideCorpsRequete } from '../zod.js';
 import { schemaRessourceDemandesAide } from './ressourceDemandesAide.schema.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
+type CorpsDemandeAide = z.output<typeof schemaRessourceDemandesAide>;
 const ressourceDemandesAide = ({ adaptateurMonAideCyber }: ConfigurationServeur): Router => {
   const routeur = Router();
 
@@ -17,7 +18,7 @@ const ressourceDemandesAide = ({ adaptateurMonAideCyber }: ConfigurationServeur)
     '/',
     cors(),
     valideCorpsRequete(schemaRessourceDemandesAide),
-    filetRouteAsynchrone(async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceDemandesAide>>, reponse) => {
+    filetRouteAsynchrone(async (requete: CorpsDeRequeteTypee<CorpsDemandeAide>, reponse) => {
       try {
         const { emailAidant, identifiantAidant, siretAidant, entiteAidee, origine } = requete.body;
         const { email, departement, raisonSociale, siret } = entiteAidee;

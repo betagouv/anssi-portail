@@ -101,7 +101,7 @@ const ressourceDocumentsGuide = ({
     valideRequete(schemaAjoutDocumentGuide),
     recupereLeGuide(entrepotGuideTravail),
     filetRouteAsynchrone(
-      async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaAjoutDocumentGuide>['body']>, reponse) => {
+      async (requete: CorpsDeRequeteTypee<z.output<typeof schemaAjoutDocumentGuide>['body']>, reponse) => {
         const fichier = requete.file!; // Le fichier est forcément présent à ce stade, car validé par "valideLesDocuments()"
         await cellar.depose(
           { contenu: fichier.buffer, nom: fichier.originalname, typeDeContenu: fichier.mimetype },

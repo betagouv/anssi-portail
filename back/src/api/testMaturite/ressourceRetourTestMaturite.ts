@@ -15,7 +15,7 @@ const ressourceRetourTestMaturite = ({ busEvenements }: ConfigurationServeur) =>
     '/',
     valideCorpsRequete(schemaRessourceRetourTestMaturite),
     filetRouteAsynchrone(
-      async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceRetourTestMaturite>>, reponse: Response) => {
+      async (requete: CorpsDeRequeteTypee<z.output<typeof schemaRessourceRetourTestMaturite>>, reponse: Response) => {
         const retour = requete.body.retour;
 
         await busEvenements.publie(

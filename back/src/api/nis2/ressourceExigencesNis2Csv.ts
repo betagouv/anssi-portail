@@ -39,7 +39,7 @@ export const ressourceExigencesNis2Csv = ({ entrepotExigence }: ConfigurationSer
     '/',
     valideRequete(schemaRessourceExigencesNis2),
     filetRouteAsynchrone(async (requete, reponse) => {
-      const { source, cible, langue } = (requete as z.infer<typeof schemaRessourceExigencesNis2>).query;
+      const { source, cible, langue } = (requete as z.output<typeof schemaRessourceExigencesNis2>).query;
 
       const referentielSource = versReferentiel(source);
       const referentielCible = versReferentiel(cible);

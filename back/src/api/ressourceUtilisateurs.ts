@@ -11,7 +11,7 @@ import { valideCorpsRequete } from './zod.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 const construitLeSuiviDepuisLaRequête = (
-  requête: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceUtilisateurs>>
+  requête: CorpsDeRequeteTypee<z.output<typeof schemaRessourceUtilisateurs>>
 ): CompteCree['suivi'] => {
   const { campagne, redirectUrl, pageSource } = requête.query;
 
@@ -48,7 +48,7 @@ const ressourceUtilisateurs = ({
     '/',
     valideCorpsRequete(schemaRessourceUtilisateurs),
     filetRouteAsynchrone(
-      async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceUtilisateurs>>, reponse: Response) => {
+      async (requete: CorpsDeRequeteTypee<z.output<typeof schemaRessourceUtilisateurs>>, reponse: Response) => {
         const {
           telephone,
           domainesSpecialite,

@@ -13,7 +13,7 @@ export const ressourceRéponsesVraiFaux = ({ busEvenements, entrepôtQuestionVra
   routeur.post(
     '/',
     valideCorpsRequete(schemaPostRéponsesVraiFaux),
-    filetRouteAsynchrone(async (requête: CorpsDeRequeteTypee<z.infer<typeof schemaPostRéponsesVraiFaux>>, reponse) => {
+    filetRouteAsynchrone(async (requête: CorpsDeRequeteTypee<z.output<typeof schemaPostRéponsesVraiFaux>>, reponse) => {
       const toutesLesQuestions = await entrepôtQuestionVraieFausse.tous();
 
       const questionnaire = new QuestionnaireVraiFaux(toutesLesQuestions);

@@ -11,7 +11,7 @@ import { adaptateurMonAideCyberVide } from '../../../src/infra/adaptateurMonAide
 import { CodeDepartement } from '../../../src/metier/referentielDepartements.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
 
-type CorpsDemandeAide = z.infer<typeof schemaRessourceDemandesAide>;
+type CorpsDemandeAide = z.output<typeof schemaRessourceDemandesAide>;
 
 const uneDemandeAide = (parametres?: {
   email?: string;
