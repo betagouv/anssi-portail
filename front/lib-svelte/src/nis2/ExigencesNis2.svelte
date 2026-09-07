@@ -113,6 +113,7 @@
               '/documents-ressources/20260317_NIS_V2_Suivi des modifications ReCyF v2.4 vers v2.5-vfinale.pdf'
             )}
         />
+        <Lien href="/guides/fiches-pratiques-recyf" libelle="Consulter les fiches pratiques ReCyF" blank />
       </div>
       <dsfr-button
         label="Exporter le tableau"
@@ -173,8 +174,8 @@
       .telechargements {
         grid-area: telechargement;
         display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
         margin-bottom: 1.5rem;
       }
 
