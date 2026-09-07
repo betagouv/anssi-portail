@@ -1,10 +1,10 @@
 <script lang="ts">
   import { afficheParcoursSecurisation } from '$plateforme/environnement';
-  import DemandeDiagnosticSimplifiee from '../../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
-  import EncartPromotionParcoursBasique from '../../parcours-securisation/EncartPromotionParcoursBasique.svelte';
-  import TagProgrammeGratuit from '../../parcours-securisation/TagProgrammeGratuit.svelte';
-  import PartageTest from '../../test-maturite/PartageTest.svelte';
-  import Alternatives from '../../ui/Alternatives.svelte';
+  import DemandeDiagnosticSimplifiee from '../../../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
+  import EncartPromotionParcoursBasique from '../../../parcours-securisation/EncartPromotionParcoursBasique.svelte';
+  import TagProgrammeGratuit from '../../../parcours-securisation/TagProgrammeGratuit.svelte';
+  import PartageTest from '../../../test-maturite/PartageTest.svelte';
+  import Alternatives from '../../../ui/Alternatives.svelte';
 
   type Props = {
     réponses: boolean[];
@@ -100,8 +100,8 @@
 </dsfr-container>
 
 <style lang="scss">
-  @use '../../../../assets/styles/responsive' as *;
-  @use '../../../../assets/styles/grille.scss' as *;
+  @use '../../../../../assets/styles/responsive' as *;
+  @use '../../../../../assets/styles/grille.scss' as *;
   .encart-score {
     display: flex;
     flex-direction: column;

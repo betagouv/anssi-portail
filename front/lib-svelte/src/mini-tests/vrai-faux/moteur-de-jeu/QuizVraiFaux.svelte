@@ -18,7 +18,7 @@
   import { v7 as uuidv7 } from 'uuid';
   import { publieRéponseQuestionnaireVraiFaux } from '../../../passerelles/mini-tests/publicationRéponses';
   import FilAriane from '../../../ui/FilAriane.svelte';
-  import ScoreFinalQuizVraiFaux from '../ScoreFinalQuizVraiFaux.svelte';
+  import ScoreFinalQuizVraiFaux from './ScoreFinalQuizVraiFaux.svelte';
   import Question from './question/Question.svelte';
   import ReponseVraiFaux from './ReponseVraiFaux.svelte';
 
