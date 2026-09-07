@@ -43,13 +43,10 @@ jobs:
         with:
           node-version-file: '.nvmrc'
 
-      - name: Installe pnpm
-        uses: pnpm/setup@84cb39b217b10273981911c288cd62326dc7c6d2 # v2.0.2
-        with:
-          install: false
-
       - name: (TOUS) Installe les dépendances
-        run: pnpm install --frozen-lockfile
+        uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
+        with:
+          require-lockfile: true
 
       - name: Lance le script de comparaison
         run: pnpm -F comparaison-grist "start:${INPUTS_CIBLE}:compare"
