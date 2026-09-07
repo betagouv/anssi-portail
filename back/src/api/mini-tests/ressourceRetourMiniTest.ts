@@ -1,14 +1,15 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Response, Router } from 'express';
 import z from 'zod';
-import { RetourTestMaturitéDonné } from '../../bus/evenements/retourTestMaturiteDonne.js';
+import { RetourMiniTestDonné } from '../../bus/evenements/retourMiniTestDonne.js';
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { valideCorpsRequete } from '../zod.js';
-import { schemaRessourceRetourTestMaturite } from './ressourceRetourTestMaturite.schema.js';
+import { schemaRessourceRetourTestMaturite } from '../testMaturite/ressourceRetourTestMaturite.schema.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
+import { MiniTest } from '../../metier/mini-tests/mini-test.js';
 
-const ressourceRetourTestMaturite = ({ busEvenements }: ConfigurationServeur) => {
+const ressourceRetourMiniTest = ({ busEvenements }: ConfigurationServeur, miniTest: MiniTest) => {
   const routeur = Router();
 
   routeur.post(
@@ -19,8 +20,9 @@ const ressourceRetourTestMaturite = ({ busEvenements }: ConfigurationServeur) =>
         const retour = requete.body.retour;
 
         await busEvenements.publie(
-          new RetourTestMaturitéDonné({
+          new RetourMiniTestDonné({
             retour,
+            miniTest,
             ...(retour === 'NEGATIF' && { commentaire: requete.body.commentaire }),
           })
         );
@@ -33,4 +35,4 @@ const ressourceRetourTestMaturite = ({ busEvenements }: ConfigurationServeur) =>
   return routeur;
 };
 
-export { ressourceRetourTestMaturite };
+export { ressourceRetourMiniTest };
