@@ -81,7 +81,7 @@
   };
 
   const libelleFichierTelechargement = $derived(
-    langueSelectionnee === 'FR' ? 'Télécharger les exigences' : 'Télécharger les exigences (en)'
+    langueSelectionnee === 'FR' ? 'Télécharger ReCyf' : 'Télécharger ReCyf (en)'
   );
   const lienFichierTelechargement = $derived(
     langueSelectionnee === 'FR'
