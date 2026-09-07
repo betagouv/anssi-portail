@@ -44,9 +44,7 @@ export const fabriqueFilAriane: FabriqueFilAriane = (
   propriétés: PropriétésFilAriane,
   utilisateurEstConnecté: boolean = false
 ) => {
-  const segmentAccueil = utilisateurEstConnecté
-    ? { id: 'noeud-catalogue', label: 'Guides et ressources', href: '/catalogue' }
-    : { id: 'noeud-accueil', label: 'Accueil', href: '/' };
+  const segmentAccueil = { id: 'noeud-accueil', label: 'Accueil', href: '/' };
 
   if (Array.isArray(propriétés)) {
     const segments = propriétés.flatMap((segment) => {
