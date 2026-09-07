@@ -94,7 +94,7 @@
   <Avertissements estBureau={rendu.estBureau} />
   <div class="entete">
     <div class="titre">
-      <h2>Exigences applicables à NIS&nbsp;2</h2>
+      <h2>Le Référentiel Cyber France (ReCyF)</h2>
       <div class="telechargements">
         <Lien
           href={lienFichierTelechargement}
