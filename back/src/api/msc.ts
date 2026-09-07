@@ -285,6 +285,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'faire-le-test',
     'vrai-faux',
     'vrai-faux/quiz',
+    'exposition',
   ];
 
   if (configurationServeur.adaptateurEnvironnement.fonctionnalites().nis2().afficheSimulateur()) {
