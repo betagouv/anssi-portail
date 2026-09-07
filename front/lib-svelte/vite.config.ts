@@ -114,6 +114,7 @@ export default defineConfig(({ command, mode }) => {
           'mini-tests': 'src/main-mini-tests.ts',
           'mini-test-vrai-faux': 'src/main-mini-test-vrai-faux.ts',
           'mini-test-vrai-faux-quiz': 'src/main-mini-test-vrai-faux-quiz.ts',
+          exposition: 'src/main-exposition.ts',
         },
         output: {
           entryFileNames: `assets/[name].js`,

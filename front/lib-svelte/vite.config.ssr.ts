@@ -31,6 +31,7 @@ const rolldownOptions: NonNullable<UserConfig['build']>['rolldownOptions'] = {
     'mini-tests': 'src/mini-tests/MiniTests.svelte',
     'mini-test-vrai-faux': 'src/mini-tests/vrai-faux/LandingVraiFaux.svelte',
     'mini-test-vrai-faux-quiz': 'src/mini-tests/vrai-faux/moteur-de-jeu/QuizVraiFaux.svelte',
+    exposition: 'src/mini-tests/exposition/ExpositionCyberattaques.svelte',
   },
   output: {
     entryFileNames: `assets/[name].js`,
