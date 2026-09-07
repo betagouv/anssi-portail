@@ -120,7 +120,7 @@ describe('La ressource du parcours complet', () => {
 
       const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
 
-      assert.equal(reponse.body.modules[0].cibleBadge, 4);
+      assert.equal(reponse.body.modules[0].cibleBadge, 2);
     });
 
     it("retourne le nombre de mesures prises en compte par l'utilisateur pour chaque module", async () => {
