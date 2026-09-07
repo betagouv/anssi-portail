@@ -229,7 +229,7 @@
       padding: 1rem;
       position: sticky;
       margin-inline: -1rem;
-      z-index: 2;
+      z-index: calc(var(--centre-aide-z-index) + 1);
     }
 
     @include a-partir-de(md) {
