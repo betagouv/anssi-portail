@@ -33,9 +33,12 @@
       ? [itemDeMenu('🚀 Protéger mon organisation', lienParcoursSécurisation, cheminRelatif === '/cyberdepart')]
       : [itemDeMenu('Diagnostic cyber gratuit', '/cyberdepart', cheminRelatif === '/cyberdepart')]),
 
-    ...(estConnecte()
-      ? [itemDeMenu('Test de maturité cyber', '/ma-maturite', cheminRelatif === '/ma-maturite')]
-      : [itemDeMenu('Test de maturité cyber', '/test-maturite', cheminRelatif === '/test-maturite')]),
+    itemDeMenu(
+      'Faire le test !',
+      '/faire-le-test',
+      ['/faire-le-test', '/test-maturite', '/ma-maturite', '/session-groupe'].includes(cheminRelatif) ||
+        cheminRelatif.startsWith('/vrai-faux')
+    ),
 
     itemDeMenu(
       'Guides et ressources',
