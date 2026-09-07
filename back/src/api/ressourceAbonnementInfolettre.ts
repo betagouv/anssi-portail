@@ -12,7 +12,7 @@ export const ressourceAbonnementInfolettre = ({ adaptateurEmail }: Configuration
   routeur.post(
     '/',
     valideCorpsRequete(schemaAbonnementInfolettre),
-    filetRouteAsynchrone(async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaAbonnementInfolettre>>, reponse) => {
+    filetRouteAsynchrone(async (requete: CorpsDeRequeteTypee<z.output<typeof schemaAbonnementInfolettre>>, reponse) => {
       await adaptateurEmail.inscrisAInfolettre(requete.body.email);
       reponse.sendStatus(HttpStatusCode.Created);
     })

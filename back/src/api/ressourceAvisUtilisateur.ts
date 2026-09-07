@@ -14,7 +14,7 @@ export const ressourceAvisUtilisateur = ({ busEvenements, messagerieInstantanee 
     '/',
     valideCorpsRequete(schemaRessourceAvisUtilisateur),
     filetRouteAsynchrone(
-      async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceAvisUtilisateur>>, reponse: Response) => {
+      async (requete: CorpsDeRequeteTypee<z.output<typeof schemaRessourceAvisUtilisateur>>, reponse: Response) => {
         const { niveauDeSatisfaction, commentaire, emailDeContact } = requete.body;
         await messagerieInstantanee.notifieUnAvisUtilisateur({
           niveauDeSatisfaction,

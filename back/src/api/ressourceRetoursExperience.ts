@@ -14,7 +14,7 @@ export const ressourceRetoursExperience = ({ messagerieInstantanee, busEvenement
     '/',
     valideCorpsRequete(schemaRessourceRetoursExperience),
     filetRouteAsynchrone(
-      async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceRetoursExperience>>, reponse: Response) => {
+      async (requete: CorpsDeRequeteTypee<z.output<typeof schemaRessourceRetoursExperience>>, reponse: Response) => {
         const { raison, emailDeContact, precision } = requete.body;
         await messagerieInstantanee.notifieUnRetourExperience({
           raison,

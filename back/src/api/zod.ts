@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import * as z from 'zod';
 
 export const valideRequete =
-  <TZod extends z.ZodType, TReq extends z.infer<TZod>>(objet: TZod) =>
+  <TZod extends z.ZodType, TReq extends z.output<TZod>>(objet: TZod) =>
   async (
     requete: Request<unknown, unknown, unknown, unknown, never> | TReq,
     reponse: Response,
@@ -15,7 +15,7 @@ export const valideRequete =
   };
 
 export const valideParametresRequete =
-  <TZod extends z.ZodType, TParams extends z.infer<TZod>>(objet: TZod) =>
+  <TZod extends z.ZodType, TParams extends z.output<TZod>>(objet: TZod) =>
   async (requete: Request<TParams, unknown, unknown, unknown, never>, reponse: Response, suite: NextFunction) => {
     const resultat = objet.safeParse(requete.params);
 
@@ -27,7 +27,7 @@ export const valideParametresRequete =
   };
 
 export const valideCorpsRequete =
-  <TZod extends z.ZodType, TBody extends z.infer<TZod>>(objet: TZod) =>
+  <TZod extends z.ZodType, TBody extends z.output<TZod>>(objet: TZod) =>
   async (requete: Request<unknown, unknown, TBody, unknown, never>, reponse: Response, suite: NextFunction) => {
     const resultat = objet.safeParse(requete.body === undefined ? {} : requete.body);
 

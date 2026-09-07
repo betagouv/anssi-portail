@@ -23,7 +23,7 @@ const ressourceFavoris = ({
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(schemaRessourceFavoris),
     filetRouteAsynchrone(
-      async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceFavoris>>, reponse: Response) => {
+      async (requete: CorpsDeRequeteTypee<z.output<typeof schemaRessourceFavoris>>, reponse: Response) => {
         const idItemCyber = requete.body.idItemCyber;
         const utilisateur = requete.utilisateur;
         await entrepotFavori.ajoute({

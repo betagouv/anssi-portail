@@ -24,7 +24,7 @@ const ressourceAvisMesure = ({
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(schemaRessourceAvisMesure),
     filetRouteAsynchrone(
-      async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceAvisMesure>>, reponse: Response) => {
+      async (requete: CorpsDeRequeteTypee<z.output<typeof schemaRessourceAvisMesure>>, reponse: Response) => {
         const idMesure = requete.params.idMesure as string;
         const retour = requete.body.retour;
         const mesureTrouvee = await entrepotMesure.parId(idMesure);

@@ -24,7 +24,7 @@ const ressourceResultatsDeTest = ({
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     valideCorpsRequete(schemaRessourceResultatsDeTest),
     filetRouteAsynchrone(
-      async (requete: CorpsDeRequeteTypee<z.infer<typeof schemaRessourceResultatsDeTest>>, reponse: Response) => {
+      async (requete: CorpsDeRequeteTypee<z.output<typeof schemaRessourceResultatsDeTest>>, reponse: Response) => {
         const { tailleOrganisation, region, secteur, reponses, codeSessionGroupe } = requete.body;
 
         const utilisateur = requete.utilisateur;
