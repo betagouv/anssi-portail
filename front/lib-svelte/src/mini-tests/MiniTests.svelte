@@ -8,6 +8,9 @@
   import IllustrationHeroMiniTest from './IllustrationHeroMiniTest.svelte';
   import PlanteAnimee from './PlanteAnimee.svelte';
   import TestVraiFauxAnime from './TestVraiFauxAnime.svelte';
+  import { profilStore } from '../stores/profil.store';
+
+  const estConnecté = $derived(!!$profilStore);
 
   const propriétésFilAriane: PropriétésFilAriane = {
     feuille: 'Faire le test !',
@@ -58,7 +61,7 @@
         cible="MaturiteCyber"
         couleurDeFond="--background-alt-green-bourgeon"
         titre="Quelle est la maturité cyber de votre organisation&nbsp?"
-        href="/test-maturite"
+        href={estConnecté ? '/ma-maturite' : '/test-maturite'}
         réactions={donnéesPage?.réactions.MaturiteCyber ?? {}}
         badge={{
           libellé:
