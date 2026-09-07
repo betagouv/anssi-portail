@@ -1,4 +1,8 @@
 <script lang="ts">
+  import axios from 'axios';
+  import { onMount } from 'svelte';
+  import { cubicOut } from 'svelte/easing';
+  import { Tween } from 'svelte/motion';
   import Bouton from '../ui/Bouton.svelte';
   import type { PropriétésFilAriane } from '../ui/filAriane';
   import HerosRiche from '../ui/HerosRiche.svelte';
@@ -12,6 +16,10 @@
 
   let { introFaite = $bindable(false) }: Props = $props();
   let enPause = $state(false);
+  let nombreOrganisation = new Tween(0, {
+    duration: 2000,
+    easing: cubicOut,
+  });
   const libelléPause = $derived(enPause ? 'Lancer les animations' : 'Mettre les animations en pause');
 
   const basculePause = () => {
@@ -22,7 +30,13 @@
     introFaite = true;
   }
 
+  onMount(async () => {
+    const réponse = await axios.get<{ compteurs: { MaturiteCyber: number } }>('/api/reactions-mini-tests');
+    nombreOrganisation.target = réponse.data.compteurs.MaturiteCyber;
+  });
+
   const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Test de maturité cyber', fondSombre: false };
+  const formateur = Intl.NumberFormat('fr', { notation: 'compact', compactDisplay: 'short', roundingMode: 'floor' });
 </script>
 
 <HerosRiche
@@ -31,7 +45,10 @@
   variante="cafe-creme"
   badges={[
     { label: '⏱️ 5 min.', accent: 'purple-glycine' },
-    { label: '🔥 +12k organisations ont fait le test', accent: 'purple-glycine' },
+    {
+      label: `🔥 +${formateur.format(nombreOrganisation.current)} organisations ont fait le test`,
+      accent: 'purple-glycine',
+    },
   ]}
   class="avec-image-fond"
 >
