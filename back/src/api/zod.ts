@@ -9,7 +9,7 @@ export const valideRequete =
     reponse: Response,
     suite: NextFunction
   ) => {
-    const resultat = objet.safeParse(requete) as z.ZodSafeParseResult<z.core.output<TZod>>;
+    const resultat = objet.safeParse(requete) as z.ZodSafeParseResult<z.output<TZod>>;
     if (!resultat.success) return reponse.sendStatus(HttpStatusCode.BadRequest);
     return suite();
   };
