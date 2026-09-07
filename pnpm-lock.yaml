@@ -331,7 +331,7 @@ importers:
         version: 1.4.0
       express-rate-limit:
         specifier: ^8.0.0
-        version: 8.6.2(express@5.2.1(supports-color@10.2.2))(supports-color@10.2.2)
+        version: 8.7.0(express@5.2.1(supports-color@10.2.2))(supports-color@10.2.2)
       forwarded-parse:
         specifier: ^2.1.2
         version: 2.1.2
@@ -2706,8 +2706,8 @@ packages:
     peerDependencies:
       express: '>= 4.11'
 
-  express-rate-limit@8.6.2:
-    resolution: {integrity: sha512-YH4ru+eOJxQABscKFfRCy9R7x9QFGdezclVMwwgFFndzS2Xnm0uo6B0ABZsLhcpeptGv2qvuJVWlQr9gQZoC3A==}
+  express-rate-limit@8.7.0:
+    resolution: {integrity: sha512-hOwV7WOxXfjRpAM1DSJWZDXx3GhplwD8IfwuwvogD8i1Qnkgosw/H45s4ZnFAUHDAhPjlY9hLBvJhKmGMyY26g==}
     engines: {node: '>= 16'}
     peerDependencies:
       express: '>= 4.11'
@@ -6419,7 +6419,7 @@ snapshots:
     dependencies:
       express: 5.2.1(supports-color@10.2.2)
 
-  express-rate-limit@8.6.2(express@5.2.1(supports-color@10.2.2))(supports-color@10.2.2):
+  express-rate-limit@8.7.0(express@5.2.1(supports-color@10.2.2))(supports-color@10.2.2):
     dependencies:
       debug: 4.4.3(supports-color@10.2.2)
       express: 5.2.1(supports-color@10.2.2)
