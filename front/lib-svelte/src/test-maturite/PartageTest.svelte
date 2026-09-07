@@ -7,12 +7,23 @@
     sujetMail,
     typeDeRetour,
   }: { cheminPartagé: string; sujetMail: string; typeDeRetour: TypeDeRetour } = $props();
+
+  const clé = $derived.by(() => {
+    switch (typeDeRetour) {
+      case 'test-maturité':
+        return 'resultat-test';
+      case 'vrai-faux':
+        return 'retour-utilisateur:vrai-faux';
+      case 'mesure':
+        throw new Error('Ce composant ne doit pas être utilisé pour un retour utilisateur depuis une page mesure');
+    }
+  });
 </script>
 
 <dsfr-container class="partage-test">
   <div class="contenu-section">
     <div class="retour">
-      <RetourUtilisateurSurContenu clé="resultat-test" {typeDeRetour}>
+      <RetourUtilisateurSurContenu {clé} {typeDeRetour}>
         <p class="texte-article-lg">Ce test vous a-t-il aidé&nbsp;?</p>
       </RetourUtilisateurSurContenu>
     </div>
