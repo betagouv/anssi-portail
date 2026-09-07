@@ -35,7 +35,14 @@
     nombreOrganisation.target = réponse.data.compteurs.MaturiteCyber;
   });
 
-  const propriétésFilAriane: PropriétésFilAriane = { feuille: 'Test de maturité cyber', fondSombre: false };
+  const propriétésFilAriane: PropriétésFilAriane = {
+    branche: {
+      nom: 'Faire le test !',
+      lien: '/faire-le-test',
+    },
+    feuille: 'Test de maturité cyber',
+    fondSombre: false,
+  };
   const formateur = Intl.NumberFormat('fr', { notation: 'compact', compactDisplay: 'short', roundingMode: 'floor' });
 </script>
 

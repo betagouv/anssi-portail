@@ -47,6 +47,10 @@
     { label: 'Comparaison avec d’autres entités', fragment: '#comparaison' },
   ];
   const propriétésFilAriane: PropriétésFilAriane = {
+    branche: {
+      nom: 'Faire le test !',
+      lien: '/faire-le-test',
+    },
     feuille: 'Test de maturité cyber',
   };
 </script>

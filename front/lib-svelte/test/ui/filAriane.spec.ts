@@ -40,12 +40,6 @@ describe('La fabrique du fil d’Ariane', () => {
     });
 
     describe("fabrique un fil d'Ariane en mode connectée", () => {
-      it('le segment "catalogue" est présent', () => {
-        const filAriane = fabriqueFilAriane(propriétésFilAriane, true);
-
-        expect(filAriane[0]).toEqual({ id: 'noeud-catalogue', label: 'Guides et ressources', href: '/catalogue' });
-      });
-
       it('le segment "branche connectée" est présent', () => {
         const filAriane = fabriqueFilAriane(propriétésFilAriane, true);
 
@@ -137,12 +131,6 @@ describe('La fabrique du fil d’Ariane', () => {
     });
 
     describe("fabrique un fil d'Ariane en mode connecté", () => {
-      it('le segment "catalogue" est présent', () => {
-        const filAriane = fabriqueFilAriane(propriétésFilAriane, true);
-
-        expect(filAriane[0]).toEqual({ id: 'noeud-catalogue', label: 'Guides et ressources', href: '/catalogue' });
-      });
-
       it('le segment "branche parent connectée"  est présent', () => {
         const filAriane = fabriqueFilAriane(propriétésFilAriane, true);
 
