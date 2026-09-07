@@ -1,1 +1,1 @@
-export type MiniTest = 'test-maturité';
+export type MiniTest = 'test-maturité' | 'vrai-faux';

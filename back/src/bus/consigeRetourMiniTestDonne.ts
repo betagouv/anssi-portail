@@ -3,7 +3,10 @@ import { AdaptateurJournal } from '../infra/adaptateurJournal.js';
 import { DonneesEvenement } from '../infra/donneesEvenement.js';
 import { RetourMiniTestDonné } from './evenements/retourMiniTestDonne.js';
 
-type ÉvènementsMiniTest = Extract<DonneesEvenement, { type: 'RETOUR_TEST_MATURITE_DONNE' }>;
+type ÉvènementsMiniTest = Extract<
+  DonneesEvenement,
+  { type: 'RETOUR_TEST_MATURITE_DONNE' | 'RETOUR_TEST_VRAI_FAUX_DONNÉ' }
+>;
 
 export const consigneRetourMiniTestDonné = ({
   adaptateurJournal,
@@ -17,6 +20,8 @@ export const consigneRetourMiniTestDonné = ({
       switch (évènement.miniTest) {
         case 'test-maturité':
           return 'RETOUR_TEST_MATURITE_DONNE';
+        case 'vrai-faux':
+          return 'RETOUR_TEST_VRAI_FAUX_DONNÉ';
         default:
           throw new Error(`mini-test "${évènement.miniTest}" non pris en charge`);
       }
