@@ -212,11 +212,7 @@ describe("L'utilisateur", () => {
 
       describe('du module Cyberdépart', () => {
         it('publie un événement de déblocage de badge', async () => {
-          utilisateurDeParcours.mesuresPrisesEnCompte = [
-            mesureDeTest().avecLId('mes1').construis(),
-            mesureDeTest().avecLId('mes2').construis(),
-            mesureDeTest().avecLId('mes3').construis(),
-          ];
+          utilisateurDeParcours.mesuresPrisesEnCompte = [mesureDeTest().avecLId('mes1').construis()];
           moduleCyberdépart.mesures = [
             mesure,
             mesureDeTest().avecLId('mes1').construis(),
@@ -230,11 +226,7 @@ describe("L'utilisateur", () => {
         });
 
         it('signale que la prise en compte debloque le badge Cyberdépart', async () => {
-          utilisateurDeParcours.mesuresPrisesEnCompte = [
-            mesureDeTest().avecLId('mes1').construis(),
-            mesureDeTest().avecLId('mes2').construis(),
-            mesureDeTest().avecLId('mes3').construis(),
-          ];
+          utilisateurDeParcours.mesuresPrisesEnCompte = [mesureDeTest().avecLId('mes1').construis()];
           moduleCyberdépart.mesures = [
             mesure,
             mesureDeTest().avecLId('mes1').construis(),
@@ -272,10 +264,7 @@ describe("L'utilisateur", () => {
         });
 
         it("ne publie pas un événement de déblocage de badge si le seuil n'est pas atteint", async () => {
-          utilisateurDeParcours.mesuresPrisesEnCompte = [
-            mesureDeTest().avecLId('mes1').construis(),
-            mesureDeTest().avecLId('mes2').construis(),
-          ];
+          utilisateurDeParcours.mesuresPrisesEnCompte = [];
 
           moduleCyberdépart.mesures = [
             mesure,
@@ -291,11 +280,7 @@ describe("L'utilisateur", () => {
         });
 
         it('publie les totaux lors du déblocage du badge', async () => {
-          utilisateurDeParcours.mesuresPrisesEnCompte = [
-            mesureDeTest().avecLId('mes1').construis(),
-            mesureDeTest().avecLId('mes2').construis(),
-            mesureDeTest().avecLId('mes3').construis(),
-          ];
+          utilisateurDeParcours.mesuresPrisesEnCompte = [mesureDeTest().avecLId('mes1').construis()];
           moduleCyberdépart.mesures = [
             mesure,
             mesureDeTest().avecLId('mes1').construis(),
@@ -306,7 +291,7 @@ describe("L'utilisateur", () => {
           await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
 
           const evenement = busEvenements.recupereEvenement(BadgeCyberdépartDébloqué);
-          assert.equal(evenement!.nombreMesuresActuel, 4);
+          assert.equal(evenement!.nombreMesuresActuel, 2);
           assert.equal(evenement!.nombreMesuresTotal, 5);
         });
 

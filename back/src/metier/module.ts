@@ -11,7 +11,7 @@ export class Module {
     readonly description: string
   ) {}
 
-  cibleDéblocageBadgeCyberdépart = () => (this.id === 1 ? Math.floor(this.mesures.length * 0.8) : undefined);
+  cibleDéblocageBadgeCyberdépart = () => (this.id === 1 ? Math.floor(this.mesures.length * 0.5) : undefined);
 
   rangDeLaMesure = (mesure: Mesure) =>
     this.mesures.toSorted((a, b) => a.ordre - b.ordre).findIndex((m) => m.id === mesure.id);

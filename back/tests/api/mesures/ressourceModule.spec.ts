@@ -148,7 +148,7 @@ describe('La ressource d’un module', () => {
 
       const { body } = await getModuleCyberdépartConnecté();
 
-      assert.equal(body.cibleBadge, 4);
+      assert.equal(body.cibleBadge, 2);
     });
 
     it('valide le type du paramètre de la requête', async () => {
