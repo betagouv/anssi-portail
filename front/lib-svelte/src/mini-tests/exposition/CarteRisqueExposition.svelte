@@ -31,12 +31,22 @@
     <div slot="badgesgroup">
       <dsfr-badge label="renforcée" type="status" status="warning" size="md"></dsfr-badge>
     </div>
-    <div slot="contentend" class="stats">
-      <p class="pourcentage fr-h4">8%</p>
-      <dsfr-badge has-icon icon="arrow-right-up-line" type="accent" accent="green-emeraude" size="sm" label="en hausse"
-      ></dsfr-badge>
-      <p class="texte-detail-sm">Lorem ipsum dolor sit amet</p>
-    </div>
+    {#if menace.resume}
+      <div slot="contentend" class="stats">
+        <p class="pourcentage fr-h4">{menace.resume.indicateur}</p>
+        {#if menace.resume.enHausse}
+          <dsfr-badge
+            has-icon
+            icon="arrow-right-up-line"
+            type="accent"
+            accent="green-emeraude"
+            size="sm"
+            label="en hausse"
+          ></dsfr-badge>
+        {/if}
+        <p class="texte-detail-sm">{menace.resume.texte}</p>
+      </div>
+    {/if}
     <div slot="buttonsgroup">
       <Bouton
         libelle="Afficher le détail"
