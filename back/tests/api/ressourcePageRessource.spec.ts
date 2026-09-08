@@ -46,6 +46,17 @@ describe('La ressource page Service', () => {
     });
   });
 
+  for (const id of ['cyber-enjeux', 'cyber-enjeux-pro', 'reflexes-cyber', 'secnumedu']) {
+    it(`redirige l'ancienne URL HTML de ${id} vers l'URL sans extension`, async () => {
+      for (const suffixe of ['', '/']) {
+        const reponse = await request(serveur).get(`/ressources/${id}.html${suffixe}`);
+
+        assert.equal(reponse.status, HttpStatusCode.MovedPermanently);
+        assert.equal(reponse.headers.location, `/ressources/${id}`);
+      }
+    });
+  }
+
   it('retourne une erreur 404 si la page n’est pas trouvée', async () => {
     fournisseurChemin.jekyll.ressource = (_id: string) => {
       throw new FichierInconnu('');

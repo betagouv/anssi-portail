@@ -19,7 +19,7 @@ cible: |
 liens:
   - accompagnement:
     titre: CyberEnJeux
-    lien: /ressources/cyber-enjeux.html
+    lien: /ressources/cyber-enjeux
     illustration: demainspecialistecyber/demainspecialistecyber-cyberenjeux.avif
 ---
 
