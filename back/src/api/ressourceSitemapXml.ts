@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 import fs, { writeFileSync } from 'fs';
+import { basename } from 'node:path';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { siteFront } from './fournisseurChemin.js';
@@ -90,7 +91,7 @@ const construitRoutesDynamiques = async ({
     .filter((f) => f.indexOf('front/_site/ressources') >= 0)
     .filter((f) => f.indexOf('.html') >= 0)
     .filter(contientFicheDétaillée)
-    .map((f) => ({ url: `/ressources/${f.split('/').pop()}`, modifieLe: fs.statSync(f).mtime }));
+    .map((f) => ({ url: `/ressources/${basename(f, '.html')}`, modifieLe: fs.statSync(f).mtime }));
 
   const liensServices = siteFront
     .fichiers()

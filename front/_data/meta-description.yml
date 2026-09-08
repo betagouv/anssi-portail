@@ -37,9 +37,9 @@
 /services/mon-espace-nis2.html: "Pré-inscrivez-vous auprès de l'ANSSI si votre organisation est soumise à la directive NIS2 et accédez à un accompagnement dédié à votre mise en conformité."
 /services/mon-service-securise.html: "Sécurisez et homologuez vos services numériques publics avec MonServiceSécurisé : identifiez vos besoins, construisez un plan d'action et gérez la conformité."
 /services/secnum-academie.html: "Formez-vous à la cybersécurité gratuitement avec SecNumAcadémie, le MOOC de l'ANSSI : SSI, authentification, sécurité du poste de travail et internet."
-/ressources/cyber-enjeux.html: 'Enseignez la cybersécurité de façon ludique avec CyberEnJeux : un outil pédagogique innovant pour collégiens et lycéens basé sur la création de jeux vidéo.'
-/ressources/cyber-enjeux-pro.html: "Sensibilisez vos équipes à la cybersécurité avec CyberEnJeux Pro : formation et cohésion par le jeu sérieux, pour entreprises et établissements d'enseignement."
-/ressources/secnumedu.html: "Trouvez des formations initiales labellisées SecNumEdu par l'ANSSI pour débuter ou approfondir une carrière dans la cybersécurité."
+/ressources/cyber-enjeux: 'Enseignez la cybersécurité de façon ludique avec CyberEnJeux : un outil pédagogique innovant pour collégiens et lycéens basé sur la création de jeux vidéo.'
+/ressources/cyber-enjeux-pro: "Sensibilisez vos équipes à la cybersécurité avec CyberEnJeux Pro : formation et cohésion par le jeu sérieux, pour entreprises et établissements d'enseignement."
+/ressources/secnumedu: "Trouvez des formations initiales labellisées SecNumEdu par l'ANSSI pour débuter ou approfondir une carrière dans la cybersécurité."
 /financements/: 'Découvrez les aides et dispositifs de financement disponibles pour aider votre organisation à mettre en place des solutions de cybersécurité.'
 /: "MesServicesCyber : la plateforme de l'ANSSI pour accéder gratuitement à des services, guides et outils de cybersécurité adaptés à votre organisation."
 /collectivites/: "Découvrez les services pour protéger votre collectivité contre les cybermenaces. Solutions adaptées aux collectivités territoriales, proposées par l'ANSSI."

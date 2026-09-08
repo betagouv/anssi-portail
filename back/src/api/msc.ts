@@ -150,6 +150,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ['/mentionsLegales', '/mentions-legales'],
     ['/guides/la-defense-en-profondeur-appliquee-aux-systemes-dinformation', '/guides/essentiels-defense-profondeur'],
     ['/services/mon-espace-nis2.html', '/nis2'],
+    ['/ressources/cyber-enjeux.html', '/ressources/cyber-enjeux'],
+    ['/ressources/cyber-enjeux-pro.html', '/ressources/cyber-enjeux-pro'],
+    ['/ressources/reflexes-cyber.html', '/ressources/reflexes-cyber'],
+    ['/ressources/secnumedu.html', '/ressources/secnumedu'],
     ['/promouvoir-messervicescyber', '/'],
     ['/promouvoir-diagnostic-cyber', '/'],
   ].forEach(([precedent, nouveau]: string[]) => {

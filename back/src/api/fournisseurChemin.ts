@@ -95,7 +95,7 @@ export const fournisseurChemin: FournisseurChemin = {
     llmsTxt: () => construisCheminVersArtefactJekyll('llms.txt'),
 
     page: (nom: string) => construisCheminVersArtefactJekyll(nom, 'index.html'),
-    ressource: (nom: string) => construisCheminVersArtefactJekyll('ressources', nom),
+    ressource: (nom: string) => construisCheminVersArtefactJekyll('ressources', `${nom}.html`),
     contact: (nom: string) => construisCheminVersArtefactJekyll('contacts', nom),
     service: (nom: string) => construisCheminVersArtefactJekyll('services', nom),
     composantSvelteCompilé: (nom: string) =>
