@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-ara
 titreHtml: "Contacts d'Auvergne-Rhône-Alpes | MesServicesCyber"
 styles: /assets/styles/contacts.css
 ---

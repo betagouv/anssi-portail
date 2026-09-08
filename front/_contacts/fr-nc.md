@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-nc
 titreHtml: 'Contacts de Nouvelle-Calédonie | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

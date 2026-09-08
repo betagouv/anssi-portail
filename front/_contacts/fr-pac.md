@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-pac
 titreHtml: 'Contacts de Provence-Alpes-Côte d’Azur | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

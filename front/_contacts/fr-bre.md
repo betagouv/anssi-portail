@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-bre
 titreHtml: 'Contacts de Bretagne | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

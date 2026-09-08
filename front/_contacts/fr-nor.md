@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-nor
 titreHtml: 'Contacts de Normandie | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

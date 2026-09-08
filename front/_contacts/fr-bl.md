@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-bl
 titreHtml: 'Contacts de Saint-Barthélemy | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

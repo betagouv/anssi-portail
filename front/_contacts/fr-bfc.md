@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-bfc
 titreHtml: 'Contacts de Bourgogne-Franche-Comté | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---
