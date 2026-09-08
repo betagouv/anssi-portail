@@ -59,6 +59,7 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
     page404: () => ressourceFactice(),
     pageMaintenance: () => ressourceFactice(),
     robotsTxt: () => ressourceFactice(),
+    llmsTxt: () => ressourceFactice(),
     page: (_nom: string) => ressourceFactice(),
     ressource: (_nom: string) => ressourceFactice(),
     contact: (_nom: string) => ressourceFactice(),
