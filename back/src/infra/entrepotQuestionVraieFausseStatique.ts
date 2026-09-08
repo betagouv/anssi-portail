@@ -82,8 +82,8 @@ export class EntrepôtQuestionVraieFausseStatique implements EntrepôtQuestionVr
         idQuestion: 'payerRançonRécupèreDonnées',
         idéeReçueEstVraie: false,
         explications: [
-          'Plusieurs semaines de fonctionnement dégradé sont fréquentes.',
-          "En 2025, des établissements scolaires ont dû fonctionner en mode dégradé pendant plusieurs semaines suite à un rançongiciel. Une autre compromission traitée par l'ANSSI a entraîné, après des mesures d'endiguement précipitées, un arrêt total et une perturbation des activités sur le long cours. L'ANSSI rappelle qu'un PCA et un PRA préparés en amont sont indispensables.",
+          "Aucune garantie, et l'expérience montre des fichiers souvent corrompus.",
+          "L'ANSSI recommande de ne jamais payer. Le paiement ne garantit pas l'obtention d'un moyen de déchiffrement, incite les cybercriminels à poursuivre, et n'empêche pas d'être ciblé à nouveau. L'expérience montre par ailleurs que l'obtention de la clé de déchiffrement ne permet pas toujours de reconstituer l'intégralité des fichiers — en particulier ceux modifiés en cours d'attaque (bases de données, etc.) qui sont souvent corrompus.",
         ],
         réponse: 'FAUX. Payer la rançon permet de récupérer ses données chiffrées.',
         idéeReçue: {
