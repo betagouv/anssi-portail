@@ -97,7 +97,7 @@ export const fournisseurChemin: FournisseurChemin = {
     page: (nom: string) => construisCheminVersArtefactJekyll(nom, 'index.html'),
     ressource: (nom: string) => construisCheminVersArtefactJekyll('ressources', `${nom}.html`),
     contact: (nom: string) => construisCheminVersArtefactJekyll('contacts', nom),
-    service: (nom: string) => construisCheminVersArtefactJekyll('services', nom),
+    service: (nom: string) => construisCheminVersArtefactJekyll('services', `${nom}.html`),
     composantSvelteCompilé: (nom: string) =>
       construisCheminVersArtefactJekyll('lib-svelte', 'dist', 'serveur', 'assets', `${nom}.js`),
 

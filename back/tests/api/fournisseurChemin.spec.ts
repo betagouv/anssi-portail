@@ -44,6 +44,13 @@ describe('le fournisseurChemin', () => {
       assert.equal(fournisseurChemin.jekyll.ressource('cyber-enjeux-pro'), chemin);
     });
 
+    it('résout une URL de service sans extension vers le fichier HTML', () => {
+      const chemin = `${process.cwd()}/front/_site/services/demainspecialistecyber.html`;
+      siteFront.fichiers = () => [chemin];
+
+      assert.equal(fournisseurChemin.jekyll.service('demainspecialistecyber'), chemin);
+    });
+
     it('refuse un fichier qui ne se trouve pas dans le site', () => {
       siteFront.fichiers = () => [];
 

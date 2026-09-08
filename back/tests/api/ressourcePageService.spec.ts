@@ -53,6 +53,27 @@ describe('La ressource page Service', () => {
     assert.equal(reponse.headers.location, '/nis2');
   });
 
+  for (const id of [
+    'ads',
+    'conseil-technique',
+    'demainspecialistecyber',
+    'mon-aide-cyber',
+    'mon-aide-cyber-aidants',
+    'mon-service-securise',
+    'mooc-ebios-rm',
+    'secnum-academie',
+    'silene',
+  ]) {
+    it(`redirige l'ancienne URL HTML de ${id} vers l'URL sans extension`, async () => {
+      for (const suffixe of ['', '/']) {
+        const reponse = await request(serveur).get(`/services/${id}.html${suffixe}`);
+
+        assert.equal(reponse.status, HttpStatusCode.MovedPermanently);
+        assert.equal(reponse.headers.location, `/services/${id}`);
+      }
+    });
+  }
+
   it('retourne une erreur 404 si la page n’est pas trouvée', async () => {
     fournisseurChemin.jekyll.service = (_id: string) => {
       throw new FichierInconnu('');

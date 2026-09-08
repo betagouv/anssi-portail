@@ -99,7 +99,7 @@ const construitRoutesDynamiques = async ({
     .filter((f) => f.indexOf('.html') >= 0)
     .filter((f) => f.indexOf('index.html') < 0)
     .filter(contientFicheDétaillée)
-    .map((f) => ({ url: `/services/${f.split('/').pop()}`, modifieLe: fs.statSync(f).mtime }));
+    .map((f) => ({ url: `/services/${basename(f, '.html')}`, modifieLe: fs.statSync(f).mtime }));
 
   const liensContactsRégionaux = siteFront
     .fichiers()
