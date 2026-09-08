@@ -24,6 +24,15 @@
     langueSelectionnee = $bindable('FR'),
     featureFlagNis2CyFun23,
   }: Props = $props();
+
+  const explications: string | undefined = $derived.by(() => {
+    switch (referentielSelectionne) {
+      case 'ISO':
+        return "Les normes ISO étant protégées par le droit d’auteur, pour accéder au contenu complet de ces normes, il convient de se référer aux publications officielles de l'ISO et de l'IEC.";
+      case 'CyFun23':
+        return "Cette comparaison a bénéficié d'échanges techniques avec le Centre pour la Cybersécurité Belgique (CCB).";
+    }
+  });
 </script>
 
 <div class="panneau" class:bureau={estBureau}>
@@ -35,11 +44,8 @@
       {featureFlagNis2CyFun23}
       bind:langueSelectionnee
     />
-    {#if referentielSelectionne === 'ISO'}
-      <p class="texte-detail-sm">
-        Les normes ISO étant protégées par le droit d’auteur, pour accéder au contenu complet de ces normes, il convient
-        de se référer aux publications officielles de l'ISO et de l'IEC.
-      </p>
+    {#if explications}
+      <p class="texte-detail-sm">{explications}</p>
     {/if}
     <PanneauFiltres {source} cible={referentielSelectionne} {estBureau} />
   {:else}
