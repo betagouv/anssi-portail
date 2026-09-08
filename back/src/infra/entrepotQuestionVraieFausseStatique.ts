@@ -86,10 +86,10 @@ export class EntrepôtQuestionVraieFausseStatique implements EntrepôtQuestionVr
           "Aucune garantie, et l'expérience montre des fichiers souvent corrompus.",
           "L'ANSSI recommande de ne jamais payer. Le paiement ne garantit pas l'obtention d'un moyen de déchiffrement, incite les cybercriminels à poursuivre, et n'empêche pas d'être ciblé à nouveau. L'expérience montre par ailleurs que l'obtention de la clé de déchiffrement ne permet pas toujours de reconstituer l'intégralité des fichiers — en particulier ceux modifiés en cours d'attaque (bases de données, etc.) qui sont souvent corrompus.",
         ],
-        réponse: 'FAUX. Payer la rançon ne permet pas de récupérer ses données chiffrées.',
+        réponse: 'FAUX. Payer la rançon ne garantit pas de récupérer ses données chiffrées.',
         idéeReçue: {
           emoji: '💰',
-          texte: 'Payer la rançon permet de récupérer ses données chiffrées.',
+          texte: 'Payer la rançon garantit de récupérer ses données chiffrées.',
         },
         source:
           'ANSSI + Ministère de la Justice, guide « Attaques par rançongiciels, tous concernés » (août 2020), page 29.',
