@@ -9,6 +9,7 @@
   import PlanteAnimee from './PlanteAnimee.svelte';
   import TestVraiFauxAnime from './TestVraiFauxAnime.svelte';
   import { profilStore } from '../stores/profil.store';
+  import RadarMenaceAnime from './RadarMenaceAnime.svelte';
 
   const estConnecté = $derived(!!$profilStore);
 
@@ -25,6 +26,7 @@
     réactions: {
       MaturiteCyber: réactionsInitiales,
       VraiFaux: réactionsInitiales,
+      Exposition: réactionsInitiales,
     },
   };
   type DonnéesPage = typeof donnéesInitiales;
@@ -91,6 +93,22 @@
       >
         {#snippet image(survol)}
           <TestVraiFauxAnime {survol} />
+        {/snippet}
+      </CarteTest>
+      <CarteTest
+        cible="Exposition"
+        couleurDeFond="--background-alt-blue-ecume"
+        titre="Quels types de cyberattaques peuvent cibler mon organisation&nbsp;?"
+        href="/exposition"
+        réactions={donnéesPage?.réactions.Exposition ?? {}}
+        badge={{
+          libellé: compteursArrondis.VraiFaux ? `+${compteursArrondis.VraiFaux} tests réalisés` : undefined,
+          accent: 'purple-glycine',
+        }}
+        estimationEnMinutes={5}
+      >
+        {#snippet image(survol)}
+          <RadarMenaceAnime {survol} />
         {/snippet}
       </CarteTest>
     </div>
