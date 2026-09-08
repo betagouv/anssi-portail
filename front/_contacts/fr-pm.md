@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-pm
 titreHtml: 'Contacts de Saint-Pierre-et-Miquelon | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

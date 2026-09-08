@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-mf
 titreHtml: 'Contacts de Saint-Martin | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

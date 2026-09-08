@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-20r
 titreHtml: 'Contacts de Corse | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

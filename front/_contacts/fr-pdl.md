@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-pdl
 titreHtml: 'Contacts des Pays de la Loire | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

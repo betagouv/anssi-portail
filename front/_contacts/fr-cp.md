@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-cp
 titreHtml: 'Contacts de Clipperton | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-naq
 titreHtml: 'Contacts de Nouvelle-Aquitaine | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

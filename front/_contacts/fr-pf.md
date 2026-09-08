@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-pf
 titreHtml: 'Contacts de Polynésie française | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

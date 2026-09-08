@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-idf
 titreHtml: "Contacts d'Île-de-France | MesServicesCyber"
 styles: /assets/styles/contacts.css
 ---

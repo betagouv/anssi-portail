@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-occ
 titreHtml: "Contacts d'Occitanie | MesServicesCyber"
 styles: /assets/styles/contacts.css
 ---

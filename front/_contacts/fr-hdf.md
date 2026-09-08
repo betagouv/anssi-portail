@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-hdf
 titreHtml: 'Contacts des Hauts-de-France | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-ges
 titreHtml: 'Contacts du Grand Est | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

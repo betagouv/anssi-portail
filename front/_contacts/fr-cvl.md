@@ -1,6 +1,5 @@
 ---
 layout: defaut
-slug: fr-cvl
 titreHtml: 'Contacts de Centre-Val de Loire | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---
