@@ -5,6 +5,7 @@ plugins:
 collections:
   services:
     output: true
+    permalink: /:collection/:path
   ressources:
     output: true
     permalink: /:collection/:path

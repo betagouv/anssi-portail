@@ -17,7 +17,7 @@ cible: |
 liens:
   - accompagnement:
     titre: Découvrez DemainSpécialisteCyber
-    lien: /services/demainspecialistecyber.html
+    lien: /services/demainspecialistecyber
     illustration: cyber-enjeux/cyber-enjeux-demainspe.avif
   - commencer:
     titre: Téléchargez les différents supports !
