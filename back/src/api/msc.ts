@@ -74,6 +74,7 @@ import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResul
 import { ressourceRetourMiniTest } from './mini-tests/ressourceRetourMiniTest.js';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
+import { ressourceLlmsTxt } from './ressourceLlmsTxt.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -413,6 +414,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
   }
   routesStatiques.forEach((page) => enregistreRoute(`/${page}`, ressourcePagesJekyll(configurationServeur, page)));
   enregistreRoute('/robots.txt', ressourceRobotsTxt(configurationServeur));
+  enregistreRoute('/llms.txt', ressourceLlmsTxt(configurationServeur));
   enregistreRoute('/sitemap.xml', ressourceSitemapXml(routesStatiques, configurationServeur));
 
   app.use((erreur: unknown, _requete: Request, reponse: Response, suite: NextFunction) => {

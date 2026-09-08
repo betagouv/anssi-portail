@@ -1,0 +1,26 @@
+# MesServicesCyber
+
+> MesServicesCyber ([messervices.cyber.gouv.fr](https://messervices.cyber.gouv.fr)) est la plateforme publique proposée par l'Agence nationale de la sécurité des systèmes d'information (ANSSI) pour accompagner gratuitement les TPE, PME, ETI et collectivités dans la sécurisation de leur organisation face aux cyberattaques. Elle propose un programme d'accompagnement cyber gratuit, pédagogique et pratico-pratique en deux niveaux progressifs, basé sur le Référentiel Cyber France (ReCyF), d'un accompagnement humain assuré par des Aidants cyber bénévoles ainsi que d'autres ressources utiles comme les contacts cyber de proximité, les prestataires cyber et les financements disponibles.
+
+## Programme d'accompagnement cyber gratuit
+
+Démarche de sécurisation en deux niveaux progressifs, accessible à toute organisation, quel que soit son niveau de maturité cyber de départ. Plus de 6 000 organisations déjà accompagnées.
+
+* [Cyberdépart](/cyberdepart) : premier niveau basé sur le niveau basique du ReCy au travers du module "cyberdépart", 13 mesures prioritaires, rapides et présentées de manière pédagogique. Réalisable en autonomie en se connectant à [messervices.cyber.gouv.fr](https://messervices.cyber.gouv.fr) ou en commençant par un accompagnement d'une heure, gratuit, en présentiel ou en visio, par un Aidant cyber (le diagnostic cyberdépart). Permet de valider le "cyberdépart" d'une organisation, ayant démarré son parcours de sécurisation, preuve de son engagement.
+* [Parcours de sécurisation complet](/parcours-de-securisation) : basé sur le niveau modéré du ReCyF, 55 mesures, protège contre les 5 risques cyber les plus courants en 5 modules (incluant le module cyberdépart). Inclut le cyberdépart. Pensé pour faciliter la mise en conformité NIS2. Permet d'évaluer sa progression au sein du référentiel.
+
+Un programme pédagogique, pensé pour les non spécialistes comme pour les spécialistes et pratico-pratique. Pour chaque mesure recommandée : en quoi consiste cette mesure, contre quels risques cyber elle protège, des conseils pour savoir comment commencer concrètement à la mettre en oeuvre puis des tutos, outils et modèles utilisables immédiatement.
+
+## Récompenses et indicateurs
+
+* Valider son cyberdépart : reconnaissance délivrée après la mise en œuvre de 50% des mesures du module du socle basique ReCyF, la validation du cyberdépart d'une organisation atteste que cette dernière a initié son parcours de sécurisation pour réduire son exposition aux risques cyber.
+* Tout au long du parcours, l'organisation peut évaluer sa progression dans son parcours de sécurisation et le valoriser.
+
+## Pour qui
+
+* TPE, PME, ETI et collectivités, particulièrement exposées aux cyberattaques (perturbation d'activité, pertes financières, risques juridiques et réputationnels).
+* Les dirigeants, responsables opérationnels, responsables de la sécurité, RSSI, responsables informatiques, responsables juridiques, DPO.
+
+## Optional
+
+* [Référentiel Cyber France (ReCyF)](https://messervices.cyber.gouv.fr/nis2#exigences): Référentiel officiel de mesures de cybersécurité pour les entités importantes et essentielles (contexte NIS2 France) sur lequel repose le programme d'accompagnement.
