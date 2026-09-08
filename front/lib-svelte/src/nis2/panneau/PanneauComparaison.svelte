@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enPropriétéWebC } from '$plateforme/webComponent';
   import { clic } from '../../directives/actions.svelte';
   import type { ReferentielSelectionne } from '../exigence.type';
   import BoutonReinitialisation from './BoutonReinitialisation.svelte';
@@ -60,7 +61,7 @@
         <dsfr-select
           id="referentielNIS2"
           label=""
-          options={[{ label: 'ReCyF (NIS 2)', value: 'NIS2' }]}
+          options={enPropriétéWebC([{ label: 'ReCyF (NIS 2)', value: 'NIS2' }])}
           value="NIS2"
           disabled
         ></dsfr-select>
@@ -81,7 +82,7 @@
           }}
           placeholder="Sélectionner"
           placeholderDisabled={false}
-          options={optionsReferentiels}
+          options={enPropriétéWebC(optionsReferentiels)}
         ></dsfr-select>
       </div>
     </div>
@@ -93,7 +94,7 @@
         selectionneLaLangue(e.detail);
       }}
       placeholderDisabled={false}
-      options={optionsLangues}
+      options={enPropriétéWebC(optionsLangues)}
     ></dsfr-select>
   </div>
 
