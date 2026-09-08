@@ -7,12 +7,18 @@
 
   let statistiques: Statistiques | undefined = $state();
   let encart = $state<HTMLDivElement | undefined>();
+  let repliVisible = $state(false);
   let hrefCTA = $state('/cyberdepart?origine=guide-dhygiene-informatique');
   let libelleCTA = $state('Demander un diagnostic gratuit');
 
   onMount(async () => {
     setTimeout(() => {
-      encart?.showPopover();
+      if (!encart) return;
+      if (typeof encart.showPopover === 'function' && typeof encart.hidePopover === 'function') {
+        encart.showPopover();
+      } else {
+        repliVisible = true;
+      }
     }, 500);
     if (afficheParcoursSecurisation) {
       const pageSource = `${window.location.pathname}-encart-lien-vers-demande-diagnostic`;
@@ -23,11 +29,18 @@
   });
 
   const fermeDialogue = () => {
-    encart?.hidePopover();
+    repliVisible = false;
+    encart?.hidePopover?.();
   };
 </script>
 
-<div bind:this={encart} onclose={fermeDialogue} popover="manual" class="encart-audessus">
+<div
+  bind:this={encart}
+  onclose={fermeDialogue}
+  popover="manual"
+  class="encart-audessus"
+  class:repli-visible={repliVisible}
+>
   <div class="conteneur">
     <div class="entete">
       <dsfr-button
@@ -108,6 +121,7 @@
     z-index: 9;
 
     &[popover] {
+      display: none;
       transition:
         display 0.5s allow-discrete,
         transform 0.5s ease;
@@ -116,7 +130,23 @@
     }
 
     &[popover]:popover-open {
+      display: block;
       transform: translateY(0);
+    }
+
+    &.repli-visible {
+      z-index: calc(var(--ground) + 950);
+      display: block;
+      position: fixed;
+      top: auto;
+      left: auto;
+      right: 0;
+      bottom: 0;
+      width: calc(100% - 2rem);
+      max-height: calc(100% - 4rem);
+      overflow: auto;
+      background: white;
+      transform: none;
     }
 
     @starting-style {
