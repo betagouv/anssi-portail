@@ -2,7 +2,7 @@
   import type { PropriétésFilAriane } from '../../ui/filAriane';
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import CarteRisqueExposition from './CarteRisqueExposition.svelte';
-  import { menacesPertinentes, type MenaceEvaluee, type ReponsesExposition } from './expositionCyberattaques';
+  import { type MenaceEvaluee, menacesPertinentes, type ReponsesExposition } from './expositionCyberattaques';
   import FormulaireExposition from './FormulaireExposition.svelte';
 
   const propriétésFilAriane: PropriétésFilAriane = {
@@ -42,9 +42,7 @@
 
 <dsfr-container>
   {#if étape === 'formulaire'}
-    <div class="conteneur-formulaire">
-      <FormulaireExposition onevaluer={évalue} />
-    </div>
+    <FormulaireExposition onévaluer={évalue} />
   {:else}
     <div class="résultats">
       <button class="lien-retour" type="button" onclick={modifie}>
@@ -99,14 +97,6 @@
     display: block;
     padding-bottom: 4rem;
     padding-top: 3.5rem;
-  }
-
-  .conteneur-formulaire {
-    padding: 0 1rem;
-
-    @include a-partir-de(md) {
-      padding: 0;
-    }
   }
 
   .résultats {

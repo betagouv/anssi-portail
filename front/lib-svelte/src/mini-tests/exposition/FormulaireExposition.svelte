@@ -1,31 +1,32 @@
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
+  import Bouton from '../../ui/Bouton.svelte';
   import {
-    FACTEURS_AGGRAVANTS,
-    secteurDisponiblePour,
-    SECTEURS,
-    TYPES_ORGANISATION,
     type FacteurAggravant,
+    FACTEURS_AGGRAVANTS,
     type ReponsesExposition,
     type Secteur,
+    secteurDisponiblePour,
+    SECTEURS,
     type TypeOrganisation,
+    TYPES_ORGANISATION,
   } from './expositionCyberattaques';
 
   interface Props {
-    onevaluer: (reponses: ReponsesExposition) => void;
+    onévaluer: (reponses: ReponsesExposition) => void;
   }
 
-  let { onevaluer }: Props = $props();
+  let { onévaluer }: Props = $props();
 
-  let type: TypeOrganisation | undefined = $state();
+  let typeOrganisation: TypeOrganisation | undefined = $state();
   let secteur = $state('');
   let facteurs: FacteurAggravant[] = $state([]);
 
   const radiosType = TYPES_ORGANISATION.map(({ value, label }) => ({ id: `type-${value}`, label, value }));
   const optionsSecteur = SECTEURS.map(({ value, label }) => ({ value, label }));
-  const checkboxesFacteurs = FACTEURS_AGGRAVANTS.map(({ value, label }) => ({ id: `facteur-${value}`, label, value }));
+  const caseÀCocherFacteurs = FACTEURS_AGGRAVANTS.map(({ value, label }) => ({ id: `facteur-${value}`, label, value }));
 
-  const secteurDisponible = $derived(secteurDisponiblePour(type));
+  const secteurDisponible = $derived(secteurDisponiblePour(typeOrganisation));
   const indiceSecteur = $derived(
     secteurDisponible
       ? "Facultatif, mais affine l'évaluation"
@@ -36,21 +37,21 @@
     if (!secteurDisponible) secteur = '';
   });
 
-  const choisitType = (evenement: CustomEvent<string>) => {
-    type = evenement.detail as TypeOrganisation;
+  const choisisType = (evenement: CustomEvent<string>) => {
+    typeOrganisation = evenement.detail as TypeOrganisation;
   };
 
-  const choisitSecteur = (evenement: CustomEvent<string>) => {
+  const choisisSecteur = (evenement: CustomEvent<string>) => {
     secteur = evenement.detail;
   };
 
-  const choisitFacteurs = (evenement: CustomEvent<string[]>) => {
+  const choisisFacteurs = (evenement: CustomEvent<string[]>) => {
     facteurs = evenement.detail as FacteurAggravant[];
   };
 
   const valide = () => {
-    if (!type) return;
-    onevaluer({ type, secteur: (secteur || undefined) as Secteur | undefined, facteurs });
+    if (!typeOrganisation) return;
+    onévaluer({ type: typeOrganisation, secteur: (secteur || undefined) as Secteur | undefined, facteurs });
   };
 </script>
 
@@ -58,7 +59,7 @@
   <div class="section section--profil">
     <div class="entete">
       <lab-anssi-icone nom="building-line" taille="lg"></lab-anssi-icone>
-      <h2>Profil de votre organisation</h2>
+      <h2 class="texte-chapo-xl">Profil de votre organisation</h2>
     </div>
 
     <dsfr-radios-group
@@ -67,7 +68,7 @@
       legend="Type d'organisation"
       rich
       radios={enPropriétéWebC(radiosType)}
-      onvaluechanged={choisitType}
+      onvaluechanged={choisisType}
     ></dsfr-radios-group>
 
     <dsfr-select
@@ -78,29 +79,27 @@
       disabled={!secteurDisponible}
       value={secteur}
       options={enPropriétéWebC(optionsSecteur)}
-      onvaluechanged={choisitSecteur}
+      onvaluechanged={choisisSecteur}
     ></dsfr-select>
   </div>
 
   <div class="section section--facteurs">
     <div class="entete">
       <lab-anssi-icone nom="crosshair-2-line" taille="lg"></lab-anssi-icone>
-      <h2>Facteurs aggravants d’exposition</h2>
+      <h2 class="texte-chapo-xl">Facteurs aggravants d’exposition</h2>
     </div>
 
     <dsfr-checkboxes-group
       id="facteurs-aggravants"
       legend="Sélectionnez un ou plusieurs facteurs aggravants"
-      checkboxes={enPropriétéWebC(checkboxesFacteurs)}
-      onvalueschanged={choisitFacteurs}
+      checkboxes={enPropriétéWebC(caseÀCocherFacteurs)}
+      onvalueschanged={choisisFacteurs}
     ></dsfr-checkboxes-group>
   </div>
 
-  <!-- svelte-ignore a11y_no_static_element_interactions -->
-  <!-- svelte-ignore a11y_click_events_have_key_events -->
-  <dsfr-button label="Évaluer mon exposition" kind="primary" size="lg" disabled={!type} onclick={valide}></dsfr-button>
+  <Bouton libelle="Évaluer mon exposition" surClic={valide} taille="lg" desactive={!typeOrganisation} />
 
-  <p class="mention">
+  <p class="texte-mention-xs">
     Strictement indicatif. Ce simulateur mesure des facteurs d'exposition à l'appui de cas de cyberattaques signalés en
     2025 à l'ANSSI (Panorama de la cybermenace) et à Cybermalveillance.gouv.fr (rapport d'activité). Il ne préjuge en
     rien de la probabilité de survenue d'une cyberattaque pour une organisation particulière, celle-ci dépendant de
@@ -109,13 +108,23 @@
 </div>
 
 <style lang="scss">
+  @use '../../../../assets/styles/responsive' as *;
+  @use '../../../../assets/styles/grille' as *;
+
   .formulaire-exposition {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 2rem;
     margin: 0 auto;
-    max-width: 36.75rem;
+    align-items: center;
+
+    @include a-partir-de(md) {
+      max-width: taille-pour-colonnes(10);
+    }
+
+    @include a-partir-de(xl) {
+      max-width: taille-pour-colonnes(6);
+    }
   }
 
   .section {
@@ -124,6 +133,7 @@
     gap: 1.5rem;
     padding: 2.5rem;
     width: 100%;
+    box-sizing: border-box;
 
     &--profil {
       background-color: var(--background-alt-pink-macaron);
@@ -139,20 +149,16 @@
     display: flex;
     gap: 1rem;
 
+    lab-anssi-icone {
+      color: var(--artwork-major-blue-france);
+    }
+
     h2 {
       margin-bottom: 0;
     }
   }
 
-  dsfr-button {
-    width: 100%;
-  }
-
-  .mention {
-    color: var(--text-mention-grey);
-    font-size: 0.75rem;
-    line-height: 1.25rem;
+  .texte-mention-xs {
     margin-bottom: 0;
-    text-align: center;
   }
 </style>
