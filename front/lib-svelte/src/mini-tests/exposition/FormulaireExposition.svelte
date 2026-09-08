@@ -55,61 +55,69 @@
   };
 </script>
 
-<div class="formulaire-exposition">
-  <div class="section section--profil">
-    <div class="entete">
-      <lab-anssi-icone nom="building-line" taille="lg"></lab-anssi-icone>
-      <h2 class="texte-chapo-xl">Profil de votre organisation</h2>
+<dsfr-container>
+  <div class="formulaire-exposition">
+    <div class="section section--profil">
+      <div class="entete">
+        <lab-anssi-icone nom="building-line" taille="lg"></lab-anssi-icone>
+        <h2 class="texte-chapo-xl">Profil de votre organisation</h2>
+      </div>
+
+      <dsfr-radios-group
+        id="type-organisation"
+        name="type-organisation"
+        legend="Type d'organisation"
+        rich
+        radios={enPropriétéWebC(radiosType)}
+        onvaluechanged={choisisType}
+      ></dsfr-radios-group>
+
+      <dsfr-select
+        id="secteur-activite"
+        label="Secteur d'activité"
+        hint={indiceSecteur}
+        placeholder="Sélectionner une option"
+        disabled={!secteurDisponible}
+        value={secteur}
+        options={enPropriétéWebC(optionsSecteur)}
+        onvaluechanged={choisisSecteur}
+      ></dsfr-select>
     </div>
 
-    <dsfr-radios-group
-      id="type-organisation"
-      name="type-organisation"
-      legend="Type d'organisation"
-      rich
-      radios={enPropriétéWebC(radiosType)}
-      onvaluechanged={choisisType}
-    ></dsfr-radios-group>
+    <div class="section section--facteurs">
+      <div class="entete">
+        <lab-anssi-icone nom="crosshair-2-line" taille="lg"></lab-anssi-icone>
+        <h2 class="texte-chapo-xl">Facteurs aggravants d’exposition</h2>
+      </div>
 
-    <dsfr-select
-      id="secteur-activite"
-      label="Secteur d'activité"
-      hint={indiceSecteur}
-      placeholder="Sélectionner une option"
-      disabled={!secteurDisponible}
-      value={secteur}
-      options={enPropriétéWebC(optionsSecteur)}
-      onvaluechanged={choisisSecteur}
-    ></dsfr-select>
-  </div>
-
-  <div class="section section--facteurs">
-    <div class="entete">
-      <lab-anssi-icone nom="crosshair-2-line" taille="lg"></lab-anssi-icone>
-      <h2 class="texte-chapo-xl">Facteurs aggravants d’exposition</h2>
+      <dsfr-checkboxes-group
+        id="facteurs-aggravants"
+        legend="Sélectionnez un ou plusieurs facteurs aggravants"
+        checkboxes={enPropriétéWebC(caseÀCocherFacteurs)}
+        onvalueschanged={choisisFacteurs}
+      ></dsfr-checkboxes-group>
     </div>
 
-    <dsfr-checkboxes-group
-      id="facteurs-aggravants"
-      legend="Sélectionnez un ou plusieurs facteurs aggravants"
-      checkboxes={enPropriétéWebC(caseÀCocherFacteurs)}
-      onvalueschanged={choisisFacteurs}
-    ></dsfr-checkboxes-group>
+    <Bouton libelle="Évaluer mon exposition" surClic={valide} taille="lg" desactive={!typeOrganisation} />
+
+    <p class="texte-mention-xs">
+      Strictement indicatif. Ce simulateur mesure des facteurs d'exposition à l'appui de cas de cyberattaques signalés
+      en 2025 à l'ANSSI (Panorama de la cybermenace) et à Cybermalveillance.gouv.fr (rapport d'activité). Il ne préjuge
+      en rien de la probabilité de survenue d'une cyberattaque pour une organisation particulière, celle-ci dépendant de
+      plusieurs facteurs, dont son niveau de maturité cyber.
+    </p>
   </div>
-
-  <Bouton libelle="Évaluer mon exposition" surClic={valide} taille="lg" desactive={!typeOrganisation} />
-
-  <p class="texte-mention-xs">
-    Strictement indicatif. Ce simulateur mesure des facteurs d'exposition à l'appui de cas de cyberattaques signalés en
-    2025 à l'ANSSI (Panorama de la cybermenace) et à Cybermalveillance.gouv.fr (rapport d'activité). Il ne préjuge en
-    rien de la probabilité de survenue d'une cyberattaque pour une organisation particulière, celle-ci dépendant de
-    plusieurs facteurs, dont son niveau de maturité cyber.
-  </p>
-</div>
+</dsfr-container>
 
 <style lang="scss">
   @use '../../../../assets/styles/responsive' as *;
   @use '../../../../assets/styles/grille' as *;
+
+  dsfr-container {
+    display: block;
+    padding-bottom: 4rem;
+    padding-top: 3.5rem;
+  }
 
   .formulaire-exposition {
     display: flex;

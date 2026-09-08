@@ -1,5 +1,6 @@
 <script lang="ts">
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
+  import Bouton from '../../ui/Bouton.svelte';
   import Modale from '../../ui/Modale.svelte';
   import type { MenaceEvaluee } from './expositionCyberattaques';
 
@@ -12,83 +13,118 @@
   let détailOuvert = $state(false);
 </script>
 
-<article class="carte-risque">
-  <div class="icone" style:background-color={`var(${menace.couleurFond})`}>
-    <lab-anssi-icone nom={menace.icone} taille="lg"></lab-anssi-icone>
-  </div>
+<div class="carte-et-modale">
+  <dsfr-card
+    title={menace.nom}
+    has-description
+    description={menace.description}
+    has-buttons
+    has-detail-end
+    detail-end=""
+    has-badge
+    no-link
+    size="md"
+  >
+    <div slot="image" class={['icone', menace.couleurFond]}>
+      <lab-anssi-icone nom={menace.icone} taille="lg"></lab-anssi-icone>
+    </div>
+    <div slot="badgesgroup">
+      <dsfr-badge label="renforcée" type="status" status="warning" size="md"></dsfr-badge>
+    </div>
+    <div slot="contentend" class="stats">
+      <p class="pourcentage fr-h4">8%</p>
+      <dsfr-badge has-icon icon="arrow-right-up-line" type="accent" accent="green-emeraude" size="sm" label="en hausse"
+      ></dsfr-badge>
+      <p class="texte-detail-sm">Lorem ipsum dolor sit amet</p>
+    </div>
+    <div slot="buttonsgroup">
+      <Bouton
+        libelle="Afficher le détail"
+        type="secondaire"
+        icone="file-text-line"
+        surClic={() => (détailOuvert = true)}
+      />
+    </div>
+  </dsfr-card>
 
-  {#if menace.renforce}
-    <dsfr-badge label="Renforcée" type="status" status="warning" size="sm"></dsfr-badge>
-  {/if}
+  <Modale titre={menace.nom} bind:estOuverte={détailOuvert}>
+    <p>{menace.description}</p>
 
-  <h3>{menace.nom}</h3>
-  <p class="description">{menace.description}</p>
+    <p class="niveau-risque">
+      <strong>Niveau de risque</strong>
+      {#if menace.renforce}
+        <dsfr-badge label="Renforcée" type="status" status="warning" size="sm"></dsfr-badge>
+      {/if}
+    </p>
 
-  <!-- svelte-ignore a11y_no_static_element_interactions -->
-  <!-- svelte-ignore a11y_click_events_have_key_events -->
-  <dsfr-button
-    label="Afficher le détail"
-    kind="tertiary"
-    size="sm"
-    has-icon="true"
-    icon="file-text-line"
-    onclick={() => (détailOuvert = true)}
-  ></dsfr-button>
-</article>
-
-<Modale titre={menace.nom} bind:estOuverte={détailOuvert}>
-  <p>{menace.description}</p>
-
-  <p class="niveau-risque">
-    <strong>Niveau de risque</strong>
-    {#if menace.renforce}
-      <dsfr-badge label="Renforcée" type="status" status="warning" size="sm"></dsfr-badge>
-    {/if}
-  </p>
-
-  {#each menace.paragraphesInsight as paragraphe (paragraphe)}
-    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-    <p>{@html aseptiseHtml(paragraphe)}</p>
-  {/each}
-</Modale>
+    {#each menace.paragraphesInsight as paragraphe (paragraphe)}
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+      <p>{@html aseptiseHtml(paragraphe)}</p>
+    {/each}
+  </Modale>
+</div>
 
 <style lang="scss">
-  .carte-risque {
-    background-color: var(--background-default-grey);
-    border: 1px solid var(--border-default-grey);
+  .carte-et-modale {
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    height: 100%;
-    padding: 1.5rem;
-  }
+    .icone {
+      align-items: center;
+      border-radius: 0.5rem;
+      display: flex;
+      height: 4rem;
+      justify-content: center;
+      width: 4rem;
 
-  .icone {
-    align-items: center;
-    border-radius: 0.5rem;
-    display: flex;
-    height: 4rem;
-    justify-content: center;
-    width: 4rem;
-  }
+      margin: 2rem 0 0 2rem;
 
-  h3 {
-    margin-bottom: 0;
-  }
+      &.jaune {
+        background-color: var(--background-alt-yellow-tournesol);
+      }
 
-  .description {
-    color: var(--text-default-grey);
-    margin-bottom: 0;
-  }
+      &.bleu {
+        background-color: var(--background-alt-blue-france);
+      }
 
-  dsfr-button {
-    margin-top: auto;
-    align-self: flex-start;
-  }
+      &.bleu-clair {
+        background-color: var(--background-alt-blue-cumulus);
+      }
 
-  .niveau-risque {
-    align-items: center;
-    display: flex;
-    gap: 0.75rem;
+      &.pourpre {
+        background-color: var(--background-alt-purple-glycine);
+      }
+
+      &.rose {
+        background-color: var(--background-alt-pink-tuile);
+      }
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      padding: 0.75rem;
+      gap: 0.25rem 0.5rem;
+      background-color: var(--background-alt-brown-cafe-creme);
+
+      .pourcentage {
+        margin: 0;
+        color: var(--text-title-blue-france);
+      }
+
+      dsfr-badge {
+        align-self: center;
+      }
+
+      .texte-detail-sm {
+        color: var(--text-mention-grey);
+        margin: 0;
+        grid-column: 1/-1;
+      }
+    }
+
+    .niveau-risque {
+      align-items: center;
+      display: flex;
+      gap: 0.75rem;
+    }
   }
 </style>

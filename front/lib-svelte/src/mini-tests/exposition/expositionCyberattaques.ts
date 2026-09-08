@@ -124,7 +124,7 @@ export const DEFINITIONS_MENACES: DefinitionMenace[] = [
   {
     id: 'ranso',
     icone: 'lock-line',
-    couleurFond: '--background-alt-yellow-tournesol',
+    couleurFond: 'jaune',
     nom: 'Rançongiciel & extorsion',
     description: 'Chiffrement des systèmes, demande de rançon, exfiltration de données à des fins de chantage.',
     visible: () => true,
@@ -132,7 +132,7 @@ export const DEFINITIONS_MENACES: DefinitionMenace[] = [
   {
     id: 'fovi',
     icone: 'bank-card-line',
-    couleurFond: '--background-alt-blue-cumulus',
+    couleurFond: 'bleu-clair',
     nom: 'Fraude au virement',
     description: "Faux RIB, faux ordre de virement, usurpation d'identité d'un fournisseur ou d'un dirigeant.",
     visible: () => true,
@@ -140,7 +140,7 @@ export const DEFINITIONS_MENACES: DefinitionMenace[] = [
   {
     id: 'harc',
     icone: 'megaphone-line',
-    couleurFond: '--background-alt-purple-glycine',
+    couleurFond: 'pourpre',
     nom: 'Cyberharcèlement',
     description:
       "Dénigrement, faux avis, usurpation d'identité sur les réseaux sociaux visant l'organisation ou ses dirigeants.",
@@ -149,7 +149,7 @@ export const DEFINITIONS_MENACES: DefinitionMenace[] = [
   {
     id: 'espionnage',
     icone: 'search-line',
-    couleurFond: '--background-alt-blue-france',
+    couleurFond: 'bleu',
     nom: 'Espionnage stratégique & industriel',
     description:
       'Collecte de renseignement, vol de données sensibles, compromission longue durée par acteurs étatiques.',
@@ -159,7 +159,7 @@ export const DEFINITIONS_MENACES: DefinitionMenace[] = [
   {
     id: 'destab',
     icone: 'flashlight-line',
-    couleurFond: '--background-alt-pink-tuile',
+    couleurFond: 'rose',
     nom: 'Déstabilisation',
     description: 'DDoS, défiguration de sites, sabotage et divulgation de données à visée politique.',
     // Affiché uniquement si exposition à des évènements publics ou internationaux
