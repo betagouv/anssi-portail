@@ -40,18 +40,8 @@
   {/snippet}
 </HerosRiche>
 
-<dsfr-container>
-  {#if étape === 'formulaire'}
-    <FormulaireExposition onévaluer={évalue} />
-  {:else}
-    <EvaluationExposition retour={modifie} {menaces} {sousTraitanceRenforcée} />
-  {/if}
-</dsfr-container>
-
-<style lang="scss">
-  dsfr-container {
-    display: block;
-    padding-bottom: 4rem;
-    padding-top: 3.5rem;
-  }
-</style>
+{#if étape === 'formulaire'}
+  <FormulaireExposition onévaluer={évalue} />
+{:else}
+  <EvaluationExposition retour={modifie} {menaces} {sousTraitanceRenforcée} />
+{/if}

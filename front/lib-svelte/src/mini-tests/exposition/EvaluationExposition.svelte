@@ -10,54 +10,65 @@
   }: { retour: () => void; menaces: MenaceEvaluee[]; sousTraitanceRenforcée: boolean } = $props();
 </script>
 
-<div class="résultats">
-  <button class="lien-retour" type="button" onclick={retour}>
-    <lab-anssi-icone nom="arrow-left-s-line" taille="sm"></lab-anssi-icone>
-    Modifier mes réponses
-  </button>
+<dsfr-container>
+  <div class="résultats">
+    <button class="lien-retour" type="button" onclick={retour}>
+      <lab-anssi-icone nom="arrow-left-s-line" taille="sm"></lab-anssi-icone>
+      Modifier mes réponses
+    </button>
 
-  <Notice
-    type="attention"
-    estRejetable={false}
-    aUneIcone
-    titre="Votre organisation présente des facteurs d’exposition aux cyberattaques"
-  />
+    <Notice
+      type="attention"
+      estRejetable={false}
+      aUneIcone
+      titre="Votre organisation présente des facteurs d’exposition aux cyberattaques"
+    />
 
-  <h2>Détail des risques</h2>
-  <div class="grille-cartes">
-    {#each menaces as menace (menace.id)}
-      <CarteRisqueExposition {menace} />
-    {/each}
-  </div>
-
-  {#if sousTraitanceRenforcée}
-    <div class="bulle-sous-traitance">
-      <lab-anssi-icone nom="links-line" taille="md"></lab-anssi-icone>
-      <p>
-        L'ANSSI documente une proportion croissante de cyberattaques impliquant la compromission préalable d'un
-        sous-traitant ou d'un prestataire pour atteindre une cible finale. Infogéreur, prestataire Cloud, éditeurs
-        logiciel peuvent constituer une porte d'entrée vers vos données ou vos systèmes d'information. Par ailleurs, une
-        violation de données subie par un partenaire, un fournisseur ou un service tiers que vous utilisez peut, même
-        sans compromission directe de vos propres systèmes, exposer indirectement des informations vous concernant
-        (identité, coordonnées, données bancaires) et alimenter des attaques secondaires contre votre organisation :
-        hameçonnage ciblé, fraude au virement, usurpation d'identité.
-      </p>
+    <h2>Détail des risques</h2>
+    <div class="grille-cartes">
+      {#each menaces as menace (menace.id)}
+        <CarteRisqueExposition {menace} />
+      {/each}
     </div>
-  {/if}
 
-  <p class="note-source">
+    {#if sousTraitanceRenforcée}
+      <div class="bulle-sous-traitance">
+        <lab-anssi-icone nom="links-line" taille="md"></lab-anssi-icone>
+        <p>
+          L'ANSSI documente une proportion croissante de cyberattaques impliquant la compromission préalable d'un
+          sous-traitant ou d'un prestataire pour atteindre une cible finale. Infogéreur, prestataire Cloud, éditeurs
+          logiciel peuvent constituer une porte d'entrée vers vos données ou vos systèmes d'information. Par ailleurs,
+          une violation de données subie par un partenaire, un fournisseur ou un service tiers que vous utilisez peut,
+          même sans compromission directe de vos propres systèmes, exposer indirectement des informations vous
+          concernant (identité, coordonnées, données bancaires) et alimenter des attaques secondaires contre votre
+          organisation : hameçonnage ciblé, fraude au virement, usurpation d'identité.
+        </p>
+      </div>
+    {/if}
+  </div>
+</dsfr-container>
+
+<dsfr-container class="note-source">
+  <p class="texte-mention-xs">
     Sources : Panorama de la cybermenace 2025 — ANSSI (CERTFR-2026-CTI-002) ; Rapport d'activité 2025 —
     Cybermalveillance.gouv.fr (GIP ACYMA), fondé sur les signalements et demandes d'assistance de professionnels reçus
     en 2025.<br />
+    <br />
     Cette évaluation mesure des facteurs d'exposition et de sinistralité observée, non une prédiction de la probabilité d'incident
     — laquelle dépend aussi de votre niveau de maturité cyber (sécurisation, sauvegardes, sensibilisation des équipes, etc.),
     non mesuré ici.
   </p>
-</div>
+</dsfr-container>
 
 <style lang="scss">
   @use '../../../../assets/styles/responsive' as *;
   @use '../../../../assets/styles/grille' as *;
+
+  dsfr-container {
+    display: block;
+    padding-bottom: 4rem;
+    padding-top: 3.5rem;
+  }
 
   .résultats {
     display: flex;
@@ -106,12 +117,14 @@
         margin-bottom: 0;
       }
     }
+  }
 
-    .note-source {
-      color: var(--text-mention-grey);
-      font-size: 0.75rem;
-      line-height: 1.25rem;
-      text-align: center;
+  .note-source {
+    background-color: var(--background-alt-grey);
+    padding: 1.5rem 0;
+
+    p {
+      margin: 0;
     }
   }
 </style>
