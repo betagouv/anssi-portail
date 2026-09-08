@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { PropriétésFilAriane } from '../../ui/filAriane';
   import HerosRiche from '../../ui/HerosRiche.svelte';
+  import Notice from '../../ui/Notice.svelte';
   import CarteRisqueExposition from './CarteRisqueExposition.svelte';
   import { type MenaceEvaluee, menacesPertinentes, type ReponsesExposition } from './expositionCyberattaques';
   import FormulaireExposition from './FormulaireExposition.svelte';
@@ -50,10 +51,12 @@
         Modifier mes réponses
       </button>
 
-      <div class="bandeau-résultat">
-        <lab-anssi-icone nom="alert-fill" taille="lg"></lab-anssi-icone>
-        <p>Votre organisation présente des facteurs d’exposition aux cyberattaques</p>
-      </div>
+      <Notice
+        type="attention"
+        estRejetable={false}
+        aUneIcone
+        titre="Votre organisation présente des facteurs d’exposition aux cyberattaques"
+      />
 
       <h2>Détail des risques</h2>
       <div class="grille-cartes">
@@ -116,20 +119,6 @@
     display: flex;
     gap: 0.25rem;
     padding: 0.375rem 1rem;
-  }
-
-  .bandeau-résultat {
-    align-items: center;
-    background-color: var(--background-contrast-warning);
-    color: var(--text-default-warning);
-    display: flex;
-    gap: 1rem;
-    padding: 1.5rem;
-
-    p {
-      font-weight: bold;
-      margin-bottom: 0;
-    }
   }
 
   h2 {
