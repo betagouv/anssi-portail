@@ -1,7 +1,6 @@
 ---
 layout: defaut
 slug: fr-idf
-permalink: /contacts/fr-idf.html
 titreHtml: "Contacts d'Île-de-France | MesServicesCyber"
 styles: /assets/styles/contacts.css
 ---

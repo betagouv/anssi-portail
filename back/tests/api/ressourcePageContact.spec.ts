@@ -46,6 +46,44 @@ describe('La ressource page Contact', () => {
     });
   });
 
+  for (const id of [
+    'fr-20r',
+    'fr-971',
+    'fr-972',
+    'fr-973',
+    'fr-974',
+    'fr-976',
+    'fr-ara',
+    'fr-bfc',
+    'fr-bl',
+    'fr-bre',
+    'fr-cp',
+    'fr-cvl',
+    'fr-ges',
+    'fr-hdf',
+    'fr-idf',
+    'fr-mf',
+    'fr-naq',
+    'fr-nc',
+    'fr-nor',
+    'fr-occ',
+    'fr-pac',
+    'fr-pdl',
+    'fr-pf',
+    'fr-pm',
+    'fr-tf',
+    'fr-wf',
+  ]) {
+    it(`redirige l'ancienne URL HTML de ${id} vers l'URL sans extension`, async () => {
+      for (const suffixe of ['', '/']) {
+        const reponse = await request(serveur).get(`/contacts/${id}.html${suffixe}`);
+
+        assert.equal(reponse.status, HttpStatusCode.MovedPermanently);
+        assert.equal(reponse.headers.location, `/contacts/${id}`);
+      }
+    });
+  }
+
   it('retourne une erreur 404 si la page n’est pas trouvée', async () => {
     fournisseurChemin.jekyll.contact = (_id: string) => {
       throw new FichierInconnu('');
