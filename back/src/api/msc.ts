@@ -154,8 +154,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ['/promouvoir-diagnostic-cyber', '/'],
   ].forEach(([precedent, nouveau]: string[]) => {
     app.use(precedent, (requete: Request, reponse: Response, suite: NextFunction) => {
-      if (requete.originalUrl === precedent || requete.originalUrl === `${precedent}/`) {
-        return reponse.redirect(HttpStatusCode.MovedPermanently, nouveau);
+      const [chemin] = requete.originalUrl.split('?');
+      if (chemin === precedent || chemin === `${precedent}/`) {
+        const parametres = requete.originalUrl.slice(chemin.length);
+        return reponse.redirect(HttpStatusCode.MovedPermanently, nouveau + parametres);
       }
       suite();
     });

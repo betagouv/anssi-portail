@@ -80,6 +80,18 @@ describe('La configuration de notre serveur', () => {
     assert.equal(réponse.headers.location, '/catalogue');
   });
 
+  for (const chemin of ['/guides', '/guides/']) {
+    it(`conserve les paramètres lors de la redirection permanente de ${chemin}`, async () => {
+      const serveur = creeServeur(configurationDeTestDuServeur);
+      const parametres = '?utm_source=newsletter&tag=a%20b&tag=c';
+
+      const reponse = await request(serveur).get(chemin + parametres);
+
+      assert.equal(reponse.statusCode, HttpStatusCode.MovedPermanently);
+      assert.equal(reponse.headers.location, '/catalogue' + parametres);
+    });
+  }
+
   it('redirige URL inconnue sans slash final vers une 404', async () => {
     const serveur = creeServeur(configurationDeTestDuServeur);
 
