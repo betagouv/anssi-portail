@@ -10,6 +10,22 @@
     réponses: boolean[];
   };
 
+  const conseils = $derived(
+    afficheParcoursSecurisation
+      ? [
+          "Vous avez répondu juste à toutes les questions. Maintenez cette vigilance et partagez ce quiz à vos pairs. Pour aller plus loin, l'ANSSI met à disposition un parcours de sécurisation, à commencer par le Cyberdépart.",
+          "Vous avez de bonnes intuitions, mais certaines idées reçues persistent. L'ANSSI met à disposition un parcours de sécurisation et notamment des ressources pour prendre votre Cyberdépart — c'est exactement ce qu'il faut pour combler ces écarts.",
+          "Plusieurs idées fausses sur la menace peuvent vous coûter cher. Bonne nouvelle : l'ANSSI met à disposition un parcours de sécurisation avec des mesures concrètes pour prendre votre Cyberdépart.",
+          "Les écarts entre votre perception et la réalité de la menace sont importants. Ce n'est pas une fatalité : l'ANSSI propose un parcours de sécurisation, à commencer par le Cyberdépart — un point d'entrée adapté aux dirigeants de petites structures.",
+        ]
+      : [
+          "Vous avez répondu juste à toutes les questions. Maintenez cette vigilance et partagez ce quiz à vos pairs. Pour aller plus loin, l'ANSSI propose un diagnostic pour prendre votre Cyberdépart.",
+          "Vous avez de bonnes intuitions, mais certaines idées reçues persistent. L'ANSSI met à disposition un diagnostic pour prendre votre Cyberdépart — c'est exactement ce qu'il faut pour combler ces écarts.",
+          "Plusieurs idées fausses sur la menace peuvent vous coûter cher. Bonne nouvelle : l'ANSSI met à disposition un diagnostic pour obtenir les 6 mesures prioritaires pour prendre votre Cyberdépart.",
+          "Les écarts entre votre perception et la réalité de la menace sont importants. Ce n'est pas une fatalité : l'ANSSI propose un diagnostic pour vous aider à prendre votre Cyberdépart.",
+        ]
+  );
+
   const { réponses }: Props = $props();
 
   const nombreDeQuestions = $derived(réponses.length);
@@ -18,32 +34,28 @@
     if (nombreDeBonnesRéponses === nombreDeQuestions) {
       return {
         résumé: 'Excellent. Vous connaissez la menace.',
-        conseil:
-          "Vous avez répondu juste à toutes les questions. Maintenez cette vigilance et partagez ce quiz à vos pairs. Pour aller plus loin, l'ANSSI met à disposition un parcours de sécurisation, à commencer par le Cyberdépart.",
+        conseil: conseils[0],
         couleur: 'vert',
       };
     }
     if (nombreDeBonnesRéponses >= nombreDeQuestions - 2) {
       return {
         résumé: 'Solide, mais quelques angles morts.',
-        conseil:
-          "Vous avez de bonnes intuitions, mais certaines idées reçues persistent. L'ANSSI met à disposition un parcours de sécurisation et notamment des ressources pour faire votre Cyberdépart — c'est exactement ce qu'il faut pour combler ces écarts.",
+        conseil: conseils[1],
         couleur: 'bleu',
       };
     }
     if (nombreDeBonnesRéponses >= nombreDeQuestions - 3) {
       return {
         résumé: 'Certains risques sont encore mal connus.',
-        conseil:
-          "Plusieurs idées fausses sur la menace peuvent vous coûter cher. Bonne nouvelle : l'ANSSI met à disposition un parcours de sécurisation avec des mesures concrètes pour prendre votre Cyberdépart.",
+        conseil: conseils[2],
         couleur: 'bleu',
       };
     }
 
     return {
       résumé: 'Quelques fondamentaux sont à revoir.',
-      conseil:
-        "Les écarts entre votre perception et la réalité de la menace sont importants. Ce n'est pas une fatalité : l'ANSSI propose un parcours de sécurisation, à commencer par le Cyberdépart — un point d'entrée adapté aux dirigeants de petites structures.",
+      conseil: conseils[3],
       couleur: 'rouge',
     };
   });
