@@ -1,7 +1,6 @@
 ---
 layout: defaut
 slug: fr-nc
-permalink: /contacts/fr-nc.html
 titreHtml: 'Contacts de Nouvelle-Calédonie | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

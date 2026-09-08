@@ -11,6 +11,7 @@ collections:
     permalink: /:collection/:path
   contacts:
     output: true
+    permalink: /:collection/:path
 include:
   - '_commonjsHelpers-*.js'
 exclude:

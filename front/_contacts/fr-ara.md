@@ -1,7 +1,6 @@
 ---
 layout: defaut
 slug: fr-ara
-permalink: /contacts/fr-ara.html
 titreHtml: "Contacts d'Auvergne-Rhône-Alpes | MesServicesCyber"
 styles: /assets/styles/contacts.css
 ---

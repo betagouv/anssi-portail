@@ -103,13 +103,13 @@ describe('La ressource pages jekyll', () => {
 
   describe('sur demande de la page contacts', () => {
     it('répond 200', async () => {
-      const reponse = await request(serveur).get('/contacts/fr-idf.html');
+      const reponse = await request(serveur).get('/contacts/fr-idf');
 
       assert.equal(reponse.status, HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu html', async () => {
-      const reponse = await request(serveur).get('/contacts/fr-idf.html');
+      const reponse = await request(serveur).get('/contacts/fr-idf');
 
       assert.notEqual(reponse.headers['content-type'], undefined);
       assert.match(reponse.headers['content-type'], /html/);

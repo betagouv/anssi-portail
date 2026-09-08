@@ -1,7 +1,6 @@
 ---
 layout: defaut
 slug: fr-pdl
-permalink: /contacts/fr-pdl.html
 titreHtml: 'Contacts des Pays de la Loire | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

@@ -1,7 +1,6 @@
 ---
 layout: defaut
 slug: fr-nor
-permalink: /contacts/fr-nor.html
 titreHtml: 'Contacts de Normandie | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---

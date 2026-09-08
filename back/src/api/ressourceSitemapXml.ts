@@ -106,7 +106,7 @@ const construitRoutesDynamiques = async ({
     .filter((f) => f.indexOf('front/_site/contacts') >= 0)
     .filter((f) => f.indexOf('.html') >= 0)
     .filter((f) => f.indexOf('index.html') < 0)
-    .map((f) => ({ url: `/contacts/${f.split('/').pop()}`, modifieLe: fs.statSync(f).mtime }));
+    .map((f) => ({ url: `/contacts/${basename(f, '.html')}`, modifieLe: fs.statSync(f).mtime }));
 
   return [...liensFinancement, ...liensGuides, ...liensRessources, ...liensServices, ...liensContactsRégionaux];
 };

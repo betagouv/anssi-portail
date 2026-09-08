@@ -1,7 +1,6 @@
 ---
 layout: defaut
 slug: fr-wf
-permalink: /contacts/fr-wf.html
 titreHtml: 'Contacts de Wallis-et-Futuna | MesServicesCyber'
 styles: /assets/styles/contacts.css
 ---
