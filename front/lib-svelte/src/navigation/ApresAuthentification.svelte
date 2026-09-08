@@ -3,6 +3,8 @@
   import { onMount } from 'svelte';
   import { profilStore } from '../stores/profil.store';
 
+  let redirectionParDéfaut = $state(false);
+
   onMount(() => {
     const pagePostConnexion = sessionStorage.getItem('pagePostConnexion');
     sessionStorage.removeItem('pagePostConnexion');
@@ -27,12 +29,32 @@
       // La redirection par défaut est appliquée.
     }
 
-    const lienParcoursUtilisateur =
-      $profilStore?.parcoursSecurisation.parcoursActuel === null
-        ? '/parcours-securisation'
-        : $profilStore?.parcoursSecurisation.parcoursActuel === 'allégé'
-          ? '/modules/1'
-          : '/parcours-complet';
-    window.location.href = afficheParcoursSecurisation ? lienParcoursUtilisateur : '/catalogue';
+    redirectionParDéfaut = true;
+  });
+
+  $effect(() => {
+    if (!redirectionParDéfaut) return;
+
+    if (!afficheParcoursSecurisation) {
+      window.location.href = '/catalogue';
+      return;
+    }
+
+    const profil = $profilStore;
+    if (!profil) return;
+
+    const parcours = profil.parcoursSecurisation.parcoursActuel;
+    const urlRedirection = (() => {
+      switch (parcours) {
+        case 'complet':
+          return '/parcours-complet';
+        case 'allégé':
+          return '/modules/1';
+        default:
+          return '/parcours-securisation';
+      }
+    })();
+
+    window.location.href = urlRedirection;
   });
 </script>
