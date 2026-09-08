@@ -1,4 +1,9 @@
 <script lang="ts">
+  import { afficheParcoursSecurisation } from '$plateforme/environnement';
+  import DemandeDiagnosticSimplifiee from '../../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
+  import EncartPromotionParcoursBasique from '../../parcours-securisation/EncartPromotionParcoursBasique.svelte';
+  import TagProgrammeGratuit from '../../parcours-securisation/TagProgrammeGratuit.svelte';
+  import Alternatives from '../../ui/Alternatives.svelte';
   import Notice from '../../ui/Notice.svelte';
   import CarteRisqueExposition from './CarteRisqueExposition.svelte';
   import type { MenaceEvaluee } from './expositionCyberattaques';
@@ -47,6 +52,26 @@
     {/if}
   </div>
 </dsfr-container>
+
+<Alternatives affichageAlternatif={afficheParcoursSecurisation}>
+  {#snippet défaut()}
+    <dsfr-container>
+      <DemandeDiagnosticSimplifiee origine="exposition" />
+    </dsfr-container>
+  {/snippet}
+  {#snippet alternatif()}
+    <section class="section-parcours-basique">
+      <EncartPromotionParcoursBasique
+        titre="12 mesures simples pour protéger votre organisation contre les cyberattaques"
+        description="Accédez à 12 mesures simples pour protéger dès maintenant votre organisation contre les cyberattaques et prendre votre Cyberdépart ! 🚀"
+      >
+        {#snippet tags()}
+          <TagProgrammeGratuit />
+        {/snippet}
+      </EncartPromotionParcoursBasique>
+    </section>
+  {/snippet}
+</Alternatives>
 
 <dsfr-container class="note-source">
   <p class="texte-mention-xs">
@@ -117,6 +142,11 @@
         margin-bottom: 0;
       }
     }
+  }
+
+  .section-parcours-basique {
+    background-color: var(--background-alt-yellow-moutarde);
+    padding-block: 6rem;
   }
 
   .note-source {
