@@ -18,7 +18,7 @@
   "dependencies": {
     "@anssi-portail/axios": "workspace:^",
     "diff": "^9.0.0",
-    "isomorphic-dompurify": "^3.18.0"
+    "isomorphic-dompurify": "catalog:"
   },
   "devDependencies": {
     "@types/node": "^26.0.0",

@@ -37,7 +37,7 @@ allowBuilds:
 catalog:
   axios: ^1.18.0
   entities: ^8.0.0
-  isomorphic-dompurify: ^3.22.0
+  isomorphic-dompurify: ^4.0.0
   prettier: 3.9.6
   svelte: 5.57.0
   tsx: ^4.23.12
