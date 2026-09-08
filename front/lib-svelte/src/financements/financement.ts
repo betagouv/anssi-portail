@@ -1,5 +1,6 @@
 export type ResumeFinancement = {
   id: number;
+  slug?: string;
   entitesElligibles: string[];
   financeur: string;
   nom: string;

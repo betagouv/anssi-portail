@@ -8,6 +8,7 @@ describe('Le store qui contient la liste des financements', () => {
     financementsStore.initialise([
       {
         id: 1,
+        slug: 'cyber-pme',
         nom: 'Cyber PME',
         financeur: 'BPI France',
         typesDeFinancement: ['Formation', 'Audits'],
@@ -17,6 +18,7 @@ describe('Le store qui contient la liste des financements', () => {
       },
       {
         id: 2,
+        slug: 'accompagnement-cybiah',
         nom: 'Cyber PME 2',
         financeur: 'BPI France',
         typesDeFinancement: ['Formation', "Aide à l'innovation cyber"],

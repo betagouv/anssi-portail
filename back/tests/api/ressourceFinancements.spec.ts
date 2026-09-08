@@ -48,6 +48,7 @@ describe('La ressource Financements', () => {
       assert.deepEqual(reponse.body, [
         {
           id: 1,
+          slug: 'cyber-pme',
           nom: 'Cyber PME',
           financeur: 'BPI France',
           typesDeFinancement: ['Formation'],
@@ -70,6 +71,7 @@ describe('La ressource Financements', () => {
       const listeDeFinancementsAttendus = [
         {
           id: 1,
+          slug: 'cyber-pme',
           nom: 'Cyber PME',
           financeur: 'BPI France',
           typesDeFinancement: ['Formation'],
@@ -122,6 +124,7 @@ describe('La ressource Financements', () => {
         assert.deepEqual(reponse.body, [
           {
             id: 2,
+            slug: 'cyber-pme',
             nom: 'Cyber PME',
             financeur: 'BPI France',
             typesDeFinancement: ['Formation'],
@@ -177,6 +180,7 @@ describe('La ressource Financements', () => {
         assert.deepEqual(reponse.body, [
           {
             id: 2,
+            slug: 'cyber-pme',
             nom: 'Cyber PME',
             financeur: 'BPI France',
             typesDeFinancement: ['Formation'],
@@ -202,6 +206,7 @@ describe('La ressource Financements', () => {
         assert.deepEqual(reponse.body, [
           {
             id: 2,
+            slug: 'cyber-pme',
             nom: 'Cyber PME',
             financeur: 'BPI France',
             typesDeFinancement: ['Formation'],
@@ -227,6 +232,7 @@ describe('La ressource Financements', () => {
         assert.deepEqual(reponse.body, [
           {
             id: 2,
+            slug: 'cyber-pme',
             nom: 'Cyber PME',
             financeur: 'BPI France',
             typesDeFinancement: ['Formation'],

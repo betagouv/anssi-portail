@@ -70,9 +70,11 @@ const construitRoutesDynamiques = async ({
   entrepotFinancement,
   entrepotGuide,
 }: ConfigurationServeur): Promise<LienSitemap[]> => {
-  const liensFinancement = (await entrepotFinancement.tous()).map((financement) => ({
-    url: `/financement/${financement.id}`,
-  }));
+  const liensFinancement = (await entrepotFinancement.tous())
+    .filter((financement) => financement.slug)
+    .map((financement) => ({
+      url: `/financements/${financement.slug}`,
+    }));
 
   const liensGuides = (await entrepotGuide.tous()).map((guide) => ({
     url: `/guides/${guide.id}`,

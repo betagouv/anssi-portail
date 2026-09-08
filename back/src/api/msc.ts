@@ -7,6 +7,8 @@ import express, { json, NextFunction, Request, RequestHandler, Response } from '
 import { IpFilter } from 'express-ipfilter';
 import rateLimit from 'express-rate-limit';
 import { fabriqueCleRateLimit } from './clefRateLimit.js';
+import { slugsFinancements } from '../metier/slugsFinancements.js';
+import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { erreurPageInterdite, erreurPageNonTrouvée, ErreurTraverséeDeChemin } from './erreurs.js';
 import { ressourceFavori } from './favoris/ressourceFavori.js';
@@ -150,6 +152,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     ['/mentionsLegales', '/mentions-legales'],
     ['/guides/la-defense-en-profondeur-appliquee-aux-systemes-dinformation', '/guides/essentiels-defense-profondeur'],
     ['/services/mon-espace-nis2.html', '/nis2'],
+    ...Object.entries(slugsFinancements).flatMap(([id, slug]) => [
+      [`/financement/${id}`, `/financements/${slug}`],
+      [`/financements/${id}`, `/financements/${slug}`],
+    ]),
     ['/promouvoir-messervicescyber', '/'],
     ['/promouvoir-diagnostic-cyber', '/'],
   ].forEach(([precedent, nouveau]: string[]) => {
@@ -204,11 +210,13 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   app.use(configurationServeur.middleware.verifieModeMaintenance);
 
-  enregistreRoute('/financements', (requete, reponse) => {
+  enregistreRoute('/financements', (requete, reponse, suite) => {
+    if (requete.path !== '/') return suite();
     const id = requete.query.idFinancement;
     if (Object.keys(requete.query).length > 0 && id) {
-      // on garde la redirection pour ne pas casser les liens existants
-      return reponse.redirect(HttpStatusCode.MovedPermanently, `/financements/${id}`);
+      const slug = typeof id === 'string' && /^\d+$/.test(id) ? slugsFinancements[Number(id)] : undefined;
+      if (!slug) return erreurPageNonTrouvée(reponse, fournisseurChemin);
+      return reponse.redirect(HttpStatusCode.MovedPermanently, `/financements/${slug}`);
     }
     reponse
       .contentType('text/html')
@@ -254,7 +262,17 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     routesStatiques.push('simulateur-nis2');
   }
 
-  enregistreRoute('/financements/:id', ressourcePagesJekyll(configurationServeur, 'financements'));
+  enregistreRoute(
+    '/financements/:slug',
+    filetRouteAsynchrone(async (requete, reponse, suite) => {
+      const financement = (await configurationServeur.entrepotFinancement.tous()).find(
+        (financement) => financement.slug === requete.params.slug
+      );
+      if (!financement) return erreurPageNonTrouvée(reponse, fournisseurChemin);
+      suite();
+    }),
+    ressourcePagesJekyll(configurationServeur, 'financements')
+  );
 
   enregistreRoute('/favoris-partages/:id', ressourcePagesJekyll(configurationServeur, 'favoris-partages'));
 

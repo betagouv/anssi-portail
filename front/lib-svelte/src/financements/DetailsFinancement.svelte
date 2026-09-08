@@ -18,6 +18,7 @@
 
   type ReponseAxios = {
     id: number;
+    slug?: string;
     nom: string;
     financeur: string;
     typesDeFinancement: string[];
@@ -179,7 +180,7 @@
   {/snippet}
 </Heros>
 
-<div bind:this={contenu}>
+<div bind:this={contenu} data-id-financement={idFinancement ?? financementInitial?.id}>
   {#if financement}
     {#if entreesMenuFinancement}
       <MenuFinancement

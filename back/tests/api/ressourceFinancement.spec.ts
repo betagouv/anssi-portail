@@ -36,6 +36,7 @@ describe('La ressource Financement', () => {
 
       assert.deepEqual(reponse.body, {
         id: 1,
+        slug: 'cyber-pme',
         nom: 'Cyber PME',
         financeur: 'BPI France',
         typesDeFinancement: ['Formation'],

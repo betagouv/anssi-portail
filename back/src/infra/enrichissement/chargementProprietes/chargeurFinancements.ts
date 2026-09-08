@@ -11,7 +11,7 @@ export class ChargeurFinancements implements ChargeurDeProps {
 
   async charge(_dom: JSDOM, routeDemandée: string) {
     if (routeDemandée.match(/financements$/)) {
-      const financementsInitiaux = await this.entrepôtFinancement.tous();
+      const financementsInitiaux = (await this.entrepôtFinancement.tous()).filter((financement) => financement.slug);
       return { financementsInitiaux };
     }
 

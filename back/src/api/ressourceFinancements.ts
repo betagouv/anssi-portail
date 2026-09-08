@@ -83,6 +83,7 @@ export const ressourceFinancements = ({
         reponse.send(
           financements.map((financement) => ({
             id: financement.id,
+            slug: financement.slug,
             nom: financement.nom,
             financeur: financement.financeur,
             typesDeFinancement: financement.typesDeFinancement,

@@ -8,6 +8,7 @@ describe('La recherche par région', () => {
     entitesElligibles: ['PME'],
     financeur: 'BPI',
     id: 1,
+    slug: 'cyber-pme',
     nom: 'Aide Cyber',
     perimetresGeographiques: ['Ile-de-France'],
     typesDeFinancement: ['Formation'],

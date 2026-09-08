@@ -105,6 +105,7 @@ describe("L'entrepot de financement Grist", () => {
 
     assert.deepEqual(financement, {
       id: 10,
+      slug: 'france-2030-diagnostic-cybersecurite',
       nom: 'Cyber PME',
       benificiaires: 'Tout le monde',
       financeur: 'BPI France',
@@ -186,6 +187,7 @@ describe("L'entrepot de financement Grist", () => {
     assert.deepEqual(financements, [
       {
         id: 10,
+        slug: 'france-2030-diagnostic-cybersecurite',
         nom: 'Cyber PME',
         benificiaires: 'Tout le monde',
         financeur: 'BPI France',
@@ -202,6 +204,7 @@ describe("L'entrepot de financement Grist", () => {
       },
       {
         id: 21,
+        slug: 'diagnostic-cybersecurite',
         nom: 'Pass Cyber formation',
         financeur: 'CCI des Hauts-de-France',
         typesDeFinancement: ['Formation'],

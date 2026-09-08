@@ -16,9 +16,9 @@ export class RésolveurDePage {
   }
 
   async financement(routeDemandée: string) {
-    const idFinancement = routeDemandée.match(/\/financements\/(.*)/)?.[1];
-    if (idFinancement) {
-      return this.entrepôtFinancement.parId(Number(idFinancement));
+    const slug = routeDemandée.match(/^\/financements\/([^/?]+)(?:\?.*)?$/)?.[1];
+    if (slug) {
+      return (await this.entrepôtFinancement.tous()).find((financement) => financement.slug === slug);
     }
   }
 }

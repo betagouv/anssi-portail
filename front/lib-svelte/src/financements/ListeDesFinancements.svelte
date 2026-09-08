@@ -25,6 +25,7 @@
 
   type ReponseAxios = {
     id: number;
+    slug?: string;
     nom: string;
     financeur: string;
     entitesElligibles: string[];
@@ -51,7 +52,7 @@
     try {
       chargement = true;
       const reponse = await axios.get<ReponseAxios>('/api/financements');
-      financements = reponse.data;
+      financements = reponse.data.filter((financement) => financement.slug);
     } catch {
       financements = [];
     } finally {

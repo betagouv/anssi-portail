@@ -51,9 +51,9 @@ describe("L'adaptateur qui enrichie le html servi", () => {
     it("lorsqu'on sert une page financement", async () => {
       const htmlFactice = fabriqueHtmlFactice('http://localhost:3000/financements');
 
-      const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/financements/1');
+      const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/financements/cyber-pme');
 
-      assert.match(rendu, /<link rel="canonical" href="http:\/\/localhost:3000\/financements\/1">/);
+      assert.match(rendu, /<link rel="canonical" href="http:\/\/localhost:3000\/financements\/cyber-pme">/);
     });
 
     it("lorsqu'on sert une page de guide", async () => {
@@ -79,7 +79,7 @@ describe("L'adaptateur qui enrichie le html servi", () => {
       await entrepôtFinancement.ajoute(financementCyberPME);
       const htmlFactice = fabriqueHtmlFactice('http://localhost:3000/financements');
 
-      const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/financements/1');
+      const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/financements/cyber-pme');
 
       assert.match(rendu, /<title>Cyber PME | MesServicesCyber<\/title>/);
     });

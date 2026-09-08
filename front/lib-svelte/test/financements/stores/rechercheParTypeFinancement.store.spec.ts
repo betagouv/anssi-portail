@@ -8,6 +8,7 @@ describe('La recherche par type de financement', () => {
     entitesElligibles: ['PME'],
     financeur: 'BPI',
     id: 1,
+    slug: 'cyber-pme',
     nom: 'Aide Cyber',
     perimetresGeographiques: ['France'],
     typesDeFinancement: ['Formation'],

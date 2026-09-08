@@ -9,7 +9,7 @@
   let { financement }: Props = $props();
 </script>
 
-<a class="lien-carte" href={`/financements/${financement.id}`}>
+<a class="lien-carte" href={`/financements/${financement.slug}`}>
   <div class="contenu">
     <div class="type-financement">
       {#each financement.typesDeFinancement as type (type)}

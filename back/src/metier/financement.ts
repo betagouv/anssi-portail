@@ -1,7 +1,9 @@
+import { slugsFinancements } from './slugsFinancements.js';
 import { CodeRegion, regionParNom } from './referentielRegions.js';
 
 export class Financement {
   id: number;
+  slug: string | undefined;
   nom: string;
   financeur: string;
   typesDeFinancement: string[];
@@ -49,6 +51,7 @@ export class Financement {
   }) {
     this.id = id;
     this.nom = nom;
+    this.slug = slugsFinancements[id];
     this.financeur = financeur;
     this.typesDeFinancement = typesDeFinancement;
     this.entitesElligibles = entitesElligibles;
