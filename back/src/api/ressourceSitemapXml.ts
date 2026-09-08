@@ -75,9 +75,9 @@ const construitRoutesDynamiques = async ({
     url: `/financement/${financement.id}`,
   }));
 
-  const liensGuides = (await entrepotGuide.tous()).map((guide) => ({
+  const liensGuides = (await entrepotGuide.tous()).map((guide): LienSitemap => ({
     url: `/guides/${guide.id}`,
-    modifieLe: guide.dateMiseAJour,
+    modifiéLe: guide.dateMiseAJour,
   }));
 
   const contientFicheDétaillée = (chemin: string) => {
@@ -91,7 +91,7 @@ const construitRoutesDynamiques = async ({
     .filter((f) => f.indexOf('front/_site/ressources') >= 0)
     .filter((f) => f.indexOf('.html') >= 0)
     .filter(contientFicheDétaillée)
-    .map((f) => ({ url: `/ressources/${basename(f, '.html')}`, modifieLe: fs.statSync(f).mtime }));
+    .map((f): LienSitemap => ({ url: `/ressources/${basename(f, '.html')}`, modifiéLe: fs.statSync(f).mtime }));
 
   const liensServices = siteFront
     .fichiers()
@@ -99,14 +99,14 @@ const construitRoutesDynamiques = async ({
     .filter((f) => f.indexOf('.html') >= 0)
     .filter((f) => f.indexOf('index.html') < 0)
     .filter(contientFicheDétaillée)
-    .map((f) => ({ url: `/services/${basename(f, '.html')}`, modifieLe: fs.statSync(f).mtime }));
+    .map((f): LienSitemap => ({ url: `/services/${basename(f, '.html')}`, modifiéLe: fs.statSync(f).mtime }));
 
   const liensContactsRégionaux = siteFront
     .fichiers()
     .filter((f) => f.indexOf('front/_site/contacts') >= 0)
     .filter((f) => f.indexOf('.html') >= 0)
     .filter((f) => f.indexOf('index.html') < 0)
-    .map((f) => ({ url: `/contacts/${basename(f, '.html')}`, modifieLe: fs.statSync(f).mtime }));
+    .map((f): LienSitemap => ({ url: `/contacts/${basename(f, '.html')}`, modifiéLe: fs.statSync(f).mtime }));
 
   return [...liensFinancement, ...liensGuides, ...liensRessources, ...liensServices, ...liensContactsRégionaux];
 };
