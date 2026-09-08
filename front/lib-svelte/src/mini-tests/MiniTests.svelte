@@ -16,8 +16,6 @@
     feuille: 'Faire le test !',
   };
 
-  const seuil = 1000;
-
   const réactionsInitiales = { '❤️': 0, '👍': 0, '🔥': 0 };
   const donnéesInitiales = {
     compteurs: {
@@ -31,12 +29,18 @@
   };
   type DonnéesPage = typeof donnéesInitiales;
 
-  const formateur = Intl.NumberFormat('fr', { notation: 'compact', compactDisplay: 'short', roundingMode: 'floor' });
+  let donnéesPage: DonnéesPage = $state(donnéesInitiales);
 
-  let donnéesPage: DonnéesPage | undefined = $state(undefined);
   onMount(async () => {
     const réponse = await axios.get('/api/info-mini-tests');
     donnéesPage = { ...donnéesInitiales, ...réponse.data };
+  });
+
+  const seuil = 1000;
+  const arrondis = (valeur: number) => Math.round(valeur / 100) * 100;
+  const compteursArrondis = $derived({
+    MaturitéCyber: donnéesPage.compteurs.MaturiteCyber > seuil ? arrondis(donnéesPage.compteurs.MaturiteCyber) : 0,
+    VraiFaux: donnéesPage.compteurs.VraiFaux > seuil ? arrondis(donnéesPage.compteurs.VraiFaux) : 0,
   });
 </script>
 
@@ -64,10 +68,7 @@
         href={estConnecté ? '/ma-maturite' : '/test-maturite'}
         réactions={donnéesPage?.réactions.MaturiteCyber ?? {}}
         badge={{
-          libellé:
-            (donnéesPage?.compteurs.MaturiteCyber ?? 0) > seuil
-              ? `+${formateur.format(donnéesPage?.compteurs.MaturiteCyber ?? 0)} tests réalisés`
-              : undefined,
+          libellé: compteursArrondis.MaturitéCyber ? `+${compteursArrondis.MaturitéCyber} tests réalisés` : undefined,
           accent: 'pink-macaron',
         }}
         estimationEnMinutes={5}
@@ -83,10 +84,7 @@
         href="/vrai-faux"
         réactions={donnéesPage?.réactions.VraiFaux ?? {}}
         badge={{
-          libellé:
-            (donnéesPage?.compteurs.VraiFaux ?? 0) > seuil
-              ? `+${formateur.format(donnéesPage?.compteurs.VraiFaux ?? 0)} quiz réalisés`
-              : undefined,
+          libellé: compteursArrondis.VraiFaux ? `+${compteursArrondis.VraiFaux} tests réalisés` : undefined,
           accent: 'purple-glycine',
         }}
         estimationEnMinutes={3}

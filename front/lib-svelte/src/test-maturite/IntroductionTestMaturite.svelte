@@ -43,7 +43,6 @@
     feuille: 'Test de maturité cyber',
     fondSombre: false,
   };
-  const formateur = Intl.NumberFormat('fr', { notation: 'compact', compactDisplay: 'short', roundingMode: 'floor' });
 </script>
 
 <HerosRiche
@@ -53,7 +52,7 @@
   badges={[
     { label: '⏱️ 5 min.', accent: 'purple-glycine' },
     {
-      label: `🔥 +${formateur.format(nombreOrganisation.current)} organisations ont fait le test`,
+      label: `🔥 +${Math.round(nombreOrganisation.current / 100) * 100} organisations ont fait le test`,
       accent: 'purple-glycine',
     },
   ]}
