@@ -38,9 +38,9 @@ script: /scripts/service.js
   description="{{page.description}}"
   liens-fil-ariane="{{segments_json | strip | escape }}"
   titre="{{page.nom}}"
-  inverse
   url-image="/assets/images/illustrations-services/{{ page.illustration }}"
-  fiche-catalogue
+  theme="clair"
+  type="fiche"
 >
   <h1 slot="seo">{{page.nom}}</h1>
   <p slot="seo">{{page.description}}</p>
