@@ -19,7 +19,7 @@ export enum Langue {
 export interface Guide extends Item {
   type: 'Guide';
   description: string;
-  langue: string;
+  langue: keyof typeof Langue;
   collections: CollectionGuide[];
   image: {
     petite: string;

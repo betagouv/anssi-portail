@@ -82,6 +82,16 @@
         ]
       : []),
   ]);
+
+  const langueRfc5646 = $derived.by(() => {
+    if (!guide) return 'fr';
+    switch (guide.langue) {
+      case 'FR':
+        return 'fr';
+      case 'EN':
+        return 'en';
+    }
+  });
 </script>
 
 {#if guide}
@@ -118,7 +128,7 @@
     ></dsfr-side-menu>
   </div>
 
-  <dsfr-container class="article">
+  <dsfr-container class="article" lang={langueRfc5646}>
     <div class="contenu-section">
       <div class="sommaire sommaire-deplie">
         <dsfr-side-menu
