@@ -81,6 +81,7 @@ export const cableTousLesAbonnes = ({
     consigneEvenementTestExpositionRealiseDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
+      adaptateurHachage,
     })
   );
   busEvenements.abonne(

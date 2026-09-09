@@ -5,19 +5,27 @@ import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../../src/api/msc.js';
 import { TestExpositionRéalisé } from '../../../../src/bus/evenements/TestExpositionRealise.js';
+import { EntrepotUtilisateur } from '../../../../src/metier/entrepotUtilisateur.js';
 import { MockBusEvenement } from '../../../bus/busPourLesTests.js';
+import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
+import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
+import { jeanneDupont } from '../../objetsPretsALEmploi.js';
 
 describe('La ressource des tests d’exposition', () => {
   let serveur: Express;
   let busEvenements: MockBusEvenement;
+  let entrepotUtilisateur: EntrepotUtilisateur;
   const corpsParDéfaut = { typeOrganisation: 'collectivite', secteur: 'sante', facteursAggravant: [] };
 
-  beforeEach(() => {
+  beforeEach(async () => {
     busEvenements = new MockBusEvenement();
+    entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+    await entrepotUtilisateur.ajoute(jeanneDupont);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements,
+      entrepotUtilisateur,
     });
   });
 
@@ -49,6 +57,28 @@ describe('La ressource des tests d’exposition', () => {
         typeOrganisation: 'association',
         secteur: 'energie',
         facteursAggravant: ['subco', 'rd'],
+        email: undefined,
+        codeRegion: undefined,
+        codeSecteur: undefined,
+        codeTrancheEffectif: undefined,
+      });
+    });
+
+    describe('venant d’un utilisateur connu', () => {
+      let cookie: string;
+
+      beforeEach(() => {
+        cookie = encodeSession({ email: jeanneDupont.email, token: 'valide' });
+      });
+
+      it('enrichit l’événement avec les données utilisateur', async () => {
+        await request(serveur).post('/api/mini-tests/exposition/tests').set('Cookie', [cookie]).send(corpsParDéfaut);
+
+        const événement = busEvenements.recupereEvenement(TestExpositionRéalisé);
+        assert.equal(événement?.email, 'jeanne.dupont@user.com');
+        assert.equal(événement?.codeSecteur, 'A');
+        assert.equal(événement?.codeRegion, 'FR-971');
+        assert.equal(événement?.codeTrancheEffectif, '11');
       });
     });
 
