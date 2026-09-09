@@ -13,11 +13,9 @@
 
   let étape: 'formulaire' | 'résultats' = $state('formulaire');
   let menaces: MenaceEvaluee[] = $state([]);
-  let sousTraitanceRenforcée = $state(false);
 
   const évalue = (reponses: ReponsesExposition) => {
     menaces = menacesPertinentes(reponses);
-    sousTraitanceRenforcée = reponses.facteurs.includes('subco');
     étape = 'résultats';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -43,5 +41,5 @@
   <dsfr-container>
     <FilAriane {...propriétésFilAriane} />
   </dsfr-container>
-  <EvaluationExposition {menaces} {sousTraitanceRenforcée} />
+  <EvaluationExposition {menaces} />
 {/if}
