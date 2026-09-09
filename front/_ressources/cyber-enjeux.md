@@ -1,7 +1,7 @@
 ---
 layout: service
 typologie: outil
-nom: Cyber&ZeroWidthSpace;Enjeux&ZeroWidthSpace;
+nom: "Cyber\u200BEnjeux\u200B"
 titreHtml: CyberEnjeux
 description: 'Former à la cybersécurité par le jeu'
 lien: https://messervicescyber-ressources.cellar-c2.services.clever-cloud.com/CyberEnJeux.zip

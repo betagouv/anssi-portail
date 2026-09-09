@@ -6,8 +6,8 @@ styles: /assets/styles/page-statique.css
 {% capture segments_json %}
 [
   {
-    "id": "{{ page.filAriane | escape }}",
-    "label": "{{ page.filAriane | escape }}"
+    "id": {{ page.filAriane | default: '' | jsonify }},
+    "label": {{ page.filAriane | default: '' | jsonify }}
   }
 ]
 {% endcapture %}
