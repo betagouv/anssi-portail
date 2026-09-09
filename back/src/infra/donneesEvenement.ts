@@ -81,6 +81,10 @@ type DonneesEvenementTestExpositionRealise = Evenement<
     typeOrganisation: TypeOrganisation;
     secteur: Secteur;
     facteursAggravant: FacteurAggravant[];
+    idUtilisateur?: string;
+    codeRegion?: CodeRegion;
+    codeSecteur?: CodeSecteur;
+    codeTrancheEffectif?: CodeTrancheEffectif;
   }
 >;
 
