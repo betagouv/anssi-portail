@@ -8,7 +8,7 @@
   import CarteRisqueExposition from './CarteRisqueExposition.svelte';
   import type { MenaceEvaluee } from './expositionCyberattaques';
 
-  const { menaces, sousTraitanceRenforcée }: { menaces: MenaceEvaluee[]; sousTraitanceRenforcée: boolean } = $props();
+  const { menaces }: { menaces: MenaceEvaluee[] } = $props();
 </script>
 
 <dsfr-container>
@@ -26,21 +26,6 @@
         <CarteRisqueExposition {menace} />
       {/each}
     </div>
-
-    {#if sousTraitanceRenforcée}
-      <div class="bulle-sous-traitance">
-        <lab-anssi-icone nom="links-line" taille="md"></lab-anssi-icone>
-        <p>
-          L'ANSSI documente une proportion croissante de cyberattaques impliquant la compromission préalable d'un
-          sous-traitant ou d'un prestataire pour atteindre une cible finale. Infogéreur, prestataire Cloud, éditeurs
-          logiciel peuvent constituer une porte d'entrée vers vos données ou vos systèmes d'information. Par ailleurs,
-          une violation de données subie par un partenaire, un fournisseur ou un service tiers que vous utilisez peut,
-          même sans compromission directe de vos propres systèmes, exposer indirectement des informations vous
-          concernant (identité, coordonnées, données bancaires) et alimenter des attaques secondaires contre votre
-          organisation : hameçonnage ciblé, fraude au virement, usurpation d'identité.
-        </p>
-      </div>
-    {/if}
   </div>
 </dsfr-container>
 
@@ -105,18 +90,6 @@
 
       @include a-partir-de(lg) {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
-
-    .bulle-sous-traitance {
-      background-color: var(--background-default-grey);
-      border: 1px solid var(--border-default-grey);
-      display: flex;
-      gap: 0.75rem;
-      padding: 1.5rem;
-
-      p {
-        margin-bottom: 0;
       }
     }
   }

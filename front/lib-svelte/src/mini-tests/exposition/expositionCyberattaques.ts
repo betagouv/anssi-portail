@@ -24,7 +24,7 @@ export type Secteur =
 
 export type FacteurAggravant = 'reputation' | 'subco' | 'rd' | 'ot' | 'geo';
 
-export type IdMenace = 'ranso' | 'fovi' | 'harc' | 'espionnage' | 'destab';
+export type IdMenace = 'ranso' | 'fovi' | 'harc' | 'espionnage' | 'destab' | 'subco';
 
 export type ReponsesExposition = {
   type: TypeOrganisation;
@@ -106,6 +106,7 @@ export function calculerScores(reponses: ReponsesExposition): Scores {
     harc: { renforce: harcRenforce },
     espionnage: { renforce: espionnageRenforce },
     destab: { renforce: destabRenforce },
+    subco: { renforce: false },
   };
 }
 
@@ -164,6 +165,16 @@ export const DEFINITIONS_MENACES: DefinitionMenace[] = [
     description: 'DDoS, défiguration de sites, sabotage et divulgation de données à visée politique.',
     // Affiché uniquement si exposition à des évènements publics ou internationaux
     visible: (reponses) => aUnFacteur(reponses, 'geo'),
+  },
+  {
+    id: 'subco',
+    icone: '/assets/icones/poignee-de-mains.avif',
+    couleurFond: 'bleu-clair',
+    nom: "Compromission d'un prestataire",
+    description:
+      "Exploitation d'un fournisseur, sous-traitant ou service tiers comme point d'entrée pour accéder à vos données ou systèmes.",
+    // Affiché uniquement si forte dépendance à des sous-traitants ou prestataires informatiques
+    visible: (reponses) => aUnFacteur(reponses, 'subco'),
   },
 ];
 
@@ -261,6 +272,13 @@ export function paragraphesInsight(id: IdMenace, reponses: ReponsesExposition): 
     return [clauseRd, variante].filter(Boolean);
   }
 
+  if (id === 'subco') {
+    return [
+      "L'ANSSI documente une proportion croissante de cyberattaques impliquant la compromission préalable d'un sous-traitant ou d'un prestataire pour atteindre une cible finale. Infogéreur, prestataire Cloud, éditeurs logiciel peuvent constituer une porte d'entrée vers vos données ou vos systèmes d'information.",
+      "Par ailleurs, une violation de données subie par un partenaire, un fournisseur ou un service tiers que vous utilisez peut, même sans compromission directe de vos propres systèmes, exposer indirectement des informations vous concernant (identité, coordonnées, données bancaires) et alimenter des attaques secondaires contre votre organisation : hameçonnage ciblé, fraude au virement, usurpation d'identité.",
+    ];
+  }
+
   // destab
   const principal =
     "Fortement liées à l'actualité internationale, les attaques à des fins de déstabilisation ciblant des entités françaises ont été particulièrement nombreuses en 2025 selon l'ANSSI. Les attaques par DDoS ont été les plus fréquentes.";
@@ -338,6 +356,13 @@ export function resumeInsight(id: IdMenace, reponses: ReponsesExposition): Resum
       };
     return undefined;
   }
+
+  if (id === 'subco')
+    return {
+      indicateur: 'Sous-traitance',
+      enHausse: false,
+      texte: 'généralisation des attaques passant par la chaîne de sous-traitance',
+    };
 
   // destab
   return {
