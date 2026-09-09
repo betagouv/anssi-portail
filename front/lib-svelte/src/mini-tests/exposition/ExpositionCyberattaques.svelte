@@ -20,10 +20,6 @@
     étape = 'résultats';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  const modifie = () => {
-    étape = 'formulaire';
-  };
 </script>
 
 <HerosRiche
@@ -43,5 +39,5 @@
 {#if étape === 'formulaire'}
   <FormulaireExposition onévaluer={évalue} />
 {:else}
-  <EvaluationExposition retour={modifie} {menaces} {sousTraitanceRenforcée} />
+  <EvaluationExposition {menaces} {sousTraitanceRenforcée} />
 {/if}
