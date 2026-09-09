@@ -1,7 +1,7 @@
 ---
 layout: service
 typologie: service
-nom: Sens&ZeroWidthSpace;Cyber
+nom: "Sens\u200BCyber"
 titreHtml: SensCyber
 description: 'Découvrir la cybersécurité et se tester'
 lien: https://www.cybermalveillance.gouv.fr/sens-cyber/apprendre/

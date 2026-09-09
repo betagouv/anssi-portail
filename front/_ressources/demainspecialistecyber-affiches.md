@@ -1,7 +1,7 @@
 ---
 layout: service
 typologie: outil
-nom: Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber
+nom: "Demain\u200BSpécialiste\u200BCyber"
 titreHtml: DemainSpécialisteCyber
 description: Téléchargez 6 affiches sur les métiers de la cyber
 illustration: demainspecialistecyber/demainspecialistecyber.avif

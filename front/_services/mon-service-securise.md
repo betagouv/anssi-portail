@@ -1,7 +1,7 @@
 ---
 layout: service
 typologie: service
-nom: Mon&ZeroWidthSpace;Service&ZeroWidthSpace;Sécurisé
+nom: "Mon\u200BService\u200BSécurisé"
 avecFicheDetaillee: true
 titreHtml: MonServiceSécurisé
 description: 'Sécuriser et homologuer en équipe'

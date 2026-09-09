@@ -1,7 +1,7 @@
 ---
 layout: service
 typologie: service
-nom: Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber
+nom: "Demain\u200BSpécialiste\u200BCyber"
 avecFicheDetaillee: true
 titreHtml: DemainSpécialisteCyber
 description: S’informer sur la cybersécurité et ses métiers
