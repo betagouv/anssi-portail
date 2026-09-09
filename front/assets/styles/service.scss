@@ -124,7 +124,7 @@
   img {
     width: 100%;
 
-    @include a-partir-de(xxl) {
+    @include a-partir-de(lg) {
       display: none;
     }
   }
