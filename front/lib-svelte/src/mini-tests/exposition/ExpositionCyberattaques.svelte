@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { PropriétésFilAriane } from '../../ui/filAriane';
+  import FilAriane from '../../ui/FilAriane.svelte';
   import HerosRiche from '../../ui/HerosRiche.svelte';
   import EvaluationExposition from './EvaluationExposition.svelte';
   import { type MenaceEvaluee, menacesPertinentes, type ReponsesExposition } from './expositionCyberattaques';
@@ -22,22 +23,25 @@
   };
 </script>
 
-<HerosRiche
-  {propriétésFilAriane}
-  variante="cafe-creme"
-  class="avec-image-fond"
-  description="Rançongiciel, fraude au virement, espionnage, déstabilisation, cyberharcèlement : chaque attaque poursuit un but différent. En 2 minutes, situez celles qui pèsent le plus sur votre organisation."
->
-  {#snippet titreHtml()}
-    Quels types de cyberattaques peuvent cibler mon organisation ?
-  {/snippet}
-  {#snippet illustration()}
-    <img src="/assets/images/illustration-tests-exposition.svg" alt="" />
-  {/snippet}
-</HerosRiche>
-
 {#if étape === 'formulaire'}
+  <HerosRiche
+    {propriétésFilAriane}
+    variante="cafe-creme"
+    class="avec-image-fond"
+    description="Rançongiciel, fraude au virement, espionnage, déstabilisation, cyberharcèlement : chaque attaque poursuit un but différent. En 2 minutes, situez celles qui pèsent le plus sur votre organisation."
+  >
+    {#snippet titreHtml()}
+      Quels types de cyberattaques peuvent cibler mon organisation ?
+    {/snippet}
+    {#snippet illustration()}
+      <img src="/assets/images/illustration-tests-exposition.svg" alt="" />
+    {/snippet}
+  </HerosRiche>
+
   <FormulaireExposition onévaluer={évalue} />
 {:else}
+  <dsfr-container>
+    <FilAriane {...propriétésFilAriane} />
+  </dsfr-container>
   <EvaluationExposition {menaces} {sousTraitanceRenforcée} />
 {/if}
