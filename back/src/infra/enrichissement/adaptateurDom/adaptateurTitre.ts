@@ -13,12 +13,12 @@ export class AdaptateurTitre implements AdaptateurDom {
     const guideTrouvé = await promesseGuide;
     const financementTrouvé = await promesseFinancement;
 
-    let nouveauTitre: string | undefined;
+    let nouveauTitre: string | undefined = undefined;
 
     if (guideTrouvé) {
       nouveauTitre = guideTrouvé.langue === 'EN' ? `${guideTrouvé.nom} (EN)` : guideTrouvé.nom;
-    } else {
-      nouveauTitre = financementTrouvé?.nom;
+    } else if (financementTrouvé) {
+      nouveauTitre = `${financementTrouvé.nom} (${financementTrouvé.perimetresGeographiques})`;
     }
 
     const titre = dom.window.document.getElementsByTagName('title').item(0);
