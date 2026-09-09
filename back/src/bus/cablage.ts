@@ -17,6 +17,7 @@ import { consigneEvenementModuleTerminéDansJournal } from './consigneEvenementM
 import { consigneEvenementProprieteTestRevendiqueeDansJournal } from './consigneEvenementProprieteTestRevendiqueeDansJournal.js';
 import { consigneEvenementRetourExperienceDonneDansJournal } from './consigneEvenementRetourExperienceDonneDansJournal.js';
 import { consigneEvenementSimulationNis2TermineeDansJournal } from './consigneEvenementSimulationNis2TermineeDansJournal.js';
+import { consigneEvenementTestExpositionRealiseDansJournal } from './consigneEvenementTestExpositionRealiseDansJournal.js';
 import { consigneEvenementTestRealiseDansJournal } from './consigneEvenementTestRealiseDansJournal.js';
 import { consigneEvenementUtilisateurConnecteDansJournal } from './consigneEvenementUtilisateurConnecteDansJournal.js';
 import { consigneParcoursAllégéTerminéDansJournal } from './consigneParcoursAllegeTermineDansJournal.js';
@@ -44,6 +45,7 @@ import { QuestionnaireVraiFauxTerminé } from './evenements/questionnaireVraiFau
 import { RetourExperienceDonne } from './evenements/retourExperienceDonne.js';
 import { RetourMiniTestDonné } from './evenements/retourMiniTestDonne.js';
 import { SimulationNis2Terminee } from './evenements/simulationNis2Terminee.js';
+import { TestExpositionRéalisé } from './evenements/TestExpositionRealise.js';
 import { TestRealise } from './evenements/testRealise.js';
 import { UtilisateurConnecte } from './evenements/utilisateurConnecte.js';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur.js';
@@ -70,6 +72,13 @@ export const cableTousLesAbonnes = ({
   busEvenements.abonne(
     TestRealise,
     consigneEvenementTestRealiseDansJournal({
+      adaptateurJournal,
+      adaptateurHorloge,
+    })
+  );
+  busEvenements.abonne(
+    TestExpositionRéalisé,
+    consigneEvenementTestExpositionRealiseDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
     })
