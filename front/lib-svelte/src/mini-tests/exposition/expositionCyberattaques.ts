@@ -92,13 +92,15 @@ export function calculerScores(reponses: ReponsesExposition): Scores {
   // toujours « Renforcée ».
   const espionnageRenforce =
     type === 'collectivite' ||
-    (!!secteur && ['energie', 'telecom', 'defense'].includes(secteur)) ||
-    secteur === 'sante' ||
+    (!!secteur && ['energie', 'telecom', 'defense', 'sante'].includes(secteur)) ||
     aUnFacteur(reponses, 'rd');
 
   // Carte déjà visible seulement si exposition aux évènements internationaux (cf.
-  // `menacesPertinentes`) ; ne devient « Renforcée » qu'avec un second facteur.
-  const destabRenforce = type === 'tpe-pme-eti' && aUnFacteur(reponses, 'ot');
+  // `menacesPertinentes`) ; passe à « Renforcée » si le secteur est concerné, ou si
+  // le second facteur (systèmes industriels) s'ajoute pour une TPE/PME/ETI.
+  const destabRenforce =
+    (!!secteur && ['energie', 'telecom', 'transports'].includes(secteur)) ||
+    (type === 'tpe-pme-eti' && aUnFacteur(reponses, 'ot'));
 
   return {
     ranso: { renforce: ransoRenforce },
