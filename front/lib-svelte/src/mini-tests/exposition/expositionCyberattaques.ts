@@ -123,7 +123,7 @@ export type DefinitionMenace = {
 export const DEFINITIONS_MENACES: DefinitionMenace[] = [
   {
     id: 'ranso',
-    icone: 'lock-line',
+    icone: '/assets/icones/cadenas.avif',
     couleurFond: 'jaune',
     nom: 'Rançongiciel & extorsion',
     description: 'Chiffrement des systèmes, demande de rançon, exfiltration de données à des fins de chantage.',
@@ -131,7 +131,7 @@ export const DEFINITIONS_MENACES: DefinitionMenace[] = [
   },
   {
     id: 'fovi',
-    icone: 'bank-card-line',
+    icone: '/assets/icones/liasse-de-billets-aillee.avif',
     couleurFond: 'bleu-clair',
     nom: 'Fraude au virement',
     description: "Faux RIB, faux ordre de virement, usurpation d'identité d'un fournisseur ou d'un dirigeant.",
@@ -139,7 +139,7 @@ export const DEFINITIONS_MENACES: DefinitionMenace[] = [
   },
   {
     id: 'harc',
-    icone: 'megaphone-line',
+    icone: '/assets/icones/bulle-discussion.avif',
     couleurFond: 'pourpre',
     nom: 'Cyberharcèlement',
     description:
@@ -148,7 +148,7 @@ export const DEFINITIONS_MENACES: DefinitionMenace[] = [
   },
   {
     id: 'espionnage',
-    icone: 'search-line',
+    icone: '/assets/icones/regard-de-cote.avif',
     couleurFond: 'bleu',
     nom: 'Espionnage stratégique & industriel',
     description:
@@ -158,7 +158,7 @@ export const DEFINITIONS_MENACES: DefinitionMenace[] = [
   },
   {
     id: 'destab',
-    icone: 'flashlight-line',
+    icone: '/assets/icones/megaphone.avif',
     couleurFond: 'rose',
     nom: 'Déstabilisation',
     description: 'DDoS, défiguration de sites, sabotage et divulgation de données à visée politique.',
