@@ -2,6 +2,7 @@ import { AvisMesureDonne } from '../bus/evenements/avisMesureDonne.js';
 import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
 import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
+import { FacteurAggravant, Secteur, TypeOrganisation } from '../metier/mini-tests/exposition/exposition.js';
 import { ReponsesEtResultatAvecAnalyse } from '../metier/nis2-simulateur/questionnaire/calculEligibilite.js';
 import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction.js';
 import { MotifChangementParcours, Parcours } from '../metier/parcours.js';
@@ -15,6 +16,7 @@ export type DonneesEvenement =
   | DonneesEvenementNouvelUtilisateur
   | DonneesEvenementProprieteTestRevendiquee
   | DonneesEvenementTestRealise
+  | DonneesEvenementTestExpositionRealise
   | DonneesEvenementMiseAJourFavorisUtilisateur
   | DonneesEvenementRetourExperienceDonne
   | DonneesEvenementAvisUtilisateurDonne
@@ -70,6 +72,15 @@ type DonneesEvenementTestRealise = Evenement<
     reponses: ReponsesTestMaturite;
     codeSessionGroupe?: string;
     idResultatTest: string;
+  }
+>;
+
+type DonneesEvenementTestExpositionRealise = Evenement<
+  'TEST_EXPOSITION_REALISE',
+  {
+    typeOrganisation: TypeOrganisation;
+    secteur: Secteur;
+    facteursAggravant: FacteurAggravant[];
   }
 >;
 
