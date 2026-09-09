@@ -4,6 +4,7 @@
   import { afficheParcoursSecurisation } from '$plateforme/environnement';
   import EncartPromotionParcoursBasique from '../parcours-securisation/EncartPromotionParcoursBasique.svelte';
   import TagProgrammeGratuit from '../parcours-securisation/TagProgrammeGratuit.svelte';
+  import EncartInvitationARenforcerCybersecurite from './EncartInvitationARenforcerCybersecurite.svelte';
 </script>
 
 <Alternatives affichageAlternatif={afficheParcoursSecurisation}>
@@ -25,18 +26,7 @@
   {/snippet}
 
   {#snippet alternatif()}
-    <dsfr-container>
-      <div class="contenu-section">
-        <hgroup class="preambule">
-          <h1>Renforcez votre cybersécurité dès maintenant</h1>
-          <p>
-            Votre organisation n’est pas suffisamment protégée face aux cyber menaces. L’ANSSI vous recommande de
-            <b>mettre en place des premières mesures simples</b> pour vous protéger rapidement.
-          </p>
-        </hgroup>
-        <lab-anssi-icone nom="arrow-down-s-line" taille="lg"></lab-anssi-icone>
-      </div>
-    </dsfr-container>
+    <EncartInvitationARenforcerCybersecurite />
     <div class="contenu-encart-parcours-securisation">
       <EncartPromotionParcoursBasique
         titre="13 mesures simples pour protéger votre organisation contre les cyberattaques"

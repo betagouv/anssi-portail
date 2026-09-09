@@ -3,6 +3,7 @@
   import DemandeDiagnosticSimplifiee from '../../demande-aide-mon-aide-cyber/DemandeDiagnosticSimplifiee.svelte';
   import EncartPromotionParcoursBasique from '../../parcours-securisation/EncartPromotionParcoursBasique.svelte';
   import TagProgrammeGratuit from '../../parcours-securisation/TagProgrammeGratuit.svelte';
+  import EncartInvitationARenforcerCybersecurite from '../../test-maturite/EncartInvitationARenforcerCybersecurite.svelte';
   import Alternatives from '../../ui/Alternatives.svelte';
   import Notice from '../../ui/Notice.svelte';
   import CarteRisqueExposition from './CarteRisqueExposition.svelte';
@@ -36,6 +37,7 @@
     </dsfr-container>
   {/snippet}
   {#snippet alternatif()}
+    <EncartInvitationARenforcerCybersecurite />
     <section class="section-parcours-basique">
       <EncartPromotionParcoursBasique
         titre="12 mesures simples pour protéger votre organisation contre les cyberattaques"
@@ -67,7 +69,7 @@
 
   dsfr-container {
     display: block;
-    padding-bottom: 4rem;
+    margin-bottom: 2rem;
   }
 
   .résultats {
@@ -97,11 +99,13 @@
   .section-parcours-basique {
     background-color: var(--background-alt-yellow-moutarde);
     padding-block: 6rem;
+    margin-top: 3.5rem;
   }
 
   .note-source {
     background-color: var(--background-alt-grey);
     padding: 1.5rem 0;
+    margin-bottom: 0;
 
     p {
       margin: 0;
