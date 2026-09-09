@@ -21,16 +21,18 @@
     has-buttons
     has-detail-end
     detail-end=""
-    has-badge
+    has-badge={menace.renforce || undefined}
     no-link
     size="md"
   >
     <div slot="image" class={['icone', menace.couleurFond]}>
       <img src={menace.icone} alt="" />
     </div>
-    <div slot="badgesgroup">
-      <dsfr-badge label="renforcée" type="status" status="warning" size="md"></dsfr-badge>
-    </div>
+    {#if menace.renforce}
+      <div slot="badgesgroup">
+        <dsfr-badge label="renforcée" type="status" status="warning" size="md"></dsfr-badge>
+      </div>
+    {/if}
     {#if menace.resume}
       <div slot="contentend" class="stats">
         <p class="pourcentage fr-h4">{menace.resume.indicateur}</p>
@@ -60,12 +62,12 @@
   <Modale titre={menace.nom} bind:estOuverte={détailOuvert}>
     <p class="texte-standard-md">{menace.description}</p>
 
-    <p class="texte-standard-md niveau-risque">
-      <strong>Niveau de risque</strong>
-      {#if menace.renforce}
+    {#if menace.renforce}
+      <p class="texte-standard-md niveau-risque">
+        <strong>Niveau de risque</strong>
         <dsfr-badge label="Renforcée" type="status" status="warning" size="sm"></dsfr-badge>
-      {/if}
-    </p>
+      </p>
+    {/if}
 
     {#if menace.resume}
       <div class="stats">
@@ -156,10 +158,9 @@
       align-items: flex-end;
       display: flex;
       gap: 0.75rem;
-
-      & + .stats {
-        margin-bottom: 1.5rem;
-      }
+    }
+    .texte-standard-md + .stats {
+      margin-bottom: 1.5rem;
     }
   }
 </style>
