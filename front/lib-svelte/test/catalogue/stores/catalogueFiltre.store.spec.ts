@@ -141,6 +141,19 @@ describe('Le store du catalogue filtré', () => {
   });
 
   describe('sur recherche textuelle', () => {
+    it.each(['Demain\u200BSpécialiste\u200BCyber', 'Demain&ZeroWidthSpace;Spécialiste&ZeroWidthSpace;Cyber'])(
+      'retrouve le nom complet malgré les espaces sans chasse : %s',
+      (nom) => {
+        const service = { ...demainSpecialisteCyber(), nom };
+        initialiseStoreCatalogue([mss(), service]);
+        rechercheTextuelle.set('DemainSpécialisteCyber');
+
+        const { resultats } = get(catalogueFiltre);
+
+        expect(resultats).toEqual([service]);
+      }
+    );
+
     it("filtre sur le nom de l'item", () => {
       initialiseStoreCatalogue([mss(), demainSpecialisteCyber()]);
       rechercheTextuelle.set('mss');
