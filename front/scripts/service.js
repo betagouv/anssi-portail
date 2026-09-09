@@ -1,5 +1,14 @@
 import { elementLePlusVisible } from './scroll.js';
 
+const ecranAvecIllustrationHeros = window.matchMedia('(min-width: 992px)');
+
+const metsAJourIllustrationHeros = () => {
+  document.querySelector('lab-anssi-bandeau-page')?.toggleAttribute('sans-image', !ecranAvecIllustrationHeros.matches);
+};
+
+metsAJourIllustrationHeros();
+ecranAvecIllustrationHeros.addEventListener('change', metsAJourIllustrationHeros);
+
 const sectionsSommaireReplie = () => Array.from(document.querySelectorAll('.sommaire.sommaire-replie ul li'));
 
 const trouveLesLiDuSommaireReplie = (hash) =>
