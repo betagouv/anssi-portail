@@ -58,18 +58,34 @@
   </dsfr-card>
 
   <Modale titre={menace.nom} bind:estOuverte={détailOuvert}>
-    <p>{menace.description}</p>
+    <p class="texte-standard-md">{menace.description}</p>
 
-    <p class="niveau-risque">
+    <p class="texte-standard-md niveau-risque">
       <strong>Niveau de risque</strong>
       {#if menace.renforce}
         <dsfr-badge label="Renforcée" type="status" status="warning" size="sm"></dsfr-badge>
       {/if}
     </p>
 
+    {#if menace.resume}
+      <div class="stats">
+        <p class="pourcentage fr-h4">{menace.resume.indicateur}</p>
+        {#if menace.resume.enHausse}
+          <dsfr-badge
+            has-icon
+            icon="arrow-right-up-line"
+            type="accent"
+            accent="green-emeraude"
+            size="sm"
+            label="en hausse"
+          ></dsfr-badge>
+        {/if}
+        <p class="texte-detail-sm">{menace.resume.texte}</p>
+      </div>
+    {/if}
     {#each menace.paragraphesInsight as paragraphe (paragraphe)}
       <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-      <p>{@html aseptiseHtml(paragraphe)}</p>
+      <p class="texte-standard-md">{@html aseptiseHtml(paragraphe)}</p>
     {/each}
   </Modale>
 </div>
@@ -132,9 +148,13 @@
     }
 
     .niveau-risque {
-      align-items: center;
+      align-items: flex-end;
       display: flex;
       gap: 0.75rem;
+
+      & + .stats {
+        margin-bottom: 1.5rem;
+      }
     }
   }
 </style>
