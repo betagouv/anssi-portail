@@ -40,17 +40,17 @@ export const TYPES_ORGANISATION: { value: TypeOrganisation; label: string }[] = 
 ];
 
 export const SECTEURS: { value: Secteur; label: string }[] = [
-  { value: 'sante', label: 'Santé' },
-  { value: 'energie', label: 'Énergie' },
-  { value: 'transports', label: 'Transports' },
-  { value: 'telecom', label: 'Télécommunications' },
-  { value: 'defense', label: 'Défense / BITD' },
-  { value: 'institutionnel', label: 'Institutionnel / Gouvernemental' },
-  { value: 'commerce', label: 'Commerce (en ligne ou physique)' },
   { value: 'assurance', label: 'Assurance / Mutuelles' },
-  { value: 'sport', label: 'Sport / Loisirs' },
+  { value: 'commerce', label: 'Commerce (en ligne ou physique)' },
+  { value: 'defense', label: 'Défense / BITD' },
   { value: 'emploi', label: 'Emploi / RH' },
+  { value: 'energie', label: 'Énergie' },
+  { value: 'institutionnel', label: 'Institutionnel / Gouvernemental' },
   { value: 'logistique', label: 'Logistique / Livraison' },
+  { value: 'sante', label: 'Santé' },
+  { value: 'sport', label: 'Sport / Loisirs' },
+  { value: 'telecom', label: 'Télécommunications' },
+  { value: 'transports', label: 'Transports' },
   { value: 'autre', label: 'Autre' },
 ];
 
