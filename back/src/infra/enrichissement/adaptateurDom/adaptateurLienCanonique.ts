@@ -4,7 +4,7 @@ import { AdaptateurDom } from './adaptateurDom.js';
 export class AdaptateurLienCanonique implements AdaptateurDom {
   private readonly motifRoutes: RegExp;
 
-  constructor(private readonly routesRacines: string[]) {
+  constructor(readonly routesRacines: string[]) {
     const alternatives = routesRacines.map((route) => route.replace(/^\//, '')).join('|');
     this.motifRoutes = new RegExp(`/(${alternatives})$`);
   }
