@@ -25,8 +25,10 @@ import { ressourceModule } from './mesures/ressourceModule.js';
 import { ressourceParcoursComplet } from './mesures/ressourceParcoursComplet.js';
 import { ressourcePriseEnCompte } from './mesures/ressourcePriseEnCompte.js';
 import { ressourceRécompensesCyberDépart } from './mesures/ressourceRecompensesCyberDepart/ressourceRecompensesCyberDepart.js';
+import { ressourceTestsExposition } from './mini-tests/exposition/ressourceTestsExposition.js';
 import { ressourceInfoMiniTests } from './mini-tests/ressourceInfoMiniTests.js';
 import { ressourceReactionMiniTest } from './mini-tests/ressourceReactionMiniTest.js';
+import { ressourceRetourMiniTest } from './mini-tests/ressourceRetourMiniTest.js';
 import { ressourceRéponsesVraiFaux } from './mini-tests/vrai-faux/ressourceReponsesVraiFaux.js';
 import { ressourceVraiFaux } from './mini-tests/vrai-faux/ressourceVraiFaux.js';
 import { ressourceDemandesAide } from './mon-aide-cyber/ressourceDemandesAide.js';
@@ -50,6 +52,7 @@ import { ressourceFinancement } from './ressourceFinancement.js';
 import { ressourceFinancements } from './ressourceFinancements.js';
 import { ressourceInformationsCreationCompte } from './ressourceInformationsCreationCompte.js';
 import { ressourceInfosSite } from './ressourceInfosSite.js';
+import { ressourceLlmsTxt } from './ressourceLlmsTxt.js';
 import { ressourcePageConnexion } from './ressourcePageConnexion.js';
 import { ressourcePageContact } from './ressourcePageContact.js';
 import { ressourcePageCrisp } from './ressourcePageCrisp.js';
@@ -71,10 +74,8 @@ import { ressourceRepartitionDesResultatsDeTest } from './testMaturite/ressource
 import { ressourceResultatDeTest } from './testMaturite/ressourceResultatDeTest.js';
 import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTest.js';
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe.js';
-import { ressourceRetourMiniTest } from './mini-tests/ressourceRetourMiniTest.js';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
-import { ressourceLlmsTxt } from './ressourceLlmsTxt.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -409,6 +410,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute('/api/mini-tests/vrai-faux', ressourceVraiFaux(configurationServeur));
   enregistreRoute('/api/mini-tests/vrai-faux/reponses', ressourceRéponsesVraiFaux(configurationServeur));
+  enregistreRoute('/api/mini-tests/exposition/tests', ressourceTestsExposition(configurationServeur));
 
   const parcoursActivé = configurationServeur.adaptateurEnvironnement
     .fonctionnalites()
