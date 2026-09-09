@@ -8,11 +8,18 @@ import { valideCorpsRequete } from '../../zod.js';
 import { schemaPostRéponsesVraiFaux } from './ressourceReponsesVraiFaux.schemas.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
-export const ressourceRéponsesVraiFaux = ({ busEvenements, entrepôtQuestionVraieFausse }: ConfigurationServeur) => {
+export const ressourceRéponsesVraiFaux = ({
+  busEvenements,
+  entrepôtQuestionVraieFausse,
+  middleware,
+  entrepotUtilisateur,
+  adaptateurHachage,
+}: ConfigurationServeur) => {
   const routeur = Router();
   routeur.post(
     '/',
     valideCorpsRequete(schemaPostRéponsesVraiFaux),
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     filetRouteAsynchrone(async (requête: CorpsDeRequeteTypee<z.output<typeof schemaPostRéponsesVraiFaux>>, reponse) => {
       const toutesLesQuestions = await entrepôtQuestionVraieFausse.tous();
 
@@ -22,6 +29,7 @@ export const ressourceRéponsesVraiFaux = ({ busEvenements, entrepôtQuestionVra
         idCorrélation: requête.body.idCorrélation,
         idQuestion: requête.body.idQuestion,
         réponseUtilisateur: requête.body.réponseUtilisateur,
+        utilisateur: requête.utilisateur,
       });
 
       return reponse.sendStatus(HttpStatusCode.Created);

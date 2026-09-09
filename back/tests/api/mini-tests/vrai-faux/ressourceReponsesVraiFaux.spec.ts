@@ -4,11 +4,14 @@ import assert from 'node:assert';
 import { beforeEach, describe, it } from 'node:test';
 import request from 'supertest';
 import { creeServeur } from '../../../../src/api/msc.js';
-import { QuestionnaireVraiFauxTerminé } from '../../../../src/bus/evenements/questionnaireVraiFauxTermine.js';
 import { QuestionnaireVraiFauxRéponseSoumise } from '../../../../src/bus/evenements/questionnaireVraiFauxReponseSoumise.js';
+import { QuestionnaireVraiFauxTerminé } from '../../../../src/bus/evenements/questionnaireVraiFauxTermine.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepôtQuestionVraieFausseMémoire } from '../../../persistance/entrepotQuestionVraieFausseMemoire.js';
+import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
+import { encodeSession } from '../../cookie.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
+import { jeanneDupont } from '../../objetsPretsALEmploi.js';
 import { questionVraieFausseDeTest } from './constructeurDeQuestionVraieFausse.js';
 
 describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
@@ -22,10 +25,13 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
     await entrepôtQuestionVraieFausse.ajoute(
       questionVraieFausseDeTest().avecLIdQuestion('idQuestion1').avecIdéeReçueEstVraie(true).construis()
     );
+    const entrepotUtilisateur = new EntrepotUtilisateurMemoire();
+    await entrepotUtilisateur.ajoute(jeanneDupont);
     serveur = creeServeur({
       ...configurationDeTestDuServeur,
       busEvenements: busÉvénements,
       entrepôtQuestionVraieFausse,
+      entrepotUtilisateur,
     });
   });
 
@@ -62,6 +68,19 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
       await posteUneRéponseValide();
 
       assert(busÉvénements.naPasRecuDEvenement(QuestionnaireVraiFauxTerminé));
+    });
+
+    it.only('publie les informations de l’utilisateur si elles sont disponibles', async () => {
+      const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'token' });
+      await request(serveur).post('/api/mini-tests/vrai-faux/reponses').set('Cookie', [cookieJeanneDupont]).send({
+        idQuestion: 'idQuestion1',
+        réponseUtilisateur: true,
+        idCorrélation: '1234567890',
+      });
+
+      const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxRéponseSoumise);
+
+      assert.equal(événement?.codeRegion, 'FR-971');
     });
 
     describe('répond un 400', () => {
