@@ -8,20 +8,11 @@
   import CarteRisqueExposition from './CarteRisqueExposition.svelte';
   import type { MenaceEvaluee } from './expositionCyberattaques';
 
-  const {
-    retour,
-    menaces,
-    sousTraitanceRenforcée,
-  }: { retour: () => void; menaces: MenaceEvaluee[]; sousTraitanceRenforcée: boolean } = $props();
+  const { menaces, sousTraitanceRenforcée }: { menaces: MenaceEvaluee[]; sousTraitanceRenforcée: boolean } = $props();
 </script>
 
 <dsfr-container>
   <div class="résultats">
-    <button class="lien-retour" type="button" onclick={retour}>
-      <lab-anssi-icone nom="arrow-left-s-line" taille="sm"></lab-anssi-icone>
-      Modifier mes réponses
-    </button>
-
     <Notice
       type="attention"
       estRejetable={false}
@@ -99,19 +90,6 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-
-    .lien-retour {
-      align-items: center;
-      align-self: flex-start;
-      background: none;
-      border: 1px solid var(--border-default-grey);
-      border-radius: 1.5rem;
-      color: var(--text-action-high-blue-france);
-      cursor: pointer;
-      display: flex;
-      gap: 0.25rem;
-      padding: 0.375rem 1rem;
-    }
 
     h2 {
       margin-bottom: 0;
