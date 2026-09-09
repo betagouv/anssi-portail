@@ -26,7 +26,7 @@
     size="md"
   >
     <div slot="image" class={['icone', menace.couleurFond]}>
-      <lab-anssi-icone nom={menace.icone} taille="lg"></lab-anssi-icone>
+      <img src={menace.icone} alt="" />
     </div>
     <div slot="badgesgroup">
       <dsfr-badge label="renforcée" type="status" status="warning" size="md"></dsfr-badge>
@@ -121,6 +121,11 @@
 
       &.rose {
         background-color: var(--background-alt-pink-tuile);
+      }
+
+      img {
+        width: 2.5rem;
+        height: 2.5rem;
       }
     }
 
