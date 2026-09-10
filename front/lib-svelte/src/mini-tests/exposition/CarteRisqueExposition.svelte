@@ -47,6 +47,11 @@
           ></dsfr-badge>
         {/if}
         <p class="texte-detail-sm">{menace.resume.texte}</p>
+        <p class="texte-mention-xs">
+          {menace.resume.source === 'ANSSI'
+            ? 'Sur la base des signalements ANSSI.'
+            : "Sur la base des demandes d'assistance à Cybermalveillance."}
+        </p>
       </div>
     {/if}
     <div slot="buttonsgroup">
@@ -149,6 +154,11 @@
 
       .texte-detail-sm {
         color: var(--text-mention-grey);
+        margin: 0;
+        grid-column: 1/-1;
+      }
+
+      .texte-mention-xs {
         margin: 0;
         grid-column: 1/-1;
       }
