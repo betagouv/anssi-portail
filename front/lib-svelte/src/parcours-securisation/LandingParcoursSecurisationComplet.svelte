@@ -57,7 +57,7 @@
 
 <div>
   <HeroLandingPage
-    description="Accédez à 6 modules élaborés pour protéger votre organisation contre les risques cyber les plus courants et faciliter votre démarche de mise en conformité NIS&nbsp;2 si vous êtes concerné."
+    description="Accédez à 6 modules élaborés pour protéger votre organisation contre les risques cyber les plus courants et pour vous accompagner dans la mise en œuvre des mesures du ReCyF."
     propriétésFilAriane={{ feuille: 'Protéger mon organisation' }}
     tag={`+${statistiques?.diagnosticsCyberArrondis ?? 0} organisations déjà accompagnées 🚀`}
     class="hero-landing-page"
