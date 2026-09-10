@@ -33,6 +33,7 @@ export type DonneesEvenement =
   | DonnéesParcoursCompletTerminé
   | DonnéesRetourTestMaturité
   | DonnéesRetourTestVraiFaux
+  | DonnéesRetourTestExposition
   | DonneesQuestionnaireVraiFauxReponseSoumise
   | DonneesQuestionnaireVraiFauxTerminé;
 
@@ -147,6 +148,7 @@ type DonnéesParcoursAllégéTerminé = Evenement<'PARCOURS_ALLÉGÉ_TERMINÉ', 
 type DonnéesParcoursCompletTerminé = Evenement<'PARCOURS_COMPLET_TERMINÉ', { idUtilisateur: string }>;
 type DonnéesRetourTestMaturité = Evenement<'RETOUR_TEST_MATURITE_DONNE', { retour: string; commentaire?: string }>;
 type DonnéesRetourTestVraiFaux = Evenement<'RETOUR_TEST_VRAI_FAUX_DONNÉ', { retour: string; commentaire?: string }>;
+type DonnéesRetourTestExposition = Evenement<'RETOUR_TEST_EXPOSITION_DONNÉ', { retour: string; commentaire?: string }>;
 
 type DonneesQuestionnaireVraiFauxReponseSoumise = Evenement<
   'QUESTIONNAIRE_VRAI_FAUX_REPONSE_SOUMISE',
