@@ -62,7 +62,7 @@
           size="sm"
         ></dsfr-badge>
 
-        <h3>13 mesures simples pour protéger votre organisation contre les cyberattaques</h3>
+        <h3>12 mesures simples pour protéger votre organisation contre les cyberattaques</h3>
 
         <ul>
           <li><strong>Rapide</strong> à mettre en place</li>
