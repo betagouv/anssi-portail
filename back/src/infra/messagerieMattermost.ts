@@ -61,6 +61,8 @@ ${aseptiseMarkdown(avis.commentaire ?? '')}`;
           return 'Test Maturité';
         case 'vrai-faux':
           return 'Test Vrai-Faux';
+        case 'exposition':
+          return 'Test Exposition';
         default:
           throw new Error(`mini-test "${retour.miniTest}" non pris en charge`);
       }

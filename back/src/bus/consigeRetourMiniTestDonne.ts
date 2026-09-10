@@ -5,7 +5,7 @@ import { RetourMiniTestDonné } from './evenements/retourMiniTestDonne.js';
 
 type ÉvènementsMiniTest = Extract<
   DonneesEvenement,
-  { type: 'RETOUR_TEST_MATURITE_DONNE' | 'RETOUR_TEST_VRAI_FAUX_DONNÉ' }
+  { type: 'RETOUR_TEST_MATURITE_DONNE' | 'RETOUR_TEST_VRAI_FAUX_DONNÉ' | 'RETOUR_TEST_EXPOSITION_DONNÉ' }
 >;
 
 export const consigneRetourMiniTestDonné = ({
@@ -22,6 +22,8 @@ export const consigneRetourMiniTestDonné = ({
           return 'RETOUR_TEST_MATURITE_DONNE';
         case 'vrai-faux':
           return 'RETOUR_TEST_VRAI_FAUX_DONNÉ';
+        case 'exposition':
+          return 'RETOUR_TEST_EXPOSITION_DONNÉ';
         default:
           throw new Error(`mini-test "${évènement.miniTest}" non pris en charge`);
       }
