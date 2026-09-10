@@ -1,5 +1,6 @@
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
+  import { publieRéponseQuestionnaireExposition } from '../../passerelles/mini-tests/publicationRéponses';
   import Bouton from '../../ui/Bouton.svelte';
   import {
     type FacteurAggravant,
@@ -19,7 +20,7 @@
   let { onévaluer }: Props = $props();
 
   let typeOrganisation: TypeOrganisation | undefined = $state();
-  let secteur = $state('');
+  let secteur: Secteur | undefined = $state();
   let facteurs: FacteurAggravant[] = $state([]);
 
   const radiosType = TYPES_ORGANISATION.map(({ value, label }) => ({ id: `type-${value}`, label, value }));
@@ -34,7 +35,7 @@
   );
 
   $effect(() => {
-    if (!secteurDisponible) secteur = '';
+    if (!secteurDisponible) secteur = undefined;
   });
 
   const choisisType = (evenement: CustomEvent<string>) => {
@@ -42,16 +43,17 @@
   };
 
   const choisisSecteur = (evenement: CustomEvent<string>) => {
-    secteur = evenement.detail;
+    secteur = (evenement.detail || undefined) as Secteur | undefined;
   };
 
   const choisisFacteurs = (evenement: CustomEvent<string[]>) => {
     facteurs = evenement.detail as FacteurAggravant[];
   };
 
-  const valide = () => {
+  const valide = async () => {
     if (!typeOrganisation) return;
-    onévaluer({ type: typeOrganisation, secteur: (secteur || undefined) as Secteur | undefined, facteurs });
+    onévaluer({ type: typeOrganisation, secteur, facteurs });
+    await publieRéponseQuestionnaireExposition({ facteursAggravant: facteurs, typeOrganisation, secteur });
   };
 </script>
 
@@ -78,7 +80,7 @@
         hint={indiceSecteur}
         placeholder="Sélectionner une option"
         disabled={!secteurDisponible}
-        value={secteur}
+        value={secteur ?? ''}
         options={enPropriétéWebC(optionsSecteur)}
         onvaluechanged={choisisSecteur}
       ></dsfr-select>
