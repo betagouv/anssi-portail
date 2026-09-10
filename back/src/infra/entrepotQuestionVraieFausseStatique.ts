@@ -72,7 +72,7 @@ export class EntrepôtQuestionVraieFausseStatique implements EntrepôtQuestionVr
           'Plusieurs semaines de fonctionnement dégradé sont fréquentes.',
           "En 2025, des établissements scolaires ont dû fonctionner en mode dégradé pendant plusieurs semaines suite à un rançongiciel. Une autre compromission traitée par l'ANSSI a entraîné, après des mesures d'endiguement précipitées, un arrêt total et une perturbation des activités sur le long cours. L'ANSSI rappelle qu'un PCA et un PRA préparés en amont sont indispensables.",
         ],
-        réponse: "FAUX. Une attaque par rançongiciel paralyse l'activité pendant au moins plusieurs jours.",
+        réponse: "FAUX. Une attaque par rançongiciel peut paralyser l'activité pendant plusieurs semaines.",
         idéeReçue: {
           emoji: '⏳',
           texte: 'Une attaque par rançongiciel paralyse rarement une activité plus de quelques jours.',
