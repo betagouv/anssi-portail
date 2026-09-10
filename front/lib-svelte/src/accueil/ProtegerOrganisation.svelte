@@ -61,7 +61,7 @@
     <Lien
       apparence="bouton"
       href="/parcours-securisation/"
-      libelle="Découvrir les parcours"
+      libelle="Découvrir le parcours"
       type="primaire"
       taille="lg"
       icone="arrow-right-circle-fill"
