@@ -1,5 +1,5 @@
 <script module lang="ts">
-  export type TypeDeRetour = 'test-maturité' | 'vrai-faux' | 'mesure';
+  export type TypeDeRetour = 'test-maturité' | 'vrai-faux' | 'mesure' | 'exposition';
 </script>
 
 <script lang="ts">
@@ -23,6 +23,9 @@
   const urlDePost = $derived.by(() => {
     if (typeDeRetour === 'vrai-faux') {
       return '/api/retour-mini-tests/vrai-faux';
+    }
+    if (typeDeRetour === 'exposition') {
+      return '/api/retour-mini-tests/exposition';
     }
     if (typeDeRetour === 'mesure') {
       return `/api/mesures/${identifiantCible}/avis`;
