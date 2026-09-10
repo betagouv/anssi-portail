@@ -4,6 +4,7 @@ export class AdaptateurStatistiqueMiniTestsMémoire implements AdaptateurStatist
   async nombreDeMiniTestsRéalisés() {
     return {
       vraiFaux: 0,
+      exposition: 1780,
     };
   }
 }

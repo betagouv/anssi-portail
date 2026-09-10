@@ -22,6 +22,7 @@ export type Statistiques = {
   satisfactionUtilisateur: number;
   miniTests: {
     vraiFaux: number;
+    exposition: number;
   };
 };
 

@@ -6,6 +6,7 @@ import { DonneesEvenement } from './donneesEvenement.js';
 type ClésMiniTests = Statistiques['miniTests'];
 const correspondanceÉvénementsEtStatistique: Partial<Record<DonneesEvenement['type'], keyof ClésMiniTests>> = {
   QUESTIONNAIRE_VRAI_FAUX_TERMINE: 'vraiFaux',
+  TEST_EXPOSITION_REALISE: 'exposition',
 };
 
 export class AdaptateurStatistiqueMiniTestsPostgres implements AdaptateurStatistiqueMiniTests {

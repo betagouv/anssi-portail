@@ -14,6 +14,7 @@ import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTest
 import { EntrepotUtilisateurMemoire } from '../persistance/entrepotUtilisateurMemoire.js';
 import { configurationDeTestDuServeur } from './fauxObjets.js';
 import { hectorDurant, jeanneDupont } from './objetsPretsALEmploi.js';
+import { Statistiques } from '../../src/metier/statistiques.js';
 
 describe('La ressource Statistiques', () => {
   describe('sur demande GET', () => {
@@ -22,6 +23,7 @@ describe('La ressource Statistiques', () => {
     let entrepotResultatTest: EntrepotResultatTest;
     let adaptateurStatistiqueMiniTests: AdaptateurStatistiqueMiniTests;
     let monAideCyber: AdaptateurMonAideCyber;
+    let statistiquesParDéfaut: Statistiques['miniTests'];
 
     beforeEach(() => {
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
@@ -37,6 +39,11 @@ describe('La ressource Statistiques', () => {
         adaptateurStatistiqueMiniTests,
         adaptateurMonAideCyber: monAideCyber,
       });
+
+      statistiquesParDéfaut = {
+        exposition: 0,
+        vraiFaux: 0,
+      };
     });
 
     it('renvoie 200', async () => {
@@ -94,11 +101,25 @@ describe('La ressource Statistiques', () => {
     });
 
     it('renvoie le nombres de tests vrai-faux réalisés', async () => {
-      adaptateurStatistiqueMiniTests.nombreDeMiniTestsRéalisés = async () => ({ vraiFaux: 10 });
+      adaptateurStatistiqueMiniTests.nombreDeMiniTestsRéalisés = async () => ({
+        ...statistiquesParDéfaut,
+        vraiFaux: 10,
+      });
 
       const reponse = await request(serveur).get('/api/statistiques');
 
       assert.deepEqual(reponse.body.miniTests.vraiFaux, 10);
+    });
+
+    it('renvoie le nombres de tests exposition réalisés', async () => {
+      adaptateurStatistiqueMiniTests.nombreDeMiniTestsRéalisés = async () => ({
+        ...statistiquesParDéfaut,
+        exposition: 20,
+      });
+
+      const reponse = await request(serveur).get('/api/statistiques');
+
+      assert.deepEqual(reponse.body.miniTests.exposition, 20);
     });
   });
 });

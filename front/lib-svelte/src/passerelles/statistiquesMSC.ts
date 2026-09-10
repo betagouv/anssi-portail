@@ -16,6 +16,7 @@ type APIStatistiques = {
   satisfactionUtilisateur: number;
   miniTests: {
     vraiFaux: number;
+    exposition: number;
   };
 };
 
@@ -41,7 +42,7 @@ export const récupèreStatistiquesMSC = async (): Promise<Statistiques> => {
   const réponse = await axios.get<APIStatistiques>(`/api/statistiques`);
   const { utilisateursInscrits, testsMaturite, diagnosticsCyber, satisfactionUtilisateur, miniTests } = réponse.data;
   const diagnosticsCyberArrondis = Math.floor(diagnosticsCyber / 100) * 100;
-  const testsRéalisés = miniTests.vraiFaux + testsMaturite.total;
+  const testsRéalisés = miniTests.vraiFaux + testsMaturite.total + miniTests.exposition;
   return {
     diagnosticsCyber,
     diagnosticsCyberArrondis,
