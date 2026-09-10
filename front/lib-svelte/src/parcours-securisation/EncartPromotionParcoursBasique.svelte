@@ -16,7 +16,7 @@
   const fonctionnalites = [
     {
       titre: 'Rapides à mettre en place',
-      description: '13 mesures accessibles, souvent réalisables en quelques minutes.',
+      description: '12 mesures accessibles, souvent réalisables en quelques minutes.',
       id: 'mesures',
       rich: true,
     },

@@ -19,7 +19,7 @@
 <Modale bind:estOuverte titre="🎉 Bravo !">
   <div class="corps">
     <p class="texte-standard-md">
-      Vous avez appliqué les 13 mesures du Cyberdépart. Vous avez posé les bases de votre cybersécurité.
+      Vous avez appliqué les 12 mesures du Cyberdépart. Vous avez posé les bases de votre cybersécurité.
     </p>
     <p class="texte-standard-md">
       <strong>Continuez votre progression&nbsp;:</strong> 5 modules complémentaires vous attendent pour renforcer la protection

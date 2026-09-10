@@ -93,7 +93,7 @@
   {#snippet alternatif()}
     <dsfr-container class="contenu-encart-parcours-securisation">
       <EncartPromotionParcoursBasique
-        titre="13 mesures simples pour protéger votre organisation contre les cyberattaques"
+        titre="12 mesures simples pour protéger votre organisation contre les cyberattaques"
         description="Un programme d'accompagnement gratuit, pensé pour les non-experts."
       >
         {#snippet tags()}

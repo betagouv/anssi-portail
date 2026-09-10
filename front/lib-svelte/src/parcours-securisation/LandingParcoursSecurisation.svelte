@@ -118,7 +118,7 @@
 <section class="section-parcours-basique">
   <EncartPromotionParcoursBasique
     titre="La cybersécurité est étrangère à votre organisation ?"
-    description="Accédez à 13 mesures simples pour protéger dès maintenant votre organisation contre les cyberattaques et prendre votre Cyberdépart ! 🚀"
+    description="Accédez à 12 mesures simples pour protéger dès maintenant votre organisation contre les cyberattaques et prendre votre Cyberdépart ! 🚀"
   >
     {#snippet tags()}
       <dsfr-tags-group tags={enPropriétéWebC(tagsParcoursBasique)}></dsfr-tags-group>
@@ -145,7 +145,7 @@
 <section class="section-parcours-complet">
   <EncartPromotionParcoursComplet
     titre="Votre organisation agit déjà pour sa cybersécurité ?"
-    description="Accédez à 57 mesures pour vous protéger contre les 5 risques cyber les plus courants."
+    description="Accédez à 58 mesures pour vous protéger contre les 5 risques cyber les plus courants."
   >
     {#snippet tags()}
       <dsfr-tags-group tags={enPropriétéWebC(tagsParcoursComplet)}></dsfr-tags-group>
