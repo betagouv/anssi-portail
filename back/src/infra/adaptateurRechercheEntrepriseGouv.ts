@@ -13,25 +13,24 @@ export class AdaptateurRechercheEntrepriseGouv implements AdaptateurRechercheEnt
 
   constructor(adaptateurEnvironnement: AdaptateurEnvironnement) {
     this.cache = new Cache({ ttl: TRENTE_MINUTES });
-    const apiUrl = adaptateurEnvironnement.rechercheEntreprise().apiUrl();
-    this.apiUrl = apiUrl;
+    this.apiUrl = adaptateurEnvironnement.rechercheEntreprise().apiUrl();
   }
 
-  async rechercheOrganisations(terme: string, departement: string | null): Promise<ResultatRechercheEntreprise[]> {
-    return this.cache.get(`${terme}-${departement}`, () => {
-      return this.rechercheOrganisationsInterne(terme, departement);
+  async rechercheOrganisations(terme: string, département: string | null): Promise<ResultatRechercheEntreprise[]> {
+    return this.cache.get(`${terme}-${département}`, () => {
+      return this.rechercheOrganisationsInterne(terme, département);
     });
   }
 
   async rechercheOrganisationsInterne(
     terme: string,
-    departement: string | null
+    département: string | null
   ): Promise<ResultatRechercheEntreprise[]> {
     try {
-      const reponse = await axios.get<{ results: ResultatSirene[] }>(this.apiUrl, {
+      const réponse = await axios.get<{ results: RésultatSirene[] }>(this.apiUrl, {
         params: {
           q: terme,
-          ...(departement && { departement }),
+          ...(département && { departement: département }),
           per_page: 25,
           page: 1,
           limite_matching_etablissements: 1,
@@ -40,7 +39,7 @@ export class AdaptateurRechercheEntrepriseGouv implements AdaptateurRechercheEnt
         },
       });
 
-      return reponse.data.results.flatMap((r) => extraisInfosEtablissement(terme, r) ?? []);
+      return réponse.data.results.flatMap((r) => extraisInfosEtablissement(terme, r) ?? []);
     } catch (e) {
       if (e instanceof AxiosError) {
         console.error(e, {
@@ -56,7 +55,7 @@ export class AdaptateurRechercheEntrepriseGouv implements AdaptateurRechercheEnt
   }
 }
 
-const extraisDepartement = (commune: string | null | undefined) => {
+const extraisDépartement = (commune: string | null | undefined) => {
   if (!commune) {
     return null;
   }
@@ -66,33 +65,33 @@ const extraisDepartement = (commune: string | null | undefined) => {
 
 const extraisInfosEtablissement = (
   terme: string,
-  resultat: ResultatSirene
+  resultat: RésultatSirene
 ): ResultatRechercheEntreprise | undefined => {
   let nom = resultat.nom_complet;
   const { departement, siret } = resultat.siege;
-  let departementRetour = departement;
+  let départementRetour = departement;
   let siretRetour = siret;
 
   const estUneRechercheParSiret = terme.match('^[0-9 ]+$');
 
   if (estUneRechercheParSiret) {
-    const etablissement = resultat.matching_etablissements?.[0];
-    if (!etablissement?.commune || !etablissement.siret) return undefined;
+    const établissement = resultat.matching_etablissements?.[0];
+    if (!établissement?.commune || !établissement.siret) return undefined;
 
-    nom = etablissement.liste_enseignes?.[0] ?? nom;
-    departementRetour = extraisDepartement(etablissement.commune);
-    siretRetour = etablissement.siret;
+    nom = établissement.liste_enseignes?.[0] ?? nom;
+    départementRetour = extraisDépartement(établissement.commune);
+    siretRetour = établissement.siret;
   }
 
-  if (!departementRetour || !siretRetour) return undefined;
+  if (!départementRetour || !siretRetour) return undefined;
 
-  const codeRegion = regions.find((region) => region.codeINSEE === resultat.siege.region)?.codeIso;
+  const codeRégion = regions.find((region) => region.codeINSEE === resultat.siege.region)?.codeIso;
 
   return {
     nom,
-    departement: departementRetour,
+    departement: départementRetour,
     siret: siretRetour,
-    codeRegion,
+    codeRegion: codeRégion,
     codeSecteur: resultat.section_activite_principale ?? undefined,
     codeTrancheEffectif: resultat.tranche_effectif_salarie ?? undefined,
     estAssociation: resultat.complements.est_association,
@@ -102,7 +101,7 @@ const extraisInfosEtablissement = (
 };
 
 // https://recherche-entreprises.api.gouv.fr/docs/
-type ResultatSirene = {
+type RésultatSirene = {
   nom_complet: string;
   siege: {
     departement?: string | null;
