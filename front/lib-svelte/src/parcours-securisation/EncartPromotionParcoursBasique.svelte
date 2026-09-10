@@ -115,9 +115,16 @@
 </dsfr-container>
 
 <style lang="scss">
+  @use '../../../assets/styles/responsive.scss' as *;
+
   [slot='media'] {
+    display: none;
     max-width: 486px;
     width: 100%;
+
+    @include a-partir-de(md) {
+      display: block;
+    }
   }
 
   .image-animee,
