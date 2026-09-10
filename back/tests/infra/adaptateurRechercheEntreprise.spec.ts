@@ -93,6 +93,27 @@ describe('La recherche entreprise', () => {
     assert.equal(resultats[0].departement, '92');
   });
 
+  for (const [commune, departement] of [
+    ['97105', '971'],
+    ['98735', '987'],
+    ['2A004', '2A'],
+  ]) {
+    it(`extrait le département ${departement} de la commune ${commune}`, async (t) => {
+      const resultat = resultatSirene();
+      t.mock.method(axios, 'get', async () => ({
+        data: {
+          results: [{ ...resultat, matching_etablissements: [{ ...resultat.matching_etablissements[0], commune }] }],
+        },
+      }));
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+
+      const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);
+
+      assert.equal(resultats.length, 1);
+      assert.equal(resultats[0].departement, departement);
+    });
+  }
+
   for (const etablissements of [undefined, []]) {
     it(`exclut un résultat sans établissement correspondant lors d'une recherche numérique (${String(etablissements)})`, async (t) => {
       t.mock.method(axios, 'get', async () => ({

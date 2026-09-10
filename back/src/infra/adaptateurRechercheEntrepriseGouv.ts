@@ -18,14 +18,11 @@ export class AdaptateurRechercheEntrepriseGouv implements AdaptateurRechercheEnt
 
   async rechercheOrganisations(terme: string, département: string | null): Promise<ResultatRechercheEntreprise[]> {
     return this.cache.get(`${terme}-${département}`, () => {
-      return this.rechercheOrganisationsInterne(terme, département);
+      return this.#rechercheOrganisations(terme, département);
     });
   }
 
-  async rechercheOrganisationsInterne(
-    terme: string,
-    département: string | null
-  ): Promise<ResultatRechercheEntreprise[]> {
+  async #rechercheOrganisations(terme: string, département: string | null): Promise<ResultatRechercheEntreprise[]> {
     try {
       const réponse = await axios.get<{ results: RésultatSirene[] }>(this.apiUrl, {
         params: {
@@ -39,7 +36,7 @@ export class AdaptateurRechercheEntrepriseGouv implements AdaptateurRechercheEnt
         },
       });
 
-      return réponse.data.results.flatMap((r) => extraisInfosEtablissement(terme, r) ?? []);
+      return réponse.data.results.flatMap((r) => extraisInfosÉtablissement(terme, r) ?? []);
     } catch (e) {
       if (e instanceof AxiosError) {
         console.error(e, {
@@ -55,35 +52,37 @@ export class AdaptateurRechercheEntrepriseGouv implements AdaptateurRechercheEnt
   }
 }
 
-const extraisDépartement = (commune: string | null | undefined) => {
-  if (!commune) {
-    return null;
-  }
+const extraisCodeINSEE = (commune: string) => {
+  const préfixeCodeInseeTerritoiresOutreMer = ['97', '98'];
 
-  return commune.startsWith('97') || commune.startsWith('98') ? commune.slice(0, 3) : commune.slice(0, 2);
+  return préfixeCodeInseeTerritoiresOutreMer.some((préfixe) => commune.startsWith(préfixe))
+    ? commune.slice(0, 3)
+    : commune.slice(0, 2);
 };
 
-const extraisInfosEtablissement = (
+const extraisInfosÉtablissement = (
   terme: string,
   resultat: RésultatSirene
 ): ResultatRechercheEntreprise | undefined => {
   let nom = resultat.nom_complet;
-  const { departement, siret } = resultat.siege;
-  let départementRetour = departement;
-  let siretRetour = siret;
+
+  let départementRetour: string;
+  let siretRetour: string;
 
   const estUneRechercheParSiret = terme.match('^[0-9 ]+$');
 
   if (estUneRechercheParSiret) {
     const établissement = resultat.matching_etablissements?.[0];
-    if (!établissement?.commune || !établissement.siret) return undefined;
+    if (!établissement || !établissement.commune || !établissement.siret) return undefined;
 
     nom = établissement.liste_enseignes?.[0] ?? nom;
-    départementRetour = extraisDépartement(établissement.commune);
+    départementRetour = extraisCodeINSEE(établissement.commune);
     siretRetour = établissement.siret;
+  } else {
+    if (!resultat.siege.departement || !resultat.siege.siret) return undefined;
+    départementRetour = resultat.siege.departement;
+    siretRetour = resultat.siege.siret;
   }
-
-  if (!départementRetour || !siretRetour) return undefined;
 
   const codeRégion = regions.find((region) => region.codeINSEE === resultat.siege.region)?.codeIso;
 
