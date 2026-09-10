@@ -3,7 +3,7 @@ import { AdaptateurStatistiqueMiniTests } from '../metier/adaptateurStatistiqueM
 export class AdaptateurStatistiqueMiniTestsMémoire implements AdaptateurStatistiqueMiniTests {
   async nombreDeMiniTestsRéalisés() {
     return {
-      vraiFaux: 0,
+      vraiFaux: 12000,
       exposition: 1780,
     };
   }

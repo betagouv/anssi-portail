@@ -22,6 +22,7 @@
     compteurs: {
       MaturiteCyber: 0,
       VraiFaux: 0,
+      Exposition: 0,
     },
     réactions: {
       MaturiteCyber: réactionsInitiales,
@@ -43,6 +44,7 @@
   const compteursArrondis = $derived({
     MaturitéCyber: donnéesPage.compteurs.MaturiteCyber > seuil ? arrondis(donnéesPage.compteurs.MaturiteCyber) : 0,
     VraiFaux: donnéesPage.compteurs.VraiFaux > seuil ? arrondis(donnéesPage.compteurs.VraiFaux) : 0,
+    Exposition: donnéesPage.compteurs.Exposition > seuil ? arrondis(donnéesPage.compteurs.Exposition) : 0,
   });
 </script>
 
@@ -102,10 +104,10 @@
         href="/exposition"
         réactions={donnéesPage?.réactions.Exposition ?? {}}
         badge={{
-          libellé: compteursArrondis.VraiFaux ? `+${compteursArrondis.VraiFaux} tests réalisés` : undefined,
+          libellé: compteursArrondis.Exposition ? `+${compteursArrondis.Exposition} tests réalisés` : undefined,
           accent: 'purple-glycine',
         }}
-        estimationEnMinutes={5}
+        estimationEnMinutes={2}
       >
         {#snippet image(survol)}
           <RadarMenaceAnime {survol} />

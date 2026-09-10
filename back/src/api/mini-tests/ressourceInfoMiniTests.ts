@@ -3,7 +3,11 @@ import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
 
-export const ressourceInfoMiniTests = ({ entrepotReactionMiniTest, entrepotResultatTest }: ConfigurationServeur) => {
+export const ressourceInfoMiniTests = ({
+  entrepotReactionMiniTest,
+  entrepotResultatTest,
+  adaptateurStatistiqueMiniTests,
+}: ConfigurationServeur) => {
   const routeur = Router();
 
   routeur.get(
@@ -11,11 +15,14 @@ export const ressourceInfoMiniTests = ({ entrepotReactionMiniTest, entrepotResul
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
       const compteurMaturitéCyber = await entrepotResultatTest.taille();
+      const { vraiFaux, exposition } = await adaptateurStatistiqueMiniTests.nombreDeMiniTestsRéalisés();
 
       const réactions = await entrepotReactionMiniTest.tous();
       reponse.send({
         compteurs: {
           MaturiteCyber: Math.floor(compteurMaturitéCyber / 100) * 100,
+          VraiFaux: Math.floor(vraiFaux / 100) * 100,
+          Exposition: Math.floor(exposition / 100) * 100,
         },
         réactions: réactions.reduce(
           (acc, réaction) => {

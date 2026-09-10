@@ -38,6 +38,8 @@ describe('La ressource des informations des mini-tests', () => {
       assert.deepEqual(reponse.body, {
         compteurs: {
           MaturiteCyber: 0,
+          Exposition: 1700,
+          VraiFaux: 12000,
         },
         réactions: {},
       });
