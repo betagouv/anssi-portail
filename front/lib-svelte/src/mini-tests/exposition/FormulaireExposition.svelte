@@ -104,9 +104,9 @@
 
     <p class="texte-mention-xs">
       Strictement indicatif. Ce simulateur mesure des facteurs d'exposition à l'appui de cas de cyberattaques signalés
-      en 2025 à l'ANSSI (Panorama de la cybermenace) et à Cybermalveillance.gouv.fr (rapport d'activité). Il ne préjuge
-      en rien de la probabilité de survenue d'une cyberattaque pour une organisation particulière, celle-ci dépendant de
-      plusieurs facteurs, dont son niveau de maturité cyber.
+      en 2025 à l'ANSSI (Panorama de la cybermenace) et à Cybermalveillance.gouv.fr (rapport d'activité et demandes
+      d'assistance adressées). Il ne préjuge en rien de la probabilité de survenue d'une cyberattaque pour une
+      organisation particulière, celle-ci dépendant de plusieurs facteurs, dont son niveau de maturité cyber.
     </p>
   </div>
 </dsfr-container>
