@@ -26,6 +26,7 @@
     {propriétésFilAriane}
     variante="cafe-creme"
     class="avec-image-fond"
+    badges={[{ label: '⏱️ 2 minutes', accent: 'green-bourgeon' }]}
     description="Rançongiciel, fraude au virement, espionnage, déstabilisation, cyberharcèlement : chaque attaque poursuit un but différent. En 2 minutes, situez celles qui pèsent le plus sur votre organisation."
   >
     {#snippet titreHtml()}
