@@ -5,6 +5,7 @@
   import EvaluationExposition from './EvaluationExposition.svelte';
   import { type MenaceEvaluee, menacesPertinentes, type ReponsesExposition } from './expositionCyberattaques';
   import FormulaireExposition from './FormulaireExposition.svelte';
+  import RadarExpositionAnime from './RadarExpositionAnime.svelte';
 
   const propriétésFilAriane: PropriétésFilAriane = {
     branche: { nom: 'Faire le test !', lien: '/faire-le-test/' },
@@ -33,7 +34,9 @@
       Quels types de cyberattaques peuvent cibler mon organisation ?
     {/snippet}
     {#snippet illustration()}
-      <img src="/assets/images/illustration-tests-exposition.svg" alt="" />
+      <div class="radar">
+        <RadarExpositionAnime />
+      </div>
     {/snippet}
   </HerosRiche>
 
@@ -44,3 +47,11 @@
   </dsfr-container>
   <EvaluationExposition {menaces} />
 {/if}
+
+<style lang="scss">
+  .radar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+</style>
