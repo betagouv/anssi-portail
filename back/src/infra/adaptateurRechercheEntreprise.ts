@@ -19,7 +19,7 @@ export type ResultatRechercheEntreprise = {
   codeActivite: string;
 };
 
-const extraisDepartement = (commune: string | undefined) => {
+const extraisDepartement = (commune: string | null | undefined) => {
   if (!commune) {
     return null;
   }
@@ -27,26 +27,27 @@ const extraisDepartement = (commune: string | undefined) => {
   return commune.startsWith('97') || commune.startsWith('98') ? commune.slice(0, 3) : commune.slice(0, 2);
 };
 
-const extraisInfosEtablissement = (terme: string, resultat: ResultatSirene): ResultatRechercheEntreprise => {
+const extraisInfosEtablissement = (
+  terme: string,
+  resultat: ResultatSirene
+): ResultatRechercheEntreprise | undefined => {
   let nom = resultat.nom_complet;
   const { departement, siret } = resultat.siege;
-  let departementRetour: string | null = departement;
+  let departementRetour = departement;
   let siretRetour = siret;
 
   const estUneRechercheParSiret = terme.match('^[0-9 ]+$');
 
-  const aUnEtablissement = resultat.matching_etablissements && resultat.matching_etablissements.length > 0;
+  if (estUneRechercheParSiret) {
+    const etablissement = resultat.matching_etablissements?.[0];
+    if (!etablissement?.commune || !etablissement.siret) return undefined;
 
-  if (estUneRechercheParSiret && aUnEtablissement) {
-    const aUneListeEnseigne =
-      resultat.matching_etablissements[0].liste_enseignes &&
-      resultat.matching_etablissements[0].liste_enseignes.length > 0;
-    if (aUneListeEnseigne) {
-      nom = resultat.matching_etablissements[0].liste_enseignes[0];
-    }
-    departementRetour = extraisDepartement(resultat.matching_etablissements[0].commune);
-    siretRetour = resultat.matching_etablissements[0].siret;
+    nom = etablissement.liste_enseignes?.[0] ?? nom;
+    departementRetour = extraisDepartement(etablissement.commune);
+    siretRetour = etablissement.siret;
   }
+
+  if (!departementRetour || !siretRetour) return undefined;
 
   const codeRegion = regions.find((region) => region.codeINSEE === resultat.siege.region)?.codeIso;
 
@@ -67,14 +68,14 @@ const extraisInfosEtablissement = (terme: string, resultat: ResultatSirene): Res
 type ResultatSirene = {
   nom_complet: string;
   siege: {
-    departement: string;
-    siret: string;
-    region: string | null;
+    departement?: string | null;
+    siret?: string | null;
+    region?: string | null;
   };
-  matching_etablissements: {
-    liste_enseignes: string[];
-    commune: string;
-    siret: string;
+  matching_etablissements?: {
+    liste_enseignes?: string[] | null;
+    commune?: string | null;
+    siret?: string | null;
   }[];
   section_activite_principale: string | null; // contrairement à ce que dit la documentation, null est possible
   tranche_effectif_salarie: string | null; // contrairement à ce que dit la documentation, null est possible
@@ -89,14 +90,6 @@ type ResultatSirene = {
 
 const creerRechercheSansCache = (apiUrl: string): AdaptateurRechercheEntreprise => ({
   async rechercheOrganisations(terme: string, departement: string | null): Promise<ResultatRechercheEntreprise[]> {
-    const etablissementEnFrance = (resultat: ResultatSirene) => {
-      const aUnEtablissement = resultat.matching_etablissements && resultat.matching_etablissements.length > 0;
-      if (!aUnEtablissement) return false;
-      return resultat.matching_etablissements[0].commune !== null;
-    };
-
-    const siegeEnFrance = (resultat: ResultatSirene) => resultat.siege.departement !== null;
-
     try {
       const reponse = await axios.get<{ results: ResultatSirene[] }>(apiUrl, {
         params: {
@@ -110,11 +103,7 @@ const creerRechercheSansCache = (apiUrl: string): AdaptateurRechercheEntreprise 
         },
       });
 
-      const estUneRechercheParSiret = terme.match('^[0-9 ]+$');
-
-      return reponse.data.results
-        .filter(estUneRechercheParSiret ? etablissementEnFrance : siegeEnFrance)
-        .map((r: ResultatSirene) => extraisInfosEtablissement(terme, r));
+      return reponse.data.results.flatMap((r) => extraisInfosEtablissement(terme, r) ?? []);
     } catch (e) {
       if (e instanceof AxiosError) {
         console.error(e, {
