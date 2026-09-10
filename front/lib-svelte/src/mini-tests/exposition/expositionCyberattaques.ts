@@ -298,6 +298,7 @@ export type ResumeInsight = {
   indicateur: string;
   enHausse: boolean;
   texte: string;
+  source: 'ANSSI' | 'CYBERMALVEILLANCE';
 };
 
 /**
@@ -315,24 +316,28 @@ export function resumeInsight(id: IdMenace, reponses: ReponsesExposition): Resum
         indicateur: '8 %',
         enHausse: true,
         texte: 'des établissements de santé touchés par un rançongiciel en 2025',
+        source: 'ANSSI',
       };
     if (type === 'tpe-pme-eti')
       return {
         indicateur: '37 %',
         enHausse: false,
         texte: 'des victimes de rançongiciels en 2025 étaient des TPE, PME ou ETI',
+        source: 'ANSSI',
       };
     if (type === 'collectivite')
       return {
         indicateur: '11 %',
         enHausse: false,
         texte: "des collectivités victimes d'un rançongiciel en 2025",
+        source: 'ANSSI',
       };
     if (type === 'grand-groupe')
       return {
         indicateur: '12 %',
         enHausse: false,
         texte: 'des victimes de rançongiciels en 2025 étaient des grands groupes',
+        source: 'ANSSI',
       };
     return undefined;
   }
@@ -342,12 +347,23 @@ export function resumeInsight(id: IdMenace, reponses: ReponsesExposition): Resum
       indicateur: '+170 %',
       enHausse: true,
       texte: 'de fraudes au virement constatées en 2025',
+      source: 'CYBERMALVEILLANCE',
     };
 
   if (id === 'harc')
     return type === 'collectivite'
-      ? { indicateur: '+209 %', enHausse: true, texte: 'pour les collectivités et administrations en 2025' }
-      : { indicateur: '+205 %', enHausse: true, texte: 'pour les entreprises en 2025' };
+      ? {
+          indicateur: '+209 %',
+          enHausse: true,
+          texte: 'pour les collectivités et administrations en 2025',
+          source: 'CYBERMALVEILLANCE',
+        }
+      : {
+          indicateur: '+205 %',
+          enHausse: true,
+          texte: 'pour les entreprises en 2025',
+          source: 'CYBERMALVEILLANCE',
+        };
 
   if (id === 'espionnage') {
     if (secteur === 'sante')
@@ -355,6 +371,7 @@ export function resumeInsight(id: IdMenace, reponses: ReponsesExposition): Resum
         indicateur: '> 10 %',
         enHausse: false,
         texte: "des incidents traités par l'ANSSI concernent la santé",
+        source: 'ANSSI',
       };
     return undefined;
   }
@@ -364,6 +381,7 @@ export function resumeInsight(id: IdMenace, reponses: ReponsesExposition): Resum
       indicateur: 'Sous-traitance',
       enHausse: false,
       texte: 'généralisation des attaques passant par la chaîne de sous-traitance',
+      source: 'ANSSI',
     };
 
   // destab
@@ -371,6 +389,7 @@ export function resumeInsight(id: IdMenace, reponses: ReponsesExposition): Resum
     indicateur: 'DDoS',
     enHausse: false,
     texte: "mode d'attaque le plus fréquent en 2025",
+    source: 'ANSSI',
   };
 }
 
