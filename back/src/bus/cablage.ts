@@ -5,7 +5,7 @@ import { AdaptateurEmail } from '../metier/adaptateurEmail.js';
 import { EntrepotFavori } from '../metier/entrepotFavori.js';
 import { MessagerieInstantanee } from '../metier/messagerieInstantanee.js';
 import { BusEvenements } from './busEvenements.js';
-import { consigneRetourMiniTestDonné } from './consigeRetourMiniTestDonne.js';
+import { consigneRetourMiniTestDonnéDansJournal } from './consigneRetourMiniTestDonneDansJournal.js';
 import { consigneRetourAvisMesureDonneDansJournal } from './consigneAvisMesureDonneDansJournal.js';
 import { consigneBadgeCyberdépartDébloquéDansJournal } from './consigneBadgeCyberdepartDebloqueDansJournal.js';
 import { consigneEvenementAvisUtilisateurDonneDansJournal } from './consigneEvenementAvisUtilisateurDonneDansJournal.js';
@@ -193,7 +193,7 @@ export const cableTousLesAbonnes = ({
   ]);
 
   busEvenements.abonnePlusieurs(RetourMiniTestDonné, [
-    consigneRetourMiniTestDonné({ adaptateurJournal, adaptateurHorloge }),
+    consigneRetourMiniTestDonnéDansJournal({ adaptateurJournal, adaptateurHorloge }),
     notifieUnRetourNégatifSurMiniTest({ messagerieInstantanee }),
   ]);
 

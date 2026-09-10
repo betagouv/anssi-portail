@@ -8,7 +8,7 @@ type ÉvènementsMiniTest = Extract<
   { type: 'RETOUR_TEST_MATURITE_DONNE' | 'RETOUR_TEST_VRAI_FAUX_DONNÉ' | 'RETOUR_TEST_EXPOSITION_DONNÉ' }
 >;
 
-export const consigneRetourMiniTestDonné = ({
+export const consigneRetourMiniTestDonnéDansJournal = ({
   adaptateurJournal,
   adaptateurHorloge,
 }: {

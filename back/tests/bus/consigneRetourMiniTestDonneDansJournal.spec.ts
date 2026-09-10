@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
-import { consigneRetourMiniTestDonné } from '../../src/bus/consigeRetourMiniTestDonne.js';
+import { consigneRetourMiniTestDonnéDansJournal } from '../../src/bus/consigneRetourMiniTestDonneDansJournal.js';
 import { RetourMiniTestDonné } from '../../src/bus/evenements/retourMiniTestDonne.js';
 import { MiniTest } from '../../src/metier/mini-tests/mini-test.js';
 
@@ -22,7 +22,7 @@ describe("L'abonnement qui consigne l'évènement de retour de test de maturité
         maintenant: () => new Date('2025-03-10'),
       };
 
-      await consigneRetourMiniTestDonné({
+      await consigneRetourMiniTestDonnéDansJournal({
         adaptateurHorloge,
         adaptateurJournal,
       })(new RetourMiniTestDonné({ miniTest, commentaire: 'un commentaire', retour: 'NEGATIF' }));
