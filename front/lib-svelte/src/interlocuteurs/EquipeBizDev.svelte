@@ -48,16 +48,18 @@
     }
 
     .visuel {
+      width: 100%;
       @include a-partir-de(lg) {
         flex: 1;
       }
     }
 
     figure {
-      margin: 0;
+      margin-inline: auto;
       max-width: 588px;
 
       @include a-partir-de(lg) {
+        margin: 0;
         max-width: 100%;
       }
     }
