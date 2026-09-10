@@ -388,7 +388,7 @@ export function resumeInsight(id: IdMenace, reponses: ReponsesExposition): Resum
   return {
     indicateur: 'DDoS',
     enHausse: false,
-    texte: "mode d'attaque le plus fréquent en 2025",
+    texte: "mode d'attaque à des fins de destabilisation",
     source: 'ANSSI',
   };
 }
