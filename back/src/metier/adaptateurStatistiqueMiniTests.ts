@@ -1,3 +1,5 @@
+import { Statistiques } from './statistiques.js';
+
 export interface AdaptateurStatistiqueMiniTests {
-  nombreDeMiniTestsRéalisés(): Promise<{ vraiFaux: number }>;
+  nombreDeMiniTestsRéalisés(): Promise<Statistiques['miniTests']>;
 }
