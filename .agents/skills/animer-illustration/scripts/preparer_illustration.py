@@ -58,6 +58,34 @@ def repare_mojibake(texte):
         return texte
 
 
+NS_ETRANGER = re.compile(r' xmlns:(\w+)="(http://www\.w3\.org/1999/xhtml)"')
+XHTML = 'http://www.w3.org/1999/xhtml'
+AUTOFERMETURE_XHTML = re.compile(rf'<(\w+)([^>]*?xmlns="{re.escape(XHTML)}"[^>]*?)/>')
+
+
+def repare_espaces_noms_html(texte):
+    """Figma imbrique du HTML (foreignObject) dans le SVG. ElementTree le
+    sérialise en préfixe d'espace de noms (`<html:div>`, `xmlns:html=…`),
+    une syntaxe que les types Svelte pour les attributs <svg> ignorent.
+    On la réécrit en `xmlns` porté par l'élément, forme que Svelte accepte.
+    """
+    correspondance = NS_ETRANGER.search(texte)
+    if not correspondance:
+        return texte
+    prefixe, uri = correspondance.group(1), correspondance.group(2)
+    texte = texte[:correspondance.start()] + texte[correspondance.end():]
+    texte = re.sub(rf'<{prefixe}:(\w+)', rf'<\1 xmlns="{uri}"', texte)
+    return re.sub(rf'</{prefixe}:(\w+)>', r'</\1>', texte)
+
+
+def repare_fermeture_xhtml(texte):
+    """SVGO réduit tout élément vide à une fermeture automatique (`<div .../>`).
+    Svelte la refuse comme ambiguë sur un élément HTML non-vide : on rouvre
+    le tag (`<div …></div>`) après optimisation.
+    """
+    return AUTOFERMETURE_XHTML.sub(r'<\1\2></\1>', texte)
+
+
 def classe_de(identifiant):
     identifiant = repare_mojibake(identifiant)
     for motif, classe in CALQUES:
@@ -222,6 +250,7 @@ def optimise(source, destination):
     # SVGO retire `pathLength` des <circle> : il porte l'animation de dessin.
     texte, remis = re.subn(r'(<circle(?:(?!/>).)*?class="[^"]*\btrace\b[^"]*")(?!(?:(?!/>).)*?pathLength)',
                            r'\1 pathLength="1"', texte, flags=re.S)
+    texte = repare_fermeture_xhtml(texte)
     destination.write_text(texte)
     return remis
 
@@ -263,7 +292,7 @@ def main():
     sortie.mkdir(parents=True, exist_ok=True)
     brut = sortie / f'.{arguments.composant}.brut.svg'
     optimise_svg = sortie / f'.{arguments.composant}.opt.svg'
-    brut.write_text(ET.tostring(racine, encoding='unicode'))
+    brut.write_text(repare_espaces_noms_html(ET.tostring(racine, encoding='unicode')))
     remis = optimise(brut, optimise_svg)
 
     composant = sortie / f'{arguments.composant}.svelte'

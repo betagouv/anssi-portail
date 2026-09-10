@@ -36,6 +36,19 @@ grossièrement mal dimensionnée.
 
 **Emojis.** Ils ne survivent pas à l'export SVG. Demander des icônes vectorielles.
 
+**Dégradé angulaire.** Figma n'a pas d'équivalent SVG natif pour un dégradé
+angulaire (`type: GRADIENT_ANGULAR`) : il exporte un hack, un `foreignObject`
+contenant un `<div xmlns="http://www.w3.org/1999/xhtml">` en
+`conic-gradient` CSS. `ElementTree` sérialise ce `<div>` HTML imbriqué en
+`<html:div>`, avec `xmlns:html="…xhtml"` hissé sur le `<svg>` racine — une
+syntaxe que les types Svelte pour les attributs `<svg>` ignorent, ce qui fait
+échouer `svelte-check` (`'"xmlns:html"' does not exist in type…`).
+`repare_espaces_noms_html` réécrit ce préfixe en `xmlns` porté par l'élément
+avant l'écriture du SVG brut. SVGO réduit ensuite ce `<div>` vide à une
+fermeture automatique (`<div .../>`), que Svelte refuse comme ambiguë sur un
+élément HTML non-vide : `repare_fermeture_xhtml` rouvre le tag après
+l'optimisation.
+
 ## SVGO
 
 | Plugin             | Dégât                                                 | Réglage     |
