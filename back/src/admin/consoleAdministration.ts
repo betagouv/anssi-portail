@@ -11,10 +11,7 @@ import { AdaptateurHachage, fabriqueAdaptateurHachage } from '../infra/adaptateu
 import { adaptateurJournalMemoire } from '../infra/adaptateurJournal.js';
 import { adaptateurJournalPostgres } from '../infra/adaptateurJournalPostgres.js';
 import { AdaptateurProfilAnssi, fabriqueAdaptateurProfilAnssi } from '../infra/adaptateurProfilAnssi.js';
-import {
-  AdaptateurRechercheEntreprise,
-  fabriqueAdaptateurRechercheEntreprise,
-} from '../infra/adaptateurRechercheEntreprise.js';
+import { AdaptateurRechercheEntreprise } from '../infra/adaptateurRechercheEntreprise.js';
 import { EntrepotFavoriPostgres } from '../infra/entrepotFavoriPostgres.js';
 import { EntrepotMesurePostgres } from '../infra/entrepotMesurePostgres.js';
 import { EntrepotUtilisateurMPAPostgres } from '../infra/entrepotUtilisateurMPAPostgres.js';
@@ -32,6 +29,7 @@ import { Utilisateur } from '../metier/utilisateur.js';
 import { MigrationChiffrement } from './migrationChiffrement.js';
 import { MigrationHash } from './migrationHash.js';
 import { adaptateurHorloge } from '../infra/adaptateurHorloge.js';
+import { AdaptateurRechercheEntrepriseGouv } from '../infra/adaptateurRechercheEntrepriseGouv.js';
 
 export class ConsoleAdministration {
   private entrepotUtilisateur: EntrepotUtilisateur;
@@ -50,7 +48,7 @@ export class ConsoleAdministration {
     this.adaptateurHachage = fabriqueAdaptateurHachage({
       adaptateurEnvironnement,
     });
-    this.adaptateurRechercheEntreprise = fabriqueAdaptateurRechercheEntreprise(adaptateurEnvironnement);
+    this.adaptateurRechercheEntreprise = new AdaptateurRechercheEntrepriseGouv(adaptateurEnvironnement);
 
     const entrepotExigence: EntrepotExigence = new EntrepotExigenceGrist({
       adaptateurEnvironnement,
