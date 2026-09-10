@@ -1,8 +1,8 @@
 import axios from '@anssi-portail/axios';
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { fabriqueAdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
+import { AdaptateurRechercheEntrepriseGouv } from '../../src/infra/adaptateurRechercheEntrepriseGouv.js';
 
 describe('La recherche entreprise', () => {
   const resultatSirene = () => ({
@@ -11,6 +11,54 @@ describe('La recherche entreprise', () => {
     matching_etablissements: [{ commune: '92026', siret: '18008001200248', liste_enseignes: [] }],
     complements: { est_association: false, collectivite_territoriale: null },
     activite_principale: '84.13Z',
+  });
+
+  describe('avec cache', () => {
+    it('retourne le résultat de la recherche entreprise', async (t) => {
+      t.mock.method(axios, 'get', async () => ({ data: { results: [resultatSirene()] } }));
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+
+      const resultats = await adaptateur.rechercheOrganisations('Organisation', '92');
+
+      assert.deepEqual(resultats, [
+        {
+          nom: 'Organisation',
+          departement: '92',
+          siret: '18008001200248',
+          codeRegion: 'FR-IDF',
+          codeSecteur: undefined,
+          codeTrancheEffectif: undefined,
+          estAssociation: false,
+          estCollectivite: false,
+          codeActivite: '84.13Z',
+        },
+      ]);
+    });
+
+    it('ne rappelle pas la recherche entreprise deux fois', async (t) => {
+      const get = t.mock.method(axios, 'get', async () => ({ data: { results: [resultatSirene()] } }));
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+
+      const premierResultat = await adaptateur.rechercheOrganisations('Organisation', '92');
+      const secondResultat = await adaptateur.rechercheOrganisations('Organisation', '92');
+
+      assert.deepEqual(secondResultat, premierResultat);
+      assert.equal(get.mock.callCount(), 1);
+    });
+
+    it('distingue les éléments à mettre en cache par terme et département', async (t) => {
+      const get = t.mock.method(axios, 'get', async () => ({ data: { results: [resultatSirene()] } }));
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+
+      await adaptateur.rechercheOrganisations('Organisation', '92');
+      await adaptateur.rechercheOrganisations('Autre organisation', '92');
+      await adaptateur.rechercheOrganisations('Organisation', null);
+      await adaptateur.rechercheOrganisations('Organisation', '92');
+      await adaptateur.rechercheOrganisations('Autre organisation', '92');
+      await adaptateur.rechercheOrganisations('Organisation', null);
+
+      assert.equal(get.mock.callCount(), 3);
+    });
   });
 
   it('exclut les dossiers INPI sans siège et conserve les organisations identifiées', async (t) => {
@@ -23,7 +71,7 @@ describe('La recherche entreprise', () => {
         ],
       },
     }));
-    const adaptateur = fabriqueAdaptateurRechercheEntreprise(fauxAdaptateurEnvironnement);
+    const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
     const resultats = await adaptateur.rechercheOrganisations('Inpi', null);
 
@@ -36,7 +84,7 @@ describe('La recherche entreprise', () => {
     t.mock.method(axios, 'get', async () => ({
       data: { results: [{ ...resultatSirene(), siege: {} }] },
     }));
-    const adaptateur = fabriqueAdaptateurRechercheEntreprise(fauxAdaptateurEnvironnement);
+    const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
     const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);
 
@@ -50,7 +98,7 @@ describe('La recherche entreprise', () => {
       t.mock.method(axios, 'get', async () => ({
         data: { results: [{ ...resultatSirene(), matching_etablissements: etablissements }] },
       }));
-      const adaptateur = fabriqueAdaptateurRechercheEntreprise(fauxAdaptateurEnvironnement);
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
       assert.deepEqual(await adaptateur.rechercheOrganisations('18008001200248', null), []);
     });
@@ -63,7 +111,7 @@ describe('La recherche entreprise', () => {
         t.mock.method(axios, 'get', async () => ({
           data: { results: [{ ...resultat, siege: { ...resultat.siege, [champ]: valeur } }] },
         }));
-        const adaptateur = fabriqueAdaptateurRechercheEntreprise(fauxAdaptateurEnvironnement);
+        const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
         assert.deepEqual(await adaptateur.rechercheOrganisations('Inpi', null), []);
       });
@@ -83,7 +131,7 @@ describe('La recherche entreprise', () => {
             ],
           },
         }));
-        const adaptateur = fabriqueAdaptateurRechercheEntreprise(fauxAdaptateurEnvironnement);
+        const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
         const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);
 
