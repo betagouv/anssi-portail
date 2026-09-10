@@ -14,6 +14,8 @@
         return 'resultat-test';
       case 'vrai-faux':
         return 'retour-utilisateur:vrai-faux';
+      case 'exposition':
+        return 'retour-utilisateur:exposition';
       case 'mesure':
         throw new Error('Ce composant ne doit pas être utilisé pour un retour utilisateur depuis une page mesure');
     }
@@ -42,7 +44,7 @@
       flex-direction: column;
       gap: 1.5rem;
 
-      @include a-partir-de(lg) {
+      @include a-partir-de(md) {
         flex-direction: row;
       }
 

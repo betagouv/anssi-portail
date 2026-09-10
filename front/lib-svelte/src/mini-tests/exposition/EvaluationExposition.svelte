@@ -4,6 +4,7 @@
   import EncartPromotionParcoursBasique from '../../parcours-securisation/EncartPromotionParcoursBasique.svelte';
   import TagProgrammeGratuit from '../../parcours-securisation/TagProgrammeGratuit.svelte';
   import EncartInvitationARenforcerCybersecurite from '../../test-maturite/EncartInvitationARenforcerCybersecurite.svelte';
+  import PartageTest from '../../test-maturite/PartageTest.svelte';
   import Alternatives from '../../ui/Alternatives.svelte';
   import Notice from '../../ui/Notice.svelte';
   import CarteRisqueExposition from './CarteRisqueExposition.svelte';
@@ -12,7 +13,7 @@
   const { menaces }: { menaces: MenaceEvaluee[] } = $props();
 </script>
 
-<dsfr-container>
+<dsfr-container class="conteneur">
   <div class="résultats">
     <Notice
       type="attention"
@@ -32,7 +33,7 @@
 
 <Alternatives affichageAlternatif={afficheParcoursSecurisation}>
   {#snippet défaut()}
-    <dsfr-container>
+    <dsfr-container class="conteneur">
       <DemandeDiagnosticSimplifiee origine="exposition" />
     </dsfr-container>
   {/snippet}
@@ -51,6 +52,12 @@
   {/snippet}
 </Alternatives>
 
+<PartageTest
+  cheminPartagé="/exposition"
+  sujetMail="Mon organisation est-elle exposée aux cyberattaques ?"
+  typeDeRetour="exposition"
+/>
+
 <dsfr-container class="note-source">
   <p class="texte-mention-xs">
     Sources : Panorama de la cybermenace 2025 — ANSSI (CERTFR-2026-CTI-002) ; Rapport d'activité 2025 —
@@ -68,8 +75,10 @@
   @use '../../../../assets/styles/grille' as *;
 
   dsfr-container {
-    display: block;
-    margin-bottom: 2rem;
+    &.conteneur {
+      display: block;
+      margin-bottom: 2rem;
+    }
   }
 
   .résultats {
@@ -105,7 +114,6 @@
   .note-source {
     background-color: var(--background-alt-grey);
     padding: 1.5rem 0;
-    margin-bottom: 0;
 
     p {
       margin: 0;
