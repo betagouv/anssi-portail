@@ -53,7 +53,7 @@
   @use '../../../assets/styles/responsive' as *;
   .partage {
     @include a-partir-de(lg) {
-      width: 282px;
+      width: 152px;
     }
 
     .texte-standard-md {
