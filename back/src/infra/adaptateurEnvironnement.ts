@@ -284,7 +284,13 @@ const adaptateurEnvironnement: AdaptateurEnvironnement = {
     }),
   }),
   rechercheEntreprise: () => ({
-    apiUrl: () => process.env.RECHERCHE_ENTREPRISE_API_URL || '',
+    apiUrl: () => {
+      const valeur = process.env.RECHERCHE_ENTREPRISE_API_URL;
+      if (valeur === '' || !valeur) {
+        throw new Error(`💥 Veuillez renseigner RECHERCHE_ENTREPRISE_API_URL`);
+      }
+      return valeur;
+    },
   }),
   nodeEnv: () => process.env.NODE_ENV,
   versionDeConstruction: () => (process.env.CC_COMMIT_ID || '1').substring(0, 8),
