@@ -63,8 +63,12 @@
 
   .contenu-encart-parcours-securisation {
     margin-top: 48px;
-    padding: 96px 0;
+    padding: 96px 0 24px;
     background-color: var(--yellow-moutarde-925-125);
+
+    @include a-partir-de(md) {
+      padding-bottom: 96px;
+    }
   }
 
   .contenu-section {
