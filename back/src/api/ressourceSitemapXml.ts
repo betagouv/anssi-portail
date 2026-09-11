@@ -115,7 +115,11 @@ const construitRoutesDynamiques = async ({
     .filter((f) => f.indexOf('front/_site/contacts') >= 0)
     .filter((f) => f.indexOf('.html') >= 0)
     .filter((f) => f.indexOf('index.html') < 0)
-    .map((f): LienSitemap => ({ url: `/contacts/${basename(f, '.html')}`, modifiéLe: fs.statSync(f).mtime }));
+    .map((f): LienSitemap => {
+      const cheminOriginel = f.replace('/_site/contacts/', '/_contacts/').replace('.html', '.md');
+      const données = matter(fs.readFileSync(cheminOriginel, 'utf-8')).data;
+      return { url: `/contacts/${basename(f, '.html')}`, modifiéLe: new Date(données.modifiéLe) };
+    });
 
   return [...liensFinancement, ...liensGuides, ...liensRessources, ...liensServices, ...liensContactsRégionaux];
 };
