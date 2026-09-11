@@ -56,6 +56,7 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
       join(process.cwd(), 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'banniere.svg'),
   },
   jekyll: {
+    page403: () => ressourceFactice(),
     page404: () => ressourceFactice(),
     pageMaintenance: () => ressourceFactice(),
     robotsTxt: () => ressourceFactice(),
