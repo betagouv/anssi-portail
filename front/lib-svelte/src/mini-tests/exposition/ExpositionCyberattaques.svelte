@@ -31,7 +31,7 @@
     description="Rançongiciel, fraude au virement, espionnage, déstabilisation, cyberharcèlement : chaque attaque poursuit un but différent. En 2 minutes, situez celles qui pèsent le plus sur votre organisation."
   >
     {#snippet titreHtml()}
-      Quels types de cyberattaques peuvent cibler mon organisation ?
+      Quels types de cyber&shy;attaques peuvent cibler mon organisation ?
     {/snippet}
     {#snippet illustration()}
       <div class="radar">
