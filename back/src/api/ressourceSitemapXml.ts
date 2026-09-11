@@ -1,3 +1,4 @@
+import matter from '@11ty/gray-matter';
 import { Request, Response, Router } from 'express';
 import fs, { writeFileSync } from 'fs';
 import { basename } from 'node:path';
@@ -91,7 +92,11 @@ const construitRoutesDynamiques = async ({
     .filter((f) => f.indexOf('front/_site/ressources') >= 0)
     .filter((f) => f.indexOf('.html') >= 0)
     .filter(contientFicheDétaillée)
-    .map((f): LienSitemap => ({ url: `/ressources/${basename(f, '.html')}`, modifiéLe: fs.statSync(f).mtime }));
+    .map((f): LienSitemap => {
+      const cheminOriginel = f.replace('/_site/ressources/', '/_ressources/').replace('.html', '.md');
+      const données = matter(fs.readFileSync(cheminOriginel, 'utf-8')).data;
+      return { url: `/ressources/${basename(f, '.html')}`, modifiéLe: new Date(données.modifiéLe) };
+    });
 
   const liensServices = siteFront
     .fichiers()
