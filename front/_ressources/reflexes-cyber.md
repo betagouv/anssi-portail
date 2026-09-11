@@ -12,6 +12,7 @@ sources:
   - Innovation ANSSI
 droitsAcces:
   - ACCES_LIBRE
+modifiéLe: 2025-03-26
 cible: |
   <p>
     <strong>RÉFLEXES CYBER est destiné aux organisations de toutes tailles, n’ayant notamment jamais réalisé d'exercice d'origine cyber</strong>, souhaitant vivre une première simulation pour sensibiliser les participant(e)s aux impacts que pourrait avoir une crise d'origine cyber sur l'organisation.

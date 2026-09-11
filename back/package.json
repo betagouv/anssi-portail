@@ -48,6 +48,7 @@
     "tsx": "catalog:"
   },
   "dependencies": {
+    "@11ty/gray-matter": "^3.0.0",
     "@anssi-portail/axios": "workspace:^",
     "@aws-sdk/client-s3": "^3.1112.0",
     "@aws-sdk/credential-providers": "^3.1112.0",
