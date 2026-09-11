@@ -12,6 +12,7 @@ droitsAcces:
 sources:
   - ANSSI
   - Innovation ANSSI
+modifiéLe: 2025-06-17
 cible: |
   <ul>
   <li> En accès libre, le diagnostic cyber gratuit est destiné aux entités publiques et privées en France souhaitant mettre en oeuvre une première démarche de cybersécurité. Le diagnostic n'est pas adapté aux particuliers et aux entreprises mono-salariées. </li>

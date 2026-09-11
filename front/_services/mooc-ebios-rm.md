@@ -11,6 +11,7 @@ droitsAcces:
   - ACCES_LIBRE
 sources:
   - ANSSI
+modifiéLe: 2025-10-09
 cible: |
   Ce MooC s’adresse à toute personne impliquée dans la gestion des risques numériques ou souhaitant comprendre les bases de l’analyse de risque cyber :
    <ul>
