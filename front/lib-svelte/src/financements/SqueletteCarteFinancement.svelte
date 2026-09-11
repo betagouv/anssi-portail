@@ -8,9 +8,8 @@
   </div>
 
   <div class="content">
-    {#each [80, 40] as width (width)}
-      <div class="skeleton line" style="width: {width}%"></div>
-    {/each}
+    <div class="skeleton line largeur-80"></div>
+    <div class="skeleton line largeur-40"></div>
   </div>
 
   <div class="tags">
@@ -70,5 +69,13 @@
 
   .line {
     height: 16px;
+  }
+
+  .largeur-80 {
+    width: 80%;
+  }
+
+  .largeur-40 {
+    width: 40%;
   }
 </style>
