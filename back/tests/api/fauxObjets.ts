@@ -139,6 +139,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   }),
   urlBaseMSC: () => 'http://localhost',
   oidc: () => ({
+    authentificationMultiFacteursDésactivée: () => false,
     urlRedirectionApresAuthentification: () => '',
     urlRedirectionApresDeconnexion: () => '',
     urlBase: () => '',
