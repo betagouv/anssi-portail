@@ -34,10 +34,7 @@
 
     <g id="cyber-gradient" opacity="0.4" clip-path="url(#cyber-gradient-clip)">
       <foreignObject x="42" y="10" width="108" height="108">
-        <div
-          xmlns="http://www.w3.org/1999/xhtml"
-          style="width:108px;height:108px;background:conic-gradient(from 90deg,rgba(255,255,255,0) 0deg,rgba(106,106,244,1) 360deg)"
-        ></div>
+        <div xmlns="http://www.w3.org/1999/xhtml" class="cyber-gradient-fond"></div>
       </foreignObject>
     </g>
 
@@ -272,6 +269,12 @@
   #cyber-gradient {
     transform-box: fill-box;
     transform-origin: center;
+  }
+
+  .cyber-gradient-fond {
+    width: 108px;
+    height: 108px;
+    background: conic-gradient(from 90deg, rgba(255, 255, 255, 0) 0deg, rgba(106, 106, 244, 1) 360deg);
   }
 
   #malware-bg,
