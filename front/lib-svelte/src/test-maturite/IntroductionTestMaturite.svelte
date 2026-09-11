@@ -79,7 +79,7 @@
   {/snippet}
   {#snippet actions()}
     <div class="conteneur-actions">
-      <Bouton libelle="Débuter le test" type="primaire" surClic={debuteTeste} />
+      <Bouton libelle="Débuter le test" type="primaire" surClic={debuteTeste} taille="lg" />
       <Lien href="/session-groupe" icone="team-fill" libelle="Accéder à l’espace session en groupe" />
     </div>
   {/snippet}
@@ -111,6 +111,7 @@
     gap: 16px;
     @include a-partir-de(lg) {
       gap: 32px;
+      padding-bottom: 4rem;
     }
   }
 </style>
