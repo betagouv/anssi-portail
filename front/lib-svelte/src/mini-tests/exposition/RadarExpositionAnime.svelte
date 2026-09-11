@@ -28,10 +28,7 @@
   <!-- Même procédé que pictogramme-exposition.svg : dégradé conique CSS intégré. -->
   <g class="radar-gradient" opacity=".4" clip-path="url(#radar-gradient-clip)">
     <foreignObject x="95" y="36" width="296" height="296">
-      <div
-        xmlns="http://www.w3.org/1999/xhtml"
-        style="width:296px;height:296px;background:conic-gradient(from 90deg,rgba(255,255,255,0) 0deg,rgba(106,106,244,1) 360deg)"
-      ></div>
+      <div xmlns="http://www.w3.org/1999/xhtml" class="radar-gradient-fill"></div>
     </foreignObject>
   </g>
 
@@ -101,7 +98,7 @@
           M 73 8.6 L 8 136.3 L 8 247 L 89 179.4 L 177 123.9 Z"
       />
     </path>
-    <circle class="radar-point" style="--point-delay: .55s" cx="73" cy="8.6" r="8">
+    <circle class="radar-point radar-point-1" cx="73" cy="8.6" r="8">
       <animate
         attributeName="cy"
         begin="2.2s"
@@ -113,7 +110,7 @@
         values="8.6;8.6;34;34;52;52;8.6"
       />
     </circle>
-    <circle class="radar-point" style="--point-delay: .85s" cx="8" cy="136.3" r="8">
+    <circle class="radar-point radar-point-2" cx="8" cy="136.3" r="8">
       <animate
         attributeName="cx"
         begin="2.2s"
@@ -135,7 +132,7 @@
         values="136.3;136.3;143.4;143.4;139.3;139.3;136.3"
       />
     </circle>
-    <circle class="radar-point" style="--point-delay: 1.15s" cx="8" cy="247" r="8">
+    <circle class="radar-point radar-point-3" cx="8" cy="247" r="8">
       <animate
         attributeName="cx"
         begin="2.2s"
@@ -157,7 +154,7 @@
         values="247;247;220.8;220.8;230.5;230.5;247"
       />
     </circle>
-    <circle class="radar-point" style="--point-delay: 1.45s" cx="89" cy="179.4" r="8">
+    <circle class="radar-point radar-point-4" cx="89" cy="179.4" r="8">
       <animate
         attributeName="cx"
         begin="2.2s"
@@ -179,7 +176,7 @@
         values="179.4;179.4;220.8;220.8;198.9;198.9;179.4"
       />
     </circle>
-    <circle class="radar-point" style="--point-delay: 1.75s" cx="177" cy="123.9" r="8">
+    <circle class="radar-point radar-point-5" cx="177" cy="123.9" r="8">
       <animate
         attributeName="cx"
         begin="2.2s"
@@ -249,6 +246,12 @@
     will-change: transform;
   }
 
+  .radar-gradient-fill {
+    width: 296px;
+    height: 296px;
+    background: conic-gradient(from 90deg, rgba(255, 255, 255, 0) 0deg, rgba(106, 106, 244, 1) 360deg);
+  }
+
   .radar-label {
     fill: #000091;
     font-family: Marianne, Arial, sans-serif;
@@ -285,6 +288,26 @@
     animation:
       radar-point-reveal 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) var(--point-delay) both,
       radar-point-pulse 2.8s ease-in-out calc(var(--point-delay) + 0.45s) infinite;
+  }
+
+  .radar-point-1 {
+    --point-delay: 0.55s;
+  }
+
+  .radar-point-2 {
+    --point-delay: 0.85s;
+  }
+
+  .radar-point-3 {
+    --point-delay: 1.15s;
+  }
+
+  .radar-point-4 {
+    --point-delay: 1.45s;
+  }
+
+  .radar-point-5 {
+    --point-delay: 1.75s;
   }
 
   @keyframes radar-gradient-rotation {
