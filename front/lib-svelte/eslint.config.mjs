@@ -53,6 +53,13 @@ export default defineConfig(
           ignoreRestSiblings: false,
         },
       ],
+
+      'svelte/no-inline-styles': [
+        'error',
+        {
+          allowTransitions: true,
+        },
+      ],
     },
   },
   {
