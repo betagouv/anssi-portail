@@ -15,6 +15,7 @@ cible: |
   <ul>
   <li> SecNumAcadémie est en accès libre.</li>
   </ul>
+modifiéLe: 2025-08-27
 liens:
   - accompagnement:
     titre: Découvrir le service

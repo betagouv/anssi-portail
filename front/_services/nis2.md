@@ -11,4 +11,5 @@ sources:
 droitsAcces:
   - ENTITES_PUBLIQUES
   - REGULES_NIS2
+modifiéLe: 2025-11-24
 ---

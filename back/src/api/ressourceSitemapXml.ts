@@ -104,7 +104,11 @@ const construitRoutesDynamiques = async ({
     .filter((f) => f.indexOf('.html') >= 0)
     .filter((f) => f.indexOf('index.html') < 0)
     .filter(contientFicheDétaillée)
-    .map((f): LienSitemap => ({ url: `/services/${basename(f, '.html')}`, modifiéLe: fs.statSync(f).mtime }));
+    .map((f): LienSitemap => {
+      const cheminOriginel = f.replace('/_site/services/', '/_services/').replace('.html', '.md');
+      const données = matter(fs.readFileSync(cheminOriginel, 'utf-8')).data;
+      return { url: `/services/${basename(f, '.html')}`, modifiéLe: new Date(données.modifiéLe) };
+    });
 
   const liensContactsRégionaux = siteFront
     .fichiers()
