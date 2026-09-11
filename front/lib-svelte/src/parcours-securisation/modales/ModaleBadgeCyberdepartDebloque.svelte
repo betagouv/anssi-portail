@@ -1,5 +1,6 @@
 <script lang="ts">
   import Bouton from '../../ui/Bouton.svelte';
+  import CanonAConfetti from '../../ui/CanonAConfetti.svelte';
   import Modale from '../../ui/Modale.svelte';
   import BoutonPartageBadgeCyberdepart from '../BoutonPartageBadgeCyberdepart.svelte';
 
@@ -28,6 +29,8 @@
     <Bouton libelle="Continuer ma progression" type="secondaire" surClic={() => (estOuverte = false)} />
   {/snippet}
 </Modale>
+
+<CanonAConfetti lectureAutomatique={estOuverte} />
 
 <style lang="scss">
   .corps {
