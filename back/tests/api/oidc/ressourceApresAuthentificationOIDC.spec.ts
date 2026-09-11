@@ -13,29 +13,34 @@ import { EntrepotUtilisateurMemoire } from '../../persistance/entrepotUtilisateu
 import { decodeSessionDuCookie } from '../cookie.js';
 import {
   configurationDeTestDuServeur,
+  fauxAdaptateurEnvironnement,
   fauxAdaptateurJWT,
   fauxAdaptateurOIDC,
   fauxFournisseurDeChemin,
   ressourceFactice,
 } from '../fauxObjets.js';
 import { utilisateurDeTest } from '../mesures/constructeurDUtilisateur.js';
+import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
 
 describe('La ressource apres authentification OIDC', () => {
   describe('quand on fait un GET sur /oidc/apres-authentification', () => {
     let serveur: Express;
     const fournisseurChemin = fauxFournisseurDeChemin;
+    let adaptateurEnvironnement: AdaptateurEnvironnement;
     let adaptateurOIDC: AdaptateurOIDC;
     let adaptateurJWT: AdaptateurJWT;
     let entrepotUtilisateur: EntrepotUtilisateurMemoire;
     let busEvenements: MockBusEvenement;
 
     beforeEach(() => {
+      adaptateurEnvironnement = { ...fauxAdaptateurEnvironnement };
       adaptateurOIDC = { ...fauxAdaptateurOIDC };
       adaptateurJWT = fauxAdaptateurJWT;
       entrepotUtilisateur = new EntrepotUtilisateurMemoire();
       busEvenements = new MockBusEvenement();
       const configurationServeur: ConfigurationServeur = {
         ...configurationDeTestDuServeur,
+        adaptateurEnvironnement,
         fournisseurChemin,
         adaptateurOIDC,
         adaptateurJWT,
@@ -48,6 +53,18 @@ describe('La ressource apres authentification OIDC', () => {
     const requeteGet = () =>
       request(serveur).get('/oidc/apres-authentification').set('Cookie', ['AgentConnectInfo={}']);
 
+    const récupèreUnJetonValide = () => {
+      adaptateurOIDC.recupereJeton = async () => {
+        return {
+          idToken: 'tokenAgentConnect',
+          accessToken: 'y',
+          sujet: 'sujet',
+          connexionAvecMFA: true,
+          acr: 'eidas2',
+        };
+      };
+    };
+
     describe("si l'utilisateur est connu", () => {
       const jeanneDupont = utilisateurDeTest()
         .avecLEmail('jeanne.dupont')
@@ -56,9 +73,10 @@ describe('La ressource apres authentification OIDC', () => {
         .avecLeSiretEntite('1234')
         .construis();
 
-      beforeEach(() => {
-        entrepotUtilisateur.ajoute(jeanneDupont);
+      beforeEach(async () => {
+        await entrepotUtilisateur.ajoute(jeanneDupont);
 
+        récupèreUnJetonValide();
         adaptateurOIDC.recupereInformationsUtilisateur = async (_) => ({
           prenom: 'Jeanne',
           nom: 'Dupont',
@@ -86,9 +104,6 @@ describe('La ressource apres authentification OIDC', () => {
       });
 
       it("ajoute les informations de l'utilisateur à la session", async () => {
-        adaptateurOIDC.recupereJeton = async () => {
-          return { idToken: 'xx', accessToken: 'y', sujet: 'sujet', connexionAvecMFA: false };
-        };
         adaptateurOIDC.recupereInformationsUtilisateur = async (accessToken) => {
           if (accessToken === 'y') {
             return {
@@ -112,13 +127,6 @@ describe('La ressource apres authentification OIDC', () => {
       });
 
       it("indique si l'utilisateur utilise le MFA", async () => {
-        adaptateurOIDC.recupereJeton = async () => ({
-          idToken: 'tokenAgentConnect',
-          accessToken: 'y',
-          sujet: 'sujet',
-          connexionAvecMFA: true,
-        });
-
         const reponse = await requeteGet();
 
         const session = decodeSessionDuCookie(reponse, 0);
@@ -135,15 +143,6 @@ describe('La ressource apres authentification OIDC', () => {
       });
 
       it('ajoute un tokenId AgentConnect à la session', async () => {
-        adaptateurOIDC.recupereJeton = async () => {
-          return {
-            idToken: 'tokenAgentConnect',
-            accessToken: 'y',
-            sujet: 'sujet',
-            connexionAvecMFA: false,
-          };
-        };
-
         const reponse = await requeteGet();
 
         const session = decodeSessionDuCookie(reponse, 0);
@@ -151,14 +150,6 @@ describe('La ressource apres authentification OIDC', () => {
       });
 
       it('publie un évènement sur le bus', async () => {
-        adaptateurOIDC.recupereJeton = async () => {
-          return {
-            idToken: 'tokenAgentConnect',
-            accessToken: 'y',
-            sujet: 'sujet',
-            connexionAvecMFA: true,
-          };
-        };
         await requeteGet();
 
         const evenement = busEvenements.recupereEvenement(UtilisateurConnecte);
@@ -166,6 +157,26 @@ describe('La ressource apres authentification OIDC', () => {
         assert.equal(evenement?.emailHache, 'jeanne.dupont-hache');
         assert.equal(evenement?.connexionAvecMFA, true);
       });
+    });
+
+    it("jette une erreur d'uthentification trop faible si la connexion ne s'est pas faite en MFA", async () => {
+      adaptateurEnvironnement.oidc = () => ({
+        ...fauxAdaptateurEnvironnement.oidc(),
+        authentificationMultiFacteursDésactivée: () => false,
+      });
+      adaptateurOIDC.recupereJeton = async () => {
+        return {
+          idToken: 'tokenAgentConnect',
+          accessToken: 'y',
+          sujet: 'sujet',
+          connexionAvecMFA: false,
+          acr: 'eidas1',
+        };
+      };
+
+      const reponse = await requeteGet();
+
+      assert.equal(reponse.status, HttpStatusCode.Forbidden);
     });
 
     it("jette une erreur 401 si le cookie AgentConnectInfo n'est pas défini", async () => {
@@ -186,6 +197,8 @@ describe('La ressource apres authentification OIDC', () => {
 
     describe("si l'utilisateur est inconnu", () => {
       it('ajoute un token contenant les informations du nouvel utilisateur et redirige vers la page de création de compte', async () => {
+        récupèreUnJetonValide();
+
         const reponse = await requeteGet();
 
         assert.equal(reponse.status, HttpStatusCode.Found);

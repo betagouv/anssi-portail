@@ -29,6 +29,7 @@ type JetonsOIDC = {
   accessToken: string;
   sujet: string;
   connexionAvecMFA: boolean;
+  acr: string | undefined;
 };
 
 export interface AdaptateurOIDC {
@@ -54,6 +55,9 @@ const genereDemandeAutorisation = async () => {
   const client = await recupereClient();
   const nonce = randomNonce();
   const state = randomState();
+  const acr = configurationOidc.authentificationMultiFacteursDésactivée()
+    ? undefined
+    : { essential: true, values: ACR_GARANTISSANT_MFA };
   const url = buildAuthorizationUrl(client, {
     redirect_uri: configurationOidc.urlRedirectionApresAuthentification(),
     scope: 'openid email given_name usual_name siret',
@@ -63,9 +67,7 @@ const genereDemandeAutorisation = async () => {
     claims: JSON.stringify({
       id_token: {
         amr: null,
-        ...(!configurationOidc.authentificationMultiFacteursDésactivée() && {
-          acr: { essential: true, values: ACR_GARANTISSANT_MFA },
-        }),
+        acr,
       },
     }),
   });
@@ -112,7 +114,7 @@ const recupereJeton = async (requete: Request) => {
     throw new Error("Les claims du token d'identité n'ont pas pu être récupérés");
   }
 
-  const amr = claims.amr;
+  const { amr, acr } = claims;
 
   return {
     idToken: token.id_token,
@@ -124,6 +126,7 @@ const recupereJeton = async (requete: Request) => {
         .filter((methodeAuthent): methodeAuthent is string => typeof methodeAuthent === 'string')
         .map((methodeAuthent) => methodeAuthent.trim())
         .includes('mfa'),
+    acr: acr as string | undefined,
   };
 };
 

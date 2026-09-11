@@ -85,6 +85,7 @@ export const fauxAdaptateurOIDC: AdaptateurOIDC = {
     idToken: '',
     sujet: '',
     connexionAvecMFA: false,
+    acr: undefined,
   }),
   genereDemandeAutorisation: async () => ({
     url: '',
@@ -139,7 +140,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   }),
   urlBaseMSC: () => 'http://localhost',
   oidc: () => ({
-    authentificationMultiFacteursDésactivée: () => false,
+    authentificationMultiFacteursDésactivée: () => true,
     urlRedirectionApresAuthentification: () => '',
     urlRedirectionApresDeconnexion: () => '',
     urlBase: () => '',
