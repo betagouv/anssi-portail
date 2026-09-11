@@ -9,6 +9,7 @@ import {
   randomState,
 } from 'openid-client';
 import { adaptateurEnvironnement } from '../../infra/adaptateurEnvironnement.js';
+import { ACR_GARANTISSANT_MFA } from './acr.js';
 
 export interface DemandeAutorisation {
   url: string;
@@ -28,6 +29,7 @@ type JetonsOIDC = {
   accessToken: string;
   sujet: string;
   connexionAvecMFA: boolean;
+  acr: string | undefined;
 };
 
 export interface AdaptateurOIDC {
@@ -53,13 +55,21 @@ const genereDemandeAutorisation = async () => {
   const client = await recupereClient();
   const nonce = randomNonce();
   const state = randomState();
+  const acr = configurationOidc.authentificationMultiFacteursDésactivée()
+    ? undefined
+    : { essential: true, values: ACR_GARANTISSANT_MFA };
   const url = buildAuthorizationUrl(client, {
     redirect_uri: configurationOidc.urlRedirectionApresAuthentification(),
     scope: 'openid email given_name usual_name siret',
     nonce,
     state,
     // https://partenaires.proconnect.gouv.fr/docs/fournisseur-service/niveaux-acr#les-m%C3%A9thodes-dauthentifications
-    claims: JSON.stringify({ id_token: { amr: null } }),
+    claims: JSON.stringify({
+      id_token: {
+        amr: null,
+        acr,
+      },
+    }),
   });
 
   return {
@@ -104,7 +114,7 @@ const recupereJeton = async (requete: Request) => {
     throw new Error("Les claims du token d'identité n'ont pas pu être récupérés");
   }
 
-  const amr = claims.amr;
+  const { amr, acr } = claims;
 
   return {
     idToken: token.id_token,
@@ -116,6 +126,7 @@ const recupereJeton = async (requete: Request) => {
         .filter((methodeAuthent): methodeAuthent is string => typeof methodeAuthent === 'string')
         .map((methodeAuthent) => methodeAuthent.trim())
         .includes('mfa'),
+    acr: acr as string | undefined,
   };
 };
 

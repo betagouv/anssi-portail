@@ -56,6 +56,7 @@ export const fauxFournisseurDeChemin: FournisseurChemin = {
       join(process.cwd(), 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'banniere.svg'),
   },
   jekyll: {
+    page403: () => ressourceFactice(),
     page404: () => ressourceFactice(),
     pageMaintenance: () => ressourceFactice(),
     robotsTxt: () => ressourceFactice(),
@@ -85,6 +86,7 @@ export const fauxAdaptateurOIDC: AdaptateurOIDC = {
     idToken: '',
     sujet: '',
     connexionAvecMFA: false,
+    acr: undefined,
   }),
   genereDemandeAutorisation: async () => ({
     url: '',
@@ -139,6 +141,7 @@ export const fauxAdaptateurEnvironnement: AdaptateurEnvironnement = {
   }),
   urlBaseMSC: () => 'http://localhost',
   oidc: () => ({
+    authentificationMultiFacteursDésactivée: () => true,
     urlRedirectionApresAuthentification: () => '',
     urlRedirectionApresDeconnexion: () => '',
     urlBase: () => '',

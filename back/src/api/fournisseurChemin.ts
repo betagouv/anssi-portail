@@ -21,6 +21,7 @@ export interface FournisseurChemin {
     banniereSvgRécompenseCyberdepart: () => string;
   };
   jekyll: {
+    page403: () => string;
     page404: () => string;
     pageMaintenance: () => string;
     robotsTxt: () => string;
@@ -89,6 +90,7 @@ export const fournisseurChemin: FournisseurChemin = {
       join(process.cwd(), 'back', 'src', 'api', 'mesures', 'ressourceRecompensesCyberDepart', 'banniere.svg'),
   },
   jekyll: {
+    page403: () => construisCheminVersArtefactJekyll('403.html'),
     page404: () => construisCheminVersArtefactJekyll('404.html'),
     pageMaintenance: () => construisCheminVersArtefactJekyll('maintenance.html'),
     robotsTxt: () => construisCheminVersArtefactJekyll('robots.txt'),

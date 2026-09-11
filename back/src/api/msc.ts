@@ -311,6 +311,8 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute(`/contacts`, ressourcePageContact(configurationServeur));
 
+  app.use('/oidc', limiteRequetesParMinuteAPI);
+
   enregistreRoute('/oidc/connexion', ressourceConnexionOIDC(configurationServeur));
 
   enregistreRoute('/oidc/apres-authentification', ressourceApresAuthentificationOIDC(configurationServeur));

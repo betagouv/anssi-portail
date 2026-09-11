@@ -4,8 +4,11 @@ import { UtilisateurConnecte } from '../../bus/evenements/utilisateurConnecte.js
 import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
+import { garantitUnMFA } from './acr.js';
+import { erreurAuthentificationTropFaible } from '../erreurs.js';
 
 const ressourceApresAuthentificationOIDC = ({
+  adaptateurEnvironnement,
   adaptateurOIDC,
   adaptateurJWT,
   entrepotUtilisateur,
@@ -24,7 +27,10 @@ const ressourceApresAuthentificationOIDC = ({
       }
 
       try {
-        const { accessToken, idToken, sujet, connexionAvecMFA } = await adaptateurOIDC.recupereJeton(requete);
+        const { accessToken, idToken, sujet, connexionAvecMFA, acr } = await adaptateurOIDC.recupereJeton(requete);
+        if (!adaptateurEnvironnement.oidc().authentificationMultiFacteursDésactivée() && !garantitUnMFA(acr)) {
+          return erreurAuthentificationTropFaible(reponse, fournisseurChemin);
+        }
         const informationsUtilisateur = await adaptateurOIDC.recupereInformationsUtilisateur(accessToken, sujet);
         const { email } = informationsUtilisateur;
 
