@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import CanonAConfetti from '../../ui/CanonAConfetti.svelte';
   import Lien from '../../ui/Lien.svelte';
   import Modale from '../../ui/Modale.svelte';
 
@@ -25,6 +26,8 @@
     <Lien etire apparence="bouton" href={`/parcours-complet?pageSource=${pageSource}`} libelle="Afficher les modules" />
   {/snippet}
 </Modale>
+
+<CanonAConfetti lectureAutomatique={estOuverte} />
 
 <style lang="scss">
   .corps {

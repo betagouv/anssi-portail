@@ -22,7 +22,7 @@
   <p class="texte-standard-md libelle">{libelle}</p>
   <span class="texte-standard-md avancement">{actuel}&nbsp;/&nbsp;{max}</span>
   <div class="barre" bind:this={barre}>
-    <div class="barre-actuelle"></div>
+    <progress class="barre-actuelle" value={actuel} {max}>{actuel}</progress>
     {#if cible}
       {#if actuel < cible}
         <div class="badge-recompense">
@@ -86,18 +86,34 @@
     .barre {
       grid-area: barre;
       height: 12px;
-      background-color: var(--background-contrast-grey);
-      border-radius: 999px;
       position: relative;
       max-width: 384px;
+      display: flex;
+      flex-direction: column;
 
       .barre-actuelle {
-        height: 100%;
+        background-color: var(--background-contrast-grey);
+        border: none;
         border-radius: 999px;
-        min-width: 0;
-        transition: width 0.3s ease;
-        width: var(--largeur-actuelle);
-        background: linear-gradient(90deg, var(--green-emeraude-850-200) 0%, var(--green-emeraude-main-632) 100%);
+        overflow: hidden;
+        flex: 1;
+        min-height: 0;
+        width: 100%;
+
+        &::-webkit-progress-bar {
+          background: var(--background-contrast-grey);
+          border-radius: 999px;
+        }
+
+        &::-webkit-progress-value {
+          background: linear-gradient(90deg, var(--green-emeraude-850-200) 0%, var(--green-emeraude-main-632) 100%);
+          border-radius: 999px;
+        }
+
+        &::-moz-progress-bar {
+          background: linear-gradient(90deg, var(--green-emeraude-850-200) 0%, var(--green-emeraude-main-632) 100%);
+          border-radius: 999px;
+        }
       }
 
       .badge-recompense {
