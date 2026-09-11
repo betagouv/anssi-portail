@@ -2,6 +2,7 @@
   import type { PropriétésFilAriane } from '../../ui/filAriane';
   import FilAriane from '../../ui/FilAriane.svelte';
   import HerosRiche from '../../ui/HerosRiche.svelte';
+  import Bouton from '../../ui/Bouton.svelte';
   import EvaluationExposition from './EvaluationExposition.svelte';
   import { type MenaceEvaluee, menacesPertinentes, type ReponsesExposition } from './expositionCyberattaques';
   import FormulaireExposition from './FormulaireExposition.svelte';
@@ -14,11 +15,17 @@
 
   let étape: 'formulaire' | 'résultats' = $state('formulaire');
   let menaces: MenaceEvaluee[] = $state([]);
+  let enPause = $state(false);
+  const libelléPause = $derived(enPause ? 'Lancer les animations' : 'Mettre les animations en pause');
 
   const évalue = (reponses: ReponsesExposition) => {
     menaces = menacesPertinentes(reponses);
     étape = 'résultats';
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const basculePause = () => {
+    enPause = !enPause;
   };
 </script>
 
@@ -34,8 +41,20 @@
       Quels types de cyber&shy;attaques peuvent cibler mon organisation ?
     {/snippet}
     {#snippet illustration()}
-      <div class="radar">
-        <RadarExpositionAnime />
+      <div class="illustration-du-bandeau">
+        <div class="radar">
+          <RadarExpositionAnime {enPause} />
+        </div>
+        <div class="controle-animation">
+          <Bouton
+            type="secondaire"
+            icone={enPause ? 'play-circle-line' : 'pause-circle-line'}
+            iconeSeule
+            libelle={libelléPause}
+            titre={libelléPause}
+            surClic={basculePause}
+          />
+        </div>
       </div>
     {/snippet}
   </HerosRiche>
@@ -49,9 +68,21 @@
 {/if}
 
 <style lang="scss">
+  .illustration-du-bandeau {
+    width: 100%;
+  }
+
   .radar {
     width: 100%;
     display: flex;
     justify-content: center;
+  }
+
+  .controle-animation {
+    text-align: right;
+
+    @media (prefers-reduced-motion: reduce) {
+      display: none;
+    }
   }
 </style>

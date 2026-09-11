@@ -1,6 +1,22 @@
-<script lang="ts"></script>
+<script lang="ts">
+  type Props = { enPause?: boolean };
+
+  const { enPause = false }: Props = $props();
+
+  let svgEl = $state<SVGSVGElement>();
+
+  $effect(() => {
+    if (enPause) {
+      svgEl?.pauseAnimations();
+    } else {
+      svgEl?.unpauseAnimations();
+    }
+  });
+</script>
 
 <svg
+  bind:this={svgEl}
+  class:en-pause={enPause}
   xmlns="http://www.w3.org/2000/svg"
   width="486"
   height="368"
@@ -392,6 +408,15 @@
       animation: none;
       opacity: 1;
       transform: none;
+    }
+  }
+
+  .en-pause {
+    .radar-gradient,
+    .radar-data-fill,
+    .radar-data-line,
+    .radar-point {
+      animation-play-state: paused;
     }
   }
 </style>
