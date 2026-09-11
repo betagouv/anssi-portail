@@ -208,7 +208,9 @@
       <CarteItem item={élément} avecBoutonFavori />
     {:else}
       <div class="aucun-resultat">
-        <IllustrationPasDeResultatDeRecherche />
+        <div class="illustration">
+          <IllustrationPasDeResultatDeRecherche />
+        </div>
         {#if chargement}
           <p class="fr-h3">Chargement...</p>
         {:else}
@@ -238,5 +240,9 @@
 
     display: grid;
     place-items: center;
+  }
+  .illustration {
+    width: 175px;
+    height: 317px;
   }
 </style>

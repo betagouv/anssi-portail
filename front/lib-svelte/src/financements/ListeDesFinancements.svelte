@@ -95,7 +95,9 @@
             <CarteFinancement {financement} />
           {:else}
             <div class="aucun-resultat">
-              <IllustrationPasDeResultatDeRecherche hauteur="250px" />
+              <div class="illustration">
+                <IllustrationPasDeResultatDeRecherche />
+              </div>
               <p class="fr-h2">Désolé, aucun résultat trouvé</p>
               <dsfr-button label="Réinitialiser les filtres" use:clic={reinitialiseFiltres}></dsfr-button>
             </div>
@@ -145,6 +147,10 @@
           gap: 16px;
           grid-column: 1 / -1;
           text-align: center;
+
+          .illustration {
+            height: 250px;
+          }
         }
       }
     }
