@@ -5,7 +5,9 @@
 </script>
 
 <div class="aucun-resultat">
-  <IllustrationPasDeResultatDeRecherche largeur="140px" />
+  <div class="illustration">
+    <IllustrationPasDeResultatDeRecherche />
+  </div>
   <h3>Désolé, aucun résultat trouvé</h3>
   <dsfr-button
     label="Réinitialiser les filtres"
@@ -26,6 +28,10 @@
 
     h3 {
       margin: 0;
+    }
+
+    .illustration {
+      height: 140px;
     }
   }
 </style>

@@ -1,10 +1,10 @@
 <script lang="ts">
   interface Props {
     texteAlternatif: string;
-    largeurMax?: string;
+    petit?: boolean;
   }
 
-  let { texteAlternatif, largeurMax }: Props = $props();
+  let { texteAlternatif, petit = false }: Props = $props();
 </script>
 
 <img
@@ -12,5 +12,11 @@
   width="175"
   height="317"
   alt={texteAlternatif}
-  style:max-width={largeurMax}
+  class:petit
 />
+
+<style lang="scss">
+  .petit {
+    max-width: 282px;
+  }
+</style>

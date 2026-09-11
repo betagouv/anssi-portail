@@ -135,9 +135,12 @@
     class:en-sortie={animationDeSortie}
     class:sans-transition={repositionnementSansAnimation}
     class="question"
+    /* eslint-disable svelte/no-inline-styles */
+    // Aucune erreur CSP en console d'où la désactivation
     style:--deplacement-x={`${déplacementX}px`}
     style:--deplacement-y={`${déplacementY}px`}
     style:--rotation={`${rotation}deg`}
+    /* eslint-enable svelte/no-inline-styles */
   >
     <dsfr-tag class="compte" size="md" label="{indexIdéeReçue + 1}/{nombreIdéesReçues}"></dsfr-tag>
     <p class="fr-h2">{emoji}</p>
