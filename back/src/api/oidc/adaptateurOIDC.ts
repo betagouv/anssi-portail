@@ -9,6 +9,7 @@ import {
   randomState,
 } from 'openid-client';
 import { adaptateurEnvironnement } from '../../infra/adaptateurEnvironnement.js';
+import { ACR_GARANTISSANT_MFA } from './acr.js';
 
 export interface DemandeAutorisation {
   url: string;
@@ -59,7 +60,14 @@ const genereDemandeAutorisation = async () => {
     nonce,
     state,
     // https://partenaires.proconnect.gouv.fr/docs/fournisseur-service/niveaux-acr#les-m%C3%A9thodes-dauthentifications
-    claims: JSON.stringify({ id_token: { amr: null } }),
+    claims: JSON.stringify({
+      id_token: {
+        amr: null,
+        ...(!configurationOidc.authentificationMultiFacteursDésactivée() && {
+          acr: { essential: true, values: ACR_GARANTISSANT_MFA },
+        }),
+      },
+    }),
   });
 
   return {
