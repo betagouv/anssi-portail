@@ -17,7 +17,7 @@
     "test": "vitest run",
     "test:ci": "vitest run",
     "typecheck": "tsc --noEmit && svelte-check --fail-on-warnings",
-    "watch": "npm-run-all --parallel dev watch:serveur",
+    "watch": "npm-run-all --parallel dev",
     "watch:serveur": "vite build --ssr --config vite.config.ssr.ts --watch"
   },
   "devDependencies": {
