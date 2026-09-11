@@ -5,6 +5,7 @@ import { ConfigurationServeur } from '../configurationServeur.js';
 import { filetRouteAsynchrone } from '../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../zod.js';
 import { garantitUnMFA } from './acr.js';
+import { erreurAuthentificationTropFaible } from '../erreurs.js';
 
 const ressourceApresAuthentificationOIDC = ({
   adaptateurEnvironnement,
@@ -28,10 +29,7 @@ const ressourceApresAuthentificationOIDC = ({
       try {
         const { accessToken, idToken, sujet, connexionAvecMFA, acr } = await adaptateurOIDC.recupereJeton(requete);
         if (!adaptateurEnvironnement.oidc().authentificationMultiFacteursDésactivée() && !garantitUnMFA(acr)) {
-          return reponse.status(HttpStatusCode.Forbidden).json({
-            erreur:
-              'Accès refusé. Vous ne pouvez pas accéder à MesServicesCyber sans double authentification. Veuillez en activer une auprès de votre fournisseur d’identité, puis vous connecter à nouveau.',
-          });
+          return erreurAuthentificationTropFaible(reponse, fournisseurChemin);
         }
         const informationsUtilisateur = await adaptateurOIDC.recupereInformationsUtilisateur(accessToken, sujet);
         const { email } = informationsUtilisateur;
