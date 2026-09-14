@@ -175,7 +175,7 @@ describe('La ressource apres authentification OIDC', () => {
 
       const reponse = await requeteGet();
 
-      assert.equal(reponse.status, HttpStatusCode.Forbidden);
+      expect(reponse.status).toBe(HttpStatusCode.Forbidden);
     });
 
     it("jette une erreur 401 si le cookie AgentConnectInfo n'est pas défini", async () => {
