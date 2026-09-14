@@ -10,7 +10,6 @@
     "lint:fix": "eslint . --fix",
     "lint": "eslint .",
     "pretest": "npm-run-all --parallel typecheck lint",
-    "test:ci": "node --conditions=anssi-portail:source --import tsx --test './tests/**/*.spec.ts'",
     "test": "node --conditions=anssi-portail:source --import tsx --test './tests/**/*.spec.ts'",
     "typecheck": "tsc --noEmit"
   },

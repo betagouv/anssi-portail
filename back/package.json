@@ -18,7 +18,6 @@
     "prestart": "tsc && pnpm migre-bdd:clever",
     "pretest": "npm-run-all --parallel typecheck lint",
     "test": "vitest run",
-    "test:ci": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "engines": {
