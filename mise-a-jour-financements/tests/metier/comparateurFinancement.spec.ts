@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { AdaptateurSourceExterne } from '../../src/infra/adaptateurSourceExterne.js';
 import { EntrepotFinancement } from '../../src/infra/entrepotFinancement.js';
 import { ComparateurFinancement } from '../../src/metier/comparateurFinancement.js';
@@ -39,7 +38,7 @@ describe('Le comparateur de financement', () => {
   it("sait récupérer tous les financements de l'entrepot", async () => {
     await comparateur.chargeFinancements();
 
-    assert.deepEqual(comparateur.financements, [financement1]);
+    expect(comparateur.financements).toEqual([financement1]);
   });
 
   describe("lorsqu'on compare un financement", () => {
@@ -47,7 +46,7 @@ describe('Le comparateur de financement', () => {
       await comparateur.chargeFinancements();
       const resultatComparaison = comparateur.compareSourceExterne();
 
-      assert.deepEqual(resultatComparaison, []);
+      expect(resultatComparaison).toEqual([]);
     });
 
     it("indique que le financement n'existe pas si il n'est pas trouvé", async () => {
@@ -56,7 +55,7 @@ describe('Le comparateur de financement', () => {
       await comparateur.chargeFinancements();
       const resultatComparaison = comparateur.compareSourceExterne();
 
-      assert.deepEqual(resultatComparaison, [
+      expect(resultatComparaison).toEqual([
         {
           idFinancement: 1,
           etat: 'supprimé',
@@ -81,7 +80,7 @@ describe('Le comparateur de financement', () => {
       await comparateur.chargeFinancements();
       const resultatComparaison = comparateur.compareSourceExterne();
 
-      assert.deepEqual(resultatComparaison, [
+      expect(resultatComparaison).toEqual([
         {
           idFinancement: 1,
           donneesDifferentes: {
@@ -157,7 +156,7 @@ describe('Le comparateur de financement', () => {
       await comparateur.chargeFinancements();
       const resultatComparaison = comparateur.compareSourceExterne();
 
-      assert.deepEqual(resultatComparaison, []);
+      expect(resultatComparaison).toEqual([]);
     });
   });
 
@@ -169,7 +168,7 @@ describe('Le comparateur de financement', () => {
       await comparateur.chargeFinancements();
       const nouvellesAides = await comparateur.detecteNouvellesAides();
 
-      assert.deepEqual(nouvellesAides, [
+      expect(nouvellesAides).toEqual([
         {
           idFinancement: nouveauFinancement.id,
           nom: nouveauFinancement.nom,
@@ -184,7 +183,7 @@ describe('Le comparateur de financement', () => {
       await comparateur.chargeFinancements();
       const nouvellesAides = await comparateur.detecteNouvellesAides();
 
-      assert.deepEqual(nouvellesAides, []);
+      expect(nouvellesAides).toEqual([]);
     });
   });
 });
