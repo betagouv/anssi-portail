@@ -1,8 +1,7 @@
 import axios, { AxiosError, AxiosHeaders, HttpStatusCode, isAxiosError } from '@anssi-portail/axios';
-import assert from 'node:assert/strict';
-import test from 'node:test';
+import { expect, it, vi } from 'vitest';
 
-test('retire les données sensibles des erreurs Axios', async () => {
+it('retire les données sensibles des erreurs Axios', async () => {
   const configuration = {
     headers: new AxiosHeaders({ Authorization: 'Bearer secret' }),
   };
@@ -22,17 +21,13 @@ test('retire les données sensibles des erreurs Axios', async () => {
     statusText: 'Internal Server Error',
   });
 
-  await assert.rejects(
-    axios.get('/ressource', {
-      adapter: async () => Promise.reject(erreur),
-    }),
-    (erreurNettoyee: unknown) => {
-      assert.ok(isAxiosError(erreurNettoyee));
-      assert.equal(erreurNettoyee.config?.headers, undefined);
-      assert.deepEqual(erreurNettoyee.request, { method: 'GET', path: '/ressource' });
-      assert.equal(erreurNettoyee.response?.headers, undefined);
-      assert.deepEqual(erreurNettoyee.response?.request, { method: 'GET', path: '/ressource' });
-      return true;
-    }
-  );
+  const appel = axios.get('/ressource', {
+    adapter: vi.fn().mockRejectedValue(erreur),
+  });
+
+  await expect(appel).rejects.toSatisfy(isAxiosError);
+  await expect(appel).rejects.not.toHaveProperty('config.headers');
+  await expect(appel).rejects.toHaveProperty('request', { method: 'GET', path: '/ressource' });
+  await expect(appel).rejects.not.toHaveProperty('response.headers');
+  await expect(appel).rejects.toHaveProperty('response.request', { method: 'GET', path: '/ressource' });
 });
