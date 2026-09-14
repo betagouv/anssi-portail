@@ -45,16 +45,19 @@ describe('La ressource page Service', () => {
     });
   });
 
-  for (const id of ['cyber-enjeux', 'cyber-enjeux-pro', 'reflexes-cyber', 'secnumedu']) {
-    it(`redirige l'ancienne URL HTML de ${id} vers l'URL sans extension`, async () => {
-      for (const suffixe of ['', '/']) {
-        const reponse = await request(serveur).get(`/ressources/${id}.html${suffixe}`);
+  it.each(
+    ['cyber-enjeux', 'cyber-enjeux-pro', 'reflexes-cyber', 'secnumedu'].flatMap((id) =>
+      ['', '/'].map((suffixe) => ({ id, suffixe }))
+    )
+  )(
+    "redirige l'ancienne URL HTML de $id avec le suffixe '$suffixe' vers l'URL sans extension",
+    async ({ id, suffixe }) => {
+      const reponse = await request(serveur).get(`/ressources/${id}.html${suffixe}`);
 
-        expect(reponse.status).toBe(HttpStatusCode.MovedPermanently);
-        expect(reponse.headers.location).toBe(`/ressources/${id}`);
-      }
-    });
-  }
+      expect(reponse.status).toBe(HttpStatusCode.MovedPermanently);
+      expect(reponse.headers.location).toBe(`/ressources/${id}`);
+    }
+  );
 
   it('retourne une erreur 404 si la page n’est pas trouvée', async () => {
     fournisseurChemin.jekyll.ressource = (_id: string) => {

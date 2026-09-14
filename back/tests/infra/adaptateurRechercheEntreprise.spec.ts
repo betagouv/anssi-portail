@@ -92,16 +92,63 @@ describe('La recherche entreprise', () => {
     expect(resultats[0].departement).toBe('92');
   });
 
-  for (const [commune, departement] of [
+  it.each([
     ['97105', '971'],
     ['98735', '987'],
     ['2A004', '2A'],
-  ]) {
-    it(`extrait le département ${departement} de la commune ${commune}`, async () => {
+  ])(`extrait le département $1 de la commune $0`, async (commune, departement) => {
+    const resultat = resultatSirene();
+    vi.spyOn(axios, 'get').mockImplementation(async () => ({
+      data: {
+        results: [{ ...resultat, matching_etablissements: [{ ...resultat.matching_etablissements[0], commune }] }],
+      },
+    }));
+    const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+
+    const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);
+
+    expect(resultats).toHaveLength(1);
+    expect(resultats[0].departement).toBe(departement);
+  });
+
+  it.each([undefined, []].map((etablissements) => ({ etablissements })))(
+    "exclut un résultat sans établissement correspondant lors d'une recherche numérique ($etablissements)",
+    async ({ etablissements }) => {
+      vi.spyOn(axios, 'get').mockImplementation(async () => ({
+        data: { results: [{ ...resultatSirene(), matching_etablissements: etablissements }] },
+      }));
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+
+      expect(await adaptateur.rechercheOrganisations('18008001200248', null)).toEqual([]);
+    }
+  );
+
+  it.each([undefined, null, ''].flatMap((valeur) => ['departement', 'siret'].map((champ) => ({ valeur, champ }))))(
+    `exclut un siège avec $champ à $valeur`,
+    async ({ valeur, champ }) => {
+      const resultat = resultatSirene();
+      vi.spyOn(axios, 'get').mockImplementation(async () => ({
+        data: { results: [{ ...resultat, siege: { ...resultat.siege, [champ]: valeur } }] },
+      }));
+      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
+
+      expect(await adaptateur.rechercheOrganisations('Inpi', null)).toEqual([]);
+    }
+  );
+
+  it.each([undefined, null, ''].flatMap((valeur) => ['commune', 'siret'].map((champ) => ({ valeur, champ }))))(
+    `exclut un établissement avec $champ à $valeur lors d'une recherche numérique`,
+    async ({ valeur, champ }) => {
       const resultat = resultatSirene();
       vi.spyOn(axios, 'get').mockImplementation(async () => ({
         data: {
-          results: [{ ...resultat, matching_etablissements: [{ ...resultat.matching_etablissements[0], commune }] }],
+          results: [
+            {
+              ...resultat,
+              matching_etablissements: [{ ...resultat.matching_etablissements[0], [champ]: valeur }],
+            },
+            resultat,
+          ],
         },
       }));
       const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
@@ -109,56 +156,8 @@ describe('La recherche entreprise', () => {
       const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);
 
       expect(resultats).toHaveLength(1);
-      expect(resultats[0].departement).toBe(departement);
-    });
-  }
-
-  for (const etablissements of [undefined, []]) {
-    it(`exclut un résultat sans établissement correspondant lors d'une recherche numérique (${String(etablissements)})`, async () => {
-      vi.spyOn(axios, 'get').mockImplementation(async () => ({
-        data: { results: [{ ...resultatSirene(), matching_etablissements: etablissements }] },
-      }));
-      const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
-
-      expect(await adaptateur.rechercheOrganisations('18008001200248', null)).toEqual([]);
-    });
-  }
-
-  for (const valeur of [undefined, null, '']) {
-    for (const champ of ['departement', 'siret']) {
-      it(`exclut un siège avec ${champ} à ${String(valeur)}`, async () => {
-        const resultat = resultatSirene();
-        vi.spyOn(axios, 'get').mockImplementation(async () => ({
-          data: { results: [{ ...resultat, siege: { ...resultat.siege, [champ]: valeur } }] },
-        }));
-        const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
-
-        expect(await adaptateur.rechercheOrganisations('Inpi', null)).toEqual([]);
-      });
+      expect(resultats[0].siret).toBe('18008001200248');
+      expect(resultats[0].departement).toBe('92');
     }
-
-    for (const champ of ['commune', 'siret']) {
-      it(`exclut un établissement avec ${champ} à ${String(valeur)} lors d'une recherche numérique`, async () => {
-        const resultat = resultatSirene();
-        vi.spyOn(axios, 'get').mockImplementation(async () => ({
-          data: {
-            results: [
-              {
-                ...resultat,
-                matching_etablissements: [{ ...resultat.matching_etablissements[0], [champ]: valeur }],
-              },
-              resultat,
-            ],
-          },
-        }));
-        const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
-
-        const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);
-
-        expect(resultats).toHaveLength(1);
-        expect(resultats[0].siret).toBe('18008001200248');
-        expect(resultats[0].departement).toBe('92');
-      });
-    }
-  }
+  );
 });
