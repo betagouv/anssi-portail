@@ -420,9 +420,6 @@ importers:
       '@types/jsonwebtoken':
         specifier: ^9.0.10
         version: 9.0.10
-      '@types/jszip':
-        specifier: ^3.4.1
-        version: 3.4.1
       '@types/multer':
         specifier: ^2.1.0
         version: 2.2.0
@@ -2004,10 +2001,6 @@ packages:
 
   '@types/jsonwebtoken@9.0.10':
     resolution: {integrity: sha512-asx5hIG9Qmf/1oStypjanR7iKTv0gXQ1Ov/jfrX6kS/EO0OFni8orbmGCn0672NHR3kXHwpAwR+B368ZGN/2rA==}
-
-  '@types/jszip@3.4.1':
-    resolution: {integrity: sha512-TezXjmf3lj+zQ651r6hPqvSScqBLvyPI9FxdXBqpEwBijNGQ2NXpaFW/7joGzveYkKQUil7iiDHLo6LV71Pc0A==}
-    deprecated: This is a stub types definition. jszip provides its own type definitions, so you do not need this installed.
 
   '@types/keygrip@1.0.6':
     resolution: {integrity: sha512-lZuNAY9xeJt7Bx4t4dx0rYCDqGPW8RXhQZK1td7d4H6E9zYbLoOtjBvfwdTKpsyxQI/2jv+armjX/RW+ZNpXOQ==}
@@ -5698,10 +5691,6 @@ snapshots:
     dependencies:
       '@types/ms': 2.1.0
       '@types/node': 26.4.1
-
-  '@types/jszip@3.4.1':
-    dependencies:
-      jszip: 3.10.1
 
   '@types/keygrip@1.0.6': {}
 
