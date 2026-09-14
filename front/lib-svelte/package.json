@@ -34,7 +34,7 @@
     "svelte": "catalog:",
     "svelte-check": "^4.4.5",
     "vite": "^8.2.1",
-    "vitest": "^4.1.7",
+    "vitest": "^5.0.0",
     "vitest-localstorage-mock": "^0.1.2"
   },
   "dependencies": {
