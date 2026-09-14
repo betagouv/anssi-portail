@@ -1,12 +1,19 @@
-import { beforeEach, describe, it, expect } from 'vitest';
+import { beforeEach, describe, it, expect, vi, afterEach } from 'vitest';
 import { ClientHttp } from '../../../src/infra/clientHttp.js';
-import { FournisseurHorloge } from '../../../src/infra/fournisseurHorloge.js';
 import { EntrepotExigenceGrist, ExigenceGrist } from '../../../src/infra/nis2/entrepotExigenceGrist.js';
 import { fauxAdaptateurEnvironnement } from '../../api/fauxObjets.js';
 import { fabriqueClientGet, fabriqueFauxClientHttp } from '../fournisseurClientHttp.js';
-import { FournisseurHorlogeDeTest } from '../fournisseurHorlogeDeTest.js';
 
 describe("L'entrepot d'exigence Grist", () => {
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2025-01-01T00:00:00Z'));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   let clientHttp: ClientHttp;
   let entrepotExigenceGrist: EntrepotExigenceGrist;
 
@@ -22,7 +29,7 @@ describe("L'entrepot d'exigence Grist", () => {
   });
 
   const ilSePasse20Secondes = (): void => {
-    FournisseurHorlogeDeTest.initialise(new Date(FournisseurHorloge.maintenant().getTime() + 20000));
+    vi.setSystemTime(new Date(Date.now() + 20000));
   };
 
   it('sait récupérer des exigences en appelant Grist', async () => {
@@ -71,19 +78,15 @@ describe("L'entrepot d'exigence Grist", () => {
   });
 
   it("n'appelle pas Grist si les données sont en cache", async () => {
-    let nombreAppel = 0;
-    clientHttp.get = async <T>() => {
-      nombreAppel++;
-      return {
-        data: { records: [] } as unknown as T,
-      };
-    };
+    clientHttp.get = fabriqueClientGet(async () => ({ data: { records: [] } }));
+
+    vi.spyOn(clientHttp, 'get');
 
     await entrepotExigenceGrist.parReferentiel('NIS2');
     ilSePasse20Secondes();
     await entrepotExigenceGrist.parReferentiel('NIS2');
 
-    expect(nombreAppel).toBe(1);
+    expect(clientHttp.get).toHaveBeenCalledOnce();
   });
 
   describe("lorsqu'il récupère les exigences NIS2", () => {

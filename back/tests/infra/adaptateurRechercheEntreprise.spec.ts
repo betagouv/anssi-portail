@@ -14,7 +14,7 @@ describe('La recherche entreprise', () => {
 
   describe('avec cache', () => {
     it('retourne le résultat de la recherche entreprise', async () => {
-      vi.spyOn(axios, 'get').mockImplementation(async () => ({ data: { results: [resultatSirene()] } }));
+      vi.spyOn(axios, 'get').mockResolvedValue({ data: { results: [resultatSirene()] } });
       const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
       const resultats = await adaptateur.rechercheOrganisations('Organisation', '92');
@@ -35,18 +35,18 @@ describe('La recherche entreprise', () => {
     });
 
     it('ne rappelle pas la recherche entreprise deux fois', async () => {
-      const get = vi.spyOn(axios, 'get').mockImplementation(async () => ({ data: { results: [resultatSirene()] } }));
+      const get = vi.spyOn(axios, 'get').mockResolvedValue({ data: { results: [resultatSirene()] } });
       const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
       const premierResultat = await adaptateur.rechercheOrganisations('Organisation', '92');
       const secondResultat = await adaptateur.rechercheOrganisations('Organisation', '92');
 
       expect(secondResultat).toEqual(premierResultat);
-      expect(get.mock.calls).toHaveLength(1);
+      expect(get).toHaveBeenCalledTimes(1);
     });
 
     it('distingue les éléments à mettre en cache par terme et département', async () => {
-      const get = vi.spyOn(axios, 'get').mockImplementation(async () => ({ data: { results: [resultatSirene()] } }));
+      const get = vi.spyOn(axios, 'get').mockResolvedValue({ data: { results: [resultatSirene()] } });
       const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
       await adaptateur.rechercheOrganisations('Organisation', '92');
@@ -56,12 +56,12 @@ describe('La recherche entreprise', () => {
       await adaptateur.rechercheOrganisations('Autre organisation', '92');
       await adaptateur.rechercheOrganisations('Organisation', null);
 
-      expect(get.mock.calls).toHaveLength(3);
+      expect(get).toHaveBeenCalledTimes(3);
     });
   });
 
   it('exclut les dossiers INPI sans siège et conserve les organisations identifiées', async () => {
-    vi.spyOn(axios, 'get').mockImplementation(async () => ({
+    vi.spyOn(axios, 'get').mockResolvedValue({
       data: {
         results: [
           { ...resultatSirene(), nom_complet: 'Dossier INPI 1', siege: {}, matching_etablissements: [] },
@@ -69,7 +69,7 @@ describe('La recherche entreprise', () => {
           { ...resultatSirene(), nom_complet: 'Dossier INPI 2', siege: {}, matching_etablissements: [] },
         ],
       },
-    }));
+    });
     const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
     const resultats = await adaptateur.rechercheOrganisations('Inpi', null);
@@ -80,9 +80,9 @@ describe('La recherche entreprise', () => {
   });
 
   it('conserve un établissement identifié même lorsque son siège est vide', async () => {
-    vi.spyOn(axios, 'get').mockImplementation(async () => ({
+    vi.spyOn(axios, 'get').mockResolvedValue({
       data: { results: [{ ...resultatSirene(), siege: {} }] },
-    }));
+    });
     const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
     const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);
@@ -98,11 +98,11 @@ describe('La recherche entreprise', () => {
     ['2A004', '2A'],
   ])(`extrait le département $1 de la commune $0`, async (commune, departement) => {
     const resultat = resultatSirene();
-    vi.spyOn(axios, 'get').mockImplementation(async () => ({
+    vi.spyOn(axios, 'get').mockResolvedValue({
       data: {
         results: [{ ...resultat, matching_etablissements: [{ ...resultat.matching_etablissements[0], commune }] }],
       },
-    }));
+    });
     const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
     const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);
@@ -114,9 +114,9 @@ describe('La recherche entreprise', () => {
   it.each([undefined, []].map((etablissements) => ({ etablissements })))(
     "exclut un résultat sans établissement correspondant lors d'une recherche numérique ($etablissements)",
     async ({ etablissements }) => {
-      vi.spyOn(axios, 'get').mockImplementation(async () => ({
+      vi.spyOn(axios, 'get').mockResolvedValue({
         data: { results: [{ ...resultatSirene(), matching_etablissements: etablissements }] },
-      }));
+      });
       const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
       expect(await adaptateur.rechercheOrganisations('18008001200248', null)).toEqual([]);
@@ -127,9 +127,9 @@ describe('La recherche entreprise', () => {
     `exclut un siège avec $champ à $valeur`,
     async ({ valeur, champ }) => {
       const resultat = resultatSirene();
-      vi.spyOn(axios, 'get').mockImplementation(async () => ({
+      vi.spyOn(axios, 'get').mockResolvedValue({
         data: { results: [{ ...resultat, siege: { ...resultat.siege, [champ]: valeur } }] },
-      }));
+      });
       const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
       expect(await adaptateur.rechercheOrganisations('Inpi', null)).toEqual([]);
@@ -140,7 +140,7 @@ describe('La recherche entreprise', () => {
     `exclut un établissement avec $champ à $valeur lors d'une recherche numérique`,
     async ({ valeur, champ }) => {
       const resultat = resultatSirene();
-      vi.spyOn(axios, 'get').mockImplementation(async () => ({
+      vi.spyOn(axios, 'get').mockResolvedValue({
         data: {
           results: [
             {
@@ -150,7 +150,7 @@ describe('La recherche entreprise', () => {
             resultat,
           ],
         },
-      }));
+      });
       const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
       const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);

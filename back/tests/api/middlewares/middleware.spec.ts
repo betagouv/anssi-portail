@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
 import { createRequest, createResponse } from 'node-mocks-http';
 import { OutgoingHttpHeaders } from 'node:http';
-import { beforeEach, describe, it, expect } from 'vitest';
+import { beforeEach, describe, it, expect, vi } from 'vitest';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT.js';
 import { FournisseurChemin } from '../../../src/api/fournisseurChemin.js';
 import { fabriqueMiddleware, Middleware } from '../../../src/api/middlewares/middleware.js';
@@ -72,9 +72,8 @@ describe('Le middleware', () => {
   describe('sur demande de validation du token JWT', () => {
     it("jette une erreur si le token n'est pas présent", async () => {
       const statutOriginal = reponse.status;
-      const envOriginal = process.env;
 
-      process.env.SECRET_JWT = 'monSecretJWT';
+      vi.stubEnv('SECRET_JWT', 'monSecretJWT');
       const token = adaptateurJWT.genereToken({
         email: 'jeanne.dupont@beta.gouv.fr',
       });
@@ -89,8 +88,6 @@ describe('Le middleware', () => {
       await middleware.verifieJWT(requete, reponse, () => {});
 
       expect(statutRecu).toBe(HttpStatusCode.Unauthorized);
-
-      process.env = envOriginal;
     });
 
     it('jette une erreur si le token ne peut pas être décodé', async () => {
