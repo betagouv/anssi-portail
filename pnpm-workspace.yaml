@@ -42,6 +42,7 @@ catalog:
   svelte: 5.57.0
   tsx: ^4.23.12
   uuid: ^14.0.1
+  vitest: ^5.0.0
 
 minimumReleaseAgeExclude:
   - '@lab-anssi/ui-kit'
