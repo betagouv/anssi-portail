@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { fabriqueMiddleware } from '../../../src/api/middlewares/middleware.js';
 import { creeServeur } from '../../../src/api/msc.js';
@@ -66,7 +65,7 @@ describe('La ressource des services et ressources favoris', () => {
 
       await request(serveur).post('/api/favoris').send({ idItemCyber: '' });
 
-      assert.equal(middelwareAppele, true);
+      expect(middelwareAppele).toBe(true);
     });
 
     it("retourne 400 si l'id est vide", async () => {
@@ -74,7 +73,7 @@ describe('La ressource des services et ressources favoris', () => {
 
       await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
 
-      assert.equal(reponse.status, HttpStatusCode.BadRequest);
+      expect(reponse.status).toBe(HttpStatusCode.BadRequest);
     });
 
     it('sauvegarde un favori', async () => {
@@ -85,10 +84,10 @@ describe('La ressource des services et ressources favoris', () => {
 
       const ceuxDeUtilisateur = await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
 
-      assert.equal(reponse.status, HttpStatusCode.Created);
-      assert.equal(ceuxDeUtilisateur.length, 1);
-      assert.equal(ceuxDeUtilisateur[0].idItemCyber, 'unId');
-      assert.deepEqual(ceuxDeUtilisateur[0].utilisateur, jeanneDupont);
+      expect(reponse.status).toBe(HttpStatusCode.Created);
+      expect(ceuxDeUtilisateur).toHaveLength(1);
+      expect(ceuxDeUtilisateur[0].idItemCyber).toBe('unId');
+      expect(ceuxDeUtilisateur[0].utilisateur).toEqual(jeanneDupont);
     });
   });
 
@@ -109,7 +108,7 @@ describe('La ressource des services et ressources favoris', () => {
 
       await request(serveur).get('/api/favoris');
 
-      assert.equal(middelwareAppele, true);
+      expect(middelwareAppele).toBe(true);
     });
 
     it("retourne les favoris de l'utilisateur connecté", async () => {
@@ -128,9 +127,9 @@ describe('La ressource des services et ressources favoris', () => {
 
       const reponse = await request(serveur).get('/api/favoris').set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
-      assert.equal(reponse.body.length, 2);
-      assert.deepEqual(reponse.body, ['unId', 'unSecondId']);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
+      expect(reponse.body).toHaveLength(2);
+      expect(reponse.body).toEqual(['unId', 'unSecondId']);
     });
 
     it('publie un événement de mise à jour de la liste des favoris', async () => {
@@ -146,7 +145,7 @@ describe('La ressource des services et ressources favoris', () => {
 
       busEvenements.aRecuUnEvenement(MiseAJourFavorisUtilisateur);
       const evenement = busEvenements.recupereEvenement(MiseAJourFavorisUtilisateur);
-      assert.equal(evenement!.utilisateur, jeanneDupont);
+      expect(evenement!.utilisateur).toBe(jeanneDupont);
     });
   });
 });

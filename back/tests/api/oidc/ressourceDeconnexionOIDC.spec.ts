@@ -1,8 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { Express } from 'express';
 import request from 'supertest';
-import assert from 'node:assert';
 import { creeServeur } from '../../../src/api/msc.js';
 import { AgentConnectInfo, encodeSession, enObjet } from '../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurOIDC } from '../fauxObjets.js';
@@ -33,9 +32,9 @@ describe('La ressource deconnexion OIDC', () => {
 
       const reponse = await request(serveur).get('/oidc/deconnexion').set('Cookie', [cookie]);
 
-      assert.equal(reponse.status, HttpStatusCode.Found);
-      assert.equal(reponse.headers.location, 'une-adresse-proconnect');
-      assert.equal(idTokenRecu, 'idToken');
+      expect(reponse.status).toBe(HttpStatusCode.Found);
+      expect(reponse.headers.location).toBe('une-adresse-proconnect');
+      expect(idTokenRecu).toBe('idToken');
     });
 
     it('dépose un cookie avec le state', async () => {
@@ -47,7 +46,7 @@ describe('La ressource deconnexion OIDC', () => {
       const headerCookie = reponse.headers['set-cookie'];
       const cookieSession = enObjet(headerCookie[0]);
 
-      assert.equal((cookieSession.AgentConnectInfo as AgentConnectInfo).state, 'un faux state');
+      expect((cookieSession.AgentConnectInfo as AgentConnectInfo).state).toBe('un faux state');
     });
   });
 });

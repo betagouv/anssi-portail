@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../../src/api/msc.js';
 import { TestExpositionRéalisé } from '../../../../src/bus/evenements/TestExpositionRealise.js';
@@ -33,13 +32,13 @@ describe('La ressource des tests d’exposition', () => {
     it('répond 201', async () => {
       const réponse = await request(serveur).post('/api/mini-tests/exposition/tests').send(corpsParDéfaut);
 
-      assert.equal(réponse.status, HttpStatusCode.Created);
+      expect(réponse.status).toBe(HttpStatusCode.Created);
     });
 
     it('émet un événement sur le bus', async () => {
       await request(serveur).post('/api/mini-tests/exposition/tests').send(corpsParDéfaut);
 
-      assert(busEvenements.aRecuUnEvenement(TestExpositionRéalisé));
+      expect(busEvenements.aRecuUnEvenement(TestExpositionRéalisé)).toBeTruthy();
     });
 
     it('trace les réponses', async () => {
@@ -52,8 +51,8 @@ describe('La ressource des tests d’exposition', () => {
         });
 
       const événement = busEvenements.recupereEvenement(TestExpositionRéalisé);
-      assert.notEqual(événement, undefined);
-      assert.deepEqual(événement, {
+      expect(événement).toBeDefined();
+      expect(événement).toEqual({
         typeOrganisation: 'association',
         secteur: 'energie',
         facteursAggravant: ['subco', 'rd'],
@@ -75,10 +74,10 @@ describe('La ressource des tests d’exposition', () => {
         await request(serveur).post('/api/mini-tests/exposition/tests').set('Cookie', [cookie]).send(corpsParDéfaut);
 
         const événement = busEvenements.recupereEvenement(TestExpositionRéalisé);
-        assert.equal(événement?.email, 'jeanne.dupont@user.com');
-        assert.equal(événement?.codeSecteur, 'A');
-        assert.equal(événement?.codeRegion, 'FR-971');
-        assert.equal(événement?.codeTrancheEffectif, '11');
+        expect(événement?.email).toBe('jeanne.dupont@user.com');
+        expect(événement?.codeSecteur).toBe('A');
+        expect(événement?.codeRegion).toBe('FR-971');
+        expect(événement?.codeTrancheEffectif).toBe('11');
       });
     });
 
@@ -90,7 +89,7 @@ describe('La ressource des tests d’exposition', () => {
           facteursAggravant: [],
         });
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
 
       it('si un secteur est inconnu', async () => {
@@ -100,7 +99,7 @@ describe('La ressource des tests d’exposition', () => {
           facteursAggravant: [],
         });
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
 
       it('si un facteur aggravant est inconnu', async () => {
@@ -112,7 +111,7 @@ describe('La ressource des tests d’exposition', () => {
             facteursAggravant: ['inconnu'],
           });
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
     });
   });

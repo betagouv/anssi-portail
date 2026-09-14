@@ -1,5 +1,4 @@
-import { describe, it } from 'vitest';
-import assert from 'node:assert';
+import { describe, it, expect } from 'vitest';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { consigneEvenementMAJFavorisUtilisateurDansJournal } from '../../src/bus/consigneEvenementMAJFavorisUtilisateurDansJournal.js';
@@ -47,10 +46,10 @@ describe("L'abonnement qui consigne la mise à jour des favoris de l'utilisateur
       })
     );
 
-    assert.notEqual(evenementRecu, undefined);
-    assert.equal(evenementRecu!.type, 'MISE_A_JOUR_FAVORIS_UTILISATEUR');
-    assert.equal(evenementRecu!.donnees.idUtilisateur, 'jeanne.dupont@user.com-hacheHMAC');
-    assert.equal(evenementRecu!.donnees.listeIdFavoris.length, 2);
-    assert.deepEqual(evenementRecu!.date, new Date('2025-04-16'));
+    expect(evenementRecu).toBeDefined();
+    expect(evenementRecu!.type).toBe('MISE_A_JOUR_FAVORIS_UTILISATEUR');
+    expect(evenementRecu!.donnees.idUtilisateur).toBe('jeanne.dupont@user.com-hacheHMAC');
+    expect(evenementRecu!.donnees.listeIdFavoris).toHaveLength(2);
+    expect(evenementRecu!.date).toEqual(new Date('2025-04-16'));
   });
 });

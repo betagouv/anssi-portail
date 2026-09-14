@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { FournisseurHorloge } from '../../src/infra/fournisseurHorloge.js';
 import { EntrepotGristGenerique } from './EntrepotGristGenerique.js';
@@ -21,8 +20,8 @@ describe("L'entrepôt Grist générique", () => {
     await entrepotRessourcesCyberGrist.tous();
     const resultat = await entrepotRessourcesCyberGrist.tous();
 
-    assert.equal(nombreAppel, 1);
-    assert.deepStrictEqual(resultat, [{ test: 'une chaine' }]);
+    expect(nombreAppel).toBe(1);
+    expect(resultat).toStrictEqual([{ test: 'une chaine' }]);
   });
 
   it("mets en cache les résultats d'appels à Grist avec des filtres différents", async () => {
@@ -37,7 +36,7 @@ describe("L'entrepôt Grist générique", () => {
     const premier = await entrepotRessourcesCyberGrist.avecFiltre(1);
     const second = await entrepotRessourcesCyberGrist.avecFiltre(2);
 
-    assert.notDeepStrictEqual(premier, second);
+    expect(premier).not.toStrictEqual(second);
   });
 
   const add = (date: Date, duration: { hours: number }) => {
@@ -66,6 +65,6 @@ describe("L'entrepôt Grist générique", () => {
 
     const resultat = await entrepotRessourcesCyberGrist.tous();
 
-    assert.deepStrictEqual(resultat, [{ test: 'une chaine' }]);
+    expect(resultat).toStrictEqual([{ test: 'une chaine' }]);
   });
 });

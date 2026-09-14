@@ -1,8 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
 import { Readable } from 'node:stream';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { ConfigurationServeur } from '../../../src/api/configurationServeur.js';
 import { creeServeur } from '../../../src/api/msc.js';
@@ -45,7 +44,7 @@ describe("La ressource de document d'un guide", () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('sers le fichier correspondant', async () => {
@@ -59,9 +58,9 @@ describe("La ressource de document d'un guide", () => {
 
       const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
-      assert.equal(nomDuFichierDemande!, 'anssi_back to basics_pki_1.0.pdf');
-      assert.equal(cleDuBucketDemandee!, 'GUIDES');
-      assert.equal(reponse.body, 'ABCD');
+      expect(nomDuFichierDemande!).toBe('anssi_back to basics_pki_1.0.pdf');
+      expect(cleDuBucketDemandee!).toBe('GUIDES');
+      expect(reponse.body).toEqual(Buffer.from('ABCD'));
     });
 
     describe("lorsque le document de guide n'existe pas", () => {
@@ -69,7 +68,7 @@ describe("La ressource de document d'un guide", () => {
         configurationDuServeur.cellar.getStream = async () => undefined;
         const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
-        assert.equal(reponse.status, HttpStatusCode.NotFound);
+        expect(reponse.status).toBe(HttpStatusCode.NotFound);
       });
 
       it("répond 301 et pointe vers le guide qui contenait ce document, s'il s'agit d'un ancien document", async () => {
@@ -80,8 +79,8 @@ describe("La ressource de document d'un guide", () => {
 
         const reponse = await request(serveur).get('/documents-guides/ancien_anssi_back to basics_pki_1.0.pdf');
 
-        assert.equal(reponse.status, HttpStatusCode.MovedPermanently);
-        assert.equal(reponse.headers['location'], '/guides/zero-trust');
+        expect(reponse.status).toBe(HttpStatusCode.MovedPermanently);
+        expect(reponse.headers['location']).toBe('/guides/zero-trust');
       });
     });
 
@@ -91,7 +90,7 @@ describe("La ressource de document d'un guide", () => {
       };
       const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.pdf');
 
-      assert.equal(reponse.status, HttpStatusCode.InternalServerError);
+      expect(reponse.status).toBe(HttpStatusCode.InternalServerError);
     });
 
     it('indique le type de contenu', async () => {
@@ -102,20 +101,18 @@ describe("La ressource de document d'un guide", () => {
 
       const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.xml');
 
-      assert.equal(reponse.headers['content-type'], 'application/xml');
+      expect(reponse.headers['content-type']).toBe('application/xml');
     });
 
     it('rend les contenus servis cachable', async () => {
       const reponse = await request(serveur).get('/documents-guides/anssi_back to basics_pki_1.0.xml');
 
-      assert.equal(
-        reponse.headers['cache-control'],
+      expect(reponse.headers['cache-control']).toBe(
         'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate'
       );
-      assert.equal(reponse.headers['pragma'], '');
-      assert.equal(reponse.headers['expires'], '3600');
-      assert.equal(
-        reponse.headers['surrogate-control'],
+      expect(reponse.headers['pragma']).toBe('');
+      expect(reponse.headers['expires']).toBe('3600');
+      expect(reponse.headers['surrogate-control']).toBe(
         'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate'
       );
     });

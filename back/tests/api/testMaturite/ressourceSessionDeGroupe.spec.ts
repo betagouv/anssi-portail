@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { EntrepotSessionDeGroupe } from '../../../src/metier/entrepotSessionDeGroupe.js';
@@ -27,13 +26,13 @@ describe('La ressource qui gère une session de groupe', () => {
 
       const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED').send({});
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it("répond 404 lorsque la session n'existe pas", async () => {
       const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED').send({});
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
   });
 });

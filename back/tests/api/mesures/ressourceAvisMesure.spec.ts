@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { AvisMesureDonne } from '../../../src/bus/evenements/avisMesureDonne.js';
@@ -49,7 +48,7 @@ describe('La ressource avis sur une mesure de sécurité', () => {
       it('doit répondre 401', async () => {
         const reponse = await request(serveur).post('/api/mesures/AUTH.5/avis').send(retourPositif);
 
-        assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+        expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
       });
     });
 
@@ -66,7 +65,7 @@ describe('La ressource avis sur une mesure de sécurité', () => {
           .set('Cookie', [cookie])
           .send(retourPositif);
 
-        assert.equal(reponse.status, HttpStatusCode.Created);
+        expect(reponse.status).toBe(HttpStatusCode.Created);
       });
 
       it("doit répondre 404 si la mesure n'existe pas", async () => {
@@ -75,7 +74,7 @@ describe('La ressource avis sur une mesure de sécurité', () => {
           .set('Cookie', [cookie])
           .send(retourPositif);
 
-        assert.equal(reponse.status, HttpStatusCode.NotFound);
+        expect(reponse.status).toBe(HttpStatusCode.NotFound);
       });
 
       it('doit répondre 400 si le corps de la requête est vide', async () => {
@@ -84,8 +83,8 @@ describe('La ressource avis sur une mesure de sécurité', () => {
           .set('Cookie', [cookie])
           .send({});
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
-        assert.equal(reponse.body.fieldErrors.retour[0], 'Le retour doit être "POSITIF" ou "NEGATIF"');
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+        expect(reponse.body.fieldErrors.retour[0]).toBe('Le retour doit être "POSITIF" ou "NEGATIF"');
       });
 
       it("doit répondre 400 si le retour n'est pas valide", async () => {
@@ -94,8 +93,8 @@ describe('La ressource avis sur une mesure de sécurité', () => {
           .set('Cookie', [cookie])
           .send({ retour: 'INVALIDE' });
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
-        assert.equal(reponse.body.fieldErrors.retour[0], 'Le retour doit être "POSITIF" ou "NEGATIF"');
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+        expect(reponse.body.fieldErrors.retour[0]).toBe('Le retour doit être "POSITIF" ou "NEGATIF"');
       });
 
       it('doit répondre 400 si le commentaire est trop long', async () => {
@@ -104,8 +103,8 @@ describe('La ressource avis sur une mesure de sécurité', () => {
           .set('Cookie', [cookie])
           .send({ retour: 'NEGATIF', commentaire: 'x'.repeat(1001) });
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
-        assert.equal(reponse.body.fieldErrors.commentaire[0], 'Le commentaire doit contenir au plus 1000 caractères');
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+        expect(reponse.body.fieldErrors.commentaire[0]).toBe('Le commentaire doit contenir au plus 1000 caractères');
       });
 
       describe('concernant les avis positifs', () => {
@@ -121,14 +120,13 @@ describe('La ressource avis sur une mesure de sécurité', () => {
 
           busEvenements.aRecuUnEvenement(AvisMesureDonne);
           const evenement = busEvenements.recupereEvenement(AvisMesureDonne);
-          assert.equal(evenement!.idUtilisateur, 'utilisateur@mail.com-hache');
-          assert.equal(evenement!.idMesure, 'AUTH.5');
-          assert.equal(evenement!.parcours, 'complet');
-          assert.equal(
-            evenement!.titreMesure,
+          expect(evenement!.idUtilisateur).toBe('utilisateur@mail.com-hache');
+          expect(evenement!.idMesure).toBe('AUTH.5');
+          expect(evenement!.parcours).toBe('complet');
+          expect(evenement!.titreMesure).toBe(
             'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes'
           );
-          assert.equal(evenement!.retour, 'POSITIF');
+          expect(evenement!.retour).toBe('POSITIF');
         });
 
         it('publie un événement sans commentaire', async () => {
@@ -139,14 +137,13 @@ describe('La ressource avis sur une mesure de sécurité', () => {
 
           busEvenements.aRecuUnEvenement(AvisMesureDonne);
           const evenement = busEvenements.recupereEvenement(AvisMesureDonne);
-          assert.equal(evenement!.idUtilisateur, 'jeanne.dupont@user.com-hache');
-          assert.equal(evenement!.idMesure, 'AUTH.5');
-          assert.equal(
-            evenement!.titreMesure,
+          expect(evenement!.idUtilisateur).toBe('jeanne.dupont@user.com-hache');
+          expect(evenement!.idMesure).toBe('AUTH.5');
+          expect(evenement!.titreMesure).toBe(
             'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes'
           );
-          assert.equal(evenement!.retour, 'POSITIF');
-          assert.equal(evenement!.commentaire, undefined);
+          expect(evenement!.retour).toBe('POSITIF');
+          expect(evenement!.commentaire).toBeUndefined();
         });
       });
 
@@ -159,14 +156,13 @@ describe('La ressource avis sur une mesure de sécurité', () => {
 
           busEvenements.aRecuUnEvenement(AvisMesureDonne);
           const evenement = busEvenements.recupereEvenement(AvisMesureDonne);
-          assert.equal(evenement!.idUtilisateur, 'jeanne.dupont@user.com-hache');
-          assert.equal(evenement!.idMesure, 'AUTH.5');
-          assert.equal(
-            evenement!.titreMesure,
+          expect(evenement!.idUtilisateur).toBe('jeanne.dupont@user.com-hache');
+          expect(evenement!.idMesure).toBe('AUTH.5');
+          expect(evenement!.titreMesure).toBe(
             'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes'
           );
-          assert.equal(evenement!.retour, 'NEGATIF');
-          assert.equal(evenement!.commentaire, 'Cette mesure est incorrecte !');
+          expect(evenement!.retour).toBe('NEGATIF');
+          expect(evenement!.commentaire).toBe('Cette mesure est incorrecte !');
         });
       });
     });

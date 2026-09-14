@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { SimulationNis2Terminee } from '../../src/bus/evenements/simulationNis2Terminee.js';
@@ -53,7 +52,7 @@ describe("L'abonnement qui consigne une simulation NIS2 terminée dans le journa
       })
     );
 
-    assert.deepEqual(evenementRecu, {
+    expect(evenementRecu).toEqual({
       type: 'SIMULATION_NIS2_TERMINEE',
       donnees: {
         reponses: {

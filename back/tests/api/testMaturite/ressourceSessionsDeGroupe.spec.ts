@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
-import assert from 'node:assert';
 import { creeServeur } from '../../../src/api/msc.js';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
 import { Express } from 'express';
@@ -32,13 +31,13 @@ describe('La ressource qui gère les sessions de groupe', () => {
     it('répond 201', async () => {
       const reponse = await request(serveur).post('/api/sessions-groupe').send({});
 
-      assert.equal(reponse.status, HttpStatusCode.Created);
+      expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
     it('ajoute une session à l’entrepôt', async () => {
       await request(serveur).post('/api/sessions-groupe').send({});
 
-      assert.equal((await entrepotSessionDeGroupe.tous()).length, 1);
+      expect(await entrepotSessionDeGroupe.tous()).toHaveLength(1);
     });
 
     it('répond avec le code de la session de groupe', async () => {
@@ -46,7 +45,7 @@ describe('La ressource qui gère les sessions de groupe', () => {
 
       const reponse = await request(serveur).post('/api/sessions-groupe').send({});
 
-      assert.equal(reponse.body.code, 'AB1XI5');
+      expect(reponse.body.code).toBe('AB1XI5');
     });
 
     it('répond avec le lien de la session de groupe pour les participants', async () => {
@@ -55,7 +54,7 @@ describe('La ressource qui gère les sessions de groupe', () => {
 
       const reponse = await request(serveur).post('/api/sessions-groupe').send({});
 
-      assert.equal(reponse.body.lienParticipant, 'https://msc.com/test-maturite?session-groupe=AB1XI5');
+      expect(reponse.body.lienParticipant).toBe('https://msc.com/test-maturite?session-groupe=AB1XI5');
     });
   });
 });

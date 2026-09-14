@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { ErreurTraverséeDeChemin } from '../../src/api/erreurs.js';
 import {
   construisListeFichiersDuSite,
@@ -11,59 +10,67 @@ import {
 describe('le fournisseurChemin', () => {
   describe("lorsqu'on récupère un fichier", () => {
     it('rejette ../etc/passwd', () => {
-      assert.throws(
-        () => fournisseurChemin.jekyll.page('../etc/passwd'),
-        (err) => err instanceof ErreurTraverséeDeChemin && /Tentative de path traversal/.test(err.message)
+      expect(() => fournisseurChemin.jekyll.page('../etc/passwd')).toThrow(
+        expect.objectContaining({
+          constructor: ErreurTraverséeDeChemin,
+          message: expect.stringMatching(/Tentative de path traversal/),
+        })
       );
     });
 
     it('rejette ..%2fetc%2fpasswd (URL-encoded)', () => {
-      assert.throws(
-        () => fournisseurChemin.jekyll.page('..%2fetc%2fpasswd'),
-        (err) => err instanceof ErreurTraverséeDeChemin && /Tentative de path traversal/.test(err.message)
+      expect(() => fournisseurChemin.jekyll.page('..%2fetc%2fpasswd')).toThrow(
+        expect.objectContaining({
+          constructor: ErreurTraverséeDeChemin,
+          message: expect.stringMatching(/Tentative de path traversal/),
+        })
       );
     });
 
     it('rejette ../../etc/passwd', () => {
-      assert.throws(
-        () => fournisseurChemin.jekyll.page('../../etc/passwd'),
-        (err) => err instanceof ErreurTraverséeDeChemin && /Tentative de path traversal/.test(err.message)
+      expect(() => fournisseurChemin.jekyll.page('../../etc/passwd')).toThrow(
+        expect.objectContaining({
+          constructor: ErreurTraverséeDeChemin,
+          message: expect.stringMatching(/Tentative de path traversal/),
+        })
       );
     });
 
     it('accepte index', () => {
       siteFront.fichiers = () => [`${process.cwd()}/front/_site/index/index.html`];
 
-      assert.doesNotThrow(() => fournisseurChemin.jekyll.page('index'));
+      expect(() => fournisseurChemin.jekyll.page('index')).not.toThrow();
     });
 
     it('résout une URL de ressource sans extension vers le fichier HTML', () => {
       const chemin = `${process.cwd()}/front/_site/ressources/cyber-enjeux-pro.html`;
       siteFront.fichiers = () => [chemin];
 
-      assert.equal(fournisseurChemin.jekyll.ressource('cyber-enjeux-pro'), chemin);
+      expect(fournisseurChemin.jekyll.ressource('cyber-enjeux-pro')).toBe(chemin);
     });
 
     it('résout une URL de service sans extension vers le fichier HTML', () => {
       const chemin = `${process.cwd()}/front/_site/services/demainspecialistecyber.html`;
       siteFront.fichiers = () => [chemin];
 
-      assert.equal(fournisseurChemin.jekyll.service('demainspecialistecyber'), chemin);
+      expect(fournisseurChemin.jekyll.service('demainspecialistecyber')).toBe(chemin);
     });
 
     it('résout une URL de contact sans extension vers le fichier HTML', () => {
       const chemin = `${process.cwd()}/front/_site/contacts/FR-IDF.html`;
       siteFront.fichiers = () => [chemin];
 
-      assert.equal(fournisseurChemin.jekyll.contact('FR-IDF'), chemin);
+      expect(fournisseurChemin.jekyll.contact('FR-IDF')).toBe(chemin);
     });
 
     it('refuse un fichier qui ne se trouve pas dans le site', () => {
       siteFront.fichiers = () => [];
 
-      assert.throws(
-        () => fournisseurChemin.jekyll.page('inconnue'),
-        (err) => err instanceof FichierInconnu && /Fichier inconnu .*_site\/inconnue\/index\.html/.test(err.message)
+      expect(() => fournisseurChemin.jekyll.page('inconnue')).toThrow(
+        expect.objectContaining({
+          constructor: FichierInconnu,
+          message: expect.stringMatching(/Fichier inconnu .*_site\/inconnue\/index\.html/),
+        })
       );
     });
   });
@@ -72,8 +79,8 @@ describe('le fournisseurChemin', () => {
     it('retourne la liste des fichiers', () => {
       const fichiers = construisListeFichiersDuSite('tests/ressources/_site');
 
-      assert.equal(fichiers[0], `${process.cwd()}/tests/ressources/_site/contacts`);
-      assert.equal(fichiers[1], `${process.cwd()}/tests/ressources/_site/contacts/index.html`);
+      expect(fichiers[0]).toBe(`${process.cwd()}/tests/ressources/_site/contacts`);
+      expect(fichiers[1]).toBe(`${process.cwd()}/tests/ressources/_site/contacts/index.html`);
     });
   });
 });

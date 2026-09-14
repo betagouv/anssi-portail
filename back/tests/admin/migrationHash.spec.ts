@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { tenteDeHacherAvecUnNouveauSel } from '../../src/admin/migrationHash.js';
 
 describe("L'outil de migration de sels de hachage", () => {
@@ -12,7 +11,7 @@ describe("L'outil de migration de sels de hachage", () => {
       'v1'
     );
 
-    assert.equal(nouveauHash, 'v1-v2:une chaine-hasheeAvecV1-hasheeAvecV2');
+    expect(nouveauHash).toBe('v1-v2:une chaine-hasheeAvecV1-hasheeAvecV2');
   });
 
   it('ne fait rien si la version du hash de la chaine ne correspond pas à la version attendue', () => {
@@ -24,7 +23,7 @@ describe("L'outil de migration de sels de hachage", () => {
       'v1-v2-v3'
     );
 
-    assert.equal(nouveauHash, 'v1-v2:une chaine-hasheeAvecV1-hasheeAvecV2');
+    expect(nouveauHash).toBe('v1-v2:une chaine-hasheeAvecV1-hasheeAvecV2');
   });
 
   it('ne fait rien si la chaine est non définie', () => {
@@ -36,6 +35,6 @@ describe("L'outil de migration de sels de hachage", () => {
       'v1'
     );
 
-    assert.equal(nouveauHash, undefined);
+    expect(nouveauHash).toBeUndefined();
   });
 });

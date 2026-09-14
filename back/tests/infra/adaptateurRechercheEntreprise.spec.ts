@@ -1,6 +1,5 @@
 import axios from '@anssi-portail/axios';
-import assert from 'node:assert/strict';
-import { describe, it, vi } from 'vitest';
+import { describe, it, vi, expect } from 'vitest';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 import { AdaptateurRechercheEntrepriseGouv } from '../../src/infra/adaptateurRechercheEntrepriseGouv.js';
 
@@ -20,7 +19,7 @@ describe('La recherche entreprise', () => {
 
       const resultats = await adaptateur.rechercheOrganisations('Organisation', '92');
 
-      assert.deepEqual(resultats, [
+      expect(resultats).toEqual([
         {
           nom: 'Organisation',
           departement: '92',
@@ -42,8 +41,8 @@ describe('La recherche entreprise', () => {
       const premierResultat = await adaptateur.rechercheOrganisations('Organisation', '92');
       const secondResultat = await adaptateur.rechercheOrganisations('Organisation', '92');
 
-      assert.deepEqual(secondResultat, premierResultat);
-      assert.equal(get.mock.calls.length, 1);
+      expect(secondResultat).toEqual(premierResultat);
+      expect(get.mock.calls).toHaveLength(1);
     });
 
     it('distingue les éléments à mettre en cache par terme et département', async () => {
@@ -57,7 +56,7 @@ describe('La recherche entreprise', () => {
       await adaptateur.rechercheOrganisations('Autre organisation', '92');
       await adaptateur.rechercheOrganisations('Organisation', null);
 
-      assert.equal(get.mock.calls.length, 3);
+      expect(get.mock.calls).toHaveLength(3);
     });
   });
 
@@ -75,9 +74,9 @@ describe('La recherche entreprise', () => {
 
     const resultats = await adaptateur.rechercheOrganisations('Inpi', null);
 
-    assert.equal(resultats.length, 1);
-    assert.equal(resultats[0].siret, '18008001200248');
-    assert.equal(resultats[0].nom, 'Organisation');
+    expect(resultats).toHaveLength(1);
+    expect(resultats[0].siret).toBe('18008001200248');
+    expect(resultats[0].nom).toBe('Organisation');
   });
 
   it('conserve un établissement identifié même lorsque son siège est vide', async () => {
@@ -88,9 +87,9 @@ describe('La recherche entreprise', () => {
 
     const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);
 
-    assert.equal(resultats.length, 1);
-    assert.equal(resultats[0].siret, '18008001200248');
-    assert.equal(resultats[0].departement, '92');
+    expect(resultats).toHaveLength(1);
+    expect(resultats[0].siret).toBe('18008001200248');
+    expect(resultats[0].departement).toBe('92');
   });
 
   for (const [commune, departement] of [
@@ -109,8 +108,8 @@ describe('La recherche entreprise', () => {
 
       const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);
 
-      assert.equal(resultats.length, 1);
-      assert.equal(resultats[0].departement, departement);
+      expect(resultats).toHaveLength(1);
+      expect(resultats[0].departement).toBe(departement);
     });
   }
 
@@ -121,7 +120,7 @@ describe('La recherche entreprise', () => {
       }));
       const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
-      assert.deepEqual(await adaptateur.rechercheOrganisations('18008001200248', null), []);
+      expect(await adaptateur.rechercheOrganisations('18008001200248', null)).toEqual([]);
     });
   }
 
@@ -134,7 +133,7 @@ describe('La recherche entreprise', () => {
         }));
         const adaptateur = new AdaptateurRechercheEntrepriseGouv(fauxAdaptateurEnvironnement);
 
-        assert.deepEqual(await adaptateur.rechercheOrganisations('Inpi', null), []);
+        expect(await adaptateur.rechercheOrganisations('Inpi', null)).toEqual([]);
       });
     }
 
@@ -156,9 +155,9 @@ describe('La recherche entreprise', () => {
 
         const resultats = await adaptateur.rechercheOrganisations('18008001200248', null);
 
-        assert.equal(resultats.length, 1);
-        assert.equal(resultats[0].siret, '18008001200248');
-        assert.equal(resultats[0].departement, '92');
+        expect(resultats).toHaveLength(1);
+        expect(resultats[0].siret).toBe('18008001200248');
+        expect(resultats[0].departement).toBe('92');
       });
     }
   }

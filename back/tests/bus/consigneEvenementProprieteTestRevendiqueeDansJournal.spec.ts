@@ -1,5 +1,4 @@
-import { beforeEach, describe, it } from 'vitest';
-import assert from 'node:assert';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { ProprieteTestRevendiquee } from '../../src/bus/evenements/proprieteTestRevendiquee.js';
@@ -47,10 +46,10 @@ describe("L'abonnement qui consigne la revendication de la propriété d'un test
       })
     );
 
-    assert.notEqual(evenementRecu, undefined);
-    assert.equal(evenementRecu!.type, 'PROPRIETE_TEST_REVENDIQUEE');
-    assert.equal(evenementRecu!.donnees.idResultatTest, '12345');
-    assert.deepEqual(evenementRecu!.date, new Date('2025-03-10'));
+    expect(evenementRecu).toBeDefined();
+    expect(evenementRecu!.type).toBe('PROPRIETE_TEST_REVENDIQUEE');
+    expect(evenementRecu!.donnees.idResultatTest).toBe('12345');
+    expect(evenementRecu!.date).toEqual(new Date('2025-03-10'));
   });
 
   it("hache l'email de l'utilisateur", async () => {
@@ -68,7 +67,7 @@ describe("L'abonnement qui consigne la revendication de la propriété d'un test
       })
     );
 
-    assert.equal(evenementRecu!.donnees.idUtilisateur, `${jeanneDupont.email}-hacheHMAC`);
-    assert.equal(evenementRecu!.donnees.emailUtilisateur, undefined);
+    expect(evenementRecu!.donnees.idUtilisateur).toBe(`${jeanneDupont.email}-hacheHMAC`);
+    expect(evenementRecu!.donnees.emailUtilisateur).toBeUndefined();
   });
 });

@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { FichierInconnu, FournisseurChemin } from '../../src/api/fournisseurChemin.js';
 import { creeServeur } from '../../src/api/msc.js';
@@ -23,14 +22,14 @@ describe('La ressource page Service', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/services/mon-service-securise');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu html', async () => {
       const reponse = await request(serveur).get('/services/mon-service-securise');
 
-      assert.notEqual(reponse.headers['content-type'], undefined);
-      assert.match(reponse.headers['content-type'], /html/);
+      expect(reponse.headers['content-type']).toBeDefined();
+      expect(reponse.headers['content-type']).toMatch(/html/);
     });
 
     it('sers le fichier html de jekyll', async () => {
@@ -42,15 +41,15 @@ describe('La ressource page Service', () => {
 
       await request(serveur).get('/services/mon-service-securise');
 
-      assert.equal(idDemandé!, 'mon-service-securise');
+      expect(idDemandé!).toBe('mon-service-securise');
     });
   });
 
   it('redirige le service `Mon Espace NIS 2` vers la page NIS2', async () => {
     const reponse = await request(serveur).get('/services/mon-espace-nis2.html');
 
-    assert.equal(reponse.status, HttpStatusCode.MovedPermanently);
-    assert.equal(reponse.headers.location, '/nis2');
+    expect(reponse.status).toBe(HttpStatusCode.MovedPermanently);
+    expect(reponse.headers.location).toBe('/nis2');
   });
 
   for (const id of [
@@ -68,8 +67,8 @@ describe('La ressource page Service', () => {
       for (const suffixe of ['', '/']) {
         const reponse = await request(serveur).get(`/services/${id}.html${suffixe}`);
 
-        assert.equal(reponse.status, HttpStatusCode.MovedPermanently);
-        assert.equal(reponse.headers.location, `/services/${id}`);
+        expect(reponse.status).toBe(HttpStatusCode.MovedPermanently);
+        expect(reponse.headers.location).toBe(`/services/${id}`);
       }
     });
   }
@@ -87,8 +86,8 @@ describe('La ressource page Service', () => {
 
     const réponse = await request(serveur).get('/services/inconnu').accept('text/html');
 
-    assert.equal(réponse.status, HttpStatusCode.NotFound);
-    assert.equal(réponse.headers['content-type'], 'text/html; charset=utf-8');
-    assert.equal(estAppelé, true);
+    expect(réponse.status).toBe(HttpStatusCode.NotFound);
+    expect(réponse.headers['content-type']).toBe('text/html; charset=utf-8');
+    expect(estAppelé).toBe(true);
   });
 });

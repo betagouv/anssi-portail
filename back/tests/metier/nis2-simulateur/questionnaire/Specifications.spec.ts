@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it, beforeEach } from 'vitest';
+import { describe, it, beforeEach, expect } from 'vitest';
 import { ResultatEligibilite } from '../../../../src/metier/nis2-simulateur/Regulation.definitions.js';
 import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications.js';
 import { RegleEntiteOSE } from '../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleEntiteOSE.js';
@@ -26,7 +25,7 @@ describe('Les spécifications', () => {
 
     const resultat = entiteOseOuiEstReguleEE.evalue(entiteOui);
 
-    assert.strictEqual(resultat, resultatDeLaSpec);
+    expect(resultat).toBe(resultatDeLaSpec);
   });
 
   it("retourne `undefined` dès qu'une réponse du questionnaire n'est pas conforme à une règle", () => {
@@ -37,6 +36,6 @@ describe('Les spécifications', () => {
 
     const resultat = entiteOseOuiEstReguleEE.evalue(entiteNon);
 
-    assert.strictEqual(resultat, undefined);
+    expect(resultat).toBeUndefined();
   });
 });

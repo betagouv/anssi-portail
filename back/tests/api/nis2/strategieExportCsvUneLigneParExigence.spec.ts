@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { StrategieExportCsvUneLigneParExigence } from '../../../src/api/nis2/strategieExportCsvUneLigneParExigence.js';
 import {
   Exigence,
@@ -19,7 +18,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
   it('reste robuste lorsqu’il n’y a pas d’exigence', () => {
     const entetes = strategieExport.entetes([]);
 
-    assert.deepEqual(entetes, []);
+    expect(entetes).toEqual([]);
   });
 
   describe('lorsqu’il n’a pas de référentiel comparé', () => {
@@ -35,7 +34,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         }),
       ]);
 
-      assert.deepEqual(entetes, [
+      expect(entetes).toEqual([
         { id: 'reference', title: 'Référence' },
         { id: 'contenu', title: 'Contenu' },
         { id: 'objectif', title: 'Objectif' },
@@ -56,7 +55,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
         }),
       ]);
 
-      assert.deepEqual(lignes, [
+      expect(lignes).toEqual([
         {
           reference: 'ref',
           contenu: 'contenu',
@@ -74,7 +73,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes, [
+      expect(entetes).toEqual([
         { id: 'reference', title: 'Référence' },
         { id: 'contenu', title: 'Contenu' },
         { id: 'objectif', title: 'Objectif' },
@@ -90,7 +89,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes.slice(7), [
+      expect(entetes.slice(7)).toEqual([
         { id: 'reference_iso_1', title: 'Référence ISO (1)' },
         { id: 'contenu_iso_1', title: 'Contenu ISO (1)' },
         { id: 'reference_iso_2', title: 'Référence ISO (2)' },
@@ -120,7 +119,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const lignes = strategieExport.lignes(exigences);
 
-      assert.deepEqual(lignes, [
+      expect(lignes).toEqual([
         {
           reference: '',
           contenu: '',
@@ -157,7 +156,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const lignes = strategieExport.lignes(exigences, 'EN');
 
-      assert.deepEqual(lignes[0].contenu_iso_1, 'in english please');
+      expect(lignes[0].contenu_iso_1).toEqual('in english please');
     });
   });
 
@@ -167,7 +166,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes, [
+      expect(entetes).toEqual([
         { id: 'reference', title: 'Référence' },
         { id: 'contenu', title: 'Contenu' },
         { id: 'objectif', title: 'Objectif' },
@@ -183,7 +182,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes.slice(7), [
+      expect(entetes.slice(7)).toEqual([
         {
           id: 'reference_ae_1',
           title: 'Référence Annexe au Règlement d’exécution 2024/2690 (1)',
@@ -231,7 +230,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const lignes = strategieExport.lignes(exigences);
 
-      assert.deepEqual(lignes, [
+      expect(lignes).toEqual([
         {
           reference: '',
           contenu: '',
@@ -255,7 +254,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes, [
+      expect(entetes).toEqual([
         { id: 'reference', title: 'Référence' },
         { id: 'contenu', title: 'Contenu' },
         { id: 'objectif', title: 'Objectif' },
@@ -271,7 +270,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes.slice(7), [
+      expect(entetes.slice(7)).toEqual([
         {
           id: 'reference_cyfun23_1',
           title: 'Référence CyberFundamentals Framework 2023 (Belgique) (1)',
@@ -314,7 +313,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const lignes = strategieExport.lignes(exigences);
 
-      assert.deepEqual(lignes, [
+      expect(lignes).toEqual([
         {
           reference: '',
           contenu: '',
@@ -338,7 +337,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes, [
+      expect(entetes).toEqual([
         { id: 'reference', title: 'Référence' },
         { id: 'contenu', title: 'Contenu' },
         { id: 'correspondance', title: 'Correspondance' },
@@ -351,7 +350,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes.slice(4), [
+      expect(entetes.slice(4)).toEqual([
         {
           id: 'reference_nis2_1',
           title: 'Référence exigence applicable à NIS 2 (1)',
@@ -398,7 +397,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const lignes = strategieExport.lignes(exigences);
 
-      assert.deepEqual(lignes, [
+      expect(lignes).toEqual([
         {
           reference: '',
           contenu: '',
@@ -419,7 +418,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes, [
+      expect(entetes).toEqual([
         { id: 'reference', title: 'Référence' },
         { id: 'contenu', title: 'Contenu' },
         { id: 'norme', title: 'Norme' },
@@ -434,7 +433,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes.slice(6), [
+      expect(entetes.slice(6)).toEqual([
         {
           id: 'reference_nis2_1',
           title: 'Référence exigence applicable à NIS 2 (1)',
@@ -483,7 +482,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const lignes = strategieExport.lignes(exigences);
 
-      assert.deepEqual(lignes, [
+      expect(lignes).toEqual([
         {
           reference: '',
           contenu: '',
@@ -506,7 +505,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes, [
+      expect(entetes).toEqual([
         { id: 'reference', title: 'Référence' },
         { id: 'contenu', title: 'Contenu' },
         { id: 'fonction', title: 'Fonction' },
@@ -522,7 +521,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const entetes = strategieExport.entetes(exigences);
 
-      assert.deepEqual(entetes.slice(7), [
+      expect(entetes.slice(7)).toEqual([
         {
           id: 'reference_nis2_1',
           title: 'Référence exigence applicable à NIS 2 (1)',
@@ -564,7 +563,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const lignes = strategieExport.lignes(exigences);
 
-      assert.deepEqual(lignes, [
+      expect(lignes).toEqual([
         {
           reference: '',
           contenu: '',
@@ -600,7 +599,7 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const lignes = strategieExport.lignes(exigences);
 
-      assert.equal(lignes[0].est_mesure_cle, 'Non');
+      expect(lignes[0].est_mesure_cle).toBe('Non');
     });
 
     it('retourne les lignes des exigences CyFun23 lorsque les valeurs optionnelles sont absentes', () => {
@@ -622,8 +621,8 @@ describe('La stratégie d’export CSV avec une ligne par exigence', () => {
 
       const lignes = strategieExport.lignes(exigences);
 
-      assert.equal(lignes[0].fonction, '');
-      assert.equal(lignes[0].niveau_assurance, '');
+      expect(lignes[0].fonction).toBe('');
+      expect(lignes[0].niveau_assurance).toBe('');
     });
   });
 });

@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { QuestionnaireVraiFauxRéponseSoumise } from '../../../../src/bus/evenements/questionnaireVraiFauxReponseSoumise.js';
 import { QuestionnaireVraiFauxTerminé } from '../../../../src/bus/evenements/questionnaireVraiFauxTermine.js';
 import { QuestionnaireVraiFaux } from '../../../../src/metier/mini-tests/vrai-faux/questionnaireVraiFaux.js';
@@ -28,7 +27,7 @@ describe('Un questionnaire vrai-faux', () => {
       });
 
       const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxRéponseSoumise);
-      assert.deepEqual(événement, {
+      expect(événement).toEqual({
         idCorrélation: 'idCorrélation',
         idQuestion: 'idQuestion1',
         réponseCorrecte: true,
@@ -48,7 +47,7 @@ describe('Un questionnaire vrai-faux', () => {
       });
 
       const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxRéponseSoumise);
-      assert.deepEqual(événement, {
+      expect(événement).toEqual({
         idCorrélation: 'idCorrélation',
         idQuestion: 'idQuestion1',
         réponseCorrecte: false,
@@ -60,18 +59,15 @@ describe('Un questionnaire vrai-faux', () => {
     });
 
     it('lève une erreur si la question est inconnue', async () => {
-      await assert.rejects(
+      await expect(
         questionnaire.évalueRéponse({
           busÉvénements,
           idCorrélation: 'idCorrélation',
           idQuestion: 'idInconnu',
           réponseUtilisateur: true,
-        }),
-        {
-          message: 'réponse à une question inconnue : idInconnu',
-        }
-      );
-      assert(busÉvénements.naPasRecuDEvenement(QuestionnaireVraiFauxRéponseSoumise));
+        })
+      ).rejects.toMatchObject({ message: 'réponse à une question inconnue : idInconnu' });
+      expect(busÉvénements.naPasRecuDEvenement(QuestionnaireVraiFauxRéponseSoumise)).toBeTruthy();
     });
 
     it('signale la complétion du questionnaire si la réponse cible la dernière question', async () => {
@@ -83,7 +79,7 @@ describe('Un questionnaire vrai-faux', () => {
       });
 
       const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxTerminé);
-      assert.equal(événement?.idCorrélation, 'idCorrélation');
+      expect(événement?.idCorrélation).toBe('idCorrélation');
     });
 
     it('ne signale pas la complétion du questionnaire si la réponse ne cible pas la dernière question', async () => {
@@ -94,7 +90,7 @@ describe('Un questionnaire vrai-faux', () => {
         réponseUtilisateur: true,
       });
 
-      assert(busÉvénements.naPasRecuDEvenement(QuestionnaireVraiFauxTerminé));
+      expect(busÉvénements.naPasRecuDEvenement(QuestionnaireVraiFauxTerminé)).toBeTruthy();
     });
 
     describe("venant d'un utilisateur connu", () => {
@@ -108,10 +104,10 @@ describe('Un questionnaire vrai-faux', () => {
         });
 
         const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxRéponseSoumise);
-        assert.equal(événement?.email, 'jeanne.dupont@user.com');
-        assert.equal(événement?.codeSecteur, 'A');
-        assert.equal(événement?.codeRegion, 'FR-971');
-        assert.equal(événement?.codeTrancheEffectif, '11');
+        expect(événement?.email).toBe('jeanne.dupont@user.com');
+        expect(événement?.codeSecteur).toBe('A');
+        expect(événement?.codeRegion).toBe('FR-971');
+        expect(événement?.codeTrancheEffectif).toBe('11');
       });
 
       it("enrichit l'événement de complétion du questionnaire avec les données utilisateur", async () => {
@@ -124,10 +120,10 @@ describe('Un questionnaire vrai-faux', () => {
         });
 
         const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxTerminé);
-        assert.equal(événement?.email, 'jeanne.dupont@user.com');
-        assert.equal(événement?.codeSecteur, 'A');
-        assert.equal(événement?.codeRegion, 'FR-971');
-        assert.equal(événement?.codeTrancheEffectif, '11');
+        expect(événement?.email).toBe('jeanne.dupont@user.com');
+        expect(événement?.codeSecteur).toBe('A');
+        expect(événement?.codeRegion).toBe('FR-971');
+        expect(événement?.codeTrancheEffectif).toBe('11');
       });
     });
   });

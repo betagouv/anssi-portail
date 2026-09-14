@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
 import { IdNiveauMaturite, ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
 import { jeanneDupont } from '../api/objetsPretsALEmploi.js';
@@ -35,7 +34,7 @@ describe('Le résultat du test de maturité', () => {
 
       const niveau: IdNiveauMaturite = resultatTest.niveau();
 
-      assert.equal(niveau, 'insuffisant');
+      expect(niveau).toBe('insuffisant');
     });
 
     it('retourne emergent si la moyenne des points des réponses est strictement inférieure à 2', () => {
@@ -50,7 +49,7 @@ describe('Le résultat du test de maturité', () => {
 
       const niveau: IdNiveauMaturite = resultatTest.niveau();
 
-      assert.equal(niveau, 'emergent');
+      expect(niveau).toBe('emergent');
     });
 
     it('retourne intermediaire si la moyenne des points des réponses est strictement inférieure à 3', () => {
@@ -65,7 +64,7 @@ describe('Le résultat du test de maturité', () => {
 
       const niveau: IdNiveauMaturite = resultatTest.niveau();
 
-      assert.equal(niveau, 'intermediaire');
+      expect(niveau).toBe('intermediaire');
     });
 
     it('retourne confirme si la moyenne des points des réponses est strictement inférieure à 4', () => {
@@ -80,7 +79,7 @@ describe('Le résultat du test de maturité', () => {
 
       const niveau: IdNiveauMaturite = resultatTest.niveau();
 
-      assert.equal(niveau, 'confirme');
+      expect(niveau).toBe('confirme');
     });
 
     it('retourne confirme si la moyenne des points des réponses est égale à 4', () => {
@@ -95,7 +94,7 @@ describe('Le résultat du test de maturité', () => {
 
       const niveau: IdNiveauMaturite = resultatTest.niveau();
 
-      assert.equal(niveau, 'optimal');
+      expect(niveau).toBe('optimal');
     });
   });
 
@@ -130,9 +129,9 @@ describe('Le résultat du test de maturité', () => {
 
       await monResultat.revendiquePropriete(jeanneDupont, adaptateurRechercheEntreprise);
 
-      assert.equal(monResultat.tailleOrganisation, '31');
-      assert.equal(monResultat.secteur, 'U');
-      assert.equal(monResultat.region, 'FR-ARA');
+      expect(monResultat.tailleOrganisation).toBe('31');
+      expect(monResultat.secteur).toBe('U');
+      expect(monResultat.region).toBe('FR-ARA');
     });
 
     it('on ne recopie pas les informations de la recherche entreprise déjà présentes dans le test', async () => {
@@ -145,9 +144,9 @@ describe('Le résultat du test de maturité', () => {
 
       await monResultat.revendiquePropriete(jeanneDupont, adaptateurRechercheEntreprise);
 
-      assert.equal(monResultat.tailleOrganisation, '11');
-      assert.equal(monResultat.secteur, 'A');
-      assert.equal(monResultat.region, 'FR-20R');
+      expect(monResultat.tailleOrganisation).toBe('11');
+      expect(monResultat.secteur).toBe('A');
+      expect(monResultat.region).toBe('FR-20R');
     });
   });
 });

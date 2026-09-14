@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { consigneParcoursChangéDansJournal } from '../../src/bus/consigneParcoursChangeDansJournal.js';
 import { ParcoursChangé } from '../../src/bus/evenements/parcoursChange.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
@@ -34,7 +33,7 @@ describe("L'abonnement qui consigne l'évènement de changement de parcours dans
       adaptateurHachage,
     })(new ParcoursChangé('test@email', 'allégé', 'complet', 'prise-en-compte-mesure', suivi));
 
-    assert.deepEqual(evenementRecu, {
+    expect(evenementRecu).toEqual({
       type: 'PARCOURS_CHANGÉ',
       donnees: {
         idUtilisateur: 'test@email-hacheHMAC',

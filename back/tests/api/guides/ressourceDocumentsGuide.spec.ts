@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { AdaptateurCellar, CleDuBucket, DocumentCellar } from '../../../src/infra/adaptateurCellar.js';
@@ -63,7 +62,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
         .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
-      assert.equal(reponse.status, HttpStatusCode.Created);
+      expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
     it('ajoute un document dans Cellar', async () => {
@@ -84,10 +83,10 @@ describe('La ressource de gestion des documents des guides', () => {
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
         .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
-      assert.equal(fichierDepose.contenu.length, 8);
-      assert.equal(fichierDepose.nom, 'document.pdf');
-      assert.equal(fichierDepose.typeDeContenu, 'application/pdf');
-      assert.equal(cleDuBucketFournie, 'GESTION_GUIDES');
+      expect(fichierDepose.contenu).toHaveLength(8);
+      expect(fichierDepose.nom).toBe('document.pdf');
+      expect(fichierDepose.typeDeContenu).toBe('application/pdf');
+      expect(cleDuBucketFournie).toBe('GESTION_GUIDES');
     });
 
     it('ajoute le document dans Grist', async () => {
@@ -98,9 +97,9 @@ describe('La ressource de gestion des documents des guides', () => {
         .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
       const monGuide = await entrepotGuideTravail.parId('zero-trust');
-      assert.equal(monGuide?.listeDocuments.length, 2);
-      assert.equal(monGuide?.listeDocuments[1].libelle, 'Cliquez pour télécharger le document');
-      assert.equal(monGuide?.listeDocuments[1].nomFichier, 'document.pdf');
+      expect(monGuide?.listeDocuments).toHaveLength(2);
+      expect(monGuide?.listeDocuments[1].libelle).toBe('Cliquez pour télécharger le document');
+      expect(monGuide?.listeDocuments[1].nomFichier).toBe('document.pdf');
     });
 
     it('génère les illustrations et les dépose', async () => {
@@ -121,13 +120,13 @@ describe('La ressource de gestion des documents des guides', () => {
         .field('genereVisuel', true)
         .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
-      assert.equal(fichiersDeposes.length, 3);
-      assert.equal(fichiersDeposes[0].nom, 'document.pdf');
-      assert.equal(fichiersDeposes[1].nom, 'zero-trust/origine.avif');
-      assert.equal(fichiersDeposes[2].nom, 'zero-trust/588.avif');
-      assert.equal(fichiersFournis.length, 2);
-      assert.equal(fichiersFournis[0].length, 8);
-      assert.equal(fichiersFournis[1].length, 8);
+      expect(fichiersDeposes).toHaveLength(3);
+      expect(fichiersDeposes[0].nom).toBe('document.pdf');
+      expect(fichiersDeposes[1].nom).toBe('zero-trust/origine.avif');
+      expect(fichiersDeposes[2].nom).toBe('zero-trust/588.avif');
+      expect(fichiersFournis).toHaveLength(2);
+      expect(fichiersFournis[0]).toHaveLength(8);
+      expect(fichiersFournis[1]).toHaveLength(8);
     });
 
     it('répond 400 si un fichier de même nom existe déjà pour ce guide', async () => {
@@ -146,13 +145,13 @@ describe('La ressource de gestion des documents des guides', () => {
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
         .attach('document-guide', Buffer.from('un-texte'), 'anssi_essentiels_devsecops_v1.0.pdf');
 
-      assert.equal(reponse.status, HttpStatusCode.BadRequest);
+      expect(reponse.status).toBe(HttpStatusCode.BadRequest);
     });
 
     it('répond 401 si l’utilisateur n’est pas authentifié', async () => {
       const reponse = await request(serveur).post('/api/guides/zero-trust/documents');
 
-      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+      expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
     });
 
     it("répond 403 si l’utilisateur n'a pas le droit de gérer les guides", async () => {
@@ -167,7 +166,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
         .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
-      assert.equal(reponse.status, HttpStatusCode.Forbidden);
+      expect(reponse.status).toBe(HttpStatusCode.Forbidden);
     });
 
     it("répond 403 si l’utilisateur n'a pas activé le MFA", async () => {
@@ -182,7 +181,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .field('libelleDuLien', 'Cliquez pour télécharger le document')
         .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
-      assert.equal(reponse.status, HttpStatusCode.Forbidden);
+      expect(reponse.status).toBe(HttpStatusCode.Forbidden);
     });
 
     describe('avec un corps de requête', () => {
@@ -192,7 +191,7 @@ describe('La ressource de gestion des documents des guides', () => {
           .set('Cookie', [cookieJeanneDupont])
           .field('libelleDuLien', 'Cliquez pour télécharger le document');
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
 
       it('rejette les requêtes sans libelle de lien', async () => {
@@ -201,7 +200,7 @@ describe('La ressource de gestion des documents des guides', () => {
           .set('Cookie', [cookieJeanneDupont])
           .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
 
       it('rejette les requêtes demandant de générer un visuel sans fournir de PDF', async () => {
@@ -212,7 +211,7 @@ describe('La ressource de gestion des documents des guides', () => {
           .field('genereVisuel', true)
           .attach('document-guide', Buffer.from('un-texte'), 'document.txt');
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
 
       it('rejette un nom de fichier dépassant 256 caractères', async () => {
@@ -222,7 +221,7 @@ describe('La ressource de gestion des documents des guides', () => {
           .field('libelleDuLien', 'Cliquez pour télécharger le document')
           .attach('document-guide', Buffer.from('un-texte'), 'a'.repeat(257));
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
     });
 
@@ -234,8 +233,8 @@ describe('La ressource de gestion des documents des guides', () => {
           .field('libelleDuLien', 'Cliquez pour télécharger le document')
           .attach('document-guide', Buffer.from('un-texte'), 'document.pdf');
 
-        assert.equal(reponse.status, HttpStatusCode.NotFound);
-        assert.equal(reponse.body.erreur, 'Le guide "guide-inexistant" est introuvable');
+        expect(reponse.status).toBe(HttpStatusCode.NotFound);
+        expect(reponse.body.erreur).toBe('Le guide "guide-inexistant" est introuvable');
       });
     });
   });
@@ -246,13 +245,13 @@ describe('La ressource de gestion des documents des guides', () => {
         .get('/api/guides/zero-trust/documents')
         .set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('répond 401 si l’utilisateur n’est pas authentifié', async () => {
       const reponse = await request(serveur).get('/api/guides/zero-trust/documents');
 
-      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+      expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
     });
 
     it("répond 403 si l’utilisateur n'a pas l'autorisation de gérer les guides", async () => {
@@ -265,7 +264,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .get('/api/guides/zero-trust/documents')
         .set('Cookie', [cookieHectorDurant]);
 
-      assert.equal(reponse.status, HttpStatusCode.Forbidden);
+      expect(reponse.status).toBe(HttpStatusCode.Forbidden);
     });
 
     it("répond 404 si le guide n'existe pas", async () => {
@@ -273,7 +272,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .get('/api/guides/guide-inexistant/documents')
         .set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     it('renvoie la liste des documents du guide', async () => {
@@ -288,8 +287,8 @@ describe('La ressource de gestion des documents des guides', () => {
 
       const reponse = await request(serveur).get('/api/guides/devsecops/documents').set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(reponse.body.length, 1);
-      assert.deepEqual(reponse.body[0], {
+      expect(reponse.body).toHaveLength(1);
+      expect(reponse.body[0]).toEqual({
         libelle: 'Les Essentiels de l&#039;ANSSI - DevSecOps - v1.0',
         nomFichier: 'anssi_essentiels_devsecops_v1.0.pdf',
         chemin: 'https://notre-cellar/gestion-guides/anssi_essentiels_devsecops_v1.0.pdf',
@@ -310,13 +309,13 @@ describe('La ressource de gestion des documents des guides', () => {
         .delete('/api/guides/zero-trust/documents/mon-fichier.pdf')
         .set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(reponse.status, HttpStatusCode.NoContent);
+      expect(reponse.status).toBe(HttpStatusCode.NoContent);
     });
 
     it('répond 401 si l’utilisateur n’est pas authentifié', async () => {
       const reponse = await request(serveur).delete('/api/guides/zero-trust/documents/mon-fichier.pdf');
 
-      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+      expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
     });
 
     it("répond 403 si l’utilisateur n'a pas l'autorisation de gérer les guides", async () => {
@@ -329,7 +328,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .delete('/api/guides/zero-trust/documents/mon-fichier.pdf')
         .set('Cookie', [cookieHectorDurant]);
 
-      assert.equal(reponse.status, HttpStatusCode.Forbidden);
+      expect(reponse.status).toBe(HttpStatusCode.Forbidden);
     });
 
     it("répond 404 si le guide n'existe pas", async () => {
@@ -337,7 +336,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .delete('/api/guides/guide-inexistant/documents/mon-fichier.pdf')
         .set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     it("répond 404 si le document n'existe pas", async () => {
@@ -345,7 +344,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .delete('/api/guides/zero-trust/documents/fichier-inexistant.pdf')
         .set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     it('supprime le document spécifié de la liste des documents du guide dans Grist', async () => {
@@ -363,7 +362,7 @@ describe('La ressource de gestion des documents des guides', () => {
         .set('Cookie', [cookieJeanneDupont]);
 
       const guideMisAJour = await entrepotGuideTravail.parId('devsecops');
-      assert.equal(guideMisAJour?.listeDocuments.length, 0);
+      expect(guideMisAJour?.listeDocuments).toHaveLength(0);
     });
 
     it('supprime le document spécifié dans le cellar', async () => {
@@ -386,8 +385,8 @@ describe('La ressource de gestion des documents des guides', () => {
         .delete('/api/guides/devsecops/documents/anssi_essentiels_devsecops_v1.0.pdf')
         .set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(cleDuBucketFournie, 'GESTION_GUIDES');
-      assert.equal(nomDuFichierSupprime, 'anssi_essentiels_devsecops_v1.0.pdf');
+      expect(cleDuBucketFournie).toBe('GESTION_GUIDES');
+      expect(nomDuFichierSupprime).toBe('anssi_essentiels_devsecops_v1.0.pdf');
     });
   });
 });

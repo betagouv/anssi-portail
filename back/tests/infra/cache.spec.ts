@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { Cache } from '../../src/infra/cache.js';
 // import { add } from 'date-fns';
 import { FournisseurHorloge } from '../../src/infra/fournisseurHorloge.js';
@@ -25,7 +24,7 @@ describe('Le système de mise en cache', () => {
       ressourceAppelee = true;
     });
 
-    assert.equal(ressourceAppelee, true);
+    expect(ressourceAppelee).toBe(true);
   });
 
   it('n’exécute pas la fonction passée lorsqu’il y a du cache', async () => {
@@ -37,7 +36,7 @@ describe('Le système de mise en cache', () => {
       ressourceAppelee = true;
     });
 
-    assert.equal(ressourceAppelee, false);
+    expect(ressourceAppelee).toBe(false);
   });
 
   it('retourne le résultat de la fonction exécutée', async () => {
@@ -48,7 +47,7 @@ describe('Le système de mise en cache', () => {
 
     const resultat = await cache.get('une-clef', laFonction);
 
-    assert.equal(resultat, 'une valeur');
+    expect(resultat).toBe('une valeur');
   });
 
   it('retourne la valeur mise en cache', async () => {
@@ -61,7 +60,7 @@ describe('Le système de mise en cache', () => {
     await cache.get('une-clef', laFonction);
     const resultat = await cache.get('une-clef', laFonction);
 
-    assert.equal(resultat, 'une valeur_0');
+    expect(resultat).toBe('une valeur_0');
   });
 
   it('effectue une mise en cache limitée dans le temps', async () => {
@@ -76,7 +75,7 @@ describe('Le système de mise en cache', () => {
     ilSePasse25Heures();
     const resultat = await cache.get('une-clef', laFonction);
 
-    assert.equal(resultat, 'une valeur_1');
+    expect(resultat).toBe('une valeur_1');
   });
 
   it('la nouvelle valeur après expiration est mise en cache', async () => {
@@ -92,7 +91,7 @@ describe('Le système de mise en cache', () => {
     await cache.get('une-clef', laFonction);
     const resultat = await cache.get('une-clef', laFonction);
 
-    assert.equal(resultat, 'une valeur_1');
+    expect(resultat).toBe('une valeur_1');
   });
 
   describe('en cas d’erreur d’exécution de la fonction', () => {
@@ -110,18 +109,16 @@ describe('Le système de mise en cache', () => {
         throw new Error('Erreur mais c’est mis en cache');
       });
 
-      assert.equal(resultat, 'une valeur_0');
+      expect(resultat).toBe('une valeur_0');
     });
 
-    it('remonte l’erreur lors du premier appel', () => {
+    it('remonte l’erreur lors du premier appel', async () => {
       const cache = new Cache<string>({ ttl: 1440 });
       const laFonction = async () => {
         throw new Error('Une erreur est survenue');
       };
 
-      assert.rejects(cache.get('une-clef', laFonction), {
-        message: 'Une erreur est survenue',
-      });
+      await expect(cache.get('une-clef', laFonction)).rejects.toMatchObject({ message: 'Une erreur est survenue' });
     });
   });
 });

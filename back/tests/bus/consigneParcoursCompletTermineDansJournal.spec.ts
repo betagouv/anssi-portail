@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { ParcoursCompletTerminé } from '../../src/bus/evenements/parcoursCompletTermine.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
@@ -30,7 +29,7 @@ describe("L'abonnement qui consigne l'événement de complétion du parcours com
       adaptateurHachage,
     })(new ParcoursCompletTerminé('test@email'));
 
-    assert.deepEqual(evenementRecu, {
+    expect(evenementRecu).toEqual({
       type: 'PARCOURS_COMPLET_TERMINÉ',
       donnees: { idUtilisateur: 'test@email-hacheHMAC' },
       date: new Date('2025-03-10'),

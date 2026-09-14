@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
-import assert from 'node:assert';
 import { Express } from 'express';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from '../fauxObjets.js';
 import { creeServeur } from '../../../src/api/msc.js';
@@ -53,19 +52,19 @@ describe('La ressource qui gère le simulateur NIS2', () => {
     it('répond 201', async () => {
       const reponse = await request(serveur).post('/api/simulateur-nis2').send(reponseComplete());
 
-      assert.equal(reponse.status, HttpStatusCode.Created);
+      expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
     it("publie sur le bus le résultat du test d'éligibilité", async () => {
       await request(serveur).post('/api/simulateur-nis2').send(reponseComplete());
 
-      assert.equal(busEvenements.aRecuUnEvenement(SimulationNis2Terminee), true);
+      expect(busEvenements.aRecuUnEvenement(SimulationNis2Terminee)).toBe(true);
     });
 
     it("retourne 400 si le corps de la requête n'est pas un questionnaire correctement rempli", async () => {
       const { status } = await request(serveur).post('/api/simulateur-nis2').send({ question1: 'pas-un-booleen' });
 
-      assert.equal(status, HttpStatusCode.BadRequest);
+      expect(status).toBe(HttpStatusCode.BadRequest);
     });
   });
 });

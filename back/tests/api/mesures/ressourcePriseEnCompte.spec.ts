@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { MesurePriseEnCompte } from '../../../src/bus/evenements/mesurePriseEnCompte.js';
@@ -54,7 +53,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
       it('réponds 401', async () => {
         const reponse = await request(serveur).put('/api/mesures/AUTH.5/prise-en-compte');
 
-        assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+        expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
       });
     });
 
@@ -76,28 +75,28 @@ describe("La ressource de prise en compte d'une mesure", () => {
       it('réponds 201', async () => {
         const reponse = await putPriseEnCompteConnecte();
 
-        assert.equal(reponse.status, HttpStatusCode.Created);
+        expect(reponse.status).toBe(HttpStatusCode.Created);
       });
 
       it('renvoie le nouvel état du module', async () => {
         const { body } = await putPriseEnCompteConnecte();
 
-        assert.equal(body.badgeCyberdépartDebloqué, false);
-        assert.equal(body.moduleTerminé, true);
-        assert.equal(body.parcoursCompletTerminé, true);
+        expect(body.badgeCyberdépartDebloqué).toBe(false);
+        expect(body.moduleTerminé).toBe(true);
+        expect(body.parcoursCompletTerminé).toBe(true);
       });
 
       it('ajoute une prise en compte', async () => {
         await putPriseEnCompteConnecte();
 
         const priseEnComptePersistee = await entrepotPriseEnCompte.pour(utilisateurParcours, mesure);
-        assert.notEqual(priseEnComptePersistee, undefined);
+        expect(priseEnComptePersistee).toBeDefined();
       });
 
       it("réponds 404 si la mesure n'existe pas", async () => {
         const reponse = await request(serveur).put('/api/mesures/mesureinconnue/prise-en-compte').set('Cookie', cookie);
 
-        assert.equal(reponse.status, HttpStatusCode.NotFound);
+        expect(reponse.status).toBe(HttpStatusCode.NotFound);
       });
 
       it('publie un événement de prise en compte', async () => {
@@ -111,11 +110,11 @@ describe("La ressource de prise en compte d'une mesure", () => {
 
         busEvenements.aRecuUnEvenement(MesurePriseEnCompte);
         const evenement = busEvenements.recupereEvenement(MesurePriseEnCompte);
-        assert.equal(evenement!.idMesure, 'AUTH.5');
-        assert.equal(evenement!.email, 'utilisateur@mail.com');
-        assert.equal(evenement!.nombreDeMesures, 3);
-        assert.equal(evenement!.position, 2);
-        assert.equal(evenement?.parcours, 'allégé');
+        expect(evenement!.idMesure).toBe('AUTH.5');
+        expect(evenement!.email).toBe('utilisateur@mail.com');
+        expect(evenement!.nombreDeMesures).toBe(3);
+        expect(evenement!.position).toBe(2);
+        expect(evenement?.parcours).toBe('allégé');
       });
 
       it('ne compte pas les mesures des autres modules dans l’événement', async () => {
@@ -127,7 +126,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
         await putPriseEnCompteConnecte();
 
         const evenement = busEvenements.recupereEvenement(MesurePriseEnCompte);
-        assert.equal(evenement!.nombreDeMesures, 1);
+        expect(evenement!.nombreDeMesures).toBe(1);
       });
 
       it("mets à jour le parcours de l'utilisateur", async () => {
@@ -137,7 +136,7 @@ describe("La ressource de prise en compte d'une mesure", () => {
         };
         await request(serveur).put('/api/mesures/AUTH.5/prise-en-compte').set('Cookie', cookie);
 
-        assert.equal(nouveauParcours, 'complet');
+        expect(nouveauParcours).toBe('complet');
       });
     });
   });

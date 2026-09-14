@@ -1,8 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
 import { Readable } from 'node:stream';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { ConfigurationServeur } from '../../src/api/configurationServeur.js';
 import { creeServeur } from '../../src/api/msc.js';
@@ -36,14 +35,14 @@ describe('La ressource des documents de ressource', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/documents-ressources/fichier_ressource.pdf');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu PDF', async () => {
       const reponse = await request(serveur).get('/documents-ressources/fichier_ressource.pdf');
 
-      assert.equal(reponse.headers['content-type'], 'application/pdf');
-      assert.equal(reponse.headers['content-length'], 10);
+      expect(reponse.headers['content-type']).toBe('application/pdf');
+      expect(reponse.headers['content-length']).toBe('10');
     });
 
     it('sers le fichier PDF correspondant', async () => {
@@ -56,9 +55,9 @@ describe('La ressource des documents de ressource', () => {
       };
       const reponse = await request(serveur).get('/documents-ressources/fichier_ressource.pdf');
 
-      assert.equal(nomDuFichierDemande, 'fichier_ressource.pdf');
-      assert.equal(cleDuBucketDemandee, 'RESSOURCES_CYBER');
-      assert.equal(reponse.body, '0123456789');
+      expect(nomDuFichierDemande).toBe('fichier_ressource.pdf');
+      expect(cleDuBucketDemandee).toBe('RESSOURCES_CYBER');
+      expect(reponse.body).toEqual(Buffer.from('0123456789'));
     });
 
     it('indique le type de contenu', async () => {
@@ -68,20 +67,18 @@ describe('La ressource des documents de ressource', () => {
       });
       const reponse = await request(serveur).get('/documents-ressources/fichier_ressource.xml');
 
-      assert.equal(reponse.headers['content-type'], 'application/xml');
+      expect(reponse.headers['content-type']).toBe('application/xml');
     });
 
     it('rend les contenus servi cachable', async () => {
       const reponse = await request(serveur).get('/documents-ressources/fichier_ressource.pdf');
 
-      assert.equal(
-        reponse.headers['cache-control'],
+      expect(reponse.headers['cache-control']).toBe(
         'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate'
       );
-      assert.equal(reponse.headers['pragma'], '');
-      assert.equal(reponse.headers['expires'], '3600');
-      assert.equal(
-        reponse.headers['surrogate-control'],
+      expect(reponse.headers['pragma']).toBe('');
+      expect(reponse.headers['expires']).toBe('3600');
+      expect(reponse.headers['surrogate-control']).toBe(
         'public, max-age=3600, s-maxage=3600, must-revalidate, proxy-revalidate'
       );
     });
@@ -91,7 +88,7 @@ describe('La ressource des documents de ressource', () => {
 
       const reponse = await request(serveur).get('/documents-ressources/fichier-qui-n-existe-pas.pdf');
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
   });
 });

@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it, beforeEach } from 'vitest';
+import { describe, it, beforeEach, expect } from 'vitest';
 import { FabriqueDeSpecifications } from '../../../../src/metier/nis2-simulateur/questionnaire/FabriqueDeSpecifications.js';
 import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
 import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications.js';
@@ -42,7 +41,7 @@ describe('La fabrique de spécifications', () => {
 
     const specs = fabrique.transforme(avecUnCode);
 
-    assert.strictEqual(specs.code, 'R1255');
+    expect(specs.code).toBe('R1255');
   });
 
   describe("pour la règle « d'entité OSE »", () => {
@@ -62,28 +61,28 @@ describe('La fabrique de spécifications', () => {
     it('sait instancier une règle « Oui »', () => {
       const specs = fabrique.transforme(uneSpecification({ 'Designation OSE': 'Oui', Resultat: 'Régulée EE' }));
 
-      assert.strictEqual(specs.nombreDeRegles(), 1);
-      assert.partialDeepStrictEqual(specs.evalue(entiteOui), reguleEE());
-      assert.strictEqual(specs.evalue(entiteNon), undefined);
-      assert.strictEqual(specs.evalue(entiteNeSaitPas), undefined);
+      expect(specs.nombreDeRegles()).toBe(1);
+      expect(specs.evalue(entiteOui)).toMatchObject(reguleEE());
+      expect(specs.evalue(entiteNon)).toBeUndefined();
+      expect(specs.evalue(entiteNeSaitPas)).toBeUndefined();
     });
 
     it('sait instancier une règle « Non »', () => {
       const specs = fabrique.transforme(uneSpecification({ 'Designation OSE': 'Non', Resultat: 'Régulée EE' }));
 
-      assert.strictEqual(specs.nombreDeRegles(), 1);
-      assert.strictEqual(specs.evalue(entiteOui), undefined);
-      assert.partialDeepStrictEqual(specs.evalue(entiteNon), reguleEE());
-      assert.strictEqual(specs.evalue(entiteNeSaitPas), undefined);
+      expect(specs.nombreDeRegles()).toBe(1);
+      expect(specs.evalue(entiteOui)).toBeUndefined();
+      expect(specs.evalue(entiteNon)).toMatchObject(reguleEE());
+      expect(specs.evalue(entiteNeSaitPas)).toBeUndefined();
     });
 
     it('sait instancier une règle « Ne sait pas »', () => {
       const specs = fabrique.transforme(uneSpecification({ 'Designation OSE': 'Ne sait pas', Resultat: 'Régulée EE' }));
 
-      assert.strictEqual(specs.nombreDeRegles(), 1);
-      assert.strictEqual(specs.evalue(entiteOui), undefined);
-      assert.strictEqual(specs.evalue(entiteNon), undefined);
-      assert.partialDeepStrictEqual(specs.evalue(entiteNeSaitPas), reguleEE());
+      expect(specs.nombreDeRegles()).toBe(1);
+      expect(specs.evalue(entiteOui)).toBeUndefined();
+      expect(specs.evalue(entiteNon)).toBeUndefined();
+      expect(specs.evalue(entiteNeSaitPas)).toMatchObject(reguleEE());
     });
 
     it('sait instancier une règle « Non [OU] Ne sait pas »', () => {
@@ -94,22 +93,22 @@ describe('La fabrique de spécifications', () => {
         })
       );
 
-      assert.strictEqual(specs.nombreDeRegles(), 1);
-      assert.strictEqual(specs.evalue(entiteOui), undefined);
-      assert.partialDeepStrictEqual(specs.evalue(entiteNon), reguleEE());
-      assert.partialDeepStrictEqual(specs.evalue(entiteNeSaitPas), reguleEE());
+      expect(specs.nombreDeRegles()).toBe(1);
+      expect(specs.evalue(entiteOui)).toBeUndefined();
+      expect(specs.evalue(entiteNon)).toMatchObject(reguleEE());
+      expect(specs.evalue(entiteNeSaitPas)).toMatchObject(reguleEE());
     });
 
     it("lève une exception si la valeur reçue n'est pas gérée", () => {
-      assert.throws(() => fabrique.transforme(uneSpecification({ 'Designation OSE': 'Mauvaise valeur' })), {
-        message: /Mauvaise valeur/,
-      });
+      expect(() => fabrique.transforme(uneSpecification({ 'Designation OSE': 'Mauvaise valeur' }))).toThrow(
+        /Mauvaise valeur/
+      );
     });
 
     it("n'instancie pas de règle si aucune valeur n'est passée", () => {
       const specifications = fabrique.transforme(uneSpecification({ 'Designation OSE': '', Resultat: 'Régulée EE' }));
 
-      assert.strictEqual(specifications.nombreDeRegles(), 0);
+      expect(specifications.nombreDeRegles()).toBe(0);
     });
   });
 
@@ -126,19 +125,19 @@ describe('La fabrique de spécifications', () => {
     it('sait instancier une règle « France »', () => {
       const specs = fabrique.transforme(uneSpecification({ Localisation: 'France', Resultat: 'Régulée EE' }));
 
-      assert.strictEqual(specs.nombreDeRegles(), 1);
-      assert.partialDeepStrictEqual(specs.evalue(entiteFrance), reguleEE());
-      assert.strictEqual(specs.evalue(entiteAutre), undefined);
+      expect(specs.nombreDeRegles()).toBe(1);
+      expect(specs.evalue(entiteFrance)).toMatchObject(reguleEE());
+      expect(specs.evalue(entiteAutre)).toBeUndefined();
     });
 
     it("lève une exception si la valeur reçue n'est pas gérée", () => {
-      assert.throws(() => fabrique.transforme(uneSpecification({ Localisation: '12345' })), /12345/);
+      expect(() => fabrique.transforme(uneSpecification({ Localisation: '12345' }))).toThrow(/12345/);
     });
 
     it("n'instancie pas de règle si aucune valeur n'est passée", () => {
       const specifications = fabrique.transforme(uneSpecification({ Localisation: '-', Resultat: 'Régulée EE' }));
 
-      assert.strictEqual(specifications.nombreDeRegles(), 0);
+      expect(specifications.nombreDeRegles()).toBe(0);
     });
   });
 
@@ -154,9 +153,9 @@ describe('La fabrique de spécifications', () => {
         })
       );
 
-      assert.strictEqual(specs.nombreDeRegles(), 1);
-      assert.partialDeepStrictEqual(specs.evalue(privee), reguleEE());
-      assert.strictEqual(specs.evalue(publique), undefined);
+      expect(specs.nombreDeRegles()).toBe(1);
+      expect(specs.evalue(privee)).toMatchObject(reguleEE());
+      expect(specs.evalue(publique)).toBeUndefined();
     });
 
     it("n'instancie pas de règle si aucune valeur n'est passée", () => {
@@ -167,13 +166,13 @@ describe('La fabrique de spécifications', () => {
         })
       );
 
-      assert.strictEqual(specs.nombreDeRegles(), 0);
+      expect(specs.nombreDeRegles()).toBe(0);
     });
 
     it("lève une exception si la valeur reçue n'est pas gérée", () => {
-      assert.throws(() => {
+      expect(() => {
         fabrique.transforme(uneSpecification({ 'Type de structure': 'X', Resultat: 'Régulée EE' }));
-      }, /X/);
+      }).toThrow(/X/);
     });
   });
 
@@ -191,40 +190,40 @@ describe('La fabrique de spécifications', () => {
     it('sait instancier une règle « Petite »', () => {
       const specs = fabrique.transforme(uneSpecification({ Taille: 'Petite', Resultat: 'Régulée EE' }));
 
-      assert.strictEqual(specs.nombreDeRegles(), 1);
-      assert.partialDeepStrictEqual(specs.evalue(petiteEntite), reguleEE());
-      assert.strictEqual(specs.evalue(entiteMoyenne), undefined);
-      assert.strictEqual(specs.evalue(grandeEntite), undefined);
+      expect(specs.nombreDeRegles()).toBe(1);
+      expect(specs.evalue(petiteEntite)).toMatchObject(reguleEE());
+      expect(specs.evalue(entiteMoyenne)).toBeUndefined();
+      expect(specs.evalue(grandeEntite)).toBeUndefined();
     });
 
     it('sait instancier une règle « Moyenne »', () => {
       const specs = fabrique.transforme(uneSpecification({ Taille: 'Moyenne', Resultat: 'Régulée EE' }));
 
-      assert.strictEqual(specs.nombreDeRegles(), 1);
-      assert.strictEqual(specs.evalue(petiteEntite), undefined);
-      assert.partialDeepStrictEqual(specs.evalue(entiteMoyenne), reguleEE());
-      assert.strictEqual(specs.evalue(grandeEntite), undefined);
+      expect(specs.nombreDeRegles()).toBe(1);
+      expect(specs.evalue(petiteEntite)).toBeUndefined();
+      expect(specs.evalue(entiteMoyenne)).toMatchObject(reguleEE());
+      expect(specs.evalue(grandeEntite)).toBeUndefined();
     });
 
     it('sait instancier une règle « Grande »', () => {
       const specs = fabrique.transforme(uneSpecification({ Taille: 'Grande', Resultat: 'Régulée EE' }));
 
-      assert.strictEqual(specs.nombreDeRegles(), 1);
-      assert.strictEqual(specs.evalue(petiteEntite), undefined);
-      assert.strictEqual(specs.evalue(entiteMoyenne), undefined);
-      assert.partialDeepStrictEqual(specs.evalue(grandeEntite), reguleEE());
+      expect(specs.nombreDeRegles()).toBe(1);
+      expect(specs.evalue(petiteEntite)).toBeUndefined();
+      expect(specs.evalue(entiteMoyenne)).toBeUndefined();
+      expect(specs.evalue(grandeEntite)).toMatchObject(reguleEE());
     });
 
     it("n'instancie pas de règle si aucune valeur n'est passée", () => {
       const specs: Specifications = fabrique.transforme(uneSpecification({ Taille: '-', Resultat: 'Régulée EE' }));
 
-      assert.strictEqual(specs.nombreDeRegles(), 0);
+      expect(specs.nombreDeRegles()).toBe(0);
     });
 
     it("lève une exception si la valeur reçue n'est pas gérée", () => {
-      assert.throws(() => {
+      expect(() => {
         fabrique.transforme(uneSpecification({ Taille: 'XXL', Resultat: 'Régulée EE' }));
-      }, /XXL/);
+      }).toThrow(/XXL/);
     });
   });
 
@@ -245,8 +244,8 @@ describe('La fabrique de spécifications', () => {
         const entite = entiteDuSecteur(id as SecteurActivite);
         const specs = fabrique.transforme(uneSpecification({ Secteurs: libelle, Resultat: 'Régulée EE' }));
 
-        assert.strictEqual(specs.nombreDeRegles(), 1);
-        assert.partialDeepStrictEqual(specs.evalue(entite), reguleEE());
+        expect(specs.nombreDeRegles()).toBe(1);
+        expect(specs.evalue(entite)).toMatchObject(reguleEE());
       });
     }
 
@@ -256,7 +255,7 @@ describe('La fabrique de spécifications', () => {
 
       const resultat = specsEnergie.evalue(banque);
 
-      assert.strictEqual(resultat, undefined);
+      expect(resultat).toBeUndefined();
     });
 
     it("matche dès qu'un secteur est parmi ceux de la règle", () => {
@@ -265,19 +264,19 @@ describe('La fabrique de spécifications', () => {
 
       const resultat = specsEnergie.evalue(banqueEtEnergie);
 
-      assert.partialDeepStrictEqual(resultat, reguleEE());
+      expect(resultat).toMatchObject(reguleEE());
     });
 
     it("n'instancie pas de règle si aucune valeur n'est passée", () => {
       const specs: Specifications = fabrique.transforme(uneSpecification({ Secteurs: '-', Resultat: 'Régulée EE' }));
 
-      assert.strictEqual(specs.nombreDeRegles(), 0);
+      expect(specs.nombreDeRegles()).toBe(0);
     });
 
     it("lève une exception si la valeur reçue n'est pas gérée", () => {
-      assert.throws(() => {
+      expect(() => {
         fabrique.transforme(uneSpecification({ Secteurs: 'Tennis', Resultat: 'Régulée EE' }));
-      }, /Tennis/);
+      }).toThrow(/Tennis/);
     });
   });
 
@@ -305,8 +304,8 @@ describe('La fabrique de spécifications', () => {
           })
         );
 
-        assert.strictEqual(specs.nombreDeRegles(), 1);
-        assert.partialDeepStrictEqual(specs.evalue(entite), reguleEE());
+        expect(specs.nombreDeRegles()).toBe(1);
+        expect(specs.evalue(entite)).toMatchObject(reguleEE());
       });
     }
 
@@ -321,7 +320,7 @@ describe('La fabrique de spécifications', () => {
 
       const resultat = transportAerien.evalue(gaz);
 
-      assert.strictEqual(resultat, undefined);
+      expect(resultat).toBeUndefined();
     });
 
     it("matche dès qu'un secteur est parmi ceux de la règle", () => {
@@ -335,7 +334,7 @@ describe('La fabrique de spécifications', () => {
 
       const resultat = specsFeroviaires.evalue(aeriensEtFerroviaires);
 
-      assert.partialDeepStrictEqual(resultat, reguleEE());
+      expect(resultat).toMatchObject(reguleEE());
     });
 
     describe("quand il s'agit de la valeur « Autre sous-secteur »", () => {
@@ -353,8 +352,8 @@ describe('La fabrique de spécifications', () => {
           })
         );
 
-        assert.strictEqual(specsAutreEnergie.nombreDeRegles(), 2);
-        assert.partialDeepStrictEqual(specsAutreEnergie.evalue(autreDeEnergie), reguleEE());
+        expect(specsAutreEnergie.nombreDeRegles()).toBe(2);
+        expect(specsAutreEnergie.evalue(autreDeEnergie)).toMatchObject(reguleEE());
       });
 
       it('sait instancier une règle pour le « Autre » du secteur Fabrication', () => {
@@ -371,8 +370,8 @@ describe('La fabrique de spécifications', () => {
           })
         );
 
-        assert.strictEqual(specsAutreFabrication.nombreDeRegles(), 2);
-        assert.partialDeepStrictEqual(specsAutreFabrication.evalue(autreDeFabrication), reguleEE());
+        expect(specsAutreFabrication.nombreDeRegles()).toBe(2);
+        expect(specsAutreFabrication.evalue(autreDeFabrication)).toMatchObject(reguleEE());
       });
 
       it('sait instancier une règle pour le « Autre » du secteur Transports', () => {
@@ -389,12 +388,12 @@ describe('La fabrique de spécifications', () => {
           })
         );
 
-        assert.strictEqual(specsAutreFabrication.nombreDeRegles(), 2);
-        assert.partialDeepStrictEqual(specsAutreFabrication.evalue(autreDeTransports), reguleEE());
+        expect(specsAutreFabrication.nombreDeRegles()).toBe(2);
+        expect(specsAutreFabrication.evalue(autreDeTransports)).toMatchObject(reguleEE());
       });
 
       it("jette une erreur si le secteur parent n'a pas de sous-secteur connu", () => {
-        assert.throws(() => {
+        expect(() => {
           fabrique.transforme(
             uneSpecification({
               'Sous-secteurs': 'Autre sous-secteur',
@@ -402,7 +401,7 @@ describe('La fabrique de spécifications', () => {
               Resultat: 'Régulée EE',
             })
           );
-        }, /Autre sous-secteur/);
+        }).toThrow(/Autre sous-secteur/);
       });
     });
 
@@ -411,13 +410,13 @@ describe('La fabrique de spécifications', () => {
         uneSpecification({ 'Sous-secteurs': '-', Resultat: 'Régulée EE' })
       );
 
-      assert.strictEqual(specs.nombreDeRegles(), 0);
+      expect(specs.nombreDeRegles()).toBe(0);
     });
 
     it("lève une exception si la valeur reçue n'est pas gérée", () => {
-      assert.throws(() => {
+      expect(() => {
         fabrique.transforme(uneSpecification({ 'Sous-secteurs': 'Parachute', Resultat: 'Régulée EE' }));
-      }, /Parachute/);
+      }).toThrow(/Parachute/);
     });
   });
 
@@ -456,23 +455,20 @@ describe('La fabrique de spécifications', () => {
           activites: [activite],
         };
 
-        assert.partialDeepStrictEqual(specs.evalue(reponse), reguleEE());
+        expect(specs.evalue(reponse)).toMatchObject(reguleEE());
       });
     }
 
     it("n'instancie pas de règle si aucune valeur n'est passée", () => {
       const specs: Specifications = fabrique.transforme(uneSpecification({ Activités: '-', Resultat: 'Régulée EE' }));
 
-      assert.strictEqual(specs.nombreDeRegles(), 0);
+      expect(specs.nombreDeRegles()).toBe(0);
     });
 
     it("lève une exception si la valeur reçue n'est pas gérée", () => {
-      assert.throws(
-        () => {
-          fabrique.transforme(uneSpecification({ Activités: 'Volley', Resultat: 'Régulée EE' }));
-        },
-        { message: /Volley/ }
-      );
+      expect(() => {
+        fabrique.transforme(uneSpecification({ Activités: 'Volley', Resultat: 'Régulée EE' }));
+      }).toThrow(/Volley/);
     });
   });
 
@@ -492,8 +488,8 @@ describe('La fabrique de spécifications', () => {
 
       const enFrance = entiteQuiFournitEn(['france']);
 
-      assert.strictEqual(specsFrance.nombreDeRegles(), 1);
-      assert.partialDeepStrictEqual(specsFrance.evalue(enFrance), reguleEE());
+      expect(specsFrance.nombreDeRegles()).toBe(1);
+      expect(specsFrance.evalue(enFrance)).toMatchObject(reguleEE());
     });
 
     it("instancie une règle pour la valeur « Autres États membres de l'Union Européenne »", () => {
@@ -506,8 +502,8 @@ describe('La fabrique de spécifications', () => {
 
       const autreEnUE = entiteQuiFournitEn(['autre']);
 
-      assert.strictEqual(specsAutreDansUE.nombreDeRegles(), 1);
-      assert.partialDeepStrictEqual(specsAutreDansUE.evalue(autreEnUE), reguleEE());
+      expect(specsAutreDansUE.nombreDeRegles()).toBe(1);
+      expect(specsAutreDansUE.evalue(autreEnUE)).toMatchObject(reguleEE());
     });
 
     it('instancie une règle pour la valeur « Autres États hors Union Européenne »', () => {
@@ -520,8 +516,8 @@ describe('La fabrique de spécifications', () => {
 
       const horsUE = entiteQuiFournitEn(['horsue']);
 
-      assert.strictEqual(specsHorsUE.nombreDeRegles(), 1);
-      assert.partialDeepStrictEqual(specsHorsUE.evalue(horsUE), reguleEE());
+      expect(specsHorsUE.nombreDeRegles()).toBe(1);
+      expect(specsHorsUE.evalue(horsUE)).toMatchObject(reguleEE());
     });
 
     describe('lorsque la valeur est un cumul de réponses', () => {
@@ -533,14 +529,14 @@ describe('La fabrique de spécifications', () => {
           })
         );
 
-        assert.strictEqual(specsFranceEtAutreUE.nombreDeRegles(), 1);
+        expect(specsFranceEtAutreUE.nombreDeRegles()).toBe(1);
 
-        assert.partialDeepStrictEqual(specsFranceEtAutreUE.evalue(entiteQuiFournitEn(['france', 'autre'])), reguleEE());
+        expect(specsFranceEtAutreUE.evalue(entiteQuiFournitEn(['france', 'autre']))).toMatchObject(reguleEE());
 
-        assert.strictEqual(specsFranceEtAutreUE.evalue(entiteQuiFournitEn(['france'])), undefined);
-        assert.strictEqual(specsFranceEtAutreUE.evalue(entiteQuiFournitEn(['autre'])), undefined);
-        assert.strictEqual(specsFranceEtAutreUE.evalue(entiteQuiFournitEn(['france', 'horsue'])), undefined);
-        assert.strictEqual(specsFranceEtAutreUE.evalue(entiteQuiFournitEn(['horsue'])), undefined);
+        expect(specsFranceEtAutreUE.evalue(entiteQuiFournitEn(['france']))).toBeUndefined();
+        expect(specsFranceEtAutreUE.evalue(entiteQuiFournitEn(['autre']))).toBeUndefined();
+        expect(specsFranceEtAutreUE.evalue(entiteQuiFournitEn(['france', 'horsue']))).toBeUndefined();
+        expect(specsFranceEtAutreUE.evalue(entiteQuiFournitEn(['horsue']))).toBeUndefined();
       });
     });
 
@@ -552,13 +548,13 @@ describe('La fabrique de spécifications', () => {
         })
       );
 
-      assert.strictEqual(specs.nombreDeRegles(), 0);
+      expect(specs.nombreDeRegles()).toBe(0);
     });
 
     it("lève une exception si la valeur reçue n'est pas gérée", () => {
-      assert.throws(() => {
+      expect(() => {
         fabrique.transforme(uneSpecification({ 'Extra - Fourniture de service': 'Jardin', Resultat: 'Régulée EE' }));
-      }, /Jardin/);
+      }).toThrow(/Jardin/);
     });
   });
 
@@ -579,20 +575,20 @@ describe('La fabrique de spécifications', () => {
     });
 
     it('instancie la règle « France »', () => {
-      assert.doesNotThrow(() =>
+      expect(() =>
         fabrique.transforme(uneSpecification({ 'Extra - Établissement principal': 'France', Resultat: 'Régulée EE' }))
-      );
+      ).not.toThrow();
     });
 
     it("instancie la règle « Autres États membres de l'Union Européenne »", () => {
-      assert.doesNotThrow(() =>
+      expect(() =>
         fabrique.transforme(
           uneSpecification({
             'Extra - Établissement principal': "Autres États membres de l'Union Européenne",
             Resultat: 'Régulée EE',
           })
         )
-      );
+      ).not.toThrow();
     });
 
     it("est un match dès qu'un pays de la réponse correspond au pays de la règle", () => {
@@ -604,13 +600,13 @@ describe('La fabrique de spécifications', () => {
       );
 
       const decisionFr = entiteAvecDecisionEn('france');
-      assert.partialDeepStrictEqual(specsFrance.evalue(decisionFr), reguleEE());
+      expect(specsFrance.evalue(decisionFr)).toMatchObject(reguleEE());
 
       const operationFr = entiteQuiOpereEn('france');
-      assert.partialDeepStrictEqual(specsFrance.evalue(operationFr), reguleEE());
+      expect(specsFrance.evalue(operationFr)).toMatchObject(reguleEE());
 
       const salariesFr = entiteAvecSalariesBasesEn('france');
-      assert.partialDeepStrictEqual(specsFrance.evalue(salariesFr), reguleEE());
+      expect(specsFrance.evalue(salariesFr)).toMatchObject(reguleEE());
     });
 
     it('ne match pas si aucun pays de la réponse ne correspond à celui de la règle', () => {
@@ -623,7 +619,7 @@ describe('La fabrique de spécifications', () => {
 
       const decisionAutreUE = entiteAvecDecisionEn('autre');
 
-      assert.strictEqual(specsFrance.evalue(decisionAutreUE), undefined);
+      expect(specsFrance.evalue(decisionAutreUE)).toBeUndefined();
     });
 
     it("n'instancie pas de règle si aucune valeur n'est passée", () => {
@@ -634,13 +630,13 @@ describe('La fabrique de spécifications', () => {
         })
       );
 
-      assert.strictEqual(specs.nombreDeRegles(), 0);
+      expect(specs.nombreDeRegles()).toBe(0);
     });
 
     it("lève une exception si la valeur reçue n'est pas gérée", () => {
-      assert.throws(() => {
+      expect(() => {
         fabrique.transforme(uneSpecification({ 'Extra - Établissement principal': 'Jardin', Resultat: 'Régulée EE' }));
-      }, /Jardin/);
+      }).toThrow(/Jardin/);
     });
   });
 
@@ -648,22 +644,22 @@ describe('La fabrique de spécifications', () => {
     it('sait instancier un résultat « Régulée EE»', () => {
       const specs: Specifications = fabrique.transforme(uneSpecification({ Resultat: 'Régulée EE' }));
 
-      assert.strictEqual(specs.resultat().regulation, 'Regule');
-      assert.strictEqual(specs.resultat().typeEntite, 'EntiteEssentielle');
+      expect(specs.resultat().regulation).toBe('Regule');
+      expect(specs.resultat().typeEntite).toBe('EntiteEssentielle');
     });
 
     it('sait instancier un résultat « Régulée EI »', () => {
       const specs: Specifications = fabrique.transforme(uneSpecification({ Resultat: 'Régulée EI' }));
 
-      assert.strictEqual(specs.resultat().regulation, 'Regule');
-      assert.strictEqual(specs.resultat().typeEntite, 'EntiteImportante');
+      expect(specs.resultat().regulation).toBe('Regule');
+      expect(specs.resultat().typeEntite).toBe('EntiteImportante');
     });
 
     it('sait instancier un résultat « Régulée, enregistrement seul »', () => {
       const specs: Specifications = fabrique.transforme(uneSpecification({ Resultat: 'Régulée, enregistrement seul' }));
 
-      assert.strictEqual(specs.resultat().regulation, 'Regule');
-      assert.strictEqual(specs.resultat().typeEntite, 'EnregistrementUniquement');
+      expect(specs.resultat().regulation).toBe('Regule');
+      expect(specs.resultat().typeEntite).toBe('EnregistrementUniquement');
     });
 
     it('sait instancier un résultat « Régulée, sans précision EE/EI »', () => {
@@ -671,25 +667,25 @@ describe('La fabrique de spécifications', () => {
         uneSpecification({ Resultat: 'Régulée, sans précision EE/EI' })
       );
 
-      assert.strictEqual(specs.resultat().regulation, 'Regule');
-      assert.strictEqual(specs.resultat().typeEntite, 'AutreEtatMembreUE');
+      expect(specs.resultat().regulation).toBe('Regule');
+      expect(specs.resultat().typeEntite).toBe('AutreEtatMembreUE');
     });
 
     it('sait instancier un résultat « Non regulée »', () => {
       const specs: Specifications = fabrique.transforme(uneSpecification({ Resultat: 'Non régulée' }));
 
-      assert.strictEqual(specs.resultat().regulation, 'NonRegule');
+      expect(specs.resultat().regulation).toBe('NonRegule');
     });
 
     it('sait instancier un résultat « Incertain »', () => {
       const specs: Specifications = fabrique.transforme(uneSpecification({ Resultat: 'Incertain' }));
 
-      assert.strictEqual(specs.resultat().regulation, 'Incertain');
-      assert.strictEqual(specs.resultat().typeEntite, 'AutreEtatMembreUE');
+      expect(specs.resultat().regulation).toBe('Incertain');
+      expect(specs.resultat().typeEntite).toBe('AutreEtatMembreUE');
     });
 
     it("lève une exception si la valeur reçue n'est pas gérée", () => {
-      assert.throws(() => fabrique.transforme(uneSpecification({ Resultat: 'X' })), /X/);
+      expect(() => fabrique.transforme(uneSpecification({ Resultat: 'X' }))).toThrow(/X/);
     });
   });
 
@@ -708,7 +704,7 @@ describe('La fabrique de spécifications', () => {
 
         const { resumes } = specs.resultat().pointsAttention;
 
-        assert.deepStrictEqual(resumes, [resumeAttendu]);
+        expect(resumes).toStrictEqual([resumeAttendu]);
       });
     }
 
@@ -732,7 +728,7 @@ describe('La fabrique de spécifications', () => {
 
         const { precisions } = specs.resultat().pointsAttention;
 
-        assert.deepStrictEqual(precisions, [precisionAttendue]);
+        expect(precisions).toStrictEqual([precisionAttendue]);
       });
     }
 
@@ -746,8 +742,8 @@ describe('La fabrique de spécifications', () => {
 
       const { resumes, precisions } = specs.resultat().pointsAttention;
 
-      assert.deepStrictEqual(resumes, ['NumeriqueUE']);
-      assert.deepStrictEqual(precisions, ['DORA']);
+      expect(resumes).toStrictEqual(['NumeriqueUE']);
+      expect(precisions).toStrictEqual(['DORA']);
     });
 
     it("ne fait rien s'il n'y a pas de points d'attention", () => {
@@ -760,15 +756,14 @@ describe('La fabrique de spécifications', () => {
 
       const { resumes, precisions } = specs.resultat().pointsAttention;
 
-      assert.deepStrictEqual(resumes, []);
-      assert.deepStrictEqual(precisions, []);
+      expect(resumes).toStrictEqual([]);
+      expect(precisions).toStrictEqual([]);
     });
 
     it("lève une exception si un point d'attention est inconnu", () => {
-      assert.throws(
-        () => fabrique.transforme(uneSpecification({ Resultat: 'Régulée EE', "Points d'attention": '#Train' })),
-        /Train/
-      );
+      expect(() =>
+        fabrique.transforme(uneSpecification({ Resultat: 'Régulée EE', "Points d'attention": '#Train' }))
+      ).toThrow(/Train/);
     });
   });
 });

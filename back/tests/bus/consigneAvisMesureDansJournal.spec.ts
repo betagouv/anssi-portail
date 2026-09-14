@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { consigneRetourAvisMesureDonneDansJournal } from '../../src/bus/consigneAvisMesureDonneDansJournal.js';
 import { AvisMesureDonne } from '../../src/bus/evenements/avisMesureDonne.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
@@ -31,7 +30,7 @@ describe("L'abonnement qui consigne un avis sur une mesure dans le journal", () 
       })
     );
 
-    assert.deepEqual(evenementRecu, {
+    expect(evenementRecu).toEqual({
       type: 'AVIS_MESURE_DONNE',
       donnees: {
         idMesure: 'AUTH.5',

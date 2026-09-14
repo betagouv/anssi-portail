@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
 import { leCSV } from './aidesAuxTests.js';
 import { evalueEligibilite } from '../../../../src/metier/nis2-simulateur/questionnaire/evalueEligibilite.js';
@@ -13,8 +12,8 @@ describe("L'évaluation complète de l'égibilité", () => {
 
     const { resultat } = evalueEligibilite(reponseEntiteOse, leCSV('specification-ose-est-regulee-ee.csv'));
 
-    assert.strictEqual(resultat.regulation, 'Regule');
-    assert.strictEqual(resultat.typeEntite, 'EntiteEssentielle');
+    expect(resultat.regulation).toBe('Regule');
+    expect(resultat.typeEntite).toBe('EntiteEssentielle');
   });
 
   it('lève une exception si le questionnaire ne correspond à aucune spécification', () => {
@@ -23,8 +22,8 @@ describe("L'évaluation complète de l'égibilité", () => {
       designationOperateurServicesEssentiels: ['non'],
     };
 
-    assert.throws(() => evalueEligibilite(reponseNonOse, leCSV('specification-ose-est-regulee-ee.csv')), {
-      message: /Aucune spécification/,
-    });
+    expect(() => evalueEligibilite(reponseNonOse, leCSV('specification-ose-est-regulee-ee.csv'))).toThrow(
+      /Aucune spécification/
+    );
   });
 });

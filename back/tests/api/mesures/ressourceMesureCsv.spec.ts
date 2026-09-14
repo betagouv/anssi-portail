@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
@@ -46,27 +45,26 @@ describe('La ressource des mesures en CSV', () => {
     it('renvoie en 200', async () => {
       const { status } = await getConnecté();
 
-      assert.equal(status, HttpStatusCode.Ok);
+      expect(status).toBe(HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu CSV', async () => {
       const { headers } = await getConnecté();
 
-      assert.equal(headers['content-type'], 'text/csv; charset=utf-8');
+      expect(headers['content-type']).toBe('text/csv; charset=utf-8');
     });
 
     it('commence le contenu CSV avec un BOM', async () => {
       const { text } = await getConnecté();
 
-      assert.equal(text[0], BOM_CHAR);
+      expect(text[0]).toBe(BOM_CHAR);
     });
 
     it('contient les en-têtes CSV attendus', async () => {
       const { text } = await getConnecté();
       const lignes = text.split('\n');
 
-      assert.equal(
-        lignes[0].slice(BOM_CHAR.length),
+      expect(lignes[0].slice(BOM_CHAR.length)).toBe(
         '"Titre du module";"Titre de la mesure";"Description de la mesure"'
       );
     });
@@ -88,9 +86,9 @@ describe('La ressource des mesures en CSV', () => {
       const lignes = text.split('\n');
       const contenu = lignes[1].split(';');
 
-      assert.equal(contenu[0].slice(1, -1), module.nom);
-      assert.equal(contenu[1].slice(1, -1), mesure.titre);
-      assert.equal(contenu[2].slice(1, -1), mesure.explications);
+      expect(contenu[0].slice(1, -1)).toBe(module.nom);
+      expect(contenu[1].slice(1, -1)).toBe(mesure.titre);
+      expect(contenu[2].slice(1, -1)).toBe(mesure.explications);
     });
 
     it('ne contient pas de balises HTML dans les descriptions', async () => {
@@ -113,10 +111,9 @@ describe('La ressource des mesures en CSV', () => {
       const lignes = text.split('\n');
       const contenu = lignes[1].split(';');
 
-      assert.equal(contenu[0].slice(1, -1), module.nom);
-      assert.equal(contenu[1].slice(1, -1), mesure.titre);
-      assert.equal(
-        contenu[2].slice(1, -1),
+      expect(contenu[0].slice(1, -1)).toBe(module.nom);
+      expect(contenu[1].slice(1, -1)).toBe(mesure.titre);
+      expect(contenu[2].slice(1, -1)).toBe(
         `Un mot de passe seul ne suffit pas toujours à protéger un compte. En activant une deuxième vérification, vous ajoutez une sécurité supplémentaire au moment de la connexion : un code reçu sur une application, une clé physique, une empreinte digitale ou, à défaut, un code par SMS.`
       );
     });
@@ -126,7 +123,7 @@ describe('La ressource des mesures en CSV', () => {
     it('réponds 401', async () => {
       const reponse = await get();
 
-      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+      expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
     });
   });
 });

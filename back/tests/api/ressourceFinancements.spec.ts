@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
@@ -37,7 +36,7 @@ describe('La ressource Financements', () => {
     it('renvoie un 200', async () => {
       const reponse = await request(serveur).get('/api/financements');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('renvoie une liste de financements', async () => {
@@ -45,7 +44,7 @@ describe('La ressource Financements', () => {
 
       const reponse = await request(serveur).get('/api/financements');
 
-      assert.deepEqual(reponse.body, [
+      expect(reponse.body).toEqual([
         {
           id: 1,
           nom: 'Cyber PME',
@@ -64,7 +63,7 @@ describe('La ressource Financements', () => {
       };
       const reponse = await request(serveur).get('/api/financements');
 
-      assert.equal(reponse.status, HttpStatusCode.InternalServerError);
+      expect(reponse.status).toBe(HttpStatusCode.InternalServerError);
     });
     describe('pour un utilisateur connecté', () => {
       const listeDeFinancementsAttendus = [
@@ -104,7 +103,7 @@ describe('La ressource Financements', () => {
 
         const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
 
-        assert.deepEqual(reponse.body, listeDeFinancementsAttendus);
+        expect(reponse.body).toEqual(listeDeFinancementsAttendus);
       });
 
       it('renvoie une liste de financements concernant les TPE uniquement', async () => {
@@ -119,7 +118,7 @@ describe('La ressource Financements', () => {
 
         const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
 
-        assert.deepEqual(reponse.body, [
+        expect(reponse.body).toEqual([
           {
             id: 2,
             nom: 'Cyber PME',
@@ -144,7 +143,7 @@ describe('La ressource Financements', () => {
 
         const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
 
-        assert.deepEqual(reponse.body, listeDeFinancementsAttendus);
+        expect(reponse.body).toEqual(listeDeFinancementsAttendus);
       });
 
       it('renvoie une liste de financements concernant les ETI uniquement', async () => {
@@ -159,7 +158,7 @@ describe('La ressource Financements', () => {
 
         const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
 
-        assert.deepEqual(reponse.body, listeDeFinancementsAttendus);
+        expect(reponse.body).toEqual(listeDeFinancementsAttendus);
       });
 
       it('renvoie une liste de financements concernant les Entreprises uniquement', async () => {
@@ -174,7 +173,7 @@ describe('La ressource Financements', () => {
 
         const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
 
-        assert.deepEqual(reponse.body, [
+        expect(reponse.body).toEqual([
           {
             id: 2,
             nom: 'Cyber PME',
@@ -199,7 +198,7 @@ describe('La ressource Financements', () => {
 
         const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
 
-        assert.deepEqual(reponse.body, [
+        expect(reponse.body).toEqual([
           {
             id: 2,
             nom: 'Cyber PME',
@@ -224,7 +223,7 @@ describe('La ressource Financements', () => {
 
         const reponse = await request(serveur).get('/api/financements').set('Cookie', [cookieJeanneDupont]).send();
 
-        assert.deepEqual(reponse.body, [
+        expect(reponse.body).toEqual([
           {
             id: 2,
             nom: 'Cyber PME',

@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { ProprieteTestRevendiquee } from '../../../src/bus/evenements/proprieteTestRevendiquee.js';
@@ -55,7 +54,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
     it('répond 201', async () => {
       const reponse = await request(serveur).post('/api/resultats-test').send(donneesCorrectes);
 
-      assert.equal(reponse.status, HttpStatusCode.Created);
+      expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
     describe('concernant la publication des evenements', () => {
@@ -78,10 +77,10 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
         busEvenements.aRecuUnEvenement(TestRealise);
         const evenement = busEvenements.recupereEvenement(TestRealise);
-        assert.equal(evenement!.region, 'FR-NOR');
-        assert.equal(evenement!.secteur, 'J');
-        assert.equal(evenement!.tailleOrganisation, '51');
-        assert.deepEqual(evenement!.reponses, {
+        expect(evenement!.region).toBe('FR-NOR');
+        expect(evenement!.secteur).toBe('J');
+        expect(evenement!.tailleOrganisation).toBe('51');
+        expect(evenement!.reponses).toEqual({
           'prise-en-compte-risque': 2,
           pilotage: 3,
           budget: 5,
@@ -111,7 +110,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
         busEvenements.aRecuUnEvenement(TestRealise);
         const evenement = busEvenements.recupereEvenement(TestRealise);
-        assert.equal(evenement!.codeSessionGroupe, 'ABC2ED');
+        expect(evenement!.codeSessionGroupe).toBe('ABC2ED');
       });
     });
 
@@ -142,12 +141,12 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
         const resultatSauvegarde = await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
 
-        assert.notEqual(resultatSauvegarde, undefined);
-        assert.equal(resultatSauvegarde?.utilisateur, jeanneDupont);
-        assert.equal(resultatSauvegarde!.region, 'FR-NOR');
-        assert.equal(resultatSauvegarde!.secteur, 'J');
-        assert.equal(resultatSauvegarde!.tailleOrganisation, '51');
-        assert.deepEqual(resultatSauvegarde!.reponses, {
+        expect(resultatSauvegarde).toBeDefined();
+        expect(resultatSauvegarde?.utilisateur).toBe(jeanneDupont);
+        expect(resultatSauvegarde!.region).toBe('FR-NOR');
+        expect(resultatSauvegarde!.secteur).toBe('J');
+        expect(resultatSauvegarde!.tailleOrganisation).toBe('51');
+        expect(resultatSauvegarde!.reponses).toEqual({
           'prise-en-compte-risque': 2,
           pilotage: 3,
           budget: 5,
@@ -164,8 +163,8 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           .send(donneesCorrectes);
 
         const resultatSauvegarde = await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
-        assert.match(resultatSauvegarde!.id, REGEX_UUID);
-        assert.deepEqual(reponse.body, { id: resultatSauvegarde!.id });
+        expect(resultatSauvegarde!.id).toMatch(REGEX_UUID);
+        expect(reponse.body).toEqual({ id: resultatSauvegarde!.id });
       });
 
       it("publie un événement sur le bus qui indique que l'utilisateur est relié au test", async () => {
@@ -176,8 +175,8 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
         busEvenements.aRecuUnEvenement(ProprieteTestRevendiquee);
         const evenement = busEvenements.recupereEvenement(ProprieteTestRevendiquee);
-        assert.equal(evenement!.utilisateur, jeanneDupont);
-        assert.equal(evenement!.idResultatTest, reponse.body.id);
+        expect(evenement!.utilisateur).toBe(jeanneDupont);
+        expect(evenement!.idResultatTest).toBe(reponse.body.id);
       });
       describe("et n'a pas renseigné des informations d'organisaton", () => {
         it("récupère les informations d'organisation et les enregistre en base", async () => {
@@ -197,9 +196,9 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
           const resultatSauvegarde = await entrepotResultatTest.dernierPourUtilisateur(jeanneDupont);
 
-          assert.equal(resultatSauvegarde?.region, 'FR-971');
-          assert.equal(resultatSauvegarde?.secteur, 'A');
-          assert.equal(resultatSauvegarde?.tailleOrganisation, '11');
+          expect(resultatSauvegarde?.region).toBe('FR-971');
+          expect(resultatSauvegarde?.secteur).toBe('A');
+          expect(resultatSauvegarde?.tailleOrganisation).toBe('11');
         });
 
         it("récupère les informations d'organisation et les publie dans le bus d'évènements", async () => {
@@ -219,9 +218,9 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
           busEvenements.aRecuUnEvenement(TestRealise);
           const evenement = busEvenements.recupereEvenement(TestRealise);
-          assert.equal(evenement?.region, 'FR-971');
-          assert.equal(evenement?.secteur, 'A');
-          assert.equal(evenement?.tailleOrganisation, '11');
+          expect(evenement?.region).toBe('FR-971');
+          expect(evenement?.secteur).toBe('A');
+          expect(evenement?.tailleOrganisation).toBe('11');
         });
       });
     });
@@ -231,8 +230,8 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         await request(serveur).post('/api/resultats-test').send(donneesCorrectes);
 
         const resultatSauvegarde = (await entrepotResultatTest.tous())[0];
-        assert.notEqual(resultatSauvegarde, undefined);
-        assert.equal(resultatSauvegarde?.utilisateur, undefined);
+        expect(resultatSauvegarde).toBeDefined();
+        expect(resultatSauvegarde?.utilisateur).toBeUndefined();
       });
       it("ne publie pas d'événement sur le bus qui indique que l'utilisateur est relié au test", async () => {
         await request(serveur).post('/api/resultats-test').send(donneesCorrectes);
@@ -256,9 +255,9 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           region: null,
         });
 
-        assert.equal(reponse.status, HttpStatusCode.Created);
+        expect(reponse.status).toBe(HttpStatusCode.Created);
         const evenement = busEvenements.recupereEvenement(TestRealise);
-        assert.equal(evenement!.region, null);
+        expect(evenement!.region).toBeUndefined();
       });
 
       it('accepte un secteur avec une valeur "nulle"', async () => {
@@ -266,9 +265,9 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           secteur: null,
         });
 
-        assert.equal(reponse.status, HttpStatusCode.Created);
+        expect(reponse.status).toBe(HttpStatusCode.Created);
         const evenement = busEvenements.recupereEvenement(TestRealise);
-        assert.equal(evenement!.secteur, null);
+        expect(evenement!.secteur).toBeUndefined();
       });
 
       it("accepte une taille d'organisation avec une valeur 'nulle'", async () => {
@@ -276,9 +275,9 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           tailleOrganisation: null,
         });
 
-        assert.equal(reponse.status, HttpStatusCode.Created);
+        expect(reponse.status).toBe(HttpStatusCode.Created);
         const evenement = busEvenements.recupereEvenement(TestRealise);
-        assert.equal(evenement!.tailleOrganisation, null);
+        expect(evenement!.tailleOrganisation).toBeUndefined();
       });
 
       it('valide la région', async () => {
@@ -286,8 +285,8 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           region: 'UneRegionInconnue',
         });
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
-        assert.equal(reponse.body.fieldErrors.region[0], 'Région invalide');
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+        expect(reponse.body.fieldErrors.region[0]).toBe('Région invalide');
       });
 
       it('valide le secteur', async () => {
@@ -295,8 +294,8 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           secteur: 'UnSecteurInconnu',
         });
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
-        assert.equal(reponse.body.fieldErrors.secteur[0], 'Secteur invalide');
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+        expect(reponse.body.fieldErrors.secteur[0]).toBe('Secteur invalide');
       });
 
       it("valide la taille d'organisation", async () => {
@@ -304,8 +303,8 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
           tailleOrganisation: 'UneTailleInconnue',
         });
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
-        assert.equal(reponse.body.fieldErrors.tailleOrganisation[0], "Taille d'organisation invalide");
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+        expect(reponse.body.fieldErrors.tailleOrganisation[0]).toBe("Taille d'organisation invalide");
       });
 
       describe('concernant les réponses', () => {
@@ -314,8 +313,8 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
             reponses: ['pasUnObjet'],
           });
 
-          assert.equal(reponse.status, HttpStatusCode.BadRequest);
-          assert.equal(reponse.body.fieldErrors.reponses[0], 'Les réponses doivent être dans un objet');
+          expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+          expect(reponse.body.fieldErrors.reponses[0]).toBe('Les réponses doivent être dans un objet');
         });
 
         it('valide les clés de réponses', async () => {
@@ -323,8 +322,8 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
             reponses: { uneAutreClef: 1 },
           });
 
-          assert.equal(reponse.status, HttpStatusCode.BadRequest);
-          assert.equal(reponse.body.fieldErrors.reponses[0], 'Les clés de réponse sont invalides');
+          expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+          expect(reponse.body.fieldErrors.reponses[0]).toBe('Les clés de réponse sont invalides');
         });
 
         it('valide les valeurs de reponses', async () => {
@@ -332,9 +331,8 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
             reponses: { ...donneesCorrectes.reponses, pilotage: 0 },
           });
 
-          assert.equal(reponse.status, HttpStatusCode.BadRequest);
-          assert.equal(
-            reponse.body.fieldErrors.reponses[0],
+          expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+          expect(reponse.body.fieldErrors.reponses[0]).toBe(
             'Les valeurs de réponses doivent être comprises entre 1 et 5'
           );
         });
@@ -344,9 +342,8 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
             reponses: { ...donneesCorrectes.reponses, pilotage: [5] },
           });
 
-          assert.equal(reponse.status, HttpStatusCode.BadRequest);
-          assert.equal(
-            reponse.body.fieldErrors.reponses[0],
+          expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+          expect(reponse.body.fieldErrors.reponses[0]).toBe(
             'Les valeurs de réponses doivent être comprises entre 1 et 5'
           );
         });
@@ -373,7 +370,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
       const resultatSauvegarde = (await entrepotResultatTest.tous())[0];
 
-      assert.equal(resultatSauvegarde.codeSessionGroupe, 'ABC2ED');
+      expect(resultatSauvegarde.codeSessionGroupe).toBe('ABC2ED');
     });
   });
 
@@ -391,7 +388,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       it('répond 200', async () => {
         const reponse = await request(serveur).get('/api/resultats-test').set('Cookie', [cookie]);
 
-        assert.equal(reponse.status, HttpStatusCode.Ok);
+        expect(reponse.status).toBe(HttpStatusCode.Ok);
       });
 
       async function ajouteUnResultatDeTest(id: string, utilisateur: Utilisateur) {
@@ -412,9 +409,9 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
         const reponse = await request(serveur).get('/api/resultats-test').set('Cookie', [cookie]);
 
-        assert.equal(reponse.body.length, 2);
-        assert.equal(reponse.body[0].id, 'test-id-1');
-        assert.equal(reponse.body[1].id, 'test-id-2');
+        expect(reponse.body).toHaveLength(2);
+        expect(reponse.body[0].id).toBe('test-id-1');
+        expect(reponse.body[1].id).toBe('test-id-2');
       });
 
       it("renvoie uniquement les résultats de test de l'utilisateur courant", async () => {
@@ -422,7 +419,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
         const reponse = await request(serveur).get('/api/resultats-test').set('Cookie', [cookie]);
 
-        assert.equal(reponse.body.length, 0);
+        expect(reponse.body).toHaveLength(0);
       });
 
       it("ne renvoie pas l'utilisateur", async () => {
@@ -430,7 +427,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
 
         const reponse = await request(serveur).get('/api/resultats-test').set('Cookie', [cookie]);
 
-        assert.equal(reponse.body[0].utilisateur, undefined);
+        expect(reponse.body[0].utilisateur).toBeUndefined();
       });
 
       it('renvoie les informations nécessaires du test', async () => {
@@ -455,9 +452,9 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
         const reponse = await request(serveur).get('/api/resultats-test').set('Cookie', [cookie]);
 
         const resultatTest = reponse.body[0];
-        assert.equal(resultatTest.niveau, 'optimal');
-        assert.equal(new Date(resultatTest.dateRealisation).getTime(), new Date(2025, 8, 11).getTime());
-        assert.deepEqual(resultatTest.reponses, {
+        expect(resultatTest.niveau).toBe('optimal');
+        expect(new Date(resultatTest.dateRealisation).getTime()).toBe(new Date(2025, 8, 11).getTime());
+        expect(resultatTest.reponses).toEqual({
           pilotage: 5,
           budget: 5,
           'prise-en-compte-risque': 5,
@@ -472,7 +469,7 @@ describe('La ressource qui gère les résultats de test de maturité', () => {
       it('répond 401', async () => {
         const reponse = await request(serveur).get('/api/resultats-test');
 
-        assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+        expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
       });
     });
   });

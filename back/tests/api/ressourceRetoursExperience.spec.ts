@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
 import { RetourExperienceDonne } from '../../src/bus/evenements/retourExperienceDonne.js';
@@ -31,7 +30,7 @@ describe("La ressource des retours d'expérience", () => {
       const reponse = await request(serveur).post('/api/retours-experience').send({
         raison: 'pas-clair',
       });
-      assert.equal(reponse.status, HttpStatusCode.Created);
+      expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
     it('envoie les données du questionnaire à mattermost', async () => {
@@ -46,7 +45,7 @@ describe("La ressource des retours d'expérience", () => {
         emailDeContact: 'mail@mail.com',
       });
 
-      assert.deepEqual(retourExperienceEnvoye, {
+      expect(retourExperienceEnvoye).toEqual({
         raison: 'pas-clair',
         precision: 'flou',
         emailDeContact: 'mail@mail.com',
@@ -63,9 +62,9 @@ describe("La ressource des retours d'expérience", () => {
         raison: 'raison-invalide',
       });
 
-      assert.equal(reponse.status, HttpStatusCode.BadRequest);
-      assert.equal(reponse.body.fieldErrors.raison[0], 'La raison est invalide');
-      assert.equal(retourExperienceEnvoye, null);
+      expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+      expect(reponse.body.fieldErrors.raison[0]).toBe('La raison est invalide');
+      expect(retourExperienceEnvoye).toBeNull();
     });
 
     it('renvoie une erreur si le mail est invalide', async () => {
@@ -74,8 +73,8 @@ describe("La ressource des retours d'expérience", () => {
         raison: 'pas-clair',
       });
 
-      assert.equal(reponse.status, HttpStatusCode.BadRequest);
-      assert.equal(reponse.body.fieldErrors.emailDeContact[0], "L'email est invalide");
+      expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+      expect(reponse.body.fieldErrors.emailDeContact[0]).toBe("L'email est invalide");
     });
 
     it("ignore l'email s'il est vide", async () => {
@@ -84,7 +83,7 @@ describe("La ressource des retours d'expérience", () => {
         raison: 'pas-clair',
       });
 
-      assert.equal(reponse.status, HttpStatusCode.Created);
+      expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
     it('accepte la raison pas-decisionnaire', async () => {
@@ -92,7 +91,7 @@ describe("La ressource des retours d'expérience", () => {
         raison: 'pas-decisionnaire',
       });
 
-      assert.equal(reponse.status, HttpStatusCode.Created);
+      expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
     describe("concernant la publication de l'événement", () => {
@@ -116,8 +115,8 @@ describe("La ressource des retours d'expérience", () => {
         await request(serveur).post('/api/retours-experience').send(representation);
 
         const evenement = busEvenements.recupereEvenement(RetourExperienceDonne);
-        assert.equal(evenement!.raison, 'pas-clair');
-        assert.equal(evenement!.emailDeContact, 'mail@mail.com');
+        expect(evenement!.raison).toBe('pas-clair');
+        expect(evenement!.emailDeContact).toBe('mail@mail.com');
       });
     });
   });

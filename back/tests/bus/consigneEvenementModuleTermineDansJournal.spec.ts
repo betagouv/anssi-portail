@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { consigneEvenementModuleTerminéDansJournal } from '../../src/bus/consigneEvenementModuleTerminéDansJournal.js';
 import { ModuleTermine } from '../../src/bus/evenements/moduleTermine.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
@@ -30,7 +29,7 @@ describe("L'abonnement qui consigne la complétion d'un module par un utilisateu
       adaptateurHachage,
     })(new ModuleTermine('u1@example.com', 1, 'Cyberdépart', 'allégé'));
 
-    assert.deepEqual(evenementRecu, {
+    expect(evenementRecu).toEqual({
       type: 'MODULE_TERMINE',
       donnees: {
         idUtilisateur: 'u1@example.com-hacheHMAC',

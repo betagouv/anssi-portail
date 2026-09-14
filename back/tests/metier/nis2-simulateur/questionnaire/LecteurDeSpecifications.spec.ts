@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { leCSV } from './aidesAuxTests.js';
 import { LecteurDeSpecifications } from '../../../../src/metier/nis2-simulateur/questionnaire/LecteurDeSpecifications.js';
 
@@ -10,12 +9,11 @@ describe('Le lecteur de spécifications', () => {
 
     const specifications = lecteur.lis(fichier);
 
-    assert.equal(specifications.nombre(), 1);
+    expect(specifications.nombre()).toBe(1);
   });
 
   it('lève une exception si les colonnes du CSV ne sont pas celles attendues', () => {
-    assert.throws(
-      () => new LecteurDeSpecifications().lis(leCSV('specification-colonne-manquante.csv')),
+    expect(() => new LecteurDeSpecifications().lis(leCSV('specification-colonne-manquante.csv'))).toThrow(
       /manque des colonnes/
     );
   });

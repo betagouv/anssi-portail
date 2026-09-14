@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { EntrepotFinancementGrist, FinancementGrist } from '../../src/infra/entrepotFinancementGrist.js';
 import { Financement } from '../../src/metier/financement.js';
@@ -32,7 +31,7 @@ describe("L'entrepot de financement Grist", () => {
 
     const financements = await entrepotFinancementGristHorsLigne.tous();
 
-    assert.deepEqual(financements, []);
+    expect(financements).toEqual([]);
   });
 
   it('sait récupérer des financements en appelant Grist', async () => {
@@ -49,8 +48,8 @@ describe("L'entrepot de financement Grist", () => {
 
     await entrepotFinancementGrist.tous();
 
-    assert.equal(headerAuthent, 'Bearer FAUSSE_CLE_API');
-    assert.equal(urlAppelee, 'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records');
+    expect(headerAuthent).toBe('Bearer FAUSSE_CLE_API');
+    expect(urlAppelee).toBe('http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records');
   });
 
   it('sait récupérer un financement en appelant Grist puis en filtrant par id', async () => {
@@ -103,7 +102,7 @@ describe("L'entrepot de financement Grist", () => {
 
     const financement = await entrepotFinancementGrist.parId(idFinancement);
 
-    assert.deepEqual(financement, {
+    expect(financement).toEqual({
       id: 10,
       nom: 'Cyber PME',
       benificiaires: 'Tout le monde',
@@ -132,7 +131,7 @@ describe("L'entrepot de financement Grist", () => {
 
     const financement = await entrepotFinancementGrist.parId(1);
 
-    assert.equal(financement, undefined);
+    expect(financement).toBeUndefined();
   });
 
   it("sait transfomer le retour de l'API Grist en financements", async () => {
@@ -183,7 +182,7 @@ describe("L'entrepot de financement Grist", () => {
 
     const financements = await entrepotFinancementGrist.tous();
 
-    assert.deepEqual(financements, [
+    expect(financements).toEqual([
       {
         id: 10,
         nom: 'Cyber PME',
@@ -231,6 +230,6 @@ describe("L'entrepot de financement Grist", () => {
     await entrepotFinancementGrist.tous();
     await entrepotFinancementGrist.tous();
 
-    assert.equal(nombreAppel, 1);
+    expect(nombreAppel).toBe(1);
   });
 });

@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { AdaptateurCellar, CleDuBucket } from '../../src/infra/adaptateurCellar.js';
 import { fabriqueServiceSanteGuides, ServiceSanteGuides } from '../../src/metier/serviceSanteGuides.js';
 import { fauxAdaptateurCellar } from '../api/fauxObjets.js';
@@ -21,10 +20,10 @@ describe('Le service de calcul de la santé des guildes', () => {
     const sante = await serviceSanteGuides.calculeSante([guideZeroTrust()]);
 
     const guidesEnBonneSante = sante.guidesEnBonneSante;
-    assert.equal(guidesEnBonneSante.length, 1);
-    assert.equal(guidesEnBonneSante[0].id, 'zero-trust');
-    assert.deepEqual(guidesEnBonneSante[0].documents, [{ nom: 'anssi-fondamentaux-zero-trust-v1.0.pdf', etat: 'ok' }]);
-    assert.deepEqual(guidesEnBonneSante[0].images, {
+    expect(guidesEnBonneSante).toHaveLength(1);
+    expect(guidesEnBonneSante[0].id).toBe('zero-trust');
+    expect(guidesEnBonneSante[0].documents).toEqual([{ nom: 'anssi-fondamentaux-zero-trust-v1.0.pdf', etat: 'ok' }]);
+    expect(guidesEnBonneSante[0].images).toEqual({
       '588': 'ok',
       origine: 'ok',
     });
@@ -34,8 +33,8 @@ describe('Le service de calcul de la santé des guildes', () => {
     const sante = await serviceSanteGuides.calculeSante([guideZeroTrust(), guideDevsecops()]);
 
     const guidesEnBonneSante = sante.guidesEnBonneSante;
-    assert.equal(guidesEnBonneSante.length, 2);
-    assert.equal(guidesEnBonneSante[1].id, 'devsecops');
+    expect(guidesEnBonneSante).toHaveLength(2);
+    expect(guidesEnBonneSante[1].id).toBe('devsecops');
   });
 
   it('retourne la santé de tous les documents', async () => {
@@ -48,9 +47,9 @@ describe('Le service de calcul de la santé des guildes', () => {
     const sante = await serviceSanteGuides.calculeSante([guideAvecPlusieursDocuments]);
 
     const guidesEnBonneSante = sante.guidesEnBonneSante;
-    assert.equal(guidesEnBonneSante[0].documents.length, 2);
-    assert.equal(guidesEnBonneSante[0].documents[0].nom, 'doc1.pdf');
-    assert.equal(guidesEnBonneSante[0].documents[1].nom, 'doc2.pdf');
+    expect(guidesEnBonneSante[0].documents).toHaveLength(2);
+    expect(guidesEnBonneSante[0].documents[0].nom).toBe('doc1.pdf');
+    expect(guidesEnBonneSante[0].documents[1].nom).toBe('doc2.pdf');
   });
 
   it('indique si un guide a un document manquant', async () => {
@@ -66,11 +65,11 @@ describe('Le service de calcul de la santé des guildes', () => {
 
     const sante = await serviceSanteGuides.calculeSante([guideAvecPlusieursDocuments]);
 
-    assert.equal(sante.guidesEnBonneSante.length, 0);
-    assert.equal(sante.guidesAvecProbleme.length, 1);
+    expect(sante.guidesEnBonneSante).toHaveLength(0);
+    expect(sante.guidesAvecProbleme).toHaveLength(1);
     const santeDocumentGuides = sante.guidesAvecProbleme[0].documents;
-    assert.equal(santeDocumentGuides[0].etat, 'ok');
-    assert.equal(santeDocumentGuides[1].etat, 'ko');
+    expect(santeDocumentGuides[0].etat).toBe('ok');
+    expect(santeDocumentGuides[1].etat).toBe('ko');
   });
 
   it("inspecte l'etat des images", async () => {
@@ -80,10 +79,10 @@ describe('Le service de calcul de la santé des guildes', () => {
 
     const sante = await serviceSanteGuides.calculeSante([guideZeroTrust()]);
 
-    assert.equal(sante.guidesEnBonneSante.length, 0);
-    assert.equal(sante.guidesAvecProbleme.length, 1);
+    expect(sante.guidesEnBonneSante).toHaveLength(0);
+    expect(sante.guidesAvecProbleme).toHaveLength(1);
     const santeImages = sante.guidesAvecProbleme[0].images;
-    assert.equal(santeImages.origine, 'ok');
-    assert.equal(santeImages['588'], 'ko');
+    expect(santeImages.origine).toBe('ok');
+    expect(santeImages['588']).toBe('ko');
   });
 });

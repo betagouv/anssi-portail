@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque.js';
 import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../../src/bus/evenements/moduleTermine.js';
@@ -51,9 +50,9 @@ describe("L'utilisateur", () => {
 
     const organisation = await utilisateur.organisation();
 
-    assert.equal(organisation.nom, 'beta');
-    assert.equal(organisation.departement, '33');
-    assert.equal(organisation.siret, '1234');
+    expect(organisation.nom).toBe('beta');
+    expect(organisation.departement).toBe('33');
+    expect(organisation.siret).toBe('1234');
   });
 
   it("ne recherche qu'une seule fois dans l’API entreprise", async () => {
@@ -88,10 +87,10 @@ describe("L'utilisateur", () => {
     const organisation = await utilisateur.organisation();
     await utilisateur.organisation();
 
-    assert.equal(organisation.nom, 'tif');
-    assert.equal(organisation.departement, '01');
-    assert.equal(organisation.siret, '98');
-    assert.equal(1, nombreRecherchesEntreprise);
+    expect(organisation.nom).toBe('tif');
+    expect(organisation.departement).toBe('01');
+    expect(organisation.siret).toBe('98');
+    expect(1).toBe(nombreRecherchesEntreprise);
   });
 
   it("se décrit comme un agent ANSSI si son organisation est le siège social de l'ANSSI", async () => {
@@ -113,7 +112,7 @@ describe("L'utilisateur", () => {
 
     const estAgentAnssi = await utilisateur.estAgentAnssi();
 
-    assert.equal(estAgentAnssi, true);
+    expect(estAgentAnssi).toBe(true);
   });
 
   it("se décrit comme un agent ANSSI si son organisation n'est pas l'ANSSI", async () => {
@@ -135,7 +134,7 @@ describe("L'utilisateur", () => {
 
     const estAgentAnssi = await utilisateur.estAgentAnssi();
 
-    assert.equal(estAgentAnssi, false);
+    expect(estAgentAnssi).toBe(false);
   });
 
   it("se décrit comme un agent ANSSI si son organisation est un établissement de l'ANSSI", async () => {
@@ -157,7 +156,7 @@ describe("L'utilisateur", () => {
 
     const estAgentAnssi = await utilisateur.estAgentAnssi();
 
-    assert.equal(estAgentAnssi, true);
+    expect(estAgentAnssi).toBe(true);
   });
 
   it('Peut ajouter un guide', () => {
@@ -170,7 +169,7 @@ describe("L'utilisateur", () => {
       fauxAdaptateurHachage
     );
 
-    assert.equal(utilisateur.peutManipulerLesDocumentsDUnGuide(), true);
+    expect(utilisateur.peutManipulerLesDocumentsDUnGuide()).toBe(true);
   });
 
   describe('du parcours de sécurisation', () => {
@@ -205,7 +204,7 @@ describe("L'utilisateur", () => {
         });
         await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
 
-        assert.equal(utilisateurDeParcours.mesuresPrisesEnCompte.length, 1);
+        expect(utilisateurDeParcours.mesuresPrisesEnCompte).toHaveLength(1);
         busEvenements.naPasRecuDEvenement(ModuleTermine);
         busEvenements.naPasRecuDEvenement(MesurePriseEnCompte);
       });
@@ -222,7 +221,7 @@ describe("L'utilisateur", () => {
           ];
           await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
 
-          assert.equal(busEvenements.aRecuUnEvenement(BadgeCyberdépartDébloqué), true);
+          expect(busEvenements.aRecuUnEvenement(BadgeCyberdépartDébloqué)).toBe(true);
         });
 
         it('signale que la prise en compte debloque le badge Cyberdépart', async () => {
@@ -239,7 +238,7 @@ describe("L'utilisateur", () => {
             module: moduleCyberdépart,
           });
 
-          assert.equal(nouvelÉtatDuModule.badgeCyberdépartDebloqué, true);
+          expect(nouvelÉtatDuModule.badgeCyberdépartDebloqué).toBe(true);
         });
 
         it("ne publie pas un événement de déblocage de badge s'il a déjà été débloqué", async () => {
@@ -260,7 +259,7 @@ describe("L'utilisateur", () => {
 
           await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
 
-          assert.equal(busEvenements.naPasRecuDEvenement(BadgeCyberdépartDébloqué), true);
+          expect(busEvenements.naPasRecuDEvenement(BadgeCyberdépartDébloqué)).toBe(true);
         });
 
         it("ne publie pas un événement de déblocage de badge si le seuil n'est pas atteint", async () => {
@@ -276,7 +275,7 @@ describe("L'utilisateur", () => {
 
           await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
 
-          assert.equal(busEvenements.naPasRecuDEvenement(BadgeCyberdépartDébloqué), true);
+          expect(busEvenements.naPasRecuDEvenement(BadgeCyberdépartDébloqué)).toBe(true);
         });
 
         it('publie les totaux lors du déblocage du badge', async () => {
@@ -291,8 +290,8 @@ describe("L'utilisateur", () => {
           await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
 
           const evenement = busEvenements.recupereEvenement(BadgeCyberdépartDébloqué);
-          assert.equal(evenement!.nombreMesuresActuel, 2);
-          assert.equal(evenement!.nombreMesuresTotal, 5);
+          expect(evenement!.nombreMesuresActuel).toBe(2);
+          expect(evenement!.nombreMesuresTotal).toBe(5);
         });
 
         it('ne prends en compte que les mesures du module Cyberdépart pour le déblocage du badge', async () => {
@@ -311,7 +310,7 @@ describe("L'utilisateur", () => {
           ];
           await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
 
-          assert.equal(busEvenements.naPasRecuDEvenement(BadgeCyberdépartDébloqué), true);
+          expect(busEvenements.naPasRecuDEvenement(BadgeCyberdépartDébloqué)).toBe(true);
         });
 
         it('rejoins le parcours basique', async () => {
@@ -326,10 +325,10 @@ describe("L'utilisateur", () => {
 
           const evenement = busEvenements.recupereEvenement(ParcoursRejoint);
 
-          assert.equal(utilisateurDeParcours.parcoursActuel(), 'allégé');
-          assert.equal(evenement?.email, utilisateurDeParcours.email);
-          assert.equal(evenement?.parcours, 'allégé');
-          assert.equal(evenement?.motif, 'prise-en-compte-mesure');
+          expect(utilisateurDeParcours.parcoursActuel()).toBe('allégé');
+          expect(evenement?.email).toBe(utilisateurDeParcours.email);
+          expect(evenement?.parcours).toBe('allégé');
+          expect(evenement?.motif).toBe('prise-en-compte-mesure');
         });
 
         it("ne rejoins pas le parcours basique s'il est déjà en parcours complet", async () => {
@@ -343,9 +342,9 @@ describe("L'utilisateur", () => {
           moduleCyberdépart.mesures = [mesureCyberdépart];
           await utilisateur.prendEnCompte({ ...paramètresPriseEnCompteDéfaut, mesure: mesureCyberdépart });
 
-          assert.equal(utilisateur.parcoursActuel(), 'complet');
-          assert.equal(busEvenements.naPasRecuDEvenement(ParcoursRejoint), true);
-          assert.equal(busEvenements.naPasRecuDEvenement(ParcoursChangé), true);
+          expect(utilisateur.parcoursActuel()).toBe('complet');
+          expect(busEvenements.naPasRecuDEvenement(ParcoursRejoint)).toBe(true);
+          expect(busEvenements.naPasRecuDEvenement(ParcoursChangé)).toBe(true);
         });
 
         it.todo('publie un événement d');
@@ -360,7 +359,7 @@ describe("L'utilisateur", () => {
 
           await utilisateurDeParcours.prendEnCompte({ ...paramètresPriseEnCompteDéfaut, mesure, module });
 
-          assert.equal(utilisateurDeParcours.parcoursActuel(), 'complet');
+          expect(utilisateurDeParcours.parcoursActuel()).toBe('complet');
         });
 
         it("rejoins le parcours complet s'il est déjà en parcours basique", async () => {
@@ -373,11 +372,11 @@ describe("L'utilisateur", () => {
           await utilisateurDeParcours.prendEnCompte({ ...paramètresPriseEnCompteDéfaut, mesure, module });
 
           const evenement = busEvenements.recupereEvenement(ParcoursChangé);
-          assert.equal(utilisateurDeParcours.parcoursActuel(), 'complet');
-          assert.equal(evenement?.email, utilisateurDeParcours.email);
-          assert.equal(evenement?.parcoursPrécédent, 'allégé');
-          assert.equal(evenement?.parcours, 'complet');
-          assert.equal(evenement?.motif, 'prise-en-compte-mesure');
+          expect(utilisateurDeParcours.parcoursActuel()).toBe('complet');
+          expect(evenement?.email).toBe(utilisateurDeParcours.email);
+          expect(evenement?.parcoursPrécédent).toBe('allégé');
+          expect(evenement?.parcours).toBe('complet');
+          expect(evenement?.motif).toBe('prise-en-compte-mesure');
         });
       });
     });
@@ -391,7 +390,7 @@ describe("L'utilisateur", () => {
           module: moduleCyberdépart,
         });
 
-        assert.equal(nouvelÉtatDuModule.moduleTerminé, true);
+        expect(nouvelÉtatDuModule.moduleTerminé).toBe(true);
       });
 
       it('publie un événement de completion quand toutes les mesures du module sont prises en compte', async () => {
@@ -403,10 +402,10 @@ describe("L'utilisateur", () => {
         busEvenements.aRecuUnEvenement(ModuleTermine);
         const evenement = busEvenements.recupereEvenement(ModuleTermine);
 
-        assert.equal(evenement!.email, 'utilisateur@mail.com');
-        assert.equal(evenement!.idModule, 1);
-        assert.equal(evenement!.nomModule, 'Cyberdépart');
-        assert.equal(evenement!.parcours, 'allégé');
+        expect(evenement!.email).toBe('utilisateur@mail.com');
+        expect(evenement!.idModule).toBe(1);
+        expect(evenement!.nomModule).toBe('Cyberdépart');
+        expect(evenement!.parcours).toBe('allégé');
       });
 
       it('publie un événement de fin de parcours allégé quand toutes les mesures du module Cyberdépart sont prises en compte', async () => {
@@ -417,7 +416,7 @@ describe("L'utilisateur", () => {
 
         const evenement = busEvenements.recupereEvenement(ParcoursAllégéTerminé);
 
-        assert.equal(evenement?.email, 'utilisateur@mail.com');
+        expect(evenement?.email).toBe('utilisateur@mail.com');
       });
 
       it("ne publie pas un événement de fin de parcours allégé si l'utilisateur n'est pas en parcours allégé", async () => {
@@ -426,7 +425,7 @@ describe("L'utilisateur", () => {
 
         await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
 
-        assert.equal(busEvenements.naPasRecuDEvenement(ParcoursAllégéTerminé), true);
+        expect(busEvenements.naPasRecuDEvenement(ParcoursAllégéTerminé)).toBe(true);
       });
 
       it('publie un événement de fin de parcours complet quand toutes les mesures sont prises en compte', async () => {
@@ -438,7 +437,7 @@ describe("L'utilisateur", () => {
 
         const evenement = busEvenements.recupereEvenement(ParcoursCompletTerminé);
 
-        assert.equal(evenement?.email, 'utilisateur@mail.com');
+        expect(evenement?.email).toBe('utilisateur@mail.com');
       });
 
       it('indique que le parcours est terminé quand toutes les mesures sont prises en compte', async () => {
@@ -448,7 +447,7 @@ describe("L'utilisateur", () => {
 
         const nouvelEtatModule = await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
 
-        assert.equal(nouvelEtatModule.parcoursCompletTerminé, true);
+        expect(nouvelEtatModule.parcoursCompletTerminé).toBe(true);
       });
 
       it("ne publie pas un événement de fin de parcours complet s'il reste des mesures à prendre en compte", async () => {
@@ -459,7 +458,7 @@ describe("L'utilisateur", () => {
 
         await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
 
-        assert.equal(busEvenements.naPasRecuDEvenement(ParcoursCompletTerminé), true);
+        expect(busEvenements.naPasRecuDEvenement(ParcoursCompletTerminé)).toBe(true);
       });
 
       it("adapte l'événement de complétion au module", async () => {
@@ -474,8 +473,8 @@ describe("L'utilisateur", () => {
         });
 
         const evenement = busEvenements.recupereEvenement(ModuleTermine);
-        assert.equal(evenement!.idModule, 3);
-        assert.equal(evenement!.nomModule, 'ModuleGénérique');
+        expect(evenement!.idModule).toBe(3);
+        expect(evenement!.nomModule).toBe('ModuleGénérique');
       });
 
       it("ne publie pas d'événement de completion si toutes les mesures du module ne sont pas prises en compte", async () => {
@@ -483,7 +482,7 @@ describe("L'utilisateur", () => {
 
         await utilisateurDeParcours.prendEnCompte(paramètresPriseEnCompteDéfaut);
 
-        assert.equal(busEvenements.naPasRecuDEvenement(ModuleTermine), true);
+        expect(busEvenements.naPasRecuDEvenement(ModuleTermine)).toBe(true);
       });
 
       it('ne compte que les prises en compte du module', async () => {
@@ -498,7 +497,7 @@ describe("L'utilisateur", () => {
           module,
         });
 
-        assert.equal(busEvenements.aRecuUnEvenement(ModuleTermine), true);
+        expect(busEvenements.aRecuUnEvenement(ModuleTermine)).toBe(true);
       });
     });
 
@@ -510,7 +509,7 @@ describe("L'utilisateur", () => {
 
       const nombreDeMesuresPrisesEnCompte = utilisateurDeParcours.nombreDeMesuresPrisesEnCompte(module);
 
-      assert.equal(nombreDeMesuresPrisesEnCompte, 2);
+      expect(nombreDeMesuresPrisesEnCompte).toBe(2);
     });
 
     it("indique le nombre des mesures prises en compte dans un module lorsqu'il n'y en a pas", () => {
@@ -519,7 +518,7 @@ describe("L'utilisateur", () => {
 
       const nombreDeMesuresPrisesEnCompte = utilisateurDeParcours.nombreDeMesuresPrisesEnCompte(module);
 
-      assert.equal(nombreDeMesuresPrisesEnCompte, 0);
+      expect(nombreDeMesuresPrisesEnCompte).toBe(0);
     });
 
     it('indique le nombre des mesures prises en compte dans un module sans tenir compte des mesures des autres modules', () => {
@@ -529,7 +528,7 @@ describe("L'utilisateur", () => {
 
       const nombreDeMesuresPrisesEnCompte = utilisateurDeParcours.nombreDeMesuresPrisesEnCompte(module);
 
-      assert.equal(nombreDeMesuresPrisesEnCompte, 0);
+      expect(nombreDeMesuresPrisesEnCompte).toBe(0);
     });
 
     it('compare les ids des mesures prises en compte', () => {
@@ -539,7 +538,7 @@ describe("L'utilisateur", () => {
 
       const nombreDeMesuresPrisesEnCompte = utilisateurDeParcours.nombreDeMesuresPrisesEnCompte(module);
 
-      assert.equal(nombreDeMesuresPrisesEnCompte, 1);
+      expect(nombreDeMesuresPrisesEnCompte).toBe(1);
     });
   });
 });

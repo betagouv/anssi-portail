@@ -1,8 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { Express } from 'express';
 import request from 'supertest';
-import assert from 'node:assert';
 import { creeServeur } from '../../../src/api/msc.js';
 import { configurationDeTestDuServeur } from '../fauxObjets.js';
 import { encodeSession, enObjet } from '../cookie.js';
@@ -22,8 +21,8 @@ describe('La ressource apres deconnexion OIDC', () => {
         .get('/oidc/apres-deconnexion?state=le-bon-state')
         .set('Cookie', [`AgentConnectInfo=${cookie}`]);
 
-      assert.equal(reponse.status, HttpStatusCode.Found);
-      assert.equal(reponse.headers.location, '/');
+      expect(reponse.status).toBe(HttpStatusCode.Found);
+      expect(reponse.headers.location).toBe('/');
     });
 
     it("ne deconnecte l'utilisateur si le state ne correspond pas", async () => {
@@ -33,7 +32,7 @@ describe('La ressource apres deconnexion OIDC', () => {
         .get('/oidc/apres-deconnexion?state=pas-le-bon-state')
         .set('Cookie', [`AgentConnectInfo=${cookie}`]);
 
-      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+      expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
     });
 
     it('supprime le cookie contenant le state', async () => {
@@ -44,10 +43,10 @@ describe('La ressource apres deconnexion OIDC', () => {
         .set('Cookie', [`AgentConnectInfo=${cookie}`]);
 
       const headerCookie = reponse.headers['set-cookie'];
-      assert.notEqual(headerCookie, undefined);
+      expect(headerCookie).toBeDefined();
       const cookieSession = enObjet(headerCookie[0]);
 
-      assert.equal(cookieSession.AgentConnectInfo, '');
+      expect(cookieSession.AgentConnectInfo).toBe('');
     });
 
     it('supprime le cookie contenant le session', async () => {
@@ -62,7 +61,7 @@ describe('La ressource apres deconnexion OIDC', () => {
 
       const cookieSessionDecode = enObjet(headerCookie[1]);
 
-      assert.equal(cookieSessionDecode.session, '');
+      expect(cookieSessionDecode.session).toBe('');
     });
   });
 });

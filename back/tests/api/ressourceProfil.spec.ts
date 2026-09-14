@@ -1,8 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
@@ -34,7 +33,7 @@ describe('La ressource Profil', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/api/profil');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it("renvoie les informations de l'utilisateur", async () => {
@@ -45,14 +44,14 @@ describe('La ressource Profil', () => {
 
       const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 
-      assert.equal(reponse.body.nom, 'Dupont');
-      assert.equal(reponse.body.prenom, 'Jeanne');
-      assert.equal(reponse.body.email, 'jeanne.dupont@user.com');
-      assert.equal(reponse.body.siret, '13000766900018');
-      assert.equal(reponse.body.estAgentAnssi, true);
-      assert.equal(reponse.body.idListeFavoris, jeanneDupont.idListeFavoris);
-      assert.equal(reponse.body.codeDepartement, '86');
-      assert.equal(reponse.body.codeRegion, 'FR-971');
+      expect(reponse.body.nom).toBe('Dupont');
+      expect(reponse.body.prenom).toBe('Jeanne');
+      expect(reponse.body.email).toBe('jeanne.dupont@user.com');
+      expect(reponse.body.siret).toBe('13000766900018');
+      expect(reponse.body.estAgentAnssi).toBe(true);
+      expect(reponse.body.idListeFavoris).toBe(jeanneDupont.idListeFavoris);
+      expect(reponse.body.codeDepartement).toBe('86');
+      expect(reponse.body.codeRegion).toBe('FR-971');
     });
 
     it("déduit la région du département si elle n'est valorisée", async () => {
@@ -95,14 +94,14 @@ describe('La ressource Profil', () => {
 
       const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 
-      assert.equal(reponse.body.nom, 'Martin');
-      assert.equal(reponse.body.prenom, 'Jean');
-      assert.equal(reponse.body.email, 'jean.martin@user.com');
-      assert.equal(reponse.body.siret, '13000766900018');
-      assert.equal(reponse.body.estAgentAnssi, true);
-      assert.equal(reponse.body.idListeFavoris, jeanMartin.idListeFavoris);
-      assert.equal(reponse.body.codeDepartement, '33');
-      assert.equal(reponse.body.codeRegion, 'FR-NAQ');
+      expect(reponse.body.nom).toBe('Martin');
+      expect(reponse.body.prenom).toBe('Jean');
+      expect(reponse.body.email).toBe('jean.martin@user.com');
+      expect(reponse.body.siret).toBe('13000766900018');
+      expect(reponse.body.estAgentAnssi).toBe(true);
+      expect(reponse.body.idListeFavoris).toBe(jeanMartin.idListeFavoris);
+      expect(reponse.body.codeDepartement).toBe('33');
+      expect(reponse.body.codeRegion).toBe('FR-NAQ');
     });
 
     it('supprime la session si le token JWT est invalide', async () => {
@@ -120,9 +119,9 @@ describe('La ressource Profil', () => {
       const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookieSession]);
 
       const headerCookie = reponse.headers['set-cookie'];
-      assert.notEqual(headerCookie, undefined);
+      expect(headerCookie).toBeDefined();
       const cookieSessionDecode = enObjet(headerCookie[0]);
-      assert.equal(cookieSessionDecode.session, '');
+      expect(cookieSessionDecode.session).toBe('');
     });
 
     it("renvoie le code d'activité de l'organisation", async () => {
@@ -133,7 +132,7 @@ describe('La ressource Profil', () => {
 
       const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 
-      assert.equal(reponse.body.codeActivite, '84.11Z');
+      expect(reponse.body.codeActivite).toBe('84.11Z');
     });
 
     describe("concernant la capacité de l'utilisateur à éditer les guides", () => {
@@ -146,7 +145,7 @@ describe('La ressource Profil', () => {
 
         const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 
-        assert.equal(reponse.body.peutGererLesGuides, true);
+        expect(reponse.body.peutGererLesGuides).toBe(true);
       });
 
       it("est fausse si il n'a pas le MFA", async () => {
@@ -157,7 +156,7 @@ describe('La ressource Profil', () => {
 
         const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 
-        assert.equal(reponse.body.peutGererLesGuides, false);
+        expect(reponse.body.peutGererLesGuides).toBe(false);
       });
 
       it("est fausse si il n'a pas le rôle nécessaire", async () => {
@@ -169,7 +168,7 @@ describe('La ressource Profil', () => {
 
         const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 
-        assert.equal(reponse.body.peutGererLesGuides, false);
+        expect(reponse.body.peutGererLesGuides).toBe(false);
       });
 
       it("est fausse si il n'y a pas d'utilisateur connecté", async () => {
@@ -181,15 +180,15 @@ describe('La ressource Profil', () => {
 
         const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 
-        assert.equal(reponse.body.peutGererLesGuides, false);
+        expect(reponse.body.peutGererLesGuides).toBe(false);
       });
     });
     describe('concernant le parcours de sécurisation', () => {
       it("ne renvoie pas de parcours si l'utilisateur n'est pas connecté", async () => {
         const reponse = await request(serveur).get('/api/profil');
 
-        assert.equal(reponse.statusCode, HttpStatusCode.Ok);
-        assert.equal(reponse.body.parcoursSecurisation, undefined);
+        expect(reponse.statusCode).toBe(HttpStatusCode.Ok);
+        expect(reponse.body.parcoursSecurisation).toBeUndefined();
       });
 
       it('renvoie le parcours actuel', async () => {
@@ -206,7 +205,7 @@ describe('La ressource Profil', () => {
 
         const reponse = await request(serveur).get('/api/profil').set('Cookie', [cookie]);
 
-        assert.deepEqual(reponse.body.parcoursSecurisation, { parcoursActuel: 'complet' });
+        expect(reponse.body.parcoursSecurisation).toEqual({ parcoursActuel: 'complet' });
       });
     });
   });

@@ -1,6 +1,5 @@
 import { JSDOM } from 'jsdom';
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { ChargeurFilAriane } from '../../../../src/infra/enrichissement/chargementProprietes/chargeurFilAriane.js';
 
 describe("Le chargeur de propriétés du fil d'Ariane", () => {
@@ -27,7 +26,7 @@ describe("Le chargeur de propriétés du fil d'Ariane", () => {
 
     const props = await chargeurDeProps.charge(dom);
 
-    assert.equal(props, undefined);
+    expect(props).toBeUndefined();
   });
 
   it('sait récupérer les données dans le DOM', async () => {
@@ -35,6 +34,6 @@ describe("Le chargeur de propriétés du fil d'Ariane", () => {
 
     const props = await chargeurDeProps.charge(dom);
 
-    assert.deepEqual(props, { feuille: 'Les services pour se lancer' });
+    expect(props).toEqual({ feuille: 'Les services pour se lancer' });
   });
 });

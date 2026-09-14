@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { consigneQuestionnaireVraiFauxReponseSoumiseDansJournal } from '../../src/bus/consigneQuestionnaireVraiFauxReponseSoumiseDansJournal.js';
 import { QuestionnaireVraiFauxRéponseSoumise } from '../../src/bus/evenements/questionnaireVraiFauxReponseSoumise.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
@@ -39,7 +38,7 @@ describe('L’abonnement qui consigne une réponse à une question vraie/faux da
       })
     );
 
-    assert.deepEqual(evenementRecu, {
+    expect(evenementRecu).toEqual({
       type: 'QUESTIONNAIRE_VRAI_FAUX_REPONSE_SOUMISE',
       donnees: {
         idCorrélation: 'id-correlation',
@@ -81,7 +80,7 @@ describe('L’abonnement qui consigne une réponse à une question vraie/faux da
       })
     );
 
-    assert.deepEqual(evenementRecu, {
+    expect(evenementRecu).toEqual({
       type: 'QUESTIONNAIRE_VRAI_FAUX_REPONSE_SOUMISE',
       donnees: {
         idCorrélation: 'id-correlation',

@@ -1,10 +1,9 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import assert from 'assert';
 import { Request, Response } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
 import { createRequest, createResponse } from 'node-mocks-http';
 import { OutgoingHttpHeaders } from 'node:http';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT.js';
 import { FournisseurChemin } from '../../../src/api/fournisseurChemin.js';
 import { fabriqueMiddleware, Middleware } from '../../../src/api/middlewares/middleware.js';
@@ -63,10 +62,10 @@ describe('Le middleware', () => {
       };
       await middleware.interdisLaMiseEnCache(requete, reponse, suite);
 
-      assert.equal(headers['cache-control'], 'no-store, no-cache, must-revalidate, proxy-revalidate');
-      assert.equal(headers.pragma, 'no-cache');
-      assert.equal(headers.expires, '0');
-      assert.equal(headers['surrogate-control'], 'no-store');
+      expect(headers['cache-control']).toBe('no-store, no-cache, must-revalidate, proxy-revalidate');
+      expect(headers.pragma).toBe('no-cache');
+      expect(headers.expires).toBe('0');
+      expect(headers['surrogate-control']).toBe('no-store');
     });
   });
 
@@ -89,7 +88,7 @@ describe('Le middleware', () => {
 
       await middleware.verifieJWT(requete, reponse, () => {});
 
-      assert.equal(statutRecu, HttpStatusCode.Unauthorized);
+      expect(statutRecu).toBe(HttpStatusCode.Unauthorized);
 
       process.env = envOriginal;
     });
@@ -112,7 +111,7 @@ describe('Le middleware', () => {
 
       await middleware.verifieJWT(requete, reponse, () => {});
 
-      assert.equal(statutRecu, HttpStatusCode.Unauthorized);
+      expect(statutRecu).toBe(HttpStatusCode.Unauthorized);
     });
 
     it("ajoute l'email de l'utilisateur courant dans la requête", async () => {
@@ -124,7 +123,7 @@ describe('Le middleware', () => {
       };
 
       await middleware.verifieJWT(requete, reponse, () => {});
-      assert.equal(requete.emailUtilisateurCourant, 'jeanne.dupond@beta.gouv.fr');
+      expect(requete.emailUtilisateurCourant).toBe('jeanne.dupond@beta.gouv.fr');
     });
   });
 
@@ -140,7 +139,7 @@ describe('Le middleware', () => {
 
       await middleware.verifieJWTNavigation(requete, reponse, () => {});
 
-      assert.equal(urlRecu, '/connexion?urlRedirection=%2Ffavoris%3Ftri%3Drecent');
+      expect(urlRecu).toBe('/connexion?urlRedirection=%2Ffavoris%3Ftri%3Drecent');
     });
 
     it('redirige vers la page de connexion si le token ne peut pas être décodé', async () => {
@@ -161,7 +160,7 @@ describe('Le middleware', () => {
 
       await middleware.verifieJWTNavigation(requete, reponse, () => {});
 
-      assert.equal(urlRecu, '/connexion?urlRedirection=%2Fma-maturite');
+      expect(urlRecu).toBe('/connexion?urlRedirection=%2Fma-maturite');
     });
   });
 
@@ -171,16 +170,16 @@ describe('Le middleware', () => {
       let aAppeleSend = false;
       reponse.send = (contenu: string) => {
         aAppeleSend = true;
-        assert.match(contenu, /<script nonce="[a-zA-Z0-9+/]{22}=="/);
+        expect(contenu).toMatch(/<script nonce="[a-zA-Z0-9+/]{22}=="/);
         return leVraiSend(contenu);
       };
 
       await middleware.ajouteMethodeEnrichissement(requete, reponse, () => {
-        assert.notEqual(reponse.envoieFichierEnrichi, undefined);
+        expect(reponse.envoieFichierEnrichi).toBeDefined();
         reponse.envoieFichierEnrichi(ressourceFactice());
       });
 
-      assert.equal(true, aAppeleSend);
+      expect(true).toBe(aAppeleSend);
     });
 
     it('permet de substituer la variable de version par la version de construction', async () => {
@@ -195,12 +194,12 @@ describe('Le middleware', () => {
       };
 
       await middleware.ajouteMethodeEnrichissement(requete, reponse, () => {
-        assert.notEqual(reponse.envoieFichierEnrichi, undefined);
+        expect(reponse.envoieFichierEnrichi).toBeDefined();
         reponse.envoieFichierEnrichi(ressourceFactice());
       });
 
-      assert.equal(true, aAppeleSend);
-      assert.match(contenuEnvoye, /<script src="\/un-script\.js\?version=12345"><\/script>/);
+      expect(true).toBe(aAppeleSend);
+      expect(contenuEnvoye).toMatch(/<script src="\/un-script\.js\?version=12345"><\/script>/);
     });
 
     it("renvoi un 404 si la fichier n'existe pas", async () => {
@@ -211,11 +210,11 @@ describe('Le middleware', () => {
       };
 
       await middleware.ajouteMethodeEnrichissement(requete, reponse, () => {
-        assert.notEqual(reponse.envoieFichierEnrichi, undefined);
+        expect(reponse.envoieFichierEnrichi).toBeDefined();
         reponse.envoieFichierEnrichi('/services/inexistant.html');
       });
 
-      assert.equal(estAppelé, true);
+      expect(estAppelé).toBe(true);
     });
   });
 
@@ -240,8 +239,8 @@ describe('Le middleware', () => {
 
       await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {});
 
-      assert.deepEqual(requete.utilisateur, jeanneDupont);
-      assert.equal(reponse.statusCode, HttpStatusCode.Ok);
+      expect(requete.utilisateur).toEqual(jeanneDupont);
+      expect(reponse.statusCode).toBe(HttpStatusCode.Ok);
     });
 
     it('est indéfini si non défini dans la session', async () => {
@@ -250,7 +249,7 @@ describe('Le middleware', () => {
 
       await middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage)(requete, reponse, () => {});
 
-      assert.equal(requete.utilisateur, undefined);
+      expect(requete.utilisateur).toBeUndefined();
     });
 
     it('appelle la suite', async () => {
@@ -260,7 +259,7 @@ describe('Le middleware', () => {
         suiteAppelee = true;
       });
 
-      assert.equal(suiteAppelee, true);
+      expect(suiteAppelee).toBe(true);
     });
 
     it("n'essaie pas de hacher si l'email est absent", async () => {
@@ -274,7 +273,7 @@ describe('Le middleware', () => {
         suiteAppelee = true;
       });
 
-      assert.equal(suiteAppelee, true);
+      expect(suiteAppelee).toBe(true);
     });
 
     it("renvoie une erreur 500 lorque l'entrepôt ne fonctionne pas", async () => {
@@ -286,8 +285,8 @@ describe('Le middleware', () => {
         suiteAppelee = true;
       });
 
-      assert.equal(reponse.statusCode, HttpStatusCode.InternalServerError);
-      assert.equal(suiteAppelee, false);
+      expect(reponse.statusCode).toBe(HttpStatusCode.InternalServerError);
+      expect(suiteAppelee).toBe(false);
     });
 
     it('renvoie une erreur 401 lorsque le jeton est invalide', async () => {
@@ -298,9 +297,9 @@ describe('Le middleware', () => {
         suiteAppelee = true;
       });
 
-      assert.equal(reponse.statusCode, HttpStatusCode.Unauthorized);
-      assert.equal(requete.utilisateur, undefined);
-      assert.equal(suiteAppelee, false);
+      expect(reponse.statusCode).toBe(HttpStatusCode.Unauthorized);
+      expect(requete.utilisateur).toBeUndefined();
+      expect(suiteAppelee).toBe(false);
     });
 
     it('nettoie silencieusement la session si le token est expiré', async () => {
@@ -316,10 +315,10 @@ describe('Le middleware', () => {
         suiteAppelee = true;
       });
 
-      assert.equal(requete.utilisateur, undefined);
-      assert.equal(suiteAppelee, true);
-      assert.equal(cookieNettoye, 'session');
-      assert.equal(requete.session, null);
+      expect(requete.utilisateur).toBeUndefined();
+      expect(suiteAppelee).toBe(true);
+      expect(cookieNettoye).toBe('session');
+      expect(requete.session).toBeNull();
     });
 
     it('n’ajoute pas d’utilisateur (mais n’échoue pas) s’il n’y a pas de token', async () => {
@@ -331,9 +330,9 @@ describe('Le middleware', () => {
         suiteAppelee++;
       });
 
-      assert.equal(requete.utilisateur, undefined);
-      assert.equal(reponse.statusCode, HttpStatusCode.Ok);
-      assert.equal(suiteAppelee, 1);
+      expect(requete.utilisateur).toBeUndefined();
+      expect(reponse.statusCode).toBe(HttpStatusCode.Ok);
+      expect(suiteAppelee).toBe(1);
     });
   });
 
@@ -352,8 +351,8 @@ describe('Le middleware', () => {
 
       await middleware.verifieModeMaintenance(requete, reponse, () => {});
 
-      assert.equal(reponse.statusCode, HttpStatusCode.ServiceUnavailable);
-      assert.equal(estAppelé, true);
+      expect(reponse.statusCode).toBe(HttpStatusCode.ServiceUnavailable);
+      expect(estAppelé).toBe(true);
     });
 
     it('appelle la suite lorsque le mode est inactif', async () => {
@@ -367,7 +366,7 @@ describe('Le middleware', () => {
         suiteAppelee = true;
       });
 
-      assert.equal(suiteAppelee, true);
+      expect(suiteAppelee).toBe(true);
     });
   });
 });

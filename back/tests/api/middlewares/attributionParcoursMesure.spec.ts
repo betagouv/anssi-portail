@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { fabriqueAttributionParcoursMesure } from '../../../src/api/middlewares/attributionParcoursMesure.js';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
 import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire.js';
@@ -36,7 +35,7 @@ describe("Le middleware d'attribution de parcours par mesure", () => {
     } as Partial<Request>;
     await attributionParcoursMesure(requête as Request, {} as Response, () => {});
 
-    assert.equal(attributionParcoursAppellé, false);
+    expect(attributionParcoursAppellé).toBe(false);
   });
 
   it("n'attribut pas de parcours si la mesure n'appartient à aucun module", async () => {
@@ -59,7 +58,7 @@ describe("Le middleware d'attribution de parcours par mesure", () => {
     } as Partial<Request>;
     await attributionParcoursMesure(requête as Request, {} as Response, () => {});
 
-    assert.equal(attributionParcoursAppellé, false);
+    expect(attributionParcoursAppellé).toBe(false);
   });
 
   it('attribut le parcours allégé si la mesure est dans le module Cyberdépart', async () => {
@@ -85,7 +84,7 @@ describe("Le middleware d'attribution de parcours par mesure", () => {
     } as Partial<Request>;
     await attributionParcoursMesure(requête as Request, {} as Response, () => {});
 
-    assert.equal(attributionParcoursAppellé, 'allégé');
+    expect(attributionParcoursAppellé).toBe('allégé');
   });
 
   it("attribut le parcours complet si la mesure n'est pas dans le module Cyberdépart", async () => {
@@ -111,6 +110,6 @@ describe("Le middleware d'attribution de parcours par mesure", () => {
     } as Partial<Request>;
     await attributionParcoursMesure(requête as Request, {} as Response, () => {});
 
-    assert.equal(attributionParcoursAppellé, 'complet');
+    expect(attributionParcoursAppellé).toBe('complet');
   });
 });

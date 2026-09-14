@@ -1,5 +1,4 @@
-import assert from 'assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { fausseMessagerieInstantanee } from '../api/fauxObjets.js';
 import { notifieUnRetourNégatifSurMiniTest } from '../../src/bus/notifieRetourNegatifSurMiniTest.js';
 import { RetourMiniTestDonné } from '../../src/bus/evenements/retourMiniTestDonne.js';
@@ -22,8 +21,8 @@ describe("L'abonnement qui notifie un retour de test de maturité négatif", () 
       })
     );
 
-    assert.equal(évènementReçu!.miniTest, 'test-maturité');
-    assert.equal(évènementReçu!.commentaire, "J'aime pas");
+    expect(évènementReçu!.miniTest).toBe('test-maturité');
+    expect(évènementReçu!.commentaire).toBe("J'aime pas");
   });
 
   it('ne consigne un évènement pour un retour positif', async () => {
@@ -43,6 +42,6 @@ describe("L'abonnement qui notifie un retour de test de maturité négatif", () 
       })
     );
 
-    assert.equal(estAppelé, false);
+    expect(estAppelé).toBe(false);
   });
 });

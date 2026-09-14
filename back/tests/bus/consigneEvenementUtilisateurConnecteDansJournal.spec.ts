@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { UtilisateurConnecte } from '../../src/bus/evenements/utilisateurConnecte.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
@@ -22,7 +21,7 @@ describe("L'abonnement qui consigne la connexion d'un utilisateur dans le journa
       adaptateurHorloge,
     })(new UtilisateurConnecte('u1@example.com-hache', true));
 
-    assert.deepEqual(evenementRecu, {
+    expect(evenementRecu).toEqual({
       type: 'UTILISATEUR_CONNECTE',
       donnees: {
         idUtilisateur: 'u1@example.com-hache',

@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
 import { Guide } from '../../src/metier/guide.js';
@@ -34,13 +33,13 @@ describe('La ressource Sante des guides', () => {
     it('renvoie 200', async () => {
       const reponse = await request(serveur).get('/api/sante-guides');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('retourne le résulat du calcul de santé', async () => {
       const reponse = await request(serveur).get('/api/sante-guides');
 
-      assert.deepEqual(reponse.body, {
+      expect(reponse.body).toEqual({
         guidesAvecProbleme: [],
         guidesEnBonneSante: [],
       });
@@ -56,9 +55,9 @@ describe('La ressource Sante des guides', () => {
 
       await request(serveur).get('/api/sante-guides');
 
-      assert.notEqual(guidesUtilises, undefined);
-      assert.equal(guidesUtilises.length, 1);
-      assert.equal(guidesUtilises[0].id, 'zero-trust');
+      expect(guidesUtilises).toBeDefined();
+      expect(guidesUtilises).toHaveLength(1);
+      expect(guidesUtilises[0].id).toBe('zero-trust');
     });
   });
 });

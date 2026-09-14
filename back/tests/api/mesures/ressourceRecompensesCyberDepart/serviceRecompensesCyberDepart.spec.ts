@@ -1,7 +1,6 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { ServiceRécompensesCyberDépart } from '../../../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
 import { readFile } from 'node:fs/promises';
-import assert from 'node:assert';
 import { fauxFournisseurDeChemin } from '../../fauxObjets.js';
 
 describe('Le service de récompense Cyberdépart', () => {
@@ -11,6 +10,6 @@ describe('Le service de récompense Cyberdépart', () => {
     const bannière = await service.genereBanniere({ nomOrganisation: 'BetaGouv ANSSI' });
     const snapshot = await readFile(new URL('./snapshot-banniere.png', import.meta.url));
 
-    assert.ok(bannière.equals(snapshot));
+    expect(bannière.equals(snapshot)).toBeTruthy();
   });
 });

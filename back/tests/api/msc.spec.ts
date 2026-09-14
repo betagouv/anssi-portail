@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin } from './fauxObjets.js';
@@ -23,8 +22,8 @@ describe('La configuration de notre serveur', () => {
 
     const { headers: entetes } = await request(serveur).get('/').set('Accept-Encoding', 'gzip, deflate, br, zstd');
 
-    assert.equal(entetes['content-encoding'], 'br');
-    assert.equal(entetes['vary'], 'Accept-Encoding');
+    expect(entetes['content-encoding']).toBe('br');
+    expect(entetes['vary']).toBe('Accept-Encoding');
   });
 
   it('sert correctement le chemin racine', async () => {
@@ -32,7 +31,7 @@ describe('La configuration de notre serveur', () => {
 
     const réponse = await request(serveur).get('/');
 
-    assert.equal(réponse.statusCode, HttpStatusCode.Ok);
+    expect(réponse.statusCode).toBe(HttpStatusCode.Ok);
   });
 
   it('redirige correctement le chemin racine', async () => {
@@ -40,8 +39,8 @@ describe('La configuration de notre serveur', () => {
 
     const réponse = await request(serveur).get('///////////');
 
-    assert.equal(réponse.statusCode, HttpStatusCode.PermanentRedirect);
-    assert.equal(réponse.headers.location, '/');
+    expect(réponse.statusCode).toBe(HttpStatusCode.PermanentRedirect);
+    expect(réponse.headers.location).toBe('/');
   });
 
   it('redirige vers une url sans slashs finaux', async () => {
@@ -49,8 +48,8 @@ describe('La configuration de notre serveur', () => {
 
     const réponse = await request(serveur).get('/catalogue/');
 
-    assert.equal(réponse.statusCode, HttpStatusCode.PermanentRedirect);
-    assert.equal(réponse.headers.location, '/catalogue');
+    expect(réponse.statusCode).toBe(HttpStatusCode.PermanentRedirect);
+    expect(réponse.headers.location).toBe('/catalogue');
   });
 
   it('redirige vers une url avec paramètres de requête sans slashs finaux', async () => {
@@ -58,8 +57,8 @@ describe('La configuration de notre serveur', () => {
 
     const réponse = await request(serveur).get('/catalogue/?param=value');
 
-    assert.equal(réponse.statusCode, HttpStatusCode.PermanentRedirect);
-    assert.equal(réponse.headers.location, '/catalogue?param=value');
+    expect(réponse.statusCode).toBe(HttpStatusCode.PermanentRedirect);
+    expect(réponse.headers.location).toBe('/catalogue?param=value');
   });
 
   it("redirige vers l'URL voulue sans slash final", async () => {
@@ -67,8 +66,8 @@ describe('La configuration de notre serveur', () => {
 
     const réponse = await request(serveur).get('/guides');
 
-    assert.equal(réponse.statusCode, HttpStatusCode.MovedPermanently);
-    assert.equal(réponse.headers.location, '/catalogue');
+    expect(réponse.statusCode).toBe(HttpStatusCode.MovedPermanently);
+    expect(réponse.headers.location).toBe('/catalogue');
   });
 
   it("redirige vers l'URL voulue avec slash final", async () => {
@@ -76,8 +75,8 @@ describe('La configuration de notre serveur', () => {
 
     const réponse = await request(serveur).get('/guides/');
 
-    assert.equal(réponse.statusCode, HttpStatusCode.MovedPermanently);
-    assert.equal(réponse.headers.location, '/catalogue');
+    expect(réponse.statusCode).toBe(HttpStatusCode.MovedPermanently);
+    expect(réponse.headers.location).toBe('/catalogue');
   });
 
   it('redirige URL inconnue sans slash final vers une 404', async () => {
@@ -85,7 +84,7 @@ describe('La configuration de notre serveur', () => {
 
     const réponse = await request(serveur).get('/monurlquinexistepas');
 
-    assert.equal(réponse.statusCode, HttpStatusCode.NotFound);
+    expect(réponse.statusCode).toBe(HttpStatusCode.NotFound);
   });
 
   it('redirige URL inconnue avec slash final vers une 404', async () => {
@@ -93,6 +92,6 @@ describe('La configuration de notre serveur', () => {
 
     const réponse = await request(serveur).get('/monurlquinexistepas/');
 
-    assert.equal(réponse.statusCode, HttpStatusCode.NotFound);
+    expect(réponse.statusCode).toBe(HttpStatusCode.NotFound);
   });
 });

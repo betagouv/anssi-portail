@@ -1,9 +1,8 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { Express } from 'express';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
-import assert from 'node:assert';
 import { FournisseurChemin } from '../../src/api/fournisseurChemin.js';
 import { configurationDeTestDuServeur, fauxFournisseurDeChemin, ressourceFactice } from './fauxObjets.js';
 import { encodeSession, enObjet } from './cookie.js';
@@ -24,14 +23,14 @@ describe('La ressource de la page connexion', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/connexion');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu html', async () => {
       const reponse = await request(serveur).get('/connexion');
 
-      assert.notEqual(reponse.headers['content-type'], undefined);
-      assert.match(reponse.headers['content-type'], /html/);
+      expect(reponse.headers['content-type']).toBeDefined();
+      expect(reponse.headers['content-type']).toMatch(/html/);
     });
 
     it('sers le fichier html de jekyll', async () => {
@@ -43,20 +42,20 @@ describe('La ressource de la page connexion', () => {
 
       await request(serveur).get('/connexion');
 
-      assert.equal(nomPageDemande!, 'connexion');
+      expect(nomPageDemande!).toBe('connexion');
     });
 
     it('accepte une URL de redirection vers une page connectée', async () => {
       const reponse = await request(serveur).get('/connexion').query({ urlRedirection: '/favoris?tri=recent' });
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('refuse une URL de redirection non autorisée', async () => {
       const reponse = await request(serveur).get('/connexion').query({ urlRedirection: 'https://example.com/favoris' });
 
-      assert.equal(reponse.status, HttpStatusCode.Found);
-      assert.equal(reponse.headers.location, '/connexion');
+      expect(reponse.status).toBe(HttpStatusCode.Found);
+      expect(reponse.headers.location).toBe('/connexion');
     });
 
     it("supprime la session de l'utilisateur", async () => {
@@ -65,9 +64,9 @@ describe('La ressource de la page connexion', () => {
       const reponse = await request(serveur).get('/connexion').set('Cookie', [cookieSession]);
 
       const headerCookie = reponse.headers['set-cookie'];
-      assert.notEqual(headerCookie, undefined);
+      expect(headerCookie).toBeDefined();
       const cookieSessionDecode = enObjet(headerCookie[0]);
-      assert.equal(cookieSessionDecode.session, '');
+      expect(cookieSessionDecode.session).toBe('');
     });
   });
 });
