@@ -20,5 +20,5 @@ mise-a-jour-financements/rapports
 .uv-tools
 .uv-python
 
-# Playwright-cli
-.playwright-cli
+# Playwright CLI output (may contain credentials)
+.playwright-cli/
