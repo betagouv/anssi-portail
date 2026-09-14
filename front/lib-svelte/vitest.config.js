@@ -5,6 +5,7 @@ import { plateformePlugin } from './src/plateforme/plateforme.plugin.js';
 export default defineConfig({
   test: {
     root: './test',
+    fsModuleCache: true,
     setupFiles: ['vitest-localstorage-mock'],
   },
   plugins: [svelte(), plateformePlugin()],
