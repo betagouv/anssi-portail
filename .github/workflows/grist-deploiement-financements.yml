@@ -1,0 +1,21 @@
+name: Déploie les financements
+run-name: Compare et déploie les financements de démo en prod
+permissions: {}
+
+on:
+  workflow_dispatch: # Pour activer le déclenchement manuel
+
+jobs:
+  compare-et-deploie-financements:
+    name: 'Financements'
+    uses: $/.github/workflows/grist-deploiement.yml
+    with:
+      cible: financements
+      environnement: DEPLOIEMENT_FINANCEMENTS
+    secrets:
+      SOURCE_GRIST_URL: ${{ secrets.SOURCE_GRIST_URL }}
+      SOURCE_GRIST_ID_TABLE: ${{ secrets.SOURCE_GRIST_ID_TABLE }}
+      SOURCE_GRIST_API_KEY: ${{ secrets.SOURCE_GRIST_API_KEY }}
+      CIBLE_GRIST_URL: ${{ secrets.CIBLE_GRIST_URL }}
+      CIBLE_GRIST_ID_TABLE: ${{ secrets.CIBLE_GRIST_ID_TABLE }}
+      CIBLE_GRIST_API_KEY: ${{ secrets.CIBLE_GRIST_API_KEY }}
