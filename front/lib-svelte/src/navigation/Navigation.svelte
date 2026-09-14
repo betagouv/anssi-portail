@@ -34,7 +34,7 @@
           itemDeMenu(
             '🚀 Protéger mon organisation',
             lienParcoursSécurisation,
-            ['/parcours-securisation', '/parcours-cyberdepart', 'parcours-complet'].includes(cheminRelatif) ||
+            ['/parcours-securisation', '/parcours-cyberdepart', '/parcours-complet'].includes(cheminRelatif) ||
               ['/modules/', '/mesures/'].some((lien) => cheminRelatif.startsWith(lien))
           ),
         ]
