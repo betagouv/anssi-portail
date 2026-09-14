@@ -52,26 +52,27 @@ describe('La ressource page Service', () => {
     expect(reponse.headers.location).toBe('/nis2');
   });
 
-  for (const id of [
-    'ads',
-    'conseil-technique',
-    'demainspecialistecyber',
-    'mon-aide-cyber',
-    'mon-aide-cyber-aidants',
-    'mon-service-securise',
-    'mooc-ebios-rm',
-    'secnum-academie',
-    'silene',
-  ]) {
-    it(`redirige l'ancienne URL HTML de ${id} vers l'URL sans extension`, async () => {
-      for (const suffixe of ['', '/']) {
-        const reponse = await request(serveur).get(`/services/${id}.html${suffixe}`);
+  it.each(
+    [
+      'ads',
+      'conseil-technique',
+      'demainspecialistecyber',
+      'mon-aide-cyber',
+      'mon-aide-cyber-aidants',
+      'mon-service-securise',
+      'mooc-ebios-rm',
+      'secnum-academie',
+      'silene',
+    ].flatMap((id) => ['', '/'].map((suffixe) => ({ id, suffixe })))
+  )(
+    "redirige l'ancienne URL HTML de $id avec le suffixe '$suffixe' vers l'URL sans extension",
+    async ({ id, suffixe }) => {
+      const reponse = await request(serveur).get(`/services/${id}.html${suffixe}`);
 
-        expect(reponse.status).toBe(HttpStatusCode.MovedPermanently);
-        expect(reponse.headers.location).toBe(`/services/${id}`);
-      }
-    });
-  }
+      expect(reponse.status).toBe(HttpStatusCode.MovedPermanently);
+      expect(reponse.headers.location).toBe(`/services/${id}`);
+    }
+  );
 
   it('retourne une erreur 404 si la page n’est pas trouvée', async () => {
     fournisseurChemin.jekyll.service = (_id: string) => {

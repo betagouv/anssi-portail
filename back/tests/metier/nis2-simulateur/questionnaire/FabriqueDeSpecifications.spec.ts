@@ -239,15 +239,13 @@ describe('La fabrique de spécifications', () => {
 
     const tousLesSecteurs = Object.entries(libellesSecteursActivite).map(([id, libelle]) => ({ id, libelle }));
 
-    for (const { id, libelle } of tousLesSecteurs) {
-      it(`sait instancier une règle pour le secteur ${libelle}`, () => {
-        const entite = entiteDuSecteur(id as SecteurActivite);
-        const specs = fabrique.transforme(uneSpecification({ Secteurs: libelle, Resultat: 'Régulée EE' }));
+    it.each(tousLesSecteurs)(`sait instancier une règle pour le secteur $libelle`, ({ id, libelle }) => {
+      const entite = entiteDuSecteur(id as SecteurActivite);
+      const specs = fabrique.transforme(uneSpecification({ Secteurs: libelle, Resultat: 'Régulée EE' }));
 
-        expect(specs.nombreDeRegles()).toBe(1);
-        expect(specs.evalue(entite)).toMatchObject(reguleEE());
-      });
-    }
+      expect(specs.nombreDeRegles()).toBe(1);
+      expect(specs.evalue(entite)).toMatchObject(reguleEE());
+    });
 
     it("ne matche pas un secteur qui n'est pas celui de la règle", () => {
       const banque = entiteDuSecteur('banqueSecteurBancaire');
@@ -294,20 +292,18 @@ describe('La fabrique de spécifications', () => {
       .filter(([, libelle]) => libelle !== 'Autre sous-secteur')
       .map(([id, libelle]) => ({ id, libelle }));
 
-    for (const { id, libelle } of tousSaufAutres) {
-      it(`sait instancier une règle pour le sous-secteur ${libelle}`, () => {
-        const entite = entiteDuSousSecteur(id as SousSecteurActivite);
-        const specs = fabrique.transforme(
-          uneSpecification({
-            'Sous-secteurs': libelle,
-            Resultat: 'Régulée EE',
-          })
-        );
+    it.each(tousSaufAutres)(`sait instancier une règle pour le sous-secteur $libelle`, ({ id, libelle }) => {
+      const entite = entiteDuSousSecteur(id as SousSecteurActivite);
+      const specs = fabrique.transforme(
+        uneSpecification({
+          'Sous-secteurs': libelle,
+          Resultat: 'Régulée EE',
+        })
+      );
 
-        expect(specs.nombreDeRegles()).toBe(1);
-        expect(specs.evalue(entite)).toMatchObject(reguleEE());
-      });
-    }
+      expect(specs.nombreDeRegles()).toBe(1);
+      expect(specs.evalue(entite)).toMatchObject(reguleEE());
+    });
 
     it("ne matche pas un sous-secteur qui n'est pas celui de la règle", () => {
       const gaz = entiteDuSousSecteur('gaz');
@@ -430,15 +426,9 @@ describe('La fabrique de spécifications', () => {
       ...autresActivites,
     ];
 
-    for (const {
-      libelleActivite,
-      activite,
-      libelleSecteur,
-      secteur,
-      libelleSousSecteur = '-',
-      sousSecteur,
-    } of casDeTest) {
-      it(`sait instancier la règle ${libelleActivite} du secteur ${libelleSecteur}`, () => {
+    it.each(casDeTest)(
+      `sait instancier la règle $libelleActivite du secteur $libelleSecteur`,
+      ({ libelleActivite, activite, libelleSecteur, secteur, libelleSousSecteur = '-', sousSecteur }) => {
         const specs: Specifications = fabrique.transforme(
           uneSpecification({
             Activités: libelleActivite,
@@ -456,8 +446,8 @@ describe('La fabrique de spécifications', () => {
         };
 
         expect(specs.evalue(reponse)).toMatchObject(reguleEE());
-      });
-    }
+      }
+    );
 
     it("n'instancie pas de règle si aucune valeur n'est passée", () => {
       const specs: Specifications = fabrique.transforme(uneSpecification({ Activités: '-', Resultat: 'Régulée EE' }));
@@ -696,17 +686,15 @@ describe('La fabrique de spécifications', () => {
       ['#RepresentantUE', 'RepresentantUE'],
     ];
 
-    for (const [cleCsv, resumeAttendu] of tousLesResumes) {
-      it(`comprend le résumé ${cleCsv}`, () => {
-        const specs: Specifications = fabrique.transforme(
-          uneSpecification({ Resultat: 'Régulée EE', "Points d'attention": cleCsv })
-        );
+    it.each(tousLesResumes)(`comprend le résumé $0`, (cleCsv, resumeAttendu) => {
+      const specs: Specifications = fabrique.transforme(
+        uneSpecification({ Resultat: 'Régulée EE', "Points d'attention": cleCsv })
+      );
 
-        const { resumes } = specs.resultat().pointsAttention;
+      const { resumes } = specs.resultat().pointsAttention;
 
-        expect(resumes).toStrictEqual([resumeAttendu]);
-      });
-    }
+      expect(resumes).toStrictEqual([resumeAttendu]);
+    });
 
     const toutesLesPrecisions: [string, PointsAttentionPrecis][] = [
       ['#MecanismeExemptionSecuriteNationale', 'MecanismeExemptionSecuriteNationale'],
@@ -720,17 +708,15 @@ describe('La fabrique de spécifications', () => {
       ['#OSE', 'OSE'],
     ];
 
-    for (const [cleCsv, precisionAttendue] of toutesLesPrecisions) {
-      it(`comprend la précision ${cleCsv}`, () => {
-        const specs: Specifications = fabrique.transforme(
-          uneSpecification({ Resultat: 'Régulée EE', "Points d'attention": cleCsv })
-        );
+    it.each(toutesLesPrecisions)(`comprend la précision $0`, (cleCsv, precisionAttendue) => {
+      const specs: Specifications = fabrique.transforme(
+        uneSpecification({ Resultat: 'Régulée EE', "Points d'attention": cleCsv })
+      );
 
-        const { precisions } = specs.resultat().pointsAttention;
+      const { precisions } = specs.resultat().pointsAttention;
 
-        expect(precisions).toStrictEqual([precisionAttendue]);
-      });
-    }
+      expect(precisions).toStrictEqual([precisionAttendue]);
+    });
 
     it('sait répartir entre les résumés et les précisions', () => {
       const specs: Specifications = fabrique.transforme(

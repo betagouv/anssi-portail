@@ -42,8 +42,9 @@ describe('La règle de « Taille »', () => {
       { tailleAttendue: 'Grande', salaries: '>= 250', ca: '>= 50M€' },
     ];
 
-    for (const { tailleAttendue, salaries, ca } of casDeTest) {
-      it(`Nombre de salariés : ${salaries} . Chiffre d'affaires : ${ca} . Taille : ${tailleAttendue} `, () => {
+    it.each(casDeTest)(
+      `Nombre de salariés : $salaries . Chiffre d'affaires : $ca . Taille : $tailleAttendue `,
+      ({ tailleAttendue, salaries, ca }) => {
         const entite: EtatQuestionnaire = {
           ...EtatQuestionnaireVide,
           trancheNombreEmployes: [nbSalaries[salaries]],
@@ -55,8 +56,8 @@ describe('La règle de « Taille »', () => {
         const resultat = spec.evalue(entite);
 
         expect(resultat).toBeTruthy();
-      });
-    }
+      }
+    );
   });
 
   describe('lorsque tous les critères importent', () => {
@@ -77,8 +78,9 @@ describe('La règle de « Taille »', () => {
       { tailleAttendue: 'Grande', salaries: '>= 50 et < 250', ca: '>= 50M€', bilanFinancier: '>= 43M€' },
     ];
 
-    for (const { tailleAttendue, salaries, ca, bilanFinancier } of casDeTest) {
-      it(`Nombre de salariés : ${salaries} . Chiffre d'affaires : ${ca} . Bilan: ${bilanFinancier} . Taille : ${tailleAttendue} `, () => {
+    it.each(casDeTest)(
+      `Nombre de salariés : $salaries . Chiffre d'affaires : $ca . Bilan: $bilanFinancier . Taille : $tailleAttendue `,
+      ({ tailleAttendue, salaries, ca, bilanFinancier }) => {
         const entite: EtatQuestionnaire = {
           ...EtatQuestionnaireVide,
           trancheNombreEmployes: [nbSalaries[salaries]],
@@ -91,7 +93,7 @@ describe('La règle de « Taille »', () => {
         const resultat = spec.evalue(entite);
 
         expect(resultat).toBeTruthy();
-      });
-    }
+      }
+    );
   });
 });
