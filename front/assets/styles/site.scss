@@ -319,6 +319,10 @@ dsfr-header {
   display: block;
   min-height: 165px;
 
+  #navigation {
+    margin-left: -1rem;
+  }
+
   &.sans-navigation {
     min-height: 116.5px;
   }
