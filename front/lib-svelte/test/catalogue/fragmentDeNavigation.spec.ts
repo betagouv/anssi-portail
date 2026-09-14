@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { BesoinCyber } from '../../src/catalogue/Catalogue.types';
 import { Langue } from '../../src/catalogue/Guide.types';
 import {
@@ -133,11 +133,14 @@ describe('Le fragment de navigation', () => {
 });
 
 describe('la fonction réécritFragmentDepuis', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it('redirige pour une URL avec une esperluette', () => {
     vi.stubGlobal('window', { location: { hash: '#section&soussecction' } });
     réécritFragmentDepuis(['#section'], '&');
 
     expect(window.location.hash).toEqual('#section/soussecction');
-    vi.unstubAllGlobals();
   });
 });
