@@ -10,7 +10,7 @@ let
   nodejs-slim =
     pkgs."nodejs-slim_${nodeVersion}"
       or (throw "Unsupported Node.js version in .nvmrc: ${nodeVersion}");
-  corepack = pkgs.corepack.override { inherit nodejs-slim; };
+  pnpm = pkgs.pnpm.override { inherit nodejs-slim; };
 
   # Utilise .ruby-version comme source de vérité pour la version majeure et mineure de Ruby.
   rubyVersion = pkgs.lib.strings.trim (builtins.readFile ./.ruby-version);
@@ -46,7 +46,7 @@ in
   shell = pkgs.mkShell {
     packages = with pkgs; [
       nodejs
-      corepack
+      pnpm
       uv
       ruby
       rubyLspSerena
@@ -65,22 +65,15 @@ in
     ];
 
     shellHook = ''
-      # Keep project-local Ruby and Corepack state out of $HOME.
+      # Keep project-local Ruby state out of $HOME.
       # Native gems are Ruby-ABI-specific; never share them across Ruby versions.
       export GEM_HOME="$PWD/.gems/${rubyVersion}"
-      export COREPACK_HOME="$PWD/.corepack"
-      export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
       export UV_CACHE_DIR="$PWD/.uv-cache"
       export UV_TOOL_DIR="$PWD/.uv-tools"
       export UV_PYTHON_INSTALL_DIR="$PWD/.uv-python"
-      export PATH="$PWD/.nix-bin:${rubyLspSerena}/bin:$GEM_HOME/bin:$PATH"
+      export PATH="${pnpm}/bin:${rubyLspSerena}/bin:$GEM_HOME/bin:$PATH"
 
-      mkdir -p "$PWD/.nix-bin" "$GEM_HOME" "$COREPACK_HOME" "$UV_CACHE_DIR" "$UV_TOOL_DIR" "$UV_PYTHON_INSTALL_DIR"
-
-      # Corepack creates the pnpm shim in .nix-bin and installs the version
-      # declared in package.json on first shell entry.
-      corepack enable --install-directory "$PWD/.nix-bin" pnpm >/dev/null
-      corepack install >/dev/null
+      mkdir -p "$GEM_HOME" "$UV_CACHE_DIR" "$UV_TOOL_DIR" "$UV_PYTHON_INSTALL_DIR"
     '';
   };
 }
