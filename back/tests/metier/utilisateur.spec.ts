@@ -346,8 +346,6 @@ describe("L'utilisateur", () => {
           expect(busEvenements.naPasRecuDEvenement(ParcoursRejoint)).toBe(true);
           expect(busEvenements.naPasRecuDEvenement(ParcoursChangé)).toBe(true);
         });
-
-        it.todo('publie un événement d');
       });
 
       describe("d'un module autre que Cyberdépart", () => {
