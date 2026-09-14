@@ -30,7 +30,14 @@
     ...(rendu.estMobile ? [itemDeMenu('Accueil', '/', cheminRelatif === '/')] : []),
 
     ...(afficheParcoursSecurisation
-      ? [itemDeMenu('🚀 Protéger mon organisation', lienParcoursSécurisation, cheminRelatif === '/cyberdepart')]
+      ? [
+          itemDeMenu(
+            '🚀 Protéger mon organisation',
+            lienParcoursSécurisation,
+            ['/parcours-securisation', '/parcours-cyberdepart', 'parcours-complet'].includes(cheminRelatif) ||
+              ['/modules/', '/mesures/'].some((lien) => cheminRelatif.startsWith(lien))
+          ),
+        ]
       : [itemDeMenu('Diagnostic cyber gratuit', '/cyberdepart', cheminRelatif === '/cyberdepart')]),
 
     itemDeMenu(
