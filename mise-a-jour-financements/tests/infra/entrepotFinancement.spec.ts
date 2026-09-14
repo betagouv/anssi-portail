@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import { ClientHttp } from '../../src/infra/clientHttp';
 import { EntrepotFinancement, EntrepotFinancementGrist, RetourApiGrist } from '../../src/infra/entrepotFinancement';
@@ -37,25 +36,17 @@ describe("L'entrepot de financement Grist", () => {
 
     const financements = await entrepotFinancementGrist.tous();
 
-    assert.deepEqual(financements, []);
+    expect(financements).toEqual([]);
   });
 
   it('sait récupérer des financements en appelant Grist', async () => {
-    let urlAppelee = '';
-    let headerAuthent;
-
-    clientHttp.get = async <T>(url: string, config?: { headers?: Record<string, string> }) => {
-      urlAppelee = url;
-      headerAuthent = config?.headers?.Authorization;
-      return {
-        data: { records: [] } as unknown as T,
-      };
-    };
+    const get = vi.spyOn(clientHttp, 'get').mockResolvedValue({ data: { records: [] } });
 
     await entrepotFinancementGrist.tous();
 
-    assert.equal(headerAuthent, 'Bearer FAUSSE_CLE_API');
-    assert.equal(urlAppelee, 'http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records');
+    expect(get).toHaveBeenCalledExactlyOnceWith('http://grist/api/docs/idDeMonDocument/tables/idDeMaTable/records', {
+      headers: { Authorization: 'Bearer FAUSSE_CLE_API' },
+    });
   });
 
   it("sait transfomer le retour de l'API Grist en financements", async () => {
@@ -103,15 +94,13 @@ describe("L'entrepot de financement Grist", () => {
         },
       ],
     };
-    clientHttp.get = async <T>() => {
-      return {
-        data: retourAPI as unknown as T,
-      };
-    };
+    vi.spyOn(clientHttp, 'get').mockResolvedValue({
+      data: retourAPI,
+    });
 
     const financements = await entrepotFinancementGrist.tous();
 
-    assert.deepEqual(financements, [
+    expect(financements).toEqual([
       {
         id: 10234,
         nom: 'Cyber PME',

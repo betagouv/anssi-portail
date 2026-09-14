@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement';
 import {
   AdapateurAidesEntreprisesAPI,
@@ -50,24 +49,16 @@ describe("L'adaptateur Aides Entreprises API", () => {
 
   describe('sait récupérer une aide', () => {
     it("en appelant l'API Aides Entreprises", async () => {
-      let urlAppelee = '';
-      let apiId = '';
-      let apiKey = '';
-
-      clientHttp.get = async <T>(url: string, config?: { headers?: Record<string, string> }) => {
-        urlAppelee = url;
-        apiId = config?.headers?.['X-Aidesentreprises-Id'] ?? '';
-        apiKey = config?.headers?.['X-Aidesentreprises-Key'] ?? '';
-        return {
-          data: aidesDeLAPI as unknown as T,
-        };
-      };
+      const get = vi.spyOn(clientHttp, 'get').mockResolvedValue({ data: aidesDeLAPI });
 
       await adapateurAidesEntreprisesAPI.parId(10234);
 
-      assert.equal(urlAppelee, 'http://example.com/financements/10234');
-      assert.equal(apiId, 'mon-api-id');
-      assert.equal(apiKey, 'mon-api-key');
+      expect(get).toHaveBeenCalledExactlyOnceWith('http://example.com/financements/10234', {
+        headers: {
+          'X-Aidesentreprises-Id': 'mon-api-id',
+          'X-Aidesentreprises-Key': 'mon-api-key',
+        },
+      });
     });
 
     it("et ne rien renvoyer si l'url source n'est pas définie", async () => {
@@ -80,30 +71,26 @@ describe("L'adaptateur Aides Entreprises API", () => {
 
       const aide = await adapateurAidesEntreprisesAPI.parId(10234);
 
-      assert.deepEqual(aide, undefined);
+      expect(aide).toBeUndefined();
     });
 
     it("et ne rien renvoyer si l'aide n'est pas active", async () => {
-      clientHttp.get = async <T>() => {
-        return {
-          data: [{ ...aidesDeLAPI, status: '0' }] as unknown as T,
-        };
-      };
+      vi.spyOn(clientHttp, 'get').mockResolvedValue({
+        data: [{ ...aidesDeLAPI, status: '0' }],
+      });
       const aide = await adapateurAidesEntreprisesAPI.parId(10234);
 
-      assert.deepEqual(aide, undefined);
+      expect(aide).toBeUndefined();
     });
 
     it("et transfomer le retour de l'API en financements", async () => {
-      clientHttp.get = async <T>() => {
-        return {
-          data: aidesDeLAPI as unknown as T,
-        };
-      };
+      vi.spyOn(clientHttp, 'get').mockResolvedValue({
+        data: aidesDeLAPI,
+      });
 
       const aide = await adapateurAidesEntreprisesAPI.parId(10234);
 
-      assert.deepEqual(aide, {
+      expect(aide).toEqual({
         id: 10234,
         nom: 'Cyber PME',
         benificiaires: 'Tout le monde',
@@ -117,33 +104,29 @@ describe("L'adaptateur Aides Entreprises API", () => {
     });
 
     it("et renvoyer une résultat non défini si l'API ne retourne pas d'aide", async () => {
-      clientHttp.get = async <T>() => {
-        return {
-          data: false as unknown as T,
-        };
-      };
+      vi.spyOn(clientHttp, 'get').mockResolvedValue({
+        data: false,
+      });
 
       const aide = await adapateurAidesEntreprisesAPI.parId(10234);
 
-      assert.deepEqual(aide, undefined);
+      expect(aide).toBeUndefined();
     });
 
     describe('et gérer les financeurs', () => {
       it("quand il n'y en a pas", async () => {
-        clientHttp.get = async <T>() => {
-          return {
-            data: [
-              {
-                ...aidesDeLAPI[0],
-                financeurs: [],
-              },
-            ] as unknown as T,
-          };
-        };
+        vi.spyOn(clientHttp, 'get').mockResolvedValue({
+          data: [
+            {
+              ...aidesDeLAPI[0],
+              financeurs: [],
+            },
+          ],
+        });
 
         const aide = await adapateurAidesEntreprisesAPI.parId(10234);
 
-        assert.deepEqual(aide, {
+        expect(aide).toEqual({
           id: 10234,
           nom: 'Cyber PME',
           benificiaires: 'Tout le monde',
@@ -157,20 +140,18 @@ describe("L'adaptateur Aides Entreprises API", () => {
       });
 
       it('quand il y en a plusieurs', async () => {
-        clientHttp.get = async <T>() => {
-          return {
-            data: [
-              {
-                ...aidesDeLAPI[0],
-                financeurs: [{ org_nom: 'Financeur 1' }, { org_nom: 'Financeur 2' }],
-              },
-            ] as unknown as T,
-          };
-        };
+        vi.spyOn(clientHttp, 'get').mockResolvedValue({
+          data: [
+            {
+              ...aidesDeLAPI[0],
+              financeurs: [{ org_nom: 'Financeur 1' }, { org_nom: 'Financeur 2' }],
+            },
+          ],
+        });
 
         const aide = await adapateurAidesEntreprisesAPI.parId(10234);
 
-        assert.deepEqual(aide, {
+        expect(aide).toEqual({
           id: 10234,
           nom: 'Cyber PME',
           benificiaires: 'Tout le monde',
@@ -198,23 +179,18 @@ describe("L'adaptateur Aides Entreprises API", () => {
       horodatage: '2025-12-31 10:00:01',
     };
     it("en appelant l'API Aides Entreprises", async () => {
-      let urlAppelee = '';
-      let apiId = '';
-      let apiKey = '';
-
-      clientHttp.get = async <T>(url: string, config?: { headers?: Record<string, string> }) => {
-        urlAppelee = url;
-        apiId = config?.headers?.['X-Aidesentreprises-Id'] ?? '';
-        apiKey = config?.headers?.['X-Aidesentreprises-Key'] ?? '';
-        return {
-          data: { data: [] } as unknown as T,
-        };
-      };
+      const get = vi.spyOn(clientHttp, 'get').mockResolvedValue({ data: { data: [] } });
       await adapateurAidesEntreprisesAPI.chercheAidesCyber();
 
-      assert.equal(urlAppelee, 'http://example.com/financements?full_text=cyber&status=1&limit=50&offset=0');
-      assert.equal(apiId, 'mon-api-id');
-      assert.equal(apiKey, 'mon-api-key');
+      expect(get).toHaveBeenCalledExactlyOnceWith(
+        'http://example.com/financements?full_text=cyber&status=1&limit=50&offset=0',
+        {
+          headers: {
+            'X-Aidesentreprises-Id': 'mon-api-id',
+            'X-Aidesentreprises-Key': 'mon-api-key',
+          },
+        }
+      );
     });
 
     it("et ne rien renvoyer si l'url source n'est pas définie", async () => {
@@ -227,19 +203,17 @@ describe("L'adaptateur Aides Entreprises API", () => {
 
       const nouvellesAides = await adapateurAidesEntreprisesAPI.chercheAidesCyber();
 
-      assert.deepEqual(nouvellesAides, []);
+      expect(nouvellesAides).toEqual([]);
     });
 
     it("et transfomer le retour de l'API en financements", async () => {
-      clientHttp.get = async <T>() => {
-        return {
-          data: { data: [resumesAides] } as unknown as T,
-        };
-      };
+      vi.spyOn(clientHttp, 'get').mockResolvedValue({
+        data: { data: [resumesAides] },
+      });
 
       const nouvellesAides = await adapateurAidesEntreprisesAPI.chercheAidesCyber();
 
-      assert.deepEqual(nouvellesAides, [
+      expect(nouvellesAides).toEqual([
         {
           id: 10234,
           nom: 'Cyber PME',
@@ -256,28 +230,24 @@ describe("L'adaptateur Aides Entreprises API", () => {
 
     it('en gérant une nombre élevé de resultats via la pagination', async () => {
       const resultats50 = new Array(50).fill(resumesAides);
-      const urlsAppelees: string[] = [];
-
-      clientHttp.get = async <T>(url: string) => {
-        urlsAppelees.push(url);
-        if (url.includes('offset=0')) {
-          return {
-            data: { data: resultats50 } as unknown as T,
-          };
-        }
-        if (url.includes('offset=50')) {
-          return {
-            data: { data: [resumesAides] } as unknown as T,
-          };
-        }
-        throw new Error('échec du test !! erreur non prévue');
-      };
+      const get = vi
+        .spyOn(clientHttp, 'get')
+        .mockResolvedValueOnce({ data: { data: resultats50 } })
+        .mockResolvedValueOnce({ data: { data: [resumesAides] } })
+        .mockRejectedValue(new Error('Appel de pagination supplémentaire inattendu'));
       await adapateurAidesEntreprisesAPI.chercheAidesCyber();
 
-      assert.deepEqual(urlsAppelees, [
+      expect(get).toHaveBeenCalledTimes(2);
+      expect(get).toHaveBeenNthCalledWith(
+        1,
         'http://example.com/financements?full_text=cyber&status=1&limit=50&offset=0',
+        expect.any(Object)
+      );
+      expect(get).toHaveBeenNthCalledWith(
+        2,
         'http://example.com/financements?full_text=cyber&status=1&limit=50&offset=50',
-      ]);
+        expect.any(Object)
+      );
     });
   });
 });
