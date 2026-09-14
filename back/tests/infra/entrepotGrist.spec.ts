@@ -1,26 +1,33 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
-import { FournisseurHorloge } from '../../src/infra/fournisseurHorloge.js';
 import { EntrepotGristGenerique } from './EntrepotGristGenerique.js';
 import { fabriqueClientGet, fabriqueFauxClientHttp } from './fournisseurClientHttp.js';
-import { FournisseurHorlogeDeTest } from './fournisseurHorlogeDeTest.js';
 
 describe("L'entrepôt Grist générique", () => {
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2025-01-01T00:00:00Z'));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('mets en cache le résultat de l’appel à Grist', async () => {
-    let nombreAppel = 0;
     const clientHttp: ClientHttp = {
       ...fabriqueFauxClientHttp(),
       get: fabriqueClientGet(async () => {
-        nombreAppel++;
         return { data: { records: [{ test: 'une chaine' }] } };
       }),
     };
     const entrepotRessourcesCyberGrist = new EntrepotGristGenerique(clientHttp, 'urlDeBase', 'cleApi', 60);
 
+    vi.spyOn(clientHttp, 'get');
+
     await entrepotRessourcesCyberGrist.tous();
     const resultat = await entrepotRessourcesCyberGrist.tous();
 
-    expect(nombreAppel).toBe(1);
+    expect(clientHttp.get).toHaveBeenCalledOnce();
     expect(resultat).toStrictEqual([{ test: 'une chaine' }]);
   });
 
@@ -44,7 +51,7 @@ describe("L'entrepôt Grist générique", () => {
   };
 
   const ilSePasse2Heures = (): void => {
-    FournisseurHorlogeDeTest.initialise(add(FournisseurHorloge.maintenant(), { hours: 2 }));
+    vi.setSystemTime(add(new Date(), { hours: 2 }));
   };
 
   it("retourne la valeur précédente en cas d'erreur Grist", async () => {

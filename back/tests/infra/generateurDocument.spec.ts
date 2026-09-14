@@ -56,7 +56,7 @@ describe('Le générateur de document', () => {
 
     const texte = await extraitLeTexte(documentPdf);
 
-    expect(texte.includes('Hello World!')).toBe(true);
+    expect(texte).toContain('Hello World!');
   });
 
   it('déclenche une erreur si la syntaxe est mauvaise', async () => {

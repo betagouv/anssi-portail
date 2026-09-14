@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { beforeEach, describe, it, expect } from 'vitest';
+import { beforeEach, describe, it, expect, vi } from 'vitest';
 import { fabriqueAttributionParcours } from '../../../src/api/middlewares/attributionParcours.js';
 import { ParcoursRejoint } from '../../../src/bus/evenements/parcoursRejoint.js';
 import { MockBusEvenement, fabriqueBusPourLesTests } from '../../bus/busPourLesTests.js';
@@ -20,7 +20,7 @@ describe("Le middleware d'attribution de parcours", () => {
       const utilisateur = new ConstructeurDUtilisateur().avecLEmail('chuck@yopmail.com').construis();
       await entrepotUtilisateur.ajoute(utilisateur);
       const attributionParcours = fabriqueAttributionParcours({ entrepotUtilisateur, busEvenements });
-      let suiteEstAppellé = false;
+      const suite = vi.fn();
       const requête = {
         originalUrl: '/parcours-complet',
         query: {
@@ -30,9 +30,7 @@ describe("Le middleware d'attribution de parcours", () => {
         utilisateur,
       } as Partial<Request>;
 
-      await attributionParcours('complet')(requête as Request, {} as Response, () => {
-        suiteEstAppellé = true;
-      });
+      await attributionParcours('complet')(requête as Request, {} as Response, suite);
 
       const utilisateurMitÀJour = await entrepotUtilisateur.parEmailHache(utilisateur.emailHache());
 
@@ -43,7 +41,7 @@ describe("Le middleware d'attribution de parcours", () => {
       expect(evenement?.motif).toBe('visite-page-module');
       expect(evenement?.suivi?.campagne).toBe('campagne_2026_NA');
       expect(evenement?.suivi?.source).toBe('landing-parcours-securisation-bandeau');
-      expect(suiteEstAppellé).toBe(true);
+      expect(suite).toHaveBeenCalledOnce();
     });
   });
 
@@ -74,7 +72,7 @@ describe("Le middleware d'attribution de parcours", () => {
         .construis();
       await entrepotUtilisateur.ajoute(utilisateur);
       const attributionParcours = fabriqueAttributionParcours({ entrepotUtilisateur, busEvenements });
-      let suiteEstAppellé = false;
+      const suite = vi.fn();
       const requête = {
         originalUrl: '/parcours-complet',
         utilisateur,
@@ -84,9 +82,7 @@ describe("Le middleware d'attribution de parcours", () => {
         },
       } as Partial<Request>;
 
-      await attributionParcours('complet')(requête as Request, {} as Response, () => {
-        suiteEstAppellé = true;
-      });
+      await attributionParcours('complet')(requête as Request, {} as Response, suite);
 
       const utilisateurMitÀJour = await entrepotUtilisateur.parEmailHache(utilisateur.emailHache());
 
@@ -97,7 +93,7 @@ describe("Le middleware d'attribution de parcours", () => {
       expect(evenement?.motif).toBe('visite-page-module');
       expect(evenement?.suivi?.campagne).toBe('campagne_2026_NA');
       expect(evenement?.suivi?.source).toBe('landing-parcours-securisation-bandeau');
-      expect(suiteEstAppellé).toBe(true);
+      expect(suite).toHaveBeenCalledOnce();
     });
   });
 });

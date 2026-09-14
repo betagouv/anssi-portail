@@ -1,49 +1,48 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { Cache } from '../../src/infra/cache.js';
-// import { add } from 'date-fns';
-import { FournisseurHorloge } from '../../src/infra/fournisseurHorloge.js';
 
-import { FournisseurHorlogeDeTest } from './fournisseurHorlogeDeTest.js';
-
-const _24_HEURES = 1440;
+const _24_HEURES = 24 * 60 * 60;
 
 const add = (date: Date, duration: { hours: number }) => {
   return new Date(date.getTime() + duration.hours * 3600000);
 };
 
 const ilSePasse25Heures = (): void => {
-  FournisseurHorlogeDeTest.initialise(add(FournisseurHorloge.maintenant(), { hours: 25 }));
+  vi.setSystemTime(add(new Date(), { hours: 25 }));
 };
 
 describe('Le système de mise en cache', () => {
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2025-01-01T00:00:00Z'));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('exécute la fonction passée lorsqu’il n’y a pas de cache', async () => {
-    let ressourceAppelee = false;
+    const ressource = vi.fn<() => Promise<void>>().mockResolvedValue(undefined);
     const cache = new Cache();
 
-    await cache.get('une-clef', async () => {
-      ressourceAppelee = true;
-    });
+    await cache.get('une-clef', ressource);
 
-    expect(ressourceAppelee).toBe(true);
+    expect(ressource).toHaveBeenCalledOnce();
   });
 
   it('n’exécute pas la fonction passée lorsqu’il y a du cache', async () => {
-    let ressourceAppelee = false;
+    const ressource = vi.fn<() => Promise<void>>().mockResolvedValue(undefined);
     const cache = new Cache();
 
     await cache.get('une-clef', async () => {});
-    await cache.get('une-clef', async () => {
-      ressourceAppelee = true;
-    });
+    await cache.get('une-clef', ressource);
 
-    expect(ressourceAppelee).toBe(false);
+    expect(ressource).not.toHaveBeenCalled();
   });
 
   it('retourne le résultat de la fonction exécutée', async () => {
     const cache = new Cache<string>();
-    const laFonction = async () => {
-      return 'une valeur';
-    };
+    const laFonction = vi.fn<() => Promise<string>>().mockResolvedValue('une valeur');
 
     const resultat = await cache.get('une-clef', laFonction);
 
@@ -52,39 +51,39 @@ describe('Le système de mise en cache', () => {
 
   it('retourne la valeur mise en cache', async () => {
     const cache = new Cache<string>();
-    let compteur = 0;
-    const laFonction = async () => {
-      return `une valeur_${compteur++}`;
-    };
+    const laFonction = vi
+      .fn<() => Promise<string>>()
+      .mockResolvedValueOnce('une valeur_0')
+      .mockResolvedValueOnce('une valeur_1');
 
     await cache.get('une-clef', laFonction);
     const resultat = await cache.get('une-clef', laFonction);
 
     expect(resultat).toBe('une valeur_0');
+    expect(laFonction).toHaveBeenCalledOnce();
   });
 
   it('effectue une mise en cache limitée dans le temps', async () => {
-    FournisseurHorlogeDeTest.initialise(new Date(Date.parse('2025/01/01')));
     const cache = new Cache<string>({ ttl: _24_HEURES });
-    let compteur = 0;
-    const laFonction = async () => {
-      return `une valeur_${compteur++}`;
-    };
+    const laFonction = vi
+      .fn<() => Promise<string>>()
+      .mockResolvedValueOnce('une valeur_0')
+      .mockResolvedValueOnce('une valeur_1');
 
     await cache.get('une-clef', laFonction);
     ilSePasse25Heures();
     const resultat = await cache.get('une-clef', laFonction);
 
     expect(resultat).toBe('une valeur_1');
+    expect(laFonction).toHaveBeenCalledTimes(2);
   });
 
   it('la nouvelle valeur après expiration est mise en cache', async () => {
-    FournisseurHorlogeDeTest.initialise(new Date(Date.parse('2025/01/01')));
     const cache = new Cache<string>({ ttl: _24_HEURES });
-    let compteur = 0;
-    const laFonction = async () => {
-      return `une valeur_${compteur++}`;
-    };
+    const laFonction = vi
+      .fn<() => Promise<string>>()
+      .mockResolvedValueOnce('une valeur_0')
+      .mockResolvedValueOnce('une valeur_1');
 
     await cache.get('une-clef', laFonction);
     ilSePasse25Heures();
@@ -92,16 +91,16 @@ describe('Le système de mise en cache', () => {
     const resultat = await cache.get('une-clef', laFonction);
 
     expect(resultat).toBe('une valeur_1');
+    expect(laFonction).toHaveBeenCalledTimes(2);
   });
 
   describe('en cas d’erreur d’exécution de la fonction', () => {
     it('retourne le cache en cas d’erreur sur un appel suivant', async () => {
-      FournisseurHorlogeDeTest.initialise(new Date(Date.parse('2025/01/01')));
-      const cache = new Cache<string>({ ttl: 1440 });
-      let compteur = 0;
-      const laFonction = async () => {
-        return `une valeur_${compteur++}`;
-      };
+      const cache = new Cache<string>({ ttl: _24_HEURES });
+      const laFonction = vi
+        .fn<() => Promise<string>>()
+        .mockResolvedValueOnce('une valeur_0')
+        .mockResolvedValueOnce('une valeur_1');
 
       await cache.get('une-clef', laFonction);
       ilSePasse25Heures();
@@ -110,13 +109,12 @@ describe('Le système de mise en cache', () => {
       });
 
       expect(resultat).toBe('une valeur_0');
+      expect(laFonction).toHaveBeenCalledOnce();
     });
 
     it('remonte l’erreur lors du premier appel', async () => {
       const cache = new Cache<string>({ ttl: 1440 });
-      const laFonction = async () => {
-        throw new Error('Une erreur est survenue');
-      };
+      const laFonction = vi.fn<() => Promise<string>>().mockRejectedValue(new Error('Une erreur est survenue'));
 
       await expect(cache.get('une-clef', laFonction)).rejects.toMatchObject({ message: 'Une erreur est survenue' });
     });

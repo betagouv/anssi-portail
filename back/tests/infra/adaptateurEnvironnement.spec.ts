@@ -1,22 +1,16 @@
-import { afterEach, beforeEach, describe, it, expect } from 'vitest';
+import { beforeEach, describe, it, expect, vi } from 'vitest';
 import { adaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 
 describe("L'adaptateur environnement", () => {
-  let envActuel: NodeJS.ProcessEnv;
-
   beforeEach(() => {
-    envActuel = process.env;
-  });
-
-  afterEach(() => {
-    process.env = envActuel;
+    for (const cle of Object.keys(process.env).filter((cle) => cle.startsWith('HACHAGE_SECRET_DE_HACHAGE_'))) {
+      vi.stubEnv(cle, undefined);
+    }
   });
 
   it('sait charger les secrets', async () => {
-    process.env = {
-      HACHAGE_SECRET_DE_HACHAGE_1: 'secret1',
-      HACHAGE_SECRET_DE_HACHAGE_2: 'secret2',
-    };
+    vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_1', 'secret1');
+    vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_2', 'secret2');
 
     const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
@@ -27,11 +21,9 @@ describe("L'adaptateur environnement", () => {
   });
 
   it('charge les secrets dans le bon ordre', async () => {
-    process.env = {
-      HACHAGE_SECRET_DE_HACHAGE_1: 'secret1',
-      HACHAGE_SECRET_DE_HACHAGE_3: 'secret3',
-      HACHAGE_SECRET_DE_HACHAGE_2: 'secret2',
-    };
+    vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_1', 'secret1');
+    vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_3', 'secret3');
+    vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_2', 'secret2');
 
     const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
@@ -43,11 +35,9 @@ describe("L'adaptateur environnement", () => {
   });
 
   it('ne charge pas les secrets qui ne correspondent pas au format indiqué', async () => {
-    process.env = {
-      HACHAGE_SECRET_DE_HACHAGE_1: 'secret1',
-      HACHAGE_SECRET_DE_HACHAGE_V3: 'secret3',
-      HACHAGE_SECRET_DE_HACHAGE_2: 'secret2',
-    };
+    vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_1', 'secret1');
+    vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_V3', 'secret3');
+    vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_2', 'secret2');
 
     const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
@@ -58,7 +48,7 @@ describe("L'adaptateur environnement", () => {
   });
 
   it('utilise des entiers pour les versions', () => {
-    process.env = { HACHAGE_SECRET_DE_HACHAGE_1: 'secret1' };
+    vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_1', 'secret1');
 
     const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
@@ -66,9 +56,7 @@ describe("L'adaptateur environnement", () => {
   });
 
   it('lance une exception si un secret est vide', async () => {
-    process.env = {
-      HACHAGE_SECRET_DE_HACHAGE_1: '',
-    };
+    vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_1', '');
 
     expect(() => {
       adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
@@ -78,10 +66,8 @@ describe("L'adaptateur environnement", () => {
   });
 
   it('ignore les clés qui ne concernent pas le hachage', () => {
-    process.env = {
-      URL_BASE: '',
-      HACHAGE_SECRET_DE_HACHAGE_1: 'ok',
-    };
+    vi.stubEnv('URL_BASE', '');
+    vi.stubEnv('HACHAGE_SECRET_DE_HACHAGE_1', 'ok');
 
     const secrets = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
@@ -89,9 +75,7 @@ describe("L'adaptateur environnement", () => {
   });
 
   it('lance une exception si SECRET_JWT est vide', () => {
-    process.env = {
-      SECRET_JWT: '',
-    };
+    vi.stubEnv('SECRET_JWT', '');
 
     expect(() => {
       adaptateurEnvironnement.secrets().jwt();
@@ -99,9 +83,7 @@ describe("L'adaptateur environnement", () => {
   });
 
   it('lance une exception si SECRET_JWT est non défini', () => {
-    process.env = {
-      SECRET_JWT: undefined,
-    };
+    vi.stubEnv('SECRET_JWT', undefined);
 
     expect(() => {
       adaptateurEnvironnement.secrets().jwt();
@@ -109,9 +91,7 @@ describe("L'adaptateur environnement", () => {
   });
 
   it('lance une exception si SECRET_COOKIE est vide', () => {
-    process.env = {
-      SECRET_COOKIE: '',
-    };
+    vi.stubEnv('SECRET_COOKIE', '');
 
     expect(() => {
       adaptateurEnvironnement.secrets().cookie();
@@ -119,9 +99,7 @@ describe("L'adaptateur environnement", () => {
   });
 
   it('lance une exception si SECRET_COOKIE est non défini', () => {
-    process.env = {
-      SECRET_COOKIE: undefined,
-    };
+    vi.stubEnv('SECRET_COOKIE', undefined);
 
     expect(() => {
       adaptateurEnvironnement.secrets().cookie();

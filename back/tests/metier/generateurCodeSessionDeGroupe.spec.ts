@@ -1,4 +1,4 @@
-import { beforeEach, describe, it, expect } from 'vitest';
+import { beforeEach, describe, it, expect, vi } from 'vitest';
 import { GenerateurAleatoireCodeSessionDeGroupe } from '../../src/metier/generateurCodeSessionDeGroupe.js';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire.js';
 import { SessionDeGroupe } from '../../src/metier/sessionDeGroupe.js';
@@ -37,28 +37,20 @@ describe('Le générateur aléatoire de code de session de groupe', () => {
     for (let i = 0; i < 500; i++) {
       const code = await generateur.genere();
 
-      expect(code.includes('0')).toBe(false);
-      expect(code.includes('O')).toBe(false);
+      expect(code).not.toContain('0');
+      expect(code).not.toContain('O');
     }
   });
 
   it('ne génère pas de code qui a déjà été affecté', async () => {
-    let essai = 0;
-    let aTireUnCodeExistant: boolean = false;
-    let codeInexistantDansLEntrepot: string = '';
-    entrepotSessionsDeGroupe.parCode = async (code: string): Promise<SessionDeGroupe | undefined> => {
-      if (essai === 0) {
-        aTireUnCodeExistant = true;
-        essai++;
-        return SessionDeGroupe.cree({ genere: async () => code });
-      }
-      codeInexistantDansLEntrepot = code;
-      return undefined;
-    };
+    const parCode = vi
+      .spyOn(entrepotSessionsDeGroupe, 'parCode')
+      .mockImplementationOnce(async (code) => SessionDeGroupe.cree({ genere: async () => code }))
+      .mockResolvedValue(undefined);
 
     const code = await generateur.genere();
 
-    expect(aTireUnCodeExistant).toBeTruthy();
-    expect(code).toBe(codeInexistantDansLEntrepot);
+    expect(parCode).toHaveBeenCalledTimes(2);
+    expect(parCode).toHaveBeenLastCalledWith(code);
   });
 });

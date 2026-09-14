@@ -1,4 +1,4 @@
-import { beforeEach, describe, it, expect } from 'vitest';
+import { beforeEach, describe, it, expect, vi } from 'vitest';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { EntrepotFinancementGrist, FinancementGrist } from '../../src/infra/entrepotFinancementGrist.js';
 import { Financement } from '../../src/metier/financement.js';
@@ -219,17 +219,17 @@ describe("L'entrepot de financement Grist", () => {
   });
 
   it("n'appelle pas Grist si les données sont en cache", async () => {
-    let nombreAppel = 0;
     clientHttp.get = async <T>() => {
-      nombreAppel++;
       return {
         data: { records: [] } as unknown as T,
       };
     };
 
+    vi.spyOn(clientHttp, 'get');
+
     await entrepotFinancementGrist.tous();
     await entrepotFinancementGrist.tous();
 
-    expect(nombreAppel).toBe(1);
+    expect(clientHttp.get).toHaveBeenCalledOnce();
   });
 });
