@@ -2,6 +2,8 @@ import axios from '@anssi-portail/axios';
 import fs from 'node:fs';
 import { adaptateurEnvironnement } from './infrastructure/adaptateurEnvironnement';
 import { EntrepotFinancementGrist } from './infrastructure/financements/entrepotFinancementGrist';
+import { ComparateurDeFinancements } from './metier/financements/comparateurDeFinancements';
+import { ConsignateurDeComparaisonDeFinancements } from './infrastructure/financements/consignateurDeComparaisonDeFinancements';
 
 const summaryFile = process.env.GITHUB_STEP_SUMMARY ?? 'rapport-financements.md';
 
@@ -19,7 +21,14 @@ const entrepotCible = new EntrepotFinancementGrist(
   adaptateurEnvironnement.grist().cible().cleApi()
 );
 
-fs.appendFileSync(
-  summaryFile,
-  'source : ' + (await entrepotSource.tous()).length + ', cible : ' + (await entrepotCible.tous()).length
-);
+const empreinte = await entrepotSource.empreinte();
+
+const comparateurDeFinancements = new ComparateurDeFinancements(entrepotSource, entrepotCible);
+await comparateurDeFinancements.chargeLesDonnees();
+const comparaison = comparateurDeFinancements.compare();
+
+const consignateur = new ConsignateurDeComparaisonDeFinancements();
+const markdown = consignateur.consigneComparaison(comparaison);
+
+fs.appendFileSync(summaryFile, markdown);
+fs.writeFileSync('empreinte.txt', empreinte);
