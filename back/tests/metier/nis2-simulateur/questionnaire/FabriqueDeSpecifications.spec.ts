@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { describe, it, beforeEach } from 'node:test';
+import { describe, it, beforeEach } from 'vitest';
 import { FabriqueDeSpecifications } from '../../../../src/metier/nis2-simulateur/questionnaire/FabriqueDeSpecifications.js';
 import { EtatQuestionnaire, EtatQuestionnaireVide } from '../../../../src/metier/nis2-simulateur/EtatQuestionnaire.js';
 import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications.js';

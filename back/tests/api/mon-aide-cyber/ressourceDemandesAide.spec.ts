@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import request from 'supertest';
 import z from 'zod';
 import { schemaRessourceDemandesAide } from '../../../src/api/mon-aide-cyber/ressourceDemandesAide.schema.js';

@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { consigneParcoursChangéDansJournal } from '../../src/bus/consigneParcoursChangeDansJournal.js';
 import { ParcoursChangé } from '../../src/bus/evenements/parcoursChange.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';

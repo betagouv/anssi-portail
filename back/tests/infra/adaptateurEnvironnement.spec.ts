@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { afterEach, beforeEach, describe, it } from 'node:test';
+import { afterEach, beforeEach, describe, it } from 'vitest';
 import { adaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 
 describe("L'adaptateur environnement", () => {

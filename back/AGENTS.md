@@ -26,7 +26,7 @@ pnpm --filter @anssi-portail/back dev:server    # Just the server (not DB)
 
 # Testing
 pnpm --filter @anssi-portail/back test          # Run all tests
-node --conditions=anssi-portail:source --import tsx --test tests/path/to/file.spec.ts  # Single file
+pnpm --filter @anssi-portail/back exec vitest run tests/path/to/file.spec.ts  # Single file
 
 # Quality
 pnpm --filter @anssi-portail/back lint          # ESLint
@@ -40,7 +40,7 @@ pnpm --filter @anssi-portail/back build         # Compile to dist/
 
 ## Testing
 
-**Framework:** Node's built-in test runner (no extra setup needed)
+**Framework:** Vitest (Node environment, explicit imports from `vitest`)
 
 **Files:** `tests/**/*.spec.ts`
 

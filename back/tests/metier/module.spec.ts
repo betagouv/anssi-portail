@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { ConstructeurDeModule } from '../api/mesures/constructeurDeModule.js';
 import { fabriqueModuleCyberdépart } from '../api/objetsPretsALEmploi.js';
 

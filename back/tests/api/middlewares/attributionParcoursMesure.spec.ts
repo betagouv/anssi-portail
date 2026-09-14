@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import assert from 'node:assert';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import { fabriqueAttributionParcoursMesure } from '../../../src/api/middlewares/attributionParcoursMesure.js';
 import { EntrepotMesureMemoire } from '../../persistance/entrepotMesureMemoire.js';
 import { EntrepôtModuleMémoire } from '../../persistance/EntrepôtModuleMémoire.js';

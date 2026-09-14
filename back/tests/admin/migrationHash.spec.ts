@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { tenteDeHacherAvecUnNouveauSel } from '../../src/admin/migrationHash.js';
 
 describe("L'outil de migration de sels de hachage", () => {

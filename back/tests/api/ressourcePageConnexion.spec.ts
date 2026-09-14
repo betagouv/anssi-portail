@@ -1,5 +1,5 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import { Express } from 'express';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';

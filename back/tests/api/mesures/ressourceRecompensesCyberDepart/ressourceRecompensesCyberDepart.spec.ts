@@ -2,7 +2,7 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import AdmZip from 'adm-zip';
 import { Express } from 'express';
 import assert from 'node:assert';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import sharp from 'sharp';
 import request from 'supertest';
 import { ServiceRécompensesCyberDépart } from '../../../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';

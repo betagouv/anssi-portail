@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../../src/api/msc.js';
 import { QuestionnaireVraiFauxRéponseSoumise } from '../../../../src/bus/evenements/questionnaireVraiFauxReponseSoumise.js';
@@ -70,7 +70,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
       assert(busÉvénements.naPasRecuDEvenement(QuestionnaireVraiFauxTerminé));
     });
 
-    it.only('publie les informations de l’utilisateur si elles sont disponibles', async () => {
+    it('publie les informations de l’utilisateur si elles sont disponibles', async () => {
       const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'token' });
       await request(serveur).post('/api/mini-tests/vrai-faux/reponses').set('Cookie', [cookieJeanneDupont]).send({
         idQuestion: 'idQuestion1',

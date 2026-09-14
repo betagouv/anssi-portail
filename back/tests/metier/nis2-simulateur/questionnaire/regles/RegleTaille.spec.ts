@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { UnionPetitMoyenGrand } from '../../../../../src/metier/nis2-simulateur/ChampsSimulateur.definitions.js';
 import {
   EtatQuestionnaire,

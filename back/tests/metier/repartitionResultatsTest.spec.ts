@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { RepartitionResultatsTest } from '../../src/metier/repartitionResultatsTest.js';
 import { ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
 import { ResultatTestMaturiteCreateur } from './ResultatTestMaturiteCreateur.js';

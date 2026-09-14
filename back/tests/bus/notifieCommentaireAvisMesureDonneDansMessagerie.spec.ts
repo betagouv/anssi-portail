@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { suite as describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { AvisMesureDonne } from '../../src/bus/evenements/avisMesureDonne.js';
 import { notifieCommentaireAvisMesureDonneDansMessagerie } from '../../src/bus/notifieCommentaireAvisMesureDonneDansMessagerie.js';
 import { fausseMessagerieInstantanee } from '../api/fauxObjets.js';

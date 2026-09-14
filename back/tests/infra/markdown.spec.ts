@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { aseptiseMarkdown } from '../../src/infra/markdown.js';
 
 describe('Le markdown', () => {

@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { EntrepotSecretHachage } from '../../src/infra/entrepotSecretHachagePostgres.js';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from '../../src/infra/serviceVerificationCoherenceSecretsHachage.js';

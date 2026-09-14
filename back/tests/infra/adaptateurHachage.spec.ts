@@ -1,4 +1,4 @@
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import assert from 'node:assert';
 import { fabriqueAdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';

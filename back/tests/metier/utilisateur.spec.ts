@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque.js';
 import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../../src/bus/evenements/moduleTermine.js';
@@ -348,7 +348,7 @@ describe("L'utilisateur", () => {
           assert.equal(busEvenements.naPasRecuDEvenement(ParcoursChangé), true);
         });
 
-        it('publie un événement d');
+        it.todo('publie un événement d');
       });
 
       describe("d'un module autre que Cyberdépart", () => {
