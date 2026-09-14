@@ -102,4 +102,7 @@ jobs:
           git commit -m "Ajoute le site généré"
           NODE_VERSION="$(./scripts/get-node-version.sh)"
           clever env set CC_NODE_VERSION "$NODE_VERSION"
+          clever env set CC_NODE_BUILD_TOOL custom
+          clever env set CC_CUSTOM_BUILD_TOOL 'pnpm install --prod=false --frozen-lockfile'
+          clever env set CC_RUN_COMMAND 'pnpm start'
           clever deploy --force --same-commit-policy=rebuild
