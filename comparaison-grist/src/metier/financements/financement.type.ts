@@ -61,3 +61,9 @@ export class Financement {
     this.regions = regions;
   }
 }
+
+export type ComparaisonDeFinancements = {
+  ajouts: Financement[];
+  suppressions: Financement[];
+  modifications: { source: Financement; cible: Financement }[];
+};
