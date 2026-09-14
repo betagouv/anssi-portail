@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   ControleAvisUtilisateur,
   type EntrepotAvisUtilisateur,
@@ -9,15 +9,15 @@ describe("Controle la demande d'avis utilisateur", () => {
     dateDebutSession: () => undefined,
     dateDerniereFermetureAvis: () => undefined,
     dateDernierAvis: () => undefined,
-    modifieDateDebutSession: () => {},
+    modifieDateDebutSession: vi.fn<EntrepotAvisUtilisateur['modifieDateDebutSession']>(),
   };
 
-  beforeAll(() => {
-    vi.useFakeTimers();
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['Date'] });
     vi.setSystemTime(new Date(2025, 7, 15, 12, 0, 0));
   });
-  afterAll(() => {
-    vi.restoreAllMocks();
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   describe('et ne la propose pas', () => {
@@ -74,14 +74,6 @@ describe("Controle la demande d'avis utilisateur", () => {
   });
 
   describe('retarde son affichage', () => {
-    const dateCourante = new Date(2025, 7, 15, 12, 0, 0);
-    beforeAll(() => {
-      vi.useFakeTimers();
-      vi.setSystemTime(dateCourante);
-    });
-    afterAll(() => {
-      vi.restoreAllMocks();
-    });
     it('en se basant sur la date de première visite et la durée minimum', () => {
       const controle = new ControleAvisUtilisateur({
         dureeMinimumEnSecondes: '20',
@@ -94,6 +86,7 @@ describe("Controle la demande d'avis utilisateur", () => {
       const delai = controle.calculeDelaiRestantAvisUtilisateur();
 
       expect(delai).toEqual(15);
+      expect(fauxEntrepotAvisUtilisateur.modifieDateDebutSession).not.toHaveBeenCalled();
     });
 
     it("en se basant uniquement sur la durée minimum si il n'y a pas de date de première visite", () => {
@@ -105,6 +98,9 @@ describe("Controle la demande d'avis utilisateur", () => {
       const delai = controle.calculeDelaiRestantAvisUtilisateur();
 
       expect(delai).toEqual(20);
+      expect(fauxEntrepotAvisUtilisateur.modifieDateDebutSession).toHaveBeenCalledExactlyOnceWith(
+        new Date(2025, 7, 15, 12, 0, 0)
+      );
     });
   });
 });
