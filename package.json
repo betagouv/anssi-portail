@@ -42,7 +42,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.4.0",
+      "version": "11.26.0",
       "onFail": "error"
     }
   }

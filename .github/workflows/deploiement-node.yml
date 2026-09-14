@@ -95,7 +95,6 @@ jobs:
           CLEVER_SECRET: ${{ secrets.CLEVER_CLOUD_SECRET }}
           CLEVER_TOKEN: ${{ secrets.CLEVER_CLOUD_TOKEN }}
           ID_APP: ${{ secrets.CLEVER_CLOUD_ID_APP }}
-          NODE_ENV: production
         run: |
           git config --global user.email "contact@messervicescyber.beta.gouv.fr"
           git config --global user.name "MesServicesCyber"
