@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { Express } from 'express';
-import assert from 'node:assert';
 import { configurationDeTestDuServeur } from './fauxObjets.js';
 import { creeServeur } from '../../src/api/msc.js';
 import request from 'supertest';
@@ -17,14 +16,14 @@ describe("La ressource Annuaire Tranche effectif d'établissements", () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/api/annuaire/tranches-effectif');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it("renvoie les tranches d'effectif du référentiel", async () => {
       const reponse = await request(serveur).get('/api/annuaire/tranches-effectif');
 
-      assert.equal(reponse.body[1].libelle, '0 salarié');
-      assert.equal(reponse.body[1].code, '00');
+      expect(reponse.body[1].libelle).toBe('0 salarié');
+      expect(reponse.body[1].code).toBe('00');
     });
   });
 });

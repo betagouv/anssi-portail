@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { consigneRetourMiniTestDonnéDansJournal } from '../../src/bus/consigneRetourMiniTestDonneDansJournal.js';
@@ -27,7 +26,7 @@ describe("L'abonnement qui consigne l'évènement de retour de test de maturité
         adaptateurJournal,
       })(new RetourMiniTestDonné({ miniTest, commentaire: 'un commentaire', retour: 'NEGATIF' }));
 
-      assert.deepEqual(évènementReçu, {
+      expect(évènementReçu).toEqual({
         type: expected.type,
         donnees: { retour: 'NEGATIF', commentaire: 'un commentaire' },
         date: new Date('2025-03-10'),

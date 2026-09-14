@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { RepartitionResultatsTest } from '../../src/metier/repartitionResultatsTest.js';
 import { ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
 import { ResultatTestMaturiteCreateur } from './ResultatTestMaturiteCreateur.js';
@@ -15,8 +14,8 @@ describe('Les répartitions des résultats de test', () => {
 
       const repartitions = new RepartitionResultatsTest(resultats).calculeRepartitionParNiveau();
 
-      assert.equal(repartitions[0].ratio, 0.75);
-      assert.equal(repartitions[1].ratio, 0.25);
+      expect(repartitions[0].ratio).toBe(0.75);
+      expect(repartitions[1].ratio).toBe(0.25);
     });
   });
 });

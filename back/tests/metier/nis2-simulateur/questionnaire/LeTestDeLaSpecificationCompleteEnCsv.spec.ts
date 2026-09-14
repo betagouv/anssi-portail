@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { leCSVDeProd } from './aidesAuxTests.js';
 import { LecteurDeSpecifications } from '../../../../src/metier/nis2-simulateur/questionnaire/LecteurDeSpecifications.js';
 
@@ -10,6 +9,6 @@ describe('La lecture de la spécification complète en CSV', () => {
 
     const specifications = lecteur.lis(csv);
 
-    assert.equal(specifications.nombre(), 673);
+    expect(specifications.nombre()).toBe(673);
   });
 });

@@ -1,5 +1,4 @@
-import { describe, it } from 'vitest';
-import assert from 'node:assert';
+import { describe, it, expect } from 'vitest';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { envoieEmailCreationCompte } from '../../src/bus/envoieEmailCreationCompte.js';
 import { CompteCree } from '../../src/bus/evenements/compteCree.js';
@@ -25,8 +24,8 @@ describe("L'abonnement qui envoie un email de création de compte", () => {
       })
     );
 
-    assert.notEqual(donneesRecues, undefined);
-    assert.equal(donneesRecues!.email, 'jeanne.dupond@mail.fr');
-    assert.equal(donneesRecues!.prenom, 'Jeanne');
+    expect(donneesRecues).toBeDefined();
+    expect(donneesRecues!.email).toBe('jeanne.dupond@mail.fr');
+    expect(donneesRecues!.prenom).toBe('Jeanne');
   });
 });

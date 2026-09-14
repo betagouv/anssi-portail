@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { Telephone } from '../../src/metier/telephone.js';
 
 describe('Les numéros de télephone', () => {
@@ -8,12 +7,12 @@ describe('Les numéros de télephone', () => {
 
     const telephoneInternational = new Telephone(telephoneFr).auFormatInternational();
 
-    assert.equal(telephoneInternational, '+33612345678');
+    expect(telephoneInternational).toBe('+33612345678');
   });
 
   it("retourne une chaine vide si le telephone n'existe pas", () => {
     const telephoneInternational = new Telephone(undefined).auFormatInternational();
 
-    assert.equal(telephoneInternational, '');
+    expect(telephoneInternational).toBe('');
   });
 });

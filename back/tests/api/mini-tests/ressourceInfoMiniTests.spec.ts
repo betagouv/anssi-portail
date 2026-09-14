@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { RéactionMiniTest } from '../../../src/metier/mini-tests/reactionMiniTest.js';
@@ -29,13 +28,13 @@ describe('La ressource des informations des mini-tests', () => {
     it('renvoie 200', async () => {
       const reponse = await request(serveur).get('/api/info-mini-tests');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('renvoie aucune réaction quand aucune n’existe', async () => {
       const reponse = await request(serveur).get('/api/info-mini-tests');
 
-      assert.deepEqual(reponse.body, {
+      expect(reponse.body).toEqual({
         compteurs: {
           MaturiteCyber: 0,
           Exposition: 1700,
@@ -52,7 +51,7 @@ describe('La ressource des informations des mini-tests', () => {
 
       const reponse = await request(serveur).get('/api/info-mini-tests');
 
-      assert.deepEqual(reponse.body.réactions, {
+      expect(reponse.body.réactions).toEqual({
         VraiFaux: { '❤️': 2, '🔥': 1 },
         MaturiteCyber: { '👍': 1 },
       });
@@ -67,7 +66,7 @@ describe('La ressource des informations des mini-tests', () => {
 
       const reponse = await request(serveur).get('/api/info-mini-tests');
 
-      assert.equal(reponse.body.compteurs.MaturiteCyber, 200);
+      expect(reponse.body.compteurs.MaturiteCyber).toBe(200);
     });
   });
 });

@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { GuideGrist } from '../../src/infra/entrepotGuideGrist.js';
 import { EntrepotGuideTravailGrist } from '../../src/infra/entrepotGuideTravailGrist.js';
@@ -36,7 +35,7 @@ describe("L'entrepot de gestion de guide Grist", () => {
 
     const guide1 = await entrepotGuideTravailGrist.parId('guide1');
 
-    assert.equal(guide1!.nom, 'Le guide 1');
+    expect(guide1!.nom).toBe('Le guide 1');
   });
 
   it("sait transformer le retour de l'API Grist en guides", async () => {
@@ -47,9 +46,9 @@ describe("L'entrepot de gestion de guide Grist", () => {
 
     const guides = await entrepotGuideTravailGrist.tous();
 
-    assert.equal(guides.length, 2);
-    assert.equal(guides[0].id, 'guide1');
-    assert.equal(guides[1].id, 'guide2');
+    expect(guides).toHaveLength(2);
+    expect(guides[0].id).toBe('guide1');
+    expect(guides[1].id).toBe('guide2');
   });
 
   describe('concernant les documents', () => {
@@ -66,7 +65,7 @@ describe("L'entrepot de gestion de guide Grist", () => {
         );
 
         const guide1 = await entrepotGuideTravailGrist.parId('guide1');
-        assert.deepEqual(guide1!.listeDocuments, [{ libelle: 'Le guide', nomFichier: 'guide.pdf' }]);
+        expect(guide1!.listeDocuments).toEqual([{ libelle: 'Le guide', nomFichier: 'guide.pdf' }]);
       });
     });
 
@@ -78,7 +77,7 @@ describe("L'entrepot de gestion de guide Grist", () => {
       await entrepotGuideTravailGrist.sauvegardeDocuments('guide1', [], ['ancien.pdf']);
 
       const guide1 = await entrepotGuideTravailGrist.parId('guide1');
-      assert.deepEqual(guide1!.nomsAnciensDocuments, ['ancien.pdf']);
+      expect(guide1!.nomsAnciensDocuments).toEqual(['ancien.pdf']);
     });
 
     it('sait supprimer un document à un guide', async () => {
@@ -89,7 +88,7 @@ describe("L'entrepot de gestion de guide Grist", () => {
       await entrepotGuideTravailGrist.sauvegardeDocuments('guide1', [], []);
 
       const guide1 = await entrepotGuideTravailGrist.parId('guide1');
-      assert.deepEqual(guide1!.listeDocuments, []);
+      expect(guide1!.listeDocuments).toEqual([]);
     });
   });
 });

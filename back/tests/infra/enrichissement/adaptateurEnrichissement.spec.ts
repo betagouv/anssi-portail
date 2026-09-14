@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import {
   AdaptateurEnrichissement,
   fabriqueAdaptateurEnrichissement,
@@ -53,7 +52,7 @@ describe("L'adaptateur qui enrichie le html servi", () => {
 
       const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/financements/1');
 
-      assert.match(rendu, /<link rel="canonical" href="http:\/\/localhost:3000\/financements\/1">/);
+      expect(rendu).toMatch(/<link rel="canonical" href="http:\/\/localhost:3000\/financements\/1">/);
     });
 
     it("lorsqu'on sert une page de guide", async () => {
@@ -61,7 +60,7 @@ describe("L'adaptateur qui enrichie le html servi", () => {
 
       const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/guides/identifiant-dun-guide');
 
-      assert.match(rendu, /<link rel="canonical" href="http:\/\/localhost:3000\/guides\/identifiant-dun-guide">/);
+      expect(rendu).toMatch(/<link rel="canonical" href="http:\/\/localhost:3000\/guides\/identifiant-dun-guide">/);
     });
   });
 
@@ -72,7 +71,7 @@ describe("L'adaptateur qui enrichie le html servi", () => {
 
       const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/guides/devsecops');
 
-      assert.match(rendu, /<title>DevSecOps | MesServicesCyber<\/title>/);
+      expect(rendu).toMatch(/<title>DevSecOps | MesServicesCyber<\/title>/);
     });
 
     it("lorsqu'on sert une page de financement", async () => {
@@ -81,7 +80,7 @@ describe("L'adaptateur qui enrichie le html servi", () => {
 
       const rendu = await adaptateurEnrichissement.enrichisAvecComposants(htmlFactice, '/financements/1');
 
-      assert.match(rendu, /<title>Cyber PME | MesServicesCyber<\/title>/);
+      expect(rendu).toMatch(/<title>Cyber PME | MesServicesCyber<\/title>/);
     });
   });
 });

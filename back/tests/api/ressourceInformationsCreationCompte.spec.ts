@@ -1,8 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT.js';
 import { creeServeur } from '../../src/api/msc.js';
@@ -43,7 +42,7 @@ describe("La ressource d'informations de création de compte", () => {
       };
       const reponse = await request(serveur).get('/api/informations-creation-compte?token=unMauvaisToken');
 
-      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+      expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
     });
 
     it('renvoie les informations utilisateur si le token est valide', async () => {
@@ -57,12 +56,12 @@ describe("La ressource d'informations de création de compte", () => {
       };
       const reponse = await request(serveur).get('/api/informations-creation-compte?token=unBonToken');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
-      assert.deepEqual(reponse.body, {
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
+      expect(reponse.body).toEqual({
         prenom: 'Jeanne',
         nom: 'Dupont',
       });
-      assert.equal(tokenRecu, 'unBonToken');
+      expect(tokenRecu).toBe('unBonToken');
     });
 
     describe("lorsque l'utilisateur n'est pas connu de MPA", () => {
@@ -86,7 +85,7 @@ describe("La ressource d'informations de création de compte", () => {
         ];
 
         const reponse = await request(serveur).get('/api/informations-creation-compte?token=unBonToken');
-        assert.deepEqual(reponse.body.organisation, {
+        expect(reponse.body.organisation).toEqual({
           siret: '1234',
           departement: '75',
           nom: 'MonOrganisation',
@@ -105,8 +104,8 @@ describe("La ressource d'informations de création de compte", () => {
 
         const reponse = await request(serveur).get('/api/informations-creation-compte?token=unBonToken');
 
-        assert.equal(rechercheEntrepriseAppelee, false);
-        assert.equal(reponse.body.organisation, undefined);
+        expect(rechercheEntrepriseAppelee).toBe(false);
+        expect(reponse.body.organisation).toBeUndefined();
       });
     });
 
@@ -131,13 +130,13 @@ describe("La ressource d'informations de création de compte", () => {
 
         const reponse = await request(serveur).get('/api/informations-creation-compte?token=unBonToken');
 
-        assert.equal(reponse.body.nom, 'Dujardin');
-        assert.equal(reponse.body.prenom, 'Jeanne');
-        assert.equal(reponse.body.telephone, '0102030405');
-        assert.equal(reponse.body.organisation.siret, '1234');
-        assert.equal(reponse.body.organisation.departement, '75');
-        assert.equal(reponse.body.organisation.nom, 'MonOrga');
-        assert.deepEqual(reponse.body.domainesSpecialite, ['RSSI']);
+        expect(reponse.body.nom).toBe('Dujardin');
+        expect(reponse.body.prenom).toBe('Jeanne');
+        expect(reponse.body.telephone).toBe('0102030405');
+        expect(reponse.body.organisation.siret).toBe('1234');
+        expect(reponse.body.organisation.departement).toBe('75');
+        expect(reponse.body.organisation.nom).toBe('MonOrga');
+        expect(reponse.body.domainesSpecialite).toEqual(['RSSI']);
       });
 
       it("ne complète pas les informations de l'organisation car elles sont déjà dispos dans le profil MPA", async () => {
@@ -161,10 +160,10 @@ describe("La ressource d'informations de création de compte", () => {
 
         const reponse = await request(serveur).get('/api/informations-creation-compte?token=unBonToken');
 
-        assert.equal(rechercheEntrepriseAppelee, false);
-        assert.equal(reponse.body.organisation.siret, '1234');
-        assert.equal(reponse.body.organisation.departement, '75');
-        assert.equal(reponse.body.organisation.nom, 'MonOrga');
+        expect(rechercheEntrepriseAppelee).toBe(false);
+        expect(reponse.body.organisation.siret).toBe('1234');
+        expect(reponse.body.organisation.departement).toBe('75');
+        expect(reponse.body.organisation.nom).toBe('MonOrga');
       });
     });
   });

@@ -1,7 +1,6 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { SessionDeGroupe } from '../../src/metier/sessionDeGroupe.js';
 import { EntrepotResultatTestMemoire } from '../persistance/entrepotResultatTestMemoire.js';
-import assert from 'assert';
 import { ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
 
 const resultatAvecReponses = (reponses: ReponsesTestMaturite, codeSession: string) =>
@@ -23,12 +22,12 @@ describe('La session de groupe', () => {
 
       const resultatSession = await sessionDeGroupe.resultatSession(entrepotResultatTest);
 
-      assert.equal(resultatSession.nombreParticipants, 0);
-      assert.equal(resultatSession.resume['insuffisant'].total, 0);
-      assert.equal(resultatSession.resume['emergent'].total, 0);
-      assert.equal(resultatSession.resume['intermediaire'].total, 0);
-      assert.equal(resultatSession.resume['confirme'].total, 0);
-      assert.equal(resultatSession.resume['optimal'].total, 0);
+      expect(resultatSession.nombreParticipants).toBe(0);
+      expect(resultatSession.resume['insuffisant'].total).toBe(0);
+      expect(resultatSession.resume['emergent'].total).toBe(0);
+      expect(resultatSession.resume['intermediaire'].total).toBe(0);
+      expect(resultatSession.resume['confirme'].total).toBe(0);
+      expect(resultatSession.resume['optimal'].total).toBe(0);
       const moyennesAZero = {
         'prise-en-compte-risque': 0,
         pilotage: 0,
@@ -37,11 +36,11 @@ describe('La session de groupe', () => {
         'adoption-solutions': 0,
         posture: 0,
       };
-      assert.deepEqual(resultatSession.resume['insuffisant'].moyennes, moyennesAZero);
-      assert.deepEqual(resultatSession.resume['emergent'].moyennes, moyennesAZero);
-      assert.deepEqual(resultatSession.resume['intermediaire'].moyennes, moyennesAZero);
-      assert.deepEqual(resultatSession.resume['confirme'].moyennes, moyennesAZero);
-      assert.deepEqual(resultatSession.resume['optimal'].moyennes, moyennesAZero);
+      expect(resultatSession.resume['insuffisant'].moyennes).toEqual(moyennesAZero);
+      expect(resultatSession.resume['emergent'].moyennes).toEqual(moyennesAZero);
+      expect(resultatSession.resume['intermediaire'].moyennes).toEqual(moyennesAZero);
+      expect(resultatSession.resume['confirme'].moyennes).toEqual(moyennesAZero);
+      expect(resultatSession.resume['optimal'].moyennes).toEqual(moyennesAZero);
     });
 
     it('donne un résumé avec résultats avec les totaux de participant par niveau', async () => {
@@ -78,12 +77,12 @@ describe('La session de groupe', () => {
 
       const resultatSession = await sessionDeGroupe.resultatSession(entrepotResultatTest);
 
-      assert.equal(resultatSession.nombreParticipants, 2);
-      assert.equal(resultatSession.resume['insuffisant'].total, 1);
-      assert.equal(resultatSession.resume['emergent'].total, 0);
-      assert.equal(resultatSession.resume['intermediaire'].total, 1);
-      assert.equal(resultatSession.resume['confirme'].total, 0);
-      assert.equal(resultatSession.resume['optimal'].total, 0);
+      expect(resultatSession.nombreParticipants).toBe(2);
+      expect(resultatSession.resume['insuffisant'].total).toBe(1);
+      expect(resultatSession.resume['emergent'].total).toBe(0);
+      expect(resultatSession.resume['intermediaire'].total).toBe(1);
+      expect(resultatSession.resume['confirme'].total).toBe(0);
+      expect(resultatSession.resume['optimal'].total).toBe(0);
     });
 
     it('donne un résumé avec résultats avec, pour chaque niveau, les moyennes des réponses à chaque question', async () => {
@@ -120,9 +119,9 @@ describe('La session de groupe', () => {
 
       const resultatSession = await sessionDeGroupe.resultatSession(entrepotResultatTest);
 
-      assert.equal(resultatSession.nombreParticipants, 2);
-      assert.equal(resultatSession.resume['insuffisant'].total, 2);
-      assert.equal(resultatSession.resume['insuffisant'].moyennes['ressources-humaines'], 3.5);
+      expect(resultatSession.nombreParticipants).toBe(2);
+      expect(resultatSession.resume['insuffisant'].total).toBe(2);
+      expect(resultatSession.resume['insuffisant'].moyennes['ressources-humaines']).toBe(3.5);
     });
   });
 });

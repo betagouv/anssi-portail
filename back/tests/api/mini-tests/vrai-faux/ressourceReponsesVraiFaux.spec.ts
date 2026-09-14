@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../../src/api/msc.js';
 import { QuestionnaireVraiFauxRéponseSoumise } from '../../../../src/bus/evenements/questionnaireVraiFauxReponseSoumise.js';
@@ -47,19 +46,19 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
     it('répond un 201', async () => {
       const reponse = await posteUneRéponseValide();
 
-      assert.equal(reponse.status, HttpStatusCode.Created);
+      expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
     it("publie un événement lorsqu'une réponse est fournie", async () => {
       await posteUneRéponseValide();
 
-      assert(busÉvénements.aRecuUnEvenement(QuestionnaireVraiFauxRéponseSoumise));
+      expect(busÉvénements.aRecuUnEvenement(QuestionnaireVraiFauxRéponseSoumise)).toBeTruthy();
     });
 
     it("publie un événement de questionnaire complété lorsqu'une la dernière réponse est fournie", async () => {
       await posteUneRéponseValide();
 
-      assert(busÉvénements.aRecuUnEvenement(QuestionnaireVraiFauxTerminé));
+      expect(busÉvénements.aRecuUnEvenement(QuestionnaireVraiFauxTerminé)).toBeTruthy();
     });
 
     it("ne publie pas d'événement de questionnaire complété si la réponse fournie n'est pas la dernière", async () => {
@@ -67,7 +66,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
 
       await posteUneRéponseValide();
 
-      assert(busÉvénements.naPasRecuDEvenement(QuestionnaireVraiFauxTerminé));
+      expect(busÉvénements.naPasRecuDEvenement(QuestionnaireVraiFauxTerminé)).toBeTruthy();
     });
 
     it('publie les informations de l’utilisateur si elles sont disponibles', async () => {
@@ -80,7 +79,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
 
       const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxRéponseSoumise);
 
-      assert.equal(événement?.codeRegion, 'FR-971');
+      expect(événement?.codeRegion).toBe('FR-971');
     });
 
     describe('répond un 400', () => {
@@ -90,7 +89,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
           idCorrélation: '1234567890',
         });
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
 
       it('si un identifiant de question est trop long', async () => {
@@ -102,7 +101,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
             idCorrélation: '1234567890',
           });
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
 
       it("si auncune réponse utilisateur n'est fournie", async () => {
@@ -111,7 +110,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
           idCorrélation: '1234567890',
         });
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
 
       it("si auncun identifiant de corrélation n'est fourni", async () => {
@@ -120,7 +119,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
           réponseUtilisateur: true,
         });
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
 
       it('si un identifiant de corrélation est trop long', async () => {
@@ -132,7 +131,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
             idCorrélation: new Array(101).fill('a'),
           });
 
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
     });
   });

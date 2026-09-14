@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { EntrepotGuideMemoire } from '../../persistance/entrepotGuideMemoire.js';
@@ -29,50 +28,48 @@ describe('La ressource qui gère les guides', () => {
       it('répond 200', async () => {
         const reponse = await request(serveur).get('/api/guides');
 
-        assert.equal(reponse.status, HttpStatusCode.Ok);
+        expect(reponse.status).toBe(HttpStatusCode.Ok);
       });
 
       it('renvoie la liste des guides', async () => {
         const reponse = await request(serveur).get('/api/guides');
 
-        assert.equal(reponse.body.length, 2);
+        expect(reponse.body).toHaveLength(2);
         const premierGuide = reponse.body[0];
-        assert.equal(premierGuide.id, 'zero-trust');
-        assert.equal(premierGuide.nom, 'Zero Trust');
-        assert.equal(
-          premierGuide.description,
+        expect(premierGuide.id).toBe('zero-trust');
+        expect(premierGuide.nom).toBe('Zero Trust');
+        expect(premierGuide.description).toBe(
           '<p>Avec l’accroissement des usages liés au télétravail, à la pratique du « Bring Your Own Device » (BYOD) et aux accès hétérogènes à des services on-premise ou dans le cloud, les produits dérivés du modèle Zero Trust sont promus par les éditeurs.</p><p> Les produits dits Zero Trust sont vus comme des solutions permettant de pallier certaines limitations des mesures traditionnelles telles que la protection des flux par VPN ou le filtrage réseau par des pares-feux périmétriques. Bien souvent, les modèles Zero Trust et de défense périmétrique sont opposés alors qu’ils sont complémentaires et partagent de nombreux principes communs. Ainsi le modèle Zero Trust doit être inclus dans une stratégie de défense en profondeur et il ne doit en aucun cas être vu comme un remplacement d’une défense périmétrique.</p><p> Le principal objectif de ce modèle est de réduire la confiance implicite accordée à un sujet souhaitant accéder au système d’information (SI). Il apporter un éclairage complémentaire à l’avis scientifique et technique de l’ANSSI publié en 2021 sur le modèle Zero Trust et sur la manière dont il peut être mis en œuvre progressivement dans le cadre d’une stratégie de défense en profondeur.</p>'
         );
-        assert.deepEqual(premierGuide.image, {
+        expect(premierGuide.image).toEqual({
           petite: '/documents-guides/zero-trust/588.avif',
           grande: '/documents-guides/zero-trust/origine.avif',
         });
-        assert.equal(premierGuide.langue, 'FR');
-        assert.equal(premierGuide.thematique, 'Les essentiels');
-        assert.deepEqual(premierGuide.collections, ['Les essentiels']);
-        assert.deepEqual(premierGuide.besoins, ['REAGIR', 'SE_FORMER']);
+        expect(premierGuide.langue).toBe('FR');
+        expect(premierGuide.thematique).toBe('Les essentiels');
+        expect(premierGuide.collections).toEqual(['Les essentiels']);
+        expect(premierGuide.besoins).toEqual(['REAGIR', 'SE_FORMER']);
 
         const secondGuide = reponse.body[1];
-        assert.equal(secondGuide.id, 'devsecops');
-        assert.equal(secondGuide.nom, 'DevSecOps');
-        assert.equal(
-          secondGuide.description,
+        expect(secondGuide.id).toBe('devsecops');
+        expect(secondGuide.nom).toBe('DevSecOps');
+        expect(secondGuide.description).toBe(
           '<p>Les Essentiels de l’ANSSI visent à éclairer l’ensemble de nos lecteurs, quel que soit leur niveau de connaissance technique, sur les grands enjeux de la cybersécurité. Ils reflètent le point de vue de l’agence au moment de leur publication et ne se positionnent pas comme des documents de recommandations détaillées, comme nos guides. Il s’agit plutôt de l’énonciation de bonnes pratiques indépendantes pouvant être mises en place de façon complémentaire. Ces recommandations sont susceptibles d’être mises à jour régulièrement suivant l’évolution de la menace, des technologies utilisées, de nos retours d’expérience, etc.</p>'
         );
-        assert.deepEqual(secondGuide.image, {
+        expect(secondGuide.image).toEqual({
           petite: '/documents-guides/devsecops/588.avif',
           grande: '/documents-guides/devsecops/origine.avif',
         });
-        assert.equal(secondGuide.langue, 'FR');
-        assert.equal(secondGuide.thematique, 'Les essentiels');
-        assert.deepEqual(secondGuide.collections, ['Les essentiels']);
-        assert.deepEqual(secondGuide.besoins, ['SECURISER']);
+        expect(secondGuide.langue).toBe('FR');
+        expect(secondGuide.thematique).toBe('Les essentiels');
+        expect(secondGuide.collections).toEqual(['Les essentiels']);
+        expect(secondGuide.besoins).toEqual(['SECURISER']);
       });
 
       it("expose les dates d'un guide", async () => {
         const reponse = await request(serveur).get('/api/guides');
 
-        assert.equal(reponse.body[0].dateMiseAJour, new Date(2025, 5, 20).toISOString());
+        expect(reponse.body[0].dateMiseAJour).toBe(new Date(2025, 5, 20).toISOString());
       });
 
       it("renvoie un 500 si l'entrepot renvoie une erreur", async () => {
@@ -81,7 +78,7 @@ describe('La ressource qui gère les guides', () => {
         };
         const reponse = await request(serveur).get('/api/guides');
 
-        assert.equal(reponse.status, HttpStatusCode.InternalServerError);
+        expect(reponse.status).toBe(HttpStatusCode.InternalServerError);
       });
     });
 
@@ -91,7 +88,7 @@ describe('La ressource qui gère les guides', () => {
 
         const reponse = await request(serveur).get('/api/guides');
 
-        assert.equal(reponse.body.length, 0);
+        expect(reponse.body).toHaveLength(0);
       });
     });
 
@@ -101,8 +98,8 @@ describe('La ressource qui gère les guides', () => {
 
         const reponse = await request(serveur).get('/api/guides?mode=travail');
 
-        assert.equal(reponse.body.length, 1);
-        assert.equal(reponse.body[0].id, 'zero-trust');
+        expect(reponse.body).toHaveLength(1);
+        expect(reponse.body[0].id).toBe('zero-trust');
       });
     });
   });

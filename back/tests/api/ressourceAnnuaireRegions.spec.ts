@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { Express } from 'express';
-import assert from 'node:assert';
 import { configurationDeTestDuServeur } from './fauxObjets.js';
 import { creeServeur } from '../../src/api/msc.js';
 import request from 'supertest';
@@ -17,14 +16,14 @@ describe('La ressource Annuaire Régions', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/api/annuaire/regions');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('renvoie les régions du référentiel', async () => {
       const reponse = await request(serveur).get('/api/annuaire/regions');
 
-      assert.equal(reponse.body[0].nom, 'Auvergne-Rhône-Alpes');
-      assert.equal(reponse.body[0].codeIso, 'FR-ARA');
+      expect(reponse.body[0].nom).toBe('Auvergne-Rhône-Alpes');
+      expect(reponse.body[0].codeIso).toBe('FR-ARA');
     });
   });
 });

@@ -1,5 +1,4 @@
-import assert from 'assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
 import { EntrepotSecretHachage } from '../../src/infra/entrepotSecretHachagePostgres.js';
 import { fabriqueServiceVerificationCoherenceSecretsHachage } from '../../src/infra/serviceVerificationCoherenceSecretsHachage.js';
@@ -27,18 +26,15 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
       adaptateurEnvironnement,
     });
 
-    await assert.rejects(
-      () => service.verifieCoherenceSecrets(),
-      (err: unknown) => {
-        assert(err instanceof AggregateError);
-        assert.strictEqual(
-          err.errors[0].message,
-          '💥 La version 1 du secret de la config a une valeur différente de celle déjà appliquée.'
-        );
-        return true;
-      },
+    await expect(
+      (() => service.verifieCoherenceSecrets())(),
       'La méthode aurait dû lever une erreur'
-    );
+    ).rejects.toMatchObject({
+      constructor: AggregateError,
+      errors: {
+        0: { message: '💥 La version 1 du secret de la config a une valeur différente de celle déjà appliquée.' },
+      },
+    });
   });
 
   it("jette une erreur si le deuxième secret est invalide, peu importe l'ordre", async () => {
@@ -68,18 +64,15 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
       adaptateurEnvironnement,
     });
 
-    await assert.rejects(
-      () => service.verifieCoherenceSecrets(),
-      (err: unknown) => {
-        assert(err instanceof AggregateError);
-        assert.strictEqual(
-          err.errors[0].message,
-          '💥 La version 2 du secret de la config a une valeur différente de celle déjà appliquée.'
-        );
-        return true;
-      },
+    await expect(
+      (() => service.verifieCoherenceSecrets())(),
       'La méthode aurait dû lever une erreur'
-    );
+    ).rejects.toMatchObject({
+      constructor: AggregateError,
+      errors: {
+        0: { message: '💥 La version 2 du secret de la config a une valeur différente de celle déjà appliquée.' },
+      },
+    });
   });
 
   it('ne fait rien si tous les secrets sont valides', async () => {
@@ -109,7 +102,7 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
       adaptateurEnvironnement,
     });
 
-    await assert.doesNotReject(() => service.verifieCoherenceSecrets());
+    await expect((() => service.verifieCoherenceSecrets())()).resolves.toBeUndefined();
   });
 
   it("jette une erreur si un secret n'est pas présent dans la persistance", async () => {
@@ -136,18 +129,13 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
       adaptateurEnvironnement,
     });
 
-    await assert.rejects(
-      () => service.verifieCoherenceSecrets(),
-      (err: unknown) => {
-        assert(err instanceof AggregateError);
-        assert.strictEqual(
-          err.errors[0].message,
-          '💥 La version 1 du secret noté dans la config est manquante dans la persistance.'
-        );
-        return true;
-      },
+    await expect(
+      (() => service.verifieCoherenceSecrets())(),
       'La méthode aurait dû lever une erreur'
-    );
+    ).rejects.toMatchObject({
+      constructor: AggregateError,
+      errors: { 0: { message: '💥 La version 1 du secret noté dans la config est manquante dans la persistance.' } },
+    });
   });
 
   it("jette une erreur si un secret de la persistance n'est pas présent dans la config", async () => {
@@ -174,18 +162,13 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
       adaptateurEnvironnement,
     });
 
-    await assert.rejects(
-      () => service.verifieCoherenceSecrets(),
-      (err: unknown) => {
-        assert(err instanceof AggregateError);
-        assert.strictEqual(
-          err.errors[0].message,
-          '💥 La version 1 du secret déjà appliquée est manquante dans la config.'
-        );
-        return true;
-      },
+    await expect(
+      (() => service.verifieCoherenceSecrets())(),
       'La méthode aurait dû lever une erreur'
-    );
+    ).rejects.toMatchObject({
+      constructor: AggregateError,
+      errors: { 0: { message: '💥 La version 1 du secret déjà appliquée est manquante dans la config.' } },
+    });
   });
 
   it("jette une erreur si aucun secret n'est présent dans la config", async () => {
@@ -206,14 +189,12 @@ describe('Le service de vérification de la cohérence des secrets de hachage', 
       adaptateurEnvironnement,
     });
 
-    await assert.rejects(
-      () => service.verifieCoherenceSecrets(),
-      (err: unknown) => {
-        assert(err instanceof AggregateError);
-        assert.strictEqual(err.errors[0].message, '💥 Aucun secret de hachage dans la config.');
-        return true;
-      },
+    await expect(
+      (() => service.verifieCoherenceSecrets())(),
       'La méthode aurait dû lever une erreur'
-    );
+    ).rejects.toMatchObject({
+      constructor: AggregateError,
+      errors: { 0: { message: '💥 Aucun secret de hachage dans la config.' } },
+    });
   });
 });

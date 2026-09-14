@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
 import {
@@ -19,12 +18,12 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
 
   it('retourne une erreur HTTP 400 si le terme de recherche est vide', async () => {
     const reponse = await request(serveur).get('/api/annuaire/organisations?recherche=&departement=mon>departement');
-    assert.equal(reponse.status, HttpStatusCode.BadRequest);
+    expect(reponse.status).toBe(HttpStatusCode.BadRequest);
   });
 
   it("retourne une erreur HTTP 400 si le département n'existe pas", async () => {
     const reponse = await request(serveur).get('/api/annuaire/organisations?recherche=siret&departement=990');
-    assert.equal(reponse.status, HttpStatusCode.BadRequest);
+    expect(reponse.status).toBe(HttpStatusCode.BadRequest);
   });
 
   it("recherche les organisations correspondantes grâce au service d'annuaire", async () => {
@@ -61,8 +60,8 @@ describe('quand requête GET sur `/api/annuaire/organisations`', () => {
 
     await request(serveur).get('/api/annuaire/organisations?recherche=marecherche&departement=01');
 
-    assert.equal(adaptateurAppele, true);
-    assert.equal(termeCherche, 'marecherche');
-    assert.equal(departementCherche, '01');
+    expect(adaptateurAppele).toBe(true);
+    expect(termeCherche).toBe('marecherche');
+    expect(departementCherche).toBe('01');
   });
 });

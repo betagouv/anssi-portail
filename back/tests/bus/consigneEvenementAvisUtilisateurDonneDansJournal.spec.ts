@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { consigneEvenementAvisUtilisateurDonneDansJournal } from '../../src/bus/consigneEvenementAvisUtilisateurDonneDansJournal.js';
 import { AvisUtilisateurDonne } from '../../src/bus/evenements/avisUtilisateurDonne.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
@@ -46,10 +45,10 @@ describe("L'abonnement qui consigne le don d'un avis utilisateur dans le journal
       })
     );
 
-    assert.notEqual(evenementRecu, undefined);
-    assert.equal(evenementRecu!.type, 'AVIS_UTILISATEUR_DONNE');
-    assert.equal(evenementRecu!.donnees.niveauDeSatisfaction, 2);
-    assert.deepEqual(evenementRecu!.date, new Date('2025-03-10'));
+    expect(evenementRecu).toBeDefined();
+    expect(evenementRecu!.type).toBe('AVIS_UTILISATEUR_DONNE');
+    expect(evenementRecu!.donnees.niveauDeSatisfaction).toBe(2);
+    expect(evenementRecu!.date).toEqual(new Date('2025-03-10'));
   });
 
   it("hache l'email de l'utilisateur", async () => {
@@ -67,7 +66,7 @@ describe("L'abonnement qui consigne le don d'un avis utilisateur dans le journal
       })
     );
 
-    assert.equal(evenementRecu!.donnees.idUtilisateur, `jean@dupont.fr-hacheHMAC`);
+    expect(evenementRecu!.donnees.idUtilisateur).toBe(`jean@dupont.fr-hacheHMAC`);
   });
 
   it("ne consigne pas d'email si celui-ci est absent", async () => {
@@ -84,6 +83,6 @@ describe("L'abonnement qui consigne le don d'un avis utilisateur dans le journal
       })
     );
 
-    assert.equal(evenementRecu!.donnees.idUtilisateur, undefined);
+    expect(evenementRecu!.donnees.idUtilisateur).toBeUndefined();
   });
 });

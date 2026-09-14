@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { afterEach, beforeEach, describe, it } from 'vitest';
+import { afterEach, beforeEach, describe, it, expect } from 'vitest';
 import { adaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
 
 describe("L'adaptateur environnement", () => {
@@ -21,7 +20,7 @@ describe("L'adaptateur environnement", () => {
 
     const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
-    assert.deepEqual(tousLesSecretsDeHachage, [
+    expect(tousLesSecretsDeHachage).toEqual([
       { version: 1, secret: 'secret1' },
       { version: 2, secret: 'secret2' },
     ]);
@@ -36,7 +35,7 @@ describe("L'adaptateur environnement", () => {
 
     const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
-    assert.deepEqual(tousLesSecretsDeHachage, [
+    expect(tousLesSecretsDeHachage).toEqual([
       { version: 1, secret: 'secret1' },
       { version: 2, secret: 'secret2' },
       { version: 3, secret: 'secret3' },
@@ -52,7 +51,7 @@ describe("L'adaptateur environnement", () => {
 
     const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
-    assert.deepEqual(tousLesSecretsDeHachage, [
+    expect(tousLesSecretsDeHachage).toEqual([
       { version: 1, secret: 'secret1' },
       { version: 2, secret: 'secret2' },
     ]);
@@ -63,7 +62,7 @@ describe("L'adaptateur environnement", () => {
 
     const tousLesSecretsDeHachage = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
-    assert.equal(tousLesSecretsDeHachage[0].version, 1);
+    expect(tousLesSecretsDeHachage[0].version).toBe(1);
   });
 
   it('lance une exception si un secret est vide', async () => {
@@ -71,13 +70,10 @@ describe("L'adaptateur environnement", () => {
       HACHAGE_SECRET_DE_HACHAGE_1: '',
     };
 
-    assert.throws(
-      () => {
-        adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
-      },
-      {
-        message: `Le secret de hachage HACHAGE_SECRET_DE_HACHAGE_1 ne doit pas être vide`,
-      }
+    expect(() => {
+      adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
+    }).toThrow(
+      expect.objectContaining({ message: `Le secret de hachage HACHAGE_SECRET_DE_HACHAGE_1 ne doit pas être vide` })
     );
   });
 
@@ -89,7 +85,7 @@ describe("L'adaptateur environnement", () => {
 
     const secrets = adaptateurEnvironnement.hachage().tousLesSecretsDeHachage();
 
-    assert.equal(secrets.length, 1);
+    expect(secrets).toHaveLength(1);
   });
 
   it('lance une exception si SECRET_JWT est vide', () => {
@@ -97,14 +93,9 @@ describe("L'adaptateur environnement", () => {
       SECRET_JWT: '',
     };
 
-    assert.throws(
-      () => {
-        adaptateurEnvironnement.secrets().jwt();
-      },
-      {
-        message: '💥 Veuillez renseigner le secret JWT',
-      }
-    );
+    expect(() => {
+      adaptateurEnvironnement.secrets().jwt();
+    }).toThrow(expect.objectContaining({ message: '💥 Veuillez renseigner le secret JWT' }));
   });
 
   it('lance une exception si SECRET_JWT est non défini', () => {
@@ -112,14 +103,9 @@ describe("L'adaptateur environnement", () => {
       SECRET_JWT: undefined,
     };
 
-    assert.throws(
-      () => {
-        adaptateurEnvironnement.secrets().jwt();
-      },
-      {
-        message: '💥 Veuillez renseigner le secret JWT',
-      }
-    );
+    expect(() => {
+      adaptateurEnvironnement.secrets().jwt();
+    }).toThrow(expect.objectContaining({ message: '💥 Veuillez renseigner le secret JWT' }));
   });
 
   it('lance une exception si SECRET_COOKIE est vide', () => {
@@ -127,14 +113,9 @@ describe("L'adaptateur environnement", () => {
       SECRET_COOKIE: '',
     };
 
-    assert.throws(
-      () => {
-        adaptateurEnvironnement.secrets().cookie();
-      },
-      {
-        message: '💥 Veuillez renseigner le secret COOKIE',
-      }
-    );
+    expect(() => {
+      adaptateurEnvironnement.secrets().cookie();
+    }).toThrow(expect.objectContaining({ message: '💥 Veuillez renseigner le secret COOKIE' }));
   });
 
   it('lance une exception si SECRET_COOKIE est non défini', () => {
@@ -142,13 +123,8 @@ describe("L'adaptateur environnement", () => {
       SECRET_COOKIE: undefined,
     };
 
-    assert.throws(
-      () => {
-        adaptateurEnvironnement.secrets().cookie();
-      },
-      {
-        message: '💥 Veuillez renseigner le secret COOKIE',
-      }
-    );
+    expect(() => {
+      adaptateurEnvironnement.secrets().cookie();
+    }).toThrow(expect.objectContaining({ message: '💥 Veuillez renseigner le secret COOKIE' }));
   });
 });

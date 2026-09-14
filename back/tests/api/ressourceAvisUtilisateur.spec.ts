@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
 import { AvisUtilisateurDonne } from '../../src/bus/evenements/avisUtilisateurDonne.js';
@@ -34,7 +33,7 @@ describe('La ressource avis utilisateur', () => {
     it('retourne un 201', async () => {
       const reponse = await request(serveur).post('/api/avis-utilisateur').send(avisUtilisateur);
 
-      assert.equal(reponse.status, HttpStatusCode.Created);
+      expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
     it('envoie les données à la messagerie instantannée', async () => {
@@ -45,7 +44,7 @@ describe('La ressource avis utilisateur', () => {
 
       await request(serveur).post('/api/avis-utilisateur').send(avisUtilisateur);
 
-      assert.deepEqual(avisUtilisateurEnvoye, {
+      expect(avisUtilisateurEnvoye).toEqual({
         niveauDeSatisfaction: 2,
         commentaire: 'Bonjour !',
         emailDeContact: 'mon.mail@mail.com',
@@ -57,7 +56,7 @@ describe('La ressource avis utilisateur', () => {
 
       const evenement = busEvenements.recupereEvenement(AvisUtilisateurDonne);
 
-      assert.deepEqual(evenement, {
+      expect(evenement).toEqual({
         niveauDeSatisfaction: 2,
         emailDeContact: 'mon.mail@mail.com',
       });
@@ -66,8 +65,8 @@ describe('La ressource avis utilisateur', () => {
     it('renvoie une erreur si le niveau de satisfaction est invalide', async () => {
       const reponse = await request(serveur).post('/api/avis-utilisateur').send({ niveauDeSatisfaction: 0 });
 
-      assert.equal(reponse.status, HttpStatusCode.BadRequest);
-      assert.equal(reponse.body.fieldErrors.niveauDeSatisfaction[0], 'Le niveau de satisfaction est invalide');
+      expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+      expect(reponse.body.fieldErrors.niveauDeSatisfaction[0]).toBe('Le niveau de satisfaction est invalide');
     });
 
     it('renvoie une erreur si le commentaire est vide', async () => {
@@ -75,8 +74,8 @@ describe('La ressource avis utilisateur', () => {
         .post('/api/avis-utilisateur')
         .send({ ...avisUtilisateur, commentaire: '' });
 
-      assert.equal(reponse.status, HttpStatusCode.BadRequest);
-      assert.equal(reponse.body.fieldErrors.commentaire[0], 'Le commentaire est requis');
+      expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+      expect(reponse.body.fieldErrors.commentaire[0]).toBe('Le commentaire est requis');
     });
 
     it("renvoie une erreur si l'email est malformé", async () => {
@@ -84,8 +83,8 @@ describe('La ressource avis utilisateur', () => {
         .post('/api/avis-utilisateur')
         .send({ ...avisUtilisateur, emailDeContact: 'pas un email' });
 
-      assert.equal(reponse.status, HttpStatusCode.BadRequest);
-      assert.equal(reponse.body.fieldErrors.emailDeContact[0], "L'email est invalide");
+      expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+      expect(reponse.body.fieldErrors.emailDeContact[0]).toBe("L'email est invalide");
     });
   });
 });

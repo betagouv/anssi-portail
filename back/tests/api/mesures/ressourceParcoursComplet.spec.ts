@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
@@ -50,7 +49,7 @@ describe('La ressource du parcours complet', () => {
     it('retourne 200', async () => {
       const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('retourne 404 si la fonctionnalité est désactivée', async () => {
@@ -71,7 +70,7 @@ describe('La ressource du parcours complet', () => {
 
       const reponse = await request(serveurSansLaRessource).get('/api/parcours/complet');
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     it("retourne 401 si l'utilisateur n'est pas connecté", async () => {
@@ -79,7 +78,7 @@ describe('La ressource du parcours complet', () => {
 
       const reponse = await request(serveur).get('/api/parcours/complet');
 
-      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+      expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
     });
 
     it('retourne les modules du parcours complet', async () => {
@@ -90,11 +89,11 @@ describe('La ressource du parcours complet', () => {
 
       const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
 
-      assert.equal(reponse.body.modules.length, 2);
-      assert.equal(reponse.body.modules[0].nom, 'Cyberdépart');
-      assert.equal(reponse.body.modules[0].id, 1);
-      assert.equal(reponse.body.modules[1].nom, 'Aggravation des conséquences');
-      assert.equal(reponse.body.modules[1].id, 2);
+      expect(reponse.body.modules).toHaveLength(2);
+      expect(reponse.body.modules[0].nom).toBe('Cyberdépart');
+      expect(reponse.body.modules[0].id).toBe(1);
+      expect(reponse.body.modules[1].nom).toBe('Aggravation des conséquences');
+      expect(reponse.body.modules[1].id).toBe(2);
     });
 
     it('retourne le nombre de mesures de chaque module', async () => {
@@ -104,7 +103,7 @@ describe('La ressource du parcours complet', () => {
 
       const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
 
-      assert.equal(reponse.body.modules[0].nombreMesuresTotal, 2);
+      expect(reponse.body.modules[0].nombreMesuresTotal).toBe(2);
     });
 
     it('retourne la cible de déblocage du badge Cyberdépart', async () => {
@@ -120,7 +119,7 @@ describe('La ressource du parcours complet', () => {
 
       const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
 
-      assert.equal(reponse.body.modules[0].cibleBadge, 2);
+      expect(reponse.body.modules[0].cibleBadge).toBe(2);
     });
 
     it("retourne le nombre de mesures prises en compte par l'utilisateur pour chaque module", async () => {
@@ -130,8 +129,8 @@ describe('La ressource du parcours complet', () => {
 
       const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
 
-      assert.equal(reponse.body.modules[0].nombreMesuresPrisesEnCompte, 98);
-      assert.equal(reponse.body.modules[1].nombreMesuresPrisesEnCompte, 20);
+      expect(reponse.body.modules[0].nombreMesuresPrisesEnCompte).toBe(98);
+      expect(reponse.body.modules[1].nombreMesuresPrisesEnCompte).toBe(20);
     });
 
     it('renvoie les modules du parcours triés par id', async () => {
@@ -141,9 +140,9 @@ describe('La ressource du parcours complet', () => {
 
       const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
 
-      assert.equal(reponse.body.modules[0].id, 1);
-      assert.equal(reponse.body.modules[1].id, 3);
-      assert.equal(reponse.body.modules[2].id, 5);
+      expect(reponse.body.modules[0].id).toBe(1);
+      expect(reponse.body.modules[1].id).toBe(3);
+      expect(reponse.body.modules[2].id).toBe(5);
     });
 
     it('renvoie la prise en compte des mesures', async () => {
@@ -155,7 +154,7 @@ describe('La ressource du parcours complet', () => {
 
       const reponse = await request(serveur).get('/api/parcours/complet').set('Cookie', cookieDeJeanneDupont);
 
-      assert.equal(reponse.body.modules[0].mesures[0].estPriseEnCompte, true);
+      expect(reponse.body.modules[0].mesures[0].estPriseEnCompte).toBe(true);
     });
   });
 });

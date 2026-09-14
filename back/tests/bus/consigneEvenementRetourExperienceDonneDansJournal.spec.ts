@@ -1,5 +1,4 @@
-import { beforeEach, describe, it } from 'vitest';
-import assert from 'node:assert';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
@@ -46,10 +45,10 @@ describe("L'abonnement qui consigne le don d'un retour d’expérience dans le j
       })
     );
 
-    assert.notEqual(evenementRecu, undefined);
-    assert.equal(evenementRecu!.type, 'RETOUR_EXPERIENCE_DONNE');
-    assert.equal(evenementRecu!.donnees.raison, 'pas-besoin');
-    assert.deepEqual(evenementRecu!.date, new Date('2025-03-10'));
+    expect(evenementRecu).toBeDefined();
+    expect(evenementRecu!.type).toBe('RETOUR_EXPERIENCE_DONNE');
+    expect(evenementRecu!.donnees.raison).toBe('pas-besoin');
+    expect(evenementRecu!.date).toEqual(new Date('2025-03-10'));
   });
 
   it("hache l'email de l'utilisateur", async () => {
@@ -67,7 +66,7 @@ describe("L'abonnement qui consigne le don d'un retour d’expérience dans le j
       })
     );
 
-    assert.equal(evenementRecu!.donnees.idUtilisateur, `jean@dupont.fr-hacheHMAC`);
+    expect(evenementRecu!.donnees.idUtilisateur).toBe(`jean@dupont.fr-hacheHMAC`);
   });
 
   it("ne consigne pas d'email si celui-ci est absent", async () => {
@@ -80,6 +79,6 @@ describe("L'abonnement qui consigne le don d'un retour d’expérience dans le j
 
     await consigneEvenementDansJournal()(new RetourExperienceDonne({ raison: 'x' }));
 
-    assert.equal(evenementRecu!.donnees.idUtilisateur, undefined);
+    expect(evenementRecu!.donnees.idUtilisateur).toBeUndefined();
   });
 });

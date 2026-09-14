@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
 import { AdaptateurMonAideCyber } from '../../src/infra/adaptateurMonAideCyber.js';
@@ -49,7 +48,7 @@ describe('La ressource Statistiques', () => {
     it('renvoie 200', async () => {
       const reponse = await request(serveur).get('/api/statistiques');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it("renvoie le nombre d'utilisateur inscrits", async () => {
@@ -58,7 +57,7 @@ describe('La ressource Statistiques', () => {
 
       const reponse = await request(serveur).get('/api/statistiques');
 
-      assert.equal(reponse.body.utilisateursInscrits, 2);
+      expect(reponse.body.utilisateursInscrits).toBe(2);
     });
 
     it('renvoie le nombre de tests de maturité', async () => {
@@ -66,19 +65,19 @@ describe('La ressource Statistiques', () => {
 
       const reponse = await request(serveur).get('/api/statistiques');
 
-      assert.equal(reponse.body.testsMaturite.total, 3);
+      expect(reponse.body.testsMaturite.total).toBe(3);
     });
 
     it('renvoie le nombre de diagnostics cyber', async () => {
       const reponse = await request(serveur).get('/api/statistiques');
 
-      assert.equal(Number.isInteger(reponse.body.diagnosticsCyber), true);
+      expect(Number.isInteger(reponse.body.diagnosticsCyber)).toBe(true);
     });
 
     it('renvoie la satisfaction utilisateur', async () => {
       const reponse = await request(serveur).get('/api/statistiques');
 
-      assert.equal(Number.isInteger(reponse.body.satisfactionUtilisateur), true);
+      expect(Number.isInteger(reponse.body.satisfactionUtilisateur)).toBe(true);
     });
 
     it('renvoie les niveaux de maturité', async () => {
@@ -91,7 +90,7 @@ describe('La ressource Statistiques', () => {
 
       const reponse = await request(serveur).get('/api/statistiques');
 
-      assert.deepEqual(reponse.body.testsMaturite.parNiveau, {
+      expect(reponse.body.testsMaturite.parNiveau).toEqual({
         insuffisant: 1,
         emergent: 2,
         intermediaire: 3,
@@ -108,7 +107,7 @@ describe('La ressource Statistiques', () => {
 
       const reponse = await request(serveur).get('/api/statistiques');
 
-      assert.deepEqual(reponse.body.miniTests.vraiFaux, 10);
+      expect(reponse.body.miniTests.vraiFaux).toEqual(10);
     });
 
     it('renvoie le nombres de tests exposition réalisés', async () => {
@@ -119,7 +118,7 @@ describe('La ressource Statistiques', () => {
 
       const reponse = await request(serveur).get('/api/statistiques');
 
-      assert.deepEqual(reponse.body.miniTests.exposition, 20);
+      expect(reponse.body.miniTests.exposition).toEqual(20);
     });
   });
 });

@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { consigneQuestionnaireVraiFauxTermineDansJournal } from '../../src/bus/consigneQuestionnaireVraiFauxTermineDansJournal.js';
 import { QuestionnaireVraiFauxTerminé } from '../../src/bus/evenements/questionnaireVraiFauxTermine.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
@@ -37,7 +36,7 @@ describe('L’abonnement qui consigne la fin d’un questionnaire vrai/faux dans
       })
     );
 
-    assert.deepEqual(evenementRecu, {
+    expect(evenementRecu).toEqual({
       type: 'QUESTIONNAIRE_VRAI_FAUX_TERMINE',
       donnees: {
         idCorrélation: 'id-correlation',
@@ -75,7 +74,7 @@ describe('L’abonnement qui consigne la fin d’un questionnaire vrai/faux dans
       })
     );
 
-    assert.deepEqual(evenementRecu, {
+    expect(evenementRecu).toEqual({
       type: 'QUESTIONNAIRE_VRAI_FAUX_TERMINE',
       donnees: {
         idCorrélation: 'id-correlation',

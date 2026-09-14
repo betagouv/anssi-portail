@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { valideSiret } from '../../src/metier/valideSiret.js';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
 
@@ -7,13 +6,13 @@ describe('Valide les numéros SIRET', () => {
   it('retourne vrai pour un numéro SIRET valide', () => {
     const resultat = valideSiret(fauxAdaptateurEnvironnement, '12345678901237');
 
-    assert.strictEqual(resultat, true);
+    expect(resultat).toBe(true);
   });
 
   it('retourne faux pour un numéro SIRET invalide', () => {
     const resultat = valideSiret(fauxAdaptateurEnvironnement, '12345678901234');
 
-    assert.strictEqual(resultat, false);
+    expect(resultat).toBe(false);
   });
 
   it('retourne vrai si on désactive la vérification stricte', () => {
@@ -23,6 +22,6 @@ describe('Valide les numéros SIRET', () => {
     };
     const resultat = valideSiret(adaptateurEnvironnement, '12345678901234');
 
-    assert.strictEqual(resultat, true);
+    expect(resultat).toBe(true);
   });
 });

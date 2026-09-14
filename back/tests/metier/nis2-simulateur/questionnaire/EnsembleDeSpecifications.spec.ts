@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications.js';
 import { RegleEntiteOSE } from '../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleEntiteOSE.js';
 import { RegleSecteurs } from '../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleSecteurs.js';
@@ -29,8 +28,8 @@ describe('Un ensemble de spécifications', () => {
 
       const resultat = uneSeuleSpec.evalue(reponseOSEOui);
 
-      assert.strictEqual(resultat.specificationsRetenues.length, 1);
-      assert.strictEqual(resultat.specificationsRetenues[0], 'R1000');
+      expect(resultat.specificationsRetenues).toHaveLength(1);
+      expect(resultat.specificationsRetenues[0]).toBe('R1000');
     });
   });
 
@@ -46,7 +45,7 @@ describe('Un ensemble de spécifications', () => {
 
       const resultat = deuxSpecs.evalue(reponseQuiMatchLesDeux);
 
-      assert.deepStrictEqual(resultat.specificationsRetenues, ['R1000', 'R1001']);
+      expect(resultat.specificationsRetenues).toStrictEqual(['R1000', 'R1001']);
     });
 
     it('trie les spécifications retenues de la plus stricte à la moins stricte', () => {
@@ -86,7 +85,7 @@ describe('Un ensemble de spécifications', () => {
 
       const resultat = ensembleDansLeDesordre.evalue(entiteEnergie);
 
-      assert.deepStrictEqual(resultat.specificationsRetenues, [
+      expect(resultat.specificationsRetenues).toStrictEqual([
         'Regulee EE (1)',
         'Regulee EI (2)',
         'Regulee sans précision (3)',
@@ -114,7 +113,7 @@ describe('Un ensemble de spécifications', () => {
 
       const resultat = toutes.evalue(entiteEnergie);
 
-      assert.deepStrictEqual(resultat.resultat.pointsAttention.resumes, ['NumeriqueUE', 'RepresentantUE']);
+      expect(resultat.resultat.pointsAttention.resumes).toStrictEqual(['NumeriqueUE', 'RepresentantUE']);
     });
 
     it("cumule les précisions de points d'attentions de toutes les spécifications retenues", () => {
@@ -131,7 +130,7 @@ describe('Un ensemble de spécifications', () => {
 
       const resultat = toutes.evalue(entiteEnergie);
 
-      assert.deepStrictEqual(resultat.resultat.pointsAttention.precisions, ['OSE', 'DORA']);
+      expect(resultat.resultat.pointsAttention.precisions).toStrictEqual(['OSE', 'DORA']);
     });
 
     it("ne fait pas de doublons dans les résumés de points d'attentions", () => {
@@ -148,7 +147,7 @@ describe('Un ensemble de spécifications', () => {
 
       const resultat = toutes.evalue(entiteEnergie);
 
-      assert.deepStrictEqual(resultat.resultat.pointsAttention.resumes, ['NumeriqueUE']);
+      expect(resultat.resultat.pointsAttention.resumes).toStrictEqual(['NumeriqueUE']);
     });
 
     it("ne fait pas de doublons dans les précisions de points d'attentions", () => {
@@ -165,7 +164,7 @@ describe('Un ensemble de spécifications', () => {
 
       const resultat = toutes.evalue(entiteEnergie);
 
-      assert.deepStrictEqual(resultat.resultat.pointsAttention.precisions, ['OSE']);
+      expect(resultat.resultat.pointsAttention.precisions).toStrictEqual(['OSE']);
     });
   });
 });

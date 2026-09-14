@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { EntrepotGuideGrist, GuideGrist } from '../../src/infra/entrepotGuideGrist.js';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';
@@ -38,7 +37,7 @@ describe("L'entrepot de guide Grist", () => {
 
     const guides = await entrepotGuideGristHorsLigne.tous();
 
-    assert.deepEqual(guides, []);
+    expect(guides).toEqual([]);
   });
 
   it('sait récupérer des guides en appelant Grist', async () => {
@@ -61,9 +60,8 @@ describe("L'entrepot de guide Grist", () => {
 
     await entrepotGuideGrist.tous();
 
-    assert.equal(headerAuthent, 'Bearer FAUSSE_CLE_API_GUIDES');
-    assert.equal(
-      urlAppelee,
+    expect(headerAuthent).toBe('Bearer FAUSSE_CLE_API_GUIDES');
+    expect(urlAppelee).toBe(
       'http://grist/api/docs/idDocumentGuides/tables/idTableGuides/records?sort=-Date_de_mise_a_jour_s_'
     );
   });
@@ -92,25 +90,25 @@ describe("L'entrepot de guide Grist", () => {
 
     const guides = await entrepotGuideGrist.tous();
 
-    assert.equal(guides.length, 2);
+    expect(guides).toHaveLength(2);
 
     const premierGuide = guides[0];
-    assert.equal(premierGuide.id, 'guide1');
-    assert.equal(premierGuide.nom, 'Premier guide');
-    assert.equal(premierGuide.description, '<p>Description du premier guide</p>');
-    assert.equal(premierGuide.langue, 'FR');
-    assert.deepEqual(premierGuide.collections, ['Les essentiels']);
-    assert.deepEqual(premierGuide.listeDocuments, []);
-    assert.deepEqual(premierGuide.nomsAnciensDocuments, ['ancien-doc.pdf']);
-    assert.equal(premierGuide.lienCourt, 'https://lien-court/guide');
+    expect(premierGuide.id).toBe('guide1');
+    expect(premierGuide.nom).toBe('Premier guide');
+    expect(premierGuide.description).toBe('<p>Description du premier guide</p>');
+    expect(premierGuide.langue).toBe('FR');
+    expect(premierGuide.collections).toEqual(['Les essentiels']);
+    expect(premierGuide.listeDocuments).toEqual([]);
+    expect(premierGuide.nomsAnciensDocuments).toEqual(['ancien-doc.pdf']);
+    expect(premierGuide.lienCourt).toBe('https://lien-court/guide');
 
     const deuxiemeGuide = guides[1];
-    assert.equal(deuxiemeGuide.id, 'guide2');
-    assert.equal(deuxiemeGuide.nom, 'Deuxième guide');
-    assert.equal(deuxiemeGuide.description, '<p>Description du deuxième guide</p>');
-    assert.equal(deuxiemeGuide.langue, 'FR');
-    assert.deepEqual(deuxiemeGuide.collections, ['Les essentiels']);
-    assert.deepEqual(deuxiemeGuide.listeDocuments, []);
+    expect(deuxiemeGuide.id).toBe('guide2');
+    expect(deuxiemeGuide.nom).toBe('Deuxième guide');
+    expect(deuxiemeGuide.description).toBe('<p>Description du deuxième guide</p>');
+    expect(deuxiemeGuide.langue).toBe('FR');
+    expect(deuxiemeGuide.collections).toEqual(['Les essentiels']);
+    expect(deuxiemeGuide.listeDocuments).toEqual([]);
   });
 
   it('sait récupérer un guide avec son id', async () => {
@@ -120,7 +118,7 @@ describe("L'entrepot de guide Grist", () => {
 
     const guide1 = await entrepotGuideGrist.parId('guide1');
 
-    assert.equal(guide1!.id, 'guide1');
+    expect(guide1!.id).toBe('guide1');
   });
 
   describe('concernant les documents', () => {
@@ -135,7 +133,7 @@ describe("L'entrepot de guide Grist", () => {
 
       const guide1 = await entrepotGuideGrist.parId('guide1');
 
-      assert.deepEqual(guide1!.listeDocuments, [
+      expect(guide1!.listeDocuments).toEqual([
         { libelle: 'Le guide', nomFichier: 'guide.pdf' },
         { libelle: 'Le guide obsolète', nomFichier: 'guide-obsolete.pdf' },
       ]);
@@ -152,7 +150,7 @@ describe("L'entrepot de guide Grist", () => {
 
     const guide1 = await entrepotGuideGrist.parId('guide1');
 
-    assert.equal(guide1!.dateMiseAJour.getTime(), new Date(2024, 10, 12).getTime());
+    expect(guide1!.dateMiseAJour.getTime()).toBe(new Date(2024, 10, 12).getTime());
   });
 
   it('sait récupérer les thématiques', async () => {
@@ -163,7 +161,7 @@ describe("L'entrepot de guide Grist", () => {
     const guides = await entrepotGuideGrist.tous();
 
     const guide = guides[0];
-    assert.equal(guide.thematique, 'Internet des objets');
+    expect(guide.thematique).toBe('Internet des objets');
   });
 
   describe("lors d'une recherche par collection", () => {
@@ -181,24 +179,24 @@ describe("L'entrepot de guide Grist", () => {
     it('retourne une liste vide si les collections sont vides', async () => {
       const guides = await entrepotGuideGrist.parCollections([]);
 
-      assert.equal(guides.length, 0);
+      expect(guides).toHaveLength(0);
     });
 
     it('sait retourner les guides correspondants à une collection', async () => {
       const guides = await entrepotGuideGrist.parCollections(['Les essentiels']);
 
-      assert.equal(guides.length, 2);
-      assert.equal(guides[0].id, 'guide1');
-      assert.equal(guides[1].id, 'guide3');
+      expect(guides).toHaveLength(2);
+      expect(guides[0].id).toBe('guide1');
+      expect(guides[1].id).toBe('guide3');
     });
 
     it('sait retourner les guides correspondants à plusieurs collections', async () => {
       const guides = await entrepotGuideGrist.parCollections(['Les essentiels', 'Les fondamentaux']);
 
-      assert.equal(guides.length, 3);
-      assert.equal(guides[0].id, 'guide1');
-      assert.equal(guides[1].id, 'guide2');
-      assert.equal(guides[2].id, 'guide3');
+      expect(guides).toHaveLength(3);
+      expect(guides[0].id).toBe('guide1');
+      expect(guides[1].id).toBe('guide2');
+      expect(guides[2].id).toBe('guide3');
     });
   });
 
@@ -216,6 +214,6 @@ describe("L'entrepot de guide Grist", () => {
     const guides = await entrepotGuideGrist.tous();
 
     const guide = guides[0];
-    assert.deepEqual(guide.besoins, ['REAGIR', 'ETRE_SENSIBILISE', 'SE_FORMER', 'SECURISER']);
+    expect(guide.besoins).toEqual(['REAGIR', 'ETRE_SENSIBILISE', 'SE_FORMER', 'SECURISER']);
   });
 });

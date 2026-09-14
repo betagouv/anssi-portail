@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { consigneEvenementMesureConsulteeDansJournal } from '../../src/bus/consigneEvenementMesureConsulteeDansJournal.js';
 import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
@@ -30,7 +29,7 @@ describe("L'abonnement qui consigne la consultation d'une mesure par un utilisat
       adaptateurHachage,
     })(new MesureConsultee('u1@example.com', 'AUTH.5'));
 
-    assert.deepEqual(evenementRecu, {
+    expect(evenementRecu).toEqual({
       type: 'MESURE_CONSULTEE',
       donnees: {
         idUtilisateur: 'u1@example.com-hacheHMAC',

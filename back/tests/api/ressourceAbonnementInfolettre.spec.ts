@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
@@ -29,7 +28,7 @@ describe('La ressource d’abonnement à l’infolettre', () => {
     it('retourne un 201', async () => {
       const reponse = await request(serveur).post('/api/abonnement-infolettre').send({ email: 'emile@beta.gouv.fr' });
 
-      assert.equal(reponse.status, HttpStatusCode.Created);
+      expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
     it('délègue la demande à l’adaptateur email', async () => {
@@ -40,19 +39,19 @@ describe('La ressource d’abonnement à l’infolettre', () => {
 
       await request(serveur).post('/api/abonnement-infolettre').send({ email: 'emile@beta.gouv.fr' });
 
-      assert.equal(emailInscrit, 'emile@beta.gouv.fr');
+      expect(emailInscrit).toBe('emile@beta.gouv.fr');
     });
 
     it("renvoie une erreur si l'email est manquant", async () => {
       const reponse = await request(serveur).post('/api/abonnement-infolettre').send({});
 
-      assert.equal(reponse.status, HttpStatusCode.BadRequest);
+      expect(reponse.status).toBe(HttpStatusCode.BadRequest);
     });
 
     it("renvoie une erreur si l'email est malformé", async () => {
       const reponse = await request(serveur).post('/api/abonnement-infolettre').send({ email: 'pas un email' });
 
-      assert.equal(reponse.status, HttpStatusCode.BadRequest);
+      expect(reponse.status).toBe(HttpStatusCode.BadRequest);
     });
   });
 });

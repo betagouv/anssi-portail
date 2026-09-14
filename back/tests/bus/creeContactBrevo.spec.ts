@@ -1,7 +1,6 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { creeContactBrevo } from '../../src/bus/creeContactBrevo.js';
-import assert from 'assert';
 import { CompteCree } from '../../src/bus/evenements/compteCree.js';
 import { fauxAdaptateurEmail } from '../api/fauxObjets.js';
 
@@ -33,8 +32,8 @@ describe("L'abonnement qui crée un contact Brevo", () => {
       })
     );
 
-    assert.notEqual(contactCree, undefined);
-    assert.deepEqual(contactCree, {
+    expect(contactCree).toBeDefined();
+    expect(contactCree).toEqual({
       email: 'jeanne.dupond@mail.fr',
       prenom: 'Jeanne',
       nom: 'Dupont',

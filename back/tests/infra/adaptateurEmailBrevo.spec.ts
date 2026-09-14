@@ -1,6 +1,5 @@
 import { AxiosError } from '@anssi-portail/axios';
-import assert from 'node:assert';
-import { afterEach, beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect, vi } from 'vitest';
 import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque.js';
 import { MesureConsultee } from '../../src/bus/evenements/mesureConsultee.js';
 import { MesurePriseEnCompte } from '../../src/bus/evenements/mesurePriseEnCompte.js';
@@ -60,7 +59,7 @@ describe('L’adaptateur email Brevo', () => {
     it('poste un message à axios', async () => {
       await brevo.creeContactBrevo(fauxContact());
 
-      assert.equal(postAxiosAppele, true);
+      expect(postAxiosAppele).toBe(true);
     });
   });
 
@@ -68,15 +67,12 @@ describe('L’adaptateur email Brevo', () => {
     it('poste un message à axios', async () => {
       await brevo.inscrisAInfolettre('email');
 
-      assert.equal(postAxiosAppele, true);
+      expect(postAxiosAppele).toBe(true);
     });
   });
 
   describe('lorsqu’une erreur se produit', () => {
-    let fnConsoleError: typeof console.error;
-
     beforeEach(() => {
-      fnConsoleError = console.error;
       clientHttp = {
         ...fabriqueFauxClientHttp(),
         post: fabriqueClientPost(async (_url: string) => {
@@ -90,58 +86,48 @@ describe('L’adaptateur email Brevo', () => {
       });
     });
 
-    afterEach(() => {
-      console.error = fnConsoleError;
-    });
-
     describe('pour la création de contact', () => {
       it('ne loggue pas l’erreur levée, loggue le message', async () => {
-        let messageLog;
-        console.error = (message) => (messageLog = message);
-        try {
-          await brevo.creeContactBrevo(fauxContact());
-          assert.fail();
-        } catch {
-          assert.equal(messageLog, 'Une erreur s’est produite');
-        }
+        const logErreur = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+        await expect(brevo.creeContactBrevo(fauxContact())).rejects.toThrow(AxiosError);
+
+        expect(logErreur).toHaveBeenCalledExactlyOnceWith('Une erreur s’est produite', {
+          'Erreur renvoyée par API Brevo': undefined,
+        });
       });
 
       it('ne loggue pas trop d’informations', async () => {
-        let messagesLog: string[] = [];
-        console.error = (...messages: unknown[]) => (messagesLog = messages.map((m) => JSON.stringify(m)));
-        try {
-          await brevo.creeContactBrevo(fauxContact());
-          assert.fail();
-        } catch {
-          for (const message of messagesLog) {
-            assert.ok(message.length < 100);
-          }
+        const logErreur = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+        await expect(brevo.creeContactBrevo(fauxContact())).rejects.toThrow(AxiosError);
+
+        expect(logErreur).toHaveBeenCalledOnce();
+        for (const message of logErreur.mock.calls.flat()) {
+          expect(JSON.stringify(message).length).toBeLessThan(100);
         }
       });
     });
 
     describe('pour l’inscription à l’infolettre', () => {
       it('ne loggue pas l’erreur levée, loggue le message', async () => {
-        let messageLog;
-        console.error = (message) => (messageLog = message);
-        try {
-          await brevo.inscrisAInfolettre('email');
-          assert.fail();
-        } catch {
-          assert.equal(messageLog, 'Une erreur s’est produite');
-        }
+        const logErreur = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+        await expect(brevo.inscrisAInfolettre('email')).rejects.toThrow(AxiosError);
+
+        expect(logErreur).toHaveBeenCalledExactlyOnceWith('Une erreur s’est produite', {
+          'Erreur renvoyée par API Brevo': undefined,
+        });
       });
 
       it('ne loggue pas trop d’informations', async () => {
-        let messagesLog: string[] = [];
-        console.error = (...messages: unknown[]) => (messagesLog = messages.map((m) => JSON.stringify(m)));
-        try {
-          await brevo.inscrisAInfolettre('email');
-          assert.fail();
-        } catch {
-          for (const message of messagesLog) {
-            assert.ok(message.length < 100);
-          }
+        const logErreur = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+        await expect(brevo.inscrisAInfolettre('email')).rejects.toThrow(AxiosError);
+
+        expect(logErreur).toHaveBeenCalledOnce();
+        for (const message of logErreur.mock.calls.flat()) {
+          expect(JSON.stringify(message).length).toBeLessThan(100);
         }
       });
     });
@@ -151,8 +137,8 @@ describe('L’adaptateur email Brevo', () => {
     it("mets à jour la date de dernière consultation d'une mesure", async () => {
       await brevo.metsÀJourMesureConsultée(new MesureConsultee('mesure.consultee@mail.com', 'AUTH.5'));
 
-      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
-      assert.deepEqual(donnéesPostAppelées, {
+      expect(urlPostAppelée).toBe('FAUSSE_URL_BREVO/events');
+      expect(donnéesPostAppelées).toEqual({
         event_name: 'mesure_consultee',
         identifiers: { email_id: 'mesure.consultee@mail.com' },
         contact_properties: {
@@ -164,8 +150,8 @@ describe('L’adaptateur email Brevo', () => {
     it("mets à jour le parcours en plus de la date de dernière consultation d'une mesure", async () => {
       await brevo.metsÀJourMesureConsultée(new MesureConsultee('mesure.consultee@mail.com', 'AUTH.5', 'allégé'));
 
-      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
-      assert.deepEqual(donnéesPostAppelées, {
+      expect(urlPostAppelée).toBe('FAUSSE_URL_BREVO/events');
+      expect(donnéesPostAppelées).toEqual({
         event_name: 'mesure_consultee',
         identifiers: { email_id: 'mesure.consultee@mail.com' },
         contact_properties: {
@@ -188,8 +174,8 @@ describe('L’adaptateur email Brevo', () => {
         new MesurePriseEnCompte('mesure.prise.en.compte@mail.com', 'AUTH.5', 12, 6, 'allégé')
       );
 
-      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
-      assert.deepEqual(donnéesPostAppelées, {
+      expect(urlPostAppelée).toBe('FAUSSE_URL_BREVO/events');
+      expect(donnéesPostAppelées).toEqual({
         event_name: 'mesure_prise_en_compte',
         identifiers: { email_id: 'mesure.prise.en.compte@mail.com' },
         contact_properties: {
@@ -211,8 +197,8 @@ describe('L’adaptateur email Brevo', () => {
 
       await brevo.metsÀJourModuleTerminé(new ModuleTermine('module.termine@mail.com', 1, 'CyberDépart', 'allégé'));
 
-      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
-      assert.deepEqual(donnéesPostAppelées, {
+      expect(urlPostAppelée).toBe('FAUSSE_URL_BREVO/events');
+      expect(donnéesPostAppelées).toEqual({
         event_name: 'module_termine',
         identifiers: { email_id: 'module.termine@mail.com' },
         contact_properties: {
@@ -225,8 +211,8 @@ describe('L’adaptateur email Brevo', () => {
     it('émets un événement de déblocage de badge CyberDépart', async () => {
       await brevo.metsÀJourBadgeCyberdépartDébloqué(new BadgeCyberdépartDébloqué('badge.debloque@mail.com', 10, 12));
 
-      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
-      assert.deepEqual(donnéesPostAppelées, {
+      expect(urlPostAppelée).toBe('FAUSSE_URL_BREVO/events');
+      expect(donnéesPostAppelées).toEqual({
         event_name: 'badge_cyberdepart_debloque',
         identifiers: { email_id: 'badge.debloque@mail.com' },
         contact_properties: {
@@ -240,8 +226,8 @@ describe('L’adaptateur email Brevo', () => {
         new ParcoursRejoint('parcours.rejoint@mail.com', 'allégé', 'visite-page-module', { campagne: 'campagne' })
       );
 
-      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
-      assert.deepEqual(donnéesPostAppelées, {
+      expect(urlPostAppelée).toBe('FAUSSE_URL_BREVO/events');
+      expect(donnéesPostAppelées).toEqual({
         event_name: 'parcours_rejoint',
         identifiers: { email_id: 'parcours.rejoint@mail.com' },
         contact_properties: {
@@ -255,8 +241,8 @@ describe('L’adaptateur email Brevo', () => {
         new ParcoursChangé('parcours.changé@mail.com', 'allégé', 'complet', 'visite-page-module')
       );
 
-      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
-      assert.deepEqual(donnéesPostAppelées, {
+      expect(urlPostAppelée).toBe('FAUSSE_URL_BREVO/events');
+      expect(donnéesPostAppelées).toEqual({
         event_name: 'parcours_change',
         identifiers: { email_id: 'parcours.changé@mail.com' },
         contact_properties: {
@@ -268,8 +254,8 @@ describe('L’adaptateur email Brevo', () => {
     it('émets un événement de complétion du parcours allégé', async () => {
       await brevo.metsÀJourParcoursAllégéTerminé(new ParcoursAllégéTerminé('parcours.allege.termine@mail.com'));
 
-      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
-      assert.deepEqual(donnéesPostAppelées, {
+      expect(urlPostAppelée).toBe('FAUSSE_URL_BREVO/events');
+      expect(donnéesPostAppelées).toEqual({
         event_name: 'parcours_allege_termine',
         identifiers: { email_id: 'parcours.allege.termine@mail.com' },
       });
@@ -278,8 +264,8 @@ describe('L’adaptateur email Brevo', () => {
     it('émets un événement de complétion du parcours complet', async () => {
       await brevo.metsÀJourParcoursCompletTerminé(new ParcoursCompletTerminé('parcours.complet.termine@mail.com'));
 
-      assert.equal(urlPostAppelée, 'FAUSSE_URL_BREVO/events');
-      assert.deepEqual(donnéesPostAppelées, {
+      expect(urlPostAppelée).toBe('FAUSSE_URL_BREVO/events');
+      expect(donnéesPostAppelées).toEqual({
         event_name: 'parcours_complet_termine',
         identifiers: { email_id: 'parcours.complet.termine@mail.com' },
       });

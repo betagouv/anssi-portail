@@ -1,7 +1,6 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { consigneEvenementTestRealiseDansJournal } from '../../src/bus/consigneEvenementTestRealiseDansJournal.js';
 import { TestRealise } from '../../src/bus/evenements/testRealise.js';
-import assert from 'node:assert';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 
@@ -30,13 +29,13 @@ describe("L'abonnement qui consigne la réalisation d'un test dans le journal", 
       })
     );
 
-    assert.notEqual(evenementRecu, undefined);
-    assert.equal(evenementRecu!.type, 'TEST_REALISE');
-    assert.equal(evenementRecu!.donnees.region, 'FR-20R');
-    assert.deepEqual(evenementRecu!.donnees.reponses, { pilotage: 2 });
-    assert.equal(evenementRecu!.donnees.secteur, 'A');
-    assert.equal(evenementRecu!.donnees.tailleOrganisation, '00');
-    assert.deepEqual(evenementRecu!.date, new Date('2025-03-10'));
-    assert.equal(evenementRecu!.donnees.idResultatTest, 'ef3dc8c7-beed-4bd7-a475-409515c28a0c');
+    expect(evenementRecu).toBeDefined();
+    expect(evenementRecu!.type).toBe('TEST_REALISE');
+    expect(evenementRecu!.donnees.region).toBe('FR-20R');
+    expect(evenementRecu!.donnees.reponses).toEqual({ pilotage: 2 });
+    expect(evenementRecu!.donnees.secteur).toBe('A');
+    expect(evenementRecu!.donnees.tailleOrganisation).toBe('00');
+    expect(evenementRecu!.date).toEqual(new Date('2025-03-10'));
+    expect(evenementRecu!.donnees.idResultatTest).toBe('ef3dc8c7-beed-4bd7-a475-409515c28a0c');
   });
 });

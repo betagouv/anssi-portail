@@ -1,6 +1,5 @@
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { BusEvenements, EvenementDuBus } from '../../src/bus/busEvenements.js';
-import assert from 'node:assert';
 
 class EvenementTestA implements EvenementDuBus {
   increment: number = 0;
@@ -25,7 +24,7 @@ describe("Le bus d'événements", () => {
 
     await bus.publie(new EvenementTestA());
 
-    assert.equal(compteur, 1);
+    expect(compteur).toBe(1);
   });
 
   it("permet d'ajouter plusieurs abonnés en un seul appel", async () => {
@@ -43,7 +42,7 @@ describe("Le bus d'événements", () => {
 
     await bus.publie(new EvenementTestA());
 
-    assert.equal(compteur, 11);
+    expect(compteur).toBe(11);
   });
 
   it('fait la différence entre les événements', async () => {
@@ -59,7 +58,7 @@ describe("Le bus d'événements", () => {
 
     await bus.publie(new EvenementTestA());
 
-    assert.equal(compteur, 1);
+    expect(compteur).toBe(1);
   });
 
   it("appelle tous les abonnés du type d'événement publié", async () => {
@@ -75,7 +74,7 @@ describe("Le bus d'événements", () => {
 
     await bus.publie(new EvenementTestA());
 
-    assert.equal(compteur, 11);
+    expect(compteur).toBe(11);
   });
 
   it("passe l'événement reçu en paramètre aux abonnés", async () => {
@@ -88,7 +87,7 @@ describe("Le bus d'événements", () => {
 
     await bus.publie(new EvenementTestA(30));
 
-    assert.equal(compteur, 30);
+    expect(compteur).toBe(30);
   });
 
   it("éxecute tous les handlers même en cas d'exception", async () => {
@@ -104,7 +103,7 @@ describe("Le bus d'événements", () => {
 
     await bus.publie(new EvenementTestA());
 
-    assert.equal(compteur, 1);
+    expect(compteur).toBe(1);
   });
 
   it("reste robuste si aucun handler n'existe pour l'événement", async () => {

@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { fabriqueMiddleware } from '../../../src/api/middlewares/middleware.js';
 import { creeServeur } from '../../../src/api/msc.js';
@@ -68,7 +67,7 @@ describe('La ressource des services et ressources favoris', () => {
 
       await request(serveur).delete(`/api/favoris/${encodeURIComponent('/services/mon-super-service')}`);
 
-      assert.equal(middelwareAppele, true);
+      expect(middelwareAppele).toBe(true);
     });
 
     it("supprime le favori de l'entrepot", async () => {
@@ -81,9 +80,9 @@ describe('La ressource des services et ressources favoris', () => {
         .delete(`/api/favoris/${encodeURIComponent('/services/mon-super-service')}`)
         .set('Cookie', [cookieJeanneDupont]);
 
-      assert.equal(reponse.statusCode, HttpStatusCode.Ok);
+      expect(reponse.statusCode).toBe(HttpStatusCode.Ok);
       const favoris = await entrepotFavori.tousCeuxDeUtilisateur(jeanneDupont);
-      assert.equal(favoris.length, 0);
+      expect(favoris).toHaveLength(0);
     });
 
     it('publie un événement de mise à jour de la liste des favoris', async () => {
@@ -98,7 +97,7 @@ describe('La ressource des services et ressources favoris', () => {
 
       busEvenements.aRecuUnEvenement(MiseAJourFavorisUtilisateur);
       const evenement = busEvenements.recupereEvenement(MiseAJourFavorisUtilisateur);
-      assert.equal(evenement!.utilisateur, jeanneDupont);
+      expect(evenement!.utilisateur).toBe(jeanneDupont);
     });
   });
 });

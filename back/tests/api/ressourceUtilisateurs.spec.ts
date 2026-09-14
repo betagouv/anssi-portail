@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { AdaptateurJWT } from '../../src/api/adaptateurJWT.js';
 import { creeServeur } from '../../src/api/msc.js';
@@ -56,7 +55,7 @@ describe('La ressource utilisateur', () => {
     it('répond 201', async () => {
       const reponse = await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
 
-      assert.equal(reponse.status, HttpStatusCode.Created);
+      expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
     it("ajoute un utilisateur à l'entrepot", async () => {
@@ -77,16 +76,16 @@ describe('La ressource utilisateur', () => {
       await request(serveur).post('/api/utilisateurs').send(donneesUtilisateur);
 
       const jeanne = await entrepotUtilisateur.parEmailHache('jeanne.dupont@user.com-hache');
-      assert.notEqual(jeanne, undefined);
-      assert.equal(jeanne?.email, 'jeanne.dupont@user.com');
-      assert.equal(jeanne?.prenom, 'Jeanne');
-      assert.equal(jeanne?.nom, 'Dupont');
-      assert.equal(jeanne?.telephone, '0123456789');
-      assert.deepEqual(jeanne?.domainesSpecialite, ['RSSI']);
-      assert.equal((await jeanne?.organisation())?.siret, '13000766900018');
-      assert.equal(jeanne?.cguAcceptees, true);
-      assert.equal(jeanne?.infolettreAcceptee, true);
-      assert.equal(jeanne?.pixelDeSuiviAccepté, true);
+      expect(jeanne).toBeDefined();
+      expect(jeanne?.email).toBe('jeanne.dupont@user.com');
+      expect(jeanne?.prenom).toBe('Jeanne');
+      expect(jeanne?.nom).toBe('Dupont');
+      expect(jeanne?.telephone).toBe('0123456789');
+      expect(jeanne?.domainesSpecialite).toEqual(['RSSI']);
+      expect((await jeanne?.organisation())?.siret).toBe('13000766900018');
+      expect(jeanne?.cguAcceptees).toBe(true);
+      expect(jeanne?.infolettreAcceptee).toBe(true);
+      expect(jeanne?.pixelDeSuiviAccepté).toBe(true);
     });
 
     it('utilise le SIRET du token en priorité', async () => {
@@ -119,7 +118,7 @@ describe('La ressource utilisateur', () => {
 
       const jeanne = await entrepotUtilisateur.parEmailHache('jeanne.dupont@user.com-hache');
 
-      assert.equal((await jeanne?.organisation())?.siret, '11223344556677');
+      expect((await jeanne?.organisation())?.siret).toBe('11223344556677');
     });
 
     it('publie un événement de création de compte', async () => {
@@ -127,13 +126,13 @@ describe('La ressource utilisateur', () => {
 
       busEvenements.aRecuUnEvenement(CompteCree);
       const evenement = busEvenements.recupereEvenement(CompteCree);
-      assert.equal(evenement!.email, 'jeanne.dupont@user.com');
-      assert.equal(evenement!.prenom, 'Jeanne');
-      assert.equal(evenement!.nom, 'Dupont');
-      assert.equal(evenement!.infoLettre, true);
-      assert.equal(evenement!.pixelDeSuiviAccepté, true);
-      assert.equal(evenement!.telephone, '0123456789');
-      assert.equal(evenement!.suivi, undefined);
+      expect(evenement!.email).toBe('jeanne.dupont@user.com');
+      expect(evenement!.prenom).toBe('Jeanne');
+      expect(evenement!.nom).toBe('Dupont');
+      expect(evenement!.infoLettre).toBe(true);
+      expect(evenement!.pixelDeSuiviAccepté).toBe(true);
+      expect(evenement!.telephone).toBe('0123456789');
+      expect(evenement!.suivi).toBeUndefined();
     });
 
     it('publie un événement de création de compte avec une campagne', async () => {
@@ -142,7 +141,7 @@ describe('La ressource utilisateur', () => {
       busEvenements.aRecuUnEvenement(CompteCree);
       const evenement = busEvenements.recupereEvenement(CompteCree);
 
-      assert.equal(evenement!.suivi?.campagne, 'aout_2026');
+      expect(evenement!.suivi?.campagne).toBe('aout_2026');
     });
 
     it('publie un événement de création de compte avec le parcours complet en destination', async () => {
@@ -153,7 +152,7 @@ describe('La ressource utilisateur', () => {
 
       const evenement = busEvenements.recupereEvenement(CompteCree);
 
-      assert.equal(evenement!.suivi?.parcoursDestination, 'complet');
+      expect(evenement!.suivi?.parcoursDestination).toBe('complet');
     });
 
     it('publie un événement de création de compte avec le parcours basique en destination', async () => {
@@ -164,7 +163,7 @@ describe('La ressource utilisateur', () => {
 
       const evenement = busEvenements.recupereEvenement(CompteCree);
 
-      assert.equal(evenement!.suivi?.parcoursDestination, 'allégé');
+      expect(evenement!.suivi?.parcoursDestination).toBe('allégé');
     });
 
     it('publie un événement de création de compte avec la source', async () => {
@@ -175,7 +174,7 @@ describe('La ressource utilisateur', () => {
 
       const evenement = busEvenements.recupereEvenement(CompteCree);
 
-      assert.equal(evenement!.suivi?.source, '/parcours-securisation-hero');
+      expect(evenement!.suivi?.source).toBe('/parcours-securisation-hero');
     });
 
     describe('concernant la validation des données', () => {
@@ -186,8 +185,8 @@ describe('La ressource utilisateur', () => {
             ...donneesUtilisateur,
             telephone: 'ABCD',
           });
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
-        assert.equal(reponse.body.fieldErrors.telephone[0], 'Le téléphone est invalide');
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+        expect(reponse.body.fieldErrors.telephone[0]).toBe('Le téléphone est invalide');
       });
 
       it('valide les domaines de spécialité', async () => {
@@ -197,8 +196,8 @@ describe('La ressource utilisateur', () => {
             ...donneesUtilisateur,
             domainesSpecialite: [],
           });
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
-        assert.equal(reponse.body.fieldErrors.domainesSpecialite[0], 'Les domaines de spécialité sont invalides');
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+        expect(reponse.body.fieldErrors.domainesSpecialite[0]).toBe('Les domaines de spécialité sont invalides');
       });
 
       it('valide le siret', async () => {
@@ -208,8 +207,8 @@ describe('La ressource utilisateur', () => {
             ...donneesUtilisateur,
             siretEntite: 'unMauvaisSiret',
           });
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
-        assert.equal(reponse.body.fieldErrors.siretEntite[0], 'Le siret est invalide');
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+        expect(reponse.body.fieldErrors.siretEntite[0]).toBe('Le siret est invalide');
       });
 
       it("valide l'acceptation des CGU", async () => {
@@ -219,8 +218,8 @@ describe('La ressource utilisateur', () => {
             ...donneesUtilisateur,
             cguAcceptees: 12,
           });
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
-        assert.equal(reponse.body.fieldErrors.cguAcceptees[0], "L'acceptation des CGU est invalide");
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+        expect(reponse.body.fieldErrors.cguAcceptees[0]).toBe("L'acceptation des CGU est invalide");
       });
 
       it("valide l'acceptation de l'infolettre", async () => {
@@ -230,8 +229,8 @@ describe('La ressource utilisateur', () => {
             ...donneesUtilisateur,
             infolettreAcceptee: 12,
           });
-        assert.equal(reponse.status, HttpStatusCode.BadRequest);
-        assert.equal(reponse.body.fieldErrors.infolettreAcceptee[0], "L'acceptation de l'infolettre est invalide");
+        expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+        expect(reponse.body.fieldErrors.infolettreAcceptee[0]).toBe("L'acceptation de l'infolettre est invalide");
       });
 
       describe('valide le token', () => {
@@ -242,8 +241,8 @@ describe('La ressource utilisateur', () => {
               ...donneesUtilisateur,
               token: '',
             });
-          assert.equal(reponse.status, HttpStatusCode.BadRequest);
-          assert.equal(reponse.body.fieldErrors.token[0], 'Le token est invalide');
+          expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+          expect(reponse.body.fieldErrors.token[0]).toBe('Le token est invalide');
         });
 
         it("lorsqu'il est mal signé", async () => {
@@ -256,8 +255,8 @@ describe('La ressource utilisateur', () => {
               ...donneesUtilisateur,
               token: 'azertyui',
             });
-          assert.equal(reponse.status, HttpStatusCode.BadRequest);
-          assert.equal(reponse.body.erreur, 'Le token est invalide');
+          expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+          expect(reponse.body.erreur).toBe('Le token est invalide');
         });
       });
     });

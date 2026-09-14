@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { ResultatTestMaturite } from '../../../src/metier/resultatTestMaturite.js';
@@ -27,7 +26,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
 
       const reponse = await request(serveur).get('/api/repartition-resultats-test');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('calcule la moyenne des scores de résultats de même niveau', async () => {
@@ -46,9 +45,9 @@ describe('La ressource qui gère les series de résultats de test de maturité',
         .cree();
       const reponse = await request(serveur).get('/api/repartition-resultats-test');
 
-      assert.equal(reponse.body.length, 2);
-      assert.equal(reponse.body[0].id, 'insuffisant');
-      assert.deepEqual(reponse.body[0].valeurs, {
+      expect(reponse.body).toHaveLength(2);
+      expect(reponse.body[0].id).toBe('insuffisant');
+      expect(reponse.body[0].valeurs).toEqual({
         'prise-en-compte-risque': 1,
         pilotage: 1,
         budget: 1,
@@ -56,8 +55,8 @@ describe('La ressource qui gère les series de résultats de test de maturité',
         'adoption-solutions': 1,
         posture: 1,
       });
-      assert.equal(reponse.body[1].id, 'emergent');
-      assert.deepEqual(reponse.body[1].valeurs, {
+      expect(reponse.body[1].id).toBe('emergent');
+      expect(reponse.body[1].valeurs).toEqual({
         'prise-en-compte-risque': 1.5,
         pilotage: 2.5,
         budget: 2,
@@ -75,8 +74,8 @@ describe('La ressource qui gère les series de résultats de test de maturité',
 
       const reponse = await request(serveur).get('/api/repartition-resultats-test');
 
-      assert.equal(reponse.body[0].totalNombreTests, 1);
-      assert.equal(reponse.body[1].totalNombreTests, 2);
+      expect(reponse.body[0].totalNombreTests).toBe(1);
+      expect(reponse.body[1].totalNombreTests).toBe(2);
     });
 
     it('répond 204 si trop peu de résultats', async () => {
@@ -99,7 +98,7 @@ describe('La ressource qui gère les series de résultats de test de maturité',
 
       const reponse = await request(serveur).get('/api/repartition-resultats-test');
 
-      assert.equal(reponse.status, HttpStatusCode.NoContent);
+      expect(reponse.status).toBe(HttpStatusCode.NoContent);
     });
 
     describe('avec un filtre', () => {
@@ -111,8 +110,8 @@ describe('La ressource qui gère les series de résultats de test de maturité',
 
         const reponse = await request(serveur).get('/api/repartition-resultats-test?secteur=A');
 
-        assert.equal(reponse.body[0].totalNombreTests, 2);
-        assert.equal(reponse.body[0].ratio, 1);
+        expect(reponse.body[0].totalNombreTests).toBe(2);
+        expect(reponse.body[0].ratio).toBe(1);
       });
 
       it('sur la région, ne remonte que les résultats de la même région', async () => {
@@ -123,8 +122,8 @@ describe('La ressource qui gère les series de résultats de test de maturité',
 
         const reponse = await request(serveur).get('/api/repartition-resultats-test?region=FR-NOR');
 
-        assert.equal(reponse.body[0].totalNombreTests, 2);
-        assert.equal(reponse.body[0].ratio, 1);
+        expect(reponse.body[0].totalNombreTests).toBe(2);
+        expect(reponse.body[0].ratio).toBe(1);
       });
 
       it("sur la taille d'organisation, ne remonte que les résultats de même taille", async () => {
@@ -135,8 +134,8 @@ describe('La ressource qui gère les series de résultats de test de maturité',
 
         const reponse = await request(serveur).get('/api/repartition-resultats-test?tailleOrganisation=01');
 
-        assert.equal(reponse.body[0].totalNombreTests, 2);
-        assert.equal(reponse.body[0].ratio, 1);
+        expect(reponse.body[0].totalNombreTests).toBe(2);
+        expect(reponse.body[0].ratio).toBe(1);
       });
     });
   });

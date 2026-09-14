@@ -1,5 +1,4 @@
-import { describe, it } from 'vitest';
-import assert from 'node:assert';
+import { describe, it, expect } from 'vitest';
 import { AdaptateurHorloge } from '../../src/infra/adaptateurHorloge.js';
 import { AdaptateurJournal } from '../../src/infra/adaptateurJournal.js';
 import { CompteCree } from '../../src/bus/evenements/compteCree.js';
@@ -38,10 +37,10 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
       })
     );
 
-    assert.notEqual(évènementReçu, undefined);
-    assert.equal(évènementReçu!.type, 'NOUVEL_UTILISATEUR_INSCRIT');
-    assert.equal(évènementReçu!.donnees?.idUtilisateur, 'u1@mail.com-hacheHMAC');
-    assert.deepEqual(évènementReçu!.date, new Date('2025-03-10'));
+    expect(évènementReçu).toBeDefined();
+    expect(évènementReçu!.type).toBe('NOUVEL_UTILISATEUR_INSCRIT');
+    expect(évènementReçu!.donnees?.idUtilisateur).toBe('u1@mail.com-hacheHMAC');
+    expect(évènementReçu!.date).toEqual(new Date('2025-03-10'));
   });
 
   it("consigne un évènement avec la provenance de l'utilisateur", async () => {
@@ -79,8 +78,8 @@ describe("L'abonnement qui consigne la création d'un compte utilisateur dans le
       })
     );
 
-    assert.equal(évènementReçu!.donnees?.suivi.campagne, 'campagne_aout_2026');
-    assert.equal(évènementReçu!.donnees?.suivi.source, '/parcours-securisation');
-    assert.equal(évènementReçu!.donnees?.suivi.parcoursDestination, '/parcours-complet');
+    expect(évènementReçu!.donnees?.suivi.campagne).toBe('campagne_aout_2026');
+    expect(évènementReçu!.donnees?.suivi.source).toBe('/parcours-securisation');
+    expect(évènementReçu!.donnees?.suivi.parcoursDestination).toBe('/parcours-complet');
   });
 });

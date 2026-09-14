@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { Express } from 'express';
-import assert from 'node:assert';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from './fauxObjets.js';
 import { creeServeur } from '../../src/api/msc.js';
 import request from 'supertest';
@@ -23,7 +22,7 @@ describe('La ressource Informations du site', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/api/infos-site');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it("retourne le jour et l'heure de la maintenance en préparation", async () => {
@@ -34,10 +33,10 @@ describe('La ressource Informations du site', () => {
 
       const reponse = await request(serveur).get('/api/infos-site');
 
-      assert.notEqual(reponse.body.maintenanceEnPreparation, undefined);
+      expect(reponse.body.maintenanceEnPreparation).toBeDefined();
       const { jour, heure } = reponse.body.maintenanceEnPreparation;
-      assert.equal(jour, 'Vendredi 20 juin');
-      assert.equal(heure, '13h à 14h');
+      expect(jour).toBe('Vendredi 20 juin');
+      expect(heure).toBe('13h à 14h');
     });
 
     it("n'est pas défini si aucune maintenance en préparation", async () => {
@@ -48,7 +47,7 @@ describe('La ressource Informations du site', () => {
 
       const reponse = await request(serveur).get('/api/infos-site');
 
-      assert.equal(reponse.body.maintenanceEnPreparation, undefined);
+      expect(reponse.body.maintenanceEnPreparation).toBeUndefined();
     });
   });
 });

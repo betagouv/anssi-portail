@@ -1,12 +1,11 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { aseptiseMarkdown } from '../../src/infra/markdown.js';
 
 describe('Le markdown', () => {
   it("retourne la chaîne intacte lorsqu'elle ne contient aucun caractère spécial", () => {
     const markdown = aseptiseMarkdown('bonjour tout le monde');
 
-    assert.equal('bonjour tout le monde', markdown);
+    expect('bonjour tout le monde').toBe(markdown);
   });
 
   ['!', '\\', '[', ']', '`', '{', '}', '*', '_', '<', '>', '(', ')', '#', '+', '-', '.', '|'].forEach(
@@ -14,7 +13,7 @@ describe('Le markdown', () => {
       it(`échappe les ${caractereAEchapper}`, () => {
         const markdown = aseptiseMarkdown(caractereAEchapper);
 
-        assert.equal(`\\${caractereAEchapper}`, markdown);
+        expect(`\\${caractereAEchapper}`).toBe(markdown);
       })
   );
 });

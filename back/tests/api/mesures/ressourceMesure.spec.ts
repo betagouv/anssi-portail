@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
@@ -49,44 +48,37 @@ describe('La ressource mesure de sécurité', () => {
     it('réponds 200', async () => {
       const reponse = await getConnecte(serveur, cookieJeanneDupont);
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('renvoie les détails de la mesure', async () => {
       const { body } = await getConnecte(serveur, cookieJeanneDupont);
 
-      assert.equal(body.id, 'AUTH.5');
-      assert.equal(
-        body.titre,
+      expect(body.id).toBe('AUTH.5');
+      expect(body.titre).toBe(
         'Activer la vérification en deux étapes ou un autre moyen de renforcement de la sécurité de l’accès aux comptes'
       );
-      assert.equal(body.phraseAccroche, 'Empêchez qu’un compte soit utilisé, même si le mot de passe a fuité 💨');
-      assert.equal(
-        body.explications,
-        `Un mot de passe seul ne suffit pas toujours à protéger un compte. En activant une deuxième vérification, vous ajoutez une sécurité supplémentaire au moment de la connexion : un code reçu sur une application, une clé physique, une empreinte digitale ou, à défaut, un code par SMS.
+      expect(body.phraseAccroche).toBe('Empêchez qu’un compte soit utilisé, même si le mot de passe a fuité 💨');
+      expect(body.explications)
+        .toBe(`Un mot de passe seul ne suffit pas toujours à protéger un compte. En activant une deuxième vérification, vous ajoutez une sécurité supplémentaire au moment de la connexion : un code reçu sur une application, une clé physique, une empreinte digitale ou, à défaut, un code par SMS.
 
-Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste beaucoup plus difficile pour une personne malveillante.`
-      );
-      assert.equal(
-        body.actionPrioritaire,
-        `Mettre en oeuvre la vérification en deux étapes sur les services importants, a minima :
+Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste beaucoup plus difficile pour une personne malveillante.`);
+      expect(body.actionPrioritaire)
+        .toBe(`Mettre en oeuvre la vérification en deux étapes sur les services importants, a minima :
 * l’accès aux mails,
 * les services en ligne,
 * tous les accès distants (ex. télétravail),
-* les comptes d’administration.`
-      );
-      assert.equal(
-        body.actionFacileAFaire,
+* les comptes d’administration.`);
+      expect(body.actionFacileAFaire).toBe(
         `Dans les principales suites collaboratives (La Suite Numérique, Microsoft 365, Google Workspace, etc.), la vérification en deux étapes est incluse — il suffit de l’activer dans les paramètres de sécurité, sans surcoût ni outil supplémentaire.`
       );
-      assert.equal(body.ordre, 10);
-      assert.equal(body.risques.length, 3);
-      assert.equal(body.risques[0].libelle, 'Un compte utilise a votre place');
-      assert.equal(body.risques[1].libelle, 'Un acces non autorise a un outil en ligne');
-      assert.equal(body.risques[2].libelle, 'Connexion frauduleuse sans alerte');
-      assert.equal(body.liens.length, 1);
-      assert.equal(
-        body.liens[0].libelle,
+      expect(body.ordre).toBe(10);
+      expect(body.risques).toHaveLength(3);
+      expect(body.risques[0].libelle).toBe('Un compte utilise a votre place');
+      expect(body.risques[1].libelle).toBe('Un acces non autorise a un outil en ligne');
+      expect(body.risques[2].libelle).toBe('Connexion frauduleuse sans alerte');
+      expect(body.liens).toHaveLength(1);
+      expect(body.liens[0].libelle).toBe(
         'Guide ANSSI — Recommandations relatives à l’authentification multifacteur et aux mots de passe'
       );
     });
@@ -94,23 +86,22 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
     it('renvoie les informations ReCyF de la mesure', async () => {
       const { body } = await getConnecte(serveur, cookieJeanneDupont);
 
-      assert.equal(body.exigences.length, 1);
+      expect(body.exigences).toHaveLength(1);
       const exigence = body.exigences[0] as ExigenceNIS2;
-      assert.equal(exigence.reference, '10.B.5-EI/EE');
-      assert.deepEqual(exigence.entitesCible, ['EntiteEssentielle', 'EntiteImportante']);
-      assert.equal(
-        exigence.objectifSecurite,
+      expect(exigence.reference).toBe('10.B.5-EI/EE');
+      expect(exigence.entitesCible).toEqual(['EntiteEssentielle', 'EntiteImportante']);
+      expect(exigence.objectifSecurite).toBe(
         'Objectif de sécurité 10: Gestion des identités et des accès des utilisateurs aux systèmes d’information'
       );
-      assert.equal(exigence.thematique, 'Authentification');
-      assert.equal(exigence.contenu, 'Les facteurs d’authentification...');
-      assert.equal(exigence.contenuEnAnglais, 'The authentication factors...');
+      expect(exigence.thematique).toBe('Authentification');
+      expect(exigence.contenu).toBe('Les facteurs d’authentification...');
+      expect(exigence.contenuEnAnglais).toBe('The authentication factors...');
     });
 
     it('réponds 404 si la mesure demandée est inconnue', async () => {
       const reponse = await request(serveur).get('/api/mesures/INCONNU.0').set('Cookie', cookieJeanneDupont);
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     it('réponds 404 si la fonctionnalité est désactivée', async () => {
@@ -131,7 +122,7 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
       });
       const reponse = await request(serveurSansLaRessource).get('/api/mesures/AUTH.5');
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     it('indique que la mesure a été prise en compte', async () => {
@@ -144,33 +135,33 @@ Ainsi, même si un mot de passe est volé ou deviné, l’accès au compte reste
 
       const { body } = await getConnecte(serveur, cookie);
 
-      assert.equal(body.estPriseEnCompte, true);
+      expect(body.estPriseEnCompte).toBe(true);
     });
 
     it('indique qu’une mesure n’a pas été prise en compte', async () => {
       const { body } = await getConnecte(serveur, cookieJeanneDupont);
 
-      assert.equal(body.estPriseEnCompte, false);
+      expect(body.estPriseEnCompte).toBe(false);
     });
 
     describe("lorsque qu'aucun utilisateur n'est connecté", async () => {
       it('réponds 401', async () => {
         const reponse = await request(serveur).get('/api/mesures/AUTH.5');
 
-        assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+        expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
       });
     });
 
     it("renvoie l'id du module d'une mesure", async () => {
       const { body } = await getConnecte(serveur, cookieJeanneDupont);
 
-      assert.equal(body.idModule, 3);
+      expect(body.idModule).toBe(3);
     });
 
     it("renvoie le nom du module d'une mesure", async () => {
       const { body } = await getConnecte(serveur, cookieJeanneDupont);
 
-      assert.equal(body.nomModule, 'Module 3');
+      expect(body.nomModule).toBe('Module 3');
     });
   });
 });

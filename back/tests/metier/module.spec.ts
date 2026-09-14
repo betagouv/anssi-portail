@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { ConstructeurDeModule } from '../api/mesures/constructeurDeModule.js';
 import { fabriqueModuleCyberdépart } from '../api/objetsPretsALEmploi.js';
 
@@ -12,7 +11,7 @@ describe('Le module', () => {
 
     const cible = moduleAutreQueCyberdépart.cibleDéblocageBadgeCyberdépart();
 
-    assert.equal(cible, undefined);
+    expect(cible).toBeUndefined();
   });
   describe("reconnait s'il est le module Cyberdépart", () => {
     it("et l'indique lorqu'il l'est", () => {
@@ -20,7 +19,7 @@ describe('Le module', () => {
 
       const estCyberdépart = moduleCyberDépart.estCyberdépart();
 
-      assert.equal(estCyberdépart, true);
+      expect(estCyberdépart).toBe(true);
     });
 
     it("et l'indique lorqu'il ne l'est pas", () => {
@@ -28,7 +27,7 @@ describe('Le module', () => {
 
       const estCyberdépart = module.estCyberdépart();
 
-      assert.equal(estCyberdépart, false);
+      expect(estCyberdépart).toBe(false);
     });
   });
 });

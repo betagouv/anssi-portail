@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { AdaptateurEnvironnement } from '../../../src/infra/adaptateurEnvironnement.js';
@@ -58,13 +57,13 @@ describe('La ressource d’un module', () => {
     it('réponds 200', async () => {
       const reponse = await getModuleCyberdépartConnecté();
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('réponds 401 si l’utilisateur n’est pas connecté', async () => {
       const reponse = await request(serveur).get('/api/modules/1');
 
-      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+      expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
     });
 
     it('renvoie la liste des mesures', async () => {
@@ -72,8 +71,8 @@ describe('La ressource d’un module', () => {
 
       const { body } = await getModuleCyberdépartConnecté();
 
-      assert.equal(body.mesures.length, 1);
-      assert.equal(body.mesures[0].id, 'AUTH.5');
+      expect(body.mesures).toHaveLength(1);
+      expect(body.mesures[0].id).toBe('AUTH.5');
     });
 
     it('trie les mesures par ordre', async () => {
@@ -82,8 +81,8 @@ describe('La ressource d’un module', () => {
 
       const { body } = await getModuleCyberdépartConnecté();
 
-      assert.equal(body.mesures[0].id, 'MES2');
-      assert.equal(body.mesures[1].id, 'MES1');
+      expect(body.mesures[0].id).toBe('MES2');
+      expect(body.mesures[1].id).toBe('MES1');
     });
 
     it('réponds 404 si la fonctionnalité est désactivée', async () => {
@@ -106,7 +105,7 @@ describe('La ressource d’un module', () => {
       });
       const reponse = await request(serveurSansLaRessource).get('/api/modules/1');
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     it('indique si les mesures ont été prises en compte', async () => {
@@ -120,8 +119,8 @@ describe('La ressource d’un module', () => {
 
       const { body } = await request(serveur).get('/api/modules/1').set('Cookie', cookie);
 
-      assert.equal(body.mesures[0].estPriseEnCompte, true);
-      assert.equal(body.mesures[1].estPriseEnCompte, false);
+      expect(body.mesures[0].estPriseEnCompte).toBe(true);
+      expect(body.mesures[1].estPriseEnCompte).toBe(false);
     });
 
     it('ne renvoie que les mesures du module demandé', async () => {
@@ -132,13 +131,13 @@ describe('La ressource d’un module', () => {
 
       const { body } = await getModuleCyberdépartConnecté();
 
-      assert.equal(body.mesures.length, 0);
+      expect(body.mesures).toHaveLength(0);
     });
 
     it('réponds 404 si le module est inconnu', async () => {
       const reponse = await request(serveur).get('/api/modules/199').set('Cookie', cookieJeanneDupont);
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     it('fournis la cible de déblocage du bagde cyberdépart', async () => {
@@ -148,13 +147,13 @@ describe('La ressource d’un module', () => {
 
       const { body } = await getModuleCyberdépartConnecté();
 
-      assert.equal(body.cibleBadge, 2);
+      expect(body.cibleBadge).toBe(2);
     });
 
     it('valide le type du paramètre de la requête', async () => {
       const reponse = await request(serveur).get('/api/modules/pas-un-nombre').set('Cookie', cookieJeanneDupont);
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     it('renvoie le nom du module', async () => {
@@ -164,8 +163,8 @@ describe('La ressource d’un module', () => {
 
       const reponse = await request(serveur).get('/api/modules/2').set('Cookie', cookieJeanneDupont);
 
-      assert.equal(reponse.body.nom, 'Module 2');
-      assert.equal(reponse.body.description, 'Description 2');
+      expect(reponse.body.nom).toBe('Module 2');
+      expect(reponse.body.description).toBe('Description 2');
     });
   });
 });

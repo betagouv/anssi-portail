@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { ProprieteTestRevendiquee } from '../../../src/bus/evenements/proprieteTestRevendiquee.js';
@@ -65,9 +64,9 @@ describe('La ressource qui gère un résultat de test', () => {
 
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
-      assert.equal(reponse.status, HttpStatusCode.Forbidden);
+      expect(reponse.status).toBe(HttpStatusCode.Forbidden);
       const resultatTest = await entrepotResultatTest.parId('r1');
-      assert.equal(resultatTest!.utilisateur, hectorDurant);
+      expect(resultatTest!.utilisateur).toBe(hectorDurant);
       busEvenements.naPasRecuDEvenement(ProprieteTestRevendiquee);
     });
 
@@ -81,7 +80,7 @@ describe('La ressource qui gère un résultat de test', () => {
 
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
       busEvenements.naPasRecuDEvenement(ProprieteTestRevendiquee);
     });
 
@@ -95,15 +94,15 @@ describe('La ressource qui gère un résultat de test', () => {
 
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
       const resultatTest = await entrepotResultatTest.parId('r1');
-      assert.equal(resultatTest!.utilisateur, jeanneDupont);
+      expect(resultatTest!.utilisateur).toBe(jeanneDupont);
     });
 
     it("renvoie une erreur 404 lorsque le résultat de test n'existe pas", async () => {
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', [cookieJeanneDupont]).send();
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     it('publie un événement de revendication de propriété du test', async () => {
@@ -118,14 +117,14 @@ describe('La ressource qui gère un résultat de test', () => {
 
       busEvenements.aRecuUnEvenement(ProprieteTestRevendiquee);
       const evenement = busEvenements.recupereEvenement(ProprieteTestRevendiquee);
-      assert.equal(evenement!.utilisateur, jeanneDupont);
-      assert.equal(evenement!.idResultatTest, 'r1');
+      expect(evenement!.utilisateur).toBe(jeanneDupont);
+      expect(evenement!.idResultatTest).toBe('r1');
     });
 
     it('refuse les requêtes non connectées', async () => {
       const reponse = await request(serveur).put('/api/resultats-test/r1').set('Cookie', []).send();
 
-      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+      expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
     });
   });
 });

@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { guideZeroTrust } from '../api/objetsPretsALEmploi.js';
 import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravailMemoire.js';
 
@@ -20,8 +19,8 @@ describe('Le guide', () => {
       await nouveuGuide.sauvegarde(fauxEntrepot);
       const guidePersiste = await fauxEntrepot.parId(nouveuGuide.id);
 
-      assert.deepEqual(guidePersiste?.listeDocuments, [{ libelle: 'Mon document', nomFichier: 'mon-document.pdf' }]);
-      assert.deepEqual(guidePersiste?.nomsAnciensDocuments, ['ancien.pdf']);
+      expect(guidePersiste?.listeDocuments).toEqual([{ libelle: 'Mon document', nomFichier: 'mon-document.pdf' }]);
+      expect(guidePersiste?.nomsAnciensDocuments).toEqual(['ancien.pdf']);
     });
   });
 
@@ -32,7 +31,7 @@ describe('Le guide', () => {
 
       guide.supprimeLeDocument('mon-document.pdf');
 
-      assert.equal(guide.listeDocuments.length, 0);
+      expect(guide.listeDocuments).toHaveLength(0);
     });
 
     it('le guide ne possède plus le document après suppression', () => {
@@ -41,7 +40,7 @@ describe('Le guide', () => {
 
       guide.supprimeLeDocument('mon-document.pdf');
 
-      assert.equal(guide.possedeLeDocument('mon-document.pdf'), false);
+      expect(guide.possedeLeDocument('mon-document.pdf')).toBe(false);
     });
 
     it('ajoute le nomFichier aux anciens documents', () => {
@@ -50,7 +49,7 @@ describe('Le guide', () => {
 
       guide.supprimeLeDocument('mon-document.pdf');
 
-      assert.deepEqual(guide.nomsAnciensDocuments, ['mon-document.pdf']);
+      expect(guide.nomsAnciensDocuments).toEqual(['mon-document.pdf']);
     });
 
     it("n'ajoute pas le nom du document aux anciens documents si celui ci n'existe pas", () => {
@@ -59,7 +58,7 @@ describe('Le guide', () => {
 
       guide.supprimeLeDocument('inexistant.pdf');
 
-      assert.deepEqual(guide.nomsAnciensDocuments, []);
+      expect(guide.nomsAnciensDocuments).toEqual([]);
     });
 
     it('ne retire pas les autres documents', () => {
@@ -71,8 +70,8 @@ describe('Le guide', () => {
 
       guide.supprimeLeDocument('document-a.pdf');
 
-      assert.equal(guide.listeDocuments.length, 1);
-      assert.equal(guide.listeDocuments[0].nomFichier, 'document-b.pdf');
+      expect(guide.listeDocuments).toHaveLength(1);
+      expect(guide.listeDocuments[0].nomFichier).toBe('document-b.pdf');
     });
   });
 
@@ -83,7 +82,7 @@ describe('Le guide', () => {
 
       guide.ajouteLeDocument({ libelle: 'Mon document', nomFichier: 'mon-document.pdf' });
 
-      assert.deepEqual(guide.nomsAnciensDocuments, []);
+      expect(guide.nomsAnciensDocuments).toEqual([]);
     });
   });
 });

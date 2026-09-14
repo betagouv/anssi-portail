@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
 import { AdaptateurEnvironnement } from '../../src/infra/adaptateurEnvironnement.js';
@@ -37,7 +36,7 @@ describe('quand requête GET sur `/api/pages-crisp/un-id-d-article`', () => {
   it('retourne un statut 200', async () => {
     const reponse = await request(serveur).get('/api/pages-crisp/promouvoir_msc');
 
-    assert.equal(reponse.status, HttpStatusCode.Ok);
+    expect(reponse.status).toBe(HttpStatusCode.Ok);
   });
 
   it('retourne un article du CMS', async () => {
@@ -54,10 +53,10 @@ describe('quand requête GET sur `/api/pages-crisp/un-id-d-article`', () => {
     const reponse = await request(serveur).get('/api/pages-crisp/promouvoir_msc');
 
     const page = reponse.body;
-    assert.equal(page.titre, 'Promouvoir MSC');
-    assert.equal(page.description, 'si vous aimez MSC...');
-    assert.equal(page.contenu, '<h1>Promo</h1>');
-    assert.deepEqual(page.tableDesMatieres, [
+    expect(page.titre).toBe('Promouvoir MSC');
+    expect(page.description).toBe('si vous aimez MSC...');
+    expect(page.contenu).toBe('<h1>Promo</h1>');
+    expect(page.tableDesMatieres).toEqual([
       { id: 'Section 1', texte: 'Section 1', profondeur: 1 },
       { id: 'Section 2', texte: 'Section 2', profondeur: 1 },
     ]);
@@ -70,6 +69,6 @@ describe('quand requête GET sur `/api/pages-crisp/un-id-d-article`', () => {
 
     const reponse = await request(serveur).get('/api/pages-crisp/id_inconnu');
 
-    assert.equal(reponse.status, HttpStatusCode.NotFound);
+    expect(reponse.status).toBe(HttpStatusCode.NotFound);
   });
 });

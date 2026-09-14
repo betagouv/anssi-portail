@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { FichierInconnu, FournisseurChemin } from '../../src/api/fournisseurChemin.js';
 import { creeServeur } from '../../src/api/msc.js';
@@ -23,14 +22,14 @@ describe('La ressource page Contact', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/contacts/fr-naq');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('renvoie un contenu html', async () => {
       const reponse = await request(serveur).get('/contacts/fr-naq');
 
-      assert.notEqual(reponse.headers['content-type'], undefined);
-      assert.match(reponse.headers['content-type'], /html/);
+      expect(reponse.headers['content-type']).toBeDefined();
+      expect(reponse.headers['content-type']).toMatch(/html/);
     });
 
     it('sers le fichier html de jekyll', async () => {
@@ -42,7 +41,7 @@ describe('La ressource page Contact', () => {
 
       await request(serveur).get('/contacts/fr-naq');
 
-      assert.equal(idDemandé!, 'fr-naq');
+      expect(idDemandé!).toBe('fr-naq');
     });
   });
 
@@ -78,8 +77,8 @@ describe('La ressource page Contact', () => {
       for (const suffixe of ['', '/']) {
         const reponse = await request(serveur).get(`/contacts/${id}.html${suffixe}`);
 
-        assert.equal(reponse.status, HttpStatusCode.MovedPermanently);
-        assert.equal(reponse.headers.location, `/contacts/${id}`);
+        expect(reponse.status).toBe(HttpStatusCode.MovedPermanently);
+        expect(reponse.headers.location).toBe(`/contacts/${id}`);
       }
     });
   }
@@ -97,8 +96,8 @@ describe('La ressource page Contact', () => {
 
     const réponse = await request(serveur).get('/contacts/inconnu').accept('text/html');
 
-    assert.equal(réponse.status, HttpStatusCode.NotFound);
-    assert.equal(réponse.headers['content-type'], 'text/html; charset=utf-8');
-    assert.equal(estAppelé, true);
+    expect(réponse.status).toBe(HttpStatusCode.NotFound);
+    expect(réponse.headers['content-type']).toBe('text/html; charset=utf-8');
+    expect(estAppelé).toBe(true);
   });
 });

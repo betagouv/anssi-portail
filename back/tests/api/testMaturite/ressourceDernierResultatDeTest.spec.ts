@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { AdaptateurRechercheEntreprise } from '../../../src/infra/adaptateurRechercheEntreprise.js';
@@ -77,8 +76,8 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
         const reponse = await requeteGET();
 
-        assert.equal(reponse.status, HttpStatusCode.Ok);
-        assert.deepEqual(reponse.body.reponses, {
+        expect(reponse.status).toBe(HttpStatusCode.Ok);
+        expect(reponse.body.reponses).toEqual({
           'prise-en-compte-risque': 2,
           pilotage: 3,
           budget: 5,
@@ -95,13 +94,13 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
         const reponse = await requeteGET();
 
-        assert.equal(new Date(reponse.body.dateRealisation).getTime(), new Date(2025, 5, 11).getTime());
+        expect(new Date(reponse.body.dateRealisation).getTime()).toBe(new Date(2025, 5, 11).getTime());
       });
 
       it("renvoie une erreur 404 lorsque l'utilisateur n'a pas de test", async () => {
         const reponse = await requeteGET();
 
-        assert.equal(reponse.status, HttpStatusCode.NotFound);
+        expect(reponse.status).toBe(HttpStatusCode.NotFound);
       });
 
       it('renvoie le niveau du test', async () => {
@@ -113,7 +112,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
         const reponse = await requeteGET();
 
-        assert.equal(reponse.body.idNiveau, 'insuffisant');
+        expect(reponse.body.idNiveau).toBe('insuffisant');
       });
 
       describe('concernant les informations de mon organisation', () => {
@@ -150,7 +149,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
           const reponse = await requeteGET();
 
-          assert.deepEqual(reponse.body.organisation, {
+          expect(reponse.body.organisation).toEqual({
             trancheEffectif: { code: '21', libelle: '50 à 99 salariés' },
             secteur: { code: 'U', libelle: 'Activités extra-territoriales' },
             region: { code: 'FR-HDF', libelle: 'Hauts-de-France' },
@@ -164,7 +163,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
             const reponse = await requeteGET();
 
-            assert.equal(reponse.body.organisation.trancheEffectif, undefined);
+            expect(reponse.body.organisation.trancheEffectif).toBeUndefined();
           });
 
           it("reste robuste lorsque la région n'est pas définie", async () => {
@@ -173,7 +172,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
             const reponse = await requeteGET();
 
-            assert.equal(reponse.body.organisation.region, undefined);
+            expect(reponse.body.organisation.region).toBeUndefined();
           });
 
           it("reste robuste lorsque le secteur n'est pas défini", async () => {
@@ -182,7 +181,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
             const reponse = await requeteGET();
 
-            assert.equal(reponse.body.organisation.secteur, undefined);
+            expect(reponse.body.organisation.secteur).toBeUndefined();
           });
 
           it('utilise la région du test', async () => {
@@ -191,7 +190,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
             const reponse = await requeteGET();
 
-            assert.equal(reponse.body.organisation.region.code, 'FR-ARA');
+            expect(reponse.body.organisation.region.code).toBe('FR-ARA');
           });
 
           it('utilise la tranche d’effectif du test', async () => {
@@ -200,7 +199,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
             const reponse = await requeteGET();
 
-            assert.equal(reponse.body.organisation.trancheEffectif.code, '53');
+            expect(reponse.body.organisation.trancheEffectif.code).toBe('53');
           });
 
           it('utilise le secteur du test', async () => {
@@ -209,7 +208,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
             const reponse = await requeteGET();
 
-            assert.equal(reponse.body.organisation.secteur.code, 'B');
+            expect(reponse.body.organisation.secteur.code).toBe('B');
           });
         });
       });
@@ -223,7 +222,7 @@ describe('La ressource qui gère le dernier résultat de test', () => {
 
         const reponse = await requeteGET();
 
-        assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+        expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
       });
     });
   });

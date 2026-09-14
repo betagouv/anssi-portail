@@ -1,8 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { Express } from 'express';
 import request from 'supertest';
-import assert from 'node:assert';
 import { creeServeur } from '../../../src/api/msc.js';
 import { AgentConnectInfo, enObjet } from '../cookie.js';
 import { configurationDeTestDuServeur, fauxAdaptateurOIDC } from '../fauxObjets.js';
@@ -26,20 +25,20 @@ describe('La ressource connexion OIDC', () => {
     it("redirige vers l'adresse proconnect", async () => {
       const reponse = await request(serveur).get('/oidc/connexion');
 
-      assert.equal(reponse.status, HttpStatusCode.Found);
-      assert.equal(reponse.headers.location, 'une-adresse-proconnect');
+      expect(reponse.status).toBe(HttpStatusCode.Found);
+      expect(reponse.headers.location).toBe('une-adresse-proconnect');
     });
 
     it('ecrit un cookie avec le state et le nonce', async () => {
       const reponse = await request(serveur).get('/oidc/connexion');
 
       const cookieHeader = reponse.headers['set-cookie'];
-      assert.notEqual(cookieHeader, undefined);
+      expect(cookieHeader).toBeDefined();
       const cookie = enObjet(cookieHeader[0]);
 
       const { state, nonce } = cookie.AgentConnectInfo as AgentConnectInfo;
-      assert.equal(state, 'un faux state');
-      assert.equal(nonce, 'un faux nonce');
+      expect(state).toBe('un faux state');
+      expect(nonce).toBe('un faux nonce');
     });
   });
 });

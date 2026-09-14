@@ -1,6 +1,5 @@
-import assert from 'assert';
 import { Request, Response } from 'express';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { fabriqueAttributionParcours } from '../../../src/api/middlewares/attributionParcours.js';
 import { ParcoursRejoint } from '../../../src/bus/evenements/parcoursRejoint.js';
 import { MockBusEvenement, fabriqueBusPourLesTests } from '../../bus/busPourLesTests.js';
@@ -38,13 +37,13 @@ describe("Le middleware d'attribution de parcours", () => {
       const utilisateurMitÀJour = await entrepotUtilisateur.parEmailHache(utilisateur.emailHache());
 
       const evenement = busEvenements.recupereEvenement(ParcoursRejoint);
-      assert.equal(utilisateurMitÀJour?.parcoursActuel(), 'complet');
-      assert.equal(evenement?.email, 'chuck@yopmail.com');
-      assert.equal(evenement?.parcours, 'complet');
-      assert.equal(evenement?.motif, 'visite-page-module');
-      assert.equal(evenement?.suivi?.campagne, 'campagne_2026_NA');
-      assert.equal(evenement?.suivi?.source, 'landing-parcours-securisation-bandeau');
-      assert.equal(suiteEstAppellé, true);
+      expect(utilisateurMitÀJour?.parcoursActuel()).toBe('complet');
+      expect(evenement?.email).toBe('chuck@yopmail.com');
+      expect(evenement?.parcours).toBe('complet');
+      expect(evenement?.motif).toBe('visite-page-module');
+      expect(evenement?.suivi?.campagne).toBe('campagne_2026_NA');
+      expect(evenement?.suivi?.source).toBe('landing-parcours-securisation-bandeau');
+      expect(suiteEstAppellé).toBe(true);
     });
   });
 
@@ -66,7 +65,7 @@ describe("Le middleware d'attribution de parcours", () => {
 
       const evenement = busEvenements.recupereEvenement(ParcoursChangé);
 
-      assert.equal(evenement?.suivi, undefined);
+      expect(evenement?.suivi).toBeUndefined();
     });
     it('le change de parcours', async () => {
       const utilisateur = new ConstructeurDUtilisateur()
@@ -92,13 +91,13 @@ describe("Le middleware d'attribution de parcours", () => {
       const utilisateurMitÀJour = await entrepotUtilisateur.parEmailHache(utilisateur.emailHache());
 
       const evenement = busEvenements.recupereEvenement(ParcoursChangé);
-      assert.equal(utilisateurMitÀJour?.parcoursActuel(), 'complet');
-      assert.equal(evenement?.email, 'chuck@yopmail.com');
-      assert.equal(evenement?.parcours, 'complet');
-      assert.equal(evenement?.motif, 'visite-page-module');
-      assert.equal(evenement?.suivi?.campagne, 'campagne_2026_NA');
-      assert.equal(evenement?.suivi?.source, 'landing-parcours-securisation-bandeau');
-      assert.equal(suiteEstAppellé, true);
+      expect(utilisateurMitÀJour?.parcoursActuel()).toBe('complet');
+      expect(evenement?.email).toBe('chuck@yopmail.com');
+      expect(evenement?.parcours).toBe('complet');
+      expect(evenement?.motif).toBe('visite-page-module');
+      expect(evenement?.suivi?.campagne).toBe('campagne_2026_NA');
+      expect(evenement?.suivi?.source).toBe('landing-parcours-securisation-bandeau');
+      expect(suiteEstAppellé).toBe(true);
     });
   });
 });

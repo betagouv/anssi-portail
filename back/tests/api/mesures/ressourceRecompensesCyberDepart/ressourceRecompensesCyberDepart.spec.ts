@@ -1,8 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import AdmZip from 'adm-zip';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import sharp from 'sharp';
 import request from 'supertest';
 import { ServiceRécompensesCyberDépart } from '../../../../src/api/mesures/ressourceRecompensesCyberDepart/serviceRecompensesCyberDepart.js';
@@ -50,7 +49,7 @@ describe('La ressource des récompenses CyberDépart', () => {
   it('renvoie un 401 pour une requête non-connectée', async () => {
     const reponse = await request(serveur).get('/api/cyberdepart/attestation_badge_cyberdepart.zip');
 
-    assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+    expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
   });
 
   it("renvoie un 403 si l'utilisateur tente d'obtenir les récompenses sans avoir suffisamment complété le module", async () => {
@@ -60,7 +59,7 @@ describe('La ressource des récompenses CyberDépart', () => {
       .get('/api/cyberdepart/attestation_badge_cyberdepart.zip')
       .set('Cookie', cookieJeanneDupont);
 
-    assert.equal(reponse.status, HttpStatusCode.Forbidden);
+    expect(reponse.status).toBe(HttpStatusCode.Forbidden);
   });
 
   it('renvoie un zip', async () => {
@@ -69,9 +68,9 @@ describe('La ressource des récompenses CyberDépart', () => {
       .get('/api/cyberdepart/attestation_badge_cyberdepart.zip')
       .set('Cookie', cookieJeanneDupont);
 
-    assert.equal(reponse.status, HttpStatusCode.Ok);
-    assert.equal(reponse.headers['content-type'], 'application/zip');
-    assert.equal(reponse.headers['content-disposition'], 'attachment; filename="attestation_badge_cyberdepart.zip"');
+    expect(reponse.status).toBe(HttpStatusCode.Ok);
+    expect(reponse.headers['content-type']).toBe('application/zip');
+    expect(reponse.headers['content-disposition']).toBe('attachment; filename="attestation_badge_cyberdepart.zip"');
   });
 
   describe('L\'archive "attestation_badge_cyberdepart.zip"', () => {
@@ -92,10 +91,10 @@ describe('La ressource des récompenses CyberDépart', () => {
         'banniere.png'
       );
 
-      assert.notEqual(bannierePng, undefined);
+      expect(bannierePng).toBeDefined();
       const metadonnées = await extraisMetadonnées(bannierePng!);
-      assert.equal(metadonnées.format, 'png');
-      assert.notEqual(metadonnées.size, 0);
+      expect(metadonnées.format).toBe('png');
+      expect(metadonnées.size).not.toBe(0);
     });
 
     it('la taille de la bannière est correcte', async () => {
@@ -105,10 +104,10 @@ describe('La ressource des récompenses CyberDépart', () => {
         'banniere.png'
       );
 
-      assert.notEqual(bannierePng, undefined);
+      expect(bannierePng).toBeDefined();
       const metadonnées = await extraisMetadonnées(bannierePng!);
-      assert.equal(metadonnées.width, 996);
-      assert.equal(metadonnées.height, 420);
+      expect(metadonnées.width).toBe(996);
+      expect(metadonnées.height).toBe(420);
     });
 
     it('contient le badge au format PNG', async () => {
@@ -116,10 +115,10 @@ describe('La ressource des récompenses CyberDépart', () => {
 
       const badgePng = await requêteEntréeArchive('/api/cyberdepart/attestation_badge_cyberdepart.zip', 'badge.png');
 
-      assert.notEqual(badgePng, undefined);
+      expect(badgePng).toBeDefined();
       const metadonnées = await extraisMetadonnées(badgePng!);
-      assert.equal(metadonnées.format, 'png');
-      assert.notEqual(metadonnées.size, 0);
+      expect(metadonnées.format).toBe('png');
+      expect(metadonnées.size).not.toBe(0);
     });
 
     it("contient l'attestation au format PDF", async () => {
@@ -130,12 +129,12 @@ describe('La ressource des récompenses CyberDépart', () => {
         'attestation.pdf'
       );
 
-      assert.notEqual(attestationPdf, undefined);
-      assert.notEqual(attestationPdf?.getData(), undefined);
+      expect(attestationPdf).toBeDefined();
+      expect(attestationPdf?.getData()).toBeDefined();
 
       const pdf = await getDocument({ data: new Uint8Array(attestationPdf!.getData()) }).promise;
 
-      assert.equal(pdf.numPages, 1);
+      expect(pdf.numPages).toBe(1);
     });
   });
 });

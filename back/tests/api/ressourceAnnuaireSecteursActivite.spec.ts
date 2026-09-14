@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { Express } from 'express';
-import assert from 'node:assert';
 import { configurationDeTestDuServeur } from './fauxObjets.js';
 import { creeServeur } from '../../src/api/msc.js';
 import request from 'supertest';
@@ -17,14 +16,14 @@ describe("La ressource Annuaire Secteurs d'activité", () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/api/annuaire/secteurs-activite');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it('renvoie les secteurs du référentiel', async () => {
       const reponse = await request(serveur).get('/api/annuaire/secteurs-activite');
 
-      assert.equal(reponse.body[0].libelle, 'Agriculture, sylviculture et pêche');
-      assert.equal(reponse.body[0].code, 'A');
+      expect(reponse.body[0].libelle).toBe('Agriculture, sylviculture et pêche');
+      expect(reponse.body[0].code).toBe('A');
     });
   });
 });

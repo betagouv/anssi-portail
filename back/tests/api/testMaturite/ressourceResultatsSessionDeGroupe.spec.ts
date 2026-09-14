@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { EntrepotResultatTest } from '../../../src/metier/entrepotResultatTest.js';
@@ -52,13 +51,13 @@ describe("La ressource qui gère les résultats d'une session de groupe", () => 
 
       const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED/resultats').send();
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it("répond 404 si la session n'existe pas", async () => {
       const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED/resultats').send();
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     it("répond 0 participant en cas d'absence de résultats", async () => {
@@ -67,7 +66,7 @@ describe("La ressource qui gère les résultats d'une session de groupe", () => 
 
       const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED/resultats').send();
 
-      assert.deepEqual(reponse.body.nombreParticipants, 0);
+      expect(reponse.body.nombreParticipants).toEqual(0);
     });
 
     it('répond le nombre de participants en cas de résultats', async () => {
@@ -82,7 +81,7 @@ describe("La ressource qui gère les résultats d'une session de groupe", () => 
 
       const reponse = await request(serveur).get('/api/sessions-groupe/ABC2ED/resultats').send();
 
-      assert.deepEqual(reponse.body.nombreParticipants, 1);
+      expect(reponse.body.nombreParticipants).toEqual(1);
     });
   });
 });

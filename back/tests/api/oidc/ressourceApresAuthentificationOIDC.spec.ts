@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT.js';
 import { ConfigurationServeur } from '../../../src/api/configurationServeur.js';
@@ -70,7 +69,7 @@ describe('La ressource apres authentification OIDC', () => {
       it('reçoit 200', async () => {
         const reponse = await requeteGet();
 
-        assert.equal(reponse.status, HttpStatusCode.Ok);
+        expect(reponse.status).toBe(HttpStatusCode.Ok);
       });
 
       it('sert la page apres-authentification', async () => {
@@ -82,7 +81,7 @@ describe('La ressource apres authentification OIDC', () => {
 
         await requeteGet();
 
-        assert.equal(nomPageDemande, 'apres-authentification');
+        expect(nomPageDemande).toBe('apres-authentification');
       });
 
       it("ajoute les informations de l'utilisateur à la session", async () => {
@@ -104,11 +103,11 @@ describe('La ressource apres authentification OIDC', () => {
         const reponse = await requeteGet();
 
         const session = decodeSessionDuCookie(reponse, 0);
-        assert.notEqual(session, undefined);
-        assert.equal(session.prenom, 'Jeanne');
-        assert.equal(session.nom, 'Dupont');
-        assert.equal(session.email, 'jeanne.dupont');
-        assert.equal(session.siret, '1234');
+        expect(session).toBeDefined();
+        expect(session.prenom).toBe('Jeanne');
+        expect(session.nom).toBe('Dupont');
+        expect(session.email).toBe('jeanne.dupont');
+        expect(session.siret).toBe('1234');
       });
 
       it("indique si l'utilisateur utilise le MFA", async () => {
@@ -122,7 +121,7 @@ describe('La ressource apres authentification OIDC', () => {
         const reponse = await requeteGet();
 
         const session = decodeSessionDuCookie(reponse, 0);
-        assert.equal(session.connexionAvecMFA, true);
+        expect(session.connexionAvecMFA).toBe(true);
       });
 
       it('ajoute un token JWT à la session', async () => {
@@ -131,7 +130,7 @@ describe('La ressource apres authentification OIDC', () => {
         const reponse = await requeteGet();
 
         const session = decodeSessionDuCookie(reponse, 0);
-        assert.equal(session.token, 'tokenJWT-jeanne.dupont');
+        expect(session.token).toBe('tokenJWT-jeanne.dupont');
       });
 
       it('ajoute un tokenId AgentConnect à la session', async () => {
@@ -147,7 +146,7 @@ describe('La ressource apres authentification OIDC', () => {
         const reponse = await requeteGet();
 
         const session = decodeSessionDuCookie(reponse, 0);
-        assert.equal(session.AgentConnectIdToken, 'tokenAgentConnect');
+        expect(session.AgentConnectIdToken).toBe('tokenAgentConnect');
       });
 
       it('publie un évènement sur le bus', async () => {
@@ -163,15 +162,15 @@ describe('La ressource apres authentification OIDC', () => {
 
         const evenement = busEvenements.recupereEvenement(UtilisateurConnecte);
 
-        assert.equal(evenement?.emailHache, 'jeanne.dupont-hache');
-        assert.equal(evenement?.connexionAvecMFA, true);
+        expect(evenement?.emailHache).toBe('jeanne.dupont-hache');
+        expect(evenement?.connexionAvecMFA).toBe(true);
       });
     });
 
     it("jette une erreur 401 si le cookie AgentConnectInfo n'est pas défini", async () => {
       const reponse = await requeteGet().set('Cookie', []);
 
-      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+      expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
     });
 
     it('jette une erreur 401 si quoi que ce soit se passe mal', async () => {
@@ -181,15 +180,15 @@ describe('La ressource apres authentification OIDC', () => {
 
       const reponse = await requeteGet();
 
-      assert.equal(reponse.status, HttpStatusCode.Unauthorized);
+      expect(reponse.status).toBe(HttpStatusCode.Unauthorized);
     });
 
     describe("si l'utilisateur est inconnu", () => {
       it('ajoute un token contenant les informations du nouvel utilisateur et redirige vers la page de création de compte', async () => {
         const reponse = await requeteGet();
 
-        assert.equal(reponse.status, HttpStatusCode.Found);
-        assert.equal(reponse.headers.location, '/creation-compte?token=tokenJWT-');
+        expect(reponse.status).toBe(HttpStatusCode.Found);
+        expect(reponse.headers.location).toBe('/creation-compte?token=tokenJWT-');
       });
     });
   });

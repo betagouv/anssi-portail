@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { consigneBadgeCyberdépartDébloquéDansJournal } from '../../src/bus/consigneBadgeCyberdepartDebloqueDansJournal.js';
 import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
@@ -30,7 +29,7 @@ describe("L'abonnement qui consigne le déblocage du badge cyberdépart par un u
       adaptateurHachage,
     })(new BadgeCyberdépartDébloqué('u1@example.com', 8, 10));
 
-    assert.deepEqual(evenementRecu, {
+    expect(evenementRecu).toEqual({
       type: 'BADGE_CYBERDEPART_DEBLOQUE',
       donnees: {
         idUtilisateur: 'u1@example.com-hacheHMAC',

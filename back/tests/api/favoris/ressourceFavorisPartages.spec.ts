@@ -1,8 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
 import { randomUUID } from 'node:crypto';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';
@@ -41,14 +40,14 @@ describe('La ressource des favoris partagés', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get(`/api/favoris-partages/${idListeFavoris}`);
 
-      assert.equal(reponse.statusCode, HttpStatusCode.Ok);
+      expect(reponse.statusCode).toBe(HttpStatusCode.Ok);
     });
 
     it("retourne les favoris de l'utilisateur qui a partagé sa liste", async () => {
       const reponse = await request(serveur).get(`/api/favoris-partages/${idListeFavoris}`);
 
-      assert.equal(reponse.body.prenom, 'Jeanne');
-      assert.deepEqual(reponse.body.favorisPartages, [
+      expect(reponse.body.prenom).toBe('Jeanne');
+      expect(reponse.body.favorisPartages).toEqual([
         '/services/mon-super-service',
         '/services/mon-autre-super-service',
       ]);
@@ -57,13 +56,13 @@ describe('La ressource des favoris partagés', () => {
     it('répond 404 si aucun utilisateur ne possède cet id de liste de favoris', async () => {
       const reponse = await request(serveur).get(`/api/favoris-partages/${randomUUID()}`);
 
-      assert.equal(reponse.statusCode, HttpStatusCode.NotFound);
+      expect(reponse.statusCode).toBe(HttpStatusCode.NotFound);
     });
 
     it("retourne 404 si l'id de la liste de favoris n'est pas un uuid", async () => {
       const reponse = await request(serveur).get(`/api/favoris-partages/pasunuuid`);
 
-      assert.equal(reponse.statusCode, HttpStatusCode.NotFound);
+      expect(reponse.statusCode).toBe(HttpStatusCode.NotFound);
     });
   });
 });

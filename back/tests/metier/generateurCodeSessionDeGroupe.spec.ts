@@ -1,6 +1,5 @@
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import { GenerateurAleatoireCodeSessionDeGroupe } from '../../src/metier/generateurCodeSessionDeGroupe.js';
-import assert from 'node:assert';
 import { EntrepotSessionDeGroupeMemoire } from '../persistance/EntrepotSessionDeGroupeMemoire.js';
 import { SessionDeGroupe } from '../../src/metier/sessionDeGroupe.js';
 
@@ -16,13 +15,13 @@ describe('Le générateur aléatoire de code de session de groupe', () => {
   it('génère un code de 6 caractères', async () => {
     const code = await generateur.genere();
 
-    assert.equal(code.length, 6);
+    expect(code).toHaveLength(6);
   });
 
   it('contient uniquement des chiffres ou des lettres majuscules', async () => {
     const code = await generateur.genere();
 
-    assert.match(code, /[A-Z0-9]{6}/);
+    expect(code).toMatch(/[A-Z0-9]{6}/);
   });
 
   it('est toujours différent', async () => {
@@ -30,7 +29,7 @@ describe('Le générateur aléatoire de code de session de groupe', () => {
       const code1 = await generateur.genere();
       const code2 = await generateur.genere();
 
-      assert.notEqual(code1, code2);
+      expect(code1).not.toBe(code2);
     }
   });
 
@@ -38,8 +37,8 @@ describe('Le générateur aléatoire de code de session de groupe', () => {
     for (let i = 0; i < 500; i++) {
       const code = await generateur.genere();
 
-      assert.equal(code.includes('0'), false);
-      assert.equal(code.includes('O'), false);
+      expect(code.includes('0')).toBe(false);
+      expect(code.includes('O')).toBe(false);
     }
   });
 
@@ -59,7 +58,7 @@ describe('Le générateur aléatoire de code de session de groupe', () => {
 
     const code = await generateur.genere();
 
-    assert.ok(aTireUnCodeExistant);
-    assert.equal(code, codeInexistantDansLEntrepot);
+    expect(aTireUnCodeExistant).toBeTruthy();
+    expect(code).toBe(codeInexistantDansLEntrepot);
   });
 });

@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { Guide } from '../../../src/metier/guide.js';
@@ -35,26 +34,26 @@ describe('La ressource des guides de mêmes collections', () => {
     it('répond 200', async () => {
       const reponse = await request(serveur).get('/api/guides/zero-trust/memes-collections');
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it("répond 404 si le guide n'existe pas", async () => {
       const reponse = await request(serveur).get('/api/guides/slug-de-guide-inconnu/memes-collections');
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     it('renvoie une liste de guides dont les collections correspondent à au moins une collection du guide ciblé', async () => {
       const reponse = await request(serveur).get('/api/guides/zero-trust/memes-collections');
 
-      assert.equal(reponse.body.length, 1);
-      assert.equal(reponse.body[0].id, 'devsecops');
+      expect(reponse.body).toHaveLength(1);
+      expect(reponse.body[0].id).toBe('devsecops');
     });
 
     it("renvoie une liste vide si le guide ciblé n'a pas de collection", async () => {
       const reponse = await request(serveur).get('/api/guides/guide-sans-collection/memes-collections');
 
-      assert.equal(reponse.body.length, 0);
+      expect(reponse.body).toHaveLength(0);
     });
   });
 });

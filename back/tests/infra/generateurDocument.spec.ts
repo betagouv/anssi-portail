@@ -1,7 +1,6 @@
 import { Canvas } from '@napi-rs/canvas';
-import assert from 'node:assert';
 import { readFile } from 'node:fs/promises';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { getDocument, PDFDocumentProxy } from 'pdfjs-dist/legacy/build/pdf.mjs';
 import sharp from 'sharp';
 import { ErreurTypst, generateurDocument } from '../../src/infra/generateurDocument.js';
@@ -46,7 +45,7 @@ describe('Le générateur de document', () => {
   it("sait générer un pdf à partir d'un contenu fichier", async () => {
     const document = await generateurDocument({ contenuFichier: '$ a arrow.squiggly b $' });
 
-    assert.equal(estUnPdf(document!), true);
+    expect(estUnPdf(document!)).toBe(true);
   });
 
   it('sait générer un pdf qui contient le texte attendu', async () => {
@@ -57,20 +56,17 @@ describe('Le générateur de document', () => {
 
     const texte = await extraitLeTexte(documentPdf);
 
-    assert.equal(texte.includes('Hello World!'), true);
+    expect(texte.includes('Hello World!')).toBe(true);
   });
 
   it('déclenche une erreur si la syntaxe est mauvaise', async () => {
-    await assert.rejects(
-      async () => await generateurDocument({ contenuFichier: '##' }),
-      (erreur) => erreur instanceof ErreurTypst
-    );
+    await expect((async () => await generateurDocument({ contenuFichier: '##' }))()).rejects.toThrow(ErreurTypst);
   });
 
   it("sait générer un pdf à partir d'un chemin fichier", async () => {
     const document = await generateurDocument({ cheminFichier: typstFactice() });
 
-    assert.equal(estUnPdf(document!), true);
+    expect(estUnPdf(document!)).toBe(true);
   });
 
   describe('concernant une attestation PDF Cyberdépart', () => {
@@ -94,8 +90,8 @@ describe('Le générateur de document', () => {
       const renduGénéré = await pixels(await rasterisePremierePage(pdfGénéré));
       const renduAttendu = await pixels(await rasterisePremierePage(pdfAttendu));
 
-      assert.deepEqual(renduGénéré.info, renduAttendu.info);
-      assert.ok(renduGénéré.data.equals(renduAttendu.data), 'Le rendu visuel du PDF diffère du snapshot');
+      expect(renduGénéré.info).toEqual(renduAttendu.info);
+      expect(renduGénéré.data.equals(renduAttendu.data), 'Le rendu visuel du PDF diffère du snapshot').toBeTruthy();
     });
   });
 });

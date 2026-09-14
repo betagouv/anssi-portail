@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { consigneEvenementTestExpositionRealiseDansJournal } from '../../src/bus/consigneEvenementTestExpositionRealiseDansJournal.js';
 import { TestExpositionRéalisé } from '../../src/bus/evenements/TestExpositionRealise.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';
@@ -39,7 +38,7 @@ describe("L'abonnement qui consigne la réalisation d'un test d'exposition dans 
       )
     );
 
-    assert.deepEqual(evenementRecu, {
+    expect(evenementRecu).toEqual({
       type: 'TEST_EXPOSITION_REALISE',
       donnees: {
         typeOrganisation: 'tpe-pme-eti',
@@ -75,7 +74,7 @@ describe("L'abonnement qui consigne la réalisation d'un test d'exposition dans 
       adaptateurHachage,
     })(new TestExpositionRéalisé('tpe-pme-eti', 'sante', ['reputation', 'geo']));
 
-    assert.deepEqual(evenementRecu, {
+    expect(evenementRecu).toEqual({
       type: 'TEST_EXPOSITION_REALISE',
       donnees: {
         typeOrganisation: 'tpe-pme-eti',

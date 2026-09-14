@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { fabriquePublieMesureConsultée } from '../../src/api/middlewares/publieMesureConsultee.js';
 import { creeServeur } from '../../src/api/msc.js';
@@ -44,8 +43,8 @@ describe("La ressource d'une page Jekyll connectée", () => {
       });
       const reponse = await request(serveur).get('/favoris');
 
-      assert.equal(middelwareAppele, true);
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(middelwareAppele).toBe(true);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
     });
 
     it("affecte le parcours de l'utilisateur", async () => {
@@ -67,7 +66,7 @@ describe("La ressource d'une page Jekyll connectée", () => {
 
       await request(serveur).get('/parcours-complet').set('Cookie', [cookie]);
 
-      assert.equal(parcoursAppellé, 'complet');
+      expect(parcoursAppellé).toBe('complet');
     });
   });
 
@@ -86,11 +85,11 @@ describe("La ressource d'une page Jekyll connectée", () => {
       });
       const reponse = await request(serveur).get('/mesures/AUTH.5').set('Cookie', [cookie]);
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
       busEvenements.aRecuUnEvenement(MesureConsultee);
       const evenement = busEvenements.recupereEvenement(MesureConsultee);
-      assert.equal(evenement!.idMesure, 'AUTH.5');
-      assert.equal(evenement!.email, 'jeanne.dupont@user.com');
+      expect(evenement!.idMesure).toBe('AUTH.5');
+      expect(evenement!.email).toBe('jeanne.dupont@user.com');
     });
 
     it("ne trace pas la visite d'une mesure mal nommée", async () => {
@@ -99,7 +98,7 @@ describe("La ressource d'une page Jekyll connectée", () => {
 
       const reponse = await request(serveur).get('/mesures/auth5').set('Cookie', [cookie]);
 
-      assert.equal(reponse.status, HttpStatusCode.Ok);
+      expect(reponse.status).toBe(HttpStatusCode.Ok);
       busEvenements.naPasRecuDEvenement(MesureConsultee);
     });
   });

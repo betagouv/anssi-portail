@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { RetourMiniTestDonné } from '../../../src/bus/evenements/retourMiniTestDonne.js';
@@ -34,27 +33,27 @@ describe('La ressource retour sur les mini-tests', () => {
     it('doit répondre 201 pour le mini-test de maturité', async () => {
       const reponse = await request(serveur).post('/api/retour-mini-tests/test-maturité').send(retourPositif);
 
-      assert.equal(reponse.status, HttpStatusCode.Created);
+      expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
     it('doit répondre 201 pour le mini-test vrai-faux', async () => {
       const reponse = await request(serveur).post('/api/retour-mini-tests/vrai-faux').send(retourPositif);
 
-      assert.equal(reponse.status, HttpStatusCode.Created);
+      expect(reponse.status).toBe(HttpStatusCode.Created);
     });
 
     it('doit répondre 400 si le corps de la requête est vide', async () => {
       const reponse = await request(serveur).post('/api/retour-mini-tests/test-maturité').send({});
 
-      assert.equal(reponse.status, HttpStatusCode.BadRequest);
-      assert.equal(reponse.body.fieldErrors.retour[0], 'Le retour doit être "POSITIF" ou "NEGATIF"');
+      expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+      expect(reponse.body.fieldErrors.retour[0]).toBe('Le retour doit être "POSITIF" ou "NEGATIF"');
     });
 
     it("doit répondre 400 si le retour n'est pas valide", async () => {
       const reponse = await request(serveur).post('/api/retour-mini-tests/test-maturité').send({ retour: 'INVALIDE' });
 
-      assert.equal(reponse.status, HttpStatusCode.BadRequest);
-      assert.equal(reponse.body.fieldErrors.retour[0], 'Le retour doit être "POSITIF" ou "NEGATIF"');
+      expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+      expect(reponse.body.fieldErrors.retour[0]).toBe('Le retour doit être "POSITIF" ou "NEGATIF"');
     });
 
     it('doit répondre 400 si le commentaire est trop long', async () => {
@@ -62,14 +61,14 @@ describe('La ressource retour sur les mini-tests', () => {
         .post('/api/retour-mini-tests/test-maturité')
         .send({ retour: 'NEGATIF', commentaire: 'x'.repeat(1001) });
 
-      assert.equal(reponse.status, HttpStatusCode.BadRequest);
-      assert.equal(reponse.body.fieldErrors.commentaire[0], 'Le commentaire doit contenir au plus 1000 caractères');
+      expect(reponse.status).toBe(HttpStatusCode.BadRequest);
+      expect(reponse.body.fieldErrors.commentaire[0]).toBe('Le commentaire doit contenir au plus 1000 caractères');
     });
 
     it('doit répondre 404 si le mini-test est inconnu', async () => {
       const reponse = await request(serveur).post('/api/retour-mini-tests/inconnu').send(retourPositif);
 
-      assert.equal(reponse.status, HttpStatusCode.NotFound);
+      expect(reponse.status).toBe(HttpStatusCode.NotFound);
     });
 
     describe('concernant les retours positifs', () => {
@@ -78,7 +77,7 @@ describe('La ressource retour sur les mini-tests', () => {
 
         busEvenements.aRecuUnEvenement(RetourMiniTestDonné);
         const evenement = busEvenements.recupereEvenement(RetourMiniTestDonné);
-        assert.equal(evenement!.retour, 'POSITIF');
+        expect(evenement!.retour).toBe('POSITIF');
       });
 
       it('publie un événement sans commentaire', async () => {
@@ -88,8 +87,8 @@ describe('La ressource retour sur les mini-tests', () => {
 
         busEvenements.aRecuUnEvenement(RetourMiniTestDonné);
         const evenement = busEvenements.recupereEvenement(RetourMiniTestDonné);
-        assert.equal(evenement!.retour, 'POSITIF');
-        assert.equal(evenement!.commentaire, undefined);
+        expect(evenement!.retour).toBe('POSITIF');
+        expect(evenement!.commentaire).toBeUndefined();
       });
     });
 
@@ -101,8 +100,8 @@ describe('La ressource retour sur les mini-tests', () => {
 
         busEvenements.aRecuUnEvenement(RetourMiniTestDonné);
         const evenement = busEvenements.recupereEvenement(RetourMiniTestDonné);
-        assert.equal(evenement!.retour, 'NEGATIF');
-        assert.equal(evenement!.commentaire, 'Ce test est nul !');
+        expect(evenement!.retour).toBe('NEGATIF');
+        expect(evenement!.commentaire).toBe('Ce test est nul !');
       });
     });
   });

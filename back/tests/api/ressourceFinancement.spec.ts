@@ -1,7 +1,6 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
-import assert from 'node:assert';
-import { beforeEach, describe, it } from 'vitest';
+import { beforeEach, describe, it, expect } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../src/api/msc.js';
 import { EntrepotFinancementMemoire } from '../persistance/entrepotFinancementMemoire.js';
@@ -26,7 +25,7 @@ describe('La ressource Financement', () => {
 
       const { status } = await request(serveur).get('/api/financements/1');
 
-      assert.equal(status, HttpStatusCode.Ok);
+      expect(status).toBe(HttpStatusCode.Ok);
     });
 
     it("renvoie le détail d'un financement", async () => {
@@ -34,7 +33,7 @@ describe('La ressource Financement', () => {
 
       const reponse = await request(serveur).get('/api/financements/1');
 
-      assert.deepEqual(reponse.body, {
+      expect(reponse.body).toEqual({
         id: 1,
         nom: 'Cyber PME',
         financeur: 'BPI France',
@@ -55,7 +54,7 @@ describe('La ressource Financement', () => {
     it("renvoie un 404 si l'id n'existe pas", async () => {
       const { status } = await request(serveur).get('/api/financements/1');
 
-      assert.equal(status, HttpStatusCode.NotFound);
+      expect(status).toBe(HttpStatusCode.NotFound);
     });
   });
 });
