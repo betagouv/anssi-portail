@@ -117,7 +117,7 @@ const CINQ_MINUTES = 300;
 const adaptateurEnvironnement: AdaptateurEnvironnement = {
   urlBaseMSC: () => process.env.URL_BASE_MSC || '',
   oidc: () => ({
-    authentificationMultiFacteursDésactivée: () => process.env.AUTHENTIFICATION_MULTI_FACTEURS_DESCTIVEE === 'true',
+    authentificationMultiFacteursDésactivée: () => process.env.AUTHENTIFICATION_MULTI_FACTEURS_DESACTIVEE === 'true',
     urlRedirectionApresAuthentification: () => `${process.env.URL_BASE_MSC}/oidc/apres-authentification`,
     urlRedirectionApresDeconnexion: () => `${process.env.URL_BASE_MSC}/oidc/apres-deconnexion`,
     urlBase: () => process.env.OIDC_URL_BASE || '/',
