@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { suite as describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { fausseMessagerieInstantanee } from '../api/fauxObjets.js';
 import { notifieUnRetourNégatifSurMiniTest } from '../../src/bus/notifieRetourNegatifSurMiniTest.js';
 import { RetourMiniTestDonné } from '../../src/bus/evenements/retourMiniTestDonne.js';

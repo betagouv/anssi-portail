@@ -1,7 +1,7 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import request from 'supertest';
 import { FichierInconnu, FournisseurChemin } from '../../src/api/fournisseurChemin.js';
 import { creeServeur } from '../../src/api/msc.js';

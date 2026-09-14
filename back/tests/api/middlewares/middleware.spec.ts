@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 import jsonwebtoken from 'jsonwebtoken';
 import { createRequest, createResponse } from 'node-mocks-http';
 import { OutgoingHttpHeaders } from 'node:http';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import { AdaptateurJWT } from '../../../src/api/adaptateurJWT.js';
 import { FournisseurChemin } from '../../../src/api/fournisseurChemin.js';
 import { fabriqueMiddleware, Middleware } from '../../../src/api/middlewares/middleware.js';

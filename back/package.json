@@ -17,8 +17,8 @@
     "prelint": "[ -d ../regles-eslint/dist ] || pnpm -F regles-eslint build",
     "prestart": "tsc && pnpm migre-bdd:clever",
     "pretest": "npm-run-all --parallel typecheck lint",
-    "test": "node --conditions=anssi-portail:source --import tsx --test './tests/**/*.spec.ts'",
-    "test:ci": "node --conditions=anssi-portail:source --import tsx --test './tests/**/*.spec.ts'",
+    "test": "vitest run",
+    "test:ci": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "engines": {
@@ -45,7 +45,8 @@
     "prettier": "catalog:",
     "regles-eslint": "workspace:^",
     "supertest": "^7.2.2",
-    "tsx": "catalog:"
+    "tsx": "catalog:",
+    "vitest": "^5.0.0"
   },
   "dependencies": {
     "@11ty/gray-matter": "^3.0.0",

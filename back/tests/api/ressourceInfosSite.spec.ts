@@ -1,5 +1,5 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { configurationDeTestDuServeur, fauxAdaptateurEnvironnement } from './fauxObjets.js';

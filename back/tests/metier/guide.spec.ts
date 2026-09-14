@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import { guideZeroTrust } from '../api/objetsPretsALEmploi.js';
 import { EntrepotGuideTravailMemoire } from '../persistance/entrepotGuideTravailMemoire.js';
 

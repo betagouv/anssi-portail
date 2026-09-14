@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { AdaptateurRechercheEntreprise } from '../../src/infra/adaptateurRechercheEntreprise.js';
 import { IdNiveauMaturite, ReponsesTestMaturite, ResultatTestMaturite } from '../../src/metier/resultatTestMaturite.js';
 import { jeanneDupont } from '../api/objetsPretsALEmploi.js';

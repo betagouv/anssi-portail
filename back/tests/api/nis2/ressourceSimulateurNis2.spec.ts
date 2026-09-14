@@ -1,5 +1,5 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import request from 'supertest';
 import assert from 'node:assert';
 import { Express } from 'express';

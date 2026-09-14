@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { Cache } from '../../src/infra/cache.js';
 // import { add } from 'date-fns';
 import { FournisseurHorloge } from '../../src/infra/fournisseurHorloge.js';

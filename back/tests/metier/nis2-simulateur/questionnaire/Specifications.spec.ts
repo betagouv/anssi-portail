@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { describe, it, beforeEach } from 'node:test';
+import { describe, it, beforeEach } from 'vitest';
 import { ResultatEligibilite } from '../../../../src/metier/nis2-simulateur/Regulation.definitions.js';
 import { Specifications } from '../../../../src/metier/nis2-simulateur/questionnaire/Specifications.js';
 import { RegleEntiteOSE } from '../../../../src/metier/nis2-simulateur/questionnaire/regles/RegleEntiteOSE.js';

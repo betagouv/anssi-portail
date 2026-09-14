@@ -1,4 +1,4 @@
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { AdaptateurEmail } from '../../src/metier/adaptateurEmail.js';
 import { creeContactBrevo } from '../../src/bus/creeContactBrevo.js';
 import assert from 'assert';

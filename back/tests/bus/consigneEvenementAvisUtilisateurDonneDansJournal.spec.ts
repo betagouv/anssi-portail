@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import { consigneEvenementAvisUtilisateurDonneDansJournal } from '../../src/bus/consigneEvenementAvisUtilisateurDonneDansJournal.js';
 import { AvisUtilisateurDonne } from '../../src/bus/evenements/avisUtilisateurDonne.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';

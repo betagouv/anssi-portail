@@ -1,4 +1,4 @@
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { BusEvenements, EvenementDuBus } from '../../src/bus/busEvenements.js';
 import assert from 'node:assert';
 

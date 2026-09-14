@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import { ClientHttp } from '../../src/infra/clientHttp.js';
 import { EntrepotGuideGrist, GuideGrist } from '../../src/infra/entrepotGuideGrist.js';
 import { fauxAdaptateurEnvironnement } from '../api/fauxObjets.js';

@@ -1,7 +1,7 @@
 import { Canvas } from '@napi-rs/canvas';
 import assert from 'node:assert';
 import { readFile } from 'node:fs/promises';
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { getDocument, PDFDocumentProxy } from 'pdfjs-dist/legacy/build/pdf.mjs';
 import sharp from 'sharp';
 import { ErreurTypst, generateurDocument } from '../../src/infra/generateurDocument.js';

@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { describe, it } from 'node:test';
+import { describe, it } from 'vitest';
 import { consigneBadgeCyberdépartDébloquéDansJournal } from '../../src/bus/consigneBadgeCyberdepartDebloqueDansJournal.js';
 import { BadgeCyberdépartDébloqué } from '../../src/bus/evenements/badgeCyberdepartDebloque.js';
 import { AdaptateurHachage } from '../../src/infra/adaptateurHachage.js';

@@ -2,7 +2,7 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { randomUUID } from 'node:crypto';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import request from 'supertest';
 import { creeServeur } from '../../../src/api/msc.js';
 import { EntrepotUtilisateur } from '../../../src/metier/entrepotUtilisateur.js';

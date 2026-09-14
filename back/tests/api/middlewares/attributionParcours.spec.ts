@@ -1,6 +1,6 @@
 import assert from 'assert';
 import { Request, Response } from 'express';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import { fabriqueAttributionParcours } from '../../../src/api/middlewares/attributionParcours.js';
 import { ParcoursRejoint } from '../../../src/bus/evenements/parcoursRejoint.js';
 import { MockBusEvenement, fabriqueBusPourLesTests } from '../../bus/busPourLesTests.js';

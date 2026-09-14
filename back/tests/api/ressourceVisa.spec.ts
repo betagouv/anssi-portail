@@ -2,7 +2,7 @@ import { HttpStatusCode } from '@anssi-portail/axios';
 import { Express } from 'express';
 import assert from 'node:assert';
 import { Readable } from 'node:stream';
-import { beforeEach, describe, it } from 'node:test';
+import { beforeEach, describe, it } from 'vitest';
 import request from 'supertest';
 import { ConfigurationServeur } from '../../src/api/configurationServeur.js';
 import { creeServeur } from '../../src/api/msc.js';
