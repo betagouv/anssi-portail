@@ -10,12 +10,12 @@
   import BadgeCyberdepart from './BadgeCyberdepart.svelte';
   import BasculeParcoursComplet from './BasculeParcoursComplet.svelte';
   import InterlocuteursParcoursSecurisation from './InterlocuteursParcoursSecurisation.svelte';
+  import LienRetourAuxModules from './LienRetourAuxModules.svelte';
   import MesuresDeModule from './MesuresDeModule.svelte';
   import ModaleBadgeCyberdepartDebloque from './modales/ModaleBadgeCyberdepartDebloque.svelte';
   import ModaleModuleCyberdepartTermine from './modales/ModaleModuleCyberdepartTermine.svelte';
   import type { ModuleRéponseApi } from './moduleReponseApi';
   import Progression from './Progression.svelte';
-  import LienRetourAuxModules from './LienRetourAuxModules.svelte';
 
   let module = $state<ModuleRéponseApi>({
     nom: '',
@@ -26,6 +26,7 @@
   const totalMesures = $derived(module.mesures.length);
   let badgeCyberdépartDebloqué = $state(false);
   let moduleTerminé = $state(false);
+  let animeProgression = $state(false);
 
   onMount(async () => {
     const reponse = await axios.get<ModuleRéponseApi>(`/api/modules/1`);
@@ -33,6 +34,7 @@
     if (sessionStorage.getItem('mesure-prise-en-compte') === 'true') {
       toasterStore.succes('Mesure déclarée prise en compte', 'Votre progression a été mise à jour.');
       sessionStorage.removeItem('mesure-prise-en-compte');
+      animeProgression = true;
     }
     if (sessionStorage.getItem('badge-cyberdepart-debloque') === 'true') {
       badgeCyberdépartDebloqué = true;
@@ -101,7 +103,10 @@
         text="Complétez votre progression et accéder à des mesures plus avancées pour renforcer vos pratiques, mieux structurer vos actions et améliorer votre protection dans la durée."
       ></dsfr-alert>
     {/if}
-    <Progression actuel={progressionActuelle} max={totalMesures} cible={module.cibleBadge}></Progression>
+    {#if module.nom !== ''}
+      <Progression actuel={progressionActuelle} max={totalMesures} cible={module.cibleBadge} anime={animeProgression}
+      ></Progression>
+    {/if}
     {#if badgeDebloque}
       <BadgeCyberdepart />
     {/if}

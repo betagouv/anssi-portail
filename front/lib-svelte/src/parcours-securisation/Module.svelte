@@ -23,6 +23,7 @@
   let moduleTerminé = $state(false);
   let parcoursTerminé = $state(false);
   const totalMesures = $derived(module.mesures.length);
+  let animeProgression = $state(false);
 
   onMount(async () => {
     const idDuModule = new URL(window.location.href).pathname.split('/').pop();
@@ -31,6 +32,7 @@
     if (sessionStorage.getItem('mesure-prise-en-compte') === 'true') {
       toasterStore.succes('Mesure déclarée prise en compte', 'Votre progression a été mise à jour.');
       sessionStorage.removeItem('mesure-prise-en-compte');
+      animeProgression = true;
     }
 
     if (sessionStorage.getItem('parcours-complet-termine') === 'true') {
@@ -88,7 +90,9 @@
 <dsfr-container>
   <div class="progression">
     <LienRetourAuxModules />
-    <Progression actuel={progressionActuelle} max={totalMesures} cible={module.cibleBadge}></Progression>
+    {#if module.nom !== ''}
+      <Progression actuel={progressionActuelle} max={totalMesures} cible={module.cibleBadge} anime={animeProgression} />
+    {/if}
   </div>
 </dsfr-container>
 

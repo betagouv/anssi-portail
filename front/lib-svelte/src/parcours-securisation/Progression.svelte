@@ -1,13 +1,23 @@
 <script lang="ts">
+  import { cubicInOut } from 'svelte/easing';
+  import { Tween } from 'svelte/motion';
+
   interface Props {
     actuel: number;
     max: number;
     cible?: number;
     mode?: 'compact' | 'reactif';
     libelle?: string;
+    anime?: boolean;
   }
 
-  const { actuel, max, cible, mode = 'reactif', libelle = 'Progression' }: Props = $props();
+  const { actuel, max, cible, mode = 'reactif', libelle = 'Progression', anime = false }: Props = $props();
+
+  const avancement = $derived(new Tween(actuel - (anime ? 1 : 0), { easing: cubicInOut, duration: 2000 }));
+
+  $effect(() => {
+    avancement.target = actuel;
+  });
 
   let barre: HTMLElement;
   $effect(() => {
@@ -22,7 +32,7 @@
   <p class="texte-standard-md libelle">{libelle}</p>
   <span class="texte-standard-md avancement">{actuel}&nbsp;/&nbsp;{max}</span>
   <div class="barre" bind:this={barre}>
-    <progress class="barre-actuelle" value={actuel} {max}>{actuel}</progress>
+    <progress class="barre-actuelle" value={avancement.current} {max}>{avancement.current}</progress>
     {#if cible}
       {#if actuel < cible}
         <div class="badge-recompense">
