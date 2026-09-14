@@ -8,7 +8,9 @@
     "node": ">=24.0.0"
   },
   "scripts": {
+    "dev:financements:compare": "node --conditions=anssi-portail:source --import tsx --env-file .env src/financements.ts",
     "dev:guides:compare": "node --conditions=anssi-portail:source --import tsx --env-file .env src/guides.ts",
+    "start:financements:compare": "node --conditions=anssi-portail:source --import tsx src/financements.ts",
     "start:guides:compare": "node --conditions=anssi-portail:source --import tsx src/guides.ts",
     "lint:fix": "eslint . --fix",
     "lint": "eslint .",
