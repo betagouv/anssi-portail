@@ -76,6 +76,7 @@ import { ressourceResultatsDeTest } from './testMaturite/ressourceResultatsDeTes
 import { ressourceResultatsSessionDeGroupe } from './testMaturite/ressourceResultatsSessionDeGroupe.js';
 import { ressourceSessionDeGroupe } from './testMaturite/ressourceSessionDeGroupe.js';
 import { ressourceSessionsDeGroupe } from './testMaturite/ressourceSessionsDeGroupe.js';
+import { ressourceRéponsesRéflexesCyber } from './mini-tests/reflexes-cyber/ressourceReponsesReflexesCyber.js';
 
 const creeServeur = (configurationServeur: ConfigurationServeur) => {
   const app = express();
@@ -414,6 +415,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
 
   enregistreRoute('/api/mini-tests/vrai-faux', ressourceVraiFaux(configurationServeur));
   enregistreRoute('/api/mini-tests/vrai-faux/reponses', ressourceRéponsesVraiFaux(configurationServeur));
+  enregistreRoute('/api/mini-tests/reflexes-cyber/reponses', ressourceRéponsesRéflexesCyber(configurationServeur));
   enregistreRoute('/api/mini-tests/exposition/tests', ressourceTestsExposition(configurationServeur));
 
   const parcoursActivé = configurationServeur.adaptateurEnvironnement
