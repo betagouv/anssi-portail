@@ -210,7 +210,7 @@ catalogs:
       version: 1.20.0
     entities:
       specifier: ^8.0.0
-      version: 8.0.0
+      version: 8.1.0
     isomorphic-dompurify:
       specifier: ^4.0.0
       version: 4.1.0
@@ -511,7 +511,7 @@ importers:
         version: 1.20.0(debug@4.4.3(supports-color@10.2.2))(supports-color@10.2.2)
       entities:
         specifier: 'catalog:'
-        version: 8.0.0
+        version: 8.1.0
       isomorphic-dompurify:
         specifier: 'catalog:'
         version: 4.1.0(@noble/hashes@1.8.0)
@@ -535,7 +535,7 @@ importers:
         version: 3.4.15
       entities:
         specifier: 'catalog:'
-        version: 8.0.0
+        version: 8.1.0
       isomorphic-dompurify:
         specifier: 'catalog:'
         version: 4.1.0(@noble/hashes@1.8.0)
@@ -2603,6 +2603,10 @@ packages:
 
   entities@8.0.0:
     resolution: {integrity: sha512-zwfzJecQ/Uej6tusMqwAqU/6KL2XaB2VZ2Jg54Je6ahNBGNH6Ek6g3jjNCF0fG9EWQKGZNddNjU5F1ZQn/sBnA==}
+    engines: {node: '>=20.19.0'}
+
+  entities@8.1.0:
+    resolution: {integrity: sha512-kxL7msIffSuh9aaFAMD7rxAIuTRMAHMeBtgHW2yUdWw732ZNh4MehkF2gdjvtdmikkaIP9bFDDJOPlsvm7avrA==}
     engines: {node: '>=20.19.0'}
 
   es-define-property@1.0.1:
@@ -6338,6 +6342,8 @@ snapshots:
   entities@4.5.0: {}
 
   entities@8.0.0: {}
+
+  entities@8.1.0: {}
 
   es-define-property@1.0.1: {}
 
