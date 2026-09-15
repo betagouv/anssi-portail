@@ -1,7 +1,7 @@
 import type { IdScénario } from '../scenarios';
 import type { IdRôle } from '../roles';
 
-export type Évènements = {
+export type ÉvènementsParScénario = {
   [idScénario in IdScénario]: {
     heure: string;
     titre: string;
@@ -12,7 +12,9 @@ export type Évènements = {
   }[];
 };
 
-export const évènements: Évènements = {
+export type Évènement = ÉvènementsParScénario[IdScénario][number];
+
+export const évènementsParScénario: ÉvènementsParScénario = {
   entreprise: [
     {
       heure: '9h30',

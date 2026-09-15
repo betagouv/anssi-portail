@@ -1,6 +1,6 @@
 import type { IdRôle } from '../roles';
 
-export type Réflexes = {
+export type RéflexesParRôle = {
   [idRôle in IdRôle]: {
     proposition: {
       bonRéflexe: string;
@@ -13,7 +13,9 @@ export type Réflexes = {
   }[];
 };
 
-export const réflexes: Réflexes = {
+export type Réflexe = RéflexesParRôle[IdRôle][number];
+
+export const réflexesParRôle: RéflexesParRôle = {
   direction: [
     {
       proposition: {
