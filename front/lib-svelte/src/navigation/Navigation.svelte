@@ -43,7 +43,7 @@
     itemDeMenu(
       'Faire le test !',
       '/faire-le-test',
-      ['/faire-le-test', '/test-maturite', '/ma-maturite', '/session-groupe'].includes(cheminRelatif) ||
+      ['/faire-le-test', '/test-maturite', '/ma-maturite', '/session-groupe', '/exposition'].includes(cheminRelatif) ||
         cheminRelatif.startsWith('/vrai-faux')
     ),
 
