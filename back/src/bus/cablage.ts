@@ -51,6 +51,10 @@ import { UtilisateurConnecte } from './evenements/utilisateurConnecte.js';
 import { MiseAJourFavorisUtilisateur } from './miseAJourFavorisUtilisateur.js';
 import { notifieCommentaireAvisMesureDonneDansMessagerie } from './notifieCommentaireAvisMesureDonneDansMessagerie.js';
 import { notifieUnRetourNégatifSurMiniTest } from './notifieRetourNegatifSurMiniTest.js';
+import { SimulationRéflexesCyberRéponseSoumise } from './evenements/simulationReflexesCyberReponseSoumise.js';
+import { consigneRéflexesCyberReponseSoumiseDansJournal } from './consigneReflexesCyberReponseSoumiseDansJournal.js';
+import { consigneRéflexesCyberTerminéDansJournal } from './consigneReflexesCyberReponseTermineDansJournal.js';
+import { SimulationRéflexesCyberTerminé } from './evenements/simulationReflexesCyberTermine.js';
 
 export const cableTousLesAbonnes = ({
   busEvenements,
@@ -209,6 +213,24 @@ export const cableTousLesAbonnes = ({
   busEvenements.abonne(
     QuestionnaireVraiFauxTerminé,
     consigneQuestionnaireVraiFauxTermineDansJournal({
+      adaptateurJournal,
+      adaptateurHorloge,
+      adaptateurHachage,
+    })
+  );
+
+  busEvenements.abonne(
+    SimulationRéflexesCyberRéponseSoumise,
+    consigneRéflexesCyberReponseSoumiseDansJournal({
+      adaptateurJournal,
+      adaptateurHorloge,
+      adaptateurHachage,
+    })
+  );
+
+  busEvenements.abonne(
+    SimulationRéflexesCyberTerminé,
+    consigneRéflexesCyberTerminéDansJournal({
       adaptateurJournal,
       adaptateurHorloge,
       adaptateurHachage,
