@@ -5,8 +5,9 @@
   import ChoixRole from './ChoixRole.svelte';
   import ChoixScenario from './ChoixScenario.svelte';
   import MiseEnSituation from './MiseEnSituation.svelte';
+  import Simulation from './Simulation.svelte';
 
-  type Étape = 'scénario' | 'rôle' | 'mise-en-situation';
+  type Étape = 'scénario' | 'rôle' | 'mise-en-situation' | 'simulation';
   let étape: Étape = $state('scénario');
   let idScénarioSélectionné: IdScénario | undefined = $state();
   let idRôleSélectionné: IdRôle | undefined = $state();
@@ -34,38 +35,61 @@
   const confirmeRôle = () => {
     étape = 'mise-en-situation';
   };
+
+  const lanceSimulation = () => {
+    étape = 'simulation';
+  };
 </script>
 
 <div class="parcours-reflexe-cyber">
-  <dsfr-container>
-    <FilAriane
-      feuille="Réflexe cyber&nbsp;: comment réagirez-vous en cas de cyberattaque&nbsp;?"
-      branche={{ nom: 'Faire le test !', lien: '/faire-le-test' }}
-    />
-  </dsfr-container>
+  {#if étape === 'simulation'}
+    <dsfr-container>
+      <FilAriane
+        feuille="Réflexe cyber&nbsp;: comment réagirez-vous en cas de cyberattaque&nbsp;?"
+        branche={{ nom: 'Faire le test !', lien: '/faire-le-test' }}
+      />
+    </dsfr-container>
+    <Simulation scénario={scénarioSélectionné!} rôle={rôleSélectionné!} />
+  {:else}
+    <div class="etapes-preparatoires">
+      <dsfr-container>
+        <FilAriane
+          feuille="Réflexe cyber&nbsp;: comment réagirez-vous en cas de cyberattaque&nbsp;?"
+          branche={{ nom: 'Faire le test !', lien: '/faire-le-test' }}
+        />
+      </dsfr-container>
 
-  {#if étape === 'scénario'}
-    <ChoixScenario {scénarios} surChoix={choisitScénario} />
-  {:else if étape === 'rôle'}
-    <ChoixRole
-      {rôles}
-      rôleSélectionné={idRôleSélectionné}
-      surChoix={choisitRôle}
-      surÉtapePrécédente={reviensAuChoixDeScénario}
-      surÉtapeSuivante={confirmeRôle}
-    />
-  {:else if étape === 'mise-en-situation'}
-    <MiseEnSituation
-      scénario={scénarioSélectionné!}
-      rôle={rôleSélectionné!}
-      surModificationScénario={reviensAuChoixDeScénario}
-      surModificationRôle={reviensAuChoixDeRôle}
-    />
+      {#if étape === 'scénario'}
+        <ChoixScenario {scénarios} surChoix={choisitScénario} />
+      {:else if étape === 'rôle'}
+        <ChoixRole
+          {rôles}
+          rôleSélectionné={idRôleSélectionné}
+          surChoix={choisitRôle}
+          surÉtapePrécédente={reviensAuChoixDeScénario}
+          surÉtapeSuivante={confirmeRôle}
+        />
+      {:else if étape === 'mise-en-situation'}
+        <MiseEnSituation
+          scénario={scénarioSélectionné!}
+          rôle={rôleSélectionné!}
+          surModificationScénario={reviensAuChoixDeScénario}
+          surModificationRôle={reviensAuChoixDeRôle}
+          surLancement={lanceSimulation}
+        />
+      {/if}
+    </div>
   {/if}
 </div>
 
 <style lang="scss">
   .parcours-reflexe-cyber {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-default-grey);
+  }
+
+  .etapes-preparatoires {
     display: flex;
     flex-direction: column;
     background-color: var(--background-alt-blue-france);
