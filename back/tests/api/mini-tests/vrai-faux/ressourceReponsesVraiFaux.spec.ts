@@ -38,7 +38,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
     return request(serveur).post('/api/mini-tests/vrai-faux/reponses').send({
       idQuestion: 'idQuestion1',
       réponseUtilisateur: true,
-      idCorrélation: '1234567890',
+      idCorrélation: '01a0a561-2416-726f-84c5-7566d613ce98',
     });
   };
 
@@ -74,7 +74,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
       await request(serveur).post('/api/mini-tests/vrai-faux/reponses').set('Cookie', [cookieJeanneDupont]).send({
         idQuestion: 'idQuestion1',
         réponseUtilisateur: true,
-        idCorrélation: '1234567890',
+        idCorrélation: '01a0a561-2416-726f-84c5-7566d613ce98',
       });
 
       const événement = busÉvénements.recupereEvenement(QuestionnaireVraiFauxRéponseSoumise);
@@ -86,7 +86,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
       it("si auncun identifiant de question n'est fourni", async () => {
         const reponse = await request(serveur).post('/api/mini-tests/vrai-faux/reponses').send({
           réponseUtilisateur: true,
-          idCorrélation: '1234567890',
+          idCorrélation: '01a0a561-2416-726f-84c5-7566d613ce98',
         });
 
         expect(reponse.status).toBe(HttpStatusCode.BadRequest);
@@ -98,7 +98,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
           .send({
             idQuestion: new Array(101).fill('a'),
             réponseUtilisateur: true,
-            idCorrélation: '1234567890',
+            idCorrélation: '01a0a561-2416-726f-84c5-7566d613ce98',
           });
 
         expect(reponse.status).toBe(HttpStatusCode.BadRequest);
@@ -107,7 +107,7 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
       it("si auncune réponse utilisateur n'est fournie", async () => {
         const reponse = await request(serveur).post('/api/mini-tests/vrai-faux/reponses').send({
           idQuestion: 'idQuestion1',
-          idCorrélation: '1234567890',
+          idCorrélation: '01a0a561-2416-726f-84c5-7566d613ce98',
         });
 
         expect(reponse.status).toBe(HttpStatusCode.BadRequest);
@@ -122,13 +122,13 @@ describe('La ressource des réponses aux questionnaire Vrai-Faux', () => {
         expect(reponse.status).toBe(HttpStatusCode.BadRequest);
       });
 
-      it('si un identifiant de corrélation est trop long', async () => {
+      it("si un identifiant de corrélation n'est pas un uuidv7", async () => {
         const reponse = await request(serveur)
           .post('/api/mini-tests/vrai-faux/reponses')
           .send({
             idQuestion: 'idQuestion1',
             réponseUtilisateur: true,
-            idCorrélation: new Array(101).fill('a'),
+            idCorrélation: new Array(36).fill('a'),
           });
 
         expect(reponse.status).toBe(HttpStatusCode.BadRequest);

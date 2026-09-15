@@ -28,7 +28,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
 
   const posteUneRéponseValide = async () => {
     await request(serveur).post('/api/mini-tests/reflexes-cyber/reponses').send({
-      idCorrélation: 'idCorrélation',
+      idCorrélation: '01a0a561-2416-726f-84c5-7912f3dfb57e',
       idScénario: 'entreprise',
       idRôle: 'direction',
       numéroÉvènement: 1,
@@ -39,7 +39,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
   describe('sur une requête POST', () => {
     it('répond un 201', async () => {
       const reponse = await request(serveur).post('/api/mini-tests/reflexes-cyber/reponses').send({
-        idCorrélation: 'idCorrélation',
+        idCorrélation: '01a0a561-2416-726f-84c5-7912f3dfb57e',
         idScénario: 'collectivité',
         idRôle: 'direction',
         numéroÉvènement: 1,
@@ -51,7 +51,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
 
     it("répond une 400 si l'id scénario n'est pas valide", async () => {
       const reponse = await request(serveur).post('/api/mini-tests/reflexes-cyber/reponses').send({
-        idCorrélation: 'idCorrélation',
+        idCorrélation: '01a0a561-2416-726f-84c5-7912f3dfb57e',
         idScénario: 'mauvaisScénario',
         idRôle: 'direction',
         numéroÉvènement: 1,
@@ -63,7 +63,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
 
     it("répond une 400 si le numéro d'évènement n'est pas valide", async () => {
       const reponse = await request(serveur).post('/api/mini-tests/reflexes-cyber/reponses').send({
-        idCorrélation: 'idCorrélation',
+        idCorrélation: '01a0a561-2416-726f-84c5-7912f3dfb57e',
         idScénario: 'entreprise',
         idRôle: 'direction',
         numéroÉvènement: 1.5,
@@ -81,7 +81,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
 
     it('publie un événement de fin de simulation sur la dernière question', async () => {
       await request(serveur).post('/api/mini-tests/reflexes-cyber/reponses').send({
-        idCorrélation: 'idCorrélation',
+        idCorrélation: '01a0a561-2416-726f-84c5-7912f3dfb57e',
         idScénario: 'entreprise',
         idRôle: 'direction',
         numéroÉvènement: 6,
@@ -93,7 +93,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
 
     it("ne publie pas d'événement de fin de simulation si la réponse n'est pas la derniere", async () => {
       await request(serveur).post('/api/mini-tests/reflexes-cyber/reponses').send({
-        idCorrélation: 'idCorrélation',
+        idCorrélation: '01a0a561-2416-726f-84c5-7912f3dfb57e',
         idScénario: 'entreprise',
         idRôle: 'direction',
         numéroÉvènement: 4,
@@ -106,7 +106,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
     it("publie les informations de l’utilisateur si elles sont disponibles sur soumission d'une réponse", async () => {
       const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'token' });
       await request(serveur).post('/api/mini-tests/reflexes-cyber/reponses').set('Cookie', [cookieJeanneDupont]).send({
-        idCorrélation: 'idCorrélation',
+        idCorrélation: '01a0a561-2416-726f-84c5-7912f3dfb57e',
         idScénario: 'entreprise',
         idRôle: 'direction',
         numéroÉvènement: 4,
@@ -123,7 +123,7 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
     it('publie les informations de l’utilisateur si elles sont disponibles sur fin de simulation', async () => {
       const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'token' });
       await request(serveur).post('/api/mini-tests/reflexes-cyber/reponses').set('Cookie', [cookieJeanneDupont]).send({
-        idCorrélation: 'idCorrélation',
+        idCorrélation: '01a0a561-2416-726f-84c5-7912f3dfb57e',
         idScénario: 'entreprise',
         idRôle: 'direction',
         numéroÉvènement: 6,
