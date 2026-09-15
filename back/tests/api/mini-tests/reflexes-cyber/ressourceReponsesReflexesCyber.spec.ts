@@ -9,6 +9,7 @@ import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourL
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
 import { jeanneDupont } from '../../objetsPretsALEmploi.js';
+import { encodeSession } from '../../cookie.js';
 
 describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
   let serveur: Express;
@@ -100,6 +101,40 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
       });
 
       expect(busÉvénements.naPasRecuDEvenement(SimulationRéflexesCyberTerminé)).toBeTruthy();
+    });
+
+    it("publie les informations de l’utilisateur si elles sont disponibles sur soumission d'une réponse", async () => {
+      const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'token' });
+      await request(serveur).post('/api/mini-tests/reflexes-cyber/reponses').set('Cookie', [cookieJeanneDupont]).send({
+        idCorrélation: 'idCorrélation',
+        idScénario: 'entreprise',
+        idRôle: 'direction',
+        numéroÉvènement: 4,
+        réflexe: 'bon',
+      });
+
+      const événement = busÉvénements.recupereEvenement(SimulationRéflexesCyberRéponseSoumise);
+
+      expect(événement?.codeRegion).toBe('FR-971');
+      expect(événement?.codeSecteur).toBe('A');
+      expect(événement?.codeTrancheEffectif).toBe('11');
+    });
+
+    it('publie les informations de l’utilisateur si elles sont disponibles sur fin de simulation', async () => {
+      const cookieJeanneDupont = encodeSession({ email: jeanneDupont.email, token: 'token' });
+      await request(serveur).post('/api/mini-tests/reflexes-cyber/reponses').set('Cookie', [cookieJeanneDupont]).send({
+        idCorrélation: 'idCorrélation',
+        idScénario: 'entreprise',
+        idRôle: 'direction',
+        numéroÉvènement: 6,
+        réflexe: 'bon',
+      });
+
+      const événement = busÉvénements.recupereEvenement(SimulationRéflexesCyberTerminé);
+
+      expect(événement?.codeRegion).toBe('FR-971');
+      expect(événement?.codeSecteur).toBe('A');
+      expect(événement?.codeTrancheEffectif).toBe('11');
     });
   });
 });
