@@ -213,7 +213,7 @@ catalogs:
       version: 8.1.0
     isomorphic-dompurify:
       specifier: ^4.0.0
-      version: 4.1.0
+      version: 4.2.0
     prettier:
       specifier: 3.9.6
       version: 3.9.6
@@ -352,7 +352,7 @@ importers:
         version: 2.6.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.1.0(@noble/hashes@1.8.0)
+        version: 4.2.0(@noble/hashes@1.8.0)
       jsdom:
         specifier: ^30.0.0
         version: 30.0.1(@noble/hashes@1.8.0)
@@ -470,7 +470,7 @@ importers:
         version: 9.0.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.1.0(@noble/hashes@1.8.0)
+        version: 4.2.0(@noble/hashes@1.8.0)
     devDependencies:
       '@types/node':
         specifier: ^26.0.0
@@ -514,7 +514,7 @@ importers:
         version: 8.1.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.1.0(@noble/hashes@1.8.0)
+        version: 4.2.0(@noble/hashes@1.8.0)
       svelte:
         specifier: 'catalog:'
         version: 5.57.0(@typescript-eslint/types@8.70.0)
@@ -538,7 +538,7 @@ importers:
         version: 8.1.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.1.0(@noble/hashes@1.8.0)
+        version: 4.2.0(@noble/hashes@1.8.0)
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
@@ -599,7 +599,7 @@ importers:
         version: 9.0.0
       isomorphic-dompurify:
         specifier: 'catalog:'
-        version: 4.1.0(@noble/hashes@1.8.0)
+        version: 4.2.0(@noble/hashes@1.8.0)
     devDependencies:
       '@types/node':
         specifier: ^26.0.0
@@ -3008,8 +3008,8 @@ packages:
     resolution: {integrity: sha512-FFUtZMpoZ8RqHS3XeXEmHWLA4thH+ZxCv2lOiPIn1Xc7CxrqhWzNSDzD+/chS/zbYezmiwWLdQC09JdQKmthOw==}
     engines: {node: '>=20'}
 
-  isomorphic-dompurify@4.1.0:
-    resolution: {integrity: sha512-vjQwQSxyEkJHO6g+KIDlWj8swAzUB01pJu9GU9cLGHjE10d59GFzJkgtB2Lj5WTOoq9JeHlYjR/FFuqeopPO0Q==}
+  isomorphic-dompurify@4.2.0:
+    resolution: {integrity: sha512-0rp/dna3nh3lQNZrWRJTZzRS8rSYBFXq7zuDOMn0MiklhFyND8fQqQbAcVFv1MkRJ2xDhgR6G7E0bl1msYQKTQ==}
     engines: {node: ^22.22.2 || ^24.15.0 || >=26.0.0}
 
   jose@6.2.12:
@@ -6780,7 +6780,7 @@ snapshots:
 
   isexe@4.0.0: {}
 
-  isomorphic-dompurify@4.1.0(@noble/hashes@1.8.0):
+  isomorphic-dompurify@4.2.0(@noble/hashes@1.8.0):
     dependencies:
       dompurify: 3.4.15
       jsdom: 30.0.1(@noble/hashes@1.8.0)
