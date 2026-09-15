@@ -44,7 +44,7 @@
       'Faire le test !',
       '/faire-le-test',
       ['/faire-le-test', '/test-maturite', '/ma-maturite', '/session-groupe', '/exposition'].includes(cheminRelatif) ||
-        cheminRelatif.startsWith('/vrai-faux')
+        ['/vrai-faux', '/reflexe-cyber'].some((lien) => cheminRelatif.startsWith(lien))
     ),
 
     itemDeMenu(
