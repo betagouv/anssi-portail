@@ -1,13 +1,10 @@
 <script lang="ts">
+  import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import Bouton from '../../../../ui/Bouton.svelte';
   import type { Rôle } from '../roles';
-  import type { IdScénario, Scénario } from '../scenarios';
-
-  type Contexte = {
-    éléments: string[];
-    conclusion: string;
-    indicateur: string;
-  };
+  import type { Scénario } from '../scenarios';
+  import { évènements } from './evenements';
+  import { réflexes } from './reflexes';
 
   type Props = {
     scénario: Scénario;
@@ -16,25 +13,15 @@
 
   const { scénario, rôle }: Props = $props();
 
-  const contextes: Record<IdScénario, Contexte> = {
-    entreprise: {
-      éléments: [
-        'agendas bloqués,',
-        'secrétariat incapable de gérer les rendez-vous clients — un client menace de rompre son contrat après un rendez-vous en visio raté.',
-      ],
-      conclusion:
-        "Le système de paie et des fichiers internes (contrats, commandes) deviennent inaccessibles, et le site web tombe. Le technicien support investigue, sans résultat clair pour l'instant.",
-      indicateur: 'Commandes bloquées',
-    },
-    collectivité: {
-      éléments: ['agendas bloqués,', 'paie inaccessible,', 'application cantine hors service.'],
-      conclusion:
-        'Sur X, un administré interpelle publiquement la mairie et évoque une cyberattaque. Le technicien est sur le coup, mais sans résultat clair pour l’instant.',
-      indicateur: 'Démarches bloquées',
-    },
-  };
+  let évènementsduScénario = $derived(évènements[scénario.id]);
+  let réflexesDuRôle = $derived(réflexes[rôle.id]);
 
-  const contexte = $derived(contextes[scénario.id]);
+  const nombreÉvènementsTotaux = $derived(évènementsduScénario.length);
+  let numéroÉvènementCourant: number = $state(1);
+
+  let évènementCourant = $derived(évènementsduScénario[numéroÉvènementCourant - 1]);
+  let réflexeCourant = $derived(réflexesDuRôle[numéroÉvènementCourant - 1]);
+
   let actionsAffichées = $state(false);
 </script>
 
@@ -51,12 +38,12 @@
     class="progression"
     role="progressbar"
     aria-label="Progression de la simulation"
-    aria-valuenow="1"
+    aria-valuenow={numéroÉvènementCourant}
     aria-valuemin="1"
-    aria-valuemax="6"
+    aria-valuemax={nombreÉvènementsTotaux}
   >
-    {#each Array(6) as _, index (index)}
-      <span class:active={index === 0} aria-hidden="true"></span>
+    {#each Array(nombreÉvènementsTotaux) as _, index (index)}
+      <span class:active={index < numéroÉvènementCourant} aria-hidden="true"></span>
     {/each}
   </div>
 
@@ -69,18 +56,15 @@
       <div class="contenu-evenement">
         <div class="contexte">
           <div class="titre">
-            <dsfr-tag label="9h30" type="default" size="md" has-icon icon="time-fill"></dsfr-tag>
-            <h2 class="fr-h3" id="titre-evenement">Début de l’incident</h2>
+            <dsfr-tag label={évènementCourant.heure} type="default" size="md" has-icon icon="time-fill"></dsfr-tag>
+            <h2 class="fr-h3" id="titre-evenement">{évènementCourant.titre}</h2>
           </div>
 
           <div class="texte-evenement fr-text--md">
-            <p>Les premières alertes arrivent en cascade&nbsp;:</p>
-            <ul>
-              {#each contexte.éléments as élément (élément)}
-                <li>{élément}</li>
-              {/each}
-            </ul>
-            <p>{contexte.conclusion}</p>
+            {#each évènementCourant.contexte as élément (élément)}
+              <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+              <p>{@html aseptiseHtml(élément)}</p>
+            {/each}
           </div>
         </div>
 
@@ -94,11 +78,11 @@
             <div class="options" role="radiogroup" aria-label="Réflexes proposés">
               <label>
                 <input type="radio" name="reflexe" value="option-1" />
-                <span>Libellé</span>
+                <span>{réflexeCourant.proposition.bonRéflexe}</span>
               </label>
               <label>
                 <input type="radio" name="reflexe" value="option-2" />
-                <span>Libellé</span>
+                <span>{réflexeCourant.proposition.mauvaisRéflexe}</span>
               </label>
             </div>
           </div>
@@ -118,7 +102,9 @@
     </section>
 
     <aside class="indicateur-crise" aria-label="État de la crise">
-      <p class="fr-text--xs">{contexte.indicateur}</p>
+      <p class="fr-text--xs">
+        {scénario.labelMétrique}
+      </p>
       <strong class="fr-h4">0</strong>
       <span class="fr-icon-error-warning-line" aria-hidden="true"></span>
     </aside>
@@ -231,13 +217,8 @@
             .texte-evenement {
               width: 100%;
 
-              p,
-              ul {
+              p {
                 margin: 0 0 1.5rem;
-              }
-
-              ul {
-                padding-left: 1.5rem;
               }
 
               > :last-child {
