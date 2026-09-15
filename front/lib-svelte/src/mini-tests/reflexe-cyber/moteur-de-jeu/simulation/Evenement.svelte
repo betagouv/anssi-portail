@@ -14,6 +14,7 @@
   let { évènement, réflexe, rôle }: Props = $props();
 
   let actionsMasquées = $state(true);
+  let statutRéflexe = $state<'en attente' | 'bon' | 'mauvais' | 'temps écoulé'>('en attente');
 </script>
 
 <div class="contexte">
@@ -56,7 +57,21 @@
     <div class="barre-temps" aria-hidden="true"></div>
   </div>
 
-  <dsfr-alert title="Bon réflexe !" text="Description" type="success" size="md" has-description></dsfr-alert>
+  {#if statutRéflexe === 'bon'}
+    <dsfr-alert title="Bon réflexe !" text={réflexe.conséquence.bonRéflexe} type="success" size="md" has-description
+    ></dsfr-alert>
+  {:else if statutRéflexe === 'mauvais'}
+    <dsfr-alert title="Mauvais réflexe" text={réflexe.conséquence.mauvaisRéflexe} type="error" size="md" has-description
+    ></dsfr-alert>
+  {:else if statutRéflexe === 'temps écoulé'}
+    <dsfr-alert
+      title="Temps écoulé"
+      text="Le temps imparti est écoulé. En situation de crise, l’absence de décision laisse les impacts s’aggraver : ce tour est compté comme un mauvais réflexe."
+      type="error"
+      size="md"
+      has-description
+    ></dsfr-alert>
+  {/if}
 
   <Bouton libelle="Événement suivant" taille="md" />
 {/if}
