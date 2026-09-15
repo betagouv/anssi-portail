@@ -1,11 +1,11 @@
 import { HttpStatusCode } from '@anssi-portail/axios';
 import { Router } from 'express';
+import z from 'zod';
+import { RéflexesCyber } from '../../../metier/mini-tests/reflexes-cyber/reflexesCyber.js';
+import { ConfigurationServeur } from '../../configurationServeur.js';
 import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { valideCorpsRequete } from '../../zod.js';
 import { schemaPostRéponsesRéflexesCyber } from './ressourceReponsesReflexesCyber.schema.js';
-import { ConfigurationServeur } from '../../configurationServeur.js';
-import { SimulationRéflexesCyberRéponseSoumise } from '../../../bus/evenements/simulationReflexesCyberReponseSoumise.js';
-import z from 'zod';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
 
 export const ressourceRéponsesRéflexesCyber = ({ busEvenements }: ConfigurationServeur) => {
@@ -14,8 +14,16 @@ export const ressourceRéponsesRéflexesCyber = ({ busEvenements }: Configuratio
     '/',
     valideCorpsRequete(schemaPostRéponsesRéflexesCyber),
     filetRouteAsynchrone(
-      async (request: CorpsDeRequeteTypee<z.output<typeof schemaPostRéponsesRéflexesCyber>>, reponse) => {
-        await busEvenements.publie(new SimulationRéflexesCyberRéponseSoumise(request.body));
+      async (requête: CorpsDeRequeteTypee<z.output<typeof schemaPostRéponsesRéflexesCyber>>, reponse) => {
+        const simulation = new RéflexesCyber();
+        await simulation.consommeLaRéponse({
+          busÉvénements: busEvenements,
+          idCorrélation: requête.body.idCorrélation,
+          idScénario: requête.body.idScénario,
+          idRôle: requête.body.idRôle,
+          numéroÉvènement: requête.body.numéroÉvènement,
+          réflexe: requête.body.réflexe,
+        });
         return reponse.sendStatus(HttpStatusCode.Created);
       }
     )
