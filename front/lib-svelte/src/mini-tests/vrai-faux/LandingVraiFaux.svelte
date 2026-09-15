@@ -2,6 +2,7 @@
   import type { PropriétésFilAriane } from '../../ui/filAriane';
 
   import HerosRiche from '../../ui/HerosRiche.svelte';
+  import Lien from '../../ui/Lien.svelte';
 
   import IllustrationHerosVraiFaux from './IllustrationHerosVraiFaux.svelte';
 
@@ -31,7 +32,7 @@
   {/snippet}
 
   {#snippet actions()}
-    <dsfr-button label="Démarrer le quiz" kind="primary" size="lg" href="/vrai-faux/quiz" markup="a"></dsfr-button>
+    <Lien apparence="bouton" libelle="Démarrer le quiz" taille="lg" href="/vrai-faux/quiz" />
   {/snippet}
 </HerosRiche>
 
