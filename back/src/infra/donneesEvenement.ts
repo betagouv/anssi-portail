@@ -3,6 +3,7 @@ import { MesureConsultee } from '../bus/evenements/mesureConsultee.js';
 import { MesurePriseEnCompte } from '../bus/evenements/mesurePriseEnCompte.js';
 import { ModuleTermine } from '../bus/evenements/moduleTermine.js';
 import { SimulationRéflexesCyberRéponseSoumise } from '../bus/evenements/simulationReflexesCyberReponseSoumise.js';
+import { SimulationRéflexesCyberTerminé } from '../bus/evenements/simulationReflexesCyberTermine.js';
 import { FacteurAggravant, Secteur, TypeOrganisation } from '../metier/mini-tests/exposition/exposition.js';
 import { ReponsesEtResultatAvecAnalyse } from '../metier/nis2-simulateur/questionnaire/calculEligibilite.js';
 import { NiveauDeSatisfaction } from '../metier/niveauDeSatisfaction.js';
@@ -37,7 +38,8 @@ export type DonneesEvenement =
   | DonnéesRetourTestExposition
   | DonneesQuestionnaireVraiFauxReponseSoumise
   | DonneesQuestionnaireVraiFauxTerminé
-  | DonneesSimulationRéflexesCyberReponseSoumise;
+  | DonneesSimulationRéflexesCyberReponseSoumise
+  | DonneesSimulationRéflexesCyberTermine;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -178,5 +180,10 @@ type DonneesQuestionnaireVraiFauxTerminé = Evenement<
 
 type DonneesSimulationRéflexesCyberReponseSoumise = Evenement<
   'SIMULATION_REFLEXES_CYBER_REPONSE_SOUMISE',
-  Omit<SimulationRéflexesCyberRéponseSoumise, 'email'> & { idUtilisateur: string }
+  Omit<SimulationRéflexesCyberRéponseSoumise, 'email'> & { idUtilisateur?: string }
+>;
+
+type DonneesSimulationRéflexesCyberTermine = Evenement<
+  'SIMULATION_REFLEXES_CYBER_TERMINEE',
+  Omit<SimulationRéflexesCyberTerminé, 'email'> & { idUtilisateur?: string }
 >;
