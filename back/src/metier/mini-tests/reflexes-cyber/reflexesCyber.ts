@@ -6,6 +6,10 @@ import { CodeSecteur } from '../../referentielSecteurs.js';
 import { CodeTrancheEffectif } from '../../referentielTranchesEffectifEtablissement.js';
 import { Utilisateur } from '../../utilisateur.js';
 
+export type Scénario = 'entreprise' | 'collectivité';
+export type Rôle = 'direction' | 'si' | 'communication' | 'juridique' | 'rh' | 'relations';
+export type Réflexe = 'bon' | 'mauvais' | 'aucun';
+
 export class RéflexesCyber {
   private readonly NUMÉRO_ÉVÉNEMENT_FIN_SIMULATION = 6;
   consommeLaRéponse = async ({
@@ -19,10 +23,10 @@ export class RéflexesCyber {
   }: {
     busÉvénements: BusEvenements;
     idCorrélation: string;
-    idScénario: 'entreprise' | 'collectivité';
-    idRôle: 'direction' | 'si' | 'communication' | 'juridique' | 'rh' | 'relations';
+    idScénario: Scénario;
+    idRôle: Rôle;
     numéroÉvènement: number;
-    réflexe: 'bon' | 'mauvais' | 'aucun';
+    réflexe: Réflexe;
     utilisateur?: Utilisateur;
   }) => {
     let email: string | undefined;
