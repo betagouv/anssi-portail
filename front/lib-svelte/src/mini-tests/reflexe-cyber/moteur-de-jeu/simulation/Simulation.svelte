@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Bouton from '../../../ui/Bouton.svelte';
-  import type { Rôle } from '../roles';
-  import type { IdScénario, Scénario } from '../scenarios';
+  import Bouton from '../../../../ui/Bouton.svelte';
+  import type { Rôle } from '../../roles';
+  import type { IdScénario, Scénario } from '../../scenarios';
 
   type Contexte = {
     éléments: string[];
@@ -126,7 +126,7 @@
 </dsfr-container>
 
 <style lang="scss">
-  @use '../../../../../assets/styles/responsive' as *;
+  @use '../../../../../../assets/styles/responsive' as *;
 
   dsfr-container {
     padding-bottom: 4.5rem;
