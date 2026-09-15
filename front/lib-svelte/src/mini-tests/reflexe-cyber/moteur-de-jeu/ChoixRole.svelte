@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import Bouton from '../../../ui/Bouton.svelte';
   import type { IdRôle, Rôle } from '../roles';
 
@@ -25,12 +25,30 @@
     suivantDésactivé = piste.scrollLeft >= positionMaximale - 1;
   };
 
+  const positionneSurRôleSélectionné = () => {
+    const indexRôleSélectionné = rôles.findIndex(({ id }) => id === rôleSélectionné);
+    const carteSélectionnée = piste?.querySelectorAll<HTMLElement>('[data-carte-role]')[indexRôleSélectionné];
+    if (!piste || !carteSélectionnée) return;
+
+    const limitesPiste = piste.getBoundingClientRect();
+    const limitesCarte = carteSélectionnée.getBoundingClientRect();
+
+    if (limitesCarte.left < limitesPiste.left) {
+      piste.scrollLeft -= limitesPiste.left - limitesCarte.left;
+    } else if (limitesCarte.right > limitesPiste.right) {
+      piste.scrollLeft += limitesCarte.right - limitesPiste.right;
+    }
+  };
+
   onMount(() => {
     if (!piste) return;
 
     const observateur = new ResizeObserver(metÀJourFlèches);
     observateur.observe(piste);
-    metÀJourFlèches();
+    void tick().then(() => {
+      positionneSurRôleSélectionné();
+      metÀJourFlèches();
+    });
 
     return () => observateur.disconnect();
   });
