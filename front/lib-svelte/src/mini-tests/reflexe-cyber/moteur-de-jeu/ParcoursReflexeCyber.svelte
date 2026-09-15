@@ -5,7 +5,7 @@
   import ChoixRole from './ChoixRole.svelte';
   import ChoixScenario from './ChoixScenario.svelte';
   import MiseEnSituation from './MiseEnSituation.svelte';
-  import Simulation from './Simulation.svelte';
+  import Simulation from './simulation/Simulation.svelte';
 
   type Étape = 'scénario' | 'rôle' | 'mise-en-situation' | 'simulation';
   let étape: Étape = $state('scénario');
