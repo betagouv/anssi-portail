@@ -12,6 +12,7 @@ export class ConsignateurDeComparaisonDeFinancements {
 <thead>
 <tr>
 <th>Identifiant</th>
+<th>Identifiant externe</th>
 <th>Nom</th>
 <th>Bénéficiares</th>
 <th>Condition</th>
@@ -35,6 +36,7 @@ ${contenuDuTableau}</tbody>
   private construisUneLigneAjout(financement: Financement) {
     return `<tr>
 ${this.construisUneCelluleAvecLeContenu(`+ ${financement.id}`)}
+${this.construisUneCelluleAvecLeContenu(`+ ${financement.idExterne}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${financement.nom}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${financement.benificiaires}`)}
 ${this.construisUneCelluleAvecLeContenu(`+ ${financement.condition}`)}
@@ -55,6 +57,7 @@ ${this.construisUneCelluleAvecLeContenu(`+ ${financement.typesDeFinancement.join
   private construisUneLigneSuppression(financement: Financement) {
     return `<tr>
 ${this.construisUneCelluleAvecLeContenu(`- ${financement.id}`)}
+${this.construisUneCelluleAvecLeContenu(`- ${financement.idExterne}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${financement.nom}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${financement.benificiaires}`)}
 ${this.construisUneCelluleAvecLeContenu(`- ${financement.condition}`)}
@@ -75,6 +78,7 @@ ${this.construisUneCelluleAvecLeContenu(`- ${financement.typesDeFinancement.join
   private construisUneLigneModification({ cible, source }: { source: Financement; cible: Financement }) {
     return `<tr>
 ${this.construisUneCelluleDeDiff(source.id, cible.id)}
+${this.construisUneCelluleDeDiff(source.idExterne ?? '', cible.idExterne ?? '')}
 ${this.construisUneCelluleDeDiff(source.nom, cible.nom)}
 ${this.construisUneCelluleDeDiff(source.benificiaires, cible.benificiaires)}
 ${this.construisUneCelluleDeDiff(source.condition, cible.condition)}
