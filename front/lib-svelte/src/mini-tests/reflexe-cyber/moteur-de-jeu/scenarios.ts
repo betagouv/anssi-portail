@@ -7,6 +7,7 @@ export type Scénario = {
   titre: string;
   description: string;
   image: { src: string; alt: string };
+  labelMétrique: string;
 };
 
 export const scénarios: Scénario[] = [
@@ -19,6 +20,7 @@ export const scénarios: Scénario[] = [
       src: `${cheminAssets}/scenario-collectivite.avif`,
       alt: 'Équipe municipale réunie dans une mairie',
     },
+    labelMétrique: 'Démarches bloquées',
   },
   {
     id: 'entreprise',
@@ -29,5 +31,6 @@ export const scénarios: Scénario[] = [
       src: `${cheminAssets}/scenario-entreprise.avif`,
       alt: 'Équipe réunie dans un entrepôt logistique',
     },
+    labelMétrique: 'Commandes bloquées',
   },
 ];

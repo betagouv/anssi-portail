@@ -1,22 +1,31 @@
 <script lang="ts">
   import FilAriane from '../../../ui/FilAriane.svelte';
-  import { scénarios, type IdScénario } from '../scenarios';
-  import { rôles, type IdRôle } from '../roles';
+  import { scénarios, type IdScénario } from './scenarios';
+  import { rôles, type IdRôle } from './roles';
   import ChoixRole from './ChoixRole.svelte';
   import ChoixScenario from './ChoixScenario.svelte';
+  import MiseEnSituation from './MiseEnSituation.svelte';
+  import Simulation from './simulation/Simulation.svelte';
 
-  type Étape = 'scénario' | 'rôle';
+  type Étape = 'scénario' | 'rôle' | 'mise-en-situation' | 'simulation';
   let étape: Étape = $state('scénario');
-  let _idScénarioSélectionné: IdScénario | undefined = $state();
+  let idScénarioSélectionné: IdScénario | undefined = $state();
   let idRôleSélectionné: IdRôle | undefined = $state();
 
+  const scénarioSélectionné = $derived(scénarios.find(({ id }) => id === idScénarioSélectionné));
+  const rôleSélectionné = $derived(rôles.find(({ id }) => id === idRôleSélectionné));
+
   const choisitScénario = (id: IdScénario) => {
-    _idScénarioSélectionné = id;
+    idScénarioSélectionné = id;
     étape = 'rôle';
   };
 
-  const reviensAuScénario = () => {
+  const reviensAuChoixDeScénario = () => {
     étape = 'scénario';
+  };
+
+  const reviensAuChoixDeRôle = () => {
+    étape = 'rôle';
   };
 
   const choisitRôle = (id: IdRôle) => {
@@ -24,11 +33,15 @@
   };
 
   const confirmeRôle = () => {
-    // TODO : À implémenter
+    étape = 'mise-en-situation';
+  };
+
+  const lanceSimulation = () => {
+    étape = 'simulation';
   };
 </script>
 
-<div class="parcours-reflexe-cyber">
+<div class="parcours-reflexe-cyber" class:simulation={étape === 'simulation'}>
   <dsfr-container>
     <FilAriane
       feuille="Réflexe cyber&nbsp;: comment réagirez-vous en cas de cyberattaque&nbsp;?"
@@ -43,9 +56,19 @@
       {rôles}
       rôleSélectionné={idRôleSélectionné}
       surChoix={choisitRôle}
-      surÉtapePrécédente={reviensAuScénario}
+      surÉtapePrécédente={reviensAuChoixDeScénario}
       surÉtapeSuivante={confirmeRôle}
     />
+  {:else if étape === 'mise-en-situation'}
+    <MiseEnSituation
+      scénario={scénarioSélectionné!}
+      rôle={rôleSélectionné!}
+      surModificationScénario={reviensAuChoixDeScénario}
+      surModificationRôle={reviensAuChoixDeRôle}
+      surLancement={lanceSimulation}
+    />
+  {:else if étape === 'simulation'}
+    <Simulation scénario={scénarioSélectionné!} rôle={rôleSélectionné!} />
   {/if}
 </div>
 
@@ -54,5 +77,9 @@
     display: flex;
     flex-direction: column;
     background-color: var(--background-alt-blue-france);
+
+    &.simulation {
+      background-color: var(--background-default-grey);
+    }
   }
 </style>
