@@ -39,7 +39,8 @@ export type DonneesEvenement =
   | DonneesQuestionnaireVraiFauxReponseSoumise
   | DonneesQuestionnaireVraiFauxTerminé
   | DonneesSimulationRéflexesCyberReponseSoumise
-  | DonneesSimulationRéflexesCyberTermine;
+  | DonneesSimulationRéflexesCyberTermine
+  | DonnéesRetourTestReflexesCyber;
 
 type Evenement<Type extends string, Donnees extends object> = {
   donnees: Donnees;
@@ -153,6 +154,10 @@ type DonnéesParcoursCompletTerminé = Evenement<'PARCOURS_COMPLET_TERMINÉ', { 
 type DonnéesRetourTestMaturité = Evenement<'RETOUR_TEST_MATURITE_DONNE', { retour: string; commentaire?: string }>;
 type DonnéesRetourTestVraiFaux = Evenement<'RETOUR_TEST_VRAI_FAUX_DONNÉ', { retour: string; commentaire?: string }>;
 type DonnéesRetourTestExposition = Evenement<'RETOUR_TEST_EXPOSITION_DONNÉ', { retour: string; commentaire?: string }>;
+type DonnéesRetourTestReflexesCyber = Evenement<
+  'RETOUR_TEST_REFLEXES_CYBER_DONNÉ',
+  { retour: string; commentaire?: string }
+>;
 
 type DonneesQuestionnaireVraiFauxReponseSoumise = Evenement<
   'QUESTIONNAIRE_VRAI_FAUX_REPONSE_SOUMISE',
