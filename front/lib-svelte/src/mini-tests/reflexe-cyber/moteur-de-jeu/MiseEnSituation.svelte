@@ -9,9 +9,10 @@
     rôle: Rôle;
     surModificationScénario: () => void;
     surModificationRôle: () => void;
+    surLancement: () => void;
   };
 
-  const { scénario, rôle, surModificationScénario, surModificationRôle }: Props = $props();
+  const { scénario, rôle, surModificationScénario, surModificationRôle, surLancement }: Props = $props();
 
   const modifieScénario = (événement: MouseEvent | KeyboardEvent) => {
     événement.preventDefault();
@@ -55,7 +56,7 @@
       accent="purple-glycine"
     ></dsfr-callout>
 
-    <Bouton libelle="Lancer la simulation" taille="lg" />
+    <Bouton libelle="Lancer la simulation" taille="lg" surClic={surLancement} />
 
     <div class="comment-jouer">
       <h3 class="fr-h6">Comment jouer&nbsp;?</h3>
