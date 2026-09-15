@@ -1,8 +1,8 @@
 <script lang="ts">
   import { clic } from '../../../directives/actions.svelte';
   import Bouton from '../../../ui/Bouton.svelte';
-  import type { Rôle } from '../roles';
-  import type { Scénario } from '../scenarios';
+  import type { Rôle } from './roles';
+  import type { Scénario } from './scenarios';
 
   type Props = {
     scénario: Scénario;

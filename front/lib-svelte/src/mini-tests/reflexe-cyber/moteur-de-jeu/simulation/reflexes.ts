@@ -1,4 +1,4 @@
-import type { IdRôle } from '../../roles';
+import type { IdRôle } from '../roles';
 
 export type Réflexes = {
   [idRôle in IdRôle]: {
