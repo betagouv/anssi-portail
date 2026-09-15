@@ -1,7 +1,7 @@
 <script lang="ts">
   import FilAriane from '../../../ui/FilAriane.svelte';
-  import { scénarios, type IdScénario } from '../scenarios';
-  import { rôles, type IdRôle } from '../roles';
+  import { scénarios, type IdScénario } from './scenarios';
+  import { rôles, type IdRôle } from './roles';
   import ChoixRole from './ChoixRole.svelte';
   import ChoixScenario from './ChoixScenario.svelte';
   import MiseEnSituation from './MiseEnSituation.svelte';

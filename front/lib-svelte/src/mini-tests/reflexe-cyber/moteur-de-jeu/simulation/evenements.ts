@@ -1,5 +1,5 @@
-import type { IdScénario } from '../../scenarios';
-import type { IdRôle } from '../../roles';
+import type { IdScénario } from '../scenarios';
+import type { IdRôle } from '../roles';
 
 export type Évènements = {
   [idScénario in IdScénario]: {

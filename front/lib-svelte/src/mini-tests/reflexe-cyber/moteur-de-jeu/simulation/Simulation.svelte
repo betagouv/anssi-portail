@@ -1,7 +1,7 @@
 <script lang="ts">
   import Bouton from '../../../../ui/Bouton.svelte';
-  import type { Rôle } from '../../roles';
-  import type { IdScénario, Scénario } from '../../scenarios';
+  import type { Rôle } from '../roles';
+  import type { IdScénario, Scénario } from '../scenarios';
 
   type Contexte = {
     éléments: string[];
