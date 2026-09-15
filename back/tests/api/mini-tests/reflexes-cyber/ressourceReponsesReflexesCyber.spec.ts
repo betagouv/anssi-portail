@@ -3,11 +3,12 @@ import { Express } from 'express';
 import request from 'supertest';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { creeServeur } from '../../../../src/api/msc.js';
+import { SimulationRéflexesCyberRéponseSoumise } from '../../../../src/bus/evenements/simulationReflexesCyberReponseSoumise.js';
+import { SimulationRéflexesCyberTerminé } from '../../../../src/bus/evenements/simulationReflexesCyberTermine.js';
 import { fabriqueBusPourLesTests, MockBusEvenement } from '../../../bus/busPourLesTests.js';
 import { EntrepotUtilisateurMemoire } from '../../../persistance/entrepotUtilisateurMemoire.js';
 import { configurationDeTestDuServeur } from '../../fauxObjets.js';
 import { jeanneDupont } from '../../objetsPretsALEmploi.js';
-import { SimulationRéflexesCyberRéponseSoumise } from '../../../../src/bus/evenements/simulationReflexesCyberReponseSoumise.js';
 
 describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
   let serveur: Express;
@@ -75,6 +76,30 @@ describe('La ressource des réponses à la simulation Réflexes Cyber', () => {
       await posteUneRéponseValide();
 
       expect(busÉvénements.aRecuUnEvenement(SimulationRéflexesCyberRéponseSoumise)).toBeTruthy();
+    });
+
+    it('publie un événement de fin de simulation sur la dernière question', async () => {
+      await request(serveur).post('/api/mini-tests/reflexes-cyber/reponses').send({
+        idCorrélation: 'idCorrélation',
+        idScénario: 'entreprise',
+        idRôle: 'direction',
+        numéroÉvènement: 6,
+        réflexe: 'bon',
+      });
+
+      expect(busÉvénements.aRecuUnEvenement(SimulationRéflexesCyberTerminé)).toBeTruthy();
+    });
+
+    it("ne publie pas d'événement de fin de simulation si la réponse n'est pas la derniere", async () => {
+      await request(serveur).post('/api/mini-tests/reflexes-cyber/reponses').send({
+        idCorrélation: 'idCorrélation',
+        idScénario: 'entreprise',
+        idRôle: 'direction',
+        numéroÉvènement: 4,
+        réflexe: 'bon',
+      });
+
+      expect(busÉvénements.naPasRecuDEvenement(SimulationRéflexesCyberTerminé)).toBeTruthy();
     });
   });
 });
