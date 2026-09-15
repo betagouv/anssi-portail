@@ -13,6 +13,7 @@ export class Financement {
   condition: string;
   sources: string[];
   contact: string;
+  idExterne: number | undefined;
 
   constructor({
     id,
@@ -29,6 +30,7 @@ export class Financement {
     condition,
     sources,
     contact,
+    idExterne,
   }: {
     id: number;
     nom: string;
@@ -44,6 +46,7 @@ export class Financement {
     condition: string;
     sources: string[];
     contact: string;
+    idExterne: number | undefined;
   }) {
     this.id = id;
     this.nom = nom;
@@ -59,6 +62,7 @@ export class Financement {
     this.sources = sources;
     this.contact = contact;
     this.regions = regions;
+    this.idExterne = idExterne;
   }
 }
 

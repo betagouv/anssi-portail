@@ -18,6 +18,7 @@ export type FinancementGrist = {
     Region: string | null;
     Contact: string | null;
     Source: string | null;
+    ID_Aides_entreprises: number | null;
   };
 };
 
@@ -92,5 +93,6 @@ export class EntrepotFinancementGrist implements EntrepotFinancement {
       sources: fields.Source ? [fields.Source] : [],
       contact: fields.Contact ?? '',
       regions: fields.Region ? [fields.Region] : [],
+      idExterne: fields.ID_Aides_entreprises ?? undefined,
     });
 }
