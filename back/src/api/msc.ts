@@ -286,6 +286,7 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     'faire-le-test',
     'vrai-faux',
     'vrai-faux/quiz',
+    'reflexe-cyber',
     'exposition',
   ];
 
