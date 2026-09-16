@@ -21,6 +21,10 @@
 
   let évènementCourant: Évènement = $derived(évènementsDuScénario[numéroÉvènementCourant - 1]);
   let réflexeCourant: Réflexe = $derived(réflexesDuRôle[numéroÉvènementCourant - 1]);
+
+  const passeÉvènementSuivant = () => {
+    numéroÉvènementCourant++;
+  };
 </script>
 
 <dsfr-container class="simulation-contenu">
@@ -41,7 +45,12 @@
       </div>
 
       <div class="contenu-evenement">
-        <Evenement {rôle} évènement={évènementCourant} réflexe={réflexeCourant} />
+        <Evenement
+          {rôle}
+          évènement={évènementCourant}
+          réflexe={réflexeCourant}
+          surÉvènementSuivant={passeÉvènementSuivant}
+        />
       </div>
     </section>
 
