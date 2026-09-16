@@ -2,6 +2,7 @@
   import { estServeur } from '$plateforme/environnement';
   import { type Snippet } from 'svelte';
   import Reactions from '../ui/Reactions.svelte';
+  import type { CouleurDeBadge } from '../ui/badge.type';
 
   type Props = {
     couleurDeFond: string;
@@ -10,7 +11,7 @@
     titre: string;
     href: string;
     réactions: Record<string, number>;
-    badge: { libellé: string | undefined; accent: string };
+    badge: { libellé: string | undefined; accent: CouleurDeBadge };
     estimationEnMinutes?: number;
   };
   let { couleurDeFond, cible, image, titre, href, réactions, badge, estimationEnMinutes }: Props = $props();
