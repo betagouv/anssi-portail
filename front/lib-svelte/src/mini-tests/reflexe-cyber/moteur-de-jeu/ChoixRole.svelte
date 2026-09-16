@@ -73,6 +73,7 @@
       role="radiogroup"
       aria-label="Sélectionnez votre rôle"
       onscroll={metÀJourFlèches}
+      tabindex="-1"
     >
       {#each rôles as rôle (rôle.id)}
         <label class="carte-role" class:selectionnee={rôleSélectionné === rôle.id} data-carte-role>
