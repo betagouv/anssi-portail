@@ -1,6 +1,7 @@
 <script lang="ts">
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
   import Bouton from '../../../../ui/Bouton.svelte';
+  import CanonAConfetti from '../../../../ui/CanonAConfetti.svelte';
   import type { Rôle } from '../roles';
   import type { Évènement } from './evenements';
   import type { Réflexe } from './reflexes';
@@ -71,6 +72,7 @@
   {#if statutRéflexe === 'bon'}
     <dsfr-alert title="Bon réflexe !" text={réflexe.conséquence.bonRéflexe} type="success" size="md" has-description
     ></dsfr-alert>
+    <CanonAConfetti lectureAutomatique />
   {:else if statutRéflexe === 'mauvais'}
     <dsfr-alert title="Mauvais réflexe" text={réflexe.conséquence.mauvaisRéflexe} type="error" size="md" has-description
     ></dsfr-alert>
@@ -84,7 +86,9 @@
     ></dsfr-alert>
   {/if}
 
-  <Bouton libelle="Événement suivant" taille="md" />
+  {#if statutRéflexe !== 'en attente'}
+    <Bouton libelle="Événement suivant" taille="md" />
+  {/if}
 {/if}
 
 <style lang="scss">
