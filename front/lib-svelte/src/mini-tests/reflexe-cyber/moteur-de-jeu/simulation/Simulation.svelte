@@ -55,11 +55,13 @@
     </section>
 
     <aside class="indicateur-crise" aria-label="État de la crise">
-      <p class="fr-text--xs">
-        {scénario.labelMétrique}
-      </p>
-      <strong class="fr-h4">0</strong>
-      <span class="fr-icon-error-warning-line" aria-hidden="true"></span>
+      <div class="metriques-bloquees">
+        <p class="texte-mention-xs">
+          {scénario.labelMétrique}
+        </p>
+        <lab-anssi-icone nom="error-warning-line" taille="lg"></lab-anssi-icone>
+        <strong class="fr-h4">78</strong>
+      </div>
     </aside>
   </div>
 </dsfr-container>
@@ -132,33 +134,37 @@
         top: 2.5rem;
         display: none;
         align-self: start;
-        min-height: 5.75rem;
         box-sizing: border-box;
-        padding: 1rem;
-        color: var(--text-default-warning);
-        background-color: var(--background-contrast-warning);
+        padding-left: 1.5rem;
 
         @include a-partir-de(md) {
           display: block;
         }
 
-        p {
-          margin: 0;
-          color: inherit;
-          font-weight: 700;
-          text-transform: uppercase;
-        }
+        .metriques-bloquees {
+          padding: 1rem;
+          color: var(--text-default-warning);
+          background-color: var(--background-contrast-warning);
+          display: grid;
+          grid-template-columns: 1fr auto;
+          grid-column-gap: 1rem;
 
-        strong {
-          margin: 0;
-          color: inherit;
-        }
+          p {
+            margin: 0;
+            color: inherit;
+            font-weight: 700;
+            text-transform: uppercase;
+          }
 
-        span {
-          position: absolute;
-          top: 1rem;
-          right: 1rem;
-          font-size: 2rem;
+          strong {
+            margin: 0;
+            color: inherit;
+          }
+
+          lab-anssi-icone {
+            grid-row: 1 / span 2;
+            grid-column: 2;
+          }
         }
       }
     }
