@@ -7,7 +7,7 @@
 
   import IllustrationHerosVraiFaux from './IllustrationHerosVraiFaux.svelte';
 
-  const { mode, suivant, urlBase = '' }: { mode?: 'autonome'; suivant: () => void; urlBase: string } = $props();
+  const { mode, suivant, urlBase = '' }: { mode?: 'autonome'; suivant?: () => void; urlBase?: string } = $props();
 
   const propriétésFilAriane: PropriétésFilAriane | undefined = $derived(
     mode === 'autonome'

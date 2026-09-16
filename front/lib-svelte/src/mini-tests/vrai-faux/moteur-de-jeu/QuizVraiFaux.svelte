@@ -22,7 +22,7 @@
   import Question from './question/Question.svelte';
   import ReponseVraiFaux from './ReponseVraiFaux.svelte';
 
-  let { urlBase = '' }: { urlBase: string } = $props();
+  let { urlBase = '' }: { urlBase?: string } = $props();
 
   const idCorrélation = uuidv7();
   let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' | 'score-final' = $state('question');
