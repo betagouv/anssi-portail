@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { Action } from 'svelte/action';
   import BoutonDeVote from './BoutonDeVote.svelte';
+  import { onMount } from 'svelte';
+  import { détecteRendu } from '../../../../utils/rendu.svelte';
 
   interface Props {
     question: string;
@@ -30,6 +32,14 @@
   let animationDeSortie = $state(false);
   let repositionnementSansAnimation = $state(false);
   let réponseSurvolée = $state<Réponse | undefined>();
+
+  const rendu = détecteRendu();
+
+  onMount(() => {
+    if (rendu.estMobile) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
 
   const réinitialiseQuestion = () => {
     pointeurActif = undefined;
