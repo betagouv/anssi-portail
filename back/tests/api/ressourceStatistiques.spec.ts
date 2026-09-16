@@ -42,6 +42,7 @@ describe('La ressource Statistiques', () => {
       statistiquesParDéfaut = {
         exposition: 0,
         vraiFaux: 0,
+        reflexesCyber: 0,
       };
     });
 
