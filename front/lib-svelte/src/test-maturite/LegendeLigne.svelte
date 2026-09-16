@@ -50,7 +50,7 @@
     }
 
     &.actif {
-      outline: 2px solid #fed980;
+      outline: 2px solid var(--border-default-blue-france);
       outline-offset: 8px;
       border-radius: 2px;
     }
