@@ -10,12 +10,19 @@
     évènement: Évènement;
     réflexe: Réflexe;
     rôle: Rôle;
+    surÉvènementSuivant: () => void;
   };
 
-  let { évènement, réflexe, rôle }: Props = $props();
+  let { évènement, réflexe, rôle, surÉvènementSuivant }: Props = $props();
 
   let actionsMasquées = $state(true);
   let statutRéflexe = $state<'en attente' | 'bon' | 'mauvais' | 'temps écoulé'>('en attente');
+
+  const passeÉvènementSuivant = () => {
+    statutRéflexe = 'en attente';
+    actionsMasquées = true;
+    surÉvènementSuivant();
+  };
 </script>
 
 <div class="contexte">
@@ -87,7 +94,7 @@
   {/if}
 
   {#if statutRéflexe !== 'en attente'}
-    <Bouton libelle="Événement suivant" taille="md" />
+    <Bouton libelle="Événement suivant" taille="md" surClic={passeÉvènementSuivant} />
   {/if}
 {/if}
 
