@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Rôle } from '../roles';
+  import { type IdRôle, type Rôle, rôleParId } from '../roles';
   import type { Scénario } from '../scenarios';
   import Evenement from './Evenement.svelte';
   import { type Évènement, évènementsParScénario } from './evenements';
@@ -23,9 +23,19 @@
   let évènementCourant: Évènement = $derived(évènementsDuScénario[numéroÉvènementCourant - 1]);
   let réflexeCourant: Réflexe = $derived(réflexesDuRôle[numéroÉvènementCourant - 1]);
 
+  let défilementMessagesActif = $state(false);
+
   const passeÉvènementSuivant = () => {
     numéroÉvènementCourant++;
   };
+  const notificationsÀAfficher = $derived(
+    (Object.keys(évènementCourant.notifications) as IdRôle[])
+      .filter((idRôle) => idRôle !== rôle.id)
+      .map((idRôle) => ({
+        rôle: rôleParId(idRôle),
+        message: évènementCourant.notifications[idRôle],
+      }))
+  );
 </script>
 
 <dsfr-container class="simulation-contenu">
@@ -51,6 +61,7 @@
           évènement={évènementCourant}
           réflexe={réflexeCourant}
           surÉvènementSuivant={passeÉvènementSuivant}
+          bind:choixEnCours={défilementMessagesActif}
         />
       </div>
     </section>
@@ -63,7 +74,7 @@
         <lab-anssi-icone nom="error-warning-line" taille="lg"></lab-anssi-icone>
         <strong class="fr-h4">78</strong>
       </div>
-      <Messages />
+      <Messages messagesÀAfficher={notificationsÀAfficher} défilementActif={défilementMessagesActif} />
     </aside>
   </div>
 </dsfr-container>
