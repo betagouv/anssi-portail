@@ -10,6 +10,7 @@
   import TestVraiFauxAnime from './TestVraiFauxAnime.svelte';
   import { profilStore } from '../stores/profil.store';
   import RadarMenaceAnime from './RadarMenaceAnime.svelte';
+  import LaptopAnime from './LaptopAnime.svelte';
 
   const estConnecté = $derived(!!$profilStore);
 
@@ -111,6 +112,22 @@
       >
         {#snippet image(survol)}
           <RadarMenaceAnime {survol} />
+        {/snippet}
+      </CarteTest>
+      <CarteTest
+        cible="Reflexes Cyber"
+        couleurDeFond="--background-alt-purple-glycine"
+        titre="Comment réagirez-vous en cas de cyberattaque&nbsp;?"
+        href="/reflexe-cyber"
+        réactions={{}}
+        badge={{
+          libellé: undefined,
+          accent: 'purple-glycine',
+        }}
+        estimationEnMinutes={10}
+      >
+        {#snippet image(survol)}
+          <LaptopAnime {survol} />
         {/snippet}
       </CarteTest>
     </div>
