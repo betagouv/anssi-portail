@@ -7,6 +7,7 @@
   import HerosRiche from '../ui/HerosRiche.svelte';
   import CarteTest from './CarteTest.svelte';
   import IllustrationHeroMiniTest from './IllustrationHeroMiniTest.svelte';
+  import LaptopAnime from './LaptopAnime.svelte';
   import PlanteAnimee from './PlanteAnimee.svelte';
   import RadarMenaceAnime from './RadarMenaceAnime.svelte';
   import TestVraiFauxAnime from './TestVraiFauxAnime.svelte';
@@ -111,6 +112,22 @@
       >
         {#snippet image(survol)}
           <RadarMenaceAnime {survol} />
+        {/snippet}
+      </CarteTest>
+      <CarteTest
+        cible="Reflexes Cyber"
+        couleurDeFond="--background-alt-purple-glycine"
+        titre="Comment réagirez-vous en cas de cyberattaque&nbsp;?"
+        href="/reflexes-cyber-en-ligne"
+        réactions={{}}
+        badge={{
+          libellé: undefined,
+          accent: 'purple-glycine',
+        }}
+        estimationEnMinutes={10}
+      >
+        {#snippet image(survol)}
+          <LaptopAnime {survol} />
         {/snippet}
       </CarteTest>
     </div>
