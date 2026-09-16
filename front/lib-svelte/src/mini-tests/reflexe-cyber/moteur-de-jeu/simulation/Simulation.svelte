@@ -3,6 +3,7 @@
   import type { Scénario } from '../scenarios';
   import Evenement from './Evenement.svelte';
   import { type Évènement, évènementsParScénario } from './evenements';
+  import Messages from './Messages.svelte';
   import Progression from './Progression.svelte';
   import { type Réflexe, réflexesParRôle } from './reflexes';
 
@@ -62,6 +63,7 @@
         <lab-anssi-icone nom="error-warning-line" taille="lg"></lab-anssi-icone>
         <strong class="fr-h4">78</strong>
       </div>
+      <Messages />
     </aside>
   </div>
 </dsfr-container>
@@ -138,7 +140,9 @@
         padding-left: 1.5rem;
 
         @include a-partir-de(md) {
-          display: block;
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
         }
 
         .metriques-bloquees {
