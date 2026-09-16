@@ -16,6 +16,7 @@
     variante: 'bleu-clair' | 'vert-clair' | 'cafe-creme';
     mentionAdditionnelle?: Snippet;
     class?: ClassValue;
+    urlBase: string;
   };
 
   const {
@@ -29,10 +30,20 @@
     variante,
     mentionAdditionnelle,
     class: className,
+    urlBase = '',
   }: Props = $props();
+
+  const urlImageDeFond = $derived(`url('${urlBase}/assets/images/motif-fond-heros-${variante}.avif')`);
+
+  let conteneur: HTMLElement | undefined;
+
+  $effect(() => {
+    conteneur?.style.setProperty('--url-image-de-fond', urlImageDeFond);
+  });
 </script>
 
 <dsfr-container
+  bind:this={conteneur}
   class={['conteneur', variante, className]}
   class:avecMentionAdditionnelle={!!mentionAdditionnelle}
   class:avecFilAriane={!!propriétésFilAriane}
@@ -118,7 +129,7 @@
 
       &.avec-image-fond {
         background: {
-          image: url('/assets/images/motif-fond-heros-cafe-creme.avif');
+          image: var(--url-image-de-fond);
           position: right -236px top;
           repeat: no-repeat;
           size: 1529px 1326px;

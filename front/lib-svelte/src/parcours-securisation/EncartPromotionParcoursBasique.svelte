@@ -11,6 +11,7 @@
     titre: string;
     description: string;
     tags: Snippet;
+    urlBase?: string;
   }
 
   const fonctionnalites = [
@@ -45,7 +46,7 @@
       rich: true,
     },
   ];
-  let { titre, description, tags }: Props = $props();
+  let { titre, description, tags, urlBase }: Props = $props();
   let pageSource = $state('');
 
   onMount(() => {
@@ -71,7 +72,7 @@
     </div>
 
     <div slot="media-pedagogique">
-      <IllustrationPedagogique />
+      <IllustrationPedagogique {urlBase} />
     </div>
 
     <div slot="media-pratico-pratique">
@@ -88,7 +89,7 @@
       </div>
 
       <div class="image-animee media-pedagogique">
-        <IllustrationPedagogique />
+        <IllustrationPedagogique {urlBase} />
       </div>
 
       <div class="image-animee media-pratico-pratique">

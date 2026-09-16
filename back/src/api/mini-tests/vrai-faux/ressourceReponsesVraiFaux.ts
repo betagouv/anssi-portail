@@ -7,6 +7,7 @@ import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { valideCorpsRequete } from '../../zod.js';
 import { schemaPostRéponsesVraiFaux } from './ressourceReponsesVraiFaux.schemas.js';
 import CorpsDeRequeteTypee = Express.CorpsDeRequeteTypee;
+import cors from 'cors';
 
 export const ressourceRéponsesVraiFaux = ({
   busEvenements,
@@ -18,6 +19,7 @@ export const ressourceRéponsesVraiFaux = ({
   const routeur = Router();
   routeur.post(
     '/',
+    cors(),
     valideCorpsRequete(schemaPostRéponsesVraiFaux),
     middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     filetRouteAsynchrone(async (requête: CorpsDeRequeteTypee<z.output<typeof schemaPostRéponsesVraiFaux>>, reponse) => {

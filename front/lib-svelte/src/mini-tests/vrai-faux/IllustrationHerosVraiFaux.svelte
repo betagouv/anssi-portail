@@ -1,9 +1,14 @@
 <script lang="ts">
+  import { untrack, type Component } from 'svelte';
   import IllustrationAnimee from '../../accueil/animation/IllustrationAnimee.svelte';
 
   import SceneHerosVraiFaux from './SceneHerosVraiFaux.svelte';
 
-  const scènes = [SceneHerosVraiFaux];
+  let { urlBase = '' }: { urlBase: string } = $props();
+
+  const scènes: (Component | [Component<any>, Record<string, unknown>])[] = [
+    [SceneHerosVraiFaux, { urlBase: untrack(() => urlBase) }],
+  ];
 </script>
 
 <IllustrationAnimee

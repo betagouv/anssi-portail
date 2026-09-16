@@ -8,6 +8,7 @@
 
   type Props = {
     réponses: boolean[];
+    urlBase?: string;
   };
 
   const conseils = $derived(
@@ -26,7 +27,7 @@
         ]
   );
 
-  const { réponses }: Props = $props();
+  const { réponses, urlBase = '' }: Props = $props();
 
   const nombreDeQuestions = $derived(réponses.length);
   const nombreDeBonnesRéponses = $derived(réponses.filter((r) => r).length);
@@ -60,7 +61,7 @@
     };
   });
   const sourceIllustration = (réponseCorrecte: boolean) =>
-    réponseCorrecte ? '/assets/icones/coche-verte.svg' : '/assets/icones/croix-rouge.svg';
+    réponseCorrecte ? `${urlBase}/assets/icones/coche-verte.svg` : `${urlBase}/assets/icones/croix-rouge.svg`;
   const commentaireIllustration = (réponseCorrecte: boolean, positionQuestion: number) =>
     `${réponseCorrecte ? 'bonne' : 'mauvaise'} réponse donnée à la question ${positionQuestion} sur ${nombreDeQuestions}`;
 </script>
@@ -95,6 +96,7 @@
       <EncartPromotionParcoursBasique
         titre="12 mesures simples pour protéger votre organisation contre les cyberattaques"
         description="Un programme d'accompagnement gratuit, pensé pour les non-experts."
+        {urlBase}
       >
         {#snippet tags()}
           <TagProgrammeGratuit />

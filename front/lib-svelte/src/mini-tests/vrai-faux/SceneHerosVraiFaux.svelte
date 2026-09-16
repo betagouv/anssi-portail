@@ -1,13 +1,15 @@
-<script lang="ts"></script>
+<script lang="ts">
+  let { urlBase }: { urlBase: string } = $props();
+</script>
 
 <div class="illustration-vrai-faux" aria-hidden="true">
   <div class="reponse faux forme forme-vers-gauche">
-    <img src="/assets/images/mini-tests/vrai-faux/pouce-bas.svg" alt="" />
+    <img crossorigin="anonymous" src={`${urlBase}/assets/images/mini-tests/vrai-faux/pouce-bas.svg`} alt="" />
     <span>Faux</span>
   </div>
 
   <div class="reponse vrai forme forme-vers-droite">
-    <img src="/assets/images/mini-tests/vrai-faux/pouce-haut.svg" alt="" />
+    <img crossorigin="anonymous" src={`${urlBase}/assets/images/mini-tests/vrai-faux/pouce-haut.svg`} alt="" />
     <span>Vrai</span>
   </div>
 
@@ -28,16 +30,21 @@
   </div>
 
   <div class="reaction reaction-reflexion bulle">
-    <img src="/assets/images/mini-tests/vrai-faux/emoji-reflexion.png" alt="" />
+    <img crossorigin="anonymous" src={`${urlBase}/assets/images/mini-tests/vrai-faux/emoji-reflexion.png`} alt="" />
   </div>
   <div class="reaction reaction-surprise bulle">
-    <img src="/assets/images/mini-tests/vrai-faux/emoji-surpris.png" alt="" />
+    <img crossorigin="anonymous" src={`${urlBase}/assets/images/mini-tests/vrai-faux/emoji-surpris.png`} alt="" />
   </div>
   <div class="reaction reaction-lunettes bulle">
-    <img src="/assets/images/mini-tests/vrai-faux/emoji-lunettes.png" alt="" />
+    <img crossorigin="anonymous" src={`${urlBase}/assets/images/mini-tests/vrai-faux/emoji-lunettes.png`} alt="" />
   </div>
 
-  <img class="boucle forme" src="/assets/images/mini-tests/vrai-faux/boucle.svg" alt="" />
+  <img
+    crossorigin="anonymous"
+    class="boucle forme"
+    src={`${urlBase}/assets/images/mini-tests/vrai-faux/boucle.svg`}
+    alt=""
+  />
   <svg class="trait" viewBox="0 0 127.821 60.0981" fill="none" aria-hidden="true">
     <path
       class="trace"
@@ -74,7 +81,7 @@
     />
   </svg>
   <div class="curseur curseur-sur-place">
-    <img src="/assets/images/mini-tests/vrai-faux/curseur.svg" alt="" />
+    <img crossorigin="anonymous" src={`${urlBase}/assets/images/mini-tests/vrai-faux/curseur.svg`} alt="" />
   </div>
 </div>
 

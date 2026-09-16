@@ -3,6 +3,7 @@
 
   const patternId = `pattern-${uid}`;
   const imageId = `image-${uid}`;
+  const { urlBase = '' }: { urlBase?: string } = $props();
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 486 324">
@@ -100,7 +101,7 @@
       id={imageId}
       width="500"
       height="896"
-      href="/assets/images/parcours-securisation/animation/section-pedagogique.avif"
+      href={`${urlBase}/assets/images/parcours-securisation/animation/section-pedagogique.avif`}
       preserveAspectRatio="none"
     />
   </defs>
