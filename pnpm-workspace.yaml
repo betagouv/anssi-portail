@@ -8,6 +8,7 @@ packages:
   - 'demande-diag'
   - 'comparaison-grist'
   - 'regles-eslint'
+  - 'webc-externes/*'
 
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 preferFrozenLockfile: true
