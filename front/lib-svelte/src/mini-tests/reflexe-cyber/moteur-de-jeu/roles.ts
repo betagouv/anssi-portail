@@ -48,3 +48,5 @@ export const rôles: Rôle[] = [
     image: { src: `${cheminAssets}/role-relations.avif`, alt: '' },
   },
 ];
+
+export const rôleParId = (idRôle: IdRôle): Rôle => rôles.find((rôle) => rôle.id === idRôle)!;

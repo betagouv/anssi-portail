@@ -59,4 +59,11 @@
       }
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition-duration: 1ms !important;
+      transition: none !important;
+    }
+  }
 </style>

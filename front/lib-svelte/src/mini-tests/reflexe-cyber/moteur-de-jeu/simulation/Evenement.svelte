@@ -11,12 +11,17 @@
     réflexe: Réflexe;
     rôle: Rôle;
     surÉvènementSuivant: () => void;
+    choixEnCours: boolean;
   };
 
-  let { évènement, réflexe, rôle, surÉvènementSuivant }: Props = $props();
+  let { évènement, réflexe, rôle, surÉvènementSuivant, choixEnCours = $bindable() }: Props = $props();
 
   let actionsMasquées = $state(true);
   let statutRéflexe = $state<'en attente' | 'bon' | 'mauvais' | 'temps écoulé'>('en attente');
+
+  $effect(() => {
+    choixEnCours = !actionsMasquées && statutRéflexe === 'en attente';
+  });
 
   const passeÉvènementSuivant = () => {
     statutRéflexe = 'en attente';

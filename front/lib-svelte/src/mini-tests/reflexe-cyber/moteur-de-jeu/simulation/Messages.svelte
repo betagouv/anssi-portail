@@ -1,22 +1,65 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import { type Rôle } from '../roles';
+
+  let {
+    défilementActif,
+    messagesÀAfficher,
+  }: {
+    défilementActif: boolean;
+    messagesÀAfficher: { rôle: Rôle; message: string }[];
+  } = $props();
+
+  let nombreMessagesAffichés = $state(0);
+
+  let numéroMessageAffiché = $state(0);
+  const messageAffiché = $derived(messagesÀAfficher[numéroMessageAffiché]);
+
+  $effect(() => {
+    messagesÀAfficher;
+    numéroMessageAffiché = 0;
+  });
+
+  let intervale: NodeJS.Timeout | undefined = undefined;
+
+  $effect(() => {
+    if (défilementActif) {
+      intervale = setInterval(() => {
+        if (défilementActif && numéroMessageAffiché < messagesÀAfficher.length - 1) {
+          numéroMessageAffiché++;
+          nombreMessagesAffichés++;
+        }
+      }, 5000);
+      setTimeout(() => {
+        nombreMessagesAffichés++;
+      }, 0);
+    } else {
+      clearInterval(intervale);
+    }
+  });
+
+  onMount(() => {
+    return () => clearInterval(intervale);
+  });
 </script>
 
 <div class="messages">
   <div class="titre">
     <lab-anssi-icone nom="message-2-line" taille="md"> </lab-anssi-icone>
     <h6>Messages</h6>
-    <div class="nombre">99</div>
+    <div class="nombre">{nombreMessagesAffichés}</div>
   </div>
-  <div class="message">
-    <div class="sous-titre">
-      <img src="/assets/images/mini-tests/reflexe-cyber/role-direction.avif" alt="" />
-      <p class="texte-standard-md">Direction</p>
+  {#if défilementActif}
+    <div class="message">
+      <div class="sous-titre">
+        <img src={messageAffiché.rôle.image.src} alt={messageAffiché.rôle.image.alt} />
+        <p class="texte-standard-md">{messageAffiché.rôle.nom}</p>
+      </div>
+      <p class="texte-detail-sm">
+        {messageAffiché.message}
+      </p>
     </div>
-    <p class="texte-detail-sm">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vestibulum eleifend ante, et fermentum nulla
-      laoreet sagittis.
-    </p>
-  </div>
+  {/if}
 </div>
 
 <style lang="scss">
