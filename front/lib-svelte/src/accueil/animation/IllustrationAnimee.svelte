@@ -3,8 +3,10 @@
   import { préfèreMouvementRéduit } from '../../utils/mouvementReduit.svelte';
   import { suitLaVisibilité } from '../../utils/visibilite.svelte';
 
+  type Scène = Component | [Component, Record<string, unknown>];
+
   type Props = {
-    scènes: Component[];
+    scènes: Scène[];
     étiquette: string;
     décor?: Snippet<[number, number]>;
     enPause?: boolean;
@@ -44,9 +46,10 @@
   {#if décor}
     <div class="decor">{@render décor(index, scènes.length)}</div>
   {/if}
-  {#each scènes as Scène, i (i)}
+  {#each scènes as scène, i (i)}
+    {@const [Scène, props] = Array.isArray(scène) ? scène : [scène, {}]}
     <div class="scene" class:active={i === index} class:gabarit={i === 0}>
-      <Scène />
+      <Scène {...props} />
     </div>
   {/each}
 </div>

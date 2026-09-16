@@ -3,11 +3,13 @@ import { Router } from 'express';
 import { filetRouteAsynchrone } from '../../middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from '../../zod.js';
 import { ConfigurationServeur } from '../../configurationServeur.js';
+import cors from 'cors';
 
 export const ressourceVraiFaux = ({ entrepôtQuestionVraieFausse }: ConfigurationServeur) => {
   const routeur = Router();
   routeur.get(
     '/',
+    cors(),
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete, reponse) => {
       const toutesLesQuestions = await entrepôtQuestionVraieFausse.tous();

@@ -22,6 +22,8 @@
   import Question from './question/Question.svelte';
   import ReponseVraiFaux from './ReponseVraiFaux.svelte';
 
+  let { urlBase = '' }: { urlBase: string } = $props();
+
   const idCorrélation = uuidv7();
   let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' | 'score-final' = $state('question');
 
@@ -50,7 +52,7 @@
   let réponses: boolean[] = $state([]);
 
   onMount(async () => {
-    const réponse = await axios.get('/api/mini-tests/vrai-faux');
+    const réponse = await axios.get(`${urlBase}/api/mini-tests/vrai-faux`);
     idéesReçues = réponse.data;
   });
 
