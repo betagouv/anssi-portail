@@ -29,6 +29,7 @@
       MaturiteCyber: réactionsInitiales,
       VraiFaux: réactionsInitiales,
       Exposition: réactionsInitiales,
+      ReflexesCyber: réactionsInitiales,
     },
   };
   type DonnéesPage = typeof donnéesInitiales;
@@ -119,7 +120,7 @@
         couleurDeFond="--background-alt-purple-glycine"
         titre="Comment réagirez-vous en cas de cyberattaque&nbsp;?"
         href="/reflexes-cyber-en-ligne"
-        réactions={{}}
+        réactions={donnéesPage?.réactions.ReflexesCyber ?? {}}
         badge={{
           libellé: undefined,
           accent: 'purple-glycine',
