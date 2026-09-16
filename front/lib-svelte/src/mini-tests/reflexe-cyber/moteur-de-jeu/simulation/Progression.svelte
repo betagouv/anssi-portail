@@ -12,7 +12,11 @@
   aria-valuemax={nombreÉvènementsTotaux}
 >
   {#each Array(nombreÉvènementsTotaux) as _, index (index)}
-    <span class:active={index < numéroÉvènementCourant} aria-hidden="true"></span>
+    <span
+      class:active={index < numéroÉvènementCourant}
+      aria-hidden="true"
+      class:courant={index + 1 === numéroÉvènementCourant}
+    ></span>
   {/each}
 </div>
 
@@ -32,9 +36,26 @@
       height: 0.5rem;
       background-color: var(--background-contrast-grey);
       flex: 1;
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--background-action-high-blue-france);
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+      }
 
       &.active {
         background-color: var(--background-action-high-blue-france);
+      }
+      &.courant {
+        background-color: var(--background-contrast-grey);
+        &:after {
+          transform: scaleX(1);
+        }
       }
     }
   }
