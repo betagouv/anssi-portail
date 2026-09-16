@@ -129,7 +129,7 @@
 
       .indicateur-crise {
         position: sticky;
-        top: 0;
+        top: 2.5rem;
         display: none;
         align-self: start;
         min-height: 5.75rem;
