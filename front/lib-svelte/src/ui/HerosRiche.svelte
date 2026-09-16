@@ -16,7 +16,7 @@
     variante: 'bleu-clair' | 'vert-clair' | 'cafe-creme';
     mentionAdditionnelle?: Snippet;
     class?: ClassValue;
-    urlBase: string;
+    urlBase?: string;
   };
 
   const {

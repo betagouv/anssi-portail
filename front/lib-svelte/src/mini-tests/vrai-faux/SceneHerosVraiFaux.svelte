@@ -1,5 +1,5 @@
 <script lang="ts">
-  let { urlBase }: { urlBase: string } = $props();
+  let { urlBase }: { urlBase?: string } = $props();
 </script>
 
 <div class="illustration-vrai-faux" aria-hidden="true">

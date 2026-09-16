@@ -4,7 +4,7 @@
 
   import SceneHerosVraiFaux from './SceneHerosVraiFaux.svelte';
 
-  let { urlBase = '' }: { urlBase: string } = $props();
+  let { urlBase = '' }: { urlBase?: string } = $props();
 
   const scènes: (Component | [Component<any>, Record<string, unknown>])[] = [
     [SceneHerosVraiFaux, { urlBase: untrack(() => urlBase) }],
