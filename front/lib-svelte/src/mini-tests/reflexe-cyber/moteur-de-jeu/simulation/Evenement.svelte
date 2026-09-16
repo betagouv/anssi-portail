@@ -39,14 +39,25 @@
       <img src={rôle.image.src} alt={rôle.image.alt} />
       <h3 class="fr-h6">Sélectionnez le bon réflexe</h3>
     </div>
-
     <div class="options" role="radiogroup" aria-label="Réflexes proposés">
-      <label>
-        <input type="radio" name="reflexe" value="option-1" />
+      <label class:desactive={statutRéflexe === 'mauvais'}>
+        <input
+          type="radio"
+          name="reflexe"
+          value="bon"
+          bind:group={statutRéflexe}
+          disabled={statutRéflexe === 'mauvais'}
+        />
         <span>{réflexe.proposition.bonRéflexe}</span>
       </label>
-      <label>
-        <input type="radio" name="reflexe" value="option-2" />
+      <label class:desactive={statutRéflexe === 'bon'}>
+        <input
+          type="radio"
+          name="reflexe"
+          value="mauvais"
+          bind:group={statutRéflexe}
+          disabled={statutRéflexe === 'bon'}
+        />
         <span>{réflexe.proposition.mauvaisRéflexe}</span>
       </label>
     </div>
@@ -153,6 +164,14 @@
         border: 1px solid var(--border-default-grey);
         background-color: var(--background-default-grey);
         cursor: pointer;
+
+        &.desactive {
+          color: var(--text-disabled-grey);
+          cursor: not-allowed;
+        }
+        &:has(input[type='radio']:checked) {
+          border: 1px solid var(--border-active-blue-france);
+        }
       }
 
       input {
