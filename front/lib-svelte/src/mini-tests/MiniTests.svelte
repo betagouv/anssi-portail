@@ -24,6 +24,7 @@
       MaturiteCyber: 0,
       VraiFaux: 0,
       Exposition: 0,
+      ReflexesCyber: 0,
     },
     réactions: {
       MaturiteCyber: réactionsInitiales,
@@ -47,6 +48,7 @@
     MaturitéCyber: donnéesPage.compteurs.MaturiteCyber > seuil ? arrondis(donnéesPage.compteurs.MaturiteCyber) : 0,
     VraiFaux: donnéesPage.compteurs.VraiFaux > seuil ? arrondis(donnéesPage.compteurs.VraiFaux) : 0,
     Exposition: donnéesPage.compteurs.Exposition > seuil ? arrondis(donnéesPage.compteurs.Exposition) : 0,
+    ReflexesCyber: donnéesPage.compteurs.ReflexesCyber > seuil ? arrondis(donnéesPage.compteurs.ReflexesCyber) : 0,
   });
 </script>
 
@@ -122,8 +124,8 @@
         href="/reflexes-cyber-en-ligne"
         réactions={donnéesPage?.réactions.ReflexesCyber ?? {}}
         badge={{
-          libellé: undefined,
-          accent: 'purple-glycine',
+          libellé: compteursArrondis.ReflexesCyber ? `+${compteursArrondis.ReflexesCyber} tests réalisés` : undefined,
+          accent: 'yellow-moutarde',
         }}
         estimationEnMinutes={10}
       >

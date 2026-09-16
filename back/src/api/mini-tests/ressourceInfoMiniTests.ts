@@ -15,7 +15,7 @@ export const ressourceInfoMiniTests = ({
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
       const compteurMaturitéCyber = await entrepotResultatTest.taille();
-      const { vraiFaux, exposition } = await adaptateurStatistiqueMiniTests.nombreDeMiniTestsRéalisés();
+      const { vraiFaux, exposition, reflexesCyber } = await adaptateurStatistiqueMiniTests.nombreDeMiniTestsRéalisés();
 
       const réactions = await entrepotReactionMiniTest.tous();
       reponse.send({
@@ -23,6 +23,7 @@ export const ressourceInfoMiniTests = ({
           MaturiteCyber: Math.floor(compteurMaturitéCyber / 100) * 100,
           VraiFaux: Math.floor(vraiFaux / 100) * 100,
           Exposition: Math.floor(exposition / 100) * 100,
+          ReflexesCyber: Math.floor(reflexesCyber / 100) * 100,
         },
         réactions: réactions.reduce(
           (acc, réaction) => {
