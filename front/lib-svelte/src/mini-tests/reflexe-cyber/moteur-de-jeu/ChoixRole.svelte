@@ -235,6 +235,7 @@
 
   .actions {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
     margin-top: 3rem;
