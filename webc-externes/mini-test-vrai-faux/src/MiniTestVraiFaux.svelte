@@ -19,7 +19,7 @@
 
 <div class="lab-anssi-mini-test-vrai-faux" data-themeable={true}>
   {#if quizAffiché}
-    <QuizVraiFaux {urlBase} />
+    <QuizVraiFaux {urlBase} mode="autonome" />
   {:else}
     <LandingVraiFaux {urlBase} mode="autonome" suivant={afficheLeQuizz} />
   {/if}
