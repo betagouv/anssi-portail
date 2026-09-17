@@ -78,7 +78,7 @@
 {#if mode === 'score-final'}
   <ScoreFinalQuizVraiFaux {réponses} {urlBase} mode={modeWebc} />
 {:else}
-  <dsfr-container class={mode}>
+  <dsfr-container class={[mode, 'conteneur-extensible']}>
     {#if modeWebc === 'autonome'}
       <EnteteAutonome {urlBase} />
     {/if}
@@ -93,6 +93,7 @@
           emoji={idéeReçueCourante.idéeReçue.emoji}
           surVoteVrai={() => afficheRéponse(true)}
           surVoteFaux={() => afficheRéponse(false)}
+          mode={modeWebc}
         />
       {:else}
         <ReponseVraiFaux
@@ -109,6 +110,8 @@
 {/if}
 
 <style lang="scss">
+  @use '../../../../../assets/styles/responsive' as *;
+
   dsfr-container {
     display: flex;
     background-color: var(--background-alt-blue-france);
@@ -129,6 +132,13 @@
 
     &.score-final {
       background-color: var(--background-default-grey);
+    }
+
+    &.conteneur-extensible {
+      min-height: calc(100dvh - 165px - 68px); // 165px correspond au header, 68px correspond au fil d'Ariane
+      @include a-partir-de(md) {
+        min-height: initial;
+      }
     }
   }
 </style>
