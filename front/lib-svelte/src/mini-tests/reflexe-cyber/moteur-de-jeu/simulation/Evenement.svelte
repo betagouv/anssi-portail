@@ -1,5 +1,6 @@
 <script lang="ts">
   import { aseptiseHtml } from '$plateforme/aseptisationDuHtml';
+  import { clic } from '../../../../directives/actions.svelte';
   import Bouton from '../../../../ui/Bouton.svelte';
   import CanonAConfetti from '../../../../ui/CanonAConfetti.svelte';
   import type { Rôle } from '../roles';
@@ -12,9 +13,19 @@
     rôle: Rôle;
     surÉvènementSuivant: () => void;
     choixEnCours: boolean;
+    surBonRéflexe: () => void;
+    surMauvaisRéflexe: () => void;
   };
 
-  let { évènement, réflexe, rôle, surÉvènementSuivant, choixEnCours = $bindable() }: Props = $props();
+  let {
+    évènement,
+    réflexe,
+    rôle,
+    surÉvènementSuivant,
+    choixEnCours = $bindable(),
+    surBonRéflexe,
+    surMauvaisRéflexe,
+  }: Props = $props();
 
   let actionsMasquées = $state(true);
   let statutRéflexe = $state<'en attente' | 'bon' | 'mauvais' | 'temps écoulé'>('en attente');
@@ -60,6 +71,7 @@
           value="bon"
           bind:group={statutRéflexe}
           disabled={statutRéflexe === 'mauvais'}
+          use:clic={surBonRéflexe}
         />
         <span>{réflexe.proposition.bonRéflexe}</span>
       </label>
@@ -70,6 +82,7 @@
           value="mauvais"
           bind:group={statutRéflexe}
           disabled={statutRéflexe === 'bon'}
+          use:clic={surMauvaisRéflexe}
         />
         <span>{réflexe.proposition.mauvaisRéflexe}</span>
       </label>

@@ -14,6 +14,8 @@
 
   const { scénario, rôle }: Props = $props();
 
+  const score = $state<('bon réflexe' | 'mauvais réflexe')[]>([]);
+
   let évènementsDuScénario: Évènement[] = $derived(évènementsParScénario[scénario.id]);
   let réflexesDuRôle: Réflexe[] = $derived(réflexesParRôle[rôle.id]);
 
@@ -36,6 +38,13 @@
         message: évènementCourant.notifications[idRôle],
       }))
   );
+
+  const aEuUnBonRéflexe = () => {
+    score.push('bon réflexe');
+  };
+  const aEuUnMauvaisRéflexe = () => {
+    score.push('mauvais réflexe');
+  };
 </script>
 
 <dsfr-container class="simulation-contenu">
@@ -60,8 +69,10 @@
           {rôle}
           évènement={évènementCourant}
           réflexe={réflexeCourant}
-          surÉvènementSuivant={passeÉvènementSuivant}
           bind:choixEnCours={défilementMessagesActif}
+          surBonRéflexe={aEuUnBonRéflexe}
+          surMauvaisRéflexe={aEuUnMauvaisRéflexe}
+          surÉvènementSuivant={passeÉvènementSuivant}
         />
       </div>
     </section>
