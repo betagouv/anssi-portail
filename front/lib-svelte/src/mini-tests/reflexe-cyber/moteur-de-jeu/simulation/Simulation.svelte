@@ -10,11 +10,11 @@
   type Props = {
     scénario: Scénario;
     rôle: Rôle;
+    score: boolean[];
+    surSimulationTerminée: () => void;
   };
 
-  const { scénario, rôle }: Props = $props();
-
-  const score = $state<('bon réflexe' | 'mauvais réflexe')[]>([]);
+  const { scénario, rôle, score, surSimulationTerminée }: Props = $props();
 
   let évènementsDuScénario: Évènement[] = $derived(évènementsParScénario[scénario.id]);
   let réflexesDuRôle: Réflexe[] = $derived(réflexesParRôle[rôle.id]);
@@ -28,7 +28,11 @@
   let défilementMessagesActif = $state(false);
 
   const passeÉvènementSuivant = () => {
-    numéroÉvènementCourant++;
+    if (numéroÉvènementCourant < nombreÉvènementsTotaux) {
+      numéroÉvènementCourant++;
+    } else {
+      surSimulationTerminée();
+    }
   };
   const notificationsÀAfficher = $derived(
     (Object.keys(évènementCourant.notifications) as IdRôle[])
@@ -40,10 +44,10 @@
   );
 
   const aEuUnBonRéflexe = () => {
-    score.push('bon réflexe');
+    score.push(true);
   };
   const aEuUnMauvaisRéflexe = () => {
-    score.push('mauvais réflexe');
+    score.push(false);
   };
 </script>
 
