@@ -232,8 +232,10 @@ const creeServeur = (configurationServeur: ConfigurationServeur) => {
     fournisseurChemin: FournisseurChemin['jekyll']['assets' | 'scripts' | 'libSvelte' | 'favicon']
   ) =>
     express.static(fournisseurChemin(), {
-      setHeaders: (réponse: Response) =>
-        réponse.setHeader('cache-control', process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store'),
+      setHeaders: (réponse: Response) => {
+        réponse.setHeader('cache-control', process.env.CACHE_CONTROL_FICHIERS_STATIQUES || 'no-store');
+        réponse.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+      },
     });
 
   enregistreRoute(`/assets`, cors(), sertLesFichiersStatiques(fournisseurChemin.jekyll.assets));
