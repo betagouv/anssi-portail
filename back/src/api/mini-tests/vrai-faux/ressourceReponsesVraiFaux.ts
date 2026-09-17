@@ -17,6 +17,7 @@ export const ressourceRéponsesVraiFaux = ({
   adaptateurHachage,
 }: ConfigurationServeur) => {
   const routeur = Router();
+  routeur.options('/', cors());
   routeur.post(
     '/',
     cors(),
