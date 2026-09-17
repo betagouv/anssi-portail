@@ -5,6 +5,7 @@
   import FilAriane from '../ui/FilAriane.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
   import Lien from '../ui/Lien.svelte';
+  import { fabriqueFilAriane } from '../ui/filAriane';
 
   let mail: string | null = $state(null);
   let infolettreAcceptee = $state(false);
@@ -36,7 +37,7 @@
 </script>
 
 <dsfr-container>
-  <FilAriane feuille="Newsletter MesServicesCyber" />
+  <FilAriane segments={fabriqueFilAriane({ feuille: 'Newsletter MesServicesCyber' })} />
 
   <Formulaire>
     <div class="formulaire">

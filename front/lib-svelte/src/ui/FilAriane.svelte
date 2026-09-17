@@ -4,21 +4,14 @@
 
 <script lang="ts">
   import { enPropriétéWebC } from '$plateforme/webComponent';
-  import { profilStore } from '../stores/profil.store.js';
-  import { fabriqueFilAriane, type Branche, type Segment } from './filAriane';
+  import type { Segment } from './filAriane';
 
   type Props = {
-    feuille: string;
-    branche?: Branche;
-    brancheConnectee?: Branche;
+    segments: Segment[];
     fondSombre?: boolean;
   };
-  const { feuille, branche = undefined, brancheConnectee = undefined, fondSombre = false }: Props = $props();
 
-  const utilisateurEstConnecté = $derived(!!$profilStore);
-  const segments: Segment[] = $derived(
-    fabriqueFilAriane({ feuille, branche, brancheConnectée: brancheConnectee }, utilisateurEstConnecté)
-  );
+  const { segments, fondSombre = false }: Props = $props();
 </script>
 
 <dsfr-breadcrumb inverse={fondSombre} buttonLabel="Voir le fil d'Ariane" segments={enPropriétéWebC(segments)}>

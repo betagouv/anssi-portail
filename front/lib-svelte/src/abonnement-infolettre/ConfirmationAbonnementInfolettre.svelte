@@ -1,9 +1,10 @@
 <script lang="ts">
+  import { fabriqueFilAriane } from '../ui/filAriane';
   import FilAriane from '../ui/FilAriane.svelte';
 </script>
 
 <dsfr-container>
-  <FilAriane feuille="Newsletter MesServicesCyber" />
+  <FilAriane segments={fabriqueFilAriane({ feuille: 'Newsletter MesServicesCyber' })} />
 
   <div class="formulaire">
     <hgroup>

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { PropriétésFilAriane } from '../../ui/filAriane';
+  import Bouton from '../../ui/Bouton.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
   import FilAriane from '../../ui/FilAriane.svelte';
   import HerosRiche from '../../ui/HerosRiche.svelte';
-  import Bouton from '../../ui/Bouton.svelte';
   import EvaluationExposition from './EvaluationExposition.svelte';
   import { type MenaceEvaluee, menacesPertinentes, type ReponsesExposition } from './expositionCyberattaques';
   import FormulaireExposition from './FormulaireExposition.svelte';
@@ -62,7 +62,7 @@
   <FormulaireExposition onévaluer={évalue} />
 {:else}
   <dsfr-container>
-    <FilAriane {...propriétésFilAriane} />
+    <FilAriane segments={fabriqueFilAriane(propriétésFilAriane)} />
   </dsfr-container>
   <EvaluationExposition {menaces} />
 {/if}
