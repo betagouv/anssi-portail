@@ -397,7 +397,7 @@ importers:
         version: 14.0.2
       zod:
         specifier: ^4.5.4
-        version: 4.6.1
+        version: 4.6.2
     devDependencies:
       '@types/bcrypt':
         specifier: ^6.0.0
@@ -4434,8 +4434,8 @@ packages:
   zimmerframe@1.1.4:
     resolution: {integrity: sha512-B58NGBEoc8Y9MWWCQGl/gq9xBCe4IiKM0a2x7GZdQKOW5Exr8S1W24J6OgM1njK8xCRGvAJIL/MxXHf6SkmQKQ==}
 
-  zod@4.6.1:
-    resolution: {integrity: sha512-341aRWQsve0rvronKNTqZpjmzdbUDlFuzHaI/XLg/Ej82qffDJRRfBTCuv7+9q/rMjB6LSLyEBnW4InJeMtt/Q==}
+  zod@4.6.2:
+    resolution: {integrity: sha512-lh5RCAGFa1Cm2hjtNwLQhSs/AsqdWnTQaBER9fEwN/88pSh7KOtJavtBx/0VlkN/uFd61SwYmljLMDAsHlvzBQ==}
 
 snapshots:
 
@@ -8106,4 +8106,4 @@ snapshots:
 
   zimmerframe@1.1.4: {}
 
-  zod@4.6.1: {}
+  zod@4.6.2: {}
