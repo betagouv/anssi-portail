@@ -9,11 +9,12 @@
     indexIdéeReçue: number;
     nombreIdéesReçues: number;
     emoji: string;
+    mode?: string;
     surVoteVrai: () => void;
     surVoteFaux: () => void;
   }
 
-  let { question, indexIdéeReçue, nombreIdéesReçues, emoji, surVoteVrai, surVoteFaux }: Props = $props();
+  let { question, indexIdéeReçue, nombreIdéesReçues, emoji, mode, surVoteVrai, surVoteFaux }: Props = $props();
 
   type Réponse = 'faux' | 'vrai';
 
@@ -36,7 +37,7 @@
   const rendu = détecteRendu();
 
   onMount(() => {
-    if (rendu.estMobile) {
+    if (rendu.estMobile && mode !== 'autonome') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
@@ -177,6 +178,10 @@
   @use '../../../../../../assets/styles/grille.scss' as *;
 
   .conteneur-de-choix {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    row-gap: 4.5rem;
+    min-height: calc(100dvh - 168px - 65px - 80px);
     --icon-size: 1.5rem;
     position: relative;
 
@@ -204,7 +209,7 @@
       cursor: grab;
       min-height: 340px;
       width: 100%;
-      margin-bottom: 4.5rem;
+      margin-bottom: auto;
       position: relative;
       overflow: hidden;
 
@@ -235,14 +240,13 @@
     }
 
     .boutons-de-vote {
+      box-sizing: border-box;
       background-color: var(--background-default-grey);
-      bottom: 0;
       box-shadow: 0 4px 12px 0 rgba(0, 0, 18, 0.16);
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
       padding: 1rem;
-      position: sticky;
       margin-inline: -1rem;
       z-index: calc(var(--centre-aide-z-index) + 1);
     }
@@ -254,6 +258,7 @@
       grid-template-areas: 'vide1 question vide2';
       grid-template-columns: 3fr 6fr 3fr;
       margin-bottom: 4.5rem;
+      min-height: initial;
 
       .question,
       &::after {
