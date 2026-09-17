@@ -7,6 +7,7 @@
   import { type IdScénario, scénarios } from './scenarios';
   import ScoreFinalReflexeCyber from './ScoreFinalReflexeCyber.svelte';
   import Simulation from './simulation/Simulation.svelte';
+  import { fabriqueFilAriane } from '../../../ui/filAriane';
 
   type Étape = 'scénario' | 'rôle' | 'mise-en-situation' | 'simulation' | 'score-final';
   let étape: Étape = $state('scénario');
@@ -55,8 +56,10 @@
 >
   <dsfr-container>
     <FilAriane
-      feuille="Réflexe cyber&nbsp;: comment réagirez-vous en cas de cyber&shy;attaque&nbsp;?"
-      branche={{ nom: 'Faire le test !', lien: '/faire-le-test' }}
+      segments={fabriqueFilAriane({
+        feuille: 'Réflexe cyber&nbsp;: comment réagirez-vous en cas de cyber&shy;attaque&nbsp;?',
+        branche: { nom: 'Faire le test !', lien: '/faire-le-test' },
+      })}
     />
   </dsfr-container>
 

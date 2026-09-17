@@ -2,12 +2,13 @@
   import type { Snippet } from 'svelte';
   import type { ClassValue } from 'svelte/elements';
 
-  import FilAriane, { type PropsFilAriane } from './FilAriane.svelte';
+  import FilAriane from './FilAriane.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from './filAriane';
 
   type Props = {
     titre?: string;
     description?: string;
-    propriétésFilAriane?: PropsFilAriane;
+    propriétésFilAriane?: PropriétésFilAriane;
     tag?: string;
     srcImage?: string;
     avantLeTitre?: Snippet;
@@ -34,7 +35,7 @@
 <div class={['section-hero', className]} class:avecFilAriane={!!propriétésFilAriane}>
   <dsfr-container>
     {#if propriétésFilAriane}
-      <FilAriane {...propriétésFilAriane} />
+      <FilAriane segments={fabriqueFilAriane(propriétésFilAriane)} />
     {/if}
 
     <div class="conteneur">

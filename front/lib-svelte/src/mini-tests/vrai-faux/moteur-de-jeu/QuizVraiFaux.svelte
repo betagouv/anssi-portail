@@ -21,6 +21,7 @@
   import ScoreFinalQuizVraiFaux from './ScoreFinalQuizVraiFaux.svelte';
   import Question from './question/Question.svelte';
   import ReponseVraiFaux from './ReponseVraiFaux.svelte';
+  import { fabriqueFilAriane } from '../../../ui/filAriane';
 
   let { urlBase = '' }: { urlBase?: string } = $props();
 
@@ -61,8 +62,10 @@
 
 <dsfr-container class={mode}>
   <FilAriane
-    feuille="Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?"
-    branche={{ nom: 'Faire le test !', lien: '/faire-le-test' }}
+    segments={fabriqueFilAriane({
+      feuille: 'Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?',
+      branche: { nom: 'Faire le test !', lien: '/faire-le-test' },
+    })}
   />
 </dsfr-container>
 

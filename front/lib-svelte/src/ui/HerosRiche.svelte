@@ -2,7 +2,8 @@
   import type { Snippet } from 'svelte';
   import type { ClassValue } from 'svelte/elements';
   import type { Badge } from './badge.type';
-  import FilAriane, { type PropsFilAriane } from './FilAriane.svelte';
+  import { fabriqueFilAriane, type PropriétésFilAriane } from './filAriane';
+  import FilAriane from './FilAriane.svelte';
   import GroupeDeBadges from './GroupeDeBadges.svelte';
 
   type Props = {
@@ -10,7 +11,7 @@
     badges?: Badge[];
     description: string;
     illustration: Snippet;
-    propriétésFilAriane?: PropsFilAriane;
+    propriétésFilAriane?: PropriétésFilAriane;
     titre?: string;
     titreHtml?: Snippet;
     variante: 'bleu-clair' | 'vert-clair' | 'cafe-creme';
@@ -49,7 +50,7 @@
   class:avecFilAriane={!!propriétésFilAriane}
 >
   {#if propriétésFilAriane}
-    <FilAriane {...propriétésFilAriane} />
+    <FilAriane segments={fabriqueFilAriane(propriétésFilAriane)} />
   {/if}
   <div class="contenu-heros">
     <div class="contenu">
