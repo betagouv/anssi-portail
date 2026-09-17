@@ -22,8 +22,9 @@
   import Question from './question/Question.svelte';
   import ReponseVraiFaux from './ReponseVraiFaux.svelte';
   import { fabriqueFilAriane } from '../../../ui/filAriane';
+  import EnteteAutonome from '../../../ui/EnteteAutonome.svelte';
 
-  let { urlBase = '' }: { urlBase?: string } = $props();
+  let { urlBase = '', mode: modeWebc }: { urlBase?: string; mode?: string } = $props();
 
   const idCorrélation = uuidv7();
   let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' | 'score-final' = $state('question');
@@ -37,11 +38,14 @@
     const réponseCorrecte = idéeReçueCourante.idéeReçueEstVraie === réponseDonnée;
     mode = réponseCorrecte ? 'bonne-réponse' : 'mauvaise-réponse';
     réponses.push(réponseCorrecte);
-    await publieRéponseQuestionnaireVraiFaux({
-      idCorrélation,
-      idQuestion: idéeReçueCourante.idQuestion,
-      réponseUtilisateur: réponseDonnée,
-    });
+    await publieRéponseQuestionnaireVraiFaux(
+      {
+        idCorrélation,
+        idQuestion: idéeReçueCourante.idQuestion,
+        réponseUtilisateur: réponseDonnée,
+      },
+      urlBase ? { urlBase } : undefined
+    );
   };
 
   const obtenirScore = () => {
@@ -60,19 +64,24 @@
   const idéeReçueCourante = $derived(idéesReçues[indexIdéeReçue]);
 </script>
 
-<dsfr-container class={mode}>
-  <FilAriane
-    segments={fabriqueFilAriane({
-      feuille: 'Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?',
-      branche: { nom: 'Faire le test !', lien: '/faire-le-test' },
-    })}
-  />
-</dsfr-container>
+{#if modeWebc !== 'autonome'}
+  <dsfr-container class={mode}>
+    <FilAriane
+      segments={fabriqueFilAriane({
+        feuille: 'Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?',
+        branche: { nom: 'Faire le test !', lien: '/faire-le-test' },
+      })}
+    />
+  </dsfr-container>
+{/if}
 
 {#if mode === 'score-final'}
-  <ScoreFinalQuizVraiFaux {réponses} />
+  <ScoreFinalQuizVraiFaux {réponses} {urlBase} mode={modeWebc} />
 {:else}
   <dsfr-container class={mode}>
+    {#if modeWebc === 'autonome'}
+      <EnteteAutonome {urlBase} />
+    {/if}
     <h1 class="fr-h6">Cyber&shy;attaques&nbsp;: saurez-vous démêler le vrai du faux&nbsp;?</h1>
 
     {#if idéeReçueCourante}

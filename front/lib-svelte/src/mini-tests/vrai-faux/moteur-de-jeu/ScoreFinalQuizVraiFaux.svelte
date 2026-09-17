@@ -5,10 +5,12 @@
   import TagProgrammeGratuit from '../../../parcours-securisation/TagProgrammeGratuit.svelte';
   import PartageTest from '../../../test-maturite/PartageTest.svelte';
   import Alternatives from '../../../ui/Alternatives.svelte';
+  import EnteteAutonome from '../../../ui/EnteteAutonome.svelte';
 
   type Props = {
     réponses: boolean[];
     urlBase?: string;
+    mode?: string;
   };
 
   const conseils = $derived(
@@ -27,7 +29,7 @@
         ]
   );
 
-  const { réponses, urlBase = '' }: Props = $props();
+  const { réponses, urlBase = '', mode }: Props = $props();
 
   const nombreDeQuestions = $derived(réponses.length);
   const nombreDeBonnesRéponses = $derived(réponses.filter((r) => r).length);
@@ -67,6 +69,9 @@
 </script>
 
 <dsfr-container>
+  {#if mode === 'autonome'}
+    <EnteteAutonome {urlBase} />
+  {/if}
   <div class={['encart-score', couleur]}>
     <p class="texte-mention-xs">Score</p>
     <p class="alternatif-xs">{nombreDeBonnesRéponses}/{nombreDeQuestions}</p>
@@ -105,13 +110,15 @@
     </dsfr-container>
   {/snippet}
 </Alternatives>
-<dsfr-container>
-  <PartageTest
-    cheminPartagé="/vrai-faux/quiz"
-    sujetMail="Cyber­attaques : saurez-vous démêler le vrai du faux ?"
-    typeDeRetour="vrai-faux"
-  />
-</dsfr-container>
+{#if mode !== 'autonome'}
+  <dsfr-container>
+    <PartageTest
+      cheminPartagé="/vrai-faux/quiz"
+      sujetMail="Cyber­attaques : saurez-vous démêler le vrai du faux ?"
+      typeDeRetour="vrai-faux"
+    />
+  </dsfr-container>
+{/if}
 
 <style lang="scss">
   @use '../../../../../assets/styles/responsive' as *;
