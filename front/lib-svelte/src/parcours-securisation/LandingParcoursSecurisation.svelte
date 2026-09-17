@@ -167,7 +167,7 @@
     </p>
 
     <hr class="separateur" />
-    <Lien href="/inscription" libelle="Haut de page" taille="md" icone="arrow-up-fill" />
+    <Lien href="#" libelle="Haut de page" taille="md" icone="arrow-up-fill" />
   </dsfr-container>
 </section>
 
