@@ -5,6 +5,7 @@
   "type": "module",
   "main": "index.ts",
   "scripts": {
+    "build:local": "VITE_API_URL=http://localhost:3000 ENV=local vite build",
     "build:demo": "VITE_API_URL=https://demo.messervicescyber.beta.gouv.fr ENV=demo vite build",
     "build:prod": "VITE_API_URL=https://messervices.cyber.gouv.fr ENV=prod vite build",
     "format": "prettier --write ."
