@@ -320,7 +320,7 @@ export function resumeInsight(id: IdMenace, reponses: ReponsesExposition): Resum
       };
     if (type === 'tpe-pme-eti')
       return {
-        indicateur: '37 %',
+        indicateur: '48 %',
         enHausse: false,
         texte: 'des victimes de rançongiciels en 2025 étaient des TPE, PME ou ETI',
         source: 'ANSSI',
