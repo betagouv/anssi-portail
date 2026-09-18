@@ -3,7 +3,7 @@
 
 <div class="minuteur">
   <p>Temps restant&nbsp;: <strong>30 secondes</strong></p>
-  <div class="barre-temps" aria-hidden="true"></div>
+  <progress value="25" max="30"></progress>
 </div>
 
 <style lang="scss">
@@ -20,11 +20,28 @@
       margin: 0;
     }
 
-    .barre-temps {
-      width: 100%;
+    progress {
       height: 0.5rem;
+      background-color: var(--background-default-grey);
+      border: none;
       border-radius: 999px;
-      background-color: var(--border-default-blue-france);
+      overflow: hidden;
+      width: 100%;
+
+      &::-webkit-progress-bar {
+        background: var(--background-default-grey);
+        border-radius: 999px;
+      }
+
+      &::-webkit-progress-value {
+        background: var(--border-default-blue-france);
+        border-radius: 999px;
+      }
+
+      &::-moz-progress-bar {
+        background: var(--border-default-blue-france);
+        border-radius: 999px;
+      }
     }
   }
 </style>
