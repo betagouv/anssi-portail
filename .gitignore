@@ -6,6 +6,7 @@ _site
 vendor
 node_modules
 dist/
+dist-*/
 .vscode
 .env
 .idea
