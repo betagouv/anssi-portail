@@ -16,6 +16,7 @@
     choixEnCours: boolean;
     surBonRéflexe: () => void;
     surMauvaisRéflexe: () => void;
+    surTempsÉcoulé: () => void;
   };
 
   let {
@@ -26,6 +27,7 @@
     choixEnCours = $bindable(),
     surBonRéflexe,
     surMauvaisRéflexe,
+    surTempsÉcoulé,
   }: Props = $props();
 
   let actionsMasquées = $state(true);
@@ -40,6 +42,14 @@
     actionsMasquées = true;
     surÉvènementSuivant();
   };
+
+  const aLaisséPasserLeTemps = () => {
+    statutRéflexe = 'temps écoulé';
+    surTempsÉcoulé();
+  };
+
+  const choixBonRéflexeDésactivé = $derived(['mauvais', 'temps écoulé'].includes(statutRéflexe));
+  const choixMauvaisRéflexeDésactivé = $derived(['bon', 'temps écoulé'].includes(statutRéflexe));
 </script>
 
 <div class="contexte">
@@ -65,24 +75,24 @@
       <h3 class="fr-h6">Sélectionnez le bon réflexe</h3>
     </div>
     <div class="options" role="radiogroup" aria-label="Réflexes proposés">
-      <label class:desactive={statutRéflexe === 'mauvais'}>
+      <label class:desactive={choixBonRéflexeDésactivé}>
         <input
           type="radio"
           name="reflexe"
           value="bon"
           bind:group={statutRéflexe}
-          disabled={statutRéflexe === 'mauvais'}
+          disabled={choixBonRéflexeDésactivé}
           use:clic={surBonRéflexe}
         />
         <span>{réflexe.proposition.bonRéflexe}</span>
       </label>
-      <label class:desactive={statutRéflexe === 'bon'}>
+      <label class:desactive={choixMauvaisRéflexeDésactivé}>
         <input
           type="radio"
           name="reflexe"
           value="mauvais"
           bind:group={statutRéflexe}
-          disabled={statutRéflexe === 'bon'}
+          disabled={choixMauvaisRéflexeDésactivé}
           use:clic={surMauvaisRéflexe}
         />
         <span>{réflexe.proposition.mauvaisRéflexe}</span>
@@ -90,7 +100,7 @@
     </div>
   </div>
 
-  <Minuteur actif={choixEnCours} />
+  <Minuteur actif={choixEnCours} surTempsÉcoulé={aLaisséPasserLeTemps} />
 
   {#if statutRéflexe === 'bon'}
     <dsfr-alert title="Bon réflexe !" text={réflexe.conséquence.bonRéflexe} type="success" size="md" has-description

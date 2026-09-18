@@ -49,6 +49,9 @@
   const aEuUnMauvaisRéflexe = () => {
     score.push(false);
   };
+  const aLaisséPasserLeTemps = () => {
+    score.push(false);
+  };
 </script>
 
 <dsfr-container class="simulation-contenu">
@@ -77,6 +80,7 @@
           surBonRéflexe={aEuUnBonRéflexe}
           surMauvaisRéflexe={aEuUnMauvaisRéflexe}
           surÉvènementSuivant={passeÉvènementSuivant}
+          surTempsÉcoulé={aLaisséPasserLeTemps}
         />
       </div>
     </section>
