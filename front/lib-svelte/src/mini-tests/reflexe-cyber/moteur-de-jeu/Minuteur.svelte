@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { Tween } from 'svelte/motion';
+
+  const { actif } = $props();
 
   const décrément = 1000; // en millisecondes
 
@@ -13,22 +14,26 @@
     return 'moins-30-secondes';
   });
 
-  onMount(() => {
-    const intervale = setInterval(() => {
-      if (palier !== 'fini') {
-        secondesRestantes.target = secondesRestantes.current - 1;
-      } else {
-        clearInterval(intervale);
-      }
-    }, décrément);
-    return () => clearInterval(intervale);
+  $effect(() => {
+    if (actif) {
+      const intervale = setInterval(() => {
+        if (palier !== 'fini') {
+          secondesRestantes.target = secondesRestantes.current - 1;
+        } else {
+          clearInterval(intervale);
+        }
+      }, décrément);
+      return () => clearInterval(intervale);
+    }
   });
 </script>
 
-<div class="minuteur">
-  <p>Temps restant&nbsp;: <strong>{Math.max(0, Math.floor(secondesRestantes.current))} secondes</strong></p>
-  <progress class={palier} value={secondesRestantes.current} max="30">{secondesRestantes.current}</progress>
-</div>
+{#if actif}
+  <div class="minuteur">
+    <p>Temps restant&nbsp;: <strong>{Math.max(0, Math.floor(secondesRestantes.current))} secondes</strong></p>
+    <progress class={palier} value={secondesRestantes.current} max="30">{secondesRestantes.current}</progress>
+  </div>
+{/if}
 
 <style lang="scss">
   .minuteur {

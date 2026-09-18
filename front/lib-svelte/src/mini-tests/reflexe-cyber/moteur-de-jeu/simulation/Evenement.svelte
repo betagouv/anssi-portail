@@ -90,7 +90,7 @@
     </div>
   </div>
 
-  <Minuteur />
+  <Minuteur actif={choixEnCours} />
 
   {#if statutRéflexe === 'bon'}
     <dsfr-alert title="Bon réflexe !" text={réflexe.conséquence.bonRéflexe} type="success" size="md" has-description
