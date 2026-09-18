@@ -10,6 +10,7 @@
   import TestVraiFauxAnime from './TestVraiFauxAnime.svelte';
   import { profilStore } from '../stores/profil.store';
   import RadarMenaceAnime from './RadarMenaceAnime.svelte';
+  import LaptopAnime from './LaptopAnime.svelte';
 
   const estConnecté = $derived(!!$profilStore);
 
@@ -23,11 +24,13 @@
       MaturiteCyber: 0,
       VraiFaux: 0,
       Exposition: 0,
+      ReflexesCyber: 0,
     },
     réactions: {
       MaturiteCyber: réactionsInitiales,
       VraiFaux: réactionsInitiales,
       Exposition: réactionsInitiales,
+      ReflexesCyber: réactionsInitiales,
     },
   };
   type DonnéesPage = typeof donnéesInitiales;
@@ -45,6 +48,7 @@
     MaturitéCyber: donnéesPage.compteurs.MaturiteCyber > seuil ? arrondis(donnéesPage.compteurs.MaturiteCyber) : 0,
     VraiFaux: donnéesPage.compteurs.VraiFaux > seuil ? arrondis(donnéesPage.compteurs.VraiFaux) : 0,
     Exposition: donnéesPage.compteurs.Exposition > seuil ? arrondis(donnéesPage.compteurs.Exposition) : 0,
+    ReflexesCyber: donnéesPage.compteurs.ReflexesCyber > seuil ? arrondis(donnéesPage.compteurs.ReflexesCyber) : 0,
   });
 </script>
 
@@ -111,6 +115,22 @@
       >
         {#snippet image(survol)}
           <RadarMenaceAnime {survol} />
+        {/snippet}
+      </CarteTest>
+      <CarteTest
+        cible="Reflexes Cyber"
+        couleurDeFond="--background-alt-purple-glycine"
+        titre="Comment réagirez-vous en cas de cyberattaque&nbsp;?"
+        href="/reflexe-cyber"
+        réactions={donnéesPage?.réactions.ReflexesCyber ?? {}}
+        badge={{
+          libellé: compteursArrondis.ReflexesCyber ? `+${compteursArrondis.ReflexesCyber} tests réalisés` : undefined,
+          accent: 'yellow-moutarde',
+        }}
+        estimationEnMinutes={10}
+      >
+        {#snippet image(survol)}
+          <LaptopAnime {survol} />
         {/snippet}
       </CarteTest>
     </div>

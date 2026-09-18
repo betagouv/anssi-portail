@@ -23,6 +23,7 @@ export type Statistiques = {
   miniTests: {
     vraiFaux: number;
     exposition: number;
+    reflexesCyber: number;
   };
 };
 
