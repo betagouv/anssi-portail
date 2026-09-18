@@ -3,6 +3,7 @@
   import { clic } from '../../../../directives/actions.svelte';
   import Bouton from '../../../../ui/Bouton.svelte';
   import CanonAConfetti from '../../../../ui/CanonAConfetti.svelte';
+  import Minuteur from '../Minuteur.svelte';
   import type { Rôle } from '../roles';
   import type { Évènement } from './evenements';
   import type { Réflexe } from './reflexes';
@@ -89,10 +90,7 @@
     </div>
   </div>
 
-  <div class="minuteur">
-    <p>Temps restant&nbsp;: <strong>30 secondes</strong></p>
-    <div class="barre-temps" aria-hidden="true"></div>
-  </div>
+  <Minuteur />
 
   {#if statutRéflexe === 'bon'}
     <dsfr-alert title="Bon réflexe !" text={réflexe.conséquence.bonRéflexe} type="success" size="md" has-description
@@ -210,27 +208,6 @@
         margin: 0;
         accent-color: var(--background-action-high-blue-france);
       }
-    }
-  }
-
-  .minuteur {
-    display: flex;
-    width: 100%;
-    box-sizing: border-box;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 1rem 1.5rem;
-    background-color: var(--background-alt-grey);
-
-    p {
-      margin: 0;
-    }
-
-    .barre-temps {
-      width: 100%;
-      height: 0.5rem;
-      border-radius: 999px;
-      background-color: var(--border-default-blue-france);
     }
   }
 
