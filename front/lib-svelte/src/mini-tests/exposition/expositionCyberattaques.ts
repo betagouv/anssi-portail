@@ -197,7 +197,7 @@ export function paragraphesInsight(id: IdMenace, reponses: ReponsesExposition): 
         "La proportion des rançongiciels ayant touché des établissements de santé (<strong>8&nbsp;%</strong>) est de nouveau en hausse par rapport à 2024. Plusieurs centres hospitaliers ont subi des perturbations de leurs activités d'accueil et de traitement de patients. Les petites structures de santé telles que les EHPAD et les cliniques sont également affectées par ce type d'incident.";
     else if (type === 'tpe-pme-eti')
       variante =
-        "<strong>37&nbsp;%</strong> des victimes de rançongiciels constatées en 2025 par l'ANSSI étaient des TPE, PME et ETI.";
+        "<strong>48&nbsp;%</strong> des victimes de rançongiciels constatées en 2025 par l'ANSSI étaient des TPE, PME et ETI.";
     else if (type === 'collectivite')
       variante =
         'La part des collectivités territoriales victimes de rançongiciel demeure importante (<strong>11&nbsp;%</strong> en 2025). Les rançongiciels sont la 3e cybermenace la plus fréquente pour les collectivités et administrations, avec un impact sur la continuité des services publics.';
