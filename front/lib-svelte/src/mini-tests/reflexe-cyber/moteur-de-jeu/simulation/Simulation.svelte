@@ -25,7 +25,7 @@
   let évènementCourant: Évènement = $derived(évènementsDuScénario[numéroÉvènementCourant - 1]);
   let réflexeCourant: Réflexe = $derived(réflexesDuRôle[numéroÉvènementCourant - 1]);
 
-  let défilementMessagesActif = $state(false);
+  let choixEnCours = $state(false);
 
   const passeÉvènementSuivant = () => {
     if (numéroÉvènementCourant < nombreÉvènementsTotaux) {
@@ -73,7 +73,7 @@
           {rôle}
           évènement={évènementCourant}
           réflexe={réflexeCourant}
-          bind:choixEnCours={défilementMessagesActif}
+          bind:choixEnCours
           surBonRéflexe={aEuUnBonRéflexe}
           surMauvaisRéflexe={aEuUnMauvaisRéflexe}
           surÉvènementSuivant={passeÉvènementSuivant}
@@ -89,7 +89,7 @@
         <lab-anssi-icone nom="error-warning-line" taille="lg"></lab-anssi-icone>
         <strong class="fr-h4">78</strong>
       </div>
-      <Messages messagesÀAfficher={notificationsÀAfficher} défilementActif={défilementMessagesActif} />
+      <Messages messagesÀAfficher={notificationsÀAfficher} défilementActif={choixEnCours} />
     </aside>
   </div>
 </dsfr-container>
