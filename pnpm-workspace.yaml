@@ -1,14 +1,8 @@
 color: always
 packages:
-  - 'axios'
-  - 'back'
-  - 'front'
-  - 'front/lib-svelte'
-  - 'mise-a-jour-financements'
-  - 'demande-diag'
-  - 'comparaison-grist'
-  - 'regles-eslint'
-  - 'webc-externes/*'
+  - '*'
+  - front/lib-svelte
+  - webc-externes/*
 
 minimumReleaseAge: 10080 # 7 jours (exprimé en minutes)
 preferFrozenLockfile: true
