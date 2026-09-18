@@ -74,7 +74,7 @@
       <img src={rôle.image.src} alt={rôle.image.alt} />
       <h3 class="fr-h6">Sélectionnez le bon réflexe</h3>
     </div>
-    <div class="options" role="radiogroup" aria-label="Réflexes proposés">
+    <div class="options" class:ordre-inverse={Math.random() < 0.5} role="radiogroup" aria-label="Réflexes proposés">
       <label class:desactive={choixBonRéflexeDésactivé}>
         <input
           type="radio"
@@ -191,6 +191,10 @@
       width: 100%;
       flex-direction: column;
       gap: 1rem;
+
+      &.ordre-inverse {
+        flex-direction: column-reverse;
+      }
 
       label {
         display: flex;
