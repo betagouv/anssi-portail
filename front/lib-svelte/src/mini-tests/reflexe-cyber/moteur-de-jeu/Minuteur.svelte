@@ -1,11 +1,11 @@
 <script lang="ts">
   import { Tween } from 'svelte/motion';
 
-  const { actif } = $props();
+  const { actif, surTempsÉcoulé } = $props();
 
-  const décrément = 1000; // en millisecondes
+  const décrémentEnMs = 1000;
 
-  let secondesRestantes = new Tween(30, { duration: décrément });
+  let secondesRestantes = new Tween(30, { duration: décrémentEnMs });
 
   let palier: 'fini' | 'moins-10-secondes' | 'moins-15-secondes' | 'moins-30-secondes' = $derived.by(() => {
     if (secondesRestantes.current <= 0) return 'fini';
@@ -21,8 +21,12 @@
           secondesRestantes.target = secondesRestantes.current - 1;
         } else {
           clearInterval(intervale);
+          surTempsÉcoulé();
         }
-      }, décrément);
+      }, décrémentEnMs);
+      setTimeout(() => {
+        secondesRestantes.target = secondesRestantes.current - 1;
+      }, 0);
       return () => clearInterval(intervale);
     }
   });
@@ -30,7 +34,11 @@
 
 {#if actif}
   <div class="minuteur">
-    <p>Temps restant&nbsp;: <strong>{Math.max(0, Math.floor(secondesRestantes.current))} secondes</strong></p>
+    <p>
+      Temps restant&nbsp;: <strong
+        >{Math.max(0, Math.floor(secondesRestantes.current))} seconde{secondesRestantes.current > 1 ? 's' : ''}</strong
+      >
+    </p>
     <progress class={palier} value={secondesRestantes.current} max="30">{secondesRestantes.current}</progress>
   </div>
 {/if}
