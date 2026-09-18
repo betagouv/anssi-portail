@@ -41,7 +41,7 @@ describe('La ressource du questionnaire Vrai-Faux', () => {
       );
       expect(reponse.body[0].explications[0]).toBe('Les PME, TPE et ETI sont la catégorie la plus touchée.');
       expect(reponse.body[0].explications[1]).toBe(
-        "En 2025, parmi les victimes d'attaques par rançongiciel portées à la connaissance de l'ANSSI, les PME, TPE et ETI représentent 37 % des cas — c'est la catégorie la plus affectée. Les attaques cybercriminelles ciblent indistinctement la plupart des secteurs et zones géographiques, de façon opportuniste."
+        "En 2025, parmi les victimes d'attaques par rançongiciel portées à la connaissance de l'ANSSI, les PME, TPE et ETI représentent 48 % des cas — c'est la catégorie la plus affectée. Les attaques cybercriminelles ciblent indistinctement la plupart des secteurs et zones géographiques, de façon opportuniste."
       );
 
       expect(reponse.body[0].source).toBe('ANSSI, Panorama de la cybermenace 2025, section 1.A — pages 10-11.');
