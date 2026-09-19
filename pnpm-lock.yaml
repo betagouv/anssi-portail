@@ -373,7 +373,7 @@ importers:
         version: 6.8.8
       p-throttle:
         specifier: ^8.0.0
-        version: 8.1.0
+        version: 8.1.1
       papaparse:
         specifier: ^5.5.3
         version: 5.7.0
@@ -3478,8 +3478,8 @@ packages:
     resolution: {integrity: sha512-LaNjtRWUBY++zB5nE/NwcaoMylSPk+S+ZHNB1TzdbMJMny6dynpAGt7X/tl/QYq3TIeE6nxHppbo2LGymrG5Pw==}
     engines: {node: '>=10'}
 
-  p-throttle@8.1.0:
-    resolution: {integrity: sha512-c1wmXavsHZIC4g1OLhOsafK6jZSAeMo0Ap3yivj59PUcCkpacy5YgWdgIp/dB4vp1JZrfBSsPCR0YuADB+ENLQ==}
+  p-throttle@8.1.1:
+    resolution: {integrity: sha512-xxWFBUyvbrQ10XC3VAr0SoXoOCKXqCX/yvbFIkBE98upphHFwjIKR6AId13ZH3jngFfF6yK43QTOtrngYAmFMA==}
     engines: {node: '>=20'}
 
   p-try@2.2.0:
@@ -7158,7 +7158,7 @@ snapshots:
     dependencies:
       p-limit: 3.1.0
 
-  p-throttle@8.1.0: {}
+  p-throttle@8.1.1: {}
 
   p-try@2.2.0: {}
 
