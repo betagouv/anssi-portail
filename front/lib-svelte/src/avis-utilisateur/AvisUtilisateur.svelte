@@ -12,9 +12,9 @@
 
   let encartOuvert = $state(false);
   let afficheDialogue: boolean = $state(false);
-  let etape: 'formulaire' | 'merci' = $state('formulaire');
+  let étape: 'formulaire' | 'merci' = $state('formulaire');
   const titreDialogue = $derived(
-    etape === 'formulaire'
+    étape === 'formulaire'
       ? 'Votre avis nous intéresse\u00a0!'
       : 'Merci 🤩\u00a0! Vos remarques sont précieuses pour faire évoluer le service.'
   );
@@ -65,7 +65,7 @@
       console.error(erreur);
     } finally {
       entrepotNavigateurAvisUtilisateur.modifieDateDernierAvisDonne(new Date());
-      etape = 'merci';
+      étape = 'merci';
     }
   };
 
@@ -89,7 +89,7 @@
 {/if}
 <Modale bind:estOuverte={afficheDialogue} titre={titreDialogue} surFermeture={enregistreFermetureDialogue}>
   <div class="dialogue-avis-utilisateur">
-    {#if etape === 'formulaire'}
+    {#if étape === 'formulaire'}
       <Formulaire id="formulaire-avis-utilisateur" surFormulaireValide={soumetsLeFormulaire}>
         <div class="contenu">
           {#if erreurSatisfaction || erreurCommentaire}
@@ -163,7 +163,7 @@
     {/if}
   </div>
   {#snippet actions()}
-    {#if etape === 'formulaire'}
+    {#if étape === 'formulaire'}
       <Bouton
         etire
         libelle="Envoyer"
