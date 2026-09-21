@@ -1,4 +1,6 @@
 <script lang="ts">
+  import axios from 'axios';
+  import { v7 as uuidv7 } from 'uuid';
   import { type IdRôle, type Rôle, rôleParId } from '../roles';
   import type { Scénario } from '../scenarios';
   import Evenement from './Evenement.svelte';
@@ -15,6 +17,8 @@
   };
 
   const { scénario, rôle, score, surSimulationTerminée }: Props = $props();
+
+  const idCorrélation = uuidv7();
 
   let évènementsDuScénario: Évènement[] = $derived(évènementsParScénario[scénario.id]);
   let réflexesDuRôle: Réflexe[] = $derived(réflexesParRôle[rôle.id]);
@@ -43,15 +47,20 @@
       }))
   );
 
-  const aEuUnBonRéflexe = () => {
-    score.push(true);
+  const prendEnCompteRéflexe = async (réflexe: 'bon' | 'mauvais' | 'aucun'): Promise<void> => {
+    score.push(réflexe === 'bon');
+    await axios.post('/api/mini-tests/reflexes-cyber/reponses', {
+      idCorrélation,
+      idScénario: scénario.id,
+      idRôle: rôle.id,
+      numéroÉvènement: numéroÉvènementCourant,
+      réflexe,
+    });
   };
-  const aEuUnMauvaisRéflexe = () => {
-    score.push(false);
-  };
-  const aLaisséPasserLeTemps = () => {
-    score.push(false);
-  };
+
+  const aEuUnBonRéflexe = async () => await prendEnCompteRéflexe('bon');
+  const aEuUnMauvaisRéflexe = async () => await prendEnCompteRéflexe('mauvais');
+  const aLaisséPasserLeTemps = async () => await prendEnCompteRéflexe('aucun');
 </script>
 
 <dsfr-container class="simulation-contenu">
