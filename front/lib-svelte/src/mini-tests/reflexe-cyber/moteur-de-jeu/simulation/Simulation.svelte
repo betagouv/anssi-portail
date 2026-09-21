@@ -28,11 +28,13 @@
 
   let évènementCourant: Évènement = $derived(évènementsDuScénario[numéroÉvènementCourant - 1]);
   let réflexeCourant: Réflexe = $derived(réflexesDuRôle[numéroÉvènementCourant - 1]);
+  let valeurBlocage = $state(0);
 
   let choixEnCours = $state(false);
 
   const passeÉvènementSuivant = () => {
     if (numéroÉvènementCourant < nombreÉvènementsTotaux) {
+      valeurBlocage = scénario.métrique.bloquage[numéroÉvènementCourant];
       numéroÉvènementCourant++;
     } else {
       surSimulationTerminée();
@@ -61,6 +63,12 @@
   const aEuUnBonRéflexe = async () => await prendEnCompteRéflexe('bon');
   const aEuUnMauvaisRéflexe = async () => await prendEnCompteRéflexe('mauvais');
   const aLaisséPasserLeTemps = async () => await prendEnCompteRéflexe('aucun');
+
+  $effect(() => {
+    if (numéroÉvènementCourant === 1 && choixEnCours) {
+      valeurBlocage = scénario.métrique.bloquage[0];
+    }
+  });
 </script>
 
 <dsfr-container class="simulation-contenu">
@@ -97,10 +105,10 @@
     <aside class="indicateur-crise" aria-label="État de la crise">
       <div class="metriques-bloquees">
         <p class="texte-mention-xs">
-          {scénario.labelMétrique}
+          {scénario.métrique.label}
         </p>
         <lab-anssi-icone nom="error-warning-line" taille="lg"></lab-anssi-icone>
-        <strong class="fr-h4">78</strong>
+        <strong class="fr-h4">{valeurBlocage}</strong>
       </div>
       <Messages messagesÀAfficher={notificationsÀAfficher} défilementActif={choixEnCours} />
     </aside>
