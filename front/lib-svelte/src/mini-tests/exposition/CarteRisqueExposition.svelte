@@ -6,9 +6,10 @@
 
   interface Props {
     menace: MenaceEvaluee;
+    urlBase?: string;
   }
 
-  let { menace }: Props = $props();
+  let { menace, urlBase = '' }: Props = $props();
 
   let détailOuvert = $state(false);
 </script>
@@ -26,7 +27,7 @@
     size="md"
   >
     <div slot="image" class={['icone', menace.couleurFond]}>
-      <img src={menace.icone} alt="" />
+      <img src={`${urlBase}${menace.icone}`} alt="" />
     </div>
     {#if menace.renforce}
       <div slot="badgesgroup">

@@ -5,6 +5,7 @@ import { Utilisateur } from '../../../metier/utilisateur.js';
 import { ConfigurationServeur } from '../../configurationServeur.js';
 import { valideCorpsRequete } from '../../zod.js';
 import { schemaPostTestExposition } from './ressourceTestsExposition.schema.js';
+import cors from 'cors';
 
 export const ressourceTestsExposition = ({
   busEvenements,
@@ -13,11 +14,12 @@ export const ressourceTestsExposition = ({
   adaptateurHachage,
 }: ConfigurationServeur) => {
   const routeur = Router();
-
+  routeur.options('/', cors());
   routeur.post(
     '/',
-    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
+    cors(),
     valideCorpsRequete(schemaPostTestExposition),
+    middleware.ajouteUtilisateurARequete(entrepotUtilisateur, adaptateurHachage),
     async (requête, réponse) => {
       const { typeOrganisation, secteur, facteursAggravant } = requête.body;
       const utilisateur = requête.utilisateur as Utilisateur;

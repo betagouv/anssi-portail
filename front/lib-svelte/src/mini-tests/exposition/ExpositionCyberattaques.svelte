@@ -1,5 +1,6 @@
 <script lang="ts">
   import Bouton from '../../ui/Bouton.svelte';
+  import EnteteAutonome from '../../ui/EnteteAutonome.svelte';
   import { fabriqueFilAriane, type PropriétésFilAriane } from '../../ui/filAriane';
   import FilAriane from '../../ui/FilAriane.svelte';
   import HerosRiche from '../../ui/HerosRiche.svelte';
@@ -7,6 +8,8 @@
   import { type MenaceEvaluee, menacesPertinentes, type ReponsesExposition } from './expositionCyberattaques';
   import FormulaireExposition from './FormulaireExposition.svelte';
   import RadarExpositionAnime from './RadarExpositionAnime.svelte';
+
+  let { mode, urlBase = '' }: { mode?: 'autonome'; urlBase?: string } = $props();
 
   const propriétésFilAriane: PropriétésFilAriane = {
     branche: { nom: 'Faire le test !', lien: '/faire-le-test/' },
@@ -30,41 +33,49 @@
 </script>
 
 {#if étape === 'formulaire'}
-  <HerosRiche
-    {propriétésFilAriane}
-    variante="cafe-creme"
-    class="avec-image-fond"
-    badges={[{ label: '⏱️ 2 minutes', accent: 'green-bourgeon' }]}
-    description="Rançongiciel, fraude au virement, espionnage, déstabilisation, cyberharcèlement : chaque attaque poursuit un but différent. En 2 minutes, situez celles qui pèsent le plus sur votre organisation."
-  >
-    {#snippet titreHtml()}
-      Quels types de cyber&shy;attaques peuvent cibler mon organisation ?
-    {/snippet}
-    {#snippet illustration()}
-      <div class="illustration-du-bandeau">
-        <div class="radar">
-          <RadarExpositionAnime {enPause} />
+  {#if mode === 'autonome'}
+    <dsfr-container>
+      <EnteteAutonome {urlBase} />
+    </dsfr-container>
+  {:else}
+    <HerosRiche
+      {propriétésFilAriane}
+      variante="cafe-creme"
+      class="avec-image-fond"
+      badges={[{ label: '⏱️ 2 minutes', accent: 'green-bourgeon' }]}
+      description="Rançongiciel, fraude au virement, espionnage, déstabilisation, cyberharcèlement : chaque attaque poursuit un but différent. En 2 minutes, situez celles qui pèsent le plus sur votre organisation."
+    >
+      {#snippet titreHtml()}
+        Quels types de cyber&shy;attaques peuvent cibler mon organisation ?
+      {/snippet}
+      {#snippet illustration()}
+        <div class="illustration-du-bandeau">
+          <div class="radar">
+            <RadarExpositionAnime {enPause} />
+          </div>
+          <div class="controle-animation">
+            <Bouton
+              type="secondaire"
+              icone={enPause ? 'play-circle-line' : 'pause-circle-line'}
+              iconeSeule
+              libelle={libelléPause}
+              titre={libelléPause}
+              surClic={basculePause}
+            />
+          </div>
         </div>
-        <div class="controle-animation">
-          <Bouton
-            type="secondaire"
-            icone={enPause ? 'play-circle-line' : 'pause-circle-line'}
-            iconeSeule
-            libelle={libelléPause}
-            titre={libelléPause}
-            surClic={basculePause}
-          />
-        </div>
-      </div>
-    {/snippet}
-  </HerosRiche>
+      {/snippet}
+    </HerosRiche>
+  {/if}
 
-  <FormulaireExposition onévaluer={évalue} />
+  <FormulaireExposition onévaluer={évalue} {urlBase} />
 {:else}
-  <dsfr-container>
-    <FilAriane segments={fabriqueFilAriane(propriétésFilAriane)} />
-  </dsfr-container>
-  <EvaluationExposition {menaces} />
+  {#if mode !== 'autonome'}
+    <dsfr-container>
+      <FilAriane segments={fabriqueFilAriane(propriétésFilAriane)} />
+    </dsfr-container>
+  {/if}
+  <EvaluationExposition {menaces} {mode} {urlBase} />
 {/if}
 
 <style lang="scss">
