@@ -18,10 +18,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "v0.1.19",
-      "revision": "397ee39c83a651e1314cfb010b94e8a3aac11261",
-      "url": "https://api.github.com/repos/microsoft/playwright-cli/tarball/refs/tags/v0.1.19",
-      "hash": "sha256-pbv51ybubbjoIpKg0k7lfXfZ9Z+qdZI2lRhQeI+/mFA=",
+      "version": "v0.1.21",
+      "revision": "74354ecc7a43da16d91a9bc54fa8db8283a3fcf5",
+      "url": "https://api.github.com/repos/microsoft/playwright-cli/tarball/refs/tags/v0.1.21",
+      "hash": "sha256-ZHfQBZQejJKNYfhszd99i4GIzEpomBzX0/HkMK2T8DQ=",
       "frozen": true
     }
   },
