@@ -11,7 +11,7 @@
   import { entrepotNavigateurAvisUtilisateur } from './ControleAvisUtilisateur';
 
   let encartOuvert = $state(false);
-  let afficheDialogue: boolean = $state(false);
+  let afficheDialogue = $state(false);
   let étape: 'formulaire' | 'merci' = $state('formulaire');
   const titreDialogue = $derived(
     étape === 'formulaire'
@@ -19,7 +19,20 @@
       : 'Merci 🤩\u00a0! Vos remarques sont précieuses pour faire évoluer le service.'
   );
 
-  type SatisfactionDisponible = '1' | '2' | '3' | '4' | '5';
+  type SatisfactionDisponible = 1 | 2 | 3 | 4 | 5;
+  const niveauxSatisfaction: {
+    id: string;
+    valeur: SatisfactionDisponible;
+    libellé: string;
+    emoji: string;
+  }[] = [
+    { id: 'pas-du-tout', valeur: 1, libellé: 'Pas du tout', emoji: '😠' },
+    { id: 'pas-satisfait', valeur: 2, libellé: 'Pas satisfait', emoji: '☹️' },
+    { id: 'moyennement-satisfait', valeur: 3, libellé: 'Moyennement satisfait', emoji: '😕' },
+    { id: 'satisfait', valeur: 4, libellé: 'Satisfait', emoji: '😊' },
+    { id: 'tout-a-fait', valeur: 5, libellé: 'Tout à fait', emoji: '🤩' },
+  ];
+
   let satisfaction: SatisfactionDisponible | undefined = $state();
   let erreurSatisfaction = $state(false);
   let commentaire = $state('');
@@ -51,13 +64,13 @@
   };
 
   const soumetsLeFormulaire = async () => {
-    if (!satisfaction) erreurSatisfaction = true;
-    if (!commentaire) erreurCommentaire = true;
+    erreurSatisfaction = !satisfaction;
+    erreurCommentaire = !commentaire;
     if (erreurCommentaire || erreurSatisfaction) return;
 
     try {
       await axios.post('/api/avis-utilisateur', {
-        niveauDeSatisfaction: Number(satisfaction),
+        niveauDeSatisfaction: satisfaction,
         commentaire,
         emailDeContact,
       });
@@ -103,26 +116,12 @@
             <p class:erreur={erreurSatisfaction}>Le service MesServicesCyber répond-il à vos attentes&nbsp;?</p>
             <div class="satisfaction">
               <div class="niveaux-satisfaction">
-                <input id="pas-du-tout" type="radio" name="note" value="1" bind:group={satisfaction} />
-                <label class="niveau-satisfaction" for="pas-du-tout">
-                  <span aria-label="Pas du tout" role="img">😠</span>
-                </label>
-                <input id="pas-satisfait" type="radio" name="note" value="2" bind:group={satisfaction} />
-                <label class="niveau-satisfaction" for="pas-satisfait">
-                  <span aria-label="Pas satisfait" role="img">☹️</span>
-                </label>
-                <input id="moyennement-satisfait" type="radio" name="note" value="3" bind:group={satisfaction} />
-                <label class="niveau-satisfaction" for="moyennement-satisfait">
-                  <span aria-label="Moyennement satisfait" role="img">😕</span>
-                </label>
-                <input id="satisfait" type="radio" name="note" value="4" bind:group={satisfaction} />
-                <label class="niveau-satisfaction" for="satisfait">
-                  <span aria-label="Satisfait" role="img">😊</span>
-                </label>
-                <input id="tout-a-fait" type="radio" name="note" value="5" bind:group={satisfaction} />
-                <label class="niveau-satisfaction" for="tout-a-fait">
-                  <span aria-label="Tout à fait" role="img">🤩</span>
-                </label>
+                {#each niveauxSatisfaction as niveau (niveau.valeur)}
+                  <input id={niveau.id} type="radio" name="note" value={niveau.valeur} bind:group={satisfaction} />
+                  <label class="niveau-satisfaction" for={niveau.id}>
+                    <span aria-label={niveau.libellé} role="img">{niveau.emoji}</span>
+                  </label>
+                {/each}
               </div>
               <div class="descriptions">
                 <span class="premier">Pas du tout</span>
