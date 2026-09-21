@@ -191,4 +191,4 @@ excluded_apis: []
 # The interface through which the agent (LLM) accesses Serena's functionality (overrides the global setting).
 # Valid values: tools, REPL (see the global configuration for details); leave empty to use the global setting.
 # Note: the interface is fixed at startup. If a project is activated post-init, its setting is not applied.
-agent_interface:
+agent_interface: REPL
