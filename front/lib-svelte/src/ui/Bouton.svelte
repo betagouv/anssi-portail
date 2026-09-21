@@ -13,6 +13,7 @@
     icone?: string;
     iconeSeule?: boolean;
     iconeADroite?: boolean;
+    idFormulaire?: string;
     surClic?: (e: MouseEvent | KeyboardEvent) => void;
   }
 
@@ -27,6 +28,7 @@
     icone = '',
     iconeSeule = false,
     iconeADroite = false,
+    idFormulaire,
     surClic,
   }: Props = $props();
 
@@ -60,7 +62,10 @@
   has-icon={hasIcon}
   icon={icone}
   icon-place={iconPlace}
+  form={idFormulaire}
   use:clic={gereClick}
 >
-  <button slot="seo" title={titre} disabled={desactive || undefined} type={boutonType}>{libelle}</button>
+  <button slot="seo" title={titre} disabled={desactive || undefined} type={boutonType} form={idFormulaire}>
+    {libelle}
+  </button>
 </dsfr-button>

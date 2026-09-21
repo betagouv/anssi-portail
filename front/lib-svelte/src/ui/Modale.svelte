@@ -7,19 +7,19 @@
     estOuverte: boolean;
     children: Snippet;
     actions?: Snippet;
+    surFermeture?: () => void;
   };
 
-  let { titre, icone, estOuverte = $bindable(), children, actions }: Props = $props();
+  let { titre, icone, estOuverte = $bindable(), children, actions, surFermeture }: Props = $props();
+
+  const ferme = () => {
+    estOuverte = false;
+    surFermeture?.();
+  };
 </script>
 
 {#if estOuverte}
-  <dsfr-modal
-    title={titre}
-    icon={icone}
-    opened={estOuverte}
-    footer={Boolean(actions)}
-    onclose={() => (estOuverte = false)}
-  >
+  <dsfr-modal title={titre} icon={icone} opened={estOuverte} footer={Boolean(actions)} onclose={ferme}>
     {@render children()}
     {#if actions}
       <div slot="footer" class="actions">
