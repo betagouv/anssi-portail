@@ -1,5 +1,5 @@
 <script module lang="ts">
-  export type TypeDeRetour = 'test-maturité' | 'vrai-faux' | 'mesure' | 'exposition';
+  export type TypeDeRetour = 'test-maturité' | 'vrai-faux' | 'mesure' | 'exposition' | 'reflexes-cyber';
 </script>
 
 <script lang="ts">
@@ -20,18 +20,17 @@
     children?: Snippet;
   };
   const { clé, typeDeRetour, children, identifiantCible }: Props = $props();
-  const urlDePost = $derived.by(() => {
-    if (typeDeRetour === 'vrai-faux') {
-      return '/api/retour-mini-tests/vrai-faux';
-    }
-    if (typeDeRetour === 'exposition') {
-      return '/api/retour-mini-tests/exposition';
-    }
-    if (typeDeRetour === 'mesure') {
-      return `/api/mesures/${identifiantCible}/avis`;
-    }
-    return '/api/retour-mini-tests/test-maturité';
-  });
+  const urlDePost = $derived(
+    (
+      {
+        'vrai-faux': '/api/retour-mini-tests/vrai-faux',
+        mesure: `/api/mesures/${identifiantCible}/avis`,
+        exposition: '/api/retour-mini-tests/exposition',
+        'reflexes-cyber': '/api/retour-mini-tests/reflexes-cyber',
+        'test-maturité': '/api/retour-mini-tests/test-maturité',
+      } satisfies { [C in TypeDeRetour]: string }
+    )[typeDeRetour]
+  );
 
   const retourUtilisateur: RetourUtilisateur | undefined = $derived(clé ? récupèreRetour(clé) : undefined);
   let étatBoutons = $derived(retourUtilisateur?.positif);
