@@ -1,15 +1,19 @@
 <script lang="ts">
   import axios from 'axios';
   import Bouton from '../ui/Bouton.svelte';
-  import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
   import Lien from '../ui/Lien.svelte';
+  import Modale from '../ui/Modale.svelte';
   import ZoneTexte from '../ui/ZoneTexte.svelte';
 
-  let dialogue: HTMLDialogElement | undefined = $state();
   let etape: 'formulaire' | 'merci' = $state('formulaire');
   let afficheDialogue = $state(false);
+  const titreDialogue = $derived(
+    etape === 'formulaire'
+      ? 'Aidez-nous à améliorer votre expérience️ 🙏\u00a0!'
+      : 'Merci pour votre retour\u00a0🤩\u00a0! Vos remarques sont précieuses pour faire évoluer le service.'
+  );
 
   export const affiche = () => {
     afficheDialogue = true;
@@ -56,135 +60,89 @@
   $effect(() => {
     if (raison) erreurRaison = false;
   });
-
-  $effect(() => {
-    if (dialogue) {
-      if (afficheDialogue) {
-        dialogue.showModal();
-      } else {
-        dialogue.close();
-      }
-    }
-  });
 </script>
 
-{#if afficheDialogue}
-  <dialog onclose={() => (afficheDialogue = false)} bind:this={dialogue}>
-    {#if etape === 'formulaire'}
-      <Formulaire classe="dialogue-sortie-diag" surFormulaireValide={soumetsLeFormulaire}>
-        <div class="contenu">
-          <BoutonFermerModale surClic={() => (afficheDialogue = false)} />
-          <h4>Aidez-nous à améliorer votre expérience️ 🙏&nbsp;!</h4>
-          <h5>🤔 Pourquoi n’avez-vous pas finalisé votre demande&nbsp;?</h5>
-          {#if erreurRaison}
-            <lab-anssi-alerte type="erreur" description="Veuillez sélectionner une réponse." fermable={false}
-            ></lab-anssi-alerte>
+<Modale bind:estOuverte={afficheDialogue} titre={titreDialogue}>
+  {#if etape === 'formulaire'}
+    <Formulaire id="formulaire-sortie-diagnostic" surFormulaireValide={soumetsLeFormulaire}>
+      <div class="contenu">
+        <h5>🤔 Pourquoi n’avez-vous pas finalisé votre demande&nbsp;?</h5>
+        {#if erreurRaison}
+          <lab-anssi-alerte type="erreur" description="Veuillez sélectionner une réponse." fermable={false}
+          ></lab-anssi-alerte>
+        {/if}
+        <div class="propositions">
+          <label>
+            <input type="radio" value="pas-clair" bind:group={raison} />
+            <span>Ce n’est pas assez clair / J’aimerais en savoir plus</span>
+          </label>
+          {#if raison === 'pas-clair'}
+            <ZoneTexte aideSaisie="Précisez votre réponse (facultatif)" bind:valeur={precisionPasClair} />
           {/if}
-          <div class="propositions">
-            <label>
-              <input type="radio" value="pas-clair" bind:group={raison} />
-              <span>Ce n’est pas assez clair / J’aimerais en savoir plus</span>
-            </label>
-            {#if raison === 'pas-clair'}
-              <ZoneTexte aideSaisie="Précisez votre réponse (facultatif)" bind:valeur={precisionPasClair} />
-            {/if}
-            <label>
-              <input type="radio" value="pas-le-temps" bind:group={raison} />
-              <span> Je n’ai pas le temps maintenant </span>
-            </label>
-            <label>
-              <input type="radio" value="pas-decisionnaire" bind:group={raison} />
-              <span>Je ne suis pas décisionnaire</span>
-            </label>
-            <label>
-              <input type="radio" value="autre" bind:group={raison} />
-              <span>Autre</span>
-            </label>
-            {#if raison === 'autre'}
-              <ZoneTexte aideSaisie="Précisez votre réponse (facultatif)" bind:valeur={precisionAutre} />
-            {/if}
-          </div>
-          <div class="contact">
-            <h5>📧 Une question ? Nos équipes se tiennent à votre disposition.</h5>
-            <ChampTexte
-              aideSaisie="Ex : jean.dupont@mail.com"
-              id="email-contact"
-              libelle="Email de contact"
-              messageErreur="L'email est invalide"
-              nom="email"
-              type="email"
-              bind:valeur={emailDeContact}
-            />
-            <p class="texte-mention-xs">
-              Votre email ne sera utilisé que pour vous recontacter à propos du diagnostic cyber.
-            </p>
-          </div>
+          <label>
+            <input type="radio" value="pas-le-temps" bind:group={raison} />
+            <span> Je n’ai pas le temps maintenant </span>
+          </label>
+          <label>
+            <input type="radio" value="pas-decisionnaire" bind:group={raison} />
+            <span>Je ne suis pas décisionnaire</span>
+          </label>
+          <label>
+            <input type="radio" value="autre" bind:group={raison} />
+            <span>Autre</span>
+          </label>
+          {#if raison === 'autre'}
+            <ZoneTexte aideSaisie="Précisez votre réponse (facultatif)" bind:valeur={precisionAutre} />
+          {/if}
         </div>
-        <div class="actions">
-          <Bouton libelle="Envoyer" type="primaire" taille="md" boutonSoumission={true} />
-          <Lien href="/" apparence="bouton" type="secondaire" libelle="Revenir à la page d’accueil"></Lien>
-        </div>
-      </Formulaire>
-    {:else}
-      <div class="dialogue-sortie-diag">
-        <div class="contenu">
-          <BoutonFermerModale surClic={() => dialogue?.close()} />
-          <h4>Merci pour votre retour&nbsp;🤩&nbsp;! Vos remarques sont précieuses pour faire évoluer le service.</h4>
-          <p>
-            Vous avez demandé à être recontacté(e) ? Notre équipe prendra contact avec vous prochainement à l’adresse
-            fournie.
+        <div class="contact">
+          <h5>📧 Une question ? Nos équipes se tiennent à votre disposition.</h5>
+          <ChampTexte
+            aideSaisie="Ex : jean.dupont@mail.com"
+            id="email-contact"
+            libelle="Email de contact"
+            messageErreur="L'email est invalide"
+            nom="email"
+            type="email"
+            bind:valeur={emailDeContact}
+          />
+          <p class="texte-mention-xs">
+            Votre email ne sera utilisé que pour vous recontacter à propos du diagnostic cyber.
           </p>
         </div>
-        <div class="actions">
-          <Lien href="/" apparence="bouton" libelle="Revenir à la page d’accueil"></Lien>
-        </div>
       </div>
+    </Formulaire>
+  {:else}
+    <div class="contenu">
+      <p>
+        Vous avez demandé à être recontacté(e) ? Notre équipe prendra contact avec vous prochainement à l’adresse
+        fournie.
+      </p>
+    </div>
+  {/if}
+  {#snippet actions()}
+    {#if etape === 'formulaire'}
+      <Bouton
+        etire
+        libelle="Envoyer"
+        type="primaire"
+        taille="md"
+        boutonSoumission={true}
+        idFormulaire="formulaire-sortie-diagnostic"
+      />
+      <Lien etire href="/" apparence="bouton" type="secondaire" libelle="Revenir à la page d’accueil"></Lien>
+    {:else}
+      <Lien etire href="/" apparence="bouton" libelle="Revenir à la page d’accueil"></Lien>
     {/if}
-  </dialog>
-{/if}
+  {/snippet}
+</Modale>
 
 <style lang="scss">
   @use '../../../assets/styles/responsive' as *;
 
-  dialog {
-    display: block;
-    min-width: 100%;
-    height: 90vh;
-    margin: auto 0 0;
-    padding: 0;
-    border: none;
-    opacity: 0;
-    transition: opacity 0.3s;
-
-    &[open] {
-      opacity: 1;
-    }
-
-    &::backdrop {
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    @include a-partir-de(md) {
-      height: min-content;
-      max-width: 588px;
-      min-width: 0;
-      margin: auto;
-      padding: 0 16px;
-      border-radius: 8px;
-    }
-  }
-
-  :global(.dialogue-sortie-diag) {
-    display: grid;
-    grid-template-rows: 1fr auto;
-    height: 100%;
-  }
-
   .contenu {
     display: flex;
     flex-direction: column;
-    overflow: auto;
-    padding: 16px 16px 0;
     gap: 16px;
 
     p {
@@ -195,10 +153,6 @@
         margin-bottom: 24px;
       }
     }
-  }
-
-  h4 {
-    margin: 0;
   }
 
   h5 {
@@ -232,19 +186,6 @@
 
     p {
       margin: 0;
-    }
-  }
-
-  .actions {
-    position: sticky;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 16px;
-
-    @include a-partir-de(md) {
-      flex-direction: row-reverse;
-      padding: 48px 16px 32px;
     }
   }
 </style>
