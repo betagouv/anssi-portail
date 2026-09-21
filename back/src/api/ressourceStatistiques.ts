@@ -3,6 +3,7 @@ import { calculeStatistiques } from '../metier/statistiques.js';
 import { ConfigurationServeur } from './configurationServeur.js';
 import { filetRouteAsynchrone } from './middlewares/middleware.js';
 import { corpsVide, valideCorpsRequete } from './zod.js';
+import cors from 'cors';
 
 export const ressourceStatistiques = ({
   adaptateurStatistiqueMiniTests: adaptateurStatistique,
@@ -12,6 +13,7 @@ export const ressourceStatistiques = ({
   const routeur = Router();
   routeur.get(
     '/',
+    cors(),
     valideCorpsRequete(corpsVide),
     filetRouteAsynchrone(async (_requete: Request, reponse: Response) => {
       const statistiques = await calculeStatistiques({

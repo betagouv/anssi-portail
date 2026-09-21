@@ -43,7 +43,7 @@
   let badges: Badge[] = $state([]);
 
   onMount(async () => {
-    const statistiques: Statistiques = await récupèreStatistiquesMSC();
+    const statistiques: Statistiques = await récupèreStatistiquesMSC({ urlBase });
     badges = [
       {
         label: `+${statistiques.diagnosticsCyberArrondis} organisations accompagnées`,

@@ -24,7 +24,7 @@
   import { fabriqueFilAriane } from '../../../ui/filAriane';
   import EnteteAutonome from '../../../ui/EnteteAutonome.svelte';
 
-  let { urlBase = '', mode: modeWebc }: { urlBase?: string; mode?: string } = $props();
+  let { urlBase = '', mode: modeWebc }: { urlBase?: string; mode?: 'autonome' } = $props();
 
   const idCorrélation = uuidv7();
   let mode: 'question' | 'bonne-réponse' | 'mauvaise-réponse' | 'score-final' = $state('question');
