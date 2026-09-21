@@ -72,21 +72,25 @@ window.addEventListener('scroll', scrolle);
 
 const modaleVideoFermee = () => {
   const video = document.querySelector('#modale-video video');
+  if (!video) return;
+
   video.pause();
   video.currentTime = 0;
 };
 
 const brancheBoutonModale = () => {
-  const bouton = document.getElementsByClassName('ouverture-modale');
+  const boutons = document.getElementsByClassName('ouverture-modale');
   const modale = document.getElementById('modale-video');
+  const video = document.querySelector('#modale-video video');
+  if (!modale || !video) return;
 
-  for (let b of bouton) {
-    b.addEventListener('click', () => {
-      const lien = b.dataset.lienVideo;
-      modale.showModal();
-      modale.addEventListener('close', modaleVideoFermee);
-      let video = document.querySelector('#modale-video video');
+  modale.addEventListener('close', modaleVideoFermee);
+
+  for (const bouton of boutons) {
+    bouton.addEventListener('click', () => {
+      const lien = bouton.dataset.lienVideo;
       video.setAttribute('src', lien);
+      modale.opened = true;
       video.play();
     });
   }
