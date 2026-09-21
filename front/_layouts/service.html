@@ -153,12 +153,9 @@ script: /scripts/service.js
           </div>
           {% endfor %}
         </div>
-        <dialog id="modale-video">
-          <form method="dialog" class="contenu-modale">
-            <button class="ferme-video">&times;</button>
-            <video id="video-presentation" src="" controls=""></video>
-          </form>
-        </dialog>
+        <dsfr-modal id="modale-video" title="Présentation vidéo" size="lg">
+          <video id="video-presentation" src="" controls=""></video>
+        </dsfr-modal>
       </section>
 
       <div class="haut-de-page">
