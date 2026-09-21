@@ -30,13 +30,13 @@
       return () => clearInterval(intervale);
     }
   });
+  const secondesEntièresRestantes = $derived(Math.max(0, Math.floor(secondesRestantes.current)));
 </script>
 
 {#if actif}
   <div class="minuteur">
     <p>
-      Temps restant&nbsp;: <strong
-        >{Math.max(0, Math.floor(secondesRestantes.current))} seconde{secondesRestantes.current > 1 ? 's' : ''}</strong
+      Temps restant&nbsp;: <strong>{secondesEntièresRestantes} seconde{secondesEntièresRestantes > 1 ? 's' : ''}</strong
       >
     </p>
     <progress class={palier} value={secondesRestantes.current} max="30">{secondesRestantes.current}</progress>
