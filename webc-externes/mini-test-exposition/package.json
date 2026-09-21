@@ -1,0 +1,24 @@
+{
+  "name": "mini-test-exposition",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "build:local": "VITE_FEATURE_FLAG_PARCOURS_SECURISATION=false VITE_API_URL=http://localhost:3000 ENV=local vite build",
+    "build:demo": "VITE_FEATURE_FLAG_PARCOURS_SECURISATION=false VITE_API_URL=https://demo.messervicescyber.beta.gouv.fr ENV=demo vite build",
+    "build:prod": "VITE_FEATURE_FLAG_PARCOURS_SECURISATION=false VITE_API_URL=https://messervices.cyber.gouv.fr ENV=prod vite build",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.3.0",
+    "@tsconfig/svelte": "^5.0.8",
+    "cssnano": "^9.0.4",
+    "sass": "^1.104.0",
+    "svelte": "catalog:",
+    "vite": "^8.2.2"
+  },
+  "dependencies": {
+    "@anssi-portail/svelte": "workspace:*"
+  }
+}

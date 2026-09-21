@@ -1,0 +1,21 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "resolveJsonModule": true,
+    "allowJs": false,
+    "checkJs": false,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "allowArbitraryExtensions": true
+  },
+  "include": [
+    "../mini-test-exposition/src/**/*.ts",
+    "../mini-test-exposition/test/**/*.ts",
+    "../mini-test-exposition/src/**/*.js",
+    "../mini-test-exposition/src/**/*.svelte"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

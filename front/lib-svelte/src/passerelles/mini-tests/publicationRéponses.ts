@@ -12,10 +12,13 @@ export const publieRéponseQuestionnaireVraiFaux = async (
   await axios.post(`${options?.urlBase ?? ''}/api/mini-tests/vrai-faux/reponses`, réponse);
 };
 
-export const publieRéponseQuestionnaireExposition = async (réponse: {
-  typeOrganisation: TypeOrganisation;
-  secteur?: Secteur;
-  facteursAggravant: FacteurAggravant[];
-}): Promise<void> => {
-  await axios.post('/api/mini-tests/exposition/tests', réponse);
+export const publieRéponseQuestionnaireExposition = async (
+  réponse: {
+    typeOrganisation: TypeOrganisation;
+    secteur?: Secteur;
+    facteursAggravant: FacteurAggravant[];
+  },
+  options?: { urlBase?: string }
+): Promise<void> => {
+  await axios.post(`${options?.urlBase ?? ''}/api/mini-tests/exposition/tests`, réponse);
 };

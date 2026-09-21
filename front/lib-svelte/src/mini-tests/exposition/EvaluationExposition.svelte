@@ -6,35 +6,49 @@
   import EncartInvitationARenforcerCybersecurite from '../../test-maturite/EncartInvitationARenforcerCybersecurite.svelte';
   import PartageTest from '../../test-maturite/PartageTest.svelte';
   import Alternatives from '../../ui/Alternatives.svelte';
+  import EnteteAutonome from '../../ui/EnteteAutonome.svelte';
   import Notice from '../../ui/Notice.svelte';
   import CarteRisqueExposition from './CarteRisqueExposition.svelte';
   import type { MenaceEvaluee } from './expositionCyberattaques';
 
-  const { menaces }: { menaces: MenaceEvaluee[] } = $props();
+  const { menaces, mode, urlBase = '' }: { menaces: MenaceEvaluee[]; mode?: 'autonome'; urlBase?: string } = $props();
 </script>
 
-<dsfr-container class="conteneur">
-  <div class="résultats">
-    <Notice
-      type="attention"
-      estRejetable={false}
-      aUneIcone
-      titre="Votre organisation présente des facteurs d’exposition aux cyberattaques"
-    />
-
-    <h2>Détail des risques</h2>
-    <div class="grille-cartes">
-      {#each menaces as menace (menace.id)}
-        <CarteRisqueExposition {menace} />
-      {/each}
-    </div>
+{#if mode === 'autonome'}
+  <div class="entete">
+    <dsfr-container>
+      <EnteteAutonome {urlBase} />
+    </dsfr-container>
+    {@render conteneur()}
   </div>
-</dsfr-container>
+{:else}
+  {@render conteneur()}
+{/if}
+
+{#snippet conteneur()}
+  <dsfr-container class="conteneur">
+    <div class="résultats">
+      <Notice
+        type="attention"
+        estRejetable={false}
+        aUneIcone
+        titre="Votre organisation présente des facteurs d’exposition aux cyberattaques"
+      />
+
+      <h2>Détail des risques</h2>
+      <div class="grille-cartes">
+        {#each menaces as menace (menace.id)}
+          <CarteRisqueExposition {menace} {urlBase} />
+        {/each}
+      </div>
+    </div>
+  </dsfr-container>
+{/snippet}
 
 <Alternatives affichageAlternatif={afficheParcoursSecurisation}>
   {#snippet défaut()}
     <dsfr-container class="conteneur">
-      <DemandeDiagnosticSimplifiee origine="exposition" />
+      <DemandeDiagnosticSimplifiee origine="exposition" {urlBase} {mode} />
     </dsfr-container>
   {/snippet}
   {#snippet alternatif()}
@@ -52,11 +66,13 @@
   {/snippet}
 </Alternatives>
 
-<PartageTest
-  cheminPartagé="/exposition"
-  sujetMail="Mon organisation est-elle exposée aux cyberattaques ?"
-  typeDeRetour="exposition"
-/>
+{#if mode !== 'autonome'}
+  <PartageTest
+    cheminPartagé="/exposition"
+    sujetMail="Mon organisation est-elle exposée aux cyberattaques ?"
+    typeDeRetour="exposition"
+  />
+{/if}
 
 <dsfr-container class="note-source">
   <p class="texte-mention-xs">
@@ -118,5 +134,11 @@
     p {
       margin: 0;
     }
+  }
+
+  .entete {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 </style>

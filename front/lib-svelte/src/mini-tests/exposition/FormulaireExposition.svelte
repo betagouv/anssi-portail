@@ -15,9 +15,10 @@
 
   interface Props {
     onévaluer: (reponses: ReponsesExposition) => void;
+    urlBase?: string;
   }
 
-  let { onévaluer }: Props = $props();
+  let { onévaluer, urlBase = '' }: Props = $props();
 
   let typeOrganisation: TypeOrganisation | undefined = $state();
   let secteur: Secteur | undefined = $state();
@@ -53,7 +54,7 @@
   const valide = async () => {
     if (!typeOrganisation) return;
     onévaluer({ type: typeOrganisation, secteur, facteurs });
-    await publieRéponseQuestionnaireExposition({ facteursAggravant: facteurs, typeOrganisation, secteur });
+    await publieRéponseQuestionnaireExposition({ facteursAggravant: facteurs, typeOrganisation, secteur }, { urlBase });
   };
 </script>
 
