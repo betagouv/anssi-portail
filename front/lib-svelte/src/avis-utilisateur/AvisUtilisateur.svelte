@@ -1,19 +1,23 @@
 <script lang="ts">
   import axios from 'axios';
   import { onMount } from 'svelte';
-  import { fade, fly } from 'svelte/transition';
+  import { fly } from 'svelte/transition';
   import { clic } from '../directives/actions.svelte';
   import Bouton from '../ui/Bouton.svelte';
-  import BoutonFermerModale from '../ui/BoutonFermerModale.svelte';
   import ChampTexte from '../ui/ChampTexte.svelte';
   import Formulaire from '../ui/Formulaire.svelte';
+  import Modale from '../ui/Modale.svelte';
   import ZoneTexte from '../ui/ZoneTexte.svelte';
   import { entrepotNavigateurAvisUtilisateur } from './ControleAvisUtilisateur';
 
   let encartOuvert = $state(false);
-  let dialogue: HTMLDialogElement | undefined = $state();
   let afficheDialogue: boolean = $state(false);
   let etape: 'formulaire' | 'merci' = $state('formulaire');
+  const titreDialogue = $derived(
+    etape === 'formulaire'
+      ? 'Votre avis nous intéresse\u00a0!'
+      : 'Merci 🤩\u00a0! Vos remarques sont précieuses pour faire évoluer le service.'
+  );
 
   type SatisfactionDisponible = '1' | '2' | '3' | '4' | '5';
   let satisfaction: SatisfactionDisponible | undefined = $state();
@@ -35,6 +39,15 @@
   const surFermetureCTA = () => {
     encartOuvert = false;
     entrepotNavigateurAvisUtilisateur.modifieDateDerniereFermetureAvis(new Date());
+  };
+
+  const enregistreFermetureDialogue = () => {
+    entrepotNavigateurAvisUtilisateur.modifieDateDerniereFermetureAvis(new Date());
+  };
+
+  const fermeDialogue = () => {
+    afficheDialogue = false;
+    enregistreFermetureDialogue();
   };
 
   const soumetsLeFormulaire = async () => {
@@ -59,16 +72,6 @@
   onMount(() => {
     encartOuvert = !RegExp(/(\/?)(cyberdepart|test-maturite)(\/?)$/).exec(window.location.pathname);
   });
-  $effect(() => {
-    if (dialogue) {
-      if (afficheDialogue) {
-        dialogue.showModal();
-      } else {
-        entrepotNavigateurAvisUtilisateur.modifieDateDerniereFermetureAvis(new Date());
-        dialogue.close();
-      }
-    }
-  });
 </script>
 
 {#if encartOuvert}
@@ -84,18 +87,11 @@
     </button>
   </div>
 {/if}
-{#if afficheDialogue}
-  <dialog
-    class="dialogue-avis-utilisateur"
-    onclose={() => (afficheDialogue = false)}
-    bind:this={dialogue}
-    transition:fade={{ duration: 500 }}
-  >
+<Modale bind:estOuverte={afficheDialogue} titre={titreDialogue} surFermeture={enregistreFermetureDialogue}>
+  <div class="dialogue-avis-utilisateur">
     {#if etape === 'formulaire'}
-      <Formulaire surFormulaireValide={soumetsLeFormulaire}>
+      <Formulaire id="formulaire-avis-utilisateur" surFormulaireValide={soumetsLeFormulaire}>
         <div class="contenu">
-          <BoutonFermerModale surClic={() => dialogue?.close()} />
-          <h4>Votre avis nous intéresse&nbsp;!</h4>
           {#if erreurSatisfaction || erreurCommentaire}
             <lab-anssi-alerte
               type="erreur"
@@ -156,30 +152,34 @@
             </p>
           </div>
         </div>
-        <footer class="actions">
-          <Bouton libelle="Envoyer" type="primaire" taille="md" boutonSoumission={true} />
-          <Bouton type="secondaire" libelle="Fermer sans répondre" surClic={() => dialogue?.close()} />
-        </footer>
       </Formulaire>
     {:else}
       <div class="contenu">
-        <BoutonFermerModale surClic={() => dialogue?.close()} />
-        <h4>Merci 🤩&nbsp;! Vos remarques sont précieuses pour faire évoluer le service.</h4>
         <p>
           Si vous avez renseigné votre adresse email, nous vous recontacterons très prochainement pour échanger sur la
           plateforme et ses futures évolutions.
         </p>
       </div>
-      <footer class="actions">
-        <Bouton libelle="Terminer" type="tertiaire-sans-bordure" taille="md" surClic={() => dialogue?.close()} />
-      </footer>
     {/if}
-  </dialog>
-{/if}
+  </div>
+  {#snippet actions()}
+    {#if etape === 'formulaire'}
+      <Bouton
+        etire
+        libelle="Envoyer"
+        type="primaire"
+        taille="md"
+        boutonSoumission={true}
+        idFormulaire="formulaire-avis-utilisateur"
+      />
+      <Bouton etire type="secondaire" libelle="Fermer sans répondre" surClic={fermeDialogue} />
+    {:else}
+      <Bouton etire libelle="Terminer" type="tertiaire-sans-bordure" taille="md" surClic={fermeDialogue} />
+    {/if}
+  {/snippet}
+</Modale>
 
 <style lang="scss">
-  @use '../../../assets/styles/responsive' as *;
-
   .avis-utilisateur-cta {
     background-color: var(--background-default-grey);
     border-radius: 8px 0 0 8px;
@@ -258,35 +258,10 @@
   }
 
   .dialogue-avis-utilisateur {
-    min-width: 100%;
-    max-height: 90vh;
-    margin: auto 0 0;
-    padding: 0;
-    border: none;
-
-    &::backdrop {
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    @include a-partir-de(md) {
-      height: min-content;
-      max-width: 588px;
-      min-width: 0;
-      margin: auto;
-      padding: 0 16px;
-      border-radius: 8px;
-    }
-
     .contenu {
       display: flex;
       flex-direction: column;
-      overflow: auto;
-      padding: 16px 16px 0;
       gap: 16px;
-
-      h4 {
-        margin: 0;
-      }
 
       .mis-en-avant {
         font-weight: bold;
@@ -316,37 +291,6 @@
         :global(textarea) {
           resize: vertical;
         }
-      }
-    }
-
-    .actions {
-      background-color: var(--background-default-grey);
-      bottom: 0;
-      position: sticky;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      padding: 16px;
-      border-top-color: transparent;
-
-      @include a-partir-de(md) {
-        flex-direction: row-reverse;
-        padding: 48px 16px 32px;
-      }
-
-      animation: ajoute-bordure-100-pourcent linear;
-      animation-timeline: scroll();
-    }
-
-    @keyframes ajoute-bordure-100-pourcent {
-      0% {
-        border-top-color: var(--border-default-grey);
-      }
-      99% {
-        border-top-color: var(--border-default-grey);
-      }
-      100% {
-        border-top-color: transparent;
       }
     }
 
