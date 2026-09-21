@@ -26,12 +26,22 @@
     if (défilementActif) {
       intervale = setInterval(() => {
         if (défilementActif && numéroMessageAffiché < messagesÀAfficher.length - 1) {
-          numéroMessageAffiché++;
           nombreMessagesAffichés++;
+          entre = false;
+          sors = true;
+          setTimeout(() => {
+            numéroMessageAffiché++;
+            entre = true;
+            sors = false;
+            setTimeout(() => (entre = false), 500);
+          }, 400);
         }
       }, 5000);
       setTimeout(() => {
         nombreMessagesAffichés++;
+        entre = true;
+        sors = false;
+        setTimeout(() => (entre = false), 500);
       }, 0);
     } else {
       clearInterval(intervale);
@@ -41,6 +51,9 @@
   onMount(() => {
     return () => clearInterval(intervale);
   });
+
+  let entre = $state(false);
+  let sors = $state(false);
 </script>
 
 <div class="messages">
@@ -50,7 +63,7 @@
     <div class="nombre">{nombreMessagesAffichés}</div>
   </div>
   {#if défilementActif}
-    <div class="message">
+    <div class="message" class:entre class:sors>
       <div class="sous-titre">
         <img src={messageAffiché.rôle.image.src} alt={messageAffiché.rôle.image.alt} />
         <p class="texte-standard-md">{messageAffiché.rôle.nom}</p>
@@ -94,6 +107,16 @@
     .message {
       padding: 1rem 1rem 1.5rem;
       background-color: var(--background-alt-yellow-moutarde);
+      transform: translateX(0);
+      will-change: opacity, transform;
+
+      &.entre {
+        animation: entrée-message 0.62s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+
+      &.sors {
+        animation: sortie-message 0.28s ease-in both;
+      }
 
       .sous-titre {
         margin-bottom: 0.75rem;
@@ -119,6 +142,22 @@
       .texte-detail-sm {
         margin: 0;
       }
+    }
+  }
+  @keyframes entrée-message {
+    0% {
+      opacity: 0;
+      transform: translateX(34px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes sortie-message {
+    to {
+      opacity: 0;
+      transform: translateX(-16px);
     }
   }
 </style>
