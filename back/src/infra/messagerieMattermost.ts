@@ -6,6 +6,7 @@ import {
   RetourExperience,
   RetourNégatifSurMiniTest,
 } from '../metier/messagerieInstantanee.js';
+import { type MiniTest } from '../metier/mini-tests/mini-test.js';
 import { AdaptateurEnvironnement } from './adaptateurEnvironnement.js';
 import { aseptiseMarkdown } from './markdown.js';
 
@@ -55,18 +56,14 @@ ${aseptiseMarkdown(avis.commentaire ?? '')}`;
   notifieUnRetourNégatifSurMiniTest: async (retour: RetourNégatifSurMiniTest) => {
     const urlWebhook = adaptateurEnvironnement.mattermost().webhookAvisUtilisateur();
 
-    const nomMiniTest = (() => {
-      switch (retour.miniTest) {
-        case 'test-maturité':
-          return 'Test Maturité';
-        case 'vrai-faux':
-          return 'Test Vrai-Faux';
-        case 'exposition':
-          return 'Test Exposition';
-        default:
-          throw new Error(`mini-test "${retour.miniTest}" non pris en charge`);
-      }
-    })();
+    const nomMiniTest = (
+      {
+        'test-maturité': 'Test Maturité',
+        'vrai-faux': 'Test Vrai-Faux',
+        exposition: 'Test Exposition',
+        'reflexes-cyber': 'Test Réflexes Cyber',
+      } satisfies { [C in MiniTest]: string }
+    )[retour.miniTest];
 
     if (urlWebhook) {
       const message = `### Retour utilisateur ${nomMiniTest}
