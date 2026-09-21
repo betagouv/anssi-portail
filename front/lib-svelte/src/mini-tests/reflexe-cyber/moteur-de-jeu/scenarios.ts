@@ -7,7 +7,7 @@ export type Scénario = {
   titre: string;
   description: string;
   image: { src: string; alt: string };
-  labelMétrique: string;
+  métrique: { label: string; bloquage: number[] };
 };
 
 export const scénarios: Scénario[] = [
@@ -20,7 +20,7 @@ export const scénarios: Scénario[] = [
       src: `${cheminAssets}/scenario-collectivite.avif`,
       alt: 'Équipe municipale réunie dans une mairie',
     },
-    labelMétrique: 'Démarches bloquées',
+    métrique: { label: 'Démarches bloquées', bloquage: [46, 128, 310, 590, 870, 1140] },
   },
   {
     id: 'entreprise',
@@ -31,6 +31,6 @@ export const scénarios: Scénario[] = [
       src: `${cheminAssets}/scenario-entreprise.avif`,
       alt: 'Équipe réunie dans un entrepôt logistique',
     },
-    labelMétrique: 'Commandes bloquées',
+    métrique: { label: 'Commandes bloquées', bloquage: [12, 37, 86, 154, 236, 318] },
   },
 ];
